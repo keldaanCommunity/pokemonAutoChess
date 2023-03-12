@@ -54,7 +54,7 @@ export default function AfterMenu() {
           <span>{getRankLabel(playerRank)}</span>
         </div>
         <p className="player-elo">
-          ELO {newElo} ({ (newElo >= currentPlayer.elo ? '+' : '-') + (newElo - currentPlayer.elo)})
+          ELO {newElo} ({ (newElo >= currentPlayer.elo ? '+' : '-') + Math.abs(newElo - currentPlayer.elo)})
         </p>
         <table>
           <thead>

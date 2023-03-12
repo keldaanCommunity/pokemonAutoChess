@@ -17,14 +17,14 @@ export default class PokemonState {
     pokemon: IPokemonEntity,
     heal: number,
     caster: IPokemonEntity,
-    spellDamageBoost?: boolean
+    apBoost?: boolean
   ): void {
     if (
       pokemon.life > 0 &&
       pokemon.life < pokemon.hp &&
       !pokemon.status.wound
     ) {
-      const boost = spellDamageBoost ? (heal * pokemon.spellDamage) / 100 : 0
+      const boost = apBoost ? (heal * pokemon.ap) / 100 : 0
       let healBoosted = Math.round(heal + boost)
       if (pokemon.skill === Ability.WONDER_GUARD) {
         healBoosted = 1
@@ -54,10 +54,10 @@ export default class PokemonState {
     pokemon: IPokemonEntity,
     shield: number,
     caster: IPokemonEntity,
-    spellDamageBoost?: boolean
+    apBoost?: boolean
   ) {
     if (pokemon.life > 0) {
-      const boost = spellDamageBoost ? (shield * pokemon.spellDamage) / 100 : 0
+      const boost = apBoost ? (shield * pokemon.ap) / 100 : 0
       const shieldBoosted = Math.round(shield + boost)
       pokemon.shield += shieldBoosted
       if (caster && shieldBoosted > 0) {

@@ -356,7 +356,7 @@ export function instanceofPokemonEntity(obj: IPokemon | IPokemonEntity) {
 
 export interface IPokemonEntity {
   simulation: ISimulation
-  addSpellDamage(value: number): void
+  addAbilityPower(value: number): void
   addAttack(atk: number): void
   handleShield(shieldBonus: number, pokemon: IPokemonEntity)
   update(dt: number, board: board, climate: string)
@@ -397,7 +397,7 @@ export interface IPokemonEntity {
   status: Status
   count: Count
   critDamage: number
-  spellDamage: number
+  ap: number
   healDone: number
   shiny: boolean
   emotion: Emotion

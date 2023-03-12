@@ -53,7 +53,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   @type(Status) status: Status
   @type(Count) count: Count
   @type("float32") critDamage = 2
-  @type("uint16") spellDamage = 0
+  @type("uint16") ap = 0
   @type("uint16") healDone: number
   @type("string") emotion: Emotion
   cooldown = 500
@@ -144,8 +144,8 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     return 1000 / this.atkSpeed
   }
 
-  handleAttackSpeed(buff: number, spellPowerBoost: boolean = false) {
-    const boost = spellPowerBoost ? (buff * this.spellDamage) / 100 : 0
+  handleAttackSpeed(buff: number, apBoost: boolean = false) {
+    const boost = apBoost ? (buff * this.ap) / 100 : 0
     this.atkSpeedBonus = this.atkSpeedBonus + buff + boost
     this.atkSpeed = Number(
       Math.min(
@@ -172,7 +172,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     )
   }
 
-  handleSpellDamage(
+  handleSpecialDamage(
     damage: number,
     board: Board,
     attackType: AttackType,
@@ -182,12 +182,12 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       this.count.spellBlockedCount++
       return
     } else {
-      let spellDamage = damage + (damage * attacker.spellDamage) / 100
+      let specialDamage = damage + (damage * attacker.ap) / 100
       if (attacker.items.has(Item.WATER_INCENSE)) {
         if (this.life > 200) {
-          spellDamage = spellDamage + 0.75 * damage
+          specialDamage = specialDamage + 0.75 * damage
         } else {
-          spellDamage = spellDamage + 0.3 * damage
+          specialDamage = specialDamage + 0.3 * damage
         }
       }
       if (
@@ -195,7 +195,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
         attacker.items.has(Item.REAPER_CLOTH) &&
         Math.random() * 100 < attacker.critChance
       ) {
-        spellDamage = Math.round(spellDamage * attacker.critDamage)
+        specialDamage = Math.round(specialDamage * attacker.critDamage)
         this.count.crit++
       }
       if (attacker && attacker.items.has(Item.POKEMONOMICON)) {
@@ -204,7 +204,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       }
       return this.state.handleDamage(
         this,
-        spellDamage,
+        specialDamage,
         board,
         attackType,
         attacker,
@@ -213,16 +213,16 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  handleHeal(heal: number, caster: IPokemonEntity, spellPowerBoost: boolean) {
-    return this.state.handleHeal(this, heal, caster, spellPowerBoost)
+  handleHeal(heal: number, caster: IPokemonEntity, apBoost: boolean) {
+    return this.state.handleHeal(this, heal, caster, apBoost)
   }
 
   handleShield(
     shield: number,
     caster: IPokemonEntity,
-    spellPowerBoost?: boolean
+    apBoost?: boolean
   ) {
-    return this.state.handleShield(this, shield, caster, spellPowerBoost)
+    return this.state.handleShield(this, shield, caster, apBoost)
   }
 
   changeState(state: PokemonState) {
@@ -264,27 +264,27 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     this.dodge = Math.min(0.9, this.dodge + value)
   }
 
-  addSpellDamage(value: number) {
-    this.spellDamage = Math.round(this.spellDamage + value)
+  addAbilityPower(value: number) {
+    this.ap = Math.round(this.ap + value)
   }
 
-  addDefense(value: number, spellPowerBoost?: boolean) {
-    const boost = spellPowerBoost ? (value * this.spellDamage) / 100 : 0
+  addDefense(value: number, apBoost?: boolean) {
+    const boost = apBoost ? (value * this.ap) / 100 : 0
     this.def = Math.max(0, this.def + Math.round(value + boost))
   }
 
-  addSpecialDefense(value: number, spellPowerBoost?: boolean) {
-    const boost = spellPowerBoost ? (value * this.spellDamage) / 100 : 0
+  addSpecialDefense(value: number, apBoost?: boolean) {
+    const boost = apBoost ? (value * this.ap) / 100 : 0
     this.speDef = Math.max(0, this.speDef + Math.round(value + boost))
   }
 
-  addAttack(value: number, spellPowerBoost?: boolean) {
-    const boost = spellPowerBoost ? (value * this.spellDamage) / 100 : 0
+  addAttack(value: number, apBoost?: boolean) {
+    const boost = apBoost ? (value * this.ap) / 100 : 0
     this.atk = Math.max(0, this.atk + Math.round(value + boost))
   }
 
-  addCritDamage(value: number, spellPowerBoost?: boolean) {
-    const boost = spellPowerBoost ? (value * this.spellDamage) / 100 : 0
+  addCritDamage(value: number, apBoost?: boolean) {
+    const boost = apBoost ? (value * this.ap) / 100 : 0
     this.critDamage = Math.max(
       0,
       this.roundTo2Digits(this.critDamage + value + boost)

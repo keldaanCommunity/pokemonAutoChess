@@ -61,7 +61,7 @@ export const ItemName: { [key in Item]: string } = {
 
 export const ItemDescription: { [key in Item]: string } = Object.freeze({
   [Item.FOSSIL_STONE]: "A fossil of a Pokémon that lived in prehistoric times",
-  [Item.TWISTED_SPOON]: `+10% ${Stat.SPELL_POWER}`,
+  [Item.TWISTED_SPOON]: `+10% ${Stat.AP}`,
   [Item.MYSTIC_WATER]: `+15 ${Stat.MANA}`,
   [Item.MAGNET]: `+10% ${Stat.ATK_SPEED}`,
   [Item.BLACK_GLASSES]: `+5% ${Stat.CRIT_CHANCE}`,
@@ -78,9 +78,9 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
   [Item.DUSK_STONE]: "The holder gains the dark type",
   [Item.LEAF_STONE]: "The holder gains the grass type",
   [Item.ICY_ROCK]: "The holder gains the ice type",
-  [Item.CHOICE_SPECS]: `The holder gains 100% bonus ${Stat.SPELL_POWER}`,
+  [Item.CHOICE_SPECS]: `The holder gains 100% bonus ${Stat.AP}`,
   [Item.SOUL_DEW]:
-    `During combat, the holder gains 10% ${Stat.SPELL_POWER} every 2 seconds`,
+    `During combat, the holder gains 10% ${Stat.AP} every 2 seconds`,
   [Item.UPGRADE]: `Attacks grant +5% bonus ${Stat.ATK_SPEED} for the rest of combat`,
   [Item.REAPER_CLOTH]: "The holder spells can critically strike",
   [Item.POKEMONOMICON]:
@@ -89,13 +89,13 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
     `+30% ${Damage.SPECIAL}, up to +75% if target has more than 200 ${Stat.HP}`,
   [Item.SHELL_BELL]: "Holder heals for 30% of all damages inflicted",
   [Item.LUCKY_EGG]:
-    `+30% ${Stat.SPELL_POWER} for holder and adjacent allies in the same row`,
+    `+30% ${Stat.AP} for holder and adjacent allies in the same row`,
   [Item.AQUA_EGG]:
     `The holder gains +50 starting ${Stat.MANA} and regains 20 ${Stat.MANA} after casting its ability`,
   [Item.BLUE_ORB]:
     `Every third attack from the holder unleashes a chain lightning that bounces to 2 enemies, burning 20 ${Stat.MANA}`,
   [Item.ZOOM_LENS]:
-    `The holder converts 5% of its ${Stat.SPELL_POWER} as ${Stat.ATK} and 5 x its ${Stat.ATK} as ${Stat.SPELL_POWER}`,
+    `The holder converts 5% of its ${Stat.AP} as ${Stat.ATK} and 5 x its ${Stat.ATK} as ${Stat.AP}`,
   [Item.BRIGHT_POWDER]:
     `Every 4 sec, the holder throw sand, dropping a random adjacent enemy ${Stat.ATK_SPEED} by 30%`,
   [Item.DELTA_ORB]:

@@ -5,7 +5,7 @@ import { addIconsToDescription } from "../../utils/descriptions"
 import "./synergy-description.css"
 
 export const effectRegExp =
-  /PHYSICAL|SPECIAL|TRUE|atk|speed|critChance|critDamage|def|hp|mana|range|shield|speDef|spellDamage/
+  /PHYSICAL|SPECIAL|TRUE|atk|speed|critChance|critDamage|def|hp|mana|range|shield|speDef|ap/
 
 export function SynergyDescription(props: { effect: Effect }) {
   const description = EffectDescription[props.effect].eng

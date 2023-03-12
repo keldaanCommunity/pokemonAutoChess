@@ -734,13 +734,13 @@ export const AbilityName: { [key in Ability]: Langage } = {
 
 export const AbilityDescription: { [key in Ability]: Langage } = {
   [Ability.SOFT_BOILED]: {
-    eng: `Cures every status effects and grants [20,40,80] ${Stat.SHIELD} for every ally`,
+    eng: `Cures every status effects and grants [20,40,80,SP] ${Stat.SHIELD} for every ally`,
     esp: ``,
     fra: ``,
     prt: ``
   },
   [Ability.EARTHQUAKE]: {
-    eng: `Deals damage [30,60,120] ${Damage.SPECIAL} to all enemy units in the same column/line`,
+    eng: `Deals damage [30,60,120,SP] ${Damage.SPECIAL} to all enemy units in the same column/line`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -752,7 +752,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.CONFUSING_MIND]: {
-    eng: `Deals [20,40,80] ${Damage.SPECIAL} to the target and make adjacent pokemons ${Status.CONFUSION} for [1.5,3,6] seconds`,
+    eng: `Deals [20,40,80,SP] ${Damage.SPECIAL} to the target and make adjacent pokemons ${Status.CONFUSION} for [1.5,3,6] seconds`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -770,7 +770,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.EXPLOSION]: {
-    eng: `Deals [50,100,200] ${Damage.SPECIAL}. Damage also the user.`,
+    eng: `Deals [50,100,200,SP] ${Damage.SPECIAL}. Damage also the user.`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -788,7 +788,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.BONEMERANG]: {
-    eng: `Throw a boomerang bone through the enemy team, dealing [30,60,120] ${Damage.SPECIAL} on its way`,
+    eng: `Throw a boomerang bone through the enemy team, dealing [30,60,120,SP] ${Damage.SPECIAL} on its way`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -806,13 +806,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.DISARMING_VOICE]: {
-    eng: `Gives [10,20,40] ${Stat.MANA} (affected by ${Stat.SPELL_POWER}) to all allies`,
+    eng: `Gives [10,20,40,SP=0.5] ${Stat.MANA} to all allies`,
     esp: ``,
     fra: ``,
     prt: ``
   },
   [Ability.HIGH_JUMP_KICK]: {
-    eng: `Deals [50,100,200] ${Damage.SPECIAL} and steal ${Stat.MANA} from its target`,
+    eng: `Deals [50,100,200,SP] ${Damage.SPECIAL} and steal all ${Stat.MANA} from its target`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -830,19 +830,19 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.ECHO]: {
-    eng: `Deals [3,6,9] ${Damage.SPECIAL}, + [1,2,4] each time the pokemon uses its ability`,
+    eng: `Deals [3,6,9,SP] ${Damage.SPECIAL}, + [1,2,4,SP] each time the pokemon uses its ability`,
     esp: ``,
     fra: ``,
     prt: ``
   },
   [Ability.PETAL_DANCE]: {
-    eng: `Deals [15,30,60] ${Damage.SPECIAL} to [2,4,6] enemies`,
+    eng: `Deals [15,30,60,SP] ${Damage.SPECIAL} to [2,4,6] enemies`,
     esp: ``,
     fra: ``,
     prt: ``
   },
   [Ability.HYPER_VOICE]: {
-    eng: `Deals [50,100,200] ${Damage.SPECIAL} on a row and make all targets hit ${Status.CONFUSION} for [1,2,3] seconds`,
+    eng: `Deals [50,100,200,SP] ${Damage.SPECIAL} on a row and make all targets hit ${Status.CONFUSION} for [1,2,3] seconds`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -854,13 +854,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.VOLT_SWITCH]: {
-    eng: `Dash into the enemy backline, dealing [30,60,120] ${Damage.SPECIAL}`,
+    eng: `Dash into the enemy backline, dealing [30,60,120,SP] ${Damage.SPECIAL}`,
     esp: ``,
     fra: ``,
     prt: ``
   },
   [Ability.LIQUIDATION]: {
-    eng: `Deals [20,40,80] ${Damage.SPECIAL} and remove [1,2,4] ${Stat.DEF} from the target`,
+    eng: `Deals [20,40,80,SP] ${Damage.SPECIAL} and remove [1,2,4] ${Stat.DEF} from the target`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -914,79 +914,79 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.FIRE_BLAST]: {
-    eng: `Throw a fire blast for [30,60,120] ${Damage.SPECIAL}`,
+    eng: `Throw a fire blast for [30,60,120,SP] ${Damage.SPECIAL}`,
     esp: `Lanza una ráfaga de fuego para 30,50,100 de daño especial`,
     fra: `Lance une déflagration infligeant 30,50,100 dégats spéciaux`,
     prt: ``
   },
   [Ability.WHEEL_OF_FIRE]: {
-    eng: `Sends a fire wheel that makes a round trip doing [20,40,80] ${Damage.SPECIAL}.`,
+    eng: `Sends a fire wheel that makes a round trip doing [20,40,80,SP] ${Damage.SPECIAL}.`,
     esp: `Envía una rueda de fuego que hace un viaje de ida y vuelta haciendo 30,40,50 de daño especial.`,
     fra: `Envoie une boule de feu faisant un aller retour, endommageant les pokémons pour 30,40,50 dégats spéciaux`,
     prt: ``
   },
   [Ability.SEISMIC_TOSS]: {
-    eng: `Mono target attack that deals [7,14,28] ${Damage.TRUE} multiplied by the number of Pokemon in your team`,
+    eng: `Mono target attack that deals [7,14,28,SP] ${Damage.TRUE} multiplied by the number of Pokemon in your team`,
     esp: `Ataque de objetivo mono que inflige daño real en función de lo grande que sea tu equipo.`,
     fra: `Attaque mono cible dont les dégats varient en fonction de la taille de l équipe.`,
     prt: ``
   },
   [Ability.GUILLOTINE]: {
-    eng: `Mono target attack that deals [1,2,3] x ${Stat.ATK} ${Damage.SPECIAL}. Restores half ${Stat.MANA} if target killed`,
+    eng: `Mono target attack that deals [1,2,3,SP] x ${Stat.ATK} ${Damage.SPECIAL}. Restores half ${Stat.MANA} if target killed`,
     esp: `Ataque de objetivo mono que causa daño físico. Restaura la mitad de maná si el objetivo muere`,
     fra: `Attaque mono cible qui fait des dégats physiques. Restaure la moitié du mana si la cible est tué.`,
     prt: ``
   },
   [Ability.ROCK_SLIDE]: {
-    eng: `Mono target attack that deals [30,60,120] ${Damage.SPECIAL}. Doubles damage if target is type flying.`,
+    eng: `Mono target attack that deals [30,60,120,SP] ${Damage.SPECIAL}. Doubles damage if target is type flying.`,
     esp: `Ataque de objetivo mono que causa daño físico. Duplica el daño si el objetivo es de tipo volador.`,
     fra: `Attaque mono cible qui fait des dégats physiques. Double les dégats si type vol.`,
     prt: ``
   },
   [Ability.HEAT_WAVE]: {
-    eng: `Area of effect attack that deals [20,40,80] ${Damage.SPECIAL} to all enemies in a line behind the target.`,
+    eng: `Area of effect attack that deals [20,40,80,SP] ${Damage.SPECIAL} to all enemies in a line behind the target.`,
     esp: `Ataque de área de efecto que inflige 30,40,50 de daño especial a todos los enemigos en una línea detrás del objetivo.`,
     fra: `Attaque AoE qui infique 30,40,50 dégats spéciaux dans une ligne derrière la cible.`,
     prt: ``
   },
   [Ability.THUNDER]: {
-    eng: `Mono target damage that deals [30,60,120] ${Damage.SPECIAL}.`,
+    eng: `Mono target damage that deals [30,60,120,SP] ${Damage.SPECIAL}.`,
     esp: `Daño de objetivo mono que inflige 30,50,70 de daño especial.`,
     fra: `Attaque monocibe infligeant 30,50,70 dégats spéciaux.`,
     prt: ``
   },
   [Ability.HYDRO_PUMP]: {
-    eng: `Area of effect attack that deals [25,50,100] ${Damage.SPECIAL} to all enemies in a line behind the target.`,
+    eng: `Area of effect attack that deals [25,50,100,SP] ${Damage.SPECIAL} to all enemies in a line behind the target.`,
     esp: `Ataque de área de efecto que inflige 30,40,50 de daño especial a todos los enemigos en una línea detrás del objetivo.`,
     fra: `Attaque AoE qui infique 30,40,50 dégats spéciaux dans une ligne derrière la cible.`,
     prt: ``
   },
   [Ability.DRACO_METEOR]: {
-    eng: `Area of effect attack that deals [10,20,40] ${Damage.SPECIAL} to all enemies`,
+    eng: `Area of effect attack that deals [10,20,40,SP] ${Damage.SPECIAL} to all enemies`,
     esp: `Ataque de área de efecto que causa 10,20,40 de daño especial a todos los enemigos`,
     fra: `Inflige 10,20,40 dégats spéciaux à tous les pokémons ennemis.`,
     prt: ``
   },
   [Ability.BLAZE_KICK]: {
-    eng: `Mono target that deals [30,60,120] ${Damage.SPECIAL}.`,
+    eng: `Mono target that deals [30,60,120,SP] ${Damage.SPECIAL}.`,
     esp: `Objetivo mono que causa 30,60,90 de daño físico`,
     fra: `Attaque monocinle faisant 30,60,90 dégats physiques`,
     prt: ``
   },
   [Ability.WISH]: {
-    eng: `Restores 50 ${Stat.HP} to [1,2,3] ally pokemon`,
+    eng: `Restores [50,SP] ${Stat.HP} to [1,2,3] ally pokemon`,
     esp: `Restaura 50 hp a 1,2,3 de pokemon aliado`,
     fra: `Soigne 50 hp à 1,2,3 pokémons alliés`,
     prt: ``
   },
   [Ability.CALM_MIND]: {
-    eng: `Buff pokemon ${Stat.ATK} by [50,100,200]%`,
+    eng: `Buff pokemon ${Stat.ATK} by [50,100,200,SP]%`,
     esp: `Ataque de pokemón de la Buff en un 50,100,150%.`,
     fra: `Augmente l attaque du pokémon de 50,100,150%.`,
     prt: ``
   },
   [Ability.IRON_DEFENSE]: {
-    eng: `Buff ${Stat.DEF} , ${Stat.SPE_DEF} by [3,6,12] points`,
+    eng: `Buff ${Stat.DEF} and ${Stat.SPE_DEF} by [3,6,12,SP] points`,
     esp: `Defensa pokemon buff , defensa especial por 4,6,8 puntos`,
     fra: `Augmente la défense du pokémon de 4,6,8 points`,
     prt: ``
@@ -998,159 +998,159 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.SOAK]: {
-    eng: `Deals [20,40,80] ${Damage.SPECIAL} and restores 10 mana to friendly pokemons`,
+    eng: `Deals [20,40,80,SP] ${Damage.SPECIAL} and restores 10 mana to friendly pokemons`,
     esp: `Hace 20,30,40 de daño especial y devuelve 10 de maná a los pokemons amistosos.`,
     fra: `Fait 20,30,40 dégats spéciaux et restaure 10 mana à chaque pokémon allié.`,
     prt: ``
   },
   [Ability.ORIGIN_PULSE]: {
-    eng: `A wave travels horizontally across the battlefield doing [30,60,120] ${Damage.SPECIAL} `,
+    eng: `A wave travels horizontally across the battlefield doing [30,60,120,SP] ${Damage.SPECIAL} `,
     esp: `Una ola viaja horizontalmente por el campo de batalla haciendo 60 de daño mágico.`,
     fra: `Une vague parcourt horizontalement le champ de bataille faisant 60 dégats magiques`,
     prt: ``
   },
   [Ability.SEED_FLARE]: {
-    eng: `Shaymins body emits a shock wave, dealing 30 ${Damage.SPECIAL} to all enemies, and decreasing their ${Stat.SPE_DEF} by 2`,
+    eng: `Shaymins body emits a shock wave, dealing [30,SP] ${Damage.SPECIAL} to all enemies, and decreasing their ${Stat.SPE_DEF} by 2`,
     esp: `El cuerpo de Shaymin emite una onda de choque que inflige 30 de daño mágico a todos los enemigos y reduce su velocidad en 2.`,
     fra: `Le corps de Shaymin émet une onde de choc, infligeant 30 dégâts magiques à tous les ennemis et réduisant leur vitesse de 2.`,
     prt: ``
   },
   [Ability.IRON_TAIL]: {
-    eng: `Mono target damage attack that deals [20,40,80] ${Damage.SPECIAL}. Buff ${Stat.DEF} by [1,3,5] points`,
+    eng: `Mono target damage attack that deals [20,40,80,SP] ${Damage.SPECIAL}. Buff ${Stat.DEF} by [1,3,5] points`,
     esp: `Ataque de daño al objetivo mono que reparte 20,30,40. Pulveriza la defensa por 1,3,5 puntos.`,
     fra: `Attaque monocible faisant 20,30,40 dégats physique. Booste la défense de 1,3,5 points.`,
     prt: ``
   },
   [Ability.BLAST_BURN]: {
-    eng: `Area of effect attack that deals [30,60,120] ${Damage.SPECIAL}`,
+    eng: `Area of effect attack that deals [30,60,120,SP] ${Damage.SPECIAL}`,
     esp: `Ataque en el área de efecto que causa 30,50,80 daños especiales.`,
     fra: `Attaque AoE en cercle faisant 30,50,80 dégats spéciaux.`,
     prt: ``
   },
   [Ability.CHARGE]: {
-    eng: `Buff all electric ally pokemons ${Stat.ATK} by [10,20,40] %`,
+    eng: `Buff all electric ally pokemons ${Stat.ATK} by [10,20,40,SP] %`,
     esp: `Pulir todos los pokemones aliados eléctricos atacan en un 10,20,30 %.`,
     fra: `Augmente l attaque des alliés electrique de 10,20,30%`,
     prt: ``
   },
   [Ability.DISCHARGE]: {
-    eng: `Shock nearby enemies for [25,50,100] ${Damage.SPECIAL}, and give ${Status.PARALYSIS} for 5 seconds`,
+    eng: `Shock nearby enemies for [25,50,100,SP] ${Damage.SPECIAL}, and give ${Status.PARALYSIS} for 5 seconds`,
     esp: `Ataque en el área de efecto que causa 40,60,80 daños especiales.`,
     fra: `Attaque AoE en cercle faisant 40,60,80 dégats spéciaux.`,
     prt: ``
   },
   [Ability.BITE]: {
-    eng: `30% Life steal mono target that deals [30,60,120] ${Damage.SPECIAL}`,
+    eng: `30% Life steal mono target that deals [30,60,120,SP] ${Damage.SPECIAL}`,
     esp: `50% Vida robar mono objetivo de ataque físico que inflige 30,50,70 de daño.`,
     fra: `Attaque monocible avec 50% de vol de vie faisant 30,50,70 dégats spéciaux.`,
     prt: ``
   },
   [Ability.DRAGON_TAIL]: {
-    eng: `Mono target attack that deals [30,60,120] ${Damage.SPECIAL} and buff ${Stat.DEF},${Stat.SPE_DEF} by [1,2,3] points`,
+    eng: `Mono target attack that deals [30,60,120,SP] ${Damage.SPECIAL} and buff ${Stat.DEF} and ${Stat.SPE_DEF} by [1,2,3,SP]`,
     esp: `El ataque físico de un monoobjetivo que inflige 30,40,50 de daño y mejora las defensas en 1,2,3 puntos`,
     fra: `Attaque mono-cible faisant 30,40,50 dégats physique et boostant les défenses de 1,2,3 points.`,
     prt: ``
   },
   [Ability.DRAGON_BREATH]: {
-    eng: `Area of effect attack that deals [30,60,120] ${Damage.TRUE} in a line behind the target`,
+    eng: `Area of effect attack that deals [30,60,120,SP] ${Damage.TRUE} in a line behind the target`,
     esp: `Ataque de área de efecto que inflige 30,40,50 de daño especial en una línea detrás del objetivo`,
     fra: `Attaque AoE faisant 30,40,50 dégats spéciaux dans une ligne derrière la cible`,
     prt: ``
   },
   [Ability.ICICLE_CRASH]: {
-    eng: `Area of effect attack that deals [20,40,80] ${Damage.SPECIAL} around the target`,
-    esp: `Ataque de área de efecto que causa 30,40,50 de daño físico alrededor del objetivo`,
-    fra: `Attaque AoE en cercle faisant 30,40,50 dégats physiques`,
+    eng: `Area of effect attack that deals [20,40,80,SP] ${Damage.SPECIAL} around the target`,
+    esp: `Ataque de área de efecto que causa [20,40,80,SP] de daño especial alrededor del objetivo`,
+    fra: `Attaque de zone faisant [20,40,80,SP] dégats spéciaux`,
     prt: ``
   },
   [Ability.ROOT]: {
-    eng: `Heal all nearby ally pokemons by [20,40,80] ${Stat.HP}`,
-    esp: `Curar a todos los pokemons aliados cercanos con 20,30,40 hp.`,
-    fra: `Soigne les alliés autour de 20,30,40 hp.`,
+    eng: `Heal all nearby ally pokemons by [20,40,80,SP] ${Stat.HP}`,
+    esp: `Curar a todos los pokemons aliados cercanos con [20,40,80,SP] ${Stat.HP}.`,
+    fra: `Soigne les alliés autour de [20,40,80,SP] ${Stat.HP}.`,
     prt: ``
   },
   [Ability.TORMENT]: {
-    eng: `Increase ${Stat.ATK_SPEED} by [20,40,60] %`,
-    esp: `Aumenta la velocidad de ataque en un 20,30,40 %.`,
-    fra: `Augmente la vitesse d attaque de 20,30,40%`,
+    eng: `Increase ${Stat.ATK_SPEED} by [20,40,60,SP] %`,
+    esp: `Aumenta ${Stat.ATK_SPEED} en un [20,40,60,SP] %.`,
+    fra: `Augmente ${Stat.ATK_SPEED} de [20,40,60,SP] %`,
     prt: ``
   },
   [Ability.STOMP]: {
-    eng: `Mono target that deals [2,4,6] x ${Stat.ATK} ${Damage.SPECIAL}`,
-    esp: `Daño físico del objetivo mono [2,4,6] x ${Stat.ATK} ${Damage.SPECIAL}`,
-    fra: `Attaque mono cible faisant [2,4,6] x ${Stat.ATK} ${Damage.SPECIAL} dégats physiques`,
+    eng: `Mono target that deals [2,4,6,SP] x ${Stat.ATK} ${Damage.SPECIAL}`,
+    esp: `Daño físico del objetivo mono [2,4,6,SP] x ${Stat.ATK} ${Damage.SPECIAL}`,
+    fra: `Attaque mono cible faisant [2,4,6,SP] x ${Stat.ATK} ${Damage.SPECIAL} dégats physiques`,
     prt: ``
   },
   [Ability.DARK_PULSE]: {
-    eng: `Life drain target attack that deals [30,60,120] ${Damage.SPECIAL}`,
-    esp: `Ataque al objetivo de drenaje de vida que causa 30,50,70 de daño especial`,
-    fra: `Attaque vol de vie faisant 30,50,70 dégats spéciaux.`,
+    eng: `Life drain target attack that deals [30,60,120,SP] ${Damage.SPECIAL}`,
+    esp: `Ataque al objetivo de drenaje de vida que causa [30,60,120,SP] ${Damage.SPECIAL}`,
+    fra: `Attaque vol de vie faisant [30,60,120,SP] ${Damage.SPECIAL}.`,
     prt: ``
   },
   [Ability.NIGHT_SLASH]: {
-    eng: `One-target attack that does [40,60,100] ${Damage.SPECIAL}. Decreases the ${Stat.DEF} of all enemies by 1 point`,
-    esp: `Ataque especial de objetivo mono que hace 40,60,80. Disminuye la defensa de todos los enemigos en 1 punto.`,
-    fra: `Attaque spéciale faisant 40,60,80 points de dégats. Diminue la défense de toute la team ennemie de 1 point.`,
+    eng: `Mono-target attack that does [40,60,100,SP] ${Damage.SPECIAL}. Decreases the ${Stat.DEF} of all enemies by 1 point`,
+    esp: `Ataque especial de objetivo mono que hace [40,60,100,SP] ${Damage.SPECIAL}. Disminuye la defensa de todos los enemigos en 1 punto.`,
+    fra: `Attaque spéciale faisant [40,60,100,SP] ${Damage.SPECIAL}. Diminue la défense de toute la team ennemie de 1 point.`,
     prt: ``
   },
   [Ability.BUG_BUZZ]: {
-    eng: `Mono target attack that does [15,30,60] ${Damage.SPECIAL}`,
-    esp: `Ataque de daño especial de un mono objetivo que hace 20,30,40.`,
-    fra: `Attaque mono cible faisant 20,30,40 dégats spéciaux`,
+    eng: `Mono target attack that does [15,30,60,SP] ${Damage.SPECIAL}`,
+    esp: `Ataque de daño especial de un mono objetivo que hace [15,30,60,SP] ${Damage.SPECIAL}`,
+    fra: `Attaque mono cible faisant [15,30,60,SP] ${Damage.SPECIAL}`,
     prt: ``
   },
   [Ability.POISON_STING]: {
-    eng: `Mono target damage that deals [30,60,120] ${Damage.SPECIAL}. Doubles damage if target is ${Status.POISON}`,
-    esp: `Daño físico de un solo objetivo que reparte 30,40,50. Duplica el daño si el objetivo está envenenado.`,
-    fra: `Attaque physique mono cible faisant 30,40,50 dégats. Double les dégats si la cible est empoisonné.`,
+    eng: `Mono target damage that deals [30,60,120,SP] ${Damage.SPECIAL}. Doubles damage if target is ${Status.POISON}`,
+    esp: `Daño especial de un solo objetivo que reparte [30,60,120,SP] ${Damage.SPECIAL}. Duplica el daño si el objetivo está envenenado.`,
+    fra: `Attaque physique mono cible faisant [30,60,120,SP] ${Damage.SPECIAL}. Double les dégats si la cible est empoisonné.`,
     prt: ``
   },
   [Ability.LEECH_LIFE]: {
-    eng: `Area of effect life steal attack that deals [15,30,60] ${Damage.SPECIAL} around the target`,
-    esp: `Área de efecto robo de vida daño especial ataque 10,20,30 alrededor del objetivo`,
-    fra: `Attaque vol de vie en AoE faisant 10,20,30 points de dégats.`,
+    eng: `Area of effect life steal attack that deals [15,30,60,SP] ${Damage.SPECIAL} around the target`,
+    esp: `Área de efecto robo de vida daño especial ataque [15,30,60,SP] ${Damage.SPECIAL} alrededor del objetivo`,
+    fra: `Attaque vol de vie en AoE faisant [15,30,60,SP] ${Damage.SPECIAL}.`,
     prt: ``
   },
   [Ability.HAPPY_HOUR]: {
-    eng: `Buff all ally ${Stat.ATK} by [3,6,9] points`,
-    esp: `Pulir todos los ataques de los aliados por 3,6,9 puntos.`,
-    fra: `Augmente l attaque de toute l équipe de 3,6,9 points.`,
+    eng: `Buff all ally ${Stat.ATK} by [3,6,9,SP] points`,
+    esp: `Pulir todos los ataques de los aliados por [3,6,9,SP] puntos.`,
+    fra: `Augmente l attaque de toute l équipe de [3,6,9,SP] points.`,
     prt: ``
   },
   [Ability.TELEPORT]: {
-    eng: `Buff ${Stat.ATK} by [1,2,3] points and teleport the pokemon on one edge of the map`,
+    eng: `Buff ${Stat.ATK} by [1,2,3,SP] and teleport the pokemon on one edge of the map`,
     esp: `Teletransportar el pokemon en un borde del mapa`,
     fra: `Téléporte le pokémon sur un coin de la carte.`,
     prt: ``
   },
   [Ability.NASTY_PLOT]: {
-    eng: `Buff pokemon ${Stat.ATK} by [5,10,20] points`,
-    esp: `Buff pokemon ataque por 5,10,20 puntos`,
-    fra: `Booste l attaque du pokémon de 5,10,20 points`,
+    eng: `Buff pokemon ${Stat.ATK} by [5,10,20,SP]`,
+    esp: `Buff pokemon ataque por [5,10,20,SP]`,
+    fra: `Booste l attaque du pokémon de [5,10,20,SP]`,
     prt: ``
   },
   [Ability.THIEF]: {
-    eng: `Steals all the target's items the holder can carry and deals [15,30,60] ${Damage.SPECIAL}`,
-    esp: `Roba el objeto del enemigo e inflige 5,10,20 de daño físico`,
-    fra: `Vole l item du pokémon ennemi et inflige 5,10,20 dégats physiques`,
+    eng: `Steals all the target's items the holder can carry and deals [15,30,60,SP] ${Damage.SPECIAL}`,
+    esp: `Roba el objeto del enemigo e inflige [15,30,60,SP] ${Damage.SPECIAL}`,
+    fra: `Vole l item du pokémon ennemi et inflige [15,30,60,SP] ${Damage.SPECIAL}`,
     prt: ``
   },
   [Ability.STUN_SPORE]: {
-    eng: `Decrease target ${Stat.ATK_SPEED} by [50,100,200] % and deals [5,10,20] ${Damage.SPECIAL}`,
-    esp: `Disminuir la velocidad de ataque del objetivo en un 50,100,200% e inflige 5,10,20 de daño físico`,
-    fra: `Diminue la vitesse d attaque du pokémon de 50,100,200% et inflige 5,10,20 dégats physiques`,
+    eng: `Decrease target ${Stat.ATK_SPEED} by [50,100,200] % and deals [5,10,20,SP] ${Damage.SPECIAL}`,
+    esp: `Disminuir la velocidad de ataque del objetivo en un 50,100,200% e inflige [5,10,20,SP] ${Damage.SPECIAL}`,
+    fra: `Diminue la vitesse d attaque du pokémon de 50,100,200% et inflige [5,10,20,SP] ${Damage.SPECIAL}`,
     prt: ``
   },
   [Ability.METEOR_MASH]: {
-    eng: `Area of effect around the target that deals [30,50,70] ${Damage.SPECIAL}. Buff pokemon ${Stat.ATK} by 5 points.`,
-    esp: `Área de efecto alrededor del objetivo que produce 30,50,70 daños. Buff pokemon ataque por 5 puntos.`,
-    fra: `Attaque en AoE faisant 30,50,40 dégats spéciaux. Booste l attaque du pokémon de 5 points.`,
+    eng: `Area of effect around the target that deals [30,50,70,SP] ${Damage.SPECIAL}. Buff pokemon ${Stat.ATK} by [5,SP].`,
+    esp: `Área de efecto alrededor del objetivo que produce [30,50,70,SP] ${Damage.SPECIAL}. Buff pokemon ataque por [5,SP].`,
+    fra: `Attaque en AoE faisant [30,50,70,SP] ${Damage.SPECIAL}. Booste l'attaque du pokémon de [5,SP].`,
     prt: ``
   },
   [Ability.HURRICANE]: {
-    eng: `Area of effect attack that deals [10,20,30] ${Damage.SPECIAL} in a line behind the target`,
-    esp: `Ataque de área de efecto que causa 10,20,30 de daño en una línea detrás del objetivo`,
-    fra: `Attaque AoE faisant 10,20,30 dégats spéciaux dans une ligne derrière la cible`,
+    eng: `Area of effect attack that deals [10,20,30,SP] ${Damage.SPECIAL} in a line behind the target`,
+    esp: `Ataque de área de efecto que causa [10,20,30,SP] ${Damage.SPECIAL} en una línea detrás del objetivo`,
+    fra: `Attaque AoE faisant [10,20,30,SP] ${Damage.SPECIAL} dans une ligne derrière la cible`,
     prt: ``
   },
   [Ability.HEAL_BLOCK]: {
@@ -1161,60 +1161,60 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
   },
   [Ability.ROAR_OF_TIME]: {
     eng: `Give ${Status.RESURECTION} to the pokemon that has the most items in your team.`,
-    esp: `Ataque de área de efecto que causa 10,20,30 de daño en una línea detrás del objetivo`,
-    fra: `Attaque AoE faisant 10,20,30 dégats spéciaux dans une ligne derrière la cible`,
+    esp: ``,
+    fra: ``,
     prt: ``
   },
   [Ability.ROCK_TOMB]: {
-    eng: `Mono target attack that deals [30,60,120] ${Damage.SPECIAL} and decrease target ${Stat.ATK_SPEED} by [20,40,60] %`,
+    eng: `Mono target attack that deals [30,60,120,SP] ${Damage.SPECIAL} and decrease target ${Stat.ATK_SPEED} by [20,40,60] %`,
     esp: ``,
     fra: ``,
     prt: ``
   },
   [Ability.ROCK_SMASH]: {
-    eng: `Mono target attack that deals [20,40,80] ${Damage.SPECIAL} and ${Status.SILENCE} target for [3,6,9] seconds`,
-    esp: `Ataque de área de efecto que causa 10,20,30 de daño en una línea detrás del objetivo`,
-    fra: `Attaque AoE faisant 10,20,30 dégats spéciaux dans une ligne derrière la cible`,
+    eng: `Mono target attack that deals [20,40,80,SP] ${Damage.SPECIAL} and ${Status.SILENCE} target for [3,6,9] seconds`,
+    esp: ``,
+    fra: ``,
     prt: ``
   },
   [Ability.HEAD_SMASH]: {
-    eng: `The pokemon hurt itself for [5,10,15] ${Stat.HP}, and deals [40,80,150] ${Damage.SPECIAL}. Execute if the target is ${Status.SLEEP} or ${Status.FREEZE}`,
+    eng: `The pokemon hurts itself for [5,10,15,SP] ${Stat.HP} and deals [40,80,150,SP] ${Damage.SPECIAL}. Execute if the target is ${Status.SLEEP} or ${Status.FREEZE}`,
     esp: `Ataque de área de efecto que causa 10,20,30 de daño en una línea detrás del objetivo`,
     fra: `Attaque AoE faisant 10,20,30 dégats spéciaux dans une ligne derrière la cible`,
     prt: ``
   },
   CORRUPTED_NATURE: {
-    eng: `${Status.WOUND} adjacent enemies for 5 seconds and deals [20,40] life steal ${Damage.SPECIAL}`,
+    eng: `${Status.WOUND} adjacent enemies for 5 seconds and deals [20,40,80,SP] life steal ${Damage.SPECIAL}`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   CRABHAMMER: {
-    eng: `Deals [30,60,120] ${Damage.SPECIAL}. Execute the target if below 30%`,
+    eng: `Deals [30,60,120,SP] ${Damage.SPECIAL}. Execute the target if below 30%`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   DIAMOND_STORM: {
-    eng: `+5 ${Stat.DEF} to adjacent allies`,
+    eng: `+[3,6,9,SP] ${Stat.DEF} to adjacent allies`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   DRACO_ENERGY: {
-    eng: `Deals 100% regidraco ${Stat.HP} as ${Damage.SPECIAL}`,
+    eng: `Deals [100,SP] % of regidraco ${Stat.HP} as ${Damage.SPECIAL}`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   DYNAMAX_CANNON: {
-    eng: `Shoot a dynamax beam on a straight line, dealing 80% ${Stat.HP} to every pokemon as ${Damage.SPECIAL}`,
+    eng: `Shoot a dynamax beam on a straight line, dealing to every pokemon hit [80,SP] % of their ${Stat.HP} as ${Damage.SPECIAL}`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   DYNAMIC_PUNCH: {
-    eng: `Deals [20,40,80] ${Damage.SPECIAL} and make the target ${Status.CONFUSION} for [1.5,3,6] seconds`,
+    eng: `Deals [20,40,80,SP] ${Damage.SPECIAL} and make the target ${Status.CONFUSION} for [1.5,3,6] seconds`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1226,49 +1226,49 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   ELECTRO_WEB: {
-    eng: `Steal [15,30,60] % ${Stat.ATK_SPEED} to adjacent enemies`,
+    eng: `Steal [15,30,60] % of adjacent enemies ${Stat.ATK_SPEED}`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   FIRE_TRICK: {
-    eng: `Deals [20,40,80] ${Damage.SPECIAL} and teleports the target to a corner of the map`,
+    eng: `Deals [20,40,80,SP] ${Damage.SPECIAL} and teleports the target to a corner of the map`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   FLAME_CHARGE: {
-    eng: `Dash into the enemy backline, dealing [30,60,120] ${Damage.SPECIAL}`,
+    eng: `Dash into the enemy backline, dealing [30,60,120,SP] ${Damage.SPECIAL}`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   LEECH_SEED: {
-    eng: `${Status.POISON} the target for [3,6,12] seconds, healing for [20,40,80] ${Stat.HP}`,
+    eng: `${Status.POISON} the target for [3,6,12] seconds, healing for [20,40,80,SP] ${Stat.HP}`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   LOCK_ON: {
-    eng: `Lock the target and give ${Status.ARMOR_REDUCTION} for 8s. Genesect deals ${Damage.TRUE} to it`,
+    eng: `Lock the target and give it ${Status.ARMOR_REDUCTION} for 8s. Genesect now deals ${Damage.TRUE} to it`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   PSYCH_UP: {
-    eng: `Deal [10,20,40] ${Damage.SPECIAL} and ${Status.SILENCE} the target and its adjacent enemies`,
+    eng: `Deal [10,20,40,SP] ${Damage.SPECIAL} and ${Status.SILENCE} the target and its adjacent enemies`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   RAZOR_WIND: {
-    eng: `Deals [20,40,80] ${Damage.SPECIAL} to the target and apply ${Status.PARALYSIS} around it`,
+    eng: `Deals [20,40,80,SP] ${Damage.SPECIAL} to the target and apply ${Status.PARALYSIS} around it`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   TWISTING_NEITHER: {
-    eng: `Deals 80 ${Damage.SPECIAL} to around enemies. Every affected pokemons is teleported somewhere`,
+    eng: `Deals [80,SP] ${Damage.SPECIAL} to adjacent enemies. Every pokemon hit is teleported somewhere.`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1292,13 +1292,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   MIND_BLOWN: {
-    eng: `Deals 50% of target life as ${Damage.SPECIAL}`,
+    eng: `Deals [50,SP] % of target current ${Stat.HP} as ${Damage.SPECIAL}`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   PAYDAY: {
-    eng: `Deals 30,60,120 ${Damage.SPECIAL}. If the target is killed, the player receive [1,2,3] gold`,
+    eng: `Deals [30,60,120,SP] ${Damage.SPECIAL}. If the target is killed, the player receive [1,2,3] gold`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1310,13 +1310,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.BLUE_FLARE]: {
-    eng: `Inflicts 50 ${Damage.SPECIAL} + 20 additional points per stage of active fire synergies`,
+    eng: `Inflicts [50,SP] ${Damage.SPECIAL} + 20 per stage of fire synergy`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   [Ability.FUSION_BOLT]: {
-    eng: `Inflicts 50 ${Damage.SPECIAL} + 25 additional points per stage of active electric synergies`,
+    eng: `Inflicts [50,SP] ${Damage.SPECIAL} + 25 per stage of electric synergy`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1328,7 +1328,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.AQUA_JET]: {
-    eng: `Dash into the enemy backline, dealing [30,60,120] ${Damage.SPECIAL}`,
+    eng: `Dash into the enemy backline, dealing [30,60,120,SP] ${Damage.SPECIAL}`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1340,7 +1340,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.CHATTER]: {
-    eng: `Deal [5,10,15] ${Damage.SPECIAL} to all enemies. Every enemy has a [20,30,40] % chance to be ${Status.CONFUSION} for 1s`,
+    eng: `Deal [5,10,15,SP] ${Damage.SPECIAL} to all enemies. Every enemy has a [20,30,40] % chance to be ${Status.CONFUSION} for 1s`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1352,25 +1352,25 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.STEAM_ERUPTION]: {
-    eng: `Deals [20,40,80] ${Damage.SPECIAL} to all enemies adjacent to the target, and ${Status.BURN} them for 3s`,
+    eng: `Deals [20,40,80,SP] ${Damage.SPECIAL} to all enemies adjacent to the target, and ${Status.BURN} them for 3s`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   [Ability.APPLE_ACID]: {
-    eng: `Deals [30,60,120] ${Damage.SPECIAL} to the target, and lower its ${Stat.SPE_DEF} by 3 points`,
+    eng: `Deals [30,60,120,SP] ${Damage.SPECIAL} to the target, and lower its ${Stat.SPE_DEF} by 3 points`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   [Ability.SHADOW_BALL]: {
-    eng: `Deals [45,90,180] ${Damage.SPECIAL} and burn 15 ${Stat.MANA} to the target and adjacent enemies`,
+    eng: `Deals [45,90,180,SP] ${Damage.SPECIAL} and burn 15 ${Stat.MANA} to the target and adjacent enemies`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   [Ability.DIVE]: {
-    eng: `Dives underwater and reappears in the middle of the enemy team, dealing [10,20,40] ${Damage.SPECIAL} and ${Status.FREEZE} all adjacent units for [1.5,3,6] seconds`,
+    eng: `Dives underwater and reappears in the middle of the enemy team, dealing [10,20,40,SP] ${Damage.SPECIAL} and ${Status.FREEZE} all adjacent units for [1.5,3,6] seconds`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1382,25 +1382,25 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.FUTURE_SIGHT]: {
-    eng: `Deals [15,30,60] ${Damage.SPECIAL} to 5 enemies`,
+    eng: `Deals [15,30,60,SP] ${Damage.SPECIAL} to 5 enemies`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   [Ability.FAKE_TEARS]: {
-    eng: `Deals [3,6,9] ${Damage.SPECIAL} to the whole enemy team and trigger ${Status.ARMOR_REDUCTION} for 3s`,
+    eng: `Deals [3,6,9,SP] ${Damage.SPECIAL} to the whole enemy team and trigger ${Status.ARMOR_REDUCTION} for 3s`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   [Ability.SPARKLING_ARIA]: {
-    eng: `Deals [15,30,60] ${Damage.SPECIAL} to the target and adjacent enemies. If adjacent allies are ${Status.BURN}, the burn is healed.`,
+    eng: `Deals [15,30,60,SP] ${Damage.SPECIAL} to the target and adjacent enemies. If adjacent allies are ${Status.BURN}, the burn is healed.`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   [Ability.DRAGON_DARTS]: {
-    eng: `Throws 3 darts that deals [10,25,50] ${Damage.SPECIAL} each to the target. If the target dies, regain 40 Mana.`,
+    eng: `Throws 3 darts that deals [10,25,50,SP] ${Damage.SPECIAL} each to the target. If the target dies, regain 40 ${Stat.MANA}.`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1418,43 +1418,43 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ""
   },
   [Ability.SKY_ATTACK]: {
-    eng: `The pokémon rises in the air and falls on the farthest target, ${Status.PROTECT} the pokemon for 1 second, and deals [50,100,200] ${Damage.SPECIAL}`,
+    eng: `Rises in the air and fall on the farthest target, ${Status.PROTECT} the attacker for 1 second and deals [50,100,200,SP] ${Damage.SPECIAL}`,
     esp: "",
     prt: "",
     fra: ""
   },
   [Ability.ILLUSION]: {
-    eng: `User recovers [40,80,120] ${Stat.HP} points and copies the form as well as the ${Stat.ATK}, ${Stat.DEF}, ${Stat.SPE_DEF}, and ${Stat.RANGE} of the targeted Pokemon`,
+    eng: `User recovers [40,80,120,SP] ${Stat.HP} points and copies the form as well as the ${Stat.ATK}, ${Stat.DEF}, ${Stat.SPE_DEF}, and ${Stat.RANGE} of the targeted Pokemon`,
     esp: "",
     prt: "",
     fra: ""
   },
   [Ability.SMOG]: {
-    eng: `Buff ${Stat.DEF} by [1,2,4] and poison adjacent enemies for 3s`,
+    eng: `Buff ${Stat.DEF} by [1,2,4,SP] and poison adjacent enemies for 3s`,
     esp: "",
     prt: "",
     fra: ""
   },
   [Ability.AURORA_BEAM]: {
-    eng: `Fires a beam in a line. All targets hit take [30,60,120] ${Damage.SPECIAL} and can be ${Status.FREEZE} (chance based on current ice synergy)`,
+    eng: `Fires a beam in a line. All targets hit take [30,60,120,SP] ${Damage.SPECIAL} and can be ${Status.FREEZE} (chance based on current ice synergy)`,
     esp: "",
     prt: "",
     fra: ""
   },
   [Ability.AGILITY]: {
-    eng: `Increase ${Stat.ATK_SPEED} by [5,10,15] % (stacks)`,
+    eng: `Increase ${Stat.ATK_SPEED} by [5,10,15,SP] % (stacks)`,
     esp: "",
     prt: "",
     fra: ""
   },
   [Ability.SPIRIT_SHACKLE]: {
-    eng: `Shoots a Piercing Arrow that deals [30,60,120] ${Damage.SPECIAL} in a line behind the target and applies ${Status.WOUND} for 4 seconds to everyone hit`,
+    eng: `Shoots a Piercing Arrow that deals [30,60,120,SP] ${Damage.SPECIAL} in a line behind the target and applies ${Status.WOUND} for 4 seconds to everyone hit`,
     esp: "",
     prt: "",
     fra: ""
   },
   [Ability.WATER_SHURIKEN]: {
-    eng: `Throws 3 shuriken in 3 directions that pass through enemies and inflict [20,40,60] ${Damage.SPECIAL}`,
+    eng: `Throws 3 shuriken in 3 directions that pass through enemies and inflict [20,40,60,SP] ${Damage.SPECIAL}`,
     esp: "",
     prt: "",
     fra: ""

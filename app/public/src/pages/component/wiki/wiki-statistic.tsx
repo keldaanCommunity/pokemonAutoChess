@@ -37,8 +37,8 @@ export default function WikiStatistic() {
         <p className="description">{addIconsToDescription(`Amount of mana required to cast ability. Pokemons receive mana with time (10 per second), when attacking (5 per attack) and when receiving damage (10% of the damage taken)`)}</p>
       </li>
       <li className="nes-container">
-        <img style={imgStyle} src="assets/icons/spellDamage.png"></img>
-        <p>Spell power (%)</p>
+        <img style={imgStyle} src="assets/icons/ap.png"></img>
+        <p>Ability Power (%)</p>
         <p className="description">{addIconsToDescription(`Increase SPECIAL and ability effects in various ways.`)}</p>
       </li>
       <li className="nes-container">
