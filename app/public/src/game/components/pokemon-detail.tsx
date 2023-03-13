@@ -23,7 +23,8 @@ export default class PokemonDetail extends GameObjects.DOMElement {
   atkSpeed: HTMLDivElement
   critChance: HTMLDivElement
   critDamage: HTMLDivElement
-  spellDamage: HTMLDivElement
+  ap: HTMLDivElement
+  abilityDescription: HTMLDivElement
   mana: HTMLDivElement
 
   constructor(
@@ -41,7 +42,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     atkSpeed: number,
     critChance: number,
     critDamage: number,
-    spellDamage: number,
+    ap: number,
     mana: number,
     types: string[],
     skill: Ability,
@@ -82,8 +83,8 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     this.critDamage = document.createElement("p")
     this.critDamage.textContent = critDamage.toString()
 
-    this.spellDamage = document.createElement("p")
-    this.spellDamage.textContent = spellDamage.toString()
+    this.ap = document.createElement("p")
+    this.ap.textContent = ap.toString()
 
     this.mana = document.createElement("p")
     this.mana.innerHTML = mana.toString()
@@ -144,7 +145,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
       { stat: Stat.CRIT_DAMAGE, elm: this.critDamage },
       { stat: Stat.MANA, elm: this.mana },
       { stat: Stat.SPE_DEF, elm: this.speDef },
-      { stat: Stat.SPELL_POWER, elm: this.spellDamage },
+      { stat: Stat.AP, elm: this.ap },
       { stat: Stat.RANGE, elm: this.range },
       { stat: Stat.CRIT_CHANCE, elm: this.critChance }
     ]
@@ -172,14 +173,11 @@ export default class PokemonDetail extends GameObjects.DOMElement {
       const ultName = document.createElement("p")
       ultName.textContent = AbilityName[skill]["eng"]
   
-      const description = document.createElement("div")
-      ReactDOM.render(
-        <AbilityTooltip ability={skill} stars={stars} />,
-        description
-      )
+      this.abilityDescription = document.createElement("div")
+      this.updateAbilityDescription(skill, stars, ap)
       ultNameWrap.appendChild(ultName)
       ult.appendChild(ultNameWrap)
-      ult.appendChild(description)
+      ult.appendChild(this.abilityDescription)
       wrap.appendChild(ult)
     }
 
@@ -201,5 +199,12 @@ export default class PokemonDetail extends GameObjects.DOMElement {
 
   updateValue(el: HTMLElement, previousValue: number, value: number) {
     el.textContent = value.toString()
+  }
+
+  updateAbilityDescription(skill: Ability, stars: number, ap: number){
+    ReactDOM.render(
+      <AbilityTooltip ability={skill} stars={stars} ap={ap} />,
+      this.abilityDescription
+    )
   }
 }

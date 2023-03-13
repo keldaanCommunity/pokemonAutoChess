@@ -253,8 +253,8 @@ export default class Simulation extends Schema implements ISimulation {
       case Stat.SPE_DEF:
         pokemon.addSpecialDefense(value)
         break
-      case Stat.SPELL_POWER:
-        pokemon.addSpellDamage(value)
+      case Stat.AP:
+        pokemon.addAbilityPower(value)
         break
       case Stat.MANA:
         pokemon.setMana(pokemon.mana + value)
@@ -304,10 +304,10 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     if (pokemon.items.has(Item.ZOOM_LENS)) {
-      const spellPowerBoost = 5 * pokemon.baseAtk
-      const atkBoost = 0.05 * pokemon.spellDamage
+      const apBoost = 5 * pokemon.baseAtk
+      const atkBoost = 0.05 * pokemon.ap
       pokemon.addAttack(atkBoost)
-      pokemon.addSpellDamage(spellPowerBoost)
+      pokemon.addAbilityPower(apBoost)
     }
 
     if (pokemon.items.has(Item.BRIGHT_POWDER)) {
@@ -429,7 +429,7 @@ export default class Simulation extends Schema implements ISimulation {
               pokemon.positionY
             )
             if (value) {
-              value.addSpellDamage(30)
+              value.addAbilityPower(30)
             }
           })
         }
@@ -440,7 +440,7 @@ export default class Simulation extends Schema implements ISimulation {
               pokemon.positionY
             )
             if (value) {
-              value.addSpellDamage(30)
+              value.addAbilityPower(30)
             }
           })
         }
@@ -708,21 +708,21 @@ export default class Simulation extends Schema implements ISimulation {
         case Effect.AMNESIA:
           if (types.includes(Synergy.PSYCHIC)) {
             pokemon.effects.push(Effect.AMNESIA)
-            pokemon.addSpellDamage(50)
+            pokemon.addAbilityPower(50)
           }
           break
 
         case Effect.LIGHT_SCREEN:
           if (types.includes(Synergy.PSYCHIC)) {
             pokemon.effects.push(Effect.LIGHT_SCREEN)
-            pokemon.addSpellDamage(100)
+            pokemon.addAbilityPower(100)
           }
           break
 
         case Effect.EERIE_SPELL:
           if (types.includes(Synergy.PSYCHIC)) {
             pokemon.effects.push(Effect.EERIE_SPELL)
-            pokemon.addSpellDamage(150)
+            pokemon.addAbilityPower(150)
           }
           break
 

@@ -55,7 +55,7 @@ export default class Pokemon extends DraggableObject {
   attackSprite: AttackSprite
   team: number | undefined
   critDamage: number
-  spellDamage: number
+  ap: number
   life: number | undefined
   shield: number | undefined
   projectile: GameObjects.Sprite | undefined
@@ -231,11 +231,11 @@ export default class Pokemon extends DraggableObject {
       this.shield = p.shield
       this.life = p.life
       this.critDamage = p.critDamage
-      this.spellDamage = p.spellDamage
+      this.ap = p.ap
       this.critChance = p.critChance
     } else {
       this.critDamage = 2
-      this.spellDamage = 0
+      this.ap = 0
       this.critChance = 10
     }
     this.setDepth(5)
@@ -276,7 +276,7 @@ export default class Pokemon extends DraggableObject {
             this.atkSpeed,
             this.critChance,
             this.critDamage,
-            this.spellDamage,
+            this.ap,
             this.mana,
             this.types,
             this.skill,
@@ -302,7 +302,7 @@ export default class Pokemon extends DraggableObject {
             this.atkSpeed,
             this.critChance,
             this.critDamage,
-            this.spellDamage,
+            this.ap,
             this.maxMana,
             this.types,
             this.skill,

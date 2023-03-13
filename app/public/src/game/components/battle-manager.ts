@@ -408,11 +408,12 @@ export default class BattleManager {
             if (pkm.detail) {
               pkm.detail.critDamage.textContent = pokemon.critDamage.toFixed(2)
             }
-          } else if (change.field == "spellDamage") {
-            pkm.spellDamage = pokemon.spellDamage
+          } else if (change.field == "ap") {
+            pkm.ap = pokemon.ap
             if (pkm.detail) {
-              pkm.detail.spellDamage.textContent =
-                pokemon.spellDamage.toString()
+              pkm.detail.ap.textContent =
+                pokemon.ap.toString()
+                pkm.detail.updateAbilityDescription(pkm.skill, pkm.stars, pkm.ap)
             }
           } else if (change.field == "atkSpeed") {
             pkm.atkSpeed = pokemon.atkSpeed

@@ -21,6 +21,22 @@
   margin-right: 4px;
 }
 
+.ability-value {
+  color: rgb(171, 171, 171);
+}
+
+.ability-value .active {
+  color: rgb(255, 255, 255);
+}
+
+.scales-ap .ability-value {
+  color: #440093;
+}
+
+.scales-ap .ability-value .active {
+  color: #D172FF;
+}
+
 .stat-label {
   color: rgb(171, 171, 171);
 }

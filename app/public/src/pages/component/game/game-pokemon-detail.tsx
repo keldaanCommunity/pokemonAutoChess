@@ -78,7 +78,7 @@ export function GamePokemonDetail(props: {
           <p>{AbilityName[props.pokemon.skill].eng}</p>
         </div>
         <div>
-          <AbilityTooltip ability={props.pokemon.skill} />
+          <AbilityTooltip ability={props.pokemon.skill} stars={props.pokemon.stars} />
         </div>
       </div>
       )}
