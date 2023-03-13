@@ -206,6 +206,11 @@ export default class GameScene extends Scene {
       "/assets/attacks/APPLE_ACID.json",
       "/assets/attacks"
     )
+    this.load.multiatlas(
+      "SHADOW_SNEAK",
+      "/assets/attacks/SHADOW_SNEAK.json",
+      "/assets/attacks"
+    )
     this.load.multiatlas("DIVE", "/assets/attacks/DIVE.json", "/assets/attacks")
     this.load.multiatlas(
       "LIQUIDATION",
@@ -501,7 +506,7 @@ export default class GameScene extends Scene {
     })
 
     this.input.keyboard.on("keyup-E", () => {
-      if(this.pokemonHovered){
+      if (this.pokemonHovered) {
         this.sellPokemon(this.pokemonHovered)
       }
     })
@@ -562,9 +567,14 @@ export default class GameScene extends Scene {
     this.sellZoneGraphic?.setVisible(false)
   }
 
-  resetDragState(){
-    if(this.pokemonDragged){
-      this.input.emit("dragend", this.input.pointer1, this.pokemonDragged, false)
+  resetDragState() {
+    if (this.pokemonDragged) {
+      this.input.emit(
+        "dragend",
+        this.input.pointer1,
+        this.pokemonDragged,
+        false
+      )
       this.pokemonDragged = undefined
     }
   }
@@ -689,7 +699,7 @@ export default class GameScene extends Scene {
           // POKEMON -> BOARD-ZONE = PLACE POKEMON
           if (dropZone.name == "board-zone") {
             const [x, y] = [dropZone.getData("x"), dropZone.getData("y")]
-            if(gameObject.positionX !== x || gameObject.positionY !== y){
+            if (gameObject.positionX !== x || gameObject.positionY !== y) {
               document.getElementById("game")?.dispatchEvent(
                 new CustomEvent<IDragDropMessage>(Transfer.DRAG_DROP, {
                   detail: { x, y, id: gameObject.id }
@@ -698,18 +708,21 @@ export default class GameScene extends Scene {
               this.lastDragDropPokemon = gameObject
             } else {
               // RETURN TO ORIGINAL SPOT
-              gameObject.setPosition(...transformCoordinate(x,y))
+              gameObject.setPosition(...transformCoordinate(x, y))
             }
           }
           // POKEMON -> SELL-ZONE = SELL POKEMON
           else if (dropZone.name == "sell-zone") {
-            if(gameObject === this.pokemonDragged){
+            if (gameObject === this.pokemonDragged) {
               this.sellPokemon(this.pokemonDragged)
             }
           }
           // RETURN TO ORIGINAL SPOT
           else {
-            const [x,y] = transformCoordinate(gameObject.positionX, gameObject.positionY)
+            const [x, y] = transformCoordinate(
+              gameObject.positionX,
+              gameObject.positionY
+            )
             gameObject.setPosition(x, y)
           }
           this.pokemonDragged = undefined
@@ -830,7 +843,11 @@ export function loadStatusMultiAtlas(scene: Scene) {
     "/assets/status/resurection.json",
     "/assets/status"
   )
-  scene.load.multiatlas("paralysis", "/assets/status/PARALYSIS.json", "/assets/status")
+  scene.load.multiatlas(
+    "paralysis",
+    "/assets/status/PARALYSIS.json",
+    "/assets/status"
+  )
   scene.load.multiatlas(
     "rune_protect",
     "/assets/status/RUNE_PROTECT.json",

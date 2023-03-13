@@ -730,6 +730,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     prt: "",
     fra: ""
   },
+  [Ability.SHADOW_SNEAK]: {
+    eng: "Shadow Sneak",
+    esp: "",
+    prt: "",
+    fra: ""
+  }
 }
 
 export const AbilityDescription: { [key in Ability]: Langage } = {
@@ -1459,4 +1465,10 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: "",
     fra: ""
   },
+  [Ability.SHADOW_SNEAK]: {
+    eng: `Deals [30,60,120] ${Damage.SPECIAL}. If the target is ${Status.SILENCE}, deals ${Damage.TRUE}`,
+    esp: "",
+    prt: "",
+    fra: ""
+  }
 }

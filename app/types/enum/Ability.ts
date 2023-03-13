@@ -119,7 +119,8 @@ import {
   AuroraBeamStrategy,
   AgilityStrategy,
   SpiritShackleStrategy,
-  WaterShurikenStrategy
+  WaterShurikenStrategy,
+  ShadowSneakStrategy
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -243,7 +244,8 @@ export enum Ability {
   AURORA_BEAM = "AURORA_BEAM",
   AGILITY = "AGILITY",
   SPIRIT_SHACKLE = "SPIRIT_SHACKLE",
-  WATER_SHURIKEN = "WATER_SHURIKEN"
+  WATER_SHURIKEN = "WATER_SHURIKEN",
+  SHADOW_SNEAK = "SHADOW_SNEAK"
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -367,5 +369,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.AURORA_BEAM]: new AuroraBeamStrategy(),
   [Ability.AGILITY]: new AgilityStrategy(),
   [Ability.SPIRIT_SHACKLE]: new SpiritShackleStrategy(),
-  [Ability.WATER_SHURIKEN]: new WaterShurikenStrategy()
+  [Ability.WATER_SHURIKEN]: new WaterShurikenStrategy(),
+  [Ability.SHADOW_SNEAK]: new ShadowSneakStrategy()
 }
