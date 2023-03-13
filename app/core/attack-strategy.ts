@@ -3547,3 +3547,19 @@ export class WaterShurikenStrategy extends AttackStrategy {
     })
   }
 }
+
+export class ShadowSneakStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    const damage = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30
+    const damageType = pokemon.status.silence
+      ? AttackType.TRUE
+      : AttackType.SPECIAL
+    target.handleSpecialDamage(damage, board, damageType, pokemon)
+  }
+}
