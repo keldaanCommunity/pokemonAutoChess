@@ -12883,7 +12883,7 @@ export class Mimikyu extends Pokemon {
       AttackSprite.FAIRY_MELEE,
       AttackType.PHYSICAL,
       2,
-      55,
+      40,
       Ability.SHADOW_SNEAK,
       shiny,
       emotion,
