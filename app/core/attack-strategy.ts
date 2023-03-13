@@ -75,7 +75,12 @@ export class BlueFlareStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon
+        )
       }
     })
   }
@@ -104,7 +109,12 @@ export class FusionBoltStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon
+        )
       }
     })
   }
@@ -260,7 +270,12 @@ export class ConfusingMindStrategy extends AttackStrategy {
     }
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon
+        )
         cell.value.status.triggerConfusion(confusion * 1000, cell.value)
       }
     })
@@ -394,7 +409,12 @@ export class ShadowBallStrategy extends AttackStrategy {
     target.count.manaBurnCount++
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon
+        )
         cell.value.setMana(cell.value.mana - 15)
         cell.value.count.manaBurnCount++
       }
@@ -450,7 +470,12 @@ export class CorruptedNatureStrategy extends AttackStrategy {
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
         cell.value.status.triggerWound(5000, cell.value, board)
-        cell.value.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon
+        )
       }
     })
   }
@@ -944,7 +969,12 @@ export class ExplosionStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon
+        )
       }
     })
 
@@ -1077,9 +1107,14 @@ export class AuroraBeamStrategy extends AttackStrategy {
         break
     }
 
-    effectInLine(board, pokemon, target, targetInLine => {
+    effectInLine(board, pokemon, target, (targetInLine) => {
       if (targetInLine.team !== pokemon.team) {
-        targetInLine.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+        targetInLine.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon
+        )
         let freezeChance = 0
         if (pokemon.effects.includes(Effect.SNOW)) {
           freezeChance += 0.1
@@ -2109,7 +2144,12 @@ export class WheelOfFireStrategy extends AttackStrategy {
     )
     cells.forEach((cell) => {
       if (cell.value && cell.value != pokemon) {
-        cell.value.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon
+        )
       }
     })
   }
@@ -2138,9 +2178,14 @@ export class HeatWaveStrategy extends AttackStrategy {
         break
     }
 
-    effectInLine(board, pokemon, target, targetInLine => {
+    effectInLine(board, pokemon, target, (targetInLine) => {
       if (targetInLine.team != pokemon.team) {
-        targetInLine.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+        targetInLine.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon
+        )
       }
     })
   }
@@ -2169,9 +2214,14 @@ export class HydroPumpStrategy extends AttackStrategy {
         break
     }
 
-    effectInLine(board, pokemon, target, targetInLine => {
+    effectInLine(board, pokemon, target, (targetInLine) => {
       if (targetInLine.team !== pokemon.team) {
-        targetInLine.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+        targetInLine.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon
+        )
       }
     })
   }
@@ -2430,7 +2480,12 @@ export class BlastBurnStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon
+        )
       }
     })
   }
@@ -2519,7 +2574,12 @@ export class DischargeStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon
+        )
         cell.value.status.triggerParalysis(5000, cell.value)
       }
     })
@@ -2708,7 +2768,12 @@ export class IcicleCrashStrategy extends AttackStrategy {
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon
+        )
       }
     })
   }
@@ -2742,7 +2807,12 @@ export class SteamEruptionStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon
+        )
         cell.value.status.triggerBurn(3000, cell.value, pokemon, board)
       }
     })
@@ -2972,7 +3042,12 @@ export class LeechLifeStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon
+        )
         pokemon.handleHeal(damage, pokemon, true)
       }
     })
@@ -3181,7 +3256,12 @@ export class MeteorMashStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon
+        )
       }
     })
   }
@@ -3210,9 +3290,14 @@ export class HurricaneStrategy extends AttackStrategy {
         break
     }
 
-    effectInLine(board, pokemon, target, targetInLine => {
+    effectInLine(board, pokemon, target, (targetInLine) => {
       if (targetInLine.team !== pokemon.team) {
-        targetInLine.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+        targetInLine.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon
+        )
       }
     })
   }
@@ -3264,7 +3349,12 @@ export class SparklingAriaStrategy extends AttackStrategy {
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon
+        )
       } else if (
         cell.value &&
         cell.value.team === pokemon.team &&
@@ -3400,13 +3490,17 @@ export class SpiritShackleStrategy extends AttackStrategy {
         break
     }
 
-    effectInLine(board, pokemon, target, targetInLine => {
+    effectInLine(board, pokemon, target, (targetInLine) => {
       if (targetInLine.team !== pokemon.team) {
-        targetInLine.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+        targetInLine.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon
+        )
         targetInLine.status.triggerWound(4000, targetInLine, board)
       }
     })
-    
   }
 }
 
@@ -3434,18 +3528,38 @@ export class WaterShurikenStrategy extends AttackStrategy {
     }
 
     const orientations = [
-      pokemon.orientation, 
-      OrientationArray[(OrientationArray.indexOf(pokemon.orientation)+1) % 8],
-      OrientationArray[(OrientationArray.indexOf(pokemon.orientation)+7) % 8],
+      pokemon.orientation,
+      OrientationArray[(OrientationArray.indexOf(pokemon.orientation) + 1) % 8],
+      OrientationArray[(OrientationArray.indexOf(pokemon.orientation) + 7) % 8]
     ]
 
-    orientations.forEach(orientation => {
-      effectInLine(board, pokemon, orientation, targetInLine => {
+    orientations.forEach((orientation) => {
+      effectInLine(board, pokemon, orientation, (targetInLine) => {
         if (targetInLine.team !== pokemon.team) {
-          targetInLine.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+          targetInLine.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon
+          )
         }
       })
     })
   }
 }
 
+export class ShadowSneakStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    const damage = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30
+    const damageType = pokemon.status.silence
+      ? AttackType.TRUE
+      : AttackType.SPECIAL
+    target.handleSpecialDamage(damage, board, damageType, pokemon)
+  }
+}

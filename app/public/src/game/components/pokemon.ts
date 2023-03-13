@@ -30,7 +30,10 @@ import { Ability } from "../../../../types/enum/Ability"
 import ManaBar from "./mana-bar"
 import { Synergy } from "../../../../types/enum/Synergy"
 import { Pkm } from "../../../../types/enum/Pokemon"
-import { OrientationArray, OrientationVector } from "../../../../utils/orientation"
+import {
+  OrientationArray,
+  OrientationVector
+} from "../../../../utils/orientation"
 
 export default class Pokemon extends DraggableObject {
   evolution: Pkm
@@ -1170,8 +1173,14 @@ export default class Pokemon extends DraggableObject {
             break
 
           case Ability.HEAT_WAVE:
-            coordinates = transformAttackCoordinate(this.positionX, this.positionY)
-            coordinatesTarget = transformAttackCoordinate(this.targetX, this.targetY)
+            coordinates = transformAttackCoordinate(
+              this.positionX,
+              this.positionY
+            )
+            coordinatesTarget = transformAttackCoordinate(
+              this.targetX,
+              this.targetY
+            )
             specialProjectile = this.scene.add.sprite(
               coordinatesTarget[0],
               coordinatesTarget[1],
@@ -1865,9 +1874,15 @@ export default class Pokemon extends DraggableObject {
             break
 
           case Ability.HURRICANE: {
-            const [dx,dy]= OrientationVector[this.orientation]
-            coordinates = transformAttackCoordinate(this.positionX, this.positionY)
-            const finalCoordinates = transformAttackCoordinate(this.positionX+dx*8, this.positionY+dy*8)
+            const [dx, dy] = OrientationVector[this.orientation]
+            coordinates = transformAttackCoordinate(
+              this.positionX,
+              this.positionY
+            )
+            const finalCoordinates = transformAttackCoordinate(
+              this.positionX + dx * 8,
+              this.positionY + dy * 8
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2140,6 +2155,25 @@ export default class Pokemon extends DraggableObject {
             specialProjectile.setDepth(7)
             specialProjectile.setScale(2, 2)
             specialProjectile.anims.play(Ability.APPLE_ACID)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
+
+          case Ability.SHADOW_SNEAK:
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.SHADOW_SNEAK,
+              "000"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.SHADOW_SNEAK)
             specialProjectile.once(
               Phaser.Animations.Events.ANIMATION_COMPLETE,
               () => {
@@ -2424,10 +2458,19 @@ export default class Pokemon extends DraggableObject {
             break
 
           case Ability.AURORA_BEAM: {
-            const [dx,dy]= OrientationVector[this.orientation]
-            coordinates = transformAttackCoordinate(this.positionX, this.positionY)
-            coordinatesTarget = transformAttackCoordinate(this.targetX, this.targetY)
-            const finalCoordinates = transformAttackCoordinate(this.positionX+dx*8, this.positionY+dy*8)
+            const [dx, dy] = OrientationVector[this.orientation]
+            coordinates = transformAttackCoordinate(
+              this.positionX,
+              this.positionY
+            )
+            coordinatesTarget = transformAttackCoordinate(
+              this.targetX,
+              this.targetY
+            )
+            const finalCoordinates = transformAttackCoordinate(
+              this.positionX + dx * 8,
+              this.positionY + dy * 8
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2641,9 +2684,8 @@ export default class Pokemon extends DraggableObject {
             })
             break
 
-
           case Ability.SPIRIT_SHACKLE: {
-            const [dx,dy]= OrientationVector[this.orientation]
+            const [dx, dy] = OrientationVector[this.orientation]
             coordinatesTarget = transformAttackCoordinate(
               this.targetX,
               this.targetY
@@ -2652,7 +2694,10 @@ export default class Pokemon extends DraggableObject {
               this.positionX,
               this.positionY
             )
-            const finalCoordinates = transformAttackCoordinate(this.positionX+dx*8, this.positionY+dy*8)
+            const finalCoordinates = transformAttackCoordinate(
+              this.positionX + dx * 8,
+              this.positionY + dy * 8
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2690,13 +2735,20 @@ export default class Pokemon extends DraggableObject {
               this.positionY
             )
             const orientations = [
-              this.orientation, 
-              OrientationArray[(OrientationArray.indexOf(this.orientation)+1) % 8],
-              OrientationArray[(OrientationArray.indexOf(this.orientation)+7) % 8],
+              this.orientation,
+              OrientationArray[
+                (OrientationArray.indexOf(this.orientation) + 1) % 8
+              ],
+              OrientationArray[
+                (OrientationArray.indexOf(this.orientation) + 7) % 8
+              ]
             ]
-            orientations.forEach(orientation => {
-              const [dx,dy]= OrientationVector[orientation]
-              const finalCoordinates = transformAttackCoordinate(this.positionX+dx*8, this.positionY+dy*8)
+            orientations.forEach((orientation) => {
+              const [dx, dy] = OrientationVector[orientation]
+              const finalCoordinates = transformAttackCoordinate(
+                this.positionX + dx * 8,
+                this.positionY + dy * 8
+              )
               const projectile = this.scene.add.sprite(
                 coordinates[0],
                 coordinates[1],
@@ -2924,7 +2976,13 @@ export default class Pokemon extends DraggableObject {
 
   addParalysis() {
     if (!this.paralysis) {
-      this.paralysis = new GameObjects.Sprite(this.scene, 0, -30, "paralysis", "000")
+      this.paralysis = new GameObjects.Sprite(
+        this.scene,
+        0,
+        -30,
+        "paralysis",
+        "000"
+      )
       this.paralysis.setScale(2, 2)
       this.scene.add.existing(this.paralysis)
       this.paralysis.anims.play("paralysis")
