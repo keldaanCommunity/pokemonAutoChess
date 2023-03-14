@@ -12,7 +12,7 @@ export default class AttackingState extends PokemonState {
     dt: number,
     board: Board,
     climate: string
-  ): boolean {
+  ) {
     super.update(pokemon, dt, board, climate)
 
     if (pokemon.cooldown <= 0) {
@@ -77,7 +77,6 @@ export default class AttackingState extends PokemonState {
     } else {
       pokemon.cooldown = Math.max(0, pokemon.cooldown - dt)
     }
-    return false
   }
 
   attack(
