@@ -16,7 +16,7 @@ export default function UnownPanel(props: {
     )
     const secretMessage = `    
     To unleash ancient power ?
-    Max Groudon with Flame Orb
+    Max Groudon with a red Orb
     Delta Sphere over Rayquaza
     And blue Jewel for Kyogre!
     `.replace(/^\s+/gm, '').replace(/\s+$/gm, '').split('')
