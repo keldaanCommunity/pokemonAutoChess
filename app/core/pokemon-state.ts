@@ -547,24 +547,7 @@ export default class PokemonState {
 
     if (pokemon.manaCooldown <= 0) {
       pokemon.setMana(pokemon.mana + 10)
-
       pokemon.manaCooldown = 1000
-      if (pokemon.mana >= pokemon.maxMana && !pokemon.status.silence) {
-        if (pokemon.targetX == -1 || pokemon.targetY == -1) {
-          const targetCoordinate = this.getNearestTargetCoordinate(
-            pokemon,
-            board
-          )
-          if (targetCoordinate) {
-            pokemon.targetX = targetCoordinate.x
-            pokemon.targetY = targetCoordinate.y
-          }
-        }
-        const target = board.getValue(pokemon.targetX, pokemon.targetY)
-        if (target) {
-          pokemon.strategy.process(pokemon, this, board, target)
-        }
-      }
     } else {
       pokemon.manaCooldown = Math.max(0, pokemon.manaCooldown - dt)
     }
