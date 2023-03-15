@@ -10,7 +10,7 @@ export default class MovingState extends PokemonState {
     dt: number,
     board: Board,
     climate: string
-  ): boolean {
+  ) {
     super.update(pokemon, dt, board, climate)
     if (pokemon.cooldown <= 0) {
       pokemon.cooldown = 500
@@ -33,7 +33,6 @@ export default class MovingState extends PokemonState {
     } else {
       pokemon.cooldown = Math.max(0, pokemon.cooldown - dt)
     }
-    return false
   }
 
   move(

@@ -508,7 +508,6 @@ export default class PokemonState {
   }
 
   update(pokemon: PokemonEntity, dt: number, board: Board, climate: string) {
-    let updateEffects = false
     if (
       (pokemon.status.freeze || pokemon.status.sleep) &&
       pokemon.action !== PokemonActionState.SLEEP
@@ -564,7 +563,6 @@ export default class PokemonState {
         const target = board.getValue(pokemon.targetX, pokemon.targetY)
         if (target) {
           pokemon.strategy.process(pokemon, this, board, target)
-          updateEffects = true
         }
       }
     } else {
@@ -598,7 +596,6 @@ export default class PokemonState {
         pokemon.handleAttackSpeed(10)
       }
     }
-    return updateEffects
   }
 
   onEnter(pokemon: PokemonEntity) {}

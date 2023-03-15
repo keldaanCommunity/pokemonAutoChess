@@ -134,10 +134,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   update(dt: number, board: Board, climate: string) {
-    const updateEffects = this.state.update(this, dt, board, climate)
-    if (updateEffects) {
-      this.simulation.applyItemsEffects(this)
-    }
+    this.state.update(this, dt, board, climate)
   }
 
   getAttackDelay() {
