@@ -17,7 +17,7 @@ export default class AttackingState extends PokemonState {
 
     if (pokemon.cooldown <= 0) {
       pokemon.cooldown = pokemon.getAttackDelay()
-      const target = board.getValue(pokemon.targetX, pokemon.targetY)
+      let target = board.getValue(pokemon.targetX, pokemon.targetY)
       let targetCoordinate: { x: number; y: number } | undefined = {
         x: pokemon.targetX,
         y: pokemon.targetY
@@ -38,6 +38,9 @@ export default class AttackingState extends PokemonState {
         )
       ) {
         targetCoordinate = this.getNearestTargetCoordinate(pokemon, board)
+        if(targetCoordinate){
+          target = board.getValue(targetCoordinate.x, targetCoordinate.y)
+        }        
       }
 
       // no target case
@@ -52,7 +55,11 @@ export default class AttackingState extends PokemonState {
         ) > pokemon.range
       ) {
         pokemon.toMovingState()
+      } else if (target && pokemon.mana >= pokemon.maxMana && !pokemon.status.silence) {
+        // CAST ABILITY
+        pokemon.strategy.process(pokemon, this, board, target)
       } else {
+        // BASIC ATTACK
         this.attack(pokemon, board, targetCoordinate, climate)
         if (
           pokemon.effects.includes(Effect.EERIE_IMPULSE) ||
