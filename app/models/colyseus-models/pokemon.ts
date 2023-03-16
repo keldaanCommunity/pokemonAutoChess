@@ -8210,7 +8210,7 @@ export class Amaura extends Pokemon {
       Pkm.AURORUS,
       100,
       7,
-      2,
+      3,
       3,
       1,
       AttackSprite.ROCK_MELEE,
@@ -8233,9 +8233,9 @@ export class Aurorus extends Pokemon {
       [Synergy.FOSSIL, Synergy.ICE],
       Rarity.EPIC,
       Pkm.DEFAULT,
-      170,
+      180,
       12,
-      4,
+      5,
       5,
       1,
       AttackSprite.ROCK_MELEE,
@@ -8255,7 +8255,7 @@ export class Carbink extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.CARBINK,
-      [Synergy.FOSSIL, Synergy.FAIRY],
+      [Synergy.FOSSIL, Synergy.MINERAL, Synergy.FAIRY],
       Rarity.EPIC,
       Pkm.DIANCIE,
       90,
@@ -8280,13 +8280,13 @@ export class Diancie extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.DIANCIE,
-      [Synergy.FOSSIL, Synergy.FAIRY],
+      [Synergy.FOSSIL, Synergy.MINERAL, Synergy.FAIRY],
       Rarity.EPIC,
       Pkm.DEFAULT,
       170,
       13,
-      3,
-      3,
+      4,
+      4,
       1,
       AttackSprite.FAIRY_MELEE,
       AttackType.PHYSICAL,
@@ -8305,11 +8305,11 @@ export class Anorith extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.ANORITH,
-      [Synergy.FOSSIL, Synergy.BUG],
+      [Synergy.FOSSIL, Synergy.BUG, Synergy.AQUATIC],
       Rarity.COMMON,
       Pkm.ARMALDO,
       60,
-      5,
+      6,
       2,
       1,
       1,
@@ -8330,11 +8330,11 @@ export class Armaldo extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.ARMALDO,
-      [Synergy.FOSSIL, Synergy.BUG],
+      [Synergy.FOSSIL, Synergy.BUG, Synergy.AQUATIC],
       Rarity.COMMON,
       Pkm.DEFAULT,
-      110,
-      8,
+      130,
+      14,
       2,
       1,
       1,
@@ -8355,7 +8355,7 @@ export class Archen extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.ARCHEN,
-      [Synergy.FOSSIL, Synergy.FLYING],
+      [Synergy.FOSSIL, Synergy.MINERAL, Synergy.FLYING],
       Rarity.RARE,
       Pkm.ARCHEOPS,
       60,
@@ -8380,7 +8380,7 @@ export class Archeops extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.ARCHEOPS,
-      [Synergy.FOSSIL, Synergy.FLYING],
+      [Synergy.FOSSIL, Synergy.MINERAL, Synergy.FLYING],
       Rarity.RARE,
       Pkm.DEFAULT,
       120,
@@ -8505,7 +8505,7 @@ export class Lileep extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.LILEEP,
-      [Synergy.FOSSIL, Synergy.GRASS],
+      [Synergy.FOSSIL, Synergy.GRASS, Synergy.FLORA],
       Rarity.RARE,
       Pkm.CRADILY,
       60,
@@ -8534,7 +8534,7 @@ export class Cradily extends Pokemon {
       Rarity.RARE,
       Pkm.DEFAULT,
       120,
-      11,
+      15,
       3,
       3,
       2,
@@ -8558,7 +8558,7 @@ export class Cranidos extends Pokemon {
       [Synergy.FOSSIL, Synergy.MONSTER],
       Rarity.UNCOMMON,
       Pkm.RAMPARDOS,
-      50,
+      60,
       7,
       2,
       1,
@@ -8583,7 +8583,7 @@ export class Rampardos extends Pokemon {
       [Synergy.FOSSIL, Synergy.MONSTER],
       Rarity.UNCOMMON,
       Pkm.DEFAULT,
-      110,
+      120,
       12,
       3,
       1,
