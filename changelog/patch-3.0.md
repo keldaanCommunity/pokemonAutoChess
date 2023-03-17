@@ -1,0 +1,1 @@
+- Reviewed statistics of every mon in the game
