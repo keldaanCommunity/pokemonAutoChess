@@ -52,7 +52,7 @@ export const ItemName: { [key in Item]: string } = {
   [Item.FOCUS_BAND]: "Focus Band",
   [Item.FLAME_ORB]: "Flame Orb",
   [Item.ASSAULT_VEST]: "Assault Vest",
-  [Item.KINGS_ROCK]: "Kings Rock",
+  [Item.AMULET_COIN]: "Amulet Coin",
   [Item.POKE_DOLL]: "Poke Doll",
   [Item.RED_ORB]: "Red Orb",
   [Item.MAX_REVIVE]: "Max Revive",
@@ -127,7 +127,7 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
     `When combat begins, the holder and adjacent allies in the same row gain +30% ${Stat.ATK_SPEED}`,
   [Item.FLAME_ORB]: `Holder is burned and cannot heal during the fight, but increase its ${Stat.ATK} by 100%`,
   [Item.ASSAULT_VEST]: `+18 ${Stat.SPE_DEF}`,
-  [Item.KINGS_ROCK]:
+  [Item.AMULET_COIN]:
     "+1 gold each time the holder kills an enemy (max 5 gold per stage)",
   [Item.POKE_DOLL]: "Reduce all incoming damage by 30%",
   [Item.RED_ORB]:

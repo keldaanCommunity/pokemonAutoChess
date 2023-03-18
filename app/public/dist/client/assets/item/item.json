@@ -325,24 +325,24 @@
 					}
 				},
 				{
-					"filename": "KINGS_ROCK",
+					"filename": "AMULET_COIN",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
 						"w": 21,
-						"h": 22
+						"h": 19
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
 						"w": 21,
-						"h": 22
+						"h": 19
 					},
 					"frame": {
 						"x": 1,
 						"y": 96,
 						"w": 21,
-						"h": 22
+						"h": 19
 					}
 				},
 				{
