@@ -301,9 +301,9 @@ export default class BattleManager {
             if (change.value != 0) {
               pkm.incenseAnimation()
             }
-          } else if (change.field == "brightPowderCount") {
+          } else if (change.field == "starDustCount") {
             if (change.value != 0) {
-              pkm.brightPowderAnimation()
+              pkm.starDustAnimation()
             }
           } else if (change.field == "mindBlownCount") {
             if (change.value != 0) {
@@ -427,7 +427,7 @@ export default class BattleManager {
               pkm.detail.hp.textContent = pokemon.life.toString()
             }
           } else if (change.field == "shield") {
-            if (change.value > 0) {
+            if (change.value >= 0) {
               pkm.shield = pokemon.shield
               pkm.lifebar?.setShieldAmount(pkm.shield)
             }
