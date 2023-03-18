@@ -1018,24 +1018,24 @@
 					}
 				},
 				{
-					"filename": "WATER_INCENSE",
+					"filename": "POWER_LENS",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 20,
-						"h": 19
+						"w": 22,
+						"h": 22
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 20,
-						"h": 19
+						"w": 22,
+						"h": 22
 					},
 					"frame": {
-						"x": 19,
-						"y": 343,
-						"w": 20,
-						"h": 19
+						"x": 18,
+						"y": 342,
+						"w": 22,
+						"h": 22
 					}
 				},
 				{

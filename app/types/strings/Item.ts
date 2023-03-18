@@ -26,7 +26,7 @@ export const ItemName: { [key in Item]: string } = {
   [Item.UPGRADE]: "Upgrade",
   [Item.REAPER_CLOTH]: "Reaper Cloth",
   [Item.POKEMONOMICON]: "Pokemonomicon",
-  [Item.WATER_INCENSE]: "Water Incense",
+  [Item.POWER_LENS]: "Power Lens",
   [Item.SHELL_BELL]: "Shell Bell",
   [Item.LUCKY_EGG]: "Lucky Egg",
   [Item.AQUA_EGG]: "Aqua Egg",
@@ -85,8 +85,8 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
   [Item.REAPER_CLOTH]: "The holder spells can critically strike",
   [Item.POKEMONOMICON]:
     "When the holder deals damage with their Ability, they burn and wound the target for 2 seconds",
-  [Item.WATER_INCENSE]:
-    `+30% ${Damage.SPECIAL}, up to +75% if target has more than 200 ${Stat.HP}`,
+  [Item.POWER_LENS]:
+    `50% of received ${Damage.SPECIAL} is reflected to the attacker`,
   [Item.SHELL_BELL]: "Holder heals for 30% of all damages inflicted",
   [Item.LUCKY_EGG]:
     `+30% ${Stat.AP} for holder and adjacent allies in the same row`,

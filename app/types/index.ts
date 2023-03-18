@@ -434,7 +434,7 @@ export interface ICount {
   attackCount: number
   growGroundCount: number
   dodgeCount: number
-  incenseCount: number
+  powerLensCount: number
   staticCount: number
   starDustCount: number
   doubleAttackCount: number

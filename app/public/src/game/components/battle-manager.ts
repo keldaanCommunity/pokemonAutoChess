@@ -297,9 +297,9 @@ export default class BattleManager {
             if (change.value != 0) {
               pkm.fairyCritAnimation()
             }
-          } else if (change.field == "incenseCount") {
+          } else if (change.field == "powerLensCount") {
             if (change.value != 0) {
-              pkm.incenseAnimation()
+              pkm.powerLensAnimation()
             }
           } else if (change.field == "starDustCount") {
             if (change.value != 0) {
