@@ -47,6 +47,11 @@ export class AttackStrategy {
     if (pokemon.items.has(Item.AQUA_EGG)) {
       pokemon.setMana(pokemon.mana + 20)
     }
+
+    if(pokemon.items.has(Item.STAR_DUST)) {
+      pokemon.handleShield(Math.round(0.5 * pokemon.maxMana))
+      pokemon.count.starDustCount++      
+    }
   }
 }
 

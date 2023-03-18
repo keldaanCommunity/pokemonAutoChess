@@ -32,7 +32,7 @@ export const ItemName: { [key in Item]: string } = {
   [Item.AQUA_EGG]: "Aqua Egg",
   [Item.BLUE_ORB]: "Blue Orb",
   [Item.ZOOM_LENS]: "Zoom Lens",
-  [Item.BRIGHT_POWDER]: "Bright Powder",
+  [Item.STAR_DUST]: "Star Dust",
   [Item.DELTA_ORB]: "Delta Orb",
   [Item.MANA_SCARF]: "Mana Scarf",
   [Item.SMOKE_BALL]: "Smoke Ball",
@@ -96,8 +96,8 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
     `Every third attack from the holder unleashes a chain lightning that bounces to 2 enemies, burning 20 ${Stat.MANA}`,
   [Item.ZOOM_LENS]:
     `The holder converts 5% of its ${Stat.AP} as ${Stat.ATK} and 5 x its ${Stat.ATK} as ${Stat.AP}`,
-  [Item.BRIGHT_POWDER]:
-    `Every 4 sec, the holder throw sand, dropping a random adjacent enemy ${Stat.ATK_SPEED} by 30%`,
+  [Item.STAR_DUST]:
+    `After casting ability, gain 50% of max ${Stat.MANA} as ${Stat.SHIELD}`,
   [Item.DELTA_ORB]:
     `Holder and adjacent allies in the same row gain 3 bonus ${Stat.MANA} per hit`,
   [Item.MANA_SCARF]: `The holder attacks restore 8 additional ${Stat.MANA}`,
