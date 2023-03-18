@@ -401,13 +401,13 @@ export default class Simulation extends Schema implements ISimulation {
           shieldBonus = 20
         }
         if (pokemon.effects.includes(Effect.STRENGTH)) {
-          shieldBonus += 30
-        }
-        if (pokemon.effects.includes(Effect.ROCK_SMASH)) {
           shieldBonus += 40
         }
+        if (pokemon.effects.includes(Effect.ROCK_SMASH)) {
+          shieldBonus += 60
+        }
         if (pokemon.effects.includes(Effect.PURE_POWER)) {
-          shieldBonus += 50
+          shieldBonus += 80
         }
         if (shieldBonus >= 0) {
           pokemon.handleShield(shieldBonus, pokemon)

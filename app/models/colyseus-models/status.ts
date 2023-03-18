@@ -149,9 +149,9 @@ export default class Status extends Schema implements IStatus {
   updateGrassHeal(dt: number, pkm: PokemonEntity) {
     if (this.grassCooldown - dt <= 0) {
       const heal = pkm.effects.includes(Effect.SPORE)
-        ? 18
+        ? 20
         : pkm.effects.includes(Effect.GROWTH)
-        ? 10
+        ? 12
         : 5
       pkm.handleHeal(heal, pkm, false)
       this.grassCooldown = 1000

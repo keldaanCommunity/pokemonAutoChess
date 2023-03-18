@@ -94,17 +94,17 @@ export const EffectDescription: {
     fra: `+20 HP pour tous les pokémons autours`
   },
   [Effect.STRENGTH]: {
-    eng: `All allies adjacent to your Normal pokemon have +30 ${Stat.SHIELD}`,
+    eng: `All allies adjacent to your Normal pokemon have +40 ${Stat.SHIELD}`,
     esp: `+30 HP por cada pokemon que esté cerca`,
     fra: `+30 HP pour tous les pokémons autours`
   },
   [Effect.ROCK_SMASH]: {
-    eng: `All allies adjacent to your Normal pokemon have +40 ${Stat.SHIELD}`,
+    eng: `All allies adjacent to your Normal pokemon have +60 ${Stat.SHIELD}`,
     esp: `+50 HP por cada pokemon que esté cerca`,
     fra: `+50 HP pour tous les pokémons autours`
   },
   [Effect.PURE_POWER]: {
-    eng: `All allies adjacent to your Normal pokemon have +50 ${Stat.SHIELD}`,
+    eng: `All allies adjacent to your Normal pokemon have +80 ${Stat.SHIELD}`,
     esp: `+50 HP por cada pokemon que esté cerca`,
     fra: `+50 HP pour tous les pokémons autours`
   },
@@ -114,12 +114,12 @@ export const EffectDescription: {
     fra: `+5% HP/s pour tous les alliés plante`
   },
   [Effect.GROWTH]: {
-    eng: `Grass allies restore 10 ${Stat.HP} per second`,
+    eng: `Grass allies restore 12 ${Stat.HP} per second`,
     esp: `+10% HP/s para los tipos de Planta`,
     fra: `+10% HP/s pour tous les alliés plante`
   },
   [Effect.SPORE]: {
-    eng: `Grass allies restore 18 ${Stat.HP} per second`,
+    eng: `Grass allies restore 20 ${Stat.HP} per second`,
     esp: `Los ennemigos que no son de Planta tienen un 30% ATK speed`,
     fra: `-30% ATK speed pour tous les ennemis`
   },
@@ -174,7 +174,7 @@ export const EffectDescription: {
     fra: `?NONE?`
   },
   [Effect.GUTS]: {
-    eng: `Fighting pokemons blocks 5 damage`,
+    eng: `Fighting pokemons blocks 4 damage`,
     esp: `+5 maná/ataque para todos los pkm`,
     fra: `+5 mana / attaque pour tous les pkm`
   },
@@ -184,7 +184,7 @@ export const EffectDescription: {
     fra: `+10 mana / attaque pour tous les pkm`
   },
   [Effect.JUSTIFIED]: {
-    eng: `Fighting pokemons blocks 9 damage`,
+    eng: `Fighting pokemons blocks 10 damage`,
     esp: `+10 maná/ataque para todos los pkm`,
     fra: `+10 mana / attaque pour tous les pkm`
   },
@@ -274,7 +274,7 @@ export const EffectDescription: {
     fra: `?NONE?`
   },
   [Effect.ANGER_POINT]: {
-    eng: `When a field pokemon dies, all other field pokemons gain 50% ${Stat.ATK_SPEED} and are healed for 60% ${Stat.HP} of their Maximum Health`,
+    eng: `When a field pokemon dies, all other field pokemons gain 40% ${Stat.ATK_SPEED} and are healed for 50% ${Stat.HP} of their Maximum Health`,
     esp: `?NONE?`,
     fra: `?NONE?`
   },
@@ -414,12 +414,12 @@ export const EffectDescription: {
     fra: `?NONE?`
   },
   [Effect.FAIRY_WIND]: {
-    eng: `Fairy pokemons shock nearby enemies for 25 ${Damage.SPECIAL} whenever they deal or receive a critical strike`,
+    eng: `Fairy pokemons shock nearby enemies for 30 ${Damage.SPECIAL} whenever they deal or receive a critical strike`,
     esp: `?NONE?`,
     fra: `?NONE?`
   },
   [Effect.STRANGE_STEAM]: {
-    eng: `Fairy pokemons shock nearby enemies for 50 ${Damage.SPECIAL} whenever they deal or receive a critical strike`,
+    eng: `Fairy pokemons shock nearby enemies for 60 ${Damage.SPECIAL} whenever they deal or receive a critical strike`,
     esp: `?NONE?`,
     fra: `?NONE?`
   },

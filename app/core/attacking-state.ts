@@ -184,9 +184,9 @@ export default class AttackingState extends PokemonState {
           if (pokemon.effects.includes(Effect.AROMATIC_MIST)) {
             d = 10
           } else if (pokemon.effects.includes(Effect.FAIRY_WIND)) {
-            d = 25
+            d = 30
           } else if (pokemon.effects.includes(Effect.STRANGE_STEAM)) {
-            d = 50
+            d = 60
           }
           const cells = board.getAdjacentCells(
             pokemon.positionX,
@@ -215,9 +215,9 @@ export default class AttackingState extends PokemonState {
           if (target.effects.includes(Effect.AROMATIC_MIST)) {
             d = 10
           } else if (target.effects.includes(Effect.FAIRY_WIND)) {
-            d = 25
+            d = 30
           } else if (target.effects.includes(Effect.STRANGE_STEAM)) {
-            d = 50
+            d = 60
           }
           const cells = board.getAdjacentCells(
             target.positionX,
