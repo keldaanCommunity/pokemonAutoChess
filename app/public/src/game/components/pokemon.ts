@@ -263,59 +263,31 @@ export default class Pokemon extends DraggableObject {
       if (this.detail) {
         this.closeDetail()
       } else {
-        if (this.life && this.mana) {
-          this.detail = new PokemonDetail(
-            this.scene,
-            0,
-            0,
-            this.name,
-            this.rarity,
-            this.life,
-            this.atk,
-            this.def,
-            this.speDef,
-            this.attackType,
-            this.range,
-            this.atkSpeed,
-            this.critChance,
-            this.critDamage,
-            this.ap,
-            this.mana,
-            this.types,
-            this.skill,
-            this.emotion,
-            this.shiny,
-            this.index,
-            this.stars,
-            this.evolution
-          )
-        } else {
-          this.detail = new PokemonDetail(
-            this.scene,
-            0,
-            0,
-            this.name,
-            this.rarity,
-            this.hp,
-            this.atk,
-            this.def,
-            this.speDef,
-            this.attackType,
-            this.range,
-            this.atkSpeed,
-            this.critChance,
-            this.critDamage,
-            this.ap,
-            this.maxMana,
-            this.types,
-            this.skill,
-            this.emotion,
-            this.shiny,
-            this.index,
-            this.stars,
-            this.evolution
-          )
-        }
+        this.detail = new PokemonDetail(
+          this.scene,
+          0,
+          0,
+          this.name,
+          this.rarity,
+          this.life || this.hp,
+          this.atk,
+          this.def,
+          this.speDef,
+          this.attackType,
+          this.range,
+          this.atkSpeed,
+          this.critChance,
+          this.critDamage,
+          this.ap,
+          this.mana || this.maxMana,
+          this.types,
+          this.skill,
+          this.emotion,
+          this.shiny,
+          this.index,
+          this.rarity === Rarity.MYTHICAL ? 3 : this.stars,
+          this.evolution
+        )
         this.detail.setPosition(
           this.detail.width / 2 + 40,
           -this.detail.height / 2 - 40

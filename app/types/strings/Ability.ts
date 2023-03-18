@@ -610,6 +610,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     prt: ``,
     fra: ``
   },
+  [Ability.JUDGEMENT]: {
+    eng: `Judgement`,
+    esp: ``,
+    prt: ``,
+    fra: ``
+  },
   [Ability.CHATTER]: {
     eng: `Chatter`,
     esp: ``,
@@ -752,13 +758,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.SONG_OF_DESIRE]: {
-    eng: `The target is ${Status.CONFUSION} for [3,6,12] seconds`,
+    eng: `The target is ${Status.CONFUSION} for [6,SP] seconds`,
     esp: ``,
     fra: ``,
     prt: ``
   },
   [Ability.CONFUSING_MIND]: {
-    eng: `Deals [20,40,80,SP] ${Damage.SPECIAL} to the target and make adjacent pokemons ${Status.CONFUSION} for [1.5,3,6] seconds`,
+    eng: `Deals [40,SP] ${Damage.SPECIAL} to the target and its adjacent pokemons, making them ${Status.CONFUSION} for 3 seconds`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -806,7 +812,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.RELIC_SONG]: {
-    eng: `Put ${Status.SLEEP} the whole enemy team for [1,2,4] seconds`,
+    eng: `Put ${Status.SLEEP} the whole enemy team for [3,SP] seconds`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -902,7 +908,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.PROTECT]: {
-    eng: `${Status.PROTECT} the user, becoming invulnerable for [3,5,7] seconds.`,
+    eng: `${Status.PROTECT} the user, becoming invulnerable for [5,SP] seconds.`,
     esp: `Hace que el pokemon sea invulnerable durante 3,5,7 segundos.`,
     fra: `Rend le pokémon invulnérable durant 3,5,7 secondes`,
     prt: ``
@@ -968,9 +974,9 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.DRACO_METEOR]: {
-    eng: `Area of effect attack that deals [10,20,40,SP] ${Damage.SPECIAL} to all enemies`,
-    esp: `Ataque de área de efecto que causa 10,20,40 de daño especial a todos los enemigos`,
-    fra: `Inflige 10,20,40 dégats spéciaux à tous les pokémons ennemis.`,
+    eng: `Area of effect attack that deals [20,SP] ${Damage.SPECIAL} to all enemies`,
+    esp: `Ataque de área de efecto que causa [20,SP] ${Damage.SPECIAL} a todos los enemigos`,
+    fra: `Inflige [20,SP] ${Damage.SPECIAL} à tous les pokémons ennemis.`,
     prt: ``
   },
   [Ability.BLAZE_KICK]: {
@@ -986,9 +992,9 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.CALM_MIND]: {
-    eng: `Buff pokemon ${Stat.ATK} by [50,100,200,SP]%`,
-    esp: `Ataque de pokemón de la Buff en un 50,100,150%.`,
-    fra: `Augmente l attaque du pokémon de 50,100,150%.`,
+    eng: `Buff pokemon ${Stat.ATK} by [100,SP]%`,
+    esp: `Ataque de pokemón de la Buff en un [100,SP]%.`,
+    fra: `Augmente l attaque du pokémon de [100,SP]%.`,
     prt: ``
   },
   [Ability.IRON_DEFENSE]: {
@@ -1010,9 +1016,9 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.ORIGIN_PULSE]: {
-    eng: `A wave travels horizontally across the battlefield doing [30,60,120,SP] ${Damage.SPECIAL} `,
-    esp: `Una ola viaja horizontalmente por el campo de batalla haciendo 60 de daño mágico.`,
-    fra: `Une vague parcourt horizontalement le champ de bataille faisant 60 dégats magiques`,
+    eng: `A wave travels horizontally across the battlefield doing [120,SP] ${Damage.SPECIAL}`,
+    esp: `Una ola viaja horizontalmente por el campo de batalla haciendo [120,SP] ${Damage.SPECIAL}`,
+    fra: `Une vague parcourt horizontalement le champ de bataille faisant [120,SP] ${Damage.SPECIAL}`,
     prt: ``
   },
   [Ability.SEED_FLARE]: {
@@ -1034,7 +1040,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.CHARGE]: {
-    eng: `Buff all electric ally pokemons ${Stat.ATK} by [10,20,40,SP] %`,
+    eng: `Buff all electric ally pokemons ${Stat.ATK} by [20,SP] %`,
     esp: `Pulir todos los pokemones aliados eléctricos atacan en un 10,20,30 %.`,
     fra: `Augmente l attaque des alliés electrique de 10,20,30%`,
     prt: ``
@@ -1130,9 +1136,9 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.NASTY_PLOT]: {
-    eng: `Buff pokemon ${Stat.ATK} by [5,10,20,SP]`,
-    esp: `Buff pokemon ataque por [5,10,20,SP]`,
-    fra: `Booste l attaque du pokémon de [5,10,20,SP]`,
+    eng: `Buff pokemon ${Stat.ATK} by [10,SP] points`,
+    esp: `Buff pokemon ataque por [10,SP]`,
+    fra: `Booste l attaque du pokémon de [10,SP]`,
     prt: ``
   },
   [Ability.THIEF]: {
@@ -1340,13 +1346,19 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.PROTEAN]: {
-    eng: `The pokemon acquires the typing of the [1,2,3] highest synergies on the team`,
+    eng: `The pokemon acquires the typing of the 2 highest synergies on the team`,
+    esp: ``,
+    prt: ``,
+    fra: ``
+  },
+  [Ability.JUDGEMENT]: {
+    eng: `The pokemon acquires the typing of the 3 highest synergies on the team`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   [Ability.CHATTER]: {
-    eng: `Deal [5,10,15,SP] ${Damage.SPECIAL} to all enemies. Every enemy has a [20,30,40] % chance to be ${Status.CONFUSION} for 1s`,
+    eng: `Deal [10,SP] ${Damage.SPECIAL} to all enemies. Every enemy has 30% chance to be ${Status.CONFUSION} for 1 second`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1358,7 +1370,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.STEAM_ERUPTION]: {
-    eng: `Deals [20,40,80,SP] ${Damage.SPECIAL} to all enemies adjacent to the target, and ${Status.BURN} them for 3s`,
+    eng: `Deals [80,SP] ${Damage.SPECIAL} to the target and all enemies adjacent, and ${Status.BURN} them for 3 seconds`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1424,7 +1436,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ""
   },
   [Ability.SKY_ATTACK]: {
-    eng: `Rises in the air and fall on the farthest target, ${Status.PROTECT} the attacker for 1 second and deals [50,100,200,SP] ${Damage.SPECIAL}`,
+    eng: `Rises in the air and fall on the farthest target, ${Status.PROTECT} the attacker for 1 second and deals [200,SP] ${Damage.SPECIAL}`,
     esp: "",
     prt: "",
     fra: ""
@@ -1466,7 +1478,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ""
   },
   [Ability.SHADOW_SNEAK]: {
-    eng: `Deals [30,60,120] ${Damage.SPECIAL}. If the target is ${Status.SILENCE}, deals ${Damage.TRUE}`,
+    eng: `Deals [60,SP] ${Damage.SPECIAL}. If the target is ${Status.SILENCE}, deals ${Damage.TRUE}`,
     esp: "",
     prt: "",
     fra: ""
