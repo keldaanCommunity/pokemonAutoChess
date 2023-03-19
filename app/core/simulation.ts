@@ -656,13 +656,13 @@ export default class Simulation extends Schema implements ISimulation {
           break
 
         case Effect.IRON_DEFENSE:
-          if (types.includes(Synergy.METAL)) {
+          if (types.includes(Synergy.STEEL)) {
             pokemon.effects.push(Effect.IRON_DEFENSE)
           }
           break
 
         case Effect.AUTOTOMIZE:
-          if (types.includes(Synergy.METAL)) {
+          if (types.includes(Synergy.STEEL)) {
             pokemon.effects.push(Effect.AUTOTOMIZE)
           }
           break
@@ -807,21 +807,21 @@ export default class Simulation extends Schema implements ISimulation {
           break
 
         case Effect.BATTLE_ARMOR:
-          if (types.includes(Synergy.MINERAL)) {
+          if (types.includes(Synergy.ROCK)) {
             pokemon.handleShield(50, pokemon)
             pokemon.effects.push(Effect.BATTLE_ARMOR)
           }
           break
 
         case Effect.MOUTAIN_RESISTANCE:
-          if (types.includes(Synergy.MINERAL)) {
+          if (types.includes(Synergy.ROCK)) {
             pokemon.handleShield(100, pokemon)
             pokemon.effects.push(Effect.MOUTAIN_RESISTANCE)
           }
           break
 
         case Effect.DIAMOND_STORM:
-          if (types.includes(Synergy.MINERAL)) {
+          if (types.includes(Synergy.ROCK)) {
             pokemon.handleShield(200, pokemon)
             pokemon.effects.push(Effect.DIAMOND_STORM)
           }

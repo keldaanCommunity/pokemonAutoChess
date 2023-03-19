@@ -77,7 +77,7 @@ export const TypeTrigger: { [key in Synergy]: number[] } = {
   [Synergy.FIGHTING]: [2, 4, 6],
   [Synergy.PSYCHIC]: [2, 4, 6],
   [Synergy.DARK]: [3, 6, 9],
-  [Synergy.METAL]: [2, 4],
+  [Synergy.STEEL]: [2, 4],
   [Synergy.GROUND]: [2, 4, 6],
   [Synergy.POISON]: [3, 6],
   [Synergy.DRAGON]: [3, 5],
@@ -88,7 +88,7 @@ export const TypeTrigger: { [key in Synergy]: number[] } = {
   [Synergy.BUG]: [2, 4, 6],
   [Synergy.FLYING]: [2, 4, 6, 8],
   [Synergy.FLORA]: [2, 3, 4, 5],
-  [Synergy.MINERAL]: [2, 4, 6],
+  [Synergy.ROCK]: [2, 4, 6],
   [Synergy.GHOST]: [2, 4, 6, 8],
   [Synergy.FAIRY]: [2, 4, 6],
   [Synergy.ICE]: [3, 5],
@@ -1524,7 +1524,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_3,
       Header.WATER
     ],
-    type: Synergy.METAL
+    type: Synergy.STEEL
   },
   DRENCHED_BLUFF: {
     id: "DRENCHED_BLUFF",
@@ -1657,7 +1657,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_3,
       Header.WATER
     ],
-    type: Synergy.MINERAL
+    type: Synergy.ROCK
   },
   SURROUNDED_SEA: {
     id: "SURROUNDED_SEA",
@@ -1702,7 +1702,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_3,
       Header.WATER
     ],
-    type: Synergy.METAL
+    type: Synergy.STEEL
   },
   TEMPORAL_TOWER: {
     id: "TEMPORAL_TOWER",
@@ -2536,7 +2536,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_2,
       Header.WATER
     ],
-    type: Synergy.METAL
+    type: Synergy.STEEL
   },
   MT_STEEL_06F_08F: {
     id: "MT_STEEL_06F_08F",
@@ -2551,7 +2551,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_2,
       Header.WATER
     ],
-    type: Synergy.METAL
+    type: Synergy.STEEL
   },
   MT_FREEZE: {
     id: "MT_FREEZE",
