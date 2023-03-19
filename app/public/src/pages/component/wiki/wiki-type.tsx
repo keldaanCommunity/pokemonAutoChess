@@ -8,7 +8,7 @@ import {
 import { EffectName } from "../../../../../types/strings/Effect"
 import { TypeTrigger, RarityColor } from "../../../../../types/Config"
 import { Synergy } from "../../../../../types/enum/Synergy"
-import { Pkm } from "../../../../../types/enum/Pokemon"
+import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
 import SynergyIcon from "../icons/synergy-icon"
 import { SynergyDescription } from "../synergy/synergy-description"
@@ -17,26 +17,27 @@ import PokemonFactory from "../../../../../models/pokemon-factory";
 import { groupBy, deduplicateArray } from "../../../../../utils/array";
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon";
 import { Rarity } from "../../../../../types/enum/Game";
-import { Mythical1Shop, Mythical2Shop } from "../../../../../models/shop";
 
 export default function WikiType(props: { type: Synergy | "all" }) {
   const [hoveredPokemon, setHoveredPokemon] = useState<Pokemon>();
 
-  let pokemons: Pkm[]
+  let pokemonsNames: Pkm[]
   if(props.type === "all"){
-    pokemons = deduplicateArray(Object.values(PRECOMPUTED_TYPE_POKEMONS_ALL).flat()) as Pkm[]
+    pokemonsNames = deduplicateArray(Object.values(PRECOMPUTED_TYPE_POKEMONS_ALL).flat()) as Pkm[]
   } else {
-    pokemons = PRECOMPUTED_TYPE_POKEMONS_ALL[props.type] as Pkm[]
+    pokemonsNames = PRECOMPUTED_TYPE_POKEMONS_ALL[props.type] as Pkm[]
   }
 
-  const firstStagePokemons = pokemons
-    .map(p => PokemonFactory.createPokemonFromName(p))
-    .filter(p => p.stars === 1 
-      || (p.rarity === Rarity.MYTHICAL && (Mythical1Shop.includes(p.name) || Mythical2Shop.includes(p.name)))
-      || p.rarity === Rarity.SUMMON
-      || p.rarity === Rarity.NEUTRAL
-    )
-  const pokemonsPerRarity = groupBy(firstStagePokemons, p => p.rarity)
+  const pokemons = pokemonsNames.map(p => PokemonFactory.createPokemonFromName(p))
+    .sort((a,b) => a.stars - b.stars) // put first stage first
+    .filter((a, index, list) => {
+      if(a.rarity === Rarity.SUMMON) return true // show all summons even in the same family
+
+      // remove if already one member of family in the list
+      return list.findIndex(b => PkmFamily[a.name] === PkmFamily[b.name]) === index
+    }) 
+    
+  const pokemonsPerRarity = groupBy(pokemons, p => p.rarity)
   return (
     <div style={{padding: "1em"}}>
       {props.type !== "all" && (<>
