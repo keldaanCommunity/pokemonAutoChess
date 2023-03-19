@@ -2,7 +2,6 @@ import { Schema, type } from "@colyseus/schema"
 import Board, { Cell } from "../../core/board"
 import PokemonEntity from "../../core/pokemon-entity"
 import { IStatus } from "../../types"
-import { Ability } from "../../types/enum/Ability"
 import { Effect } from "../../types/enum/Effect"
 import { AttackType } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
@@ -26,7 +25,6 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") fairyField = false
   @type("boolean") spikeArmor = false
   soulDew = false
-  brightPowder = false
   deltaOrb = false
   burnOrigin: PokemonEntity | undefined = undefined
   poisonOrigin: PokemonEntity | undefined = undefined
@@ -41,7 +39,6 @@ export default class Status extends Schema implements IStatus {
   confusionCooldown = 0
   woundCooldown = 0
   soulDewCooldown = 0
-  brightPowderCooldown = 0
   paralysisCooldown = 0
   armorReductionCooldown = 0
   runeProtectCooldown = 0
@@ -108,10 +105,6 @@ export default class Status extends Schema implements IStatus {
 
     if (this.soulDew) {
       this.updateSoulDew(dt, pokemon)
-    }
-
-    if (this.brightPowder) {
-      this.updateBrightPowder(dt, pokemon, board)
     }
 
     if (this.paralysis) {
@@ -405,36 +398,6 @@ export default class Status extends Schema implements IStatus {
       this.wound = false
     } else {
       this.woundCooldown = this.woundCooldown - dt
-    }
-  }
-
-  triggerBrightPowder(timer: number) {
-    if (!this.brightPowder) {
-      this.brightPowder = true
-      this.brightPowderCooldown = timer
-    }
-  }
-
-  updateBrightPowder(dt: number, pokemon: PokemonEntity, board: Board) {
-    if (this.brightPowderCooldown - dt <= 0) {
-      this.brightPowder = false
-      const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
-
-      let c = 1
-      cells.forEach((cell) => {
-        if (cell.value && pokemon.team !== cell.value.team && c > 0) {
-          cell.value.handleAttackSpeed(-30)
-          cell.value.count.brightPowderCount++
-          c--
-        }
-      })
-
-      if (pokemon.items.has(Item.BRIGHT_POWDER)) {
-        pokemon.status.triggerBrightPowder(4000)
-        pokemon.count.brightPowderCount++
-      }
-    } else {
-      this.brightPowderCooldown = this.brightPowderCooldown - dt
     }
   }
 

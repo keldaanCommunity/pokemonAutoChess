@@ -310,9 +310,6 @@ export default class Simulation extends Schema implements ISimulation {
       pokemon.addAbilityPower(apBoost)
     }
 
-    if (pokemon.items.has(Item.BRIGHT_POWDER)) {
-      pokemon.status.triggerBrightPowder(4000)
-    }
     if (pokemon.items.has(Item.WIDE_LENS)) {
       pokemon.range += 2
     }

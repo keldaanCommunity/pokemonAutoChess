@@ -26,13 +26,13 @@ export const ItemName: { [key in Item]: string } = {
   [Item.UPGRADE]: "Upgrade",
   [Item.REAPER_CLOTH]: "Reaper Cloth",
   [Item.POKEMONOMICON]: "Pokemonomicon",
-  [Item.WATER_INCENSE]: "Water Incense",
+  [Item.POWER_LENS]: "Power Lens",
   [Item.SHELL_BELL]: "Shell Bell",
   [Item.LUCKY_EGG]: "Lucky Egg",
   [Item.AQUA_EGG]: "Aqua Egg",
   [Item.BLUE_ORB]: "Blue Orb",
   [Item.ZOOM_LENS]: "Zoom Lens",
-  [Item.BRIGHT_POWDER]: "Bright Powder",
+  [Item.STAR_DUST]: "Star Dust",
   [Item.DELTA_ORB]: "Delta Orb",
   [Item.MANA_SCARF]: "Mana Scarf",
   [Item.SMOKE_BALL]: "Smoke Ball",
@@ -52,7 +52,7 @@ export const ItemName: { [key in Item]: string } = {
   [Item.FOCUS_BAND]: "Focus Band",
   [Item.FLAME_ORB]: "Flame Orb",
   [Item.ASSAULT_VEST]: "Assault Vest",
-  [Item.KINGS_ROCK]: "Kings Rock",
+  [Item.AMULET_COIN]: "Amulet Coin",
   [Item.POKE_DOLL]: "Poke Doll",
   [Item.RED_ORB]: "Red Orb",
   [Item.MAX_REVIVE]: "Max Revive",
@@ -85,8 +85,8 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
   [Item.REAPER_CLOTH]: "The holder spells can critically strike",
   [Item.POKEMONOMICON]:
     "When the holder deals damage with their Ability, they burn and wound the target for 2 seconds",
-  [Item.WATER_INCENSE]:
-    `+30% ${Damage.SPECIAL}, up to +75% if target has more than 200 ${Stat.HP}`,
+  [Item.POWER_LENS]:
+    `50% of received ${Damage.SPECIAL} is reflected to the attacker`,
   [Item.SHELL_BELL]: "Holder heals for 30% of all damages inflicted",
   [Item.LUCKY_EGG]:
     `+30% ${Stat.AP} for holder and adjacent allies in the same row`,
@@ -96,8 +96,8 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
     `Every third attack from the holder unleashes a chain lightning that bounces to 2 enemies, burning 20 ${Stat.MANA}`,
   [Item.ZOOM_LENS]:
     `The holder converts 5% of its ${Stat.AP} as ${Stat.ATK} and 5 x its ${Stat.ATK} as ${Stat.AP}`,
-  [Item.BRIGHT_POWDER]:
-    `Every 4 sec, the holder throw sand, dropping a random adjacent enemy ${Stat.ATK_SPEED} by 30%`,
+  [Item.STAR_DUST]:
+    `After casting ability, gain 50% of max ${Stat.MANA} as ${Stat.SHIELD}`,
   [Item.DELTA_ORB]:
     `Holder and adjacent allies in the same row gain 3 bonus ${Stat.MANA} per hit`,
   [Item.MANA_SCARF]: `The holder attacks restore 8 additional ${Stat.MANA}`,
@@ -127,7 +127,7 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
     `When combat begins, the holder and adjacent allies in the same row gain +30% ${Stat.ATK_SPEED}`,
   [Item.FLAME_ORB]: `Holder is burned and cannot heal during the fight, but increase its ${Stat.ATK} by 100%`,
   [Item.ASSAULT_VEST]: `+18 ${Stat.SPE_DEF}`,
-  [Item.KINGS_ROCK]:
+  [Item.AMULET_COIN]:
     "+1 gold each time the holder kills an enemy (max 5 gold per stage)",
   [Item.POKE_DOLL]: "Reduce all incoming damage by 30%",
   [Item.RED_ORB]:

@@ -180,13 +180,6 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       return
     } else {
       let specialDamage = damage + (damage * attacker.ap) / 100
-      if (attacker.items.has(Item.WATER_INCENSE)) {
-        if (this.life > 200) {
-          specialDamage = specialDamage + 0.75 * damage
-        } else {
-          specialDamage = specialDamage + 0.3 * damage
-        }
-      }
       if (
         attacker &&
         attacker.items.has(Item.REAPER_CLOTH) &&
@@ -198,6 +191,9 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       if (attacker && attacker.items.has(Item.POKEMONOMICON)) {
         this.status.triggerBurn(2000, this, attacker, board)
         this.status.triggerWound(2000, this, board)
+      }
+      if(this.items.has(Item.POWER_LENS)){
+        attacker.handleSpecialDamage(Math.round(0.5*specialDamage), board, attackType, this)
       }
       return this.state.handleDamage(
         this,

@@ -434,9 +434,9 @@ export interface ICount {
   attackCount: number
   growGroundCount: number
   dodgeCount: number
-  incenseCount: number
+  powerLensCount: number
   staticCount: number
-  brightPowderCount: number
+  starDustCount: number
   doubleAttackCount: number
   staticHolderCount: number
   defensiveRibbonCount: number

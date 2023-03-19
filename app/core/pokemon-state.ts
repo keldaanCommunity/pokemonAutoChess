@@ -387,7 +387,7 @@ export default class PokemonState {
     if (death && pokemon) {
       if (
         attacker &&
-        attacker.items.has(Item.KINGS_ROCK) &&
+        attacker.items.has(Item.AMULET_COIN) &&
         attacker.team === 0 &&
         attacker.simulation.player &&
         attacker.count.moneyCount < 5

@@ -471,7 +471,7 @@ export default class Pokemon extends DraggableObject {
     })
   }
 
-  incenseAnimation() {
+  powerLensAnimation() {
     const coordinates = transformAttackCoordinate(
       this.positionX,
       this.positionY
@@ -490,7 +490,7 @@ export default class Pokemon extends DraggableObject {
     })
   }
 
-  brightPowderAnimation() {
+  starDustAnimation() {
     const coordinates = transformAttackCoordinate(
       this.positionX,
       this.positionY
