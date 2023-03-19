@@ -1,5 +1,5 @@
 import { createObjectCsvWriter } from 'csv-writer'
-import { Pkm, PkmIndex } from "../app/types/enum/Pokemon"
+import { Pkm, PkmFamily, PkmIndex } from "../app/types/enum/Pokemon"
 import PokemonFactory from "../app/models/pokemon-factory"
 import { Ability } from '../app/types/enum/Ability';
 import { Rarity } from '../app/types/enum/Game';
@@ -22,7 +22,12 @@ const csvWriter = createObjectCsvWriter({
     {id: 'spedef', title: 'Special Defense'},
     {id: 'range', title: 'Attack Range'},
     {id: 'mana', title: 'Max Mana'},
-    {id: 'ability', title: 'Ability' }
+    {id: 'ability', title: 'Ability' },
+    {id: 'family', title: 'Family' },
+    {id: 'familyType1', title: 'Family Type 1'},
+    {id: 'familyType2', title: 'Family Type 2'},
+    {id: 'familyType3', title: 'Family Type 3'},
+    {id: 'familyType4', title: 'Family Type 4'},
   ]
 });
 
@@ -42,7 +47,12 @@ interface PokemonData {
     spedef: number
     range: number
     mana: number
-    ability: string
+    ability: string,
+    family: string,
+    familyType1: string
+    familyType2: string
+    familyType3: string
+    familyType4: string
 }
 
 const data: PokemonData[] = []
@@ -50,6 +60,8 @@ const data: PokemonData[] = []
 Object.values(Pkm).sort((a,b) => PkmIndex[a].localeCompare(PkmIndex[b])).forEach((pkm) => {
     const pokemon = PokemonFactory.createPokemonFromName(pkm)
     if (pokemon.skill != Ability.DEFAULT && pokemon.rarity !== Rarity.NEUTRAL) {
+      const family = Object.keys(PkmFamily).filter(p => PkmFamily[p] === PkmFamily[pkm])
+      const familyTypes = [...new Set(family.flatMap(p => [...PokemonFactory.createPokemonFromName(p as Pkm).types]))]
         data.push({
             index: pokemon.index,
             name: pkm,
@@ -66,7 +78,12 @@ Object.values(Pkm).sort((a,b) => PkmIndex[a].localeCompare(PkmIndex[b])).forEach
             spedef: pokemon.speDef,
             range: pokemon.range,
             mana: pokemon.maxMana,
-            ability: pokemon.skill
+            ability: pokemon.skill,
+            family: PkmFamily[pkm],
+            familyType1: familyTypes[0] ?? "",
+            familyType2: familyTypes[1] ?? "",
+            familyType3: familyTypes[2] ?? "",
+            familyType4: familyTypes[3] ?? "",
         })
     }
 })
