@@ -3076,9 +3076,10 @@ export class HappyHourStrategy extends AttackStrategy {
       default:
         break
     }
+    buff = Math.round(buff * (1 + pokemon.ap/100))
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (ally && pokemon.team == ally.team) {
-        ally.addAttack(buff, true)
+        ally.addAttack(buff, false)
       }
     })
   }
