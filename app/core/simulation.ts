@@ -300,7 +300,7 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     if (pokemon.items.has(Item.SOUL_DEW)) {
-      pokemon.status.triggerSoulDew(2000)
+      pokemon.status.triggerSoulDew(1000)
     }
 
     if (pokemon.items.has(Item.ZOOM_LENS)) {
