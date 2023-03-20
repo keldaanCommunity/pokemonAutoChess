@@ -324,6 +324,7 @@ export default class BattleManager {
           } else if (change.field == "moneyCount") {
             if (change.value != 0) {
               this.moneyAnimation(pkm.x, pkm.y)
+              pkm.itemsContainer.updateCount(Item.AMULET_COIN, change.value)
             }
           } else if (change.field == "attackCount") {
             if (change.value != 0) {
@@ -348,6 +349,12 @@ export default class BattleManager {
             if (change.value != 0) {
               pkm.sprite.setScale(2 + change.value, 2 + change.value)
             }
+          } else if (change.field == "upgradeCount") {
+            pkm.itemsContainer.updateCount(Item.UPGRADE, change.value)
+          } else if (change.field == "soulDewCount") {
+            pkm.itemsContainer.updateCount(Item.SOUL_DEW, change.value)
+          } else if (change.field == "defensiveRibbonCount") {
+            pkm.itemsContainer.updateCount(Item.DEFENSIVE_RIBBON, change.value)
           }
         }
       }

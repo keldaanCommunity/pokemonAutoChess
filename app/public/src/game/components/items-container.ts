@@ -70,4 +70,14 @@ export default class ItemsContainer extends GameObjects.Container {
       this.addItem(item)
     })
   }
+
+  updateCount(item: Item, count: number){
+    console.log("update count", item, count)
+    for (let i = 0; i < this.list.length; i++) {
+      const it = <ItemContainer>this.list[i]
+      if(it.name === item){
+        it.updateCount(count)
+      }
+    }
+  }
 }

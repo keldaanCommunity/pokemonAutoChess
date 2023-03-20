@@ -10,6 +10,7 @@ export default class ItemContainer extends DraggableObject {
   sprite: GameObjects.Image
   tempDetail: ItemDetail | undefined
   tempSprite: GameObjects.Image | undefined
+  countText: GameObjects.Text | undefined
   circle?: GameObjects.Ellipse
   name: Item
   parentContainer: ItemsContainer
@@ -136,5 +137,25 @@ export default class ItemContainer extends DraggableObject {
     this.add(this.tempSprite)
     this.add(this.tempDetail)
     this.tempDetail.setVisible(true)
+  }
+
+  updateCount(value: number){
+    if(this.countText === undefined){
+      const textStyle = {
+        fontSize: "16px",
+        fontFamily: "brandonGrotesque",
+        color: "#FFFFFF",
+        align: "center",
+        strokeThickness: 2,
+        stroke: "#000000"
+      }
+      this.countText = this.scene.add.existing(
+        new GameObjects.Text(this.scene, this.detail.width * 0.5 + 10, this.detail.height * 0.5 - 15, value.toString(), textStyle)
+      )
+      this.add(this.countText)
+      this.countText.setAlign("left")
+    } else {
+      this.countText.setText(value.toString())
+    }
   }
 }

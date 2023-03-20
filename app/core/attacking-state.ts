@@ -103,6 +103,7 @@ export default class AttackingState extends PokemonState {
 
       if (pokemon.items.has(Item.UPGRADE)) {
         pokemon.handleAttackSpeed(5)
+        pokemon.count.upgradeCount++;
       }
 
       let freezeChance = 0
