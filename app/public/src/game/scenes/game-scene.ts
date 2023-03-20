@@ -496,6 +496,13 @@ export default class GameScene extends Scene {
     }
   }
 
+  update(time: number, delta: number){
+    super.update(time, delta)
+    if(this.lastPokemonDetail){
+      this.lastPokemonDetail.updateTooltipPosition()
+    }
+  }
+
   registerKeys() {
     this.input.keyboard.on("keyup-D", () => {
       this.refreshShop()

@@ -48,7 +48,7 @@ const data = {
     mythicalPokemons: new Array<string>(),
     additionalPokemons: new Array<string>()
   },
-  METAL: {
+  STEEL: {
     pokemons: new Array<string>(),
     mythicalPokemons: new Array<string>(),
     additionalPokemons: new Array<string>()
@@ -103,7 +103,7 @@ const data = {
     mythicalPokemons: new Array<string>(),
     additionalPokemons: new Array<string>()
   },
-  MINERAL: {
+  ROCK: {
     pokemons: new Array<string>(),
     mythicalPokemons: new Array<string>(),
     additionalPokemons: new Array<string>()

@@ -34,6 +34,7 @@ import {
   OrientationArray,
   OrientationVector
 } from "../../../../utils/orientation"
+import { clamp } from "../../../../utils/number"
 
 export default class Pokemon extends DraggableObject {
   evolution: Pkm
@@ -242,6 +243,19 @@ export default class Pokemon extends DraggableObject {
       this.critChance = 10
     }
     this.setDepth(5)
+  }
+
+  updateTooltipPosition(){
+    if(this.detail){
+      const absX = this.x + this.detail.width / 2 + 40
+      const minX = this.detail.width / 2
+      const maxX = window.innerWidth - this.detail.width / 2
+      const absY = this.y -this.detail.height / 2 - 40
+      const minY = this.detail.height / 2
+      const maxY = window.innerHeight - this.detail.height / 2
+      const [x,y] = [clamp(absX, minX, maxX) - this.x, clamp(absY, minY, maxY) - this.y]
+      this.detail.setPosition(x,y)
+    }
   }
 
   closeDetail() {
