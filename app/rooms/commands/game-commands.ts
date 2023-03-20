@@ -155,7 +155,7 @@ export class OnPokemonPropositionCommand extends Command<
 > {
   execute({ playerId, pkm }) {
     const player = this.state.players.get(playerId)
-    if (player) {
+    if (player && !this.state.additionalPokemons.includes(pkm)) {
       this.state.additionalPokemons.push(pkm)
       this.state.shop.addAdditionalPokemon(pkm)
       if (this.room.getBenchSize(player.board) < 8) {
@@ -226,7 +226,7 @@ export class OnDragDropCommand extends Command<
               success = true
               message.updateBoard = false
             }
-          } else if(y === 0) {
+          } else if (y === 0) {
             this.room.swap(playerId, pokemon, x, y)
             success = true
           }
