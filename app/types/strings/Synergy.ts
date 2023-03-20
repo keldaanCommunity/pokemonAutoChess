@@ -44,7 +44,7 @@ export const SynergyName: {
     esp: "Siniestro",
     fra: "Ténèbres"
   },
-  [Synergy.METAL]: {
+  [Synergy.STEEL]: {
     eng: "Steel",
     esp: "Acero",
     fra: "Acier"
@@ -99,7 +99,7 @@ export const SynergyName: {
     esp: "Flor",
     fra: "Fleur"
   },
-  [Synergy.MINERAL]: {
+  [Synergy.ROCK]: {
     eng: "Rock",
     esp: "Roca",
     fra: "Minéral"
@@ -164,7 +164,7 @@ export const SynergyDetail: { [key in Synergy]: Effect[] } = Object.freeze({
   [Synergy.FIGHTING]: [Effect.GUTS, Effect.DEFIANT, Effect.JUSTIFIED],
   [Synergy.PSYCHIC]: [Effect.AMNESIA, Effect.LIGHT_SCREEN, Effect.EERIE_SPELL],
   [Synergy.DARK]: [Effect.HONE_CLAWS, Effect.ASSURANCE, Effect.BEAT_UP],
-  [Synergy.METAL]: [Effect.IRON_DEFENSE, Effect.AUTOTOMIZE],
+  [Synergy.STEEL]: [Effect.IRON_DEFENSE, Effect.AUTOTOMIZE],
   [Synergy.GROUND]: [Effect.SHORE_UP, Effect.ROTOTILLER, Effect.SANDSTORM],
   [Synergy.POISON]: [Effect.POISON_GAS, Effect.TOXIC],
   [Synergy.DRAGON]: [Effect.DRAGON_ENERGY, Effect.DRAGON_DANCE],
@@ -185,7 +185,7 @@ export const SynergyDetail: { [key in Synergy]: Effect[] } = Object.freeze({
     Effect.VILE_FLOWER,
     Effect.SUN_FLOWER
   ],
-  [Synergy.MINERAL]: [
+  [Synergy.ROCK]: [
     Effect.BATTLE_ARMOR,
     Effect.MOUTAIN_RESISTANCE,
     Effect.DIAMOND_STORM
