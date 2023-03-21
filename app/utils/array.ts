@@ -13,3 +13,7 @@ export function sum(arr: number[]): number {
 export function deduplicateArray<T>(arr: T[]): T[] {
   return arr.filter((item,index, array) => array.indexOf(item) === index)
 }
+
+export function removeInArray<T>(arr: T[], el: T) {
+  arr.splice(arr.indexOf(el), 1)
+}

@@ -1,5 +1,5 @@
 import { Command } from "@colyseus/command"
-import { ItemRecipe, PkmCost, NeutralStage } from "../../types/Config"
+import { ItemRecipe, NeutralStage } from "../../types/Config"
 import { Item, BasicItems } from "../../types/enum/Item"
 import { BattleResult } from "../../types/enum/Game"
 import Player from "../../models/colyseus-models/player"
@@ -28,6 +28,7 @@ import { Synergy } from "../../types/enum/Synergy"
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Pokemon } from "../../models/colyseus-models/pokemon"
 import { Ability } from "../../types/enum/Ability"
+import { Mythical1Shop, Mythical2Shop } from "../../models/shop"
 
 export class OnShopCommand extends Command<
   GameRoom,
@@ -1101,9 +1102,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         if (!player.isBot) {
           if (!player.shopLocked) {
             if (this.state.stageLevel == 10) {
-              this.state.shop.assignFirstMythicalShop(player)
+              this.state.shop.assignMythicalShop(player, Mythical1Shop)
             } else if (this.state.stageLevel == 20) {
-              this.state.shop.assignSecondMythicalShop(player)
+              this.state.shop.assignMythicalShop(player, Mythical2Shop)
             } else {
               this.state.shop.assignShop(player)
             }

@@ -290,9 +290,11 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     pokemon.items.forEach((item) => {
-      Object.entries(ItemStats[item]!).forEach(([stat, value]) =>
-        this.applyStat(pokemon, stat as Stat, value)
-      )
+      if(ItemStats[item]){
+        Object.entries(ItemStats[item]).forEach(([stat, value]) =>
+          this.applyStat(pokemon, stat as Stat, value)
+        )
+      }
     })
 
     if (pokemon.skill === Ability.SYNCHRO) {
