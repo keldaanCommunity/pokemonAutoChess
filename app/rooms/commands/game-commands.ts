@@ -29,6 +29,7 @@ import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Pokemon } from "../../models/colyseus-models/pokemon"
 import { Ability } from "../../types/enum/Ability"
 import { Mythical1Shop, Mythical2Shop } from "../../models/shop"
+import { PokemonAvatar } from "../../models/colyseus-models/pokemon-avatar"
 
 export class OnShopCommand extends Command<
   GameRoom,
@@ -643,6 +644,9 @@ export class OnJoinCommand extends Command<
           this.room
         )
 
+        const avatar = new PokemonAvatar(user.uid, user.avatar)
+        this.state.avatars.set(client.auth.uid, avatar)
+
         this.state.players.set(client.auth.uid, player)
 
         if (client && client.auth && client.auth.displayName) {
@@ -713,7 +717,9 @@ export class OnUpdateCommand extends Command<
 
 export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   execute() {
-    if (this.state.phase == GamePhaseState.PICK) {
+    if (true) {
+      this.initializeMinigamePhase()
+    } else if (this.state.phase == GamePhaseState.PICK) {
       const commands = this.checkForLazyTeam()
       if (commands.length != 0) {
         return commands
@@ -1213,6 +1219,11 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
 
   checkForPVE() {
     return this.getPVEIndex(this.state.stageLevel) >= 0
+  }
+
+  initializeMinigamePhase() {
+    this.state.phase = GamePhaseState.MINIGAME
+    this.state.time = FIGHTING_PHASE_DURATION
   }
 
   initializeFightingPhase() {

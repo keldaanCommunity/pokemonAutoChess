@@ -250,6 +250,15 @@ export interface ISimplePlayer {
   synergies: Array<{ name: Synergy; value: number }>
 }
 
+export interface IPokemonAvatar {
+  id: string
+  name: Pkm
+  shiny: boolean
+  x: number
+  y: number
+  action: PokemonActionState
+}
+
 export interface IPlayer {
   id: string
   name: string
@@ -350,8 +359,16 @@ export interface IDpsHeal {
   shield: number
 }
 
-export function instanceofPokemonEntity(obj: IPokemon | IPokemonEntity) {
+export function instanceofPokemonEntity(
+  obj: IPokemon | IPokemonEntity | IPokemonAvatar
+) {
   return "mana" in obj
+}
+
+export function instanceofPokemonAvatar(
+  obj: IPokemon | IPokemonEntity | IPokemonAvatar
+) {
+  return !("stars" in obj)
 }
 
 export interface IPokemonEntity {

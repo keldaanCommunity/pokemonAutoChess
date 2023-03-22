@@ -103,7 +103,7 @@ export const gameSlice = createSlice({
       })
     },
     setRoundTime: (state, action: PayloadAction<number>) => {
-      if(action.payload > state.roundTime) state.phaseDuration = action.payload;
+      if (action.payload > state.roundTime) state.phaseDuration = action.payload
       state.roundTime = action.payload
     },
     setAfterGameId: (state, action: PayloadAction<string>) => {

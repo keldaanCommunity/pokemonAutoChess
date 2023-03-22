@@ -1,4 +1,5 @@
 import Player from "../../models/colyseus-models/player"
+import { PokemonAvatar } from "../../models/colyseus-models/pokemon-avatar"
 import Shop from "../../models/shop"
 import Design, { DesignTiled } from "../../core/design"
 import BotManager from "../../core/bot-manager"
@@ -13,6 +14,7 @@ export default class GameState extends Schema {
   @type("uint8") roundTime = 30
   @type("uint8") phase = GamePhaseState.PICK
   @type({ map: Player }) players = new MapSchema<Player>()
+  @type({ map: PokemonAvatar }) avatars = new MapSchema<PokemonAvatar>()
   @type(["string"]) additionalPokemons = new ArraySchema<Pkm>()
   @type("uint8") stageLevel = 0
   @type("string") mapName: string

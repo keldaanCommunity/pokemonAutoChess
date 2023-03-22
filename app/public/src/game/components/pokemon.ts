@@ -12,8 +12,10 @@ import {
   IPokemon,
   IPokemonEntity,
   instanceofPokemonEntity,
+  instanceofPokemonAvatar,
   Emotion,
-  AttackSprite
+  AttackSprite,
+  IPokemonAvatar
 } from "../../../../types"
 import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
 import MoveTo from "phaser3-rex-plugins/plugins/moveto"
@@ -35,6 +37,7 @@ import {
   OrientationVector
 } from "../../../../utils/orientation"
 import { clamp } from "../../../../utils/number"
+import PokemonFactory from "../../../../models/pokemon-factory"
 
 export default class Pokemon extends DraggableObject {
   evolution: Pkm
@@ -100,11 +103,15 @@ export default class Pokemon extends DraggableObject {
     scene: GameScene,
     x: number,
     y: number,
-    pokemon: IPokemonEntity | IPokemon,
+    pokemon_: IPokemonEntity | IPokemon | IPokemonAvatar,
     playerId: string,
     inBattle: boolean
   ) {
     super(scene, x, y, 75, 75, playerId !== scene.uid)
+    const pokemon: IPokemonEntity | IPokemon = instanceofPokemonAvatar(pokemon_)
+      ? PokemonFactory.createPokemonFromName(pokemon_.name)
+      : (pokemon_ as IPokemonEntity | IPokemon)
+
     this.stars = pokemon.stars
     this.evolution = instanceofPokemonEntity(pokemon)
       ? Pkm.DEFAULT
@@ -245,16 +252,19 @@ export default class Pokemon extends DraggableObject {
     this.setDepth(5)
   }
 
-  updateTooltipPosition(){
-    if(this.detail){
+  updateTooltipPosition() {
+    if (this.detail) {
       const absX = this.x + this.detail.width / 2 + 40
       const minX = this.detail.width / 2
       const maxX = window.innerWidth - this.detail.width / 2
-      const absY = this.y -this.detail.height / 2 - 40
+      const absY = this.y - this.detail.height / 2 - 40
       const minY = this.detail.height / 2
       const maxY = window.innerHeight - this.detail.height / 2
-      const [x,y] = [clamp(absX, minX, maxX) - this.x, clamp(absY, minY, maxY) - this.y]
-      this.detail.setPosition(x,y)
+      const [x, y] = [
+        clamp(absX, minX, maxX) - this.x,
+        clamp(absY, minY, maxY) - this.y
+      ]
+      this.detail.setPosition(x, y)
     }
   }
 
