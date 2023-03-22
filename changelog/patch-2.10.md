@@ -3,7 +3,7 @@
 
 # Changes to Pokemon
 
-
+- Castform rework: make castform change form dynamically according to weather, with a new ability
 
 # Changes to Synergies
 
