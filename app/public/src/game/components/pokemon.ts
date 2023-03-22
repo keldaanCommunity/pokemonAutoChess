@@ -98,6 +98,7 @@ export default class Pokemon extends DraggableObject {
   fairyField: GameObjects.Sprite | undefined
   voidBoost: GameObjects.Sprite | undefined
   stars: number
+  playerId: string
 
   constructor(
     scene: GameScene,
@@ -108,6 +109,7 @@ export default class Pokemon extends DraggableObject {
     inBattle: boolean
   ) {
     super(scene, x, y, 75, 75, playerId !== scene.uid)
+    this.playerId = playerId
     const pokemon: IPokemonEntity | IPokemon = instanceofPokemonAvatar(pokemon_)
       ? PokemonFactory.createPokemonFromName(pokemon_.name)
       : (pokemon_ as IPokemonEntity | IPokemon)

@@ -644,9 +644,6 @@ export class OnJoinCommand extends Command<
           this.room
         )
 
-        const avatar = new PokemonAvatar(user.uid, user.avatar)
-        this.state.avatars.set(client.auth.uid, avatar)
-
         this.state.players.set(client.auth.uid, player)
 
         if (client && client.auth && client.auth.displayName) {
@@ -707,6 +704,8 @@ export class OnUpdateCommand extends Command<
         if (everySimulationFinished) {
           updatePhaseNeeded = true
         }
+      } else if (this.state.phase === GamePhaseState.MINIGAME) {
+        this.room.miniGame.update(deltaTime)
       }
       if (updatePhaseNeeded) {
         return [new OnUpdatePhaseCommand()]
@@ -717,8 +716,11 @@ export class OnUpdateCommand extends Command<
 
 export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   execute() {
-    if (true) {
+    if (this.state.stageLevel % 2 === 0) {
       this.initializeMinigamePhase()
+    } else if (this.state.phase == GamePhaseState.MINIGAME) {
+      this.room.miniGame.stop()
+      this.initializePickingPhase()
     } else if (this.state.phase == GamePhaseState.PICK) {
       const commands = this.checkForLazyTeam()
       if (commands.length != 0) {
@@ -1025,98 +1027,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         ? 50000
         : 30000
 
-    this.state.players.forEach((player: Player, key: string) => {
-      player.simulation.stop()
-      if (player.alive) {
-        if (player.isBot) {
-          player.experienceManager.level = Math.min(
-            9,
-            Math.round(this.state.stageLevel / 2)
-          )
-        } else {
-          if (Math.random() < 0.037) {
-            const client = this.room.clients.find(
-              (cli) => cli.auth.uid === player.id
-            )
-            if (client) {
-              setTimeout(() => {
-                client.send(Transfer.UNOWN_WANDERING)
-              }, Math.round((5 + 15 * Math.random()) * 1000))
-            }
-          }
-        }
-        if (isPVE && player.getLastBattleResult() == BattleResult.WIN) {
-          const items = ItemFactory.createRandomItems()
-          // let items = process.env.MODE == 'dev' ? ItemFactory.createRandomFossils(): ItemFactory.createRandomItem();
-          items.forEach((item) => {
-            player.itemsProposition.push(item)
-          })
-          // const item = ItemFactory.createRandomItem();
-          // const item = ItemFactory.createSpecificItems([ItemS.BLUE_ORB]);
-          player.items.add(ItemFactory.createBasicRandomItem())
-        }
-
-        if (
-          this.room.getBenchSize(player.board) < 8 &&
-          player.getLastBattleResult() == BattleResult.DEFEAT &&
-          (player.effects.list.includes(Effect.HATCHER) ||
-            player.effects.list.includes(Effect.BREEDER))
-        ) {
-          const chance = player.effects.list.includes(Effect.BREEDER)
-            ? 1
-            : 0.2 * player.streak
-          if (Math.random() < chance) {
-            const egg = PokemonFactory.createRandomEgg()
-            const x = this.room.getFirstAvailablePositionInBench(player.id)
-            egg.positionX = x !== undefined ? x : -1
-            egg.positionY = 0
-            player.board.set(egg.id, egg)
-          }
-        }
-
-        player.opponentName = ""
-        if (!player.isBot) {
-          if (!player.shopLocked) {
-            this.state.shop.assignShop(player)
-          } else {
-            player.shopLocked = false
-          }
-        }
-
-        player.board.forEach((pokemon, key) => {
-          if (pokemon.evolutionTimer !== undefined) {
-            pokemon.evolutionTimer -= 1
-
-            if (pokemon.evolutionTimer === 0) {
-              let pokemonEvolved
-              pokemonEvolved = PokemonFactory.createPokemonFromName(
-                pokemon.evolution,
-                player.pokemonCollection.get(pokemon.index)
-              )
-
-              pokemon.items.forEach((i) => {
-                pokemonEvolved.items.add(i)
-              })
-              pokemonEvolved.positionX = pokemon.positionX
-              pokemonEvolved.positionY = pokemon.positionY
-              player.board.delete(key)
-              player.board.set(pokemonEvolved.id, pokemonEvolved)
-              player.synergies.update(player.board)
-              player.effects.update(player.synergies)
-            } else {
-              if (pokemon.name === Pkm.EGG) {
-                if (pokemon.evolutionTimer >= 2) {
-                  pokemon.action = PokemonActionState.IDLE
-                } else if (pokemon.evolutionTimer === 1) {
-                  pokemon.action = PokemonActionState.HOP
-                }
-              }
-            }
-          }
-        })
-      }
-    })
-
     // First additional pick stage
     if (this.state.stageLevel === 5) {
       this.state.players.forEach((player: Player) => {
@@ -1224,6 +1134,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   initializeMinigamePhase() {
     this.state.phase = GamePhaseState.MINIGAME
     this.state.time = FIGHTING_PHASE_DURATION
+    this.state.stageLevel += 1
+    this.room.miniGame.initialize(this.state.players)
   }
 
   initializeFightingPhase() {

@@ -662,6 +662,16 @@ export default class GameScene extends Scene {
     this.dragDropText.setOrigin(0.5)
 
     this.input.mouse.disableContextMenu()
+    this.input.on("pointerdown", (pointer) => {
+      if (
+        pointer.rightButtonDown() &&
+        this.minigameManager &&
+        this.room?.state.phase === GamePhaseState.MINIGAME
+      ) {
+        const vector = this.minigameManager.getVector(pointer.x, pointer.y)
+        this.room?.send(Transfer.VECTOR, vector)
+      }
+    })
 
     this.input.on(
       "gameobjectover",

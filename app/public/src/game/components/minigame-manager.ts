@@ -3,6 +3,10 @@ import { IPokemon, IPokemonAvatar } from "../../../../types"
 import { DataChange } from "@colyseus/schema"
 import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
+import {
+  transformMiniGameXCoordinate,
+  transformMiniGameYCoordinate
+} from "../../pages/utils/utils"
 
 export default class MinigameManager {
   pokemons: Map<string, Pokemon>
@@ -31,18 +35,30 @@ export default class MinigameManager {
     })
   }
 
+  getVector(x: number, y: number) {
+    const avatar = this.pokemons.get(this.uid)
+    if (avatar) {
+      return {
+        x: x - avatar.x,
+        y: y - avatar.y
+      }
+    } else {
+      return { x: 0, y: 0 }
+    }
+  }
+
   addPokemon(pokemon: IPokemonAvatar) {
     const pokemonUI = new Pokemon(
       this.scene,
-      pokemon.x,
-      pokemon.y,
+      transformMiniGameXCoordinate(pokemon.x),
+      transformMiniGameYCoordinate(pokemon.y),
       pokemon,
       pokemon.id,
-      false
+      true
     )
 
     this.animationManager.animatePokemon(pokemonUI, pokemon.action)
-    this.pokemons.set(pokemonUI.id, pokemonUI)
+    this.pokemons.set(pokemonUI.playerId, pokemonUI)
   }
 
   removePokemon(pokemonToRemove: IPokemonAvatar) {
@@ -54,7 +70,6 @@ export default class MinigameManager {
   }
 
   changePokemon(pokemon: IPokemonAvatar, change: DataChange<any>) {
-    // console.log('change', change.field, pokemon.name);
     const pokemonUI = this.pokemons.get(pokemon.id)
     if (pokemonUI) {
       switch (change.field) {
@@ -62,8 +77,12 @@ export default class MinigameManager {
           this.animationManager.animatePokemon(pokemonUI, change.value)
           break
 
-        default:
-          pokemonUI[change.field] = change.value
+        case "x":
+          pokemonUI.x = transformMiniGameXCoordinate(change.value)
+          break
+
+        case "y":
+          pokemonUI.y = transformMiniGameYCoordinate(change.value)
           break
       }
     }

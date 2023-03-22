@@ -145,7 +145,8 @@ export enum Transfer {
   POKEMON_DAMAGE = "POKEMON_DAMAGE",
   POKEMON_HEAL = "POKEMON_HEAL",
   UNOWN_ENCOUNTER = "UNOWN_ENCOUNTER",
-  UNOWN_WANDERING = "UNOWN_WANDERING"
+  UNOWN_WANDERING = "UNOWN_WANDERING",
+  VECTOR = "VECTOR"
 }
 
 export enum AttackSprite {
@@ -257,6 +258,13 @@ export interface IPokemonAvatar {
   x: number
   y: number
   action: PokemonActionState
+}
+
+export interface IFloatingItem {
+  id: string
+  name: Item
+  x: number
+  y: number
 }
 
 export interface IPlayer {
