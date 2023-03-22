@@ -34,7 +34,7 @@ import {
   IPokemon,
   Transfer
 } from "../types"
-import { Pkm, PkmIndex } from "../types/enum/Pokemon"
+import { Pkm, PkmFamily, PkmIndex } from "../types/enum/Pokemon"
 import PokemonConfig from "../models/colyseus-models/pokemon-config"
 import { Synergy } from "../types/enum/Synergy"
 import { Pokemon } from "../models/colyseus-models/pokemon"
@@ -45,7 +45,7 @@ import { Title, Role } from "../types"
 import PRECOMPUTED_TYPE_POKEMONS from "../models/precomputed/type-pokemons.json"
 import BannedUser from "../models/mongo-models/banned-user"
 import { pickRandomIn, shuffleArray } from "../utils/random"
-import { Rarity } from "../types/enum/Game"
+import { Climate, Rarity } from "../types/enum/Game"
 import { FilterQuery } from "mongoose"
 
 export default class GameRoom extends Room<GameState> {
@@ -819,5 +819,36 @@ export default class GameRoom extends Room<GameState> {
     })
 
     return size
+  }
+
+  updateCastform(weather: Climate) {
+    let newForm: Pkm = Pkm.CASTFORM
+    if(weather === Climate.SNOW){
+      newForm = Pkm.CASTFORM_HAIL
+    } else if(weather === Climate.RAIN){
+      newForm = Pkm.CASTFORM_RAIN
+    } else if(weather === Climate.SUN){
+      newForm = Pkm.CASTFORM_SUN
+    }
+
+    this.state.players.forEach(player => {
+      player.board.forEach((pokemon, id) => {
+        if(PkmFamily[pokemon.name] === PkmFamily[Pkm.CASTFORM] && pokemon.name !== newForm){
+          const newPokemon = PokemonFactory.createPokemonFromName(
+            newForm,
+            player.pokemonCollection.get(PkmIndex[newForm])
+          )
+          pokemon.items.forEach(item => {
+            newPokemon.items.add(item)
+          })
+          newPokemon.positionX = pokemon.positionX
+          newPokemon.positionY = pokemon.positionY
+          player.board.delete(id)
+          player.board.set(newPokemon.id, newPokemon)          
+          player.synergies.update(player.board)
+          player.effects.update(player.synergies)
+        }
+      })
+    })
   }
 }
