@@ -4,8 +4,9 @@ import Player from "./colyseus-models/player"
 import { IPokemon } from "../types"
 import { Probability, DITTO_RATE } from "../types/Config"
 import { Rarity } from "../types/enum/Game"
-import { pickRandomIn } from "../utils/random"
+import { pickRandomIn, shuffleArray } from "../utils/random"
 import { clamp } from "../utils/number"
+import { removeInArray } from "../utils/array"
 
 export const PoolSize: { [key in Rarity]: [number, number, number] } = {
   [Rarity.COMMON]: [1, 14, 29],
@@ -288,21 +289,41 @@ export default class Shop {
     }
   }
 
-  assignFirstMythicalShop(player: Player) {
-    const mythicalCopy = JSON.parse(JSON.stringify(Mythical1Shop)) as Array<Pkm>
-    for (let i = 0; i < 6; i++) {
-      const pkm = pickRandomIn(mythicalCopy)
-      mythicalCopy.splice(mythicalCopy.indexOf(pkm), 1)
-      player.shop[i] = pkm
-    }
-  }
+  assignMythicalShop(player: Player, list: Pkm[]) {
+    const mythicals = [...list]
+    const synergies = Array.from(player.synergies).filter(([synergy, value]) => value > 0).map(([synergy, value]) => synergy)
+    const top2Synergies = Array.from(player.synergies).sort(([s1, v1], [s2, v2]) => v2 - v1).slice(0,2).map(([synergy, value]) => synergy)
 
-  assignSecondMythicalShop(player: Player) {
-    const mythicalCopy = JSON.parse(JSON.stringify(Mythical2Shop)) as Array<Pkm>
+    const mythicalsTopSynergy = mythicals.filter(m => PokemonFactory.createPokemonFromName(m).types.some(t => top2Synergies.includes(t)))
+    const mythicalsCommonSynergy = mythicals.filter(m => PokemonFactory.createPokemonFromName(m).types.some(t => synergies.includes(t)))
+
+    const shop: Pkm[] = []
+    if(mythicalsTopSynergy.length > 0){
+      const pkm = pickRandomIn(mythicalsTopSynergy)
+      removeInArray(mythicals, pkm)
+      removeInArray(mythicalsTopSynergy, pkm)
+      removeInArray(mythicalsCommonSynergy, pkm)
+      shop.push(pkm)
+    }
+
+    for(let i=0; i<2; i++){
+      if(mythicalsCommonSynergy.length > 0){
+        const pkm = pickRandomIn(mythicalsCommonSynergy)
+        removeInArray(mythicals, pkm)
+        removeInArray(mythicalsCommonSynergy, pkm)
+        shop.push(pkm)
+      }
+    }
+
+    while(shop.length < 6){
+      const pkm = pickRandomIn(mythicals)
+      removeInArray(mythicals, pkm)
+      shop.push(pkm)
+    }
+
+    shuffleArray(shop)
     for (let i = 0; i < 6; i++) {
-      const pkm = pickRandomIn(mythicalCopy)
-      mythicalCopy.splice(mythicalCopy.indexOf(pkm), 1)
-      player.shop[i] = pkm
+      player.shop[i] = shop[i]
     }
   }
 
