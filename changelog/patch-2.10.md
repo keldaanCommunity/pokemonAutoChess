@@ -7,7 +7,7 @@
 
 # Changes to Synergies
 
-
+- Steel now doubles the base attack, and no longer the total attack with items
 
 # Changes to Items
 
