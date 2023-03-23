@@ -158,7 +158,8 @@ export const Mythical1Shop = new Array<Pkm>(
   Pkm.FARFETCH_D,
   Pkm.TAPU_BULU,
   Pkm.TAPU_FINI,
-  Pkm.MIMIKYU
+  Pkm.MIMIKYU,
+  Pkm.TYROGUE
 )
 
 export const Mythical2Shop = new Array<Pkm>(
