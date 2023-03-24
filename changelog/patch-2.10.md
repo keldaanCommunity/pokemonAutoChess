@@ -1,5 +1,8 @@
 # New Pokemons:
-
+- Tyrogue
+- Hitmonchan
+- Hitmonlee
+- Hitmontop
 
 # Changes to Pokemon
 
