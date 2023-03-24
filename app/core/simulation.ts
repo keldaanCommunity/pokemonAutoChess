@@ -12,7 +12,6 @@ import DpsHeal from "./dps-heal"
 import ItemFactory from "../models/item-factory"
 import { ISimulation, IPokemonEntity, IPokemon, IPlayer } from "../types"
 import { Synergy } from "../types/enum/Synergy"
-import { Pkm } from "../types/enum/Pokemon"
 import { ItemStats } from "../types/Config"
 import { getPath } from "../public/src/pages/utils/utils"
 import GameRoom from "../rooms/game-room"
@@ -79,6 +78,7 @@ export default class Simulation extends Schema implements ISimulation {
     // console.log('blueEffects', blueEffects);
     // console.log('redEffects', redEffects);
     this.climate = this.getClimate()
+    this.room.updateCastform(this.climate)
     this.finished = false
     this.flowerSpawn = [false, false]
 

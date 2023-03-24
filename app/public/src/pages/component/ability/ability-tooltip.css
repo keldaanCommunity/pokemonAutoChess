@@ -21,6 +21,10 @@
   margin-right: 4px;
 }
 
+.ability-description {
+  white-space: pre-wrap;
+}
+
 .ability-value {
   color: rgb(171, 171, 171);
 }

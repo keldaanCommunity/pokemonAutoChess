@@ -3569,3 +3569,30 @@ export class ShadowSneakStrategy extends AttackStrategy {
     target.handleSpecialDamage(damage, board, damageType, pokemon)
   }
 }
+
+export class ForecastStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+
+    board.forEach((x: number, y: number, p: PokemonEntity | undefined) => {
+      if (p && pokemon.team === p.team) {
+        p.handleShield(10, pokemon, true)
+        if(pokemon.name === Pkm.CASTFORM_SUN){
+          p.addAttack(5, true)
+        }
+        if(pokemon.name === Pkm.CASTFORM_RAIN){
+          p.setMana(p.mana + Math.round(20*(1 + pokemon.ap / 100)))
+        }
+        if(pokemon.name === Pkm.CASTFORM_HAIL){
+          p.addDefense(5, true)
+          p.addSpecialDefense(5, true)
+        }
+      }
+    })
+  }
+}

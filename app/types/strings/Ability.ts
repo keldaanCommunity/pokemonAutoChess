@@ -735,6 +735,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.FORECAST]: {
+    eng: "Forecast",
+    esp: "",
+    prt: "",
+    fra: "Météo"
   }
 }
 
@@ -1470,5 +1476,15 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.FORECAST]: {
+    eng: `Castform changes forms depending on the weather, giving additional bonus to your team:
+Gives [10,SP] ${Stat.SHIELD} to your team. 
+Sun: also gives [5,SP] ${Stat.ATK}
+Rain: also gives [20,SP] ${Stat.MANA}
+Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
+    esp: "",
+    prt: "",
+    fra: "Météo"
   }
 }

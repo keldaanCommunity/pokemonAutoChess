@@ -7185,7 +7185,7 @@ export class Castform extends Pokemon {
       AttackType.PHYSICAL,
       2,
       80,
-      Ability.NASTY_PLOT,
+      Ability.FORECAST,
       shiny,
       emotion,
       false
@@ -7209,7 +7209,7 @@ export class CastformSun extends Pokemon {
       AttackType.PHYSICAL,
       2,
       80,
-      Ability.AURORA_VEIL,
+      Ability.FORECAST,
       shiny,
       emotion,
       true
@@ -7233,7 +7233,7 @@ export class CastformRain extends Pokemon {
       AttackType.PHYSICAL,
       2,
       80,
-      Ability.AURORA_VEIL,
+      Ability.FORECAST,
       shiny,
       emotion,
       true
@@ -7257,7 +7257,7 @@ export class CastformHail extends Pokemon {
       AttackType.PHYSICAL,
       2,
       80,
-      Ability.AURORA_VEIL,
+      Ability.FORECAST,
       shiny,
       emotion,
       true
