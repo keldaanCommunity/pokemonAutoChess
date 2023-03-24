@@ -358,42 +358,23 @@ export default class Simulation extends Schema implements ISimulation {
           p.status.fairyField = true
         }
       })
-    })
 
-    const blueIronDefense = Array.from(this.blueTeam.values()).filter((p) =>
-      p.effects.includes(Effect.IRON_DEFENSE)
-    )
-    if (blueIronDefense.length > 0) {
-      blueIronDefense.forEach((pokemon) => {
-        pokemon.effects.splice(
-          pokemon.effects.findIndex((e) => e === Effect.IRON_DEFENSE),
-          1
-        )
-      })
-      const blueIronDefensePkm = pickRandomIn(blueIronDefense)
-      blueIronDefensePkm.addAttack(blueIronDefensePkm.atk)
-      blueIronDefensePkm.effects.push(Effect.IRON_DEFENSE)
-    }
+      const ironDefenseCandidates = Array.from(team.values()).filter((p) => p.effects.includes(Effect.IRON_DEFENSE))
+      if (ironDefenseCandidates.length > 0) {
+        ironDefenseCandidates.forEach((pokemon) => {
+          pokemon.effects.splice(
+            pokemon.effects.findIndex((e) => e === Effect.IRON_DEFENSE),
+            1
+          )
+        })
+        const ironDefensePkm = pickRandomIn(ironDefenseCandidates)
+        ironDefensePkm.addAttack(ironDefensePkm.baseAtk)
+        ironDefensePkm.effects.push(Effect.IRON_DEFENSE)
+      }
 
-    const redIronDefense = Array.from(this.redTeam.values()).filter((p) =>
-      p.effects.includes(Effect.IRON_DEFENSE)
-    )
-    if (redIronDefense.length > 0) {
-      redIronDefense.forEach((pokemon) => {
-        pokemon.effects.splice(
-          pokemon.effects.findIndex((e) => e === Effect.IRON_DEFENSE),
-          1
-        )
-      })
-      const redIronDefensePkm = pickRandomIn(redIronDefense)
-      redIronDefensePkm.addAttack(redIronDefensePkm.atk)
-      redIronDefensePkm.effects.push(Effect.IRON_DEFENSE)
-    }
-
-    ;[this.blueTeam, this.redTeam].forEach((team) => {
       team.forEach((pokemon) => {
         if (pokemon.effects.includes(Effect.AUTOTOMIZE)) {
-          pokemon.addAttack(pokemon.atk)
+          pokemon.addAttack(pokemon.baseAtk)
         }
         let shieldBonus = 0
         if (pokemon.effects.includes(Effect.STAMINA)) {
