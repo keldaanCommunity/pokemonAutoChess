@@ -18,6 +18,7 @@ import { leavePreparation } from "../../../stores/PreparationStore"
 import PreparationState from "../../../../../rooms/states/preparation-state"
 import "./preparation-menu.css";
 import { cc } from "../../utils/jsx"
+import { throttle } from "../../../../../utils/function"
 
 export default function PreparationMenu(props: {
   setToGame: Dispatch<SetStateAction<boolean>>
@@ -55,7 +56,7 @@ export default function PreparationMenu(props: {
     }
   }
 
-  async function startGame() {
+  const startGame = throttle(async function startGame() {
     if (room && allUsersReady) {
       const token = await firebase.auth().currentUser?.getIdToken()
       if (token) {
@@ -74,7 +75,7 @@ export default function PreparationMenu(props: {
         props.setToGame(true)
       }
     }
-  }
+  }, 1000)
 
   return (
     <div className="preparation-menu nes-container is-centered">
