@@ -10,14 +10,10 @@
   color: #ffd800;
 }
 
-.description-icon {
-  display: inline-flex;
-  align-items: center;
-  vertical-align: text-bottom;
-}
-
 .description-icon > img {
-  height: 24px;
+  display: inline-block;
+  vertical-align: -2px;
+  height: 16px;
   margin-right: 4px;
 }
 
