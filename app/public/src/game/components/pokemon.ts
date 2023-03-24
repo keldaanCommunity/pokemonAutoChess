@@ -1,4 +1,4 @@
-import { Game, GameObjects } from "phaser"
+import Phaser, { Game, GameObjects } from "phaser"
 import Lifebar from "./life-bar"
 import DraggableObject from "./draggable-object"
 import PokemonDetail from "./pokemon-detail"
@@ -2786,6 +2786,67 @@ export default class Pokemon extends DraggableObject {
             })
             break
           }
+
+          case Ability.MACH_PUNCH:
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              "FIGHTING",
+              "FIST"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(0.25)
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              scale: 3,
+              ease: Phaser.Math.Easing.Cubic.Out,
+              yoyo: false,
+              duration: 500,
+              onComplete: () => {
+                specialProjectile.destroy()
+              }
+            })
+            break
+
+          case Ability.MAWASHI_GERI:
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              "FIGHTING",
+              "FOOT"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(0.25)
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              scale: 3,
+              ease: Phaser.Math.Easing.Cubic.Out,
+              yoyo: false,
+              duration: 500,
+              onComplete: () => {
+                specialProjectile.destroy()
+              }
+            })
+            break
+          
+          case Ability.TRIPLE_KICK:
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY)
+            for(let i=0; i<3; i++){
+              setTimeout(() => {
+                const projectile = this.scene.add.sprite(
+                  coordinates[0] + Math.round(50 * Math.cos(Math.PI * 2 * i / 3)),
+                  coordinates[1] + Math.round(50 * Math.sin(Math.PI * 2 * i / 3)),
+                  "FIGHTING",
+                  "PAW"
+                )              
+                projectile.setDepth(7)
+                projectile.setScale(1.5)
+                setTimeout(() => projectile.destroy(), 500)
+              }, i * 250)
+            }
+            break
 
           default:
             break

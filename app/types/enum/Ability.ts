@@ -120,7 +120,10 @@ import {
   AgilityStrategy,
   SpiritShackleStrategy,
   WaterShurikenStrategy,
-  ShadowSneakStrategy
+  ShadowSneakStrategy,
+  MachPunchStrategy,
+  TripleKickStrategy,
+  MawashiGeriStrategy
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -245,7 +248,10 @@ export enum Ability {
   AGILITY = "AGILITY",
   SPIRIT_SHACKLE = "SPIRIT_SHACKLE",
   WATER_SHURIKEN = "WATER_SHURIKEN",
-  SHADOW_SNEAK = "SHADOW_SNEAK"
+  SHADOW_SNEAK = "SHADOW_SNEAK",
+  MACH_PUNCH = "MACH_PUNCH",
+  TRIPLE_KICK = "TRIPLE_KICK",
+  MAWASHI_GERI = "MAWASHI_GERI"
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -370,5 +376,8 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.AGILITY]: new AgilityStrategy(),
   [Ability.SPIRIT_SHACKLE]: new SpiritShackleStrategy(),
   [Ability.WATER_SHURIKEN]: new WaterShurikenStrategy(),
-  [Ability.SHADOW_SNEAK]: new ShadowSneakStrategy()
+  [Ability.SHADOW_SNEAK]: new ShadowSneakStrategy(),
+  [Ability.MACH_PUNCH]: new MachPunchStrategy(),
+  [Ability.TRIPLE_KICK]: new TripleKickStrategy(),
+  [Ability.MAWASHI_GERI]: new MawashiGeriStrategy()
 }

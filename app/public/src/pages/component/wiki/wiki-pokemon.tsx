@@ -7,7 +7,7 @@ import { ITracker } from "../../../../../types/ITracker"
 import PRECOMPUTED_RARITY_POKEMONS_ALL from "../../../../../models/precomputed/type-rarity-all.json"
 import tracker from "../../../../dist/client/assets/pokemons/tracker.json"
 import { Rarity } from "../../../../../types/enum/Game"
-import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
+import { Pkm, PkmIndex, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
 import { Mythical1Shop, Mythical2Shop } from "../../../../../models/shop"
 
@@ -26,14 +26,20 @@ export default function WikiPokemon(props: { rarity: Rarity }) {
     sections = [
       {
         label: "Stage 10",
-        pokemons: precomputed[props.rarity].filter(p => Mythical1Shop.includes(p))
+        pokemons: precomputed[props.rarity].filter(p => Mythical1Shop.includes(p) || Mythical1Shop.includes(PkmFamily[p]))
       },
       {
         label: "Stage 20",
-        pokemons: precomputed[props.rarity].filter(p => Mythical2Shop.includes(p))
+        pokemons: precomputed[props.rarity].filter(p => Mythical2Shop.includes(p) || Mythical2Shop.includes(PkmFamily[p]))
       },
     ]
   }
+
+  sections.forEach(section => section.pokemons.sort((a: Pkm, b: Pkm) => {
+    const pa = PokemonFactory.createPokemonFromName(a)
+    const pb = PokemonFactory.createPokemonFromName(b)
+    return PkmFamily[a] === PkmFamily[b] ? pa.stars - pb.stars : PkmIndex[PkmFamily[a]].localeCompare(PkmIndex[PkmFamily[b]])
+  }))
   
   return (
     <Tabs>
