@@ -3578,7 +3578,6 @@ export class ForecastStrategy extends AttackStrategy {
     target: PokemonEntity
   ) {
     super.process(pokemon, state, board, target)
-
     board.forEach((x: number, y: number, p: PokemonEntity | undefined) => {
       if (p && pokemon.team === p.team) {
         p.handleShield(10, pokemon, true)
@@ -3591,6 +3590,62 @@ export class ForecastStrategy extends AttackStrategy {
         if(pokemon.name === Pkm.CASTFORM_HAIL){
           p.addDefense(5, true)
           p.addSpecialDefense(5, true)
+        }
+      }
+    })
+  }
+}
+
+export class MachPunchStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    let damage = 50
+    if(pokemon.def > target.def) damage *= 2
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+  }
+}
+
+export class MawashiGeriStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    let damage = 50
+    if(pokemon.atk > target.atk) damage *= 2
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+  }
+}
+
+export class TripleKickStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    let damage = 50
+    
+    const cells = board.getAdjacentCells(target.positionX, target.positionY)
+    let count = 0
+    cells.forEach((cell) => {
+      if (cell.value && pokemon.team !== cell.value.team) {
+        count++;
+        if(count <= 3){
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon
+          )
         }
       }
     })

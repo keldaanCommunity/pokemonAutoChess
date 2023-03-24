@@ -445,6 +445,26 @@ export class OnDragDropItemCommand extends Command<
             )
           }
           break
+        case Pkm.TYROGUE:
+          let evol = Pkm.HITMONTOP
+          if(item === Item.CHARCOAL
+          || item === Item.MAGNET
+          || (item in ItemRecipe && ItemRecipe[item].includes(Item.CHARCOAL))
+          || (item in ItemRecipe && ItemRecipe[item].includes(Item.MAGNET))){
+            evol = Pkm.HITMONLEE
+          }
+          if(item === Item.HEART_SCALE
+            || item === Item.NEVER_MELT_ICE
+            || (item in ItemRecipe && ItemRecipe[item].includes(Item.HEART_SCALE))
+            || (item in ItemRecipe && ItemRecipe[item].includes(Item.NEVER_MELT_ICE))){
+              evol = Pkm.HITMONCHAN
+            }
+          newItemPokemon = PokemonFactory.transformPokemon(
+            pokemon,
+            evol,
+            player.pokemonCollection.get(PkmIndex[evol])
+          )
+          break;
       }
 
       if (newItemPokemon) {

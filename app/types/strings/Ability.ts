@@ -736,6 +736,24 @@ export const AbilityName: { [key in Ability]: Langage } = {
     prt: "",
     fra: ""
   },
+  [Ability.MACH_PUNCH]: {
+    eng: "Mach Punch",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.TRIPLE_KICK]: {
+    eng: "Triple Kick",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.MAWASHI_GERI]: {
+    eng: "Mawashi Geri",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
   [Ability.FORECAST]: {
     eng: "Forecast",
     esp: "",
@@ -1473,6 +1491,24 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
   },
   [Ability.SHADOW_SNEAK]: {
     eng: `Deals [30,60,120] ${Damage.SPECIAL}. If the target is ${Status.SILENCE}, deals ${Damage.TRUE}`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.MACH_PUNCH]: {
+    eng: `Deals [50, SP] ${Damage.SPECIAL}. Double damage if attacker has a better ${Stat.DEF} than target`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.TRIPLE_KICK]: {
+    eng: `Deals [50, SP] ${Damage.SPECIAL} to up to 3 adjacent enemies`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.MAWASHI_GERI]: {
+    eng: `Deals [50, SP] ${Damage.SPECIAL}. Double damage if attacker has a better ${Stat.ATK} than target`,
     esp: "",
     prt: "",
     fra: ""

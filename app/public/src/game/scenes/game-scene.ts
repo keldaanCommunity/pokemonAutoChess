@@ -425,6 +425,11 @@ export default class GameScene extends Scene {
       "/assets/attacks/WATER_SHURIKEN.json",
       "/assets/attacks"
     )
+    this.load.multiatlas(
+      "FIGHTING",
+      "/assets/attacks/FIGHTING.json",
+      "/assets/attacks"
+    )
   }
 
   create() {
