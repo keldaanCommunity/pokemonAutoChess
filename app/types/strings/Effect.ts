@@ -219,12 +219,12 @@ export const EffectDescription: {
     fra: `Artificial pokemons gains +10 ${Stat.ATK}/+50 ${Stat.SHIELD} for each held items`
   },
   [Effect.IRON_DEFENSE]: {
-    eng: `One of your steel gains double ${Stat.ATK}`,
+    eng: `One of your steel Pokemon gains double base ${Stat.ATK}`,
     esp: `?NONE?`,
     fra: `?NONE?`
   },
   [Effect.AUTOTOMIZE]: {
-    eng: `All of your steel gains double ${Stat.ATK}`,
+    eng: `All of your steel Pokemon gains double base ${Stat.ATK}`,
     esp: `?NONE?`,
     fra: `?NONE?`
   },

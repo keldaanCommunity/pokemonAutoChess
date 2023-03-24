@@ -57,59 +57,7 @@ export class OnShopCommand extends Command<
           if (pokemon.skill === Ability.PROTEAN) {
             this.room.checkProtean(player, pokemon)
           }
-          if (pokemon.name == Pkm.CASTFORM) {
-            if (
-              player.synergies.get(Synergy.FIRE) ||
-              player.synergies.get(Synergy.WATER) ||
-              player.synergies.get(Synergy.ICE)
-            ) {
-              const rankArray = [
-                {
-                  s: Synergy.FIRE,
-                  v: player.synergies.get(Synergy.FIRE)
-                    ? player.synergies.get(Synergy.FIRE)
-                    : 0
-                },
-                {
-                  s: Synergy.WATER,
-                  v: player.synergies.get(Synergy.WATER)
-                    ? player.synergies.get(Synergy.WATER)
-                    : 0
-                },
-                {
-                  s: Synergy.ICE,
-                  v: player.synergies.get(Synergy.ICE)
-                    ? player.synergies.get(Synergy.ICE)
-                    : 0
-                }
-              ]
-              rankArray.sort((a, b) => {
-                const va = a.v ? a.v : 0
-                const vb = b.v ? b.v : 0
-                return vb - va
-              })
-              switch (rankArray[0].s) {
-                case Synergy.FIRE:
-                  pokemon = PokemonFactory.createPokemonFromName(
-                    Pkm.CASTFORM_SUN,
-                    player.pokemonCollection.get(PkmIndex[Pkm.CASTFORM_SUN])
-                  )
-                  break
-                case Synergy.WATER:
-                  pokemon = PokemonFactory.createPokemonFromName(
-                    Pkm.CASTFORM_RAIN,
-                    player.pokemonCollection.get(PkmIndex[Pkm.CASTFORM_RAIN])
-                  )
-                  break
-                case Synergy.ICE:
-                  pokemon = PokemonFactory.createPokemonFromName(
-                    Pkm.CASTFORM_HAIL,
-                    player.pokemonCollection.get(PkmIndex[Pkm.CASTFORM_HAIL])
-                  )
-                  break
-              }
-            }
-          }
+
           const x = this.room.getFirstAvailablePositionInBench(player.id)
           pokemon.positionX = x !== undefined ? x : -1
           pokemon.positionY = 0
