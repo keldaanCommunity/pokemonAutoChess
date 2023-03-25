@@ -1010,10 +1010,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     this.state.phase = GamePhaseState.PICK
     const isPVE = this.checkForPVE()
 
-    this.state.time =
-      this.state.stageLevel === 10 || this.state.stageLevel === 20
-        ? 50000
-        : 30000
+    this.state.time = isPVE ? 50000 : 30000
 
     // First additional pick stage
     if (this.state.stageLevel === 5) {
