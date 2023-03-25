@@ -1,6 +1,6 @@
 import { PokemonAvatar } from "../../models/colyseus-models/pokemon-avatar"
 import { FloatingItem } from "../../models/colyseus-models/floating-item"
-import { Schema, MapSchema, type } from "@colyseus/schema"
+import { MapSchema } from "@colyseus/schema"
 import {
   Bodies,
   Composite,
@@ -15,6 +15,11 @@ import { getOrientation } from "../../public/src/pages/utils/utils"
 import { PokemonActionState } from "../../types/enum/Game"
 import { BasicItems, Item } from "../../types/enum/Item"
 import { pickRandomIn } from "../../utils/random"
+
+const PLAYER_ACCELERATION = 0.002
+const PLAYER_MAX_SPEED = 1
+const ITEM_ROTATION_SPEED = 0.0004
+const CAROUSEL_RADIUS = 120
 
 export class MiniGame {
   avatars: MapSchema<PokemonAvatar> | undefined
@@ -48,20 +53,9 @@ export class MiniGame {
         if (item.avatarId === "") {
           const itemBody = this.bodies.get(item.id)
           if (itemBody) {
-            const x =
-              this.centerX +
-              Math.cos(
-                this.engine.timing.timestamp * 0.0005 +
-                  (Math.PI * item.index) / 4.5
-              ) *
-                100
-            const y =
-              this.centerY +
-              Math.sin(
-                this.engine.timing.timestamp * 0.0005 +
-                  (Math.PI * item.index) / 4.5
-              ) *
-                90
+            const t = this.engine.timing.timestamp * ITEM_ROTATION_SPEED
+            const x = this.centerX + Math.cos(t + (Math.PI * item.index) / 4.5) * CAROUSEL_RADIUS
+            const y = this.centerY + Math.sin(t + (Math.PI * item.index) / 4.5) * CAROUSEL_RADIUS
             Body.setPosition(itemBody, { x: x, y: y })
           }
         }
@@ -108,6 +102,9 @@ export class MiniGame {
           Composite.add(this.engine.world, constraint)
           avatar.itemId = item.id
           item.avatarId = avatar.id
+
+          itemBody.collisionFilter.mask = 0 // item no longer collide
+          avatarBody.collisionFilter.mask = 0 // player no longer collide after taking an item
         }
       }
     })
@@ -136,7 +133,7 @@ export class MiniGame {
         player.avatar,
         x,
         y,
-        11000 - player.rank * 1000
+        4000 + (alivePlayers.length - player.rank) * 2000
       )
 
       this.avatars!.set(avatar.id, avatar)
@@ -146,10 +143,13 @@ export class MiniGame {
       Composite.add(this.engine.world, body)
       i++
     })
+
+    const items = this.pickRandomItems()
+
     for (let j = 0; j < 9; j++) {
       const x = this.centerX + Math.cos((Math.PI * j) / 4.5) * 100
       const y = this.centerY + Math.sin((Math.PI * j) / 4.5) * 90
-      const name = pickRandomIn(BasicItems)
+      const name = items[j]
       const floatingItem = new FloatingItem(name, x, y, j)
       this.items?.set(floatingItem.id, floatingItem)
       const body = Bodies.circle(x, y, 15)
@@ -192,6 +192,19 @@ export class MiniGame {
     })
   }
 
+  pickRandomItems(): Item[] {
+    const items: Item[] = []
+    for (let j = 0; j < 9; j++) {
+      let item, count
+      do {
+        item = pickRandomIn(BasicItems)
+        count = items.filter(i => i === item).length
+      } while(count >= 2) // maximum 2 copies of each item
+      items.push(item)
+    }
+    return items
+  }
+
   applyVector(id: string, x: number, y: number) {
     const avatar = this.avatars?.get(id)
     if (avatar && avatar.timer <= 0) {
@@ -205,8 +218,9 @@ export class MiniGame {
         Body.applyForce(
           body,
           body.position,
-          Vector.create(normX / 700, -normY / 700)
+          Vector.create(normX * PLAYER_ACCELERATION, -normY * PLAYER_ACCELERATION)
         )
+        Body.setSpeed(body, Math.min(PLAYER_MAX_SPEED, body.speed))
       }
     }
   }
@@ -217,12 +231,19 @@ export class MiniGame {
       this.bodies.delete(key)
     })
     this.avatars!.forEach((avatar) => {
-      if (avatar.itemId !== "") {
-        const item = this.items?.get(avatar.itemId)
-        const player = players.get(avatar.id)
-        if (item && player) {
-          player.items.add(item.name)
-        }
+      const player = players.get(avatar.id)
+      if (avatar.itemId === "" && player && !player.isBot) {
+        // give a random item if none was taken
+        const remainingItems = [...this.items!.entries()].filter(
+          ([itemId, item]) => item.avatarId == ""
+        )
+        avatar.itemId = pickRandomIn(remainingItems)[0]
+      }
+
+      const item = this.items?.get(avatar.itemId)
+      
+      if (item && player && !player.isBot) {
+        player.items.add(item.name)
       }
       this.avatars!.delete(avatar.id)
     })

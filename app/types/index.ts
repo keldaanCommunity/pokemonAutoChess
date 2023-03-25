@@ -36,7 +36,7 @@ export * from "./enum/Emotion"
 
 export const FIGHTING_PHASE_DURATION = 40000
 
-export const MINIGAME_PHASE_DURATION = 25000
+export const MINIGAME_PHASE_DURATION = 40000
 
 export const CDN_PORTRAIT_URL =
   "https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/"

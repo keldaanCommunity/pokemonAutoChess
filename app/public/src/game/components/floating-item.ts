@@ -22,4 +22,8 @@ export class FloatingItem extends GameObjects.Container {
     this.add(this.sprite)
     this.scene.add.existing(this)
   }
+
+  onGrab(){
+    this.circle.setStrokeStyle(2, 0x4CFF00, 0.85)
+  }
 }
