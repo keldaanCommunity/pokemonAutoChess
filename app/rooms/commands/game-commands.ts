@@ -716,28 +716,22 @@ export class OnUpdateCommand extends Command<
 
 export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   execute() {
-    if (this.state.stageLevel % 2 === 0) {
-      this.initializeMinigamePhase()
-    } else if (this.state.phase == GamePhaseState.MINIGAME) {
+    if (this.state.phase == GamePhaseState.MINIGAME) {
       this.room.miniGame.stop(this.state.players)
       this.initializePickingPhase()
     } else if (this.state.phase == GamePhaseState.PICK) {
+      this.stopPickingPhase()
       const commands = this.checkForLazyTeam()
       if (commands.length != 0) {
         return commands
       }
       this.initializeFightingPhase()
     } else if (this.state.phase == GamePhaseState.FIGHT) {
-      this.computeAchievments()
-      this.computeStreak()
-      this.computeLife()
-      this.rankPlayers()
-      this.checkDeath()
-      const kickCommands = this.checkEndGame()
+      const kickCommands = this.stopFightingPhase()
       if (kickCommands.length != 0) {
         return kickCommands
       }
-      this.computeIncome()
+
       this.initializePickingPhase()
     }
   }
@@ -1131,6 +1125,46 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     return this.getPVEIndex(this.state.stageLevel) >= 0
   }
 
+  stopPickingPhase() {
+    this.state.players.forEach((player, key) => {
+      if (player.itemsProposition.length != 0) {
+        if (player.itemsProposition.length == 3) {
+          const i = player.itemsProposition.pop()
+          if (i) {
+            player.items.add(i)
+          }
+        }
+        while (player.itemsProposition.length > 0) {
+          player.itemsProposition.pop()
+        }
+      }
+
+      if (player.pokemonsProposition.length > 0) {
+        if (player.pokemonsProposition.length === 3) {
+          // auto pick if not chosen
+          const pkm = player.pokemonsProposition.pop()
+          if (pkm) {
+            this.state.additionalPokemons.push(pkm)
+            this.state.shop.addAdditionalPokemon(pkm)
+          }
+        }
+        while (player.pokemonsProposition.length > 0) {
+          player.pokemonsProposition.pop()
+        }
+      }
+    })
+  }
+
+  stopFightingPhase() {
+    this.computeAchievments()
+    this.computeStreak()
+    this.computeLife()
+    this.rankPlayers()
+    this.checkDeath()
+    this.computeIncome()
+    return this.checkEndGame()
+  }
+
   initializeMinigamePhase() {
     this.state.phase = GamePhaseState.MINIGAME
     this.state.time = 20000
@@ -1150,32 +1184,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
 
     this.state.players.forEach((player: Player, key: string) => {
       if (player.alive) {
-        if (player.itemsProposition.length != 0) {
-          if (player.itemsProposition.length == 3) {
-            const i = player.itemsProposition.pop()
-            if (i) {
-              player.items.add(i)
-            }
-          }
-          while (player.itemsProposition.length > 0) {
-            player.itemsProposition.pop()
-          }
-        }
-
-        if (player.pokemonsProposition.length > 0) {
-          if (player.pokemonsProposition.length === 3) {
-            // auto pick if not chosen
-            const pkm = player.pokemonsProposition.pop()
-            if (pkm) {
-              this.state.additionalPokemons.push(pkm)
-              this.state.shop.addAdditionalPokemon(pkm)
-            }
-          }
-          while (player.pokemonsProposition.length > 0) {
-            player.pokemonsProposition.pop()
-          }
-        }
-
         if (stageIndex != -1) {
           player.opponentName = "PVE"
           player.opponentAvatar = NeutralStage[stageIndex].avatar
