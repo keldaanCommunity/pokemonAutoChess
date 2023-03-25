@@ -413,17 +413,6 @@ export default class Simulation extends Schema implements ISimulation {
             }
           })
         }
-        if (pokemon.items.has(Item.DELTA_ORB)) {
-          ;[-1, 0, 1].forEach((offset) => {
-            const value = this.board.getValue(
-              pokemon.positionX + offset,
-              pokemon.positionY
-            )
-            if (value) {
-              value.addAbilityPower(30)
-            }
-          })
-        }
         if (pokemon.items.has(Item.RUNE_PROTECT)) {
           const cells = this.board.getAdjacentCells(
             pokemon.positionX,
