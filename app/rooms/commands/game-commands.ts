@@ -1161,6 +1161,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
             }
           }
         }
+        if (isPVE && player.getLastBattleResult() == BattleResult.WIN) {
+          player.items.add(ItemFactory.createBasicRandomItem())
+        }
 
         if (
           this.room.getBenchSize(player.board) < 8 &&

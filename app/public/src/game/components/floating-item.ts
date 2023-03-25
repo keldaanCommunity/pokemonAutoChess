@@ -15,8 +15,8 @@ export class FloatingItem extends GameObjects.Container {
     super(scene, x, y)
     this.name = name
     this.id = id
-    this.circle = new GameObjects.Ellipse(scene, 0, 0, 30, 30)
-    this.circle.setStrokeStyle(2, 0xffffff)
+    this.circle = new GameObjects.Ellipse(scene, 0, 0, 30, 30, 0x61738a, 1)
+    this.circle.setStrokeStyle(1, 0xffffff, 0.7)
     this.add(this.circle)
     this.sprite = new GameObjects.Image(scene, 0, 0, "item", this.name)
     this.add(this.sprite)

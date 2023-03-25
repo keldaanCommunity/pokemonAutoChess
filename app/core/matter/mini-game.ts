@@ -51,14 +51,14 @@ export class MiniGame {
             const x =
               this.centerX +
               Math.cos(
-                this.engine.timing.timestamp * 0.001 +
+                this.engine.timing.timestamp * 0.0005 +
                   (Math.PI * item.index) / 4.5
               ) *
                 100
             const y =
               this.centerY +
               Math.sin(
-                this.engine.timing.timestamp * 0.001 +
+                this.engine.timing.timestamp * 0.0005 +
                   (Math.PI * item.index) / 4.5
               ) *
                 90
