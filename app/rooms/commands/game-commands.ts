@@ -9,7 +9,11 @@ import UserMetadata from "../../models/mongo-models/user-metadata"
 import GameRoom from "../game-room"
 import { Client, updateLobby } from "colyseus"
 import { Effect } from "../../types/enum/Effect"
-import { Title, FIGHTING_PHASE_DURATION } from "../../types"
+import {
+  Title,
+  FIGHTING_PHASE_DURATION,
+  MINIGAME_PHASE_DURATION
+} from "../../types"
 import { MapSchema } from "@colyseus/schema"
 import {
   GamePhaseState,
@@ -29,6 +33,7 @@ import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Pokemon } from "../../models/colyseus-models/pokemon"
 import { Ability } from "../../types/enum/Ability"
 import { Mythical1Shop, Mythical2Shop } from "../../models/shop"
+import { PokemonAvatar } from "../../models/colyseus-models/pokemon-avatar"
 
 export class OnShopCommand extends Command<
   GameRoom,
@@ -70,26 +75,6 @@ export class OnShopCommand extends Command<
           }
           this.room.updateEvolution(id)
         }
-      }
-    }
-  }
-}
-
-export class OnItemCommand extends Command<
-  GameRoom,
-  {
-    playerId: string
-    id: string
-  }
-> {
-  execute({ playerId, id }) {
-    const player = this.state.players.get(playerId)
-    if (player) {
-      if (player.itemsProposition.includes(id)) {
-        player.items.add(id)
-      }
-      while (player.itemsProposition.length > 0) {
-        player.itemsProposition.pop()
       }
     }
   }
@@ -449,24 +434,30 @@ export class OnDragDropItemCommand extends Command<
           break
         case Pkm.TYROGUE:
           let evol = Pkm.HITMONTOP
-          if(item === Item.CHARCOAL
-          || item === Item.MAGNET
-          || (item in ItemRecipe && ItemRecipe[item].includes(Item.CHARCOAL))
-          || (item in ItemRecipe && ItemRecipe[item].includes(Item.MAGNET))){
+          if (
+            item === Item.CHARCOAL ||
+            item === Item.MAGNET ||
+            (item in ItemRecipe && ItemRecipe[item].includes(Item.CHARCOAL)) ||
+            (item in ItemRecipe && ItemRecipe[item].includes(Item.MAGNET))
+          ) {
             evol = Pkm.HITMONLEE
           }
-          if(item === Item.HEART_SCALE
-            || item === Item.NEVER_MELT_ICE
-            || (item in ItemRecipe && ItemRecipe[item].includes(Item.HEART_SCALE))
-            || (item in ItemRecipe && ItemRecipe[item].includes(Item.NEVER_MELT_ICE))){
-              evol = Pkm.HITMONCHAN
-            }
+          if (
+            item === Item.HEART_SCALE ||
+            item === Item.NEVER_MELT_ICE ||
+            (item in ItemRecipe &&
+              ItemRecipe[item].includes(Item.HEART_SCALE)) ||
+            (item in ItemRecipe &&
+              ItemRecipe[item].includes(Item.NEVER_MELT_ICE))
+          ) {
+            evol = Pkm.HITMONCHAN
+          }
           newItemPokemon = PokemonFactory.transformPokemon(
             pokemon,
             evol,
             player.pokemonCollection.get(PkmIndex[evol])
           )
-          break;
+          break
       }
 
       if (newItemPokemon) {
@@ -703,6 +694,8 @@ export class OnUpdateCommand extends Command<
         if (everySimulationFinished) {
           updatePhaseNeeded = true
         }
+      } else if (this.state.phase === GamePhaseState.MINIGAME) {
+        this.room.miniGame.update(deltaTime)
       }
       if (updatePhaseNeeded) {
         return [new OnUpdatePhaseCommand()]
@@ -713,24 +706,27 @@ export class OnUpdateCommand extends Command<
 
 export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   execute() {
-    if (this.state.phase == GamePhaseState.PICK) {
+    if (this.state.phase == GamePhaseState.MINIGAME) {
+      this.room.miniGame.stop(this.state.players)
+      this.initializePickingPhase()
+    } else if (this.state.phase == GamePhaseState.PICK) {
+      this.stopPickingPhase()
       const commands = this.checkForLazyTeam()
       if (commands.length != 0) {
         return commands
       }
       this.initializeFightingPhase()
     } else if (this.state.phase == GamePhaseState.FIGHT) {
-      this.computeAchievments()
-      this.computeStreak()
-      this.computeLife()
-      this.rankPlayers()
-      this.checkDeath()
-      const kickCommands = this.checkEndGame()
+      const kickCommands = this.stopFightingPhase()
       if (kickCommands.length != 0) {
         return kickCommands
       }
-      this.computeIncome()
-      this.initializePickingPhase()
+      const isPVE = this.checkForPVE()
+      if (isPVE) {
+        this.initializeMinigamePhase()
+      } else {
+        this.initializePickingPhase()
+      }
     }
   }
 
@@ -1019,6 +1015,138 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         ? 50000
         : 30000
 
+    // First additional pick stage
+    if (this.state.stageLevel === 5) {
+      this.state.players.forEach((player: Player) => {
+        if (player.isBot) {
+          const p = this.room.additionalPokemonsPool1.pop()
+          if (p) {
+            this.state.additionalPokemons.push(p)
+            this.state.shop.addAdditionalPokemon(p)
+          }
+        } else {
+          for (let i = 0; i < 3; i++) {
+            const p = this.room.additionalPokemonsPool1.pop()
+            if (p) {
+              player.pokemonsProposition.push(p)
+            }
+          }
+        }
+      })
+    }
+
+    // Second additional pick stage
+    if (this.state.stageLevel === 8) {
+      this.state.players.forEach((player: Player) => {
+        if (player.isBot) {
+          const p = this.room.additionalPokemonsPool2.pop()
+          if (p) {
+            this.state.additionalPokemons.push(p)
+            this.state.shop.addAdditionalPokemon(p)
+          }
+        } else {
+          for (let i = 0; i < 3; i++) {
+            const p = this.room.additionalPokemonsPool2.pop()
+            if (p) {
+              player.pokemonsProposition.push(p)
+            }
+          }
+        }
+      })
+    }
+
+    if (this.state.stageLevel === 10) {
+      this.state.players.forEach((player: Player) => {
+        this.state.shop.assignMythicalPropositions(player, Mythical1Shop)
+      })
+    }
+
+    if (this.state.stageLevel === 20) {
+      this.state.players.forEach((player: Player) => {
+        this.state.shop.assignMythicalPropositions(player, Mythical2Shop)
+      })
+    }
+  }
+
+  checkForLazyTeam() {
+    const commands = new Array<Command>()
+
+    this.state.players.forEach((player, key) => {
+      const teamSize = this.room.getTeamSize(player.board)
+      if (teamSize < player.experienceManager.level) {
+        const numberOfPokemonsToMove = player.experienceManager.level - teamSize
+        for (let i = 0; i < numberOfPokemonsToMove; i++) {
+          const boardSize = this.room.getBenchSizeWithoutNeutral(player.board)
+          if (boardSize > 0) {
+            const coordinate = this.room.getFirstAvailablePositionInTeam(
+              player.id
+            )
+            const p = this.room.getFirstPokemonOnBench(player.board)
+            if (coordinate && p) {
+              const detail: { id: string; x: number; y: number } = {
+                id: p.id,
+                x: coordinate[0],
+                y: coordinate[1]
+              }
+              const client: IClient = {
+                auth: {
+                  uid: key
+                }
+              }
+              commands.push(
+                new OnDragDropCommand().setPayload({
+                  client: client,
+                  detail: detail
+                })
+              )
+            }
+          }
+        }
+      }
+    })
+    return commands
+  }
+
+  getPVEIndex(stageLevel: number) {
+    const result = NeutralStage.findIndex((stage) => {
+      return stage.turn == stageLevel
+    })
+
+    return result
+  }
+
+  checkForPVE() {
+    return this.getPVEIndex(this.state.stageLevel) >= 0
+  }
+
+  stopPickingPhase() {
+    this.state.players.forEach((player, key) => {
+      if (player.pokemonsProposition.length > 0) {
+        if (player.pokemonsProposition.length === 3) {
+          // auto pick if not chosen
+          const pkm = player.pokemonsProposition.pop()
+          if (pkm) {
+            this.state.additionalPokemons.push(pkm)
+            this.state.shop.addAdditionalPokemon(pkm)
+          }
+        }
+        while (player.pokemonsProposition.length > 0) {
+          player.pokemonsProposition.pop()
+        }
+      }
+    })
+  }
+
+  stopFightingPhase() {
+    const isPVE = this.checkForPVE()
+
+    this.computeAchievments()
+    this.computeStreak()
+    this.computeLife()
+    this.rankPlayers()
+    this.checkDeath()
+    this.computeIncome()
+
     this.state.players.forEach((player: Player, key: string) => {
       player.simulation.stop()
       if (player.alive) {
@@ -1040,13 +1168,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
           }
         }
         if (isPVE && player.getLastBattleResult() == BattleResult.WIN) {
-          const items = ItemFactory.createRandomItems()
-          // let items = process.env.MODE == 'dev' ? ItemFactory.createRandomFossils(): ItemFactory.createRandomItem();
-          items.forEach((item) => {
-            player.itemsProposition.push(item)
-          })
-          // const item = ItemFactory.createRandomItem();
-          // const item = ItemFactory.createSpecificItems([ItemS.BLUE_ORB]);
           player.items.add(ItemFactory.createBasicRandomItem())
         }
 
@@ -1110,109 +1231,13 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         })
       }
     })
-
-    // First additional pick stage
-    if (this.state.stageLevel === 5) {
-      this.state.players.forEach((player: Player) => {
-        if (player.isBot) {
-          const p = this.room.additionalPokemonsPool1.pop()
-          if (p) {
-            this.state.additionalPokemons.push(p)
-            this.state.shop.addAdditionalPokemon(p)
-          }
-        } else {
-          for (let i = 0; i < 3; i++) {
-            const p = this.room.additionalPokemonsPool1.pop()
-            if (p) {
-              player.pokemonsProposition.push(p)
-            }
-          }
-        }
-      })
-    }
-
-    // Second additional pick stage
-    if (this.state.stageLevel === 8) {
-      this.state.players.forEach((player: Player) => {
-        if (player.isBot) {
-          const p = this.room.additionalPokemonsPool2.pop()
-          if (p) {
-            this.state.additionalPokemons.push(p)
-            this.state.shop.addAdditionalPokemon(p)
-          }
-        } else {
-          for (let i = 0; i < 3; i++) {
-            const p = this.room.additionalPokemonsPool2.pop()
-            if (p) {
-              player.pokemonsProposition.push(p)
-            }
-          }
-        }
-      })
-    }
-
-    if (this.state.stageLevel === 10) {
-      this.state.players.forEach((player: Player) => {
-        this.state.shop.assignMythicalPropositions(player, Mythical1Shop)  
-      })
-    }
-    
-    if (this.state.stageLevel === 20) {
-      this.state.players.forEach((player: Player) => {
-        this.state.shop.assignMythicalPropositions(player, Mythical2Shop)  
-      })
-    }
+    return this.checkEndGame()
   }
 
-  checkForLazyTeam() {
-    const commands = new Array<Command>()
-
-    this.state.players.forEach((player, key) => {
-      const teamSize = this.room.getTeamSize(player.board)
-      if (teamSize < player.experienceManager.level) {
-        const numberOfPokemonsToMove = player.experienceManager.level - teamSize
-        for (let i = 0; i < numberOfPokemonsToMove; i++) {
-          const boardSize = this.room.getBenchSizeWithoutNeutral(player.board)
-          if (boardSize > 0) {
-            const coordinate = this.room.getFirstAvailablePositionInTeam(
-              player.id
-            )
-            const p = this.room.getFirstPokemonOnBench(player.board)
-            if (coordinate && p) {
-              const detail: { id: string; x: number; y: number } = {
-                id: p.id,
-                x: coordinate[0],
-                y: coordinate[1]
-              }
-              const client: IClient = {
-                auth: {
-                  uid: key
-                }
-              }
-              commands.push(
-                new OnDragDropCommand().setPayload({
-                  client: client,
-                  detail: detail
-                })
-              )
-            }
-          }
-        }
-      }
-    })
-    return commands
-  }
-
-  getPVEIndex(stageLevel: number) {
-    const result = NeutralStage.findIndex((stage) => {
-      return stage.turn == stageLevel
-    })
-
-    return result
-  }
-
-  checkForPVE() {
-    return this.getPVEIndex(this.state.stageLevel) >= 0
+  initializeMinigamePhase() {
+    this.state.phase = GamePhaseState.MINIGAME
+    this.state.time = MINIGAME_PHASE_DURATION
+    this.room.miniGame.initialize(this.state.players)
   }
 
   initializeFightingPhase() {
@@ -1227,32 +1252,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
 
     this.state.players.forEach((player: Player, key: string) => {
       if (player.alive) {
-        if (player.itemsProposition.length != 0) {
-          if (player.itemsProposition.length == 3) {
-            const i = player.itemsProposition.pop()
-            if (i) {
-              player.items.add(i)
-            }
-          }
-          while (player.itemsProposition.length > 0) {
-            player.itemsProposition.pop()
-          }
-        }
-
-        if (player.pokemonsProposition.length > 0) {
-          if (player.pokemonsProposition.length === 3) {
-            // auto pick if not chosen
-            const pkm = player.pokemonsProposition.pop()
-            if (pkm) {
-              this.state.additionalPokemons.push(pkm)
-              this.state.shop.addAdditionalPokemon(pkm)
-            }
-          }
-          while (player.pokemonsProposition.length > 0) {
-            player.pokemonsProposition.pop()
-          }
-        }
-
         if (stageIndex != -1) {
           player.opponentName = "PVE"
           player.opponentAvatar = NeutralStage[stageIndex].avatar

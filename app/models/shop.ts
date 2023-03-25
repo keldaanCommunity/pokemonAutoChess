@@ -292,14 +292,27 @@ export default class Shop {
 
   assignMythicalPropositions(player: Player, list: Pkm[]) {
     const mythicals = [...list]
-    const synergies = Array.from(player.synergies).filter(([synergy, value]) => value > 0).map(([synergy, value]) => synergy)
-    const top2Synergies = Array.from(player.synergies).sort(([s1, v1], [s2, v2]) => v2 - v1).slice(0,2).map(([synergy, value]) => synergy)
+    const synergies = Array.from(player.synergies)
+      .filter(([synergy, value]) => value > 0)
+      .map(([synergy, value]) => synergy)
+    const top2Synergies = Array.from(player.synergies)
+      .sort(([s1, v1], [s2, v2]) => v2 - v1)
+      .slice(0, 2)
+      .map(([synergy, value]) => synergy)
 
-    const mythicalsTopSynergy = mythicals.filter(m => PokemonFactory.createPokemonFromName(m).types.some(t => top2Synergies.includes(t)))
-    const mythicalsCommonSynergy = mythicals.filter(m => PokemonFactory.createPokemonFromName(m).types.some(t => synergies.includes(t)))
+    const mythicalsTopSynergy = mythicals.filter((m) =>
+      PokemonFactory.createPokemonFromName(m).types.some((t) =>
+        top2Synergies.includes(t)
+      )
+    )
+    const mythicalsCommonSynergy = mythicals.filter((m) =>
+      PokemonFactory.createPokemonFromName(m).types.some((t) =>
+        synergies.includes(t)
+      )
+    )
 
     const shop: Pkm[] = []
-    if(mythicalsTopSynergy.length > 0){
+    if (mythicalsTopSynergy.length > 0) {
       const pkm = pickRandomIn(mythicalsTopSynergy)
       removeInArray(mythicals, pkm)
       removeInArray(mythicalsTopSynergy, pkm)
@@ -307,8 +320,8 @@ export default class Shop {
       shop.push(pkm)
     }
 
-    for(let i=0; i<2; i++){
-      if(mythicalsCommonSynergy.length > 0){
+    for (let i = 0; i < 2; i++) {
+      if (mythicalsCommonSynergy.length > 0) {
         const pkm = pickRandomIn(mythicalsCommonSynergy)
         removeInArray(mythicals, pkm)
         removeInArray(mythicalsCommonSynergy, pkm)
@@ -316,14 +329,14 @@ export default class Shop {
       }
     }
 
-    while(shop.length < 6){
+    while (shop.length < 6) {
       const pkm = pickRandomIn(mythicals)
       removeInArray(mythicals, pkm)
       shop.push(pkm)
     }
 
     shuffleArray(shop)
-    shop.forEach(pkm => player.pokemonsProposition.push(pkm))
+    shop.forEach((pkm) => player.pokemonsProposition.push(pkm))
   }
 
   getRandomPokemonFromPool(pool: Map<Pkm, number>, finals: Array<Pkm>): Pkm {

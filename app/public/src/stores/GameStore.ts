@@ -28,7 +28,6 @@ interface GameStateStore {
   shopLocked: boolean
   experienceManager: ExperienceManager
   shop: Pkm[]
-  itemsProposition: string[]
   pokemonsProposition: Pkm[]
   currentPlayerSynergies: [string, number][]
   currentPlayerOpponentName: string
@@ -63,7 +62,6 @@ const initialState: GameStateStore = {
   shopLocked: false,
   experienceManager: new ExperienceManager(),
   shop: new Array<Pkm>(),
-  itemsProposition: new Array<Item>(),
   pokemonsProposition: new Array<Pkm>(),
   currentPlayerSynergies: new Array<[Synergy, number]>(),
   currentPlayerOpponentName: "",
@@ -103,7 +101,7 @@ export const gameSlice = createSlice({
       })
     },
     setRoundTime: (state, action: PayloadAction<number>) => {
-      if(action.payload > state.roundTime) state.phaseDuration = action.payload;
+      if (action.payload > state.roundTime) state.phaseDuration = action.payload
       state.roundTime = action.payload
     },
     setAfterGameId: (state, action: PayloadAction<string>) => {
@@ -155,9 +153,6 @@ export const gameSlice = createSlice({
     },
     setShop: (state, action: PayloadAction<ArraySchema<Pkm>>) => {
       state.shop = action.payload
-    },
-    setItemsProposition: (state, action: PayloadAction<ArraySchema<Item>>) => {
-      state.itemsProposition = JSON.parse(JSON.stringify(action.payload))
     },
     setPokemonProposition: (state, action: PayloadAction<Pkm[]>) => {
       state.pokemonsProposition = JSON.parse(JSON.stringify(action.payload))
@@ -469,8 +464,7 @@ export const {
   setMoney,
   setShopLocked,
   changePlayer,
-  setShop,
-  setItemsProposition
+  setShop
 } = gameSlice.actions
 
 export default gameSlice.reducer

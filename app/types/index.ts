@@ -36,6 +36,8 @@ export * from "./enum/Emotion"
 
 export const FIGHTING_PHASE_DURATION = 40000
 
+export const MINIGAME_PHASE_DURATION = 25000
+
 export const CDN_PORTRAIT_URL =
   "https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/"
 
@@ -145,7 +147,8 @@ export enum Transfer {
   POKEMON_DAMAGE = "POKEMON_DAMAGE",
   POKEMON_HEAL = "POKEMON_HEAL",
   UNOWN_ENCOUNTER = "UNOWN_ENCOUNTER",
-  UNOWN_WANDERING = "UNOWN_WANDERING"
+  UNOWN_WANDERING = "UNOWN_WANDERING",
+  VECTOR = "VECTOR"
 }
 
 export enum AttackSprite {
@@ -250,6 +253,22 @@ export interface ISimplePlayer {
   synergies: Array<{ name: Synergy; value: number }>
 }
 
+export interface IPokemonAvatar {
+  id: string
+  name: Pkm
+  shiny: boolean
+  x: number
+  y: number
+  action: PokemonActionState
+}
+
+export interface IFloatingItem {
+  id: string
+  name: Item
+  x: number
+  y: number
+}
+
 export interface IPlayer {
   id: string
   name: string
@@ -259,7 +278,6 @@ export interface IPlayer {
   simulation: ISimulation
   experienceManager: ExperienceManager
   synergies: Synergies
-  itemsProposition: Item[]
   money: number
   life: number
   shopLocked: boolean
@@ -350,8 +368,16 @@ export interface IDpsHeal {
   shield: number
 }
 
-export function instanceofPokemonEntity(obj: IPokemon | IPokemonEntity) {
+export function instanceofPokemonEntity(
+  obj: IPokemon | IPokemonEntity | IPokemonAvatar
+) {
   return "mana" in obj
+}
+
+export function instanceofPokemonAvatar(
+  obj: IPokemon | IPokemonEntity | IPokemonAvatar
+) {
+  return !("stars" in obj)
 }
 
 export interface IPokemonEntity {

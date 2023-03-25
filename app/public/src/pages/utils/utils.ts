@@ -22,6 +22,14 @@ export function transformAttackCoordinate(x: number, y: number) {
   return [28 * 24 + 96 * x, 664 - 96 * y]
 }
 
+export function transformMiniGameXCoordinate(x: number) {
+  return 28 * 24 + x
+}
+
+export function transformMiniGameYCoordinate(y: number) {
+  return 664 - y
+}
+
 export function getOrientation(x1: number, y1: number, x2: number, y2: number) {
   let angle = Math.atan2(y2 - y1, x2 - x1)
   if (angle < 0) {

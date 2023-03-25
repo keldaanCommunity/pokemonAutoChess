@@ -148,9 +148,6 @@ export const networkSlice = createSlice({
     pokemonPropositionClick: (state, action: PayloadAction<Pkm>) => {
       state.game?.send(Transfer.POKEMON_PROPOSITION, action.payload)
     },
-    itemClick: (state, action: PayloadAction<string>) => {
-      state.game?.send(Transfer.ITEM, { id: action.payload })
-    },
     gameStart: (state, action: PayloadAction<string>) => {
       state.preparation?.send(Transfer.GAME_START, { id: action.payload })
     },
@@ -249,7 +246,6 @@ export const {
   removeBot,
   toggleReady,
   requestTilemap,
-  itemClick,
   shopClick,
   levelClick,
   lockClick,

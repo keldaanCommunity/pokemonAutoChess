@@ -12,7 +12,8 @@ export enum Rarity {
 
 export enum GamePhaseState {
   PICK,
-  FIGHT
+  FIGHT,
+  MINIGAME
 }
 
 export enum PokemonActionState {

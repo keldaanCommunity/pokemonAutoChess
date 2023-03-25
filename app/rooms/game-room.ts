@@ -3,11 +3,12 @@ import { Dispatcher } from "@colyseus/command"
 import GameState from "./states/game-state"
 import Player from "../models/colyseus-models/player"
 import { MapSchema } from "@colyseus/schema"
-import UserMetadata, { IUserMetadata } from "../models/mongo-models/user-metadata"
+import UserMetadata, {
+  IUserMetadata
+} from "../models/mongo-models/user-metadata"
 import BOT from "../models/mongo-models/bot-v2"
 import {
   OnShopCommand,
-  OnItemCommand,
   OnSellDropCommand,
   OnRefreshCommand,
   OnLockCommand,
@@ -47,18 +48,21 @@ import BannedUser from "../models/mongo-models/banned-user"
 import { pickRandomIn, shuffleArray } from "../utils/random"
 import { Climate, Rarity } from "../types/enum/Game"
 import { FilterQuery } from "mongoose"
+import { MiniGame } from "../core/matter/mini-game"
 
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>
   eloEngine: EloRank
   additionalPokemonsPool1: Array<Pkm>
   additionalPokemonsPool2: Array<Pkm>
+  miniGame: MiniGame
   constructor() {
     super()
     this.dispatcher = new Dispatcher(this)
     this.eloEngine = new EloRank()
     this.additionalPokemonsPool1 = new Array<Pkm>()
     this.additionalPokemonsPool2 = new Array<Pkm>()
+    this.miniGame = new MiniGame()
   }
 
   // When room is initialized
@@ -77,12 +81,17 @@ export default class GameRoom extends Room<GameState> {
     })
     // console.log(options);
     this.setState(new GameState(options.preparationId, options.name))
+    this.miniGame.create(this.state.avatars, this.state.floatingItems)
     Object.keys(PRECOMPUTED_TYPE_POKEMONS).forEach((type) => {
       PRECOMPUTED_TYPE_POKEMONS[type].additionalPokemons.forEach((p) => {
         const pokemon = PokemonFactory.createPokemonFromName(p)
-        if (!this.additionalPokemonsPool1.includes(p) && !this.additionalPokemonsPool2.includes(p) && pokemon.stars === 1) {
-          if([Rarity.COMMON, Rarity.UNCOMMON].includes(pokemon.rarity)){
-            this.additionalPokemonsPool1.push(p)  
+        if (
+          !this.additionalPokemonsPool1.includes(p) &&
+          !this.additionalPokemonsPool2.includes(p) &&
+          pokemon.stars === 1
+        ) {
+          if ([Rarity.COMMON, Rarity.UNCOMMON].includes(pokemon.rarity)) {
+            this.additionalPokemonsPool1.push(p)
           } else {
             this.additionalPokemonsPool2.push(p)
           }
@@ -124,19 +133,6 @@ export default class GameRoom extends Room<GameState> {
           })
         } catch (error) {
           console.log("shop error", message, error)
-        }
-      }
-    })
-
-    this.onMessage(Transfer.ITEM, (client, message) => {
-      if (!this.state.gameFinished) {
-        try {
-          this.dispatcher.dispatch(new OnItemCommand(), {
-            playerId: client.auth.uid,
-            id: message.id
-          })
-        } catch (error) {
-          console.log(error)
         }
       }
     })
@@ -210,6 +206,17 @@ export default class GameRoom extends Room<GameState> {
             client.send(Transfer.DRAG_DROP_FAILED, errorInformation)
             console.log("drag drop error", error)
           }
+        }
+      }
+    )
+
+    this.onMessage(
+      Transfer.VECTOR,
+      (client, message: { x: number; y: number }) => {
+        try {
+          this.miniGame.applyVector(client.auth.uid, message.x, message.y)
+        } catch (error) {
+          console.log(error)
         }
       }
     )
@@ -296,7 +303,8 @@ export default class GameRoom extends Room<GameState> {
               })
             }
             u.save()
-          })
+          }
+        )
       } catch (error) {
         console.log(error)
       }

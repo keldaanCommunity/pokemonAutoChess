@@ -12,8 +12,10 @@ import {
   IPokemon,
   IPokemonEntity,
   instanceofPokemonEntity,
+  instanceofPokemonAvatar,
   Emotion,
-  AttackSprite
+  AttackSprite,
+  IPokemonAvatar
 } from "../../../../types"
 import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
 import MoveTo from "phaser3-rex-plugins/plugins/moveto"
@@ -35,6 +37,7 @@ import {
   OrientationVector
 } from "../../../../utils/orientation"
 import { clamp } from "../../../../utils/number"
+import PokemonFactory from "../../../../models/pokemon-factory"
 
 export default class Pokemon extends DraggableObject {
   evolution: Pkm
@@ -95,16 +98,25 @@ export default class Pokemon extends DraggableObject {
   fairyField: GameObjects.Sprite | undefined
   voidBoost: GameObjects.Sprite | undefined
   stars: number
+  playerId: string
+  tooltip: boolean
+  circle: GameObjects.Ellipse | undefined
 
   constructor(
     scene: GameScene,
     x: number,
     y: number,
-    pokemon: IPokemonEntity | IPokemon,
+    pokemon_: IPokemonEntity | IPokemon | IPokemonAvatar,
     playerId: string,
     inBattle: boolean
   ) {
     super(scene, x, y, 75, 75, playerId !== scene.uid)
+    this.playerId = playerId
+    const pokemon: IPokemonEntity | IPokemon = instanceofPokemonAvatar(pokemon_)
+      ? PokemonFactory.createPokemonFromName(pokemon_.name)
+      : (pokemon_ as IPokemonEntity | IPokemon)
+
+    this.tooltip = !instanceofPokemonAvatar(pokemon_)
     this.stars = pokemon.stars
     this.evolution = instanceofPokemonEntity(pokemon)
       ? Pkm.DEFAULT
@@ -153,6 +165,11 @@ export default class Pokemon extends DraggableObject {
     } else {
       this.orientation = Orientation.DOWNLEFT
       this.action = PokemonActionState.WALK
+    }
+    if (instanceofPokemonAvatar(pokemon_)) {
+      this.circle = new GameObjects.Ellipse(scene, 0, 0, 50, 50)
+      this.circle.setStrokeStyle(1, 0xffffff, 0.7)
+      this.add(this.circle)
     }
     this.sprite = new GameObjects.Sprite(
       scene,
@@ -245,16 +262,19 @@ export default class Pokemon extends DraggableObject {
     this.setDepth(5)
   }
 
-  updateTooltipPosition(){
-    if(this.detail){
+  updateTooltipPosition() {
+    if (this.detail) {
       const absX = this.x + this.detail.width / 2 + 40
       const minX = this.detail.width / 2
       const maxX = window.innerWidth - this.detail.width / 2
-      const absY = this.y -this.detail.height / 2 - 40
+      const absY = this.y - this.detail.height / 2 - 40
       const minY = this.detail.height / 2
       const maxY = window.innerHeight - this.detail.height / 2
-      const [x,y] = [clamp(absX, minX, maxX) - this.x, clamp(absY, minY, maxY) - this.y]
-      this.detail.setPosition(x,y)
+      const [x, y] = [
+        clamp(absX, minX, maxX) - this.x,
+        clamp(absY, minY, maxY) - this.y
+      ]
+      this.detail.setPosition(x, y)
     }
   }
 
@@ -268,7 +288,7 @@ export default class Pokemon extends DraggableObject {
 
   onPointerDown(pointer: Phaser.Input.Pointer) {
     super.onPointerDown(pointer)
-    if (pointer.rightButtonDown()) {
+    if (pointer.rightButtonDown() && this.tooltip) {
       const s = <GameScene>this.scene
       if (s.lastPokemonDetail && s.lastPokemonDetail != this) {
         s.lastPokemonDetail.closeDetail()
