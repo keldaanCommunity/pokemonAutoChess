@@ -434,24 +434,30 @@ export class OnDragDropItemCommand extends Command<
           break
         case Pkm.TYROGUE:
           let evol = Pkm.HITMONTOP
-          if(item === Item.CHARCOAL
-          || item === Item.MAGNET
-          || (item in ItemRecipe && ItemRecipe[item].includes(Item.CHARCOAL))
-          || (item in ItemRecipe && ItemRecipe[item].includes(Item.MAGNET))){
+          if (
+            item === Item.CHARCOAL ||
+            item === Item.MAGNET ||
+            (item in ItemRecipe && ItemRecipe[item].includes(Item.CHARCOAL)) ||
+            (item in ItemRecipe && ItemRecipe[item].includes(Item.MAGNET))
+          ) {
             evol = Pkm.HITMONLEE
           }
-          if(item === Item.HEART_SCALE
-            || item === Item.NEVER_MELT_ICE
-            || (item in ItemRecipe && ItemRecipe[item].includes(Item.HEART_SCALE))
-            || (item in ItemRecipe && ItemRecipe[item].includes(Item.NEVER_MELT_ICE))){
-              evol = Pkm.HITMONCHAN
-            }
+          if (
+            item === Item.HEART_SCALE ||
+            item === Item.NEVER_MELT_ICE ||
+            (item in ItemRecipe &&
+              ItemRecipe[item].includes(Item.HEART_SCALE)) ||
+            (item in ItemRecipe &&
+              ItemRecipe[item].includes(Item.NEVER_MELT_ICE))
+          ) {
+            evol = Pkm.HITMONCHAN
+          }
           newItemPokemon = PokemonFactory.transformPokemon(
             pokemon,
             evol,
             player.pokemonCollection.get(PkmIndex[evol])
           )
-          break;
+          break
       }
 
       if (newItemPokemon) {
@@ -1051,13 +1057,13 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
 
     if (this.state.stageLevel === 10) {
       this.state.players.forEach((player: Player) => {
-        this.state.shop.assignMythicalPropositions(player, Mythical1Shop)  
+        this.state.shop.assignMythicalPropositions(player, Mythical1Shop)
       })
     }
-    
+
     if (this.state.stageLevel === 20) {
       this.state.players.forEach((player: Player) => {
-        this.state.shop.assignMythicalPropositions(player, Mythical2Shop)  
+        this.state.shop.assignMythicalPropositions(player, Mythical2Shop)
       })
     }
   }
@@ -1186,13 +1192,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         player.opponentName = ""
         if (!player.isBot) {
           if (!player.shopLocked) {
-            if (this.state.stageLevel == 10) {
-              this.state.shop.assignFirstMythicalShop(player)
-            } else if (this.state.stageLevel == 20) {
-              this.state.shop.assignSecondMythicalShop(player)
-            } else {
-              this.state.shop.assignShop(player)
-            }
+            this.state.shop.assignShop(player)
           } else {
             player.shopLocked = false
           }

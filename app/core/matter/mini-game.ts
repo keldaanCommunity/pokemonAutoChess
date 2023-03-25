@@ -120,15 +120,17 @@ export class MiniGame {
 
   initialize(players: MapSchema<Player>) {
     let i = 0
-    let alivePlayers = 0
+    let alivePlayers = new Array<Player>()
     players.forEach((p) => {
       if (p.alive) {
-        alivePlayers++
+        alivePlayers.push(p)
       }
     })
-    players.forEach((player) => {
-      const x = this.centerX + Math.cos((2 * Math.PI * i) / alivePlayers) * 300
-      const y = this.centerY + Math.sin((2 * Math.PI * i) / alivePlayers) * 250
+    alivePlayers.forEach((player) => {
+      const x =
+        this.centerX + Math.cos((2 * Math.PI * i) / alivePlayers.length) * 300
+      const y =
+        this.centerY + Math.sin((2 * Math.PI * i) / alivePlayers.length) * 250
       const avatar = new PokemonAvatar(
         player.id,
         player.avatar,
