@@ -99,6 +99,8 @@ export default class Pokemon extends DraggableObject {
   voidBoost: GameObjects.Sprite | undefined
   stars: number
   playerId: string
+  tooltip: boolean
+  circle: GameObjects.Ellipse | undefined
 
   constructor(
     scene: GameScene,
@@ -114,6 +116,7 @@ export default class Pokemon extends DraggableObject {
       ? PokemonFactory.createPokemonFromName(pokemon_.name)
       : (pokemon_ as IPokemonEntity | IPokemon)
 
+    this.tooltip = !instanceofPokemonAvatar(pokemon_)
     this.stars = pokemon.stars
     this.evolution = instanceofPokemonEntity(pokemon)
       ? Pkm.DEFAULT
@@ -162,6 +165,11 @@ export default class Pokemon extends DraggableObject {
     } else {
       this.orientation = Orientation.DOWNLEFT
       this.action = PokemonActionState.WALK
+    }
+    if (instanceofPokemonAvatar(pokemon_)) {
+      this.circle = new GameObjects.Ellipse(scene, 0, 0, 50, 50)
+      this.circle.setStrokeStyle(1, 0xffffff, 0.7)
+      this.add(this.circle)
     }
     this.sprite = new GameObjects.Sprite(
       scene,
@@ -280,7 +288,7 @@ export default class Pokemon extends DraggableObject {
 
   onPointerDown(pointer: Phaser.Input.Pointer) {
     super.onPointerDown(pointer)
-    if (pointer.rightButtonDown()) {
+    if (pointer.rightButtonDown() && this.tooltip) {
       const s = <GameScene>this.scene
       if (s.lastPokemonDetail && s.lastPokemonDetail != this) {
         s.lastPokemonDetail.closeDetail()

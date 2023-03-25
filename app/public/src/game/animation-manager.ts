@@ -1520,6 +1520,18 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: "WATER/cell",
+      frames: this.game.anims.generateFrameNames("attacks", {
+        start: 0,
+        end: 6,
+        zeroPad: 3,
+        prefix: "WATER/cell/"
+      }),
+      duration: 200,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.FAKE_TEARS,
       frames: this.game.anims.generateFrameNames(Ability.FAKE_TEARS, {
         start: 0,

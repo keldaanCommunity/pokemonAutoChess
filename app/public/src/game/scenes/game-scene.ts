@@ -473,7 +473,8 @@ export default class GameScene extends Scene {
         this,
         this.animationManager,
         this.uid,
-        this.room.state.avatars
+        this.room.state.avatars,
+        this.room.state.floatingItems
       )
       this.itemsContainer = new ItemsContainer(
         this,
@@ -670,6 +671,26 @@ export default class GameScene extends Scene {
       ) {
         const vector = this.minigameManager.getVector(pointer.x, pointer.y)
         this.room?.send(Transfer.VECTOR, vector)
+
+        const clickAnimation = this.add.sprite(
+          pointer.x,
+          pointer.y,
+          "attacks",
+          `WATER/cell/000`
+        )
+        clickAnimation.setDepth(7)
+        clickAnimation.anims.play("WATER/cell")
+        this.tweens.add({
+          targets: clickAnimation,
+          x: pointer.x,
+          y: pointer.y,
+          ease: "linear",
+          yoyo: true,
+          duration: 200,
+          onComplete: () => {
+            clickAnimation.destroy()
+          }
+        })
       }
     })
 

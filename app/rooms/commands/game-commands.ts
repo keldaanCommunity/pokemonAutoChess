@@ -719,7 +719,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     if (this.state.stageLevel % 2 === 0) {
       this.initializeMinigamePhase()
     } else if (this.state.phase == GamePhaseState.MINIGAME) {
-      this.room.miniGame.stop()
+      this.room.miniGame.stop(this.state.players)
       this.initializePickingPhase()
     } else if (this.state.phase == GamePhaseState.PICK) {
       const commands = this.checkForLazyTeam()
@@ -1133,7 +1133,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
 
   initializeMinigamePhase() {
     this.state.phase = GamePhaseState.MINIGAME
-    this.state.time = FIGHTING_PHASE_DURATION
+    this.state.time = 20000
     this.state.stageLevel += 1
     this.room.miniGame.initialize(this.state.players)
   }

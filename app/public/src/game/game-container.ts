@@ -15,6 +15,7 @@ import {
   IPlayer,
   IPokemon,
   IPokemonAvatar,
+  IFloatingItem,
   IPokemonEntity,
   Transfer
 } from "../../../types"
@@ -92,6 +93,19 @@ class GameContainer {
 
     this.room.state.avatars.onRemove = (value, key) => {
       this.handleAvatarRemove(value)
+    }
+
+    this.room.state.floatingItems.onAdd = (floatingItem) => {
+      this.handleFloatingItemAdd(floatingItem)
+      floatingItem.onChange = (changes) => {
+        changes.forEach((change) => {
+          this.handleFloatingItemChange(floatingItem, change)
+        })
+      }
+    }
+
+    this.room.state.floatingItems.onRemove = (value, key) => {
+      this.handleFloatingItemRemove(value)
     }
     this.room.onError((err) => console.log("room error", err))
   }
@@ -472,6 +486,15 @@ class GameContainer {
     }
   }
 
+  handleFloatingItemAdd(floatingItem: IFloatingItem) {
+    if (this.game != null && this.game.scene.getScene("gameScene")) {
+      const g = <GameScene>this.game.scene.getScene("gameScene")
+      if (g.minigameManager) {
+        g.minigameManager.addItem(floatingItem)
+      }
+    }
+  }
+
   handleBoardPokemonAdd(player: IPlayer, pokemon: IPokemon) {
     if (this.game != null && this.game.scene.getScene("gameScene")) {
       const g = <GameScene>this.game.scene.getScene("gameScene")
@@ -499,6 +522,15 @@ class GameContainer {
     }
   }
 
+  handleFloatingItemRemove(floatingItem: IFloatingItem) {
+    if (this.game != null && this.game.scene.getScene("gameScene")) {
+      const g = <GameScene>this.game.scene.getScene("gameScene")
+      if (g.minigameManager) {
+        g.minigameManager.removeItem(floatingItem)
+      }
+    }
+  }
+
   handleBoardPokemonChange(
     player: IPlayer,
     pokemon: IPokemon,
@@ -517,6 +549,18 @@ class GameContainer {
       const g = <GameScene>this.game.scene.getScene("gameScene")
       if (g.minigameManager) {
         g.minigameManager.changePokemon(avatar, change)
+      }
+    }
+  }
+
+  handleFloatingItemChange(
+    floatingItem: IFloatingItem,
+    change: DataChange<any>
+  ) {
+    if (this.game != null && this.game.scene.getScene("gameScene")) {
+      const g = <GameScene>this.game.scene.getScene("gameScene")
+      if (g.minigameManager) {
+        g.minigameManager.changeItem(floatingItem, change)
       }
     }
   }
