@@ -11,26 +11,25 @@ const style: CSS.Properties = {
 }
 
 export default function GameItemsProposition() {
-  const itemsProposition = useAppSelector(
-    (state) => state.game.itemsProposition
-  )
+  const itemsProposition = useAppSelector((state) => state.game.itemsProposition)
+  const pokemonsProposition = useAppSelector((state) => state.game.pokemonsProposition)
+
   const [visible, setVisible] = useState(true)
-  if (itemsProposition.length > 0) {
+  if (itemsProposition.length > 0 && pokemonsProposition.length === 0) {
     return (
       <div style={style}>
-        {visible ? (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              padding: "10px"
-            }}
-          >
-            {itemsProposition.map((e, i) => {
-              return <GameItem key={i} item={e} />
-            })}
-          </div>
-        ) : null}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            padding: "10px",
+            visibility: visible ? 'visible' : 'hidden'
+          }}
+        >
+          {itemsProposition.map((e, i) => {
+            return <GameItem key={i} item={e} />
+          })}
+        </div>
 
         <div style={{ display: "flex", justifyContent: "center" }}>
           <button

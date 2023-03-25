@@ -105,8 +105,10 @@ export class OnPokemonPropositionCommand extends Command<
   execute({ playerId, pkm }) {
     const player = this.state.players.get(playerId)
     if (player && !this.state.additionalPokemons.includes(pkm)) {
-      this.state.additionalPokemons.push(pkm)
-      this.state.shop.addAdditionalPokemon(pkm)
+      if (this.state.stageLevel === 5 || this.state.stageLevel === 8) {
+        this.state.additionalPokemons.push(pkm)
+        this.state.shop.addAdditionalPokemon(pkm)
+      }
       if (this.room.getBenchSize(player.board) < 8) {
         const pokemon = PokemonFactory.createPokemonFromName(
           pkm,
@@ -1069,13 +1071,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         player.opponentName = ""
         if (!player.isBot) {
           if (!player.shopLocked) {
-            if (this.state.stageLevel == 10) {
-              this.state.shop.assignMythicalShop(player, Mythical1Shop)
-            } else if (this.state.stageLevel == 20) {
-              this.state.shop.assignMythicalShop(player, Mythical2Shop)
-            } else {
-              this.state.shop.assignShop(player)
-            }
+            this.state.shop.assignShop(player)
           } else {
             player.shopLocked = false
           }
@@ -1152,6 +1148,18 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
             }
           }
         }
+      })
+    }
+
+    if (this.state.stageLevel === 10) {
+      this.state.players.forEach((player: Player) => {
+        this.state.shop.assignMythicalPropositions(player, Mythical1Shop)  
+      })
+    }
+    
+    if (this.state.stageLevel === 20) {
+      this.state.players.forEach((player: Player) => {
+        this.state.shop.assignMythicalPropositions(player, Mythical2Shop)  
       })
     }
   }

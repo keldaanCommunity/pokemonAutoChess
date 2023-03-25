@@ -290,7 +290,7 @@ export default class Shop {
     }
   }
 
-  assignMythicalShop(player: Player, list: Pkm[]) {
+  assignMythicalPropositions(player: Player, list: Pkm[]) {
     const mythicals = [...list]
     const synergies = Array.from(player.synergies).filter(([synergy, value]) => value > 0).map(([synergy, value]) => synergy)
     const top2Synergies = Array.from(player.synergies).sort(([s1, v1], [s2, v2]) => v2 - v1).slice(0,2).map(([synergy, value]) => synergy)
@@ -323,9 +323,7 @@ export default class Shop {
     }
 
     shuffleArray(shop)
-    for (let i = 0; i < 6; i++) {
-      player.shop[i] = shop[i]
-    }
+    shop.forEach(pkm => player.pokemonsProposition.push(pkm))
   }
 
   getRandomPokemonFromPool(pool: Map<Pkm, number>, finals: Array<Pkm>): Pkm {
