@@ -9,7 +9,6 @@ import UserMetadata, {
 import BOT from "../models/mongo-models/bot-v2"
 import {
   OnShopCommand,
-  OnItemCommand,
   OnSellDropCommand,
   OnRefreshCommand,
   OnLockCommand,
@@ -134,19 +133,6 @@ export default class GameRoom extends Room<GameState> {
           })
         } catch (error) {
           console.log("shop error", message, error)
-        }
-      }
-    })
-
-    this.onMessage(Transfer.ITEM, (client, message) => {
-      if (!this.state.gameFinished) {
-        try {
-          this.dispatcher.dispatch(new OnItemCommand(), {
-            playerId: client.auth.uid,
-            id: message.id
-          })
-        } catch (error) {
-          console.log(error)
         }
       }
     })

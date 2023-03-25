@@ -565,7 +565,10 @@ export default class GameScene extends Scene {
 
   updatePhase() {
     this.resetDragState()
-    if (this.room?.state.phase == GamePhaseState.FIGHT) {
+    if (
+      this.room?.state.phase == GamePhaseState.FIGHT ||
+      this.room?.state.phase === GamePhaseState.MINIGAME
+    ) {
       this.board?.battleMode()
     } else {
       this.board?.pickMode()

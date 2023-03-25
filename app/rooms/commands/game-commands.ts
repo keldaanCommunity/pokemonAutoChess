@@ -9,7 +9,11 @@ import UserMetadata from "../../models/mongo-models/user-metadata"
 import GameRoom from "../game-room"
 import { Client, updateLobby } from "colyseus"
 import { Effect } from "../../types/enum/Effect"
-import { Title, FIGHTING_PHASE_DURATION } from "../../types"
+import {
+  Title,
+  FIGHTING_PHASE_DURATION,
+  MINIGAME_PHASE_DURATION
+} from "../../types"
 import { MapSchema } from "@colyseus/schema"
 import {
   GamePhaseState,
@@ -71,26 +75,6 @@ export class OnShopCommand extends Command<
           }
           this.room.updateEvolution(id)
         }
-      }
-    }
-  }
-}
-
-export class OnItemCommand extends Command<
-  GameRoom,
-  {
-    playerId: string
-    id: string
-  }
-> {
-  execute({ playerId, id }) {
-    const player = this.state.players.get(playerId)
-    if (player) {
-      if (player.itemsProposition.includes(id)) {
-        player.items.add(id)
-      }
-      while (player.itemsProposition.length > 0) {
-        player.itemsProposition.pop()
       }
     }
   }
@@ -731,8 +715,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
       if (kickCommands.length != 0) {
         return kickCommands
       }
-
-      this.initializePickingPhase()
+      const isPVE = this.checkForPVE()
+      if (isPVE) {
+        this.initializeMinigamePhase()
+      } else {
+        this.initializePickingPhase()
+      }
     }
   }
 
@@ -1127,18 +1115,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
 
   stopPickingPhase() {
     this.state.players.forEach((player, key) => {
-      if (player.itemsProposition.length != 0) {
-        if (player.itemsProposition.length == 3) {
-          const i = player.itemsProposition.pop()
-          if (i) {
-            player.items.add(i)
-          }
-        }
-        while (player.itemsProposition.length > 0) {
-          player.itemsProposition.pop()
-        }
-      }
-
       if (player.pokemonsProposition.length > 0) {
         if (player.pokemonsProposition.length === 3) {
           // auto pick if not chosen
@@ -1156,19 +1132,108 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   }
 
   stopFightingPhase() {
+    const isPVE = this.checkForPVE()
+
     this.computeAchievments()
     this.computeStreak()
     this.computeLife()
     this.rankPlayers()
     this.checkDeath()
     this.computeIncome()
+
+    this.state.players.forEach((player: Player, key: string) => {
+      player.simulation.stop()
+      if (player.alive) {
+        if (player.isBot) {
+          player.experienceManager.level = Math.min(
+            9,
+            Math.round(this.state.stageLevel / 2)
+          )
+        } else {
+          if (Math.random() < 0.037) {
+            const client = this.room.clients.find(
+              (cli) => cli.auth.uid === player.id
+            )
+            if (client) {
+              setTimeout(() => {
+                client.send(Transfer.UNOWN_WANDERING)
+              }, Math.round((5 + 15 * Math.random()) * 1000))
+            }
+          }
+        }
+
+        if (
+          this.room.getBenchSize(player.board) < 8 &&
+          player.getLastBattleResult() == BattleResult.DEFEAT &&
+          (player.effects.list.includes(Effect.HATCHER) ||
+            player.effects.list.includes(Effect.BREEDER))
+        ) {
+          const chance = player.effects.list.includes(Effect.BREEDER)
+            ? 1
+            : 0.2 * player.streak
+          if (Math.random() < chance) {
+            const egg = PokemonFactory.createRandomEgg()
+            const x = this.room.getFirstAvailablePositionInBench(player.id)
+            egg.positionX = x !== undefined ? x : -1
+            egg.positionY = 0
+            player.board.set(egg.id, egg)
+          }
+        }
+
+        player.opponentName = ""
+        if (!player.isBot) {
+          if (!player.shopLocked) {
+            if (this.state.stageLevel == 10) {
+              this.state.shop.assignFirstMythicalShop(player)
+            } else if (this.state.stageLevel == 20) {
+              this.state.shop.assignSecondMythicalShop(player)
+            } else {
+              this.state.shop.assignShop(player)
+            }
+          } else {
+            player.shopLocked = false
+          }
+        }
+
+        player.board.forEach((pokemon, key) => {
+          if (pokemon.evolutionTimer !== undefined) {
+            pokemon.evolutionTimer -= 1
+
+            if (pokemon.evolutionTimer === 0) {
+              let pokemonEvolved
+              pokemonEvolved = PokemonFactory.createPokemonFromName(
+                pokemon.evolution,
+                player.pokemonCollection.get(pokemon.index)
+              )
+
+              pokemon.items.forEach((i) => {
+                pokemonEvolved.items.add(i)
+              })
+              pokemonEvolved.positionX = pokemon.positionX
+              pokemonEvolved.positionY = pokemon.positionY
+              player.board.delete(key)
+              player.board.set(pokemonEvolved.id, pokemonEvolved)
+              player.synergies.update(player.board)
+              player.effects.update(player.synergies)
+            } else {
+              if (pokemon.name === Pkm.EGG) {
+                if (pokemon.evolutionTimer >= 2) {
+                  pokemon.action = PokemonActionState.IDLE
+                } else if (pokemon.evolutionTimer === 1) {
+                  pokemon.action = PokemonActionState.HOP
+                }
+              }
+            }
+          }
+        })
+      }
+    })
     return this.checkEndGame()
   }
 
   initializeMinigamePhase() {
     this.state.phase = GamePhaseState.MINIGAME
-    this.state.time = 20000
-    this.state.stageLevel += 1
+    this.state.time = MINIGAME_PHASE_DURATION
     this.room.miniGame.initialize(this.state.players)
   }
 
