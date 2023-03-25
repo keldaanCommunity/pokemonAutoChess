@@ -6,8 +6,8 @@ import { useAppSelector } from "../../../hooks"
 const style: CSS.Properties = {
   position: "absolute",
   top: "30%",
-  left: "15.5%",
-  width: "60%"
+  left: "50%",
+  transform: "translateX(-50%)"
 }
 
 export default function GameItemsProposition() {
@@ -21,8 +21,8 @@ export default function GameItemsProposition() {
         <div
           style={{
             display: "flex",
-            justifyContent: "space-between",
-            padding: "10px",
+            gap: "1vw",
+            justifyContent: "center",
             visibility: visible ? 'visible' : 'hidden'
           }}
         >
@@ -31,7 +31,7 @@ export default function GameItemsProposition() {
           })}
         </div>
 
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div style={{ display: "flex", justifyContent: "center", margin: "1em" }}>
           <button
             className="bubbly orange"
             onClick={() => {

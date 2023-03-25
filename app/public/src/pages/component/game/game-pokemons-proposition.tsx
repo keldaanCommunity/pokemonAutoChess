@@ -8,8 +8,8 @@ import { pokemonPropositionClick } from "../../../stores/NetworkStore"
 const style: CSS.Properties = {
   position: "absolute",
   top: "30%",
-  left: "20.5%",
-  width: "60%"
+  left: "50%",
+  transform: "translateX(-50%)"
 }
 
 export default function GamePokemonsPropositions() {
@@ -31,7 +31,6 @@ export default function GamePokemonsPropositions() {
               display: "flex",
               padding: "10px",
               gap: "1vw",
-              height: "17vh",
               justifyContent: "center"
             }}
           >
@@ -53,7 +52,7 @@ export default function GamePokemonsPropositions() {
           </div>
         </div>
 
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div style={{ display: "flex", justifyContent: "center", margin: "1em" }}>
           <button
             className="bubbly orange"
             onClick={() => {
