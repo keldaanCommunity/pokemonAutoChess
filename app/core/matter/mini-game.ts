@@ -232,7 +232,7 @@ export class MiniGame {
     })
     this.avatars!.forEach((avatar) => {
       const player = players.get(avatar.id)
-      if (avatar.itemId === "" && !player.isBot) {
+      if (avatar.itemId === "" && player && !player.isBot) {
         // give a random item if none was taken
         const remainingItems = [...this.items!.entries()].filter(
           ([itemId, item]) => item.avatarId == ""
