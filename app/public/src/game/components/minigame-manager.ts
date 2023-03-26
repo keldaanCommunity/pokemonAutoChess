@@ -1,6 +1,6 @@
 import Pokemon from "./pokemon"
 import { FloatingItem } from "./floating-item"
-import { IFloatingItem, IPokemon, IPokemonAvatar } from "../../../../types"
+import { IFloatingItem, IPokemonAvatar } from "../../../../types"
 import { DataChange } from "@colyseus/schema"
 import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
@@ -8,7 +8,6 @@ import {
   transformMiniGameXCoordinate,
   transformMiniGameYCoordinate
 } from "../../pages/utils/utils"
-import { PokemonActionState } from "../../../../types/enum/Game"
 
 export default class MinigameManager {
   pokemons: Map<string, Pokemon>
@@ -135,6 +134,10 @@ export default class MinigameManager {
 
         case "y":
           pokemonUI.y = transformMiniGameYCoordinate(change.value)
+          break
+
+        case "timer":
+          pokemonUI.updateCircleTimer(change.value)
           break
       }
     }

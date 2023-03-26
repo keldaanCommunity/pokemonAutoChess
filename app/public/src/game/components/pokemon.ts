@@ -1,4 +1,4 @@
-import Phaser, { Game, GameObjects } from "phaser"
+import Phaser, { GameObjects } from "phaser"
 import Lifebar from "./life-bar"
 import DraggableObject from "./draggable-object"
 import PokemonDetail from "./pokemon-detail"
@@ -101,6 +101,9 @@ export default class Pokemon extends DraggableObject {
   playerId: string
   tooltip: boolean
   circle: GameObjects.Ellipse | undefined
+  circleTimer: GameObjects.Graphics
+  isPlayerAvatar: boolean
+  isCurrentPlayerAvatar: boolean
 
   constructor(
     scene: GameScene,
@@ -166,10 +169,20 @@ export default class Pokemon extends DraggableObject {
       this.orientation = Orientation.DOWNLEFT
       this.action = PokemonActionState.WALK
     }
-    if (instanceofPokemonAvatar(pokemon_)) {
+
+    this.isPlayerAvatar = instanceofPokemonAvatar(pokemon_)
+    if (this.isPlayerAvatar) {
+      const currentPlayerId = scene.uid
       this.circle = new GameObjects.Ellipse(scene, 0, 0, 50, 50)
-      this.circle.setStrokeStyle(1, 0xffffff, 0.7)
       this.add(this.circle)
+      this.circleTimer = new GameObjects.Graphics(scene);      
+      this.add(this.circleTimer)
+      this.isCurrentPlayerAvatar = (pokemon_.id === currentPlayerId)
+      if(this.isCurrentPlayerAvatar){
+        this.circle.setStrokeStyle(2, 0xffffff, 0.8)
+      } else {
+        this.circle.setStrokeStyle(1, 0xffffff, 0.5)
+      }
     }
     this.sprite = new GameObjects.Sprite(
       scene,
@@ -357,6 +370,20 @@ export default class Pokemon extends DraggableObject {
         this.add(this.detail)
         s.lastPokemonDetail = this
       }
+    }
+  }
+
+  updateCircleTimer(timer: number){
+    if(timer <= 0){
+      this.circleTimer.destroy()
+    } else {
+      this.circleTimer.clear()
+      this.circleTimer.lineStyle(8, 0xff0000, this.isCurrentPlayerAvatar ? 0.75 : 0.25);
+      this.circleTimer.beginPath();
+      
+      const angle = (Math.min(timer, 8000) / 8000) * Math.PI * 2
+      this.circleTimer.arc(0, 0, 30, 0, angle);
+      this.circleTimer.strokePath();
     }
   }
 

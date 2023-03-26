@@ -11,10 +11,12 @@ export class PokemonAvatar extends Schema implements IPokemonAvatar {
   @type("boolean") shiny: boolean
   @type("number") x: number
   @type("number") y: number
+  @type("number") targetX: number
+  @type("number") targetY: number
   @type("string") action: PokemonActionState = PokemonActionState.IDLE
   @type("string") orientation: Orientation = Orientation.DOWNLEFT
+  @type("number") timer: number
   itemId: string = ""
-  timer: number
   constraint: Constraint | undefined
 
   constructor(id: string, avatar: string, x: number, y: number, timer: number) {
@@ -22,6 +24,8 @@ export class PokemonAvatar extends Schema implements IPokemonAvatar {
     this.id = id
     this.x = x
     this.y = y
+    this.targetX = x
+    this.targetY = y
     this.timer = timer
     const informations = getInformations(avatar)
     Object.keys(PkmIndex).forEach((pkm_) => {
