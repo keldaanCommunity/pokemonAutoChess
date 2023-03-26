@@ -88,6 +88,9 @@ export default class MinigameManager {
         case "y":
           itemUI.y = transformMiniGameYCoordinate(change.value)
           break
+
+        case "avatarId":
+          itemUI.onGrab(change.value)
       }
     }
   }

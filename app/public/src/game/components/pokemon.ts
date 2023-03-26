@@ -378,7 +378,7 @@ export default class Pokemon extends DraggableObject {
       this.circleTimer.destroy()
     } else {
       this.circleTimer.clear()
-      this.circleTimer.lineStyle(8, 0xff0000, this.isCurrentPlayerAvatar ? 0.75 : 0.25);
+      this.circleTimer.lineStyle(8, this.isCurrentPlayerAvatar ? 0xFF0000 : 0x7F0000, 0.75);
       this.circleTimer.beginPath();
       
       const angle = (Math.min(timer, 8000) / 8000) * Math.PI * 2
