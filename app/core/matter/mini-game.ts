@@ -206,7 +206,7 @@ export class MiniGame {
     const avatar = this.avatars?.get(id)
     const body = this.bodies.get(id)
     if (body && avatar) {      
-      const distanceToTarget = Math.sqrt((avatar.targetX - avatar.x) ** 2 + (avatar.targetY - avatar.y) ** 2)      
+      const distanceToTarget = Math.sqrt((avatar.targetX - avatar.x) ** 2 + (avatar.targetY - avatar.y) ** 2) 
       if (distanceToTarget > PLAYER_VELOCITY){
         avatar.action = PokemonActionState.WALK
         let moveVector = Vector.sub(Vector.create(avatar.targetX, avatar.targetY), Vector.create(avatar.x, avatar.y))
@@ -214,7 +214,7 @@ export class MiniGame {
         moveVector = Vector.normalise(moveVector)
         moveVector = Vector.mult(moveVector, PLAYER_VELOCITY)
         Body.setVelocity(body, moveVector)
-      } else if (avatar.action !== PokemonActionState.IDLE){
+      } else {
         avatar.action = PokemonActionState.IDLE
         Body.setVelocity(body, Vector.create(0,0))
       }

@@ -72,7 +72,6 @@ export default class ItemsContainer extends GameObjects.Container {
   }
 
   updateCount(item: Item, count: number){
-    console.log("update count", item, count)
     for (let i = 0; i < this.list.length; i++) {
       const it = <ItemContainer>this.list[i]
       if(it.name === item){
