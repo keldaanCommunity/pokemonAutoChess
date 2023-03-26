@@ -695,6 +695,9 @@ export default class GameScene extends Scene {
           }
         })
       }
+      if(this.board){
+        this.board.closeTooltips()
+      }
     })
 
     this.input.on(
