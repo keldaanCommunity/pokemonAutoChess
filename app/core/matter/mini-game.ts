@@ -18,7 +18,7 @@ import { pickRandomIn } from "../../utils/random"
 
 const PLAYER_VELOCITY = 2
 const ITEM_ROTATION_SPEED = 0.0004
-const CAROUSEL_RADIUS = 120
+const CAROUSEL_RADIUS = 140
 
 export class MiniGame {
   avatars: MapSchema<PokemonAvatar> | undefined
