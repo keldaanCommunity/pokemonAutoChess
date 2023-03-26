@@ -16,8 +16,7 @@ import { PokemonActionState } from "../../types/enum/Game"
 import { BasicItems, Item } from "../../types/enum/Item"
 import { pickRandomIn } from "../../utils/random"
 
-const PLAYER_ACCELERATION = 0.002
-const PLAYER_MAX_SPEED = 1
+const PLAYER_VELOCITY = 2
 const ITEM_ROTATION_SPEED = 0.0004
 const CAROUSEL_RADIUS = 120
 
@@ -166,25 +165,14 @@ export class MiniGame {
         a.timer = a.timer - dt
       }
     })
-    this.bodies.forEach((body, key) => {
-      const avatar = this.avatars?.get(key)
+    this.bodies.forEach((body, id) => {
+      const avatar = this.avatars?.get(id)
       if (avatar) {
-        if (
-          avatar.action === PokemonActionState.IDLE &&
-          (Math.abs(body.velocity.x) > 0.1 || Math.abs(body.velocity.y) > 0.1)
-        ) {
-          avatar.action = PokemonActionState.WALK
-        } else if (
-          avatar.action === PokemonActionState.WALK &&
-          Math.abs(body.velocity.x) < 0.1 &&
-          Math.abs(body.velocity.y) < 0.1
-        ) {
-          avatar.action = PokemonActionState.IDLE
-        }
         avatar.x = body.position.x
         avatar.y = body.position.y
+        this.updatePlayerVector(id)
       }
-      const item = this.items?.get(key)
+      const item = this.items?.get(id)
       if (item) {
         item.x = body.position.x
         item.y = body.position.y
@@ -208,19 +196,27 @@ export class MiniGame {
   applyVector(id: string, x: number, y: number) {
     const avatar = this.avatars?.get(id)
     if (avatar && avatar.timer <= 0) {
-      const norm = Math.sqrt(x ** 2 + y ** 2)
-      const normX = x / norm
-      const normY = y / norm
-      const body = this.bodies.get(id)
+      avatar.targetX = avatar.x + x
+      avatar.targetY = avatar.y - y
+      this.updatePlayerVector(id)
+    }
+  }
 
-      avatar.orientation = getOrientation(0, 0, x, y)
-      if (body) {
-        Body.applyForce(
-          body,
-          body.position,
-          Vector.create(normX * PLAYER_ACCELERATION, -normY * PLAYER_ACCELERATION)
-        )
-        Body.setSpeed(body, Math.min(PLAYER_MAX_SPEED, body.speed))
+  updatePlayerVector(id: string){
+    const avatar = this.avatars?.get(id)
+    const body = this.bodies.get(id)
+    if (body && avatar) {      
+      const distanceToTarget = Math.sqrt((avatar.targetX - avatar.x) ** 2 + (avatar.targetY - avatar.y) ** 2)      
+      if (distanceToTarget > PLAYER_VELOCITY){
+        avatar.action = PokemonActionState.WALK
+        let moveVector = Vector.sub(Vector.create(avatar.targetX, avatar.targetY), Vector.create(avatar.x, avatar.y))
+        avatar.orientation = getOrientation(0, 0, moveVector.x, -1 * moveVector.y)
+        moveVector = Vector.normalise(moveVector)
+        moveVector = Vector.mult(moveVector, PLAYER_VELOCITY)
+        Body.setVelocity(body, moveVector)
+      } else if (avatar.action !== PokemonActionState.IDLE){
+        avatar.action = PokemonActionState.IDLE
+        Body.setVelocity(body, Vector.create(0,0))
       }
     }
   }
