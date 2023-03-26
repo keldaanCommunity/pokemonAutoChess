@@ -1,5 +1,6 @@
 import { GameObjects } from "phaser"
 import { Item } from "../../../../types/enum/Item"
+import GameScene from "../scenes/game-scene"
 
 export class FloatingItem extends GameObjects.Container {
   circle: GameObjects.Ellipse
@@ -23,7 +24,16 @@ export class FloatingItem extends GameObjects.Container {
     this.scene.add.existing(this)
   }
 
-  onGrab(){
-    this.circle.setStrokeStyle(2, 0x4CFF00, 0.85)
+  onGrab(playerId){
+    const currentPlayerId: string = (this.scene as GameScene).uid!
+    if(playerId === currentPlayerId){
+      this.circle.setStrokeStyle(2, 0x4CFF00, 0.85)
+    } else if(playerId == ""){
+      this.circle.setStrokeStyle(1, 0xffffff, 0.7)
+      this.circle.setFillStyle(0x61738a, 1) 
+    } else {
+      this.circle.setStrokeStyle(1, 0x7F0000, 0.7)
+      this.circle.setFillStyle(0x61738a, 0) 
+    }
   }
 }
