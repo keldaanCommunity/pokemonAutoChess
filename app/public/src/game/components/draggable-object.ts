@@ -18,7 +18,10 @@ export default class DraggableObject extends GameObjects.Container {
     this.setInteractive()
       .on("pointerover", () => this.onPointerOver())
       .on("pointerout", () => this.onPointerOut())
-      .on("pointerdown", (pointer) => this.onPointerDown(pointer))
+      .on("pointerdown", (pointer: Phaser.Input.Pointer, x: number, y:number, event: Phaser.Types.Input.EventData) => {
+        event.stopPropagation()
+        this.onPointerDown(pointer)
+      })
       .on("pointerup", () => this.onPointerUp())
     this.scene.add.existing(this)
   }
