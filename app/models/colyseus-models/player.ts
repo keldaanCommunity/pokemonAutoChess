@@ -46,6 +46,7 @@ export default class Player extends Schema implements IPlayer {
   @type({ map: PokemonConfig }) pokemonCollection
   @type("string") title: Title | ""
   @type("string") role: Role
+  @type(["string"]) itemsProposition = new ArraySchema<Item>()
   @type(["string"]) pokemonsProposition = new ArraySchema<Pkm>()
   effects: Effects = new Effects()
   isBot: boolean

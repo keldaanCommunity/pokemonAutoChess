@@ -149,6 +149,9 @@ export const EvolutionTime = {
   EVOLVE_HATCH: 4
 }
 
+export const CarouselStages = [1, 6, 11, 16, 21, 26, 31]
+export const ItemProposalStages = [2, 3]
+
 export const NeutralStage: { turn: number; avatar: string }[] = [
   {
     turn: 1,

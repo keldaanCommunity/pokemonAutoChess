@@ -125,7 +125,7 @@ export class MiniGame {
     this.items = items
   }
 
-  initialize(players: MapSchema<Player>) {
+  initialize(players: MapSchema<Player>, stageLevel: number) {
     this.alivePlayers = new Array<Player>()
     players.forEach((p) => {
       if (p.alive) {
@@ -137,12 +137,17 @@ export class MiniGame {
         this.centerX + Math.cos((2 * Math.PI * i) / this.alivePlayers.length) * 300
       const y =
         this.centerY + Math.sin((2 * Math.PI * i) / this.alivePlayers.length) * 250
+      let retentionDelay = 4000 + (this.alivePlayers.length - player.rank) * 2000
+      if(stageLevel < 3){
+        retentionDelay = 5000
+      }
+
       const avatar = new PokemonAvatar(
         player.id,
         player.avatar,
         x,
         y,
-        4000 + (this.alivePlayers.length - player.rank) * 2000
+        retentionDelay
       )
 
       if(player.isBot){
