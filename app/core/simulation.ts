@@ -1031,32 +1031,28 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     this.blueTeam.forEach((pkm, key) => {
-      if (!pkm.life) {
-        this.blueTeam.delete(key)
-      }
-      if (pkm.life <= 0) {
-        this.blueTeam.delete(key)
-      } else {
-        pkm.update(dt, this.board, this.climate)
-        this.blueDpsMeter
+      this.blueDpsMeter
           .get(key)
           ?.changeDamage(pkm.physicalDamage, pkm.specialDamage, pkm.trueDamage)
         this.blueHealDpsMeter.get(key)?.changeHeal(pkm.healDone, pkm.shieldDone)
+
+      if (!pkm.life || pkm.life <= 0) {
+        this.blueTeam.delete(key)
+      } else {
+        pkm.update(dt, this.board, this.climate)        
       }
     })
 
     this.redTeam.forEach((pkm, key) => {
-      if (!pkm.life) {
-        this.redTeam.delete(key)
-      }
-      if (pkm.life <= 0) {
-        this.redTeam.delete(key)
-      } else {
-        pkm.update(dt, this.board, this.climate)
-        this.redDpsMeter
+      this.redDpsMeter
           .get(key)
           ?.changeDamage(pkm.physicalDamage, pkm.specialDamage, pkm.trueDamage)
-        this.redHealDpsMeter.get(key)?.changeHeal(pkm.healDone, pkm.shieldDone)
+      this.redHealDpsMeter.get(key)?.changeHeal(pkm.healDone, pkm.shieldDone)
+
+      if (!pkm.life || pkm.life <= 0) {
+        this.redTeam.delete(key)
+      } else {
+        pkm.update(dt, this.board, this.climate)  
       }
     })
   }
