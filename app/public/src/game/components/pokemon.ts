@@ -380,8 +380,8 @@ export default class Pokemon extends DraggableObject {
       this.circleTimer.clear()
       this.circleTimer.lineStyle(
         8,
-        this.isCurrentPlayerAvatar ? 0xff0000 : 0x7f0000,
-        0.75
+        0xF7D51D,
+        this.isCurrentPlayerAvatar ? 0.8 : 0.5
       )
       this.circleTimer.beginPath()
 

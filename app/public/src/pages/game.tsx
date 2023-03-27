@@ -11,6 +11,7 @@ import {
   setCurrentPlayerId,
   setExperienceManager,
   setInterest,
+  setItemsProposition,
   setMapName,
   setMoney,
   setPhase,
@@ -51,6 +52,7 @@ import { FIREBASE_CONFIG } from "./utils/utils"
 import GameContainer from "../game/game-container"
 import { Navigate } from "react-router-dom"
 import GameDpsMeter from "./component/game/game-dps-meter"
+import GameItemsProposition from "./component/game/game-items-proposition"
 import GamePlayerInformations from "./component/game/game-player-informations"
 import GamePlayers from "./component/game/game-players"
 import GameShop from "./component/game/game-shop"
@@ -369,6 +371,17 @@ export default function Game() {
           dispatch(setSynergies({ id: player.id, value: player.synergies }))
         }
 
+        player.itemsProposition.onAdd = (changes) => {
+          if (player.id == uid) {
+            dispatch(setItemsProposition(player.itemsProposition))
+          }
+        }
+        player.itemsProposition.onRemove = (changes) => {
+          if (player.id == uid) {
+            dispatch(setItemsProposition(player.itemsProposition))
+          }
+        }
+
         player.pokemonsProposition.onAdd = (changes) => {
           if (player.id == uid) {
             dispatch(setPokemonProposition(player.pokemonsProposition))
@@ -475,6 +488,7 @@ export default function Game() {
         <GamePlayerInformations />
         <GamePlayers click={(id: string) => playerClick(id)} />
         <GameSynergies />
+        <GameItemsProposition />
         <GamePokemonsProposition />
         <GameDpsMeter />
         <GameToasts />

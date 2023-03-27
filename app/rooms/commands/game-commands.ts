@@ -1,5 +1,5 @@
 import { Command } from "@colyseus/command"
-import { ItemRecipe, NeutralStage } from "../../types/Config"
+import { ItemProposalStages, ItemRecipe, NeutralStage, CarouselStages } from "../../types/Config"
 import { Item, BasicItems } from "../../types/enum/Item"
 import { BattleResult } from "../../types/enum/Game"
 import Player from "../../models/colyseus-models/player"
@@ -11,8 +11,7 @@ import { Client, updateLobby } from "colyseus"
 import { Effect } from "../../types/enum/Effect"
 import {
   Title,
-  FIGHTING_PHASE_DURATION,
-  MINIGAME_PHASE_DURATION
+  FIGHTING_PHASE_DURATION
 } from "../../types"
 import { MapSchema } from "@colyseus/schema"
 import {
@@ -28,12 +27,11 @@ import {
   IPokemonEntity,
   Transfer
 } from "../../types"
-import { Synergy } from "../../types/enum/Synergy"
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Pokemon } from "../../models/colyseus-models/pokemon"
 import { Ability } from "../../types/enum/Ability"
 import { Mythical1Shop, Mythical2Shop } from "../../models/shop"
-import { PokemonAvatar } from "../../models/colyseus-models/pokemon-avatar"
+import { pickRandomIn } from "../../utils/random"
 
 export class OnShopCommand extends Command<
   GameRoom,
@@ -75,6 +73,26 @@ export class OnShopCommand extends Command<
           }
           this.room.updateEvolution(id)
         }
+      }
+    }
+  }
+}
+
+export class OnItemCommand extends Command<
+  GameRoom,
+  {
+    playerId: string
+    id: string
+  }
+> {
+  execute({ playerId, id }) {
+    const player = this.state.players.get(playerId)
+    if (player) {
+      if (player.itemsProposition.includes(id)) {
+        player.items.add(id)
+      }
+      while (player.itemsProposition.length > 0) {
+        player.itemsProposition.pop()
       }
     }
   }
@@ -721,8 +739,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
       if (kickCommands.length != 0) {
         return kickCommands
       }
-      const isPVE = this.checkForPVE()
-      if (isPVE) {
+      
+      if (CarouselStages.includes(this.state.stageLevel)) {
         this.initializeMinigamePhase()
       } else {
         this.initializePickingPhase()
@@ -1008,12 +1026,21 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
 
   initializePickingPhase() {
     this.state.phase = GamePhaseState.PICK
-    const isPVE = this.checkForPVE()
 
     this.state.time =
       this.state.stageLevel === 10 || this.state.stageLevel === 20
         ? 50000
         : 30000
+
+    // Item propositions stages
+    if(ItemProposalStages.includes(this.state.stageLevel)){
+      this.state.players.forEach((player: Player) => {
+        const items = ItemFactory.createRandomItems()
+        items.forEach((item) => {
+          player.itemsProposition.push(item)
+        })
+      })
+    }
 
     // First additional pick stage
     if (this.state.stageLevel === 5) {
@@ -1121,10 +1148,23 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
 
   stopPickingPhase() {
     this.state.players.forEach((player, key) => {
+      if (player.itemsProposition.length > 0) {
+        if (player.itemsProposition.length === 3) {
+          // auto pick if not chosen
+          const i = pickRandomIn([...player.itemsProposition])
+          if (i) {
+            player.items.add(i)
+          }
+        }
+        while (player.itemsProposition.length > 0) {
+          player.itemsProposition.pop()
+        }
+      }
+
       if (player.pokemonsProposition.length > 0) {
         if (player.pokemonsProposition.length === 3) {
           // auto pick if not chosen
-          const pkm = player.pokemonsProposition.pop()
+          const pkm = pickRandomIn([...player.pokemonsProposition])
           if (pkm) {
             this.state.additionalPokemons.push(pkm)
             this.state.shop.addAdditionalPokemon(pkm)
@@ -1236,8 +1276,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
 
   initializeMinigamePhase() {
     this.state.phase = GamePhaseState.MINIGAME
-    this.state.time = MINIGAME_PHASE_DURATION
-    this.room.miniGame.initialize(this.state.players)
+    const nbPlayersAlive = [...this.state.players.values()].filter((p: Player) => p.life > 0).length
+    const minigamePhaseDuration = 14000 + nbPlayersAlive * 2000 // 10 seconds + retention delay
+    this.state.time = minigamePhaseDuration
+    this.room.miniGame.initialize(this.state.players, this.state.stageLevel)
   }
 
   initializeFightingPhase() {

@@ -27,13 +27,14 @@ export class FloatingItem extends GameObjects.Container {
   onGrab(playerId){
     const currentPlayerId: string = (this.scene as GameScene).uid!
     if(playerId === currentPlayerId){
-      this.circle.setStrokeStyle(2, 0x4CFF00, 0.85)
+      this.circle.setStrokeStyle(2, 0x4CFF00, 1)
+      this.circle.setFillStyle(0x61738a, 1)
     } else if(playerId == ""){
       this.circle.setStrokeStyle(1, 0xffffff, 0.7)
-      this.circle.setFillStyle(0x61738a, 1) 
+      this.circle.setFillStyle(0x61738a, 1)
     } else {
-      this.circle.setStrokeStyle(1, 0x7F0000, 0.7)
-      this.circle.setFillStyle(0x61738a, 0) 
+      this.circle.setStrokeStyle(2, 0xCF0000, 0.7)
+      this.circle.setFillStyle(0x61738a, 0.7) 
     }
   }
 }
