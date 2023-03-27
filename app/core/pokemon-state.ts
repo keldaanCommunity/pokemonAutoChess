@@ -370,9 +370,12 @@ export default class PokemonState {
                   value.team == pokemon.team &&
                   value.types.includes(Synergy.FIELD)
                 ) {
-                  value.count.fieldCount++
-                  value.handleHeal((boost / 100) * value.hp, pokemon, false)
-                  value.handleAttackSpeed(speedBoost)
+                  let _pokemon = pokemon // beware of closure vars
+                  pokemon.simulation.room.clock.setTimeout(() => {
+                    value.count.fieldCount++
+                    value.handleHeal((boost / 100) * value.hp, _pokemon, false)
+                    value.handleAttackSpeed(speedBoost)
+                  }, 16) // delay to next tick, targeting 60 ticks per second
                 }
               })
             }
