@@ -125,7 +125,7 @@ export default class Pokemon extends DraggableObject {
       ? Pkm.DEFAULT
       : (pokemon as IPokemon).evolution
     this.emotion = pokemon.emotion
-    this.shiny = pokemon.shiny
+    this.shiny = pokemon_.shiny
     this.height = 0
     this.width = 0
     this.index = pokemon.index
@@ -175,10 +175,10 @@ export default class Pokemon extends DraggableObject {
       const currentPlayerId = scene.uid
       this.circle = new GameObjects.Ellipse(scene, 0, 0, 50, 50)
       this.add(this.circle)
-      this.circleTimer = new GameObjects.Graphics(scene);      
+      this.circleTimer = new GameObjects.Graphics(scene)
       this.add(this.circleTimer)
-      this.isCurrentPlayerAvatar = (pokemon_.id === currentPlayerId)
-      if(this.isCurrentPlayerAvatar){
+      this.isCurrentPlayerAvatar = pokemon_.id === currentPlayerId
+      if (this.isCurrentPlayerAvatar) {
         this.circle.setStrokeStyle(2, 0xffffff, 0.8)
       } else {
         this.circle.setStrokeStyle(1, 0xffffff, 0.5)
@@ -373,17 +373,21 @@ export default class Pokemon extends DraggableObject {
     }
   }
 
-  updateCircleTimer(timer: number){
-    if(timer <= 0){
+  updateCircleTimer(timer: number) {
+    if (timer <= 0) {
       this.circleTimer.destroy()
     } else {
       this.circleTimer.clear()
-      this.circleTimer.lineStyle(8, this.isCurrentPlayerAvatar ? 0xFF0000 : 0x7F0000, 0.75);
-      this.circleTimer.beginPath();
-      
+      this.circleTimer.lineStyle(
+        8,
+        this.isCurrentPlayerAvatar ? 0xff0000 : 0x7f0000,
+        0.75
+      )
+      this.circleTimer.beginPath()
+
       const angle = (Math.min(timer, 8000) / 8000) * Math.PI * 2
-      this.circleTimer.arc(0, 0, 30, 0, angle);
-      this.circleTimer.strokePath();
+      this.circleTimer.arc(0, 0, 30, 0, angle)
+      this.circleTimer.strokePath()
     }
   }
 
@@ -2877,17 +2881,22 @@ export default class Pokemon extends DraggableObject {
               }
             })
             break
-          
+
           case Ability.TRIPLE_KICK:
-            coordinates = transformAttackCoordinate(this.positionX, this.positionY)
-            for(let i=0; i<3; i++){
+            coordinates = transformAttackCoordinate(
+              this.positionX,
+              this.positionY
+            )
+            for (let i = 0; i < 3; i++) {
               setTimeout(() => {
                 const projectile = this.scene.add.sprite(
-                  coordinates[0] + Math.round(50 * Math.cos(Math.PI * 2 * i / 3)),
-                  coordinates[1] + Math.round(50 * Math.sin(Math.PI * 2 * i / 3)),
+                  coordinates[0] +
+                    Math.round(50 * Math.cos((Math.PI * 2 * i) / 3)),
+                  coordinates[1] +
+                    Math.round(50 * Math.sin((Math.PI * 2 * i) / 3)),
                   "FIGHTING",
                   "PAW"
-                )              
+                )
                 projectile.setDepth(7)
                 projectile.setScale(1.5)
                 setTimeout(() => projectile.destroy(), 500)
