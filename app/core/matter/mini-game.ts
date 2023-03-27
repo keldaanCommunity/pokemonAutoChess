@@ -15,6 +15,7 @@ import { getOrientation } from "../../public/src/pages/utils/utils"
 import { PokemonActionState } from "../../types/enum/Game"
 import { BasicItems, Item } from "../../types/enum/Item"
 import { pickRandomIn } from "../../utils/random"
+import { clamp } from "../../utils/number"
 
 const PLAYER_VELOCITY = 2
 const ITEM_ROTATION_SPEED = 0.0004
@@ -24,6 +25,7 @@ export class MiniGame {
   avatars: MapSchema<PokemonAvatar> | undefined
   items: MapSchema<FloatingItem> | undefined
   bodies: Map<string, Body>
+  alivePlayers: Player[]
   engine: Engine
   centerX: number = 325
   centerY: number = 250
@@ -31,6 +33,7 @@ export class MiniGame {
   constructor() {
     this.engine = Engine.create({ gravity: { x: 0, y: 0 } })
     this.bodies = new Map<string, Body>()
+    this.alivePlayers = []
     Composite.add(
       this.engine.world,
       Bodies.rectangle(0, -70, 2000, 40, { isStatic: true, restitution: 1 })
@@ -53,9 +56,9 @@ export class MiniGame {
           const itemBody = this.bodies.get(item.id)
           if (itemBody) {
             const t = this.engine.timing.timestamp * ITEM_ROTATION_SPEED
-            const x = this.centerX + Math.cos(t + (Math.PI * item.index) / 4.5) * CAROUSEL_RADIUS
-            const y = this.centerY + Math.sin(t + (Math.PI * item.index) / 4.5) * CAROUSEL_RADIUS
-            Body.setPosition(itemBody, { x: x, y: y })
+            const x = this.centerX + Math.cos(t + (Math.PI * 2 * item.index / this.items!.size)) * CAROUSEL_RADIUS
+            const y = this.centerY + Math.sin(t + (Math.PI * 2 * item.index / this.items!.size)) * CAROUSEL_RADIUS
+            Body.setPosition(itemBody, { x, y })
           }
         }
       })
@@ -104,6 +107,14 @@ export class MiniGame {
 
           itemBody.collisionFilter.mask = 0 // item no longer collide
           avatarBody.collisionFilter.mask = 0 // player no longer collide after taking an item
+
+          const player = this.alivePlayers.find(p => p.id === avatar!.id)
+          if(player && player.isBot){
+            // make bots return to outer circle
+            const i = this.alivePlayers.indexOf(player) 
+            avatar.targetX = this.centerX + Math.cos((2 * Math.PI * i) / this.alivePlayers.length) * 300
+            avatar.targetY = this.centerY + Math.sin((2 * Math.PI * i) / this.alivePlayers.length) * 250
+          }
         }
       }
     })
@@ -115,39 +126,43 @@ export class MiniGame {
   }
 
   initialize(players: MapSchema<Player>) {
-    let i = 0
-    let alivePlayers = new Array<Player>()
+    this.alivePlayers = new Array<Player>()
     players.forEach((p) => {
       if (p.alive) {
-        alivePlayers.push(p)
+        this.alivePlayers.push(p)
       }
     })
-    alivePlayers.forEach((player) => {
+    this.alivePlayers.forEach((player, i) => {
       const x =
-        this.centerX + Math.cos((2 * Math.PI * i) / alivePlayers.length) * 300
+        this.centerX + Math.cos((2 * Math.PI * i) / this.alivePlayers.length) * 300
       const y =
-        this.centerY + Math.sin((2 * Math.PI * i) / alivePlayers.length) * 250
+        this.centerY + Math.sin((2 * Math.PI * i) / this.alivePlayers.length) * 250
       const avatar = new PokemonAvatar(
         player.id,
         player.avatar,
         x,
         y,
-        4000 + (alivePlayers.length - player.rank) * 2000
+        4000 + (this.alivePlayers.length - player.rank) * 2000
       )
+
+      if(player.isBot){
+        avatar.targetX = this.centerX + Math.cos((2 * Math.PI * i) / this.alivePlayers.length) * CAROUSEL_RADIUS
+        avatar.targetY = this.centerY + Math.sin((2 * Math.PI * i) / this.alivePlayers.length) * CAROUSEL_RADIUS
+      }
 
       this.avatars!.set(avatar.id, avatar)
       const body = Bodies.circle(x, y, 25)
       body.label = avatar.id
       this.bodies.set(avatar.id, body)
       Composite.add(this.engine.world, body)
-      i++
     })
 
-    const items = this.pickRandomItems()
+    const nbItemsToPick = clamp(this.alivePlayers.length + 3, 5, 9)
+    const items = this.pickRandomItems(nbItemsToPick)
 
-    for (let j = 0; j < 9; j++) {
-      const x = this.centerX + Math.cos((Math.PI * j) / 4.5) * 100
-      const y = this.centerY + Math.sin((Math.PI * j) / 4.5) * 90
+    for (let j = 0; j < nbItemsToPick; j++) {
+      const x = this.centerX + Math.cos(Math.PI * 2 * j / nbItemsToPick) * 100
+      const y = this.centerY + Math.sin(Math.PI * 2 * j / nbItemsToPick) * 90
       const name = items[j]
       const floatingItem = new FloatingItem(name, x, y, j)
       this.items?.set(floatingItem.id, floatingItem)
@@ -180,9 +195,9 @@ export class MiniGame {
     })
   }
 
-  pickRandomItems(): Item[] {
+  pickRandomItems(nbItemsToPick: number): Item[] {
     const items: Item[] = []
-    for (let j = 0; j < 9; j++) {
+    for (let j = 0; j < nbItemsToPick; j++) {
       let item, count
       do {
         item = pickRandomIn(BasicItems)
@@ -205,7 +220,7 @@ export class MiniGame {
   updatePlayerVector(id: string){
     const avatar = this.avatars?.get(id)
     const body = this.bodies.get(id)
-    if (body && avatar) {      
+    if (body && avatar && avatar.timer <= 0) {      
       const distanceToTarget = Math.sqrt((avatar.targetX - avatar.x) ** 2 + (avatar.targetY - avatar.y) ** 2) 
       if (distanceToTarget > PLAYER_VELOCITY){
         avatar.action = PokemonActionState.WALK
