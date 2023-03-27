@@ -7,7 +7,7 @@
 
 # Changes to Synergies
 
-
+- Field: the heal effect is now triggered 16 milliseconds after one pokemon is KO, so that team is more vulnerable to Area of Effect damage
 
 # Changes to Items
 
