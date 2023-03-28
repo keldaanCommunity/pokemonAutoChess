@@ -20,7 +20,6 @@ thundurus,0642/AnimData.xml
 thundurus,0642/0000/0001/AnimData.xml
 terrakion,0639/AnimData.xml
 terrakion,0639/0000/0001/AnimData.xml
-virizion,0640/AnimData.xml
 virizion,0640/0000/0001/AnimData.xml
 kyurem,0646/AnimData.xml
 kyurem,0646/0000/0001/AnimData.xml
