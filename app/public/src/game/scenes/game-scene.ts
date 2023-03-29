@@ -209,6 +209,11 @@ export default class GameScene extends Scene {
       "/assets/attacks"
     )
     this.load.multiatlas(
+      "SACRED_SWORD",
+      "/assets/attacks/SACRED_SWORD.json",
+      "/assets/attacks"
+    )
+    this.load.multiatlas(
       "SHADOW_SNEAK",
       "/assets/attacks/SHADOW_SNEAK.json",
       "/assets/attacks"
@@ -695,7 +700,7 @@ export default class GameScene extends Scene {
           }
         })
       }
-      if(this.board){
+      if (this.board) {
         this.board.closeTooltips()
       }
     })

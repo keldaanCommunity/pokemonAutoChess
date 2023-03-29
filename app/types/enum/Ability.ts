@@ -253,7 +253,8 @@ export enum Ability {
   MACH_PUNCH = "MACH_PUNCH",
   TRIPLE_KICK = "TRIPLE_KICK",
   MAWASHI_GERI = "MAWASHI_GERI",
-  FORECAST = "FORECAST"
+  FORECAST = "FORECAST",
+  SACRED_SWORD = "SACRED_SWORD"
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {

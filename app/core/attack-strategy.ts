@@ -48,9 +48,9 @@ export class AttackStrategy {
       pokemon.setMana(pokemon.mana + 20)
     }
 
-    if(pokemon.items.has(Item.STAR_DUST)) {
+    if (pokemon.items.has(Item.STAR_DUST)) {
       pokemon.handleShield(Math.round(0.5 * pokemon.maxMana), pokemon, false)
-      pokemon.count.starDustCount++      
+      pokemon.count.starDustCount++
     }
   }
 }
@@ -2686,6 +2686,19 @@ export class AppleAcidStrategy extends AttackStrategy {
   }
 }
 
+export class SacredSwordStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    const damage = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 80 : 60
+    target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon)
+  }
+}
+
 export class DragonTailStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
@@ -3081,7 +3094,7 @@ export class HappyHourStrategy extends AttackStrategy {
       default:
         break
     }
-    buff = Math.round(buff * (1 + pokemon.ap/100))
+    buff = Math.round(buff * (1 + pokemon.ap / 100))
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (ally && pokemon.team == ally.team) {
         ally.addAttack(buff, false)
@@ -3581,13 +3594,13 @@ export class ForecastStrategy extends AttackStrategy {
     board.forEach((x: number, y: number, p: PokemonEntity | undefined) => {
       if (p && pokemon.team === p.team) {
         p.handleShield(10, pokemon, true)
-        if(pokemon.name === Pkm.CASTFORM_SUN){
+        if (pokemon.name === Pkm.CASTFORM_SUN) {
           p.addAttack(5, true)
         }
-        if(pokemon.name === Pkm.CASTFORM_RAIN){
-          p.setMana(p.mana + Math.round(20*(1 + pokemon.ap / 100)))
+        if (pokemon.name === Pkm.CASTFORM_RAIN) {
+          p.setMana(p.mana + Math.round(20 * (1 + pokemon.ap / 100)))
         }
-        if(pokemon.name === Pkm.CASTFORM_HAIL){
+        if (pokemon.name === Pkm.CASTFORM_HAIL) {
           p.addDefense(5, true)
           p.addSpecialDefense(5, true)
         }
@@ -3605,7 +3618,7 @@ export class MachPunchStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target)
     let damage = 50
-    if(pokemon.def > target.def) damage *= 2
+    if (pokemon.def > target.def) damage *= 2
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
   }
 }
@@ -3619,7 +3632,7 @@ export class MawashiGeriStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target)
     let damage = 50
-    if(pokemon.atk > target.atk) damage *= 2
+    if (pokemon.atk > target.atk) damage *= 2
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
   }
 }
@@ -3633,13 +3646,13 @@ export class TripleKickStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target)
     let damage = 50
-    
+
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
     let count = 0
     cells.forEach((cell) => {
       if (cell.value && pokemon.team !== cell.value.team) {
-        count++;
-        if(count <= 3){
+        count++
+        if (count <= 3) {
           cell.value.handleSpecialDamage(
             damage,
             board,
