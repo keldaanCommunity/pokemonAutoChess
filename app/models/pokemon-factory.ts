@@ -529,7 +529,17 @@ import {
   Arbok,
   MimeJr,
   MrMime,
-  Ekans
+  Ekans,
+  PirouetteMeloetta,
+  Melmetal,
+  Hoopa,
+  HoopaUnbound,
+  TypeNull,
+  Sylvally,
+  Zeraora,
+  Xerneas,
+  Yveltal,
+  OriginGiratina
 } from "./colyseus-models/pokemon"
 import { MapSchema } from "@colyseus/schema"
 import { Emotion } from "../types"
@@ -1817,6 +1827,26 @@ export default class PokemonFactory {
         return new MrMime(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
+      case Pkm.ORIGIN_GIRATINA:
+        return new OriginGiratina(s, e)
+      case Pkm.PIROUETTE_MELOETTA:
+        return new PirouetteMeloetta(s, e)
+      case Pkm.MELMETAL:
+        return new Melmetal(s, e)
+      case Pkm.HOOPA:
+        return new Hoopa(s, e)
+      case Pkm.HOOPA_UNBOUND:
+        return new HoopaUnbound(s, e)
+      case Pkm.TYPE_NULL:
+        return new TypeNull(s, e)
+      case Pkm.SILVALLY:
+        return new Sylvally(s, e)
+      case Pkm.ZERAORA:
+        return new Zeraora(s, e)
+      case Pkm.XERNEAS:
+        return new Xerneas(s, e)
+      case Pkm.YVELTAL:
+        return new Yveltal(s, e)
       default:
         // console.log(`No pokemon with name "${name}" found, return magikarp`);
         return new Magikarp(s, e)

@@ -78,3 +78,6 @@ dragapult,0887/AnimData.xml
 dragapult,0887/0000/0001/AnimData.xml
 frogadier,0657/AnimData.xml
 frogadier,0657/0000/0001/AnimData.xml
+pirouette-meloetta,0648/0001/0001/AnimData.xml
+melmetal,0809/AnimData.xml
+melmetal,0809/0000/0001/AnimData.xml

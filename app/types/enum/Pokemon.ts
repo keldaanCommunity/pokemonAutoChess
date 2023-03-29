@@ -529,7 +529,17 @@ export enum Pkm {
   EKANS = "ekans",
   ARBOK = "arbok",
   MIME_JR = "mime-jr",
-  MR_MIME = "mr-mime"
+  MR_MIME = "mr-mime",
+  ORIGIN_GIRATINA = "origin-giratina",
+  PIROUETTE_MELOETTA = "pirouette-meloetta",
+  MELMETAL = "melmetal",
+  HOOPA = "hoopa",
+  HOOPA_UNBOUND = "hoopa_unbound",
+  SILVALLY = "silvally",
+  TYPE_NULL = "type_null",
+  ZERAORA = "zeraora",
+  XERNEAS = "xerneas",
+  YVELTAL = "yveltal"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1063,7 +1073,17 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.EKANS]: "0023",
   [Pkm.ARBOK]: "0024",
   [Pkm.MIME_JR]: "0439",
-  [Pkm.MR_MIME]: "0122"
+  [Pkm.MR_MIME]: "0122",
+  [Pkm.ORIGIN_GIRATINA]: "0487-0001",
+  [Pkm.PIROUETTE_MELOETTA]: "0648-0001",
+  [Pkm.MELMETAL]: "0809",
+  [Pkm.HOOPA]: "0720",
+  [Pkm.HOOPA_UNBOUND]: "0720-0001",
+  [Pkm.SILVALLY]: "0773",
+  [Pkm.ZERAORA]: "0807",
+  [Pkm.XERNEAS]: "0716",
+  [Pkm.YVELTAL]: "0717",
+  [Pkm.TYPE_NULL]: "0772"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1597,5 +1617,15 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.EKANS]: Pkm.EKANS,
   [Pkm.ARBOK]: Pkm.EKANS,
   [Pkm.MIME_JR]: Pkm.MIME_JR,
-  [Pkm.MR_MIME]: Pkm.MIME_JR
+  [Pkm.MR_MIME]: Pkm.MIME_JR,
+  [Pkm.ORIGIN_GIRATINA]: Pkm.ORIGIN_GIRATINA,
+  [Pkm.PIROUETTE_MELOETTA]: Pkm.PIROUETTE_MELOETTA,
+  [Pkm.MELMETAL]: Pkm.MELMETAL,
+  [Pkm.HOOPA]: Pkm.HOOPA,
+  [Pkm.HOOPA_UNBOUND]: Pkm.HOOPA_UNBOUND,
+  [Pkm.SILVALLY]: Pkm.TYPE_NULL,
+  [Pkm.ZERAORA]: Pkm.ZERAORA,
+  [Pkm.XERNEAS]: Pkm.XERNEAS,
+  [Pkm.YVELTAL]: Pkm.YVELTAL,
+  [Pkm.TYPE_NULL]: Pkm.TYPE_NULL
 }
