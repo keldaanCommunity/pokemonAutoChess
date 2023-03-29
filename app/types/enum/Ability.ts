@@ -124,7 +124,8 @@ import {
   MachPunchStrategy,
   TripleKickStrategy,
   MawashiGeriStrategy,
-  ForecastStrategy
+  ForecastStrategy,
+  SacredSwordStrategy
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -253,7 +254,8 @@ export enum Ability {
   MACH_PUNCH = "MACH_PUNCH",
   TRIPLE_KICK = "TRIPLE_KICK",
   MAWASHI_GERI = "MAWASHI_GERI",
-  FORECAST = "FORECAST"
+  FORECAST = "FORECAST",
+  SACRED_SWORD = "SACRED_SWORD"
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -382,5 +384,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.MACH_PUNCH]: new MachPunchStrategy(),
   [Ability.TRIPLE_KICK]: new TripleKickStrategy(),
   [Ability.MAWASHI_GERI]: new MawashiGeriStrategy(),
-  [Ability.FORECAST]: new ForecastStrategy()
+  [Ability.FORECAST]: new ForecastStrategy(),
+  [Ability.SACRED_SWORD]: new SacredSwordStrategy()
 }

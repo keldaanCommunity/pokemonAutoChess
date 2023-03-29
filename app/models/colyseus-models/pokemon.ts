@@ -7400,8 +7400,8 @@ export class Virizion extends Pokemon {
       AttackSprite.GRASS_MELEE,
       AttackType.PHYSICAL,
       2,
-      100,
-      Ability.SEISMIC_TOSS,
+      90,
+      Ability.SACRED_SWORD,
       shiny,
       emotion,
       true

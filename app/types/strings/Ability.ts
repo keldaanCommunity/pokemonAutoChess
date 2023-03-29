@@ -634,6 +634,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     prt: ``,
     fra: ``
   },
+  [Ability.SACRED_SWORD]: {
+    eng: `Sacred Sword`,
+    esp: ``,
+    prt: ``,
+    fra: ``
+  },
   [Ability.SHADOW_BALL]: {
     eng: `Shadow Ball`,
     esp: ``,
@@ -1389,6 +1395,12 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
   },
   [Ability.APPLE_ACID]: {
     eng: `Deals [30,60,120,SP] ${Damage.SPECIAL} to the target, and lower its ${Stat.SPE_DEF} by 3 points`,
+    esp: ``,
+    prt: ``,
+    fra: ``
+  },
+  [Ability.SACRED_SWORD]: {
+    eng: `Deals [60,80,120,SP] ${Damage.TRUE} to the target`,
     esp: ``,
     prt: ``,
     fra: ``
