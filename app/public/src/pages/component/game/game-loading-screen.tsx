@@ -6,7 +6,6 @@ import "./game-loading-screen.css"
 
 export default function GameLoadingScreen() {
   const players = useAppSelector((state) => state.game.players)
-  console.log({ players })
   const currentPlayerId = useAppSelector((state) => state.network.uid)
   const progress = players.find(p => p.id === currentPlayerId)?.loadingProgress
   const statusMessage = getGameScene()?.loadingManager?.statusMessage
