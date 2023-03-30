@@ -1,0 +1,19 @@
+.game-loading-screen {
+    position: absolute;
+    width: 100vw;
+    aspect-ratio: 2000/1000;
+}
+
+.game-loading-screen .loading-bar {
+    position: absolute;
+    top: 20vw;
+    left: 20vw;
+    right: 20vw;
+    color: white;
+}
+
+.game-loading-screen .loading-bar p {
+    text-align: center;
+    font-family: monospace;
+    font-size: 28pt;
+}

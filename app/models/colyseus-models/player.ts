@@ -48,6 +48,7 @@ export default class Player extends Schema implements IPlayer {
   @type("string") role: Role
   @type(["string"]) itemsProposition = new ArraySchema<Item>()
   @type(["string"]) pokemonsProposition = new ArraySchema<Pkm>()
+  @type("float32") loadingProgress: number = 0
   effects: Effects = new Effects()
   isBot: boolean
   opponents: Map<string, number> = new Map<string, number>()
@@ -77,6 +78,7 @@ export default class Player extends Schema implements IPlayer {
     this.role = role
     this.pokemonCollection = new PokemonCollection(pokemonCollection)
     this.simulation = new Simulation(id, room)
+    if(isBot) this.loadingProgress = 100
   }
 
   getCurrentBattleResult() {

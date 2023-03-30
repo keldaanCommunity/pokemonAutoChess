@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { AttackType, GamePhaseState } from "../../../types/enum/Game"
+import { GamePhaseState } from "../../../types/enum/Game"
 import { IDps, IDpsHeal, IPlayer } from "../../../types"
 import { ArraySchema, DataChange, MapSchema } from "@colyseus/schema"
 import ExperienceManager from "../../../models/colyseus-models/experience-manager"
@@ -12,6 +12,7 @@ import { Item } from "../../../types/enum/Item"
 import { toast } from "react-toastify"
 import React from "react"
 import { getAvatarSrc } from "../utils"
+import { StageDuration } from "../../../types/Config"
 
 interface GameStateStore {
   afterGameId: string
@@ -50,8 +51,8 @@ interface GameStateStore {
 
 const initialState: GameStateStore = {
   afterGameId: "",
-  phaseDuration: 50,
-  roundTime: 50,
+  phaseDuration: StageDuration[0],
+  roundTime: StageDuration[0],
   phase: GamePhaseState.PICK,
   players: new Array<IPlayer>(),
   stageLevel: 0,
@@ -240,6 +241,15 @@ export const gameSlice = createSlice({
     ) => {
       if (state.currentPlayerId === action.payload.id) {
         state.currentPlayerAvatar = action.payload.value
+      }
+    },
+    setLoadingProgress: (
+      state,
+      action: PayloadAction<{ value: number; id: string }>
+    ) => {
+      const player = state.players.find(p => p.id === action.payload.id)
+      if(player){
+        player.loadingProgress = action.payload.value
       }
     },
     setPlayer: (state, action: PayloadAction<IPlayer>) => {
@@ -447,6 +457,7 @@ export const {
   addBlueHealDpsMeter,
   setCurrentPlayerName,
   setCurrentPlayerTitle,
+  setLoadingProgress,
   setPlayer,
   setCurrentPlayerAvatar,
   setCurrentPlayerExperienceManager,

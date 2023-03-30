@@ -324,6 +324,30 @@ export default class GameRoom extends Room<GameState> {
       }
     })
 
+    this.onMessage(Transfer.LOADING_PROGRESS, (client, progress: number) => {
+      if (client.auth) {
+        const player = this.state.players.get(client.auth.uid)
+        if(player){
+          player.loadingProgress = progress
+        }
+      }
+    })
+
+    this.onMessage(Transfer.LOADING_COMPLETE, (client) => {
+      if (client.auth) {
+        const player = this.state.players.get(client.auth.uid)
+        if(player){
+          player.loadingProgress = 100
+        }
+        if(Array.from(this.state.players.values()).every(player => player.loadingProgress === 100)){
+          this.broadcast(Transfer.LOADING_COMPLETE)
+          this.startGame()
+        }
+      }
+    })
+  }
+
+  startGame(){
     this.setSimulationInterval((deltaTime: number) => {
       if (!this.state.gameFinished) {
         try {

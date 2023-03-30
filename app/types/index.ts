@@ -146,7 +146,9 @@ export enum Transfer {
   POKEMON_HEAL = "POKEMON_HEAL",
   UNOWN_ENCOUNTER = "UNOWN_ENCOUNTER",
   UNOWN_WANDERING = "UNOWN_WANDERING",
-  VECTOR = "VECTOR"
+  VECTOR = "VECTOR",
+  LOADING_PROGRESS = "LOADING_PROGRESS",
+  LOADING_COMPLETE = "LOADING_COMPLETE"
 }
 
 export enum AttackSprite {
@@ -295,6 +297,7 @@ export interface IPlayer {
   itemsProposition: Item[]
   pokemonsProposition: Pkm[]
   rerollCount: number
+  loadingProgress: number
 }
 export interface IPokemon {
   id: string

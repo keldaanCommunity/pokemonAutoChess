@@ -29,6 +29,7 @@ import {
   setCurrentPlayerExperienceManager,
   setCurrentPlayerAvatar,
   setCurrentPlayerName,
+  setLoadingProgress,
   addBlueDpsMeter,
   changeBlueDpsMeter,
   addRedDpsMeter,
@@ -59,6 +60,7 @@ import GameShop from "./component/game/game-shop"
 import GameSynergies from "./component/game/game-synergies"
 import GameModal from "./component/game/game-modal"
 import GameOptionsIcon from "./component/game/game-options-icon"
+import GameLoadingScreen from "./component/game/game-loading-screen"
 import AfterGameState from "../../../rooms/states/after-game-state"
 import {
   IDragDropCombineMessage,
@@ -82,7 +84,7 @@ export function getGameContainer(): GameContainer {
 }
 
 export function getGameScene(): GameScene | undefined {
-  return gameContainer.game?.scene?.getScene("gameScene") as
+  return gameContainer?.game?.scene?.getScene("gameScene") as
     | GameScene
     | undefined
 }
@@ -99,6 +101,7 @@ export default function Game() {
   )
 
   const [initialized, setInitialized] = useState<boolean>(false)
+  const [loaded, setLoaded] = useState<boolean>(false)
   const [reconnected, setReconnected] = useState<boolean>(false)
   const [modalTitle, setModalTitle] = useState<string>("")
   const [modalInfo, setModalInfo] = useState<string>("")
@@ -109,31 +112,6 @@ export default function Game() {
 
   async function leave() {
     const savePlayers = new Array<ISimplePlayer>()
-
-    document.getElementById("game")?.removeEventListener(Transfer.DRAG_DROP, ((
-      event: CustomEvent<IDragDropMessage>
-    ) => {
-      gameContainer.onDragDrop(event)
-    }) as EventListener)
-    document
-      .getElementById("game")
-      ?.removeEventListener(Transfer.DRAG_DROP_ITEM, ((
-        event: CustomEvent<IDragDropItemMessage>
-      ) => {
-        gameContainer.onDragDropItem(event)
-      }) as EventListener)
-    document
-      .getElementById("game")
-      ?.removeEventListener(Transfer.DRAG_DROP_COMBINE, ((
-        event: CustomEvent<IDragDropCombineMessage>
-      ) => {
-        gameContainer.onDragDropCombine(event)
-      }) as EventListener)
-    document.getElementById("game")?.removeEventListener(Transfer.SELL_DROP, ((
-      event: CustomEvent<{ pokemonId: string }>
-    ) => {
-      gameContainer.onSellDrop(event)
-    }) as EventListener)
 
     const token = await firebase.auth().currentUser?.getIdToken()
 
@@ -241,6 +219,9 @@ export default function Game() {
       ) => {
         gameContainer.onSellDrop(event)
       }) as EventListener)
+      room.onMessage(Transfer.LOADING_COMPLETE, () => {
+        setLoaded(true)
+      })
       room.onMessage(Transfer.BROADCAST_INFO, (message) => {
         setModalTitle(message.title)
         setModalInfo(message.info)
@@ -362,6 +343,10 @@ export default function Game() {
               dispatch(
                 setCurrentPlayerTitle({ id: player.id, value: change.value })
               )
+            } else if (change.field == "loadingProgress") {
+              dispatch(
+                setLoadingProgress({ id: player.id, value: change.value })
+              )
             }
             dispatch(changePlayer({ id: player.id, change: change }))
           })
@@ -474,27 +459,29 @@ export default function Game() {
 
   if (toAfter) {
     return <Navigate to="/after" />
-  } else {
-    return (
-      <div>
-        <GameModal
-          modalBoolean={modalBoolean}
-          modalTitle={modalTitle}
-          modalInfo={modalInfo}
-          hideModal={setModalBoolean}
-          leave={leave}
-        />
-        <GameShop />
-        <GamePlayerInformations />
-        <GamePlayers click={(id: string) => playerClick(id)} />
-        <GameSynergies />
-        <GameItemsProposition />
-        <GamePokemonsProposition />
-        <GameDpsMeter />
-        <GameToasts />
-        <GameOptionsIcon leave={leave} />
-        <div id="game" ref={container}></div>
-      </div>
-    )
   }
+  
+  return (
+    <div>
+      {loaded ? (<>
+        <GameModal
+        modalBoolean={modalBoolean}
+        modalTitle={modalTitle}
+        modalInfo={modalInfo}
+        hideModal={setModalBoolean}
+        leave={leave}
+      />
+      <GameShop />
+      <GamePlayerInformations />
+      <GamePlayers click={(id: string) => playerClick(id)} />
+      <GameSynergies />
+      <GameItemsProposition />
+      <GamePokemonsProposition />
+      <GameDpsMeter />
+      <GameToasts />
+      <GameOptionsIcon leave={leave} />
+      </>) : (<GameLoadingScreen />)}
+      <div id="game" ref={container}></div>
+    </div>
+  )
 }

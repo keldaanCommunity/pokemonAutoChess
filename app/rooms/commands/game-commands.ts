@@ -1,5 +1,5 @@
 import { Command } from "@colyseus/command"
-import { ItemProposalStages, ItemRecipe, NeutralStage, CarouselStages } from "../../types/Config"
+import { ItemProposalStages, ItemRecipe, NeutralStage, CarouselStages, StageDuration } from "../../types/Config"
 import { Item, BasicItems } from "../../types/enum/Item"
 import { BattleResult } from "../../types/enum/Game"
 import Player from "../../models/colyseus-models/player"
@@ -1026,11 +1026,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
 
   initializePickingPhase() {
     this.state.phase = GamePhaseState.PICK
-
-    this.state.time =
-      this.state.stageLevel === 10 || this.state.stageLevel === 20
-        ? 50000
-        : 30000
+    this.state.time = (StageDuration[this.state.stageLevel] ?? StageDuration.DEFAULT) * 1000
 
     // Item propositions stages
     if(ItemProposalStages.includes(this.state.stageLevel)){

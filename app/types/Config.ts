@@ -149,6 +149,13 @@ export const EvolutionTime = {
   EVOLVE_HATCH: 4
 }
 
+export const StageDuration: Record<number | "DEFAULT", number> = {
+  0: 15,
+  10: 50,
+  20: 50,
+  DEFAULT: 30
+}
+
 export const CarouselStages = [1, 6, 11, 16, 21, 26, 31]
 export const ItemProposalStages = [2, 3]
 

@@ -17,15 +17,6 @@ export default class BattleManager {
   group: GameObjects.Group
   scene: GameScene
   player: IPlayer
-  textStyle: {
-    fontSize: string
-    fontFamily: string
-    color: string
-    align: string
-    stroke: string
-    strokeThickness: number
-    wordWrap: { width: number; useAdvancedWrap: boolean }
-  }
   animationManager: AnimationManager
 
   constructor(
@@ -37,15 +28,6 @@ export default class BattleManager {
     this.group = group
     this.scene = scene
     this.player = player
-    this.textStyle = {
-      fontSize: "25px",
-      fontFamily: "Verdana",
-      color: "white",
-      align: "center",
-      stroke: "#000",
-      strokeThickness: 2,
-      wordWrap: { width: 200, useAdvancedWrap: true }
-    }
     this.animationManager = animationManager
   }
 
