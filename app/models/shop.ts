@@ -193,7 +193,8 @@ export const Mythical2Shop = new Array<Pkm>(
   Pkm.RAYQUAZA,
   Pkm.KYOGRE,
   Pkm.GROUDON,
-  Pkm.VOLCANION
+  Pkm.VOLCANION,
+  Pkm.ORIGIN_GIRATINA
 )
 
 export default class Shop {

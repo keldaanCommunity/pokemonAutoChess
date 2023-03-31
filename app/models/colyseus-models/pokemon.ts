@@ -6463,9 +6463,9 @@ export class Giratina extends Pokemon {
       2,
       AttackSprite.GHOST_RANGE,
       AttackType.PHYSICAL,
-      2,
-      100,
-      Ability.NIGHT_SLASH,
+      3,
+      40,
+      Ability.SHADOW_SNEAK,
       shiny,
       emotion,
       true
@@ -6480,16 +6480,16 @@ export class OriginGiratina extends Pokemon {
       [Synergy.DRAGON, Synergy.GHOST],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
-      300,
-      30,
-      5,
-      5,
-      2,
+      400,
+      40,
+      6,
+      6,
+      1,
       AttackSprite.GHOST_RANGE,
       AttackType.PHYSICAL,
-      2,
-      100,
-      Ability.DEFAULT,
+      3,
+      40,
+      Ability.SHADOW_SNEAK,
       shiny,
       emotion,
       true
@@ -6522,52 +6522,52 @@ export class Zapdos extends Pokemon {
 }
 
 export class Zeraora extends Pokemon {
-    constructor(shiny: boolean, emotion: Emotion) {
-      super(
-        Pkm.ZERAORA,
-        [Synergy.ELECTRIC, Synergy.FIELD],
-        Rarity.MYTHICAL,
-        Pkm.DEFAULT,
-        200,
-        20,
-        3,
-        3,
-        2,
-        AttackSprite.ELECTRIC_RANGE,
-        AttackType.PHYSICAL,
-        2,
-        80,
-        Ability.DEFAULT,
-        shiny,
-        emotion,
-        true
-      )
-    }
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ZERAORA,
+      [Synergy.ELECTRIC, Synergy.FIELD],
+      Rarity.MYTHICAL,
+      Pkm.DEFAULT,
+      200,
+      20,
+      3,
+      3,
+      2,
+      AttackSprite.ELECTRIC_RANGE,
+      AttackType.PHYSICAL,
+      2,
+      80,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      true
+    )
   }
+}
 
-  export class Yveltal extends Pokemon {
-    constructor(shiny: boolean, emotion: Emotion) {
-      super(
-        Pkm.YVELTAL,
-        [Synergy.FIRE, Synergy.FLYING],
-        Rarity.MYTHICAL,
-        Pkm.DEFAULT,
-        200,
-        20,
-        3,
-        3,
-        2,
-        AttackSprite.FIRE_RANGE,
-        AttackType.PHYSICAL,
-        2,
-        60,
-        Ability.DEFAULT,
-        shiny,
-        emotion,
-        true
-      )
-    }
+export class Yveltal extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.YVELTAL,
+      [Synergy.FIRE, Synergy.FLYING],
+      Rarity.MYTHICAL,
+      Pkm.DEFAULT,
+      200,
+      20,
+      3,
+      3,
+      2,
+      AttackSprite.FIRE_RANGE,
+      AttackType.PHYSICAL,
+      2,
+      60,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      true
+    )
   }
+}
 
 export class Moltres extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
@@ -9488,29 +9488,28 @@ export class TapuLele extends Pokemon {
 }
 
 export class Xerneas extends Pokemon {
-    constructor(shiny: boolean, emotion: Emotion) {
-      super(
-        Pkm.XERNEAS,
-        [Synergy.PSYCHIC, Synergy.FAIRY],
-        Rarity.MYTHICAL,
-        Pkm.DEFAULT,
-        270,
-        17,
-        3,
-        3,
-        3,
-        AttackSprite.PSYCHIC_RANGE,
-        AttackType.PHYSICAL,
-        2,
-        200,
-        Ability.DEFAULT,
-        shiny,
-        emotion,
-        true
-      )
-    }
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.XERNEAS,
+      [Synergy.PSYCHIC, Synergy.FAIRY],
+      Rarity.MYTHICAL,
+      Pkm.DEFAULT,
+      270,
+      17,
+      3,
+      3,
+      3,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      2,
+      200,
+      Ability.DEFAULT,
+      shiny,
+      emotion,
+      true
+    )
   }
-  
+}
 
 export class TapuFini extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
