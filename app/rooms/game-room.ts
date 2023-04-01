@@ -391,7 +391,7 @@ export default class GameRoom extends Room<GameState> {
         throw new Error("consented leave")
       }
 
-      // allow disconnected client to reconnect into this room until 20 seconds
+      // allow disconnected client to reconnect into this room until 60 seconds
       await this.allowReconnection(client, 60)
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
@@ -400,6 +400,10 @@ export default class GameRoom extends Room<GameState> {
         if(player && player.loadingProgress < 100){
           // if player quit during the loading screen, remove it from the players
           this.state.players.delete(client.auth.uid)
+          if(Array.from(this.state.players.values()).every(player => player.loadingProgress === 100)){
+            this.broadcast(Transfer.LOADING_COMPLETE)
+            this.startGame()
+          }
         }
       }
     }

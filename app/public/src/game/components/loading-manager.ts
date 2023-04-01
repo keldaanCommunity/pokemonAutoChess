@@ -17,8 +17,10 @@ export default class LoadingManager {
       this.scene.room?.send(Transfer.LOADING_PROGRESS, value*100)
     })
 
-    this.scene.load.on("fileprogress", (file) => {
-      this.statusMessage = "Loading asset: " + file.key
+    this.scene.load.on("fileprogress", (file, percentComplete) => {
+      if(percentComplete < 1){
+        this.statusMessage = "Loading asset: " + file.key
+      }
     })
 
     this.scene.load.on("complete", () => {
