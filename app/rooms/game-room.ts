@@ -396,6 +396,11 @@ export default class GameRoom extends Room<GameState> {
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
         console.log(`${client.auth.displayName} leave game room`)
+        const player = this.state.players.get(client.auth.uid)
+        if(player && player.loadingProgress < 100){
+          // if player quit during the loading screen, remove it from the players
+          this.state.players.delete(client.auth.uid)
+        }
       }
     }
   }
