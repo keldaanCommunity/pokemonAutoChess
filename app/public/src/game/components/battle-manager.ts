@@ -8,7 +8,8 @@ import { DataChange } from "@colyseus/schema"
 import {
   AttackType,
   PokemonActionState,
-  HealType
+  HealType,
+  Rarity
 } from "../../../../types/enum/Game"
 import { Ability } from "../../../../types/enum/Ability"
 import { Item } from "../../../../types/enum/Item"
@@ -418,9 +419,10 @@ export default class BattleManager {
           } else if (change.field == "ap") {
             pkm.ap = pokemon.ap
             if (pkm.detail) {
+              const abilityTier = pkm.rarity === Rarity.MYTHICAL ? 3 : pkm.stars
               pkm.detail.ap.textContent =
                 pokemon.ap.toString()
-                pkm.detail.updateAbilityDescription(pkm.skill, pkm.stars, pkm.ap)
+                pkm.detail.updateAbilityDescription(pkm.skill, abilityTier, pkm.ap)
             }
           } else if (change.field == "atkSpeed") {
             pkm.atkSpeed = pokemon.atkSpeed

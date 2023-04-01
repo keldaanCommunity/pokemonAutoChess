@@ -3,7 +3,7 @@ import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
 import { AttackTypeColor, RarityColor } from "../../../../../types/Config"
 import { Ability } from "../../../../../types/enum/Ability"
-import { Stat } from "../../../../../types/enum/Game"
+import { Rarity, Stat } from "../../../../../types/enum/Game"
 import { AbilityName } from "../../../../../types/strings/Ability"
 import { AttackTypeLabel } from "../../../../../types/strings/AttackType"
 import { CustomPokemonDescription } from "../../../../../types/strings/Pokemon"
@@ -78,7 +78,7 @@ export function GamePokemonDetail(props: {
           <p>{AbilityName[props.pokemon.skill].eng}</p>
         </div>
         <div>
-          <AbilityTooltip ability={props.pokemon.skill} stars={props.pokemon.stars} />
+          <AbilityTooltip ability={props.pokemon.skill} tier={props.pokemon.rarity === Rarity.MYTHICAL ? 3 : props.pokemon.stars} />
         </div>
       </div>
       )}

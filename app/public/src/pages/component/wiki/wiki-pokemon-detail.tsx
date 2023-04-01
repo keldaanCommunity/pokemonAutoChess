@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { CDN_URL } from "../../../../../types"
 import { ICreditName } from "../../../../../types"
-import { AbilityName, AbilityDescription } from "../../../../../types/strings/Ability"
+import { AbilityName } from "../../../../../types/strings/Ability"
 import { ITracker } from "../../../../../types/ITracker"
 import Credits from "./Credits"
 import { RarityColor } from "../../../../../types/Config"
@@ -10,7 +10,7 @@ import { Pkm } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
 import SynergyIcon from "../icons/synergy-icon"
 import { AbilityTooltip } from "../ability/ability-tooltip"
-import { Stat } from "../../../../../types/enum/Game"
+import { Rarity, Stat } from "../../../../../types/enum/Game"
 import { StatLabel } from "../../../../../types/strings/Stat"
 import "./wiki-pokemon-detail.css"
 
@@ -84,7 +84,7 @@ export default function WikiPokemonDetail(props: {
       <dl>
         <dt>Ability</dt>
         <dd>{AbilityName[pokemon.skill].eng}
-          <AbilityTooltip ability={pokemon.skill} stars={pokemon.stars} />
+          <AbilityTooltip ability={pokemon.skill} tier={pokemon.rarity === Rarity.MYTHICAL ? 3 : pokemon.stars} />
         </dd>
       </dl>
     </div>
