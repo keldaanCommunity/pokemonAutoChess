@@ -77,7 +77,7 @@ export const TypeTrigger: { [key in Synergy]: number[] } = {
   [Synergy.FIGHTING]: [2, 4, 6],
   [Synergy.PSYCHIC]: [2, 4, 6],
   [Synergy.DARK]: [3, 6, 9],
-  [Synergy.METAL]: [2, 4],
+  [Synergy.STEEL]: [2, 4],
   [Synergy.GROUND]: [2, 4, 6],
   [Synergy.POISON]: [3, 6],
   [Synergy.DRAGON]: [3, 5],
@@ -88,7 +88,7 @@ export const TypeTrigger: { [key in Synergy]: number[] } = {
   [Synergy.BUG]: [2, 4, 6],
   [Synergy.FLYING]: [2, 4, 6, 8],
   [Synergy.FLORA]: [2, 3, 4, 5],
-  [Synergy.MINERAL]: [2, 4, 6],
+  [Synergy.ROCK]: [2, 4, 6],
   [Synergy.GHOST]: [2, 4, 6, 8],
   [Synergy.FAIRY]: [2, 4, 6],
   [Synergy.ICE]: [3, 5],
@@ -148,6 +148,9 @@ export const EvolutionTime = {
   EGG_HATCH: 3,
   EVOLVE_HATCH: 4
 }
+
+export const CarouselStages = [1, 6, 11, 16, 21, 26, 31]
+export const ItemProposalStages = [2, 3]
 
 export const NeutralStage: { turn: number; avatar: string }[] = [
   {
@@ -432,13 +435,13 @@ export const ItemRecipe: { [key in Item]?: Item[] } = {
   [Item.UPGRADE]: [Item.TWISTED_SPOON, Item.MAGNET],
   [Item.REAPER_CLOTH]: [Item.TWISTED_SPOON, Item.BLACK_GLASSES],
   [Item.POKEMONOMICON]: [Item.TWISTED_SPOON, Item.MIRACLE_SEED],
-  [Item.WATER_INCENSE]: [Item.TWISTED_SPOON, Item.NEVER_MELT_ICE],
+  [Item.POWER_LENS]: [Item.TWISTED_SPOON, Item.NEVER_MELT_ICE],
   [Item.SHELL_BELL]: [Item.TWISTED_SPOON, Item.CHARCOAL],
   [Item.LUCKY_EGG]: [Item.TWISTED_SPOON, Item.HEART_SCALE],
   [Item.AQUA_EGG]: [Item.MYSTIC_WATER, Item.MYSTIC_WATER],
   [Item.BLUE_ORB]: [Item.MYSTIC_WATER, Item.MAGNET],
   [Item.ZOOM_LENS]: [Item.MYSTIC_WATER, Item.BLACK_GLASSES],
-  [Item.BRIGHT_POWDER]: [Item.MYSTIC_WATER, Item.MIRACLE_SEED],
+  [Item.STAR_DUST]: [Item.MYSTIC_WATER, Item.MIRACLE_SEED],
   [Item.DELTA_ORB]: [Item.MYSTIC_WATER, Item.NEVER_MELT_ICE],
   [Item.MANA_SCARF]: [Item.MYSTIC_WATER, Item.CHARCOAL],
   [Item.SMOKE_BALL]: [Item.MYSTIC_WATER, Item.HEART_SCALE],
@@ -458,7 +461,7 @@ export const ItemRecipe: { [key in Item]?: Item[] } = {
   [Item.FOCUS_BAND]: [Item.MIRACLE_SEED, Item.CHARCOAL],
   [Item.FLAME_ORB]: [Item.MIRACLE_SEED, Item.HEART_SCALE],
   [Item.ASSAULT_VEST]: [Item.NEVER_MELT_ICE, Item.NEVER_MELT_ICE],
-  [Item.KINGS_ROCK]: [Item.NEVER_MELT_ICE, Item.CHARCOAL],
+  [Item.AMULET_COIN]: [Item.NEVER_MELT_ICE, Item.CHARCOAL],
   [Item.POKE_DOLL]: [Item.NEVER_MELT_ICE, Item.HEART_SCALE],
   [Item.RED_ORB]: [Item.CHARCOAL, Item.CHARCOAL],
   [Item.MAX_REVIVE]: [Item.CHARCOAL, Item.HEART_SCALE],
@@ -489,13 +492,13 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.UPGRADE]: { [Stat.AP]: 10, [Stat.ATK_SPEED]: 10 },
   [Item.REAPER_CLOTH]: { [Stat.AP]: 10, [Stat.CRIT_CHANCE]: 5 },
   [Item.POKEMONOMICON]: { [Stat.AP]: 10, [Stat.SHIELD]: 15 },
-  [Item.WATER_INCENSE]: { [Stat.AP]: 10, [Stat.SPE_DEF]: 1 },
+  [Item.POWER_LENS]: { [Stat.AP]: 10, [Stat.SPE_DEF]: 1 },
   [Item.SHELL_BELL]: { [Stat.AP]: 10, [Stat.ATK]: 1 },
   [Item.LUCKY_EGG]: { [Stat.AP]: 10, [Stat.DEF]: 1 },
   [Item.AQUA_EGG]: { [Stat.MANA]: 50 },
   [Item.BLUE_ORB]: { [Stat.MANA]: 15, [Stat.ATK_SPEED]: 10 },
   [Item.ZOOM_LENS]: { [Stat.MANA]: 15, [Stat.CRIT_CHANCE]: 5 },
-  [Item.BRIGHT_POWDER]: { [Stat.MANA]: 15, [Stat.SHIELD]: 15 },
+  [Item.STAR_DUST]: { [Stat.MANA]: 15, [Stat.SHIELD]: 15 },
   [Item.DELTA_ORB]: { [Stat.MANA]: 15, [Stat.SPE_DEF]: 1 },
   [Item.MANA_SCARF]: { [Stat.MANA]: 15, [Stat.ATK]: 1 },
   [Item.SMOKE_BALL]: { [Stat.MANA]: 15, [Stat.DEF]: 1 },
@@ -519,7 +522,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.FOCUS_BAND]: { [Stat.SHIELD]: 15, [Stat.ATK]: 1 },
   [Item.FLAME_ORB]: { [Stat.SHIELD]: 15, [Stat.DEF]: 1 },
   [Item.ASSAULT_VEST]: { [Stat.SPE_DEF]: 18 },
-  [Item.KINGS_ROCK]: { [Stat.SPE_DEF]: 1, [Stat.ATK]: 1 },
+  [Item.AMULET_COIN]: { [Stat.SPE_DEF]: 1, [Stat.ATK]: 1 },
   [Item.POKE_DOLL]: { [Stat.SPE_DEF]: 1, [Stat.DEF]: 1 },
   [Item.RED_ORB]: { [Stat.ATK]: 10 },
   [Item.MAX_REVIVE]: { [Stat.ATK]: 1, [Stat.DEF]: 1 },
@@ -1524,7 +1527,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_3,
       Header.WATER
     ],
-    type: Synergy.METAL
+    type: Synergy.STEEL
   },
   DRENCHED_BLUFF: {
     id: "DRENCHED_BLUFF",
@@ -1657,7 +1660,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_3,
       Header.WATER
     ],
-    type: Synergy.MINERAL
+    type: Synergy.ROCK
   },
   SURROUNDED_SEA: {
     id: "SURROUNDED_SEA",
@@ -1702,7 +1705,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_3,
       Header.WATER
     ],
-    type: Synergy.METAL
+    type: Synergy.STEEL
   },
   TEMPORAL_TOWER: {
     id: "TEMPORAL_TOWER",
@@ -2536,7 +2539,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_2,
       Header.WATER
     ],
-    type: Synergy.METAL
+    type: Synergy.STEEL
   },
   MT_STEEL_06F_08F: {
     id: "MT_STEEL_06F_08F",
@@ -2551,7 +2554,7 @@ export const DungeonData: { [key in Dungeon]: DungeonInfo } = Object.freeze({
       Header.GROUND_ALT_2,
       Header.WATER
     ],
-    type: Synergy.METAL
+    type: Synergy.STEEL
   },
   MT_FREEZE: {
     id: "MT_FREEZE",

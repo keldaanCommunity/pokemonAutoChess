@@ -6,7 +6,7 @@ import { itemClick } from "../../../stores/NetworkStore"
 import { addIconsToDescription } from "../../utils/descriptions"
 
 const style: CSS.Properties = {
-  width: "30%",
+  width: "320px",
   display: "flex",
   flexFlow: "column",
   alignItems: "center",

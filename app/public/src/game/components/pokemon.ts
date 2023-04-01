@@ -1,4 +1,4 @@
-import { Game, GameObjects } from "phaser"
+import Phaser, { GameObjects } from "phaser"
 import Lifebar from "./life-bar"
 import DraggableObject from "./draggable-object"
 import PokemonDetail from "./pokemon-detail"
@@ -12,8 +12,10 @@ import {
   IPokemon,
   IPokemonEntity,
   instanceofPokemonEntity,
+  instanceofPokemonAvatar,
   Emotion,
-  AttackSprite
+  AttackSprite,
+  IPokemonAvatar
 } from "../../../../types"
 import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
 import MoveTo from "phaser3-rex-plugins/plugins/moveto"
@@ -34,6 +36,8 @@ import {
   OrientationArray,
   OrientationVector
 } from "../../../../utils/orientation"
+import { clamp } from "../../../../utils/number"
+import PokemonFactory from "../../../../models/pokemon-factory"
 
 export default class Pokemon extends DraggableObject {
   evolution: Pkm
@@ -94,22 +98,34 @@ export default class Pokemon extends DraggableObject {
   fairyField: GameObjects.Sprite | undefined
   voidBoost: GameObjects.Sprite | undefined
   stars: number
+  playerId: string
+  tooltip: boolean
+  circle: GameObjects.Ellipse | undefined
+  circleTimer: GameObjects.Graphics
+  isPlayerAvatar: boolean
+  isCurrentPlayerAvatar: boolean
 
   constructor(
     scene: GameScene,
     x: number,
     y: number,
-    pokemon: IPokemonEntity | IPokemon,
+    pokemon_: IPokemonEntity | IPokemon | IPokemonAvatar,
     playerId: string,
     inBattle: boolean
   ) {
     super(scene, x, y, 75, 75, playerId !== scene.uid)
+    this.playerId = playerId
+    const pokemon: IPokemonEntity | IPokemon = instanceofPokemonAvatar(pokemon_)
+      ? PokemonFactory.createPokemonFromName(pokemon_.name)
+      : (pokemon_ as IPokemonEntity | IPokemon)
+
+    this.tooltip = !instanceofPokemonAvatar(pokemon_)
     this.stars = pokemon.stars
     this.evolution = instanceofPokemonEntity(pokemon)
       ? Pkm.DEFAULT
       : (pokemon as IPokemon).evolution
     this.emotion = pokemon.emotion
-    this.shiny = pokemon.shiny
+    this.shiny = pokemon_.shiny
     this.height = 0
     this.width = 0
     this.index = pokemon.index
@@ -152,6 +168,21 @@ export default class Pokemon extends DraggableObject {
     } else {
       this.orientation = Orientation.DOWNLEFT
       this.action = PokemonActionState.WALK
+    }
+
+    this.isPlayerAvatar = instanceofPokemonAvatar(pokemon_)
+    if (this.isPlayerAvatar) {
+      const currentPlayerId = scene.uid
+      this.circle = new GameObjects.Ellipse(scene, 0, 0, 50, 50)
+      this.add(this.circle)
+      this.circleTimer = new GameObjects.Graphics(scene)
+      this.add(this.circleTimer)
+      this.isCurrentPlayerAvatar = pokemon_.id === currentPlayerId
+      if (this.isCurrentPlayerAvatar) {
+        this.circle.setStrokeStyle(2, 0xffffff, 0.8)
+      } else {
+        this.circle.setStrokeStyle(1, 0xffffff, 0.5)
+      }
     }
     this.sprite = new GameObjects.Sprite(
       scene,
@@ -244,6 +275,22 @@ export default class Pokemon extends DraggableObject {
     this.setDepth(5)
   }
 
+  updateTooltipPosition() {
+    if (this.detail) {
+      const absX = this.x + this.detail.width / 2 + 40
+      const minX = this.detail.width / 2
+      const maxX = window.innerWidth - this.detail.width / 2
+      const absY = this.y - this.detail.height / 2 - 40
+      const minY = this.detail.height / 2
+      const maxY = window.innerHeight - this.detail.height / 2
+      const [x, y] = [
+        clamp(absX, minX, maxX) - this.x,
+        clamp(absY, minY, maxY) - this.y
+      ]
+      this.detail.setPosition(x, y)
+    }
+  }
+
   closeDetail() {
     if (this.detail) {
       this.detail.dom.remove()
@@ -254,7 +301,7 @@ export default class Pokemon extends DraggableObject {
 
   onPointerDown(pointer: Phaser.Input.Pointer) {
     super.onPointerDown(pointer)
-    if (pointer.rightButtonDown()) {
+    if (pointer.rightButtonDown() && this.tooltip) {
       const s = <GameScene>this.scene
       if (s.lastPokemonDetail && s.lastPokemonDetail != this) {
         s.lastPokemonDetail.closeDetail()
@@ -295,6 +342,24 @@ export default class Pokemon extends DraggableObject {
         this.add(this.detail)
         s.lastPokemonDetail = this
       }
+    }
+  }
+
+  updateCircleTimer(timer: number) {
+    if (timer <= 0) {
+      this.circleTimer.destroy()
+    } else {
+      this.circleTimer.clear()
+      this.circleTimer.lineStyle(
+        8,
+        0xF7D51D,
+        this.isCurrentPlayerAvatar ? 0.8 : 0.5
+      )
+      this.circleTimer.beginPath()
+
+      const angle = (Math.min(timer, 8000) / 8000) * Math.PI * 2
+      this.circleTimer.arc(0, 0, 30, 0, angle)
+      this.circleTimer.strokePath()
     }
   }
 
@@ -443,7 +508,7 @@ export default class Pokemon extends DraggableObject {
     })
   }
 
-  incenseAnimation() {
+  powerLensAnimation() {
     const coordinates = transformAttackCoordinate(
       this.positionX,
       this.positionY
@@ -462,7 +527,7 @@ export default class Pokemon extends DraggableObject {
     })
   }
 
-  brightPowderAnimation() {
+  starDustAnimation() {
     const coordinates = transformAttackCoordinate(
       this.positionX,
       this.positionY
@@ -2135,6 +2200,25 @@ export default class Pokemon extends DraggableObject {
             )
             break
 
+          case Ability.SACRED_SWORD:
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.SACRED_SWORD,
+              "000"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.SACRED_SWORD)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
+
           case Ability.SHADOW_SNEAK:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY)
             specialProjectile = this.scene.add.sprite(
@@ -2744,6 +2828,72 @@ export default class Pokemon extends DraggableObject {
             })
             break
           }
+
+          case Ability.MACH_PUNCH:
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              "FIGHTING",
+              "FIST"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(0.25)
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              scale: 3,
+              ease: Phaser.Math.Easing.Cubic.Out,
+              yoyo: false,
+              duration: 500,
+              onComplete: () => {
+                specialProjectile.destroy()
+              }
+            })
+            break
+
+          case Ability.MAWASHI_GERI:
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              "FIGHTING",
+              "FOOT"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(0.25)
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              scale: 3,
+              ease: Phaser.Math.Easing.Cubic.Out,
+              yoyo: false,
+              duration: 500,
+              onComplete: () => {
+                specialProjectile.destroy()
+              }
+            })
+            break
+
+          case Ability.TRIPLE_KICK:
+            coordinates = transformAttackCoordinate(
+              this.positionX,
+              this.positionY
+            )
+            for (let i = 0; i < 3; i++) {
+              setTimeout(() => {
+                const projectile = this.scene.add.sprite(
+                  coordinates[0] +
+                    Math.round(50 * Math.cos((Math.PI * 2 * i) / 3)),
+                  coordinates[1] +
+                    Math.round(50 * Math.sin((Math.PI * 2 * i) / 3)),
+                  "FIGHTING",
+                  "PAW"
+                )
+                projectile.setDepth(7)
+                projectile.setScale(1.5)
+                setTimeout(() => projectile.destroy(), 500)
+              }, i * 250)
+            }
+            break
 
           default:
             break

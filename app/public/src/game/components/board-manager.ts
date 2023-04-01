@@ -71,11 +71,9 @@ export default class BoardManager {
     this.pokemons.forEach((pokemon) => {
       if (pokemon.positionY != 0) {
         pokemon.setVisible(false)
-        if (pokemon.detail) {
-          pokemon.closeDetail()
-        }
       }
     })
+    this.closeTooltips()
   }
 
   pickMode() {
@@ -169,5 +167,16 @@ export default class BoardManager {
       }
     })
     return count === 2 || count === 5 || count === 8
+  }
+
+  closeTooltips(){
+    this.pokemons.forEach((pokemon) => {
+      if (pokemon.detail) {
+        pokemon.closeDetail()
+      }
+      if(pokemon.itemsContainer){
+        pokemon.itemsContainer.closeDetails()
+      }
+    })
   }
 }

@@ -27,6 +27,7 @@ import { loadPreferences } from "../../preferences"
 import { getPortraitSrc } from "../../utils"
 import { Item } from "../../../../types/enum/Item"
 import Player from "../../../../models/colyseus-models/player"
+import MinigameManager from "../components/minigame-manager"
 
 export default class GameScene extends Scene {
   tilemap: DesignTiled | undefined
@@ -62,6 +63,7 @@ export default class GameScene extends Scene {
   zones: Phaser.GameObjects.Zone[] = []
   lastDragDropPokemon: Pokemon | undefined
   lastPokemonDetail: Pokemon | undefined
+  minigameManager: MinigameManager
 
   constructor() {
     super({
@@ -204,6 +206,11 @@ export default class GameScene extends Scene {
     this.load.multiatlas(
       "APPLE_ACID",
       "/assets/attacks/APPLE_ACID.json",
+      "/assets/attacks"
+    )
+    this.load.multiatlas(
+      "SACRED_SWORD",
+      "/assets/attacks/SACRED_SWORD.json",
       "/assets/attacks"
     )
     this.load.multiatlas(
@@ -425,6 +432,11 @@ export default class GameScene extends Scene {
       "/assets/attacks/WATER_SHURIKEN.json",
       "/assets/attacks"
     )
+    this.load.multiatlas(
+      "FIGHTING",
+      "/assets/attacks/FIGHTING.json",
+      "/assets/attacks"
+    )
   }
 
   create() {
@@ -462,6 +474,13 @@ export default class GameScene extends Scene {
       this.initializeDragAndDrop()
       this.battleGroup = this.add.group()
       this.animationManager = new AnimationManager(this)
+      this.minigameManager = new MinigameManager(
+        this,
+        this.animationManager,
+        this.uid,
+        this.room.state.avatars,
+        this.room.state.floatingItems
+      )
       this.itemsContainer = new ItemsContainer(
         this,
         this.room.state.players[this.uid].items,
@@ -493,6 +512,13 @@ export default class GameScene extends Scene {
       }) as Phaser.Sound.WebAudioSound
       const musicVolume = loadPreferences().musicVolume / 100
       this.music.play({ volume: musicVolume, loop: true })
+    }
+  }
+
+  update(time: number, delta: number) {
+    super.update(time, delta)
+    if (this.lastPokemonDetail) {
+      this.lastPokemonDetail.updateTooltipPosition()
     }
   }
 
@@ -544,7 +570,10 @@ export default class GameScene extends Scene {
 
   updatePhase() {
     this.resetDragState()
-    if (this.room?.state.phase == GamePhaseState.FIGHT) {
+    if (
+      this.room?.state.phase == GamePhaseState.FIGHT ||
+      this.room?.state.phase === GamePhaseState.MINIGAME
+    ) {
       this.board?.battleMode()
     } else {
       this.board?.pickMode()
@@ -642,6 +671,39 @@ export default class GameScene extends Scene {
     this.dragDropText.setOrigin(0.5)
 
     this.input.mouse.disableContextMenu()
+    this.input.on("pointerdown", (pointer) => {
+      if (
+        pointer.rightButtonDown() &&
+        this.minigameManager &&
+        this.room?.state.phase === GamePhaseState.MINIGAME
+      ) {
+        const vector = this.minigameManager.getVector(pointer.x, pointer.y)
+        this.room?.send(Transfer.VECTOR, vector)
+
+        const clickAnimation = this.add.sprite(
+          pointer.x,
+          pointer.y,
+          "attacks",
+          `WATER/cell/000`
+        )
+        clickAnimation.setDepth(7)
+        clickAnimation.anims.play("WATER/cell")
+        this.tweens.add({
+          targets: clickAnimation,
+          x: pointer.x,
+          y: pointer.y,
+          ease: "linear",
+          yoyo: true,
+          duration: 200,
+          onComplete: () => {
+            clickAnimation.destroy()
+          }
+        })
+      }
+      if (this.board) {
+        this.board.closeTooltips()
+      }
+    })
 
     this.input.on(
       "gameobjectover",

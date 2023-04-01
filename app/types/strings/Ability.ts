@@ -640,6 +640,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     prt: ``,
     fra: ``
   },
+  [Ability.SACRED_SWORD]: {
+    eng: `Sacred Sword`,
+    esp: ``,
+    prt: ``,
+    fra: ``
+  },
   [Ability.SHADOW_BALL]: {
     eng: `Shadow Ball`,
     esp: ``,
@@ -741,6 +747,30 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.MACH_PUNCH]: {
+    eng: "Mach Punch",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.TRIPLE_KICK]: {
+    eng: "Triple Kick",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.MAWASHI_GERI]: {
+    eng: "Mawashi Geri",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.FORECAST]: {
+    eng: "Forecast",
+    esp: "",
+    prt: "",
+    fra: "Météo"
   }
 }
 
@@ -1381,6 +1411,12 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``,
     fra: ``
   },
+  [Ability.SACRED_SWORD]: {
+    eng: `Deals [60,80,120,SP] ${Damage.TRUE} to the target`,
+    esp: ``,
+    prt: ``,
+    fra: ``
+  },
   [Ability.SHADOW_BALL]: {
     eng: `Deals [45,90,180,SP] ${Damage.SPECIAL} and burn 15 ${Stat.MANA} to the target and adjacent enemies`,
     esp: ``,
@@ -1482,5 +1518,33 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.MACH_PUNCH]: {
+    eng: `Deals [50, SP] ${Damage.SPECIAL}. Double damage if attacker has a better ${Stat.DEF} than target`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.TRIPLE_KICK]: {
+    eng: `Deals [50, SP] ${Damage.SPECIAL} to up to 3 adjacent enemies`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.MAWASHI_GERI]: {
+    eng: `Deals [50, SP] ${Damage.SPECIAL}. Double damage if attacker has a better ${Stat.ATK} than target`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.FORECAST]: {
+    eng: `Castform changes forms depending on the weather, giving additional bonus to your team:
+Gives [10,SP] ${Stat.SHIELD} to your team. 
+Sun: also gives [5,SP] ${Stat.ATK}
+Rain: also gives [20,SP] ${Stat.MANA}
+Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
+    esp: "",
+    prt: "",
+    fra: "Météo"
   }
 }

@@ -145,7 +145,8 @@ export enum Transfer {
   POKEMON_DAMAGE = "POKEMON_DAMAGE",
   POKEMON_HEAL = "POKEMON_HEAL",
   UNOWN_ENCOUNTER = "UNOWN_ENCOUNTER",
-  UNOWN_WANDERING = "UNOWN_WANDERING"
+  UNOWN_WANDERING = "UNOWN_WANDERING",
+  VECTOR = "VECTOR"
 }
 
 export enum AttackSprite {
@@ -250,6 +251,22 @@ export interface ISimplePlayer {
   synergies: Array<{ name: Synergy; value: number }>
 }
 
+export interface IPokemonAvatar {
+  id: string
+  name: Pkm
+  shiny: boolean
+  x: number
+  y: number
+  action: PokemonActionState
+}
+
+export interface IFloatingItem {
+  id: string
+  name: Item
+  x: number
+  y: number
+}
+
 export interface IPlayer {
   id: string
   name: string
@@ -259,7 +276,6 @@ export interface IPlayer {
   simulation: ISimulation
   experienceManager: ExperienceManager
   synergies: Synergies
-  itemsProposition: Item[]
   money: number
   life: number
   shopLocked: boolean
@@ -276,6 +292,7 @@ export interface IPlayer {
   pokemonCollection: PokemonCollection
   title: Title | ""
   role: Role
+  itemsProposition: Item[]
   pokemonsProposition: Pkm[]
   rerollCount: number
 }
@@ -350,8 +367,16 @@ export interface IDpsHeal {
   shield: number
 }
 
-export function instanceofPokemonEntity(obj: IPokemon | IPokemonEntity) {
+export function instanceofPokemonEntity(
+  obj: IPokemon | IPokemonEntity | IPokemonAvatar
+) {
   return "mana" in obj
+}
+
+export function instanceofPokemonAvatar(
+  obj: IPokemon | IPokemonEntity | IPokemonAvatar
+) {
+  return !("stars" in obj)
 }
 
 export interface IPokemonEntity {
@@ -434,9 +459,9 @@ export interface ICount {
   attackCount: number
   growGroundCount: number
   dodgeCount: number
-  incenseCount: number
+  powerLensCount: number
   staticCount: number
-  brightPowderCount: number
+  starDustCount: number
   doubleAttackCount: number
   staticHolderCount: number
   defensiveRibbonCount: number
@@ -575,7 +600,7 @@ export const TitleDescription: { [key in Title]: string } = {
   [Title.DRAGON_TAMER]: "Max Synergy With Dragon Type in a game",
   [Title.FIREFIGHTER]: "Max Synergy With Water Type in a game",
   [Title.TEAM_ROCKET_GRUNT]: "Max Synergy With Poison Type in a game",
-  [Title.HIKER]: "Max Synergy With Mineral Type in a game",
+  [Title.HIKER]: "Max Synergy With Rock Type in a game",
   [Title.LONE_WOLF]: "Win in a lobby against only bots",
   [Title.KINDLER]: "Max Synergy With Fire Type in a game",
   [Title.GARDENER]: "Max Synergy With Flora Type in a game",

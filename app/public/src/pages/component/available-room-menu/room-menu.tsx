@@ -11,6 +11,7 @@ import { leaveLobby } from "../../../stores/LobbyStore"
 import { ILobbyUser } from "../../../../../models/colyseus-models/lobby-user"
 import GameRoomItem from "./game-room-item"
 import "./room-menu.css"
+import { throttle } from "../../../../../utils/function"
 
 export default function RoomMenu(props: {
   toPreparation: boolean
@@ -31,7 +32,7 @@ export default function RoomMenu(props: {
   const lobbyUsers: ILobbyUser[] = useAppSelector((state) => state.lobby.users)
   const [isJoining, setJoining] = useState<boolean>(false)
 
-  async function create() {
+  const createRoom = throttle(async function create() {
     if (lobby && !props.toPreparation && !isJoining) {
       setJoining(true)
       const user = firebase.auth().currentUser
@@ -51,9 +52,9 @@ export default function RoomMenu(props: {
         props.setToPreparation(true)
       }
     }
-  }
+  }, 1000)
 
-  async function join(selectedRoom: RoomAvailable<IPreparationMetadata>) {
+  const joinRoom = throttle(async function join(selectedRoom: RoomAvailable<IPreparationMetadata>) {
     if (lobby && !props.toPreparation && !isJoining) {
       if(selectedRoom.metadata?.password){
         const password = prompt(`This room is private. Enter password`)
@@ -73,7 +74,7 @@ export default function RoomMenu(props: {
         props.setToPreparation(true)
       }
     }
-  }
+  }, 1000)
 
   return (
     <Tabs className="nes-container room-menu">
@@ -89,11 +90,11 @@ export default function RoomMenu(props: {
         <ul className="hidden-scrollable">
           {preparationRooms.map((r) => (
             <li key={r.roomId}>
-              <RoomItem room={r} click={join} />
+              <RoomItem room={r} click={joinRoom} />
             </li>
           ))}
         </ul>
-        <button onClick={create} className="bubbly green create-room-button">
+        <button onClick={createRoom} className="bubbly green create-room-button">
           Create Room
         </button>
       </TabPanel>

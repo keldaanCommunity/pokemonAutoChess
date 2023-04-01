@@ -789,6 +789,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.SACRED_SWORD,
+      frames: this.game.anims.generateFrameNames(Ability.SACRED_SWORD, {
+        start: 0,
+        end: 30,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.SHADOW_SNEAK,
       frames: this.game.anims.generateFrameNames(Ability.SHADOW_SNEAK, {
         start: 0,
@@ -1517,6 +1528,18 @@ export default class AnimationManager {
       }),
       duration: 1000,
       repeat: -1
+    })
+
+    this.game.anims.create({
+      key: "WATER/cell",
+      frames: this.game.anims.generateFrameNames("attacks", {
+        start: 0,
+        end: 6,
+        zeroPad: 3,
+        prefix: "WATER/cell/"
+      }),
+      duration: 200,
+      repeat: 0
     })
 
     this.game.anims.create({

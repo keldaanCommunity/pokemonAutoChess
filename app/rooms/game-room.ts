@@ -3,7 +3,9 @@ import { Dispatcher } from "@colyseus/command"
 import GameState from "./states/game-state"
 import Player from "../models/colyseus-models/player"
 import { MapSchema } from "@colyseus/schema"
-import UserMetadata, { IUserMetadata } from "../models/mongo-models/user-metadata"
+import UserMetadata, {
+  IUserMetadata
+} from "../models/mongo-models/user-metadata"
 import BOT from "../models/mongo-models/bot-v2"
 import {
   OnShopCommand,
@@ -34,7 +36,7 @@ import {
   IPokemon,
   Transfer
 } from "../types"
-import { Pkm, PkmIndex } from "../types/enum/Pokemon"
+import { Pkm, PkmFamily, PkmIndex } from "../types/enum/Pokemon"
 import PokemonConfig from "../models/colyseus-models/pokemon-config"
 import { Synergy } from "../types/enum/Synergy"
 import { Pokemon } from "../models/colyseus-models/pokemon"
@@ -45,20 +47,23 @@ import { Title, Role } from "../types"
 import PRECOMPUTED_TYPE_POKEMONS from "../models/precomputed/type-pokemons.json"
 import BannedUser from "../models/mongo-models/banned-user"
 import { pickRandomIn, shuffleArray } from "../utils/random"
-import { Rarity } from "../types/enum/Game"
+import { Climate, Rarity } from "../types/enum/Game"
 import { FilterQuery } from "mongoose"
+import { MiniGame } from "../core/matter/mini-game"
 
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>
   eloEngine: EloRank
   additionalPokemonsPool1: Array<Pkm>
   additionalPokemonsPool2: Array<Pkm>
+  miniGame: MiniGame
   constructor() {
     super()
     this.dispatcher = new Dispatcher(this)
     this.eloEngine = new EloRank()
     this.additionalPokemonsPool1 = new Array<Pkm>()
     this.additionalPokemonsPool2 = new Array<Pkm>()
+    this.miniGame = new MiniGame()
   }
 
   // When room is initialized
@@ -77,12 +82,17 @@ export default class GameRoom extends Room<GameState> {
     })
     // console.log(options);
     this.setState(new GameState(options.preparationId, options.name))
+    this.miniGame.create(this.state.avatars, this.state.floatingItems)
     Object.keys(PRECOMPUTED_TYPE_POKEMONS).forEach((type) => {
       PRECOMPUTED_TYPE_POKEMONS[type].additionalPokemons.forEach((p) => {
         const pokemon = PokemonFactory.createPokemonFromName(p)
-        if (!this.additionalPokemonsPool1.includes(p) && !this.additionalPokemonsPool2.includes(p) && pokemon.stars === 1) {
-          if([Rarity.COMMON, Rarity.UNCOMMON].includes(pokemon.rarity)){
-            this.additionalPokemonsPool1.push(p)  
+        if (
+          !this.additionalPokemonsPool1.includes(p) &&
+          !this.additionalPokemonsPool2.includes(p) &&
+          pokemon.stars === 1
+        ) {
+          if ([Rarity.COMMON, Rarity.UNCOMMON].includes(pokemon.rarity)) {
+            this.additionalPokemonsPool1.push(p)
           } else {
             this.additionalPokemonsPool2.push(p)
           }
@@ -115,19 +125,6 @@ export default class GameRoom extends Room<GameState> {
       }
     }
 
-    this.onMessage(Transfer.SHOP, (client, message) => {
-      if (!this.state.gameFinished) {
-        try {
-          this.dispatcher.dispatch(new OnShopCommand(), {
-            id: client.auth.uid,
-            index: message.id
-          })
-        } catch (error) {
-          console.log("shop error", message, error)
-        }
-      }
-    })
-
     this.onMessage(Transfer.ITEM, (client, message) => {
       if (!this.state.gameFinished) {
         try {
@@ -137,6 +134,19 @@ export default class GameRoom extends Room<GameState> {
           })
         } catch (error) {
           console.log(error)
+        }
+      }
+    })
+
+    this.onMessage(Transfer.SHOP, (client, message) => {
+      if (!this.state.gameFinished) {
+        try {
+          this.dispatcher.dispatch(new OnShopCommand(), {
+            id: client.auth.uid,
+            index: message.id
+          })
+        } catch (error) {
+          console.log("shop error", message, error)
         }
       }
     })
@@ -210,6 +220,17 @@ export default class GameRoom extends Room<GameState> {
             client.send(Transfer.DRAG_DROP_FAILED, errorInformation)
             console.log("drag drop error", error)
           }
+        }
+      }
+    )
+
+    this.onMessage(
+      Transfer.VECTOR,
+      (client, message: { x: number; y: number }) => {
+        try {
+          this.miniGame.applyVector(client.auth.uid, message.x, message.y)
+        } catch (error) {
+          console.log(error)
         }
       }
     )
@@ -296,7 +317,8 @@ export default class GameRoom extends Room<GameState> {
               })
             }
             u.save()
-          })
+          }
+        )
       } catch (error) {
         console.log(error)
       }
@@ -819,5 +841,36 @@ export default class GameRoom extends Room<GameState> {
     })
 
     return size
+  }
+
+  updateCastform(weather: Climate) {
+    let newForm: Pkm = Pkm.CASTFORM
+    if(weather === Climate.SNOW){
+      newForm = Pkm.CASTFORM_HAIL
+    } else if(weather === Climate.RAIN){
+      newForm = Pkm.CASTFORM_RAIN
+    } else if(weather === Climate.SUN){
+      newForm = Pkm.CASTFORM_SUN
+    }
+
+    this.state.players.forEach(player => {
+      player.board.forEach((pokemon, id) => {
+        if(PkmFamily[pokemon.name] === PkmFamily[Pkm.CASTFORM] && pokemon.name !== newForm){
+          const newPokemon = PokemonFactory.createPokemonFromName(
+            newForm,
+            player.pokemonCollection.get(PkmIndex[newForm])
+          )
+          pokemon.items.forEach(item => {
+            newPokemon.items.add(item)
+          })
+          newPokemon.positionX = pokemon.positionX
+          newPokemon.positionY = pokemon.positionY
+          player.board.delete(id)
+          player.board.set(newPokemon.id, newPokemon)          
+          player.synergies.update(player.board)
+          player.effects.update(player.synergies)
+        }
+      })
+    })
   }
 }

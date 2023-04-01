@@ -298,13 +298,13 @@ export default class BattleManager {
             if (change.value != 0) {
               pkm.fairyCritAnimation()
             }
-          } else if (change.field == "incenseCount") {
+          } else if (change.field == "powerLensCount") {
             if (change.value != 0) {
-              pkm.incenseAnimation()
+              pkm.powerLensAnimation()
             }
-          } else if (change.field == "brightPowderCount") {
+          } else if (change.field == "starDustCount") {
             if (change.value != 0) {
-              pkm.brightPowderAnimation()
+              pkm.starDustAnimation()
             }
           } else if (change.field == "mindBlownCount") {
             if (change.value != 0) {
@@ -325,6 +325,7 @@ export default class BattleManager {
           } else if (change.field == "moneyCount") {
             if (change.value != 0) {
               this.moneyAnimation(pkm.x, pkm.y)
+              pkm.itemsContainer.updateCount(Item.AMULET_COIN, change.value)
             }
           } else if (change.field == "attackCount") {
             if (change.value != 0) {
@@ -349,6 +350,12 @@ export default class BattleManager {
             if (change.value != 0) {
               pkm.sprite.setScale(2 + change.value, 2 + change.value)
             }
+          } else if (change.field == "upgradeCount") {
+            pkm.itemsContainer.updateCount(Item.UPGRADE, change.value)
+          } else if (change.field == "soulDewCount") {
+            pkm.itemsContainer.updateCount(Item.SOUL_DEW, change.value)
+          } else if (change.field == "defensiveRibbonCount") {
+            pkm.itemsContainer.updateCount(Item.DEFENSIVE_RIBBON, change.value)
           }
         }
       }
@@ -429,7 +436,7 @@ export default class BattleManager {
               pkm.detail.hp.textContent = pokemon.life.toString()
             }
           } else if (change.field == "shield") {
-            if (change.value > 0) {
+            if (change.value >= 0) {
               pkm.shield = pokemon.shield
               pkm.lifebar?.setShieldAmount(pkm.shield)
             }

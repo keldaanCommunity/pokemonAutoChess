@@ -30,7 +30,6 @@ export default class Player extends Schema implements IPlayer {
   @type(Simulation) simulation
   @type(ExperienceManager) experienceManager = new ExperienceManager()
   @type({ map: "uint8" }) synergies = new Synergies()
-  @type(["string"]) itemsProposition = new ArraySchema<Item>()
   @type("uint8") money = process.env.MODE == "dev" ? 400 : 6
   @type("uint8") life = 100
   @type("boolean") shopLocked: boolean = false
@@ -47,6 +46,7 @@ export default class Player extends Schema implements IPlayer {
   @type({ map: PokemonConfig }) pokemonCollection
   @type("string") title: Title | ""
   @type("string") role: Role
+  @type(["string"]) itemsProposition = new ArraySchema<Item>()
   @type(["string"]) pokemonsProposition = new ArraySchema<Pkm>()
   effects: Effects = new Effects()
   isBot: boolean
