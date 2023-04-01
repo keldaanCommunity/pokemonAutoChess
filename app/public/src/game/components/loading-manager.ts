@@ -104,6 +104,11 @@ export default class LoadingManager {
       "/assets/attacks"
     )
     scene.load.multiatlas(
+      "SACRED_SWORD",
+      "/assets/attacks/SACRED_SWORD.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
       "SHADOW_SNEAK",
       "/assets/attacks/SHADOW_SNEAK.json",
       "/assets/attacks"

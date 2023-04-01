@@ -49,7 +49,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     emotion: Emotion,
     shiny: boolean,
     index: string,
-    stars: number,
+    abilityTier: number,
     evolution: Pkm
   ) {
     super(scene, x, y)
@@ -174,7 +174,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
       ultName.textContent = AbilityName[skill]["eng"]
   
       this.abilityDescription = document.createElement("div")
-      this.updateAbilityDescription(skill, stars, ap)
+      this.updateAbilityDescription(skill, abilityTier, ap)
       ultNameWrap.appendChild(ultName)
       ult.appendChild(ultNameWrap)
       ult.appendChild(this.abilityDescription)
@@ -201,9 +201,9 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     el.textContent = value.toString()
   }
 
-  updateAbilityDescription(skill: Ability, stars: number, ap: number){
+  updateAbilityDescription(skill: Ability, abilityTier: number, ap: number){
     ReactDOM.render(
-      <AbilityTooltip ability={skill} stars={stars} ap={ap} />,
+      <AbilityTooltip ability={skill} tier={abilityTier} ap={ap} />,
       this.abilityDescription
     )
   }

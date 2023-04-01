@@ -20,7 +20,6 @@ thundurus,0642/AnimData.xml
 thundurus,0642/0000/0001/AnimData.xml
 terrakion,0639/AnimData.xml
 terrakion,0639/0000/0001/AnimData.xml
-virizion,0640/AnimData.xml
 virizion,0640/0000/0001/AnimData.xml
 kyurem,0646/AnimData.xml
 kyurem,0646/0000/0001/AnimData.xml
@@ -79,3 +78,6 @@ dragapult,0887/AnimData.xml
 dragapult,0887/0000/0001/AnimData.xml
 frogadier,0657/AnimData.xml
 frogadier,0657/0000/0001/AnimData.xml
+pirouette-meloetta,0648/0001/0001/AnimData.xml
+melmetal,0809/AnimData.xml
+melmetal,0809/0000/0001/AnimData.xml

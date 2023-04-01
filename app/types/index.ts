@@ -302,7 +302,7 @@ export interface IPlayer {
 export interface IPokemon {
   id: string
   name: Pkm
-  types: Synergy[]
+  types: ArraySchema<Synergy>
   rarity: Rarity
   index: string
   evolution: Pkm
@@ -417,9 +417,9 @@ export interface IPokemonEntity {
   attackSprite: AttackSprite
   rarity: Rarity
   name: Pkm
-  effects: Effect[]
+  effects: ArraySchema<Effect>
   items: SetSchema<Item>
-  types: Synergy[]
+  types: ArraySchema<Synergy>
   stars: number
   skill: Ability
   status: Status

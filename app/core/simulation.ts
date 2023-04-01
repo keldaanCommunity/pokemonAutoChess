@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-extra-semi */
 import Board from "./board"
-import { Schema, MapSchema, type } from "@colyseus/schema"
+import { Schema, MapSchema, type, ArraySchema } from "@colyseus/schema"
 import PokemonEntity from "./pokemon-entity"
 import PokemonFactory from "../models/pokemon-factory"
 import { Pokemon } from "../models/colyseus-models/pokemon"
@@ -290,7 +290,7 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     pokemon.items.forEach((item) => {
-      if(ItemStats[item]){
+      if (ItemStats[item]) {
         Object.entries(ItemStats[item]).forEach(([stat, value]) =>
           this.applyStat(pokemon, stat as Stat, value)
         )
@@ -359,7 +359,9 @@ export default class Simulation extends Schema implements ISimulation {
         }
       })
 
-      const ironDefenseCandidates = Array.from(team.values()).filter((p) => p.effects.includes(Effect.IRON_DEFENSE))
+      const ironDefenseCandidates = Array.from(team.values()).filter((p) =>
+        p.effects.includes(Effect.IRON_DEFENSE)
+      )
       if (ironDefenseCandidates.length > 0) {
         ironDefenseCandidates.forEach((pokemon) => {
           pokemon.effects.splice(
@@ -381,13 +383,13 @@ export default class Simulation extends Schema implements ISimulation {
           shieldBonus = 20
         }
         if (pokemon.effects.includes(Effect.STRENGTH)) {
-          shieldBonus += 30
-        }
-        if (pokemon.effects.includes(Effect.ROCK_SMASH)) {
           shieldBonus += 40
         }
+        if (pokemon.effects.includes(Effect.ROCK_SMASH)) {
+          shieldBonus += 60
+        }
         if (pokemon.effects.includes(Effect.PURE_POWER)) {
-          shieldBonus += 50
+          shieldBonus += 80
         }
         if (shieldBonus >= 0) {
           pokemon.handleShield(shieldBonus, pokemon)
@@ -465,7 +467,11 @@ export default class Simulation extends Schema implements ISimulation {
     })
   }
 
-  applyEffects(pokemon: PokemonEntity, types: string[], allyEffects: Effect[]) {
+  applyEffects(
+    pokemon: PokemonEntity,
+    types: ArraySchema<Synergy>,
+    allyEffects: Effect[]
+  ) {
     allyEffects.forEach((effect) => {
       switch (effect) {
         case Effect.HONE_CLAWS:
@@ -1032,27 +1038,27 @@ export default class Simulation extends Schema implements ISimulation {
 
     this.blueTeam.forEach((pkm, key) => {
       this.blueDpsMeter
-          .get(key)
-          ?.changeDamage(pkm.physicalDamage, pkm.specialDamage, pkm.trueDamage)
-        this.blueHealDpsMeter.get(key)?.changeHeal(pkm.healDone, pkm.shieldDone)
+        .get(key)
+        ?.changeDamage(pkm.physicalDamage, pkm.specialDamage, pkm.trueDamage)
+      this.blueHealDpsMeter.get(key)?.changeHeal(pkm.healDone, pkm.shieldDone)
 
       if (!pkm.life || pkm.life <= 0) {
         this.blueTeam.delete(key)
       } else {
-        pkm.update(dt, this.board, this.climate)        
+        pkm.update(dt, this.board, this.climate)
       }
     })
 
     this.redTeam.forEach((pkm, key) => {
       this.redDpsMeter
-          .get(key)
-          ?.changeDamage(pkm.physicalDamage, pkm.specialDamage, pkm.trueDamage)
+        .get(key)
+        ?.changeDamage(pkm.physicalDamage, pkm.specialDamage, pkm.trueDamage)
       this.redHealDpsMeter.get(key)?.changeHeal(pkm.healDone, pkm.shieldDone)
 
       if (!pkm.life || pkm.life <= 0) {
         this.redTeam.delete(key)
       } else {
-        pkm.update(dt, this.board, this.climate)  
+        pkm.update(dt, this.board, this.climate)
       }
     })
   }

@@ -11,7 +11,7 @@ import { cc } from "./jsx"
 export const iconRegExp =
   /(?<=\W|^)(?:PHYSICAL|SPECIAL|TRUE|atk|speed|critChance|critDamage|def|hp|mana|range|shield|speDef|ap|BURN|SILENCE|POISON|FREEZE|PROTECT|SLEEP|CONFUSION|WOUND|RESURECTION|PARALYSIS|ARMOR_REDUCTION|GRASS_FIELD|FAIRY_FIELD|RUNE_PROTECT|ELECTRIC_FIELD|PSYCHIC_FIELD|\[[^\]]+\])(?=\W|$)/g
 
-export function addIconsToDescription(description: string, stars: number = 0, ap: number = 0) {
+export function addIconsToDescription(description: string, tier: number = 0, ap: number = 0) {
   const matchIcon = description.match(iconRegExp)
   if (matchIcon === null) return description
   const descriptionParts = description.split(iconRegExp)
@@ -69,7 +69,7 @@ export function addIconsToDescription(description: string, stars: number = 0, ap
                 <span key={j} className="ability-value">
                   <span
                     className={cc({
-                      "active": stars === undefined || array.length === 1 || j === stars - 1
+                      "active": tier === undefined || array.length === 1 || j === tier - 1
                     })}
                   >
                     {value}

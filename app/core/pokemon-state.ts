@@ -167,10 +167,10 @@ export default class PokemonState {
             pokemon.effects.includes(Effect.JUSTIFIED))
         ) {
           const damageReduction = pokemon.effects.includes(Effect.GUTS)
-            ? 5
+            ? 4
             : pokemon.effects.includes(Effect.DEFIANT)
             ? 7
-            : 9
+            : 10
           residualDamage = residualDamage - damageReduction
         }
 
@@ -361,8 +361,8 @@ export default class PokemonState {
                 boost = 40
                 speedBoost = 30
               } else if (isAngerPoint) {
-                boost = 60
-                speedBoost = 50
+                boost = 50
+                speedBoost = 40
               }
               board.forEach((r, c, value) => {
                 if (

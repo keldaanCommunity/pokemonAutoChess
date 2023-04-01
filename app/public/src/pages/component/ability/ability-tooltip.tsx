@@ -6,9 +6,9 @@ import "./ability-tooltip.css"
 
 export function AbilityTooltip(props: { 
   ability: Ability
-  stars?: number
+  tier?: number
   ap?: number
 }) {
   const description = AbilityDescription[props.ability].eng
-  return <p className="ability-description">{addIconsToDescription(description, props.stars, props.ap)}</p>
+  return <p className="ability-description">{addIconsToDescription(description, props.tier, props.ap)}</p>
 }

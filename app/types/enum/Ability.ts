@@ -124,7 +124,8 @@ import {
   MachPunchStrategy,
   TripleKickStrategy,
   MawashiGeriStrategy,
-  ForecastStrategy
+  ForecastStrategy,
+  SacredSwordStrategy
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -228,6 +229,7 @@ export enum Ability {
   AURORA_VEIL = "AURORA_VEIL",
   AQUA_JET = "AQUA_JET",
   PROTEAN = "PROTEAN",
+  JUDGEMENT = "JUDGEMENT",
   CHATTER = "CHATTER",
   LIQUIDATION = "LIQUIDATION",
   SYNCHRO = "SYNCHRO",
@@ -253,7 +255,8 @@ export enum Ability {
   MACH_PUNCH = "MACH_PUNCH",
   TRIPLE_KICK = "TRIPLE_KICK",
   MAWASHI_GERI = "MAWASHI_GERI",
-  FORECAST = "FORECAST"
+  FORECAST = "FORECAST",
+  SACRED_SWORD = "SACRED_SWORD"
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -357,6 +360,7 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.AURORA_VEIL]: new AuroraVeilStrategy(),
   [Ability.AQUA_JET]: new AquaJetStrategy(),
   [Ability.PROTEAN]: new ProteanStrategy(),
+  [Ability.JUDGEMENT]: new ProteanStrategy(),
   [Ability.CHATTER]: new ChatterStrategy(),
   [Ability.LIQUIDATION]: new LiquidationStrategy(),
   [Ability.SYNCHRO]: new SynchroStrategy(),
@@ -382,5 +386,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.MACH_PUNCH]: new MachPunchStrategy(),
   [Ability.TRIPLE_KICK]: new TripleKickStrategy(),
   [Ability.MAWASHI_GERI]: new MawashiGeriStrategy(),
-  [Ability.FORECAST]: new ForecastStrategy()
+  [Ability.FORECAST]: new ForecastStrategy(),
+  [Ability.SACRED_SWORD]: new SacredSwordStrategy()
 }
