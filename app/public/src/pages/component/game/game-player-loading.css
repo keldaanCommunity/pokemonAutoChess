@@ -1,0 +1,33 @@
+.game-player-loading {
+    transform: translate(-50%,-50%);
+    color: white;
+}
+
+.game-player-loading-icon {
+    height: 8vh;
+    width: 8vh;
+    background-size: cover;
+    border-radius: 50%;
+    image-rendering: pixelated;
+    box-shadow: inset 0 0 0 0.8vh black;
+    margin: auto;
+}
+
+.game-player-loading-icon .CircularProgressbar {
+    transform: scale(1);
+    transition: all 100ms ease-out;
+    border-radius: 50%;
+    border: 1px solid black;
+}
+
+.game-player-loading-icon .CircularProgressbar-path {
+    stroke: #F7D51D;
+}
+
+.game-player-loading-icon .CircularProgressbar-trail {
+    stroke: #2d334b;
+}
+
+.game-player-loading p {
+    text-align: center;
+}

@@ -324,6 +324,30 @@ export default class GameRoom extends Room<GameState> {
       }
     })
 
+    this.onMessage(Transfer.LOADING_PROGRESS, (client, progress: number) => {
+      if (client.auth) {
+        const player = this.state.players.get(client.auth.uid)
+        if(player){
+          player.loadingProgress = progress
+        }
+      }
+    })
+
+    this.onMessage(Transfer.LOADING_COMPLETE, (client) => {
+      if (client.auth) {
+        const player = this.state.players.get(client.auth.uid)
+        if(player){
+          player.loadingProgress = 100
+        }
+        if(Array.from(this.state.players.values()).every(player => player.loadingProgress === 100)){
+          this.broadcast(Transfer.LOADING_COMPLETE)
+          this.startGame()
+        }
+      }
+    })
+  }
+
+  startGame(){
     this.setSimulationInterval((deltaTime: number) => {
       if (!this.state.gameFinished) {
         try {
@@ -367,11 +391,20 @@ export default class GameRoom extends Room<GameState> {
         throw new Error("consented leave")
       }
 
-      // allow disconnected client to reconnect into this room until 20 seconds
+      // allow disconnected client to reconnect into this room until 60 seconds
       await this.allowReconnection(client, 60)
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
         console.log(`${client.auth.displayName} leave game room`)
+        const player = this.state.players.get(client.auth.uid)
+        if(player && player.loadingProgress < 100){
+          // if player quit during the loading screen, remove it from the players
+          this.state.players.delete(client.auth.uid)
+          if(Array.from(this.state.players.values()).every(player => player.loadingProgress === 100)){
+            this.broadcast(Transfer.LOADING_COMPLETE)
+            this.startGame()
+          }
+        }
       }
     }
   }

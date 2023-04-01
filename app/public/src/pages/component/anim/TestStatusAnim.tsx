@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import Phaser from "phaser"
 import { nanoid } from "nanoid"
 import { createStatusAnimations } from "../../../game/animation-manager"
-import { loadStatusMultiAtlas } from "../../../game/scenes/game-scene"
+import { loadStatusMultiAtlas } from "../../../game/components/loading-manager"
 import { Orientation, PokemonActionState, PokemonTint, SpriteType } from "../../../../../types/enum/Game"
 import durations from "../../../../dist/client/assets/pokemons/durations.json"
 
