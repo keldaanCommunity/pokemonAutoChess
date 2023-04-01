@@ -7,6 +7,7 @@ import { Rarity } from "../types/enum/Game"
 import { pickRandomIn, shuffleArray } from "../utils/random"
 import { clamp } from "../utils/number"
 import { removeInArray } from "../utils/array"
+import { Pokemon } from "./colyseus-models/pokemon"
 
 export const PoolSize: { [key in Rarity]: [number, number, number] } = {
   [Rarity.COMMON]: [1, 14, 29],
@@ -369,7 +370,7 @@ export default class Shop {
     let threshold = 0
     const finals = new Array<Pkm>()
 
-    player.board.forEach((pokemon: IPokemon) => {
+    player.board.forEach((pokemon: Pokemon) => {
       if (pokemon.final) {
         finals.push(PkmFamily[pokemon.name])
       }

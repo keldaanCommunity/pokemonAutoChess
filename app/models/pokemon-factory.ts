@@ -542,7 +542,7 @@ import {
   OriginGiratina
 } from "./colyseus-models/pokemon"
 import { MapSchema } from "@colyseus/schema"
-import { Emotion } from "../types"
+import { Emotion, IPokemon } from "../types"
 import { PokemonActionState, Rarity } from "../types/enum/Game"
 import { IPokemonConfig } from "./mongo-models/user-metadata"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
@@ -760,7 +760,7 @@ export default class PokemonFactory {
     }
   }
 
-  static createPokemonFromName(name: Pkm, config?: IPokemonConfig) {
+  static createPokemonFromName(name: Pkm, config?: IPokemonConfig): Pokemon {
     const s = config && config.selectedShiny ? true : false
     const e =
       config && config.selectedEmotion ? config.selectedEmotion : Emotion.NORMAL
