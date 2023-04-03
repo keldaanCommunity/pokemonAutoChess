@@ -274,7 +274,7 @@ export interface IPlayer {
   name: string
   avatar: string
   board: MapSchema<Pokemon>
-  shop: Pkm[]
+  shop: ArraySchema<Pkm>
   simulation: ISimulation
   experienceManager: ExperienceManager
   synergies: Synergies
@@ -294,8 +294,8 @@ export interface IPlayer {
   pokemonCollection: PokemonCollection
   title: Title | ""
   role: Role
-  itemsProposition: Item[]
-  pokemonsProposition: Pkm[]
+  itemsProposition: ArraySchema<Item>
+  pokemonsProposition: ArraySchema<Pkm>
   rerollCount: number
   loadingProgress: number
 }

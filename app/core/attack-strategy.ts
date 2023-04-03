@@ -844,7 +844,12 @@ export class RazorWindStrategy extends AttackStrategy {
     target: PokemonEntity
   ) {
     super.process(pokemon, state, board, target)
-    const damage = pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL ? 80 : pokemon.stars === 2 ? 40 : 20
+    const damage =
+      pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL
+        ? 80
+        : pokemon.stars === 2
+        ? 40
+        : 20
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
     target.status.triggerParalysis(7000, target)
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
@@ -1161,7 +1166,7 @@ export class RelicSongStrategy extends AttackStrategy {
     target: PokemonEntity
   ) {
     super.process(pokemon, state, board, target)
-    let duration = Math.round(3000 * (1+pokemon.ap/100))
+    let duration = Math.round(3000 * (1 + pokemon.ap / 100))
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
         tg.status.triggerSleep(duration, tg)
@@ -1269,10 +1274,10 @@ export class TriAttackStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target)
     let duration = 2000
-    if(pokemon.stars === 2){
+    if (pokemon.stars === 2) {
       duration = 4000
     }
-    if(pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL){
+    if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
       duration = 8000
     }
     target.status.triggerFreeze(duration, target)
@@ -1477,10 +1482,10 @@ export class VoltSwitchStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target)
 
     let damage = 30
-    if(pokemon.stars === 2){
+    if (pokemon.stars === 2) {
       damage = 60
     }
-    if(pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL){
+    if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
       damage = 120
     }
 
@@ -1601,13 +1606,13 @@ export class RockTombStrategy extends AttackStrategy {
 
     let damage = 30
     let debuff = 20
-    if(pokemon.stars === 2){
+    if (pokemon.stars === 2) {
       damage = 60
       debuff = 40
     }
-    if(pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL){
+    if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
       damage = 120
-      debuff = 60 
+      debuff = 60
     }
 
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
@@ -1765,7 +1770,7 @@ export class BurnStrategy extends AttackStrategy {
     if (pokemon.stars === 2) {
       duration = 10000
     }
-    if(pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL){
+    if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
       duration = 20000
     }
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
@@ -1852,10 +1857,10 @@ export class FreezeStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target)
     let timer = 1000
-    if(pokemon.stars === 2){
+    if (pokemon.stars === 2) {
       timer = 2000
     }
-    if(pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL){
+    if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
       timer = 4000
     }
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
@@ -1874,7 +1879,7 @@ export class ProtectStrategy extends AttackStrategy {
     target: PokemonEntity
   ) {
     super.process(pokemon, state, board, target)
-    let duration = Math.round(5000 * (1+pokemon.ap/100))
+    let duration = Math.round(5000 * (1 + pokemon.ap / 100))
     pokemon.status.triggerProtect(duration)
   }
 }
@@ -1961,10 +1966,10 @@ export class FireBlastStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target)
     let damage = 30
-    if(pokemon.stars === 2){
+    if (pokemon.stars === 2) {
       damage = 60
     }
-    if(pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL){
+    if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
       damage = 120
     }
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
@@ -1980,10 +1985,10 @@ export class SeismicTossStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target)
     let damage = 7
-    if(pokemon.stars === 2){
+    if (pokemon.stars === 2) {
       damage = 14
     }
-    if(pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL){
+    if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
       damage = 28
     }
 
@@ -2027,10 +2032,10 @@ export class RockSlideStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target)
     let damage = 30
-    if(pokemon.stars === 2){
+    if (pokemon.stars === 2) {
       damage = 60
     }
-    if(pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL){
+    if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
       damage = 120
     }
 
@@ -2050,10 +2055,10 @@ export class WheelOfFireStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target)
     let damage = 20
-    if(pokemon.stars === 2){
+    if (pokemon.stars === 2) {
       damage = 40
     }
-    if(pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL){
+    if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
       damage = 80
     }
     const cells = board.getCellsBetween(
@@ -2263,10 +2268,10 @@ export class IronDefenseStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target)
     let buff = 3
-    if(pokemon.stars === 2){
+    if (pokemon.stars === 2) {
       buff = 6
     }
-    if(pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL){
+    if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
       buff = 12
     }
     pokemon.addDefense(buff, true)
@@ -2317,11 +2322,11 @@ export class IronTailStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target)
     let damage = 20
     let buff = 1
-    if(pokemon.stars === 2){
+    if (pokemon.stars === 2) {
       damage = 40
       buff = 3
     }
-    if(pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL){
+    if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
       damage = 80
       buff = 5
     }
@@ -2458,9 +2463,18 @@ export class DiveStrategy extends AttackStrategy {
     target: PokemonEntity
   ) {
     super.process(pokemon, state, board, target)
-    const damage = pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL ? 40 : pokemon.stars === 2 ? 20 : 10
+    const damage =
+      pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL
+        ? 40
+        : pokemon.stars === 2
+        ? 20
+        : 10
     const duration =
-      pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL ? 6000 : pokemon.stars === 2 ? 3000 : 1500
+      pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL
+        ? 6000
+        : pokemon.stars === 2
+        ? 3000
+        : 1500
     const mostSurroundedCoordinate =
       state.getMostSurroundedCoordianteAvailablePlace(pokemon, board)
 
@@ -2625,10 +2639,10 @@ export class IcicleCrashStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target)
     let damage = 20
-    if(pokemon.stars === 2){
+    if (pokemon.stars === 2) {
       damage = 40
     }
-    if(pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL){
+    if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
       damage = 80
     }
 
@@ -2788,10 +2802,10 @@ export class NightSlashStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target)
     let damage = 40
-    if(pokemon.stars === 2){
+    if (pokemon.stars === 2) {
       damage = 60
     }
-    if(pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL){
+    if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
       damage = 100
     }
 
@@ -2842,10 +2856,10 @@ export class PoisonStingStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target)
     let damage = 30
-    if(pokemon.stars === 2){
+    if (pokemon.stars === 2) {
       damage = 60
     }
-    if(pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL){
+    if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
       damage = 120
     }
 
@@ -2985,10 +2999,10 @@ export class ThiefStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target)
     let damage = 15
-    if(pokemon.stars === 2){
+    if (pokemon.stars === 2) {
       damage = 30
     }
-    if(pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL){
+    if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
       damage = 60
     }
 

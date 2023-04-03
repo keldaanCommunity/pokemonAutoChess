@@ -4,6 +4,7 @@ import GameState from "./states/game-state"
 import Player from "../models/colyseus-models/player"
 import { MapSchema } from "@colyseus/schema"
 import UserMetadata, {
+  IPokemonConfig,
   IUserMetadata
 } from "../models/mongo-models/user-metadata"
 import BOT from "../models/mongo-models/bot-v2"
@@ -50,6 +51,7 @@ import { pickRandomIn, shuffleArray } from "../utils/random"
 import { Climate, Rarity } from "../types/enum/Game"
 import { FilterQuery } from "mongoose"
 import { MiniGame } from "../core/matter/mini-game"
+import { Ability } from "../types/enum/Ability"
 
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>
@@ -114,7 +116,7 @@ export default class GameRoom extends Room<GameState> {
           user.avatar,
           true,
           this.state.players.size + 1,
-          new Map<string, PokemonConfig>(),
+          new Map<string, IPokemonConfig>(),
           "",
           Role.BOT,
           this
@@ -327,7 +329,7 @@ export default class GameRoom extends Room<GameState> {
     this.onMessage(Transfer.LOADING_PROGRESS, (client, progress: number) => {
       if (client.auth) {
         const player = this.state.players.get(client.auth.uid)
-        if(player){
+        if (player) {
           player.loadingProgress = progress
         }
       }
@@ -336,10 +338,14 @@ export default class GameRoom extends Room<GameState> {
     this.onMessage(Transfer.LOADING_COMPLETE, (client) => {
       if (client.auth) {
         const player = this.state.players.get(client.auth.uid)
-        if(player){
+        if (player) {
           player.loadingProgress = 100
         }
-        if(Array.from(this.state.players.values()).every(player => player.loadingProgress === 100)){
+        if (
+          Array.from(this.state.players.values()).every(
+            (player) => player.loadingProgress === 100
+          )
+        ) {
           this.broadcast(Transfer.LOADING_COMPLETE)
           this.startGame()
         }
@@ -347,7 +353,7 @@ export default class GameRoom extends Room<GameState> {
     })
   }
 
-  startGame(){
+  startGame() {
     this.setSimulationInterval((deltaTime: number) => {
       if (!this.state.gameFinished) {
         try {
@@ -397,10 +403,14 @@ export default class GameRoom extends Room<GameState> {
       if (client && client.auth && client.auth.displayName) {
         console.log(`${client.auth.displayName} leave game room`)
         const player = this.state.players.get(client.auth.uid)
-        if(player && player.loadingProgress < 100){
+        if (player && player.loadingProgress < 100) {
           // if player quit during the loading screen, remove it from the players
           this.state.players.delete(client.auth.uid)
-          if(Array.from(this.state.players.values()).every(player => player.loadingProgress === 100)){
+          if (
+            Array.from(this.state.players.values()).every(
+              (player) => player.loadingProgress === 100
+            )
+          ) {
             this.broadcast(Transfer.LOADING_COMPLETE)
             this.startGame()
           }
@@ -692,6 +702,12 @@ export default class GameRoom extends Room<GameState> {
   }
 
   checkProtean(player: Player, pokemon: Pokemon) {
+    const n =
+      pokemon.skill === Ability.JUDGEMENT
+        ? 3
+        : pokemon.skill === Ability.PROTEAN
+        ? 2
+        : 1
     const rankArray = new Array<{ s: Synergy; v: number }>()
     player.synergies.forEach((value, key) => {
       if (value > 0) {
@@ -704,7 +720,7 @@ export default class GameRoom extends Room<GameState> {
     while (pokemon.types.length > 0) {
       pokemon.types.pop()
     }
-    for (let i = 0; i < pokemon.stars; i++) {
+    for (let i = 0; i < n; i++) {
       const kv = rankArray.shift()
       if (kv) {
         pokemon.types.push(kv.s)
@@ -878,28 +894,31 @@ export default class GameRoom extends Room<GameState> {
 
   updateCastform(weather: Climate) {
     let newForm: Pkm = Pkm.CASTFORM
-    if(weather === Climate.SNOW){
+    if (weather === Climate.SNOW) {
       newForm = Pkm.CASTFORM_HAIL
-    } else if(weather === Climate.RAIN){
+    } else if (weather === Climate.RAIN) {
       newForm = Pkm.CASTFORM_RAIN
-    } else if(weather === Climate.SUN){
+    } else if (weather === Climate.SUN) {
       newForm = Pkm.CASTFORM_SUN
     }
 
-    this.state.players.forEach(player => {
+    this.state.players.forEach((player) => {
       player.board.forEach((pokemon, id) => {
-        if(PkmFamily[pokemon.name] === PkmFamily[Pkm.CASTFORM] && pokemon.name !== newForm){
+        if (
+          PkmFamily[pokemon.name] === PkmFamily[Pkm.CASTFORM] &&
+          pokemon.name !== newForm
+        ) {
           const newPokemon = PokemonFactory.createPokemonFromName(
             newForm,
             player.pokemonCollection.get(PkmIndex[newForm])
           )
-          pokemon.items.forEach(item => {
+          pokemon.items.forEach((item) => {
             newPokemon.items.add(item)
           })
           newPokemon.positionX = pokemon.positionX
           newPokemon.positionY = pokemon.positionY
           player.board.delete(id)
-          player.board.set(newPokemon.id, newPokemon)          
+          player.board.set(newPokemon.id, newPokemon)
           player.synergies.update(player.board)
           player.effects.update(player.synergies)
         }
