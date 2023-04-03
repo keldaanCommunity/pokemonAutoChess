@@ -51,6 +51,7 @@ export default class GameScene extends Scene {
   lastPokemonDetail: Pokemon | undefined
   minigameManager: MinigameManager
   loadingManager: LoadingManager
+  started: boolean
 
   constructor() {
     super({
@@ -63,19 +64,25 @@ export default class GameScene extends Scene {
     this.tilemap = data.tilemap
     this.room = data.room
     this.uid = firebase.auth().currentUser?.uid
+    this.started = false
   }
 
   preload() {
     this.loadingManager = new LoadingManager(this)
 
-    this.room!.onMessage(Transfer.LOADING_COMPLETE, () => this.startGame())
+    this.room!.onMessage(Transfer.LOADING_COMPLETE, () => {
+      if (!this.started) {
+        this.started = true
+        this.startGame()
+      }
+    })
   }
 
   create() {
     this.input.mouse.disableContextMenu()
   }
 
-  startGame(){
+  startGame() {
     if (this.uid && this.tilemap && this.room) {
       this.registerKeys()
 
@@ -516,4 +523,3 @@ export default class GameScene extends Scene {
 //     }
 //   });
 // }
-
