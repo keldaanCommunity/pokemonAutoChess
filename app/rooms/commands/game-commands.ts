@@ -1285,7 +1285,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     const nbPlayersAlive = [...this.state.players.values()].filter(
       (p: Player) => p.life > 0
     ).length
-    const minigamePhaseDuration = 14000 + nbPlayersAlive * 2000 // 10 seconds + retention delay
+    const minigamePhaseDuration = this.state.stageLevel === 1 ? 15000 : 14000 + nbPlayersAlive * 2000
     this.state.time = minigamePhaseDuration
     this.room.miniGame.initialize(this.state.players, this.state.stageLevel)
   }
