@@ -8698,7 +8698,7 @@ export class Cradily extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.CRADILY,
-      [Synergy.FOSSIL, Synergy.GRASS],
+      [Synergy.FOSSIL, Synergy.GRASS, Synergy.FLORA],
       Rarity.RARE,
       Pkm.DEFAULT,
       150,
