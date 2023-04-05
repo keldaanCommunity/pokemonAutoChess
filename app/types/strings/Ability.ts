@@ -1190,9 +1190,9 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.HURRICANE]: {
-    eng: `Area of effect attack that deals [10,20,30,SP] ${Damage.SPECIAL} in a line behind the target`,
-    esp: `Ataque de área de efecto que causa [10,20,30,SP] ${Damage.SPECIAL} en una línea detrás del objetivo`,
-    fra: `Attaque AoE faisant [10,20,30,SP] ${Damage.SPECIAL} dans une ligne derrière la cible`,
+    eng: `Area of effect attack that deals [25,50,100,SP] ${Damage.SPECIAL} in a line behind the target and ${Status.PARALYSIS} for 4 seconds`,
+    esp: `Ataque de área de efecto que causa [25,50,100,SP] ${Damage.SPECIAL} en una línea detrás del objetivo`,
+    fra: `Attaque AoE faisant [25,50,100,SP] ${Damage.SPECIAL} dans une ligne derrière la cible`,
     prt: ``
   },
   [Ability.HEAL_BLOCK]: {
