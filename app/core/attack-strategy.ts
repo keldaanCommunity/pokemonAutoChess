@@ -135,7 +135,7 @@ export class BeatUpStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target)
     for (let i = 0; i < pokemon.stars; i++) {
       const houndour = PokemonFactory.createPokemonFromName(Pkm.HOUNDOUR)
-      const coord = pokemon.simulation.getFirstAvailablePlaceOnBoard(true)
+      const coord = pokemon.simulation.getClosestAvailablePlaceOnBoard(pokemon, pokemon.team)
       pokemon.simulation.addPokemon(
         houndour,
         coord.x,
