@@ -12,13 +12,13 @@ export default class LoadingManager {
   constructor(scene: GameScene) {
     this.scene = scene
     this.statusMessage = "Loading..."
-    
+
     scene.load.on("progress", (value: number) => {
-      this.scene.room?.send(Transfer.LOADING_PROGRESS, value*100)
+      this.scene.room?.send(Transfer.LOADING_PROGRESS, value * 100)
     })
 
     this.scene.load.on("fileprogress", (file, percentComplete) => {
-      if(percentComplete < 1){
+      if (percentComplete < 1) {
         this.statusMessage = "Loading asset: " + file.key
       }
     })
@@ -106,6 +106,11 @@ export default class LoadingManager {
       "/assets/attacks"
     )
     scene.load.multiatlas(
+      "PLASMA_FIST",
+      "/assets/attacks/PLASMA_FIST.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
       "SACRED_SWORD",
       "/assets/attacks/SACRED_SWORD.json",
       "/assets/attacks"
@@ -115,7 +120,11 @@ export default class LoadingManager {
       "/assets/attacks/SHADOW_SNEAK.json",
       "/assets/attacks"
     )
-    scene.load.multiatlas("DIVE", "/assets/attacks/DIVE.json", "/assets/attacks")
+    scene.load.multiatlas(
+      "DIVE",
+      "/assets/attacks/DIVE.json",
+      "/assets/attacks"
+    )
     scene.load.multiatlas(
       "LIQUIDATION",
       "/assets/attacks/LIQUIDATION.json",
@@ -141,7 +150,11 @@ export default class LoadingManager {
       "/assets/attacks/PETAL_DANCE.json",
       "/assets/attacks"
     )
-    scene.load.multiatlas("ECHO", "/assets/attacks/ECHO.json", "/assets/attacks")
+    scene.load.multiatlas(
+      "ECHO",
+      "/assets/attacks/ECHO.json",
+      "/assets/attacks"
+    )
     scene.load.multiatlas(
       "INCENSE_DAMAGE",
       "/assets/attacks/INCENSE_DAMAGE.json",
@@ -292,7 +305,11 @@ export default class LoadingManager {
       "/assets/attacks/SPARKLING_ARIA.json",
       "/assets/attacks"
     )
-    scene.load.multiatlas("SMOG", "/assets/attacks/SMOG.json", "/assets/attacks")
+    scene.load.multiatlas(
+      "SMOG",
+      "/assets/attacks/SMOG.json",
+      "/assets/attacks"
+    )
     scene.load.multiatlas(
       "AURORA_BEAM",
       "/assets/attacks/AURORA_BEAM.json",
