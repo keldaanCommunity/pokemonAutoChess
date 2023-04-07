@@ -352,7 +352,7 @@ export default class Pokemon extends DraggableObject {
       this.circleTimer.clear()
       this.circleTimer.lineStyle(
         8,
-        0xF7D51D,
+        0xf7d51d,
         this.isCurrentPlayerAvatar ? 0.8 : 0.5
       )
       this.circleTimer.beginPath()
@@ -2192,6 +2192,25 @@ export default class Pokemon extends DraggableObject {
             specialProjectile.setDepth(7)
             specialProjectile.setScale(2, 2)
             specialProjectile.anims.play(Ability.APPLE_ACID)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
+
+          case Ability.PLASMA_FIST:
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.PLASMA_FIST,
+              "000"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.PLASMA_FIST)
             specialProjectile.once(
               Phaser.Animations.Events.ANIMATION_COMPLETE,
               () => {
