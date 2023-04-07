@@ -443,7 +443,7 @@ export class Scyther extends Pokemon {
       AttackType.PHYSICAL,
       1,
       80,
-      Ability.KING_SHIELD,
+      Ability.X_SCISSOR,
       shiny,
       emotion,
       false
@@ -467,7 +467,7 @@ export class Scizor extends Pokemon {
       AttackType.PHYSICAL,
       2,
       80,
-      Ability.KING_SHIELD,
+      Ability.X_SCISSOR,
       shiny,
       emotion,
       false
@@ -491,7 +491,7 @@ export class MegaScizor extends Pokemon {
       AttackType.PHYSICAL,
       3,
       80,
-      Ability.KING_SHIELD,
+      Ability.X_SCISSOR,
       shiny,
       emotion,
       true

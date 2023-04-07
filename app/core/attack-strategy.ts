@@ -2588,6 +2588,20 @@ export class SacredSwordStrategy extends AttackStrategy {
   }
 }
 
+export class XScissorStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    const damage = pokemon.stars === 3 ? 80 : pokemon.stars === 2 ? 40 : 20
+    target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon)
+    target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon) // twice
+  }
+}
+
 export class DragonTailStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,

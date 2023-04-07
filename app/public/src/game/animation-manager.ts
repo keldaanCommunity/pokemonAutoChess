@@ -1615,7 +1615,18 @@ export default class AnimationManager {
         end: 3,
         zeroPad: 3
       }),
-      duration: 4*50,
+      duration: 250,
+      repeat: 0
+    })
+
+    this.game.anims.create({
+      key: Ability.X_SCISSOR,
+      frames: this.game.anims.generateFrameNames(Ability.X_SCISSOR, {
+        start: 0,
+        end: 9,
+        zeroPad: 3
+      }),
+      duration: 1000,
       repeat: 0
     })
   }

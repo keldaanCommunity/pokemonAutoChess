@@ -1,5 +1,5 @@
 # New Pokemons:
-
+- Virizion
 
 
 # Changes to Pokemon
@@ -9,7 +9,7 @@
 - Wonderguard ability: now has an active effect that deals damage and paralyze adjacent enemies
 - Lileep family: new ability "Leech Seed"
 - Cacnea family: new ability "Heal Block"
-
+- Scyther family: new ability "X-Scissor"
 
 # Changes to Synergies
 

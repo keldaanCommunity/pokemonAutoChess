@@ -777,6 +777,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: "Météo"
+  },
+  [Ability.X_SCISSOR]: {
+    eng: `X-Scissor`,
+    esp: "",
+    prt: "",
+    fra: "Plaie Croix"
   }
 }
 
@@ -1532,19 +1538,19 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ""
   },
   [Ability.MACH_PUNCH]: {
-    eng: `Deals [50, SP] ${Damage.SPECIAL}. Double damage if attacker has a better ${Stat.DEF} than target`,
+    eng: `Deals [50,SP] ${Damage.SPECIAL}. Double damage if attacker has a better ${Stat.DEF} than target`,
     esp: "",
     prt: "",
     fra: ""
   },
   [Ability.TRIPLE_KICK]: {
-    eng: `Deals [50, SP] ${Damage.SPECIAL} to up to 3 adjacent enemies`,
+    eng: `Deals [50,SP] ${Damage.SPECIAL} to up to 3 adjacent enemies`,
     esp: "",
     prt: "",
     fra: ""
   },
   [Ability.MAWASHI_GERI]: {
-    eng: `Deals [50, SP] ${Damage.SPECIAL}. Double damage if attacker has a better ${Stat.ATK} than target`,
+    eng: `Deals [50,SP] ${Damage.SPECIAL}. Double damage if attacker has a better ${Stat.ATK} than target`,
     esp: "",
     prt: "",
     fra: ""
@@ -1558,5 +1564,11 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     esp: "",
     prt: "",
     fra: "Météo"
+  },
+  [Ability.X_SCISSOR]: {
+    eng: `Deals [20,40,80,SP] ${Damage.TRUE} twice`,
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }

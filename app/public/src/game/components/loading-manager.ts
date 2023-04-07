@@ -340,6 +340,11 @@ export default class LoadingManager {
       "/assets/attacks/WONDER_GUARD.json",
       "/assets/attacks"
     )
+    scene.load.multiatlas(
+      "X_SCISSOR",
+      "/assets/attacks/X_SCISSOR.json",
+      "/assets/attacks"
+    )
   }
 }
 

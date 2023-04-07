@@ -4,6 +4,10 @@
     aspect-ratio: 2000/1000;
 }
 
+.game-loading-screen li {
+    list-style: none;
+}
+
 .game-loading-screen .loading-bar {
     position: absolute;
     top: 20vw;

@@ -2936,6 +2936,24 @@ export default class Pokemon extends DraggableObject {
             )
             break
 
+          case Ability.X_SCISSOR:
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.X_SCISSOR,
+              "000"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.X_SCISSOR)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
           default:
             break
         }
