@@ -69,12 +69,8 @@ export default class Simulation extends Schema implements ISimulation {
     })
 
     this.board = new Board(8, 6)
-    if (blueEffects) {
-      this.blueEffects = blueEffects
-    }
-    if (redEffects) {
-      this.redEffects = redEffects
-    }
+    this.blueEffects = blueEffects || []
+    this.redEffects = redEffects || []
     // console.log('blueEffects', blueEffects);
     // console.log('redEffects', redEffects);
     this.climate = this.getClimate()
@@ -103,71 +99,33 @@ export default class Simulation extends Schema implements ISimulation {
       })
     }
 
-    if (
-      blueEffects &&
-      (blueEffects.includes(Effect.INFESTATION) ||
-        blueEffects.includes(Effect.HORDE) ||
-        blueEffects.includes(Effect.HEART_OF_THE_SWARM))
-    ) {
-      const bugTeam = new Array<IPokemon>()
-      blueTeam.forEach((pkm) => {
-        if (pkm.types.includes(Synergy.BUG) && pkm.positionY != 0) {
-          bugTeam.push(pkm)
-        }
-      })
-      bugTeam.sort((a, b) => b.hp - a.hp)
+    ;[
+      { team: blueTeam, effects: blueEffects },
+      { team: redTeam, effects: redEffects }
+    ].forEach(({ team, effects }: { team: MapSchema<Pokemon, string>, effects: Effect[] }) => {
+      if ([Effect.INFESTATION, Effect.HORDE, Effect.HEART_OF_THE_SWARM].some(e => effects.includes(e))) {
 
-      if (blueEffects.includes(Effect.INFESTATION)) {
-        const bug = PokemonFactory.createPokemonFromName(bugTeam[0].name)
-        const coord = this.getFirstAvailablePlaceOnBoard(true)
-        this.addPokemon(bug, coord.x, coord.y, 0, true)
-      } else if (blueEffects.includes(Effect.HORDE)) {
-        for (let i = 0; i < 2; i++) {
+        const teamIndex = team === blueTeam ? 0 : 1
+        const bugTeam = new Array<IPokemon>()
+        team.forEach((pkm) => {
+          if (pkm.types.includes(Synergy.BUG) && pkm.positionY != 0) {
+            bugTeam.push(pkm)
+          }
+        })
+        bugTeam.sort((a, b) => b.hp - a.hp)
+
+        let numberToSpawn = 0
+        if (effects.includes(Effect.INFESTATION)) { numberToSpawn = 1 }
+        if (effects.includes(Effect.HORDE)) { numberToSpawn = 2 }
+        if (effects.includes(Effect.HEART_OF_THE_SWARM)) { numberToSpawn = 4 }
+
+        for (let i = 0; i < numberToSpawn; i++) {
           const bug = PokemonFactory.createPokemonFromName(bugTeam[i].name)
-          const coord = this.getFirstAvailablePlaceOnBoard(true)
-          this.addPokemon(bug, coord.x, coord.y, 0, true)
-        }
-      } else if (blueEffects.includes(Effect.HEART_OF_THE_SWARM)) {
-        for (let i = 0; i < 4; i++) {
-          const bug = PokemonFactory.createPokemonFromName(bugTeam[i].name)
-          const coord = this.getFirstAvailablePlaceOnBoard(true)
-          this.addPokemon(bug, coord.x, coord.y, 0, true)
+          const coord = this.getClosestAvailablePlaceOnBoard(bugTeam[i], teamIndex)
+          this.addPokemon(bug, coord.x, coord.y, teamIndex, true)
         }
       }
-    }
-
-    if (
-      redEffects &&
-      (redEffects.includes(Effect.INFESTATION) ||
-        redEffects.includes(Effect.HORDE) ||
-        redEffects.includes(Effect.HEART_OF_THE_SWARM))
-    ) {
-      const bugTeam = new Array<IPokemon>()
-      redTeam.forEach((pkm) => {
-        if (pkm.types.includes(Synergy.BUG) && pkm.positionY != 0) {
-          bugTeam.push(pkm)
-        }
-      })
-      bugTeam.sort((a, b) => b.hp - a.hp)
-
-      if (redEffects.includes(Effect.INFESTATION)) {
-        const bug = PokemonFactory.createPokemonFromName(bugTeam[0].name)
-        const coord = this.getFirstAvailablePlaceOnBoard(false)
-        this.addPokemon(bug, coord.x, coord.y, 1, true)
-      } else if (redEffects.includes(Effect.HORDE)) {
-        for (let i = 0; i < 2; i++) {
-          const bug = PokemonFactory.createPokemonFromName(bugTeam[i].name)
-          const coord = this.getFirstAvailablePlaceOnBoard(false)
-          this.addPokemon(bug, coord.x, coord.y, 1, true)
-        }
-      } else if (redEffects.includes(Effect.HEART_OF_THE_SWARM)) {
-        for (let i = 0; i < 4; i++) {
-          const bug = PokemonFactory.createPokemonFromName(bugTeam[i].name)
-          const coord = this.getFirstAvailablePlaceOnBoard(false)
-          this.addPokemon(bug, coord.x, coord.y, 1, true)
-        }
-      }
-    }
+    })
 
     this.applyPostEffects()
   }
@@ -215,10 +173,10 @@ export default class Simulation extends Schema implements ISimulation {
     return this.addPokemon(pokemon, x, y, team)
   }
 
-  getFirstAvailablePlaceOnBoard(ascending: boolean) {
+  getFirstAvailablePlaceOnBoard(teamIndex: number): { x: number, y: number } {
     let row = 0
     let column = 0
-    if (ascending) {
+    if (teamIndex === 0) {
       outerloop: for (let x = 0; x < this.board.rows; x++) {
         for (let y = 0; y < this.board.columns; y++) {
           if (this.board.getValue(x, y) === undefined) {
@@ -240,6 +198,27 @@ export default class Simulation extends Schema implements ISimulation {
       }
     }
     return { x: row, y: column }
+  }
+
+  getClosestAvailablePlaceOnBoard(pokemon: IPokemon | IPokemonEntity, teamIndex: number): { x: number, y: number } {
+    const placesToConsiderByOrderOfPriority = [
+      [-1,0], [+1,0], [0,-1], [-1,-1], [+1,-1], [-1,+1], [+1,+1], [0,+1],
+      [-2,0], [+2,0], [-2,-1], [+2,-1], [0,-2], [-1,-2], [+1,-2], [-2,-2], [+2,-2],
+      [-2,+1], [+2,+1], [-3,0], [+3,0], [-3,-1], [+3,-1], [-3,-2], [+3,-2],
+      [0,-3], [-1,-3], [+1,-3], [-2,-3], [+2,-3], [-3,-3], [+3,-3],
+      [-3,+1], [+3,+1]
+    ]
+    for(let [dx,dy] of placesToConsiderByOrderOfPriority){
+      let x = pokemon.positionX + dx
+      let y = teamIndex === 0 ? pokemon.positionY - 1 + dy : 5 - (pokemon.positionY - 1) - dy
+
+      if (x >= 0 && x < this.board.rows
+      && y >= 0 && y < this.board.columns
+      && this.board.getValue(x, y) === undefined) {
+        return { x, y }
+      }
+    }
+    return this.getFirstAvailablePlaceOnBoard(teamIndex)
   }
 
   applyStat(pokemon: PokemonEntity, stat: Stat, value: number) {
