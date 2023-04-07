@@ -1328,7 +1328,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   WONDER_GUARD: {
-    eng: `Passive: Reduce received damage and received healing to 1`,
+    eng: `Passive: Reduce received damage and received healing to 1.\nActive: Deals [30,60,120,SP] ${Damage.SPECIAL} and apply ${Status.PARALYSIS} to all adjacent enemies for [5,SP] seconds.`,
     esp: ``,
     prt: ``,
     fra: ``

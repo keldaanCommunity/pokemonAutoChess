@@ -303,6 +303,22 @@ export class WonderGuardStrategy extends AttackStrategy {
     target: PokemonEntity
   ) {
     super.process(pokemon, state, board, target)
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+    let damage = 30
+    if (pokemon.stars == 2) {
+      damage = 60
+    }
+    if (pokemon.stars == 3 || pokemon.rarity === Rarity.MYTHICAL) {
+      damage = 120
+    }
+
+    cells.forEach((cell) => {
+      if (cell.value && pokemon.team != cell.value.team) {
+        let duration = Math.round(3000 * (1 + pokemon.ap / 100))
+        cell.value.status.triggerParalysis(duration, cell.value)
+        cell.value.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+      }
+    })
   }
 }
 

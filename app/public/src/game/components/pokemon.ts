@@ -2895,27 +2895,46 @@ export default class Pokemon extends DraggableObject {
             }
             break
 
-            case Ability.STRING_SHOT:
-              coordinates = transformAttackCoordinate(this.targetX, this.targetY)
-              specialProjectile = this.scene.add.sprite(
-                coordinates[0],
-                coordinates[1],
-                "STRING_SHOT"
-              )
-              specialProjectile.setDepth(7)
-              specialProjectile.setScale(0.25)
-              this.scene.tweens.add({
-                targets: specialProjectile,
-                scale: 2,
-                alpha: 0.9,
-                ease: Phaser.Math.Easing.Cubic.Out,
-                yoyo: false,
-                duration: 1000,
-                onComplete: () => {
-                  specialProjectile.destroy()
-                }
-              })
-              break
+          case Ability.STRING_SHOT:
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              "STRING_SHOT"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(0.25)
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              scale: 2,
+              alpha: 0.9,
+              ease: Phaser.Math.Easing.Cubic.Out,
+              yoyo: false,
+              duration: 1000,
+              onComplete: () => {
+                specialProjectile.destroy()
+              }
+            })
+            break
+
+          case Ability.WONDER_GUARD:
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.WONDER_GUARD,
+              `${Ability.WONDER_GUARD}/000`
+            )
+            specialProjectile.setDepth(2)
+            specialProjectile.setScale(2)
+            specialProjectile.anims.play(Ability.WONDER_GUARD)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
 
           default:
             break

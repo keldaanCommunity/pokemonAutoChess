@@ -1607,6 +1607,17 @@ export default class AnimationManager {
       duration: 333,
       repeat: -1
     })
+
+    this.game.anims.create({
+      key: Ability.WONDER_GUARD,
+      frames: this.game.anims.generateFrameNames(Ability.WONDER_GUARD, {
+        start: 0,
+        end: 3,
+        zeroPad: 3
+      }),
+      duration: 4*50,
+      repeat: 0
+    })
   }
 
   animatePokemon(entity: Pokemon, action: PokemonActionState) {
