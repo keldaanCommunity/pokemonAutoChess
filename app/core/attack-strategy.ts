@@ -3117,13 +3117,13 @@ export class HurricaneStrategy extends AttackStrategy {
     let damage = 0
     switch (pokemon.stars) {
       case 1:
-        damage = 10
+        damage = 25
         break
       case 2:
-        damage = 20
+        damage = 50
         break
       case 3:
-        damage = 30
+        damage = 100
         break
       default:
         break
@@ -3131,12 +3131,8 @@ export class HurricaneStrategy extends AttackStrategy {
 
     effectInLine(board, pokemon, target, (targetInLine) => {
       if (targetInLine.team !== pokemon.team) {
-        targetInLine.handleSpecialDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon
-        )
+        targetInLine.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+        targetInLine.status.triggerParalysis(4000, targetInLine)
       }
     })
   }
