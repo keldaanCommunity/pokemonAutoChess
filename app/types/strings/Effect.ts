@@ -264,17 +264,17 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.BULK_UP]: {
-    eng: `When a field pokemon dies, all other field pokemons gain 20% ${Stat.ATK_SPEED} and are healed for 30% ${Stat.HP} of their Maximum Health`,
+    eng: `When a field pokemon dies, all other field pokemons gain 15% ${Stat.ATK_SPEED} and are healed for 30% ${Stat.HP} of their Maximum Health`,
     esp: `?NONE?`,
     fra: `?NONE?`
   },
   [Effect.RAGE]: {
-    eng: `When a field pokemon dies, all other field pokemons gain 30% ${Stat.ATK_SPEED} and are healed for 40% ${Stat.HP} of their Maximum Health`,
+    eng: `When a field pokemon dies, all other field pokemons gain 20% ${Stat.ATK_SPEED} and are healed for 40% ${Stat.HP} of their Maximum Health`,
     esp: `?NONE?`,
     fra: `?NONE?`
   },
   [Effect.ANGER_POINT]: {
-    eng: `When a field pokemon dies, all other field pokemons gain 40% ${Stat.ATK_SPEED} and are healed for 50% ${Stat.HP} of their Maximum Health`,
+    eng: `When a field pokemon dies, all other field pokemons gain 30% ${Stat.ATK_SPEED} and are healed for 50% ${Stat.HP} of their Maximum Health`,
     esp: `?NONE?`,
     fra: `?NONE?`
   },
