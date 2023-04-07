@@ -370,6 +370,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     fra: `Bourdon`,
     prt: ``
   },
+  [Ability.STRING_SHOT]: {
+    eng: `String Shot`,
+    esp: ``,
+    fra: `Sécrétion`,
+    prt: ``
+  },
   [Ability.POISON_STING]: {
     eng: `Poison Sting`,
     esp: `Picadura de veneno`,
@@ -812,7 +818,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.EXPLOSION]: {
-    eng: `Deals [50,100,200,SP] ${Damage.SPECIAL}. Damage also the user.`,
+    eng: `Deals [50,100,200,SP] ${Damage.SPECIAL} to all adjacent enemies. Also damage the user.`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -1136,9 +1142,15 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.BUG_BUZZ]: {
-    eng: `Mono target attack that does [15,30,60,SP] ${Damage.SPECIAL}`,
-    esp: `Ataque de daño especial de un mono objetivo que hace [15,30,60,SP] ${Damage.SPECIAL}`,
-    fra: `Attaque mono cible faisant [15,30,60,SP] ${Damage.SPECIAL}`,
+    eng: `Mono target attack that does [20,40,80,SP] ${Damage.SPECIAL}. Double damage if target has ${Status.PARALYSIS}`,
+    esp: `Ataque de daño especial de un mono objetivo que hace [20,40,80,SP] ${Damage.SPECIAL}. Double damage if target has ${Status.PARALYSIS}`,
+    fra: `Attaque mono cible faisant [20,40,80,SP] ${Damage.SPECIAL}. Double les dégâts si la cible est ${Status.PARALYSIS}`,
+    prt: ``
+  },
+  [Ability.STRING_SHOT]: {
+    eng: `Mono target attack that does [10,20,50,SP] ${Damage.SPECIAL} and trigger ${Status.PARALYSIS} for 5 seconds`,
+    esp: ``,
+    fra: ``,
     prt: ``
   },
   [Ability.POISON_STING]: {

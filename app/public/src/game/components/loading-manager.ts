@@ -334,6 +334,7 @@ export default class LoadingManager {
       "/assets/attacks/FIGHTING.json",
       "/assets/attacks"
     )
+    scene.load.image("STRING_SHOT", "/assets/attacks/STRING_SHOT.png")
   }
 }
 

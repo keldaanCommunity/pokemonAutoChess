@@ -2843,7 +2843,40 @@ export class BugBuzzStrategy extends AttackStrategy {
         break
     }
 
+    if(target.status.paralysis){
+      damage *= 2
+    }
+
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+  }
+}
+
+export class StringShotStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    let damage = 0
+
+    switch (pokemon.stars) {
+      case 1:
+        damage = 10
+        break
+      case 2:
+        damage = 20
+        break
+      case 3:
+        damage = 50
+        break
+      default:
+        break
+    }
+
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+    target.status.triggerParalysis(5000, target)
   }
 }
 

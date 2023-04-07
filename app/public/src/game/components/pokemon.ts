@@ -2895,6 +2895,28 @@ export default class Pokemon extends DraggableObject {
             }
             break
 
+            case Ability.STRING_SHOT:
+              coordinates = transformAttackCoordinate(this.targetX, this.targetY)
+              specialProjectile = this.scene.add.sprite(
+                coordinates[0],
+                coordinates[1],
+                "STRING_SHOT"
+              )
+              specialProjectile.setDepth(7)
+              specialProjectile.setScale(0.25)
+              this.scene.tweens.add({
+                targets: specialProjectile,
+                scale: 2,
+                alpha: 0.9,
+                ease: Phaser.Math.Easing.Cubic.Out,
+                yoyo: false,
+                duration: 1000,
+                onComplete: () => {
+                  specialProjectile.destroy()
+                }
+              })
+              break
+
           default:
             break
         }

@@ -5697,7 +5697,7 @@ export class Caterpie extends Pokemon {
       AttackType.PHYSICAL,
       1,
       100,
-      Ability.BUG_BUZZ,
+      Ability.STRING_SHOT,
       shiny,
       emotion,
       false
@@ -5721,7 +5721,7 @@ export class Metapod extends Pokemon {
       AttackType.PHYSICAL,
       2,
       100,
-      Ability.BUG_BUZZ,
+      Ability.STRING_SHOT,
       shiny,
       emotion,
       false
@@ -5745,7 +5745,7 @@ export class Butterfree extends Pokemon {
       AttackType.PHYSICAL,
       3,
       100,
-      Ability.BUG_BUZZ,
+      Ability.STRING_SHOT,
       shiny,
       emotion,
       true
