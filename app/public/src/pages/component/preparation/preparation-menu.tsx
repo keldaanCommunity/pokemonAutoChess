@@ -19,6 +19,7 @@ import PreparationState from "../../../../../rooms/states/preparation-state"
 import "./preparation-menu.css";
 import { cc } from "../../utils/jsx"
 import { throttle } from "../../../../../utils/function"
+import { playSound, SOUNDS } from "../../utils/audio"
 
 export default function PreparationMenu(props: {
   setToGame: Dispatch<SetStateAction<boolean>>
@@ -66,6 +67,7 @@ export default function PreparationMenu(props: {
           name: name,
           preparationId: room.id
         })
+        playSound(SOUNDS.START_GAME)
         dispatch(gameStart(r.id))
         localStorage.setItem("lastRoomId", r.id)
         localStorage.setItem("lastSessionId", r.sessionId)

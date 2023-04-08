@@ -60,6 +60,7 @@ import Booster from "./component/booster/booster"
 import { IPokemonsStatistic } from "../../../models/mongo-models/pokemons-statistic"
 import { cc } from "./utils/jsx"
 import "./lobby.css"
+import { playSound, SOUNDS } from "./utils/audio"
 
 export default function Lobby() {
   const dispatch = useAppDispatch()
@@ -82,8 +83,6 @@ export default function Lobby() {
 
   const user = useAppSelector((state) => state.lobby.user)
   const numberOfBooster = user?.booster ?? 0
-  
-  const audio = useRef(new Audio("assets/sounds/notification.mp3"))
 
   const [lobbyJoined, setLobbyJoined] = useState<boolean>(false)
   const [showWiki, toggleWiki] = useState<boolean>(false)
@@ -137,8 +136,6 @@ export default function Lobby() {
                 }
                 dispatch(setUser(u))
                 setSearchedUser(u)
-              } else {
-                audio.current?.play()
               }
               u.onChange = (changes) => {
                 changes.forEach((change) => {
@@ -198,6 +195,7 @@ export default function Lobby() {
             room.onMessage("+", ([roomId, room]) => {
               if (room.name === "room" || room.name === "game") {
                 dispatch(addRoom(room))
+                playSound(SOUNDS.NEW_ROOM)
               }
             })
 
@@ -261,7 +259,7 @@ export default function Lobby() {
       join()
       setLobbyJoined(true)
     }
-  }, [lobbyJoined, dispatch, client, audio])
+  }, [lobbyJoined, dispatch, client])
 
   if (toAuth) {
     return <Navigate to={"/"} />

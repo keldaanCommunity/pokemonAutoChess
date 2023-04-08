@@ -8,21 +8,12 @@ import firebase from "firebase/compat/app"
 import { FIREBASE_CONFIG } from "./utils/utils"
 import { joinAfter, logIn } from "../stores/NetworkStore"
 import { addPlayer, leaveAfter } from "../stores/AfterGameStore"
-
-const buttonStyle = {
-  marginLeft: "10px",
-  marginTop: "10px"
-}
-
-const style = {
-  margin: "10px",
-  display: "flex",
-  flexFlow: "column"
-}
+import { playSound, SOUNDS } from "./utils/audio"
 
 export default function AfterGame() {
   const dispatch = useAppDispatch()
   const client: Client = useAppSelector((state) => state.network.client)
+  const currentPlayerId: string = useAppSelector((state) => state.network.uid)
   const room: Room<AfterGameState> | undefined = useAppSelector(
     (state) => state.network.after
   )
@@ -78,6 +69,9 @@ export default function AfterGame() {
     const initialize = async (r: Room<AfterGameState>) => {
       r.state.players.onAdd = (player) => {
         dispatch(addPlayer(player))
+        if(player.id === currentPlayerId){
+          playSound(SOUNDS["FINISH"+player.rank])
+        }
       }
     }
 
@@ -96,7 +90,7 @@ export default function AfterGame() {
       <div className="after-game">
         <button
           className="bubbly blue"
-          style={buttonStyle}
+          style={{margin: "10px 0 0 10px"}}
           onClick={() => {
             if (room) {
               room.connection.close()
