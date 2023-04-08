@@ -24,6 +24,7 @@ import {
 import GameState from "../../../rooms/states/game-state"
 import { Transfer } from "../../../types"
 import "./preparation.css"
+import { playSound, SOUNDS } from "./utils/audio"
 
 export default function Preparation() {
   const dispatch = useAppDispatch()
@@ -34,8 +35,7 @@ export default function Preparation() {
   const [initialized, setInitialized] = useState<boolean>(false)
   const [toGame, setToGame] = useState<boolean>(false)
   const [toAuth, setToAuth] = useState<boolean>(false)
-  const [toLobby, setToLobby] = useState<boolean>(false)
-  const audio = useRef(new Audio("assets/sounds/notification.mp3"))
+  const [toLobby, setToLobby] = useState<boolean>(false)  
   const connectingToGame = useRef<boolean>(false)
 
   useEffect(() => {
@@ -85,7 +85,7 @@ export default function Preparation() {
             dispatch(setName(change.value))
           } else if (change.field == "password") {
             dispatch(setPassword(change.value))
-          }
+          } 
         })
       }
       r.state.users.onAdd = (u) => {
@@ -93,10 +93,8 @@ export default function Preparation() {
 
         if (u.id === uid) {
           dispatch(setUser(u))
-        }
-
-        if (!u.isBot) {
-          audio.current?.play()
+        } else if (!u.isBot) {
+          playSound(SOUNDS.JOIN_ROOM)
         }
 
         u.onChange = (changes) => {
@@ -104,11 +102,17 @@ export default function Preparation() {
             dispatch(
               changeUser({ id: u.id, field: change.field, value: change.value })
             )
+            if (change.field === "ready" && change.value === true){
+              playSound(SOUNDS.SET_READY)
+            }
           })
         }
       }
       r.state.users.onRemove = (u) => {
         dispatch(removeUser(u.id))
+        if (!u.isBot && u.id !== uid && !connectingToGame.current) {
+          playSound(SOUNDS.LEAVE_ROOM)
+        }
       }
       r.onMessage(Transfer.MESSAGES, (message) => {
         dispatch(pushMessage(message))
@@ -118,11 +122,13 @@ export default function Preparation() {
         await r.leave(false)
         dispatch(leavePreparation())
         setToLobby(true)
+        playSound(SOUNDS.LEAVE_ROOM)
       })
 
       r.onMessage(Transfer.GAME_START, async (message) => {
         const token = await firebase.auth().currentUser?.getIdToken()
         if (token && !connectingToGame.current) {
+          playSound(SOUNDS.START_GAME)
           connectingToGame.current = true
           const game: Room<GameState> = await client.joinById(message.id, {
             idToken: token
