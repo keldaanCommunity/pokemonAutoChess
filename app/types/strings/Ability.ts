@@ -370,6 +370,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     fra: `Bourdon`,
     prt: ``
   },
+  [Ability.STRING_SHOT]: {
+    eng: `String Shot`,
+    esp: ``,
+    fra: `Sécrétion`,
+    prt: ``
+  },
   [Ability.POISON_STING]: {
     eng: `Poison Sting`,
     esp: `Picadura de veneno`,
@@ -772,6 +778,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     prt: "",
     fra: "Météo"
   },
+  [Ability.X_SCISSOR]: {
+    eng: `X-Scissor`,
+    esp: "",
+    prt: "",
+    fra: "Plaie Croix"
+  },
   [Ability.PLASMA_FIST]: {
     eng: "Plasma Fist",
     esp: "",
@@ -818,7 +830,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.EXPLOSION]: {
-    eng: `Deals [50,100,200,SP] ${Damage.SPECIAL}. Damage also the user.`,
+    eng: `Deals [50,100,200,SP] ${Damage.SPECIAL} to all adjacent enemies. Also damage the user.`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -1142,9 +1154,15 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.BUG_BUZZ]: {
-    eng: `Mono target attack that does [15,30,60,SP] ${Damage.SPECIAL}`,
-    esp: `Ataque de daño especial de un mono objetivo que hace [15,30,60,SP] ${Damage.SPECIAL}`,
-    fra: `Attaque mono cible faisant [15,30,60,SP] ${Damage.SPECIAL}`,
+    eng: `Mono target attack that does [20,40,80,SP] ${Damage.SPECIAL}. Double damage if target has ${Status.PARALYSIS}`,
+    esp: `Ataque de daño especial de un mono objetivo que hace [20,40,80,SP] ${Damage.SPECIAL}. Double damage if target has ${Status.PARALYSIS}`,
+    fra: `Attaque mono cible faisant [20,40,80,SP] ${Damage.SPECIAL}. Double les dégâts si la cible est ${Status.PARALYSIS}`,
+    prt: ``
+  },
+  [Ability.STRING_SHOT]: {
+    eng: `Mono target attack that does [10,20,50,SP] ${Damage.SPECIAL} and trigger ${Status.PARALYSIS} for 5 seconds`,
+    esp: ``,
+    fra: ``,
     prt: ``
   },
   [Ability.POISON_STING]: {
@@ -1322,7 +1340,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   WONDER_GUARD: {
-    eng: `Passive: Reduce received damage and received healing to 1`,
+    eng: `Passive: Reduce received damage and received healing to 1.\nActive: Deals [30,60,120,SP] ${Damage.SPECIAL} and apply ${Status.PARALYSIS} to all adjacent enemies for [5,SP] seconds.`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1526,19 +1544,19 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ""
   },
   [Ability.MACH_PUNCH]: {
-    eng: `Deals [50, SP] ${Damage.SPECIAL}. Double damage if attacker has a better ${Stat.DEF} than target`,
+    eng: `Deals [50,SP] ${Damage.SPECIAL}. Double damage if attacker has a better ${Stat.DEF} than target`,
     esp: "",
     prt: "",
     fra: ""
   },
   [Ability.TRIPLE_KICK]: {
-    eng: `Deals [50, SP] ${Damage.SPECIAL} to up to 3 adjacent enemies`,
+    eng: `Deals [50,SP] ${Damage.SPECIAL} to up to 3 adjacent enemies`,
     esp: "",
     prt: "",
     fra: ""
   },
   [Ability.MAWASHI_GERI]: {
-    eng: `Deals [50, SP] ${Damage.SPECIAL}. Double damage if attacker has a better ${Stat.ATK} than target`,
+    eng: `Deals [50,SP] ${Damage.SPECIAL}. Double damage if attacker has a better ${Stat.ATK} than target`,
     esp: "",
     prt: "",
     fra: ""
@@ -1552,6 +1570,12 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     esp: "",
     prt: "",
     fra: "Météo"
+  },
+  [Ability.X_SCISSOR]: {
+    eng: `Deals [20,40,80,SP] ${Damage.TRUE} twice`,
+    esp: "",
+    prt: "",
+    fra: ""
   },
   [Ability.PLASMA_FIST]: {
     eng: `Deals [120, SP] ${Damage.SPECIAL} with 50% lifesteal`,

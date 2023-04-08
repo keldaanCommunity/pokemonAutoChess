@@ -351,6 +351,17 @@ export default class LoadingManager {
       "/assets/attacks/FIGHTING.json",
       "/assets/attacks"
     )
+    scene.load.image("STRING_SHOT", "/assets/attacks/STRING_SHOT.png")
+    scene.load.multiatlas(
+      "WONDER_GUARD",
+      "/assets/attacks/WONDER_GUARD.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
+      "X_SCISSOR",
+      "/assets/attacks/X_SCISSOR.json",
+      "/assets/attacks"
+    )
   }
 }
 

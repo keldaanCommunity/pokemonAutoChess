@@ -78,6 +78,7 @@ import {
   SoakStrategy,
   SongOfDesireStrategy,
   StompStrategy,
+  StringShotStrategy,
   StunSporeStrategy,
   TeleportStrategy,
   ThiefStrategy,
@@ -126,6 +127,7 @@ import {
   MawashiGeriStrategy,
   ForecastStrategy,
   SacredSwordStrategy,
+  XScissorStrategy,
   PlasmaFistStrategy
 } from "../../core/attack-strategy"
 
@@ -160,6 +162,7 @@ export enum Ability {
   DARK_PULSE = "DARK_PULSE",
   NIGHT_SLASH = "NIGHT_SLASH",
   BUG_BUZZ = "BUG_BUZZ",
+  STRING_SHOT = "STRING_SHOT",
   POISON_STING = "POISON_STING",
   LEECH_LIFE = "LEECH_LIFE",
   HAPPY_HOUR = "HAPPY_HOUR",
@@ -258,6 +261,7 @@ export enum Ability {
   MAWASHI_GERI = "MAWASHI_GERI",
   FORECAST = "FORECAST",
   SACRED_SWORD = "SACRED_SWORD",
+  X_SCISSOR = "X_SCISSOR",
   PLASMA_FIST = "PLASMA_FIST"
 }
 
@@ -313,6 +317,7 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.DARK_PULSE]: new DarkPulseStrategy(),
   [Ability.NIGHT_SLASH]: new NightSlashStrategy(),
   [Ability.BUG_BUZZ]: new BugBuzzStrategy(),
+  [Ability.STRING_SHOT]: new StringShotStrategy(),
   [Ability.POISON_STING]: new PoisonStingStrategy(),
   [Ability.LEECH_LIFE]: new LeechLifeStrategy(),
   [Ability.HAPPY_HOUR]: new HappyHourStrategy(),
@@ -390,6 +395,7 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.MAWASHI_GERI]: new MawashiGeriStrategy(),
   [Ability.FORECAST]: new ForecastStrategy(),
   [Ability.SACRED_SWORD]: new SacredSwordStrategy(),
+  [Ability.X_SCISSOR]: new XScissorStrategy(),
   [Ability.PLASMA_FIST]: new PlasmaFistStrategy()
 }
 

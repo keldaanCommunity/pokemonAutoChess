@@ -303,6 +303,22 @@ export class WonderGuardStrategy extends AttackStrategy {
     target: PokemonEntity
   ) {
     super.process(pokemon, state, board, target)
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+    let damage = 30
+    if (pokemon.stars == 2) {
+      damage = 60
+    }
+    if (pokemon.stars == 3 || pokemon.rarity === Rarity.MYTHICAL) {
+      damage = 120
+    }
+
+    cells.forEach((cell) => {
+      if (cell.value && pokemon.team != cell.value.team) {
+        let duration = Math.round(3000 * (1 + pokemon.ap / 100))
+        cell.value.status.triggerParalysis(duration, cell.value)
+        cell.value.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+      }
+    })
   }
 }
 
@@ -2572,6 +2588,20 @@ export class SacredSwordStrategy extends AttackStrategy {
   }
 }
 
+export class XScissorStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    const damage = pokemon.stars === 3 ? 80 : pokemon.stars === 2 ? 40 : 20
+    target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon)
+    target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon) // twice
+  }
+}
+
 export class DragonTailStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
@@ -2843,7 +2873,40 @@ export class BugBuzzStrategy extends AttackStrategy {
         break
     }
 
+    if(target.status.paralysis){
+      damage *= 2
+    }
+
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+  }
+}
+
+export class StringShotStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    let damage = 0
+
+    switch (pokemon.stars) {
+      case 1:
+        damage = 10
+        break
+      case 2:
+        damage = 20
+        break
+      case 3:
+        damage = 50
+        break
+      default:
+        break
+    }
+
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+    target.status.triggerParalysis(5000, target)
   }
 }
 

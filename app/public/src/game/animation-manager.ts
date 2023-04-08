@@ -1618,6 +1618,28 @@ export default class AnimationManager {
       duration: 333,
       repeat: -1
     })
+
+    this.game.anims.create({
+      key: Ability.WONDER_GUARD,
+      frames: this.game.anims.generateFrameNames(Ability.WONDER_GUARD, {
+        start: 0,
+        end: 3,
+        zeroPad: 3
+      }),
+      duration: 250,
+      repeat: 0
+    })
+
+    this.game.anims.create({
+      key: Ability.X_SCISSOR,
+      frames: this.game.anims.generateFrameNames(Ability.X_SCISSOR, {
+        start: 0,
+        end: 9,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
   }
 
   animatePokemon(entity: Pokemon, action: PokemonActionState) {
