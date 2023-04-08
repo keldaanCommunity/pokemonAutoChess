@@ -26,7 +26,6 @@ export function getPoolSize(rarity: Rarity, maxStars: number): number {
 }
 
 export const CommonShop = new Array<Pkm>(
-  Pkm.SCYTHER, // TEMP
   Pkm.POLIWAG,
   Pkm.CHARMANDER,
   Pkm.GEODUDE,
