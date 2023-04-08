@@ -872,7 +872,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
                       user.titles,
                       user.title,
                       user.role,
-                      client.auth.email === undefined
+                      client.auth.email === undefined && client.auth.photoURL === undefined
                     )
                   )
                 }
@@ -905,7 +905,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
                 [],
                 "",
                 Role.BASIC,
-                client.auth.email === undefined
+                client.auth.email === undefined && client.auth.photoURL === undefined
               )
             )
           }
