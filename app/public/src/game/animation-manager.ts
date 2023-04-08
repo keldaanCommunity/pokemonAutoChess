@@ -789,6 +789,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.PLASMA_FIST,
+      frames: this.game.anims.generateFrameNames(Ability.PLASMA_FIST, {
+        start: 0,
+        end: 5,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.SACRED_SWORD,
       frames: this.game.anims.generateFrameNames(Ability.SACRED_SWORD, {
         start: 0,

@@ -783,6 +783,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: "Plaie Croix"
+  },
+  [Ability.PLASMA_FIST]: {
+    eng: "Plasma Fist",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1567,6 +1573,12 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
   },
   [Ability.X_SCISSOR]: {
     eng: `Deals [20,40,80,SP] ${Damage.TRUE} twice`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.PLASMA_FIST]: {
+    eng: `Deals [120, SP] ${Damage.SPECIAL} with 50% lifesteal`,
     esp: "",
     prt: "",
     fra: ""

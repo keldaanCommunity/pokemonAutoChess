@@ -5,7 +5,7 @@ import Board from "./board"
 import PokemonEntity from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
 import { Synergy } from "../types/enum/Synergy"
-import { Ability, AbilityStrategy } from "../types/enum/Ability"
+import { AbilityStrategy, Ability } from "../types/enum/Ability"
 import PokemonFactory from "../models/pokemon-factory"
 import { Pkm } from "../types/enum/Pokemon"
 import { pickRandomIn, shuffleArray } from "../utils/random"
@@ -3306,7 +3306,9 @@ export class MetronomeStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target)
 
-    const strategy = pickRandomIn(Object.values(AbilityStrategy))
+    const strategy = pickRandomIn(
+      Object.values(AbilityStrategy) as AttackStrategy[]
+    )
     strategy.process(pokemon, state, board, target)
   }
 }
@@ -3459,6 +3461,20 @@ export class ShadowSneakStrategy extends AttackStrategy {
       ? AttackType.TRUE
       : AttackType.SPECIAL
     target.handleSpecialDamage(damage, board, damageType, pokemon)
+  }
+}
+
+export class PlasmaFistStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    const damage = 120
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+    pokemon.handleHeal(damage / 2, pokemon, true)
   }
 }
 
