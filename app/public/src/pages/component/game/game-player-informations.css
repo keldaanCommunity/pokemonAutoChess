@@ -65,3 +65,21 @@
     height: 100%;
     gap: 5px;
 }
+
+#toast-life .toast-player-damage {
+    color: red;
+    font-weight: bold;
+}
+
+#toast-money .toast-player-income {
+    color: white;
+    font-weight: bold;
+}
+
+#toast-life img,
+#toast-money img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    display: inline-block;
+}

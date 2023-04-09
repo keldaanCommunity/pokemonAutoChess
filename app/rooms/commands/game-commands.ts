@@ -757,12 +757,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     }
   }
 
-  computeAchievments() {
-    this.state.players.forEach((player, key) => {
-      this.checkSuccess(player)
-    })
-  }
-
   checkSuccess(player: Player) {
     player.titles.add(Title.NOVICE)
     player.simulation.blueEffects.forEach((effect) => {
@@ -950,87 +944,79 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     })
   }
 
-  computeLife() {
+  computeLife(player) {
+    let playerDamage = 0
     const isPVE = this.checkForPVE()
-    this.state.players.forEach((player, key) => {
-      if (player.alive) {
-        const currentResult = player.getCurrentBattleResult()
-
-        if (
-          currentResult == BattleResult.DEFEAT ||
-          currentResult == BattleResult.DRAW
-        ) {
-          player.life =
-            player.life -
-            this.computePlayerDamage(
-              player.simulation.redTeam,
-              player.experienceManager.level,
-              this.state.stageLevel
-            )
-        }
-        player.addBattleResult(
-          player.opponentName,
-          currentResult,
-          player.opponentAvatar,
-          isPVE
-        )
-      }
-    })
-  }
-
-  computeStreak() {
-    if (this.checkForPVE()) {
-      return
-    }
-
-    this.state.players.forEach((player, key) => {
-      if (!player.alive) {
-        return
-      }
+    if (player.alive) {
       const currentResult = player.getCurrentBattleResult()
-      const lastPlayerResult = player.getLastPlayerBattleResult()
 
       if (
-        currentResult == BattleResult.DRAW ||
-        currentResult != lastPlayerResult
+        currentResult == BattleResult.DEFEAT ||
+        currentResult == BattleResult.DRAW
       ) {
-        player.streak = 0
-      } else {
-        player.streak = Math.min(player.streak + 1, 5)
+        playerDamage = this.computePlayerDamage(
+          player.simulation.redTeam,
+          player.experienceManager.level,
+          this.state.stageLevel
+        )
+        player.life -= playerDamage
       }
-    })
+      player.addBattleResult(
+        player.opponentName,
+        currentResult,
+        player.opponentAvatar,
+        isPVE
+      )
+    }
+    return playerDamage
   }
 
-  computeIncome() {
-    this.state.players.forEach((player, key) => {
-      if (player.alive && !player.isBot) {
-        player.interest = Math.min(Math.floor(player.money / 10), 5)
-        player.money += player.interest
-        player.money += player.streak
-        if (player.getLastBattleResult() == BattleResult.WIN) {
-          player.money += 1
-        }
-        player.money += 5
-        player.experienceManager.addExperience(2)
-      }
-    })
+  computeStreak(player) {
+    if (this.checkForPVE() || !player.alive) {
+      return
+    }
+    const currentResult = player.getCurrentBattleResult()
+    const lastPlayerResult = player.getLastPlayerBattleResult()
+
+    if (
+      currentResult == BattleResult.DRAW ||
+      currentResult != lastPlayerResult
+    ) {
+      player.streak = 0
+    } else {
+      player.streak = Math.min(player.streak + 1, 5)
+    }
   }
 
-  checkDeath() {
-    this.state.players.forEach((player: Player, key: string) => {
-      if (player.life <= 0 && player.alive) {
-        if (!player.isBot) {
-          player.shop.forEach((pkm) => {
-            this.state.shop.releasePokemon(pkm)
-          })
-          player.board.forEach((pokemon) => {
-            this.state.shop.releasePokemon(pokemon.name)
-          })
-        }
-        player.life = 0
-        player.alive = false
+  computeIncome(player) {
+    let income = 0
+    if (player.alive && !player.isBot) {      
+      player.interest = Math.min(Math.floor(player.money / 10), 5)
+      income += player.interest
+      income += player.streak
+      if (player.getLastBattleResult() == BattleResult.WIN) {
+        income += 1
       }
-    })
+      income += 5
+      player.money += income
+      player.experienceManager.addExperience(2)
+    }
+    return income
+  }
+
+  checkDeath(player) {
+    if (player.life <= 0 && player.alive) {
+      if (!player.isBot) {
+        player.shop.forEach((pkm) => {
+          this.state.shop.releasePokemon(pkm)
+        })
+        player.board.forEach((pokemon) => {
+          this.state.shop.releasePokemon(pokemon.name)
+        })
+      }
+      player.life = 0
+      player.alive = false
+    }
   }
 
   initializePickingPhase() {
@@ -1186,14 +1172,19 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   stopFightingPhase() {
     const isPVE = this.checkForPVE()
 
-    this.computeAchievments()
-    this.computeStreak()
-    this.computeLife()
-    this.rankPlayers()
-    this.checkDeath()
-    this.computeIncome()
-
     this.state.players.forEach((player: Player, key: string) => {
+      const client = this.room.clients.find(
+        (cli) => cli.auth.uid === player.id
+      )
+
+      this.checkSuccess(player)
+      this.computeStreak(player)
+      const income = this.computeIncome(player)
+      if(income > 0) client?.send(Transfer.PLAYER_INCOME, income)
+      const playerDamage = this.computeLife(player)
+      if(playerDamage > 0) client?.send(Transfer.PLAYER_DAMAGE, playerDamage)
+      this.checkDeath(player)
+
       player.simulation.stop()
       if (player.alive) {
         if (player.isBot) {
@@ -1203,9 +1194,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
           )
         } else {
           if (Math.random() < 0.037) {
-            const client = this.room.clients.find(
-              (cli) => cli.auth.uid === player.id
-            )
             if (client) {
               setTimeout(() => {
                 client.send(Transfer.UNOWN_WANDERING)
@@ -1277,6 +1265,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         })
       }
     })
+    this.rankPlayers()
     return this.checkEndGame()
   }
 

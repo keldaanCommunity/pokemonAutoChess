@@ -73,6 +73,7 @@ import GameToasts from "./component/game/game-toasts"
 import GamePokemonsProposition from "./component/game/game-pokemons-proposition"
 import { getRankLabel } from "../../../types/strings/Strings"
 import GameScene from "../game/scenes/game-scene"
+import { toast } from "react-toastify"
 let gameContainer: GameContainer
 
 function playerClick(id: string) {
@@ -240,6 +241,20 @@ export default function Game() {
 
       room.onMessage(Transfer.POKEMON_HEAL, (message) => {
         gameContainer.handleDisplayHeal(message)
+      })
+
+      room.onMessage(Transfer.PLAYER_DAMAGE, (value) => {
+        toast(<div className="toast-player-damage">
+          <span style={{verticalAlign: "middle"}}>-{value}</span>
+          <img className="icon-life" src="/assets/ui/heart.png" alt="❤" />
+        </div>, { containerId: "toast-life" })
+      })
+
+      room.onMessage(Transfer.PLAYER_INCOME, (value) => {
+        toast(<div className="toast-player-income">
+          <span style={{verticalAlign: "middle"}}>+{value}</span>
+          <img className="icon-money" src="/assets/ui/money.svg" alt="$" />
+        </div>, { containerId: "toast-money" })
       })
 
       room.onMessage(Transfer.UNOWN_WANDERING, () => {
