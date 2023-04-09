@@ -13,7 +13,8 @@ export default function PokemonCollectionItem(props: {
   index: string
   metadata: ITracker
   config: IPokemonConfig | undefined
-  filter: string
+  filter: string,
+  shinyOnly: boolean,
   setPokemon: Dispatch<SetStateAction<Pkm | undefined>>
 }) {
   if (
@@ -24,11 +25,11 @@ export default function PokemonCollectionItem(props: {
   }
 
   const { dust, emotions, shinyEmotions } = props.config ?? { dust: 0, emotions: [] as Emotion[], shinyEmotions: [] as Emotion[] }
-  const isUnlocked = (emotions?.length > 0 || shinyEmotions?.length > 0)
+  const isUnlocked = ((!props.shinyOnly && emotions?.length > 0) || shinyEmotions?.length > 0)
   const availableEmotions = Object.values(Emotion).filter(emotion => emotion in props.metadata.portrait_files)
 
   const canUnlock = availableEmotions.some(e => (
-    (emotions.includes(e) === false && dust >= getEmotionCost(e, false)) || 
+    (emotions.includes(e) === false && dust >= getEmotionCost(e, false) && !props.shinyOnly) || 
     (shinyEmotions.includes(e) === false && dust >= getEmotionCost(e, true))
   ))
 

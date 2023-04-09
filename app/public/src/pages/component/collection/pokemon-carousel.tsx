@@ -12,7 +12,8 @@ export default function PokemonCarousel(props: {
   type: Synergy | "all"
   setPokemon: Dispatch<SetStateAction<Pkm | undefined>>
   metadata: { [key: string]: ITracker },
-  filter: string
+  filter: string,
+  shinyOnly: boolean
 }) {
   const pokemonCollection = useAppSelector(
     (state) => state.lobby.pokemonCollection
@@ -52,6 +53,7 @@ export default function PokemonCarousel(props: {
               metadata={m}
               config={pokemonCollection.find((p) => p.id == pkm.index)}
               filter={props.filter}
+              shinyOnly={props.shinyOnly}
               setPokemon={props.setPokemon}
             />
           )

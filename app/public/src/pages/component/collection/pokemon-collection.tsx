@@ -17,6 +17,7 @@ export default function PokemonCollection(props: {
   const [selectedPokemon, setSelectedPokemon] = useState<Pkm | undefined>(undefined)
 
   const [filter, setFilter] = useState<string>("all")
+  const [shinyOnly, setShinyOnly] = useState<boolean>(false)
   
   return (
     <div id="pokemon-collection">
@@ -30,6 +31,10 @@ export default function PokemonCollection(props: {
           Back to Lobby
         </button>
         <div className="spacer"></div>
+        <label>
+          <input type="checkbox" className="nes-checkbox is-dark" checked={shinyOnly === true} onChange={e => setShinyOnly(!shinyOnly)} />
+          <span>Shiny Hunter</span>
+        </label>
         <button onClick={() => { setFilter("all") }} className="bubbly pink">
           <input type="checkbox" className="nes-checkbox is-dark" readOnly checked={filter === "all"}/><span>Show all</span>
         </button>
@@ -67,6 +72,7 @@ export default function PokemonCollection(props: {
                   setPokemon={setSelectedPokemon}
                   metadata={metadata}
                   filter={filter}
+                  shinyOnly={shinyOnly}
                 />
               </TabPanel>
             )
