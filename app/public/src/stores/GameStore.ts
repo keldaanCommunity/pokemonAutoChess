@@ -100,7 +100,7 @@ export const gameSlice = createSlice({
       )
       toast(i, {
         containerId: state.players[index].rank.toString(),
-        className: "toast-no-border"
+        className: "toast-emote"
       })
     },
     setRoundTime: (state, action: PayloadAction<number>) => {

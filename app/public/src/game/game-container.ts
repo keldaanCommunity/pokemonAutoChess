@@ -145,7 +145,7 @@ class GameContainer {
           },
           null
         )
-        toast(i, { containerId: player.rank.toString() })
+        toast(i, { containerId: player.rank.toString(), className: "toast-new-pokemon" })
       }
       p.onChange = (changes: DataChange<any>[]) => {
         changes.forEach((change) => {

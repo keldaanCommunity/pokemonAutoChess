@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react"
+import React from "react"
 import { useAppSelector } from "../../../hooks"
 import { TitleName } from "../../../../../types"
 import { getAvatarSrc } from "../../../utils"
@@ -8,6 +8,7 @@ import { Life } from "../icons/life"
 import { Money } from "../icons/money"
 import GameMoneyDetail from "./game-money-detail"
 import "./game-player-informations.css";
+import { ToastContainer } from "react-toastify"
 
 export default function GamePlayerInformations() {
   const experienceManager = useAppSelector(
@@ -73,6 +74,32 @@ export default function GamePlayerInformations() {
         </div>
       </div>
       <TimerBar />
+      <ToastContainer
+        className="toast"
+        containerId="toast-money"
+        enableMultiContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar
+        newestOnTop
+        closeOnClick
+        limit={1}
+        closeButton={false}
+        style={{ left: `48.5%`, top: `7.5%` }}
+      />
+      <ToastContainer
+        className="toast"
+        containerId="toast-life"
+        enableMultiContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar
+        newestOnTop
+        closeOnClick
+        limit={1}
+        closeButton={false}
+        style={{ left: `56.5%`, top: `7.5%` }}
+      />
     </>
   )
 }
