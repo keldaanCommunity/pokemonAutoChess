@@ -22,6 +22,10 @@
     gap: 1vw;
 }
 
+#pokemon-collection header label {
+    align-self: center;
+}
+
 #pokemon-collection header .nes-checkbox + span::before {
     top: calc(0.65em - 8px);
 }
