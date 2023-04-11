@@ -1667,7 +1667,7 @@ export class JangmoO extends Pokemon {
       AttackType.PHYSICAL,
       1,
       110,
-      Ability.DEFAULT,
+      Ability.CLANGOROUS_SOUL,
       shiny,
       emotion,
       false
@@ -1691,7 +1691,7 @@ export class HakamoO extends Pokemon {
       AttackType.PHYSICAL,
       2,
       110,
-      Ability.DEFAULT,
+      Ability.CLANGOROUS_SOUL,
       shiny,
       emotion,
       false
@@ -1715,7 +1715,7 @@ export class KommoO extends Pokemon {
       AttackType.PHYSICAL,
       3,
       110,
-      Ability.DEFAULT,
+      Ability.CLANGOROUS_SOUL,
       shiny,
       emotion,
       true
