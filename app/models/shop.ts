@@ -101,7 +101,8 @@ export const EpicShop = new Array<Pkm>(
   Pkm.HOUNDOUR,
   Pkm.GOOMY,
   Pkm.BOUNSWEET,
-  Pkm.OSHAWOTT
+  Pkm.OSHAWOTT,
+  Pkm.JANGMO_O
 )
 
 export const LegendaryShop = new Array<Pkm>(
