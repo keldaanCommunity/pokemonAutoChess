@@ -18,10 +18,10 @@ export default function Media() {
       <GithubButton />
       <PolicyButton />
       <span style={{ color: "white", textShadow: "2px 2px 0 black" }}>
-        V2.8
+        V3.3
       </span>
       <p style={{ color: "#fff", textShadow: "2px 4px 3px rgba(0,0,0,0.3)" }}>
-        Made by a fan, for fans
+        Made by 2 fans, for fans
         <br />
         Non profit / Open Source game
         <br />
