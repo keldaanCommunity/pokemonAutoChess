@@ -135,7 +135,10 @@ export class BeatUpStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target)
     for (let i = 0; i < pokemon.stars; i++) {
       const houndour = PokemonFactory.createPokemonFromName(Pkm.HOUNDOUR)
-      const coord = pokemon.simulation.getClosestAvailablePlaceOnBoard(pokemon, pokemon.team)
+      const coord = pokemon.simulation.getClosestAvailablePlaceOnBoard(
+        pokemon,
+        pokemon.team
+      )
       pokemon.simulation.addPokemon(
         houndour,
         coord.x,
@@ -316,7 +319,12 @@ export class WonderGuardStrategy extends AttackStrategy {
       if (cell.value && pokemon.team != cell.value.team) {
         let duration = Math.round(3000 * (1 + pokemon.ap / 100))
         cell.value.status.triggerParalysis(duration, cell.value)
-        cell.value.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon
+        )
       }
     })
   }
@@ -1024,6 +1032,10 @@ export class ClangorousSoulStrategy extends AttackStrategy {
     }
 
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+
+    pokemon.addAttack(buffAtk, true)
+    pokemon.addDefense(buffDef, true)
+    pokemon.addSpecialDefense(buffDef, true)
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team == cell.value.team) {
@@ -2873,7 +2885,7 @@ export class BugBuzzStrategy extends AttackStrategy {
         break
     }
 
-    if(target.status.paralysis){
+    if (target.status.paralysis) {
       damage *= 2
     }
 
@@ -3194,7 +3206,12 @@ export class HurricaneStrategy extends AttackStrategy {
 
     effectInLine(board, pokemon, target, (targetInLine) => {
       if (targetInLine.team !== pokemon.team) {
-        targetInLine.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+        targetInLine.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon
+        )
         targetInLine.status.triggerParalysis(4000, targetInLine)
       }
     })
