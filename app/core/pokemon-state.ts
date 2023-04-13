@@ -355,13 +355,13 @@ export default class PokemonState {
               let boost = 0
               let speedBoost = 0
               if (isWorkUp) {
-                boost = 30
+                boost = 20
                 speedBoost = 15
               } else if (isRage) {
-                boost = 40
+                boost = 30
                 speedBoost = 20
               } else if (isAngerPoint) {
-                boost = 50
+                boost = 40
                 speedBoost = 30
               }
               board.forEach((r, c, value) => {
