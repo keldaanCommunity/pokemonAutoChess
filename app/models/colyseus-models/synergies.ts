@@ -16,7 +16,6 @@ export default class Synergies
   }
 
   update(board: MapSchema<Pokemon>) {
-    const pokemonNames = new Array<Pkm>()
     this.setToZero()
 
     board.forEach((pkm: Pokemon) => {
@@ -67,19 +66,20 @@ export default class Synergies
       }
     })
 
+    const typesPerFamily = new Map<Pkm, Set<Synergy>>()
     board.forEach((pkm: Pokemon) => {
-      const family = PkmFamily[pkm.name]
-      if (!pokemonNames.includes(family) && pkm.positionY != 0) {
-        pokemonNames.push(family)
-        pkm.types.forEach((type) => {
-          const t = this.get(type)
-          if (t) {
-            this.set(type, t + 1)
-          } else {
-            this.set(type, 1)
-          }
-        })
+      if (pkm.positionY != 0) {
+        const family = PkmFamily[pkm.name]
+        if(!typesPerFamily.has(family)) typesPerFamily.set(family, new Set())
+        const types: Set<Synergy> = typesPerFamily.get(family)!
+        pkm.types.forEach(type => types.add(type))
       }
+    })
+
+    typesPerFamily.forEach((types) => {
+      types.forEach(type => {
+        this.set(type, (this.get(type) ?? 0) + 1)
+      })      
     })
   }
 
