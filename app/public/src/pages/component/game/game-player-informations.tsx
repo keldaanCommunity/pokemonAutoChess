@@ -9,6 +9,7 @@ import { Money } from "../icons/money"
 import GameMoneyDetail from "./game-money-detail"
 import "./game-player-informations.css";
 import { ToastContainer } from "react-toastify"
+import { AdditionalPicksStages, CarouselStages, MythicalPicksStages, NeutralStage } from "../../../../../types/Config"
 
 export default function GamePlayerInformations() {
   const experienceManager = useAppSelector(
@@ -26,7 +27,18 @@ export default function GamePlayerInformations() {
   return (
     <>
       <div id="game-player-informations" className="nes-container">
-        <div className="stage-information">
+        <div className="stage-information" data-tip data-for="detail-stage">
+          <ReactTooltip
+              id="detail-stage"
+              className="customeTheme"
+              effect="solid"
+              place="bottom"
+            >
+            <p><span className="help">PVE Stages:</span> {NeutralStage.map(s => s.turn).join(", ")}</p>
+            <p><span className="help">Carousel Stages:</span> {CarouselStages.join(", ")}</p>
+            <p><span className="help">Additional picks:</span> Stages {AdditionalPicksStages.join(" and ")}</p>
+            <p><span className="help">Mythical picks:</span> Stages {MythicalPicksStages.join(" and ")}</p>
+          </ReactTooltip>
           <p>Stage {stageLevel}</p>
           <p>{roundTime}s</p>
         </div>

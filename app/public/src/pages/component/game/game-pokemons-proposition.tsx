@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../../hooks"
 import GamePokemonPortrait from "./game-pokemon-portrait"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { pokemonPropositionClick } from "../../../stores/NetworkStore"
+import { AdditionalPicksStages } from "../../../../../types/Config"
 
 const style: CSS.Properties = {
   position: "absolute",
@@ -23,7 +24,7 @@ export default function GamePokemonsPropositions() {
     return (
       <div style={style}>
         <div className="nes-container" style={{visibility: visible ? 'visible' : 'hidden'}}>
-          {(stageLevel === 5 || stageLevel === 8) && (<h2 style={{ textAlign: "center" }}>
+          {AdditionalPicksStages.includes(stageLevel) && (<h2 style={{ textAlign: "center" }}>
             Pick an additional Pokemon. It will be available to everyone.
           </h2>)}
           <div
