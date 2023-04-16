@@ -14,6 +14,7 @@ import {
   leavePreparation,
   pushMessage,
   removeUser,
+  setBotsList,
   setGameStarted,
   setName,
   setOwnerId,
@@ -25,6 +26,7 @@ import GameState from "../../../rooms/states/game-state"
 import { Transfer } from "../../../types"
 import "./preparation.css"
 import { playSound, SOUNDS } from "./utils/audio"
+import { IBot } from "../../../models/mongo-models/bot-v2"
 
 export default function Preparation() {
   const dispatch = useAppDispatch()
@@ -123,6 +125,10 @@ export default function Preparation() {
         dispatch(leavePreparation())
         setToLobby(true)
         playSound(SOUNDS.LEAVE_ROOM)
+      })
+
+      r.onMessage(Transfer.REQUEST_BOT_LIST, (bots: IBot[]) => {
+        dispatch(setBotsList(bots))
       })
 
       r.onMessage(Transfer.GAME_START, async (message) => {

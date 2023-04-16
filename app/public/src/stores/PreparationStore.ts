@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { GameUser, IGameUser } from "../../../models/colyseus-models/game-user"
+import { IBot } from "../../../models/mongo-models/bot-v2"
 import { IMessage } from "../../../types"
 
 interface IUserPreparationState {
@@ -11,6 +12,7 @@ interface IUserPreparationState {
   name: string
   password: string | null
   user: GameUser | undefined
+  botsList: IBot[] | null
 }
 
 const initialState: IUserPreparationState = {
@@ -21,7 +23,8 @@ const initialState: IUserPreparationState = {
   messages: [],
   name: "",
   user: undefined,
-  password: null
+  password: null,
+  botsList: null
 }
 
 export const preparationSlice = createSlice({
@@ -69,13 +72,17 @@ export const preparationSlice = createSlice({
     setPassword: (state, action: PayloadAction<string | null>) => {
       state.password = action.payload
     },
-    leavePreparation: () => initialState
+    leavePreparation: () => initialState,
+    setBotsList: (state, action: PayloadAction<IBot[] | null>) => {
+      state.botsList = action.payload
+    }
   }
 })
 
 export const {
   setUser,
   setName,
+  setBotsList,
   pushMessage,
   addUser,
   changeUser,

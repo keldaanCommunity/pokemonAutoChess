@@ -3,7 +3,7 @@ import { GameUser } from "../../models/colyseus-models/game-user"
 import UserMetadata, {
   IUserMetadata
 } from "../../models/mongo-models/user-metadata"
-import BotV2 from "../../models/mongo-models/bot-v2"
+import BotV2, { IBot } from "../../models/mongo-models/bot-v2"
 import { Client } from "colyseus"
 import PreparationRoom from "../preparation-room"
 import { Emotion, IMessage, Role, Transfer } from "../../types"
@@ -273,27 +273,19 @@ export class InitializeBotsCommand extends Command<
 }
 
 type OnAddBotPayload = {
-  difficulty: BotDifficulty
+  type: IBot | BotDifficulty
   user: IUserMetadata
 }
 
 export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
-  execute(data: OnAddBotPayload) {
-    try {
-      if (this.state.users.size >= 8) {
-        return
-      }
+  async execute(data: OnAddBotPayload) {
+    if (this.state.users.size >= 8) {
+      return
+    }
 
-      const userArray = new Array<string>()
-
-      this.state.users.forEach((value: GameUser, key: string) => {
-        if (value.isBot) {
-          userArray.push(key)
-        }
-      })
-
-      const { difficulty, user } = data
-
+    const { type, user } = data
+    const bot: IBot = typeof type === "object" ? type : await new Promise(resolve => {
+      const difficulty = type
       let d
 
       switch (difficulty) {
@@ -311,11 +303,19 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
           break
       }
 
+      const userArray = new Array<string>()
+      this.state.users.forEach((value: GameUser, key: string) => {
+        if (value.isBot) {
+          userArray.push(key)
+        }
+      })
+
       BotV2.find(
         { id: { $nin: userArray }, elo: d },
         ["avatar", "elo", "name", "id"],
         null,
         (err, bots) => {
+          if(err) return console.error(err)
           if (bots.length <= 0) {
             this.room.broadcast(Transfer.MESSAGES, {
               name: user.displayName,
@@ -326,38 +326,38 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
             return
           }
 
-          const bot = pickRandomIn(bots)
-
           if (this.state.users.size >= 8) {
             return
           } else {
-            this.state.users.set(
-              bot.id,
-              new GameUser(
-                bot.id,
-                bot.name,
-                bot.elo,
-                bot.avatar,
-                true,
-                true,
-                "",
-                Role.BOT,
-                false
-              )
-            )
-
-            this.room.broadcast(Transfer.MESSAGES, {
-              name: user.displayName,
-              payload: `Bot ${bot.name} added.`,
-              avatar: user.avatar,
-              time: Date.now()
-            })
+            const bot = pickRandomIn(bots)
+            resolve(bot)
           }
         }
       )
-    } catch (error) {
-      console.log(error)
-    }
+    })
+
+    this.state.listBots = null
+    this.state.users.set(
+      bot.id,
+      new GameUser(
+        bot.id,
+        bot.name,
+        bot.elo,
+        bot.avatar,
+        true,
+        true,
+        "",
+        Role.BOT,
+        false
+      )
+    )
+    
+    this.room.broadcast(Transfer.MESSAGES, {
+      name: user.displayName,
+      payload: `Bot ${bot.name} added.`,
+      avatar: user.avatar,
+      time: Date.now()
+    })
   }
 }
 
@@ -370,7 +370,6 @@ export class OnRemoveBotCommand extends Command<
 > {
   execute({ target, user }) {
     try {
-      console.log(target)
       // if no message, delete a random bot
       if (!target) {
         // let botDeleted = false;
@@ -402,6 +401,52 @@ export class OnRemoveBotCommand extends Command<
           time: Date.now()
         })
       }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export class OnListBotsCommand extends Command<PreparationRoom> {
+  execute(data: { user: IUserMetadata }) {
+    try {
+      if (this.state.users.size >= 8) {
+        return
+      }
+
+      const userArray = new Array<string>()
+
+      this.state.users.forEach((value: GameUser, key: string) => {
+        if (value.isBot) {
+          userArray.push(key)
+        }
+      })
+
+      const { user } = data
+
+      BotV2.find(
+        { id: { $nin: userArray } },
+        ["avatar", "elo", "name", "id"],
+        null,
+        (err, bots) => {
+          if(err) return console.error(err)
+          if (bots.length <= 0) {
+            this.room.broadcast(Transfer.MESSAGES, {
+              name: user.displayName,
+              payload: `Error: No bots found`,
+              avatar: user.avatar,
+              time: Date.now()
+            })
+            return
+          }
+
+          this.room.clients.forEach((client) => {
+            if (client.auth.uid === this.state.ownerId) {
+              client.send(Transfer.REQUEST_BOT_LIST, bots)
+            }
+          })
+        }
+      )
     } catch (error) {
       console.log(error)
     }

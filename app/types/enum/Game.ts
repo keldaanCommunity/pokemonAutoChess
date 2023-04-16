@@ -57,7 +57,8 @@ export enum BotDifficulty {
   EASY,
   MEDIUM,
   HARD,
-  EXTREME
+  EXTREME,
+  CUSTOM
 }
 
 export enum PokemonTint {
