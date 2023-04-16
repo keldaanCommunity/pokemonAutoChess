@@ -236,13 +236,15 @@ export default class Status extends Schema implements IStatus {
   updateBurn(dt: number, pkm: PokemonEntity, board: Board) {
     if (this.burnDamageCooldown - dt <= 0) {
       if (this.burnOrigin) {
-        pkm.handleDamage(
-          Math.ceil(pkm.hp * 0.05),
+        pkm.handleDamage({
+          damage: Math.ceil(pkm.hp * 0.05),
           board,
-          AttackType.TRUE,
-          this.burnOrigin,
-          false
-        )
+          attackType: AttackType.TRUE,
+          attacker: this.burnOrigin,
+          dodgeable: false,
+          shouldAttackerGainMana: false,
+          shouldTargetGainMana: true
+        })
         this.burnDamageCooldown = 1000
       }
     } else {
@@ -301,13 +303,15 @@ export default class Status extends Schema implements IStatus {
   updatePoison(dt: number, pkm: PokemonEntity, board: Board) {
     if (this.poisonDamageCooldown - dt <= 0) {
       if (this.poisonOrigin) {
-        pkm.handleDamage(
-          Math.ceil(pkm.hp * 0.05 * this.poisonStacks),
+        pkm.handleDamage({
+          damage: Math.ceil(pkm.hp * 0.05 * this.poisonStacks),
           board,
-          AttackType.TRUE,
-          this.poisonOrigin,
-          false
-        )
+          attackType: AttackType.TRUE,
+          attacker: this.poisonOrigin,
+          dodgeable: false,
+          shouldAttackerGainMana: false,
+          shouldTargetGainMana: false
+        })
         this.poisonDamageCooldown = 1000
       }
     } else {

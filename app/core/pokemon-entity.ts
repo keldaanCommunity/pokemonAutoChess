@@ -152,21 +152,16 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     )
   }
 
-  handleDamage(
+  handleDamage(params: {
     damage: number,
     board: Board,
     attackType: AttackType,
     attacker: PokemonEntity,
-    dodgeable: boolean
-  ) {
-    return this.state.handleDamage(
-      this,
-      damage,
-      board,
-      attackType,
-      attacker,
-      dodgeable
-    )
+    dodgeable: boolean,
+    shouldTargetGainMana: boolean,
+    shouldAttackerGainMana: boolean
+  }) {
+    return this.state.handleDamage({ target: this, ...params })
   }
 
   handleSpecialDamage(
@@ -195,14 +190,16 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       if(this.items.has(Item.POWER_LENS)){
         attacker.handleSpecialDamage(Math.round(0.5*specialDamage), board, attackType, this)
       }
-      return this.state.handleDamage(
-        this,
-        specialDamage,
+      return this.state.handleDamage({
+        target: this,
+        damage: specialDamage,
         board,
         attackType,
         attacker,
-        false
-      )
+        dodgeable: false,
+        shouldAttackerGainMana: false,
+        shouldTargetGainMana: true
+      })
     }
   }
 
