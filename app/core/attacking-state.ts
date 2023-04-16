@@ -197,13 +197,15 @@ export default class AttackingState extends PokemonState {
           cells.forEach((cell) => {
             if (cell.value && pokemon.team != cell.value.team) {
               cell.value.count.fairyCritCount++
-              cell.value.handleDamage(
-                d,
+              cell.value.handleDamage({
+                damage: d,
                 board,
-                AttackType.SPECIAL,
-                pokemon,
-                false
-              )
+                attackType: AttackType.SPECIAL,
+                attacker: pokemon,
+                dodgeable: false,
+                shouldAttackerGainMana: false,
+                shouldTargetGainMana: true
+              })
             }
           })
         }
@@ -228,13 +230,15 @@ export default class AttackingState extends PokemonState {
           cells.forEach((cell) => {
             if (cell.value && target.team != cell.value.team) {
               cell.value.count.fairyCritCount++
-              cell.value.handleDamage(
-                d,
+              cell.value.handleDamage({
+                damage: d,
                 board,
-                AttackType.SPECIAL,
-                target,
-                false
-              )
+                attackType: AttackType.SPECIAL,
+                attacker: target,
+                dodgeable: false,
+                shouldAttackerGainMana: false,
+                shouldTargetGainMana: true
+              })
             }
           })
         }
@@ -247,40 +251,83 @@ export default class AttackingState extends PokemonState {
       if (pokemon.effects.includes(Effect.PHANTOM_FORCE)) {
         const trueDamage = 0.2 * damage
         damage = 0.8 * damage
-        target.handleDamage(trueDamage, board, AttackType.TRUE, pokemon, true)
+        target.handleDamage({
+          damage: trueDamage, 
+          board, 
+          attackType: AttackType.TRUE,
+          attacker: pokemon,
+          dodgeable: true,
+          shouldAttackerGainMana: false,
+          shouldTargetGainMana: true
+        })
       }
 
       if (pokemon.effects.includes(Effect.CURSE)) {
         const trueDamage = 0.4 * damage
         damage = 0.6 * damage
-        target.handleDamage(trueDamage, board, AttackType.TRUE, pokemon, true)
+        target.handleDamage({
+          damage: trueDamage, 
+          board, 
+          attackType: AttackType.TRUE,
+          attacker: pokemon,
+          dodgeable: true,
+          shouldAttackerGainMana: false,
+          shouldTargetGainMana: true
+        })
       }
 
       if (pokemon.effects.includes(Effect.SHADOW_TAG)) {
         const trueDamage = 0.7 * damage
         damage = 0.3 * damage
-        target.handleDamage(trueDamage, board, AttackType.TRUE, pokemon, true)
+        target.handleDamage({
+          damage: trueDamage, 
+          board, 
+          attackType: AttackType.TRUE,
+          attacker: pokemon,
+          dodgeable: true,
+          shouldAttackerGainMana: false,
+          shouldTargetGainMana: true
+        })
       }
 
       if (pokemon.effects.includes(Effect.WANDERING_SPIRIT)) {
         const trueDamage = damage
         damage = 0
-        target.handleDamage(trueDamage, board, AttackType.TRUE, pokemon, true)
+        target.handleDamage({
+          damage: trueDamage, 
+          board, 
+          attackType: AttackType.TRUE,
+          attacker: pokemon,
+          dodgeable: true,
+          shouldAttackerGainMana: false,
+          shouldTargetGainMana: true
+        })
       }
 
       if (target.status.spikeArmor && pokemon.range === 1) {
         pokemon.status.triggerWound(2000, pokemon, board)
-        pokemon.handleDamage(
-          target.def,
+        pokemon.handleDamage({
+          damage: target.def,
           board,
-          AttackType.SPECIAL,
-          target,
-          false
-        )
+          attackType: AttackType.SPECIAL,
+          attacker: target,
+          dodgeable: false,
+          shouldAttackerGainMana: false,
+          shouldTargetGainMana: true
+        })
       }
 
       if (damage > 0) {
-        target.handleDamage(damage, board, attackType, pokemon, true)
+        // finally, the direct attack damage is handled here
+        target.handleDamage({
+          damage,
+          board,
+          attackType,
+          attacker: pokemon,
+          dodgeable: true,
+          shouldAttackerGainMana: true,
+          shouldTargetGainMana: true
+        })
       }
 
       if (pokemon.items.has(Item.BLUE_ORB)) {
@@ -302,13 +349,15 @@ export default class AttackingState extends PokemonState {
 
       if (pokemon.items.has(Item.RED_ORB)) {
         if (target) {
-          target.handleDamage(
-            Math.ceil(pokemon.atk * 0.2),
+          target.handleDamage({
+            damage: Math.ceil(pokemon.atk * 0.2),
             board,
-            AttackType.TRUE,
-            pokemon,
-            true
-          )
+            attackType: AttackType.TRUE,
+            attacker: pokemon,
+            dodgeable: true,
+            shouldAttackerGainMana: false,
+            shouldTargetGainMana: true
+          })
         }
       }
       if (target && target.items.has(Item.SMOKE_BALL)) {
@@ -324,13 +373,15 @@ export default class AttackingState extends PokemonState {
             pokemon.team != cell.value.team &&
             targetCount > 0
           ) {
-            cell.value.handleDamage(
-              Math.ceil(0.5 * damage),
+            cell.value.handleDamage({
+              damage: Math.ceil(0.5 * damage),
               board,
               attackType,
-              pokemon,
-              true
-            )
+              attacker: pokemon,
+              dodgeable: true,
+              shouldAttackerGainMana: false,
+              shouldTargetGainMana: true
+            })
             targetCount--
           }
         })

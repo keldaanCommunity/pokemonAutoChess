@@ -76,16 +76,17 @@ export default class PokemonState {
     }
   }
 
-  handleDamage(
-    pokemon: PokemonEntity,
+  handleDamage({ target: pokemon, damage, board, attackType, attacker, dodgeable, shouldTargetGainMana, shouldAttackerGainMana }: {
+    target: PokemonEntity,
     damage: number,
     board: Board,
-    attackType_: AttackType,
+    attackType: AttackType,
     attacker: PokemonEntity,
-    dodgeable: boolean
-  ): boolean {
+    dodgeable: boolean,
+    shouldTargetGainMana: boolean,
+    shouldAttackerGainMana: boolean
+  }): boolean {
     let death: boolean
-    let attackType = attackType_
     if (pokemon.life == 0) {
       death = true
     } else {
@@ -223,7 +224,9 @@ export default class PokemonState {
         // console.log(`${pokemon.name} took ${damage} and has now ${pokemon.life} life shield ${pokemon.shield}`);
 
         if (pokemon) {
-          pokemon.setMana(pokemon.mana + Math.ceil(residualDamage / 10))
+          if(shouldTargetGainMana){
+            pokemon.setMana(pokemon.mana + Math.ceil(residualDamage / 10))
+          }
 
           if (
             pokemon.items.has(Item.DEFENSIVE_RIBBON) &&
@@ -273,7 +276,9 @@ export default class PokemonState {
         }
 
         if (attacker) {
-          attacker.setMana(attacker.mana + 5)
+          if(shouldAttackerGainMana){
+            attacker.setMana(attacker.mana + 5)
+          }
           if (
             attacker.effects.includes(Effect.CALM_MIND) ||
             attacker.effects.includes(Effect.FOCUS_ENERGY) ||
