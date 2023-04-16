@@ -121,11 +121,14 @@ export const networkSlice = createSlice({
     requestLevelLeaderboard: (state) => {
       state.lobby?.send(Transfer.REQUEST_LEVEL_LEADERBOARD)
     },
-    addBot: (state, action: PayloadAction<BotDifficulty>) => {
+    addBot: (state, action: PayloadAction<BotDifficulty | IBot>) => {
       state.preparation?.send(Transfer.ADD_BOT, action.payload)
     },
     removeBot: (state, action: PayloadAction<string>) => {
       state.preparation?.send(Transfer.REMOVE_BOT, action.payload)
+    },
+    listBots: (state) => {
+      state.preparation?.send(Transfer.REQUEST_BOT_LIST)
     },
     toggleReady: (state) => {
       state.preparation?.send(Transfer.TOGGLE_READY)
@@ -247,6 +250,7 @@ export const {
   requestBotData,
   addBot,
   removeBot,
+  listBots,
   toggleReady,
   requestTilemap,
   itemClick,

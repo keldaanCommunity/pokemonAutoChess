@@ -10,6 +10,7 @@ import {
   OnMessageCommand,
   OnAddBotCommand,
   OnRemoveBotCommand,
+  OnListBotsCommand,
   InitializeBotsCommand,
   OnRoomNameCommand,
   OnRoomPasswordCommand,
@@ -20,6 +21,7 @@ import { IPreparationMetadata, Transfer } from "../types"
 import { components } from "../api-v1/openapi"
 import { GameUser } from "../models/colyseus-models/game-user"
 import BannedUser from "../models/mongo-models/banned-user"
+import { IBot } from "../models/mongo-models/bot-v2"
 
 export default class PreparationRoom extends Room {
   dispatcher: Dispatcher<this>
@@ -119,11 +121,11 @@ export default class PreparationRoom extends Room {
     })
     this.onMessage(
       Transfer.ADD_BOT,
-      (client: Client, difficulty: BotDifficulty) => {
+      (client: Client, botType: IBot | BotDifficulty) => {
         try {
           const user = this.state.users.get(client.auth.uid)
           this.dispatcher.dispatch(new OnAddBotCommand(), {
-            difficulty: difficulty,
+            type: botType,
             user: user
           })
         } catch (error) {
@@ -136,6 +138,17 @@ export default class PreparationRoom extends Room {
         const user = this.state.users.get(client.auth.uid)
         this.dispatcher.dispatch(new OnRemoveBotCommand(), {
           target: t,
+          user: user
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    })
+    this.onMessage(Transfer.REQUEST_BOT_LIST, (client: Client) => {
+      try {
+        const user = this.state.users.get(client.auth.uid)
+        
+        this.dispatcher.dispatch(new OnListBotsCommand(), {
           user: user
         })
       } catch (error) {
