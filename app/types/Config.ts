@@ -156,8 +156,10 @@ export const StageDuration: Record<number | "DEFAULT", number> = {
   DEFAULT: 30
 }
 
-export const CarouselStages = [1, 6, 11, 16, 21, 26, 31]
+export const CarouselStages = [1, 6, 11, 16, 21, 26, 31, 36, 41]
 export const ItemProposalStages = [2, 3]
+export const AdditionalPicksStages = [5, 8]
+export const MythicalPicksStages = [10, 20]
 
 export const NeutralStage: { turn: number; avatar: string }[] = [
   {
@@ -202,14 +204,6 @@ export const NeutralStage: { turn: number; avatar: string }[] = [
   },
   {
     turn: 45,
-    avatar: `${PkmIndex[Pkm.RAYQUAZA].replace("-", "/")}/${Emotion.NORMAL}`
-  },
-  {
-    turn: 50,
-    avatar: `${PkmIndex[Pkm.RAYQUAZA].replace("-", "/")}/${Emotion.NORMAL}`
-  },
-  {
-    turn: 55,
     avatar: `${PkmIndex[Pkm.RAYQUAZA].replace("-", "/")}/${Emotion.NORMAL}`
   }
 ]

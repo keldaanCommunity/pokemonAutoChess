@@ -4,7 +4,9 @@ import {
   ItemRecipe,
   NeutralStage,
   CarouselStages,
-  StageDuration
+  StageDuration,
+  AdditionalPicksStages,
+  MythicalPicksStages
 } from "../../types/Config"
 import { Item, BasicItems } from "../../types/enum/Item"
 import { BattleResult } from "../../types/enum/Game"
@@ -114,7 +116,7 @@ export class OnPokemonPropositionCommand extends Command<
   execute({ playerId, pkm }) {
     const player = this.state.players.get(playerId)
     if (player && !this.state.additionalPokemons.includes(pkm)) {
-      if (this.state.stageLevel === 5 || this.state.stageLevel === 8) {
+      if (AdditionalPicksStages.includes(this.state.stageLevel)) {
         this.state.additionalPokemons.push(pkm)
         this.state.shop.addAdditionalPokemon(pkm)
       }
@@ -1035,7 +1037,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     }
 
     // First additional pick stage
-    if (this.state.stageLevel === 5) {
+    if (this.state.stageLevel === AdditionalPicksStages[0]) {
       this.state.players.forEach((player: Player) => {
         if (player.isBot) {
           const p = this.room.additionalPokemonsPool1.pop()
@@ -1055,7 +1057,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     }
 
     // Second additional pick stage
-    if (this.state.stageLevel === 8) {
+    if (this.state.stageLevel === AdditionalPicksStages[1]) {
       this.state.players.forEach((player: Player) => {
         if (player.isBot) {
           const p = this.room.additionalPokemonsPool2.pop()
@@ -1074,13 +1076,13 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
       })
     }
 
-    if (this.state.stageLevel === 10) {
+    if (this.state.stageLevel === MythicalPicksStages[0]) {
       this.state.players.forEach((player: Player) => {
         this.state.shop.assignMythicalPropositions(player, Mythical1Shop)
       })
     }
 
-    if (this.state.stageLevel === 20) {
+    if (this.state.stageLevel === MythicalPicksStages[1]) {
       this.state.players.forEach((player: Player) => {
         this.state.shop.assignMythicalPropositions(player, Mythical2Shop)
       })
