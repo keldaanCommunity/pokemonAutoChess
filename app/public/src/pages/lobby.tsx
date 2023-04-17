@@ -60,7 +60,6 @@ import Booster from "./component/booster/booster"
 import { IPokemonsStatistic } from "../../../models/mongo-models/pokemons-statistic"
 import { cc } from "./utils/jsx"
 import "./lobby.css"
-import { playSound, SOUNDS } from "./utils/audio"
 
 export default function Lobby() {
   const dispatch = useAppDispatch()
@@ -195,7 +194,6 @@ export default function Lobby() {
             room.onMessage("+", ([roomId, room]) => {
               if (room.name === "room" || room.name === "game") {
                 dispatch(addRoom(room))
-                playSound(SOUNDS.NEW_ROOM)
               }
             })
 

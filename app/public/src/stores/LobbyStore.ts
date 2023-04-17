@@ -15,6 +15,7 @@ import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
 import PokemonConfig from "../../../models/colyseus-models/pokemon-config"
 import { Synergy } from "../../../types/enum/Synergy"
 import { IPokemonsStatistic } from "../../../models/mongo-models/pokemons-statistic"
+import { playSound, SOUNDS } from "../pages/utils/audio"
 
 interface IUserLobbyState {
   messages: IMessage[]
@@ -228,6 +229,9 @@ export const lobbySlice = createSlice({
         if (roomIndex !== -1) {
           rooms[roomIndex] = action.payload
         } else {
+          if(metadata.type === "preparation"){
+            playSound(SOUNDS.NEW_ROOM)
+          }
           rooms.push(action.payload)
         }
       }
