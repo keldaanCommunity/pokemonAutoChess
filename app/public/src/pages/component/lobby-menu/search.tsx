@@ -127,7 +127,7 @@ export default function Search() {
         ))}
       </div>
       {user ? (
-        <div className="nes-container" style={{marginTop: "1em"}}>
+        <div className="nes-container" style={{ marginTop: "1em" }}>
           <Avatar
             avatar={user.avatar}
             name={user.name}
@@ -135,13 +135,22 @@ export default function Search() {
             title={user.title}
             role={user.role}
           />
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-            <p>Level {user.level} ({user.exp} / 1000)</p>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              overflow: "scroll"
+            }}
+          >
+            <p>
+              Level {user.level} ({user.exp} / 1000)
+            </p>
             <p>Wins: {user.wins}</p>
-          {modButton}
-          {giveButton}
-          {titleButton}
-          {banButton}
+            {modButton}
+            {giveButton}
+            {titleButton}
+            {banButton}
           </div>
           <History history={user.history} />
         </div>
