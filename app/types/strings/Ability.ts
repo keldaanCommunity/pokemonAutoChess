@@ -866,7 +866,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.DISARMING_VOICE]: {
-    eng: `Gives [10,20,40,SP=0.5] ${Stat.MANA} to all allies`,
+    eng: `Gives [10,20,40,SP=0.5] ${Stat.MANA} to all allies except the caster`,
     esp: ``,
     fra: ``,
     prt: ``
