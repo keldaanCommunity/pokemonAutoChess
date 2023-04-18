@@ -1227,7 +1227,7 @@ export class DisarmingVoiceStrategy extends AttackStrategy {
     }
     heal = Math.round(heal * (1 + pokemon.ap / 200))
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
-      if (tg && pokemon.team == tg.team) {
+      if (tg && pokemon.team === tg.team && tg.id !== pokemon.id) {
         tg.setMana(tg.mana + heal)
       }
     })
