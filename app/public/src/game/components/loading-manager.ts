@@ -106,6 +106,11 @@ export default class LoadingManager {
       "/assets/attacks"
     )
     scene.load.multiatlas(
+      "SPECTRAL_THIEF",
+      "/assets/attacks/SPECTRAL_THIEF.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
       "PLASMA_FIST",
       "/assets/attacks/PLASMA_FIST.json",
       "/assets/attacks"

@@ -128,7 +128,8 @@ import {
   ForecastStrategy,
   SacredSwordStrategy,
   XScissorStrategy,
-  PlasmaFistStrategy
+  PlasmaFistStrategy,
+  SpectralThiefStrategy
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -262,7 +263,8 @@ export enum Ability {
   FORECAST = "FORECAST",
   SACRED_SWORD = "SACRED_SWORD",
   X_SCISSOR = "X_SCISSOR",
-  PLASMA_FIST = "PLASMA_FIST"
+  PLASMA_FIST = "PLASMA_FIST",
+  SPECTRAL_THIEF = "SPECTRAL_THIEF"
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -396,6 +398,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.FORECAST]: new ForecastStrategy(),
   [Ability.SACRED_SWORD]: new SacredSwordStrategy(),
   [Ability.X_SCISSOR]: new XScissorStrategy(),
-  [Ability.PLASMA_FIST]: new PlasmaFistStrategy()
+  [Ability.PLASMA_FIST]: new PlasmaFistStrategy(),
+  [Ability.SPECTRAL_THIEF]: new SpectralThiefStrategy()
 }
-

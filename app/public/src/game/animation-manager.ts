@@ -789,6 +789,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.SPECTRAL_THIEF,
+      frames: this.game.anims.generateFrameNames(Ability.SPECTRAL_THIEF, {
+        start: 0,
+        end: 11,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.PLASMA_FIST,
       frames: this.game.anims.generateFrameNames(Ability.PLASMA_FIST, {
         start: 0,

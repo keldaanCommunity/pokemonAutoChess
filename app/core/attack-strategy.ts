@@ -3065,6 +3065,43 @@ export class NastyPlotStrategy extends AttackStrategy {
   }
 }
 
+export class SpectralThiefStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(
+      pokemon,
+      board
+    )
+    const damage = 50
+    if (farthestCoordinate) {
+      target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+
+      board.swapValue(
+        pokemon.positionX,
+        pokemon.positionY,
+        farthestCoordinate.x,
+        farthestCoordinate.y
+      )
+      pokemon.positionX = farthestCoordinate.x
+      pokemon.positionY = farthestCoordinate.y
+      const boostAtk = Math.min(0, target.atk - target.baseAtk)
+      const boostDef = Math.min(0, target.def - target.baseSpeDef)
+      const boostSpeDef = Math.min(0, target.speDef - target.baseSpeDef)
+      target.atk = target.baseAtk
+      target.def = target.baseDef
+      target.speDef = target.baseSpeDef
+      pokemon.addAttack(boostAtk, false)
+      pokemon.addDefense(boostDef, false)
+      pokemon.addSpecialDefense(boostSpeDef, false)
+    }
+  }
+}
+
 export class ThiefStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,

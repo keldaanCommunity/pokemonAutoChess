@@ -539,7 +539,8 @@ export enum Pkm {
   TYPE_NULL = "type_null",
   ZERAORA = "zeraora",
   XERNEAS = "xerneas",
-  YVELTAL = "yveltal"
+  YVELTAL = "yveltal",
+  MARSHADOW = "marshadow"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1083,7 +1084,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.ZERAORA]: "0807",
   [Pkm.XERNEAS]: "0716",
   [Pkm.YVELTAL]: "0717",
-  [Pkm.TYPE_NULL]: "0772"
+  [Pkm.TYPE_NULL]: "0772",
+  [Pkm.MARSHADOW]: "0802"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1627,5 +1629,6 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.ZERAORA]: Pkm.ZERAORA,
   [Pkm.XERNEAS]: Pkm.XERNEAS,
   [Pkm.YVELTAL]: Pkm.YVELTAL,
-  [Pkm.TYPE_NULL]: Pkm.TYPE_NULL
+  [Pkm.TYPE_NULL]: Pkm.TYPE_NULL,
+  [Pkm.MARSHADOW]: Pkm.MARSHADOW
 }

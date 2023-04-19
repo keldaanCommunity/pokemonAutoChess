@@ -2200,6 +2200,45 @@ export default class Pokemon extends DraggableObject {
             )
             break
 
+          case Ability.SPECTRAL_THIEF:
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.SPECTRAL_THIEF,
+              "000"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.SPECTRAL_THIEF)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+
+            const selfCoordinates = transformAttackCoordinate(
+              this.positionX,
+              this.positionY
+            )
+            const selfAnimation = this.scene.add.sprite(
+              selfCoordinates[0],
+              selfCoordinates[1],
+              Ability.SPECTRAL_THIEF,
+              "000"
+            )
+            selfAnimation.setDepth(7)
+            selfAnimation.setScale(2, 2)
+            selfAnimation.anims.play(Ability.SPECTRAL_THIEF)
+            selfAnimation.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                selfAnimation.destroy()
+              }
+            )
+            break
+
           case Ability.PLASMA_FIST:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY)
             specialProjectile = this.scene.add.sprite(
@@ -2937,7 +2976,10 @@ export default class Pokemon extends DraggableObject {
             break
 
           case Ability.WONDER_GUARD:
-            coordinates = transformAttackCoordinate(this.positionX, this.positionY)
+            coordinates = transformAttackCoordinate(
+              this.positionX,
+              this.positionY
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
