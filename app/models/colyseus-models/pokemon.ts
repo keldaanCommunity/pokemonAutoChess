@@ -7914,28 +7914,28 @@ export class Mewtwo extends Pokemon {
 }
 
 export class Marshadow extends Pokemon {
-    constructor(shiny: boolean, emotion: Emotion) {
-      super(
-        Pkm.MARSHADOW,
-        [Synergy.GHOST, Synergy.FIGHTING],
-        Rarity.MYTHICAL,
-        Pkm.DEFAULT,
-        200,
-        30,
-        2,
-        5,
-        3,
-        AttackSprite.PSYCHIC_RANGE,
-        AttackType.PHYSICAL,
-        2,
-        110,
-        Ability.THIEF,
-        shiny,
-        emotion,
-        true
-      )
-    }
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.MARSHADOW,
+      [Synergy.GHOST, Synergy.FIGHTING],
+      Rarity.MYTHICAL,
+      Pkm.DEFAULT,
+      250,
+      35,
+      6,
+      6,
+      1,
+      AttackSprite.FIGHTING_MELEE,
+      AttackType.PHYSICAL,
+      3,
+      90,
+      Ability.SPECTRAL_THIEF,
+      shiny,
+      emotion,
+      true
+    )
   }
+}
 
 export class Kyurem extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {

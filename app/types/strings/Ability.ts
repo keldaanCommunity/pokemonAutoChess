@@ -789,6 +789,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.SPECTRAL_THIEF]: {
+    eng: "Spectral Thief",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1579,6 +1585,12 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
   },
   [Ability.PLASMA_FIST]: {
     eng: `Deals [120, SP] ${Damage.SPECIAL} with 50% lifesteal`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.SPECTRAL_THIEF]: {
+    eng: `Disappears and reappears dealing [50, SP] ${Damage.SPECIAL}, stealing all the statistic boost of the target`,
     esp: "",
     prt: "",
     fra: ""
