@@ -229,17 +229,17 @@ export const EffectDescription: {
     fra: `?NONE?`
   },
   [Effect.SHORE_UP]: {
-    eng: `Every 3 seconds, all ground pokemons gains 1 ${Stat.DEF}/${Stat.SPE_DEF} and 1 ${Stat.ATK} bonus stats (stacks up to 4 times)`,
+    eng: `Every 3 seconds, all ground pokemons gains 1 ${Stat.DEF}/${Stat.SPE_DEF} and 1 ${Stat.ATK} bonus stats, up to 4 times`,
     esp: ``,
     fra: ``
   },
   [Effect.ROTOTILLER]: {
-    eng: `Every 3 seconds, all ground pokemons gains 2 ${Stat.DEF}/${Stat.SPE_DEF} and 2 ${Stat.ATK} bonus stats (stacks up to 4 times)`,
+    eng: `Every 3 seconds, all ground pokemons gains 2 ${Stat.DEF}/${Stat.SPE_DEF} and 2 ${Stat.ATK} bonus stats, up to 4 times`,
     esp: ``,
     fra: ``
   },
   [Effect.SANDSTORM]: {
-    eng: `Every 3 seconds, all ground pokemons gains 3 ${Stat.DEF}/${Stat.SPE_DEF} and 3 ${Stat.ATK} bonus stats (stacks up to 4 times)`,
+    eng: `Every 3 seconds, all ground pokemons gains 3 ${Stat.DEF}/${Stat.SPE_DEF} and 3 ${Stat.ATK} bonus stats, up to 4 times (Weather: Sandstorm)`,
     esp: ``,
     fra: ``
   },
