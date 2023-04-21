@@ -1502,7 +1502,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ""
   },
   [Ability.SKY_ATTACK]: {
-    eng: `Rises in the air and fall on the farthest target, ${Status.PROTECT} the attacker for 1 second and deals [200,SP] ${Damage.SPECIAL}`,
+    eng: `Rises in the air and fall on the farthest target, ${Status.PROTECT} the attacker for .5 second and deals [120,SP] ${Damage.SPECIAL}`,
     esp: "",
     prt: "",
     fra: ""
