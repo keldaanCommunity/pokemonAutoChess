@@ -129,32 +129,32 @@ export const EffectDescription: {
     fra: `Les pkm feu gagnent 5% d'ATK à chaque attaque`
   },
   [Effect.VICTORY_STAR]: {
-    eng: `Your Fire pokemon have 20% chance to ${Status.BURN} enemy for 2s and gain +1 ${Stat.ATK} after every hit (Sunlight)`,
+    eng: `Your Fire pokemon have 20% chance to ${Status.BURN} enemy for 2s and gain +1 ${Stat.ATK} after every hit (Weather: Sunlight)`,
     esp: `Fire pkm gana un 5% de dano en cada ataque`,
     fra: `Les pkm feu gagnent 5% d'ATK à chaque attaque`
   },
   [Effect.DROUGHT]: {
-    eng: `Your Fire pokemon have 30% chance to ${Status.BURN} enemy for 2s and gain +2 ${Stat.ATK} after every hit (Sunlight)`,
+    eng: `Your Fire pokemon have 30% chance to ${Status.BURN} enemy for 2s and gain +2 ${Stat.ATK} after every hit (Weather: Sunlight)`,
     esp: `El so se intensifica, los pkm de fuego gana +50% ATK`,
     fra: `Le soleil s'intensifie, augmentant l'ATK des pkm feu de 50%`
   },
   [Effect.DESOLATE_LAND]: {
-    eng: `Your Fire pokemon have 40% chance to ${Status.BURN} enemy for 2s and gain +3 ${Stat.ATK} after every hit (Sunlight)`,
+    eng: `Your Fire pokemon have 40% chance to ${Status.BURN} enemy for 2s and gain +3 ${Stat.ATK} after every hit (Weather: Sunlight)`,
     esp: `?NONE?`,
     fra: `?NONE?`
   },
   [Effect.RAIN_DANCE]: {
-    eng: `Water pokemons gain 25% chance to dodge enemy attacks`,
+    eng: `Water pokemons gain 25% chance to dodge enemy attacks (Weather: Rainy)`,
     esp: `Cae la lluvia, 30% de ATK para los aliados del agua`,
     fra: `La pluie tombe, 30% d'ATK pour les alliés eau`
   },
   [Effect.DRIZZLE]: {
-    eng: `Water pokemons gain 50% chance to dodge enemy attacks`,
+    eng: `Water pokemons gain 50% chance to dodge enemy attacks (Weather: Rainy)`,
     esp: `La lluvia es cada vez más intensa, un 30% más de ATK.`,
     fra: `La pluie s'intensifie, 30% d'ATK en plus`
   },
   [Effect.PRIMORDIAL_SEA]: {
-    eng: `Water pokemons gain 75% chance to dodge enemy attacks`,
+    eng: `Water pokemons gain 75% chance to dodge enemy attacks (Weather: Rainy)`,
     esp: `Invoca a Kyogre, el rey de los océanos`,
     fra: `Invoque Kyogre, le roi des océans`
   },
@@ -229,17 +229,17 @@ export const EffectDescription: {
     fra: `?NONE?`
   },
   [Effect.SHORE_UP]: {
-    eng: `Every 3 seconds, all ground pokemons gains 1 ${Stat.DEF}/${Stat.SPE_DEF} and 1 ${Stat.ATK} bonus stats (stacks up to 4 times)`,
+    eng: `Every 3 seconds, all ground pokemons gains 1 ${Stat.DEF}/${Stat.SPE_DEF} and 1 ${Stat.ATK} bonus stats, up to 4 times`,
     esp: ``,
     fra: ``
   },
   [Effect.ROTOTILLER]: {
-    eng: `Every 3 seconds, all ground pokemons gains 2 ${Stat.DEF}/${Stat.SPE_DEF} and 2 ${Stat.ATK} bonus stats (stacks up to 4 times)`,
+    eng: `Every 3 seconds, all ground pokemons gains 2 ${Stat.DEF}/${Stat.SPE_DEF} and 2 ${Stat.ATK} bonus stats, up to 4 times`,
     esp: ``,
     fra: ``
   },
   [Effect.SANDSTORM]: {
-    eng: `Every 3 seconds, all ground pokemons gains 3 ${Stat.DEF}/${Stat.SPE_DEF} and 3 ${Stat.ATK} bonus stats (stacks up to 4 times)`,
+    eng: `Every 3 seconds, all ground pokemons gains 3 ${Stat.DEF}/${Stat.SPE_DEF} and 3 ${Stat.ATK} bonus stats, up to 4 times (Weather: Sandstorm)`,
     esp: ``,
     fra: ``
   },
@@ -424,12 +424,12 @@ export const EffectDescription: {
     fra: `?NONE?`
   },
   [Effect.SNOW]: {
-    eng: `All allies have a 10% chance to ${Status.FREEZE} an enemy for 2 seconds after a hit.`,
+    eng: `All allies have a 10% chance to ${Status.FREEZE} an enemy for 2 seconds after a hit (Weather: Snow)`,
     esp: `+10% de probabilidad de congelar al enemigo durante un ataque`,
     fra: `+10% de chance de geler l'ennemi lors d'une attaque`
   },
   [Effect.SHEER_COLD]: {
-    eng: `All allies pokemon have a 30% chance to ${Status.FREEZE} an enemy for 2 seconds after a hit.`,
+    eng: `All allies pokemon have a 30% chance to ${Status.FREEZE} an enemy for 2 seconds after a hit (Weather: Snow)`,
     esp: `+30% de probabilidad de congelar al enemigo durante un ataque`,
     fra: `+30% de chance de geler l'ennemi lors d'une attaque`
   },

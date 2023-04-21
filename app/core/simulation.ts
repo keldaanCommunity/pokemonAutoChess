@@ -955,50 +955,42 @@ export default class Simulation extends Schema implements ISimulation {
   }
 
   getClimate() {
-    let climate = Climate.NEUTRAL
-    if (
-      this.blueEffects.includes(Effect.SNOW) ||
-      this.redEffects.includes(Effect.SNOW)
-    ) {
-      climate = Climate.SNOW
+    function getPlayerClimate(effects: Effect[]){
+      return effects.includes(Effect.SANDSTORM) ? Climate.SANDSTORM
+      : effects.includes(Effect.DESOLATE_LAND) ? Climate.SUN
+      : effects.includes(Effect.PRIMORDIAL_SEA) ? Climate.RAIN
+      : effects.includes(Effect.DROUGHT) ? Climate.SUN
+      : effects.includes(Effect.DRIZZLE) ? Climate.RAIN
+      : effects.includes(Effect.SHEER_COLD) ? Climate.SNOW
+      : effects.includes(Effect.VICTORY_STAR) ? Climate.SUN      
+      : effects.includes(Effect.SNOW) ? Climate.SNOW      
+      : effects.includes(Effect.RAIN_DANCE) ? Climate.RAIN
+      : Climate.NEUTRAL
     }
-    if (
-      this.blueEffects.includes(Effect.DRIZZLE) ||
-      this.redEffects.includes(Effect.DRIZZLE)
-    ) {
-      climate = Climate.RAIN
-    }
-    if (
-      this.blueEffects.includes(Effect.SHEER_COLD) ||
-      this.redEffects.includes(Effect.SHEER_COLD)
-    ) {
-      climate = Climate.SNOW
-    }
-    if (
-      this.blueEffects.includes(Effect.RAIN_DANCE) ||
-      this.redEffects.includes(Effect.RAIN_DANCE)
-    ) {
-      climate = Climate.RAIN
-    }
-    if (
-      this.blueEffects.includes(Effect.SANDSTORM) ||
-      this.redEffects.includes(Effect.SANDSTORM)
-    ) {
-      climate = Climate.SANDSTORM
-    }
-    if (
-      this.blueEffects.includes(Effect.DROUGHT) ||
-      this.redEffects.includes(Effect.DROUGHT)
-    ) {
-      climate = Climate.SUN
-    }
-    if (
-      this.blueEffects.includes(Effect.PRIMORDIAL_SEA) ||
-      this.redEffects.includes(Effect.PRIMORDIAL_SEA)
-    ) {
-      climate = Climate.RAIN
-    }
-    return climate
+
+    const redClimate = getPlayerClimate(this.redEffects)
+    const blueClimate = getPlayerClimate(this.blueEffects)
+    
+    if(redClimate !== Climate.NEUTRAL && blueClimate === Climate.NEUTRAL) return redClimate
+    if(blueClimate !== Climate.NEUTRAL && redClimate === Climate.NEUTRAL) return blueClimate
+    if(redClimate === blueClimate) return redClimate
+
+    // sandstorm beats everything
+    if(redClimate === Climate.SANDSTORM || blueClimate === Climate.SANDSTORM) return Climate.SANDSTORM
+
+    // snow beats rain
+    if(redClimate === Climate.SNOW && blueClimate === Climate.RAIN) return Climate.SNOW
+    if(blueClimate === Climate.SNOW && redClimate === Climate.RAIN) return Climate.SNOW
+
+    // sunlight beats snow
+    if(redClimate === Climate.SNOW && blueClimate === Climate.SUN) return Climate.SUN
+    if(blueClimate === Climate.SNOW && redClimate === Climate.SUN) return Climate.SUN
+
+    // rain beats sunlight
+    if(redClimate === Climate.SUN && blueClimate === Climate.RAIN) return Climate.RAIN
+    if(blueClimate === Climate.SUN && redClimate === Climate.RAIN) return Climate.RAIN
+
+    return Climate.NEUTRAL
   }
 
   update(dt: number) {
