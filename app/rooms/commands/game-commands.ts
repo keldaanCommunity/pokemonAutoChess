@@ -61,25 +61,35 @@ export class OnShopCommand extends Command<
             (this.room.getPossibleEvolution(player.board, pokemon.name) &&
               this.room.getBenchSize(player.board) == 8))
         ) {
-          player.money -= pokemon.cost
-          if (
-            pokemon.skill === Ability.PROTEAN ||
-            pokemon.skill === Ability.JUDGEMENT
-          ) {
-            this.room.checkProtean(player, pokemon)
+          let allowBuy = true
+          if (pokemon.rarity === Rarity.MYTHICAL) {
+            player.board.forEach((p) => {
+              if (p.name === pokemon.name) {
+                allowBuy = false
+              }
+            })
           }
+          if (allowBuy) {
+            player.money -= pokemon.cost
+            if (
+              pokemon.skill === Ability.PROTEAN ||
+              pokemon.skill === Ability.JUDGEMENT
+            ) {
+              this.room.checkProtean(player, pokemon)
+            }
 
-          const x = this.room.getFirstAvailablePositionInBench(player.id)
-          pokemon.positionX = x !== undefined ? x : -1
-          pokemon.positionY = 0
-          player.board.set(pokemon.id, pokemon)
+            const x = this.room.getFirstAvailablePositionInBench(player.id)
+            pokemon.positionX = x !== undefined ? x : -1
+            pokemon.positionY = 0
+            player.board.set(pokemon.id, pokemon)
 
-          if (pokemon.rarity == Rarity.MYTHICAL) {
-            this.state.shop.assignShop(player)
-          } else {
-            player.shop[index] = Pkm.DEFAULT
+            if (pokemon.rarity == Rarity.MYTHICAL) {
+              this.state.shop.assignShop(player)
+            } else {
+              player.shop[index] = Pkm.DEFAULT
+            }
+            this.room.updateEvolution(id)
           }
-          this.room.updateEvolution(id)
         }
       }
     }
@@ -968,7 +978,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
             this.state.stageLevel
           )
           player.life -= playerDamage
-          if(playerDamage > 0) {
+          if (playerDamage > 0) {
             const client = this.room.clients.find(
               (cli) => cli.auth.uid === player.id
             )
@@ -1011,7 +1021,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   computeIncome() {
     this.state.players.forEach((player, key) => {
       let income = 0
-      if (player.alive && !player.isBot) {      
+      if (player.alive && !player.isBot) {
         player.interest = Math.min(Math.floor(player.money / 10), 5)
         income += player.interest
         income += player.streak
@@ -1020,7 +1030,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         }
         income += 5
         player.money += income
-        if(income > 0){
+        if (income > 0) {
           const client = this.room.clients.find(
             (cli) => cli.auth.uid === player.id
           )
@@ -1300,7 +1310,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     const nbPlayersAlive = [...this.state.players.values()].filter(
       (p: Player) => p.life > 0
     ).length
-    const minigamePhaseDuration = this.state.stageLevel === 1 ? 15000 : 14000 + nbPlayersAlive * 2000
+    const minigamePhaseDuration =
+      this.state.stageLevel === 1 ? 15000 : 14000 + nbPlayersAlive * 2000
     this.state.time = minigamePhaseDuration
     this.room.miniGame.initialize(this.state.players, this.state.stageLevel)
   }
