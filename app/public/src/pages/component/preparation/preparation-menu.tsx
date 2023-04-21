@@ -113,18 +113,18 @@ export default function PreparationMenu(props: {
 
       {isOwner && <>
         <div className="actions">
-          <label>
+          <label title="Add a password to this room">
             <input type="checkbox" className="nes-checkbox is-dark" checked={password != null} onChange={() => makePrivate()} />
             <span>Private lobby {password && ` (Password: ${password})`}</span>
           </label>
-          <label>
+          <label title="No ELO gain or loss for this game">
             <input type="checkbox" className="nes-checkbox is-dark" 
                   checked={noElo === true}
                   onChange={() => toggleElo()}
-                  title="No ELO gain or loss for this game"
             />
             <span>Just for fun</span>
           </label>
+          <div className="spacer"></div>
         </div>
         <div className="actions">
           <input

@@ -38,7 +38,6 @@ import {
   Transfer
 } from "../types"
 import { Pkm, PkmFamily, PkmIndex } from "../types/enum/Pokemon"
-import PokemonConfig from "../models/colyseus-models/pokemon-config"
 import { Synergy } from "../types/enum/Synergy"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { IGameUser } from "../models/colyseus-models/game-user"
@@ -73,7 +72,8 @@ export default class GameRoom extends Room<GameState> {
     users: { [key: string]: IGameUser }
     preparationId: string
     name: string
-    idToken: string
+    idToken: string,
+    noElo: boolean
   }) {
     console.log("create game room")
     this.setMetadata(<IGameMetadata>{

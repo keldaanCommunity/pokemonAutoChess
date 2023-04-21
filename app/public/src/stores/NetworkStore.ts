@@ -255,6 +255,7 @@ export const {
   removeBot,
   listBots,
   toggleReady,
+  toggleEloRoom,
   requestTilemap,
   itemClick,
   shopClick,

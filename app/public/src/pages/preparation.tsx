@@ -20,6 +20,7 @@ import {
   setOwnerId,
   setOwnerName,
   setPassword,
+  setNoELO,
   setUser
 } from "../stores/PreparationStore"
 import GameState from "../../../rooms/states/game-state"
@@ -87,6 +88,8 @@ export default function Preparation() {
             dispatch(setName(change.value))
           } else if (change.field == "password") {
             dispatch(setPassword(change.value))
+          } else if (change.field == "noElo") {
+            dispatch(setNoELO(change.value))
           } 
         })
       }

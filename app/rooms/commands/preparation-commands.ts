@@ -134,11 +134,11 @@ export class OnRoomPasswordCommand extends Command<
     message: string
   }
   > {
-  execute({ client, message }) {
+  execute({ client, message: password }) {
     try {
-      if (client.auth.uid == this.state.ownerId && this.state.password != message) {
-        this.room.setPassword(message)
-        this.state.password = message
+      if (client.auth.uid == this.state.ownerId && this.state.password != password) {
+        this.room.setPassword(password)
+        this.state.password = password
       }
     } catch (error) {
       console.log(error)
@@ -153,13 +153,14 @@ export class OnToggleEloCommand extends Command<
     message: boolean
   }
   > {
-  execute({ client, message }) {
+  execute({ client, message: noElo }) {
     try {
-      if (client.auth.uid === this.state.ownerId && this.state.noElo != message) {
-        this.state.noElo = message
+      if (client.auth.uid === this.state.ownerId && this.state.noElo != noElo) {
+        this.state.noElo = noElo
+        this.room.toggleElo(noElo)
         this.room.broadcast(Transfer.MESSAGES, {
           name: "Server",
-          payload: `Room leader ${message ? "disabled" : "enabled"} ELO gain for this game.`,
+          payload: `Room leader ${noElo ? "disabled" : "enabled"} ELO gain for this game.`,
           avatar: this.state.users.get(client.auth.uid)?.avatar,
           time: Date.now()
         })
