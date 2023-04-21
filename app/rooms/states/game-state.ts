@@ -24,6 +24,7 @@ export default class GameState extends Schema {
   botManager: BotManager = new BotManager()
   shop: Shop = new Shop()
   elligibleToXP = false
+  noElo = false
   id: Dungeon
   design: Design
   tilemap: DesignTiled | undefined
@@ -34,12 +35,13 @@ export default class GameState extends Schema {
   endTime: number | undefined = undefined
   preparationId: string
 
-  constructor(preparationId: string, name: string) {
+  constructor(preparationId: string, name: string, noElo: boolean) {
     super()
     this.preparationId = preparationId
     this.startTime = Date.now()
     this.name = name
     this.id = pickRandomIn(Dungeon)
+    this.noElo = noElo
     this.mapName = DungeonData[this.id].name
     this.design = new Design(this.id, 5, 0.1)
     this.design.create().then(() => {

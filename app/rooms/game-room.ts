@@ -83,7 +83,7 @@ export default class GameRoom extends Room<GameState> {
       type: "game"
     })
     // console.log(options);
-    this.setState(new GameState(options.preparationId, options.name))
+    this.setState(new GameState(options.preparationId, options.name, options.noElo))
     this.miniGame.create(this.state.avatars, this.state.floatingItems)
     Object.keys(PRECOMPUTED_TYPE_POKEMONS).forEach((type) => {
       PRECOMPUTED_TYPE_POKEMONS[type].additionalPokemons.forEach((p) => {
@@ -439,7 +439,8 @@ export default class GameRoom extends Room<GameState> {
 
     if (
       this.state.stageLevel >= requiredStageLevel &&
-      this.state.elligibleToXP
+      this.state.elligibleToXP === true &&
+      this.state.noElo === false
     ) {
       this.state.players.forEach((player) => {
         if (player.isBot) {

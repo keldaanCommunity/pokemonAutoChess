@@ -146,6 +146,30 @@ export class OnRoomPasswordCommand extends Command<
   }
 }
 
+export class OnToggleEloCommand extends Command<
+  PreparationRoom,
+  {
+    client: Client
+    message: boolean
+  }
+  > {
+  execute({ client, message }) {
+    try {
+      if (client.auth.uid === this.state.ownerId && this.state.noElo != message) {
+        this.state.noElo = message
+        this.room.broadcast(Transfer.MESSAGES, {
+          name: "Server",
+          payload: `Room leader ${message ? "disabled" : "enabled"} ELO gain for this game.`,
+          avatar: this.state.users.get(client.auth.uid)?.avatar,
+          time: Date.now()
+        })
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
 export class OnKickPlayerCommand extends Command<
   PreparationRoom,
   {

@@ -8,7 +8,8 @@ import {
   changeRoomName,
   changeRoomPassword,
   gameStart,
-  toggleReady
+  toggleReady,
+  toggleEloRoom
 } from "../../../stores/NetworkStore"
 import firebase from "firebase/compat/app"
 import { Client, Room } from "colyseus.js"
@@ -37,6 +38,7 @@ export default function PreparationMenu(props: {
   const name: string = useAppSelector((state) => state.preparation.name)
   const ownerId: string = useAppSelector((state) => state.preparation.ownerId)
   const password: string | null = useAppSelector((state) => state.preparation.password)
+  const noElo: boolean = useAppSelector((state) => state.preparation.noElo)
   const botsList: IBot[] | null = useAppSelector((state) => state.preparation.botsList)
   const uid: string = useAppSelector((state) => state.network.uid)
   const isOwner: boolean = useAppSelector(
@@ -66,6 +68,10 @@ export default function PreparationMenu(props: {
     }
   }
 
+  function toggleElo(){
+    dispatch(toggleEloRoom(!noElo))
+  }
+
   const startGame = throttle(async function startGame() {
     if (room && allUsersReady) {
       const token = await firebase.auth().currentUser?.getIdToken()
@@ -74,7 +80,8 @@ export default function PreparationMenu(props: {
           users: users,
           idToken: token,
           name: name,
-          preparationId: room.id
+          preparationId: room.id,
+          noElo
         })
         playSound(SOUNDS.START_GAME)
         dispatch(gameStart(r.id))
@@ -109,6 +116,14 @@ export default function PreparationMenu(props: {
           <label>
             <input type="checkbox" className="nes-checkbox is-dark" checked={password != null} onChange={() => makePrivate()} />
             <span>Private lobby {password && ` (Password: ${password})`}</span>
+          </label>
+          <label>
+            <input type="checkbox" className="nes-checkbox is-dark" 
+                  checked={noElo === true}
+                  onChange={() => toggleElo()}
+                  title="No ELO gain or loss for this game"
+            />
+            <span>Just for fun</span>
           </label>
         </div>
         <div className="actions">
