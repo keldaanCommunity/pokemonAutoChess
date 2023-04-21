@@ -959,11 +959,11 @@ export default class Simulation extends Schema implements ISimulation {
       return effects.includes(Effect.SANDSTORM) ? Climate.SANDSTORM
       : effects.includes(Effect.DESOLATE_LAND) ? Climate.SUN
       : effects.includes(Effect.PRIMORDIAL_SEA) ? Climate.RAIN
-      : effects.includes(Effect.SHEER_COLD) ? Climate.SNOW
       : effects.includes(Effect.DROUGHT) ? Climate.SUN
       : effects.includes(Effect.DRIZZLE) ? Climate.RAIN
-      : effects.includes(Effect.SNOW) ? Climate.SNOW
-      : effects.includes(Effect.VICTORY_STAR) ? Climate.SUN
+      : effects.includes(Effect.SHEER_COLD) ? Climate.SNOW
+      : effects.includes(Effect.VICTORY_STAR) ? Climate.SUN      
+      : effects.includes(Effect.SNOW) ? Climate.SNOW      
       : effects.includes(Effect.RAIN_DANCE) ? Climate.RAIN
       : Climate.NEUTRAL
     }
