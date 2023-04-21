@@ -3379,7 +3379,7 @@ export class SkyAttackStrategy extends AttackStrategy {
       pokemon,
       board
     )
-    const damage = 200
+    const damage = 120
     if (farthestCoordinate) {
       target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
 
@@ -3391,7 +3391,7 @@ export class SkyAttackStrategy extends AttackStrategy {
       )
       pokemon.positionX = farthestCoordinate.x
       pokemon.positionY = farthestCoordinate.y
-      pokemon.status.triggerProtect(1000)
+      pokemon.status.triggerProtect(500)
     }
   }
 }
