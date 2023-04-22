@@ -60,7 +60,7 @@ export default class AttackingState extends PokemonState {
         pokemon.strategy.process(pokemon, this, board, target)
       } else {
         // BASIC ATTACK
-        this.attack(pokemon, board, targetCoordinate, climate)
+        this.attack(pokemon, board, targetCoordinate)
         if (
           pokemon.effects.includes(Effect.EERIE_IMPULSE) ||
           pokemon.effects.includes(Effect.RISING_VOLTAGE) ||
@@ -76,8 +76,8 @@ export default class AttackingState extends PokemonState {
           }
           if (Math.random() < doubleAttackChance) {
             pokemon.count.doubleAttackCount++
-            this.attack(pokemon, board, targetCoordinate, climate)
-            this.attack(pokemon, board, targetCoordinate, climate)
+            this.attack(pokemon, board, targetCoordinate)
+            this.attack(pokemon, board, targetCoordinate)
           }
         }
       }
@@ -89,8 +89,7 @@ export default class AttackingState extends PokemonState {
   attack(
     pokemon: PokemonEntity,
     board: Board,
-    coordinates: { x: number; y: number },
-    climate: string
+    coordinates: { x: number; y: number }
   ) {
     pokemon.count.attackCount++
     pokemon.targetX = coordinates.x
