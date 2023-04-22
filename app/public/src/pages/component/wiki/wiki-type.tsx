@@ -3,7 +3,8 @@ import ReactTooltip from "react-tooltip";
 import PRECOMPUTED_TYPE_POKEMONS_ALL from "../../../../../models/precomputed/type-pokemons-all.json"
 import {
   SynergyName,
-  SynergyDetail
+  SynergyDetail,
+  SynergyDescription
 } from "../../../../../types/strings/Synergy"
 import { EffectName } from "../../../../../types/strings/Effect"
 import { TypeTrigger, RarityColor } from "../../../../../types/Config"
@@ -11,12 +12,13 @@ import { Synergy } from "../../../../../types/enum/Synergy"
 import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
 import SynergyIcon from "../icons/synergy-icon"
-import { SynergyDescription } from "../synergy/synergy-description"
+import { EffectDescriptionComponent } from "../synergy/effect-description"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
 import PokemonFactory from "../../../../../models/pokemon-factory";
 import { groupBy, deduplicateArray } from "../../../../../utils/array";
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon";
 import { Rarity } from "../../../../../types/enum/Game";
+import { addIconsToDescription } from "../../utils/descriptions";
 
 export default function WikiType(props: { type: Synergy | "all" }) {
   const [hoveredPokemon, setHoveredPokemon] = useState<Pokemon>();
@@ -41,17 +43,15 @@ export default function WikiType(props: { type: Synergy | "all" }) {
   return (
     <div style={{padding: "1em"}}>
       {props.type !== "all" && (<>
-        <div style={{ display: "flex", marginBottom: "0.5em" }}>
-          <SynergyIcon type={props.type} />
-          <p>{SynergyName[props.type].eng}</p>
-        </div>
+        <h2><SynergyIcon type={props.type} /> {SynergyName[props.type].eng}</h2>
+        <p>{addIconsToDescription(SynergyDescription[props.type].eng)}</p>
         {SynergyDetail[props.type].map((effect, i) => {
           return (
             <div key={EffectName[effect]} style={{ display: "flex" }}>
               <p>
                 ({TypeTrigger[props.type][i]}) {EffectName[effect]}:&nbsp;
               </p>
-              <SynergyDescription effect={effect} />
+              <EffectDescriptionComponent effect={effect} />
             </div>
           )
         })}

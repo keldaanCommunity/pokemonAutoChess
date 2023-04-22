@@ -3,4 +3,5 @@
   height: 40px;
   filter: drop-shadow(2px 2px 0px #505261);
   margin: 1px;
+  vertical-align: bottom;
 }
