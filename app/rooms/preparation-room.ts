@@ -14,6 +14,7 @@ import {
   InitializeBotsCommand,
   OnRoomNameCommand,
   OnRoomPasswordCommand,
+  OnToggleEloCommand,
   OnKickPlayerCommand
 } from "./commands/preparation-commands"
 import { BotDifficulty } from "../types/enum/Game"
@@ -45,6 +46,13 @@ export default class PreparationRoom extends Room {
     await this.setMetadata(<IPreparationMetadata>{
       password: password,
       type: "preparation"
+    })
+    updateLobby(this)
+  }
+
+  async toggleElo(noElo: boolean){
+    await this.setMetadata(<IPreparationMetadata>{
+      noElo: noElo
     })
     updateLobby(this)
   }
@@ -82,6 +90,14 @@ export default class PreparationRoom extends Room {
     this.onMessage(Transfer.CHANGE_ROOM_PASSWORD, (client, message) => {
       try {
         this.dispatcher.dispatch(new OnRoomPasswordCommand(), { client, message })
+      } catch (error) {
+        console.log(error)
+      }
+    })
+
+    this.onMessage(Transfer.TOGGLE_NO_ELO, (client, message) => {
+      try {
+        this.dispatcher.dispatch(new OnToggleEloCommand(), { client, message })
       } catch (error) {
         console.log(error)
       }

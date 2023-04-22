@@ -12,6 +12,7 @@ export default function RoomItem(props: {
     <div className="room-item">
       <span className="room-name">{props.room.metadata?.name}</span>
       {props.room.metadata?.password && <img alt="Private" className="lock-icon" src="/assets/ui/lock.svg" />}
+      {props.room.metadata?.noElo && <img alt="Just for fun" title="Just for fun (no ELO gain/loss)" className="noelo-icon" src="/assets/ui/noelo.png" style={{borderRadius: "50%"}} />}
       <span>{props.room.clients}/{props.room.maxClients}</span>
       <button
         className={cc("bubbly", props.room.metadata?.password ? 'orange' : 'green')}

@@ -14,6 +14,7 @@ import {
   setItemsProposition,
   setMapName,
   setMoney,
+  setNoELO,
   setPhase,
   setRoundTime,
   setShop,
@@ -133,7 +134,8 @@ export default function Game() {
 
     const r: Room<AfterGameState> = await client.create("after-game", {
       players: savePlayers,
-      idToken: token
+      idToken: token,
+      noElo: room?.state.noElo
     })
     localStorage.setItem("lastRoomId", r.id)
     localStorage.setItem("lastSessionId", r.sessionId)
@@ -280,6 +282,8 @@ export default function Game() {
             dispatch(setStageLevel(change.value))
           } else if (change.field == "mapName") {
             dispatch(setMapName(change.value))
+          } else if (change.field == "noElo") {
+            dispatch(setNoELO(change.value))
           }
         })
       }

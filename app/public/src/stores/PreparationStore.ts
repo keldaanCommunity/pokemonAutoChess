@@ -11,6 +11,7 @@ interface IUserPreparationState {
   messages: IMessage[]
   name: string
   password: string | null
+  noElo: boolean
   user: GameUser | undefined
   botsList: IBot[] | null
 }
@@ -24,6 +25,7 @@ const initialState: IUserPreparationState = {
   name: "",
   user: undefined,
   password: null,
+  noElo: false,
   botsList: null
 }
 
@@ -72,6 +74,9 @@ export const preparationSlice = createSlice({
     setPassword: (state, action: PayloadAction<string | null>) => {
       state.password = action.payload
     },
+    setNoELO: (state, action: PayloadAction<boolean>) => {
+      state.noElo = action.payload
+    },
     leavePreparation: () => initialState,
     setBotsList: (state, action: PayloadAction<IBot[] | null>) => {
       state.botsList = action.payload
@@ -91,6 +96,7 @@ export const {
   setOwnerId,
   setOwnerName,
   setPassword,
+  setNoELO,
   leavePreparation
 } = preparationSlice.actions
 

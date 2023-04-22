@@ -111,6 +111,7 @@ export enum Transfer {
   ADD_BOT = "ADD_BOT",
   REMOVE_BOT = "REMOVE_BOT",
   TOGGLE_READY = "TOGGLE_READY",
+  TOGGLE_NO_ELO = "TOGGLE_NO_ELO",
   REQUEST_TILEMAP = "REQUEST_TILEMAP",
   REFRESH = "REFRESH",
   LOCK = "LOCK",
@@ -481,6 +482,7 @@ export interface ICount {
 export interface IPreparationMetadata {
   name: string
   password: string | null
+  noElo: boolean
   type: "preparation"
 }
 

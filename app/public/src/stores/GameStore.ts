@@ -22,6 +22,7 @@ interface GameStateStore {
   players: IPlayer[]
   stageLevel: number
   mapName: string
+  noElo: boolean
   currentPlayerId: string
   money: number
   interest: number
@@ -57,6 +58,7 @@ const initialState: GameStateStore = {
   players: new Array<IPlayer>(),
   stageLevel: 0,
   mapName: "",
+  noElo: false,
   currentPlayerId: "",
   money: 5,
   interest: 0,
@@ -118,6 +120,9 @@ export const gameSlice = createSlice({
     },
     setMapName: (state, action: PayloadAction<string>) => {
       state.mapName = action.payload
+    },
+    setNoELO: (state, action: PayloadAction<boolean>) => {
+      state.noElo = action.payload
     },
     addPlayer: (state, action: PayloadAction<IPlayer>) => {
       state.players.push(JSON.parse(JSON.stringify(action.payload)))
@@ -472,6 +477,7 @@ export const {
   setPhase,
   setStageLevel,
   setMapName,
+  setNoELO,
   addPlayer,
   setCurrentPlayerId,
   setExperienceManager,

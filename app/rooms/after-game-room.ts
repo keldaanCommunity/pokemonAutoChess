@@ -12,10 +12,14 @@ export default class AfterGameRoom extends Room {
     this.dispatcher = new Dispatcher(this)
   }
 
-  onCreate(options: any) {
+  onCreate(options: {
+    players: SimplePlayer[],
+    idToken: string,
+    noElo: boolean
+  }) {
     console.log("create after game", this.roomId)
 
-    this.setState(new AfterGameState())
+    this.setState(new AfterGameState(options.noElo))
     this.maxClients = 8
     // console.log('before', this.state.players);
     if (options.players) {

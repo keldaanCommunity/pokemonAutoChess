@@ -38,6 +38,7 @@ export default function AfterMenu() {
     .slice()
     .sort((a, b) => a.rank - b.rank)
 
+  const noElo = useAppSelector((state) => state.after.noElo)
   const currentPlayerId: string = useAppSelector((state) => state.network.uid)
   const currentPlayer = players.find((p) => p.id === currentPlayerId)
   if (!currentPlayer) return null
@@ -53,9 +54,9 @@ export default function AfterMenu() {
           )}
           <span>{getRankLabel(playerRank)}</span>
         </div>
-        <p className="player-elo">
+        {!noElo && <p className="player-elo">
           ELO {newElo} ({ (newElo >= currentPlayer.elo ? '+' : '-') + Math.abs(newElo - currentPlayer.elo)})
-        </p>
+        </p>}
         <table>
           <thead>
             <tr>

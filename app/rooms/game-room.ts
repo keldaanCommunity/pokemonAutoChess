@@ -38,7 +38,6 @@ import {
   Transfer
 } from "../types"
 import { Pkm, PkmFamily, PkmIndex } from "../types/enum/Pokemon"
-import PokemonConfig from "../models/colyseus-models/pokemon-config"
 import { Synergy } from "../types/enum/Synergy"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { IGameUser } from "../models/colyseus-models/game-user"
@@ -73,7 +72,8 @@ export default class GameRoom extends Room<GameState> {
     users: { [key: string]: IGameUser }
     preparationId: string
     name: string
-    idToken: string
+    idToken: string,
+    noElo: boolean
   }) {
     console.log("create game room")
     this.setMetadata(<IGameMetadata>{
@@ -83,7 +83,7 @@ export default class GameRoom extends Room<GameState> {
       type: "game"
     })
     // console.log(options);
-    this.setState(new GameState(options.preparationId, options.name))
+    this.setState(new GameState(options.preparationId, options.name, options.noElo))
     this.miniGame.create(this.state.avatars, this.state.floatingItems)
     Object.keys(PRECOMPUTED_TYPE_POKEMONS).forEach((type) => {
       PRECOMPUTED_TYPE_POKEMONS[type].additionalPokemons.forEach((p) => {
@@ -439,7 +439,8 @@ export default class GameRoom extends Room<GameState> {
 
     if (
       this.state.stageLevel >= requiredStageLevel &&
-      this.state.elligibleToXP
+      this.state.elligibleToXP === true &&
+      this.state.noElo === false
     ) {
       this.state.players.forEach((player) => {
         if (player.isBot) {

@@ -133,6 +133,9 @@ export const networkSlice = createSlice({
     toggleReady: (state) => {
       state.preparation?.send(Transfer.TOGGLE_READY)
     },
+    toggleEloRoom: (state, action: PayloadAction<boolean>) => {
+      state.preparation?.send(Transfer.TOGGLE_NO_ELO, action.payload)
+    },
     requestTilemap: (state) => {
       state.game?.send(Transfer.REQUEST_TILEMAP)
     },
@@ -252,6 +255,7 @@ export const {
   removeBot,
   listBots,
   toggleReady,
+  toggleEloRoom,
   requestTilemap,
   itemClick,
   shopClick,

@@ -20,6 +20,7 @@ export default class GameState extends Schema {
   @type(["string"]) additionalPokemons = new ArraySchema<Pkm>()
   @type("uint8") stageLevel = 0
   @type("string") mapName: string
+  @type("boolean") noElo = false
   time = StageDuration[0] * 1000
   botManager: BotManager = new BotManager()
   shop: Shop = new Shop()
@@ -34,12 +35,13 @@ export default class GameState extends Schema {
   endTime: number | undefined = undefined
   preparationId: string
 
-  constructor(preparationId: string, name: string) {
+  constructor(preparationId: string, name: string, noElo: boolean) {
     super()
     this.preparationId = preparationId
     this.startTime = Date.now()
     this.name = name
     this.id = pickRandomIn(Dungeon)
+    this.noElo = noElo
     this.mapName = DungeonData[this.id].name
     this.design = new Design(this.id, 5, 0.1)
     this.design.create().then(() => {

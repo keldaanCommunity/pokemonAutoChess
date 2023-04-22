@@ -19,6 +19,7 @@ export default class PreparationState
   @type("string") ownerName: string
   @type("string") name: string
   @type("string") password: string | null
+  @type("boolean") noElo: boolean
 
   constructor(ownerId: string | undefined, name: string) {
     super()
@@ -27,5 +28,6 @@ export default class PreparationState
     this.gameStarted = false
     this.ownerName = ""
     this.password = null
+    this.noElo = false
   }
 }
