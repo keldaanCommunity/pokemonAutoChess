@@ -78,5 +78,6 @@ export enum Effect {
   LINK_CABLE,
   GOOGLE_SPECS,
   HATCHER,
-  BREEDER
+  BREEDER,
+  TELEPORT_NEXT_ATTACK
 }

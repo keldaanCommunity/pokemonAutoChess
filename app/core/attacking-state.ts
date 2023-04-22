@@ -158,6 +158,11 @@ export default class AttackingState extends PokemonState {
           pokemon.setMana(pokemon.mana + manaGain)
         }
       }
+      if(pokemon.effects.includes(Effect.TELEPORT_NEXT_ATTACK)){
+        target.handleSpecialDamage([15,30,60][pokemon.stars-1], board, AttackType.SPECIAL, pokemon)
+        pokemon.effects.splice(pokemon.effects.indexOf(Effect.TELEPORT_NEXT_ATTACK), 1)
+      }
+
       pokemon.orientation = board.orientation(
         pokemon.positionX,
         pokemon.positionY,
