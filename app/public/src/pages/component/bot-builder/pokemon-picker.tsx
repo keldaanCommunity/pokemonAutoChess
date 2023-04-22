@@ -1,6 +1,6 @@
 import React from "react"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
-import { PkmIndex } from "../../../../../types/enum/Pokemon"
+import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import CSS from "csstype"
 import PRECOMPUTED_TYPE_POKEMONS_ALL from "../../../../../models/precomputed/type-pokemons-all.json"
 import { Item } from "../../../../../types/enum/Item"
@@ -40,6 +40,9 @@ export default function PokemonPicker(props: {
             </Tab>
           )
         })}
+        <Tab style={cursorStyle} key="none">
+          <img src="assets/unown/unown-qm.png" alt="?" className="unown-icon" style={{margin: "-28px"}} />
+        </Tab>
       </TabList>
 
       {Object.keys(PRECOMPUTED_TYPE_POKEMONS_ALL).map((key) => {
@@ -64,6 +67,25 @@ export default function PokemonPicker(props: {
           </TabPanel>
         )
       })}
+
+      <TabPanel key="none" style={{ display: "flex", flexWrap: "wrap" }}>
+        {[Pkm.KECLEON, Pkm.ARCEUS].map((pkm) => {
+          return (
+            <div
+              onClick={() => {
+                props.selectEntity({
+                  pkm: pkm,
+                  emotion: Emotion.NORMAL,
+                  shiny: false,
+                })
+              }}
+              key={`${pkm}`}
+            >
+              <img style={imgStyle} src={getPortraitSrc(PkmIndex[pkm])} />
+            </div>
+          )
+        })}
+      </TabPanel>
     </Tabs>
   )
 }
