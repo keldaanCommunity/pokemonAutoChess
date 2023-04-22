@@ -1190,7 +1190,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.TELEPORT]: {
-    eng: `Buff ${Stat.ATK} by [1,2,3,SP] and teleport the pokemon on one edge of the map`,
+    eng: `Teleport the pokemon on one edge of the map. Next attack deals [15,30,60,SP] ${Damage.SPECIAL}`,
     esp: `Teletransportar el pokemon en un borde del mapa`,
     fra: `Téléporte le pokémon sur un coin de la carte.`,
     prt: ``

@@ -3025,7 +3025,6 @@ export class TeleportStrategy extends AttackStrategy {
     target: PokemonEntity
   ) {
     super.process(pokemon, state, board, target)
-    pokemon.addAttack(pokemon.stars, true)
 
     const potentialCells = [
       [0, 0],
@@ -3046,6 +3045,8 @@ export class TeleportStrategy extends AttackStrategy {
         )
         pokemon.positionX = potentialCells[i][0]
         pokemon.positionY = potentialCells[i][1]
+        pokemon.cooldown = 100;
+        pokemon.effects.push(Effect.TELEPORT_NEXT_ATTACK)
         break
       }
     }
