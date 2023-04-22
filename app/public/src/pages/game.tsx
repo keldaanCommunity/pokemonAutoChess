@@ -112,6 +112,8 @@ export default function Game() {
   const [toAuth, setToAuth] = useState<boolean>(false)
   const container = useRef<HTMLDivElement>(null)
 
+  const MAX_ATTEMPS_RECONNECT = 2
+
   async function leave() {
     const savePlayers = new Array<ISimplePlayer>()
 
@@ -156,35 +158,29 @@ export default function Game() {
         if (user) {
           dispatch(logIn(user))
           dispatch(setCurrentPlayerId(user.uid))
-          try {
-            const lastRoomId = localStorage.getItem("lastRoomId")
-            const lastSessionId = localStorage.getItem("lastSessionId")
-            if (lastRoomId && lastSessionId) {
-              const r: Room<GameState> = await client.reconnect(
-                lastRoomId,
-                lastSessionId
-              )
-              dispatch(joinGame(r))
-            }
-          } catch (error) {
+
+          async function tryToReconnectToLastGame(attempts=1){
             try {
-              setTimeout(async () => {
-                const lastRoomId = localStorage.getItem("lastRoomId")
-                const lastSessionId = localStorage.getItem("lastSessionId")
-                if (lastRoomId && lastSessionId) {
-                  const r: Room<GameState> = await client.reconnect(
-                    lastRoomId,
-                    lastSessionId
-                  )
-                  dispatch(joinGame(r))
-                }
-              })
+              const lastRoomId = localStorage.getItem("lastRoomId")
+              const lastSessionId = localStorage.getItem("lastSessionId")
+              if (lastRoomId && lastSessionId) {
+                const r: Room<GameState> = await client.reconnect(
+                  lastRoomId,
+                  lastSessionId
+                )
+                dispatch(joinGame(r))
+              }
             } catch (error) {
-              setToAuth(true)
+              if(attempts < MAX_ATTEMPS_RECONNECT){
+                setTimeout(() => tryToReconnectToLastGame(attempts+1), 100)
+              } else{
+                console.error("reconnect error", error)
+                setToAuth(true)
+              }
             }
           }
-        } else {
-          setToAuth(true)
+
+          tryToReconnectToLastGame()
         }
       })
     }
