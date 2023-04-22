@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from "react"
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react"
 import PreparationMenuUser from "./preparation-menu-user"
 import { IGameUser } from "../../../../../models/colyseus-models/game-user"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
@@ -24,7 +24,6 @@ import { playSound, SOUNDS } from "../../utils/audio"
 import Elo from "../elo"
 import InlineAvatar from "../inline-avatar"
 import { IBot } from "../../../../../models/mongo-models/bot-v2"
-import { RemoveButton } from "../buttons/remove-button"
 
 export default function PreparationMenu(props: {
   setToGame: Dispatch<SetStateAction<boolean>>
@@ -55,9 +54,26 @@ export default function PreparationMenu(props: {
   const isReady = users.find(user => user.id === uid)?.ready
   const allUsersReady = users.every(user => user.ready)
 
-  const [sortBots, setSortBots] = useState<string>("name")
+  const [sortBotsOrder, setSortBotsOrder] = useState<boolean>(false)
+  const [sortBotsCriteria, setSortBotsCriteria] = useState<string>("name")
   const [queryBot, setQueryBot] = useState<string>("")
-  const botsListSorted = botsList ? [...botsList].filter(b => b.name.includes(queryBot)).sort((a,b) => a[sortBots] < b[sortBots] ? -1 : 1) : null
+  const [botsSelection, setBotsSelection] = useState<Set<IBot>>(new Set())
+
+  console.log({ botsSelection })
+
+  function sortBy(criteria: string){
+    if(sortBotsCriteria === criteria){
+      setSortBotsOrder(!sortBotsOrder)
+    } else {
+      setSortBotsCriteria(criteria)
+      setSortBotsOrder(false)
+    }
+  }
+
+  const botsListSorted = (botsList ? [...botsList]
+    .filter(b => b.name.includes(queryBot))
+    .sort((a,b) => (a[sortBotsCriteria] < b[sortBotsCriteria] ? -1 : 1) * (sortBotsOrder ? -1 : 1))
+  : null)
 
   function makePrivate(){
     if(password === null){
@@ -208,7 +224,7 @@ export default function PreparationMenu(props: {
 
       {isOwner && botsListSorted != null && <dialog open className="nes-container bots-list">
         <header>
-          <h2>Pick a bot</h2>
+          <h2>Select bots for this game</h2>
           <div className="spacer"></div>
           <input type="search" 
                  className="my-input"
@@ -217,16 +233,19 @@ export default function PreparationMenu(props: {
                  value={queryBot}
                  onInput={e => setQueryBot((e.target as HTMLInputElement).value)}
           />
-          <button onClick={() => { setSortBots("elo") }} className="bubbly pink">Sort by ELO</button>
-          <button onClick={() => { setSortBots("name") }} className="bubbly blue">Sort by name</button>
-          <RemoveButton onClick={() => dispatch(setBotsList(null))} title="Cancel" />
+          <button onClick={() => { sortBy("elo") }} className="bubbly pink">Sort by ELO</button>
+          <button onClick={() => { sortBy("name") }} className="bubbly blue">Sort by name</button>
         </header>
         <ul>
           {botsListSorted.map(bot => (
-            <li className="nes-container player-box preparation-menu-user" 
+            <li className={cc("nes-container","player-box","preparation-menu-user", { selected: botsSelection.has(bot) })}
                 onClick={() => {
-                  dispatch(addBot(bot))
-                  dispatch(setBotsList(null))
+                  if(botsSelection.has(bot)){
+                    botsSelection.delete(bot)
+                  } else {
+                    botsSelection.add(bot)
+                  }
+                  setBotsSelection(new Set([...botsSelection]))
                 }}
                 key={"proposition-bot-"+bot.id}>
               <Elo elo={bot.elo} />
@@ -238,6 +257,15 @@ export default function PreparationMenu(props: {
           ))}
         </ul>
         {botsListSorted.length === 0 && <p>No bots found !</p>}
+        <footer className="actions">
+          <button className="bubbly red" onClick={() => {
+            dispatch(setBotsList(null))
+          }}>Cancel</button>
+          <button className="bubbly blue" onClick={() => {
+            botsSelection.forEach(bot => dispatch(addBot(bot)))
+            dispatch(setBotsList(null))
+          }}>Add {botsSelection.size} bot{botsSelection.size === 1 ? '' : 's'}</button>
+        </footer>
       </dialog>}
     </div>
   )

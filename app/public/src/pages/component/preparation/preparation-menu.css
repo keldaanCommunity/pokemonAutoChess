@@ -51,6 +51,9 @@
     max-height: 90vh;
     overflow-y: auto;
     z-index: 20;
+    display: grid;
+    grid-template-rows: min-content 1fr min-content;
+    grid-template-columns: 1fr;
 }
 
 .preparation-menu .bots-list header {
@@ -65,7 +68,7 @@
     grid-template-columns: repeat(auto-fill, minmax(320px, auto));
     grid-auto-rows: min-content;
     padding: 0;
-    height: auto;
+    overflow: auto;
     width: 1320px;
     max-width: 100%;
     gap: 8px;
@@ -74,4 +77,8 @@
 .preparation-menu .bots-list li:hover {
     cursor: var(--cursor-hover);
     filter: contrast(1.1) brightness(1.1);
+}
+
+.preparation-menu .bots-list li.selected {
+    background-color: #109fff;
 }
