@@ -9,6 +9,7 @@
 
 
 # Changes to Items
+- Nerf Defensive Ribbon: now longer gives Attack & Spe Def, doubles the stack needed
 
 # Changes to Stages
 

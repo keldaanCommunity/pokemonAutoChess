@@ -23,6 +23,7 @@
 .game-item-detail-name {
     grid-area: name;
     margin: 0;
+    white-space: nowrap;
 }
 
 .game-item-detail-stats {
