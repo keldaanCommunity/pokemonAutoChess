@@ -3624,8 +3624,8 @@ export class GeomancyStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target)
     pokemon.addAttack(15, true)
-    pokemon.handleAttackSpeed(30, true)
     pokemon.addSpecialDefense(5, true)
+    pokemon.handleAttackSpeed(30, false)
   }
 }
 

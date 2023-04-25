@@ -795,6 +795,18 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.GEOMANCY]: {
+    eng: "Geomancy",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.DEATH_WING]: {
+    eng: "Death Wing",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1591,6 +1603,18 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
   },
   [Ability.SPECTRAL_THIEF]: {
     eng: `Disappears and reappears dealing [50, SP] ${Damage.SPECIAL}, stealing all the statistic boost of the target`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.GEOMANCY]: {
+    eng: `Gain [15,SP] ${Stat.ATK}, [5,SP] ${Stat.SPE_DEF} and 30% ${Stat.ATK_SPEED}`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.DEATH_WING]: {
+    eng: `Deals [150,SP] ${Damage.SPECIAL} and heals for 75% of the damage taken by the target`,
     esp: "",
     prt: "",
     fra: ""
