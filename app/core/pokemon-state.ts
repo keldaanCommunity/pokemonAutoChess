@@ -234,6 +234,7 @@ export default class PokemonState {
           ) {
             pokemon.count.defensiveRibbonCount++
             if(pokemon.count.defensiveRibbonCount % 2 === 0){
+              pokemon.addAttack(1)
               pokemon.addDefense(1)
               pokemon.handleAttackSpeed(5)
             }
