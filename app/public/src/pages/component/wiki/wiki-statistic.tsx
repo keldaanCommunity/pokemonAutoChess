@@ -19,7 +19,7 @@ export default function WikiStatistic() {
       <li className="nes-container">
         <img style={imgStyle} src="assets/icons/shield.png"></img>
         <p>Shield</p>
-        <p className="description">{addIconsToDescription(`Temporary health points. Cannot be healed.`)}</p>
+        <p className="description">Temporary health points.<br/>Cannot be healed.</p>
       </li>
       <li className="nes-container">
         <img style={imgStyle} src="assets/icons/def.png"></img>
@@ -54,7 +54,7 @@ export default function WikiStatistic() {
       <li className="nes-container">
         <img style={imgStyle} src="assets/icons/speed.png"></img>
         <p>Attack Speed (Attack/second)</p>
-        <p className="description">{addIconsToDescription(`Number of attacks per second`)}</p>
+        <p className="description">Number of attacks per second.<br />Maximum 2.5</p>
       </li>
       <li className="nes-container">
         <img style={imgStyle} src="assets/icons/critChance.png"></img>

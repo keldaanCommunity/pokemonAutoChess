@@ -230,13 +230,14 @@ export default class PokemonState {
 
           if (
             pokemon.items.has(Item.DEFENSIVE_RIBBON) &&
-            pokemon.count.defensiveRibbonCount < 10
+            pokemon.count.defensiveRibbonCount < 20
           ) {
-            pokemon.addAttack(1)
-            pokemon.addDefense(1)
-            pokemon.addSpecialDefense(1)
-            pokemon.handleAttackSpeed(5)
             pokemon.count.defensiveRibbonCount++
+            if(pokemon.count.defensiveRibbonCount % 2 === 0){
+              pokemon.addAttack(1)
+              pokemon.addDefense(1)
+              pokemon.handleAttackSpeed(5)
+            }
           }
 
           if (pokemon.status.sleep) {

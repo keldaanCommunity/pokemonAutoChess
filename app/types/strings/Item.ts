@@ -112,7 +112,7 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
     "The holder basic attacks hit a second adjacent enemy for 50% of the damage",
   [Item.FIRE_GEM]: `Adds 8% of target max ${Stat.HP} to attack damage`,
   [Item.DEFENSIVE_RIBBON]:
-    `When the holder takes damage, they gain +1 ${Stat.ATK}, +1 ${Stat.DEF}, +1 ${Stat.SPE_DEF} and +5% ${Stat.ATK_SPEED} (stacks up to 10 times)`,
+    `When the holder takes damage, gain 1 stack. Every 2 stacks, the holder gains +1 ${Stat.DEF}, +1 ${Stat.ATK} and +5% ${Stat.ATK_SPEED} (max 20 stacks)`,
   [Item.WONDER_BOX]:
     "At the beginning of each battle, wonder box is replaced by 2 temporary items (max 3 items held)",
   [Item.RUNE_PROTECT]:
