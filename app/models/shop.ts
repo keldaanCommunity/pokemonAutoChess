@@ -1,7 +1,6 @@
 import PokemonFactory from "./pokemon-factory"
 import { Pkm, PkmFamily } from "../types/enum/Pokemon"
 import Player from "./colyseus-models/player"
-import { IPokemon } from "../types"
 import { Probability, DITTO_RATE } from "../types/Config"
 import { Rarity } from "../types/enum/Game"
 import { pickRandomIn, shuffleArray } from "../utils/random"
@@ -198,7 +197,9 @@ export const Mythical2Shop = new Array<Pkm>(
   Pkm.GROUDON,
   Pkm.VOLCANION,
   Pkm.ORIGIN_GIRATINA,
-  Pkm.MARSHADOW
+  Pkm.MARSHADOW,
+  Pkm.XERNEAS,
+  Pkm.YVELTAL
 )
 
 export default class Shop {

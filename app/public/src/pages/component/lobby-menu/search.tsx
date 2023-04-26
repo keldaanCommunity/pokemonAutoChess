@@ -139,8 +139,7 @@ export default function Search() {
             style={{
               display: "flex",
               alignItems: "center",
-              justifyContent: "space-between",
-              overflow: "scroll"
+              justifyContent: "space-between"
             }}
           >
             <p>

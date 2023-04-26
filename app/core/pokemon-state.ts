@@ -85,8 +85,9 @@ export default class PokemonState {
     dodgeable: boolean,
     shouldTargetGainMana: boolean,
     shouldAttackerGainMana: boolean
-  }): boolean {
+  }): { death: boolean, takenDamage: number } {
     let death: boolean
+    let takenDamage: number = 0
     if (pokemon.life == 0) {
       death = true
     } else {
@@ -179,7 +180,7 @@ export default class PokemonState {
           residualDamage = 1
         }
 
-        const takenDamage = Math.max(
+        takenDamage = Math.max(
           1,
           Math.round(Math.min(residualDamage, pokemon.life))
         )
@@ -513,7 +514,7 @@ export default class PokemonState {
         })
       }
     }
-    return death
+    return { death, takenDamage }
   }
 
   update(pokemon: PokemonEntity, dt: number, board: Board, climate: string) {

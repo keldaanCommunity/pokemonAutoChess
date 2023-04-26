@@ -367,6 +367,16 @@ export default class LoadingManager {
       "/assets/attacks/X_SCISSOR.json",
       "/assets/attacks"
     )
+    scene.load.multiatlas(
+      "GEOMANCY",
+      "/assets/attacks/GEOMANCY.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
+      "DEATH_WING",
+      "/assets/attacks/DEATH_WING.json",
+      "/assets/attacks"
+    )
   }
 }
 

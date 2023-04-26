@@ -160,13 +160,13 @@ export class PaydayStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target)
     const damage = pokemon.stars === 2 ? 60 : pokemon.stars === 3 ? 120 : 30
 
-    const victim = target.handleSpecialDamage(
+    const { death } = target.handleSpecialDamage(
       damage,
       board,
       AttackType.SPECIAL,
       pokemon
     )
-    if (victim && pokemon.team === 0 && pokemon.simulation.player) {
+    if (death && pokemon.team === 0 && pokemon.simulation.player) {
       pokemon.simulation.player.money += pokemon.stars
       pokemon.count.moneyCount++
     }
@@ -2039,13 +2039,13 @@ export class GuillotineStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target)
     const damage = pokemon.atk * pokemon.stars
-    const victim = target.handleSpecialDamage(
+    const { death } = target.handleSpecialDamage(
       damage,
       board,
       AttackType.SPECIAL,
       pokemon
     )
-    if (victim) {
+    if (death) {
       pokemon.setMana(pokemon.maxMana)
     }
   }
@@ -3612,5 +3612,35 @@ export class TripleKickStrategy extends AttackStrategy {
         }
       }
     })
+  }
+}
+
+export class GeomancyStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    pokemon.addAttack(15, true)
+    pokemon.addSpecialDefense(5, true)
+    pokemon.handleAttackSpeed(30, false)
+  }
+}
+
+export class DeathWingStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    let damage = 150
+    const { takenDamage } = target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+    if(takenDamage > 0){
+      pokemon.handleHeal(Math.round(0.75 * takenDamage), pokemon, false)
+    }
   }
 }

@@ -1651,6 +1651,29 @@ export default class AnimationManager {
       duration: 1000,
       repeat: 0
     })
+
+    this.game.anims.create({
+      key: Ability.GEOMANCY,
+      frames: this.game.anims.generateFrameNames(Ability.GEOMANCY, {
+        start: 0,
+        end: 11,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
+      key: Ability.DEATH_WING,
+      frames: this.game.anims.generateFrameNames(Ability.DEATH_WING, {
+        start: 0,
+        end: 14,
+        zeroPad: 3,
+        suffix: ".png"
+      }),
+      duration: 1000,
+      repeat: 0
+    })
   }
 
   animatePokemon(entity: Pokemon, action: PokemonActionState) {
