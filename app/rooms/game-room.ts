@@ -51,6 +51,7 @@ import { Climate, Rarity } from "../types/enum/Game"
 import { FilterQuery } from "mongoose"
 import { MiniGame } from "../core/matter/mini-game"
 import { Ability } from "../types/enum/Ability"
+import { logger } from "../utils/logger"
 
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>
@@ -75,14 +76,14 @@ export default class GameRoom extends Room<GameState> {
     idToken: string,
     noElo: boolean
   }) {
-    console.log("create game room")
+    logger.log("create game room")
     this.setMetadata(<IGameMetadata>{
       name: options.name,
       nbPlayers: Object.values(options.users).length,
       stageLevel: 0,
       type: "game"
     })
-    // console.log(options);
+    // logger.log(options);
     this.setState(new GameState(options.preparationId, options.name, options.noElo))
     this.miniGame.create(this.state.avatars, this.state.floatingItems)
     Object.keys(PRECOMPUTED_TYPE_POKEMONS).forEach((type) => {
@@ -107,7 +108,7 @@ export default class GameRoom extends Room<GameState> {
     this.maxClients = 8
     for (const id in options.users) {
       const user = options.users[id]
-      // console.log(user);
+      // logger.debug(user);
       if (user.isBot) {
         const player = new Player(
           user.id,
@@ -135,7 +136,7 @@ export default class GameRoom extends Room<GameState> {
             id: message.id
           })
         } catch (error) {
-          console.log(error)
+          logger.error(error)
         }
       }
     })
@@ -148,7 +149,7 @@ export default class GameRoom extends Room<GameState> {
             index: message.id
           })
         } catch (error) {
-          console.log("shop error", message, error)
+          logger.error("shop error", message, error)
         }
       }
     })
@@ -161,7 +162,7 @@ export default class GameRoom extends Room<GameState> {
             pkm: message
           })
         } catch (error) {
-          console.log(error)
+          logger.error(error)
         }
       }
     })
@@ -179,7 +180,7 @@ export default class GameRoom extends Room<GameState> {
             updateItems: true
           }
           client.send(Transfer.DRAG_DROP_FAILED, errorInformation)
-          console.log("drag drop error", error)
+          logger.error("drag drop error", error)
         }
       }
     })
@@ -199,7 +200,7 @@ export default class GameRoom extends Room<GameState> {
               updateItems: true
             }
             client.send(Transfer.DRAG_DROP_FAILED, errorInformation)
-            console.log("drag drop error", error)
+            logger.error("drag drop error", error)
           }
         }
       }
@@ -220,7 +221,7 @@ export default class GameRoom extends Room<GameState> {
               updateItems: true
             }
             client.send(Transfer.DRAG_DROP_FAILED, errorInformation)
-            console.log("drag drop error", error)
+            logger.error("drag drop error", error)
           }
         }
       }
@@ -232,7 +233,7 @@ export default class GameRoom extends Room<GameState> {
         try {
           this.miniGame.applyVector(client.auth.uid, message.x, message.y)
         } catch (error) {
-          console.log(error)
+          logger.error(error)
         }
       }
     )
@@ -247,7 +248,7 @@ export default class GameRoom extends Room<GameState> {
               detail: message
             })
           } catch (error) {
-            console.log("sell drop error", message)
+            logger.error("sell drop error", message)
           }
         }
       }
@@ -262,7 +263,7 @@ export default class GameRoom extends Room<GameState> {
         try {
           this.dispatcher.dispatch(new OnRefreshCommand(), client.auth.uid)
         } catch (error) {
-          console.log("refresh error", message)
+          logger.error("refresh error", message)
         }
       }
     })
@@ -272,7 +273,7 @@ export default class GameRoom extends Room<GameState> {
         try {
           this.dispatcher.dispatch(new OnLockCommand(), client.auth.uid)
         } catch (error) {
-          console.log("lock error", message)
+          logger.error("lock error", message)
         }
       }
     })
@@ -282,7 +283,7 @@ export default class GameRoom extends Room<GameState> {
         try {
           this.dispatcher.dispatch(new OnLevelUpCommand(), client.auth.uid)
         } catch (error) {
-          console.log("level up error", message)
+          logger.error("level up error", message)
         }
       }
     })
@@ -322,7 +323,7 @@ export default class GameRoom extends Room<GameState> {
           }
         )
       } catch (error) {
-        console.log(error)
+        logger.error(error)
       }
     })
 
@@ -359,7 +360,7 @@ export default class GameRoom extends Room<GameState> {
         try {
           this.dispatcher.dispatch(new OnUpdateCommand(), { deltaTime })
         } catch (error) {
-          console.log("update error", error)
+          logger.error("update error", error)
         }
       }
     })
@@ -380,7 +381,7 @@ export default class GameRoom extends Room<GameState> {
         return user
       }
     } catch (error) {
-      console.log(error)
+      logger.error(error)
     }
   }
 
@@ -391,7 +392,7 @@ export default class GameRoom extends Room<GameState> {
   async onLeave(client: Client, consented: boolean) {
     try {
       if (client && client.auth && client.auth.displayName) {
-        console.log(`${client.auth.displayName} is leaving`)
+        logger.log(`${client.auth.displayName} is leaving`)
       }
       if (consented) {
         throw new Error("consented leave")
@@ -401,7 +402,7 @@ export default class GameRoom extends Room<GameState> {
       await this.allowReconnection(client, 300)
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
-        console.log(`${client.auth.displayName} leave game room`)
+        logger.log(`${client.auth.displayName} leave game room`)
         const player = this.state.players.get(client.auth.uid)
         if (player && player.loadingProgress < 100) {
           // if player quit during the loading screen, remove it from the players
@@ -420,7 +421,7 @@ export default class GameRoom extends Room<GameState> {
   }
 
   onDispose() {
-    // console.log(`dispose game room`);
+    // logger.log(`dispose game room`);
     const requiredStageLevel = process.env.MODE == "dev" ? 0 : 10
     this.state.endTime = Date.now()
     const ps = new Array<components["schemas"]["GameHistory"]>()
@@ -475,7 +476,7 @@ export default class GameRoom extends Room<GameState> {
 
           UserMetadata.findOne({ uid: player.id }, (err: any, usr: any) => {
             if (err) {
-              console.log(err)
+              logger.error(err)
             } else {
               const expThreshold = 1000
               if (usr.exp + exp >= expThreshold) {
@@ -519,12 +520,12 @@ export default class GameRoom extends Room<GameState> {
 
                 player.titles.forEach((t) => {
                   if (!usr.titles.includes(t)) {
-                    console.log("title added ", t)
+                    logger.log("title added ", t)
                     usr.titles.push(t)
                   }
                 })
-                //console.log(usr);
-                // usr.markModified('metadata';
+                //logger.log(usr);
+                //usr.markModified('metadata');
                 usr.save()
 
                 DetailledStatistic.create({
@@ -607,8 +608,8 @@ export default class GameRoom extends Room<GameState> {
     if (rank <= 4 && meanGain < elo) {
       meanGain = elo
     }
-    // console.log(eloGains);
-    console.log(
+    //logger.log(eloGains);
+    logger.log(
       `${player.name} (was ${player.elo}) will be ${meanGain} (${rank})`
     )
     return meanGain
@@ -754,19 +755,19 @@ export default class GameRoom extends Room<GameState> {
 
         player.board.forEach((pkm, id) => {
           if (pkm.index == pokemon.index) {
-            // console.log(pkm.name, pokemon.name)
+            // logger.log(pkm.name, pokemon.name)
             if (coord) {
               if (pkm.positionY > coord.y) {
                 coord.x = pkm.positionX
                 coord.y = pkm.positionY
-                // console.log('better coord', coord)
+                // logger.log('better coord', coord)
               }
             } else {
               if (pkm.positionX !== -1) {
                 coord = { x: pkm.positionX, y: pkm.positionY }
               }
 
-              // console.log('first coord', coord)
+              // logger.log('first coord', coord)
             }
 
             pkm.items.forEach((el) => {
@@ -800,13 +801,13 @@ export default class GameRoom extends Room<GameState> {
           player.items.add(item)
         })
         if (coord) {
-          // console.log(coord, pokemonEvolved.name)
+          // logger.log(coord, pokemonEvolved.name)
           pokemonEvolved.positionX = coord.x
           pokemonEvolved.positionY = coord.y
           player.board.set(pokemonEvolved.id, pokemonEvolved)
           evolve = true
         } else {
-          console.log("error, no coordinate found for new evolution")
+          logger.error("no coordinate found for new evolution")
         }
       }
     })

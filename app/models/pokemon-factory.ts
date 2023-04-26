@@ -543,15 +543,14 @@ import {
   Marshadow
 } from "./colyseus-models/pokemon"
 import { MapSchema } from "@colyseus/schema"
-import { Emotion, IPokemon } from "../types"
+import { Emotion } from "../types"
 import { PokemonActionState, Rarity } from "../types/enum/Game"
 import { IPokemonConfig } from "./mongo-models/user-metadata"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
 import { Synergy } from "../types/enum/Synergy"
 import { Pkm, PkmFamily } from "../types/enum/Pokemon"
-import { PkmCost, EvolutionTime } from "../types/Config"
+import { PkmCost, EvolutionTime, Mythical1Shop } from "../types/Config"
 import { pickRandomIn } from "../utils/random"
-import { Mythical1Shop } from "./shop"
 
 export const ObtainableEgg = new Array<Pkm>(
   Pkm.GOTHITA,

@@ -145,7 +145,7 @@ export default class PokemonState {
 
         if (!reducedDamage) {
           reducedDamage = 0
-          // console.log(`error calculating damage, damage: ${damage}, defenseur: ${pokemon.name}, attaquant: ${attacker.name}, attack type: ${attackType}, defense : ${pokemon.def}, spedefense: ${pokemon.speDef}, life: ${pokemon.life}`);
+          // logger.debug(`error calculating damage, damage: ${damage}, defenseur: ${pokemon.name}, attaquant: ${attacker.name}, attack type: ${attackType}, defense : ${pokemon.def}, spedefense: ${pokemon.speDef}, life: ${pokemon.life}`);
         }
 
         if (dodgeable && pokemon.dodge > Math.random()) {
@@ -222,7 +222,7 @@ export default class PokemonState {
 
         pokemon.life = Math.max(0, pokemon.life - residualDamage)
 
-        // console.log(`${pokemon.name} took ${damage} and has now ${pokemon.life} life shield ${pokemon.shield}`);
+        // logger.debug(`${pokemon.name} took ${damage} and has now ${pokemon.life} life shield ${pokemon.shield}`);
 
         if (pokemon) {
           if(shouldTargetGainMana){

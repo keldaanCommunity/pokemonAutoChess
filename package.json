@@ -77,6 +77,7 @@
     "react-tabs": "^4.0.1",
     "react-toastify": "^9.1.1",
     "react-tooltip": "^4.2.21",
+    "tracer": "^1.1.6",
     "unique-names-generator": "^4.7.1"
   },
   "devDependencies": {

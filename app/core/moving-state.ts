@@ -40,7 +40,7 @@ export default class MovingState extends PokemonState {
     board: Board,
     coordinates: { x: number; y: number }
   ) {
-    // console.log('move attempt');
+    //logger.debug('move attempt');
 
     let x: number | undefined = undefined
     let y: number | undefined = undefined
@@ -49,7 +49,7 @@ export default class MovingState extends PokemonState {
         pokemon,
         board
       )
-      //console.log(farthestCoordinate)
+      //logger.debug({ farthestCoordinate })
       if (farthestCoordinate) {
         x = farthestCoordinate.x
         y = farthestCoordinate.y
@@ -66,7 +66,7 @@ export default class MovingState extends PokemonState {
             cell.row,
             cell.column
           )
-          // console.log(`Candidate (${cell.row},${cell.column}) to ${coordinates}, distance: ${candidateDistance}`);
+          // logger.debug(`Candidate (${cell.row},${cell.column}) to ${coordinates}, distance: ${candidateDistance}`);
           if (candidateDistance < distance) {
             distance = candidateDistance
             x = cell.row
@@ -84,7 +84,7 @@ export default class MovingState extends PokemonState {
         pokemon,
         undefined
       )
-      // console.log(`pokemon moved from (${pokemon.positionX},${pokemon.positionY}) to (${x},${y}), (desired direction (${coordinates[0]}, ${coordinates[1]})), orientation: ${pokemon.orientation}`);
+      // logger.debug(`pokemon moved from (${pokemon.positionX},${pokemon.positionY}) to (${x},${y}), (desired direction (${coordinates[0]}, ${coordinates[1]})), orientation: ${pokemon.orientation}`);
       board.swapValue(pokemon.positionX, pokemon.positionY, x, y)
       pokemon.positionX = x
       pokemon.positionY = y

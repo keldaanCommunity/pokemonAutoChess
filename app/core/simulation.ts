@@ -71,8 +71,7 @@ export default class Simulation extends Schema implements ISimulation {
     this.board = new Board(8, 6)
     this.blueEffects = blueEffects || []
     this.redEffects = redEffects || []
-    // console.log('blueEffects', blueEffects);
-    // console.log('redEffects', redEffects);
+    // logger.debug({ blueEffects, redEffects })
     this.climate = this.getClimate()
     this.room.updateCastform(this.climate)
     this.finished = false
@@ -1036,12 +1035,12 @@ export default class Simulation extends Schema implements ISimulation {
 
   stop() {
     this.blueTeam.forEach((pokemon, key) => {
-      // console.log('deleting ' + pokemon.name);
+      // logger.debug('deleting ' + pokemon.name);
       this.blueTeam.delete(key)
     })
 
     this.redTeam.forEach((pokemon, key) => {
-      // console.log('deleting ' + pokemon.name);
+      // logger.debug('deleting ' + pokemon.name);
       this.redTeam.delete(key)
     })
 

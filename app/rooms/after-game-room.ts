@@ -4,6 +4,7 @@ import { Dispatcher } from "@colyseus/command"
 import AfterGameState from "./states/after-game-state"
 import admin from "firebase-admin"
 import BannedUser from "../models/mongo-models/banned-user"
+import { logger } from "../utils/logger"
 
 export default class AfterGameRoom extends Room {
   dispatcher: Dispatcher<this>
@@ -17,11 +18,11 @@ export default class AfterGameRoom extends Room {
     idToken: string,
     noElo: boolean
   }) {
-    console.log("create after game", this.roomId)
+    logger.log("create after game", this.roomId)
 
     this.setState(new AfterGameState(options.noElo))
     this.maxClients = 8
-    // console.log('before', this.state.players);
+    // logger.debug('before', this.state.players);
     if (options.players) {
       options.players.forEach((plyr: SimplePlayer) => {
         const player = new SimplePlayer(
@@ -56,12 +57,12 @@ export default class AfterGameRoom extends Room {
         return user
       }
     } catch (error) {
-      console.log(error)
+      logger.error(error)
     }
   }
 
   onJoin(client: Client, options: any, auth: any) {
-    console.log(`${client.auth.email} join after game`)
+    logger.log(`${client.auth.email} join after game`)
   }
 
   async onLeave(client: Client, consented: boolean) {
@@ -74,13 +75,13 @@ export default class AfterGameRoom extends Room {
       await this.allowReconnection(client, 20)
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
-        console.log(`${client.auth.displayName} leave after game room`)
+        logger.log(`${client.auth.displayName} leave after game room`)
       }
     }
   }
 
   onDispose() {
-    console.log("dispose after game")
+    logger.log("dispose after game")
     this.dispatcher.stop()
   }
 }

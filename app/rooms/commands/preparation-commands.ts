@@ -9,6 +9,7 @@ import PreparationRoom from "../preparation-room"
 import { Emotion, IMessage, Role, Transfer } from "../../types"
 import { BotDifficulty } from "../../types/enum/Game"
 import { pickRandomIn } from "../../utils/random"
+import { logger } from "../../utils/logger"
 
 export class OnJoinCommand extends Command<
   PreparationRoom,
@@ -43,7 +44,7 @@ export class OnJoinCommand extends Command<
             )
 
             if (user.uid == this.state.ownerId) {
-              // console.log(user.displayName);
+              // logger.log(user.displayName);
               this.state.ownerName = user.displayName
             }
             this.room.broadcast(Transfer.MESSAGES, {
@@ -60,7 +61,7 @@ export class OnJoinCommand extends Command<
         return [new OnRemoveBotCommand().setPayload({ target: undefined })]
       }
     } catch (error) {
-      console.log(error)
+      logger.error(error)
     }
   }
 }
@@ -87,7 +88,7 @@ export class OnGameStartCommand extends Command<
         this.room.broadcast(Transfer.GAME_START, message, { except: client })
       }
     } catch (error) {
-      console.log(error)
+      logger.error(error)
     }
   }
 }
@@ -103,7 +104,7 @@ export class OnMessageCommand extends Command<
     try {
       this.room.broadcast(Transfer.MESSAGES, { ...message, time: Date.now() })
     } catch (error) {
-      console.log(error)
+      logger.error(error)
     }
   }
 }
@@ -122,7 +123,7 @@ export class OnRoomNameCommand extends Command<
         this.state.name = message
       }
     } catch (error) {
-      console.log(error)
+      logger.error(error)
     }
   }
 }
@@ -141,7 +142,7 @@ export class OnRoomPasswordCommand extends Command<
         this.state.password = password
       }
     } catch (error) {
-      console.log(error)
+      logger.error(error)
     }
   }
 }
@@ -166,7 +167,7 @@ export class OnToggleEloCommand extends Command<
         })
       }
     } catch (error) {
-      console.log(error)
+      logger.error(error)
     }
   }
 }
@@ -197,7 +198,7 @@ export class OnKickPlayerCommand extends Command<
         })
       }
     } catch (error) {
-      console.log(error)
+      logger.error(error)
     }
   }
 }
@@ -224,7 +225,7 @@ export class OnLeaveCommand extends Command<
         }
       }
     } catch (error) {
-      console.error(error)
+      logger.error(error)
     }
   }
 }
@@ -237,14 +238,14 @@ export class OnToggleReadyCommand extends Command<
 > {
   execute({ client }) {
     try {
-      // console.log(this.state.users.get(client.auth.uid).ready);
+      // logger.log(this.state.users.get(client.auth.uid).ready);
       if (client.auth.uid && this.state.users.has(client.auth.uid)) {
         this.state.users.get(client.auth.uid).ready = !this.state.users.get(
           client.auth.uid
         ).ready
       }
     } catch (error) {
-      console.log(error)
+      logger.error(error)
     }
   }
 }
@@ -292,7 +293,7 @@ export class InitializeBotsCommand extends Command<
         }
       )
     } catch (error) {
-      console.log(error)
+      logger.error(error)
     }
   }
 }
@@ -340,7 +341,7 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
         ["avatar", "elo", "name", "id"],
         null,
         (err, bots) => {
-          if(err) return console.error(err)
+          if(err) return logger.error(err)
           if (bots.length <= 0) {
             this.room.broadcast(Transfer.MESSAGES, {
               name: user.displayName,
@@ -413,7 +414,7 @@ export class OnRemoveBotCommand extends Command<
             return
           }
         }
-        console.log("error, no bots in lobby")
+        logger.log("no bots in lobby")
         return
       }
 
@@ -427,7 +428,7 @@ export class OnRemoveBotCommand extends Command<
         })
       }
     } catch (error) {
-      console.log(error)
+      logger.error(error)
     }
   }
 }
@@ -454,7 +455,7 @@ export class OnListBotsCommand extends Command<PreparationRoom> {
         ["avatar", "elo", "name", "id"],
         null,
         (err, bots) => {
-          if(err) return console.error(err)
+          if(err) return logger.error(err)
           if (bots.length <= 0) {
             this.room.broadcast(Transfer.MESSAGES, {
               name: user.displayName,
@@ -473,7 +474,7 @@ export class OnListBotsCommand extends Command<PreparationRoom> {
         }
       )
     } catch (error) {
-      console.log(error)
+      logger.error(error)
     }
   }
 }
