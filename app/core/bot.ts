@@ -3,6 +3,7 @@ import BOT, { IBot } from "../models/mongo-models/bot-v2"
 import Player from "../models/colyseus-models/player"
 import { BattleResult } from "../types/enum/Game"
 import { Emotion } from "../types"
+import { logger } from "../utils/logger"
 
 export default class Bot {
   player: Player
@@ -20,7 +21,7 @@ export default class Bot {
         this.scenario = bot
         this.updatePlayerTeam()
       } else {
-        console.log("error, bot not found")
+        logger.error("Bot not found")
       }
     })
   }
@@ -46,7 +47,6 @@ export default class Bot {
   }
 
   updatePlayerTeam() {
-    // console.log(this.scenario);
     this.player.board.forEach((pokemon, key) => {
       this.player.board.delete(key)
     })

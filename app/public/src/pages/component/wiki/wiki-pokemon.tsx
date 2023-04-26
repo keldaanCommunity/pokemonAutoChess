@@ -9,7 +9,7 @@ import tracker from "../../../../dist/client/assets/pokemons/tracker.json"
 import { Rarity } from "../../../../../types/enum/Game"
 import { Pkm, PkmIndex, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
-import { Mythical1Shop, Mythical2Shop } from "../../../../../models/shop"
+import { Mythical1Shop, Mythical2Shop } from "../../../../../types/Config"
 
 const metadata = tracker as unknown as { [key: string]: ITracker }
 const precomputed =

@@ -194,7 +194,6 @@ export default class Status extends Schema implements IStatus {
   }
 
   triggerSoulDew(timer: number) {
-    // console.log('sould dew');
     if (!this.soulDew) {
       this.soulDew = true
       this.soulDewCooldown = timer

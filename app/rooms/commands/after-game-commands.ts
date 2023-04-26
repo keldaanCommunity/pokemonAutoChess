@@ -2,6 +2,7 @@ import { Command } from "@colyseus/command"
 import { GameUser } from "../../models/colyseus-models/game-user"
 import UserMetadata from "../../models/mongo-models/user-metadata"
 import { Emotion, Transfer } from "../../types"
+import { logger } from "../../utils/logger"
 
 export class OnJoinCommand extends Command {
   execute({ client, options, auth }) {
@@ -49,8 +50,8 @@ export class OnLeaveCommand extends Command {
         time: Date.now()
       })
       this.state.users.delete(client.auth.uid)
-    } catch (e) {
-      console.error(e)
+    } catch (error) {
+      logger.error(error)
     }
   }
 }

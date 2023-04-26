@@ -42,6 +42,7 @@ import PRECOMPUTED_RARITY_POKEMONS from "../models/precomputed/type-rarity-all.j
 import { Rarity } from "../types/enum/Game"
 import { pickRandomIn } from "../utils/random"
 import { sum } from "../utils/array"
+import { logger } from "../utils/logger"
 
 export default class CustomLobbyRoom extends LobbyRoom {
   discordWebhook: WebhookClient | undefined
@@ -108,7 +109,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
   }
 
   onCreate(): Promise<void> {
-    console.log("create lobby", this.roomId)
+    logger.log("create lobby", this.roomId)
     super.onCreate({})
     this.setState(new LobbyState())
     this.autoDispose = false
@@ -117,7 +118,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
       try {
         client.send(Transfer.REQUEST_LEADERBOARD, this.leaderboard)
       } catch (error) {
-        console.log(error)
+        logger.error(error)
       }
     })
 
@@ -125,7 +126,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
       try {
         client.send(Transfer.REQUEST_BOT_LEADERBOARD, this.botLeaderboard)
       } catch (error) {
-        console.log(error)
+        logger.error(error)
       }
     })
 
@@ -133,7 +134,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
       try {
         client.send(Transfer.REQUEST_LEVEL_LEADERBOARD, this.levelLeaderboard)
       } catch (error) {
-        console.log(error)
+        logger.error(error)
       }
     })
 
@@ -146,7 +147,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
         ) {
           BannedUser.findOne({ uid: message }, (err, banned) => {
             if (err) {
-              console.log(err)
+              logger.error(err)
             }
             if (!banned) {
               BannedUser.create({ uid: message })
@@ -160,7 +161,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
           })
         }
       } catch (error) {
-        console.log(error)
+        logger.error(error)
       }
     })
 
@@ -177,7 +178,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
           )
         }
       } catch (error) {
-        console.log(error)
+        logger.error(error)
       }
     })
 
@@ -194,7 +195,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
             this.state.removeMessage(message.author, message.payload)
           }
         } catch (error) {
-          console.log(error)
+          logger.error(error)
         }
       }
     )
@@ -219,7 +220,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
             })
           }
         } catch (error) {
-          console.log(error)
+          logger.error(error)
         }
       }
     )
@@ -244,7 +245,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
             })
           }
         } catch (error) {
-          console.log(error)
+          logger.error(error)
         }
       }
     )
@@ -253,7 +254,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
       try {
         const u = this.state.users.get(client.auth.uid)
         const targetUser = this.state.users.get(uid)
-        // console.log(u.role, uid)
+        // logger.debug(u.role, uid)
         if (u && u.role === Role.ADMIN) {
           UserMetadata.findOne({ uid: uid }, (err, user) => {
             if (user) {
@@ -267,7 +268,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
           })
         }
       } catch (error) {
-        console.log(error)
+        logger.error(error)
       }
     })
 
@@ -296,14 +297,14 @@ export default class CustomLobbyRoom extends LobbyRoom {
                 embeds: [dsEmbed]
               })
             } catch (error) {
-              console.log(error)
+              logger.error(error)
             }
           })
-          .catch((err) => {
-            console.log(err)
+          .catch((error) => {
+            logger.error(error)
           })
       } catch (error) {
-        console.log(error)
+        logger.error(error)
       }
     })
 
@@ -327,7 +328,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
 
         client.send(Transfer.REQUEST_BOT_LIST, botList)
       } catch (error) {
-        console.log(error)
+        logger.error(error)
       }
     })
 
@@ -336,7 +337,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
         const botData = this.bots.get(bot)
         client.send(Transfer.REQUEST_BOT_DATA, botData)
       } catch (error) {
-        console.log(error)
+        logger.error(error)
       }
     })
 
@@ -346,7 +347,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
         client.send(Transfer.REQUEST_META_ITEMS, this.metaItems)
         client.send(Transfer.REQUEST_META_POKEMONS, this.metaPokemons)
       } catch (error) {
-        console.log(error)
+        logger.error(error)
       }
     })
 
@@ -399,7 +400,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
           client.send(Transfer.BOOSTER_CONTENT, boosterIndex)
         }
       } catch (error) {
-        console.log(error)
+        logger.error(error)
       }
     })
 
@@ -415,7 +416,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
           })
         }
       } catch (error) {
-        console.log(error)
+        logger.error(error)
       }
     })
 
@@ -436,7 +437,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
           })
         }
       } catch (error) {
-        console.log(error)
+        logger.error(error)
       }
     })
 
@@ -474,7 +475,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
             }
           }
         } catch (error) {
-          console.log(error)
+          logger.error(error)
         }
       }
     )
@@ -559,7 +560,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
             }
           }
         } catch (error) {
-          console.log(error)
+          logger.error(error)
         }
       }
     )
@@ -574,7 +575,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
               { limit: 10, sort: { time: -1 } },
               (err, stats) => {
                 if (err) {
-                  console.log(err)
+                  logger.error(err)
                 } else {
                   client.send(
                     Transfer.USER,
@@ -608,7 +609,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
           }
         })
       } catch (error) {
-        console.log(error)
+        logger.error(error)
       }
     })
 
@@ -637,7 +638,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
           )
         }
       } catch (error) {
-        console.log(error)
+        logger.error(error)
       }
     })
 
@@ -673,7 +674,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
             }
           }
         } catch (error) {
-          console.log(error)
+          logger.error(error)
         }
       }
     )
@@ -683,12 +684,14 @@ export default class CustomLobbyRoom extends LobbyRoom {
         process.env.MONGO_URI ? process.env.MONGO_URI : "Default Mongo URI",
         {},
         (err) => {
-          console.log(err)
+          if(err != null){
+            logger.error("Error connecting to Mongo", err)
+          }
           Chat.find(
             { time: { $gt: Date.now() - 86400000 } },
             (err, messages) => {
               if (err) {
-                console.log(err)
+                logger.error(err)
               } else {
                 messages.forEach((message) => {
                   this.state.addMessage(
@@ -708,7 +711,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
             { limit: 100, sort: { elo: -1 } },
             (err, users) => {
               if (err) {
-                console.log(err)
+                logger.error(err)
               } else {
                 for (let i = 0; i < users.length; i++) {
                   const user = users[i]
@@ -728,7 +731,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
             { limit: 100, sort: { level: -1 } },
             (err, users) => {
               if (err) {
-                console.log(err)
+                logger.error(err)
               } else {
                 for (let i = 0; i < users.length; i++) {
                   const user = users[i]
@@ -773,7 +776,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
             ],
             (err, docs) => {
               if (err) {
-                console.log(err)
+                logger.error(err)
               } else {
                 docs.forEach((doc) => {
                   this.meta.push(doc)
@@ -783,7 +786,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
           )
           ItemsStatistic.find({}, (err, docs) => {
             if (err) {
-              console.log(err)
+              logger.error(err)
             } else {
               docs.forEach((doc) => {
                 this.metaItems.push(doc)
@@ -792,7 +795,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
           })
           PokemonsStatistic.find({}, (err, docs) => {
             if (err) {
-              console.log(err)
+              logger.error(err)
             } else {
               docs.forEach((doc) => {
                 this.metaPokemons.push(doc)
@@ -820,14 +823,14 @@ export default class CustomLobbyRoom extends LobbyRoom {
         return user
       }
     } catch (error) {
-      console.log(error)
+      logger.error(err)
     }
   }
 
   onJoin(client: Client, options: any) {
     super.onJoin(client, options)
     try {
-      console.log(`${client.auth.displayName} ${client.id} join lobby room`)
+      logger.log(`${client.auth.displayName} ${client.id} join lobby room`)
       // client.send(Transfer.REQUEST_BOT_DATA, this.bots);
       UserMetadata.findOne(
         { uid: client.auth.uid },
@@ -839,7 +842,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
               { limit: 10, sort: { time: -1 } },
               (err, stats) => {
                 if (err) {
-                  console.log(err)
+                  logger.error(err)
                 } else {
                   const records = new ArraySchema<GameRecord>()
                   stats.forEach((record) => {
@@ -912,7 +915,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
         }
       )
     } catch (error) {
-      console.log(error)
+      logger.error(error)
     }
   }
 
@@ -920,20 +923,20 @@ export default class CustomLobbyRoom extends LobbyRoom {
     try {
       super.onLeave(client)
       if (client && client.auth && client.auth.displayName && client.auth.uid) {
-        console.log(`${client.auth.displayName} ${client.id} leave lobby`)
+        logger.log(`${client.auth.displayName} ${client.id} leave lobby`)
         this.state.users.delete(client.auth.uid)
       }
     } catch (error) {
-      console.log(error)
+      logger.error(error)
     }
   }
 
   onDispose() {
     try {
       super.onDispose()
-      console.log("dispose lobby")
+      logger.log("dispose lobby")
     } catch (error) {
-      console.log(error)
+      logger.error(error)
     }
   }
 }

@@ -6,7 +6,9 @@ import {
   CarouselStages,
   StageDuration,
   AdditionalPicksStages,
-  MythicalPicksStages
+  MythicalPicksStages,
+  Mythical1Shop,
+  Mythical2Shop
 } from "../../types/Config"
 import { Item, BasicItems } from "../../types/enum/Item"
 import { BattleResult } from "../../types/enum/Game"
@@ -35,8 +37,8 @@ import {
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Pokemon } from "../../models/colyseus-models/pokemon"
 import { Ability } from "../../types/enum/Ability"
-import { Mythical1Shop, Mythical2Shop } from "../../models/shop"
 import { pickRandomIn } from "../../utils/random"
+import { logger } from "../../utils/logger"
 
 export class OnShopCommand extends Command<
   GameRoom,
@@ -676,13 +678,13 @@ export class OnJoinCommand extends Command<
         this.state.players.set(client.auth.uid, player)
 
         if (client && client.auth && client.auth.displayName) {
-          console.log(`${client.auth.displayName} ${client.id} join game room`)
+          logger.log(`${client.auth.displayName} ${client.id} join game room`)
         }
 
-        // console.log(this.state.players.get(client.auth.uid).tileset);
+        // logger.log(this.state.players.get(client.auth.uid).tileset);
         this.state.shop.assignShop(player)
         if (this.state.players.size >= 8) {
-          // console.log('game elligible to xp');
+          // logger.log('game elligible to xp');
           this.state.elligibleToXP = true
           let c = 0
           this.state.players.forEach((p) => {

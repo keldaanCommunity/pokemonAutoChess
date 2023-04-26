@@ -87,19 +87,15 @@ export default class Board {
         if(pokemon.status.confusion){
           return pickRandomIn(Orientation)
         }
-        console.log("error orientation", r0, c0, r1, c1)
-        console.log(
-          "error pokemon",
-          pokemon.positionX,
-          pokemon.positionY,
-          pokemon.name
-        )
-        console.log(
-          "error target",
-          target?.positionX,
-          target?.positionY,
-          target?.name
-        )
+        logger.error("failed to get pokemon orientation", {
+          r0, c0, r1, c1, 
+          pokemon: pokemon.name,
+          pokemonPosX: pokemon.positionX,
+          pokemonPosY: pokemon.positionY,
+          target: target?.name,
+          targetPosX: target?.positionX,
+          targetPosY: target?.positionY
+        })
         return Orientation.DOWNRIGHT
       } else if (vy < 0) {
         return Orientation.DOWN

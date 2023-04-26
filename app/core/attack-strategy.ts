@@ -915,7 +915,7 @@ export class TwistingNeitherStrategy extends AttackStrategy {
           cell.value.positionX = teleportationCell.row
           cell.value.positionY = teleportationCell.column
         } else {
-          console.log("ERROR: unable to teleport pokemon")
+          console.error("unable to teleport pokemon", cell.value)
         }
       }
     })

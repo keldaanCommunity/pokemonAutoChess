@@ -104,12 +104,12 @@ export default class Tileset {
   }
 
   getTilemapId(terrain: TerrainType, maskId: Mask): number {
-    // console.log(terrain, maskId);
+    // logger.debug({ terrain, maskId });
     let items
     switch (terrain) {
       case TerrainType.GROUND:
         items = this.groundAlt.get(maskId)
-        // console.log(items);
+        // logger.debug({ items });
         if (items && items.length > 0) {
           if (Math.random() > 0.8) {
             return pickRandomIn(items)
@@ -124,7 +124,7 @@ export default class Tileset {
 
       case TerrainType.WALL:
         items = this.wallAlt.get(maskId)
-        // console.log(items);
+        // logger.debug({ items });
         if (items && items.length > 0) {
           if (Math.random() > 0.8) {
             return pickRandomIn(items)
