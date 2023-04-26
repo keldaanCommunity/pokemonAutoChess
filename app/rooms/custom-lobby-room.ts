@@ -823,7 +823,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
         return user
       }
     } catch (error) {
-      logger.error(err)
+      logger.error(error)
     }
   }
 

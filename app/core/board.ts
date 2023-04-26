@@ -1,5 +1,6 @@
 import { IPokemonEntity } from "../types"
 import { Orientation } from "../types/enum/Game"
+import { logger } from "../utils/logger"
 import { pickRandomIn } from "../utils/random"
 import PokemonEntity from "./pokemon-entity"
 
