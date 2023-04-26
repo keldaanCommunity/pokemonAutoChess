@@ -1,1 +1,0 @@
-Console logs are added here in daily files with automatic rotation
