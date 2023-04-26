@@ -10,6 +10,14 @@ import { WebSocketTransport } from "@colyseus/ws-transport"
 import * as bodyParser from "body-parser"
 import admin from "firebase-admin"
 import PRECOMPUTED_TYPE_POKEMONS_ALL from "./models/precomputed/type-pokemons-all.json"
+import AfterGameRoom from "./rooms/after-game-room"
+import CustomLobbyRoom from "./rooms/custom-lobby-room"
+import PreprationRoom from "./rooms/preparation-room"
+import GameRoom from "./rooms/game-room"
+import { Pkm } from "./types/enum/Pokemon"
+import { Item } from "./types/enum/Item"
+import { TypeTrigger } from "./types/Config"
+import { logger } from "./utils/logger"
 
 dotenv.config()
 
@@ -154,13 +162,6 @@ const basicAuthMiddleware = basicAuth({
 app.use("/colyseus", basicAuthMiddleware, monitor())
 
 // Room
-import AfterGameRoom from "./rooms/after-game-room"
-import CustomLobbyRoom from "./rooms/custom-lobby-room"
-import PreprationRoom from "./rooms/preparation-room"
-import GameRoom from "./rooms/game-room"
-import { Pkm } from "./types/enum/Pokemon"
-import { Item } from "./types/enum/Item"
-import { TypeTrigger } from "./types/Config"
 
 gameServer.define("after-game", AfterGameRoom)
 gameServer.define("lobby", CustomLobbyRoom)
@@ -169,4 +170,4 @@ gameServer.define("game", GameRoom).enableRealtimeListing()
 
 // Start
 gameServer.listen(port)
-console.log(`Game server started, listening on port ${port}`)
+logger.log(`Game server started, listening on port ${port}`)
