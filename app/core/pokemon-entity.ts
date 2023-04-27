@@ -189,8 +189,16 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
         this.status.triggerBurn(2000, this, attacker, board)
         this.status.triggerWound(2000, this, board)
       }
-      if(this.items.has(Item.POWER_LENS)){
-        attacker.handleSpecialDamage(Math.round(0.5*specialDamage), board, attackType, this)
+      if(this.items.has(Item.POWER_LENS) && specialDamage >= 1){
+        attacker.handleDamage({
+          damage: Math.round(0.5*specialDamage),
+          board,
+          attackType: AttackType.SPECIAL,
+          attacker: this,
+          dodgeable: false,
+          shouldAttackerGainMana: false,
+          shouldTargetGainMana: true
+        })
       }
       return this.state.handleDamage({
         target: this,
