@@ -242,7 +242,7 @@ export default class PokemonState {
           }
 
           if (pokemon.status.sleep) {
-            pokemon.status.updateSleep(100)
+            pokemon.status.updateSleep(500)
           }
 
           if (pokemon.life && pokemon.life > 0) {
