@@ -3,7 +3,7 @@ export const logger = require("tracer").colorConsole({
       '{{timestamp}} <{{title}}> {{message}} (in {{method}} - {{file}}:{{line}})', //default format
       {
         error:
-          '{{timestamp}} <{{title}}> {{message}} (in {{method}} - {{file}}:{{line}})\Stack:\n{{stack}}' // error format
+          '{{timestamp}} <{{title}}> {{message}} (in {{method}} - {{file}}:{{line}})\n{{stack}}' // error format
       }
     ],
     preprocess: function(data) {
