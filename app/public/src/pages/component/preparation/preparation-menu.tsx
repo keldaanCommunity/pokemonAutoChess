@@ -59,8 +59,6 @@ export default function PreparationMenu(props: {
   const [queryBot, setQueryBot] = useState<string>("")
   const [botsSelection, setBotsSelection] = useState<Set<IBot>>(new Set())
 
-  console.log({ botsSelection })
-
   function sortBy(criteria: string){
     if(sortBotsCriteria === criteria){
       setSortBotsOrder(!sortBotsOrder)
