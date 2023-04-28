@@ -4,6 +4,7 @@ import WikiContent from "./wiki-content"
 import WikiStatistic from "./wiki-statistic"
 import WikiTypes from "./wiki-types"
 import WikiFaq from "./wiki-faq"
+import WikiTutorials from "./wiki-tutorials"
 import WikiItemsCheatSheet from "./wiki-items-cheat-sheet"
 import WikiStatus from "./wiki-status"
 import "./wiki.css"
@@ -20,6 +21,7 @@ export default function Wiki(props: { toggleWiki: () => void }) {
         <Tabs>
           <TabList>
             <Tab key="title-faq">F.A.Q.</Tab>
+            <Tab key="title-tutorials">HOW TO PLAY ?</Tab>
             <Tab key="title-pokemon">POKEMONS</Tab>
             <Tab key="title-items">ITEMS</Tab>
             <Tab key="title-types">SYNERGIES</Tab>
@@ -29,6 +31,9 @@ export default function Wiki(props: { toggleWiki: () => void }) {
 
           <TabPanel key="faq">
             <WikiFaq />
+          </TabPanel>
+          <TabPanel key="tutorials">
+            <WikiTutorials />
           </TabPanel>
           <TabPanel key="pokemon">
             <WikiContent />

@@ -52,6 +52,11 @@ body {
   font-size: 1vw;
 }
 
+a {
+  /* better contrast on dark background for accessibility */
+  color: #7bbbff;
+}
+
 #root {
   width: 100vw;
   height: 100vh;

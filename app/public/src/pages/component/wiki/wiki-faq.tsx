@@ -60,11 +60,8 @@ export default class WikiFaq extends Component {
           It seems some sprites are missing ?
         </h4>
         <p>
-          Sprites of pokemon auto chess are based on this collaborative project:
-          <a href="https://github.com/PMDCollab/SpriteCollab">
-            https://github.com/PMDCollab/SpriteCollab
-          </a>
-          . If you want the missing sprites to be added, please consider
+          Sprites of pokemon auto chess are based on <a href="https://github.com/PMDCollab/SpriteCollab">this collaborative project</a>.
+          If you want the missing sprites to be added, please consider
           donating to pokemon autochess. Every donation will be used to pay
           spriters to make sprites for everyone.
         </p>
@@ -159,11 +156,7 @@ export default class WikiFaq extends Component {
         </p>
         <h4 className="nes-text is-success">How can i support the game ?</h4>
         <p>
-          You can donate on the tipee:
-          <a href="https://en.tipeee.com/pokemon-auto-chess">
-            https://en.tipeee.com/pokemon-auto-chess
-          </a>
-          .
+          You can donate on <a href="https://en.tipeee.com/pokemon-auto-chess">Tipeee</a>.
         </p>
         <h4 className="nes-text is-success">
           Will there be a mobile version one day ?
