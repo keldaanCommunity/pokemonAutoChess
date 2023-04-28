@@ -878,7 +878,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.RELIC_SONG]: {
-    eng: `Put ${Status.SLEEP} the whole enemy team for [3,SP] seconds`,
+    eng: `Put ${Status.SLEEP} the whole enemy team for [2,SP=0.5] seconds`,
     esp: ``,
     fra: ``,
     prt: ``

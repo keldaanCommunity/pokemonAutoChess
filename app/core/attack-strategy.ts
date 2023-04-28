@@ -1194,7 +1194,7 @@ export class RelicSongStrategy extends AttackStrategy {
     target: PokemonEntity
   ) {
     super.process(pokemon, state, board, target)
-    let duration = Math.round(3000 * (1 + pokemon.ap / 100))
+    let duration = Math.round(2000 * (1 + pokemon.ap / 200))
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
         tg.status.triggerSleep(duration, tg)
