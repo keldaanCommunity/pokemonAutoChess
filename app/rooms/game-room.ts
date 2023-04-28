@@ -440,8 +440,7 @@ export default class GameRoom extends Room<GameState> {
 
     if (
       this.state.stageLevel >= requiredStageLevel &&
-      this.state.elligibleToXP === true &&
-      this.state.noElo === false
+      this.state.elligibleToXP === true
     ) {
       this.state.players.forEach((player) => {
         if (player.isBot) {
@@ -492,18 +491,30 @@ export default class GameRoom extends Room<GameState> {
               }
 
               if (usr.elo) {
-                const elo = Math.max(0, this.computeElo(player, rank, usr.elo))
-                if (elo) {
-                  if (elo > 1100) {
-                    player.titles.add(Title.GYM_TRAINER)
+                if(this.state.noElo === false){
+                  const elo = Math.max(0, this.computeElo(player, rank, usr.elo))
+                  if (elo) {
+                    if (elo > 1100) {
+                      player.titles.add(Title.GYM_TRAINER)
+                    }
+                    if (elo > 1200) {
+                      player.titles.add(Title.GYM_CHALLENGER)
+                    }
+                    if (elo > 1400) {
+                      player.titles.add(Title.GYM_LEADER)
+                    }
+                    usr.elo = elo
                   }
-                  if (elo > 1200) {
-                    player.titles.add(Title.GYM_CHALLENGER)
-                  }
-                  if (elo > 1400) {
-                    player.titles.add(Title.GYM_LEADER)
-                  }
-                  usr.elo = elo
+
+                  DetailledStatistic.create({
+                    time: Date.now(),
+                    name: dbrecord.name,
+                    pokemons: dbrecord.pokemons,
+                    rank: dbrecord.rank,
+                    avatar: dbrecord.avatar,
+                    playerId: dbrecord.id,
+                    elo: elo
+                  })
                 }
 
                 if (player.life === 100 && rank === 1) {
@@ -527,16 +538,6 @@ export default class GameRoom extends Room<GameState> {
                 //logger.log(usr);
                 //usr.markModified('metadata');
                 usr.save()
-
-                DetailledStatistic.create({
-                  time: Date.now(),
-                  name: dbrecord.name,
-                  pokemons: dbrecord.pokemons,
-                  rank: dbrecord.rank,
-                  avatar: dbrecord.avatar,
-                  playerId: dbrecord.id,
-                  elo: elo
-                })
               }
             }
           })
