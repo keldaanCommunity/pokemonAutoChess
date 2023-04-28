@@ -1454,7 +1454,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.SACRED_SWORD]: {
-    eng: `Deals [60,80,120,SP] ${Damage.TRUE} to the target`,
+    eng: `Deals [120,SP] ${Damage.TRUE} to the target`,
     esp: ``,
     prt: ``,
     fra: ``
