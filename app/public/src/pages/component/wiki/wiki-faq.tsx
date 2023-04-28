@@ -12,7 +12,8 @@ export default class WikiFaq extends Component {
         <h4 className="nes-text is-success">How do pokemon evolve ?</h4>
         <p>
           You need 3 copies of the same pokemon to get the evolution. The 3
-          pokemons will merge to give the evolved pokemon.
+          pokemons will merge to give the evolved pokemon. Hatch Pokemon that
+          come from eggs evolve automatically with time every 5 stages.
         </p>
         <h4 className="nes-text is-success">
           Why is there field/flora/human/aquatic synergies ? They don't match
@@ -126,27 +127,19 @@ export default class WikiFaq extends Component {
           What are the special damages and physical damages ?
         </h4>
         <p>
-          Auto attacks are mostly Physical attack type, while Spells are
-          mostly Special attack type. Some spells/abilities however can 
+          Auto attacks mostly deal Physical damage, while Abilities 
+          mostly deal Special damage. Some abilities however can 
           deal true damage or physical damage.
         </p>
         <h4 className="nes-text is-success">
-          Can you also tell me how defense works? Is it flat damage reduction?
+          Can you tell me how defense works? Is it flat damage reduction?
         </h4>
         <p>
           Same system as League of Legends: damage = atk * (hp / hp *
           (1+(0.1*def))). Defense works for physical damage, special defense for
           special damage
         </p>
-        <h4 className="nes-text is-success">
-          Why do legendaries have scaled skill descriptions like 10/20/30 damage
-          ? Which one is the right value?
-        </h4>
-        <p>
-          After Stage 10, it's the second value, after Turn 20, it's the third
-          value
-        </p>
-        <h4 className="nes-text is-success">How do you get shiny ?</h4>
+        <h4 className="nes-text is-success">How do you get shiny pokemons ?</h4>
         <p>
           So when you play games with 8 players/bots, you get experience. With
           enough experience, you level up and get a booster pack. Each booster
@@ -163,9 +156,9 @@ export default class WikiFaq extends Component {
         </h4>
         <p>No.</p>
         <h4 className="nes-text is-success">
-          What language is used to code the game ?
+          What language/library is used to code the game ?
         </h4>
-        <p>TypeScript</p>
+        <p>TypeScript, Phaser, Colyseus. If you want to contribute, <a href="https://github.com/keldaanInteractive/pokemonAutoChess" target="_blank">pull requests are open</a> !</p>
       </div>
     )
   }
