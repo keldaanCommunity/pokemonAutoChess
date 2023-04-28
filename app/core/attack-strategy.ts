@@ -2595,7 +2595,7 @@ export class SacredSwordStrategy extends AttackStrategy {
     target: PokemonEntity
   ) {
     super.process(pokemon, state, board, target)
-    const damage = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 80 : 60
+    const damage = 120
     target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon)
   }
 }
