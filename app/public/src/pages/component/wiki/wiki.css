@@ -52,3 +52,17 @@
     font-size: 120%;
     margin: 0.25em 0;
 }
+
+#wiki-page .wiki-tutorials {
+    padding: 1em
+}
+
+#wiki-page .wiki-tutorials ul {
+    display: flex;
+    gap: 1em;
+    padding: 0;
+}
+
+#wiki-page .wiki-tutorials li {
+    list-style: none;
+}
