@@ -324,17 +324,20 @@ export default function Lobby() {
           >
             Wiki
           </button>
+          {user?.anonymous === false ?
           <button
-            className="bubbly green"
+            disabled={user?.anonymous === false}
+            className={user?.anonymous === false ?"bubbly green is-disabled" : "bubbly green"}
             onClick={() => {
-              if (botList.length == 0) {
+              if (user?.anonymous === false && botList.length == 0) {
                 dispatch(requestBotList())
               }
               toggleBuilder(!showBuilder)
             }}
           >
             BOT Builder
-          </button>
+          </button>: null}
+
           <button
             className="bubbly green"
             onClick={() => {
