@@ -101,6 +101,7 @@ export default function Game() {
   const currentPlayerId: string = useAppSelector(
     (state) => state.game.currentPlayerId
   )
+  const spectate = currentPlayerId !== uid
 
   const [initialized, setInitialized] = useState<boolean>(false)
   const [loaded, setLoaded] = useState<boolean>(false)
@@ -157,7 +158,6 @@ export default function Game() {
       firebase.auth().onAuthStateChanged(async (user) => {
         if (user) {
           dispatch(logIn(user))
-          dispatch(setCurrentPlayerId(user.uid))
 
           async function tryToReconnectToLastGame(attempts=1){
             try {
@@ -297,6 +297,10 @@ export default function Game() {
           dispatch(setStreak(player.streak))
           dispatch(setShopLocked(player.shopLocked))
           dispatch(setPokemonCollection(player.pokemonCollection))
+          dispatch(setPlayer(player))
+          dispatch(setCurrentPlayerId(uid))
+        }
+        else if(spectate && !currentPlayerId){
           dispatch(setPlayer(player))
         }
 
@@ -465,6 +469,10 @@ export default function Game() {
           dispatch(removeRedHealDpsMeter(player.id))
         }
       }
+
+      room.state.spectators.onAdd = (uid) => {
+        gameContainer.initializeSpectactor(uid)
+      }
     }
   }, [reconnected, initialized, room, dispatch, client, uid, currentPlayerId])
 
@@ -486,7 +494,7 @@ export default function Game() {
         hideModal={setModalBoolean}
         leave={leave}
       />
-      <GameShop />
+      {!spectate && <GameShop />}
       <GamePlayerInformations />
       <GamePlayers click={(id: string) => playerClick(id)} />
       <GameSynergies />

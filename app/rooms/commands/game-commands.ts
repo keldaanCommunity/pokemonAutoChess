@@ -655,53 +655,57 @@ export class OnJoinCommand extends Command<
   GameRoom,
   {
     client: Client
-    options: any
+    options: { spectate?: boolean }
     auth: any
   }
 > {
   execute({ client, options, auth }) {
-    UserMetadata.findOne({ uid: auth.uid }, (err, user) => {
-      if (user) {
-        const player = new Player(
-          user.uid,
-          user.displayName,
-          user.elo,
-          user.avatar,
-          false,
-          this.state.players.size + 1,
-          user.pokemonCollection,
-          user.title,
-          user.role,
-          this.room
-        )
-
-        this.state.players.set(client.auth.uid, player)
-
-        if (client && client.auth && client.auth.displayName) {
-          logger.log(`${client.auth.displayName} ${client.id} join game room`)
-        }
-
-        // logger.log(this.state.players.get(client.auth.uid).tileset);
-        this.state.shop.assignShop(player)
-        if (this.state.players.size >= 8) {
-          // logger.log('game elligible to xp');
-          this.state.elligibleToXP = true
-          let c = 0
-          this.state.players.forEach((p) => {
-            if (!p.isBot) {
-              c += 1
-            }
-          })
-          if (c === 1) {
+    if(options.spectate === true){
+      this.state.spectators.add(client.auth.uid)
+    } else {
+      UserMetadata.findOne({ uid: auth.uid }, (err, user) => {
+        if (user) {
+          const player = new Player(
+            user.uid,
+            user.displayName,
+            user.elo,
+            user.avatar,
+            false,
+            this.state.players.size + 1,
+            user.pokemonCollection,
+            user.title,
+            user.role,
+            this.room
+          )
+  
+          this.state.players.set(client.auth.uid, player)
+  
+          if (client && client.auth && client.auth.displayName) {
+            logger.log(`${client.auth.displayName} ${client.id} join game room`)
+          }
+  
+          // logger.log(this.state.players.get(client.auth.uid).tileset);
+          this.state.shop.assignShop(player)
+          if (this.state.players.size >= 8) {
+            // logger.log('game elligible to xp');
+            this.state.elligibleToXP = true
+            let c = 0
             this.state.players.forEach((p) => {
               if (!p.isBot) {
-                p.titles.add(Title.LONE_WOLF)
+                c += 1
               }
             })
+            if (c === 1) {
+              this.state.players.forEach((p) => {
+                if (!p.isBot) {
+                  p.titles.add(Title.LONE_WOLF)
+                }
+              })
+            }
           }
         }
-      }
-    })
+      })
+    }
   }
 }
 

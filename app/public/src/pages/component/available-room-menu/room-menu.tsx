@@ -4,7 +4,7 @@ import firebase from "firebase/compat/app"
 import React, { Dispatch, SetStateAction, useState } from "react"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { ICustomLobbyState, IPreparationMetadata } from "../../../../../types"
+import { ICustomLobbyState, IGameMetadata, IPreparationMetadata } from "../../../../../types"
 import RoomItem from "./room-item"
 import PreparationState from "../../../../../rooms/states/preparation-state"
 import { leaveLobby } from "../../../stores/LobbyStore"
@@ -12,6 +12,8 @@ import { ILobbyUser } from "../../../../../models/colyseus-models/lobby-user"
 import GameRoomItem from "./game-room-item"
 import "./room-menu.css"
 import { throttle } from "../../../../../utils/function"
+import GameState from "../../../../../rooms/states/game-state"
+import { useNavigate } from "react-router"
 
 export default function RoomMenu(props: {
   toPreparation: boolean
@@ -31,6 +33,8 @@ export default function RoomMenu(props: {
   const uid: string = useAppSelector((state) => state.network.uid)
   const lobbyUsers: ILobbyUser[] = useAppSelector((state) => state.lobby.users)
   const [isJoining, setJoining] = useState<boolean>(false)
+
+  const navigate = useNavigate();
 
   const createRoom = throttle(async function create() {
     if (lobby && !props.toPreparation && !isJoining) {
@@ -76,6 +80,25 @@ export default function RoomMenu(props: {
     }
   }, 1000)
 
+  const spectateRoom = throttle(async function spectate(selectedRoom: RoomAvailable<IGameMetadata>) {
+    if (lobby && !isJoining) {
+      setJoining(true)
+      const token = await firebase.auth().currentUser?.getIdToken()
+      if (token) {
+        const game: Room<GameState> = await client.joinById(selectedRoom.roomId, {
+          idToken: token,
+          spectate: true
+        })
+        localStorage.setItem("lastRoomId", game.id)
+        localStorage.setItem("lastSessionId", game.sessionId)
+        await lobby.leave()
+        game.connection.close()
+        dispatch(leaveLobby())
+        navigate("/game")
+      }
+    }
+  }, 1000)
+
   return (
     <Tabs className="nes-container room-menu">
       <TabList>
@@ -102,7 +125,7 @@ export default function RoomMenu(props: {
         <ul className="hidden-scrollable">
           {gameRooms.map((r) => (
             <li key={r.roomId}>
-              <GameRoomItem room={r} />
+              <GameRoomItem room={r} onSpectate={() => spectateRoom(r) }/>
             </li>
           ))}
         </ul>
