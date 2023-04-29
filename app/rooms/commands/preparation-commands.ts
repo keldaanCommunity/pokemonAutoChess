@@ -418,8 +418,8 @@ export class OnRemoveBotCommand extends Command<
         return
       }
 
-      const name = this.state.users.get(target).name
-      if (this.state.users.delete(target)) {
+      const name = this.state.users.get(target)?.name
+      if (name && this.state.users.delete(target)) {
         this.room.broadcast(Transfer.MESSAGES, {
           name: user?.displayName ? user.displayName : "Server",
           payload: `Bot ${name} removed.`,
