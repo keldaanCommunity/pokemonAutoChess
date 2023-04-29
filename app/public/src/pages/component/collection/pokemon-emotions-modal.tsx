@@ -1,6 +1,7 @@
 import React from "react"
 import Modal from "react-bootstrap/esm/Modal"
-import { useAppSelector } from "../../../hooks"
+import { useAppDispatch, useAppSelector } from "../../../hooks"
+import { buyBooster } from "../../../stores/NetworkStore"
 import PokemonEmotion from "./pokemon-emotion"
 import { getPortraitSrc } from "../../../utils"
 import { Pkm } from "../../../../../types/enum/Pokemon"
@@ -16,6 +17,7 @@ export default function PokemonEmotionsModal(props: {
     pokemon: Pkm,
     onHide: () => any
 }) {
+    const dispatch = useAppDispatch()
     const pokemonCollection = useAppSelector((state) => state.lobby.pokemonCollection)
     const metadata = tracker as unknown as { [key: string]: ITracker }
 
@@ -43,6 +45,7 @@ export default function PokemonEmotionsModal(props: {
     }
     
     const pConfig = pokemonCollection.find((c) => c.id == p.index)
+    const dust = pConfig?.dust ?? 0
 
     return (
         <Modal
@@ -58,7 +61,7 @@ export default function PokemonEmotionsModal(props: {
               <h1>{props.pokemon}</h1>
               <div className="spacer"/>
               <p className="dust">
-                {pConfig ? pConfig.dust : 0} <img src={getPortraitSrc(p.index)} alt="dust" />                
+                {dust} <img src={getPortraitSrc(p.index)} alt="dust" />                
               </p>
             </Modal.Title>
           </Modal.Header>
@@ -75,7 +78,7 @@ export default function PokemonEmotionsModal(props: {
                       unlocked={pConfig && pConfig.emotions.includes(e)}
                       path={p.index.replace("-", "/")}
                       emotion={e}
-                      dust={pConfig?.dust ?? 0}
+                      dust={dust}
                     />
                   )
                 })}
@@ -93,7 +96,7 @@ export default function PokemonEmotionsModal(props: {
                       unlocked={pConfig && pConfig.shinyEmotions.includes(e)}
                       path={`${p.index.replace("-", "/")}/0000/0001`}
                       emotion={e}
-                      dust={pConfig?.dust ?? 0}
+                      dust={dust}
                     />
                   )
                 })}
@@ -101,6 +104,12 @@ export default function PokemonEmotionsModal(props: {
             </section>
           </Modal.Body>
           <Modal.Footer>
+            <button 
+              className="bubbly blue"
+              disabled={dust < 500} 
+              onClick={() => dispatch(buyBooster({ index: p.index }))}
+            >Buy a new booster for 500 <img src={getPortraitSrc(p.index)} alt="dust" /></button>
+            <div className="spacer"></div>
             <button className="bubbly red" onClick={props.onHide}>
               Close
             </button>

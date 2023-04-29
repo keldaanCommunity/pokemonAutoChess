@@ -43,7 +43,7 @@ export default function Chat(props: { source: string }) {
           className="my-input"
         />
         <button
-          className={user?.anonymous ? "bubbly disabled" : "bubbly blue"}
+          className="bubbly blue"
           disabled={user?.anonymous}
           title={
             user?.anonymous

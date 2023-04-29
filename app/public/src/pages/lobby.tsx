@@ -327,7 +327,7 @@ export default function Lobby() {
           {user?.anonymous === false ?
           <button
             disabled={user?.anonymous === false}
-            className={user?.anonymous === false ?"bubbly green is-disabled" : "bubbly green"}
+            className="bubbly green"
             onClick={() => {
               if (user?.anonymous === false && botList.length == 0) {
                 dispatch(requestBotList())
