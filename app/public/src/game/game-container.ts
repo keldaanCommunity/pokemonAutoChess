@@ -38,6 +38,7 @@ class GameContainer {
   player: Player | undefined
   tilemap: DesignTiled | undefined
   uid: string
+  spectate: boolean
   constructor(div: HTMLDivElement, uid: string, room: Room<GameState>) {
     this.room = room
     this.div = div
@@ -45,10 +46,12 @@ class GameContainer {
     this.player = undefined
     this.tilemap = undefined
     this.uid = uid
+    this.spectate = false
     this.initializeEvents()
   }
 
   initializeGame() {
+    if(this.game != null) return; // prevent initializing twice
     // Create Phaser game
     const config = {
       type: Phaser.CANVAS,
@@ -74,7 +77,8 @@ class GameContainer {
     this.game = new Phaser.Game(config)
     this.game.scene.start("gameScene", {
       room: this.room,
-      tilemap: this.tilemap
+      tilemap: this.tilemap,
+      spectate: this.spectate
     })
   }
 
@@ -112,7 +116,7 @@ class GameContainer {
 
   setTilemap(tilemap) {
     this.tilemap = tilemap
-    if (this.player) {
+    if (this.player || (this.spectate && this.room.state.players.size > 0)) {
       // console.log('setTilemap', this.player, this.tilemap);
       this.initializeGame()
     }
@@ -126,6 +130,9 @@ class GameContainer {
         // console.log('initializePlayer', this.player, this.tilemap);
         this.initializeGame()
       }
+    }
+    else if(this.spectate && this.tilemap) {
+      this.initializeGame()
     }
 
     player.board.onAdd = ((pokemon, key) => {
@@ -271,6 +278,15 @@ class GameContainer {
       this.handlePokemonRemove(player.id, pokemon)
     }
     player.triggerAll()
+  }
+
+  initializeSpectactor(uid: string){
+    if (this.uid === uid) {
+      this.spectate = true
+      if (this.tilemap && this.room.state.players.size > 0) {
+        this.initializeGame()
+      }
+    }
   }
 
   handlePokemonAdd(playerId: string, pokemon: IPokemonEntity) {

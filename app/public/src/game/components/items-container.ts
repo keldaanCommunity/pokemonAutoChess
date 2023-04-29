@@ -1,4 +1,4 @@
-import { SetSchema } from "@colyseus/schema"
+import { CollectionSchema, SetSchema } from "@colyseus/schema"
 import { GameObjects } from "phaser"
 import ItemContainer from "./item-container"
 import { Item } from "../../../../types/enum/Item"
@@ -10,7 +10,7 @@ export default class ItemsContainer extends GameObjects.Container {
 
   constructor(
     scene: Phaser.Scene,
-    inventory: SetSchema<Item>,
+    inventory: SetSchema<Item> | CollectionSchema<Item>,
     x: number,
     y: number,
     pokemonId: string | null,

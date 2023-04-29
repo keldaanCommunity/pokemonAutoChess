@@ -6,7 +6,7 @@ import Design, { DesignTiled } from "../../core/design"
 import BotManager from "../../core/bot-manager"
 import { DungeonData, Dungeon, StageDuration } from "../../types/Config"
 import { GamePhaseState } from "../../types/enum/Game"
-import { Schema, MapSchema, ArraySchema, type } from "@colyseus/schema"
+import { Schema, MapSchema, ArraySchema, type, SetSchema } from "@colyseus/schema"
 import { Pkm } from "../../types/enum/Pokemon"
 import { pickRandomIn } from "../../utils/random"
 
@@ -21,6 +21,7 @@ export default class GameState extends Schema {
   @type("uint8") stageLevel = 0
   @type("string") mapName: string
   @type("boolean") noElo = false
+  @type({ set: "string" }) spectators = new SetSchema<string>()
   time = StageDuration[0] * 1000
   botManager: BotManager = new BotManager()
   shop: Shop = new Shop()

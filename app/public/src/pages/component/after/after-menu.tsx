@@ -41,20 +41,20 @@ export default function AfterMenu() {
   const noElo = useAppSelector((state) => state.after.noElo)
   const currentPlayerId: string = useAppSelector((state) => state.network.uid)
   const currentPlayer = players.find((p) => p.id === currentPlayerId)
-  if (!currentPlayer) return null
-  const playerRank = currentPlayer!.rank
-  const newElo = computeElo(players, currentPlayer)
+  const playerRank = currentPlayer ? currentPlayer.rank : null
+  const newElo = currentPlayer ? computeElo(players, currentPlayer) : null
+  const shouldShowElo = !noElo && currentPlayer && newElo
 
   return (
     <div className="after-menu">
       <div className="nes-container is-centered">
-        <div className="player-rank">
+        {playerRank && <div className="player-rank">
           {playerRank <= 3 && (
             <img src={`/assets/ui/rank${playerRank}.png`} alt="" />
           )}
           <span>{getRankLabel(playerRank)}</span>
-        </div>
-        {!noElo && <p className="player-elo">
+        </div>}
+        {shouldShowElo && <p className="player-elo">
           ELO {newElo} ({ (newElo >= currentPlayer.elo ? '+' : '-') + Math.abs(newElo - currentPlayer.elo)})
         </p>}
         <table>

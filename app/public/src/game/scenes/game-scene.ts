@@ -52,6 +52,7 @@ export default class GameScene extends Scene {
   minigameManager: MinigameManager
   loadingManager: LoadingManager
   started: boolean
+  spectate: boolean
 
   constructor() {
     super({
@@ -60,9 +61,14 @@ export default class GameScene extends Scene {
     })
   }
 
-  init(data) {
+  init(data: {
+    room: Room<GameState>,
+    tilemap: DesignTiled,
+    spectate: boolean
+  }) {
     this.tilemap = data.tilemap
     this.room = data.room
+    this.spectate = data.spectate
     this.uid = firebase.auth().currentUser?.uid
     this.started = false
   }
@@ -107,9 +113,15 @@ export default class GameScene extends Scene {
         this.room.state.avatars,
         this.room.state.floatingItems
       )
+
+      const playerUids: string[] = []
+      this.room.state.players.forEach(p => playerUids.push(p.id))
+
+      const player = this.room.state.players.get(this.spectate ? playerUids[0] : this.uid) as Player
+
       this.itemsContainer = new ItemsContainer(
         this,
-        this.room.state.players[this.uid].items,
+        player.items,
         22 * 24 + 10,
         5 * 24 + 10,
         null,
@@ -117,16 +129,17 @@ export default class GameScene extends Scene {
       )
       this.board = new BoardManager(
         this,
-        this.room.state.players[this.uid],
+        player,
         this.animationManager,
         this.uid
       )
       this.battle = new BattleManager(
         this,
         this.battleGroup,
-        this.room.state.players[this.uid],
+        player,
         this.animationManager
       )
+     
       this.weatherManager = new WeatherManager(this)
       this.unownManager = new UnownManager(
         this,
@@ -307,6 +320,7 @@ export default class GameScene extends Scene {
         pointer.rightButtonDown() &&
         this.minigameManager &&
         this.room?.state.phase === GamePhaseState.MINIGAME
+        && !this.spectate
       ) {
         const vector = this.minigameManager.getVector(pointer.x, pointer.y)
         this.room?.send(Transfer.VECTOR, vector)
