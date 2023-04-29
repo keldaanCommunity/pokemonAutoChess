@@ -127,24 +127,33 @@ export class OnPokemonPropositionCommand extends Command<
 > {
   execute({ playerId, pkm }) {
     const player = this.state.players.get(playerId)
-    if (player && !this.state.additionalPokemons.includes(pkm)) {
+    if (player && !this.state.additionalPokemons.includes(pkm) && this.room.getBenchSize(player.board) < 8) {
       if (AdditionalPicksStages.includes(this.state.stageLevel)) {
         this.state.additionalPokemons.push(pkm)
         this.state.shop.addAdditionalPokemon(pkm)
       }
-      if (this.room.getBenchSize(player.board) < 8) {
-        const pokemon = PokemonFactory.createPokemonFromName(
-          pkm,
-          player.pokemonCollection.get(PkmIndex[pkm])
-        )
+      const pokemon = PokemonFactory.createPokemonFromName(
+        pkm,
+        player.pokemonCollection.get(PkmIndex[pkm])
+      )
+
+      let allowBuy = true
+      if (pokemon.rarity === Rarity.MYTHICAL) {
+        player.board.forEach((p) => {
+          if (p.name === pokemon.name) {
+            allowBuy = false
+          }
+        })
+      }
+      if(allowBuy){
         const x = this.room.getFirstAvailablePositionInBench(player.id)
         pokemon.positionX = x !== undefined ? x : -1
         pokemon.positionY = 0
         player.board.set(pokemon.id, pokemon)
-      }
-
-      while (player.pokemonsProposition.length > 0) {
-        player.pokemonsProposition.pop()
+  
+        while (player.pokemonsProposition.length > 0) {
+          player.pokemonsProposition.pop()
+        }
       }
     }
   }
