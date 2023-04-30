@@ -1332,7 +1332,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.GROUDON]: Pkm.GROUDON,
   [Pkm.KYOGRE]: Pkm.KYOGRE,
   [Pkm.RAYQUAZA]: Pkm.RAYQUAZA,
-  [Pkm.MEGA_RAYQUAZA]: Pkm.MEGA_RAYQUAZA,
+  [Pkm.MEGA_RAYQUAZA]: Pkm.RAYQUAZA,
   [Pkm.PALKIA]: Pkm.PALKIA,
   [Pkm.DIALGA]: Pkm.DIALGA,
   [Pkm.GIRATINA]: Pkm.GIRATINA,
