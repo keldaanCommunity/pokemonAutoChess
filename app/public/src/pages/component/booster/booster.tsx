@@ -40,7 +40,8 @@ export default function Booster(props: { toggle: () => void }) {
                 dispatch(openBooster())
               }
             }}
-            className={cc("bubbly", { blue: numberOfBooster > 0, disabled: numberOfBooster <= 0 })}
+            className={cc("bubbly", { blue: numberOfBooster > 0 })}
+            disabled={numberOfBooster <= 0}
           >
             Open a Booster
           </button>

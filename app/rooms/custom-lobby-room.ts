@@ -565,6 +565,35 @@ export default class CustomLobbyRoom extends LobbyRoom {
       }
     )
 
+    this.onMessage(
+      Transfer.BUY_BOOSTER,
+      (
+        client,
+        message: { index: string }
+      ) => {
+        try {
+          const user: LobbyUser = this.state.users.get(client.auth.uid)
+          const pokemonConfig = user.pokemonCollection.get(message.index)
+          if (pokemonConfig) {
+            const BOOSTER_COST = 500
+            if (pokemonConfig.dust >= BOOSTER_COST) {
+              pokemonConfig.dust -= BOOSTER_COST
+              user.booster += 1
+              UserMetadata.findOne({ uid: client.auth.uid }, (err, u) => {
+                if (u) {
+                  u.pokemonCollection.get(message.index).dust = pokemonConfig.dust
+                  u.booster = user.booster
+                  u.save()
+                }
+              })
+            }
+          }
+        } catch (error) {
+          logger.error(error)
+        }
+      }
+    )
+
     this.onMessage(Transfer.SEARCH_BY_ID, (client, message) => {
       try {
         UserMetadata.findOne({ uid: message }, (err, user) => {

@@ -178,6 +178,9 @@ export const networkSlice = createSlice({
     ) => {
       state.lobby?.send(Transfer.BUY_EMOTION, action.payload)
     },
+    buyBooster: (state, action: PayloadAction<{ index: string; }>) => {
+      state.lobby?.send(Transfer.BUY_BOOSTER, action.payload)
+    },
     openBooster: (state) => {
       state.lobby?.send(Transfer.OPEN_BOOSTER)
     },
@@ -234,6 +237,7 @@ export const {
   openBooster,
   changeSelectedEmotion,
   buyEmotion,
+  buyBooster,
   changeRoomName,
   changeRoomPassword,
   gameStart,

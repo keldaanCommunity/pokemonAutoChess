@@ -277,11 +277,11 @@ p:last-child {
   text-shadow: 2px 2px 2px #00000040;
 }
 
-.bubbly:hover {
+.bubbly:not([disabled]):hover {
   background: #e7e7e7;
 }
 
-.bubbly:active {
+.bubbly:not([disabled]):active {
   background: #cfcfcf;
   box-shadow: inset 6px 6px 0px 0px #e7e7e7;
 }
@@ -292,11 +292,11 @@ p:last-child {
   color: white;
 }
 
-.bubbly.green:hover {
+.bubbly.green:not([disabled]):hover {
   background: #76c442;
 }
 
-.bubbly.green:active {
+.bubbly.green:not([disabled]):active {
   background: #92cc41;
   box-shadow: inset 6px 6px 0px 0px #65a013;
 }
@@ -307,11 +307,11 @@ p:last-child {
   color: black;
 }
 
-.bubbly.orange:hover {
+.bubbly.orange:not([disabled]):hover {
   background: #e7c819;
 }
 
-.bubbly.orange:active {
+.bubbly.orange:not([disabled]):active {
   background: #f7d51d;
   box-shadow: inset 6px 6px 0px 0px #c9ae17;
 }
@@ -322,11 +322,11 @@ p:last-child {
   color: white;
 }
 
-.bubbly.red:hover {
+.bubbly.red:not([disabled]):hover {
   background: #c25c48;
 }
 
-.bubbly.red:active {
+.bubbly.red:not([disabled]):active {
   background: #761c1e;
   box-shadow: inset 6px 6px 0px 0px #8c2022;
 }
@@ -337,21 +337,13 @@ p:last-child {
   color: white;
 }
 
-.bubbly.blue:hover {
+.bubbly.blue:not([disabled]):hover {
   background: #1195ec;
 }
 
-.bubbly.blue:active {
+.bubbly.blue:not([disabled]):active {
   background: #109fff;
   box-shadow: inset 6px 6px 0px 0px #108de0;
-}
-
-.bubbly.disabled {
-  background: #d3d3d3;
-  box-shadow: inset -6px -6px 0px 0px #adafbc;
-  color: #757575;
-  opacity: 0.6;
-  cursor: not-allowed;
 }
 
 .bubbly.pink {  
@@ -360,9 +352,21 @@ p:last-child {
   box-shadow: inset -6px -6px 0px 0px #902c74;  
 }
 
-.bubbly.pink:active {
+.bubbly.pink:not([disabled]):hover {
+  background: #eb55ac;
+}
+
+.bubbly.pink:not([disabled]):active {
   background: #ee2097;
   box-shadow: inset 6px 6px 0px 0px #902c74;  
+}
+
+.bubbly[disabled] {
+  background: #d3d3d3;
+  box-shadow: inset -6px -6px 0px 0px #adafbc;
+  color: #757575;
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .firebaseui-idp-button {
