@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import ReactTooltip from "react-tooltip";
 import PRECOMPUTED_TYPE_POKEMONS_ALL from "../../../../../models/precomputed/type-pokemons-all.json"
+import PRECOMPUTED_TYPE_POKEMONS from "../../../../../models/precomputed/type-pokemons.json"
 import {
   SynergyName,
   SynergyDetail,
@@ -19,6 +20,7 @@ import { groupBy, deduplicateArray } from "../../../../../utils/array";
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon";
 import { Rarity } from "../../../../../types/enum/Game";
 import { addIconsToDescription } from "../../utils/descriptions";
+import { cc } from "../../utils/jsx";
 
 export default function WikiType(props: { type: Synergy | "all" }) {
   const [hoveredPokemon, setHoveredPokemon] = useState<Pokemon>();
@@ -37,9 +39,18 @@ export default function WikiType(props: { type: Synergy | "all" }) {
 
       // remove if already one member of family in the list
       return list.findIndex(b => PkmFamily[a.name] === PkmFamily[b.name]) === index
-    }) 
+    })
     
   const pokemonsPerRarity = groupBy(pokemons, p => p.rarity)
+  for(let rarity in pokemonsPerRarity){
+    pokemonsPerRarity[rarity].sort((a,b) => +isAdditionalPick(a.name) - +isAdditionalPick(b.name))
+  }
+
+  function isAdditionalPick(pkm: Pkm): boolean{
+    const pokemon = PokemonFactory.createPokemonFromName(pkm)
+    return PRECOMPUTED_TYPE_POKEMONS[pokemon.types[0]].additionalPokemons.includes(pkm)
+  }
+
   return (
     <div style={{padding: "1em"}}>
       {props.type !== "all" && (<>
@@ -62,11 +73,14 @@ export default function WikiType(props: { type: Synergy | "all" }) {
           return <tr key={rarity}>
             <td style={{ color: RarityColor[rarity] }}>{rarity}</td>
             <td>{(pokemonsPerRarity[rarity] ?? []).map(p => {
-              return <img key={p.name} src={getPortraitSrc(p.index)} alt={p.name} title={p.name}
-                data-tip data-for="pokemon-detail"
-                onMouseOver={() => {
-                  setHoveredPokemon(p)
-                }} />})}
+              return <div key={p.name} className={cc('pokemon-portrait', { additional: isAdditionalPick(p.name)})}>
+                <img src={getPortraitSrc(p.index)} alt={p.name} title={p.name}
+                  data-tip data-for="pokemon-detail"
+                  onMouseOver={() => {
+                    setHoveredPokemon(p)
+                  }} />
+              </div>
+            })}
             </td>
           </tr>
         })}
