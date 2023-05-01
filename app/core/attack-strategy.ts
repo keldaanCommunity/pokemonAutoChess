@@ -935,6 +935,26 @@ export class TwistingNeitherStrategy extends AttackStrategy {
     })
   }
 }
+
+export class DarkVoidStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    const damage = 30
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
+      if (tg && pokemon.team != tg.team) {
+        tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
+        if(tg.status.silence){
+          tg.status.triggerSleep(2000, tg)
+        }
+      }
+    })
+  }
+}
 export class KingShieldStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,

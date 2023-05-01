@@ -132,7 +132,8 @@ import {
   SpectralThiefStrategy,
   GeomancyStrategy,
   DeathWingStrategy,
-  SlackOffStrategy
+  SlackOffStrategy,
+  DarkVoidStrategy
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -270,7 +271,8 @@ export enum Ability {
   SPECTRAL_THIEF = "SPECTRAL_THIEF",
   GEOMANCY = "GEOMANCY",
   DEATH_WING = "DEATH_WING",
-  SLACK_OFF = "SLACK_OFF"
+  SLACK_OFF = "SLACK_OFF",
+  DARK_VOID = "DARK_VOID"
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -408,5 +410,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.SPECTRAL_THIEF]: new SpectralThiefStrategy(),
   [Ability.GEOMANCY]: new GeomancyStrategy(),
   [Ability.DEATH_WING]: new DeathWingStrategy(),
-  [Ability.SLACK_OFF]: new SlackOffStrategy()
+  [Ability.SLACK_OFF]: new SlackOffStrategy(),
+  [Ability.DARK_VOID]: new DarkVoidStrategy()
 }

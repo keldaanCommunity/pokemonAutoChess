@@ -813,6 +813,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.DARK_VOID]: {
+    eng: "Dark Void",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1626,7 +1632,13 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     fra: ""
   },
   [Ability.SLACK_OFF]: {
-    eng: `Clear all negative status, heal 50% of the pokemon hp (scale with ${Stat.AP}) and put the caster asleep for 3s`,
+    eng: `Clear all negative status, heal 50% of the pokemon hp (scale with ${Stat.AP}) and put the caster ${Status.SLEEP} for 3s`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.DARK_VOID]: {
+    eng: `Deals [30, SP] ${Damage.SPECIAL} to all enemies. If any affected target was ${Status.SILENCE}, they are put to ${Status.SLEEP} for 2s`,
     esp: "",
     prt: "",
     fra: ""
