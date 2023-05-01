@@ -7232,7 +7232,7 @@ export class Darkrai extends Pokemon {
       AttackSprite.GHOST_RANGE,
       AttackType.PHYSICAL,
       2,
-      100,
+      120,
       Ability.DARK_VOID,
       shiny,
       emotion,

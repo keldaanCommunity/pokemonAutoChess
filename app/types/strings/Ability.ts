@@ -1638,7 +1638,7 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     fra: ""
   },
   [Ability.DARK_VOID]: {
-    eng: `Deals [30, SP] ${Damage.SPECIAL} to all enemies. If any affected target was ${Status.SILENCE}, they are put to ${Status.SLEEP} for 2s`,
+    eng: `Deals [30, SP] ${Damage.SPECIAL} to all enemies. If any affected target was ${Status.SILENCE}, they are put ${Status.SLEEP} for 2s`,
     esp: "",
     prt: "",
     fra: ""
