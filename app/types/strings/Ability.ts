@@ -807,6 +807,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.SLACK_OFF]: {
+    eng: "Slack Off",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1615,6 +1621,12 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
   },
   [Ability.DEATH_WING]: {
     eng: `Deals [150,SP] ${Damage.SPECIAL} and heals for 75% of the damage taken by the target`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.SLACK_OFF]: {
+    eng: `Clear all negative status, heal 50% of the pokemon hp (scale with ${Stat.AP}) and put the caster asleep for 3s`,
     esp: "",
     prt: "",
     fra: ""

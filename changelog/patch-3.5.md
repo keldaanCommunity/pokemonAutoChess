@@ -3,6 +3,9 @@
 
 # Changes to Pokemon
 
+New Ability Slack off : Clear all negative status, heal 50% of the pokemon hp (scale with AP) and put the caster asleep for 3s
+Snorlax: New Slack off ability
+Slacking: New Slack off ability
 
 # Changes to Synergies
 

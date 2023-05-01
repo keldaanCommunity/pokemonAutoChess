@@ -255,6 +255,20 @@ export class SongOfDesireStrategy extends AttackStrategy {
   }
 }
 
+export class SlackOffStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity
+  ) {
+    super.process(pokemon, state, board, target)
+    pokemon.status.clearNegativeStatus()
+    pokemon.handleHeal(pokemon.hp / 2, pokemon, true)
+    pokemon.status.triggerSleep(3000, pokemon)
+  }
+}
+
 export class ConfusingMindStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
