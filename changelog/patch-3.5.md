@@ -4,8 +4,10 @@
 # Changes to Pokemon
 
 New Ability Slack off : Clear all negative status, heal 50% of the pokemon hp (scale with AP) and put the caster asleep for 3s
+New Ability Dark void: Deals 30 special damage to all enemies. If any affected target was Silenced, they are put to sleep for 2s
 Snorlax: New Slack off ability
 Slacking: New Slack off ability
+Darkrai: New Dark void ability
 
 # Changes to Synergies
 
