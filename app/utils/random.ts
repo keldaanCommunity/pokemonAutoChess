@@ -1,14 +1,8 @@
-import { MapSchema } from "@colyseus/schema"
-
 export function coinflip(): boolean {
     return Math.random() < 0.5
 }
 
-export function pickRandomIn<T>(list: T[] | Record<any, T> | MapSchema<T>): T {
-    if(typeof list.values === "function"){ 
-        const values = [...list.values()]
-        return values[Math.floor(Math.random()*values.length)]
-    }
+export function pickRandomIn<T>(list: T[] | Record<any, T>): T {
     if(!Array.isArray(list)) return pickRandomIn(Object.values(list))
     return list[Math.floor(Math.random()*list.length)]
 }
