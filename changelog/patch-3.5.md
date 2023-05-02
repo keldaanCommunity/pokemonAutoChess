@@ -18,6 +18,7 @@ Darkrai: New Dark void ability
 
 # Gameplay
 - Add a Spectate mode for games
+- Mana generation from incoming damage is now based on incoming damage before reduction from def/spedef/items
 
 # UI
 
