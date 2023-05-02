@@ -371,7 +371,7 @@ export default class PokemonState {
                 boost = 40
                 speedBoost = 30
               }
-              board.forEach((r, c, value) => {
+              board.forEach((x, y, value) => {
                 if (
                   value !== undefined &&
                   value.team == pokemon.team &&
@@ -615,19 +615,19 @@ export default class PokemonState {
       y: number
     }>()
 
-    board.forEach((r: number, c: number, value: PokemonEntity | undefined) => {
+    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value !== undefined && value.team != pokemon.team) {
         const candidateDistance = board.distance(
           pokemon.positionX,
           pokemon.positionY,
-          r,
-          c
+          x,
+          y
         )
         if (candidateDistance < distance) {
           distance = candidateDistance
-          candidatesCoordinates = [{ x: r, y: c }]
+          candidatesCoordinates = [{ x, y }]
         } else if (candidateDistance == distance) {
-          candidatesCoordinates.push({ x: r, y: c })
+          candidatesCoordinates.push({ x, y })
         }
       }
     })
@@ -644,10 +644,10 @@ export default class PokemonState {
   ): { x: number; y: number } | undefined {
     const pokemons = new Array<{ distance: number; x: number; y: number }>()
 
-    board.forEach((r: number, c: number, value: PokemonEntity | undefined) => {
+    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value !== undefined && value.team != pokemon.team) {
-        const d = board.distance(pokemon.positionX, pokemon.positionY, r, c)
-        pokemons.push({ distance: d, x: r, y: c })
+        const distance = board.distance(pokemon.positionX, pokemon.positionY, x, y)
+        pokemons.push({ distance, x, y })
       }
     })
 
@@ -670,16 +670,16 @@ export default class PokemonState {
     let y: number | undefined = undefined
     const team = pokemon.team
     const emptyPlaces = new Array<{ x: number; y: number; neighbour: number }>()
-    board.forEach((r: number, c: number, value: PokemonEntity | undefined) => {
+    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value === undefined) {
-        const cells = board.getAdjacentCells(r, c)
+        const cells = board.getAdjacentCells(x, y)
         let n = 0
         cells.forEach((cell) => {
           if (cell.value && cell.value.team !== team) {
             n++
           }
         })
-        emptyPlaces.push({ x: r, y: c, neighbour: n })
+        emptyPlaces.push({ x, y, neighbour: n })
       }
     })
 
@@ -693,7 +693,7 @@ export default class PokemonState {
     }
 
     if (x !== undefined && y !== undefined) {
-      return { x: x, y: y }
+      return { x, y }
     } else {
       return undefined
     }
@@ -707,10 +707,10 @@ export default class PokemonState {
     let y: number | undefined = undefined
     const pokemons = new Array<{ distance: number; x: number; y: number }>()
 
-    board.forEach((r: number, c: number, value: PokemonEntity | undefined) => {
+    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value !== undefined && value.team != pokemon.team) {
-        const d = board.distance(pokemon.positionX, pokemon.positionY, r, c)
-        pokemons.push({ distance: d, x: r, y: c })
+        const distance = board.distance(pokemon.positionX, pokemon.positionY, x, y)
+        pokemons.push({ distance, x, y })
       }
     })
 
@@ -724,19 +724,14 @@ export default class PokemonState {
 
       around.sort((a, b) => {
         return (
-          board.distance(
-            b.row,
-            b.column,
-            pokemon.positionX,
-            pokemon.positionY
-          ) -
-          board.distance(a.row, a.column, pokemon.positionX, pokemon.positionY)
+          board.distance(b.x, b.y, pokemon.positionX, pokemon.positionY) -
+          board.distance(a.x, a.y, pokemon.positionX, pokemon.positionY)
         )
       })
       around.forEach((cell) => {
         if (!cell.value && x === undefined && y === undefined) {
-          x = cell.row
-          y = cell.column
+          x = cell.x
+          y = cell.y
         }
       })
       if (x !== undefined && y !== undefined) {
@@ -744,7 +739,7 @@ export default class PokemonState {
       }
     }
     if (x !== undefined && y !== undefined) {
-      return { x: x, y: y }
+      return { x, y }
     } else {
       return undefined
     }
@@ -760,19 +755,19 @@ export default class PokemonState {
       y: number
     }>()
 
-    board.forEach((r: number, c: number, value: PokemonEntity | undefined) => {
+    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value !== undefined && value.id != pokemon.id) {
         const candidateDistance = board.distance(
           pokemon.positionX,
           pokemon.positionY,
-          r,
-          c
+          x,
+          y
         )
         if (candidateDistance < distance) {
           distance = candidateDistance
-          candidatesCoordinates = [{ x: r, y: c }]
+          candidatesCoordinates = [{ x, y }]
         } else if (candidateDistance == distance) {
-          candidatesCoordinates.push({ x: r, y: c })
+          candidatesCoordinates.push({ x, y })
         }
       }
     })

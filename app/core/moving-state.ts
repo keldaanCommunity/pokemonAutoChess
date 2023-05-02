@@ -63,14 +63,14 @@ export default class MovingState extends PokemonState {
           const candidateDistance = board.distance(
             coordinates.x,
             coordinates.y,
-            cell.row,
-            cell.column
+            cell.x,
+            cell.y
           )
-          // logger.debug(`Candidate (${cell.row},${cell.column}) to ${coordinates}, distance: ${candidateDistance}`);
+          // logger.debug(`Candidate (${cell.x},${cell.y}) to ${coordinates}, distance: ${candidateDistance}`);
           if (candidateDistance < distance) {
             distance = candidateDistance
-            x = cell.row
-            y = cell.column
+            x = cell.x
+            y = cell.y
           }
         }
       })

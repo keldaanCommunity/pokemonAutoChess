@@ -27,17 +27,9 @@ export const OrientationArray: Orientation[] = [
 export function effectInLine(
     board: Board,
     pokemon: PokemonEntity,
-    target: PokemonEntity | Orientation,
+    orientation: Orientation,
     effect: (target: PokemonEntity) => void
 ){
-    const orientation: Orientation = target instanceof PokemonEntity ? board.orientation(
-        pokemon.positionX,
-        pokemon.positionY,
-        target.positionX,
-        target.positionY,
-        pokemon,
-        target
-    ) : target
 
     const targetsHit = new Set()
 
@@ -97,11 +89,5 @@ export function effectInLine(
                 applyEffect(x, y)
             }
             break;
-    }
-
-    if(target instanceof PokemonEntity && targetsHit.has(target) === false){
-        // should at least touch the original target
-        // this can happen when target has an angle in between 45 degrees modulo, see https://discord.com/channels/737230355039387749/1098262507505848523
-        effect(target)
     }
 }
