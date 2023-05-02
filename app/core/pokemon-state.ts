@@ -17,14 +17,14 @@ export default class PokemonState {
     pokemon: IPokemonEntity,
     heal: number,
     caster: IPokemonEntity,
-    apBoost?: boolean
+    apBoost: number = 0
   ): void {
     if (
       pokemon.life > 0 &&
       pokemon.life < pokemon.hp &&
       !pokemon.status.wound
     ) {
-      const boost = apBoost ? (heal * pokemon.ap) / 100 : 0
+      const boost = apBoost ? (heal * apBoost * pokemon.ap) / 100 : 0
       let healBoosted = Math.round(heal + boost)
       if (pokemon.skill === Ability.WONDER_GUARD) {
         healBoosted = 1
@@ -297,14 +297,14 @@ export default class PokemonState {
             attacker.handleHeal(
               Math.floor(lifesteal * residualDamage),
               attacker,
-              false
+              0
             )
           }
           if (attacker.items.has(Item.SHELL_BELL)) {
             attacker.handleHeal(
               Math.floor(0.3 * residualDamage),
               attacker,
-              false
+              0
             )
           }
 
@@ -380,7 +380,7 @@ export default class PokemonState {
                   let _pokemon = pokemon // beware of closure vars
                   pokemon.simulation.room.clock.setTimeout(() => {
                     value.count.fieldCount++
-                    value.handleHeal((boost / 100) * value.hp, _pokemon, false)
+                    value.handleHeal((boost / 100) * value.hp, _pokemon, 0)
                     value.handleAttackSpeed(speedBoost)
                   }, 16) // delay to next tick, targeting 60 ticks per second
                 }
@@ -434,7 +434,7 @@ export default class PokemonState {
           }
           attacker.addSpecialDefense(defBoost)
           attacker.addDefense(defBoost)
-          attacker.handleHeal(healBoost, attacker, false)
+          attacker.handleHeal(healBoost, attacker, 0)
           attacker.addAttack(attackBoost)
           attacker.count.monsterExecutionCount++
         }

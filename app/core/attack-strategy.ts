@@ -264,8 +264,9 @@ export class SlackOffStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target)
     pokemon.status.clearNegativeStatus()
-    pokemon.handleHeal(pokemon.hp / 2, pokemon, true)
-    pokemon.status.triggerSleep(3000, pokemon)
+    const healFactor = (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) ? 0.5 : pokemon.stars === 2 ? 0.4 : 0.3
+    pokemon.handleHeal(pokemon.hp * healFactor, pokemon, 0.5)
+    pokemon.status.triggerSleep(5000, pokemon)
   }
 }
 
@@ -364,7 +365,7 @@ export class IllusionStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target)
     const heal = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 80 : 40
-    pokemon.handleHeal(heal, pokemon, true)
+    pokemon.handleHeal(heal, pokemon, 1)
     if (target) {
       pokemon.index = target.index
       pokemon.atk = Math.max(pokemon.atk, target.atk)
@@ -825,7 +826,7 @@ export class LeechSeedStrategy extends AttackStrategy {
       duration = 6000
       heal = 80
     }
-    pokemon.handleHeal(heal, pokemon, true)
+    pokemon.handleHeal(heal, pokemon, 1)
     target.status.triggerPoison(duration, target, pokemon, board)
   }
 }
@@ -2300,7 +2301,7 @@ export class WishStrategy extends AttackStrategy {
         count > 0 &&
         ally.life < ally.hp
       ) {
-        ally.handleHeal(heal, pokemon, true)
+        ally.handleHeal(heal, pokemon, 1)
         count -= 1
       }
     })
@@ -2589,7 +2590,7 @@ export class BiteStrategy extends AttackStrategy {
         break
     }
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
-    pokemon.handleHeal(Math.floor(0.33 * damage), pokemon, true)
+    pokemon.handleHeal(Math.floor(0.33 * damage), pokemon, 1)
   }
 }
 
@@ -2791,11 +2792,11 @@ export class RootStrategy extends AttackStrategy {
     }
 
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
-    pokemon.handleHeal(heal, pokemon, true)
+    pokemon.handleHeal(heal, pokemon, 1)
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team == cell.value.team) {
-        cell.value.handleHeal(heal, pokemon, true)
+        cell.value.handleHeal(heal, pokemon, 1)
       }
     })
   }
@@ -2864,7 +2865,7 @@ export class DarkPulseStrategy extends AttackStrategy {
         break
     }
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
-    pokemon.handleHeal(damage, pokemon, true)
+    pokemon.handleHeal(damage, pokemon, 1)
   }
 }
 
@@ -3013,7 +3014,7 @@ export class LeechLifeStrategy extends AttackStrategy {
           AttackType.SPECIAL,
           pokemon
         )
-        pokemon.handleHeal(damage, pokemon, true)
+        pokemon.handleHeal(damage, pokemon, 1)
       }
     })
   }
@@ -3562,7 +3563,7 @@ export class PlasmaFistStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target)
     const damage = 120
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon)
-    pokemon.handleHeal(damage / 2, pokemon, true)
+    pokemon.handleHeal(damage / 2, pokemon, 1)
   }
 }
 
@@ -3678,7 +3679,7 @@ export class DeathWingStrategy extends AttackStrategy {
       pokemon
     )
     if (takenDamage > 0) {
-      pokemon.handleHeal(Math.round(0.75 * takenDamage), pokemon, false)
+      pokemon.handleHeal(Math.round(0.75 * takenDamage), pokemon, 0)
     }
   }
 }

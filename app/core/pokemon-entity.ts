@@ -213,7 +213,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  handleHeal(heal: number, caster: IPokemonEntity, apBoost: boolean) {
+  handleHeal(heal: number, caster: IPokemonEntity, apBoost: number) {
     return this.state.handleHeal(this, heal, caster, apBoost)
   }
 
