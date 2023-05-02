@@ -751,11 +751,11 @@ export class FireTrickStrategy extends AttackStrategy {
       board.swapValue(
         target.positionX,
         target.positionY,
-        teleportationCell.row,
-        teleportationCell.column
+        teleportationCell.x,
+        teleportationCell.y
       )
-      target.positionX = teleportationCell.row
-      target.positionY = teleportationCell.column
+      target.positionX = teleportationCell.x
+      target.positionY = teleportationCell.y
     }
   }
 }
@@ -920,11 +920,11 @@ export class TwistingNeitherStrategy extends AttackStrategy {
           board.swapValue(
             cell.value.positionX,
             cell.value.positionY,
-            teleportationCell.row,
-            teleportationCell.column
+            teleportationCell.x,
+            teleportationCell.y
           )
-          cell.value.positionX = teleportationCell.row
-          cell.value.positionY = teleportationCell.column
+          cell.value.positionX = teleportationCell.x
+          cell.value.positionY = teleportationCell.y
         } else {
           console.error("unable to teleport pokemon", cell.value)
         }
@@ -1164,8 +1164,10 @@ export class AuroraBeamStrategy extends AttackStrategy {
         break
     }
 
-    effectInLine(board, pokemon, target, (targetInLine) => {
-      if (targetInLine.team !== pokemon.team) {
+    const cells = board.getCellsBetween(pokemon.positionX, pokemon.positionY, target.positionX, target.positionY)
+    cells.forEach(cell => {
+      const targetInLine = cell.value
+      if (targetInLine != null && targetInLine.team !== pokemon.team) {
         targetInLine.handleSpecialDamage(
           damage,
           board,
@@ -2165,8 +2167,10 @@ export class HeatWaveStrategy extends AttackStrategy {
         break
     }
 
-    effectInLine(board, pokemon, target, (targetInLine) => {
-      if (targetInLine.team != pokemon.team) {
+    const cells = board.getCellsBetween(pokemon.positionX, pokemon.positionY, target.positionX, target.positionY)
+    cells.forEach(cell => {
+      const targetInLine = cell.value
+      if (targetInLine != null && targetInLine.team != pokemon.team) {
         targetInLine.handleSpecialDamage(
           damage,
           board,
@@ -2201,8 +2205,10 @@ export class HydroPumpStrategy extends AttackStrategy {
         break
     }
 
-    effectInLine(board, pokemon, target, (targetInLine) => {
-      if (targetInLine.team !== pokemon.team) {
+    const cells = board.getCellsBetween(pokemon.positionX, pokemon.positionY, target.positionX, target.positionY)
+    cells.forEach(cell => {
+      const targetInLine = cell.value
+      if (targetInLine != null && targetInLine.team !== pokemon.team) {
         targetInLine.handleSpecialDamage(
           damage,
           board,
@@ -3276,8 +3282,10 @@ export class HurricaneStrategy extends AttackStrategy {
         break
     }
 
-    effectInLine(board, pokemon, target, (targetInLine) => {
-      if (targetInLine.team !== pokemon.team) {
+    const cells = board.getCellsBetween(pokemon.positionX, pokemon.positionY, target.positionX, target.positionY)
+    cells.forEach(cell => {
+      const targetInLine = cell.value
+      if (targetInLine != null && targetInLine.team !== pokemon.team) {
         targetInLine.handleSpecialDamage(
           damage,
           board,
@@ -3479,8 +3487,10 @@ export class SpiritShackleStrategy extends AttackStrategy {
         break
     }
 
-    effectInLine(board, pokemon, target, (targetInLine) => {
-      if (targetInLine.team !== pokemon.team) {
+    const cells = board.getCellsBetween(pokemon.positionX, pokemon.positionY, target.positionX, target.positionY)
+    cells.forEach(cell => {
+      const targetInLine = cell.value
+      if (targetInLine != null && targetInLine.team !== pokemon.team) {
         targetInLine.handleSpecialDamage(
           damage,
           board,

@@ -173,30 +173,29 @@ export default class Simulation extends Schema implements ISimulation {
   }
 
   getFirstAvailablePlaceOnBoard(teamIndex: number): { x: number, y: number } {
-    let row = 0
-    let column = 0
+    let candidateX = 0, candidateY = 0
     if (teamIndex === 0) {
-      outerloop: for (let x = 0; x < this.board.rows; x++) {
-        for (let y = 0; y < this.board.columns; y++) {
+      outerloop: for (let y = 0; y < this.board.rows; y++) {
+        for (let x = 0; x < this.board.columns; x++) {
           if (this.board.getValue(x, y) === undefined) {
-            row = x
-            column = y
+            candidateX = x
+            candidateY = y
             break outerloop
           }
         }
       }
     } else {
-      outerloop: for (let x = 0; x < this.board.rows; x++) {
-        for (let y = this.board.columns - 1; y >= 0; y--) {
+      outerloop: for (let y = 0; y < this.board.rows; y++) {
+        for (let x = this.board.columns - 1; x >= 0; x--) {
           if (this.board.getValue(x, y) === undefined) {
-            row = x
-            column = y
+            candidateX = x
+            candidateY = y
             break outerloop
           }
         }
       }
     }
-    return { x: row, y: column }
+    return { x: candidateX, y: candidateY }
   }
 
   getClosestAvailablePlaceOnBoard(pokemon: IPokemon | IPokemonEntity, teamIndex: number): { x: number, y: number } {

@@ -5,91 +5,91 @@ import { pickRandomIn } from "../utils/random"
 import PokemonEntity from "./pokemon-entity"
 
 export type Cell = {
-  row: number
-  column: number
+  x: number
+  y: number
   value: PokemonEntity | undefined
 }
 export default class Board {
   rows: number
   columns: number
-  cell: Array<PokemonEntity | undefined>
+  cells: Array<PokemonEntity | undefined>
 
   constructor(rows: number, colums: number) {
     this.rows = rows
     this.columns = colums
-    this.cell = new Array<PokemonEntity | undefined>(this.rows * this.columns)
+    this.cells = new Array<PokemonEntity | undefined>(this.rows * this.columns)
   }
 
-  getValue(row: number, col: number): PokemonEntity | undefined {
-    if (row >= 0 && row < this.rows && col >= 0 && col < this.columns) {
-      return this.cell[this.columns * row + col]
+  getValue(x: number, y: number): PokemonEntity | undefined {
+    if (y >= 0 && y < this.rows && x >= 0 && x < this.columns) {
+      return this.cells[this.columns * y + x]
     }
   }
 
-  setValue(row: number, col: number, value: PokemonEntity | undefined) {
-    if (row >= 0 && row < this.rows && col >= 0 && col < this.columns) {
-      this.cell[this.columns * row + col] = value
+  setValue(x: number, y: number, value: PokemonEntity | undefined) {
+    if (y >= 0 && y < this.rows && x >= 0 && x < this.columns) {
+      this.cells[this.columns * y + x] = value
     }
   }
 
-  moveValue(r0: number, c0: number, r1: number, c1: number) {
-    const value = this.getValue(r0, c0)
-    this.setValue(r1, c1, value)
-    this.setValue(r0, c0, undefined)
+  moveValue(x0: number, y0: number, x1: number, y1: number) {
+    const value = this.getValue(x0, y0)
+    this.setValue(x1, y1, value)
+    this.setValue(x0, y0, undefined)
   }
 
-  swapValue(r0: number, c0: number, r1: number, c1: number) {
-    const v0 = this.getValue(r0, c0)
-    const v1 = this.getValue(r1, c1)
-    this.setValue(r1, c1, v0)
-    this.setValue(r0, c0, v1)
+  swapValue(x0: number, y0: number, x1: number, y1: number) {
+    const v0 = this.getValue(x0, y0)
+    const v1 = this.getValue(x1, y1)
+    this.setValue(x1, y1, v0)
+    this.setValue(x0, y0, v1)
   }
 
   forEach(
     callback: (x: number, y: number, tg: PokemonEntity | undefined) => void
   ) {
-    for (let r = 0; r < this.rows; r++) {
-      for (let c = 0; c < this.columns; c++) {
-        callback(r, c, this.cell[this.columns * r + c])
+    for (let y = 0; y < this.rows; y++) {
+      for (let x = 0; x < this.columns; x++) {
+        callback(x, y, this.cells[this.columns * y + x])
       }
     }
   }
 
-  distance(r0: number, c0: number, r1: number, c1: number) {
+  distance(x0: number, y0: number, x1: number, y1: number) {
     // chebyshev distance
-    return Math.max(Math.abs(r0 - r1), Math.abs(c0 - c1))
+    return Math.max(Math.abs(y0 - y1), Math.abs(x0 - x1))
   }
 
-  distanceC(r0: number, c0: number, r1: number, c1: number) {
+  distanceC(x0: number, y0: number, x1: number, y1: number) {
     // Manhattan distance
-    return Math.abs(r1 - r0) + Math.abs(c1 - c0)
+    return Math.abs(x1 - x0) + Math.abs(y1 - y0)
   }
 
   orientation(
-    r0: number,
-    c0: number,
-    r1: number,
-    c1: number,
+    x0: number,
+    y0: number,
+    x1: number,
+    y1: number,
     pokemon: IPokemonEntity,
     target: IPokemonEntity | undefined
   ) {
-    const vx = r1 - r0
-    const vy = c1 - c0
-    if (vx > 0) {
-      if (vy == 0) {
+    const dx = x1 - x0
+    const dy = y1 - y0
+    if (dx > 0) {
+      if (dy == 0) {
         return Orientation.RIGHT
-      } else if (vy < 0) {
+      } else if (dy < 0) {
         return Orientation.DOWNRIGHT
       } else {
         return Orientation.UPRIGHT
       }
-    } else if (vx == 0) {
-      if (vy == 0) {
+    } else if (dx == 0) {
+      if (dy == 0) {
         if(pokemon.status.confusion){
           return pickRandomIn(Orientation)
         }
         logger.error("failed to get pokemon orientation", {
-          r0, c0, r1, c1, 
+          x0, y0, x1, y1, 
           pokemon: pokemon.name,
           pokemonPosX: pokemon.positionX,
           pokemonPosY: pokemon.positionY,
@@ -98,15 +98,15 @@ export default class Board {
           targetPosY: target?.positionY
         })
         return Orientation.DOWNRIGHT
-      } else if (vy < 0) {
+      } else if (dy < 0) {
         return Orientation.DOWN
       } else {
         return Orientation.UP
       }
     } else {
-      if (vy == 0) {
+      if (dy == 0) {
         return Orientation.LEFT
-      } else if (vy < 0) {
+      } else if (dy < 0) {
         return Orientation.DOWNLEFT
       } else {
         return Orientation.UPLEFT
@@ -114,93 +114,96 @@ export default class Board {
     }
   }
 
-  getAdjacentCells(row: number, col: number) {
+  getAdjacentCells(cellX: number, cellY: number) {
     const cells = new Array<Cell>()
-    for (let r = row - 1; r < row + 2; r++) {
-      for (let c = col - 1; c < col + 2; c++) {
-        if (r == row && c == col) continue
-        if (r >= 0 && r < this.rows && c >= 0 && c < this.columns) {
-          cells.push({
-            row: r,
-            column: c,
-            value: this.cell[this.columns * r + c]
-          })
+    for (let y = cellY - 1; y < cellY + 2; y++) {
+      for (let x = cellX - 1; x < cellX + 2; x++) {
+        if (x == cellX && y == cellY) continue
+        if (y >= 0 && y < this.rows && x >= 0 && x < this.columns) {
+          cells.push({ x, y, value: this.cells[this.columns * y + x] })
         }
       }
     }
     return cells
   }
 
-  getCellsInRange(row: number, col: number, range: number) {
+  getCellsInRange(cellX: number, cellY: number, range: number) {
     const cells = new Array<Cell>()
-    const n = Math.floor(Math.abs(range))
-    for (let r = 0; r < this.rows; r++) {
-      for (let c = 0; c < this.columns; c++) {
-        if (r == row && c == col) continue
-        const d = this.distance(row, col, r, c)
-        if (r >= 0 && r < this.rows && c >= 0 && c < this.columns && d <= n) {
-          cells.push({
-            row: r,
-            column: c,
-            value: this.cell[this.columns * r + c]
-          })
+    range = Math.floor(Math.abs(range))
+    for (let y = 0; y < this.rows; y++) {
+      for (let x = 0; x < this.columns; x++) {
+        if (x == cellX && y == cellY) continue
+        const distance = this.distance(cellX, cellY, x, y)
+        if (y >= 0 && y < this.rows && x >= 0 && x < this.columns && distance <= range) {
+          cells.push({ x, y, value: this.cells[this.columns * y + x] })
         }
       }
     }
     return cells
   }
 
-  getCellsInRadius(row: number, col: number, radius: number) {
+  getCellsInRadius(cellX: number, cellY: number, radius: number) {
     const cells = new Array<Cell>()
-    const n = Math.floor(Math.abs(radius)) + 0.5
-    const n2 = n * n
-    for (let r = 0; r < this.rows; r++) {
-      for (let c = 0; c < this.columns; c++) {
-        if (r == row && c == col) continue
-        const dr = row - r
-        const dc = col - c
-        const d2 = dr * dr + dc * dc
-        if (r >= 0 && r < this.rows && c >= 0 && c < this.columns && d2 < n2) {
-          cells.push({
-            row: r,
-            column: c,
-            value: this.cell[this.columns * r + c]
-          })
+    radius = Math.floor(Math.abs(radius)) + 0.5
+    const radiusSquared = radius * radius
+    for (let y = 0; y < this.rows; y++) {
+      for (let x = 0; x < this.columns; x++) {
+        if (x == cellX && y == cellY) continue
+        const dy = cellY - y
+        const dx = cellX - x
+        const distanceSquared = dy * dy + dx * dx
+        if (y >= 0 && y < this.rows && x >= 0 && x < this.columns && distanceSquared < radiusSquared) {
+          cells.push({ x, y, value: this.cells[this.columns * y + x] })
         }
       }
     }
     return cells
   }
 
-  getCellsBetween(r0: number, c0: number, r1: number, c1: number) {
-    const cells = new Array<Cell>()
-    const dr = r1 - r0
-    const dc = c1 - c0
-    const n = Math.max(Math.abs(dr), Math.abs(dc))
-    const m = n == 0 ? 0 : 1 / n
-    const rs = dr * m
-    const cs = dc * m
-    for (let fr = r0, cf = c0, i = 0; i <= n; i++, fr += rs, cf += cs) {
-      const r = Math.round(fr)
-      const c = Math.round(cf)
-      cells.push({
-        row: r,
-        column: c,
-        value: this.cell[this.columns * r + c]
-      })
+  getCellsBetween(x0: number, y0: number, x1: number, y1: number) {
+    /* Supercover line algorithm from https://www.redblobgames.com/grids/line-drawing.html */
+    const cells: Cell[] = [{
+      x: x0,
+      y: y0,
+      value: this.cells[this.columns * y0 + x0]
+    }]
+    const dx = x1 - x0, dy = y1 - y0
+    const nx = Math.abs(dx), ny = Math.abs(dy);
+    const sign_x = Math.sign(dx), sign_y = Math.sign(dy);
+
+    let x=x0, y=y0
+    for (let ix = 0, iy = 0; ix < nx || iy < ny;) {
+      let decision = (1 + 2*ix) * ny - (1 + 2*iy) * nx;
+      if (decision === 0) {
+          // next step is diagonal
+          x += sign_x;
+          y += sign_y;
+          ix++;
+          iy++;
+      } else if (decision < 0) {
+          // next step is horizontal
+          x += sign_x;
+          ix++;
+      } else {
+          // next step is vertical
+          y += sign_y;
+          iy++;
+      }
+      cells.push({ x, y, value: this.cells[this.columns * y + x] });
     }
+
     return cells
   }
 
-  getTeleportationCell(r: number, c: number) {
+  getTeleportationCell(x: number, y: number) {
     const candidates = new Array<Cell>()
     ;[
-      { r: 0, c: 0 },
-      { r: this.rows - 1, c: 0 },
-      { r: this.rows - 1, c: this.columns - 1 },
-      { r: 0, c: this.columns - 1 }
+      { x: 0, y: 0 },
+      { x: 0, y: this.rows - 1 },
+      { x: this.columns - 1, y: this.rows - 1 },
+      { x: this.columns - 1, y: 0 }
     ].forEach((coord) => {
-      const cells = this.getCellsBetween(r, c, coord.r, coord.c)
+      const cells = this.getCellsBetween(x, y, coord.x, coord.y)
       cells.forEach((cell) => {
         if (cell.value === undefined) {
           candidates.push(cell)
@@ -210,8 +213,8 @@ export default class Board {
     if (candidates.length > 0) {
       candidates.sort(
         (a, b) =>
-          this.distance(r, c, b.row, b.column) -
-          this.distance(r, c, a.row, a.column)
+          this.distance(x, y, b.x, b.y) -
+          this.distance(x, y, a.x, a.y)
       )
       return candidates[0]
     } else {
