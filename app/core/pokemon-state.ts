@@ -226,7 +226,7 @@ export default class PokemonState {
 
         if (pokemon) {
           if(shouldTargetGainMana){
-            pokemon.setMana(pokemon.mana + Math.ceil(residualDamage / 10))
+            pokemon.setMana(pokemon.mana + Math.ceil(damage / 10))
           }
 
           if (
