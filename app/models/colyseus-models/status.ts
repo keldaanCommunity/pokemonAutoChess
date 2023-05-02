@@ -146,7 +146,7 @@ export default class Status extends Schema implements IStatus {
         : pkm.effects.includes(Effect.GROWTH)
         ? 12
         : 5
-      pkm.handleHeal(heal, pkm, false)
+      pkm.handleHeal(heal, pkm, 0)
       this.grassCooldown = 1000
     } else {
       this.grassCooldown = this.grassCooldown - dt

@@ -250,7 +250,7 @@ export default class Simulation extends Schema implements ISimulation {
         pokemon.handleShield(value, pokemon)
         break
       case Stat.HP:
-        pokemon.handleHeal(value, pokemon, false)
+        pokemon.handleHeal(value, pokemon, 0)
         break
     }
   }
