@@ -29,7 +29,7 @@ export default class Simulation extends Schema implements ISimulation {
   room: GameRoom
   blueEffects = new Array<Effect>()
   redEffects = new Array<Effect>()
-  board: Board = new Board(8, 6)
+  board: Board = new Board(6, 8)
   finished = false
   flowerSpawn: boolean[] = [false, false]
   stageLevel: number = 0
@@ -68,7 +68,7 @@ export default class Simulation extends Schema implements ISimulation {
       this.redHealDpsMeter.delete(key)
     })
 
-    this.board = new Board(8, 6)
+    this.board = new Board(6, 8)
     this.blueEffects = blueEffects || []
     this.redEffects = redEffects || []
     // logger.debug({ blueEffects, redEffects })
