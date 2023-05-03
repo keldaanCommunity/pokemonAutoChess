@@ -170,20 +170,16 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     damage: number,
     board: Board,
     attackType: AttackType,
-    attacker: PokemonEntity
+    attacker: PokemonEntity,
+    crit: boolean
   ): { death: boolean, takenDamage: number } {
     if (this.status.runeProtect) {
       this.count.spellBlockedCount++
       return { death: false, takenDamage: 0 }
     } else {
       let specialDamage = damage + (damage * attacker.ap) / 100
-      if (
-        attacker &&
-        attacker.items.has(Item.REAPER_CLOTH) &&
-        Math.random() * 100 < attacker.critChance
-      ) {
+      if(crit && this.items.has(Item.ROCKY_HELMET) === false){
         specialDamage = Math.round(specialDamage * attacker.critDamage)
-        this.count.crit++
       }
       if (attacker && attacker.items.has(Item.POKEMONOMICON)) {
         this.status.triggerBurn(2000, this, attacker, board)
@@ -293,5 +289,83 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
 
   roundTo2Digits(value: number) {
     return parseFloat(value.toFixed(2))
+  }
+
+  onCritical(target: PokemonEntity, board: Board){
+    target.count.crit++
+
+    if (
+      this.effects.includes(Effect.FAIRY_WIND) ||
+      this.effects.includes(Effect.STRANGE_STEAM) ||
+      this.effects.includes(Effect.AROMATIC_MIST)
+    ) {
+      let d = 0
+      if (this.effects.includes(Effect.AROMATIC_MIST)) {
+        d = 10
+      } else if (this.effects.includes(Effect.FAIRY_WIND)) {
+        d = 30
+      } else if (this.effects.includes(Effect.STRANGE_STEAM)) {
+        d = 60
+      }
+      const cells = board.getAdjacentCells(
+        this.positionX,
+        this.positionY
+      )
+
+      cells.forEach((cell) => {
+        if (cell.value && this.team != cell.value.team) {
+          cell.value.count.fairyCritCount++
+          cell.value.handleDamage({
+            damage: d,
+            board,
+            attackType: AttackType.SPECIAL,
+            attacker: this,
+            dodgeable: false,
+            shouldAttackerGainMana: false,
+            shouldTargetGainMana: true
+          })
+        }
+      })
+    }
+    
+    if (
+      target.effects.includes(Effect.FAIRY_WIND) ||
+      target.effects.includes(Effect.STRANGE_STEAM) ||
+      target.effects.includes(Effect.AROMATIC_MIST)
+    ) {
+      let d = 0
+      if (target.effects.includes(Effect.AROMATIC_MIST)) {
+        d = 10
+      } else if (target.effects.includes(Effect.FAIRY_WIND)) {
+        d = 30
+      } else if (target.effects.includes(Effect.STRANGE_STEAM)) {
+        d = 60
+      }
+      const cells = board.getAdjacentCells(
+        target.positionX,
+        target.positionY
+      )
+
+      cells.forEach((cell) => {
+        if (cell.value && target.team != cell.value.team) {
+          cell.value.count.fairyCritCount++
+          cell.value.handleDamage({
+            damage: d,
+            board,
+            attackType: AttackType.SPECIAL,
+            attacker: target,
+            dodgeable: false,
+            shouldAttackerGainMana: false,
+            shouldTargetGainMana: true
+          })
+        }
+      })
+    }
+
+    if(this.items.has(Item.SCOPE_LENS)){
+      this.setMana(this.mana + 15)
+      target.setMana(target.mana - 15)
+      target.count.manaBurnCount++
+    }
   }
 }

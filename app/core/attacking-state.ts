@@ -5,6 +5,7 @@ import Board from "./board"
 import PokemonEntity from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
 import { PokemonActionState } from "../types/enum/Game"
+import { chance } from "../utils/random"
 
 export default class AttackingState extends PokemonState {
   update(
@@ -57,7 +58,11 @@ export default class AttackingState extends PokemonState {
         pokemon.toMovingState()
       } else if (target && pokemon.mana >= pokemon.maxMana && !pokemon.status.silence) {
         // CAST ABILITY
-        pokemon.strategy.process(pokemon, this, board, target)
+        let crit = false
+        if (pokemon.items.has(Item.REAPER_CLOTH)) {
+          crit = chance(pokemon.critChance / 100)
+        }
+        pokemon.strategy.process(pokemon, this, board, target, crit)
       } else {
         // BASIC ATTACK
         this.attack(pokemon, board, targetCoordinate)
@@ -159,7 +164,11 @@ export default class AttackingState extends PokemonState {
         }
       }
       if(pokemon.effects.includes(Effect.TELEPORT_NEXT_ATTACK)){
-        target.handleSpecialDamage([15,30,60][pokemon.stars-1], board, AttackType.SPECIAL, pokemon)
+        const crit = pokemon.items.has(Item.REAPER_CLOTH) && chance(pokemon.critChance)
+        if(crit){
+          pokemon.onCritical(target, board)
+        }
+        target.handleSpecialDamage([15,30,60][pokemon.stars-1], board, AttackType.SPECIAL, pokemon, crit)
         pokemon.effects.splice(pokemon.effects.indexOf(Effect.TELEPORT_NEXT_ATTACK), 1)
       }
 
@@ -177,77 +186,12 @@ export default class AttackingState extends PokemonState {
 
       if (
         Math.random() * 100 < pokemon.critChance &&
-        target &&
-        !target.items.has(Item.ROCKY_HELMET)
+        target
       ) {
-        if (
-          pokemon.effects.includes(Effect.FAIRY_WIND) ||
-          pokemon.effects.includes(Effect.STRANGE_STEAM) ||
-          pokemon.effects.includes(Effect.AROMATIC_MIST)
-        ) {
-          let d = 0
-          if (pokemon.effects.includes(Effect.AROMATIC_MIST)) {
-            d = 10
-          } else if (pokemon.effects.includes(Effect.FAIRY_WIND)) {
-            d = 30
-          } else if (pokemon.effects.includes(Effect.STRANGE_STEAM)) {
-            d = 60
-          }
-          const cells = board.getAdjacentCells(
-            pokemon.positionX,
-            pokemon.positionY
-          )
-
-          cells.forEach((cell) => {
-            if (cell.value && pokemon.team != cell.value.team) {
-              cell.value.count.fairyCritCount++
-              cell.value.handleDamage({
-                damage: d,
-                board,
-                attackType: AttackType.SPECIAL,
-                attacker: pokemon,
-                dodgeable: false,
-                shouldAttackerGainMana: false,
-                shouldTargetGainMana: true
-              })
-            }
-          })
+        pokemon.onCritical(target, board)
+        if(target.items.has(Item.ROCKY_HELMET) === false){
+          damage = Math.round(pokemon.atk * pokemon.critDamage)
         }
-        if (
-          target.effects.includes(Effect.FAIRY_WIND) ||
-          target.effects.includes(Effect.STRANGE_STEAM) ||
-          target.effects.includes(Effect.AROMATIC_MIST)
-        ) {
-          let d = 0
-          if (target.effects.includes(Effect.AROMATIC_MIST)) {
-            d = 10
-          } else if (target.effects.includes(Effect.FAIRY_WIND)) {
-            d = 30
-          } else if (target.effects.includes(Effect.STRANGE_STEAM)) {
-            d = 60
-          }
-          const cells = board.getAdjacentCells(
-            target.positionX,
-            target.positionY
-          )
-
-          cells.forEach((cell) => {
-            if (cell.value && target.team != cell.value.team) {
-              cell.value.count.fairyCritCount++
-              cell.value.handleDamage({
-                damage: d,
-                board,
-                attackType: AttackType.SPECIAL,
-                attacker: target,
-                dodgeable: false,
-                shouldAttackerGainMana: false,
-                shouldTargetGainMana: true
-              })
-            }
-          })
-        }
-        damage = Math.round(pokemon.atk * pokemon.critDamage)
-        target.count.crit++
       } else {
         damage = pokemon.atk
       }
