@@ -282,13 +282,6 @@ export default class Simulation extends Schema implements ISimulation {
       pokemon.status.triggerSoulDew(1000)
     }
 
-    if (pokemon.items.has(Item.ZOOM_LENS)) {
-      const apBoost = 5 * pokemon.baseAtk
-      const atkBoost = 0.05 * pokemon.ap
-      pokemon.addAttack(atkBoost)
-      pokemon.addAbilityPower(apBoost)
-    }
-
     if (pokemon.items.has(Item.WIDE_LENS)) {
       pokemon.range += 2
     }

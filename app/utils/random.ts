@@ -1,3 +1,7 @@
+export function chance(probability: number): boolean {
+    return Math.random() < probability
+}
+
 export function coinflip(): boolean {
     return Math.random() < 0.5
 }
