@@ -18,17 +18,9 @@ async function main() {
         step.board.forEach((p) => {
           for (let j = 0; j < p.items.length; j++) {
             const item = p.items[j] as any
-            if (item === "KINGS_ROCK") {
+            if (item === "ZOOM_LENS") {
               console.log(p.name, item)
-              p.items[j] = Item.AMULET_COIN
-              modified = true
-            } else if (item === "WATER_INCENSE") {
-              console.log(p.name, item)
-              p.items[j] = Item.POWER_LENS
-              modified = true
-            } else if (item === "BRIGHT_POWDER") {
-              console.log(p.name, item)
-              p.items[j] = Item.STAR_DUST
+              p.items[j] = Item.SCOPE_LENS
               modified = true
             }
           }
