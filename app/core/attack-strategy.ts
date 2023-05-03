@@ -3199,7 +3199,7 @@ export class TeleportStrategy extends AttackStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, false) // crit is handled with TELEPORT_NEXT_ATTACK efefct
+    super.process(pokemon, state, board, target, false) // crit is handled with TELEPORT_NEXT_ATTACK effect
 
     const potentialCells = [
       [0, 0],

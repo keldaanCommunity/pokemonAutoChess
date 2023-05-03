@@ -164,7 +164,7 @@ export default class AttackingState extends PokemonState {
         }
       }
       if(pokemon.effects.includes(Effect.TELEPORT_NEXT_ATTACK)){
-        const crit = chance(pokemon.critChance)
+        const crit = pokemon.items.has(Item.REAPER_CLOTH) && chance(pokemon.critChance)
         if(crit){
           pokemon.onCritical(target, board)
         }
