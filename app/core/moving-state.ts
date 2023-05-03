@@ -3,6 +3,7 @@ import PokemonEntity from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
 import { PokemonActionState } from "../types/enum/Game"
 import { Synergy } from "../types/enum/Synergy"
+import { logger } from "../utils/logger"
 
 export default class MovingState extends PokemonState {
   update(
@@ -66,7 +67,7 @@ export default class MovingState extends PokemonState {
             cell.x,
             cell.y
           )
-          // logger.debug(`Candidate (${cell.x},${cell.y}) to ${coordinates}, distance: ${candidateDistance}`);
+          // logger.debug(`${pokemon.name} - Candidate (${cell.x},${cell.y}) to ${coordinates.x},${coordinates.y}, distance: ${candidateDistance}`);
           if (candidateDistance < distance) {
             distance = candidateDistance
             x = cell.x
@@ -84,7 +85,7 @@ export default class MovingState extends PokemonState {
         pokemon,
         undefined
       )
-      // logger.debug(`pokemon moved from (${pokemon.positionX},${pokemon.positionY}) to (${x},${y}), (desired direction (${coordinates[0]}, ${coordinates[1]})), orientation: ${pokemon.orientation}`);
+      // logger.debug(`pokemon ${pokemon.name} moved from (${pokemon.positionX},${pokemon.positionY}) to (${x},${y}), (desired direction (${coordinates.x}, ${coordinates.y})), orientation: ${pokemon.orientation}`);
       board.swapValue(pokemon.positionX, pokemon.positionY, x, y)
       pokemon.positionX = x
       pokemon.positionY = y
