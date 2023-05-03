@@ -24,7 +24,7 @@ Darkrai: New Dark void ability
 - Mana generation from incoming damage is now based on incoming damage before reduction from def/spedef/items
 - Critical hits for abilities now also applies "on critical" effects, such as fairy splash damage
 - Critical chance for special damage is now computed once and no longer per target. Previously, an area of effect ability could trigger critical hit on only part of the targets.
-- Improve the algorithm for abilities with effects in line. They should be more accurate.
+- Improve the accuracy of abilities Aqua Jet, Flame Charge, Volt Switch and Flame Wheel.
 
 # UI
 

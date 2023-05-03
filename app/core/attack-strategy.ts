@@ -1226,9 +1226,7 @@ export class AuroraBeamStrategy extends AttackStrategy {
         break
     }
 
-    const cells = board.getCellsBetween(pokemon.positionX, pokemon.positionY, target.positionX, target.positionY)
-    cells.forEach(cell => {
-      const targetInLine = cell.value
+    effectInLine(board, pokemon, target, (targetInLine) => {
       if (targetInLine != null && targetInLine.team !== pokemon.team) {
         targetInLine.handleSpecialDamage(
           damage,
@@ -2267,9 +2265,7 @@ export class HeatWaveStrategy extends AttackStrategy {
         break
     }
 
-    const cells = board.getCellsBetween(pokemon.positionX, pokemon.positionY, target.positionX, target.positionY)
-    cells.forEach(cell => {
-      const targetInLine = cell.value
+    effectInLine(board, pokemon, target, (targetInLine) => {
       if (targetInLine != null && targetInLine.team != pokemon.team) {
         targetInLine.handleSpecialDamage(
           damage,
@@ -2307,9 +2303,7 @@ export class HydroPumpStrategy extends AttackStrategy {
         break
     }
 
-    const cells = board.getCellsBetween(pokemon.positionX, pokemon.positionY, target.positionX, target.positionY)
-    cells.forEach(cell => {
-      const targetInLine = cell.value
+    effectInLine(board, pokemon, target, (targetInLine) => {
       if (targetInLine != null && targetInLine.team !== pokemon.team) {
         targetInLine.handleSpecialDamage(
           damage,
@@ -3430,9 +3424,7 @@ export class HurricaneStrategy extends AttackStrategy {
         break
     }
 
-    const cells = board.getCellsBetween(pokemon.positionX, pokemon.positionY, target.positionX, target.positionY)
-    cells.forEach(cell => {
-      const targetInLine = cell.value
+    effectInLine(board, pokemon, target, (targetInLine) => {
       if (targetInLine != null && targetInLine.team !== pokemon.team) {
         targetInLine.handleSpecialDamage(
           damage,
@@ -3644,9 +3636,7 @@ export class SpiritShackleStrategy extends AttackStrategy {
         break
     }
 
-    const cells = board.getCellsBetween(pokemon.positionX, pokemon.positionY, target.positionX, target.positionY)
-    cells.forEach(cell => {
-      const targetInLine = cell.value
+    effectInLine(board, pokemon, target, (targetInLine) => {
       if (targetInLine != null && targetInLine.team !== pokemon.team) {
         targetInLine.handleSpecialDamage(
           damage,
