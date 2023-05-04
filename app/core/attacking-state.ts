@@ -71,16 +71,16 @@ export default class AttackingState extends PokemonState {
           pokemon.effects.includes(Effect.RISING_VOLTAGE) ||
           pokemon.effects.includes(Effect.OVERDRIVE)
         ) {
-          let doubleAttackChance = 0
+          let tripleAttackChance = 0
           if (pokemon.effects.includes(Effect.EERIE_IMPULSE)) {
-            doubleAttackChance = 0.3
+            tripleAttackChance = 0.3
           } else if (pokemon.effects.includes(Effect.RISING_VOLTAGE)) {
-            doubleAttackChance = 0.5
+            tripleAttackChance = 0.4
           } else if (pokemon.effects.includes(Effect.OVERDRIVE)) {
-            doubleAttackChance = 0.7
+            tripleAttackChance = 0.5
           }
-          if (Math.random() < doubleAttackChance) {
-            pokemon.count.doubleAttackCount++
+          if (Math.random() < tripleAttackChance) {
+            pokemon.count.tripleAttackCount++
             this.attack(pokemon, board, targetCoordinate)
             this.attack(pokemon, board, targetCoordinate)
           }
