@@ -345,7 +345,7 @@ export default class Simulation extends Schema implements ISimulation {
       }
 
       team.forEach((pokemon) => {
-        if (pokemon.effects.includes(Effect.AUTOTOMIZE)) {
+        if (pokemon.effects.includes(Effect.AUTOMATE)) {
           pokemon.addAttack(pokemon.baseAtk)
         }
         let shieldBonus = 0
@@ -609,9 +609,9 @@ export default class Simulation extends Schema implements ISimulation {
           }
           break
 
-        case Effect.AUTOTOMIZE:
+        case Effect.AUTOMATE:
           if (types.includes(Synergy.STEEL)) {
-            pokemon.effects.push(Effect.AUTOTOMIZE)
+            pokemon.effects.push(Effect.AUTOMATE)
           }
           break
 

@@ -30,7 +30,7 @@ export const EffectName: { [key in Effect]: string } = {
   [Effect.ASSURANCE]: `Assurance`,
   [Effect.BEAT_UP]: `Beat Up`,
   [Effect.IRON_DEFENSE]: `Iron Defense`,
-  [Effect.AUTOTOMIZE]: `Autotomize`,
+  [Effect.AUTOMATE]: `Automate`,
   [Effect.SHORE_UP]: `Shore Up`,
   [Effect.ROTOTILLER]: `Rototiller`,
   [Effect.SANDSTORM]: `Sandstorm`,
@@ -223,7 +223,7 @@ export const EffectDescription: {
     esp: ``,
     fra: ``
   },
-  [Effect.AUTOTOMIZE]: {
+  [Effect.AUTOMATE]: {
     eng: `All of your steel Pokemon gains double base ${Stat.ATK}`,
     esp: ``,
     fra: ``

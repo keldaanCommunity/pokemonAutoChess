@@ -818,7 +818,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         case Effect.BEAT_UP:
           player.titles.add(Title.DELINQUENT)
           break
-        case Effect.AUTOTOMIZE:
+        case Effect.AUTOMATE:
           player.titles.add(Title.ENGINEER)
           break
         case Effect.SANDSTORM:
