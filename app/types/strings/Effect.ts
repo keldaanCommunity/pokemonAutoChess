@@ -82,7 +82,8 @@ export const EffectName: { [key in Effect]: string } = {
   [Effect.LINK_CABLE]: `Link Cable`,
   [Effect.GOOGLE_SPECS]: `Google Specs`,
   [Effect.HATCHER]: `Hatcher`,
-  [Effect.BREEDER]: `Breeder`
+  [Effect.BREEDER]: `Breeder`,
+  [Effect.TELEPORT_NEXT_ATTACK]: `Teleport`
 }
 
 export const EffectDescription: {
@@ -487,5 +488,10 @@ export const EffectDescription: {
     eng: `Get an Egg after each defeat against a player`,
     esp: ``,
     fra: ``
-  }
+  },
+  [Effect.TELEPORT_NEXT_ATTACK]: {
+    eng: `Next attack will deal additional ${Damage.SPECIAL}`,
+    esp: ``,
+    fra: ``
+  },
 }
