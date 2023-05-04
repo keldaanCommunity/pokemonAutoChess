@@ -119,7 +119,7 @@ export default class Simulation extends Schema implements ISimulation {
         if (effects.includes(Effect.HEART_OF_THE_SWARM)) { numberToSpawn = 4 }
 
         for (let i = 0; i < numberToSpawn; i++) {
-          const bug = PokemonFactory.createPokemonFromName(bugTeam[i].name)
+          const bug = PokemonFactory.createPokemonFromName(bugTeam[i].name, player.pokemonCollection.get(bugTeam[i].index))
           const coord = this.getClosestAvailablePlaceOnBoard(bugTeam[i], teamIndex)
           this.addPokemon(bug, coord.x, coord.y, teamIndex, true)
         }
