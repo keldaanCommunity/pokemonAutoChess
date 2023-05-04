@@ -133,20 +133,20 @@ export default function Profile() {
           <TabPanel>
             <ul className="titles" style={{ display: "flex", flexDirection: "column", padding: 0 }}>
               {Object.keys(Title).map((k,i) => (
-                <li key={k} style={{ 
-                  padding: "0.5em",
-                  listStyle: "none",
-                  backgroundColor: i%2 ? '#54596b' : '#61738a'
-                }}>
-                  <h5
+                <li key={k} 
+                    style={{ 
+                      padding: "0.5em",
+                      listStyle: "none",
+                      backgroundColor: i%2 ? '#54596b' : '#61738a'
+                    }}
+                    className="clickable"
                     onClick={() => {
                       if (user.titles.includes(k as Title)) {
                         dispatch(setTitle(k))
                       }
                     }}
-                    style={{ color: user.title === k ? '#ffc107' : user.titles.includes(k as Title) ? "#92cc41" : "#db5e6a" }}
-                    className="clickable"
-                  >
+                >
+                  <h5 style={{ color: user.title === k ? '#ffc107' : user.titles.includes(k as Title) ? "#92cc41" : "#db5e6a" }}>
                     {TitleName[k]}
                   </h5>
                   <p style={{ 

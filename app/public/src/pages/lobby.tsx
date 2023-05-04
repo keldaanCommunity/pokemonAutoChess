@@ -49,7 +49,7 @@ import {
   setBotLeaderboard,
   setLeaderboard
 } from "../stores/LobbyStore"
-import { ICustomLobbyState, ISuggestionUser, Transfer } from "../../../types"
+import { ICustomLobbyState, ISuggestionUser, Title, Transfer } from "../../../types"
 import LobbyUser from "../../../models/colyseus-models/lobby-user"
 import { IBot } from "../../../models/mongo-models/bot-v2"
 import { IMeta } from "../../../models/mongo-models/meta"
@@ -324,7 +324,7 @@ export default function Lobby() {
           >
             Wiki
           </button>
-          {user?.anonymous === false ?
+          {user?.anonymous === false && user?.title === Title.BOT_BUILDER && 
           <button
             disabled={user?.anonymous}
             className="bubbly green"
@@ -336,7 +336,7 @@ export default function Lobby() {
             }}
           >
             BOT Builder
-          </button>: null}
+          </button>}
 
           <button
             className="bubbly green"

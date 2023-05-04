@@ -478,16 +478,43 @@ export default class GameRoom extends Room<GameState> {
               logger.error(err)
             } else {
               const expThreshold = 1000
-              if (usr.exp + exp >= expThreshold) {
+              let remainingExpToGain = exp
+              while(usr.exp + remainingExpToGain >= expThreshold) {
                 usr.level += 1
                 usr.booster += 1
-                usr.exp = usr.exp + exp - expThreshold
-              } else {
-                usr.exp = usr.exp + exp
+                remainingExpToGain -= (expThreshold - usr.exp)
+                usr.exp = 0
               }
-              usr.exp = !isNaN(usr.exp) ? usr.exp : 0
+              usr.exp = remainingExpToGain > 0 ? remainingExpToGain : 0
+
               if (rank == 1) {
                 usr.wins += 1
+              }
+
+              if (usr.level >= 10) {
+                player.titles.add(Title.ROOKIE)
+                player.titles.add(Title.BOT_BUILDER)
+              }
+              if (usr.level >= 20) {
+                player.titles.add(Title.AMATEUR)
+              }
+              if (usr.level >= 30) {
+                player.titles.add(Title.VETERAN)
+              }
+              if (usr.level >= 50) {
+                player.titles.add(Title.PRO)
+              }
+              if (usr.level >= 100) {
+                player.titles.add(Title.EXPERT)
+              }
+              if (usr.level >= 150) {
+                player.titles.add(Title.ELITE)
+              }
+              if (usr.level >= 200) {
+                player.titles.add(Title.MASTER)
+              }
+              if (usr.level >= 300) {
+                player.titles.add(Title.GRAND_MASTER)
               }
 
               if (usr.elo) {
@@ -516,29 +543,29 @@ export default class GameRoom extends Room<GameState> {
                     elo: elo
                   })
                 }
-
-                if (player.life === 100 && rank === 1) {
-                  player.titles.add(Title.TYRANT)
-                }
-
-                if (player.rerollCount > 60) {
-                  player.titles.add(Title.GAMBLER)
-                }
-
-                if (usr.titles === undefined) {
-                  usr.titles = []
-                }
-
-                player.titles.forEach((t) => {
-                  if (!usr.titles.includes(t)) {
-                    logger.log("title added ", t)
-                    usr.titles.push(t)
-                  }
-                })
-                //logger.log(usr);
-                //usr.markModified('metadata');
-                usr.save()
               }
+
+              if (player.life === 100 && rank === 1) {
+                player.titles.add(Title.TYRANT)
+              }
+
+              if (player.rerollCount > 60) {
+                player.titles.add(Title.GAMBLER)
+              }                
+
+              if (usr.titles === undefined) {
+                usr.titles = []
+              }
+
+              player.titles.forEach((t) => {
+                if (!usr.titles.includes(t)) {
+                  logger.log("title added ", t)
+                  usr.titles.push(t)
+                }
+              })
+              //logger.log(usr);
+              //usr.markModified('metadata');
+              usr.save()
             }
           })
         }

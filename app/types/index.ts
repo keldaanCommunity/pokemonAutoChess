@@ -504,6 +504,14 @@ export interface ISuggestionUser {
 
 export enum Title {
   NOVICE = "NOVICE",
+  ROOKIE = "ROOKIE",
+  AMATEUR = "AMATEUR",
+  VETERAN = "VETERAN",
+  PRO = "PRO",
+  EXPERT = "EXPERT",
+  ELITE = "ELITE",
+  MASTER = "MASTER",
+  GRAND_MASTER = "GRAND_MASTER",
   BIRD_KEEPER = "BIRD_KEEPER",
   BLACK_BELT = "BLACK_BELT",
   BUG_MANIAC = "BUG_MANIAC",
@@ -546,12 +554,21 @@ export enum Title {
   BACKER = "BACKER",
   TYRANT = "TYRANT",
   GAMBLER = "GAMBLER",
+  BOT_BUILDER = "BOT_BUILDER",
   SHINY_SEEKER = "SHINY_SEEKER",
   ARCHEOLOGIST = "ARCHEOLOGIST"
 }
 
 export const TitleName: { [key in Title]: string } = {
   [Title.NOVICE]: "Novice",
+  [Title.ROOKIE]: "Rookie",
+  [Title.AMATEUR]: "Amateur",
+  [Title.VETERAN]: "Veteran",
+  [Title.PRO]: "Pro",
+  [Title.EXPERT]: "Expert",
+  [Title.ELITE]: "Elite",
+  [Title.MASTER]: "Master",
+  [Title.GRAND_MASTER]: "Grand Master",
   [Title.BIRD_KEEPER]: "Bird Keeper",
   [Title.BLACK_BELT]: "Black Belt",
   [Title.BUG_MANIAC]: "Bug Maniac",
@@ -594,12 +611,21 @@ export const TitleName: { [key in Title]: string } = {
   [Title.BACKER]: "Backer",
   [Title.TYRANT]: "Tyrant",
   [Title.GAMBLER]: "Gambler",
+  [Title.BOT_BUILDER]: "Bot Builder",
   [Title.SHINY_SEEKER]: "Shiny Seeker",
   [Title.ARCHEOLOGIST]: "Archeologist"
 }
 
 export const TitleDescription: { [key in Title]: string } = {
   [Title.NOVICE]: "Play your first game",
+  [Title.ROOKIE]: "Reach level 10",
+  [Title.AMATEUR]: "Reach level 20",
+  [Title.VETERAN]: "Reach level 30",
+  [Title.PRO]: "Reach level 50",
+  [Title.EXPERT]: "Reach level 100",
+  [Title.ELITE]: "Reach level 150",
+  [Title.MASTER]: "Reach level 200",
+  [Title.GRAND_MASTER]: "Reach level 300",
   [Title.BIRD_KEEPER]: "Max Synergy With Flying type in a game",
   [Title.BLACK_BELT]: "Max Synergy With Fighting Type in a game",
   [Title.BUG_MANIAC]: "Max Synergy With Bug Type in a game",
@@ -642,6 +668,7 @@ export const TitleDescription: { [key in Title]: string } = {
   [Title.BACKER]: "Support the game financially",
   [Title.TYRANT]: "Win a game at 100 Hp",
   [Title.GAMBLER]: "Reroll over 60 times in a single match",
+  [Title.BOT_BUILDER]: "Reach level 10 to unlock the Bot Builder",
   [Title.SHINY_SEEKER]: "Have over 30 shiny pokemon avatars",
   [Title.ARCHEOLOGIST]: "Decipher the secret message of the Unowns"
 }
