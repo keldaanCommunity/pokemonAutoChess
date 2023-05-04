@@ -21,6 +21,7 @@ import { Pokemon } from "../../../../../models/colyseus-models/pokemon";
 import { Rarity } from "../../../../../types/enum/Game";
 import { addIconsToDescription } from "../../utils/descriptions";
 import { cc } from "../../utils/jsx";
+import { Ability } from "../../../../../types/enum/Ability";
 
 export default function WikiType(props: { type: Synergy | "all" }) {
   const [hoveredPokemon, setHoveredPokemon] = useState<Pokemon>();
@@ -36,6 +37,7 @@ export default function WikiType(props: { type: Synergy | "all" }) {
     .sort((a,b) => a.stars - b.stars) // put first stage first
     .filter((a, index, list) => {
       if(a.rarity === Rarity.SUMMON) return true // show all summons even in the same family
+      if(a.skill === Ability.DEFAULT) return false // pokemons with no ability are no ready for the show
 
       // remove if already one member of family in the list
       return list.findIndex(b => PkmFamily[a.name] === PkmFamily[b.name]) === index
