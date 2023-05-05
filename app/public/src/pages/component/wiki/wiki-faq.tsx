@@ -104,9 +104,10 @@ export default class WikiFaq extends Component {
         </p>
         <h4 className="nes-text is-success">Can i create my own bot ?</h4>
         <p>
-          Sure. Go to the bot builder in the lobby and try to make your own bot.
-          If you submit your bot, it'll be send in the #bot-creation channel for
-          a review by the bot reviewer team.
+          Sure. You'll need to be at least level 10 to unlock the Bot Builder title.
+          Then choose this title and a "Bot Builder" button will appear in the header.
+          Read the instructions and submit your bot, it will be sent in the 
+          #bot-creation channel on Discord for a review by the bot reviewers team.
         </p>
         <h4 className="nes-text is-success">How does the elo system work ?</h4>
         <p>
