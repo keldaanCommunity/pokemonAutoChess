@@ -10,7 +10,7 @@ Moltres: New Overheat ability: Deals 20 special damage to all enemies. Double da
 Articuno: nerf mana: 100 → 120
 
 # Changes to Synergies
-
+- Nerf Electric 4 & 6: 50% → 40%, 70% → 50% chance of triple attack
 
 # Changes to Items
 - Replace Zoom Lens by Scope Lens: Gains 25% critical chance. Critical hits steal 20 Mana from the target

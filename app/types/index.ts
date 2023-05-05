@@ -469,7 +469,7 @@ export interface ICount {
   powerLensCount: number
   staticCount: number
   starDustCount: number
-  doubleAttackCount: number
+  tripleAttackCount: number
   staticHolderCount: number
   defensiveRibbonCount: number
   earthquakeCount: number

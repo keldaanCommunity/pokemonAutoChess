@@ -165,12 +165,12 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.RISING_VOLTAGE]: {
-    eng: `50% chance of triple attack`,
+    eng: `40% chance of triple attack`,
     esp: ``,
     fra: ``
   },
   [Effect.OVERDRIVE]: {
-    eng: `70% chance of triple attack`,
+    eng: `50% chance of triple attack`,
     esp: ``,
     fra: ``
   },

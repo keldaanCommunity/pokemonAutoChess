@@ -324,9 +324,9 @@ export default class BattleManager {
                 pkm.attackAnimation()
               }
             }
-          } else if (change.field == "doubleAttackCount") {
+          } else if (change.field == "tripleAttackCount") {
             if (change.value != 0) {
-              this.displayDoubleAttack(pkm.x, pkm.y)
+              this.displayTripleAttack(pkm.x, pkm.y)
             }
           } else if (change.field == "monsterExecutionCount") {
             if (change.value != 0) {
@@ -655,7 +655,7 @@ export default class BattleManager {
     })
   }
 
-  displayDoubleAttack(x: number, y: number) {
+  displayTripleAttack(x: number, y: number) {
     const textStyle = {
       fontSize: "25px",
       fontFamily: "Verdana",
@@ -664,12 +664,12 @@ export default class BattleManager {
       strokeThickness: 2,
       stroke: "#000"
     }
-    const doubleAttack = this.scene.add.existing(
+    const tripleAttack = this.scene.add.existing(
       new GameObjects.Text(this.scene, x - 30, y - 50, "ZAP!", textStyle)
     )
-    doubleAttack.setDepth(9)
+    tripleAttack.setDepth(9)
     this.scene.add.tween({
-      targets: [doubleAttack],
+      targets: [tripleAttack],
       ease: "Linear",
       duration: 1000,
       delay: 0,
@@ -682,7 +682,7 @@ export default class BattleManager {
         getEnd: () => y - 110
       },
       onComplete: () => {
-        doubleAttack.destroy(true)
+        tripleAttack.destroy(true)
       }
     })
   }
