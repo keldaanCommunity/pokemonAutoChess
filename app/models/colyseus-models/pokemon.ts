@@ -7953,7 +7953,7 @@ export class Kyurem extends Pokemon {
       AttackType.PHYSICAL,
       3,
       100,
-      Ability.FREEZE,
+      Ability.DEFAULT, //Ability.FREEZE,
       shiny,
       emotion,
       true
