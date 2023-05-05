@@ -1,17 +1,11 @@
 import React, { useState } from "react"
-import CSS from "csstype"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import GamePokemonPortrait from "./game-pokemon-portrait"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { pokemonPropositionClick } from "../../../stores/NetworkStore"
 import { AdditionalPicksStages } from "../../../../../types/Config"
-
-const style: CSS.Properties = {
-  position: "absolute",
-  top: "30%",
-  left: "50%",
-  transform: "translateX(-50%)"
-}
+import { getGameScene } from "../../game"
+import "./game-pokemon-propositions.css"
 
 export default function GamePokemonsPropositions() {
   const dispatch = useAppDispatch()
@@ -19,22 +13,17 @@ export default function GamePokemonsPropositions() {
   const pokemonCollection = useAppSelector((state) => state.game.pokemonCollection)
   const stageLevel =  useAppSelector((state) => state.game.stageLevel)
 
+  const isBenchFull = getGameScene()?.board?.isBenchFull
+
   const [visible, setVisible] = useState(true)
   if (pokemonsProposition.length > 0) {
     return (
-      <div style={style}>
+      <div className="game-pokemons-proposition">
         <div className="nes-container" style={{visibility: visible ? 'visible' : 'hidden'}}>
-          {AdditionalPicksStages.includes(stageLevel) && (<h2 style={{ textAlign: "center" }}>
+          {AdditionalPicksStages.includes(stageLevel) && (<h2>
             Pick an additional Pokemon. It will be available to everyone.
           </h2>)}
-          <div
-            style={{
-              display: "flex",
-              padding: "10px",
-              gap: "1vw",
-              justifyContent: "center"
-            }}
-          >
+          <div className="game-pokemons-proposition-list">
             {pokemonsProposition.map((pokemon, index) => {
               const p = PokemonFactory.createPokemonFromName(pokemon)
               return (
@@ -51,9 +40,10 @@ export default function GamePokemonsPropositions() {
               )
             })}
           </div>
+          {isBenchFull && <p>You mush have a free slot on the bench, sell a Pokemon !</p>}
         </div>
 
-        <div style={{ display: "flex", justifyContent: "center", margin: "1em" }}>
+        <div className="show-hide-action">
           <button
             className="bubbly orange"
             onClick={() => {

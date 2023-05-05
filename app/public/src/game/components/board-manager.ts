@@ -179,4 +179,20 @@ export default class BoardManager {
       }
     })
   }
+
+  getBenchSize(): number {
+    let benchSize = 0
+
+    this.pokemons.forEach((pokemon, key) => {
+      if (pokemon.positionY == 0) {
+        benchSize++
+      }
+    })
+
+    return benchSize
+  }
+
+  get isBenchFull(): boolean {
+    return this.getBenchSize() >= 8
+  }
 }

@@ -138,16 +138,25 @@ export class OnPokemonPropositionCommand extends Command<
       )
 
       let allowBuy = true
-      if (pokemon.rarity === Rarity.MYTHICAL) {
-        player.board.forEach((p) => {
-          if (p.name === pokemon.name) {
-            allowBuy = false
-          }
-        })
+      if(Mythical1Shop.includes(pokemon.name) && this.state.stageLevel !== 10){
+        allowBuy = false
       }
+      if(Mythical2Shop.includes(pokemon.name) && this.state.stageLevel !== 20){
+        allowBuy = false
+      }
+      player.board.forEach((p) => {
+        if (Mythical1Shop.includes(pokemon.name) && Mythical1Shop.includes(p.name)) {
+          allowBuy = false // already picked a T10 mythical
+        }
+        if (Mythical2Shop.includes(pokemon.name) && Mythical2Shop.includes(p.name)) {
+          allowBuy = false // already picked a T20 mythical
+        }
+      })
+
       if(allowBuy){
         const x = this.room.getFirstAvailablePositionInBench(player.id)
-        pokemon.positionX = x !== undefined ? x : -1
+        if(x === undefined) return;
+        pokemon.positionX = x
         pokemon.positionY = 0
         player.board.set(pokemon.id, pokemon)
   

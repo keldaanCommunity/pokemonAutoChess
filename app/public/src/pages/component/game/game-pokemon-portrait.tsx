@@ -7,10 +7,10 @@ import { GamePokemonDetail } from "./game-pokemon-detail"
 import SynergyIcon from "../icons/synergy-icon"
 import ReactTooltip from "react-tooltip"
 import { getGameScene } from "../../game"
-import "./game-pokemon-portrait.css"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Money } from "../icons/money"
 import { useAppSelector } from "../../../hooks"
+import "./game-pokemon-portrait.css"
 
 export default function GamePokemonPortrait(props: {
   index: number,

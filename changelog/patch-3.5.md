@@ -27,6 +27,7 @@ Articuno: nerf mana: 100 → 120
 - Improve the accuracy of abilities Aqua Jet, Flame Charge, Volt Switch and Flame Wheel.
 
 # UI
+- Prevents picking a mythical when your bench is full. Add an informative message
 
 # Bugfix
 - Just for fun games now give XP and unlock titles just like ranked games
