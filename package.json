@@ -32,7 +32,8 @@
     "build": "npm run build-client && npm run build-server",
     "start": "node ./app/public/dist/server/app/index.js",
     "add-bot": "node ./app/public/dist/server/db-commands/populate-bot.js",
-    "monitor-bot": "node ./app/public/dist/server/scheduled/monitor-bot.js"
+    "monitor-bot": "node ./app/public/dist/server/scheduled/monitor-bot.js",
+    "update-items": "node ./app/public/dist/server/db-commands/update-items.js"
   },
   "dependencies": {
     "@colyseus/command": "^0.2.1",
