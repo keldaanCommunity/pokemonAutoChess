@@ -239,7 +239,7 @@ export default class Pokemon extends DraggableObject {
       if (
         p.effects &&
         (p.effects.includes(Effect.IRON_DEFENSE) ||
-          p.effects.includes(Effect.AUTOTOMIZE))
+          p.effects.includes(Effect.AUTOMATE))
       ) {
         this.sprite.setScale(3, 3)
       }
