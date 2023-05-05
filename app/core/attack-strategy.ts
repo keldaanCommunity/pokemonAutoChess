@@ -1007,6 +1007,28 @@ export class DarkVoidStrategy extends AttackStrategy {
     })
   }
 }
+
+export class OverheatStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)    
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
+      if (tg && pokemon.team != tg.team) {
+        let damage = 20
+        if(tg.status.burn){
+          damage *= 2
+        }
+        tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+      }
+    })
+  }
+}
+
 export class KingShieldStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,

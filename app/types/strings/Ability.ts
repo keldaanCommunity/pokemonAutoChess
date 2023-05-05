@@ -819,6 +819,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.OVERHEAT]: {
+    eng: "Overheat",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1639,6 +1645,12 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
   },
   [Ability.DARK_VOID]: {
     eng: `Deals [30, SP] ${Damage.SPECIAL} to all enemies. If any affected target was ${Status.SILENCE}, they are put ${Status.SLEEP} for 2 seconds`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.OVERHEAT]: {
+    eng: `Deals [20, SP] ${Damage.SPECIAL} to all enemies. Double damage if target is ${Status.BURN}`,
     esp: "",
     prt: "",
     fra: ""

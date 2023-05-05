@@ -3,11 +3,11 @@
 
 # Changes to Pokemon
 
-New Ability Slack off: Clear all negative status, heal 30/40/50% of the pokemon max HP and put the caster asleep for 5s
-New Ability Dark void: Deals 30 special damage to all enemies. If any affected target was Silenced, they are put to sleep for 2s
-Snorlax: New Slack off ability
+Snorlax: New Slack off ability: Clear all negative status, heal 30/40/50% of the pokemon max HP and put the caster asleep for 5s
 Slacking: New Slack off ability
-Darkrai: New Dark void ability
+Darkrai: New Dark void ability: Deals 30 special damage to all enemies. If any affected target was Silenced, they are put to sleep for 2s
+Moltres: New Overheat ability: Deals 20 special damage to all enemies. Double damage if target is burn
+Articuno: nerf mana: 100 → 120
 
 # Changes to Synergies
 

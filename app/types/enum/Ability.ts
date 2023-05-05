@@ -133,7 +133,8 @@ import {
   GeomancyStrategy,
   DeathWingStrategy,
   SlackOffStrategy,
-  DarkVoidStrategy
+  DarkVoidStrategy,
+  OverheatStrategy
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -272,7 +273,8 @@ export enum Ability {
   GEOMANCY = "GEOMANCY",
   DEATH_WING = "DEATH_WING",
   SLACK_OFF = "SLACK_OFF",
-  DARK_VOID = "DARK_VOID"
+  DARK_VOID = "DARK_VOID",
+  OVERHEAT = "OVERHEAT"
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -411,5 +413,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.GEOMANCY]: new GeomancyStrategy(),
   [Ability.DEATH_WING]: new DeathWingStrategy(),
   [Ability.SLACK_OFF]: new SlackOffStrategy(),
-  [Ability.DARK_VOID]: new DarkVoidStrategy()
+  [Ability.DARK_VOID]: new DarkVoidStrategy(),
+  [Ability.OVERHEAT]: new OverheatStrategy()
 }
