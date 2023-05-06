@@ -3,11 +3,12 @@
 
 # Changes to Pokemon
 
-Snorlax: New Slack off ability: Clear all negative status, heal 30/40/50% of the pokemon max HP and put the caster asleep for 5s
-Slacking: New Slack off ability
-Darkrai: New Dark void ability: Deals 30 special damage to all enemies. If any affected target was Silenced, they are put to sleep for 2s
-Moltres: New Overheat ability: Deals 20 special damage to all enemies. Double damage if target is burn
-Articuno: nerf mana: 100 → 120
+- Snorlax: New Slack off ability: Clear all negative status, heal 30/40/50% of the pokemon max HP and put the caster asleep for 5s
+- Slacking: New Slack off ability
+- Darkrai: New Dark void ability: Deals 30 special damage to all enemies. If any affected target was Silenced, they are put to sleep for 2s
+- Moltres: New Overheat ability: Deals 20 special damage to all enemies. Double damage if target is burn
+- Articuno: nerf mana: 100 → 120
+- Buff Frogadier and Greninja ; all the Greninja line is now 1-range
 
 # Changes to Synergies
 - Nerf Electric 4 & 6: 50% → 40%, 70% → 50% chance of triple attack
@@ -28,6 +29,7 @@ Articuno: nerf mana: 100 → 120
 
 # UI
 - Prevents picking a mythical when your bench is full. Add an informative message
+- Improvements to highlight current synergy levels
 
 # Bugfix
 - Just for fun games now give XP and unlock titles just like ranked games
