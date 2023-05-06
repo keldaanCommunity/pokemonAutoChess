@@ -1,0 +1,25 @@
+.game-pokemons-proposition {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.game-pokemons-proposition h2,
+.game-pokemons-proposition p {
+    color: white;
+    text-align: center;
+}
+
+.game-pokemons-proposition-list {
+    display: flex;
+    padding: 10px;
+    gap: 1vw;
+    justify-content: center;
+}
+
+.game-pokemons-proposition .show-hide-action {
+    display: flex;
+    justify-content: center;
+    margin: 1em;
+}
