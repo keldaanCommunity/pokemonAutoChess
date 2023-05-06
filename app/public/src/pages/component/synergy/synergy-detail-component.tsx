@@ -26,6 +26,8 @@ export default function SynergyDetailComponent(props: {
   const additionalPokemons = useAppSelector(
     (state) => state.game.additionalPokemons
   )
+  if(TypeTrigger.hasOwnProperty(props.type) === false) return null
+  const levelReached = TypeTrigger[props.type].filter(n => n <= props.value).at(-1)
   return (
     <div>
       <div style={{ display: "flex" }}>
@@ -39,16 +41,9 @@ export default function SynergyDetailComponent(props: {
           <div
             key={EffectName[d]}
             style={{
-              color:
-                TypeTrigger[props.type][i] == props.value ? "#fff" : "#e8e8e8",
-              backgroundColor:
-                TypeTrigger[props.type][i] == props.value
-                  ? "#54596b"
-                  : "rgba(84, 89, 107,0)",
-              border:
-                TypeTrigger[props.type][i] == props.value
-                  ? "4px solid black"
-                  : "none",
+              color: levelReached === TypeTrigger[props.type][i] ? "#fff" : "#e8e8e8",
+              backgroundColor: levelReached === TypeTrigger[props.type][i] ? "#54596b" : "rgba(84, 89, 107,0)",
+              border: levelReached === TypeTrigger[props.type][i] ? "4px solid black" : "none",
               borderRadius: "12px",
               padding: "5px"
             }}

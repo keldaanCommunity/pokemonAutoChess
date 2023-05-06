@@ -11,10 +11,12 @@ export default function SynergyComponent(props: {
   isFirst: boolean
   value: number
 }) {
+  const levelReached = TypeTrigger[props.type].filter(n => n <= props.value).at(-1)
   return (
     <div
       style={{
-        display: "flex",
+        display: "grid",
+        gridTemplateColumns: "40px 2ch 1fr",
         alignItems: "center",
         justifyContent: "space-around",
         backgroundColor:
@@ -44,7 +46,7 @@ export default function SynergyComponent(props: {
       </ReactTooltip>
 
       <SynergyIcon type={props.type} size="40px" />
-      <h4>{props.value}</h4>
+      <span style={{ fontSize: "32px", textShadow: "2px 2px 2px #00000080", textAlign: "center" }}>{props.value}</span>
       <div
         style={{
           display: "flex",
@@ -54,21 +56,21 @@ export default function SynergyComponent(props: {
         <div
           style={{
             display: "flex",
-            justifyContent: "space-between"
+            justifyContent: "space-evenly"
           }}
         >
           {TypeTrigger[props.type].map((t) => {
             return (
               <span
                 key={t}
-                style={{ color: props.value >= t ? "#fff" : "#e8e8e8" }}
+                style={{ color: levelReached === t ? "#f7d51d" : props.value >= t ? "#ffffff" : "#b8b8b8" }}
               >
                 {t}
               </span>
             )
           })}
         </div>
-        <p style={{ margin: "0px" }}>{SynergyName[props.type]["eng"]}</p>
+        <p style={{ margin: "0px", textAlign: "center" }}>{SynergyName[props.type]["eng"]}</p>
       </div>
     </div>
   )
