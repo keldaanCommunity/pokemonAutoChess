@@ -151,7 +151,7 @@ export const StatusDescription: { [key in Status]: Langage } = {
       prt: ""
     },
     [Status.RESURECTION]: {
-      eng: `Prevent death once, restoring to max ${Stat.HP}`,
+      eng: `Prevents KO once, restoring to max ${Stat.HP}`,
       esp: "",
       fra: "",
       prt: ""

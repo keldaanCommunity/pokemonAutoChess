@@ -212,7 +212,7 @@ export const SynergyDescription: {
     fra: ""
   },
   [Synergy.MONSTER]: {
-    eng: `Monster pokemons heal and gain bonus stats every time they kill an enemy`,
+    eng: `Monster pokemons heal and gain bonus stats every time they knock down an opponent`,
     esp: "",
     fra: ""
   },
@@ -262,7 +262,7 @@ export const SynergyDescription: {
     fra: ""
   },
   [Synergy.FOSSIL]: {
-    eng: `On their first death, fossil pokemons come back to life with increased ${Stat.ATK}`,
+    eng: `On their first KO, fossil pokemons come back to life with increased ${Stat.ATK}`,
     esp: "",
     fra: ""
   },

@@ -1028,7 +1028,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.GUILLOTINE]: {
-    eng: `Mono target attack that deals [1,2,3,SP] x ${Stat.ATK} ${Damage.SPECIAL}. Restores half ${Stat.MANA} if target killed`,
+    eng: `Mono target attack that deals [1,2,3,SP] x ${Stat.ATK} ${Damage.SPECIAL}. Restores half ${Stat.MANA} if target is KO`,
     esp: `Ataque de objetivo mono que causa daño físico. Restaura la mitad de maná si el objetivo muere`,
     fra: `Attaque mono cible qui fait des dégats physiques. Restaure la moitié du mana si la cible est tué.`,
     prt: ``
@@ -1400,7 +1400,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   PAYDAY: {
-    eng: `Deals [30,60,120,SP] ${Damage.SPECIAL}. If the target is killed, the player receive [1,2,3] gold`,
+    eng: `Deals [30,60,120,SP] ${Damage.SPECIAL}. If the target is KO, the player receive [1,2,3] gold`,
     esp: ``,
     prt: ``,
     fra: ``

@@ -331,10 +331,7 @@ export default class PokemonState {
         }
 
         if (!pokemon.life || pokemon.life <= 0) {
-          if (pokemon.items.has(Item.MAX_REVIVE)) {
-            pokemon.life = pokemon.hp
-            pokemon.items.delete(Item.MAX_REVIVE)
-          } else if (pokemon.effects.includes(Effect.ANCIENT_POWER)) {
+          if (pokemon.effects.includes(Effect.ANCIENT_POWER)) {
             pokemon.status.triggerProtect(1000)
             pokemon.life = pokemon.hp * 0.4
             pokemon.addAttack(pokemon.baseAtk * 0.3)
@@ -390,130 +387,43 @@ export default class PokemonState {
             board.setValue(pokemon.positionX, pokemon.positionY, undefined)
             death = true
           }
-        }
-      }
-    }
 
-    if (death && pokemon) {
-      if (
-        attacker &&
-        attacker.items.has(Item.AMULET_COIN) &&
-        attacker.team === 0 &&
-        attacker.simulation.player &&
-        attacker.count.moneyCount < 5
-      ) {
-        attacker.simulation.player.money += 1
-        attacker.count.moneyCount++
-      }
-      if (
-        attacker &&
-        (attacker.effects.includes(Effect.PURSUIT) ||
-          attacker.effects.includes(Effect.BRUTAL_SWING) ||
-          attacker.effects.includes(Effect.POWER_TRIP))
-      ) {
-        const isPursuit = attacker.effects.includes(Effect.PURSUIT)
-        const isBrutalSwing = attacker.effects.includes(Effect.BRUTAL_SWING)
-        const isPowerTrip = attacker.effects.includes(Effect.POWER_TRIP)
-
-        if (isPursuit || isBrutalSwing || isPowerTrip) {
-          let defBoost = 0
-          let healBoost = 0
-          let attackBoost = 0
-          if (isPursuit) {
-            defBoost = 2
-            healBoost = 30
-            attackBoost = 3
-          } else if (isBrutalSwing) {
-            defBoost = 4
-            healBoost = 60
-            attackBoost = 6
-          } else if (isPowerTrip) {
-            defBoost = 6
-            healBoost = 120
-            attackBoost = 12
+          if(attacker){
+            attacker.onKill(pokemon, board)
           }
-          attacker.addSpecialDefense(defBoost)
-          attacker.addDefense(defBoost)
-          attacker.handleHeal(healBoost, attacker, 0)
-          attacker.addAttack(attackBoost)
-          attacker.count.monsterExecutionCount++
-        }
-      }
 
-      if (
-        pokemon.effects.includes(Effect.ODD_FLOWER) ||
-        pokemon.effects.includes(Effect.GLOOM_FLOWER) ||
-        pokemon.effects.includes(Effect.VILE_FLOWER) ||
-        pokemon.effects.includes(Effect.SUN_FLOWER)
-      ) {
-        if (!pokemon.simulation.flowerSpawn[pokemon.team]) {
-          pokemon.simulation.flowerSpawn[pokemon.team] = true
-          const nearestAvailableCoordinate =
-            this.getFarthestTargetCoordinateAvailablePlace(pokemon, board)
-          if (nearestAvailableCoordinate) {
-            if (pokemon.effects.includes(Effect.ODD_FLOWER)) {
-              pokemon.simulation.addPokemon(
-                PokemonFactory.createPokemonFromName(Pkm.ODDISH),
-                nearestAvailableCoordinate.x,
-                nearestAvailableCoordinate.y,
-                pokemon.team,
-                true
-              )
-            } else if (pokemon.effects.includes(Effect.GLOOM_FLOWER)) {
-              pokemon.simulation.addPokemon(
-                PokemonFactory.createPokemonFromName(Pkm.GLOOM),
-                nearestAvailableCoordinate.x,
-                nearestAvailableCoordinate.y,
-                pokemon.team,
-                true
-              )
-            } else if (pokemon.effects.includes(Effect.VILE_FLOWER)) {
-              pokemon.simulation.addPokemon(
-                PokemonFactory.createPokemonFromName(Pkm.VILEPLUME),
-                nearestAvailableCoordinate.x,
-                nearestAvailableCoordinate.y,
-                pokemon.team,
-                true
-              )
-            } else if (pokemon.effects.includes(Effect.SUN_FLOWER)) {
-              pokemon.simulation.addPokemon(
-                PokemonFactory.createPokemonFromName(Pkm.BELLOSSOM),
-                nearestAvailableCoordinate.x,
-                nearestAvailableCoordinate.y,
-                pokemon.team,
-                true
-              )
+          if(death){
+            // Remove field effects on death
+            if (pokemon.skill === Ability.ELECTRIC_SURGE) {
+              board.forEach((x, y, v) => {
+                if (v && v.status.electricField) {
+                  v.status.electricField = false
+                }
+              })
+            } else if (pokemon.skill === Ability.PSYCHIC_SURGE) {
+              board.forEach((x, y, v) => {
+                if (v && v.status.psychicField) {
+                  v.status.psychicField = false
+                }
+              })
+            } else if (pokemon.skill === Ability.GRASSY_SURGE) {
+              board.forEach((x, y, v) => {
+                if (v && v.status.grassField) {
+                  v.status.grassField = false
+                }
+              })
+            } else if (pokemon.skill === Ability.MISTY_SURGE) {
+              board.forEach((x, y, v) => {
+                if (v && v.status.fairyField) {
+                  v.status.fairyField = false
+                }
+              })
             }
           }
         }
       }
-
-      if (pokemon.skill === Ability.ELECTRIC_SURGE) {
-        board.forEach((x, y, v) => {
-          if (v && v.status.electricField) {
-            v.status.electricField = false
-          }
-        })
-      } else if (pokemon.skill === Ability.PSYCHIC_SURGE) {
-        board.forEach((x, y, v) => {
-          if (v && v.status.psychicField) {
-            v.status.psychicField = false
-          }
-        })
-      } else if (pokemon.skill === Ability.GRASSY_SURGE) {
-        board.forEach((x, y, v) => {
-          if (v && v.status.grassField) {
-            v.status.grassField = false
-          }
-        })
-      } else if (pokemon.skill === Ability.MISTY_SURGE) {
-        board.forEach((x, y, v) => {
-          if (v && v.status.fairyField) {
-            v.status.fairyField = false
-          }
-        })
-      }
     }
+    
     return { death, takenDamage }
   }
 
