@@ -16,7 +16,7 @@ export default function SynergyComponent(props: {
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: "40px 40px 1fr",
+        gridTemplateColumns: "40px 2ch 1fr",
         alignItems: "center",
         justifyContent: "space-around",
         backgroundColor:
