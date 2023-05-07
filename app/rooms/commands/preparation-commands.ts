@@ -1,5 +1,5 @@
 import { Command } from "@colyseus/command"
-import { GameUser } from "../../models/colyseus-models/game-user"
+import { GameUser, IGameUser } from "../../models/colyseus-models/game-user"
 import UserMetadata, {
   IUserMetadata
 } from "../../models/mongo-models/user-metadata"
@@ -10,6 +10,7 @@ import { Emotion, IMessage, Role, Transfer } from "../../types"
 import { BotDifficulty } from "../../types/enum/Game"
 import { pickRandomIn } from "../../utils/random"
 import { logger } from "../../utils/logger"
+import { entries, values } from "../../utils/schemas"
 
 export class OnJoinCommand extends Command<
   PreparationRoom,
@@ -179,16 +180,15 @@ export class OnKickPlayerCommand extends Command<
     message: string
   }
 > {
-  execute({ client, message }) {
+  execute({ client, message: userId }) {
     try {
       if (client.auth.uid === this.state.ownerId) {
         this.room.clients.forEach((cli) => {
-          if (cli.auth.uid === message) {
+          if (cli.auth.uid === userId && this.state.users.has(userId)) {
+            const user = this.state.users.get(userId)!
             this.room.broadcast(Transfer.MESSAGES, {
               name: "Server",
-              payload: `${this.state.users.get(message).name} was kicked by ${
-                this.state.ownerName
-              }.`,
+              payload: `${user.name} was kicked by ${this.state.ownerName}.`,
               avatar: this.state.users.get(client.auth.uid)?.avatar,
               time: Date.now()
             })
@@ -222,6 +222,20 @@ export class OnLeaveCommand extends Command<
             time: Date.now()
           })
           this.state.users.delete(client.auth.uid)
+
+          if (client.auth.uid === this.state.ownerId) {
+            const newOwner = values(this.state.users).find(user => user.id !== this.state.ownerId)
+            if(newOwner){
+              this.state.ownerId = newOwner.id
+              this.state.ownerName = newOwner.name
+              this.room.broadcast(Transfer.MESSAGES, {
+                name: "Server",
+                payload: `The new room leader is ${newOwner.name}`,
+                avatar: newOwner.avatar,
+                time: Date.now()
+              })
+            }
+          }
         }
       }
     } catch (error) {
@@ -240,9 +254,8 @@ export class OnToggleReadyCommand extends Command<
     try {
       // logger.log(this.state.users.get(client.auth.uid).ready);
       if (client.auth.uid && this.state.users.has(client.auth.uid)) {
-        this.state.users.get(client.auth.uid).ready = !this.state.users.get(
-          client.auth.uid
-        ).ready
+        const user = this.state.users.get(client.auth.uid)!
+        user.ready = !user.ready
       }
     } catch (error) {
       logger.error(error)
@@ -300,7 +313,7 @@ export class InitializeBotsCommand extends Command<
 
 type OnAddBotPayload = {
   type: IBot | BotDifficulty
-  user: IUserMetadata
+  user: IGameUser
 }
 
 export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
@@ -344,7 +357,7 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
           if(err) return logger.error(err)
           if (bots.length <= 0) {
             this.room.broadcast(Transfer.MESSAGES, {
-              name: user.displayName,
+              name: user.name,
               payload: "Error: No bots found",
               avatar: user.avatar,
               time: Date.now()
@@ -362,7 +375,6 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
       )
     })
 
-    this.state.listBots = null
     this.state.users.set(
       bot.id,
       new GameUser(
@@ -379,7 +391,7 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
     )
     
     this.room.broadcast(Transfer.MESSAGES, {
-      name: user.displayName,
+      name: user.name,
       payload: `Bot ${bot.name} added.`,
       avatar: user.avatar,
       time: Date.now()
@@ -391,28 +403,24 @@ export class OnRemoveBotCommand extends Command<
   PreparationRoom,
   {
     target?: string | undefined
-    user?: IUserMetadata | undefined
+    user?: IGameUser | undefined
   }
 > {
   execute({ target, user }) {
     try {
       // if no message, delete a random bot
       if (!target) {
-        // let botDeleted = false;
-        const keys = this.state.users.keys()
-        while (!keys.done) {
-          const key = keys.next().value
-          if (this.state.users.get(key).isBot) {
-            this.room.broadcast(Transfer.MESSAGES, {
-              name: user?.displayName ? user.displayName : "Server",
-              payload: `Bot ${key} removed to make room for new player.`,
-              avatar: user?.avatar ? user.avatar : `0081/${Emotion.NORMAL}`,
-              time: Date.now()
-            })
-            this.state.users.delete(key)
-            // botDeleted = true;
-            return
-          }
+        const users = entries(this.state.users)
+        const entryToDelete = users.find(([key, user]) => user.isBot)
+        if(entryToDelete){
+          const [key, bot] = entryToDelete
+          this.room.broadcast(Transfer.MESSAGES, {
+            name: user?.displayName ?? "Server",
+            payload: `Bot ${bot.name} removed to make room for new player.`,
+            avatar: user?.avatar ? user.avatar : `0081/${Emotion.NORMAL}`,
+            time: Date.now()
+          })
+          this.state.users.delete(key)
         }
         logger.log("no bots in lobby")
         return

@@ -6,7 +6,7 @@ import admin from "firebase-admin"
 import BannedUser from "../models/mongo-models/banned-user"
 import { logger } from "../utils/logger"
 
-export default class AfterGameRoom extends Room {
+export default class AfterGameRoom extends Room<AfterGameState> {
   dispatcher: Dispatcher<this>
   constructor() {
     super()

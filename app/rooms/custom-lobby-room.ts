@@ -276,6 +276,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
       try {
         const bot = message.bot
         const user = this.state.users.get(client.auth.uid)
+        if(!user) return;
         this.pastebin
           ?.createPaste({
             text: JSON.stringify(bot),
@@ -353,7 +354,9 @@ export default class CustomLobbyRoom extends LobbyRoom {
 
     this.onMessage(Transfer.OPEN_BOOSTER, (client) => {
       try {
-        const user: LobbyUser = this.state.users.get(client.auth.uid)
+        const user = this.state.users.get(client.auth.uid)
+        if(!user) return;
+
         const DUST_PER_BOOSTER = 50
         if (user && user.booster && user.booster > 0) {
           user.booster -= 1
@@ -406,8 +409,10 @@ export default class CustomLobbyRoom extends LobbyRoom {
 
     this.onMessage(Transfer.CHANGE_NAME, (client, message) => {
       try {
+        const user = this.state.users.get(client.auth.uid)
+        if(!user) return
         if (USERNAME_REGEXP.test(message.name)) {
-          this.state.users.get(client.auth.uid).name = message.name
+          user.name = message.name
           UserMetadata.findOne({ uid: client.auth.uid }, (err, user) => {
             if (user) {
               user.displayName = message.name
@@ -448,7 +453,8 @@ export default class CustomLobbyRoom extends LobbyRoom {
         message: { index: string; emotion: Emotion; shiny: boolean }
       ) => {
         try {
-          const user: LobbyUser = this.state.users.get(client.auth.uid)
+          const user = this.state.users.get(client.auth.uid)
+          if(!user) return
           const pokemonConfig = user.pokemonCollection.get(message.index)
           if (pokemonConfig) {
             const emotionsToCheck = message.shiny
@@ -487,7 +493,8 @@ export default class CustomLobbyRoom extends LobbyRoom {
         message: { index: string; emotion: Emotion; shiny: boolean }
       ) => {
         try {
-          const user: LobbyUser = this.state.users.get(client.auth.uid)
+          const user = this.state.users.get(client.auth.uid)
+          if(!user) return
           const pokemonConfig = user.pokemonCollection.get(message.index)
           if (pokemonConfig) {
             const emotionsToCheck = message.shiny
@@ -572,7 +579,8 @@ export default class CustomLobbyRoom extends LobbyRoom {
         message: { index: string }
       ) => {
         try {
-          const user: LobbyUser = this.state.users.get(client.auth.uid)
+          const user = this.state.users.get(client.auth.uid)
+          if(!user) return
           const pokemonConfig = user.pokemonCollection.get(message.index)
           if (pokemonConfig) {
             const BOOSTER_COST = 500
@@ -678,7 +686,8 @@ export default class CustomLobbyRoom extends LobbyRoom {
         message: { index: string; emotion: Emotion; shiny: boolean }
       ) => {
         try {
-          const user: LobbyUser = this.state.users.get(client.auth.uid)
+          const user = this.state.users.get(client.auth.uid)
+          if(!user) return
           const config = user.pokemonCollection.get(message.index)
           if (config) {
             const emotionsToCheck = message.shiny
