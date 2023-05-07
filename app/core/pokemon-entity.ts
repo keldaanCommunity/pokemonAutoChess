@@ -402,8 +402,8 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
           attackBoost = 6
         } else if (isPowerTrip) {
           defBoost = 6
-          healBoost = 120
-          attackBoost = 12
+          healBoost = 90
+          attackBoost = 9
         }
         this.addSpecialDefense(defBoost)
         this.addDefense(defBoost)

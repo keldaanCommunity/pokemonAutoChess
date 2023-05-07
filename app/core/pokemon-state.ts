@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { Item } from "../types/enum/Item"
-import { Pkm } from "../types/enum/Pokemon"
 import { Effect } from "../types/enum/Effect"
 import { AttackType, HealType, PokemonActionState } from "../types/enum/Game"
-import PokemonFactory from "../models/pokemon-factory"
 import Board from "./board"
 import PokemonEntity from "./pokemon-entity"
 import { IPokemonEntity, Transfer, FIGHTING_PHASE_DURATION } from "../types"
@@ -11,6 +9,7 @@ import { Synergy } from "../types/enum/Synergy"
 import { Ability } from "../types/enum/Ability"
 import { FlyingProtectThreshold } from "../types/Config"
 import { pickRandomIn } from "../utils/random"
+import { logger } from "../utils/logger"
 
 export default class PokemonState {
   handleHeal(
@@ -88,6 +87,11 @@ export default class PokemonState {
   }): { death: boolean, takenDamage: number } {
     let death: boolean
     let takenDamage: number = 0
+
+    if(isNaN(damage)){
+      return logger.error(`NaN Damage`)
+    }
+
     if (pokemon.life == 0) {
       death = true
     } else {
