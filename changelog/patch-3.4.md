@@ -9,9 +9,11 @@
 - Moltres: New Overheat ability: Deals 20 special damage to all enemies. Double damage if target is burn
 - Articuno: nerf mana: 100 → 120
 - Buff Frogadier and Greninja ; all the Greninja line is now 1-range
+- Nerf Salamence: range 2 → 1 ; adjusted def & spe def
 
 # Changes to Synergies
 - Nerf Electric 4 & 6: 50% → 40%, 70% → 50% chance of triple attack
+- Nerf Monster 6 : 12 → 9 attack buff, 120 → 90 HP healed
 
 # Changes to Items
 - Replace Zoom Lens by Scope Lens: Gains 25% critical chance. Critical hits steal 20 Mana from the target

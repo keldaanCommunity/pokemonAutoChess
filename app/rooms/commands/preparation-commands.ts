@@ -212,7 +212,7 @@ export class OnLeaveCommand extends Command<
 > {
   execute({ client, consented }) {
     try {
-      if (client.auth.uid) {
+      if (client.auth?.uid) {
         const user = this.state.users.get(client.auth.uid)
         if (user) {
           this.room.broadcast(Transfer.MESSAGES, {

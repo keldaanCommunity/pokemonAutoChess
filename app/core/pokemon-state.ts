@@ -11,6 +11,7 @@ import { Synergy } from "../types/enum/Synergy"
 import { Ability } from "../types/enum/Ability"
 import { FlyingProtectThreshold } from "../types/Config"
 import { pickRandomIn } from "../utils/random"
+import { logger } from "../utils/logger"
 
 export default class PokemonState {
   handleHeal(
@@ -88,6 +89,11 @@ export default class PokemonState {
   }): { death: boolean, takenDamage: number } {
     let death: boolean
     let takenDamage: number = 0
+
+    if(isNaN(damage)){
+      return logger.error(`NaN Damage`)
+    }
+
     if (pokemon.life == 0) {
       death = true
     } else {
@@ -429,8 +435,8 @@ export default class PokemonState {
             attackBoost = 6
           } else if (isPowerTrip) {
             defBoost = 6
-            healBoost = 120
-            attackBoost = 12
+            healBoost = 90
+            attackBoost = 9
           }
           attacker.addSpecialDefense(defBoost)
           attacker.addDefense(defBoost)
