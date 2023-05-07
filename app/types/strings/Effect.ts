@@ -290,7 +290,7 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.POWER_TRIP]: {
-    eng: `Upon kill, grants 6 ${Stat.DEF}, 6 ${Stat.SPE_DEF}, 12 ${Stat.ATK} and heal 120 ${Stat.HP}`,
+    eng: `Upon kill, grants 6 ${Stat.DEF}, 6 ${Stat.SPE_DEF}, 9 ${Stat.ATK} and heal 90 ${Stat.HP}`,
     esp: ``,
     fra: ``
   },
