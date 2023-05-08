@@ -42,3 +42,4 @@
 - Add How to play section to wiki with tutorial videos (thanks @Batotsu !)
 - Add 8 new titles based on reaching a certain level: Rookie, Amateur, Veteran, Pro, Expert, Elite, Master, Grand Master
 - Accessing the Bot Builder now requires the title "Bot Builder" which is unlocked at level 10
+- When a room leader quits his lobby, room leader role is automatically given to next player
