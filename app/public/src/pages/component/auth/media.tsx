@@ -5,22 +5,12 @@ import PolicyButton from "../buttons/policy-button"
 
 export default function Media() {
   return (
-    <div
-      style={{
-        display: "flex",
-        gap: "1em",
-        alignItems: "center",
-        justifyContent: "end",
-        marginRight: "1em"
-      }}
-    >
+    <div className="media">
       <DiscordButton />
       <GithubButton />
       <PolicyButton />
-      <span style={{ color: "white", textShadow: "2px 2px 0 black" }}>
-        V3.3
-      </span>
-      <p style={{ color: "#fff", textShadow: "2px 4px 3px rgba(0,0,0,0.3)" }}>
+      <span>V3.3</span>
+      <p>
         Made by 2 fans, for fans
         <br />
         Non profit / Open Source game
