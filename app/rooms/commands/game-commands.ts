@@ -872,7 +872,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         case Effect.SHEER_COLD:
           player.titles.add(Title.SKIER)
           break
-        case Effect.ELDER_POWER:
+        case Effect.FORGOTTEN_POWER:
           player.titles.add(Title.MUSEUM_DIRECTOR)
           break
         case Effect.PRESTO:
