@@ -1,12 +1,8 @@
 import React from "react"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { PrecomputedTypePokemon } from "../../../../../types"
-import { Synergy } from "../../../../../types/enum/Synergy"
-import {
-  SynergyName,
-  SynergyDetail,
-  SynergyDescription
-} from "../../../../../types/strings/Synergy"
+import { Synergy, SynergyEffects } from "../../../../../types/enum/Synergy"
+import { SynergyName, SynergyDescription } from "../../../../../types/strings/Synergy"
 import PRECOMPUTED_TYPE_POKEMONS from "../../../../../models/precomputed/type-pokemons.json"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { EffectName } from "../../../../../types/strings/Effect"
@@ -36,7 +32,7 @@ export default function SynergyDetailComponent(props: {
       </div>
       <p>{addIconsToDescription(SynergyDescription[props.type].eng)}</p>
 
-      {SynergyDetail[props.type].map((d, i) => {
+      {SynergyEffects[props.type].map((d, i) => {
         return (
           <div
             key={EffectName[d]}

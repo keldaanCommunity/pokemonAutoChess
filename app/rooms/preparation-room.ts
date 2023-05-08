@@ -25,7 +25,7 @@ import BannedUser from "../models/mongo-models/banned-user"
 import { IBot } from "../models/mongo-models/bot-v2"
 import { logger } from "../utils/logger"
 
-export default class PreparationRoom extends Room {
+export default class PreparationRoom extends Room<PreparationState> {
   dispatcher: Dispatcher<this>
   elos: Map<any, any>
 
@@ -141,10 +141,12 @@ export default class PreparationRoom extends Room {
       (client: Client, botType: IBot | BotDifficulty) => {
         try {
           const user = this.state.users.get(client.auth.uid)
-          this.dispatcher.dispatch(new OnAddBotCommand(), {
-            type: botType,
-            user: user
-          })
+          if (user) {
+            this.dispatcher.dispatch(new OnAddBotCommand(), {
+              type: botType,
+              user: user
+            })
+          }
         } catch (error) {
           logger.error(error)
         }
@@ -153,10 +155,12 @@ export default class PreparationRoom extends Room {
     this.onMessage(Transfer.REMOVE_BOT, (client: Client, t: string) => {
       try {
         const user = this.state.users.get(client.auth.uid)
-        this.dispatcher.dispatch(new OnRemoveBotCommand(), {
-          target: t,
-          user: user
-        })
+        if(user){
+          this.dispatcher.dispatch(new OnRemoveBotCommand(), {
+            target: t,
+            user: user
+          })
+        }
       } catch (error) {
         logger.error(error)
       }

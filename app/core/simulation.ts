@@ -469,14 +469,10 @@ export default class Simulation extends Schema implements ISimulation {
           break
 
         case Effect.ANCIENT_POWER:
-          if (types.includes(Synergy.FOSSIL)) {
-            pokemon.effects.push(Effect.ANCIENT_POWER)
-          }
-          break
-
         case Effect.ELDER_POWER:
+        case Effect.FORGOTTEN_POWER:
           if (types.includes(Synergy.FOSSIL)) {
-            pokemon.effects.push(Effect.ELDER_POWER)
+            pokemon.effects.push(effect)
           }
           break
 
