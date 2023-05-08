@@ -17,6 +17,7 @@ import { AbilityStrategy, Ability } from "../types/enum/Ability"
 import { Synergy } from "../types/enum/Synergy"
 import { Pkm } from "../types/enum/Pokemon"
 import { IdleState } from "./idle-state"
+import PokemonFactory from "../models/pokemon-factory"
 
 export default class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
@@ -368,4 +369,97 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       target.count.manaBurnCount++
     }
   }
+
+  onKill(target: PokemonEntity, board: Board){
+    if (
+      this.items.has(Item.AMULET_COIN) &&
+      this.team === 0 &&
+      this.simulation.player &&
+      this.count.moneyCount < 5
+    ) {
+      this.simulation.player.money += 1
+      this.count.moneyCount++
+    }
+    if (this.effects.includes(Effect.PURSUIT) ||
+        this.effects.includes(Effect.BRUTAL_SWING) ||
+        this.effects.includes(Effect.POWER_TRIP)
+    ) {
+      const isPursuit = this.effects.includes(Effect.PURSUIT)
+      const isBrutalSwing = this.effects.includes(Effect.BRUTAL_SWING)
+      const isPowerTrip = this.effects.includes(Effect.POWER_TRIP)
+
+      if (isPursuit || isBrutalSwing || isPowerTrip) {
+        let defBoost = 0
+        let healBoost = 0
+        let attackBoost = 0
+        if (isPursuit) {
+          defBoost = 2
+          healBoost = 30
+          attackBoost = 3
+        } else if (isBrutalSwing) {
+          defBoost = 4
+          healBoost = 60
+          attackBoost = 6
+        } else if (isPowerTrip) {
+          defBoost = 6
+          healBoost = 90
+          attackBoost = 9
+        }
+        this.addSpecialDefense(defBoost)
+        this.addDefense(defBoost)
+        this.handleHeal(healBoost, this, 0)
+        this.addAttack(attackBoost)
+        this.count.monsterExecutionCount++
+      }
+    }
+
+    if (
+      target.effects.includes(Effect.ODD_FLOWER) ||
+      target.effects.includes(Effect.GLOOM_FLOWER) ||
+      target.effects.includes(Effect.VILE_FLOWER) ||
+      target.effects.includes(Effect.SUN_FLOWER)
+    ) {
+      if (!target.simulation.flowerSpawn[target.team]) {
+        target.simulation.flowerSpawn[target.team] = true
+        const nearestAvailableCoordinate =
+          this.state.getFarthestTargetCoordinateAvailablePlace(target, board)
+        if (nearestAvailableCoordinate) {
+          if (target.effects.includes(Effect.ODD_FLOWER)) {
+            target.simulation.addPokemon(
+              PokemonFactory.createPokemonFromName(Pkm.ODDISH),
+              nearestAvailableCoordinate.x,
+              nearestAvailableCoordinate.y,
+              target.team,
+              true
+            )
+          } else if (target.effects.includes(Effect.GLOOM_FLOWER)) {
+            target.simulation.addPokemon(
+              PokemonFactory.createPokemonFromName(Pkm.GLOOM),
+              nearestAvailableCoordinate.x,
+              nearestAvailableCoordinate.y,
+              target.team,
+              true
+            )
+          } else if (target.effects.includes(Effect.VILE_FLOWER)) {
+            target.simulation.addPokemon(
+              PokemonFactory.createPokemonFromName(Pkm.VILEPLUME),
+              nearestAvailableCoordinate.x,
+              nearestAvailableCoordinate.y,
+              target.team,
+              true
+            )
+          } else if (target.effects.includes(Effect.SUN_FLOWER)) {
+            target.simulation.addPokemon(
+              PokemonFactory.createPokemonFromName(Pkm.BELLOSSOM),
+              nearestAvailableCoordinate.x,
+              nearestAvailableCoordinate.y,
+              target.team,
+              true
+            )
+          }
+        }
+      }
+    }
+  }
+
 }

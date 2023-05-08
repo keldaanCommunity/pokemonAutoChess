@@ -20,6 +20,7 @@
 - Replace Zoom Lens by Scope Lens: Gains 25% critical chance. Critical hits steal 20 Mana from the target
 - Rocky Helmet no longer prevents "on critical" effects, such as fairy splash damage
 - Rocky Helmet now also negates bonus damage from critical special damage
+- Max Revive now gives Resurection status, and so can no longer be stacked with another Resurection from an ability
 
 # Changes to Stages
 
@@ -29,6 +30,7 @@
 - Critical hits for abilities now also applies "on critical" effects, such as fairy splash damage
 - Critical chance for special damage is now computed once and no longer per target. Previously, an area of effect ability could trigger critical hit on only part of the targets.
 - Improve the accuracy of abilities Aqua Jet, Flame Charge, Volt Switch and Flame Wheel.
+- On-KO effects are now triggered even when target has Resurection, Fossil revive or Max revive
 
 # UI
 - Prevents picking a mythical when your bench is full. Add an informative message

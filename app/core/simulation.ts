@@ -285,6 +285,10 @@ export default class Simulation extends Schema implements ISimulation {
     if (pokemon.items.has(Item.WIDE_LENS)) {
       pokemon.range += 2
     }
+
+    if (pokemon.items.has(Item.MAX_REVIVE)) {
+      pokemon.status.resurection = true
+    }
   }
 
   applyPostEffects() {
