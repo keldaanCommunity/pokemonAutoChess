@@ -25,7 +25,7 @@ import BannedUser from "../models/mongo-models/banned-user"
 import { IBot } from "../models/mongo-models/bot-v2"
 import { logger } from "../utils/logger"
 
-export default class PreparationRoom extends Room {
+export default class PreparationRoom extends Room<PreparationState> {
   dispatcher: Dispatcher<this>
   elos: Map<any, any>
 
@@ -59,10 +59,10 @@ export default class PreparationRoom extends Room {
   }
 
   onCreate(options: { ownerId?: string; idToken: string; ownerName: string }) {
-    // logger.log(options);
+    // logger.debug(options);
     const n = `${options.ownerName}'s room`
-    logger.log(`create ${n} room`)
-    // logger.log(defaultRoomName);
+    logger.info(`create ${n} room`)
+    // logger.debug(defaultRoomName);
     this.setState(new PreparationState(options.ownerId, n))
     this.maxClients = 8
     if (options.ownerId) {
@@ -141,10 +141,12 @@ export default class PreparationRoom extends Room {
       (client: Client, botType: IBot | BotDifficulty) => {
         try {
           const user = this.state.users.get(client.auth.uid)
-          this.dispatcher.dispatch(new OnAddBotCommand(), {
-            type: botType,
-            user: user
-          })
+          if (user) {
+            this.dispatcher.dispatch(new OnAddBotCommand(), {
+              type: botType,
+              user: user
+            })
+          }
         } catch (error) {
           logger.error(error)
         }
@@ -153,10 +155,12 @@ export default class PreparationRoom extends Room {
     this.onMessage(Transfer.REMOVE_BOT, (client: Client, t: string) => {
       try {
         const user = this.state.users.get(client.auth.uid)
-        this.dispatcher.dispatch(new OnRemoveBotCommand(), {
-          target: t,
-          user: user
-        })
+        if(user){
+          this.dispatcher.dispatch(new OnRemoveBotCommand(), {
+            target: t,
+            user: user
+          })
+        }
       } catch (error) {
         logger.error(error)
       }
@@ -195,7 +199,7 @@ export default class PreparationRoom extends Room {
 
   onJoin(client: Client, options: any, auth: any) {
     if (client && client.auth && client.auth.displayName) {
-      logger.log(
+      logger.info(
         `${client.auth.displayName} ${client.id} join preparation room`
       )
       this.dispatcher.dispatch(new OnJoinCommand(), { client, options, auth })
@@ -204,7 +208,7 @@ export default class PreparationRoom extends Room {
 
   async onLeave(client: Client, consented: boolean) {
     if (client && client.auth && client.auth.displayName) {
-      logger.log(
+      logger.info(
         `${client.auth.displayName} ${client.id} is leaving preparation room`
       )
     }
@@ -217,7 +221,7 @@ export default class PreparationRoom extends Room {
       await this.allowReconnection(client, 2)
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
-        logger.log(
+        logger.info(
           `${client.auth.displayName} ${client.id} leave preparation room`
         )
       }
@@ -226,7 +230,7 @@ export default class PreparationRoom extends Room {
   }
 
   onDispose() {
-    logger.log("Dispose preparation room")
+    logger.info("Dispose preparation room")
     this.dispatcher.stop()
   }
 

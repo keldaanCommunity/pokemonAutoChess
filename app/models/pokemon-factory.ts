@@ -1850,7 +1850,7 @@ export default class PokemonFactory {
       case Pkm.MARSHADOW:
         return new Marshadow(s, e)
       default:
-        // console.log(`No pokemon with name "${name}" found, return magikarp`);
+        // logger.warn(`No pokemon with name "${name}" found, return magikarp`);
         return new Magikarp(s, e)
     }
   }

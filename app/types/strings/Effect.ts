@@ -75,6 +75,7 @@ export const EffectName: { [key in Effect]: string } = {
   [Effect.SHEER_COLD]: `Sheer Cold`,
   [Effect.ANCIENT_POWER]: `Ancient Power`,
   [Effect.ELDER_POWER]: `Elder Power`,
+  [Effect.FORGOTTEN_POWER]: `Forgotten Power`,
   [Effect.LARGO]: `Largo`,
   [Effect.ALLEGRO]: `Allegro`,
   [Effect.PRESTO]: `Presto`,
@@ -446,6 +447,11 @@ export const EffectDescription: {
   },
   [Effect.ELDER_POWER]: {
     eng: `Revive with 80% ${Stat.HP} and +60% ${Stat.ATK}.`,
+    esp: ``,
+    fra: ``
+  },
+  [Effect.FORGOTTEN_POWER]: {
+    eng: `Revive with 100% ${Stat.HP} and +100% ${Stat.ATK}.`,
     esp: ``,
     fra: ``
   },

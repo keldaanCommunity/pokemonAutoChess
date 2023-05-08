@@ -97,6 +97,7 @@ export default class Board {
           targetPosX: target?.positionX,
           targetPosY: target?.positionY
         })
+        logger.trace("orientation error")
         return Orientation.DOWNRIGHT
       } else if (dy < 0) {
         return Orientation.DOWN

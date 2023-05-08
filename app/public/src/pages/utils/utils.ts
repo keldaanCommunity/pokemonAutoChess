@@ -36,7 +36,7 @@ export function getOrientation(x1: number, y1: number, x2: number, y2: number) {
     angle += 2 * Math.PI
   }
   const quarterPi = Math.PI / 4
-  // console.log(angle);
+  // logger.debug(angle);
   if (angle < quarterPi) {
     return Orientation.RIGHT
   } else if (angle < 2 * quarterPi) {

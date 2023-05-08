@@ -3,6 +3,7 @@ import { connect } from "mongoose"
 import BotV2 from "../app/models/mongo-models/bot-v2"
 import { PastebinAPI } from "pastebin-ts/dist/api"
 import { nanoid } from "nanoid"
+import { logger } from "../app/utils/logger"
 const args = process.argv.slice(2)
 
 async function main() {
@@ -16,22 +17,22 @@ async function main() {
 
   const url = args[0]
   const id = url.slice(21)
-  console.log(`retrieving id : ${id} ...`)
+  logger.debug(`retrieving id : ${id} ...`)
 
-  console.log("retrieving data ...")
+  logger.debug("retrieving data ...")
   const data = await pastebin.getPaste(id, false)
-  console.log("parsing JSON data ...")
+  logger.debug("parsing JSON data ...")
   try {
     const json = JSON.parse(data)
-    console.log("connect to db ...")
+    logger.debug("connect to db ...")
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const db = await connect(process.env.MONGO_URI!)
     const resultDelete = await BotV2.deleteMany({
       avatar: json.avatar,
       author: json.author
     })
-    console.log(resultDelete)
-    console.log(`creating BotV2 ${json.avatar} by ${json.author}...`)
+    logger.debug(resultDelete)
+    logger.debug(`creating BotV2 ${json.avatar} by ${json.author}...`)
     const resultCreate = await BotV2.create({
       name: json.name,
       avatar: json.avatar,
@@ -40,7 +41,7 @@ async function main() {
       steps: json.steps,
       id: nanoid()
     })
-    console.log(
+    logger.debug(
       resultCreate.id,
       resultCreate.name,
       resultCreate.avatar,
@@ -49,7 +50,7 @@ async function main() {
     )
     await db.disconnect()
   } catch (e) {
-    console.error("Parsing error:", e)
+    logger.error("Parsing error:", e)
   }
 }
 

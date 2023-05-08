@@ -109,7 +109,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
   }
 
   onCreate(): Promise<void> {
-    logger.log("create lobby", this.roomId)
+    logger.info("create lobby", this.roomId)
     super.onCreate({})
     this.setState(new LobbyState())
     this.autoDispose = false
@@ -276,6 +276,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
       try {
         const bot = message.bot
         const user = this.state.users.get(client.auth.uid)
+        if(!user) return;
         this.pastebin
           ?.createPaste({
             text: JSON.stringify(bot),
@@ -353,7 +354,9 @@ export default class CustomLobbyRoom extends LobbyRoom {
 
     this.onMessage(Transfer.OPEN_BOOSTER, (client) => {
       try {
-        const user: LobbyUser = this.state.users.get(client.auth.uid)
+        const user = this.state.users.get(client.auth.uid)
+        if(!user) return;
+
         const DUST_PER_BOOSTER = 50
         if (user && user.booster && user.booster > 0) {
           user.booster -= 1
@@ -406,8 +409,10 @@ export default class CustomLobbyRoom extends LobbyRoom {
 
     this.onMessage(Transfer.CHANGE_NAME, (client, message) => {
       try {
+        const user = this.state.users.get(client.auth.uid)
+        if(!user) return
         if (USERNAME_REGEXP.test(message.name)) {
-          this.state.users.get(client.auth.uid).name = message.name
+          user.name = message.name
           UserMetadata.findOne({ uid: client.auth.uid }, (err, user) => {
             if (user) {
               user.displayName = message.name
@@ -448,7 +453,8 @@ export default class CustomLobbyRoom extends LobbyRoom {
         message: { index: string; emotion: Emotion; shiny: boolean }
       ) => {
         try {
-          const user: LobbyUser = this.state.users.get(client.auth.uid)
+          const user = this.state.users.get(client.auth.uid)
+          if(!user) return
           const pokemonConfig = user.pokemonCollection.get(message.index)
           if (pokemonConfig) {
             const emotionsToCheck = message.shiny
@@ -487,7 +493,8 @@ export default class CustomLobbyRoom extends LobbyRoom {
         message: { index: string; emotion: Emotion; shiny: boolean }
       ) => {
         try {
-          const user: LobbyUser = this.state.users.get(client.auth.uid)
+          const user = this.state.users.get(client.auth.uid)
+          if(!user) return
           const pokemonConfig = user.pokemonCollection.get(message.index)
           if (pokemonConfig) {
             const emotionsToCheck = message.shiny
@@ -572,7 +579,8 @@ export default class CustomLobbyRoom extends LobbyRoom {
         message: { index: string }
       ) => {
         try {
-          const user: LobbyUser = this.state.users.get(client.auth.uid)
+          const user = this.state.users.get(client.auth.uid)
+          if(!user) return
           const pokemonConfig = user.pokemonCollection.get(message.index)
           if (pokemonConfig) {
             const BOOSTER_COST = 500
@@ -678,7 +686,8 @@ export default class CustomLobbyRoom extends LobbyRoom {
         message: { index: string; emotion: Emotion; shiny: boolean }
       ) => {
         try {
-          const user: LobbyUser = this.state.users.get(client.auth.uid)
+          const user = this.state.users.get(client.auth.uid)
+          if(!user) return
           const config = user.pokemonCollection.get(message.index)
           if (config) {
             const emotionsToCheck = message.shiny
@@ -859,7 +868,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
   onJoin(client: Client, options: any) {
     super.onJoin(client, options)
     try {
-      logger.log(`${client.auth.displayName} ${client.id} join lobby room`)
+      logger.info(`${client.auth.displayName} ${client.id} join lobby room`)
       // client.send(Transfer.REQUEST_BOT_DATA, this.bots);
       UserMetadata.findOne(
         { uid: client.auth.uid },
@@ -952,7 +961,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
     try {
       super.onLeave(client)
       if (client && client.auth && client.auth.displayName && client.auth.uid) {
-        logger.log(`${client.auth.displayName} ${client.id} leave lobby`)
+        logger.info(`${client.auth.displayName} ${client.id} leave lobby`)
         this.state.users.delete(client.auth.uid)
       }
     } catch (error) {
@@ -963,7 +972,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
   onDispose() {
     try {
       super.onDispose()
-      logger.log("dispose lobby")
+      logger.info("dispose lobby")
     } catch (error) {
       logger.error(error)
     }

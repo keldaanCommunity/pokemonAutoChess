@@ -170,4 +170,4 @@ gameServer.define("game", GameRoom).enableRealtimeListing()
 
 // Start
 gameServer.listen(port)
-logger.log(`Game server started, listening on port ${port}`)
+logger.info(`Game server started, listening on port ${port}`)

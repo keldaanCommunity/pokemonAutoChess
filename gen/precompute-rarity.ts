@@ -5,6 +5,7 @@ import { Ability } from "../app/types/enum/Ability"
 import { Rarity } from "../app/types/enum/Game"
 import { Pokemon } from "../app/models/colyseus-models/pokemon"
 import { indexSort } from "./precompute-all"
+import { logger } from "../app/utils/logger"
 
 const data = {
   [Rarity.COMMON]: [],
@@ -30,7 +31,7 @@ Object.keys(Rarity).forEach((rarity) => {
   data[rarity] = pokemonCandidates.map((p) => p.name)
 })
 
-console.log(data)
+logger.debug(data)
 
 fs.writeFileSync(
   "../app/models/precomputed/type-rarity-all.json",

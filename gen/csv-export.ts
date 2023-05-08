@@ -3,6 +3,7 @@ import { Pkm, PkmFamily, PkmIndex } from "../app/types/enum/Pokemon"
 import PokemonFactory from "../app/models/pokemon-factory"
 import { Ability } from '../app/types/enum/Ability';
 import { Rarity } from '../app/types/enum/Game';
+import { logger } from '../app/utils/logger';
 
 const csvWriter = createObjectCsvWriter({
   path: '../app/models/precomputed/pokemons-data.csv',
@@ -90,4 +91,4 @@ Object.values(Pkm).sort((a,b) => PkmIndex[a].localeCompare(PkmIndex[b])).forEach
 
 csvWriter
   .writeRecords(data)
-  .then(()=> console.log('CSV export done successfully'));
+  .then(()=> logger.info('CSV export done successfully'));

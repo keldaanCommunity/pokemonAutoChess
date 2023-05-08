@@ -55,7 +55,7 @@ export default class WikiFaq extends Component {
         <h4 className="nes-text is-success">How do I level up ?</h4>
         <p>
           You gain experience each time you finish a game. If you finish first,
-          you'll get 900 xp, if you finish last, you'll get 100 xp.
+          you'll get 700 xp, if you finish last, you'll get 100 xp.
         </p>
         <h4 className="nes-text is-success">
           It seems some sprites are missing ?

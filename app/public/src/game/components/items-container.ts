@@ -3,6 +3,7 @@ import { GameObjects } from "phaser"
 import ItemContainer from "./item-container"
 import { Item } from "../../../../types/enum/Item"
 import Player from "../../../../models/colyseus-models/player"
+import { logger } from "../../../../utils/logger"
 
 export default class ItemsContainer extends GameObjects.Container {
   pokemonId: string | null;
@@ -38,7 +39,7 @@ export default class ItemsContainer extends GameObjects.Container {
       this.remove(target, true)
       this.updateItems()
     } else {
-      console.warn("no item found looking for", item)
+      logger.warn("no item found looking for", item)
     }
   }
 

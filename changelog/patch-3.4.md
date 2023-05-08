@@ -14,6 +14,7 @@
 # Changes to Synergies
 - Nerf Electric 4 & 6: 50% → 40%, 70% → 50% chance of triple attack
 - Nerf Monster 6 : 12 → 9 attack buff, 120 → 90 HP healed
+- New Fossil 6 synergy level: (6) Forgotten Power: Revive with 100% Health Points and +100% attack
 
 # Changes to Items
 - Replace Zoom Lens by Scope Lens: Gains 25% critical chance. Critical hits steal 20 Mana from the target
@@ -44,3 +45,4 @@
 - Add How to play section to wiki with tutorial videos (thanks @Batotsu !)
 - Add 8 new titles based on reaching a certain level: Rookie, Amateur, Veteran, Pro, Expert, Elite, Master, Grand Master
 - Accessing the Bot Builder now requires the title "Bot Builder" which is unlocked at level 10
+- When a room leader quits his lobby, room leader role is automatically given to next player

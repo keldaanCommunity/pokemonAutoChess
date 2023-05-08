@@ -71,6 +71,7 @@ export enum Effect {
   SHEER_COLD,
   ANCIENT_POWER,
   ELDER_POWER,
+  FORGOTTEN_POWER,
   LARGO,
   ALLEGRO,
   PRESTO,

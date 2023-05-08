@@ -5,7 +5,7 @@ import { AttackType, HealType, PokemonActionState } from "../types/enum/Game"
 import Board from "./board"
 import PokemonEntity from "./pokemon-entity"
 import { IPokemonEntity, Transfer, FIGHTING_PHASE_DURATION } from "../types"
-import { Synergy } from "../types/enum/Synergy"
+import { Synergy, SynergyEffects } from "../types/enum/Synergy"
 import { Ability } from "../types/enum/Ability"
 import { FlyingProtectThreshold } from "../types/Config"
 import { pickRandomIn } from "../utils/random"
@@ -89,7 +89,9 @@ export default class PokemonState {
     let takenDamage: number = 0
 
     if(isNaN(damage)){
-      return logger.error(`NaN Damage`)
+      logger.trace(`NaN Damage`)
+      logger.debug({ damage, attacker: attacker.name, critDamage: attacker.critDamage, atk: attacker.atk })
+      return { death: false, takenDamage: 0 }
     }
 
     if (pokemon.life == 0) {
@@ -335,20 +337,16 @@ export default class PokemonState {
         }
 
         if (!pokemon.life || pokemon.life <= 0) {
-          if (pokemon.effects.includes(Effect.ANCIENT_POWER)) {
-            pokemon.status.triggerProtect(1000)
-            pokemon.life = pokemon.hp * 0.4
-            pokemon.addAttack(pokemon.baseAtk * 0.3)
+          if (pokemon.items.has(Item.MAX_REVIVE)) {
+            pokemon.life = pokemon.hp
+            pokemon.items.delete(Item.MAX_REVIVE)
+          } else if (SynergyEffects[Synergy.FOSSIL].some(e => pokemon.effects.includes(e))) {
+            const healBonus = pokemon.effects.includes(Effect.FORGOTTEN_POWER) ? 1 : pokemon.effects.includes(Effect.ELDER_POWER) ? 0.8 : 0.4
+            const attackBonus = pokemon.effects.includes(Effect.FORGOTTEN_POWER) ? 1 : pokemon.effects.includes(Effect.ELDER_POWER) ? 0.6 : 0.3
+            pokemon.life = pokemon.hp * healBonus
+            pokemon.addAttack(pokemon.baseAtk * attackBonus)
             pokemon.effects.splice(
-              pokemon.effects.findIndex((e) => e === Effect.ANCIENT_POWER),
-              1
-            )
-          } else if (pokemon.effects.includes(Effect.ELDER_POWER)) {
-            pokemon.status.triggerProtect(1000)
-            pokemon.life = pokemon.hp * 0.8
-            pokemon.addAttack(pokemon.baseAtk * 0.6)
-            pokemon.effects.splice(
-              pokemon.effects.findIndex((e) => e === Effect.ELDER_POWER),
+              pokemon.effects.findIndex((e) => SynergyEffects[Synergy.FOSSIL].includes(e)),
               1
             )
           } else if (pokemon.status.resurection) {

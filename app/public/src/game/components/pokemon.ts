@@ -3116,7 +3116,7 @@ export default class Pokemon extends DraggableObject {
       const coordinates = transformAttackCoordinate(this.targetX, this.targetY)
 
       if (this.scene) {
-        // console.log(`Shooting a projectile to (${this.targetX},${this.targetY})`);
+        // logger.debug(`Shooting a projectile to (${this.targetX},${this.targetY})`);
         this.scene.tweens.add({
           targets: this.projectile,
           x: coordinates[0],

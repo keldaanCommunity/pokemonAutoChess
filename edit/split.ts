@@ -10,6 +10,7 @@ import {
   PokemonTint,
   SpriteType
 } from "../app/types/enum/Game"
+import { logger } from "../app/utils/logger"
 
 gracefulFs.gracefulify(fs)
 const args = process.argv.slice(2)
@@ -55,7 +56,7 @@ async function split() {
     }
   })
 
-  console.log(mapName)
+  logger.debug(mapName)
 
   for (let i = 0; i < pkmaIndexes.length; i++) {
     const index = pkmaIndexes[i]
@@ -108,7 +109,7 @@ async function split() {
                 if (frameWidth && frameHeight) {
                   const width = img.getWidth() / frameWidth
                   const height = img.getHeight() / frameHeight
-                  // console.log('img', index, 'action', action, 'frame height', metadata.FrameHeight, 'frame width', metadata.FrameWidth, 'width', img.getWidth(), 'height', img.getHeight(), ':', width, height);
+                  // logger.debug('img', index, 'action', action, 'frame height', metadata.FrameHeight, 'frame width', metadata.FrameWidth, 'width', img.getWidth(), 'height', img.getHeight(), ':', width, height);
                   for (let x = 0; x < width; x++) {
                     for (let y = 0; y < height; y++) {
                       const cropImg = img.clone()
@@ -153,8 +154,8 @@ async function split() {
                 }
               }
             } catch (error) {
-              console.log(error)
-              console.log(
+              logger.error(error)
+              logger.warn(
                 "action",
                 action,
                 "is missing for index",
@@ -162,11 +163,11 @@ async function split() {
                 mapName.get(index)
               )
             }
-            console.log(progression, shiny, anim, action)
+            logger.debug(progression, shiny, anim, action)
           }
         }
       } catch (error) {
-        console.log(
+        logger.warn(
           "pokemon with index",
           index,
           "not found",
@@ -179,17 +180,17 @@ async function split() {
     }
   }
 
-  console.log(durations)
+  logger.debug(durations)
   const fileA = fs.createWriteStream("sheets/durations.json")
   fileA.on("error", function (err) {
-    console.log(err)
+    logger.error(err)
   })
   fileA.write(JSON.stringify(durations))
   fileA.end()
 
   const fileB = fs.createWriteStream("sheets/missing.txt")
   fileB.on("error", function (err) {
-    console.log(err)
+    logger.error(err)
   })
   fileB.write(missing)
   fileB.end()

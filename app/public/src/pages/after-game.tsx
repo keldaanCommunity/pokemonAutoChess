@@ -58,7 +58,6 @@ export default function AfterGame() {
                 setToLobby(true)
               }
             }, 1000)
-            console.log(error)
           }
         } else {
           setToAuth(true)
