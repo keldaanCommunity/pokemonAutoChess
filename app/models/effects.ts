@@ -1,9 +1,8 @@
 import Synergies from "./colyseus-models/synergies"
 import { Effect } from "../types/enum/Effect"
-import { Synergy } from "../types/enum/Synergy"
+import { Synergy, SynergyEffects } from "../types/enum/Synergy"
 import { Climate } from "../types/enum/Game"
 import { TypeTrigger } from "../types/Config"
-import { SynergyDetail } from "../types/strings/Synergy"
 
 export class Effects {
   climate: string
@@ -21,7 +20,7 @@ export class Effects {
         const v = TypeTrigger[synergy][i]
         const s = synergies.get(synergy)
         if (s && s >= v) {
-          this.list.push(SynergyDetail[synergy][i])
+          this.list.push(SynergyEffects[synergy][i])
           break
         }
       }
