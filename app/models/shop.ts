@@ -7,6 +7,7 @@ import { pickRandomIn, shuffleArray } from "../utils/random"
 import { clamp } from "../utils/number"
 import { removeInArray } from "../utils/array"
 import { Pokemon } from "./colyseus-models/pokemon"
+import { logger } from "../utils/logger"
 
 
 export function getPoolSize(rarity: Rarity, maxStars: number): number {
@@ -174,7 +175,7 @@ export default class Shop {
     if (val !== undefined) {
       pool.set(pkm, Math.max(0, val - 1))
     }
-    //console.log("taking a ", pkm, "from the shop", val)
+    //logger.debug("taking a ", pkm, "from the shop", val)
     return pkm
   }
 
@@ -211,7 +212,7 @@ export default class Shop {
             pokemon = this.getRandomPokemonFromPool(this.legendaryPool, finals)
             break
           default:
-            console.error(
+            logger.error(
               `error in shop while picking seed = ${seed}, threshold = ${threshold}, index = ${i}`
             )
             break

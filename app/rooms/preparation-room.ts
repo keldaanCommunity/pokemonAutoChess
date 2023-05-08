@@ -59,10 +59,10 @@ export default class PreparationRoom extends Room<PreparationState> {
   }
 
   onCreate(options: { ownerId?: string; idToken: string; ownerName: string }) {
-    // logger.log(options);
+    // logger.debug(options);
     const n = `${options.ownerName}'s room`
-    logger.log(`create ${n} room`)
-    // logger.log(defaultRoomName);
+    logger.info(`create ${n} room`)
+    // logger.debug(defaultRoomName);
     this.setState(new PreparationState(options.ownerId, n))
     this.maxClients = 8
     if (options.ownerId) {
@@ -199,7 +199,7 @@ export default class PreparationRoom extends Room<PreparationState> {
 
   onJoin(client: Client, options: any, auth: any) {
     if (client && client.auth && client.auth.displayName) {
-      logger.log(
+      logger.info(
         `${client.auth.displayName} ${client.id} join preparation room`
       )
       this.dispatcher.dispatch(new OnJoinCommand(), { client, options, auth })
@@ -208,7 +208,7 @@ export default class PreparationRoom extends Room<PreparationState> {
 
   async onLeave(client: Client, consented: boolean) {
     if (client && client.auth && client.auth.displayName) {
-      logger.log(
+      logger.info(
         `${client.auth.displayName} ${client.id} is leaving preparation room`
       )
     }
@@ -221,7 +221,7 @@ export default class PreparationRoom extends Room<PreparationState> {
       await this.allowReconnection(client, 2)
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
-        logger.log(
+        logger.info(
           `${client.auth.displayName} ${client.id} leave preparation room`
         )
       }
@@ -230,7 +230,7 @@ export default class PreparationRoom extends Room<PreparationState> {
   }
 
   onDispose() {
-    logger.log("Dispose preparation room")
+    logger.info("Dispose preparation room")
     this.dispatcher.stop()
   }
 

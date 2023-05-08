@@ -312,7 +312,7 @@ export default class AttackingState extends PokemonState {
         pokemon.status.triggerParalysis(5000, pokemon)
       }
 
-      if (pokemon.items.has(Item.CHOICE_SCARF)) {
+      if (pokemon.items.has(Item.CHOICE_SCARF) && damage > 0) {
         const cells = board.getAdjacentCells(target.positionX, target.positionY)
         let targetCount = 1
         cells.forEach((cell) => {

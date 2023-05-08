@@ -75,6 +75,7 @@ import GamePokemonsProposition from "./component/game/game-pokemons-proposition"
 import { getRankLabel } from "../../../types/strings/Strings"
 import GameScene from "../game/scenes/game-scene"
 import { toast } from "react-toastify"
+import { logger } from "../../../utils/logger"
 let gameContainer: GameContainer
 
 function playerClick(id: string) {
@@ -174,7 +175,7 @@ export default function Game() {
               if(attempts < MAX_ATTEMPS_RECONNECT){
                 setTimeout(() => tryToReconnectToLastGame(attempts+1), 100)
               } else{
-                console.error("reconnect error", error)
+                logger.error("reconnect error", error)
                 setToAuth(true)
               }
             }

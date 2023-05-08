@@ -43,9 +43,9 @@ export default function Synergies(props: { synergies: [string, number][] }) {
             }
           })
           .map((type, index) => {
-            // console.log(type);
+            // logger.debug(type);
             const s = props.synergies.find((e) => e[0] == type)
-            // console.log(s);
+            // logger.debug(s);
             if (s && s[1] > 0) {
               return (
                 <SynergyComponent

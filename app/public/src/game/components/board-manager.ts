@@ -66,7 +66,7 @@ export default class BoardManager {
   }
 
   battleMode() {
-    // console.log('battleMode');
+    // logger.debug('battleMode');
     this.mode = "battle"
     this.pokemons.forEach((pokemon) => {
       if (pokemon.positionY != 0) {
@@ -77,7 +77,7 @@ export default class BoardManager {
   }
 
   pickMode() {
-    // console.log('pickMode');
+    // logger.debug('pickMode');
     this.mode = "pick"
     this.pokemons.forEach((pokemon) => {
       pokemon.setVisible(true)
@@ -96,7 +96,7 @@ export default class BoardManager {
   }
 
   addPokemonItem(playerId: string, value: Item, pokemon: IPokemon) {
-    // console.log(change);
+    // logger.debug(change);
     if (this.player.id === playerId) {
       const pkm = this.pokemons.get(pokemon.id)
       if (pkm && !pkm.itemsContainer.findItem(value)) {
@@ -117,7 +117,7 @@ export default class BoardManager {
   }
 
   changePokemon(pokemon: IPokemon, change: DataChange<any>) {
-    // console.log('change', change.field, pokemon.name);
+    // logger.debug('change', change.field, pokemon.name);
     const pokemonUI = this.pokemons.get(pokemon.id)
     let coordinates: number[]
     if (pokemonUI) {

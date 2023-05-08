@@ -10,6 +10,7 @@ import PokemonFactory from "../models/pokemon-factory"
 import { Pkm } from "../types/enum/Pokemon"
 import { pickRandomIn, shuffleArray } from "../utils/random"
 import { effectInLine, OrientationArray } from "../utils/orientation"
+import { logger } from "../utils/logger"
 
 export class AttackStrategy {
   process(
@@ -980,7 +981,7 @@ export class TwistingNeitherStrategy extends AttackStrategy {
           cell.value.positionX = teleportationCell.x
           cell.value.positionY = teleportationCell.y
         } else {
-          console.error("unable to teleport pokemon", cell.value)
+          logger.error("unable to teleport pokemon", cell.value)
         }
       }
     })

@@ -91,7 +91,9 @@ export default class PokemonState {
     let takenDamage: number = 0
 
     if(isNaN(damage)){
-      console.trace(`NaN Damage`)
+      logger.trace(`NaN Damage`)
+      logger.debug({ damage, attacker: attacker.name, critDamage: attacker.critDamage, atk: attacker.atk })
+      return { death: false, takenDamage: 0 }
     }
 
     if (pokemon.life == 0) {

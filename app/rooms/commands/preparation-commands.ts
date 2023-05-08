@@ -45,7 +45,7 @@ export class OnJoinCommand extends Command<
             )
 
             if (user.uid == this.state.ownerId) {
-              // logger.log(user.displayName);
+              // logger.debug(user.displayName);
               this.state.ownerName = user.displayName
             }
             this.room.broadcast(Transfer.MESSAGES, {
@@ -252,7 +252,7 @@ export class OnToggleReadyCommand extends Command<
 > {
   execute({ client }) {
     try {
-      // logger.log(this.state.users.get(client.auth.uid).ready);
+      // logger.debug(this.state.users.get(client.auth.uid).ready);
       if (client.auth.uid && this.state.users.has(client.auth.uid)) {
         const user = this.state.users.get(client.auth.uid)!
         user.ready = !user.ready
@@ -422,7 +422,7 @@ export class OnRemoveBotCommand extends Command<
           })
           this.state.users.delete(key)
         }
-        logger.log("no bots in lobby")
+        logger.info("no bots in lobby")
         return
       }
 

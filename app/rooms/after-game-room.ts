@@ -18,7 +18,7 @@ export default class AfterGameRoom extends Room<AfterGameState> {
     idToken: string,
     noElo: boolean
   }) {
-    logger.log("create after game", this.roomId)
+    logger.info("create after game", this.roomId)
 
     this.setState(new AfterGameState(options.noElo))
     this.maxClients = 8
@@ -62,7 +62,7 @@ export default class AfterGameRoom extends Room<AfterGameState> {
   }
 
   onJoin(client: Client, options: any, auth: any) {
-    logger.log(`${client.auth.email} join after game`)
+    logger.info(`${client.auth.email} join after game`)
   }
 
   async onLeave(client: Client, consented: boolean) {
@@ -75,13 +75,13 @@ export default class AfterGameRoom extends Room<AfterGameState> {
       await this.allowReconnection(client, 20)
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
-        logger.log(`${client.auth.displayName} leave after game room`)
+        logger.info(`${client.auth.displayName} leave after game room`)
       }
     }
   }
 
   onDispose() {
-    logger.log("dispose after game")
+    logger.info("dispose after game")
     this.dispatcher.stop()
   }
 }

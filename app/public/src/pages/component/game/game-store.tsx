@@ -11,7 +11,7 @@ export default function GameStore() {
   const pokemonCollection = useAppSelector(
     (state) => state.game.pokemonCollection
   )
-  // console.log(pokemonCollection);
+  // logger.debug(pokemonCollection);
   return (
     <ul className="game-pokemons-store">
       {shop.map((pokemon, index) => {
