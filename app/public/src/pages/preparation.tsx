@@ -28,6 +28,7 @@ import { Transfer } from "../../../types"
 import "./preparation.css"
 import { playSound, SOUNDS } from "./utils/audio"
 import { IBot } from "../../../models/mongo-models/bot-v2"
+import { logger } from "../../../utils/logger"
 
 export default function Preparation() {
   const dispatch = useAppDispatch()
@@ -64,7 +65,7 @@ export default function Preparation() {
             }
           } catch (error) {
             setToAuth(true)
-            console.log(error)
+            logger.error(error)
           }
         } else {
           setToAuth(true)

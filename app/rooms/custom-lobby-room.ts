@@ -109,7 +109,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
   }
 
   onCreate(): Promise<void> {
-    logger.log("create lobby", this.roomId)
+    logger.info("create lobby", this.roomId)
     super.onCreate({})
     this.setState(new LobbyState())
     this.autoDispose = false
@@ -859,7 +859,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
   onJoin(client: Client, options: any) {
     super.onJoin(client, options)
     try {
-      logger.log(`${client.auth.displayName} ${client.id} join lobby room`)
+      logger.info(`${client.auth.displayName} ${client.id} join lobby room`)
       // client.send(Transfer.REQUEST_BOT_DATA, this.bots);
       UserMetadata.findOne(
         { uid: client.auth.uid },
@@ -952,7 +952,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
     try {
       super.onLeave(client)
       if (client && client.auth && client.auth.displayName && client.auth.uid) {
-        logger.log(`${client.auth.displayName} ${client.id} leave lobby`)
+        logger.info(`${client.auth.displayName} ${client.id} leave lobby`)
         this.state.users.delete(client.auth.uid)
       }
     } catch (error) {
@@ -963,7 +963,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
   onDispose() {
     try {
       super.onDispose()
-      logger.log("dispose lobby")
+      logger.info("dispose lobby")
     } catch (error) {
       logger.error(error)
     }

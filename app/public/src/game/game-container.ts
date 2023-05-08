@@ -30,6 +30,7 @@ import { IPokemonRecord } from "../../../models/colyseus-models/game-record"
 import { Synergy } from "../../../types/enum/Synergy"
 import { AttackType, HealType } from "../../../types/enum/Game"
 import store from "../stores"
+import { logger } from "../../../utils/logger"
 
 class GameContainer {
   room: Room<GameState>
@@ -111,23 +112,23 @@ class GameContainer {
     this.room.state.floatingItems.onRemove = (value, key) => {
       this.handleFloatingItemRemove(value)
     }
-    this.room.onError((err) => console.log("room error", err))
+    this.room.onError((err) => logger.error("room error", err))
   }
 
   setTilemap(tilemap) {
     this.tilemap = tilemap
     if (this.player || (this.spectate && this.room.state.players.size > 0)) {
-      // console.log('setTilemap', this.player, this.tilemap);
+      // logger.debug('setTilemap', this.player, this.tilemap);
       this.initializeGame()
     }
   }
 
   initializePlayer(player: Player) {
-    // //console.log(player);
+    // logger.debug(player);
     if (this.uid == player.id) {
       this.player = player
       if (this.tilemap) {
-        // console.log('initializePlayer', this.player, this.tilemap);
+        // logger.debug('initializePlayer', this.player, this.tilemap);
         this.initializeGame()
       }
     }
@@ -161,11 +162,11 @@ class GameContainer {
       }
 
       p.items.onAdd = (value, key) => {
-        // console.log('added', value, key)
+        // logger.debug('added', value, key)
         this.handleBoardPokemonItemAdd(player.id, value, p)
       }
       p.items.onRemove = (value, key) => {
-        // console.log('removed', value, key)
+        // logger.debug('removed', value, key)
         this.handleBoardPokemonItemRemove(player.id, value, p)
       }
 
@@ -177,12 +178,12 @@ class GameContainer {
     }).bind(this)
 
     player.items.onAdd = (value, key) => {
-      // console.log('added', value, key);
+      // logger.debug('added', value, key);
       this.handleItemAdd(player, value)
     }
 
     player.items.onRemove = (value, key) => {
-      // console.log('removed', value, key);
+      // logger.debug('removed', value, key);
       this.handleItemRemove(player, value)
     }
 
@@ -193,7 +194,7 @@ class GameContainer {
         this.game.scene.getScene("gameScene") != null
       ) {
         changes.forEach((change) => {
-          // console.log('simulation change ', change.field, change.value);
+          // logger.debug('simulation change ', change.field, change.value);
           if (change.field == "climate") {
             this.handleClimateChange(change, player)
           }
@@ -202,7 +203,7 @@ class GameContainer {
     }
 
     player.simulation.blueTeam.onAdd = (p, key) => {
-      // console.log('add pokemon');
+      // logger.debug('add pokemon');
       const pokemon = <PokemonEntity>p
       this.handlePokemonAdd(player.id, pokemon)
 
@@ -213,24 +214,24 @@ class GameContainer {
       }
 
       pokemon.onChange = (changes: DataChange<any>[]) => {
-        // console.log('change pokemon');
+        // logger.debug('change pokemon');
         changes.forEach((change) => {
-          // console.log(change.field);
+          // logger.debug(change.field);
           this.handlePokemonChange(player.id, change, pokemon)
         })
       }
 
       pokemon.items.onAdd = (value, key) => {
-        // console.log('added', value, key)
+        // logger.debug('added', value, key)
         this.handleBattleManagerPokemonItemAdd(player.id, value, pokemon)
       }
       pokemon.items.onRemove = (value, key) => {
-        // console.log('removed', value, key)
+        // logger.debug('removed', value, key)
         this.handleBattleManagerPokemonItemRemove(player.id, value, pokemon)
       }
 
       pokemon.count.onChange = (changes: DataChange<any>[]) => {
-        // console.log('change item');
+        // logger.debug('change item');
         changes.forEach((change) => {
           this.handlePokemonCountChange(player.id, change, pokemon)
         })
@@ -238,7 +239,7 @@ class GameContainer {
     }
 
     player.simulation.redTeam.onAdd = (p, key) => {
-      // console.log('add pokemon');
+      // logger.debug('add pokemon');
       const pokemon = <PokemonEntity>p
       this.handlePokemonAdd(player.id, pokemon)
 
@@ -249,32 +250,32 @@ class GameContainer {
       }
 
       pokemon.onChange = (changes: DataChange<any>[]) => {
-        // console.log('change pokemon');
+        // logger.debug('change pokemon');
         changes.forEach((change) => {
           this.handlePokemonChange(player.id, change, pokemon)
         })
       }
       pokemon.items.onAdd = (value, key) => {
-        // console.log('added', value, key)
+        // logger.debug('added', value, key)
         this.handleBattleManagerPokemonItemAdd(player.id, value, pokemon)
       }
       pokemon.items.onRemove = (value, key) => {
-        // console.log('removed', value, key)
+        // logger.debug('removed', value, key)
         this.handleBattleManagerPokemonItemRemove(player.id, value, pokemon)
       }
       pokemon.count.onChange = (changes: DataChange<any>[]) => {
-        // console.log('change item');
+        // logger.debug('change item');
         changes.forEach((change) => {
           this.handlePokemonCountChange(player.id, change, pokemon)
         })
       }
     }
     player.simulation.blueTeam.onRemove = (pokemon, key) => {
-      // console.log('remove pokemon');
+      // logger.debug('remove pokemon');
       this.handlePokemonRemove(player.id, pokemon)
     }
     player.simulation.redTeam.onRemove = (pokemon, key) => {
-      // console.log('remove pokemon');
+      // logger.debug('remove pokemon');
       this.handlePokemonRemove(player.id, pokemon)
     }
     player.triggerAll()
@@ -290,7 +291,7 @@ class GameContainer {
   }
 
   handlePokemonAdd(playerId: string, pokemon: IPokemonEntity) {
-    // console.log('simulation add' + pokemon.name);
+    // logger.debug('simulation add' + pokemon.name);
     if (this.game && this.game.scene && this.game.scene.getScene("gameScene")) {
       const g = <GameScene>this.game.scene.getScene("gameScene")
       if (g.battle) {
@@ -300,7 +301,7 @@ class GameContainer {
   }
 
   handlePokemonRemove(playerId: string, pokemon: IPokemonEntity) {
-    // console.log('simulation remove' + pokemon.name);
+    // logger.debug('simulation remove' + pokemon.name);
     if (this.game && this.game.scene && this.game.scene.getScene("gameScene")) {
       const g = <GameScene>this.game.scene.getScene("gameScene")
       if (g.battle) {
@@ -341,7 +342,7 @@ class GameContainer {
     change: DataChange<any>,
     pokemon: IPokemonEntity
   ) {
-    // console.log('simulation change' + change.field);
+    // logger.debug('simulation change' + change.field);
     if (this.game && this.game.scene && this.game.scene.getScene("gameScene")) {
       const g = <GameScene>this.game.scene.getScene("gameScene")
       if (g.battle) {
@@ -355,7 +356,7 @@ class GameContainer {
     change: DataChange<any>,
     pokemon: IPokemonEntity
   ) {
-    // console.log('simulation change' + change.field);
+    // logger.debug('simulation change' + change.field);
     if (this.game && this.game.scene && this.game.scene.getScene("gameScene")) {
       const g = <GameScene>this.game.scene.getScene("gameScene")
       if (g.battle) {

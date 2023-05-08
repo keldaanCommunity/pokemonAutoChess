@@ -4,8 +4,8 @@ import { Pkm, PkmFamily } from "../app/types/enum/Pokemon"
 import PokemonFactory from "../app/models/pokemon-factory"
 import fs from "fs"
 import { Synergy } from "../app/types/enum/Synergy"
-import { RarityHpCost } from "../app/types/Config"
 import { Pokemon } from "../app/models/colyseus-models/pokemon"
+import { logger } from "../app/utils/logger"
 
 const data = {
   NORMAL: {
@@ -207,7 +207,7 @@ const data = {
   })
 })
 
-console.log(data)
+logger.debug(data)
 
 fs.writeFileSync(
   "../app/models/precomputed/type-pokemons.json",

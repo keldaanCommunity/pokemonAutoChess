@@ -699,13 +699,13 @@ export class OnJoinCommand extends Command<
           this.state.players.set(client.auth.uid, player)
   
           if (client && client.auth && client.auth.displayName) {
-            logger.log(`${client.auth.displayName} ${client.id} join game room`)
+            logger.info(`${client.auth.displayName} ${client.id} join game room`)
           }
   
-          // logger.log(this.state.players.get(client.auth.uid).tileset);
+          // logger.debug(this.state.players.get(client.auth.uid).tileset);
           this.state.shop.assignShop(player)
           if (this.state.players.size >= 8) {
-            // logger.log('game elligible to xp');
+            // logger.debug('game elligible to xp');
             this.state.elligibleToXP = true
             let c = 0
             this.state.players.forEach((p) => {

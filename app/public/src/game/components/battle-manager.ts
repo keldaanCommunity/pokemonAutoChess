@@ -79,7 +79,7 @@ export default class BattleManager {
   }
 
   addPokemonItem(playerId: string, value: Item, pokemon: IPokemonEntity) {
-    // console.log(change);
+    // logger.debug(change);
     if (this.player.id === playerId) {
       const children = this.group.getChildren()
       for (let i = 0; i < children.length; i++) {
@@ -233,7 +233,7 @@ export default class BattleManager {
     change: DataChange<any>,
     pokemon: IPokemonEntity
   ) {
-    // console.log(change.field, change.value);
+    // logger.debug(change.field, change.value);
     if (this.player.id == playerId && this.group) {
       const children = this.group.getChildren()
       for (let i = 0; i < children.length; i++) {
@@ -311,7 +311,7 @@ export default class BattleManager {
             }
           } else if (change.field == "attackCount") {
             if (change.value != 0) {
-              // console.log(change.value, pkm.action, pkm.targetX, pkm.targetY);
+              // logger.debug(change.value, pkm.action, pkm.targetX, pkm.targetY);
               if (
                 pkm.action == PokemonActionState.ATTACK &&
                 pkm.targetX !== null &&
@@ -355,7 +355,7 @@ export default class BattleManager {
         const pkm = <Pokemon>children[i]
         if (pkm.id == pokemon.id) {
           if (change.field == "positionX" || change.field == "positionY") {
-            // console.log(pokemon.positionX, pokemon.positionY);
+            // logger.debug(pokemon.positionX, pokemon.positionY);
             if (change.field == "positionX") {
               pkm.positionX = pokemon.positionX
             } else if (change.field == "positionY") {

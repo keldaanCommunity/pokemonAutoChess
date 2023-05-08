@@ -11,6 +11,7 @@ import Pokemon from "./components/pokemon"
 import GameScene from "./scenes/game-scene"
 import durations from "../../dist/client/assets/pokemons/durations.json"
 import indexList from "../../dist/client/assets/pokemons/indexList.json"
+import { logger } from "../../../utils/logger"
 
 export default class AnimationManager {
   game: GameScene
@@ -59,7 +60,7 @@ export default class AnimationManager {
                     })
                   }
                 } else {
-                  console.log(
+                  logger.warn(
                     "duration array missing for ",
                     `${index}/${shiny}/${action}/${mode}`
                   )

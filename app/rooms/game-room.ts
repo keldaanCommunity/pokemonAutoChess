@@ -76,14 +76,14 @@ export default class GameRoom extends Room<GameState> {
     idToken: string,
     noElo: boolean
   }) {
-    logger.log("create game room")
+    logger.trace("create game room")
     this.setMetadata(<IGameMetadata>{
       name: options.name,
       nbPlayers: Object.values(options.users).length,
       stageLevel: 0,
       type: "game"
     })
-    // logger.log(options);
+    // logger.debug(options);
     this.setState(new GameState(options.preparationId, options.name, options.noElo))
     this.miniGame.create(this.state.avatars, this.state.floatingItems)
     Object.keys(PRECOMPUTED_TYPE_POKEMONS).forEach((type) => {
@@ -392,7 +392,7 @@ export default class GameRoom extends Room<GameState> {
   async onLeave(client: Client, consented: boolean) {
     try {
       if (client && client.auth && client.auth.displayName) {
-        logger.log(`${client.auth.displayName} is leaving`)
+        logger.info(`${client.auth.displayName} is leaving`)
       }
       if (consented) {
         throw new Error("consented leave")
@@ -402,7 +402,7 @@ export default class GameRoom extends Room<GameState> {
       await this.allowReconnection(client, 300)
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
-        logger.log(`${client.auth.displayName} leave game room`)
+        logger.info(`${client.auth.displayName} leave game room`)
         const player = this.state.players.get(client.auth.uid)
         if (player && player.loadingProgress < 100) {
           // if player quit during the loading screen, remove it from the players
@@ -421,7 +421,7 @@ export default class GameRoom extends Room<GameState> {
   }
 
   onDispose() {
-    // logger.log(`dispose game room`);
+    // logger.info(`dispose game room`);
     const requiredStageLevel = process.env.MODE == "dev" ? 0 : 10
     this.state.endTime = Date.now()
     const ps = new Array<components["schemas"]["GameHistory"]>()
@@ -559,11 +559,11 @@ export default class GameRoom extends Room<GameState> {
 
               player.titles.forEach((t) => {
                 if (!usr.titles.includes(t)) {
-                  logger.log("title added ", t)
+                  logger.info("title added ", t)
                   usr.titles.push(t)
                 }
               })
-              //logger.log(usr);
+              //logger.debug(usr);
               //usr.markModified('metadata');
               usr.save()
             }
@@ -636,8 +636,8 @@ export default class GameRoom extends Room<GameState> {
     if (rank <= 4 && meanGain < elo) {
       meanGain = elo
     }
-    //logger.log(eloGains);
-    logger.log(
+    //logger.debug(eloGains);
+    logger.info(
       `${player.name} (was ${player.elo}) will be ${meanGain} (${rank})`
     )
     return meanGain
@@ -783,19 +783,19 @@ export default class GameRoom extends Room<GameState> {
 
         player.board.forEach((pkm, id) => {
           if (pkm.index == pokemon.index) {
-            // logger.log(pkm.name, pokemon.name)
+            // logger.debug(pkm.name, pokemon.name)
             if (coord) {
               if (pkm.positionY > coord.y) {
                 coord.x = pkm.positionX
                 coord.y = pkm.positionY
-                // logger.log('better coord', coord)
+                // logger.debug('better coord', coord)
               }
             } else {
               if (pkm.positionX !== -1) {
                 coord = { x: pkm.positionX, y: pkm.positionY }
               }
 
-              // logger.log('first coord', coord)
+              // logger.debug('first coord', coord)
             }
 
             pkm.items.forEach((el) => {
@@ -829,7 +829,7 @@ export default class GameRoom extends Room<GameState> {
           player.items.add(item)
         })
         if (coord) {
-          // logger.log(coord, pokemonEvolved.name)
+          // logger.debug(coord, pokemonEvolved.name)
           pokemonEvolved.positionX = coord.x
           pokemonEvolved.positionY = coord.y
           player.board.set(pokemonEvolved.id, pokemonEvolved)
