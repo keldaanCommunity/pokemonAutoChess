@@ -127,9 +127,6 @@ export const gameSlice = createSlice({
     addPlayer: (state, action: PayloadAction<IPlayer>) => {
       state.players.push(JSON.parse(JSON.stringify(action.payload)))
     },
-    setCurrentPlayerId: (state, action: PayloadAction<string>) => {
-      state.currentPlayerId = action.payload
-    },
     setMoney: (state, action: PayloadAction<number>) => {
       state.money = action.payload
     },
@@ -479,7 +476,6 @@ export const {
   setMapName,
   setNoELO,
   addPlayer,
-  setCurrentPlayerId,
   setExperienceManager,
   setStreak,
   setInterest,
