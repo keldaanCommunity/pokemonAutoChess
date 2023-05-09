@@ -86,7 +86,7 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
   [Item.POKEMONOMICON]:
     "When the holder deals damage with their Ability, they burn and wound the target for 2 seconds",
   [Item.POWER_LENS]:
-    `50% of received ${Damage.SPECIAL} is reflected to the attacker`,
+    `50% of incoming ${Damage.SPECIAL} is also dealt to the attacker`,
   [Item.SHELL_BELL]: "Holder heals for 30% of all damages inflicted",
   [Item.LUCKY_EGG]:
     `+30% ${Stat.AP} for holder and adjacent allies in the same row`,

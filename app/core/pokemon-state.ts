@@ -85,7 +85,7 @@ export default class PokemonState {
     shouldTargetGainMana: boolean,
     shouldAttackerGainMana: boolean
   }): { death: boolean, takenDamage: number } {
-    let death: boolean
+    let death: boolean = false
     let takenDamage: number = 0
 
     if(isNaN(damage)){
@@ -96,9 +96,10 @@ export default class PokemonState {
 
     if (pokemon.life == 0) {
       death = true
-    } else {
+    } else if(pokemon.status.protect){
       death = false
-      if (!pokemon.status.protect) {
+      takenDamage = 0
+    } else {
         let reducedDamage = damage
 
         if (pokemon.items.has(Item.POKE_DOLL)) {
@@ -149,9 +150,25 @@ export default class PokemonState {
           reducedDamage = damage
         }
 
-        if (!reducedDamage) {
+        if (
+          attackType !== AttackType.TRUE &&
+          (pokemon.effects.includes(Effect.GUTS) ||
+           pokemon.effects.includes(Effect.DEFIANT) ||
+           pokemon.effects.includes(Effect.JUSTIFIED))
+        ) {
+          const damageBlocked = pokemon.effects.includes(Effect.JUSTIFIED)
+            ? 10
+            : pokemon.effects.includes(Effect.DEFIANT)
+            ? 7
+            : 4
+            reducedDamage = reducedDamage - damageBlocked
+        }
+
+        reducedDamage = Math.max(1, reducedDamage) // should deal 1 damage at least
+
+        if (isNaN(reducedDamage)) {
           reducedDamage = 0
-          // logger.debug(`error calculating damage, damage: ${damage}, defenseur: ${pokemon.name}, attaquant: ${attacker.name}, attack type: ${attackType}, defense : ${pokemon.def}, spedefense: ${pokemon.speDef}, life: ${pokemon.life}`);
+          logger.error(`error calculating damage, damage: ${damage}, target: ${pokemon.name}, attacker: ${attacker.name}, attack type: ${attackType}, defense : ${pokemon.def}, spedefense: ${pokemon.speDef}, life: ${pokemon.life}`);
         }
 
         if (dodgeable && pokemon.dodge > Math.random()) {
@@ -164,32 +181,16 @@ export default class PokemonState {
         let residualDamage = reducedDamage
 
         if (pokemon.shield > 0) {
+          takenDamage += Math.min(pokemon.shield, reducedDamage)
           residualDamage = Math.max(0, reducedDamage - pokemon.shield)
           pokemon.shield = Math.max(0, pokemon.shield - reducedDamage)
-        }
-
-        if (
-          attackType !== AttackType.TRUE &&
-          (pokemon.effects.includes(Effect.GUTS) ||
-            pokemon.effects.includes(Effect.DEFIANT) ||
-            pokemon.effects.includes(Effect.JUSTIFIED))
-        ) {
-          const damageReduction = pokemon.effects.includes(Effect.GUTS)
-            ? 4
-            : pokemon.effects.includes(Effect.DEFIANT)
-            ? 7
-            : 10
-          residualDamage = residualDamage - damageReduction
         }
 
         if (pokemon.skill == Ability.WONDER_GUARD) {
           residualDamage = 1
         }
 
-        takenDamage = Math.max(
-          1,
-          Math.round(Math.min(residualDamage, pokemon.life))
-        )
+        takenDamage += Math.min(residualDamage, pokemon.life)
 
         if (attacker && residualDamage > 0) {
           switch (attackType) {
@@ -221,11 +222,6 @@ export default class PokemonState {
           })
         }
 
-        if (pokemon.shield > 0) {
-          residualDamage = Math.max(0, reducedDamage - pokemon.shield)
-          pokemon.shield = Math.max(0, pokemon.shield - reducedDamage)
-        }
-
         pokemon.life = Math.max(0, pokemon.life - residualDamage)
 
         // logger.debug(`${pokemon.name} took ${damage} and has now ${pokemon.life} life shield ${pokemon.shield}`);
@@ -237,7 +233,8 @@ export default class PokemonState {
 
           if (
             pokemon.items.has(Item.DEFENSIVE_RIBBON) &&
-            pokemon.count.defensiveRibbonCount < 20
+            pokemon.count.defensiveRibbonCount < 20 &&
+            takenDamage > 0
           ) {
             pokemon.count.defensiveRibbonCount++
             if(pokemon.count.defensiveRibbonCount % 2 === 0){
@@ -247,7 +244,7 @@ export default class PokemonState {
             }
           }
 
-          if (pokemon.status.sleep) {
+          if (pokemon.status.sleep && takenDamage > 0) {
             pokemon.status.updateSleep(500)
           }
 
@@ -283,57 +280,8 @@ export default class PokemonState {
           }
         }
 
-        if (attacker) {
-          if(shouldAttackerGainMana){
-            attacker.setMana(attacker.mana + 5)
-          }
-          if (
-            attacker.effects.includes(Effect.CALM_MIND) ||
-            attacker.effects.includes(Effect.FOCUS_ENERGY) ||
-            attacker.effects.includes(Effect.MEDITATE)
-          ) {
-            let lifesteal = 0
-            if (attacker.effects.includes(Effect.MEDITATE)) {
-              lifesteal = 0.15
-            } else if (attacker.effects.includes(Effect.FOCUS_ENERGY)) {
-              lifesteal = 0.3
-            } else if (attacker.effects.includes(Effect.CALM_MIND)) {
-              lifesteal = 0.6
-            }
-            attacker.handleHeal(
-              Math.floor(lifesteal * residualDamage),
-              attacker,
-              0
-            )
-          }
-          if (attacker.items.has(Item.SHELL_BELL)) {
-            attacker.handleHeal(
-              Math.floor(0.3 * residualDamage),
-              attacker,
-              0
-            )
-          }
-
-          if (
-            attacker.effects.includes(Effect.BLAZE) ||
-            attacker.effects.includes(Effect.DROUGHT) ||
-            attacker.effects.includes(Effect.DESOLATE_LAND)
-          ) {
-            let burnChance = 0
-            if (attacker.effects.includes(Effect.BLAZE)) {
-              burnChance = 0.2
-            }
-            if (attacker.effects.includes(Effect.VICTORY_STAR)) {
-              burnChance = 0.2
-            } else if (attacker.effects.includes(Effect.DROUGHT)) {
-              burnChance = 0.3
-            } else if (attacker.effects.includes(Effect.DESOLATE_LAND)) {
-              burnChance = 0.4
-            }
-            if (Math.random() < burnChance) {
-              pokemon.status.triggerBurn(2000, pokemon, attacker, board)
-            }
-          }
+        if (attacker && takenDamage > 0) {
+          attacker.onAttack(pokemon, board, takenDamage, shouldAttackerGainMana)
         }
 
         if (!pokemon.life || pokemon.life <= 0) {
@@ -420,9 +368,9 @@ export default class PokemonState {
             }
           }
         }
-      }
     }
     
+    takenDamage = Math.round(takenDamage)
     return { death, takenDamage }
   }
 

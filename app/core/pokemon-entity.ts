@@ -292,6 +292,60 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     return parseFloat(value.toFixed(2))
   }
 
+  // called after every successful attack (not dodged or protected)
+  onAttack(target: PokemonEntity, board: Board, damageDealt: number, shouldAttackerGainMana: boolean){
+    if(shouldAttackerGainMana){
+      this.setMana(this.mana + 5)
+    }
+    if (
+      this.effects.includes(Effect.CALM_MIND) ||
+      this.effects.includes(Effect.FOCUS_ENERGY) ||
+      this.effects.includes(Effect.MEDITATE)
+    ) {
+      let lifesteal = 0
+      if (this.effects.includes(Effect.MEDITATE)) {
+        lifesteal = 0.15
+      } else if (this.effects.includes(Effect.FOCUS_ENERGY)) {
+        lifesteal = 0.3
+      } else if (this.effects.includes(Effect.CALM_MIND)) {
+        lifesteal = 0.6
+      }
+      this.handleHeal(
+        Math.floor(lifesteal * damageDealt),
+        this,
+        0
+      )
+    }
+    if (this.items.has(Item.SHELL_BELL)) {
+      this.handleHeal(
+        Math.floor(0.3 * damageDealt),
+        this,
+        0
+      )
+    }
+
+    if (
+      this.effects.includes(Effect.BLAZE) ||
+      this.effects.includes(Effect.DROUGHT) ||
+      this.effects.includes(Effect.DESOLATE_LAND)
+    ) {
+      let burnChance = 0
+      if (this.effects.includes(Effect.BLAZE)) {
+        burnChance = 0.2
+      }
+      if (this.effects.includes(Effect.VICTORY_STAR)) {
+        burnChance = 0.2
+      } else if (this.effects.includes(Effect.DROUGHT)) {
+        burnChance = 0.3
+      } else if (this.effects.includes(Effect.DESOLATE_LAND)) {
+        burnChance = 0.4
+      }
+      if (Math.random() < burnChance) {
+        target.status.triggerBurn(2000, target, this, board)
+      }
+    }
+  }
+
   onCritical(target: PokemonEntity, board: Board){
     target.count.crit++
 
