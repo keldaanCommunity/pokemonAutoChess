@@ -8,7 +8,6 @@ import {
   setSynergies,
   addPlayer,
   changePlayer,
-  setCurrentPlayerId,
   setExperienceManager,
   setInterest,
   setItemsProposition,
@@ -298,10 +297,6 @@ export default function Game() {
           dispatch(setStreak(player.streak))
           dispatch(setShopLocked(player.shopLocked))
           dispatch(setPokemonCollection(player.pokemonCollection))
-          dispatch(setPlayer(player))
-          dispatch(setCurrentPlayerId(uid))
-        }
-        else if(spectate && !currentPlayerId){
           dispatch(setPlayer(player))
         }
 
