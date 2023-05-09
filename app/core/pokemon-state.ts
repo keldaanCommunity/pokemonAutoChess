@@ -337,10 +337,7 @@ export default class PokemonState {
         }
 
         if (!pokemon.life || pokemon.life <= 0) {
-          if (pokemon.items.has(Item.MAX_REVIVE)) {
-            pokemon.life = pokemon.hp
-            pokemon.items.delete(Item.MAX_REVIVE)
-          } else if (SynergyEffects[Synergy.FOSSIL].some(e => pokemon.effects.includes(e))) {
+          if (SynergyEffects[Synergy.FOSSIL].some(e => pokemon.effects.includes(e))) {
             const healBonus = pokemon.effects.includes(Effect.FORGOTTEN_POWER) ? 1 : pokemon.effects.includes(Effect.ELDER_POWER) ? 0.8 : 0.4
             const attackBonus = pokemon.effects.includes(Effect.FORGOTTEN_POWER) ? 1 : pokemon.effects.includes(Effect.ELDER_POWER) ? 0.6 : 0.3
             pokemon.life = pokemon.hp * healBonus
