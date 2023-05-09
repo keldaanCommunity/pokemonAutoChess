@@ -7,20 +7,18 @@ import {
   listBots,
   changeRoomName,
   changeRoomPassword,
-  gameStart,
+  gameStartRequest,
   toggleReady,
   toggleEloRoom
 } from "../../../stores/NetworkStore"
 import firebase from "firebase/compat/app"
-import { Client, Room } from "colyseus.js"
-import GameState from "../../../../../rooms/states/game-state"
+import { Room } from "colyseus.js"
 import { BotDifficulty } from "../../../../../types/enum/Game"
-import { leavePreparation, setBotsList } from "../../../stores/PreparationStore"
+import { setBotsList } from "../../../stores/PreparationStore"
 import PreparationState from "../../../../../rooms/states/preparation-state"
 import "./preparation-menu.css";
 import { cc } from "../../utils/jsx"
 import { throttle } from "../../../../../utils/function"
-import { playSound, SOUNDS } from "../../utils/audio"
 import Elo from "../elo"
 import InlineAvatar from "../inline-avatar"
 import { IBot } from "../../../../../models/mongo-models/bot-v2"
@@ -43,7 +41,6 @@ export default function PreparationMenu(props: {
   const isOwner: boolean = useAppSelector(
     (state) => state.preparation.ownerId === state.network.uid
   )
-  const client: Client = useAppSelector((state) => state.network.client)
   const room: Room<PreparationState> | undefined = useAppSelector(
     (state) => state.network.preparation
   )
@@ -87,24 +84,10 @@ export default function PreparationMenu(props: {
   }
 
   const startGame = throttle(async function startGame() {
-    if (room && allUsersReady) {
+    if (room) {
       const token = await firebase.auth().currentUser?.getIdToken()
       if (token) {
-        const r: Room<GameState> = await client.create("game", {
-          users: users,
-          idToken: token,
-          name: name,
-          preparationId: room.id,
-          noElo
-        })
-        playSound(SOUNDS.START_GAME)
-        dispatch(gameStart(r.id))
-        localStorage.setItem("lastRoomId", r.id)
-        localStorage.setItem("lastSessionId", r.sessionId)
-        await room.leave()
-        r.connection.close()
-        dispatch(leavePreparation())
-        props.setToGame(true)
+        dispatch(gameStartRequest(token))
       }
     }
   }, 1000)
@@ -206,11 +189,10 @@ export default function PreparationMenu(props: {
         </button>
 
         { isOwner && <button
-            className={
-              ownerId == uid
-                ? "bubbly green"
-                : "bubbly green is-disabled"
-            }
+            className={cc('bubbly', {
+              green: allUsersReady,
+              orange: !allUsersReady
+            })}
             onClick={ownerId == uid ? startGame : undefined}
             data-tip
             data-for={"start-game"}

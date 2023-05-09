@@ -157,6 +157,9 @@ export const networkSlice = createSlice({
     itemClick: (state, action: PayloadAction<string>) => {
       state.game?.send(Transfer.ITEM, { id: action.payload })
     },
+    gameStartRequest: (state, action: PayloadAction<string>) => {
+      state.preparation?.send(Transfer.GAME_START_REQUEST, { token: action.payload })
+    },
     gameStart: (state, action: PayloadAction<string>) => {
       state.preparation?.send(Transfer.GAME_START, { id: action.payload })
     },
@@ -241,6 +244,7 @@ export const {
   changeRoomName,
   changeRoomPassword,
   gameStart,
+  gameStartRequest,
   logIn,
   logOut,
   joinLobby,

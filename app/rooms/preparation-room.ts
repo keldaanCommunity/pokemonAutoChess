@@ -4,6 +4,7 @@ import PreparationState from "./states/preparation-state"
 import admin from "firebase-admin"
 import {
   OnGameStartCommand,
+  OnGameStartRequestCommand,
   OnJoinCommand,
   OnLeaveCommand,
   OnToggleReadyCommand,
@@ -104,6 +105,14 @@ export default class PreparationRoom extends Room<PreparationState> {
       }
     })
 
+    this.onMessage(Transfer.GAME_START_REQUEST, (client) => {
+      try {
+        this.dispatcher.dispatch(new OnGameStartRequestCommand(), { client })
+      } catch (error) {
+        logger.error(error)
+      }
+    })
+
     this.onMessage(Transfer.GAME_START, (client, message) => {
       try {
         this.dispatcher.dispatch(new OnGameStartCommand(), { client, message })
@@ -111,9 +120,10 @@ export default class PreparationRoom extends Room<PreparationState> {
         logger.error(error)
       }
     })
-    this.onMessage(Transfer.TOGGLE_READY, (c, message) => {
+
+    this.onMessage(Transfer.TOGGLE_READY, (client) => {
       try {
-        this.dispatcher.dispatch(new OnToggleReadyCommand(), { client: c })
+        this.dispatcher.dispatch(new OnToggleReadyCommand(), { client })
       } catch (error) {
         logger.error(error)
       }
