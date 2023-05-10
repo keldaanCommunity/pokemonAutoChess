@@ -7,7 +7,7 @@ import { FIREBASE_CONFIG } from "./utils/utils"
 import PreparationState from "../../../rooms/states/preparation-state"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import { Client, Room } from "colyseus.js"
-import { joinPreparation, logIn } from "../stores/NetworkStore"
+import { gameStart, joinPreparation, logIn } from "../stores/NetworkStore"
 import {
   addUser,
   changeUser,
@@ -133,6 +133,28 @@ export default function Preparation() {
 
       r.onMessage(Transfer.REQUEST_BOT_LIST, (bots: IBot[]) => {
         dispatch(setBotsList(bots))
+      })
+
+      r.onMessage(Transfer.GAME_START_REQUEST, async (message) => {
+        const token = await firebase.auth().currentUser?.getIdToken()
+        if(message === "ok" && token && !connectingToGame.current){
+          const game: Room<GameState> = await client.create("game", {
+            users: r.state.users,
+            idToken: token,
+            name: r.state.name,
+            preparationId: r.id,
+            noElo: r.state.noElo
+          })
+
+          dispatch(gameStart(game.id))
+          playSound(SOUNDS.START_GAME)
+          localStorage.setItem("lastRoomId", game.id)
+          localStorage.setItem("lastSessionId", game.sessionId)
+          await r.leave()
+          game.connection.close()
+          dispatch(leavePreparation())
+          setToGame(true)
+        }
       })
 
       r.onMessage(Transfer.GAME_START, async (message) => {

@@ -1,3 +1,4 @@
+import os from "node:os"
 import { Command } from "@colyseus/command"
 import { GameUser, IGameUser } from "../../models/colyseus-models/game-user"
 import UserMetadata, {
@@ -67,6 +68,66 @@ export class OnJoinCommand extends Command<
   }
 }
 
+export class OnGameStartRequestCommand extends Command<
+  PreparationRoom,
+  {
+    client: Client
+  }
+> {
+  execute({ client }) {
+    try {
+      if(this.state.gameStarted){
+        return; // game already started
+      } 
+      let allUsersReady = true
+      let nbHumanPlayers = 0
+      
+      this.state.users.forEach((user: GameUser) => {
+        if (!user.ready) {
+          allUsersReady = false
+        }
+        if(!user.isBot){
+          nbHumanPlayers++;
+        }
+      })
+
+      if(!allUsersReady){
+        client.send(Transfer.MESSAGES, {
+          name: "Server",
+          payload: `Not all players are ready.`,
+          avatar: "0079/Sigh",
+          time: Date.now()
+        })
+      } else {
+        const freeMemory = os.freemem()
+        const totalMemory = os.totalmem()
+        logger.info(`Memory: ${(100*freeMemory/totalMemory).toFixed(2)} % free (${totalMemory-freeMemory} / ${totalMemory})`)
+        if(freeMemory < 0.1 * totalMemory){
+          // if less than 10% free memory available, prevents starting another game to avoid out of memory crash
+          this.room.broadcast(Transfer.MESSAGES, {
+            name: "Server",
+            payload: `Too many players are currently playing and the server is running out of memory. Try again in a few minutes, and avoid playing with bots.`,
+            avatar: "0025/Pain",
+            time: Date.now()
+          })
+        } else if(freeMemory < 0.2 * totalMemory && nbHumanPlayers === 1){
+          // if less than 20% free memory available, prevents starting a game solo
+          this.room.broadcast(Transfer.MESSAGES, {
+            name: "Server",
+            payload: `Too many players are currently playing and the server is running out of memory. To save resources, solo games have been disabled. Please wait for more players to join the lobby before starting the game.`,
+            avatar: "0025/Pain",
+            time: Date.now()
+          })
+        } else {
+          client.send(Transfer.GAME_START_REQUEST, "ok")
+        }
+      }
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+}
+
 export class OnGameStartCommand extends Command<
   PreparationRoom,
   {
@@ -76,18 +137,8 @@ export class OnGameStartCommand extends Command<
 > {
   execute({ client, message }) {
     try {
-      let allUsersReady = true
-
-      this.state.users.forEach((user: GameUser, key: string) => {
-        if (!user.ready) {
-          allUsersReady = false
-        }
-      })
-
-      if (allUsersReady && !this.state.gameStarted) {
-        this.state.gameStarted = true
-        this.room.broadcast(Transfer.GAME_START, message, { except: client })
-      }
+      this.state.gameStarted = true
+      this.room.broadcast(Transfer.GAME_START, message, { except: client })
     } catch (error) {
       logger.error(error)
     }
