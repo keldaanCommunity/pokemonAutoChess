@@ -106,15 +106,23 @@ export class OnGameStartRequestCommand extends Command<
           // if less than 10% free memory available, prevents starting another game to avoid out of memory crash
           this.room.broadcast(Transfer.MESSAGES, {
             name: "Server",
-            payload: `Too many players are currently playing and the server is running out of memory. Try again in a few minutes, and avoid playing with bots.`,
+            payload: `Too many players are currently playing and the server is running out of memory. Try again in a few minutes, and avoid playing with bots. Sorry for the inconvenience.`,
             avatar: "0025/Pain",
             time: Date.now()
           })
-        } else if(freeMemory < 0.2 * totalMemory && nbHumanPlayers === 1){
-          // if less than 20% free memory available, prevents starting a game solo
+        } else if(freeMemory < 0.2 * totalMemory && nbHumanPlayers < 8){
+          // if less than 20% free memory available, prevents starting a game with bots
           this.room.broadcast(Transfer.MESSAGES, {
             name: "Server",
-            payload: `Too many players are currently playing and the server is running out of memory. To save resources, solo games have been disabled. Please wait for more players to join the lobby before starting the game.`,
+            payload: `Too many players are currently playing and the server is running out of memory. To save resources, only lobbys with 8 human players are enabled. Sorry for the inconvenience.`,
+            avatar: "0025/Pain",
+            time: Date.now()
+          })
+        } else if(freeMemory < 0.4 * totalMemory && nbHumanPlayers === 1){
+          // if less than 40% free memory available, prevents starting a game solo
+          this.room.broadcast(Transfer.MESSAGES, {
+            name: "Server",
+            payload: `Too many players are currently playing and the server is running out of memory. To save resources, solo games have been disabled. Please wait for more players to join the lobby before starting the game. Sorry for the inconvenience.`,
             avatar: "0025/Pain",
             time: Date.now()
           })
