@@ -210,8 +210,8 @@ export default class Simulation extends Schema implements ISimulation {
       let x = pokemon.positionX + dx
       let y = teamIndex === 0 ? pokemon.positionY - 1 + dy : 5 - (pokemon.positionY - 1) - dy
 
-      if (x >= 0 && x < this.board.rows
-      && y >= 0 && y < this.board.columns
+      if (x >= 0 && x < this.board.columns
+      && y >= 0 && y < this.board.rows
       && this.board.getValue(x, y) === undefined) {
         return { x, y }
       }
