@@ -52,7 +52,7 @@ class GameContainer {
   }
 
   initializeGame() {
-    if(this.game != null) return; // prevent initializing twice
+    if (this.game != null) return // prevent initializing twice
     // Create Phaser game
     const config = {
       type: Phaser.CANVAS,
@@ -87,31 +87,31 @@ class GameContainer {
     this.room.onMessage(Transfer.DRAG_DROP_FAILED, (message) =>
       this.handleDragDropFailed(message)
     )
-    this.room.state.avatars.onAdd = (avatar) => {
+    this.room.state.avatars.onAdd((avatar) => {
       this.handleAvatarAdd(avatar)
-      avatar.onChange = (changes) => {
+      avatar.onChange((changes) => {
         changes.forEach((change) => {
           this.handleAvatarChange(avatar, change)
         })
-      }
-    }
+      })
+    })
 
-    this.room.state.avatars.onRemove = (value, key) => {
+    this.room.state.avatars.onRemove((value, key) => {
       this.handleAvatarRemove(value)
-    }
+    })
 
-    this.room.state.floatingItems.onAdd = (floatingItem) => {
+    this.room.state.floatingItems.onAdd((floatingItem) => {
       this.handleFloatingItemAdd(floatingItem)
-      floatingItem.onChange = (changes) => {
+      floatingItem.onChange((changes) => {
         changes.forEach((change) => {
           this.handleFloatingItemChange(floatingItem, change)
         })
-      }
-    }
+      })
+    })
 
-    this.room.state.floatingItems.onRemove = (value, key) => {
+    this.room.state.floatingItems.onRemove((value, key) => {
       this.handleFloatingItemRemove(value)
-    }
+    })
     this.room.onError((err) => logger.error("room error", err))
   }
 
@@ -131,12 +131,11 @@ class GameContainer {
         // logger.debug('initializePlayer', this.player, this.tilemap);
         this.initializeGame()
       }
-    }
-    else if(this.spectate && this.tilemap) {
+    } else if (this.spectate && this.tilemap) {
       this.initializeGame()
     }
 
-    player.board.onAdd = ((pokemon, key) => {
+    player.board.onAdd((pokemon, key) => {
       const p = <Pokemon>pokemon
       if (p.stars > 1) {
         const config: IPokemonConfig | undefined = player.pokemonCollection.get(
@@ -153,41 +152,44 @@ class GameContainer {
           },
           null
         )
-        toast(i, { containerId: player.rank.toString(), className: "toast-new-pokemon" })
+        toast(i, {
+          containerId: player.rank.toString(),
+          className: "toast-new-pokemon"
+        })
       }
-      p.onChange = (changes: DataChange<any>[]) => {
+      p.onChange((changes) => {
         changes.forEach((change) => {
           this.handleBoardPokemonChange(player, p, change)
         })
-      }
+      })
 
-      p.items.onAdd = (value, key) => {
+      p.items.onAdd((value, key) => {
         // logger.debug('added', value, key)
         this.handleBoardPokemonItemAdd(player.id, value, p)
-      }
-      p.items.onRemove = (value, key) => {
+      })
+      p.items.onRemove((value, key) => {
         // logger.debug('removed', value, key)
         this.handleBoardPokemonItemRemove(player.id, value, p)
-      }
+      })
 
       this.handleBoardPokemonAdd(player, p)
-    }).bind(this)
+    })
 
-    player.board.onRemove = ((pokemon, key) => {
+    player.board.onRemove((pokemon, key) => {
       this.handleBoardPokemonRemove(player, pokemon)
-    }).bind(this)
+    })
 
-    player.items.onAdd = (value, key) => {
+    player.items.onAdd((value, key) => {
       // logger.debug('added', value, key);
       this.handleItemAdd(player, value)
-    }
+    })
 
-    player.items.onRemove = (value, key) => {
+    player.items.onRemove((value, key) => {
       // logger.debug('removed', value, key);
       this.handleItemRemove(player, value)
-    }
+    })
 
-    player.simulation.onChange = (changes: DataChange<any>[]) => {
+    player.simulation.onChange((changes) => {
       if (
         this.game != null &&
         player.id == this.uid &&
@@ -200,88 +202,87 @@ class GameContainer {
           }
         })
       }
-    }
+    })
 
-    player.simulation.blueTeam.onAdd = (p, key) => {
+    player.simulation.blueTeam.onAdd((p, key) => {
       // logger.debug('add pokemon');
       const pokemon = <PokemonEntity>p
       this.handlePokemonAdd(player.id, pokemon)
 
-      pokemon.status.onChange = (changes: DataChange<any>[]) => {
+      pokemon.status.onChange((changes) => {
         changes.forEach((change) => {
           this.handlePokemonStatusChange(player.id, change, pokemon)
         })
-      }
+      })
 
-      pokemon.onChange = (changes: DataChange<any>[]) => {
+      pokemon.onChange((changes) => {
         // logger.debug('change pokemon');
         changes.forEach((change) => {
           // logger.debug(change.field);
           this.handlePokemonChange(player.id, change, pokemon)
         })
-      }
+      })
 
-      pokemon.items.onAdd = (value, key) => {
+      pokemon.items.onAdd((value, key) => {
         // logger.debug('added', value, key)
         this.handleBattleManagerPokemonItemAdd(player.id, value, pokemon)
-      }
-      pokemon.items.onRemove = (value, key) => {
+      })
+      pokemon.items.onRemove((value, key) => {
         // logger.debug('removed', value, key)
         this.handleBattleManagerPokemonItemRemove(player.id, value, pokemon)
-      }
+      })
 
-      pokemon.count.onChange = (changes: DataChange<any>[]) => {
+      pokemon.count.onChange((changes) => {
         // logger.debug('change item');
         changes.forEach((change) => {
           this.handlePokemonCountChange(player.id, change, pokemon)
         })
-      }
-    }
+      })
+    })
 
     player.simulation.redTeam.onAdd = (p, key) => {
       // logger.debug('add pokemon');
       const pokemon = <PokemonEntity>p
       this.handlePokemonAdd(player.id, pokemon)
 
-      pokemon.status.onChange = (changes) => {
+      pokemon.status.onChange((changes) => {
         changes.forEach((change) => {
           this.handlePokemonStatusChange(player.id, change, pokemon)
         })
-      }
+      })
 
-      pokemon.onChange = (changes: DataChange<any>[]) => {
+      pokemon.onChange((changes) => {
         // logger.debug('change pokemon');
         changes.forEach((change) => {
           this.handlePokemonChange(player.id, change, pokemon)
         })
-      }
-      pokemon.items.onAdd = (value, key) => {
+      })
+      pokemon.items.onAdd((value, key) => {
         // logger.debug('added', value, key)
         this.handleBattleManagerPokemonItemAdd(player.id, value, pokemon)
-      }
-      pokemon.items.onRemove = (value, key) => {
+      })
+      pokemon.items.onRemove((value, key) => {
         // logger.debug('removed', value, key)
         this.handleBattleManagerPokemonItemRemove(player.id, value, pokemon)
-      }
-      pokemon.count.onChange = (changes: DataChange<any>[]) => {
+      })
+      pokemon.count.onChange((changes) => {
         // logger.debug('change item');
         changes.forEach((change) => {
           this.handlePokemonCountChange(player.id, change, pokemon)
         })
-      }
+      })
     }
-    player.simulation.blueTeam.onRemove = (pokemon, key) => {
+    player.simulation.blueTeam.onRemove((pokemon, key) => {
       // logger.debug('remove pokemon');
       this.handlePokemonRemove(player.id, pokemon)
-    }
-    player.simulation.redTeam.onRemove = (pokemon, key) => {
+    })
+    player.simulation.redTeam.onRemove((pokemon, key) => {
       // logger.debug('remove pokemon');
       this.handlePokemonRemove(player.id, pokemon)
-    }
-    player.triggerAll()
+    })
   }
 
-  initializeSpectactor(uid: string){
+  initializeSpectactor(uid: string) {
     if (this.uid === uid) {
       this.spectate = true
       if (this.tilemap && this.room.state.players.size > 0) {

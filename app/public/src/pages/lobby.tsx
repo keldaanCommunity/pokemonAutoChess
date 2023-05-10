@@ -49,7 +49,12 @@ import {
   setBotLeaderboard,
   setLeaderboard
 } from "../stores/LobbyStore"
-import { ICustomLobbyState, ISuggestionUser, Title, Transfer } from "../../../types"
+import {
+  ICustomLobbyState,
+  ISuggestionUser,
+  Title,
+  Transfer
+} from "../../../types"
 import LobbyUser from "../../../models/colyseus-models/lobby-user"
 import { IBot } from "../../../models/mongo-models/bot-v2"
 import { IMeta } from "../../../models/mongo-models/meta"
@@ -107,22 +112,23 @@ export default function Lobby() {
               "lobby",
               { idToken: token }
             )
-            room.state.messages.onAdd = (m) => {
+            room.state.messages.onAdd((m) => {
               dispatch(pushMessage(m))
-            }
-            room.state.messages.onRemove = (m, k) => {
+            })
+            room.state.messages.onRemove((m, k) => {
               dispatch(removeMessage(m))
-            }
+            })
 
-            room.state.users.onAdd = (u) => {
+            room.state.users.onAdd((u) => {
               dispatch(addUser(u))
 
               if (u.id == user.uid) {
-                u.pokemonCollection.onAdd = (pokemonConfig, key) => {
+                u.pokemonCollection.onAdd((pokemonConfig, key) => {
                   const p = pokemonConfig as PokemonConfig
                   dispatch(addPokemonConfig(p))
-                  p.onChange = (changes) => {
+                  p.onChange((changes) => {
                     changes.forEach((change) => {
+                      console.log(change)
                       dispatch(
                         changePokemonConfig({
                           id: key,
@@ -131,12 +137,12 @@ export default function Lobby() {
                         })
                       )
                     })
-                  }
-                }
+                  })
+                }, false)
                 dispatch(setUser(u))
                 setSearchedUser(u)
               }
-              u.onChange = (changes) => {
+              u.onChange((changes) => {
                 changes.forEach((change) => {
                   dispatch(
                     changeUser({
@@ -146,12 +152,12 @@ export default function Lobby() {
                     })
                   )
                 })
-              }
-            }
+              })
+            })
 
-            room.state.users.onRemove = (u) => {
+            room.state.users.onRemove((u) => {
               dispatch(removeUser(u.id))
-            }
+            })
 
             room.onMessage(Transfer.REQUEST_LEADERBOARD, (l) => {
               dispatch(setLeaderboard(l))
@@ -324,19 +330,20 @@ export default function Lobby() {
           >
             Wiki
           </button>
-          {user?.anonymous === false && user?.title === Title.BOT_BUILDER && 
-          <button
-            disabled={user?.anonymous}
-            className="bubbly green"
-            onClick={() => {
-              if (user?.anonymous === false && botList.length == 0) {
-                dispatch(requestBotList())
-              }
-              toggleBuilder(!showBuilder)
-            }}
-          >
-            BOT Builder
-          </button>}
+          {user?.anonymous === false && user?.title === Title.BOT_BUILDER && (
+            <button
+              disabled={user?.anonymous}
+              className="bubbly green"
+              onClick={() => {
+                if (user?.anonymous === false && botList.length == 0) {
+                  dispatch(requestBotList())
+                }
+                toggleBuilder(!showBuilder)
+              }}
+            >
+              BOT Builder
+            </button>
+          )}
 
           <button
             className="bubbly green"

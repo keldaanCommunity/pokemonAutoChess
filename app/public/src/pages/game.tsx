@@ -140,8 +140,7 @@ export default function Game() {
       idToken: token,
       noElo: room?.state.noElo
     })
-    localStorage.setItem("lastRoomId", r.id)
-    localStorage.setItem("lastSessionId", r.sessionId)
+    localStorage.setItem("cachedReconnectionToken", r.reconnectionToken)
     await room?.leave()
     r.connection.close()
     dispatch(leaveGame())
@@ -159,21 +158,21 @@ export default function Game() {
         if (user) {
           dispatch(logIn(user))
 
-          async function tryToReconnectToLastGame(attempts=1){
+          async function tryToReconnectToLastGame(attempts = 1) {
             try {
-              const lastRoomId = localStorage.getItem("lastRoomId")
-              const lastSessionId = localStorage.getItem("lastSessionId")
-              if (lastRoomId && lastSessionId) {
+              const cachedReconnectionToken = localStorage.getItem(
+                "cachedReconnectionToken"
+              )
+              if (cachedReconnectionToken) {
                 const r: Room<GameState> = await client.reconnect(
-                  lastRoomId,
-                  lastSessionId
+                  cachedReconnectionToken
                 )
                 dispatch(joinGame(r))
               }
             } catch (error) {
-              if(attempts < MAX_ATTEMPS_RECONNECT){
-                setTimeout(() => tryToReconnectToLastGame(attempts+1), 100)
-              } else{
+              if (attempts < MAX_ATTEMPS_RECONNECT) {
+                setTimeout(() => tryToReconnectToLastGame(attempts + 1), 100)
+              } else {
                 logger.error("reconnect error", error)
                 setToAuth(true)
               }
@@ -242,17 +241,23 @@ export default function Game() {
       })
 
       room.onMessage(Transfer.PLAYER_DAMAGE, (value) => {
-        toast(<div className="toast-player-damage">
-          <span style={{verticalAlign: "middle"}}>-{value}</span>
-          <img className="icon-life" src="/assets/ui/heart.png" alt="❤" />
-        </div>, { containerId: "toast-life" })
+        toast(
+          <div className="toast-player-damage">
+            <span style={{ verticalAlign: "middle" }}>-{value}</span>
+            <img className="icon-life" src="/assets/ui/heart.png" alt="❤" />
+          </div>,
+          { containerId: "toast-life" }
+        )
       })
 
       room.onMessage(Transfer.PLAYER_INCOME, (value) => {
-        toast(<div className="toast-player-income">
-          <span style={{verticalAlign: "middle"}}>+{value}</span>
-          <img className="icon-money" src="/assets/ui/money.svg" alt="$" />
-        </div>, { containerId: "toast-money" })
+        toast(
+          <div className="toast-player-income">
+            <span style={{ verticalAlign: "middle" }}>+{value}</span>
+            <img className="icon-money" src="/assets/ui/money.svg" alt="$" />
+          </div>,
+          { containerId: "toast-money" }
+        )
       })
 
       room.onMessage(Transfer.UNOWN_WANDERING, () => {
@@ -264,7 +269,7 @@ export default function Game() {
         }
       })
 
-      room.state.onChange = (changes) => {
+      room.state.onChange((changes) => {
         changes.forEach((change) => {
           if (change.field == "roundTime") {
             dispatch(setRoundTime(change.value))
@@ -282,13 +287,13 @@ export default function Game() {
             dispatch(setNoELO(change.value))
           }
         })
-      }
+      })
 
-      room.state.additionalPokemons.onAdd = (pkm) => {
+      room.state.additionalPokemons.onAdd((pkm) => {
         dispatch(setAdditionalPokemons(room.state.additionalPokemons))
-      }
+      })
 
-      room.state.players.onAdd = (player) => {
+      room.state.players.onAdd((player) => {
         gameContainer.initializePlayer(player)
         dispatch(addPlayer(player))
 
@@ -300,7 +305,7 @@ export default function Game() {
           dispatch(setPlayer(player))
         }
 
-        player.onChange = (changes) => {
+        player.onChange((changes) => {
           changes.forEach((change) => {
             if (player.id == uid) {
               if (change.field == "alive") {
@@ -365,37 +370,37 @@ export default function Game() {
             }
             dispatch(changePlayer({ id: player.id, change: change }))
           })
-        }
+        })
 
-        player.synergies.onChange = (value, key) => {
+        player.synergies.onChange((value, key) => {
           dispatch(setSynergies({ id: player.id, value: player.synergies }))
-        }
+        })
 
-        player.itemsProposition.onAdd = (changes) => {
+        player.itemsProposition.onAdd((changes) => {
           if (player.id == uid) {
             dispatch(setItemsProposition(player.itemsProposition))
           }
-        }
-        player.itemsProposition.onRemove = (changes) => {
+        })
+        player.itemsProposition.onRemove((changes) => {
           if (player.id == uid) {
             dispatch(setItemsProposition(player.itemsProposition))
           }
-        }
+        })
 
-        player.pokemonsProposition.onAdd = (changes) => {
+        player.pokemonsProposition.onAdd((changes) => {
           if (player.id == uid) {
             dispatch(setPokemonProposition(player.pokemonsProposition))
           }
-        }
-        player.pokemonsProposition.onRemove = (changes) => {
+        })
+        player.pokemonsProposition.onRemove((changes) => {
           if (player.id == uid) {
             dispatch(setPokemonProposition(player.pokemonsProposition))
           }
-        }
+        })
 
-        player.simulation.blueDpsMeter.onAdd = (dps, key) => {
+        player.simulation.blueDpsMeter.onAdd((dps, key) => {
           dispatch(addBlueDpsMeter({ value: dps, id: player.id }))
-          dps.onChange = function (changes) {
+          dps.onChange((changes) => {
             changes.forEach((change) => {
               dispatch(
                 changeBlueDpsMeter({
@@ -405,15 +410,15 @@ export default function Game() {
                 })
               )
             })
-          }
-        }
-        player.simulation.blueDpsMeter.onRemove = (dps, key) => {
+          })
+        })
+        player.simulation.blueDpsMeter.onRemove((dps, key) => {
           dispatch(removeBlueDpsMeter(player.id))
-        }
+        })
 
-        player.simulation.redDpsMeter.onAdd = (dps, key) => {
+        player.simulation.redDpsMeter.onAdd((dps, key) => {
           dispatch(addRedDpsMeter({ value: dps, id: player.id }))
-          dps.onChange = function (changes) {
+          dps.onChange((changes) => {
             changes.forEach((change) => {
               dispatch(
                 changeRedDpsMeter({
@@ -423,15 +428,15 @@ export default function Game() {
                 })
               )
             })
-          }
-        }
-        player.simulation.redDpsMeter.onRemove = (dps, key) => {
+          })
+        })
+        player.simulation.redDpsMeter.onRemove((dps, key) => {
           dispatch(removeRedDpsMeter(player.id))
-        }
+        })
 
-        player.simulation.blueHealDpsMeter.onAdd = (dps, key) => {
+        player.simulation.blueHealDpsMeter.onAdd((dps, key) => {
           dispatch(addBlueHealDpsMeter({ value: dps, id: player.id }))
-          dps.onChange = function (changes) {
+          dps.onChange((changes) => {
             changes.forEach((change) => {
               dispatch(
                 changeBlueHealDpsMeter({
@@ -441,15 +446,15 @@ export default function Game() {
                 })
               )
             })
-          }
-        }
-        player.simulation.blueHealDpsMeter.onRemove = (dps, key) => {
+          })
+        })
+        player.simulation.blueHealDpsMeter.onRemove((dps, key) => {
           dispatch(removeBlueHealDpsMeter(player.id))
-        }
+        })
 
-        player.simulation.redHealDpsMeter.onAdd = (dps, key) => {
+        player.simulation.redHealDpsMeter.onAdd((dps, key) => {
           dispatch(addRedHealDpsMeter({ value: dps, id: player.id }))
-          dps.onChange = function (changes) {
+          dps.onChange((changes) => {
             changes.forEach((change) => {
               dispatch(
                 changeRedHealDpsMeter({
@@ -459,16 +464,16 @@ export default function Game() {
                 })
               )
             })
-          }
-        }
-        player.simulation.redHealDpsMeter.onRemove = (dps, key) => {
+          })
+        })
+        player.simulation.redHealDpsMeter.onRemove((dps, key) => {
           dispatch(removeRedHealDpsMeter(player.id))
-        }
-      }
+        })
+      })
 
-      room.state.spectators.onAdd = (uid) => {
+      room.state.spectators.onAdd((uid) => {
         gameContainer.initializeSpectactor(uid)
-      }
+      })
     }
   }, [reconnected, initialized, room, dispatch, client, uid, currentPlayerId])
 
@@ -479,27 +484,31 @@ export default function Game() {
   if (toAfter) {
     return <Navigate to="/after" />
   }
-  
+
   return (
     <div>
-      {loaded ? (<>
-        <GameModal
-        modalBoolean={modalBoolean}
-        modalTitle={modalTitle}
-        modalInfo={modalInfo}
-        hideModal={setModalBoolean}
-        leave={leave}
-      />
-      {!spectate && <GameShop />}
-      <GamePlayerInformations />
-      <GamePlayers click={(id: string) => playerClick(id)} />
-      <GameSynergies />
-      <GameItemsProposition />
-      <GamePokemonsProposition />
-      <GameDpsMeter />
-      <GameToasts />
-      <GameOptionsIcon leave={leave} />
-      </>) : (<GameLoadingScreen />)}
+      {loaded ? (
+        <>
+          <GameModal
+            modalBoolean={modalBoolean}
+            modalTitle={modalTitle}
+            modalInfo={modalInfo}
+            hideModal={setModalBoolean}
+            leave={leave}
+          />
+          {!spectate && <GameShop />}
+          <GamePlayerInformations />
+          <GamePlayers click={(id: string) => playerClick(id)} />
+          <GameSynergies />
+          <GameItemsProposition />
+          <GamePokemonsProposition />
+          <GameDpsMeter />
+          <GameToasts />
+          <GameOptionsIcon leave={leave} />
+        </>
+      ) : (
+        <GameLoadingScreen />
+      )}
       <div id="game" ref={container}></div>
     </div>
   )
