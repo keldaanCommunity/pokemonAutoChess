@@ -52,6 +52,7 @@ import {
 import {
   ICustomLobbyState,
   ISuggestionUser,
+  NonFunctionPropNames,
   Title,
   Transfer
 } from "../../../types"
@@ -123,9 +124,26 @@ export default function Lobby() {
               dispatch(addUser(u))
 
               if (u.id == user.uid) {
-                u.pokemonCollection.onAdd((pokemonConfig, key) => {
-                  const p = pokemonConfig as PokemonConfig
-                  dispatch(addPokemonConfig(p))
+                u.pokemonCollection.onAdd((p, key) => {
+                  const pokemonConfig = p as PokemonConfig
+                  dispatch(addPokemonConfig(pokemonConfig))
+                  const fields: NonFunctionPropNames<PokemonConfig>[] = [
+                    "dust",
+                    "emotions",
+                    "id",
+                    "selectedEmotion",
+                    "selectedShiny",
+                    "shinyEmotions"
+                  ]
+
+                  fields.forEach((field) => {
+                    pokemonConfig.listen(field, (value, previousValue) => {
+                      dispatch(
+                        changeUser({ id: u.id, field: field, value: value })
+                      )
+                    })
+                  })
+
                   p.onChange((changes) => {
                     changes.forEach((change) => {
                       console.log(change)
@@ -142,15 +160,28 @@ export default function Lobby() {
                 dispatch(setUser(u))
                 setSearchedUser(u)
               }
-              u.onChange((changes) => {
-                changes.forEach((change) => {
-                  dispatch(
-                    changeUser({
-                      id: u.id,
-                      field: change.field,
-                      value: change.value
-                    })
-                  )
+              const fields: NonFunctionPropNames<LobbyUser>[] = [
+                "id",
+                "name",
+                "avatar",
+                "elo",
+                "langage",
+                "wins",
+                "exp",
+                "level",
+                "donor",
+                "honors",
+                "history",
+                "booster",
+                "titles",
+                "title",
+                "role",
+                "anonymous"
+              ]
+
+              fields.forEach((field) => {
+                u.listen(field, (value, previousValue) => {
+                  dispatch(changeUser({ id: u.id, field: field, value: value }))
                 })
               })
             })

@@ -45,6 +45,10 @@ export const CDN_URL =
 export const USERNAME_REGEXP =
   /^(?=.{4,20}$)(?:[\u0021-\uFFFF]+(?:(?:\.|-|_)[\u0021-\uFFFF])*)+$/
 
+export type NonFunctionPropNames<T> = {
+  [K in keyof T]: T[K] extends Function ? never : K
+}[keyof T]
+
 export type DetailledPkm = { pkm: Pkm; shiny: boolean; emotion: Emotion }
 
 export type PrecomputedTypePokemon = {
