@@ -181,7 +181,7 @@ export default class AttackingState extends PokemonState {
         target
       )
 
-      let damage
+      let damage = pokemon.atk
       const attackType = pokemon.attackType
 
       if (
@@ -192,11 +192,9 @@ export default class AttackingState extends PokemonState {
         if(target.items.has(Item.ROCKY_HELMET) === false){
           damage = Math.round(pokemon.atk * pokemon.critDamage)
         }
-      } else {
-        damage = pokemon.atk
       }
 
-      if (pokemon.effects.includes(Effect.PHANTOM_FORCE)) {
+      if (pokemon.effects.includes(Effect.PHANTOM_FORCE) && damage > 0) {
         const trueDamage = 0.2 * damage
         damage = 0.8 * damage
         target.handleDamage({
@@ -210,7 +208,7 @@ export default class AttackingState extends PokemonState {
         })
       }
 
-      if (pokemon.effects.includes(Effect.CURSE)) {
+      if (pokemon.effects.includes(Effect.CURSE) && damage > 0) {
         const trueDamage = 0.4 * damage
         damage = 0.6 * damage
         target.handleDamage({
@@ -224,7 +222,7 @@ export default class AttackingState extends PokemonState {
         })
       }
 
-      if (pokemon.effects.includes(Effect.SHADOW_TAG)) {
+      if (pokemon.effects.includes(Effect.SHADOW_TAG) && damage > 0) {
         const trueDamage = 0.7 * damage
         damage = 0.3 * damage
         target.handleDamage({
@@ -238,7 +236,7 @@ export default class AttackingState extends PokemonState {
         })
       }
 
-      if (pokemon.effects.includes(Effect.WANDERING_SPIRIT)) {
+      if (pokemon.effects.includes(Effect.WANDERING_SPIRIT) && damage > 0) {
         const trueDamage = damage
         damage = 0
         target.handleDamage({
