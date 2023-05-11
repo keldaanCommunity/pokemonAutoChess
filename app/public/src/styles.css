@@ -229,6 +229,7 @@ p:last-child {
 
 .Toastify__toast-container {
   width: auto !important;
+  --toastify-z-index: 1040;
 }
 
 .Toastify__toast {
