@@ -102,7 +102,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
         this.precomputedRarityPokemons[rarity].length > 0
       ) {
         pkm = pickRandomIn(this.precomputedRarityPokemons[rarity])
-        break;
+        break
       }
     }
     return pkm
@@ -110,7 +110,6 @@ export default class CustomLobbyRoom extends LobbyRoom {
 
   onCreate(): Promise<void> {
     logger.info("create lobby", this.roomId)
-    super.onCreate({})
     this.setState(new LobbyState())
     this.autoDispose = false
 
@@ -276,7 +275,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
       try {
         const bot = message.bot
         const user = this.state.users.get(client.auth.uid)
-        if(!user) return;
+        if (!user) return
         this.pastebin
           ?.createPaste({
             text: JSON.stringify(bot),
@@ -355,7 +354,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
     this.onMessage(Transfer.OPEN_BOOSTER, (client) => {
       try {
         const user = this.state.users.get(client.auth.uid)
-        if(!user) return;
+        if (!user) return
 
         const DUST_PER_BOOSTER = 50
         if (user && user.booster && user.booster > 0) {
@@ -410,7 +409,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
     this.onMessage(Transfer.CHANGE_NAME, (client, message) => {
       try {
         const user = this.state.users.get(client.auth.uid)
-        if(!user) return
+        if (!user) return
         if (USERNAME_REGEXP.test(message.name)) {
           user.name = message.name
           UserMetadata.findOne({ uid: client.auth.uid }, (err, user) => {
@@ -454,7 +453,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
       ) => {
         try {
           const user = this.state.users.get(client.auth.uid)
-          if(!user) return
+          if (!user) return
           const pokemonConfig = user.pokemonCollection.get(message.index)
           if (pokemonConfig) {
             const emotionsToCheck = message.shiny
@@ -494,7 +493,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
       ) => {
         try {
           const user = this.state.users.get(client.auth.uid)
-          if(!user) return
+          if (!user) return
           const pokemonConfig = user.pokemonCollection.get(message.index)
           if (pokemonConfig) {
             const emotionsToCheck = message.shiny
@@ -538,13 +537,21 @@ export default class CustomLobbyRoom extends LobbyRoom {
                       u.titles.push(Title.DUCHESS)
                     }
 
-                    const unowns = (Object.keys(PkmFamily) as Pkm[]).filter(pkm => PkmFamily[pkm] === Pkm.UNOWN_A)
-                    if(!u.titles.includes(Title.ARCHEOLOGIST) && unowns.every(name => {
-                      const index = PkmIndex[name]
-                      const collection = u.pokemonCollection.get(index)
-                      const isUnlocked = collection && (collection.emotions.length > 0 || collection.shinyEmotions.length > 0)
-                      return (isUnlocked || index === message.index)
-                    })){
+                    const unowns = (Object.keys(PkmFamily) as Pkm[]).filter(
+                      (pkm) => PkmFamily[pkm] === Pkm.UNOWN_A
+                    )
+                    if (
+                      !u.titles.includes(Title.ARCHEOLOGIST) &&
+                      unowns.every((name) => {
+                        const index = PkmIndex[name]
+                        const collection = u.pokemonCollection.get(index)
+                        const isUnlocked =
+                          collection &&
+                          (collection.emotions.length > 0 ||
+                            collection.shinyEmotions.length > 0)
+                        return isUnlocked || index === message.index
+                      })
+                    ) {
                       u.titles.push(Title.ARCHEOLOGIST)
                     }
 
@@ -574,13 +581,10 @@ export default class CustomLobbyRoom extends LobbyRoom {
 
     this.onMessage(
       Transfer.BUY_BOOSTER,
-      (
-        client,
-        message: { index: string }
-      ) => {
+      (client, message: { index: string }) => {
         try {
           const user = this.state.users.get(client.auth.uid)
-          if(!user) return
+          if (!user) return
           const pokemonConfig = user.pokemonCollection.get(message.index)
           if (pokemonConfig) {
             const BOOSTER_COST = 500
@@ -589,7 +593,8 @@ export default class CustomLobbyRoom extends LobbyRoom {
               user.booster += 1
               UserMetadata.findOne({ uid: client.auth.uid }, (err, u) => {
                 if (u) {
-                  u.pokemonCollection.get(message.index).dust = pokemonConfig.dust
+                  u.pokemonCollection.get(message.index).dust =
+                    pokemonConfig.dust
                   u.booster = user.booster
                   u.save()
                 }
@@ -687,7 +692,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
       ) => {
         try {
           const user = this.state.users.get(client.auth.uid)
-          if(!user) return
+          if (!user) return
           const config = user.pokemonCollection.get(message.index)
           if (config) {
             const emotionsToCheck = message.shiny
@@ -722,7 +727,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
         process.env.MONGO_URI ? process.env.MONGO_URI : "Default Mongo URI",
         {},
         (err) => {
-          if(err != null){
+          if (err != null) {
             logger.error("Error connecting to Mongo", err)
           }
           Chat.find(
@@ -913,7 +918,8 @@ export default class CustomLobbyRoom extends LobbyRoom {
                       user.titles,
                       user.title,
                       user.role,
-                      client.auth.email === undefined && client.auth.photoURL === undefined
+                      client.auth.email === undefined &&
+                        client.auth.photoURL === undefined
                     )
                   )
                 }
@@ -946,7 +952,8 @@ export default class CustomLobbyRoom extends LobbyRoom {
                 [],
                 "",
                 Role.BASIC,
-                client.auth.email === undefined && client.auth.photoURL === undefined
+                client.auth.email === undefined &&
+                  client.auth.photoURL === undefined
               )
             )
           }

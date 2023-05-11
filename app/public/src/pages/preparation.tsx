@@ -24,11 +24,12 @@ import {
   setUser
 } from "../stores/PreparationStore"
 import GameState from "../../../rooms/states/game-state"
-import { Transfer } from "../../../types"
+import { NonFunctionPropNames, Transfer } from "../../../types"
 import "./preparation.css"
 import { playSound, SOUNDS } from "./utils/audio"
 import { IBot } from "../../../models/mongo-models/bot-v2"
 import { logger } from "../../../utils/logger"
+import { GameUser } from "../../../models/colyseus-models/game-user"
 
 export default function Preparation() {
   const dispatch = useAppDispatch()
@@ -39,7 +40,7 @@ export default function Preparation() {
   const [initialized, setInitialized] = useState<boolean>(false)
   const [toGame, setToGame] = useState<boolean>(false)
   const [toAuth, setToAuth] = useState<boolean>(false)
-  const [toLobby, setToLobby] = useState<boolean>(false)  
+  const [toLobby, setToLobby] = useState<boolean>(false)
   const connectingToGame = useRef<boolean>(false)
 
   useEffect(() => {
@@ -53,12 +54,16 @@ export default function Preparation() {
         if (user) {
           dispatch(logIn(user))
           try {
-            const lastRoomId = localStorage.getItem("lastRoomId")
-            const lastSessionId = localStorage.getItem("lastSessionId")
-            if (lastRoomId && lastSessionId) {
+            const cachedReconnectionToken = localStorage.getItem(
+              "cachedReconnectionToken"
+            )
+            if (cachedReconnectionToken) {
               const r: Room<PreparationState> = await client.reconnect(
-                lastRoomId,
-                lastSessionId
+                cachedReconnectionToken
+              )
+              localStorage.setItem(
+                "cachedReconnectionToken",
+                r.reconnectionToken
               )
               await initialize(r, user.uid)
               dispatch(joinPreparation(r))
@@ -77,24 +82,32 @@ export default function Preparation() {
       r.state.users.forEach((u) => {
         dispatch(addUser(u))
       })
-      r.state.onChange = (changes) => {
-        changes.forEach((change) => {
-          if (change.field == "gameStarted") {
-            dispatch(setGameStarted(change.value))
-          } else if (change.field == "ownerId") {
-            dispatch(setOwnerId(change.value))
-          } else if (change.field == "ownerName") {
-            dispatch(setOwnerName(change.value))
-          } else if (change.field == "name") {
-            dispatch(setName(change.value))
-          } else if (change.field == "password") {
-            dispatch(setPassword(change.value))
-          } else if (change.field == "noElo") {
-            dispatch(setNoELO(change.value))
-          } 
-        })
-      }
-      r.state.users.onAdd = (u) => {
+
+      r.state.listen("gameStarted", (value, previousValue) => {
+        dispatch(setGameStarted(value))
+      })
+
+      r.state.listen("ownerId", (value, previousValue) => {
+        dispatch(setOwnerId(value))
+      })
+
+      r.state.listen("ownerName", (value, previousValue) => {
+        dispatch(setOwnerName(value))
+      })
+
+      r.state.listen("name", (value, previousValue) => {
+        dispatch(setName(value))
+      })
+
+      r.state.listen("password", (value, previousValue) => {
+        dispatch(setPassword(value))
+      })
+
+      r.state.listen("noElo", (value, previousValue) => {
+        dispatch(setNoELO(value))
+      })
+
+      r.state.users.onAdd((u) => {
         dispatch(addUser(u))
 
         if (u.id === uid) {
@@ -103,23 +116,34 @@ export default function Preparation() {
           playSound(SOUNDS.JOIN_ROOM)
         }
 
-        u.onChange = (changes) => {
-          changes.forEach((change) => {
-            dispatch(
-              changeUser({ id: u.id, field: change.field, value: change.value })
-            )
-            if (change.field === "ready" && change.value === true){
+        const fields: NonFunctionPropNames<GameUser>[] = [
+          "anonymous",
+          "avatar",
+          "elo",
+          "id",
+          "isBot",
+          "map",
+          "name",
+          "role",
+          "title",
+          "ready"
+        ]
+
+        fields.forEach((field) => {
+          u.listen(field, (value, previousValue) => {
+            if (field === "ready" && value) {
               playSound(SOUNDS.SET_READY)
             }
+            dispatch(changeUser({ id: u.id, field: field, value: value }))
           })
-        }
-      }
-      r.state.users.onRemove = (u) => {
+        })
+      })
+      r.state.users.onRemove((u) => {
         dispatch(removeUser(u.id))
         if (!u.isBot && u.id !== uid && !connectingToGame.current) {
           playSound(SOUNDS.LEAVE_ROOM)
         }
-      }
+      })
       r.onMessage(Transfer.MESSAGES, (message) => {
         dispatch(pushMessage(message))
       })
@@ -137,7 +161,7 @@ export default function Preparation() {
 
       r.onMessage(Transfer.GAME_START_REQUEST, async (message) => {
         const token = await firebase.auth().currentUser?.getIdToken()
-        if(message === "ok" && token && !connectingToGame.current){
+        if (message === "ok" && token && !connectingToGame.current) {
           const game: Room<GameState> = await client.create("game", {
             users: r.state.users,
             idToken: token,
@@ -148,8 +172,10 @@ export default function Preparation() {
 
           dispatch(gameStart(game.id))
           playSound(SOUNDS.START_GAME)
-          localStorage.setItem("lastRoomId", game.id)
-          localStorage.setItem("lastSessionId", game.sessionId)
+          localStorage.setItem(
+            "cachedReconnectionToken",
+            game.reconnectionToken
+          )
           await r.leave()
           game.connection.close()
           dispatch(leavePreparation())
@@ -165,8 +191,10 @@ export default function Preparation() {
           const game: Room<GameState> = await client.joinById(message.id, {
             idToken: token
           })
-          localStorage.setItem("lastRoomId", game.id)
-          localStorage.setItem("lastSessionId", game.sessionId)
+          localStorage.setItem(
+            "cachedReconnectionToken",
+            game.reconnectionToken
+          )
           await r.leave()
           game.connection.close()
           dispatch(leavePreparation())
