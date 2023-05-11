@@ -139,24 +139,15 @@ export default function Lobby() {
                   fields.forEach((field) => {
                     pokemonConfig.listen(field, (value, previousValue) => {
                       dispatch(
-                        changeUser({ id: u.id, field: field, value: value })
-                      )
-                    })
-                  })
-
-                  p.onChange((changes) => {
-                    changes.forEach((change) => {
-                      console.log(change)
-                      dispatch(
                         changePokemonConfig({
                           id: key,
-                          field: change.field,
-                          value: change.value
+                          field: field,
+                          value: value
                         })
                       )
                     })
                   })
-                }, false)
+                })
                 dispatch(setUser(u))
                 setSearchedUser(u)
               }

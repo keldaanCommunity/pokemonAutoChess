@@ -116,14 +116,14 @@ export default class BoardManager {
     }
   }
 
-  changePokemon(pokemon: IPokemon, change: DataChange<any>) {
+  changePokemon(pokemon: IPokemon, field: string, value: any) {
     // logger.debug('change', change.field, pokemon.name);
     const pokemonUI = this.pokemons.get(pokemon.id)
     let coordinates: number[]
     if (pokemonUI) {
-      switch (change.field) {
+      switch (field) {
         case "positionX":
-          pokemonUI.positionX = change.value
+          pokemonUI.positionX = value
           pokemonUI.positionY = pokemon.positionY
           coordinates = transformCoordinate(
             pokemon.positionX,
@@ -134,7 +134,7 @@ export default class BoardManager {
           break
 
         case "positionY":
-          pokemonUI.positionY = change.value
+          pokemonUI.positionY = value
           pokemonUI.positionX = pokemon.positionX
           coordinates = transformCoordinate(
             pokemon.positionX,
@@ -148,11 +148,11 @@ export default class BoardManager {
           break
 
         case "action":
-          this.animationManager.animatePokemon(pokemonUI, change.value)
+          this.animationManager.animatePokemon(pokemonUI, value)
           break
 
         default:
-          pokemonUI[change.field] = change.value
+          pokemonUI[field] = value
           break
       }
     }
@@ -169,12 +169,12 @@ export default class BoardManager {
     return count === 2 || count === 5 || count === 8
   }
 
-  closeTooltips(){
+  closeTooltips() {
     this.pokemons.forEach((pokemon) => {
       if (pokemon.detail) {
         pokemon.closeDetail()
       }
-      if(pokemon.itemsContainer){
+      if (pokemon.itemsContainer) {
         pokemon.itemsContainer.closeDetails()
       }
     })

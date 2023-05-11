@@ -44,7 +44,7 @@ export default class PreparationRoom extends Room<PreparationState> {
     updateLobby(this)
   }
 
-  async setPassword(password: string){
+  async setPassword(password: string) {
     await this.setMetadata(<IPreparationMetadata>{
       password: password,
       type: "preparation"
@@ -52,7 +52,7 @@ export default class PreparationRoom extends Room<PreparationState> {
     updateLobby(this)
   }
 
-  async toggleElo(noElo: boolean){
+  async toggleElo(noElo: boolean) {
     await this.setMetadata(<IPreparationMetadata>{
       noElo: noElo
     })
@@ -91,7 +91,10 @@ export default class PreparationRoom extends Room<PreparationState> {
 
     this.onMessage(Transfer.CHANGE_ROOM_PASSWORD, (client, message) => {
       try {
-        this.dispatcher.dispatch(new OnRoomPasswordCommand(), { client, message })
+        this.dispatcher.dispatch(new OnRoomPasswordCommand(), {
+          client,
+          message
+        })
       } catch (error) {
         logger.error(error)
       }
@@ -165,7 +168,7 @@ export default class PreparationRoom extends Room<PreparationState> {
     this.onMessage(Transfer.REMOVE_BOT, (client: Client, t: string) => {
       try {
         const user = this.state.users.get(client.auth.uid)
-        if(user){
+        if (user) {
           this.dispatcher.dispatch(new OnRemoveBotCommand(), {
             target: t,
             user: user
@@ -178,7 +181,7 @@ export default class PreparationRoom extends Room<PreparationState> {
     this.onMessage(Transfer.REQUEST_BOT_LIST, (client: Client) => {
       try {
         const user = this.state.users.get(client.auth.uid)
-        
+
         this.dispatcher.dispatch(new OnListBotsCommand(), {
           user: user
         })
@@ -226,9 +229,8 @@ export default class PreparationRoom extends Room<PreparationState> {
       if (consented) {
         throw new Error("consented leave")
       }
-
       // allow disconnected client to reconnect into this room until 2 seconds
-      await this.allowReconnection(client, 2)
+      await this.allowReconnection(client, 10)
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
         logger.info(

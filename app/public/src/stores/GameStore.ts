@@ -144,17 +144,10 @@ export const gameSlice = createSlice({
     },
     changePlayer: (
       state,
-      action: PayloadAction<{ id: string; change: DataChange<any> }>
+      action: PayloadAction<{ id: string; field: string; value: any }>
     ) => {
       const index = state.players.findIndex((e) => action.payload.id == e.id)
-      if (
-        ["money", "history", "life", "rank"].includes(
-          action.payload.change.field
-        )
-      ) {
-        state.players[index][action.payload.change.field] =
-          action.payload.change.value
-      }
+      state.players[index][action.payload.field] = action.payload.value
     },
     setShop: (state, action: PayloadAction<ArraySchema<Pkm>>) => {
       state.shop = action.payload
@@ -249,8 +242,8 @@ export const gameSlice = createSlice({
       state,
       action: PayloadAction<{ value: number; id: string }>
     ) => {
-      const player = state.players.find(p => p.id === action.payload.id)
-      if(player){
+      const player = state.players.find((p) => p.id === action.payload.id)
+      if (player) {
         player.loadingProgress = action.payload.value
       }
     },
@@ -341,7 +334,8 @@ export const gameSlice = createSlice({
       state,
       action: PayloadAction<{
         id: string
-        change: DataChange<any>
+        field: string
+        value: string | number
         playerId: string
       }>
     ) => {
@@ -350,8 +344,7 @@ export const gameSlice = createSlice({
           (e) => action.payload.id == e.id
         )
         if (index >= 0) {
-          state.redDpsMeter[index][action.payload.change.field] =
-            action.payload.change.value
+          state.redDpsMeter[index][action.payload.field] = action.payload.value
         }
       }
     },
@@ -359,7 +352,8 @@ export const gameSlice = createSlice({
       state,
       action: PayloadAction<{
         id: string
-        change: DataChange<any>
+        field: string
+        value: string | number
         playerId: string
       }>
     ) => {
@@ -370,7 +364,7 @@ export const gameSlice = createSlice({
         if (index >= 0) {
           state.blueDpsMeter[
             state.blueDpsMeter.findIndex((e) => action.payload.id == e.id)
-          ][action.payload.change.field] = action.payload.change.value
+          ][action.payload.field] = action.payload.value
         }
       }
     },
@@ -378,7 +372,8 @@ export const gameSlice = createSlice({
       state,
       action: PayloadAction<{
         id: string
-        change: DataChange<any>
+        field: string
+        value: string | number
         playerId: string
       }>
     ) => {
@@ -389,7 +384,7 @@ export const gameSlice = createSlice({
         if (index >= 0) {
           state.redHealDpsMeter[
             state.redHealDpsMeter.findIndex((e) => action.payload.id == e.id)
-          ][action.payload.change.field] = action.payload.change.value
+          ][action.payload.field] = action.payload.value
         }
       }
     },
@@ -397,7 +392,8 @@ export const gameSlice = createSlice({
       state,
       action: PayloadAction<{
         id: string
-        change: DataChange<any>
+        field: string
+        value: string | number
         playerId: string
       }>
     ) => {
@@ -408,7 +404,7 @@ export const gameSlice = createSlice({
         if (index >= 0) {
           state.blueHealDpsMeter[
             state.blueHealDpsMeter.findIndex((e) => action.payload.id == e.id)
-          ][action.payload.change.field] = action.payload.change.value
+          ][action.payload.field] = action.payload.value
         }
       }
     },

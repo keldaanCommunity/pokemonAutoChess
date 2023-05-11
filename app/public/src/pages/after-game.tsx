@@ -66,18 +66,15 @@ export default function AfterGame() {
     }
 
     const initialize = async (r: Room<AfterGameState>) => {
+      localStorage.setItem("cachedReconnectionToken", r.reconnectionToken)
       r.state.players.onAdd((player) => {
         dispatch(addPlayer(player))
         if (player.id === currentPlayerId) {
           playSound(SOUNDS["FINISH" + player.rank])
         }
       })
-      r.state.onChange((changes) => {
-        changes.forEach((change) => {
-          if (change.field == "noElo") {
-            dispatch(setNoELO(change.value))
-          }
-        })
+      r.state.listen("noElo", (value, previousValue) => {
+        dispatch(setNoELO(value))
       })
     }
 
