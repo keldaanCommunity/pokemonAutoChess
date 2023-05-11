@@ -3096,7 +3096,22 @@ export default class Pokemon extends DraggableObject {
             break
 
           case Ability.OVERHEAT:
-            this.scene.cameras.main.flash(200, 255, 0, 0)
+            coordinates = transformAttackCoordinate(this.positionX, this.positionY)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              "specials",
+              `${Ability.FIRE_BLAST}/000`
+            )
+            specialProjectile.setDepth(0)
+            specialProjectile.setScale(3)
+            specialProjectile.anims.play(Ability.FIRE_BLAST)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
             break
 
           default:
