@@ -1484,7 +1484,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.DIVE]: {
-    eng: `Dives underwater and reappears in the middle of the enemy team, dealing [10,20,40,SP] ${Damage.SPECIAL} and ${Status.FREEZE} all adjacent units for [1.5,3,6] seconds`,
+    eng: `Dives underwater and reappears in the middle of the enemy team, dealing [15,30,60,SP] ${Damage.SPECIAL} and ${Status.FREEZE} all adjacent units for [1,2,4] seconds`,
     esp: ``,
     prt: ``,
     fra: ``
