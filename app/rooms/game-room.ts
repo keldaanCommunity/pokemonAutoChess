@@ -478,14 +478,14 @@ export default class GameRoom extends Room<GameState> {
               logger.error(err)
             } else {
               const expThreshold = 1000
-              let remainingExpToGain = exp
-              while(usr.exp + remainingExpToGain >= expThreshold) {
+              if (usr.exp + exp >= expThreshold) {
                 usr.level += 1
                 usr.booster += 1
-                remainingExpToGain -= (expThreshold - usr.exp)
-                usr.exp = 0
+                usr.exp = usr.exp + exp - expThreshold
+              } else {
+                usr.exp = usr.exp + exp
               }
-              usr.exp = remainingExpToGain > 0 ? remainingExpToGain : 0
+              usr.exp = !isNaN(usr.exp) ? usr.exp : 0
 
               if (rank == 1) {
                 usr.wins += 1
