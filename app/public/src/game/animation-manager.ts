@@ -605,12 +605,12 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
-      key: Ability.POISON_STING,
+      key: Ability.VENOSHOCK,
       frames: this.game.anims.generateFrameNames("specials", {
         start: 0,
         end: 12,
         zeroPad: 3,
-        prefix: `${Ability.POISON_STING}/`
+        prefix: `${Ability.VENOSHOCK}/`
       }),
       duration: 1000,
       repeat: 0
