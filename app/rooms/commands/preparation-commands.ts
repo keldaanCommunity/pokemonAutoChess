@@ -283,7 +283,7 @@ export class OnLeaveCommand extends Command<
           this.state.users.delete(client.auth.uid)
 
           if (client.auth.uid === this.state.ownerId) {
-            const newOwner = values(this.state.users).find(user => user.id !== this.state.ownerId)
+            const newOwner = values(this.state.users).find(user => !user.isBot && user.id !== this.state.ownerId)
             if(newOwner){
               this.state.ownerId = newOwner.id
               this.state.ownerName = newOwner.name
