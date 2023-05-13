@@ -28,8 +28,8 @@ export default function LeaderboardItem(props: {
       }}
     >
       <div style={{ display: "flex", gap: "5px" }}>
-        <span style={{lineHeight: "40px"}}>{props.item.rank}</span>
-        <img src={getAvatarSrc(props.item.avatar)} />
+        <span className="player-rank">{props.item.rank}</span>
+        <img src={getAvatarSrc(props.item.avatar)} className="pokemon-portrait" />
       </div>
       <span style={{ overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis", padding: "0 0.5em" }}>
         {props.item.name}

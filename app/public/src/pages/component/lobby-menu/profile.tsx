@@ -31,7 +31,7 @@ export default function Profile() {
             }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "0.5em" }}>
-              <img src={getAvatarSrc(user.avatar)} />
+              <img src={getAvatarSrc(user.avatar)} className="pokemon-portrait" />
               <p style={{ color: "#ffc107" }}>{TitleName[user.title]}</p>
               <RoleBadge role={user.role} />
               <p>{user.name}</p>
@@ -92,7 +92,7 @@ export default function Profile() {
                     return (
                       <img
                         key={`normal-${pokemonConfig.id}${emotion}`}
-                        className="clickable"
+                        className="clickable pokemon-portrait"
                         onClick={() => {
                           dispatch(
                             changeAvatar({
@@ -112,7 +112,7 @@ export default function Profile() {
                     return (
                       <img
                         key={`shiny-${pokemonConfig.id}${emotion}`}
-                        className="clickable"
+                        className="clickable pokemon-portrait"
                         onClick={() => {
                           dispatch(
                             changeAvatar({
