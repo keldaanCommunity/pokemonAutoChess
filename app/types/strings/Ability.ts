@@ -825,6 +825,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.HYPNOSIS]: {
+    eng: "Hypnosis",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1651,6 +1657,12 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
   },
   [Ability.OVERHEAT]: {
     eng: `Deals [20, SP] ${Damage.SPECIAL} to all enemies. Double damage if target is ${Status.BURN}`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HYPNOSIS]: {
+    eng: `Put ${Status.SLEEP} 1 enemy in the back lines for [2,3.5,6]  seconds`,
     esp: "",
     prt: "",
     fra: ""

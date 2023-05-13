@@ -10146,9 +10146,9 @@ export class Hoothoot extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.HOOTHOOT,
-      [Synergy.NORMAL, Synergy.FLYING],
+      [Synergy.NORMAL, Synergy.FLYING, Synergy.PSYCHIC],
       Rarity.UNCOMMON,
-      Pkm.PERSIAN,
+      Pkm.NOCTOWL,
       75,
       5,
       2,
@@ -10158,7 +10158,7 @@ export class Hoothoot extends Pokemon {
       AttackType.PHYSICAL,
       1,
       100,
-      Ability.PAYDAY,
+      Ability.HYPNOSIS,
       shiny,
       emotion,
       false,
@@ -10171,8 +10171,8 @@ export class Noctowl extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.NOCTOWL,
-      [Synergy.NORMAL, Synergy.FIELD],
-      Rarity.RARE,
+      [Synergy.NORMAL, Synergy.FLYING, Synergy.PSYCHIC],
+      Rarity.UNCOMMON,
       Pkm.DEFAULT,
       170,
       6,
@@ -10183,7 +10183,7 @@ export class Noctowl extends Pokemon {
       AttackType.PHYSICAL,
       2,
       100,
-      Ability.PAYDAY,
+      Ability.HYPNOSIS,
       shiny,
       emotion,
       true,
