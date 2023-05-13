@@ -11,3 +11,5 @@
 # Bugfix
 
 # Misc
+
+- Add Alchemist title for maxing artificial synergy
