@@ -22,7 +22,8 @@
   ],
   "main": "dist/server/index.js",
   "scripts": {
-    "reset": "rm -rf node_modules/ && rm -f app/public/js/*",
+    "reset": "rm -rf node_modules/ && rm -f app/public/js/*",    
+    "clone-external-assets": "cd app/public/dist/client/assets/external && git clone https://github.com/keldaanInteractive/pokemonAutoChessMusic.git && git clone https://github.com/keldaanInteractive/SpriteCollab.git",
     "dev-client": "node esbuild.js --dev",
     "dev-server": "ts-node-dev --watch \"src/**/*\" --respawn --transpile-only ./app/index.ts",
     "dev": "npm-run-all --parallel dev-*",

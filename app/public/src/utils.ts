@@ -1,4 +1,4 @@
-import { CDN_PORTRAIT_URL, Emotion } from "../../types"
+import { PORTRAITS_PATH, Emotion } from "../../types"
 
 export function getPortraitSrc(
   index: string,
@@ -7,14 +7,14 @@ export function getPortraitSrc(
 ) {
   const shinyPad = shiny ? (index.length === 4 ? "/0000/0001" : "/0001") : ""
   const emotionWithFallback = emotion ? emotion : Emotion.NORMAL
-  return `${CDN_PORTRAIT_URL}${index.replace(
+  return `${PORTRAITS_PATH}${index.replace(
     "-",
     "/"
   )}${shinyPad}/${emotionWithFallback}.png`
 }
 
 export function getAvatarSrc(avatar: string) {
-  return `${CDN_PORTRAIT_URL}${avatar.replace("-", "/")}.png`
+  return `${PORTRAITS_PATH}${avatar.replace("-", "/")}.png`
 }
 
 export function getInformations(avatar: string) {

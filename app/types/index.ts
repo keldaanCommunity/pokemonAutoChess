@@ -36,11 +36,9 @@ export * from "./enum/Emotion"
 
 export const FIGHTING_PHASE_DURATION = 40000
 
-export const CDN_PORTRAIT_URL =
-  "https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/"
+export const PORTRAITS_PATH = "assets/external/SpriteCollab/portrait/"
 
-export const CDN_URL =
-  "https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master"
+export const SPRITE_COLLAB_URL = "https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master"
 
 export const USERNAME_REGEXP =
   /^(?=.{4,20}$)(?:[\u0021-\uFFFF]+(?:(?:\.|-|_)[\u0021-\uFFFF])*)+$/

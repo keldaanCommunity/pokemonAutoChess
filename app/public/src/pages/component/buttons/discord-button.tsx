@@ -12,7 +12,7 @@ export default function DiscordButton() {
         handleDiscordClick()
       }}
     >
-      <img src="assets/ui/discord.svg" style={{ height: "100%" }} />
+      <img src="assets/ui/discord.svg" />
     </button>
   )
 }

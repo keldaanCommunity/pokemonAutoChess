@@ -1,0 +1,1 @@
+External assets are retrieved from Github by `install-external-assets` npm script

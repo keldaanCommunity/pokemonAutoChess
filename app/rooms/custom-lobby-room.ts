@@ -30,7 +30,7 @@ import {
   ISuggestionUser,
   Title,
   Role,
-  CDN_PORTRAIT_URL,
+  PORTRAITS_PATH,
   PrecomputedRaritPokemonyAll,
   USERNAME_REGEXP
 } from "../types"
@@ -704,7 +704,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
                 message.shiny,
                 message.emotion
               )
-                .replace(CDN_PORTRAIT_URL, "")
+                .replace(PORTRAITS_PATH, "")
                 .replace(".png", "")
               user.avatar = portrait
               UserMetadata.findOne(

@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import PokemonFactory from "../../../../../models/pokemon-factory"
-import { CDN_URL } from "../../../../../types"
+import { SPRITE_COLLAB_URL } from "../../../../../types"
 import { ICreditName } from "../../../../../types"
 import { AbilityName } from "../../../../../types/strings/Ability"
 import { ITracker } from "../../../../../types/ITracker"
@@ -23,7 +23,7 @@ export default function WikiPokemonDetail(props: {
   const [initialized, setInitialized] = useState<boolean>(false)
   if (!initialized) {
     setInitialized(true)
-    fetch(`${CDN_URL}/credit_names.txt`)
+    fetch(`${SPRITE_COLLAB_URL}/credit_names.txt`)
       .then((res) => res.text())
       .then((text) => text.split("\n"))
       .then((lines: string[]) =>
