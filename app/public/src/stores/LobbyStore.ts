@@ -7,7 +7,12 @@ import LeaderboardInfo, {
   ILeaderboardInfo
 } from "../../../models/colyseus-models/leaderboard-info"
 import { RoomAvailable } from "colyseus.js"
-import { IGameMetadata, IMessage, IPreparationMetadata, ISuggestionUser } from "../../../types"
+import {
+  IGameMetadata,
+  IMessage,
+  IPreparationMetadata,
+  ISuggestionUser
+} from "../../../types"
 import { IMeta } from "../../../models/mongo-models/meta"
 import { IBot } from "../../../models/mongo-models/bot-v2"
 import { IItemsStatistic } from "../../../models/mongo-models/items-statistic"
@@ -173,7 +178,7 @@ export const lobbySlice = createSlice({
     setLevelLeaderboard: (state, action: PayloadAction<LeaderboardInfo[]>) => {
       state.levelLeaderboard = action.payload
     },
-    addPokemonConfig: (state, action: PayloadAction<PokemonConfig>) => {
+    addPokemonConfig: (state, action: PayloadAction<IPokemonConfig>) => {
       state.pokemonCollection.push(JSON.parse(JSON.stringify(action.payload)))
     },
     changePokemonConfig: (
@@ -220,8 +225,12 @@ export const lobbySlice = createSlice({
       state.tabIndex = action.payload
     },
     addRoom: (state, action: PayloadAction<RoomAvailable>) => {
-      const metadata: IPreparationMetadata | IGameMetadata = action.payload.metadata
-      const rooms = metadata.type === "preparation" ? state.preparationRooms : state.gameRooms
+      const metadata: IPreparationMetadata | IGameMetadata =
+        action.payload.metadata
+      const rooms =
+        metadata.type === "preparation"
+          ? state.preparationRooms
+          : state.gameRooms
       if (metadata && metadata.name) {
         const roomIndex = rooms.findIndex(
           (room) => room.roomId === action.payload.roomId
@@ -229,7 +238,7 @@ export const lobbySlice = createSlice({
         if (roomIndex !== -1) {
           rooms[roomIndex] = action.payload
         } else {
-          if(metadata.type === "preparation"){
+          if (metadata.type === "preparation") {
             playSound(SOUNDS.NEW_ROOM)
           }
           rooms.push(action.payload)

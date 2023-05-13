@@ -317,7 +317,6 @@ export default class GameScene extends Scene {
     this.input.mouse.disableContextMenu()
     this.input.on("pointerdown", (pointer) => {
       if (
-        pointer.rightButtonDown() &&
         this.minigameManager &&
         this.room?.state.phase === GamePhaseState.MINIGAME
         && !this.spectate

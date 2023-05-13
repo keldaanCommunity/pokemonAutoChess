@@ -376,8 +376,8 @@ export const AbilityName: { [key in Ability]: Langage } = {
     fra: `Sécrétion`,
     prt: ``
   },
-  [Ability.POISON_STING]: {
-    eng: `Poison Sting`,
+  [Ability.VENOSHOCK]: {
+    eng: `Venoshock`,
     esp: `Picadura de veneno`,
     fra: `Dard Venin`,
     prt: ``
@@ -1201,7 +1201,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``,
     prt: ``
   },
-  [Ability.POISON_STING]: {
+  [Ability.VENOSHOCK]: {
     eng: `Mono target damage that deals [30,60,120,SP] ${Damage.SPECIAL}. Doubles damage if target is ${Status.POISON}`,
     esp: `Daño especial de un solo objetivo que reparte [30,60,120,SP] ${Damage.SPECIAL}. Duplica el daño si el objetivo está envenenado.`,
     fra: `Attaque physique mono cible faisant [30,60,120,SP] ${Damage.SPECIAL}. Double les dégats si la cible est empoisonné.`,
@@ -1484,7 +1484,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.DIVE]: {
-    eng: `Dives underwater and reappears in the middle of the enemy team, dealing [10,20,40,SP] ${Damage.SPECIAL} and ${Status.FREEZE} all adjacent units for [1.5,3,6] seconds`,
+    eng: `Dives underwater and reappears in the middle of the enemy team, dealing [15,30,60,SP] ${Damage.SPECIAL} and ${Status.FREEZE} all adjacent units for [1,2,4] seconds`,
     esp: ``,
     prt: ``,
     fra: ``

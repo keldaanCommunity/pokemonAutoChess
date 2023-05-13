@@ -67,7 +67,11 @@ import {
   IDragDropItemMessage,
   IDragDropMessage,
   Transfer,
-  ISimplePlayer
+  ISimplePlayer,
+  NonFunctionPropNames,
+  IDps,
+  IDpsHeal,
+  IPlayer
 } from "../../../types"
 import GameToasts from "./component/game/game-toasts"
 import GamePokemonsProposition from "./component/game/game-pokemons-proposition"
@@ -140,8 +144,7 @@ export default function Game() {
       idToken: token,
       noElo: room?.state.noElo
     })
-    localStorage.setItem("lastRoomId", r.id)
-    localStorage.setItem("lastSessionId", r.sessionId)
+    localStorage.setItem("cachedReconnectionToken", r.reconnectionToken)
     await room?.leave()
     r.connection.close()
     dispatch(leaveGame())
@@ -159,21 +162,25 @@ export default function Game() {
         if (user) {
           dispatch(logIn(user))
 
-          async function tryToReconnectToLastGame(attempts=1){
+          async function tryToReconnectToLastGame(attempts = 1) {
             try {
-              const lastRoomId = localStorage.getItem("lastRoomId")
-              const lastSessionId = localStorage.getItem("lastSessionId")
-              if (lastRoomId && lastSessionId) {
+              const cachedReconnectionToken = localStorage.getItem(
+                "cachedReconnectionToken"
+              )
+              if (cachedReconnectionToken) {
                 const r: Room<GameState> = await client.reconnect(
-                  lastRoomId,
-                  lastSessionId
+                  cachedReconnectionToken
+                )
+                localStorage.setItem(
+                  "cachedReconnectionToken",
+                  r.reconnectionToken
                 )
                 dispatch(joinGame(r))
               }
             } catch (error) {
-              if(attempts < MAX_ATTEMPS_RECONNECT){
-                setTimeout(() => tryToReconnectToLastGame(attempts+1), 100)
-              } else{
+              if (attempts < MAX_ATTEMPS_RECONNECT) {
+                setTimeout(() => tryToReconnectToLastGame(attempts + 1), 100)
+              } else {
                 logger.error("reconnect error", error)
                 setToAuth(true)
               }
@@ -242,17 +249,23 @@ export default function Game() {
       })
 
       room.onMessage(Transfer.PLAYER_DAMAGE, (value) => {
-        toast(<div className="toast-player-damage">
-          <span style={{verticalAlign: "middle"}}>-{value}</span>
-          <img className="icon-life" src="/assets/ui/heart.png" alt="❤" />
-        </div>, { containerId: "toast-life" })
+        toast(
+          <div className="toast-player-damage">
+            <span style={{ verticalAlign: "middle" }}>-{value}</span>
+            <img className="icon-life" src="/assets/ui/heart.png" alt="❤" />
+          </div>,
+          { containerId: "toast-life" }
+        )
       })
 
       room.onMessage(Transfer.PLAYER_INCOME, (value) => {
-        toast(<div className="toast-player-income">
-          <span style={{verticalAlign: "middle"}}>+{value}</span>
-          <img className="icon-money" src="/assets/ui/money.svg" alt="$" />
-        </div>, { containerId: "toast-money" })
+        toast(
+          <div className="toast-player-income">
+            <span style={{ verticalAlign: "middle" }}>+{value}</span>
+            <img className="icon-money" src="/assets/ui/money.svg" alt="$" />
+          </div>,
+          { containerId: "toast-money" }
+        )
       })
 
       room.onMessage(Transfer.UNOWN_WANDERING, () => {
@@ -264,31 +277,36 @@ export default function Game() {
         }
       })
 
-      room.state.onChange = (changes) => {
-        changes.forEach((change) => {
-          if (change.field == "roundTime") {
-            dispatch(setRoundTime(change.value))
-          } else if (change.field == "phase") {
-            if (gameContainer.game) {
-              const g: any = gameContainer.game.scene.getScene("gameScene")
-              g.updatePhase()
-            }
-            dispatch(setPhase(change.value))
-          } else if (change.field == "stageLevel") {
-            dispatch(setStageLevel(change.value))
-          } else if (change.field == "mapName") {
-            dispatch(setMapName(change.value))
-          } else if (change.field == "noElo") {
-            dispatch(setNoELO(change.value))
-          }
-        })
-      }
+      room.state.listen("roundTime", (value, previousValue) => {
+        dispatch(setRoundTime(value))
+      })
 
-      room.state.additionalPokemons.onAdd = (pkm) => {
+      room.state.listen("phase", (value, previousValue) => {
+        if (gameContainer.game) {
+          const g: any = gameContainer.game.scene.getScene("gameScene")
+          g.updatePhase()
+        }
+        dispatch(setPhase(value))
+      })
+
+      room.state.listen("stageLevel", (value, previousValue) => {
+        dispatch(setStageLevel(value))
+      })
+
+      room.state.listen("mapName", (value, previousValue) => {
+        dispatch(setMapName(value))
+      })
+
+      room.state.listen("noElo", (value, previousValue) => {
+        dispatch(setNoELO(value))
+      })
+
+      room.state.additionalPokemons.onAdd((pkm) => {
         dispatch(setAdditionalPokemons(room.state.additionalPokemons))
-      }
+      })
 
-      room.state.players.onAdd = (player) => {
+      room.state.players.onAdd((player) => {
+        // dispatch(changePlayer({ id: player.id, change: change }))
         gameContainer.initializePlayer(player)
         dispatch(addPlayer(player))
 
@@ -300,175 +318,221 @@ export default function Game() {
           dispatch(setPlayer(player))
         }
 
-        player.onChange = (changes) => {
-          changes.forEach((change) => {
-            if (player.id == uid) {
-              if (change.field == "alive") {
-                const rankPhrase = getRankLabel(player.rank)!
-                const titlePhrase = "Game Over"
-                if (!change.value) {
-                  setModalTitle(titlePhrase)
-                  setModalInfo(rankPhrase)
-                  setModalBoolean(true)
-                }
-              } else if (change.field == "experienceManager") {
-                dispatch(setExperienceManager(player.experienceManager))
-              } else if (change.field == "interest") {
-                dispatch(setInterest(player.interest))
-              } else if (change.field == "shop") {
-                dispatch(setShop(player.shop))
-              } else if (change.field == "shopLocked") {
-                dispatch(setShopLocked(player.shopLocked))
-              } else if (change.field == "money") {
-                dispatch(setMoney(player.money))
-              } else if (change.field == "streak") {
-                dispatch(setStreak(player.streak))
-              }
+        if (player.id === uid) {
+          player.listen("alive", (value, previousValue) => {
+            const rankPhrase = getRankLabel(player.rank)!
+            const titlePhrase = "Game Over"
+            if (value === false) {
+              setModalTitle(titlePhrase)
+              setModalInfo(rankPhrase)
+              setModalBoolean(true)
             }
-            if (change.field == "opponentName") {
-              dispatch(setOpponentName({ id: player.id, value: change.value }))
-            } else if (change.field == "opponentAvatar") {
-              dispatch(
-                setOpponentAvatar({ id: player.id, value: change.value })
-              )
-            } else if (change.field == "boardSize") {
-              dispatch(setBoardSize({ id: player.id, value: change.value }))
-            } else if (change.field == "life") {
-              dispatch(setLife({ id: player.id, value: change.value }))
-            } else if (change.field == "money") {
-              dispatch(
-                setCurrentPlayerMoney({ id: player.id, value: change.value })
-              )
-            } else if (change.field == "experienceManager") {
-              dispatch(
-                setCurrentPlayerExperienceManager({
-                  id: player.id,
-                  value: change.value
-                })
-              )
-            } else if (change.field == "avatar") {
-              dispatch(
-                setCurrentPlayerAvatar({ id: player.id, value: change.value })
-              )
-            } else if (change.field == "name") {
-              dispatch(
-                setCurrentPlayerName({ id: player.id, value: change.value })
-              )
-            } else if (change.field == "title") {
-              dispatch(
-                setCurrentPlayerTitle({ id: player.id, value: change.value })
-              )
-            } else if (change.field == "loadingProgress") {
-              dispatch(
-                setLoadingProgress({ id: player.id, value: change.value })
-              )
-            }
-            dispatch(changePlayer({ id: player.id, change: change }))
+          })
+          player.listen("interest", (value, previousValue) => {
+            dispatch(setInterest(value))
+          })
+          player.listen("shop", (value, previousValue) => {
+            dispatch(setShop(value))
+          })
+          player.listen("shopLocked", (value, previousValue) => {
+            dispatch(setShopLocked(value))
+          })
+          player.listen("money", (value, previousValue) => {
+            dispatch(setMoney(value))
+          })
+          player.listen("streak", (value, previousValue) => {
+            dispatch(setStreak(value))
           })
         }
 
-        player.synergies.onChange = (value, key) => {
+        player.listen("opponentName", (value, previousValue) => {
+          dispatch(setOpponentName({ id: player.id, value: value }))
+        })
+        player.listen("opponentAvatar", (value, previousValue) => {
+          dispatch(setOpponentAvatar({ id: player.id, value: value }))
+        })
+        player.listen("boardSize", (value, previousValue) => {
+          dispatch(setBoardSize({ id: player.id, value: value }))
+        })
+        player.listen("life", (value, previousValue) => {
+          dispatch(setLife({ id: player.id, value: value }))
+        })
+        player.listen("money", (value, previousValue) => {
+          dispatch(setCurrentPlayerMoney({ id: player.id, value: value }))
+        })
+        player.listen("experienceManager", (value, previousValue) => {
+          if (player.id === uid) {
+            dispatch(setExperienceManager(value))
+          }
+          dispatch(
+            setCurrentPlayerExperienceManager({
+              id: player.id,
+              value: value
+            })
+          )
+        })
+        player.listen("avatar", (value, previousValue) => {
+          dispatch(setCurrentPlayerAvatar({ id: player.id, value: value }))
+        })
+        player.listen("name", (value, previousValue) => {
+          dispatch(setCurrentPlayerName({ id: player.id, value: value }))
+        })
+        player.listen("title", (value, previousValue) => {
+          dispatch(setCurrentPlayerTitle({ id: player.id, value: value }))
+        })
+        player.listen("loadingProgress", (value, previousValue) => {
+          dispatch(setLoadingProgress({ id: player.id, value: value }))
+        })
+
+        const fields: NonFunctionPropNames<IPlayer>[] = [
+          "money",
+          "history",
+          "life",
+          "rank"
+        ]
+
+        fields.forEach((field) => {
+          player.listen(field, (value, previousValue) => {
+            dispatch(
+              changePlayer({ id: player.id, field: field, value: value })
+            )
+          })
+        })
+
+        player.synergies.onChange((value, key) => {
           dispatch(setSynergies({ id: player.id, value: player.synergies }))
-        }
+        })
 
-        player.itemsProposition.onAdd = (changes) => {
+        player.itemsProposition.onAdd((changes) => {
           if (player.id == uid) {
             dispatch(setItemsProposition(player.itemsProposition))
           }
-        }
-        player.itemsProposition.onRemove = (changes) => {
+        })
+        player.itemsProposition.onRemove((changes) => {
           if (player.id == uid) {
             dispatch(setItemsProposition(player.itemsProposition))
           }
-        }
+        })
 
-        player.pokemonsProposition.onAdd = (changes) => {
+        player.pokemonsProposition.onAdd((changes) => {
           if (player.id == uid) {
             dispatch(setPokemonProposition(player.pokemonsProposition))
           }
-        }
-        player.pokemonsProposition.onRemove = (changes) => {
+        })
+        player.pokemonsProposition.onRemove((changes) => {
           if (player.id == uid) {
             dispatch(setPokemonProposition(player.pokemonsProposition))
           }
-        }
+        })
 
-        player.simulation.blueDpsMeter.onAdd = (dps, key) => {
+        player.simulation.blueDpsMeter.onAdd((dps, key) => {
           dispatch(addBlueDpsMeter({ value: dps, id: player.id }))
-          dps.onChange = function (changes) {
-            changes.forEach((change) => {
+          const fields: NonFunctionPropNames<IDps>[] = [
+            "id",
+            "name",
+            "physicalDamage",
+            "specialDamage",
+            "trueDamage"
+          ]
+          fields.forEach((field) => {
+            dps.listen(field, (value, previousValue) => {
               dispatch(
                 changeBlueDpsMeter({
                   id: dps.id,
-                  change: change,
+                  field: field,
+                  value: value,
                   playerId: player.id
                 })
               )
             })
-          }
-        }
-        player.simulation.blueDpsMeter.onRemove = (dps, key) => {
+          })
+        })
+        player.simulation.blueDpsMeter.onRemove((dps, key) => {
           dispatch(removeBlueDpsMeter(player.id))
-        }
+        })
 
-        player.simulation.redDpsMeter.onAdd = (dps, key) => {
+        player.simulation.redDpsMeter.onAdd((dps, key) => {
           dispatch(addRedDpsMeter({ value: dps, id: player.id }))
-          dps.onChange = function (changes) {
-            changes.forEach((change) => {
+          const fields: NonFunctionPropNames<IDps>[] = [
+            "id",
+            "name",
+            "physicalDamage",
+            "specialDamage",
+            "trueDamage"
+          ]
+          fields.forEach((field) => {
+            dps.listen(field, (value, previousValue) => {
               dispatch(
                 changeRedDpsMeter({
                   id: dps.id,
-                  change: change,
+                  field: field,
+                  value: value,
                   playerId: player.id
                 })
               )
             })
-          }
-        }
-        player.simulation.redDpsMeter.onRemove = (dps, key) => {
+          })
+        })
+        player.simulation.redDpsMeter.onRemove((dps, key) => {
           dispatch(removeRedDpsMeter(player.id))
-        }
+        })
 
-        player.simulation.blueHealDpsMeter.onAdd = (dps, key) => {
+        player.simulation.blueHealDpsMeter.onAdd((dps, key) => {
           dispatch(addBlueHealDpsMeter({ value: dps, id: player.id }))
-          dps.onChange = function (changes) {
-            changes.forEach((change) => {
+          const fields: NonFunctionPropNames<IDpsHeal>[] = [
+            "heal",
+            "id",
+            "name",
+            "shield"
+          ]
+
+          fields.forEach((field) => {
+            dps.listen(field, (value, previousValue) => {
               dispatch(
                 changeBlueHealDpsMeter({
                   id: dps.id,
-                  change: change,
+                  field: field,
+                  value: value,
                   playerId: player.id
                 })
               )
             })
-          }
-        }
-        player.simulation.blueHealDpsMeter.onRemove = (dps, key) => {
+          })
+        })
+        player.simulation.blueHealDpsMeter.onRemove((dps, key) => {
           dispatch(removeBlueHealDpsMeter(player.id))
-        }
+        })
 
-        player.simulation.redHealDpsMeter.onAdd = (dps, key) => {
+        player.simulation.redHealDpsMeter.onAdd((dps, key) => {
           dispatch(addRedHealDpsMeter({ value: dps, id: player.id }))
-          dps.onChange = function (changes) {
-            changes.forEach((change) => {
+          const fields: NonFunctionPropNames<IDpsHeal>[] = [
+            "heal",
+            "id",
+            "name",
+            "shield"
+          ]
+
+          fields.forEach((field) => {
+            dps.listen(field, (value, previousValue) => {
               dispatch(
                 changeRedHealDpsMeter({
                   id: dps.id,
-                  change: change,
+                  field: field,
+                  value: value,
                   playerId: player.id
                 })
               )
             })
-          }
-        }
-        player.simulation.redHealDpsMeter.onRemove = (dps, key) => {
+          })
+        })
+        player.simulation.redHealDpsMeter.onRemove((dps, key) => {
           dispatch(removeRedHealDpsMeter(player.id))
-        }
-      }
+        })
+      })
 
-      room.state.spectators.onAdd = (uid) => {
+      room.state.spectators.onAdd((uid) => {
         gameContainer.initializeSpectactor(uid)
-      }
+      })
     }
   }, [reconnected, initialized, room, dispatch, client, uid, currentPlayerId])
 
@@ -479,27 +543,31 @@ export default function Game() {
   if (toAfter) {
     return <Navigate to="/after" />
   }
-  
+
   return (
     <div>
-      {loaded ? (<>
-        <GameModal
-        modalBoolean={modalBoolean}
-        modalTitle={modalTitle}
-        modalInfo={modalInfo}
-        hideModal={setModalBoolean}
-        leave={leave}
-      />
-      {!spectate && <GameShop />}
-      <GamePlayerInformations />
-      <GamePlayers click={(id: string) => playerClick(id)} />
-      <GameSynergies />
-      <GameItemsProposition />
-      <GamePokemonsProposition />
-      <GameDpsMeter />
-      <GameToasts />
-      <GameOptionsIcon leave={leave} />
-      </>) : (<GameLoadingScreen />)}
+      {loaded ? (
+        <>
+          <GameModal
+            modalBoolean={modalBoolean}
+            modalTitle={modalTitle}
+            modalInfo={modalInfo}
+            hideModal={setModalBoolean}
+            leave={leave}
+          />
+          {!spectate && <GameShop />}
+          <GamePlayerInformations />
+          <GamePlayers click={(id: string) => playerClick(id)} />
+          <GameSynergies />
+          <GameItemsProposition />
+          <GamePokemonsProposition />
+          <GameDpsMeter />
+          <GameToasts />
+          <GameOptionsIcon leave={leave} />
+        </>
+      ) : (
+        <GameLoadingScreen />
+      )}
       <div id="game" ref={container}></div>
     </div>
   )

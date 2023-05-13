@@ -128,7 +128,11 @@ export class OnPokemonPropositionCommand extends Command<
 > {
   execute({ playerId, pkm }) {
     const player = this.state.players.get(playerId)
-    if (player && !this.state.additionalPokemons.includes(pkm) && this.room.getBenchSize(player.board) < 8) {
+    if (
+      player &&
+      !this.state.additionalPokemons.includes(pkm) &&
+      this.room.getBenchSize(player.board) < 8
+    ) {
       if (AdditionalPicksStages.includes(this.state.stageLevel)) {
         this.state.additionalPokemons.push(pkm)
         this.state.shop.addAdditionalPokemon(pkm)
@@ -139,28 +143,40 @@ export class OnPokemonPropositionCommand extends Command<
       )
 
       let allowBuy = true
-      if(Mythical1Shop.includes(pokemon.name) && this.state.stageLevel !== 10){
+      if (
+        Mythical1Shop.includes(pokemon.name) &&
+        this.state.stageLevel !== 10
+      ) {
         allowBuy = false
       }
-      if(Mythical2Shop.includes(pokemon.name) && this.state.stageLevel !== 20){
+      if (
+        Mythical2Shop.includes(pokemon.name) &&
+        this.state.stageLevel !== 20
+      ) {
         allowBuy = false
       }
       player.board.forEach((p) => {
-        if (Mythical1Shop.includes(pokemon.name) && Mythical1Shop.includes(p.name)) {
+        if (
+          Mythical1Shop.includes(pokemon.name) &&
+          Mythical1Shop.includes(p.name)
+        ) {
           allowBuy = false // already picked a T10 mythical
         }
-        if (Mythical2Shop.includes(pokemon.name) && Mythical2Shop.includes(p.name)) {
+        if (
+          Mythical2Shop.includes(pokemon.name) &&
+          Mythical2Shop.includes(p.name)
+        ) {
           allowBuy = false // already picked a T20 mythical
         }
       })
 
-      if(allowBuy){
+      if (allowBuy) {
         const x = this.room.getFirstAvailablePositionInBench(player.id)
-        if(x === undefined) return;
+        if (x === undefined) return
         pokemon.positionX = x
         pokemon.positionY = 0
         player.board.set(pokemon.id, pokemon)
-  
+
         while (player.pokemonsProposition.length > 0) {
           player.pokemonsProposition.pop()
         }
@@ -679,7 +695,7 @@ export class OnJoinCommand extends Command<
   }
 > {
   execute({ client, options, auth }) {
-    if(options.spectate === true){
+    if (options.spectate === true) {
       this.state.spectators.add(client.auth.uid)
     } else {
       UserMetadata.findOne({ uid: auth.uid }, (err, user) => {
@@ -696,13 +712,15 @@ export class OnJoinCommand extends Command<
             user.role,
             this.room
           )
-  
+
           this.state.players.set(client.auth.uid, player)
-  
+
           if (client && client.auth && client.auth.displayName) {
-            logger.info(`${client.auth.displayName} ${client.id} join game room`)
+            logger.info(
+              `${client.auth.displayName} ${client.id} join game room`
+            )
           }
-  
+
           // logger.debug(this.state.players.get(client.auth.uid).tileset);
           this.state.shop.assignShop(player)
           if (this.state.players.size >= MAX_PLAYERS_PER_LOBBY) {
@@ -860,6 +878,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
           break
         case Effect.SUN_FLOWER:
           player.titles.add(Title.GARDENER)
+          break
+        case Effect.GOOGLE_SPECS:
+          player.titles.add(Title.ALCHEMIST)
           break
         case Effect.DIAMOND_STORM:
           player.titles.add(Title.HIKER)

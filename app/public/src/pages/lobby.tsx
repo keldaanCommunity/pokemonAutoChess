@@ -49,7 +49,13 @@ import {
   setBotLeaderboard,
   setLeaderboard
 } from "../stores/LobbyStore"
-import { ICustomLobbyState, ISuggestionUser, Title, Transfer } from "../../../types"
+import {
+  ICustomLobbyState,
+  ISuggestionUser,
+  NonFunctionPropNames,
+  Title,
+  Transfer
+} from "../../../types"
 import LobbyUser from "../../../models/colyseus-models/lobby-user"
 import { IBot } from "../../../models/mongo-models/bot-v2"
 import { IMeta } from "../../../models/mongo-models/meta"
@@ -107,51 +113,73 @@ export default function Lobby() {
               "lobby",
               { idToken: token }
             )
-            room.state.messages.onAdd = (m) => {
+            room.state.messages.onAdd((m) => {
               dispatch(pushMessage(m))
-            }
-            room.state.messages.onRemove = (m, k) => {
+            })
+            room.state.messages.onRemove((m, k) => {
               dispatch(removeMessage(m))
-            }
+            })
 
-            room.state.users.onAdd = (u) => {
+            room.state.users.onAdd((u) => {
               dispatch(addUser(u))
 
               if (u.id == user.uid) {
-                u.pokemonCollection.onAdd = (pokemonConfig, key) => {
-                  const p = pokemonConfig as PokemonConfig
-                  dispatch(addPokemonConfig(p))
-                  p.onChange = (changes) => {
-                    changes.forEach((change) => {
+                u.pokemonCollection.onAdd((p, key) => {
+                  const pokemonConfig = p as PokemonConfig
+                  dispatch(addPokemonConfig(pokemonConfig))
+                  const fields: NonFunctionPropNames<PokemonConfig>[] = [
+                    "dust",
+                    "emotions",
+                    "id",
+                    "selectedEmotion",
+                    "selectedShiny",
+                    "shinyEmotions"
+                  ]
+
+                  fields.forEach((field) => {
+                    pokemonConfig.listen(field, (value, previousValue) => {
                       dispatch(
                         changePokemonConfig({
                           id: key,
-                          field: change.field,
-                          value: change.value
+                          field: field,
+                          value: value
                         })
                       )
                     })
-                  }
-                }
+                  })
+                })
                 dispatch(setUser(u))
                 setSearchedUser(u)
               }
-              u.onChange = (changes) => {
-                changes.forEach((change) => {
-                  dispatch(
-                    changeUser({
-                      id: u.id,
-                      field: change.field,
-                      value: change.value
-                    })
-                  )
-                })
-              }
-            }
+              const fields: NonFunctionPropNames<LobbyUser>[] = [
+                "id",
+                "name",
+                "avatar",
+                "elo",
+                "langage",
+                "wins",
+                "exp",
+                "level",
+                "donor",
+                "honors",
+                "history",
+                "booster",
+                "titles",
+                "title",
+                "role",
+                "anonymous"
+              ]
 
-            room.state.users.onRemove = (u) => {
+              fields.forEach((field) => {
+                u.listen(field, (value, previousValue) => {
+                  dispatch(changeUser({ id: u.id, field: field, value: value }))
+                })
+              })
+            })
+
+            room.state.users.onRemove((u) => {
               dispatch(removeUser(u.id))
-            }
+            })
 
             room.onMessage(Transfer.REQUEST_LEADERBOARD, (l) => {
               dispatch(setLeaderboard(l))
@@ -324,19 +352,20 @@ export default function Lobby() {
           >
             Wiki
           </button>
-          {user?.anonymous === false && user?.title === Title.BOT_BUILDER && 
-          <button
-            disabled={user?.anonymous}
-            className="bubbly green"
-            onClick={() => {
-              if (user?.anonymous === false && botList.length == 0) {
-                dispatch(requestBotList())
-              }
-              toggleBuilder(!showBuilder)
-            }}
-          >
-            BOT Builder
-          </button>}
+          {user?.anonymous === false && user?.title === Title.BOT_BUILDER && (
+            <button
+              disabled={user?.anonymous}
+              className="bubbly green"
+              onClick={() => {
+                if (user?.anonymous === false && botList.length == 0) {
+                  dispatch(requestBotList())
+                }
+                toggleBuilder(!showBuilder)
+              }}
+            >
+              BOT Builder
+            </button>
+          )}
 
           <button
             className="bubbly green"
