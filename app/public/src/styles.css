@@ -370,6 +370,13 @@ p:last-child {
   cursor: not-allowed;
 }
 
+.bubbly > img:first-child {
+  height: 1.4em;
+  display: inline-block;
+  vertical-align: text-top;
+  margin-right: 0.25em;
+}
+
 .firebaseui-idp-button {
   border: solid !important;
   padding: 5px 30px !important;
