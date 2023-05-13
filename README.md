@@ -12,10 +12,3 @@ Support: [https://en.tipeee.com/pokemon-auto-chess](https://en.tipeee.com/pokemo
 Discord: [https://discord.com/invite/6JMS7tr](https://discord.com/invite/6JMS7tr)
 
 Source: [https://github.com/keldaanInteractive/pokemonAutoChess](https://github.com/keldaanInteractive/pokemonAutoChess)
-
-## Dev setup
-
-```sh
-npm install
-npm run clone-external-assets
-```

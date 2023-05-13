@@ -22,8 +22,10 @@
   ],
   "main": "dist/server/index.js",
   "scripts": {
-    "reset": "rm -rf node_modules/ && rm -f app/public/js/*",    
-    "clone-external-assets": "cd app/public/dist/client/assets/external && git clone https://github.com/keldaanInteractive/pokemonAutoChessMusic.git && git clone https://github.com/keldaanInteractive/SpriteCollab.git",
+    "reset": "rm -rf node_modules/ && rm -f app/public/js/*",
+    "postinstall": "npm-run-all install-*",
+    "install-external-music": "cd app/public/dist/client/assets/external && git -C pokemonAutoChessMusic pull || git clone https://github.com/keldaanInteractive/pokemonAutoChessMusic.git",
+    "install-external-sprites": "cd app/public/dist/client/assets/external && git -C SpriteCollab pull || git clone https://github.com/keldaanInteractive/SpriteCollab.git",
     "dev-client": "node esbuild.js --dev",
     "dev-server": "ts-node-dev --watch \"src/**/*\" --respawn --transpile-only ./app/index.ts",
     "dev": "npm-run-all --parallel dev-*",
@@ -99,6 +101,7 @@
     "npm-run-all": "^4.1.5",
     "openapi-typescript": "^5.3.0",
     "redux-devtools-extension": "^2.13.9",
+    "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
     "typescript": "^4.9.5"
   }
