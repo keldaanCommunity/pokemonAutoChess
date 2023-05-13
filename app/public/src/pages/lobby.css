@@ -17,6 +17,10 @@
     grid-area: nav;
 }
 
+.lobby nav a:hover {
+    text-decoration: none;
+}
+
 .lobby nav .bubbly {
     position: relative;
     padding: 0.25em 0.5em;
