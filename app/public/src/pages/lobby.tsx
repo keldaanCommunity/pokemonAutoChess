@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Link, Navigate } from "react-router-dom"
 import Chat from "./component/chat/chat"
+import News from "./component/news/news"
 import CurrentUsers from "./component/available-user-menu/current-users"
 import RoomMenu from "./component/available-room-menu/room-menu"
 import TabMenu from "./component/lobby-menu/tab-menu"
@@ -408,6 +409,7 @@ export default function Lobby() {
           setToPreparation={setToPreparation}
         />
         <CurrentUsers />
+        <News />
         <Chat source="lobby" />
       </main>
     )

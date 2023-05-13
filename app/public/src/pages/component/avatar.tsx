@@ -34,6 +34,7 @@ export default function Avatar(props: {
       >
         <img
           style={{ width: "40px", height: "40px" }}
+          className="pokemon-portrait"
           src={getAvatarSrc(props.avatar)}
         />
 

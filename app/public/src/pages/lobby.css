@@ -4,7 +4,9 @@
     display: grid;
     grid-template:
     "nav nav nav nav" min-content
-    "user rooms online chat" 1fr / 30vw 25vw 15vw 1fr;
+    "user rooms online news" 1fr
+    "user rooms online chat" 1fr
+    / 30vw 25vw 15vw 1fr;
     gap: 1vw;
 }
 
@@ -37,10 +39,11 @@
 
 .lobby .user-chat {
     grid-area: chat;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    overflow-y: auto;    
+}
+
+.lobby .news {
+    grid-area: news;
 }
 
 .lobby h1 {    

@@ -27,38 +27,29 @@ export default function ChatMessage(props: { message: IMessage }) {
     ) : null
 
   return (
-    <div className="chatbg">
-      <div className="chat">
-        <div
-          style={{
-            display: "flex",
-            flexFlow: "row nowrap",
-            alignItems: "center",
-            justifyContent: "space-between"
-          }}
-        >
-          <img
-            style={{ marginRight: "10px" }}
-            src={getAvatarSrc(props.message.avatar)}
-          />
-          <span
-            style={{ fontSize: "1vw" }}
-            onClick={() => {
-              dispatch(searchName(props.message.name))
-              dispatch(setTabIndex(4))
-            }}
-          >
-            {props.message.name}
-          </span>
-          <span style={{ fontSize: "1vw" }}>
-            {formatDate(props.message.time)}
-          </span>
-          {removeButton}
-        </div>
-        <p style={{ fontSize: "1vw", wordBreak: "break-word" }}>
-          {props.message.payload}
-        </p>
-      </div>
+    <div className="chat" style={{
+      display: "flex",
+      flexFlow: "row nowrap",
+      alignItems: "top",
+      justifyContent: "start"
+    }}>
+      <img src={getAvatarSrc(props.message.avatar)}
+           style={{ alignSelf: "start" }}
+           className="pokemon-portrait"
+      />
+      <span className="chat-message-author"
+        title={formatDate(props.message.time)}
+        onClick={() => {
+          dispatch(searchName(props.message.name))
+          dispatch(setTabIndex(4))
+        }}
+      >
+        {props.message.name}
+      </span>
+      <p style={{ fontSize: "1vw", wordBreak: "break-word" }}>
+        {props.message.payload}
+      </p>
+      {removeButton}
     </div>
   )
 }
