@@ -127,6 +127,8 @@ export default class GameRoom extends Room<GameState> {
       }
     }
 
+    setTimeout(() => this.startGame(), 5 * 60 * 1000) // maximum 5 minutes of loading game, game will start no matter what after that
+
     this.onMessage(Transfer.ITEM, (client, message) => {
       if (!this.state.gameFinished) {
         try {
@@ -354,6 +356,8 @@ export default class GameRoom extends Room<GameState> {
   }
 
   startGame() {
+    if(this.state.gameLoaded) return; // already started
+    this.state.gameLoaded = true
     this.setSimulationInterval((deltaTime: number) => {
       if (!this.state.gameFinished) {
         try {
@@ -397,8 +401,8 @@ export default class GameRoom extends Room<GameState> {
         throw new Error("consented leave")
       }
 
-      // allow disconnected client to reconnect into this room until 300 seconds
-      await this.allowReconnection(client, 300)
+      // allow disconnected client to reconnect into this room until 5 minutes
+      await this.allowReconnection(client, 5 * 60)
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
         logger.info(`${client.auth.displayName} leave game room`)
