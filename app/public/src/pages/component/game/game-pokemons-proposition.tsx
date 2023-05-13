@@ -14,9 +14,10 @@ export default function GamePokemonsPropositions() {
   const stageLevel =  useAppSelector((state) => state.game.stageLevel)
 
   const isBenchFull = getGameScene()?.board?.isBenchFull
+  const life = useAppSelector((state) => state.game.currentPlayerLife)
 
   const [visible, setVisible] = useState(true)
-  if (pokemonsProposition.length > 0) {
+  if (pokemonsProposition.length > 0 && life > 0) {
     return (
       <div className="game-pokemons-proposition">
         <div className="nes-container" style={{visibility: visible ? 'visible' : 'hidden'}}>
