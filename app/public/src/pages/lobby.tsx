@@ -334,6 +334,7 @@ export default function Lobby() {
               toggleCollection(!showCollection)
             }}
           >
+            <img src="assets/ui/collection.svg" alt="" />
             Collection
           </button>
           <button
@@ -342,6 +343,7 @@ export default function Lobby() {
               toggleBooster(!showBooster)
             }}
           >
+            <img src="assets/ui/booster.svg" alt="" />
             Boosters
           </button>
           <button
@@ -350,6 +352,7 @@ export default function Lobby() {
               toggleWiki(!showWiki)
             }}
           >
+            <img src="assets/ui/wiki.svg" alt="" />
             Wiki
           </button>
           {user?.anonymous === false && user?.title === Title.BOT_BUILDER && (
@@ -363,6 +366,7 @@ export default function Lobby() {
                 toggleBuilder(!showBuilder)
               }}
             >
+              <img src="assets/ui/bot.svg" alt="" />
               BOT Builder
             </button>
           )}
@@ -376,6 +380,7 @@ export default function Lobby() {
               toggleMeta(!showMeta)
             }}
           >
+            <img src="assets/ui/meta.svg" alt="" />
             Meta
           </button>
           <DiscordButton />
