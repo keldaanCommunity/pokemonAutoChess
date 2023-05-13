@@ -4,9 +4,8 @@ import "./news.css";
 
 export default function News() {
   const [newsContent, setNewsContent] = useState("")
-  const [isLoading, setIsLoading] = useState(true)
-  fetch(`https://raw.githubusercontent.com/sylvainpolletvillard/pokemonAutoChess/master/app/public/news.md`) //TEMP
-  //fetch(`https://raw.githubusercontent.com/keldaanInteractive/pokemonAutoChess/master/app/public/news.md`)
+  const [isLoading, setIsLoading] = useState(true)  
+  fetch(`https://raw.githubusercontent.com/keldaanInteractive/pokemonAutoChess/master/app/public/news.md`)
     .then(res => res.text())
     .then(md => marked.parse(md))
     .then(html => {
