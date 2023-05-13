@@ -14,6 +14,9 @@
 
 # Changes to Stages
 
+# Changes to Abilities
+- Thief now correctly applies all the item effects of the items stolen (except synergy stones)
+
 
 # Gameplay
 - Damage dealt by a successful attack is minimum 1, even after blocking damage with Fighting synergy

@@ -267,26 +267,30 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     pokemon.items.forEach((item) => {
-      if (ItemStats[item]) {
-        Object.entries(ItemStats[item]).forEach(([stat, value]) =>
-          this.applyStat(pokemon, stat as Stat, value)
-        )
-      }
+      this.applyItemEffect(pokemon, item)
     })
 
     if (pokemon.skill === Ability.SYNCHRO) {
       pokemon.status.triggerSynchro()
     }
+  }
 
-    if (pokemon.items.has(Item.SOUL_DEW)) {
+  applyItemEffect(pokemon: PokemonEntity, item: Item){
+    if (ItemStats[item]) {
+      Object.entries(ItemStats[item]).forEach(([stat, value]) =>
+        this.applyStat(pokemon, stat as Stat, value)
+      )
+    }
+
+    if (item === Item.SOUL_DEW) {
       pokemon.status.triggerSoulDew(1000)
     }
 
-    if (pokemon.items.has(Item.WIDE_LENS)) {
+    if (item === Item.WIDE_LENS) {
       pokemon.range += 2
     }
 
-    if (pokemon.items.has(Item.MAX_REVIVE)) {
+    if (item === Item.MAX_REVIVE) {
       pokemon.status.resurection = true
     }
   }

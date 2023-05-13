@@ -3394,10 +3394,12 @@ export class ThiefStrategy extends AttackStrategy {
     target.items.forEach((item) => {
       if (pokemon.items.size < 3) {
         pokemon.items.add(item)
+        pokemon.simulation.applyItemEffect(pokemon, item)
       }
       target.items.delete(item)
     })
 
+    // update artificial synergy bonuses
     if (pokemon.effects.includes(Effect.DUBIOUS_DISC)) {
       pokemon.addAttack(4 * l, true)
       pokemon.handleShield(20 * l, pokemon)
@@ -3413,8 +3415,6 @@ export class ThiefStrategy extends AttackStrategy {
       pokemon.handleShield(50 * l, pokemon)
     }
 
-    // pokemon.simulation.applyItemsEffects(pokemon);
-    // target.simulation.applyItemsEffects(target);
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
