@@ -10141,6 +10141,57 @@ export class Persian extends Pokemon {
     )
   }
 }
+
+export class Hoothoot extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.HOOTHOOT,
+      [Synergy.NORMAL, Synergy.FLYING, Synergy.PSYCHIC],
+      Rarity.UNCOMMON,
+      Pkm.NOCTOWL,
+      75,
+      5,
+      2,
+      3,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.HYPNOSIS,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Noctowl extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.NOCTOWL,
+      [Synergy.NORMAL, Synergy.FLYING, Synergy.PSYCHIC],
+      Rarity.UNCOMMON,
+      Pkm.DEFAULT,
+      170,
+      6,
+      3,
+      5,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      100,
+      Ability.HYPNOSIS,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
 export class Munchlax extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(

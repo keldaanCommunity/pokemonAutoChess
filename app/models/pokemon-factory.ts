@@ -540,7 +540,9 @@ import {
   Xerneas,
   Yveltal,
   OriginGiratina,
-  Marshadow
+  Marshadow,
+  Noctowl,
+  Hoothoot
 } from "./colyseus-models/pokemon"
 import { MapSchema } from "@colyseus/schema"
 import { Emotion } from "../types"
@@ -1849,6 +1851,10 @@ export default class PokemonFactory {
         return new Yveltal(s, e)
       case Pkm.MARSHADOW:
         return new Marshadow(s, e)
+      case Pkm.HOOTHOOT:
+        return new Hoothoot(s, e)
+      case Pkm.NOCTOWL:
+        return new Noctowl(s, e)
       default:
         // logger.warn(`No pokemon with name "${name}" found, return magikarp`);
         return new Magikarp(s, e)

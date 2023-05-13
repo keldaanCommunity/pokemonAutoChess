@@ -1047,6 +1047,29 @@ export class OverheatStrategy extends AttackStrategy {
   }
 }
 
+export class HypnosisStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const farthestTarget = state.getFarthestTargetCoordinate(pokemon, board)
+    if (farthestTarget) {
+      const x = farthestTarget.x
+      const y = farthestTarget.y
+      const duration =
+        pokemon.stars === 3 ? 6000 : pokemon.stars === 2 ? 3000 : 1500
+      const tg = board.getValue(x, y)
+      if (tg) {
+        tg.status.triggerSleep(duration, tg)
+      }
+    }
+  }
+}
+
 export class KingShieldStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
