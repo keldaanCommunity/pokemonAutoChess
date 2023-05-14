@@ -10,11 +10,10 @@ export default function GameLock() {
     <button
       className={`bubbly lock-icon ${shopLocked ? "red" : "green"}`}
       onClick={() => { dispatch(lockClick()) }}
-      title="Lock current shop for next turn"
+      title={`${shopLocked ? 'Unlock' : 'Lock'} current shop for next turn`}
     >
-      <img
-        style={{ width: "2vw" }}
-        src="/assets/ui/lock.svg"
+      <img src={`/assets/ui/lock-${shopLocked ? "close" : "open"}.svg`} 
+           alt={`${shopLocked ? 'Locked': 'Unlocked'}`}
       />
     </button>
   )

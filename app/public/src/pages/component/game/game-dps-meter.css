@@ -1,0 +1,85 @@
+#root .game-dps-meter {
+    position: absolute;
+    right: 10vw;
+    top: .5%;
+    width: 15%;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    padding: 10px;
+    overflow-y: scroll;
+    max-height: 78%;
+    color: #fff;
+}
+
+.game-dps-meter header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.game-dps-meter header img {
+    width: 60px;
+    height: 60px;
+}
+
+.game-dps-meter .react-tabs__tab-list {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 0.5em;
+    font-size: 1rem;
+}
+
+.game-dps-meter .react-tabs__tab-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.game-dps-bar {
+    display: flex;
+    align-items: center;
+    width: 90%;
+    margin-bottom: 0.5em;
+}
+
+.game-dps-bar img {
+    width: 40px;
+    height: 40px;
+}
+
+.game-dps-progress-wrapper {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    margin-left: 5px;
+    width: 100%;
+}
+
+.game-dps-progress-wrapper p {
+    position: relative;
+    margin-bottom: -6px;
+    margin-left: 4px;
+}
+
+.game-dps-progress-wrapper .nes-progress {
+    height: 14px;
+    border-width: 2px;
+    border-image-outset: 1.5;
+    box-shadow: 1px 1px 0 #00000060;
+}
+
+#game-dps-icon {
+    position: absolute;
+    right: calc(9vw - 50px);
+    top: 0.5%;    
+}
+
+#root #game-dps-icon:hover {
+    filter: brightness(1.25);
+}
+
+#game-dps-icon img {
+    height: 48px;
+    width: 48px;
+}

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
 import CSS from "csstype"
 import GameBlueDpsMeter from "./game-blue-dps-meter"
@@ -7,49 +7,43 @@ import GameBlueHealDpsMeter from "./game-blue-heal-dps-meter"
 import GameRedHealDpsMeter from "./game-red-heal-dps-meter"
 import { useAppSelector } from "../../../hooks"
 import { getAvatarSrc } from "../../../utils"
-
-const style: CSS.Properties = {
-  position: "absolute",
-  right: "9.5%",
-  top: ".5%",
-  width: "15%",
-  display: "flex",
-  flexFlow: "column",
-  justifyContent: "space-between",
-  padding: "10px",
-  overflowY: "scroll",
-  maxHeight: "78%",
-  color: "#fff"
-}
-const imgStyle: CSS.Properties = {
-  width: "60px",
-  height: "60px",
-  imageRendering: "pixelated"
-}
+import "./game-dps-meter.css";
+import { loadPreferences, savePreferences } from "../../../preferences"
 
 export default function GameDpsMeter() {
+  const opponentName = useAppSelector(
+    (state) => state.game.currentPlayerOpponentName
+  )
   const opponentAvatar = useAppSelector(
     (state) => state.game.currentPlayerOpponentAvatar
   )
   const avatar = useAppSelector((state) => state.game.currentPlayerAvatar)
+  const name = useAppSelector((state) => state.game.currentPlayerName)
+  const [isOpen,setOpen] = useState(loadPreferences().showDpsMeter)
+
+  function toggleOpen(){
+    setOpen(!isOpen)
+    savePreferences({ showDpsMeter: !isOpen })    
+  }
+
   if (opponentAvatar == "") {
     return null
   } else {
-    return (
-      <div className="nes-container hidden-scrollable" style={style}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center"
-          }}
-        >
-          <img style={imgStyle} src={getAvatarSrc(avatar)}></img>
+    return (<>
+      <div id="game-dps-icon" 
+           className="nes-container clickable" 
+           title={`${isOpen ? 'Hide' : 'Show'} battle stats`}
+           onClick={toggleOpen}>
+        <img src="/assets/ui/dpsmeter.svg" />
+      </div>
+      <div className="nes-container hidden-scrollable game-dps-meter" hidden={!isOpen}>
+        <header>
+          <img src={getAvatarSrc(avatar)} className="pokemon-portrait" title={name}></img>
           <h2>Vs</h2>
-          <img style={imgStyle} src={getAvatarSrc(opponentAvatar)}></img>
-        </div>
+          <img src={getAvatarSrc(opponentAvatar)} className="pokemon-portrait" title={opponentName}></img>
+        </header>
         <Tabs>
-          <TabList style={{ display: "flex", justifyContent: "space-evenly" }}>
+          <TabList>
             <Tab key="damage">
               <p>Damage</p>
             </Tab>
@@ -59,28 +53,16 @@ export default function GameDpsMeter() {
           </TabList>
 
           <TabPanel>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <div style={{ width: "50%" }}>
-                <GameBlueDpsMeter />
-              </div>
-              <div style={{ width: "50%" }}>
-                <GameRedDpsMeter />
-              </div>
-            </div>
+            <GameBlueDpsMeter />
+            <GameRedDpsMeter />
           </TabPanel>
 
           <TabPanel>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <div style={{ width: "50%" }}>
-                <GameBlueHealDpsMeter />
-              </div>
-              <div style={{ width: "50%" }}>
-                <GameRedHealDpsMeter />
-              </div>
-            </div>
+            <GameBlueHealDpsMeter />            
+            <GameRedHealDpsMeter />
           </TabPanel>
         </Tabs>
       </div>
-    )
+    </>)
   }
 }
