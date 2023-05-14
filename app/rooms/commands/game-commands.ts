@@ -811,7 +811,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     }
   }
 
-  computeAchievments() {
+  computeAchievements() {
     this.state.players.forEach((player, key) => {
       this.checkSuccess(player)
     })
@@ -1256,7 +1256,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   stopFightingPhase() {
     const isPVE = this.checkForPVE()
 
-    this.computeAchievments()
+    this.computeAchievements()
     this.computeStreak()
     this.computeLife()
     this.rankPlayers()

@@ -10,6 +10,7 @@
 
 .user-chat h1 {
   color: white;
+  text-align: center;
 }
 
 .user-chat form {
@@ -32,6 +33,11 @@
 .chat-history {
   flex: 1;
   overflow-y: auto;
+}
+
+.chat button {
+  padding: 0.25em;
+  align-self: start;
 }
 
 .chat-message-author {

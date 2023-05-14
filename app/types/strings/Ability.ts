@@ -1496,7 +1496,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.SPIKE_ARMOR]: {
-    eng: `For [3,5,10] seconds, targets that melee attack this Pokémon receive ${Status.WOUND} and take ${Damage.SPECIAL} equal to his current defense`,
+    eng: `For [3,5,10] seconds, targets that melee attack this Pokémon receive ${Status.WOUND} and take ${Damage.SPECIAL} equal to his current ${Stat.DEF}`,
     esp: ``,
     prt: ``,
     fra: ``
