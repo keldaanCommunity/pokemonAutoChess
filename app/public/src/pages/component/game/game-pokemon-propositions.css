@@ -5,8 +5,8 @@
     transform: translate(-50%, -50%);
 }
 
-.game-pokemons-proposition h2,
-.game-pokemons-proposition p {
+.game-pokemons-proposition > .nes-container > h2,
+.game-pokemons-proposition > .nes-container > p {
     color: white;
     text-align: center;
 }

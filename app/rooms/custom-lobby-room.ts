@@ -1,4 +1,11 @@
-import { Client, LobbyRoom } from "colyseus"
+import {
+  Client,
+  LobbyRoom,
+  Room,
+  RoomListingData,
+  matchMaker,
+  subscribeLobby
+} from "colyseus"
 import LobbyState from "./states/lobby-state"
 import { connect, FilterQuery, CallbackError } from "mongoose"
 import Chat from "../models/mongo-models/chat"
@@ -44,7 +51,7 @@ import { pickRandomIn } from "../utils/random"
 import { sum } from "../utils/array"
 import { logger } from "../utils/logger"
 
-export default class CustomLobbyRoom extends LobbyRoom {
+export default class CustomLobbyRoom extends Room<LobbyState> {
   discordWebhook: WebhookClient | undefined
   bots: Map<string, IBot>
   meta: IMeta[]
@@ -55,6 +62,8 @@ export default class CustomLobbyRoom extends LobbyRoom {
   levelLeaderboard: ILeaderboardInfo[]
   pastebin: PastebinAPI | undefined = undefined
   precomputedRarityPokemons: PrecomputedRaritPokemonyAll
+  unsubscribeLobby: (() => void) | undefined
+  rooms: RoomListingData<any>[] | undefined
 
   constructor() {
     super()
@@ -108,10 +117,54 @@ export default class CustomLobbyRoom extends LobbyRoom {
     return pkm
   }
 
-  onCreate(): Promise<void> {
+  async onCreate(): Promise<void> {
     logger.info("create lobby", this.roomId)
     this.setState(new LobbyState())
     this.autoDispose = false
+    this.listing.unlisted = true
+
+    this.unsubscribeLobby = await subscribeLobby((roomId, data) => {
+      if (this.rooms) {
+        const roomIndex = this.rooms?.findIndex(
+          (room) => room.roomId === roomId
+        )
+
+        if (!data) {
+          // remove room listing data
+          if (roomIndex !== -1) {
+            const previousData = this.rooms[roomIndex]
+
+            this.rooms.splice(roomIndex, 1)
+
+            this.clients.forEach((client) => {
+              client.send(Transfer.REMOVE_ROOM, roomId)
+            })
+          }
+        } else if (roomIndex === -1) {
+          // append room listing data
+          this.rooms.push(data)
+
+          this.clients.forEach((client) => {
+            client.send(Transfer.ADD_ROOM, [roomId, data])
+          })
+        } else {
+          const previousData = this.rooms[roomIndex]
+
+          // replace room listing data
+          this.rooms[roomIndex] = data
+
+          this.clients.forEach((client) => {
+            if (previousData && !data) {
+              client.send(Transfer.REMOVE_ROOM, roomId)
+            } else if (data) {
+              client.send(Transfer.ADD_ROOM, [roomId, data])
+            }
+          })
+        }
+      }
+    })
+
+    this.rooms = await matchMaker.query({ private: false, unlisted: false })
 
     this.onMessage(Transfer.REQUEST_LEADERBOARD, (client, message) => {
       try {
@@ -871,9 +924,9 @@ export default class CustomLobbyRoom extends LobbyRoom {
   }
 
   onJoin(client: Client, options: any) {
-    super.onJoin(client, options)
     try {
       logger.info(`${client.auth.displayName} ${client.id} join lobby room`)
+      client.send(Transfer.ROOMS, this.rooms)
       // client.send(Transfer.REQUEST_BOT_DATA, this.bots);
       UserMetadata.findOne(
         { uid: client.auth.uid },
@@ -966,7 +1019,6 @@ export default class CustomLobbyRoom extends LobbyRoom {
 
   onLeave(client: Client) {
     try {
-      super.onLeave(client)
       if (client && client.auth && client.auth.displayName && client.auth.uid) {
         logger.info(`${client.auth.displayName} ${client.id} leave lobby`)
         this.state.users.delete(client.auth.uid)
@@ -978,8 +1030,10 @@ export default class CustomLobbyRoom extends LobbyRoom {
 
   onDispose() {
     try {
-      super.onDispose()
       logger.info("dispose lobby")
+      if (this.unsubscribeLobby) {
+        this.unsubscribeLobby()
+      }
     } catch (error) {
       logger.error(error)
     }

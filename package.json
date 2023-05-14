@@ -1,6 +1,6 @@
 {
   "name": "pokemon-autochess",
-  "version": "3.3.3",
+  "version": "3.4.0",
   "description": "",
   "keywords": [],
   "license": "MIT",
@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@colyseus/command": "^0.2.1",
-    "@colyseus/monitor": "^0.14.22",
+    "@colyseus/monitor": "^0.15.1",
     "@colyseus/ws-transport": "^0.15.0",
     "@reduxjs/toolkit": "^1.9.2",
     "@types/bootstrap": "^5.2.6",
@@ -60,6 +60,7 @@
     "immer": "^9.0.19",
     "jimp": "^0.16.1",
     "loglevel": "^1.8.1",
+    "marked": "^5.0.2",
     "matter-js": "^0.19.0",
     "mongoose": "^6.9.0",
     "nanoid": "^3.0.0",

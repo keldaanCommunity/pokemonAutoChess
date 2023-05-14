@@ -45,10 +45,9 @@ export default class Simulation extends Schema implements ISimulation {
   initialize(
     blueTeam: MapSchema<Pokemon>,
     redTeam: MapSchema<Pokemon>,
-    blueEffects: Effect[],
-    redEffects: Effect[],
-    stageLevel: number,
-    player: IPlayer
+    player: IPlayer,
+    opponent: IPlayer | null, // null if PVE round
+    stageLevel: number
   ) {
     this.player = player
     this.stageLevel = stageLevel
@@ -69,11 +68,17 @@ export default class Simulation extends Schema implements ISimulation {
     })
 
     this.board = new Board(6, 8)
-    this.blueEffects = blueEffects || []
-    this.redEffects = redEffects || []
+    this.blueEffects = player?.effects?.list ?? []
+    this.redEffects = opponent?.effects?.list ?? []
     // logger.debug({ blueEffects, redEffects })
-    this.climate = this.getClimate()
+
+    this.climate = this.getClimate(this.blueEffects, this.redEffects)
     this.room.updateCastform(this.climate)
+
+    // update effects after castform transformation
+    this.blueEffects = player?.effects?.list ?? []
+    this.redEffects = opponent?.effects?.list ?? []
+
     this.finished = false
     this.flowerSpawn = [false, false]
 
@@ -99,8 +104,8 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     ;[
-      { team: blueTeam, effects: blueEffects },
-      { team: redTeam, effects: redEffects }
+      { team: blueTeam, effects: this.blueEffects },
+      { team: redTeam, effects: this.redEffects }
     ].forEach(({ team, effects }: { team: MapSchema<Pokemon, string>, effects: Effect[] }) => {
       if ([Effect.INFESTATION, Effect.HORDE, Effect.HEART_OF_THE_SWARM].some(e => effects.includes(e))) {
 
@@ -267,26 +272,30 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     pokemon.items.forEach((item) => {
-      if (ItemStats[item]) {
-        Object.entries(ItemStats[item]).forEach(([stat, value]) =>
-          this.applyStat(pokemon, stat as Stat, value)
-        )
-      }
+      this.applyItemEffect(pokemon, item)
     })
 
     if (pokemon.skill === Ability.SYNCHRO) {
       pokemon.status.triggerSynchro()
     }
+  }
 
-    if (pokemon.items.has(Item.SOUL_DEW)) {
+  applyItemEffect(pokemon: PokemonEntity, item: Item){
+    if (ItemStats[item]) {
+      Object.entries(ItemStats[item]).forEach(([stat, value]) =>
+        this.applyStat(pokemon, stat as Stat, value)
+      )
+    }
+
+    if (item === Item.SOUL_DEW) {
       pokemon.status.triggerSoulDew(1000)
     }
 
-    if (pokemon.items.has(Item.WIDE_LENS)) {
+    if (item === Item.WIDE_LENS) {
       pokemon.range += 2
     }
 
-    if (pokemon.items.has(Item.MAX_REVIVE)) {
+    if (item === Item.MAX_REVIVE) {
       pokemon.status.resurection = true
     }
   }
@@ -945,7 +954,7 @@ export default class Simulation extends Schema implements ISimulation {
     })
   }
 
-  getClimate() {
+  getClimate(blueEffects: Effect[], redEffects: Effect[]) {
     function getPlayerClimate(effects: Effect[]){
       return effects.includes(Effect.SANDSTORM) ? Climate.SANDSTORM
       : effects.includes(Effect.DESOLATE_LAND) ? Climate.SUN
@@ -959,8 +968,8 @@ export default class Simulation extends Schema implements ISimulation {
       : Climate.NEUTRAL
     }
 
-    const redClimate = getPlayerClimate(this.redEffects)
-    const blueClimate = getPlayerClimate(this.blueEffects)
+    const redClimate = getPlayerClimate(redEffects)
+    const blueClimate = getPlayerClimate(blueEffects)
     
     if(redClimate !== Climate.NEUTRAL && blueClimate === Climate.NEUTRAL) return redClimate
     if(blueClimate !== Climate.NEUTRAL && redClimate === Climate.NEUTRAL) return blueClimate

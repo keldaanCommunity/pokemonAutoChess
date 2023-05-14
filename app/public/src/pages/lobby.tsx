@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Link, Navigate } from "react-router-dom"
 import Chat from "./component/chat/chat"
+import News from "./component/news/news"
 import CurrentUsers from "./component/available-user-menu/current-users"
 import RoomMenu from "./component/available-room-menu/room-menu"
 import TabMenu from "./component/lobby-menu/tab-menu"
@@ -201,7 +202,7 @@ export default function Lobby() {
               dispatch(setPastebinUrl(json.url))
             })
 
-            room.onMessage("rooms", (rooms: RoomAvailable[]) => {
+            room.onMessage(Transfer.ROOMS, (rooms: RoomAvailable[]) => {
               rooms.forEach((room) => dispatch(addRoom(room)))
             })
 
@@ -219,13 +220,13 @@ export default function Lobby() {
               }
             )
 
-            room.onMessage("+", ([roomId, room]) => {
+            room.onMessage(Transfer.ADD_ROOM, ([roomId, room]) => {
               if (room.name === "room" || room.name === "game") {
                 dispatch(addRoom(room))
               }
             })
 
-            room.onMessage("-", (roomId: string) =>
+            room.onMessage(Transfer.REMOVE_ROOM, (roomId: string) =>
               dispatch(removeRoom(roomId))
             )
 
@@ -334,6 +335,7 @@ export default function Lobby() {
               toggleCollection(!showCollection)
             }}
           >
+            <img src="assets/ui/collection.svg" alt="" />
             Collection
           </button>
           <button
@@ -342,6 +344,7 @@ export default function Lobby() {
               toggleBooster(!showBooster)
             }}
           >
+            <img src="assets/ui/booster.svg" alt="" />
             Boosters
           </button>
           <button
@@ -350,6 +353,7 @@ export default function Lobby() {
               toggleWiki(!showWiki)
             }}
           >
+            <img src="assets/ui/wiki.svg" alt="" />
             Wiki
           </button>
           {user?.anonymous === false && user?.title === Title.BOT_BUILDER && (
@@ -363,6 +367,7 @@ export default function Lobby() {
                 toggleBuilder(!showBuilder)
               }}
             >
+              <img src="assets/ui/bot.svg" alt="" />
               BOT Builder
             </button>
           )}
@@ -376,6 +381,7 @@ export default function Lobby() {
               toggleMeta(!showMeta)
             }}
           >
+            <img src="assets/ui/meta.svg" alt="" />
             Meta
           </button>
           <DiscordButton />
@@ -403,6 +409,7 @@ export default function Lobby() {
           setToPreparation={setToPreparation}
         />
         <CurrentUsers />
+        <News />
         <Chat source="lobby" />
       </main>
     )

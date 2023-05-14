@@ -197,11 +197,14 @@ export default class PreparationRoom extends Room<PreparationState> {
       const token = await admin.auth().verifyIdToken(options.idToken)
       const user = await admin.auth().getUser(token.uid)
       const isBanned = await BannedUser.findOne({ uid: user.uid })
+      const isAlreadyInRoom = this.state.users.has(user.uid)
 
       if (!user.displayName) {
         throw "No display name"
       } else if (isBanned) {
         throw "User banned"
+      } else if (isAlreadyInRoom) {
+        throw "User already in room"
       } else {
         return user
       }
@@ -229,8 +232,8 @@ export default class PreparationRoom extends Room<PreparationState> {
       if (consented) {
         throw new Error("consented leave")
       }
-      // allow disconnected client to reconnect into this room until 2 seconds
-      await this.allowReconnection(client, 2)
+      // allow disconnected client to reconnect into this room until 10 seconds
+      await this.allowReconnection(client, 10)
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
         logger.info(

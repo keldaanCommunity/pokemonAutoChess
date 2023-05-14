@@ -31,6 +31,7 @@ import { Pkm } from "./enum/Pokemon"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { IPokemonRecord } from "../models/colyseus-models/game-record"
 import GameRoom from "../rooms/game-room"
+import { Effects } from "../models/effects"
 
 export * from "./enum/Emotion"
 
@@ -157,7 +158,10 @@ export enum Transfer {
   LOADING_PROGRESS = "LOADING_PROGRESS",
   LOADING_COMPLETE = "LOADING_COMPLETE",
   PLAYER_INCOME = "PLAYER_INCOME",
-  PLAYER_DAMAGE = "PLAYER_DAMAGE"
+  PLAYER_DAMAGE = "PLAYER_DAMAGE",
+  ROOMS = "ROOMS",
+  ADD_ROOM = "ADD_ROOM",
+  REMOVE_ROOM = "REMOVE_ROOM"
 }
 
 export enum AttackSprite {
@@ -307,6 +311,7 @@ export interface IPlayer {
   pokemonsProposition: ArraySchema<Pkm>
   rerollCount: number
   loadingProgress: number
+  effects: Effects
 }
 export interface IPokemon {
   id: string

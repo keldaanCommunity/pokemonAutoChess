@@ -134,7 +134,8 @@ import {
   DeathWingStrategy,
   SlackOffStrategy,
   DarkVoidStrategy,
-  OverheatStrategy
+  OverheatStrategy,
+  HypnosisStrategy
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -274,7 +275,8 @@ export enum Ability {
   DEATH_WING = "DEATH_WING",
   SLACK_OFF = "SLACK_OFF",
   DARK_VOID = "DARK_VOID",
-  OVERHEAT = "OVERHEAT"
+  OVERHEAT = "OVERHEAT",
+  HYPNOSIS = "HYPNOSIS"
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -414,5 +416,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.DEATH_WING]: new DeathWingStrategy(),
   [Ability.SLACK_OFF]: new SlackOffStrategy(),
   [Ability.DARK_VOID]: new DarkVoidStrategy(),
-  [Ability.OVERHEAT]: new OverheatStrategy()
+  [Ability.OVERHEAT]: new OverheatStrategy(),
+  [Ability.HYPNOSIS]: new HypnosisStrategy()
 }

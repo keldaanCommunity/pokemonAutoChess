@@ -812,7 +812,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     }
   }
 
-  computeAchievments() {
+  computeAchievements() {
     this.state.players.forEach((player, key) => {
       this.checkSuccess(player)
     })
@@ -1257,7 +1257,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   stopFightingPhase() {
     const isPVE = this.checkForPVE()
 
-    this.computeAchievments()
+    this.computeAchievements()
     this.computeStreak()
     this.computeLife()
     this.rankPlayers()
@@ -1382,10 +1382,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
             PokemonFactory.getNeutralPokemonsByLevelStage(
               this.state.stageLevel
             ),
-            player.effects.list,
-            [],
-            this.state.stageLevel,
-            player
+            player,
+            null,
+            this.state.stageLevel
           )
         } else {
           const opponentId = this.room.computeRandomOpponent(key)
@@ -1395,10 +1394,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
               player.simulation.initialize(
                 player.board,
                 opponent.board,
-                player.effects.list,
-                opponent.effects.list,
-                this.state.stageLevel,
-                player
+                player,
+                opponent,
+                this.state.stageLevel
               )
             }
           }

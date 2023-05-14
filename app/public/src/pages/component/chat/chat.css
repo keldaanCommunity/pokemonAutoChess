@@ -2,7 +2,7 @@
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
-  align-items: center;
+  align-items: stretch;
   background-image: url("assets/ui/back1.png");
   background-size: cover;
   background-position-x: right;
@@ -10,6 +10,7 @@
 
 .user-chat h1 {
   color: white;
+  text-align: center;
 }
 
 .user-chat form {
@@ -27,4 +28,22 @@
 
 .user-chat form button {
   flex: 0;
+}
+
+.chat-history {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.chat button {
+  padding: 0.25em;
+  align-self: start;
+}
+
+.chat-message-author {
+  font-size: 1vw;
+  display: inline-block;
+  margin: 0 0.5em;
+  color: rgb(255, 193, 7);
+  max-width: 10ch;
 }

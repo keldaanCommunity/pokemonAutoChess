@@ -9,7 +9,6 @@ mega-medicham,0308/0001/AnimData.xml
 mega-medicham,0308/0001/0001/AnimData.xml
 mega-camerupt,0323/0001/AnimData.xml
 mega-camerupt,0323/0001/0001/AnimData.xml
-lampent,0608/0000/0001/AnimData.xml
 mega-abomasnow,0460/0001/AnimData.xml
 mega-abomasnow,0460/0001/0001/AnimData.xml
 vanilluxe,0584/AnimData.xml
@@ -43,7 +42,6 @@ tyrantrum,0697/AnimData.xml
 tyrantrum,0697/0000/0001/AnimData.xml
 fraxure,0611/AnimData.xml
 fraxure,0611/0000/0001/AnimData.xml
-haxorus,0612/0000/0001/AnimData.xml
 venipede,0543/AnimData.xml
 venipede,0543/0000/0001/AnimData.xml
 whirlipede,0544/AnimData.xml
@@ -52,7 +50,6 @@ scolipede,0545/AnimData.xml
 scolipede,0545/0000/0001/AnimData.xml
 mega-manectric,0310/0001/AnimData.xml
 mega-manectric,0310/0001/0001/AnimData.xml
-mega-banette,0354/0001/0001/AnimData.xml
 doublade,0680/AnimData.xml
 doublade,0680/0000/0001/AnimData.xml
 palpitoad,0536/AnimData.xml
