@@ -7,7 +7,7 @@
     color: white;
 }
 
-.player-rank {
+.user-menu  .player-rank {
     line-height: 40px;
     min-width: 2ch;
     text-align: center;
