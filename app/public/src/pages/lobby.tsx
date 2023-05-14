@@ -202,7 +202,7 @@ export default function Lobby() {
               dispatch(setPastebinUrl(json.url))
             })
 
-            room.onMessage("rooms", (rooms: RoomAvailable[]) => {
+            room.onMessage(Transfer.ROOMS, (rooms: RoomAvailable[]) => {
               rooms.forEach((room) => dispatch(addRoom(room)))
             })
 
@@ -220,13 +220,13 @@ export default function Lobby() {
               }
             )
 
-            room.onMessage("+", ([roomId, room]) => {
+            room.onMessage(Transfer.ADD_ROOM, ([roomId, room]) => {
               if (room.name === "room" || room.name === "game") {
                 dispatch(addRoom(room))
               }
             })
 
-            room.onMessage("-", (roomId: string) =>
+            room.onMessage(Transfer.REMOVE_ROOM, (roomId: string) =>
               dispatch(removeRoom(roomId))
             )
 
