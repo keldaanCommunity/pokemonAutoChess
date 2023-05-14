@@ -13,6 +13,7 @@ export default function GameRefresh() {
         dispatch(refreshClick())
       }}
     >
+      <img src={`/assets/ui/refresh.svg`} />
       <Money value="Refresh 1" />
     </button>
   )

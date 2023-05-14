@@ -46,7 +46,7 @@ export default function ChatMessage(props: { message: IMessage }) {
       >
         {props.message.name}
       </span>
-      <p style={{ fontSize: "1vw", wordBreak: "break-word", flex: "1" }}>
+      <p style={{ fontSize: "1vw", wordBreak: "break-word", flex: "1", margin: "0" }}>
         {props.message.payload}
       </p>
       {removeButton}
