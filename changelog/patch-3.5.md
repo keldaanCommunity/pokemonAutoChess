@@ -29,7 +29,7 @@
 
 # Bugfix
 - Fixed damage on shield being counted twice, shield should be much effective now
-
+- Castform now updates synergy level count after transformation
 
 # Misc
 

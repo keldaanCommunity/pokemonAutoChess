@@ -1381,10 +1381,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
             PokemonFactory.getNeutralPokemonsByLevelStage(
               this.state.stageLevel
             ),
-            player.effects.list,
-            [],
-            this.state.stageLevel,
-            player
+            player,
+            null,
+            this.state.stageLevel
           )
         } else {
           const opponentId = this.room.computeRandomOpponent(key)
@@ -1394,10 +1393,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
               player.simulation.initialize(
                 player.board,
                 opponent.board,
-                player.effects.list,
-                opponent.effects.list,
-                this.state.stageLevel,
-                player
+                player,
+                opponent,
+                this.state.stageLevel
               )
             }
           }
