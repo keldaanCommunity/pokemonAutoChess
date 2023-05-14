@@ -127,11 +127,11 @@ export class OnGameStartRequestCommand extends Command<
             avatar: "0025/Pain",
             time: Date.now()
           })
-        } else if (freeMemory < 0.2 * totalMemory && nbHumanPlayers < 8) {
+        } else if (freeMemory < 0.2 * totalMemory && nbHumanPlayers < MAX_PLAYERS_PER_LOBBY) {
           // if less than 20% free memory available, prevents starting a game with bots
           this.room.broadcast(Transfer.MESSAGES, {
             name: "Server",
-            payload: `Too many players are currently playing and the server is running out of memory. To save resources, only lobbys with 8 human players are enabled. Sorry for the inconvenience.`,
+            payload: `Too many players are currently playing and the server is running out of memory. To save resources, only lobbys with ${MAX_PLAYERS_PER_LOBBY} human players are enabled. Sorry for the inconvenience.`,
             avatar: "0025/Pain",
             time: Date.now()
           })
@@ -451,7 +451,7 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
                   return
                 }
 
-                if (this.state.users.size >= 8) {
+                if (this.state.users.size >= MAX_PLAYERS_PER_LOBBY) {
                   return
                 } else {
                   const bot = pickRandomIn(bots)
