@@ -105,7 +105,6 @@ export default class GameRoom extends Room<GameState> {
     shuffleArray(this.additionalPokemonsPool1)
     shuffleArray(this.additionalPokemonsPool2)
 
-    this.maxClients = 8
     for (const id in options.users) {
       const user = options.users[id]
       // logger.debug(user);
@@ -127,6 +126,8 @@ export default class GameRoom extends Room<GameState> {
         //this.state.shop.assignShop(player)
       }
     }
+
+    setTimeout(() => this.startGame(), 5 * 60 * 1000) // maximum 5 minutes of loading game, game will start no matter what after that
 
     this.onMessage(Transfer.ITEM, (client, message) => {
       if (!this.state.gameFinished) {
@@ -355,6 +356,8 @@ export default class GameRoom extends Room<GameState> {
   }
 
   startGame() {
+    if(this.state.gameLoaded) return; // already started
+    this.state.gameLoaded = true
     this.setSimulationInterval((deltaTime: number) => {
       if (!this.state.gameFinished) {
         try {
@@ -398,8 +401,8 @@ export default class GameRoom extends Room<GameState> {
         throw new Error("consented leave")
       }
 
-      // allow disconnected client to reconnect into this room until 300 seconds
-      await this.allowReconnection(client, 300)
+      // allow disconnected client to reconnect into this room until 5 minutes
+      await this.allowReconnection(client, 5 * 60)
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
         logger.info(`${client.auth.displayName} leave game room`)
@@ -478,14 +481,14 @@ export default class GameRoom extends Room<GameState> {
               logger.error(err)
             } else {
               const expThreshold = 1000
-              let remainingExpToGain = exp
-              while(usr.exp + remainingExpToGain >= expThreshold) {
+              if (usr.exp + exp >= expThreshold) {
                 usr.level += 1
                 usr.booster += 1
-                remainingExpToGain -= (expThreshold - usr.exp)
-                usr.exp = 0
+                usr.exp = usr.exp + exp - expThreshold
+              } else {
+                usr.exp = usr.exp + exp
               }
-              usr.exp = remainingExpToGain > 0 ? remainingExpToGain : 0
+              usr.exp = !isNaN(usr.exp) ? usr.exp : 0
 
               if (rank == 1) {
                 usr.wins += 1

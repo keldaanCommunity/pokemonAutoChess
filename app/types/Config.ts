@@ -339,6 +339,8 @@ export const Mythical2Shop = new Array<Pkm>(
   Pkm.YVELTAL
 )
 
+export const MAX_PLAYERS_PER_LOBBY = 8
+
 export const StageDuration: Record<number | "DEFAULT", number> = {
   0: 15,
   10: 50,

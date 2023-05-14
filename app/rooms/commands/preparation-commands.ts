@@ -12,6 +12,7 @@ import { BotDifficulty } from "../../types/enum/Game"
 import { pickRandomIn } from "../../utils/random"
 import { logger } from "../../utils/logger"
 import { entries, values } from "../../utils/schemas"
+import { MAX_PLAYERS_PER_LOBBY } from "../../types/Config"
 
 export class OnJoinCommand extends Command<
   PreparationRoom,
@@ -23,6 +24,9 @@ export class OnJoinCommand extends Command<
 > {
   execute({ client, options, auth }) {
     try {
+      if (this.state.users.size >= MAX_PLAYERS_PER_LOBBY) {
+        return; // lobby already full
+      }
       if (this.state.ownerId == "") {
         this.state.ownerId = auth.uid
       }
@@ -68,7 +72,7 @@ export class OnJoinCommand extends Command<
         )
       }
 
-      if (this.state.users.size >= 8) {
+      if (this.state.users.size >= MAX_PLAYERS_PER_LOBBY) {
         return [new OnRemoveBotCommand().setPayload({ target: undefined })]
       }
     } catch (error) {
@@ -123,11 +127,11 @@ export class OnGameStartRequestCommand extends Command<
             avatar: "0025/Pain",
             time: Date.now()
           })
-        } else if (freeMemory < 0.2 * totalMemory && nbHumanPlayers < 8) {
+        } else if (freeMemory < 0.2 * totalMemory && nbHumanPlayers < MAX_PLAYERS_PER_LOBBY) {
           // if less than 20% free memory available, prevents starting a game with bots
           this.room.broadcast(Transfer.MESSAGES, {
             name: "Server",
-            payload: `Too many players are currently playing and the server is running out of memory. To save resources, only lobbys with 8 human players are enabled. Sorry for the inconvenience.`,
+            payload: `Too many players are currently playing and the server is running out of memory. To save resources, only lobbys with ${MAX_PLAYERS_PER_LOBBY} human players are enabled. Sorry for the inconvenience.`,
             avatar: "0025/Pain",
             time: Date.now()
           })
@@ -397,7 +401,7 @@ type OnAddBotPayload = {
 
 export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
   async execute(data: OnAddBotPayload) {
-    if (this.state.users.size >= 8) {
+    if (this.state.users.size >= MAX_PLAYERS_PER_LOBBY) {
       return
     }
 
@@ -447,7 +451,7 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
                   return
                 }
 
-                if (this.state.users.size >= 8) {
+                if (this.state.users.size >= MAX_PLAYERS_PER_LOBBY) {
                   return
                 } else {
                   const bot = pickRandomIn(bots)
@@ -526,7 +530,7 @@ export class OnRemoveBotCommand extends Command<
 export class OnListBotsCommand extends Command<PreparationRoom> {
   execute(data: { user: IUserMetadata }) {
     try {
-      if (this.state.users.size >= 8) {
+      if (this.state.users.size >= MAX_PLAYERS_PER_LOBBY) {
         return
       }
 

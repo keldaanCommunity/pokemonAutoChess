@@ -18,6 +18,7 @@ import "./room-menu.css"
 import { throttle } from "../../../../../utils/function"
 import GameState from "../../../../../rooms/states/game-state"
 import { useNavigate } from "react-router"
+import { MAX_PLAYERS_PER_LOBBY } from "../../../../../types/Config"
 
 export default function RoomMenu(props: {
   toPreparation: boolean
@@ -64,6 +65,9 @@ export default function RoomMenu(props: {
   const joinRoom = throttle(async function join(
     selectedRoom: RoomAvailable<IPreparationMetadata>
   ) {
+    if(selectedRoom.clients >= MAX_PLAYERS_PER_LOBBY){
+      return
+    }
     if (lobby && !props.toPreparation && !isJoining) {
       if (selectedRoom.metadata?.password) {
         const password = prompt(`This room is private. Enter password`)

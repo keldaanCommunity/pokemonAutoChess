@@ -8,7 +8,8 @@ import {
   AdditionalPicksStages,
   MythicalPicksStages,
   Mythical1Shop,
-  Mythical2Shop
+  Mythical2Shop,
+  MAX_PLAYERS_PER_LOBBY
 } from "../../types/Config"
 import { Item, BasicItems } from "../../types/enum/Item"
 import { BattleResult } from "../../types/enum/Game"
@@ -722,7 +723,7 @@ export class OnJoinCommand extends Command<
 
           // logger.debug(this.state.players.get(client.auth.uid).tileset);
           this.state.shop.assignShop(player)
-          if (this.state.players.size >= 8) {
+          if (this.state.players.size >= MAX_PLAYERS_PER_LOBBY) {
             // logger.debug('game elligible to xp');
             this.state.elligibleToXP = true
             let c = 0
