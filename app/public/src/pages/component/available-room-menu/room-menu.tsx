@@ -73,17 +73,24 @@ export default function RoomMenu(props: {
       setJoining(true)
       const token = await firebase.auth().currentUser?.getIdToken()
       if (token) {
-        const room: Room<PreparationState> = await client.joinById(
-          selectedRoom.roomId,
-          {
-            idToken: token
-          }
-        )
-        localStorage.setItem("cachedReconnectionToken", room.reconnectionToken)
-        await lobby.leave()
-        room.connection.close()
-        dispatch(leaveLobby())
-        props.setToPreparation(true)
+        try {
+          const room: Room<PreparationState> = await client.joinById(
+            selectedRoom.roomId,
+            {
+              idToken: token
+            }
+          )
+          localStorage.setItem(
+            "cachedReconnectionToken",
+            room.reconnectionToken
+          )
+          await lobby.leave()
+          room.connection.close()
+          dispatch(leaveLobby())
+          props.setToPreparation(true)
+        } catch (error) {
+          console.log(error)
+        }
       }
     }
   },

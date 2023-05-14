@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@colyseus/command": "^0.2.1",
-    "@colyseus/monitor": "^0.14.22",
+    "@colyseus/monitor": "^0.15.1",
     "@colyseus/ws-transport": "^0.15.0",
     "@reduxjs/toolkit": "^1.9.2",
     "@types/bootstrap": "^5.2.6",
