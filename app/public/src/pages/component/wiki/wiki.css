@@ -21,10 +21,7 @@
 #wiki-page .pokemon-portrait {
     position: relative;
     display: inline-block;
-    margin: 2px;    
-    border: 1px solid #ffffff;
-    border-radius: 4px;
-    box-shadow: 2px 2px 4px #00000060;
+    margin: 2px;
 }
 
 #wiki-page .pokemon-portrait > img {

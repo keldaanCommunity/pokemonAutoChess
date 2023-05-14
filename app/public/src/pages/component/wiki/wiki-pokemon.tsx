@@ -49,7 +49,7 @@ export default function WikiPokemon(props: { rarity: Rarity }) {
         {section.pokemons.map((pkm) => {
           return (
             <Tab key={"title-" + pkm}>
-              <img src={getPortraitSrc(PkmIndex[pkm])}></img>
+              <img className="pokemon-portrait" src={getPortraitSrc(PkmIndex[pkm])}></img>
             </Tab>
           )
         })}

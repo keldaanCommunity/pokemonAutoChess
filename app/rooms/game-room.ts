@@ -105,7 +105,6 @@ export default class GameRoom extends Room<GameState> {
     shuffleArray(this.additionalPokemonsPool1)
     shuffleArray(this.additionalPokemonsPool2)
 
-    this.maxClients = 8
     for (const id in options.users) {
       const user = options.users[id]
       // logger.debug(user);
@@ -127,6 +126,8 @@ export default class GameRoom extends Room<GameState> {
         //this.state.shop.assignShop(player)
       }
     }
+
+    setTimeout(() => this.startGame(), 5 * 60 * 1000) // maximum 5 minutes of loading game, game will start no matter what after that
 
     this.onMessage(Transfer.ITEM, (client, message) => {
       if (!this.state.gameFinished) {
@@ -355,6 +356,8 @@ export default class GameRoom extends Room<GameState> {
   }
 
   startGame() {
+    if(this.state.gameLoaded) return; // already started
+    this.state.gameLoaded = true
     this.setSimulationInterval((deltaTime: number) => {
       if (!this.state.gameFinished) {
         try {
@@ -398,8 +401,8 @@ export default class GameRoom extends Room<GameState> {
         throw new Error("consented leave")
       }
 
-      // allow disconnected client to reconnect into this room until 300 seconds
-      await this.allowReconnection(client, 300)
+      // allow disconnected client to reconnect into this room until 5 minutes
+      await this.allowReconnection(client, 5 * 60)
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
         logger.info(`${client.auth.displayName} leave game room`)
@@ -407,15 +410,15 @@ export default class GameRoom extends Room<GameState> {
         if (player && player.loadingProgress < 100) {
           // if player quit during the loading screen, remove it from the players
           this.state.players.delete(client.auth.uid)
-          if (
-            Array.from(this.state.players.values()).every(
-              (player) => player.loadingProgress === 100
-            )
-          ) {
-            this.broadcast(Transfer.LOADING_COMPLETE)
-            this.startGame()
-          }
         }
+      }
+      if (
+        Array.from(this.state.players.values()).every(
+          (player) => player.loadingProgress === 100
+        )
+      ) {
+        this.broadcast(Transfer.LOADING_COMPLETE)
+        this.startGame()
       }
     }
   }

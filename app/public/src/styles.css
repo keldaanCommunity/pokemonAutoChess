@@ -229,6 +229,7 @@ p:last-child {
 
 .Toastify__toast-container {
   width: auto !important;
+  --toastify-z-index: 1040;
 }
 
 .Toastify__toast {
@@ -369,6 +370,13 @@ p:last-child {
   cursor: not-allowed;
 }
 
+.bubbly > img:first-child {
+  height: 1.4em;
+  display: inline-block;
+  vertical-align: text-top;
+  margin-right: 0.25em;
+}
+
 .firebaseui-idp-button {
   border: solid !important;
   padding: 5px 30px !important;
@@ -433,27 +441,20 @@ p:last-child {
   background-color: #4F5160;
 }
 
-.chatbg {
-  background: #aeb6c0;
-  border-radius: 8px;
-  border: none;
-  padding: 0;
-  cursor: var(--cursor-hover);
-  outline-offset: 4px;
-  border: solid;
-  border-color: black;
-}
-
 .chat {
   display: block;
-  padding: 12px 42px;
+  padding: 0;
+  margin: 0.25em 0;
   border-radius: 8px;
   font-size: 1.25rem;
   border: solid;
   border-color: black;
   background: #61738a;
   color: white;
-  transform: translateY(-8px) translateX(-8px);
+  cursor: var(--cursor-hover);
+}
+.chat:nth-child(odd){
+  background-color: #54596b;
 }
 
 .player-box {
@@ -631,4 +632,10 @@ p:last-child {
   );
   background-size: 400% 400%;
   background-repeat: no-repeat;
+}
+
+.pokemon-portrait {
+  border: 1px solid #000000;
+  border-radius: 4px;
+  box-shadow: 2px 2px 0 #00000060;
 }

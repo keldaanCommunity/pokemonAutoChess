@@ -32,7 +32,7 @@ async function main() {
               p.items[j] = Item.STAR_DUST
               modified = true
             } else if (item === "ZOOM_LENS") {
-              logger.debug(p.name, item)
+              logger.debug(p.name, bot.author, bot.name, item)
               p.items[j] = Item.SCOPE_LENS
               modified = true
             }

@@ -31,6 +31,7 @@ import { Pkm } from "./enum/Pokemon"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { IPokemonRecord } from "../models/colyseus-models/game-record"
 import GameRoom from "../rooms/game-room"
+import { Effects } from "../models/effects"
 
 export * from "./enum/Emotion"
 
@@ -44,6 +45,10 @@ export const CDN_URL =
 
 export const USERNAME_REGEXP =
   /^(?=.{4,20}$)(?:[\u0021-\uFFFF]+(?:(?:\.|-|_)[\u0021-\uFFFF])*)+$/
+
+export type NonFunctionPropNames<T> = {
+  [K in keyof T]: T[K] extends Function ? never : K
+}[keyof T]
 
 export type DetailledPkm = { pkm: Pkm; shiny: boolean; emotion: Emotion }
 
@@ -153,7 +158,10 @@ export enum Transfer {
   LOADING_PROGRESS = "LOADING_PROGRESS",
   LOADING_COMPLETE = "LOADING_COMPLETE",
   PLAYER_INCOME = "PLAYER_INCOME",
-  PLAYER_DAMAGE = "PLAYER_DAMAGE"
+  PLAYER_DAMAGE = "PLAYER_DAMAGE",
+  ROOMS = "ROOMS",
+  ADD_ROOM = "ADD_ROOM",
+  REMOVE_ROOM = "REMOVE_ROOM"
 }
 
 export enum AttackSprite {
@@ -303,6 +311,7 @@ export interface IPlayer {
   pokemonsProposition: ArraySchema<Pkm>
   rerollCount: number
   loadingProgress: number
+  effects: Effects
 }
 export interface IPokemon {
   id: string
@@ -557,7 +566,8 @@ export enum Title {
   GAMBLER = "GAMBLER",
   BOT_BUILDER = "BOT_BUILDER",
   SHINY_SEEKER = "SHINY_SEEKER",
-  ARCHEOLOGIST = "ARCHEOLOGIST"
+  ARCHEOLOGIST = "ARCHEOLOGIST",
+  ALCHEMIST = "ALCHEMIST"
 }
 
 export const TitleName: { [key in Title]: string } = {
@@ -614,7 +624,8 @@ export const TitleName: { [key in Title]: string } = {
   [Title.GAMBLER]: "Gambler",
   [Title.BOT_BUILDER]: "Bot Builder",
   [Title.SHINY_SEEKER]: "Shiny Seeker",
-  [Title.ARCHEOLOGIST]: "Archeologist"
+  [Title.ARCHEOLOGIST]: "Archeologist",
+  [Title.ALCHEMIST]: "Alchemist"
 }
 
 export const TitleDescription: { [key in Title]: string } = {
@@ -671,5 +682,6 @@ export const TitleDescription: { [key in Title]: string } = {
   [Title.GAMBLER]: "Reroll over 60 times in a single match",
   [Title.BOT_BUILDER]: "Reach level 10 to unlock the Bot Builder",
   [Title.SHINY_SEEKER]: "Have over 30 shiny pokemon avatars",
-  [Title.ARCHEOLOGIST]: "Decipher the secret message of the Unowns"
+  [Title.ARCHEOLOGIST]: "Decipher the secret message of the Unowns",
+  [Title.ALCHEMIST]: "Max synergy with artificial type in a game"
 }

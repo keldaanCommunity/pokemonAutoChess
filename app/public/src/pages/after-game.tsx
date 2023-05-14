@@ -31,12 +31,12 @@ export default function AfterGame() {
         if (user) {
           dispatch(logIn(user))
           try {
-            const lastRoomId = localStorage.getItem("lastRoomId")
-            const lastSessionId = localStorage.getItem("lastSessionId")
-            if (lastRoomId && lastSessionId) {
+            const cachedReconnectionToken = localStorage.getItem(
+              "cachedReconnectionToken"
+            )
+            if (cachedReconnectionToken) {
               const r: Room<AfterGameState> = await client.reconnect(
-                lastRoomId,
-                lastSessionId
+                cachedReconnectionToken
               )
               await initialize(r)
               dispatch(joinAfter(r))
@@ -45,12 +45,12 @@ export default function AfterGame() {
             }
           } catch (error) {
             setTimeout(async () => {
-              const lastRoomId = localStorage.getItem("lastRoomId")
-              const lastSessionId = localStorage.getItem("lastSessionId")
-              if (lastRoomId && lastSessionId) {
+              const cachedReconnectionToken = localStorage.getItem(
+                "cachedReconnectionToken"
+              )
+              if (cachedReconnectionToken) {
                 const r: Room<AfterGameState> = await client.reconnect(
-                  lastRoomId,
-                  lastSessionId
+                  cachedReconnectionToken
                 )
                 await initialize(r)
                 dispatch(joinAfter(r))
@@ -66,19 +66,16 @@ export default function AfterGame() {
     }
 
     const initialize = async (r: Room<AfterGameState>) => {
-      r.state.players.onAdd = (player) => {
+      localStorage.setItem("cachedReconnectionToken", r.reconnectionToken)
+      r.state.players.onAdd((player) => {
         dispatch(addPlayer(player))
-        if(player.id === currentPlayerId){
-          playSound(SOUNDS["FINISH"+player.rank])
+        if (player.id === currentPlayerId) {
+          playSound(SOUNDS["FINISH" + player.rank])
         }
-      }
-      r.state.onChange = (changes) => {
-        changes.forEach((change) => {
-          if (change.field == "noElo") {
-            dispatch(setNoELO(change.value))
-          } 
-        })
-      }
+      })
+      r.state.listen("noElo", (value, previousValue) => {
+        dispatch(setNoELO(value))
+      })
     }
 
     if (!initialized) {
@@ -96,7 +93,7 @@ export default function AfterGame() {
       <div className="after-game">
         <button
           className="bubbly blue"
-          style={{margin: "10px 0 0 10px"}}
+          style={{ margin: "10px 0 0 10px" }}
           onClick={() => {
             if (room) {
               room.connection.close()
@@ -105,7 +102,7 @@ export default function AfterGame() {
             setToLobby(true)
           }}
         >
-         Back to Lobby
+          Back to Lobby
         </button>
         <AfterMenu />
       </div>

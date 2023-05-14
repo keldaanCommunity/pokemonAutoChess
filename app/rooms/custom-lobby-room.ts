@@ -1,4 +1,11 @@
-import { Client, LobbyRoom } from "colyseus"
+import {
+  Client,
+  LobbyRoom,
+  Room,
+  RoomListingData,
+  matchMaker,
+  subscribeLobby
+} from "colyseus"
 import LobbyState from "./states/lobby-state"
 import { connect, FilterQuery, CallbackError } from "mongoose"
 import Chat from "../models/mongo-models/chat"
@@ -44,7 +51,7 @@ import { pickRandomIn } from "../utils/random"
 import { sum } from "../utils/array"
 import { logger } from "../utils/logger"
 
-export default class CustomLobbyRoom extends LobbyRoom {
+export default class CustomLobbyRoom extends Room<LobbyState> {
   discordWebhook: WebhookClient | undefined
   bots: Map<string, IBot>
   meta: IMeta[]
@@ -55,6 +62,8 @@ export default class CustomLobbyRoom extends LobbyRoom {
   levelLeaderboard: ILeaderboardInfo[]
   pastebin: PastebinAPI | undefined = undefined
   precomputedRarityPokemons: PrecomputedRaritPokemonyAll
+  unsubscribeLobby: (() => void) | undefined
+  rooms: RoomListingData<any>[] | undefined
 
   constructor() {
     super()
@@ -102,17 +111,60 @@ export default class CustomLobbyRoom extends LobbyRoom {
         this.precomputedRarityPokemons[rarity].length > 0
       ) {
         pkm = pickRandomIn(this.precomputedRarityPokemons[rarity])
-        break;
+        break
       }
     }
     return pkm
   }
 
-  onCreate(): Promise<void> {
+  async onCreate(): Promise<void> {
     logger.info("create lobby", this.roomId)
-    super.onCreate({})
     this.setState(new LobbyState())
     this.autoDispose = false
+    this.listing.unlisted = true
+
+    this.unsubscribeLobby = await subscribeLobby((roomId, data) => {
+      if (this.rooms) {
+        const roomIndex = this.rooms?.findIndex(
+          (room) => room.roomId === roomId
+        )
+
+        if (!data) {
+          // remove room listing data
+          if (roomIndex !== -1) {
+            const previousData = this.rooms[roomIndex]
+
+            this.rooms.splice(roomIndex, 1)
+
+            this.clients.forEach((client) => {
+              client.send(Transfer.REMOVE_ROOM, roomId)
+            })
+          }
+        } else if (roomIndex === -1) {
+          // append room listing data
+          this.rooms.push(data)
+
+          this.clients.forEach((client) => {
+            client.send(Transfer.ADD_ROOM, [roomId, data])
+          })
+        } else {
+          const previousData = this.rooms[roomIndex]
+
+          // replace room listing data
+          this.rooms[roomIndex] = data
+
+          this.clients.forEach((client) => {
+            if (previousData && !data) {
+              client.send(Transfer.REMOVE_ROOM, roomId)
+            } else if (data) {
+              client.send(Transfer.ADD_ROOM, [roomId, data])
+            }
+          })
+        }
+      }
+    })
+
+    this.rooms = await matchMaker.query({ private: false, unlisted: false })
 
     this.onMessage(Transfer.REQUEST_LEADERBOARD, (client, message) => {
       try {
@@ -276,7 +328,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
       try {
         const bot = message.bot
         const user = this.state.users.get(client.auth.uid)
-        if(!user) return;
+        if (!user) return
         this.pastebin
           ?.createPaste({
             text: JSON.stringify(bot),
@@ -355,7 +407,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
     this.onMessage(Transfer.OPEN_BOOSTER, (client) => {
       try {
         const user = this.state.users.get(client.auth.uid)
-        if(!user) return;
+        if (!user) return
 
         const DUST_PER_BOOSTER = 50
         if (user && user.booster && user.booster > 0) {
@@ -410,7 +462,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
     this.onMessage(Transfer.CHANGE_NAME, (client, message) => {
       try {
         const user = this.state.users.get(client.auth.uid)
-        if(!user) return
+        if (!user) return
         if (USERNAME_REGEXP.test(message.name)) {
           user.name = message.name
           UserMetadata.findOne({ uid: client.auth.uid }, (err, user) => {
@@ -454,7 +506,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
       ) => {
         try {
           const user = this.state.users.get(client.auth.uid)
-          if(!user) return
+          if (!user) return
           const pokemonConfig = user.pokemonCollection.get(message.index)
           if (pokemonConfig) {
             const emotionsToCheck = message.shiny
@@ -494,7 +546,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
       ) => {
         try {
           const user = this.state.users.get(client.auth.uid)
-          if(!user) return
+          if (!user) return
           const pokemonConfig = user.pokemonCollection.get(message.index)
           if (pokemonConfig) {
             const emotionsToCheck = message.shiny
@@ -538,13 +590,21 @@ export default class CustomLobbyRoom extends LobbyRoom {
                       u.titles.push(Title.DUCHESS)
                     }
 
-                    const unowns = (Object.keys(PkmFamily) as Pkm[]).filter(pkm => PkmFamily[pkm] === Pkm.UNOWN_A)
-                    if(!u.titles.includes(Title.ARCHEOLOGIST) && unowns.every(name => {
-                      const index = PkmIndex[name]
-                      const collection = u.pokemonCollection.get(index)
-                      const isUnlocked = collection && (collection.emotions.length > 0 || collection.shinyEmotions.length > 0)
-                      return (isUnlocked || index === message.index)
-                    })){
+                    const unowns = (Object.keys(PkmFamily) as Pkm[]).filter(
+                      (pkm) => PkmFamily[pkm] === Pkm.UNOWN_A
+                    )
+                    if (
+                      !u.titles.includes(Title.ARCHEOLOGIST) &&
+                      unowns.every((name) => {
+                        const index = PkmIndex[name]
+                        const collection = u.pokemonCollection.get(index)
+                        const isUnlocked =
+                          collection &&
+                          (collection.emotions.length > 0 ||
+                            collection.shinyEmotions.length > 0)
+                        return isUnlocked || index === message.index
+                      })
+                    ) {
                       u.titles.push(Title.ARCHEOLOGIST)
                     }
 
@@ -574,13 +634,10 @@ export default class CustomLobbyRoom extends LobbyRoom {
 
     this.onMessage(
       Transfer.BUY_BOOSTER,
-      (
-        client,
-        message: { index: string }
-      ) => {
+      (client, message: { index: string }) => {
         try {
           const user = this.state.users.get(client.auth.uid)
-          if(!user) return
+          if (!user) return
           const pokemonConfig = user.pokemonCollection.get(message.index)
           if (pokemonConfig) {
             const BOOSTER_COST = 500
@@ -589,7 +646,8 @@ export default class CustomLobbyRoom extends LobbyRoom {
               user.booster += 1
               UserMetadata.findOne({ uid: client.auth.uid }, (err, u) => {
                 if (u) {
-                  u.pokemonCollection.get(message.index).dust = pokemonConfig.dust
+                  u.pokemonCollection.get(message.index).dust =
+                    pokemonConfig.dust
                   u.booster = user.booster
                   u.save()
                 }
@@ -687,7 +745,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
       ) => {
         try {
           const user = this.state.users.get(client.auth.uid)
-          if(!user) return
+          if (!user) return
           const config = user.pokemonCollection.get(message.index)
           if (config) {
             const emotionsToCheck = message.shiny
@@ -722,7 +780,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
         process.env.MONGO_URI ? process.env.MONGO_URI : "Default Mongo URI",
         {},
         (err) => {
-          if(err != null){
+          if (err != null) {
             logger.error("Error connecting to Mongo", err)
           }
           Chat.find(
@@ -866,9 +924,9 @@ export default class CustomLobbyRoom extends LobbyRoom {
   }
 
   onJoin(client: Client, options: any) {
-    super.onJoin(client, options)
     try {
       logger.info(`${client.auth.displayName} ${client.id} join lobby room`)
+      client.send(Transfer.ROOMS, this.rooms)
       // client.send(Transfer.REQUEST_BOT_DATA, this.bots);
       UserMetadata.findOne(
         { uid: client.auth.uid },
@@ -913,7 +971,8 @@ export default class CustomLobbyRoom extends LobbyRoom {
                       user.titles,
                       user.title,
                       user.role,
-                      client.auth.email === undefined && client.auth.photoURL === undefined
+                      client.auth.email === undefined &&
+                        client.auth.photoURL === undefined
                     )
                   )
                 }
@@ -946,7 +1005,8 @@ export default class CustomLobbyRoom extends LobbyRoom {
                 [],
                 "",
                 Role.BASIC,
-                client.auth.email === undefined && client.auth.photoURL === undefined
+                client.auth.email === undefined &&
+                  client.auth.photoURL === undefined
               )
             )
           }
@@ -959,7 +1019,6 @@ export default class CustomLobbyRoom extends LobbyRoom {
 
   onLeave(client: Client) {
     try {
-      super.onLeave(client)
       if (client && client.auth && client.auth.displayName && client.auth.uid) {
         logger.info(`${client.auth.displayName} ${client.id} leave lobby`)
         this.state.users.delete(client.auth.uid)
@@ -971,8 +1030,10 @@ export default class CustomLobbyRoom extends LobbyRoom {
 
   onDispose() {
     try {
-      super.onDispose()
       logger.info("dispose lobby")
+      if (this.unsubscribeLobby) {
+        this.unsubscribeLobby()
+      }
     } catch (error) {
       logger.error(error)
     }

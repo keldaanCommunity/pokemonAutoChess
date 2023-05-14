@@ -4329,7 +4329,7 @@ export class NidoranF extends Pokemon {
       AttackType.PHYSICAL,
       1,
       90,
-      Ability.POISON_STING,
+      Ability.VENOSHOCK,
       shiny,
       emotion,
       false
@@ -4353,7 +4353,7 @@ export class Nidorina extends Pokemon {
       AttackType.PHYSICAL,
       2,
       90,
-      Ability.POISON_STING,
+      Ability.VENOSHOCK,
       shiny,
       emotion,
       false
@@ -4377,7 +4377,7 @@ export class Nidoqueen extends Pokemon {
       AttackType.PHYSICAL,
       3,
       90,
-      Ability.POISON_STING,
+      Ability.VENOSHOCK,
       shiny,
       emotion,
       true
@@ -6801,7 +6801,7 @@ export class Seviper extends Pokemon {
       AttackType.PHYSICAL,
       1,
       75,
-      Ability.POISON_STING,
+      Ability.VENOSHOCK,
       shiny,
       emotion,
       true
@@ -10141,6 +10141,57 @@ export class Persian extends Pokemon {
     )
   }
 }
+
+export class Hoothoot extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.HOOTHOOT,
+      [Synergy.NORMAL, Synergy.FLYING, Synergy.PSYCHIC],
+      Rarity.UNCOMMON,
+      Pkm.NOCTOWL,
+      75,
+      5,
+      2,
+      3,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.HYPNOSIS,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Noctowl extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.NOCTOWL,
+      [Synergy.NORMAL, Synergy.FLYING, Synergy.PSYCHIC],
+      Rarity.UNCOMMON,
+      Pkm.DEFAULT,
+      170,
+      6,
+      3,
+      5,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      100,
+      Ability.HYPNOSIS,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
 export class Munchlax extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
@@ -11425,7 +11476,7 @@ export class Snivy extends Pokemon {
       AttackType.PHYSICAL,
       1,
       80,
-      Ability.POISON_STING,
+      Ability.VENOSHOCK,
       shiny,
       emotion,
       false
@@ -11449,7 +11500,7 @@ export class Servine extends Pokemon {
       AttackType.PHYSICAL,
       2,
       80,
-      Ability.POISON_STING,
+      Ability.VENOSHOCK,
       shiny,
       emotion,
       false
@@ -11473,7 +11524,7 @@ export class Serperior extends Pokemon {
       AttackType.PHYSICAL,
       3,
       80,
-      Ability.POISON_STING,
+      Ability.VENOSHOCK,
       shiny,
       emotion,
       true
@@ -12878,7 +12929,7 @@ export class Ekans extends Pokemon {
       AttackType.PHYSICAL,
       1,
       90,
-      Ability.POISON_STING,
+      Ability.VENOSHOCK,
       shiny,
       emotion,
       false,
@@ -12903,7 +12954,7 @@ export class Arbok extends Pokemon {
       AttackType.PHYSICAL,
       2,
       90,
-      Ability.POISON_STING,
+      Ability.VENOSHOCK,
       shiny,
       emotion,
       true,

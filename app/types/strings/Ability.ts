@@ -376,8 +376,8 @@ export const AbilityName: { [key in Ability]: Langage } = {
     fra: `Sécrétion`,
     prt: ``
   },
-  [Ability.POISON_STING]: {
-    eng: `Poison Sting`,
+  [Ability.VENOSHOCK]: {
+    eng: `Venoshock`,
     esp: `Picadura de veneno`,
     fra: `Dard Venin`,
     prt: ``
@@ -825,6 +825,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.HYPNOSIS]: {
+    eng: "Hypnosis",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1201,7 +1207,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``,
     prt: ``
   },
-  [Ability.POISON_STING]: {
+  [Ability.VENOSHOCK]: {
     eng: `Mono target damage that deals [30,60,120,SP] ${Damage.SPECIAL}. Doubles damage if target is ${Status.POISON}`,
     esp: `Daño especial de un solo objetivo que reparte [30,60,120,SP] ${Damage.SPECIAL}. Duplica el daño si el objetivo está envenenado.`,
     fra: `Attaque physique mono cible faisant [30,60,120,SP] ${Damage.SPECIAL}. Double les dégats si la cible est empoisonné.`,
@@ -1484,13 +1490,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.DIVE]: {
-    eng: `Dives underwater and reappears in the middle of the enemy team, dealing [10,20,40,SP] ${Damage.SPECIAL} and ${Status.FREEZE} all adjacent units for [1.5,3,6] seconds`,
+    eng: `Dives underwater and reappears in the middle of the enemy team, dealing [15,30,60,SP] ${Damage.SPECIAL} and ${Status.FREEZE} all adjacent units for [1,2,4] seconds`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   [Ability.SPIKE_ARMOR]: {
-    eng: `For [3,5,10] seconds, targets that melee attack this Pokémon receive ${Status.WOUND} and take ${Damage.SPECIAL} equal to his current defense`,
+    eng: `For [3,5,10] seconds, targets that melee attack this Pokémon receive ${Status.WOUND} and take ${Damage.SPECIAL} equal to his current ${Stat.DEF}`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1651,6 +1657,12 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
   },
   [Ability.OVERHEAT]: {
     eng: `Deals [20, SP] ${Damage.SPECIAL} to all enemies. Double damage if target is ${Status.BURN}`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HYPNOSIS]: {
+    eng: `Put ${Status.SLEEP} 1 enemy in the back lines for [2,3.5,6]  seconds`,
     esp: "",
     prt: "",
     fra: ""
