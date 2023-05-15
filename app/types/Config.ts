@@ -162,6 +162,7 @@ export const PoolSize: { [key in Rarity]: [number, number, number] } = {
 }
 
 export const CommonShop = new Array<Pkm>(
+  Pkm.BONSLEY,
   Pkm.POLIWAG,
   Pkm.CHARMANDER,
   Pkm.GEODUDE,

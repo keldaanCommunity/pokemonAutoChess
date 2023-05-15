@@ -3964,3 +3964,16 @@ export class DeathWingStrategy extends AttackStrategy {
     }
   }
 }
+
+export class MimicStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    AbilityStrategy[target.skill].process(pokemon, state, board, target, crit)
+  }
+}

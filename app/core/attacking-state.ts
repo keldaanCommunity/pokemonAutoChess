@@ -6,6 +6,7 @@ import PokemonEntity from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
 import { PokemonActionState } from "../types/enum/Game"
 import { chance } from "../utils/random"
+import { Ability } from "../types/enum/Ability"
 
 export default class AttackingState extends PokemonState {
   update(
@@ -45,7 +46,15 @@ export default class AttackingState extends PokemonState {
       }
 
       // no target case
-      if (!targetCoordinate) {
+      if(pokemon.status.tree === true){
+        if(pokemon.mana >= pokemon.maxMana){
+          pokemon.mana = 0
+          pokemon.status.tree = false
+          pokemon.toMovingState()
+        } else if(pokemon.skill === Ability.MIMIC) {
+          pokemon.addAttack(2)
+        }
+      } else if (!targetCoordinate) {
         pokemon.toMovingState()
       } else if (
         board.distance(

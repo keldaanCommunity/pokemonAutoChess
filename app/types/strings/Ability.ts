@@ -831,6 +831,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.MIMIC]: {
+    eng: "Mimic",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1662,7 +1668,13 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     fra: ""
   },
   [Ability.HYPNOSIS]: {
-    eng: `Put ${Status.SLEEP} 1 enemy in the back lines for [2,3.5,6]  seconds`,
+    eng: `Put ${Status.SLEEP} 1 enemy in the back lines for [2,3.5,6] seconds`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.MIMIC]: {
+    eng: `Pretends to be a tree, does not attack but gain 2 ${Stat.ATK} instead (stackable). Starts attacking when ${Stat.MANA} bar is full, then Mimic copies the ability of the target.`,
     esp: "",
     prt: "",
     fra: ""

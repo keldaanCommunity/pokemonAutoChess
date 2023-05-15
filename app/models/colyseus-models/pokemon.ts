@@ -13208,3 +13208,53 @@ export class Mimikyu extends Pokemon {
     )
   }
 }
+
+export class Bonsley extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.BONSLEY,
+      [Synergy.ROCK, Synergy.FLORA, Synergy.BABY],
+      Rarity.EPIC,
+      Pkm.SUDOWOODO,
+      125,
+      8,
+      5,
+      2,
+      1,
+      AttackSprite.ROCK_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.MIMIC,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Sudowoodo extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.SUDOWOODO,
+      [Synergy.ROCK, Synergy.FLORA, Synergy.MONSTER],
+      Rarity.EPIC,
+      Pkm.DEFAULT,
+      250,
+      16,
+      6,
+      3,
+      1,
+      AttackSprite.ROCK_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      100,
+      Ability.MIMIC,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}

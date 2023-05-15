@@ -542,7 +542,9 @@ import {
   OriginGiratina,
   Marshadow,
   Noctowl,
-  Hoothoot
+  Hoothoot,
+  Bonsley,
+  Sudowoodo
 } from "./colyseus-models/pokemon"
 import { MapSchema } from "@colyseus/schema"
 import { Emotion } from "../types"
@@ -1855,6 +1857,10 @@ export default class PokemonFactory {
         return new Hoothoot(s, e)
       case Pkm.NOCTOWL:
         return new Noctowl(s, e)
+      case Pkm.BONSLEY:
+        return new Bonsley(s, e)
+      case Pkm.SUDOWOODO:
+        return new Sudowoodo(s, e)
       default:
         // logger.warn(`No pokemon with name "${name}" found, return magikarp`);
         return new Magikarp(s, e)
