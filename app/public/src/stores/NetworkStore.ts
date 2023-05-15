@@ -49,33 +49,49 @@ export const networkSlice = createSlice({
       state.client = new Client(endpoint)
       state.uid = ""
       state.displayName = ""
+      state.preparation?.connection.close()
       state.preparation = undefined
+      state.lobby?.connection.close()
       state.lobby = undefined
+      state.game?.connection.close()
       state.game = undefined
+      state.after?.connection.close()
       state.after = undefined
     },
     joinLobby: (state, action: PayloadAction<Room<ICustomLobbyState>>) => {
       state.lobby = action.payload
+      state.preparation?.connection.close()
       state.preparation = undefined
+      state.game?.connection.close()
       state.game = undefined
+      state.after?.connection.close()
       state.after = undefined
     },
     joinPreparation: (state, action: PayloadAction<Room<PreparationState>>) => {
       state.preparation = action.payload
+      state.lobby?.connection.close()
       state.lobby = undefined
+      state.game?.connection.close()
       state.game = undefined
+      state.after?.connection.close()
       state.after = undefined
     },
     joinGame: (state, action: PayloadAction<Room<GameState>>) => {
       state.game = action.payload
+      state.preparation?.connection.close()
       state.preparation = undefined
+      state.lobby?.connection.close()
       state.lobby = undefined
+      state.after?.connection.close()
       state.after = undefined
     },
     joinAfter: (state, action: PayloadAction<Room<AfterGameState>>) => {
       state.after = action.payload
+      state.game?.connection.close()
       state.game = undefined
+      state.lobby?.connection.close()
       state.lobby = undefined
+      state.preparation?.connection.close()
       state.preparation = undefined
     },
     sendMessage: (state, action: PayloadAction<string>) => {
@@ -158,7 +174,9 @@ export const networkSlice = createSlice({
       state.game?.send(Transfer.ITEM, { id: action.payload })
     },
     gameStartRequest: (state, action: PayloadAction<string>) => {
-      state.preparation?.send(Transfer.GAME_START_REQUEST, { token: action.payload })
+      state.preparation?.send(Transfer.GAME_START_REQUEST, {
+        token: action.payload
+      })
     },
     gameStart: (state, action: PayloadAction<string>) => {
       state.preparation?.send(Transfer.GAME_START, { id: action.payload })
@@ -181,7 +199,7 @@ export const networkSlice = createSlice({
     ) => {
       state.lobby?.send(Transfer.BUY_EMOTION, action.payload)
     },
-    buyBooster: (state, action: PayloadAction<{ index: string; }>) => {
+    buyBooster: (state, action: PayloadAction<{ index: string }>) => {
       state.lobby?.send(Transfer.BUY_BOOSTER, action.payload)
     },
     openBooster: (state) => {
