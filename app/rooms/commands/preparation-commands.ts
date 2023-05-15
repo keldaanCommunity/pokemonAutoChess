@@ -24,8 +24,14 @@ export class OnJoinCommand extends Command<
 > {
   execute({ client, options, auth }) {
     try {
-      if (this.state.users.size >= MAX_PLAYERS_PER_LOBBY) {
-        return; // lobby already full
+      let numberOfHumanPlayers = 0
+      this.state.users.forEach((u) => {
+        if (!u.isBot) {
+          numberOfHumanPlayers++
+        }
+      })
+      if (numberOfHumanPlayers >= MAX_PLAYERS_PER_LOBBY) {
+        return // lobby already full
       }
       if (this.state.ownerId == "") {
         this.state.ownerId = auth.uid
@@ -127,7 +133,10 @@ export class OnGameStartRequestCommand extends Command<
             avatar: "0025/Pain",
             time: Date.now()
           })
-        } else if (freeMemory < 0.2 * totalMemory && nbHumanPlayers < MAX_PLAYERS_PER_LOBBY) {
+        } else if (
+          freeMemory < 0.2 * totalMemory &&
+          nbHumanPlayers < MAX_PLAYERS_PER_LOBBY
+        ) {
           // if less than 20% free memory available, prevents starting a game with bots
           this.room.broadcast(Transfer.MESSAGES, {
             name: "Server",

@@ -25,6 +25,7 @@ import { GameUser } from "../models/colyseus-models/game-user"
 import BannedUser from "../models/mongo-models/banned-user"
 import { IBot } from "../models/mongo-models/bot-v2"
 import { logger } from "../utils/logger"
+import { MAX_PLAYERS_PER_LOBBY } from "../types/Config"
 
 export default class PreparationRoom extends Room<PreparationState> {
   dispatcher: Dispatcher<this>
@@ -198,8 +199,17 @@ export default class PreparationRoom extends Room<PreparationState> {
       const user = await admin.auth().getUser(token.uid)
       const isBanned = await BannedUser.findOne({ uid: user.uid })
       const isAlreadyInRoom = this.state.users.has(user.uid)
-
-      if (!user.displayName) {
+      let numberOfHumanPlayers = 0
+      this.state.users.forEach((u) => {
+        if (!u.isBot) {
+          numberOfHumanPlayers++
+        }
+      })
+      if (numberOfHumanPlayers >= MAX_PLAYERS_PER_LOBBY) {
+        throw "room is full"
+      } else if (this.state.gameStarted) {
+        throw "game already started"
+      } else if (!user.displayName) {
         throw "No display name"
       } else if (isBanned) {
         throw "User banned"
