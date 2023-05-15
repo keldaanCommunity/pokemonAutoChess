@@ -73,7 +73,7 @@ export default class GameRoom extends Room<GameState> {
     users: { [key: string]: IGameUser }
     preparationId: string
     name: string
-    idToken: string,
+    idToken: string
     noElo: boolean
   }) {
     logger.trace("create game room")
@@ -84,7 +84,9 @@ export default class GameRoom extends Room<GameState> {
       type: "game"
     })
     // logger.debug(options);
-    this.setState(new GameState(options.preparationId, options.name, options.noElo))
+    this.setState(
+      new GameState(options.preparationId, options.name, options.noElo)
+    )
     this.miniGame.create(this.state.avatars, this.state.floatingItems)
     Object.keys(PRECOMPUTED_TYPE_POKEMONS).forEach((type) => {
       PRECOMPUTED_TYPE_POKEMONS[type].additionalPokemons.forEach((p) => {
@@ -127,7 +129,10 @@ export default class GameRoom extends Room<GameState> {
       }
     }
 
-    setTimeout(() => this.startGame(), 5 * 60 * 1000) // maximum 5 minutes of loading game, game will start no matter what after that
+    setTimeout(() => {
+      this.broadcast(Transfer.LOADING_COMPLETE)
+      this.startGame()
+    }, 5 * 60 * 1000) // maximum 5 minutes of loading game, game will start no matter what after that
 
     this.onMessage(Transfer.ITEM, (client, message) => {
       if (!this.state.gameFinished) {
@@ -356,7 +361,7 @@ export default class GameRoom extends Room<GameState> {
   }
 
   startGame() {
-    if(this.state.gameLoaded) return; // already started
+    if (this.state.gameLoaded) return // already started
     this.state.gameLoaded = true
     this.setSimulationInterval((deltaTime: number) => {
       if (!this.state.gameFinished) {
@@ -401,8 +406,8 @@ export default class GameRoom extends Room<GameState> {
         throw new Error("consented leave")
       }
 
-      // allow disconnected client to reconnect into this room until 5 minutes
-      await this.allowReconnection(client, 5 * 60)
+      // allow disconnected client to reconnect into this room until 1 minute
+      await this.allowReconnection(client, 60)
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
         logger.info(`${client.auth.displayName} leave game room`)
@@ -521,8 +526,11 @@ export default class GameRoom extends Room<GameState> {
               }
 
               if (usr.elo) {
-                if(this.state.noElo === false){
-                  const elo = Math.max(0, this.computeElo(player, rank, usr.elo))
+                if (this.state.noElo === false) {
+                  const elo = Math.max(
+                    0,
+                    this.computeElo(player, rank, usr.elo)
+                  )
                   if (elo) {
                     if (elo > 1100) {
                       player.titles.add(Title.GYM_TRAINER)
@@ -554,7 +562,7 @@ export default class GameRoom extends Room<GameState> {
 
               if (player.rerollCount > 60) {
                 player.titles.add(Title.GAMBLER)
-              }                
+              }
 
               if (usr.titles === undefined) {
                 usr.titles = []
