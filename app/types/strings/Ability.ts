@@ -1220,7 +1220,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.LEECH_LIFE]: {
-    eng: `Area of effect life steal attack that deals [15,30,60,SP] ${Damage.SPECIAL} around the target`,
+    eng: `Area of effect life steal attack that deals [15,30,60,SP] ${Damage.SPECIAL}`,
     esp: `Área de efecto robo de vida daño especial ataque [15,30,60,SP] ${Damage.SPECIAL} alrededor del objetivo`,
     fra: `Attaque vol de vie en AoE faisant [15,30,60,SP] ${Damage.SPECIAL}.`,
     prt: ``
