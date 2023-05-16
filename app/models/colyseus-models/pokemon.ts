@@ -6165,7 +6165,7 @@ export class Charizard extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.CHARIZARD,
-      [Synergy.FIRE, Synergy.DRAGON],
+      [Synergy.FIRE, Synergy.DRAGON, Synergy.FLYING],
       Rarity.COMMON,
       Pkm.DEFAULT,
       220,

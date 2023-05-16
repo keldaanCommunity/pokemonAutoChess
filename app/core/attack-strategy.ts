@@ -3229,6 +3229,15 @@ export class LeechLifeStrategy extends AttackStrategy {
         break
     }
 
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit
+    );
+    pokemon.handleHeal(damage, pokemon, 1)
+
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
 
     cells.forEach((cell) => {
