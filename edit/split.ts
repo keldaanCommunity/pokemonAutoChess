@@ -15,6 +15,7 @@ import { logger } from "../app/utils/logger"
 gracefulFs.gracefulify(fs)
 const args = process.argv.slice(2)
 const path = args[0]
+const specificIndexToSplit = args[1]
 
 interface IPMDCollab {
   AnimData: IAnimData
@@ -40,31 +41,111 @@ interface IDuration {
   Duration: any
 }
 
-async function split() {
-  const pkmaIndexes = ["0000"]
-  const mapName = new Map<string, string>()
-  mapName.set("0000", "missingno")
-  // const credits = {};
-  const durations = {}
-  let missing = ""
+const mapName = new Map<string, string>()
+mapName.set("0000", "missingno")
 
-  Object.values(Pkm).forEach((pkm) => {
-    const pokemon = PokemonFactory.createPokemonFromName(pkm)
-    if (!pkmaIndexes.includes(pokemon.index)) {
-      pkmaIndexes.push(pokemon.index)
-      mapName.set(pokemon.index, pokemon.name)
-    }
-  })
+const pkmaIndexes = ["0000"]
 
-  logger.debug(mapName)
+Object.values(Pkm).forEach((pkm) => {
+  const pokemon = PokemonFactory.createPokemonFromName(pkm)
+  if (!pkmaIndexes.includes(pokemon.index)) {
+    pkmaIndexes.push(pokemon.index)
+    mapName.set(pokemon.index, pokemon.name)
+  }
+})
 
+logger.debug(mapName)
+
+// const credits = {};
+const durations = {}
+let missing = ""
+
+async function splitAll() {
   for (let i = 0; i < pkmaIndexes.length; i++) {
     const index = pkmaIndexes[i]
-    const progression = `${i}/${pkmaIndexes.length - 1} (${(
+
+    logger.debug(`${i}/${pkmaIndexes.length - 1} (${(
       (i * 100) /
       (pkmaIndexes.length - 1)
-    ).toFixed(2)}%) #${index} ${mapName.get(index)}`
-    const pathIndex = index.replace("-", "/")
+    ).toFixed(2)}%) #${index} ${mapName.get(index)}`)
+
+    splitIndex(index)    
+  }
+}
+
+export function loadDurationsFile(){
+  const rawdata = fs.readFileSync("sheets/durations.json", 'utf8')
+  Object.assign(durations, JSON.parse(rawdata))
+  logger.debug(`Loaded durations file, ${Object.keys(durations).length} durations already computed`)
+}
+
+export function saveDurationsFile(){
+  const fileA = fs.createWriteStream("sheets/durations.json")
+  fileA.on("error", function (err) {
+    logger.error(err)
+  })
+  fileA.write(JSON.stringify(durations))
+  fileA.end()
+  logger.debug(`Saved durations file, ${Object.keys(durations).length} durations entries`)
+}
+
+export function saveMissingFiles(){
+  const fileB = fs.createWriteStream("sheets/missing.txt")
+  fileB.on("error", function (err) {
+    logger.error(err)
+  })
+  fileB.write(missing)
+  fileB.end()
+}
+
+function removeBlue(cropImg) {
+  cropImg.scan(
+    0,
+    0,
+    cropImg.bitmap.width,
+    cropImg.bitmap.height,
+    (x, y, idx) => {
+      if (
+        cropImg.bitmap.data[idx] == 0 &&
+        cropImg.bitmap.data[idx + 1] == 0 &&
+        cropImg.bitmap.data[idx + 2] != 0
+      ) {
+        cropImg.bitmap.data[idx] = 0
+        cropImg.bitmap.data[idx + 1] = 0
+        cropImg.bitmap.data[idx + 2] = 0
+        cropImg.bitmap.data[idx + 3] = 0
+      }
+    }
+  )
+}
+
+function removeRed(cropImg) {
+  cropImg.scan(
+    0,
+    0,
+    cropImg.bitmap.width,
+    cropImg.bitmap.height,
+    (x, y, idx) => {
+      if (
+        cropImg.bitmap.data[idx] != 0 &&
+        cropImg.bitmap.data[idx + 1] == 0 &&
+        cropImg.bitmap.data[idx + 2] == 0
+      ) {
+        cropImg.bitmap.data[idx] = 0
+        cropImg.bitmap.data[idx + 1] = 0
+        cropImg.bitmap.data[idx + 2] = 0
+        cropImg.bitmap.data[idx + 3] = 0
+      }
+    }
+  )
+}
+
+function zeroPad(num: number) {
+  return ("0000" + num).slice(-4)
+}
+
+async function splitIndex(index: string){
+  const pathIndex = index.replace("-", "/")
     const shinyPad =
       pathIndex.length == 4 ? `${pathIndex}/0000/0001` : `${pathIndex}/0001`
     const allPads = [pathIndex, shinyPad]
@@ -163,7 +244,7 @@ async function split() {
                 mapName.get(index)
               )
             }
-            logger.debug(progression, shiny, anim, action)
+            logger.debug("split", index, shiny, anim, action)
           }
         }
       } catch (error) {
@@ -178,68 +259,16 @@ async function split() {
         missing += `${mapName.get(index)},${pad}/AnimData.xml\n`
       }
     }
-  }
+}
 
-  logger.debug(durations)
-  const fileA = fs.createWriteStream("sheets/durations.json")
-  fileA.on("error", function (err) {
-    logger.error(err)
+if(specificIndexToSplit){
+  loadDurationsFile()
+  splitIndex(specificIndexToSplit).then(() => {
+    saveDurationsFile()
   })
-  fileA.write(JSON.stringify(durations))
-  fileA.end()
-
-  const fileB = fs.createWriteStream("sheets/missing.txt")
-  fileB.on("error", function (err) {
-    logger.error(err)
+}  else {
+  splitAll().then(() => {
+    saveDurationsFile()
+    saveMissingFiles()
   })
-  fileB.write(missing)
-  fileB.end()
 }
-
-function removeBlue(cropImg) {
-  cropImg.scan(
-    0,
-    0,
-    cropImg.bitmap.width,
-    cropImg.bitmap.height,
-    (x, y, idx) => {
-      if (
-        cropImg.bitmap.data[idx] == 0 &&
-        cropImg.bitmap.data[idx + 1] == 0 &&
-        cropImg.bitmap.data[idx + 2] != 0
-      ) {
-        cropImg.bitmap.data[idx] = 0
-        cropImg.bitmap.data[idx + 1] = 0
-        cropImg.bitmap.data[idx + 2] = 0
-        cropImg.bitmap.data[idx + 3] = 0
-      }
-    }
-  )
-}
-
-function removeRed(cropImg) {
-  cropImg.scan(
-    0,
-    0,
-    cropImg.bitmap.width,
-    cropImg.bitmap.height,
-    (x, y, idx) => {
-      if (
-        cropImg.bitmap.data[idx] != 0 &&
-        cropImg.bitmap.data[idx + 1] == 0 &&
-        cropImg.bitmap.data[idx + 2] == 0
-      ) {
-        cropImg.bitmap.data[idx] = 0
-        cropImg.bitmap.data[idx + 1] = 0
-        cropImg.bitmap.data[idx + 2] = 0
-        cropImg.bitmap.data[idx + 3] = 0
-      }
-    }
-  )
-}
-
-function zeroPad(num: number) {
-  return ("0000" + num).slice(-4)
-}
-
-split()

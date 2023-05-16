@@ -135,7 +135,8 @@ import {
   SlackOffStrategy,
   DarkVoidStrategy,
   OverheatStrategy,
-  HypnosisStrategy
+  HypnosisStrategy,
+  MimicStrategy
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -276,7 +277,8 @@ export enum Ability {
   SLACK_OFF = "SLACK_OFF",
   DARK_VOID = "DARK_VOID",
   OVERHEAT = "OVERHEAT",
-  HYPNOSIS = "HYPNOSIS"
+  HYPNOSIS = "HYPNOSIS",
+  MIMIC = "MIMIC"
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -417,5 +419,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.SLACK_OFF]: new SlackOffStrategy(),
   [Ability.DARK_VOID]: new DarkVoidStrategy(),
   [Ability.OVERHEAT]: new OverheatStrategy(),
-  [Ability.HYPNOSIS]: new HypnosisStrategy()
+  [Ability.HYPNOSIS]: new HypnosisStrategy(),
+  [Ability.MIMIC]: new MimicStrategy()
 }
