@@ -46,4 +46,5 @@
   margin: 0 0.5em;
   color: rgb(255, 193, 7);
   max-width: 10ch;
+  word-break: break-word;
 }
