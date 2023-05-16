@@ -137,7 +137,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
 
     if(this.skill === Ability.MIMIC){
       this.status.tree = true
-      this.toAttackingState()
+      this.toIdleState()
     }
   }
 

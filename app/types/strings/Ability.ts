@@ -1674,7 +1674,7 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     fra: ""
   },
   [Ability.MIMIC]: {
-    eng: `Pretends to be a tree, does not attack but gain 2 ${Stat.ATK} instead (stackable). Starts attacking when ${Stat.MANA} bar is full, then Mimic copies the ability of the target.`,
+    eng: `Pretends to be a tree and does not attack but gain 2 ${Stat.ATK} per second instead (stackable).\nStarts attacking when ${Stat.MANA} bar is full, then Mimic copies the ability of the target.`,
     esp: "",
     prt: "",
     fra: ""
