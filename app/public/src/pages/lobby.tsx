@@ -141,14 +141,14 @@ export default function Lobby() {
                     pokemonConfig.listen(field, (value, previousValue) => {
                       dispatch(
                         changePokemonConfig({
-                          id: key,
+                          id: pokemonConfig.id,
                           field: field,
                           value: value
                         })
                       )
                     })
                   })
-                })
+                }, false)
                 dispatch(setUser(u))
                 setSearchedUser(u)
               }

@@ -186,9 +186,9 @@ export const lobbySlice = createSlice({
       action: PayloadAction<{ id: string; field: string; value: any }>
     ) => {
       const index = state.pokemonCollection.findIndex(
-        (p) => p.id == action.payload.id
+        (p) => p.id === action.payload.id
       )
-      if (index != -1) {
+      if (index !== -1) {
         state.pokemonCollection[index][action.payload.field] =
           action.payload.value
       }
