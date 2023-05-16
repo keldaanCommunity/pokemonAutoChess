@@ -1871,10 +1871,10 @@ export class Litwick extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.LITWICK,
-      [Synergy.FIRE, Synergy.GHOST],
-      Rarity.EPIC,
+      [Synergy.GHOST, Synergy.FIRE, Synergy.ARTIFICIAL],
+      Rarity.COMMON,
       Pkm.LAMPENT,
-      90,
+      50,
       5,
       1,
       1,
@@ -1883,7 +1883,7 @@ export class Litwick extends Pokemon {
       AttackType.PHYSICAL,
       1,
       100,
-      Ability.DEFAULT,
+      Ability.WHEEL_OF_FIRE,
       shiny,
       emotion,
       false
@@ -1895,10 +1895,10 @@ export class Lampent extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.LAMPENT,
-      [Synergy.FIRE, Synergy.GHOST],
-      Rarity.EPIC,
+      [Synergy.GHOST, Synergy.FIRE, Synergy.ARTIFICIAL],
+      Rarity.COMMON,
       Pkm.CHANDELURE,
-      130,
+      110,
       9,
       1,
       1,
@@ -1907,7 +1907,7 @@ export class Lampent extends Pokemon {
       AttackType.PHYSICAL,
       2,
       100,
-      Ability.DEFAULT,
+      Ability.WHEEL_OF_FIRE,
       shiny,
       emotion,
       false
@@ -1919,10 +1919,10 @@ export class Chandelure extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.CHANDELURE,
-      [Synergy.FIRE, Synergy.GHOST],
-      Rarity.EPIC,
+      [Synergy.GHOST, Synergy.FIRE, Synergy.ARTIFICIAL],
+      Rarity.COMMON,
       Pkm.DEFAULT,
-      230,
+      200,
       18,
       1,
       1,
@@ -1931,7 +1931,7 @@ export class Chandelure extends Pokemon {
       AttackType.PHYSICAL,
       3,
       100,
-      Ability.DEFAULT,
+      Ability.WHEEL_OF_FIRE,
       shiny,
       emotion,
       true

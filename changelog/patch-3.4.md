@@ -1,48 +1,33 @@
 # New Pokemons:
+- Hoothoot/Noctowl
 
-
-# Changes to Pokemon
-
-- Snorlax: New Slack off ability: Clear all negative status, heal 30/40/50% of the pokemon max HP and put the caster asleep for 5s
-- Slacking: New Slack off ability
-- Darkrai: New Dark void ability: Deals 30 special damage to all enemies. If any affected target was Silenced, they are put to sleep for 2s
-- Moltres: New Overheat ability: Deals 20 special damage to all enemies. Double damage if target is burn
-- Articuno: nerf mana: 100 → 120
-- Buff Frogadier and Greninja ; all the Greninja line is now 1-range
-- Nerf Salamence: range 2 → 1 ; adjusted def & spe def
+# Changes to Pokemon & Abilities
+- Nerf Dive: Freezing time reduced: ~~1.5/3/6~~ 1/2/4 damage increased ~~10/20/40~~ 15/30/60
+- Thief now correctly applies all the item effects of the items stolen (except synergy stones)
 
 # Changes to Synergies
-- Nerf Electric 4 & 6: 50% → 40%, 70% → 50% chance of triple attack
-- Nerf Monster 6 : 12 → 9 attack buff, 120 → 90 HP healed
-- New Fossil 6 synergy level: (6) Forgotten Power: Revive with 100% Health Points and +100% attack
+- Damage blocked by fighting synergy now also works for damage on shield
+- Fire burn chance & attack buff now only work if the attack was successful (not dodged / protected)
+- Dragon attack speed buff now only work if the attack was successful (not dodged / protected)
 
 # Changes to Items
-- Replace Zoom Lens by Scope Lens: Gains 25% critical chance. Critical hits steal 20 Mana from the target
-- Rocky Helmet no longer prevents "on critical" effects, such as fairy splash damage
-- Rocky Helmet now also negates bonus damage from critical special damage
-- Max Revive now gives Resurection status, and so can no longer be stacked with another Resurection from an ability
+
 
 # Changes to Stages
 
+
 # Gameplay
-- Add a Spectate mode for games
-- Mana generation from incoming damage is now based on incoming damage before reduction from def/spedef/items
-- Critical hits for abilities now also applies "on critical" effects, such as fairy splash damage
-- Critical chance for special damage is now computed once and no longer per target. Previously, an area of effect ability could trigger critical hit on only part of the targets.
-- Improve the accuracy of abilities Aqua Jet, Flame Charge, Volt Switch and Flame Wheel.
-- On-KO effects are now triggered even when target has Resurection, Fossil revive or Max revive
+- Damage dealt by a successful attack is minimum 1, even after blocking damage with Fighting synergy
+- On-hit effects (from items or synergies) now only works if the attack was successful (not dodged / protected)
+- Sleep duration reduction now only works if pokemon actually took damage (not dodged / protected)
+- Shell bell & human synergy heal now also takes into account the damage on shield
 
 # UI
-- Prevents picking a mythical when your bench is full. Add an informative message
-- Improvements to highlight current synergy levels
+
 
 # Bugfix
-- Just for fun games now give XP and unlock titles just like ranked games
-- Fix sacred sword damage
+- Fixed damage on shield being counted twice, shield should be much effective now
+- Castform now updates synergy level count after transformation
 
 # Misc
-- Allow to buy a booster with 500 shards of a pokemon
-- Add How to play section to wiki with tutorial videos (thanks @Batotsu !)
-- Add 8 new titles based on reaching a certain level: Rookie, Amateur, Veteran, Pro, Expert, Elite, Master, Grand Master
-- Accessing the Bot Builder now requires the title "Bot Builder" which is unlocked at level 10
-- When a room leader quits his lobby, room leader role is automatically given to next player
+- Add Alchemist title for maxing artificial synergy
