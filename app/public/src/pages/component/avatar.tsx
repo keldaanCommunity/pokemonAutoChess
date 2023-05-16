@@ -44,7 +44,7 @@ export default function Avatar(props: {
         <RoleBadge role={props.role} />
       </div>
       <div style={{ display: "flex", gap: "5px", alignItems: "center" }}>
-        <p style={{ margin: "0px", color: "#ffc107" }}>
+        <p className="player-title" style={{ margin: "0px" }}>
           {TitleName[props.title]}
         </p>
         {elo}

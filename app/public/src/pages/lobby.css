@@ -29,6 +29,20 @@
 .lobby .user-menu {
     grid-area: user;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.lobby .user-menu .react-tabs,
+.lobby .user-menu .react-tabs__tab-panel--selected {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.lobby .user-menu .react-tabs__tab-panel--selected {
+    overflow-y: auto;
 }
 
 .lobby .room-menu {
@@ -53,7 +67,12 @@
 .lobby h1 {    
     text-align: center;
     color: white;
-    font-size: 2vw;
+    font-size: 1.5vw;
+    margin: 0.25em 0;
+}
+
+.lobby h2 {
+    font-size: 1.25vw;
 }
 
 @media(max-width: 640px){

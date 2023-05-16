@@ -11,7 +11,7 @@ import {
   ban
 } from "../../../stores/NetworkStore"
 import { getAvatarSrc } from "../../../utils"
-import Avatar from "../avatar"
+import PlayerBox from "./player-box"
 
 export default function Search() {
   const dispatch = useAppDispatch()
@@ -20,6 +20,7 @@ export default function Search() {
   const [currentText, setCurrentText] = useState<string>("")
   const role = useAppSelector((state) => state.lobby.user?.role)
   const [t, setT] = useState<Title>(Title.ACE_TRAINER)
+
   const giveButton =
     user && role && role === Role.ADMIN ? (
       <button
@@ -43,6 +44,7 @@ export default function Search() {
         <p style={{ margin: "0px" }}>Ban User</p>
       </button>
     ) : null
+
   const modButton =
     user && role && role === Role.ADMIN ? (
       <button
@@ -54,6 +56,7 @@ export default function Search() {
         <p style={{ margin: "0px" }}>Set Moderator</p>
       </button>
     ) : null
+
   const titleButton =
     user && role && role === Role.ADMIN ? (
       <div style={{ display: "flex" }}>
@@ -94,66 +97,34 @@ export default function Search() {
           }}
         />
       </div>
-      <div
-        style={{
-          display: "flex",
-          gap: "10px",
-          flexWrap: "wrap",
-          marginTop: "10px",
-          justifyContent: "space-around"
-        }}
-      >
+
+      <ul className="search-suggestions">
         {suggestions.map((suggestion) => (
-          <div
-            style={{ display: "flex", flexFlow: "column", padding: "5px" }}
+          <li
             className="player-box clickable"
             key={suggestion.id}
             onClick={(e) => {
               dispatch(searchById(suggestion.id))
             }}
           >
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <img
-                style={{ width: "40px", height: "40px" }}
-                src={getAvatarSrc(suggestion.avatar)}
-              />
-            </div>
-            <div style={{ display: "flex", flexFlow: "column" }}>
-              <p style={{ margin: "0px", padding: "0px" }}>
-                {suggestion.name}{" "}
-              </p>
-            </div>
-          </div>
+            <img src={getAvatarSrc(suggestion.avatar)} className="pokemon-portrait" />
+            <p>{suggestion.name}</p>
+          </li>
         ))}
-      </div>
-      {user ? (
-        <div className="nes-container" style={{ marginTop: "1em" }}>
-          <Avatar
-            avatar={user.avatar}
-            name={user.name}
-            elo={user.elo}
-            title={user.title}
-            role={user.role}
-          />
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between"
-            }}
-          >
-            <p>
-              Level {user.level} ({user.exp} / 1000)
-            </p>
-            <p>Wins: {user.wins}</p>
-            {modButton}
-            {giveButton}
-            {titleButton}
-            {banButton}
-          </div>
+      </ul>
+
+      {user && (
+        <div className="player-history nes-container">
+          <PlayerBox user={user} />
+            
+          {modButton}
+          {giveButton}
+          {titleButton}
+          {banButton}
+          
           <History history={user.history} />
         </div>
-      ) : null}
+      )}
     </div>
   )
 }

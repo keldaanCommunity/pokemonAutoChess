@@ -21,7 +21,7 @@ export default function InlineAvatar(props: {
         style={{ width: "40px", height: "40px" }}
         src={getAvatarSrc(props.avatar)}
       />
-      {props.title && <span style={{ color: "#ffc107" }}>{TitleName[props.title]}</span>}
+      {props.title && <span className="player-title">{TitleName[props.title]}</span>}
       <span style={{ overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis", padding: "0 0.5em" }}>
         {props.name}
       </span>
