@@ -79,6 +79,8 @@ import { getRankLabel } from "../../../types/strings/Strings"
 import GameScene from "../game/scenes/game-scene"
 import { toast } from "react-toastify"
 import { logger } from "../../../utils/logger"
+import { MAX_PLAYERS_PER_LOBBY, RequiredStageLevelForXpElligibility } from "../../../types/Config"
+
 let gameContainer: GameContainer
 
 function playerClick(id: string) {
@@ -120,7 +122,7 @@ export default function Game() {
   const MAX_ATTEMPS_RECONNECT = 2
 
   async function leave() {
-    const savePlayers = new Array<ISimplePlayer>()
+    const savedPlayers = new Array<ISimplePlayer>()
 
     const token = await firebase.auth().currentUser?.getIdToken()
 
@@ -128,21 +130,22 @@ export default function Game() {
       gameContainer.game.destroy(true)
     }
 
-    if (
-      room &&
-      room.state &&
-      room.state.players &&
-      room.state.players.size > 0
-    ) {
-      room.state.players.forEach((player) =>
-        savePlayers.push(gameContainer.transformToSimplePlayer(player))
+    const nbPlayers = room?.state.players.size ?? 0
+
+    if (nbPlayers > 0) {
+      room?.state.players.forEach((player) =>
+        savedPlayers.push(gameContainer.transformToSimplePlayer(player))
       )
     }
 
+    const elligibleToXP = nbPlayers >= MAX_PLAYERS_PER_LOBBY && (room?.state.stageLevel ?? 0) >= RequiredStageLevelForXpElligibility
+    const elligibleToELO = elligibleToXP && !room?.state.noElo
+
     const r: Room<AfterGameState> = await client.create("after-game", {
-      players: savePlayers,
+      players: savedPlayers,
       idToken: token,
-      noElo: room?.state.noElo
+      elligibleToXP,
+      elligibleToELO
     })
     localStorage.setItem("cachedReconnectionToken", r.reconnectionToken)
     await room?.leave()

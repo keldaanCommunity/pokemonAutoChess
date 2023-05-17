@@ -721,18 +721,15 @@ export class OnJoinCommand extends Command<
             )
           }
 
-          // logger.debug(this.state.players.get(client.auth.uid).tileset);
           this.state.shop.assignShop(player)
           if (this.state.players.size >= MAX_PLAYERS_PER_LOBBY) {
-            // logger.debug('game elligible to xp');
-            this.state.elligibleToXP = true
-            let c = 0
+            let nbHumanPlayers = 0
             this.state.players.forEach((p) => {
               if (!p.isBot) {
-                c += 1
+                nbHumanPlayers += 1
               }
             })
-            if (c === 1) {
+            if (nbHumanPlayers === 1) {
               this.state.players.forEach((p) => {
                 if (!p.isBot) {
                   p.titles.add(Title.LONE_WOLF)
