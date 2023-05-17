@@ -25,7 +25,6 @@ export default class GameState extends Schema {
   time = StageDuration[0] * 1000
   botManager: BotManager = new BotManager()
   shop: Shop = new Shop()
-  elligibleToXP = false
   id: Dungeon
   design: Design
   tilemap: DesignTiled | undefined

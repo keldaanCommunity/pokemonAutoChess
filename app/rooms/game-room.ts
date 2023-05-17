@@ -22,7 +22,7 @@ import {
   OnDragDropCombineCommand,
   OnPokemonPropositionCommand
 } from "./commands/game-commands"
-import { ExpPlace } from "../types/Config"
+import { ExpPlace, MAX_PLAYERS_PER_LOBBY, RequiredStageLevelForXpElligibility } from "../types/Config"
 import { Item, BasicItems } from "../types/enum/Item"
 import PokemonFactory from "../models/pokemon-factory"
 import EloRank from "elo-rank"
@@ -425,7 +425,6 @@ export default class GameRoom extends Room<GameState> {
 
   onDispose() {
     // logger.info(`dispose game room`);
-    const requiredStageLevel = process.env.MODE == "dev" ? 0 : 10
     this.state.endTime = Date.now()
     const ps = new Array<components["schemas"]["GameHistory"]>()
     this.state.players.forEach((p) => {
@@ -441,10 +440,10 @@ export default class GameRoom extends Room<GameState> {
       players: ps
     })
 
-    if (
-      this.state.stageLevel >= requiredStageLevel &&
-      this.state.elligibleToXP === true
-    ) {
+    const elligibleToXP = this.state.players.size >= MAX_PLAYERS_PER_LOBBY && this.state.stageLevel >= RequiredStageLevelForXpElligibility
+    const elligibleToELO = elligibleToXP && !this.state.noElo
+
+    if (elligibleToXP) {
       this.state.players.forEach((player) => {
         if (player.isBot) {
           BOT.find({ id: player.id }, (err, bots) => {
@@ -520,32 +519,33 @@ export default class GameRoom extends Room<GameState> {
                 player.titles.add(Title.GRAND_MASTER)
               }
 
-              if (usr.elo) {
-                if(this.state.noElo === false){
-                  const elo = Math.max(0, this.computeElo(player, rank, usr.elo))
-                  if (elo) {
-                    if (elo > 1100) {
-                      player.titles.add(Title.GYM_TRAINER)
-                    }
-                    if (elo > 1200) {
-                      player.titles.add(Title.GYM_CHALLENGER)
-                    }
-                    if (elo > 1400) {
-                      player.titles.add(Title.GYM_LEADER)
-                    }
-                    usr.elo = elo
+              if (usr.elo && elligibleToELO) {
+                const elo = Math.max(
+                  0,
+                  this.computeElo(player, rank, usr.elo)
+                )
+                if (elo) {
+                  if (elo > 1100) {
+                    player.titles.add(Title.GYM_TRAINER)
                   }
-
-                  DetailledStatistic.create({
-                    time: Date.now(),
-                    name: dbrecord.name,
-                    pokemons: dbrecord.pokemons,
-                    rank: dbrecord.rank,
-                    avatar: dbrecord.avatar,
-                    playerId: dbrecord.id,
-                    elo: elo
-                  })
+                  if (elo > 1200) {
+                    player.titles.add(Title.GYM_CHALLENGER)
+                  }
+                  if (elo > 1400) {
+                    player.titles.add(Title.GYM_LEADER)
+                  }
+                  usr.elo = elo
                 }
+
+                DetailledStatistic.create({
+                  time: Date.now(),
+                  name: dbrecord.name,
+                  pokemons: dbrecord.pokemons,
+                  rank: dbrecord.rank,
+                  avatar: dbrecord.avatar,
+                  playerId: dbrecord.id,
+                  elo: elo,
+                })
               }
 
               if (player.life === 100 && rank === 1) {
@@ -554,7 +554,7 @@ export default class GameRoom extends Room<GameState> {
 
               if (player.rerollCount > 60) {
                 player.titles.add(Title.GAMBLER)
-              }                
+              }
 
               if (usr.titles === undefined) {
                 usr.titles = []

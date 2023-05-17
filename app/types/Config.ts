@@ -98,6 +98,8 @@ export const TypeTrigger: { [key in Synergy]: number[] } = {
   [Synergy.BABY]: [3, 5]
 }
 
+export const RequiredStageLevelForXpElligibility = 10
+
 export const ExpPlace = [700, 500, 400, 300, 200, 150, 100, 0]
 
 export const RarityColor: { [key in Rarity]: string } = {
