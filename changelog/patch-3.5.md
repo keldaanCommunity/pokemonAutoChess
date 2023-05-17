@@ -13,7 +13,7 @@
 - Fire Gem buff: Attacks do double damage on Shields and deal 10% of target max HP as additional damage
 
 # Changes to Stages
-
+- Round damage formula changed: defeats on early game are a little more punitive, and a little less in late game. Beware, hatchers !
 
 # Gameplay
 
