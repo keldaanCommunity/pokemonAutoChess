@@ -9,7 +9,7 @@
 # Changes to Synergies
 
 # Changes to Items
-
+- Fire Gem buff: Attacks do double damage on Shields and deal 10% of target max HP as additional damage
 
 # Changes to Stages
 

@@ -123,7 +123,7 @@ export default class PokemonState {
         }
 
         if (attacker && attacker.items.has(Item.FIRE_GEM)) {
-          reducedDamage = Math.ceil(reducedDamage + pokemon.hp * 0.08)
+          reducedDamage = Math.ceil(reducedDamage + pokemon.hp * 0.1)
         }
 
         if (
@@ -181,9 +181,17 @@ export default class PokemonState {
         let residualDamage = reducedDamage
 
         if (pokemon.shield > 0) {
-          takenDamage += Math.min(pokemon.shield, reducedDamage)
-          residualDamage = Math.max(0, reducedDamage - pokemon.shield)
-          pokemon.shield = Math.max(0, pokemon.shield - reducedDamage)
+          let damageOnShield = reducedDamage
+          if (attacker && attacker.items.has(Item.FIRE_GEM)) {            
+            damageOnShield *= 2 // double damage on shield
+          }
+          if(damageOnShield > pokemon.shield){
+            damageOnShield = pokemon.shield
+          }
+
+          takenDamage += damageOnShield
+          pokemon.shield = pokemon.shield - damageOnShield
+          residualDamage = Math.max(0, reducedDamage - damageOnShield)
         }
 
         if (pokemon.skill == Ability.WONDER_GUARD) {
