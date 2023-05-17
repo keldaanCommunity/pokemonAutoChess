@@ -1290,6 +1290,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
           if (!player.shopLocked) {
             this.state.shop.assignShop(player)
           } else {
+            this.state.shop.refillShop(player)
             player.shopLocked = false
           }
         }

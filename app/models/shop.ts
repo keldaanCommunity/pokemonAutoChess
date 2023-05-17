@@ -96,17 +96,21 @@ export default class Shop {
     }
   }
 
+  refillShop(player: Player) {
+    // No need to release pokemons since they won't be changed
+    player.shop = player.shop.map(pokemon =>{
+      if(pokemon != Pkm.MAGIKARP){
+        return pokemon
+      } 
+      return this.pickPokemon(player)
+    } )
+  }
+
   assignShop(player: Player) {
     player.shop.forEach((pkm) => this.releasePokemon(pkm))
 
     for (let i = 0; i < 6; i++) {
-      const seed = Math.random()
-      if (seed < DITTO_RATE) {
-        player.shop[i] = Pkm.DITTO
-      } else {
-        let pokemon = this.pickPokemon(player)
-        player.shop[i] = pokemon
-      }
+      player.shop[i] = this.pickPokemon(player)
     }
   }
 
@@ -221,6 +225,12 @@ export default class Shop {
         break
       }
     }
+
+    const ditto_seed = Math.random()
+    if (ditto_seed < DITTO_RATE) {
+      pokemon = Pkm.DITTO
+    }
+
     return pokemon
   }
 }
