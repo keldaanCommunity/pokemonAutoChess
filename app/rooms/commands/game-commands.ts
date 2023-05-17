@@ -1323,7 +1323,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
               let pokemonEvolved
               pokemonEvolved = PokemonFactory.createPokemonFromName(
                 pokemon.evolution,
-                player.pokemonCollection.get(pokemon.index)
+                player.pokemonCollection.get(PkmIndex[pokemon.evolution])
               )
 
               pokemon.items.forEach((i) => {
