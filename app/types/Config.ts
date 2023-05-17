@@ -145,7 +145,7 @@ export const Probability: { [key: number]: number[] } = {
 }
 
 export const EvolutionTime = {
-  EGG_HATCH: 3,
+  EGG_HATCH: 4,
   EVOLVE_HATCH: 4
 }
 

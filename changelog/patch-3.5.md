@@ -7,6 +7,7 @@
 - Leech Life now also hits current target
 
 # Changes to Synergies
+- Baby nerf: Egg hatch time increased: 3 → 4 stages
 
 # Changes to Items
 - Fire Gem buff: Attacks do double damage on Shields and deal 10% of target max HP as additional damage
