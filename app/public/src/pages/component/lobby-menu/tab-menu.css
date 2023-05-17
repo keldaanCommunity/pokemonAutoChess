@@ -12,3 +12,73 @@
     min-width: 2ch;
     text-align: center;
 }
+
+ul.titles {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+}
+
+ul.titles > li {
+    display: flex;
+    gap: 0.5em;
+    border: 4px solid black;
+    border-radius: 8px;
+    margin: 0.1em 0;
+    padding: 0.5em;
+    list-style: none;
+    background-color: #54596b;
+}
+
+ul.titles > li span {
+    color: #e76e55;
+}
+
+ul.titles > li p {
+    color: #a0a0a0;
+}
+
+ul.titles > li.unlocked {
+    background-color: #61738a;
+}
+
+ul.titles > li.unlocked span {
+    color: #92cc41;
+}
+
+ul.titles > li.unlocked p {
+    color: white;
+}
+
+ul.titles > li.selected {
+    background-color: #109fff;
+}
+
+ul.titles > li.selected span {
+    color: #ffc107;
+}
+
+ul.titles > li.selected p {
+    color: white;
+}
+
+.search-suggestions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    justify-content: space-around;
+}
+
+.search-suggestions .player-box {
+    display: flex;
+    flex-flow: column;
+    padding: 5px;
+}
+
+.search-suggestions .player-box img {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto;
+}

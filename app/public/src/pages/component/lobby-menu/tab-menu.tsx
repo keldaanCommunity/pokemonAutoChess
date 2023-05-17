@@ -19,7 +19,7 @@ export default function TabMenu() {
     <Tabs
       className="nes-container user-menu hidden-scrollable"
       selectedIndex={tabIndex}
-      onSelect={(i: number) => dispatch(setTabIndex(i))}
+      onSelect={(i: number) => { dispatch(setTabIndex(i)) }}
     >
       <TabList>
         <Tab>Elo</Tab>

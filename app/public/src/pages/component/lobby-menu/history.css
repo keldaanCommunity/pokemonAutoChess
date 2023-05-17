@@ -1,21 +1,22 @@
-.game-history {
-  padding: 0 0 20px 0;
-  overflow-x: auto;
+.game-history-list {
+  gap: 0.5em;
 }
 
-.game-history p:first-child {
-  font-size: 140%;
+.game-history-list h2 {
+  margin: 0.5em 0;
 }
 
-.game-history tr {
-  border-bottom: 4px solid white;
+.game-history.nes-container {
+  display: grid;
+  align-items: center;
+  gap: 0.5em;
+  grid-template-columns: 4ch 8ch 1fr;
+  background-color: #54596b;
+  margin: 0.25em 0;
+  padding: 0.25em;
 }
 
-.game-history th {
-  text-align: center;
+.game-history .player-team-pokemons {
+  padding-left: 0;
+  padding-bottom: 10px;
 }
-
-.game-history td {
-  padding: 0 0.25em;
-}
-

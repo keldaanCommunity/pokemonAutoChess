@@ -81,7 +81,7 @@ export default function GamePlayerInformations() {
         </div>
         <div className="nes-container player-information">
           <img src={getAvatarSrc(avatar)} className="pokemon-portrait" />
-          <p style={{ margin: "0px", color: "#ffc107" }}>{TitleName[title]}</p>
+          <p className="player-title" style={{ margin: "0px" }}>{TitleName[title]}</p>
           <p style={{ marginLeft: "5px", color: "white", textAlign: "center" }}>{name}</p>
         </div>
       </div>
