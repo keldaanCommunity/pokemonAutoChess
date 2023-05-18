@@ -939,34 +939,17 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   }
 
   computePlayerDamage(
-    redTeam: MapSchema<IPokemonEntity>,
-    playerLevel: number,
+    opponentTeam: MapSchema<IPokemonEntity>,
     stageLevel: number
   ) {
-    let damage = playerLevel - 2
-    let multiplier = 1
-    if (stageLevel >= 10) {
-      multiplier = 1.25
-    } else if (stageLevel >= 15) {
-      multiplier = 1.5
-    } else if (stageLevel >= 20) {
-      multiplier = 2.0
-    } else if (stageLevel >= 25) {
-      multiplier = 3
-    } else if (stageLevel >= 30) {
-      multiplier = 5
-    } else if (stageLevel >= 35) {
-      multiplier = 8
-    }
-    damage = damage * multiplier
-    if (redTeam.size > 0) {
-      redTeam.forEach((pokemon, key) => {
+    let damage = Math.ceil(stageLevel/2)
+    if (opponentTeam.size > 0) {
+      opponentTeam.forEach((pokemon) => {
         if (!pokemon.isClone) {
           damage += pokemon.stars
         }
       })
     }
-    damage = Math.max(Math.round(damage), 0)
     return damage
   }
 
@@ -1017,7 +1000,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         ) {
           const playerDamage = this.computePlayerDamage(
             player.simulation.redTeam,
-            player.experienceManager.level,
             this.state.stageLevel
           )
           player.life -= playerDamage
