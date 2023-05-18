@@ -186,10 +186,15 @@ export default class Shop {
 
   pickPokemon(player: Player) {
     const playerProbality = Probability[player.experienceManager.level]
-    const seed = Math.random()
+    const ditto_seed = Math.random()
+    const rarity_seed = Math.random()
     let pokemon = Pkm.MAGIKARP
     let threshold = 0
     const finals = new Array<Pkm>()
+    
+    if (ditto_seed < DITTO_RATE) {
+      return Pkm.DITTO
+    }
 
     player.board.forEach((pokemon: Pokemon) => {
       if (pokemon.final) {
@@ -199,7 +204,7 @@ export default class Shop {
 
     for (let i = 0; i < playerProbality.length; i++) {
       threshold += playerProbality[i]
-      if (seed < threshold) {
+      if (rarity_seed < threshold) {
         switch (i) {
           case 0:
             pokemon = this.getRandomPokemonFromPool(this.commonPool, finals)
@@ -218,17 +223,12 @@ export default class Shop {
             break
           default:
             logger.error(
-              `error in shop while picking seed = ${seed}, threshold = ${threshold}, index = ${i}`
+              `error in shop while picking seed = ${rarity_seed}, threshold = ${threshold}, index = ${i}`
             )
             break
         }
         break
       }
-    }
-
-    const ditto_seed = Math.random()
-    if (ditto_seed < DITTO_RATE) {
-      pokemon = Pkm.DITTO
     }
 
     return pokemon
