@@ -100,12 +100,13 @@ export default class Shop {
     player.shop.forEach((pkm) => this.releasePokemon(pkm))
 
     for (let i = 0; i < 6; i++) {
-      let pokemon = this.pickPokemon(player)
       const seed = Math.random()
       if (seed < DITTO_RATE) {
-        pokemon = Pkm.DITTO
+        player.shop[i] = Pkm.DITTO
+      } else {
+        let pokemon = this.pickPokemon(player)
+        player.shop[i] = pokemon
       }
-      player.shop[i] = pokemon
     }
   }
 
