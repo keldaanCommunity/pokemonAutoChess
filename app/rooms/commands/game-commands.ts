@@ -228,6 +228,9 @@ export class OnDragDropCommand extends Command<
               PokemonFactory.getPokemonBaseEvolution(pokemonToClone.name),
               player.pokemonCollection.get(PkmIndex[pokemonToClone.name])
             )
+            pokemon.items.forEach((it) => {
+              player.items.add(it)
+            })
             player.board.delete(detail.id)
             const position =
               this.room.getFirstAvailablePositionInBench(playerId)
