@@ -190,6 +190,92 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       }
     })
 
+    this.onMessage(Transfer.DELETE_BOT_DATABASE, async (client, message) => {
+      try {
+        const user = this.state.users.get(client.auth.uid)
+        if (
+          user &&
+          (user.role === Role.ADMIN ||
+            user.role === Role.BOT_MANAGER ||
+            user.role === Role.MODERATOR)
+        ) {
+          const id = message
+          client.send(Transfer.BOT_DATABASE_LOG, `deleting bot id ${id}`)
+          const resultDelete = await BotV2.deleteOne({ id: id })
+          client.send(
+            Transfer.BOT_DATABASE_LOG,
+            JSON.stringify(resultDelete, null, 2)
+          )
+          this.bots.delete(id)
+          this.broadcast(Transfer.REQUEST_BOT_LIST, this.createBotList())
+        }
+      } catch (error) {
+        logger.error(error)
+        client.send(Transfer.BOT_DATABASE_LOG, JSON.stringify(error))
+      }
+    })
+
+    this.onMessage(Transfer.ADD_BOT_DATABASE, async (client, message) => {
+      try {
+        const user = this.state.users.get(client.auth.uid)
+        if (
+          user &&
+          (user.role === Role.ADMIN ||
+            user.role === Role.BOT_MANAGER ||
+            user.role === Role.MODERATOR)
+        ) {
+          const id = message.slice(21)
+          client.send(Transfer.BOT_DATABASE_LOG, `retrieving id : ${id} ...`)
+          client.send(Transfer.BOT_DATABASE_LOG, "retrieving data ...")
+          const data = await this.pastebin?.getPaste(id, false)
+          if (data) {
+            client.send(Transfer.BOT_DATABASE_LOG, "parsing JSON data ...")
+            const json = JSON.parse(data)
+            const resultDelete = await BotV2.deleteMany({
+              avatar: json.avatar,
+              author: json.author
+            })
+            const keys = new Array<string>()
+            this.bots.forEach((b) => {
+              if (b.avatar === json.avatar && b.author === json.author) {
+                keys.push(b.id)
+              }
+            })
+            keys.forEach((k) => {
+              this.bots.delete(k)
+            })
+            client.send(
+              Transfer.BOT_DATABASE_LOG,
+              JSON.stringify(resultDelete, null, 2)
+            )
+            client.send(
+              Transfer.BOT_DATABASE_LOG,
+              `creating Bot ${json.avatar} by ${json.author}...`
+            )
+            const resultCreate = await BotV2.create({
+              name: json.name,
+              avatar: json.avatar,
+              elo: json.elo ? json.elo : 1200,
+              author: json.author,
+              steps: json.steps,
+              id: nanoid()
+            })
+
+            this.bots.set(resultCreate.id, resultCreate)
+            this.broadcast(Transfer.REQUEST_BOT_LIST, this.createBotList())
+          } else {
+            client.send(
+              Transfer.BOT_DATABASE_LOG,
+              `no pastebin found with given url ${message}`
+            )
+          }
+        }
+      } catch (error) {
+        logger.error(error)
+        client.send(Transfer.BOT_DATABASE_LOG, JSON.stringify(error))
+      }
+    })
+
     this.onMessage(Transfer.BAN, (client, message) => {
       try {
         const user = this.state.users.get(client.auth.uid)
@@ -324,6 +410,28 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       }
     })
 
+    this.onMessage(Transfer.SET_BOT_MANAGER, (client, uid: string) => {
+      try {
+        const u = this.state.users.get(client.auth.uid)
+        const targetUser = this.state.users.get(uid)
+        // logger.debug(u.role, uid)
+        if (u && u.role === Role.ADMIN) {
+          UserMetadata.findOne({ uid: uid }, (err, user) => {
+            if (user) {
+              user.role = Role.BOT_MANAGER
+              user.save()
+
+              if (targetUser) {
+                targetUser.role = user.role
+              }
+            }
+          })
+        }
+      } catch (error) {
+        logger.error(error)
+      }
+    })
+
     this.onMessage(Transfer.BOT_CREATION, (client, message) => {
       try {
         const bot = message.bot
@@ -363,23 +471,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
 
     this.onMessage(Transfer.REQUEST_BOT_LIST, (client) => {
       try {
-        const botList = new Array<{
-          name: string
-          avatar: string
-          author: string
-          id: string
-        }>()
-
-        this.bots.forEach((b) => {
-          botList.push({
-            name: b.name,
-            avatar: b.avatar,
-            id: b.id,
-            author: b.author
-          })
-        })
-
-        client.send(Transfer.REQUEST_BOT_LIST, botList)
+        client.send(Transfer.REQUEST_BOT_LIST, this.createBotList())
       } catch (error) {
         logger.error(error)
       }
@@ -1037,5 +1129,24 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     } catch (error) {
       logger.error(error)
     }
+  }
+
+  createBotList() {
+    const botList = new Array<{
+      name: string
+      avatar: string
+      author: string
+      id: string
+    }>()
+
+    this.bots.forEach((b) => {
+      botList.push({
+        name: b.name,
+        avatar: b.avatar,
+        id: b.id,
+        author: b.author
+      })
+    })
+    return botList
   }
 }
