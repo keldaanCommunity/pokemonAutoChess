@@ -158,7 +158,9 @@ export const networkSlice = createSlice({
       state.game?.send(Transfer.ITEM, { id: action.payload })
     },
     gameStartRequest: (state, action: PayloadAction<string>) => {
-      state.preparation?.send(Transfer.GAME_START_REQUEST, { token: action.payload })
+      state.preparation?.send(Transfer.GAME_START_REQUEST, {
+        token: action.payload
+      })
     },
     gameStart: (state, action: PayloadAction<string>) => {
       state.preparation?.send(Transfer.GAME_START, { id: action.payload })
@@ -181,7 +183,7 @@ export const networkSlice = createSlice({
     ) => {
       state.lobby?.send(Transfer.BUY_EMOTION, action.payload)
     },
-    buyBooster: (state, action: PayloadAction<{ index: string; }>) => {
+    buyBooster: (state, action: PayloadAction<{ index: string }>) => {
       state.lobby?.send(Transfer.BUY_BOOSTER, action.payload)
     },
     openBooster: (state) => {
@@ -211,6 +213,9 @@ export const networkSlice = createSlice({
     setModerator: (state, action: PayloadAction<string>) => {
       state.lobby?.send(Transfer.SET_MODERATOR, action.payload)
     },
+    setBotManager: (state, action: PayloadAction<string>) => {
+      state.lobby?.send(Transfer.SET_BOT_MANAGER, action.payload)
+    },
     giveTitle: (
       state,
       action: PayloadAction<{ uid: string; title: Title }>
@@ -222,11 +227,19 @@ export const networkSlice = createSlice({
     },
     ban: (state, action: PayloadAction<string>) => {
       state.lobby?.send(Transfer.BAN, action.payload)
+    },
+    deleteBotDatabase: (state, action: PayloadAction<string>) => {
+      state.lobby?.send(Transfer.DELETE_BOT_DATABASE, action.payload)
+    },
+    addBotDatabase: (state, action: PayloadAction<string>) => {
+      state.lobby?.send(Transfer.ADD_BOT_DATABASE, action.payload)
     }
   }
 })
 
 export const {
+  deleteBotDatabase,
+  addBotDatabase,
   ban,
   pokemonPropositionClick,
   requestLeaderboard,
@@ -236,6 +249,7 @@ export const {
   removeMessage,
   giveBooster,
   setModerator,
+  setBotManager,
   broadcastEmote,
   openBooster,
   changeSelectedEmotion,

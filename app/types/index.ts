@@ -79,21 +79,24 @@ export enum Role {
   ADMIN = "ADMIN",
   MODERATOR = "MODERATOR",
   BASIC = "BASIC",
-  BOT = "BOT"
+  BOT = "BOT",
+  BOT_MANAGER = "BOT_MANAGER"
 }
 
 export const RoleName: { [key in Role]: string } = {
   [Role.ADMIN]: "Admin",
   [Role.MODERATOR]: "Mod",
   [Role.BASIC]: "Basic",
-  [Role.BOT]: "Bot"
+  [Role.BOT]: "Bot",
+  [Role.BOT_MANAGER]: "Bot Manager"
 }
 
 export const RoleColor: { [key in Role]: string } = {
   [Role.ADMIN]: "success",
   [Role.MODERATOR]: "primary",
   [Role.BASIC]: "",
-  [Role.BOT]: "secondary"
+  [Role.BOT]: "secondary",
+  [Role.BOT_MANAGER]: "danger"
 }
 
 export enum Transfer {
@@ -143,6 +146,7 @@ export enum Transfer {
   REMOVE_MESSAGE = "REMOVE_MESSAGE",
   GIVE_BOOSTER = "GIVE_BOOSTER",
   SET_MODERATOR = "SET_MODERATOR",
+  SET_BOT_MANAGER = "SET_BOT_MANAGER",
   GIVE_TITLE = "GIVE_TITLE",
   REQUEST_LEADERBOARD = "REQUEST_LEADERBOARD",
   REQUEST_LEVEL_LEADERBOARD = "REQUEST_LEVEL_LEADERBOARD",
@@ -161,7 +165,10 @@ export enum Transfer {
   PLAYER_DAMAGE = "PLAYER_DAMAGE",
   ROOMS = "ROOMS",
   ADD_ROOM = "ADD_ROOM",
-  REMOVE_ROOM = "REMOVE_ROOM"
+  REMOVE_ROOM = "REMOVE_ROOM",
+  ADD_BOT_DATABASE = "ADD_BOT_DATABASE",
+  DELETE_BOT_DATABASE = "DELETE_BOT_DATABASE",
+  BOT_DATABASE_LOG = "BOT_DATABASE_LOG"
 }
 
 export enum AttackSprite {

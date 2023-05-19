@@ -8,7 +8,8 @@ import {
   giveBooster,
   setModerator,
   giveTitle,
-  ban
+  ban,
+  setBotManager
 } from "../../../stores/NetworkStore"
 import { getAvatarSrc } from "../../../utils"
 import PlayerBox from "./player-box"
@@ -54,6 +55,18 @@ export default function Search() {
         }}
       >
         <p style={{ margin: "0px" }}>Set Moderator</p>
+      </button>
+    ) : null
+
+  const botManagerButton =
+    user && role && role === Role.ADMIN ? (
+      <button
+        className="bubbly orange"
+        onClick={() => {
+          dispatch(setBotManager(user.id))
+        }}
+      >
+        <p style={{ margin: "0px" }}>Set Bot Manager</p>
       </button>
     ) : null
 
@@ -107,7 +120,10 @@ export default function Search() {
               dispatch(searchById(suggestion.id))
             }}
           >
-            <img src={getAvatarSrc(suggestion.avatar)} className="pokemon-portrait" />
+            <img
+              src={getAvatarSrc(suggestion.avatar)}
+              className="pokemon-portrait"
+            />
             <p>{suggestion.name}</p>
           </li>
         ))}
@@ -116,12 +132,13 @@ export default function Search() {
       {user && (
         <div className="player-history nes-container">
           <PlayerBox user={user} />
-            
+
           {modButton}
+          {botManagerButton}
           {giveButton}
           {titleButton}
           {banButton}
-          
+
           <History history={user.history} />
         </div>
       )}
