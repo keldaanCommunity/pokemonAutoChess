@@ -96,21 +96,17 @@ export default class Shop {
     }
   }
 
-  refillShop(player: Player) {
-    // No need to release pokemons since they won't be changed
-    player.shop = player.shop.map((pokemon) =>{
-      if(pokemon != Pkm.MAGIKARP && pokemon != Pkm.DEFAULT){
-        return pokemon
-      } 
-      return this.pickPokemon(player)
-    } )
-  }
-
   assignShop(player: Player) {
     player.shop.forEach((pkm) => this.releasePokemon(pkm))
 
     for (let i = 0; i < 6; i++) {
-      player.shop[i] = this.pickPokemon(player)
+      const seed = Math.random()
+      if (seed < DITTO_RATE) {
+        player.shop[i] = Pkm.DITTO
+      } else {
+        let pokemon = this.pickPokemon(player)
+        player.shop[i] = pokemon
+      }
     }
   }
 
@@ -186,15 +182,10 @@ export default class Shop {
 
   pickPokemon(player: Player) {
     const playerProbality = Probability[player.experienceManager.level]
-    const ditto_seed = Math.random()
-    const rarity_seed = Math.random()
+    const seed = Math.random()
     let pokemon = Pkm.MAGIKARP
     let threshold = 0
     const finals = new Array<Pkm>()
-    
-    if (ditto_seed < DITTO_RATE) {
-      return Pkm.DITTO
-    }
 
     player.board.forEach((pokemon: Pokemon) => {
       if (pokemon.final) {
@@ -204,7 +195,7 @@ export default class Shop {
 
     for (let i = 0; i < playerProbality.length; i++) {
       threshold += playerProbality[i]
-      if (rarity_seed < threshold) {
+      if (seed < threshold) {
         switch (i) {
           case 0:
             pokemon = this.getRandomPokemonFromPool(this.commonPool, finals)
@@ -223,14 +214,13 @@ export default class Shop {
             break
           default:
             logger.error(
-              `error in shop while picking seed = ${rarity_seed}, threshold = ${threshold}, index = ${i}`
+              `error in shop while picking seed = ${seed}, threshold = ${threshold}, index = ${i}`
             )
             break
         }
         break
       }
     }
-
     return pokemon
   }
 }
