@@ -91,22 +91,22 @@ export const EffectDescription: {
   [key in Effect]: { eng: string; esp: string; fra: string }
 } = {
   [Effect.STAMINA]: {
-    eng: `Gain 20 ${Stat.SHIELD}`,
+    eng: `Gain 15 ${Stat.SHIELD}`,
     esp: `20 ${Stat.SHIELD}`,
     fra: `20 ${Stat.SHIELD}`
   },
   [Effect.STRENGTH]: {
-    eng: `Gain 40 ${Stat.SHIELD}`,
+    eng: `Gain 30 ${Stat.SHIELD}`,
     esp: `40 ${Stat.SHIELD}`,
     fra: `40 ${Stat.SHIELD}`
   },
   [Effect.ROCK_SMASH]: {
-    eng: `Gain 60 ${Stat.SHIELD}`,
+    eng: `Gain 45 ${Stat.SHIELD}`,
     esp: `60 ${Stat.SHIELD}`,
     fra: `60 ${Stat.SHIELD}`
   },
   [Effect.PURE_POWER]: {
-    eng: `Gain 80 ${Stat.SHIELD}`,
+    eng: `Gain 60 ${Stat.SHIELD}`,
     esp: `80 ${Stat.SHIELD}`,
     fra: `80 ${Stat.SHIELD}`
   },
@@ -499,5 +499,5 @@ export const EffectDescription: {
     eng: `Next attack will deal additional ${Damage.SPECIAL}`,
     esp: ``,
     fra: ``
-  },
+  }
 }
