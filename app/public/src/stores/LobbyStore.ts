@@ -23,6 +23,7 @@ import { IPokemonsStatistic } from "../../../models/mongo-models/pokemons-statis
 import { playSound, SOUNDS } from "../pages/utils/audio"
 
 interface IUserLobbyState {
+  botLogDatabase: string[]
   messages: IMessage[]
   users: ILobbyUser[]
   leaderboard: ILeaderboardInfo[]
@@ -46,6 +47,7 @@ interface IUserLobbyState {
 }
 
 const initialState: IUserLobbyState = {
+  botLogDatabase: [],
   suggestions: [],
   boosterContent: [],
   pokemonCollection: [],
@@ -160,6 +162,9 @@ export const lobbySlice = createSlice({
   name: "lobby",
   initialState: initialState,
   reducers: {
+    pushBotLog: (state, action: PayloadAction<string>) => {
+      state.botLogDatabase.push(action.payload)
+    },
     pushMessage: (state, action: PayloadAction<Message>) => {
       const m: IMessage = JSON.parse(JSON.stringify(action.payload))
       state.messages.push(m)
@@ -321,7 +326,8 @@ export const {
   setBotData,
   leaveLobby,
   setBotCreatorSynergies,
-  setSuggestions
+  setSuggestions,
+  pushBotLog
 } = lobbySlice.actions
 
 export default lobbySlice.reducer

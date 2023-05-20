@@ -831,6 +831,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.MIMIC]: {
+    eng: "Mimic",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1214,7 +1220,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.LEECH_LIFE]: {
-    eng: `Area of effect life steal attack that deals [15,30,60,SP] ${Damage.SPECIAL} around the target`,
+    eng: `Area of effect life steal attack that deals [15,30,60,SP] ${Damage.SPECIAL}`,
     esp: `Área de efecto robo de vida daño especial ataque [15,30,60,SP] ${Damage.SPECIAL} alrededor del objetivo`,
     fra: `Attaque vol de vie en AoE faisant [15,30,60,SP] ${Damage.SPECIAL}.`,
     prt: ``
@@ -1662,7 +1668,13 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     fra: ""
   },
   [Ability.HYPNOSIS]: {
-    eng: `Put ${Status.SLEEP} 1 enemy in the back lines for [2,3.5,6]  seconds`,
+    eng: `Put ${Status.SLEEP} 1 enemy in the back lines for [2,3.5,6] seconds`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.MIMIC]: {
+    eng: `Pretends to be a tree and does not attack but gain 2 ${Stat.ATK} per second instead (stackable).\nStarts attacking when ${Stat.MANA} bar is full, then Mimic copies the ability of the target.`,
     esp: "",
     prt: "",
     fra: ""

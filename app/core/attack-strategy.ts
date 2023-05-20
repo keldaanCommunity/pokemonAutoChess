@@ -3229,6 +3229,15 @@ export class LeechLifeStrategy extends AttackStrategy {
         break
     }
 
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit
+    );
+    pokemon.handleHeal(damage, pokemon, 1)
+
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
 
     cells.forEach((cell) => {
@@ -3962,5 +3971,18 @@ export class DeathWingStrategy extends AttackStrategy {
     if (takenDamage > 0) {
       pokemon.handleHeal(Math.round(0.75 * takenDamage), pokemon, 0)
     }
+  }
+}
+
+export class MimicStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    AbilityStrategy[target.skill].process(pokemon, state, board, target, crit)
   }
 }

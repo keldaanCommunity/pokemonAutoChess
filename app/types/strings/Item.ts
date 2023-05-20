@@ -110,7 +110,7 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
     `During the combat, the holder attack heals adjacent allies on the same row for 5% of their max ${Stat.HP}`,
   [Item.CHOICE_SCARF]:
     "The holder basic attacks hit a second adjacent enemy for 50% of the damage",
-  [Item.FIRE_GEM]: `Adds 8% of target max ${Stat.HP} to attack damage`,
+  [Item.FIRE_GEM]: `Attacks do double damage on ${Stat.SHIELD} and deal 10% of target max ${Stat.HP} as additional damage`,
   [Item.DEFENSIVE_RIBBON]:
     `When the holder takes damage, gain 1 stack. Every 2 stacks, the holder gains +1 ${Stat.DEF}, +1 ${Stat.ATK} and +5% ${Stat.ATK_SPEED} (max 20 stacks)`,
   [Item.WONDER_BOX]:

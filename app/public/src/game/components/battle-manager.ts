@@ -4,7 +4,6 @@ import { transformAttackCoordinate } from "../../pages/utils/utils"
 import GameScene from "../scenes/game-scene"
 import { IPlayer, IPokemonEntity } from "../../../../types"
 import AnimationManager from "../animation-manager"
-import { DataChange } from "@colyseus/schema"
 import {
   AttackType,
   PokemonActionState,

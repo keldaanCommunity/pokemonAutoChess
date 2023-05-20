@@ -29,9 +29,7 @@ export default function GameLoadingScreen() {
           ></progress>
         <p>{statusMessage}</p>
       </div>
-      <footer>
-      In case of disconnect, you have 5 minutes to reconnect before being kicked out of the game. Game will start after 5 minutes no matter what.
-      </footer>
+      <footer>Players disconnected for more than one minute are kicked out of the game. Game will start after 5 minutes max of loading no matter what.</footer>
     </div>
   )
 }

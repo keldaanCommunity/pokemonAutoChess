@@ -22,7 +22,14 @@
     gap: 16px;
 }
 
-.after-menu .player-elo {
+.after-menu .player-gains {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.after-menu .player-elo,
+.after-menu .player-exp {
     font-size: 1.5 rem;
     color: white;
     text-shadow: 2px 2px 0 black;

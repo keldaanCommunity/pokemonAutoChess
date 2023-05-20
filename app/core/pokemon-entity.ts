@@ -134,6 +134,11 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     pokemon.types.forEach((type) => {
       this.types.push(type)
     })
+
+    if(this.skill === Ability.MIMIC){
+      this.status.tree = true
+      this.toIdleState()
+    }
   }
 
   update(dt: number, board: Board, climate: string) {

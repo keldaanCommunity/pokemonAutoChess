@@ -48,12 +48,14 @@ import {
   removeMessage,
   setLevelLeaderboard,
   setBotLeaderboard,
-  setLeaderboard
+  setLeaderboard,
+  pushBotLog
 } from "../stores/LobbyStore"
 import {
   ICustomLobbyState,
   ISuggestionUser,
   NonFunctionPropNames,
+  Role,
   Title,
   Transfer
 } from "../../../types"
@@ -67,6 +69,7 @@ import Booster from "./component/booster/booster"
 import { IPokemonsStatistic } from "../../../models/mongo-models/pokemons-statistic"
 import { cc } from "./utils/jsx"
 import "./lobby.css"
+import { BotManagerPanel } from "./component/bot-builder/bot-manager-panel"
 
 export default function Lobby() {
   const dispatch = useAppDispatch()
@@ -94,6 +97,7 @@ export default function Lobby() {
   const [showWiki, toggleWiki] = useState<boolean>(false)
   const [showMeta, toggleMeta] = useState<boolean>(false)
   const [showBuilder, toggleBuilder] = useState<boolean>(false)
+  const [showBotManager, toggleBotManager] = useState<boolean>()
   const [showCollection, toggleCollection] = useState<boolean>(false)
   const [showBooster, toggleBooster] = useState<boolean>(false)
   const [toPreparation, setToPreparation] = useState<boolean>(false)
@@ -196,6 +200,10 @@ export default function Lobby() {
 
             room.onMessage(Transfer.BAN, () => {
               setToAuth(true)
+            })
+
+            room.onMessage(Transfer.BOT_DATABASE_LOG, (message) => {
+              dispatch(pushBotLog(message))
             })
 
             room.onMessage(Transfer.PASTEBIN_URL, (json: { url: string }) => {
@@ -323,6 +331,13 @@ export default function Lobby() {
       />
     )
   }
+  if (showBotManager && user?.role !== Role.BASIC) {
+    return (
+      <BotManagerPanel
+        toggleBotManager={() => toggleBotManager(!showBotManager)}
+      />
+    )
+  }
   if (showBuilder) {
     return <TeamBuilder toggleBuilder={() => toggleBuilder(!showBuilder)} />
   } else {
@@ -369,6 +384,20 @@ export default function Lobby() {
             >
               <img src="assets/ui/bot.svg" alt="" />
               BOT Builder
+            </button>
+          )}
+          {user?.role !== Role.BASIC && (
+            <button
+              className="bubbly green"
+              onClick={() => {
+                if (user?.role !== Role.BASIC && botList.length == 0) {
+                  dispatch(requestBotList())
+                }
+                toggleBotManager(!showBotManager)
+              }}
+            >
+              <img src="assets/ui/bot.svg" alt="" />
+              BOT Admin
             </button>
           )}
 

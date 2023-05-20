@@ -7,7 +7,7 @@ import AfterGameState from "../../../rooms/states/after-game-state"
 import firebase from "firebase/compat/app"
 import { FIREBASE_CONFIG } from "./utils/utils"
 import { joinAfter, logIn } from "../stores/NetworkStore"
-import { addPlayer, leaveAfter, setNoELO } from "../stores/AfterGameStore"
+import { addPlayer, leaveAfter, setElligibilityToELO, setElligibilityToXP } from "../stores/AfterGameStore"
 import { playSound, SOUNDS } from "./utils/audio"
 
 export default function AfterGame() {
@@ -73,8 +73,11 @@ export default function AfterGame() {
           playSound(SOUNDS["FINISH" + player.rank])
         }
       })
-      r.state.listen("noElo", (value, previousValue) => {
-        dispatch(setNoELO(value))
+      r.state.listen("elligibleToELO", (value, previousValue) => {
+        dispatch(setElligibilityToELO(value))
+      })
+      r.state.listen("elligibleToXP", (value, previousValue) => {
+        dispatch(setElligibilityToXP(value))
       })
     }
 

@@ -98,6 +98,8 @@ export const TypeTrigger: { [key in Synergy]: number[] } = {
   [Synergy.BABY]: [3, 5]
 }
 
+export const RequiredStageLevelForXpElligibility = 10
+
 export const ExpPlace = [700, 500, 400, 300, 200, 150, 100, 0]
 
 export const RarityColor: { [key in Rarity]: string } = {
@@ -145,7 +147,7 @@ export const Probability: { [key: number]: number[] } = {
 }
 
 export const EvolutionTime = {
-  EGG_HATCH: 3,
+  EGG_HATCH: 4,
   EVOLVE_HATCH: 4
 }
 
@@ -181,7 +183,8 @@ export const CommonShop = new Array<Pkm>(
   Pkm.SQUIRTLE,
   Pkm.ARON,
   Pkm.MUDKIP,
-  Pkm.CHIMCHAR
+  Pkm.CHIMCHAR,
+  Pkm.LITWICK
 )
 
 export const UncommonShop = new Array<Pkm>(

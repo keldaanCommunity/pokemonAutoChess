@@ -229,6 +229,9 @@ export const networkSlice = createSlice({
     setModerator: (state, action: PayloadAction<string>) => {
       state.lobby?.send(Transfer.SET_MODERATOR, action.payload)
     },
+    setBotManager: (state, action: PayloadAction<string>) => {
+      state.lobby?.send(Transfer.SET_BOT_MANAGER, action.payload)
+    },
     giveTitle: (
       state,
       action: PayloadAction<{ uid: string; title: Title }>
@@ -240,11 +243,19 @@ export const networkSlice = createSlice({
     },
     ban: (state, action: PayloadAction<string>) => {
       state.lobby?.send(Transfer.BAN, action.payload)
+    },
+    deleteBotDatabase: (state, action: PayloadAction<string>) => {
+      state.lobby?.send(Transfer.DELETE_BOT_DATABASE, action.payload)
+    },
+    addBotDatabase: (state, action: PayloadAction<string>) => {
+      state.lobby?.send(Transfer.ADD_BOT_DATABASE, action.payload)
     }
   }
 })
 
 export const {
+  deleteBotDatabase,
+  addBotDatabase,
   ban,
   pokemonPropositionClick,
   requestLeaderboard,
@@ -254,6 +265,7 @@ export const {
   removeMessage,
   giveBooster,
   setModerator,
+  setBotManager,
   broadcastEmote,
   openBooster,
   changeSelectedEmotion,

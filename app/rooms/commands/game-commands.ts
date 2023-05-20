@@ -228,6 +228,9 @@ export class OnDragDropCommand extends Command<
               PokemonFactory.getPokemonBaseEvolution(pokemonToClone.name),
               player.pokemonCollection.get(PkmIndex[pokemonToClone.name])
             )
+            pokemon.items.forEach((it) => {
+              player.items.add(it)
+            })
             player.board.delete(detail.id)
             const position =
               this.room.getFirstAvailablePositionInBench(playerId)
@@ -724,18 +727,15 @@ export class OnJoinCommand extends Command<
             )
           }
 
-          // logger.debug(this.state.players.get(client.auth.uid).tileset);
           this.state.shop.assignShop(player)
           if (this.state.players.size >= MAX_PLAYERS_PER_LOBBY) {
-            // logger.debug('game elligible to xp');
-            this.state.elligibleToXP = true
-            let c = 0
+            let nbHumanPlayers = 0
             this.state.players.forEach((p) => {
               if (!p.isBot) {
-                c += 1
+                nbHumanPlayers += 1
               }
             })
-            if (c === 1) {
+            if (nbHumanPlayers === 1) {
               this.state.players.forEach((p) => {
                 if (!p.isBot) {
                   p.titles.add(Title.LONE_WOLF)
@@ -945,34 +945,17 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   }
 
   computePlayerDamage(
-    redTeam: MapSchema<IPokemonEntity>,
-    playerLevel: number,
+    opponentTeam: MapSchema<IPokemonEntity>,
     stageLevel: number
   ) {
-    let damage = playerLevel - 2
-    let multiplier = 1
-    if (stageLevel >= 10) {
-      multiplier = 1.25
-    } else if (stageLevel >= 15) {
-      multiplier = 1.5
-    } else if (stageLevel >= 20) {
-      multiplier = 2.0
-    } else if (stageLevel >= 25) {
-      multiplier = 3
-    } else if (stageLevel >= 30) {
-      multiplier = 5
-    } else if (stageLevel >= 35) {
-      multiplier = 8
-    }
-    damage = damage * multiplier
-    if (redTeam.size > 0) {
-      redTeam.forEach((pokemon, key) => {
+    let damage = Math.ceil(stageLevel/2)
+    if (opponentTeam.size > 0) {
+      opponentTeam.forEach((pokemon) => {
         if (!pokemon.isClone) {
           damage += pokemon.stars
         }
       })
     }
-    damage = Math.max(Math.round(damage), 0)
     return damage
   }
 
@@ -1023,7 +1006,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         ) {
           const playerDamage = this.computePlayerDamage(
             player.simulation.redTeam,
-            player.experienceManager.level,
             this.state.stageLevel
           )
           player.life -= playerDamage

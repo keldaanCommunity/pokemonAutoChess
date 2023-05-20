@@ -12,7 +12,6 @@
 
 .player-team-pokemons .pokemon-portrait {
     box-shadow: #2d334b 2px 2px 4px;
-    image-rendering: pixelated;
     width: 60px;
     height: 60px;
     margin: 10px 0;

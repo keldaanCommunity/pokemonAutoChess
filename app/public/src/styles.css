@@ -471,6 +471,10 @@ p:last-child {
   margin: 0;
 }
 
+.player-title {
+  color: #ffc107;
+}
+
 .my-input {
   border-radius: 12px;
   width: 100%;
@@ -638,4 +642,5 @@ p:last-child {
   border: 1px solid #000000;
   border-radius: 4px;
   box-shadow: 2px 2px 0 #00000060;
+  image-rendering: pixelated;
 }
