@@ -2,20 +2,25 @@
 
 ## Newcomers
 
-Welcome to Hoothoot and Noctowl ! ![Hoothoot](https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/0163/Normal.png)
+Welcome to Bonsly and Sudowoodo !
+![sudowoodo](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0438/Normal.png)
+![bonsly](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0185/Normal.png)
 
-## Dodge & Protect
+Welcome to Litwick, Lampent and Chandelure !
+![litwick](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0607/Normal.png)
+![lampent](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0608/Normal.png)
+![chandelure](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0609/Normal.png)
 
-- On-hit effects now don't work if attack is dodged or target is protected, giving a small buff to Water and a small nerf to Fire & Dragon
-- Sleep duration reduction now only works if pokemon actually took damage (not dodged / protected)
+## Nerf Normal
 
-## No more zero damage
+Give ~~20/40/60/80~~ 15/30/45/60 shield
 
-Minimum damage per attack is one, even with blocked damage by Fight synergy
+## Nerf Baby
 
-## Shields up
+Egg hatch time increased: ~~3~~ 4 stages
 
-- Shield should be much effective now that we fixed the bug on damage on shield being counted twice
-- Shell bell & human synergy heal now also takes into account the damage on shield
+## Fire Gem buff
+
+ Attacks do double damage on Shields and deal 10% of target max HP as additional damage
 
 Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752)
