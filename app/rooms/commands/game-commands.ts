@@ -243,25 +243,28 @@ export class OnDragDropCommand extends Command<
             success = true
           }
         } else {
-          if (y == 0 && pokemon.positionY == 0) {
+          const dropOnBench = (y == 0)
+          const dropFromBench = (pokemon.positionY == 0)
+          // Drag and drop pokemons through bench has no limitation
+          if (dropOnBench && dropFromBench) {
             this.room.swap(playerId, pokemon, x, y)
             success = true
           } else if (this.state.phase == GamePhaseState.PICK) {
+            // On pick, allow to drop on / from board
             const teamSize = this.room.getTeamSize(player.board)
-            if (teamSize < player.experienceManager.level) {
+            const isBoardFull = teamSize >= player.experienceManager.level
+            const dropToEmptyPlace = this.room.isPositionEmpty(playerId, x, y)
+            
+            if(dropOnBench){
+              // From board to bench is always allowed (bench to bench is already handled)
               this.room.swap(playerId, pokemon, x, y)
               success = true
-            } else if (teamSize == player.experienceManager.level) {
-              const empty = this.room.isPositionEmpty(playerId, x, y)
-              if (!empty) {
-                this.room.swap(playerId, pokemon, x, y)
-                success = true
-                message.updateBoard = false
               } else {
-                if ((pokemon.positionY != 0 && y != 0) || y == 0) {
+              if(pokemon.rarity != Rarity.NEUTRAL){
+                // Prevents a pokemon to go on the board only if it's adding a pokemon from the bench on a full board 
+                  if (!isBoardFull || !dropToEmptyPlace || !dropFromBench) {
                   this.room.swap(playerId, pokemon, x, y)
                   success = true
-                  message.updateBoard = false
                 }
               }
             }
