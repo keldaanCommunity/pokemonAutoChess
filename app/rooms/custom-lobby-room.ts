@@ -200,12 +200,36 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
             user.role === Role.MODERATOR)
         ) {
           const id = message
-          client.send(Transfer.BOT_DATABASE_LOG, `deleting bot id ${id}`)
+          const botData = this.bots.get(id)
+          client.send(
+            Transfer.BOT_DATABASE_LOG,
+            `deleting bot ${botData?.name}by @${botData?.author} id ${id}`
+          )
           const resultDelete = await BotV2.deleteOne({ id: id })
           client.send(
             Transfer.BOT_DATABASE_LOG,
             JSON.stringify(resultDelete, null, 2)
           )
+          const dsEmbed = new MessageEmbed()
+            .setTitle(
+              `BOT ${botData?.name} by @${botData?.author} deleted by ${user.name}`
+            )
+            .setAuthor({
+              name: user.name,
+              iconURL: getAvatarSrc(user.avatar)
+            })
+            .setDescription(
+              `BOT ${botData?.name} by @${botData?.author} (id: ${message} ) deleted by ${user.name}`
+            )
+            .setThumbnail(getAvatarSrc(botData?.avatar ? botData?.avatar : ""))
+          try {
+            this.discordWebhook?.send({
+              embeds: [dsEmbed]
+            })
+          } catch (error) {
+            logger.error(error)
+          }
+
           this.bots.delete(id)
           this.broadcast(Transfer.REQUEST_BOT_LIST, this.createBotList())
         }
@@ -260,6 +284,27 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
               steps: json.steps,
               id: nanoid()
             })
+
+            const dsEmbed = new MessageEmbed()
+              .setTitle(
+                `BOT ${json.name} by @${json.author} loaded by ${user.name}`
+              )
+              .setURL(message as string)
+              .setAuthor({
+                name: user.name,
+                iconURL: getAvatarSrc(user.avatar)
+              })
+              .setDescription(
+                `BOT ${json.name} by @${json.author} (url: ${message} ) loaded by ${user.name}`
+              )
+              .setThumbnail(getAvatarSrc(json.avatar))
+            try {
+              this.discordWebhook?.send({
+                embeds: [dsEmbed]
+              })
+            } catch (error) {
+              logger.error(error)
+            }
 
             this.bots.set(resultCreate.id, resultCreate)
             this.broadcast(Transfer.REQUEST_BOT_LIST, this.createBotList())
@@ -447,7 +492,10 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
             const dsEmbed = new MessageEmbed()
               .setTitle(`BOT ${bot.name} created by ${bot.author}`)
               .setURL(data as string)
-              .setAuthor(user.name, getAvatarSrc(user.avatar))
+              .setAuthor({
+                name: user.name,
+                iconURL: getAvatarSrc(user.avatar)
+              })
               .setDescription(
                 `A new bot has been created by ${user.name}, You can import the data in the Pokemon Auto Chess Bot Builder (url: ${data} ).`
               )
