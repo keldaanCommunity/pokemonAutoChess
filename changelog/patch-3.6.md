@@ -4,7 +4,7 @@
 
 # Changes to Pokemon
 
-- Nerf Dive: Freezing time reduced: ~~1.5/3/6~~ 1/2/4 damage increased ~~10/20/40~~ 15/30/60
+- New ability for Litwick: Hex, Single target 20-40-80 Spell Damage, it doubles if the enemy mon has any status
 
 # Changes to Synergies
 
