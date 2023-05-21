@@ -12,6 +12,8 @@
 
 # Bugfix
 
+Fix Dps meter damage record with shield
+
 # Misc
 
 - Add Alchemist title for maxing artificial synergy
