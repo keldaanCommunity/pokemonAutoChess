@@ -200,7 +200,7 @@ export default class PokemonState {
 
         takenDamage += Math.min(residualDamage, pokemon.life)
 
-        if (attacker && residualDamage > 0) {
+        if (attacker && takenDamage > 0) {
           switch (attackType) {
             case AttackType.PHYSICAL:
               attacker.physicalDamage += takenDamage
