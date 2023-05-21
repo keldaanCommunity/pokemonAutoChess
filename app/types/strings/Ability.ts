@@ -837,6 +837,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.HEX]: {
+    eng: "Hex",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1675,6 +1681,12 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
   },
   [Ability.MIMIC]: {
     eng: `Pretends to be a tree and does not attack but gain 2 ${Stat.ATK} per second instead (stackable).\nStarts attacking when ${Stat.MANA} bar is full, then Mimic copies the ability of the target.`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HEX]: {
+    eng: `Deals [20,40,80,SP] ${Damage.SPECIAL} to the target. Doubles damage if ${Status.BURN}, ${Status.CONFUSION}, ${Status.FREEZE}, ${Status.PARALYSIS}, ${Status.POISON}, ${Status.SILENCE}, ${Status.SLEEP}, ${Status.WOUND}`,
     esp: "",
     prt: "",
     fra: ""

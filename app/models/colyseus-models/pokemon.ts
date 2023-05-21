@@ -1883,7 +1883,7 @@ export class Litwick extends Pokemon {
       AttackType.PHYSICAL,
       1,
       100,
-      Ability.WHEEL_OF_FIRE,
+      Ability.HEX,
       shiny,
       emotion,
       false
@@ -1907,7 +1907,7 @@ export class Lampent extends Pokemon {
       AttackType.PHYSICAL,
       2,
       100,
-      Ability.WHEEL_OF_FIRE,
+      Ability.HEX,
       shiny,
       emotion,
       false
@@ -1931,7 +1931,7 @@ export class Chandelure extends Pokemon {
       AttackType.PHYSICAL,
       3,
       100,
-      Ability.WHEEL_OF_FIRE,
+      Ability.HEX,
       shiny,
       emotion,
       true

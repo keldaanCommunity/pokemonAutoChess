@@ -790,6 +790,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.HEX,
+      frames: this.game.anims.generateFrameNames(Ability.HEX, {
+        start: 0,
+        end: 19,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.SPECTRAL_THIEF,
       frames: this.game.anims.generateFrameNames(Ability.SPECTRAL_THIEF, {
         start: 0,
