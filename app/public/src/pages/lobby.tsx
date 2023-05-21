@@ -386,7 +386,9 @@ export default function Lobby() {
               BOT Builder
             </button>
           )}
-          {user?.role !== Role.BASIC && (
+          {user?.role === Role.ADMIN ||
+          user?.role === Role.MODERATOR ||
+          user?.role === Role.BOT_MANAGER ? (
             <button
               className="bubbly green"
               onClick={() => {
@@ -399,7 +401,7 @@ export default function Lobby() {
               <img src="assets/ui/bot.svg" alt="" />
               BOT Admin
             </button>
-          )}
+          ) : null}
 
           <button
             className="bubbly green"
