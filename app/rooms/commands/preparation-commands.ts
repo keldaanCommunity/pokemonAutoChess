@@ -25,7 +25,7 @@ export class OnJoinCommand extends Command<
   execute({ client, options, auth }) {
     try {
       if (this.state.users.size >= MAX_PLAYERS_PER_LOBBY) {
-        return; // lobby already full
+        return // lobby already full
       }
       if (this.state.ownerId == "") {
         this.state.ownerId = auth.uid
@@ -119,7 +119,9 @@ export class OnGameStartRequestCommand extends Command<
             totalMemory - freeMemory
           } / ${totalMemory})`
         )
-        if (freeMemory < 0.1 * totalMemory) {
+        if (process.env?.MODE === "dev") {
+          client.send(Transfer.GAME_START_REQUEST, "ok")
+        } else if (freeMemory < 0.1 * totalMemory) {
           // if less than 10% free memory available, prevents starting another game to avoid out of memory crash
           this.room.broadcast(Transfer.MESSAGES, {
             name: "Server",
@@ -127,7 +129,10 @@ export class OnGameStartRequestCommand extends Command<
             avatar: "0025/Pain",
             time: Date.now()
           })
-        } else if (freeMemory < 0.2 * totalMemory && nbHumanPlayers < MAX_PLAYERS_PER_LOBBY) {
+        } else if (
+          freeMemory < 0.2 * totalMemory &&
+          nbHumanPlayers < MAX_PLAYERS_PER_LOBBY
+        ) {
           // if less than 20% free memory available, prevents starting a game with bots
           this.room.broadcast(Transfer.MESSAGES, {
             name: "Server",

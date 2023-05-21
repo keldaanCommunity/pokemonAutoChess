@@ -136,7 +136,8 @@ import {
   DarkVoidStrategy,
   OverheatStrategy,
   HypnosisStrategy,
-  MimicStrategy
+  MimicStrategy,
+  HexStrategy
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -278,7 +279,8 @@ export enum Ability {
   DARK_VOID = "DARK_VOID",
   OVERHEAT = "OVERHEAT",
   HYPNOSIS = "HYPNOSIS",
-  MIMIC = "MIMIC"
+  MIMIC = "MIMIC",
+  HEX = "HEX"
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -420,5 +422,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.DARK_VOID]: new DarkVoidStrategy(),
   [Ability.OVERHEAT]: new OverheatStrategy(),
   [Ability.HYPNOSIS]: new HypnosisStrategy(),
-  [Ability.MIMIC]: new MimicStrategy()
+  [Ability.MIMIC]: new MimicStrategy(),
+  [Ability.HEX]: new HexStrategy()
 }
