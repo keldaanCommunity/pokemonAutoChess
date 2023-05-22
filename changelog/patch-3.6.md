@@ -12,4 +12,6 @@
 
 # Bugfix
 
+- Fix a bug where user were stuck on loading screen
+
 # Misc
