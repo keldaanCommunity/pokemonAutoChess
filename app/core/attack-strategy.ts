@@ -1,6 +1,6 @@
 import { Item } from "../types/enum/Item"
 import { Effect } from "../types/enum/Effect"
-import { AttackType, Rarity } from "../types/enum/Game"
+import { AttackType, Climate, Rarity } from "../types/enum/Game"
 import Board from "./board"
 import PokemonEntity from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
@@ -3996,7 +3996,7 @@ export class HexStrategy extends AttackStrategy {
       target.status.confusion ||
       target.status.freeze ||
       target.status.paralysis ||
-      target.status.poisonStacks !== 0 ||
+      target.status.poisonStacks > 0 ||
       target.status.silence ||
       target.status.sleep ||
       target.status.wound
@@ -4004,5 +4004,24 @@ export class HexStrategy extends AttackStrategy {
       damage = damage * 2
     }
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+  }
+}
+
+export class GrowthStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+
+    const attackBuff = Math.floor(10 * (1 + pokemon.ap / 100))
+    pokemon.addAttack(attackBuff)
+
+    if(pokemon.simulation.climate === Climate.SUN){
+      pokemon.addAttack(attackBuff) // grows twice as fast if sunny weather
+    }
   }
 }
