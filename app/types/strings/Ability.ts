@@ -843,6 +843,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.GROWTH]: {
+    eng: "Growth",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1686,7 +1692,13 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     fra: ""
   },
   [Ability.HEX]: {
-    eng: `Deals [20,40,80,SP] ${Damage.SPECIAL} to the target. Doubles damage if ${Status.BURN}, ${Status.CONFUSION}, ${Status.FREEZE}, ${Status.PARALYSIS}, ${Status.POISON}, ${Status.SILENCE}, ${Status.SLEEP}, ${Status.WOUND}`,
+    eng: `Deals [20,40,80,SP] ${Damage.SPECIAL} to the target. Doubles damage if target is ${Status.BURN}, ${Status.CONFUSION}, ${Status.FREEZE}, ${Status.PARALYSIS}, ${Status.POISON}, ${Status.SILENCE}, ${Status.SLEEP} or ${Status.WOUND}`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.GROWTH]: {
+    eng: `Increase body size and ${Stat.ATK} by [10,SP]. Grows twice as fast if weather is sunny.`,
     esp: "",
     prt: "",
     fra: ""
