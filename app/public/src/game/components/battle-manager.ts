@@ -246,7 +246,7 @@ export default class BattleManager {
             }
           } else if (field == "ult") {
             if (value != 0) {
-              pkm.specialAttackAnimation(this.group)
+              pkm.specialAttackAnimation(this.group, value)
             }
           } else if (field == "petalDanceCount") {
             if (value != 0) {
@@ -326,7 +326,7 @@ export default class BattleManager {
             }
           } else if (field == "monsterExecutionCount") {
             if (value != 0) {
-              pkm.sprite.setScale(2 + value, 2 + value)
+              pkm.sprite.setScale(2 + 0.5 * value)
             }
           } else if (field == "upgradeCount") {
             pkm.itemsContainer.updateCount(Item.UPGRADE, value)
@@ -366,7 +366,7 @@ export default class BattleManager {
             if (pokemon.skill == Ability.TELEPORT) {
               pkm.x = coordinates[0]
               pkm.y = coordinates[1]
-              pkm.specialAttackAnimation(this.group)
+              pkm.specialAttackAnimation(this.group, pokemon.count.ult)
             } else {
               pkm.moveManager.setSpeed(
                 3 *

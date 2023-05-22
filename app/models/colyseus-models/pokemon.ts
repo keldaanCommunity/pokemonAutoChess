@@ -2099,7 +2099,7 @@ export class Turtwig extends Pokemon {
       AttackType.PHYSICAL,
       1,
       100,
-      Ability.STOMP,
+      Ability.GROWTH,
       shiny,
       emotion,
       false
@@ -2123,7 +2123,7 @@ export class Grotle extends Pokemon {
       AttackType.PHYSICAL,
       2,
       100,
-      Ability.STOMP,
+      Ability.GROWTH,
       shiny,
       emotion,
       false
@@ -2147,7 +2147,7 @@ export class Torterra extends Pokemon {
       AttackType.PHYSICAL,
       3,
       100,
-      Ability.STOMP,
+      Ability.GROWTH,
       shiny,
       emotion,
       true

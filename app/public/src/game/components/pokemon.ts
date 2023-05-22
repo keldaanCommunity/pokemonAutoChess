@@ -628,7 +628,7 @@ export default class Pokemon extends DraggableObject {
     })
   }
 
-  specialAttackAnimation(group: Phaser.GameObjects.Group) {
+  specialAttackAnimation(group: Phaser.GameObjects.Group, ultCount: number) {
     if (this.skill) {
       let coordinates: number[]
       let specialProjectile: GameObjects.Sprite
@@ -3142,6 +3142,10 @@ export default class Pokemon extends DraggableObject {
           default:
             break
         }
+      }
+
+      if(this.skill === Ability.GROWTH){
+        this.sprite.setScale(2 + 0.5 * ultCount)
       }
     }
   }
