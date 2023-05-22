@@ -544,7 +544,8 @@ import {
   Noctowl,
   Hoothoot,
   Bonsley,
-  Sudowoodo
+  Sudowoodo,
+  Phione
 } from "./colyseus-models/pokemon"
 import { MapSchema } from "@colyseus/schema"
 import { Emotion } from "../types"
@@ -1237,6 +1238,8 @@ export default class PokemonFactory {
         return new Cobalion(s, e)
       case Pkm.MANAPHY:
         return new Manaphy(s, e)
+      case Pkm.PHIONE:
+        return new Phione(s, e)
       case Pkm.SPIRITOMB:
         return new Spiritomb(s, e)
       case Pkm.ABSOL:

@@ -282,7 +282,7 @@ export const Mythical1Shop = new Array<Pkm>(
   Pkm.ABSOL,
   Pkm.SPIRITOMB,
   Pkm.ROTOM,
-  Pkm.MANAPHY,
+  Pkm.PHIONE,
   Pkm.COBALION,
   Pkm.KELDEO,
   Pkm.VOLCARONA,
