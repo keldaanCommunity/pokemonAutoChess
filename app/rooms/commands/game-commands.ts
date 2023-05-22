@@ -246,8 +246,8 @@ export class OnDragDropCommand extends Command<
             success = true
           }
         } else {
-          const dropOnBench = (y == 0)
-          const dropFromBench = (pokemon.positionY == 0)
+          const dropOnBench = y == 0
+          const dropFromBench = pokemon.positionY == 0
           // Drag and drop pokemons through bench has no limitation
           if (dropOnBench && dropFromBench) {
             this.room.swap(playerId, pokemon, x, y)
@@ -257,15 +257,15 @@ export class OnDragDropCommand extends Command<
             const teamSize = this.room.getTeamSize(player.board)
             const isBoardFull = teamSize >= player.experienceManager.level
             const dropToEmptyPlace = this.room.isPositionEmpty(playerId, x, y)
-            
-            if(dropOnBench){
+
+            if (dropOnBench) {
               // From board to bench is always allowed (bench to bench is already handled)
               this.room.swap(playerId, pokemon, x, y)
               success = true
-              } else {
-              if(pokemon.rarity != Rarity.NEUTRAL){
-                // Prevents a pokemon to go on the board only if it's adding a pokemon from the bench on a full board 
-                  if (!isBoardFull || !dropToEmptyPlace || !dropFromBench) {
+            } else {
+              if (pokemon.rarity != Rarity.NEUTRAL) {
+                // Prevents a pokemon to go on the board only if it's adding a pokemon from the bench on a full board
+                if (!isBoardFull || !dropToEmptyPlace || !dropFromBench) {
                   this.room.swap(playerId, pokemon, x, y)
                   success = true
                 }
@@ -487,6 +487,17 @@ export class OnDragDropItemCommand extends Command<
         case Pkm.DITTO:
           client.send(Transfer.DRAG_DROP_FAILED, message)
           break
+
+        case Pkm.PHIONE:
+          if (item == Item.AQUA_EGG) {
+            newItemPokemon = PokemonFactory.transformPokemon(
+              pokemon,
+              Pkm.MANAPHY,
+              player.pokemonCollection.get(PkmIndex[Pkm.MANAPHY])
+            )
+          }
+          break
+
         case Pkm.GROUDON:
           if (item == Item.RED_ORB) {
             newItemPokemon = PokemonFactory.transformPokemon(
@@ -948,7 +959,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     opponentTeam: MapSchema<IPokemonEntity>,
     stageLevel: number
   ) {
-    let damage = Math.ceil(stageLevel/2)
+    let damage = Math.ceil(stageLevel / 2)
     if (opponentTeam.size > 0) {
       opponentTeam.forEach((pokemon) => {
         if (!pokemon.isClone) {

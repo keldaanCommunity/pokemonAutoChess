@@ -7625,6 +7625,30 @@ export class Mawile extends Pokemon {
   }
 }
 
+export class Phione extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.PHIONE,
+      [Synergy.WATER, Synergy.BUG],
+      Rarity.MYTHICAL,
+      Pkm.MANAPHY,
+      160,
+      16,
+      2,
+      2,
+      3,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.NASTY_PLOT,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
 export class Manaphy extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
@@ -7632,10 +7656,10 @@ export class Manaphy extends Pokemon {
       [Synergy.WATER, Synergy.BUG],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
-      200,
-      20,
-      3,
-      3,
+      240,
+      4,
+      4,
+      4,
       3,
       AttackSprite.PSYCHIC_RANGE,
       AttackType.PHYSICAL,
