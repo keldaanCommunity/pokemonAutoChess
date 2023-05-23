@@ -58,9 +58,9 @@ export const StatusLabel: { [key in Status]: Langage } = {
     prt: ""
   },
   [Status.PARALYSIS]: {
-    eng: "Paralysis",
+    eng: "Paralyzed",
     esp: "",
-    fra: "Paralysie",
+    fra: "Paralysé",
     prt: ""
   },
   [Status.ARMOR_REDUCTION]: {

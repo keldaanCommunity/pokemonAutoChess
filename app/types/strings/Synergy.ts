@@ -232,7 +232,7 @@ export const SynergyDescription: {
     fra: ""
   },
   [Synergy.FLYING]: {
-    eng: `Flying pokemons get ${Status.PROTECT} when they fell under a certain amount of ${Stat.HP}`,
+    eng: `Flying pokemons fly away when they fell under a certain amount of ${Stat.HP}`,
     esp: "",
     fra: ""
   },

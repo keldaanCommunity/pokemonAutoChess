@@ -7,7 +7,6 @@ import PokemonEntity from "./pokemon-entity"
 import { IPokemonEntity, Transfer, FIGHTING_PHASE_DURATION } from "../types"
 import { Synergy, SynergyEffects } from "../types/enum/Synergy"
 import { Ability } from "../types/enum/Ability"
-import { FlyingProtectThreshold } from "../types/Config"
 import { pickRandomIn } from "../utils/random"
 import { logger } from "../utils/logger"
 
@@ -256,33 +255,29 @@ export default class PokemonState {
             pokemon.status.updateSleep(500)
           }
 
-          if (pokemon.life && pokemon.life > 0) {
-            if (pokemon.flyingProtection) {
-              const t = FlyingProtectThreshold[Effect.TAILWIND]
-              const f = FlyingProtectThreshold[Effect.FEATHER_DANCE]
-              const ma = FlyingProtectThreshold[Effect.MAX_AIRSTREAM]
-              const mg = FlyingProtectThreshold[Effect.MAX_GUARD]
+          if (pokemon.flyingProtection > 0 && pokemon.life > 0) {
+            const pcLife = pokemon.life / pokemon.hp
 
-              if (pokemon.effects.includes(Effect.TAILWIND) && t) {
-                if (pokemon.life / pokemon.hp < t.threshold) {
-                  pokemon.status.triggerProtect(t.duration)
-                  pokemon.flyingProtection = false
-                }
-              } else if (pokemon.effects.includes(Effect.FEATHER_DANCE) && f) {
-                if (pokemon.life / pokemon.hp < f.threshold) {
-                  pokemon.status.triggerProtect(f.duration)
-                  pokemon.flyingProtection = false
-                }
-              } else if (pokemon.effects.includes(Effect.MAX_AIRSTREAM) && ma) {
-                if (pokemon.life / pokemon.hp < ma.threshold) {
-                  pokemon.status.triggerProtect(ma.duration)
-                  pokemon.flyingProtection = false
-                }
-              } else if (pokemon.effects.includes(Effect.MAX_GUARD) && mg) {
-                if (pokemon.life / pokemon.hp < mg.threshold) {
-                  pokemon.status.triggerProtect(mg.duration)
-                  pokemon.flyingProtection = false
-                }
+            if (pokemon.effects.includes(Effect.TAILWIND) && pcLife < 0.2) {
+              pokemon.flyAway(board)
+            } else if (pokemon.effects.includes(Effect.FEATHER_DANCE) && pcLife < 0.2) {
+              pokemon.status.triggerProtect(2000)
+              pokemon.flyAway(board)
+            } else if (pokemon.effects.includes(Effect.MAX_AIRSTREAM)) {
+              if ((pokemon.flyingProtection === 2 && pcLife < 0.5) || (pokemon.flyingProtection === 1 && pcLife < 0.2)) {
+                pokemon.status.triggerProtect(2000)
+                pokemon.flyAway(board)
+              }
+            } else if (pokemon.effects.includes(Effect.MAX_GUARD)) {
+              if ((pokemon.flyingProtection === 2 && pcLife < 0.5) || (pokemon.flyingProtection === 1 && pcLife < 0.2)) {
+                pokemon.status.triggerProtect(2000)
+                pokemon.flyAway(board)
+                const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+                cells.forEach((cell) => {
+                  if (cell.value && pokemon.team != cell.value.team) {
+                    cell.value.status.triggerParalysis(2000, cell.value)
+                  }
+                })
               }
             }
           }
