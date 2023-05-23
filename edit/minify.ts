@@ -8,19 +8,31 @@ const specificIndexToMinify = args[0]
 
 const indexes = ["0000"]
 
-function minifySheet(id){
+function minifySheet(id) {
   try {
     logger.debug(`Minifying sheet ${id}...`)
     const buffer = fs.readFileSync(`sheets/${id}.json`)
     const json = JSON.parse(buffer.toString())
     fs.writeFileSync(`sheets/${id}.json`, JSON.stringify(json, null, 0))
-    indexes.push(id)
+    const indexList = JSON.parse(
+      fs
+        .readFileSync(
+          "../app/public/dist/client/assets/pokemons/indexList.json"
+        )
+        .toString()
+    )
+    console.log(indexList)
+    indexList.push(id)
+    fs.writeFileSync(
+      "sheets/indexList.json",
+      JSON.stringify(indexList, null, 0)
+    )
   } catch (error) {
-    logger.error("error id#", id)
+    logger.error("error id#", id, error)
   }
 }
 
-function minifyAll(){  
+function minifyAll() {
   const pkmaIndexes = new Array<string>()
 
   Object.values(Pkm).forEach((pkm) => {
@@ -43,7 +55,7 @@ function minifyAll(){
   logger.debug(`indexList.json updated`)
 }
 
-if(specificIndexToMinify) {
+if (specificIndexToMinify) {
   minifySheet(specificIndexToMinify)
 } else {
   minifyAll()

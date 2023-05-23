@@ -2,7 +2,12 @@ import { GameObjects } from "phaser"
 import Pokemon from "./pokemon"
 import { transformAttackCoordinate } from "../../pages/utils/utils"
 import GameScene from "../scenes/game-scene"
-import { IPlayer, IPokemonEntity } from "../../../../types"
+import {
+  ICount,
+  IPlayer,
+  IPokemonEntity,
+  NonFunctionPropNames
+} from "../../../../types"
 import AnimationManager from "../animation-manager"
 import {
   AttackType,
@@ -12,6 +17,7 @@ import {
 } from "../../../../types/enum/Game"
 import { Ability } from "../../../../types/enum/Ability"
 import { Item } from "../../../../types/enum/Item"
+import Count from "../../../../models/colyseus-models/count"
 
 export default class BattleManager {
   group: GameObjects.Group
@@ -226,7 +232,7 @@ export default class BattleManager {
   changeCount(
     playerId: string,
     pokemon: IPokemonEntity,
-    field: string,
+    field: NonFunctionPropNames<Count>,
     value: any
   ) {
     // logger.debug(field, value);
@@ -299,6 +305,14 @@ export default class BattleManager {
           } else if (field == "staticCount") {
             if (value != 0) {
               pkm.staticAnimation()
+            }
+          } else if (field === "healOrderCount") {
+            if (value != 0) {
+              pkm.healOrderAnimation()
+            }
+          } else if (field === "attackOrderCount") {
+            if (value != 0) {
+              pkm.attackOrderAnimation()
             }
           } else if (field == "moneyCount") {
             if (value != 0) {
