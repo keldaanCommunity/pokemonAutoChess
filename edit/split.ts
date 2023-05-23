@@ -64,32 +64,43 @@ async function splitAll() {
   for (let i = 0; i < pkmaIndexes.length; i++) {
     const index = pkmaIndexes[i]
 
-    logger.debug(`${i}/${pkmaIndexes.length - 1} (${(
-      (i * 100) /
-      (pkmaIndexes.length - 1)
-    ).toFixed(2)}%) #${index} ${mapName.get(index)}`)
+    logger.debug(
+      `${i}/${pkmaIndexes.length - 1} (${(
+        (i * 100) /
+        (pkmaIndexes.length - 1)
+      ).toFixed(2)}%) #${index} ${mapName.get(index)}`
+    )
 
-    splitIndex(index)    
+    splitIndex(index)
   }
 }
 
-export function loadDurationsFile(){
-  const rawdata = fs.readFileSync("sheets/durations.json", 'utf8')
+export function loadDurationsFile() {
+  const rawdata = fs.readFileSync(
+    "../app/public/dist/client/assets/pokemons/durations.json",
+    "utf8"
+  )
   Object.assign(durations, JSON.parse(rawdata))
-  logger.debug(`Loaded durations file, ${Object.keys(durations).length} durations already computed`)
+  logger.debug(
+    `Loaded durations file, ${
+      Object.keys(durations).length
+    } durations already computed`
+  )
 }
 
-export function saveDurationsFile(){
+export function saveDurationsFile() {
   const fileA = fs.createWriteStream("sheets/durations.json")
   fileA.on("error", function (err) {
     logger.error(err)
   })
   fileA.write(JSON.stringify(durations))
   fileA.end()
-  logger.debug(`Saved durations file, ${Object.keys(durations).length} durations entries`)
+  logger.debug(
+    `Saved durations file, ${Object.keys(durations).length} durations entries`
+  )
 }
 
-export function saveMissingFiles(){
+export function saveMissingFiles() {
   const fileB = fs.createWriteStream("sheets/missing.txt")
   fileB.on("error", function (err) {
     logger.error(err)
@@ -144,129 +155,129 @@ function zeroPad(num: number) {
   return ("0000" + num).slice(-4)
 }
 
-async function splitIndex(index: string){
+async function splitIndex(index: string) {
   const pathIndex = index.replace("-", "/")
-    const shinyPad =
-      pathIndex.length == 4 ? `${pathIndex}/0000/0001` : `${pathIndex}/0001`
-    const allPads = [pathIndex, shinyPad]
+  const shinyPad =
+    pathIndex.length == 4 ? `${pathIndex}/0000/0001` : `${pathIndex}/0001`
+  const allPads = [pathIndex, shinyPad]
 
-    for (let j = 0; j < allPads.length; j++) {
-      const pad = allPads[j]
-      try {
-        const shiny = pathIndex == pad ? PokemonTint.NORMAL : PokemonTint.SHINY
-        const xmlFile = fs.readFileSync(`${path}/sprite/${pad}/AnimData.xml`)
-        const parser = new XMLParser()
-        const xmlData = <IPMDCollab>parser.parse(xmlFile)
-        for (let k = 0; k < Object.values(SpriteType).length; k++) {
-          const anim = Object.values(SpriteType)[k]
-          for (let l = 0; l < Object.values(PokemonActionState).length; l++) {
-            const action = Object.values(PokemonActionState)[l]
-            try {
-              let img
-              let metadata = xmlData.AnimData.Anims.Anim.find(
-                (m) => m.Name == action
-              )
-              if (metadata) {
-                if (metadata.CopyOf) {
-                  img = await Jimp.read(
-                    `${path}/sprite/${pad}/${metadata.CopyOf}-${anim}.png`
-                  )
-                  metadata = xmlData.AnimData.Anims.Anim.find(
-                    (m) => m.Name == metadata?.CopyOf
-                  )
-                } else {
-                  img = await Jimp.read(
-                    `${path}/sprite/${pad}/${action}-${anim}.png`
-                  )
-                }
+  for (let j = 0; j < allPads.length; j++) {
+    const pad = allPads[j]
+    try {
+      const shiny = pathIndex == pad ? PokemonTint.NORMAL : PokemonTint.SHINY
+      const xmlFile = fs.readFileSync(`${path}/sprite/${pad}/AnimData.xml`)
+      const parser = new XMLParser()
+      const xmlData = <IPMDCollab>parser.parse(xmlFile)
+      for (let k = 0; k < Object.values(SpriteType).length; k++) {
+        const anim = Object.values(SpriteType)[k]
+        for (let l = 0; l < Object.values(PokemonActionState).length; l++) {
+          const action = Object.values(PokemonActionState)[l]
+          try {
+            let img
+            let metadata = xmlData.AnimData.Anims.Anim.find(
+              (m) => m.Name == action
+            )
+            if (metadata) {
+              if (metadata.CopyOf) {
+                img = await Jimp.read(
+                  `${path}/sprite/${pad}/${metadata.CopyOf}-${anim}.png`
+                )
+                metadata = xmlData.AnimData.Anims.Anim.find(
+                  (m) => m.Name == metadata?.CopyOf
+                )
+              } else {
+                img = await Jimp.read(
+                  `${path}/sprite/${pad}/${action}-${anim}.png`
+                )
+              }
 
-                durations[`${index}/${shiny}/${action}/${anim}`] =
-                  metadata?.Durations.Duration.length !== undefined
-                    ? [...metadata?.Durations.Duration]
-                    : [metadata?.Durations.Duration]
-                const frameHeight = metadata?.FrameHeight
-                const frameWidth = metadata?.FrameWidth
+              durations[`${index}/${shiny}/${action}/${anim}`] =
+                metadata?.Durations.Duration.length !== undefined
+                  ? [...metadata?.Durations.Duration]
+                  : [metadata?.Durations.Duration]
+              const frameHeight = metadata?.FrameHeight
+              const frameWidth = metadata?.FrameWidth
 
-                if (frameWidth && frameHeight) {
-                  const width = img.getWidth() / frameWidth
-                  const height = img.getHeight() / frameHeight
-                  // logger.debug('img', index, 'action', action, 'frame height', metadata.FrameHeight, 'frame width', metadata.FrameWidth, 'width', img.getWidth(), 'height', img.getHeight(), ':', width, height);
-                  for (let x = 0; x < width; x++) {
-                    for (let y = 0; y < height; y++) {
-                      const cropImg = img.clone()
+              if (frameWidth && frameHeight) {
+                const width = img.getWidth() / frameWidth
+                const height = img.getHeight() / frameHeight
+                // logger.debug('img', index, 'action', action, 'frame height', metadata.FrameHeight, 'frame width', metadata.FrameWidth, 'width', img.getWidth(), 'height', img.getHeight(), ':', width, height);
+                for (let x = 0; x < width; x++) {
+                  for (let y = 0; y < height; y++) {
+                    const cropImg = img.clone()
 
-                      if (anim == SpriteType.SHADOW) {
-                        const shadow = xmlData.AnimData.ShadowSize
-                        if (shadow == 0) {
-                          removeRed(cropImg)
-                          removeBlue(cropImg)
-                        } else if (shadow == 1) {
-                          removeBlue(cropImg)
-                        }
-                        // transform to black
-                        cropImg.scan(
-                          0,
-                          0,
-                          cropImg.bitmap.width,
-                          cropImg.bitmap.height,
-                          (x, y, idx) => {
-                            if (cropImg.bitmap.data[idx + 3] != 0) {
-                              cropImg.bitmap.data[idx] = 0
-                              cropImg.bitmap.data[idx + 1] = 0
-                              cropImg.bitmap.data[idx + 2] = 0
-                            }
-                          }
-                        )
+                    if (anim == SpriteType.SHADOW) {
+                      const shadow = xmlData.AnimData.ShadowSize
+                      if (shadow == 0) {
+                        removeRed(cropImg)
+                        removeBlue(cropImg)
+                      } else if (shadow == 1) {
+                        removeBlue(cropImg)
                       }
-
-                      cropImg.crop(
-                        x * frameWidth,
-                        y * frameHeight,
-                        frameWidth,
-                        frameHeight
+                      // transform to black
+                      cropImg.scan(
+                        0,
+                        0,
+                        cropImg.bitmap.width,
+                        cropImg.bitmap.height,
+                        (x, y, idx) => {
+                          if (cropImg.bitmap.data[idx + 3] != 0) {
+                            cropImg.bitmap.data[idx] = 0
+                            cropImg.bitmap.data[idx + 1] = 0
+                            cropImg.bitmap.data[idx + 2] = 0
+                          }
+                        }
                       )
-
-                      const writePath = `split/${index}/${shiny}/${action}/${anim}/${y}/${zeroPad(
-                        x
-                      )}.png`
-                      await cropImg.writeAsync(writePath)
                     }
+
+                    cropImg.crop(
+                      x * frameWidth,
+                      y * frameHeight,
+                      frameWidth,
+                      frameHeight
+                    )
+
+                    const writePath = `split/${index}/${shiny}/${action}/${anim}/${y}/${zeroPad(
+                      x
+                    )}.png`
+                    await cropImg.writeAsync(writePath)
                   }
                 }
               }
-            } catch (error) {
-              logger.error(error)
-              logger.warn(
-                "action",
-                action,
-                "is missing for index",
-                index,
-                mapName.get(index)
-              )
             }
-            logger.debug("split", index, shiny, anim, action)
+          } catch (error) {
+            logger.error(error)
+            logger.warn(
+              "action",
+              action,
+              "is missing for index",
+              index,
+              mapName.get(index)
+            )
           }
+          logger.debug("split", index, shiny, anim, action)
         }
-      } catch (error) {
-        logger.warn(
-          "pokemon with index",
-          index,
-          "not found",
-          mapName.get(index),
-          "path: ",
-          `${path}/sprite/${pad}/AnimData.xml`
-        )
-        missing += `${mapName.get(index)},${pad}/AnimData.xml\n`
       }
+    } catch (error) {
+      logger.warn(
+        "pokemon with index",
+        index,
+        "not found",
+        mapName.get(index),
+        "path: ",
+        `${path}/sprite/${pad}/AnimData.xml`
+      )
+      missing += `${mapName.get(index)},${pad}/AnimData.xml\n`
     }
+  }
 }
 
-if(specificIndexToSplit){
+if (specificIndexToSplit) {
   loadDurationsFile()
   splitIndex(specificIndexToSplit).then(() => {
     saveDurationsFile()
   })
-}  else {
+} else {
   splitAll().then(() => {
     saveDurationsFile()
     saveMissingFiles()

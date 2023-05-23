@@ -849,6 +849,18 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.HEAL_ORDER]: {
+    eng: "Heal Order",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.SHELL_TRAP]: {
+    eng: "Shell Trap",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1698,7 +1710,19 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     fra: ""
   },
   [Ability.GROWTH]: {
-    eng: `Increase body size and ${Stat.ATK} by [10,SP]. Grows twice as fast if weather is sunny.`,
+    eng: `Increase body size and ${Stat.ATK} by [10,SP]. Grows twice as fast if weather is sunny`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HEAL_ORDER]: {
+    eng: `Deals [25,45,65,SP] ${Damage.SPECIAL} to adjacent enemies and heal [25,45,65,SP] to adjacent allies`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.SHELL_TRAP]: {
+    eng: `${Status.SILENCE} target for 3 seconds and removes 40 ${Stat.MANA} from target and enemies around it`,
     esp: "",
     prt: "",
     fra: ""

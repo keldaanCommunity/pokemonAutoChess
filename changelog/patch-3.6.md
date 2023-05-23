@@ -1,6 +1,6 @@
 # New Pokemons:
 
-- Phione
+- Phione, Shuckle, Combee, Vespiqueen
 
 # Changes to Pokemon
 

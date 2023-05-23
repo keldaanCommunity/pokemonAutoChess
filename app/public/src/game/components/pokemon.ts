@@ -565,6 +565,44 @@ export default class Pokemon extends DraggableObject {
     })
   }
 
+  healOrderAnimation() {
+    const coordinates = transformAttackCoordinate(
+      this.positionX,
+      this.positionY
+    )
+    const specialProjectile = this.scene.add.sprite(
+      coordinates[0],
+      coordinates[1],
+      "HEAL_ORDER",
+      "000"
+    )
+    specialProjectile.setDepth(7)
+    specialProjectile.setScale(2, 2)
+    specialProjectile.anims.play("HEAL_ORDER")
+    specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+      specialProjectile.destroy()
+    })
+  }
+
+  attackOrderAnimation() {
+    const coordinates = transformAttackCoordinate(
+      this.positionX,
+      this.positionY
+    )
+    const specialProjectile = this.scene.add.sprite(
+      coordinates[0],
+      coordinates[1],
+      "ATTACK_ORDER",
+      "000"
+    )
+    specialProjectile.setDepth(7)
+    specialProjectile.setScale(2, 2)
+    specialProjectile.anims.play("ATTACK_ORDER")
+    specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+      specialProjectile.destroy()
+    })
+  }
+
   earthquakeAnimation() {
     const coordinates = transformAttackCoordinate(
       this.positionX,
@@ -2578,6 +2616,25 @@ export default class Pokemon extends DraggableObject {
             )
             break
 
+          case Ability.SHELL_TRAP:
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.SHELL_TRAP,
+              "000"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.SHELL_TRAP)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
+
           case Ability.TRI_ATTACK:
             coordinatesTarget = transformAttackCoordinate(
               this.targetX,
@@ -3144,7 +3201,7 @@ export default class Pokemon extends DraggableObject {
         }
       }
 
-      if(this.skill === Ability.GROWTH){
+      if (this.skill === Ability.GROWTH) {
         this.sprite.setScale(2 + 0.5 * ultCount)
       }
     }

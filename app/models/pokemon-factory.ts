@@ -545,7 +545,10 @@ import {
   Hoothoot,
   Bonsley,
   Sudowoodo,
-  Phione
+  Phione,
+  Combee,
+  Vespiqueen,
+  Shuckle
 } from "./colyseus-models/pokemon"
 import { MapSchema } from "@colyseus/schema"
 import { Emotion } from "../types"
@@ -1864,6 +1867,12 @@ export default class PokemonFactory {
         return new Bonsley(s, e)
       case Pkm.SUDOWOODO:
         return new Sudowoodo(s, e)
+      case Pkm.COMBEE:
+        return new Combee(s, e)
+      case Pkm.VESPIQUEEN:
+        return new Vespiqueen(s, e)
+      case Pkm.SHUCKLE:
+        return new Shuckle(s, e)
       default:
         // logger.warn(`No pokemon with name "${name}" found, return magikarp`);
         return new Magikarp(s, e)

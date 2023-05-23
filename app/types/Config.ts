@@ -302,7 +302,8 @@ export const Mythical1Shop = new Array<Pkm>(
   Pkm.MIMIKYU,
   Pkm.TYROGUE,
   Pkm.VIRIZION,
-  Pkm.ZERAORA
+  Pkm.ZERAORA,
+  Pkm.SHUCKLE
 )
 
 export const Mythical2Shop = new Array<Pkm>(

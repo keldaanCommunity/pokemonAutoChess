@@ -105,6 +105,21 @@ export default class LoadingManager {
       "/assets/attacks/APPLE_ACID.json",
       "/assets/attacks"
     )
+    scene.load.multiatlas(
+      "HEAL_ORDER",
+      "/assets/attacks/HEAL_ORDER.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
+      "ATTACK_ORDER",
+      "/assets/attacks/ATTACK_ORDER.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
+      "SHELL_TRAP",
+      "/assets/attacks/SHELL_TRAP.json",
+      "/assets/attacks"
+    )
     scene.load.multiatlas("HEX", "/assets/attacks/HEX.json", "/assets/attacks")
     scene.load.multiatlas(
       "SPECTRAL_THIEF",
