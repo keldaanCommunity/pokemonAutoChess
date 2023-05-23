@@ -80,7 +80,7 @@ export default class Bot {
       }
 
       this.player.synergies.update(this.player.board)
-      this.player.effects.update(this.player.synergies)
+      this.player.effects.update(this.player.synergies, this.player.board)
     }
   }
 }
