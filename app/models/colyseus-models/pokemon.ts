@@ -13282,3 +13282,77 @@ export class Sudowoodo extends Pokemon {
     )
   }
 }
+
+export class Combee extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.COMBEE,
+      [Synergy.BUG, Synergy.FLORA],
+      Rarity.EPIC,
+      Pkm.VESPIQUEEN,
+      120,
+      8,
+      3,
+      3,
+      1,
+      AttackSprite.BUG_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      90,
+      Ability.HEAL_ORDER,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Vespiqueen extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.VESPIQUEEN,
+      [Synergy.BUG, Synergy.FLORA],
+      Rarity.EPIC,
+      Pkm.DEFAULT,
+      250,
+      16,
+      4,
+      4,
+      1,
+      AttackSprite.BUG_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      90,
+      Ability.HEAL_ORDER,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
+export class Shuckle extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.SHUCKLE,
+      [Synergy.BUG, Synergy.ROCK],
+      Rarity.MYTHICAL,
+      Pkm.DEFAULT,
+      150,
+      4,
+      15,
+      15,
+      1,
+      AttackSprite.ROCK_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      70,
+      Ability.SHELL_TRAP,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}

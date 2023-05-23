@@ -324,7 +324,9 @@ class GameContainer {
         "monsterExecutionCount",
         "upgradeCount",
         "soulDewCount",
-        "defensiveRibbonCount"
+        "defensiveRibbonCount",
+        "attackOrderCount",
+        "healOrderCount"
       ]
 
       fieldsCount.forEach((field) => {
@@ -435,7 +437,9 @@ class GameContainer {
         "monsterExecutionCount",
         "upgradeCount",
         "soulDewCount",
-        "defensiveRibbonCount"
+        "defensiveRibbonCount",
+        "healOrderCount",
+        "attackOrderCount"
       ]
 
       fieldsCount.forEach((field) => {
@@ -576,7 +580,7 @@ class GameContainer {
 
   handlePokemonCountChange(
     playerId: string,
-    field: string,
+    field: NonFunctionPropNames<Count>,
     value: any,
     pokemon: IPokemonEntity
   ) {

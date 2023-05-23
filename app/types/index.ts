@@ -495,6 +495,8 @@ export interface ICount {
   manaBurnCount: number
   moneyCount: number
   futureSightCount: number
+  healOrderCount: number
+  attackOrderCount: number
 }
 
 export interface IPreparationMetadata {

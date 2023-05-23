@@ -1174,6 +1174,39 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: "HEAL_ORDER",
+      frames: this.game.anims.generateFrameNames("HEAL_ORDER", {
+        start: 0,
+        end: 35,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
+      key: "ATTACK_ORDER",
+      frames: this.game.anims.generateFrameNames("ATTACK_ORDER", {
+        start: 0,
+        end: 28,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
+      key: Ability.SHELL_TRAP,
+      frames: this.game.anims.generateFrameNames(Ability.SHELL_TRAP, {
+        start: 0,
+        end: 7,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 1
+    })
+
+    this.game.anims.create({
       key: "MIND_BLOWN_SELF",
       frames: this.game.anims.generateFrameNames("MIND_BLOWN_SELF", {
         start: 0,

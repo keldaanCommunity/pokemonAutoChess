@@ -4020,8 +4020,62 @@ export class GrowthStrategy extends AttackStrategy {
     const attackBuff = Math.floor(10 * (1 + pokemon.ap / 100))
     pokemon.addAttack(attackBuff)
 
-    if(pokemon.simulation.climate === Climate.SUN){
+    if (pokemon.simulation.climate === Climate.SUN) {
       pokemon.addAttack(attackBuff) // grows twice as fast if sunny weather
     }
+  }
+}
+
+export class HealOrderStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+    const damage = pokemon.stars === 3 ? 65 : pokemon.stars === 2 ? 45 : 25
+
+    cells.forEach((cell) => {
+      if (cell.value) {
+        if (cell.value.team !== pokemon.team) {
+          cell.value.count.attackOrderCount++
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        } else {
+          cell.value.count.healOrderCount++
+          cell.value.handleHeal(damage, pokemon, 1)
+        }
+      }
+    })
+  }
+}
+
+export class ShellTrapStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    target.status.triggerSilence(3000, target, board)
+    target.setMana(target.mana - 40)
+
+    const cells = board.getAdjacentCells(target.positionX, target.positionY)
+
+    cells.forEach((cell) => {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.setMana(cell.value.mana - 40)
+      }
+    })
   }
 }

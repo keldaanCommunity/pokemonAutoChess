@@ -1,4 +1,3 @@
-Egg,0000/0004/0001/AnimData.xml
 mega-steelix,0208/0001/AnimData.xml
 mega-steelix,0208/0001/0001/AnimData.xml
 mega-scizor,0212/0001/AnimData.xml
@@ -25,7 +24,6 @@ primal-Kyogre,0382/0001/AnimData.xml
 primal-Kyogre,0382/0001/0001/AnimData.xml
 primal-Groudon,0383/0001/AnimData.xml
 primal-Groudon,0383/0001/0001/AnimData.xml
-zweilous,0634/0000/0001/AnimData.xml
 hydreigon,0635/AnimData.xml
 hydreigon,0635/0000/0001/AnimData.xml
 krokorok,0552/AnimData.xml
@@ -52,8 +50,6 @@ mega-manectric,0310/0001/AnimData.xml
 mega-manectric,0310/0001/0001/AnimData.xml
 doublade,0680/AnimData.xml
 doublade,0680/0000/0001/AnimData.xml
-palpitoad,0536/AnimData.xml
-palpitoad,0536/0000/0001/AnimData.xml
 seismitoad,0537/AnimData.xml
 seismitoad,0537/0000/0001/AnimData.xml
 swadloon,0541/AnimData.xml
@@ -66,7 +62,6 @@ toucannon,0733/AnimData.xml
 toucannon,0733/0000/0001/AnimData.xml
 mega-altaria,0334/0001/AnimData.xml
 mega-altaria,0334/0001/0001/AnimData.xml
-frosmoth,0873/0000/0001/AnimData.xml
 dragapult,0887/AnimData.xml
 dragapult,0887/0000/0001/AnimData.xml
 frogadier,0657/AnimData.xml
