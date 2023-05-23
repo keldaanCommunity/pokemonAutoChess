@@ -274,7 +274,7 @@ export class OnDragDropCommand extends Command<
           }
         }
         player.synergies.update(player.board)
-        player.effects.update(player.synergies)
+        player.effects.update(player.synergies, player.board)
         player.boardSize = this.room.getTeamSize(player.board)
       }
 
@@ -286,7 +286,7 @@ export class OnDragDropCommand extends Command<
       }
 
       player.synergies.update(player.board)
-      player.effects.update(player.synergies)
+      player.effects.update(player.synergies, player.board)
     }
     if (commands.length > 0) {
       return commands
@@ -361,7 +361,7 @@ export class OnDragDropCombineCommand extends Command<
       }
 
       player.synergies.update(player.board)
-      player.effects.update(player.synergies)
+      player.effects.update(player.synergies, player.board)
     }
   }
 }
@@ -558,7 +558,7 @@ export class OnDragDropItemCommand extends Command<
         player.board.delete(pokemon.id)
         player.board.set(newItemPokemon.id, newItemPokemon)
         player.synergies.update(player.board)
-        player.effects.update(player.synergies)
+        player.effects.update(player.synergies, player.board)
         player.boardSize = this.room.getTeamSize(player.board)
         if (equipAfterTransform) {
           newItemPokemon.items.add(item)
@@ -619,7 +619,7 @@ export class OnDragDropItemCommand extends Command<
       }
 
       player.synergies.update(player.board)
-      player.effects.update(player.synergies)
+      player.effects.update(player.synergies, player.board)
       if (commands.length > 0) {
         return commands
       }
@@ -649,7 +649,7 @@ export class OnSellDropCommand extends Command<
         player.board.delete(detail.pokemonId)
 
         player.synergies.update(player.board)
-        player.effects.update(player.synergies)
+        player.effects.update(player.synergies, player.board)
         player.boardSize = this.room.getTeamSize(player.board)
       }
     }
@@ -1331,7 +1331,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
               player.board.delete(key)
               player.board.set(pokemonEvolved.id, pokemonEvolved)
               player.synergies.update(player.board)
-              player.effects.update(player.synergies)
+              player.effects.update(player.synergies, player.board)
             } else {
               if (pokemon.name === Pkm.EGG) {
                 if (pokemon.evolutionTimer >= 2) {
@@ -1343,6 +1343,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
             }
           }
         })
+        // Refreshes effects (like tapu Terrains)
+        player.synergies.update(player.board)
+        player.effects.update(player.synergies, player.board)
       }
     })
     return this.checkEndGame()

@@ -99,3 +99,8 @@ export enum Damage {
   SPECIAL = "SPECIAL",
   TRUE = "TRUE"
 }
+
+export enum Team {
+  BLUE_TEAM,
+  RED_TEAM
+}
