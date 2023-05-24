@@ -34,7 +34,7 @@ export default function Profile() {
           <TabPanel>
             <div className="nes-container">
               <h3>Change Name</h3>
-              <div className="nes-field is-inline" style={{gap: "0.5em"}}>
+              <div className="nes-field is-inline" style={{ gap: "0.5em" }}>
                 <input
                   type="text"
                   className="my-input"
@@ -56,7 +56,11 @@ export default function Profile() {
             <div className="nes-container">
               <h3>Change Avatar</h3>
               <div style={{ display: "flex", flexWrap: "wrap" }}>
-                {pokemonCollection.length === 0 && <p>Play more games to earn boosters and unlock new avatars !</p>}
+                {pokemonCollection.length === 0 && (
+                  <p>
+                    Play more games to earn boosters and unlock new avatars !
+                  </p>
+                )}
                 {pokemonCollection.map((pokemonConfig) => {
                   return pokemonConfig.emotions.map((emotion) => {
                     return (
@@ -102,17 +106,18 @@ export default function Profile() {
           </TabPanel>
           <TabPanel>
             <ul className="titles">
-              {Object.keys(Title).map((k,i) => (
-                <li key={k}
-                    className={cc("clickable", { 
-                      unlocked: user.titles.includes(k as Title),
-                      selected: user.title === k
-                    })}
-                    onClick={() => {
-                      if (user.titles.includes(k as Title)) {
-                        dispatch(setTitle(k))
-                      }
-                    }}
+              {Object.keys(Title).map((k, i) => (
+                <li
+                  key={k}
+                  className={cc("clickable", {
+                    unlocked: user.titles.includes(k as Title),
+                    selected: user.title === k
+                  })}
+                  onClick={() => {
+                    if (user.titles.includes(k as Title)) {
+                      dispatch(setTitle(k))
+                    }
+                  }}
                 >
                   <span>{TitleName[k]}</span>
                   <p>{TitleDescription[k]}</p>

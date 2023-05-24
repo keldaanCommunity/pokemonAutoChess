@@ -1,85 +1,85 @@
 #game-player-informations {
-    position: absolute;
-    top: .5%;
-    left: 30%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    min-width: 40%;
-    height: 8%;    
-    color: white;
-    border-radius: 12px 12px 0 0;
+  position: absolute;
+  top: 0.5%;
+  left: 30%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 40%;
+  height: 8%;
+  color: white;
+  border-radius: 12px 12px 0 0;
 }
 
 #game-player-informations .stage-information {
-    width: 4vw;
-    text-align: center;
+  width: 4vw;
+  text-align: center;
 }
 
 #game-player-informations .stage-information p {
-    margin: 0;
+  margin: 0;
 }
 
 #game-player-informations .information {
-    background-color: #54596b;
-    padding: .001px!important;
-    display: flex;
-    height: 100%;
-    background-size: cover;
-    color: white;
+  background-color: #54596b;
+  padding: 0.001px !important;
+  display: flex;
+  height: 100%;
+  background-size: cover;
+  color: white;
 }
 
 #game-player-informations .information > div {
-    background: #54596b;
-    display: flex;
-    align-items: center;
-    border-radius: 7px;
-    height: 100%;
-    padding: 0 0.5em;
+  background: #54596b;
+  display: flex;
+  align-items: center;
+  border-radius: 7px;
+  height: 100%;
+  padding: 0 0.5em;
 }
 
 #game-player-informations .information .icon {
-    width: 1vw;
-    height: 1vw;
+  width: 1vw;
+  height: 1vw;
 }
 
 #game-player-informations .team-size.information {
-    width: 5vw;
-    background-image: url("assets/ui/pokeball-bg.png");
+  width: 5vw;
+  background-image: url("assets/ui/pokeball-bg.png");
 }
 
 #game-player-informations .money.information {
-    width: 5vw;
-    background-image: url("assets/ui/money-bg.png");
+  width: 5vw;
+  background-image: url("assets/ui/money-bg.png");
 }
 
 #game-player-informations .life.information {
-    width: 5vw;
-    background-image: url("assets/ui/heart-bg.png");
+  width: 5vw;
+  background-image: url("assets/ui/heart-bg.png");
 }
 
 #game-player-informations .player-information {
-    background-color: #54596b;
-    padding: 5px;
-    display: flex;
-    height: 100%;
-    gap: 5px;
+  background-color: #54596b;
+  padding: 5px;
+  display: flex;
+  height: 100%;
+  gap: 5px;
 }
 
 #toast-life .toast-player-damage {
-    color: red;
-    font-weight: bold;
+  color: red;
+  font-weight: bold;
 }
 
 #toast-money .toast-player-income {
-    color: white;
-    font-weight: bold;
+  color: white;
+  font-weight: bold;
 }
 
 #toast-life img,
 #toast-money img {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
-    display: inline-block;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  display: inline-block;
 }

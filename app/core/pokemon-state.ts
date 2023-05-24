@@ -1,7 +1,12 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { Item } from "../types/enum/Item"
 import { Effect } from "../types/enum/Effect"
-import { AttackType, HealType, PokemonActionState, Team } from "../types/enum/Game"
+import {
+  AttackType,
+  HealType,
+  PokemonActionState,
+  Team
+} from "../types/enum/Game"
 import Board from "./board"
 import PokemonEntity from "./pokemon-entity"
 import { IPokemonEntity, Transfer, FIGHTING_PHASE_DURATION } from "../types"
@@ -272,26 +277,38 @@ export default class PokemonState {
 
           if (pokemon.effects.includes(Effect.TAILWIND) && pcLife < 0.2) {
             pokemon.flyAway(board)
-          } else if (pokemon.effects.includes(Effect.FEATHER_DANCE) && pcLife < 0.2) {
+          } else if (
+            pokemon.effects.includes(Effect.FEATHER_DANCE) &&
+            pcLife < 0.2
+          ) {
             pokemon.status.triggerProtect(2000)
             pokemon.flyAway(board)
           } else if (pokemon.effects.includes(Effect.MAX_AIRSTREAM)) {
-            if ((pokemon.flyingProtection === 2 && pcLife < 0.5) || (pokemon.flyingProtection === 1 && pcLife < 0.2)) {
+            if (
+              (pokemon.flyingProtection === 2 && pcLife < 0.5) ||
+              (pokemon.flyingProtection === 1 && pcLife < 0.2)
+            ) {
               pokemon.status.triggerProtect(2000)
-                  pokemon.flyAway(board)
+              pokemon.flyAway(board)
             }
           } else if (pokemon.effects.includes(Effect.MAX_GUARD)) {
-            if ((pokemon.flyingProtection === 2 && pcLife < 0.5) || (pokemon.flyingProtection === 1 && pcLife < 0.2)) {
+            if (
+              (pokemon.flyingProtection === 2 && pcLife < 0.5) ||
+              (pokemon.flyingProtection === 1 && pcLife < 0.2)
+            ) {
               pokemon.status.triggerProtect(2000)
-              const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+              const cells = board.getAdjacentCells(
+                pokemon.positionX,
+                pokemon.positionY
+              )
               cells.forEach((cell) => {
                 if (cell.value && pokemon.team != cell.value.team) {
                   cell.value.status.triggerParalysis(2000, cell.value)
                 }
               })
-              pokemon.flyAway(board)                
+              pokemon.flyAway(board)
             }
-          }  
+          }
         }
       }
 
@@ -362,46 +379,36 @@ export default class PokemonState {
         }
       }
 
-
-
       if (attacker) {
         attacker.onKill(pokemon, board)
       }
 
       if (death) {
-
         let effectsRemovedList: Effect[] = []
-        
+
         // Remove field effects on death
         if (pokemon.skill === Ability.ELECTRIC_SURGE) {
-        
           board.forEach((x, y, pkm) => {
             if (pkm && pkm.team == pokemon.team && pkm.status.electricField) {
               pkm.status.electricField = false
             }
           })
           effectsRemovedList.push(Effect.ELECTRIC_TERRAIN)
-
         } else if (pokemon.skill === Ability.PSYCHIC_SURGE) {
-        
           board.forEach((x, y, pkm) => {
             if (pkm && pkm.team == pokemon.team && pkm.status.psychicField) {
               pkm.status.psychicField = false
             }
           })
           effectsRemovedList.push(Effect.PSYCHIC_TERRAIN)
-        
         } else if (pokemon.skill === Ability.GRASSY_SURGE) {
-        
           board.forEach((x, y, pkm) => {
             if (pkm && pkm.team == pokemon.team && pkm.status.grassField) {
               pkm.status.grassField = false
             }
           })
           effectsRemovedList.push(Effect.GRASSY_TERRAIN)
-        
         } else if (pokemon.skill === Ability.MISTY_SURGE) {
-        
           board.forEach((x, y, pkm) => {
             if (pkm && pkm.team == pokemon.team && pkm.status.fairyField) {
               pkm.status.fairyField = false
@@ -410,15 +417,17 @@ export default class PokemonState {
           effectsRemovedList.push(Effect.MISTY_TERRAIN)
         }
 
-
-        if(pokemon.team == Team.BLUE_TEAM){
-          pokemon.simulation.blueEffects = pokemon.simulation.blueEffects.filter(x => !effectsRemovedList.includes(x));
+        if (pokemon.team == Team.BLUE_TEAM) {
+          pokemon.simulation.blueEffects =
+            pokemon.simulation.blueEffects.filter(
+              (x) => !effectsRemovedList.includes(x)
+            )
         } else {
-          pokemon.simulation.redEffects = pokemon.simulation.redEffects.filter(x => !effectsRemovedList.includes(x));
+          pokemon.simulation.redEffects = pokemon.simulation.redEffects.filter(
+            (x) => !effectsRemovedList.includes(x)
+          )
         }
-
       }
-
     }
 
     takenDamage = Math.round(takenDamage)

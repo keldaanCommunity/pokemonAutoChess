@@ -1,5 +1,5 @@
-import { Langage } from "..";
-import { AttackType } from "../enum/Game";
+import { Langage } from ".."
+import { AttackType } from "../enum/Game"
 
 export const AttackTypeLabel: { [key in AttackType]: Langage } = {
   [AttackType.PHYSICAL]: {
@@ -21,5 +21,5 @@ export const AttackTypeLabel: { [key in AttackType]: Langage } = {
     esp: "Bruto",
     fra: "Brut",
     prt: "Bruto"
-  },
-};
+  }
+}

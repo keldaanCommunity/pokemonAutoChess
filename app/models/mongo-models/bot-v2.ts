@@ -99,12 +99,13 @@ const bot = new Schema(
       transform: function (doc, ret) {
         delete ret._id
         delete ret.__v
-        if(ret.steps) ret.steps.forEach((step) => {
-          step.board.forEach((board) => {
-            delete board._id
+        if (ret.steps)
+          ret.steps.forEach((step) => {
+            step.board.forEach((board) => {
+              delete board._id
+            })
+            delete step._id
           })
-          delete step._id
-        })
       }
     }
   }

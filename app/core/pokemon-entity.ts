@@ -136,7 +136,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       this.types.push(type)
     })
 
-    if(this.skill === Ability.MIMIC){
+    if (this.skill === Ability.MIMIC) {
       this.status.tree = true
       this.toIdleState()
     }
@@ -162,12 +162,12 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   handleDamage(params: {
-    damage: number,
-    board: Board,
-    attackType: AttackType,
-    attacker: PokemonEntity,
-    dodgeable: boolean,
-    shouldTargetGainMana: boolean,
+    damage: number
+    board: Board
+    attackType: AttackType
+    attacker: PokemonEntity
+    dodgeable: boolean
+    shouldTargetGainMana: boolean
     shouldAttackerGainMana: boolean
   }) {
     return this.state.handleDamage({ target: this, ...params })
@@ -179,22 +179,22 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     attackType: AttackType,
     attacker: PokemonEntity,
     crit: boolean
-  ): { death: boolean, takenDamage: number } {
+  ): { death: boolean; takenDamage: number } {
     if (this.status.runeProtect) {
       this.count.spellBlockedCount++
       return { death: false, takenDamage: 0 }
     } else {
       let specialDamage = damage + (damage * attacker.ap) / 100
-      if(crit && this.items.has(Item.ROCKY_HELMET) === false){
+      if (crit && this.items.has(Item.ROCKY_HELMET) === false) {
         specialDamage = Math.round(specialDamage * attacker.critDamage)
       }
       if (attacker && attacker.items.has(Item.POKEMONOMICON)) {
         this.status.triggerBurn(2000, this, attacker, board)
         this.status.triggerWound(2000, this, board)
       }
-      if(this.items.has(Item.POWER_LENS) && specialDamage >= 1){
+      if (this.items.has(Item.POWER_LENS) && specialDamage >= 1) {
         attacker.handleDamage({
-          damage: Math.round(0.5*specialDamage),
+          damage: Math.round(0.5 * specialDamage),
           board,
           attackType: AttackType.SPECIAL,
           attacker: this,
@@ -220,11 +220,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     return this.state.handleHeal(this, heal, caster, apBoost)
   }
 
-  handleShield(
-    shield: number,
-    caster: IPokemonEntity,
-    apBoost?: boolean
-  ) {
+  handleShield(shield: number, caster: IPokemonEntity, apBoost?: boolean) {
     return this.state.handleShield(this, shield, caster, apBoost)
   }
 
@@ -298,13 +294,18 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     board.swapValue(this.positionX, this.positionY, x, y)
     this.positionX = x
     this.positionY = y
-    this.toMovingState() 
+    this.toMovingState()
     this.cooldown = 100 // for faster retargeting
   }
 
   // called after every successful attack (not dodged or protected)
-  onAttack(target: PokemonEntity, board: Board, damageDealt: number, shouldAttackerGainMana: boolean){
-    if(shouldAttackerGainMana){
+  onAttack(
+    target: PokemonEntity,
+    board: Board,
+    damageDealt: number,
+    shouldAttackerGainMana: boolean
+  ) {
+    if (shouldAttackerGainMana) {
       this.setMana(this.mana + 5)
     }
     if (
@@ -320,18 +321,10 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       } else if (this.effects.includes(Effect.CALM_MIND)) {
         lifesteal = 0.6
       }
-      this.handleHeal(
-        Math.floor(lifesteal * damageDealt),
-        this,
-        0
-      )
+      this.handleHeal(Math.floor(lifesteal * damageDealt), this, 0)
     }
     if (this.items.has(Item.SHELL_BELL)) {
-      this.handleHeal(
-        Math.floor(0.3 * damageDealt),
-        this,
-        0
-      )
+      this.handleHeal(Math.floor(0.3 * damageDealt), this, 0)
     }
 
     if (
@@ -356,7 +349,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  onCritical(target: PokemonEntity, board: Board){
+  onCritical(target: PokemonEntity, board: Board) {
     target.count.crit++
 
     if (
@@ -372,10 +365,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       } else if (this.effects.includes(Effect.STRANGE_STEAM)) {
         d = 60
       }
-      const cells = board.getAdjacentCells(
-        this.positionX,
-        this.positionY
-      )
+      const cells = board.getAdjacentCells(this.positionX, this.positionY)
 
       cells.forEach((cell) => {
         if (cell.value && this.team != cell.value.team) {
@@ -392,7 +382,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
         }
       })
     }
-    
+
     if (
       target.effects.includes(Effect.FAIRY_WIND) ||
       target.effects.includes(Effect.STRANGE_STEAM) ||
@@ -406,10 +396,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       } else if (target.effects.includes(Effect.STRANGE_STEAM)) {
         d = 60
       }
-      const cells = board.getAdjacentCells(
-        target.positionX,
-        target.positionY
-      )
+      const cells = board.getAdjacentCells(target.positionX, target.positionY)
 
       cells.forEach((cell) => {
         if (cell.value && target.team != cell.value.team) {
@@ -427,14 +414,14 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       })
     }
 
-    if(this.items.has(Item.SCOPE_LENS)){
+    if (this.items.has(Item.SCOPE_LENS)) {
       this.setMana(this.mana + 15)
       target.setMana(target.mana - 15)
       target.count.manaBurnCount++
     }
   }
 
-  onKill(target: PokemonEntity, board: Board){
+  onKill(target: PokemonEntity, board: Board) {
     if (
       this.items.has(Item.AMULET_COIN) &&
       this.team === 0 &&
@@ -444,9 +431,10 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       this.simulation.player.money += 1
       this.count.moneyCount++
     }
-    if (this.effects.includes(Effect.PURSUIT) ||
-        this.effects.includes(Effect.BRUTAL_SWING) ||
-        this.effects.includes(Effect.POWER_TRIP)
+    if (
+      this.effects.includes(Effect.PURSUIT) ||
+      this.effects.includes(Effect.BRUTAL_SWING) ||
+      this.effects.includes(Effect.POWER_TRIP)
     ) {
       const isPursuit = this.effects.includes(Effect.PURSUIT)
       const isBrutalSwing = this.effects.includes(Effect.BRUTAL_SWING)
@@ -526,12 +514,11 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  flyAway(board: Board){
+  flyAway(board: Board) {
     const flyAwayCell = board.getFlyAwayCell(this.positionX, this.positionY)
     this.flyingProtection--
-    if(flyAwayCell){
+    if (flyAwayCell) {
       this.moveTo(flyAwayCell.x, flyAwayCell.y, board)
     }
   }
-
 }

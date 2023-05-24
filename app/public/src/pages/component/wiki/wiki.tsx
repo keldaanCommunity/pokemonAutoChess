@@ -12,10 +12,9 @@ import "./wiki.css"
 export default function Wiki(props: { toggleWiki: () => void }) {
   return (
     <div id="wiki-page">
-      <button
-        onClick={props.toggleWiki}
-        className="bubbly blue"
-      >Back to Lobby</button>
+      <button onClick={props.toggleWiki} className="bubbly blue">
+        Back to Lobby
+      </button>
 
       <div className="nes-container">
         <Tabs>

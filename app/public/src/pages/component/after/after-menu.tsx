@@ -50,24 +50,30 @@ export default function AfterMenu() {
   return (
     <div className="after-menu">
       <div className="nes-container is-centered">
-        {playerRank && <>
-        <div className="player-rank">
-          {playerRank <= 3 && (
-            <img src={`/assets/ui/rank${playerRank}.png`} alt="" />
-          )}
-          <span>{getRankLabel(playerRank)}</span>
-        </div>
-        <div className="player-gains">
-          {shouldShowElo && <p className="player-elo">
-            ELO {newElo} ({ (newElo >= currentPlayer.elo ? '+' : '-') + Math.abs(newElo - currentPlayer.elo)})
-          </p>}
-          {elligibleToXP && <p className="player-exp">
-            EXP + {ExpPlace[playerRank-1]}
-          </p>}
-        </div>
-        </>
-        }
-        
+        {playerRank && (
+          <>
+            <div className="player-rank">
+              {playerRank <= 3 && (
+                <img src={`/assets/ui/rank${playerRank}.png`} alt="" />
+              )}
+              <span>{getRankLabel(playerRank)}</span>
+            </div>
+            <div className="player-gains">
+              {shouldShowElo && (
+                <p className="player-elo">
+                  ELO {newElo} (
+                  {(newElo >= currentPlayer.elo ? "+" : "-") +
+                    Math.abs(newElo - currentPlayer.elo)}
+                  )
+                </p>
+              )}
+              {elligibleToXP && (
+                <p className="player-exp">EXP + {ExpPlace[playerRank - 1]}</p>
+              )}
+            </div>
+          </>
+        )}
+
         <table>
           <thead>
             <tr>

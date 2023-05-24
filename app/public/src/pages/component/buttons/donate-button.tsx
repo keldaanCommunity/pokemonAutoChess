@@ -7,9 +7,13 @@ export default function DonateButton() {
         <img src="assets/ui/donate.svg" alt="" />
         <span className="btn-txt">Donate</span>
         <img
-            src="assets/ui/tipeee.svg"
-            style={{ height: "1.25em", marginLeft:"0.25em", display: "inline-block" }}
-          />
+          src="assets/ui/tipeee.svg"
+          style={{
+            height: "1.25em",
+            marginLeft: "0.25em",
+            display: "inline-block"
+          }}
+        />
       </button>
     </a>
   )

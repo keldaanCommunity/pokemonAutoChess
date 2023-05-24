@@ -206,7 +206,7 @@ export default class Status extends Schema implements IStatus {
     if (this.soulDewCooldown - dt <= 0) {
       this.soulDew = false
       pkm.addAbilityPower(10)
-      pkm.count.soulDewCount++;
+      pkm.count.soulDewCount++
       if (pkm.items.has(Item.SOUL_DEW)) {
         this.triggerSoulDew(1000)
       }

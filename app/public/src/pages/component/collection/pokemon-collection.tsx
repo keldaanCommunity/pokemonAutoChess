@@ -14,11 +14,13 @@ export default function PokemonCollection(props: {
   toggleCollection: () => void
 }) {
   const metadata = tracker as unknown as { [key: string]: ITracker }
-  const [selectedPokemon, setSelectedPokemon] = useState<Pkm | undefined>(undefined)
+  const [selectedPokemon, setSelectedPokemon] = useState<Pkm | undefined>(
+    undefined
+  )
 
   const [filter, setFilter] = useState<string>("all")
   const [shinyOnly, setShinyOnly] = useState<boolean>(false)
-  
+
   return (
     <div id="pokemon-collection">
       <header>
@@ -32,20 +34,69 @@ export default function PokemonCollection(props: {
         </button>
         <div className="spacer"></div>
         <label>
-          <input type="checkbox" className="nes-checkbox is-dark" checked={shinyOnly === true} onChange={e => setShinyOnly(!shinyOnly)} />
+          <input
+            type="checkbox"
+            className="nes-checkbox is-dark"
+            checked={shinyOnly === true}
+            onChange={(e) => setShinyOnly(!shinyOnly)}
+          />
           <span>Shiny Hunter</span>
         </label>
-        <button onClick={() => { setFilter("all") }} className="bubbly pink">
-          <input type="checkbox" className="nes-checkbox is-dark" readOnly checked={filter === "all"}/><span>Show all</span>
+        <button
+          onClick={() => {
+            setFilter("all")
+          }}
+          className="bubbly pink"
+        >
+          <input
+            type="checkbox"
+            className="nes-checkbox is-dark"
+            readOnly
+            checked={filter === "all"}
+          />
+          <span>Show all</span>
         </button>
-        <button onClick={() => { setFilter("locked") }} className="bubbly red">
-          <input type="checkbox" className="nes-checkbox is-dark" readOnly checked={filter === "locked"}/><span>Show locked</span>
+        <button
+          onClick={() => {
+            setFilter("locked")
+          }}
+          className="bubbly red"
+        >
+          <input
+            type="checkbox"
+            className="nes-checkbox is-dark"
+            readOnly
+            checked={filter === "locked"}
+          />
+          <span>Show locked</span>
         </button>
-        <button onClick={() => { setFilter("unlockable") }} className="bubbly orange">
-          <input type="checkbox" className="nes-checkbox" readOnly checked={filter === "unlockable"}/><span>Show unlockable</span>
+        <button
+          onClick={() => {
+            setFilter("unlockable")
+          }}
+          className="bubbly orange"
+        >
+          <input
+            type="checkbox"
+            className="nes-checkbox"
+            readOnly
+            checked={filter === "unlockable"}
+          />
+          <span>Show unlockable</span>
         </button>
-        <button onClick={() => { setFilter("unlocked") }} className="bubbly green">
-          <input type="checkbox" className="nes-checkbox is-dark" readOnly checked={filter === "unlocked"}/><span>Show unlocked</span>
+        <button
+          onClick={() => {
+            setFilter("unlocked")
+          }}
+          className="bubbly green"
+        >
+          <input
+            type="checkbox"
+            className="nes-checkbox is-dark"
+            readOnly
+            checked={filter === "unlocked"}
+          />
+          <span>Show unlocked</span>
         </button>
       </header>
       <div className="nes-container">
@@ -55,36 +106,51 @@ export default function PokemonCollection(props: {
             {(Object.keys(Synergy) as Synergy[]).map((type) => {
               return (
                 <Tab key={"title-" + type}>
-                  <SynergyIcon type={type} />                  
+                  <SynergyIcon type={type} />
                 </Tab>
               )
             })}
             <Tab key="?">
-              <img src="assets/unown/unown-qm.png" alt="?" className="unown-icon" />
+              <img
+                src="assets/unown/unown-qm.png"
+                alt="?"
+                className="unown-icon"
+              />
             </Tab>
           </TabList>
 
-          {(["all"].concat(Object.keys(Synergy)) as (Synergy | "all")[]).map(type => {
-            return (
-              <TabPanel key={type}>                
-                <PokemonCarousel
-                  type={type}
-                  setPokemon={setSelectedPokemon}
-                  metadata={metadata}
-                  filter={filter}
-                  shinyOnly={shinyOnly}
-                />
-              </TabPanel>
-            )
-          })}
+          {(["all"].concat(Object.keys(Synergy)) as (Synergy | "all")[]).map(
+            (type) => {
+              return (
+                <TabPanel key={type}>
+                  <PokemonCarousel
+                    type={type}
+                    setPokemon={setSelectedPokemon}
+                    metadata={metadata}
+                    filter={filter}
+                    shinyOnly={shinyOnly}
+                  />
+                </TabPanel>
+              )
+            }
+          )}
           <TabPanel>
-            <UnownPanel setPokemon={setSelectedPokemon} metadata={metadata} filter={filter} />
+            <UnownPanel
+              setPokemon={setSelectedPokemon}
+              metadata={metadata}
+              filter={filter}
+            />
           </TabPanel>
         </Tabs>
       </div>
-      {selectedPokemon && <PokemonEmotionsModal pokemon={selectedPokemon} onHide={() => {
-          setSelectedPokemon(undefined)
-      }}/>}
+      {selectedPokemon && (
+        <PokemonEmotionsModal
+          pokemon={selectedPokemon}
+          onHide={() => {
+            setSelectedPokemon(undefined)
+          }}
+        />
+      )}
     </div>
   )
 }

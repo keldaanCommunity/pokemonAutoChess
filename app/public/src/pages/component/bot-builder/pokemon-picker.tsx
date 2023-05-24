@@ -13,18 +13,18 @@ const pokemonPoolStyle: CSS.Properties = {
   display: "flex",
   flexWrap: "wrap",
   margin: "10px",
-  marginTop: "0px",
+  marginTop: "0px"
 }
 
 const imgStyle: CSS.Properties = {
   width: "40px",
   height: "40px",
   imageRendering: "pixelated",
-  cursor: "var(--cursor-hover)",
+  cursor: "var(--cursor-hover)"
 }
 
 const cursorStyle: CSS.Properties = {
-  cursor: "var(--cursor-hover)",
+  cursor: "var(--cursor-hover)"
 }
 
 export default function PokemonPicker(props: {
@@ -41,7 +41,12 @@ export default function PokemonPicker(props: {
           )
         })}
         <Tab style={cursorStyle} key="none">
-          <img src="assets/unown/unown-qm.png" alt="?" className="unown-icon" style={{margin: "-28px"}} />
+          <img
+            src="assets/unown/unown-qm.png"
+            alt="?"
+            className="unown-icon"
+            style={{ margin: "-28px" }}
+          />
         </Tab>
       </TabList>
 
@@ -55,7 +60,7 @@ export default function PokemonPicker(props: {
                     props.selectEntity({
                       pkm: pkm,
                       emotion: Emotion.NORMAL,
-                      shiny: false,
+                      shiny: false
                     })
                   }}
                   key={`${pkm}`}
@@ -76,7 +81,7 @@ export default function PokemonPicker(props: {
                 props.selectEntity({
                   pkm: pkm,
                   emotion: Emotion.NORMAL,
-                  shiny: false,
+                  shiny: false
                 })
               }}
               key={`${pkm}`}

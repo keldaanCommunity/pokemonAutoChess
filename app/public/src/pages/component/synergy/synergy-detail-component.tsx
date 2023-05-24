@@ -2,7 +2,10 @@ import React from "react"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { PrecomputedTypePokemon } from "../../../../../types"
 import { Synergy, SynergyEffects } from "../../../../../types/enum/Synergy"
-import { SynergyName, SynergyDescription } from "../../../../../types/strings/Synergy"
+import {
+  SynergyName,
+  SynergyDescription
+} from "../../../../../types/strings/Synergy"
 import PRECOMPUTED_TYPE_POKEMONS from "../../../../../models/precomputed/type-pokemons.json"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { EffectName } from "../../../../../types/strings/Effect"
@@ -22,13 +25,15 @@ export default function SynergyDetailComponent(props: {
   const additionalPokemons = useAppSelector(
     (state) => state.game.additionalPokemons
   )
-  if(TypeTrigger.hasOwnProperty(props.type) === false) return null
-  const levelReached = TypeTrigger[props.type].filter(n => n <= props.value).at(-1)
+  if (TypeTrigger.hasOwnProperty(props.type) === false) return null
+  const levelReached = TypeTrigger[props.type]
+    .filter((n) => n <= props.value)
+    .at(-1)
   return (
     <div style={{ maxWidth: "480px" }}>
       <div style={{ display: "flex", alignItems: "center" }}>
         <SynergyIcon type={props.type} size="40px" />
-        <h3 style={{margin: 0}}>{SynergyName[props.type].eng}</h3>
+        <h3 style={{ margin: 0 }}>{SynergyName[props.type].eng}</h3>
       </div>
       <p>{addIconsToDescription(SynergyDescription[props.type].eng)}</p>
 
@@ -37,9 +42,18 @@ export default function SynergyDetailComponent(props: {
           <div
             key={EffectName[d]}
             style={{
-              color: levelReached === TypeTrigger[props.type][i] ? "#fff" : "#e8e8e8",
-              backgroundColor: levelReached === TypeTrigger[props.type][i] ? "#54596b" : "rgba(84, 89, 107,0)",
-              border: levelReached === TypeTrigger[props.type][i] ? "4px solid black" : "none",
+              color:
+                levelReached === TypeTrigger[props.type][i]
+                  ? "#fff"
+                  : "#e8e8e8",
+              backgroundColor:
+                levelReached === TypeTrigger[props.type][i]
+                  ? "#54596b"
+                  : "rgba(84, 89, 107,0)",
+              border:
+                levelReached === TypeTrigger[props.type][i]
+                  ? "4px solid black"
+                  : "none",
               borderRadius: "12px",
               padding: "5px"
             }}
@@ -51,21 +65,21 @@ export default function SynergyDetailComponent(props: {
           </div>
         )
       })}
-      <div style={{ display: "flex", flexWrap: 'wrap' }}>
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
         {precomputed[props.type].pokemons.map((p) => {
           const pokemon = PokemonFactory.createPokemonFromName(p as Pkm)
           const s = { border: "3px solid " + RarityColor[pokemon.rarity] }
           return <img key={p} style={s} src={getPortraitSrc(pokemon.index)} />
         })}
       </div>
-      <div style={{ display: "flex", flexWrap: 'wrap', marginTop: "10px" }}>
+      <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
         {precomputed[props.type].mythicalPokemons.map((p) => {
           const pokemon = PokemonFactory.createPokemonFromName(p as Pkm)
           const s = { border: "3px solid " + RarityColor[pokemon.rarity] }
           return <img key={p} style={s} src={getPortraitSrc(pokemon.index)} />
         })}
       </div>
-      <div style={{ display: "flex", flexWrap: 'wrap', marginTop: "10px" }}>
+      <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
         {precomputed[props.type].additionalPokemons.map((p) => {
           if (additionalPokemons.includes(p)) {
             const pokemon = PokemonFactory.createPokemonFromName(p as Pkm)

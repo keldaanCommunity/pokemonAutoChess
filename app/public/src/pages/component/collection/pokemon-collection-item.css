@@ -1,45 +1,45 @@
 .pokemon-collection-item {
-    cursor: var(--cursor-hover);
-    padding: 5px;
-    background-color: #54596b;
+  cursor: var(--cursor-hover);
+  padding: 5px;
+  background-color: #54596b;
 }
 
 .pokemon-collection-item > img {
-    width: 80px;
-    height: 80px;
-    image-rendering: pixelated;
-    border-radius: 8px 8px 0 0;
+  width: 80px;
+  height: 80px;
+  image-rendering: pixelated;
+  border-radius: 8px 8px 0 0;
 }
 
-.pokemon-collection-item:not(.unlocked,.unlockable){
-    filter: grayscale(1) contrast(0.5);
+.pokemon-collection-item:not(.unlocked, .unlockable) {
+  filter: grayscale(1) contrast(0.5);
 }
 
 .pokemon-collection-item.unlocked {
-    filter: grayscale(0) contrast(1);
+  filter: grayscale(0) contrast(1);
 }
 .pokemon-collection-item.unlockable:not(.unlocked) {
-    filter: grayscale(1) contrast(1);
+  filter: grayscale(1) contrast(1);
 }
 
 .pokemon-collection-item > p {
-    text-align: center;
-    line-height: 1em;
-    border-radius: 0 0 8px 8px;
+  text-align: center;
+  line-height: 1em;
+  border-radius: 0 0 8px 8px;
 }
 
 .pokemon-collection-item p > * {
-    vertical-align: middle;
-    color: white;
+  vertical-align: middle;
+  color: white;
 }
 
 .pokemon-collection-item.unlockable p {
-    color: black;
+  color: black;
 }
 
 .pokemon-collection-item p > img {
-    width: 20px;
-    height: 20px;
-    image-rendering: pixelated;
-    margin-left: 0.5em;
+  width: 20px;
+  height: 20px;
+  image-rendering: pixelated;
+  margin-left: 0.5em;
 }

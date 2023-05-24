@@ -1,4 +1,4 @@
-import log from 'loglevel';
+import log from "loglevel"
 
 log.setDefaultLevel("debug")
 

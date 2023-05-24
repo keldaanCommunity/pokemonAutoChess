@@ -6,12 +6,7 @@ import { Synergy } from "../types/enum/Synergy"
 import { logger } from "../utils/logger"
 
 export default class MovingState extends PokemonState {
-  update(
-    pokemon: PokemonEntity,
-    dt: number,
-    board: Board,
-    climate: string
-  ) {
+  update(pokemon: PokemonEntity, dt: number, board: Board, climate: string) {
     super.update(pokemon, dt, board, climate)
     if (pokemon.cooldown <= 0) {
       pokemon.cooldown = 500

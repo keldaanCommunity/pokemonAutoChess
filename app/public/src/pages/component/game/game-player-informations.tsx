@@ -7,9 +7,14 @@ import ReactTooltip from "react-tooltip"
 import { Life } from "../icons/life"
 import { Money } from "../icons/money"
 import GameMoneyDetail from "./game-money-detail"
-import "./game-player-informations.css";
+import "./game-player-informations.css"
 import { ToastContainer } from "react-toastify"
-import { AdditionalPicksStages, CarouselStages, MythicalPicksStages, NeutralStage } from "../../../../../types/Config"
+import {
+  AdditionalPicksStages,
+  CarouselStages,
+  MythicalPicksStages,
+  NeutralStage
+} from "../../../../../types/Config"
 
 export default function GamePlayerInformations() {
   const experienceManager = useAppSelector(
@@ -29,15 +34,27 @@ export default function GamePlayerInformations() {
       <div id="game-player-informations" className="nes-container">
         <div className="stage-information" data-tip data-for="detail-stage">
           <ReactTooltip
-              id="detail-stage"
-              className="customeTheme"
-              effect="solid"
-              place="bottom"
-            >
-            <p><span className="help">PVE Stages:</span> {NeutralStage.map(s => s.turn).join(", ")}</p>
-            <p><span className="help">Carousel Stages:</span> {CarouselStages.join(", ")}</p>
-            <p><span className="help">Additional picks:</span> Stages {AdditionalPicksStages.join(" and ")}</p>
-            <p><span className="help">Mythical picks:</span> Stages {MythicalPicksStages.join(" and ")}</p>
+            id="detail-stage"
+            className="customeTheme"
+            effect="solid"
+            place="bottom"
+          >
+            <p>
+              <span className="help">PVE Stages:</span>{" "}
+              {NeutralStage.map((s) => s.turn).join(", ")}
+            </p>
+            <p>
+              <span className="help">Carousel Stages:</span>{" "}
+              {CarouselStages.join(", ")}
+            </p>
+            <p>
+              <span className="help">Additional picks:</span> Stages{" "}
+              {AdditionalPicksStages.join(" and ")}
+            </p>
+            <p>
+              <span className="help">Mythical picks:</span> Stages{" "}
+              {MythicalPicksStages.join(" and ")}
+            </p>
           </ReactTooltip>
           <p>Stage {stageLevel}</p>
           <p>{roundTime}s</p>
@@ -77,12 +94,18 @@ export default function GamePlayerInformations() {
           </div>
         </div>
         <div className="nes-container life information">
-          <div><Life value={life} /></div>
+          <div>
+            <Life value={life} />
+          </div>
         </div>
         <div className="nes-container player-information">
           <img src={getAvatarSrc(avatar)} className="pokemon-portrait" />
-          <p className="player-title" style={{ margin: "0px" }}>{TitleName[title]}</p>
-          <p style={{ marginLeft: "5px", color: "white", textAlign: "center" }}>{name}</p>
+          <p className="player-title" style={{ margin: "0px" }}>
+            {TitleName[title]}
+          </p>
+          <p style={{ marginLeft: "5px", color: "white", textAlign: "center" }}>
+            {name}
+          </p>
         </div>
       </div>
       <TimerBar />

@@ -14,14 +14,21 @@ export default function GamePlayerDetail(props: {
 }) {
   return (
     <div>
-      <div style={{ display: "flex", gap: "10px", marginBottom: "10px", alignItems: "center" }}>
+      <div
+        style={{
+          display: "flex",
+          gap: "10px",
+          marginBottom: "10px",
+          alignItems: "center"
+        }}
+      >
         <h4>{props.name}</h4>
         <div className="nes-container">
           <Life value={props.life} />
         </div>
         <div className="nes-container">
           <Money value={props.money} />
-        </div>        
+        </div>
       </div>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         {props.history.map((record, i) => {

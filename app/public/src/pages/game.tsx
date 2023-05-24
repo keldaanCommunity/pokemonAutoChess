@@ -79,7 +79,10 @@ import { getRankLabel } from "../../../types/strings/Strings"
 import GameScene from "../game/scenes/game-scene"
 import { toast } from "react-toastify"
 import { logger } from "../../../utils/logger"
-import { MAX_PLAYERS_PER_LOBBY, RequiredStageLevelForXpElligibility } from "../../../types/Config"
+import {
+  MAX_PLAYERS_PER_LOBBY,
+  RequiredStageLevelForXpElligibility
+} from "../../../types/Config"
 
 let gameContainer: GameContainer
 
@@ -138,7 +141,9 @@ export default function Game() {
       )
     }
 
-    const elligibleToXP = nbPlayers >= MAX_PLAYERS_PER_LOBBY && (room?.state.stageLevel ?? 0) >= RequiredStageLevelForXpElligibility
+    const elligibleToXP =
+      nbPlayers >= MAX_PLAYERS_PER_LOBBY &&
+      (room?.state.stageLevel ?? 0) >= RequiredStageLevelForXpElligibility
     const elligibleToELO = elligibleToXP && !room?.state.noElo
 
     const r: Room<AfterGameState> = await client.create("after-game", {

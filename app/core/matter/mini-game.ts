@@ -56,8 +56,14 @@ export class MiniGame {
           const itemBody = this.bodies.get(item.id)
           if (itemBody) {
             const t = this.engine.timing.timestamp * ITEM_ROTATION_SPEED
-            const x = this.centerX + Math.cos(t + (Math.PI * 2 * item.index / this.items!.size)) * CAROUSEL_RADIUS
-            const y = this.centerY + Math.sin(t + (Math.PI * 2 * item.index / this.items!.size)) * CAROUSEL_RADIUS
+            const x =
+              this.centerX +
+              Math.cos(t + (Math.PI * 2 * item.index) / this.items!.size) *
+                CAROUSEL_RADIUS
+            const y =
+              this.centerY +
+              Math.sin(t + (Math.PI * 2 * item.index) / this.items!.size) *
+                CAROUSEL_RADIUS
             Body.setPosition(itemBody, { x, y })
           }
         }
@@ -108,12 +114,16 @@ export class MiniGame {
           itemBody.collisionFilter.mask = 0 // item no longer collide
           avatarBody.collisionFilter.mask = 0 // player no longer collide after taking an item
 
-          const player = this.alivePlayers.find(p => p.id === avatar!.id)
-          if(player && player.isBot){
+          const player = this.alivePlayers.find((p) => p.id === avatar!.id)
+          if (player && player.isBot) {
             // make bots return to outer circle
-            const i = this.alivePlayers.indexOf(player) 
-            avatar.targetX = this.centerX + Math.cos((2 * Math.PI * i) / this.alivePlayers.length) * 300
-            avatar.targetY = this.centerY + Math.sin((2 * Math.PI * i) / this.alivePlayers.length) * 250
+            const i = this.alivePlayers.indexOf(player)
+            avatar.targetX =
+              this.centerX +
+              Math.cos((2 * Math.PI * i) / this.alivePlayers.length) * 300
+            avatar.targetY =
+              this.centerY +
+              Math.sin((2 * Math.PI * i) / this.alivePlayers.length) * 250
           }
         }
       }
@@ -134,11 +144,14 @@ export class MiniGame {
     })
     this.alivePlayers.forEach((player, i) => {
       const x =
-        this.centerX + Math.cos((2 * Math.PI * i) / this.alivePlayers.length) * 300
+        this.centerX +
+        Math.cos((2 * Math.PI * i) / this.alivePlayers.length) * 300
       const y =
-        this.centerY + Math.sin((2 * Math.PI * i) / this.alivePlayers.length) * 250
-      let retentionDelay = 4000 + (this.alivePlayers.length - player.rank) * 2000
-      if(stageLevel < 3){
+        this.centerY +
+        Math.sin((2 * Math.PI * i) / this.alivePlayers.length) * 250
+      let retentionDelay =
+        4000 + (this.alivePlayers.length - player.rank) * 2000
+      if (stageLevel < 3) {
         retentionDelay = 5000
       }
 
@@ -150,9 +163,15 @@ export class MiniGame {
         retentionDelay
       )
 
-      if(player.isBot){
-        avatar.targetX = this.centerX + Math.cos((2 * Math.PI * i) / this.alivePlayers.length) * CAROUSEL_RADIUS
-        avatar.targetY = this.centerY + Math.sin((2 * Math.PI * i) / this.alivePlayers.length) * CAROUSEL_RADIUS
+      if (player.isBot) {
+        avatar.targetX =
+          this.centerX +
+          Math.cos((2 * Math.PI * i) / this.alivePlayers.length) *
+            CAROUSEL_RADIUS
+        avatar.targetY =
+          this.centerY +
+          Math.sin((2 * Math.PI * i) / this.alivePlayers.length) *
+            CAROUSEL_RADIUS
       }
 
       this.avatars!.set(avatar.id, avatar)
@@ -166,8 +185,8 @@ export class MiniGame {
     const items = this.pickRandomItems(nbItemsToPick)
 
     for (let j = 0; j < nbItemsToPick; j++) {
-      const x = this.centerX + Math.cos(Math.PI * 2 * j / nbItemsToPick) * 100
-      const y = this.centerY + Math.sin(Math.PI * 2 * j / nbItemsToPick) * 90
+      const x = this.centerX + Math.cos((Math.PI * 2 * j) / nbItemsToPick) * 100
+      const y = this.centerY + Math.sin((Math.PI * 2 * j) / nbItemsToPick) * 90
       const name = items[j]
       const floatingItem = new FloatingItem(name, x, y, j)
       this.items?.set(floatingItem.id, floatingItem)
@@ -206,8 +225,8 @@ export class MiniGame {
       let item, count
       do {
         item = pickRandomIn(BasicItems)
-        count = items.filter(i => i === item).length
-      } while(count >= 2) // maximum 2 copies of each item
+        count = items.filter((i) => i === item).length
+      } while (count >= 2) // maximum 2 copies of each item
       items.push(item)
     }
     return items
@@ -222,21 +241,31 @@ export class MiniGame {
     }
   }
 
-  updatePlayerVector(id: string){
+  updatePlayerVector(id: string) {
     const avatar = this.avatars?.get(id)
     const body = this.bodies.get(id)
-    if (body && avatar && avatar.timer <= 0) {      
-      const distanceToTarget = Math.sqrt((avatar.targetX - avatar.x) ** 2 + (avatar.targetY - avatar.y) ** 2) 
-      if (distanceToTarget > PLAYER_VELOCITY){
+    if (body && avatar && avatar.timer <= 0) {
+      const distanceToTarget = Math.sqrt(
+        (avatar.targetX - avatar.x) ** 2 + (avatar.targetY - avatar.y) ** 2
+      )
+      if (distanceToTarget > PLAYER_VELOCITY) {
         avatar.action = PokemonActionState.WALK
-        let moveVector = Vector.sub(Vector.create(avatar.targetX, avatar.targetY), Vector.create(avatar.x, avatar.y))
-        avatar.orientation = getOrientation(0, 0, moveVector.x, -1 * moveVector.y)
+        let moveVector = Vector.sub(
+          Vector.create(avatar.targetX, avatar.targetY),
+          Vector.create(avatar.x, avatar.y)
+        )
+        avatar.orientation = getOrientation(
+          0,
+          0,
+          moveVector.x,
+          -1 * moveVector.y
+        )
         moveVector = Vector.normalise(moveVector)
         moveVector = Vector.mult(moveVector, PLAYER_VELOCITY)
         Body.setVelocity(body, moveVector)
       } else {
         avatar.action = PokemonActionState.IDLE
-        Body.setVelocity(body, Vector.create(0,0))
+        Body.setVelocity(body, Vector.create(0, 0))
       }
     }
   }
@@ -257,7 +286,7 @@ export class MiniGame {
       }
 
       const item = this.items?.get(avatar.itemId)
-      
+
       if (item && player && !player.isBot) {
         player.items.add(item.name)
       }

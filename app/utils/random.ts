@@ -1,5 +1,5 @@
 export function chance(probability: number): boolean {
-    return Math.random() < probability
+  return Math.random() < probability
 }
 
 export function coinflip(): boolean {
@@ -7,8 +7,8 @@ export function coinflip(): boolean {
 }
 
 export function pickRandomIn<T>(list: T[] | Record<any, T>): T {
-    if(!Array.isArray(list)) return pickRandomIn(Object.values(list))
-    return list[Math.floor(Math.random()*list.length)]
+  if (!Array.isArray(list)) return pickRandomIn(Object.values(list))
+  return list[Math.floor(Math.random() * list.length)]
 }
 
 export function pickNRandomIn<T>(array: T[], number = 1): T[] {

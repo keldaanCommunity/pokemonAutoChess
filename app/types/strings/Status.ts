@@ -102,90 +102,90 @@ export const StatusLabel: { [key in Status]: Langage } = {
 }
 
 export const StatusDescription: { [key in Status]: Langage } = {
-    [Status.BURN]: {
-      eng: `Deals 5% of max HP as ${Damage.TRUE} every second`,
-      esp: "",
-      fra: "",
-      prt: ""
-    },
-    [Status.SILENCE]: {
-      eng: "Prevents casting abilities and gaining mana",
-      esp: "",
-      fra: "",
-      prt: ""
-    },
-    [Status.POISON]: {
-      eng: `Deals 5% of max HP per stack as ${Damage.TRUE} every second. Can stack up to 3 times.`,
-      esp: "",
-      fra: "",
-      prt: ""
-    },
-    [Status.FREEZE]: {
-      eng: "Prevents moving or attacking",
-      esp: "",
-      fra: "",
-      prt: ""
-    },
-    [Status.PROTECT]: {
-      eng: "Protects from any source of damage, but prevents mana gain",
-      esp: "",
-      fra: "",
-      prt: ""
-    },
-    [Status.SLEEP]: {
-      eng: "Prevents moving or attacking. Receiving attacks reduces the duration of the effect.",
-      esp: "",
-      fra: "",
-      prt: ""
-    },
-    [Status.CONFUSION]: {
-      eng: "Force to change target all the time and sometimes deal damage to itself",
-      esp: "",
-      fra: "",
-      prt: ""
-    },
-    [Status.WOUND]: {
-      eng: "Prevents healing from any source",
-      esp: "",
-      fra: "",
-      prt: ""
-    },
-    [Status.RESURECTION]: {
-      eng: `Prevents KO once, restoring to max ${Stat.HP}`,
-      esp: "",
-      fra: "",
-      prt: ""
-    },
-    [Status.PARALYSIS]: {
-      eng: `Reduce ${Stat.ATK_SPEED} by 40%`,
-      esp: "",
-      fra: "",
-      prt: ""
-    },
-    [Status.ARMOR_REDUCTION]: {
-      eng: `Reduce ${Stat.DEF} & ${Stat.SPE_DEF} by 50%`,
-      esp: "",
-      fra: "",
-      prt: ""
-    },
-    [Status.RUNE_PROTECT]: {
-      eng: `Protects from ${Damage.SPECIAL} and status alterations.`,
-      esp: "",
-      fra: "",
-      prt: ""
-    },
-    [Status.ELECTRIC_FIELD]: {
-      eng: "Increase damage dealt by 30% (Electric only)",
-      esp: "",
-      fra: "Champ Electrique",
-      prt: ""
-    },
-    [Status.PSYCHIC_FIELD]: {
-      eng: "Increase damage dealt by 30% (Psychic only)",
-      esp: "",
-      fra: "Champ Psychique",
-      prt: ""
-    },
+  [Status.BURN]: {
+    eng: `Deals 5% of max HP as ${Damage.TRUE} every second`,
+    esp: "",
+    fra: "",
+    prt: ""
+  },
+  [Status.SILENCE]: {
+    eng: "Prevents casting abilities and gaining mana",
+    esp: "",
+    fra: "",
+    prt: ""
+  },
+  [Status.POISON]: {
+    eng: `Deals 5% of max HP per stack as ${Damage.TRUE} every second. Can stack up to 3 times.`,
+    esp: "",
+    fra: "",
+    prt: ""
+  },
+  [Status.FREEZE]: {
+    eng: "Prevents moving or attacking",
+    esp: "",
+    fra: "",
+    prt: ""
+  },
+  [Status.PROTECT]: {
+    eng: "Protects from any source of damage, but prevents mana gain",
+    esp: "",
+    fra: "",
+    prt: ""
+  },
+  [Status.SLEEP]: {
+    eng: "Prevents moving or attacking. Receiving attacks reduces the duration of the effect.",
+    esp: "",
+    fra: "",
+    prt: ""
+  },
+  [Status.CONFUSION]: {
+    eng: "Force to change target all the time and sometimes deal damage to itself",
+    esp: "",
+    fra: "",
+    prt: ""
+  },
+  [Status.WOUND]: {
+    eng: "Prevents healing from any source",
+    esp: "",
+    fra: "",
+    prt: ""
+  },
+  [Status.RESURECTION]: {
+    eng: `Prevents KO once, restoring to max ${Stat.HP}`,
+    esp: "",
+    fra: "",
+    prt: ""
+  },
+  [Status.PARALYSIS]: {
+    eng: `Reduce ${Stat.ATK_SPEED} by 40%`,
+    esp: "",
+    fra: "",
+    prt: ""
+  },
+  [Status.ARMOR_REDUCTION]: {
+    eng: `Reduce ${Stat.DEF} & ${Stat.SPE_DEF} by 50%`,
+    esp: "",
+    fra: "",
+    prt: ""
+  },
+  [Status.RUNE_PROTECT]: {
+    eng: `Protects from ${Damage.SPECIAL} and status alterations.`,
+    esp: "",
+    fra: "",
+    prt: ""
+  },
+  [Status.ELECTRIC_FIELD]: {
+    eng: "Increase damage dealt by 30% (Electric only)",
+    esp: "",
+    fra: "Champ Electrique",
+    prt: ""
+  },
+  [Status.PSYCHIC_FIELD]: {
+    eng: "Increase damage dealt by 30% (Psychic only)",
+    esp: "",
+    fra: "Champ Psychique",
+    prt: ""
+  },
   [Status.GRASS_FIELD]: {
     eng: "Increase damage dealt by 30% (Grass only)",
     esp: "",

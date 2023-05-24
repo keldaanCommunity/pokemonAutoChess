@@ -38,7 +38,14 @@ export default function Avatar(props: {
           src={getAvatarSrc(props.avatar)}
         />
 
-        <span style={{ overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis", padding: "0 0.5em" }}>
+        <span
+          style={{
+            overflow: "hidden",
+            whiteSpace: "nowrap",
+            textOverflow: "ellipsis",
+            padding: "0 0.5em"
+          }}
+        >
           {props.name}
         </span>
         <RoleBadge role={props.role} />

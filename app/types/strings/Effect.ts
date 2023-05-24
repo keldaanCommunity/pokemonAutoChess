@@ -84,7 +84,11 @@ export const EffectName: { [key in Effect]: string } = {
   [Effect.GOOGLE_SPECS]: `Google Specs`,
   [Effect.HATCHER]: `Hatcher`,
   [Effect.BREEDER]: `Breeder`,
-  [Effect.TELEPORT_NEXT_ATTACK]: `Teleport`
+  [Effect.TELEPORT_NEXT_ATTACK]: `Teleport`,
+  [Effect.GRASSY_TERRAIN]: "Grassy Terrain",
+  [Effect.PSYCHIC_TERRAIN]: "Psychic Terrain",
+  [Effect.ELECTRIC_TERRAIN]: "Electric Terrain",
+  [Effect.MISTY_TERRAIN]: "Misty Terrain"
 }
 
 export const EffectDescription: {
@@ -499,5 +503,25 @@ export const EffectDescription: {
     eng: `Next attack will deal additional ${Damage.SPECIAL}`,
     esp: ``,
     fra: ``
+  },
+  [Effect.GRASSY_TERRAIN]: {
+    eng: "Increase damage dealt by 30% (Grass only)",
+    esp: "",
+    fra: ""
+  },
+  [Effect.PSYCHIC_TERRAIN]: {
+    eng: "Increase damage dealt by 30% (Psychic only)",
+    esp: "",
+    fra: ""
+  },
+  [Effect.ELECTRIC_TERRAIN]: {
+    eng: "Increase damage dealt by 30% (Electric only)",
+    esp: "",
+    fra: ""
+  },
+  [Effect.MISTY_TERRAIN]: {
+    eng: "Increase damage dealt by 30% (Fairy only)",
+    esp: "",
+    fra: ""
   }
 }
