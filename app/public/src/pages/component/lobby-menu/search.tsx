@@ -9,7 +9,8 @@ import {
   setModerator,
   giveTitle,
   ban,
-  setBotManager
+  setBotManager,
+  unban
 } from "../../../stores/NetworkStore"
 import { getAvatarSrc } from "../../../utils"
 import PlayerBox from "./player-box"
@@ -39,10 +40,22 @@ export default function Search() {
       <button
         className="bubbly red"
         onClick={() => {
-          dispatch(ban(user.id))
+          dispatch(ban({ uid: user.id, name: user.name }))
         }}
       >
         <p style={{ margin: "0px" }}>Ban User</p>
+      </button>
+    ) : null
+
+  const unbanButton =
+    user && role && (role === Role.ADMIN || role === Role.MODERATOR) ? (
+      <button
+        className="bubbly red"
+        onClick={() => {
+          dispatch(unban({ uid: user.id, name: user.name }))
+        }}
+      >
+        <p style={{ margin: "0px" }}>Unban User</p>
       </button>
     ) : null
 
@@ -138,7 +151,7 @@ export default function Search() {
           {giveButton}
           {titleButton}
           {banButton}
-
+          {unbanButton}
           <History history={user.history} />
         </div>
       )}
