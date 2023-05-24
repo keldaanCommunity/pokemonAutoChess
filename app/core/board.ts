@@ -222,4 +222,21 @@ export default class Board {
       return undefined
     }
   }
+
+  getFlyAwayCell(x: number, y: number): Cell | null {
+    let cx = Math.round((x + this.columns * 0.5) % this.columns)
+    let cy = Math.round((y + this.rows * 0.5) % this.rows)
+    let radius = 1
+    const candidates: Cell[] = [{ x: cx, y: cy, value: this.getValue(cx, cy) }]
+    while(candidates[0].value !== undefined && radius < 5){
+      candidates.shift()
+      if(candidates.length === 0){
+        candidates.push(...this.getCellsInRadius(cx, cy, radius))
+        radius++;
+      }
+    }
+    
+    return candidates[0].value === undefined ? candidates[0] : null
+  }
+
 }

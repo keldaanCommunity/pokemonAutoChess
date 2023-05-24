@@ -18,6 +18,7 @@ import { Synergy } from "../types/enum/Synergy"
 import { Pkm } from "../types/enum/Pokemon"
 import { IdleState } from "./idle-state"
 import PokemonFactory from "../models/pokemon-factory"
+import { roundTo2Digits } from "../utils/number"
 
 export default class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
@@ -71,7 +72,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   specialDamage: number
   trueDamage: number
   shieldDone: number
-  flyingProtection = false
+  flyingProtection = 0
   growGroundTimer = 0
   echo = 0
   isClone = false
@@ -289,12 +290,16 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     const boost = apBoost ? (value * this.ap) / 100 : 0
     this.critDamage = Math.max(
       0,
-      this.roundTo2Digits(this.critDamage + value + boost)
+      roundTo2Digits(this.critDamage + value + boost)
     )
   }
 
-  roundTo2Digits(value: number) {
-    return parseFloat(value.toFixed(2))
+  moveTo(x: number, y: number, board: Board) {
+    board.swapValue(this.positionX, this.positionY, x, y)
+    this.positionX = x
+    this.positionY = y
+    this.toMovingState() 
+    this.cooldown = 100 // for faster retargeting
   }
 
   // called after every successful attack (not dodged or protected)
@@ -518,6 +523,14 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
           }
         }
       }
+    }
+  }
+
+  flyAway(board: Board){
+    const flyAwayCell = board.getFlyAwayCell(this.positionX, this.positionY)
+    this.flyingProtection--
+    if(flyAwayCell){
+      this.moveTo(flyAwayCell.x, flyAwayCell.y, board)
     }
   }
 
