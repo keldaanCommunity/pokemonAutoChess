@@ -43,6 +43,5 @@ export class Effects {
         this.list.push(Effect.PSYCHIC_TERRAIN)
       }
     })
-
   }
 }

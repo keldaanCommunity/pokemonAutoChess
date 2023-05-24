@@ -11,7 +11,9 @@ export default function Team(props: { team: IPokemonRecord[] }) {
           <li key={index}>
             <img src={getAvatarSrc(p.avatar)} className="pokemon-portrait" />
             <div className="pokemon-items">
-            {p.items.map((item, i) => <img key={i} src={"/assets/item/" + item + ".png"} />)}
+              {p.items.map((item, i) => (
+                <img key={i} src={"/assets/item/" + item + ".png"} />
+              ))}
             </div>
           </li>
         )

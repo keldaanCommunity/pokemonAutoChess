@@ -30,7 +30,7 @@ export const afterSlice = createSlice({
   }
 })
 
-export const { 
+export const {
   addPlayer,
   leaveAfter,
   setElligibilityToXP,

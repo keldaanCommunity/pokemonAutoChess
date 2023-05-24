@@ -25,7 +25,9 @@ export default function WikiTypes() {
           </TabPanel>
         )
       })}
-      <TabPanel key="all"><WikiType type="all" /></TabPanel>
+      <TabPanel key="all">
+        <WikiType type="all" />
+      </TabPanel>
     </Tabs>
   )
 }

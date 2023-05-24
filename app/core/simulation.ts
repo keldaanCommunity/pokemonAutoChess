@@ -365,7 +365,6 @@ export default class Simulation extends Schema implements ISimulation {
 
   applyPostEffects() {
     ;[this.blueTeam, this.redTeam].forEach((team) => {
-
       const ironDefenseCandidates = Array.from(team.values()).filter((p) =>
         p.effects.includes(Effect.IRON_DEFENSE)
       )

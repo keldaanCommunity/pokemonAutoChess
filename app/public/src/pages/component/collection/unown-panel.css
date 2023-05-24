@@ -1,21 +1,21 @@
 #unown-panel {
-    background-image: url("assets/ui/unown-panel.png");
-    background-size: 100% 100%;
-    width: 40em;
-    height: 10em;
-    margin: auto;
-    font-size: 2rem;
-    padding: 1.5em 1.5em 2em 1.5em;
-    text-align: center;
+  background-image: url("assets/ui/unown-panel.png");
+  background-size: 100% 100%;
+  width: 40em;
+  height: 10em;
+  margin: auto;
+  font-size: 2rem;
+  padding: 1.5em 1.5em 2em 1.5em;
+  text-align: center;
 }
 
 #unown-panel .char {
-    display: inline-block;
-    width: 1.1em;
-    height: 1.1em;
-    background-color: rgba(255,255,255,0.2);
-    border-radius: 4px;
-    margin: 0 0.15em;
-    background-position: center;
-    background-size: 80px 80px;
+  display: inline-block;
+  width: 1.1em;
+  height: 1.1em;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  margin: 0 0.15em;
+  background-position: center;
+  background-size: 80px 80px;
 }

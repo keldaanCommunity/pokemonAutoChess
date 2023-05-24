@@ -13,8 +13,8 @@ import { AbilityTooltip } from "../ability/ability-tooltip"
 import SynergyIcon from "../icons/synergy-icon"
 import "./game-pokemon-detail.css"
 
-export function GamePokemonDetail(props: { 
-  pokemon: Pokemon,
+export function GamePokemonDetail(props: {
+  pokemon: Pokemon
   pokemonConfig?: IPokemonConfig
 }) {
   const pokemonStats = [
@@ -73,14 +73,21 @@ export function GamePokemonDetail(props: {
       </div>
 
       {props.pokemon.skill !== Ability.DEFAULT && (
-      <div className="game-pokemon-detail-ult">
-        <div className="ability-name">
-          <p>{AbilityName[props.pokemon.skill].eng}</p>
+        <div className="game-pokemon-detail-ult">
+          <div className="ability-name">
+            <p>{AbilityName[props.pokemon.skill].eng}</p>
+          </div>
+          <div>
+            <AbilityTooltip
+              ability={props.pokemon.skill}
+              tier={
+                props.pokemon.rarity === Rarity.MYTHICAL
+                  ? 3
+                  : props.pokemon.stars
+              }
+            />
+          </div>
         </div>
-        <div>
-          <AbilityTooltip ability={props.pokemon.skill} tier={props.pokemon.rarity === Rarity.MYTHICAL ? 3 : props.pokemon.stars} />
-        </div>
-      </div>
       )}
 
       {props.pokemon.name in CustomPokemonDescription && (

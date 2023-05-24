@@ -61,8 +61,11 @@ export default class WikiFaq extends Component {
           It seems some sprites are missing ?
         </h4>
         <p>
-          Sprites of pokemon auto chess are based on <a href="https://github.com/PMDCollab/SpriteCollab">this collaborative project</a>.
-          If you want the missing sprites to be added, please consider
+          Sprites of pokemon auto chess are based on{" "}
+          <a href="https://github.com/PMDCollab/SpriteCollab">
+            this collaborative project
+          </a>
+          . If you want the missing sprites to be added, please consider
           donating to pokemon autochess. Every donation will be used to pay
           spriters to make sprites for everyone.
         </p>
@@ -104,10 +107,11 @@ export default class WikiFaq extends Component {
         </p>
         <h4 className="nes-text is-success">Can i create my own bot ?</h4>
         <p>
-          Sure. You'll need to be at least level 10 to unlock the Bot Builder title.
-          Then choose this title and a "Bot Builder" button will appear in the header.
-          Read the instructions and submit your bot, it will be sent in the 
-          #bot-creation channel on Discord for a review by the bot reviewers team.
+          Sure. You'll need to be at least level 10 to unlock the Bot Builder
+          title. Then choose this title and a "Bot Builder" button will appear
+          in the header. Read the instructions and submit your bot, it will be
+          sent in the #bot-creation channel on Discord for a review by the bot
+          reviewers team.
         </p>
         <h4 className="nes-text is-success">How does the elo system work ?</h4>
         <p>
@@ -128,9 +132,9 @@ export default class WikiFaq extends Component {
           What are the special damages and physical damages ?
         </h4>
         <p>
-          Auto attacks mostly deal Physical damage, while Abilities 
-          mostly deal Special damage. Some abilities however can 
-          deal true damage or physical damage.
+          Auto attacks mostly deal Physical damage, while Abilities mostly deal
+          Special damage. Some abilities however can deal true damage or
+          physical damage.
         </p>
         <h4 className="nes-text is-success">
           Can you tell me how defense works? Is it flat damage reduction?
@@ -150,7 +154,8 @@ export default class WikiFaq extends Component {
         </p>
         <h4 className="nes-text is-success">How can i support the game ?</h4>
         <p>
-          You can donate on <a href="https://en.tipeee.com/pokemon-auto-chess">Tipeee</a>.
+          You can donate on{" "}
+          <a href="https://en.tipeee.com/pokemon-auto-chess">Tipeee</a>.
         </p>
         <h4 className="nes-text is-success">
           Will there be a mobile version one day ?
@@ -159,7 +164,16 @@ export default class WikiFaq extends Component {
         <h4 className="nes-text is-success">
           What language/library is used to code the game ?
         </h4>
-        <p>TypeScript, Phaser, Colyseus. If you want to contribute, <a href="https://github.com/keldaanInteractive/pokemonAutoChess" target="_blank">pull requests are open</a> !</p>
+        <p>
+          TypeScript, Phaser, Colyseus. If you want to contribute,{" "}
+          <a
+            href="https://github.com/keldaanInteractive/pokemonAutoChess"
+            target="_blank"
+          >
+            pull requests are open
+          </a>{" "}
+          !
+        </p>
       </div>
     )
   }

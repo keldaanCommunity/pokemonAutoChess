@@ -15,19 +15,20 @@ export default function Booster(props: { toggle: () => void }) {
   return (
     <div id="boosters-page">
       <button
-        onClick={() => { 
+        onClick={() => {
           dispatch(setBoosterContent([]))
-          props.toggle() 
+          props.toggle()
         }}
         className="bubbly blue"
       >
         Back to Lobby
       </button>
       <div className="nes-container">
-        <p className="help">{numberOfBooster === 0 
-          ? "Play more games to level up and earn new boosters." 
-          : "Open boosters to unlock new avatars and complete your collection !"
-          }</p>
+        <p className="help">
+          {numberOfBooster === 0
+            ? "Play more games to level up and earn new boosters."
+            : "Open boosters to unlock new avatars and complete your collection !"}
+        </p>
         <div className="actions">
           <p>
             <span>{numberOfBooster}</span>
@@ -35,7 +36,7 @@ export default function Booster(props: { toggle: () => void }) {
           </p>
           <button
             onClick={() => {
-              if(numberOfBooster > 0){
+              if (numberOfBooster > 0) {
                 dispatch(setBoosterContent([]))
                 dispatch(openBooster())
               }
@@ -47,8 +48,8 @@ export default function Booster(props: { toggle: () => void }) {
           </button>
         </div>
         <div className="boosters-content">
-          {boosterContent.map((pkm,i) => (
-            <BoosterCard key={"booster"+i} pkm={pkm} shards={50} />
+          {boosterContent.map((pkm, i) => (
+            <BoosterCard key={"booster" + i} pkm={pkm} shards={50} />
           ))}
         </div>
       </div>

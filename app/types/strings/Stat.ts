@@ -73,5 +73,5 @@ export const StatLabel: { [key in Stat]: Langage } = {
     esp: "Escudo",
     fra: "Bouclier",
     prt: "Escudo"
-  },
+  }
 }

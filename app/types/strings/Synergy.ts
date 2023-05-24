@@ -1,5 +1,5 @@
 import { Effect } from "../enum/Effect"
-import { Damage, Stat } from "../enum/Game";
+import { Damage, Stat } from "../enum/Game"
 import { Synergy } from "../enum/Synergy"
 import { Status } from "../enum/Status"
 
@@ -282,4 +282,3 @@ export const SynergyDescription: {
     fra: ""
   }
 }
-

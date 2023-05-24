@@ -5,14 +5,14 @@ import { buyEmotion, changeSelectedEmotion } from "../../../stores/NetworkStore"
 import { getPortraitSrc } from "../../../utils"
 import { getEmotionCost } from "../../../../../types/Config"
 import { cc } from "../../utils/jsx"
-import "./pokemon-emotion.css";
+import "./pokemon-emotion.css"
 
 export default function PokemonEmotion(props: {
   index: string
   shiny: boolean
   unlocked: boolean | undefined
   path: string
-  emotion: Emotion,
+  emotion: Emotion
   dust: number
 }) {
   const dispatch = useAppDispatch()
@@ -21,10 +21,10 @@ export default function PokemonEmotion(props: {
 
   return (
     <div
-      className={cc("nes-container", "pokemon-emotion", { 
+      className={cc("nes-container", "pokemon-emotion", {
         unlocked: !!props.unlocked,
         unlockable: canUnlock,
-        shimmer: canUnlock,
+        shimmer: canUnlock
       })}
       onClick={() => {
         if (props.unlocked) {
@@ -47,10 +47,14 @@ export default function PokemonEmotion(props: {
       }}
     >
       <img src={getPortraitSrc(props.index, props.shiny, props.emotion)} />
-      {props.unlocked ? (<p>{props.emotion}</p>) : (<p>
+      {props.unlocked ? (
+        <p>{props.emotion}</p>
+      ) : (
+        <p>
           <span>{cost}</span>
           <img src={getPortraitSrc(props.index)} />
-      </p>)}
+        </p>
+      )}
     </div>
   )
 }
