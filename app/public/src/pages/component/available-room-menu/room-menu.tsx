@@ -7,7 +7,8 @@ import { useAppDispatch, useAppSelector } from "../../../hooks"
 import {
   ICustomLobbyState,
   IGameMetadata,
-  IPreparationMetadata
+  IPreparationMetadata,
+  Role
 } from "../../../../../types"
 import RoomItem from "./room-item"
 import PreparationState from "../../../../../rooms/states/preparation-state"
@@ -71,11 +72,15 @@ export default function RoomMenu(props: {
     ) {
       return
     }
+
     if (lobby && !props.toPreparation && !isJoining) {
       if (selectedRoom.metadata?.password) {
-        const password = prompt(`This room is private. Enter password`)
-        if (selectedRoom.metadata?.password != password)
-          return alert(`Wrong password !`)
+        const lobbyUser = lobbyUsers.find((u) => u.id === uid)
+        if (lobbyUser && lobbyUser.role === Role.BASIC) {
+          const password = prompt(`This room is private. Enter password`)
+          if (selectedRoom.metadata?.password != password)
+            return alert(`Wrong password !`)
+        }
       }
       setJoining(true)
       const token = await firebase.auth().currentUser?.getIdToken()

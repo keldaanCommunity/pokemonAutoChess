@@ -279,14 +279,23 @@ export class OnKickPlayerCommand extends Command<
         this.room.clients.forEach((cli) => {
           if (cli.auth.uid === userId && this.state.users.has(userId)) {
             const user = this.state.users.get(userId)!
-            this.room.broadcast(Transfer.MESSAGES, {
-              name: "Server",
-              payload: `${user.name} was kicked by ${this.state.ownerName}.`,
-              avatar: this.state.users.get(client.auth.uid)?.avatar,
-              time: Date.now()
-            })
-            cli.send(Transfer.KICK)
-            cli.leave()
+            if (user.role === Role.BASIC) {
+              this.room.broadcast(Transfer.MESSAGES, {
+                name: "Server",
+                payload: `${user.name} was kicked by ${this.state.ownerName}.`,
+                avatar: this.state.users.get(client.auth.uid)?.avatar,
+                time: Date.now()
+              })
+              cli.send(Transfer.KICK)
+              cli.leave()
+            } else {
+              this.room.broadcast(Transfer.MESSAGES, {
+                name: "Server",
+                payload: `${this.state.ownerName} tried to kick a moderator ( ${user.name} ).`,
+                avatar: this.state.users.get(client.auth.uid)?.avatar,
+                time: Date.now()
+              })
+            }
           }
         })
       }
