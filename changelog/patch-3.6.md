@@ -14,6 +14,7 @@
 # Bugfix
 
 - Fix a bug where user were stuck on loading screen
+- Fix Fire/Dragon: Synergy effects was triggered on movement
 
 # Misc
 
