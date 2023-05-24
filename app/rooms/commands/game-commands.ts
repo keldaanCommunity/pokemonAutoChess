@@ -145,13 +145,13 @@ export class OnPokemonPropositionCommand extends Command<
       let allowBuy = true
       if (
         Mythical1Shop.includes(pokemon.name) &&
-        this.state.stageLevel !== 10
+        this.state.stageLevel !== MythicalPicksStages[0]
       ) {
         allowBuy = false
       }
       if (
         Mythical2Shop.includes(pokemon.name) &&
-        this.state.stageLevel !== 20
+        this.state.stageLevel !== MythicalPicksStages[1]
       ) {
         allowBuy = false
       }
