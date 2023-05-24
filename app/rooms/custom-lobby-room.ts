@@ -902,7 +902,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
           UserMetadata.find(
             { displayName: { $regex: regExp, $options: "i" } },
             ["uid", "elo", "displayName", "level", "avatar"],
-            { limit: 10, sort: { level: -1 } },
+            { limit: 100, sort: { level: -1 } },
             (err, users) => {
               if (users) {
                 const suggestions: Array<ISuggestionUser> = users.map((u) => {

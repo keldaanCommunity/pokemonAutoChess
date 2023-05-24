@@ -20,5 +20,8 @@
 
 # Misc
 
-- Add a unban button
+- Add a unban button for moderators
 - Ban/Unban will display a message in the chat
+- You can't ban moderators
+- You can't kick moderators from a room
+- Moderators don't need the password to go to a password protected lobby
