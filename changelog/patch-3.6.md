@@ -16,5 +16,9 @@
 
 - Fix a bug where user were stuck on loading screen
 - Reduce the lag before next attack after a teleport/jump
+- Fix Fire/Dragon: Synergy effects was triggered on movement
 
 # Misc
+
+- Add a unban button
+- Ban/Unban will display a message in the chat

@@ -241,8 +241,11 @@ export const networkSlice = createSlice({
     kick: (state, action: PayloadAction<string>) => {
       state.preparation?.send(Transfer.KICK, action.payload)
     },
-    ban: (state, action: PayloadAction<string>) => {
+    ban: (state, action: PayloadAction<{ uid: string; name: string }>) => {
       state.lobby?.send(Transfer.BAN, action.payload)
+    },
+    unban: (state, action: PayloadAction<{ uid: string; name: string }>) => {
+      state.lobby?.send(Transfer.UNBAN, action.payload)
     },
     deleteBotDatabase: (state, action: PayloadAction<string>) => {
       state.lobby?.send(Transfer.DELETE_BOT_DATABASE, action.payload)
@@ -254,6 +257,7 @@ export const networkSlice = createSlice({
 })
 
 export const {
+  unban,
   deleteBotDatabase,
   addBotDatabase,
   ban,

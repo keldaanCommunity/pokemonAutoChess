@@ -168,7 +168,8 @@ export enum Transfer {
   REMOVE_ROOM = "REMOVE_ROOM",
   ADD_BOT_DATABASE = "ADD_BOT_DATABASE",
   DELETE_BOT_DATABASE = "DELETE_BOT_DATABASE",
-  BOT_DATABASE_LOG = "BOT_DATABASE_LOG"
+  BOT_DATABASE_LOG = "BOT_DATABASE_LOG",
+  UNBAN = "UNBAN"
 }
 
 export enum AttackSprite {
@@ -504,6 +505,7 @@ export interface IPreparationMetadata {
   password: string | null
   noElo: boolean
   type: "preparation"
+  gameStarted: boolean
 }
 
 export interface IGameMetadata {

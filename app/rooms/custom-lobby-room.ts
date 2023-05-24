@@ -321,6 +321,33 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       }
     })
 
+    this.onMessage(Transfer.UNBAN, (client, message) => {
+      try {
+        const user = this.state.users.get(client.auth.uid)
+        if (
+          user &&
+          (user.role === Role.ADMIN || user.role === Role.MODERATOR)
+        ) {
+          BannedUser.deleteOne({ uid: message.uid }, (err, res) => {
+            if (err) {
+              logger.error
+            }
+            if (res?.deletedCount > 0) {
+              this.state.addMessage(
+                "Server",
+                `${user.name} unbanned the user ${message.name}`,
+                `0081/${Emotion.NORMAL}`,
+                Date.now(),
+                true
+              )
+            }
+          })
+        }
+      } catch (error) {
+        logger.error(error)
+      }
+    })
+
     this.onMessage(Transfer.BAN, (client, message) => {
       try {
         const user = this.state.users.get(client.auth.uid)
@@ -328,16 +355,36 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
           user &&
           (user.role === Role.ADMIN || user.role === Role.MODERATOR)
         ) {
-          BannedUser.findOne({ uid: message }, (err, banned) => {
+          BannedUser.findOne({ uid: message.uid }, (err, banned) => {
             if (err) {
               logger.error(err)
             }
             if (!banned) {
-              BannedUser.create({ uid: message })
+              BannedUser.create({
+                uid: message.uid,
+                author: user.name,
+                time: Date.now(),
+                name: message.name
+              })
+              this.state.addMessage(
+                "Server",
+                `${user.name} banned the user ${message.name}`,
+                `0081/${Emotion.NORMAL}`,
+                Date.now(),
+                true
+              )
+            } else {
+              this.state.addMessage(
+                "Server",
+                `${message.name} was already banned`,
+                `0081/${Emotion.NORMAL}`,
+                Date.now(),
+                true
+              )
             }
           })
           this.clients.forEach((c) => {
-            if (c.auth.uid === message) {
+            if (c.auth.uid === message.uid) {
               c.send(Transfer.BAN)
               c.leave()
             }

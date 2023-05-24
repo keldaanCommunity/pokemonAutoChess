@@ -24,7 +24,13 @@ export class OnJoinCommand extends Command<
 > {
   execute({ client, options, auth }) {
     try {
-      if (this.state.users.size >= MAX_PLAYERS_PER_LOBBY) {
+      let numberOfHumanPlayers = 0
+      this.state.users.forEach((u) => {
+        if (!u.isBot) {
+          numberOfHumanPlayers++
+        }
+      })
+      if (numberOfHumanPlayers >= MAX_PLAYERS_PER_LOBBY) {
         return // lobby already full
       }
       if (this.state.ownerId == "") {
@@ -168,6 +174,7 @@ export class OnGameStartCommand extends Command<
   execute({ client, message }) {
     try {
       this.state.gameStarted = true
+      this.room.setGameStarted(true)
       this.room.broadcast(Transfer.GAME_START, message, { except: client })
     } catch (error) {
       logger.error(error)
