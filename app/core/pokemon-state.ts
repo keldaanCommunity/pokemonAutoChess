@@ -271,13 +271,13 @@ export default class PokemonState {
             } else if (pokemon.effects.includes(Effect.MAX_GUARD)) {
               if ((pokemon.flyingProtection === 2 && pcLife < 0.5) || (pokemon.flyingProtection === 1 && pcLife < 0.2)) {
                 pokemon.status.triggerProtect(2000)
-                pokemon.flyAway(board)
                 const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
                 cells.forEach((cell) => {
                   if (cell.value && pokemon.team != cell.value.team) {
                     cell.value.status.triggerParalysis(2000, cell.value)
                   }
                 })
+                pokemon.flyAway(board)                
               }
             }
           }
