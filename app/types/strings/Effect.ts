@@ -266,17 +266,17 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.BULK_UP]: {
-    eng: `Gain 15% ${Stat.ATK_SPEED} and heal for 20% of max ${Stat.HP}`,
+    eng: `Heal 30 ${Stat.HP} and gain 20% ${Stat.ATK_SPEED}`,
     esp: ``,
     fra: ``
   },
   [Effect.RAGE]: {
-    eng: `Gain 20% ${Stat.ATK_SPEED} and heal for 30% of max ${Stat.HP}`,
+    eng: `Heal 30 ${Stat.HP} and gain 25% ${Stat.ATK_SPEED}`,
     esp: ``,
     fra: ``
   },
   [Effect.ANGER_POINT]: {
-    eng: `Gain 30% ${Stat.ATK_SPEED} and heal for 40% of max ${Stat.HP}`,
+    eng: `Heal 30 ${Stat.HP} and gain 30% ${Stat.ATK_SPEED}`,
     esp: ``,
     fra: ``
   },

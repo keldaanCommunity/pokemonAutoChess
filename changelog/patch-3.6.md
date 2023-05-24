@@ -8,6 +8,8 @@
 - New ability for Turtwig: Growth: Increase body size and Attack by 10. Grows twice as fast if weather is sunny
 
 # Changes to Synergies
+
+- Field rework: now gives a flat HP heal instead of a percentage of max HP
 - Flying rework: flying pokemons now fly away when under HP threshold
 
 # Changes to Items

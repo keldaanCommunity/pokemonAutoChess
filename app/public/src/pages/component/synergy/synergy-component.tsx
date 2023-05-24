@@ -7,9 +7,9 @@ import { Synergy } from "../../../../../types/enum/Synergy"
 import { SynergyName } from "../../../../../types/strings/Synergy"
 
 export default function SynergyComponent(props: {
-  type: Synergy
-  isFirst: boolean
-  value: number
+  type: Synergy,
+  value: number,
+  index: number
 }) {
   const levelReached = TypeTrigger[props.type].filter(n => n <= props.value).at(-1)
   return (
@@ -40,7 +40,7 @@ export default function SynergyComponent(props: {
         className="customeTheme"
         effect="solid"
         place="right"
-        offset={{ bottom: props.isFirst ? 110 : 0 }}
+        offset={{ bottom: (5-props.index)*50 }}
       >
         <SynergyDetailComponent type={props.type} value={props.value} />
       </ReactTooltip>

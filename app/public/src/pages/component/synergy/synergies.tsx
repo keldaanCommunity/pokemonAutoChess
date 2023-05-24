@@ -51,8 +51,8 @@ export default function Synergies(props: { synergies: [string, number][] }) {
                 <SynergyComponent
                   key={type}
                   type={type as Synergy}
-                  isFirst={index == 0}
                   value={s[1]}
+                  index={index}
                 />
               )
             } else {

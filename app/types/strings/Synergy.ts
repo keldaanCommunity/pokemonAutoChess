@@ -207,7 +207,7 @@ export const SynergyDescription: {
     fra: "Dragon"
   },
   [Synergy.FIELD]: {
-    eng: `When a field pokemon dies, all the other field pokemons gain ${Stat.ATK_SPEED} and are healed for a percentage of their max ${Stat.HP}`,
+    eng: `When a field pokemon dies, all the other field pokemons are healed and gain ${Stat.ATK_SPEED}`,
     esp: "",
     fra: ""
   },

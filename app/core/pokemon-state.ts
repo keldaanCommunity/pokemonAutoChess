@@ -332,16 +332,13 @@ export default class PokemonState {
           const isAngerPoint = pokemon.effects.includes(Effect.ANGER_POINT)
 
           if (isWorkUp || isRage || isAngerPoint) {
-            let boost = 0
+            let heal = 30
             let speedBoost = 0
             if (isWorkUp) {
-              boost = 20
-              speedBoost = 15
-            } else if (isRage) {
-              boost = 30
               speedBoost = 20
+            } else if (isRage) {
+              speedBoost = 25
             } else if (isAngerPoint) {
-              boost = 40
               speedBoost = 30
             }
             board.forEach((x, y, value) => {
@@ -353,7 +350,7 @@ export default class PokemonState {
                 let _pokemon = pokemon // beware of closure vars
                 pokemon.simulation.room.clock.setTimeout(() => {
                   value.count.fieldCount++
-                  value.handleHeal((boost / 100) * value.hp, _pokemon, 0)
+                  value.handleHeal(heal, _pokemon, 0)
                   value.handleAttackSpeed(speedBoost)
                 }, 16) // delay to next tick, targeting 60 ticks per second
               }
