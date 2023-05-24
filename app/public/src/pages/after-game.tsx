@@ -7,7 +7,12 @@ import AfterGameState from "../../../rooms/states/after-game-state"
 import firebase from "firebase/compat/app"
 import { FIREBASE_CONFIG } from "./utils/utils"
 import { joinAfter, logIn } from "../stores/NetworkStore"
-import { addPlayer, leaveAfter, setElligibilityToELO, setElligibilityToXP } from "../stores/AfterGameStore"
+import {
+  addPlayer,
+  leaveAfter,
+  setElligibilityToELO,
+  setElligibilityToXP
+} from "../stores/AfterGameStore"
 import { playSound, SOUNDS } from "./utils/audio"
 
 export default function AfterGame() {

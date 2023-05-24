@@ -5,7 +5,7 @@ import { kick, removeBot } from "../../../stores/NetworkStore"
 import { RemoveButton } from "../buttons/remove-button"
 import Elo from "../elo"
 import InlineAvatar from "../inline-avatar"
-import "./preparation-menu-user.css";
+import "./preparation-menu-user.css"
 
 export default function PreparationMenuUser(props: {
   key: string
@@ -15,14 +15,28 @@ export default function PreparationMenuUser(props: {
 }) {
   const dispatch = useAppDispatch()
 
-  const removeButton = props.user.isBot ? 
-    (<RemoveButton onClick={() => { dispatch(removeBot(props.user.id)) }} title="Remove Bot" />) 
-    : props.isOwner && props.user.id !== props.ownerId ? 
-    (<RemoveButton onClick={() => { dispatch(kick(props.user.id)) }} title="Kick User" />) 
-    : null
+  const removeButton = props.user.isBot ? (
+    <RemoveButton
+      onClick={() => {
+        dispatch(removeBot(props.user.id))
+      }}
+      title="Remove Bot"
+    />
+  ) : props.isOwner && props.user.id !== props.ownerId ? (
+    <RemoveButton
+      onClick={() => {
+        dispatch(kick(props.user.id))
+      }}
+      title="Kick User"
+    />
+  ) : null
 
   return (
-    <div className={`nes-container player-box preparation-menu-user ${props.user.ready ? "ready" : "not-ready"}`}>
+    <div
+      className={`nes-container player-box preparation-menu-user ${
+        props.user.ready ? "ready" : "not-ready"
+      }`}
+    >
       <Elo elo={props.user?.elo} />
       <InlineAvatar
         avatar={props.user?.avatar}

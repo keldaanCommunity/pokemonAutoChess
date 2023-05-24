@@ -27,17 +27,22 @@ export default function ChatMessage(props: { message: IMessage }) {
     ) : null
 
   return (
-    <div className="chat" style={{
-      display: "flex",
-      flexFlow: "row nowrap",
-      alignItems: "top",
-      justifyContent: "start"
-    }}>
-      <img src={getAvatarSrc(props.message.avatar)}
-           style={{ alignSelf: "start" }}
-           className="pokemon-portrait"
+    <div
+      className="chat"
+      style={{
+        display: "flex",
+        flexFlow: "row nowrap",
+        alignItems: "top",
+        justifyContent: "start"
+      }}
+    >
+      <img
+        src={getAvatarSrc(props.message.avatar)}
+        style={{ alignSelf: "start" }}
+        className="pokemon-portrait"
       />
-      <span className="chat-message-author"
+      <span
+        className="chat-message-author"
         title={formatDate(props.message.time)}
         onClick={() => {
           dispatch(searchName(props.message.name))
@@ -46,7 +51,14 @@ export default function ChatMessage(props: { message: IMessage }) {
       >
         {props.message.name}
       </span>
-      <p style={{ fontSize: "1vw", wordBreak: "break-word", flex: "1", margin: "0" }}>
+      <p
+        style={{
+          fontSize: "1vw",
+          wordBreak: "break-word",
+          flex: "1",
+          margin: "0"
+        }}
+      >
         {props.message.payload}
       </p>
       {removeButton}

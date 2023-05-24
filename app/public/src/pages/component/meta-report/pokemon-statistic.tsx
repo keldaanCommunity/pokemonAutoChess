@@ -5,7 +5,7 @@ import { IPokemonsStatistic } from "../../../../../models/mongo-models/pokemons-
 import { getPortraitSrc } from "../../../utils"
 
 const pStyle = {
-  fontSize: "1.1vw",
+  fontSize: "1.1vw"
 }
 
 export default function PokemonStatistic(props: {
@@ -14,7 +14,7 @@ export default function PokemonStatistic(props: {
   const imgStyle: CSS.Properties = {
     width: "60px",
     height: "60px",
-    imageRendering: "pixelated",
+    imageRendering: "pixelated"
   }
   const portrait = PkmIndex[props.pokemon.name]
     ? getPortraitSrc(PkmIndex[props.pokemon.name])
@@ -36,7 +36,7 @@ export default function PokemonStatistic(props: {
                 style={{
                   display: "flex",
                   flexFlow: "column",
-                  alignItems: "center",
+                  alignItems: "center"
                 }}
                 key={item}
               >

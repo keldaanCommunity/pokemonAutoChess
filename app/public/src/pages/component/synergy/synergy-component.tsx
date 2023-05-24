@@ -7,11 +7,13 @@ import { Synergy } from "../../../../../types/enum/Synergy"
 import { SynergyName } from "../../../../../types/strings/Synergy"
 
 export default function SynergyComponent(props: {
-  type: Synergy,
-  value: number,
+  type: Synergy
+  value: number
   index: number
 }) {
-  const levelReached = TypeTrigger[props.type].filter(n => n <= props.value).at(-1)
+  const levelReached = TypeTrigger[props.type]
+    .filter((n) => n <= props.value)
+    .at(-1)
   return (
     <div
       style={{
@@ -40,13 +42,21 @@ export default function SynergyComponent(props: {
         className="customeTheme"
         effect="solid"
         place="right"
-        offset={{ bottom: (5-props.index)*50 }}
+        offset={{ bottom: (5 - props.index) * 50 }}
       >
         <SynergyDetailComponent type={props.type} value={props.value} />
       </ReactTooltip>
 
       <SynergyIcon type={props.type} size="40px" />
-      <span style={{ fontSize: "32px", textShadow: "2px 2px 2px #00000080", textAlign: "center" }}>{props.value}</span>
+      <span
+        style={{
+          fontSize: "32px",
+          textShadow: "2px 2px 2px #00000080",
+          textAlign: "center"
+        }}
+      >
+        {props.value}
+      </span>
       <div
         style={{
           display: "flex",
@@ -63,14 +73,23 @@ export default function SynergyComponent(props: {
             return (
               <span
                 key={t}
-                style={{ color: levelReached === t ? "#f7d51d" : props.value >= t ? "#ffffff" : "#b8b8b8" }}
+                style={{
+                  color:
+                    levelReached === t
+                      ? "#f7d51d"
+                      : props.value >= t
+                      ? "#ffffff"
+                      : "#b8b8b8"
+                }}
               >
                 {t}
               </span>
             )
           })}
         </div>
-        <p style={{ margin: "0px", textAlign: "center" }}>{SynergyName[props.type]["eng"]}</p>
+        <p style={{ margin: "0px", textAlign: "center" }}>
+          {SynergyName[props.type]["eng"]}
+        </p>
       </div>
     </div>
   )

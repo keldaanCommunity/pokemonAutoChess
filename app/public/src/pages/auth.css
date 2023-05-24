@@ -1,55 +1,55 @@
 .auth-page {
-    display: grid;
-    grid-template-areas: 
+  display: grid;
+  grid-template-areas:
     "main logo"
     "media media";
-    grid-template-columns: 6fr 4fr;
-    grid-template-rows: 1fr 6rem;
-    height: 100vh;
-    padding: 5vmin;
+  grid-template-columns: 6fr 4fr;
+  grid-template-rows: 1fr 6rem;
+  height: 100vh;
+  padding: 5vmin;
 }
 
 .auth-page main {
-    grid-area: main;
-    display: flex;
-    flex-flow: column;
-    margin-top: 5vh;
-    margin-bottom: 5vh;
-    justify-content: space-between;
+  grid-area: main;
+  display: flex;
+  flex-flow: column;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  justify-content: space-between;
 }
 
 .auth-page main > h1 {
-    font-size: 5vw;
-    color: white;
-    text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
-    font-family: "Press Start 2P";
+  font-size: 5vw;
+  color: white;
+  text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
+  font-family: "Press Start 2P";
 }
 
 .auth-page .logo {
-    grid-area: logo;
-    object-fit: contain;
+  grid-area: logo;
+  object-fit: contain;
 }
 
 .auth-page .media {
-    grid-area: media;
-    display: flex;
-    gap: 1em;
-    align-items: center;
-    justify-content: end;
-    margin-right: 1em;
-    color: white;
-    text-shadow: 2px 4px 3px rgba(0,0,0,0.3)
+  grid-area: media;
+  display: flex;
+  gap: 1em;
+  align-items: center;
+  justify-content: end;
+  margin-right: 1em;
+  color: white;
+  text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
 }
 
 .mobile-warning {
-    background: #e76e55;
-    color: white;
-    margin: 1em 0;
-    padding: 1em;
-    border: 4px solid black;
-    border-radius: 12px;
-    text-align: center;
-    grid-column: 1 / 3;
-    font-size: 1.2rem;
-    text-shadow: 2px 2px 2px #00000080;
+  background: #e76e55;
+  color: white;
+  margin: 1em 0;
+  padding: 1em;
+  border: 4px solid black;
+  border-radius: 12px;
+  text-align: center;
+  grid-column: 1 / 3;
+  font-size: 1.2rem;
+  text-shadow: 2px 2px 2px #00000080;
 }

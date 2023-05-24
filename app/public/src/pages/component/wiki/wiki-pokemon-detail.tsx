@@ -36,24 +36,40 @@ export default function WikiPokemonDetail(props: {
       .then((credits: ICreditName[]) => setCredits(credits))
   }
 
-  const evolution = pokemon.evolution === Pkm.DEFAULT ? null : PokemonFactory.createPokemonFromName(pokemon.evolution as Pkm)
+  const evolution =
+    pokemon.evolution === Pkm.DEFAULT
+      ? null
+      : PokemonFactory.createPokemonFromName(pokemon.evolution as Pkm)
 
-  if (!props.m) return null;
+  if (!props.m) return null
 
   return (
     <div className="wiki-pokemon-detail">
       <dl>
-        <dt>Name</dt><dd className="pokemon-name">{pokemon.name}</dd>
-        <dt>Rarity</dt><dd style={{ color: RarityColor[pokemon.rarity] }}>{pokemon.rarity}</dd>
+        <dt>Name</dt>
+        <dd className="pokemon-name">{pokemon.name}</dd>
+        <dt>Rarity</dt>
+        <dd style={{ color: RarityColor[pokemon.rarity] }}>{pokemon.rarity}</dd>
         <dt>Types</dt>
-        <dd>{pokemon.types.map((type) => (
+        <dd>
+          {pokemon.types.map((type) => (
             <SynergyIcon key={"img" + type} type={type} />
-          ))}</dd>
+          ))}
+        </dd>
         <dt>Evolution</dt>
-        <dd>{!evolution ? "No evolution" : (<>
-            <img src={getPortraitSrc(evolution.index)} style={{marginRight: "0.5em"}} />
-            <span className="pokemon-name">{evolution.name}</span>
-          </>)}</dd>
+        <dd>
+          {!evolution ? (
+            "No evolution"
+          ) : (
+            <>
+              <img
+                src={getPortraitSrc(evolution.index)}
+                style={{ marginRight: "0.5em" }}
+              />
+              <span className="pokemon-name">{evolution.name}</span>
+            </>
+          )}
+        </dd>
 
         <dt>Portrait Credit</dt>
         {credits && (
@@ -74,17 +90,29 @@ export default function WikiPokemonDetail(props: {
         )}
       </dl>
       <dl>
-        {[Stat.HP, Stat.ATK, Stat.DEF, Stat.SPE_DEF, Stat.RANGE].map(stat => (<React.Fragment key={stat}>
-          <dt><img src={`assets/icons/${stat}.png`} alt="" /> {StatLabel[stat]["eng"]}</dt>
-          <dd>{pokemon[stat]}</dd>
-        </React.Fragment>))}
-        <dt><img src={`assets/icons/mana.png`} alt="" /> {StatLabel[Stat.MAX_MANA]["eng"]}</dt>
+        {[Stat.HP, Stat.ATK, Stat.DEF, Stat.SPE_DEF, Stat.RANGE].map((stat) => (
+          <React.Fragment key={stat}>
+            <dt>
+              <img src={`assets/icons/${stat}.png`} alt="" />{" "}
+              {StatLabel[stat]["eng"]}
+            </dt>
+            <dd>{pokemon[stat]}</dd>
+          </React.Fragment>
+        ))}
+        <dt>
+          <img src={`assets/icons/mana.png`} alt="" />{" "}
+          {StatLabel[Stat.MAX_MANA]["eng"]}
+        </dt>
         <dd>{pokemon.maxMana}</dd>
       </dl>
       <dl>
         <dt>Ability</dt>
-        <dd>{AbilityName[pokemon.skill].eng}
-          <AbilityTooltip ability={pokemon.skill} tier={pokemon.rarity === Rarity.MYTHICAL ? 3 : pokemon.stars} />
+        <dd>
+          {AbilityName[pokemon.skill].eng}
+          <AbilityTooltip
+            ability={pokemon.skill}
+            tier={pokemon.rarity === Rarity.MYTHICAL ? 3 : pokemon.stars}
+          />
         </dd>
       </dl>
     </div>

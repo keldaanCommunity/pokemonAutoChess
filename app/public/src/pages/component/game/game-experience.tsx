@@ -6,7 +6,7 @@ import { Money } from "../icons/money"
 
 export default function GameExperience() {
   const dispatch = useAppDispatch()
-  
+
   const experienceManager = useAppSelector(
     (state) => state.game.experienceManager
   )
@@ -18,7 +18,9 @@ export default function GameExperience() {
       <button
         className="bubbly orange buy-xp-button"
         title="Buy 4 XP for 4 gold (shortcut: F)"
-        onClick={() => { dispatch(levelClick()) }}
+        onClick={() => {
+          dispatch(levelClick())
+        }}
       >
         <Money value="Buy XP 4" />
       </button>
@@ -28,7 +30,11 @@ export default function GameExperience() {
           value={isLevelMax ? 0 : experienceManager.experience}
           max={experienceManager.expNeeded}
         ></progress>
-        <span>{isLevelMax ? "Max Level" : experienceManager.experience + "/" + experienceManager.expNeeded}</span>
+        <span>
+          {isLevelMax
+            ? "Max Level"
+            : experienceManager.experience + "/" + experienceManager.expNeeded}
+        </span>
       </div>
     </div>
   )

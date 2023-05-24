@@ -9,7 +9,10 @@ export default function GameDpsHeal(props: {
 }) {
   return (
     <div className="game-dps-bar">
-      <img className="pokemon-portrait" src={getAvatarSrc(props.dpsHeal.name)} />
+      <img
+        className="pokemon-portrait"
+        src={getAvatarSrc(props.dpsHeal.name)}
+      />
       <div className="game-dps-progress-wrapper">
         <p>{props.dpsHeal.heal + props.dpsHeal.shield}</p>
         <ProgressBar className="nes-progress is-primary">

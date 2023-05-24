@@ -1079,7 +1079,7 @@ export class KingShieldStrategy extends AttackStrategy {
         tg.positionX = oldX
         tg.positionY = oldY
       }
-      pokemon.moveTo(x,y, board)
+      pokemon.moveTo(x, y, board)
     }
   }
 }
@@ -2703,7 +2703,11 @@ export class DiveStrategy extends AttackStrategy {
       state.getMostSurroundedCoordianteAvailablePlace(pokemon, board)
 
     if (mostSurroundedCoordinate) {
-      pokemon.moveTo(mostSurroundedCoordinate.x, mostSurroundedCoordinate.y, board)
+      pokemon.moveTo(
+        mostSurroundedCoordinate.x,
+        mostSurroundedCoordinate.y,
+        board
+      )
 
       const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
 

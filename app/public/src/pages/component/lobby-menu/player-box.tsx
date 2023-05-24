@@ -1,9 +1,9 @@
-import React from "react";
-import { ILobbyUser } from "../../../../../models/colyseus-models/lobby-user";
-import { TitleName } from "../../../../../types";
-import { getAvatarSrc } from "../../../utils";
-import Elo from "../elo";
-import { RoleBadge } from "../RoleBadge";
+import React from "react"
+import { ILobbyUser } from "../../../../../models/colyseus-models/lobby-user"
+import { TitleName } from "../../../../../types"
+import { getAvatarSrc } from "../../../utils"
+import Elo from "../elo"
+import { RoleBadge } from "../RoleBadge"
 
 export default function PlayerBox(props: { user: ILobbyUser }) {
   return (
@@ -12,14 +12,25 @@ export default function PlayerBox(props: { user: ILobbyUser }) {
         style={{
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-between",
+          justifyContent: "space-between"
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "0.5em" }}>
-          <img src={getAvatarSrc(props.user.avatar)} className="pokemon-portrait" />
+          <img
+            src={getAvatarSrc(props.user.avatar)}
+            className="pokemon-portrait"
+          />
           <p className="player-title">{TitleName[props.user.title]}</p>
           <RoleBadge role={props.user.role} />
-          <p style={{ overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis" }}>{props.user.name}</p>
+          <p
+            style={{
+              overflow: "hidden",
+              whiteSpace: "nowrap",
+              textOverflow: "ellipsis"
+            }}
+          >
+            {props.user.name}
+          </p>
         </div>
         <p>
           Level {props.user.level} ({props.user.exp} / 1000)
@@ -29,7 +40,7 @@ export default function PlayerBox(props: { user: ILobbyUser }) {
         style={{
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-between",
+          justifyContent: "space-between"
         }}
       >
         <div style={{ display: "flex", alignItems: "center" }}>
@@ -38,5 +49,5 @@ export default function PlayerBox(props: { user: ILobbyUser }) {
         <p>Wins: {props.user.wins}</p>
       </div>
     </div>
-  );
+  )
 }

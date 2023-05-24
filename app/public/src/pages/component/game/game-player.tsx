@@ -17,7 +17,9 @@ export default function GamePlayer(props: {
 }) {
   const dispatch = useAppDispatch()
   const game = useAppSelector((state) => state.network.game)
-  const spectatedPlayerId: string = useAppSelector((state) => state.game.currentPlayerId)
+  const spectatedPlayerId: string = useAppSelector(
+    (state) => state.game.currentPlayerId
+  )
   const selfPlayerId = useAppSelector((state) => state.network.uid)
 
   function playerClick() {
@@ -32,8 +34,11 @@ export default function GamePlayer(props: {
 
   return (
     <div
-      style={{top: `${1 + props.index * 12.5}%`, backgroundImage: `url('${getAvatarSrc(props.player.avatar)}')`}}
-      className={cc('game-player', { 
+      style={{
+        top: `${1 + props.index * 12.5}%`,
+        backgroundImage: `url('${getAvatarSrc(props.player.avatar)}')`
+      }}
+      className={cc("game-player", {
         spectated: spectatedPlayerId === props.player.id,
         self: selfPlayerId === props.player.id,
         dead: props.player.life <= 0

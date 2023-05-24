@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { sendMessage } from "../../../stores/NetworkStore"
 import ChatHistory from "./chat-history"
-import "./chat.css";
+import "./chat.css"
 
 export default function Chat(props: { source: string }) {
   const dispatch = useAppDispatch()

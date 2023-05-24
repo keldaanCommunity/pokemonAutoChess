@@ -11,8 +11,12 @@ const style: CSS.Properties = {
 }
 
 export default function GameItemsProposition() {
-  const itemsProposition = useAppSelector((state) => state.game.itemsProposition)
-  const pokemonsProposition = useAppSelector((state) => state.game.pokemonsProposition)
+  const itemsProposition = useAppSelector(
+    (state) => state.game.itemsProposition
+  )
+  const pokemonsProposition = useAppSelector(
+    (state) => state.game.pokemonsProposition
+  )
 
   const [visible, setVisible] = useState(true)
   if (itemsProposition.length > 0 && pokemonsProposition.length === 0) {
@@ -23,7 +27,7 @@ export default function GameItemsProposition() {
             display: "flex",
             gap: "1vw",
             justifyContent: "center",
-            visibility: visible ? 'visible' : 'hidden'
+            visibility: visible ? "visible" : "hidden"
           }}
         >
           {itemsProposition.map((e, i) => {
@@ -31,7 +35,9 @@ export default function GameItemsProposition() {
           })}
         </div>
 
-        <div style={{ display: "flex", justifyContent: "center", margin: "1em" }}>
+        <div
+          style={{ display: "flex", justifyContent: "center", margin: "1em" }}
+        >
           <button
             className="bubbly orange"
             onClick={() => {

@@ -70,16 +70,16 @@ export default class Synergies
     board.forEach((pkm: Pokemon) => {
       if (pkm.positionY != 0) {
         const family = PkmFamily[pkm.name]
-        if(!typesPerFamily.has(family)) typesPerFamily.set(family, new Set())
+        if (!typesPerFamily.has(family)) typesPerFamily.set(family, new Set())
         const types: Set<Synergy> = typesPerFamily.get(family)!
-        pkm.types.forEach(type => types.add(type))
+        pkm.types.forEach((type) => types.add(type))
       }
     })
 
     typesPerFamily.forEach((types) => {
-      types.forEach(type => {
+      types.forEach((type) => {
         this.set(type, (this.get(type) ?? 0) + 1)
-      })      
+      })
     })
   }
 

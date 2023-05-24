@@ -1,14 +1,14 @@
 #game-options-icon {
-    position: absolute;
-    left: 0.5%;
-    top: 0.5%;    
+  position: absolute;
+  left: 0.5%;
+  top: 0.5%;
 }
 
 #root #game-options-icon:hover {
-    filter: brightness(1.25);
+  filter: brightness(1.25);
 }
 
 #game-options-icon img {
-    height: 48px;
-    width: 48px;
+  height: 48px;
+  width: 48px;
 }
