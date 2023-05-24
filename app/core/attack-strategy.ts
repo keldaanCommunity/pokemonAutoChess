@@ -748,14 +748,7 @@ export class AquaJetStrategy extends AttackStrategy {
         }
       })
 
-      board.swapValue(
-        pokemon.positionX,
-        pokemon.positionY,
-        farthestCoordinate.x,
-        farthestCoordinate.y
-      )
-      pokemon.positionX = farthestCoordinate.x
-      pokemon.positionY = farthestCoordinate.y
+      pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
     }
   }
 }
@@ -807,14 +800,7 @@ export class FireTrickStrategy extends AttackStrategy {
       target.positionY
     )
     if (teleportationCell) {
-      board.swapValue(
-        target.positionX,
-        target.positionY,
-        teleportationCell.x,
-        teleportationCell.y
-      )
-      target.positionX = teleportationCell.x
-      target.positionY = teleportationCell.y
+      target.moveTo(teleportationCell.x, teleportationCell.y, board)
     }
   }
 }
@@ -858,14 +844,7 @@ export class FlameChargeStrategy extends AttackStrategy {
         }
       })
 
-      board.swapValue(
-        pokemon.positionX,
-        pokemon.positionY,
-        farthestCoordinate.x,
-        farthestCoordinate.y
-      )
-      pokemon.positionX = farthestCoordinate.x
-      pokemon.positionY = farthestCoordinate.y
+      pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
     }
   }
 }
@@ -989,14 +968,7 @@ export class TwistingNeitherStrategy extends AttackStrategy {
           cell.value.positionY
         )
         if (teleportationCell) {
-          board.swapValue(
-            cell.value.positionX,
-            cell.value.positionY,
-            teleportationCell.x,
-            teleportationCell.y
-          )
-          cell.value.positionX = teleportationCell.x
-          cell.value.positionY = teleportationCell.y
+          cell.value.moveTo(teleportationCell.x, teleportationCell.y, board)
         } else {
           logger.error("unable to teleport pokemon", cell.value)
         }
@@ -1107,9 +1079,7 @@ export class KingShieldStrategy extends AttackStrategy {
         tg.positionX = oldX
         tg.positionY = oldY
       }
-      board.swapValue(pokemon.positionX, pokemon.positionY, x, y)
-      pokemon.positionX = x
-      pokemon.positionY = y
+      pokemon.moveTo(x,y, board)
     }
   }
 }
@@ -1716,14 +1686,7 @@ export class VoltSwitchStrategy extends AttackStrategy {
         }
       })
 
-      board.swapValue(
-        pokemon.positionX,
-        pokemon.positionY,
-        farthestCoordinate.x,
-        farthestCoordinate.y
-      )
-      pokemon.positionX = farthestCoordinate.x
-      pokemon.positionY = farthestCoordinate.y
+      pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
     }
   }
 }
@@ -2740,14 +2703,7 @@ export class DiveStrategy extends AttackStrategy {
       state.getMostSurroundedCoordianteAvailablePlace(pokemon, board)
 
     if (mostSurroundedCoordinate) {
-      board.swapValue(
-        pokemon.positionX,
-        pokemon.positionY,
-        mostSurroundedCoordinate.x,
-        mostSurroundedCoordinate.y
-      )
-      pokemon.positionX = mostSurroundedCoordinate.x
-      pokemon.positionY = mostSurroundedCoordinate.y
+      pokemon.moveTo(mostSurroundedCoordinate.x, mostSurroundedCoordinate.y, board)
 
       const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
 
@@ -3302,15 +3258,7 @@ export class TeleportStrategy extends AttackStrategy {
     for (let i = 0; i < potentialCells.length; i++) {
       const entity = board.getValue(potentialCells[i][0], potentialCells[i][1])
       if (entity === undefined) {
-        board.swapValue(
-          pokemon.positionX,
-          pokemon.positionY,
-          potentialCells[i][0],
-          potentialCells[i][1]
-        )
-        pokemon.positionX = potentialCells[i][0]
-        pokemon.positionY = potentialCells[i][1]
-        pokemon.cooldown = 100
+        pokemon.moveTo(potentialCells[i][0], potentialCells[i][1], board)
         pokemon.effects.push(Effect.TELEPORT_NEXT_ATTACK)
         break
       }
@@ -3355,14 +3303,7 @@ export class SpectralThiefStrategy extends AttackStrategy {
         crit
       )
 
-      board.swapValue(
-        pokemon.positionX,
-        pokemon.positionY,
-        farthestCoordinate.x,
-        farthestCoordinate.y
-      )
-      pokemon.positionX = farthestCoordinate.x
-      pokemon.positionY = farthestCoordinate.y
+      pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
       const boostAtk = Math.min(0, target.atk - target.baseAtk)
       const boostDef = Math.min(0, target.def - target.baseSpeDef)
       const boostSpeDef = Math.min(0, target.speDef - target.baseSpeDef)
@@ -3687,14 +3628,7 @@ export class SkyAttackStrategy extends AttackStrategy {
         crit
       )
 
-      board.swapValue(
-        pokemon.positionX,
-        pokemon.positionY,
-        farthestCoordinate.x,
-        farthestCoordinate.y
-      )
-      pokemon.positionX = farthestCoordinate.x
-      pokemon.positionY = farthestCoordinate.y
+      pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
       pokemon.status.triggerProtect(500)
     }
   }

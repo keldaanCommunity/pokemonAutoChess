@@ -768,7 +768,7 @@ export default class GameRoom extends Room<GameState> {
       }
     }
     player.synergies.update(player.board)
-    player.effects.update(player.synergies)
+    player.effects.update(player.synergies, player.board)
   }
 
   updateEvolution(id: string) {
@@ -853,7 +853,7 @@ export default class GameRoom extends Room<GameState> {
 
     if (evolve) {
       player.synergies.update(player.board)
-      player.effects.update(player.synergies)
+      player.effects.update(player.synergies, player.board)
     }
     player.boardSize = this.getTeamSize(player.board)
 
@@ -961,7 +961,7 @@ export default class GameRoom extends Room<GameState> {
           player.board.delete(id)
           player.board.set(newPokemon.id, newPokemon)
           player.synergies.update(player.board)
-          player.effects.update(player.synergies)
+          player.effects.update(player.synergies, player.board)
         }
       })
     })
