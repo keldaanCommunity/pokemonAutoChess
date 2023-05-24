@@ -758,28 +758,28 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.TAILWIND:
           if (types.includes(Synergy.FLYING)) {
-            pokemon.flyingProtection = true
+            pokemon.flyingProtection = 1
             pokemon.effects.push(Effect.TAILWIND)
           }
           break
 
         case Effect.FEATHER_DANCE:
           if (types.includes(Synergy.FLYING)) {
-            pokemon.flyingProtection = true
+            pokemon.flyingProtection = 1
             pokemon.effects.push(Effect.FEATHER_DANCE)
           }
           break
 
         case Effect.MAX_AIRSTREAM:
           if (types.includes(Synergy.FLYING)) {
-            pokemon.flyingProtection = true
+            pokemon.flyingProtection = 2
             pokemon.effects.push(Effect.MAX_AIRSTREAM)
           }
           break
 
         case Effect.MAX_GUARD:
           if (types.includes(Synergy.FLYING)) {
-            pokemon.flyingProtection = true
+            pokemon.flyingProtection = 2
             pokemon.effects.push(Effect.MAX_GUARD)
           }
           break

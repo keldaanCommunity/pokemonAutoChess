@@ -341,22 +341,22 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.TAILWIND]: {
-    eng: `Give ${Status.PROTECT} for 1 sec when under 20% ${Stat.HP}`,
+    eng: `Fly away once under 20% ${Stat.HP}`,
     esp: ``,
     fra: ``
   },
   [Effect.FEATHER_DANCE]: {
-    eng: `Give ${Status.PROTECT} for 1.5 sec when under 40% ${Stat.HP}`,
+    eng: `Get ${Status.PROTECT} for 2 seconds after flying away`,
     esp: ``,
     fra: ``
   },
   [Effect.MAX_AIRSTREAM]: {
-    eng: `Give ${Status.PROTECT} for 2 sec when under 50% ${Stat.HP}`,
+    eng: `Fly away twice when under 50% ${Stat.HP} and 20% ${Stat.HP}`,
     esp: ``,
     fra: ``
   },
   [Effect.MAX_GUARD]: {
-    eng: `Give ${Status.PROTECT} for 2.5sec when under 50% ${Stat.HP}`,
+    eng: `When flying away, enemies around are ${Status.PARALYSIS} for 2 seconds`,
     esp: ``,
     fra: ``
   },

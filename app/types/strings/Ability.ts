@@ -1166,7 +1166,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.DISCHARGE]: {
-    eng: `Shock nearby enemies for [25,50,100,SP] ${Damage.SPECIAL}, and give ${Status.PARALYSIS} for 5 seconds`,
+    eng: `Shock nearby enemies for [25,50,100,SP] ${Damage.SPECIAL} and make them ${Status.PARALYSIS} for 5 seconds`,
     esp: `Ataque en el área de efecto que causa 40,60,80 daños especiales.`,
     fra: `Attaque AoE en cercle faisant 40,60,80 dégats spéciaux.`,
     prt: ``
@@ -1226,13 +1226,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.BUG_BUZZ]: {
-    eng: `Mono target attack that does [20,40,80,SP] ${Damage.SPECIAL}. Double damage if target has ${Status.PARALYSIS}`,
-    esp: `Ataque de daño especial de un mono objetivo que hace [20,40,80,SP] ${Damage.SPECIAL}. Double damage if target has ${Status.PARALYSIS}`,
+    eng: `Mono target attack that does [20,40,80,SP] ${Damage.SPECIAL}. Double damage if target is ${Status.PARALYSIS}`,
+    esp: `Ataque de daño especial de un mono objetivo que hace [20,40,80,SP] ${Damage.SPECIAL}. Double damage if target is ${Status.PARALYSIS}`,
     fra: `Attaque mono cible faisant [20,40,80,SP] ${Damage.SPECIAL}. Double les dégâts si la cible est ${Status.PARALYSIS}`,
     prt: ``
   },
   [Ability.STRING_SHOT]: {
-    eng: `Mono target attack that does [10,20,50,SP] ${Damage.SPECIAL} and trigger ${Status.PARALYSIS} for 5 seconds`,
+    eng: `Mono target attack that does [10,20,50,SP] ${Damage.SPECIAL} and make ${Status.PARALYSIS} for 5 seconds`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -1286,7 +1286,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.HURRICANE]: {
-    eng: `Area of effect attack that deals [25,50,100,SP] ${Damage.SPECIAL} in a line behind the target and ${Status.PARALYSIS} for 4 seconds`,
+    eng: `Area of effect attack that deals [25,50,100,SP] ${Damage.SPECIAL} in a line behind the target and make ${Status.PARALYSIS} for 4 seconds`,
     esp: `Ataque de área de efecto que causa [25,50,100,SP] ${Damage.SPECIAL} en una línea detrás del objetivo`,
     fra: `Attaque AoE faisant [25,50,100,SP] ${Damage.SPECIAL} dans une ligne derrière la cible`,
     prt: ``
@@ -1400,7 +1400,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   RAZOR_WIND: {
-    eng: `Deals [20,40,80,SP] ${Damage.SPECIAL} to the target and apply ${Status.PARALYSIS} around it`,
+    eng: `Deals [20,40,80,SP] ${Damage.SPECIAL} to the target and make surounding enemies ${Status.PARALYSIS}`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1412,7 +1412,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   WONDER_GUARD: {
-    eng: `Passive: Reduce received damage and received healing to 1.\nActive: Deals [30,60,120,SP] ${Damage.SPECIAL} and apply ${Status.PARALYSIS} to all adjacent enemies for [5,SP] seconds.`,
+    eng: `Passive: Reduce received damage and received healing to 1.\nActive: Deals [30,60,120,SP] ${Damage.SPECIAL} and make all adjacent enemies ${Status.PARALYSIS} for [5,SP] seconds.`,
     esp: ``,
     prt: ``,
     fra: ``
