@@ -16,3 +16,6 @@
 - Fix a bug where user were stuck on loading screen
 
 # Misc
+
+- Add a unban button
+- Ban/Unban will display a message in the chat
