@@ -505,6 +505,7 @@ export interface IPreparationMetadata {
   password: string | null
   noElo: boolean
   type: "preparation"
+  gameStarted: boolean
 }
 
 export interface IGameMetadata {

@@ -65,7 +65,10 @@ export default function RoomMenu(props: {
   const joinRoom = throttle(async function join(
     selectedRoom: RoomAvailable<IPreparationMetadata>
   ) {
-    if (selectedRoom.clients >= MAX_PLAYERS_PER_LOBBY) {
+    if (
+      selectedRoom.clients >= MAX_PLAYERS_PER_LOBBY ||
+      selectedRoom.metadata?.gameStarted === true
+    ) {
       return
     }
     if (lobby && !props.toPreparation && !isJoining) {
