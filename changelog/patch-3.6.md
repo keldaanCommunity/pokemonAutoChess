@@ -17,6 +17,9 @@
 - Fix a bug where user were stuck on loading screen
 - Reduce the lag before next attack after a teleport/jump
 - Fix Fire/Dragon: Synergy effects was triggered on movement
+- The empty slots of the shop refills now effectively
+- The Grassy terrain procs now on the Flora Summon
+- If you have the same terrain as an opponent and kill their Tapu, your pokemons keep their terrain 
 
 # Misc
 

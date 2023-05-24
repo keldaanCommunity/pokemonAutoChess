@@ -6,7 +6,7 @@ import PokemonFactory from "../models/pokemon-factory"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { Item } from "../types/enum/Item"
 import { Effect } from "../types/enum/Effect"
-import { Climate, PokemonActionState, Stat } from "../types/enum/Game"
+import { Climate, PokemonActionState, Stat, Team } from "../types/enum/Game"
 import Dps from "./dps"
 import DpsHeal from "./dps-heal"
 import ItemFactory from "../models/item-factory"
@@ -173,7 +173,7 @@ export default class Simulation extends Schema implements ISimulation {
       pokemonEntity
     )
 
-    if (team == 0) {
+    if (team == Team.BLUE_TEAM) {
       this.applyEffects(pokemonEntity, pokemon.types, this.blueEffects)
       const dps = new Dps(pokemonEntity.id, getPath(pokemonEntity))
       const dpsHeal = new DpsHeal(pokemonEntity.id, getPath(pokemonEntity))
@@ -181,7 +181,7 @@ export default class Simulation extends Schema implements ISimulation {
       this.blueDpsMeter.set(pokemonEntity.id, dps)
       this.blueHealDpsMeter.set(pokemonEntity.id, dpsHeal)
     }
-    if (team == 1) {
+    if (team == Team.RED_TEAM) {
       this.applyEffects(pokemonEntity, pokemon.types, this.redEffects)
       const dps = new Dps(pokemonEntity.id, getPath(pokemonEntity))
       const dpsHeal = new DpsHeal(pokemonEntity.id, getPath(pokemonEntity))
@@ -365,45 +365,6 @@ export default class Simulation extends Schema implements ISimulation {
 
   applyPostEffects() {
     ;[this.blueTeam, this.redTeam].forEach((team) => {
-      let grassySurge = false
-      let mistySurge = false
-      let electricSurge = false
-      let psychicSurge = false
-      team.forEach((p) => {
-        if (p.skill === Ability.GRASSY_SURGE) {
-          grassySurge = true
-        }
-      })
-      team.forEach((p) => {
-        if (p.skill === Ability.MISTY_SURGE) {
-          mistySurge = true
-        }
-      })
-      team.forEach((p) => {
-        if (p.skill === Ability.ELECTRIC_SURGE) {
-          electricSurge = true
-        }
-      })
-      team.forEach((p) => {
-        if (p.skill === Ability.PSYCHIC_SURGE) {
-          psychicSurge = true
-        }
-      })
-
-      team.forEach((p) => {
-        if (grassySurge && p.types.includes(Synergy.GRASS)) {
-          p.status.grassField = true
-        }
-        if (psychicSurge && p.types.includes(Synergy.PSYCHIC)) {
-          p.status.psychicField = true
-        }
-        if (electricSurge && p.types.includes(Synergy.ELECTRIC)) {
-          p.status.electricField = true
-        }
-        if (mistySurge && p.types.includes(Synergy.FAIRY)) {
-          p.status.fairyField = true
-        }
-      })
 
       const ironDefenseCandidates = Array.from(team.values()).filter((p) =>
         p.effects.includes(Effect.IRON_DEFENSE)
@@ -1008,6 +969,34 @@ export default class Simulation extends Schema implements ISimulation {
         case Effect.BREEDER:
           if (types.includes(Synergy.BABY)) {
             pokemon.effects.push(Effect.BREEDER)
+          }
+          break
+
+        case Effect.GRASSY_TERRAIN:
+          if (types.includes(Synergy.GRASS)) {
+            pokemon.status.grassField = true
+            pokemon.effects.push(Effect.GRASSY_TERRAIN)
+          }
+          break
+
+        case Effect.PSYCHIC_TERRAIN:
+          if (types.includes(Synergy.PSYCHIC)) {
+            pokemon.status.psychicField = true
+            pokemon.effects.push(Effect.PSYCHIC_TERRAIN)
+          }
+          break
+
+        case Effect.ELECTRIC_TERRAIN:
+          if (types.includes(Synergy.ELECTRIC)) {
+            pokemon.status.electricField = true
+            pokemon.effects.push(Effect.ELECTRIC_TERRAIN)
+          }
+          break
+
+        case Effect.MISTY_TERRAIN:
+          if (types.includes(Synergy.FAIRY)) {
+            pokemon.status.fairyField = true
+            pokemon.effects.push(Effect.MISTY_TERRAIN)
           }
           break
 
