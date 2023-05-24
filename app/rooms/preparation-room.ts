@@ -60,6 +60,12 @@ export default class PreparationRoom extends Room<PreparationState> {
     updateLobby(this)
   }
 
+  async setGameStarted(gameStarted: boolean) {
+    await this.setMetadata(<IPreparationMetadata>{
+      gameStarted: gameStarted
+    })
+  }
+
   onCreate(options: { ownerId?: string; idToken: string; ownerName: string }) {
     // logger.debug(options);
     const n = `${options.ownerName}'s room`
