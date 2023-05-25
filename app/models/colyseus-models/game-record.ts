@@ -1,14 +1,14 @@
 import { Schema, ArraySchema, type } from "@colyseus/schema"
 import { Emotion } from "../../types"
 import { Item } from "../../types/enum/Item"
-import { PkmIndex } from "../../types/enum/Pokemon"
+import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 export interface IPokemonRecord {
-  name: string
+  name: Pkm
   items: Item[]
   avatar: string
 }
 export class PokemonRecord extends Schema implements IPokemonRecord {
-  @type("string") name: string
+  @type("string") name: Pkm
   @type("string") avatar: string
   @type(["string"]) items = new ArraySchema<Item>()
 
