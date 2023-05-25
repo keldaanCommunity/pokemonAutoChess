@@ -3005,6 +3005,7 @@ export default class Pokemon extends DraggableObject {
           }
 
           case Ability.MACH_PUNCH:
+          case Ability.UPPERCUT:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
