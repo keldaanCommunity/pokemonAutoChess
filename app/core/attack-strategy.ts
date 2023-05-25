@@ -3651,16 +3651,17 @@ export class AgilityStrategy extends AttackStrategy {
 
     switch (pokemon.stars) {
       case 1:
-        boost = 5
-        break
-      case 2:
         boost = 10
         break
+      case 2:
+        boost = 20
+        break
       case 3:
-        boost = 15
+        boost = 30
         break
     }
     pokemon.handleAttackSpeed(boost, true)
+    pokemon.cooldown = 0;
   }
 }
 
