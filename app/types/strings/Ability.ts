@@ -861,6 +861,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.DIG]: {
+    eng: "Dig",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1723,6 +1729,12 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
   },
   [Ability.SHELL_TRAP]: {
     eng: `${Status.SILENCE} target for 3 seconds and removes 40 ${Stat.MANA} from target and enemies around it`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.DIG]: {
+    eng: `Digs underground and reappears next to the farthest enemy, dealing [10,20,40,SP] special damage to all enemies on the way`,
     esp: "",
     prt: "",
     fra: ""
