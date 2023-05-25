@@ -28,9 +28,7 @@
 - Improve the choice of the target cell for jump/teleport abilities
 
 # Misc
+- New title: Survivor
+- You can no longer kick moderators from a room
+- Moderators can now enter password protected lobbies
 
-- Add a unban button for moderators
-- Ban/Unban will display a message in the chat
-- You can't ban moderators
-- You can't kick moderators from a room
-- Moderators don't need the password to go to a password protected lobby
