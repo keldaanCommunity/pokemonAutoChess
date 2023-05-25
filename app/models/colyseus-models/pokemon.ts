@@ -13200,7 +13200,7 @@ export class Hitmonchan extends Pokemon {
       AttackType.PHYSICAL,
       1,
       100,
-      Ability.MACH_PUNCH,
+      Ability.UPPERCUT,
       shiny,
       emotion,
       true,

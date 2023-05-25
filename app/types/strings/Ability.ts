@@ -760,6 +760,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     prt: "",
     fra: ""
   },
+  [Ability.UPPERCUT]: {
+    eng: "Uppercut",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
   [Ability.TRIPLE_KICK]: {
     eng: "Triple Kick",
     esp: "",
@@ -1622,7 +1628,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ""
   },
   [Ability.MACH_PUNCH]: {
-    eng: `Deals [50,SP] ${Damage.SPECIAL}. Double damage if attacker has a better ${Stat.DEF} than target`,
+    eng: `Deals [50,SP] ${Damage.SPECIAL} and attacks immediately after`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.UPPERCUT]: {
+    eng: `Deals [80,SP] ${Damage.SPECIAL}. Double damage if attacker has a better ${Stat.DEF} than target`,
     esp: "",
     prt: "",
     fra: ""
@@ -1634,7 +1646,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ""
   },
   [Ability.MAWASHI_GERI]: {
-    eng: `Deals [50,SP] ${Damage.SPECIAL}. Double damage if attacker has a better ${Stat.ATK} than target`,
+    eng: `Deals [80,SP] ${Damage.SPECIAL}. Double damage if attacker has a better ${Stat.ATK} than target`,
     esp: "",
     prt: "",
     fra: ""

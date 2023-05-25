@@ -3819,6 +3819,21 @@ export class MachPunchStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     let damage = 50
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    pokemon.cooldown = 100
+  }
+}
+
+export class UppercutStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    let damage = 80
     if (pokemon.def > target.def) damage *= 2
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
@@ -3833,7 +3848,7 @@ export class MawashiGeriStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 50
+    let damage = 80
     if (pokemon.atk > target.atk) damage *= 2
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
