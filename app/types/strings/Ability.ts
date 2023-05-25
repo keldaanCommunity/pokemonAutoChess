@@ -1592,7 +1592,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ""
   },
   [Ability.AGILITY]: {
-    eng: `Increase ${Stat.ATK_SPEED} by [5,10,15,SP] % (stacks)`,
+    eng: `Increase ${Stat.ATK_SPEED} by [10,20,30,SP] % (stacks)`,
     esp: "",
     prt: "",
     fra: ""
