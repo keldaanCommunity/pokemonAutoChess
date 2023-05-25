@@ -559,6 +559,9 @@ export default class GameRoom extends Room<GameState> {
               if (player.life === 100 && rank === 1) {
                 player.titles.add(Title.TYRANT)
               }
+              if (player.life === 1 && rank === 1) {
+                player.titles.add(Title.SURVIVOR)
+              }
 
               if (player.rerollCount > 60) {
                 player.titles.add(Title.GAMBLER)
