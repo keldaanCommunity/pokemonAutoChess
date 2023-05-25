@@ -24,6 +24,7 @@
 - The empty slots of the shop refills now effectively
 - The Grassy terrain procs now on the Flora Summon
 - If you have the same terrain as an opponent and kill their Tapu, your pokemons keep their terrain 
+- Improve the choice of the target cell for jump/teleport abilities
 
 # Misc
 
