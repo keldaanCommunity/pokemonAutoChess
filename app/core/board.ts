@@ -234,7 +234,7 @@ export default class Board {
     })
     if (candidates.length > 0) {
       candidates.sort(
-        (a, b) => this.distance(x, y, b.x, b.y) - this.distance(x, y, a.x, a.y)
+        (a, b) => this.distanceC(x, y, b.x, b.y) - this.distanceC(x, y, a.x, a.y)
       )
       return candidates[0]
     } else {

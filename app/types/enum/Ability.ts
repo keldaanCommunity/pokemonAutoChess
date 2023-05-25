@@ -140,7 +140,8 @@ import {
   HexStrategy,
   GrowthStrategy,
   HealOrderStrategy,
-  ShellTrapStrategy
+  ShellTrapStrategy,
+  DigStrategy
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -286,7 +287,8 @@ export enum Ability {
   HEX = "HEX",
   GROWTH = "GROWTH",
   HEAL_ORDER = "HEAL_ORDER",
-  SHELL_TRAP = "SHELL_TRAP"
+  SHELL_TRAP = "SHELL_TRAP",
+  DIG="DIG"
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -432,5 +434,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.HEX]: new HexStrategy(),
   [Ability.GROWTH]: new GrowthStrategy(),
   [Ability.HEAL_ORDER]: new HealOrderStrategy(),
-  [Ability.SHELL_TRAP]: new ShellTrapStrategy()
+  [Ability.SHELL_TRAP]: new ShellTrapStrategy(),
+  [Ability.DIG]: new DigStrategy()
 }

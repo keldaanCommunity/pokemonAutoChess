@@ -737,7 +737,7 @@ export class AquaJetStrategy extends AttackStrategy {
         farthestCoordinate.y
       )
       cells.forEach((cell) => {
-        if (cell.value && cell.value != pokemon) {
+        if (cell.value && cell.value.team != pokemon.team) {
           cell.value.handleSpecialDamage(
             damage,
             board,
@@ -833,7 +833,7 @@ export class FlameChargeStrategy extends AttackStrategy {
         farthestCoordinate.y
       )
       cells.forEach((cell) => {
-        if (cell.value && cell.value != pokemon) {
+        if (cell.value && cell.value.team != pokemon.team) {
           cell.value.handleSpecialDamage(
             damage,
             board,
@@ -1675,7 +1675,7 @@ export class VoltSwitchStrategy extends AttackStrategy {
         farthestCoordinate.y
       )
       cells.forEach((cell) => {
-        if (cell.value && cell.value != pokemon) {
+        if (cell.value && cell.value.team != pokemon.team) {
           cell.value.handleSpecialDamage(
             damage,
             board,
@@ -2271,7 +2271,7 @@ export class WheelOfFireStrategy extends AttackStrategy {
         coord.y
       )
       cells.forEach((cell) => {
-        if (cell.value && cell.value != pokemon) {
+        if (cell.value && cell.value.team != pokemon.team) {
           cell.value.handleSpecialDamage(
             damage,
             board,
@@ -4015,5 +4015,45 @@ export class ShellTrapStrategy extends AttackStrategy {
         cell.value.setMana(cell.value.mana - 40)
       }
     })
+  }
+}
+
+export class DigStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10
+
+    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(
+      pokemon,
+      board
+    )
+
+    if (farthestCoordinate) {
+      const cells = board.getCellsBetween(
+        pokemon.positionX,
+        pokemon.positionY,
+        farthestCoordinate.x,
+        farthestCoordinate.y
+      )
+      cells.forEach((cell) => {
+        if (cell.value && cell.value.team != pokemon.team) {
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      })
+
+      pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
+    }
   }
 }

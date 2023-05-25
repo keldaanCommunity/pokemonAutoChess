@@ -6,6 +6,8 @@
 
 - New ability for Litwick: Hex, Single target 20-40-80 Spell Damage, it doubles if the enemy mon has any status
 - New ability for Turtwig: Growth: Increase body size and Attack by 10. Grows twice as fast if weather is sunny
+- New ability for Tauros: Head Smash: Hurts itself for 15 HP and deals 150 special damage. Execute if the target is asleep of frozen
+- New ability for Diglett/Dugtrio: Dig: Digs underground and reappears next to the farthest enemy, dealing 10-20-40 special damage to all enemies on the way
 
 # Changes to Synergies
 
@@ -22,6 +24,7 @@
 - The empty slots of the shop refills now effectively
 - The Grassy terrain procs now on the Flora Summon
 - If you have the same terrain as an opponent and kill their Tapu, your pokemons keep their terrain 
+- Improve the choice of the target cell for jump/teleport abilities
 
 # Misc
 
