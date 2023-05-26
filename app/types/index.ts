@@ -216,9 +216,11 @@ export interface ICreditName {
   Name: string
 }
 
-export interface IMessage {
-  name: string
+export interface IChatV2 {
+  id: string
   payload: string
+  authorId: string
+  author: string
   avatar: string
   time: number
 }

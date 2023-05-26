@@ -34,12 +34,6 @@ export class OnJoinCommand extends Command {
   }
 }
 
-export class OnMessageCommand extends Command {
-  execute({ client, message }) {
-    this.room.broadcast(Transfer.MESSAGES, message)
-  }
-}
-
 export class OnLeaveCommand extends Command {
   execute({ client, consented }) {
     try {

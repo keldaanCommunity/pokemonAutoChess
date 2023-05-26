@@ -8,7 +8,7 @@ import {
 } from "colyseus"
 import LobbyState from "./states/lobby-state"
 import { connect, FilterQuery, CallbackError } from "mongoose"
-import Chat from "../models/mongo-models/chat"
+import ChatV2 from "../models/mongo-models/chat-v2"
 import UserMetadata, {
   IPokemonConfig,
   IUserMetadata
@@ -334,8 +334,10 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
             }
             if (res?.deletedCount > 0) {
               this.state.addMessage(
-                "Server",
+                nanoid(),
                 `${user.name} unbanned the user ${message.name}`,
+                "server-id",
+                "Server",
                 `0081/${Emotion.NORMAL}`,
                 Date.now(),
                 true
@@ -355,6 +357,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
           user &&
           (user.role === Role.ADMIN || user.role === Role.MODERATOR)
         ) {
+          this.state.removeMessages(message.uid)
           BannedUser.findOne({ uid: message.uid }, (err, banned) => {
             if (err) {
               logger.error(err)
@@ -367,16 +370,20 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
                 name: message.name
               })
               this.state.addMessage(
-                "Server",
+                nanoid(),
                 `${user.name} banned the user ${message.name}`,
+                "server-id",
+                "Server",
                 `0081/${Emotion.NORMAL}`,
                 Date.now(),
                 true
               )
             } else {
               this.state.addMessage(
-                "Server",
+                nanoid(),
                 `${message.name} was already banned`,
+                "server-id",
+                "Server",
                 `0081/${Emotion.NORMAL}`,
                 Date.now(),
                 true
@@ -400,8 +407,10 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
         const user = this.state.users.get(client.auth.uid)
         if (user && !user.anonymous && message.payload != "") {
           this.state.addMessage(
-            user.name,
+            nanoid(),
             message.payload,
+            user.id,
+            user.name,
             user.avatar,
             Date.now(),
             true
@@ -414,7 +423,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
 
     this.onMessage(
       Transfer.REMOVE_MESSAGE,
-      (client, message: { author: string; payload: string }) => {
+      (client, message: { id: string }) => {
         try {
           const user = this.state.users.get(client.auth.uid)
           if (
@@ -422,7 +431,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
             user.role &&
             (user.role === Role.ADMIN || user.role === Role.MODERATOR)
           ) {
-            this.state.removeMessage(message.author, message.payload)
+            this.state.removeMessage(message.id)
           }
         } catch (error) {
           logger.error(error)
@@ -970,7 +979,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
           if (err != null) {
             logger.error("Error connecting to Mongo", err)
           }
-          Chat.find(
+          ChatV2.find(
             { time: { $gt: Date.now() - 86400000 } },
             (err, messages) => {
               if (err) {
@@ -978,8 +987,10 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
               } else {
                 messages.forEach((message) => {
                   this.state.addMessage(
-                    message.name,
+                    nanoid(),
                     message.payload,
+                    message.authorId,
+                    message.author,
                     message.avatar,
                     message.time,
                     false
