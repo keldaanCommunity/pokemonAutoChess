@@ -608,7 +608,7 @@ export default class PokemonState {
           ...board.getAdjacentCells(x, y).map((cell) => ({
             x: cell.x,
             y: cell.y,
-            distance: board.distanceC(
+            distance: board.distance(
               pokemon.positionX,
               pokemon.positionY,
               cell.x,
