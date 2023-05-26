@@ -26,6 +26,7 @@ import BannedUser from "../models/mongo-models/banned-user"
 import { IBot } from "../models/mongo-models/bot-v2"
 import { logger } from "../utils/logger"
 import { MAX_PLAYERS_PER_LOBBY } from "../types/Config"
+import { nanoid } from "nanoid"
 
 export default class PreparationRoom extends Room<PreparationState> {
   dispatcher: Dispatcher<this>
@@ -145,10 +146,12 @@ export default class PreparationRoom extends Room<PreparationState> {
           this.dispatcher.dispatch(new OnMessageCommand(), {
             client: client,
             message: {
-              name: user.name,
+              author: user.name,
+              authorId: user.id,
               avatar: user.avatar,
               payload: message.payload,
-              time: Date.now()
+              time: Date.now(),
+              id: nanoid()
             }
           })
         }

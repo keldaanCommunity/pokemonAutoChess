@@ -9,7 +9,7 @@ import LeaderboardInfo, {
 import { RoomAvailable } from "colyseus.js"
 import {
   IGameMetadata,
-  IMessage,
+  IChatV2,
   IPreparationMetadata,
   ISuggestionUser
 } from "../../../types"
@@ -24,7 +24,7 @@ import { playSound, SOUNDS } from "../pages/utils/audio"
 
 interface IUserLobbyState {
   botLogDatabase: string[]
-  messages: IMessage[]
+  messages: IChatV2[]
   users: ILobbyUser[]
   leaderboard: ILeaderboardInfo[]
   botLeaderboard: ILeaderboardInfo[]
@@ -166,7 +166,7 @@ export const lobbySlice = createSlice({
       state.botLogDatabase.push(action.payload)
     },
     pushMessage: (state, action: PayloadAction<Message>) => {
-      const m: IMessage = JSON.parse(JSON.stringify(action.payload))
+      const m: IChatV2 = JSON.parse(JSON.stringify(action.payload))
       state.messages.push(m)
     },
     removeMessage: (state, action: PayloadAction<Message>) => {
