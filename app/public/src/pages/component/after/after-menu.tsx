@@ -1,13 +1,14 @@
-import React, { useRef } from "react"
+import React from "react"
 import { useAppSelector } from "../../../hooks"
 import Avatar from "../avatar"
 import Team from "./team"
 import { getRankLabel } from "../../../../../../app/types/strings/Strings"
-import "./after-menu.css"
 import SynergyIcon from "../icons/synergy-icon"
 import EloRank from "elo-rank"
 import { ISimplePlayer } from "../../../../../types"
-import { ExpPlace } from "../../../../../types/Config"
+import { ExpPlace, TypeTrigger } from "../../../../../types/Config"
+import { Synergy } from "../../../../../types/enum/Synergy"
+import "./after-menu.css"
 
 function computeElo(players: ISimplePlayer[], player: ISimplePlayer) {
   const eloEngine = new EloRank()
@@ -102,7 +103,7 @@ export default function AfterMenu() {
                   </td>
                   <td>
                     <ul className="player-team-synergies">
-                      {v.synergies.map((s) => (
+                      {v.synergies.filter(isNotIncomplete).map((s) => (
                         <React.Fragment key={s.name}>
                           <SynergyIcon type={s.name} />
                           <span>{s.value}</span>
@@ -118,4 +119,8 @@ export default function AfterMenu() {
       </div>
     </div>
   )
+}
+
+function isNotIncomplete(s: { name: Synergy, value: number }){
+  return s.value >= TypeTrigger[s.name][0]
 }
