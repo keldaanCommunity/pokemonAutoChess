@@ -379,11 +379,10 @@ export default class PokemonState {
         }
       }
 
-      if (attacker) {
-        attacker.onKill(pokemon, board)
-      }
-
       if (death) {
+        if (attacker) {
+          attacker.onKill(pokemon, board)
+        }
         let effectsRemovedList: Effect[] = []
 
         // Remove field effects on death
@@ -598,10 +597,10 @@ export default class PokemonState {
     board: Board
   ): { x: number; y: number } | undefined {
     const candidateCells = new Array<{
-      distance: number;
-      x: number;
-      y: number;
-    }>();
+      distance: number
+      x: number
+      y: number
+    }>()
 
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value !== undefined && value.team != pokemon.team) {
@@ -614,14 +613,14 @@ export default class PokemonState {
               pokemon.positionY,
               cell.x,
               cell.y
-            ),
+            )
           }))
-        );
+        )
       }
-    });
+    })
 
-    candidateCells.sort((a, b) => b.distance - a.distance);
-    return candidateCells[0];
+    candidateCells.sort((a, b) => b.distance - a.distance)
+    return candidateCells[0]
   }
 
   getTargetCoordinateWhenConfused(
