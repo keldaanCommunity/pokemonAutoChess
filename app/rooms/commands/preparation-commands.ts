@@ -7,7 +7,7 @@ import UserMetadata, {
 import BotV2, { IBot } from "../../models/mongo-models/bot-v2"
 import { Client } from "colyseus"
 import PreparationRoom from "../preparation-room"
-import { Emotion, IMessage, Role, Transfer } from "../../types"
+import { Emotion, IChatV2, Role, Transfer } from "../../types"
 import { BotDifficulty } from "../../types/enum/Game"
 import { pickRandomIn } from "../../utils/random"
 import { logger } from "../../utils/logger"
@@ -186,7 +186,7 @@ export class OnMessageCommand extends Command<
   PreparationRoom,
   {
     client: Client
-    message: IMessage
+    message: IChatV2
   }
 > {
   execute({ client, message }) {
