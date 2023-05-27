@@ -15,6 +15,7 @@
 
 .room-item .room-name {
   flex: 1;
+  word-break: break-word;
 }
 
 .room-item .lock-icon {

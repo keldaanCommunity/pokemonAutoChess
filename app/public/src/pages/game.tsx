@@ -71,7 +71,8 @@ import {
   NonFunctionPropNames,
   IDps,
   IDpsHeal,
-  IPlayer
+  IPlayer,
+  Role
 } from "../../../types"
 import GameToasts from "./component/game/game-toasts"
 import GamePokemonsProposition from "./component/game/game-pokemons-proposition"
@@ -141,10 +142,8 @@ export default function Game() {
       )
     }
 
-    const elligibleToXP =
-      nbPlayers >= MAX_PLAYERS_PER_LOBBY &&
-      (room?.state.stageLevel ?? 0) >= RequiredStageLevelForXpElligibility
-    const elligibleToELO = elligibleToXP && !room?.state.noElo
+    const elligibleToXP = nbPlayers >= 2 && (room?.state.stageLevel ?? 0) >= RequiredStageLevelForXpElligibility
+    const elligibleToELO = elligibleToXP && !room?.state.noElo && savedPlayers.filter(p => p.role !== Role.BOT).length >= 2
 
     const r: Room<AfterGameState> = await client.create("after-game", {
       players: savedPlayers,
