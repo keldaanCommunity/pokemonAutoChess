@@ -202,6 +202,10 @@ export default function Lobby() {
               setToAuth(true)
             })
 
+            room.onMessage(Transfer.BANNED, (message) => {
+              alert(message)
+            })
+
             room.onMessage(Transfer.BOT_DATABASE_LOG, (message) => {
               dispatch(pushBotLog(message))
             })

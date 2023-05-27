@@ -333,14 +333,9 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
               logger.error
             }
             if (res?.deletedCount > 0) {
-              this.state.addMessage(
-                nanoid(),
-                `${user.name} unbanned the user ${message.name}`,
-                "server-id",
-                "Server",
-                `0081/${Emotion.NORMAL}`,
-                Date.now(),
-                true
+              client.send(
+                Transfer.BANNED,
+                `${user.name} unbanned the user ${message.name}`
               )
             }
           })
@@ -369,25 +364,12 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
                 time: Date.now(),
                 name: message.name
               })
-              this.state.addMessage(
-                nanoid(),
-                `${user.name} banned the user ${message.name}`,
-                "server-id",
-                "Server",
-                `0081/${Emotion.NORMAL}`,
-                Date.now(),
-                true
+              client.send(
+                Transfer.BANNED,
+                `${user.name} banned the user ${message.name}`
               )
             } else {
-              this.state.addMessage(
-                nanoid(),
-                `${message.name} was already banned`,
-                "server-id",
-                "Server",
-                `0081/${Emotion.NORMAL}`,
-                Date.now(),
-                true
-              )
+              client.send(Transfer.BANNED, `${message.name} was already banned`)
             }
           })
           this.clients.forEach((c) => {
