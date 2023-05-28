@@ -273,8 +273,18 @@ export interface ISimplePlayer {
   id: string
   rank: number
   avatar: string
+  title: string
+  role: Role
   pokemons: IPokemonRecord[]
   synergies: Array<{ name: Synergy; value: number }>
+}
+
+export interface IGameHistorySimplePlayer extends ISimplePlayer {
+  pokemons: IGameHistoryPokemonRecord[]
+}
+
+export interface IGameHistoryPokemonRecord extends IPokemonRecord {
+  inventory: Item[]
 }
 
 export interface IPokemonAvatar {
@@ -323,6 +333,7 @@ export interface IPlayer {
   rerollCount: number
   loadingProgress: number
   effects: Effects
+  isBot: boolean
 }
 export interface IPokemon {
   id: string
