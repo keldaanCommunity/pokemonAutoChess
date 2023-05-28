@@ -11,5 +11,6 @@ export enum Passive {
     GRASSY_SURGE = "GRASSY_SURGE",
     MISTY_SURGE = "MISTY_SURGE",
     PSYCHIC_SURGE = "PSYCHIC_SURGE",
-    EEVEE = "EEVEE"
+    EEVEE = "EEVEE",
+    TREE = "TREE",
 }

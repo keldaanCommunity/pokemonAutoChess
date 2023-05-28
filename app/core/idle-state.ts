@@ -1,5 +1,5 @@
-import { Ability } from "../types/enum/Ability"
 import { PokemonActionState } from "../types/enum/Game"
+import { Passive } from "../types/enum/Passive"
 import Board from "./board"
 import PokemonEntity from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
@@ -20,7 +20,7 @@ export class IdleState extends PokemonState {
 
     if (pokemon.cooldown <= 0) {
       pokemon.cooldown = 500
-      if (pokemon.skill === Ability.MIMIC && pokemon.status.tree) {
+      if (pokemon.passive === Passive.TREE && pokemon.status.tree) {
         pokemon.addAttack(1)
       }
     } else {

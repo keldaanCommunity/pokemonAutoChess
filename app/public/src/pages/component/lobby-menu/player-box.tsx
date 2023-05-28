@@ -48,9 +48,7 @@ export default function PlayerBox(props: { user: ILobbyUser }) {
         </p>
         <p>Wins: {props.user.wins}</p>
       </div>
-      <p>
-          ID: {props.user.id}
-        </p>
+      <p style={{ color: "gray", fontSize: "60%"}}>User ID: {props.user.id}</p>
     </div>
   )
 }
