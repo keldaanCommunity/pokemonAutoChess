@@ -19,6 +19,7 @@ import { Pkm } from "../types/enum/Pokemon"
 import { IdleState } from "./idle-state"
 import PokemonFactory from "../models/pokemon-factory"
 import { roundTo2Digits } from "../utils/number"
+import { Passive } from "../types/enum/Passive"
 
 export default class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
@@ -52,6 +53,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   @type(["string"]) types = new ArraySchema<Synergy>()
   @type("uint8") stars: number
   @type("string") skill: Ability
+  @type("string") passive: Passive
   @type(Status) status: Status
   @type(Count) count: Count
   @type("float32") critDamage = 2
@@ -122,6 +124,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     this.attackSprite = pokemon.attackSprite
     this.stars = pokemon.stars
     this.skill = pokemon.skill
+    this.passive = pokemon.passive
     this.shiny = pokemon.shiny
     this.emotion = pokemon.emotion
 

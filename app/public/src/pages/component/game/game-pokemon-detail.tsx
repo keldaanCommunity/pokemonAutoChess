@@ -1,14 +1,16 @@
 import React from "react"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
-import { AttackTypeColor, RarityColor } from "../../../../../types/Config"
+import { RarityColor } from "../../../../../types/Config"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Rarity, Stat } from "../../../../../types/enum/Game"
+import { Passive } from "../../../../../types/enum/Passive"
 import { AbilityName } from "../../../../../types/strings/Ability"
-import { AttackTypeLabel } from "../../../../../types/strings/AttackType"
+import { PassiveDescription } from "../../../../../types/strings/Passive"
 import { CustomPokemonDescription } from "../../../../../types/strings/Pokemon"
 import { StatLabel } from "../../../../../types/strings/Stat"
 import { getPortraitSrc } from "../../../utils"
+import { addIconsToDescription } from "../../utils/descriptions"
 import { AbilityTooltip } from "../ability/ability-tooltip"
 import SynergyIcon from "../icons/synergy-icon"
 import "./game-pokemon-detail.css"
@@ -44,12 +46,6 @@ export function GamePokemonDetail(props: {
           style={{ color: RarityColor[props.pokemon.rarity] }}
         >
           {props.pokemon.rarity}
-        </p>
-        <p
-          className="game-pokemon-detail-entry-attack-type"
-          style={{ color: AttackTypeColor[props.pokemon.attackType] }}
-        >
-          {AttackTypeLabel[props.pokemon.attackType].eng}
         </p>
       </div>
 
@@ -95,6 +91,12 @@ export function GamePokemonDetail(props: {
           <div className="custom-description">
             <p>{CustomPokemonDescription[props.pokemon.name].eng}</p>
           </div>
+        </div>
+      )}
+
+      {props.pokemon.passive !== Passive.NONE && (
+        <div className="game-pokemon-detail-passive">
+          <p>Passive: {addIconsToDescription(PassiveDescription[props.pokemon.passive])}</p>
         </div>
       )}
     </div>
