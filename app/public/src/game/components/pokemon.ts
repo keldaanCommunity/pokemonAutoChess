@@ -38,6 +38,7 @@ import {
 } from "../../../../utils/orientation"
 import { clamp } from "../../../../utils/number"
 import PokemonFactory from "../../../../models/pokemon-factory"
+import { AnimationType } from "../../../../types/Animation"
 
 export default class Pokemon extends DraggableObject {
   evolution: Pkm
@@ -189,7 +190,7 @@ export default class Pokemon extends DraggableObject {
       0,
       0,
       this.index,
-      `${PokemonTint.NORMAL}/${PokemonActionState.IDLE}/${SpriteType.ANIM}/${Orientation.DOWN}/0000`
+      `${PokemonTint.NORMAL}/${AnimationType.Idle}/${SpriteType.ANIM}/${Orientation.DOWN}/0000`
     )
     this.sprite.setDepth(3)
     //this.sprite.setOrigin(0,0);
@@ -198,9 +199,7 @@ export default class Pokemon extends DraggableObject {
       Phaser.Animations.Events.ANIMATION_COMPLETE,
       (animation, frame, gameObject, frameKey: string) => {
         const g = <GameScene>scene
-        if (frameKey.includes(PokemonActionState.ATTACK)) {
-          g.animationManager?.animatePokemon(this, PokemonActionState.IDLE)
-        }
+        g.animationManager?.animatePokemon(this, AnimationType.Idle)
       }
     )
     this.height = this.sprite.height

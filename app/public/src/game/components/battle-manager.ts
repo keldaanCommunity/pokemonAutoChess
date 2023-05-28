@@ -18,6 +18,8 @@ import {
 import { Ability } from "../../../../types/enum/Ability"
 import { Item } from "../../../../types/enum/Item"
 import Count from "../../../../models/colyseus-models/count"
+import { AnimationConfig, AnimationType } from "../../../../types/Animation"
+import { Pkm } from "../../../../types/enum/Pokemon"
 
 export default class BattleManager {
   group: GameObjects.Group
@@ -62,7 +64,7 @@ export default class BattleManager {
         playerId,
         true
       )
-      this.animationManager.animatePokemon(pokemonUI, PokemonActionState.WALK)
+      this.animationManager.animatePokemon(pokemonUI, AnimationType.Walk)
       this.group.add(pokemonUI)
     }
   }
@@ -76,7 +78,7 @@ export default class BattleManager {
       this.group.getChildren().forEach((p) => {
         const pkm = <Pokemon>p
         if (pkm.id == pokemon.id) {
-          this.animationManager.animatePokemon(pkm, PokemonActionState.HURT)
+          this.animationManager.animatePokemon(pkm, AnimationType.Hurt)
           pkm.deathAnimation()
         }
       })
@@ -126,10 +128,7 @@ export default class BattleManager {
           } else if (field == "sleep") {
             if (pokemon.status.sleep) {
               pkm.addSleep()
-              this.animationManager.animatePokemon(
-                pkm,
-                PokemonActionState.SLEEP
-              )
+              this.animationManager.animatePokemon(pkm, AnimationType.Sleep)
             } else {
               pkm.removeSleep()
             }
@@ -252,6 +251,10 @@ export default class BattleManager {
             }
           } else if (field == "ult") {
             if (value != 0) {
+              this.animationManager.animatePokemon(
+                pkm,
+                AnimationConfig[pkm.name as Pkm].ability
+              )
               pkm.specialAttackAnimation(this.group, value)
             }
           } else if (field == "petalDanceCount") {
@@ -329,7 +332,7 @@ export default class BattleManager {
               ) {
                 this.animationManager.animatePokemon(
                   pkm,
-                  PokemonActionState.ATTACK
+                  AnimationConfig[pkm.name as Pkm].attack
                 )
                 pkm.attackAnimation()
               }
@@ -394,7 +397,7 @@ export default class BattleManager {
           } else if (field == "orientation") {
             pkm.orientation = pokemon.orientation
             if (pokemon.action !== PokemonActionState.SLEEP) {
-              this.animationManager.animatePokemon(pkm, PokemonActionState.WALK)
+              this.animationManager.animatePokemon(pkm, AnimationType.Walk)
             }
           } else if (field == "action") {
             pkm.action = pokemon.action
@@ -482,7 +485,7 @@ export default class BattleManager {
             }
           } else if (field === "index") {
             pkm.index = value
-            this.animationManager.animatePokemon(pkm, pkm.action)
+            this.animationManager.animatePokemon(pkm, AnimationType.Idle)
           }
           break
         }

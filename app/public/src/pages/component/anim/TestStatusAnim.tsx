@@ -10,6 +10,7 @@ import {
   SpriteType
 } from "../../../../../types/enum/Game"
 import durations from "../../../../dist/client/assets/pokemons/durations.json"
+import { AnimationType } from "../../../../../types/Animation"
 
 export default function TestAnim({
   height = 100,
@@ -62,13 +63,13 @@ export default function TestAnim({
 
       const durationArray =
         durations[
-          `${PKM_INDEX}/${PokemonTint.NORMAL}/${PokemonActionState.IDLE}/${SpriteType.ANIM}`
+          `${PKM_INDEX}/${PokemonTint.NORMAL}/${AnimationType.Idle}/${SpriteType.ANIM}`
         ]
       const frameArray = this.anims.generateFrameNames(PKM_INDEX, {
         start: 0,
         end: durationArray.length - 1,
         zeroPad: 4,
-        prefix: `${PokemonTint.NORMAL}/${PokemonActionState.IDLE}/${SpriteType.ANIM}/${Orientation.DOWN}/`
+        prefix: `${PokemonTint.NORMAL}/${AnimationType.Idle}/${SpriteType.ANIM}/${Orientation.DOWN}/`
       })
       for (let i = 0; i < durationArray.length; i++) {
         if (frameArray[i]) {
@@ -86,7 +87,7 @@ export default function TestAnim({
         width / 2,
         height / 2,
         PKM_INDEX,
-        `${PokemonTint.NORMAL}/${PokemonActionState.IDLE}/${SpriteType.ANIM}/${Orientation.DOWN}/0000`
+        `${PokemonTint.NORMAL}/${AnimationType.Idle}/${SpriteType.ANIM}/${Orientation.DOWN}/0000`
       )
       pkmSprite.play(PKM_INDEX)
       pkmSprite.setScale(2).setDepth(3)
