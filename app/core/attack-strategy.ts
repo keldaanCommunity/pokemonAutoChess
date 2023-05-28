@@ -20,7 +20,7 @@ export class AttackStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    pokemon.setMana(0)
+    pokemon.mana = 0
     pokemon.count.ult += 1
 
     if (pokemon.types.includes(Synergy.SOUND)) {
