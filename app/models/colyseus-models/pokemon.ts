@@ -9992,7 +9992,7 @@ export class MimeJr extends Pokemon {
       AttackSprite.PSYCHIC_RANGE,
       1,
       90,
-      Ability.AURORA_VEIL,
+      Ability.MIMIC,
       shiny,
       emotion,
       false,
@@ -10016,7 +10016,7 @@ export class MrMime extends Pokemon {
       AttackSprite.PSYCHIC_RANGE,
       2,
       90,
-      Ability.AURORA_VEIL,
+      Ability.MIMIC,
       shiny,
       emotion,
       true,
@@ -12748,7 +12748,8 @@ export class Bonsley extends Pokemon {
       shiny,
       emotion,
       false,
-      true
+      true,
+      Passive.TREE
     )
   }
 }
@@ -12772,7 +12773,8 @@ export class Sudowoodo extends Pokemon {
       shiny,
       emotion,
       true,
-      true
+      true,
+      Passive.TREE
     )
   }
 }
