@@ -1424,13 +1424,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   ELECTRIC_SURGE: {
-    eng: `Passive: Give ${Status.ELECTRIC_FIELD} to your Electric Pokemon, boosting their damage by 30%`,
+    eng: `Increase ${Stat.ATK_SPEED} of all Electric pokemons by [10,SP]%`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   PSYCHIC_SURGE: {
-    eng: `Passive: Give ${Status.PSYCHIC_FIELD} to your Psychic Pokemon, boosting their damage by 30%`,
+    eng: `Increase ${Stat.AP} of all Psychic pokemons by [10,SP]%`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1556,13 +1556,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.GRASSY_SURGE]: {
-    eng: `Passive: Give ${Status.GRASS_FIELD} to your Grass Pokemon, boosting their damage by 30%`,
+    eng: `Increase ${Stat.ATK} of all Grass pokemons by [5,SP]`,
     esp: "",
     prt: "",
     fra: ""
   },
   [Ability.MISTY_SURGE]: {
-    eng: `Passive: Give ${Status.FAIRY_FIELD} to your Fairy Pokemon, boosting their damage by 30%`,
+    eng: `Increase ${Stat.SPE_DEF} of all Fairy pokemons by [5,SP]`,
     esp: "",
     prt: "",
     fra: ""

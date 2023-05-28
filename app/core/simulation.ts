@@ -305,7 +305,7 @@ export default class Simulation extends Schema implements ISimulation {
         pokemon.setMana(pokemon.mana + value)
         break
       case Stat.ATK_SPEED:
-        pokemon.handleAttackSpeed(value)
+        pokemon.addAttackSpeed(value)
         break
       case Stat.CRIT_CHANCE:
         pokemon.addCritChance(value)
@@ -441,7 +441,7 @@ export default class Simulation extends Schema implements ISimulation {
               pokemon.positionY
             )
             if (value) {
-              value.handleAttackSpeed(30)
+              value.addAttackSpeed(30)
             }
           })
         }

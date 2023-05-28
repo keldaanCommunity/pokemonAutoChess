@@ -126,19 +126,19 @@ export default class PokemonState {
       }
 
       if (attacker && attacker.status.electricField) {
-        reducedDamage = Math.ceil(reducedDamage * 1.3)
+        reducedDamage = Math.ceil(reducedDamage * 1.2)
       }
 
       if (attacker && attacker.status.psychicField) {
-        reducedDamage = Math.ceil(reducedDamage * 1.3)
+        reducedDamage = Math.ceil(reducedDamage * 1.2)
       }
 
       if (attacker && attacker.status.grassField) {
-        reducedDamage = Math.ceil(reducedDamage * 1.3)
+        reducedDamage = Math.ceil(reducedDamage * 1.2)
       }
 
       if (attacker && attacker.status.fairyField) {
-        reducedDamage = Math.ceil(reducedDamage * 1.3)
+        reducedDamage = Math.ceil(reducedDamage * 1.2)
       }
 
       if (attacker && attacker.items.has(Item.FIRE_GEM)) {
@@ -269,7 +269,7 @@ export default class PokemonState {
           if (pokemon.count.defensiveRibbonCount % 2 === 0) {
             pokemon.addAttack(1)
             pokemon.addDefense(1)
-            pokemon.handleAttackSpeed(5)
+            pokemon.addAttackSpeed(5)
           }
         }
 
@@ -369,7 +369,7 @@ export default class PokemonState {
                 pokemon.simulation.room.clock.setTimeout(() => {
                   value.count.fieldCount++
                   value.handleHeal(heal, _pokemon, 0)
-                  value.handleAttackSpeed(speedBoost)
+                  value.addAttackSpeed(speedBoost)
                 }, 16) // delay to next tick, targeting 60 ticks per second
               }
             })
@@ -387,28 +387,28 @@ export default class PokemonState {
         let effectsRemovedList: Effect[] = []
 
         // Remove field effects on death
-        if (pokemon.skill === Ability.ELECTRIC_SURGE) {
+        if (pokemon.passive === Passive.ELECTRIC_SURGE) {
           board.forEach((x, y, pkm) => {
             if (pkm && pkm.team == pokemon.team && pkm.status.electricField) {
               pkm.status.electricField = false
             }
           })
           effectsRemovedList.push(Effect.ELECTRIC_TERRAIN)
-        } else if (pokemon.skill === Ability.PSYCHIC_SURGE) {
+        } else if (pokemon.passive === Passive.PSYCHIC_SURGE) {
           board.forEach((x, y, pkm) => {
             if (pkm && pkm.team == pokemon.team && pkm.status.psychicField) {
               pkm.status.psychicField = false
             }
           })
           effectsRemovedList.push(Effect.PSYCHIC_TERRAIN)
-        } else if (pokemon.skill === Ability.GRASSY_SURGE) {
+        } else if (pokemon.passive === Passive.GRASSY_SURGE) {
           board.forEach((x, y, pkm) => {
             if (pkm && pkm.team == pokemon.team && pkm.status.grassField) {
               pkm.status.grassField = false
             }
           })
           effectsRemovedList.push(Effect.GRASSY_TERRAIN)
-        } else if (pokemon.skill === Ability.MISTY_SURGE) {
+        } else if (pokemon.passive === Passive.MISTY_SURGE) {
           board.forEach((x, y, pkm) => {
             if (pkm && pkm.team == pokemon.team && pkm.status.fairyField) {
               pkm.status.fairyField = false

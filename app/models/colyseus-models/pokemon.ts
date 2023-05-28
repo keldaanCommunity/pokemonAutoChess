@@ -6717,7 +6717,9 @@ export class Eevee extends Pokemon {
       Ability.HAPPY_HOUR,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.EEVEE
     )
   }
 }
@@ -9143,7 +9145,9 @@ export class TapuKoko extends Pokemon {
       Ability.ELECTRIC_SURGE,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.ELECTRIC_SURGE
     )
   }
 }
@@ -9166,7 +9170,9 @@ export class TapuLele extends Pokemon {
       Ability.PSYCHIC_SURGE,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.PSYCHIC_SURGE
     )
   }
 }
@@ -9212,7 +9218,9 @@ export class TapuFini extends Pokemon {
       Ability.MISTY_SURGE,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.MISTY_SURGE
     )
   }
 }
@@ -9235,7 +9243,9 @@ export class TapuBulu extends Pokemon {
       Ability.GRASSY_SURGE,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.GRASSY_SURGE
     )
   }
 }

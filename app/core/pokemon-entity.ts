@@ -18,7 +18,7 @@ import { Synergy } from "../types/enum/Synergy"
 import { Pkm } from "../types/enum/Pokemon"
 import { IdleState } from "./idle-state"
 import PokemonFactory from "../models/pokemon-factory"
-import { roundTo2Digits } from "../utils/number"
+import { clamp, roundTo2Digits } from "../utils/number"
 import { Passive } from "../types/enum/Passive"
 
 export default class PokemonEntity extends Schema implements IPokemonEntity {
@@ -153,17 +153,6 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     return 1000 / this.atkSpeed
   }
 
-  handleAttackSpeed(buff: number, apBoost: boolean = false) {
-    const boost = apBoost ? (buff * this.ap) / 100 : 0
-    this.atkSpeedBonus = this.atkSpeedBonus + buff + boost
-    this.atkSpeed = Number(
-      Math.min(
-        2.5,
-        Math.max(0.4, 0.75 * (1 + this.atkSpeedBonus / 100))
-      ).toFixed(2)
-    )
-  }
-
   handleDamage(params: {
     damage: number
     board: Board
@@ -266,8 +255,9 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     this.dodge = Math.min(0.9, this.dodge + value)
   }
 
-  addAbilityPower(value: number) {
-    this.ap = Math.round(this.ap + value)
+  addAbilityPower(value: number, apBoost: boolean = true) {
+    const boost = apBoost ? (value * this.ap) / 100 : 0
+    this.ap = Math.round(this.ap + Math.round(value + boost))
   }
 
   addDefense(value: number, apBoost?: boolean) {
@@ -283,6 +273,12 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   addAttack(value: number, apBoost?: boolean) {
     const boost = apBoost ? (value * this.ap) / 100 : 0
     this.atk = Math.max(0, this.atk + Math.round(value + boost))
+  }
+
+  addAttackSpeed(value: number, apBoost: boolean = false) {
+    const boost = apBoost ? (value * this.ap) / 100 : 0
+    this.atkSpeedBonus += value + boost
+    this.atkSpeed = clamp(roundTo2Digits(0.75 * (1 + this.atkSpeedBonus / 100)), 0.4, 2.5)
   }
 
   addCritDamage(value: number, apBoost?: boolean) {

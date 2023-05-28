@@ -1,4 +1,5 @@
 import { Passive } from "../enum/Passive";
+import { Status } from "../enum/Status"
 
 export const PassiveDescription: { [key in Passive]: string } = {
     [Passive.NONE]: "No passive",
@@ -9,4 +10,9 @@ export const PassiveDescription: { [key in Passive]: string } = {
     [Passive.PHIONE]: `Phione is looking for an Aqua Egg`,
     [Passive.PRIMAL]: `Legend has it that you could unleash the ancient powers of these pokemons`,
     [Passive.WONDER_GUARD]: `Reduce received damage and received healing to 1`,
+    [Passive.ELECTRIC_SURGE]: `Give ${Status.ELECTRIC_FIELD} to your Electric Pokemon, boosting their damage by 20%`,
+    [Passive.GRASSY_SURGE]: `Give ${Status.GRASS_FIELD} to your Grass Pokemon, boosting their damage by 20%`,
+    [Passive.MISTY_SURGE]: `Give ${Status.FAIRY_FIELD} to your Fairy Pokemon, boosting their damage by 20%`,
+    [Passive.PSYCHIC_SURGE]: `Give ${Status.PSYCHIC_FIELD} to your Psychic Pokemon, boosting their damage by 20%`,
+    [Passive.EEVEE]: `Eevee can evolve into one of the 8 Eeveelutions when given a synergy stone`,
 }
