@@ -32,9 +32,6 @@ export default function PlayerBox(props: { user: ILobbyUser }) {
             {props.user.name}
           </p>
         </div>
-        <p>
-          Level {props.user.level} ({props.user.exp} / 1000)
-        </p>
       </div>
       <div
         style={{
@@ -46,8 +43,14 @@ export default function PlayerBox(props: { user: ILobbyUser }) {
         <div style={{ display: "flex", alignItems: "center" }}>
           <Elo elo={props.user.elo} />
         </div>
+        <p>
+          Level {props.user.level} ({props.user.exp} / 1000)
+        </p>
         <p>Wins: {props.user.wins}</p>
       </div>
+      <p>
+          ID: {props.user.id}
+        </p>
     </div>
   )
 }
