@@ -6642,7 +6642,9 @@ export class Kyogre extends Pokemon {
       Ability.ORIGIN_PULSE,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.PRIMAL
     )
   }
 }
@@ -6665,7 +6667,9 @@ export class Groudon extends Pokemon {
       Ability.EARTHQUAKE,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.PRIMAL
     )
   }
 }
@@ -6688,7 +6692,9 @@ export class Rayquaza extends Pokemon {
       Ability.DRACO_METEOR,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.PRIMAL
     )
   }
 }
@@ -8995,7 +9001,9 @@ export class Nincada extends Pokemon {
       Ability.WONDER_GUARD,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.WONDER_GUARD
     )
   }
 }
@@ -9017,7 +9025,9 @@ export class Ninjask extends Pokemon {
       Ability.WONDER_GUARD,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.WONDER_GUARD
     )
   }
 }
@@ -9039,7 +9049,9 @@ export class Shedninja extends Pokemon {
       Ability.WONDER_GUARD,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.WONDER_GUARD
     )
   }
 }

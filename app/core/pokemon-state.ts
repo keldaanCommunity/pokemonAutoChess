@@ -14,6 +14,7 @@ import { Synergy, SynergyEffects } from "../types/enum/Synergy"
 import { Ability } from "../types/enum/Ability"
 import { pickRandomIn } from "../utils/random"
 import { logger } from "../utils/logger"
+import { Passive } from "../types/enum/Passive"
 
 export default class PokemonState {
   handleHeal(
@@ -29,7 +30,7 @@ export default class PokemonState {
     ) {
       const boost = apBoost ? (heal * apBoost * pokemon.ap) / 100 : 0
       let healBoosted = Math.round(heal + boost)
-      if (pokemon.skill === Ability.WONDER_GUARD) {
+      if (pokemon.passive === Passive.WONDER_GUARD) {
         healBoosted = 1
       }
 
@@ -214,7 +215,7 @@ export default class PokemonState {
         residualDamage = Math.max(0, reducedDamage - damageOnShield)
       }
 
-      if (pokemon.skill == Ability.WONDER_GUARD) {
+      if (pokemon.passive == Passive.WONDER_GUARD) {
         residualDamage = 1
       }
 

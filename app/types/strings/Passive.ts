@@ -7,4 +7,6 @@ export const PassiveDescription: { [key in Passive]: string } = {
     [Passive.PROTEAN3]: `The pokemon acquires the typing of the 3 highest synergies on the team`,
     [Passive.CASTFORM]: `Castform changes form depending on the weather`,
     [Passive.PHIONE]: `Phione is looking for an Aqua Egg`,
+    [Passive.PRIMAL]: `Legend has it that you could unleash the ancient powers of these pokemons`,
+    [Passive.WONDER_GUARD]: `Reduce received damage and received healing to 1`,
 }
