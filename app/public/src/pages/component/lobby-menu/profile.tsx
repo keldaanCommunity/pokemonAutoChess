@@ -1,6 +1,6 @@
 import React, { useState } from "react"
-import { Title, TitleDescription, TitleName } from "../../../../../types"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
+import { Title, TitleDescription, TitleName } from "../../../../../types"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import {
   changeAvatar,
@@ -10,6 +10,7 @@ import {
 import { getPortraitSrc } from "../../../utils"
 import { cc } from "../../utils/jsx"
 import PlayerBox from "./player-box"
+import History from "./history"
 
 export default function Profile() {
   const dispatch = useAppDispatch()
@@ -29,6 +30,7 @@ export default function Profile() {
             <Tab>Name</Tab>
             <Tab>Avatar</Tab>
             <Tab>Title</Tab>
+            <Tab>Game History</Tab>
           </TabList>
 
           <TabPanel>
@@ -124,6 +126,9 @@ export default function Profile() {
                 </li>
               ))}
             </ul>
+          </TabPanel>
+          <TabPanel>
+            <History history={user.history} />
           </TabPanel>
         </Tabs>
       </>
