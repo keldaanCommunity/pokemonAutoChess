@@ -7058,7 +7058,9 @@ export class Castform extends Pokemon {
       Ability.FORECAST,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.CASTFORM
     )
   }
 }
@@ -7081,7 +7083,9 @@ export class CastformSun extends Pokemon {
       Ability.FORECAST,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.CASTFORM
     )
   }
 }
@@ -7104,7 +7108,9 @@ export class CastformRain extends Pokemon {
       Ability.FORECAST,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.CASTFORM
     )
   }
 }
@@ -7127,7 +7133,9 @@ export class CastformHail extends Pokemon {
       Ability.FORECAST,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.CASTFORM
     )
   }
 }
@@ -7334,7 +7342,9 @@ export class Phione extends Pokemon {
       Ability.NASTY_PLOT,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.PHIONE
     )
   }
 }

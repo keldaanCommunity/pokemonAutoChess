@@ -161,6 +161,13 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     }
     wrap.appendChild(statsElm)
 
+    if(passive != Passive.NONE) {
+      this.passiveDescription = document.createElement("div")
+      this.passiveDescription.className = "game-pokemon-detail-passive"
+      this.updatePassiveDescription(passive, abilityTier, ap)
+      wrap.appendChild(this.passiveDescription)
+    }
+
     if (skill !== Ability.DEFAULT) {
       const ult = document.createElement("div")
       ult.className = "game-pokemon-detail-ult"
@@ -188,13 +195,6 @@ export default class PokemonDetail extends GameObjects.DOMElement {
       descriptionWrap.appendChild(description)
       ult.appendChild(descriptionWrap)
       wrap.appendChild(ult)
-    }
-
-    if(passive != Passive.NONE) {
-      this.passiveDescription = document.createElement("div")
-      this.passiveDescription.className = "game-pokemon-detail-passive"
-      this.updatePassiveDescription(passive, abilityTier, ap)
-      wrap.appendChild(this.passiveDescription)
     }
 
     this.dom.appendChild(wrap)

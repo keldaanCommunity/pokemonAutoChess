@@ -13,8 +13,9 @@
   grid-template-areas:
     "portrait entry types"
     "stats stats stats"
-    "ult ult ult"
-    "passive passive passive";
+    "passive passive passive"
+    "ult ult ult";
+    
 }
 
 .game-pokemon-detail p {
@@ -117,5 +118,6 @@
   padding: 0.25em 0.5em;
   margin: 0 -5px -5px -5px;
   font-size: 1em;
-  box-shadow: 0 -1px 2px rgb(0 0 0 / 50%);
+  box-shadow: 0 -1px 1px rgb(0 0 0 / 50%);
+}
 }

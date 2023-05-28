@@ -68,6 +68,12 @@ export function GamePokemonDetail(props: {
         ))}
       </div>
 
+      {props.pokemon.passive !== Passive.NONE && (
+        <div className="game-pokemon-detail-passive">
+          <p>Passive: {addIconsToDescription(PassiveDescription[props.pokemon.passive])}</p>
+        </div>
+      )}
+
       {props.pokemon.skill !== Ability.DEFAULT && (
         <div className="game-pokemon-detail-ult">
           <div className="ability-name">
@@ -92,13 +98,7 @@ export function GamePokemonDetail(props: {
             <p>{CustomPokemonDescription[props.pokemon.name].eng}</p>
           </div>
         </div>
-      )}
-
-      {props.pokemon.passive !== Passive.NONE && (
-        <div className="game-pokemon-detail-passive">
-          <p>Passive: {addIconsToDescription(PassiveDescription[props.pokemon.passive])}</p>
-        </div>
-      )}
+      )}      
     </div>
   )
 }

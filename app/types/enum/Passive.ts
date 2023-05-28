@@ -3,4 +3,6 @@ export enum Passive {
     TYROGUE = "TYROGUE",
     PROTEAN2 = "PROTEAN2",
     PROTEAN3 = "PROTEAN3",
+    CASTFORM = "CASTFORM",
+    PHIONE = "PHIONE",
 }
