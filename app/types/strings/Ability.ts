@@ -1697,7 +1697,7 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     fra: ""
   },
   [Ability.HYPNOSIS]: {
-    eng: `Put ${Status.SLEEP} 1 enemy in the back lines for [2,3.5,6] seconds`,
+    eng: `Put ${Status.SLEEP} 1 enemy in the back lines for [2,3.5,6,SP=0.5] seconds`,
     esp: "",
     prt: "",
     fra: ""
