@@ -4,13 +4,13 @@
 }
 
 #wiki-page > .nes-container {
-  margin-top: 1em;
+  margin: 1em 0;
   color: white;
   background-color: #54596b;
 }
 
 #wiki-page > .nes-container > .react-tabs > .react-tabs__tab-panel {
-  height: calc(100vh - 8vw - 2em);
+  height: calc(100vh - 8vw - 4em);
   overflow-y: auto;
 }
 
@@ -83,6 +83,7 @@
 
 #wiki-page .wiki-tutorials ul {
   display: flex;
+  flex-wrap: wrap;
   gap: 1em;
   padding: 0;
 }

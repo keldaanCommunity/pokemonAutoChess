@@ -414,7 +414,7 @@ export default class Status extends Schema implements IStatus {
       !this.runeProtect
     ) {
       this.paralysis = true
-      pkm.handleAttackSpeed(-40)
+      pkm.addAttackSpeed(-40)
       this.paralysisCooldown = timer
     }
   }
@@ -422,7 +422,7 @@ export default class Status extends Schema implements IStatus {
   updateParalysis(dt: number, pkm: PokemonEntity) {
     if (this.paralysisCooldown - dt <= 0) {
       this.paralysis = false
-      pkm.handleAttackSpeed(40)
+      pkm.addAttackSpeed(40)
     } else {
       this.paralysisCooldown = this.paralysisCooldown - dt
     }

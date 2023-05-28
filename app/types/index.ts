@@ -32,6 +32,7 @@ import { Pokemon } from "../models/colyseus-models/pokemon"
 import { IPokemonRecord } from "../models/colyseus-models/game-record"
 import GameRoom from "../rooms/game-room"
 import { Effects } from "../models/effects"
+import { Passive } from "./enum/Passive"
 
 export * from "./enum/Emotion"
 
@@ -356,6 +357,7 @@ export interface IPokemon {
   stars: number
   maxMana: number
   skill: Ability
+  passive: Passive
   items: SetSchema<Item>
   evolutionTimer: number | undefined
   shiny: boolean
@@ -458,6 +460,7 @@ export interface IPokemonEntity {
   types: ArraySchema<Synergy>
   stars: number
   skill: Ability
+  passive: Passive
   status: Status
   count: Count
   critDamage: number
