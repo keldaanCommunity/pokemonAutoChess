@@ -2158,22 +2158,29 @@ export class ConfusionStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let timer = 0
+    let timer = 0, damage =0
     switch (pokemon.stars) {
       case 1:
         timer = 3000
+        damage = 75
         break
       case 2:
-        timer = 6000
+        timer = 5000
+        damage = 150
         break
       case 3:
-        timer = 12000
+        timer = 7000
+        damage = 300
         break
       default:
         break
     }
 
-    target.status.triggerConfusion(timer, target)
+    if(target.status.confusion){
+      target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    } else {
+      target.status.triggerConfusion(timer, target)
+    }
   }
 }
 
