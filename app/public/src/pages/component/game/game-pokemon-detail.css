@@ -119,5 +119,5 @@
   margin: 0 -5px -5px -5px;
   font-size: 1em;
   box-shadow: 0 -1px 1px rgb(0 0 0 / 50%);
-}
+  white-space: pre-wrap;
 }
