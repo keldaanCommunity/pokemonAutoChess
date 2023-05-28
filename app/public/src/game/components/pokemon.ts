@@ -29,6 +29,7 @@ import {
   Rarity
 } from "../../../../types/enum/Game"
 import { Ability } from "../../../../types/enum/Ability"
+import { Passive } from "../../../../types/enum/Passive"
 import ManaBar from "./mana-bar"
 import { Synergy } from "../../../../types/enum/Synergy"
 import { Pkm } from "../../../../types/enum/Pokemon"
@@ -57,6 +58,7 @@ export default class Pokemon extends DraggableObject {
   targetX: number | null
   targetY: number | null
   skill: Ability
+  passive: Passive
   positionX: number
   positionY: number
   attackSprite: AttackSprite
@@ -148,6 +150,7 @@ export default class Pokemon extends DraggableObject {
     this.targetX = null
     this.targetY = null
     this.skill = pokemon.skill
+    this.passive = pokemon.passive
     this.positionX = pokemon.positionX
     this.positionY = pokemon.positionY
     this.attackSprite = pokemon.attackSprite
@@ -320,7 +323,6 @@ export default class Pokemon extends DraggableObject {
           this.atk,
           this.def,
           this.speDef,
-          this.attackType,
           this.range,
           this.atkSpeed,
           this.critChance,
@@ -329,6 +331,7 @@ export default class Pokemon extends DraggableObject {
           this.mana || this.maxMana,
           this.types,
           this.skill,
+          this.passive,
           this.emotion,
           this.shiny,
           this.index,
@@ -2374,6 +2377,25 @@ export default class Pokemon extends DraggableObject {
               }
             )
             break
+
+            case Ability.JUDGEMENT:
+              coordinates = transformAttackCoordinate(this.targetX, this.targetY)
+              specialProjectile = this.scene.add.sprite(
+                coordinates[0],
+                coordinates[1],
+                Ability.JUDGEMENT,
+                "000"
+              )
+              specialProjectile.setDepth(7)
+              specialProjectile.setScale(2, 2)
+              specialProjectile.anims.play(Ability.JUDGEMENT)
+              specialProjectile.once(
+                Phaser.Animations.Events.ANIMATION_COMPLETE,
+                () => {
+                  specialProjectile.destroy()
+                }
+              )
+              break
 
           case Ability.SHADOW_SNEAK:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY)

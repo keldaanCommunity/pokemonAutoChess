@@ -407,7 +407,7 @@ export class IllusionStrategy extends AttackStrategy {
   }
 }
 
-export class ProteanStrategy extends AttackStrategy {
+export class JudgementStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -416,6 +416,15 @@ export class ProteanStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    let synergyLevelsCount = 0
+    const synergies = pokemon.simulation.player?.synergies
+    if(synergies){
+      pokemon.types.forEach(type => {
+        synergyLevelsCount += synergies.get(type) ?? 0      
+      })
+    }
+    const damage = 10 * synergyLevelsCount
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
 
@@ -428,6 +437,12 @@ export class ElectricSurgeStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    let buff = 10
+    board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
+      if (ally && pokemon.team == ally.team && ally.types.includes(Synergy.ELECTRIC)) {
+        ally.addAttackSpeed(buff, true)
+      }
+    })
   }
 }
 
@@ -440,10 +455,16 @@ export class PsychicSurgeStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    let buff = 10
+    board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
+      if (ally && pokemon.team == ally.team && ally.types.includes(Synergy.PSYCHIC)) {
+        ally.addAbilityPower(buff, true)
+      }
+    })
   }
 }
 
-export class MistsySurgeStrategy extends AttackStrategy {
+export class MistySurgeStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -452,6 +473,12 @@ export class MistsySurgeStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    let buff = 5
+    board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
+      if (ally && pokemon.team == ally.team && ally.types.includes(Synergy.FAIRY)) {
+        ally.addSpecialDefense(buff, true)
+      }
+    })
   }
 }
 
@@ -464,6 +491,12 @@ export class GrassySurgeStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    let buff = 5
+    board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
+      if (ally && pokemon.team == ally.team && ally.types.includes(Synergy.GRASS)) {
+        ally.addAttack(buff, true)
+      }
+    })
   }
 }
 
@@ -772,8 +805,8 @@ export class ElectroWebStrategy extends AttackStrategy {
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
       .forEach((cell) => {
         if (cell.value && cell.value.team !== pokemon.team) {
-          cell.value.handleAttackSpeed(-steal)
-          pokemon.handleAttackSpeed(steal)
+          cell.value.addAttackSpeed(-steal)
+          pokemon.addAttackSpeed(steal)
         }
       })
   }
@@ -1790,7 +1823,7 @@ export class RockTombStrategy extends AttackStrategy {
     }
 
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.handleAttackSpeed(-debuff)
+    target.addAttackSpeed(-debuff)
   }
 }
 
@@ -2988,7 +3021,7 @@ export class TormentStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let boost = 1
+    let boost = 0
 
     switch (pokemon.stars) {
       case 1:
@@ -3003,7 +3036,7 @@ export class TormentStrategy extends AttackStrategy {
       default:
         break
     }
-    pokemon.handleAttackSpeed(boost, true)
+    pokemon.addAttackSpeed(boost, true)
   }
 }
 
@@ -3395,7 +3428,7 @@ export class StunSporeStrategy extends AttackStrategy {
         break
     }
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.handleAttackSpeed(-debuff)
+    target.addAttackSpeed(-debuff)
   }
 }
 
@@ -3660,7 +3693,8 @@ export class AgilityStrategy extends AttackStrategy {
         boost = 30
         break
     }
-    pokemon.handleAttackSpeed(boost, true)
+
+    pokemon.addAttackSpeed(boost, true)
     pokemon.cooldown = 0;
   }
 }
@@ -3895,7 +3929,7 @@ export class GeomancyStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target, crit)
     pokemon.addAttack(15, true)
     pokemon.addSpecialDefense(5, true)
-    pokemon.handleAttackSpeed(30, false)
+    pokemon.addAttackSpeed(30, false)
   }
 }
 

@@ -137,6 +137,11 @@ export default class LoadingManager {
       "/assets/attacks"
     )
     scene.load.multiatlas(
+      "JUDGEMENT",
+      "/assets/attacks/JUDGEMENT.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
       "SHADOW_SNEAK",
       "/assets/attacks/SHADOW_SNEAK.json",
       "/assets/attacks"
