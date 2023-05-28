@@ -610,12 +610,6 @@ export const AbilityName: { [key in Ability]: Langage } = {
     prt: ``,
     fra: ``
   },
-  [Ability.PROTEAN]: {
-    eng: `Protean`,
-    esp: ``,
-    prt: ``,
-    fra: ``
-  },
   [Ability.JUDGEMENT]: {
     eng: `Judgement`,
     esp: ``,
@@ -1479,12 +1473,6 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
   },
   [Ability.AQUA_JET]: {
     eng: `Dash into the enemy backline, dealing [30,60,120,SP] ${Damage.SPECIAL}`,
-    esp: ``,
-    prt: ``,
-    fra: ``
-  },
-  [Ability.PROTEAN]: {
-    eng: `The pokemon acquires the typing of the 2 highest synergies on the team`,
     esp: ``,
     prt: ``,
     fra: ``

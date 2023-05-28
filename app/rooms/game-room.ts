@@ -56,9 +56,9 @@ import { pickRandomIn, shuffleArray } from "../utils/random"
 import { Climate, Rarity } from "../types/enum/Game"
 import { FilterQuery } from "mongoose"
 import { MiniGame } from "../core/matter/mini-game"
-import { Ability } from "../types/enum/Ability"
 import { logger } from "../utils/logger"
 import { computeElo } from "../core/elo"
+import { Passive } from "../types/enum/Passive"
 
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>
@@ -720,11 +720,11 @@ export default class GameRoom extends Room<GameState> {
     }
   }
 
-  checkProtean(player: Player, pokemon: Pokemon) {
+  checkDynamicSynergies(player: Player, pokemon: Pokemon) {
     const n =
-      pokemon.skill === Ability.JUDGEMENT
+      pokemon.passive === Passive.PROTEAN3
         ? 3
-        : pokemon.skill === Ability.PROTEAN
+        : pokemon.passive === Passive.PROTEAN2
         ? 2
         : 1
     const rankArray = new Array<{ s: Synergy; v: number }>()

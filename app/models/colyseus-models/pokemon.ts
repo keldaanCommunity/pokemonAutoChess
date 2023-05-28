@@ -7035,7 +7035,7 @@ export class Kecleon extends Pokemon {
       emotion,
       false,
       false,
-      Passive.PROTEAN,
+      Passive.PROTEAN2,
     )
   }
 }
@@ -7794,7 +7794,9 @@ export class Arceus extends Pokemon {
       Ability.JUDGEMENT,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.PROTEAN3
     )
   }
 }

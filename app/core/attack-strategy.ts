@@ -407,7 +407,7 @@ export class IllusionStrategy extends AttackStrategy {
   }
 }
 
-export class ProteanStrategy extends AttackStrategy {
+export class JudgementStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -416,6 +416,15 @@ export class ProteanStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    let synergyLevelsCount = 0
+    const synergies = pokemon.simulation.player?.synergies
+    if(synergies){
+      pokemon.types.forEach(type => {
+        synergyLevelsCount += synergies.get(type) ?? 0      
+      })
+    }
+    const damage = 10 * synergyLevelsCount
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
 
