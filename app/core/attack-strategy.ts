@@ -1065,10 +1065,11 @@ export class HypnosisStrategy extends AttackStrategy {
     if (farthestTarget) {
       const x = farthestTarget.x
       const y = farthestTarget.y
-      const duration =
+      let duration =
         pokemon.stars === 3 ? 6000 : pokemon.stars === 2 ? 3000 : 1500
       const tg = board.getValue(x, y)
       if (tg) {
+        duration *= (1+pokemon.ap/200)
         tg.status.triggerSleep(duration, tg)
       }
     }
@@ -1473,16 +1474,19 @@ export class TriAttackStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let duration = 2000
+    let duration = 2000, damage = 25
     if (pokemon.stars === 2) {
       duration = 4000
+      damage = 50
     }
     if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
       duration = 8000
+      damage = 100
     }
     target.status.triggerFreeze(duration, target)
     target.status.triggerWound(duration, target, board)
     target.status.triggerBurn(duration, target, pokemon, board)
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
 
@@ -2158,22 +2162,29 @@ export class ConfusionStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let timer = 0
+    let timer = 0, damage =0
     switch (pokemon.stars) {
       case 1:
         timer = 3000
+        damage = 75
         break
       case 2:
-        timer = 6000
+        timer = 5000
+        damage = 150
         break
       case 3:
-        timer = 12000
+        timer = 7000
+        damage = 300
         break
       default:
         break
     }
 
-    target.status.triggerConfusion(timer, target)
+    if(target.status.confusion){
+      target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    } else {
+      target.status.triggerConfusion(timer, target)
+    }
   }
 }
 
@@ -4105,5 +4116,67 @@ export class DigStrategy extends AttackStrategy {
 
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
     }
+  }
+}
+
+export class FireSpinStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    let damage = 20
+    if (pokemon.stars === 2) {
+      damage = 40
+    }
+    if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
+      damage = 100
+    }
+
+    const cells = board.getAdjacentCells(target.positionX, target.positionY)
+
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    target.status.triggerBurn(3000, target, pokemon, board)
+    cells.forEach((cell) => {
+      if (cell.value && pokemon.team != cell.value.team) {
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        cell.value.status.triggerBurn(3000, target, pokemon, board)
+      }
+    })
+  }
+}
+
+export class SearingShotStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    let damage = 20
+    const cells = board.getCellsInRadius(pokemon.positionX, pokemon.positionY, 2)
+    cells.forEach((cell) => {
+      if (cell.value && pokemon.team != cell.value.team) {
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        cell.value.status.triggerBurn(3000, target, pokemon, board)
+      }
+    })
   }
 }
