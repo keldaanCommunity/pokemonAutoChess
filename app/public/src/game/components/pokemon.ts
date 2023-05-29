@@ -702,6 +702,25 @@ export default class Pokemon extends DraggableObject {
             )
             break
 
+          case Ability.FIRE_SPIN:
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              "specials",
+              `${Ability.FIRE_BLAST}/000`
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(3, 3)
+            specialProjectile.anims.play(Ability.FIRE_BLAST)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
+
           case Ability.CORRUPTED_NATURE:
             coordinates = transformAttackCoordinate(
               this.positionX,

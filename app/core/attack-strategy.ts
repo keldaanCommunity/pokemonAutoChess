@@ -4118,3 +4118,39 @@ export class DigStrategy extends AttackStrategy {
     }
   }
 }
+
+export class FireSpinStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    let damage = 20
+    if (pokemon.stars === 2) {
+      damage = 40
+    }
+    if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
+      damage = 100
+    }
+
+    const cells = board.getAdjacentCells(target.positionX, target.positionY)
+
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    target.status.triggerBurn(3000, target, pokemon, board)
+    cells.forEach((cell) => {
+      if (cell.value && pokemon.team != cell.value.team) {
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        cell.value.status.triggerBurn(3000, target, pokemon, board)
+      }
+    })
+  }
+}

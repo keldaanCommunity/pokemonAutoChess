@@ -867,7 +867,13 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
-  }
+  },
+  [Ability.FIRE_SPIN]: {
+    eng: "Fire Spin",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
 }
 
 export const AbilityDescription: { [key in Ability]: Langage } = {
@@ -1737,5 +1743,11 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     esp: "",
     prt: "",
     fra: ""
-  }
+  },
+  [Ability.FIRE_SPIN]: {
+    eng: `Area of effect attack that deals [20,40,100,SP] ${Damage.SPECIAL} around the target and ${Status.BURN} all enemies hit for 3 seconds`,
+    esp: ``,
+    fra: ``,
+    prt: ``
+  },
 }
