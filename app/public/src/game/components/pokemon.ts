@@ -2282,6 +2282,25 @@ export default class Pokemon extends DraggableObject {
             )
             break
 
+            case Ability.SEARING_SHOT:
+              coordinates = transformAttackCoordinate(this.positionX, this.positionY)
+              specialProjectile = this.scene.add.sprite(
+                coordinates[0],
+                coordinates[1],
+                Ability.SEARING_SHOT,
+                "000"
+              )
+              specialProjectile.setDepth(0)
+              specialProjectile.setScale(3, 3)
+              specialProjectile.anims.play(Ability.STEAM_ERUPTION)
+              specialProjectile.once(
+                Phaser.Animations.Events.ANIMATION_COMPLETE,
+                () => {
+                  specialProjectile.destroy()
+                }
+              )
+              break
+
           case Ability.APPLE_ACID:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY)
             specialProjectile = this.scene.add.sprite(

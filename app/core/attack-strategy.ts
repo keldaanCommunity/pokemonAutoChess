@@ -4154,3 +4154,29 @@ export class FireSpinStrategy extends AttackStrategy {
     })
   }
 }
+
+export class SearingShotStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    let damage = 20
+    const cells = board.getCellsInRadius(pokemon.positionX, pokemon.positionY, 2)
+    cells.forEach((cell) => {
+      if (cell.value && pokemon.team != cell.value.team) {
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        cell.value.status.triggerBurn(3000, target, pokemon, board)
+      }
+    })
+  }
+}

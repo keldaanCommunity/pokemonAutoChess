@@ -7759,11 +7759,11 @@ export class Victini extends Pokemon {
       20,
       5,
       5,
-      3,
+      2,
       AttackSprite.FIRE_MELEE,
       2,
       100,
-      Ability.BURN,
+      Ability.SEARING_SHOT,
       shiny,
       emotion,
       true

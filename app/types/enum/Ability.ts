@@ -143,7 +143,8 @@ import {
   HealOrderStrategy,
   ShellTrapStrategy,
   DigStrategy,
-  FireSpinStrategy
+  FireSpinStrategy,
+  SearingShotStrategy,
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -292,6 +293,7 @@ export enum Ability {
   SHELL_TRAP = "SHELL_TRAP",
   DIG = "DIG",
   FIRE_SPIN = "FIRE_SPIN",
+  SEARING_SHOT = "SEARING_SHOT",
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -440,4 +442,5 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.SHELL_TRAP]: new ShellTrapStrategy(),
   [Ability.DIG]: new DigStrategy(),
   [Ability.FIRE_SPIN]: new FireSpinStrategy(),
+  [Ability.SEARING_SHOT]: new SearingShotStrategy(),
 }
