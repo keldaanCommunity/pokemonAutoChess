@@ -355,7 +355,10 @@ export default class GameRoom extends Room<GameState> {
         if (player) {
           player.loadingProgress = 100
         }
-        if (
+        if(this.state.gameLoaded){
+          // already started, presumably a user refreshed page and wants to reconnect to game
+          client.send(Transfer.LOADING_COMPLETE) 
+        } else if (
           Array.from(this.state.players.values()).every(
             (player) => player.loadingProgress === 100
           )
