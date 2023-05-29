@@ -5,8 +5,9 @@
 # Changes to Pokemon
 - Add active abilities to Kecleon, Arceus, Tapu-koko, Tapu-lele, Tapu-Bulu, Tapu-Fini
 - New ability for MimeJr/MrMime: Mimic
-- Reworked ability Confusion (Meditite, Smoochum): Makes the target confused for [3,5,7] seconds. If the target is already confused, deals [75,150,300] special damage instead
+- Reworked ability Confusion (Meditite, Smoochum): Makes the target confused for 3/5/7 seconds. If the target is already confused, deals 75/150/300 special damage instead
 - Changed ability Hypnosis (Hoothoot): sleep duration now scales with AP
+- Changed ability TriAttack (Porygon): now deals 25/50/100 special damage
 - Buff Fennekin: Mana: 120 → 100
 
 # Changes to Synergies
