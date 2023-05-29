@@ -867,7 +867,19 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
-  }
+  },
+  [Ability.FIRE_SPIN]: {
+    eng: "Fire Spin",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.SEARING_SHOT]: {
+    eng: `Searing Shot`,
+    esp: ``,
+    fra: ``,
+    prt: ``
+  },
 }
 
 export const AbilityDescription: { [key in Ability]: Langage } = {
@@ -962,7 +974,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.TRI_ATTACK]: {
-    eng: `${Status.BURN}, ${Status.FREEZE} and ${Status.WOUND} the target for [2,4,8] seconds`,
+    eng: `Deals [25,50,100,SP] special damage. ${Status.BURN}, ${Status.FREEZE} and ${Status.WOUND} the target for [2,4,8] seconds`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -1046,7 +1058,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.CONFUSION]: {
-    eng: `Makes the target ${Status.CONFUSION} for [3,6,12] seconds`,
+    eng: `Makes the target ${Status.CONFUSION} for [3,5,7] seconds. If the target is already ${Status.CONFUSION}, deals [75,150,300,SP] ${Damage.SPECIAL} instead`,
     esp: `Hace que todo el equipo se confunda durante 1,2,4 segundos`,
     fra: `Rend toute la team ennemie confus pendant 1, 2 4 secondes`,
     prt: ``
@@ -1697,7 +1709,7 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     fra: ""
   },
   [Ability.HYPNOSIS]: {
-    eng: `Put ${Status.SLEEP} 1 enemy in the back lines for [2,3.5,6] seconds`,
+    eng: `Put ${Status.SLEEP} 1 enemy in the back lines for [2,3.5,6,SP=0.5] seconds`,
     esp: "",
     prt: "",
     fra: ""
@@ -1737,5 +1749,17 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     esp: "",
     prt: "",
     fra: ""
-  }
+  },
+  [Ability.FIRE_SPIN]: {
+    eng: `Area of effect attack that deals [20,40,100,SP] ${Damage.SPECIAL} around the target and ${Status.BURN} all enemies hit for 3 seconds`,
+    esp: ``,
+    fra: ``,
+    prt: ``
+  },
+  [Ability.SEARING_SHOT]: {
+    eng: `An inferno of scarlet flames torches everything around the user. Deals [20,SP] ${Damage.SPECIAL} and ${Status.BURN} all enemies hit for 3 seconds`,
+    esp: ``,
+    fra: ``,
+    prt: ``
+  },
 }
