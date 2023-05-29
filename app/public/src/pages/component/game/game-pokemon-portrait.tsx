@@ -105,9 +105,9 @@ export default function GamePokemonPortrait(props: {
             />
           </div>
         )}
-        <div className="game-pokemon-portrait-cost">
+        {props.origin === "shop" && <div className="game-pokemon-portrait-cost">
           <Money value={PkmCost[props.pokemon.rarity]} />
-        </div>
+        </div>}
         <ul className="game-pokemon-portrait-types">
           {props.pokemon.types.map((type) => {
             return (
