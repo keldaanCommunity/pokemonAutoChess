@@ -39,6 +39,7 @@ import {
 } from "../../../../utils/orientation"
 import { clamp } from "../../../../utils/number"
 import PokemonFactory from "../../../../models/pokemon-factory"
+import { AnimationType } from "../../../../types/Animation"
 
 export default class Pokemon extends DraggableObject {
   evolution: Pkm
@@ -201,9 +202,7 @@ export default class Pokemon extends DraggableObject {
       Phaser.Animations.Events.ANIMATION_COMPLETE,
       (animation, frame, gameObject, frameKey: string) => {
         const g = <GameScene>scene
-        if (frameKey.includes(PokemonActionState.ATTACK)) {
-          g.animationManager?.animatePokemon(this, PokemonActionState.IDLE)
-        }
+        g.animationManager?.animatePokemon(this, PokemonActionState.IDLE)
       }
     )
     this.height = this.sprite.height
@@ -674,6 +673,8 @@ export default class Pokemon extends DraggableObject {
       let coordinates: number[]
       let specialProjectile: GameObjects.Sprite
       let additionalProjectile: GameObjects.Sprite
+      let selfCoordinates: number[]
+      let selfAnimation: GameObjects.Sprite
       let coordinatesTarget: number[]
 
       if (
@@ -2357,11 +2358,11 @@ export default class Pokemon extends DraggableObject {
               }
             )
 
-            const selfCoordinates = transformAttackCoordinate(
+            selfCoordinates = transformAttackCoordinate(
               this.positionX,
               this.positionY
             )
-            const selfAnimation = this.scene.add.sprite(
+            selfAnimation = this.scene.add.sprite(
               selfCoordinates[0],
               selfCoordinates[1],
               Ability.SPECTRAL_THIEF,

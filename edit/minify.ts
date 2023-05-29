@@ -13,6 +13,7 @@ function minifySheet(id) {
     logger.debug(`Minifying sheet ${id}...`)
     const buffer = fs.readFileSync(`sheets/${id}.json`)
     const json = JSON.parse(buffer.toString())
+    delete json.meta
     fs.writeFileSync(`sheets/${id}.json`, JSON.stringify(json, null, 0))
     const indexList = JSON.parse(
       fs
@@ -21,8 +22,10 @@ function minifySheet(id) {
         )
         .toString()
     )
-    console.log(indexList)
-    indexList.push(id)
+    if (!indexList.includes(id)) {
+      indexList.push(id)
+    }
+
     fs.writeFileSync(
       "sheets/indexList.json",
       JSON.stringify(indexList, null, 0)
