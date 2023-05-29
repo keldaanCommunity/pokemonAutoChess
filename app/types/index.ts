@@ -85,7 +85,7 @@ export enum Role {
 }
 
 export const RoleName: { [key in Role]: string } = {
-  [Role.ADMIN]: "Admin",
+  [Role.ADMIN]: "Creator",
   [Role.MODERATOR]: "Mod",
   [Role.BASIC]: "Basic",
   [Role.BOT]: "Bot",
