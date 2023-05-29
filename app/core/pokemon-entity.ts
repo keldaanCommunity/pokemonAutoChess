@@ -150,7 +150,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     return 1000 / this.atkSpeed
   }
 
-  handleAttackSpeed(buff: number, apBoost: boolean = false) {
+  handleAttackSpeed(buff: number, apBoost = false) {
     const boost = apBoost ? (buff * this.ap) / 100 : 0
     this.atkSpeedBonus = this.atkSpeedBonus + buff + boost
     this.atkSpeed = Number(

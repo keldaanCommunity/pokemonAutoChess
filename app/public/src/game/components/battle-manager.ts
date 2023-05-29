@@ -64,7 +64,7 @@ export default class BattleManager {
         playerId,
         true
       )
-      this.animationManager.animatePokemon(pokemonUI, AnimationType.Walk)
+      this.animationManager.animatePokemon(pokemonUI, PokemonActionState.WALK)
       this.group.add(pokemonUI)
     }
   }
@@ -78,7 +78,7 @@ export default class BattleManager {
       this.group.getChildren().forEach((p) => {
         const pkm = <Pokemon>p
         if (pkm.id == pokemon.id) {
-          this.animationManager.animatePokemon(pkm, AnimationType.Hurt)
+          this.animationManager.animatePokemon(pkm, PokemonActionState.HURT)
           pkm.deathAnimation()
         }
       })
@@ -128,7 +128,10 @@ export default class BattleManager {
           } else if (field == "sleep") {
             if (pokemon.status.sleep) {
               pkm.addSleep()
-              this.animationManager.animatePokemon(pkm, AnimationType.Sleep)
+              this.animationManager.animatePokemon(
+                pkm,
+                PokemonActionState.SLEEP
+              )
             } else {
               pkm.removeSleep()
             }
@@ -251,7 +254,7 @@ export default class BattleManager {
             }
           } else if (field == "ult") {
             if (value != 0) {
-              this.animationManager.animatePokemon(
+              this.animationManager.play(
                 pkm,
                 AnimationConfig[pkm.name as Pkm].ability
               )
@@ -332,7 +335,7 @@ export default class BattleManager {
               ) {
                 this.animationManager.animatePokemon(
                   pkm,
-                  AnimationConfig[pkm.name as Pkm].attack
+                  PokemonActionState.ATTACK
                 )
                 pkm.attackAnimation()
               }
@@ -397,7 +400,7 @@ export default class BattleManager {
           } else if (field == "orientation") {
             pkm.orientation = pokemon.orientation
             if (pokemon.action !== PokemonActionState.SLEEP) {
-              this.animationManager.animatePokemon(pkm, AnimationType.Walk)
+              this.animationManager.animatePokemon(pkm, pokemon.action)
             }
           } else if (field == "action") {
             pkm.action = pokemon.action
@@ -485,7 +488,7 @@ export default class BattleManager {
             }
           } else if (field === "index") {
             pkm.index = value
-            this.animationManager.animatePokemon(pkm, AnimationType.Idle)
+            this.animationManager.animatePokemon(pkm, PokemonActionState.IDLE)
           }
           break
         }

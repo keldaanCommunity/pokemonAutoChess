@@ -47,7 +47,7 @@ export default class UnownManager {
       "unown",
       false
     )
-    this.animationManager.animatePokemon(unown, AnimationType.Idle)
+    this.animationManager.animatePokemon(unown, PokemonActionState.IDLE)
 
     const tween = this.scene.tweens.add({
       targets: unown,

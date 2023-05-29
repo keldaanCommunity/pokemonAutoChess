@@ -20,7 +20,7 @@ export default class PokemonState {
     pokemon: IPokemonEntity,
     heal: number,
     caster: IPokemonEntity,
-    apBoost: number = 0
+    apBoost = 0
   ): void {
     if (
       pokemon.life > 0 &&
@@ -98,8 +98,8 @@ export default class PokemonState {
     shouldTargetGainMana: boolean
     shouldAttackerGainMana: boolean
   }): { death: boolean; takenDamage: number } {
-    let death: boolean = false
-    let takenDamage: number = 0
+    let death = false
+    let takenDamage = 0
 
     if (isNaN(damage)) {
       logger.trace(`NaN Damage`)
@@ -349,7 +349,7 @@ export default class PokemonState {
           const isAngerPoint = pokemon.effects.includes(Effect.ANGER_POINT)
 
           if (isWorkUp || isRage || isAngerPoint) {
-            let heal = 30
+            const heal = 30
             let speedBoost = 0
             if (isWorkUp) {
               speedBoost = 20
@@ -364,7 +364,7 @@ export default class PokemonState {
                 value.team == pokemon.team &&
                 value.types.includes(Synergy.FIELD)
               ) {
-                let _pokemon = pokemon // beware of closure vars
+                const _pokemon = pokemon // beware of closure vars
                 pokemon.simulation.room.clock.setTimeout(() => {
                   value.count.fieldCount++
                   value.handleHeal(heal, _pokemon, 0)
@@ -383,7 +383,7 @@ export default class PokemonState {
         if (attacker) {
           attacker.onKill(pokemon, board)
         }
-        let effectsRemovedList: Effect[] = []
+        const effectsRemovedList: Effect[] = []
 
         // Remove field effects on death
         if (pokemon.skill === Ability.ELECTRIC_SURGE) {

@@ -22,7 +22,10 @@ function minifySheet(id) {
         )
         .toString()
     )
-    indexList.push(id)
+    if (!indexList.includes(id)) {
+      indexList.push(id)
+    }
+
     fs.writeFileSync(
       "sheets/indexList.json",
       JSON.stringify(indexList, null, 0)

@@ -1,7 +1,16 @@
 /* eslint-disable @typescript-eslint/no-extra-semi */
 /* eslint-disable max-len */
-import { Orientation, SpriteType, PokemonTint } from "../../../types/enum/Game"
-import { AnimationType, AnimationConfig } from "../../../types/Animation"
+import {
+  Orientation,
+  SpriteType,
+  PokemonTint,
+  PokemonActionState
+} from "../../../types/enum/Game"
+import {
+  AnimationType,
+  AnimationConfig,
+  AnimationComplete
+} from "../../../types/Animation"
 import { Ability } from "../../../types/enum/Ability"
 import Pokemon from "./components/pokemon"
 import GameScene from "./scenes/game-scene"
@@ -44,7 +53,7 @@ export default class AnimationManager {
         actions.forEach((action) => {
           ;(Object.values(SpriteType) as SpriteType[]).forEach((mode) => {
             const directionArray =
-              action === AnimationType.Sleep
+              AnimationComplete[action] === false
                 ? [Orientation.DOWN]
                 : Object.values(Orientation)
             directionArray.forEach((direction) => {
@@ -62,11 +71,23 @@ export default class AnimationManager {
                     frameArray[i]["duration"] = durationArray[i] * 10
                   }
                 }
-                this.game.anims.create({
-                  key: `${index}/${shiny}/${action}/${mode}/${direction}`,
-                  frames: frameArray,
-                  repeat: -1
-                })
+                if (
+                  action === AnimationType.Idle ||
+                  action === AnimationType.Sleep ||
+                  action === AnimationType.Hop
+                ) {
+                  this.game.anims.create({
+                    key: `${index}/${shiny}/${action}/${mode}/${direction}`,
+                    frames: frameArray,
+                    repeat: -1
+                  })
+                } else {
+                  this.game.anims.create({
+                    key: `${index}/${shiny}/${action}/${mode}/${direction}`,
+                    frames: frameArray,
+                    repeat: 0
+                  })
+                }
               } else {
                 logger.warn(
                   "duration array missing for ",
@@ -1728,13 +1749,33 @@ export default class AnimationManager {
     })
   }
 
-  animatePokemon(entity: Pokemon, action: AnimationType) {
-    const orientation =
-      action === AnimationType.Sleep ? Orientation.DOWN : entity.orientation
-    const tint = entity.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL
-    const animKey = `${entity.index}/${tint}/${action}/${SpriteType.ANIM}/${orientation}`
-    const shadowKey = `${entity.index}/${tint}/${action}/${SpriteType.SHADOW}/${orientation}`
+  animatePokemon(entity: Pokemon, action: PokemonActionState) {
+    let animation = AnimationType.Idle
+    if (action === PokemonActionState.HOP) {
+      animation = AnimationType.Hop
+    } else if (action === PokemonActionState.HURT) {
+      animation = AnimationType.Hurt
+    } else if (action === PokemonActionState.IDLE) {
+      animation = AnimationType.Idle
+    } else if (action === PokemonActionState.SLEEP) {
+      animation = AnimationType.Sleep
+    } else if (action === PokemonActionState.WALK) {
+      animation = AnimationType.Walk
+    } else if (action === PokemonActionState.ATTACK) {
+      animation = AnimationConfig[entity.name as Pkm].attack
+    }
+    this.play(entity, animation)
+  }
 
+  play(entity: Pokemon, animation: AnimationType) {
+    const orientation =
+      AnimationComplete[animation] === true
+        ? entity.orientation
+        : Orientation.DOWN
+
+    const tint = entity.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL
+    const animKey = `${entity.index}/${tint}/${animation}/${SpriteType.ANIM}/${orientation}`
+    const shadowKey = `${entity.index}/${tint}/${animation}/${SpriteType.SHADOW}/${orientation}`
     entity.sprite.anims.play(animKey)
     entity.shadow.anims.play(shadowKey)
   }
