@@ -8,6 +8,7 @@ import { getGameContainer } from "../../pages/game"
 import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
 import Pokemon from "./pokemon"
+import { AnimationType } from "../../../../types/Animation"
 
 const SHARDS_PER_ENCOUNTER = 50
 

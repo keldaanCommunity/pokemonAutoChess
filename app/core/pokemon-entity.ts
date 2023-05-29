@@ -153,6 +153,17 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     return 1000 / this.atkSpeed
   }
 
+  handleAttackSpeed(buff: number, apBoost = false) {
+    const boost = apBoost ? (buff * this.ap) / 100 : 0
+    this.atkSpeedBonus = this.atkSpeedBonus + buff + boost
+    this.atkSpeed = Number(
+      Math.min(
+        2.5,
+        Math.max(0.4, 0.75 * (1 + this.atkSpeedBonus / 100))
+      ).toFixed(2)
+    )
+  }
+
   handleDamage(params: {
     damage: number
     board: Board
@@ -255,7 +266,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     this.dodge = Math.min(0.9, this.dodge + value)
   }
 
-  addAbilityPower(value: number, apBoost: boolean = true) {
+  addAbilityPower(value: number, apBoost = true) {
     const boost = apBoost ? (value * this.ap) / 100 : 0
     this.ap = Math.round(this.ap + Math.round(value + boost))
   }
@@ -275,10 +286,14 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     this.atk = Math.max(0, this.atk + Math.round(value + boost))
   }
 
-  addAttackSpeed(value: number, apBoost: boolean = false) {
+  addAttackSpeed(value: number, apBoost = false) {
     const boost = apBoost ? (value * this.ap) / 100 : 0
     this.atkSpeedBonus += value + boost
-    this.atkSpeed = clamp(roundTo2Digits(0.75 * (1 + this.atkSpeedBonus / 100)), 0.4, 2.5)
+    this.atkSpeed = clamp(
+      roundTo2Digits(0.75 * (1 + this.atkSpeedBonus / 100)),
+      0.4,
+      2.5
+    )
   }
 
   addCritDamage(value: number, apBoost?: boolean) {
