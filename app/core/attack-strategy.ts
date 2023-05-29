@@ -1474,16 +1474,19 @@ export class TriAttackStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let duration = 2000
+    let duration = 2000, damage = 25
     if (pokemon.stars === 2) {
       duration = 4000
+      damage = 50
     }
     if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
       duration = 8000
+      damage = 100
     }
     target.status.triggerFreeze(duration, target)
     target.status.triggerWound(duration, target, board)
     target.status.triggerBurn(duration, target, pokemon, board)
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
 
