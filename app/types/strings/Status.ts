@@ -175,25 +175,25 @@ export const StatusDescription: { [key in Status]: Langage } = {
     prt: ""
   },
   [Status.ELECTRIC_FIELD]: {
-    eng: "Increase damage dealt by 30% (Electric only)",
+    eng: "Increase damage dealt by 20% (Electric only)",
     esp: "",
     fra: "Champ Electrique",
     prt: ""
   },
   [Status.PSYCHIC_FIELD]: {
-    eng: "Increase damage dealt by 30% (Psychic only)",
+    eng: "Increase damage dealt by 20% (Psychic only)",
     esp: "",
     fra: "Champ Psychique",
     prt: ""
   },
   [Status.GRASS_FIELD]: {
-    eng: "Increase damage dealt by 30% (Grass only)",
+    eng: "Increase damage dealt by 20% (Grass only)",
     esp: "",
     prt: "",
     fra: ""
   },
   [Status.FAIRY_FIELD]: {
-    eng: "Increase damage dealt by 30% (Fairy only)",
+    eng: "Increase damage dealt by 20% (Fairy only)",
     esp: "",
     prt: "",
     fra: ""

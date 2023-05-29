@@ -40,6 +40,7 @@ import { Pokemon } from "../../models/colyseus-models/pokemon"
 import { Ability } from "../../types/enum/Ability"
 import { pickRandomIn } from "../../utils/random"
 import { logger } from "../../utils/logger"
+import { Passive } from "../../types/enum/Passive"
 
 export class OnShopCommand extends Command<
   GameRoom,
@@ -75,10 +76,10 @@ export class OnShopCommand extends Command<
           if (allowBuy) {
             player.money -= pokemon.cost
             if (
-              pokemon.skill === Ability.PROTEAN ||
-              pokemon.skill === Ability.JUDGEMENT
+              pokemon.passive === Passive.PROTEAN2 ||
+              pokemon.passive === Passive.PROTEAN3
             ) {
-              this.room.checkProtean(player, pokemon)
+              this.room.checkDynamicSynergies(player, pokemon)
             }
 
             const x = this.room.getFirstAvailablePositionInBench(player.id)
@@ -208,10 +209,10 @@ export class OnDragDropCommand extends Command<
       const pokemon = player.board.get(detail.id)
       if (pokemon) {
         if (
-          pokemon.skill === Ability.PROTEAN ||
-          pokemon.skill === Ability.JUDGEMENT
+          pokemon.passive === Passive.PROTEAN2 ||
+          pokemon.passive === Passive.PROTEAN3
         ) {
-          this.room.checkProtean(player, pokemon)
+          this.room.checkDynamicSynergies(player, pokemon)
         }
         const x = parseInt(detail.x)
         const y = parseInt(detail.y)
