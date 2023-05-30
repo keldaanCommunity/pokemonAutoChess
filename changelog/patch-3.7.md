@@ -12,6 +12,7 @@
 - Changed ability TriAttack (Porygon): now deals 25/50/100 special damage
 - Stats ajustments: Buffed Fennekin, Jangmo-O, Hakamo-O, Kommo-O, Vespiqueen, Shuppet, Banette, Mega-Banette, Gastly, Haunter, Gengar, Seel, Dewgong ; Nerfed Lampent, Chandelure, Virizion
 - Nerfed Dive ability: freeze duration is now 1.5 seconds for all tiers
+- Buffed PVE rounds pokemons: Rattata and Spearow now have abilities, Gyarados has more HP and attack
 
 # Changes to Synergies
 
@@ -39,3 +40,4 @@
 - Bots are no longer taken into account for ELO gain/loss calculations
 - ELO elligibility is now indicated on room preparation screen
 - Game ID displayed in player profile
+- Neutral and Summon categories have been merged into one "Special" category

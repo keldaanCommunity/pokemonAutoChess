@@ -145,6 +145,8 @@ import {
   DigStrategy,
   FireSpinStrategy,
   SearingShotStrategy,
+  PeckStrategy,
+  SplashStrategy,
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -294,6 +296,8 @@ export enum Ability {
   DIG = "DIG",
   FIRE_SPIN = "FIRE_SPIN",
   SEARING_SHOT = "SEARING_SHOT",
+  PECK = "PECK",
+  SPLASH = "SPLASH",
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -443,4 +447,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.DIG]: new DigStrategy(),
   [Ability.FIRE_SPIN]: new FireSpinStrategy(),
   [Ability.SEARING_SHOT]: new SearingShotStrategy(),
+  [Ability.PECK]: new PeckStrategy(),
+  [Ability.SPLASH]: new SplashStrategy(),
 }
