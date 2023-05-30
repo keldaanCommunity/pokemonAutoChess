@@ -768,7 +768,7 @@ export default class GameRoom extends Room<GameState> {
 
       if (
         pokemonEvolutionName !== Pkm.DEFAULT &&
-        ![Rarity.NEUTRAL, Rarity.HATCH].includes(pokemon.rarity) &&
+        ![Rarity.SPECIAL, Rarity.HATCH].includes(pokemon.rarity) &&
         count >= 3
       ) {
         let coord: { x: number; y: number } | undefined
@@ -867,7 +867,7 @@ export default class GameRoom extends Room<GameState> {
     let boardSize = 0
 
     board.forEach((pokemon, key) => {
-      if (pokemon.positionY == 0 && pokemon.rarity !== Rarity.NEUTRAL) {
+      if (pokemon.positionY == 0 && pokemon.rarity !== Rarity.SPECIAL) {
         boardSize++
       }
     })
@@ -892,7 +892,7 @@ export default class GameRoom extends Room<GameState> {
     board.forEach((pokemon, key) => {
       if (
         pokemon.positionY == 0 &&
-        pokemon.rarity != Rarity.NEUTRAL &&
+        pokemon.rarity != Rarity.SPECIAL &&
         !found
       ) {
         found = true

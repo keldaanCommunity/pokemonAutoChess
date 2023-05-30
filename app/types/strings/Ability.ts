@@ -880,6 +880,18 @@ export const AbilityName: { [key in Ability]: Langage } = {
     fra: ``,
     prt: ``
   },
+  [Ability.SPLASH]: { 
+    eng: `Splash`,
+    esp: ``,
+    fra: ``,
+    prt: ``
+  },
+  [Ability.PECK]: {
+    eng: `Peck`,
+    esp: ``,
+    fra: ``,
+    prt: ``
+  },
 }
 
 export const AbilityDescription: { [key in Ability]: Langage } = {
@@ -1758,6 +1770,18 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
   },
   [Ability.SEARING_SHOT]: {
     eng: `An inferno of scarlet flames torches everything around the user. Deals [20,SP] ${Damage.SPECIAL} and ${Status.BURN} all enemies hit for 3 seconds`,
+    esp: ``,
+    fra: ``,
+    prt: ``
+  },
+  [Ability.SPLASH]: {
+    eng: `Just flops and splashes around to no effect at all...`,
+    esp: ``,
+    fra: ``,
+    prt: ``
+  },
+  [Ability.PECK]: {
+    eng: `Deals [10,20,30,SP] ${Damage.SPECIAL} to the target`,
     esp: ``,
     fra: ``,
     prt: ``

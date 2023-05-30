@@ -99,7 +99,7 @@ export class Ditto extends Pokemon {
     super(
       Pkm.DITTO,
       [Synergy.NORMAL],
-      Rarity.NEUTRAL,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       30,
       1,
@@ -112,7 +112,9 @@ export class Ditto extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.DITTO
     )
   }
 }
@@ -122,7 +124,7 @@ export class Egg extends Pokemon {
     super(
       Pkm.EGG,
       [],
-      Rarity.NEUTRAL,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       30,
       1,
@@ -135,7 +137,9 @@ export class Egg extends Pokemon {
       Ability.DEFAULT,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.EGG
     )
   }
 }
@@ -5939,7 +5943,7 @@ export class Magikarp extends Pokemon {
     super(
       Pkm.MAGIKARP,
       [Synergy.WATER],
-      Rarity.NEUTRAL,
+      Rarity.SPECIAL,
       Pkm.GYARADOS,
       30,
       1,
@@ -5948,8 +5952,8 @@ export class Magikarp extends Pokemon {
       1,
       AttackSprite.WATER_MELEE,
       1,
-      100,
-      Ability.DEFAULT,
+      50,
+      Ability.SPLASH,
       shiny,
       emotion,
       false
@@ -5961,11 +5965,11 @@ export class Gyarados extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.GYARADOS,
-      [Synergy.WATER],
-      Rarity.NEUTRAL,
+      [Synergy.WATER, Synergy.FLYING],
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
-      200,
-      20,
+      300,
+      30,
       5,
       1,
       1,
@@ -5985,17 +5989,17 @@ export class Rattata extends Pokemon {
     super(
       Pkm.RATTATA,
       [Synergy.NORMAL],
-      Rarity.NEUTRAL,
+      Rarity.SPECIAL,
       Pkm.RATICATE,
       30,
-      5,
+      4,
       1,
       1,
       1,
       AttackSprite.NORMAL_MELEE,
       1,
       100,
-      Ability.DEFAULT,
+      Ability.AGILITY,
       shiny,
       emotion,
       false
@@ -6008,17 +6012,17 @@ export class Raticate extends Pokemon {
     super(
       Pkm.RATICATE,
       [Synergy.NORMAL],
-      Rarity.NEUTRAL,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       60,
-      7,
+      6,
       1,
       1,
       1,
       AttackSprite.NORMAL_MELEE,
       2,
       100,
-      Ability.DEFAULT,
+      Ability.AGILITY,
       shiny,
       emotion,
       true
@@ -6031,17 +6035,17 @@ export class Spearow extends Pokemon {
     super(
       Pkm.SPEAROW,
       [Synergy.FLYING, Synergy.NORMAL],
-      Rarity.NEUTRAL,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       30,
-      5,
+      4,
       1,
       1,
       1,
       AttackSprite.NORMAL_MELEE,
       1,
       100,
-      Ability.DEFAULT,
+      Ability.PECK,
       shiny,
       emotion,
       false
@@ -6054,17 +6058,17 @@ export class Fearow extends Pokemon {
     super(
       Pkm.FEAROW,
       [Synergy.FLYING, Synergy.NORMAL],
-      Rarity.NEUTRAL,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       60,
-      7,
+      6,
       1,
       1,
       1,
       AttackSprite.NORMAL_MELEE,
       2,
       100,
-      Ability.DEFAULT,
+      Ability.PECK,
       shiny,
       emotion,
       true
@@ -8008,7 +8012,7 @@ export class Oddish extends Pokemon {
     super(
       Pkm.ODDISH,
       [Synergy.POISON, Synergy.GRASS],
-      Rarity.SUMMON,
+      Rarity.SPECIAL,
       Pkm.GLOOM,
       90,
       9,
@@ -8031,7 +8035,7 @@ export class Gloom extends Pokemon {
     super(
       Pkm.GLOOM,
       [Synergy.POISON, Synergy.GRASS],
-      Rarity.SUMMON,
+      Rarity.SPECIAL,
       Pkm.VILEPLUME,
       160,
       18,
@@ -8054,7 +8058,7 @@ export class Vileplume extends Pokemon {
     super(
       Pkm.VILEPLUME,
       [Synergy.POISON, Synergy.GRASS],
-      Rarity.SUMMON,
+      Rarity.SPECIAL,
       Pkm.BELLOSSOM,
       260,
       20,
@@ -8077,7 +8081,7 @@ export class Bellossom extends Pokemon {
     super(
       Pkm.BELLOSSOM,
       [Synergy.POISON, Synergy.GRASS],
-      Rarity.SUMMON,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       360,
       27,
@@ -8085,7 +8089,7 @@ export class Bellossom extends Pokemon {
       5,
       1,
       AttackSprite.GRASS_MELEE,
-      4,
+      3,
       100,
       Ability.STUN_SPORE,
       shiny,
@@ -11497,7 +11501,7 @@ export class UnownA extends Pokemon {
     super(
       Pkm.UNOWN_A,
       [Synergy.PSYCHIC],
-      Rarity.SUMMON,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       40,
       4,
@@ -11519,7 +11523,7 @@ export class UnownB extends Pokemon {
     super(
       Pkm.UNOWN_B,
       [Synergy.PSYCHIC],
-      Rarity.SUMMON,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       40,
       4,
@@ -11542,7 +11546,7 @@ export class UnownC extends Pokemon {
     super(
       Pkm.UNOWN_C,
       [Synergy.PSYCHIC],
-      Rarity.SUMMON,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       40,
       4,
@@ -11565,7 +11569,7 @@ export class UnownD extends Pokemon {
     super(
       Pkm.UNOWN_D,
       [Synergy.PSYCHIC],
-      Rarity.SUMMON,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       40,
       4,
@@ -11588,7 +11592,7 @@ export class UnownE extends Pokemon {
     super(
       Pkm.UNOWN_E,
       [Synergy.PSYCHIC],
-      Rarity.SUMMON,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       40,
       4,
@@ -11611,7 +11615,7 @@ export class UnownF extends Pokemon {
     super(
       Pkm.UNOWN_F,
       [Synergy.PSYCHIC],
-      Rarity.SUMMON,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       40,
       4,
@@ -11634,7 +11638,7 @@ export class UnownG extends Pokemon {
     super(
       Pkm.UNOWN_G,
       [Synergy.PSYCHIC],
-      Rarity.SUMMON,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       40,
       4,
@@ -11657,7 +11661,7 @@ export class UnownH extends Pokemon {
     super(
       Pkm.UNOWN_H,
       [Synergy.PSYCHIC],
-      Rarity.SUMMON,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       40,
       4,
@@ -11680,7 +11684,7 @@ export class UnownI extends Pokemon {
     super(
       Pkm.UNOWN_I,
       [Synergy.PSYCHIC],
-      Rarity.SUMMON,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       40,
       4,
@@ -11703,7 +11707,7 @@ export class UnownJ extends Pokemon {
     super(
       Pkm.UNOWN_J,
       [Synergy.PSYCHIC],
-      Rarity.SUMMON,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       40,
       4,
@@ -11726,7 +11730,7 @@ export class UnownK extends Pokemon {
     super(
       Pkm.UNOWN_K,
       [Synergy.PSYCHIC],
-      Rarity.SUMMON,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       40,
       4,
@@ -11749,7 +11753,7 @@ export class UnownL extends Pokemon {
     super(
       Pkm.UNOWN_L,
       [Synergy.PSYCHIC],
-      Rarity.SUMMON,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       40,
       4,
@@ -11772,7 +11776,7 @@ export class UnownM extends Pokemon {
     super(
       Pkm.UNOWN_M,
       [Synergy.PSYCHIC],
-      Rarity.SUMMON,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       40,
       4,
@@ -11795,7 +11799,7 @@ export class UnownN extends Pokemon {
     super(
       Pkm.UNOWN_N,
       [Synergy.PSYCHIC],
-      Rarity.SUMMON,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       40,
       4,
@@ -11818,7 +11822,7 @@ export class UnownO extends Pokemon {
     super(
       Pkm.UNOWN_O,
       [Synergy.PSYCHIC],
-      Rarity.SUMMON,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       40,
       4,
@@ -11841,7 +11845,7 @@ export class UnownP extends Pokemon {
     super(
       Pkm.UNOWN_P,
       [Synergy.PSYCHIC],
-      Rarity.SUMMON,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       40,
       4,
@@ -11864,7 +11868,7 @@ export class UnownQ extends Pokemon {
     super(
       Pkm.UNOWN_Q,
       [Synergy.PSYCHIC],
-      Rarity.SUMMON,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       40,
       4,
@@ -11887,7 +11891,7 @@ export class UnownR extends Pokemon {
     super(
       Pkm.UNOWN_R,
       [Synergy.PSYCHIC],
-      Rarity.SUMMON,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       40,
       4,
@@ -11910,7 +11914,7 @@ export class UnownS extends Pokemon {
     super(
       Pkm.UNOWN_S,
       [Synergy.PSYCHIC],
-      Rarity.SUMMON,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       40,
       4,
@@ -11933,7 +11937,7 @@ export class UnownT extends Pokemon {
     super(
       Pkm.UNOWN_T,
       [Synergy.PSYCHIC],
-      Rarity.SUMMON,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       40,
       4,
@@ -11956,7 +11960,7 @@ export class UnownU extends Pokemon {
     super(
       Pkm.UNOWN_U,
       [Synergy.PSYCHIC],
-      Rarity.SUMMON,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       40,
       4,
@@ -11979,7 +11983,7 @@ export class UnownV extends Pokemon {
     super(
       Pkm.UNOWN_V,
       [Synergy.PSYCHIC],
-      Rarity.SUMMON,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       40,
       4,
@@ -12002,7 +12006,7 @@ export class UnownW extends Pokemon {
     super(
       Pkm.UNOWN_W,
       [Synergy.PSYCHIC],
-      Rarity.SUMMON,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       40,
       4,
@@ -12025,7 +12029,7 @@ export class UnownX extends Pokemon {
     super(
       Pkm.UNOWN_X,
       [Synergy.PSYCHIC],
-      Rarity.SUMMON,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       40,
       4,
@@ -12048,7 +12052,7 @@ export class UnownY extends Pokemon {
     super(
       Pkm.UNOWN_Y,
       [Synergy.PSYCHIC],
-      Rarity.SUMMON,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       40,
       4,
@@ -12071,7 +12075,7 @@ export class UnownZ extends Pokemon {
     super(
       Pkm.UNOWN_Z,
       [Synergy.PSYCHIC],
-      Rarity.SUMMON,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       40,
       4,
@@ -12094,7 +12098,7 @@ export class UnownQuestion extends Pokemon {
     super(
       Pkm.UNOWN_QUESTION,
       [Synergy.PSYCHIC],
-      Rarity.SUMMON,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       40,
       4,
@@ -12117,7 +12121,7 @@ export class UnownExclamation extends Pokemon {
     super(
       Pkm.UNOWN_EXCLAMATION,
       [Synergy.PSYCHIC],
-      Rarity.SUMMON,
+      Rarity.SPECIAL,
       Pkm.DEFAULT,
       40,
       4,
@@ -12843,6 +12847,75 @@ export class Shuckle extends Pokemon {
       1,
       70,
       Ability.SHELL_TRAP,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
+export class Tepig extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.TEPIG,
+      [Synergy.FIRE, Synergy.FIGHTING, Synergy.FIELD],
+      Rarity.HATCH,
+      Pkm.PIGNITE,
+      80,
+      5,
+      5,
+      2,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      1,
+      100,
+      Ability.IRON_TAIL,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
+export class Pignite extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.PIGNITE,
+      [Synergy.FIRE, Synergy.FIGHTING, Synergy.FIELD],
+      Rarity.HATCH,
+      Pkm.EMBOAR,
+      150,
+      12,
+      6,
+      2,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      2,
+      100,
+      Ability.IRON_TAIL,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
+export class Emboar extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.EMBOAR,
+      [Synergy.FIRE, Synergy.FIGHTING, Synergy.FIELD],
+      Rarity.HATCH,
+      Pkm.DEFAULT,
+      250,
+      20,
+      7,
+      2,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      3,
+      100,
+      Ability.IRON_TAIL,
       shiny,
       emotion,
       true

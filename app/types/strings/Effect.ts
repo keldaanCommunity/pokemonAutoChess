@@ -380,7 +380,7 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.SUN_FLOWER]: {
-    eng: `Summon Belossom`,
+    eng: `Summon Bellossom`,
     esp: ``,
     fra: ``
   },

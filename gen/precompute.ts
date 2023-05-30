@@ -153,7 +153,7 @@ const data = {
   Object.values(Pkm).forEach((pkm) => {
     const pokemon = PokemonFactory.createPokemonFromName(pkm)
     const family = PkmFamily[pkm]
-    if (pokemon.rarity != Rarity.NEUTRAL && pokemon.skill != Ability.DEFAULT) {
+    if (pokemon.rarity != Rarity.SPECIAL && pokemon.skill != Ability.DEFAULT) {
       if (pokemon.types.includes(type)) {
         if (pokemon.rarity == Rarity.MYTHICAL) {
           mythicalPokemonCandidates.push(pokemon)
