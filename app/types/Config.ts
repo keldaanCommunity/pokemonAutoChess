@@ -1,7 +1,6 @@
 import { Synergy } from "./enum/Synergy"
 import { Pkm, PkmIndex } from "./enum/Pokemon"
 import { Item } from "./enum/Item"
-import { Effect } from "./enum/Effect"
 import { AttackType, Rarity, Stat } from "./enum/Game"
 import { Emotion } from "."
 
@@ -12,8 +11,7 @@ export const RarityHpCost: { [key in Rarity]: number } = Object.freeze({
   [Rarity.EPIC]: 2,
   [Rarity.LEGENDARY]: 3,
   [Rarity.MYTHICAL]: 4,
-  [Rarity.NEUTRAL]: 2,
-  [Rarity.SUMMON]: 1,
+  [Rarity.SPECIAL]: 1,
   [Rarity.HATCH]: 4
 })
 
@@ -24,8 +22,7 @@ export const PkmCost: { [key in Rarity]: number } = Object.freeze({
   [Rarity.EPIC]: 4,
   [Rarity.MYTHICAL]: 6,
   [Rarity.LEGENDARY]: 5,
-  [Rarity.SUMMON]: 1,
-  [Rarity.NEUTRAL]: 5,
+  [Rarity.SPECIAL]: 5,
   [Rarity.HATCH]: 4
 })
 
@@ -104,26 +101,24 @@ export const ExpPlace = [700, 500, 400, 300, 200, 150, 100, 0]
 
 export const RarityColor: { [key in Rarity]: string } = {
   [Rarity.COMMON]: "#9f9f9f",
-  [Rarity.NEUTRAL]: "#888d9d",
   [Rarity.UNCOMMON]: "#3bc95e",
   [Rarity.RARE]: "#41bfcc",
   [Rarity.EPIC]: "#ca6cee",
   [Rarity.LEGENDARY]: "#e6cb49",
   [Rarity.MYTHICAL]: "#ffc0cb",
-  [Rarity.SUMMON]: "#991f1f",
+  [Rarity.SPECIAL]: "#967FFF",
   [Rarity.HATCH]: "#b9915a"
 }
 
 export const RarityProbability: { [key in Rarity]: number } = {
   [Rarity.COMMON]: 0.15,
-  [Rarity.NEUTRAL]: 0,
   [Rarity.UNCOMMON]: 0.2,
   [Rarity.RARE]: 0.2,
   [Rarity.EPIC]: 0.15,
   [Rarity.LEGENDARY]: 0.05,
   [Rarity.MYTHICAL]: 0.15,
-  [Rarity.SUMMON]: 0,
-  [Rarity.HATCH]: 0.1
+  [Rarity.HATCH]: 0.1,
+  [Rarity.SPECIAL]: 0
 }
 
 export const DITTO_RATE = 0.005
@@ -158,8 +153,7 @@ export const PoolSize: { [key in Rarity]: [number, number, number] } = {
   [Rarity.EPIC]: [1, 7, 14],
   [Rarity.LEGENDARY]: [1, 5, 10],
   [Rarity.MYTHICAL]: [1, 1, 1],
-  [Rarity.NEUTRAL]: [0, 0, 0],
-  [Rarity.SUMMON]: [0, 0, 0],
+  [Rarity.SPECIAL]: [0, 0, 0],
   [Rarity.HATCH]: [0, 0, 0]
 }
 

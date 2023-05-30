@@ -220,9 +220,9 @@ export class OnDragDropCommand extends Command<
           const pokemonToClone = this.room.getPokemonByPosition(playerId, x, y)
           if (
             pokemonToClone &&
-            pokemonToClone.rarity !== Rarity.MYTHICAL &&
-            pokemonToClone.rarity !== Rarity.NEUTRAL &&
-            pokemonToClone.rarity !== Rarity.HATCH
+            ![Rarity.MYTHICAL, Rarity.SPECIAL, Rarity.HATCH].includes(
+              pokemonToClone.rarity
+            )
           ) {
             dittoReplaced = true
             const replaceDitto = PokemonFactory.createPokemonFromName(
@@ -264,7 +264,7 @@ export class OnDragDropCommand extends Command<
               this.room.swap(playerId, pokemon, x, y)
               success = true
             } else {
-              if (pokemon.rarity != Rarity.NEUTRAL) {
+              if (pokemon.rarity != Rarity.SPECIAL) {
                 // Prevents a pokemon to go on the board only if it's adding a pokemon from the bench on a full board
                 if (!isBoardFull || !dropToEmptyPlace || !dropFromBench) {
                   this.room.swap(playerId, pokemon, x, y)

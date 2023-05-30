@@ -16,5 +16,7 @@ export const PassiveDescription: { [key in Passive]: string } = {
     [Passive.MISTY_SURGE]: `Give ${Status.FAIRY_FIELD} to your Fairy Pokemon, boosting their damage by 20%`,
     [Passive.PSYCHIC_SURGE]: `Give ${Status.PSYCHIC_FIELD} to your Psychic Pokemon, boosting their damage by 20%`,
     [Passive.EEVEE]: `Eevee can evolve into one of the 8 Eeveelutions when given a synergy stone`,
-    [Passive.TREE]: `Pretends to be a tree and does not attack but gain 2 ${Stat.ATK} per second instead (stackable).\nStarts attacking when ${Stat.MANA} bar is full.`
+    [Passive.TREE]: `Pretends to be a tree and does not attack but gain 2 ${Stat.ATK} per second instead (stackable).\nStarts attacking when ${Stat.MANA} bar is full.`,
+    [Passive.DITTO]: `Ditto can't fight, but it can transform to create a copy of the basic form of one of your pokemons you drop it over (except Mythical and Hatch).`,
+    [Passive.EGG]: `You can feel something moving inside.`
 }

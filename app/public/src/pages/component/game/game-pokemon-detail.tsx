@@ -7,7 +7,6 @@ import { Rarity, Stat } from "../../../../../types/enum/Game"
 import { Passive } from "../../../../../types/enum/Passive"
 import { AbilityName } from "../../../../../types/strings/Ability"
 import { PassiveDescription } from "../../../../../types/strings/Passive"
-import { CustomPokemonDescription } from "../../../../../types/strings/Pokemon"
 import { StatLabel } from "../../../../../types/strings/Stat"
 import { getPortraitSrc } from "../../../utils"
 import { addIconsToDescription } from "../../utils/descriptions"
@@ -90,15 +89,7 @@ export function GamePokemonDetail(props: {
             />
           </div>
         </div>
-      )}
-
-      {props.pokemon.name in CustomPokemonDescription && (
-        <div className="game-pokemon-detail-ult">
-          <div className="custom-description">
-            <p>{CustomPokemonDescription[props.pokemon.name].eng}</p>
-          </div>
-        </div>
-      )}      
+      )} 
     </div>
   )
 }

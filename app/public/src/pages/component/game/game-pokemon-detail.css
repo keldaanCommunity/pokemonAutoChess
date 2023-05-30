@@ -121,3 +121,8 @@
   box-shadow: 0 -1px 1px rgb(0 0 0 / 50%);
   white-space: pre-wrap;
 }
+
+.game-pokemon-detail-passive:last-child {
+  margin-bottom: -10px;
+  border-radius: 0 0 8px 8px;
+}

@@ -548,7 +548,10 @@ import {
   Phione,
   Combee,
   Vespiqueen,
-  Shuckle
+  Shuckle,
+  Tepig,
+  Pignite,
+  Emboar
 } from "./colyseus-models/pokemon"
 import { MapSchema } from "@colyseus/schema"
 import { Emotion } from "../types"
@@ -559,6 +562,7 @@ import { Synergy } from "../types/enum/Synergy"
 import { Pkm, PkmFamily } from "../types/enum/Pokemon"
 import { PkmCost, EvolutionTime, Mythical1Shop } from "../types/Config"
 import { pickRandomIn } from "../utils/random"
+import { logger } from "../utils/logger"
 
 export const ObtainableEgg = new Array<Pkm>(
   Pkm.GOTHITA,
@@ -1835,8 +1839,6 @@ export default class PokemonFactory {
         return new MimeJr(s, e)
       case Pkm.MR_MIME:
         return new MrMime(s, e)
-      case Pkm.DEFAULT:
-        return new Magikarp(s, e)
       case Pkm.ORIGIN_GIRATINA:
         return new OriginGiratina(s, e)
       case Pkm.PIROUETTE_MELOETTA:
@@ -1873,8 +1875,16 @@ export default class PokemonFactory {
         return new Vespiqueen(s, e)
       case Pkm.SHUCKLE:
         return new Shuckle(s, e)
+      case Pkm.TEPIG:
+        return new Tepig(s, e)
+      case Pkm.PIGNITE:
+        return new Pignite(s, e)
+      case Pkm.EMBOAR:
+        return new Emboar(s, e)
+      case Pkm.DEFAULT:
+        return new Magikarp(s, e)
       default:
-        // logger.warn(`No pokemon with name "${name}" found, return magikarp`);
+        logger.warn(`No pokemon with name "${name}" found, return magikarp`);
         return new Magikarp(s, e)
     }
   }

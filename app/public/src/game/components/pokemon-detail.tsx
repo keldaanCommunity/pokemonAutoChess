@@ -9,7 +9,6 @@ import { StatLabel } from "../../../../types/strings/Stat"
 import React from "react"
 import ReactDOM from "react-dom"
 import { AbilityTooltip } from "../../pages/component/ability/ability-tooltip"
-import { CustomPokemonDescription } from "../../../../types/strings/Pokemon"
 import { Pkm, PkmIndex } from "../../../../types/enum/Pokemon"
 import { Passive } from "../../../../types/enum/Passive"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
@@ -182,18 +181,6 @@ export default class PokemonDetail extends GameObjects.DOMElement {
       ultNameWrap.appendChild(ultName)
       ult.appendChild(ultNameWrap)
       ult.appendChild(this.abilityDescription)
-      wrap.appendChild(ult)
-    }
-
-    if (name in CustomPokemonDescription) {
-      const ult = document.createElement("div")
-      ult.className = "game-pokemon-detail-ult"
-      const descriptionWrap = document.createElement("div")
-      descriptionWrap.className = "custom-description"
-      const description = document.createElement("p")
-      description.textContent = CustomPokemonDescription[name]["eng"]
-      descriptionWrap.appendChild(description)
-      ult.appendChild(descriptionWrap)
       wrap.appendChild(ult)
     }
 
