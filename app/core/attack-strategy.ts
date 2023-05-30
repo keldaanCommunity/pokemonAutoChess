@@ -2737,12 +2737,7 @@ export class DiveStrategy extends AttackStrategy {
         : pokemon.stars === 2
         ? 30
         : 15
-    const duration =
-      pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL
-        ? 4000
-        : pokemon.stars === 2
-        ? 2000
-        : 1000
+    const freezeDuration = 1500
     const mostSurroundedCoordinate =
       state.getMostSurroundedCoordianteAvailablePlace(pokemon, board)
 
@@ -2764,7 +2759,7 @@ export class DiveStrategy extends AttackStrategy {
             pokemon,
             crit
           )
-          cell.value.status.triggerFreeze(duration, cell.value)
+          cell.value.status.triggerFreeze(freezeDuration, cell.value)
         }
       })
     }
