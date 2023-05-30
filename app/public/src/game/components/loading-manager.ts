@@ -61,6 +61,9 @@ export default class LoadingManager {
       "/assets/ui/"
     )
 
+    scene.load.image("money", "/assets/ui/money.svg")
+    scene.load.image("arrowDown", "/assets/ui/arrowDown.png")
+
     loadStatusMultiAtlas(this.scene)
 
     scene.load.multiatlas("item", "/assets/item/item.json", "/assets/item/")
@@ -356,7 +359,6 @@ export default class LoadingManager {
       "/assets/attacks/pmd-replace.json",
       "/assets/attacks"
     )
-    scene.load.image("money", "/assets/ui/money.svg")
     scene.load.multiatlas(
       "ICE_RANGE",
       "/assets/attacks/ICE_RANGE.json",

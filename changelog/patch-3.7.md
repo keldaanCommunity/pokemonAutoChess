@@ -27,11 +27,10 @@
 
 - Lots of pokemons animations did change. Based on the collaborative work of many people (thanks to RedPandersBear).
   https://discord.com/channels/737230355039387749/1107633727896571944
-
-# UI Changes
 - Add Game History and User ID in player Profile menu
 - Passive abilities are now indicated separately on pokemon tooltips
 - Pokemon tooltips are now displayed in the wiki
+- Added an arrow indicator and a sound effect on Carousel rounds
 
 
 # Misc

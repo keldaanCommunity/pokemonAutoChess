@@ -39,7 +39,7 @@ import {
 } from "../../../../utils/orientation"
 import { clamp } from "../../../../utils/number"
 import PokemonFactory from "../../../../models/pokemon-factory"
-import { AnimationType } from "../../../../types/Animation"
+import { playSound, SOUNDS } from "../../pages/utils/audio"
 
 export default class Pokemon extends DraggableObject {
   evolution: Pkm
@@ -350,6 +350,7 @@ export default class Pokemon extends DraggableObject {
   updateCircleTimer(timer: number) {
     if (timer <= 0) {
       this.circleTimer.destroy()
+      playSound(SOUNDS.CAROUSEL_UNLOCK)
     } else {
       this.circleTimer.clear()
       this.circleTimer.lineStyle(

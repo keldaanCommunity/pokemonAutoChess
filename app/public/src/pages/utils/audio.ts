@@ -3,6 +3,7 @@ import { loadPreferences } from "../../preferences"
 export const SOUNDS = {
   BUTTON_CLICK: "buttonclick.mp3",
   BUTTON_HOVER: "buttonhover.mp3",
+  CAROUSEL_UNLOCK: "carouselunlock.mp3",
   FINISH1: "finish1.mp3",
   FINISH2: "finish2.mp3",
   FINISH3: "finish3.mp3",
