@@ -5969,7 +5969,7 @@ export class Gyarados extends Pokemon {
       Rarity.SPECIAL,
       Pkm.DEFAULT,
       300,
-      20,
+      30,
       5,
       1,
       1,

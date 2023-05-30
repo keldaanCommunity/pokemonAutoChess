@@ -11,7 +11,7 @@
 - Changed ability Hypnosis (Hoothoot): sleep duration now scales with AP
 - Changed ability TriAttack (Porygon): now deals 25/50/100 special damage
 - Buff Fennekin: Mana: 120 → 100
-
+- Buffed PVE rounds pokemons: Rattata and Spearow now have abilities, Gyarados has more HP and attack
 
 # Changes to Synergies
 
@@ -40,3 +40,4 @@
 - Bots are no longer taken into account for ELO gain/loss calculations
 - ELO elligibility is now indicated on room preparation screen
 - Game ID displayed in player profile
+- Neutral and Summon categories have been merged into one "Special" category
