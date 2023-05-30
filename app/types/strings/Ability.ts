@@ -622,12 +622,6 @@ export const AbilityName: { [key in Ability]: Langage } = {
     prt: ``,
     fra: ``
   },
-  [Ability.SYNCHRO]: {
-    eng: `Synchro`,
-    esp: ``,
-    prt: ``,
-    fra: ``
-  },
   [Ability.STEAM_ERUPTION]: {
     eng: `Steam Eruption`,
     esp: ``,
@@ -1509,12 +1503,6 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
   },
   [Ability.CHATTER]: {
     eng: `Deal [10,SP] ${Damage.SPECIAL} to all enemies. Every enemy has 30% chance to be ${Status.CONFUSION} for 1 second`,
-    esp: ``,
-    prt: ``,
-    fra: ``
-  },
-  [Ability.SYNCHRO]: {
-    eng: `If the pokemon is affected by ${Status.POISON}, ${Status.BURN}, ${Status.WOUND} or ${Status.SILENCE}, the enemy team will suffer the same negative status`,
     esp: ``,
     prt: ``,
     fra: ``

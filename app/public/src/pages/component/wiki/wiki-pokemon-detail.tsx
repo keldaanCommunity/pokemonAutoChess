@@ -128,7 +128,7 @@ export default function WikiPokemonDetail(props: {
         </>}
         {pokemon.passive !== Passive.NONE && <>
           <dt>Passive</dt>
-          <dd>
+          <dd><br/>
           {addIconsToDescription(PassiveDescription[pokemon.passive])}
           </dd>
         </>}
