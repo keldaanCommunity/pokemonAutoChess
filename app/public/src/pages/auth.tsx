@@ -16,11 +16,11 @@ export default function Auth() {
         </p>
       )}
       <main>
-        <h1>
-          Pokemon
-          <br />
-          Auto Chess
-        </h1>
+        <h1>Pokemon Auto Chess</h1>
+        <div className="nintendo">
+          <p>Non profit, open source. All rights to The Pokemon Company®</p>
+        </div>
+
         <Login />
       </main>
       <img className="logo" src="assets/ui/pokemon_autochess_final.svg" />
