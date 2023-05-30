@@ -105,6 +105,28 @@ export default class MinigameManager {
       true
     )
 
+    if (pokemonUI.isCurrentPlayerAvatar) {
+      console.log("arrowDown", pokemonUI.x + pokemonUI.width / 2 - 8,
+      pokemonUI.y + 50)
+      const arrowIndicator = this.scene.add.sprite(
+        pokemonUI.x + pokemonUI.width / 2 - 8,
+        pokemonUI.y - 70,
+        "arrowDown"
+      ).setDepth(10).setScale(2)
+      this.scene.tweens.add({
+        targets: arrowIndicator,
+        y: pokemonUI.y - 50,
+        duration: 500,
+        ease: Phaser.Math.Easing.Sine.InOut,
+        loop: 3,
+        yoyo: true,
+        onComplete() {
+          console.log("destroy arrowDown")
+          arrowIndicator.destroy()
+        }
+      })
+    }
+
     this.animationManager.animatePokemon(pokemonUI, pokemon.action)
     this.pokemons.set(pokemonUI.playerId, pokemonUI)
   }
