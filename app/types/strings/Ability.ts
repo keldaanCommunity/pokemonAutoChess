@@ -1502,7 +1502,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.JUDGEMENT]: {
-    eng: `The pokemon acquires the typing of the 3 highest synergies on the team`,
+    eng: `Inflicts [10,SP] special damage to the target, multiplied by the sum of Arceus synergy levels`,
     esp: ``,
     prt: ``,
     fra: ``
