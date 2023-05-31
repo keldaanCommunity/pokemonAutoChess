@@ -25,6 +25,7 @@ export default function PokemonCarousel(props: {
     ;(Object.values(Pkm) as Pkm[]).forEach((v) => {
       const pkm = PokemonFactory.createPokemonFromName(v)
       if (
+        v !== Pkm.DEFAULT &&
         pkm.skill !== Ability.DEFAULT &&
         (props.type === "all" || pkm.types.includes(Synergy[props.type]))
       ) {

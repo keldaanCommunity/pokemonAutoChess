@@ -147,8 +147,7 @@ export enum Transfer {
   SET_TITLE = "SET_TITLE",
   REMOVE_MESSAGE = "REMOVE_MESSAGE",
   GIVE_BOOSTER = "GIVE_BOOSTER",
-  SET_MODERATOR = "SET_MODERATOR",
-  SET_BOT_MANAGER = "SET_BOT_MANAGER",
+  SET_ROLE = "SET_ROLE",
   GIVE_TITLE = "GIVE_TITLE",
   REQUEST_LEADERBOARD = "REQUEST_LEADERBOARD",
   REQUEST_LEVEL_LEADERBOARD = "REQUEST_LEVEL_LEADERBOARD",
@@ -578,6 +577,7 @@ export enum Title {
   HEX_MANIAC = "HEX_MANIAC",
   MUSICIAN = "MUSICIAN",
   BABYSITTER = "BABYSITTER",
+  ALCHEMIST = "ALCHEMIST",
   HARLEQUIN = "HARLEQUIN",
   GLITCH_TRAINER = "GLITCH_TRAINER",
   NURSE = "NURSE",
@@ -597,7 +597,6 @@ export enum Title {
   BOT_BUILDER = "BOT_BUILDER",
   SHINY_SEEKER = "SHINY_SEEKER",
   ARCHEOLOGIST = "ARCHEOLOGIST",
-  ALCHEMIST = "ALCHEMIST",
   DENTIST = "DENTIST"
 }
 
@@ -696,6 +695,7 @@ export const TitleDescription: { [key in Title]: string } = {
   [Title.HEX_MANIAC]: "Max Synergy With Ghost Type in a game",
   [Title.MUSICIAN]: "Max Synergy With Sound Type in a game",
   [Title.BABYSITTER]: "Max Synergy With Baby Type in a game",
+  [Title.ALCHEMIST]: "Max synergy with Artificial type in a game",
   [Title.HARLEQUIN]: "Have 5 different synergies at once",
   [Title.GLITCH_TRAINER]: "Report a Bug without annoying Keldaan",
   [Title.NURSE]: "Heal 1000 or more in a single fight",
@@ -717,6 +717,5 @@ export const TitleDescription: { [key in Title]: string } = {
   [Title.BOT_BUILDER]: "Reach level 10 to unlock the Bot Builder",
   [Title.SHINY_SEEKER]: "Have over 30 shiny pokemon avatars",
   [Title.ARCHEOLOGIST]: "Decipher the secret message of the Unowns",
-  [Title.ALCHEMIST]: "Max synergy with artificial type in a game",
   [Title.DENTIST]: "Own the angry Arbok"
 }
