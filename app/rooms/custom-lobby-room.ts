@@ -386,11 +386,12 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
 
     this.onMessage(Transfer.NEW_MESSAGE, (client, message) => {
       try {
+        const MAX_MESSAGE_LENGTH = 250
         const user = this.state.users.get(client.auth.uid)
         if (user && !user.anonymous && message.payload != "") {
           this.state.addMessage(
             nanoid(),
-            message.payload,
+            message.payload.substring(0, MAX_MESSAGE_LENGTH),
             user.id,
             user.name,
             user.avatar,
