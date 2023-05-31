@@ -17,6 +17,7 @@
   justify-content: center;
   align-items: center;
   gap: 0.5em;
+  text-align: center;
 }
 
 .game-dps-meter header img {
