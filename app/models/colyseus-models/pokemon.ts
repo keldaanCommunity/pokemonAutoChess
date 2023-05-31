@@ -2149,7 +2149,7 @@ export class Poliwag extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.POLIWAG,
-      [Synergy.WATER, Synergy.FIGHTING],
+      [Synergy.WATER, Synergy.AQUATIC, Synergy.FIGHTING],
       Rarity.COMMON,
       Pkm.POLIWHIRL,
       65,
@@ -2172,7 +2172,7 @@ export class Poliwhirl extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.POLIWHIRL,
-      [Synergy.WATER, Synergy.FIGHTING],
+      [Synergy.WATER, Synergy.AQUATIC, Synergy.FIGHTING],
       Rarity.COMMON,
       Pkm.POLITOED,
       120,
@@ -2195,7 +2195,7 @@ export class Politoed extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.POLITOED,
-      [Synergy.WATER, Synergy.FIGHTING],
+      [Synergy.WATER, Synergy.AQUATIC, Synergy.FIGHTING],
       Rarity.COMMON,
       Pkm.DEFAULT,
       220,
@@ -2701,7 +2701,7 @@ export class Lotad extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.LOTAD,
-      [Synergy.GRASS, Synergy.WATER],
+      [Synergy.GRASS, Synergy.WATER, Synergy.AQUATIC],
       Rarity.RARE,
       Pkm.LOMBRE,
       80,
@@ -2711,7 +2711,7 @@ export class Lotad extends Pokemon {
       2,
       AttackSprite.GRASS_RANGE,
       1,
-      100,
+      120,
       Ability.TORMENT,
       shiny,
       emotion,
@@ -2724,7 +2724,7 @@ export class Lombre extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.LOMBRE,
-      [Synergy.GRASS, Synergy.WATER],
+      [Synergy.GRASS, Synergy.WATER, Synergy.AQUATIC],
       Rarity.RARE,
       Pkm.LUDICOLO,
       150,
@@ -2734,7 +2734,7 @@ export class Lombre extends Pokemon {
       2,
       AttackSprite.GRASS_RANGE,
       2,
-      100,
+      120,
       Ability.TORMENT,
       shiny,
       emotion,
@@ -2747,7 +2747,7 @@ export class Ludicolo extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.LUDICOLO,
-      [Synergy.GRASS, Synergy.WATER],
+      [Synergy.GRASS, Synergy.WATER, Synergy.AQUATIC],
       Rarity.RARE,
       Pkm.DEFAULT,
       260,
@@ -2757,7 +2757,7 @@ export class Ludicolo extends Pokemon {
       2,
       AttackSprite.GRASS_RANGE,
       3,
-      100,
+      120,
       Ability.TORMENT,
       shiny,
       emotion,
@@ -7340,7 +7340,7 @@ export class Phione extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.PHIONE,
-      [Synergy.WATER, Synergy.BUG],
+      [Synergy.WATER, Synergy.BUG, Synergy.AQUATIC],
       Rarity.MYTHICAL,
       Pkm.MANAPHY,
       160,
@@ -7365,7 +7365,7 @@ export class Manaphy extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.MANAPHY,
-      [Synergy.WATER, Synergy.BUG],
+      [Synergy.WATER, Synergy.BUG, Synergy.AQUATIC],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       240,
@@ -10608,7 +10608,7 @@ export class Tentacool extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.TENTACOOL,
-      [Synergy.WATER, Synergy.POISON],
+      [Synergy.WATER, Synergy.AQUATIC, Synergy.POISON],
       Rarity.COMMON,
       Pkm.TENTACRUEL,
       55,
@@ -10632,7 +10632,7 @@ export class Tentacruel extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.TENTACRUEL,
-      [Synergy.WATER, Synergy.POISON],
+      [Synergy.WATER, Synergy.AQUATIC, Synergy.POISON],
       Rarity.COMMON,
       Pkm.DEFAULT,
       150,
@@ -12550,7 +12550,7 @@ export class Froakie extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.FROAKIE,
-      [Synergy.WATER, Synergy.DARK],
+      [Synergy.WATER, Synergy.AQUATIC, Synergy.DARK],
       Rarity.HATCH,
       Pkm.FROGADIER,
       90,
@@ -12573,7 +12573,7 @@ export class Frogadier extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.FROGADIER,
-      [Synergy.WATER, Synergy.DARK],
+      [Synergy.WATER, Synergy.AQUATIC, Synergy.DARK],
       Rarity.HATCH,
       Pkm.GRENINJA,
       150,
@@ -12596,7 +12596,7 @@ export class Greninja extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.GRENINJA,
-      [Synergy.WATER, Synergy.DARK],
+      [Synergy.WATER, Synergy.AQUATIC, Synergy.DARK],
       Rarity.HATCH,
       Pkm.DEFAULT,
       250,
