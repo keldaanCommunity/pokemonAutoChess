@@ -3,7 +3,7 @@
 -
 
 # Changes to Pokemon
-
+- More Aquatic: Poliwag, Tentacool, Lotad, Froakie, Phione now have the Aquatic synergy
 - Add active abilities to Kecleon, Arceus, Mew, Tapu-koko, Tapu-lele, Tapu-Bulu, Tapu-Fini
 - New ability for MimeJr/MrMime: Mimic
 - New ability for Vulpix/Ninetales/Ho-Oh: Fire Spin: Area of effect attack that deals 20/40/100 special dmaage around the target and burn all enemies hit for 3 seconds
