@@ -21,7 +21,7 @@ interface Section {
 }
 
 export default function WikiPokemon(props: { rarity: Rarity }) {
-  let sections: Section[] = [{ pokemons: precomputed[props.rarity] }]
+  let sections: Section[] = [{ pokemons: precomputed[props.rarity].filter(p => p !== Pkm.DEFAULT) }]
   if (props.rarity === Rarity.MYTHICAL) {
     sections = [
       {
