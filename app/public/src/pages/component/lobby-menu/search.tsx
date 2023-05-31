@@ -21,17 +21,17 @@ export default function Search() {
   const suggestions = useAppSelector((state) => state.lobby.suggestions)
   const [currentText, setCurrentText] = useState<string>("")
   const role = useAppSelector((state) => state.lobby.user?.role)
-  const [t, setT] = useState<Title>(Title.ACE_TRAINER)
+  const [title, setTitle] = useState<Title>(Title.ACE_TRAINER)
 
   const giveButton =
     user && role && role === Role.ADMIN ? (
       <button
         className="bubbly green"
         onClick={() => {
-          dispatch(giveBooster({ numberOfBoosters: 1, uid: user.id }))
+          dispatch(giveBooster({ numberOfBoosters: Number(prompt("How many boosters ?")) || 1, uid: user.id }))
         }}
       >
-        <p style={{ margin: "0px" }}>Give 1 booster</p>
+        <p style={{ margin: "0px" }}>Give boosters</p>
       </button>
     ) : null
 
@@ -87,9 +87,9 @@ export default function Search() {
     user && role && role === Role.ADMIN ? (
       <div style={{ display: "flex" }}>
         <select
-          value={t}
+          value={title}
           onChange={(e) => {
-            setT(e.target.value as Title)
+            setTitle(e.target.value as Title)
           }}
         >
           {Object.keys(Title).map((ti) => (
@@ -101,7 +101,7 @@ export default function Search() {
         <button
           className="bubbly blue"
           onClick={() => {
-            dispatch(giveTitle({ uid: user.id, title: t }))
+            dispatch(giveTitle({ uid: user.id, title: title }))
           }}
         >
           Give Title
@@ -145,13 +145,14 @@ export default function Search() {
       {user && (
         <div className="player-history nes-container">
           <PlayerBox user={user} />
-
-          {modButton}
-          {botManagerButton}
-          {giveButton}
-          {titleButton}
-          {banButton}
-          {unbanButton}
+          {(role === Role.ADMIN || role === Role.MODERATOR) && <div className="actions">
+            {modButton}
+            {botManagerButton}
+            {giveButton}
+            {titleButton}
+            {banButton}
+            {unbanButton}
+          </div>}
           <History history={user.history} />
         </div>
       )}
