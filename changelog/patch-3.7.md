@@ -22,7 +22,7 @@
 
 # Bugfix
 
--
+- Bot Builder creation: remove the "bench" line
 
 # UI
 

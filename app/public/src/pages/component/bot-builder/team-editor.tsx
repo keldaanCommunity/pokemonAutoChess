@@ -235,7 +235,7 @@ export default function TeamEditor(props: {
                 >
                   <table className="nes-table is-bordered is-centered">
                     <tbody>
-                      {[3, 2, 1, 0].map((y) => {
+                      {[3, 2, 1].map((y) => {
                         return (
                           <tr key={y}>
                             {[0, 1, 2, 3, 4, 5, 6, 7].map((x) => {
