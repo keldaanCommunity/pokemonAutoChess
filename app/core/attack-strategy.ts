@@ -3384,6 +3384,9 @@ export class ThiefStrategy extends AttackStrategy {
         pokemon.simulation.applyItemEffect(pokemon, item)
       }
       target.items.delete(item)
+      if(item === Item.MAX_REVIVE && target.status.resurection){
+        target.status.resurection = false
+      }
     })
 
     // update artificial synergy bonuses
