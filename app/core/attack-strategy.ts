@@ -374,18 +374,6 @@ export class WonderGuardStrategy extends AttackStrategy {
   }
 }
 
-export class SynchroStrategy extends AttackStrategy {
-  process(
-    pokemon: PokemonEntity,
-    state: PokemonState,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
-    super.process(pokemon, state, board, target, crit)
-  }
-}
-
 export class IllusionStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,

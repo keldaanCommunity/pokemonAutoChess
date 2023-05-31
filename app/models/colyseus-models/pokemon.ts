@@ -7605,11 +7605,13 @@ export class Mew extends Pokemon {
       3,
       AttackSprite.PSYCHIC_RANGE,
       1,
-      200,
-      Ability.SYNCHRO,
+      50,
+      Ability.TELEPORT,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.SYNCHRO
     )
   }
 }

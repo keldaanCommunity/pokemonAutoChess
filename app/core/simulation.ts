@@ -16,7 +16,7 @@ import { ItemStats } from "../types/Config"
 import { getPath } from "../public/src/pages/utils/utils"
 import GameRoom from "../rooms/game-room"
 import { pickRandomIn } from "../utils/random"
-import { Ability } from "../types/enum/Ability"
+import { Passive } from "../types/enum/Passive"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") climate: Climate = Climate.NEUTRAL
@@ -338,7 +338,7 @@ export default class Simulation extends Schema implements ISimulation {
       this.applyItemEffect(pokemon, item)
     })
 
-    if (pokemon.skill === Ability.SYNCHRO) {
+    if (pokemon.passive === Passive.SYNCHRO) {
       pokemon.status.triggerSynchro()
     }
   }

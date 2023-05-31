@@ -14,5 +14,6 @@ export enum Passive {
     EEVEE = "EEVEE",
     TREE = "TREE",
     DITTO = "DITTO",
-    EGG = "EGG"
+    EGG = "EGG",
+    SYNCHRO = "SYNCHRO"
 }
