@@ -39,10 +39,10 @@ export * from "./enum/Emotion"
 export const FIGHTING_PHASE_DURATION = 40000
 
 export const CDN_PORTRAIT_URL =
-  "https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/"
+  "https://raw.githubusercontent.com/keldaanCommunity/SpriteCollab/master/portrait/"
 
 export const CDN_URL =
-  "https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master"
+  "https://raw.githubusercontent.com/keldaanCommunity/SpriteCollab/master"
 
 export const USERNAME_REGEXP =
   /^(?=.{4,20}$)(?:[\u0021-\uFFFF]+(?:(?:\.|-|_)[\u0021-\uFFFF])*)+$/
@@ -597,7 +597,8 @@ export enum Title {
   BOT_BUILDER = "BOT_BUILDER",
   SHINY_SEEKER = "SHINY_SEEKER",
   ARCHEOLOGIST = "ARCHEOLOGIST",
-  ALCHEMIST = "ALCHEMIST"
+  ALCHEMIST = "ALCHEMIST",
+  DENTIST = "DENTIST"
 }
 
 export const TitleName: { [key in Title]: string } = {
@@ -656,7 +657,8 @@ export const TitleName: { [key in Title]: string } = {
   [Title.BOT_BUILDER]: "Bot Builder",
   [Title.SHINY_SEEKER]: "Shiny Seeker",
   [Title.ARCHEOLOGIST]: "Archeologist",
-  [Title.ALCHEMIST]: "Alchemist"
+  [Title.ALCHEMIST]: "Alchemist",
+  [Title.DENTIST]: "Dentist"
 }
 
 export const TitleDescription: { [key in Title]: string } = {
@@ -715,5 +717,6 @@ export const TitleDescription: { [key in Title]: string } = {
   [Title.BOT_BUILDER]: "Reach level 10 to unlock the Bot Builder",
   [Title.SHINY_SEEKER]: "Have over 30 shiny pokemon avatars",
   [Title.ARCHEOLOGIST]: "Decipher the secret message of the Unowns",
-  [Title.ALCHEMIST]: "Max synergy with artificial type in a game"
+  [Title.ALCHEMIST]: "Max synergy with artificial type in a game",
+  [Title.DENTIST]: "Own the angry Arbok"
 }

@@ -758,6 +758,13 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
                   ) {
                     u.titles.push(Title.DUKE)
                   }
+                  if (
+                    message.emotion === Emotion.ANGRY &&
+                    message.index === PkmIndex[Pkm.ARBOK] &&
+                    !u.titles.includes(Title.DENTIST)
+                  ) {
+                    u.titles.push(Title.DENTIST)
+                  }
                   if (u.pokemonCollection.get(message.index)) {
                     if (
                       u.pokemonCollection.get(message.index).shinyEmotions
