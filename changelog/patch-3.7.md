@@ -4,7 +4,7 @@
 
 # Changes to Pokemon
 
-- Add active abilities to Kecleon, Arceus, Tapu-koko, Tapu-lele, Tapu-Bulu, Tapu-Fini
+- Add active abilities to Kecleon, Arceus, Mew, Tapu-koko, Tapu-lele, Tapu-Bulu, Tapu-Fini
 - New ability for MimeJr/MrMime: Mimic
 - New ability for Vulpix/Ninetales/Ho-Oh: Fire Spin: Area of effect attack that deals 20/40/100 special dmaage around the target and burn all enemies hit for 3 seconds
 - Reworked ability Confusion (Meditite, Smoochum): Makes the target confused for 3/5/7 seconds. If the target is already confused, deals 75/150/300 special damage instead

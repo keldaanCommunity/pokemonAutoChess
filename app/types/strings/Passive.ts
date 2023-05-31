@@ -18,5 +18,6 @@ export const PassiveDescription: { [key in Passive]: string } = {
     [Passive.EEVEE]: `Eevee can evolve into one of the 8 Eeveelutions when given a synergy stone`,
     [Passive.TREE]: `Pretends to be a tree and does not attack but gain 2 ${Stat.ATK} per second instead (stackable).\nStarts attacking when ${Stat.MANA} bar is full.`,
     [Passive.DITTO]: `Ditto can't fight, but it can transform to create a copy of the basic form of one of your pokemons you drop it over (except Mythical and Hatch).`,
-    [Passive.EGG]: `You can feel something moving inside.`
+    [Passive.EGG]: `You can feel something moving inside.`,
+    [Passive.SYNCHRO]: `If the pokemon is affected by ${Status.POISON}, ${Status.BURN}, ${Status.WOUND} or ${Status.SILENCE}, the enemy team will suffer the same negative status`,
 }
