@@ -82,3 +82,10 @@ ul.titles > li.selected p {
   height: 40px;
   margin: 0 auto;
 }
+
+.player-history .actions {
+  font-size: 80%;
+  display: flex;
+  gap: 0.25em;
+  flex-wrap: wrap;
+}

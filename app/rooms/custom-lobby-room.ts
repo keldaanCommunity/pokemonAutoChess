@@ -385,7 +385,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
         this.dispatcher.dispatch(new GiveBoostersCommand(), {
           client,
           uid,
-          numberOfBoosters
+          numberOfBoosters: Number(numberOfBoosters) || 1
         })
       }
     )
