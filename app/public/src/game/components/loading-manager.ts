@@ -67,7 +67,6 @@ export default class LoadingManager {
     loadStatusMultiAtlas(this.scene)
 
     scene.load.multiatlas("item", "/assets/item/item.json", "/assets/item/")
-    scene.load.multiatlas("lock", "/assets/lock/lock.json", "/assets/lock/")
     scene.load.multiatlas(
       "attacks",
       "/assets/attacks/attacks.json",
