@@ -33,11 +33,12 @@
 - Pokemon tooltips are now displayed in the wiki
 - Added an arrow indicator and a sound effect on Carousel rounds
 
-
 # Misc
 
+- Add the dentist title (Own the angry Arbok)
 - Lobbys don't need 8 players any more to be elligible for ELO, but need at least 2 human players
 - Bots are no longer taken into account for ELO gain/loss calculations
 - ELO elligibility is now indicated on room preparation screen
 - Game ID displayed in player profile
 - Neutral and Summon categories have been merged into one "Special" category
+- KeldaanInteractive is now KeldaanCommunity

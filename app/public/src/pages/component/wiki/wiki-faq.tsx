@@ -167,7 +167,7 @@ export default class WikiFaq extends Component {
         <p>
           TypeScript, Phaser, Colyseus. If you want to contribute,{" "}
           <a
-            href="https://github.com/keldaanInteractive/pokemonAutoChess"
+            href="https://github.com/keldaanCommunity/pokemonAutoChess"
             target="_blank"
           >
             pull requests are open

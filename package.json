@@ -7,13 +7,13 @@
   "engines": {
     "node": "18.16"
   },
-  "homepage": "https://github.com/keldaanInteractive/pokemonAutoChess#readme",
+  "homepage": "https://github.com/keldaanCommunity/pokemonAutoChess#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/keldaanInteractive/pokemonAutoChess.git"
+    "url": "git+https://github.com/keldaanCommunity/pokemonAutoChess.git"
   },
   "bugs": {
-    "url": "https://github.com/keldaanInteractive/pokemonAutoChess/issues"
+    "url": "https://github.com/keldaanCommunity/pokemonAutoChess/issues"
   },
   "author": "keldaan-ag",
   "contributors": [

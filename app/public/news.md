@@ -8,7 +8,7 @@ Welcome to Phione, Shuckle, Combee and Vespiqueen !
 ![combee](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0415/Normal.png) ![vespiqueen](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0416/Normal.png)
 
 Phione will evolve into a manaphy if you give him an aqua egg.
-![phione](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0489/Normal.png) + ![aqua-egg](https://raw.githubusercontent.com/keldaanInteractive/pokemonAutoChess/master/app/public/dist/client/assets/item/AQUA_EGG.png) = ![manaphy](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0490/Normal.png)
+![phione](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0489/Normal.png) + ![aqua-egg](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/dist/client/assets/item/AQUA_EGG.png) = ![manaphy](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0490/Normal.png)
 
 ## I want to fly away, yeah yeah yeah
 
@@ -47,7 +47,7 @@ Check out the full changelog on [Discord](https://discord.com/channels/737230355
 
 ## Newcomers
 
-Welcome to Hoothoot and Noctowl ! ![Hoothoot](https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/0163/Normal.png)
+Welcome to Hoothoot and Noctowl ! ![Hoothoot](https://raw.githubusercontent.com/keldaanCommunity/SpriteCollab/master/portrait/0163/Normal.png)
 
 ## Dodge & Protect
 
