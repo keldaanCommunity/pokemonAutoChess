@@ -41,4 +41,5 @@
 - ELO elligibility is now indicated on room preparation screen
 - Game ID displayed in player profile
 - Neutral and Summon categories have been merged into one "Special" category
+- You can now have a chance to find a shiny Gyarados at stage 10. It gives two components instead of one.
 - KeldaanInteractive is now KeldaanCommunity
