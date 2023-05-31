@@ -20,7 +20,7 @@ export const ItemName: { [key in Item]: string } = {
   [Item.MOON_STONE]: "Moon Stone",
   [Item.DUSK_STONE]: "Dusk Stone",
   [Item.LEAF_STONE]: "Leaf Stone",
-  [Item.ICY_ROCK]: "Icy Rock",
+  [Item.ICY_ROCK]: "Ice Stone",
   [Item.CHOICE_SPECS]: "Choice Specs",
   [Item.SOUL_DEW]: "Soul Dew",
   [Item.UPGRADE]: "Upgrade",
