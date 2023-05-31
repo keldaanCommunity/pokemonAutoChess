@@ -951,7 +951,11 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         title: "End of the game",
         info: "We have a winner !"
       })
-      // commands.push(new OnKickPlayerCommand());
+      setTimeout(() => {
+        // dispose the room automatically after 30 seconds
+        this.room.broadcast(Transfer.GAME_END)
+        this.room.disconnect();
+      }, 30 * 1000)
     }
     return commands
   }

@@ -152,10 +152,15 @@ export default function Game() {
       elligibleToELO
     })
     localStorage.setItem("cachedReconnectionToken", r.reconnectionToken)
-    await room?.leave()
     r.connection.close()
     dispatch(leaveGame())
     setToAfter(true)
+
+    try {
+      await room?.leave()
+    } catch(error) {
+      logger.warn("Room already closed")
+    }
   }
 
   useEffect(() => {
@@ -283,6 +288,8 @@ export default function Game() {
           }
         }
       })
+
+      room.onMessage(Transfer.GAME_END, leave)
 
       room.state.listen("roundTime", (value, previousValue) => {
         dispatch(setRoundTime(value))

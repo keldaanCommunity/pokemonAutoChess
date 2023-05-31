@@ -105,9 +105,7 @@ export default class MinigameManager {
       true
     )
 
-    if (pokemonUI.isCurrentPlayerAvatar) {
-      console.log("arrowDown", pokemonUI.x + pokemonUI.width / 2 - 8,
-      pokemonUI.y + 50)
+    if (pokemonUI.isCurrentPlayerAvatar) {      
       const arrowIndicator = this.scene.add.sprite(
         pokemonUI.x + pokemonUI.width / 2 - 8,
         pokemonUI.y - 70,
@@ -121,7 +119,6 @@ export default class MinigameManager {
         loop: 3,
         yoyo: true,
         onComplete() {
-          console.log("destroy arrowDown")
           arrowIndicator.destroy()
         }
       })
