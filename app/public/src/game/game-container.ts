@@ -242,6 +242,7 @@ class GameContainer {
         "protect",
         "psychicField",
         "resurection",
+        "resurecting",
         "runeProtect",
         "silence",
         "sleep",

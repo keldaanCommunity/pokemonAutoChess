@@ -21,6 +21,9 @@ import PokemonFactory from "../models/pokemon-factory"
 import { clamp, roundTo2Digits } from "../utils/number"
 import { Passive } from "../types/enum/Passive"
 
+export const DEFAULT_CRIT_CHANCE = 10
+export const DEFAULT_CRIT_DAMAGE = 2
+
 export default class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
   @type("uint8") positionX: number
@@ -29,7 +32,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   @type("string") index: string
   @type("string") id: string
   @type("string") orientation = Orientation.DOWNLEFT
-  @type("uint8") critChance = 10
+  @type("uint8") critChance = DEFAULT_CRIT_CHANCE
   @type("uint16") hp: number
   @type("uint8") mana = 0
   @type("uint8") maxMana: number
@@ -56,7 +59,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   @type("string") passive: Passive
   @type(Status) status: Status
   @type(Count) count: Count
-  @type("float32") critDamage = 2
+  @type("float32") critDamage = DEFAULT_CRIT_DAMAGE
   @type("uint16") ap = 0
   @type("uint16") healDone: number
   @type("string") emotion: Emotion
@@ -153,6 +156,14 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     return 1000 / this.atkSpeed
   }
 
+  get canMove(): boolean {
+    return !this.status.freeze && !this.status.sleep && !this.status.resurecting
+  }
+
+  get isTargettable(): boolean {
+    return !this.status.resurecting
+  }
+
   handleDamage(params: {
     damage: number
     board: Board
@@ -235,7 +246,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   setMana(mana: number) {
-    if (!this.status.silence && !this.status.protect) {
+    if (!this.status.silence && !this.status.protect && !this.status.resurecting) {
       this.mana = Math.max(0, Math.min(mana, this.maxMana))
     }
   }
@@ -523,5 +534,24 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     if (flyAwayCell) {
       this.moveTo(flyAwayCell.x, flyAwayCell.y, board)
     }
+  }
+
+  resetStats(){
+    const cloneForStatsReference = PokemonFactory.createPokemonFromName(this.name)
+    this.life = cloneForStatsReference.hp
+    this.shield = 0
+    this.mana = 0
+    this.atk = cloneForStatsReference.atk
+    this.def = cloneForStatsReference.def
+    this.speDef = cloneForStatsReference.speDef
+    this.atkSpeed = cloneForStatsReference.atkSpeed
+    this.critChance = DEFAULT_CRIT_CHANCE
+    this.critDamage = DEFAULT_CRIT_DAMAGE
+    this.count = new Count()
+    this.status.clearNegativeStatus()
+    this.simulation.applySynergyEffects(this)
+    this.simulation.applyItemsEffects(this)
+    this.status.resurection = false; // prevent reapplying max revive again
+    // does not trigger postEffects (iron defense, normal shield, rune protect, focus band, delta orb, flame orb...)
   }
 }
