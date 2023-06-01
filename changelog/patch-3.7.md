@@ -1,6 +1,5 @@
 # New Pokemons:
-
--
+- Tepig: Hatch, Fire/Field/Fighting
 
 # Changes to Pokemon
 - More Aquatic: Poliwag, Tentacool, Lotad, Froakie, Phione now have the Aquatic synergy
