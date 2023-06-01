@@ -337,6 +337,18 @@ export const Mythical2Shop = new Array<Pkm>(
   Pkm.YVELTAL
 )
 
+export const HatchList = new Array<Pkm>(
+  Pkm.GOTHITA,
+  Pkm.DREEPY,
+  Pkm.SNIVY,
+  Pkm.SCORBUNNY,
+  Pkm.POPPLIO,
+  Pkm.ALOLAN_GEODUDE,
+  Pkm.ROWLET,
+  Pkm.FROAKIE,
+  Pkm.TEPIG
+)
+
 export const MAX_PLAYERS_PER_LOBBY = 8
 
 export const StageDuration: Record<number | "DEFAULT", number> = {

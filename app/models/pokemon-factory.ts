@@ -560,20 +560,9 @@ import { IPokemonConfig } from "./mongo-models/user-metadata"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
 import { Synergy } from "../types/enum/Synergy"
 import { Pkm, PkmFamily } from "../types/enum/Pokemon"
-import { PkmCost, EvolutionTime, Mythical1Shop } from "../types/Config"
+import { PkmCost, EvolutionTime, Mythical1Shop, HatchList } from "../types/Config"
 import { pickRandomIn } from "../utils/random"
 import { logger } from "../utils/logger"
-
-export const ObtainableEgg = new Array<Pkm>(
-  Pkm.GOTHITA,
-  Pkm.DREEPY,
-  Pkm.SNIVY,
-  Pkm.SCORBUNNY,
-  Pkm.POPPLIO,
-  Pkm.ALOLAN_GEODUDE,
-  Pkm.ROWLET,
-  Pkm.FROAKIE
-)
 
 export default class PokemonFactory {
   static getNeutralPokemonsByLevelStage(level: number): MapSchema<Pokemon> {
@@ -1897,7 +1886,7 @@ export default class PokemonFactory {
   static createRandomEgg() {
     const egg = PokemonFactory.createPokemonFromName(Pkm.EGG)
     egg.action = PokemonActionState.SLEEP
-    egg.evolution = pickRandomIn(ObtainableEgg)
+    egg.evolution = pickRandomIn(HatchList)
     egg.evolutionTimer = EvolutionTime.EGG_HATCH
     return egg
   }
