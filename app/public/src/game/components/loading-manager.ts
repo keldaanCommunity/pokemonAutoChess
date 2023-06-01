@@ -415,6 +415,11 @@ export function loadStatusMultiAtlas(scene: Phaser.Scene) {
     "/assets/status"
   )
   scene.load.multiatlas(
+    "RESURECT",
+    "/assets/status/RESURECT.json",
+    "/assets/status"
+  )
+  scene.load.multiatlas(
     "paralysis",
     "/assets/status/PARALYSIS.json",
     "/assets/status"

@@ -14,7 +14,7 @@ export class IdleState extends PokemonState {
         pokemon.status.tree = false
         pokemon.toMovingState()
       }
-    } else if (!pokemon.status.freeze && !pokemon.status.sleep) {
+    } else if (pokemon.canMove) {
       pokemon.toMovingState()
     }
 
@@ -30,9 +30,13 @@ export class IdleState extends PokemonState {
 
   onEnter(pokemon: PokemonEntity) {
     super.onEnter(pokemon)
-    pokemon.action = pokemon.status.tree
-      ? PokemonActionState.IDLE
-      : PokemonActionState.SLEEP
+    if(pokemon.status.tree) {
+      pokemon.action = PokemonActionState.IDLE
+    } else if(pokemon.status.resurecting){
+      pokemon.action = PokemonActionState.HURT
+    } else {
+      pokemon.action = PokemonActionState.SLEEP
+    }
     pokemon.cooldown = 0
   }
 

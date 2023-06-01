@@ -40,6 +40,7 @@ import {
 import { clamp } from "../../../../utils/number"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { playSound, SOUNDS } from "../../pages/utils/audio"
+import { DEFAULT_CRIT_CHANCE, DEFAULT_CRIT_DAMAGE } from "../../../../core/pokemon-entity"
 
 export default class Pokemon extends DraggableObject {
   evolution: Pkm
@@ -140,7 +141,7 @@ export default class Pokemon extends DraggableObject {
     this.id = pokemon.id
     this.hp = pokemon.hp
     this.range = pokemon.range
-    this.critChance = 10
+    this.critChance = DEFAULT_CRIT_CHANCE
     this.atk = pokemon.atk
     this.def = pokemon.def
     this.speDef = pokemon.speDef
@@ -202,7 +203,10 @@ export default class Pokemon extends DraggableObject {
       Phaser.Animations.Events.ANIMATION_COMPLETE,
       (animation, frame, gameObject, frameKey: string) => {
         const g = <GameScene>scene
-        g.animationManager?.animatePokemon(this, PokemonActionState.IDLE)
+        // go back to idle anim if no more animation in queue
+        if(pokemon.action !== PokemonActionState.HURT){
+          g.animationManager?.animatePokemon(this, PokemonActionState.IDLE)
+        }        
       }
     )
     this.height = this.sprite.height
@@ -270,9 +274,9 @@ export default class Pokemon extends DraggableObject {
       this.ap = p.ap
       this.critChance = p.critChance
     } else {
-      this.critDamage = 2
+      this.critDamage = DEFAULT_CRIT_DAMAGE
       this.ap = 0
-      this.critChance = 10
+      this.critChance = DEFAULT_CRIT_CHANCE
     }
     this.setDepth(5)
   }
@@ -666,6 +670,29 @@ export default class Pokemon extends DraggableObject {
       onComplete: () => {
         this.destroy(true)
       }
+    })
+  }
+
+  resurectAnimation() {
+    if (this.lifebar) {
+      this.lifebar.setAmount(0)
+    }
+
+    const coordinates = transformAttackCoordinate(
+      this.positionX,
+      this.positionY
+    )
+    const resurectAnim = this.scene.add.sprite(
+      coordinates[0],
+      coordinates[1],
+      "RESURECT",
+      "000"
+    )
+    resurectAnim.setDepth(7)
+    resurectAnim.setScale(2, 2)
+    resurectAnim.anims.play("RESURECT")
+    resurectAnim.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+      resurectAnim.destroy()
     })
   }
 

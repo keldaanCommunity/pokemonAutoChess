@@ -20,6 +20,7 @@ import { throttle } from "../../../../../utils/function"
 import GameState from "../../../../../rooms/states/game-state"
 import { useNavigate } from "react-router"
 import { MAX_PLAYERS_PER_LOBBY } from "../../../../../types/Config"
+import { logger } from "../../../../../utils/logger"
 
 export default function RoomMenu(props: {
   toPreparation: boolean
@@ -101,7 +102,7 @@ export default function RoomMenu(props: {
           dispatch(leaveLobby())
           props.setToPreparation(true)
         } catch (error) {
-          console.log(error)
+          logger.error(error)
         }
       }
     }

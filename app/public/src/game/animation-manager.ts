@@ -71,23 +71,17 @@ export default class AnimationManager {
                     frameArray[i]["duration"] = durationArray[i] * 10
                   }
                 }
-                if (
-                  action === AnimationType.Idle ||
-                  action === AnimationType.Sleep ||
-                  action === AnimationType.Hop
-                ) {
-                  this.game.anims.create({
-                    key: `${index}/${shiny}/${action}/${mode}/${direction}`,
-                    frames: frameArray,
-                    repeat: -1
-                  })
-                } else {
-                  this.game.anims.create({
-                    key: `${index}/${shiny}/${action}/${mode}/${direction}`,
-                    frames: frameArray,
-                    repeat: 0
-                  })
-                }
+                const shouldLoop = [
+                  AnimationType.Idle,
+                  AnimationType.Sleep,
+                  AnimationType.Hop
+                ].includes(action)
+
+                this.game.anims.create({
+                  key: `${index}/${shiny}/${action}/${mode}/${direction}`,
+                  frames: frameArray,
+                  repeat: shouldLoop ? -1 : 0
+                })
               } else {
                 logger.warn(
                   "duration array missing for ",
@@ -1897,6 +1891,17 @@ export function createStatusAnimations(game: Phaser.Scene) {
     }),
     frameRate: 3,
     repeat: -1
+  })
+
+  game.anims.create({
+    key: "RESURECT",
+    frames: game.anims.generateFrameNames("RESURECT", {
+      start: 0,
+      end: 56,
+      zeroPad: 3
+    }),
+    frameRate: 28,
+    repeat: 0
   })
 
   /*game.anims.create({
