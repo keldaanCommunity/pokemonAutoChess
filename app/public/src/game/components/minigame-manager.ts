@@ -1,7 +1,6 @@
 import Pokemon from "./pokemon"
 import { FloatingItem } from "./floating-item"
 import { IFloatingItem, IPokemonAvatar } from "../../../../types"
-import { DataChange } from "@colyseus/schema"
 import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
 import {

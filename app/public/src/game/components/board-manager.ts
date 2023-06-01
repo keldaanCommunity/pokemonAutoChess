@@ -74,6 +74,7 @@ export default class BoardManager {
       }
     })
     this.closeTooltips()
+    this.scene.input.setDragState(this.scene.input.activePointer, 0)
   }
 
   pickMode() {
