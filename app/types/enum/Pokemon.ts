@@ -1363,7 +1363,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.RAIKOU]: Pkm.RAIKOU,
   [Pkm.REGIGIGAS]: Pkm.REGIGIGAS,
   [Pkm.MAGIKARP]: Pkm.MAGIKARP,
-  [Pkm.GYARADOS]: Pkm.GYARADOS,
+  [Pkm.GYARADOS]: Pkm.MAGIKARP,
   [Pkm.RATTATA]: Pkm.RATTATA,
   [Pkm.RATICATE]: Pkm.RATTATA,
   [Pkm.LUGIA]: Pkm.LUGIA,
