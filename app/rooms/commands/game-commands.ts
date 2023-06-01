@@ -38,7 +38,7 @@ import {
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Pokemon } from "../../models/colyseus-models/pokemon"
 import { Ability } from "../../types/enum/Ability"
-import { pickRandomIn } from "../../utils/random"
+import { chance, pickRandomIn } from "../../utils/random"
 import { logger } from "../../utils/logger"
 import { Passive } from "../../types/enum/Passive"
 
@@ -1287,6 +1287,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         }
         if (isPVE && player.getLastBattleResult() == BattleResult.WIN) {
           player.items.add(ItemFactory.createBasicRandomItem())
+          if(this.state.shinyEncounter){
+            // give a second item if shiny PVE round
+            player.items.add(ItemFactory.createBasicRandomItem())
+          }
         }
 
         if (
@@ -1376,6 +1380,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     this.state.botManager.updateBots()
 
     const stageIndex = this.getPVEIndex(this.state.stageLevel)
+    this.state.shinyEncounter = (this.state.stageLevel === 10 && chance(1/20))
 
     this.state.players.forEach((player: Player, key: string) => {
       if (player.alive) {
@@ -1385,7 +1390,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
           player.simulation.initialize(
             player.board,
             PokemonFactory.getNeutralPokemonsByLevelStage(
-              this.state.stageLevel
+              this.state.stageLevel,
+              this.state.shinyEncounter
             ),
             player,
             null,
