@@ -18,6 +18,8 @@
 -
 
 # Changes to Items
+- Buff Oran Berry: 130 → 150 shield
+- Nerf Max Revive: after revive, stats and item stacks are now reset to what they were at the start of the battle
 
 # Bugfix
 
@@ -30,6 +32,7 @@
 - Passive abilities are now indicated separately on pokemon tooltips
 - Pokemon tooltips are now displayed in the wiki
 - Added an arrow indicator and a sound effect on Carousel rounds
+- Resurection now has an animation and a 2 seconds delay before the pokemon is revived
 
 # Misc
 

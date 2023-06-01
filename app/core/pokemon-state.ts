@@ -342,8 +342,7 @@ export default class PokemonState {
             1
           )
         } else if (pokemon.status.resurection) {
-          pokemon.status.resurection = false
-          pokemon.life = pokemon.hp
+          pokemon.status.triggerResurection(pokemon)
         } else {
           const isWorkUp = pokemon.effects.includes(Effect.BULK_UP)
           const isRage = pokemon.effects.includes(Effect.RAGE)
@@ -435,6 +434,11 @@ export default class PokemonState {
   }
 
   update(pokemon: PokemonEntity, dt: number, board: Board, climate: string) {
+    if(pokemon.status.resurecting &&
+      pokemon.action !== PokemonActionState.HURT
+    ){
+      pokemon.toIdleState()
+    }
     if (
       (pokemon.status.freeze || pokemon.status.sleep) &&
       pokemon.action !== PokemonActionState.SLEEP
@@ -484,16 +488,6 @@ export default class PokemonState {
 
   onExit(pokemon: PokemonEntity) {}
 
-  isTarget(pokemon: PokemonEntity, board: Board) {
-    let target = false
-    board.forEach((x, y, value) => {
-      if (value && value.team != pokemon.team) {
-        target = true
-      }
-    })
-    return target
-  }
-
   getNearestTargetCoordinate(
     pokemon: PokemonEntity,
     board: Board
@@ -505,7 +499,7 @@ export default class PokemonState {
     }>()
 
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
-      if (value !== undefined && value.team != pokemon.team) {
+      if (value !== undefined && value.team !== pokemon.team && value.isTargettable) {
         const candidateDistance = board.distance(
           pokemon.positionX,
           pokemon.positionY,
@@ -534,7 +528,7 @@ export default class PokemonState {
     const pokemons = new Array<{ distance: number; x: number; y: number }>()
 
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
-      if (value !== undefined && value.team != pokemon.team) {
+      if (value !== undefined && value.team !== pokemon.team && value.isTargettable) {
         const distance = board.distance(
           pokemon.positionX,
           pokemon.positionY,
@@ -602,7 +596,7 @@ export default class PokemonState {
     const pokemons = new Array<{ distance: number; x: number; y: number }>()
 
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
-      if (value !== undefined && value.team != pokemon.team) {
+      if (value !== undefined && value.team !== pokemon.team && value.isTargettable) {
         const distance = board.distance(
           pokemon.positionX,
           pokemon.positionY,
@@ -655,7 +649,7 @@ export default class PokemonState {
     }>()
 
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
-      if (value !== undefined && value.id != pokemon.id) {
+      if (value !== undefined && value.id !== pokemon.id && value.isTargettable) {
         const candidateDistance = board.distance(
           pokemon.positionX,
           pokemon.positionY,

@@ -16,6 +16,7 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") confusion = false
   @type("boolean") wound = false
   @type("boolean") resurection = false
+  @type("boolean") resurecting = false
   @type("boolean") paralysis = false
   @type("boolean") armorReduction = false
   @type("boolean") runeProtect = false
@@ -47,6 +48,7 @@ export default class Status extends Schema implements IStatus {
   synchroCooldown = 3000
   synchro = false
   tree = false
+  resurectingCooldown = 0
 
   clearNegativeStatus() {
     this.burnCooldown = 0
@@ -122,6 +124,10 @@ export default class Status extends Schema implements IStatus {
 
     if (this.synchro) {
       this.updateSynchro(dt, board, pokemon)
+    }
+
+    if (this.resurecting) {
+      this.updateResurecting(dt, pokemon)
     }
   }
 
@@ -452,6 +458,24 @@ export default class Status extends Schema implements IStatus {
       this.spikeArmor = false
     } else {
       this.spikeArmorCooldown = this.spikeArmorCooldown - dt
+    }
+  }
+
+  triggerResurection(pokemon: PokemonEntity){
+    this.resurection = false
+    this.resurecting = true
+    this.resurectingCooldown = 2000
+    pokemon.status.clearNegativeStatus()
+  }
+
+  updateResurecting(dt: number, pokemon: PokemonEntity){
+    if (this.resurectingCooldown - dt <= 0) {
+      this.resurecting = false
+      pokemon.resetStats()
+      pokemon.toMovingState()
+      pokemon.cooldown = 0
+    } else {
+      this.resurectingCooldown -= dt
     }
   }
 }

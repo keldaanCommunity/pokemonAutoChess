@@ -107,7 +107,7 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
   [Item.WIDE_LENS]: `The holder gains +2 ${Stat.RANGE}`,
   [Item.RAZOR_CLAW]: `The holder gains +55% ${Stat.CRIT_CHANCE}`,
   [Item.FLUFFY_TAIL]: `Holder is immune to all status alterations`,
-  [Item.ORAN_BERRY]: `+130 ${Stat.SHIELD} when combat begins`,
+  [Item.ORAN_BERRY]: `+150 ${Stat.SHIELD} when combat begins`,
   [Item.SHINY_CHARM]: `Upon attack, 25% chance to trigger ${Status.PROTECT} for 1 second`,
   [Item.FOCUS_BAND]: `When combat begins, the holder and adjacent allies in the same row gain +30% ${Stat.ATK_SPEED}`,
   [Item.FLAME_ORB]: `Holder is burned and cannot heal during the fight, but increase its ${Stat.ATK} by 100%`,

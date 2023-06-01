@@ -18,7 +18,7 @@ import {
 import { Ability } from "../../../../types/enum/Ability"
 import { Item } from "../../../../types/enum/Item"
 import Count from "../../../../models/colyseus-models/count"
-import { AnimationConfig, AnimationType } from "../../../../types/Animation"
+import { AnimationConfig } from "../../../../types/Animation"
 import { Pkm } from "../../../../types/enum/Pokemon"
 
 export default class BattleManager {
@@ -176,6 +176,10 @@ export default class BattleManager {
               pkm.addResurection()
             } else {
               pkm.removeResurection()
+            }
+          } else if (field == "resurecting") {
+            if (pokemon.status.resurecting) {
+              pkm.resurectAnimation()
             }
           } else if (field == "paralysis") {
             if (pokemon.status.paralysis) {
