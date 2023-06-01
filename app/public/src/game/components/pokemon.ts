@@ -350,7 +350,9 @@ export default class Pokemon extends DraggableObject {
   updateCircleTimer(timer: number) {
     if (timer <= 0) {
       this.circleTimer.destroy()
-      playSound(SOUNDS.CAROUSEL_UNLOCK)
+      if(this.isCurrentPlayerAvatar){
+        playSound(SOUNDS.CAROUSEL_UNLOCK)
+      }
     } else {
       this.circleTimer.clear()
       this.circleTimer.lineStyle(

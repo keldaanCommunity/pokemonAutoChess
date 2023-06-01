@@ -565,7 +565,7 @@ import { pickRandomIn } from "../utils/random"
 import { logger } from "../utils/logger"
 
 export default class PokemonFactory {
-  static getNeutralPokemonsByLevelStage(level: number): MapSchema<Pokemon> {
+  static getNeutralPokemonsByLevelStage(level: number, shinyEncounter: boolean): MapSchema<Pokemon> {
     const pokemons = new MapSchema<Pokemon>()
     switch (level) {
       case 1: {
@@ -617,7 +617,8 @@ export default class PokemonFactory {
       }
 
       case 10: {
-        const gyarados = PokemonFactory.createPokemonFromName(Pkm.GYARADOS)
+        const config = shinyEncounter ? { selectedShiny: true, selectedEmotion: Emotion.ANGRY } : undefined
+        const gyarados = PokemonFactory.createPokemonFromName(Pkm.GYARADOS, config)
         gyarados.positionX = 4
         gyarados.positionY = 2
         pokemons.set(gyarados.id, gyarados)
@@ -761,7 +762,7 @@ export default class PokemonFactory {
     }
   }
 
-  static createPokemonFromName(name: Pkm, config?: IPokemonConfig): Pokemon {
+  static createPokemonFromName(name: Pkm, config?: { selectedShiny?: boolean, selectedEmotion?: Emotion }): Pokemon {
     const s = config && config.selectedShiny ? true : false
     const e =
       config && config.selectedEmotion ? config.selectedEmotion : Emotion.NORMAL

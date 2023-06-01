@@ -40,6 +40,7 @@ export default class GameState extends Schema {
   startTime: number
   endTime: number | undefined = undefined
   preparationId: string
+  shinyEncounter = false
 
   constructor(preparationId: string, name: string, noElo: boolean) {
     super()
