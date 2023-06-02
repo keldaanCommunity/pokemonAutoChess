@@ -11006,7 +11006,9 @@ export class Dreepy extends Pokemon {
       Ability.DRAGON_DARTS,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.HATCH
     )
   }
 }
@@ -11029,7 +11031,9 @@ export class Drakloak extends Pokemon {
       Ability.DRAGON_DARTS,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.HATCH
     )
   }
 }
@@ -11075,7 +11079,9 @@ export class Snivy extends Pokemon {
       Ability.VENOSHOCK,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.HATCH
     )
   }
 }
@@ -11098,7 +11104,9 @@ export class Servine extends Pokemon {
       Ability.VENOSHOCK,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.HATCH
     )
   }
 }
@@ -11144,7 +11152,9 @@ export class Scorbunny extends Pokemon {
       Ability.BLAZE_KICK,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.HATCH
     )
   }
 }
@@ -11167,7 +11177,9 @@ export class Raboot extends Pokemon {
       Ability.BLAZE_KICK,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.HATCH
     )
   }
 }
@@ -11213,7 +11225,9 @@ export class AlolanGeodude extends Pokemon {
       Ability.DISCHARGE,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.HATCH
     )
   }
 }
@@ -11236,7 +11250,9 @@ export class AlolanGraveler extends Pokemon {
       Ability.DISCHARGE,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.HATCH
     )
   }
 }
@@ -11282,7 +11298,9 @@ export class Popplio extends Pokemon {
       Ability.SPARKLING_ARIA,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.HATCH
     )
   }
 }
@@ -11305,7 +11323,9 @@ export class Brionne extends Pokemon {
       Ability.SPARKLING_ARIA,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.HATCH
     )
   }
 }
@@ -11351,7 +11371,9 @@ export class Gothita extends Pokemon {
       Ability.FAKE_TEARS,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.HATCH
     )
   }
 }
@@ -11374,7 +11396,9 @@ export class Gothorita extends Pokemon {
       Ability.FAKE_TEARS,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.HATCH
     )
   }
 }
@@ -12207,7 +12231,9 @@ export class Rowlet extends Pokemon {
       Ability.SPIRIT_SHACKLE,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.HATCH
     )
   }
 }
@@ -12230,7 +12256,9 @@ export class Dartix extends Pokemon {
       Ability.SPIRIT_SHACKLE,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.HATCH
     )
   }
 }
@@ -12564,7 +12592,9 @@ export class Froakie extends Pokemon {
       Ability.WATER_SHURIKEN,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.HATCH
     )
   }
 }
@@ -12587,7 +12617,9 @@ export class Frogadier extends Pokemon {
       Ability.WATER_SHURIKEN,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.HATCH
     )
   }
 }
@@ -12874,7 +12906,9 @@ export class Tepig extends Pokemon {
       Ability.IRON_TAIL,
       shiny,
       emotion,
-      true
+      false,
+      false,
+      Passive.HATCH
     )
   }
 }
@@ -12897,7 +12931,9 @@ export class Pignite extends Pokemon {
       Ability.IRON_TAIL,
       shiny,
       emotion,
-      true
+      false,
+      false,
+      Passive.HATCH
     )
   }
 }
@@ -12920,7 +12956,8 @@ export class Emboar extends Pokemon {
       Ability.IRON_TAIL,
       shiny,
       emotion,
-      true
+      true,
+      false
     )
   }
 }
