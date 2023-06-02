@@ -54,7 +54,7 @@ import GameContainer from "../game/game-container"
 import { Navigate } from "react-router-dom"
 import GameDpsMeter from "./component/game/game-dps-meter"
 import GameItemsProposition from "./component/game/game-items-proposition"
-import GamePlayerInformations from "./component/game/game-player-informations"
+import GameStageInfo from "./component/game/game-stage-info"
 import GamePlayers from "./component/game/game-players"
 import GameShop from "./component/game/game-shop"
 import GameSynergies from "./component/game/game-synergies"
@@ -570,7 +570,7 @@ export default function Game() {
             leave={leave}
           />
           {!spectate && <GameShop />}
-          <GamePlayerInformations />
+          <GameStageInfo />
           <GamePlayers click={(id: string) => playerClick(id)} />
           <GameSynergies />
           <GameItemsProposition />

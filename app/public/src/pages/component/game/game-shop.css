@@ -93,11 +93,12 @@
 
 .game-pokemons-store {
   display: flex;
+  flex: 1;
   list-style: none;
   gap: 5px;
   margin: 0;
   padding: 0;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .game-experience {
@@ -144,4 +145,75 @@
 .game-experience .progress-bar > .nes-progress {
   overflow: hidden;
   height: 100%;
+}
+
+#game-money-info {
+  position: absolute;
+  bottom: 100%;
+  left:7vw;
+  width: 5vw;
+  background-image: url("assets/ui/money-bg.png");
+  background-size: 70px 40px;
+}
+
+#game-life-info {
+  position: absolute;
+  bottom: 100%;
+  left: 1vw;
+  width: 5vw;
+  background-image: url("assets/ui/heart-bg.png");
+  background-size: 48px 38px;
+}
+
+#game-team-info {
+  position: absolute;
+  bottom: 100%;
+  right: 1vw;
+  width: 5vw;
+  background-image: url("assets/ui/pokeball-bg.png");
+  background-size: 70px 40px;
+}
+
+#toast-life .toast-player-damage {
+  color: red;
+  font-weight: bold;
+}
+
+#toast-money .toast-player-income {
+  color: white;
+  font-weight: bold;
+}
+
+#toast-life img,
+#toast-money img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  display: inline-block;
+}
+
+.game-shop .information {
+  background: #61738a;
+  padding: 0.001px !important;
+  display: flex;
+  justify-content: end;
+  height: 2em;
+  background-size: cover;
+  color: white;
+  border-radius: 12px 12px 0 0;
+}
+
+.game-shop .information > div {
+  background: #54596b;
+  display: flex;
+  align-items: center;
+  border-radius: 0 7px 0 0;
+  height: 100%;
+  width: 3.2vw;
+  padding: 0 0.5em;
+}
+
+.game-shop .information .icon {
+  width: 1vw;
+  height: 1vw;
 }

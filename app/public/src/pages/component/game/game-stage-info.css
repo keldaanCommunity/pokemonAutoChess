@@ -1,0 +1,31 @@
+#game-stage-info {
+  position: absolute;
+  top: 0.5%;
+  left: 30%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 40%;
+  height: 8%;
+  color: white;
+  border-radius: 12px 12px 0 0;
+}
+
+#game-stage-infor .stage-information {
+  width: 4vw;
+  text-align: center;
+}
+
+#game-stage-info .stage-information p {
+  margin: 0;
+}
+
+#game-stage-info .player-information {
+  background-color: #54596b;
+  padding: 5px;
+  display: flex;
+  height: 100%;
+  gap: 5px;
+}
+
+
