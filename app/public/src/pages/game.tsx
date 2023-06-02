@@ -80,10 +80,7 @@ import { getRankLabel } from "../../../types/strings/Strings"
 import GameScene from "../game/scenes/game-scene"
 import { toast } from "react-toastify"
 import { logger } from "../../../utils/logger"
-import {
-  MAX_PLAYERS_PER_LOBBY,
-  RequiredStageLevelForXpElligibility
-} from "../../../types/Config"
+import { RequiredStageLevelForXpElligibility } from "../../../types/Config"
 
 let gameContainer: GameContainer
 
