@@ -12,12 +12,18 @@ import {
 } from "../../../../../types/Config"
 import "./game-stage-info.css"
 
-export default function GameStageInfo() {  
+export default function GameStageInfo() {
   const name = useAppSelector((state) => state.game.currentPlayerName)
   const title = useAppSelector((state) => state.game.currentPlayerTitle)
   const avatar = useAppSelector((state) => state.game.currentPlayerAvatar)
-  
+
   const stageLevel = useAppSelector((state) => state.game.stageLevel)
+  const opponentName = useAppSelector(
+    (state) => state.game.currentPlayerOpponentName
+  )
+  const opponentAvatar = useAppSelector(
+    (state) => state.game.currentPlayerOpponentAvatar
+  )
 
   return (
     <>
@@ -49,19 +55,28 @@ export default function GameStageInfo() {
           <p>Stage {stageLevel}</p>
         </div>
 
-        
-               
-        <div className="nes-container player-information">
-          <img src={getAvatarSrc(avatar)} className="pokemon-portrait" />
-          <p className="player-title" style={{ margin: "0px" }}>
-            {TitleName[title]}
-          </p>
-          <p style={{ marginLeft: "5px", color: "white", textAlign: "center" }}>
-            {name}
-          </p>
+        <div className="players-information">
+          <div className="nes-container player-information">
+            <img src={getAvatarSrc(avatar)} className="pokemon-portrait" />
+            <p className="player-title">{TitleName[title]}</p>
+            <p className="player-name">{name}</p>
+          </div>
+          {opponentName && (
+            <>
+              <span>vs</span>
+              <div className="nes-container player-information">
+                <img
+                  src={getAvatarSrc(opponentAvatar)}
+                  className="pokemon-portrait"
+                />
+                <p className="player-title">{TitleName[title]}</p>
+                <p className="player-name">{opponentName}</p>
+              </div>
+            </>
+          )}
         </div>
       </div>
-      <TimerBar />      
+      <TimerBar />
     </>
   )
 }

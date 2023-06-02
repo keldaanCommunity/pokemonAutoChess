@@ -20,6 +20,13 @@
   margin: 0;
 }
 
+#game-stage-info .players-information {
+  display: flex;
+  flex: 0;
+  height: 100%;
+  gap: 0.5em;
+}
+
 #game-stage-info .player-information {
   background-color: #54596b;
   padding: 5px;
@@ -33,4 +40,14 @@
   height: 40px;
 }
 
+#game-stage-info .player-information .player-title {
+  white-space: nowrap;
+  margin: 0;
+}
+
+#game-stage-info .player-information .player-name {
+  margin-left: 0.25em;
+  color: white;
+  text-align: center;
+}
 
