@@ -18,7 +18,6 @@ export default function GameStageInfo() {
   const avatar = useAppSelector((state) => state.game.currentPlayerAvatar)
   
   const stageLevel = useAppSelector((state) => state.game.stageLevel)
-  const roundTime = useAppSelector((state) => state.game.roundTime)
 
   return (
     <>
@@ -48,8 +47,9 @@ export default function GameStageInfo() {
             </p>
           </ReactTooltip>
           <p>Stage {stageLevel}</p>
-          <p>{roundTime}s</p>
-        </div>        
+        </div>
+
+        
                
         <div className="nes-container player-information">
           <img src={getAvatarSrc(avatar)} className="pokemon-portrait" />

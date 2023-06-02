@@ -48,6 +48,7 @@ export default function GamePlayer(props: {
       data-for={"detail-" + props.player.id}
     >
       <CircularProgressbarWithChildren value={props.player.life} />
+      <div className="nes-container life-text">{props.player.life}</div>
       <ReactTooltip
         id={"detail-" + props.player.id}
         className="customeTheme"

@@ -6,7 +6,7 @@
   justify-content: space-between;
   align-items: center;
   min-width: 40%;
-  height: 8%;
+  height: 5%;
   color: white;
   border-radius: 12px 12px 0 0;
 }
@@ -24,8 +24,13 @@
   background-color: #54596b;
   padding: 5px;
   display: flex;
+  align-items: center;
   height: 100%;
   gap: 5px;
+}
+
+#game-stage-info .player-information img {
+  height: 40px;
 }
 
 
