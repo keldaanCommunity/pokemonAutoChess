@@ -10,6 +10,13 @@
   color: white;
   border-radius: 12px 12px 0 0;
   padding: 1px 5px 3px 5px;
+  overflow: hidden;
+}
+
+#game-stage-info p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #game-stage-infor .stage-information {
@@ -40,14 +47,15 @@
   align-items: center;
   height: 100%;
   gap: 5px;
+  overflow: hidden;
 }
 
 #game-stage-info .player-information img {
-  height: 40px;
+  width: 1.5em;
+  height: 1.5em;
 }
 
 #game-stage-info .player-information .player-title {
-  white-space: nowrap;
   margin: 0;
 }
 
@@ -97,6 +105,6 @@
 
 .game-stage-path .stage-path img {
   display: block;
-  height: 40px;
-  width: 40px;
+  height: 1.5em;
+  width: 1.5em;
 }
