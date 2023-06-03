@@ -1258,6 +1258,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   stopFightingPhase() {
     const isPVE = this.checkForPVE()
 
+    this.state.stageLevel += 1
     this.computeAchievements()
     this.computeStreak()
     this.computeLife()
@@ -1373,8 +1374,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
 
   initializeFightingPhase() {
     this.state.phase = GamePhaseState.FIGHT
-    this.state.time = FIGHTING_PHASE_DURATION
-    this.state.stageLevel += 1
+    this.state.time = FIGHTING_PHASE_DURATION    
     this.room.setMetadata({ stageLevel: this.state.stageLevel })
     updateLobby(this.room)
     this.state.botManager.updateBots()

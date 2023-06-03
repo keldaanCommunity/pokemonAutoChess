@@ -9,6 +9,7 @@
   height: 5%;
   color: white;
   border-radius: 12px 12px 0 0;
+  padding: 1px 5px 3px 5px;
 }
 
 #game-stage-infor .stage-information {
@@ -17,18 +18,23 @@
 }
 
 #game-stage-info .stage-information p {
-  margin: 0;
+  margin: 0 0.25em;
 }
 
 #game-stage-info .players-information {
   display: flex;
-  flex: 0;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
   height: 100%;
   gap: 0.5em;
 }
 
+#game-stage-info .players-information:not(.has-opponent){
+  flex: 0;
+}
+
 #game-stage-info .player-information {
-  background-color: #54596b;
   padding: 5px;
   display: flex;
   align-items: center;
@@ -51,3 +57,33 @@
   text-align: center;
 }
 
+.game-stage-path {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.game-stage-path .stage-path {
+  background-color: #54596b;
+  border-radius: 8px;
+  border: 4px solid transparent;
+  overflow: hidden;
+}
+
+.game-stage-path .stage-path.current {
+  background-color: #109fff;
+}
+
+.game-stage-path .stage-path.victory {
+  border-color: #4aa52e;
+}
+
+.game-stage-path .stage-path.defeat {
+  border-color: #8c2022;
+}
+
+.game-stage-path .stage-path img {
+  display: block;
+  height: 40px;
+  width: 40px;
+}
