@@ -64,14 +64,27 @@
 }
 
 .game-stage-path .stage-path {
+  position: relative;
   background-color: #54596b;
   border-radius: 8px;
   border: 4px solid transparent;
-  overflow: hidden;
 }
 
 .game-stage-path .stage-path.current {
   background-color: #109fff;
+}
+
+.game-stage-path .stage-path.current::after {
+  content: "";
+  display: block;
+  height: 0;
+  width: 0;
+  position: absolute;
+  top: 100%;
+  left: 10px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid black;
 }
 
 .game-stage-path .stage-path.victory {

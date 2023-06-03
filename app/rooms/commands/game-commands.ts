@@ -1385,8 +1385,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     this.state.players.forEach((player: Player, key: string) => {
       if (player.alive) {
         if (stageIndex != -1) {
-          player.opponentName = "PVE"
+          player.opponentName = NeutralStage[stageIndex].name
           player.opponentAvatar = NeutralStage[stageIndex].avatar
+          player.opponentTitle = "PVE"
           player.simulation.initialize(
             player.board,
             PokemonFactory.getNeutralPokemonsByLevelStage(

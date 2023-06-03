@@ -616,7 +616,7 @@ export default class PokemonFactory {
         break
       }
 
-      case 10: {
+      case 9: {
         const config = shinyEncounter ? { selectedShiny: true, selectedEmotion: Emotion.ANGRY } : undefined
         const gyarados = PokemonFactory.createPokemonFromName(Pkm.GYARADOS, config)
         gyarados.positionX = 4
@@ -625,7 +625,7 @@ export default class PokemonFactory {
         break
       }
 
-      case 15: {
+      case 14: {
         const lugia = PokemonFactory.createPokemonFromName(Pkm.LUGIA)
         lugia.positionX = 4
         lugia.positionY = 2
@@ -633,7 +633,7 @@ export default class PokemonFactory {
         break
       }
 
-      case 20: {
+      case 19: {
         const giratina = PokemonFactory.createPokemonFromName(Pkm.GIRATINA)
         giratina.positionX = 4
         giratina.positionY = 2
@@ -641,7 +641,7 @@ export default class PokemonFactory {
         break
       }
 
-      case 25: {
+      case 24: {
         const zapdos = PokemonFactory.createPokemonFromName(Pkm.ZAPDOS)
         zapdos.positionX = 2
         zapdos.positionY = 2
@@ -657,7 +657,7 @@ export default class PokemonFactory {
         break
       }
 
-      case 30: {
+      case 29: {
         const dialga = PokemonFactory.createPokemonFromName(Pkm.DIALGA)
         dialga.positionX = 2
         dialga.positionY = 2
@@ -669,7 +669,7 @@ export default class PokemonFactory {
         break
       }
 
-      case 35: {
+      case 34: {
         const suicune = PokemonFactory.createPokemonFromName(Pkm.SUICUNE)
         suicune.positionX = 2
         suicune.positionY = 2
@@ -685,7 +685,7 @@ export default class PokemonFactory {
         break
       }
 
-      case 40: {
+      case 39: {
         const regice = PokemonFactory.createPokemonFromName(Pkm.REGICE)
         regice.positionX = 2
         regice.positionY = 3

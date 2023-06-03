@@ -1,6 +1,7 @@
 import React from "react"
 import Elo from "./elo"
-import { Role, TitleName } from "../../../../types"
+import { Role } from "../../../../types"
+import { TitleName } from "../../../../types/strings/Title"
 import { RoleBadge } from "./RoleBadge"
 import { getAvatarSrc } from "../../utils"
 

@@ -22,6 +22,7 @@ import {
   setStreak,
   setOpponentName,
   setOpponentAvatar,
+  setOpponentTitle,
   setLife,
   setPlayer,
   setBoardSize,
@@ -80,10 +81,7 @@ import { getRankLabel } from "../../../types/strings/Strings"
 import GameScene from "../game/scenes/game-scene"
 import { toast } from "react-toastify"
 import { logger } from "../../../utils/logger"
-import {
-  MAX_PLAYERS_PER_LOBBY,
-  RequiredStageLevelForXpElligibility
-} from "../../../types/Config"
+import { RequiredStageLevelForXpElligibility } from "../../../types/Config"
 
 let gameContainer: GameContainer
 
@@ -364,6 +362,9 @@ export default function Game() {
         })
         player.listen("opponentAvatar", (value, previousValue) => {
           dispatch(setOpponentAvatar({ id: player.id, value: value }))
+        })
+        player.listen("opponentTitle", (value, previousValue) => {
+          dispatch(setOpponentTitle({ id: player.id, value: value }))
         })
         player.listen("boardSize", (value, previousValue) => {
           dispatch(setBoardSize({ id: player.id, value: value }))

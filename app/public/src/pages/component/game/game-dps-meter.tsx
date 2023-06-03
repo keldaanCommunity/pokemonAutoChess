@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
-import CSS from "csstype"
 import GameBlueDpsMeter from "./game-blue-dps-meter"
 import GameRedDpsMeter from "./game-red-dps-meter"
 import GameBlueHealDpsMeter from "./game-blue-heal-dps-meter"

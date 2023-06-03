@@ -1,6 +1,6 @@
 import React from "react"
 import { useAppSelector } from "../../../hooks"
-import { TitleName } from "../../../../../types"
+import { TitleName } from "../../../../../types/strings/Title"
 import { getAvatarSrc } from "../../../utils"
 import { cc } from "../../utils/jsx"
 import TimerBar from "./game-timer-bar"
@@ -27,6 +27,11 @@ export default function GameStageInfo() {
   const opponentAvatar = useAppSelector(
     (state) => state.game.currentPlayerOpponentAvatar
   )
+  const opponentTitle = useAppSelector(
+    (state) => state.game.currentPlayerOpponentTitle
+  )
+
+  console.log({ opponentName, opponentTitle })
 
   return (
     <>
@@ -39,7 +44,7 @@ export default function GameStageInfo() {
             place="bottom"
           >
             <p>
-              <span className="help">PvE Stages:</span>{" "}
+              <span className="help">PVE Stages:</span>{" "}
               {NeutralStage.map((s) => s.turn).join(", ")}
             </p>
             <p>
@@ -67,7 +72,7 @@ export default function GameStageInfo() {
         >
           <div className="player-information">
             <img src={getAvatarSrc(avatar)} className="pokemon-portrait" />
-            <p className="player-title">{TitleName[title]}</p>
+            {title && <p className="player-title">{TitleName[title]}</p>}
             <p className="player-name">{name}</p>
           </div>
           {opponentName && (
@@ -78,7 +83,7 @@ export default function GameStageInfo() {
                   src={getAvatarSrc(opponentAvatar)}
                   className="pokemon-portrait"
                 />
-                <p className="player-title">{TitleName[title]}</p>
+                {opponentTitle && <p className="player-title">{opponentTitle}</p>}
                 <p className="player-name">{opponentName}</p>
               </div>
             </>
@@ -148,7 +153,7 @@ export function StagePath() {
       path.push({
         level,
         icon: getAvatarSrc(neutralStage.avatar),
-        title: record?.name ?? `PvE`,
+        title: record?.name ?? `PVE`,
         result: record?.result
       })
       if(level === stageLevel && currentLevelPathIndex === undefined){
