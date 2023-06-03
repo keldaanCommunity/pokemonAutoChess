@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { GamePhaseState } from "../../../types/enum/Game"
 import { IDps, IDpsHeal, IPlayer } from "../../../types"
-import { ArraySchema, DataChange, MapSchema } from "@colyseus/schema"
+import { ArraySchema, MapSchema } from "@colyseus/schema"
 import ExperienceManager from "../../../models/colyseus-models/experience-manager"
 import Synergies from "../../../models/colyseus-models/synergies"
 import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
@@ -35,6 +35,7 @@ interface GameStateStore {
   currentPlayerSynergies: [string, number][]
   currentPlayerOpponentName: string
   currentPlayerOpponentAvatar: string
+  currentPlayerOpponentTitle: string
   currentPlayerBoardSize: number
   currentPlayerLife: number
   currentPlayerMoney: number
@@ -71,6 +72,7 @@ const initialState: GameStateStore = {
   currentPlayerSynergies: new Array<[Synergy, number]>(),
   currentPlayerOpponentName: "",
   currentPlayerOpponentAvatar: "0019/Normal",
+  currentPlayerOpponentTitle: "",
   currentPlayerBoardSize: 0,
   currentPlayerLife: 100,
   currentPlayerMoney: 5,
@@ -185,6 +187,14 @@ export const gameSlice = createSlice({
         state.currentPlayerOpponentAvatar = action.payload.value
       }
     },
+    setOpponentTitle: (
+      state,
+      action: PayloadAction<{ value: string; id: string }>
+    ) => {
+      if (state.currentPlayerId === action.payload.id) {
+        state.currentPlayerOpponentTitle = action.payload.value
+      }
+    },
     setBoardSize: (
       state,
       action: PayloadAction<{ value: number; id: string }>
@@ -253,6 +263,7 @@ export const gameSlice = createSlice({
       state.currentPlayerExperienceManager = action.payload.experienceManager
       state.currentPlayerOpponentName = action.payload.opponentName
       state.currentPlayerOpponentAvatar = action.payload.opponentAvatar
+      state.currentPlayerOpponentTitle = action.payload.opponentTitle
       state.currentPlayerLife = action.payload.life
       state.currentPlayerSynergies = Array.from(action.payload.synergies)
       state.currentPlayerAvatar = action.payload.avatar
@@ -464,6 +475,7 @@ export const {
   setBoardSize,
   setOpponentName,
   setOpponentAvatar,
+  setOpponentTitle,
   setSynergies,
   setRoundTime,
   setAfterGameId,

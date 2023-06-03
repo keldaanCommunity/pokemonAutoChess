@@ -1,6 +1,6 @@
 import React from "react"
 import { ILobbyUser } from "../../../../../models/colyseus-models/lobby-user"
-import { TitleName } from "../../../../../types"
+import { TitleName } from "../../../../../types/strings/Title"
 import { getAvatarSrc } from "../../../utils"
 import Elo from "../elo"
 import { RoleBadge } from "../RoleBadge"

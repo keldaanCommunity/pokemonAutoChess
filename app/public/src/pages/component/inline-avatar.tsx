@@ -1,5 +1,6 @@
 import React from "react"
-import { Role, TitleName } from "../../../../types"
+import { Role } from "../../../../types"
+import { TitleName } from "../../../../types/strings/Title"
 import { getAvatarSrc } from "../../utils"
 import { RoleBadge } from "./RoleBadge"
 
