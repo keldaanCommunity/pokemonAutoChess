@@ -351,6 +351,10 @@ export const HatchList = new Array<Pkm>(
 
 export const MAX_PLAYERS_PER_LOBBY = 8
 
+export const DEFAULT_ATK_SPEED = 0.75
+export const DEFAULT_CRIT_CHANCE = 10
+export const DEFAULT_CRIT_DAMAGE = 2
+
 export const StageDuration: Record<number | "DEFAULT", number> = {
   0: 15,
   10: 50,

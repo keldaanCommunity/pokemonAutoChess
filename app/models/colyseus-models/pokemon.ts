@@ -4,7 +4,7 @@
 import { Schema, type, ArraySchema, SetSchema } from "@colyseus/schema"
 import { nanoid } from "nanoid"
 import { Emotion, IPokemon, AttackSprite } from "../../types"
-import { EvolutionTime, PkmCost } from "../../types/Config"
+import { DEFAULT_ATK_SPEED, EvolutionTime, PkmCost } from "../../types/Config"
 import { Item } from "../../types/enum/Item"
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Rarity, AttackType, PokemonActionState } from "../../types/enum/Game"
@@ -23,7 +23,7 @@ export class Pokemon extends Schema implements IPokemon {
   @type("int8") positionY = -1
   @type("uint8") cost: number
   @type("string") attackSprite: AttackSprite
-  @type("float32") atkSpeed = 0.75
+  @type("float32") atkSpeed = DEFAULT_ATK_SPEED
   @type("uint8") def: number
   @type("uint8") speDef: number
   @type("uint8") attackType: AttackType

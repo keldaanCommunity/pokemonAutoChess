@@ -24,6 +24,8 @@
 # Bugfix
 
 - Bot Builder creation: remove the "bench" line
+- Spectral Thief ability now correctly steals the target's stats
+- Fixed pokemons with missing animations not being highlighted in shop
 
 # UI
 - Lots of pokemons animations did change. Based on the collaborative work of many people (thanks to RedPandersBear)
