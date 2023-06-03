@@ -153,7 +153,7 @@ export function StagePath() {
       path.push({
         level,
         icon: getAvatarSrc(neutralStage.avatar),
-        title: record?.name ?? `Wild`,
+        title: record?.name ?? neutralStage.name,
         result: record?.result
       })
       if(level === stageLevel && currentLevelPathIndex === undefined){
@@ -163,7 +163,7 @@ export function StagePath() {
       path.push({
         level,
         icon: record?.avatar ? getAvatarSrc(record.avatar) : "/assets/ui/battle.svg",
-        title: record?.name ?? `Battle`,
+        title: record?.name ?? `Fight`,
         result: record?.result
       })
       if(level === stageLevel && currentLevelPathIndex === undefined){
@@ -198,7 +198,7 @@ export function StagePath() {
             effect="solid"
             place="bottom"
           >
-            {step.title}
+            {step.title} {step.name}
           </ReactTooltip>
           <img src={step.icon}></img>
         </div>
