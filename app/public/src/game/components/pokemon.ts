@@ -133,9 +133,6 @@ export default class Pokemon extends DraggableObject {
     this.height = 0
     this.width = 0
     this.index = pokemon.index
-    if (!scene.textures.exists(this.index)) {
-      this.index = "0000"
-    }
     this.name = pokemon.name
     this.rarity = pokemon.rarity
     this.id = pokemon.id
@@ -189,11 +186,13 @@ export default class Pokemon extends DraggableObject {
         this.circle.setStrokeStyle(1, 0xffffff, 0.5)
       }
     }
+
+    let textureIndex = scene.textures.exists(this.index) ? this.index : "0000"
     this.sprite = new GameObjects.Sprite(
       scene,
       0,
       0,
-      this.index,
+      textureIndex,
       `${PokemonTint.NORMAL}/${PokemonActionState.IDLE}/${SpriteType.ANIM}/${Orientation.DOWN}/0000`
     )
     this.sprite.setDepth(3)
@@ -219,7 +218,7 @@ export default class Pokemon extends DraggableObject {
       this.id,
       playerId
     )
-    this.shadow = new GameObjects.Sprite(scene, 0, 5, this.index)
+    this.shadow = new GameObjects.Sprite(scene, 0, 5, textureIndex)
     //this.shadow.setOrigin(0,0);
     this.shadow.setScale(2, 2)
     scene.add.existing(this.shadow)
