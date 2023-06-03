@@ -193,18 +193,16 @@
 }
 
 .game-shop .information {
-  background: #61738a;
   padding: 0.001px !important;
   display: flex;
   justify-content: end;
   height: 2em;
-  background-size: cover;
   color: white;
   border-radius: 12px 12px 0 0;
 }
 
 .game-shop .information > div {
-  background: #54596b;
+  background: #61738a;
   display: flex;
   align-items: center;
   border-radius: 0 7px 0 0;

@@ -1387,7 +1387,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         if (stageIndex != -1) {
           player.opponentName = NeutralStage[stageIndex].name
           player.opponentAvatar = NeutralStage[stageIndex].avatar
-          player.opponentTitle = "PVE"
+          player.opponentTitle = "Wild"
           player.simulation.initialize(
             player.board,
             PokemonFactory.getNeutralPokemonsByLevelStage(
