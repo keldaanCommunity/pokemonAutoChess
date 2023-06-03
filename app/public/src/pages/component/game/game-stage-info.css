@@ -82,17 +82,17 @@
   background-color: #109fff;
 }
 
-.game-stage-path .stage-path.current::after {
+.game-stage-path .stage-path.current::before {
   content: "";
   display: block;
   height: 0;
   width: 0;
   position: absolute;
-  top: 100%;
+  bottom: 100%;
   left: 10px;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-bottom: 10px solid black;
+  border-top: 10px solid black;
 }
 
 .game-stage-path .stage-path.victory {

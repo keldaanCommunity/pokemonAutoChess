@@ -153,7 +153,7 @@ export function StagePath() {
       path.push({
         level,
         icon: getAvatarSrc(neutralStage.avatar),
-        title: record?.name ?? `PVE`,
+        title: record?.name ?? `Wild`,
         result: record?.result
       })
       if(level === stageLevel && currentLevelPathIndex === undefined){
