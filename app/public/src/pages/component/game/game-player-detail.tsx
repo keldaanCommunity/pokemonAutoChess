@@ -53,7 +53,7 @@ export default function GamePlayerDetail(props: {
                 }}
                 src={getAvatarSrc(record.avatar)}
               />
-              <p style={{}}>{record.name.slice(0, 4)}</p>
+              <p>{record.name.slice(0, 4)}</p>
             </div>
           )
         })}

@@ -1,9 +1,29 @@
 import React from "react"
+import ReactTooltip from "react-tooltip"
 import { BattleResult } from "../../../../../types/enum/Game"
 import { useAppSelector } from "../../../hooks"
 import { Money } from "../icons/money"
 
-export default function GameMoneyDetail() {
+export function GameMoneyInfo() {
+  const money = useAppSelector((state) => state.game.currentPlayerMoney)
+  return (
+    <div id="game-money-info" className="nes-container money information">
+      <div data-tip data-for="detail-money">
+        <ReactTooltip
+          id="detail-money"
+          className="customeTheme"
+          effect="solid"
+          place="top"
+        >
+          <GameMoneyDetail />
+        </ReactTooltip>
+        <Money value={money} />
+      </div>
+    </div>
+  )
+}
+
+export function GameMoneyDetail() {
   const streak = useAppSelector((state) => state.game.streak)
   const currentPlayer = useAppSelector((state) =>
     state.game.players.find((p) => p.id === state.game.currentPlayerId)

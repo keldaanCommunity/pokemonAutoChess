@@ -47,3 +47,18 @@
 .game-player.dead {
   filter: grayscale(1) brightness(0.5);
 }
+
+.game-player .life-text {
+  margin: -0.2em auto;
+  z-index: -1;
+  text-align: center;
+  color: white;
+  padding: 0;
+  line-height: 1em;
+  transition: margin 100ms ease-out;
+  width: 2.5em
+}
+
+.game-player.spectated .life-text {
+  margin-top: calc(-0.2em + 0.65vh);
+}

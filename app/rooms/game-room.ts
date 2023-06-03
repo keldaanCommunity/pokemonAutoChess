@@ -24,7 +24,6 @@ import {
 } from "./commands/game-commands"
 import {
   ExpPlace,
-  MAX_PLAYERS_PER_LOBBY,
   RequiredStageLevelForXpElligibility
 } from "../types/Config"
 import { Item, BasicItems } from "../types/enum/Item"
@@ -43,6 +42,7 @@ import {
   IPokemon,
   Transfer
 } from "../types"
+import{ TitleName } from "../types/strings/Title"
 import { Pkm, PkmFamily, PkmIndex } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { Pokemon } from "../models/colyseus-models/pokemon"
@@ -663,6 +663,7 @@ export default class GameRoom extends Room<GameState> {
           player.opponents.set(id, this.state.stageLevel)
           player.opponentName = opponent.name
           player.opponentAvatar = opponent.avatar
+          player.opponentTitle = TitleName[opponent.title]
           return id
         }
       }

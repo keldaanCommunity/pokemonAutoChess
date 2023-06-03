@@ -22,6 +22,7 @@ import {
   setStreak,
   setOpponentName,
   setOpponentAvatar,
+  setOpponentTitle,
   setLife,
   setPlayer,
   setBoardSize,
@@ -54,7 +55,7 @@ import GameContainer from "../game/game-container"
 import { Navigate } from "react-router-dom"
 import GameDpsMeter from "./component/game/game-dps-meter"
 import GameItemsProposition from "./component/game/game-items-proposition"
-import GamePlayerInformations from "./component/game/game-player-informations"
+import GameStageInfo from "./component/game/game-stage-info"
 import GamePlayers from "./component/game/game-players"
 import GameShop from "./component/game/game-shop"
 import GameSynergies from "./component/game/game-synergies"
@@ -362,6 +363,9 @@ export default function Game() {
         player.listen("opponentAvatar", (value, previousValue) => {
           dispatch(setOpponentAvatar({ id: player.id, value: value }))
         })
+        player.listen("opponentTitle", (value, previousValue) => {
+          dispatch(setOpponentTitle({ id: player.id, value: value }))
+        })
         player.listen("boardSize", (value, previousValue) => {
           dispatch(setBoardSize({ id: player.id, value: value }))
         })
@@ -567,7 +571,7 @@ export default function Game() {
             leave={leave}
           />
           {!spectate && <GameShop />}
-          <GamePlayerInformations />
+          <GameStageInfo />
           <GamePlayers click={(id: string) => playerClick(id)} />
           <GameSynergies />
           <GameItemsProposition />

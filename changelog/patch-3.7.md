@@ -26,8 +26,8 @@
 - Bot Builder creation: remove the "bench" line
 
 # UI
-
 - Lots of pokemons animations did change. Based on the collaborative work of many people (thanks to RedPandersBear)
+- HUD has been redesigned. You now have an overview of the past stages and the stages to come.
 - Add Game History and User ID in player Profile menu
 - Passive abilities are now indicated separately on pokemon tooltips
 - Pokemon tooltips are now displayed in the wiki
@@ -35,13 +35,14 @@
 - Resurection now has an animation and a 2 seconds delay before the pokemon is revived
 
 # Misc
-
-- Replace Icy rock with ice stone
-- Add the dentist title (Own the angry Arbok)
 - Lobbys don't need 8 players any more to be elligible for ELO, but need at least 2 human players
 - Bots are no longer taken into account for ELO gain/loss calculations
 - ELO elligibility is now indicated on room preparation screen
+- Replace Icy rock with ice stone
+- Add the dentist title (Own the angry Arbok)
 - Game ID displayed in player profile
+- First Carousel round has been moved to stage 4
+- Next stage now starts at preparation phase instead of battle phase. Consequently, all PvE rounds have been moved by 1.
 - Neutral and Summon categories have been merged into one "Special" category
 - You can now have a chance to find a shiny Gyarados at stage 10. It gives two components instead of one.
 - KeldaanInteractive is now KeldaanCommunity

@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
-import { Title, TitleDescription, TitleName } from "../../../../../types"
+import { Title } from "../../../../../types"
+import { TitleName, TitleDescription } from "../../../../../types/strings/Title"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import {
   changeAvatar,
