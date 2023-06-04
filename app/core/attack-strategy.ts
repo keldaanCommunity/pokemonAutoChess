@@ -1,6 +1,6 @@
 import { Item } from "../types/enum/Item"
 import { Effect } from "../types/enum/Effect"
-import { AttackType, Climate, Rarity } from "../types/enum/Game"
+import { AttackType, Weather, Rarity } from "../types/enum/Game"
 import Board from "./board"
 import PokemonEntity from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
@@ -4012,7 +4012,7 @@ export class GrowthStrategy extends AttackStrategy {
     const attackBuff = Math.floor(10 * (1 + pokemon.ap / 100))
     pokemon.addAttack(attackBuff)
 
-    if (pokemon.simulation.climate === Climate.SUN) {
+    if (pokemon.simulation.weather === Weather.SUN) {
       pokemon.addAttack(attackBuff) // grows twice as fast if sunny weather
     }
   }

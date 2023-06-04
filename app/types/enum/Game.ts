@@ -70,7 +70,7 @@ export enum SpriteType {
   SHADOW = "Shadow"
 }
 
-export enum Climate {
+export enum Weather {
   NEUTRAL = "NEUTRAL",
   RAIN = "RAIN",
   SUN = "SUN",

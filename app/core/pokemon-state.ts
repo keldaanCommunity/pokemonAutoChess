@@ -433,7 +433,7 @@ export default class PokemonState {
     return { death, takenDamage }
   }
 
-  update(pokemon: PokemonEntity, dt: number, board: Board, climate: string) {
+  update(pokemon: PokemonEntity, dt: number, board: Board, weather: string) {
     if(pokemon.status.resurecting &&
       pokemon.action !== PokemonActionState.HURT
     ){

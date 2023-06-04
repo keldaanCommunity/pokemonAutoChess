@@ -30,7 +30,7 @@ import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
 import { getPortraitSrc } from "../utils"
 import { IPokemonRecord } from "../../../models/colyseus-models/game-record"
 import { Synergy } from "../../../types/enum/Synergy"
-import { AttackType, Climate, HealType } from "../../../types/enum/Game"
+import { AttackType, Weather, HealType } from "../../../types/enum/Game"
 import store from "../stores"
 import { logger } from "../../../utils/logger"
 import { PokemonAvatar } from "../../../models/colyseus-models/pokemon-avatar"
@@ -213,13 +213,13 @@ class GameContainer {
       this.handleItemRemove(player, value)
     })
 
-    player.simulation.listen("climate", (value, previousValue) => {
+    player.simulation.listen("weather", (value, previousValue) => {
       if (
         this.game != null &&
         player.id == this.uid &&
         this.game.scene.getScene("gameScene") != null
       ) {
-        this.handleClimateChange(player, value)
+        this.handleWeatherChange(player, value)
       }
     })
 
@@ -594,7 +594,7 @@ class GameContainer {
     }
   }
 
-  handleClimateChange(player: Player, value: Climate) {
+  handleWeatherChange(player: Player, value: Weather) {
     if (
       this.game != null &&
       player.id == this.uid &&
@@ -603,23 +603,23 @@ class GameContainer {
       const g = <GameScene>this.game.scene.getScene("gameScene")
       if (g.weatherManager) {
         switch (value) {
-          case Climate.RAIN:
+          case Weather.RAIN:
             g.weatherManager.addRain()
             break
 
-          case Climate.SUN:
+          case Weather.SUN:
             g.weatherManager.addSun()
             break
 
-          case Climate.SANDSTORM:
+          case Weather.SANDSTORM:
             g.weatherManager.addSandstorm()
             break
 
-          case Climate.SNOW:
+          case Weather.SNOW:
             g.weatherManager.addSnow()
             break
 
-          case Climate.NEUTRAL:
+          case Weather.NEUTRAL:
             g.weatherManager.clearWeather()
             break
 

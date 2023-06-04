@@ -53,7 +53,7 @@ import { Title, Role } from "../types"
 import PRECOMPUTED_TYPE_POKEMONS from "../models/precomputed/type-pokemons.json"
 import BannedUser from "../models/mongo-models/banned-user"
 import { pickRandomIn, shuffleArray } from "../utils/random"
-import { Climate, Rarity } from "../types/enum/Game"
+import { Weather, Rarity } from "../types/enum/Game"
 import { FilterQuery } from "mongoose"
 import { MiniGame } from "../core/matter/mini-game"
 import { logger } from "../utils/logger"
@@ -915,13 +915,13 @@ export default class GameRoom extends Room<GameState> {
     return size
   }
 
-  updateCastform(weather: Climate) {
+  updateCastform(weather: Weather) {
     let newForm: Pkm = Pkm.CASTFORM
-    if (weather === Climate.SNOW) {
+    if (weather === Weather.SNOW) {
       newForm = Pkm.CASTFORM_HAIL
-    } else if (weather === Climate.RAIN) {
+    } else if (weather === Weather.RAIN) {
       newForm = Pkm.CASTFORM_RAIN
-    } else if (weather === Climate.SUN) {
+    } else if (weather === Weather.SUN) {
       newForm = Pkm.CASTFORM_SUN
     }
 

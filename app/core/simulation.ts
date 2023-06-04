@@ -6,7 +6,7 @@ import PokemonFactory from "../models/pokemon-factory"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { Item } from "../types/enum/Item"
 import { Effect } from "../types/enum/Effect"
-import { Climate, PokemonActionState, Stat, Team } from "../types/enum/Game"
+import { Weather, PokemonActionState, Stat, Team } from "../types/enum/Game"
 import Dps from "./dps"
 import DpsHeal from "./dps-heal"
 import ItemFactory from "../models/item-factory"
@@ -19,7 +19,7 @@ import { pickRandomIn } from "../utils/random"
 import { Passive } from "../types/enum/Passive"
 
 export default class Simulation extends Schema implements ISimulation {
-  @type("string") climate: Climate = Climate.NEUTRAL
+  @type("string") weather: Weather = Weather.NEUTRAL
   @type({ map: PokemonEntity }) blueTeam = new MapSchema<IPokemonEntity>()
   @type({ map: PokemonEntity }) redTeam = new MapSchema<IPokemonEntity>()
   @type({ map: Dps }) blueDpsMeter = new MapSchema<Dps>()
@@ -72,8 +72,8 @@ export default class Simulation extends Schema implements ISimulation {
     this.redEffects = opponent?.effects?.list ?? []
     // logger.debug({ blueEffects, redEffects })
 
-    this.climate = this.getClimate(this.blueEffects, this.redEffects)
-    this.room.updateCastform(this.climate)
+    this.weather = this.getWeather(this.blueEffects, this.redEffects)
+    this.room.updateCastform(this.weather)
 
     // update effects after castform transformation
     this.blueEffects = player?.effects?.list ?? []
@@ -1012,61 +1012,61 @@ export default class Simulation extends Schema implements ISimulation {
     })
   }
 
-  getClimate(blueEffects: Effect[], redEffects: Effect[]) {
-    function getPlayerClimate(effects: Effect[]) {
+  getWeather(blueEffects: Effect[], redEffects: Effect[]) {
+    function getPlayerWeather(effects: Effect[]) {
       return effects.includes(Effect.SANDSTORM)
-        ? Climate.SANDSTORM
+        ? Weather.SANDSTORM
         : effects.includes(Effect.DESOLATE_LAND)
-        ? Climate.SUN
+        ? Weather.SUN
         : effects.includes(Effect.PRIMORDIAL_SEA)
-        ? Climate.RAIN
+        ? Weather.RAIN
         : effects.includes(Effect.DROUGHT)
-        ? Climate.SUN
+        ? Weather.SUN
         : effects.includes(Effect.DRIZZLE)
-        ? Climate.RAIN
+        ? Weather.RAIN
         : effects.includes(Effect.SHEER_COLD)
-        ? Climate.SNOW
+        ? Weather.SNOW
         : effects.includes(Effect.VICTORY_STAR)
-        ? Climate.SUN
+        ? Weather.SUN
         : effects.includes(Effect.SNOW)
-        ? Climate.SNOW
+        ? Weather.SNOW
         : effects.includes(Effect.RAIN_DANCE)
-        ? Climate.RAIN
-        : Climate.NEUTRAL
+        ? Weather.RAIN
+        : Weather.NEUTRAL
     }
 
-    const redClimate = getPlayerClimate(redEffects)
-    const blueClimate = getPlayerClimate(blueEffects)
+    const redWeather = getPlayerWeather(redEffects)
+    const blueWeather = getPlayerWeather(blueEffects)
 
-    if (redClimate !== Climate.NEUTRAL && blueClimate === Climate.NEUTRAL)
-      return redClimate
-    if (blueClimate !== Climate.NEUTRAL && redClimate === Climate.NEUTRAL)
-      return blueClimate
-    if (redClimate === blueClimate) return redClimate
+    if (redWeather !== Weather.NEUTRAL && blueWeather === Weather.NEUTRAL)
+      return redWeather
+    if (blueWeather !== Weather.NEUTRAL && redWeather === Weather.NEUTRAL)
+      return blueWeather
+    if (redWeather === blueWeather) return redWeather
 
     // sandstorm beats everything
-    if (redClimate === Climate.SANDSTORM || blueClimate === Climate.SANDSTORM)
-      return Climate.SANDSTORM
+    if (redWeather === Weather.SANDSTORM || blueWeather === Weather.SANDSTORM)
+      return Weather.SANDSTORM
 
     // snow beats rain
-    if (redClimate === Climate.SNOW && blueClimate === Climate.RAIN)
-      return Climate.SNOW
-    if (blueClimate === Climate.SNOW && redClimate === Climate.RAIN)
-      return Climate.SNOW
+    if (redWeather === Weather.SNOW && blueWeather === Weather.RAIN)
+      return Weather.SNOW
+    if (blueWeather === Weather.SNOW && redWeather === Weather.RAIN)
+      return Weather.SNOW
 
     // sunlight beats snow
-    if (redClimate === Climate.SNOW && blueClimate === Climate.SUN)
-      return Climate.SUN
-    if (blueClimate === Climate.SNOW && redClimate === Climate.SUN)
-      return Climate.SUN
+    if (redWeather === Weather.SNOW && blueWeather === Weather.SUN)
+      return Weather.SUN
+    if (blueWeather === Weather.SNOW && redWeather === Weather.SUN)
+      return Weather.SUN
 
     // rain beats sunlight
-    if (redClimate === Climate.SUN && blueClimate === Climate.RAIN)
-      return Climate.RAIN
-    if (blueClimate === Climate.SUN && redClimate === Climate.RAIN)
-      return Climate.RAIN
+    if (redWeather === Weather.SUN && blueWeather === Weather.RAIN)
+      return Weather.RAIN
+    if (blueWeather === Weather.SUN && redWeather === Weather.RAIN)
+      return Weather.RAIN
 
-    return Climate.NEUTRAL
+    return Weather.NEUTRAL
   }
 
   update(dt: number) {
@@ -1092,7 +1092,7 @@ export default class Simulation extends Schema implements ISimulation {
       if ((!pkm.life || pkm.life <= 0) && !pkm.status.resurecting && !pkm.status.resurection) {
         this.blueTeam.delete(key)
       } else {
-        pkm.update(dt, this.board, this.climate)
+        pkm.update(dt, this.board, this.weather)
       }
     })
 
@@ -1105,7 +1105,7 @@ export default class Simulation extends Schema implements ISimulation {
       if ((!pkm.life || pkm.life <= 0) && !pkm.status.resurecting && !pkm.status.resurection) {
         this.redTeam.delete(key)
       } else {
-        pkm.update(dt, this.board, this.climate)
+        pkm.update(dt, this.board, this.weather)
       }
     })
   }
@@ -1121,6 +1121,6 @@ export default class Simulation extends Schema implements ISimulation {
       this.redTeam.delete(key)
     })
 
-    this.climate = Climate.NEUTRAL
+    this.weather = Weather.NEUTRAL
   }
 }

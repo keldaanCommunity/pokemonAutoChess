@@ -6,8 +6,8 @@ import { Synergy } from "../types/enum/Synergy"
 import { logger } from "../utils/logger"
 
 export default class MovingState extends PokemonState {
-  update(pokemon: PokemonEntity, dt: number, board: Board, climate: string) {
-    super.update(pokemon, dt, board, climate)
+  update(pokemon: PokemonEntity, dt: number, board: Board, weather: string) {
+    super.update(pokemon, dt, board, weather)
     if (pokemon.cooldown <= 0) {
       pokemon.cooldown = 500
       const targetCoordinate = this.getNearestTargetCoordinate(pokemon, board)

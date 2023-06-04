@@ -377,7 +377,7 @@ export interface IExperienceManager {
 export interface ISimulation {
   room: GameRoom
   id: string
-  climate: string
+  weather: string
   blueEffects: Effect[]
   redEffects: Effect[]
   blueTeam: MapSchema<IPokemonEntity>
@@ -426,7 +426,7 @@ export interface IPokemonEntity {
   addAbilityPower(value: number): void
   addAttack(atk: number): void
   handleShield(shieldBonus: number, pokemon: IPokemonEntity)
-  update(dt: number, board: board, climate: string)
+  update(dt: number, board: board, weather: string)
   physicalDamage: number
   specialDamage: number
   trueDamage: number

@@ -147,8 +147,8 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  update(dt: number, board: Board, climate: string) {
-    this.state.update(this, dt, board, climate)
+  update(dt: number, board: Board, weather: string) {
+    this.state.update(this, dt, board, weather)
   }
 
   getAttackDelay() {
