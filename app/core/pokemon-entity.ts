@@ -20,9 +20,8 @@ import { IdleState } from "./idle-state"
 import PokemonFactory from "../models/pokemon-factory"
 import { clamp, roundTo2Digits } from "../utils/number"
 import { Passive } from "../types/enum/Passive"
+import { DEFAULT_CRIT_CHANCE, DEFAULT_CRIT_DAMAGE } from "../types/Config"
 
-export const DEFAULT_CRIT_CHANCE = 10
-export const DEFAULT_CRIT_DAMAGE = 2
 
 export default class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
@@ -32,7 +31,6 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   @type("string") index: string
   @type("string") id: string
   @type("string") orientation = Orientation.DOWNLEFT
-  @type("uint8") critChance = DEFAULT_CRIT_CHANCE
   @type("uint16") hp: number
   @type("uint8") mana = 0
   @type("uint8") maxMana: number
@@ -59,6 +57,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   @type("string") passive: Passive
   @type(Status) status: Status
   @type(Count) count: Count
+  @type("uint8") critChance = DEFAULT_CRIT_CHANCE
   @type("float32") critDamage = DEFAULT_CRIT_DAMAGE
   @type("uint16") ap = 0
   @type("uint16") healDone: number

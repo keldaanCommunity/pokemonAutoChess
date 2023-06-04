@@ -11,6 +11,8 @@ import { Pkm } from "../types/enum/Pokemon"
 import { pickRandomIn, shuffleArray } from "../utils/random"
 import { effectInLine, OrientationArray } from "../utils/orientation"
 import { logger } from "../utils/logger"
+import { DEFAULT_ATK_SPEED } from "../types/Config"
+import { min } from "../utils/number"
 
 export class AttackStrategy {
   process(
@@ -2687,7 +2689,7 @@ export class DischargeStrategy extends AttackStrategy {
         damage = 50
         break
       case 3:
-        damage = 100
+        damage = 75
         break
       default:
         break
@@ -3335,15 +3337,20 @@ export class SpectralThiefStrategy extends AttackStrategy {
       )
 
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
-      const boostAtk = Math.min(0, target.atk - target.baseAtk)
-      const boostDef = Math.min(0, target.def - target.baseSpeDef)
-      const boostSpeDef = Math.min(0, target.speDef - target.baseSpeDef)
+      const boostAtk = min(0)(target.atk - target.baseAtk)
+      const boostAtkSpeed = min(0)(target.atkSpeed - DEFAULT_ATK_SPEED)
+      const boostDef = min(0)(target.def - target.baseSpeDef)
+      const boostSpeDef = min(0)(target.speDef - target.baseSpeDef)
+      const boostAP = target.ap
+
       target.atk = target.baseAtk
       target.def = target.baseDef
       target.speDef = target.baseSpeDef
       pokemon.addAttack(boostAtk, false)
       pokemon.addDefense(boostDef, false)
       pokemon.addSpecialDefense(boostSpeDef, false)
+      pokemon.addAbilityPower(boostAP, false)
+      pokemon.addAttackSpeed(boostAtkSpeed, false)
     }
   }
 }
@@ -3714,7 +3721,7 @@ export class SpiritShackleStrategy extends AttackStrategy {
         damage = 60
         break
       case 3:
-        damage = 120
+        damage = 90
         break
       default:
         break

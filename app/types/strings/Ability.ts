@@ -1190,7 +1190,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.DISCHARGE]: {
-    eng: `Shock nearby enemies for [25,50,100,SP] ${Damage.SPECIAL} and make them ${Status.PARALYSIS} for 5 seconds`,
+    eng: `Shock nearby enemies for [25,50,75,SP] ${Damage.SPECIAL} and make them ${Status.PARALYSIS} for 5 seconds`,
     esp: `Ataque en el área de efecto que causa 40,60,80 daños especiales.`,
     fra: `Attaque AoE en cercle faisant 40,60,80 dégats spéciaux.`,
     prt: ``
@@ -1610,7 +1610,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ""
   },
   [Ability.SPIRIT_SHACKLE]: {
-    eng: `Shoots a Piercing Arrow that deals [30,60,120,SP] ${Damage.SPECIAL} in a line behind the target and applies ${Status.WOUND} for 4 seconds to everyone hit`,
+    eng: `Shoots a Piercing Arrow that deals [30,60,90,SP] ${Damage.SPECIAL} in a line behind the target and applies ${Status.WOUND} for 4 seconds to everyone hit`,
     esp: "",
     prt: "",
     fra: ""
