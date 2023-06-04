@@ -1778,9 +1778,10 @@ export default class AnimationManager {
         ? entity.orientation
         : Orientation.DOWN
 
+    let textureIndex = entity.scene.textures.exists(entity.index) ? entity.index : "0000"
     const tint = entity.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL
-    const animKey = `${entity.index}/${tint}/${animation}/${SpriteType.ANIM}/${orientation}`
-    const shadowKey = `${entity.index}/${tint}/${animation}/${SpriteType.SHADOW}/${orientation}`
+    const animKey = `${textureIndex}/${tint}/${animation}/${SpriteType.ANIM}/${orientation}`
+    const shadowKey = `${textureIndex}/${tint}/${animation}/${SpriteType.SHADOW}/${orientation}`
     entity.sprite.anims.play(animKey)
     entity.shadow.anims.play(shadowKey)
   }
