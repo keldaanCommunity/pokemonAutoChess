@@ -2689,7 +2689,7 @@ export class DischargeStrategy extends AttackStrategy {
         damage = 50
         break
       case 3:
-        damage = 100
+        damage = 75
         break
       default:
         break
@@ -3721,7 +3721,7 @@ export class SpiritShackleStrategy extends AttackStrategy {
         damage = 60
         break
       case 3:
-        damage = 120
+        damage = 90
         break
       default:
         break
