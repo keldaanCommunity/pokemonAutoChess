@@ -6,9 +6,7 @@ import Player from "../../../models/colyseus-models/player"
 import { Room } from "colyseus.js"
 import GameState from "../../../rooms/states/game-state"
 import { Pokemon } from "../../../models/colyseus-models/pokemon"
-import { DataChange } from "@colyseus/schema"
 import {
-  Emotion,
   IDragDropCombineMessage,
   IDragDropItemMessage,
   IDragDropMessage,
@@ -602,29 +600,18 @@ class GameContainer {
     ) {
       const g = <GameScene>this.game.scene.getScene("gameScene")
       if (g.weatherManager) {
-        switch (value) {
-          case Weather.RAIN:
-            g.weatherManager.addRain()
-            break
-
-          case Weather.SUN:
-            g.weatherManager.addSun()
-            break
-
-          case Weather.SANDSTORM:
-            g.weatherManager.addSandstorm()
-            break
-
-          case Weather.SNOW:
-            g.weatherManager.addSnow()
-            break
-
-          case Weather.NEUTRAL:
-            g.weatherManager.clearWeather()
-            break
-
-          default:
-            break
+        if(value === Weather.RAIN){
+          g.weatherManager.addRain()
+        } else if(value === Weather.SUN){
+          g.weatherManager.addSun()
+        } else if(value === Weather.SANDSTORM){
+          g.weatherManager.addSandstorm()
+        } else if(value === Weather.SNOW){
+          g.weatherManager.addSnow()
+        } else if(value === Weather.NIGHT){
+          g.weatherManager.addNight()
+        } else if(value === Weather.NEUTRAL){
+          g.weatherManager.clearWeather()
         }
       }
     }

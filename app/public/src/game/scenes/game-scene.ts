@@ -101,8 +101,8 @@ export default class GameScene extends Scene {
         24,
         1,
         1
-      )
-      this.map.createLayer("World", tileset, 0, 0).setScale(2, 2)
+      )!
+      this.map.createLayer("World", tileset, 0, 0)!.setScale(2, 2)
       this.initializeDragAndDrop()
       this.battleGroup = this.add.group()
       this.animationManager = new AnimationManager(this)

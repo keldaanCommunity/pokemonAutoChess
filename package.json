@@ -66,7 +66,7 @@
     "nanoid": "^3.0.0",
     "nes.css": "^2.3.0",
     "pastebin-ts": "^1.3.0",
-    "phaser": "^3.55.2",
+    "phaser": "^3.60.0",
     "phaser3-rex-plugins": "^1.1.80",
     "react": "^17.0.2",
     "react-bootstrap": "^2.7.0",
