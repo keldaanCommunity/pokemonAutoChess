@@ -69,6 +69,7 @@ class GameContainer {
       dom: {
         createContainer: true
       },
+      disableContextMenu : true,
       plugins: {
         global: [
           {
