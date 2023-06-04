@@ -31,8 +31,6 @@ export default function GameStageInfo() {
     (state) => state.game.currentPlayerOpponentTitle
   )
 
-  console.log({ opponentName, opponentTitle })
-
   return (
     <>
       <div id="game-stage-info" className="nes-container">
@@ -177,8 +175,6 @@ export function StagePath() {
   let startIndex = min(0)(currentLevelPathIndex - 3)
   path = path.slice(startIndex, startIndex + 7)
   currentLevelPathIndex -= startIndex
-
-  console.log({ path, history })
 
   return (
     <div className="game-stage-path">
