@@ -40,7 +40,7 @@ import {
 import { clamp } from "../../../../utils/number"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { playSound, SOUNDS } from "../../pages/utils/audio"
-import { DEFAULT_CRIT_CHANCE, DEFAULT_CRIT_DAMAGE } from "../../../../core/pokemon-entity"
+import { DEFAULT_CRIT_CHANCE, DEFAULT_CRIT_DAMAGE } from "../../../../types/Config"
 
 export default class Pokemon extends DraggableObject {
   evolution: Pkm
