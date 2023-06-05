@@ -59,10 +59,6 @@ export default class Bot {
         const pkm = PokemonFactory.createPokemonFromName(
           stepTeam.board[i].name,
           {
-            dust: 0,
-            emotions: new Array<Emotion>(),
-            shinyEmotions: new Array<Emotion>(),
-            id: "",
             selectedEmotion: emotion,
             selectedShiny: !!stepTeam.board[i].shiny
           }
