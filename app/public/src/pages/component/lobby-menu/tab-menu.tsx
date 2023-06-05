@@ -8,7 +8,7 @@ import BotLeaderboard from "./bot-leaderboard"
 import PlayerLeaderboard from "./player-leaderboard"
 import LevelLeaderboard from "./level-leaderboard"
 import "react-tabs/style/react-tabs.css"
-import "./tab-menu.css";
+import "./tab-menu.css"
 
 export default function TabMenu() {
   const dispatch = useAppDispatch()
@@ -19,7 +19,9 @@ export default function TabMenu() {
     <Tabs
       className="nes-container user-menu hidden-scrollable"
       selectedIndex={tabIndex}
-      onSelect={(i: number) => dispatch(setTabIndex(i))}
+      onSelect={(i: number) => {
+        dispatch(setTabIndex(i))
+      }}
     >
       <TabList>
         <Tab>Elo</Tab>

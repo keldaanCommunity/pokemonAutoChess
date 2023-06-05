@@ -8,12 +8,7 @@ import { PokemonActionState } from "../types/enum/Game"
 import { chance } from "../utils/random"
 
 export default class AttackingState extends PokemonState {
-  update(
-    pokemon: PokemonEntity,
-    dt: number,
-    board: Board,
-    climate: string
-  ) {
+  update(pokemon: PokemonEntity, dt: number, board: Board, climate: string) {
     super.update(pokemon, dt, board, climate)
 
     if (pokemon.cooldown <= 0) {
@@ -24,7 +19,7 @@ export default class AttackingState extends PokemonState {
         y: pokemon.targetY
       }
 
-      if(pokemon.status.confusion){
+      if (pokemon.status.confusion) {
         targetCoordinate = this.getTargetCoordinateWhenConfused(pokemon, board)
       } else if (
         !(
@@ -39,9 +34,9 @@ export default class AttackingState extends PokemonState {
         )
       ) {
         targetCoordinate = this.getNearestTargetCoordinate(pokemon, board)
-        if(targetCoordinate){
+        if (targetCoordinate) {
           target = board.getValue(targetCoordinate.x, targetCoordinate.y)
-        }        
+        }
       }
 
       // no target case
@@ -56,7 +51,11 @@ export default class AttackingState extends PokemonState {
         ) > pokemon.range
       ) {
         pokemon.toMovingState()
-      } else if (target && pokemon.mana >= pokemon.maxMana && !pokemon.status.silence) {
+      } else if (
+        target &&
+        pokemon.mana >= pokemon.maxMana &&
+        !pokemon.status.silence
+      ) {
         // CAST ABILITY
         let crit = false
         if (pokemon.items.has(Item.REAPER_CLOTH)) {
@@ -107,7 +106,7 @@ export default class AttackingState extends PokemonState {
 
       if (pokemon.items.has(Item.UPGRADE)) {
         pokemon.handleAttackSpeed(5)
-        pokemon.count.upgradeCount++;
+        pokemon.count.upgradeCount++
       }
 
       let freezeChance = 0
@@ -163,13 +162,23 @@ export default class AttackingState extends PokemonState {
           pokemon.setMana(pokemon.mana + manaGain)
         }
       }
-      if(pokemon.effects.includes(Effect.TELEPORT_NEXT_ATTACK)){
-        const crit = pokemon.items.has(Item.REAPER_CLOTH) && chance(pokemon.critChance)
-        if(crit){
+      if (pokemon.effects.includes(Effect.TELEPORT_NEXT_ATTACK)) {
+        const crit =
+          pokemon.items.has(Item.REAPER_CLOTH) && chance(pokemon.critChance)
+        if (crit) {
           pokemon.onCritical(target, board)
         }
-        target.handleSpecialDamage([15,30,60][pokemon.stars-1], board, AttackType.SPECIAL, pokemon, crit)
-        pokemon.effects.splice(pokemon.effects.indexOf(Effect.TELEPORT_NEXT_ATTACK), 1)
+        target.handleSpecialDamage(
+          [15, 30, 60][pokemon.stars - 1],
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        pokemon.effects.splice(
+          pokemon.effects.indexOf(Effect.TELEPORT_NEXT_ATTACK),
+          1
+        )
       }
 
       pokemon.orientation = board.orientation(
@@ -184,12 +193,9 @@ export default class AttackingState extends PokemonState {
       let damage = pokemon.atk
       const attackType = pokemon.attackType
 
-      if (
-        Math.random() * 100 < pokemon.critChance &&
-        target
-      ) {
+      if (Math.random() * 100 < pokemon.critChance && target) {
         pokemon.onCritical(target, board)
-        if(target.items.has(Item.ROCKY_HELMET) === false){
+        if (target.items.has(Item.ROCKY_HELMET) === false) {
           damage = Math.round(pokemon.atk * pokemon.critDamage)
         }
       }
@@ -198,8 +204,8 @@ export default class AttackingState extends PokemonState {
         const trueDamage = 0.2 * damage
         damage = 0.8 * damage
         target.handleDamage({
-          damage: trueDamage, 
-          board, 
+          damage: trueDamage,
+          board,
           attackType: AttackType.TRUE,
           attacker: pokemon,
           dodgeable: true,
@@ -212,8 +218,8 @@ export default class AttackingState extends PokemonState {
         const trueDamage = 0.4 * damage
         damage = 0.6 * damage
         target.handleDamage({
-          damage: trueDamage, 
-          board, 
+          damage: trueDamage,
+          board,
           attackType: AttackType.TRUE,
           attacker: pokemon,
           dodgeable: true,
@@ -226,8 +232,8 @@ export default class AttackingState extends PokemonState {
         const trueDamage = 0.7 * damage
         damage = 0.3 * damage
         target.handleDamage({
-          damage: trueDamage, 
-          board, 
+          damage: trueDamage,
+          board,
           attackType: AttackType.TRUE,
           attacker: pokemon,
           dodgeable: true,
@@ -240,8 +246,8 @@ export default class AttackingState extends PokemonState {
         const trueDamage = damage
         damage = 0
         target.handleDamage({
-          damage: trueDamage, 
-          board, 
+          damage: trueDamage,
+          board,
           attackType: AttackType.TRUE,
           attacker: pokemon,
           dodgeable: true,
@@ -352,6 +358,19 @@ export default class AttackingState extends PokemonState {
       if (pokemon.status.deltaOrb) {
         pokemon.setMana(pokemon.mana + 3)
       }
+    }
+    if (pokemon.effects.includes(Effect.VICTORY_STAR)) {
+      pokemon.addAttack(1)
+    } else if (pokemon.effects.includes(Effect.DROUGHT)) {
+      pokemon.addAttack(2)
+    } else if (pokemon.effects.includes(Effect.DESOLATE_LAND)) {
+      pokemon.addAttack(3)
+    }
+
+    if (pokemon.effects.includes(Effect.DRAGON_ENERGY)) {
+      pokemon.handleAttackSpeed(5)
+    } else if (pokemon.effects.includes(Effect.DRAGON_DANCE)) {
+      pokemon.handleAttackSpeed(10)
     }
   }
 

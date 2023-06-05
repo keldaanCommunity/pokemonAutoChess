@@ -1,53 +1,61 @@
 .after-menu {
-    text-align: center;
+  text-align: center;
 }
 
 .after-menu .nes-container {
-    display: inline-block;
-    max-width: 98vw;
-    max-height: calc(100vh - 8vw);
-    margin: auto;
-    color: white;
-    padding: 0.5em 1em;
-    overflow: auto;
+  display: inline-block;
+  max-width: 98vw;
+  max-height: calc(100vh - 8vw);
+  margin: auto;
+  color: white;
+  padding: 0.5em 1em;
+  overflow: auto;
 }
 
 .after-menu .player-rank {
-    font-size: 4rem;
-    color: white;
-    text-shadow: 4px 4px 0 black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
+  font-size: 4rem;
+  color: white;
+  text-shadow: 4px 4px 0 black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
 }
 
-.after-menu .player-elo {
-    font-size: 1.5 rem;
-    color: white;
-    text-shadow: 2px 2px 0 black;
+.after-menu .player-gains {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.after-menu .player-elo,
+.after-menu .player-exp {
+  font-size: 1.5 rem;
+  color: white;
+  text-shadow: 2px 2px 0 black;
 }
 
 .after-menu .player-rank img {
-    height: 48px;
+  height: 48px;
 }
 
 .after-menu table td {
-    padding: 8px;
+  padding: 8px;
 }
 
 .after-menu table td:first-child {
-    font-size: 2rem;
-    color: white;
-    text-shadow: 4px 4px 0 black;
-    width: 80px;
+  font-size: 2rem;
+  color: white;
+  text-shadow: 4px 4px 0 black;
+  width: 80px;
 }
 
 .after-menu .player-team-synergies {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  padding: 0;
 }
 
 .after-menu .player-team-synergies img:not(:first-of-type) {
-    margin-left: 0.5em;
+  margin-left: 0.5em;
 }

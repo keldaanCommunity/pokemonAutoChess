@@ -1,0 +1,22 @@
+.news {
+  background-image: url(assets/ui/back1.png);
+  background-size: cover;
+  background-position-x: left;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  overflow-y: auto;
+}
+
+.news .content {
+  color: white;
+  text-align: left;
+  flex: 1;
+  overflow-y: auto;
+  background-color: #54596b;
+}
+
+#root .news .content {
+  padding: 0.5em;
+}

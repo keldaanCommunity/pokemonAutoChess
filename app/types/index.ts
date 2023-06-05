@@ -31,6 +31,7 @@ import { Pkm } from "./enum/Pokemon"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { IPokemonRecord } from "../models/colyseus-models/game-record"
 import GameRoom from "../rooms/game-room"
+import { Effects } from "../models/effects"
 
 export * from "./enum/Emotion"
 
@@ -44,6 +45,10 @@ export const CDN_URL =
 
 export const USERNAME_REGEXP =
   /^(?=.{4,20}$)(?:[\u0021-\uFFFF]+(?:(?:\.|-|_)[\u0021-\uFFFF])*)+$/
+
+export type NonFunctionPropNames<T> = {
+  [K in keyof T]: T[K] extends Function ? never : K
+}[keyof T]
 
 export type DetailledPkm = { pkm: Pkm; shiny: boolean; emotion: Emotion }
 
@@ -74,21 +79,24 @@ export enum Role {
   ADMIN = "ADMIN",
   MODERATOR = "MODERATOR",
   BASIC = "BASIC",
-  BOT = "BOT"
+  BOT = "BOT",
+  BOT_MANAGER = "BOT_MANAGER"
 }
 
 export const RoleName: { [key in Role]: string } = {
   [Role.ADMIN]: "Admin",
   [Role.MODERATOR]: "Mod",
   [Role.BASIC]: "Basic",
-  [Role.BOT]: "Bot"
+  [Role.BOT]: "Bot",
+  [Role.BOT_MANAGER]: "Bot Manager"
 }
 
 export const RoleColor: { [key in Role]: string } = {
   [Role.ADMIN]: "success",
   [Role.MODERATOR]: "primary",
   [Role.BASIC]: "",
-  [Role.BOT]: "secondary"
+  [Role.BOT]: "secondary",
+  [Role.BOT_MANAGER]: "danger"
 }
 
 export enum Transfer {
@@ -138,6 +146,7 @@ export enum Transfer {
   REMOVE_MESSAGE = "REMOVE_MESSAGE",
   GIVE_BOOSTER = "GIVE_BOOSTER",
   SET_MODERATOR = "SET_MODERATOR",
+  SET_BOT_MANAGER = "SET_BOT_MANAGER",
   GIVE_TITLE = "GIVE_TITLE",
   REQUEST_LEADERBOARD = "REQUEST_LEADERBOARD",
   REQUEST_LEVEL_LEADERBOARD = "REQUEST_LEVEL_LEADERBOARD",
@@ -145,6 +154,7 @@ export enum Transfer {
   POKEMON_PROPOSITION = "POKEMON_PROPOSITION",
   KICK = "KICK",
   BAN = "BAN",
+  BANNED = "BANNED",
   POKEMON_DAMAGE = "POKEMON_DAMAGE",
   POKEMON_HEAL = "POKEMON_HEAL",
   UNOWN_ENCOUNTER = "UNOWN_ENCOUNTER",
@@ -153,7 +163,14 @@ export enum Transfer {
   LOADING_PROGRESS = "LOADING_PROGRESS",
   LOADING_COMPLETE = "LOADING_COMPLETE",
   PLAYER_INCOME = "PLAYER_INCOME",
-  PLAYER_DAMAGE = "PLAYER_DAMAGE"
+  PLAYER_DAMAGE = "PLAYER_DAMAGE",
+  ROOMS = "ROOMS",
+  ADD_ROOM = "ADD_ROOM",
+  REMOVE_ROOM = "REMOVE_ROOM",
+  ADD_BOT_DATABASE = "ADD_BOT_DATABASE",
+  DELETE_BOT_DATABASE = "DELETE_BOT_DATABASE",
+  BOT_DATABASE_LOG = "BOT_DATABASE_LOG",
+  UNBAN = "UNBAN"
 }
 
 export enum AttackSprite {
@@ -200,9 +217,11 @@ export interface ICreditName {
   Name: string
 }
 
-export interface IMessage {
-  name: string
+export interface IChatV2 {
+  id: string
   payload: string
+  authorId: string
+  author: string
   avatar: string
   time: number
 }
@@ -303,6 +322,7 @@ export interface IPlayer {
   pokemonsProposition: ArraySchema<Pkm>
   rerollCount: number
   loadingProgress: number
+  effects: Effects
 }
 export interface IPokemon {
   id: string
@@ -479,6 +499,8 @@ export interface ICount {
   manaBurnCount: number
   moneyCount: number
   futureSightCount: number
+  healOrderCount: number
+  attackOrderCount: number
 }
 
 export interface IPreparationMetadata {
@@ -486,6 +508,7 @@ export interface IPreparationMetadata {
   password: string | null
   noElo: boolean
   type: "preparation"
+  gameStarted: boolean
 }
 
 export interface IGameMetadata {
@@ -554,10 +577,12 @@ export enum Title {
   ACE_TRAINER = "ACE_TRAINER",
   BACKER = "BACKER",
   TYRANT = "TYRANT",
+  SURVIVOR = "SURVIVOR",
   GAMBLER = "GAMBLER",
   BOT_BUILDER = "BOT_BUILDER",
   SHINY_SEEKER = "SHINY_SEEKER",
-  ARCHEOLOGIST = "ARCHEOLOGIST"
+  ARCHEOLOGIST = "ARCHEOLOGIST",
+  ALCHEMIST = "ALCHEMIST"
 }
 
 export const TitleName: { [key in Title]: string } = {
@@ -611,10 +636,12 @@ export const TitleName: { [key in Title]: string } = {
   [Title.RIVAL]: "Rival",
   [Title.BACKER]: "Backer",
   [Title.TYRANT]: "Tyrant",
+  [Title.SURVIVOR]: "Survivor",
   [Title.GAMBLER]: "Gambler",
   [Title.BOT_BUILDER]: "Bot Builder",
   [Title.SHINY_SEEKER]: "Shiny Seeker",
-  [Title.ARCHEOLOGIST]: "Archeologist"
+  [Title.ARCHEOLOGIST]: "Archeologist",
+  [Title.ALCHEMIST]: "Alchemist"
 }
 
 export const TitleDescription: { [key in Title]: string } = {
@@ -667,9 +694,11 @@ export const TitleDescription: { [key in Title]: string } = {
   [Title.CAMPER]: "Max Synergy with Field Type in a game",
   [Title.RIVAL]: "Max Synergy with Human Type in a game",
   [Title.BACKER]: "Support the game financially",
-  [Title.TYRANT]: "Win a game at 100 Hp",
+  [Title.TYRANT]: "Win a game at 100 HP",
+  [Title.SURVIVOR]: "Win a game with only 1 HP remaining",
   [Title.GAMBLER]: "Reroll over 60 times in a single match",
   [Title.BOT_BUILDER]: "Reach level 10 to unlock the Bot Builder",
   [Title.SHINY_SEEKER]: "Have over 30 shiny pokemon avatars",
-  [Title.ARCHEOLOGIST]: "Decipher the secret message of the Unowns"
+  [Title.ARCHEOLOGIST]: "Decipher the secret message of the Unowns",
+  [Title.ALCHEMIST]: "Max synergy with artificial type in a game"
 }

@@ -62,8 +62,8 @@ export default class GameScene extends Scene {
   }
 
   init(data: {
-    room: Room<GameState>,
-    tilemap: DesignTiled,
+    room: Room<GameState>
+    tilemap: DesignTiled
     spectate: boolean
   }) {
     this.tilemap = data.tilemap
@@ -115,9 +115,11 @@ export default class GameScene extends Scene {
       )
 
       const playerUids: string[] = []
-      this.room.state.players.forEach(p => playerUids.push(p.id))
+      this.room.state.players.forEach((p) => playerUids.push(p.id))
 
-      const player = this.room.state.players.get(this.spectate ? playerUids[0] : this.uid) as Player
+      const player = this.room.state.players.get(
+        this.spectate ? playerUids[0] : this.uid
+      ) as Player
 
       this.itemsContainer = new ItemsContainer(
         this,
@@ -139,7 +141,7 @@ export default class GameScene extends Scene {
         player,
         this.animationManager
       )
-     
+
       this.weatherManager = new WeatherManager(this)
       this.unownManager = new UnownManager(
         this,
@@ -317,10 +319,9 @@ export default class GameScene extends Scene {
     this.input.mouse.disableContextMenu()
     this.input.on("pointerdown", (pointer) => {
       if (
-        pointer.rightButtonDown() &&
         this.minigameManager &&
-        this.room?.state.phase === GamePhaseState.MINIGAME
-        && !this.spectate
+        this.room?.state.phase === GamePhaseState.MINIGAME &&
+        !this.spectate
       ) {
         const vector = this.minigameManager.getVector(pointer.x, pointer.y)
         this.room?.send(Transfer.VECTOR, vector)

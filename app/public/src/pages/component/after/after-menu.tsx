@@ -1,12 +1,14 @@
-import React, { useRef } from "react"
+import React from "react"
 import { useAppSelector } from "../../../hooks"
 import Avatar from "../avatar"
 import Team from "./team"
 import { getRankLabel } from "../../../../../../app/types/strings/Strings"
-import "./after-menu.css"
 import SynergyIcon from "../icons/synergy-icon"
 import EloRank from "elo-rank"
 import { ISimplePlayer } from "../../../../../types"
+import { ExpPlace, TypeTrigger } from "../../../../../types/Config"
+import { Synergy } from "../../../../../types/enum/Synergy"
+import "./after-menu.css"
 
 function computeElo(players: ISimplePlayer[], player: ISimplePlayer) {
   const eloEngine = new EloRank()
@@ -38,25 +40,41 @@ export default function AfterMenu() {
     .slice()
     .sort((a, b) => a.rank - b.rank)
 
-  const noElo = useAppSelector((state) => state.after.noElo)
+  const elligibleToXP = useAppSelector((state) => state.after.elligibleToXP)
+  const elligibleToELO = useAppSelector((state) => state.after.elligibleToELO)
   const currentPlayerId: string = useAppSelector((state) => state.network.uid)
   const currentPlayer = players.find((p) => p.id === currentPlayerId)
   const playerRank = currentPlayer ? currentPlayer.rank : null
   const newElo = currentPlayer ? computeElo(players, currentPlayer) : null
-  const shouldShowElo = !noElo && currentPlayer && newElo
+  const shouldShowElo = elligibleToELO && currentPlayer && newElo
 
   return (
     <div className="after-menu">
       <div className="nes-container is-centered">
-        {playerRank && <div className="player-rank">
-          {playerRank <= 3 && (
-            <img src={`/assets/ui/rank${playerRank}.png`} alt="" />
-          )}
-          <span>{getRankLabel(playerRank)}</span>
-        </div>}
-        {shouldShowElo && <p className="player-elo">
-          ELO {newElo} ({ (newElo >= currentPlayer.elo ? '+' : '-') + Math.abs(newElo - currentPlayer.elo)})
-        </p>}
+        {playerRank && (
+          <>
+            <div className="player-rank">
+              {playerRank <= 3 && (
+                <img src={`/assets/ui/rank${playerRank}.png`} alt="" />
+              )}
+              <span>{getRankLabel(playerRank)}</span>
+            </div>
+            <div className="player-gains">
+              {shouldShowElo && (
+                <p className="player-elo">
+                  ELO {newElo} (
+                  {(newElo >= currentPlayer.elo ? "+" : "-") +
+                    Math.abs(newElo - currentPlayer.elo)}
+                  )
+                </p>
+              )}
+              {elligibleToXP && (
+                <p className="player-exp">EXP + {ExpPlace[playerRank - 1]}</p>
+              )}
+            </div>
+          </>
+        )}
+
         <table>
           <thead>
             <tr>
@@ -85,7 +103,7 @@ export default function AfterMenu() {
                   </td>
                   <td>
                     <ul className="player-team-synergies">
-                      {v.synergies.map((s) => (
+                      {v.synergies.filter(isNotIncomplete).map((s) => (
                         <React.Fragment key={s.name}>
                           <SynergyIcon type={s.name} />
                           <span>{s.value}</span>
@@ -101,4 +119,8 @@ export default function AfterMenu() {
       </div>
     </div>
   )
+}
+
+function isNotIncomplete(s: { name: Synergy, value: number }){
+  return s.value >= TypeTrigger[s.name][0]
 }

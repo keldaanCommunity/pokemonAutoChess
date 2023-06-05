@@ -1,21 +1,21 @@
 .preparation-menu-user {
-    display: flex;
-    padding: 0.5em;
-    margin: 0;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0.5em;
+  display: flex;
+  padding: 0.5em;
+  margin: 0;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5em;
 }
 
 .preparation-menu-user .inline-avatar {
-    flex: 1;
-    min-width: 0;
+  flex: 1;
+  min-width: 0;
 }
 
 .preparation-menu-user.ready {
-    border-color: #76c442;
+  border-color: #76c442;
 }
 
 .preparation-menu-user.not-ready {
-    border-color: #ce372b;
+  border-color: #ce372b;
 }

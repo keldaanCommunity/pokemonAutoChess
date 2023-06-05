@@ -1,95 +1,92 @@
 #wiki-page {
-    height: 100vh;
-    padding: 1vw;
+  height: 100vh;
+  padding: 1vw;
 }
 
 #wiki-page > .nes-container {
-    margin-top: 1em;
-    color: white;
-    background-color: #54596b;
+  margin-top: 1em;
+  color: white;
+  background-color: #54596b;
 }
 
 #wiki-page > .nes-container > .react-tabs > .react-tabs__tab-panel {
-    height: calc(100vh - 8vw - 2em);
-    overflow-y: auto;
+  height: calc(100vh - 8vw - 2em);
+  overflow-y: auto;
 }
 
 #wiki-page .pokemon-name {
-    text-transform: capitalize;
+  text-transform: capitalize;
 }
 
 #wiki-page .pokemon-portrait {
-    position: relative;
-    display: inline-block;
-    margin: 2px;    
-    border: 1px solid #ffffff;
-    border-radius: 4px;
-    box-shadow: 2px 2px 4px #00000060;
+  position: relative;
+  display: inline-block;
+  margin: 2px;
 }
 
 #wiki-page .pokemon-portrait > img {
-    display: block;
-    border-radius: 2px;
+  display: block;
+  border-radius: 2px;
 }
 
 #wiki-page .pokemon-portrait.additional::after {
-    content: "";
-    position: absolute;
-    top: 2px;
-    right: 0px;
-    height: 12px;
-    width: 12px;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABISURBVChTjZABCgAgCAO1///ZWqlpRXggQptNZMqIduBa0+6IRN/iMr2ACaNWEX9H7kg49Q0zz+WSAwMQfuBXi3FKixfuRNQBW78Y/CRSBzwAAAAASUVORK5CYII=);
-    background-size: cover;
-    image-rendering: pixelated;
-    filter: invert(1);
+  content: "";
+  position: absolute;
+  top: 2px;
+  right: 0px;
+  height: 12px;
+  width: 12px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABISURBVChTjZABCgAgCAO1///ZWqlpRXggQptNZMqIduBa0+6IRN/iMr2ACaNWEX9H7kg49Q0zz+WSAwMQfuBXi3FKixfuRNQBW78Y/CRSBzwAAAAASUVORK5CYII=);
+  background-size: cover;
+  image-rendering: pixelated;
+  filter: invert(1);
 }
 
 #wiki-page .wiki-status,
 #wiki-page .wiki-stat {
-    display: grid;
-    grid-template-columns: repeat( auto-fit, minmax(20em, 1fr) );
-    gap: 1em;
-    padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
+  gap: 1em;
+  padding: 0;
 }
 
 #wiki-page .wiki-status li {
-    list-style: none;
-    display: grid;
-    grid-template: auto 1fr / 150px 1fr;
+  list-style: none;
+  display: grid;
+  grid-template: auto 1fr / 150px 1fr;
 }
 
 #wiki-page .wiki-stat li {
-    list-style: none;
-    display: grid;
-    grid-template: auto 1fr / 80px 1fr;
+  list-style: none;
+  display: grid;
+  grid-template: auto 1fr / 80px 1fr;
 }
 
 #wiki-page .wiki-status .test-anim-wrapper,
 #wiki-page .wiki-stat li img {
-    grid-row: 1/3;
+  grid-row: 1/3;
 }
 
 #wiki-page .section-label {
-    font-size: 120%;
-    margin: 0.5em;
+  font-size: 120%;
+  margin: 0.5em;
 }
 
 #wiki-page .wiki-stat p:first-of-type {
-    font-size: 120%;
-    margin: 0.25em 0;
+  font-size: 120%;
+  margin: 0.25em 0;
 }
 
 #wiki-page .wiki-tutorials {
-    padding: 1em
+  padding: 1em;
 }
 
 #wiki-page .wiki-tutorials ul {
-    display: flex;
-    gap: 1em;
-    padding: 0;
+  display: flex;
+  gap: 1em;
+  padding: 0;
 }
 
 #wiki-page .wiki-tutorials li {
-    list-style: none;
+  list-style: none;
 }

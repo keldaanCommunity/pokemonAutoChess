@@ -14,14 +14,14 @@ export default class AfterGameRoom extends Room<AfterGameState> {
   }
 
   onCreate(options: {
-    players: SimplePlayer[],
-    idToken: string,
-    noElo: boolean
+    players: SimplePlayer[]
+    idToken: string
+    elligibleToXP: boolean
+    elligibleToELO: boolean
   }) {
     logger.info("create after game", this.roomId)
 
-    this.setState(new AfterGameState(options.noElo))
-    this.maxClients = 8
+    this.setState(new AfterGameState(options))
     // logger.debug('before', this.state.players);
     if (options.players) {
       options.players.forEach((plyr: SimplePlayer) => {

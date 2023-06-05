@@ -1,32 +1,31 @@
 .player-team-pokemons {
-    display: flex;
-    flex-wrap: wrap;
-    list-style: none;
-    gap: 8px;
-    margin: 0 0 0.5em 0;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  gap: 8px;
+  margin: 0 0 0.5em 0;
 }
 
 .player-team-pokemons li {
-    position: relative;
+  position: relative;
 }
 
 .player-team-pokemons .pokemon-portrait {
-    box-shadow: #2d334b 2px 2px 4px;
-    image-rendering: pixelated;
-    width: 60px;
-    height: 60px;
-    margin: 10px 0;
+  box-shadow: #2d334b 2px 2px 4px;
+  width: 60px;
+  height: 60px;
+  margin: 10px 0;
 }
 
 .player-team-pokemons .pokemon-items {
-    position: absolute;
-    top: 70px;
-    left: 0;
-    display: flex;    
+  position: absolute;
+  top: 70px;
+  left: 0;
+  display: flex;
 }
 
 .player-team-pokemons .pokemon-items img {
-    width: 20px;
-    height: 20px;
-    image-rendering: pixelated;
+  width: 20px;
+  height: 20px;
+  image-rendering: pixelated;
 }

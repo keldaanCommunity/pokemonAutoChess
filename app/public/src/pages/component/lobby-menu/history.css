@@ -1,21 +1,62 @@
-.game-history {
-  padding: 0 0 20px 0;
-  overflow-x: auto;
+.game-history-list {
+  gap: 0.5em;
 }
 
-.game-history p:first-child {
-  font-size: 140%;
+.game-history-list h2 {
+  margin: 0.5em 0;
 }
 
-.game-history tr {
-  border-bottom: 4px solid white;
+.game-history.nes-container {
+  display: grid;
+  align-items: center;
+  gap: 0 0.5em;
+  grid-template-areas: 
+  "top elo team"
+  "syn syn team"
+  "date date team";
+  grid-template-columns: 5ch 7ch 1fr;
+  background-color: #54596b;
+  margin: 0.25em 0;
+  padding: 0.25em;
+  justify-items: center;
 }
 
-.game-history th {
+.game-history .player-team-pokemons {
+  padding-left: 0;
+  padding-bottom: 10px;
+  grid-area: team;
+  align-self: start;
+  justify-self: start;
+}
+
+.game-history .top { grid-area: top; }
+.game-history .elo { grid-area: elo; }
+
+.game-history .date { 
+  grid-area: date; 
+  color: gray;
+  font-size: 0.8em;
+  margin: 0;
   text-align: center;
 }
 
-.game-history td {
-  padding: 0 0.25em;
+.game-history .synergies {
+  grid-area: syn;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 0.5em;
 }
 
+.game-history .synergies > li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.game-history .synergies > li > span {
+  line-height: 80%;
+}

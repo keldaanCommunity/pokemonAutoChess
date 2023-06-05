@@ -18,7 +18,7 @@ const imgStyle: CSS.Properties = {
 export default function Elo(props: { elo: number }) {
   const rank = getRank(props.elo)
   return (
-    <div style={style}>
+    <div style={style} className="elo">
       <img style={imgStyle} src={"assets/ranks/" + rank + ".svg"} />
       <p style={{ margin: "0px", fontSize: "1vw" }}>{props.elo}</p>
     </div>

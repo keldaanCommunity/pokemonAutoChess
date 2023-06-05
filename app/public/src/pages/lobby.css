@@ -1,69 +1,96 @@
 .lobby {
-    height: 100vh;
-    padding: 1vw;
-    display: grid;
-    grid-template:
+  height: 100vh;
+  padding: 1vw;
+  display: grid;
+  grid-template:
     "nav nav nav nav" min-content
-    "user rooms online chat" 1fr / 30vw 25vw 15vw 1fr;
-    gap: 1vw;
+    "user rooms online news" 1fr
+    "user rooms online chat" 1fr
+    / 30vw 25vw 15vw 1fr;
+  gap: 1vw;
 }
 
 .lobby nav {
-    display: flex;
-    justify-content: space-between;
-    gap: 1vw;
-    grid-area: nav;
+  display: flex;
+  justify-content: space-between;
+  gap: 1vw;
+  grid-area: nav;
+}
+
+.lobby nav a:hover {
+  text-decoration: none;
 }
 
 .lobby nav .bubbly {
-    position: relative;
+  position: relative;
+  padding: 0.25em 0.5em;
 }
 
 .lobby .user-menu {
-    grid-area: user;
-    height: 100%;
+  grid-area: user;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.lobby .user-menu .react-tabs,
+.lobby .user-menu .react-tabs__tab-panel--selected {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.lobby .user-menu .react-tabs__tab-panel--selected {
+  overflow-y: auto;
 }
 
 .lobby .room-menu {
-    grid-area: rooms;
-    height: 100%;
+  grid-area: rooms;
+  height: 100%;
 }
 
 .lobby .current-users-menu {
-    grid-area: online;
-    height: 100%;
+  grid-area: online;
+  height: 100%;
 }
 
 .lobby .user-chat {
-    grid-area: chat;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  grid-area: chat;
+  overflow-y: auto;
 }
 
-.lobby h1 {    
-    text-align: center;
-    color: white;
-    font-size: 2vw;
+.lobby .news {
+  grid-area: news;
 }
 
-@media(max-width: 640px){
-    .lobby {
-        overflow-y: auto;
-        display: block;
-    }
+.lobby h1 {
+  text-align: center;
+  color: white;
+  font-size: 1.5vw;
+  margin: 0.25em 0;
+}
 
-    .lobby nav {
-        flex-wrap: wrap;
-    }
+.lobby h2 {
+  font-size: 1.25vw;
+}
 
-    .lobby h1 {
-        font-size: 4vw;
-    }
+@media (max-width: 640px) {
+  .lobby {
+    overflow-y: auto;
+    display: block;
+  }
 
-    .lobby > .nes-container {
-        margin-top: 1em;
-        max-height: 80vh;
-    }
+  .lobby nav {
+    flex-wrap: wrap;
+  }
+
+  .lobby h1 {
+    font-size: 4vw;
+  }
+
+  .lobby > .nes-container {
+    margin-top: 1em;
+    max-height: 80vh;
+  }
 }

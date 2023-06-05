@@ -13,18 +13,18 @@ import { useAppSelector } from "../../../hooks"
 import "./game-pokemon-portrait.css"
 
 export default function GamePokemonPortrait(props: {
-  index: number,
-  origin: string,
+  index: number
+  origin: string
   pokemon: Pokemon | undefined
   pokemonConfig: IPokemonConfig | undefined
   click: React.MouseEventHandler<HTMLDivElement>
 }) {
   if (!props.pokemon) {
-    return (<div className="game-pokemon-portrait nes-container empty" />)
+    return <div className="game-pokemon-portrait nes-container empty" />
   } else {
     const rarityColor = RarityColor[props.pokemon.rarity]
     const boardManager = getGameScene()?.board
-    
+
     const uid: string = useAppSelector((state) => state.network.uid)
     const currentPlayerId: string = useAppSelector(
       (state) => state.game.currentPlayerId
@@ -83,7 +83,10 @@ export default function GamePokemonPortrait(props: {
           effect="solid"
           place="bottom"
         >
-          <GamePokemonDetail pokemon={props.pokemon} pokemonConfig={props.pokemonConfig} />
+          <GamePokemonDetail
+            pokemon={props.pokemon}
+            pokemonConfig={props.pokemonConfig}
+          />
         </ReactTooltip>
         {willEvolve && pokemonEvolution && (
           <div className="game-pokemon-portrait-evolution">

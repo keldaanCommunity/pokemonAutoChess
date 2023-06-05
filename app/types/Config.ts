@@ -98,6 +98,8 @@ export const TypeTrigger: { [key in Synergy]: number[] } = {
   [Synergy.BABY]: [3, 5]
 }
 
+export const RequiredStageLevelForXpElligibility = 10
+
 export const ExpPlace = [700, 500, 400, 300, 200, 150, 100, 0]
 
 export const RarityColor: { [key in Rarity]: string } = {
@@ -145,7 +147,7 @@ export const Probability: { [key: number]: number[] } = {
 }
 
 export const EvolutionTime = {
-  EGG_HATCH: 3,
+  EGG_HATCH: 4,
   EVOLVE_HATCH: 4
 }
 
@@ -181,7 +183,8 @@ export const CommonShop = new Array<Pkm>(
   Pkm.SQUIRTLE,
   Pkm.ARON,
   Pkm.MUDKIP,
-  Pkm.CHIMCHAR
+  Pkm.CHIMCHAR,
+  Pkm.LITWICK
 )
 
 export const UncommonShop = new Array<Pkm>(
@@ -279,7 +282,7 @@ export const Mythical1Shop = new Array<Pkm>(
   Pkm.ABSOL,
   Pkm.SPIRITOMB,
   Pkm.ROTOM,
-  Pkm.MANAPHY,
+  Pkm.PHIONE,
   Pkm.COBALION,
   Pkm.KELDEO,
   Pkm.VOLCARONA,
@@ -299,7 +302,8 @@ export const Mythical1Shop = new Array<Pkm>(
   Pkm.MIMIKYU,
   Pkm.TYROGUE,
   Pkm.VIRIZION,
-  Pkm.ZERAORA
+  Pkm.ZERAORA,
+  Pkm.SHUCKLE
 )
 
 export const Mythical2Shop = new Array<Pkm>(
@@ -338,6 +342,8 @@ export const Mythical2Shop = new Array<Pkm>(
   Pkm.XERNEAS,
   Pkm.YVELTAL
 )
+
+export const MAX_PLAYERS_PER_LOBBY = 8
 
 export const StageDuration: Record<number | "DEFAULT", number> = {
   0: 15,
@@ -397,30 +403,6 @@ export const NeutralStage: { turn: number; avatar: string }[] = [
     avatar: `${PkmIndex[Pkm.RAYQUAZA].replace("-", "/")}/${Emotion.NORMAL}`
   }
 ]
-
-type ThresholdDuration = {
-  duration: number
-  threshold: number
-}
-
-export const FlyingProtectThreshold: { [key in Effect]?: ThresholdDuration } = {
-  [Effect.TAILWIND]: {
-    duration: 1000,
-    threshold: 0.2
-  },
-  [Effect.FEATHER_DANCE]: {
-    duration: 1500,
-    threshold: 0.4
-  },
-  [Effect.MAX_AIRSTREAM]: {
-    duration: 2000,
-    threshold: 0.5
-  },
-  [Effect.MAX_GUARD]: {
-    duration: 2500,
-    threshold: 0.5
-  }
-}
 
 export enum EloRank {
   DIAMOND = "DIAMOND",

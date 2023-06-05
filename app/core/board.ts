@@ -85,11 +85,14 @@ export default class Board {
       }
     } else if (dx == 0) {
       if (dy == 0) {
-        if(pokemon.status.confusion){
+        if (pokemon.status.confusion) {
           return pickRandomIn(Orientation)
         }
         logger.error("failed to get pokemon orientation", {
-          x0, y0, x1, y1, 
+          x0,
+          y0,
+          x1,
+          y1,
           pokemon: pokemon.name,
           pokemonPosX: pokemon.positionX,
           pokemonPosY: pokemon.positionY,
@@ -135,7 +138,13 @@ export default class Board {
       for (let x = 0; x < this.columns; x++) {
         if (x == cellX && y == cellY) continue
         const distance = this.distance(cellX, cellY, x, y)
-        if (y >= 0 && y < this.rows && x >= 0 && x < this.columns && distance <= range) {
+        if (
+          y >= 0 &&
+          y < this.rows &&
+          x >= 0 &&
+          x < this.columns &&
+          distance <= range
+        ) {
           cells.push({ x, y, value: this.cells[this.columns * y + x] })
         }
       }
@@ -153,7 +162,13 @@ export default class Board {
         const dy = cellY - y
         const dx = cellX - x
         const distanceSquared = dy * dy + dx * dx
-        if (y >= 0 && y < this.rows && x >= 0 && x < this.columns && distanceSquared < radiusSquared) {
+        if (
+          y >= 0 &&
+          y < this.rows &&
+          x >= 0 &&
+          x < this.columns &&
+          distanceSquared < radiusSquared
+        ) {
           cells.push({ x, y, value: this.cells[this.columns * y + x] })
         }
       }
@@ -163,34 +178,40 @@ export default class Board {
 
   getCellsBetween(x0: number, y0: number, x1: number, y1: number) {
     /* Supercover line algorithm from https://www.redblobgames.com/grids/line-drawing.html */
-    const cells: Cell[] = [{
-      x: x0,
-      y: y0,
-      value: this.cells[this.columns * y0 + x0]
-    }]
-    const dx = x1 - x0, dy = y1 - y0
-    const nx = Math.abs(dx), ny = Math.abs(dy);
-    const sign_x = Math.sign(dx), sign_y = Math.sign(dy);
-
-    let x=x0, y=y0
-    for (let ix = 0, iy = 0; ix < nx || iy < ny;) {
-      let decision = (1 + 2*ix) * ny - (1 + 2*iy) * nx;
-      if (decision === 0) {
-          // next step is diagonal
-          x += sign_x;
-          y += sign_y;
-          ix++;
-          iy++;
-      } else if (decision < 0) {
-          // next step is horizontal
-          x += sign_x;
-          ix++;
-      } else {
-          // next step is vertical
-          y += sign_y;
-          iy++;
+    const cells: Cell[] = [
+      {
+        x: x0,
+        y: y0,
+        value: this.cells[this.columns * y0 + x0]
       }
-      cells.push({ x, y, value: this.cells[this.columns * y + x] });
+    ]
+    const dx = x1 - x0,
+      dy = y1 - y0
+    const nx = Math.abs(dx),
+      ny = Math.abs(dy)
+    const sign_x = Math.sign(dx),
+      sign_y = Math.sign(dy)
+
+    let x = x0,
+      y = y0
+    for (let ix = 0, iy = 0; ix < nx || iy < ny; ) {
+      let decision = (1 + 2 * ix) * ny - (1 + 2 * iy) * nx
+      if (decision === 0) {
+        // next step is diagonal
+        x += sign_x
+        y += sign_y
+        ix++
+        iy++
+      } else if (decision < 0) {
+        // next step is horizontal
+        x += sign_x
+        ix++
+      } else {
+        // next step is vertical
+        y += sign_y
+        iy++
+      }
+      cells.push({ x, y, value: this.cells[this.columns * y + x] })
     }
 
     return cells
@@ -213,13 +234,27 @@ export default class Board {
     })
     if (candidates.length > 0) {
       candidates.sort(
-        (a, b) =>
-          this.distance(x, y, b.x, b.y) -
-          this.distance(x, y, a.x, a.y)
+        (a, b) => this.distance(x, y, b.x, b.y) - this.distance(x, y, a.x, a.y)
       )
       return candidates[0]
     } else {
       return undefined
     }
+  }
+
+  getFlyAwayCell(x: number, y: number): Cell | null {
+    let cx = Math.round((x + this.columns * 0.5) % this.columns)
+    let cy = Math.round((y + this.rows * 0.5) % this.rows)
+    let radius = 1
+    const candidates: Cell[] = [{ x: cx, y: cy, value: this.getValue(cx, cy) }]
+    while (candidates[0].value !== undefined && radius < 5) {
+      candidates.shift()
+      if (candidates.length === 0) {
+        candidates.push(...this.getCellsInRadius(cx, cy, radius))
+        radius++
+      }
+    }
+
+    return candidates[0].value === undefined ? candidates[0] : null
   }
 }

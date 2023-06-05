@@ -605,12 +605,12 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
-      key: Ability.POISON_STING,
+      key: Ability.VENOSHOCK,
       frames: this.game.anims.generateFrameNames("specials", {
         start: 0,
         end: 12,
         zeroPad: 3,
-        prefix: `${Ability.POISON_STING}/`
+        prefix: `${Ability.VENOSHOCK}/`
       }),
       duration: 1000,
       repeat: 0
@@ -781,6 +781,17 @@ export default class AnimationManager {
     this.game.anims.create({
       key: Ability.APPLE_ACID,
       frames: this.game.anims.generateFrameNames(Ability.APPLE_ACID, {
+        start: 0,
+        end: 19,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
+      key: Ability.HEX,
+      frames: this.game.anims.generateFrameNames(Ability.HEX, {
         start: 0,
         end: 19,
         zeroPad: 3
@@ -1160,6 +1171,39 @@ export default class AnimationManager {
       }),
       duration: 1000,
       repeat: 3
+    })
+
+    this.game.anims.create({
+      key: "HEAL_ORDER",
+      frames: this.game.anims.generateFrameNames("HEAL_ORDER", {
+        start: 0,
+        end: 35,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
+      key: "ATTACK_ORDER",
+      frames: this.game.anims.generateFrameNames("ATTACK_ORDER", {
+        start: 0,
+        end: 28,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
+      key: Ability.SHELL_TRAP,
+      frames: this.game.anims.generateFrameNames(Ability.SHELL_TRAP, {
+        start: 0,
+        end: 7,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 1
     })
 
     this.game.anims.create({

@@ -1,7 +1,8 @@
 import { Schema, type } from "@colyseus/schema"
-import Board, { Cell } from "../../core/board"
+import Board from "../../core/board"
 import PokemonEntity from "../../core/pokemon-entity"
-import { IStatus } from "../../types"
+import { IPokemon, IStatus } from "../../types"
+import { Ability } from "../../types/enum/Ability"
 import { Effect } from "../../types/enum/Effect"
 import { AttackType } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
@@ -46,6 +47,7 @@ export default class Status extends Schema implements IStatus {
   spikeArmorCooldown = 0
   synchroCooldown = 3000
   synchro = false
+  tree = false
 
   clearNegativeStatus() {
     this.burnCooldown = 0
@@ -204,7 +206,7 @@ export default class Status extends Schema implements IStatus {
     if (this.soulDewCooldown - dt <= 0) {
       this.soulDew = false
       pkm.addAbilityPower(10)
-      pkm.count.soulDewCount++;
+      pkm.count.soulDewCount++
       if (pkm.items.has(Item.SOUL_DEW)) {
         this.triggerSoulDew(1000)
       }

@@ -8,7 +8,7 @@ import { useAppSelector, useAppDispatch } from "../../../hooks"
 import { logIn, logOut } from "../../../stores/NetworkStore"
 import { FIREBASE_CONFIG } from "../../utils/utils"
 import AnonymousButton from "./anonymous-button"
-import "./login.css";
+import "./login.css"
 
 export default function Login() {
   const dispatch = useAppDispatch()
@@ -65,7 +65,7 @@ export default function Login() {
         <ul className="actions">
           <li>
             <Link className="bubbly green" to={"/lobby"}>
-                Join Lobby
+              Join Lobby
             </Link>
           </li>
           <li>

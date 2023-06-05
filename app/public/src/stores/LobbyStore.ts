@@ -7,7 +7,12 @@ import LeaderboardInfo, {
   ILeaderboardInfo
 } from "../../../models/colyseus-models/leaderboard-info"
 import { RoomAvailable } from "colyseus.js"
-import { IGameMetadata, IMessage, IPreparationMetadata, ISuggestionUser } from "../../../types"
+import {
+  IGameMetadata,
+  IChatV2,
+  IPreparationMetadata,
+  ISuggestionUser
+} from "../../../types"
 import { IMeta } from "../../../models/mongo-models/meta"
 import { IBot } from "../../../models/mongo-models/bot-v2"
 import { IItemsStatistic } from "../../../models/mongo-models/items-statistic"
@@ -18,7 +23,8 @@ import { IPokemonsStatistic } from "../../../models/mongo-models/pokemons-statis
 import { playSound, SOUNDS } from "../pages/utils/audio"
 
 interface IUserLobbyState {
-  messages: IMessage[]
+  botLogDatabase: string[]
+  messages: IChatV2[]
   users: ILobbyUser[]
   leaderboard: ILeaderboardInfo[]
   botLeaderboard: ILeaderboardInfo[]
@@ -41,6 +47,7 @@ interface IUserLobbyState {
 }
 
 const initialState: IUserLobbyState = {
+  botLogDatabase: [],
   suggestions: [],
   boosterContent: [],
   pokemonCollection: [],
@@ -155,8 +162,11 @@ export const lobbySlice = createSlice({
   name: "lobby",
   initialState: initialState,
   reducers: {
+    pushBotLog: (state, action: PayloadAction<string>) => {
+      state.botLogDatabase.push(action.payload)
+    },
     pushMessage: (state, action: PayloadAction<Message>) => {
-      const m: IMessage = JSON.parse(JSON.stringify(action.payload))
+      const m: IChatV2 = JSON.parse(JSON.stringify(action.payload))
       state.messages.push(m)
     },
     removeMessage: (state, action: PayloadAction<Message>) => {
@@ -173,7 +183,7 @@ export const lobbySlice = createSlice({
     setLevelLeaderboard: (state, action: PayloadAction<LeaderboardInfo[]>) => {
       state.levelLeaderboard = action.payload
     },
-    addPokemonConfig: (state, action: PayloadAction<PokemonConfig>) => {
+    addPokemonConfig: (state, action: PayloadAction<IPokemonConfig>) => {
       state.pokemonCollection.push(JSON.parse(JSON.stringify(action.payload)))
     },
     changePokemonConfig: (
@@ -181,9 +191,9 @@ export const lobbySlice = createSlice({
       action: PayloadAction<{ id: string; field: string; value: any }>
     ) => {
       const index = state.pokemonCollection.findIndex(
-        (p) => p.id == action.payload.id
+        (p) => p.id === action.payload.id
       )
-      if (index != -1) {
+      if (index !== -1) {
         state.pokemonCollection[index][action.payload.field] =
           action.payload.value
       }
@@ -220,8 +230,12 @@ export const lobbySlice = createSlice({
       state.tabIndex = action.payload
     },
     addRoom: (state, action: PayloadAction<RoomAvailable>) => {
-      const metadata: IPreparationMetadata | IGameMetadata = action.payload.metadata
-      const rooms = metadata.type === "preparation" ? state.preparationRooms : state.gameRooms
+      const metadata: IPreparationMetadata | IGameMetadata =
+        action.payload.metadata
+      const rooms =
+        metadata.type === "preparation"
+          ? state.preparationRooms
+          : state.gameRooms
       if (metadata && metadata.name) {
         const roomIndex = rooms.findIndex(
           (room) => room.roomId === action.payload.roomId
@@ -229,7 +243,7 @@ export const lobbySlice = createSlice({
         if (roomIndex !== -1) {
           rooms[roomIndex] = action.payload
         } else {
-          if(metadata.type === "preparation"){
+          if (metadata.type === "preparation") {
             playSound(SOUNDS.NEW_ROOM)
           }
           rooms.push(action.payload)
@@ -312,7 +326,8 @@ export const {
   setBotData,
   leaveLobby,
   setBotCreatorSynergies,
-  setSuggestions
+  setSuggestions,
+  pushBotLog
 } = lobbySlice.actions
 
 export default lobbySlice.reducer

@@ -1,6 +1,6 @@
 import { Item } from "../types/enum/Item"
 import { Effect } from "../types/enum/Effect"
-import { AttackType, Rarity } from "../types/enum/Game"
+import { AttackType, Climate, Rarity } from "../types/enum/Game"
 import Board from "./board"
 import PokemonEntity from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
@@ -20,7 +20,7 @@ export class AttackStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    pokemon.setMana(0)
+    pokemon.mana = 0
     pokemon.count.ult += 1
 
     if (pokemon.types.includes(Synergy.SOUND)) {
@@ -55,7 +55,7 @@ export class AttackStrategy {
       pokemon.count.starDustCount++
     }
 
-    if(crit){
+    if (crit) {
       pokemon.onCritical(target, board)
     }
   }
@@ -283,7 +283,12 @@ export class SlackOffStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     pokemon.status.clearNegativeStatus()
-    const healFactor = (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) ? 0.5 : pokemon.stars === 2 ? 0.4 : 0.3
+    const healFactor =
+      pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL
+        ? 0.5
+        : pokemon.stars === 2
+        ? 0.4
+        : 0.3
     pokemon.handleHeal(pokemon.hp * healFactor, pokemon, 0.5)
     pokemon.status.triggerSleep(5000, pokemon)
   }
@@ -602,7 +607,13 @@ export class DracoEnergyStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    target.handleSpecialDamage(pokemon.life, board, AttackType.SPECIAL, pokemon, crit)
+    target.handleSpecialDamage(
+      pokemon.life,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit
+    )
   }
 }
 
@@ -726,7 +737,7 @@ export class AquaJetStrategy extends AttackStrategy {
         farthestCoordinate.y
       )
       cells.forEach((cell) => {
-        if (cell.value && cell.value != pokemon) {
+        if (cell.value && cell.value.team != pokemon.team) {
           cell.value.handleSpecialDamage(
             damage,
             board,
@@ -737,14 +748,7 @@ export class AquaJetStrategy extends AttackStrategy {
         }
       })
 
-      board.swapValue(
-        pokemon.positionX,
-        pokemon.positionY,
-        farthestCoordinate.x,
-        farthestCoordinate.y
-      )
-      pokemon.positionX = farthestCoordinate.x
-      pokemon.positionY = farthestCoordinate.y
+      pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
     }
   }
 }
@@ -796,14 +800,7 @@ export class FireTrickStrategy extends AttackStrategy {
       target.positionY
     )
     if (teleportationCell) {
-      board.swapValue(
-        target.positionX,
-        target.positionY,
-        teleportationCell.x,
-        teleportationCell.y
-      )
-      target.positionX = teleportationCell.x
-      target.positionY = teleportationCell.y
+      target.moveTo(teleportationCell.x, teleportationCell.y, board)
     }
   }
 }
@@ -836,7 +833,7 @@ export class FlameChargeStrategy extends AttackStrategy {
         farthestCoordinate.y
       )
       cells.forEach((cell) => {
-        if (cell.value && cell.value != pokemon) {
+        if (cell.value && cell.value.team != pokemon.team) {
           cell.value.handleSpecialDamage(
             damage,
             board,
@@ -847,14 +844,7 @@ export class FlameChargeStrategy extends AttackStrategy {
         }
       })
 
-      board.swapValue(
-        pokemon.positionX,
-        pokemon.positionY,
-        farthestCoordinate.x,
-        farthestCoordinate.y
-      )
-      pokemon.positionX = farthestCoordinate.x
-      pokemon.positionY = farthestCoordinate.y
+      pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
     }
   }
 }
@@ -966,20 +956,19 @@ export class TwistingNeitherStrategy extends AttackStrategy {
     )
     cells.forEach((cell) => {
       if (cell && cell.value && cell.value.team !== pokemon.team) {
-        cell.value.handleSpecialDamage(80, board, AttackType.SPECIAL, pokemon, crit)
+        cell.value.handleSpecialDamage(
+          80,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
         const teleportationCell = board.getTeleportationCell(
           cell.value.positionX,
           cell.value.positionY
         )
         if (teleportationCell) {
-          board.swapValue(
-            cell.value.positionX,
-            cell.value.positionY,
-            teleportationCell.x,
-            teleportationCell.y
-          )
-          cell.value.positionX = teleportationCell.x
-          cell.value.positionY = teleportationCell.y
+          cell.value.moveTo(teleportationCell.x, teleportationCell.y, board)
         } else {
           logger.error("unable to teleport pokemon", cell.value)
         }
@@ -1017,16 +1006,39 @@ export class OverheatStrategy extends AttackStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)    
+    super.process(pokemon, state, board, target, crit)
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
         let damage = 20
-        if(tg.status.burn){
+        if (tg.status.burn) {
           damage *= 2
         }
         tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
       }
     })
+  }
+}
+
+export class HypnosisStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const farthestTarget = state.getFarthestTargetCoordinate(pokemon, board)
+    if (farthestTarget) {
+      const x = farthestTarget.x
+      const y = farthestTarget.y
+      const duration =
+        pokemon.stars === 3 ? 6000 : pokemon.stars === 2 ? 3000 : 1500
+      const tg = board.getValue(x, y)
+      if (tg) {
+        tg.status.triggerSleep(duration, tg)
+      }
+    }
   }
 }
 
@@ -1067,9 +1079,7 @@ export class KingShieldStrategy extends AttackStrategy {
         tg.positionX = oldX
         tg.positionY = oldY
       }
-      board.swapValue(pokemon.positionX, pokemon.positionY, x, y)
-      pokemon.positionX = x
-      pokemon.positionY = y
+      pokemon.moveTo(x, y, board)
     }
   }
 }
@@ -1112,7 +1122,13 @@ export class ExplosionStrategy extends AttackStrategy {
       }
     })
 
-    pokemon.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    pokemon.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit
+    )
   }
 }
 
@@ -1514,7 +1530,7 @@ export class FutureSightStrategy extends AttackStrategy {
     }
 
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
-      if (tg && pokemon.team != tg.team && count > 0) {        
+      if (tg && pokemon.team != tg.team && count > 0) {
         tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
         count--
         tg.count.futureSightCount++
@@ -1659,7 +1675,7 @@ export class VoltSwitchStrategy extends AttackStrategy {
         farthestCoordinate.y
       )
       cells.forEach((cell) => {
-        if (cell.value && cell.value != pokemon) {
+        if (cell.value && cell.value.team != pokemon.team) {
           cell.value.handleSpecialDamage(
             damage,
             board,
@@ -1670,14 +1686,7 @@ export class VoltSwitchStrategy extends AttackStrategy {
         }
       })
 
-      board.swapValue(
-        pokemon.positionX,
-        pokemon.positionY,
-        farthestCoordinate.x,
-        farthestCoordinate.y
-      )
-      pokemon.positionX = farthestCoordinate.x
-      pokemon.positionY = farthestCoordinate.y
+      pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
     }
   }
 }
@@ -1711,7 +1720,13 @@ export class HeadSmashStrategy extends AttackStrategy {
         break
     }
     if (target.status.sleep || target.status.freeze) {
-      target.handleSpecialDamage(target.life, board, AttackType.TRUE, pokemon, crit)
+      target.handleSpecialDamage(
+        target.life,
+        board,
+        AttackType.TRUE,
+        pokemon,
+        crit
+      )
     } else {
       target.handleSpecialDamage(d, board, AttackType.SPECIAL, pokemon, crit)
     }
@@ -2172,7 +2187,13 @@ export class SeismicTossStrategy extends AttackStrategy {
         totalDamage += damage
       }
     })
-    target.handleSpecialDamage(totalDamage, board, AttackType.TRUE, pokemon, crit)
+    target.handleSpecialDamage(
+      totalDamage,
+      board,
+      AttackType.TRUE,
+      pokemon,
+      crit
+    )
   }
 }
 
@@ -2250,7 +2271,7 @@ export class WheelOfFireStrategy extends AttackStrategy {
         coord.y
       )
       cells.forEach((cell) => {
-        if (cell.value && cell.value != pokemon) {
+        if (cell.value && cell.value.team != pokemon.team) {
           cell.value.handleSpecialDamage(
             damage,
             board,
@@ -2668,28 +2689,25 @@ export class DiveStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target, crit)
     const damage =
       pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL
-        ? 40
+        ? 60
         : pokemon.stars === 2
-        ? 20
-        : 10
+        ? 30
+        : 15
     const duration =
       pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL
-        ? 6000
+        ? 4000
         : pokemon.stars === 2
-        ? 3000
-        : 1500
+        ? 2000
+        : 1000
     const mostSurroundedCoordinate =
       state.getMostSurroundedCoordianteAvailablePlace(pokemon, board)
 
     if (mostSurroundedCoordinate) {
-      board.swapValue(
-        pokemon.positionX,
-        pokemon.positionY,
+      pokemon.moveTo(
         mostSurroundedCoordinate.x,
-        mostSurroundedCoordinate.y
+        mostSurroundedCoordinate.y,
+        board
       )
-      pokemon.positionX = mostSurroundedCoordinate.x
-      pokemon.positionY = mostSurroundedCoordinate.y
 
       const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
 
@@ -2849,7 +2867,13 @@ export class DragonBreathStrategy extends AttackStrategy {
     target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
     const secondTarget = board.getValue(target.positionX, target.positionY + 1)
     if (secondTarget && secondTarget != pokemon) {
-      secondTarget.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
+      secondTarget.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.TRUE,
+        pokemon,
+        crit
+      )
     }
   }
 }
@@ -3165,6 +3189,9 @@ export class LeechLifeStrategy extends AttackStrategy {
         break
     }
 
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    pokemon.handleHeal(damage, pokemon, 1)
+
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
 
     cells.forEach((cell) => {
@@ -3235,15 +3262,7 @@ export class TeleportStrategy extends AttackStrategy {
     for (let i = 0; i < potentialCells.length; i++) {
       const entity = board.getValue(potentialCells[i][0], potentialCells[i][1])
       if (entity === undefined) {
-        board.swapValue(
-          pokemon.positionX,
-          pokemon.positionY,
-          potentialCells[i][0],
-          potentialCells[i][1]
-        )
-        pokemon.positionX = potentialCells[i][0]
-        pokemon.positionY = potentialCells[i][1]
-        pokemon.cooldown = 100
+        pokemon.moveTo(potentialCells[i][0], potentialCells[i][1], board)
         pokemon.effects.push(Effect.TELEPORT_NEXT_ATTACK)
         break
       }
@@ -3280,16 +3299,15 @@ export class SpectralThiefStrategy extends AttackStrategy {
     )
     const damage = 50
     if (farthestCoordinate) {
-      target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-
-      board.swapValue(
-        pokemon.positionX,
-        pokemon.positionY,
-        farthestCoordinate.x,
-        farthestCoordinate.y
+      target.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
       )
-      pokemon.positionX = farthestCoordinate.x
-      pokemon.positionY = farthestCoordinate.y
+
+      pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
       const boostAtk = Math.min(0, target.atk - target.baseAtk)
       const boostDef = Math.min(0, target.def - target.baseSpeDef)
       const boostSpeDef = Math.min(0, target.speDef - target.baseSpeDef)
@@ -3324,10 +3342,12 @@ export class ThiefStrategy extends AttackStrategy {
     target.items.forEach((item) => {
       if (pokemon.items.size < 3) {
         pokemon.items.add(item)
+        pokemon.simulation.applyItemEffect(pokemon, item)
       }
       target.items.delete(item)
     })
 
+    // update artificial synergy bonuses
     if (pokemon.effects.includes(Effect.DUBIOUS_DISC)) {
       pokemon.addAttack(4 * l, true)
       pokemon.handleShield(20 * l, pokemon)
@@ -3343,8 +3363,6 @@ export class ThiefStrategy extends AttackStrategy {
       pokemon.handleShield(50 * l, pokemon)
     }
 
-    // pokemon.simulation.applyItemsEffects(pokemon);
-    // target.simulation.applyItemsEffects(target);
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
@@ -3489,7 +3507,13 @@ export class FakeTearsStrategy extends AttackStrategy {
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value && pokemon.team != value.team) {
         value.status.triggerArmorReduction(3000)
-        value.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+        value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
       }
     })
   }
@@ -3554,7 +3578,13 @@ export class DragonDartsStrategy extends AttackStrategy {
     }
 
     for (let n = 0; n < 3; n++) {
-      target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+      target.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
     }
     if (target.life <= 0) {
       pokemon.setMana(pokemon.mana + 40)
@@ -3594,16 +3624,15 @@ export class SkyAttackStrategy extends AttackStrategy {
     )
     const damage = 120
     if (farthestCoordinate) {
-      target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-
-      board.swapValue(
-        pokemon.positionX,
-        pokemon.positionY,
-        farthestCoordinate.x,
-        farthestCoordinate.y
+      target.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
       )
-      pokemon.positionX = farthestCoordinate.x
-      pokemon.positionY = farthestCoordinate.y
+
+      pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
       pokemon.status.triggerProtect(500)
     }
   }
@@ -3622,16 +3651,17 @@ export class AgilityStrategy extends AttackStrategy {
 
     switch (pokemon.stars) {
       case 1:
-        boost = 5
-        break
-      case 2:
         boost = 10
         break
+      case 2:
+        boost = 20
+        break
       case 3:
-        boost = 15
+        boost = 30
         break
     }
     pokemon.handleAttackSpeed(boost, true)
+    pokemon.cooldown = 0;
   }
 }
 
@@ -3789,6 +3819,21 @@ export class MachPunchStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     let damage = 50
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    pokemon.cooldown = 100
+  }
+}
+
+export class UppercutStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    let damage = 80
     if (pokemon.def > target.def) damage *= 2
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
@@ -3803,7 +3848,7 @@ export class MawashiGeriStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 50
+    let damage = 80
     if (pokemon.atk > target.atk) damage *= 2
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
@@ -3873,6 +3918,158 @@ export class DeathWingStrategy extends AttackStrategy {
     )
     if (takenDamage > 0) {
       pokemon.handleHeal(Math.round(0.75 * takenDamage), pokemon, 0)
+    }
+  }
+}
+
+export class MimicStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    AbilityStrategy[target.skill].process(pokemon, state, board, target, crit)
+  }
+}
+
+export class HexStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    let damage = pokemon.stars === 3 ? 80 : pokemon.stars === 2 ? 40 : 20
+    if (
+      target.status.burn ||
+      target.status.confusion ||
+      target.status.freeze ||
+      target.status.paralysis ||
+      target.status.poisonStacks > 0 ||
+      target.status.silence ||
+      target.status.sleep ||
+      target.status.wound
+    ) {
+      damage = damage * 2
+    }
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+  }
+}
+
+export class GrowthStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+
+    const attackBuff = Math.floor(10 * (1 + pokemon.ap / 100))
+    pokemon.addAttack(attackBuff)
+
+    if (pokemon.simulation.climate === Climate.SUN) {
+      pokemon.addAttack(attackBuff) // grows twice as fast if sunny weather
+    }
+  }
+}
+
+export class HealOrderStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+    const damage = pokemon.stars === 3 ? 65 : pokemon.stars === 2 ? 45 : 25
+
+    cells.forEach((cell) => {
+      if (cell.value) {
+        if (cell.value.team !== pokemon.team) {
+          cell.value.count.attackOrderCount++
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        } else {
+          cell.value.count.healOrderCount++
+          cell.value.handleHeal(damage, pokemon, 1)
+        }
+      }
+    })
+  }
+}
+
+export class ShellTrapStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    target.status.triggerSilence(3000, target, board)
+    target.setMana(target.mana - 40)
+
+    const cells = board.getAdjacentCells(target.positionX, target.positionY)
+
+    cells.forEach((cell) => {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.setMana(cell.value.mana - 40)
+      }
+    })
+  }
+}
+
+export class DigStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10
+
+    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(
+      pokemon,
+      board
+    )
+
+    if (farthestCoordinate) {
+      const cells = board.getCellsBetween(
+        pokemon.positionX,
+        pokemon.positionY,
+        farthestCoordinate.x,
+        farthestCoordinate.y
+      )
+      cells.forEach((cell) => {
+        if (cell.value && cell.value.team != pokemon.team) {
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      })
+
+      pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
     }
   }
 }

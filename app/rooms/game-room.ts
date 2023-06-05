@@ -22,7 +22,11 @@ import {
   OnDragDropCombineCommand,
   OnPokemonPropositionCommand
 } from "./commands/game-commands"
-import { ExpPlace } from "../types/Config"
+import {
+  ExpPlace,
+  MAX_PLAYERS_PER_LOBBY,
+  RequiredStageLevelForXpElligibility
+} from "../types/Config"
 import { Item, BasicItems } from "../types/enum/Item"
 import PokemonFactory from "../models/pokemon-factory"
 import EloRank from "elo-rank"
@@ -73,7 +77,7 @@ export default class GameRoom extends Room<GameState> {
     users: { [key: string]: IGameUser }
     preparationId: string
     name: string
-    idToken: string,
+    idToken: string
     noElo: boolean
   }) {
     logger.trace("create game room")
@@ -84,7 +88,9 @@ export default class GameRoom extends Room<GameState> {
       type: "game"
     })
     // logger.debug(options);
-    this.setState(new GameState(options.preparationId, options.name, options.noElo))
+    this.setState(
+      new GameState(options.preparationId, options.name, options.noElo)
+    )
     this.miniGame.create(this.state.avatars, this.state.floatingItems)
     Object.keys(PRECOMPUTED_TYPE_POKEMONS).forEach((type) => {
       PRECOMPUTED_TYPE_POKEMONS[type].additionalPokemons.forEach((p) => {
@@ -105,7 +111,6 @@ export default class GameRoom extends Room<GameState> {
     shuffleArray(this.additionalPokemonsPool1)
     shuffleArray(this.additionalPokemonsPool2)
 
-    this.maxClients = 8
     for (const id in options.users) {
       const user = options.users[id]
       // logger.debug(user);
@@ -127,6 +132,11 @@ export default class GameRoom extends Room<GameState> {
         //this.state.shop.assignShop(player)
       }
     }
+
+    setTimeout(() => {
+      this.broadcast(Transfer.LOADING_COMPLETE)
+      this.startGame()
+    }, 5 * 60 * 1000) // maximum 5 minutes of loading game, game will start no matter what after that
 
     this.onMessage(Transfer.ITEM, (client, message) => {
       if (!this.state.gameFinished) {
@@ -355,6 +365,8 @@ export default class GameRoom extends Room<GameState> {
   }
 
   startGame() {
+    if (this.state.gameLoaded) return // already started
+    this.state.gameLoaded = true
     this.setSimulationInterval((deltaTime: number) => {
       if (!this.state.gameFinished) {
         try {
@@ -398,31 +410,30 @@ export default class GameRoom extends Room<GameState> {
         throw new Error("consented leave")
       }
 
-      // allow disconnected client to reconnect into this room until 300 seconds
-      await this.allowReconnection(client, 300)
+      // allow disconnected client to reconnect into this room until 1 minute
+      await this.allowReconnection(client, 60)
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
         logger.info(`${client.auth.displayName} leave game room`)
         const player = this.state.players.get(client.auth.uid)
-        if (player && player.loadingProgress < 100) {
+        if (player && player.loadingProgress < 100 && !this.state.gameLoaded) {
           // if player quit during the loading screen, remove it from the players
           this.state.players.delete(client.auth.uid)
-          if (
-            Array.from(this.state.players.values()).every(
-              (player) => player.loadingProgress === 100
-            )
-          ) {
-            this.broadcast(Transfer.LOADING_COMPLETE)
-            this.startGame()
-          }
         }
+      }
+      if (
+        Array.from(this.state.players.values()).every(
+          (player) => player.loadingProgress === 100
+        )
+      ) {
+        this.broadcast(Transfer.LOADING_COMPLETE)
+        this.startGame()
       }
     }
   }
 
   onDispose() {
     // logger.info(`dispose game room`);
-    const requiredStageLevel = process.env.MODE == "dev" ? 0 : 10
     this.state.endTime = Date.now()
     const ps = new Array<components["schemas"]["GameHistory"]>()
     this.state.players.forEach((p) => {
@@ -438,10 +449,12 @@ export default class GameRoom extends Room<GameState> {
       players: ps
     })
 
-    if (
-      this.state.stageLevel >= requiredStageLevel &&
-      this.state.elligibleToXP === true
-    ) {
+    const elligibleToXP =
+      this.state.players.size >= MAX_PLAYERS_PER_LOBBY &&
+      this.state.stageLevel >= RequiredStageLevelForXpElligibility
+    const elligibleToELO = elligibleToXP && !this.state.noElo
+
+    if (elligibleToXP) {
       this.state.players.forEach((player) => {
         if (player.isBot) {
           BOT.find({ id: player.id }, (err, bots) => {
@@ -517,41 +530,42 @@ export default class GameRoom extends Room<GameState> {
                 player.titles.add(Title.GRAND_MASTER)
               }
 
-              if (usr.elo) {
-                if(this.state.noElo === false){
-                  const elo = Math.max(0, this.computeElo(player, rank, usr.elo))
-                  if (elo) {
-                    if (elo > 1100) {
-                      player.titles.add(Title.GYM_TRAINER)
-                    }
-                    if (elo > 1200) {
-                      player.titles.add(Title.GYM_CHALLENGER)
-                    }
-                    if (elo > 1400) {
-                      player.titles.add(Title.GYM_LEADER)
-                    }
-                    usr.elo = elo
+              if (usr.elo && elligibleToELO) {
+                const elo = Math.max(0, this.computeElo(player, rank, usr.elo))
+                if (elo) {
+                  if (elo > 1100) {
+                    player.titles.add(Title.GYM_TRAINER)
                   }
-
-                  DetailledStatistic.create({
-                    time: Date.now(),
-                    name: dbrecord.name,
-                    pokemons: dbrecord.pokemons,
-                    rank: dbrecord.rank,
-                    avatar: dbrecord.avatar,
-                    playerId: dbrecord.id,
-                    elo: elo
-                  })
+                  if (elo > 1200) {
+                    player.titles.add(Title.GYM_CHALLENGER)
+                  }
+                  if (elo > 1400) {
+                    player.titles.add(Title.GYM_LEADER)
+                  }
+                  usr.elo = elo
                 }
+
+                DetailledStatistic.create({
+                  time: Date.now(),
+                  name: dbrecord.name,
+                  pokemons: dbrecord.pokemons,
+                  rank: dbrecord.rank,
+                  avatar: dbrecord.avatar,
+                  playerId: dbrecord.id,
+                  elo: elo
+                })
               }
 
               if (player.life === 100 && rank === 1) {
                 player.titles.add(Title.TYRANT)
               }
+              if (player.life === 1 && rank === 1) {
+                player.titles.add(Title.SURVIVOR)
+              }
 
               if (player.rerollCount > 60) {
                 player.titles.add(Title.GAMBLER)
-              }                
+              }
 
               if (usr.titles === undefined) {
                 usr.titles = []
@@ -757,7 +771,7 @@ export default class GameRoom extends Room<GameState> {
       }
     }
     player.synergies.update(player.board)
-    player.effects.update(player.synergies)
+    player.effects.update(player.synergies, player.board)
   }
 
   updateEvolution(id: string) {
@@ -842,7 +856,7 @@ export default class GameRoom extends Room<GameState> {
 
     if (evolve) {
       player.synergies.update(player.board)
-      player.effects.update(player.synergies)
+      player.effects.update(player.synergies, player.board)
     }
     player.boardSize = this.getTeamSize(player.board)
 
@@ -950,7 +964,7 @@ export default class GameRoom extends Room<GameState> {
           player.board.delete(id)
           player.board.set(newPokemon.id, newPokemon)
           player.synergies.update(player.board)
-          player.effects.update(player.synergies)
+          player.effects.update(player.synergies, player.board)
         }
       })
     })

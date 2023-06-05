@@ -1,15 +1,15 @@
 import React, { useState } from "react"
 import { Title, TitleDescription, TitleName } from "../../../../../types"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
-import Elo from "../elo"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import {
   changeAvatar,
   changeName,
   setTitle
 } from "../../../stores/NetworkStore"
-import { RoleBadge } from "../RoleBadge"
-import { getAvatarSrc, getPortraitSrc } from "../../../utils"
+import { getPortraitSrc } from "../../../utils"
+import { cc } from "../../utils/jsx"
+import PlayerBox from "./player-box"
 
 export default function Profile() {
   const dispatch = useAppDispatch()
@@ -22,37 +22,7 @@ export default function Profile() {
   if (user) {
     return (
       <>
-        <div className="player-box" style={{ marginBottom: "1em" }}>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between"
-            }}
-          >
-            <div style={{ display: "flex", alignItems: "center", gap: "0.5em" }}>
-              <img src={getAvatarSrc(user.avatar)} />
-              <p style={{ color: "#ffc107" }}>{TitleName[user.title]}</p>
-              <RoleBadge role={user.role} />
-              <p>{user.name}</p>
-            </div>
-            <p>
-              Level {user.level} ({user.exp} / 1000)
-            </p>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between"
-            }}
-          >
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <Elo elo={user.elo} />
-            </div>
-            <p>Wins: {user.wins}</p>
-          </div>
-        </div>
+        <PlayerBox user={user} />
 
         <Tabs>
           <TabList>
@@ -64,7 +34,7 @@ export default function Profile() {
           <TabPanel>
             <div className="nes-container">
               <h3>Change Name</h3>
-              <div className="nes-field is-inline" style={{gap: "0.5em"}}>
+              <div className="nes-field is-inline" style={{ gap: "0.5em" }}>
                 <input
                   type="text"
                   className="my-input"
@@ -86,13 +56,17 @@ export default function Profile() {
             <div className="nes-container">
               <h3>Change Avatar</h3>
               <div style={{ display: "flex", flexWrap: "wrap" }}>
-                {pokemonCollection.length === 0 && <p>Play more games to earn boosters and unlock new avatars !</p>}
+                {pokemonCollection.length === 0 && (
+                  <p>
+                    Play more games to earn boosters and unlock new avatars !
+                  </p>
+                )}
                 {pokemonCollection.map((pokemonConfig) => {
                   return pokemonConfig.emotions.map((emotion) => {
                     return (
                       <img
                         key={`normal-${pokemonConfig.id}${emotion}`}
-                        className="clickable"
+                        className="clickable pokemon-portrait"
                         onClick={() => {
                           dispatch(
                             changeAvatar({
@@ -112,7 +86,7 @@ export default function Profile() {
                     return (
                       <img
                         key={`shiny-${pokemonConfig.id}${emotion}`}
-                        className="clickable"
+                        className="clickable pokemon-portrait"
                         onClick={() => {
                           dispatch(
                             changeAvatar({
@@ -131,28 +105,22 @@ export default function Profile() {
             </div>
           </TabPanel>
           <TabPanel>
-            <ul className="titles" style={{ display: "flex", flexDirection: "column", padding: 0 }}>
-              {Object.keys(Title).map((k,i) => (
-                <li key={k} 
-                    style={{ 
-                      padding: "0.5em",
-                      listStyle: "none",
-                      backgroundColor: i%2 ? '#54596b' : '#61738a'
-                    }}
-                    className="clickable"
-                    onClick={() => {
-                      if (user.titles.includes(k as Title)) {
-                        dispatch(setTitle(k))
-                      }
-                    }}
+            <ul className="titles">
+              {Object.keys(Title).map((k, i) => (
+                <li
+                  key={k}
+                  className={cc("clickable", {
+                    unlocked: user.titles.includes(k as Title),
+                    selected: user.title === k
+                  })}
+                  onClick={() => {
+                    if (user.titles.includes(k as Title)) {
+                      dispatch(setTitle(k))
+                    }
+                  }}
                 >
-                  <h5 style={{ color: user.title === k ? '#ffc107' : user.titles.includes(k as Title) ? "#92cc41" : "#db5e6a" }}>
-                    {TitleName[k]}
-                  </h5>
-                  <p style={{ 
-                    margin: 0, 
-                    color: user.titles.includes(k as Title) ? '#ffffff' : '#a0a0a0'
-                  }}>{TitleDescription[k]}</p>
+                  <span>{TitleName[k]}</span>
+                  <p>{TitleDescription[k]}</p>
                 </li>
               ))}
             </ul>

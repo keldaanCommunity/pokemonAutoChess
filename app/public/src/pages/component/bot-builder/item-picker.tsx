@@ -7,14 +7,14 @@ const itemPoolStyle: CSS.Properties = {
   display: "flex",
   flexWrap: "wrap",
   margin: "10px",
-  marginTop: "0px",
+  marginTop: "0px"
 }
 
 const imgStyle: CSS.Properties = {
   width: "40px",
   height: "40px",
   imageRendering: "pixelated",
-  cursor: "var(--cursor-hover)",
+  cursor: "var(--cursor-hover)"
 }
 
 export default function ItemPicker(props: {

@@ -6,8 +6,8 @@ import Player from "../../../../models/colyseus-models/player"
 import { logger } from "../../../../utils/logger"
 
 export default class ItemsContainer extends GameObjects.Container {
-  pokemonId: string | null;
-  playerId: string;
+  pokemonId: string | null
+  playerId: string
 
   constructor(
     scene: Phaser.Scene,
@@ -18,7 +18,7 @@ export default class ItemsContainer extends GameObjects.Container {
     playerId: string
   ) {
     super(scene, x, y)
-   
+
     this.pokemonId = pokemonId
     this.playerId = playerId
     scene.add.existing(this)
@@ -29,7 +29,9 @@ export default class ItemsContainer extends GameObjects.Container {
   }
 
   addItem(value: Item) {
-    this.add(new ItemContainer(this.scene, 0, 0, value, this.pokemonId, this.playerId))
+    this.add(
+      new ItemContainer(this.scene, 0, 0, value, this.pokemonId, this.playerId)
+    )
     this.updateItems()
   }
 
@@ -44,7 +46,7 @@ export default class ItemsContainer extends GameObjects.Container {
   }
 
   updateItems() {
-    const itemSize = (this.pokemonId === null ? 80 : 25)
+    const itemSize = this.pokemonId === null ? 80 : 25
     for (let i = 0; i < this.list.length; i++) {
       const it = <ItemContainer>this.list[i]
       it.closeDetail()
@@ -57,14 +59,14 @@ export default class ItemsContainer extends GameObjects.Container {
     return this.getFirst("name", item)
   }
 
-  closeDetails(){
+  closeDetails() {
     for (let i = 0; i < this.list.length; i++) {
       const it = <ItemContainer>this.list[i]
       it.closeDetail()
     }
   }
 
-  setPlayer(player: Player){
+  setPlayer(player: Player) {
     this.playerId = player.id
     this.removeAll(true)
     player.items.forEach((item) => {
@@ -72,10 +74,10 @@ export default class ItemsContainer extends GameObjects.Container {
     })
   }
 
-  updateCount(item: Item, count: number){
+  updateCount(item: Item, count: number) {
     for (let i = 0; i < this.list.length; i++) {
       const it = <ItemContainer>this.list[i]
-      if(it.name === item){
+      if (it.name === item) {
         it.updateCount(count)
       }
     }

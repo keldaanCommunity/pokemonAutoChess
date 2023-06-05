@@ -65,7 +65,6 @@ export default class Tileset {
           }
         }
       })
-
       ;[Header.WALL_ALT_1, Header.WALL_ALT_2, Header.WALL_ALT_3].forEach(
         (h) => {
           if (this.headers.includes(h) && this.isPixelValue(v, h)) {

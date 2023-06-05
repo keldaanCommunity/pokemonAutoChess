@@ -1,35 +1,35 @@
 #pokemon-collection {
-    height: 100vh;
-    padding: 1vw;
+  height: 100vh;
+  padding: 1vw;
 }
 
 #pokemon-collection > .nes-container {
-    margin-top: 1vw;
-    max-height: calc(100vh - 6vw);
-    overflow-y: auto;
+  margin-top: 1vw;
+  max-height: calc(100vh - 6vw);
+  overflow-y: auto;
 }
 
 #pokemon-collection .pokemon-carousel {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1vw;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1vw;
+  justify-content: center;
 }
 
 #pokemon-collection header {
-    display: flex;
-    align-content: center;
-    gap: 1vw;
+  display: flex;
+  align-content: center;
+  gap: 1vw;
 }
 
 #pokemon-collection header label {
-    align-self: center;
+  align-self: center;
 }
 
 #pokemon-collection header .nes-checkbox + span::before {
-    top: calc(0.65em - 8px);
+  top: calc(0.65em - 8px);
 }
 
 #pokemon-collection .unown-icon {
-    margin: -28px;
+  margin: -28px;
 }

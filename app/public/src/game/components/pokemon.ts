@@ -565,6 +565,44 @@ export default class Pokemon extends DraggableObject {
     })
   }
 
+  healOrderAnimation() {
+    const coordinates = transformAttackCoordinate(
+      this.positionX,
+      this.positionY
+    )
+    const specialProjectile = this.scene.add.sprite(
+      coordinates[0],
+      coordinates[1],
+      "HEAL_ORDER",
+      "000"
+    )
+    specialProjectile.setDepth(7)
+    specialProjectile.setScale(2, 2)
+    specialProjectile.anims.play("HEAL_ORDER")
+    specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+      specialProjectile.destroy()
+    })
+  }
+
+  attackOrderAnimation() {
+    const coordinates = transformAttackCoordinate(
+      this.positionX,
+      this.positionY
+    )
+    const specialProjectile = this.scene.add.sprite(
+      coordinates[0],
+      coordinates[1],
+      "ATTACK_ORDER",
+      "000"
+    )
+    specialProjectile.setDepth(7)
+    specialProjectile.setScale(2, 2)
+    specialProjectile.anims.play("ATTACK_ORDER")
+    specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+      specialProjectile.destroy()
+    })
+  }
+
   earthquakeAnimation() {
     const coordinates = transformAttackCoordinate(
       this.positionX,
@@ -628,7 +666,7 @@ export default class Pokemon extends DraggableObject {
     })
   }
 
-  specialAttackAnimation(group: Phaser.GameObjects.Group) {
+  specialAttackAnimation(group: Phaser.GameObjects.Group, ultCount: number) {
     if (this.skill) {
       let coordinates: number[]
       let specialProjectile: GameObjects.Sprite
@@ -1768,17 +1806,17 @@ export default class Pokemon extends DraggableObject {
             )
             break
 
-          case Ability.POISON_STING:
+          case Ability.VENOSHOCK:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
               "specials",
-              `${Ability.POISON_STING}/000`
+              `${Ability.VENOSHOCK}/000`
             )
             specialProjectile.setDepth(7)
             specialProjectile.setScale(2, 2)
-            specialProjectile.anims.play(Ability.POISON_STING)
+            specialProjectile.anims.play(Ability.VENOSHOCK)
             specialProjectile.once(
               Phaser.Animations.Events.ANIMATION_COMPLETE,
               () => {
@@ -2241,6 +2279,25 @@ export default class Pokemon extends DraggableObject {
             )
             break
 
+          case Ability.HEX:
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.HEX,
+              "000"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.HEX)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
+
           case Ability.SPECTRAL_THIEF:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY)
             specialProjectile = this.scene.add.sprite(
@@ -2559,6 +2616,25 @@ export default class Pokemon extends DraggableObject {
             )
             break
 
+          case Ability.SHELL_TRAP:
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.SHELL_TRAP,
+              "000"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.SHELL_TRAP)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
+
           case Ability.TRI_ATTACK:
             coordinatesTarget = transformAttackCoordinate(
               this.targetX,
@@ -2815,7 +2891,7 @@ export default class Pokemon extends DraggableObject {
               coordinates[0],
               coordinates[1],
               "specials",
-              `${Ability.POISON_STING}/002`
+              `${Ability.VENOSHOCK}/002`
             )
             specialProjectile.setDepth(7)
             specialProjectile.setScale(1, 1)
@@ -2929,6 +3005,7 @@ export default class Pokemon extends DraggableObject {
           }
 
           case Ability.MACH_PUNCH:
+          case Ability.UPPERCUT:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
@@ -3077,7 +3154,10 @@ export default class Pokemon extends DraggableObject {
             break
 
           case Ability.GEOMANCY:
-            coordinates = transformAttackCoordinate(this.positionX, this.positionY)
+            coordinates = transformAttackCoordinate(
+              this.positionX,
+              this.positionY
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1] - 50,
@@ -3096,12 +3176,34 @@ export default class Pokemon extends DraggableObject {
             break
 
           case Ability.OVERHEAT:
-            this.scene.cameras.main.flash(200, 255, 0, 0)
+            coordinates = transformAttackCoordinate(
+              this.positionX,
+              this.positionY
+            )
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              "specials",
+              `${Ability.FIRE_BLAST}/000`
+            )
+            specialProjectile.setDepth(0)
+            specialProjectile.setScale(3)
+            specialProjectile.anims.play(Ability.FIRE_BLAST)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
             break
 
           default:
             break
         }
+      }
+
+      if (this.skill === Ability.GROWTH) {
+        this.sprite.setScale(2 + 0.5 * ultCount)
       }
     }
   }

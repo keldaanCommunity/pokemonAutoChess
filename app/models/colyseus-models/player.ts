@@ -27,7 +27,7 @@ export default class Player extends Schema implements IPlayer {
   @type("string") avatar: string
   @type({ map: Pokemon }) board = new MapSchema<Pokemon>()
   @type(["string"]) shop = new ArraySchema<Pkm>()
-  @type(Simulation) simulation
+  @type(Simulation) simulation: Simulation
   @type(ExperienceManager) experienceManager = new ExperienceManager()
   @type({ map: "uint8" }) synergies = new Synergies()
   @type("uint8") money = process.env.MODE == "dev" ? 400 : 6
@@ -78,7 +78,7 @@ export default class Player extends Schema implements IPlayer {
     this.role = role
     this.pokemonCollection = new PokemonCollection(pokemonCollection)
     this.simulation = new Simulation(id, room)
-    if(isBot) this.loadingProgress = 100
+    if (isBot) this.loadingProgress = 100
   }
 
   getCurrentBattleResult() {

@@ -1871,10 +1871,10 @@ export class Litwick extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.LITWICK,
-      [Synergy.FIRE, Synergy.GHOST],
-      Rarity.EPIC,
+      [Synergy.GHOST, Synergy.FIRE, Synergy.ARTIFICIAL],
+      Rarity.COMMON,
       Pkm.LAMPENT,
-      90,
+      50,
       5,
       1,
       1,
@@ -1883,7 +1883,7 @@ export class Litwick extends Pokemon {
       AttackType.PHYSICAL,
       1,
       100,
-      Ability.DEFAULT,
+      Ability.HEX,
       shiny,
       emotion,
       false
@@ -1895,10 +1895,10 @@ export class Lampent extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.LAMPENT,
-      [Synergy.FIRE, Synergy.GHOST],
-      Rarity.EPIC,
+      [Synergy.GHOST, Synergy.FIRE, Synergy.ARTIFICIAL],
+      Rarity.COMMON,
       Pkm.CHANDELURE,
-      130,
+      110,
       9,
       1,
       1,
@@ -1907,7 +1907,7 @@ export class Lampent extends Pokemon {
       AttackType.PHYSICAL,
       2,
       100,
-      Ability.DEFAULT,
+      Ability.HEX,
       shiny,
       emotion,
       false
@@ -1919,10 +1919,10 @@ export class Chandelure extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.CHANDELURE,
-      [Synergy.FIRE, Synergy.GHOST],
-      Rarity.EPIC,
+      [Synergy.GHOST, Synergy.FIRE, Synergy.ARTIFICIAL],
+      Rarity.COMMON,
       Pkm.DEFAULT,
-      230,
+      200,
       18,
       1,
       1,
@@ -1931,7 +1931,7 @@ export class Chandelure extends Pokemon {
       AttackType.PHYSICAL,
       3,
       100,
-      Ability.DEFAULT,
+      Ability.HEX,
       shiny,
       emotion,
       true
@@ -2099,7 +2099,7 @@ export class Turtwig extends Pokemon {
       AttackType.PHYSICAL,
       1,
       100,
-      Ability.STOMP,
+      Ability.GROWTH,
       shiny,
       emotion,
       false
@@ -2123,7 +2123,7 @@ export class Grotle extends Pokemon {
       AttackType.PHYSICAL,
       2,
       100,
-      Ability.STOMP,
+      Ability.GROWTH,
       shiny,
       emotion,
       false
@@ -2147,7 +2147,7 @@ export class Torterra extends Pokemon {
       AttackType.PHYSICAL,
       3,
       100,
-      Ability.STOMP,
+      Ability.GROWTH,
       shiny,
       emotion,
       true
@@ -4329,7 +4329,7 @@ export class NidoranF extends Pokemon {
       AttackType.PHYSICAL,
       1,
       90,
-      Ability.POISON_STING,
+      Ability.VENOSHOCK,
       shiny,
       emotion,
       false
@@ -4353,7 +4353,7 @@ export class Nidorina extends Pokemon {
       AttackType.PHYSICAL,
       2,
       90,
-      Ability.POISON_STING,
+      Ability.VENOSHOCK,
       shiny,
       emotion,
       false
@@ -4377,7 +4377,7 @@ export class Nidoqueen extends Pokemon {
       AttackType.PHYSICAL,
       3,
       90,
-      Ability.POISON_STING,
+      Ability.VENOSHOCK,
       shiny,
       emotion,
       true
@@ -6165,7 +6165,7 @@ export class Charizard extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.CHARIZARD,
-      [Synergy.FIRE, Synergy.DRAGON],
+      [Synergy.FIRE, Synergy.DRAGON, Synergy.FLYING],
       Rarity.COMMON,
       Pkm.DEFAULT,
       220,
@@ -6801,7 +6801,7 @@ export class Seviper extends Pokemon {
       AttackType.PHYSICAL,
       1,
       75,
-      Ability.POISON_STING,
+      Ability.VENOSHOCK,
       shiny,
       emotion,
       true
@@ -6848,8 +6848,8 @@ export class Tauros extends Pokemon {
       AttackSprite.NORMAL_MELEE,
       AttackType.PHYSICAL,
       1,
-      105,
-      Ability.EARTHQUAKE,
+      100,
+      Ability.HEAD_SMASH,
       shiny,
       emotion,
       true
@@ -7625,6 +7625,30 @@ export class Mawile extends Pokemon {
   }
 }
 
+export class Phione extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.PHIONE,
+      [Synergy.WATER, Synergy.BUG],
+      Rarity.MYTHICAL,
+      Pkm.MANAPHY,
+      160,
+      12,
+      2,
+      2,
+      3,
+      AttackSprite.PSYCHIC_RANGE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.NASTY_PLOT,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
 export class Manaphy extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
@@ -7632,10 +7656,10 @@ export class Manaphy extends Pokemon {
       [Synergy.WATER, Synergy.BUG],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
-      200,
-      20,
-      3,
-      3,
+      240,
+      16,
+      4,
+      4,
       3,
       AttackSprite.PSYCHIC_RANGE,
       AttackType.PHYSICAL,
@@ -10141,6 +10165,57 @@ export class Persian extends Pokemon {
     )
   }
 }
+
+export class Hoothoot extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.HOOTHOOT,
+      [Synergy.NORMAL, Synergy.FLYING, Synergy.PSYCHIC],
+      Rarity.UNCOMMON,
+      Pkm.NOCTOWL,
+      75,
+      5,
+      2,
+      3,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.HYPNOSIS,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Noctowl extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.NOCTOWL,
+      [Synergy.NORMAL, Synergy.FLYING, Synergy.PSYCHIC],
+      Rarity.UNCOMMON,
+      Pkm.DEFAULT,
+      170,
+      6,
+      3,
+      5,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      100,
+      Ability.HYPNOSIS,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
 export class Munchlax extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
@@ -11425,7 +11500,7 @@ export class Snivy extends Pokemon {
       AttackType.PHYSICAL,
       1,
       80,
-      Ability.POISON_STING,
+      Ability.VENOSHOCK,
       shiny,
       emotion,
       false
@@ -11449,7 +11524,7 @@ export class Servine extends Pokemon {
       AttackType.PHYSICAL,
       2,
       80,
-      Ability.POISON_STING,
+      Ability.VENOSHOCK,
       shiny,
       emotion,
       false
@@ -11473,7 +11548,7 @@ export class Serperior extends Pokemon {
       AttackType.PHYSICAL,
       3,
       80,
-      Ability.POISON_STING,
+      Ability.VENOSHOCK,
       shiny,
       emotion,
       true
@@ -12555,8 +12630,8 @@ export class Diglett extends Pokemon {
       AttackSprite.ROCK_MELEE,
       AttackType.PHYSICAL,
       1,
-      200,
-      Ability.EARTHQUAKE,
+      50,
+      Ability.DIG,
       shiny,
       emotion,
       false,
@@ -12580,8 +12655,8 @@ export class Dugtrio extends Pokemon {
       AttackSprite.ROCK_MELEE,
       AttackType.PHYSICAL,
       2,
-      200,
-      Ability.EARTHQUAKE,
+      50,
+      Ability.DIG,
       shiny,
       emotion,
       true,
@@ -12878,7 +12953,7 @@ export class Ekans extends Pokemon {
       AttackType.PHYSICAL,
       1,
       90,
-      Ability.POISON_STING,
+      Ability.VENOSHOCK,
       shiny,
       emotion,
       false,
@@ -12903,7 +12978,7 @@ export class Arbok extends Pokemon {
       AttackType.PHYSICAL,
       2,
       90,
-      Ability.POISON_STING,
+      Ability.VENOSHOCK,
       shiny,
       emotion,
       true,
@@ -13125,7 +13200,7 @@ export class Hitmonchan extends Pokemon {
       AttackType.PHYSICAL,
       1,
       100,
-      Ability.MACH_PUNCH,
+      Ability.UPPERCUT,
       shiny,
       emotion,
       true,
@@ -13151,6 +13226,130 @@ export class Mimikyu extends Pokemon {
       1,
       40,
       Ability.SHADOW_SNEAK,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
+export class Bonsley extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.BONSLEY,
+      [Synergy.ROCK, Synergy.FLORA, Synergy.BABY],
+      Rarity.EPIC,
+      Pkm.SUDOWOODO,
+      125,
+      8,
+      5,
+      2,
+      1,
+      AttackSprite.ROCK_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      100,
+      Ability.MIMIC,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Sudowoodo extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.SUDOWOODO,
+      [Synergy.ROCK, Synergy.FLORA, Synergy.MONSTER],
+      Rarity.EPIC,
+      Pkm.DEFAULT,
+      250,
+      16,
+      6,
+      3,
+      1,
+      AttackSprite.ROCK_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      100,
+      Ability.MIMIC,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
+export class Combee extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.COMBEE,
+      [Synergy.BUG, Synergy.FLORA],
+      Rarity.EPIC,
+      Pkm.VESPIQUEEN,
+      120,
+      8,
+      3,
+      3,
+      1,
+      AttackSprite.BUG_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      90,
+      Ability.HEAL_ORDER,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Vespiqueen extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.VESPIQUEEN,
+      [Synergy.BUG, Synergy.FLORA],
+      Rarity.EPIC,
+      Pkm.DEFAULT,
+      250,
+      16,
+      4,
+      4,
+      1,
+      AttackSprite.BUG_MELEE,
+      AttackType.PHYSICAL,
+      2,
+      90,
+      Ability.HEAL_ORDER,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
+export class Shuckle extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.SHUCKLE,
+      [Synergy.BUG, Synergy.ROCK],
+      Rarity.MYTHICAL,
+      Pkm.DEFAULT,
+      150,
+      4,
+      15,
+      15,
+      1,
+      AttackSprite.ROCK_MELEE,
+      AttackType.PHYSICAL,
+      1,
+      70,
+      Ability.SHELL_TRAP,
       shiny,
       emotion,
       true

@@ -3,10 +3,18 @@ import SimplePlayer from "../../models/colyseus-models/simple-player"
 
 export default class AfterGameState extends Schema {
   @type({ map: SimplePlayer }) players = new MapSchema<SimplePlayer>()
-  @type("boolean") noElo = false
+  @type("boolean") elligibleToELO = false
+  @type("boolean") elligibleToXP = false
 
-  constructor(noElo: boolean) {
+  constructor({
+    elligibleToELO,
+    elligibleToXP
+  }: {
+    elligibleToELO: boolean
+    elligibleToXP: boolean
+  }) {
     super()
-    this.noElo = noElo
+    this.elligibleToXP = elligibleToXP
+    this.elligibleToELO = elligibleToELO
   }
 }

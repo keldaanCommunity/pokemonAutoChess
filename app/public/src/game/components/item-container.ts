@@ -27,18 +27,32 @@ export default class ItemContainer extends DraggableObject {
     playerId: string
   ) {
     const currentPlayerUid = getGameScene()?.uid
-    const itemSize = (pokemonId === null ? 70 : 25)
+    const itemSize = pokemonId === null ? 70 : 25
     super(scene, x, y, itemSize, itemSize, playerId !== currentPlayerUid)
     this.scene = scene
     this.pokemonId = pokemonId
     this.playerId = playerId
-    this.circle = new GameObjects.Ellipse(scene, 0, 0, itemSize, itemSize, 0x61738a, 1)
-    if(pokemonId === null){    
-      this.circle.setStrokeStyle(3, playerId === currentPlayerUid ? 0x000000 : 0x666666, 1)
+    this.circle = new GameObjects.Ellipse(
+      scene,
+      0,
+      0,
+      itemSize,
+      itemSize,
+      0x61738a,
+      1
+    )
+    if (pokemonId === null) {
+      this.circle.setStrokeStyle(
+        3,
+        playerId === currentPlayerUid ? 0x000000 : 0x666666,
+        1
+      )
       this.circle.setAlpha(playerId === currentPlayerUid ? 1 : 0.7)
     }
     this.add(this.circle)
-    this.sprite = new GameObjects.Image(scene, 0, 0, "item", item).setScale(pokemonId === null ? 2 : 1)
+    this.sprite = new GameObjects.Image(scene, 0, 0, "item", item).setScale(
+      pokemonId === null ? 2 : 1
+    )
     this.detail = new ItemDetail(scene, 0, 0, item)
     this.detail.setDepth(100)
     this.detail.setPosition(
@@ -56,8 +70,8 @@ export default class ItemContainer extends DraggableObject {
     scene.input.setDraggable(this, this.isDraggable)
   }
 
-  get isDraggable(){
-    return (!this.isDisabled && this.pokemonId === null)
+  get isDraggable() {
+    return !this.isDisabled && this.pokemonId === null
   }
 
   onPointerOver() {
@@ -71,7 +85,7 @@ export default class ItemContainer extends DraggableObject {
 
   onPointerOut() {
     super.onPointerOut()
-    if(!this.isDisabled){
+    if (!this.isDisabled) {
       this.input.dropZone = true
     }
     if (this.isDraggable) {
@@ -139,8 +153,8 @@ export default class ItemContainer extends DraggableObject {
     this.tempDetail.setVisible(true)
   }
 
-  updateCount(value: number){
-    if(this.countText === undefined){
+  updateCount(value: number) {
+    if (this.countText === undefined) {
       const textStyle = {
         fontSize: "16px",
         fontFamily: "brandonGrotesque",
@@ -150,7 +164,13 @@ export default class ItemContainer extends DraggableObject {
         stroke: "#000000"
       }
       this.countText = this.scene.add.existing(
-        new GameObjects.Text(this.scene, this.detail.width * 0.5 + 10, this.detail.height * 0.5 - 15, value.toString(), textStyle)
+        new GameObjects.Text(
+          this.scene,
+          this.detail.width * 0.5 + 10,
+          this.detail.height * 0.5 - 15,
+          value.toString(),
+          textStyle
+        )
       )
       this.add(this.countText)
       this.countText.setAlign("left")

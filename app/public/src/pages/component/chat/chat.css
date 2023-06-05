@@ -2,23 +2,25 @@
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
-  align-items: center;
+  align-items: stretch;
   background-image: url("assets/ui/back1.png");
   background-size: cover;
   background-position-x: right;
 }
 
-.user-chat h1 {
+#root .user-chat h1 {
   color: white;
+  text-align: center;
+  margin: 0;
 }
 
 .user-chat form {
   display: flex;
   flex-flow: row nowrap;
   width: 100%;
-  margin-top: 15px;
   align-items: stretch;
-  gap: 4px;
+  margin-top: 0.25em;
+  gap: 0.25em;
 }
 
 .user-chat form input {
@@ -27,4 +29,29 @@
 
 .user-chat form button {
   flex: 0;
+}
+
+.chat-history {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.chat button {
+  padding: 0.25em;
+  align-self: start;
+}
+
+.chat-message-author {
+  font-size: 1vw;
+  display: inline-block;
+  margin: 0 0.5em;
+  color: rgb(255, 193, 7);
+  max-width: 10ch;
+  word-break: break-word;
+}
+
+.chat span,
+.chat p {
+  padding: 0.25em 0 0.15em 0;
+  line-height: 1.25em;
 }

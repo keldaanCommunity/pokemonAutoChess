@@ -6,7 +6,13 @@ import Design, { DesignTiled } from "../../core/design"
 import BotManager from "../../core/bot-manager"
 import { DungeonData, Dungeon, StageDuration } from "../../types/Config"
 import { GamePhaseState } from "../../types/enum/Game"
-import { Schema, MapSchema, ArraySchema, type, SetSchema } from "@colyseus/schema"
+import {
+  Schema,
+  MapSchema,
+  ArraySchema,
+  type,
+  SetSchema
+} from "@colyseus/schema"
 import { Pkm } from "../../types/enum/Pokemon"
 import { pickRandomIn } from "../../utils/random"
 
@@ -25,7 +31,6 @@ export default class GameState extends Schema {
   time = StageDuration[0] * 1000
   botManager: BotManager = new BotManager()
   shop: Shop = new Shop()
-  elligibleToXP = false
   id: Dungeon
   design: Design
   tilemap: DesignTiled | undefined

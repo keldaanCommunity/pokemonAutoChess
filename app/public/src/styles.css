@@ -229,6 +229,7 @@ p:last-child {
 
 .Toastify__toast-container {
   width: auto !important;
+  --toastify-z-index: 1040;
 }
 
 .Toastify__toast {
@@ -301,7 +302,7 @@ p:last-child {
   box-shadow: inset 6px 6px 0px 0px #65a013;
 }
 
-.bubbly.orange {  
+.bubbly.orange {
   background: #f7d51d;
   box-shadow: inset -6px -6px 0px 0px #c9ae17;
   color: black;
@@ -346,10 +347,10 @@ p:last-child {
   box-shadow: inset 6px 6px 0px 0px #108de0;
 }
 
-.bubbly.pink {  
+.bubbly.pink {
   background: #ee2097;
   color: white;
-  box-shadow: inset -6px -6px 0px 0px #902c74;  
+  box-shadow: inset -6px -6px 0px 0px #902c74;
 }
 
 .bubbly.pink:not([disabled]):hover {
@@ -358,7 +359,7 @@ p:last-child {
 
 .bubbly.pink:not([disabled]):active {
   background: #ee2097;
-  box-shadow: inset 6px 6px 0px 0px #902c74;  
+  box-shadow: inset 6px 6px 0px 0px #902c74;
 }
 
 .bubbly[disabled] {
@@ -367,6 +368,13 @@ p:last-child {
   color: #757575;
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+.bubbly > img:first-child {
+  height: 1.4em;
+  display: inline-block;
+  vertical-align: text-top;
+  margin-right: 0.25em;
 }
 
 .firebaseui-idp-button {
@@ -427,33 +435,26 @@ p:last-child {
   color: white;
 }
 
-.modal-dialog.is-dark :is(.modal-header, .modal-footer){
+.modal-dialog.is-dark :is(.modal-header, .modal-footer) {
   border-color: black;
   border-width: 4px;
-  background-color: #4F5160;
-}
-
-.chatbg {
-  background: #aeb6c0;
-  border-radius: 8px;
-  border: none;
-  padding: 0;
-  cursor: var(--cursor-hover);
-  outline-offset: 4px;
-  border: solid;
-  border-color: black;
+  background-color: #4f5160;
 }
 
 .chat {
   display: block;
-  padding: 12px 42px;
+  padding: 0;
+  margin: 0.25em 0;
   border-radius: 8px;
   font-size: 1.25rem;
   border: solid;
   border-color: black;
   background: #61738a;
   color: white;
-  transform: translateY(-8px) translateX(-8px);
+  cursor: var(--cursor-hover);
+}
+.chat:nth-child(odd) {
+  background-color: #54596b;
 }
 
 .player-box {
@@ -461,13 +462,17 @@ p:last-child {
   border-radius: 12px;
   border: solid;
   border-color: black;
-  padding: 5px;  
+  padding: 5px;
   color: white;
   box-shadow: #2d334b 4px 4px 0px;
 }
 
 .player-box p {
   margin: 0;
+}
+
+.player-title {
+  color: #ffc107;
 }
 
 .my-input {
@@ -506,7 +511,7 @@ p:last-child {
   margin: 0px !important;
   background-color: #61738a !important;
   color: "#fff" !important;
-  appearance: none!important;
+  appearance: none !important;
   -webkit-appearance: none !important;
 }
 
@@ -551,7 +556,7 @@ p:last-child {
 /* react-tooltip */
 
 #root .__react_component_tooltip {
-  font-size: 1vw;   
+  font-size: 1vw;
 }
 
 .__react_component_tooltip output {
@@ -572,13 +577,13 @@ p:last-child {
      MEDIA QUERIES
 ======================== */
 
-@media(max-width: 1024px){
+@media (max-width: 1024px) {
   body {
     font-size: 1.5vw;
   }
 }
 
-@media(max-width: 640px){
+@media (max-width: 640px) {
   body {
     font-size: 2vw;
   }
@@ -631,4 +636,11 @@ p:last-child {
   );
   background-size: 400% 400%;
   background-repeat: no-repeat;
+}
+
+.pokemon-portrait {
+  border: 1px solid #000000;
+  border-radius: 4px;
+  box-shadow: 2px 2px 0 #00000060;
+  image-rendering: pixelated;
 }

@@ -1,4 +1,4 @@
-import { Effect } from "./Effect";
+import { Effect } from "./Effect"
 
 export enum Synergy {
   NORMAL = "NORMAL",
@@ -91,7 +91,11 @@ export const SynergyEffects: { [key in Synergy]: Effect[] } = Object.freeze({
     Effect.STRANGE_STEAM
   ],
   [Synergy.ICE]: [Effect.SNOW, Effect.SHEER_COLD],
-  [Synergy.FOSSIL]: [Effect.ANCIENT_POWER, Effect.ELDER_POWER, Effect.FORGOTTEN_POWER],
+  [Synergy.FOSSIL]: [
+    Effect.ANCIENT_POWER,
+    Effect.ELDER_POWER,
+    Effect.FORGOTTEN_POWER
+  ],
   [Synergy.SOUND]: [Effect.LARGO, Effect.ALLEGRO, Effect.PRESTO],
   [Synergy.ARTIFICIAL]: [
     Effect.DUBIOUS_DISC,

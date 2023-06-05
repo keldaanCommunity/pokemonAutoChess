@@ -376,8 +376,8 @@ export const AbilityName: { [key in Ability]: Langage } = {
     fra: `Sécrétion`,
     prt: ``
   },
-  [Ability.POISON_STING]: {
-    eng: `Poison Sting`,
+  [Ability.VENOSHOCK]: {
+    eng: `Venoshock`,
     esp: `Picadura de veneno`,
     fra: `Dard Venin`,
     prt: ``
@@ -760,6 +760,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     prt: "",
     fra: ""
   },
+  [Ability.UPPERCUT]: {
+    eng: "Uppercut",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
   [Ability.TRIPLE_KICK]: {
     eng: "Triple Kick",
     esp: "",
@@ -822,6 +828,48 @@ export const AbilityName: { [key in Ability]: Langage } = {
   },
   [Ability.OVERHEAT]: {
     eng: "Overheat",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HYPNOSIS]: {
+    eng: "Hypnosis",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.MIMIC]: {
+    eng: "Mimic",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HEX]: {
+    eng: "Hex",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.GROWTH]: {
+    eng: "Growth",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HEAL_ORDER]: {
+    eng: "Heal Order",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.SHELL_TRAP]: {
+    eng: "Shell Trap",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.DIG]: {
+    eng: "Dig",
     esp: "",
     prt: "",
     fra: ""
@@ -1130,7 +1178,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.DISCHARGE]: {
-    eng: `Shock nearby enemies for [25,50,100,SP] ${Damage.SPECIAL}, and give ${Status.PARALYSIS} for 5 seconds`,
+    eng: `Shock nearby enemies for [25,50,100,SP] ${Damage.SPECIAL} and make them ${Status.PARALYSIS} for 5 seconds`,
     esp: `Ataque en el área de efecto que causa 40,60,80 daños especiales.`,
     fra: `Attaque AoE en cercle faisant 40,60,80 dégats spéciaux.`,
     prt: ``
@@ -1190,25 +1238,25 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.BUG_BUZZ]: {
-    eng: `Mono target attack that does [20,40,80,SP] ${Damage.SPECIAL}. Double damage if target has ${Status.PARALYSIS}`,
-    esp: `Ataque de daño especial de un mono objetivo que hace [20,40,80,SP] ${Damage.SPECIAL}. Double damage if target has ${Status.PARALYSIS}`,
+    eng: `Mono target attack that does [20,40,80,SP] ${Damage.SPECIAL}. Double damage if target is ${Status.PARALYSIS}`,
+    esp: `Ataque de daño especial de un mono objetivo que hace [20,40,80,SP] ${Damage.SPECIAL}. Double damage if target is ${Status.PARALYSIS}`,
     fra: `Attaque mono cible faisant [20,40,80,SP] ${Damage.SPECIAL}. Double les dégâts si la cible est ${Status.PARALYSIS}`,
     prt: ``
   },
   [Ability.STRING_SHOT]: {
-    eng: `Mono target attack that does [10,20,50,SP] ${Damage.SPECIAL} and trigger ${Status.PARALYSIS} for 5 seconds`,
+    eng: `Mono target attack that does [10,20,50,SP] ${Damage.SPECIAL} and make ${Status.PARALYSIS} for 5 seconds`,
     esp: ``,
     fra: ``,
     prt: ``
   },
-  [Ability.POISON_STING]: {
+  [Ability.VENOSHOCK]: {
     eng: `Mono target damage that deals [30,60,120,SP] ${Damage.SPECIAL}. Doubles damage if target is ${Status.POISON}`,
     esp: `Daño especial de un solo objetivo que reparte [30,60,120,SP] ${Damage.SPECIAL}. Duplica el daño si el objetivo está envenenado.`,
     fra: `Attaque physique mono cible faisant [30,60,120,SP] ${Damage.SPECIAL}. Double les dégats si la cible est empoisonné.`,
     prt: ``
   },
   [Ability.LEECH_LIFE]: {
-    eng: `Area of effect life steal attack that deals [15,30,60,SP] ${Damage.SPECIAL} around the target`,
+    eng: `Area of effect life steal attack that deals [15,30,60,SP] ${Damage.SPECIAL}`,
     esp: `Área de efecto robo de vida daño especial ataque [15,30,60,SP] ${Damage.SPECIAL} alrededor del objetivo`,
     fra: `Attaque vol de vie en AoE faisant [15,30,60,SP] ${Damage.SPECIAL}.`,
     prt: ``
@@ -1250,7 +1298,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.HURRICANE]: {
-    eng: `Area of effect attack that deals [25,50,100,SP] ${Damage.SPECIAL} in a line behind the target and ${Status.PARALYSIS} for 4 seconds`,
+    eng: `Area of effect attack that deals [25,50,100,SP] ${Damage.SPECIAL} in a line behind the target and make ${Status.PARALYSIS} for 4 seconds`,
     esp: `Ataque de área de efecto que causa [25,50,100,SP] ${Damage.SPECIAL} en una línea detrás del objetivo`,
     fra: `Attaque AoE faisant [25,50,100,SP] ${Damage.SPECIAL} dans une ligne derrière la cible`,
     prt: ``
@@ -1364,7 +1412,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   RAZOR_WIND: {
-    eng: `Deals [20,40,80,SP] ${Damage.SPECIAL} to the target and apply ${Status.PARALYSIS} around it`,
+    eng: `Deals [20,40,80,SP] ${Damage.SPECIAL} to the target and make surounding enemies ${Status.PARALYSIS}`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1376,7 +1424,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   WONDER_GUARD: {
-    eng: `Passive: Reduce received damage and received healing to 1.\nActive: Deals [30,60,120,SP] ${Damage.SPECIAL} and apply ${Status.PARALYSIS} to all adjacent enemies for [5,SP] seconds.`,
+    eng: `Passive: Reduce received damage and received healing to 1.\nActive: Deals [30,60,120,SP] ${Damage.SPECIAL} and make all adjacent enemies ${Status.PARALYSIS} for [5,SP] seconds.`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1484,13 +1532,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.DIVE]: {
-    eng: `Dives underwater and reappears in the middle of the enemy team, dealing [10,20,40,SP] ${Damage.SPECIAL} and ${Status.FREEZE} all adjacent units for [1.5,3,6] seconds`,
+    eng: `Dives underwater and reappears in the middle of the enemy team, dealing [15,30,60,SP] ${Damage.SPECIAL} and ${Status.FREEZE} all adjacent units for [1,2,4] seconds`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   [Ability.SPIKE_ARMOR]: {
-    eng: `For [3,5,10] seconds, targets that melee attack this Pokémon receive ${Status.WOUND} and take ${Damage.SPECIAL} equal to his current defense`,
+    eng: `For [3,5,10] seconds, targets that melee attack this Pokémon receive ${Status.WOUND} and take ${Damage.SPECIAL} equal to his current ${Stat.DEF}`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1556,7 +1604,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ""
   },
   [Ability.AGILITY]: {
-    eng: `Increase ${Stat.ATK_SPEED} by [5,10,15,SP] % (stacks)`,
+    eng: `Increase ${Stat.ATK_SPEED} by [10,20,30,SP] % (stacks)`,
     esp: "",
     prt: "",
     fra: ""
@@ -1580,7 +1628,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ""
   },
   [Ability.MACH_PUNCH]: {
-    eng: `Deals [50,SP] ${Damage.SPECIAL}. Double damage if attacker has a better ${Stat.DEF} than target`,
+    eng: `Deals [50,SP] ${Damage.SPECIAL} and attacks immediately after`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.UPPERCUT]: {
+    eng: `Deals [80,SP] ${Damage.SPECIAL}. Double damage if attacker has a better ${Stat.DEF} than target`,
     esp: "",
     prt: "",
     fra: ""
@@ -1592,7 +1646,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ""
   },
   [Ability.MAWASHI_GERI]: {
-    eng: `Deals [50,SP] ${Damage.SPECIAL}. Double damage if attacker has a better ${Stat.ATK} than target`,
+    eng: `Deals [80,SP] ${Damage.SPECIAL}. Double damage if attacker has a better ${Stat.ATK} than target`,
     esp: "",
     prt: "",
     fra: ""
@@ -1651,6 +1705,48 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
   },
   [Ability.OVERHEAT]: {
     eng: `Deals [20, SP] ${Damage.SPECIAL} to all enemies. Double damage if target is ${Status.BURN}`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HYPNOSIS]: {
+    eng: `Put ${Status.SLEEP} 1 enemy in the back lines for [2,3.5,6] seconds`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.MIMIC]: {
+    eng: `Pretends to be a tree and does not attack but gain 2 ${Stat.ATK} per second instead (stackable).\nStarts attacking when ${Stat.MANA} bar is full, then Mimic copies the ability of the target.`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HEX]: {
+    eng: `Deals [20,40,80,SP] ${Damage.SPECIAL} to the target. Doubles damage if target is ${Status.BURN}, ${Status.CONFUSION}, ${Status.FREEZE}, ${Status.PARALYSIS}, ${Status.POISON}, ${Status.SILENCE}, ${Status.SLEEP} or ${Status.WOUND}`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.GROWTH]: {
+    eng: `Increase body size and ${Stat.ATK} by [10,SP]. Grows twice as fast if weather is sunny`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HEAL_ORDER]: {
+    eng: `Deals [25,45,65,SP] ${Damage.SPECIAL} to adjacent enemies and heal [25,45,65,SP] to adjacent allies`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.SHELL_TRAP]: {
+    eng: `${Status.SILENCE} target for 3 seconds and removes 40 ${Stat.MANA} from target and enemies around it`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.DIG]: {
+    eng: `Digs underground and reappears next to the farthest enemy, dealing [10,20,40,SP] special damage to all enemies on the way`,
     esp: "",
     prt: "",
     fra: ""

@@ -34,16 +34,24 @@ export default function Avatar(props: {
       >
         <img
           style={{ width: "40px", height: "40px" }}
+          className="pokemon-portrait"
           src={getAvatarSrc(props.avatar)}
         />
 
-        <span style={{ overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis", padding: "0 0.5em" }}>
+        <span
+          style={{
+            overflow: "hidden",
+            whiteSpace: "nowrap",
+            textOverflow: "ellipsis",
+            padding: "0 0.5em"
+          }}
+        >
           {props.name}
         </span>
         <RoleBadge role={props.role} />
       </div>
       <div style={{ display: "flex", gap: "5px", alignItems: "center" }}>
-        <p style={{ margin: "0px", color: "#ffc107" }}>
+        <p className="player-title" style={{ margin: "0px" }}>
           {TitleName[props.title]}
         </p>
         {elo}

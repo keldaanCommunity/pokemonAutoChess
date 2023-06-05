@@ -3,12 +3,14 @@ import SimplePlayer from "../../../models/colyseus-models/simple-player"
 
 interface IUserAfterState {
   players: SimplePlayer[]
-  noElo: boolean
+  elligibleToXP: boolean
+  elligibleToELO: boolean
 }
 
 const initialState: IUserAfterState = {
   players: new Array<SimplePlayer>(),
-  noElo: false
+  elligibleToXP: false,
+  elligibleToELO: false
 }
 
 export const afterSlice = createSlice({
@@ -19,16 +21,20 @@ export const afterSlice = createSlice({
       state.players.push(JSON.parse(JSON.stringify(action.payload)))
     },
     leaveAfter: () => initialState,
-    setNoELO: (state, action: PayloadAction<boolean>) => {
-      state.noElo = action.payload
+    setElligibilityToXP: (state, action: PayloadAction<boolean>) => {
+      state.elligibleToXP = action.payload
     },
+    setElligibilityToELO: (state, action: PayloadAction<boolean>) => {
+      state.elligibleToELO = action.payload
+    }
   }
 })
 
-export const { 
+export const {
   addPlayer,
   leaveAfter,
-  setNoELO
+  setElligibilityToXP,
+  setElligibilityToELO
 } = afterSlice.actions
 
 export default afterSlice.reducer

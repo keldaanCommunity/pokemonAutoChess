@@ -17,7 +17,8 @@ import {
   IPokemonAvatar,
   IFloatingItem,
   IPokemonEntity,
-  Transfer
+  Transfer,
+  NonFunctionPropNames
 } from "../../../types"
 import PokemonEntity from "../../../core/pokemon-entity"
 import { Item } from "../../../types/enum/Item"
@@ -28,9 +29,13 @@ import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
 import { getPortraitSrc } from "../utils"
 import { IPokemonRecord } from "../../../models/colyseus-models/game-record"
 import { Synergy } from "../../../types/enum/Synergy"
-import { AttackType, HealType } from "../../../types/enum/Game"
+import { AttackType, Climate, HealType } from "../../../types/enum/Game"
 import store from "../stores"
 import { logger } from "../../../utils/logger"
+import { PokemonAvatar } from "../../../models/colyseus-models/pokemon-avatar"
+import { FloatingItem } from "../../../models/colyseus-models/floating-item"
+import Status from "../../../models/colyseus-models/status"
+import Count from "../../../models/colyseus-models/count"
 
 class GameContainer {
   room: Room<GameState>
@@ -52,7 +57,7 @@ class GameContainer {
   }
 
   initializeGame() {
-    if(this.game != null) return; // prevent initializing twice
+    if (this.game != null) return // prevent initializing twice
     // Create Phaser game
     const config = {
       type: Phaser.CANVAS,
@@ -87,31 +92,43 @@ class GameContainer {
     this.room.onMessage(Transfer.DRAG_DROP_FAILED, (message) =>
       this.handleDragDropFailed(message)
     )
-    this.room.state.avatars.onAdd = (avatar) => {
+    this.room.state.avatars.onAdd((avatar) => {
       this.handleAvatarAdd(avatar)
-      avatar.onChange = (changes) => {
-        changes.forEach((change) => {
-          this.handleAvatarChange(avatar, change)
+      const fields: NonFunctionPropNames<PokemonAvatar>[] = [
+        "x",
+        "y",
+        "action",
+        "timer",
+        "orientation"
+      ]
+      fields.forEach((field) => {
+        avatar.listen(field, (value, previousValue) => {
+          this.handleAvatarChange(avatar, field, value)
         })
-      }
-    }
+      })
+    })
 
-    this.room.state.avatars.onRemove = (value, key) => {
+    this.room.state.avatars.onRemove((value, key) => {
       this.handleAvatarRemove(value)
-    }
+    })
 
-    this.room.state.floatingItems.onAdd = (floatingItem) => {
+    this.room.state.floatingItems.onAdd((floatingItem) => {
       this.handleFloatingItemAdd(floatingItem)
-      floatingItem.onChange = (changes) => {
-        changes.forEach((change) => {
-          this.handleFloatingItemChange(floatingItem, change)
+      const fields: NonFunctionPropNames<FloatingItem>[] = [
+        "x",
+        "y",
+        "avatarId"
+      ]
+      fields.forEach((field) => {
+        floatingItem.listen(field, (value, previousValue) => {
+          this.handleFloatingItemChange(floatingItem, field, value)
         })
-      }
-    }
+      })
+    })
 
-    this.room.state.floatingItems.onRemove = (value, key) => {
+    this.room.state.floatingItems.onRemove((value, key) => {
       this.handleFloatingItemRemove(value)
-    }
+    })
     this.room.onError((err) => logger.error("room error", err))
   }
 
@@ -131,12 +148,11 @@ class GameContainer {
         // logger.debug('initializePlayer', this.player, this.tilemap);
         this.initializeGame()
       }
-    }
-    else if(this.spectate && this.tilemap) {
+    } else if (this.spectate && this.tilemap) {
       this.initializeGame()
     }
 
-    player.board.onAdd = ((pokemon, key) => {
+    player.board.onAdd((pokemon, key) => {
       const p = <Pokemon>pokemon
       if (p.stars > 1) {
         const config: IPokemonConfig | undefined = player.pokemonCollection.get(
@@ -153,135 +169,296 @@ class GameContainer {
           },
           null
         )
-        toast(i, { containerId: player.rank.toString(), className: "toast-new-pokemon" })
-      }
-      p.onChange = (changes: DataChange<any>[]) => {
-        changes.forEach((change) => {
-          this.handleBoardPokemonChange(player, p, change)
+        toast(i, {
+          containerId: player.rank.toString(),
+          className: "toast-new-pokemon"
         })
       }
 
-      p.items.onAdd = (value, key) => {
+      const fields: NonFunctionPropNames<Pokemon>[] = [
+        "positionX",
+        "positionY",
+        "action"
+      ]
+      fields.forEach((field) => {
+        p.listen(field, (value, previousValue) => {
+          this.handleBoardPokemonChange(player, p, field, value)
+        })
+      })
+
+      p.items.onAdd((value, key) => {
         // logger.debug('added', value, key)
         this.handleBoardPokemonItemAdd(player.id, value, p)
-      }
-      p.items.onRemove = (value, key) => {
+      })
+      p.items.onRemove((value, key) => {
         // logger.debug('removed', value, key)
         this.handleBoardPokemonItemRemove(player.id, value, p)
-      }
+      })
 
       this.handleBoardPokemonAdd(player, p)
-    }).bind(this)
+    })
 
-    player.board.onRemove = ((pokemon, key) => {
+    player.board.onRemove((pokemon, key) => {
       this.handleBoardPokemonRemove(player, pokemon)
-    }).bind(this)
+    })
 
-    player.items.onAdd = (value, key) => {
+    player.items.onAdd((value, key) => {
       // logger.debug('added', value, key);
       this.handleItemAdd(player, value)
-    }
+    })
 
-    player.items.onRemove = (value, key) => {
+    player.items.onRemove((value, key) => {
       // logger.debug('removed', value, key);
       this.handleItemRemove(player, value)
-    }
+    })
 
-    player.simulation.onChange = (changes: DataChange<any>[]) => {
+    player.simulation.listen("climate", (value, previousValue) => {
       if (
         this.game != null &&
         player.id == this.uid &&
         this.game.scene.getScene("gameScene") != null
       ) {
-        changes.forEach((change) => {
-          // logger.debug('simulation change ', change.field, change.value);
-          if (change.field == "climate") {
-            this.handleClimateChange(change, player)
-          }
-        })
+        this.handleClimateChange(player, value)
       }
-    }
+    })
 
-    player.simulation.blueTeam.onAdd = (p, key) => {
+    player.simulation.blueTeam.onAdd((p, key) => {
       // logger.debug('add pokemon');
       const pokemon = <PokemonEntity>p
       this.handlePokemonAdd(player.id, pokemon)
 
-      pokemon.status.onChange = (changes: DataChange<any>[]) => {
-        changes.forEach((change) => {
-          this.handlePokemonStatusChange(player.id, change, pokemon)
-        })
-      }
+      const fields: NonFunctionPropNames<Status>[] = [
+        "armorReduction",
+        "burn",
+        "confusion",
+        "deltaOrb",
+        "electricField",
+        "fairyField",
+        "freeze",
+        "grassField",
+        "paralysis",
+        "poisonStacks",
+        "protect",
+        "psychicField",
+        "resurection",
+        "runeProtect",
+        "silence",
+        "sleep",
+        "soulDew",
+        "spikeArmor",
+        "synchro",
+        "wound"
+      ]
 
-      pokemon.onChange = (changes: DataChange<any>[]) => {
-        // logger.debug('change pokemon');
-        changes.forEach((change) => {
-          // logger.debug(change.field);
-          this.handlePokemonChange(player.id, change, pokemon)
+      fields.forEach((field) => {
+        pokemon.status.listen(field, (value, previousValue) => {
+          this.handlePokemonStatusChange(player.id, pokemon, field)
         })
-      }
+      })
 
-      pokemon.items.onAdd = (value, key) => {
+      pokemon.onChange((changes) => {
+        const fields: NonFunctionPropNames<PokemonEntity>[] = [
+          "positionX",
+          "positionY",
+          "orientation",
+          "action",
+          "critChance",
+          "critDamage",
+          "ap",
+          "atkSpeed",
+          "life",
+          "shield",
+          "mana",
+          "atk",
+          "def",
+          "speDef",
+          "range",
+          "targetX",
+          "targetY",
+          "team",
+          "index"
+        ]
+
+        fields.forEach((field) => {
+          pokemon.listen(field, (value, previousValue) => {
+            this.handlePokemonChange(
+              player.id,
+              pokemon,
+              field,
+              value,
+              previousValue
+            )
+          })
+        })
+      })
+
+      pokemon.items.onAdd((value, key) => {
         // logger.debug('added', value, key)
         this.handleBattleManagerPokemonItemAdd(player.id, value, pokemon)
-      }
-      pokemon.items.onRemove = (value, key) => {
+      })
+      pokemon.items.onRemove((value, key) => {
         // logger.debug('removed', value, key)
         this.handleBattleManagerPokemonItemRemove(player.id, value, pokemon)
-      }
+      })
 
-      pokemon.count.onChange = (changes: DataChange<any>[]) => {
-        // logger.debug('change item');
-        changes.forEach((change) => {
-          this.handlePokemonCountChange(player.id, change, pokemon)
+      const fieldsCount: NonFunctionPropNames<Count>[] = [
+        "crit",
+        "dodgeCount",
+        "ult",
+        "petalDanceCount",
+        "futureSightCount",
+        "earthquakeCount",
+        "fieldCount",
+        "soundCount",
+        "growGroundCount",
+        "fairyCritCount",
+        "powerLensCount",
+        "starDustCount",
+        "mindBlownCount",
+        "spellBlockedCount",
+        "manaBurnCount",
+        "staticCount",
+        "moneyCount",
+        "attackCount",
+        "tripleAttackCount",
+        "monsterExecutionCount",
+        "upgradeCount",
+        "soulDewCount",
+        "defensiveRibbonCount",
+        "attackOrderCount",
+        "healOrderCount"
+      ]
+
+      fieldsCount.forEach((field) => {
+        pokemon.count.listen(field, (value, previousValue) => {
+          this.handlePokemonCountChange(player.id, field, value, pokemon)
         })
-      }
-    }
+      })
+    })
 
-    player.simulation.redTeam.onAdd = (p, key) => {
+    player.simulation.redTeam.onAdd((p, key) => {
       // logger.debug('add pokemon');
       const pokemon = <PokemonEntity>p
       this.handlePokemonAdd(player.id, pokemon)
 
-      pokemon.status.onChange = (changes) => {
-        changes.forEach((change) => {
-          this.handlePokemonStatusChange(player.id, change, pokemon)
-        })
-      }
+      const fields: NonFunctionPropNames<Status>[] = [
+        "armorReduction",
+        "burn",
+        "confusion",
+        "deltaOrb",
+        "electricField",
+        "fairyField",
+        "freeze",
+        "grassField",
+        "paralysis",
+        "poisonStacks",
+        "protect",
+        "psychicField",
+        "resurection",
+        "runeProtect",
+        "silence",
+        "sleep",
+        "soulDew",
+        "spikeArmor",
+        "synchro",
+        "wound"
+      ]
 
-      pokemon.onChange = (changes: DataChange<any>[]) => {
-        // logger.debug('change pokemon');
-        changes.forEach((change) => {
-          this.handlePokemonChange(player.id, change, pokemon)
+      fields.forEach((field) => {
+        pokemon.status.listen(field, (value, previousValue) => {
+          this.handlePokemonStatusChange(player.id, pokemon, field)
         })
-      }
-      pokemon.items.onAdd = (value, key) => {
+      })
+
+      pokemon.onChange((changes) => {
+        const fields: NonFunctionPropNames<PokemonEntity>[] = [
+          "positionX",
+          "positionY",
+          "orientation",
+          "action",
+          "critChance",
+          "critDamage",
+          "ap",
+          "atkSpeed",
+          "life",
+          "shield",
+          "mana",
+          "atk",
+          "def",
+          "speDef",
+          "range",
+          "targetX",
+          "targetY",
+          "team",
+          "index"
+        ]
+
+        fields.forEach((field) => {
+          pokemon.listen(field, (value, previousValue) => {
+            this.handlePokemonChange(
+              player.id,
+              pokemon,
+              field,
+              value,
+              previousValue
+            )
+          })
+        })
+      })
+
+      pokemon.items.onAdd((value, key) => {
         // logger.debug('added', value, key)
         this.handleBattleManagerPokemonItemAdd(player.id, value, pokemon)
-      }
-      pokemon.items.onRemove = (value, key) => {
+      })
+      pokemon.items.onRemove((value, key) => {
         // logger.debug('removed', value, key)
         this.handleBattleManagerPokemonItemRemove(player.id, value, pokemon)
-      }
-      pokemon.count.onChange = (changes: DataChange<any>[]) => {
-        // logger.debug('change item');
-        changes.forEach((change) => {
-          this.handlePokemonCountChange(player.id, change, pokemon)
+      })
+      const fieldsCount: NonFunctionPropNames<Count>[] = [
+        "crit",
+        "dodgeCount",
+        "ult",
+        "petalDanceCount",
+        "futureSightCount",
+        "earthquakeCount",
+        "fieldCount",
+        "soundCount",
+        "growGroundCount",
+        "fairyCritCount",
+        "powerLensCount",
+        "starDustCount",
+        "mindBlownCount",
+        "spellBlockedCount",
+        "manaBurnCount",
+        "staticCount",
+        "moneyCount",
+        "attackCount",
+        "tripleAttackCount",
+        "monsterExecutionCount",
+        "upgradeCount",
+        "soulDewCount",
+        "defensiveRibbonCount",
+        "healOrderCount",
+        "attackOrderCount"
+      ]
+
+      fieldsCount.forEach((field) => {
+        pokemon.count.listen(field, (value, previousValue) => {
+          this.handlePokemonCountChange(player.id, field, value, pokemon)
         })
-      }
-    }
-    player.simulation.blueTeam.onRemove = (pokemon, key) => {
+      })
+    })
+    player.simulation.blueTeam.onRemove((pokemon, key) => {
       // logger.debug('remove pokemon');
       this.handlePokemonRemove(player.id, pokemon)
-    }
-    player.simulation.redTeam.onRemove = (pokemon, key) => {
+    })
+    player.simulation.redTeam.onRemove((pokemon, key) => {
       // logger.debug('remove pokemon');
       this.handlePokemonRemove(player.id, pokemon)
-    }
-    player.triggerAll()
+    })
   }
 
-  initializeSpectactor(uid: string){
+  initializeSpectactor(uid: string) {
     if (this.uid === uid) {
       this.spectate = true
       if (this.tilemap && this.room.state.players.size > 0) {
@@ -339,28 +516,30 @@ class GameContainer {
 
   handlePokemonChange(
     playerId: string,
-    change: DataChange<any>,
-    pokemon: IPokemonEntity
+    pokemon: IPokemonEntity,
+    field: string,
+    value: any,
+    previousValue: any
   ) {
     // logger.debug('simulation change' + change.field);
     if (this.game && this.game.scene && this.game.scene.getScene("gameScene")) {
       const g = <GameScene>this.game.scene.getScene("gameScene")
       if (g.battle) {
-        g.battle.changePokemon(playerId, change, pokemon)
+        g.battle.changePokemon(playerId, pokemon, field, value, previousValue)
       }
     }
   }
 
   handlePokemonStatusChange(
     playerId: string,
-    change: DataChange<any>,
-    pokemon: IPokemonEntity
+    pokemon: IPokemonEntity,
+    field: string
   ) {
     // logger.debug('simulation change' + change.field);
     if (this.game && this.game.scene && this.game.scene.getScene("gameScene")) {
       const g = <GameScene>this.game.scene.getScene("gameScene")
       if (g.battle) {
-        g.battle.changeStatus(playerId, change, pokemon)
+        g.battle.changeStatus(playerId, pokemon, field)
       }
     }
   }
@@ -401,18 +580,19 @@ class GameContainer {
 
   handlePokemonCountChange(
     playerId: string,
-    change: DataChange<any>,
+    field: NonFunctionPropNames<Count>,
+    value: any,
     pokemon: IPokemonEntity
   ) {
     if (this.game && this.game.scene && this.game.scene.getScene("gameScene")) {
       const g = <GameScene>this.game.scene.getScene("gameScene")
       if (g.battle) {
-        g.battle.changeCount(playerId, change, pokemon)
+        g.battle.changeCount(playerId, pokemon, field, value)
       }
     }
   }
 
-  handleClimateChange(change: DataChange<any>, player: Player) {
+  handleClimateChange(player: Player, value: Climate) {
     if (
       this.game != null &&
       player.id == this.uid &&
@@ -420,24 +600,24 @@ class GameContainer {
     ) {
       const g = <GameScene>this.game.scene.getScene("gameScene")
       if (g.weatherManager) {
-        switch (change.value) {
-          case "RAIN":
+        switch (value) {
+          case Climate.RAIN:
             g.weatherManager.addRain()
             break
 
-          case "SUN":
+          case Climate.SUN:
             g.weatherManager.addSun()
             break
 
-          case "SANDSTORM":
+          case Climate.SANDSTORM:
             g.weatherManager.addSandstorm()
             break
 
-          case "SNOW":
+          case Climate.SNOW:
             g.weatherManager.addSnow()
             break
 
-          case "NEUTRAL":
+          case Climate.NEUTRAL:
             g.weatherManager.clearWeather()
             break
 
@@ -551,33 +731,35 @@ class GameContainer {
   handleBoardPokemonChange(
     player: IPlayer,
     pokemon: IPokemon,
-    change: DataChange<any>
+    field: string,
+    value: any
   ) {
     if (this.game != null && this.game.scene.getScene("gameScene")) {
       const g = <GameScene>this.game.scene.getScene("gameScene")
       if (g.board && g.board.player && g.board.player.id == player.id) {
-        g.board.changePokemon(pokemon, change)
+        g.board.changePokemon(pokemon, field, value)
       }
     }
   }
 
-  handleAvatarChange(avatar: IPokemonAvatar, change: DataChange<any>) {
+  handleAvatarChange(avatar: IPokemonAvatar, field: string, value: any) {
     if (this.game != null && this.game.scene.getScene("gameScene")) {
       const g = <GameScene>this.game.scene.getScene("gameScene")
       if (g.minigameManager) {
-        g.minigameManager.changePokemon(avatar, change)
+        g.minigameManager.changePokemon(avatar, field, value)
       }
     }
   }
 
   handleFloatingItemChange(
     floatingItem: IFloatingItem,
-    change: DataChange<any>
+    field: string,
+    value: any
   ) {
     if (this.game != null && this.game.scene.getScene("gameScene")) {
       const g = <GameScene>this.game.scene.getScene("gameScene")
       if (g.minigameManager) {
-        g.minigameManager.changeItem(floatingItem, change)
+        g.minigameManager.changeItem(floatingItem, field, value)
       }
     }
   }

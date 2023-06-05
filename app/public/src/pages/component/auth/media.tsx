@@ -9,7 +9,7 @@ export default function Media() {
       <DiscordButton />
       <GithubButton />
       <PolicyButton />
-      <span>V3.3</span>
+      <span>V3.4</span>
       <p>
         Made by 2 fans, for fans
         <br />

@@ -1,32 +1,32 @@
 # New Pokemons:
+- Litwick, Lampent, Chandelure (Common Ghost/Fire/Artificial)
+- Bonsley, Sudowoodo (Epic Rock/Flora/Baby - Rock/Flora/Monster)
 
-
-# Changes to Pokemon
-
+# Changes to Pokemon & Abilities
+- Charizard now has Flying type
+- Leech Life now also hits current target
 
 # Changes to Synergies
-- Damage blocked by fighting synergy now also works for damage on shield
-- Fire burn chance & attack buff now only work if the attack was successful (not dodged / protected)
-- Dragon attack speed buff now only work if the attack was successful (not dodged / protected)
+- Baby nerf: Egg hatch time increased: 3 → 4 stages
 
 # Changes to Items
-
+- Fire Gem buff: Attacks do double damage on Shields and deal 10% of target max HP as additional damage
 
 # Changes to Stages
-
+- Round damage formula changed: defeats on early game are a little more punitive, and a little less in late game. Beware, hatchers !
 
 # Gameplay
-- Damage dealt by a successful attack is minimum 1, even after blocking damage with Fighting synergy
-- On-hit effects (from items or synergies) now only works if the attack was successful (not dodged / protected)
-- Sleep duration reduction now only works if pokemon actually took damage (not dodged / protected)
-- Shell bell & human synergy heal now also takes into account the damage on shield
+
+- Allow to refill empty slots of the shop when locked
 
 # UI
-
+- DPS meter has been redesigned and can now be hidden during games
 
 # Bugfix
-- Fixed damage on shield being counted twice, shield should be much effective now
-
+- Castform now updates synergy level count after transformation
+- fix(DragDrop): Prevents neutral pokes from going on board
+- fix(ditto): Prevents loss of object when duplication 
+- fix(spectate): Can click while evolve event
+- fix(ditto): Prevents ditto from taking a pokemon from the pool
 
 # Misc
-

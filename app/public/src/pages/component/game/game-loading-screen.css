@@ -1,23 +1,37 @@
 .game-loading-screen {
-    position: absolute;
-    width: 100vw;
-    aspect-ratio: 2000/1000;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 
 .game-loading-screen li {
-    list-style: none;
+  list-style: none;
 }
 
 .game-loading-screen .loading-bar {
-    position: absolute;
-    top: 20vw;
-    left: 20vw;
-    right: 20vw;
-    color: white;
+  position: absolute;
+  top: 20vw;
+  left: 20vw;
+  right: 20vw;
+  color: white;
 }
 
 .game-loading-screen .loading-bar p {
-    text-align: center;
-    font-family: monospace;
-    font-size: 28pt;
+  text-align: center;
+  font-family: monospace;
+  font-size: 28pt;
+}
+
+.game-loading-screen footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 1rem;
+  color: white;
+  font-size: 1rem;
+  text-align: center;
 }

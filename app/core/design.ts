@@ -95,25 +95,22 @@ export default class Design {
       const row: number[] = []
       for (let j = 0; j < this.width; j++) {
         const v = generation[i][j]
-        if(this.preview){
-            if(i===0 || i === 1){
-                row.push(TerrainType.WALL)
-            }
-            else if(i === 2 || i === 3){
-                row.push(TerrainType.GROUND)
-            }
-            else{
-                row.push(TerrainType.WATER)
-            }
-        }
-        else{
-            if (v > 0.66) {
-                row.push(TerrainType.WALL)
-              } else if (v > 0.33) {
-                row.push(TerrainType.GROUND)
-              } else {
-                row.push(TerrainType.WATER)
-              }
+        if (this.preview) {
+          if (i === 0 || i === 1) {
+            row.push(TerrainType.WALL)
+          } else if (i === 2 || i === 3) {
+            row.push(TerrainType.GROUND)
+          } else {
+            row.push(TerrainType.WATER)
+          }
+        } else {
+          if (v > 0.66) {
+            row.push(TerrainType.WALL)
+          } else if (v > 0.33) {
+            row.push(TerrainType.GROUND)
+          } else {
+            row.push(TerrainType.WATER)
+          }
         }
       }
       this.terrain.push(row)
@@ -171,8 +168,8 @@ export default class Design {
           visible: true,
           width: this.width,
           x: 0,
-          y: 0,
-        },
+          y: 0
+        }
       ],
       nextlayerid: 6,
       nextobjectid: 1,
@@ -184,7 +181,7 @@ export default class Design {
       tilewidth: 24,
       type: "map",
       version: "1.6",
-      width: this.width,
+      width: this.width
     }
   }
 }

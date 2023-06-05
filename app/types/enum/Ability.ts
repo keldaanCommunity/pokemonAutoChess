@@ -123,6 +123,7 @@ import {
   WaterShurikenStrategy,
   ShadowSneakStrategy,
   MachPunchStrategy,
+  UppercutStrategy,
   TripleKickStrategy,
   MawashiGeriStrategy,
   ForecastStrategy,
@@ -134,7 +135,14 @@ import {
   DeathWingStrategy,
   SlackOffStrategy,
   DarkVoidStrategy,
-  OverheatStrategy
+  OverheatStrategy,
+  HypnosisStrategy,
+  MimicStrategy,
+  HexStrategy,
+  GrowthStrategy,
+  HealOrderStrategy,
+  ShellTrapStrategy,
+  DigStrategy
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -169,7 +177,7 @@ export enum Ability {
   NIGHT_SLASH = "NIGHT_SLASH",
   BUG_BUZZ = "BUG_BUZZ",
   STRING_SHOT = "STRING_SHOT",
-  POISON_STING = "POISON_STING",
+  VENOSHOCK = "VENOSHOCK",
   LEECH_LIFE = "LEECH_LIFE",
   HAPPY_HOUR = "HAPPY_HOUR",
   TELEPORT = "TELEPORT",
@@ -263,6 +271,7 @@ export enum Ability {
   WATER_SHURIKEN = "WATER_SHURIKEN",
   SHADOW_SNEAK = "SHADOW_SNEAK",
   MACH_PUNCH = "MACH_PUNCH",
+  UPPERCUT = "UPPERCUT",
   TRIPLE_KICK = "TRIPLE_KICK",
   MAWASHI_GERI = "MAWASHI_GERI",
   FORECAST = "FORECAST",
@@ -274,7 +283,14 @@ export enum Ability {
   DEATH_WING = "DEATH_WING",
   SLACK_OFF = "SLACK_OFF",
   DARK_VOID = "DARK_VOID",
-  OVERHEAT = "OVERHEAT"
+  OVERHEAT = "OVERHEAT",
+  HYPNOSIS = "HYPNOSIS",
+  MIMIC = "MIMIC",
+  HEX = "HEX",
+  GROWTH = "GROWTH",
+  HEAL_ORDER = "HEAL_ORDER",
+  SHELL_TRAP = "SHELL_TRAP",
+  DIG="DIG"
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -330,7 +346,7 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.NIGHT_SLASH]: new NightSlashStrategy(),
   [Ability.BUG_BUZZ]: new BugBuzzStrategy(),
   [Ability.STRING_SHOT]: new StringShotStrategy(),
-  [Ability.POISON_STING]: new PoisonStingStrategy(),
+  [Ability.VENOSHOCK]: new PoisonStingStrategy(),
   [Ability.LEECH_LIFE]: new LeechLifeStrategy(),
   [Ability.HAPPY_HOUR]: new HappyHourStrategy(),
   [Ability.TELEPORT]: new TeleportStrategy(),
@@ -403,6 +419,7 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.WATER_SHURIKEN]: new WaterShurikenStrategy(),
   [Ability.SHADOW_SNEAK]: new ShadowSneakStrategy(),
   [Ability.MACH_PUNCH]: new MachPunchStrategy(),
+  [Ability.UPPERCUT]: new UppercutStrategy(),
   [Ability.TRIPLE_KICK]: new TripleKickStrategy(),
   [Ability.MAWASHI_GERI]: new MawashiGeriStrategy(),
   [Ability.FORECAST]: new ForecastStrategy(),
@@ -414,5 +431,12 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.DEATH_WING]: new DeathWingStrategy(),
   [Ability.SLACK_OFF]: new SlackOffStrategy(),
   [Ability.DARK_VOID]: new DarkVoidStrategy(),
-  [Ability.OVERHEAT]: new OverheatStrategy()
+  [Ability.OVERHEAT]: new OverheatStrategy(),
+  [Ability.HYPNOSIS]: new HypnosisStrategy(),
+  [Ability.MIMIC]: new MimicStrategy(),
+  [Ability.HEX]: new HexStrategy(),
+  [Ability.GROWTH]: new GrowthStrategy(),
+  [Ability.HEAL_ORDER]: new HealOrderStrategy(),
+  [Ability.SHELL_TRAP]: new ShellTrapStrategy(),
+  [Ability.DIG]: new DigStrategy()
 }

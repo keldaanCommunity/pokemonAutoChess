@@ -1,5 +1,5 @@
 import { Effect } from "../enum/Effect"
-import { Damage, Stat } from "../enum/Game";
+import { Damage, Stat } from "../enum/Game"
 import { Synergy } from "../enum/Synergy"
 import { Status } from "../enum/Status"
 
@@ -197,7 +197,7 @@ export const SynergyDescription: {
     fra: ""
   },
   [Synergy.POISON]: {
-    eng: `Poison pokemons have a chance to ${Status.POISON} their target for seconds with their basic attacks `,
+    eng: `Poison pokemons have a chance to ${Status.POISON} their target for 4 seconds with their basic attacks `,
     esp: "",
     fra: ""
   },
@@ -207,7 +207,7 @@ export const SynergyDescription: {
     fra: "Dragon"
   },
   [Synergy.FIELD]: {
-    eng: `When a field pokemon dies, all the other field pokemons gain ${Stat.ATK_SPEED} and are healed for a percentage of their max ${Stat.HP}`,
+    eng: `When a field pokemon dies, all the other field pokemons are healed and gain ${Stat.ATK_SPEED}`,
     esp: "",
     fra: ""
   },
@@ -232,7 +232,7 @@ export const SynergyDescription: {
     fra: ""
   },
   [Synergy.FLYING]: {
-    eng: `Flying pokemons get ${Status.PROTECT} when they fell under a certain amount of ${Stat.HP}`,
+    eng: `Flying pokemons fly away when they fell under a certain amount of ${Stat.HP}`,
     esp: "",
     fra: ""
   },
@@ -282,4 +282,3 @@ export const SynergyDescription: {
     fra: ""
   }
 }
-

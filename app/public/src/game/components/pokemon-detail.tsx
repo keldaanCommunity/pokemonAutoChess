@@ -95,7 +95,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     avatar.style.borderColor = RarityColor[rarity]
     wrap.appendChild(avatar)
 
-    if(index === PkmIndex[Pkm.EGG]){
+    if (index === PkmIndex[Pkm.EGG]) {
       const eggHint = document.createElement("img")
       eggHint.className = "game-pokemon-detail-portrait-hint"
       eggHint.src = getPortraitSrc(PkmIndex[evolution])
@@ -164,15 +164,15 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     }
     wrap.appendChild(statsElm)
 
-    if(skill !== Ability.DEFAULT){
+    if (skill !== Ability.DEFAULT) {
       const ult = document.createElement("div")
       ult.className = "game-pokemon-detail-ult"
-  
+
       const ultNameWrap = document.createElement("div")
       ultNameWrap.className = "ability-name"
       const ultName = document.createElement("p")
       ultName.textContent = AbilityName[skill]["eng"]
-  
+
       this.abilityDescription = document.createElement("div")
       this.updateAbilityDescription(skill, abilityTier, ap)
       ultNameWrap.appendChild(ultName)
@@ -181,7 +181,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
       wrap.appendChild(ult)
     }
 
-    if(name in CustomPokemonDescription){
+    if (name in CustomPokemonDescription) {
       const ult = document.createElement("div")
       ult.className = "game-pokemon-detail-ult"
       const descriptionWrap = document.createElement("div")
@@ -201,7 +201,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     el.textContent = value.toString()
   }
 
-  updateAbilityDescription(skill: Ability, abilityTier: number, ap: number){
+  updateAbilityDescription(skill: Ability, abilityTier: number, ap: number) {
     ReactDOM.render(
       <AbilityTooltip ability={skill} tier={abilityTier} ap={ap} />,
       this.abilityDescription

@@ -1,7 +1,14 @@
-import { Client, LobbyRoom } from "colyseus"
+import {
+  Client,
+  LobbyRoom,
+  Room,
+  RoomListingData,
+  matchMaker,
+  subscribeLobby
+} from "colyseus"
 import LobbyState from "./states/lobby-state"
 import { connect, FilterQuery, CallbackError } from "mongoose"
-import Chat from "../models/mongo-models/chat"
+import ChatV2 from "../models/mongo-models/chat-v2"
 import UserMetadata, {
   IPokemonConfig,
   IUserMetadata
@@ -44,7 +51,7 @@ import { pickRandomIn } from "../utils/random"
 import { sum } from "../utils/array"
 import { logger } from "../utils/logger"
 
-export default class CustomLobbyRoom extends LobbyRoom {
+export default class CustomLobbyRoom extends Room<LobbyState> {
   discordWebhook: WebhookClient | undefined
   bots: Map<string, IBot>
   meta: IMeta[]
@@ -55,6 +62,8 @@ export default class CustomLobbyRoom extends LobbyRoom {
   levelLeaderboard: ILeaderboardInfo[]
   pastebin: PastebinAPI | undefined = undefined
   precomputedRarityPokemons: PrecomputedRaritPokemonyAll
+  unsubscribeLobby: (() => void) | undefined
+  rooms: RoomListingData<any>[] | undefined
 
   constructor() {
     super()
@@ -102,17 +111,60 @@ export default class CustomLobbyRoom extends LobbyRoom {
         this.precomputedRarityPokemons[rarity].length > 0
       ) {
         pkm = pickRandomIn(this.precomputedRarityPokemons[rarity])
-        break;
+        break
       }
     }
     return pkm
   }
 
-  onCreate(): Promise<void> {
+  async onCreate(): Promise<void> {
     logger.info("create lobby", this.roomId)
-    super.onCreate({})
     this.setState(new LobbyState())
     this.autoDispose = false
+    this.listing.unlisted = true
+
+    this.unsubscribeLobby = await subscribeLobby((roomId, data) => {
+      if (this.rooms) {
+        const roomIndex = this.rooms?.findIndex(
+          (room) => room.roomId === roomId
+        )
+
+        if (!data) {
+          // remove room listing data
+          if (roomIndex !== -1) {
+            const previousData = this.rooms[roomIndex]
+
+            this.rooms.splice(roomIndex, 1)
+
+            this.clients.forEach((client) => {
+              client.send(Transfer.REMOVE_ROOM, roomId)
+            })
+          }
+        } else if (roomIndex === -1) {
+          // append room listing data
+          this.rooms.push(data)
+
+          this.clients.forEach((client) => {
+            client.send(Transfer.ADD_ROOM, [roomId, data])
+          })
+        } else {
+          const previousData = this.rooms[roomIndex]
+
+          // replace room listing data
+          this.rooms[roomIndex] = data
+
+          this.clients.forEach((client) => {
+            if (previousData && !data) {
+              client.send(Transfer.REMOVE_ROOM, roomId)
+            } else if (data) {
+              client.send(Transfer.ADD_ROOM, [roomId, data])
+            }
+          })
+        }
+      }
+    })
+
+    this.rooms = await matchMaker.query({ private: false, unlisted: false })
 
     this.onMessage(Transfer.REQUEST_LEADERBOARD, (client, message) => {
       try {
@@ -138,6 +190,161 @@ export default class CustomLobbyRoom extends LobbyRoom {
       }
     })
 
+    this.onMessage(Transfer.DELETE_BOT_DATABASE, async (client, message) => {
+      try {
+        const user = this.state.users.get(client.auth.uid)
+        if (
+          user &&
+          (user.role === Role.ADMIN ||
+            user.role === Role.BOT_MANAGER ||
+            user.role === Role.MODERATOR)
+        ) {
+          const id = message
+          const botData = this.bots.get(id)
+          client.send(
+            Transfer.BOT_DATABASE_LOG,
+            `deleting bot ${botData?.name}by @${botData?.author} id ${id}`
+          )
+          const resultDelete = await BotV2.deleteOne({ id: id })
+          client.send(
+            Transfer.BOT_DATABASE_LOG,
+            JSON.stringify(resultDelete, null, 2)
+          )
+          const dsEmbed = new MessageEmbed()
+            .setTitle(
+              `BOT ${botData?.name} by @${botData?.author} deleted by ${user.name}`
+            )
+            .setAuthor({
+              name: user.name,
+              iconURL: getAvatarSrc(user.avatar)
+            })
+            .setDescription(
+              `BOT ${botData?.name} by @${botData?.author} (id: ${message} ) deleted by ${user.name}`
+            )
+            .setThumbnail(getAvatarSrc(botData?.avatar ? botData?.avatar : ""))
+          try {
+            this.discordWebhook?.send({
+              embeds: [dsEmbed]
+            })
+          } catch (error) {
+            logger.error(error)
+          }
+
+          this.bots.delete(id)
+          this.broadcast(Transfer.REQUEST_BOT_LIST, this.createBotList())
+        }
+      } catch (error) {
+        logger.error(error)
+        client.send(Transfer.BOT_DATABASE_LOG, JSON.stringify(error))
+      }
+    })
+
+    this.onMessage(Transfer.ADD_BOT_DATABASE, async (client, message) => {
+      try {
+        const user = this.state.users.get(client.auth.uid)
+        if (
+          user &&
+          (user.role === Role.ADMIN ||
+            user.role === Role.BOT_MANAGER ||
+            user.role === Role.MODERATOR)
+        ) {
+          const id = message.slice(21)
+          client.send(Transfer.BOT_DATABASE_LOG, `retrieving id : ${id} ...`)
+          client.send(Transfer.BOT_DATABASE_LOG, "retrieving data ...")
+          const data = await this.pastebin?.getPaste(id, false)
+          if (data) {
+            client.send(Transfer.BOT_DATABASE_LOG, "parsing JSON data ...")
+            const json = JSON.parse(data)
+            const resultDelete = await BotV2.deleteMany({
+              avatar: json.avatar,
+              author: json.author
+            })
+            const keys = new Array<string>()
+            this.bots.forEach((b) => {
+              if (b.avatar === json.avatar && b.author === json.author) {
+                keys.push(b.id)
+              }
+            })
+            keys.forEach((k) => {
+              this.bots.delete(k)
+            })
+            client.send(
+              Transfer.BOT_DATABASE_LOG,
+              JSON.stringify(resultDelete, null, 2)
+            )
+            client.send(
+              Transfer.BOT_DATABASE_LOG,
+              `creating Bot ${json.avatar} by ${json.author}...`
+            )
+            const resultCreate = await BotV2.create({
+              name: json.name,
+              avatar: json.avatar,
+              elo: json.elo ? json.elo : 1200,
+              author: json.author,
+              steps: json.steps,
+              id: nanoid()
+            })
+
+            const dsEmbed = new MessageEmbed()
+              .setTitle(
+                `BOT ${json.name} by @${json.author} loaded by ${user.name}`
+              )
+              .setURL(message as string)
+              .setAuthor({
+                name: user.name,
+                iconURL: getAvatarSrc(user.avatar)
+              })
+              .setDescription(
+                `BOT ${json.name} by @${json.author} (url: ${message} ) loaded by ${user.name}`
+              )
+              .setThumbnail(getAvatarSrc(json.avatar))
+            try {
+              this.discordWebhook?.send({
+                embeds: [dsEmbed]
+              })
+            } catch (error) {
+              logger.error(error)
+            }
+
+            this.bots.set(resultCreate.id, resultCreate)
+            this.broadcast(Transfer.REQUEST_BOT_LIST, this.createBotList())
+          } else {
+            client.send(
+              Transfer.BOT_DATABASE_LOG,
+              `no pastebin found with given url ${message}`
+            )
+          }
+        }
+      } catch (error) {
+        logger.error(error)
+        client.send(Transfer.BOT_DATABASE_LOG, JSON.stringify(error))
+      }
+    })
+
+    this.onMessage(Transfer.UNBAN, (client, message) => {
+      try {
+        const user = this.state.users.get(client.auth.uid)
+        if (
+          user &&
+          (user.role === Role.ADMIN || user.role === Role.MODERATOR)
+        ) {
+          BannedUser.deleteOne({ uid: message.uid }, (err, res) => {
+            if (err) {
+              logger.error
+            }
+            if (res?.deletedCount > 0) {
+              client.send(
+                Transfer.BANNED,
+                `${user.name} unbanned the user ${message.name}`
+              )
+            }
+          })
+        }
+      } catch (error) {
+        logger.error(error)
+      }
+    })
+
     this.onMessage(Transfer.BAN, (client, message) => {
       try {
         const user = this.state.users.get(client.auth.uid)
@@ -145,16 +352,28 @@ export default class CustomLobbyRoom extends LobbyRoom {
           user &&
           (user.role === Role.ADMIN || user.role === Role.MODERATOR)
         ) {
-          BannedUser.findOne({ uid: message }, (err, banned) => {
+          this.state.removeMessages(message.uid)
+          BannedUser.findOne({ uid: message.uid }, (err, banned) => {
             if (err) {
               logger.error(err)
             }
             if (!banned) {
-              BannedUser.create({ uid: message })
+              BannedUser.create({
+                uid: message.uid,
+                author: user.name,
+                time: Date.now(),
+                name: message.name
+              })
+              client.send(
+                Transfer.BANNED,
+                `${user.name} banned the user ${message.name}`
+              )
+            } else {
+              client.send(Transfer.BANNED, `${message.name} was already banned`)
             }
           })
           this.clients.forEach((c) => {
-            if (c.auth.uid === message) {
+            if (c.auth.uid === message.uid) {
               c.send(Transfer.BAN)
               c.leave()
             }
@@ -170,8 +389,10 @@ export default class CustomLobbyRoom extends LobbyRoom {
         const user = this.state.users.get(client.auth.uid)
         if (user && !user.anonymous && message.payload != "") {
           this.state.addMessage(
-            user.name,
+            nanoid(),
             message.payload,
+            user.id,
+            user.name,
             user.avatar,
             Date.now(),
             true
@@ -184,7 +405,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
 
     this.onMessage(
       Transfer.REMOVE_MESSAGE,
-      (client, message: { author: string; payload: string }) => {
+      (client, message: { id: string }) => {
         try {
           const user = this.state.users.get(client.auth.uid)
           if (
@@ -192,7 +413,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
             user.role &&
             (user.role === Role.ADMIN || user.role === Role.MODERATOR)
           ) {
-            this.state.removeMessage(message.author, message.payload)
+            this.state.removeMessage(message.id)
           }
         } catch (error) {
           logger.error(error)
@@ -272,11 +493,33 @@ export default class CustomLobbyRoom extends LobbyRoom {
       }
     })
 
+    this.onMessage(Transfer.SET_BOT_MANAGER, (client, uid: string) => {
+      try {
+        const u = this.state.users.get(client.auth.uid)
+        const targetUser = this.state.users.get(uid)
+        // logger.debug(u.role, uid)
+        if (u && u.role === Role.ADMIN) {
+          UserMetadata.findOne({ uid: uid }, (err, user) => {
+            if (user) {
+              user.role = Role.BOT_MANAGER
+              user.save()
+
+              if (targetUser) {
+                targetUser.role = user.role
+              }
+            }
+          })
+        }
+      } catch (error) {
+        logger.error(error)
+      }
+    })
+
     this.onMessage(Transfer.BOT_CREATION, (client, message) => {
       try {
         const bot = message.bot
         const user = this.state.users.get(client.auth.uid)
-        if(!user) return;
+        if (!user) return
         this.pastebin
           ?.createPaste({
             text: JSON.stringify(bot),
@@ -287,7 +530,10 @@ export default class CustomLobbyRoom extends LobbyRoom {
             const dsEmbed = new MessageEmbed()
               .setTitle(`BOT ${bot.name} created by ${bot.author}`)
               .setURL(data as string)
-              .setAuthor(user.name, getAvatarSrc(user.avatar))
+              .setAuthor({
+                name: user.name,
+                iconURL: getAvatarSrc(user.avatar)
+              })
               .setDescription(
                 `A new bot has been created by ${user.name}, You can import the data in the Pokemon Auto Chess Bot Builder (url: ${data} ).`
               )
@@ -311,23 +557,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
 
     this.onMessage(Transfer.REQUEST_BOT_LIST, (client) => {
       try {
-        const botList = new Array<{
-          name: string
-          avatar: string
-          author: string
-          id: string
-        }>()
-
-        this.bots.forEach((b) => {
-          botList.push({
-            name: b.name,
-            avatar: b.avatar,
-            id: b.id,
-            author: b.author
-          })
-        })
-
-        client.send(Transfer.REQUEST_BOT_LIST, botList)
+        client.send(Transfer.REQUEST_BOT_LIST, this.createBotList())
       } catch (error) {
         logger.error(error)
       }
@@ -355,7 +585,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
     this.onMessage(Transfer.OPEN_BOOSTER, (client) => {
       try {
         const user = this.state.users.get(client.auth.uid)
-        if(!user) return;
+        if (!user) return
 
         const DUST_PER_BOOSTER = 50
         if (user && user.booster && user.booster > 0) {
@@ -410,7 +640,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
     this.onMessage(Transfer.CHANGE_NAME, (client, message) => {
       try {
         const user = this.state.users.get(client.auth.uid)
-        if(!user) return
+        if (!user) return
         if (USERNAME_REGEXP.test(message.name)) {
           user.name = message.name
           UserMetadata.findOne({ uid: client.auth.uid }, (err, user) => {
@@ -454,7 +684,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
       ) => {
         try {
           const user = this.state.users.get(client.auth.uid)
-          if(!user) return
+          if (!user) return
           const pokemonConfig = user.pokemonCollection.get(message.index)
           if (pokemonConfig) {
             const emotionsToCheck = message.shiny
@@ -494,7 +724,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
       ) => {
         try {
           const user = this.state.users.get(client.auth.uid)
-          if(!user) return
+          if (!user) return
           const pokemonConfig = user.pokemonCollection.get(message.index)
           if (pokemonConfig) {
             const emotionsToCheck = message.shiny
@@ -538,13 +768,21 @@ export default class CustomLobbyRoom extends LobbyRoom {
                       u.titles.push(Title.DUCHESS)
                     }
 
-                    const unowns = (Object.keys(PkmFamily) as Pkm[]).filter(pkm => PkmFamily[pkm] === Pkm.UNOWN_A)
-                    if(!u.titles.includes(Title.ARCHEOLOGIST) && unowns.every(name => {
-                      const index = PkmIndex[name]
-                      const collection = u.pokemonCollection.get(index)
-                      const isUnlocked = collection && (collection.emotions.length > 0 || collection.shinyEmotions.length > 0)
-                      return (isUnlocked || index === message.index)
-                    })){
+                    const unowns = (Object.keys(PkmFamily) as Pkm[]).filter(
+                      (pkm) => PkmFamily[pkm] === Pkm.UNOWN_A
+                    )
+                    if (
+                      !u.titles.includes(Title.ARCHEOLOGIST) &&
+                      unowns.every((name) => {
+                        const index = PkmIndex[name]
+                        const collection = u.pokemonCollection.get(index)
+                        const isUnlocked =
+                          collection &&
+                          (collection.emotions.length > 0 ||
+                            collection.shinyEmotions.length > 0)
+                        return isUnlocked || index === message.index
+                      })
+                    ) {
                       u.titles.push(Title.ARCHEOLOGIST)
                     }
 
@@ -574,13 +812,10 @@ export default class CustomLobbyRoom extends LobbyRoom {
 
     this.onMessage(
       Transfer.BUY_BOOSTER,
-      (
-        client,
-        message: { index: string }
-      ) => {
+      (client, message: { index: string }) => {
         try {
           const user = this.state.users.get(client.auth.uid)
-          if(!user) return
+          if (!user) return
           const pokemonConfig = user.pokemonCollection.get(message.index)
           if (pokemonConfig) {
             const BOOSTER_COST = 500
@@ -589,7 +824,8 @@ export default class CustomLobbyRoom extends LobbyRoom {
               user.booster += 1
               UserMetadata.findOne({ uid: client.auth.uid }, (err, u) => {
                 if (u) {
-                  u.pokemonCollection.get(message.index).dust = pokemonConfig.dust
+                  u.pokemonCollection.get(message.index).dust =
+                    pokemonConfig.dust
                   u.booster = user.booster
                   u.save()
                 }
@@ -657,7 +893,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
           UserMetadata.find(
             { displayName: { $regex: regExp, $options: "i" } },
             ["uid", "elo", "displayName", "level", "avatar"],
-            { limit: 10, sort: { level: -1 } },
+            { limit: 100, sort: { level: -1 } },
             (err, users) => {
               if (users) {
                 const suggestions: Array<ISuggestionUser> = users.map((u) => {
@@ -687,7 +923,7 @@ export default class CustomLobbyRoom extends LobbyRoom {
       ) => {
         try {
           const user = this.state.users.get(client.auth.uid)
-          if(!user) return
+          if (!user) return
           const config = user.pokemonCollection.get(message.index)
           if (config) {
             const emotionsToCheck = message.shiny
@@ -722,10 +958,10 @@ export default class CustomLobbyRoom extends LobbyRoom {
         process.env.MONGO_URI ? process.env.MONGO_URI : "Default Mongo URI",
         {},
         (err) => {
-          if(err != null){
+          if (err != null) {
             logger.error("Error connecting to Mongo", err)
           }
-          Chat.find(
+          ChatV2.find(
             { time: { $gt: Date.now() - 86400000 } },
             (err, messages) => {
               if (err) {
@@ -733,8 +969,10 @@ export default class CustomLobbyRoom extends LobbyRoom {
               } else {
                 messages.forEach((message) => {
                   this.state.addMessage(
-                    message.name,
+                    nanoid(),
                     message.payload,
+                    message.authorId,
+                    message.author,
                     message.avatar,
                     message.time,
                     false
@@ -866,9 +1104,9 @@ export default class CustomLobbyRoom extends LobbyRoom {
   }
 
   onJoin(client: Client, options: any) {
-    super.onJoin(client, options)
     try {
       logger.info(`${client.auth.displayName} ${client.id} join lobby room`)
+      client.send(Transfer.ROOMS, this.rooms)
       // client.send(Transfer.REQUEST_BOT_DATA, this.bots);
       UserMetadata.findOne(
         { uid: client.auth.uid },
@@ -913,7 +1151,8 @@ export default class CustomLobbyRoom extends LobbyRoom {
                       user.titles,
                       user.title,
                       user.role,
-                      client.auth.email === undefined && client.auth.photoURL === undefined
+                      client.auth.email === undefined &&
+                        client.auth.photoURL === undefined
                     )
                   )
                 }
@@ -946,7 +1185,8 @@ export default class CustomLobbyRoom extends LobbyRoom {
                 [],
                 "",
                 Role.BASIC,
-                client.auth.email === undefined && client.auth.photoURL === undefined
+                client.auth.email === undefined &&
+                  client.auth.photoURL === undefined
               )
             )
           }
@@ -959,7 +1199,6 @@ export default class CustomLobbyRoom extends LobbyRoom {
 
   onLeave(client: Client) {
     try {
-      super.onLeave(client)
       if (client && client.auth && client.auth.displayName && client.auth.uid) {
         logger.info(`${client.auth.displayName} ${client.id} leave lobby`)
         this.state.users.delete(client.auth.uid)
@@ -971,10 +1210,31 @@ export default class CustomLobbyRoom extends LobbyRoom {
 
   onDispose() {
     try {
-      super.onDispose()
       logger.info("dispose lobby")
+      if (this.unsubscribeLobby) {
+        this.unsubscribeLobby()
+      }
     } catch (error) {
       logger.error(error)
     }
+  }
+
+  createBotList() {
+    const botList = new Array<{
+      name: string
+      avatar: string
+      author: string
+      id: string
+    }>()
+
+    this.bots.forEach((b) => {
+      botList.push({
+        name: b.name,
+        avatar: b.avatar,
+        id: b.id,
+        author: b.author
+      })
+    })
+    return botList
   }
 }

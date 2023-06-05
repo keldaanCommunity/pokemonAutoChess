@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { GameUser, IGameUser } from "../../../models/colyseus-models/game-user"
 import { IBot } from "../../../models/mongo-models/bot-v2"
-import { IMessage } from "../../../types"
+import { IChatV2 } from "../../../types"
 
 interface IUserPreparationState {
   users: IGameUser[]
   gameStarted: boolean
   ownerId: string
   ownerName: string
-  messages: IMessage[]
+  messages: IChatV2[]
   name: string
   password: string | null
   noElo: boolean
@@ -37,8 +37,8 @@ export const preparationSlice = createSlice({
       const u: GameUser = JSON.parse(JSON.stringify(action.payload))
       state.user = u
     },
-    pushMessage: (state, action: PayloadAction<IMessage>) => {
-      const m: IMessage = JSON.parse(JSON.stringify(action.payload))
+    pushMessage: (state, action: PayloadAction<IChatV2>) => {
+      const m: IChatV2 = JSON.parse(JSON.stringify(action.payload))
       state.messages.push(m)
     },
     addUser: (state, action: PayloadAction<IGameUser>) => {

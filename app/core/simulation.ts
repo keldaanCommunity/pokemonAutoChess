@@ -6,7 +6,7 @@ import PokemonFactory from "../models/pokemon-factory"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { Item } from "../types/enum/Item"
 import { Effect } from "../types/enum/Effect"
-import { Climate, PokemonActionState, Stat } from "../types/enum/Game"
+import { Climate, PokemonActionState, Stat, Team } from "../types/enum/Game"
 import Dps from "./dps"
 import DpsHeal from "./dps-heal"
 import ItemFactory from "../models/item-factory"
@@ -45,10 +45,9 @@ export default class Simulation extends Schema implements ISimulation {
   initialize(
     blueTeam: MapSchema<Pokemon>,
     redTeam: MapSchema<Pokemon>,
-    blueEffects: Effect[],
-    redEffects: Effect[],
-    stageLevel: number,
-    player: IPlayer
+    player: IPlayer,
+    opponent: IPlayer | null, // null if PVE round
+    stageLevel: number
   ) {
     this.player = player
     this.stageLevel = stageLevel
@@ -69,11 +68,17 @@ export default class Simulation extends Schema implements ISimulation {
     })
 
     this.board = new Board(6, 8)
-    this.blueEffects = blueEffects || []
-    this.redEffects = redEffects || []
+    this.blueEffects = player?.effects?.list ?? []
+    this.redEffects = opponent?.effects?.list ?? []
     // logger.debug({ blueEffects, redEffects })
-    this.climate = this.getClimate()
+
+    this.climate = this.getClimate(this.blueEffects, this.redEffects)
     this.room.updateCastform(this.climate)
+
+    // update effects after castform transformation
+    this.blueEffects = player?.effects?.list ?? []
+    this.redEffects = opponent?.effects?.list ?? []
+
     this.finished = false
     this.flowerSpawn = [false, false]
 
@@ -99,32 +104,55 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     ;[
-      { team: blueTeam, effects: blueEffects },
-      { team: redTeam, effects: redEffects }
-    ].forEach(({ team, effects }: { team: MapSchema<Pokemon, string>, effects: Effect[] }) => {
-      if ([Effect.INFESTATION, Effect.HORDE, Effect.HEART_OF_THE_SWARM].some(e => effects.includes(e))) {
+      { team: blueTeam, effects: this.blueEffects },
+      { team: redTeam, effects: this.redEffects }
+    ].forEach(
+      ({
+        team,
+        effects
+      }: {
+        team: MapSchema<Pokemon, string>
+        effects: Effect[]
+      }) => {
+        if (
+          [Effect.INFESTATION, Effect.HORDE, Effect.HEART_OF_THE_SWARM].some(
+            (e) => effects.includes(e)
+          )
+        ) {
+          const teamIndex = team === blueTeam ? 0 : 1
+          const bugTeam = new Array<IPokemon>()
+          team.forEach((pkm) => {
+            if (pkm.types.includes(Synergy.BUG) && pkm.positionY != 0) {
+              bugTeam.push(pkm)
+            }
+          })
+          bugTeam.sort((a, b) => b.hp - a.hp)
 
-        const teamIndex = team === blueTeam ? 0 : 1
-        const bugTeam = new Array<IPokemon>()
-        team.forEach((pkm) => {
-          if (pkm.types.includes(Synergy.BUG) && pkm.positionY != 0) {
-            bugTeam.push(pkm)
+          let numberToSpawn = 0
+          if (effects.includes(Effect.INFESTATION)) {
+            numberToSpawn = 1
           }
-        })
-        bugTeam.sort((a, b) => b.hp - a.hp)
+          if (effects.includes(Effect.HORDE)) {
+            numberToSpawn = 2
+          }
+          if (effects.includes(Effect.HEART_OF_THE_SWARM)) {
+            numberToSpawn = 4
+          }
 
-        let numberToSpawn = 0
-        if (effects.includes(Effect.INFESTATION)) { numberToSpawn = 1 }
-        if (effects.includes(Effect.HORDE)) { numberToSpawn = 2 }
-        if (effects.includes(Effect.HEART_OF_THE_SWARM)) { numberToSpawn = 4 }
-
-        for (let i = 0; i < numberToSpawn; i++) {
-          const bug = PokemonFactory.createPokemonFromName(bugTeam[i].name, player.pokemonCollection.get(bugTeam[i].index))
-          const coord = this.getClosestAvailablePlaceOnBoard(bugTeam[i], teamIndex)
-          this.addPokemon(bug, coord.x, coord.y, teamIndex, true)
+          for (let i = 0; i < numberToSpawn; i++) {
+            const bug = PokemonFactory.createPokemonFromName(
+              bugTeam[i].name,
+              player.pokemonCollection.get(bugTeam[i].index)
+            )
+            const coord = this.getClosestAvailablePlaceOnBoard(
+              bugTeam[i],
+              teamIndex
+            )
+            this.addPokemon(bug, coord.x, coord.y, teamIndex, true)
+          }
         }
       }
-    })
+    )
 
     this.applyPostEffects()
   }
@@ -145,7 +173,7 @@ export default class Simulation extends Schema implements ISimulation {
       pokemonEntity
     )
 
-    if (team == 0) {
+    if (team == Team.BLUE_TEAM) {
       this.applyEffects(pokemonEntity, pokemon.types, this.blueEffects)
       const dps = new Dps(pokemonEntity.id, getPath(pokemonEntity))
       const dpsHeal = new DpsHeal(pokemonEntity.id, getPath(pokemonEntity))
@@ -153,7 +181,7 @@ export default class Simulation extends Schema implements ISimulation {
       this.blueDpsMeter.set(pokemonEntity.id, dps)
       this.blueHealDpsMeter.set(pokemonEntity.id, dpsHeal)
     }
-    if (team == 1) {
+    if (team == Team.RED_TEAM) {
       this.applyEffects(pokemonEntity, pokemon.types, this.redEffects)
       const dps = new Dps(pokemonEntity.id, getPath(pokemonEntity))
       const dpsHeal = new DpsHeal(pokemonEntity.id, getPath(pokemonEntity))
@@ -172,8 +200,9 @@ export default class Simulation extends Schema implements ISimulation {
     return this.addPokemon(pokemon, x, y, team)
   }
 
-  getFirstAvailablePlaceOnBoard(teamIndex: number): { x: number, y: number } {
-    let candidateX = 0, candidateY = 0
+  getFirstAvailablePlaceOnBoard(teamIndex: number): { x: number; y: number } {
+    let candidateX = 0,
+      candidateY = 0
     if (teamIndex === 0) {
       outerloop: for (let y = 0; y < this.board.rows; y++) {
         for (let x = 0; x < this.board.columns; x++) {
@@ -198,21 +227,60 @@ export default class Simulation extends Schema implements ISimulation {
     return { x: candidateX, y: candidateY }
   }
 
-  getClosestAvailablePlaceOnBoard(pokemon: IPokemon | IPokemonEntity, teamIndex: number): { x: number, y: number } {
+  getClosestAvailablePlaceOnBoard(
+    pokemon: IPokemon | IPokemonEntity,
+    teamIndex: number
+  ): { x: number; y: number } {
     const placesToConsiderByOrderOfPriority = [
-      [-1,0], [+1,0], [0,-1], [-1,-1], [+1,-1], [-1,+1], [+1,+1], [0,+1],
-      [-2,0], [+2,0], [-2,-1], [+2,-1], [0,-2], [-1,-2], [+1,-2], [-2,-2], [+2,-2],
-      [-2,+1], [+2,+1], [-3,0], [+3,0], [-3,-1], [+3,-1], [-3,-2], [+3,-2],
-      [0,-3], [-1,-3], [+1,-3], [-2,-3], [+2,-3], [-3,-3], [+3,-3],
-      [-3,+1], [+3,+1]
+      [-1, 0],
+      [+1, 0],
+      [0, -1],
+      [-1, -1],
+      [+1, -1],
+      [-1, +1],
+      [+1, +1],
+      [0, +1],
+      [-2, 0],
+      [+2, 0],
+      [-2, -1],
+      [+2, -1],
+      [0, -2],
+      [-1, -2],
+      [+1, -2],
+      [-2, -2],
+      [+2, -2],
+      [-2, +1],
+      [+2, +1],
+      [-3, 0],
+      [+3, 0],
+      [-3, -1],
+      [+3, -1],
+      [-3, -2],
+      [+3, -2],
+      [0, -3],
+      [-1, -3],
+      [+1, -3],
+      [-2, -3],
+      [+2, -3],
+      [-3, -3],
+      [+3, -3],
+      [-3, +1],
+      [+3, +1]
     ]
-    for(let [dx,dy] of placesToConsiderByOrderOfPriority){
+    for (let [dx, dy] of placesToConsiderByOrderOfPriority) {
       let x = pokemon.positionX + dx
-      let y = teamIndex === 0 ? pokemon.positionY - 1 + dy : 5 - (pokemon.positionY - 1) - dy
+      let y =
+        teamIndex === 0
+          ? pokemon.positionY - 1 + dy
+          : 5 - (pokemon.positionY - 1) - dy
 
-      if (x >= 0 && x < this.board.columns
-      && y >= 0 && y < this.board.rows
-      && this.board.getValue(x, y) === undefined) {
+      if (
+        x >= 0 &&
+        x < this.board.columns &&
+        y >= 0 &&
+        y < this.board.rows &&
+        this.board.getValue(x, y) === undefined
+      ) {
         return { x, y }
       }
     }
@@ -267,72 +335,36 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     pokemon.items.forEach((item) => {
-      if (ItemStats[item]) {
-        Object.entries(ItemStats[item]).forEach(([stat, value]) =>
-          this.applyStat(pokemon, stat as Stat, value)
-        )
-      }
+      this.applyItemEffect(pokemon, item)
     })
 
     if (pokemon.skill === Ability.SYNCHRO) {
       pokemon.status.triggerSynchro()
     }
+  }
 
-    if (pokemon.items.has(Item.SOUL_DEW)) {
+  applyItemEffect(pokemon: PokemonEntity, item: Item) {
+    if (ItemStats[item]) {
+      Object.entries(ItemStats[item]).forEach(([stat, value]) =>
+        this.applyStat(pokemon, stat as Stat, value)
+      )
+    }
+
+    if (item === Item.SOUL_DEW) {
       pokemon.status.triggerSoulDew(1000)
     }
 
-    if (pokemon.items.has(Item.WIDE_LENS)) {
+    if (item === Item.WIDE_LENS) {
       pokemon.range += 2
     }
 
-    if (pokemon.items.has(Item.MAX_REVIVE)) {
+    if (item === Item.MAX_REVIVE) {
       pokemon.status.resurection = true
     }
   }
 
   applyPostEffects() {
     ;[this.blueTeam, this.redTeam].forEach((team) => {
-      let grassySurge = false
-      let mistySurge = false
-      let electricSurge = false
-      let psychicSurge = false
-      team.forEach((p) => {
-        if (p.skill === Ability.GRASSY_SURGE) {
-          grassySurge = true
-        }
-      })
-      team.forEach((p) => {
-        if (p.skill === Ability.MISTY_SURGE) {
-          mistySurge = true
-        }
-      })
-      team.forEach((p) => {
-        if (p.skill === Ability.ELECTRIC_SURGE) {
-          electricSurge = true
-        }
-      })
-      team.forEach((p) => {
-        if (p.skill === Ability.PSYCHIC_SURGE) {
-          psychicSurge = true
-        }
-      })
-
-      team.forEach((p) => {
-        if (grassySurge && p.types.includes(Synergy.GRASS)) {
-          p.status.grassField = true
-        }
-        if (psychicSurge && p.types.includes(Synergy.PSYCHIC)) {
-          p.status.psychicField = true
-        }
-        if (electricSurge && p.types.includes(Synergy.ELECTRIC)) {
-          p.status.electricField = true
-        }
-        if (mistySurge && p.types.includes(Synergy.FAIRY)) {
-          p.status.fairyField = true
-        }
-      })
-
       const ironDefenseCandidates = Array.from(team.values()).filter((p) =>
         p.effects.includes(Effect.IRON_DEFENSE)
       )
@@ -354,16 +386,16 @@ export default class Simulation extends Schema implements ISimulation {
         }
         let shieldBonus = 0
         if (pokemon.effects.includes(Effect.STAMINA)) {
-          shieldBonus = 20
+          shieldBonus = 15
         }
         if (pokemon.effects.includes(Effect.STRENGTH)) {
-          shieldBonus += 40
+          shieldBonus += 30
         }
         if (pokemon.effects.includes(Effect.ROCK_SMASH)) {
-          shieldBonus += 60
+          shieldBonus += 45
         }
         if (pokemon.effects.includes(Effect.PURE_POWER)) {
-          shieldBonus += 80
+          shieldBonus += 60
         }
         if (shieldBonus >= 0) {
           pokemon.handleShield(shieldBonus, pokemon)
@@ -686,28 +718,28 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.TAILWIND:
           if (types.includes(Synergy.FLYING)) {
-            pokemon.flyingProtection = true
+            pokemon.flyingProtection = 1
             pokemon.effects.push(Effect.TAILWIND)
           }
           break
 
         case Effect.FEATHER_DANCE:
           if (types.includes(Synergy.FLYING)) {
-            pokemon.flyingProtection = true
+            pokemon.flyingProtection = 1
             pokemon.effects.push(Effect.FEATHER_DANCE)
           }
           break
 
         case Effect.MAX_AIRSTREAM:
           if (types.includes(Synergy.FLYING)) {
-            pokemon.flyingProtection = true
+            pokemon.flyingProtection = 2
             pokemon.effects.push(Effect.MAX_AIRSTREAM)
           }
           break
 
         case Effect.MAX_GUARD:
           if (types.includes(Synergy.FLYING)) {
-            pokemon.flyingProtection = true
+            pokemon.flyingProtection = 2
             pokemon.effects.push(Effect.MAX_GUARD)
           }
           break
@@ -939,47 +971,93 @@ export default class Simulation extends Schema implements ISimulation {
           }
           break
 
+        case Effect.GRASSY_TERRAIN:
+          if (types.includes(Synergy.GRASS)) {
+            pokemon.status.grassField = true
+            pokemon.effects.push(Effect.GRASSY_TERRAIN)
+          }
+          break
+
+        case Effect.PSYCHIC_TERRAIN:
+          if (types.includes(Synergy.PSYCHIC)) {
+            pokemon.status.psychicField = true
+            pokemon.effects.push(Effect.PSYCHIC_TERRAIN)
+          }
+          break
+
+        case Effect.ELECTRIC_TERRAIN:
+          if (types.includes(Synergy.ELECTRIC)) {
+            pokemon.status.electricField = true
+            pokemon.effects.push(Effect.ELECTRIC_TERRAIN)
+          }
+          break
+
+        case Effect.MISTY_TERRAIN:
+          if (types.includes(Synergy.FAIRY)) {
+            pokemon.status.fairyField = true
+            pokemon.effects.push(Effect.MISTY_TERRAIN)
+          }
+          break
+
         default:
           break
       }
     })
   }
 
-  getClimate() {
-    function getPlayerClimate(effects: Effect[]){
-      return effects.includes(Effect.SANDSTORM) ? Climate.SANDSTORM
-      : effects.includes(Effect.DESOLATE_LAND) ? Climate.SUN
-      : effects.includes(Effect.PRIMORDIAL_SEA) ? Climate.RAIN
-      : effects.includes(Effect.DROUGHT) ? Climate.SUN
-      : effects.includes(Effect.DRIZZLE) ? Climate.RAIN
-      : effects.includes(Effect.SHEER_COLD) ? Climate.SNOW
-      : effects.includes(Effect.VICTORY_STAR) ? Climate.SUN      
-      : effects.includes(Effect.SNOW) ? Climate.SNOW      
-      : effects.includes(Effect.RAIN_DANCE) ? Climate.RAIN
-      : Climate.NEUTRAL
+  getClimate(blueEffects: Effect[], redEffects: Effect[]) {
+    function getPlayerClimate(effects: Effect[]) {
+      return effects.includes(Effect.SANDSTORM)
+        ? Climate.SANDSTORM
+        : effects.includes(Effect.DESOLATE_LAND)
+        ? Climate.SUN
+        : effects.includes(Effect.PRIMORDIAL_SEA)
+        ? Climate.RAIN
+        : effects.includes(Effect.DROUGHT)
+        ? Climate.SUN
+        : effects.includes(Effect.DRIZZLE)
+        ? Climate.RAIN
+        : effects.includes(Effect.SHEER_COLD)
+        ? Climate.SNOW
+        : effects.includes(Effect.VICTORY_STAR)
+        ? Climate.SUN
+        : effects.includes(Effect.SNOW)
+        ? Climate.SNOW
+        : effects.includes(Effect.RAIN_DANCE)
+        ? Climate.RAIN
+        : Climate.NEUTRAL
     }
 
-    const redClimate = getPlayerClimate(this.redEffects)
-    const blueClimate = getPlayerClimate(this.blueEffects)
-    
-    if(redClimate !== Climate.NEUTRAL && blueClimate === Climate.NEUTRAL) return redClimate
-    if(blueClimate !== Climate.NEUTRAL && redClimate === Climate.NEUTRAL) return blueClimate
-    if(redClimate === blueClimate) return redClimate
+    const redClimate = getPlayerClimate(redEffects)
+    const blueClimate = getPlayerClimate(blueEffects)
+
+    if (redClimate !== Climate.NEUTRAL && blueClimate === Climate.NEUTRAL)
+      return redClimate
+    if (blueClimate !== Climate.NEUTRAL && redClimate === Climate.NEUTRAL)
+      return blueClimate
+    if (redClimate === blueClimate) return redClimate
 
     // sandstorm beats everything
-    if(redClimate === Climate.SANDSTORM || blueClimate === Climate.SANDSTORM) return Climate.SANDSTORM
+    if (redClimate === Climate.SANDSTORM || blueClimate === Climate.SANDSTORM)
+      return Climate.SANDSTORM
 
     // snow beats rain
-    if(redClimate === Climate.SNOW && blueClimate === Climate.RAIN) return Climate.SNOW
-    if(blueClimate === Climate.SNOW && redClimate === Climate.RAIN) return Climate.SNOW
+    if (redClimate === Climate.SNOW && blueClimate === Climate.RAIN)
+      return Climate.SNOW
+    if (blueClimate === Climate.SNOW && redClimate === Climate.RAIN)
+      return Climate.SNOW
 
     // sunlight beats snow
-    if(redClimate === Climate.SNOW && blueClimate === Climate.SUN) return Climate.SUN
-    if(blueClimate === Climate.SNOW && redClimate === Climate.SUN) return Climate.SUN
+    if (redClimate === Climate.SNOW && blueClimate === Climate.SUN)
+      return Climate.SUN
+    if (blueClimate === Climate.SNOW && redClimate === Climate.SUN)
+      return Climate.SUN
 
     // rain beats sunlight
-    if(redClimate === Climate.SUN && blueClimate === Climate.RAIN) return Climate.RAIN
-    if(blueClimate === Climate.SUN && redClimate === Climate.RAIN) return Climate.RAIN
+    if (redClimate === Climate.SUN && blueClimate === Climate.RAIN)
+      return Climate.RAIN
+    if (blueClimate === Climate.SUN && redClimate === Climate.RAIN)
+      return Climate.RAIN
 
     return Climate.NEUTRAL
   }

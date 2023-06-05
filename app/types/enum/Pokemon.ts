@@ -540,7 +540,15 @@ export enum Pkm {
   ZERAORA = "zeraora",
   XERNEAS = "xerneas",
   YVELTAL = "yveltal",
-  MARSHADOW = "marshadow"
+  MARSHADOW = "marshadow",
+  HOOTHOOT = "hoothoot",
+  NOCTOWL = "noctowl",
+  BONSLEY = "bonsley",
+  SUDOWOODO = "sudowoodo",
+  PHIONE = "phione",
+  COMBEE = "combee",
+  VESPIQUEEN = "vespiqueen",
+  SHUCKLE = "shuckle"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1085,7 +1093,15 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.XERNEAS]: "0716",
   [Pkm.YVELTAL]: "0717",
   [Pkm.TYPE_NULL]: "0772",
-  [Pkm.MARSHADOW]: "0802"
+  [Pkm.MARSHADOW]: "0802",
+  [Pkm.HOOTHOOT]: "0163",
+  [Pkm.NOCTOWL]: "0164",
+  [Pkm.BONSLEY]: "0438",
+  [Pkm.SUDOWOODO]: "0185",
+  [Pkm.PHIONE]: "0489",
+  [Pkm.COMBEE]: "0415",
+  [Pkm.VESPIQUEEN]: "0416",
+  [Pkm.SHUCKLE]: "0213"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1299,7 +1315,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.TERRAKION]: Pkm.TERRAKION,
   [Pkm.VIRIZION]: Pkm.VIRIZION,
   [Pkm.COBALION]: Pkm.COBALION,
-  [Pkm.MANAPHY]: Pkm.MANAPHY,
+  [Pkm.MANAPHY]: Pkm.PHIONE,
   [Pkm.ROTOM]: Pkm.ROTOM,
   [Pkm.SPIRITOMB]: Pkm.SPIRITOMB,
   [Pkm.ABSOL]: Pkm.ABSOL,
@@ -1630,5 +1646,13 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.XERNEAS]: Pkm.XERNEAS,
   [Pkm.YVELTAL]: Pkm.YVELTAL,
   [Pkm.TYPE_NULL]: Pkm.TYPE_NULL,
-  [Pkm.MARSHADOW]: Pkm.MARSHADOW
+  [Pkm.MARSHADOW]: Pkm.MARSHADOW,
+  [Pkm.HOOTHOOT]: Pkm.HOOTHOOT,
+  [Pkm.NOCTOWL]: Pkm.HOOTHOOT,
+  [Pkm.BONSLEY]: Pkm.BONSLEY,
+  [Pkm.SUDOWOODO]: Pkm.BONSLEY,
+  [Pkm.PHIONE]: Pkm.PHIONE,
+  [Pkm.COMBEE]: Pkm.COMBEE,
+  [Pkm.VESPIQUEEN]: Pkm.COMBEE,
+  [Pkm.SHUCKLE]: Pkm.SHUCKLE
 }

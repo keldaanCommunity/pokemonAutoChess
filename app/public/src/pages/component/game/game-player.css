@@ -1,48 +1,49 @@
 .game-player {
-    cursor: var(--cursor-hover);
-    height: 6.5vh;
-    width: 6.5vh;
-    position: absolute;
-    right: 0.5%;
-    background-size: cover;
-    border-radius: 50%;
-    image-rendering: pixelated;
-    box-shadow: inset 0 0 0 0.8vh black;
+  cursor: var(--cursor-hover);
+  height: 6.5vh;
+  width: 6.5vh;
+  position: absolute;
+  right: 0.5%;
+  background-size: cover;
+  border-radius: 50%;
+  image-rendering: pixelated;
+  box-shadow: inset 0 0 0 0.8vh black;
+  z-index: 2000;
 }
 
 .game-player .CircularProgressbar {
-    transform: scale(1);
-    transition: all 100ms ease-out;
-    border-radius: 50%;
-    border: 1px solid black;
+  transform: scale(1);
+  transition: all 100ms ease-out;
+  border-radius: 50%;
+  border: 1px solid black;
 }
 
 .game-player .CircularProgressbar-path {
-    stroke: #F7D51D;
+  stroke: #f7d51d;
 }
 
 .game-player .CircularProgressbar-trail {
-    stroke: #2d334b;
+  stroke: #2d334b;
 }
 
 .game-player.spectated {
-    box-shadow: inset 0 0 0 0.4vh black;
+  box-shadow: inset 0 0 0 0.4vh black;
 }
 
 .game-player.spectated .CircularProgressbar {
-    transform: scale(1.25);
-    border-width: 4px;
+  transform: scale(1.25);
+  border-width: 4px;
 }
 
 .game-player.self .CircularProgressbar-trail {
-    stroke-width: 12px;
+  stroke-width: 12px;
 }
 
 .game-player.self .CircularProgressbar-path {
-    stroke: #01FF01;
-    stroke-width: 12px;
+  stroke: #01ff01;
+  stroke-width: 12px;
 }
 
 .game-player.dead {
-    filter: grayscale(1) brightness(0.5);
+  filter: grayscale(1) brightness(0.5);
 }

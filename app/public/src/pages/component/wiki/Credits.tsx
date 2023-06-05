@@ -10,7 +10,7 @@ export default function Credits(props: {
     let contact = ""
     let name = ""
     if (props.credits) {
-      const user = props.credits.find(user => user.Discord === id)
+      const user = props.credits.find((user) => user.Discord === id)
       if (user != null) {
         contact = user.Contact
         name = user.Name
@@ -31,12 +31,18 @@ export default function Credits(props: {
   return (
     <>
       <dd>{props.primary.length > 0 && findCredits(props.primary)}</dd>
-      {props.secondary.length > 0 && (<>
-        <dt>Others</dt>
-        <dd><ul style={{paddingLeft: "12ch"}}>
-          {props.secondary.map((s) => (<li key={s}>{findCredits(s)}</li>))}
-        </ul></dd>
-      </>)}
+      {props.secondary.length > 0 && (
+        <>
+          <dt>Others</dt>
+          <dd>
+            <ul style={{ paddingLeft: "12ch" }}>
+              {props.secondary.map((s) => (
+                <li key={s}>{findCredits(s)}</li>
+              ))}
+            </ul>
+          </dd>
+        </>
+      )}
     </>
   )
 }

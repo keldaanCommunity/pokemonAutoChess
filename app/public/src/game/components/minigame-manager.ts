@@ -77,20 +77,20 @@ export default class MinigameManager {
     this.items.delete(itemToRemove.id)
   }
 
-  changeItem(item: IFloatingItem, change: DataChange<any>) {
+  changeItem(item: IFloatingItem, field: string, value: any) {
     const itemUI = this.items.get(item.id)
     if (itemUI) {
-      switch (change.field) {
+      switch (field) {
         case "x":
-          itemUI.x = transformMiniGameXCoordinate(change.value)
+          itemUI.x = transformMiniGameXCoordinate(value)
           break
 
         case "y":
-          itemUI.y = transformMiniGameYCoordinate(change.value)
+          itemUI.y = transformMiniGameYCoordinate(value)
           break
 
         case "avatarId":
-          itemUI.onGrab(change.value)
+          itemUI.onGrab(value)
       }
     }
   }
@@ -117,30 +117,30 @@ export default class MinigameManager {
     this.pokemons.delete(pokemonToRemove.id)
   }
 
-  changePokemon(pokemon: IPokemonAvatar, change: DataChange<any>) {
+  changePokemon(pokemon: IPokemonAvatar, field: string, value: any) {
     const pokemonUI = this.pokemons.get(pokemon.id)
     if (pokemonUI) {
-      switch (change.field) {
+      switch (field) {
         case "orientation":
-          pokemonUI.orientation = change.value
+          pokemonUI.orientation = value
           this.animationManager.animatePokemon(pokemonUI, pokemonUI.action)
           break
 
         case "action":
-          pokemonUI.action = change.value
-          this.animationManager.animatePokemon(pokemonUI, change.value)
+          pokemonUI.action = value
+          this.animationManager.animatePokemon(pokemonUI, value)
           break
 
         case "x":
-          pokemonUI.x = transformMiniGameXCoordinate(change.value)
+          pokemonUI.x = transformMiniGameXCoordinate(value)
           break
 
         case "y":
-          pokemonUI.y = transformMiniGameYCoordinate(change.value)
+          pokemonUI.y = transformMiniGameYCoordinate(value)
           break
 
         case "timer":
-          pokemonUI.updateCircleTimer(change.value)
+          pokemonUI.updateCircleTimer(value)
           break
       }
     }

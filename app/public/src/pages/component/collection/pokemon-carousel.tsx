@@ -11,8 +11,8 @@ import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 export default function PokemonCarousel(props: {
   type: Synergy | "all"
   setPokemon: Dispatch<SetStateAction<Pkm | undefined>>
-  metadata: { [key: string]: ITracker },
-  filter: string,
+  metadata: { [key: string]: ITracker }
+  filter: string
   shinyOnly: boolean
 }) {
   const pokemonCollection = useAppSelector(
@@ -32,7 +32,7 @@ export default function PokemonCarousel(props: {
       }
     })
     setElligiblePokemons(filteredCollection)
-  }, [props.filter]);
+  }, [props.filter])
 
   return (
     <div className="pokemon-carousel">

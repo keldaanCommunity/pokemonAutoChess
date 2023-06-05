@@ -84,29 +84,33 @@ export const EffectName: { [key in Effect]: string } = {
   [Effect.GOOGLE_SPECS]: `Google Specs`,
   [Effect.HATCHER]: `Hatcher`,
   [Effect.BREEDER]: `Breeder`,
-  [Effect.TELEPORT_NEXT_ATTACK]: `Teleport`
+  [Effect.TELEPORT_NEXT_ATTACK]: `Teleport`,
+  [Effect.GRASSY_TERRAIN]: "Grassy Terrain",
+  [Effect.PSYCHIC_TERRAIN]: "Psychic Terrain",
+  [Effect.ELECTRIC_TERRAIN]: "Electric Terrain",
+  [Effect.MISTY_TERRAIN]: "Misty Terrain"
 }
 
 export const EffectDescription: {
   [key in Effect]: { eng: string; esp: string; fra: string }
 } = {
   [Effect.STAMINA]: {
-    eng: `Gain 20 ${Stat.SHIELD}`,
+    eng: `Gain 15 ${Stat.SHIELD}`,
     esp: `20 ${Stat.SHIELD}`,
     fra: `20 ${Stat.SHIELD}`
   },
   [Effect.STRENGTH]: {
-    eng: `Gain 40 ${Stat.SHIELD}`,
+    eng: `Gain 30 ${Stat.SHIELD}`,
     esp: `40 ${Stat.SHIELD}`,
     fra: `40 ${Stat.SHIELD}`
   },
   [Effect.ROCK_SMASH]: {
-    eng: `Gain 60 ${Stat.SHIELD}`,
+    eng: `Gain 45 ${Stat.SHIELD}`,
     esp: `60 ${Stat.SHIELD}`,
     fra: `60 ${Stat.SHIELD}`
   },
   [Effect.PURE_POWER]: {
-    eng: `Gain 80 ${Stat.SHIELD}`,
+    eng: `Gain 60 ${Stat.SHIELD}`,
     esp: `80 ${Stat.SHIELD}`,
     fra: `80 ${Stat.SHIELD}`
   },
@@ -266,17 +270,17 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.BULK_UP]: {
-    eng: `Gain 15% ${Stat.ATK_SPEED} and heal for 20% of max ${Stat.HP}`,
+    eng: `Heal 30 ${Stat.HP} and gain 20% ${Stat.ATK_SPEED}`,
     esp: ``,
     fra: ``
   },
   [Effect.RAGE]: {
-    eng: `Gain 20% ${Stat.ATK_SPEED} and heal for 30% of max ${Stat.HP}`,
+    eng: `Heal 30 ${Stat.HP} and gain 25% ${Stat.ATK_SPEED}`,
     esp: ``,
     fra: ``
   },
   [Effect.ANGER_POINT]: {
-    eng: `Gain 30% ${Stat.ATK_SPEED} and heal for 40% of max ${Stat.HP}`,
+    eng: `Heal 30 ${Stat.HP} and gain 30% ${Stat.ATK_SPEED}`,
     esp: ``,
     fra: ``
   },
@@ -341,22 +345,22 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.TAILWIND]: {
-    eng: `Give ${Status.PROTECT} for 1 sec when under 20% ${Stat.HP}`,
+    eng: `Fly away once under 20% ${Stat.HP}`,
     esp: ``,
     fra: ``
   },
   [Effect.FEATHER_DANCE]: {
-    eng: `Give ${Status.PROTECT} for 1.5 sec when under 40% ${Stat.HP}`,
+    eng: `Get ${Status.PROTECT} for 2 seconds after flying away`,
     esp: ``,
     fra: ``
   },
   [Effect.MAX_AIRSTREAM]: {
-    eng: `Give ${Status.PROTECT} for 2 sec when under 50% ${Stat.HP}`,
+    eng: `Fly away twice when under 50% ${Stat.HP} and 20% ${Stat.HP}`,
     esp: ``,
     fra: ``
   },
   [Effect.MAX_GUARD]: {
-    eng: `Give ${Status.PROTECT} for 2.5sec when under 50% ${Stat.HP}`,
+    eng: `When flying away, enemies around are ${Status.PARALYSIS} for 2 seconds`,
     esp: ``,
     fra: ``
   },
@@ -500,4 +504,24 @@ export const EffectDescription: {
     esp: ``,
     fra: ``
   },
+  [Effect.GRASSY_TERRAIN]: {
+    eng: "Increase damage dealt by 30% (Grass only)",
+    esp: "",
+    fra: ""
+  },
+  [Effect.PSYCHIC_TERRAIN]: {
+    eng: "Increase damage dealt by 30% (Psychic only)",
+    esp: "",
+    fra: ""
+  },
+  [Effect.ELECTRIC_TERRAIN]: {
+    eng: "Increase damage dealt by 30% (Electric only)",
+    esp: "",
+    fra: ""
+  },
+  [Effect.MISTY_TERRAIN]: {
+    eng: "Increase damage dealt by 30% (Fairy only)",
+    esp: "",
+    fra: ""
+  }
 }
