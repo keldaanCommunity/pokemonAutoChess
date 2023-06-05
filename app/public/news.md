@@ -24,6 +24,8 @@ Bots are no longer taken into account for ELO gain/loss calculations. Lobbys don
 
 Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752)
 
+---
+
 # Patch 3.6 - Fly Away
 
 Release : 26/05/2023
@@ -46,6 +48,8 @@ Field has also been reworked to heal flat HP instead of percentage of max HP.
 ## New Abilities
 
 Checkout the new abilities for Litwick, Turtwig, Tauros, Diglett and Hitmonchan !
+
+---
 
 # Patch 3.5 - Burning Forest
 
@@ -73,7 +77,9 @@ Buff Fire Gem: Attacks do double damage on Shields and deal 10% of target max HP
 
 Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752)
 
-# Patch 3.4 - May 14
+# Patch 3.4 - Shields Up
+
+Release: 04/05/2023
 
 ## Newcomers
 
@@ -83,12 +89,9 @@ Welcome to Hoothoot and Noctowl ! ![Hoothoot](https://raw.githubusercontent.com/
 
 - On-hit effects now don't work if attack is dodged or target is protected, giving a small buff to Water and a small nerf to Fire & Dragon
 - Sleep duration reduction now only works if pokemon actually took damage (not dodged / protected)
+- Minimum damage per attack is one, even with blocked damage by Fight synergy
 
-## No more zero damage
-
-Minimum damage per attack is one, even with blocked damage by Fight synergy
-
-## Shields up
+## Stronger Shields
 
 - Shield should be much effective now that we fixed the bug on damage on shield being counted twice
 - Shell bell & human synergy heal now also takes into account the damage on shield
