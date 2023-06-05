@@ -1448,7 +1448,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   PSYCHIC_SURGE: {
-    eng: `Increase ${Stat.AP} of all Psychic pokemons by [10,SP]%`,
+    eng: `Increase ${Stat.AP} of all Psychic pokemons by [5,SP]%, except the caster`,
     esp: ``,
     prt: ``,
     fra: ``

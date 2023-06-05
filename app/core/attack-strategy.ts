@@ -445,9 +445,9 @@ export class PsychicSurgeStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let buff = 10
+    let buff = 5
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
-      if (ally && pokemon.team == ally.team && ally.types.includes(Synergy.PSYCHIC)) {
+      if (ally && ally !== pokemon && pokemon.team == ally.team && ally.types.includes(Synergy.PSYCHIC)) {
         ally.addAbilityPower(buff, true)
       }
     })
