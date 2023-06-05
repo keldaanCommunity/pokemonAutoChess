@@ -385,7 +385,7 @@ export class IllusionStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const heal = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 80 : 40
+    const heal = pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL ? 120 : pokemon.stars === 2 ? 80 : 40
     pokemon.handleHeal(heal, pokemon, 1)
     if (target) {
       pokemon.index = target.index
