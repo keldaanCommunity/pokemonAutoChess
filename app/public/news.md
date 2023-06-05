@@ -1,4 +1,4 @@
-# 3.7- Dancefloor
+# 3.7 - Dancefloor
 
 Release : 05/06/2023
 
@@ -8,21 +8,25 @@ Release : 05/06/2023
 ![tepig](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0499/Normal.png)
 ![tepig](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0500/Normal.png)
 
-More Aquatic: Poliwag, Tentacool, Lotad, Froakie, Phione now have the Aquatic synergy
+## Show me your moves
 
-Add active abilities to Kecleon, Arceus, Mew, Tapu-koko, Tapu-lele, Tapu-Bulu, Tapu-Fini
+New fighting animations for almost all Pokemon, and a brand new HUD redesign !
 
-Buff Oran Berry: 130 → 150 shield
+## Human after all
 
-Nerf Max Revive: after revive, stats and item stacks are now reset to what they were at the start of the battle
+Bots are no longer taken into account for ELO gain/loss calculations. Lobbys don't need 8 players any more to be elligible for ELO, but need at least 2 human players
 
-Nerfed Dive ability: freeze duration is now 1.5 seconds for all tiers
+## Getting sweaty
 
-Nerfed damage of abilities Discharge and Spirit Shackle at tier 3
+More Aquatic mons: Poliwag, Tentacool, Lotad, Froakie, Phione now have the Aquatic synergy
+Many Psychic abilities have been reworked
+New abilities for all mons that only had a passive effect
 
-Buffed PVE rounds pokemons: Rattata and Spearow now have abilities, Gyarados has more HP and attack
+Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752)
 
-# Patch 3.6 - May 26
+# Patch 3.6 - Fly Away
+
+Release : 26/05/2023
 
 ## Newcomers
 
@@ -43,7 +47,9 @@ Field has also been reworked to heal flat HP instead of percentage of max HP.
 
 Checkout the new abilities for Litwick, Turtwig, Tauros, Diglett and Hitmonchan !
 
-# Patch 3.5 - May 20
+# Patch 3.5 - Burning Forest
+
+Release: 20/05/2023
 
 ## Newcomers
 
