@@ -18,9 +18,9 @@ Bots are no longer taken into account for ELO gain/loss calculations. Lobbys don
 
 ## Getting sweaty
 
-More Aquatic mons: Poliwag, Tentacool, Lotad, Froakie, Phione now have the Aquatic synergy
-Many Psychic abilities have been reworked
-New abilities for all mons that only had a passive effect
+- More Aquatic mons: Poliwag, Tentacool, Lotad, Froakie, Phione now have the Aquatic synergy
+- Many Psychic abilities have been reworked
+- New abilities for all mons that only had a passive effect
 
 Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752)
 
@@ -43,7 +43,7 @@ Phione will evolve into a manaphy if you give him an aqua egg.
 Flying Synergy has been reworked, flying pokemons now fly away when in danger.
 Field has also been reworked to heal flat HP instead of percentage of max HP.
 
-## New Ablities
+## New Abilities
 
 Checkout the new abilities for Litwick, Turtwig, Tauros, Diglett and Hitmonchan !
 
