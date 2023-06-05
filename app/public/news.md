@@ -1,4 +1,4 @@
-# 3.7- Dancefloor
+# Patch 3.7 - Dancefloor
 
 Release : 05/06/2023
 
@@ -8,21 +8,27 @@ Release : 05/06/2023
 ![tepig](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0499/Normal.png)
 ![tepig](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0500/Normal.png)
 
-More Aquatic: Poliwag, Tentacool, Lotad, Froakie, Phione now have the Aquatic synergy
+## Show me your moves
 
-Add active abilities to Kecleon, Arceus, Mew, Tapu-koko, Tapu-lele, Tapu-Bulu, Tapu-Fini
+New fighting animations for almost all Pokemon, and a brand new HUD redesign !
 
-Buff Oran Berry: 130 → 150 shield
+## Human after all
 
-Nerf Max Revive: after revive, stats and item stacks are now reset to what they were at the start of the battle
+Bots are no longer taken into account for ELO gain/loss calculations. Lobbys don't need 8 players any more to be elligible for ELO, but need at least 2 human players
 
-Nerfed Dive ability: freeze duration is now 1.5 seconds for all tiers
+## Getting sweaty
 
-Nerfed damage of abilities Discharge and Spirit Shackle at tier 3
+- More Aquatic mons: Poliwag, Tentacool, Lotad, Froakie, Phione now have the Aquatic synergy
+- Many Psychic abilities have been reworked
+- New abilities for all mons that only had a passive effect
 
-Buffed PVE rounds pokemons: Rattata and Spearow now have abilities, Gyarados has more HP and attack
+Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752)
 
-# Patch 3.6 - May 26
+---
+
+# Patch 3.6 - Fly Away
+
+Release : 26/05/2023
 
 ## Newcomers
 
@@ -39,11 +45,15 @@ Phione will evolve into a manaphy if you give him an aqua egg.
 Flying Synergy has been reworked, flying pokemons now fly away when in danger.
 Field has also been reworked to heal flat HP instead of percentage of max HP.
 
-## New Ablities
+## New Abilities
 
 Checkout the new abilities for Litwick, Turtwig, Tauros, Diglett and Hitmonchan !
 
-# Patch 3.5 - May 20
+---
+
+# Patch 3.5 - Burning Forest
+
+Release: 20/05/2023
 
 ## Newcomers
 
@@ -67,7 +77,9 @@ Buff Fire Gem: Attacks do double damage on Shields and deal 10% of target max HP
 
 Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752)
 
-# Patch 3.4 - May 14
+# Patch 3.4 - Shields Up
+
+Release: 04/05/2023
 
 ## Newcomers
 
@@ -77,12 +89,9 @@ Welcome to Hoothoot and Noctowl ! ![Hoothoot](https://raw.githubusercontent.com/
 
 - On-hit effects now don't work if attack is dodged or target is protected, giving a small buff to Water and a small nerf to Fire & Dragon
 - Sleep duration reduction now only works if pokemon actually took damage (not dodged / protected)
+- Minimum damage per attack is one, even with blocked damage by Fight synergy
 
-## No more zero damage
-
-Minimum damage per attack is one, even with blocked damage by Fight synergy
-
-## Shields up
+## Stronger Shields
 
 - Shield should be much effective now that we fixed the bug on damage on shield being counted twice
 - Shell bell & human synergy heal now also takes into account the damage on shield
