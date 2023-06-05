@@ -15,7 +15,9 @@ export function deduplicateArray<T>(arr: T[]): T[] {
 }
 
 export function removeInArray<T>(arr: T[], el: T) {
-  if (arr.find((e) => e === el)) {
-    arr.splice(arr.indexOf(el), 1)
+  const index = arr.indexOf(el)
+  if (index > -1) {
+    arr.splice(index, 1)
   }
 }
+
