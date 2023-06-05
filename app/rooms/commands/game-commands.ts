@@ -38,8 +38,9 @@ import {
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Pokemon } from "../../models/colyseus-models/pokemon"
 import { Ability } from "../../types/enum/Ability"
-import { pickRandomIn } from "../../utils/random"
+import { chance, pickRandomIn } from "../../utils/random"
 import { logger } from "../../utils/logger"
+import { Passive } from "../../types/enum/Passive"
 
 export class OnShopCommand extends Command<
   GameRoom,
@@ -75,10 +76,10 @@ export class OnShopCommand extends Command<
           if (allowBuy) {
             player.money -= pokemon.cost
             if (
-              pokemon.skill === Ability.PROTEAN ||
-              pokemon.skill === Ability.JUDGEMENT
+              pokemon.passive === Passive.PROTEAN2 ||
+              pokemon.passive === Passive.PROTEAN3
             ) {
-              this.room.checkProtean(player, pokemon)
+              this.room.checkDynamicSynergies(player, pokemon)
             }
 
             const x = this.room.getFirstAvailablePositionInBench(player.id)
@@ -208,10 +209,10 @@ export class OnDragDropCommand extends Command<
       const pokemon = player.board.get(detail.id)
       if (pokemon) {
         if (
-          pokemon.skill === Ability.PROTEAN ||
-          pokemon.skill === Ability.JUDGEMENT
+          pokemon.passive === Passive.PROTEAN2 ||
+          pokemon.passive === Passive.PROTEAN3
         ) {
-          this.room.checkProtean(player, pokemon)
+          this.room.checkDynamicSynergies(player, pokemon)
         }
         const x = parseInt(detail.x)
         const y = parseInt(detail.y)
@@ -219,9 +220,9 @@ export class OnDragDropCommand extends Command<
           const pokemonToClone = this.room.getPokemonByPosition(playerId, x, y)
           if (
             pokemonToClone &&
-            pokemonToClone.rarity !== Rarity.MYTHICAL &&
-            pokemonToClone.rarity !== Rarity.NEUTRAL &&
-            pokemonToClone.rarity !== Rarity.HATCH
+            ![Rarity.MYTHICAL, Rarity.SPECIAL, Rarity.HATCH].includes(
+              pokemonToClone.rarity
+            )
           ) {
             dittoReplaced = true
             const replaceDitto = PokemonFactory.createPokemonFromName(
@@ -263,7 +264,7 @@ export class OnDragDropCommand extends Command<
               this.room.swap(playerId, pokemon, x, y)
               success = true
             } else {
-              if (pokemon.rarity != Rarity.NEUTRAL) {
+              if (pokemon.rarity != Rarity.SPECIAL) {
                 // Prevents a pokemon to go on the board only if it's adding a pokemon from the bench on a full board
                 if (!isBoardFull || !dropToEmptyPlace || !dropFromBench) {
                   this.room.swap(playerId, pokemon, x, y)
@@ -950,7 +951,11 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         title: "End of the game",
         info: "We have a winner !"
       })
-      // commands.push(new OnKickPlayerCommand());
+      setTimeout(() => {
+        // dispose the room automatically after 30 seconds
+        this.room.broadcast(Transfer.GAME_END)
+        this.room.disconnect();
+      }, 30 * 1000)
     }
     return commands
   }
@@ -1253,6 +1258,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   stopFightingPhase() {
     const isPVE = this.checkForPVE()
 
+    this.state.stageLevel += 1
     this.computeAchievements()
     this.computeStreak()
     this.computeLife()
@@ -1282,6 +1288,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         }
         if (isPVE && player.getLastBattleResult() == BattleResult.WIN) {
           player.items.add(ItemFactory.createBasicRandomItem())
+          if(this.state.shinyEncounter){
+            // give a second item if shiny PVE round
+            player.items.add(ItemFactory.createBasicRandomItem())
+          }
         }
 
         if (
@@ -1364,23 +1374,25 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
 
   initializeFightingPhase() {
     this.state.phase = GamePhaseState.FIGHT
-    this.state.time = FIGHTING_PHASE_DURATION
-    this.state.stageLevel += 1
+    this.state.time = FIGHTING_PHASE_DURATION    
     this.room.setMetadata({ stageLevel: this.state.stageLevel })
     updateLobby(this.room)
     this.state.botManager.updateBots()
 
     const stageIndex = this.getPVEIndex(this.state.stageLevel)
+    this.state.shinyEncounter = (this.state.stageLevel === 10 && chance(1/20))
 
     this.state.players.forEach((player: Player, key: string) => {
       if (player.alive) {
         if (stageIndex != -1) {
-          player.opponentName = "PVE"
+          player.opponentName = NeutralStage[stageIndex].name
           player.opponentAvatar = NeutralStage[stageIndex].avatar
+          player.opponentTitle = "Wild"
           player.simulation.initialize(
             player.board,
             PokemonFactory.getNeutralPokemonsByLevelStage(
-              this.state.stageLevel
+              this.state.stageLevel,
+              this.state.shinyEncounter
             ),
             player,
             null,

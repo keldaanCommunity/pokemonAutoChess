@@ -18,6 +18,8 @@ import {
 import { Ability } from "../../../../types/enum/Ability"
 import { Item } from "../../../../types/enum/Item"
 import Count from "../../../../models/colyseus-models/count"
+import { AnimationConfig } from "../../../../types/Animation"
+import { Pkm } from "../../../../types/enum/Pokemon"
 
 export default class BattleManager {
   group: GameObjects.Group
@@ -175,6 +177,10 @@ export default class BattleManager {
             } else {
               pkm.removeResurection()
             }
+          } else if (field == "resurecting") {
+            if (pokemon.status.resurecting) {
+              pkm.resurectAnimation()
+            }
           } else if (field == "paralysis") {
             if (pokemon.status.paralysis) {
               pkm.addParalysis()
@@ -252,6 +258,10 @@ export default class BattleManager {
             }
           } else if (field == "ult") {
             if (value != 0) {
+              this.animationManager.play(
+                pkm,
+                AnimationConfig[pkm.name as Pkm].ability
+              )
               pkm.specialAttackAnimation(this.group, value)
             }
           } else if (field == "petalDanceCount") {
@@ -394,7 +404,7 @@ export default class BattleManager {
           } else if (field == "orientation") {
             pkm.orientation = pokemon.orientation
             if (pokemon.action !== PokemonActionState.SLEEP) {
-              this.animationManager.animatePokemon(pkm, PokemonActionState.WALK)
+              this.animationManager.animatePokemon(pkm, pokemon.action)
             }
           } else if (field == "action") {
             pkm.action = pokemon.action
@@ -482,7 +492,7 @@ export default class BattleManager {
             }
           } else if (field === "index") {
             pkm.index = value
-            this.animationManager.animatePokemon(pkm, pkm.action)
+            this.animationManager.animatePokemon(pkm, PokemonActionState.IDLE)
           }
           break
         }

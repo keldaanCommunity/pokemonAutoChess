@@ -60,6 +60,8 @@ export default function PreparationMenu(props: {
   const [queryBot, setQueryBot] = useState<string>("")
   const [botsSelection, setBotsSelection] = useState<Set<IBot>>(new Set())
 
+  const isElligibleForELO = users.filter(u => !u.isBot).length >= 2
+
   function sortBy(criteria: string) {
     if (sortBotsCriteria === criteria) {
       setSortBotsOrder(!sortBotsOrder)
@@ -106,6 +108,21 @@ export default function PreparationMenu(props: {
       <h1>
         {name}: {users.length}/8
       </h1>
+
+      <div className="elo-elligibility">
+        {noElo === true ? <p><img
+          alt="Just for fun"
+          title="Just for fun (no ELO gain/loss)"
+          className="noelo-icon"
+          src="/assets/ui/noelo.png"
+          style={{ borderRadius: "50%" }}
+        />This game is just for fun, no ELO gain/loss !</p>
+        : isElligibleForELO ? <p>✔ This game is elligible for ELO gain/loss. GLHF !</p>
+        : users.length > 1 ?<p>❌Games with bots only are not elligible for ELO gain/loss.</p>
+        : <p>Add bots or wait for more players to join your room</p>
+        }
+      </div>
+
       <div className="preparation-menu-users">
         {users.map((u) => {
           return (

@@ -548,7 +548,10 @@ import {
   Phione,
   Combee,
   Vespiqueen,
-  Shuckle
+  Shuckle,
+  Tepig,
+  Pignite,
+  Emboar
 } from "./colyseus-models/pokemon"
 import { MapSchema } from "@colyseus/schema"
 import { Emotion } from "../types"
@@ -557,22 +560,12 @@ import { IPokemonConfig } from "./mongo-models/user-metadata"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
 import { Synergy } from "../types/enum/Synergy"
 import { Pkm, PkmFamily } from "../types/enum/Pokemon"
-import { PkmCost, EvolutionTime, Mythical1Shop } from "../types/Config"
+import { PkmCost, EvolutionTime, Mythical1Shop, HatchList } from "../types/Config"
 import { pickRandomIn } from "../utils/random"
-
-export const ObtainableEgg = new Array<Pkm>(
-  Pkm.GOTHITA,
-  Pkm.DREEPY,
-  Pkm.SNIVY,
-  Pkm.SCORBUNNY,
-  Pkm.POPPLIO,
-  Pkm.ALOLAN_GEODUDE,
-  Pkm.ROWLET,
-  Pkm.FROAKIE
-)
+import { logger } from "../utils/logger"
 
 export default class PokemonFactory {
-  static getNeutralPokemonsByLevelStage(level: number): MapSchema<Pokemon> {
+  static getNeutralPokemonsByLevelStage(level: number, shinyEncounter: boolean): MapSchema<Pokemon> {
     const pokemons = new MapSchema<Pokemon>()
     switch (level) {
       case 1: {
@@ -623,15 +616,16 @@ export default class PokemonFactory {
         break
       }
 
-      case 10: {
-        const gyarados = PokemonFactory.createPokemonFromName(Pkm.GYARADOS)
+      case 9: {
+        const config = shinyEncounter ? { selectedShiny: true, selectedEmotion: Emotion.ANGRY } : undefined
+        const gyarados = PokemonFactory.createPokemonFromName(Pkm.GYARADOS, config)
         gyarados.positionX = 4
         gyarados.positionY = 2
         pokemons.set(gyarados.id, gyarados)
         break
       }
 
-      case 15: {
+      case 14: {
         const lugia = PokemonFactory.createPokemonFromName(Pkm.LUGIA)
         lugia.positionX = 4
         lugia.positionY = 2
@@ -639,7 +633,7 @@ export default class PokemonFactory {
         break
       }
 
-      case 20: {
+      case 19: {
         const giratina = PokemonFactory.createPokemonFromName(Pkm.GIRATINA)
         giratina.positionX = 4
         giratina.positionY = 2
@@ -647,7 +641,7 @@ export default class PokemonFactory {
         break
       }
 
-      case 25: {
+      case 24: {
         const zapdos = PokemonFactory.createPokemonFromName(Pkm.ZAPDOS)
         zapdos.positionX = 2
         zapdos.positionY = 2
@@ -663,7 +657,7 @@ export default class PokemonFactory {
         break
       }
 
-      case 30: {
+      case 29: {
         const dialga = PokemonFactory.createPokemonFromName(Pkm.DIALGA)
         dialga.positionX = 2
         dialga.positionY = 2
@@ -675,7 +669,7 @@ export default class PokemonFactory {
         break
       }
 
-      case 35: {
+      case 34: {
         const suicune = PokemonFactory.createPokemonFromName(Pkm.SUICUNE)
         suicune.positionX = 2
         suicune.positionY = 2
@@ -691,7 +685,7 @@ export default class PokemonFactory {
         break
       }
 
-      case 40: {
+      case 39: {
         const regice = PokemonFactory.createPokemonFromName(Pkm.REGICE)
         regice.positionX = 2
         regice.positionY = 3
@@ -768,7 +762,7 @@ export default class PokemonFactory {
     }
   }
 
-  static createPokemonFromName(name: Pkm, config?: IPokemonConfig): Pokemon {
+  static createPokemonFromName(name: Pkm, config?: { selectedShiny?: boolean, selectedEmotion?: Emotion }): Pokemon {
     const s = config && config.selectedShiny ? true : false
     const e =
       config && config.selectedEmotion ? config.selectedEmotion : Emotion.NORMAL
@@ -1835,8 +1829,6 @@ export default class PokemonFactory {
         return new MimeJr(s, e)
       case Pkm.MR_MIME:
         return new MrMime(s, e)
-      case Pkm.DEFAULT:
-        return new Magikarp(s, e)
       case Pkm.ORIGIN_GIRATINA:
         return new OriginGiratina(s, e)
       case Pkm.PIROUETTE_MELOETTA:
@@ -1873,8 +1865,16 @@ export default class PokemonFactory {
         return new Vespiqueen(s, e)
       case Pkm.SHUCKLE:
         return new Shuckle(s, e)
+      case Pkm.TEPIG:
+        return new Tepig(s, e)
+      case Pkm.PIGNITE:
+        return new Pignite(s, e)
+      case Pkm.EMBOAR:
+        return new Emboar(s, e)
+      case Pkm.DEFAULT:
+        return new Magikarp(s, e)
       default:
-        // logger.warn(`No pokemon with name "${name}" found, return magikarp`);
+        logger.warn(`No pokemon with name "${name}" found, return magikarp`);
         return new Magikarp(s, e)
     }
   }
@@ -1887,7 +1887,7 @@ export default class PokemonFactory {
   static createRandomEgg() {
     const egg = PokemonFactory.createPokemonFromName(Pkm.EGG)
     egg.action = PokemonActionState.SLEEP
-    egg.evolution = pickRandomIn(ObtainableEgg)
+    egg.evolution = pickRandomIn(HatchList)
     egg.evolutionTimer = EvolutionTime.EGG_HATCH
     return egg
   }

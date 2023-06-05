@@ -13,6 +13,11 @@ import { AbilityTooltip } from "../ability/ability-tooltip"
 import { Rarity, Stat } from "../../../../../types/enum/Game"
 import { StatLabel } from "../../../../../types/strings/Stat"
 import "./wiki-pokemon-detail.css"
+import { GamePokemonDetail } from "../game/game-pokemon-detail"
+import { Ability } from "../../../../../types/enum/Ability"
+import { Passive } from "../../../../../types/enum/Passive"
+import { PassiveDescription } from "../../../../../types/strings/Passive"
+import { addIconsToDescription } from "../../utils/descriptions"
 
 export default function WikiPokemonDetail(props: {
   pokemon: Pkm
@@ -45,9 +50,14 @@ export default function WikiPokemonDetail(props: {
 
   return (
     <div className="wiki-pokemon-detail">
+      <div className="game-pokemon-detail-tooltip">
+        <GamePokemonDetail pokemon={pokemon} ></GamePokemonDetail>
+      </div>
       <dl>
         <dt>Name</dt>
         <dd className="pokemon-name">{pokemon.name}</dd>
+        <dt>Index</dt>
+        <dd className="pokemon-index">{pokemon.index}</dd>
         <dt>Rarity</dt>
         <dd style={{ color: RarityColor[pokemon.rarity] }}>{pokemon.rarity}</dd>
         <dt>Types</dt>
@@ -106,14 +116,22 @@ export default function WikiPokemonDetail(props: {
         <dd>{pokemon.maxMana}</dd>
       </dl>
       <dl>
-        <dt>Ability</dt>
-        <dd>
-          {AbilityName[pokemon.skill].eng}
-          <AbilityTooltip
-            ability={pokemon.skill}
-            tier={pokemon.rarity === Rarity.MYTHICAL ? 3 : pokemon.stars}
-          />
-        </dd>
+        {pokemon.skill !== Ability.DEFAULT && <>
+          <dt>Ability</dt>
+          <dd>
+            {AbilityName[pokemon.skill].eng}
+            <AbilityTooltip
+              ability={pokemon.skill}
+              tier={pokemon.rarity === Rarity.MYTHICAL ? 3 : pokemon.stars}
+            />
+          </dd>
+        </>}
+        {pokemon.passive !== Passive.NONE && <>
+          <dt>Passive</dt>
+          <dd><br/>
+          {addIconsToDescription(PassiveDescription[pokemon.passive])}
+          </dd>
+        </>}
       </dl>
     </div>
   )

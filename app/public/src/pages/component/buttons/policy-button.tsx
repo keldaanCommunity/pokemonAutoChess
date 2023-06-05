@@ -3,7 +3,7 @@ import React from "react"
 export default function PolicyButton() {
   return (
     <a
-      href="https://pokemonautochess-b18fb.web.app/privacy-policy.html"
+      href="https://github.com/keldaanCommunity/pokemonAutoChess/blob/dev/policy.md"
       target="_blank"
     >
       <button type="button" className="bubbly">

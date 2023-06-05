@@ -11,6 +11,7 @@ import {
   SpriteType
 } from "../app/types/enum/Game"
 import { logger } from "../app/utils/logger"
+import { AnimationConfig, AnimationType } from "../app/types/Animation"
 
 gracefulFs.gracefulify(fs)
 const args = process.argv.slice(2)
@@ -71,7 +72,7 @@ async function splitAll() {
       ).toFixed(2)}%) #${index} ${mapName.get(index)}`
     )
 
-    splitIndex(index)
+    await splitIndex(index)
   }
 }
 
@@ -170,8 +171,29 @@ async function splitIndex(index: string) {
       const xmlData = <IPMDCollab>parser.parse(xmlFile)
       for (let k = 0; k < Object.values(SpriteType).length; k++) {
         const anim = Object.values(SpriteType)[k]
-        for (let l = 0; l < Object.values(PokemonActionState).length; l++) {
-          const action = Object.values(PokemonActionState)[l]
+        const conf = mapName.get(index)
+
+        const actions: AnimationType[] = [
+          AnimationType.Idle,
+          AnimationType.Walk,
+          AnimationType.Sleep,
+          AnimationType.Hop,
+          AnimationType.Hurt
+        ]
+
+        if (conf && AnimationConfig[conf]) {
+          if (!actions.includes(AnimationConfig[conf as Pkm].attack)) {
+            actions.push(AnimationConfig[conf as Pkm].attack)
+          }
+          if (!actions.includes(AnimationConfig[conf as Pkm].ability)) {
+            actions.push(AnimationConfig[conf as Pkm].ability)
+          }
+        } else {
+          actions.push(AnimationType.Attack)
+        }
+
+        for (let l = 0; l < actions.length; l++) {
+          const action = actions[l]
           try {
             let img
             let metadata = xmlData.AnimData.Anims.Anim.find(
@@ -272,14 +294,16 @@ async function splitIndex(index: string) {
   }
 }
 
-if (specificIndexToSplit) {
+async function main() {
   loadDurationsFile()
-  splitIndex(specificIndexToSplit).then(() => {
+  if (specificIndexToSplit) {
+    await splitIndex(specificIndexToSplit)
     saveDurationsFile()
-  })
-} else {
-  splitAll().then(() => {
+  } else {
+    await splitAll()
     saveDurationsFile()
     saveMissingFiles()
-  })
+  }
 }
+
+main()

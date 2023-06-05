@@ -380,7 +380,7 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.SUN_FLOWER]: {
-    eng: `Summon Belossom`,
+    eng: `Summon Bellossom`,
     esp: ``,
     fra: ``
   },
@@ -505,22 +505,22 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.GRASSY_TERRAIN]: {
-    eng: "Increase damage dealt by 30% (Grass only)",
+    eng: "Increase damage dealt by 20% (Grass only)",
     esp: "",
     fra: ""
   },
   [Effect.PSYCHIC_TERRAIN]: {
-    eng: "Increase damage dealt by 30% (Psychic only)",
+    eng: "Increase damage dealt by 20% (Psychic only)",
     esp: "",
     fra: ""
   },
   [Effect.ELECTRIC_TERRAIN]: {
-    eng: "Increase damage dealt by 30% (Electric only)",
+    eng: "Increase damage dealt by 20% (Electric only)",
     esp: "",
     fra: ""
   },
   [Effect.MISTY_TERRAIN]: {
-    eng: "Increase damage dealt by 30% (Fairy only)",
+    eng: "Increase damage dealt by 20% (Fairy only)",
     esp: "",
     fra: ""
   }

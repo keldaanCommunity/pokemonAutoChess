@@ -18,7 +18,8 @@ import {
   IFloatingItem,
   IPokemonEntity,
   Transfer,
-  NonFunctionPropNames
+  NonFunctionPropNames,
+  ISimplePlayer
 } from "../../../types"
 import PokemonEntity from "../../../core/pokemon-entity"
 import { Item } from "../../../types/enum/Item"
@@ -241,6 +242,7 @@ class GameContainer {
         "protect",
         "psychicField",
         "resurection",
+        "resurecting",
         "runeProtect",
         "silence",
         "sleep",
@@ -833,7 +835,7 @@ class GameContainer {
     this.room.send(Transfer.SELL_DROP, event.detail)
   }
 
-  transformToSimplePlayer(player: IPlayer) {
+  transformToSimplePlayer(player: IPlayer): ISimplePlayer {
     const simplePlayer = {
       elo: player.elo,
       name: player.name,

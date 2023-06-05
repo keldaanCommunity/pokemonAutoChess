@@ -47,6 +47,7 @@ import {
   IcicleCrashStrategy,
   IronDefenseStrategy,
   IronTailStrategy,
+  JudgementStrategy,
   KingShieldStrategy,
   KnowledgeThiefStrategy,
   LeechLifeStrategy,
@@ -99,10 +100,8 @@ import {
   FusionBoltStrategy,
   AuroraVeilStrategy,
   AquaJetStrategy,
-  ProteanStrategy,
   ChatterStrategy,
   LiquidationStrategy,
-  SynchroStrategy,
   SteamEruptionStrategy,
   AppleAcidStrategy,
   ShadowBallStrategy,
@@ -112,7 +111,7 @@ import {
   FakeTearsStrategy,
   SparklingAriaStrategy,
   DragonDartsStrategy,
-  MistsySurgeStrategy,
+  MistySurgeStrategy,
   GrassySurgeStrategy,
   SkyAttackStrategy,
   IllusionStrategy,
@@ -142,7 +141,11 @@ import {
   GrowthStrategy,
   HealOrderStrategy,
   ShellTrapStrategy,
-  DigStrategy
+  DigStrategy,
+  FireSpinStrategy,
+  SearingShotStrategy,
+  PeckStrategy,
+  SplashStrategy,
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -246,11 +249,9 @@ export enum Ability {
   FUSION_BOLT = "FUSION_BOLT",
   AURORA_VEIL = "AURORA_VEIL",
   AQUA_JET = "AQUA_JET",
-  PROTEAN = "PROTEAN",
   JUDGEMENT = "JUDGEMENT",
   CHATTER = "CHATTER",
   LIQUIDATION = "LIQUIDATION",
-  SYNCHRO = "SYNCHRO",
   STEAM_ERUPTION = "STEAM_ERUPTION",
   APPLE_ACID = "APPLE_ACID",
   SHADOW_BALL = "SHADOW_BALL",
@@ -290,7 +291,11 @@ export enum Ability {
   GROWTH = "GROWTH",
   HEAL_ORDER = "HEAL_ORDER",
   SHELL_TRAP = "SHELL_TRAP",
-  DIG="DIG"
+  DIG = "DIG",
+  FIRE_SPIN = "FIRE_SPIN",
+  SEARING_SHOT = "SEARING_SHOT",
+  PECK = "PECK",
+  SPLASH = "SPLASH",
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -394,11 +399,9 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.FUSION_BOLT]: new FusionBoltStrategy(),
   [Ability.AURORA_VEIL]: new AuroraVeilStrategy(),
   [Ability.AQUA_JET]: new AquaJetStrategy(),
-  [Ability.PROTEAN]: new ProteanStrategy(),
-  [Ability.JUDGEMENT]: new ProteanStrategy(),
+  [Ability.JUDGEMENT]: new JudgementStrategy(),
   [Ability.CHATTER]: new ChatterStrategy(),
   [Ability.LIQUIDATION]: new LiquidationStrategy(),
-  [Ability.SYNCHRO]: new SynchroStrategy(),
   [Ability.STEAM_ERUPTION]: new SteamEruptionStrategy(),
   [Ability.APPLE_ACID]: new AppleAcidStrategy(),
   [Ability.SHADOW_BALL]: new ShadowBallStrategy(),
@@ -409,7 +412,7 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.SPARKLING_ARIA]: new SparklingAriaStrategy(),
   [Ability.DRAGON_DARTS]: new DragonDartsStrategy(),
   [Ability.GRASSY_SURGE]: new GrassySurgeStrategy(),
-  [Ability.MISTY_SURGE]: new MistsySurgeStrategy(),
+  [Ability.MISTY_SURGE]: new MistySurgeStrategy(),
   [Ability.SKY_ATTACK]: new SkyAttackStrategy(),
   [Ability.ILLUSION]: new IllusionStrategy(),
   [Ability.SMOG]: new SmogStrategy(),
@@ -438,5 +441,9 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.GROWTH]: new GrowthStrategy(),
   [Ability.HEAL_ORDER]: new HealOrderStrategy(),
   [Ability.SHELL_TRAP]: new ShellTrapStrategy(),
-  [Ability.DIG]: new DigStrategy()
+  [Ability.DIG]: new DigStrategy(),
+  [Ability.FIRE_SPIN]: new FireSpinStrategy(),
+  [Ability.SEARING_SHOT]: new SearingShotStrategy(),
+  [Ability.PECK]: new PeckStrategy(),
+  [Ability.SPLASH]: new SplashStrategy(),
 }

@@ -1,19 +1,19 @@
 {
-  "name": "pokemon-autochess",
-  "version": "3.6.0",
+  "name": "pokemon-auto-chess",
+  "version": "3.7.0",
   "description": "",
   "keywords": [],
   "license": "MIT",
   "engines": {
     "node": "18.16"
   },
-  "homepage": "https://github.com/keldaanInteractive/pokemonAutoChess#readme",
+  "homepage": "https://github.com/keldaanCommunity/pokemonAutoChess#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/keldaanInteractive/pokemonAutoChess.git"
+    "url": "git+https://github.com/keldaanCommunity/pokemonAutoChess.git"
   },
   "bugs": {
-    "url": "https://github.com/keldaanInteractive/pokemonAutoChess/issues"
+    "url": "https://github.com/keldaanCommunity/pokemonAutoChess/issues"
   },
   "author": "keldaan-ag",
   "contributors": [

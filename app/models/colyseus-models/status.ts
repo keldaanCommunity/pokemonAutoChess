@@ -1,8 +1,7 @@
 import { Schema, type } from "@colyseus/schema"
 import Board from "../../core/board"
 import PokemonEntity from "../../core/pokemon-entity"
-import { IPokemon, IStatus } from "../../types"
-import { Ability } from "../../types/enum/Ability"
+import { IStatus } from "../../types"
 import { Effect } from "../../types/enum/Effect"
 import { AttackType } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
@@ -17,6 +16,7 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") confusion = false
   @type("boolean") wound = false
   @type("boolean") resurection = false
+  @type("boolean") resurecting = false
   @type("boolean") paralysis = false
   @type("boolean") armorReduction = false
   @type("boolean") runeProtect = false
@@ -48,6 +48,7 @@ export default class Status extends Schema implements IStatus {
   synchroCooldown = 3000
   synchro = false
   tree = false
+  resurectingCooldown = 0
 
   clearNegativeStatus() {
     this.burnCooldown = 0
@@ -123,6 +124,10 @@ export default class Status extends Schema implements IStatus {
 
     if (this.synchro) {
       this.updateSynchro(dt, board, pokemon)
+    }
+
+    if (this.resurecting) {
+      this.updateResurecting(dt, pokemon)
     }
   }
 
@@ -414,7 +419,7 @@ export default class Status extends Schema implements IStatus {
       !this.runeProtect
     ) {
       this.paralysis = true
-      pkm.handleAttackSpeed(-40)
+      pkm.addAttackSpeed(-40)
       this.paralysisCooldown = timer
     }
   }
@@ -422,7 +427,7 @@ export default class Status extends Schema implements IStatus {
   updateParalysis(dt: number, pkm: PokemonEntity) {
     if (this.paralysisCooldown - dt <= 0) {
       this.paralysis = false
-      pkm.handleAttackSpeed(40)
+      pkm.addAttackSpeed(40)
     } else {
       this.paralysisCooldown = this.paralysisCooldown - dt
     }
@@ -453,6 +458,24 @@ export default class Status extends Schema implements IStatus {
       this.spikeArmor = false
     } else {
       this.spikeArmorCooldown = this.spikeArmorCooldown - dt
+    }
+  }
+
+  triggerResurection(pokemon: PokemonEntity){
+    this.resurection = false
+    this.resurecting = true
+    this.resurectingCooldown = 2000
+    pokemon.status.clearNegativeStatus()
+  }
+
+  updateResurecting(dt: number, pokemon: PokemonEntity){
+    if (this.resurectingCooldown - dt <= 0) {
+      this.resurecting = false
+      pokemon.resetStats()
+      pokemon.toMovingState()
+      pokemon.cooldown = 0
+    } else {
+      this.resurectingCooldown -= dt
     }
   }
 }

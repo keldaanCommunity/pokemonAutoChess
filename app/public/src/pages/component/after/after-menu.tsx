@@ -4,36 +4,11 @@ import Avatar from "../avatar"
 import Team from "./team"
 import { getRankLabel } from "../../../../../../app/types/strings/Strings"
 import SynergyIcon from "../icons/synergy-icon"
-import EloRank from "elo-rank"
-import { ISimplePlayer } from "../../../../../types"
 import { ExpPlace, TypeTrigger } from "../../../../../types/Config"
 import { Synergy } from "../../../../../types/enum/Synergy"
+import { computeElo } from "../../../../../core/elo"
 import "./after-menu.css"
-
-function computeElo(players: ISimplePlayer[], player: ISimplePlayer) {
-  const eloEngine = new EloRank()
-  const eloGains = new Array<number>()
-  let meanGain = 0
-  players.forEach((plyr) => {
-    if (player.name != plyr.name) {
-      const expectedScoreA = eloEngine.getExpected(player.elo, plyr.elo)
-      if (player.rank < plyr.rank) {
-        eloGains.push(eloEngine.updateRating(expectedScoreA, 1, player.elo))
-      } else {
-        eloGains.push(eloEngine.updateRating(expectedScoreA, 0, player.elo))
-      }
-    }
-  })
-
-  eloGains.forEach((gain) => {
-    meanGain += gain
-  })
-  meanGain = Math.max(0, Math.floor(meanGain / eloGains.length))
-  if (player.rank <= 4 && meanGain < player.elo) {
-    meanGain = player.elo
-  }
-  return meanGain
-}
+import { Role } from "../../../../../types"
 
 export default function AfterMenu() {
   const players = useAppSelector((state) => state.after.players)
@@ -45,7 +20,8 @@ export default function AfterMenu() {
   const currentPlayerId: string = useAppSelector((state) => state.network.uid)
   const currentPlayer = players.find((p) => p.id === currentPlayerId)
   const playerRank = currentPlayer ? currentPlayer.rank : null
-  const newElo = currentPlayer ? computeElo(players, currentPlayer) : null
+  const humans = players.filter(p => p.role !== Role.BOT)
+  const newElo = currentPlayer ? computeElo(currentPlayer, currentPlayer.rank, currentPlayer.elo, humans) : null
   const shouldShowElo = elligibleToELO && currentPlayer && newElo
 
   return (

@@ -164,15 +164,15 @@ export default class GameScene extends Scene {
   }
 
   registerKeys() {
-    this.input.keyboard.on("keyup-D", () => {
+    this.input.keyboard.on("keydown-D", () => {
       this.refreshShop()
     })
 
-    this.input.keyboard.on("keyup-F", () => {
+    this.input.keyboard.on("keydown-F", () => {
       this.buyExperience()
     })
 
-    this.input.keyboard.on("keyup-E", () => {
+    this.input.keyboard.on("keydown-E", () => {
       if (this.pokemonHovered) {
         this.sellPokemon(this.pokemonHovered)
       }
@@ -391,6 +391,9 @@ export default class GameScene extends Scene {
         const g = <Phaser.GameObjects.Container>gameObject
         g.x = dragX
         g.y = dragY
+        if(g && this.sellZoneGraphic?.visible === false){
+          this.drawRectangles(true)
+        }
       }
     )
 

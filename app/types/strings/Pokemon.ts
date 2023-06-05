@@ -22,16 +22,3 @@ export const PokemonNames = {
     fra: ""
   }
 }
-
-export const CustomPokemonDescription = {
-  [Pkm.DITTO]: {
-    eng: "It can take the form of any other Pokemon, becoming a perfect copy.",
-    esp: "",
-    fra: ""
-  },
-  [Pkm.EGG]: {
-    eng: "You can feel something moving inside.",
-    esp: "",
-    fra: ""
-  }
-}

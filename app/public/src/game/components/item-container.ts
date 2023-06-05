@@ -27,7 +27,7 @@ export default class ItemContainer extends DraggableObject {
     playerId: string
   ) {
     const currentPlayerUid = getGameScene()?.uid
-    const itemSize = pokemonId === null ? 70 : 25
+    const itemSize = pokemonId === null ? 60 : 25
     super(scene, x, y, itemSize, itemSize, playerId !== currentPlayerUid)
     this.scene = scene
     this.pokemonId = pokemonId
@@ -43,7 +43,7 @@ export default class ItemContainer extends DraggableObject {
     )
     if (pokemonId === null) {
       this.circle.setStrokeStyle(
-        3,
+        2,
         playerId === currentPlayerUid ? 0x000000 : 0x666666,
         1
       )

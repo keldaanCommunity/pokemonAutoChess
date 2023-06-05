@@ -548,7 +548,10 @@ export enum Pkm {
   PHIONE = "phione",
   COMBEE = "combee",
   VESPIQUEEN = "vespiqueen",
-  SHUCKLE = "shuckle"
+  SHUCKLE = "shuckle",
+  TEPIG = "tepig",
+  PIGNITE = "pignite",
+  EMBOAR = "emboar"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1101,7 +1104,10 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.PHIONE]: "0489",
   [Pkm.COMBEE]: "0415",
   [Pkm.VESPIQUEEN]: "0416",
-  [Pkm.SHUCKLE]: "0213"
+  [Pkm.SHUCKLE]: "0213",
+  [Pkm.TEPIG]: "0498",
+  [Pkm.PIGNITE]: "0499",
+  [Pkm.EMBOAR]: "0500"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1357,7 +1363,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.RAIKOU]: Pkm.RAIKOU,
   [Pkm.REGIGIGAS]: Pkm.REGIGIGAS,
   [Pkm.MAGIKARP]: Pkm.MAGIKARP,
-  [Pkm.GYARADOS]: Pkm.GYARADOS,
+  [Pkm.GYARADOS]: Pkm.MAGIKARP,
   [Pkm.RATTATA]: Pkm.RATTATA,
   [Pkm.RATICATE]: Pkm.RATTATA,
   [Pkm.LUGIA]: Pkm.LUGIA,
@@ -1654,5 +1660,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.PHIONE]: Pkm.PHIONE,
   [Pkm.COMBEE]: Pkm.COMBEE,
   [Pkm.VESPIQUEEN]: Pkm.COMBEE,
-  [Pkm.SHUCKLE]: Pkm.SHUCKLE
+  [Pkm.SHUCKLE]: Pkm.SHUCKLE,
+  [Pkm.TEPIG]: Pkm.TEPIG,
+  [Pkm.PIGNITE]: Pkm.TEPIG,
+  [Pkm.EMBOAR]: Pkm.TEPIG
 }

@@ -11,6 +11,8 @@ import { Pkm } from "../types/enum/Pokemon"
 import { pickRandomIn, shuffleArray } from "../utils/random"
 import { effectInLine, OrientationArray } from "../utils/orientation"
 import { logger } from "../utils/logger"
+import { DEFAULT_ATK_SPEED } from "../types/Config"
+import { min } from "../utils/number"
 
 export class AttackStrategy {
   process(
@@ -374,18 +376,6 @@ export class WonderGuardStrategy extends AttackStrategy {
   }
 }
 
-export class SynchroStrategy extends AttackStrategy {
-  process(
-    pokemon: PokemonEntity,
-    state: PokemonState,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
-    super.process(pokemon, state, board, target, crit)
-  }
-}
-
 export class IllusionStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
@@ -407,7 +397,7 @@ export class IllusionStrategy extends AttackStrategy {
   }
 }
 
-export class ProteanStrategy extends AttackStrategy {
+export class JudgementStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -416,6 +406,15 @@ export class ProteanStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    let synergyLevelsCount = 0
+    const synergies = pokemon.simulation.player?.synergies
+    if(synergies){
+      pokemon.types.forEach(type => {
+        synergyLevelsCount += synergies.get(type) ?? 0      
+      })
+    }
+    const damage = 10 * synergyLevelsCount
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
 
@@ -428,6 +427,12 @@ export class ElectricSurgeStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    let buff = 10
+    board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
+      if (ally && pokemon.team == ally.team && ally.types.includes(Synergy.ELECTRIC)) {
+        ally.addAttackSpeed(buff, true)
+      }
+    })
   }
 }
 
@@ -440,10 +445,16 @@ export class PsychicSurgeStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    let buff = 10
+    board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
+      if (ally && pokemon.team == ally.team && ally.types.includes(Synergy.PSYCHIC)) {
+        ally.addAbilityPower(buff, true)
+      }
+    })
   }
 }
 
-export class MistsySurgeStrategy extends AttackStrategy {
+export class MistySurgeStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -452,6 +463,12 @@ export class MistsySurgeStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    let buff = 5
+    board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
+      if (ally && pokemon.team == ally.team && ally.types.includes(Synergy.FAIRY)) {
+        ally.addSpecialDefense(buff, true)
+      }
+    })
   }
 }
 
@@ -464,6 +481,12 @@ export class GrassySurgeStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    let buff = 5
+    board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
+      if (ally && pokemon.team == ally.team && ally.types.includes(Synergy.GRASS)) {
+        ally.addAttack(buff, true)
+      }
+    })
   }
 }
 
@@ -772,8 +795,8 @@ export class ElectroWebStrategy extends AttackStrategy {
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
       .forEach((cell) => {
         if (cell.value && cell.value.team !== pokemon.team) {
-          cell.value.handleAttackSpeed(-steal)
-          pokemon.handleAttackSpeed(steal)
+          cell.value.addAttackSpeed(-steal)
+          pokemon.addAttackSpeed(steal)
         }
       })
   }
@@ -1032,10 +1055,11 @@ export class HypnosisStrategy extends AttackStrategy {
     if (farthestTarget) {
       const x = farthestTarget.x
       const y = farthestTarget.y
-      const duration =
+      let duration =
         pokemon.stars === 3 ? 6000 : pokemon.stars === 2 ? 3000 : 1500
       const tg = board.getValue(x, y)
       if (tg) {
+        duration *= (1+pokemon.ap/200)
         tg.status.triggerSleep(duration, tg)
       }
     }
@@ -1440,16 +1464,19 @@ export class TriAttackStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let duration = 2000
+    let duration = 2000, damage = 25
     if (pokemon.stars === 2) {
       duration = 4000
+      damage = 50
     }
     if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
       duration = 8000
+      damage = 100
     }
     target.status.triggerFreeze(duration, target)
     target.status.triggerWound(duration, target, board)
     target.status.triggerBurn(duration, target, pokemon, board)
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
 
@@ -1790,7 +1817,7 @@ export class RockTombStrategy extends AttackStrategy {
     }
 
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.handleAttackSpeed(-debuff)
+    target.addAttackSpeed(-debuff)
   }
 }
 
@@ -2125,22 +2152,29 @@ export class ConfusionStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let timer = 0
+    let timer = 0, damage =0
     switch (pokemon.stars) {
       case 1:
         timer = 3000
+        damage = 75
         break
       case 2:
-        timer = 6000
+        timer = 5000
+        damage = 150
         break
       case 3:
-        timer = 12000
+        timer = 7000
+        damage = 300
         break
       default:
         break
     }
 
-    target.status.triggerConfusion(timer, target)
+    if(target.status.confusion){
+      target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    } else {
+      target.status.triggerConfusion(timer, target)
+    }
   }
 }
 
@@ -2655,7 +2689,7 @@ export class DischargeStrategy extends AttackStrategy {
         damage = 50
         break
       case 3:
-        damage = 100
+        damage = 75
         break
       default:
         break
@@ -2693,12 +2727,7 @@ export class DiveStrategy extends AttackStrategy {
         : pokemon.stars === 2
         ? 30
         : 15
-    const duration =
-      pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL
-        ? 4000
-        : pokemon.stars === 2
-        ? 2000
-        : 1000
+    const freezeDuration = 1500
     const mostSurroundedCoordinate =
       state.getMostSurroundedCoordianteAvailablePlace(pokemon, board)
 
@@ -2720,7 +2749,7 @@ export class DiveStrategy extends AttackStrategy {
             pokemon,
             crit
           )
-          cell.value.status.triggerFreeze(duration, cell.value)
+          cell.value.status.triggerFreeze(freezeDuration, cell.value)
         }
       })
     }
@@ -2988,7 +3017,7 @@ export class TormentStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let boost = 1
+    let boost = 0
 
     switch (pokemon.stars) {
       case 1:
@@ -3003,7 +3032,7 @@ export class TormentStrategy extends AttackStrategy {
       default:
         break
     }
-    pokemon.handleAttackSpeed(boost, true)
+    pokemon.addAttackSpeed(boost, true)
   }
 }
 
@@ -3308,15 +3337,20 @@ export class SpectralThiefStrategy extends AttackStrategy {
       )
 
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
-      const boostAtk = Math.min(0, target.atk - target.baseAtk)
-      const boostDef = Math.min(0, target.def - target.baseSpeDef)
-      const boostSpeDef = Math.min(0, target.speDef - target.baseSpeDef)
+      const boostAtk = min(0)(target.atk - target.baseAtk)
+      const boostAtkSpeed = min(0)(target.atkSpeed - DEFAULT_ATK_SPEED)
+      const boostDef = min(0)(target.def - target.baseSpeDef)
+      const boostSpeDef = min(0)(target.speDef - target.baseSpeDef)
+      const boostAP = target.ap
+
       target.atk = target.baseAtk
       target.def = target.baseDef
       target.speDef = target.baseSpeDef
       pokemon.addAttack(boostAtk, false)
       pokemon.addDefense(boostDef, false)
       pokemon.addSpecialDefense(boostSpeDef, false)
+      pokemon.addAbilityPower(boostAP, false)
+      pokemon.addAttackSpeed(boostAtkSpeed, false)
     }
   }
 }
@@ -3345,6 +3379,9 @@ export class ThiefStrategy extends AttackStrategy {
         pokemon.simulation.applyItemEffect(pokemon, item)
       }
       target.items.delete(item)
+      if(item === Item.MAX_REVIVE && target.status.resurection){
+        target.status.resurection = false
+      }
     })
 
     // update artificial synergy bonuses
@@ -3395,7 +3432,7 @@ export class StunSporeStrategy extends AttackStrategy {
         break
     }
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.handleAttackSpeed(-debuff)
+    target.addAttackSpeed(-debuff)
   }
 }
 
@@ -3660,7 +3697,8 @@ export class AgilityStrategy extends AttackStrategy {
         boost = 30
         break
     }
-    pokemon.handleAttackSpeed(boost, true)
+
+    pokemon.addAttackSpeed(boost, true)
     pokemon.cooldown = 0;
   }
 }
@@ -3683,7 +3721,7 @@ export class SpiritShackleStrategy extends AttackStrategy {
         damage = 60
         break
       case 3:
-        damage = 120
+        damage = 90
         break
       default:
         break
@@ -3895,7 +3933,7 @@ export class GeomancyStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target, crit)
     pokemon.addAttack(15, true)
     pokemon.addSpecialDefense(5, true)
-    pokemon.handleAttackSpeed(30, false)
+    pokemon.addAttackSpeed(30, false)
   }
 }
 
@@ -4071,5 +4109,94 @@ export class DigStrategy extends AttackStrategy {
 
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
     }
+  }
+}
+
+export class FireSpinStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    let damage = 20
+    if (pokemon.stars === 2) {
+      damage = 40
+    }
+    if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
+      damage = 100
+    }
+
+    const cells = board.getAdjacentCells(target.positionX, target.positionY)
+
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    target.status.triggerBurn(3000, target, pokemon, board)
+    cells.forEach((cell) => {
+      if (cell.value && pokemon.team != cell.value.team) {
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        cell.value.status.triggerBurn(3000, target, pokemon, board)
+      }
+    })
+  }
+}
+
+export class SearingShotStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    let damage = 20
+    const cells = board.getCellsInRadius(pokemon.positionX, pokemon.positionY, 2)
+    cells.forEach((cell) => {
+      if (cell.value && pokemon.team != cell.value.team) {
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        cell.value.status.triggerBurn(3000, target, pokemon, board)
+      }
+    })
+  }
+}
+
+export class PeckStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = pokemon.stars === 3 ? 30 : pokemon.stars === 2 ? 20 : 10
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+  }
+}
+
+export class SplashStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    // does nothing, intentionally
   }
 }

@@ -44,7 +44,7 @@ export default class LoadingManager {
 
     if (scene.tilemap) {
       scene.load.audio("sound", [
-        `https://raw.githubusercontent.com/keldaanInteractive/pokemonAutoChessMusic/main/music/${scene.tilemap.tilesets[0].name}.mp3`
+        `https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChessMusic/main/music/${scene.tilemap.tilesets[0].name}.mp3`
       ])
       scene.load.image(
         "tiles",
@@ -61,10 +61,12 @@ export default class LoadingManager {
       "/assets/ui/"
     )
 
+    scene.load.image("money", "/assets/ui/money.svg")
+    scene.load.image("arrowDown", "/assets/ui/arrowDown.png")
+
     loadStatusMultiAtlas(this.scene)
 
     scene.load.multiatlas("item", "/assets/item/item.json", "/assets/item/")
-    scene.load.multiatlas("lock", "/assets/lock/lock.json", "/assets/lock/")
     scene.load.multiatlas(
       "attacks",
       "/assets/attacks/attacks.json",
@@ -134,6 +136,11 @@ export default class LoadingManager {
     scene.load.multiatlas(
       "SACRED_SWORD",
       "/assets/attacks/SACRED_SWORD.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
+      "JUDGEMENT",
+      "/assets/attacks/JUDGEMENT.json",
       "/assets/attacks"
     )
     scene.load.multiatlas(
@@ -351,7 +358,6 @@ export default class LoadingManager {
       "/assets/attacks/pmd-replace.json",
       "/assets/attacks"
     )
-    scene.load.image("money", "/assets/ui/money.svg")
     scene.load.multiatlas(
       "ICE_RANGE",
       "/assets/attacks/ICE_RANGE.json",
@@ -406,6 +412,11 @@ export function loadStatusMultiAtlas(scene: Phaser.Scene) {
   scene.load.multiatlas(
     "resurection",
     "/assets/status/resurection.json",
+    "/assets/status"
+  )
+  scene.load.multiatlas(
+    "RESURECT",
+    "/assets/status/RESURECT.json",
     "/assets/status"
   )
   scene.load.multiatlas(

@@ -32,16 +32,17 @@ import { Pokemon } from "../models/colyseus-models/pokemon"
 import { IPokemonRecord } from "../models/colyseus-models/game-record"
 import GameRoom from "../rooms/game-room"
 import { Effects } from "../models/effects"
+import { Passive } from "./enum/Passive"
 
 export * from "./enum/Emotion"
 
 export const FIGHTING_PHASE_DURATION = 40000
 
 export const CDN_PORTRAIT_URL =
-  "https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master/portrait/"
+  "https://raw.githubusercontent.com/keldaanCommunity/SpriteCollab/master/portrait/"
 
 export const CDN_URL =
-  "https://raw.githubusercontent.com/keldaanInteractive/SpriteCollab/master"
+  "https://raw.githubusercontent.com/keldaanCommunity/SpriteCollab/master"
 
 export const USERNAME_REGEXP =
   /^(?=.{4,20}$)(?:[\u0021-\uFFFF]+(?:(?:\.|-|_)[\u0021-\uFFFF])*)+$/
@@ -84,7 +85,7 @@ export enum Role {
 }
 
 export const RoleName: { [key in Role]: string } = {
-  [Role.ADMIN]: "Admin",
+  [Role.ADMIN]: "Creator",
   [Role.MODERATOR]: "Mod",
   [Role.BASIC]: "Basic",
   [Role.BOT]: "Bot",
@@ -129,6 +130,7 @@ export enum Transfer {
   ITEM = "ITEM",
   GAME_START = "GAME_START",
   GAME_START_REQUEST = "GAME_START_REQUEST",
+  GAME_END = "GAME_END",
   CHANGE_ROOM_NAME = "CHANGE_ROOM_NAME",
   CHANGE_ROOM_PASSWORD = "CHANGE_ROOM_PASSWORD",
   BUY_EMOTION = "BUY_EMOTION",
@@ -145,8 +147,7 @@ export enum Transfer {
   SET_TITLE = "SET_TITLE",
   REMOVE_MESSAGE = "REMOVE_MESSAGE",
   GIVE_BOOSTER = "GIVE_BOOSTER",
-  SET_MODERATOR = "SET_MODERATOR",
-  SET_BOT_MANAGER = "SET_BOT_MANAGER",
+  SET_ROLE = "SET_ROLE",
   GIVE_TITLE = "GIVE_TITLE",
   REQUEST_LEADERBOARD = "REQUEST_LEADERBOARD",
   REQUEST_LEVEL_LEADERBOARD = "REQUEST_LEVEL_LEADERBOARD",
@@ -273,8 +274,18 @@ export interface ISimplePlayer {
   id: string
   rank: number
   avatar: string
+  title: string
+  role: Role
   pokemons: IPokemonRecord[]
   synergies: Array<{ name: Synergy; value: number }>
+}
+
+export interface IGameHistorySimplePlayer extends ISimplePlayer {
+  pokemons: IGameHistoryPokemonRecord[]
+}
+
+export interface IGameHistoryPokemonRecord extends IPokemonRecord {
+  inventory: Item[]
 }
 
 export interface IPokemonAvatar {
@@ -309,6 +320,7 @@ export interface IPlayer {
   interest: number
   opponentName: string
   opponentAvatar: string
+  opponentTitle: string
   boardSize: number
   items: CollectionSchema<Item>
   rank: number
@@ -323,6 +335,7 @@ export interface IPlayer {
   rerollCount: number
   loadingProgress: number
   effects: Effects
+  isBot: boolean
 }
 export interface IPokemon {
   id: string
@@ -345,6 +358,7 @@ export interface IPokemon {
   stars: number
   maxMana: number
   skill: Ability
+  passive: Passive
   items: SetSchema<Item>
   evolutionTimer: number | undefined
   shiny: boolean
@@ -447,6 +461,7 @@ export interface IPokemonEntity {
   types: ArraySchema<Synergy>
   stars: number
   skill: Ability
+  passive: Passive
   status: Status
   count: Count
   critDamage: number
@@ -468,6 +483,7 @@ export interface IStatus {
   confusion: boolean
   wound: boolean
   resurection: boolean
+  resurecting: boolean
   paralysis: boolean
   armorReduction: boolean
   runeProtect: boolean
@@ -563,6 +579,7 @@ export enum Title {
   HEX_MANIAC = "HEX_MANIAC",
   MUSICIAN = "MUSICIAN",
   BABYSITTER = "BABYSITTER",
+  ALCHEMIST = "ALCHEMIST",
   HARLEQUIN = "HARLEQUIN",
   GLITCH_TRAINER = "GLITCH_TRAINER",
   NURSE = "NURSE",
@@ -582,123 +599,5 @@ export enum Title {
   BOT_BUILDER = "BOT_BUILDER",
   SHINY_SEEKER = "SHINY_SEEKER",
   ARCHEOLOGIST = "ARCHEOLOGIST",
-  ALCHEMIST = "ALCHEMIST"
-}
-
-export const TitleName: { [key in Title]: string } = {
-  [Title.NOVICE]: "Novice",
-  [Title.ROOKIE]: "Rookie",
-  [Title.AMATEUR]: "Amateur",
-  [Title.VETERAN]: "Veteran",
-  [Title.PRO]: "Pro",
-  [Title.EXPERT]: "Expert",
-  [Title.ELITE]: "Elite",
-  [Title.MASTER]: "Master",
-  [Title.GRAND_MASTER]: "Grand Master",
-  [Title.BIRD_KEEPER]: "Bird Keeper",
-  [Title.BLACK_BELT]: "Black Belt",
-  [Title.BUG_MANIAC]: "Bug Maniac",
-  [Title.CUTE_MANIAC]: "Cute Maniac",
-  [Title.DELINQUENT]: "Delinquent",
-  [Title.DRAGON_TAMER]: "Dragon Tamer",
-  [Title.FIREFIGHTER]: "Firefighter",
-  [Title.TEAM_ROCKET_GRUNT]: "Team Rocket Grunt",
-  [Title.HIKER]: "Hiker",
-  [Title.LONE_WOLF]: "Lone Wolf",
-  [Title.KINDLER]: "Kindler",
-  [Title.GARDENER]: "Gardener",
-  [Title.MUSEUM_DIRECTOR]: "Museum Director",
-  [Title.ENGINEER]: "Engineer",
-  [Title.TELEKINESIST]: "Telekinesist",
-  [Title.ELECTRICIAN]: "Electrician",
-  [Title.GEOLOGIST]: "Geologist",
-  [Title.MYTH_TRAINER]: "Myth Trainer",
-  [Title.DIVER]: "Diver",
-  [Title.POKEMON_RANGER]: "Pokemon Ranger",
-  [Title.SKIER]: "Skier",
-  [Title.POKEFAN]: "Pokefan",
-  [Title.HEX_MANIAC]: "Hex Maniac",
-  [Title.MUSICIAN]: "Musician",
-  [Title.BABYSITTER]: "Babysitter",
-  [Title.HARLEQUIN]: "Harlequin",
-  [Title.GLITCH_TRAINER]: "Glitch Trainer",
-  [Title.NURSE]: "Nurse",
-  [Title.GARDIAN]: "Guardian",
-  [Title.DUKE]: "Duke",
-  [Title.DUCHESS]: "Duchess",
-  [Title.CHAMPION]: "Champion",
-  [Title.ELITE_FOUR_MEMBER]: "Elite Four Member",
-  [Title.ACE_TRAINER]: "Ace Trainer",
-  [Title.GYM_LEADER]: "Gym Leader",
-  [Title.GYM_CHALLENGER]: "Gym Challenger",
-  [Title.GYM_TRAINER]: "Gym Trainer",
-  [Title.CAMPER]: "Camper",
-  [Title.RIVAL]: "Rival",
-  [Title.BACKER]: "Backer",
-  [Title.TYRANT]: "Tyrant",
-  [Title.SURVIVOR]: "Survivor",
-  [Title.GAMBLER]: "Gambler",
-  [Title.BOT_BUILDER]: "Bot Builder",
-  [Title.SHINY_SEEKER]: "Shiny Seeker",
-  [Title.ARCHEOLOGIST]: "Archeologist",
-  [Title.ALCHEMIST]: "Alchemist"
-}
-
-export const TitleDescription: { [key in Title]: string } = {
-  [Title.NOVICE]: "Play your first game",
-  [Title.ROOKIE]: "Reach level 10",
-  [Title.AMATEUR]: "Reach level 20",
-  [Title.VETERAN]: "Reach level 30",
-  [Title.PRO]: "Reach level 50",
-  [Title.EXPERT]: "Reach level 100",
-  [Title.ELITE]: "Reach level 150",
-  [Title.MASTER]: "Reach level 200",
-  [Title.GRAND_MASTER]: "Reach level 300",
-  [Title.BIRD_KEEPER]: "Max Synergy With Flying type in a game",
-  [Title.BLACK_BELT]: "Max Synergy With Fighting Type in a game",
-  [Title.BUG_MANIAC]: "Max Synergy With Bug Type in a game",
-  [Title.CUTE_MANIAC]: "Max Synergy With Fairy Type in a game",
-  [Title.DELINQUENT]: "Max Synergy With Dark Type in a game",
-  [Title.DRAGON_TAMER]: "Max Synergy With Dragon Type in a game",
-  [Title.FIREFIGHTER]: "Max Synergy With Water Type in a game",
-  [Title.TEAM_ROCKET_GRUNT]: "Max Synergy With Poison Type in a game",
-  [Title.HIKER]: "Max Synergy With Rock Type in a game",
-  [Title.LONE_WOLF]: "Win in a lobby against only bots",
-  [Title.KINDLER]: "Max Synergy With Fire Type in a game",
-  [Title.GARDENER]: "Max Synergy With Flora Type in a game",
-  [Title.MUSEUM_DIRECTOR]: "Max Synergy With Fossil Type in a game",
-  [Title.ENGINEER]: "Max Synergy With Steel Type in a game",
-  [Title.TELEKINESIST]: "Max Synergy With Psychic Type in a game",
-  [Title.ELECTRICIAN]: "Max Synergy With Electric Type in a game",
-  [Title.GEOLOGIST]: "Max Synergy With Ground Type in a game",
-  [Title.MYTH_TRAINER]: "Max Synergy With Monster Type in a game",
-  [Title.DIVER]: "Max Synergy With Aquatic Type in a game",
-  [Title.POKEMON_RANGER]: "Max Synergy With Grass Type in a game",
-  [Title.SKIER]: "Max Synergy With Ice Type in a game",
-  [Title.POKEFAN]: "Max Synergy With Normal Type in a game",
-  [Title.HEX_MANIAC]: "Max Synergy With Ghost Type in a game",
-  [Title.MUSICIAN]: "Max Synergy With Sound Type in a game",
-  [Title.BABYSITTER]: "Max Synergy With Baby Type in a game",
-  [Title.HARLEQUIN]: "Have 5 different synergies at once",
-  [Title.GLITCH_TRAINER]: "Report a Bug without annoying Keldaan",
-  [Title.NURSE]: "Heal 1000 or more in a single fight",
-  [Title.GARDIAN]: "Shield 1000 or more in a single fight",
-  [Title.DUKE]: "Own 30 different avatars",
-  [Title.DUCHESS]: "Own all the emotion of a single pokemon",
-  [Title.CHAMPION]: "Win a Tournament",
-  [Title.ELITE_FOUR_MEMBER]: "Reach first 4 places of a tournament",
-  [Title.ACE_TRAINER]: "Reach the final of a tournament",
-  [Title.GYM_LEADER]: "Reach 1400 Elo",
-  [Title.GYM_CHALLENGER]: "Reach 1200 Elo",
-  [Title.GYM_TRAINER]: "Reach 1100 Elo",
-  [Title.CAMPER]: "Max Synergy with Field Type in a game",
-  [Title.RIVAL]: "Max Synergy with Human Type in a game",
-  [Title.BACKER]: "Support the game financially",
-  [Title.TYRANT]: "Win a game at 100 HP",
-  [Title.SURVIVOR]: "Win a game with only 1 HP remaining",
-  [Title.GAMBLER]: "Reroll over 60 times in a single match",
-  [Title.BOT_BUILDER]: "Reach level 10 to unlock the Bot Builder",
-  [Title.SHINY_SEEKER]: "Have over 30 shiny pokemon avatars",
-  [Title.ARCHEOLOGIST]: "Decipher the secret message of the Unowns",
-  [Title.ALCHEMIST]: "Max synergy with artificial type in a game"
+  DENTIST = "DENTIST"
 }

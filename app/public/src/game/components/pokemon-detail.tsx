@@ -1,17 +1,18 @@
 import { GameObjects } from "phaser"
-import { AttackType, Rarity, Stat } from "../../../../types/enum/Game"
+import { Rarity, Stat } from "../../../../types/enum/Game"
 import { Emotion } from "../../../../types"
 import { AbilityName } from "../../../../types/strings/Ability"
 import { Ability } from "../../../../types/enum/Ability"
 import { getPortraitSrc } from "../../utils"
-import { AttackTypeColor, RarityColor } from "../../../../types/Config"
-import { AttackTypeLabel } from "../../../../types/strings/AttackType"
+import { RarityColor } from "../../../../types/Config"
 import { StatLabel } from "../../../../types/strings/Stat"
 import React from "react"
 import ReactDOM from "react-dom"
 import { AbilityTooltip } from "../../pages/component/ability/ability-tooltip"
-import { CustomPokemonDescription } from "../../../../types/strings/Pokemon"
 import { Pkm, PkmIndex } from "../../../../types/enum/Pokemon"
+import { Passive } from "../../../../types/enum/Passive"
+import { addIconsToDescription } from "../../pages/utils/descriptions"
+import { PassiveDescription } from "../../../../types/strings/Passive"
 
 export default class PokemonDetail extends GameObjects.DOMElement {
   dom: HTMLDivElement
@@ -25,6 +26,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
   critDamage: HTMLDivElement
   ap: HTMLDivElement
   abilityDescription: HTMLDivElement
+  passiveDescription: HTMLDivElement
   mana: HTMLDivElement
 
   constructor(
@@ -37,7 +39,6 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     atk: number,
     def: number,
     speDef: number,
-    attackType: AttackType,
     range: number,
     atkSpeed: number,
     critChance: number,
@@ -46,6 +47,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     mana: number,
     types: string[],
     skill: Ability,
+    passive: Passive,
     emotion: Emotion,
     shiny: boolean,
     index: string,
@@ -117,12 +119,6 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     pokemonRarity.className = "game-pokemon-detail-entry-rarity"
     entry.appendChild(pokemonRarity)
 
-    const attackTypeElm = document.createElement("p")
-    attackTypeElm.textContent = AttackTypeLabel[attackType].eng
-    attackTypeElm.style.color = AttackTypeColor[attackType]
-    attackTypeElm.className = "game-pokemon-detail-entry-attack-type"
-    entry.appendChild(attackTypeElm)
-
     const typesList = document.createElement("div")
     typesList.className = "game-pokemon-detail-types"
     types.forEach((type) => {
@@ -164,6 +160,13 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     }
     wrap.appendChild(statsElm)
 
+    if(passive != Passive.NONE) {
+      this.passiveDescription = document.createElement("div")
+      this.passiveDescription.className = "game-pokemon-detail-passive"
+      this.updatePassiveDescription(passive, abilityTier, ap)
+      wrap.appendChild(this.passiveDescription)
+    }
+
     if (skill !== Ability.DEFAULT) {
       const ult = document.createElement("div")
       ult.className = "game-pokemon-detail-ult"
@@ -181,18 +184,6 @@ export default class PokemonDetail extends GameObjects.DOMElement {
       wrap.appendChild(ult)
     }
 
-    if (name in CustomPokemonDescription) {
-      const ult = document.createElement("div")
-      ult.className = "game-pokemon-detail-ult"
-      const descriptionWrap = document.createElement("div")
-      descriptionWrap.className = "custom-description"
-      const description = document.createElement("p")
-      description.textContent = CustomPokemonDescription[name]["eng"]
-      descriptionWrap.appendChild(description)
-      ult.appendChild(descriptionWrap)
-      wrap.appendChild(ult)
-    }
-
     this.dom.appendChild(wrap)
     this.setElement(this.dom)
   }
@@ -205,6 +196,13 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     ReactDOM.render(
       <AbilityTooltip ability={skill} tier={abilityTier} ap={ap} />,
       this.abilityDescription
+    )
+  }
+
+  updatePassiveDescription(passive: Passive, abilityTier: number, ap: number) {
+    ReactDOM.render(
+      <p>Passive: {addIconsToDescription(PassiveDescription[passive], abilityTier, ap)}</p>,
+      this.passiveDescription
     )
   }
 }

@@ -73,7 +73,7 @@ export default class WikiFaq extends Component {
         <p>
           PVE are predefined waves of enemies. If you win against PVE, you'll
           get one Tier 1 item and you will have to choose one of 3 items
-          propositions. PVE occurs at turn 1,2,3,10,15,20,25,30,35,40.
+          propositions. PVE occurs at turn 1,2,3,9,14,19,24,29,34,39.
         </p>
         <h4 className="nes-text is-success">
           What are those mythical pokemons ? When can I buy them ?
@@ -167,7 +167,7 @@ export default class WikiFaq extends Component {
         <p>
           TypeScript, Phaser, Colyseus. If you want to contribute,{" "}
           <a
-            href="https://github.com/keldaanInteractive/pokemonAutoChess"
+            href="https://github.com/keldaanCommunity/pokemonAutoChess"
             target="_blank"
           >
             pull requests are open

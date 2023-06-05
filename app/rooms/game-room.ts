@@ -24,7 +24,6 @@ import {
 } from "./commands/game-commands"
 import {
   ExpPlace,
-  MAX_PLAYERS_PER_LOBBY,
   RequiredStageLevelForXpElligibility
 } from "../types/Config"
 import { Item, BasicItems } from "../types/enum/Item"
@@ -37,10 +36,13 @@ import {
   IDragDropCombineMessage,
   IDragDropItemMessage,
   IDragDropMessage,
+  IGameHistoryPokemonRecord,
+  IGameHistorySimplePlayer,
   IGameMetadata,
   IPokemon,
   Transfer
 } from "../types"
+import{ TitleName } from "../types/strings/Title"
 import { Pkm, PkmFamily, PkmIndex } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { Pokemon } from "../models/colyseus-models/pokemon"
@@ -54,8 +56,9 @@ import { pickRandomIn, shuffleArray } from "../utils/random"
 import { Climate, Rarity } from "../types/enum/Game"
 import { FilterQuery } from "mongoose"
 import { MiniGame } from "../core/matter/mini-game"
-import { Ability } from "../types/enum/Ability"
 import { logger } from "../utils/logger"
+import { computeElo } from "../core/elo"
+import { Passive } from "../types/enum/Passive"
 
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>
@@ -352,7 +355,10 @@ export default class GameRoom extends Room<GameState> {
         if (player) {
           player.loadingProgress = 100
         }
-        if (
+        if(this.state.gameLoaded){
+          // already started, presumably a user refreshed page and wants to reconnect to game
+          client.send(Transfer.LOADING_COMPLETE) 
+        } else if (
           Array.from(this.state.players.values()).every(
             (player) => player.loadingProgress === 100
           )
@@ -435,10 +441,10 @@ export default class GameRoom extends Room<GameState> {
   onDispose() {
     // logger.info(`dispose game room`);
     this.state.endTime = Date.now()
-    const ps = new Array<components["schemas"]["GameHistory"]>()
+    const players: components["schemas"]["GameHistory"]["players"] = []
     this.state.players.forEach((p) => {
       if (!p.isBot) {
-        ps.push(this.transformToSimplePlayer(p))
+        players.push(this.transformToSimplePlayer(p))
       }
     })
     History.create({
@@ -446,170 +452,174 @@ export default class GameRoom extends Room<GameState> {
       name: this.state.name,
       startTime: this.state.startTime,
       endTime: this.state.endTime,
-      players: ps
+      players
     })
 
-    const elligibleToXP =
-      this.state.players.size >= MAX_PLAYERS_PER_LOBBY &&
-      this.state.stageLevel >= RequiredStageLevelForXpElligibility
-    const elligibleToELO = elligibleToXP && !this.state.noElo
+    const humans: Player[] = []
+    const bots: Player[] = []
+
+    this.state.players.forEach((player) => {
+      if (player.isBot) { bots.push(player) }
+      else { humans.push(player) } 
+    })
+
+    const elligibleToXP = this.state.players.size >= 2 && this.state.stageLevel >= RequiredStageLevelForXpElligibility
+    const elligibleToELO = elligibleToXP && !this.state.noElo && humans.length >= 2
 
     if (elligibleToXP) {
-      this.state.players.forEach((player) => {
-        if (player.isBot) {
-          BOT.find({ id: player.id }, (err, bots) => {
-            if (bots) {
-              bots.forEach((bot) => {
-                bot.elo = Math.max(
-                  0,
-                  this.computeElo(player, player.rank, player.elo)
-                )
-                bot.save()
-              })
+      bots.forEach((player) => {
+        BOT.find({ id: player.id }, (err, results) => {
+          if(err != null) logger.error(err)
+          else if (results) {
+            results.forEach((bot) => {
+              bot.elo = computeElo(this.transformToSimplePlayer(player), player.rank, player.elo, [...humans, ...bots].map(p => this.transformToSimplePlayer(p)))
+              bot.save()
+            })
+          }
+        })
+      })
+
+      humans.forEach((player) => {
+        const exp = ExpPlace[player.rank - 1]
+        let rank = player.rank
+
+        if (!this.state.gameFinished && player.life > 0) {
+          let rankOfLastPlayerAlive = this.state.players.size
+          this.state.players.forEach((plyr) => {
+            if (plyr.life <= 0 && plyr.rank < rankOfLastPlayerAlive) {
+              rankOfLastPlayerAlive = plyr.rank
             }
           })
-        } else {
-          const dbrecord = this.transformToSimplePlayer(player)
-          const exp = ExpPlace[player.rank - 1]
-          let rank = player.rank
+          rank = rankOfLastPlayerAlive
+        }
 
-          if (!this.state.gameFinished && player.life != 0) {
-            let rankOfLastPlayerAlive = this.state.players.size
-            this.state.players.forEach((plyr) => {
-              if (plyr.life <= 0) {
-                rankOfLastPlayerAlive = Math.min(
-                  rankOfLastPlayerAlive,
-                  plyr.rank
-                )
-              }
-            })
-            rank = rankOfLastPlayerAlive
+        UserMetadata.findOne({ uid: player.id }, (err: any, usr: any) => {
+          if (err) { return logger.error(err) }
+          const expThreshold = 1000
+          if (usr.exp + exp >= expThreshold) {
+            usr.level += 1
+            usr.booster += 1
+            usr.exp = usr.exp + exp - expThreshold
+          } else {
+            usr.exp = usr.exp + exp
+          }
+          usr.exp = !isNaN(usr.exp) ? usr.exp : 0
+
+          if (rank === 1) {
+            usr.wins += 1
           }
 
-          UserMetadata.findOne({ uid: player.id }, (err: any, usr: any) => {
-            if (err) {
-              logger.error(err)
-            } else {
-              const expThreshold = 1000
-              if (usr.exp + exp >= expThreshold) {
-                usr.level += 1
-                usr.booster += 1
-                usr.exp = usr.exp + exp - expThreshold
-              } else {
-                usr.exp = usr.exp + exp
-              }
-              usr.exp = !isNaN(usr.exp) ? usr.exp : 0
+          if (usr.level >= 10) {
+            player.titles.add(Title.ROOKIE)
+            player.titles.add(Title.BOT_BUILDER)
+          }
+          if (usr.level >= 20) {
+            player.titles.add(Title.AMATEUR)
+          }
+          if (usr.level >= 30) {
+            player.titles.add(Title.VETERAN)
+          }
+          if (usr.level >= 50) {
+            player.titles.add(Title.PRO)
+          }
+          if (usr.level >= 100) {
+            player.titles.add(Title.EXPERT)
+          }
+          if (usr.level >= 150) {
+            player.titles.add(Title.ELITE)
+          }
+          if (usr.level >= 200) {
+            player.titles.add(Title.MASTER)
+          }
+          if (usr.level >= 300) {
+            player.titles.add(Title.GRAND_MASTER)
+          }
 
-              if (rank == 1) {
-                usr.wins += 1
+          if (usr.elo && elligibleToELO) {
+            const elo = computeElo(this.transformToSimplePlayer(player), rank, usr.elo, humans.map(p => this.transformToSimplePlayer(p)))
+            if (elo) {
+              if (elo > 1100) {
+                player.titles.add(Title.GYM_TRAINER)
               }
+              if (elo > 1200) {
+                player.titles.add(Title.GYM_CHALLENGER)
+              }
+              if (elo > 1400) {
+                player.titles.add(Title.GYM_LEADER)
+              }
+              usr.elo = elo
+            }
 
-              if (usr.level >= 10) {
-                player.titles.add(Title.ROOKIE)
-                player.titles.add(Title.BOT_BUILDER)
-              }
-              if (usr.level >= 20) {
-                player.titles.add(Title.AMATEUR)
-              }
-              if (usr.level >= 30) {
-                player.titles.add(Title.VETERAN)
-              }
-              if (usr.level >= 50) {
-                player.titles.add(Title.PRO)
-              }
-              if (usr.level >= 100) {
-                player.titles.add(Title.EXPERT)
-              }
-              if (usr.level >= 150) {
-                player.titles.add(Title.ELITE)
-              }
-              if (usr.level >= 200) {
-                player.titles.add(Title.MASTER)
-              }
-              if (usr.level >= 300) {
-                player.titles.add(Title.GRAND_MASTER)
-              }
+            const dbrecord = this.transformToSimplePlayer(player)
+            DetailledStatistic.create({
+              time: Date.now(),
+              name: dbrecord.name,
+              pokemons: dbrecord.pokemons,
+              rank: dbrecord.rank,
+              avatar: dbrecord.avatar,
+              playerId: dbrecord.id,
+              elo: elo
+            })
+          }
 
-              if (usr.elo && elligibleToELO) {
-                const elo = Math.max(0, this.computeElo(player, rank, usr.elo))
-                if (elo) {
-                  if (elo > 1100) {
-                    player.titles.add(Title.GYM_TRAINER)
-                  }
-                  if (elo > 1200) {
-                    player.titles.add(Title.GYM_CHALLENGER)
-                  }
-                  if (elo > 1400) {
-                    player.titles.add(Title.GYM_LEADER)
-                  }
-                  usr.elo = elo
-                }
+          if (player.life === 100 && rank === 1) {
+            player.titles.add(Title.TYRANT)
+          }
+          if (player.life === 1 && rank === 1) {
+            player.titles.add(Title.SURVIVOR)
+          }
 
-                DetailledStatistic.create({
-                  time: Date.now(),
-                  name: dbrecord.name,
-                  pokemons: dbrecord.pokemons,
-                  rank: dbrecord.rank,
-                  avatar: dbrecord.avatar,
-                  playerId: dbrecord.id,
-                  elo: elo
-                })
-              }
+          if (player.rerollCount > 60) {
+            player.titles.add(Title.GAMBLER)
+          }
 
-              if (player.life === 100 && rank === 1) {
-                player.titles.add(Title.TYRANT)
-              }
-              if (player.life === 1 && rank === 1) {
-                player.titles.add(Title.SURVIVOR)
-              }
+          if (usr.titles === undefined) {
+            usr.titles = []
+          }
 
-              if (player.rerollCount > 60) {
-                player.titles.add(Title.GAMBLER)
-              }
-
-              if (usr.titles === undefined) {
-                usr.titles = []
-              }
-
-              player.titles.forEach((t) => {
-                if (!usr.titles.includes(t)) {
-                  logger.info("title added ", t)
-                  usr.titles.push(t)
-                }
-              })
-              //logger.debug(usr);
-              //usr.markModified('metadata');
-              usr.save()
+          player.titles.forEach((t) => {
+            if (!usr.titles.includes(t)) {
+              logger.info("title added ", t)
+              usr.titles.push(t)
             }
           })
-        }
+          //logger.debug(usr);
+          //usr.markModified('metadata');
+          usr.save()
+        
+        })
       })
     }
     this.dispatcher.stop()
   }
 
-  transformToSimplePlayer(player: Player) {
-    const simplePlayer = {
+  transformToSimplePlayer(player: Player): IGameHistorySimplePlayer {
+    const simplePlayer: IGameHistorySimplePlayer = {
       name: player.name,
       id: player.id,
       rank: player.rank,
       avatar: player.avatar,
       pokemons: new Array<{
-        name: string
+        name: Pkm
         avatar: string
         items: Item[]
         inventory: Item[]
       }>(),
       elo: player.elo,
+      synergies: [],
       title: player.title,
       role: player.role
     }
+    
+    player.synergies.forEach((v, k) => {
+      simplePlayer.synergies.push({ name: k as Synergy, value: v })
+    })
 
     player.board.forEach((pokemon: IPokemon) => {
       if (pokemon.positionY != 0) {
         const shinyPad = pokemon.shiny ? "/0000/0001" : ""
         const avatar = `${pokemon.index}${shinyPad}/${pokemon.emotion}`
-        const s = {
+        const s: IGameHistoryPokemonRecord = {
           name: pokemon.name,
           avatar: avatar,
           items: new Array<Item>(),
@@ -623,38 +633,6 @@ export default class GameRoom extends Room<GameState> {
       }
     })
     return simplePlayer
-  }
-
-  computeElo(player: Player, rank: number, elo: number) {
-    const eloGains = new Array<number>()
-    let meanGain = 0
-    this.state.players.forEach((plyr) => {
-      if (player.name != plyr.name) {
-        const expectedScoreA = this.eloEngine.getExpected(elo, plyr.elo)
-        if (rank < plyr.rank) {
-          eloGains.push(
-            this.eloEngine.updateRating(expectedScoreA, 1, player.elo)
-          )
-        } else {
-          eloGains.push(
-            this.eloEngine.updateRating(expectedScoreA, 0, player.elo)
-          )
-        }
-      }
-    })
-
-    eloGains.forEach((gain) => {
-      meanGain += gain
-    })
-    meanGain = Math.max(0, Math.floor(meanGain / eloGains.length))
-    if (rank <= 4 && meanGain < elo) {
-      meanGain = elo
-    }
-    //logger.debug(eloGains);
-    logger.info(
-      `${player.name} (was ${player.elo}) will be ${meanGain} (${rank})`
-    )
-    return meanGain
   }
 
   computeRandomOpponent(playerId: string) {
@@ -685,6 +663,7 @@ export default class GameRoom extends Room<GameState> {
           player.opponents.set(id, this.state.stageLevel)
           player.opponentName = opponent.name
           player.opponentAvatar = opponent.avatar
+          player.opponentTitle = TitleName[opponent.title]
           return id
         }
       }
@@ -745,11 +724,11 @@ export default class GameRoom extends Room<GameState> {
     }
   }
 
-  checkProtean(player: Player, pokemon: Pokemon) {
+  checkDynamicSynergies(player: Player, pokemon: Pokemon) {
     const n =
-      pokemon.skill === Ability.JUDGEMENT
+      pokemon.passive === Passive.PROTEAN3
         ? 3
-        : pokemon.skill === Ability.PROTEAN
+        : pokemon.passive === Passive.PROTEAN2
         ? 2
         : 1
     const rankArray = new Array<{ s: Synergy; v: number }>()
@@ -790,7 +769,7 @@ export default class GameRoom extends Room<GameState> {
 
       if (
         pokemonEvolutionName !== Pkm.DEFAULT &&
-        ![Rarity.NEUTRAL, Rarity.HATCH].includes(pokemon.rarity) &&
+        ![Rarity.SPECIAL, Rarity.HATCH].includes(pokemon.rarity) &&
         count >= 3
       ) {
         let coord: { x: number; y: number } | undefined
@@ -889,7 +868,7 @@ export default class GameRoom extends Room<GameState> {
     let boardSize = 0
 
     board.forEach((pokemon, key) => {
-      if (pokemon.positionY == 0 && pokemon.rarity !== Rarity.NEUTRAL) {
+      if (pokemon.positionY == 0 && pokemon.rarity !== Rarity.SPECIAL) {
         boardSize++
       }
     })
@@ -914,7 +893,7 @@ export default class GameRoom extends Room<GameState> {
     board.forEach((pokemon, key) => {
       if (
         pokemon.positionY == 0 &&
-        pokemon.rarity != Rarity.NEUTRAL &&
+        pokemon.rarity != Rarity.SPECIAL &&
         !found
       ) {
         found = true

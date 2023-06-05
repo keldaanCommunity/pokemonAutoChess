@@ -16,7 +16,7 @@ import { ItemStats } from "../types/Config"
 import { getPath } from "../public/src/pages/utils/utils"
 import GameRoom from "../rooms/game-room"
 import { pickRandomIn } from "../utils/random"
-import { Ability } from "../types/enum/Ability"
+import { Passive } from "../types/enum/Passive"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") climate: Climate = Climate.NEUTRAL
@@ -166,7 +166,8 @@ export default class Simulation extends Schema implements ISimulation {
   ) {
     const pokemonEntity = new PokemonEntity(pokemon, x, y, team, this)
     pokemonEntity.isClone = isClone
-    this.applyItemsEffects(pokemonEntity)
+    this.applySynergyEffects(pokemonEntity)
+    this.applyItemsEffects(pokemonEntity)    
     this.board.setValue(
       pokemonEntity.positionX,
       pokemonEntity.positionY,
@@ -174,7 +175,6 @@ export default class Simulation extends Schema implements ISimulation {
     )
 
     if (team == Team.BLUE_TEAM) {
-      this.applyEffects(pokemonEntity, pokemon.types, this.blueEffects)
       const dps = new Dps(pokemonEntity.id, getPath(pokemonEntity))
       const dpsHeal = new DpsHeal(pokemonEntity.id, getPath(pokemonEntity))
       this.blueTeam.set(pokemonEntity.id, pokemonEntity)
@@ -182,7 +182,6 @@ export default class Simulation extends Schema implements ISimulation {
       this.blueHealDpsMeter.set(pokemonEntity.id, dpsHeal)
     }
     if (team == Team.RED_TEAM) {
-      this.applyEffects(pokemonEntity, pokemon.types, this.redEffects)
       const dps = new Dps(pokemonEntity.id, getPath(pokemonEntity))
       const dpsHeal = new DpsHeal(pokemonEntity.id, getPath(pokemonEntity))
       this.redTeam.set(pokemonEntity.id, pokemonEntity)
@@ -305,7 +304,7 @@ export default class Simulation extends Schema implements ISimulation {
         pokemon.setMana(pokemon.mana + value)
         break
       case Stat.ATK_SPEED:
-        pokemon.handleAttackSpeed(value)
+        pokemon.addAttackSpeed(value)
         break
       case Stat.CRIT_CHANCE:
         pokemon.addCritChance(value)
@@ -338,7 +337,7 @@ export default class Simulation extends Schema implements ISimulation {
       this.applyItemEffect(pokemon, item)
     })
 
-    if (pokemon.skill === Ability.SYNCHRO) {
+    if (pokemon.passive === Passive.SYNCHRO) {
       pokemon.status.triggerSynchro()
     }
   }
@@ -360,6 +359,14 @@ export default class Simulation extends Schema implements ISimulation {
 
     if (item === Item.MAX_REVIVE) {
       pokemon.status.resurection = true
+    }
+  }
+
+  applySynergyEffects(pokemon: PokemonEntity){
+    if(pokemon.team === Team.BLUE_TEAM){
+      this.applyEffects(pokemon, pokemon.types, this.blueEffects)
+    } else if(pokemon.team === Team.RED_TEAM){
+      this.applyEffects(pokemon, pokemon.types, this.redEffects)
     }
   }
 
@@ -441,7 +448,7 @@ export default class Simulation extends Schema implements ISimulation {
               pokemon.positionY
             )
             if (value) {
-              value.handleAttackSpeed(30)
+              value.addAttackSpeed(30)
             }
           })
         }
@@ -1082,7 +1089,7 @@ export default class Simulation extends Schema implements ISimulation {
         ?.changeDamage(pkm.physicalDamage, pkm.specialDamage, pkm.trueDamage)
       this.blueHealDpsMeter.get(key)?.changeHeal(pkm.healDone, pkm.shieldDone)
 
-      if (!pkm.life || pkm.life <= 0) {
+      if ((!pkm.life || pkm.life <= 0) && !pkm.status.resurecting && !pkm.status.resurection) {
         this.blueTeam.delete(key)
       } else {
         pkm.update(dt, this.board, this.climate)
@@ -1095,7 +1102,7 @@ export default class Simulation extends Schema implements ISimulation {
         ?.changeDamage(pkm.physicalDamage, pkm.specialDamage, pkm.trueDamage)
       this.redHealDpsMeter.get(key)?.changeHeal(pkm.healDone, pkm.shieldDone)
 
-      if (!pkm.life || pkm.life <= 0) {
+      if ((!pkm.life || pkm.life <= 0) && !pkm.status.resurecting && !pkm.status.resurection) {
         this.redTeam.delete(key)
       } else {
         pkm.update(dt, this.board, this.climate)

@@ -25,6 +25,7 @@ export default class AttackingState extends PokemonState {
         !(
           target &&
           target.team !== pokemon.team &&
+          target.isTargettable &&
           board.distance(
             pokemon.positionX,
             pokemon.positionY,
@@ -105,7 +106,7 @@ export default class AttackingState extends PokemonState {
       }
 
       if (pokemon.items.has(Item.UPGRADE)) {
-        pokemon.handleAttackSpeed(5)
+        pokemon.addAttackSpeed(5)
         pokemon.count.upgradeCount++
       }
 
@@ -368,9 +369,9 @@ export default class AttackingState extends PokemonState {
     }
 
     if (pokemon.effects.includes(Effect.DRAGON_ENERGY)) {
-      pokemon.handleAttackSpeed(5)
+      pokemon.addAttackSpeed(5)
     } else if (pokemon.effects.includes(Effect.DRAGON_DANCE)) {
-      pokemon.handleAttackSpeed(10)
+      pokemon.addAttackSpeed(10)
     }
   }
 

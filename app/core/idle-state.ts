@@ -1,5 +1,5 @@
-import { Ability } from "../types/enum/Ability"
 import { PokemonActionState } from "../types/enum/Game"
+import { Passive } from "../types/enum/Passive"
 import Board from "./board"
 import PokemonEntity from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
@@ -14,13 +14,13 @@ export class IdleState extends PokemonState {
         pokemon.status.tree = false
         pokemon.toMovingState()
       }
-    } else if (!pokemon.status.freeze && !pokemon.status.sleep) {
+    } else if (pokemon.canMove) {
       pokemon.toMovingState()
     }
 
     if (pokemon.cooldown <= 0) {
       pokemon.cooldown = 500
-      if (pokemon.skill === Ability.MIMIC && pokemon.status.tree) {
+      if (pokemon.passive === Passive.TREE && pokemon.status.tree) {
         pokemon.addAttack(1)
       }
     } else {
@@ -30,9 +30,13 @@ export class IdleState extends PokemonState {
 
   onEnter(pokemon: PokemonEntity) {
     super.onEnter(pokemon)
-    pokemon.action = pokemon.status.tree
-      ? PokemonActionState.IDLE
-      : PokemonActionState.SLEEP
+    if(pokemon.status.tree) {
+      pokemon.action = PokemonActionState.IDLE
+    } else if(pokemon.status.resurecting){
+      pokemon.action = PokemonActionState.HURT
+    } else {
+      pokemon.action = PokemonActionState.SLEEP
+    }
     pokemon.cooldown = 0
   }
 

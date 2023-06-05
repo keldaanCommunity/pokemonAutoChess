@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
-import CSS from "csstype"
 import GameBlueDpsMeter from "./game-blue-dps-meter"
 import GameRedDpsMeter from "./game-red-dps-meter"
 import GameBlueHealDpsMeter from "./game-blue-heal-dps-meter"
@@ -10,10 +9,15 @@ import { getAvatarSrc } from "../../../utils"
 import "./game-dps-meter.css"
 import { loadPreferences, savePreferences } from "../../../preferences"
 
+let lastOpponentName = ""
+
 export default function GameDpsMeter() {
   const opponentName = useAppSelector(
     (state) => state.game.currentPlayerOpponentName
   )
+  if(opponentName != lastOpponentName && opponentName != "") {
+    lastOpponentName = opponentName
+  }
   const opponentAvatar = useAppSelector(
     (state) => state.game.currentPlayerOpponentAvatar
   )
@@ -44,17 +48,21 @@ export default function GameDpsMeter() {
           hidden={!isOpen}
         >
           <header>
-            <img
+            <div>
+              <img
               src={getAvatarSrc(avatar)}
               className="pokemon-portrait"
-              title={name}
-            ></img>
+              ></img>
+              <p>{name}</p>
+            </div>
             <h2>Vs</h2>
-            <img
-              src={getAvatarSrc(opponentAvatar)}
-              className="pokemon-portrait"
-              title={opponentName}
-            ></img>
+            <div>
+              <img
+                src={getAvatarSrc(opponentAvatar)}
+                className="pokemon-portrait"
+              ></img>
+              <p>{opponentName || lastOpponentName}</p>
+            </div>
           </header>
           <Tabs>
             <TabList>

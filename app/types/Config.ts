@@ -1,7 +1,6 @@
 import { Synergy } from "./enum/Synergy"
 import { Pkm, PkmIndex } from "./enum/Pokemon"
 import { Item } from "./enum/Item"
-import { Effect } from "./enum/Effect"
 import { AttackType, Rarity, Stat } from "./enum/Game"
 import { Emotion } from "."
 
@@ -12,8 +11,7 @@ export const RarityHpCost: { [key in Rarity]: number } = Object.freeze({
   [Rarity.EPIC]: 2,
   [Rarity.LEGENDARY]: 3,
   [Rarity.MYTHICAL]: 4,
-  [Rarity.NEUTRAL]: 2,
-  [Rarity.SUMMON]: 1,
+  [Rarity.SPECIAL]: 1,
   [Rarity.HATCH]: 4
 })
 
@@ -24,8 +22,7 @@ export const PkmCost: { [key in Rarity]: number } = Object.freeze({
   [Rarity.EPIC]: 4,
   [Rarity.MYTHICAL]: 6,
   [Rarity.LEGENDARY]: 5,
-  [Rarity.SUMMON]: 1,
-  [Rarity.NEUTRAL]: 5,
+  [Rarity.SPECIAL]: 5,
   [Rarity.HATCH]: 4
 })
 
@@ -104,26 +101,24 @@ export const ExpPlace = [700, 500, 400, 300, 200, 150, 100, 0]
 
 export const RarityColor: { [key in Rarity]: string } = {
   [Rarity.COMMON]: "#9f9f9f",
-  [Rarity.NEUTRAL]: "#888d9d",
   [Rarity.UNCOMMON]: "#3bc95e",
   [Rarity.RARE]: "#41bfcc",
   [Rarity.EPIC]: "#ca6cee",
   [Rarity.LEGENDARY]: "#e6cb49",
   [Rarity.MYTHICAL]: "#ffc0cb",
-  [Rarity.SUMMON]: "#991f1f",
+  [Rarity.SPECIAL]: "#967FFF",
   [Rarity.HATCH]: "#b9915a"
 }
 
 export const RarityProbability: { [key in Rarity]: number } = {
   [Rarity.COMMON]: 0.15,
-  [Rarity.NEUTRAL]: 0,
   [Rarity.UNCOMMON]: 0.2,
   [Rarity.RARE]: 0.2,
   [Rarity.EPIC]: 0.15,
   [Rarity.LEGENDARY]: 0.05,
   [Rarity.MYTHICAL]: 0.15,
-  [Rarity.SUMMON]: 0,
-  [Rarity.HATCH]: 0.1
+  [Rarity.HATCH]: 0.1,
+  [Rarity.SPECIAL]: 0
 }
 
 export const DITTO_RATE = 0.005
@@ -158,8 +153,7 @@ export const PoolSize: { [key in Rarity]: [number, number, number] } = {
   [Rarity.EPIC]: [1, 7, 14],
   [Rarity.LEGENDARY]: [1, 5, 10],
   [Rarity.MYTHICAL]: [1, 1, 1],
-  [Rarity.NEUTRAL]: [0, 0, 0],
-  [Rarity.SUMMON]: [0, 0, 0],
+  [Rarity.SPECIAL]: [0, 0, 0],
   [Rarity.HATCH]: [0, 0, 0]
 }
 
@@ -343,7 +337,23 @@ export const Mythical2Shop = new Array<Pkm>(
   Pkm.YVELTAL
 )
 
+export const HatchList = new Array<Pkm>(
+  Pkm.GOTHITA,
+  Pkm.DREEPY,
+  Pkm.SNIVY,
+  Pkm.SCORBUNNY,
+  Pkm.POPPLIO,
+  Pkm.ALOLAN_GEODUDE,
+  Pkm.ROWLET,
+  Pkm.FROAKIE,
+  Pkm.TEPIG
+)
+
 export const MAX_PLAYERS_PER_LOBBY = 8
+
+export const DEFAULT_ATK_SPEED = 0.75
+export const DEFAULT_CRIT_CHANCE = 10
+export const DEFAULT_CRIT_DAMAGE = 2
 
 export const StageDuration: Record<number | "DEFAULT", number> = {
   0: 15,
@@ -352,54 +362,65 @@ export const StageDuration: Record<number | "DEFAULT", number> = {
   DEFAULT: 30
 }
 
-export const CarouselStages = [1, 6, 11, 16, 21, 26, 31, 36, 41]
+export const CarouselStages = [4, 7, 12, 17, 22, 27, 32, 37, 42]
 export const ItemProposalStages = [2, 3]
 export const AdditionalPicksStages = [5, 8]
 export const MythicalPicksStages = [10, 20]
 
-export const NeutralStage: { turn: number; avatar: string }[] = [
+export const NeutralStage: { turn: number; name: string; avatar: string }[] = [
   {
     turn: 1,
+    name: "Magikarp",
     avatar: `${PkmIndex[Pkm.MAGIKARP].replace("-", "/")}/${Emotion.NORMAL}`
   },
   {
     turn: 2,
+    name: "Raticate",
     avatar: `${PkmIndex[Pkm.RATICATE].replace("-", "/")}/${Emotion.NORMAL}`
   },
   {
     turn: 3,
+    name: "Fearow",
     avatar: `${PkmIndex[Pkm.FEAROW].replace("-", "/")}/${Emotion.NORMAL}`
   },
   {
-    turn: 10,
+    turn: 9,
+    name: "Gyarados",
     avatar: `${PkmIndex[Pkm.GYARADOS].replace("-", "/")}/${Emotion.NORMAL}`
   },
   {
-    turn: 15,
+    turn: 14,
+    name: "Lugia",
     avatar: `${PkmIndex[Pkm.LUGIA].replace("-", "/")}/${Emotion.NORMAL}`
   },
   {
-    turn: 20,
+    turn: 19,
+    name: "Giratina",
     avatar: `${PkmIndex[Pkm.GIRATINA].replace("-", "/")}/${Emotion.NORMAL}`
   },
   {
-    turn: 25,
+    turn: 24,
+    name: "Zapdos",
     avatar: `${PkmIndex[Pkm.ZAPDOS].replace("-", "/")}/${Emotion.NORMAL}`
   },
   {
-    turn: 30,
+    turn: 29,
+    name: "Dialga",
     avatar: `${PkmIndex[Pkm.DIALGA].replace("-", "/")}/${Emotion.NORMAL}`
   },
   {
-    turn: 35,
+    turn: 34,
+    name: "Suicune",
     avatar: `${PkmIndex[Pkm.SUICUNE].replace("-", "/")}/${Emotion.NORMAL}`
   },
   {
-    turn: 40,
+    turn: 39,
+    name: "Regice",
     avatar: `${PkmIndex[Pkm.REGICE].replace("-", "/")}/${Emotion.NORMAL}`
   },
   {
-    turn: 45,
+    turn: 44,
+    name: "Rayquaza",
     avatar: `${PkmIndex[Pkm.RAYQUAZA].replace("-", "/")}/${Emotion.NORMAL}`
   }
 ]
@@ -690,7 +711,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.WIDE_LENS]: { [Stat.CRIT_CHANCE]: 5, [Stat.SPE_DEF]: 1 },
   [Item.RAZOR_CLAW]: { [Stat.CRIT_CHANCE]: 55, [Stat.ATK]: 1 },
   [Item.FLUFFY_TAIL]: { [Stat.CRIT_CHANCE]: 5, [Stat.SPE_DEF]: 1 },
-  [Item.ORAN_BERRY]: { [Stat.SHIELD]: 130 },
+  [Item.ORAN_BERRY]: { [Stat.SHIELD]: 150 },
   [Item.SHINY_CHARM]: { [Stat.SHIELD]: 15, [Stat.SPE_DEF]: 1 },
   [Item.FOCUS_BAND]: { [Stat.SHIELD]: 15, [Stat.ATK]: 1 },
   [Item.FLAME_ORB]: { [Stat.SHIELD]: 15, [Stat.DEF]: 1 },

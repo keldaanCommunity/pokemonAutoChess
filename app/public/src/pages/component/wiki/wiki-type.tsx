@@ -27,9 +27,9 @@ export default function WikiType(props: { type: Synergy | "all" }) {
 
   let pokemonsNames: Pkm[]
   if (props.type === "all") {
-    pokemonsNames = Object.values(Pkm)
+    pokemonsNames = Object.values(Pkm).filter(p => p!== Pkm.DEFAULT)
   } else {
-    pokemonsNames = PRECOMPUTED_TYPE_POKEMONS_ALL[props.type] as Pkm[]
+    pokemonsNames = PRECOMPUTED_TYPE_POKEMONS_ALL[props.type].filter(p => p!== Pkm.DEFAULT) as Pkm[]
   }
 
   const pokemons = pokemonsNames
@@ -37,7 +37,7 @@ export default function WikiType(props: { type: Synergy | "all" }) {
     .sort((a, b) => a.stars - b.stars) // put first stage first
     .filter((a, index, list) => {
       if (a.skill === Ability.DEFAULT) return false // pokemons with no ability are no ready for the show
-      if (a.rarity === Rarity.SUMMON) return true // show all summons even in the same family
+      if (a.rarity === Rarity.SPECIAL) return true // show all summons & specials, even in the same family
 
       // remove if already one member of family in the list
       return (
@@ -48,8 +48,11 @@ export default function WikiType(props: { type: Synergy | "all" }) {
   const pokemonsPerRarity = groupBy(pokemons, (p) => p.rarity)
   for (let rarity in pokemonsPerRarity) {
     pokemonsPerRarity[rarity].sort(
-      (a, b) => +isAdditionalPick(a.name) - +isAdditionalPick(b.name)
-    )
+      (a: Pokemon, b: Pokemon) => {
+        const isAddA = isAdditionalPick(a.name), isAddB= isAdditionalPick(b.name)
+        if(isAddA !== isAddB) return +isAddA - +isAddB
+        return a.index < b.index ? -1 : 1
+      })
   }
 
   function isAdditionalPick(pkm: Pkm): boolean {

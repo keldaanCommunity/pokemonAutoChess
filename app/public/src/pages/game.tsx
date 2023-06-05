@@ -22,6 +22,7 @@ import {
   setStreak,
   setOpponentName,
   setOpponentAvatar,
+  setOpponentTitle,
   setLife,
   setPlayer,
   setBoardSize,
@@ -54,7 +55,7 @@ import GameContainer from "../game/game-container"
 import { Navigate } from "react-router-dom"
 import GameDpsMeter from "./component/game/game-dps-meter"
 import GameItemsProposition from "./component/game/game-items-proposition"
-import GamePlayerInformations from "./component/game/game-player-informations"
+import GameStageInfo from "./component/game/game-stage-info"
 import GamePlayers from "./component/game/game-players"
 import GameShop from "./component/game/game-shop"
 import GameSynergies from "./component/game/game-synergies"
@@ -71,7 +72,8 @@ import {
   NonFunctionPropNames,
   IDps,
   IDpsHeal,
-  IPlayer
+  IPlayer,
+  Role
 } from "../../../types"
 import GameToasts from "./component/game/game-toasts"
 import GamePokemonsProposition from "./component/game/game-pokemons-proposition"
@@ -79,10 +81,7 @@ import { getRankLabel } from "../../../types/strings/Strings"
 import GameScene from "../game/scenes/game-scene"
 import { toast } from "react-toastify"
 import { logger } from "../../../utils/logger"
-import {
-  MAX_PLAYERS_PER_LOBBY,
-  RequiredStageLevelForXpElligibility
-} from "../../../types/Config"
+import { RequiredStageLevelForXpElligibility } from "../../../types/Config"
 
 let gameContainer: GameContainer
 
@@ -141,10 +140,8 @@ export default function Game() {
       )
     }
 
-    const elligibleToXP =
-      nbPlayers >= MAX_PLAYERS_PER_LOBBY &&
-      (room?.state.stageLevel ?? 0) >= RequiredStageLevelForXpElligibility
-    const elligibleToELO = elligibleToXP && !room?.state.noElo
+    const elligibleToXP = nbPlayers >= 2 && (room?.state.stageLevel ?? 0) >= RequiredStageLevelForXpElligibility
+    const elligibleToELO = elligibleToXP && !room?.state.noElo && savedPlayers.filter(p => p.role !== Role.BOT).length >= 2
 
     const r: Room<AfterGameState> = await client.create("after-game", {
       players: savedPlayers,
@@ -153,10 +150,15 @@ export default function Game() {
       elligibleToELO
     })
     localStorage.setItem("cachedReconnectionToken", r.reconnectionToken)
-    await room?.leave()
     r.connection.close()
     dispatch(leaveGame())
     setToAfter(true)
+
+    try {
+      await room?.leave()
+    } catch(error) {
+      logger.warn("Room already closed")
+    }
   }
 
   useEffect(() => {
@@ -285,6 +287,8 @@ export default function Game() {
         }
       })
 
+      room.onMessage(Transfer.GAME_END, leave)
+
       room.state.listen("roundTime", (value, previousValue) => {
         dispatch(setRoundTime(value))
       })
@@ -358,6 +362,9 @@ export default function Game() {
         })
         player.listen("opponentAvatar", (value, previousValue) => {
           dispatch(setOpponentAvatar({ id: player.id, value: value }))
+        })
+        player.listen("opponentTitle", (value, previousValue) => {
+          dispatch(setOpponentTitle({ id: player.id, value: value }))
         })
         player.listen("boardSize", (value, previousValue) => {
           dispatch(setBoardSize({ id: player.id, value: value }))
@@ -564,7 +571,7 @@ export default function Game() {
             leave={leave}
           />
           {!spectate && <GameShop />}
-          <GamePlayerInformations />
+          <GameStageInfo />
           <GamePlayers click={(id: string) => playerClick(id)} />
           <GameSynergies />
           <GameItemsProposition />

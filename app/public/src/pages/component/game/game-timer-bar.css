@@ -1,6 +1,6 @@
 .timer-bar {
   position: absolute;
-  top: calc(8.5% - 6px);
+  top: calc(5.5% - 6px);
   left: 30%;
   width: 40%;
   height: 12px;

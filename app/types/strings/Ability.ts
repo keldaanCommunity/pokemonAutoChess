@@ -610,12 +610,6 @@ export const AbilityName: { [key in Ability]: Langage } = {
     prt: ``,
     fra: ``
   },
-  [Ability.PROTEAN]: {
-    eng: `Protean`,
-    esp: ``,
-    prt: ``,
-    fra: ``
-  },
   [Ability.JUDGEMENT]: {
     eng: `Judgement`,
     esp: ``,
@@ -624,12 +618,6 @@ export const AbilityName: { [key in Ability]: Langage } = {
   },
   [Ability.CHATTER]: {
     eng: `Chatter`,
-    esp: ``,
-    prt: ``,
-    fra: ``
-  },
-  [Ability.SYNCHRO]: {
-    eng: `Synchro`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -873,7 +861,31 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
-  }
+  },
+  [Ability.FIRE_SPIN]: {
+    eng: "Fire Spin",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.SEARING_SHOT]: {
+    eng: `Searing Shot`,
+    esp: ``,
+    fra: ``,
+    prt: ``
+  },
+  [Ability.SPLASH]: { 
+    eng: `Splash`,
+    esp: ``,
+    fra: ``,
+    prt: ``
+  },
+  [Ability.PECK]: {
+    eng: `Peck`,
+    esp: ``,
+    fra: ``,
+    prt: ``
+  },
 }
 
 export const AbilityDescription: { [key in Ability]: Langage } = {
@@ -968,7 +980,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.TRI_ATTACK]: {
-    eng: `${Status.BURN}, ${Status.FREEZE} and ${Status.WOUND} the target for [2,4,8] seconds`,
+    eng: `Deals [25,50,100,SP] special damage. ${Status.BURN}, ${Status.FREEZE} and ${Status.WOUND} the target for [2,4,8] seconds`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -1052,7 +1064,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.CONFUSION]: {
-    eng: `Makes the target ${Status.CONFUSION} for [3,6,12] seconds`,
+    eng: `Makes the target ${Status.CONFUSION} for [3,5,7] seconds. If the target is already ${Status.CONFUSION}, deals [75,150,300,SP] ${Damage.SPECIAL} instead`,
     esp: `Hace que todo el equipo se confunda durante 1,2,4 segundos`,
     fra: `Rend toute la team ennemie confus pendant 1, 2 4 secondes`,
     prt: ``
@@ -1178,7 +1190,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.DISCHARGE]: {
-    eng: `Shock nearby enemies for [25,50,100,SP] ${Damage.SPECIAL} and make them ${Status.PARALYSIS} for 5 seconds`,
+    eng: `Shock nearby enemies for [25,50,75,SP] ${Damage.SPECIAL} and make them ${Status.PARALYSIS} for 5 seconds`,
     esp: `Ataque en el área de efecto que causa 40,60,80 daños especiales.`,
     fra: `Attaque AoE en cercle faisant 40,60,80 dégats spéciaux.`,
     prt: ``
@@ -1424,19 +1436,19 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   WONDER_GUARD: {
-    eng: `Passive: Reduce received damage and received healing to 1.\nActive: Deals [30,60,120,SP] ${Damage.SPECIAL} and make all adjacent enemies ${Status.PARALYSIS} for [5,SP] seconds.`,
+    eng: `Deals [30,60,120,SP] ${Damage.SPECIAL} and make all adjacent enemies ${Status.PARALYSIS} for [5,SP] seconds`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   ELECTRIC_SURGE: {
-    eng: `Passive: Give ${Status.ELECTRIC_FIELD} to your Electric Pokemon, boosting their damage by 30%`,
+    eng: `Increase ${Stat.ATK_SPEED} of all Electric pokemons by [10,SP]%`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   PSYCHIC_SURGE: {
-    eng: `Passive: Give ${Status.PSYCHIC_FIELD} to your Psychic Pokemon, boosting their damage by 30%`,
+    eng: `Increase ${Stat.AP} of all Psychic pokemons by [10,SP]%`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1483,26 +1495,14 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``,
     fra: ``
   },
-  [Ability.PROTEAN]: {
-    eng: `The pokemon acquires the typing of the 2 highest synergies on the team`,
-    esp: ``,
-    prt: ``,
-    fra: ``
-  },
   [Ability.JUDGEMENT]: {
-    eng: `The pokemon acquires the typing of the 3 highest synergies on the team`,
+    eng: `Inflicts [10,SP] special damage to the target, multiplied by the sum of Arceus synergy levels`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   [Ability.CHATTER]: {
     eng: `Deal [10,SP] ${Damage.SPECIAL} to all enemies. Every enemy has 30% chance to be ${Status.CONFUSION} for 1 second`,
-    esp: ``,
-    prt: ``,
-    fra: ``
-  },
-  [Ability.SYNCHRO]: {
-    eng: `If the pokemon is affected by ${Status.POISON}, ${Status.BURN}, ${Status.WOUND} or ${Status.SILENCE}, the enemy team will suffer the same negative status`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1532,7 +1532,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.DIVE]: {
-    eng: `Dives underwater and reappears in the middle of the enemy team, dealing [15,30,60,SP] ${Damage.SPECIAL} and ${Status.FREEZE} all adjacent units for [1,2,4] seconds`,
+    eng: `Dives underwater and reappears in the middle of the enemy team, dealing [15,30,60,SP] ${Damage.SPECIAL} and ${Status.FREEZE} all adjacent units for 1.5 second`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1568,13 +1568,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.GRASSY_SURGE]: {
-    eng: `Passive: Give ${Status.GRASS_FIELD} to your Grass Pokemon, boosting their damage by 30%`,
+    eng: `Increase ${Stat.ATK} of all Grass pokemons by [5,SP]`,
     esp: "",
     prt: "",
     fra: ""
   },
   [Ability.MISTY_SURGE]: {
-    eng: `Passive: Give ${Status.FAIRY_FIELD} to your Fairy Pokemon, boosting their damage by 30%`,
+    eng: `Increase ${Stat.SPE_DEF} of all Fairy pokemons by [5,SP]`,
     esp: "",
     prt: "",
     fra: ""
@@ -1610,7 +1610,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ""
   },
   [Ability.SPIRIT_SHACKLE]: {
-    eng: `Shoots a Piercing Arrow that deals [30,60,120,SP] ${Damage.SPECIAL} in a line behind the target and applies ${Status.WOUND} for 4 seconds to everyone hit`,
+    eng: `Shoots a Piercing Arrow that deals [30,60,90,SP] ${Damage.SPECIAL} in a line behind the target and applies ${Status.WOUND} for 4 seconds to everyone hit`,
     esp: "",
     prt: "",
     fra: ""
@@ -1652,8 +1652,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ""
   },
   [Ability.FORECAST]: {
-    eng: `Castform changes forms depending on the weather, giving additional bonus to your team:
-Gives [10,SP] ${Stat.SHIELD} to your team. 
+    eng: `Gives [10,SP] ${Stat.SHIELD} to your team, plus additional bonus depending on the weather:
 Sun: also gives [5,SP] ${Stat.ATK}
 Rain: also gives [20,SP] ${Stat.MANA}
 Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
@@ -1710,13 +1709,13 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     fra: ""
   },
   [Ability.HYPNOSIS]: {
-    eng: `Put ${Status.SLEEP} 1 enemy in the back lines for [2,3.5,6] seconds`,
+    eng: `Put ${Status.SLEEP} 1 enemy in the back lines for [2,3.5,6,SP=0.5] seconds`,
     esp: "",
     prt: "",
     fra: ""
   },
   [Ability.MIMIC]: {
-    eng: `Pretends to be a tree and does not attack but gain 2 ${Stat.ATK} per second instead (stackable).\nStarts attacking when ${Stat.MANA} bar is full, then Mimic copies the ability of the target.`,
+    eng: `Copies the ability of the current target`,
     esp: "",
     prt: "",
     fra: ""
@@ -1750,5 +1749,29 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     esp: "",
     prt: "",
     fra: ""
-  }
+  },
+  [Ability.FIRE_SPIN]: {
+    eng: `Area of effect attack that deals [20,40,100,SP] ${Damage.SPECIAL} around the target and ${Status.BURN} all enemies hit for 3 seconds`,
+    esp: ``,
+    fra: ``,
+    prt: ``
+  },
+  [Ability.SEARING_SHOT]: {
+    eng: `An inferno of scarlet flames torches everything around the user. Deals [20,SP] ${Damage.SPECIAL} and ${Status.BURN} all enemies hit for 3 seconds`,
+    esp: ``,
+    fra: ``,
+    prt: ``
+  },
+  [Ability.SPLASH]: {
+    eng: `Just flops and splashes around to no effect at all...`,
+    esp: ``,
+    fra: ``,
+    prt: ``
+  },
+  [Ability.PECK]: {
+    eng: `Deals [10,20,30,SP] ${Damage.SPECIAL} to the target`,
+    esp: ``,
+    fra: ``,
+    prt: ``
+  },
 }

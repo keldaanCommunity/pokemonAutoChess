@@ -24,7 +24,7 @@ export default class GameState extends Schema {
   @type({ map: PokemonAvatar }) avatars = new MapSchema<PokemonAvatar>()
   @type({ map: FloatingItem }) floatingItems = new MapSchema<FloatingItem>()
   @type(["string"]) additionalPokemons = new ArraySchema<Pkm>()
-  @type("uint8") stageLevel = 0
+  @type("uint8") stageLevel = 1
   @type("string") mapName: string
   @type("boolean") noElo = false
   @type({ set: "string" }) spectators = new SetSchema<string>()
@@ -40,6 +40,7 @@ export default class GameState extends Schema {
   startTime: number
   endTime: number | undefined = undefined
   preparationId: string
+  shinyEncounter = false
 
   constructor(preparationId: string, name: string, noElo: boolean) {
     super()

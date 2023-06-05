@@ -18,7 +18,10 @@ import { Synergy } from "../types/enum/Synergy"
 import { Pkm } from "../types/enum/Pokemon"
 import { IdleState } from "./idle-state"
 import PokemonFactory from "../models/pokemon-factory"
-import { roundTo2Digits } from "../utils/number"
+import { clamp, roundTo2Digits } from "../utils/number"
+import { Passive } from "../types/enum/Passive"
+import { DEFAULT_CRIT_CHANCE, DEFAULT_CRIT_DAMAGE } from "../types/Config"
+
 
 export default class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
@@ -28,7 +31,6 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   @type("string") index: string
   @type("string") id: string
   @type("string") orientation = Orientation.DOWNLEFT
-  @type("uint8") critChance = 10
   @type("uint16") hp: number
   @type("uint8") mana = 0
   @type("uint8") maxMana: number
@@ -52,9 +54,11 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   @type(["string"]) types = new ArraySchema<Synergy>()
   @type("uint8") stars: number
   @type("string") skill: Ability
+  @type("string") passive: Passive
   @type(Status) status: Status
   @type(Count) count: Count
-  @type("float32") critDamage = 2
+  @type("uint8") critChance = DEFAULT_CRIT_CHANCE
+  @type("float32") critDamage = DEFAULT_CRIT_DAMAGE
   @type("uint16") ap = 0
   @type("uint16") healDone: number
   @type("string") emotion: Emotion
@@ -122,6 +126,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     this.attackSprite = pokemon.attackSprite
     this.stars = pokemon.stars
     this.skill = pokemon.skill
+    this.passive = pokemon.passive
     this.shiny = pokemon.shiny
     this.emotion = pokemon.emotion
 
@@ -136,7 +141,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       this.types.push(type)
     })
 
-    if (this.skill === Ability.MIMIC) {
+    if (this.passive === Passive.TREE) {
       this.status.tree = true
       this.toIdleState()
     }
@@ -150,15 +155,12 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     return 1000 / this.atkSpeed
   }
 
-  handleAttackSpeed(buff: number, apBoost: boolean = false) {
-    const boost = apBoost ? (buff * this.ap) / 100 : 0
-    this.atkSpeedBonus = this.atkSpeedBonus + buff + boost
-    this.atkSpeed = Number(
-      Math.min(
-        2.5,
-        Math.max(0.4, 0.75 * (1 + this.atkSpeedBonus / 100))
-      ).toFixed(2)
-    )
+  get canMove(): boolean {
+    return !this.status.freeze && !this.status.sleep && !this.status.resurecting
+  }
+
+  get isTargettable(): boolean {
+    return !this.status.resurecting
   }
 
   handleDamage(params: {
@@ -243,7 +245,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   setMana(mana: number) {
-    if (!this.status.silence && !this.status.protect) {
+    if (!this.status.silence && !this.status.protect && !this.status.resurecting) {
       this.mana = Math.max(0, Math.min(mana, this.maxMana))
     }
   }
@@ -263,8 +265,9 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     this.dodge = Math.min(0.9, this.dodge + value)
   }
 
-  addAbilityPower(value: number) {
-    this.ap = Math.round(this.ap + value)
+  addAbilityPower(value: number, apBoost = true) {
+    const boost = apBoost ? (value * this.ap) / 100 : 0
+    this.ap = Math.round(this.ap + Math.round(value + boost))
   }
 
   addDefense(value: number, apBoost?: boolean) {
@@ -280,6 +283,16 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   addAttack(value: number, apBoost?: boolean) {
     const boost = apBoost ? (value * this.ap) / 100 : 0
     this.atk = Math.max(0, this.atk + Math.round(value + boost))
+  }
+
+  addAttackSpeed(value: number, apBoost = false) {
+    const boost = apBoost ? (value * this.ap) / 100 : 0
+    this.atkSpeedBonus += value + boost
+    this.atkSpeed = clamp(
+      roundTo2Digits(0.75 * (1 + this.atkSpeedBonus / 100)),
+      0.4,
+      2.5
+    )
   }
 
   addCritDamage(value: number, apBoost?: boolean) {
@@ -520,5 +533,25 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     if (flyAwayCell) {
       this.moveTo(flyAwayCell.x, flyAwayCell.y, board)
     }
+  }
+
+  resetStats(){
+    const cloneForStatsReference = PokemonFactory.createPokemonFromName(this.name)
+    this.life = cloneForStatsReference.hp
+    this.shield = 0
+    this.mana = 0
+    this.ap = 0
+    this.atk = cloneForStatsReference.atk
+    this.def = cloneForStatsReference.def
+    this.speDef = cloneForStatsReference.speDef
+    this.atkSpeed = cloneForStatsReference.atkSpeed
+    this.critChance = DEFAULT_CRIT_CHANCE
+    this.critDamage = DEFAULT_CRIT_DAMAGE
+    this.count = new Count()
+    this.status.clearNegativeStatus()
+    this.simulation.applySynergyEffects(this)
+    this.simulation.applyItemsEffects(this)
+    this.status.resurection = false; // prevent reapplying max revive again
+    // does not trigger postEffects (iron defense, normal shield, rune protect, focus band, delta orb, flame orb...)
   }
 }

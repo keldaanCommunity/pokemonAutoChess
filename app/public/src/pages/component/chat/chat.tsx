@@ -8,6 +8,7 @@ export default function Chat(props: { source: string }) {
   const dispatch = useAppDispatch()
   const [currentText, setCurrentText] = useState<string>("")
   const user = useAppSelector((state) => state[props.source].user)
+  const MAX_MESSAGE_LENGTH = 250
 
   return (
     <div className="nes-container user-chat">
@@ -40,6 +41,7 @@ export default function Chat(props: { source: string }) {
             setCurrentText(e.target.value)
           }}
           value={currentText}
+          maxLength={MAX_MESSAGE_LENGTH}
           className="my-input"
         />
         <button

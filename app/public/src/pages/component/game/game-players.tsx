@@ -13,7 +13,6 @@ const style: CSS.Properties = {
 
 export default function GamePlayers(props: { click: (id: string) => void }) {
   const players = useAppSelector((state) => state.game.players)
-  const uid = useAppSelector((state) => state.network.uid)
   const sortedPlayers = [...players]
   return (
     <div style={style}>

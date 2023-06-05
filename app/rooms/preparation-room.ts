@@ -142,14 +142,15 @@ export default class PreparationRoom extends Room<PreparationState> {
     this.onMessage(Transfer.NEW_MESSAGE, (client, message) => {
       try {
         const user = this.state.users.get(client.auth.uid)
-        if (user && !user.anonymous && message.payload != "") {
+        const MAX_MESSAGE_LENGTH = 250
+        if (user && !user.anonymous && message != "") {
           this.dispatcher.dispatch(new OnMessageCommand(), {
             client: client,
             message: {
               author: user.name,
               authorId: user.id,
               avatar: user.avatar,
-              payload: message.payload,
+              payload: message.substring(0, MAX_MESSAGE_LENGTH),
               time: Date.now(),
               id: nanoid()
             }
