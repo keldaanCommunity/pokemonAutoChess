@@ -1,3 +1,27 @@
+# 3.7- Dancefloor
+
+Release : 05/06/2023
+
+## Welcome to Tepig
+
+![tepig](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0498/Normal.png)
+![tepig](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0499/Normal.png)
+![tepig](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0500/Normal.png)
+
+More Aquatic: Poliwag, Tentacool, Lotad, Froakie, Phione now have the Aquatic synergy
+
+Add active abilities to Kecleon, Arceus, Mew, Tapu-koko, Tapu-lele, Tapu-Bulu, Tapu-Fini
+
+Buff Oran Berry: 130 → 150 shield
+
+Nerf Max Revive: after revive, stats and item stacks are now reset to what they were at the start of the battle
+
+Nerfed Dive ability: freeze duration is now 1.5 seconds for all tiers
+
+Nerfed damage of abilities Discharge and Spirit Shackle at tier 3
+
+Buffed PVE rounds pokemons: Rattata and Spearow now have abilities, Gyarados has more HP and attack
+
 # Patch 3.6 - May 26
 
 ## Newcomers
@@ -15,7 +39,7 @@ Phione will evolve into a manaphy if you give him an aqua egg.
 Flying Synergy has been reworked, flying pokemons now fly away when in danger.
 Field has also been reworked to heal flat HP instead of percentage of max HP.
 
-## New Ablities 
+## New Ablities
 
 Checkout the new abilities for Litwick, Turtwig, Tauros, Diglett and Hitmonchan !
 
