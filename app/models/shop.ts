@@ -106,7 +106,7 @@ export default class Shop {
 
   refillShop(player: Player) {
     // No need to release pokemons since they won't be changed
-    let PkmList = player.shop.map((pokemon) => {
+    const PkmList = player.shop.map((pokemon) => {
       if (pokemon != Pkm.MAGIKARP && pokemon != Pkm.DEFAULT) {
         return pokemon
       }

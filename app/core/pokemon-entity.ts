@@ -23,7 +23,6 @@ import { Passive } from "../types/enum/Passive"
 import { DEFAULT_CRIT_CHANCE, DEFAULT_CRIT_DAMAGE } from "../types/Config"
 import { removeInArray } from "../utils/array"
 
-
 export default class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
   @type("uint8") positionX: number
@@ -246,7 +245,11 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   setMana(mana: number) {
-    if (!this.status.silence && !this.status.protect && !this.status.resurecting) {
+    if (
+      !this.status.silence &&
+      !this.status.protect &&
+      !this.status.resurecting
+    ) {
       this.mana = Math.max(0, Math.min(mana, this.maxMana))
     }
   }
@@ -536,8 +539,10 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  resetStats(){
-    const cloneForStatsReference = PokemonFactory.createPokemonFromName(this.name)
+  resetStats() {
+    const cloneForStatsReference = PokemonFactory.createPokemonFromName(
+      this.name
+    )
     this.life = cloneForStatsReference.hp
     this.shield = 0
     this.mana = 0
@@ -553,9 +558,11 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     this.effects.clear()
     this.simulation.applySynergyEffects(this)
     this.simulation.applyItemsEffects(this)
-    this.status.resurection = false; // prevent reapplying max revive again
+    this.status.resurection = false // prevent reapplying max revive again
     this.shield = 0 // prevent reapplying shield again
-    SynergyEffects[Synergy.FOSSIL].forEach(fossilResurectEffect => removeInArray(this.effects, fossilResurectEffect)) // prevent resurecting fossils twice
+    SynergyEffects[Synergy.FOSSIL].forEach((fossilResurectEffect) =>
+      removeInArray(this.effects, fossilResurectEffect)
+    ) // prevent resurecting fossils twice
 
     // does not trigger postEffects (iron defense, normal shield, rune protect, focus band, delta orb, flame orb...)
   }

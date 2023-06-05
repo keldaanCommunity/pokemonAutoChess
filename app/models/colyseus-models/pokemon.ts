@@ -7047,7 +7047,7 @@ export class Kecleon extends Pokemon {
       emotion,
       false,
       false,
-      Passive.PROTEAN2,
+      Passive.PROTEAN2
     )
   }
 }
@@ -7595,17 +7595,17 @@ export class Mew extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.MEW,
-      [Synergy.PSYCHIC, Synergy.FIELD],
+      [Synergy.PSYCHIC],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
-      200,
-      20,
+      150,
+      10,
+      1,
+      1,
       2,
-      2,
-      3,
       AttackSprite.PSYCHIC_RANGE,
       1,
-      50,
+      120,
       Ability.TELEPORT,
       shiny,
       emotion,

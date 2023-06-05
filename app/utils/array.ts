@@ -20,3 +20,4 @@ export function removeInArray<T>(arr: T[], el: T) {
     arr.splice(index, 1)
   }
 }
+
