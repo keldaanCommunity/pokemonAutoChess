@@ -14,13 +14,14 @@ import { IPokemonEntity, IPokemon, Emotion, AttackSprite } from "../types"
 import { AttackType, Rarity } from "../types/enum/Game"
 import { Effect } from "../types/enum/Effect"
 import { AbilityStrategy, Ability } from "../types/enum/Ability"
-import { Synergy } from "../types/enum/Synergy"
+import { Synergy, SynergyEffects } from "../types/enum/Synergy"
 import { Pkm } from "../types/enum/Pokemon"
 import { IdleState } from "./idle-state"
 import PokemonFactory from "../models/pokemon-factory"
 import { clamp, roundTo2Digits } from "../utils/number"
 import { Passive } from "../types/enum/Passive"
 import { DEFAULT_CRIT_CHANCE, DEFAULT_CRIT_DAMAGE } from "../types/Config"
+import { removeInArray } from "../utils/array"
 
 
 export default class PokemonEntity extends Schema implements IPokemonEntity {
@@ -549,9 +550,13 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     this.critDamage = DEFAULT_CRIT_DAMAGE
     this.count = new Count()
     this.status.clearNegativeStatus()
+    this.effects.clear()
     this.simulation.applySynergyEffects(this)
     this.simulation.applyItemsEffects(this)
     this.status.resurection = false; // prevent reapplying max revive again
+    this.shield = 0 // prevent reapplying shield again
+    SynergyEffects[Synergy.FOSSIL].forEach(fossilResurectEffect => removeInArray(this.effects, fossilResurectEffect)) // prevent resurecting fossils twice
+
     // does not trigger postEffects (iron defense, normal shield, rune protect, focus band, delta orb, flame orb...)
   }
 }
