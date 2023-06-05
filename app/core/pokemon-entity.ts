@@ -540,6 +540,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     this.life = cloneForStatsReference.hp
     this.shield = 0
     this.mana = 0
+    this.ap = 0
     this.atk = cloneForStatsReference.atk
     this.def = cloneForStatsReference.def
     this.speDef = cloneForStatsReference.speDef
