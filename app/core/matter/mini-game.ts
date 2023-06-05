@@ -138,7 +138,7 @@ export class MiniGame {
       const y =
         this.centerY + Math.sin((2 * Math.PI * i) / this.alivePlayers.length) * 250
       let retentionDelay = 4000 + (this.alivePlayers.length - player.rank) * 2000
-      if(stageLevel < 3){
+      if(stageLevel < 5){
         retentionDelay = 5000
       }
 
