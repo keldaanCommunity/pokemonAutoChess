@@ -4012,7 +4012,7 @@ export class GrowthStrategy extends AttackStrategy {
     const attackBuff = Math.floor(10 * (1 + pokemon.ap / 100))
     pokemon.addAttack(attackBuff)
 
-    if (pokemon.simulation.weather === Weather.SUN) {
+    if (pokemon.simulation.weather === Weather.ZENITH) {
       pokemon.addAttack(attackBuff) // grows twice as fast if sunny weather
     }
   }

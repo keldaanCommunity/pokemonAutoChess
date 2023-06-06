@@ -47,10 +47,13 @@ export default class Simulation extends Schema implements ISimulation {
     redTeam: MapSchema<Pokemon>,
     player: IPlayer,
     opponent: IPlayer | null, // null if PVE round
-    stageLevel: number
+    stageLevel: number,
+    weather: Weather
   ) {
     this.player = player
     this.stageLevel = stageLevel
+    this.weather = weather
+
     this.blueDpsMeter.forEach((dps, key) => {
       this.blueDpsMeter.delete(key)
     })
@@ -72,7 +75,6 @@ export default class Simulation extends Schema implements ISimulation {
     this.redEffects = opponent?.effects?.list ?? []
     // logger.debug({ blueEffects, redEffects })
 
-    this.weather = this.getWeather(this.blueEffects, this.redEffects)
     this.room.updateCastform(this.weather)
 
     // update effects after castform transformation
@@ -1013,41 +1015,7 @@ export default class Simulation extends Schema implements ISimulation {
   }
 
   getWeather(blueEffects: Effect[], redEffects: Effect[]) {
-    function getPlayerWeather(effects: Effect[]) {
-      return Weather.STORM
-    }
-
-    const redWeather = getPlayerWeather(redEffects)
-    const blueWeather = getPlayerWeather(blueEffects)
-
-    if (redWeather !== Weather.NEUTRAL && blueWeather === Weather.NEUTRAL)
-      return redWeather
-    if (blueWeather !== Weather.NEUTRAL && redWeather === Weather.NEUTRAL)
-      return blueWeather
-    if (redWeather === blueWeather) return redWeather
-
-    // sandstorm beats everything
-    if (redWeather === Weather.SANDSTORM || blueWeather === Weather.SANDSTORM)
-      return Weather.SANDSTORM
-
-    // snow beats rain
-    if (redWeather === Weather.SNOW && blueWeather === Weather.RAIN)
-      return Weather.SNOW
-    if (blueWeather === Weather.SNOW && redWeather === Weather.RAIN)
-      return Weather.SNOW
-
-    // sunlight beats snow
-    if (redWeather === Weather.SNOW && blueWeather === Weather.SUN)
-      return Weather.SUN
-    if (blueWeather === Weather.SNOW && redWeather === Weather.SUN)
-      return Weather.SUN
-
-    // rain beats sunlight
-    if (redWeather === Weather.SUN && blueWeather === Weather.RAIN)
-      return Weather.RAIN
-    if (blueWeather === Weather.SUN && redWeather === Weather.RAIN)
-      return Weather.RAIN
-
+    //TODO
     return Weather.NEUTRAL
   }
 

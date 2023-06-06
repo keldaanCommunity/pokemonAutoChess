@@ -30,6 +30,7 @@ export default function GameStageInfo() {
   const opponentTitle = useAppSelector(
     (state) => state.game.currentPlayerOpponentTitle
   )
+  const weather = useAppSelector((state) => state.game.weather)
 
   return (
     <>
@@ -87,13 +88,18 @@ export default function GameStageInfo() {
             </>
           )}
         </div>
+
+        <div
+          className="meteo-information">
+          {weather}
+        </div>
       </div>
       <TimerBar />
     </>
   )
 }
 
-type PathStep = { level:number, icon: string; title: string; result?: BattleResult }
+type PathStep = { level:number, icon: string; name: string; result?: BattleResult }
 
 export function StagePath() {
   const currentPlayer = useAppSelector((state) =>
@@ -120,7 +126,7 @@ export function StagePath() {
       path.push({ 
         level,
         icon: "/assets/ui/carousel.svg",
-        title: `Carousel`
+        name: `Carousel`
       })
       if(level === stageLevel && phase === GamePhaseState.MINIGAME){
         currentLevelPathIndex = path.length-1
@@ -130,7 +136,7 @@ export function StagePath() {
       path.push({
         level,
         icon: "/assets/ui/mythical.svg", 
-        title: `Mythical pick` 
+        name: `Mythical pick` 
       })
       if(level === stageLevel && phase === GamePhaseState.PICK){
         currentLevelPathIndex = path.length-1
@@ -139,7 +145,7 @@ export function StagePath() {
       path.push({
         level,
         icon: "/assets/ui/additional-pick.svg",
-        title: `Additional pick`
+        name: `Additional pick`
       })
       if(level === stageLevel && phase === GamePhaseState.PICK){
         currentLevelPathIndex = path.length-1
@@ -151,7 +157,7 @@ export function StagePath() {
       path.push({
         level,
         icon: getAvatarSrc(neutralStage.avatar),
-        title: record?.name ?? neutralStage.name,
+        name: record?.name ?? neutralStage.name,
         result: record?.result
       })
       if(level === stageLevel && currentLevelPathIndex === undefined){
@@ -161,7 +167,7 @@ export function StagePath() {
       path.push({
         level,
         icon: record?.avatar ? getAvatarSrc(record.avatar) : "/assets/ui/battle.svg",
-        title: record?.name ?? `Fight`,
+        name: record?.name ?? `Fight`,
         result: record?.result
       })
       if(level === stageLevel && currentLevelPathIndex === undefined){
@@ -194,7 +200,7 @@ export function StagePath() {
             effect="solid"
             place="bottom"
           >
-            {step.title} {step.name}
+            {step.name}
           </ReactTooltip>
           <img src={step.icon}></img>
         </div>

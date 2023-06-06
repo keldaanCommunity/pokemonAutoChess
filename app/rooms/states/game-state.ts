@@ -5,7 +5,7 @@ import Shop from "../../models/shop"
 import Design, { DesignTiled } from "../../core/design"
 import BotManager from "../../core/bot-manager"
 import { DungeonData, Dungeon, StageDuration } from "../../types/Config"
-import { GamePhaseState } from "../../types/enum/Game"
+import { GamePhaseState, Weather } from "../../types/enum/Game"
 import {
   Schema,
   MapSchema,
@@ -26,6 +26,7 @@ export default class GameState extends Schema {
   @type(["string"]) additionalPokemons = new ArraySchema<Pkm>()
   @type("uint8") stageLevel = 1
   @type("string") mapName: string
+  @type("string") weather: Weather
   @type("boolean") noElo = false
   @type({ set: "string" }) spectators = new SetSchema<string>()
   time = StageDuration[0] * 1000
@@ -50,6 +51,7 @@ export default class GameState extends Schema {
     this.id = pickRandomIn(Dungeon)
     this.noElo = noElo
     this.mapName = DungeonData[this.id].name
+    this.weather = Weather.NEUTRAL
     this.design = new Design(this.id, 5, 0.1)
     this.design.create().then(() => {
       this.tilemap = this.design.exportToTiled()

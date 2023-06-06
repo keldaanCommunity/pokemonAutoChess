@@ -77,7 +77,7 @@
     "react-router-dom": "^6.8.0",
     "react-tabs": "^4.0.1",
     "react-toastify": "^9.1.1",
-    "react-tooltip": "^4.2.21",
+    "react-tooltip": "^4.5.1",
     "unique-names-generator": "^4.7.1"
   },
   "devDependencies": {

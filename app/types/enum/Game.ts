@@ -78,7 +78,7 @@ export enum Weather {
   NIGHT = "NIGHT",
   STORM = "STORM",
   MISTY = "MISTY",
-  GRAIL = "GRAIL",
+  SNOW = "SNOW",
   SANDSTORM = "SANDSTORM"
 }
 

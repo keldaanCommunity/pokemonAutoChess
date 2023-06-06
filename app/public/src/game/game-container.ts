@@ -619,7 +619,7 @@ class GameContainer {
           g.weatherManager.addSun()
         } else if(value === Weather.SANDSTORM){
           g.weatherManager.addSandstorm()
-        } else if(value === Weather.GRAIL){
+        } else if(value === Weather.SNOW){
           g.weatherManager.addSnow()
         } else if(value === Weather.NIGHT){
           g.weatherManager.addNight()

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { GamePhaseState } from "../../../types/enum/Game"
+import { GamePhaseState, Weather } from "../../../types/enum/Game"
 import { IDps, IDpsHeal, IPlayer } from "../../../types"
 import { ArraySchema, MapSchema } from "@colyseus/schema"
 import ExperienceManager from "../../../models/colyseus-models/experience-manager"
@@ -22,6 +22,7 @@ interface GameStateStore {
   players: IPlayer[]
   stageLevel: number
   mapName: string
+  weather: Weather
   noElo: boolean
   currentPlayerId: string
   money: number
@@ -59,6 +60,7 @@ const initialState: GameStateStore = {
   players: new Array<IPlayer>(),
   stageLevel: 0,
   mapName: "",
+  weather: Weather.NEUTRAL,
   noElo: false,
   currentPlayerId: "",
   money: 5,

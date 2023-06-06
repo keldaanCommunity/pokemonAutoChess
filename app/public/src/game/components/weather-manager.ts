@@ -254,7 +254,7 @@ export default class WeatherManager {
       this.scene.add.particles(0, 0, "snowflakes", {
         ...offscreenSource,
         deathZone: { source: this.screen, type: "onLeave" },
-        frequency: 10,
+        frequency: 20,
         speedY: { min: -60, max: -40 },
         lifespan: 5000,
         scale: 1,
@@ -264,7 +264,7 @@ export default class WeatherManager {
       this.scene.add.particles(0, 0, "snowflakes", {
         ...offscreenSource,
         deathZone: { source: this.screen, type: "onLeave" },
-        frequency: 20,
+        frequency: 40,
         speedY: { min: -60, max: -40 },
         lifespan: 5000,
         scale: 2,
