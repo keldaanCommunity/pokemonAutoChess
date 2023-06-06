@@ -2114,7 +2114,7 @@ export class ProtectStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const duration = Math.round(5000 * (1 + pokemon.ap / 100))
+    const duration = Math.round(5000 * (1 + pokemon.ap / 200))
     pokemon.status.triggerProtect(duration)
   }
 }
