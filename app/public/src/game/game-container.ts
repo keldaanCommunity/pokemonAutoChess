@@ -615,7 +615,7 @@ class GameContainer {
         g.weatherManager.clearWeather()
         if(value === Weather.RAIN){
           g.weatherManager.addRain()
-        } else if(value === Weather.ZENITH){
+        } else if(value === Weather.SUN){
           g.weatherManager.addSun()
         } else if(value === Weather.SANDSTORM){
           g.weatherManager.addSandstorm()
