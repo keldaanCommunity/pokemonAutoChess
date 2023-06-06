@@ -385,8 +385,8 @@ export class IllusionStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const heal = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 80 : 40
-    pokemon.handleHeal(heal, pokemon, 1)
+    const heal = pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL ? 70 : pokemon.stars === 2 ? 50 : 30
+    pokemon.handleHeal(heal, pokemon, 0.5)
     if (target) {
       pokemon.index = target.index
       pokemon.atk = Math.max(pokemon.atk, target.atk)
@@ -1728,24 +1728,18 @@ export class HeadSmashStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
 
-    let d = 0
-    let recoil = 0
-    switch (pokemon.stars) {
-      case 1:
-        d = 40
-        recoil = 5
-        break
-      case 2:
-        d = 80
-        recoil = 10
-        break
-      case 3:
-        d = 150
-        recoil = 15
-        break
-      default:
-        break
+    let damage, recoil
+    if(pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
+      damage = 150
+      recoil = 15
+    } else if(pokemon.stars === 2) {
+      damage = 80
+      recoil = 10
+    } else {
+      damage = 40
+      recoil = 5
     }
+
     if (target.status.sleep || target.status.freeze) {
       target.handleSpecialDamage(
         target.life,
@@ -1755,7 +1749,7 @@ export class HeadSmashStrategy extends AttackStrategy {
         crit
       )
     } else {
-      target.handleSpecialDamage(d, board, AttackType.SPECIAL, pokemon, crit)
+      target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     }
     pokemon.handleSpecialDamage(recoil, board, AttackType.TRUE, pokemon, crit)
   }
