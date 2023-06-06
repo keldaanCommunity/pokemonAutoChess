@@ -2330,6 +2330,14 @@ export const AnimationConfig: {
   [Pkm.EMBOAR]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot
+  },
+  [Pkm.WYNAUT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot
+  },
+  [Pkm.WOBBUFFET]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Withdraw
   }
 }
 

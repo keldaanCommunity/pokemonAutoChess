@@ -1,3 +1,10 @@
+# Patch 3.8 - Nightfall
+
+## Welcome to Wynaut
+
+![wynaut](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0360/Normal.png)
+![wynaut](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0202/Normal.png)
+
 # Patch 3.7 - Dancefloor
 
 Release : 05/06/2023

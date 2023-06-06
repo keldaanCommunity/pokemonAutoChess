@@ -812,6 +812,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.COUNTER,
+      frames: this.game.anims.generateFrameNames(Ability.COUNTER, {
+        start: 0,
+        end: 11,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.HEX,
       frames: this.game.anims.generateFrameNames(Ability.HEX, {
         start: 0,
@@ -1778,7 +1789,9 @@ export default class AnimationManager {
         ? entity.orientation
         : Orientation.DOWN
 
-    let textureIndex = entity.scene.textures.exists(entity.index) ? entity.index : "0000"
+    const textureIndex = entity.scene.textures.exists(entity.index)
+      ? entity.index
+      : "0000"
     const tint = entity.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL
     const animKey = `${textureIndex}/${tint}/${animation}/${SpriteType.ANIM}/${orientation}`
     const shadowKey = `${textureIndex}/${tint}/${animation}/${SpriteType.SHADOW}/${orientation}`

@@ -40,7 +40,10 @@ import {
 import { clamp } from "../../../../utils/number"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { playSound, SOUNDS } from "../../pages/utils/audio"
-import { DEFAULT_CRIT_CHANCE, DEFAULT_CRIT_DAMAGE } from "../../../../types/Config"
+import {
+  DEFAULT_CRIT_CHANCE,
+  DEFAULT_CRIT_DAMAGE
+} from "../../../../types/Config"
 
 export default class Pokemon extends DraggableObject {
   evolution: Pkm
@@ -187,7 +190,7 @@ export default class Pokemon extends DraggableObject {
       }
     }
 
-    let textureIndex = scene.textures.exists(this.index) ? this.index : "0000"
+    const textureIndex = scene.textures.exists(this.index) ? this.index : "0000"
     this.sprite = new GameObjects.Sprite(
       scene,
       0,
@@ -203,9 +206,9 @@ export default class Pokemon extends DraggableObject {
       (animation, frame, gameObject, frameKey: string) => {
         const g = <GameScene>scene
         // go back to idle anim if no more animation in queue
-        if(pokemon.action !== PokemonActionState.HURT){
+        if (pokemon.action !== PokemonActionState.HURT) {
           g.animationManager?.animatePokemon(this, PokemonActionState.IDLE)
-        }        
+        }
       }
     )
     this.height = this.sprite.height
@@ -353,7 +356,7 @@ export default class Pokemon extends DraggableObject {
   updateCircleTimer(timer: number) {
     if (timer <= 0) {
       this.circleTimer.destroy()
-      if(this.isCurrentPlayerAvatar){
+      if (this.isCurrentPlayerAvatar) {
         playSound(SOUNDS.CAROUSEL_UNLOCK)
       }
     } else {
@@ -2312,24 +2315,27 @@ export default class Pokemon extends DraggableObject {
             )
             break
 
-            case Ability.SEARING_SHOT:
-              coordinates = transformAttackCoordinate(this.positionX, this.positionY)
-              specialProjectile = this.scene.add.sprite(
-                coordinates[0],
-                coordinates[1],
-                Ability.SEARING_SHOT,
-                "000"
-              )
-              specialProjectile.setDepth(0)
-              specialProjectile.setScale(3, 3)
-              specialProjectile.anims.play(Ability.STEAM_ERUPTION)
-              specialProjectile.once(
-                Phaser.Animations.Events.ANIMATION_COMPLETE,
-                () => {
-                  specialProjectile.destroy()
-                }
-              )
-              break
+          case Ability.SEARING_SHOT:
+            coordinates = transformAttackCoordinate(
+              this.positionX,
+              this.positionY
+            )
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.SEARING_SHOT,
+              "000"
+            )
+            specialProjectile.setDepth(0)
+            specialProjectile.setScale(3, 3)
+            specialProjectile.anims.play(Ability.STEAM_ERUPTION)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
 
           case Ability.APPLE_ACID:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY)
@@ -2342,6 +2348,28 @@ export default class Pokemon extends DraggableObject {
             specialProjectile.setDepth(7)
             specialProjectile.setScale(2, 2)
             specialProjectile.anims.play(Ability.APPLE_ACID)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
+
+          case Ability.COUNTER:
+            coordinates = transformAttackCoordinate(
+              this.positionX,
+              this.positionY
+            )
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.COUNTER,
+              "000"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(3, 3)
+            specialProjectile.anims.play(Ability.COUNTER)
             specialProjectile.once(
               Phaser.Animations.Events.ANIMATION_COMPLETE,
               () => {
@@ -2446,24 +2474,24 @@ export default class Pokemon extends DraggableObject {
             )
             break
 
-            case Ability.JUDGEMENT:
-              coordinates = transformAttackCoordinate(this.targetX, this.targetY)
-              specialProjectile = this.scene.add.sprite(
-                coordinates[0],
-                coordinates[1],
-                Ability.JUDGEMENT,
-                "000"
-              )
-              specialProjectile.setDepth(7)
-              specialProjectile.setScale(2, 2)
-              specialProjectile.anims.play(Ability.JUDGEMENT)
-              specialProjectile.once(
-                Phaser.Animations.Events.ANIMATION_COMPLETE,
-                () => {
-                  specialProjectile.destroy()
-                }
-              )
-              break
+          case Ability.JUDGEMENT:
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.JUDGEMENT,
+              "000"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.JUDGEMENT)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
 
           case Ability.SHADOW_SNEAK:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY)
