@@ -7595,7 +7595,7 @@ export class Mew extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.MEW,
-      [Synergy.PSYCHIC],
+      [Synergy.PSYCHIC, Synergy.FIELD],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       200,
@@ -7605,7 +7605,7 @@ export class Mew extends Pokemon {
       3,
       AttackSprite.PSYCHIC_RANGE,
       1,
-      120,
+      80,
       Ability.TELEPORT,
       shiny,
       emotion,

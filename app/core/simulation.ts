@@ -32,7 +32,7 @@ export default class Simulation extends Schema implements ISimulation {
   board: Board = new Board(6, 8)
   finished = false
   flowerSpawn: boolean[] = [false, false]
-  stageLevel: number = 0
+  stageLevel = 0
   player: IPlayer | undefined
   id: string
 
@@ -167,7 +167,7 @@ export default class Simulation extends Schema implements ISimulation {
     const pokemonEntity = new PokemonEntity(pokemon, x, y, team, this)
     pokemonEntity.isClone = isClone
     this.applySynergyEffects(pokemonEntity)
-    this.applyItemsEffects(pokemonEntity)    
+    this.applyItemsEffects(pokemonEntity)
     this.board.setValue(
       pokemonEntity.positionX,
       pokemonEntity.positionY,
@@ -266,9 +266,9 @@ export default class Simulation extends Schema implements ISimulation {
       [-3, +1],
       [+3, +1]
     ]
-    for (let [dx, dy] of placesToConsiderByOrderOfPriority) {
-      let x = pokemon.positionX + dx
-      let y =
+    for (const [dx, dy] of placesToConsiderByOrderOfPriority) {
+      const x = pokemon.positionX + dx
+      const y =
         teamIndex === 0
           ? pokemon.positionY - 1 + dy
           : 5 - (pokemon.positionY - 1) - dy
@@ -362,10 +362,10 @@ export default class Simulation extends Schema implements ISimulation {
     }
   }
 
-  applySynergyEffects(pokemon: PokemonEntity){
-    if(pokemon.team === Team.BLUE_TEAM){
+  applySynergyEffects(pokemon: PokemonEntity) {
+    if (pokemon.team === Team.BLUE_TEAM) {
       this.applyEffects(pokemon, pokemon.types, this.blueEffects)
-    } else if(pokemon.team === Team.RED_TEAM){
+    } else if (pokemon.team === Team.RED_TEAM) {
       this.applyEffects(pokemon, pokemon.types, this.redEffects)
     }
   }
@@ -1089,7 +1089,11 @@ export default class Simulation extends Schema implements ISimulation {
         ?.changeDamage(pkm.physicalDamage, pkm.specialDamage, pkm.trueDamage)
       this.blueHealDpsMeter.get(key)?.changeHeal(pkm.healDone, pkm.shieldDone)
 
-      if ((!pkm.life || pkm.life <= 0) && !pkm.status.resurecting && !pkm.status.resurection) {
+      if (
+        (!pkm.life || pkm.life <= 0) &&
+        !pkm.status.resurecting &&
+        !pkm.status.resurection
+      ) {
         this.blueTeam.delete(key)
       } else {
         pkm.update(dt, this.board, this.climate)
@@ -1102,7 +1106,11 @@ export default class Simulation extends Schema implements ISimulation {
         ?.changeDamage(pkm.physicalDamage, pkm.specialDamage, pkm.trueDamage)
       this.redHealDpsMeter.get(key)?.changeHeal(pkm.healDone, pkm.shieldDone)
 
-      if ((!pkm.life || pkm.life <= 0) && !pkm.status.resurecting && !pkm.status.resurection) {
+      if (
+        (!pkm.life || pkm.life <= 0) &&
+        !pkm.status.resurecting &&
+        !pkm.status.resurection
+      ) {
         this.redTeam.delete(key)
       } else {
         pkm.update(dt, this.board, this.climate)

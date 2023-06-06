@@ -29,6 +29,8 @@ export default class Status extends Schema implements IStatus {
   deltaOrb = false
   burnOrigin: PokemonEntity | undefined = undefined
   poisonOrigin: PokemonEntity | undefined = undefined
+  silenceOrigin: PokemonEntity | undefined = undefined
+  woundOrigin: PokemonEntity | undefined = undefined
   burnCooldown = 0
   burnDamageCooldown = 1000
   silenceCooldown = 0
@@ -171,29 +173,27 @@ export default class Status extends Schema implements IStatus {
     if (this.synchroCooldown - dt <= 0) {
       this.synchro = false
       this.triggerSynchro()
-      if (
-        this.burn ||
-        this.poisonStacks ||
-        this.paralysis ||
-        this.wound ||
-        this.silence
-      ) {
-        board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
-          if (tg && tg.team !== pkm.team) {
-            if (this.silence) {
-              tg.status.triggerSilence(3000, tg, board)
-            }
-            if (this.burn) {
-              tg.status.triggerBurn(3000, tg, pkm, board)
-            }
-            if (this.poisonStacks) {
-              tg.status.triggerPoison(3000, tg, pkm, board)
-            }
-            if (this.wound) {
-              tg.status.triggerWound(3000, tg, board)
-            }
-          }
-        })
+      if (this.burn && this.burnOrigin) {
+        this.burnOrigin.status.triggerBurn(3000, this.burnOrigin, pkm, board)
+      }
+      if (this.poisonStacks && this.poisonOrigin) {
+        this.poisonOrigin.status.triggerPoison(
+          3000,
+          this.poisonOrigin,
+          pkm,
+          board
+        )
+      }
+      if (this.wound && this.woundOrigin) {
+        this.woundOrigin.status.triggerWound(3000, this.woundOrigin, pkm, board)
+      }
+      if (this.silence && this.silenceOrigin) {
+        this.silenceOrigin.status.triggerSilence(
+          3000,
+          this.silenceOrigin,
+          pkm,
+          board
+        )
       }
     } else {
       this.synchroCooldown = this.synchroCooldown - dt
@@ -272,7 +272,12 @@ export default class Status extends Schema implements IStatus {
     this.burnDamageCooldown = 1000
   }
 
-  triggerSilence(timer: number, pkm: PokemonEntity, board: Board) {
+  triggerSilence(
+    timer: number,
+    pkm: PokemonEntity,
+    origin: PokemonEntity | undefined,
+    board: Board
+  ) {
     if (
       !this.silence &&
       !pkm.items.has(Item.FLUFFY_TAIL) &&
@@ -280,12 +285,16 @@ export default class Status extends Schema implements IStatus {
     ) {
       this.silence = true
       this.silenceCooldown = timer
+      if (origin) {
+        this.silenceOrigin = origin
+      }
     }
   }
 
   updateSilence(dt: number) {
     if (this.silenceCooldown - dt <= 0) {
       this.silence = false
+      this.silenceOrigin = undefined
     } else {
       this.silenceCooldown = this.silenceCooldown - dt
     }
@@ -397,16 +406,25 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerWound(timer: number, pkm: PokemonEntity, board: Board) {
+  triggerWound(
+    timer: number,
+    pkm: PokemonEntity,
+    origin: PokemonEntity | undefined,
+    board: Board
+  ) {
     if (!this.wound && !pkm.items.has(Item.FLUFFY_TAIL) && !this.runeProtect) {
       this.wound = true
       this.woundCooldown = timer
+      if (origin) {
+        this.woundOrigin = origin
+      }
     }
   }
 
   updateWound(dt: number) {
     if (this.woundCooldown - dt <= 0) {
       this.wound = false
+      this.woundOrigin = undefined
     } else {
       this.woundCooldown = this.woundCooldown - dt
     }
@@ -461,14 +479,14 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerResurection(pokemon: PokemonEntity){
+  triggerResurection(pokemon: PokemonEntity) {
     this.resurection = false
     this.resurecting = true
     this.resurectingCooldown = 2000
     pokemon.status.clearNegativeStatus()
   }
 
-  updateResurecting(dt: number, pokemon: PokemonEntity){
+  updateResurecting(dt: number, pokemon: PokemonEntity) {
     if (this.resurectingCooldown - dt <= 0) {
       this.resurecting = false
       pokemon.resetStats()
