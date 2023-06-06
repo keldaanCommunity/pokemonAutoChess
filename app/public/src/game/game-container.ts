@@ -85,7 +85,7 @@ class GameContainer {
       room: this.room,
       tilemap: this.tilemap,
       spectate: this.spectate
-    })
+    })    
   }
 
   initializeEvents() {
@@ -148,6 +148,17 @@ class GameContainer {
         // logger.debug('initializePlayer', this.player, this.tilemap);
         this.initializeGame()
       }
+
+      let m=0;
+      const Weathers = Object.values(Weather)
+      document.addEventListener("keydown", (event) => {
+        if(event.key == "m") {
+          const w = Weathers[m++%Weathers.length]
+          console.log(`Weather: ${w}`)
+          this.handleWeatherChange(player, w)
+        }
+      })
+
     } else if (this.spectate && this.tilemap) {
       this.initializeGame()
     }
@@ -220,7 +231,7 @@ class GameContainer {
       ) {
         this.handleWeatherChange(player, value)
       }
-    })
+    })    
 
     player.simulation.blueTeam.onAdd((p, key) => {
       // logger.debug('add pokemon');
@@ -601,6 +612,7 @@ class GameContainer {
     ) {
       const g = <GameScene>this.game.scene.getScene("gameScene")
       if (g.weatherManager) {
+        g.weatherManager.clearWeather()
         if(value === Weather.RAIN){
           g.weatherManager.addRain()
         } else if(value === Weather.ZENITH){
@@ -613,8 +625,10 @@ class GameContainer {
           g.weatherManager.addNight()
         } else if(value === Weather.WINDY){
           g.weatherManager.addWind()
-        } else if(value === Weather.NEUTRAL){
-          g.weatherManager.clearWeather()
+        } else if(value === Weather.STORM){
+          g.weatherManager.addStorm()
+        } else if(value === Weather.MISTY){
+          g.weatherManager.addMist()
         }
       }
     }

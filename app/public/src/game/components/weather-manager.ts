@@ -145,10 +145,7 @@ export default class WeatherManager {
         speedY: { min: -260, max: -280 },
         lifespan: 5000,
         scale: 0.8
-      })
-    )
-
-    this.particlesEmitters.push(
+      }),
       this.scene.add.particles(0, 0, "sand", {
         ...leftScreenSource,
         deathZone: { source: deathZoneSource, type: "onLeave" },
@@ -157,10 +154,7 @@ export default class WeatherManager {
         speedY: { min: -260, max: -280 },
         lifespan: 5000,
         scale: 1.2
-      })
-    )
-
-    this.particlesEmitters.push(
+      }),
       this.scene.add.particles(0, 0, "sand", {
         ...leftScreenSource,
         deathZone: { source: deathZoneSource, type: "onLeave" },
@@ -201,17 +195,141 @@ export default class WeatherManager {
   }
 
   addWind(){
-    this.fx = this.scene.cameras.main.postFX!.addDisplacement(undefined, -0.01, 0.005);
+    const leftScreenSource = { x: { min: 0, max: 100 }, y: { min: 0, max: 1000 } }
+    const deathZoneSource = new Phaser.Geom.Rectangle(0, 0, 2000, 4000)
+
+    this.fx = this.scene.cameras.main.postFX!.addDisplacement(undefined, -0.008, -0.002);
     this.fxTween = this.scene.tweens.add({
       targets: this.fx,
-      x: +0.01,
-      y: -0.005,
+      x: +0.008,
+      y: +0.002,
       yoyo: true,
       loop: -1,
-      duration: 1000,
+      duration: 1500,
       ease: 'sine.inout'
     });
-    logger.debug('addWind')
+    this.particlesEmitters.push(
+      this.scene.add.particles(0, 0, "wind", {
+        ...leftScreenSource,
+        deathZone: { source: deathZoneSource, type: "onLeave" },
+        frequency: 100,
+        speedX: { min: 500, max: 800 },
+        speedY: { min: -100, max: 100 },
+        lifespan: 2000,
+        scale: 1
+      }),
+      this.scene.add.particles(0, 0, "wind", {
+        ...leftScreenSource,
+        deathZone: { source: deathZoneSource, type: "onLeave" },
+        frequency: 100,
+        speedX: { min: 1000, max: 1400 },
+        speedY: { min: -100, max: 100 },
+        lifespan: 2000,
+        scale: .5
+      })
+    )
+  }
+
+  addMist(){
+    const offscreenSource = { x: { min: 0, max: 2000 }, y: { min: 900, max: 1000 } }
+    this.image = this.scene.add.existing(
+      new Phaser.GameObjects.Image(this.scene, 1000, 500, "clouds")
+        .setScale(2, 2)
+        .setOrigin(0.5)
+        .setDepth(8)
+        .setAlpha(0.5)
+    )
+    this.colorFilter = this.scene.add.existing(
+      new Phaser.GameObjects.Rectangle(
+        this.scene,
+        1000,
+        500,
+        2000,
+        1000,
+        0x994C6E,
+        0.15
+      ).setDepth(8)
+    )
+    this.particlesEmitters.push(
+      this.scene.add.particles(0, 0, "snowflakes", {
+        ...offscreenSource,
+        deathZone: { source: this.screen, type: "onLeave" },
+        frequency: 10,
+        speedY: { min: -60, max: -40 },
+        lifespan: 5000,
+        scale: 1,
+        tint: 0xFF80AE,
+        alpha: { start: 1, end: 0 }
+      }),
+      this.scene.add.particles(0, 0, "snowflakes", {
+        ...offscreenSource,
+        deathZone: { source: this.screen, type: "onLeave" },
+        frequency: 20,
+        speedY: { min: -60, max: -40 },
+        lifespan: 5000,
+        scale: 2,
+        tint: 0xFF80BE,
+        alpha: { start: 1, end: 0 }
+      })
+    )
+  }
+
+  addStorm(){
+    const offscreenSource = { x: { min: 0, max: 2000 }, y: { min: 0, max: 100 } }
+    this.colorFilter = this.scene.add.existing(
+      new Phaser.GameObjects.Rectangle(
+        this.scene,
+        1000,
+        500,
+        2000,
+        1000,
+        0x5C7777,
+        0.3
+      ).setDepth(8)
+    )
+
+    this.image = this.scene.add.existing(
+      new Phaser.GameObjects.Image(this.scene, 1000, 300, "clouds")
+        .setScale(2, 2)
+        .setOrigin(0.5)
+        .setDepth(8)
+        .setAlpha(0.35)
+        .setTint(0x000000)
+    )
+
+    this.particlesEmitters.push(
+      this.scene.add.particles(0, 0, "rain", {
+        ...offscreenSource,
+        deathZone: { source: this.screen, type: "onLeave" },
+        frequency: 200,
+        quantity: 12,
+        speedY: { min: 600, max: 800 },
+        speedX: { min: 500, max: 600 },
+        lifespan: 5000,
+        scale: 0.8
+      }),
+
+      this.scene.add.particles(0, 0, "rain", {
+        ...offscreenSource,
+        deathZone: { source: this.screen, type: "onLeave" },
+        frequency: 200,
+        quantity: 8,
+        speedY: { min: 800, max: 1000 },
+        speedX: { min: 700, max: 850 },
+        lifespan: 5000,
+        scale: 1
+      })
+    )
+
+    this.fx = this.scene.cameras.main.postFX!.addDisplacement(undefined, 0, -0.002);
+    this.fxTween = this.scene.tweens.add({
+      targets: this.fx,
+      y: +0.002,
+      yoyo: true,
+      loop: -1,
+      duration: 800,
+      ease: Phaser.Math.Easing.Quadratic.InOut
+    });
   }
 
   clearWeather() {
@@ -224,6 +342,8 @@ export default class WeatherManager {
       this.image.destroy()
     }
     if(this.fx){
+      this.fx.x=0
+      this.fx.y=0
       this.fx.destroy();      
     }
     if(this.fxTween){

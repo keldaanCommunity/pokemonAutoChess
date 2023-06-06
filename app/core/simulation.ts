@@ -1014,7 +1014,7 @@ export default class Simulation extends Schema implements ISimulation {
 
   getWeather(blueEffects: Effect[], redEffects: Effect[]) {
     function getPlayerWeather(effects: Effect[]) {
-      return Weather.NIGHT
+      return Weather.STORM
     }
 
     const redWeather = getPlayerWeather(redEffects)
