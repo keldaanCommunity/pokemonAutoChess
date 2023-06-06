@@ -356,7 +356,7 @@ export const DEFAULT_CRIT_CHANCE = 10
 export const DEFAULT_CRIT_DAMAGE = 2
 
 export const StageDuration: Record<number | "DEFAULT", number> = {
-  0: 15,
+  1: 20,
   10: 50,
   20: 50,
   DEFAULT: 30
