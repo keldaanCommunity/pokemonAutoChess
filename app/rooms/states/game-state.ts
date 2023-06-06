@@ -18,7 +18,7 @@ import { pickRandomIn } from "../../utils/random"
 
 export default class GameState extends Schema {
   @type("string") afterGameId = ""
-  @type("uint8") roundTime = StageDuration[0]
+  @type("uint8") roundTime = StageDuration[1]
   @type("uint8") phase = GamePhaseState.PICK
   @type({ map: Player }) players = new MapSchema<Player>()
   @type({ map: PokemonAvatar }) avatars = new MapSchema<PokemonAvatar>()
@@ -28,7 +28,7 @@ export default class GameState extends Schema {
   @type("string") mapName: string
   @type("boolean") noElo = false
   @type({ set: "string" }) spectators = new SetSchema<string>()
-  time = StageDuration[0] * 1000
+  time = StageDuration[1] * 1000
   botManager: BotManager = new BotManager()
   shop: Shop = new Shop()
   id: Dungeon
