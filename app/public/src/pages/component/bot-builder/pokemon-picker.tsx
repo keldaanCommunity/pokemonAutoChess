@@ -8,6 +8,8 @@ import { getPortraitSrc } from "../../../utils"
 import { DetailledPkm, Emotion } from "../../../../../types"
 import SynergyIcon from "../icons/synergy-icon"
 import { Synergy } from "../../../../../types/enum/Synergy"
+import PokemonFactory from "../../../../../models/pokemon-factory"
+import { Rarity } from "../../../../../types/enum/Game"
 
 const pokemonPoolStyle: CSS.Properties = {
   display: "flex",
@@ -51,9 +53,13 @@ export default function PokemonPicker(props: {
       </TabList>
 
       {Object.keys(PRECOMPUTED_TYPE_POKEMONS_ALL).map((key) => {
+        const pokemons = PRECOMPUTED_TYPE_POKEMONS_ALL[key].filter(p => {
+          const pkm = PokemonFactory.createPokemonFromName(p)
+          return pkm.rarity !== Rarity.SPECIAL
+        })
         return (
           <TabPanel key={key} style={{ display: "flex", flexWrap: "wrap" }}>
-            {PRECOMPUTED_TYPE_POKEMONS_ALL[key].map((pkm) => {
+            {pokemons.map((pkm) => {
               return (
                 <div
                   onClick={() => {
