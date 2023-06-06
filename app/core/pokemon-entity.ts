@@ -269,22 +269,22 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     this.dodge = Math.min(0.9, this.dodge + value)
   }
 
-  addAbilityPower(value: number, apBoost = true) {
+  addAbilityPower(value: number, apBoost = false) {
     const boost = apBoost ? (value * this.ap) / 100 : 0
     this.ap = Math.round(this.ap + Math.round(value + boost))
   }
 
-  addDefense(value: number, apBoost?: boolean) {
+  addDefense(value: number, apBoost = false) {
     const boost = apBoost ? (value * this.ap) / 100 : 0
     this.def = Math.max(0, this.def + Math.round(value + boost))
   }
 
-  addSpecialDefense(value: number, apBoost?: boolean) {
+  addSpecialDefense(value: number, apBoost = false) {
     const boost = apBoost ? (value * this.ap) / 100 : 0
     this.speDef = Math.max(0, this.speDef + Math.round(value + boost))
   }
 
-  addAttack(value: number, apBoost?: boolean) {
+  addAttack(value: number, apBoost = false) {
     const boost = apBoost ? (value * this.ap) / 100 : 0
     this.atk = Math.max(0, this.atk + Math.round(value + boost))
   }
@@ -299,7 +299,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     )
   }
 
-  addCritDamage(value: number, apBoost?: boolean) {
+  addCritDamage(value: number, apBoost = false) {
     const boost = apBoost ? (value * this.ap) / 100 : 0
     this.critDamage = Math.max(
       0,
