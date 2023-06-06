@@ -551,7 +551,9 @@ import {
   Shuckle,
   Tepig,
   Pignite,
-  Emboar
+  Emboar,
+  Wynaut,
+  Wobbuffet
 } from "./colyseus-models/pokemon"
 import { MapSchema } from "@colyseus/schema"
 import { Emotion } from "../types"
@@ -560,12 +562,20 @@ import { IPokemonConfig } from "./mongo-models/user-metadata"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
 import { Synergy } from "../types/enum/Synergy"
 import { Pkm, PkmFamily } from "../types/enum/Pokemon"
-import { PkmCost, EvolutionTime, Mythical1Shop, HatchList } from "../types/Config"
+import {
+  PkmCost,
+  EvolutionTime,
+  Mythical1Shop,
+  HatchList
+} from "../types/Config"
 import { pickRandomIn } from "../utils/random"
 import { logger } from "../utils/logger"
 
 export default class PokemonFactory {
-  static getNeutralPokemonsByLevelStage(level: number, shinyEncounter: boolean): MapSchema<Pokemon> {
+  static getNeutralPokemonsByLevelStage(
+    level: number,
+    shinyEncounter: boolean
+  ): MapSchema<Pokemon> {
     const pokemons = new MapSchema<Pokemon>()
     switch (level) {
       case 1: {
@@ -617,8 +627,13 @@ export default class PokemonFactory {
       }
 
       case 9: {
-        const config = shinyEncounter ? { selectedShiny: true, selectedEmotion: Emotion.ANGRY } : undefined
-        const gyarados = PokemonFactory.createPokemonFromName(Pkm.GYARADOS, config)
+        const config = shinyEncounter
+          ? { selectedShiny: true, selectedEmotion: Emotion.ANGRY }
+          : undefined
+        const gyarados = PokemonFactory.createPokemonFromName(
+          Pkm.GYARADOS,
+          config
+        )
         gyarados.positionX = 4
         gyarados.positionY = 2
         pokemons.set(gyarados.id, gyarados)
@@ -762,7 +777,10 @@ export default class PokemonFactory {
     }
   }
 
-  static createPokemonFromName(name: Pkm, config?: { selectedShiny?: boolean, selectedEmotion?: Emotion }): Pokemon {
+  static createPokemonFromName(
+    name: Pkm,
+    config?: { selectedShiny?: boolean; selectedEmotion?: Emotion }
+  ): Pokemon {
     const s = config && config.selectedShiny ? true : false
     const e =
       config && config.selectedEmotion ? config.selectedEmotion : Emotion.NORMAL
@@ -1871,10 +1889,14 @@ export default class PokemonFactory {
         return new Pignite(s, e)
       case Pkm.EMBOAR:
         return new Emboar(s, e)
+      case Pkm.WYNAUT:
+        return new Wynaut(s, e)
+      case Pkm.WOBBUFFET:
+        return new Wobbuffet(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:
-        logger.warn(`No pokemon with name "${name}" found, return magikarp`);
+        logger.warn(`No pokemon with name "${name}" found, return magikarp`)
         return new Magikarp(s, e)
     }
   }
