@@ -1058,7 +1058,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.PROTECT]: {
-    eng: `${Status.PROTECT} the user, becoming invulnerable for [5,SP] seconds.`,
+    eng: `${Status.PROTECT} the user, becoming invulnerable for [5,SP=0.5] seconds.`,
     esp: `Hace que el pokemon sea invulnerable durante 3,5,7 segundos.`,
     fra: `Rend le pokémon invulnérable durant 3,5,7 secondes`,
     prt: ``
