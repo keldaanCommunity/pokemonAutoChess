@@ -1,4 +1,5 @@
 import Phaser from "phaser"
+import { logger } from "../../../../utils/logger"
 
 export default class WeatherManager {
   scene: Phaser.Scene
@@ -6,11 +7,14 @@ export default class WeatherManager {
   colorFilter: Phaser.GameObjects.Rectangle | undefined
   particlesEmitters: Phaser.GameObjects.Particles.ParticleEmitter[]
   image: Phaser.GameObjects.Image | undefined
+  fx: Phaser.FX.Displacement | undefined
+  fxTween: Phaser.Tweens.Tween | undefined
 
   constructor(scene: Phaser.Scene) {
     this.scene = scene
     this.screen = new Phaser.Geom.Rectangle(0, 0, 2000, 1000)
     this.particlesEmitters = []
+    this.scene.cameras.main.initPostPipeline()
   }
 
   addRain() {
@@ -196,6 +200,20 @@ export default class WeatherManager {
     )
   }
 
+  addWind(){
+    this.fx = this.scene.cameras.main.postFX!.addDisplacement(undefined, -0.01, 0.005);
+    this.fxTween = this.scene.tweens.add({
+      targets: this.fx,
+      x: +0.01,
+      y: -0.005,
+      yoyo: true,
+      loop: -1,
+      duration: 1000,
+      ease: 'sine.inout'
+    });
+    logger.debug('addWind')
+  }
+
   clearWeather() {
     this.particlesEmitters.forEach((emitter) => emitter.destroy())
     this.particlesEmitters = []
@@ -204,6 +222,12 @@ export default class WeatherManager {
     }
     if (this.image) {
       this.image.destroy()
+    }
+    if(this.fx){
+      this.fx.destroy();      
+    }
+    if(this.fxTween){
+      this.fxTween.destroy();
     }
   }
 }

@@ -72,11 +72,14 @@ export enum SpriteType {
 
 export enum Weather {
   NEUTRAL = "NEUTRAL",
+  ZENITH = "ZENITH",
+  WINDY = "WINDY",
   RAIN = "RAIN",
-  SUN = "SUN",
-  SANDSTORM = "SANDSTORM",
-  SNOW = "SNOW",
-  NIGHT = "NIGHT"
+  NIGHT = "NIGHT",
+  STORM = "STORM",
+  MISTY = "MISTY",
+  GRAIL = "GRAIL",
+  SANDSTORM = "SANDSTORM"
 }
 
 export enum Stat {

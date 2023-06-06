@@ -1014,25 +1014,7 @@ export default class Simulation extends Schema implements ISimulation {
 
   getWeather(blueEffects: Effect[], redEffects: Effect[]) {
     function getPlayerWeather(effects: Effect[]) {
-      return effects.includes(Effect.SANDSTORM)
-        ? Weather.SANDSTORM
-        : effects.includes(Effect.DESOLATE_LAND)
-        ? Weather.SUN
-        : effects.includes(Effect.PRIMORDIAL_SEA)
-        ? Weather.RAIN
-        : effects.includes(Effect.DROUGHT)
-        ? Weather.SUN
-        : effects.includes(Effect.DRIZZLE)
-        ? Weather.RAIN
-        : effects.includes(Effect.SHEER_COLD)
-        ? Weather.SNOW
-        : effects.includes(Effect.VICTORY_STAR)
-        ? Weather.SUN
-        : effects.includes(Effect.SNOW)
-        ? Weather.SNOW
-        : effects.includes(Effect.RAIN_DANCE)
-        ? Weather.RAIN
-        : Weather.NEUTRAL
+      return Weather.NIGHT
     }
 
     const redWeather = getPlayerWeather(redEffects)

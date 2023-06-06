@@ -59,7 +59,7 @@ class GameContainer {
     if (this.game != null) return // prevent initializing twice
     // Create Phaser game
     const config = {
-      type: Phaser.CANVAS,
+      type: Phaser.WEBGL,
       width: 2000,
       height: 1000,
       parent: this.div,
@@ -603,14 +603,16 @@ class GameContainer {
       if (g.weatherManager) {
         if(value === Weather.RAIN){
           g.weatherManager.addRain()
-        } else if(value === Weather.SUN){
+        } else if(value === Weather.ZENITH){
           g.weatherManager.addSun()
         } else if(value === Weather.SANDSTORM){
           g.weatherManager.addSandstorm()
-        } else if(value === Weather.SNOW){
+        } else if(value === Weather.GRAIL){
           g.weatherManager.addSnow()
         } else if(value === Weather.NIGHT){
           g.weatherManager.addNight()
+        } else if(value === Weather.WINDY){
+          g.weatherManager.addWind()
         } else if(value === Weather.NEUTRAL){
           g.weatherManager.clearWeather()
         }
