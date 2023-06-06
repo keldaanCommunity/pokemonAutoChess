@@ -12,7 +12,7 @@ import {
   MAX_PLAYERS_PER_LOBBY
 } from "../../types/Config"
 import { Item, BasicItems } from "../../types/enum/Item"
-import { BattleResult } from "../../types/enum/Game"
+import { BattleResult, Weather } from "../../types/enum/Game"
 import Player from "../../models/colyseus-models/player"
 import PokemonFactory from "../../models/pokemon-factory"
 import ItemFactory from "../../models/item-factory"
@@ -1396,19 +1396,22 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
             ),
             player,
             null,
-            this.state.stageLevel
+            this.state.stageLevel,
+            Weather.NEUTRAL
           )
         } else {
           const opponentId = this.room.computeRandomOpponent(key)
           if (opponentId) {
             const opponent = this.state.players.get(opponentId)
             if (opponent) {
+              const weather = player.simulation.getWeather(player, opponent)
               player.simulation.initialize(
                 player.board,
                 opponent.board,
                 player,
                 opponent,
-                this.state.stageLevel
+                this.state.stageLevel,
+                weather
               )
             }
           }

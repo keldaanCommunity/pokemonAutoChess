@@ -1014,7 +1014,7 @@ export default class Simulation extends Schema implements ISimulation {
     })
   }
 
-  getWeather(blueEffects: Effect[], redEffects: Effect[]) {
+  getWeather(player: IPlayer, opponent: IPlayer) {
     //TODO
     return Weather.NEUTRAL
   }
