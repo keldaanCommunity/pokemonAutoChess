@@ -8245,6 +8245,54 @@ export class Armaldo extends Pokemon {
   }
 }
 
+export class Wynaut extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.WYNAUT,
+      [Synergy.PSYCHIC, Synergy.BABY],
+      Rarity.COMMON,
+      Pkm.WOBBUFFET,
+      80,
+      5,
+      1,
+      1,
+      1,
+      AttackSprite.FIGHTING_MELEE,
+      1,
+      100,
+      Ability.COUNTER,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Wobbuffet extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.WOBBUFFET,
+      [Synergy.PSYCHIC],
+      Rarity.COMMON,
+      Pkm.DEFAULT,
+      200,
+      10,
+      2,
+      2,
+      1,
+      AttackSprite.ROCK_MELEE,
+      2,
+      100,
+      Ability.COUNTER,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
 export class Archen extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(

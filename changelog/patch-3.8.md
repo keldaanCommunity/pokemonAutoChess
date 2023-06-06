@@ -21,7 +21,7 @@ full changelog
 ---
 
 # New Pokemons:
-- 
+- Wynaut
 
 # Changes to Pokemon / Abilities
 - Nerf Protect: AP scaling for protect duration: 1 → 0.5

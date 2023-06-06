@@ -874,7 +874,7 @@ export const AbilityName: { [key in Ability]: Langage } = {
     fra: ``,
     prt: ``
   },
-  [Ability.SPLASH]: { 
+  [Ability.SPLASH]: {
     eng: `Splash`,
     esp: ``,
     fra: ``,
@@ -886,6 +886,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     fra: ``,
     prt: ``
   },
+  [Ability.COUNTER]: {
+    eng: "Counter",
+    esp: "",
+    prt: "",
+    fra: ""
+  }
 }
 
 export const AbilityDescription: { [key in Ability]: Langage } = {
@@ -1774,4 +1780,10 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     fra: ``,
     prt: ``
   },
+  [Ability.COUNTER]: {
+    eng: `Pokemon lashes out at adjacent enemies dealing ${Damage.SPECIAL} equal its missing ${Stat.HP} (Scale with ${Stat.AP})`,
+    esp: "",
+    prt: "",
+    fra: ""
+  }
 }

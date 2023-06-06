@@ -551,7 +551,9 @@ export enum Pkm {
   SHUCKLE = "shuckle",
   TEPIG = "tepig",
   PIGNITE = "pignite",
-  EMBOAR = "emboar"
+  EMBOAR = "emboar",
+  WYNAUT = "wynaut",
+  WOBBUFFET = "Wobbuffet"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1107,7 +1109,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.SHUCKLE]: "0213",
   [Pkm.TEPIG]: "0498",
   [Pkm.PIGNITE]: "0499",
-  [Pkm.EMBOAR]: "0500"
+  [Pkm.EMBOAR]: "0500",
+  [Pkm.WYNAUT]: "0360",
+  [Pkm.WOBBUFFET]: "0202"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1663,5 +1667,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.SHUCKLE]: Pkm.SHUCKLE,
   [Pkm.TEPIG]: Pkm.TEPIG,
   [Pkm.PIGNITE]: Pkm.TEPIG,
-  [Pkm.EMBOAR]: Pkm.TEPIG
+  [Pkm.EMBOAR]: Pkm.TEPIG,
+  [Pkm.WYNAUT]: Pkm.WYNAUT,
+  [Pkm.WOBBUFFET]: Pkm.WYNAUT
 }
