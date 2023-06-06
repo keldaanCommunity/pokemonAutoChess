@@ -52,7 +52,7 @@
     "express-basic-auth": "^1.2.0",
     "express-openapi": "^11.0.0",
     "express-rate-limit": "^6.7.0",
-    "fast-xml-parser": "^4.0.15",
+    "fast-xml-parser": "^4.2.4",
     "firebase": "^9.16.0",
     "firebase-admin": "^11.5.0",
     "firebaseui": "^6.0.2",
