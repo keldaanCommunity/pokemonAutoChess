@@ -6,18 +6,14 @@ import {
   PokemonTint,
   PokemonActionState
 } from "../../../types/enum/Game"
-import {
-  AnimationType,
-  AnimationConfig,
-  AnimationComplete
-} from "../../../types/Animation"
+import { AnimationType, AnimationComplete } from "../../../types/Animation"
 import { Ability } from "../../../types/enum/Ability"
 import Pokemon from "./components/pokemon"
 import GameScene from "./scenes/game-scene"
 import durations from "../../dist/client/assets/pokemons/durations.json"
 import indexList from "../../dist/client/assets/pokemons/indexList.json"
 import { logger } from "../../../utils/logger"
-import { Pkm, PkmIndex } from "../../../types/enum/Pokemon"
+import { AnimationConfig, Pkm, PkmIndex } from "../../../types/enum/Pokemon"
 
 export default class AnimationManager {
   game: GameScene

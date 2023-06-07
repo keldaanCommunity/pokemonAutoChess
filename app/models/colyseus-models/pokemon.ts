@@ -6536,6 +6536,52 @@ export class Seviper extends Pokemon {
   }
 }
 
+export class Lunatone extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.LUNATONE,
+      [Synergy.ROCK, Synergy.PSYCHIC],
+      Rarity.MYTHICAL,
+      Pkm.DEFAULT,
+      200,
+      15,
+      2,
+      2,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      1,
+      90,
+      Ability.ROCK_SLIDE,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
+export class Solrock extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.SOLROCK,
+      [Synergy.ROCK, Synergy.PSYCHIC],
+      Rarity.MYTHICAL,
+      Pkm.DEFAULT,
+      200,
+      15,
+      2,
+      2,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      1,
+      90,
+      Ability.ROCK_SLIDE,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
 export class Regirock extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
