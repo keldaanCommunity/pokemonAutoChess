@@ -488,7 +488,6 @@ export default class GameScene extends Scene {
 
     this.input.on("dragend", (pointer, gameObject, dropped) => {
       this.removeRectangles()
-      console.log("dragend", dropped)
       if (!dropped) {
         gameObject.x = gameObject.input.dragStartX
         gameObject.y = gameObject.input.dragStartY
