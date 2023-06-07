@@ -553,7 +553,9 @@ import {
   Pignite,
   Emboar,
   Wynaut,
-  Wobbuffet
+  Wobbuffet,
+  Lunatone,
+  Solrock
 } from "./colyseus-models/pokemon"
 import { MapSchema } from "@colyseus/schema"
 import { Emotion } from "../types"
@@ -1893,6 +1895,10 @@ export default class PokemonFactory {
         return new Wynaut(s, e)
       case Pkm.WOBBUFFET:
         return new Wobbuffet(s, e)
+      case Pkm.LUNATONE:
+        return new Lunatone(s, e)
+      case Pkm.SOLROCK:
+        return new Solrock(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:
