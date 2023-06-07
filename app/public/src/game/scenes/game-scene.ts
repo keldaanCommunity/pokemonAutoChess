@@ -85,7 +85,7 @@ export default class GameScene extends Scene {
   }
 
   create() {
-    this.input.mouse.disableContextMenu()
+    this.input.mouse!.disableContextMenu()
   }
 
   startGame() {
@@ -101,8 +101,8 @@ export default class GameScene extends Scene {
         24,
         1,
         1
-      )
-      this.map.createLayer("World", tileset, 0, 0).setScale(2, 2)
+      )!
+      this.map.createLayer("World", tileset, 0, 0)!.setScale(2, 2)
       this.initializeDragAndDrop()
       this.battleGroup = this.add.group()
       this.animationManager = new AnimationManager(this)
@@ -164,15 +164,15 @@ export default class GameScene extends Scene {
   }
 
   registerKeys() {
-    this.input.keyboard.on("keydown-D", () => {
+    this.input.keyboard!.on("keydown-D", () => {
       this.refreshShop()
     })
 
-    this.input.keyboard.on("keydown-F", () => {
+    this.input.keyboard!.on("keydown-F", () => {
       this.buyExperience()
     })
 
-    this.input.keyboard.on("keydown-E", () => {
+    this.input.keyboard!.on("keydown-E", () => {
       if (this.pokemonHovered) {
         this.sellPokemon(this.pokemonHovered)
       }
@@ -264,9 +264,9 @@ export default class GameScene extends Scene {
         const graphic = this.add
           .graphics()
           .fillStyle(0x61738a, 1)
-          .fillCircle(zone.x, zone.y, zone.input.hitArea.width / 4)
+          .fillCircle(zone.x, zone.y, zone.input!.hitArea.width / 4)
           .lineStyle(2, 0x000000, 1)
-          .strokeCircle(zone.x, zone.y, zone.input.hitArea.width / 4)
+          .strokeCircle(zone.x, zone.y, zone.input!.hitArea.width / 4)
         graphic.setVisible(false)
         this.graphics.push(graphic)
       }
@@ -286,17 +286,17 @@ export default class GameScene extends Scene {
       .graphics()
       .fillStyle(0x61738a, 1)
       .fillRect(
-        sellZone.x - sellZone.input.hitArea.width / 2,
-        sellZone.y - sellZone.input.hitArea.height / 2,
-        sellZone.input.hitArea.width,
-        sellZone.input.hitArea.height
+        sellZone.x - sellZone.input!.hitArea.width / 2,
+        sellZone.y - sellZone.input!.hitArea.height / 2,
+        sellZone.input!.hitArea.width,
+        sellZone.input!.hitArea.height
       )
       .lineStyle(2, 0x000000, 1)
       .strokeRect(
-        sellZone.x - sellZone.input.hitArea.width / 2,
-        sellZone.y - sellZone.input.hitArea.height / 2,
-        sellZone.input.hitArea.width,
-        sellZone.input.hitArea.height
+        sellZone.x - sellZone.input!.hitArea.width / 2,
+        sellZone.y - sellZone.input!.hitArea.height / 2,
+        sellZone.input!.hitArea.width,
+        sellZone.input!.hitArea.height
       )
     graphic.setVisible(false)
 
@@ -316,7 +316,7 @@ export default class GameScene extends Scene {
     this.dragDropText.setVisible(false)
     this.dragDropText.setOrigin(0.5)
 
-    this.input.mouse.disableContextMenu()
+    this.input.mouse!.disableContextMenu()
     this.input.on("pointerdown", (pointer) => {
       if (
         this.minigameManager &&
@@ -391,7 +391,7 @@ export default class GameScene extends Scene {
         const g = <Phaser.GameObjects.Container>gameObject
         g.x = dragX
         g.y = dragY
-        if(g && this.sellZoneGraphic?.visible === false){
+        if(g && this.pokemonDragged != null && this.sellZoneGraphic?.visible === false){
           this.drawRectangles(true)
         }
       }
