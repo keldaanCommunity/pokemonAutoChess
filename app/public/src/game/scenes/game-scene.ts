@@ -42,7 +42,8 @@ export default class GameScene extends Scene {
   unownManager?: UnownManager
   music: Phaser.Sound.WebAudioSound | undefined
   pokemonHovered: Pokemon | undefined
-  pokemonDragged: Pokemon | undefined
+  pokemonDragged: Pokemon | null = null
+  itemDragged: ItemContainer | null = null
   graphics: Phaser.GameObjects.Graphics[] = []
   dragDropText: Phaser.GameObjects.Text | undefined
   sellZoneGraphic: Phaser.GameObjects.Graphics | undefined
@@ -239,14 +240,16 @@ export default class GameScene extends Scene {
 
   resetDragState() {
     if (this.pokemonDragged) {
-      this.input.emit(
-        "dragend",
-        this.input.pointer1,
-        this.pokemonDragged,
-        false
-      )
-      this.pokemonDragged = undefined
+      this.input.emit("dragend", this.input.pointer1, this.pokemonDragged, false)
+      this.pokemonDragged = null
+    } else if(this.itemDragged) {
+      this.itemDragged.closeDetail()
+      this.itemDragged.x = this.itemDragged.input!.dragStartX
+      this.itemDragged.y = this.itemDragged.input!.dragStartY
+      this.input.emit("dragend", this.input.pointer1, this.itemDragged, false)
+      this.itemDragged = null
     }
+    this.input.setDragState(this.input.pointer1, 0)
   }
 
   initializeDragAndDrop() {
@@ -373,7 +376,8 @@ export default class GameScene extends Scene {
             )} gold`
           )
           this.drawRectangles(true)
-        } else {
+        } else if(gameObject instanceof ItemContainer) {
+          this.itemDragged = gameObject
           this.drawRectangles(false)
         }
         // this.children.bringToTop(gameObject);
@@ -436,8 +440,8 @@ export default class GameScene extends Scene {
             )
             gameObject.setPosition(x, y)
           }
-          this.pokemonDragged = undefined
-        } else if (gameObject instanceof ItemContainer) {
+          this.pokemonDragged = null
+        } else if (gameObject instanceof ItemContainer && this.itemDragged != null) {
           // Item -> Item = COMBINE
           if (dropZone instanceof ItemContainer) {
             document.getElementById("game")?.dispatchEvent(
@@ -476,6 +480,7 @@ export default class GameScene extends Scene {
             // gameObject.x = gameObject.input.dragStartX
             // gameObject.y = gameObject.input.dragStartY
           }
+          this.itemDragged = null
         }
       },
       this
@@ -483,6 +488,7 @@ export default class GameScene extends Scene {
 
     this.input.on("dragend", (pointer, gameObject, dropped) => {
       this.removeRectangles()
+      console.log("dragend", dropped)
       if (!dropped) {
         gameObject.x = gameObject.input.dragStartX
         gameObject.y = gameObject.input.dragStartY
