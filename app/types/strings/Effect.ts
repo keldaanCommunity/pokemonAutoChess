@@ -145,32 +145,32 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.VICTORY_STAR]: {
-    eng: `20% chance to ${Status.BURN}, +1 ${Stat.ATK} after every hit (Weather: Sunlight)`,
+    eng: `20% chance to ${Status.BURN}, +1 ${Stat.ATK} after every hit`,
     esp: ``,
     fra: ``
   },
   [Effect.DROUGHT]: {
-    eng: `30% chance to ${Status.BURN}, +2 ${Stat.ATK} after every hit (Weather: Sunlight)`,
+    eng: `30% chance to ${Status.BURN}, +2 ${Stat.ATK} after every hit`,
     esp: ``,
     fra: ``
   },
   [Effect.DESOLATE_LAND]: {
-    eng: `40% chance to ${Status.BURN}, +3 ${Stat.ATK} after every hit (Weather: Sunlight)`,
+    eng: `40% chance to ${Status.BURN}, +3 ${Stat.ATK} after every hit`,
     esp: ``,
     fra: ``
   },
   [Effect.RAIN_DANCE]: {
-    eng: `25% chance to dodge (Weather: Rainy)`,
+    eng: `25% chance to dodge`,
     esp: ``,
     fra: ``
   },
   [Effect.DRIZZLE]: {
-    eng: `50% chance to dodge (Weather: Rainy)`,
+    eng: `50% chance to dodge`,
     esp: ``,
     fra: ``
   },
   [Effect.PRIMORDIAL_SEA]: {
-    eng: `75% chance to dodge (Weather: Rainy)`,
+    eng: `75% chance to dodge`,
     esp: ``,
     fra: ``
   },
