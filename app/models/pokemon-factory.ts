@@ -1930,3 +1930,11 @@ export default class PokemonFactory {
     }
   }
 }
+
+export function isAdditionalPick(pkm: Pkm): boolean {
+  const pokemon = PokemonFactory.createPokemonFromName(pkm)
+  if (pokemon.types.length === 0) return false
+  return PRECOMPUTED_TYPE_POKEMONS[
+    pokemon.types[0]
+  ].additionalPokemons.includes(pkm)
+}

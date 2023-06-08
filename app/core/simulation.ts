@@ -1110,7 +1110,7 @@ export default class Simulation extends Schema implements ISimulation {
         const y = randomBetween(0, this.board.rows-1)
         //logger.debug('lightning at ' + x + ' ' + y)
         const pokemonOnCell = this.board.getValue(x, y)
-        if(pokemonOnCell){
+        if(pokemonOnCell && pokemonOnCell.types.includes(Synergy.ELECTRIC) === false){
           pokemonOnCell.handleSpecialDamage(100, this.board, AttackType.SPECIAL, null, false)
         }
         if(this.player){
