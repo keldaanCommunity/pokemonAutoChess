@@ -545,7 +545,7 @@ export const EffectDescription: {
     fra: ""
   },
   [Effect.SUN]: {
-    eng: `${Status.BURN} damage +30%\n${Status.FREEZE} duration -30%`,
+    eng: `+30% ${Status.BURN} damage\n-30% ${Status.FREEZE} duration`,
     esp: "",
     fra: ""
   },
@@ -560,7 +560,7 @@ export const EffectDescription: {
     fra: ""
   },
   [Effect.MISTY]: {
-    eng: `+10% ${Damage.SPECIAL}\n+30% ${Status.SILENCE} duration`,
+    eng: `+20% ${Damage.SPECIAL}\n+30% ${Status.SILENCE} duration`,
     esp: "",
     fra: ""
   },
@@ -570,7 +570,7 @@ export const EffectDescription: {
     fra: ""
   },
   [Effect.NIGHT]: {
-    eng: `+10% ${Stat.CRIT_CHANCE}\n+30% ${Status.SLEEP} duration`,
+    eng: `+20% ${Stat.CRIT_CHANCE}\n+30% ${Status.SLEEP} duration`,
     esp: "",
     fra: ""
   }

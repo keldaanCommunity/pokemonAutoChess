@@ -384,7 +384,7 @@ export default class Simulation extends Schema implements ISimulation {
           pokemon.addDodgeChance(pokemon.types.includes(Synergy.FLYING) ? 0.2 : 0.1)
           break
         case Effect.NIGHT:
-          pokemon.addCritChance(0.1)
+          pokemon.addCritChance(0.2)
           break
         case Effect.SNOW:
           pokemon.addAttackSpeed(-0.25)
