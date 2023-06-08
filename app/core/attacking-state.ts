@@ -140,7 +140,7 @@ export default class AttackingState extends PokemonState {
           pokemon.effects.includes(Effect.WANDERING_SPIRIT)) &&
         Math.random() > 0.5
       ) {
-        target.status.triggerSilence(3000, target, board)
+        target.status.triggerSilence(3000, target, pokemon, board)
       }
       if (
         pokemon.effects.includes(Effect.SWIFT_SWIM) ||
@@ -258,7 +258,7 @@ export default class AttackingState extends PokemonState {
       }
 
       if (target.status.spikeArmor && pokemon.range === 1) {
-        pokemon.status.triggerWound(2000, pokemon, board)
+        pokemon.status.triggerWound(2000, pokemon, target, board)
         pokemon.handleDamage({
           damage: target.def,
           board,

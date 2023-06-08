@@ -874,7 +874,7 @@ export const AbilityName: { [key in Ability]: Langage } = {
     fra: ``,
     prt: ``
   },
-  [Ability.SPLASH]: { 
+  [Ability.SPLASH]: {
     eng: `Splash`,
     esp: ``,
     fra: ``,
@@ -886,6 +886,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     fra: ``,
     prt: ``
   },
+  [Ability.COUNTER]: {
+    eng: "Counter",
+    esp: "",
+    prt: "",
+    fra: ""
+  }
 }
 
 export const AbilityDescription: { [key in Ability]: Langage } = {
@@ -1052,7 +1058,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.PROTECT]: {
-    eng: `${Status.PROTECT} the user, becoming invulnerable for [5,SP] seconds.`,
+    eng: `${Status.PROTECT} the user, becoming invulnerable for [5,SP=0.5] seconds.`,
     esp: `Hace que el pokemon sea invulnerable durante 3,5,7 segundos.`,
     fra: `Rend le pokémon invulnérable durant 3,5,7 secondes`,
     prt: ``
@@ -1448,7 +1454,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   PSYCHIC_SURGE: {
-    eng: `Increase ${Stat.AP} of all Psychic pokemons by [10,SP]%`,
+    eng: `Increase ${Stat.AP} of all Psychic pokemons by [5,SP]%, except the caster`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1586,7 +1592,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ""
   },
   [Ability.ILLUSION]: {
-    eng: `User recovers [40,80,120,SP] ${Stat.HP} points and copies the form as well as the ${Stat.ATK}, ${Stat.DEF}, ${Stat.SPE_DEF}, and ${Stat.RANGE} of the targeted Pokemon`,
+    eng: `User recovers [30,50,70,SP=0.5] ${Stat.HP} points and copies the form as well as the ${Stat.ATK}, ${Stat.DEF}, ${Stat.SPE_DEF}, and ${Stat.RANGE} of the targeted Pokemon`,
     esp: "",
     prt: "",
     fra: ""
@@ -1716,6 +1722,66 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
   },
   [Ability.MIMIC]: {
     eng: `Copies the ability of the current target`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HEX]: {
+    eng: `Deals [20,40,80,SP] ${Damage.SPECIAL} to the target. Doubles damage if target is ${Status.BURN}, ${Status.CONFUSION}, ${Status.FREEZE}, ${Status.PARALYSIS}, ${Status.POISON}, ${Status.SILENCE}, ${Status.SLEEP} or ${Status.WOUND}`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.GROWTH]: {
+    eng: `Increase body size and ${Stat.ATK} by [10,SP]. Grows twice as fast if weather is sunny`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HEAL_ORDER]: {
+    eng: `Deals [25,45,65,SP] ${Damage.SPECIAL} to adjacent enemies and heal [25,45,65,SP] to adjacent allies`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.SHELL_TRAP]: {
+    eng: `${Status.SILENCE} target for 3 seconds and removes 40 ${Stat.MANA} from target and enemies around it`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.DIG]: {
+    eng: `Digs underground and reappears next to the farthest enemy, dealing [10,20,40,SP] special damage to all enemies on the way`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.FIRE_SPIN]: {
+    eng: `Area of effect attack that deals [20,40,100,SP] ${Damage.SPECIAL} around the target and ${Status.BURN} all enemies hit for 3 seconds`,
+    esp: ``,
+    fra: ``,
+    prt: ``
+  },
+  [Ability.SEARING_SHOT]: {
+    eng: `An inferno of scarlet flames torches everything around the user. Deals [20,SP] ${Damage.SPECIAL} and ${Status.BURN} all enemies hit for 3 seconds`,
+    esp: ``,
+    fra: ``,
+    prt: ``
+  },
+  [Ability.SPLASH]: {
+    eng: `Just flops and splashes around to no effect at all...`,
+    esp: ``,
+    fra: ``,
+    prt: ``
+  },
+  [Ability.PECK]: {
+    eng: `Deals [10,20,30,SP] ${Damage.SPECIAL} to the target`,
+    esp: ``,
+    fra: ``,
+    prt: ``
+  },
+  [Ability.COUNTER]: {
+    eng: `Pokemon lashes out at adjacent enemies dealing ${Damage.SPECIAL} equal its missing ${Stat.HP} (Scale with ${Stat.AP})`,
     esp: "",
     prt: "",
     fra: ""

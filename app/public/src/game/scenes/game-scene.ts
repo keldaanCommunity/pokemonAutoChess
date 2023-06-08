@@ -386,7 +386,7 @@ export default class GameScene extends Scene {
         const g = <Phaser.GameObjects.Container>gameObject
         g.x = dragX
         g.y = dragY
-        if(g && this.sellZoneGraphic?.visible === false){
+        if(g && this.pokemonDragged != null && this.sellZoneGraphic?.visible === false){
           this.drawRectangles(true)
         }
       }

@@ -89,9 +89,7 @@ export default function GameStageInfo() {
                   src={getAvatarSrc(opponentAvatar)}
                   className="pokemon-portrait"
                 />
-                {opponentTitle && (
-                  <p className="player-title">{opponentTitle}</p>
-                )}
+                {opponentTitle && <p className="player-title">{opponentTitle}</p>}
                 <p className="player-name">{opponentName}</p>
               </div>
             </>
@@ -147,39 +145,39 @@ export function StagePath() {
   while (level < stageLevel + 5) {
     let record
     if (level < stageLevel && history) {
-      let historyIndex = level < 5 ? level - 1 : 5 + level - stageLevel
-      if (historyIndex in history) {
-        record = history.at(level < 5 ? level - 1 : level - stageLevel)
-      }
+      let historyIndex = level < 5 ? level-1 : 5 + level - stageLevel
+      if(historyIndex in history){
+        record = history.at(level < 5 ? level-1 : level - stageLevel)  
+      }      
     }
 
     if (CarouselStages.includes(level)) {
-      path.push({
+      path.push({ 
         level,
         icon: "/assets/ui/carousel.svg",
-        name: `Carousel`
+        title: `Carousel`
       })
-      if (level === stageLevel && phase === GamePhaseState.MINIGAME) {
-        currentLevelPathIndex = path.length - 1
+      if(level === stageLevel && phase === GamePhaseState.MINIGAME){
+        currentLevelPathIndex = path.length-1
       }
     }
     if (MythicalPicksStages.includes(level)) {
       path.push({
         level,
-        icon: "/assets/ui/mythical.svg",
-        name: `Mythical pick`
+        icon: "/assets/ui/mythical.svg", 
+        title: `Mythical pick` 
       })
-      if (level === stageLevel && phase === GamePhaseState.PICK) {
-        currentLevelPathIndex = path.length - 1
+      if(level === stageLevel && phase === GamePhaseState.PICK){
+        currentLevelPathIndex = path.length-1
       }
     } else if (AdditionalPicksStages.includes(level)) {
       path.push({
         level,
         icon: "/assets/ui/additional-pick.svg",
-        name: `Additional pick`
+        title: `Additional pick`
       })
-      if (level === stageLevel && phase === GamePhaseState.PICK) {
-        currentLevelPathIndex = path.length - 1
+      if(level === stageLevel && phase === GamePhaseState.PICK){
+        currentLevelPathIndex = path.length-1
       }
     }
 
@@ -188,23 +186,21 @@ export function StagePath() {
       path.push({
         level,
         icon: getAvatarSrc(neutralStage.avatar),
-        name: record?.name ?? neutralStage.name,
+        title: record?.name ?? neutralStage.name,
         result: record?.result
       })
-      if (level === stageLevel && currentLevelPathIndex === undefined) {
-        currentLevelPathIndex = path.length - 1
+      if(level === stageLevel && currentLevelPathIndex === undefined){
+        currentLevelPathIndex = path.length-1
       }
     } else {
       path.push({
         level,
-        icon: record?.avatar
-          ? getAvatarSrc(record.avatar)
-          : "/assets/ui/battle.svg",
-        name: record?.name ?? `Fight`,
+        icon: record?.avatar ? getAvatarSrc(record.avatar) : "/assets/ui/battle.svg",
+        title: record?.name ?? `Fight`,
         result: record?.result
       })
-      if (level === stageLevel && currentLevelPathIndex === undefined) {
-        currentLevelPathIndex = path.length - 1
+      if(level === stageLevel && currentLevelPathIndex === undefined){
+        currentLevelPathIndex = path.length-1
       }
     }
 
@@ -217,30 +213,29 @@ export function StagePath() {
 
   return (
     <div className="game-stage-path">
-      {path.map((step, i) => (
-        <React.Fragment key={"stage-path-" + i}>
-          <div
-            className={cc("stage-path", {
-              current: currentLevelPathIndex === i,
-              defeat: step.result === BattleResult.DEFEAT,
-              victory: step.result === BattleResult.WIN
-            })}
-            data-tip
-            data-for={"stage-path-" + i}
+      {path.map((step, i) => <React.Fragment key={"stage-path-" + i}>
+        <div
+          className={cc("stage-path", {
+            current: currentLevelPathIndex === i,
+            defeat: step.result === BattleResult.DEFEAT,
+            victory: step.result === BattleResult.WIN
+          })}
+          data-tip
+          data-for={"stage-path-" + i}          
+        >
+          <ReactTooltip
+            id={"stage-path-" + i}
+            className="customeTheme"
+            effect="solid"
+            place="bottom"
           >
-            <ReactTooltip
-              id={"stage-path-" + i}
-              className="customeTheme"
-              effect="solid"
-              place="bottom"
-            >
-              {step.name}
-            </ReactTooltip>
-            <img src={step.icon}></img>
-          </div>
-          {i < path.length - 1 && <span>―</span>}
-        </React.Fragment>
-      ))}
+            {step.title} {step.name}
+          </ReactTooltip>
+          <img src={step.icon}></img>
+        </div>
+        {i<(path.length-1) && <span>―</span>}
+      </React.Fragment>
+      )}
     </div>
   )
 }

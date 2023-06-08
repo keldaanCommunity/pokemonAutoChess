@@ -1359,6 +1359,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         player.effects.update(player.synergies, player.board)
       }
     })
+
+    this.state.stageLevel += 1
     return this.checkEndGame()
   }
 

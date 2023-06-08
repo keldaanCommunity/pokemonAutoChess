@@ -18,8 +18,7 @@ import {
 import { Ability } from "../../../../types/enum/Ability"
 import { Item } from "../../../../types/enum/Item"
 import Count from "../../../../models/colyseus-models/count"
-import { AnimationConfig } from "../../../../types/Animation"
-import { Pkm } from "../../../../types/enum/Pokemon"
+import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
 
 export default class BattleManager {
   group: GameObjects.Group

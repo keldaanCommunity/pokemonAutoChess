@@ -6544,6 +6544,52 @@ export class Seviper extends Pokemon {
   }
 }
 
+export class Lunatone extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.LUNATONE,
+      [Synergy.ROCK, Synergy.PSYCHIC],
+      Rarity.MYTHICAL,
+      Pkm.DEFAULT,
+      200,
+      15,
+      2,
+      2,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      1,
+      90,
+      Ability.ROCK_SLIDE,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
+export class Solrock extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.SOLROCK,
+      [Synergy.ROCK, Synergy.PSYCHIC],
+      Rarity.MYTHICAL,
+      Pkm.DEFAULT,
+      200,
+      15,
+      2,
+      2,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      1,
+      90,
+      Ability.ROCK_SLIDE,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
 export class Regirock extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
@@ -7057,7 +7103,7 @@ export class Kecleon extends Pokemon {
       emotion,
       false,
       false,
-      Passive.PROTEAN2,
+      Passive.PROTEAN2
     )
   }
 }
@@ -7615,13 +7661,13 @@ export class Mew extends Pokemon {
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       200,
-      20,
+      12,
       2,
       2,
       3,
       AttackSprite.PSYCHIC_RANGE,
       1,
-      50,
+      80,
       Ability.TELEPORT,
       shiny,
       emotion,
@@ -8269,6 +8315,54 @@ export class Armaldo extends Pokemon {
       2,
       100,
       Ability.ROCK_SMASH,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
+export class Wynaut extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.WYNAUT,
+      [Synergy.PSYCHIC, Synergy.BABY],
+      Rarity.COMMON,
+      Pkm.WOBBUFFET,
+      80,
+      5,
+      1,
+      1,
+      1,
+      AttackSprite.FIGHTING_MELEE,
+      1,
+      100,
+      Ability.COUNTER,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Wobbuffet extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.WOBBUFFET,
+      [Synergy.PSYCHIC],
+      Rarity.COMMON,
+      Pkm.DEFAULT,
+      200,
+      10,
+      2,
+      2,
+      1,
+      AttackSprite.ROCK_MELEE,
+      2,
+      100,
+      Ability.COUNTER,
       shiny,
       emotion,
       true,

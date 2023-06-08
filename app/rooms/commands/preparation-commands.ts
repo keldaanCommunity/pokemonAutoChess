@@ -13,6 +13,7 @@ import { pickRandomIn } from "../../utils/random"
 import { logger } from "../../utils/logger"
 import { entries, values } from "../../utils/schemas"
 import { MAX_PLAYERS_PER_LOBBY } from "../../types/Config"
+import { memoryUsage } from "node:process"
 
 export class OnJoinCommand extends Command<
   PreparationRoom,
@@ -118,12 +119,21 @@ export class OnGameStartRequestCommand extends Command<
           time: Date.now()
         })
       } else {
-        const freeMemory = os.freemem()
-        const totalMemory = os.totalmem()
+        let freeMemory = os.freemem()
+        let totalMemory = os.totalmem()
         logger.info(
-          `Memory: ${((100 * freeMemory) / totalMemory).toFixed(2)} % free (${
-            totalMemory - freeMemory
-          } / ${totalMemory})`
+          `Memory freemem/totalmem: ${(
+            (100 * freeMemory) /
+            totalMemory
+          ).toFixed(2)} % free (${totalMemory - freeMemory} / ${totalMemory})`
+        )
+        freeMemory = memoryUsage().heapUsed
+        totalMemory = memoryUsage().heapTotal
+        logger.info(
+          `Memory heapUsed/heapTotal: ${(
+            (100 * freeMemory) /
+            totalMemory
+          ).toFixed(2)} % free (${totalMemory - freeMemory} / ${totalMemory})`
         )
         if (process.env?.MODE === "dev") {
           client.send(Transfer.GAME_START_REQUEST, "ok")

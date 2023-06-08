@@ -14,14 +14,14 @@ import { IPokemonEntity, IPokemon, Emotion, AttackSprite } from "../types"
 import { AttackType, Rarity } from "../types/enum/Game"
 import { Effect } from "../types/enum/Effect"
 import { AbilityStrategy, Ability } from "../types/enum/Ability"
-import { Synergy } from "../types/enum/Synergy"
+import { Synergy, SynergyEffects } from "../types/enum/Synergy"
 import { Pkm } from "../types/enum/Pokemon"
 import { IdleState } from "./idle-state"
 import PokemonFactory from "../models/pokemon-factory"
 import { clamp, roundTo2Digits } from "../utils/number"
 import { Passive } from "../types/enum/Passive"
 import { DEFAULT_CRIT_CHANCE, DEFAULT_CRIT_DAMAGE } from "../types/Config"
-
+import { removeInArray } from "../utils/array"
 
 export default class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
@@ -193,7 +193,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       }
       if (attacker && attacker.items.has(Item.POKEMONOMICON)) {
         this.status.triggerBurn(2000, this, attacker, board)
-        this.status.triggerWound(2000, this, board)
+        this.status.triggerWound(2000, this, attacker, board)
       }
       if (this.items.has(Item.POWER_LENS) && specialDamage >= 1 && attacker) {
         attacker.handleDamage({
@@ -246,7 +246,11 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   setMana(mana: number) {
-    if (!this.status.silence && !this.status.protect && !this.status.resurecting) {
+    if (
+      !this.status.silence &&
+      !this.status.protect &&
+      !this.status.resurecting
+    ) {
       this.mana = Math.max(0, Math.min(mana, this.maxMana))
     }
   }
@@ -266,22 +270,22 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     this.dodge = Math.min(0.9, this.dodge + value)
   }
 
-  addAbilityPower(value: number, apBoost = true) {
+  addAbilityPower(value: number, apBoost = false) {
     const boost = apBoost ? (value * this.ap) / 100 : 0
     this.ap = Math.round(this.ap + Math.round(value + boost))
   }
 
-  addDefense(value: number, apBoost?: boolean) {
+  addDefense(value: number, apBoost = false) {
     const boost = apBoost ? (value * this.ap) / 100 : 0
     this.def = Math.max(0, this.def + Math.round(value + boost))
   }
 
-  addSpecialDefense(value: number, apBoost?: boolean) {
+  addSpecialDefense(value: number, apBoost = false) {
     const boost = apBoost ? (value * this.ap) / 100 : 0
     this.speDef = Math.max(0, this.speDef + Math.round(value + boost))
   }
 
-  addAttack(value: number, apBoost?: boolean) {
+  addAttack(value: number, apBoost = false) {
     const boost = apBoost ? (value * this.ap) / 100 : 0
     this.atk = Math.max(0, this.atk + Math.round(value + boost))
   }
@@ -296,7 +300,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     )
   }
 
-  addCritDamage(value: number, apBoost?: boolean) {
+  addCritDamage(value: number, apBoost = false) {
     const boost = apBoost ? (value * this.ap) / 100 : 0
     this.critDamage = Math.max(
       0,
@@ -536,11 +540,14 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  resetStats(){
-    const cloneForStatsReference = PokemonFactory.createPokemonFromName(this.name)
+  resetStats() {
+    const cloneForStatsReference = PokemonFactory.createPokemonFromName(
+      this.name
+    )
     this.life = cloneForStatsReference.hp
     this.shield = 0
     this.mana = 0
+    this.ap = 0
     this.atk = cloneForStatsReference.atk
     this.def = cloneForStatsReference.def
     this.speDef = cloneForStatsReference.speDef
@@ -549,10 +556,16 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     this.critDamage = DEFAULT_CRIT_DAMAGE
     this.count = new Count()
     this.status.clearNegativeStatus()
+    this.effects.clear()
     this.simulation.applySynergyEffects(this)
     this.simulation.applyItemsEffects(this)
     this.simulation.applyWeatherEffects(this)
-    this.status.resurection = false; // prevent reapplying max revive again
+    this.status.resurection = false // prevent reapplying max revive again
+    this.shield = 0 // prevent reapplying shield again
+    SynergyEffects[Synergy.FOSSIL].forEach((fossilResurectEffect) =>
+      removeInArray(this.effects, fossilResurectEffect)
+    ) // prevent resurecting fossils twice
+
     // does not trigger postEffects (iron defense, normal shield, rune protect, focus band, delta orb, flame orb...)
   }
 }

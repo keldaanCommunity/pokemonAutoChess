@@ -297,7 +297,9 @@ export const Mythical1Shop = new Array<Pkm>(
   Pkm.TYROGUE,
   Pkm.VIRIZION,
   Pkm.ZERAORA,
-  Pkm.SHUCKLE
+  Pkm.SHUCKLE,
+  Pkm.LUNATONE,
+  Pkm.SOLROCK
 )
 
 export const Mythical2Shop = new Array<Pkm>(
@@ -356,7 +358,7 @@ export const DEFAULT_CRIT_CHANCE = 10
 export const DEFAULT_CRIT_DAMAGE = 2
 
 export const StageDuration: Record<number | "DEFAULT", number> = {
-  0: 15,
+  1: 20,
   10: 50,
   20: 50,
   DEFAULT: 30

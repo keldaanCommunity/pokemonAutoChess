@@ -3,15 +3,14 @@ import Jimp from "jimp"
 import { XMLParser } from "fast-xml-parser"
 import fs from "fs"
 import gracefulFs from "graceful-fs"
-import { Pkm } from "../app/types/enum/Pokemon"
+import { AnimationConfig, Pkm } from "../app/types/enum/Pokemon"
 import PokemonFactory from "../app/models/pokemon-factory"
 import {
-  PokemonActionState,
   PokemonTint,
   SpriteType
 } from "../app/types/enum/Game"
 import { logger } from "../app/utils/logger"
-import { AnimationConfig, AnimationType } from "../app/types/Animation"
+import { AnimationType } from "../app/types/Animation"
 
 gracefulFs.gracefulify(fs)
 const args = process.argv.slice(2)

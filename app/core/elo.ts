@@ -27,7 +27,7 @@ export function computeElo(
 
   let meanGain = min(0)(Math.floor(average(...eloGains)))
   //logger.debug("mean gain", meanGain)
-  if (rank <= Math.ceil(players.length / 2) && meanGain < elo) {
+  if (rank <= Math.floor(players.length / 2) && meanGain < elo) {
     meanGain = elo // ensure to not lose ELO if you're on the upper part of the ranking
   }
 
