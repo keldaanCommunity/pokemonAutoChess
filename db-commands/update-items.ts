@@ -35,6 +35,14 @@ async function main() {
               logger.debug(p.name, bot.author, bot.name, item)
               p.items[j] = Item.SCOPE_LENS
               modified = true
+            } else if (item === "FOCUS_BAND") {
+              logger.debug(p.name, bot.author, bot.name, item)
+              p.items[j] = Item.GRACIDEA_FLOWER
+              modified = true
+            } else if (item === "ICY_ROCK") {
+              logger.debug(p.name, bot.author, bot.name, item)
+              p.items[j] = Item.ICE_STONE
+              modified = true
             }
           }
         })

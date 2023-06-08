@@ -7948,6 +7948,29 @@ export class Shaymin extends Pokemon {
   }
 }
 
+export class ShayminSky extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.SHAYMIN_SKY,
+      [Synergy.GRASS, Synergy.FLORA, Synergy.FLYING],
+      Rarity.MYTHICAL,
+      Pkm.DEFAULT,
+      300,
+      30,
+      5,
+      5,
+      3,
+      AttackSprite.GRASS_RANGE,
+      2,
+      100,
+      Ability.SEED_FLARE,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
 export class Cresselia extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(

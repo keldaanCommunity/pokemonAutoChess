@@ -46,14 +46,11 @@ export default class Synergies
   }
 }
 
-export function addSynergiesFromStones(pkm: Pokemon){
+export function addSynergiesFromStones(pkm: Pokemon) {
   if (pkm.items.has(Item.FIRE_STONE) && !pkm.types.includes(Synergy.FIRE)) {
     pkm.types.push(Synergy.FIRE)
   }
-  if (
-    pkm.items.has(Item.WATER_STONE) &&
-    !pkm.types.includes(Synergy.WATER)
-  ) {
+  if (pkm.items.has(Item.WATER_STONE) && !pkm.types.includes(Synergy.WATER)) {
     pkm.types.push(Synergy.WATER)
   }
   if (
@@ -65,31 +62,19 @@ export function addSynergiesFromStones(pkm: Pokemon){
   if (pkm.items.has(Item.DUSK_STONE) && !pkm.types.includes(Synergy.DARK)) {
     pkm.types.push(Synergy.DARK)
   }
-  if (
-    pkm.items.has(Item.MOON_STONE) &&
-    !pkm.types.includes(Synergy.FAIRY)
-  ) {
+  if (pkm.items.has(Item.MOON_STONE) && !pkm.types.includes(Synergy.FAIRY)) {
     pkm.types.push(Synergy.FAIRY)
   }
-  if (
-    pkm.items.has(Item.LEAF_STONE) &&
-    !pkm.types.includes(Synergy.GRASS)
-  ) {
+  if (pkm.items.has(Item.LEAF_STONE) && !pkm.types.includes(Synergy.GRASS)) {
     pkm.types.push(Synergy.GRASS)
   }
-  if (
-    pkm.items.has(Item.DAWN_STONE) &&
-    !pkm.types.includes(Synergy.PSYCHIC)
-  ) {
+  if (pkm.items.has(Item.DAWN_STONE) && !pkm.types.includes(Synergy.PSYCHIC)) {
     pkm.types.push(Synergy.PSYCHIC)
   }
-  if (pkm.items.has(Item.ICY_ROCK) && !pkm.types.includes(Synergy.ICE)) {
+  if (pkm.items.has(Item.ICE_STONE) && !pkm.types.includes(Synergy.ICE)) {
     pkm.types.push(Synergy.ICE)
   }
-  if (
-    pkm.items.has(Item.OLD_AMBER) &&
-    !pkm.types.includes(Synergy.FOSSIL)
-  ) {
+  if (pkm.items.has(Item.OLD_AMBER) && !pkm.types.includes(Synergy.FOSSIL)) {
     pkm.types.push(Synergy.FOSSIL)
   }
 }

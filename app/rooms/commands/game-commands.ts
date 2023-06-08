@@ -477,7 +477,7 @@ export class OnDragDropItemCommand extends Command<
                 player.pokemonCollection.get(PkmIndex[Pkm.ESPEON])
               )
               break
-            case Item.ICY_ROCK:
+            case Item.ICE_STONE:
               newItemPokemon = PokemonFactory.transformPokemon(
                 pokemon,
                 Pkm.GLACEON,
@@ -524,6 +524,15 @@ export class OnDragDropItemCommand extends Command<
               pokemon,
               Pkm.MEGA_RAYQUAZA,
               player.pokemonCollection.get(PkmIndex[Pkm.MEGA_RAYQUAZA])
+            )
+          }
+          break
+        case Pkm.SHAYMIN:
+          if (item == Item.GRACIDEA_FLOWER) {
+            newItemPokemon = PokemonFactory.transformPokemon(
+              pokemon,
+              Pkm.SHAYMIN_SKY,
+              player.pokemonCollection.get(PkmIndex[Pkm.SHAYMIN_SKY])
             )
           }
           break

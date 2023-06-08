@@ -556,7 +556,8 @@ import {
   Wobbuffet,
   Lunatone,
   Solrock,
-  Poliwrath
+  Poliwrath,
+  ShayminSky
 } from "./colyseus-models/pokemon"
 import { MapSchema } from "@colyseus/schema"
 import { Emotion } from "../types"
@@ -1294,6 +1295,8 @@ export default class PokemonFactory {
         return new Deoxys(s, e)
       case Pkm.SHAYMIN:
         return new Shaymin(s, e)
+      case Pkm.SHAYMIN_SKY:
+        return new ShayminSky(s, e)
       case Pkm.CRESSELIA:
         return new Cresselia(s, e)
       case Pkm.HEATRAN:
