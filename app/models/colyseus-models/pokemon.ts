@@ -6562,7 +6562,9 @@ export class Lunatone extends Pokemon {
       Ability.ROCK_SLIDE,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.NIGHT
     )
   }
 }
@@ -6585,7 +6587,9 @@ export class Solrock extends Pokemon {
       Ability.ROCK_SLIDE,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.SUN
     )
   }
 }
