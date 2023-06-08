@@ -120,6 +120,7 @@ export enum Pkm {
   POLIWAG = "poliwag",
   POLIWHIRL = "poliwhirl",
   POLITOED = "politoed",
+  POLIWRATH = "poliwrath",
   ABRA = "abra",
   KADABRA = "kadabra",
   ALAKAZAM = "alakazam",
@@ -1117,7 +1118,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.WYNAUT]: "0360",
   [Pkm.WOBBUFFET]: "0202",
   [Pkm.LUNATONE]: "0337",
-  [Pkm.SOLROCK]: "0338"
+  [Pkm.SOLROCK]: "0338",
+  [Pkm.POLIWRATH]: "0062"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1677,7 +1679,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.WYNAUT]: Pkm.WYNAUT,
   [Pkm.WOBBUFFET]: Pkm.WYNAUT,
   [Pkm.LUNATONE]: Pkm.LUNATONE,
-  [Pkm.SOLROCK]: Pkm.SOLROCK
+  [Pkm.SOLROCK]: Pkm.SOLROCK,
+  [Pkm.POLIWRATH]: Pkm.POLIWAG
 }
 
 export const AnimationConfig: {
@@ -3910,5 +3913,9 @@ export const AnimationConfig: {
   [Pkm.SOLROCK]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Rotate
+  },
+  [Pkm.POLIWRATH]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.RearUp
   }
 }

@@ -20,7 +20,7 @@ More Wounding abilities
 
 # New Pokemons:
 
-- Wynaut, Solrock, Lunatone
+- Wynaut, Solrock, Lunatone, Gorebyss, Poliwrath
 
 # Changes to Pokemon / Abilities
 
@@ -44,4 +44,4 @@ More Wounding abilities
 
 # Misc
 
--
+- New evolution mechanic for Poliwhirl/Clamperl. Evolution will depends if the pokemon is placed in the frontlane or not.

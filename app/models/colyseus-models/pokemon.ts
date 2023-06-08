@@ -2163,7 +2163,9 @@ export class Poliwag extends Pokemon {
       Ability.SOAK,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.TADPOLE
     )
   }
 }
@@ -2186,7 +2188,9 @@ export class Poliwhirl extends Pokemon {
       Ability.SOAK,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.TADPOLE
     )
   }
 }
@@ -2209,7 +2213,34 @@ export class Politoed extends Pokemon {
       Ability.SOAK,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.TADPOLE
+    )
+  }
+}
+
+export class Poliwrath extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.POLIWRATH,
+      [Synergy.WATER, Synergy.AQUATIC, Synergy.FIGHTING],
+      Rarity.COMMON,
+      Pkm.DEFAULT,
+      220,
+      18,
+      3,
+      3,
+      1,
+      AttackSprite.WATER_MELEE,
+      3,
+      100,
+      Ability.CRABHAMMER,
+      shiny,
+      emotion,
+      true,
+      false,
+      Passive.TADPOLE
     )
   }
 }
@@ -8693,7 +8724,8 @@ export class Clamperl extends Pokemon {
       shiny,
       emotion,
       false,
-      true
+      true,
+      Passive.BIVALVE
     )
   }
 }
@@ -8713,11 +8745,12 @@ export class Gorebyss extends Pokemon {
       AttackSprite.WATER_RANGE,
       2,
       80,
-      Ability.DEFAULT,
+      Ability.HYDRO_PUMP,
       shiny,
       emotion,
       true,
-      true
+      true,
+      Passive.BIVALVE
     )
   }
 }
@@ -8740,7 +8773,8 @@ export class Huntail extends Pokemon {
       shiny,
       emotion,
       true,
-      true
+      true,
+      Passive.BIVALVE
     )
   }
 }

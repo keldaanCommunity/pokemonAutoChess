@@ -555,7 +555,8 @@ import {
   Wynaut,
   Wobbuffet,
   Lunatone,
-  Solrock
+  Solrock,
+  Poliwrath
 } from "./colyseus-models/pokemon"
 import { MapSchema } from "@colyseus/schema"
 import { Emotion } from "../types"
@@ -1899,6 +1900,8 @@ export default class PokemonFactory {
         return new Lunatone(s, e)
       case Pkm.SOLROCK:
         return new Solrock(s, e)
+      case Pkm.POLIWRATH:
+        return new Poliwrath(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:
