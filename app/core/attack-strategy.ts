@@ -336,7 +336,10 @@ export class KnowledgeThiefStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    if (target.skill !== Ability.KNOWLEDGE_THIEF) {
+    if (
+      target.skill !== Ability.KNOWLEDGE_THIEF &&
+      target.skill !== Ability.MIMIC
+    ) {
       AbilityStrategy[target.skill].process(pokemon, state, board, target, crit)
     }
   }
@@ -3999,7 +4002,12 @@ export class MimicStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    AbilityStrategy[target.skill].process(pokemon, state, board, target, crit)
+    if (
+      target.skill !== Ability.KNOWLEDGE_THIEF &&
+      target.skill !== Ability.MIMIC
+    ) {
+      AbilityStrategy[target.skill].process(pokemon, state, board, target, crit)
+    }
   }
 }
 
