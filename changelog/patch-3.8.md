@@ -25,6 +25,7 @@ More Wounding abilities
 # Changes to Pokemon / Abilities
 
 - Nerf Protect: AP scaling for protect duration: 1 → 0.5
+- Nerf to Happy Hour: ~~3/6/9~~ 2/5/8
 
 # Changes to Synergies
 
