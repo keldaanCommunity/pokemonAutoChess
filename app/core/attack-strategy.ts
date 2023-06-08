@@ -414,9 +414,9 @@ export class JudgementStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target, crit)
     let synergyLevelsCount = 0
     const synergies = pokemon.simulation.player?.synergies
-    if(synergies){
-      pokemon.types.forEach(type => {
-        synergyLevelsCount += synergies.get(type) ?? 0      
+    if (synergies) {
+      pokemon.types.forEach((type) => {
+        synergyLevelsCount += synergies.get(type) ?? 0
       })
     }
     const damage = 10 * synergyLevelsCount

@@ -208,7 +208,7 @@ export default class Pokemon extends DraggableObject {
         // go back to idle anim if no more animation in queue
         if (pokemon.action !== PokemonActionState.HURT) {
           g.animationManager?.animatePokemon(this, PokemonActionState.IDLE)
-        }        
+        }
       }
     )
     this.height = this.sprite.height

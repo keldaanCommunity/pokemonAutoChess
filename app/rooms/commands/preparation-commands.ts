@@ -135,9 +135,7 @@ export class OnGameStartRequestCommand extends Command<
             totalMemory
           ).toFixed(2)} % free (${totalMemory - freeMemory} / ${totalMemory})`
         )
-        if (process.env?.MODE === "dev") {
-          client.send(Transfer.GAME_START_REQUEST, "ok")
-        } else if (freeMemory < 0.1 * totalMemory) {
+        if (freeMemory < 0.1 * totalMemory) {
           // if less than 10% free memory available, prevents starting another game to avoid out of memory crash
           this.room.broadcast(Transfer.MESSAGES, {
             name: "Server",

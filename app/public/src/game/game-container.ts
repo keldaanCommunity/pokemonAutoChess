@@ -86,7 +86,7 @@ class GameContainer {
       room: this.room,
       tilemap: this.tilemap,
       spectate: this.spectate
-    })    
+    })
   }
 
   initializeEvents() {
@@ -221,7 +221,7 @@ class GameContainer {
       ) {
         this.handleWeatherChange(player, value)
       }
-    })    
+    })
 
     player.simulation.blueTeam.onAdd((p, key) => {
       // logger.debug('add pokemon');
