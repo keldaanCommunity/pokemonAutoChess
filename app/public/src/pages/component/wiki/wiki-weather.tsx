@@ -5,6 +5,7 @@ import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import PokemonFactory, {
   isAdditionalPick
 } from "../../../../../models/pokemon-factory"
+import { Ability } from "../../../../../types/enum/Ability"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import {
   PassiveAssociatedToWeather,
@@ -103,6 +104,7 @@ function getPokemonsInfluencingWeather(weather: Weather) {
     .map((pkm) => PokemonFactory.createPokemonFromName(pkm))
     .filter(
       (pkm) =>
+        pkm.skill != Ability.DEFAULT &&
         pkm.passive != null &&
         pkm.passive === PassiveAssociatedToWeather.get(weather)
     )
