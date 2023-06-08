@@ -77,7 +77,7 @@ export function addIconsToDescription(
             className="description-icon weather"
             title={WeatherDescription[token]}
           >
-            <img src={`assets/icons/weather/${token}.svg`} />
+            <img src={`assets/icons/weather/${token.toLowerCase()}.svg`} />
             <span className="weather-label">{WeatherLabel[token]}</span>
           </span>
         )

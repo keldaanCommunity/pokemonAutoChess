@@ -4,15 +4,15 @@ import { Synergy } from "./Synergy"
 import { reverseMap } from "../../utils/map"
 
 export enum Weather {
-  NEUTRAL = "NEUTRAL",
   SUN = "SUN",
-  WINDY = "WINDY",
-  RAIN = "RAIN",
   NIGHT = "NIGHT",
-  STORM = "STORM",
+  WINDY = "WINDY",
   MISTY = "MISTY",
+  RAIN = "RAIN",  
   SNOW = "SNOW",
-  SANDSTORM = "SANDSTORM"
+  STORM = "STORM",
+  SANDSTORM = "SANDSTORM",
+  NEUTRAL = "NEUTRAL"
 }
 
 export const WeatherPassives: Map<Passive, Weather> = new Map([

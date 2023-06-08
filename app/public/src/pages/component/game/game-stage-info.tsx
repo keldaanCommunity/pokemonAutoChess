@@ -116,7 +116,7 @@ export default function GameStageInfo() {
               </span>
               <p>{addIconsToDescription(WeatherDescription[weather])}</p>
             </ReactTooltip>
-            <img src={`/assets/ui/weather/${weather.toLowerCase()}.svg`} />
+            <img src={`/assets/icons/weather/${weather.toLowerCase()}.svg`} />
           </div>
         )}
       </div>

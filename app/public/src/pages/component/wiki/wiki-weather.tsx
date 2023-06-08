@@ -1,4 +1,7 @@
-import React from "react"
+import { get } from "http"
+import React, { useState } from "react"
+import ReactTooltip from "react-tooltip"
+import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import PokemonFactory, {
   isAdditionalPick
 } from "../../../../../models/pokemon-factory"
@@ -15,20 +18,38 @@ import {
 import { getPortraitSrc } from "../../../utils"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
+import { GamePokemonDetail } from "../game/game-pokemon-detail"
 import SynergyIcon from "../icons/synergy-icon"
 
+const pokemonsByWeather: Map<Weather, Pokemon[]> = new Map()
+Object.values(Weather).forEach((weather) => {
+  pokemonsByWeather.set(weather, getPokemonsInfluencingWeather(weather))
+})
+
 export default function WikiWeather() {
+  const [hoveredPokemon, setHoveredPokemon] = useState<Pokemon>()
+  
   return (
-    <div className="wiki-weather">
-      <p>The dominant type of pokemons on the board during a battle can influence the weather. The weather has various effects on all of your team's and opponent's pokemons.</p>
-      <p>It will require at least 10 pokemons of this type on the board to change the weather. Some powerful pokemons also have the ability to change weather by their own.</p>
+    <div id="wiki-weather">
+      <div className="nes-container">
+        <p>
+          The dominant type of pokemons on the board during a battle can
+          influence the weather. The weather has various effects on all of your
+          team's and opponent's pokemons.
+        </p>
+        <p>
+          It will require at least 10 pokemons of this type on the board to
+          change the weather. Some powerful pokemons also have the ability to
+          change weather by their own.
+        </p>
+      </div>
       <ul>
         {Object.values(Weather).map((weather: Weather) => (
           <li key={weather} className="nes-container">
             <header>
               <img
                 className="weather-icon"
-                src={`/assets/ui/weather/${weather.toLowerCase()}.svg`}
+                src={`/assets/icons/weather/${weather.toLowerCase()}.svg`}
               />
               <h2>{WeatherLabel[weather]}</h2>
               <SynergyIcon type={SynergyAssociatedToWeather.get(weather)!} />
@@ -37,21 +58,23 @@ export default function WikiWeather() {
               {addIconsToDescription(WeatherDescription[weather])}
             </p>
             <ul>
-              <li></li>
-              {getPokemonsInfluencingWeather(weather).map((p) => (
+              {(pokemonsByWeather.get(weather) ?? []).map((p) => (
                 <li key={p.index}>
                   <div
                     key={p.name}
                     className={cc("pokemon-portrait", {
                       additional: isAdditionalPick(p.name)
                     })}
+                    data-tip
+                    data-for="pokemon-detail"
+                    onMouseOver={() => {
+                      setHoveredPokemon(p)
+                    }}
                   >
                     <img
                       src={getPortraitSrc(p.index)}
                       alt={p.name}
                       title={p.name}
-                      data-tip
-                      data-for="pokemon-detail"
                     />
                   </div>
                 </li>
@@ -60,6 +83,17 @@ export default function WikiWeather() {
           </li>
         ))}
       </ul>
+      {hoveredPokemon && (
+        <ReactTooltip
+          id="pokemon-detail"
+          className="customeTheme game-pokemon-detail-tooltip"
+          effect="float"
+          place="bottom"
+          offset={{ bottom: 20 }}
+        >
+          <GamePokemonDetail pokemon={hoveredPokemon} />
+        </ReactTooltip>
+      )}
     </div>
   )
 }

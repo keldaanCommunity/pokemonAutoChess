@@ -3,6 +3,14 @@
   padding: 1vw;
 }
 
+#wiki-page ul {
+  padding: 0;
+}
+
+#wiki-page li {
+  list-style: none;
+}
+
 #wiki-page > .nes-container {
   margin: 1em 0;
   color: white;
@@ -43,8 +51,7 @@
 }
 
 #wiki-page .wiki-status,
-#wiki-page .wiki-stat,
-#wiki-page .wiki-weather {
+#wiki-page .wiki-stat {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
   gap: 1em;
@@ -82,42 +89,53 @@
   padding: 1em;
 }
 
-#wiki-page .wiki-tutorials ul,
-#wiki-page .wiki-weather ul {
+#wiki-page .wiki-tutorials ul {
   display: flex;
   flex-wrap: wrap;
   gap: 1em;
   padding: 0;
 }
 
-#wiki-page .wiki-tutorials li,
-#wiki-page .wiki-weather li {
-  list-style: none;
+#wiki-weather > ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
 }
 
-#wiki-page .wiki-weather .nes-container {
-  padding: 1em;
+#wiki-weather .nes-container {
+  padding: 0.5em;
+  margin: 0.5em;
+}
+
+#wiki-weather > ul > .nes-container {
+  padding: 0.5em 1em 0;
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 0.5em;
 }
 
-#wiki-page .wiki-weather .nes-container header {
+#wiki-weather .nes-container header {
   display: flex;
   align-items: center;
   gap: 0.5em;
 }
 
-#wiki-page .wiki-weather .nes-container h2 {
+#wiki-weather .nes-container h2 {
   flex: 1;
   margin: 0;
 }
 
-#wiki-page .wiki-weather .nes-container header .weather-icon {
+#wiki-weather .nes-container header .weather-icon {
   height: 40px;
 }
 
-#wiki-page .wiki-weather .nes-container p {
+#wiki-weather .nes-container p {
   margin: 0;
   white-space: pre-line;
+}
+
+#wiki-weather .nes-container ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  padding: 0;
 }

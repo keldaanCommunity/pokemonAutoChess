@@ -20,7 +20,7 @@ export const WeatherLabel: {
 export const WeatherDescription: {
   [key in Weather]: string
 } = {
-  [Weather.NEUTRAL]: ``,
+  [Weather.NEUTRAL]: `Default weather. No effects.`,
   [Weather.SUN]: `${Status.BURN} damage +30%\n${Status.FREEZE} duration -30%`,
   [Weather.WINDY]: `+10% dodge chance (+20% if ${Synergy.FLYING})`,
   [Weather.RAIN]: `+3 ${Stat.MANA} per second\n-30% ${Status.BURN} and ${Status.POISON} damage`,
