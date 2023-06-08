@@ -38,7 +38,7 @@ export default function WikiWeather() {
           team's and opponent's pokemons.
         </p>
         <p>
-          It will require at least 10 pokemons of this type on the board to
+          It will require at least 8 pokemons of this type on the board to
           change the weather. Some powerful pokemons also have the ability to
           change weather by their own.
         </p>

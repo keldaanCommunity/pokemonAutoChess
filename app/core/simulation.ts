@@ -1055,8 +1055,9 @@ export default class Simulation extends Schema implements ISimulation {
       })
     })
 
+    const MIN_THRESHOLD = 8
     const entries = [...countPerWeather.entries()].sort((a, b) => b[1] - a[1])
-    if (entries.length === 0 || entries[0][1] < 10) return Weather.NEUTRAL
+    if (entries.length === 0 || entries[0][1] < MIN_THRESHOLD) return Weather.NEUTRAL
     if (entries.length >= 2 && entries[0][1] === entries[1][1]) { return Weather.NEUTRAL }
     return entries[0][0]
   }
