@@ -1259,7 +1259,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   stopFightingPhase() {
     const isPVE = this.checkForPVE()
 
-    this.state.stageLevel += 1
     this.computeAchievements()
     this.computeStreak()
     this.computeLife()
