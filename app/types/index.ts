@@ -49,6 +49,7 @@ export const USERNAME_REGEXP =
   /^(?=.{4,20}$)(?:[\u0021-\uFFFF]+(?:(?:\.|-|_)[\u0021-\uFFFF])*)+$/
 
 export type NonFunctionPropNames<T> = {
+  // eslint-disable-next-line @typescript-eslint/ban-types
   [K in keyof T]: T[K] extends Function ? never : K
 }[keyof T]
 

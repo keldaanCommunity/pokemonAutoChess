@@ -55,7 +55,7 @@ export class OnShopCommand extends Command<
       const player = this.state.players.get(id)
       if (player && player.shop[index]) {
         const name = player.shop[index]
-        let pokemon = PokemonFactory.createPokemonFromName(
+        const pokemon = PokemonFactory.createPokemonFromName(
           name,
           player.pokemonCollection.get(PkmIndex[name])
         )
@@ -423,7 +423,8 @@ export class OnDragDropItemCommand extends Command<
 
       // SPECIAL CASES: create a new pokemon on item equip
       let newItemPokemon: Pokemon | undefined = undefined
-      let equipAfterTransform = true
+      const equipAfterTransform = true
+      let evol = Pkm.HITMONTOP
 
       switch (pokemon.name) {
         case Pkm.EEVEE:
@@ -477,7 +478,7 @@ export class OnDragDropItemCommand extends Command<
                 player.pokemonCollection.get(PkmIndex[Pkm.ESPEON])
               )
               break
-            case Item.ICY_ROCK:
+            case Item.ICE_STONE:
               newItemPokemon = PokemonFactory.transformPokemon(
                 pokemon,
                 Pkm.GLACEON,
@@ -527,8 +528,16 @@ export class OnDragDropItemCommand extends Command<
             )
           }
           break
+        case Pkm.SHAYMIN:
+          if (item == Item.GRACIDEA_FLOWER) {
+            newItemPokemon = PokemonFactory.transformPokemon(
+              pokemon,
+              Pkm.SHAYMIN_SKY,
+              player.pokemonCollection.get(PkmIndex[Pkm.SHAYMIN_SKY])
+            )
+          }
+          break
         case Pkm.TYROGUE:
-          let evol = Pkm.HITMONTOP
           if (
             item === Item.CHARCOAL ||
             item === Item.MAGNET ||
@@ -955,7 +964,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
       setTimeout(() => {
         // dispose the room automatically after 30 seconds
         this.room.broadcast(Transfer.GAME_END)
-        this.room.disconnect();
+        this.room.disconnect()
       }, 30 * 1000)
     }
     return commands
@@ -1288,7 +1297,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         }
         if (isPVE && player.getLastBattleResult() == BattleResult.WIN) {
           player.items.add(ItemFactory.createBasicRandomItem())
-          if(this.state.shinyEncounter){
+          if (this.state.shinyEncounter) {
             // give a second item if shiny PVE round
             player.items.add(ItemFactory.createBasicRandomItem())
           }
@@ -1327,8 +1336,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
             pokemon.evolutionTimer -= 1
 
             if (pokemon.evolutionTimer === 0) {
-              let pokemonEvolved
-              pokemonEvolved = PokemonFactory.createPokemonFromName(
+              const pokemonEvolved = PokemonFactory.createPokemonFromName(
                 pokemon.evolution,
                 player.pokemonCollection.get(PkmIndex[pokemon.evolution])
               )
@@ -1376,13 +1384,13 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
 
   initializeFightingPhase() {
     this.state.phase = GamePhaseState.FIGHT
-    this.state.time = FIGHTING_PHASE_DURATION    
+    this.state.time = FIGHTING_PHASE_DURATION
     this.room.setMetadata({ stageLevel: this.state.stageLevel })
     updateLobby(this.room)
     this.state.botManager.updateBots()
 
     const stageIndex = this.getPVEIndex(this.state.stageLevel)
-    this.state.shinyEncounter = (this.state.stageLevel === 10 && chance(1/20))
+    this.state.shinyEncounter = this.state.stageLevel === 10 && chance(1 / 20)
 
     this.state.players.forEach((player: Player, key: string) => {
       if (player.alive) {

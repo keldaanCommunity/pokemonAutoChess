@@ -10,6 +10,15 @@
 ![wynaut](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0337/Normal.png)
 ![wynaut](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0338/Normal.png)
 
+## Bringing back the old ones
+
+![wynaut](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0368/Normal.png)
+![wynaut](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0062/Normal.png)
+
+## The Gracidea Flower
+
+![wynaut](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0492/0001/Normal.png)
+
 # Patch 3.7 - Dancefloor
 
 Release : 05/06/2023

@@ -5,8 +5,7 @@ import { Weather } from "../enum/Weather"
 
 export const PassiveDescription: { [key in Passive]: string } = {
   [Passive.NONE]: "No passive",
-  [Passive.TYROGUE]:
-    "Will choose a combat discipline based on the first item given",
+  [Passive.TYROGUE]: `Will choose a combat discipline based on the first item given`,
   [Passive.PROTEAN2]: `The pokemon acquires the typing of the 2 highest synergies on the team`,
   [Passive.PROTEAN3]: `The pokemon acquires the typing of the 3 highest synergies on the team`,
   [Passive.CASTFORM]: `Castform changes form depending on the weather`,
@@ -23,6 +22,8 @@ export const PassiveDescription: { [key in Passive]: string } = {
   [Passive.EGG]: `You can feel something moving inside.`,
   [Passive.HATCH]: `Hatched pokemons evolve automatically after 4 stages`,
   [Passive.SYNCHRO]: `If the pokemon is affected by ${Status.POISON}, ${Status.BURN}, ${Status.WOUND} or ${Status.SILENCE}, the enemy caster will suffer the same negative status`,
+  [Passive.TADPOLE]: `Poliwhirl will evolve into Poliwrath if placed on the frontlane, Politoed otherwise.`,
+  [Passive.BIVALVE]: `Clamperl will evolve into Huntail if placed on the frontlane, Gorebyss otherwise.`,
   [Passive.SUN]: `Change weather to ${Weather.SUN}`,
   [Passive.RAIN]: `Change weather to ${Weather.RAIN}`,
   [Passive.SANDSTORM]: `Change weather to ${Weather.SANDSTORM}`,

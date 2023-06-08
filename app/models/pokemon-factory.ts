@@ -555,7 +555,9 @@ import {
   Wynaut,
   Wobbuffet,
   Lunatone,
-  Solrock
+  Solrock,
+  Poliwrath,
+  ShayminSky
 } from "./colyseus-models/pokemon"
 import { MapSchema } from "@colyseus/schema"
 import { Emotion } from "../types"
@@ -1293,6 +1295,8 @@ export default class PokemonFactory {
         return new Deoxys(s, e)
       case Pkm.SHAYMIN:
         return new Shaymin(s, e)
+      case Pkm.SHAYMIN_SKY:
+        return new ShayminSky(s, e)
       case Pkm.CRESSELIA:
         return new Cresselia(s, e)
       case Pkm.HEATRAN:
@@ -1899,6 +1903,8 @@ export default class PokemonFactory {
         return new Lunatone(s, e)
       case Pkm.SOLROCK:
         return new Solrock(s, e)
+      case Pkm.POLIWRATH:
+        return new Poliwrath(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:
