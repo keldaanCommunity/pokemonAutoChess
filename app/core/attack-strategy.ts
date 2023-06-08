@@ -1,6 +1,7 @@
 import { Item } from "../types/enum/Item"
 import { Effect } from "../types/enum/Effect"
-import { AttackType, Weather, Rarity } from "../types/enum/Game"
+import { AttackType, Rarity } from "../types/enum/Game"
+import { Weather } from "../types/enum/Weather"
 import Board from "./board"
 import PokemonEntity from "./pokemon-entity"
 import PokemonState from "./pokemon-state"

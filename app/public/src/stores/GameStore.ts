@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { GamePhaseState, Weather } from "../../../types/enum/Game"
+import { GamePhaseState } from "../../../types/enum/Game"
+import { Weather } from "../../../types/enum/Weather"
 import { IDps, IDpsHeal, IPlayer } from "../../../types"
 import { ArraySchema, MapSchema } from "@colyseus/schema"
 import ExperienceManager from "../../../models/colyseus-models/experience-manager"
@@ -124,6 +125,9 @@ export const gameSlice = createSlice({
     },
     setMapName: (state, action: PayloadAction<string>) => {
       state.mapName = action.payload
+    },
+    setWeather: (state, action: PayloadAction<Weather>) => {
+      state.weather = action.payload
     },
     setNoELO: (state, action: PayloadAction<boolean>) => {
       state.noElo = action.payload
@@ -484,6 +488,7 @@ export const {
   setPhase,
   setStageLevel,
   setMapName,
+  setWeather,
   setNoELO,
   addPlayer,
   setExperienceManager,

@@ -6,7 +6,8 @@ import PokemonFactory from "../models/pokemon-factory"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { Item } from "../types/enum/Item"
 import { Effect } from "../types/enum/Effect"
-import { Weather, PokemonActionState, Stat, Team } from "../types/enum/Game"
+import { PokemonActionState, Stat, Team } from "../types/enum/Game"
+import { Weather, WeatherAssociatedToSynergy, WeatherPassives } from "../types/enum/Weather"
 import Dps from "./dps"
 import DpsHeal from "./dps-heal"
 import ItemFactory from "../models/item-factory"
@@ -1014,9 +1015,29 @@ export default class Simulation extends Schema implements ISimulation {
     })
   }
 
-  getWeather(player: IPlayer, opponent: IPlayer) {
-    //TODO
-    return Weather.NEUTRAL
+  getWeather(playerBoard: MapSchema<Pokemon, string>, opponentBoard: MapSchema<Pokemon, string>) {
+    const countPerWeather = new Map<Weather, number>()
+    ;[playerBoard, opponentBoard].forEach((board) => {
+      board.forEach((pkm) => {
+        if (pkm.positionY != 0) {
+          if(WeatherPassives.has(pkm.passive)){
+            const weather = WeatherPassives.get(pkm.passive)!
+            countPerWeather.set(weather, (countPerWeather.get(weather) ?? 0) + 100)
+          }
+          pkm.types.forEach((type) => {
+            if(WeatherAssociatedToSynergy.has(type)){
+              const weather = WeatherAssociatedToSynergy.get(type)!
+              countPerWeather.set(weather, (countPerWeather.get(weather) ?? 0) + 1)
+            }
+          })
+        }
+      })
+    })
+
+    const entries = [...countPerWeather.entries()].sort((a, b) => b[1] - a[1])
+    if (entries.length === 0 || entries[0][1] < 10) return Weather.NEUTRAL
+    if (entries.length >= 2 && entries[0][1] === entries[1][1]) { return Weather.NEUTRAL }
+    return entries[0][0]
   }
 
   update(dt: number) {

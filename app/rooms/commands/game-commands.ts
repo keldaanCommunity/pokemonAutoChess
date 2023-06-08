@@ -12,7 +12,8 @@ import {
   MAX_PLAYERS_PER_LOBBY
 } from "../../types/Config"
 import { Item, BasicItems } from "../../types/enum/Item"
-import { BattleResult, Weather } from "../../types/enum/Game"
+import { BattleResult } from "../../types/enum/Game"
+import { Weather } from "../../types/enum/Weather"
 import Player from "../../models/colyseus-models/player"
 import PokemonFactory from "../../models/pokemon-factory"
 import ItemFactory from "../../models/item-factory"
@@ -1388,12 +1389,15 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
           player.opponentName = NeutralStage[stageIndex].name
           player.opponentAvatar = NeutralStage[stageIndex].avatar
           player.opponentTitle = "Wild"
+          const pveBoard = PokemonFactory.getNeutralPokemonsByLevelStage(
+            this.state.stageLevel,
+            this.state.shinyEncounter
+          )
+          const weather = player.simulation.getWeather(player.board, pveBoard)
+          this.state.weather = weather
           player.simulation.initialize(
             player.board,
-            PokemonFactory.getNeutralPokemonsByLevelStage(
-              this.state.stageLevel,
-              this.state.shinyEncounter
-            ),
+            pveBoard,
             player,
             null,
             this.state.stageLevel,
@@ -1404,7 +1408,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
           if (opponentId) {
             const opponent = this.state.players.get(opponentId)
             if (opponent) {
-              const weather = player.simulation.getWeather(player, opponent)
+              const weather = player.simulation.getWeather(player.board, opponent.board)
+              this.state.weather = weather
               player.simulation.initialize(
                 player.board,
                 opponent.board,

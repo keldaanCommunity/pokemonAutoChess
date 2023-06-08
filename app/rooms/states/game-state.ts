@@ -5,7 +5,8 @@ import Shop from "../../models/shop"
 import Design, { DesignTiled } from "../../core/design"
 import BotManager from "../../core/bot-manager"
 import { DungeonData, Dungeon, StageDuration } from "../../types/Config"
-import { GamePhaseState, Weather } from "../../types/enum/Game"
+import { GamePhaseState, } from "../../types/enum/Game"
+import { Weather } from "../../types/enum/Weather"
 import {
   Schema,
   MapSchema,

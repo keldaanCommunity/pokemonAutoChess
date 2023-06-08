@@ -70,31 +70,19 @@ export enum SpriteType {
   SHADOW = "Shadow"
 }
 
-export enum Weather {
-  NEUTRAL = "NEUTRAL",
-  SUN = "SUN",
-  WINDY = "WINDY",
-  RAIN = "RAIN",
-  NIGHT = "NIGHT",
-  STORM = "STORM",
-  MISTY = "MISTY",
-  SNOW = "SNOW",
-  SANDSTORM = "SANDSTORM"
-}
-
 export enum Stat {
-  ATK = "atk",
-  ATK_SPEED = "speed",
-  DEF = "def",
-  SPE_DEF = "speDef",
-  HP = "hp",
-  RANGE = "range",
-  MANA = "mana",
-  MAX_MANA = "maxMana",
-  CRIT_CHANCE = "critChance",
-  CRIT_DAMAGE = "critDamage",
-  AP = "ap",
-  SHIELD = "shield"
+  ATK = "ATK",
+  ATK_SPEED = "ATK_SPEED",
+  DEF = "DEF",
+  SPE_DEF = "SPE_DEF",
+  HP = "HP",
+  RANGE = "RANGE",
+  MANA = "MANA",
+  MAX_MANA = "MAX_MANA",
+  CRIT_CHANCE = "CRIT_CHANCE",
+  CRIT_DAMAGE = "CRIT_DAMAGE",
+  AP = "AP",
+  SHIELD = "SHIELD"
 }
 
 export enum Damage {

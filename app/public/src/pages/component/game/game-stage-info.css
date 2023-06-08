@@ -108,3 +108,12 @@
   height: 1.5em;
   width: 1.5em;
 }
+
+#game-stage-info .weather-information > img {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+#game-stage-info .weather-information p {
+  white-space: pre-line;
+}

@@ -1,6 +1,7 @@
 import { Stat } from "../enum/Game";
 import { Passive } from "../enum/Passive";
 import { Status } from "../enum/Status"
+import { Weather } from "../enum/Weather";
 
 export const PassiveDescription: { [key in Passive]: string } = {
     [Passive.NONE]: "No passive",
@@ -21,4 +22,12 @@ export const PassiveDescription: { [key in Passive]: string } = {
     [Passive.EGG]: `You can feel something moving inside.`,
     [Passive.HATCH]: `Hatched pokemons evolve automatically after 4 stages`,
     [Passive.SYNCHRO]: `If the pokemon is affected by ${Status.POISON}, ${Status.BURN}, ${Status.WOUND} or ${Status.SILENCE}, the enemy team will suffer the same negative status`,
+    [Passive.SUN]: `Change weather to ${Weather.SUN}`,
+    [Passive.RAIN]: `Change weather to ${Weather.RAIN}`,
+    [Passive.SANDSTORM]: `Change weather to ${Weather.SANDSTORM}`,
+    [Passive.MISTY]: `Change weather to ${Weather.MISTY}`,
+    [Passive.SNOW]: `Change weather to ${Weather.SNOW}`,
+    [Passive.STORM]: `Change weather to ${Weather.STORM}`,
+    [Passive.NIGHT]: `Change weather to ${Weather.NIGHT}`,
+    [Passive.WINDY]: `Change weather to ${Weather.WINDY}`
 }

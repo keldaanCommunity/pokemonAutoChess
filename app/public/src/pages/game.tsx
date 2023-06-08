@@ -12,6 +12,7 @@ import {
   setInterest,
   setItemsProposition,
   setMapName,
+  setWeather,
   setMoney,
   setNoELO,
   setPhase,
@@ -82,6 +83,7 @@ import GameScene from "../game/scenes/game-scene"
 import { toast } from "react-toastify"
 import { logger } from "../../../utils/logger"
 import { RequiredStageLevelForXpElligibility } from "../../../types/Config"
+import { Weather } from "../../../types/enum/Weather"
 
 let gameContainer: GameContainer
 
@@ -307,6 +309,10 @@ export default function Game() {
 
       room.state.listen("mapName", (value, previousValue) => {
         dispatch(setMapName(value))
+      })
+
+      room.state.listen("weather", (value, previousValue) => {
+        dispatch(setWeather(value))
       })
 
       room.state.listen("noElo", (value, previousValue) => {
@@ -542,6 +548,17 @@ export default function Game() {
         })
         player.simulation.redHealDpsMeter.onRemove((dps, key) => {
           dispatch(removeRedHealDpsMeter(player.id))
+        })
+
+        let m=0;
+        const Weathers = Object.values(Weather)
+        document.addEventListener("keydown", (event) => {
+          if(event.key == "m") {
+            const w = Weathers[m++%Weathers.length]
+            console.log(`Weather: ${w}`)
+            dispatch(setWeather(w))
+            getGameContainer().handleWeatherChange(player, w)
+          }
         })
       })
 

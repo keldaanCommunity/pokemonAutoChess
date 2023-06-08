@@ -1,7 +1,7 @@
 import Synergies from "./colyseus-models/synergies"
 import { Effect } from "../types/enum/Effect"
 import { Synergy, SynergyEffects } from "../types/enum/Synergy"
-import { Weather } from "../types/enum/Game"
+import { Weather } from "../types/enum/Weather"
 import { TypeTrigger } from "../types/Config"
 import { MapSchema } from "@colyseus/schema"
 import { Pokemon } from "../models/colyseus-models/pokemon"

@@ -28,7 +28,8 @@ import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
 import { getPortraitSrc } from "../utils"
 import { IPokemonRecord } from "../../../models/colyseus-models/game-record"
 import { Synergy } from "../../../types/enum/Synergy"
-import { AttackType, Weather, HealType } from "../../../types/enum/Game"
+import { AttackType, HealType } from "../../../types/enum/Game"
+import { Weather } from "../../../types/enum/Weather"
 import store from "../stores"
 import { logger } from "../../../utils/logger"
 import { PokemonAvatar } from "../../../models/colyseus-models/pokemon-avatar"
@@ -148,17 +149,6 @@ class GameContainer {
         // logger.debug('initializePlayer', this.player, this.tilemap);
         this.initializeGame()
       }
-
-      let m=0;
-      const Weathers = Object.values(Weather)
-      document.addEventListener("keydown", (event) => {
-        if(event.key == "m") {
-          const w = Weathers[m++%Weathers.length]
-          console.log(`Weather: ${w}`)
-          this.handleWeatherChange(player, w)
-        }
-      })
-
     } else if (this.spectate && this.tilemap) {
       this.initializeGame()
     }

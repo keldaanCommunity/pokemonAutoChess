@@ -16,5 +16,13 @@ export enum Passive {
     DITTO = "DITTO",
     EGG = "EGG",
     HATCH = "HATCH",
-    SYNCHRO = "SYNCHRO"
+    SYNCHRO = "SYNCHRO",
+    SUN = "SUN",
+    RAIN = "RAIN",
+    SANDSTORM = "SANDSTORM",
+    MISTY = "MISTY",
+    SNOW = "SNOW",
+    STORM = "STORM",
+    NIGHT = "NIGHT",
+    WINDY = "WINDY",
 }
