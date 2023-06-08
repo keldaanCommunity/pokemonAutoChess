@@ -21,5 +21,9 @@ export const PassiveDescription: { [key in Passive]: string } = {
   [Passive.DITTO]: `Ditto can't fight, but it can transform to create a copy of the basic form of one of your pokemons you drop it over (except Mythical and Hatch).`,
   [Passive.EGG]: `You can feel something moving inside.`,
   [Passive.HATCH]: `Hatched pokemons evolve automatically after 4 stages`,
-  [Passive.SYNCHRO]: `If the pokemon is affected by ${Status.POISON}, ${Status.BURN}, ${Status.WOUND} or ${Status.SILENCE}, the enemy caster will suffer the same negative status`
+  [Passive.SYNCHRO]: `If the pokemon is affected by ${Status.POISON}, ${Status.BURN}, ${Status.WOUND} or ${Status.SILENCE}, the enemy caster will suffer the same negative status`,
+  [Passive.TADPOLE]:
+    "Poliwhirl will evolve into Poliwrath if placed on the frontlane, Politoed otherwise.",
+  [Passive.BIVALVE]:
+    "Clamperl will evolve into Huntail if placed on the frontlane, Gorebyss otherwise."
 }

@@ -22,10 +22,7 @@ import {
   OnDragDropCombineCommand,
   OnPokemonPropositionCommand
 } from "./commands/game-commands"
-import {
-  ExpPlace,
-  RequiredStageLevelForXpElligibility
-} from "../types/Config"
+import { ExpPlace, RequiredStageLevelForXpElligibility } from "../types/Config"
 import { Item, BasicItems } from "../types/enum/Item"
 import PokemonFactory from "../models/pokemon-factory"
 import EloRank from "elo-rank"
@@ -42,7 +39,7 @@ import {
   IPokemon,
   Transfer
 } from "../types"
-import{ TitleName } from "../types/strings/Title"
+import { TitleName } from "../types/strings/Title"
 import { Pkm, PkmFamily, PkmIndex } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { Pokemon } from "../models/colyseus-models/pokemon"
@@ -355,9 +352,9 @@ export default class GameRoom extends Room<GameState> {
         if (player) {
           player.loadingProgress = 100
         }
-        if(this.state.gameLoaded){
+        if (this.state.gameLoaded) {
           // already started, presumably a user refreshed page and wants to reconnect to game
-          client.send(Transfer.LOADING_COMPLETE) 
+          client.send(Transfer.LOADING_COMPLETE)
         } else if (
           Array.from(this.state.players.values()).every(
             (player) => player.loadingProgress === 100
@@ -459,20 +456,31 @@ export default class GameRoom extends Room<GameState> {
     const bots: Player[] = []
 
     this.state.players.forEach((player) => {
-      if (player.isBot) { bots.push(player) }
-      else { humans.push(player) } 
+      if (player.isBot) {
+        bots.push(player)
+      } else {
+        humans.push(player)
+      }
     })
 
-    const elligibleToXP = this.state.players.size >= 2 && this.state.stageLevel >= RequiredStageLevelForXpElligibility
-    const elligibleToELO = elligibleToXP && !this.state.noElo && humans.length >= 2
+    const elligibleToXP =
+      this.state.players.size >= 2 &&
+      this.state.stageLevel >= RequiredStageLevelForXpElligibility
+    const elligibleToELO =
+      elligibleToXP && !this.state.noElo && humans.length >= 2
 
     if (elligibleToXP) {
       bots.forEach((player) => {
         BOT.find({ id: player.id }, (err, results) => {
-          if(err != null) logger.error(err)
+          if (err != null) logger.error(err)
           else if (results) {
             results.forEach((bot) => {
-              bot.elo = computeElo(this.transformToSimplePlayer(player), player.rank, player.elo, [...humans, ...bots].map(p => this.transformToSimplePlayer(p)))
+              bot.elo = computeElo(
+                this.transformToSimplePlayer(player),
+                player.rank,
+                player.elo,
+                [...humans, ...bots].map((p) => this.transformToSimplePlayer(p))
+              )
               bot.save()
             })
           }
@@ -494,7 +502,9 @@ export default class GameRoom extends Room<GameState> {
         }
 
         UserMetadata.findOne({ uid: player.id }, (err: any, usr: any) => {
-          if (err) { return logger.error(err) }
+          if (err) {
+            return logger.error(err)
+          }
           const expThreshold = 1000
           if (usr.exp + exp >= expThreshold) {
             usr.level += 1
@@ -536,7 +546,12 @@ export default class GameRoom extends Room<GameState> {
           }
 
           if (usr.elo && elligibleToELO) {
-            const elo = computeElo(this.transformToSimplePlayer(player), rank, usr.elo, humans.map(p => this.transformToSimplePlayer(p)))
+            const elo = computeElo(
+              this.transformToSimplePlayer(player),
+              rank,
+              usr.elo,
+              humans.map((p) => this.transformToSimplePlayer(p))
+            )
             if (elo) {
               if (elo > 1100) {
                 player.titles.add(Title.GYM_TRAINER)
@@ -586,7 +601,6 @@ export default class GameRoom extends Room<GameState> {
           //logger.debug(usr);
           //usr.markModified('metadata');
           usr.save()
-        
         })
       })
     }
@@ -610,7 +624,7 @@ export default class GameRoom extends Room<GameState> {
       title: player.title,
       role: player.role
     }
-    
+
     player.synergies.forEach((v, k) => {
       simplePlayer.synergies.push({ name: k as Synergy, value: v })
     })
@@ -765,7 +779,7 @@ export default class GameRoom extends Room<GameState> {
         (pkm) => pkm.index === pokemon.index
       ).length
 
-      const pokemonEvolutionName = pokemon.evolution
+      let pokemonEvolutionName = pokemon.evolution
 
       if (
         pokemonEvolutionName !== Pkm.DEFAULT &&
@@ -773,6 +787,34 @@ export default class GameRoom extends Room<GameState> {
         count >= 3
       ) {
         let coord: { x: number; y: number } | undefined
+
+        if (pokemon.name === Pkm.POLIWHIRL) {
+          if (
+            Math.max(
+              ...[...player.board.values()]
+                .filter((pkm) => pkm.index === pokemon.index)
+                .map((v) => v.positionY)
+            ) === 3
+          ) {
+            pokemonEvolutionName = Pkm.POLIWRATH
+          } else {
+            pokemonEvolutionName = Pkm.POLITOED
+          }
+        }
+
+        if (pokemon.name === Pkm.CLAMPERL) {
+          if (
+            Math.max(
+              ...[...player.board.values()]
+                .filter((pkm) => pkm.index === pokemon.index)
+                .map((v) => v.positionY)
+            ) === 3
+          ) {
+            pokemonEvolutionName = Pkm.HUNTAIL
+          } else {
+            pokemonEvolutionName = Pkm.GOREBYSS
+          }
+        }
 
         player.board.forEach((pkm, id) => {
           if (pkm.index == pokemon.index) {
