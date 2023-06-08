@@ -441,7 +441,7 @@ export default class Simulation extends Schema implements ISimulation {
           })
         }
 
-        if (pokemon.items.has(Item.FOCUS_BAND)) {
+        if (pokemon.items.has(Item.GRACIDEA_FLOWER)) {
           ;[-1, 0, 1].forEach((offset) => {
             const value = this.board.getValue(
               pokemon.positionX + offset,
