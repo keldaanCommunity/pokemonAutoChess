@@ -1280,7 +1280,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.HAPPY_HOUR]: {
-    eng: `Buff all ally ${Stat.ATK} by [3,6,9,SP] points`,
+    eng: `Buff all ally ${Stat.ATK} by [2,5,8,SP] points`,
     esp: `Pulir todos los ataques de los aliados por [3,6,9,SP] puntos.`,
     fra: `Augmente l attaque de toute l équipe de [3,6,9,SP] points.`,
     prt: ``

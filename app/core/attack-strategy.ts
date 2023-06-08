@@ -3283,13 +3283,13 @@ export class HappyHourStrategy extends AttackStrategy {
     let buff = 0
     switch (pokemon.stars) {
       case 1:
-        buff = 3
+        buff = 2
         break
       case 2:
-        buff = 6
+        buff = 5
         break
       case 3:
-        buff = 9
+        buff = 8
         break
       default:
         break
