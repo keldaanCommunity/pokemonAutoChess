@@ -95,3 +95,7 @@ export enum Team {
   BLUE_TEAM,
   RED_TEAM
 }
+
+export enum BoardEvent {
+  LIGHTNING = "LIGHTNING",
+}

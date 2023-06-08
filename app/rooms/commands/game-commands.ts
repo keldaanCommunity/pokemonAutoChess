@@ -1401,7 +1401,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
             player,
             null,
             this.state.stageLevel,
-            Weather.NEUTRAL
+            weather
           )
         } else {
           const opponentId = this.room.computeRandomOpponent(key)

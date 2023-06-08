@@ -1,3 +1,4 @@
+import { Effect } from "./Effect";
 import { Passive } from "./Passive"
 import { Synergy } from "./Synergy"
 
@@ -39,4 +40,15 @@ export const WeatherAssociatedToSynergy: Map<Synergy, Weather> = new Map([
 export const SynergyAssociatedToWeather = new Map(
   Array.from(WeatherAssociatedToSynergy.entries()).map(([k, v]) => [v, k])
 );
+
+export const WeatherEffects: Map<Weather, Effect> = new Map([
+  [Weather.SUN, Effect.SUN],
+  [Weather.RAIN, Effect.RAIN],
+  [Weather.SANDSTORM, Effect.SANDSTORM],
+  [Weather.MISTY, Effect.MISTY],
+  [Weather.SNOW, Effect.SNOW],
+  [Weather.STORM, Effect.STORM],
+  [Weather.NIGHT, Effect.NIGHT],
+  [Weather.WINDY, Effect.WINDY]
+])
   

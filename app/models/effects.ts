@@ -8,11 +8,9 @@ import { Pokemon } from "../models/colyseus-models/pokemon"
 import { Ability } from "../types/enum/Ability"
 
 export class Effects {
-  weather: string
   list: Effect[]
 
   constructor() {
-    this.weather = Weather.NEUTRAL
     this.list = []
   }
 

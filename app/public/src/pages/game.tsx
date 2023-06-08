@@ -74,7 +74,8 @@ import {
   IDps,
   IDpsHeal,
   IPlayer,
-  Role
+  Role,
+  IBoardEvent
 } from "../../../types"
 import GameToasts from "./component/game/game-toasts"
 import GamePokemonsProposition from "./component/game/game-pokemons-proposition"
@@ -285,6 +286,15 @@ export default function Game() {
           const g: any = gameContainer.game.scene.getScene("gameScene")
           if (g && g.unownManager) {
             g.unownManager.addWanderingUnown()
+          }
+        }
+      })
+
+      room.onMessage(Transfer.BOARD_EVENT, (event: IBoardEvent) => {
+        if(gameContainer.game){
+          const g = gameContainer.game.scene.getScene("gameScene") as GameScene
+          if(g && g.board){
+            g.board.handleBoardEvent(event)
           }
         }
       })

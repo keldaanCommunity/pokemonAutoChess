@@ -1300,7 +1300,7 @@ export class AuroraBeamStrategy extends AttackStrategy {
           crit
         )
         let freezeChance = 0
-        if (pokemon.effects.includes(Effect.SNOW)) {
+        if (pokemon.effects.includes(Effect.FROSTY)) {
           freezeChance += 0.1
         }
         if (pokemon.effects.includes(Effect.SHEER_COLD)) {

@@ -207,7 +207,6 @@ export default class GameScene extends Scene {
 
   updatePhase() {
     this.resetDragState()
-    this.cameras.main.flash(400, 0, 0, 0)
     if (
       this.room?.state.phase == GamePhaseState.FIGHT ||
       this.room?.state.phase === GamePhaseState.MINIGAME

@@ -283,18 +283,9 @@ export default class WeatherManager {
         500,
         2000,
         1000,
-        0x5C7777,
-        0.3
+        0x2B3838,
+        0.4
       ).setDepth(8)
-    )
-
-    this.image = this.scene.add.existing(
-      new Phaser.GameObjects.Image(this.scene, 1000, 300, "clouds")
-        .setScale(2, 2)
-        .setOrigin(0.5)
-        .setDepth(8)
-        .setAlpha(0.35)
-        .setTint(0x000000)
     )
 
     this.particlesEmitters.push(
@@ -303,10 +294,11 @@ export default class WeatherManager {
         deathZone: { source: this.screen, type: "onLeave" },
         frequency: 200,
         quantity: 12,
-        speedY: { min: 600, max: 800 },
-        speedX: { min: 500, max: 600 },
+        speedY: { min: 700, max: 800 },
+        speedX: { min: 900, max: 1000 },
         lifespan: 5000,
-        scale: 0.8
+        scale: 0.8,
+        tint: 0xa0a0a0
       }),
 
       this.scene.add.particles(0, 0, "rain", {
@@ -315,9 +307,10 @@ export default class WeatherManager {
         frequency: 200,
         quantity: 8,
         speedY: { min: 800, max: 1000 },
-        speedX: { min: 700, max: 850 },
+        speedX: { min: 1000, max: 1200 },
         lifespan: 5000,
-        scale: 1
+        scale: 1,
+        tint: 0xa0a0a0
       })
     )
 

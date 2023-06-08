@@ -6,17 +6,17 @@ import PokemonFactory from "../models/pokemon-factory"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { Item } from "../types/enum/Item"
 import { Effect } from "../types/enum/Effect"
-import { PokemonActionState, Stat, Team } from "../types/enum/Game"
-import { Weather, WeatherAssociatedToSynergy, WeatherPassives } from "../types/enum/Weather"
+import { AttackType, BoardEvent, PokemonActionState, Stat, Team } from "../types/enum/Game"
+import { Weather, WeatherAssociatedToSynergy, WeatherEffects, WeatherPassives } from "../types/enum/Weather"
 import Dps from "./dps"
 import DpsHeal from "./dps-heal"
 import ItemFactory from "../models/item-factory"
-import { ISimulation, IPokemonEntity, IPokemon, IPlayer } from "../types"
+import { ISimulation, IPokemonEntity, IPokemon, IPlayer, Transfer } from "../types"
 import { Synergy } from "../types/enum/Synergy"
 import { ItemStats } from "../types/Config"
 import { getPath } from "../public/src/pages/utils/utils"
 import GameRoom from "../rooms/game-room"
-import { pickRandomIn } from "../utils/random"
+import { pickRandomIn, randomBetween } from "../utils/random"
 import { Passive } from "../types/enum/Passive"
 
 export default class Simulation extends Schema implements ISimulation {
@@ -36,6 +36,7 @@ export default class Simulation extends Schema implements ISimulation {
   stageLevel: number = 0
   player: IPlayer | undefined
   id: string
+  stormLightningTimer = 0
 
   constructor(id: string, room: GameRoom) {
     super()
@@ -84,6 +85,7 @@ export default class Simulation extends Schema implements ISimulation {
 
     this.finished = false
     this.flowerSpawn = [false, false]
+    this.stormLightningTimer = randomBetween(4000, 8000)
 
     if (blueTeam) {
       blueTeam.forEach((pokemon) => {
@@ -170,7 +172,8 @@ export default class Simulation extends Schema implements ISimulation {
     const pokemonEntity = new PokemonEntity(pokemon, x, y, team, this)
     pokemonEntity.isClone = isClone
     this.applySynergyEffects(pokemonEntity)
-    this.applyItemsEffects(pokemonEntity)    
+    this.applyItemsEffects(pokemonEntity)
+    this.applyWeatherEffects(pokemonEntity)
     this.board.setValue(
       pokemonEntity.positionX,
       pokemonEntity.positionY,
@@ -370,6 +373,24 @@ export default class Simulation extends Schema implements ISimulation {
       this.applyEffects(pokemon, pokemon.types, this.blueEffects)
     } else if(pokemon.team === Team.RED_TEAM){
       this.applyEffects(pokemon, pokemon.types, this.redEffects)
+    }
+  }
+
+  applyWeatherEffects(pokemon: PokemonEntity){
+    const weatherEffect = WeatherEffects.get(this.weather)
+    if(weatherEffect){
+      switch(weatherEffect){
+        case Effect.WINDY:
+          pokemon.addDodgeChance(pokemon.types.includes(Synergy.FLYING) ? 0.2 : 0.1)
+          break
+        case Effect.NIGHT:
+          pokemon.addCritChance(0.1)
+          break
+        case Effect.SNOW:
+          pokemon.addAttackSpeed(-0.25)
+          break
+      }
+      pokemon.effects.push(weatherEffect)
     }
   }
 
@@ -871,8 +892,8 @@ export default class Simulation extends Schema implements ISimulation {
           }
           break
 
-        case Effect.SNOW:
-          pokemon.effects.push(Effect.SNOW)
+        case Effect.FROSTY:
+          pokemon.effects.push(Effect.FROSTY)
           break
 
         case Effect.SHEER_COLD:
@@ -927,21 +948,21 @@ export default class Simulation extends Schema implements ISimulation {
           }
           break
 
-        case Effect.SHORE_UP:
+        case Effect.TILLER:
           if (types.includes(Synergy.GROUND)) {
-            pokemon.effects.push(Effect.SHORE_UP)
+            pokemon.effects.push(Effect.TILLER)
           }
           break
 
-        case Effect.ROTOTILLER:
+        case Effect.DIGGER:
           if (types.includes(Synergy.GROUND)) {
-            pokemon.effects.push(Effect.ROTOTILLER)
+            pokemon.effects.push(Effect.DIGGER)
           }
           break
 
-        case Effect.SANDSTORM:
+        case Effect.DRILLER:
           if (types.includes(Synergy.GROUND)) {
-            pokemon.effects.push(Effect.SANDSTORM)
+            pokemon.effects.push(Effect.DRILLER)
           }
           break
 
@@ -1015,7 +1036,7 @@ export default class Simulation extends Schema implements ISimulation {
     })
   }
 
-  getWeather(playerBoard: MapSchema<Pokemon, string>, opponentBoard: MapSchema<Pokemon, string>) {
+  getWeather(playerBoard: MapSchema<Pokemon, string>, opponentBoard: MapSchema<Pokemon, string>): Weather {
     const countPerWeather = new Map<Weather, number>()
     ;[playerBoard, opponentBoard].forEach((board) => {
       board.forEach((pkm) => {
@@ -1079,6 +1100,29 @@ export default class Simulation extends Schema implements ISimulation {
         pkm.update(dt, this.board, this.weather)
       }
     })
+
+    if(this.weather === Weather.STORM){
+      this.stormLightningTimer -= dt
+      if (this.stormLightningTimer <= 0) {
+        this.stormLightningTimer = randomBetween(4000, 8000)
+        // trigger lightning
+        const x = randomBetween(0, this.board.columns-1)
+        const y = randomBetween(0, this.board.rows-1)
+        //logger.debug('lightning at ' + x + ' ' + y)
+        const pokemonOnCell = this.board.getValue(x, y)
+        if(pokemonOnCell){
+          pokemonOnCell.handleSpecialDamage(100, this.board, AttackType.SPECIAL, null, false)
+        }
+        if(this.player){
+          const client = this.room.clients.find(
+            (cli) => cli.auth.uid === this.player!.id
+          )
+          if (client) {
+            client.send(Transfer.BOARD_EVENT, { type: BoardEvent.LIGHTNING, x ,y })
+          }
+        }
+      }
+    }
   }
 
   stop() {
