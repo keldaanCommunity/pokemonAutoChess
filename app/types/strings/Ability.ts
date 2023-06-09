@@ -1160,7 +1160,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.SOAK]: {
-    eng: `Deals [20,40,80,SP] ${Damage.SPECIAL} and restores 10 mana to friendly pokemons`,
+    eng: `Deals [20,40,80,SP] ${Damage.SPECIAL} and restores 10 ${Stat.MANA} to friendly pokemons`,
     esp: `Hace 20,30,40 de daño especial y devuelve 10 de maná a los pokemons amistosos.`,
     fra: `Fait 20,30,40 dégats spéciaux et restaure 10 mana à chaque pokémon allié.`,
     prt: ``

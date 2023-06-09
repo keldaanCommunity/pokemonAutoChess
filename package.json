@@ -66,7 +66,7 @@
     "nanoid": "^3.0.0",
     "nes.css": "^2.3.0",
     "pastebin-ts": "^1.3.0",
-    "phaser": "^3.55.2",
+    "phaser": "^3.60.0",
     "phaser3-rex-plugins": "^1.1.80",
     "react": "^17.0.2",
     "react-bootstrap": "^2.7.0",
@@ -77,7 +77,7 @@
     "react-router-dom": "^6.8.0",
     "react-tabs": "^4.0.1",
     "react-toastify": "^9.1.1",
-    "react-tooltip": "^4.2.21",
+    "react-tooltip": "^4.5.1",
     "unique-names-generator": "^4.7.1"
   },
   "devDependencies": {

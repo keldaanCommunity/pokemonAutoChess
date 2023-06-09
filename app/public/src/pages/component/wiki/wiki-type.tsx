@@ -14,7 +14,7 @@ import { getPortraitSrc } from "../../../utils"
 import SynergyIcon from "../icons/synergy-icon"
 import { EffectDescriptionComponent } from "../synergy/effect-description"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
-import PokemonFactory from "../../../../../models/pokemon-factory"
+import PokemonFactory, { isAdditionalPick } from "../../../../../models/pokemon-factory"
 import { groupBy } from "../../../../../utils/array"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import { Rarity } from "../../../../../types/enum/Game"
@@ -53,14 +53,6 @@ export default function WikiType(props: { type: Synergy | "all" }) {
         if(isAddA !== isAddB) return +isAddA - +isAddB
         return a.index < b.index ? -1 : 1
       })
-  }
-
-  function isAdditionalPick(pkm: Pkm): boolean {
-    const pokemon = PokemonFactory.createPokemonFromName(pkm)
-    if (pokemon.types.length === 0) return false
-    return PRECOMPUTED_TYPE_POKEMONS[
-      pokemon.types[0]
-    ].additionalPokemons.includes(pkm)
   }
 
   return (

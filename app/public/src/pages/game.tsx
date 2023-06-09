@@ -12,6 +12,7 @@ import {
   setInterest,
   setItemsProposition,
   setMapName,
+  setWeather,
   setMoney,
   setNoELO,
   setPhase,
@@ -73,7 +74,8 @@ import {
   IDps,
   IDpsHeal,
   IPlayer,
-  Role
+  Role,
+  IBoardEvent
 } from "../../../types"
 import GameToasts from "./component/game/game-toasts"
 import GamePokemonsProposition from "./component/game/game-pokemons-proposition"
@@ -287,6 +289,15 @@ export default function Game() {
         }
       })
 
+      room.onMessage(Transfer.BOARD_EVENT, (event: IBoardEvent) => {
+        if(gameContainer.game){
+          const g = gameContainer.game.scene.getScene("gameScene") as GameScene
+          if(g && g.board){
+            g.board.handleBoardEvent(event)
+          }
+        }
+      })
+
       room.onMessage(Transfer.GAME_END, leave)
 
       room.state.listen("roundTime", (value, previousValue) => {
@@ -307,6 +318,10 @@ export default function Game() {
 
       room.state.listen("mapName", (value, previousValue) => {
         dispatch(setMapName(value))
+      })
+
+      room.state.listen("weather", (value, previousValue) => {
+        dispatch(setWeather(value))
       })
 
       room.state.listen("noElo", (value, previousValue) => {

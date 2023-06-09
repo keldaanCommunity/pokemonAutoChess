@@ -6171,7 +6171,9 @@ export class Lugia extends Pokemon {
       Ability.SKY_ATTACK,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.WINDY
     )
   }
 }
@@ -6286,7 +6288,9 @@ export class Zapdos extends Pokemon {
       Ability.CHARGE,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.STORM
     )
   }
 }
@@ -6355,7 +6359,9 @@ export class Moltres extends Pokemon {
       Ability.OVERHEAT,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.SUN
     )
   }
 }
@@ -6378,7 +6384,9 @@ export class Articuno extends Pokemon {
       Ability.FREEZE,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.SNOW
     )
   }
 }
@@ -6585,7 +6593,9 @@ export class Lunatone extends Pokemon {
       Ability.ROCK_SLIDE,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.NIGHT
     )
   }
 }
@@ -6608,7 +6618,9 @@ export class Solrock extends Pokemon {
       Ability.ROCK_SLIDE,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.SUN
     )
   }
 }
@@ -7007,7 +7019,9 @@ export class Volcanion extends Pokemon {
       Ability.STEAM_ERUPTION,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.RAIN
     )
   }
 }
@@ -7244,10 +7258,13 @@ export class Landorus extends Pokemon {
       AttackSprite.FLYING_RANGE,
       1,
       100,
-      Ability.ROCK_SLIDE,
+      //Ability.ROCK_SLIDE,
+      Ability.DEFAULT,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.SANDSTORM
     )
   }
 }
@@ -7267,10 +7284,13 @@ export class Thundurus extends Pokemon {
       AttackSprite.ELECTRIC_RANGE,
       1,
       80,
-      Ability.THUNDER,
+      //Ability.THUNDER,
+      Ability.DEFAULT,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.STORM
     )
   }
 }
@@ -7293,7 +7313,9 @@ export class Tornadus extends Pokemon {
       Ability.TRI_ATTACK,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.WINDY
     )
   }
 }
@@ -7757,7 +7779,9 @@ export class Kyurem extends Pokemon {
       Ability.DEFAULT, //Ability.FREEZE,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.SNOW
     )
   }
 }
@@ -7780,7 +7804,9 @@ export class Reshiram extends Pokemon {
       Ability.BLUE_FLARE,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.SUN
     )
   }
 }
@@ -7803,7 +7829,9 @@ export class Zekrom extends Pokemon {
       Ability.FUSION_BOLT,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.STORM
     )
   }
 }
@@ -7989,7 +8017,9 @@ export class Cresselia extends Pokemon {
       Ability.WISH,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.MISTY
     )
   }
 }
@@ -8035,7 +8065,9 @@ export class HooH extends Pokemon {
       Ability.FIRE_SPIN,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.SUN
     )
   }
 }
@@ -8058,7 +8090,9 @@ export class PrimalGroudon extends Pokemon {
       Ability.EARTHQUAKE,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.SANDSTORM
     )
   }
 }
@@ -8081,7 +8115,9 @@ export class PrimalKyogre extends Pokemon {
       Ability.ORIGIN_PULSE,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.RAIN
     )
   }
 }
@@ -8104,7 +8140,9 @@ export class MegaRayquaza extends Pokemon {
       Ability.DRACO_METEOR,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.STORM
     )
   }
 }
@@ -9352,7 +9390,9 @@ export class Xerneas extends Pokemon {
       Ability.GEOMANCY,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.MISTY
     )
   }
 }

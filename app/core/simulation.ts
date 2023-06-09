@@ -6,20 +6,21 @@ import PokemonFactory from "../models/pokemon-factory"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { Item } from "../types/enum/Item"
 import { Effect } from "../types/enum/Effect"
-import { Climate, PokemonActionState, Stat, Team } from "../types/enum/Game"
+import { AttackType, BoardEvent, PokemonActionState, Stat, Team } from "../types/enum/Game"
+import { Weather, WeatherAssociatedToSynergy, WeatherEffects, WeatherPassives } from "../types/enum/Weather"
 import Dps from "./dps"
 import DpsHeal from "./dps-heal"
 import ItemFactory from "../models/item-factory"
-import { ISimulation, IPokemonEntity, IPokemon, IPlayer } from "../types"
+import { ISimulation, IPokemonEntity, IPokemon, IPlayer, Transfer } from "../types"
 import { Synergy } from "../types/enum/Synergy"
 import { ItemStats } from "../types/Config"
 import { getPath } from "../public/src/pages/utils/utils"
 import GameRoom from "../rooms/game-room"
-import { pickRandomIn } from "../utils/random"
+import { pickRandomIn, randomBetween } from "../utils/random"
 import { Passive } from "../types/enum/Passive"
 
 export default class Simulation extends Schema implements ISimulation {
-  @type("string") climate: Climate = Climate.NEUTRAL
+  @type("string") weather: Weather = Weather.NEUTRAL
   @type({ map: PokemonEntity }) blueTeam = new MapSchema<IPokemonEntity>()
   @type({ map: PokemonEntity }) redTeam = new MapSchema<IPokemonEntity>()
   @type({ map: Dps }) blueDpsMeter = new MapSchema<Dps>()
@@ -35,6 +36,7 @@ export default class Simulation extends Schema implements ISimulation {
   stageLevel = 0
   player: IPlayer | undefined
   id: string
+  stormLightningTimer = 0
 
   constructor(id: string, room: GameRoom) {
     super()
@@ -47,10 +49,13 @@ export default class Simulation extends Schema implements ISimulation {
     redTeam: MapSchema<Pokemon>,
     player: IPlayer,
     opponent: IPlayer | null, // null if PVE round
-    stageLevel: number
+    stageLevel: number,
+    weather: Weather
   ) {
     this.player = player
     this.stageLevel = stageLevel
+    this.weather = weather
+
     this.blueDpsMeter.forEach((dps, key) => {
       this.blueDpsMeter.delete(key)
     })
@@ -72,8 +77,7 @@ export default class Simulation extends Schema implements ISimulation {
     this.redEffects = opponent?.effects?.list ?? []
     // logger.debug({ blueEffects, redEffects })
 
-    this.climate = this.getClimate(this.blueEffects, this.redEffects)
-    this.room.updateCastform(this.climate)
+    this.room.updateCastform(this.weather)
 
     // update effects after castform transformation
     this.blueEffects = player?.effects?.list ?? []
@@ -81,6 +85,7 @@ export default class Simulation extends Schema implements ISimulation {
 
     this.finished = false
     this.flowerSpawn = [false, false]
+    this.stormLightningTimer = randomBetween(4000, 8000)
 
     if (blueTeam) {
       blueTeam.forEach((pokemon) => {
@@ -168,6 +173,7 @@ export default class Simulation extends Schema implements ISimulation {
     pokemonEntity.isClone = isClone
     this.applySynergyEffects(pokemonEntity)
     this.applyItemsEffects(pokemonEntity)
+    this.applyWeatherEffects(pokemonEntity)
     this.board.setValue(
       pokemonEntity.positionX,
       pokemonEntity.positionY,
@@ -367,6 +373,24 @@ export default class Simulation extends Schema implements ISimulation {
       this.applyEffects(pokemon, pokemon.types, this.blueEffects)
     } else if (pokemon.team === Team.RED_TEAM) {
       this.applyEffects(pokemon, pokemon.types, this.redEffects)
+    }
+  }
+
+  applyWeatherEffects(pokemon: PokemonEntity){
+    const weatherEffect = WeatherEffects.get(this.weather)
+    if(weatherEffect){
+      switch(weatherEffect){
+        case Effect.WINDY:
+          pokemon.addDodgeChance(pokemon.types.includes(Synergy.FLYING) ? 0.2 : 0.1)
+          break
+        case Effect.NIGHT:
+          pokemon.addCritChance(0.2)
+          break
+        case Effect.SNOW:
+          pokemon.addAttackSpeed(-0.25)
+          break
+      }
+      pokemon.effects.push(weatherEffect)
     }
   }
 
@@ -868,8 +892,8 @@ export default class Simulation extends Schema implements ISimulation {
           }
           break
 
-        case Effect.SNOW:
-          pokemon.effects.push(Effect.SNOW)
+        case Effect.FROSTY:
+          pokemon.effects.push(Effect.FROSTY)
           break
 
         case Effect.SHEER_COLD:
@@ -924,21 +948,21 @@ export default class Simulation extends Schema implements ISimulation {
           }
           break
 
-        case Effect.SHORE_UP:
+        case Effect.TILLER:
           if (types.includes(Synergy.GROUND)) {
-            pokemon.effects.push(Effect.SHORE_UP)
+            pokemon.effects.push(Effect.TILLER)
           }
           break
 
-        case Effect.ROTOTILLER:
+        case Effect.DIGGER:
           if (types.includes(Synergy.GROUND)) {
-            pokemon.effects.push(Effect.ROTOTILLER)
+            pokemon.effects.push(Effect.DIGGER)
           }
           break
 
-        case Effect.SANDSTORM:
+        case Effect.DRILLER:
           if (types.includes(Synergy.GROUND)) {
-            pokemon.effects.push(Effect.SANDSTORM)
+            pokemon.effects.push(Effect.DRILLER)
           }
           break
 
@@ -1012,61 +1036,30 @@ export default class Simulation extends Schema implements ISimulation {
     })
   }
 
-  getClimate(blueEffects: Effect[], redEffects: Effect[]) {
-    function getPlayerClimate(effects: Effect[]) {
-      return effects.includes(Effect.SANDSTORM)
-        ? Climate.SANDSTORM
-        : effects.includes(Effect.DESOLATE_LAND)
-        ? Climate.SUN
-        : effects.includes(Effect.PRIMORDIAL_SEA)
-        ? Climate.RAIN
-        : effects.includes(Effect.DROUGHT)
-        ? Climate.SUN
-        : effects.includes(Effect.DRIZZLE)
-        ? Climate.RAIN
-        : effects.includes(Effect.SHEER_COLD)
-        ? Climate.SNOW
-        : effects.includes(Effect.VICTORY_STAR)
-        ? Climate.SUN
-        : effects.includes(Effect.SNOW)
-        ? Climate.SNOW
-        : effects.includes(Effect.RAIN_DANCE)
-        ? Climate.RAIN
-        : Climate.NEUTRAL
-    }
+  getWeather(playerBoard: MapSchema<Pokemon, string>, opponentBoard: MapSchema<Pokemon, string>): Weather {
+    const countPerWeather = new Map<Weather, number>()
+    ;[playerBoard, opponentBoard].forEach((board) => {
+      board.forEach((pkm) => {
+        if (pkm.positionY != 0) {
+          if(WeatherPassives.has(pkm.passive)){
+            const weather = WeatherPassives.get(pkm.passive)!
+            countPerWeather.set(weather, (countPerWeather.get(weather) ?? 0) + 100)
+          }
+          pkm.types.forEach((type) => {
+            if(WeatherAssociatedToSynergy.has(type)){
+              const weather = WeatherAssociatedToSynergy.get(type)!
+              countPerWeather.set(weather, (countPerWeather.get(weather) ?? 0) + 1)
+            }
+          })
+        }
+      })
+    })
 
-    const redClimate = getPlayerClimate(redEffects)
-    const blueClimate = getPlayerClimate(blueEffects)
-
-    if (redClimate !== Climate.NEUTRAL && blueClimate === Climate.NEUTRAL)
-      return redClimate
-    if (blueClimate !== Climate.NEUTRAL && redClimate === Climate.NEUTRAL)
-      return blueClimate
-    if (redClimate === blueClimate) return redClimate
-
-    // sandstorm beats everything
-    if (redClimate === Climate.SANDSTORM || blueClimate === Climate.SANDSTORM)
-      return Climate.SANDSTORM
-
-    // snow beats rain
-    if (redClimate === Climate.SNOW && blueClimate === Climate.RAIN)
-      return Climate.SNOW
-    if (blueClimate === Climate.SNOW && redClimate === Climate.RAIN)
-      return Climate.SNOW
-
-    // sunlight beats snow
-    if (redClimate === Climate.SNOW && blueClimate === Climate.SUN)
-      return Climate.SUN
-    if (blueClimate === Climate.SNOW && redClimate === Climate.SUN)
-      return Climate.SUN
-
-    // rain beats sunlight
-    if (redClimate === Climate.SUN && blueClimate === Climate.RAIN)
-      return Climate.RAIN
-    if (blueClimate === Climate.SUN && redClimate === Climate.RAIN)
-      return Climate.RAIN
-
-    return Climate.NEUTRAL
+    const MIN_THRESHOLD = 8
+    const entries = [...countPerWeather.entries()].sort((a, b) => b[1] - a[1])
+    if (entries.length === 0 || entries[0][1] < MIN_THRESHOLD) return Weather.NEUTRAL
+    if (entries.length >= 2 && entries[0][1] === entries[1][1]) { return Weather.NEUTRAL }
+    return entries[0][0]
   }
 
   update(dt: number) {
@@ -1096,7 +1089,7 @@ export default class Simulation extends Schema implements ISimulation {
       ) {
         this.blueTeam.delete(key)
       } else {
-        pkm.update(dt, this.board, this.climate)
+        pkm.update(dt, this.board, this.weather)
       }
     })
 
@@ -1113,9 +1106,32 @@ export default class Simulation extends Schema implements ISimulation {
       ) {
         this.redTeam.delete(key)
       } else {
-        pkm.update(dt, this.board, this.climate)
+        pkm.update(dt, this.board, this.weather)
       }
     })
+
+    if(this.weather === Weather.STORM){
+      this.stormLightningTimer -= dt
+      if (this.stormLightningTimer <= 0) {
+        this.stormLightningTimer = randomBetween(4000, 8000)
+        // trigger lightning
+        const x = randomBetween(0, this.board.columns-1)
+        const y = randomBetween(0, this.board.rows-1)
+        //logger.debug('lightning at ' + x + ' ' + y)
+        const pokemonOnCell = this.board.getValue(x, y)
+        if(pokemonOnCell && pokemonOnCell.types.includes(Synergy.ELECTRIC) === false){
+          pokemonOnCell.handleSpecialDamage(100, this.board, AttackType.SPECIAL, null, false)
+        }
+        if(this.player){
+          const client = this.room.clients.find(
+            (cli) => cli.auth.uid === this.player!.id
+          )
+          if (client) {
+            client.send(Transfer.BOARD_EVENT, { type: BoardEvent.LIGHTNING, x ,y })
+          }
+        }
+      }
+    }
   }
 
   stop() {
@@ -1129,6 +1145,6 @@ export default class Simulation extends Schema implements ISimulation {
       this.redTeam.delete(key)
     })
 
-    this.climate = Climate.NEUTRAL
+    this.weather = Weather.NEUTRAL
   }
 }

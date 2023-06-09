@@ -78,6 +78,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   shieldDone: number
   flyingProtection = 0
   growGroundTimer = 0
+  sandstormDamageTimer = 0
   echo = 0
   isClone = false
 
@@ -147,8 +148,8 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  update(dt: number, board: Board, climate: string) {
-    this.state.update(this, dt, board, climate)
+  update(dt: number, board: Board, weather: string) {
+    this.state.update(this, dt, board, weather)
   }
 
   getAttackDelay() {
@@ -179,22 +180,22 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     damage: number,
     board: Board,
     attackType: AttackType,
-    attacker: PokemonEntity,
+    attacker: PokemonEntity | null,
     crit: boolean
   ): { death: boolean; takenDamage: number } {
     if (this.status.runeProtect) {
       this.count.spellBlockedCount++
       return { death: false, takenDamage: 0 }
     } else {
-      let specialDamage = damage + (damage * attacker.ap) / 100
-      if (crit && this.items.has(Item.ROCKY_HELMET) === false) {
+      let specialDamage = damage + (damage * (attacker ? attacker.ap : 0)) / 100
+      if (crit && attacker && this.items.has(Item.ROCKY_HELMET) === false) {
         specialDamage = Math.round(specialDamage * attacker.critDamage)
       }
       if (attacker && attacker.items.has(Item.POKEMONOMICON)) {
         this.status.triggerBurn(2000, this, attacker, board)
         this.status.triggerWound(2000, this, attacker, board)
       }
-      if (this.items.has(Item.POWER_LENS) && specialDamage >= 1) {
+      if (this.items.has(Item.POWER_LENS) && specialDamage >= 1 && attacker) {
         attacker.handleDamage({
           damage: Math.round(0.5 * specialDamage),
           board,
@@ -558,6 +559,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     this.effects.clear()
     this.simulation.applySynergyEffects(this)
     this.simulation.applyItemsEffects(this)
+    this.simulation.applyWeatherEffects(this)
     this.status.resurection = false // prevent reapplying max revive again
     this.shield = 0 // prevent reapplying shield again
     SynergyEffects[Synergy.FOSSIL].forEach((fossilResurectEffect) =>

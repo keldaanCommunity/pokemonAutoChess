@@ -5,8 +5,8 @@ import PokemonEntity from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
 
 export class IdleState extends PokemonState {
-  update(pokemon: PokemonEntity, dt: number, board: Board, climate: string) {
-    super.update(pokemon, dt, board, climate)
+  update(pokemon: PokemonEntity, dt: number, board: Board, weather: string) {
+    super.update(pokemon, dt, board, weather)
 
     if (pokemon.status.tree) {
       if (pokemon.mana >= pokemon.maxMana) {

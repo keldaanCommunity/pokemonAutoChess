@@ -15,6 +15,7 @@ import { Ability } from "../types/enum/Ability"
 import { pickRandomIn } from "../utils/random"
 import { logger } from "../utils/logger"
 import { Passive } from "../types/enum/Passive"
+import { Weather } from "../types/enum/Weather"
 
 export default class PokemonState {
   handleHeal(
@@ -94,7 +95,7 @@ export default class PokemonState {
     damage: number
     board: Board
     attackType: AttackType
-    attacker: PokemonEntity
+    attacker: PokemonEntity | null
     dodgeable: boolean
     shouldTargetGainMana: boolean
     shouldAttackerGainMana: boolean
@@ -103,13 +104,7 @@ export default class PokemonState {
     let takenDamage = 0
 
     if (isNaN(damage)) {
-      logger.trace(`NaN Damage`)
-      logger.debug({
-        damage,
-        attacker: attacker.name,
-        critDamage: attacker.critDamage,
-        atk: attacker.atk
-      })
+      logger.trace(`NaN Damage from ${attacker ? attacker.name : "Environment"}`)
       return { death: false, takenDamage: 0 }
     }
 
@@ -143,6 +138,10 @@ export default class PokemonState {
 
       if (attacker && attacker.items.has(Item.FIRE_GEM)) {
         reducedDamage = Math.ceil(reducedDamage + pokemon.hp * 0.1)
+      }
+
+      if(pokemon.simulation.weather === Weather.MISTY && attackType === AttackType.SPECIAL) {
+        reducedDamage = Math.ceil(reducedDamage * 1.2)
       }
 
       if (
@@ -188,7 +187,7 @@ export default class PokemonState {
       if (isNaN(reducedDamage)) {
         reducedDamage = 0
         logger.error(
-          `error calculating damage, damage: ${damage}, target: ${pokemon.name}, attacker: ${attacker.name}, attack type: ${attackType}, defense : ${pokemon.def}, spedefense: ${pokemon.speDef}, life: ${pokemon.life}`
+          `error calculating damage, damage: ${damage}, target: ${pokemon.name}, attacker: ${attacker ? attacker.name : "Environment"}, attack type: ${attackType}, defense : ${pokemon.def}, spedefense: ${pokemon.speDef}, life: ${pokemon.life}`
         )
       }
 
@@ -433,7 +432,7 @@ export default class PokemonState {
     return { death, takenDamage }
   }
 
-  update(pokemon: PokemonEntity, dt: number, board: Board, climate: string) {
+  update(pokemon: PokemonEntity, dt: number, board: Board, weather: string) {
     if(pokemon.status.resurecting &&
       pokemon.action !== PokemonActionState.HURT
     ){
@@ -446,24 +445,24 @@ export default class PokemonState {
       pokemon.toIdleState()
     }
     if (
-      pokemon.effects.includes(Effect.SHORE_UP) ||
-      pokemon.effects.includes(Effect.ROTOTILLER) ||
-      pokemon.effects.includes(Effect.SANDSTORM)
+      pokemon.effects.includes(Effect.TILLER) ||
+      pokemon.effects.includes(Effect.DIGGER) ||
+      pokemon.effects.includes(Effect.DRILLER)
     ) {
       if (pokemon.count.growGroundCount < 4) {
         pokemon.growGroundTimer -= dt
         if (pokemon.growGroundTimer <= 0) {
           pokemon.growGroundTimer = 3000
           pokemon.count.growGroundCount += 1
-          if (pokemon.effects.includes(Effect.SHORE_UP)) {
+          if (pokemon.effects.includes(Effect.TILLER)) {
             pokemon.addDefense(1)
             pokemon.addSpecialDefense(1)
             pokemon.addAttack(1)
-          } else if (pokemon.effects.includes(Effect.ROTOTILLER)) {
+          } else if (pokemon.effects.includes(Effect.DIGGER)) {
             pokemon.addDefense(2)
             pokemon.addSpecialDefense(2)
             pokemon.addAttack(2)
-          } else if (pokemon.effects.includes(Effect.SANDSTORM)) {
+          } else if (pokemon.effects.includes(Effect.DRILLER)) {
             pokemon.addDefense(3)
             pokemon.addSpecialDefense(3)
             pokemon.addAttack(3)
@@ -474,10 +473,22 @@ export default class PokemonState {
       }
     }
 
+    if(pokemon.simulation.weather === Weather.SANDSTORM && pokemon.types.includes(Synergy.GROUND) === false) {
+      pokemon.sandstormDamageTimer -= dt
+      if (pokemon.sandstormDamageTimer <= 0) {
+        pokemon.sandstormDamageTimer = 1000
+        const sandstormDamage = 5
+        pokemon.handleSpecialDamage(sandstormDamage, board, AttackType.SPECIAL, null, false)
+      }
+    }
+
     pokemon.status.updateAllStatus(dt, pokemon, board)
 
     if (pokemon.manaCooldown <= 0) {
       pokemon.setMana(pokemon.mana + 10)
+      if(pokemon.simulation.weather === Weather.RAIN) {
+        pokemon.setMana(pokemon.mana + 3)
+      }
       pokemon.manaCooldown = 1000
     } else {
       pokemon.manaCooldown = Math.max(0, pokemon.manaCooldown - dt)

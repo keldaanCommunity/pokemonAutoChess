@@ -1,6 +1,7 @@
 import { Item } from "../types/enum/Item"
 import { Effect } from "../types/enum/Effect"
-import { AttackType, Climate, Rarity } from "../types/enum/Game"
+import { AttackType, Rarity } from "../types/enum/Game"
+import { Weather } from "../types/enum/Weather"
 import Board from "./board"
 import PokemonEntity from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
@@ -1321,7 +1322,7 @@ export class AuroraBeamStrategy extends AttackStrategy {
           crit
         )
         let freezeChance = 0
-        if (pokemon.effects.includes(Effect.SNOW)) {
+        if (pokemon.effects.includes(Effect.FROSTY)) {
           freezeChance += 0.1
         }
         if (pokemon.effects.includes(Effect.SHEER_COLD)) {
@@ -4042,7 +4043,7 @@ export class GrowthStrategy extends AttackStrategy {
     const attackBuff = Math.floor(10 * (1 + pokemon.ap / 100))
     pokemon.addAttack(attackBuff)
 
-    if (pokemon.simulation.climate === Climate.SUN) {
+    if (pokemon.simulation.weather === Weather.SUN) {
       pokemon.addAttack(attackBuff) // grows twice as fast if sunny weather
     }
   }

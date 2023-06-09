@@ -1,11 +1,15 @@
 import Pokemon from "./pokemon"
-import { transformCoordinate } from "../../pages/utils/utils"
-import { IPlayer, IPokemon } from "../../../../types"
-import { DataChange } from "@colyseus/schema"
+import {
+  transformAttackCoordinate,
+  transformCoordinate
+} from "../../pages/utils/utils"
+import { IBoardEvent, IPlayer, IPokemon } from "../../../../types"
 import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
 import { Item } from "../../../../types/enum/Item"
 import { Pkm } from "../../../../types/enum/Pokemon"
+import { BoardEvent } from "../../../../types/enum/Game"
+import { Ability } from "../../../../types/enum/Ability"
 
 export default class BoardManager {
   pokemons: Map<string, Pokemon>
@@ -195,5 +199,31 @@ export default class BoardManager {
 
   get isBenchFull(): boolean {
     return this.getBenchSize() >= 8
+  }
+
+  handleBoardEvent(event: IBoardEvent) {
+    if (
+      event.type === BoardEvent.LIGHTNING &&
+      event.x != null &&
+      event.y != null
+    ) {
+      this.triggerLightning(event.x, event.y)
+    }
+  }
+
+  triggerLightning(x: number, y: number) {
+    const coordinates = transformAttackCoordinate(x, y)
+    const thunderSprite = this.scene.add.sprite(
+      coordinates[0],
+      coordinates[1],
+      "specials",
+      `${Ability.THUNDER}/000`
+    )
+    thunderSprite.setDepth(7)
+    thunderSprite.setScale(2, 2)
+    thunderSprite.anims.play(Ability.THUNDER)
+    thunderSprite.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+      thunderSprite.destroy()
+    })
   }
 }

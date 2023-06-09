@@ -109,7 +109,7 @@ export const StatusDescription: { [key in Status]: Langage } = {
     prt: ""
   },
   [Status.SILENCE]: {
-    eng: "Prevents casting abilities and gaining mana",
+    eng: `Prevents casting abilities and gaining ${Stat.MANA}`,
     esp: "",
     fra: "",
     prt: ""
@@ -127,7 +127,7 @@ export const StatusDescription: { [key in Status]: Langage } = {
     prt: ""
   },
   [Status.PROTECT]: {
-    eng: "Protects from any source of damage, but prevents mana gain",
+    eng: `Protects from any source of damage, but prevents ${Stat.MANA} gain`,
     esp: "",
     fra: "",
     prt: ""

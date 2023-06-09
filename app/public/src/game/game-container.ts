@@ -6,9 +6,7 @@ import Player from "../../../models/colyseus-models/player"
 import { Room } from "colyseus.js"
 import GameState from "../../../rooms/states/game-state"
 import { Pokemon } from "../../../models/colyseus-models/pokemon"
-import { DataChange } from "@colyseus/schema"
 import {
-  Emotion,
   IDragDropCombineMessage,
   IDragDropItemMessage,
   IDragDropMessage,
@@ -30,7 +28,8 @@ import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
 import { getPortraitSrc } from "../utils"
 import { IPokemonRecord } from "../../../models/colyseus-models/game-record"
 import { Synergy } from "../../../types/enum/Synergy"
-import { AttackType, Climate, HealType } from "../../../types/enum/Game"
+import { AttackType, HealType } from "../../../types/enum/Game"
+import { Weather } from "../../../types/enum/Weather"
 import store from "../stores"
 import { logger } from "../../../utils/logger"
 import { PokemonAvatar } from "../../../models/colyseus-models/pokemon-avatar"
@@ -61,7 +60,7 @@ class GameContainer {
     if (this.game != null) return // prevent initializing twice
     // Create Phaser game
     const config = {
-      type: Phaser.CANVAS,
+      type: Phaser.WEBGL,
       width: 2000,
       height: 1000,
       parent: this.div,
@@ -71,6 +70,7 @@ class GameContainer {
       dom: {
         createContainer: true
       },
+      disableContextMenu : true,
       plugins: {
         global: [
           {
@@ -213,13 +213,13 @@ class GameContainer {
       this.handleItemRemove(player, value)
     })
 
-    player.simulation.listen("climate", (value, previousValue) => {
+    player.simulation.listen("weather", (value, previousValue) => {
       if (
         this.game != null &&
         player.id == this.uid &&
         this.game.scene.getScene("gameScene") != null
       ) {
-        this.handleClimateChange(player, value)
+        this.handleWeatherChange(player, value)
       }
     })
 
@@ -594,7 +594,7 @@ class GameContainer {
     }
   }
 
-  handleClimateChange(player: Player, value: Climate) {
+  handleWeatherChange(player: Player, value: Weather) {
     if (
       this.game != null &&
       player.id == this.uid &&
@@ -602,29 +602,23 @@ class GameContainer {
     ) {
       const g = <GameScene>this.game.scene.getScene("gameScene")
       if (g.weatherManager) {
-        switch (value) {
-          case Climate.RAIN:
-            g.weatherManager.addRain()
-            break
-
-          case Climate.SUN:
-            g.weatherManager.addSun()
-            break
-
-          case Climate.SANDSTORM:
-            g.weatherManager.addSandstorm()
-            break
-
-          case Climate.SNOW:
-            g.weatherManager.addSnow()
-            break
-
-          case Climate.NEUTRAL:
-            g.weatherManager.clearWeather()
-            break
-
-          default:
-            break
+        g.weatherManager.clearWeather()
+        if(value === Weather.RAIN){
+          g.weatherManager.addRain()
+        } else if(value === Weather.SUN){
+          g.weatherManager.addSun()
+        } else if(value === Weather.SANDSTORM){
+          g.weatherManager.addSandstorm()
+        } else if(value === Weather.SNOW){
+          g.weatherManager.addSnow()
+        } else if(value === Weather.NIGHT){
+          g.weatherManager.addNight()
+        } else if(value === Weather.WINDY){
+          g.weatherManager.addWind()
+        } else if(value === Weather.STORM){
+          g.weatherManager.addStorm()
+        } else if(value === Weather.MISTY){
+          g.weatherManager.addMist()
         }
       }
     }
