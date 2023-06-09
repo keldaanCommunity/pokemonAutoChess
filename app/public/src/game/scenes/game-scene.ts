@@ -85,10 +85,6 @@ export default class GameScene extends Scene {
     })
   }
 
-  create() {
-    this.input.mouse!.disableContextMenu()
-  }
-
   startGame() {
     if (this.uid && this.tilemap && this.room) {
       this.registerKeys()
@@ -319,7 +315,6 @@ export default class GameScene extends Scene {
     this.dragDropText.setVisible(false)
     this.dragDropText.setOrigin(0.5)
 
-    this.input.mouse!.disableContextMenu()
     this.input.on("pointerdown", (pointer) => {
       if (
         this.minigameManager &&

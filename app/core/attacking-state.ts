@@ -8,8 +8,8 @@ import { PokemonActionState } from "../types/enum/Game"
 import { chance } from "../utils/random"
 
 export default class AttackingState extends PokemonState {
-  update(pokemon: PokemonEntity, dt: number, board: Board, climate: string) {
-    super.update(pokemon, dt, board, climate)
+  update(pokemon: PokemonEntity, dt: number, board: Board, weather: string) {
+    super.update(pokemon, dt, board, weather)
 
     if (pokemon.cooldown <= 0) {
       pokemon.cooldown = pokemon.getAttackDelay()
@@ -111,7 +111,7 @@ export default class AttackingState extends PokemonState {
       }
 
       let freezeChance = 0
-      if (pokemon.effects.includes(Effect.SNOW)) {
+      if (pokemon.effects.includes(Effect.FROSTY)) {
         freezeChance += 0.1
       }
       if (pokemon.effects.includes(Effect.SHEER_COLD)) {

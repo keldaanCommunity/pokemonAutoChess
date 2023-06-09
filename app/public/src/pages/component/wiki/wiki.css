@@ -3,6 +3,14 @@
   padding: 1vw;
 }
 
+#wiki-page ul {
+  padding: 0;
+}
+
+#wiki-page li {
+  list-style: none;
+}
+
 #wiki-page > .nes-container {
   margin: 1em 0;
   color: white;
@@ -88,6 +96,46 @@
   padding: 0;
 }
 
-#wiki-page .wiki-tutorials li {
-  list-style: none;
+#wiki-weather > ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
+}
+
+#wiki-weather .nes-container {
+  padding: 0.5em;
+  margin: 0.5em;
+}
+
+#wiki-weather > ul > .nes-container {
+  padding: 0.5em 1em 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+#wiki-weather .nes-container header {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+#wiki-weather .nes-container h2 {
+  flex: 1;
+  margin: 0;
+}
+
+#wiki-weather .nes-container header .weather-icon {
+  height: 40px;
+}
+
+#wiki-weather .nes-container p {
+  margin: 0;
+  white-space: pre-line;
+}
+
+#wiki-weather .nes-container ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  padding: 0;
 }

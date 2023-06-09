@@ -7,6 +7,7 @@ import WikiFaq from "./wiki-faq"
 import WikiTutorials from "./wiki-tutorials"
 import WikiItemsCheatSheet from "./wiki-items-cheat-sheet"
 import WikiStatus from "./wiki-status"
+import WikiWeather from "./wiki-weather"
 import "./wiki.css"
 
 export default function Wiki(props: { toggleWiki: () => void }) {
@@ -26,6 +27,7 @@ export default function Wiki(props: { toggleWiki: () => void }) {
             <Tab key="title-types">SYNERGIES</Tab>
             <Tab key="title-statistic">STATISTICS</Tab>
             <Tab key="title-status">STATUS</Tab>
+            <Tab key="title-weather">WEATHER</Tab>
           </TabList>
 
           <TabPanel key="faq">
@@ -48,6 +50,9 @@ export default function Wiki(props: { toggleWiki: () => void }) {
           </TabPanel>
           <TabPanel key="status">
             <WikiStatus />
+          </TabPanel>
+          <TabPanel key="weather">
+            <WikiWeather />
           </TabPanel>
         </Tabs>
       </div>

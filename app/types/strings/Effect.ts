@@ -1,6 +1,7 @@
 import { Effect } from "../enum/Effect"
 import { Damage, Stat } from "../enum/Game"
 import { Status } from "../enum/Status"
+import { Synergy } from "../enum/Synergy"
 
 export const EffectName: { [key in Effect]: string } = {
   [Effect.INGRAIN]: `Ingrain`,
@@ -31,9 +32,9 @@ export const EffectName: { [key in Effect]: string } = {
   [Effect.BEAT_UP]: `Beat Up`,
   [Effect.IRON_DEFENSE]: `Iron Defense`,
   [Effect.AUTOMATE]: `Automate`,
-  [Effect.SHORE_UP]: `Shore Up`,
-  [Effect.ROTOTILLER]: `Rototiller`,
-  [Effect.SANDSTORM]: `Sandstorm`,
+  [Effect.TILLER]: `Tiller`,
+  [Effect.DIGGER]: `Digger`,
+  [Effect.DRILLER]: `Driller`,
   [Effect.POISON_GAS]: `Poison Gas`,
   [Effect.TOXIC]: `Toxic`,
   [Effect.DRAGON_ENERGY]: `Dragon Energy`,
@@ -71,7 +72,7 @@ export const EffectName: { [key in Effect]: string } = {
   [Effect.AROMATIC_MIST]: `Aromatic Mist`,
   [Effect.FAIRY_WIND]: `Fairy Wind`,
   [Effect.STRANGE_STEAM]: `Strange Steam`,
-  [Effect.SNOW]: `Snow`,
+  [Effect.FROSTY]: `Frosty`,
   [Effect.SHEER_COLD]: `Sheer Cold`,
   [Effect.ANCIENT_POWER]: `Ancient Power`,
   [Effect.ELDER_POWER]: `Elder Power`,
@@ -88,7 +89,16 @@ export const EffectName: { [key in Effect]: string } = {
   [Effect.GRASSY_TERRAIN]: "Grassy Terrain",
   [Effect.PSYCHIC_TERRAIN]: "Psychic Terrain",
   [Effect.ELECTRIC_TERRAIN]: "Electric Terrain",
-  [Effect.MISTY_TERRAIN]: "Misty Terrain"
+  [Effect.MISTY_TERRAIN]: "Misty Terrain",
+  [Effect.SANDSTORM]: "Sandstorm",
+  [Effect.SNOW]: "Snow",
+  [Effect.SUN]: "Sun",
+  [Effect.RAIN]: "Rain",
+  [Effect.STORM]: "Storm",
+  [Effect.MISTY]: "Misty",
+  [Effect.WINDY]: "Windy",
+  [Effect.NIGHT]: "Night",
+
 }
 
 export const EffectDescription: {
@@ -135,32 +145,32 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.VICTORY_STAR]: {
-    eng: `20% chance to ${Status.BURN}, +1 ${Stat.ATK} after every hit (Weather: Sunlight)`,
+    eng: `20% chance to ${Status.BURN}, +1 ${Stat.ATK} after every hit`,
     esp: ``,
     fra: ``
   },
   [Effect.DROUGHT]: {
-    eng: `30% chance to ${Status.BURN}, +2 ${Stat.ATK} after every hit (Weather: Sunlight)`,
+    eng: `30% chance to ${Status.BURN}, +2 ${Stat.ATK} after every hit`,
     esp: ``,
     fra: ``
   },
   [Effect.DESOLATE_LAND]: {
-    eng: `40% chance to ${Status.BURN}, +3 ${Stat.ATK} after every hit (Weather: Sunlight)`,
+    eng: `40% chance to ${Status.BURN}, +3 ${Stat.ATK} after every hit`,
     esp: ``,
     fra: ``
   },
   [Effect.RAIN_DANCE]: {
-    eng: `25% chance to dodge (Weather: Rainy)`,
+    eng: `25% chance to dodge`,
     esp: ``,
     fra: ``
   },
   [Effect.DRIZZLE]: {
-    eng: `50% chance to dodge (Weather: Rainy)`,
+    eng: `50% chance to dodge`,
     esp: ``,
     fra: ``
   },
   [Effect.PRIMORDIAL_SEA]: {
-    eng: `75% chance to dodge (Weather: Rainy)`,
+    eng: `75% chance to dodge`,
     esp: ``,
     fra: ``
   },
@@ -234,18 +244,18 @@ export const EffectDescription: {
     esp: ``,
     fra: ``
   },
-  [Effect.SHORE_UP]: {
+  [Effect.TILLER]: {
     eng: `Gain +1 ${Stat.ATK} / ${Stat.DEF} / ${Stat.SPE_DEF}`,
     esp: ``,
     fra: ``
   },
-  [Effect.ROTOTILLER]: {
+  [Effect.DIGGER]: {
     eng: `Gain +2 ${Stat.ATK} / ${Stat.DEF} / ${Stat.SPE_DEF}`,
     esp: ``,
     fra: ``
   },
-  [Effect.SANDSTORM]: {
-    eng: `Gain +3  ${Stat.ATK} / ${Stat.DEF} / ${Stat.SPE_DEF} (Weather: Sandstorm)`,
+  [Effect.DRILLER]: {
+    eng: `Gain +3  ${Stat.ATK} / ${Stat.DEF} / ${Stat.SPE_DEF}`,
     esp: ``,
     fra: ``
   },
@@ -434,13 +444,13 @@ export const EffectDescription: {
     esp: ``,
     fra: ``
   },
-  [Effect.SNOW]: {
-    eng: `10% chance to ${Status.FREEZE} (Weather: Snow)`,
+  [Effect.FROSTY]: {
+    eng: `10% chance to ${Status.FREEZE}`,
     esp: ``,
     fra: ``
   },
   [Effect.SHEER_COLD]: {
-    eng: `30% chance to ${Status.FREEZE} (Weather: Snow)`,
+    eng: `30% chance to ${Status.FREEZE}`,
     esp: ``,
     fra: ``
   },
@@ -521,6 +531,46 @@ export const EffectDescription: {
   },
   [Effect.MISTY_TERRAIN]: {
     eng: "Increase damage dealt by 20% (Fairy only)",
+    esp: "",
+    fra: ""
+  },
+  [Effect.SANDSTORM]: {
+    eng: `5 ${Damage.SPECIAL} per second (${Synergy.GROUND} are immune)\n${Status.CONFUSION} duration +30%`,
+    esp: "",
+    fra: ""
+  },
+  [Effect.SNOW]: {
+    eng: `-25% base ${Stat.ATK_SPEED}\n+30% ${Status.FREEZE} duration`,
+    esp: "",
+    fra: ""
+  },
+  [Effect.SUN]: {
+    eng: `+30% ${Status.BURN} damage\n-30% ${Status.FREEZE} duration`,
+    esp: "",
+    fra: ""
+  },
+  [Effect.RAIN]: {
+    eng: `+3 ${Stat.MANA} per second\n-30% ${Status.BURN} and ${Status.POISON} damage`,
+    esp: "",
+    fra: ""
+  },
+  [Effect.STORM]: {
+    eng: `Lightning randomly falls on the board (${Synergy.ELECTRIC} are immune)\n+30% ${Status.PARALYSIS} duration`,
+    esp: "",
+    fra: ""
+  },
+  [Effect.MISTY]: {
+    eng: `+20% ${Damage.SPECIAL}\n+30% ${Status.SILENCE} duration`,
+    esp: "",
+    fra: ""
+  },
+  [Effect.WINDY]: {
+    eng: `+10% dodge chance (+20% if ${Synergy.FLYING})`,
+    esp: "",
+    fra: ""
+  },
+  [Effect.NIGHT]: {
+    eng: `+20% ${Stat.CRIT_CHANCE}\n+30% ${Status.SLEEP} duration`,
     esp: "",
     fra: ""
   }

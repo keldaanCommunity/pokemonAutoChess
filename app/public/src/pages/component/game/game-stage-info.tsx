@@ -1,6 +1,10 @@
 import React from "react"
 import { useAppSelector } from "../../../hooks"
 import { TitleName } from "../../../../../types/strings/Title"
+import {
+  WeatherLabel,
+  WeatherDescription
+} from "../../../../../types/strings/Weather"
 import { getAvatarSrc } from "../../../utils"
 import { cc } from "../../utils/jsx"
 import TimerBar from "./game-timer-bar"
@@ -14,6 +18,9 @@ import {
 import "./game-stage-info.css"
 import { min } from "../../../../../utils/number"
 import { BattleResult, GamePhaseState } from "../../../../../types/enum/Game"
+import { SynergyAssociatedToWeather } from "../../../../../types/enum/Weather"
+import SynergyIcon from "../icons/synergy-icon"
+import { addIconsToDescription } from "../../utils/descriptions"
 
 export default function GameStageInfo() {
   const name = useAppSelector((state) => state.game.currentPlayerName)
@@ -30,6 +37,7 @@ export default function GameStageInfo() {
   const opponentTitle = useAppSelector(
     (state) => state.game.currentPlayerOpponentTitle
   )
+  const weather = useAppSelector((state) => state.game.weather)
 
   return (
     <>
@@ -87,13 +95,40 @@ export default function GameStageInfo() {
             </>
           )}
         </div>
+
+        {opponentName != "" && (
+          <div
+            className="weather-information"
+            data-tip
+            data-for="detail-weather"
+          >
+            <ReactTooltip
+              id="detail-weather"
+              className="customeTheme"
+              effect="solid"
+              place="bottom"
+            >
+              <span>
+                <SynergyIcon type={SynergyAssociatedToWeather.get(weather)!} />
+                {WeatherLabel[weather]}
+              </span>
+              <p>{addIconsToDescription(WeatherDescription[weather])}</p>
+            </ReactTooltip>
+            <img src={`/assets/icons/weather/${weather.toLowerCase()}.svg`} />
+          </div>
+        )}
       </div>
       <TimerBar />
     </>
   )
 }
 
-type PathStep = { level:number, icon: string; title: string; result?: BattleResult }
+type PathStep = {
+  level: number
+  icon: string
+  name: string
+  result?: BattleResult
+}
 
 export function StagePath() {
   const currentPlayer = useAppSelector((state) =>

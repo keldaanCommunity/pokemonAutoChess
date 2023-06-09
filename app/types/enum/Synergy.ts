@@ -54,7 +54,7 @@ export const SynergyEffects: { [key in Synergy]: Effect[] } = Object.freeze({
   [Synergy.PSYCHIC]: [Effect.AMNESIA, Effect.LIGHT_SCREEN, Effect.EERIE_SPELL],
   [Synergy.DARK]: [Effect.HONE_CLAWS, Effect.ASSURANCE, Effect.BEAT_UP],
   [Synergy.STEEL]: [Effect.IRON_DEFENSE, Effect.AUTOMATE],
-  [Synergy.GROUND]: [Effect.SHORE_UP, Effect.ROTOTILLER, Effect.SANDSTORM],
+  [Synergy.GROUND]: [Effect.TILLER, Effect.DIGGER, Effect.DRILLER],
   [Synergy.POISON]: [Effect.POISON_GAS, Effect.TOXIC],
   [Synergy.DRAGON]: [Effect.DRAGON_ENERGY, Effect.DRAGON_DANCE],
   [Synergy.FIELD]: [Effect.BULK_UP, Effect.RAGE, Effect.ANGER_POINT],
@@ -90,7 +90,7 @@ export const SynergyEffects: { [key in Synergy]: Effect[] } = Object.freeze({
     Effect.FAIRY_WIND,
     Effect.STRANGE_STEAM
   ],
-  [Synergy.ICE]: [Effect.SNOW, Effect.SHEER_COLD],
+  [Synergy.ICE]: [Effect.FROSTY, Effect.SHEER_COLD],
   [Synergy.FOSSIL]: [
     Effect.ANCIENT_POWER,
     Effect.ELDER_POWER,

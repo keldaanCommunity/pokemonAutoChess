@@ -4,7 +4,7 @@ import {
   SetSchema,
   CollectionSchema
 } from "@colyseus/schema"
-import board from "../core/board"
+import Board from "../core/board"
 import Dps from "../core/dps"
 import DpsHeal from "../core/dps-heal"
 import Count from "../models/colyseus-models/count"
@@ -17,6 +17,7 @@ import Synergies from "../models/colyseus-models/synergies"
 import PokemonCollection from "../models/colyseus-models/pokemon-collection"
 import {
   AttackType,
+  BoardEvent,
   Orientation,
   PokemonActionState,
   Rarity
@@ -172,7 +173,8 @@ export enum Transfer {
   ADD_BOT_DATABASE = "ADD_BOT_DATABASE",
   DELETE_BOT_DATABASE = "DELETE_BOT_DATABASE",
   BOT_DATABASE_LOG = "BOT_DATABASE_LOG",
-  UNBAN = "UNBAN"
+  UNBAN = "UNBAN",
+  BOARD_EVENT = "BOARD_EVENT"
 }
 
 export enum AttackSprite {
@@ -378,7 +380,7 @@ export interface IExperienceManager {
 export interface ISimulation {
   room: GameRoom
   id: string
-  climate: string
+  weather: string
   blueEffects: Effect[]
   redEffects: Effect[]
   blueTeam: MapSchema<IPokemonEntity>
@@ -427,7 +429,7 @@ export interface IPokemonEntity {
   addAbilityPower(value: number): void
   addAttack(atk: number): void
   handleShield(shieldBonus: number, pokemon: IPokemonEntity)
-  update(dt: number, board: board, climate: string)
+  update(dt: number, board: Board, weather: string)
   physicalDamage: number
   specialDamage: number
   trueDamage: number
@@ -601,4 +603,10 @@ export enum Title {
   SHINY_SEEKER = "SHINY_SEEKER",
   ARCHEOLOGIST = "ARCHEOLOGIST",
   DENTIST = "DENTIST"
+}
+
+export interface IBoardEvent {
+  type: BoardEvent
+  x?: number
+  y?: number
 }

@@ -15,6 +15,7 @@
   justify-content: space-between;
   gap: 1vw;
   grid-area: nav;
+  flex-wrap: wrap;
 }
 
 .lobby nav a:hover {

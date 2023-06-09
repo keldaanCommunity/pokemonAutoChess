@@ -89,7 +89,7 @@
   width: 0;
   position: absolute;
   bottom: 100%;
-  left: 10px;
+  left: calc(0.75em - 10px);
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   border-top: 10px solid black;
@@ -107,4 +107,13 @@
   display: block;
   height: 1.5em;
   width: 1.5em;
+}
+
+#game-stage-info .weather-information > img {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+#game-stage-info .weather-information p {
+  white-space: pre-line;
 }

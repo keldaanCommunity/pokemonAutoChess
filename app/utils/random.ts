@@ -6,6 +6,10 @@ export function coinflip(): boolean {
   return Math.random() < 0.5
 }
 
+export function randomBetween(min: number, max: number): number {
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
 export function pickRandomIn<T>(list: T[] | Record<any, T>): T {
   if (!Array.isArray(list)) return pickRandomIn(Object.values(list))
   return list[Math.floor(Math.random() * list.length)]
