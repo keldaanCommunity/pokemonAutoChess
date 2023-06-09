@@ -891,6 +891,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.COSMIC_POWER]: {
+    eng: "Cosmic Power",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1782,6 +1788,12 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
   },
   [Ability.COUNTER]: {
     eng: `Pokemon lashes out at adjacent enemies dealing ${Damage.SPECIAL} equal its missing ${Stat.HP} (Scale with ${Stat.AP})`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.COSMIC_POWER]: {
+    eng: `Buff adjacent pokemons ${Stat.AP} by [10,20,30]`,
     esp: "",
     prt: "",
     fra: ""

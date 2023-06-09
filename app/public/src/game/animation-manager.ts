@@ -96,6 +96,17 @@ export default class AnimationManager {
 
   createSpecialAttacksAnimations() {
     this.game.anims.create({
+      key: Ability.COSMIC_POWER,
+      frames: this.game.anims.generateFrameNames("COSMIC_POWER", {
+        start: 0,
+        end: 36,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.SOFT_BOILED,
       frames: this.game.anims.generateFrameNames("SOFT_BOILED", {
         start: 0,
