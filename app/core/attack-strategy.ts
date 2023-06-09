@@ -2538,6 +2538,31 @@ export class CalmMindStrategy extends AttackStrategy {
   }
 }
 
+export class ComsicPowerStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+    const ap =
+      pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL
+        ? 30
+        : pokemon.stars === 2
+        ? 20
+        : 10
+    pokemon.addAbilityPower(ap, false)
+    cells.forEach((cell) => {
+      if (cell.value && pokemon.team === cell.value.team) {
+        cell.value.addAbilityPower(ap, false)
+      }
+    })
+  }
+}
+
 export class IronDefenseStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
