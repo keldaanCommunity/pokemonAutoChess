@@ -470,17 +470,17 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.LARGO]: {
-    eng: `Gain +3 ${Stat.ATK}`,
+    eng: `Ally team gains +1 ${Stat.ATK}`,
     esp: ``,
     fra: ``
   },
   [Effect.ALLEGRO]: {
-    eng: `Gain +5 ${Stat.ATK}`,
+    eng: `Ally team gains +1 ${Stat.ATK} and +5% ${Stat.ATK_SPEED}`,
     esp: ``,
     fra: ``
   },
   [Effect.PRESTO]: {
-    eng: `Gain +7 ${Stat.ATK}`,
+    eng: `Ally team gains +1 ${Stat.ATK}, +5% ${Stat.ATK_SPEED} and 3 ${Stat.MANA}`,
     esp: ``,
     fra: ``
   },

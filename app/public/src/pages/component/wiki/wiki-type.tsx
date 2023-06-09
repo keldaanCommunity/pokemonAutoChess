@@ -65,10 +65,8 @@ export default function WikiType(props: { type: Synergy | "all" }) {
           <p>{addIconsToDescription(SynergyDescription[props.type].eng)}</p>
           {SynergyEffects[props.type].map((effect, i) => {
             return (
-              <div key={EffectName[effect]} style={{ display: "flex" }}>
-                <p>
-                  ({TypeTrigger[props.type][i]}) {EffectName[effect]}:&nbsp;
-                </p>
+              <div key={EffectName[effect]} style={{ display: "flex", alignItems: "center" }}>
+                <span>({TypeTrigger[props.type][i]}) {EffectName[effect]}:&nbsp;</span>
                 <EffectDescriptionComponent effect={effect} />
               </div>
             )
