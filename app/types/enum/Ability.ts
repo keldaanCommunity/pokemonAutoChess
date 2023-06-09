@@ -146,7 +146,8 @@ import {
   SearingShotStrategy,
   PeckStrategy,
   SplashStrategy,
-  CounterStrategy
+  CounterStrategy,
+  ComsicPowerStrategy
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -297,7 +298,8 @@ export enum Ability {
   SEARING_SHOT = "SEARING_SHOT",
   PECK = "PECK",
   SPLASH = "SPLASH",
-  COUNTER = "COUNTER"
+  COUNTER = "COUNTER",
+  COSMIC_POWER = "COSMIC_POWER"
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -448,5 +450,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.SEARING_SHOT]: new SearingShotStrategy(),
   [Ability.PECK]: new PeckStrategy(),
   [Ability.SPLASH]: new SplashStrategy(),
-  [Ability.COUNTER]: new CounterStrategy()
+  [Ability.COUNTER]: new CounterStrategy(),
+  [Ability.COSMIC_POWER]: new ComsicPowerStrategy()
 }

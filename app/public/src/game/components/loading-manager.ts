@@ -251,6 +251,11 @@ export default class LoadingManager {
       "/assets/attacks"
     )
     scene.load.multiatlas(
+      "COSMIC_POWER",
+      "/assets/attacks/COSMIC_POWER.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
       "BONEMERANG",
       "/assets/attacks/BONEMERANG.json",
       "/assets/attacks"
