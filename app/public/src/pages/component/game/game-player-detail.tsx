@@ -10,6 +10,7 @@ export default function GamePlayerDetail(props: {
   name: string
   life: number
   money: number
+  level: number
   history: ArraySchema<HistoryItem>
 }) {
   return (
@@ -17,12 +18,12 @@ export default function GamePlayerDetail(props: {
       <div
         style={{
           display: "flex",
-          gap: "10px",
-          marginBottom: "10px",
+          gap: "1em",
           alignItems: "center"
         }}
       >
-        <h4>{props.name}</h4>
+        <span className="player-name">{props.name}</span>
+        <span>Lvl {props.level}</span>
         <div className="nes-container">
           <Life value={props.life} />
         </div>
@@ -30,7 +31,7 @@ export default function GamePlayerDetail(props: {
           <Money value={props.money} />
         </div>
       </div>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div style={{ display: "flex", justifyContent: "start" }}>
         {props.history.map((record, i) => {
           return (
             <div
@@ -45,9 +46,9 @@ export default function GamePlayerDetail(props: {
               <img
                 style={{
                   border:
-                    record.result == BattleResult.WIN
-                      ? "4px solid #4aa52e"
-                      : "4px solid #8c2022",
+                    record.result === BattleResult.WIN ? "4px solid #4aa52e"
+                    : record.result === BattleResult.DRAW ? "4px solid #cc6a28"
+                    : "4px solid #8c2022",
                   marginLeft: "6px",
                   borderRadius: "12px"
                 }}
