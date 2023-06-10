@@ -15,8 +15,37 @@
   flex: 1;
   overflow-y: auto;
   background-color: #54596b;
+  line-height: 1em;
+  font-size: 80%;
 }
 
 #root .news .content {
   padding: 0.5em;
+}
+
+.news .content h1 {
+  font-size: 180%;
+  text-align: center;
+  text-shadow: 2px 2px 2px #00000040;
+}
+
+.news .content h2 {
+  font-size: 120%;
+  border-bottom: 2px solid #80808080;
+}
+
+.news .content ul {
+  padding-left: 20px;
+}
+
+.news .content blockquote {
+  text-align: right;
+  color: gray;
+  margin-bottom: 0.25em;
+}
+
+.news .content hr {
+  height: 2px;
+  background-color: white;
+  margin: 1em 0;
 }
