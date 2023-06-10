@@ -16,6 +16,7 @@ import { pickRandomIn } from "../utils/random"
 import { logger } from "../utils/logger"
 import { Passive } from "../types/enum/Passive"
 import { Weather } from "../types/enum/Weather"
+import { min } from "../utils/number"
 
 export default class PokemonState {
   handleHeal(
@@ -433,6 +434,8 @@ export default class PokemonState {
   }
 
   update(pokemon: PokemonEntity, dt: number, board: Board, weather: string) {
+    pokemon.status.updateAllStatus(dt, pokemon, board)
+
     if(pokemon.status.resurecting &&
       pokemon.action !== PokemonActionState.HURT
     ){
@@ -444,6 +447,7 @@ export default class PokemonState {
     ) {
       pokemon.toIdleState()
     }
+
     if (
       pokemon.effects.includes(Effect.TILLER) ||
       pokemon.effects.includes(Effect.DIGGER) ||
@@ -482,8 +486,6 @@ export default class PokemonState {
       }
     }
 
-    pokemon.status.updateAllStatus(dt, pokemon, board)
-
     if (pokemon.manaCooldown <= 0) {
       pokemon.setMana(pokemon.mana + 10)
       if(pokemon.simulation.weather === Weather.RAIN) {
@@ -491,7 +493,11 @@ export default class PokemonState {
       }
       pokemon.manaCooldown = 1000
     } else {
-      pokemon.manaCooldown = Math.max(0, pokemon.manaCooldown - dt)
+      pokemon.manaCooldown = min(0)(pokemon.manaCooldown - dt)
+    }
+
+    if (pokemon.fairySplashCooldown > 0) {
+      pokemon.fairySplashCooldown = min(0)(pokemon.fairySplashCooldown - dt)
     }
   }
 
