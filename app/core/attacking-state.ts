@@ -191,63 +191,38 @@ export default class AttackingState extends PokemonState {
         target
       )
 
-      let damage = pokemon.atk
+      let rawDamageCount = pokemon.atk
       const attackType = pokemon.attackType
 
       if (Math.random() * 100 < pokemon.critChance && target) {
         pokemon.onCritical(target, board)
         if (target.items.has(Item.ROCKY_HELMET) === false) {
-          damage = Math.round(pokemon.atk * pokemon.critDamage)
+          rawDamageCount = Math.round(pokemon.atk * pokemon.critDamage)
         }
       }
 
-      if (pokemon.effects.includes(Effect.PHANTOM_FORCE) && damage > 0) {
-        const trueDamage = 0.2 * damage
-        damage = 0.8 * damage
-        target.handleDamage({
-          damage: trueDamage,
-          board,
-          attackType: AttackType.TRUE,
-          attacker: pokemon,
-          dodgeable: true,
-          shouldAttackerGainMana: false,
-          shouldTargetGainMana: true
-        })
-      }
+      // Partition damage into base/true damage from ghost synergy
+      let directDamage = rawDamageCount
+      let ghostTrueDamage = 0.0
 
-      if (pokemon.effects.includes(Effect.CURSE) && damage > 0) {
-        const trueDamage = 0.4 * damage
-        damage = 0.6 * damage
-        target.handleDamage({
-          damage: trueDamage,
-          board,
-          attackType: AttackType.TRUE,
-          attacker: pokemon,
-          dodgeable: true,
-          shouldAttackerGainMana: false,
-          shouldTargetGainMana: true
-        })
-      }
+      if (
+        pokemon.effects.includes(Effect.PHANTOM_FORCE) ||
+        pokemon.effects.includes(Effect.CURSE) ||
+        pokemon.effects.includes(Effect.SHADOW_TAG) ||
+        pokemon.effects.includes(Effect.WANDERING_SPIRIT)
+      ) {
+        let ghostTrueDamageFactor = 
+        pokemon.effects.includes(Effect.PHANTOM_FORCE) ? 0.2 : 
+        pokemon.effects.includes(Effect.CURSE) ? 0.4 :
+        pokemon.effects.includes(Effect.SHADOW_TAG) ? 0.7 :
+        pokemon.effects.includes(Effect.WANDERING_SPIRIT) ? 1.0 : 0.0
 
-      if (pokemon.effects.includes(Effect.SHADOW_TAG) && damage > 0) {
-        const trueDamage = 0.7 * damage
-        damage = 0.3 * damage
-        target.handleDamage({
-          damage: trueDamage,
-          board,
-          attackType: AttackType.TRUE,
-          attacker: pokemon,
-          dodgeable: true,
-          shouldAttackerGainMana: false,
-          shouldTargetGainMana: true
-        })
-      }
+        ghostTrueDamage = rawDamageCount * ghostTrueDamageFactor
+        directDamage = rawDamageCount - ghostTrueDamage
 
-      if (pokemon.effects.includes(Effect.WANDERING_SPIRIT) && damage > 0) {
-        const trueDamage = damage
-        damage = 0
+        // Apply ghost true damage
         target.handleDamage({
-          damage: trueDamage,
+          damage: Math.ceil(rawDamageCount * ghostTrueDamageFactor),
           board,
           attackType: AttackType.TRUE,
           attacker: pokemon,
@@ -270,10 +245,10 @@ export default class AttackingState extends PokemonState {
         })
       }
 
-      if (damage > 0) {
+      if (directDamage > 0) {
         // finally, the direct attack damage is handled here
         target.handleDamage({
-          damage,
+          damage: directDamage,
           board,
           attackType,
           attacker: pokemon,
@@ -317,7 +292,8 @@ export default class AttackingState extends PokemonState {
         pokemon.status.triggerParalysis(5000, pokemon)
       }
 
-      if (pokemon.items.has(Item.CHOICE_SCARF) && damage > 0) {
+      // Apply choice scarf damage to random adjacent target
+      if (pokemon.items.has(Item.CHOICE_SCARF) && rawDamageCount > 0) {
         const cells = board.getAdjacentCells(target.positionX, target.positionY)
         let targetCount = 1
         cells.forEach((cell) => {
@@ -326,8 +302,9 @@ export default class AttackingState extends PokemonState {
             pokemon.team != cell.value.team &&
             targetCount > 0
           ) {
+            // Apply direct damage
             cell.value.handleDamage({
-              damage: Math.ceil(0.5 * damage),
+              damage: Math.ceil(0.5 * directDamage),
               board,
               attackType,
               attacker: pokemon,
@@ -335,6 +312,18 @@ export default class AttackingState extends PokemonState {
               shouldAttackerGainMana: false,
               shouldTargetGainMana: true
             })
+
+            // Apply ghost true damage
+            cell.value.handleDamage({
+              damage: Math.ceil(0.5 * ghostTrueDamage),
+              board,
+              attackType,
+              attacker: pokemon,
+              dodgeable: true,
+              shouldAttackerGainMana: false,
+              shouldTargetGainMana: true
+            })
+
             targetCount--
           }
         })
