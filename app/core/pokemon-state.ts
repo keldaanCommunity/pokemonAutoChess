@@ -343,6 +343,13 @@ export default class PokemonState {
           )
         } else if (pokemon.status.resurection) {
           pokemon.status.triggerResurection(pokemon)
+          board.forEach((x, y, entity: PokemonEntity | undefined) => {
+            if(entity && entity.targetX === pokemon.positionX && entity.targetY === pokemon.positionY) {
+              // switch aggro immediately to reduce retarget lag after resurection
+              entity.cooldown = 0
+              entity.toMovingState()
+            }
+          })
         } else {
           const isWorkUp = pokemon.effects.includes(Effect.BULK_UP)
           const isRage = pokemon.effects.includes(Effect.RAGE)
