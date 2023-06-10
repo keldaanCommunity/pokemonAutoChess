@@ -227,7 +227,7 @@ export default class AttackingState extends PokemonState {
           attackType: AttackType.TRUE,
           attacker: pokemon,
           dodgeable: true,
-          shouldAttackerGainMana: false,
+          shouldAttackerGainMana: pokemon.effects.includes(Effect.WANDERING_SPIRIT),  // Ensure mana gain in 100% true damage case
           shouldTargetGainMana: true
         })
       }
