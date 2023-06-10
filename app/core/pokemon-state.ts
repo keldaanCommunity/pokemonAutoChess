@@ -32,6 +32,11 @@ export default class PokemonState {
     ) {
       const boost = apBoost ? (heal * apBoost * pokemon.ap) / 100 : 0
       let healBoosted = Math.round(heal + boost)
+
+      if(pokemon.status.poisonStacks > 0){
+        healBoosted = Math.round(healBoosted * (1 - pokemon.status.poisonStacks * 0.2))
+      }
+
       if (pokemon.passive === Passive.WONDER_GUARD) {
         healBoosted = 1
       }

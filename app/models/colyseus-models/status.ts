@@ -6,6 +6,7 @@ import { Effect } from "../../types/enum/Effect"
 import { AttackType } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Weather } from "../../types/enum/Weather"
+import { max } from "../../utils/number"
 
 export default class Status extends Schema implements IStatus {
   @type("boolean") burn = false
@@ -286,11 +287,7 @@ export default class Status extends Schema implements IStatus {
     origin: PokemonEntity | undefined,
     board: Board
   ) {
-    if (
-      !this.silence &&
-      !pkm.items.has(Item.FLUFFY_TAIL) &&
-      !this.runeProtect
-    ) {
+    if (!this.silence && !pkm.isImmuneToStatusChange) {
       this.silence = true
       if(pkm.simulation.weather === Weather.MISTY){
         timer = Math.round(timer * 1.3)
@@ -317,12 +314,19 @@ export default class Status extends Schema implements IStatus {
     origin: PokemonEntity | undefined,
     board: Board
   ) {
-    if (pkm.items.has(Item.FLUFFY_TAIL) === false && !this.runeProtect) {
-      this.poisonStacks = Math.min(3, this.poisonStacks + 1)
-      this.poisonCooldown = Math.max(timer, this.poisonCooldown)
+    if (!pkm.isImmuneToStatusChange) {
+      let maxStacks = 3
       if (origin) {
         this.poisonOrigin = origin
+        if(origin.effects.includes(Effect.VENOMOUS)){
+          maxStacks = 4
+        }
+        if(origin.effects.includes(Effect.TOXIC)){
+          maxStacks = 5
+        }
       }
+      this.poisonStacks = max(maxStacks)(this.poisonStacks + 1)
+      this.poisonCooldown = Math.max(timer, this.poisonCooldown)
     }
   }
 
@@ -359,7 +363,7 @@ export default class Status extends Schema implements IStatus {
   }
 
   triggerFreeze(timer: number, pkm: PokemonEntity) {
-    if (!this.freeze && !pkm.items.has(Item.FLUFFY_TAIL) && !this.runeProtect) {
+    if (!this.freeze && !pkm.isImmuneToStatusChange) {
       if(pkm.simulation.weather === Weather.SNOW){
         timer = Math.round(timer * 1.3)
       } else if (pkm.simulation.weather === Weather.SUN){
@@ -394,7 +398,7 @@ export default class Status extends Schema implements IStatus {
   }
 
   triggerSleep(timer: number, pkm: PokemonEntity) {
-    if (!this.sleep && !pkm.items.has(Item.FLUFFY_TAIL) && !this.runeProtect) {
+    if (!this.sleep && !pkm.isImmuneToStatusChange) {
       if(pkm.simulation.weather === Weather.NIGHT){
         timer = Math.round(timer * 1.3)
       }
@@ -412,11 +416,7 @@ export default class Status extends Schema implements IStatus {
   }
 
   triggerConfusion(timer: number, pkm: PokemonEntity) {
-    if (
-      !this.confusion &&
-      !pkm.items.has(Item.FLUFFY_TAIL) &&
-      !this.runeProtect
-    ) {
+    if (!this.confusion && !pkm.isImmuneToStatusChange) {
       if(pkm.simulation.weather === Weather.SANDSTORM){
         timer = Math.round(timer * 1.3)
       }
@@ -439,7 +439,7 @@ export default class Status extends Schema implements IStatus {
     origin: PokemonEntity | undefined,
     board: Board
   ) {
-    if (!this.wound && !pkm.items.has(Item.FLUFFY_TAIL) && !this.runeProtect) {
+    if (!this.wound && !pkm.isImmuneToStatusChange) {
       this.wound = true
       this.woundCooldown = timer
       if (origin) {
@@ -458,11 +458,7 @@ export default class Status extends Schema implements IStatus {
   }
 
   triggerParalysis(timer: number, pkm: PokemonEntity) {
-    if (
-      !this.paralysis &&
-      !pkm.items.has(Item.FLUFFY_TAIL) &&
-      !this.runeProtect
-    ) {
+    if (!this.paralysis && !pkm.isImmuneToStatusChange) {
       this.paralysis = true
       pkm.addAttackSpeed(-40)
       if(pkm.simulation.weather === Weather.STORM){

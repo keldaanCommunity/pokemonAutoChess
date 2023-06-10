@@ -900,69 +900,35 @@ export default class Simulation extends Schema implements ISimulation {
           pokemon.effects.push(Effect.SHEER_COLD)
           break
 
-        case Effect.POISON_GAS:
-          if (types.includes(Synergy.POISON)) {
-            pokemon.effects.push(Effect.POISON_GAS)
-          }
-          break
-
+        case Effect.POISONOUS:
+        case Effect.VENOMOUS:
         case Effect.TOXIC:
           if (types.includes(Synergy.POISON)) {
-            pokemon.effects.push(Effect.TOXIC)
+            pokemon.effects.push(effect)
           }
           break
 
         case Effect.LARGO:
-          if (types.includes(Synergy.SOUND)) {
-            pokemon.effects.push(Effect.LARGO)
-          }
-          break
-
         case Effect.ALLEGRO:
-          if (types.includes(Synergy.SOUND)) {
-            pokemon.effects.push(Effect.ALLEGRO)
-          }
-          break
-
         case Effect.PRESTO:
           if (types.includes(Synergy.SOUND)) {
-            pokemon.effects.push(Effect.PRESTO)
+            pokemon.effects.push(effect)
           }
           break
 
         case Effect.INFESTATION:
-          if (types.includes(Synergy.BUG)) {
-            pokemon.effects.push(Effect.INFESTATION)
-          }
-          break
-
         case Effect.HORDE:
-          if (types.includes(Synergy.BUG)) {
-            pokemon.effects.push(Effect.HORDE)
-          }
-          break
-
         case Effect.HEART_OF_THE_SWARM:
           if (types.includes(Synergy.BUG)) {
-            pokemon.effects.push(Effect.HEART_OF_THE_SWARM)
+            pokemon.effects.push(effect)
           }
           break
 
         case Effect.TILLER:
-          if (types.includes(Synergy.GROUND)) {
-            pokemon.effects.push(Effect.TILLER)
-          }
-          break
-
         case Effect.DIGGER:
-          if (types.includes(Synergy.GROUND)) {
-            pokemon.effects.push(Effect.DIGGER)
-          }
-          break
-
         case Effect.DRILLER:
           if (types.includes(Synergy.GROUND)) {
-            pokemon.effects.push(Effect.DRILLER)
+            pokemon.effects.push(effect)
           }
           break
 
@@ -991,14 +957,9 @@ export default class Simulation extends Schema implements ISimulation {
           break
 
         case Effect.HATCHER:
-          if (types.includes(Synergy.BABY)) {
-            pokemon.effects.push(Effect.HATCHER)
-          }
-          break
-
         case Effect.BREEDER:
           if (types.includes(Synergy.BABY)) {
-            pokemon.effects.push(Effect.BREEDER)
+            pokemon.effects.push(effect)
           }
           break
 

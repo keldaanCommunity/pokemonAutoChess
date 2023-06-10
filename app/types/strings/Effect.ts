@@ -35,7 +35,8 @@ export const EffectName: { [key in Effect]: string } = {
   [Effect.TILLER]: `Tiller`,
   [Effect.DIGGER]: `Digger`,
   [Effect.DRILLER]: `Driller`,
-  [Effect.POISON_GAS]: `Poison Gas`,
+  [Effect.POISONOUS]: `Poisonous`,
+  [Effect.VENOMOUS]: `Venomous`,
   [Effect.TOXIC]: `Toxic`,
   [Effect.DRAGON_ENERGY]: `Dragon Energy`,
   [Effect.DRAGON_DANCE]: `Dragon Dance`,
@@ -259,13 +260,18 @@ export const EffectDescription: {
     esp: ``,
     fra: ``
   },
-  [Effect.POISON_GAS]: {
+  [Effect.POISONOUS]: {
     eng: `30% chance to ${Status.POISON}`,
     esp: ``,
     fra: ``
   },
+  [Effect.VENOMOUS]: {
+    eng: `50% chance to ${Status.POISON}. Max stacks of ${Status.POISON} +1`,
+    esp: ``,
+    fra: ``
+  },
   [Effect.TOXIC]: {
-    eng: `70% chance to ${Status.POISON}`,
+    eng: `70% chance to ${Status.POISON}. Max stacks of ${Status.POISON} +2`,
     esp: ``,
     fra: ``
   },

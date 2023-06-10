@@ -196,7 +196,7 @@ export const SynergyDescription: {
     fra: ""
   },
   [Synergy.POISON]: {
-    eng: `Poison pokemons have a chance to ${Status.POISON} their target for 4 seconds with their basic attacks `,
+    eng: `Poison pokemons have a chance to ${Status.POISON} their target for 4 seconds with their basic attacks. Poison inflicts ${Damage.TRUE} over time and reduce healing efficiency.`,
     esp: "",
     fra: ""
   },

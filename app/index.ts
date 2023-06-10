@@ -16,7 +16,7 @@ import PreprationRoom from "./rooms/preparation-room"
 import GameRoom from "./rooms/game-room"
 import { Pkm } from "./types/enum/Pokemon"
 import { Item } from "./types/enum/Item"
-import { TypeTrigger } from "./types/Config"
+import { SynergyTriggers } from "./types/Config"
 import { logger } from "./utils/logger"
 
 dotenv.config()
@@ -146,7 +146,7 @@ app.get("/items", (req, res) => {
 })
 
 app.get("/types-trigger", (req, res) => {
-  res.send(TypeTrigger)
+  res.send(SynergyTriggers)
 })
 
 const basicAuthMiddleware = basicAuth({

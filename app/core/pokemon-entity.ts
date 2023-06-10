@@ -166,6 +166,10 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     return !this.status.resurecting
   }
 
+  get isImmuneToStatusChange() {
+    return this.items.has(Item.FLUFFY_TAIL) || this.status.runeProtect
+  }
+
   handleDamage(params: {
     damage: number
     board: Board
