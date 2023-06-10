@@ -31,6 +31,7 @@ More Wounding abilities
 
 - Rework Sound: Sound pokemons emit a cry when they use their abilities, waking up allies asleep and giving them bonus stats
 - Nerf Flora: Activates at ~~2/3/4/5~~ 3/4/5/6
+- Fairy Splash damage now has a cooldown of 1 millisecond, to prevent it from triggering multiple times with electric additional attacks
 
 # Changes to Items
 
