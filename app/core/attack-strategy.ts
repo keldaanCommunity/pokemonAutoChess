@@ -27,26 +27,28 @@ export class AttackStrategy {
     pokemon.count.ult += 1
 
     if (pokemon.types.includes(Synergy.SOUND)) {
-      let atk = 0
-      if (pokemon.effects.includes(Effect.LARGO)) {
-        atk += 3
-      } else if (pokemon.effects.includes(Effect.ALLEGRO)) {
-        atk += 5
-      } else if (pokemon.effects.includes(Effect.PRESTO)) {
-        atk += 7
-      }
-      if (atk > 0) {
-        board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
+      pokemon.count.soundCount++
+      board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
+        if (ally && pokemon.team === ally.team) {
+          ally.status.sleep = false
           if (
-            tg &&
-            pokemon.team == tg.team &&
-            tg.types.includes(Synergy.SOUND)
+            pokemon.effects.includes(Effect.LARGO) ||
+            pokemon.effects.includes(Effect.ALLEGRO) ||
+            pokemon.effects.includes(Effect.PRESTO)
           ) {
-            tg.count.soundCount++
-            tg.addAttack(atk, true)
+            ally.addAttack(1, false)
           }
-        })
-      }
+          if (
+            pokemon.effects.includes(Effect.ALLEGRO) ||
+            pokemon.effects.includes(Effect.PRESTO)
+          ) {
+            ally.addAttackSpeed(5, false)
+          }
+          if (pokemon.effects.includes(Effect.PRESTO)) {
+            ally.setMana(ally.mana + 3)
+          }
+        }
+      })
     }
 
     if (pokemon.items.has(Item.AQUA_EGG)) {

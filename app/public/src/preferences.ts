@@ -2,11 +2,13 @@ const KEY = "pac_preferences"
 
 interface IPreferencesState {
   musicVolume: number
+  sfxVolume: number
   showDpsMeter: boolean
 }
 
 const defaultPreferences: IPreferencesState = {
   musicVolume: 30,
+  sfxVolume: 30,
   showDpsMeter: false
 }
 
@@ -14,7 +16,7 @@ export function loadPreferences(): IPreferencesState {
   try {
     const serializedState = localStorage.getItem(KEY)
     if (!serializedState) return defaultPreferences
-    return JSON.parse(serializedState)
+    return { ...defaultPreferences, ...JSON.parse(serializedState) }
   } catch (e) {
     return defaultPreferences
   }
