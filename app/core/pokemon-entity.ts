@@ -22,6 +22,7 @@ import { clamp, roundTo2Digits } from "../utils/number"
 import { Passive } from "../types/enum/Passive"
 import { DEFAULT_CRIT_CHANCE, DEFAULT_CRIT_DAMAGE } from "../types/Config"
 import { removeInArray } from "../utils/array"
+import { logger } from "../utils/logger"
 
 export default class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
@@ -79,6 +80,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   flyingProtection = 0
   growGroundTimer = 0
   sandstormDamageTimer = 0
+  fairySplashCooldown = 0
   echo = 0
   isClone = false
 
@@ -370,67 +372,42 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   onCritical(target: PokemonEntity, board: Board) {
     target.count.crit++
 
-    if (
-      this.effects.includes(Effect.FAIRY_WIND) ||
-      this.effects.includes(Effect.STRANGE_STEAM) ||
-      this.effects.includes(Effect.AROMATIC_MIST)
-    ) {
-      let d = 0
-      if (this.effects.includes(Effect.AROMATIC_MIST)) {
-        d = 10
-      } else if (this.effects.includes(Effect.FAIRY_WIND)) {
-        d = 30
-      } else if (this.effects.includes(Effect.STRANGE_STEAM)) {
-        d = 60
-      }
-      const cells = board.getAdjacentCells(this.positionX, this.positionY)
-
-      cells.forEach((cell) => {
-        if (cell.value && this.team != cell.value.team) {
-          cell.value.count.fairyCritCount++
-          cell.value.handleDamage({
-            damage: d,
-            board,
-            attackType: AttackType.SPECIAL,
-            attacker: this,
-            dodgeable: false,
-            shouldAttackerGainMana: false,
-            shouldTargetGainMana: true
-          })
+    // proc fairy splash damage for both the attacker and the target
+    ;[this,target].forEach((pokemon) => {
+      if (
+        pokemon.fairySplashCooldown === 0 &&
+        (pokemon.effects.includes(Effect.FAIRY_WIND) ||
+        pokemon.effects.includes(Effect.STRANGE_STEAM) ||
+        pokemon.effects.includes(Effect.AROMATIC_MIST))
+      ) {
+        let d = 0
+        if (pokemon.effects.includes(Effect.AROMATIC_MIST)) {
+          d = 10
+        } else if (pokemon.effects.includes(Effect.FAIRY_WIND)) {
+          d = 30
+        } else if (pokemon.effects.includes(Effect.STRANGE_STEAM)) {
+          d = 60
         }
-      })
-    }
+        const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+  
+        cells.forEach((cell) => {
+          if (cell.value && pokemon.team !== cell.value.team) {
+            cell.value.count.fairyCritCount++
+            cell.value.handleDamage({
+              damage: d,
+              board,
+              attackType: AttackType.SPECIAL,
+              attacker: pokemon,
+              dodgeable: false,
+              shouldAttackerGainMana: false,
+              shouldTargetGainMana: true
+            })
+          }
+        })
 
-    if (
-      target.effects.includes(Effect.FAIRY_WIND) ||
-      target.effects.includes(Effect.STRANGE_STEAM) ||
-      target.effects.includes(Effect.AROMATIC_MIST)
-    ) {
-      let d = 0
-      if (target.effects.includes(Effect.AROMATIC_MIST)) {
-        d = 10
-      } else if (target.effects.includes(Effect.FAIRY_WIND)) {
-        d = 30
-      } else if (target.effects.includes(Effect.STRANGE_STEAM)) {
-        d = 60
+        pokemon.fairySplashCooldown = 1
       }
-      const cells = board.getAdjacentCells(target.positionX, target.positionY)
-
-      cells.forEach((cell) => {
-        if (cell.value && target.team != cell.value.team) {
-          cell.value.count.fairyCritCount++
-          cell.value.handleDamage({
-            damage: d,
-            board,
-            attackType: AttackType.SPECIAL,
-            attacker: target,
-            dodgeable: false,
-            shouldAttackerGainMana: false,
-            shouldTargetGainMana: true
-          })
-        }
-      })
-    }
+    })
 
     if (this.items.has(Item.SCOPE_LENS)) {
       this.setMana(this.mana + 15)
