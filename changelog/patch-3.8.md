@@ -7,7 +7,7 @@ patch announcement
 # Patch 3.8: Nightfall
 
 Sound rework
-New weather effects: Night, Windy, Storm, Misty
+4 new weather effects: Night, Windy, Storm, Misty
 Weather system rework: counts the total number per type for both boards combined to elect weather
 Solrock / Lunatone
 Poison rework (heal reduction)
@@ -29,6 +29,7 @@ More Wounding abilities
 
 # Changes to Synergies
 
+- Rework Sound: Sound pokemons emit a cry when they use their abilities, waking up allies asleep and giving them bonus stats
 - Nerf Flora: Activates at ~~2/3/4/5~~ 3/4/5/6
 
 # Changes to Items
@@ -40,8 +41,7 @@ More Wounding abilities
 -
 
 # UI
-
--
+- Add a slider option for SFX volume
 
 # Misc
 

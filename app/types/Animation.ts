@@ -1,5 +1,3 @@
-import { Pkm } from "./enum/Pokemon"
-
 export enum AnimationType {
   Idle = "Idle",
   Walk = "Walk",

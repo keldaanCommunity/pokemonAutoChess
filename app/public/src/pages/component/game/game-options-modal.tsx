@@ -8,8 +8,9 @@ export default function GameOptionsModal(props: {
   hideModal: Dispatch<SetStateAction<boolean>>
   leave: () => void
 }) {
-  const initialVolume = loadPreferences().musicVolume
-  const [musicVolume, setMusicVolume] = useState(initialVolume)
+  const initialPreferences = loadPreferences()
+  const [musicVolume, setMusicVolume] = useState(initialPreferences.musicVolume)
+  const [sfxVolume, setSFXVolume] = useState(initialPreferences.sfxVolume)
 
   function changeMusicVolume(e: FormEvent<HTMLInputElement>) {
     const newValue = Number((e.target as HTMLInputElement).value)
@@ -18,6 +19,11 @@ export default function GameOptionsModal(props: {
     if (gameScene && gameScene.music) {
       ;(gameScene.music as Phaser.Sound.WebAudioSound).setVolume(newValue / 100)
     }
+  }
+
+  function changeSFXVolume(e: FormEvent<HTMLInputElement>) {
+    const newValue = Number((e.target as HTMLInputElement).value)
+    setSFXVolume(newValue)
   }
 
   return (
@@ -38,6 +44,18 @@ export default function GameOptionsModal(props: {
             ></input>
           </label>
         </p>
+        <p>
+          <label>
+            SFX Volume: {sfxVolume} %
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value={sfxVolume}
+              onInput={changeSFXVolume}
+            ></input>
+          </label>
+        </p>
       </Modal.Body>
       <Modal.Footer style={{ justifyContent: "space-between" }}>
         <button className="bubbly red" onClick={props.leave}>
@@ -46,7 +64,10 @@ export default function GameOptionsModal(props: {
         <button
           className="bubbly green"
           onClick={() => {
-            savePreferences({ musicVolume })
+            savePreferences({ 
+              musicVolume,
+              sfxVolume
+            })
             props.hideModal(true)
           }}
         >

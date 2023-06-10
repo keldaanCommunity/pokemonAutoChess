@@ -266,7 +266,7 @@ export const SynergyDescription: {
     fra: ""
   },
   [Synergy.SOUND]: {
-    eng: `Sound pokemons gain ${Stat.ATK} every time they use their abilities`,
+    eng: `Sound pokemons emit a cry when they use their abilities, waking up allies asleep and giving them bonus stats`,
     esp: "",
     fra: ""
   },
