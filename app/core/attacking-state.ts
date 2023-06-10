@@ -217,19 +217,21 @@ export default class AttackingState extends PokemonState {
         pokemon.effects.includes(Effect.SHADOW_TAG) ? 0.7 :
         pokemon.effects.includes(Effect.WANDERING_SPIRIT) ? 1.0 : 0.0
 
-        ghostTrueDamage = rawDamageCount * ghostTrueDamageFactor
+        ghostTrueDamage = Math.ceil(rawDamageCount * ghostTrueDamageFactor)
         directDamage = rawDamageCount - ghostTrueDamage
 
         // Apply ghost true damage
-        target.handleDamage({
-          damage: Math.ceil(rawDamageCount * ghostTrueDamageFactor),
-          board,
-          attackType: AttackType.TRUE,
-          attacker: pokemon,
-          dodgeable: true,
-          shouldAttackerGainMana: pokemon.effects.includes(Effect.WANDERING_SPIRIT),  // Ensure mana gain in 100% true damage case
-          shouldTargetGainMana: true
-        })
+        if (ghostTrueDamage > 0) {
+          target.handleDamage({
+            damage: Math.ceil(rawDamageCount * ghostTrueDamageFactor),
+            board,
+            attackType: AttackType.TRUE,
+            attacker: pokemon,
+            dodgeable: true,
+            shouldAttackerGainMana: pokemon.effects.includes(Effect.WANDERING_SPIRIT),  // Ensure mana gain in 100% true damage case
+            shouldTargetGainMana: true
+          })
+        }
       }
 
       if (target.status.spikeArmor && pokemon.range === 1) {
