@@ -1969,23 +1969,12 @@ export class NightmareStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let timer = 0
-    switch (pokemon.stars) {
-      case 1:
-        timer = 2000
-        break
-      case 2:
-        timer = 4000
-        break
-      case 3:
-        timer = 8000
-        break
-      default:
-        break
-    }
+    let duration = pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL ? 8000 : pokemon.stars === 2 ? 4000 : 2000
+    duration = Math.round(duration * (1 + pokemon.ap / 200))
+
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value && pokemon.team != value.team) {
-        value.status.triggerPoison(timer, value, pokemon, board)
+        value.status.triggerPoison(duration, value, pokemon, board)
       }
     })
   }
@@ -2055,29 +2044,31 @@ export class PoisonStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let timer = 0
+    let duration = 0
     let count = 1
 
     switch (pokemon.stars) {
       case 1:
-        timer = 3000
+        duration = 3000
         count = 1
         break
       case 2:
-        timer = 6000
+        duration = 6000
         count = 2
         break
       case 3:
-        timer = 9000
+        duration = 9000
         count = 3
         break
       default:
         break
     }
 
+    duration = Math.round(duration * (1 + pokemon.ap / 200))
+
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team && count > 0) {
-        tg.status.triggerPoison(timer, tg, pokemon, board)
+        tg.status.triggerPoison(duration, tg, pokemon, board)
         count--
       }
     })
