@@ -472,7 +472,12 @@ export default class GameRoom extends Room<GameState> {
           if(err != null) logger.error(err)
           else if (results) {
             results.forEach((bot) => {
-              bot.elo = computeElo(this.transformToSimplePlayer(player), player.rank, player.elo, [...humans, ...bots].map(p => this.transformToSimplePlayer(p)))
+              bot.elo = computeElo(
+                this.transformToSimplePlayer(player),
+                player.rank,
+                bot.elo,
+                [...humans, ...bots].map((p) => this.transformToSimplePlayer(p))
+              )
               bot.save()
             })
           }
