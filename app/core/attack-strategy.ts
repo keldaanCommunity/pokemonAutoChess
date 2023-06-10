@@ -2066,12 +2066,24 @@ export class PoisonStrategy extends AttackStrategy {
 
     duration = Math.round(duration * (1 + pokemon.ap / 200))
 
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
-      if (tg && pokemon.team != tg.team && count > 0) {
-        tg.status.triggerPoison(duration, tg, pokemon, board)
-        count--
+    const closestEnemies = new Array<PokemonEntity>()
+    board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
+      if (enemy && pokemon.team !== enemy.team) {
+        closestEnemies.push(enemy)
       }
     })
+    closestEnemies.sort((a, b) => {
+      const distanceA = board.distance(a.positionX, a.positionY, pokemon.positionX, pokemon.positionY)
+      const distanceB = board.distance(b.positionX, b.positionY, pokemon.positionX, pokemon.positionY)
+      return distanceA - distanceB
+    })
+
+    for (let i = 0; i < count; i++) {
+      const enemy = closestEnemies[i]
+      if (enemy) {
+        enemy.status.triggerPoison(duration, enemy, pokemon, board)
+      }
+    }
   }
 }
 
