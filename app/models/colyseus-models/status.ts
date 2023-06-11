@@ -153,9 +153,9 @@ export default class Status extends Schema implements IStatus {
   updateGrassHeal(dt: number, pkm: PokemonEntity) {
     if (this.grassCooldown - dt <= 0) {
       const heal = pkm.effects.includes(Effect.SPORE)
-        ? 20
+        ? 18
         : pkm.effects.includes(Effect.GROWTH)
-        ? 12
+        ? 10
         : 5
       pkm.handleHeal(heal, pkm, 0)
       this.grassCooldown = 1000
@@ -245,9 +245,9 @@ export default class Status extends Schema implements IStatus {
     if (this.burnDamageCooldown - dt <= 0) {
       if (this.burnOrigin) {
         let burnDamage = Math.ceil(pkm.hp * 0.05)
-        if(pkm.simulation.weather === Weather.SUN){
+        if (pkm.simulation.weather === Weather.SUN) {
           burnDamage = Math.round(burnDamage * 1.3)
-        } else if(pkm.simulation.weather === Weather.RAIN){
+        } else if (pkm.simulation.weather === Weather.RAIN) {
           burnDamage = Math.round(burnDamage * 0.7)
         }
 
@@ -256,8 +256,6 @@ export default class Status extends Schema implements IStatus {
           board,
           attackType: AttackType.TRUE,
           attacker: this.burnOrigin,
-          dodgeable: false,
-          shouldAttackerGainMana: false,
           shouldTargetGainMana: true
         })
         this.burnDamageCooldown = 1000
@@ -289,7 +287,7 @@ export default class Status extends Schema implements IStatus {
   ) {
     if (!this.silence && !pkm.isImmuneToStatusChange) {
       this.silence = true
-      if(pkm.simulation.weather === Weather.MISTY){
+      if (pkm.simulation.weather === Weather.MISTY) {
         timer = Math.round(timer * 1.3)
       }
       this.silenceCooldown = timer
@@ -318,10 +316,10 @@ export default class Status extends Schema implements IStatus {
       let maxStacks = 3
       if (origin) {
         this.poisonOrigin = origin
-        if(origin.effects.includes(Effect.VENOMOUS)){
+        if (origin.effects.includes(Effect.VENOMOUS)) {
           maxStacks = 4
         }
-        if(origin.effects.includes(Effect.TOXIC)){
+        if (origin.effects.includes(Effect.TOXIC)) {
           maxStacks = 5
         }
       }
@@ -334,7 +332,7 @@ export default class Status extends Schema implements IStatus {
     if (this.poisonDamageCooldown - dt <= 0) {
       if (this.poisonOrigin) {
         let poisonDamage = Math.ceil(pkm.hp * 0.05 * this.poisonStacks)
-        if(pkm.simulation.weather === Weather.RAIN){
+        if (pkm.simulation.weather === Weather.RAIN) {
           poisonDamage = Math.round(poisonDamage * 0.7)
         }
 
@@ -343,8 +341,6 @@ export default class Status extends Schema implements IStatus {
           board,
           attackType: AttackType.TRUE,
           attacker: this.poisonOrigin,
-          dodgeable: false,
-          shouldAttackerGainMana: false,
           shouldTargetGainMana: false
         })
         this.poisonDamageCooldown = 1000
@@ -364,9 +360,9 @@ export default class Status extends Schema implements IStatus {
 
   triggerFreeze(timer: number, pkm: PokemonEntity) {
     if (!this.freeze && !pkm.isImmuneToStatusChange) {
-      if(pkm.simulation.weather === Weather.SNOW){
+      if (pkm.simulation.weather === Weather.SNOW) {
         timer = Math.round(timer * 1.3)
-      } else if (pkm.simulation.weather === Weather.SUN){
+      } else if (pkm.simulation.weather === Weather.SUN) {
         timer = Math.round(timer * 0.7)
       }
       this.freeze = true
@@ -399,7 +395,7 @@ export default class Status extends Schema implements IStatus {
 
   triggerSleep(timer: number, pkm: PokemonEntity) {
     if (!this.sleep && !pkm.isImmuneToStatusChange) {
-      if(pkm.simulation.weather === Weather.NIGHT){
+      if (pkm.simulation.weather === Weather.NIGHT) {
         timer = Math.round(timer * 1.3)
       }
       this.sleep = true
@@ -417,7 +413,7 @@ export default class Status extends Schema implements IStatus {
 
   triggerConfusion(timer: number, pkm: PokemonEntity) {
     if (!this.confusion && !pkm.isImmuneToStatusChange) {
-      if(pkm.simulation.weather === Weather.SANDSTORM){
+      if (pkm.simulation.weather === Weather.SANDSTORM) {
         timer = Math.round(timer * 1.3)
       }
       this.confusion = true
@@ -461,7 +457,7 @@ export default class Status extends Schema implements IStatus {
     if (!this.paralysis && !pkm.isImmuneToStatusChange) {
       this.paralysis = true
       pkm.addAttackSpeed(-40)
-      if(pkm.simulation.weather === Weather.STORM){
+      if (pkm.simulation.weather === Weather.STORM) {
         timer = Math.round(timer * 1.3)
       }
       this.paralysisCooldown = timer

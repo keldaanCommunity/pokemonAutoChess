@@ -28,6 +28,14 @@ More Wounding abilities
 - Nerf to Happy Hour: ~~3/6/9~~ 2/5/8
 - Corrected and adjusted description of Poison ability
 - Poison & Nightmare now have poison duration scale with AP
+- Buff Sharpedo ~~18~~ 21 atk
+- Nerf Virizion Sacred Sword ~~120~~ 90 true damage
+- Grass 5 : restaure 12 hp / sec >>>>> restaure 10 hp / sec
+- Grass 7 : restaure 20 hp / sec >>>>> restaure 18 hp / sec
+- Bounsweet Hp ~~110~~ >>>> 100 mana ~~90~~ 100
+- Flying 4: Get Protect for ~~2~~ 1.5 seconds after flying away
+- Lanturn Buff ~~14~~ 16 atk
+- Buff Delphox ~~15~~ 18 atk
 
 # Changes to Synergies
 
@@ -42,9 +50,12 @@ More Wounding abilities
 
 # Bugfix
 
--
+- Many on-hit effects now only apply when the attack is successful (not dodged or protected). This concerns: Aquatic mana burn, Fire attack buff, Poison chance, Freeze chance, Silence chance, Upgrade stacks, Red Orb damage, Smoke Ball debuff, Spike Armor
+- Choice scarf was not applying damage correctly with Ghost true damage
+- Leftovers heal was triggering twice for the item holder
 
 # UI
+
 - Add a slider option for SFX volume
 
 # Misc

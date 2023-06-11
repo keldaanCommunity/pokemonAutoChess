@@ -98,8 +98,7 @@ export const EffectName: { [key in Effect]: string } = {
   [Effect.STORM]: "Storm",
   [Effect.MISTY]: "Misty",
   [Effect.WINDY]: "Windy",
-  [Effect.NIGHT]: "Night",
-
+  [Effect.NIGHT]: "Night"
 }
 
 export const EffectDescription: {
@@ -131,12 +130,12 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.GROWTH]: {
-    eng: `Restore 12 ${Stat.HP} per second`,
+    eng: `Restore 10 ${Stat.HP} per second`,
     esp: ``,
     fra: ``
   },
   [Effect.SPORE]: {
-    eng: `Restore 20 ${Stat.HP} per second`,
+    eng: `Restore 18 ${Stat.HP} per second`,
     esp: ``,
     fra: ``
   },
@@ -366,7 +365,7 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.FEATHER_DANCE]: {
-    eng: `Get ${Status.PROTECT} for 2 seconds after flying away`,
+    eng: `Get ${Status.PROTECT} for 1.5 seconds after flying away`,
     esp: ``,
     fra: ``
   },
@@ -456,7 +455,7 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.SHEER_COLD]: {
-    eng: `30% chance to ${Status.FREEZE}`,
+    eng: `40% chance to ${Status.FREEZE}`,
     esp: ``,
     fra: ``
   },
