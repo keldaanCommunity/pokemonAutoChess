@@ -7751,7 +7751,7 @@ export class Marshadow extends Pokemon {
       6,
       1,
       AttackSprite.FIGHTING_MELEE,
-      3,
+      2,
       90,
       Ability.SPECTRAL_THIEF,
       shiny,
@@ -13152,3 +13152,127 @@ export class Emboar extends Pokemon {
     )
   }
 }
+
+export class Wurmple extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.WURMPLE,
+      [Synergy.BUG],
+      Rarity.EPIC,
+      Pkm.SILCOON,
+      110,
+      10,
+      3,
+      3,
+      1,
+      AttackSprite.BUG_MELEE,
+      1,
+      100,
+      Ability.STICKY_WEB,
+      shiny,
+      emotion,
+      false,
+      false,
+      Passive.WURMPLE
+    )
+  }
+}
+
+export class Silcoon extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.SILCOON,
+      [Synergy.BUG, Synergy.NORMAL],
+      Rarity.EPIC,
+      Pkm.BEAUTIFLY,
+      180,
+      20,
+      6,
+      6,
+      1,
+      AttackSprite.BUG_MELEE,
+      2,
+      100,
+      Ability.SPIKE_ARMOR,
+      shiny,
+      emotion,
+      false,
+      false
+    )
+  }
+}
+
+export class Beautifly extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.BEAUTIFLY,
+      [Synergy.BUG, Synergy.NORMAL, Synergy.FLYING],
+      Rarity.EPIC,
+      Pkm.DEFAULT,
+      250,
+      30,
+      6,
+      6,
+      1,
+      AttackSprite.BUG_MELEE,
+      3,
+      100,
+      Ability.SILVER_WIND,
+      shiny,
+      emotion,
+      true,
+      false
+    )
+  }
+}
+
+export class Cascoon extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.CASCOON,
+      [Synergy.BUG, Synergy.POISON],
+      Rarity.EPIC,
+      Pkm.DUSTOX,
+      180,
+      20,
+      6,
+      6,
+      1,
+      AttackSprite.BUG_MELEE,
+      2,
+      100,
+      Ability.SPIKE_ARMOR,
+      shiny,
+      emotion,
+      false,
+      false
+    )
+  }
+}
+
+export class Dustox extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.DUSTOX,
+      [Synergy.BUG, Synergy.POISON, Synergy.FLYING],
+      Rarity.EPIC,
+      Pkm.DEFAULT,
+      250,
+      30,
+      6,
+      6,
+      1,
+      AttackSprite.BUG_MELEE,
+      3,
+      100,
+      Ability.POISON_POWDER,
+      shiny,
+      emotion,
+      false,
+      false
+    )
+  }
+}
+
+
+      

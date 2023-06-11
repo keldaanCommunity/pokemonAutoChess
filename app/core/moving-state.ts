@@ -3,7 +3,6 @@ import PokemonEntity from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
 import { PokemonActionState } from "../types/enum/Game"
 import { Synergy } from "../types/enum/Synergy"
-import { logger } from "../utils/logger"
 
 export default class MovingState extends PokemonState {
   update(pokemon: PokemonEntity, dt: number, board: Board, weather: string) {
