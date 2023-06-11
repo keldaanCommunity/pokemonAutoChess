@@ -20,6 +20,7 @@ import HistoryItem from "./history-item"
 import { Item } from "../../types/enum/Item"
 import { Pkm } from "../../types/enum/Pokemon"
 import GameRoom from "../../rooms/game-room"
+import { Weather } from "../../types/enum/Weather"
 
 export default class Player extends Schema implements IPlayer {
   @type("string") id: string
@@ -95,20 +96,25 @@ export default class Player extends Schema implements IPlayer {
     name: string,
     result: BattleResult,
     avatar: string,
-    isPVE: boolean
+    isPVE: boolean,
+    weather: Weather
   ) {
     if (this.history.length >= 5) {
       this.history.shift()
     }
-    this.history.push(new HistoryItem(name, result, avatar, isPVE))
+    this.history.push(new HistoryItem(name, result, avatar, isPVE, weather))
   }
 
-  getLastBattleResult() {
+  getLastBattle(): HistoryItem | null {
     if (this.history.length > 0) {
-      return this.history[this.history.length - 1].result
+      return this.history[this.history.length - 1]
     } else {
-      return ""
+      return null
     }
+  }
+
+  getLastBattleResult(): BattleResult | "" {
+    return this.getLastBattle()?.result ?? ""
   }
 
   getLastPlayerBattleResult() {
