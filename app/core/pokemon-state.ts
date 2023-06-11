@@ -303,11 +303,7 @@ export default class PokemonState {
       }
 
       if (!pokemon.life || pokemon.life <= 0) {
-        if (
-          SynergyEffects[Synergy.FOSSIL].some((e) =>
-            pokemon.effects.includes(e)
-          )
-        ) {
+        if (pokemon.hasSynergyEffect(Synergy.FOSSIL)) {
           const healBonus = pokemon.effects.includes(Effect.FORGOTTEN_POWER)
             ? 1
             : pokemon.effects.includes(Effect.ELDER_POWER)
@@ -415,6 +411,19 @@ export default class PokemonState {
     }
 
     takenDamage = Math.round(takenDamage)
+
+    if (attacker && attacker.hasSynergyEffect(Synergy.HUMAN)) {
+      let lifesteal = 0
+      if (attacker.effects.includes(Effect.MEDITATE)) {
+        lifesteal = 0.15
+      } else if (attacker.effects.includes(Effect.FOCUS_ENERGY)) {
+        lifesteal = 0.3
+      } else if (attacker.effects.includes(Effect.CALM_MIND)) {
+        lifesteal = 0.6
+      }
+      attacker.handleHeal(Math.floor(lifesteal * takenDamage), attacker, 0)
+    }
+
     return { death, takenDamage }
   }
 

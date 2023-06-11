@@ -166,6 +166,10 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     return !this.status.resurecting
   }
 
+  hasSynergyEffect(synergy: Synergy): boolean {
+    return this.effects.some(effect => SynergyEffects[synergy].includes(effect))
+  }
+
   handleDamage(params: {
     damage: number
     board: Board
@@ -437,11 +441,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
 
     // Synergy effects on hit
 
-    if (
-      SynergyEffects[Synergy.ICE].some((effect) =>
-        this.effects.includes(effect)
-      )
-    ) {
+    if (this.hasSynergyEffect(Synergy.ICE)) {
       let freezeChance = 0
       if (this.effects.includes(Effect.FROSTY)) {
         freezeChance = 0.1
@@ -453,27 +453,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       }
     }
 
-    if (
-      SynergyEffects[Synergy.HUMAN].some((effect) =>
-        this.effects.includes(effect)
-      )
-    ) {
-      let lifesteal = 0
-      if (this.effects.includes(Effect.MEDITATE)) {
-        lifesteal = 0.15
-      } else if (this.effects.includes(Effect.FOCUS_ENERGY)) {
-        lifesteal = 0.3
-      } else if (this.effects.includes(Effect.CALM_MIND)) {
-        lifesteal = 0.6
-      }
-      this.handleHeal(Math.floor(lifesteal * totalTakenDamage), this, 0)
-    }
-
-    if (
-      SynergyEffects[Synergy.FIRE].some((effect) =>
-        this.effects.includes(effect)
-      )
-    ) {
+    if (this.hasSynergyEffect(Synergy.FIRE)) {
       let burnChance = 0
       if (this.effects.includes(Effect.BLAZE)) {
         burnChance = 0.2
@@ -493,11 +473,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       }
     }
 
-    if (
-      SynergyEffects[Synergy.AQUATIC].some((effect) =>
-        this.effects.includes(effect)
-      )
-    ) {
+    if (this.hasSynergyEffect(Synergy.AQUATIC)) {
       const burnManaChance = this.effects.includes(Effect.SWIFT_SWIM)
         ? 0.35
         : this.effects.includes(Effect.HYDRATION)
@@ -515,21 +491,13 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       }
     }
 
-    if (
-      SynergyEffects[Synergy.GHOST].some((effect) =>
-        this.effects.includes(effect)
-      )
-    ) {
+    if (this.hasSynergyEffect(Synergy.GHOST)) {
       if (chance(1 / 2)) {
         target.status.triggerSilence(3000, target, this, board)
       }
     }
 
-    if (
-      SynergyEffects[Synergy.POISON].some((effect) =>
-        this.effects.includes(effect)
-      )
-    ) {
+    if (this.hasSynergyEffect(Synergy.POISON)) {
       let poisonChance = 0
       if (this.effects.includes(Effect.POISON_GAS)) {
         poisonChance = 0.3
