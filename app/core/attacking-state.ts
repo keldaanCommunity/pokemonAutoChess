@@ -99,19 +99,18 @@ export default class AttackingState extends PokemonState {
   ) {
     pokemon.count.attackCount++
     pokemon.targetX = coordinates.x
-    pokemon.targetY = coordinates.y    
+    pokemon.targetY = coordinates.y
 
     const target = board.getValue(coordinates.x, coordinates.y)
     if (target) {
-
       let isAttackSuccessful = true
       if (chance(target.dodge) && !pokemon.items.has(Item.XRAY_VISION)) {
         isAttackSuccessful = false
         pokemon.count.dodgeCount += 1
       }
-      if(target.status.protect){
+      if (target.status.protect) {
         isAttackSuccessful = false
-      }      
+      }
 
       pokemon.orientation = board.orientation(
         pokemon.positionX,
@@ -135,11 +134,17 @@ export default class AttackingState extends PokemonState {
       }
 
       if (pokemon.hasSynergyEffect(Synergy.GHOST)) {
-        let ghostTrueDamageFactor =
-        pokemon.effects.includes(Effect.PHANTOM_FORCE) ? 0.2 : 
-        pokemon.effects.includes(Effect.CURSE) ? 0.4 :
-        pokemon.effects.includes(Effect.SHADOW_TAG) ? 0.7 :
-        pokemon.effects.includes(Effect.WANDERING_SPIRIT) ? 1.0 : 0.0
+        let ghostTrueDamageFactor = pokemon.effects.includes(
+          Effect.PHANTOM_FORCE
+        )
+          ? 0.2
+          : pokemon.effects.includes(Effect.CURSE)
+          ? 0.4
+          : pokemon.effects.includes(Effect.SHADOW_TAG)
+          ? 0.7
+          : pokemon.effects.includes(Effect.WANDERING_SPIRIT)
+          ? 1.0
+          : 0.0
 
         trueDamage = Math.ceil(physicalDamage * ghostTrueDamageFactor)
         physicalDamage -= trueDamage
@@ -170,8 +175,14 @@ export default class AttackingState extends PokemonState {
       }
 
       let totalDamage = physicalDamage + trueDamage
-      pokemon.onAttack({ target, board, physicalDamage, trueDamage, totalDamage })
-      if(isAttackSuccessful){
+      pokemon.onAttack({
+        target,
+        board,
+        physicalDamage,
+        trueDamage,
+        totalDamage
+      })
+      if (isAttackSuccessful) {
         pokemon.onHit({ target, board, totalTakenDamage })
       }
     }

@@ -167,9 +167,11 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   hasSynergyEffect(synergy: Synergy): boolean {
-    return this.effects.some(effect => SynergyEffects[synergy].includes(effect))
+    return this.effects.some((effect) =>
+      SynergyEffects[synergy].includes(effect)
+    )
   }
-  
+
   get isImmuneToStatusChange() {
     return this.items.has(Item.FLUFFY_TAIL) || this.status.runeProtect
   }
@@ -362,7 +364,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       let targetCount = 1
       cells.forEach((cell) => {
         if (cell.value && this.team != cell.value.team && targetCount > 0) {
-          if(physicalDamage > 0){
+          if (physicalDamage > 0) {
             cell.value.handleDamage({
               damage: Math.ceil(0.5 * physicalDamage),
               board,
@@ -371,7 +373,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
               shouldTargetGainMana: true
             })
           }
-          if(trueDamage > 0){
+          if (trueDamage > 0) {
             cell.value.handleDamage({
               damage: Math.ceil(0.5 * trueDamage),
               board,
@@ -380,7 +382,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
               shouldTargetGainMana: true
             })
           }
-          
+
           targetCount--
         }
       })
@@ -547,13 +549,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   // called whenever the unit deals damage, by basic attack or ability
-  onDamageDealt({
-    target,
-    damage
-  }: {
-    target: PokemonEntity,
-    damage: number
-  }){
+  onDamageDealt({ target, damage }: { target: PokemonEntity; damage: number }) {
     if (this.hasSynergyEffect(Synergy.HUMAN)) {
       let lifesteal = 0
       if (this.effects.includes(Effect.MEDITATE)) {
