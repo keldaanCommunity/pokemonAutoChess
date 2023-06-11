@@ -1972,7 +1972,12 @@ export class NightmareStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let duration = pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL ? 8000 : pokemon.stars === 2 ? 4000 : 2000
+    let duration =
+      pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL
+        ? 8000
+        : pokemon.stars === 2
+        ? 4000
+        : 2000
     duration = Math.round(duration * (1 + pokemon.ap / 200))
 
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
@@ -2076,8 +2081,18 @@ export class PoisonStrategy extends AttackStrategy {
       }
     })
     closestEnemies.sort((a, b) => {
-      const distanceA = board.distance(a.positionX, a.positionY, pokemon.positionX, pokemon.positionY)
-      const distanceB = board.distance(b.positionX, b.positionY, pokemon.positionX, pokemon.positionY)
+      const distanceA = board.distance(
+        a.positionX,
+        a.positionY,
+        pokemon.positionX,
+        pokemon.positionY
+      )
+      const distanceB = board.distance(
+        b.positionX,
+        b.positionY,
+        pokemon.positionX,
+        pokemon.positionY
+      )
       return distanceA - distanceB
     })
 
@@ -2885,7 +2900,7 @@ export class SacredSwordStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = 120
+    const damage = 90
     target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
   }
 }

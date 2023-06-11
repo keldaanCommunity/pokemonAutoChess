@@ -28,6 +28,8 @@ More Wounding abilities
 - Nerf to Happy Hour: ~~3/6/9~~ 2/5/8
 - Corrected and adjusted description of Poison ability
 - Poison & Nightmare now have poison duration scale with AP
+- Buff Sharpedo ~~18~~ 21 atk
+- Nerf Virizion Sacred Sword ~~120~~ 90 true damage
 
 # Changes to Synergies
 
@@ -47,6 +49,7 @@ More Wounding abilities
 - Leftovers heal was triggering twice for the item holder
 
 # UI
+
 - Add a slider option for SFX volume
 
 # Misc
