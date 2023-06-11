@@ -61,6 +61,7 @@ export default function GamePlayer(props: {
           name={props.player.name}
           life={props.player.life}
           money={props.player.money}
+          level={props.player.experienceManager.level}
           history={props.player.history}
         />
       </ReactTooltip>
