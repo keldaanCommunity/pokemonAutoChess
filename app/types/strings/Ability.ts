@@ -1769,7 +1769,7 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     prt: ``
   },
   [Ability.SEARING_SHOT]: {
-    eng: `An inferno of scarlet flames torches everything around the user. Deals [20,SP] ${Damage.SPECIAL} and ${Status.BURN} all enemies hit for 3 seconds`,
+    eng: `An inferno of scarlet flames torches everything around the user. Deals [20,SP] ${Damage.SPECIAL} and ${Status.BURN}for 3 seconds all ennemies 2 tiles around Victini`,
     esp: ``,
     fra: ``,
     prt: ``
