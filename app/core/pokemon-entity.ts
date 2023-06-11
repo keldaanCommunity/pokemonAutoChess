@@ -525,6 +525,27 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
+  // called whenever the unit deals damage, by basic attack or ability
+  onDamageDealt({
+    target,
+    damage
+  }: {
+    target: PokemonEntity,
+    damage: number
+  }){
+    if (this.hasSynergyEffect(Synergy.HUMAN)) {
+      let lifesteal = 0
+      if (this.effects.includes(Effect.MEDITATE)) {
+        lifesteal = 0.15
+      } else if (this.effects.includes(Effect.FOCUS_ENERGY)) {
+        lifesteal = 0.3
+      } else if (this.effects.includes(Effect.CALM_MIND)) {
+        lifesteal = 0.6
+      }
+      this.handleHeal(Math.floor(lifesteal * damage), this, 0)
+    }
+  }
+
   onCritical(target: PokemonEntity, board: Board) {
     target.count.crit++
 

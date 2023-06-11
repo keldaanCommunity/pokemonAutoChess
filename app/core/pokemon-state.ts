@@ -211,6 +211,7 @@ export default class PokemonState {
       takenDamage += Math.min(residualDamage, pokemon.life)
 
       if (attacker && takenDamage > 0) {
+        attacker.onDamageDealt({ target: pokemon, damage: takenDamage })
         switch (attackType) {
           case AttackType.PHYSICAL:
             attacker.physicalDamage += takenDamage
@@ -227,9 +228,7 @@ export default class PokemonState {
           default:
             break
         }
-      }
 
-      if (attacker && takenDamage > 0) {
         pokemon.simulation.room.broadcast(Transfer.POKEMON_DAMAGE, {
           index: attacker.index,
           type: attackType,
@@ -411,19 +410,6 @@ export default class PokemonState {
     }
 
     takenDamage = Math.round(takenDamage)
-
-    if (attacker && attacker.hasSynergyEffect(Synergy.HUMAN)) {
-      let lifesteal = 0
-      if (attacker.effects.includes(Effect.MEDITATE)) {
-        lifesteal = 0.15
-      } else if (attacker.effects.includes(Effect.FOCUS_ENERGY)) {
-        lifesteal = 0.3
-      } else if (attacker.effects.includes(Effect.CALM_MIND)) {
-        lifesteal = 0.6
-      }
-      attacker.handleHeal(Math.floor(lifesteal * takenDamage), attacker, 0)
-    }
-
     return { death, takenDamage }
   }
 
