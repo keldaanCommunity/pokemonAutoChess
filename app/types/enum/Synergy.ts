@@ -55,7 +55,7 @@ export const SynergyEffects: { [key in Synergy]: Effect[] } = Object.freeze({
   [Synergy.DARK]: [Effect.HONE_CLAWS, Effect.ASSURANCE, Effect.BEAT_UP],
   [Synergy.STEEL]: [Effect.IRON_DEFENSE, Effect.AUTOMATE],
   [Synergy.GROUND]: [Effect.TILLER, Effect.DIGGER, Effect.DRILLER],
-  [Synergy.POISON]: [Effect.POISON_GAS, Effect.TOXIC],
+  [Synergy.POISON]: [Effect.POISONOUS, Effect.VENOMOUS, Effect.TOXIC],
   [Synergy.DRAGON]: [Effect.DRAGON_ENERGY, Effect.DRAGON_DANCE],
   [Synergy.FIELD]: [Effect.BULK_UP, Effect.RAGE, Effect.ANGER_POINT],
   [Synergy.MONSTER]: [Effect.PURSUIT, Effect.BRUTAL_SWING, Effect.POWER_TRIP],

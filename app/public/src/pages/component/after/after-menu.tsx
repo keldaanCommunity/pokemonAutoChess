@@ -4,7 +4,7 @@ import Avatar from "../avatar"
 import Team from "./team"
 import { getRankLabel } from "../../../../../../app/types/strings/Strings"
 import SynergyIcon from "../icons/synergy-icon"
-import { ExpPlace, TypeTrigger } from "../../../../../types/Config"
+import { ExpPlace, SynergyTriggers } from "../../../../../types/Config"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { computeElo } from "../../../../../core/elo"
 import "./after-menu.css"
@@ -98,5 +98,5 @@ export default function AfterMenu() {
 }
 
 function isNotIncomplete(s: { name: Synergy, value: number }){
-  return s.value >= TypeTrigger[s.name][0]
+  return s.value >= SynergyTriggers[s.name][0]
 }
