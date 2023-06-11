@@ -98,8 +98,7 @@ export const EffectName: { [key in Effect]: string } = {
   [Effect.STORM]: "Storm",
   [Effect.MISTY]: "Misty",
   [Effect.WINDY]: "Windy",
-  [Effect.NIGHT]: "Night",
-
+  [Effect.NIGHT]: "Night"
 }
 
 export const EffectDescription: {
@@ -131,12 +130,12 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.GROWTH]: {
-    eng: `Restore 12 ${Stat.HP} per second`,
+    eng: `Restore 10 ${Stat.HP} per second`,
     esp: ``,
     fra: ``
   },
   [Effect.SPORE]: {
-    eng: `Restore 20 ${Stat.HP} per second`,
+    eng: `Restore 18 ${Stat.HP} per second`,
     esp: ``,
     fra: ``
   },
