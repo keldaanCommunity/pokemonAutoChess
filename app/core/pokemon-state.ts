@@ -93,18 +93,14 @@ export default class PokemonState {
     board,
     attackType,
     attacker,
-    dodgeable,
-    shouldTargetGainMana,
-    shouldAttackerGainMana
+    shouldTargetGainMana
   }: {
     target: PokemonEntity
     damage: number
     board: Board
     attackType: AttackType
     attacker: PokemonEntity | null
-    dodgeable: boolean
     shouldTargetGainMana: boolean
-    shouldAttackerGainMana: boolean
   }): { death: boolean; takenDamage: number } {
     let death = false
     let takenDamage = 0
@@ -197,13 +193,6 @@ export default class PokemonState {
         )
       }
 
-      if (dodgeable && pokemon.dodge > Math.random()) {
-        if (!(attacker && attacker.items.has(Item.XRAY_VISION))) {
-          reducedDamage = 0
-          pokemon.count.dodgeCount += 1
-        }
-      }
-
       let residualDamage = reducedDamage
 
       if (pokemon.shield > 0) {
@@ -227,6 +216,7 @@ export default class PokemonState {
       takenDamage += Math.min(residualDamage, pokemon.life)
 
       if (attacker && takenDamage > 0) {
+        attacker.onDamageDealt({ target: pokemon, damage: takenDamage })
         switch (attackType) {
           case AttackType.PHYSICAL:
             attacker.physicalDamage += takenDamage
@@ -243,9 +233,7 @@ export default class PokemonState {
           default:
             break
         }
-      }
 
-      if (attacker && takenDamage > 0) {
         pokemon.simulation.room.broadcast(Transfer.POKEMON_DAMAGE, {
           index: attacker.index,
           type: attackType,
@@ -318,16 +306,8 @@ export default class PokemonState {
         }
       }
 
-      if (attacker && takenDamage > 0) {
-        attacker.onAttack(pokemon, board, takenDamage, shouldAttackerGainMana)
-      }
-
       if (!pokemon.life || pokemon.life <= 0) {
-        if (
-          SynergyEffects[Synergy.FOSSIL].some((e) =>
-            pokemon.effects.includes(e)
-          )
-        ) {
+        if (pokemon.hasSynergyEffect(Synergy.FOSSIL)) {
           const healBonus = pokemon.effects.includes(Effect.FORGOTTEN_POWER)
             ? 1
             : pokemon.effects.includes(Effect.ELDER_POWER)

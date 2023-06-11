@@ -456,7 +456,7 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.SHEER_COLD]: {
-    eng: `30% chance to ${Status.FREEZE}`,
+    eng: `40% chance to ${Status.FREEZE}`,
     esp: ``,
     fra: ``
   },

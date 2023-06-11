@@ -42,7 +42,9 @@ More Wounding abilities
 
 # Bugfix
 
--
+- Many on-hit effects now only apply when the attack is successful (not dodged or protected). This concerns: Aquatic mana burn, Fire attack buff, Poison chance, Freeze chance, Silence chance, Upgrade stacks, Red Orb damage, Smoke Ball debuff, Spike Armor
+- Choice scarf was not applying damage correctly with Ghost true damage
+- Leftovers heal was triggering twice for the item holder
 
 # UI
 - Add a slider option for SFX volume
