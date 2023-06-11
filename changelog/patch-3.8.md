@@ -34,6 +34,7 @@ More Wounding abilities
 - Grass 7 : restaure 20 hp / sec >>>>> restaure 18 hp / sec
 - Bounsweet Hp ~~110~~ >>>> 100 mana ~~90~~ 100
 - Flying 4: Get Protect for ~~2~~ 1.5 seconds after flying away
+- Lanturn Buff ~~14~~ 16 atk
 
 # Changes to Synergies
 
