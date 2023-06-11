@@ -35,6 +35,7 @@ More Wounding abilities
 - Bounsweet Hp ~~110~~ >>>> 100 mana ~~90~~ 100
 - Flying 4: Get Protect for ~~2~~ 1.5 seconds after flying away
 - Lanturn Buff ~~14~~ 16 atk
+- Buff Delphox ~~15~~ 18 atk
 
 # Changes to Synergies
 

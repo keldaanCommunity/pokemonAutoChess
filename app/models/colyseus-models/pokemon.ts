@@ -9076,7 +9076,7 @@ export class Delphox extends Pokemon {
       Rarity.COMMON,
       Pkm.DEFAULT,
       200,
-      15,
+      18,
       1,
       1,
       2,
