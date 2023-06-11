@@ -30,6 +30,9 @@ More Wounding abilities
 - Poison & Nightmare now have poison duration scale with AP
 - Buff Sharpedo ~~18~~ 21 atk
 - Nerf Virizion Sacred Sword ~~120~~ 90 true damage
+- Grass 5 : restaure 12 hp / sec >>>>> restaure 10 hp / sec
+- Grass 7 : restaure 20 hp / sec >>>>> restaure 18 hp / sec
+- Bounsweet Hp ~~110~~ >>>> 100 mana ~~90~~ 100
 
 # Changes to Synergies
 
