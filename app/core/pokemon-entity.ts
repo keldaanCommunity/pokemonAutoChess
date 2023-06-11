@@ -420,6 +420,12 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       }
     }
 
+    if (SynergyEffects[Synergy.GHOST].some(effect => this.effects.includes(effect))) {
+      if(chance(1/2)){
+        target.status.triggerSilence(3000, target, this, board)
+      }
+    }
+
     //TODO: Poison chance for poison synergy
   }
 

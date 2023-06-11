@@ -117,15 +117,6 @@ export default class AttackingState extends PokemonState {
           target.status.triggerPoison(4000, target, pokemon, board)
         }
       }
-      if (
-        (pokemon.effects.includes(Effect.CURSE) ||
-          pokemon.effects.includes(Effect.PHANTOM_FORCE) ||
-          pokemon.effects.includes(Effect.SHADOW_TAG) ||
-          pokemon.effects.includes(Effect.WANDERING_SPIRIT)) &&
-        Math.random() > 0.5
-      ) {
-        target.status.triggerSilence(3000, target, pokemon, board)
-      }
       
       if (pokemon.effects.includes(Effect.TELEPORT_NEXT_ATTACK)) {
         const crit =
