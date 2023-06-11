@@ -33,8 +33,10 @@ export default class PokemonState {
       const boost = apBoost ? (heal * apBoost * pokemon.ap) / 100 : 0
       let healBoosted = Math.round(heal + boost)
 
-      if(pokemon.status.poisonStacks > 0){
-        healBoosted = Math.round(healBoosted * (1 - pokemon.status.poisonStacks * 0.2))
+      if (pokemon.status.poisonStacks > 0) {
+        healBoosted = Math.round(
+          healBoosted * (1 - pokemon.status.poisonStacks * 0.2)
+        )
       }
 
       if (pokemon.passive === Passive.WONDER_GUARD) {
@@ -106,7 +108,9 @@ export default class PokemonState {
     let takenDamage = 0
 
     if (isNaN(damage)) {
-      logger.trace(`NaN Damage from ${attacker ? attacker.name : "Environment"}`)
+      logger.trace(
+        `NaN Damage from ${attacker ? attacker.name : "Environment"}`
+      )
       return { death: false, takenDamage: 0 }
     }
 
@@ -142,7 +146,10 @@ export default class PokemonState {
         reducedDamage = Math.ceil(reducedDamage + pokemon.hp * 0.1)
       }
 
-      if(pokemon.simulation.weather === Weather.MISTY && attackType === AttackType.SPECIAL) {
+      if (
+        pokemon.simulation.weather === Weather.MISTY &&
+        attackType === AttackType.SPECIAL
+      ) {
         reducedDamage = Math.ceil(reducedDamage * 1.2)
       }
 
@@ -189,7 +196,13 @@ export default class PokemonState {
       if (isNaN(reducedDamage)) {
         reducedDamage = 0
         logger.error(
-          `error calculating damage, damage: ${damage}, target: ${pokemon.name}, attacker: ${attacker ? attacker.name : "Environment"}, attack type: ${attackType}, defense : ${pokemon.def}, spedefense: ${pokemon.speDef}, life: ${pokemon.life}`
+          `error calculating damage, damage: ${damage}, target: ${
+            pokemon.name
+          }, attacker: ${
+            attacker ? attacker.name : "Environment"
+          }, attack type: ${attackType}, defense : ${
+            pokemon.def
+          }, spedefense: ${pokemon.speDef}, life: ${pokemon.life}`
         )
       }
 
@@ -275,7 +288,7 @@ export default class PokemonState {
             pokemon.effects.includes(Effect.FEATHER_DANCE) &&
             pcLife < 0.2
           ) {
-            pokemon.status.triggerProtect(2000)
+            pokemon.status.triggerProtect(1500)
             pokemon.flyAway(board)
           } else if (pokemon.effects.includes(Effect.MAX_AIRSTREAM)) {
             if (
@@ -329,7 +342,11 @@ export default class PokemonState {
         } else if (pokemon.status.resurection) {
           pokemon.status.triggerResurection(pokemon)
           board.forEach((x, y, entity: PokemonEntity | undefined) => {
-            if(entity && entity.targetX === pokemon.positionX && entity.targetY === pokemon.positionY) {
+            if (
+              entity &&
+              entity.targetX === pokemon.positionX &&
+              entity.targetY === pokemon.positionY
+            ) {
               // switch aggro immediately to reduce retarget lag after resurection
               entity.cooldown = 0
               entity.toMovingState()
@@ -428,9 +445,10 @@ export default class PokemonState {
   update(pokemon: PokemonEntity, dt: number, board: Board, weather: string) {
     pokemon.status.updateAllStatus(dt, pokemon, board)
 
-    if(pokemon.status.resurecting &&
+    if (
+      pokemon.status.resurecting &&
       pokemon.action !== PokemonActionState.HURT
-    ){
+    ) {
       pokemon.toIdleState()
     }
     if (
@@ -469,18 +487,27 @@ export default class PokemonState {
       }
     }
 
-    if(pokemon.simulation.weather === Weather.SANDSTORM && pokemon.types.includes(Synergy.GROUND) === false) {
+    if (
+      pokemon.simulation.weather === Weather.SANDSTORM &&
+      pokemon.types.includes(Synergy.GROUND) === false
+    ) {
       pokemon.sandstormDamageTimer -= dt
       if (pokemon.sandstormDamageTimer <= 0) {
         pokemon.sandstormDamageTimer = 1000
         const sandstormDamage = 5
-        pokemon.handleSpecialDamage(sandstormDamage, board, AttackType.SPECIAL, null, false)
+        pokemon.handleSpecialDamage(
+          sandstormDamage,
+          board,
+          AttackType.SPECIAL,
+          null,
+          false
+        )
       }
     }
 
     if (pokemon.manaCooldown <= 0) {
       pokemon.setMana(pokemon.mana + 10)
-      if(pokemon.simulation.weather === Weather.RAIN) {
+      if (pokemon.simulation.weather === Weather.RAIN) {
         pokemon.setMana(pokemon.mana + 3)
       }
       pokemon.manaCooldown = 1000
@@ -508,7 +535,11 @@ export default class PokemonState {
     }>()
 
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
-      if (value !== undefined && value.team !== pokemon.team && value.isTargettable) {
+      if (
+        value !== undefined &&
+        value.team !== pokemon.team &&
+        value.isTargettable
+      ) {
         const candidateDistance = board.distance(
           pokemon.positionX,
           pokemon.positionY,
@@ -537,7 +568,11 @@ export default class PokemonState {
     const pokemons = new Array<{ distance: number; x: number; y: number }>()
 
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
-      if (value !== undefined && value.team !== pokemon.team && value.isTargettable) {
+      if (
+        value !== undefined &&
+        value.team !== pokemon.team &&
+        value.isTargettable
+      ) {
         const distance = board.distance(
           pokemon.positionX,
           pokemon.positionY,
@@ -605,7 +640,11 @@ export default class PokemonState {
     const pokemons = new Array<{ distance: number; x: number; y: number }>()
 
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
-      if (value !== undefined && value.team !== pokemon.team && value.isTargettable) {
+      if (
+        value !== undefined &&
+        value.team !== pokemon.team &&
+        value.isTargettable
+      ) {
         const distance = board.distance(
           pokemon.positionX,
           pokemon.positionY,
@@ -658,7 +697,11 @@ export default class PokemonState {
     }>()
 
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
-      if (value !== undefined && value.id !== pokemon.id && value.isTargettable) {
+      if (
+        value !== undefined &&
+        value.id !== pokemon.id &&
+        value.isTargettable
+      ) {
         const candidateDistance = board.distance(
           pokemon.positionX,
           pokemon.positionY,

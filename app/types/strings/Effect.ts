@@ -365,7 +365,7 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.FEATHER_DANCE]: {
-    eng: `Get ${Status.PROTECT} for 2 seconds after flying away`,
+    eng: `Get ${Status.PROTECT} for 1.5 seconds after flying away`,
     esp: ``,
     fra: ``
   },
