@@ -98,44 +98,19 @@ export default class AttackingState extends PokemonState {
   ) {
     pokemon.count.attackCount++
     pokemon.targetX = coordinates.x
-    pokemon.targetY = coordinates.y
+    pokemon.targetY = coordinates.y    
+
     const target = board.getValue(coordinates.x, coordinates.y)
     if (target) {
-      if (pokemon.items.has(Item.SHINY_CHARM) && Math.random() < 0.25) {
-        pokemon.status.triggerProtect(1000)
-      }
 
-      let poisonChance = 0
-      if (pokemon.effects.includes(Effect.POISON_GAS)) {
-        poisonChance = 0.3
+      let isAttackSuccessful = true
+      if (chance(target.dodge) && !pokemon.items.has(Item.XRAY_VISION)) {
+        isAttackSuccessful = false
+        pokemon.count.dodgeCount += 1
       }
-      if (pokemon.effects.includes(Effect.TOXIC)) {
-        poisonChance = 0.7
-      }
-      if (poisonChance > 0) {
-        if (Math.random() < poisonChance) {
-          target.status.triggerPoison(4000, target, pokemon, board)
-        }
-      }
-      
-      if (pokemon.effects.includes(Effect.TELEPORT_NEXT_ATTACK)) {
-        const crit =
-          pokemon.items.has(Item.REAPER_CLOTH) && chance(pokemon.critChance)
-        if (crit) {
-          pokemon.onCritical(target, board)
-        }
-        target.handleSpecialDamage(
-          [15, 30, 60][pokemon.stars - 1],
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
-        )
-        pokemon.effects.splice(
-          pokemon.effects.indexOf(Effect.TELEPORT_NEXT_ATTACK),
-          1
-        )
-      }
+      if(target.status.protect){
+        isAttackSuccessful = false
+      }      
 
       pokemon.orientation = board.orientation(
         pokemon.positionX,
@@ -146,163 +121,87 @@ export default class AttackingState extends PokemonState {
         target
       )
 
-      let damage = pokemon.atk
+      let physicalDamage = pokemon.atk
+      let trueDamage = 0
+      let totalTakenDamage = 0
       const attackType = pokemon.attackType
 
-      if (Math.random() * 100 < pokemon.critChance && target) {
+      if (Math.random() * 100 < pokemon.critChance) {
         pokemon.onCritical(target, board)
         if (target.items.has(Item.ROCKY_HELMET) === false) {
-          damage = Math.round(pokemon.atk * pokemon.critDamage)
+          physicalDamage = Math.round(pokemon.atk * pokemon.critDamage)
         }
       }
 
-      if (pokemon.effects.includes(Effect.PHANTOM_FORCE) && damage > 0) {
-        const trueDamage = 0.2 * damage
-        damage = 0.8 * damage
-        target.handleDamage({
+      if (pokemon.effects.includes(Effect.PHANTOM_FORCE) && physicalDamage > 0) {
+        trueDamage = 0.2 * physicalDamage
+        physicalDamage = 0.8 * physicalDamage
+        const { takenDamage } = target.handleDamage({
           damage: trueDamage,
           board,
           attackType: AttackType.TRUE,
           attacker: pokemon,
-          dodgeable: true,
-          shouldAttackerGainMana: false,
           shouldTargetGainMana: true
         })
+        totalTakenDamage += takenDamage
       }
 
-      if (pokemon.effects.includes(Effect.CURSE) && damage > 0) {
-        const trueDamage = 0.4 * damage
-        damage = 0.6 * damage
-        target.handleDamage({
+      if (pokemon.effects.includes(Effect.CURSE) && physicalDamage > 0) {
+        trueDamage = 0.4 * physicalDamage
+        physicalDamage = 0.6 * physicalDamage
+        const { takenDamage } = target.handleDamage({
           damage: trueDamage,
           board,
           attackType: AttackType.TRUE,
           attacker: pokemon,
-          dodgeable: true,
-          shouldAttackerGainMana: false,
           shouldTargetGainMana: true
         })
+        totalTakenDamage += takenDamage
       }
 
-      if (pokemon.effects.includes(Effect.SHADOW_TAG) && damage > 0) {
-        const trueDamage = 0.7 * damage
-        damage = 0.3 * damage
-        target.handleDamage({
+      if (pokemon.effects.includes(Effect.SHADOW_TAG) && physicalDamage > 0) {
+        trueDamage = 0.7 * physicalDamage
+        physicalDamage = 0.3 * physicalDamage
+        const { takenDamage } = target.handleDamage({
           damage: trueDamage,
           board,
           attackType: AttackType.TRUE,
           attacker: pokemon,
-          dodgeable: true,
-          shouldAttackerGainMana: false,
           shouldTargetGainMana: true
         })
+        totalTakenDamage += takenDamage
       }
 
-      if (pokemon.effects.includes(Effect.WANDERING_SPIRIT) && damage > 0) {
-        const trueDamage = damage
-        damage = 0
-        target.handleDamage({
+      if (pokemon.effects.includes(Effect.WANDERING_SPIRIT) && physicalDamage > 0) {
+        trueDamage = physicalDamage
+        physicalDamage = 0
+        const { takenDamage } = target.handleDamage({
           damage: trueDamage,
           board,
           attackType: AttackType.TRUE,
           attacker: pokemon,
-          dodgeable: true,
-          shouldAttackerGainMana: false,
           shouldTargetGainMana: true
         })
-      }
+        totalTakenDamage += takenDamage
+      }      
 
-      if (target.status.spikeArmor && pokemon.range === 1) {
-        pokemon.status.triggerWound(2000, pokemon, target, board)
-        pokemon.handleDamage({
-          damage: target.def,
-          board,
-          attackType: AttackType.SPECIAL,
-          attacker: target,
-          dodgeable: false,
-          shouldAttackerGainMana: false,
-          shouldTargetGainMana: true
-        })
-      }
-
-      if (damage > 0) {
+      if (physicalDamage > 0) {
         // finally, the direct attack damage is handled here
-        target.handleDamage({
-          damage,
+        const { takenDamage } = target.handleDamage({
+          damage: physicalDamage,
           board,
           attackType,
           attacker: pokemon,
-          dodgeable: true,
-          shouldAttackerGainMana: true,
           shouldTargetGainMana: true
         })
+        totalTakenDamage += takenDamage
       }
 
-      if (pokemon.items.has(Item.BLUE_ORB)) {
-        pokemon.count.staticHolderCount++
-        if (pokemon.count.staticHolderCount > 2) {
-          pokemon.count.staticHolderCount = 0
-          // eslint-disable-next-line no-unused-vars
-          let c = 2
-          board.forEach((x, y, tg) => {
-            if (tg && pokemon.team != tg.team && c > 0) {
-              tg.count.staticCount++
-              tg.setMana(tg.mana - 20)
-              tg.count.manaBurnCount++
-              c--
-            }
-          })
-        }
+      let totalDamage = physicalDamage + trueDamage
+      pokemon.onAttack({ target, board, totalDamage })
+      if(isAttackSuccessful){
+        pokemon.onHit({ target, board, totalTakenDamage })
       }
-
-      if (pokemon.items.has(Item.CHOICE_SCARF) && damage > 0) {
-        const cells = board.getAdjacentCells(target.positionX, target.positionY)
-        let targetCount = 1
-        cells.forEach((cell) => {
-          if (
-            cell.value &&
-            pokemon.team != cell.value.team &&
-            targetCount > 0
-          ) {
-            cell.value.handleDamage({
-              damage: Math.ceil(0.5 * damage),
-              board,
-              attackType,
-              attacker: pokemon,
-              dodgeable: true,
-              shouldAttackerGainMana: false,
-              shouldTargetGainMana: true
-            })
-            targetCount--
-          }
-        })
-      }
-
-      if (pokemon.items.has(Item.LEFTOVERS)) {
-        pokemon.handleHeal(pokemon.hp * 0.05, pokemon, 0)
-        ;[-1, 0, 1].forEach((offset) => {
-          const value = board.getValue(
-            pokemon.positionX + offset,
-            pokemon.positionY
-          )
-          if (value && value.team === pokemon.team) {
-            value.handleHeal(value.hp * 0.05, pokemon, 0)
-          }
-        })
-      }
-
-      if (pokemon.items.has(Item.MANA_SCARF)) {
-        pokemon.setMana(pokemon.mana + 8)
-      }
-      if (pokemon.status.deltaOrb) {
-        pokemon.setMana(pokemon.mana + 3)
-      }
-    }
-
-    if (pokemon.effects.includes(Effect.DRAGON_ENERGY)) {
-      pokemon.addAttackSpeed(5)
-    } else if (pokemon.effects.includes(Effect.DRAGON_DANCE)) {
-      pokemon.addAttackSpeed(10)
     }
   }
 

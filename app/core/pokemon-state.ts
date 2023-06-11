@@ -88,18 +88,14 @@ export default class PokemonState {
     board,
     attackType,
     attacker,
-    dodgeable,
-    shouldTargetGainMana,
-    shouldAttackerGainMana
+    shouldTargetGainMana
   }: {
     target: PokemonEntity
     damage: number
     board: Board
     attackType: AttackType
     attacker: PokemonEntity | null
-    dodgeable: boolean
     shouldTargetGainMana: boolean
-    shouldAttackerGainMana: boolean
   }): { death: boolean; takenDamage: number } {
     let death = false
     let takenDamage = 0
@@ -190,13 +186,6 @@ export default class PokemonState {
         logger.error(
           `error calculating damage, damage: ${damage}, target: ${pokemon.name}, attacker: ${attacker ? attacker.name : "Environment"}, attack type: ${attackType}, defense : ${pokemon.def}, spedefense: ${pokemon.speDef}, life: ${pokemon.life}`
         )
-      }
-
-      if (dodgeable && pokemon.dodge > Math.random()) {
-        if (!(attacker && attacker.items.has(Item.XRAY_VISION))) {
-          reducedDamage = 0
-          pokemon.count.dodgeCount += 1
-        }
       }
 
       let residualDamage = reducedDamage
@@ -311,10 +300,6 @@ export default class PokemonState {
             }
           }
         }
-      }
-
-      if (attacker && takenDamage > 0) {
-        attacker.onAttack(pokemon, board, takenDamage, shouldAttackerGainMana)
       }
 
       if (!pokemon.life || pokemon.life <= 0) {
