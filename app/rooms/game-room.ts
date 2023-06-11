@@ -479,7 +479,7 @@ export default class GameRoom extends Room<GameState> {
               bot.elo = computeElo(
                 this.transformToSimplePlayer(player),
                 player.rank,
-                player.elo,
+                bot.elo,
                 [...humans, ...bots].map((p) => this.transformToSimplePlayer(p))
               )
               bot.save()

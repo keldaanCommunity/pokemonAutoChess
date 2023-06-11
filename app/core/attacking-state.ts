@@ -6,6 +6,7 @@ import PokemonEntity from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
 import { PokemonActionState } from "../types/enum/Game"
 import { chance } from "../utils/random"
+import { Synergy } from "../types/enum/Synergy"
 
 export default class AttackingState extends PokemonState {
   update(pokemon: PokemonEntity, dt: number, board: Board, weather: string) {
@@ -133,60 +134,31 @@ export default class AttackingState extends PokemonState {
         }
       }
 
-      if (pokemon.effects.includes(Effect.PHANTOM_FORCE) && physicalDamage > 0) {
-        trueDamage = 0.2 * physicalDamage
-        physicalDamage = 0.8 * physicalDamage
-        const { takenDamage } = target.handleDamage({
-          damage: trueDamage,
-          board,
-          attackType: AttackType.TRUE,
-          attacker: pokemon,
-          shouldTargetGainMana: true
-        })
-        totalTakenDamage += takenDamage
-      }
+      if (pokemon.hasSynergyEffect(Synergy.GHOST)) {
+        let ghostTrueDamageFactor =
+        pokemon.effects.includes(Effect.PHANTOM_FORCE) ? 0.2 : 
+        pokemon.effects.includes(Effect.CURSE) ? 0.4 :
+        pokemon.effects.includes(Effect.SHADOW_TAG) ? 0.7 :
+        pokemon.effects.includes(Effect.WANDERING_SPIRIT) ? 1.0 : 0.0
 
-      if (pokemon.effects.includes(Effect.CURSE) && physicalDamage > 0) {
-        trueDamage = 0.4 * physicalDamage
-        physicalDamage = 0.6 * physicalDamage
-        const { takenDamage } = target.handleDamage({
-          damage: trueDamage,
-          board,
-          attackType: AttackType.TRUE,
-          attacker: pokemon,
-          shouldTargetGainMana: true
-        })
-        totalTakenDamage += takenDamage
-      }
+        trueDamage = Math.ceil(physicalDamage * ghostTrueDamageFactor)
+        physicalDamage -= trueDamage
 
-      if (pokemon.effects.includes(Effect.SHADOW_TAG) && physicalDamage > 0) {
-        trueDamage = 0.7 * physicalDamage
-        physicalDamage = 0.3 * physicalDamage
-        const { takenDamage } = target.handleDamage({
-          damage: trueDamage,
-          board,
-          attackType: AttackType.TRUE,
-          attacker: pokemon,
-          shouldTargetGainMana: true
-        })
-        totalTakenDamage += takenDamage
+        // Apply ghost true damage
+        if (trueDamage > 0) {
+          const { takenDamage } = target.handleDamage({
+            damage: trueDamage,
+            board,
+            attackType: AttackType.TRUE,
+            attacker: pokemon,
+            shouldTargetGainMana: true
+          })
+          totalTakenDamage += takenDamage
+        }
       }
-
-      if (pokemon.effects.includes(Effect.WANDERING_SPIRIT) && physicalDamage > 0) {
-        trueDamage = physicalDamage
-        physicalDamage = 0
-        const { takenDamage } = target.handleDamage({
-          damage: trueDamage,
-          board,
-          attackType: AttackType.TRUE,
-          attacker: pokemon,
-          shouldTargetGainMana: true
-        })
-        totalTakenDamage += takenDamage
-      }      
 
       if (physicalDamage > 0) {
-        // finally, the direct attack damage is handled here
+        // Apply attack physical damage
         const { takenDamage } = target.handleDamage({
           damage: physicalDamage,
           board,
@@ -198,7 +170,7 @@ export default class AttackingState extends PokemonState {
       }
 
       let totalDamage = physicalDamage + trueDamage
-      pokemon.onAttack({ target, board, totalDamage })
+      pokemon.onAttack({ target, board, physicalDamage, trueDamage, totalDamage })
       if(isAttackSuccessful){
         pokemon.onHit({ target, board, totalTakenDamage })
       }

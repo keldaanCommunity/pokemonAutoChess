@@ -320,10 +320,14 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   onAttack({
     target,
     board,
+    physicalDamage,
+    trueDamage,
     totalDamage
   }: {
     target: PokemonEntity
     board: Board
+    physicalDamage: number
+    trueDamage: number
     totalDamage: number
   }) {
     this.setMana(this.mana + 5)
@@ -354,13 +358,25 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       let targetCount = 1
       cells.forEach((cell) => {
         if (cell.value && this.team != cell.value.team && targetCount > 0) {
-          cell.value.handleDamage({
-            damage: Math.ceil(0.5 * totalDamage),
-            board,
-            attackType: AttackType.PHYSICAL,
-            attacker: this,
-            shouldTargetGainMana: true
-          })
+          if(physicalDamage > 0){
+            cell.value.handleDamage({
+              damage: Math.ceil(0.5 * physicalDamage),
+              board,
+              attackType: AttackType.PHYSICAL,
+              attacker: this,
+              shouldTargetGainMana: true
+            })
+          }
+          if(trueDamage > 0){
+            cell.value.handleDamage({
+              damage: Math.ceil(0.5 * trueDamage),
+              board,
+              attackType: AttackType.TRUE,
+              attacker: this,
+              shouldTargetGainMana: true
+            })
+          }
+          
           targetCount--
         }
       })
