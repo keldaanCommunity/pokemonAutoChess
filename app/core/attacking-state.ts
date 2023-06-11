@@ -264,20 +264,6 @@ export default class AttackingState extends PokemonState {
         }
       }
 
-      if (pokemon.items.has(Item.RED_ORB)) {
-        if (target) {
-          target.handleDamage({
-            damage: Math.ceil(pokemon.atk * 0.2),
-            board,
-            attackType: AttackType.TRUE,
-            attacker: pokemon,
-            dodgeable: true,
-            shouldAttackerGainMana: false,
-            shouldTargetGainMana: true
-          })
-        }
-      }
-
       if (pokemon.items.has(Item.CHOICE_SCARF) && damage > 0) {
         const cells = board.getAdjacentCells(target.positionX, target.positionY)
         let targetCount = 1

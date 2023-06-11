@@ -344,6 +344,18 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       this.count.upgradeCount++
     }
 
+    if (this.items.has(Item.RED_ORB) && target) {
+      target.handleDamage({
+        damage: Math.ceil(this.atk * 0.2),
+        board,
+        attackType: AttackType.TRUE,
+        attacker: this,
+        dodgeable: false, // if base attack has not been dodged, neither is red orb
+        shouldAttackerGainMana: false,
+        shouldTargetGainMana: true
+      })
+    }
+
     // Synergy effects on hit
 
     if (SynergyEffects[Synergy.ICE].some(effect => this.effects.includes(effect))) {
