@@ -12749,7 +12749,7 @@ export class Sharpedo extends Pokemon {
       Rarity.UNCOMMON,
       Pkm.DEFAULT,
       130,
-      18,
+      21,
       2,
       3,
       1,
