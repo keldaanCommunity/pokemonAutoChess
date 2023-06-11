@@ -169,6 +169,10 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   hasSynergyEffect(synergy: Synergy): boolean {
     return this.effects.some(effect => SynergyEffects[synergy].includes(effect))
   }
+  
+  get isImmuneToStatusChange() {
+    return this.items.has(Item.FLUFFY_TAIL) || this.status.runeProtect
+  }
 
   handleDamage(params: {
     damage: number
@@ -513,18 +517,19 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       }
     }
 
-    if (this.hasSynergyEffect(Synergy.POISON)) {
-      let poisonChance = 0
-      if (this.effects.includes(Effect.POISON_GAS)) {
-        poisonChance = 0.3
-      }
-      if (this.effects.includes(Effect.TOXIC)) {
-        poisonChance = 0.7
-      }
-      if (poisonChance > 0) {
-        if (Math.random() < poisonChance) {
-          target.status.triggerPoison(4000, target, this, board)
-        }
+    let poisonChance = 0
+    if (this.effects.includes(Effect.POISONOUS)) {
+      poisonChance = 0.3
+    }
+    if (this.effects.includes(Effect.VENOMOUS)) {
+      poisonChance = 0.5
+    }
+    if (this.effects.includes(Effect.TOXIC)) {
+      poisonChance = 0.7
+    }
+    if (poisonChance > 0) {
+      if (Math.random() < poisonChance) {
+        target.status.triggerPoison(4000, target, this, board)
       }
     }
 

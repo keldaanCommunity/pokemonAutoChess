@@ -50,6 +50,10 @@
   filter: invert(1);
 }
 
+#wiki-page p.description {
+  line-height: 1.2em;
+}
+
 #wiki-page .wiki-status,
 #wiki-page .wiki-stat {
   display: grid;

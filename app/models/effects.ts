@@ -1,8 +1,7 @@
 import Synergies from "./colyseus-models/synergies"
 import { Effect } from "../types/enum/Effect"
 import { Synergy, SynergyEffects } from "../types/enum/Synergy"
-import { Weather } from "../types/enum/Weather"
-import { TypeTrigger } from "../types/Config"
+import { SynergyTriggers } from "../types/Config"
 import { MapSchema } from "@colyseus/schema"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { Ability } from "../types/enum/Ability"
@@ -17,8 +16,8 @@ export class Effects {
   update(synergies: Synergies, board: MapSchema<Pokemon>) {
     this.list = []
     ;(Object.values(Synergy) as Synergy[]).forEach((synergy) => {
-      for (let i = TypeTrigger[synergy].length; i >= 0; i--) {
-        const v = TypeTrigger[synergy][i]
+      for (let i = SynergyTriggers[synergy].length; i >= 0; i--) {
+        const v = SynergyTriggers[synergy][i]
         const s = synergies.get(synergy)
         if (s && s >= v) {
           this.list.push(SynergyEffects[synergy][i])

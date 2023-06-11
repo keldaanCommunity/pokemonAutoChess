@@ -115,7 +115,7 @@ export const StatusDescription: { [key in Status]: Langage } = {
     prt: ""
   },
   [Status.POISON]: {
-    eng: `Deals 5% of max HP per stack as ${Damage.TRUE} every second. Can stack up to 3 times.`,
+    eng: `Deals 5% of max HP per stack as ${Damage.TRUE} every second. Can stack up to 3 times by default. Reduce healing by 20% per stack.`,
     esp: "",
     fra: "",
     prt: ""

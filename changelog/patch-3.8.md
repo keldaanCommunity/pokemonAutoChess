@@ -26,10 +26,13 @@ More Wounding abilities
 
 - Nerf Protect: AP scaling for protect duration: 1 → 0.5
 - Nerf to Happy Hour: ~~3/6/9~~ 2/5/8
+- Corrected and adjusted description of Poison ability
+- Poison & Nightmare now have poison duration scale with AP
 
 # Changes to Synergies
 
 - Rework Sound: Sound pokemons emit a cry when they use their abilities, waking up allies asleep and giving them bonus stats
+- Rework Poison: new levels 3/5/7 ; Increase max poison stacks with levels ; Poison now reduces healing efficiency by 20% per stack
 - Nerf Flora: Activates at ~~2/3/4/5~~ 3/4/5/6
 - Fairy Splash damage now has a cooldown of 1 millisecond, to prevent it from triggering multiple times with electric additional attacks
 

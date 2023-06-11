@@ -944,7 +944,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.NIGHTMARE]: {
-    eng: `${Status.POISON} the whole enemy team for [2,4,8] seconds`,
+    eng: `${Status.POISON} the whole enemy team for [2,4,8,SP=0.5] seconds`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -1046,7 +1046,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.POISON]: {
-    eng: `${Status.POISON} the target for [4,8,16] seconds`,
+    eng: `Apply ${Status.POISON} to [1,2,3] closest opponents for [3,6,9,SP=0.5] seconds`,
     esp: `Envenenar el objetivo durante 5,10,20 segundos, repartiendo 15% hp,segundos`,
     fra: `Empoisonne la cible durant 5,10,20 secondes, faisant 15% hp,secondes`,
     prt: ``
