@@ -1,5 +1,5 @@
 import React from "react"
-import { TypeTrigger } from "../../../../../types/Config"
+import { SynergyTriggers } from "../../../../../types/Config"
 import SynergyComponent from "./synergy-component"
 import CSS from "csstype"
 import { Synergy } from "../../../../../types/enum/Synergy"
@@ -33,7 +33,7 @@ export default function Synergies(props: { synergies: [string, number][] }) {
             const sa = fa ? fa : 0
             const sb = fb ? fb : 0
             if (sa[1] == sb[1]) {
-              if (sa[1] >= TypeTrigger[a][0]) {
+              if (sa[1] >= SynergyTriggers[a][0]) {
                 return -1
               } else {
                 return 1

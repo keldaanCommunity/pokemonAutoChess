@@ -13,11 +13,11 @@ export default function WikiStatistic() {
   return (
     <ul className="wiki-stat">
       <li className="nes-container">
-        <img style={imgStyle} src="assets/icons/hp.png"></img>
+        <img style={imgStyle} src="assets/icons/HP.png"></img>
         <p>Health points</p>
       </li>
       <li className="nes-container">
-        <img style={imgStyle} src="assets/icons/shield.png"></img>
+        <img style={imgStyle} src="assets/icons/SHIELD.png"></img>
         <p>Shield</p>
         <p className="description">
           Temporary health points.
@@ -26,21 +26,21 @@ export default function WikiStatistic() {
         </p>
       </li>
       <li className="nes-container">
-        <img style={imgStyle} src="assets/icons/def.png"></img>
+        <img style={imgStyle} src="assets/icons/DEF.png"></img>
         <p>Defense points</p>
         <p className="description">
           {addIconsToDescription(`Reduces PHYSICAL received`)}
         </p>
       </li>
       <li className="nes-container">
-        <img style={imgStyle} src="assets/icons/speDef.png"></img>
+        <img style={imgStyle} src="assets/icons/SPE_DEF.png"></img>
         <p>Special Defense points</p>
         <p className="description">
           {addIconsToDescription(`Reduces SPECIAL received`)}
         </p>
       </li>
       <li className="nes-container">
-        <img style={imgStyle} src="assets/icons/mana.png"></img>
+        <img style={imgStyle} src="assets/icons/MANA.png"></img>
         <p>Mana points</p>
         <p className="description">
           {addIconsToDescription(
@@ -49,7 +49,7 @@ export default function WikiStatistic() {
         </p>
       </li>
       <li className="nes-container">
-        <img style={imgStyle} src="assets/icons/ap.png"></img>
+        <img style={imgStyle} src="assets/icons/AP.png"></img>
         <p>Ability Power (%)</p>
         <p className="description">
           {addIconsToDescription(
@@ -58,21 +58,21 @@ export default function WikiStatistic() {
         </p>
       </li>
       <li className="nes-container">
-        <img style={imgStyle} src="assets/icons/atk.png"></img>
+        <img style={imgStyle} src="assets/icons/ATK.png"></img>
         <p>Attack Damage</p>
         <p className="description">
           {addIconsToDescription(`Damage inflicted on each basic attack`)}
         </p>
       </li>
       <li className="nes-container">
-        <img style={imgStyle} src="assets/icons/range.png"></img>
+        <img style={imgStyle} src="assets/icons/RANGE.png"></img>
         <p>Attack Range</p>
         <p className="description">
           {addIconsToDescription(`1-range pokemon are melee`)}
         </p>
       </li>
       <li className="nes-container">
-        <img style={imgStyle} src="assets/icons/speed.png"></img>
+        <img style={imgStyle} src="assets/icons/ATK_SPEED.png"></img>
         <p>Attack Speed (Attack/second)</p>
         <p className="description">
           Number of attacks per second.
@@ -81,7 +81,7 @@ export default function WikiStatistic() {
         </p>
       </li>
       <li className="nes-container">
-        <img style={imgStyle} src="assets/icons/critChance.png"></img>
+        <img style={imgStyle} src="assets/icons/CRIT_CHANCE.png"></img>
         <p>Critical hit chance (%)</p>
         <p className="description">
           {addIconsToDescription(
@@ -90,7 +90,7 @@ export default function WikiStatistic() {
         </p>
       </li>
       <li className="nes-container">
-        <img style={imgStyle} src="assets/icons/critDamage.png"></img>
+        <img style={imgStyle} src="assets/icons/CRIT_DAMAGE.png"></img>
         <p>Critical hit damage</p>
         <p className="description">
           {addIconsToDescription(

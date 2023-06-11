@@ -122,8 +122,11 @@ export default class AttackingState extends PokemonState {
       }
 
       let poisonChance = 0
-      if (pokemon.effects.includes(Effect.POISON_GAS)) {
+      if (pokemon.effects.includes(Effect.POISONOUS)) {
         poisonChance = 0.3
+      }
+      if (pokemon.effects.includes(Effect.VENOMOUS)) {
+        poisonChance = 0.5
       }
       if (pokemon.effects.includes(Effect.TOXIC)) {
         poisonChance = 0.7

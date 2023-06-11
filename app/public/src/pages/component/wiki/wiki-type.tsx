@@ -1,13 +1,12 @@
 import React, { useState } from "react"
 import ReactTooltip from "react-tooltip"
 import PRECOMPUTED_TYPE_POKEMONS_ALL from "../../../../../models/precomputed/type-pokemons-all.json"
-import PRECOMPUTED_TYPE_POKEMONS from "../../../../../models/precomputed/type-pokemons.json"
 import {
   SynergyName,
   SynergyDescription
 } from "../../../../../types/strings/Synergy"
 import { EffectName } from "../../../../../types/strings/Effect"
-import { TypeTrigger, RarityColor } from "../../../../../types/Config"
+import { SynergyTriggers, RarityColor } from "../../../../../types/Config"
 import { Synergy, SynergyEffects } from "../../../../../types/enum/Synergy"
 import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
@@ -66,7 +65,7 @@ export default function WikiType(props: { type: Synergy | "all" }) {
           {SynergyEffects[props.type].map((effect, i) => {
             return (
               <div key={EffectName[effect]} style={{ display: "flex", alignItems: "center" }}>
-                <span>({TypeTrigger[props.type][i]}) {EffectName[effect]}:&nbsp;</span>
+                <span>({SynergyTriggers[props.type][i]}) {EffectName[effect]}:&nbsp;</span>
                 <EffectDescriptionComponent effect={effect} />
               </div>
             )

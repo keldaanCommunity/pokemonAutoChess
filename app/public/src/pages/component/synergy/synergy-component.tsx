@@ -1,5 +1,5 @@
 import React from "react"
-import { TypeTrigger } from "../../../../../types/Config"
+import { SynergyTriggers } from "../../../../../types/Config"
 import ReactTooltip from "react-tooltip"
 import SynergyDetailComponent from "./synergy-detail-component"
 import SynergyIcon from "../icons/synergy-icon"
@@ -11,7 +11,7 @@ export default function SynergyComponent(props: {
   value: number
   index: number
 }) {
-  const levelReached = TypeTrigger[props.type]
+  const levelReached = SynergyTriggers[props.type]
     .filter((n) => n <= props.value)
     .at(-1)
   return (
@@ -22,14 +22,14 @@ export default function SynergyComponent(props: {
         alignItems: "center",
         justifyContent: "space-around",
         backgroundColor:
-          props.value >= TypeTrigger[props.type][0]
+          props.value >= SynergyTriggers[props.type][0]
             ? "#54596b"
             : "rgba(84, 89, 107,0)",
         margin: "5px",
         borderRadius: "12px",
         padding: "5px",
         border:
-          props.value >= TypeTrigger[props.type][0]
+          props.value >= SynergyTriggers[props.type][0]
             ? "4px solid black"
             : "none",
         cursor: "var(--cursor-hover)"
@@ -69,7 +69,7 @@ export default function SynergyComponent(props: {
             justifyContent: "space-evenly"
           }}
         >
-          {TypeTrigger[props.type].map((t) => {
+          {SynergyTriggers[props.type].map((t) => {
             return (
               <span
                 key={t}

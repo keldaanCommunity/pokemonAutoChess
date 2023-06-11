@@ -9,7 +9,7 @@ import {
 import PRECOMPUTED_TYPE_POKEMONS from "../../../../../models/precomputed/type-pokemons.json"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { EffectName } from "../../../../../types/strings/Effect"
-import { TypeTrigger, RarityColor } from "../../../../../types/Config"
+import { SynergyTriggers, RarityColor } from "../../../../../types/Config"
 import { useAppSelector } from "../../../hooks"
 import { getPortraitSrc } from "../../../utils"
 import SynergyIcon from "../icons/synergy-icon"
@@ -25,8 +25,8 @@ export default function SynergyDetailComponent(props: {
   const additionalPokemons = useAppSelector(
     (state) => state.game.additionalPokemons
   )
-  if (TypeTrigger.hasOwnProperty(props.type) === false) return null
-  const levelReached = TypeTrigger[props.type]
+  if (SynergyTriggers.hasOwnProperty(props.type) === false) return null
+  const levelReached = SynergyTriggers[props.type]
     .filter((n) => n <= props.value)
     .at(-1)
   return (
@@ -43,15 +43,15 @@ export default function SynergyDetailComponent(props: {
             key={EffectName[d]}
             style={{
               color:
-                levelReached === TypeTrigger[props.type][i]
+                levelReached === SynergyTriggers[props.type][i]
                   ? "#fff"
                   : "#e8e8e8",
               backgroundColor:
-                levelReached === TypeTrigger[props.type][i]
+                levelReached === SynergyTriggers[props.type][i]
                   ? "#54596b"
                   : "rgba(84, 89, 107,0)",
               border:
-                levelReached === TypeTrigger[props.type][i]
+                levelReached === SynergyTriggers[props.type][i]
                   ? "4px solid black"
                   : "none",
               borderRadius: "12px",
@@ -59,7 +59,7 @@ export default function SynergyDetailComponent(props: {
             }}
           >
             <h5 style={{ fontSize: "1.3vw" }}>
-              ({TypeTrigger[props.type][i]}) {EffectName[d]}
+              ({SynergyTriggers[props.type][i]}) {EffectName[d]}
             </h5>
             <EffectDescriptionComponent effect={d} />
           </div>
