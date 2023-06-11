@@ -620,51 +620,33 @@ export default class PokemonState {
     pokemon: PokemonEntity,
     board: Board
   ): { x: number; y: number } | undefined {
-    let x: number | undefined = undefined
-    let y: number | undefined = undefined
-    const pokemons = new Array<{ distance: number; x: number; y: number }>()
+    const candidateCells = new Array<{
+      distance: number
+      x: number
+      y: number
+    }>()
 
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
-      if (value !== undefined && value.team !== pokemon.team && value.isTargettable) {
-        const distance = board.distance(
-          pokemon.positionX,
-          pokemon.positionY,
-          x,
-          y
+      if (value !== undefined && value.team !== pokemon.team) {
+        candidateCells.push(
+          ...board.getAdjacentCells(x, y)
+            .filter(cell => board.getValue(cell.x, cell.y) === undefined)
+            .map((cell) => ({
+              x: cell.x,
+              y: cell.y,
+              distance: board.distance(
+                pokemon.positionX,
+                pokemon.positionY,
+                cell.x,
+                cell.y
+              )
+            }))
         )
-        pokemons.push({ distance, x, y })
       }
     })
 
-    pokemons.sort((a, b) => {
-      return b.distance - a.distance
-    })
-
-    for (let i = 0; i < pokemons.length; i++) {
-      const p = pokemons[i]
-      const around = board.getAdjacentCells(p.x, p.y)
-
-      around.sort((a, b) => {
-        return (
-          board.distance(b.x, b.y, pokemon.positionX, pokemon.positionY) -
-          board.distance(a.x, a.y, pokemon.positionX, pokemon.positionY)
-        )
-      })
-      around.forEach((cell) => {
-        if (!cell.value && x === undefined && y === undefined) {
-          x = cell.x
-          y = cell.y
-        }
-      })
-      if (x !== undefined && y !== undefined) {
-        break
-      }
-    }
-    if (x !== undefined && y !== undefined) {
-      return { x, y }
-    } else {
-      return undefined
-    }
+    candidateCells.sort((a, b) => b.distance - a.distance)
+    return candidateCells[0]
   }
 
   getTargetCoordinateWhenConfused(
