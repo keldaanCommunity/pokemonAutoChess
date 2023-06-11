@@ -22,7 +22,7 @@ import { clamp, roundTo2Digits } from "../utils/number"
 import { Passive } from "../types/enum/Passive"
 import { DEFAULT_CRIT_CHANCE, DEFAULT_CRIT_DAMAGE } from "../types/Config"
 import { removeInArray } from "../utils/array"
-import { logger } from "../utils/logger"
+import { chance } from "../utils/random"
 
 export default class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
@@ -328,11 +328,37 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     if (shouldAttackerGainMana) {
       this.setMana(this.mana + 5)
     }
-    if (
-      this.effects.includes(Effect.CALM_MIND) ||
-      this.effects.includes(Effect.FOCUS_ENERGY) ||
-      this.effects.includes(Effect.MEDITATE)
-    ) {
+
+    // Item effects on hit
+
+    if (target && target.items.has(Item.SMOKE_BALL)) {
+      this.status.triggerParalysis(5000, this)
+    }
+
+    if (this.items.has(Item.SHELL_BELL)) {
+      this.handleHeal(Math.floor(0.3 * damageDealt), this, 0)
+    }
+
+    if (this.items.has(Item.UPGRADE)) {
+      this.addAttackSpeed(5)
+      this.count.upgradeCount++
+    }
+
+    // Synergy effects on hit
+
+    if (SynergyEffects[Synergy.ICE].some(effect => this.effects.includes(effect))) {
+      let freezeChance = 0
+      if (this.effects.includes(Effect.FROSTY)) {
+        freezeChance = 0.1
+      } else if (this.effects.includes(Effect.SHEER_COLD)) {
+        freezeChance = 0.4
+      }
+      if (chance(freezeChance)) {
+        target.status.triggerFreeze(2000, target)
+      }
+    }
+
+    if (SynergyEffects[Synergy.HUMAN].some(effect => this.effects.includes(effect))) {
       let lifesteal = 0
       if (this.effects.includes(Effect.MEDITATE)) {
         lifesteal = 0.15
@@ -343,30 +369,46 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       }
       this.handleHeal(Math.floor(lifesteal * damageDealt), this, 0)
     }
-    if (this.items.has(Item.SHELL_BELL)) {
-      this.handleHeal(Math.floor(0.3 * damageDealt), this, 0)
-    }
 
-    if (
-      this.effects.includes(Effect.BLAZE) ||
-      this.effects.includes(Effect.DROUGHT) ||
-      this.effects.includes(Effect.DESOLATE_LAND)
-    ) {
+    if (SynergyEffects[Synergy.FIRE].some(effect => this.effects.includes(effect))) {
       let burnChance = 0
       if (this.effects.includes(Effect.BLAZE)) {
         burnChance = 0.2
       }
       if (this.effects.includes(Effect.VICTORY_STAR)) {
         burnChance = 0.2
+        this.addAttack(1)
       } else if (this.effects.includes(Effect.DROUGHT)) {
         burnChance = 0.3
+        this.addAttack(2)
       } else if (this.effects.includes(Effect.DESOLATE_LAND)) {
         burnChance = 0.4
+        this.addAttack(3)
       }
-      if (Math.random() < burnChance) {
+      if (chance(burnChance)) {
         target.status.triggerBurn(2000, target, this, board)
       }
     }
+
+    if (SynergyEffects[Synergy.AQUATIC].some(effect => this.effects.includes(effect))) {
+      const burnManaChance = this.effects.includes(Effect.SWIFT_SWIM)
+        ? 0.35
+        : this.effects.includes(Effect.HYDRATION)
+        ? 0.45
+        : 0.55
+      const manaGain = this.effects.includes(Effect.SWIFT_SWIM)
+        ? 15
+        : this.effects.includes(Effect.HYDRATION)
+        ? 30
+        : 45
+      if (chance(burnManaChance)) {
+        target.setMana(target.mana - 20)
+        target.count.manaBurnCount++
+        this.setMana(this.mana + manaGain)
+      }
+    }
+
+    //TODO: Poison chance for poison synergy
   }
 
   onCritical(target: PokemonEntity, board: Board) {

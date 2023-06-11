@@ -80,7 +80,7 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
   [Item.ICE_STONE]: "The holder gains the ice type",
   [Item.CHOICE_SPECS]: `The holder gains 100% bonus ${Stat.AP}`,
   [Item.SOUL_DEW]: `During combat, the holder gains 10% ${Stat.AP} every second`,
-  [Item.UPGRADE]: `Attacks grant +5% bonus ${Stat.ATK_SPEED} for the rest of combat`,
+  [Item.UPGRADE]: `Successful attacks grant +5% bonus ${Stat.ATK_SPEED} for the rest of combat`,
   [Item.REAPER_CLOTH]: "The holder spells can critically strike",
   [Item.POKEMONOMICON]:
     "When the holder deals damage with their Ability, they burn and wound the target for 2 seconds",

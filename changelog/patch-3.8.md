@@ -39,7 +39,7 @@ More Wounding abilities
 
 # Bugfix
 
--
+- Many on-hit effects now only apply when the attack is successful (not dodged or protected). This concerns Upgrade stacks, Aquatic mana burn, Fire attack buff, Poison chance, Freeze chance and Smoke Ball debuff
 
 # UI
 - Add a slider option for SFX volume

@@ -105,22 +105,6 @@ export default class AttackingState extends PokemonState {
         pokemon.status.triggerProtect(1000)
       }
 
-      if (pokemon.items.has(Item.UPGRADE)) {
-        pokemon.addAttackSpeed(5)
-        pokemon.count.upgradeCount++
-      }
-
-      let freezeChance = 0
-      if (pokemon.effects.includes(Effect.FROSTY)) {
-        freezeChance += 0.1
-      }
-      if (pokemon.effects.includes(Effect.SHEER_COLD)) {
-        freezeChance += 0.3
-      }
-      if (Math.random() > 1 - freezeChance) {
-        target.status.triggerFreeze(2000, target)
-      }
-
       let poisonChance = 0
       if (pokemon.effects.includes(Effect.POISON_GAS)) {
         poisonChance = 0.3
@@ -142,27 +126,7 @@ export default class AttackingState extends PokemonState {
       ) {
         target.status.triggerSilence(3000, target, pokemon, board)
       }
-      if (
-        pokemon.effects.includes(Effect.SWIFT_SWIM) ||
-        pokemon.effects.includes(Effect.HYDRATION) ||
-        pokemon.effects.includes(Effect.WATER_VEIL)
-      ) {
-        const chance = pokemon.effects.includes(Effect.SWIFT_SWIM)
-          ? 0.35
-          : pokemon.effects.includes(Effect.HYDRATION)
-          ? 0.45
-          : 0.55
-        const manaGain = pokemon.effects.includes(Effect.SWIFT_SWIM)
-          ? 15
-          : pokemon.effects.includes(Effect.HYDRATION)
-          ? 30
-          : 45
-        if (Math.random() > 1 - chance) {
-          target.setMana(target.mana - 20)
-          target.count.manaBurnCount++
-          pokemon.setMana(pokemon.mana + manaGain)
-        }
-      }
+      
       if (pokemon.effects.includes(Effect.TELEPORT_NEXT_ATTACK)) {
         const crit =
           pokemon.items.has(Item.REAPER_CLOTH) && chance(pokemon.critChance)
@@ -313,9 +277,6 @@ export default class AttackingState extends PokemonState {
           })
         }
       }
-      if (target && target.items.has(Item.SMOKE_BALL)) {
-        pokemon.status.triggerParalysis(5000, pokemon)
-      }
 
       if (pokemon.items.has(Item.CHOICE_SCARF) && damage > 0) {
         const cells = board.getAdjacentCells(target.positionX, target.positionY)
@@ -359,13 +320,6 @@ export default class AttackingState extends PokemonState {
       if (pokemon.status.deltaOrb) {
         pokemon.setMana(pokemon.mana + 3)
       }
-    }
-    if (pokemon.effects.includes(Effect.VICTORY_STAR)) {
-      pokemon.addAttack(1)
-    } else if (pokemon.effects.includes(Effect.DROUGHT)) {
-      pokemon.addAttack(2)
-    } else if (pokemon.effects.includes(Effect.DESOLATE_LAND)) {
-      pokemon.addAttack(3)
     }
 
     if (pokemon.effects.includes(Effect.DRAGON_ENERGY)) {
