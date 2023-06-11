@@ -1377,7 +1377,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
       (p: Player) => p.life > 0
     ).length
     const minigamePhaseDuration =
-      this.state.stageLevel === 1 ? 15000 : 14000 + nbPlayersAlive * 2000
+      this.state.stageLevel === CarouselStages[0] ? 15000 : 14000 + nbPlayersAlive * 2000
     this.state.time = minigamePhaseDuration
     this.room.miniGame.initialize(this.state.players, this.state.stageLevel)
   }
@@ -1390,7 +1390,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     this.state.botManager.updateBots()
 
     const stageIndex = this.getPVEIndex(this.state.stageLevel)
-    this.state.shinyEncounter = this.state.stageLevel === 10 && chance(1 / 20)
+    this.state.shinyEncounter = this.state.stageLevel === 9 && chance(1 / 20)
 
     this.state.players.forEach((player: Player, key: string) => {
       if (player.alive) {
