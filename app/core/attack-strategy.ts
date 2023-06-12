@@ -3247,6 +3247,49 @@ export class StringShotStrategy extends AttackStrategy {
   }
 }
 
+export class StickyWebStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    let damage = 0
+
+    switch (pokemon.stars) {
+      case 1:
+        damage = 10
+        break
+      case 2:
+        damage = 20
+        break
+      case 3:
+        damage = 40
+        break
+      default:
+        break
+    }
+
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    target.status.triggerParalysis(4000, target)
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+    cells.forEach((cell) => {
+      if (cell.value && pokemon.team !== cell.value.team) {
+        cell.value.status.triggerParalysis(4000, target)
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
+    })
+  }
+}
+
 export class PoisonStingStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
@@ -4312,5 +4355,106 @@ export class CounterStrategy extends AttackStrategy {
         )
       }
     })
+  }
+}
+
+export class PoisonPowderStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    let damage = 30
+    if (pokemon.stars === 2) {
+      damage = 60
+    }
+    if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
+      damage = 120
+    }
+
+    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(
+      pokemon,
+      board
+    )
+
+    if (farthestCoordinate) {
+      const cells = board.getCellsBetween(
+        pokemon.positionX,
+        pokemon.positionY,
+        farthestCoordinate.x,
+        farthestCoordinate.y
+      )
+      cells.forEach((cell) => {
+        if (cell.value && cell.value.team != pokemon.team) {
+          cell.value.status.triggerPoison(5000, target, pokemon, board)
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      })
+
+      pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
+    }
+    
+  }
+}
+
+export class SilverWindStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+
+    let damage = 30
+    if (pokemon.stars === 2) {
+      damage = 60
+    }
+    if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
+      damage = 120
+    }
+
+    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(
+      pokemon,
+      board
+    )
+
+    pokemon.addAttack(1)
+    pokemon.addDefense(1)
+    pokemon.addSpecialDefense(1)
+    pokemon.addAttackSpeed(10)
+    pokemon.addAbilityPower(10)
+
+    if (farthestCoordinate) {
+      const cells = board.getCellsBetween(
+        pokemon.positionX,
+        pokemon.positionY,
+        farthestCoordinate.x,
+        farthestCoordinate.y
+      )
+      cells.forEach((cell) => {
+        if (cell.value && cell.value.team != pokemon.team) {
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      })
+
+      pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
+    }
   }
 }

@@ -897,7 +897,25 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
-  }
+  },
+  [Ability.STICKY_WEB]: {
+    eng: "Sticky Web",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.SILVER_WIND]: {
+    eng: "Silver Wind",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.POISON_POWDER]: {
+    eng: "Poison Powder",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
 }
 
 export const AbilityDescription: { [key in Ability]: Langage } = {
@@ -1797,5 +1815,23 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     esp: "",
     prt: "",
     fra: ""
-  }
+  },
+  [Ability.STICKY_WEB]: {
+    eng: `Deals [10,20,40,SP] ${Damage.SPECIAL} and ${Status.PARALYSIS} the target and adjacent enemies for 4 seconds`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.SILVER_WIND]: {
+    eng: `Dash into the enemy backline, dealing [30,60,120,SP] ${Damage.SPECIAL} to every enemy on the path. Then gain 1 ${Stat.ATK}, 1 ${Stat.DEF}, 1 ${Stat.SPE_DEF}, 10% ${Stat.AP} and 10% ${Stat.ATK_SPEED}`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.POISON_POWDER]: {
+    eng: `Dash into the enemy backline, dealing [30,60,120,SP] and applying ${Status.POISON} for 5 seconds to every enemy on the path.`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
 }

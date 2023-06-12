@@ -48,6 +48,21 @@ export default function WikiPokemonDetail(props: {
 
   if (!props.m) return null
 
+  const statProp: Record<Stat, string> = {
+    [Stat.ATK]: "atk",
+    [Stat.DEF]: "def",
+    [Stat.HP]: "hp",
+    [Stat.MAX_MANA]: "maxMana",
+    [Stat.RANGE]: "range",
+    [Stat.SPE_DEF]: "speDef",
+    [Stat.CRIT_CHANCE]: "critChance",
+    [Stat.CRIT_DAMAGE]: "critDamage",
+    [Stat.ATK_SPEED]: "atkSpeed",
+    [Stat.MANA]: "mana",
+    [Stat.AP]: "ap",
+    [Stat.SHIELD]: "shield",
+  }
+
   return (
     <div className="wiki-pokemon-detail">
       <div className="game-pokemon-detail-tooltip">
@@ -106,7 +121,7 @@ export default function WikiPokemonDetail(props: {
               <img src={`assets/icons/${stat}.png`} alt="" />{" "}
               {StatLabel[stat]["eng"]}
             </dt>
-            <dd>{pokemon[stat]}</dd>
+            <dd>{pokemon[statProp[stat]]}</dd>
           </React.Fragment>
         ))}
         <dt>

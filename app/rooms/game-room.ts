@@ -49,7 +49,7 @@ import { components } from "../api-v1/openapi"
 import { Title, Role } from "../types"
 import PRECOMPUTED_TYPE_POKEMONS from "../models/precomputed/type-pokemons.json"
 import BannedUser from "../models/mongo-models/banned-user"
-import { pickRandomIn, shuffleArray } from "../utils/random"
+import { coinflip, pickRandomIn, shuffleArray } from "../utils/random"
 import { Rarity } from "../types/enum/Game"
 import { Weather } from "../types/enum/Weather"
 import { FilterQuery } from "mongoose"
@@ -814,6 +814,24 @@ export default class GameRoom extends Room<GameState> {
             pokemonEvolutionName = Pkm.HUNTAIL
           } else {
             pokemonEvolutionName = Pkm.GOREBYSS
+          }
+        }
+
+        if (pokemon.name === Pkm.WURMPLE) {
+          const lastWeather = player.getLastBattle()?.weather ?? Weather.NEUTRAL
+          let existingSecondTier: Pkm | null = null
+          player.board.forEach((pkm) => {
+            if(pkm.name === Pkm.CASCOON) existingSecondTier = Pkm.CASCOON
+            else if(pkm.name === Pkm.SILCOON) existingSecondTier = Pkm.SILCOON
+          })
+          if(existingSecondTier !== null){ 
+            pokemonEvolutionName = existingSecondTier
+          } else if([Weather.NIGHT, Weather.STORM, Weather.SANDSTORM, Weather.SNOW].includes(lastWeather)){
+            pokemonEvolutionName = Pkm.CASCOON
+          } else if([Weather.SUN, Weather.RAIN, Weather.MISTY, Weather.WINDY].includes(lastWeather)){
+            pokemonEvolutionName = Pkm.SILCOON
+          } else {
+            pokemonEvolutionName = coinflip() ? Pkm.CASCOON : Pkm.SILCOON
           }
         }
 
