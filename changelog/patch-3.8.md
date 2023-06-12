@@ -57,6 +57,8 @@ More Wounding abilities
 # Changes to Items
 
 - Gracidea flower: Replace focus band
+- Buff Reaper Cloth: AP: 10% → 15% ; Crit chance: 5% → 15%
+- Rework Shiny Charm: Give 15% chance to avoid incoming damage and trigger Protect for 1 second
 
 # Bugfix
 
