@@ -70,7 +70,7 @@ export const SynergyTriggers: { [key in Synergy]: number[] } = {
   [Synergy.GRASS]: [3, 5, 7],
   [Synergy.FIRE]: [2, 4, 6, 8],
   [Synergy.WATER]: [3, 6, 9],
-  [Synergy.ELECTRIC]: [2, 4, 6],
+  [Synergy.ELECTRIC]: [3, 6],
   [Synergy.FIGHTING]: [2, 4, 6],
   [Synergy.PSYCHIC]: [2, 4, 6],
   [Synergy.DARK]: [3, 6, 9],
@@ -157,7 +157,7 @@ export const PoolSize: { [key in Rarity]: [number, number, number] } = {
   [Rarity.HATCH]: [0, 0, 0]
 }
 
-export const CommonShop = new Array<Pkm>(  
+export const CommonShop = new Array<Pkm>(
   Pkm.POLIWAG,
   Pkm.CHARMANDER,
   Pkm.GEODUDE,

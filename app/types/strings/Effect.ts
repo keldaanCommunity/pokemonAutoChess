@@ -18,7 +18,6 @@ export const EffectName: { [key in Effect]: string } = {
   [Effect.STRENGTH]: `Strength`,
   [Effect.PURE_POWER]: `Pure Power`,
   [Effect.ROCK_SMASH]: `Rock Smash`,
-  [Effect.EERIE_IMPULSE]: `Eerie Impulse`,
   [Effect.RISING_VOLTAGE]: `Rising Voltage`,
   [Effect.OVERDRIVE]: `Overdrive`,
   [Effect.GUTS]: `Guts`,
@@ -174,13 +173,8 @@ export const EffectDescription: {
     esp: ``,
     fra: ``
   },
-  [Effect.EERIE_IMPULSE]: {
-    eng: `30% chance of triple attack`,
-    esp: ``,
-    fra: ``
-  },
   [Effect.RISING_VOLTAGE]: {
-    eng: `40% chance of triple attack`,
+    eng: `30% chance of triple attack`,
     esp: ``,
     fra: ``
   },
