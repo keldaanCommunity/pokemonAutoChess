@@ -915,7 +915,7 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
-  },
+  }
 }
 
 export const AbilityDescription: { [key in Ability]: Langage } = {
@@ -1787,7 +1787,7 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     prt: ``
   },
   [Ability.SEARING_SHOT]: {
-    eng: `An inferno of scarlet flames torches everything around the user. Deals [20,SP] ${Damage.SPECIAL} and ${Status.BURN}for 3 seconds all ennemies 2 tiles around Victini`,
+    eng: `An inferno of scarlet flames torches everything around the user. Deals [30,SP] ${Damage.SPECIAL} and ${Status.BURN} for 3 seconds all enemies within 2 tiles of Victini.`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -1833,5 +1833,5 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     esp: "",
     prt: "",
     fra: ""
-  },
+  }
 }

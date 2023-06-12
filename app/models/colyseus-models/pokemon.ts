@@ -7867,10 +7867,10 @@ export class Victini extends Pokemon {
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       300,
-      20,
+      30,
       5,
       5,
-      2,
+      1,
       AttackSprite.FIRE_MELEE,
       2,
       100,
@@ -13273,6 +13273,3 @@ export class Dustox extends Pokemon {
     )
   }
 }
-
-
-      

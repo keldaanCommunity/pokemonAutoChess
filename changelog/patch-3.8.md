@@ -36,6 +36,7 @@ More Wounding abilities
 - Flying 4: Get Protect for ~~2~~ 1.5 seconds after flying away
 - Lanturn Buff ~~14~~ 16 atk
 - Buff Delphox ~~15~~ 18 atk
+- Buff Victini Range ~~2~~ 1 Searing Shot ~~20~~ 30 damage Atk ~~20~~ 30
 
 # Changes to Synergies
 
