@@ -44,7 +44,6 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   @type("uint8") team: number
   @type("uint8") range: number
   @type("float32") atkSpeed: number
-  @type("uint8") atkSpeedBonus = 0
   @type("int8") targetX = -1
   @type("int8") targetY = -1
   @type("string") attackSprite: AttackSprite
@@ -298,9 +297,10 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
 
   addAttackSpeed(value: number, apBoost = false) {
     const boost = apBoost ? (value * this.ap) / 100 : 0
-    this.atkSpeedBonus += value + boost
+    const currentAtkSpeedBonus = 100 * (this.atkSpeed / 0.75 - 1)
+    const atkSpeedBonus = currentAtkSpeedBonus + value + boost
     this.atkSpeed = clamp(
-      roundTo2Digits(0.75 * (1 + this.atkSpeedBonus / 100)),
+      roundTo2Digits(0.75 * (1 + atkSpeedBonus / 100)),
       0.4,
       2.5
     )

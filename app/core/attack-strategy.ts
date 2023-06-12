@@ -3539,15 +3539,15 @@ export class StunSporeStrategy extends AttackStrategy {
     let damage = 0
     switch (pokemon.stars) {
       case 1:
-        debuff = 50
+        debuff = 30
         damage = 5
         break
       case 2:
-        debuff = 100
+        debuff = 60
         damage = 10
         break
       case 3:
-        debuff = 200
+        debuff = 90
         damage = 20
         break
       default:

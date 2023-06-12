@@ -38,6 +38,7 @@ More Wounding abilities
 - Buff Delphox ~~15~~ 18 atk
 - Buff Victini Range ~~2~~ 1 Searing Shot ~~20~~ 30 damage Atk ~~20~~ 30
 - Nerf Zeraora Plasma Fist lifesteal ~~50~~ 25%
+- Nerf Stun spore Decrease target attack speed by ~~50/100/200~~ 30/60/90%
 
 # Changes to Synergies
 
@@ -55,6 +56,7 @@ More Wounding abilities
 - Many on-hit effects now only apply when the attack is successful (not dodged or protected). This concerns: Aquatic mana burn, Fire attack buff, Poison chance, Freeze chance, Silence chance, Upgrade stacks, Red Orb damage, Smoke Ball debuff, Spike Armor
 - Choice scarf was not applying damage correctly with Ghost true damage
 - Leftovers heal was triggering twice for the item holder
+- Fix a bug where the attack speed of a pkm was stuck at .4 even with upgrade buff
 
 # UI
 
