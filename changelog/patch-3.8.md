@@ -40,6 +40,7 @@ More Wounding abilities
 - Nerf Zeraora Plasma Fist lifesteal ~~50~~ 25%
 - Nerf Stun spore Decrease target attack speed by ~~50/100/200~~ 30/60/90%
 - Nerf Electric ~~2/4/6~~ 3/6 (3) Rising Voltage: 30% chance of triple attack
+- Buff Dark ~~3/6/9~~ 3/5/7
 
 # Changes to Synergies
 
