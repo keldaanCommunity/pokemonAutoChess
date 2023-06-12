@@ -3131,7 +3131,7 @@ export class StompStrategy extends AttackStrategy {
   }
 }
 
-export class DarkPulseStrategy extends AttackStrategy {
+export class PaybackStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3143,13 +3143,13 @@ export class DarkPulseStrategy extends AttackStrategy {
     let damage = 0
     switch (pokemon.stars) {
       case 1:
-        damage = 30
+        damage = 20
         break
       case 2:
-        damage = 60
+        damage = 40
         break
       case 3:
-        damage = 120
+        damage = 80
         break
       default:
         break
