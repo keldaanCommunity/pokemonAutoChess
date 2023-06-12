@@ -31,5 +31,6 @@ export const PassiveDescription: { [key in Passive]: string } = {
   [Passive.SNOW]: `Change weather to ${Weather.SNOW}`,
   [Passive.STORM]: `Change weather to ${Weather.STORM}`,
   [Passive.NIGHT]: `Change weather to ${Weather.NIGHT}`,
-  [Passive.WINDY]: `Change weather to ${Weather.WINDY}`
+  [Passive.WINDY]: `Change weather to ${Weather.WINDY}`,
+  [Passive.WURMPLE]: `Wurmple can evolve into Silcoon or Cascoon, depending on the weather at previous stage`,
 }

@@ -78,6 +78,7 @@ import {
   SleepStrategy,
   SoakStrategy,
   SongOfDesireStrategy,
+  StickyWebStrategy,
   StompStrategy,
   StringShotStrategy,
   StunSporeStrategy,
@@ -147,7 +148,9 @@ import {
   PeckStrategy,
   SplashStrategy,
   CounterStrategy,
-  ComsicPowerStrategy
+  ComsicPowerStrategy,
+  PoisonPowderStrategy,
+  SilverWindStrategy
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -299,7 +302,10 @@ export enum Ability {
   PECK = "PECK",
   SPLASH = "SPLASH",
   COUNTER = "COUNTER",
-  COSMIC_POWER = "COSMIC_POWER"
+  COSMIC_POWER = "COSMIC_POWER",
+  STICKY_WEB = "STICKY_WEB",
+  SILVER_WIND = "SILVER_WIND",
+  POISON_POWDER = "POISON_POWDER"
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -355,6 +361,7 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.NIGHT_SLASH]: new NightSlashStrategy(),
   [Ability.BUG_BUZZ]: new BugBuzzStrategy(),
   [Ability.STRING_SHOT]: new StringShotStrategy(),
+  [Ability.STICKY_WEB]: new StickyWebStrategy(),
   [Ability.VENOSHOCK]: new PoisonStingStrategy(),
   [Ability.LEECH_LIFE]: new LeechLifeStrategy(),
   [Ability.HAPPY_HOUR]: new HappyHourStrategy(),
@@ -451,5 +458,7 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.PECK]: new PeckStrategy(),
   [Ability.SPLASH]: new SplashStrategy(),
   [Ability.COUNTER]: new CounterStrategy(),
-  [Ability.COSMIC_POWER]: new ComsicPowerStrategy()
+  [Ability.COSMIC_POWER]: new ComsicPowerStrategy(),
+  [Ability.POISON_POWDER]: new PoisonPowderStrategy(),
+  [Ability.SILVER_WIND]: new SilverWindStrategy(),
 }

@@ -559,7 +559,12 @@ export enum Pkm {
   WOBBUFFET = "Wobbuffet",
   LUNATONE = "lunatone",
   SOLROCK = "solrock",
-  SHAYMIN_SKY = "shaymin-sky"
+  SHAYMIN_SKY = "shaymin-sky",
+  WURMPLE = "wurmple",
+  SILCOON = "silcoon",
+  BEAUTIFLY = "beautifly",
+  CASCOON = "cascoon",
+  DUSTOX = "dustox",
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1121,7 +1126,12 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.LUNATONE]: "0337",
   [Pkm.SOLROCK]: "0338",
   [Pkm.POLIWRATH]: "0062",
-  [Pkm.SHAYMIN_SKY]: "0492-0001"
+  [Pkm.SHAYMIN_SKY]: "0492-0001",
+  [Pkm.WURMPLE]: "0265",
+  [Pkm.SILCOON]: "0266",
+  [Pkm.BEAUTIFLY]: "0267",
+  [Pkm.CASCOON]: "0268",
+  [Pkm.DUSTOX]: "0269",
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1683,7 +1693,12 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.LUNATONE]: Pkm.LUNATONE,
   [Pkm.SOLROCK]: Pkm.SOLROCK,
   [Pkm.POLIWRATH]: Pkm.POLIWAG,
-  [Pkm.SHAYMIN_SKY]: Pkm.SHAYMIN
+  [Pkm.SHAYMIN_SKY]: Pkm.SHAYMIN,
+  [Pkm.WURMPLE]: Pkm.WURMPLE,
+  [Pkm.SILCOON]: Pkm.WURMPLE,
+  [Pkm.BEAUTIFLY]: Pkm.WURMPLE,
+  [Pkm.CASCOON]: Pkm.WURMPLE,
+  [Pkm.DUSTOX]: Pkm.WURMPLE,
 }
 
 export const AnimationConfig: {
@@ -3924,5 +3939,25 @@ export const AnimationConfig: {
   [Pkm.SHAYMIN_SKY]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Charge
-  }
+  },
+  [Pkm.WURMPLE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot
+  },
+  [Pkm.SILCOON]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Withdraw
+  },
+  [Pkm.BEAUTIFLY]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.FlapAround
+  },
+  [Pkm.CASCOON]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Withdraw
+  },
+  [Pkm.DUSTOX]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.FlapAround
+  },
 }

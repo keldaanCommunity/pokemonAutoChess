@@ -1046,7 +1046,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
           player.opponentName,
           currentResult,
           player.opponentAvatar,
-          isPVE
+          isPVE,
+          player.simulation.weather
         )
       }
     })

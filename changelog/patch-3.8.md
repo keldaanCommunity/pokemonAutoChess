@@ -11,7 +11,7 @@ Sound rework
 Weather system rework: counts the total number per type for both boards combined to elect weather
 Solrock / Lunatone
 Poison rework (heal reduction)
-Wurmple (Hatch)
+Wurmple line
 More Wounding abilities
 
 ---
