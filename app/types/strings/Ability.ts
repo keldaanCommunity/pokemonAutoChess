@@ -1697,7 +1697,7 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     fra: ""
   },
   [Ability.PLASMA_FIST]: {
-    eng: `Deals [120, SP] ${Damage.SPECIAL} with 50% lifesteal`,
+    eng: `Deals [120, SP] ${Damage.SPECIAL} with 25% lifesteal`,
     esp: "",
     prt: "",
     fra: ""

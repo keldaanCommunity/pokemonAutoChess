@@ -37,6 +37,7 @@ More Wounding abilities
 - Lanturn Buff ~~14~~ 16 atk
 - Buff Delphox ~~15~~ 18 atk
 - Buff Victini Range ~~2~~ 1 Searing Shot ~~20~~ 30 damage Atk ~~20~~ 30
+- Nerf Zeraora Plasma Fist lifesteal ~~50~~ 25%
 
 # Changes to Synergies
 

@@ -3938,7 +3938,7 @@ export class PlasmaFistStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target, crit)
     const damage = 120
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    pokemon.handleHeal(damage / 2, pokemon, 1)
+    pokemon.handleHeal(damage * 0.25, pokemon, 1)
   }
 }
 
@@ -4402,7 +4402,6 @@ export class PoisonPowderStrategy extends AttackStrategy {
 
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
     }
-    
   }
 }
 
