@@ -19,18 +19,21 @@ export default function GameDps(props: { maxDamage: number; dps: IDps }) {
             max={props.maxDamage}
             now={props.dps.physicalDamage}
             key="physical"
+            title={props.dps.physicalDamage.toString()}
           />
           <ProgressBar
             style={{ backgroundColor: "#209cee" }}
             max={props.maxDamage}
             now={props.dps.specialDamage}
             key="special"
+            title={props.dps.specialDamage.toString()}
           />
           <ProgressBar
             style={{ backgroundColor: "#f7d51d" }}
             max={props.maxDamage}
             now={props.dps.trueDamage}
             key="true"
+            title={props.dps.trueDamage.toString()}
           />
         </ProgressBar>
       </div>

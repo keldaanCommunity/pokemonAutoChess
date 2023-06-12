@@ -62,6 +62,7 @@ More Wounding abilities
 # UI
 
 - Add a slider option for SFX volume
+- Extra detail in the damage bars
 
 # Misc
 
