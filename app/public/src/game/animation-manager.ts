@@ -808,10 +808,21 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.ICY_WIND,
+      frames: this.game.anims.generateFrameNames(Ability.ICY_WIND, {
+        start: 0,
+        end: 19,
+        zeroPad: 3
+      }),
+      duration: 300,
+      repeat: 4
+    })
+
+    this.game.anims.create({
       key: Ability.APPLE_ACID,
       frames: this.game.anims.generateFrameNames(Ability.APPLE_ACID, {
         start: 0,
-        end: 19,
+        end: 3,
         zeroPad: 3
       }),
       duration: 1000,

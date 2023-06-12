@@ -38,13 +38,13 @@ More Wounding abilities
 - Buff Delphox ~~15~~ 18 atk
 - Buff Victini Range ~~2~~ 1 Searing Shot ~~20~~ 30 damage Atk ~~20~~ 30
 - Nerf Zeraora Plasma Fist lifesteal ~~50~~ 25%
-- Nerf Stun spore Decrease target attack speed by ~~50/100/200~~ 30/60/90%
+- Nerf Stun spore Decrease target attack speed by ~~50/100/200~~ 10/20/40%
 - Nerf Electric ~~2/4/6~~ 3/6 (3) Rising Voltage: 30% chance of triple attack
 - Buff Dark ~~3/6/9~~ 3/5/7
 - Blue flare & Fusion Bolt now also hits their target (not only adjacent targets)
 - Rename Dark Pulse to Payback ~~30/60/120~~ 20/40/80 special damage
 - Seedot ability: ~~Thief~~ Payback
-- Snorunt ability: ~~Dark Pulse~~ Hex
+- Snorunt ability: ~~Dark Pulse~~ Icy Wind Deals 30/60/120 special damage and decrease target attack speed by 10/20/40%
 
 # Changes to Synergies
 

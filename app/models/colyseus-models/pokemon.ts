@@ -3225,7 +3225,7 @@ export class Snorunt extends Pokemon {
       AttackSprite.GHOST_RANGE,
       1,
       100,
-      Ability.HEX,
+      Ability.ICY_WIND,
       shiny,
       emotion,
       false
@@ -3248,7 +3248,7 @@ export class Glalie extends Pokemon {
       AttackSprite.GHOST_RANGE,
       2,
       100,
-      Ability.HEX,
+      Ability.ICY_WIND,
       shiny,
       emotion,
       false
@@ -3271,7 +3271,7 @@ export class Froslass extends Pokemon {
       AttackSprite.GHOST_RANGE,
       3,
       100,
-      Ability.HEX,
+      Ability.ICY_WIND,
       shiny,
       emotion,
       true

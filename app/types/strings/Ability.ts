@@ -915,6 +915,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.ICY_WIND]: {
+    eng: "Icy Wind",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1328,7 +1334,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.STUN_SPORE]: {
-    eng: `Decrease target ${Stat.ATK_SPEED} by [30,60,90] % and deals [5,10,20,SP] ${Damage.SPECIAL}`,
+    eng: `Decrease target ${Stat.ATK_SPEED} by [10,20,40] % and deals [5,10,20,SP] ${Damage.SPECIAL}`,
     esp: `Disminuir la velocidad de ataque del objetivo en un 50,100,200% e inflige [5,10,20,SP] ${Damage.SPECIAL}`,
     fra: `Diminue la vitesse d attaque du pokémon de 50,100,200% et inflige [5,10,20,SP] ${Damage.SPECIAL}`,
     prt: ``
@@ -1358,7 +1364,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.ROCK_TOMB]: {
-    eng: `Mono target attack that deals [30,60,120,SP] ${Damage.SPECIAL} and decrease target ${Stat.ATK_SPEED} by [20,40,60] %`,
+    eng: `Mono target attack that deals [30,60,120,SP] ${Damage.SPECIAL} and decrease target ${Stat.ATK_SPEED} by [10,20,40] %`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -1830,6 +1836,12 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
   },
   [Ability.POISON_POWDER]: {
     eng: `Dash into the enemy backline, dealing [30,60,120,SP] and applying ${Status.POISON} for 5 seconds to every enemy on the path.`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.ICY_WIND]: {
+    eng: `Deals [30,60,120,SP] ${Damage.SPECIAL} and decrease target ${Stat.ATK_SPEED} by [10,20,40]%`,
     esp: "",
     prt: "",
     fra: ""
