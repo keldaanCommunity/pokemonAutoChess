@@ -1837,18 +1837,18 @@ export class RockTombStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target, crit)
 
     let damage = 30
-    let debuff = 20
+    let debuff = 10
     if (pokemon.stars === 2) {
       damage = 60
-      debuff = 40
+      debuff = 20
     }
     if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
       damage = 120
-      debuff = 60
+      debuff = 40
     }
 
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.addAttackSpeed(-debuff)
+    target.addAttackSpeed(-debuff, false)
   }
 }
 
@@ -3541,22 +3541,22 @@ export class StunSporeStrategy extends AttackStrategy {
     let damage = 0
     switch (pokemon.stars) {
       case 1:
-        debuff = 30
+        debuff = 10
         damage = 5
         break
       case 2:
-        debuff = 60
+        debuff = 20
         damage = 10
         break
       case 3:
-        debuff = 90
+        debuff = 40
         damage = 20
         break
       default:
         break
     }
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.addAttackSpeed(-debuff)
+    target.addAttackSpeed(-debuff, false)
   }
 }
 
@@ -4457,5 +4457,21 @@ export class SilverWindStrategy extends AttackStrategy {
 
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
     }
+  }
+}
+
+export class IcyWindStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30
+    const debuff = pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    target.addAttackSpeed(-debuff)
   }
 }
