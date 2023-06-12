@@ -90,6 +90,8 @@ export class BlueFlareStrategy extends AttackStrategy {
 
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
 
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
         cell.value.handleSpecialDamage(
@@ -123,6 +125,8 @@ export class FusionBoltStrategy extends AttackStrategy {
     damage += multiplier * 40
 
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
+
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
 
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
