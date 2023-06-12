@@ -60,7 +60,9 @@ export default function PreparationMenu(props: {
   const [queryBot, setQueryBot] = useState<string>("")
   const [botsSelection, setBotsSelection] = useState<Set<IBot>>(new Set())
 
+  const humans = users.filter((u) => !u.isBot)
   const isElligibleForELO = users.filter(u => !u.isBot).length >= 2
+  const averageElo = Math.round(humans.reduce((acc, u) => acc + u.elo, 0) / humans.length)
 
   function sortBy(criteria: string) {
     if (sortBotsCriteria === criteria) {
@@ -117,7 +119,7 @@ export default function PreparationMenu(props: {
           src="/assets/ui/noelo.png"
           style={{ borderRadius: "50%" }}
         />This game is just for fun, no ELO gain/loss !</p>
-        : isElligibleForELO ? <p>✔ This game is elligible for ELO gain/loss. GLHF !</p>
+        : isElligibleForELO ? <p>✔ This game is elligible for ELO gain/loss. Average ELO: {averageElo} ; GLHF !</p>
         : users.length > 1 ?<p>❌Games with bots only are not elligible for ELO gain/loss.</p>
         : <p>Add bots or wait for more players to join your room</p>
         }
