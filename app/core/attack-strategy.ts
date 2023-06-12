@@ -115,14 +115,12 @@ export class FusionBoltStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target, crit)
     let damage = 50
     let multiplier = 0
-    if (pokemon.effects.includes(Effect.EERIE_IMPULSE)) {
+    if (pokemon.effects.includes(Effect.RISING_VOLTAGE)) {
       multiplier = 1
-    } else if (pokemon.effects.includes(Effect.RISING_VOLTAGE)) {
-      multiplier = 2
     } else if (pokemon.effects.includes(Effect.OVERDRIVE)) {
-      multiplier = 3
+      multiplier = 2
     }
-    damage += multiplier * 25
+    damage += multiplier * 40
 
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
 

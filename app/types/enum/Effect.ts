@@ -13,7 +13,6 @@ export enum Effect {
   STRENGTH,
   ROCK_SMASH,
   PURE_POWER,
-  EERIE_IMPULSE,
   RISING_VOLTAGE,
   OVERDRIVE,
   GUTS,

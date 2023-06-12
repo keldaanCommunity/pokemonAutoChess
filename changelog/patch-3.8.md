@@ -39,6 +39,7 @@ More Wounding abilities
 - Buff Victini Range ~~2~~ 1 Searing Shot ~~20~~ 30 damage Atk ~~20~~ 30
 - Nerf Zeraora Plasma Fist lifesteal ~~50~~ 25%
 - Nerf Stun spore Decrease target attack speed by ~~50/100/200~~ 30/60/90%
+- Nerf Electric ~~2/4/6~~ 3/6 (3) Rising Voltage: 30% chance of triple attack
 
 # Changes to Synergies
 

@@ -68,15 +68,12 @@ export default class AttackingState extends PokemonState {
         // BASIC ATTACK
         this.attack(pokemon, board, targetCoordinate)
         if (
-          pokemon.effects.includes(Effect.EERIE_IMPULSE) ||
           pokemon.effects.includes(Effect.RISING_VOLTAGE) ||
           pokemon.effects.includes(Effect.OVERDRIVE)
         ) {
           let tripleAttackChance = 0
-          if (pokemon.effects.includes(Effect.EERIE_IMPULSE)) {
+          if (pokemon.effects.includes(Effect.RISING_VOLTAGE)) {
             tripleAttackChance = 0.3
-          } else if (pokemon.effects.includes(Effect.RISING_VOLTAGE)) {
-            tripleAttackChance = 0.4
           } else if (pokemon.effects.includes(Effect.OVERDRIVE)) {
             tripleAttackChance = 0.5
           }
@@ -134,7 +131,7 @@ export default class AttackingState extends PokemonState {
       }
 
       if (pokemon.hasSynergyEffect(Synergy.GHOST)) {
-        let ghostTrueDamageFactor = pokemon.effects.includes(
+        const ghostTrueDamageFactor = pokemon.effects.includes(
           Effect.PHANTOM_FORCE
         )
           ? 0.2
@@ -174,7 +171,7 @@ export default class AttackingState extends PokemonState {
         totalTakenDamage += takenDamage
       }
 
-      let totalDamage = physicalDamage + trueDamage
+      const totalDamage = physicalDamage + trueDamage
       pokemon.onAttack({
         target,
         board,
