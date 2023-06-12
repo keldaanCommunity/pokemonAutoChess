@@ -1268,7 +1268,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.PAYBACK]: {
-    eng: `Life drain target attack that deals [30,60,120,SP] ${Damage.SPECIAL}`,
+    eng: `Life drain target attack that deals [20,40,80,SP] ${Damage.SPECIAL}`,
     esp: `Ataque al objetivo de drenaje de vida que causa [30,60,120,SP] ${Damage.SPECIAL}`,
     fra: `Attaque vol de vie faisant [30,60,120,SP] ${Damage.SPECIAL}.`,
     prt: ``
