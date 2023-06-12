@@ -453,7 +453,6 @@ export interface IPokemonEntity {
   team: number
   range: number
   atkSpeed: number
-  atkSpeedBonus: number
   targetX: number
   targetY: number
   attackSprite: AttackSprite

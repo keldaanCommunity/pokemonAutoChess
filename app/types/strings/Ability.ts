@@ -1328,7 +1328,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.STUN_SPORE]: {
-    eng: `Decrease target ${Stat.ATK_SPEED} by [50,100,200] % and deals [5,10,20,SP] ${Damage.SPECIAL}`,
+    eng: `Decrease target ${Stat.ATK_SPEED} by [30,60,90] % and deals [5,10,20,SP] ${Damage.SPECIAL}`,
     esp: `Disminuir la velocidad de ataque del objetivo en un 50,100,200% e inflige [5,10,20,SP] ${Damage.SPECIAL}`,
     fra: `Diminue la vitesse d attaque du pokémon de 50,100,200% et inflige [5,10,20,SP] ${Damage.SPECIAL}`,
     prt: ``
