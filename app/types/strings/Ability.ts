@@ -1508,7 +1508,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.FUSION_BOLT]: {
-    eng: `Inflicts [50,SP] ${Damage.SPECIAL} + 25 per stage of electric synergy`,
+    eng: `Inflicts [50,SP] ${Damage.SPECIAL} + 40 per stage of electric synergy`,
     esp: ``,
     prt: ``,
     fra: ``
