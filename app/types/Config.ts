@@ -687,7 +687,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.CHOICE_SPECS]: { [Stat.AP]: 100 },
   [Item.SOUL_DEW]: { [Stat.AP]: 10, [Stat.MANA]: 15 },
   [Item.UPGRADE]: { [Stat.AP]: 10, [Stat.ATK_SPEED]: 10 },
-  [Item.REAPER_CLOTH]: { [Stat.AP]: 10, [Stat.CRIT_CHANCE]: 5 },
+  [Item.REAPER_CLOTH]: { [Stat.AP]: 15, [Stat.CRIT_CHANCE]: 15 },
   [Item.POKEMONOMICON]: { [Stat.AP]: 10, [Stat.SHIELD]: 15 },
   [Item.POWER_LENS]: { [Stat.AP]: 10, [Stat.SPE_DEF]: 1 },
   [Item.SHELL_BELL]: { [Stat.AP]: 10, [Stat.ATK]: 1 },
