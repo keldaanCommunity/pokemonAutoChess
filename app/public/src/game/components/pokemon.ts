@@ -1826,17 +1826,17 @@ export default class Pokemon extends DraggableObject {
             )
             break
 
-          case Ability.DARK_PULSE:
+          case Ability.PAYBACK:
             coordinates = transformAttackCoordinate(this.targetX, this.targetY)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
               "specials",
-              `${Ability.DARK_PULSE}/000`
+              `${Ability.PAYBACK}/000`
             )
             specialProjectile.setDepth(7)
             specialProjectile.setScale(2, 2)
-            specialProjectile.anims.play(Ability.DARK_PULSE)
+            specialProjectile.anims.play(Ability.PAYBACK)
             specialProjectile.once(
               Phaser.Animations.Events.ANIMATION_COMPLETE,
               () => {
@@ -3233,28 +3233,28 @@ export default class Pokemon extends DraggableObject {
             })
             break
 
-            case Ability.STICKY_WEB:
-              coordinates = transformAttackCoordinate(this.targetX, this.targetY)
-              specialProjectile = this.scene.add.sprite(
-                coordinates[0],
-                coordinates[1],
-                "STRING_SHOT"
-              )
-              specialProjectile.setDepth(7)
-              specialProjectile.setScale(0.25)
-              specialProjectile.setTint(0x80A080)
-              this.scene.tweens.add({
-                targets: specialProjectile,
-                scale: 3,
-                alpha: 0.9,
-                ease: Phaser.Math.Easing.Cubic.Out,
-                yoyo: false,
-                duration: 1200,
-                onComplete: () => {
-                  specialProjectile.destroy()
-                }
-              })
-              break
+          case Ability.STICKY_WEB:
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              "STRING_SHOT"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(0.25)
+            specialProjectile.setTint(0x80a080)
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              scale: 3,
+              alpha: 0.9,
+              ease: Phaser.Math.Easing.Cubic.Out,
+              yoyo: false,
+              duration: 1200,
+              onComplete: () => {
+                specialProjectile.destroy()
+              }
+            })
+            break
 
           case Ability.WONDER_GUARD:
             coordinates = transformAttackCoordinate(

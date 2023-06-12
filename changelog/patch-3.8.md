@@ -42,6 +42,9 @@ More Wounding abilities
 - Nerf Electric ~~2/4/6~~ 3/6 (3) Rising Voltage: 30% chance of triple attack
 - Buff Dark ~~3/6/9~~ 3/5/7
 - Blue flare & Fusion Bolt now also hits their target (not only adjacent targets)
+- Rename Dark Pulse to Payback
+- Seedot ability: ~~Thief~~ Payback
+- Snorunt ability: ~~Dark Pulse~~ Hex
 
 # Changes to Synergies
 

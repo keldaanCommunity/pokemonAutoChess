@@ -181,7 +181,7 @@ export enum Ability {
   ROOT = "ROOT",
   TORMENT = "TORMENT",
   STOMP = "STOMP",
-  DARK_PULSE = "DARK_PULSE",
+  PAYBACK = "PAYBACK",
   NIGHT_SLASH = "NIGHT_SLASH",
   BUG_BUZZ = "BUG_BUZZ",
   STRING_SHOT = "STRING_SHOT",
@@ -357,7 +357,7 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.ROOT]: new RootStrategy(),
   [Ability.TORMENT]: new TormentStrategy(),
   [Ability.STOMP]: new StompStrategy(),
-  [Ability.DARK_PULSE]: new DarkPulseStrategy(),
+  [Ability.PAYBACK]: new DarkPulseStrategy(),
   [Ability.NIGHT_SLASH]: new NightSlashStrategy(),
   [Ability.BUG_BUZZ]: new BugBuzzStrategy(),
   [Ability.STRING_SHOT]: new StringShotStrategy(),
@@ -460,5 +460,5 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.COUNTER]: new CounterStrategy(),
   [Ability.COSMIC_POWER]: new ComsicPowerStrategy(),
   [Ability.POISON_POWDER]: new PoisonPowderStrategy(),
-  [Ability.SILVER_WIND]: new SilverWindStrategy(),
+  [Ability.SILVER_WIND]: new SilverWindStrategy()
 }

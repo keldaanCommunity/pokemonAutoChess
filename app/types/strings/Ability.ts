@@ -352,8 +352,8 @@ export const AbilityName: { [key in Ability]: Langage } = {
     fra: `Ecrasement`,
     prt: ``
   },
-  [Ability.DARK_PULSE]: {
-    eng: `Dark Pulse`,
+  [Ability.PAYBACK]: {
+    eng: `Payback`,
     esp: `Pulso oscuro`,
     fra: `Vibrobscur`,
     prt: ``
@@ -1267,7 +1267,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: `Attaque mono cible faisant [2,4,6,SP] x ${Stat.ATK} ${Damage.SPECIAL} dégats physiques`,
     prt: ``
   },
-  [Ability.DARK_PULSE]: {
+  [Ability.PAYBACK]: {
     eng: `Life drain target attack that deals [30,60,120,SP] ${Damage.SPECIAL}`,
     esp: `Ataque al objetivo de drenaje de vida que causa [30,60,120,SP] ${Damage.SPECIAL}`,
     fra: `Attaque vol de vie faisant [30,60,120,SP] ${Damage.SPECIAL}.`,
