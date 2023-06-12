@@ -74,3 +74,4 @@ More Wounding abilities
 
 - New evolution mechanic for Poliwhirl/Clamperl. Evolution will depends if the pokemon is placed in the frontlane or not.
 - New evolution mechanic for Shaymin. Give it a Gracidea flower to evolve into Shaymin Sky.
+- Pool size for stage 5 additional picks has been increased: Common: 14 → 18 ; Uncommon: 11 → 13 ; it's now easier to evolve them
