@@ -31,6 +31,7 @@ export const EffectName: { [key in Effect]: string } = {
   [Effect.BEAT_UP]: `Beat Up`,
   [Effect.IRON_DEFENSE]: `Iron Defense`,
   [Effect.AUTOMATE]: `Automate`,
+  [Effect.STEEL_SURGE]: "Steel Surge",
   [Effect.TILLER]: `Tiller`,
   [Effect.DIGGER]: `Digger`,
   [Effect.DRILLER]: `Driller`,
@@ -237,6 +238,11 @@ export const EffectDescription: {
     eng: `All of your steel Pokemon gains double base ${Stat.ATK}`,
     esp: ``,
     fra: ``
+  },
+  [Effect.STEEL_SURGE]: {
+    eng: `All of your steel Pokemon gains double base ${Stat.ATK}. One gets triple base ${Stat.ATK}`,
+    esp: "",
+    fra: ""
   },
   [Effect.TILLER]: {
     eng: `Gain +1 ${Stat.ATK} / ${Stat.DEF} / ${Stat.SPE_DEF}`,

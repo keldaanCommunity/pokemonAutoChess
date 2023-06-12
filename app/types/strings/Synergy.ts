@@ -186,7 +186,7 @@ export const SynergyDescription: {
     fra: ""
   },
   [Synergy.STEEL]: {
-    eng: `Steel pokemons can double their base ${Stat.ATK}`,
+    eng: `Steel pokemons can multiply their base ${Stat.ATK}`,
     esp: "",
     fra: ""
   },

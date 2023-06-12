@@ -103,7 +103,6 @@ export default class Pokemon extends DraggableObject {
   psychicField: GameObjects.Sprite | undefined
   grassField: GameObjects.Sprite | undefined
   fairyField: GameObjects.Sprite | undefined
-  voidBoost: GameObjects.Sprite | undefined
   stars: number
   playerId: string
   tooltip: boolean
@@ -251,13 +250,10 @@ export default class Pokemon extends DraggableObject {
       ) {
         this.sprite.setScale(3, 3)
       }
-      if (
-        p.effects &&
-        (p.effects.includes(Effect.PHANTOM_FORCE) ||
-          p.effects.includes(Effect.CURSE))
-      ) {
-        this.addVoidBoost()
+      if (p.effects && p.effects.includes(Effect.STEEL_SURGE)) {
+        this.sprite.setScale(4, 4)
       }
+
       this.setLifeBar(p, scene)
       this.setManaBar(p, scene)
       //this.setEffects(p, scene);
@@ -3826,30 +3822,6 @@ export default class Pokemon extends DraggableObject {
     if (this.fairyField) {
       this.remove(this.fairyField, true)
       this.fairyField = undefined
-    }
-  }
-
-  addVoidBoost() {
-    if (!this.voidBoost) {
-      this.voidBoost = new GameObjects.Sprite(
-        this.scene,
-        0,
-        10,
-        "VOID_BOOST",
-        "000"
-      )
-      this.voidBoost.setDepth(0)
-      this.voidBoost.setScale(3, 3)
-      this.scene.add.existing(this.voidBoost)
-      this.voidBoost.anims.play("VOID_BOOST")
-      this.add(this.voidBoost)
-    }
-  }
-
-  removeVoidBoost() {
-    if (this.voidBoost) {
-      this.remove(this.voidBoost, true)
-      this.voidBoost = undefined
     }
   }
 
