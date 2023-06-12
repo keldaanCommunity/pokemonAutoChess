@@ -871,7 +871,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         case Effect.BEAT_UP:
           player.titles.add(Title.DELINQUENT)
           break
-        case Effect.AUTOMATE:
+        case Effect.STEEL_SURGE:
           player.titles.add(Title.ENGINEER)
           break
         case Effect.SANDSTORM:
@@ -1378,7 +1378,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
       (p: Player) => p.life > 0
     ).length
     const minigamePhaseDuration =
-      this.state.stageLevel === CarouselStages[0] ? 15000 : 14000 + nbPlayersAlive * 2000
+      this.state.stageLevel === CarouselStages[0]
+        ? 15000
+        : 14000 + nbPlayersAlive * 2000
     this.state.time = minigamePhaseDuration
     this.room.miniGame.initialize(this.state.players, this.state.stageLevel)
   }
@@ -1418,7 +1420,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
           if (opponentId) {
             const opponent = this.state.players.get(opponentId)
             if (opponent) {
-              const weather = player.simulation.getWeather(player.board, opponent.board)
+              const weather = player.simulation.getWeather(
+                player.board,
+                opponent.board
+              )
               this.state.weather = weather
               player.simulation.initialize(
                 player.board,

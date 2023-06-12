@@ -430,6 +430,23 @@ export default class Simulation extends Schema implements ISimulation {
         ironDefensePkm.effects.push(Effect.IRON_DEFENSE)
       }
 
+      const steelSurgeCandidates = Array.from(team.values()).filter((p) =>
+        p.effects.includes(Effect.STEEL_SURGE)
+      )
+
+      if (steelSurgeCandidates.length > 0) {
+        steelSurgeCandidates.forEach((pokemon) => {
+          pokemon.effects.splice(
+            pokemon.effects.findIndex((e) => e === Effect.STEEL_SURGE),
+            1
+          )
+          pokemon.effects.push(Effect.AUTOMATE)
+        })
+        const steelSurgePkm = pickRandomIn(steelSurgeCandidates)
+        steelSurgePkm.addAttack(steelSurgePkm.baseAtk)
+        steelSurgePkm.effects.push(Effect.STEEL_SURGE)
+      }
+
       team.forEach((pokemon) => {
         if (pokemon.effects.includes(Effect.AUTOMATE)) {
           pokemon.addAttack(pokemon.baseAtk)
@@ -688,6 +705,12 @@ export default class Simulation extends Schema implements ISimulation {
         case Effect.AUTOMATE:
           if (types.includes(Synergy.STEEL)) {
             pokemon.effects.push(Effect.AUTOMATE)
+          }
+          break
+
+        case Effect.STEEL_SURGE:
+          if (types.includes(Synergy.STEEL)) {
+            pokemon.effects.push(Effect.STEEL_SURGE)
           }
           break
 
