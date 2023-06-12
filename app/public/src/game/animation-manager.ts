@@ -598,12 +598,12 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
-      key: Ability.DARK_PULSE,
+      key: Ability.PAYBACK,
       frames: this.game.anims.generateFrameNames("specials", {
         start: 0,
         end: 31,
         zeroPad: 3,
-        prefix: `${Ability.DARK_PULSE}/`
+        prefix: `${Ability.PAYBACK}/`
       }),
       duration: 1000,
       repeat: 0

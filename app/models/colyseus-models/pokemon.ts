@@ -3225,7 +3225,7 @@ export class Snorunt extends Pokemon {
       AttackSprite.GHOST_RANGE,
       1,
       100,
-      Ability.DARK_PULSE,
+      Ability.HEX,
       shiny,
       emotion,
       false
@@ -3248,7 +3248,7 @@ export class Glalie extends Pokemon {
       AttackSprite.GHOST_RANGE,
       2,
       100,
-      Ability.DARK_PULSE,
+      Ability.HEX,
       shiny,
       emotion,
       false
@@ -3271,7 +3271,7 @@ export class Froslass extends Pokemon {
       AttackSprite.GHOST_RANGE,
       3,
       100,
-      Ability.DARK_PULSE,
+      Ability.HEX,
       shiny,
       emotion,
       true
@@ -5777,7 +5777,7 @@ export class Seedot extends Pokemon {
       AttackSprite.GRASS_MELEE,
       1,
       100,
-      Ability.THIEF,
+      Ability.PAYBACK,
       shiny,
       emotion,
       false
@@ -5800,7 +5800,7 @@ export class Nuzleaf extends Pokemon {
       AttackSprite.GRASS_MELEE,
       2,
       100,
-      Ability.THIEF,
+      Ability.PAYBACK,
       shiny,
       emotion,
       false
@@ -5823,7 +5823,7 @@ export class Shiftry extends Pokemon {
       AttackSprite.GRASS_MELEE,
       3,
       100,
-      Ability.THIEF,
+      Ability.PAYBACK,
       shiny,
       emotion,
       true
