@@ -26,6 +26,7 @@ export enum Effect {
   BEAT_UP,
   IRON_DEFENSE,
   AUTOMATE,
+  STEEL_SURGE,
   TILLER,
   DIGGER,
   DRILLER,

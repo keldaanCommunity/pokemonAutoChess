@@ -45,6 +45,7 @@ More Wounding abilities
 - Rename Dark Pulse to Payback ~~30/60/120~~ 20/40/80 special damage
 - Seedot ability: ~~Thief~~ Payback
 - Snorunt ability: ~~Dark Pulse~~ Icy Wind Deals 30/60/120 special damage and decrease target attack speed by 10/20/40%
+- Buff Steel: (6) Steel Surge: All of your steel Pokemon gains double base atk. One gets triple base atk
 
 # Changes to Synergies
 
