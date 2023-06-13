@@ -338,10 +338,6 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   }) {
     this.setMana(this.mana + 5)
 
-    if (this.items.has(Item.SHINY_CHARM) && Math.random() < 0.25) {
-      this.status.triggerProtect(1000)
-    }
-
     if (this.items.has(Item.BLUE_ORB)) {
       this.count.staticHolderCount++
       if (this.count.staticHolderCount > 2) {
