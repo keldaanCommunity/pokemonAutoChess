@@ -32,6 +32,8 @@ export class OnJoinCommand extends Command<
         }
       })
       if (numberOfHumanPlayers >= MAX_PLAYERS_PER_LOBBY) {
+        client.send(Transfer.KICK)
+        client.leave()
         return // lobby already full
       }
       if (this.state.ownerId == "") {
@@ -49,6 +51,12 @@ export class OnJoinCommand extends Command<
         UserMetadata.findOne(
           { uid: auth.uid },
           (err: any, user: IUserMetadata) => {
+            if (this.state.users.size >= MAX_PLAYERS_PER_LOBBY) {
+              // lobby has been filled while waiting for the database
+              client.send(Transfer.KICK)
+              client.leave()
+              return
+            }
             if (user) {
               this.state.users.set(
                 client.auth.uid,
