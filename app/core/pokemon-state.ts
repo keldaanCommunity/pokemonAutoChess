@@ -12,7 +12,7 @@ import PokemonEntity from "./pokemon-entity"
 import { IPokemonEntity, Transfer, FIGHTING_PHASE_DURATION } from "../types"
 import { Synergy, SynergyEffects } from "../types/enum/Synergy"
 import { Ability } from "../types/enum/Ability"
-import { pickRandomIn } from "../utils/random"
+import { chance, pickRandomIn } from "../utils/random"
 import { logger } from "../utils/logger"
 import { Passive } from "../types/enum/Passive"
 import { Weather } from "../types/enum/Weather"
@@ -119,6 +119,10 @@ export default class PokemonState {
     } else if (pokemon.status.protect) {
       death = false
       takenDamage = 0
+    } else if(pokemon.items.has(Item.SHINY_CHARM) && chance(0.15)){  
+      death = false
+      takenDamage = 0    
+      pokemon.status.triggerProtect(1000)
     } else {
       let reducedDamage = damage
 
