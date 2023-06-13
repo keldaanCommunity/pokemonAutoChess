@@ -30,22 +30,16 @@ More Wounding abilities
 - Poison & Nightmare now have poison duration scale with AP
 - Buff Sharpedo ~~18~~ 21 atk
 - Nerf Virizion Sacred Sword ~~120~~ 90 true damage
-- Grass 5 : restaure 12 hp / sec >>>>> restaure 10 hp / sec
-- Grass 7 : restaure 20 hp / sec >>>>> restaure 18 hp / sec
 - Bounsweet Hp ~~110~~ >>>> 100 mana ~~90~~ 100
-- Flying 4: Get Protect for ~~2~~ 1.5 seconds after flying away
 - Lanturn Buff ~~14~~ 16 atk
 - Buff Delphox ~~15~~ 18 atk
 - Buff Victini Range ~~2~~ 1 Searing Shot ~~20~~ 30 damage Atk ~~20~~ 30
 - Nerf Zeraora Plasma Fist lifesteal ~~50~~ 25%
 - Nerf Stun spore Decrease target attack speed by ~~50/100/200~~ 10/20/40%
-- Nerf Electric ~~2/4/6~~ 3/6 (3) Rising Voltage: 30% chance of triple attack
-- Buff Dark ~~3/6/9~~ 3/5/7
 - Blue flare & Fusion Bolt now also hits their target (not only adjacent targets)
 - Rename Dark Pulse to Payback ~~30/60/120~~ 20/40/80 special damage
 - Seedot ability: ~~Thief~~ Payback
 - Snorunt ability: ~~Dark Pulse~~ Icy Wind Deals 30/60/120 special damage and decrease target attack speed by 10/20/40%
-- Buff Steel: (6) Steel Surge: All of your steel Pokemon gains double base atk. One gets triple base atk
 
 # Changes to Synergies
 
@@ -53,6 +47,12 @@ More Wounding abilities
 - Rework Poison: new levels 3/5/7 ; Increase max poison stacks with levels ; Poison now reduces healing efficiency by 20% per stack
 - Nerf Flora: Activates at ~~2/3/4/5~~ 3/4/5/6
 - Fairy Splash damage now has a cooldown of 1 millisecond, to prevent it from triggering multiple times with electric additional attacks
+- Nerf Electric ~~2/4/6~~ 3/6 (3) Rising Voltage: 30% chance of triple attack
+- Buff Dark ~~3/6/9~~ 3/5/7
+- Flying 4: Get Protect for ~~2~~ 1.5 seconds after flying away
+- Grass 5 : restaure 12 hp / sec >>>>> restaure 10 hp / sec
+- Grass 7 : restaure 20 hp / sec >>>>> restaure 18 hp / sec
+- Buff Steel: (6) Steel Surge: All of your steel Pokemon gains double base atk. One gets triple base atk
 
 # Changes to Items
 

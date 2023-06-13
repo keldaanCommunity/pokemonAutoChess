@@ -35,6 +35,7 @@ export default class PreparationRoom extends Room<PreparationState> {
   constructor() {
     super()
     this.dispatcher = new Dispatcher(this)
+    this.maxClients = MAX_PLAYERS_PER_LOBBY
     this.elos = new Map()
   }
 
