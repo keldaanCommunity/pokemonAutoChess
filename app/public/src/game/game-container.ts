@@ -70,7 +70,7 @@ class GameContainer {
       dom: {
         createContainer: true
       },
-      disableContextMenu : true,
+      disableContextMenu: true,
       plugins: {
         global: [
           {
@@ -597,27 +597,27 @@ class GameContainer {
   handleWeatherChange(player: Player, value: Weather) {
     if (
       this.game != null &&
-      player.id == this.uid &&
+      player.id === this.player?.id &&
       this.game.scene.getScene("gameScene")
     ) {
       const g = <GameScene>this.game.scene.getScene("gameScene")
       if (g.weatherManager) {
         g.weatherManager.clearWeather()
-        if(value === Weather.RAIN){
+        if (value === Weather.RAIN) {
           g.weatherManager.addRain()
-        } else if(value === Weather.SUN){
+        } else if (value === Weather.SUN) {
           g.weatherManager.addSun()
-        } else if(value === Weather.SANDSTORM){
+        } else if (value === Weather.SANDSTORM) {
           g.weatherManager.addSandstorm()
-        } else if(value === Weather.SNOW){
+        } else if (value === Weather.SNOW) {
           g.weatherManager.addSnow()
-        } else if(value === Weather.NIGHT){
+        } else if (value === Weather.NIGHT) {
           g.weatherManager.addNight()
-        } else if(value === Weather.WINDY){
+        } else if (value === Weather.WINDY) {
           g.weatherManager.addWind()
-        } else if(value === Weather.STORM){
+        } else if (value === Weather.STORM) {
           g.weatherManager.addStorm()
-        } else if(value === Weather.MISTY){
+        } else if (value === Weather.MISTY) {
           g.weatherManager.addMist()
         }
       }
@@ -807,8 +807,10 @@ class GameContainer {
     if (this.game && this.game.scene.getScene("gameScene")) {
       const g = <GameScene>this.game.scene.getScene("gameScene")
       const player = this.room.state.players.get(id)
+      this.player = player
       if (player) {
         g.setPlayer(player)
+        this.handleWeatherChange(player, player.simulation.weather)
       }
     }
   }

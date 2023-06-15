@@ -1406,7 +1406,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
             this.state.shinyEncounter
           )
           const weather = player.simulation.getWeather(player.board, pveBoard)
-          this.state.weather = weather
           player.simulation.initialize(
             player.board,
             pveBoard,
@@ -1424,7 +1423,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
                 player.board,
                 opponent.board
               )
-              this.state.weather = weather
               player.simulation.initialize(
                 player.board,
                 opponent.board,
