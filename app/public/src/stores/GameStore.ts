@@ -23,7 +23,6 @@ interface GameStateStore {
   players: IPlayer[]
   stageLevel: number
   mapName: string
-  weather: Weather
   noElo: boolean
   currentPlayerId: string
   money: number
@@ -45,6 +44,7 @@ interface GameStateStore {
   currentPlayerName: string
   currentPlayerAvatar: string
   currentPlayerTitle: string
+  currentPlayerWeather: Weather
   blueDpsMeter: IDps[]
   redDpsMeter: IDps[]
   blueHealDpsMeter: IDpsHeal[]
@@ -61,7 +61,7 @@ const initialState: GameStateStore = {
   players: new Array<IPlayer>(),
   stageLevel: 0,
   mapName: "",
-  weather: Weather.NEUTRAL,
+  currentPlayerWeather: Weather.NEUTRAL,
   noElo: false,
   currentPlayerId: "",
   money: 5,
@@ -125,9 +125,6 @@ export const gameSlice = createSlice({
     },
     setMapName: (state, action: PayloadAction<string>) => {
       state.mapName = action.payload
-    },
-    setWeather: (state, action: PayloadAction<Weather>) => {
-      state.weather = action.payload
     },
     setNoELO: (state, action: PayloadAction<boolean>) => {
       state.noElo = action.payload
@@ -263,6 +260,14 @@ export const gameSlice = createSlice({
         player.loadingProgress = action.payload.value
       }
     },
+    setCurrentPlayerWeather: (
+      state,
+      action: PayloadAction<{ value: Weather; id: string }>
+    ) => {
+      if (state.currentPlayerId === action.payload.id) {
+        state.currentPlayerWeather = action.payload.value
+      }
+    },
     setPlayer: (state, action: PayloadAction<IPlayer>) => {
       state.currentPlayerId = action.payload.id
       state.currentPlayerMoney = action.payload.money
@@ -270,6 +275,7 @@ export const gameSlice = createSlice({
       state.currentPlayerOpponentName = action.payload.opponentName
       state.currentPlayerOpponentAvatar = action.payload.opponentAvatar
       state.currentPlayerOpponentTitle = action.payload.opponentTitle
+      state.currentPlayerWeather = action.payload.simulation.weather
       state.currentPlayerLife = action.payload.life
       state.currentPlayerSynergies = Array.from(action.payload.synergies)
       state.currentPlayerAvatar = action.payload.avatar
@@ -488,7 +494,7 @@ export const {
   setPhase,
   setStageLevel,
   setMapName,
-  setWeather,
+  setCurrentPlayerWeather,
   setNoELO,
   addPlayer,
   setExperienceManager,

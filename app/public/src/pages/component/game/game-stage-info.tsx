@@ -26,6 +26,7 @@ export default function GameStageInfo() {
   const name = useAppSelector((state) => state.game.currentPlayerName)
   const title = useAppSelector((state) => state.game.currentPlayerTitle)
   const avatar = useAppSelector((state) => state.game.currentPlayerAvatar)
+  const weather = useAppSelector((state) => state.game.currentPlayerWeather)
 
   const stageLevel = useAppSelector((state) => state.game.stageLevel)
   const opponentName = useAppSelector(
@@ -37,7 +38,6 @@ export default function GameStageInfo() {
   const opponentTitle = useAppSelector(
     (state) => state.game.currentPlayerOpponentTitle
   )
-  const weather = useAppSelector((state) => state.game.weather)
 
   return (
     <>
@@ -89,7 +89,9 @@ export default function GameStageInfo() {
                   src={getAvatarSrc(opponentAvatar)}
                   className="pokemon-portrait"
                 />
-                {opponentTitle && <p className="player-title">{opponentTitle}</p>}
+                {opponentTitle && (
+                  <p className="player-title">{opponentTitle}</p>
+                )}
                 <p className="player-name">{opponentName}</p>
               </div>
             </>
@@ -126,7 +128,7 @@ export default function GameStageInfo() {
 type PathStep = {
   level: number
   icon: string
-  name: string
+  title: string
   result?: BattleResult
 }
 
@@ -145,30 +147,30 @@ export function StagePath() {
   while (level < stageLevel + 5) {
     let record
     if (level < stageLevel && history) {
-      let historyIndex = level < 5 ? level-1 : 5 + level - stageLevel
-      if(historyIndex in history){
-        record = history.at(level < 5 ? level-1 : level - stageLevel)  
-      }      
+      const historyIndex = level < 5 ? level - 1 : 5 + level - stageLevel
+      if (historyIndex in history) {
+        record = history.at(level < 5 ? level - 1 : level - stageLevel)
+      }
     }
 
     if (CarouselStages.includes(level)) {
-      path.push({ 
+      path.push({
         level,
         icon: "/assets/ui/carousel.svg",
         title: `Carousel`
       })
-      if(level === stageLevel && phase === GamePhaseState.MINIGAME){
-        currentLevelPathIndex = path.length-1
+      if (level === stageLevel && phase === GamePhaseState.MINIGAME) {
+        currentLevelPathIndex = path.length - 1
       }
     }
     if (MythicalPicksStages.includes(level)) {
       path.push({
         level,
-        icon: "/assets/ui/mythical.svg", 
-        title: `Mythical pick` 
+        icon: "/assets/ui/mythical.svg",
+        title: `Mythical pick`
       })
-      if(level === stageLevel && phase === GamePhaseState.PICK){
-        currentLevelPathIndex = path.length-1
+      if (level === stageLevel && phase === GamePhaseState.PICK) {
+        currentLevelPathIndex = path.length - 1
       }
     } else if (AdditionalPicksStages.includes(level)) {
       path.push({
@@ -176,8 +178,8 @@ export function StagePath() {
         icon: "/assets/ui/additional-pick.svg",
         title: `Additional pick`
       })
-      if(level === stageLevel && phase === GamePhaseState.PICK){
-        currentLevelPathIndex = path.length-1
+      if (level === stageLevel && phase === GamePhaseState.PICK) {
+        currentLevelPathIndex = path.length - 1
       }
     }
 
@@ -189,53 +191,56 @@ export function StagePath() {
         title: record?.name ?? neutralStage.name,
         result: record?.result
       })
-      if(level === stageLevel && currentLevelPathIndex === undefined){
-        currentLevelPathIndex = path.length-1
+      if (level === stageLevel && currentLevelPathIndex === undefined) {
+        currentLevelPathIndex = path.length - 1
       }
     } else {
       path.push({
         level,
-        icon: record?.avatar ? getAvatarSrc(record.avatar) : "/assets/ui/battle.svg",
+        icon: record?.avatar
+          ? getAvatarSrc(record.avatar)
+          : "/assets/ui/battle.svg",
         title: record?.name ?? `Fight`,
         result: record?.result
       })
-      if(level === stageLevel && currentLevelPathIndex === undefined){
-        currentLevelPathIndex = path.length-1
+      if (level === stageLevel && currentLevelPathIndex === undefined) {
+        currentLevelPathIndex = path.length - 1
       }
     }
 
     level++
   }
 
-  let startIndex = min(0)(currentLevelPathIndex - 3)
+  const startIndex = min(0)(currentLevelPathIndex - 3)
   path = path.slice(startIndex, startIndex + 7)
   currentLevelPathIndex -= startIndex
 
   return (
     <div className="game-stage-path">
-      {path.map((step, i) => <React.Fragment key={"stage-path-" + i}>
-        <div
-          className={cc("stage-path", {
-            current: currentLevelPathIndex === i,
-            defeat: step.result === BattleResult.DEFEAT,
-            victory: step.result === BattleResult.WIN
-          })}
-          data-tip
-          data-for={"stage-path-" + i}          
-        >
-          <ReactTooltip
-            id={"stage-path-" + i}
-            className="customeTheme"
-            effect="solid"
-            place="bottom"
+      {path.map((step, i) => (
+        <React.Fragment key={"stage-path-" + i}>
+          <div
+            className={cc("stage-path", {
+              current: currentLevelPathIndex === i,
+              defeat: step.result === BattleResult.DEFEAT,
+              victory: step.result === BattleResult.WIN
+            })}
+            data-tip
+            data-for={"stage-path-" + i}
           >
-            {step.title} {step.name}
-          </ReactTooltip>
-          <img src={step.icon}></img>
-        </div>
-        {i<(path.length-1) && <span>―</span>}
-      </React.Fragment>
-      )}
+            <ReactTooltip
+              id={"stage-path-" + i}
+              className="customeTheme"
+              effect="solid"
+              place="bottom"
+            >
+              {step.title}
+            </ReactTooltip>
+            <img src={step.icon}></img>
+          </div>
+          {i < path.length - 1 && <span>―</span>}
+        </React.Fragment>
+      ))}
     </div>
   )
 }

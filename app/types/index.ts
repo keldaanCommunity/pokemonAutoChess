@@ -34,6 +34,7 @@ import { IPokemonRecord } from "../models/colyseus-models/game-record"
 import GameRoom from "../rooms/game-room"
 import { Effects } from "../models/effects"
 import { Passive } from "./enum/Passive"
+import { Weather } from "./enum/Weather"
 
 export * from "./enum/Emotion"
 
@@ -380,7 +381,7 @@ export interface IExperienceManager {
 export interface ISimulation {
   room: GameRoom
   id: string
-  weather: string
+  weather: Weather
   blueEffects: Effect[]
   redEffects: Effect[]
   blueTeam: MapSchema<IPokemonEntity>
