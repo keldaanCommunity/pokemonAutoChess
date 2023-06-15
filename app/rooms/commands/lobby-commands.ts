@@ -31,6 +31,7 @@ import { Rarity } from "../../types/enum/Game"
 import { sum } from "../../utils/array"
 import { pickRandomIn } from "../../utils/random"
 import { getPortraitSrc, getAvatarSrc } from "../../public/src/utils"
+import { cleanProfanity } from "../../utils/profanity-filter"
 
 export class OnJoinCommand extends Command<
   CustomLobbyRoom,
@@ -268,11 +269,13 @@ export class OnNewMessageCommand extends Command<
   execute({ client, message }: { client: Client; message: string }) {
     try {
       const MAX_MESSAGE_LENGTH = 250
+      message = cleanProfanity(message.substring(0, MAX_MESSAGE_LENGTH))
+      
       const user = this.state.users.get(client.auth.uid)
       if (user && !user.anonymous && message != "") {
         this.state.addMessage(
           nanoid(),
-          message.substring(0, MAX_MESSAGE_LENGTH),
+          message,
           user.id,
           user.name,
           user.avatar,
