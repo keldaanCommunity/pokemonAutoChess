@@ -7,8 +7,15 @@
 ![Lunatone](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0337/Normal.png)
 ![Solrock](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0338/Normal.png)
 
-The other newcomers are Wynaut and Wobbuffet ! And welcome back to Gorebyss and Poliwrath !
+The other newcomers are Wynaut, Wobbuffet, Wumrple, Silcoon, Beautifly, Cascoon and Dustox ! And welcome back to Gorebyss and Poliwrath !
 
+![Wynaut](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0360/Normal.png)
+![Wobbuffet](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0202/Normal.png)
+![Wurmple](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0265/Normal.png)
+![Silcoon](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0266/Normal.png)
+![Beautifly](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0267/Normal.png)
+![Cascoon](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0268/Normal.png)
+![Dustox](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0269/Normal.png)
 ![Gorebyss](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0368/Normal.png)
 ![Poliwrath](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0062/Normal.png)
 
