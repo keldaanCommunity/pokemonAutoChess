@@ -25,6 +25,7 @@ import { GameUser } from "../models/colyseus-models/game-user"
 import BannedUser from "../models/mongo-models/banned-user"
 import { IBot } from "../models/mongo-models/bot-v2"
 import { logger } from "../utils/logger"
+import { cleanProfanity } from "../utils/profanity-filter"
 import { MAX_PLAYERS_PER_LOBBY } from "../types/Config"
 import { nanoid } from "nanoid"
 
@@ -144,6 +145,8 @@ export default class PreparationRoom extends Room<PreparationState> {
       try {
         const user = this.state.users.get(client.auth.uid)
         const MAX_MESSAGE_LENGTH = 250
+        message = cleanProfanity(message.substring(0, MAX_MESSAGE_LENGTH))
+
         if (user && !user.anonymous && message != "") {
           this.dispatcher.dispatch(new OnMessageCommand(), {
             client: client,
@@ -151,7 +154,7 @@ export default class PreparationRoom extends Room<PreparationState> {
               author: user.name,
               authorId: user.id,
               avatar: user.avatar,
-              payload: message.substring(0, MAX_MESSAGE_LENGTH),
+              payload: message,
               time: Date.now(),
               id: nanoid()
             }
