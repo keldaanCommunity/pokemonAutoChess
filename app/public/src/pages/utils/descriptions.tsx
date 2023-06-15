@@ -99,7 +99,7 @@ export function addIconsToDescription(
           <span className={cc("description-icon", { "scales-ap": scale > 0 })}>
             {scale > 0 && (
               <img
-                src="assets/icons/ap.png"
+                src="assets/icons/AP.png"
                 alt="Ability Power"
                 title="Scales with Ability Power"
               ></img>
