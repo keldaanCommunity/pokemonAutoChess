@@ -12,7 +12,7 @@ import {
   setInterest,
   setItemsProposition,
   setMapName,
-  setWeather,
+  setCurrentPlayerWeather,
   setMoney,
   setNoELO,
   setPhase,
@@ -125,6 +125,28 @@ export default function Game() {
 
   const MAX_ATTEMPS_RECONNECT = 2
 
+  async function tryToReconnectToLastGame(attempts = 1) {
+    try {
+      const cachedReconnectionToken = localStorage.getItem(
+        "cachedReconnectionToken"
+      )
+      if (cachedReconnectionToken) {
+        const r: Room<GameState> = await client.reconnect(
+          cachedReconnectionToken
+        )
+        localStorage.setItem("cachedReconnectionToken", r.reconnectionToken)
+        dispatch(joinGame(r))
+      }
+    } catch (error) {
+      if (attempts < MAX_ATTEMPS_RECONNECT) {
+        setTimeout(() => tryToReconnectToLastGame(attempts + 1), 100)
+      } else {
+        logger.error("reconnect error", error)
+        setToAuth(true)
+      }
+    }
+  }
+
   async function leave() {
     const savedPlayers = new Array<ISimplePlayer>()
 
@@ -142,8 +164,13 @@ export default function Game() {
       )
     }
 
-    const elligibleToXP = nbPlayers >= 2 && (room?.state.stageLevel ?? 0) >= RequiredStageLevelForXpElligibility
-    const elligibleToELO = elligibleToXP && !room?.state.noElo && savedPlayers.filter(p => p.role !== Role.BOT).length >= 2
+    const elligibleToXP =
+      nbPlayers >= 2 &&
+      (room?.state.stageLevel ?? 0) >= RequiredStageLevelForXpElligibility
+    const elligibleToELO =
+      elligibleToXP &&
+      !room?.state.noElo &&
+      savedPlayers.filter((p) => p.role !== Role.BOT).length >= 2
 
     const r: Room<AfterGameState> = await client.create("after-game", {
       players: savedPlayers,
@@ -158,7 +185,7 @@ export default function Game() {
 
     try {
       await room?.leave()
-    } catch(error) {
+    } catch (error) {
       logger.warn("Room already closed")
     }
   }
@@ -173,31 +200,6 @@ export default function Game() {
       firebase.auth().onAuthStateChanged(async (user) => {
         if (user) {
           dispatch(logIn(user))
-
-          async function tryToReconnectToLastGame(attempts = 1) {
-            try {
-              const cachedReconnectionToken = localStorage.getItem(
-                "cachedReconnectionToken"
-              )
-              if (cachedReconnectionToken) {
-                const r: Room<GameState> = await client.reconnect(
-                  cachedReconnectionToken
-                )
-                localStorage.setItem(
-                  "cachedReconnectionToken",
-                  r.reconnectionToken
-                )
-                dispatch(joinGame(r))
-              }
-            } catch (error) {
-              if (attempts < MAX_ATTEMPS_RECONNECT) {
-                setTimeout(() => tryToReconnectToLastGame(attempts + 1), 100)
-              } else {
-                logger.error("reconnect error", error)
-                setToAuth(true)
-              }
-            }
-          }
 
           tryToReconnectToLastGame()
         }
@@ -290,9 +292,9 @@ export default function Game() {
       })
 
       room.onMessage(Transfer.BOARD_EVENT, (event: IBoardEvent) => {
-        if(gameContainer.game){
+        if (gameContainer.game) {
           const g = gameContainer.game.scene.getScene("gameScene") as GameScene
-          if(g && g.board){
+          if (g && g.board) {
             g.board.handleBoardEvent(event)
           }
         }
@@ -318,10 +320,6 @@ export default function Game() {
 
       room.state.listen("mapName", (value, previousValue) => {
         dispatch(setMapName(value))
-      })
-
-      room.state.listen("weather", (value, previousValue) => {
-        dispatch(setWeather(value))
       })
 
       room.state.listen("noElo", (value, previousValue) => {
@@ -453,6 +451,10 @@ export default function Game() {
           if (player.id == uid) {
             dispatch(setPokemonProposition(player.pokemonsProposition))
           }
+        })
+
+        player.simulation.listen("weather", (value) => {
+          dispatch(setCurrentPlayerWeather({ id: player.id, value: value }))
         })
 
         player.simulation.blueDpsMeter.onAdd((dps, key) => {
