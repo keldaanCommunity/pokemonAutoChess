@@ -11,7 +11,6 @@ import { Pkm } from "../../../../types/enum/Pokemon"
 import { BoardEvent, GamePhaseState, Orientation } from "../../../../types/enum/Game"
 import { Ability } from "../../../../types/enum/Ability"
 import { PokemonAvatar } from "../../../../models/colyseus-models/pokemon-avatar"
-import store from "../../stores"
 
 export enum BoardMode { PICK = "pick", BATTLE = "battle", MINIGAME = "minigame" }
 
@@ -96,7 +95,7 @@ export default class BoardManager {
       this.player.id,
       false
     )
-
+    this.playerAvatar.disableInteractive()
     this.playerAvatar.orientation = Orientation.UPRIGHT
     this.animationManager.animatePokemon(this.playerAvatar, this.playerAvatar.action)    
   }
@@ -116,7 +115,7 @@ export default class BoardManager {
         opponentId,
         false
       )
-
+      this.opponentAvatar.disableInteractive()
       this.opponentAvatar.orientation = Orientation.DOWNLEFT
       this.animationManager.animatePokemon(this.opponentAvatar, this.opponentAvatar.action)
     }
