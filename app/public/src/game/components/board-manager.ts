@@ -8,16 +8,22 @@ import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
 import { Item } from "../../../../types/enum/Item"
 import { Pkm } from "../../../../types/enum/Pokemon"
-import { BoardEvent } from "../../../../types/enum/Game"
+import { BoardEvent, GamePhaseState, Orientation } from "../../../../types/enum/Game"
 import { Ability } from "../../../../types/enum/Ability"
+import { PokemonAvatar } from "../../../../models/colyseus-models/pokemon-avatar"
+import store from "../../stores"
+
+export enum BoardMode { PICK = "pick", BATTLE = "battle", MINIGAME = "minigame" }
 
 export default class BoardManager {
   pokemons: Map<string, Pokemon>
   uid: string
   scene: GameScene
   player: IPlayer
-  mode: string
+  mode: BoardMode
   animationManager: AnimationManager
+  playerAvatar: Pokemon
+  opponentAvatar: Pokemon | null
 
   constructor(
     scene: GameScene,
@@ -29,9 +35,17 @@ export default class BoardManager {
     this.uid = uid
     this.scene = scene
     this.player = player
-    this.mode = "pick"
+    this.mode = BoardMode.PICK
     this.animationManager = animationManager
     this.buildPokemons()
+
+    if (this.scene.room?.state.phase == GamePhaseState.FIGHT) {
+      this.battleMode()
+    } else if (this.scene.room?.state.phase === GamePhaseState.MINIGAME) {
+      this.minigameMode()
+    } else {
+      this.pickMode()
+    }
   }
 
   addPokemon(pokemon: IPokemon) {
@@ -50,7 +64,7 @@ export default class BoardManager {
 
     this.animationManager.animatePokemon(pokemonUI, pokemon.action)
     this.pokemons.set(pokemonUI.id, pokemonUI)
-    if (pokemon.positionY != 0 && this.mode == "battle") {
+    if (pokemon.positionY != 0 && this.mode === BoardMode.BATTLE) {
       pokemonUI.setVisible(false)
     }
   }
@@ -69,9 +83,48 @@ export default class BoardManager {
     })
   }
 
+  updatePlayerAvatar(){
+    if(this.playerAvatar){
+      this.playerAvatar.destroy(true)
+    }
+    const playerAvatar = new PokemonAvatar(this.player.id, this.player.avatar, 0, 0, 0)
+    this.playerAvatar = new Pokemon(
+      this.scene,
+      504,
+      696,
+      playerAvatar,
+      this.player.id,
+      false
+    )
+
+    this.playerAvatar.orientation = Orientation.UPRIGHT
+    this.animationManager.animatePokemon(this.playerAvatar, this.playerAvatar.action)    
+  }
+
+  updateOpponentAvatar(opponentId: string, opponentAvatarString: string){
+    if(this.opponentAvatar){
+      this.opponentAvatar.destroy(true)
+    }
+
+    if(this.mode === BoardMode.BATTLE){
+      const opponentAvatar = new PokemonAvatar(this.player.id, opponentAvatarString, 0, 0, 0)
+      this.opponentAvatar = new Pokemon(
+        this.scene,
+        1512,
+        122,
+        opponentAvatar,
+        opponentId,
+        false
+      )
+
+      this.opponentAvatar.orientation = Orientation.DOWNLEFT
+      this.animationManager.animatePokemon(this.opponentAvatar, this.opponentAvatar.action)
+    }
+  }
+
   battleMode() {
     // logger.debug('battleMode');
-    this.mode = "battle"
+    this.mode = BoardMode.BATTLE
     this.pokemons.forEach((pokemon) => {
       if (pokemon.positionY != 0) {
         pokemon.setVisible(false)
@@ -83,10 +136,32 @@ export default class BoardManager {
 
   pickMode() {
     // logger.debug('pickMode');
-    this.mode = "pick"
+    this.mode = BoardMode.PICK
     this.pokemons.forEach((pokemon) => {
       pokemon.setVisible(true)
     })
+    this.updatePlayerAvatar()
+    if(this.opponentAvatar){
+      this.opponentAvatar.destroy(true)
+    }
+  }
+
+  minigameMode(){
+    this.mode = BoardMode.MINIGAME
+    this.pokemons.forEach((pokemon) => {
+      if (pokemon.positionY != 0) {
+        pokemon.setVisible(false)
+      }
+    })
+    this.closeTooltips()
+    this.scene.input.setDragState(this.scene.input.activePointer, 0)
+
+    if(this.playerAvatar){
+      this.playerAvatar.destroy(true)
+    }
+    if(this.opponentAvatar){
+      this.opponentAvatar.destroy(true)
+    }
   }
 
   setPlayer(player: IPlayer) {
@@ -97,6 +172,8 @@ export default class BoardManager {
       this.pokemons.clear()
       this.player = player
       this.buildPokemons()
+      this.updatePlayerAvatar()
+      this.updateOpponentAvatar(this.player.opponentId, this.player.opponentAvatar)
     }
   }
 
