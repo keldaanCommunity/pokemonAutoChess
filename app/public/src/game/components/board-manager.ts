@@ -97,6 +97,7 @@ export default class BoardManager {
     )
     this.playerAvatar.disableInteractive()
     this.playerAvatar.orientation = Orientation.UPRIGHT
+    this.playerAvatar.updateCircleLife(this.player.life)
     this.animationManager.animatePokemon(this.playerAvatar, this.playerAvatar.action)    
   }
 
@@ -105,7 +106,7 @@ export default class BoardManager {
       this.opponentAvatar.destroy(true)
     }
 
-    if(this.mode === BoardMode.BATTLE){
+    if(this.mode === BoardMode.BATTLE && opponentId !== "pve"){
       const opponentAvatar = new PokemonAvatar(this.player.id, opponentAvatarString, 0, 0, 0)
       this.opponentAvatar = new Pokemon(
         this.scene,
@@ -117,7 +118,22 @@ export default class BoardManager {
       )
       this.opponentAvatar.disableInteractive()
       this.opponentAvatar.orientation = Orientation.DOWNLEFT
+      let opponentLife = 0 
+      this.scene.room?.state.players.forEach(p => {
+        if(p.id === opponentId) opponentLife = p.life
+      })
+      this.opponentAvatar.updateCircleLife(opponentLife)
       this.animationManager.animatePokemon(this.opponentAvatar, this.opponentAvatar.action)
+    }
+  }
+
+  updateAvatarLife(playerId: string, value: number){
+    if(this.player.id === playerId){
+      this.playerAvatar.updateCircleLife(value)
+    }
+    
+    if(this.opponentAvatar && this.opponentAvatar.id === playerId){
+      this.opponentAvatar.updateCircleLife(value)
     }
   }
 

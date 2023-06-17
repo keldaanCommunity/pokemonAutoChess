@@ -222,6 +222,7 @@ export const gameSlice = createSlice({
       if (state.currentPlayerId === action.payload.id) {
         state.currentPlayerLife = action.payload.value
       }
+      getGameScene()?.board?.updateAvatarLife(action.payload.id, action.payload.value)
     },
     setCurrentPlayerExperienceManager: (
       state,

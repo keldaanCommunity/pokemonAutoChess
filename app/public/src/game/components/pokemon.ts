@@ -26,7 +26,8 @@ import {
   PokemonActionState,
   SpriteType,
   PokemonTint,
-  Rarity
+  Rarity,
+  GamePhaseState
 } from "../../../../types/enum/Game"
 import { Ability } from "../../../../types/enum/Ability"
 import { Passive } from "../../../../types/enum/Passive"
@@ -37,7 +38,7 @@ import {
   OrientationArray,
   OrientationVector
 } from "../../../../utils/orientation"
-import { clamp } from "../../../../utils/number"
+import { clamp, max } from "../../../../utils/number"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { playSound, SOUNDS } from "../../pages/utils/audio"
 import {
@@ -106,8 +107,8 @@ export default class Pokemon extends DraggableObject {
   stars: number
   playerId: string
   tooltip: boolean
-  circle: GameObjects.Ellipse | undefined
-  circleTimer: GameObjects.Graphics
+  circleHitbox: GameObjects.Ellipse | undefined
+  circlePartial: GameObjects.Graphics
   isPlayerAvatar: boolean
   isCurrentPlayerAvatar: boolean
 
@@ -176,17 +177,7 @@ export default class Pokemon extends DraggableObject {
 
     this.isPlayerAvatar = instanceofPokemonAvatar(pokemon_)
     if (this.isPlayerAvatar) {
-      const currentPlayerId = scene.uid
-      this.circle = new GameObjects.Ellipse(scene, 0, 0, 50, 50)
-      this.add(this.circle)
-      this.circleTimer = new GameObjects.Graphics(scene)
-      this.add(this.circleTimer)
-      this.isCurrentPlayerAvatar = pokemon_.id === currentPlayerId
-      if (this.isCurrentPlayerAvatar) {
-        this.circle.setStrokeStyle(2, 0xffffff, 0.8)
-      } else {
-        this.circle.setStrokeStyle(1, 0xffffff, 0.5)
-      }
+      this.drawCircles()
     }
 
     const textureIndex = scene.textures.exists(this.index) ? this.index : "0000"
@@ -349,25 +340,55 @@ export default class Pokemon extends DraggableObject {
     }
   }
 
+  drawCircles(){
+    const scene = this.scene as GameScene
+    const currentPlayerId = scene.uid
+    this.circleHitbox = new GameObjects.Ellipse(scene, 0, 0, 50, 50)
+    this.add(this.circleHitbox)
+    this.circleHitbox.setVisible(scene.room?.state.phase === GamePhaseState.MINIGAME)
+    this.circlePartial = new GameObjects.Graphics(scene)
+    this.add(this.circlePartial)
+    this.isCurrentPlayerAvatar = this.playerId === currentPlayerId
+    if (this.isCurrentPlayerAvatar) {
+      this.circleHitbox.setStrokeStyle(2, 0xffffff, 0.8)
+    } else {
+      this.circleHitbox.setStrokeStyle(1, 0xffffff, 0.5)
+    }
+  }
+
   updateCircleTimer(timer: number) {
     if (timer <= 0) {
-      this.circleTimer.destroy()
+      this.circlePartial.destroy()
       if (this.isCurrentPlayerAvatar) {
         playSound(SOUNDS.CAROUSEL_UNLOCK)
       }
     } else {
-      this.circleTimer.clear()
-      this.circleTimer.lineStyle(
+      this.circlePartial.clear()
+      this.circlePartial.lineStyle(
         8,
         0xf7d51d,
         this.isCurrentPlayerAvatar ? 0.8 : 0.5
       )
-      this.circleTimer.beginPath()
+      this.circlePartial.beginPath()
 
       const angle = (Math.min(timer, 8000) / 8000) * Math.PI * 2
-      this.circleTimer.arc(0, 0, 30, 0, angle)
-      this.circleTimer.strokePath()
+      this.circlePartial.arc(0, 0, 30, 0, angle)
+      this.circlePartial.strokePath()
     }
+  }
+
+  updateCircleLife(life: number){
+    this.circlePartial.clear()
+    this.circlePartial.lineStyle(
+      8,
+      this.isCurrentPlayerAvatar ? 0x01ff01 : 0xf7d51d,
+      0.8
+    )
+    this.circlePartial.beginPath()
+
+    const angle = Math.PI * 2 * max(100)(life) / 100
+    this.circlePartial.arc(0, 0, 30, 0, angle)
+    this.circlePartial.strokePath()
   }
 
   attackAnimation() {
