@@ -26,7 +26,7 @@ Emotes communication between players ingame
 
 # Changes to Pokemon / Abilities
 
-- Give Human synergy to: Jynx, Cacnea line, Mr Mime, Gothita line, Monferno line, Electabuzz, Electivire, Lucario, Mega-Lucario ; adjusted stats accordingly
+- Give Human synergy to: Jynx, Cacnea line, Mr Mime, Gothita line, Monferno line, Electabuzz, Electivire ; adjusted stats accordingly
 
 # Changes to Synergies
 

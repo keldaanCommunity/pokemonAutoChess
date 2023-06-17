@@ -309,13 +309,13 @@ export class Lucario extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.LUCARIO,
-      [Synergy.FIGHTING, Synergy.STEEL, Synergy.HUMAN],
+      [Synergy.FIGHTING, Synergy.STEEL],
       Rarity.LEGENDARY,
       Pkm.MEGA_LUCARIO,
       240,
       24,
-      4,
-      4,
+      5,
+      5,
       2,
       AttackSprite.FIGHTING_RANGE,
       2,
@@ -332,13 +332,13 @@ export class MegaLucario extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.MEGA_LUCARIO,
-      [Synergy.FIGHTING, Synergy.STEEL, Synergy.HUMAN],
+      [Synergy.FIGHTING, Synergy.STEEL],
       Rarity.LEGENDARY,
       Pkm.DEFAULT,
       360,
       42,
-      5,
-      5,
+      7,
+      7,
       2,
       AttackSprite.FIGHTING_RANGE,
       3,
@@ -10207,7 +10207,7 @@ export class MrMime extends Pokemon {
       Pkm.DEFAULT,
       200,
       15,
-      2
+      2,
       4,
       2,
       AttackSprite.PSYCHIC_RANGE,
