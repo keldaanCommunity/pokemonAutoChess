@@ -322,6 +322,7 @@ export interface IPlayer {
   shopLocked: boolean
   streak: number
   interest: number
+  opponentId: string
   opponentName: string
   opponentAvatar: string
   opponentTitle: string

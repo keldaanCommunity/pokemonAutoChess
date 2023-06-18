@@ -208,11 +208,10 @@ export default class GameScene extends Scene {
 
   updatePhase() {
     this.resetDragState()
-    if (
-      this.room?.state.phase == GamePhaseState.FIGHT ||
-      this.room?.state.phase === GamePhaseState.MINIGAME
-    ) {
+    if (this.room?.state.phase == GamePhaseState.FIGHT) {
       this.board?.battleMode()
+    } else if (this.room?.state.phase === GamePhaseState.MINIGAME) {
+      this.board?.minigameMode()
     } else {
       this.board?.pickMode()
     }
@@ -236,9 +235,14 @@ export default class GameScene extends Scene {
 
   resetDragState() {
     if (this.pokemonDragged) {
-      this.input.emit("dragend", this.input.pointer1, this.pokemonDragged, false)
+      this.input.emit(
+        "dragend",
+        this.input.pointer1,
+        this.pokemonDragged,
+        false
+      )
       this.pokemonDragged = null
-    } else if(this.itemDragged) {
+    } else if (this.itemDragged) {
       this.itemDragged.closeDetail()
       this.itemDragged.x = this.itemDragged.input!.dragStartX
       this.itemDragged.y = this.itemDragged.input!.dragStartY
@@ -371,7 +375,7 @@ export default class GameScene extends Scene {
             )} gold`
           )
           this.drawRectangles(true)
-        } else if(gameObject instanceof ItemContainer) {
+        } else if (gameObject instanceof ItemContainer) {
           this.itemDragged = gameObject
           this.drawRectangles(false)
         }
@@ -390,7 +394,11 @@ export default class GameScene extends Scene {
         const g = <Phaser.GameObjects.Container>gameObject
         g.x = dragX
         g.y = dragY
-        if(g && this.pokemonDragged != null && this.sellZoneGraphic?.visible === false){
+        if (
+          g &&
+          this.pokemonDragged != null &&
+          this.sellZoneGraphic?.visible === false
+        ) {
           this.drawRectangles(true)
         }
       }
@@ -436,7 +444,10 @@ export default class GameScene extends Scene {
             gameObject.setPosition(x, y)
           }
           this.pokemonDragged = null
-        } else if (gameObject instanceof ItemContainer && this.itemDragged != null) {
+        } else if (
+          gameObject instanceof ItemContainer &&
+          this.itemDragged != null
+        ) {
           // Item -> Item = COMBINE
           if (dropZone instanceof ItemContainer) {
             document.getElementById("game")?.dispatchEvent(

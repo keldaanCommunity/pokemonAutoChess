@@ -38,6 +38,7 @@ import { Passive } from "../types/enum/Passive"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") weather: Weather = Weather.NEUTRAL
+  @type("string") winnerId: string = ""
   @type({ map: PokemonEntity }) blueTeam = new MapSchema<IPokemonEntity>()
   @type({ map: PokemonEntity }) redTeam = new MapSchema<IPokemonEntity>()
   @type({ map: Dps }) blueDpsMeter = new MapSchema<Dps>()
@@ -52,6 +53,7 @@ export default class Simulation extends Schema implements ISimulation {
   flowerSpawn: boolean[] = [false, false]
   stageLevel = 0
   player: IPlayer | undefined
+  opponent: IPlayer | undefined
   id: string
   stormLightningTimer = 0
 
@@ -70,6 +72,7 @@ export default class Simulation extends Schema implements ISimulation {
     weather: Weather
   ) {
     this.player = player
+    this.opponent = opponent ?? undefined
     this.stageLevel = stageLevel
     this.weather = weather
 
@@ -101,6 +104,7 @@ export default class Simulation extends Schema implements ISimulation {
     this.redEffects = opponent?.effects?.list ?? []
 
     this.finished = false
+    this.winnerId = ""
     this.flowerSpawn = [false, false]
     this.stormLightningTimer = randomBetween(4000, 8000)
 
@@ -1075,10 +1079,12 @@ export default class Simulation extends Schema implements ISimulation {
     if (this.blueTeam.size == 0 || this.redTeam.size == 0) {
       this.finished = true
       if (this.blueTeam.size == 0) {
+        this.winnerId = this.opponent ? this.opponent.id : "pve"
         this.redTeam.forEach((p) => {
           p.action = PokemonActionState.HOP
         })
       } else {
+        this.winnerId = this.player?.id ?? ""
         this.blueTeam.forEach((p) => {
           p.action = PokemonActionState.HOP
         })
@@ -1168,5 +1174,6 @@ export default class Simulation extends Schema implements ISimulation {
     })
 
     this.weather = Weather.NEUTRAL
+    this.winnerId = ""
   }
 }
