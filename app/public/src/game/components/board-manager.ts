@@ -8,9 +8,11 @@ import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
 import { Item } from "../../../../types/enum/Item"
 import { Pkm } from "../../../../types/enum/Pokemon"
-import { BoardEvent, GamePhaseState, Orientation } from "../../../../types/enum/Game"
+import { BoardEvent, GamePhaseState, Orientation, PokemonActionState } from "../../../../types/enum/Game"
 import { Ability } from "../../../../types/enum/Ability"
 import { PokemonAvatar } from "../../../../models/colyseus-models/pokemon-avatar"
+import Player from "../../../../models/colyseus-models/player"
+import { logger } from "../../../../utils/logger"
 
 export enum BoardMode { PICK = "pick", BATTLE = "battle", MINIGAME = "minigame" }
 
@@ -18,7 +20,7 @@ export default class BoardManager {
   pokemons: Map<string, Pokemon>
   uid: string
   scene: GameScene
-  player: IPlayer
+  player: Player
   mode: BoardMode
   animationManager: AnimationManager
   playerAvatar: Pokemon
@@ -26,7 +28,7 @@ export default class BoardManager {
 
   constructor(
     scene: GameScene,
-    player: IPlayer,
+    player: Player,
     animationManager: AnimationManager,
     uid: string
   ) {
@@ -45,6 +47,24 @@ export default class BoardManager {
     } else {
       this.pickMode()
     }
+
+    player.simulation.listen("winnerId", winnerId => {
+      //logger.debug({ winnerId, playerId: this.player.id, opponentId: this.opponentAvatar?.playerId })
+      if(winnerId === this.player.id){
+        this.animationManager.animatePokemon(this.playerAvatar, PokemonActionState.HOP)
+        if(this.opponentAvatar){
+          this.animationManager.animatePokemon(this.opponentAvatar, PokemonActionState.HURT)
+        }
+      } else if(winnerId === this.opponentAvatar?.playerId){
+        this.animationManager.animatePokemon(this.opponentAvatar, PokemonActionState.HOP)
+        this.animationManager.animatePokemon(this.playerAvatar, PokemonActionState.HURT)
+      } else {
+        this.animationManager.animatePokemon(this.playerAvatar, PokemonActionState.IDLE)
+        if(this.opponentAvatar){
+          this.animationManager.animatePokemon(this.opponentAvatar, PokemonActionState.IDLE)
+        }
+      }
+    })
   }
 
   addPokemon(pokemon: IPokemon) {

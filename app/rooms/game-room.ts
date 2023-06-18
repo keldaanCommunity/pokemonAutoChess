@@ -679,7 +679,7 @@ export default class GameRoom extends Room<GameState> {
           player.opponentId = id
           player.opponentName = opponent.name
           player.opponentAvatar = opponent.avatar
-          player.opponentTitle = TitleName[opponent.title]
+          player.opponentTitle = TitleName[opponent.title] ?? ""
           return id
         }
       }
