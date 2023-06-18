@@ -861,10 +861,10 @@ export class Electabuzz extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.ELECTABUZZ,
-      [Synergy.ELECTRIC, Synergy.ARTIFICIAL],
+      [Synergy.ELECTRIC, Synergy.ARTIFICIAL, Synergy.HUMAN],
       Rarity.EPIC,
       Pkm.ELECTIVIRE,
-      200,
+      180,
       16,
       5,
       5,
@@ -884,10 +884,10 @@ export class Electivire extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.ELECTIVIRE,
-      [Synergy.ELECTRIC, Synergy.ARTIFICIAL],
+      [Synergy.ELECTRIC, Synergy.ARTIFICIAL, Synergy.HUMAN],
       Rarity.EPIC,
       Pkm.DEFAULT,
-      420,
+      380,
       28,
       6,
       6,
@@ -4455,7 +4455,7 @@ export class Chimchar extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.CHIMCHAR,
-      [Synergy.FIRE, Synergy.FIGHTING],
+      [Synergy.FIRE, Synergy.FIGHTING, Synergy.HUMAN],
       Rarity.COMMON,
       Pkm.MONFERNO,
       60,
@@ -4478,10 +4478,10 @@ export class Monferno extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.MONFERNO,
-      [Synergy.FIRE, Synergy.FIGHTING],
+      [Synergy.FIRE, Synergy.FIGHTING, Synergy.HUMAN],
       Rarity.COMMON,
       Pkm.INFERNAPE,
-      110,
+      100,
       11,
       2,
       2,
@@ -4501,7 +4501,7 @@ export class Infernape extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.INFERNAPE,
-      [Synergy.FIRE, Synergy.FIGHTING],
+      [Synergy.FIRE, Synergy.FIGHTING, Synergy.HUMAN],
       Rarity.COMMON,
       Pkm.DEFAULT,
       180,
@@ -9566,13 +9566,13 @@ export class Cacnea extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.CACNEA,
-      [Synergy.GRASS, Synergy.DARK],
+      [Synergy.GRASS, Synergy.DARK, Synergy.HUMAN],
       Rarity.RARE,
       Pkm.CACTURNE,
-      90,
+      85,
       7,
-      4,
       3,
+      1,
       1,
       AttackSprite.GRASS_MELEE,
       1,
@@ -9590,13 +9590,13 @@ export class Cacturne extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.CACTURNE,
-      [Synergy.GRASS, Synergy.DARK],
+      [Synergy.GRASS, Synergy.DARK, Synergy.HUMAN],
       Rarity.RARE,
       Pkm.DEFAULT,
       180,
       20,
       6,
-      5,
+      2,
       1,
       AttackSprite.GRASS_MELEE,
       2,
@@ -10154,7 +10154,7 @@ export class Jynx extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.JYNX,
-      [Synergy.ICE, Synergy.PSYCHIC],
+      [Synergy.ICE, Synergy.PSYCHIC, Synergy.HUMAN],
       Rarity.COMMON,
       Pkm.DEFAULT,
       130,
@@ -10202,13 +10202,13 @@ export class MrMime extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.MR_MIME,
-      [Synergy.FAIRY, Synergy.PSYCHIC],
+      [Synergy.FAIRY, Synergy.PSYCHIC, Synergy.HUMAN],
       Rarity.RARE,
       Pkm.DEFAULT,
       200,
-      16,
-      3,
-      5,
+      15,
+      2,
+      4,
       2,
       AttackSprite.PSYCHIC_RANGE,
       2,
@@ -11548,13 +11548,13 @@ export class Gothita extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.GOTHITA,
-      [Synergy.PSYCHIC, Synergy.DARK],
+      [Synergy.PSYCHIC, Synergy.DARK, Synergy.HUMAN],
       Rarity.HATCH,
       Pkm.GOTHORITA,
-      90,
+      70,
       5,
       1,
-      4,
+      2,
       3,
       AttackSprite.PSYCHIC_RANGE,
       1,
@@ -11573,13 +11573,13 @@ export class Gothorita extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.GOTHORITA,
-      [Synergy.PSYCHIC, Synergy.DARK],
+      [Synergy.PSYCHIC, Synergy.DARK, Synergy.HUMAN],
       Rarity.HATCH,
       Pkm.GOTHITELLE,
-      130,
+      120,
       12,
       1,
-      5,
+      3,
       3,
       AttackSprite.PSYCHIC_RANGE,
       2,
@@ -11598,13 +11598,13 @@ export class Gothitelle extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.GOTHITELLE,
-      [Synergy.PSYCHIC, Synergy.DARK],
+      [Synergy.PSYCHIC, Synergy.DARK, Synergy.HUMAN],
       Rarity.HATCH,
       Pkm.DEFAULT,
-      220,
-      22,
+      190,
+      20,
       1,
-      6,
+      4,
       3,
       AttackSprite.PSYCHIC_RANGE,
       3,

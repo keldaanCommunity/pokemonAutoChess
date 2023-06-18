@@ -549,11 +549,11 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.hasSynergyEffect(Synergy.HUMAN)) {
       let lifesteal = 0
       if (this.effects.includes(Effect.MEDITATE)) {
-        lifesteal = 0.15
+        lifesteal = 0.1
       } else if (this.effects.includes(Effect.FOCUS_ENERGY)) {
-        lifesteal = 0.3
+        lifesteal = 0.25
       } else if (this.effects.includes(Effect.CALM_MIND)) {
-        lifesteal = 0.6
+        lifesteal = 0.5
       }
       this.handleHeal(Math.floor(lifesteal * damage), this, 0)
     }
