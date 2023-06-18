@@ -199,7 +199,7 @@ export default class BoardManager {
     }
   }
 
-  setPlayer(player: IPlayer) {
+  setPlayer(player: Player) {
     if (player.id != this.player.id) {
       this.pokemons.forEach((pokemon, key) => {
         pokemon.destroy(true)

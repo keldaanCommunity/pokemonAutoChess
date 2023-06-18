@@ -5,7 +5,7 @@ import {
   WeatherLabel,
   WeatherDescription
 } from "../../../../../types/strings/Weather"
-import { getAvatarSrc } from "../../../utils"
+import { getAvatarSrc, getPortraitSrc } from "../../../utils"
 import { cc } from "../../utils/jsx"
 import TimerBar from "./game-timer-bar"
 import ReactTooltip from "react-tooltip"
@@ -21,6 +21,8 @@ import { BattleResult, GamePhaseState } from "../../../../../types/enum/Game"
 import { SynergyAssociatedToWeather } from "../../../../../types/enum/Weather"
 import SynergyIcon from "../icons/synergy-icon"
 import { addIconsToDescription } from "../../utils/descriptions"
+import { PkmIndex } from "../../../../../types/enum/Pokemon"
+import { Emotion } from "../../../../../types"
 
 export default function GameStageInfo() {
   const name = useAppSelector((state) => state.game.currentPlayerName)
@@ -187,7 +189,7 @@ export function StagePath() {
     if (neutralStage) {
       path.push({
         level,
-        icon: getAvatarSrc(neutralStage.avatar),
+        icon: getPortraitSrc(PkmIndex[neutralStage.avatar], false, Emotion.NORMAL),
         title: record?.name ?? neutralStage.name,
         result: record?.result
       })

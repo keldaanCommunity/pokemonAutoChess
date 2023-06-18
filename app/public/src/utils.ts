@@ -4,17 +4,21 @@ export function getPortraitSrc(
   index: string,
   shiny?: boolean,
   emotion?: Emotion
-) {
-  const shinyPad = shiny ? (index.length === 4 ? "/0000/0001" : "/0001") : ""
-  const emotionWithFallback = emotion ? emotion : Emotion.NORMAL
-  return `${CDN_PORTRAIT_URL}${index.replace(
-    "-",
-    "/"
-  )}${shinyPad}/${emotionWithFallback}.png`
+) {  
+  return getAvatarSrc(getAvatarString(index, shiny, emotion))
 }
 
 export function getAvatarSrc(avatar: string) {
   return `${CDN_PORTRAIT_URL}${avatar.replace("-", "/")}.png`
+}
+
+export function getAvatarString(
+  index: string,
+  shiny?: boolean,
+  emotion?: Emotion
+): string {
+  const shinyPad = shiny ? (index.length === 4 ? "/0000/0001" : "/0001") : ""  
+  return `${index.replace("-", "/")}${shinyPad}/${emotion || Emotion.NORMAL}`
 }
 
 export interface IPokemonAvatarConfig {

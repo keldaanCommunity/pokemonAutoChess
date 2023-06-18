@@ -370,61 +370,61 @@ export const ItemProposalStages = [2, 3]
 export const AdditionalPicksStages = [5, 8]
 export const MythicalPicksStages = [10, 20]
 
-export const NeutralStage: { turn: number; name: string; avatar: string }[] = [
+export const NeutralStage: { turn: number; name: string; avatar: Pkm }[] = [
   {
     turn: 1,
     name: "Magikarp",
-    avatar: `${PkmIndex[Pkm.MAGIKARP].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: Pkm.MAGIKARP
   },
   {
     turn: 2,
     name: "Raticate",
-    avatar: `${PkmIndex[Pkm.RATICATE].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: Pkm.RATICATE
   },
   {
     turn: 3,
     name: "Fearow",
-    avatar: `${PkmIndex[Pkm.FEAROW].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: Pkm.FEAROW
   },
   {
     turn: 9,
     name: "Gyarados",
-    avatar: `${PkmIndex[Pkm.GYARADOS].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: Pkm.GYARADOS
   },
   {
     turn: 14,
     name: "Lugia",
-    avatar: `${PkmIndex[Pkm.LUGIA].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: Pkm.LUGIA
   },
   {
     turn: 19,
     name: "Giratina",
-    avatar: `${PkmIndex[Pkm.GIRATINA].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: Pkm.GIRATINA
   },
   {
     turn: 24,
     name: "Zapdos",
-    avatar: `${PkmIndex[Pkm.ZAPDOS].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: Pkm.ZAPDOS
   },
   {
     turn: 29,
     name: "Dialga",
-    avatar: `${PkmIndex[Pkm.DIALGA].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: Pkm.DIALGA
   },
   {
     turn: 34,
     name: "Suicune",
-    avatar: `${PkmIndex[Pkm.SUICUNE].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: Pkm.SUICUNE
   },
   {
     turn: 39,
     name: "Regice",
-    avatar: `${PkmIndex[Pkm.REGICE].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: Pkm.REGICE
   },
   {
     turn: 44,
     name: "Rayquaza",
-    avatar: `${PkmIndex[Pkm.RAYQUAZA].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: Pkm.RAYQUAZA
   }
 ]
 
