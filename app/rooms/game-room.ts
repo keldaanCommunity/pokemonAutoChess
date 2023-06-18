@@ -408,21 +408,22 @@ export default class GameRoom extends Room<GameState> {
   async onLeave(client: Client, consented: boolean) {
     try {
       if (client && client.auth && client.auth.displayName) {
-        logger.info(`${client.auth.displayName} is leaving`)
+        logger.info(`${client.auth.displayName} has been disconnected`)
       }
       if (consented) {
         throw new Error("consented leave")
       }
 
-      // allow disconnected client to reconnect into this room until 1 minute
-      await this.allowReconnection(client, 60)
+      // allow disconnected client to reconnect into this room until 3 minutes
+      await this.allowReconnection(client, 180)
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
-        logger.info(`${client.auth.displayName} leave game room`)
+        logger.info(`${client.auth.displayName} left game`)
         const player = this.state.players.get(client.auth.uid)
-        if (player && player.loadingProgress < 100 && !this.state.gameLoaded) {
-          // if player quit during the loading screen, remove it from the players
+        if (player && (player.loadingProgress < 100 || this.state.stageLevel < 4)) {
+          // if player left game during the loading screen or before stage 4, remove it from the players
           this.state.players.delete(client.auth.uid)
+          logger.info(`${client.auth.displayName} has been removed from players list`)
         }
       }
       if (
