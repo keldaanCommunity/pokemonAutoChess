@@ -314,7 +314,7 @@ export default class WeatherManager {
       })
     )
 
-    this.fx = this.scene.cameras.main.postFX!.addDisplacement(undefined, 0, -0.002);
+    this.fx = this.scene.cameras.main.postFX.addDisplacement(undefined, 0, -0.002);
     this.fxTween = this.scene.tweens.add({
       targets: this.fx,
       y: +0.002,
@@ -337,10 +337,11 @@ export default class WeatherManager {
     if(this.fx){
       this.fx.x=0
       this.fx.y=0
-      this.fx.destroy();      
+      this.fx.destroy();
     }
     if(this.fxTween){
       this.fxTween.destroy();
     }
+    this.scene.cameras.main.postFX.clear()
   }
 }

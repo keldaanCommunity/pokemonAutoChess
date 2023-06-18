@@ -14,6 +14,7 @@ import { toast } from "react-toastify"
 import React from "react"
 import { getAvatarSrc } from "../utils"
 import { StageDuration } from "../../../types/Config"
+import { getGameScene } from "../pages/game"
 
 interface GameStateStore {
   afterGameId: string
@@ -34,6 +35,7 @@ interface GameStateStore {
   itemsProposition: string[]
   pokemonsProposition: Pkm[]
   currentPlayerSynergies: [string, number][]
+  currentPlayerOpponentId: string
   currentPlayerOpponentName: string
   currentPlayerOpponentAvatar: string
   currentPlayerOpponentTitle: string
@@ -73,6 +75,7 @@ const initialState: GameStateStore = {
   itemsProposition: new Array<Item>(),
   pokemonsProposition: new Array<Pkm>(),
   currentPlayerSynergies: new Array<[Synergy, number]>(),
+  currentPlayerOpponentId: "",
   currentPlayerOpponentName: "",
   currentPlayerOpponentAvatar: "0019/Normal",
   currentPlayerOpponentTitle: "",
@@ -174,6 +177,14 @@ export const gameSlice = createSlice({
         state.currentPlayerSynergies = Array.from(action.payload.value)
       }
     },
+    setOpponentId: (
+      state,
+      action: PayloadAction<{ value: string; id: string }>
+    ) => {
+      if (state.currentPlayerId === action.payload.id) {
+        state.currentPlayerOpponentId = action.payload.value
+      }
+    },
     setOpponentName: (
       state,
       action: PayloadAction<{ value: string; id: string }>
@@ -188,6 +199,7 @@ export const gameSlice = createSlice({
     ) => {
       if (state.currentPlayerId === action.payload.id) {
         state.currentPlayerOpponentAvatar = action.payload.value
+        getGameScene()?.board?.updateOpponentAvatar(state.currentPlayerOpponentId, state.currentPlayerOpponentAvatar)
       }
     },
     setOpponentTitle: (
@@ -210,6 +222,7 @@ export const gameSlice = createSlice({
       if (state.currentPlayerId === action.payload.id) {
         state.currentPlayerLife = action.payload.value
       }
+      getGameScene()?.board?.updateAvatarLife(action.payload.id, action.payload.value)
     },
     setPlayerExperienceManager: (
       state,
@@ -276,6 +289,7 @@ export const gameSlice = createSlice({
       state.currentPlayerId = action.payload.id
       state.currentPlayerMoney = action.payload.money
       state.currentPlayerExperienceManager = action.payload.experienceManager
+      state.currentPlayerOpponentId = action.payload.opponentId
       state.currentPlayerOpponentName = action.payload.opponentName
       state.currentPlayerOpponentAvatar = action.payload.opponentAvatar
       state.currentPlayerOpponentTitle = action.payload.opponentTitle
@@ -489,6 +503,7 @@ export const {
   setCurrentPlayerMoney,
   setLife,
   setBoardSize,
+  setOpponentId,
   setOpponentName,
   setOpponentAvatar,
   setOpponentTitle,

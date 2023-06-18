@@ -17,7 +17,13 @@ export function getAvatarSrc(avatar: string) {
   return `${CDN_PORTRAIT_URL}${avatar.replace("-", "/")}.png`
 }
 
-export function getInformations(avatar: string) {
+export interface IPokemonAvatarConfig {
+  index: string
+  emotion: Emotion,
+  shiny: boolean  
+}
+
+export function getPokemonConfigFromAvatar(avatar: string): IPokemonAvatarConfig {
   let emotion = Emotion.NORMAL
   let shiny = false
   let index = "0019"

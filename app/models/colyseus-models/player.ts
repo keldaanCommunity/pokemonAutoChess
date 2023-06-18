@@ -36,6 +36,7 @@ export default class Player extends Schema implements IPlayer {
   @type("boolean") shopLocked: boolean = false
   @type("uint8") streak: number = 0
   @type("uint8") interest: number = 0
+  @type("string") opponentId: string = ""
   @type("string") opponentName: string = ""
   @type("string") opponentAvatar: string = ""
   @type("string") opponentTitle: string = ""

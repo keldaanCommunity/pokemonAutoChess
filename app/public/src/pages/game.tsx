@@ -21,6 +21,7 @@ import {
   setShopLocked,
   setStageLevel,
   setStreak,
+  setOpponentId,
   setOpponentName,
   setOpponentAvatar,
   setOpponentTitle,
@@ -370,6 +371,9 @@ export default function Game() {
           })
         }
 
+        player.listen("opponentId", (value, previousValue) => {
+          dispatch(setOpponentId({ id: player.id, value: value }))
+        })
         player.listen("opponentName", (value, previousValue) => {
           dispatch(setOpponentName({ id: player.id, value: value }))
         })

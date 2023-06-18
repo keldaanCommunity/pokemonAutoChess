@@ -38,7 +38,6 @@ import {
 } from "../../types"
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Pokemon } from "../../models/colyseus-models/pokemon"
-import { Ability } from "../../types/enum/Ability"
 import { chance, pickRandomIn } from "../../utils/random"
 import { logger } from "../../utils/logger"
 import { Passive } from "../../types/enum/Passive"
@@ -1042,6 +1041,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
             client?.send(Transfer.PLAYER_DAMAGE, playerDamage)
           }
         }
+
         player.addBattleResult(
           player.opponentName,
           currentResult,
@@ -1323,6 +1323,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         }
 
         player.opponentName = ""
+        player.opponentId = ""
+        player.opponentAvatar = ""
+        player.opponentTitle = ""
+
         if (!player.isBot) {
           if (!player.shopLocked) {
             this.state.shop.assignShop(player)
@@ -1398,6 +1402,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     this.state.players.forEach((player: Player, key: string) => {
       if (player.alive) {
         if (stageIndex != -1) {
+          player.opponentId = "pve"
           player.opponentName = NeutralStage[stageIndex].name
           player.opponentAvatar = NeutralStage[stageIndex].avatar
           player.opponentTitle = "Wild"

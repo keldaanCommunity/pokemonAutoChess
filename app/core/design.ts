@@ -127,6 +127,20 @@ export default class Design {
         this.terrain[this.leftBorder[1]][i] = TerrainType.WALL
       }
     }
+
+    this.drawGroundRect(9, 13, 3, 3)
+    this.drawGroundRect(30, 1, 3, 3)
+  }
+
+  drawGroundRect(x: number, y: number, width: number, height: number) {
+    for (let i = x; i < x + width; i++) {
+      for (let j = y; j < y + height; j++) {
+        this.terrain[j][i] =
+          i === x || i === x + width - 1 || j === y || j === y + height - 1
+            ? TerrainType.WALL
+            : TerrainType.GROUND
+      }
+    }
   }
 
   generateMask() {
