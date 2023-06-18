@@ -315,17 +315,17 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.MEDITATE]: {
-    eng: `Heal for 15% ${Stat.HP} of the damage`,
+    eng: `Heal for 10% ${Stat.HP} of the damage`,
     esp: ``,
     fra: ``
   },
   [Effect.FOCUS_ENERGY]: {
-    eng: `Heal for 30% ${Stat.HP} of the damage`,
+    eng: `Heal for 25% ${Stat.HP} of the damage`,
     esp: ``,
     fra: ``
   },
   [Effect.CALM_MIND]: {
-    eng: `Heal for 60% ${Stat.HP} of the damage`,
+    eng: `Heal for 50% ${Stat.HP} of the damage`,
     esp: ``,
     fra: ``
   },
