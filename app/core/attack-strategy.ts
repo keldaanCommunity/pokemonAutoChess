@@ -9,11 +9,11 @@ import { Synergy } from "../types/enum/Synergy"
 import { AbilityStrategy, Ability } from "../types/enum/Ability"
 import PokemonFactory from "../models/pokemon-factory"
 import { Pkm } from "../types/enum/Pokemon"
-import { pickRandomIn, shuffleArray } from "../utils/random"
+import { chance, pickRandomIn, shuffleArray } from "../utils/random"
 import { effectInLine, OrientationArray } from "../utils/orientation"
 import { logger } from "../utils/logger"
 import { DEFAULT_ATK_SPEED } from "../types/Config"
-import { min } from "../utils/number"
+import { max, min } from "../utils/number"
 
 export class AttackStrategy {
   process(
@@ -561,11 +561,11 @@ export class ChatterStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const damage = 10
-    const chance = 0.3
+    const confusionChance = max(1)(0.3 * (1 + pokemon.ap/100))
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
         tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-        if (Math.random() < chance) {
+        if (chance(confusionChance)) {
           tg.status.triggerConfusion(1000, tg)
         }
       }
@@ -1062,7 +1062,7 @@ export class OverheatStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target, crit)
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
-        let damage = 20
+        let damage = 30
         if (tg.status.burn) {
           damage *= 2
         }
@@ -2121,7 +2121,7 @@ export class FreezeStrategy extends AttackStrategy {
       timer = 2000
     }
     if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
-      timer = 4000
+      timer = 3000
     }
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value && pokemon.team != value.team) {
