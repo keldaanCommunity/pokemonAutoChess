@@ -1062,7 +1062,7 @@ export class OverheatStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target, crit)
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
-        let damage = 20
+        let damage = 30
         if (tg.status.burn) {
           damage *= 2
         }

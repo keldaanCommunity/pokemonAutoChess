@@ -1739,7 +1739,7 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     fra: ""
   },
   [Ability.OVERHEAT]: {
-    eng: `Deals [20, SP] ${Damage.SPECIAL} to all enemies. Double damage if target is ${Status.BURN}`,
+    eng: `Deals [30, SP] ${Damage.SPECIAL} to all enemies. Double damage if target is ${Status.BURN}`,
     esp: "",
     prt: "",
     fra: ""
