@@ -1094,8 +1094,8 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.FREEZE]: {
-    eng: `${Status.FREEZE} the whole enemy team for [1,2,4] seconds`,
-    esp: `Congela todo el equipo durante 1,2,4 segundos`,
+    eng: `${Status.FREEZE} the whole enemy team for [1,2,3] seconds`,
+    esp: `Congela todo el equipo durante 1,2,3 segundos`,
     fra: `Gèle la cible durant 1,2,4 secondes`,
     prt: ``
   },
@@ -1538,7 +1538,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.CHATTER]: {
-    eng: `Deal [10,SP] ${Damage.SPECIAL} to all enemies. Every enemy has 30% chance to be ${Status.CONFUSION} for 1 second`,
+    eng: `Deal [10,SP] ${Damage.SPECIAL} to all enemies. Every enemy has [30,SP]% chance to be ${Status.CONFUSION} for 1 second`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1739,7 +1739,7 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     fra: ""
   },
   [Ability.OVERHEAT]: {
-    eng: `Deals [20, SP] ${Damage.SPECIAL} to all enemies. Double damage if target is ${Status.BURN}`,
+    eng: `Deals [30, SP] ${Damage.SPECIAL} to all enemies. Double damage if target is ${Status.BURN}`,
     esp: "",
     prt: "",
     fra: ""
