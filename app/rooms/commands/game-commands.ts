@@ -13,7 +13,6 @@ import {
 } from "../../types/Config"
 import { Item, BasicItems } from "../../types/enum/Item"
 import { BattleResult } from "../../types/enum/Game"
-import { Weather } from "../../types/enum/Weather"
 import Player from "../../models/colyseus-models/player"
 import PokemonFactory from "../../models/pokemon-factory"
 import ItemFactory from "../../models/item-factory"
@@ -21,7 +20,7 @@ import UserMetadata from "../../models/mongo-models/user-metadata"
 import GameRoom from "../game-room"
 import { Client, updateLobby } from "colyseus"
 import { Effect } from "../../types/enum/Effect"
-import { Title, FIGHTING_PHASE_DURATION } from "../../types"
+import { Title, FIGHTING_PHASE_DURATION, Emotion } from "../../types"
 import { MapSchema } from "@colyseus/schema"
 import {
   GamePhaseState,
@@ -41,6 +40,7 @@ import { Pokemon } from "../../models/colyseus-models/pokemon"
 import { chance, pickRandomIn } from "../../utils/random"
 import { logger } from "../../utils/logger"
 import { Passive } from "../../types/enum/Passive"
+import { getAvatarString, getPortraitSrc } from "../../public/src/utils"
 
 export class OnShopCommand extends Command<
   GameRoom,
@@ -1404,7 +1404,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         if (stageIndex != -1) {
           player.opponentId = "pve"
           player.opponentName = NeutralStage[stageIndex].name
-          player.opponentAvatar = NeutralStage[stageIndex].avatar
+          player.opponentAvatar = getAvatarString(PkmIndex[NeutralStage[stageIndex].avatar], this.state.shinyEncounter, Emotion.NORMAL)
           player.opponentTitle = "Wild"
           const pveBoard = PokemonFactory.getNeutralPokemonsByLevelStage(
             this.state.stageLevel,
