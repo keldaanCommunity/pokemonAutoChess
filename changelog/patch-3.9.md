@@ -27,6 +27,11 @@ Emotes communication between players ingame
 # Changes to Pokemon / Abilities
 
 - Give Human synergy to: Jynx, Cacnea line, Mr Mime, Gothita line, Monferno line, Electabuzz, Electivire ; adjusted stats accordingly
+- Nerf Freeze tier 3: freeze duration 4 → 3 seconds
+- Buff Chatter: Mana 120 → 100, Confusion chance now scales with AP
+- Buff Cyndaquill line: Cyndaquill: Attack 6 → 7 ; Quilava: Attack 11 → 13 ; Typlosion HP 230 → 250, Attack 21 → 25
+- Buff Overheat: 20 → 30 special damage
+- Nerf Spiritomb: range 3 → 2
 
 # Changes to Synergies
 

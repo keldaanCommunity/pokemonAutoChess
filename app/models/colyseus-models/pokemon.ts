@@ -7517,7 +7517,7 @@ export class Spiritomb extends Pokemon {
       20,
       2,
       2,
-      3,
+      2,
       AttackSprite.GHOST_RANGE,
       1,
       80,
