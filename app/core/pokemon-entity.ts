@@ -201,8 +201,8 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
         specialDamage = Math.round(specialDamage * attacker.critDamage)
       }
       if (attacker && attacker.items.has(Item.POKEMONOMICON)) {
-        this.status.triggerBurn(2000, this, attacker, board)
-        this.status.triggerWound(2000, this, attacker, board)
+        this.status.triggerBurn(3000, this, attacker, board)
+        this.status.triggerWound(3000, this, attacker, board)
       }
       if (this.items.has(Item.POWER_LENS) && specialDamage >= 1 && attacker) {
         attacker.handleDamage({
@@ -570,13 +570,13 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
           pokemon.effects.includes(Effect.STRANGE_STEAM) ||
           pokemon.effects.includes(Effect.AROMATIC_MIST))
       ) {
-        let d = 0
+        let damage = 0
         if (pokemon.effects.includes(Effect.AROMATIC_MIST)) {
-          d = 10
+          damage = 10
         } else if (pokemon.effects.includes(Effect.FAIRY_WIND)) {
-          d = 30
+          damage = 30
         } else if (pokemon.effects.includes(Effect.STRANGE_STEAM)) {
-          d = 60
+          damage = 60
         }
         const cells = board.getAdjacentCells(
           pokemon.positionX,
@@ -586,13 +586,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
         cells.forEach((cell) => {
           if (cell.value && pokemon.team !== cell.value.team) {
             cell.value.count.fairyCritCount++
-            cell.value.handleDamage({
-              damage: d,
-              board,
-              attackType: AttackType.SPECIAL,
-              attacker: pokemon,
-              shouldTargetGainMana: true
-            })
+            cell.value.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, false)
           }
         })
 
