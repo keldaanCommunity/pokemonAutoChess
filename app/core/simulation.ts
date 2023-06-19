@@ -973,25 +973,22 @@ export default class Simulation extends Schema implements ISimulation {
           break
 
         case Effect.DUBIOUS_DISC:
-          if (types.includes(Synergy.ARTIFICIAL) && pokemon.items.size != 0) {
-            pokemon.addAttack(4 * pokemon.items.size)
-            pokemon.handleShield(20 * pokemon.items.size, pokemon)
-            pokemon.effects.push(Effect.DUBIOUS_DISC)
-          }
-          break
-
         case Effect.LINK_CABLE:
-          if (types.includes(Synergy.ARTIFICIAL) && pokemon.items.size != 0) {
-            pokemon.addAttack(7 * pokemon.items.size)
-            pokemon.handleShield(30 * pokemon.items.size, pokemon)
-            pokemon.effects.push(Effect.LINK_CABLE)
-          }
-          break
-
         case Effect.GOOGLE_SPECS:
-          if (types.includes(Synergy.ARTIFICIAL) && pokemon.items.size != 0) {
-            pokemon.addAttack(10 * pokemon.items.size)
-            pokemon.handleShield(50 * pokemon.items.size, pokemon)
+          if (types.includes(Synergy.ARTIFICIAL) && pokemon.items.size > 0) {
+            const nbItems = pokemon.items.size + (pokemon.items.has(Item.WONDER_BOX) ? 1 : 0)
+            const attackBoost = {
+              [Effect.DUBIOUS_DISC]: 4,
+              [Effect.LINK_CABLE]: 7,
+              [Effect.GOOGLE_SPECS]: 10
+            }[effect]
+            const shieldBoost = {
+              [Effect.DUBIOUS_DISC]: 20,
+              [Effect.LINK_CABLE]: 30,
+              [Effect.GOOGLE_SPECS]: 50
+            }[effect]
+            pokemon.addAttack(attackBoost * nbItems)
+            pokemon.handleShield(shieldBoost * nbItems, pokemon)
             pokemon.effects.push(Effect.GOOGLE_SPECS)
           }
           break
