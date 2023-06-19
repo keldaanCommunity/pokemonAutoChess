@@ -879,44 +879,19 @@ export default class Simulation extends Schema implements ISimulation {
           break
 
         case Effect.PHANTOM_FORCE:
-          if (types.includes(Synergy.GHOST)) {
-            pokemon.effects.push(Effect.PHANTOM_FORCE)
-          }
-          break
-
         case Effect.CURSE:
-          if (types.includes(Synergy.GHOST)) {
-            pokemon.effects.push(Effect.CURSE)
-          }
-          break
-
         case Effect.SHADOW_TAG:
-          if (types.includes(Synergy.GHOST)) {
-            pokemon.effects.push(Effect.SHADOW_TAG)
-          }
-          break
-
         case Effect.WANDERING_SPIRIT:
           if (types.includes(Synergy.GHOST)) {
-            pokemon.effects.push(Effect.WANDERING_SPIRIT)
+            pokemon.effects.push(effect)
           }
           break
 
         case Effect.AROMATIC_MIST:
-          if (types.includes(Synergy.FAIRY)) {
-            pokemon.effects.push(Effect.AROMATIC_MIST)
-          }
-          break
-
         case Effect.FAIRY_WIND:
-          if (types.includes(Synergy.FAIRY)) {
-            pokemon.effects.push(Effect.FAIRY_WIND)
-          }
-          break
-
         case Effect.STRANGE_STEAM:
           if (types.includes(Synergy.FAIRY)) {
-            pokemon.effects.push(Effect.STRANGE_STEAM)
+            pokemon.effects.push(effect)
           }
           break
 
@@ -1140,6 +1115,7 @@ export default class Simulation extends Schema implements ISimulation {
             this.board,
             AttackType.SPECIAL,
             null,
+            false,
             false
           )
         }
