@@ -1115,7 +1115,6 @@ export default class Simulation extends Schema implements ISimulation {
             this.board,
             AttackType.SPECIAL,
             null,
-            false,
             false
           )
         }
