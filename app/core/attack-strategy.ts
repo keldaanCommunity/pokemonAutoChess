@@ -561,11 +561,11 @@ export class ChatterStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const damage = 10
-    const chance = 0.3
+    const confusionChance = max(1)(0.3 * (1 + pokemon.ap/100))
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
         tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-        if (Math.random() < chance) {
+        if (chance(confusionChance)) {
           tg.status.triggerConfusion(1000, tg)
         }
       }

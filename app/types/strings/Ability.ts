@@ -1538,7 +1538,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.CHATTER]: {
-    eng: `Deal [10,SP] ${Damage.SPECIAL} to all enemies. Every enemy has 30% chance to be ${Status.CONFUSION} for 1 second`,
+    eng: `Deal [10,SP] ${Damage.SPECIAL} to all enemies. Every enemy has [30,SP]% chance to be ${Status.CONFUSION} for 1 second`,
     esp: ``,
     prt: ``,
     fra: ``
