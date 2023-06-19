@@ -27,6 +27,7 @@ Emotes communication between players ingame
 # Changes to Pokemon / Abilities
 
 - Give Human synergy to: Jynx, Cacnea line, Mr Mime, Gothita line, Monferno line, Electabuzz, Electivire ; adjusted stats accordingly
+- Castform & Volcanion now change weather depending on your dominant synergy
 
 # Changes to Synergies
 
