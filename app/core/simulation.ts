@@ -976,7 +976,8 @@ export default class Simulation extends Schema implements ISimulation {
         case Effect.LINK_CABLE:
         case Effect.GOOGLE_SPECS:
           if (types.includes(Synergy.ARTIFICIAL) && pokemon.items.size > 0) {
-            const nbItems = pokemon.items.size + (pokemon.items.has(Item.WONDER_BOX) ? 1 : 0)
+            const nbItems =
+              pokemon.items.size + (pokemon.items.has(Item.WONDER_BOX) ? 1 : 0)
             const attackBoost = {
               [Effect.DUBIOUS_DISC]: 4,
               [Effect.LINK_CABLE]: 7,
@@ -1038,38 +1039,95 @@ export default class Simulation extends Schema implements ISimulation {
     playerBoard: MapSchema<Pokemon, string>,
     opponentBoard: MapSchema<Pokemon, string>
   ): Weather {
-    const countPerWeather = new Map<Weather, number>()
+    function getDominantWeather(
+      count: Map<Weather, number>,
+      weathers: Weather[] = [...count.keys()]
+    ): Weather | null {
+      const sortedCount = weathers
+        .map((w) => [w, count.get(w) ?? 0] as [Weather, number])
+        .sort((a, b) => b[1] - a[1])
+
+      if (sortedCount.length === 0) return null
+      if (sortedCount.length === 1) return sortedCount[0][0]
+      if (sortedCount.length >= 2 && sortedCount[0][1] === sortedCount[1][1])
+        return null
+      return sortedCount[0][0]
+    }
+
+    const boardWeatherScore = new Map<Weather, number>()
     ;[playerBoard, opponentBoard].forEach((board) => {
+      const playerWeatherScore = new Map<Weather, number>()
       board.forEach((pkm) => {
         if (pkm.positionY != 0) {
           if (WeatherPassives.has(pkm.passive)) {
             const weather = WeatherPassives.get(pkm.passive)!
-            countPerWeather.set(
+            boardWeatherScore.set(
               weather,
-              (countPerWeather.get(weather) ?? 0) + 100
+              (boardWeatherScore.get(weather) ?? 0) + 100
+            )
+            playerWeatherScore.set(
+              weather,
+              (playerWeatherScore.get(weather) ?? 0) + 100
             )
           }
           pkm.types.forEach((type) => {
             if (WeatherAssociatedToSynergy.has(type)) {
               const weather = WeatherAssociatedToSynergy.get(type)!
-              countPerWeather.set(
+              boardWeatherScore.set(
                 weather,
-                (countPerWeather.get(weather) ?? 0) + 1
+                (boardWeatherScore.get(weather) ?? 0) + 1
+              )
+              playerWeatherScore.set(
+                weather,
+                (playerWeatherScore.get(weather) ?? 0) + 1
               )
             }
           })
         }
       })
+
+      // apply special weather passives
+      board.forEach((pkm) => {
+        if (pkm.positionY != 0) {
+          if (pkm.passive === Passive.CASTFORM) {
+            const dominant = getDominantWeather(playerWeatherScore, [
+              Weather.SUN,
+              Weather.RAIN,
+              Weather.SNOW
+            ])
+            if (dominant) {
+              boardWeatherScore.set(
+                dominant,
+                (boardWeatherScore.get(dominant) ?? 0) + 100
+              )
+            }
+          }
+          if (pkm.passive === Passive.VOLCANION) {
+            const dominant = getDominantWeather(playerWeatherScore, [
+              Weather.SUN,
+              Weather.RAIN
+            ])
+            if (dominant) {
+              boardWeatherScore.set(
+                dominant,
+                (boardWeatherScore.get(dominant) ?? 0) + 100
+              )
+            }
+          }
+        }
+      })
     })
 
+    //logger.debug("boardWeatherScore", boardWeatherScore)
     const MIN_THRESHOLD = 8
-    const entries = [...countPerWeather.entries()].sort((a, b) => b[1] - a[1])
-    if (entries.length === 0 || entries[0][1] < MIN_THRESHOLD)
-      return Weather.NEUTRAL
-    if (entries.length >= 2 && entries[0][1] === entries[1][1]) {
-      return Weather.NEUTRAL
+    const dominantWeather = getDominantWeather(boardWeatherScore)
+    if (
+      dominantWeather &&
+      boardWeatherScore.get(dominantWeather)! >= MIN_THRESHOLD
+    ) {
+      return dominantWeather
     }
-    return entries[0][0]
+    return Weather.NEUTRAL
   }
 
   update(dt: number) {

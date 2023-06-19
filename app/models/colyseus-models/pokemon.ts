@@ -7021,7 +7021,7 @@ export class Volcanion extends Pokemon {
       emotion,
       true,
       false,
-      Passive.RAIN
+      Passive.VOLCANION
     )
   }
 }
