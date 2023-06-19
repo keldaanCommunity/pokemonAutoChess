@@ -27,6 +27,6 @@ export enum Passive {
   STORM = "STORM",
   NIGHT = "NIGHT",
   WINDY = "WINDY",
-  WURMPLE = "WURMPLE",
-  VOLCANION = "VOLCANION"
+  AIRLOCK = "AIRLOCK",
+  WURMPLE = "WURMPLE"
 }
