@@ -403,7 +403,7 @@ export class IllusionStrategy extends AttackStrategy {
     if (target) {
       pokemon.index = target.index
       pokemon.atk = Math.max(pokemon.atk, target.atk)
-      pokemon.range = target.range
+      pokemon.range = target.range + (pokemon.items.has(Item.WIDE_LENS) ? 2 : 0)
       pokemon.def = Math.max(pokemon.def, target.def)
       pokemon.speDef = Math.max(pokemon.speDef, target.speDef)
     }
