@@ -1094,8 +1094,8 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.FREEZE]: {
-    eng: `${Status.FREEZE} the whole enemy team for [1,2,4] seconds`,
-    esp: `Congela todo el equipo durante 1,2,4 segundos`,
+    eng: `${Status.FREEZE} the whole enemy team for [1,2,3] seconds`,
+    esp: `Congela todo el equipo durante 1,2,3 segundos`,
     fra: `Gèle la cible durant 1,2,4 secondes`,
     prt: ``
   },

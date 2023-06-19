@@ -9,11 +9,11 @@ import { Synergy } from "../types/enum/Synergy"
 import { AbilityStrategy, Ability } from "../types/enum/Ability"
 import PokemonFactory from "../models/pokemon-factory"
 import { Pkm } from "../types/enum/Pokemon"
-import { pickRandomIn, shuffleArray } from "../utils/random"
+import { chance, pickRandomIn, shuffleArray } from "../utils/random"
 import { effectInLine, OrientationArray } from "../utils/orientation"
 import { logger } from "../utils/logger"
 import { DEFAULT_ATK_SPEED } from "../types/Config"
-import { min } from "../utils/number"
+import { max, min } from "../utils/number"
 
 export class AttackStrategy {
   process(
@@ -2121,7 +2121,7 @@ export class FreezeStrategy extends AttackStrategy {
       timer = 2000
     }
     if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
-      timer = 4000
+      timer = 3000
     }
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value && pokemon.team != value.team) {
