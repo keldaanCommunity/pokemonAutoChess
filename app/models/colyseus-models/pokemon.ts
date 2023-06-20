@@ -6360,8 +6360,7 @@ export class Moltres extends Pokemon {
       shiny,
       emotion,
       true,
-      false,
-      Passive.SUN
+      false
     )
   }
 }
@@ -7020,8 +7019,7 @@ export class Volcanion extends Pokemon {
       shiny,
       emotion,
       true,
-      false,
-      Passive.VOLCANION
+      false
     )
   }
 }
@@ -7805,8 +7803,7 @@ export class Reshiram extends Pokemon {
       shiny,
       emotion,
       true,
-      false,
-      Passive.SUN
+      false
     )
   }
 }
@@ -7830,8 +7827,7 @@ export class Zekrom extends Pokemon {
       shiny,
       emotion,
       true,
-      false,
-      Passive.STORM
+      false
     )
   }
 }
@@ -8142,7 +8138,7 @@ export class MegaRayquaza extends Pokemon {
       emotion,
       true,
       false,
-      Passive.STORM
+      Passive.AIRLOCK
     )
   }
 }

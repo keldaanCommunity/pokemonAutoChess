@@ -33,6 +33,9 @@ Emotes communication between players ingame
 - Nerf Spiritomb: range 3 → 2
 - Castform & Volcanion now change weather depending on your dominant synergy
 - Buff Gible: move from Epic to Rare
+- Castform now change weather depending on your dominant synergy
+- Remove weather passive from Moltres, Reshiram, Zekrom, Volcanion
+- Change weather passive of Mega-Rayquaza
 
 # Changes to Synergies
 

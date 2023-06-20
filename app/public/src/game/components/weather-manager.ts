@@ -1,5 +1,4 @@
 import Phaser from "phaser"
-import { logger } from "../../../../utils/logger"
 
 export default class WeatherManager {
   scene: Phaser.Scene
@@ -7,8 +6,6 @@ export default class WeatherManager {
   colorFilter: Phaser.GameObjects.Rectangle | undefined
   particlesEmitters: Phaser.GameObjects.Particles.ParticleEmitter[]
   image: Phaser.GameObjects.Image | undefined
-  fx: Phaser.FX.Displacement | undefined
-  fxTween: Phaser.Tweens.Tween | undefined
 
   constructor(scene: Phaser.Scene) {
     this.scene = scene
@@ -189,7 +186,7 @@ export default class WeatherManager {
         2000,
         1000,
         0x141346,
-        0.7
+        0.6
       ).setDepth(8)
     )
   }
@@ -198,16 +195,6 @@ export default class WeatherManager {
     const leftScreenSource = { x: { min: 0, max: 100 }, y: { min: 0, max: 1000 } }
     const deathZoneSource = new Phaser.Geom.Rectangle(0, 0, 2000, 4000)
 
-    this.fx = this.scene.cameras.main.postFX!.addDisplacement(undefined, -0.008, -0.002);
-    this.fxTween = this.scene.tweens.add({
-      targets: this.fx,
-      x: +0.008,
-      y: +0.002,
-      yoyo: true,
-      loop: -1,
-      duration: 1500,
-      ease: 'sine.inout'
-    });
     this.particlesEmitters.push(
       this.scene.add.particles(0, 0, "wind", {
         ...leftScreenSource,
@@ -237,7 +224,7 @@ export default class WeatherManager {
         .setScale(2, 2)
         .setOrigin(0.5)
         .setDepth(8)
-        .setAlpha(0.5)
+        .setAlpha(0.4)
     )
     this.colorFilter = this.scene.add.existing(
       new Phaser.GameObjects.Rectangle(
@@ -313,16 +300,6 @@ export default class WeatherManager {
         tint: 0xa0a0a0
       })
     )
-
-    this.fx = this.scene.cameras.main.postFX.addDisplacement(undefined, 0, -0.002);
-    this.fxTween = this.scene.tweens.add({
-      targets: this.fx,
-      y: +0.002,
-      yoyo: true,
-      loop: -1,
-      duration: 800,
-      ease: Phaser.Math.Easing.Quadratic.InOut
-    });
   }
 
   clearWeather() {
@@ -334,14 +311,5 @@ export default class WeatherManager {
     if (this.image) {
       this.image.destroy()
     }
-    if(this.fx){
-      this.fx.x=0
-      this.fx.y=0
-      this.fx.destroy();
-    }
-    if(this.fxTween){
-      this.fxTween.destroy();
-    }
-    this.scene.cameras.main.postFX.clear()
   }
 }

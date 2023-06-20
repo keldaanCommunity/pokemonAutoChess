@@ -1,4 +1,3 @@
-import { get } from "http"
 import React, { useState } from "react"
 import ReactTooltip from "react-tooltip"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
@@ -106,6 +105,9 @@ function getPokemonsInfluencingWeather(weather: Weather) {
       (pkm) =>
         pkm.skill != Ability.DEFAULT &&
         pkm.passive != null &&
-        pkm.passive === PassiveAssociatedToWeather.get(weather)
+        (pkm.passive === PassiveAssociatedToWeather.get(weather)
+        || (pkm.name === Pkm.CASTFORM_SUN && weather === Weather.SUN)
+        || (pkm.name === Pkm.CASTFORM_RAIN && weather === Weather.RAIN)
+        || (pkm.name === Pkm.CASTFORM_HAIL && weather === Weather.SNOW))
     )
 }

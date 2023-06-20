@@ -1077,18 +1077,6 @@ export default class Simulation extends Schema implements ISimulation {
               )
             }
           }
-          if (pkm.passive === Passive.VOLCANION) {
-            const dominant = getDominantWeather(playerWeatherScore, [
-              Weather.SUN,
-              Weather.RAIN
-            ])
-            if (dominant) {
-              boardWeatherScore.set(
-                dominant,
-                (boardWeatherScore.get(dominant) ?? 0) + 100
-              )
-            }
-          }
         }
       })
     })

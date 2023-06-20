@@ -9,8 +9,7 @@ export const PassiveDescription: { [key in Passive]: string } = {
   [Passive.TYROGUE]: `Will choose a combat discipline based on the first item given`,
   [Passive.PROTEAN2]: `The pokemon acquires the typing of the 2 highest synergies on the team`,
   [Passive.PROTEAN3]: `The pokemon acquires the typing of the 3 highest synergies on the team`,
-  [Passive.CASTFORM]: `Castform changes its form and the weather to ${Weather.SUN}, ${Weather.RAIN} or ${Weather.SNOW} depending on your dominant synergy between ${Synergy.FIRE} ${Synergy.WATER} ${Synergy.ICE}`,
-  [Passive.VOLCANION]: `Volcanion can change the weather to ${Weather.SUN} or ${Weather.RAIN} depending on your dominant synergy between ${Synergy.FIRE} ${Synergy.WATER}`,
+  [Passive.CASTFORM]: `Castform changes its form and the weather to ${Weather.SUN}, ${Weather.RAIN} or ${Weather.SNOW} depending on your dominant synergy between ${Synergy.FIRE} ${Synergy.WATER} ${Synergy.ICE}`,  
   [Passive.PHIONE]: `Phione is looking for an Aqua Egg`,
   [Passive.PRIMAL]: `Legend has it that you could unleash the ancient powers of these pokemons`,
   [Passive.WONDER_GUARD]: `Reduce received damage and received healing to 1`,
@@ -34,5 +33,6 @@ export const PassiveDescription: { [key in Passive]: string } = {
   [Passive.STORM]: `Change weather to ${Weather.STORM}`,
   [Passive.NIGHT]: `Change weather to ${Weather.NIGHT}`,
   [Passive.WINDY]: `Change weather to ${Weather.WINDY}`,
+  [Passive.AIRLOCK]: `Neutralize weather effects, getting back to ${Weather.NEUTRAL}`,
   [Passive.WURMPLE]: `Wurmple can evolve into Silcoon or Cascoon, depending on the weather at previous stage`,
 }
