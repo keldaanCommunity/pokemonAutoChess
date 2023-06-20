@@ -60,7 +60,7 @@ class GameContainer {
     if (this.game != null) return // prevent initializing twice
     // Create Phaser game
     const config = {
-      type: Phaser.WEBGL,
+      type: Phaser.AUTO,
       width: 2000,
       height: 1000,
       parent: this.div,
