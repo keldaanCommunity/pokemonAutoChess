@@ -32,7 +32,9 @@ Emotes communication between players ingame
 - Buff Cyndaquill line: Cyndaquill: Attack 6 → 7 ; Quilava: Attack 11 → 13 ; Typlosion HP 230 → 250, Attack 21 → 25
 - Buff Overheat: 20 → 30 special damage
 - Nerf Spiritomb: range 3 → 2
-- Castform & Volcanion now change weather depending on your dominant synergy
+- Castform now change weather depending on your dominant synergy
+- Remove weather passive from Moltres, Reshiram, Zekrom, Volcanion
+- Change weather passive of Mega-Rayquaza
 
 # Changes to Synergies
 
