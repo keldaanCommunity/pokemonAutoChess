@@ -908,7 +908,7 @@ export class Gible extends Pokemon {
     super(
       Pkm.GIBLE,
       [Synergy.DRAGON, Synergy.GROUND, Synergy.MONSTER],
-      Rarity.EPIC,
+      Rarity.RARE,
       Pkm.GABITE,
       100,
       6,
@@ -931,7 +931,7 @@ export class Gabite extends Pokemon {
     super(
       Pkm.GABITE,
       [Synergy.DRAGON, Synergy.GROUND, Synergy.MONSTER],
-      Rarity.EPIC,
+      Rarity.RARE,
       Pkm.GARCHOMP,
       160,
       14,
@@ -954,7 +954,7 @@ export class Garchomp extends Pokemon {
     super(
       Pkm.GARCHOMP,
       [Synergy.DRAGON, Synergy.GROUND, Synergy.MONSTER],
-      Rarity.EPIC,
+      Rarity.RARE,
       Pkm.DEFAULT,
       260,
       32,
@@ -13270,6 +13270,75 @@ export class Dustox extends Pokemon {
       emotion,
       false,
       false
+    )
+  }
+}
+
+export class Tinkatink extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.TINKATINK,
+      [Synergy.STEEL, Synergy.FAIRY],
+      Rarity.EPIC,
+      Pkm.TINKATUFF,
+      100,
+      7,
+      3,
+      3,
+      1,
+      AttackSprite.FAIRY_MELEE,
+      1,
+      150,
+      Ability.GIGATON_HAMMER,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class Tinkatuff extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.TINKATUFF,
+      [Synergy.STEEL, Synergy.FAIRY],
+      Rarity.EPIC,
+      Pkm.TINKATON,
+      200,
+      14,
+      4,
+      4,
+      1,
+      AttackSprite.FAIRY_MELEE,
+      2,
+      150,
+      Ability.GIGATON_HAMMER,
+      shiny,
+      emotion,
+      false
+    )
+  }
+}
+
+export class Tinkaton extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.TINKATON,
+      [Synergy.STEEL, Synergy.FAIRY],
+      Rarity.EPIC,
+      Pkm.DEFAULT,
+      300,
+      30,
+      8,
+      8,
+      1,
+      AttackSprite.FAIRY_MELEE,
+      3,
+      150,
+      Ability.GIGATON_HAMMER,
+      shiny,
+      emotion,
+      true
     )
   }
 }

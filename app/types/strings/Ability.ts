@@ -921,6 +921,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.GIGATON_HAMMER]: {
+    eng: "Gigaton Hammer",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1835,13 +1841,19 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     fra: ""
   },
   [Ability.POISON_POWDER]: {
-    eng: `Dash into the enemy backline, dealing [30,60,120,SP] and applying ${Status.POISON} for 5 seconds to every enemy on the path.`,
+    eng: `Dash into the enemy backline, dealing [30,60,120,SP] and applying ${Status.POISON} for 5 seconds to every enemy on the path`,
     esp: "",
     prt: "",
     fra: ""
   },
   [Ability.ICY_WIND]: {
     eng: `Deals [30,60,120,SP] ${Damage.SPECIAL} and decrease target ${Stat.ATK_SPEED} by [10,20,40]%`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.GIGATON_HAMMER]: {
+    eng: `Deals [100,200,400,SP] ${Damage.SPECIAL} but ${Status.SILENCE} itself for 6 seconds`,
     esp: "",
     prt: "",
     fra: ""

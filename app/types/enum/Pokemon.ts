@@ -565,6 +565,9 @@ export enum Pkm {
   BEAUTIFLY = "beautifly",
   CASCOON = "cascoon",
   DUSTOX = "dustox",
+  TINKATINK = "tinkatink",
+  TINKATUFF = "tinkatuff",
+  TINKATON = "tinkaton"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1132,6 +1135,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.BEAUTIFLY]: "0267",
   [Pkm.CASCOON]: "0268",
   [Pkm.DUSTOX]: "0269",
+  [Pkm.TINKATINK]: "0957",
+  [Pkm.TINKATUFF]: "0958",
+  [Pkm.TINKATON]: "0959"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1699,6 +1705,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.BEAUTIFLY]: Pkm.WURMPLE,
   [Pkm.CASCOON]: Pkm.WURMPLE,
   [Pkm.DUSTOX]: Pkm.WURMPLE,
+  [Pkm.TINKATINK]: Pkm.TINKATINK,
+  [Pkm.TINKATUFF]: Pkm.TINKATINK,
+  [Pkm.TINKATON]: Pkm.TINKATINK
 }
 
 export const AnimationConfig: {
@@ -3960,4 +3969,16 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.FlapAround
   },
+  [Pkm.TINKATINK]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Charge
+  },
+  [Pkm.TINKATUFF]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Charge
+  },
+  [Pkm.TINKATON]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Twirl
+  }
 }

@@ -15,14 +15,13 @@ Tournament info & pantheon in the game ?
 Show player avatars on the side of the board
 Emotes communication between players ingame
 
-
 ---
 
 ## full changelog
 
 # New Pokemons:
 
-- 
+- Tinkatin/Tinkatuff/Tinkaton
 
 # Changes to Pokemon / Abilities
 
@@ -33,6 +32,7 @@ Emotes communication between players ingame
 - Buff Overheat: 20 → 30 special damage
 - Nerf Spiritomb: range 3 → 2
 - Castform & Volcanion now change weather depending on your dominant synergy
+- Buff Gible: move from Epic to Rare
 
 # Changes to Synergies
 
@@ -45,12 +45,12 @@ Emotes communication between players ingame
 
 # Bugfix
 
-- 
+-
 
 # UI
 
-- 
+-
 
 # Misc
 
-- 
+-
