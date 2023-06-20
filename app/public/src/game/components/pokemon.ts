@@ -340,12 +340,14 @@ export default class Pokemon extends DraggableObject {
     }
   }
 
-  drawCircles(){
+  drawCircles() {
     const scene = this.scene as GameScene
     const currentPlayerId = scene.uid
     this.circleHitbox = new GameObjects.Ellipse(scene, 0, 0, 50, 50)
     this.add(this.circleHitbox)
-    this.circleHitbox.setVisible(scene.room?.state.phase === GamePhaseState.MINIGAME)
+    this.circleHitbox.setVisible(
+      scene.room?.state.phase === GamePhaseState.MINIGAME
+    )
     this.circlePartial = new GameObjects.Graphics(scene)
     this.add(this.circlePartial)
     this.isCurrentPlayerAvatar = this.playerId === currentPlayerId
@@ -377,7 +379,7 @@ export default class Pokemon extends DraggableObject {
     }
   }
 
-  updateCircleLife(life: number){
+  updateCircleLife(life: number) {
     this.circlePartial.clear()
     this.circlePartial.lineStyle(
       8,
@@ -386,7 +388,7 @@ export default class Pokemon extends DraggableObject {
     )
     this.circlePartial.beginPath()
 
-    const angle = Math.PI * 2 * max(100)(life) / 100
+    const angle = (Math.PI * 2 * max(100)(life)) / 100
     this.circlePartial.arc(0, 0, 30, 0, angle)
     this.circlePartial.strokePath()
   }
@@ -2418,6 +2420,25 @@ export default class Pokemon extends DraggableObject {
             specialProjectile.setDepth(7)
             specialProjectile.setScale(2, 2)
             specialProjectile.anims.play(Ability.APPLE_ACID)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
+
+          case Ability.GIGATON_HAMMER:
+            coordinates = transformAttackCoordinate(this.targetX, this.targetY)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.GIGATON_HAMMER,
+              "000"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.GIGATON_HAMMER)
             specialProjectile.once(
               Phaser.Animations.Events.ANIMATION_COMPLETE,
               () => {

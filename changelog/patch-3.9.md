@@ -15,14 +15,13 @@ Tournament info & pantheon in the game ?
 Show player avatars on the side of the board
 Emotes communication between players ingame
 
-
 ---
 
 ## full changelog
 
 # New Pokemons:
 
-- 
+- Tinkatin/Tinkatuff/Tinkaton
 
 # Changes to Pokemon / Abilities
 
@@ -32,6 +31,8 @@ Emotes communication between players ingame
 - Buff Cyndaquill line: Cyndaquill: Attack 6 → 7 ; Quilava: Attack 11 → 13 ; Typlosion HP 230 → 250, Attack 21 → 25
 - Buff Overheat: 20 → 30 special damage
 - Nerf Spiritomb: range 3 → 2
+- Castform & Volcanion now change weather depending on your dominant synergy
+- Buff Gible: move from Epic to Rare
 - Castform now change weather depending on your dominant synergy
 - Remove weather passive from Moltres, Reshiram, Zekrom, Volcanion
 - Change weather passive of Mega-Rayquaza
@@ -47,12 +48,12 @@ Emotes communication between players ingame
 
 # Bugfix
 
-- 
+-
 
 # UI
 
-- 
+-
 
 # Misc
 
-- 
+-
