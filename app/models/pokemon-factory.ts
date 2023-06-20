@@ -483,6 +483,9 @@ import {
   Tepig,
   Terrakion,
   Thundurus,
+  Tinkatink,
+  Tinkaton,
+  Tinkatuff,
   Tirtouga,
   Togekiss,
   Togepi,
@@ -1920,6 +1923,12 @@ export default class PokemonFactory {
         return new Cascoon(s, e)
       case Pkm.DUSTOX:
         return new Dustox(s, e)
+      case Pkm.TINKATINK:
+        return new Tinkatink(s, e)
+      case Pkm.TINKATUFF:
+        return new Tinkatuff(s, e)
+      case Pkm.TINKATON:
+        return new Tinkaton(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:
