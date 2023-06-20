@@ -397,7 +397,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       this.setMana(this.mana + 8)
     }
     if (this.status.deltaOrb) {
-      this.setMana(this.mana + 3)
+      this.setMana(this.mana + 4)
     }
 
     if (this.effects.includes(Effect.DRAGON_ENERGY)) {
