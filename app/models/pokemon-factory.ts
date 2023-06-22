@@ -347,6 +347,8 @@ import {
   Oshawott,
   Palkia,
   Palpitoad,
+  Paras,
+  Parasect,
   Persian,
   Phione,
   Pichu,
@@ -1929,6 +1931,10 @@ export default class PokemonFactory {
         return new Tinkatuff(s, e)
       case Pkm.TINKATON:
         return new Tinkaton(s, e)
+      case Pkm.PARAS:
+        return new Paras(s, e)
+      case Pkm.PARASECT:
+        return new Parasect(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:
