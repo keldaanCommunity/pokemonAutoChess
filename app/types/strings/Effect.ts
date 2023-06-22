@@ -400,17 +400,17 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.BATTLE_ARMOR]: {
-    eng: `Gain 50 ${Stat.SHIELD}`,
+    eng: `Gain 40 ${Stat.SHIELD}`,
     esp: ``,
     fra: ``
   },
   [Effect.MOUTAIN_RESISTANCE]: {
-    eng: `Gain 100 ${Stat.SHIELD}`,
+    eng: `Gain 80 ${Stat.SHIELD}`,
     esp: ``,
     fra: ``
   },
   [Effect.DIAMOND_STORM]: {
-    eng: `Gain 200 ${Stat.SHIELD}`,
+    eng: `Gain 160 ${Stat.SHIELD}`,
     esp: ``,
     fra: ``
   },
