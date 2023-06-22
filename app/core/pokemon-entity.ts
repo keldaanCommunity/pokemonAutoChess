@@ -576,7 +576,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
         } else if (pokemon.effects.includes(Effect.FAIRY_WIND)) {
           damage = 30
         } else if (pokemon.effects.includes(Effect.STRANGE_STEAM)) {
-          damage = 60
+          damage = 55
         }
         const cells = board.getAdjacentCells(
           pokemon.positionX,
@@ -586,7 +586,13 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
         cells.forEach((cell) => {
           if (cell.value && pokemon.team !== cell.value.team) {
             cell.value.count.fairyCritCount++
-            cell.value.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, false)
+            cell.value.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              false
+            )
           }
         })
 

@@ -43,6 +43,7 @@ Emotes communication between players ingame
 
 - Nerf Human heal: (2) 15% → 10% ; (4) 30% → 25% ; (6): 60% → 50%
 - Fairy splash now acts the same way as any other special damage, that is trigger Pokemonomicon, be absorbed by Rune Protect and be reflected by Power Lens
+- Nerf Fairy, Strange Steam (6): Shocks deal 60 -> 55 special damage
 
 # Changes to Items
 
