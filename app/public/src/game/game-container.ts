@@ -28,7 +28,7 @@ import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
 import { getPortraitSrc } from "../utils"
 import { IPokemonRecord } from "../../../models/colyseus-models/game-record"
 import { Synergy } from "../../../types/enum/Synergy"
-import { AttackType, HealType } from "../../../types/enum/Game"
+import { AttackType, HealType, Orientation } from "../../../types/enum/Game"
 import { Weather } from "../../../types/enum/Weather"
 import store from "../stores"
 import { logger } from "../../../utils/logger"
@@ -36,6 +36,7 @@ import { PokemonAvatar } from "../../../models/colyseus-models/pokemon-avatar"
 import { FloatingItem } from "../../../models/colyseus-models/floating-item"
 import Status from "../../../models/colyseus-models/status"
 import Count from "../../../models/colyseus-models/count"
+import { Ability } from "../../../types/enum/Ability"
 
 class GameContainer {
   room: Room<GameState>
@@ -670,6 +671,30 @@ class GameContainer {
     }
   }
 
+  handleDisplayAbility(message: {
+    id: string
+    skill: Ability
+    orientation: Orientation
+    positionX: number
+    positionY: number
+    targetX?: number
+    targetY?: number
+  }) {
+    if (this.game && this.game.scene && this.game.scene.getScene("gameScene")) {
+      const g = <GameScene>this.game.scene.getScene("gameScene")
+      if (g.battle) {
+        g.battle.displayAbility(
+          message.id,
+          message.skill,
+          message.orientation,
+          message.positionX,
+          message.positionY,
+          message.targetX,
+          message.targetY
+        )
+      }
+    }
+  }
   handleAvatarAdd(avatar: IPokemonAvatar) {
     if (this.game != null && this.game.scene.getScene("gameScene")) {
       const g = <GameScene>this.game.scene.getScene("gameScene")
