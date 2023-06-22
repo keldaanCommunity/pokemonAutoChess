@@ -1166,7 +1166,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.DRACO_METEOR]: {
-    eng: `Area of effect attack that deals [20,SP] ${Damage.SPECIAL} to all enemies`,
+    eng: `Area of effect attack that deals [25,SP] ${Damage.SPECIAL} to all enemies`,
     esp: `Ataque de área de efecto que causa [20,SP] ${Damage.SPECIAL} a todos los enemigos`,
     fra: `Inflige [20,SP] ${Damage.SPECIAL} à tous les pokémons ennemis.`,
     prt: ``

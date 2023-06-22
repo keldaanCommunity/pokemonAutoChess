@@ -38,7 +38,7 @@ import { Passive } from "../types/enum/Passive"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") weather: Weather = Weather.NEUTRAL
-  @type("string") winnerId: string = ""
+  @type("string") winnerId = ""
   @type({ map: PokemonEntity }) blueTeam = new MapSchema<IPokemonEntity>()
   @type({ map: PokemonEntity }) redTeam = new MapSchema<IPokemonEntity>()
   @type({ map: Dps }) blueDpsMeter = new MapSchema<Dps>()
@@ -859,21 +859,21 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.BATTLE_ARMOR:
           if (types.includes(Synergy.ROCK)) {
-            pokemon.handleShield(50, pokemon)
+            pokemon.handleShield(40, pokemon)
             pokemon.effects.push(Effect.BATTLE_ARMOR)
           }
           break
 
         case Effect.MOUTAIN_RESISTANCE:
           if (types.includes(Synergy.ROCK)) {
-            pokemon.handleShield(100, pokemon)
+            pokemon.handleShield(80, pokemon)
             pokemon.effects.push(Effect.MOUTAIN_RESISTANCE)
           }
           break
 
         case Effect.DIAMOND_STORM:
           if (types.includes(Synergy.ROCK)) {
-            pokemon.handleShield(200, pokemon)
+            pokemon.handleShield(160, pokemon)
             pokemon.effects.push(Effect.DIAMOND_STORM)
           }
           break
