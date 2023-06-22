@@ -14,6 +14,7 @@ import { effectInLine, OrientationArray } from "../utils/orientation"
 import { logger } from "../utils/logger"
 import { DEFAULT_ATK_SPEED } from "../types/Config"
 import { max, min } from "../utils/number"
+import { Transfer } from "../types"
 
 export class AttackStrategy {
   process(
@@ -25,6 +26,15 @@ export class AttackStrategy {
   ) {
     pokemon.mana = 0
     pokemon.count.ult += 1
+    pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+      id: pokemon.simulation.id,
+      skill: pokemon.skill,
+      positionX: pokemon.positionX,
+      positionY: pokemon.positionY,
+      targetX: target.positionX,
+      targetY: target.positionY,
+      orientation: pokemon.orientation
+    })
 
     if (pokemon.types.includes(Synergy.SOUND)) {
       pokemon.count.soundCount++
@@ -230,6 +240,13 @@ export class SoftBoiledStrategy extends AttackStrategy {
     }
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team == tg.team) {
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: pokemon.skill,
+          positionX: tg.positionX,
+          positionY: tg.positionX,
+          orientation: pokemon.orientation
+        })
         tg.handleShield(shield, pokemon, true)
         tg.status.clearNegativeStatus()
       }
@@ -1387,6 +1404,13 @@ export class RelicSongStrategy extends AttackStrategy {
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
         tg.status.triggerSleep(duration, tg)
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: pokemon.skill,
+          positionX: tg.positionX,
+          positionY: tg.positionX,
+          orientation: tg.orientation
+        })
       }
     })
   }
@@ -1419,6 +1443,13 @@ export class DisarmingVoiceStrategy extends AttackStrategy {
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team === tg.team && tg.id !== pokemon.id) {
         tg.setMana(tg.mana + heal)
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: pokemon.skill,
+          positionX: tg.positionX,
+          positionY: tg.positionY,
+          orientation: tg.orientation
+        })
       }
     })
   }
@@ -3668,6 +3699,13 @@ export class FakeTearsStrategy extends AttackStrategy {
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value && pokemon.team != value.team) {
         value.status.triggerArmorReduction(3000)
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: pokemon.skill,
+          positionX: value.positionX,
+          positionY: value.positionX,
+          orientation: value.orientation
+        })
         value.handleSpecialDamage(
           damage,
           board,

@@ -136,14 +136,17 @@ export default function Game() {
     if (cachedReconnectionToken) {
       setConnecting(true)
       const statusMessage = document.querySelector("#status-message")
-      if(statusMessage){
+      if (statusMessage) {
         statusMessage.textContent = `Connecting to game...`
       }
 
       client
         .reconnect(cachedReconnectionToken)
         .then((room: Room) => {
-          localStorage.setItem("cachedReconnectionToken", room.reconnectionToken)
+          localStorage.setItem(
+            "cachedReconnectionToken",
+            room.reconnectionToken
+          )
           dispatch(joinGame(room))
           setConnected(true)
           setConnecting(false)
@@ -153,7 +156,7 @@ export default function Game() {
             setTimeout(() => connectToGame(attempts + 1), 1000)
           } else {
             let connectError = error.message
-            if(error.code === 4212){
+            if (error.code === 4212) {
               // room disposed
               connectError = "This game does no longer exist"
             }
@@ -227,7 +230,7 @@ export default function Game() {
     }
 
     if (!connected) {
-      if(!connecting){ 
+      if (!connecting) {
         connect()
       }
     } else if (!initialized && room != undefined && container?.current) {
@@ -276,6 +279,10 @@ export default function Game() {
 
       room.onMessage(Transfer.POKEMON_DAMAGE, (message) => {
         gameContainer.handleDisplayDamage(message)
+      })
+
+      room.onMessage(Transfer.ABILITY, (message) => {
+        gameContainer.handleDisplayAbility(message)
       })
 
       room.onMessage(Transfer.POKEMON_HEAL, (message) => {
@@ -589,7 +596,16 @@ export default function Game() {
         gameContainer.initializeSpectactor(uid)
       })
     }
-  }, [connected, connecting, initialized, room, dispatch, client, uid, currentPlayerId])
+  }, [
+    connected,
+    connecting,
+    initialized,
+    room,
+    dispatch,
+    client,
+    uid,
+    currentPlayerId
+  ])
 
   if (toAuth) {
     return <Navigate to={"/"} />
