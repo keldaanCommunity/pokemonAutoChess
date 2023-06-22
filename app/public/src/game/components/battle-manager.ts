@@ -2172,6 +2172,30 @@ export default class BattleManager {
             })
             break
 
+          case Ability.ACROBATICS:
+            coordinatesTarget = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX + 1, targetY + 1)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.ACROBATICS,
+              "000"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(1.5, 1.5)
+            specialProjectile.anims.play(Ability.ACROBATICS)
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              x: coordinatesTarget[0],
+              y: coordinatesTarget[1],
+              ease: "linear",
+              duration: 300,
+              onComplete: () => {
+                specialProjectile.destroy()
+              }
+            })
+            break
+
           case Ability.PAYDAY:
             coordinates = transformAttackCoordinate(targetX, targetY)
             specialProjectile = this.scene.add.sprite(

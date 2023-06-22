@@ -5708,7 +5708,7 @@ export class Hoppip extends Pokemon {
       AttackSprite.FLYING_RANGE,
       1,
       100,
-      Ability.STUN_SPORE,
+      Ability.ACROBATICS,
       shiny,
       emotion,
       false
@@ -5731,7 +5731,7 @@ export class Skiploom extends Pokemon {
       AttackSprite.FLYING_RANGE,
       2,
       100,
-      Ability.STUN_SPORE,
+      Ability.ACROBATICS,
       shiny,
       emotion,
       false
@@ -5754,7 +5754,7 @@ export class Jumpluff extends Pokemon {
       AttackSprite.FLYING_RANGE,
       3,
       100,
-      Ability.STUN_SPORE,
+      Ability.ACROBATICS,
       shiny,
       emotion,
       true
@@ -8410,7 +8410,7 @@ export class Wobbuffet extends Pokemon {
       [Synergy.PSYCHIC],
       Rarity.COMMON,
       Pkm.DEFAULT,
-      200,
+      250,
       10,
       2,
       2,

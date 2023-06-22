@@ -4534,3 +4534,27 @@ export class GigatonHammerStrategy extends AttackStrategy {
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
+
+export class AcrobaticsStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    let damage = 20
+    let additional = 20
+    if (pokemon.stars === 2) {
+      damage = 40
+      additional = 30
+    }
+    if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
+      damage = 80
+      additional = 20
+    }
+    const total = pokemon.items.size === 0 ? damage + additional : damage
+    target.handleSpecialDamage(total, board, AttackType.SPECIAL, pokemon, crit)
+  }
+}
