@@ -445,7 +445,7 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.STRANGE_STEAM]: {
-    eng: `Shocks deal 60 ${Damage.SPECIAL}`,
+    eng: `Shocks deal 55 ${Damage.SPECIAL}`,
     esp: ``,
     fra: ``
   },
