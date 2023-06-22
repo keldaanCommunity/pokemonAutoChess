@@ -830,6 +830,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.ACROBATICS,
+      frames: this.game.anims.generateFrameNames(Ability.ACROBATICS, {
+        start: 0,
+        end: 3,
+        zeroPad: 3
+      }),
+      duration: 300,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.GIGATON_HAMMER,
       frames: this.game.anims.generateFrameNames(Ability.GIGATON_HAMMER, {
         start: 0,

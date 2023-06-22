@@ -1,0 +1,104 @@
+{
+	"textures": [
+		{
+			"image": "ACROBATICS.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 122,
+				"h": 35
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "000",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 7,
+						"w": 26,
+						"h": 23
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 26,
+						"h": 23
+					}
+				},
+				{
+					"filename": "001",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 29,
+						"y": 1,
+						"w": 32,
+						"h": 32
+					}
+				},
+				{
+					"filename": "002",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 0,
+						"w": 28,
+						"h": 32
+					},
+					"frame": {
+						"x": 63,
+						"y": 1,
+						"w": 28,
+						"h": 32
+					}
+				},
+				{
+					"filename": "003",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 40,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 2,
+						"w": 28,
+						"h": 33
+					},
+					"frame": {
+						"x": 93,
+						"y": 1,
+						"w": 28,
+						"h": 33
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:83fa54fcb6274e351f5191c3ea05a021:c5e01b71f9e30ac89f73103275b54405:00562853457b5e5da9ee046ab7a086d2$"
+	}
+}

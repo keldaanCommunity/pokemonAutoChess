@@ -927,6 +927,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.ACROBATICS]: {
+    eng: "Acrobatics",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1854,6 +1860,12 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
   },
   [Ability.GIGATON_HAMMER]: {
     eng: `Deals [100,200,400,SP] ${Damage.SPECIAL} but ${Status.SILENCE} itself for 6 seconds`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.ACROBATICS]: {
+    eng: `Deals [20,40,80,SP] ${Damage.SPECIAL}. If the caster have no items, deals an extra [20,30,40,SP] ${Damage.SPECIAL}`,
     esp: "",
     prt: "",
     fra: ""

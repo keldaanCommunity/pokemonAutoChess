@@ -36,6 +36,8 @@ Emotes communication between players ingame
 - Castform now change weather depending on your dominant synergy
 - Remove weather passive from Moltres, Reshiram, Zekrom, Volcanion
 - Change weather passive of Mega-Rayquaza
+- New Ability Acrobatics for Hoppip Deals 20/40/80 damage. If the caster have no items, deals an extra 20/30/40 damage
+- Buff Woobuffet hp 200-> 250
 
 # Changes to Synergies
 
