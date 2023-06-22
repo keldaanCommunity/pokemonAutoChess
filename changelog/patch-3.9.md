@@ -38,6 +38,7 @@ Emotes communication between players ingame
 - Change weather passive of Mega-Rayquaza
 - New Ability Acrobatics for Hoppip Deals 20/40/80 damage. If the caster have no items, deals an extra 20/30/40 damage
 - Buff Woobuffet hp 200-> 250
+- Buff Draco Meteor damage 20 -> 25
 
 # Changes to Synergies
 
