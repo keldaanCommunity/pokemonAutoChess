@@ -939,6 +939,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.ROLLOUT]: {
+    eng: "Rollout",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1878,6 +1884,12 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
   },
   [Ability.ABSORB]: {
     eng: `Deals [30,60,120,SP] ${Damage.SPECIAL} and heals [3,6,12,SP] to adjacent allies`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.ROLLOUT]: {
+    eng: `Buff the ${Stat.DEF} by [5,SP] and deals 6x the ${Stat.DEF} as ${Damage.SPECIAL}`,
     esp: "",
     prt: "",
     fra: ""

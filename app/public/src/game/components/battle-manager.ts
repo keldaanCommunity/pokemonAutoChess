@@ -2182,7 +2182,7 @@ export default class BattleManager {
               "000"
             )
             specialProjectile.setDepth(7)
-            specialProjectile.setScale(1.5, 1.5)
+            specialProjectile.setScale(2, 2)
             specialProjectile.anims.play(Ability.ACROBATICS)
             this.scene.tweens.add({
               targets: specialProjectile,
@@ -2190,6 +2190,30 @@ export default class BattleManager {
               y: coordinatesTarget[1],
               ease: "linear",
               duration: 300,
+              onComplete: () => {
+                specialProjectile.destroy()
+              }
+            })
+            break
+
+          case Ability.ROLLOUT:
+            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinatesTarget = transformAttackCoordinate(targetX, targetY)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.ROLLOUT,
+              "000"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.ROLLOUT)
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              x: coordinatesTarget[0],
+              y: coordinatesTarget[1],
+              ease: "linear",
+              duration: 1000,
               onComplete: () => {
                 specialProjectile.destroy()
               }

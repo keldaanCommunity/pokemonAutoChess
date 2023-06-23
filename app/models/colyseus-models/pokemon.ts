@@ -6318,6 +6318,29 @@ export class Zeraora extends Pokemon {
   }
 }
 
+export class Miltank extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.MILTANK,
+      [Synergy.NORMAL, Synergy.FIELD],
+      Rarity.MYTHICAL,
+      Pkm.DEFAULT,
+      250,
+      15,
+      5,
+      5,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      1,
+      90,
+      Ability.ROLLOUT,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
 export class Yveltal extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
