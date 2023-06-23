@@ -8354,6 +8354,54 @@ export class Diancie extends Pokemon {
   }
 }
 
+export class Sunkern extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.SUNKERN,
+      [Synergy.GRASS, Synergy.FIRE, Synergy.FLORA],
+      Rarity.EPIC,
+      Pkm.SUNFLORA,
+      80,
+      8,
+      3,
+      3,
+      2,
+      AttackSprite.FIRE_RANGE,
+      1,
+      100,
+      Ability.SOLAR_BEAM,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Sunflora extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.SUNFLORA,
+      [Synergy.GRASS, Synergy.FIRE, Synergy.FLORA],
+      Rarity.EPIC,
+      Pkm.DEFAULT,
+      160,
+      14,
+      5,
+      5,
+      2,
+      AttackSprite.FIRE_RANGE,
+      2,
+      100,
+      Ability.SOLAR_BEAM,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
 export class Mankey extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(

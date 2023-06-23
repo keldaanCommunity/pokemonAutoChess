@@ -472,6 +472,8 @@ import {
   Steenee,
   Sudowoodo,
   Suicune,
+  Sunflora,
+  Sunkern,
   Swablu,
   Swadloon,
   Swampert,
@@ -1944,6 +1946,10 @@ export default class PokemonFactory {
         return new Mankey(s, e)
       case Pkm.PRIMEAPE:
         return new Primeape(s, e)
+      case Pkm.SUNKERN:
+        return new Sunkern(s, e)
+      case Pkm.SUNFLORA:
+        return new Sunflora(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:

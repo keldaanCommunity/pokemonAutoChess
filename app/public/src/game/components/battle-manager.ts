@@ -1200,6 +1200,31 @@ export default class BattleManager {
             })
             break
 
+          case Ability.SOLAR_BEAM:
+            coordinatesTarget = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY - 3)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.SOLAR_BEAM,
+              "000"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.SOLAR_BEAM)
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              x: coordinatesTarget[0],
+              y: coordinatesTarget[1],
+              ease: "linear",
+              yoyo: false,
+              duration: 500,
+              onComplete: () => {
+                specialProjectile.destroy()
+              }
+            })
+            break
+
           case Ability.ORIGIN_PULSE:
             coordinatesTarget = transformAttackCoordinate(0, targetY)
             coordinates = transformAttackCoordinate(8, targetY)

@@ -572,7 +572,9 @@ export enum Pkm {
   PARASECT = "parasect",
   MILTANK = "miltank",
   MANKEY = "mankey",
-  PRIMEAPE = "primeape"
+  PRIMEAPE = "primeape",
+  SUNKERN = "sunkern",
+  SUNFLORA = "sunflora"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1147,7 +1149,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.PARASECT]: "0047",
   [Pkm.MILTANK]: "0241",
   [Pkm.MANKEY]: "0056",
-  [Pkm.PRIMEAPE]: "0057"
+  [Pkm.PRIMEAPE]: "0057",
+  [Pkm.SUNKERN]: "0191",
+  [Pkm.SUNFLORA]: "0192"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1722,7 +1726,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.PARASECT]: Pkm.PARAS,
   [Pkm.MILTANK]: Pkm.MILTANK,
   [Pkm.MANKEY]: Pkm.MANKEY,
-  [Pkm.PRIMEAPE]: Pkm.MANKEY
+  [Pkm.PRIMEAPE]: Pkm.MANKEY,
+  [Pkm.SUNKERN]: Pkm.SUNKERN,
+  [Pkm.SUNFLORA]: Pkm.SUNKERN
 }
 
 export const AnimationConfig: {
@@ -4015,5 +4021,13 @@ export const AnimationConfig: {
   [Pkm.PRIMEAPE]: {
     attack: AnimationType.MultiStrike,
     ability: AnimationType.Charge
+  },
+  [Pkm.SUNKERN]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Attack
+  },
+  [Pkm.SUNFLORA]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Attack
   }
 }
