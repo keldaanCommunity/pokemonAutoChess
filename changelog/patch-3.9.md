@@ -2,7 +2,7 @@
 patch announcement
 ---
 
-> June,
+> June, 30th
 
 # Patch 3.9: Duality
 
@@ -24,6 +24,7 @@ Emotes communication between players ingame
 - Tinkatin/Tinkatuff/Tinkaton
 - Paras/Parasect
 - Miltank
+- Mankey/Primeape
 
 # Changes to Pokemon / Abilities
 

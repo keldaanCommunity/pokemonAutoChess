@@ -4609,3 +4609,17 @@ export class RolloutStrategy extends AttackStrategy {
     )
   }
 }
+
+export class ThrashStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    pokemon.addAttack(Math.ceil(1.1 * pokemon.baseAtk), false)
+    pokemon.status.triggerConfusion(3000, pokemon)
+  }
+}

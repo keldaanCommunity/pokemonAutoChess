@@ -945,6 +945,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.THRASH]: {
+    eng: "Thrash",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1890,6 +1896,12 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
   },
   [Ability.ROLLOUT]: {
     eng: `Buff the ${Stat.DEF} by [5,SP] and deals 6x the ${Stat.DEF} as ${Damage.SPECIAL}`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.THRASH]: {
+    eng: `Buff ${Stat.ATK} by 110% and become ${Status.CONFUSION} for 3s`,
     esp: "",
     prt: "",
     fra: ""
