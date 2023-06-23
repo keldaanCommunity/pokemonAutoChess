@@ -2482,6 +2482,38 @@ export class HydroPumpStrategy extends AttackStrategy {
   }
 }
 
+export class SolarBeamStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    let damage = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30
+    if (pokemon.simulation.weather === Weather.SUN) {
+      damage = damage * 2
+      pokemon.setMana(pokemon.mana + 40)
+    }
+    effectInLine(board, pokemon, target, (targetInLine) => {
+      if (targetInLine != null && targetInLine.team !== pokemon.team) {
+        if(pokemon.simulation.weather === Weather.SUN){
+          targetInLine.status.triggerBurn(3000, targetInLine, pokemon, board)
+        }
+
+        targetInLine.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
+    })
+  }
+}
+
 export class ThunderStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
