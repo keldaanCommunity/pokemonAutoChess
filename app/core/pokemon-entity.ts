@@ -536,7 +536,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     if (target.status.spikeArmor && this.range === 1) {
       this.status.triggerWound(2000, this, target, board)
       this.handleDamage({
-        damage: target.def,
+        damage: Math.round(target.def * (1 + target.ap / 100)),
         board,
         attackType: AttackType.SPECIAL,
         attacker: target,
