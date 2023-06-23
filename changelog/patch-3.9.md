@@ -25,6 +25,7 @@ Emotes communication between players ingame
 - Paras/Parasect
 - Miltank
 - Mankey/Primeape
+- Sunkern/Sunflora
 
 # Changes to Pokemon / Abilities
 

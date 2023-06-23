@@ -156,7 +156,8 @@ import {
   AcrobaticsStrategy,
   AbsorbStrategy,
   RolloutStrategy,
-  ThrashStrategy
+  ThrashStrategy,
+  SolarBeamStrategy
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -317,7 +318,8 @@ export enum Ability {
   ACROBATICS = "ACROBATICS",
   ABSORB = "ABSORB",
   ROLLOUT = "ROLLOUT",
-  THRASH = "THRASH"
+  THRASH = "THRASH",
+  SOLAR_BEAM = "SOLAR_BEAM"
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -478,5 +480,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.ACROBATICS]: new AcrobaticsStrategy(),
   [Ability.ABSORB]: new AbsorbStrategy(),
   [Ability.ROLLOUT]: new RolloutStrategy(),
-  [Ability.THRASH]: new ThrashStrategy()
+  [Ability.THRASH]: new ThrashStrategy(),
+  [Ability.SOLAR_BEAM]: new SolarBeamStrategy()
 }

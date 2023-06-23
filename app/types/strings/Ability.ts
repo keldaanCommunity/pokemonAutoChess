@@ -2,6 +2,7 @@ import { Langage } from ".."
 import { Ability } from "../enum/Ability"
 import { Damage, Stat } from "../enum/Game"
 import { Status } from "../enum/Status"
+import { Weather } from "../enum/Weather"
 
 export const AbilityName: { [key in Ability]: Langage } = {
   [Ability.SOFT_BOILED]: {
@@ -948,6 +949,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
   },
   [Ability.THRASH]: {
     eng: "Thrash",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.SOLAR_BEAM]: {
+    eng: "Solar Beam",
     esp: "",
     prt: "",
     fra: ""
@@ -1902,6 +1909,12 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
   },
   [Ability.THRASH]: {
     eng: `Buff ${Stat.ATK} by 110% and become ${Status.CONFUSION} for 3s`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.SOLAR_BEAM]: {
+    eng: `Deals [30,60,120,SP] ${Damage.SPECIAL} in a straight line behind the target. If the weather is sunny, targets are ${Status.BURN} for 3s and restores 40 ${Stat.MANA}`,
     esp: "",
     prt: "",
     fra: ""

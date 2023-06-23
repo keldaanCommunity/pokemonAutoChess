@@ -830,6 +830,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.SOLAR_BEAM,
+      frames: this.game.anims.generateFrameNames(Ability.SOLAR_BEAM, {
+        start: 0,
+        end: 3,
+        zeroPad: 3
+      }),
+      duration: 120,
+      repeat: 4
+    })
+
+    this.game.anims.create({
       key: Ability.THRASH,
       frames: this.game.anims.generateFrameNames(Ability.THRASH, {
         start: 0,
