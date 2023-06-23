@@ -9884,6 +9884,55 @@ export class Galvantula extends Pokemon {
     )
   }
 }
+
+export class Paras extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.PARAS,
+      [Synergy.BUG, Synergy.POISON, Synergy.GRASS],
+      Rarity.RARE,
+      Pkm.PARASECT,
+      90,
+      9,
+      1,
+      1,
+      1,
+      AttackSprite.BUG_MELEE,
+      1,
+      110,
+      Ability.ABSORB,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Parasect extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.PARASECT,
+      [Synergy.BUG, Synergy.POISON, Synergy.GRASS],
+      Rarity.RARE,
+      Pkm.DEFAULT,
+      110,
+      16,
+      2,
+      2,
+      1,
+      AttackSprite.BUG_MELEE,
+      2,
+      110,
+      Ability.ABSORB,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
 export class Corphish extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(

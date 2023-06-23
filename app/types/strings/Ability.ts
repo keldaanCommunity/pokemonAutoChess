@@ -933,6 +933,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.ABSORB]: {
+    eng: "Absorb",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1866,6 +1872,12 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
   },
   [Ability.ACROBATICS]: {
     eng: `Deals [20,40,80,SP] ${Damage.SPECIAL}. If the caster have no items, deals an extra [20,30,40,SP] ${Damage.SPECIAL}`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.ABSORB]: {
+    eng: `Deals [30,60,120,SP] ${Damage.SPECIAL} and heals [3,6,12,SP] to adjacent allies`,
     esp: "",
     prt: "",
     fra: ""
