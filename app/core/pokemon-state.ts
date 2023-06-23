@@ -486,8 +486,27 @@ export default class PokemonState {
             pokemon.addAttack(3)
           }
         }
+      }
+    }
+
+    if (
+      pokemon.effects.includes(Effect.INGRAIN) ||
+      pokemon.effects.includes(Effect.GROWTH) ||
+      pokemon.effects.includes(Effect.SPORE)
+    ) {
+      if (pokemon.grassHealCooldown - dt <= 0) {
+        let heal = pokemon.effects.includes(Effect.SPORE)
+          ? 18
+          : pokemon.effects.includes(Effect.GROWTH)
+          ? 10
+          : 5
+          if(pokemon.effects.includes(Effect.HYDRATATION) && pokemon.simulation.weather === Weather.RAIN){
+            heal += 5
+          }
+          pokemon.handleHeal(heal, pokemon, 0)
+          pokemon.grassHealCooldown = 1000
       } else {
-        pokemon.growGroundTimer = 3000
+        pokemon.grassHealCooldown = pokemon.grassHealCooldown - dt
       }
     }
 

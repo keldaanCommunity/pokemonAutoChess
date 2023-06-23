@@ -47,7 +47,6 @@ export default class Status extends Schema implements IStatus {
   paralysisCooldown = 0
   armorReductionCooldown = 0
   runeProtectCooldown = 0
-  grassCooldown = 1000
   spikeArmorCooldown = 0
   synchroCooldown = 3000
   synchro = false
@@ -66,14 +65,6 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateAllStatus(dt: number, pokemon: PokemonEntity, board: Board) {
-    if (
-      pokemon.effects.includes(Effect.INGRAIN) ||
-      pokemon.effects.includes(Effect.GROWTH) ||
-      pokemon.effects.includes(Effect.SPORE)
-    ) {
-      this.updateGrassHeal(dt, pokemon)
-    }
-
     if (pokemon.status.runeProtect) {
       this.updateRuneProtect(dt)
     }
@@ -147,20 +138,6 @@ export default class Status extends Schema implements IStatus {
       this.armorReduction = false
     } else {
       this.armorReductionCooldown = this.armorReductionCooldown - dt
-    }
-  }
-
-  updateGrassHeal(dt: number, pkm: PokemonEntity) {
-    if (this.grassCooldown - dt <= 0) {
-      const heal = pkm.effects.includes(Effect.SPORE)
-        ? 18
-        : pkm.effects.includes(Effect.GROWTH)
-        ? 10
-        : 5
-      pkm.handleHeal(heal, pkm, 0)
-      this.grassCooldown = 1000
-    } else {
-      this.grassCooldown = this.grassCooldown - dt
     }
   }
 
