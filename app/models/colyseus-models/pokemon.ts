@@ -8354,6 +8354,54 @@ export class Diancie extends Pokemon {
   }
 }
 
+export class Mankey extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.MANKEY,
+      [Synergy.FIGHTING, Synergy.FIELD],
+      Rarity.EPIC,
+      Pkm.PRIMEAPE,
+      100,
+      8,
+      3,
+      2,
+      1,
+      AttackSprite.FIGHTING_MELEE,
+      1,
+      90,
+      Ability.THRASH,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Primeape extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.PRIMEAPE,
+      [Synergy.FIGHTING, Synergy.FIELD],
+      Rarity.EPIC,
+      Pkm.DEFAULT,
+      200,
+      21,
+      6,
+      2,
+      1,
+      AttackSprite.FIGHTING_MELEE,
+      2,
+      90,
+      Ability.THRASH,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
 export class Anorith extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(

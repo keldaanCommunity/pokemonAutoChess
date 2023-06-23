@@ -570,7 +570,9 @@ export enum Pkm {
   TINKATON = "tinkaton",
   PARAS = "paras",
   PARASECT = "parasect",
-  MILTANK = "miltank"
+  MILTANK = "miltank",
+  MANKEY = "mankey",
+  PRIMEAPE = "primeape"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1143,7 +1145,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.TINKATON]: "0959",
   [Pkm.PARAS]: "0046",
   [Pkm.PARASECT]: "0047",
-  [Pkm.MILTANK]: "0241"
+  [Pkm.MILTANK]: "0241",
+  [Pkm.MANKEY]: "0056",
+  [Pkm.PRIMEAPE]: "0057"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1716,7 +1720,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.TINKATON]: Pkm.TINKATINK,
   [Pkm.PARAS]: Pkm.PARAS,
   [Pkm.PARASECT]: Pkm.PARAS,
-  [Pkm.MILTANK]: Pkm.MILTANK
+  [Pkm.MILTANK]: Pkm.MILTANK,
+  [Pkm.MANKEY]: Pkm.MANKEY,
+  [Pkm.PRIMEAPE]: Pkm.MANKEY
 }
 
 export const AnimationConfig: {
@@ -4001,5 +4007,13 @@ export const AnimationConfig: {
   [Pkm.MILTANK]: {
     attack: AnimationType.Stomp,
     ability: AnimationType.Attack
+  },
+  [Pkm.MANKEY]: {
+    attack: AnimationType.MultiStrike,
+    ability: AnimationType.Charge
+  },
+  [Pkm.PRIMEAPE]: {
+    attack: AnimationType.MultiStrike,
+    ability: AnimationType.Charge
   }
 }
