@@ -574,7 +574,8 @@ export enum Pkm {
   MANKEY = "mankey",
   PRIMEAPE = "primeape",
   SUNKERN = "sunkern",
-  SUNFLORA = "sunflora"
+  SUNFLORA = "sunflora",
+  MARACTUS = "maractus"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1151,7 +1152,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.MANKEY]: "0056",
   [Pkm.PRIMEAPE]: "0057",
   [Pkm.SUNKERN]: "0191",
-  [Pkm.SUNFLORA]: "0192"
+  [Pkm.SUNFLORA]: "0192",
+  [Pkm.MARACTUS]: "0556"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1728,7 +1730,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.MANKEY]: Pkm.MANKEY,
   [Pkm.PRIMEAPE]: Pkm.MANKEY,
   [Pkm.SUNKERN]: Pkm.SUNKERN,
-  [Pkm.SUNFLORA]: Pkm.SUNKERN
+  [Pkm.SUNFLORA]: Pkm.SUNKERN,
+  [Pkm.MARACTUS]: Pkm.MARACTUS
 }
 
 export const AnimationConfig: {
@@ -4029,5 +4032,9 @@ export const AnimationConfig: {
   [Pkm.SUNFLORA]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Attack
-  }
+  },
+  [Pkm.MARACTUS]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Twirl
+  },
 }

@@ -13006,7 +13006,7 @@ export class Tyrogue extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.TYROGUE,
-      [Synergy.FIGHTING, Synergy.HUMAN],
+      [Synergy.FIGHTING, Synergy.BABY],
       Rarity.MYTHICAL,
       Pkm.HITMONTOP,
       200,
@@ -13503,6 +13503,31 @@ export class Tinkaton extends Pokemon {
       shiny,
       emotion,
       true
+    )
+  }
+}
+
+export class Maractus extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.MARACTUS,
+      [Synergy.GRASS, Synergy.GROUND, Synergy.FLORA],
+      Rarity.MYTHICAL,
+      Pkm.DEFAULT,
+      200,
+      12,
+      6,
+      3,
+      1,
+      AttackSprite.GRASS_MELEE,
+      1,
+      100,
+      Ability.SPIKE_ARMOR,
+      shiny,
+      emotion,
+      false,
+      false,
+      Passive.HYDRATATION
     )
   }
 }

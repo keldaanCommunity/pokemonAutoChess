@@ -23,7 +23,8 @@ Emotes communication between players ingame
 
 - Tinkatin/Tinkatuff/Tinkaton
 - Paras/Parasect
-- Miltank
+- Miltank: Normal/Field T10
+- Maractus: Ground/Grass/Flora T10
 - Mankey/Primeape
 - Sunkern/Sunflora
 
