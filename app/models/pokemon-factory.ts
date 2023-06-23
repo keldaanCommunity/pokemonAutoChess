@@ -286,6 +286,7 @@ import {
   Mamoswine,
   Manaphy,
   Manectric,
+  Mankey,
   Mareep,
   Marill,
   Marowak,
@@ -377,6 +378,7 @@ import {
   PrimalGroudon,
   PrimalKyogre,
   Primarina,
+  Primeape,
   Prinplup,
   Pumpkaboo,
   Pupitar,
@@ -1938,6 +1940,10 @@ export default class PokemonFactory {
         return new Parasect(s, e)
       case Pkm.MILTANK:
         return new Miltank(s, e)
+      case Pkm.MANKEY:
+        return new Mankey(s, e)
+      case Pkm.PRIMEAPE:
+        return new Primeape(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:

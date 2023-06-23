@@ -2323,6 +2323,25 @@ export default class BattleManager {
             )
             break
 
+          case Ability.THRASH:
+            coordinates = transformAttackCoordinate(positionX, positionY)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.THRASH,
+              "000"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.THRASH)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
+
           case Ability.ABSORB:
             coordinates = transformAttackCoordinate(positionX, positionY)
             specialProjectile = this.scene.add.sprite(
