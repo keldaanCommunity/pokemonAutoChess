@@ -153,7 +153,8 @@ import {
   SilverWindStrategy,
   IcyWindStrategy,
   GigatonHammerStrategy,
-  AcrobaticsStrategy
+  AcrobaticsStrategy,
+  AbsorbStrategy
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -311,7 +312,8 @@ export enum Ability {
   POISON_POWDER = "POISON_POWDER",
   ICY_WIND = "ICY_WIND",
   GIGATON_HAMMER = "GIGATON_HAMMER",
-  ACROBATICS = "ACROBATICS"
+  ACROBATICS = "ACROBATICS",
+  ABSORB = "ABSORB"
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -469,5 +471,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.SILVER_WIND]: new SilverWindStrategy(),
   [Ability.ICY_WIND]: new IcyWindStrategy(),
   [Ability.GIGATON_HAMMER]: new GigatonHammerStrategy(),
-  [Ability.ACROBATICS]: new AcrobaticsStrategy()
+  [Ability.ACROBATICS]: new AcrobaticsStrategy(),
+  [Ability.ABSORB]: new AbsorbStrategy()
 }

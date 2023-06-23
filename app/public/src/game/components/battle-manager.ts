@@ -2299,6 +2299,25 @@ export default class BattleManager {
             )
             break
 
+          case Ability.ABSORB:
+            coordinates = transformAttackCoordinate(positionX, positionY)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.ABSORB,
+              "000"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.ABSORB)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
+
           case Ability.GIGATON_HAMMER:
             coordinates = transformAttackCoordinate(targetX, targetY)
             specialProjectile = this.scene.add.sprite(

@@ -830,6 +830,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.ABSORB,
+      frames: this.game.anims.generateFrameNames(Ability.ABSORB, {
+        start: 0,
+        end: 2,
+        zeroPad: 3
+      }),
+      duration: 600,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.ACROBATICS,
       frames: this.game.anims.generateFrameNames(Ability.ACROBATICS, {
         start: 0,

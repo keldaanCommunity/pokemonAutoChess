@@ -4558,3 +4558,31 @@ export class AcrobaticsStrategy extends AttackStrategy {
     target.handleSpecialDamage(total, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
+
+export class AbsorbStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    let damage = 30
+    if (pokemon.stars === 2) {
+      damage = 60
+    }
+    if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
+      damage = 120
+    }
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    pokemon.handleHeal(damage * 0.1, pokemon, 1)
+
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+    cells.forEach((cell) => {
+      if (cell.value && cell.value.team === pokemon.team) {
+        cell.value.handleHeal(damage * 0.1, pokemon, 1)
+      }
+    })
+  }
+}

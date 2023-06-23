@@ -1,0 +1,83 @@
+{
+	"textures": [
+		{
+			"image": "ABSORB.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 91,
+				"h": 102
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "002",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 59
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 80,
+						"h": 59
+					}
+				},
+				{
+					"filename": "001",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 1,
+						"w": 52,
+						"h": 39
+					},
+					"frame": {
+						"x": 1,
+						"y": 62,
+						"w": 52,
+						"h": 39
+					}
+				},
+				{
+					"filename": "000",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 40,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 6,
+						"w": 35,
+						"h": 28
+					},
+					"frame": {
+						"x": 55,
+						"y": 62,
+						"w": 35,
+						"h": 28
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:28039a26c3d8531b48bac73c114f92dc:674b43fcba05430aedbf194d7656be09:36f724544d476ffd0d3e85969cf58bfb$"
+	}
+}
