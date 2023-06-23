@@ -287,6 +287,7 @@ import {
   Manaphy,
   Manectric,
   Mankey,
+  Maractus,
   Mareep,
   Marill,
   Marowak,
@@ -1950,6 +1951,8 @@ export default class PokemonFactory {
         return new Sunkern(s, e)
       case Pkm.SUNFLORA:
         return new Sunflora(s, e)
+      case Pkm.MARACTUS:
+        return new Maractus(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:

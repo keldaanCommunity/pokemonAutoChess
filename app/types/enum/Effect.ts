@@ -93,5 +93,6 @@ export enum Effect {
   SNOW,
   STORM,
   NIGHT,
-  WINDY
+  WINDY,
+  HYDRATATION
 }
