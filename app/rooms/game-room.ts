@@ -140,7 +140,7 @@ export default class GameRoom extends Room<GameState> {
     }, 5 * 60 * 1000) // maximum 5 minutes of loading game, game will start no matter what after that
 
     this.onMessage(Transfer.ITEM, (client, message) => {
-      if (!this.state.gameFinished) {
+      if (!this.state.gameFinished && client.auth) {
         try {
           this.dispatcher.dispatch(new OnItemCommand(), {
             playerId: client.auth.uid,
@@ -153,7 +153,7 @@ export default class GameRoom extends Room<GameState> {
     })
 
     this.onMessage(Transfer.SHOP, (client, message) => {
-      if (!this.state.gameFinished) {
+      if (!this.state.gameFinished && client.auth) {
         try {
           this.dispatcher.dispatch(new OnShopCommand(), {
             id: client.auth.uid,
@@ -166,7 +166,7 @@ export default class GameRoom extends Room<GameState> {
     })
 
     this.onMessage(Transfer.POKEMON_PROPOSITION, (client, message) => {
-      if (!this.state.gameFinished) {
+      if (!this.state.gameFinished && client.auth) {
         try {
           this.dispatcher.dispatch(new OnPokemonPropositionCommand(), {
             playerId: client.auth.uid,
@@ -242,7 +242,9 @@ export default class GameRoom extends Room<GameState> {
       Transfer.VECTOR,
       (client, message: { x: number; y: number }) => {
         try {
-          this.miniGame.applyVector(client.auth.uid, message.x, message.y)
+          if (client.auth) {
+            this.miniGame.applyVector(client.auth.uid, message.x, message.y)
+          }
         } catch (error) {
           logger.error(error)
         }
@@ -252,7 +254,7 @@ export default class GameRoom extends Room<GameState> {
     this.onMessage(
       Transfer.SELL_DROP,
       (client, message: { pokemonId: string }) => {
-        if (!this.state.gameFinished) {
+        if (!this.state.gameFinished && client.auth) {
           try {
             this.dispatcher.dispatch(new OnSellDropCommand(), {
               client,
@@ -270,7 +272,7 @@ export default class GameRoom extends Room<GameState> {
     })
 
     this.onMessage(Transfer.REFRESH, (client, message) => {
-      if (!this.state.gameFinished) {
+      if (!this.state.gameFinished && client.auth) {
         try {
           this.dispatcher.dispatch(new OnRefreshCommand(), client.auth.uid)
         } catch (error) {
@@ -280,7 +282,7 @@ export default class GameRoom extends Room<GameState> {
     })
 
     this.onMessage(Transfer.LOCK, (client, message) => {
-      if (!this.state.gameFinished) {
+      if (!this.state.gameFinished && client.auth) {
         try {
           this.dispatcher.dispatch(new OnLockCommand(), client.auth.uid)
         } catch (error) {
@@ -290,7 +292,7 @@ export default class GameRoom extends Room<GameState> {
     })
 
     this.onMessage(Transfer.LEVEL_UP, (client, message) => {
-      if (!this.state.gameFinished) {
+      if (!this.state.gameFinished && client.auth) {
         try {
           this.dispatcher.dispatch(new OnLevelUpCommand(), client.auth.uid)
         } catch (error) {
@@ -313,26 +315,28 @@ export default class GameRoom extends Room<GameState> {
 
     this.onMessage(Transfer.UNOWN_ENCOUNTER, (client, unownIndex) => {
       try {
-        const DUST_PER_ENCOUNTER = 50
-        UserMetadata.findOne(
-          { uid: client.auth.uid },
-          (err, u: FilterQuery<IUserMetadata>) => {
-            const c = u.pokemonCollection.get(unownIndex)
-            if (c) {
-              c.dust += DUST_PER_ENCOUNTER
-            } else {
-              u.pokemonCollection.set(unownIndex, {
-                id: unownIndex,
-                emotions: [],
-                shinyEmotions: [],
-                dust: DUST_PER_ENCOUNTER,
-                selectedEmotion: Emotion.NORMAL,
-                selectedShiny: false
-              })
+        if (client.auth) {
+          const DUST_PER_ENCOUNTER = 50
+          UserMetadata.findOne(
+            { uid: client.auth.uid },
+            (err, u: FilterQuery<IUserMetadata>) => {
+              const c = u.pokemonCollection.get(unownIndex)
+              if (c) {
+                c.dust += DUST_PER_ENCOUNTER
+              } else {
+                u.pokemonCollection.set(unownIndex, {
+                  id: unownIndex,
+                  emotions: [],
+                  shinyEmotions: [],
+                  dust: DUST_PER_ENCOUNTER,
+                  selectedEmotion: Emotion.NORMAL,
+                  selectedShiny: false
+                })
+              }
+              u.save()
             }
-            u.save()
-          }
-        )
+          )
+        }
       } catch (error) {
         logger.error(error)
       }
@@ -420,10 +424,15 @@ export default class GameRoom extends Room<GameState> {
       if (client && client.auth && client.auth.displayName) {
         logger.info(`${client.auth.displayName} left game`)
         const player = this.state.players.get(client.auth.uid)
-        if (player && (player.loadingProgress < 100 || this.state.stageLevel < 4)) {
+        if (
+          player &&
+          (player.loadingProgress < 100 || this.state.stageLevel < 4)
+        ) {
           // if player left game during the loading screen or before stage 4, remove it from the players
           this.state.players.delete(client.auth.uid)
-          logger.info(`${client.auth.displayName} has been removed from players list`)
+          logger.info(
+            `${client.auth.displayName} has been removed from players list`
+          )
         }
       }
       if (
@@ -823,14 +832,25 @@ export default class GameRoom extends Room<GameState> {
           const lastWeather = player.getLastBattle()?.weather ?? Weather.NEUTRAL
           let existingSecondTier: Pkm | null = null
           player.board.forEach((pkm) => {
-            if(pkm.name === Pkm.CASCOON) existingSecondTier = Pkm.CASCOON
-            else if(pkm.name === Pkm.SILCOON) existingSecondTier = Pkm.SILCOON
+            if (pkm.name === Pkm.CASCOON) existingSecondTier = Pkm.CASCOON
+            else if (pkm.name === Pkm.SILCOON) existingSecondTier = Pkm.SILCOON
           })
-          if(existingSecondTier !== null){ 
+          if (existingSecondTier !== null) {
             pokemonEvolutionName = existingSecondTier
-          } else if([Weather.NIGHT, Weather.STORM, Weather.SANDSTORM, Weather.SNOW].includes(lastWeather)){
+          } else if (
+            [
+              Weather.NIGHT,
+              Weather.STORM,
+              Weather.SANDSTORM,
+              Weather.SNOW
+            ].includes(lastWeather)
+          ) {
             pokemonEvolutionName = Pkm.CASCOON
-          } else if([Weather.SUN, Weather.RAIN, Weather.MISTY, Weather.WINDY].includes(lastWeather)){
+          } else if (
+            [Weather.SUN, Weather.RAIN, Weather.MISTY, Weather.WINDY].includes(
+              lastWeather
+            )
+          ) {
             pokemonEvolutionName = Pkm.SILCOON
           } else {
             pokemonEvolutionName = coinflip() ? Pkm.CASCOON : Pkm.SILCOON
