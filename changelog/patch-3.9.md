@@ -22,6 +22,8 @@ Emotes communication between players ingame
 # New Pokemons:
 
 - Tinkatin/Tinkatuff/Tinkaton
+- Paras/Parasect
+- Miltank
 
 # Changes to Pokemon / Abilities
 

@@ -4586,3 +4586,26 @@ export class AbsorbStrategy extends AttackStrategy {
     })
   }
 }
+
+export class RolloutStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const multiplier = 6
+    const defenseBoost = 5
+
+    pokemon.addDefense(defenseBoost, true)
+    target.handleSpecialDamage(
+      multiplier * pokemon.def,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit
+    )
+  }
+}

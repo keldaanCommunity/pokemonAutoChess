@@ -317,6 +317,7 @@ import {
   Mew,
   Mewtwo,
   Mightyena,
+  Miltank,
   MimeJr,
   Mimikyu,
   Moltres,
@@ -1935,6 +1936,8 @@ export default class PokemonFactory {
         return new Paras(s, e)
       case Pkm.PARASECT:
         return new Parasect(s, e)
+      case Pkm.MILTANK:
+        return new Miltank(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:
