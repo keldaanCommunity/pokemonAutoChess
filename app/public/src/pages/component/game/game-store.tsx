@@ -8,10 +8,7 @@ import { shopClick } from "../../../stores/NetworkStore"
 export default function GameStore() {
   const dispatch = useAppDispatch()
   const shop = useAppSelector((state) => state.game.shop)
-  const pokemonCollection = useAppSelector(
-    (state) => state.game.pokemonCollection
-  )
-  // logger.debug(pokemonCollection);
+  
   return (
     <ul className="game-pokemons-store">
       {shop.map((pokemon, index) => {
@@ -23,7 +20,6 @@ export default function GameStore() {
               origin="shop"
               index={index}
               pokemon={p}
-              pokemonConfig={pokemonCollection.get(p.index)}
               click={(e) => {
                 dispatch(shopClick(index))
               }}
@@ -36,7 +32,6 @@ export default function GameStore() {
               origin="shop"
               index={index}
               pokemon={undefined}
-              pokemonConfig={undefined}
               click={() => {}}
             />
           )
