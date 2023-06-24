@@ -11,12 +11,12 @@ import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Money } from "../icons/money"
 import { useAppSelector } from "../../../hooks"
 import "./game-pokemon-portrait.css"
+import PokemonFactory from "../../../../../models/pokemon-factory"
 
 export default function GamePokemonPortrait(props: {
   index: number
   origin: string
   pokemon: Pokemon | undefined
-  pokemonConfig: IPokemonConfig | undefined
   click: React.MouseEventHandler<HTMLDivElement>
 }) {
   if (!props.pokemon) {
@@ -24,6 +24,10 @@ export default function GamePokemonPortrait(props: {
   } else {
     const rarityColor = RarityColor[props.pokemon.rarity]
     const boardManager = getGameScene()?.board
+    const pokemonCollection = useAppSelector(
+      (state) => state.game.pokemonCollection
+    )
+    const pokemonConfig: IPokemonConfig | undefined = pokemonCollection.get(props.pokemon.index)
 
     const uid: string = useAppSelector((state) => state.network.uid)
     const currentPlayerId: string = useAppSelector(
@@ -59,6 +63,9 @@ export default function GamePokemonPortrait(props: {
     if (count === 2 && countEvol === 2 && pokemonEvolution2 != null)
       pokemonEvolution = pokemonEvolution2
 
+    const pokemonInPortrait = (willEvolve && pokemonEvolution) ? PokemonFactory.createPokemonFromName(pokemonEvolution) : props.pokemon
+    const pokemonInPortraitConfig = pokemonCollection.get(pokemonInPortrait.index)
+
     return (
       <div
         className={`nes-container game-pokemon-portrait ${
@@ -68,9 +75,9 @@ export default function GamePokemonPortrait(props: {
           backgroundColor: rarityColor,
           borderColor: rarityColor,
           backgroundImage: `url("${getPortraitSrc(
-            props.pokemon.index,
-            props.pokemonConfig?.selectedShiny,
-            props.pokemonConfig?.selectedEmotion
+            pokemonInPortrait.index,
+            pokemonInPortraitConfig?.selectedShiny,
+            pokemonInPortraitConfig?.selectedEmotion
           )}")`
         }}
         onClick={props.click}
@@ -84,17 +91,17 @@ export default function GamePokemonPortrait(props: {
           place="bottom"
         >
           <GamePokemonDetail
-            pokemon={props.pokemon}
-            pokemonConfig={props.pokemonConfig}
+            pokemon={pokemonInPortrait}
+            pokemonConfig={pokemonInPortraitConfig}
           />
         </ReactTooltip>
         {willEvolve && pokemonEvolution && (
           <div className="game-pokemon-portrait-evolution">
             <img
               src={getPortraitSrc(
-                PkmIndex[pokemonEvolution],
-                props.pokemonConfig?.selectedShiny,
-                props.pokemonConfig?.selectedEmotion
+                props.pokemon.index,
+                pokemonConfig?.selectedShiny,
+                pokemonConfig?.selectedEmotion
               )}
               className="game-pokemon-portrait-evolution-portrait"
             />

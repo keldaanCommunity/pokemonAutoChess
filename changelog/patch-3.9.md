@@ -66,7 +66,7 @@ Emotes communication between players ingame
 
 # UI
 
--
+- Evolutions are now shown as main portrait in shop
 
 # Misc
 
