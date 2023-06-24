@@ -1528,11 +1528,11 @@ export class TriAttackStrategy extends AttackStrategy {
     let duration = 2000,
       damage = 25
     if (pokemon.stars === 2) {
-      duration = 4000
+      duration = 3000
       damage = 50
     }
     if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
-      duration = 8000
+      duration = 5000
       damage = 100
     }
     target.status.triggerFreeze(duration, target)

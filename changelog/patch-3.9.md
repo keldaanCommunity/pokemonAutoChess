@@ -44,7 +44,8 @@ Emotes communication between players ingame
 - New Ability Acrobatics for Hoppip Deals 20/40/80 damage. If the caster have no items, deals an extra 20/30/40 damage
 - Buff Woobuffet hp 200-> 250
 - Buff Draco Meteor damage 20 -> 25
-- Buuff Jynx mana 90 -> 80 attack 10 -> 12
+- Buff Jynx: mana 90 -> 80 ; attack 10 -> 12
+- Nerf Triattack duration: 2/4/8 → 2/3/5 seconds
 
 # Changes to Synergies
 
