@@ -70,4 +70,4 @@ Emotes communication between players ingame
 
 # Misc
 
--
+- Draw now preserve existing streak, but does not increase it
