@@ -42,7 +42,6 @@ export default function GamePokemonsPropositions() {
                   origin="proposition"
                   index={index}
                   pokemon={p}
-                  pokemonConfig={pokemonCollection.get(p.index)}
                   click={(e) => {
                     dispatch(pokemonPropositionClick(p.name))
                   }}
