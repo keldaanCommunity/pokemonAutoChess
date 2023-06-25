@@ -1,4 +1,4 @@
-import { PokemonAvatar } from "../../models/colyseus-models/pokemon-avatar"
+import { PokemonAvatarModel } from "../../models/colyseus-models/pokemon-avatar"
 import { FloatingItem } from "../../models/colyseus-models/floating-item"
 import { MapSchema } from "@colyseus/schema"
 import {
@@ -22,7 +22,7 @@ const ITEM_ROTATION_SPEED = 0.0004
 const CAROUSEL_RADIUS = 140
 
 export class MiniGame {
-  avatars: MapSchema<PokemonAvatar> | undefined
+  avatars: MapSchema<PokemonAvatarModel> | undefined
   items: MapSchema<FloatingItem> | undefined
   bodies: Map<string, Body>
   alivePlayers: Player[]
@@ -78,7 +78,7 @@ export class MiniGame {
         (this.avatars?.has(pairs[0].bodyA.label) ||
           this.avatars?.has(pairs[0].bodyB.label))
       ) {
-        let avatar: PokemonAvatar | undefined,
+        let avatar: PokemonAvatarModel | undefined,
           avatarBody: Body | undefined,
           item: FloatingItem | undefined,
           itemBody: Body | undefined
@@ -130,7 +130,7 @@ export class MiniGame {
     })
   }
 
-  create(avatars: MapSchema<PokemonAvatar>, items: MapSchema<FloatingItem>) {
+  create(avatars: MapSchema<PokemonAvatarModel>, items: MapSchema<FloatingItem>) {
     this.avatars = avatars
     this.items = items
   }
@@ -155,7 +155,7 @@ export class MiniGame {
         retentionDelay = 5000
       }
 
-      const avatar = new PokemonAvatar(
+      const avatar = new PokemonAvatarModel(
         player.id,
         player.avatar,
         x,

@@ -2,7 +2,7 @@
 import { GameObjects } from "phaser"
 
 export default class DraggableObject extends GameObjects.Container {
-  isDisabled: boolean
+  dragDisabled: boolean
 
   constructor(
     scene: Phaser.Scene,
@@ -10,10 +10,10 @@ export default class DraggableObject extends GameObjects.Container {
     y: number,
     width: number,
     height: number,
-    isDisabled: boolean = false
+    dragDisabled: boolean = false
   ) {
     super(scene, x, y)
-    this.isDisabled = isDisabled
+    this.dragDisabled = dragDisabled
     this.setSize(width, height)
     this.setInteractive()
       .on("pointerover", () => this.onPointerOver())
@@ -34,26 +34,35 @@ export default class DraggableObject extends GameObjects.Container {
     this.scene.add.existing(this)
   }
 
+  get draggable(): boolean {
+    return !this.dragDisabled
+  }
+
+  set draggable(isDraggable: boolean){
+    this.dragDisabled = !isDraggable
+    this.scene.input.setDraggable(this, isDraggable)
+  }
+
   onPointerOver() {
-    if (!this.isDisabled) {
+    if (!this.dragDisabled) {
       document.body.classList.add("grab")
     }
   }
 
   onPointerOut() {
-    if (!this.isDisabled) {
+    if (!this.dragDisabled) {
       document.body.classList.remove("grab")
     }
   }
 
   onPointerDown(pointer) {
-    if (!this.isDisabled) {
+    if (!this.dragDisabled) {
       document.body.classList.add("grabbing")
     }
   }
 
   onPointerUp() {
-    if (!this.isDisabled) {
+    if (!this.dragDisabled) {
       document.body.classList.remove("grabbing")
       document.body.classList.add(
         "grab"

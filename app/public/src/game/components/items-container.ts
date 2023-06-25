@@ -47,11 +47,12 @@ export default class ItemsContainer extends GameObjects.Container {
 
   updateItems() {
     const itemSize = this.pokemonId === null ? 70 : 25
+    const ITEMS_PER_COLUMN = 6
     for (let i = 0; i < this.list.length; i++) {
       const it = <ItemContainer>this.list[i]
       it.closeDetail()
-      it.x = 0
-      it.y = i * itemSize
+      it.x = -1 * itemSize * Math.floor(i / ITEMS_PER_COLUMN)
+      it.y = (i % ITEMS_PER_COLUMN) * itemSize
     }
   }
 

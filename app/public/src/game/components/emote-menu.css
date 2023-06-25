@@ -1,0 +1,29 @@
+.emote-menu ul {
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4px;
+}
+
+.emote-menu li {
+    display: block;
+    list-style: none;
+}
+
+.emote-menu li img {
+    width: 80px;
+    height: 80px;
+    image-rendering: pixelated;
+    border: 1px solid #000000;
+    border-radius: 4px;
+    box-shadow: 2px 2px #00000060;
+}
+
+.emote-menu li img.locked {
+    filter: grayscale(1) contrast(0.5);
+}
+
+.emote-menu li img:not(.locked) {
+    cursor: var(--cursor-hover);
+}

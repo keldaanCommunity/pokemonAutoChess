@@ -5,7 +5,7 @@ import { IPokemonAvatar } from "../../types"
 import { Orientation, PokemonActionState } from "../../types/enum/Game"
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 
-export class PokemonAvatar extends Schema implements IPokemonAvatar {
+export class PokemonAvatarModel extends Schema implements IPokemonAvatar {
   @type("string") id: string
   @type("string") name: Pkm = Pkm.RATTATA
   @type("boolean") shiny: boolean

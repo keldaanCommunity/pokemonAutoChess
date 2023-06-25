@@ -1864,7 +1864,11 @@ export default class AnimationManager {
     } else if (action === PokemonActionState.ATTACK) {
       animation = AnimationConfig[entity.name as Pkm].attack
     }
-    this.play(entity, animation)
+    try {
+      this.play(entity, animation)
+    } catch(err){
+      logger.warn(`Can't play animation ${animation} for ${entity.name}`)
+    }
   }
 
   play(entity: Pokemon, animation: AnimationType) {

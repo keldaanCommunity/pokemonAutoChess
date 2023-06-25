@@ -421,12 +421,6 @@ export function instanceofPokemonEntity(
   return "mana" in obj
 }
 
-export function instanceofPokemonAvatar(
-  obj: IPokemon | IPokemonEntity | IPokemonAvatar
-) {
-  return !("stars" in obj)
-}
-
 export interface IPokemonEntity {
   simulation: ISimulation
   addAbilityPower(value: number): void
