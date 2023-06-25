@@ -7,12 +7,14 @@ import { getAvatarSrc } from "../../utils"
 import GameScene from "../scenes/game-scene"
 import Pokemon from "./pokemon"
 import LifeBar from "./life-bar"
+import EmoteMenu from "./emote-menu"
 
 export default class PokemonAvatar extends Pokemon {
   circleHitbox: GameObjects.Ellipse | undefined
   circleTimer: GameObjects.Graphics
   isCurrentPlayerAvatar: boolean
   emoteBubble: EmoteBubble | null
+  emoteMenu: EmoteMenu | null
 
   constructor(
     scene: GameScene,
@@ -32,9 +34,13 @@ export default class PokemonAvatar extends Pokemon {
     this.shouldShowTooltip = false
     this.draggable = false
     this.emoteBubble = null
+    this.emoteMenu = null
     this.isCurrentPlayerAvatar = this.playerId === scene.uid
-    this.drawCircles()
-    this.drawLifebar()
+    if(scene.room?.state.phase === GamePhaseState.MINIGAME){
+      this.drawCircles()
+    } else {
+      this.drawLifebar()
+    }
   }
 
   drawCircles() {
@@ -81,11 +87,16 @@ export default class PokemonAvatar extends Pokemon {
   }
 
   drawSpeechBubble(emoteAvatar: string, isOpponent: boolean) {
-    this.emoteBubble = new EmoteBubble(this.scene, emoteAvatar, this.isCurrentPlayerAvatar)
+    if(this.emoteMenu){
+      this.emoteMenu.destroy()
+      this.emoteMenu = null
+    }
+    
+    this.emoteBubble = new EmoteBubble(this.scene, emoteAvatar, isOpponent)
     this.add(this.emoteBubble)
 
     const x = isOpponent ? -40 : +40
-    const y = isOpponent ? +100 : -100
+    const y = isOpponent ? +100 : -120
     this.emoteBubble.setPosition(x, y)
 
     setTimeout(() => {
@@ -104,20 +115,30 @@ export default class PokemonAvatar extends Pokemon {
       60,
       100,
       0,
-      this.isCurrentPlayerAvatar ? 1 : 2
+      this.isCurrentPlayerAvatar ? 0 : 1
     )
     this.add(this.lifebar)
+  }
+
+  toggleEmoteMenu() {
+    if(this.emoteMenu){
+      this.emoteMenu.destroy()
+      this.emoteMenu = null
+    } else if(this.isCurrentPlayerAvatar){
+      this.emoteMenu = new EmoteMenu(this.scene, this.index, this.shiny)
+      this.add(this.emoteMenu)
+    }
   }
 }
 
 export class EmoteBubble extends GameObjects.DOMElement {
   dom: HTMLDivElement
 
-  constructor(scene: Phaser.Scene, emoteAvatar: string, isCurrentPlayerAvatar: boolean){
+  constructor(scene: Phaser.Scene, emoteAvatar: string, isOpponent: boolean){
     super(scene, 0, 0)
 
     this.dom = document.createElement("div")
-    this.dom.className = "game-emote-bubble " + (isCurrentPlayerAvatar ? "current" : "opponent")
+    this.dom.className = "game-emote-bubble " + (isOpponent ? "opponent" : "current")
 
     const emoteImg = document.createElement("img")
     emoteImg.src = getAvatarSrc(emoteAvatar)
