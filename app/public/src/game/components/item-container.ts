@@ -66,29 +66,25 @@ export default class ItemContainer extends DraggableObject {
 
     this.setInteractive()
     this.input.dropZone = true
-
-    scene.input.setDraggable(this, this.isDraggable)
+    this.draggable = (this.pokemonId === null)
   }
 
-  get isDraggable() {
-    return !this.isDisabled && this.pokemonId === null
-  }
 
   onPointerOver() {
     //this.openDetail()
     super.onPointerOver()
     this.input.dropZone = false
-    if (this.isDraggable) {
+    if (this.draggable) {
       this.circle?.setFillStyle(0x68829e)
     }
   }
 
   onPointerOut() {
     super.onPointerOut()
-    if (!this.isDisabled) {
+    if (!this.dragDisabled) {
       this.input.dropZone = true
     }
-    if (this.isDraggable) {
+    if (this.draggable) {
       this.circle?.setFillStyle(0x61738a)
     }
   }

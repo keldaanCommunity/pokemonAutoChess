@@ -46,7 +46,6 @@ import {
   removeRedHealDpsMeter,
   removeBlueHealDpsMeter,
   leaveGame,
-  displayEmote,
   setCurrentPlayerTitle,
   setPokemonProposition,
   setAdditionalPokemons
@@ -274,7 +273,10 @@ export default function Game() {
         gameContainer.setTilemap(tilemap)
       })
       room.onMessage(Transfer.BROADCAST_EMOTE, (message) => {
-        dispatch(displayEmote({ id: message.id, emote: message.emote }))
+        const g = gameContainer.game?.scene.getScene("gameScene") as GameScene
+          if (g && g.board) {
+            g.board.displayEmote(message.id, message.emote)
+          }
       })
 
       room.onMessage(Transfer.POKEMON_DAMAGE, (message) => {

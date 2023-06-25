@@ -98,21 +98,6 @@ export const gameSlice = createSlice({
   name: "game",
   initialState: initialState,
   reducers: {
-    displayEmote: (
-      state,
-      action: PayloadAction<{ id: string; emote: string }>
-    ) => {
-      const index = state.players.findIndex((e) => action.payload.id == e.id)
-      const i = React.createElement(
-        "img",
-        { src: getAvatarSrc(action.payload.emote) },
-        null
-      )
-      toast(i, {
-        containerId: state.players[index].rank.toString(),
-        className: "toast-emote"
-      })
-    },
     setRoundTime: (state, action: PayloadAction<number>) => {
       if (action.payload > state.roundTime) state.phaseDuration = action.payload
       state.roundTime = action.payload
@@ -475,7 +460,6 @@ export const gameSlice = createSlice({
 export const {
   setAdditionalPokemons,
   setPokemonProposition,
-  displayEmote,
   setPokemonCollection,
   leaveGame,
   removeBlueDpsMeter,

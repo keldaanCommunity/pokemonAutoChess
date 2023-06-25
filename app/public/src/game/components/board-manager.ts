@@ -3,16 +3,22 @@ import {
   transformAttackCoordinate,
   transformCoordinate
 } from "../../pages/utils/utils"
-import { IBoardEvent, IPlayer, IPokemon } from "../../../../types"
+import { Emotion, IBoardEvent, IPokemon } from "../../../../types"
 import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
 import { Item } from "../../../../types/enum/Item"
-import { Pkm } from "../../../../types/enum/Pokemon"
+import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
 import { BoardEvent, GamePhaseState, Orientation, PokemonActionState } from "../../../../types/enum/Game"
 import { Ability } from "../../../../types/enum/Ability"
-import { PokemonAvatar } from "../../../../models/colyseus-models/pokemon-avatar"
+import { PokemonAvatarModel } from "../../../../models/colyseus-models/pokemon-avatar"
 import Player from "../../../../models/colyseus-models/player"
 import { logger } from "../../../../utils/logger"
+import { broadcastEmote } from "../../stores/NetworkStore"
+import store from "../../stores"
+import { getAvatarString } from "../../utils"
+import PokemonAvatar from "./pokemon-avatar"
+import { AnimationType } from "../../../../types/Animation"
+import { throttle } from "../../../../utils/function"
 
 export enum BoardMode { PICK = "pick", BATTLE = "battle", MINIGAME = "minigame" }
 
@@ -23,8 +29,8 @@ export default class BoardManager {
   player: Player
   mode: BoardMode
   animationManager: AnimationManager
-  playerAvatar: Pokemon
-  opponentAvatar: Pokemon | null
+  playerAvatar: PokemonAvatar
+  opponentAvatar: PokemonAvatar | null
 
   constructor(
     scene: GameScene,
@@ -106,18 +112,27 @@ export default class BoardManager {
     if(this.playerAvatar){
       this.playerAvatar.destroy(true)
     }
-    const playerAvatar = new PokemonAvatar(this.player.id, this.player.avatar, 0, 0, 0)
-    this.playerAvatar = new Pokemon(
+    const playerAvatar = new PokemonAvatarModel(this.player.id, this.player.avatar, 0, 0, 0)
+    this.playerAvatar = new PokemonAvatar(
       this.scene,
       504,
       696,
       playerAvatar,
-      this.player.id,
-      false
+      this.player.id
     )
-    this.playerAvatar.disableInteractive()
     this.playerAvatar.orientation = Orientation.UPRIGHT
     this.playerAvatar.updateCircleLife(this.player.life)
+    this.playerAvatar.on("pointerdown", throttle(() => {
+      store.dispatch(
+        broadcastEmote(
+          getAvatarString(
+            this.playerAvatar.index,
+            this.playerAvatar.shiny,
+            Emotion.HAPPY
+          )
+        )
+      )
+    }, 3000))
     this.animationManager.animatePokemon(this.playerAvatar, this.playerAvatar.action)    
   }
 
@@ -127,14 +142,13 @@ export default class BoardManager {
     }
 
     if(this.mode === BoardMode.BATTLE && opponentId !== "pve"){
-      const opponentAvatar = new PokemonAvatar(this.player.id, opponentAvatarString, 0, 0, 0)
-      this.opponentAvatar = new Pokemon(
+      const opponentAvatar = new PokemonAvatarModel(this.player.id, opponentAvatarString, 0, 0, 0)
+      this.opponentAvatar = new PokemonAvatar(
         this.scene,
         1512,
         122,
         opponentAvatar,
-        opponentId,
-        false
+        opponentId
       )
       this.opponentAvatar.disableInteractive()
       this.opponentAvatar.orientation = Orientation.DOWNLEFT
@@ -320,6 +334,16 @@ export default class BoardManager {
       event.y != null
     ) {
       this.triggerLightning(event.x, event.y)
+    }
+  }
+
+  displayEmote(playerId: string, emote: string){
+    if(this.playerAvatar && this.playerAvatar.playerId === playerId){
+      this.animationManager.play(this.playerAvatar, AnimationConfig[this.playerAvatar.name].emote)
+      this.playerAvatar.drawSpeechBubble(emote, false)
+    } else if(this.opponentAvatar && this.opponentAvatar.playerId === playerId){
+      this.animationManager.play(this.opponentAvatar, AnimationConfig[this.opponentAvatar.name].emote)
+      this.opponentAvatar.drawSpeechBubble(emote, true)
     }
   }
 
