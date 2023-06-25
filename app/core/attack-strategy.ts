@@ -1558,15 +1558,15 @@ export class EchoStrategy extends AttackStrategy {
     switch (pokemon.stars) {
       case 1:
         damage = 3
-        additional = 1
+        additional = 3
         break
       case 2:
         damage = 6
-        additional = 2
+        additional = 6
         break
       case 3:
         damage = 9
-        additional = 4
+        additional = 9
         break
       default:
         break
@@ -3189,7 +3189,13 @@ export class StompStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = pokemon.atk * pokemon.stars * 2
+    let damageFactor = 3
+    if(pokemon.stars === 2){
+      damageFactor = 4
+    } else if(pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL){
+      damageFactor = 5
+    }
+    const damage = pokemon.atk * damageFactor
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }

@@ -1059,7 +1059,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.ECHO]: {
-    eng: `Deals [3,6,9,SP] ${Damage.SPECIAL}, + [1,2,4,SP] each time the pokemon uses its ability`,
+    eng: `Deals [3,6,9,SP] ${Damage.SPECIAL} to the enemy team, increasing by [3,6,9,SP] every time the pokemon uses its ability`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -1305,9 +1305,9 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.STOMP]: {
-    eng: `Mono target that deals [2,4,6,SP] x ${Stat.ATK} ${Damage.SPECIAL}`,
-    esp: `Daño físico del objetivo mono [2,4,6,SP] x ${Stat.ATK} ${Damage.SPECIAL}`,
-    fra: `Attaque mono cible faisant [2,4,6,SP] x ${Stat.ATK} ${Damage.SPECIAL} dégats physiques`,
+    eng: `Mono target that deals [3,4,5,SP] x ${Stat.ATK} ${Damage.SPECIAL}`,
+    esp: `Daño físico del objetivo mono [3,4,5,SP] x ${Stat.ATK} ${Damage.SPECIAL}`,
+    fra: `Attaque mono cible faisant [3,4,5,SP] x ${Stat.ATK} ${Damage.SPECIAL} dégats physiques`,
     prt: ``
   },
   [Ability.PAYBACK]: {
