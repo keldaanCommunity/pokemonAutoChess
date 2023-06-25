@@ -112,6 +112,7 @@ export default class BoardManager {
     if(this.playerAvatar){
       this.playerAvatar.destroy(true)
     }
+    if(this.player.life <= 0) return; // do not display avatar when player is dead
     const playerAvatar = new PokemonAvatarModel(this.player.id, this.player.avatar, 0, 0, 0)
     this.playerAvatar = new PokemonAvatar(
       this.scene,
@@ -142,6 +143,13 @@ export default class BoardManager {
     }
 
     if(this.mode === BoardMode.BATTLE && opponentId !== "pve"){
+      let opponentLife = 0 
+      this.scene.room?.state.players.forEach(p => {
+        if(p.id === opponentId) opponentLife = p.life
+      })
+
+      if(opponentLife <= 0) return; // do not display avatar when player is dead
+
       const opponentAvatar = new PokemonAvatarModel(this.player.id, opponentAvatarString, 0, 0, 0)
       this.opponentAvatar = new PokemonAvatar(
         this.scene,
@@ -152,10 +160,6 @@ export default class BoardManager {
       )
       this.opponentAvatar.disableInteractive()
       this.opponentAvatar.orientation = Orientation.DOWNLEFT
-      let opponentLife = 0 
-      this.scene.room?.state.players.forEach(p => {
-        if(p.id === opponentId) opponentLife = p.life
-      })
       this.opponentAvatar.updateLife(opponentLife)
       this.animationManager.animatePokemon(this.opponentAvatar, this.opponentAvatar.action)
     }
