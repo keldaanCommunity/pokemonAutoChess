@@ -59,12 +59,11 @@ export default class BattleManager {
         pokemon.positionX,
         pokemon.positionY
       )
-      const p = <IPokemonEntity>pokemon
       const pokemonUI = new Pokemon(
         this.scene,
         coordinates[0],
         coordinates[1],
-        p,
+        pokemon,
         playerId,
         true
       )

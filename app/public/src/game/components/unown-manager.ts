@@ -62,7 +62,7 @@ export default class UnownManager {
       }
     })
 
-    unown.isDisabled = true
+    unown.draggable = false
     unown.sprite.setInteractive()
     unown.sprite.on("pointerdown", (pointer) => {
       getGameContainer().room.send(Transfer.UNOWN_ENCOUNTER, unown.index)

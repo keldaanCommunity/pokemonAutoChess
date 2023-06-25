@@ -1,4 +1,5 @@
 import Phaser, { GameObjects } from "phaser"
+import { SetSchema } from "@colyseus/schema"
 import Lifebar from "./life-bar"
 import DraggableObject from "./draggable-object"
 import PokemonDetail from "./pokemon-detail"
@@ -12,10 +13,8 @@ import {
   IPokemon,
   IPokemonEntity,
   instanceofPokemonEntity,
-  instanceofPokemonAvatar,
   Emotion,
-  AttackSprite,
-  IPokemonAvatar
+  AttackSprite
 } from "../../../../types"
 import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
 import MoveTo from "phaser3-rex-plugins/plugins/moveto"
@@ -26,21 +25,14 @@ import {
   PokemonActionState,
   SpriteType,
   PokemonTint,
-  Rarity,
-  GamePhaseState
+  Rarity
 } from "../../../../types/enum/Game"
 import { Ability } from "../../../../types/enum/Ability"
 import { Passive } from "../../../../types/enum/Passive"
 import ManaBar from "./mana-bar"
 import { Synergy } from "../../../../types/enum/Synergy"
 import { Pkm } from "../../../../types/enum/Pokemon"
-import {
-  OrientationArray,
-  OrientationVector
-} from "../../../../utils/orientation"
-import { clamp, max } from "../../../../utils/number"
-import PokemonFactory from "../../../../models/pokemon-factory"
-import { playSound, SOUNDS } from "../../pages/utils/audio"
+import { clamp } from "../../../../utils/number"
 import {
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_DAMAGE
@@ -106,33 +98,26 @@ export default class Pokemon extends DraggableObject {
   fairyField: GameObjects.Sprite | undefined
   stars: number
   playerId: string
-  tooltip: boolean
-  circleHitbox: GameObjects.Ellipse | undefined
-  circlePartial: GameObjects.Graphics
-  isPlayerAvatar: boolean
-  isCurrentPlayerAvatar: boolean
+  shouldShowTooltip: boolean
+  
 
   constructor(
     scene: GameScene,
     x: number,
     y: number,
-    pokemon_: IPokemonEntity | IPokemon | IPokemonAvatar,
+    pokemon: IPokemonEntity | IPokemon,
     playerId: string,
     inBattle: boolean
   ) {
     super(scene, x, y, 75, 75, playerId !== scene.uid)
     this.playerId = playerId
-    const pokemon: IPokemonEntity | IPokemon = instanceofPokemonAvatar(pokemon_)
-      ? PokemonFactory.createPokemonFromName(pokemon_.name)
-      : (pokemon_ as IPokemonEntity | IPokemon)
-
-    this.tooltip = !instanceofPokemonAvatar(pokemon_)
+    this.shouldShowTooltip = true
     this.stars = pokemon.stars
     this.evolution = instanceofPokemonEntity(pokemon)
       ? Pkm.DEFAULT
       : (pokemon as IPokemon).evolution
     this.emotion = pokemon.emotion
-    this.shiny = pokemon_.shiny
+    this.shiny = pokemon.shiny
     this.height = 0
     this.width = 0
     this.index = pokemon.index
@@ -166,6 +151,7 @@ export default class Pokemon extends DraggableObject {
       speed: 300,
       rotateToTarget: false
     })
+
     const p = <IPokemonEntity>pokemon
     if (p.orientation) {
       this.orientation = p.orientation
@@ -173,11 +159,6 @@ export default class Pokemon extends DraggableObject {
     } else {
       this.orientation = Orientation.DOWNLEFT
       this.action = PokemonActionState.WALK
-    }
-
-    this.isPlayerAvatar = instanceofPokemonAvatar(pokemon_)
-    if (this.isPlayerAvatar) {
-      this.drawCircles()
     }
 
     const textureIndex = scene.textures.exists(this.index) ? this.index : "0000"
@@ -205,7 +186,7 @@ export default class Pokemon extends DraggableObject {
     this.width = this.sprite.width
     this.itemsContainer = new ItemsContainer(
       scene,
-      p.items,
+      p.items ?? new SetSchema(),
       this.width / 2 + 25,
       -35,
       this.id,
@@ -250,9 +231,7 @@ export default class Pokemon extends DraggableObject {
       //this.setEffects(p, scene);
     }
     this.add(this.sprite)
-    if (playerId === scene.uid && !inBattle) {
-      scene.input.setDraggable(this)
-    }
+    this.draggable = (playerId === scene.uid && !inBattle)
     if (instanceofPokemonEntity(pokemon)) {
       const p = <IPokemonEntity>pokemon
       this.mana = p.mana
@@ -296,7 +275,7 @@ export default class Pokemon extends DraggableObject {
 
   onPointerDown(pointer: Phaser.Input.Pointer) {
     super.onPointerDown(pointer)
-    if (pointer.rightButtonDown() && this.tooltip) {
+    if (pointer.rightButtonDown() && this.shouldShowTooltip) {
       const s = <GameScene>this.scene
       if (s.lastPokemonDetail && s.lastPokemonDetail != this) {
         s.lastPokemonDetail.closeDetail()
@@ -338,59 +317,6 @@ export default class Pokemon extends DraggableObject {
         s.lastPokemonDetail = this
       }
     }
-  }
-
-  drawCircles() {
-    const scene = this.scene as GameScene
-    const currentPlayerId = scene.uid
-    this.circleHitbox = new GameObjects.Ellipse(scene, 0, 0, 50, 50)
-    this.add(this.circleHitbox)
-    this.circleHitbox.setVisible(
-      scene.room?.state.phase === GamePhaseState.MINIGAME
-    )
-    this.circlePartial = new GameObjects.Graphics(scene)
-    this.add(this.circlePartial)
-    this.isCurrentPlayerAvatar = this.playerId === currentPlayerId
-    if (this.isCurrentPlayerAvatar) {
-      this.circleHitbox.setStrokeStyle(2, 0xffffff, 0.8)
-    } else {
-      this.circleHitbox.setStrokeStyle(1, 0xffffff, 0.5)
-    }
-  }
-
-  updateCircleTimer(timer: number) {
-    if (timer <= 0) {
-      this.circlePartial.destroy()
-      if (this.isCurrentPlayerAvatar) {
-        playSound(SOUNDS.CAROUSEL_UNLOCK)
-      }
-    } else {
-      this.circlePartial.clear()
-      this.circlePartial.lineStyle(
-        8,
-        0xf7d51d,
-        this.isCurrentPlayerAvatar ? 0.8 : 0.5
-      )
-      this.circlePartial.beginPath()
-
-      const angle = (Math.min(timer, 8000) / 8000) * Math.PI * 2
-      this.circlePartial.arc(0, 0, 30, 0, angle)
-      this.circlePartial.strokePath()
-    }
-  }
-
-  updateCircleLife(life: number) {
-    this.circlePartial.clear()
-    this.circlePartial.lineStyle(
-      8,
-      this.isCurrentPlayerAvatar ? 0x01ff01 : 0xf7d51d,
-      0.8
-    )
-    this.circlePartial.beginPath()
-
-    const angle = (Math.PI * 2 * max(100)(life)) / 100
-    this.circlePartial.arc(0, 0, 30, 0, angle)
-    this.circlePartial.strokePath()
   }
 
   attackAnimation() {

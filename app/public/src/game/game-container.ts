@@ -32,7 +32,7 @@ import { AttackType, HealType, Orientation } from "../../../types/enum/Game"
 import { Weather } from "../../../types/enum/Weather"
 import store from "../stores"
 import { logger } from "../../../utils/logger"
-import { PokemonAvatar } from "../../../models/colyseus-models/pokemon-avatar"
+import { PokemonAvatarModel } from "../../../models/colyseus-models/pokemon-avatar"
 import { FloatingItem } from "../../../models/colyseus-models/floating-item"
 import Status from "../../../models/colyseus-models/status"
 import Count from "../../../models/colyseus-models/count"
@@ -96,7 +96,7 @@ class GameContainer {
     )
     this.room.state.avatars.onAdd((avatar) => {
       this.handleAvatarAdd(avatar)
-      const fields: NonFunctionPropNames<PokemonAvatar>[] = [
+      const fields: NonFunctionPropNames<PokemonAvatarModel>[] = [
         "x",
         "y",
         "action",

@@ -3,18 +3,27 @@ import {
   transformAttackCoordinate,
   transformCoordinate
 } from "../../pages/utils/utils"
-import { IBoardEvent, IPlayer, IPokemon } from "../../../../types"
+import { IBoardEvent, IPokemon } from "../../../../types"
 import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
 import { Item } from "../../../../types/enum/Item"
-import { Pkm } from "../../../../types/enum/Pokemon"
-import { BoardEvent, GamePhaseState, Orientation, PokemonActionState } from "../../../../types/enum/Game"
+import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
+import {
+  BoardEvent,
+  GamePhaseState,
+  Orientation,
+  PokemonActionState
+} from "../../../../types/enum/Game"
 import { Ability } from "../../../../types/enum/Ability"
-import { PokemonAvatar } from "../../../../models/colyseus-models/pokemon-avatar"
+import { PokemonAvatarModel } from "../../../../models/colyseus-models/pokemon-avatar"
 import Player from "../../../../models/colyseus-models/player"
-import { logger } from "../../../../utils/logger"
+import PokemonAvatar from "./pokemon-avatar"
 
-export enum BoardMode { PICK = "pick", BATTLE = "battle", MINIGAME = "minigame" }
+export enum BoardMode {
+  PICK = "pick",
+  BATTLE = "battle",
+  MINIGAME = "minigame"
+}
 
 export default class BoardManager {
   pokemons: Map<string, Pokemon>
@@ -23,8 +32,8 @@ export default class BoardManager {
   player: Player
   mode: BoardMode
   animationManager: AnimationManager
-  playerAvatar: Pokemon
-  opponentAvatar: Pokemon | null
+  playerAvatar: PokemonAvatar
+  opponentAvatar: PokemonAvatar | null
 
   constructor(
     scene: GameScene,
@@ -48,20 +57,38 @@ export default class BoardManager {
       this.pickMode()
     }
 
-    player.simulation.listen("winnerId", winnerId => {
+    player.simulation.listen("winnerId", (winnerId) => {
       //logger.debug({ winnerId, playerId: this.player.id, opponentId: this.opponentAvatar?.playerId })
-      if(winnerId === this.player.id){
-        this.animationManager.animatePokemon(this.playerAvatar, PokemonActionState.HOP)
-        if(this.opponentAvatar){
-          this.animationManager.animatePokemon(this.opponentAvatar, PokemonActionState.HURT)
+      if (winnerId === this.player.id) {
+        this.animationManager.animatePokemon(
+          this.playerAvatar,
+          PokemonActionState.HOP
+        )
+        if (this.opponentAvatar) {
+          this.animationManager.animatePokemon(
+            this.opponentAvatar,
+            PokemonActionState.HURT
+          )
         }
-      } else if(winnerId === this.opponentAvatar?.playerId){
-        this.animationManager.animatePokemon(this.opponentAvatar, PokemonActionState.HOP)
-        this.animationManager.animatePokemon(this.playerAvatar, PokemonActionState.HURT)
+      } else if (winnerId === this.opponentAvatar?.playerId) {
+        this.animationManager.animatePokemon(
+          this.opponentAvatar,
+          PokemonActionState.HOP
+        )
+        this.animationManager.animatePokemon(
+          this.playerAvatar,
+          PokemonActionState.HURT
+        )
       } else {
-        this.animationManager.animatePokemon(this.playerAvatar, PokemonActionState.IDLE)
-        if(this.opponentAvatar){
-          this.animationManager.animatePokemon(this.opponentAvatar, PokemonActionState.IDLE)
+        this.animationManager.animatePokemon(
+          this.playerAvatar,
+          PokemonActionState.IDLE
+        )
+        if (this.opponentAvatar) {
+          this.animationManager.animatePokemon(
+            this.opponentAvatar,
+            PokemonActionState.IDLE
+          )
         }
       }
     })
@@ -102,58 +129,84 @@ export default class BoardManager {
     })
   }
 
-  updatePlayerAvatar(){
-    if(this.playerAvatar){
+  updatePlayerAvatar() {
+    if (this.playerAvatar) {
       this.playerAvatar.destroy(true)
     }
-    const playerAvatar = new PokemonAvatar(this.player.id, this.player.avatar, 0, 0, 0)
-    this.playerAvatar = new Pokemon(
+    if (this.player.life <= 0) return // do not display avatar when player is dead
+    const playerAvatar = new PokemonAvatarModel(
+      this.player.id,
+      this.player.avatar,
+      0,
+      0,
+      0
+    )
+    this.playerAvatar = new PokemonAvatar(
       this.scene,
       504,
       696,
       playerAvatar,
-      this.player.id,
-      false
+      this.player.id
     )
-    this.playerAvatar.disableInteractive()
     this.playerAvatar.orientation = Orientation.UPRIGHT
-    this.playerAvatar.updateCircleLife(this.player.life)
-    this.animationManager.animatePokemon(this.playerAvatar, this.playerAvatar.action)    
+    this.playerAvatar.updateLife(this.player.life)
+    this.playerAvatar.on("pointerdown", (pointer) => {
+      if (pointer.rightButtonDown()) {
+        this.playerAvatar.toggleEmoteMenu()
+      } else {
+        this.animationManager.play(this.playerAvatar, AnimationConfig[this.playerAvatar.name].emote)
+      }
+    })
+    this.animationManager.animatePokemon(
+      this.playerAvatar,
+      this.playerAvatar.action
+    )
   }
 
-  updateOpponentAvatar(opponentId: string, opponentAvatarString: string){
-    if(this.opponentAvatar){
+  updateOpponentAvatar(opponentId: string, opponentAvatarString: string) {
+    if (this.opponentAvatar) {
       this.opponentAvatar.destroy(true)
     }
 
-    if(this.mode === BoardMode.BATTLE && opponentId !== "pve"){
-      const opponentAvatar = new PokemonAvatar(this.player.id, opponentAvatarString, 0, 0, 0)
-      this.opponentAvatar = new Pokemon(
+    if (this.mode === BoardMode.BATTLE && opponentId !== "pve") {
+      let opponentLife = 0
+      this.scene.room?.state.players.forEach((p) => {
+        if (p.id === opponentId) opponentLife = p.life
+      })
+
+      if (opponentLife <= 0) return // do not display avatar when player is dead
+
+      const opponentAvatar = new PokemonAvatarModel(
+        this.player.id,
+        opponentAvatarString,
+        0,
+        0,
+        0
+      )
+      this.opponentAvatar = new PokemonAvatar(
         this.scene,
         1512,
         122,
         opponentAvatar,
-        opponentId,
-        false
+        opponentId
       )
       this.opponentAvatar.disableInteractive()
       this.opponentAvatar.orientation = Orientation.DOWNLEFT
-      let opponentLife = 0 
-      this.scene.room?.state.players.forEach(p => {
-        if(p.id === opponentId) opponentLife = p.life
-      })
-      this.opponentAvatar.updateCircleLife(opponentLife)
-      this.animationManager.animatePokemon(this.opponentAvatar, this.opponentAvatar.action)
+      this.opponentAvatar.updateLife(opponentLife)
+      this.animationManager.animatePokemon(
+        this.opponentAvatar,
+        this.opponentAvatar.action
+      )
     }
   }
 
-  updateAvatarLife(playerId: string, value: number){
-    if(this.player.id === playerId){
-      this.playerAvatar.updateCircleLife(value)
+  updateAvatarLife(playerId: string, value: number) {
+    if (this.player.id === playerId) {
+      this.playerAvatar.updateLife(value)
     }
-    
-    if(this.opponentAvatar && this.opponentAvatar.id === playerId){
-      this.opponentAvatar.updateCircleLife(value)
+
+    if (this.opponentAvatar && this.opponentAvatar.id === playerId) {
+      this.opponentAvatar.updateLife(value)
     }
   }
 
@@ -176,12 +229,12 @@ export default class BoardManager {
       pokemon.setVisible(true)
     })
     this.updatePlayerAvatar()
-    if(this.opponentAvatar){
+    if (this.opponentAvatar) {
       this.opponentAvatar.destroy(true)
     }
   }
 
-  minigameMode(){
+  minigameMode() {
     this.mode = BoardMode.MINIGAME
     this.pokemons.forEach((pokemon) => {
       if (pokemon.positionY != 0) {
@@ -191,10 +244,10 @@ export default class BoardManager {
     this.closeTooltips()
     this.scene.input.setDragState(this.scene.input.activePointer, 0)
 
-    if(this.playerAvatar){
+    if (this.playerAvatar) {
       this.playerAvatar.destroy(true)
     }
-    if(this.opponentAvatar){
+    if (this.opponentAvatar) {
       this.opponentAvatar.destroy(true)
     }
   }
@@ -208,7 +261,10 @@ export default class BoardManager {
       this.player = player
       this.buildPokemons()
       this.updatePlayerAvatar()
-      this.updateOpponentAvatar(this.player.opponentId, this.player.opponentAvatar)
+      this.updateOpponentAvatar(
+        this.player.opponentId,
+        this.player.opponentAvatar
+      )
     }
   }
 
@@ -320,6 +376,25 @@ export default class BoardManager {
       event.y != null
     ) {
       this.triggerLightning(event.x, event.y)
+    }
+  }
+
+  displayEmote(playerId: string, emote: string) {
+    if (this.playerAvatar && this.playerAvatar.playerId === playerId) {
+      this.animationManager.play(
+        this.playerAvatar,
+        AnimationConfig[this.playerAvatar.name].emote
+      )
+      this.playerAvatar.drawSpeechBubble(emote, false)
+    } else if (
+      this.opponentAvatar &&
+      this.opponentAvatar.playerId === playerId
+    ) {
+      this.animationManager.play(
+        this.opponentAvatar,
+        AnimationConfig[this.opponentAvatar.name].emote
+      )
+      this.opponentAvatar.drawSpeechBubble(emote, true)
     }
   }
 
