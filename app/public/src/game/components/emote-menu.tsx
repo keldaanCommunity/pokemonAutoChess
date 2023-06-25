@@ -54,7 +54,6 @@ export function EmoteMenuComponent(props: {
     )
   }
   const pConfig = pokemonCollection[props.index]
-  console.log({ pokemonCollection, pConfig })
 
   return (
     <ul>
