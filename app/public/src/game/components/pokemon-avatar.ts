@@ -2,15 +2,15 @@ import { GameObjects } from "phaser"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { IPokemonAvatar } from "../../../../types"
 import { GamePhaseState } from "../../../../types/enum/Game"
-import { max } from "../../../../utils/number"
 import { playSound, SOUNDS } from "../../pages/utils/audio"
 import { getAvatarSrc } from "../../utils"
 import GameScene from "../scenes/game-scene"
 import Pokemon from "./pokemon"
+import LifeBar from "./life-bar"
 
 export default class PokemonAvatar extends Pokemon {
   circleHitbox: GameObjects.Ellipse | undefined
-  circlePartial: GameObjects.Graphics
+  circleTimer: GameObjects.Graphics
   isCurrentPlayerAvatar: boolean
   emoteBubble: EmoteBubble | null
 
@@ -34,17 +34,20 @@ export default class PokemonAvatar extends Pokemon {
     this.emoteBubble = null
     this.isCurrentPlayerAvatar = this.playerId === scene.uid
     this.drawCircles()
+    this.drawLifebar()
   }
 
   drawCircles() {
     const scene = this.scene as GameScene
     this.circleHitbox = new GameObjects.Ellipse(scene, 0, 0, 50, 50)
     this.add(this.circleHitbox)
+    this.circleHitbox.setDepth(-1)
     this.circleHitbox.setVisible(
       scene.room?.state.phase === GamePhaseState.MINIGAME
     )
-    this.circlePartial = new GameObjects.Graphics(scene)
-    this.add(this.circlePartial)
+    this.circleTimer = new GameObjects.Graphics(scene)
+    this.add(this.circleTimer)
+    this.circleTimer.setDepth(-1)
     if (this.isCurrentPlayerAvatar) {
       this.circleHitbox.setStrokeStyle(2, 0xffffff, 0.8)
     } else {
@@ -54,45 +57,35 @@ export default class PokemonAvatar extends Pokemon {
 
   updateCircleTimer(timer: number) {
     if (timer <= 0) {
-      this.circlePartial.destroy()
+      this.circleTimer.destroy()
       if (this.isCurrentPlayerAvatar) {
         playSound(SOUNDS.CAROUSEL_UNLOCK)
       }
     } else {
-      this.circlePartial.clear()
-      this.circlePartial.lineStyle(
+      this.circleTimer.clear()
+      this.circleTimer.lineStyle(
         8,
         0xf7d51d,
         this.isCurrentPlayerAvatar ? 0.8 : 0.5
       )
-      this.circlePartial.beginPath()
+      this.circleTimer.beginPath()
 
       const angle = (Math.min(timer, 8000) / 8000) * Math.PI * 2
-      this.circlePartial.arc(0, 0, 30, 0, angle)
-      this.circlePartial.strokePath()
+      this.circleTimer.arc(0, 0, 30, 0, angle)
+      this.circleTimer.strokePath()
     }
   }
 
-  updateCircleLife(life: number) {
-    this.circlePartial.clear()
-    this.circlePartial.lineStyle(
-      8,
-      this.isCurrentPlayerAvatar ? 0x01ff01 : 0xf7d51d,
-      0.8
-    )
-    this.circlePartial.beginPath()
-
-    const angle = (Math.PI * 2 * max(100)(life)) / 100
-    this.circlePartial.arc(0, 0, 30, 0, angle)
-    this.circlePartial.strokePath()
+  updateLife(life: number) {
+    this.lifebar?.setAmount(life)
   }
 
   drawSpeechBubble(emoteAvatar: string, isOpponent: boolean) {
     this.emoteBubble = new EmoteBubble(this.scene, emoteAvatar, this.isCurrentPlayerAvatar)
     this.add(this.emoteBubble)
 
-    const x = isOpponent ? -25 : +25
-    const y = isOpponent ? +90 : -90
+    const x = isOpponent ? -40 : +40
+    const y = isOpponent ? +100 : -100
     this.emoteBubble.setPosition(x, y)
 
     setTimeout(() => {
@@ -101,6 +94,19 @@ export default class PokemonAvatar extends Pokemon {
         this.emoteBubble = null
       } 
     }, 3000)
+  }
+
+  drawLifebar(){
+    this.lifebar = new LifeBar(
+      this.scene,
+      0,
+      28,
+      60,
+      100,
+      0,
+      this.isCurrentPlayerAvatar ? 1 : 2
+    )
+    this.add(this.lifebar)
   }
 }
 

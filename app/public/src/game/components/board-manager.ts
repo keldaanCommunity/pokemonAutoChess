@@ -121,7 +121,7 @@ export default class BoardManager {
       this.player.id
     )
     this.playerAvatar.orientation = Orientation.UPRIGHT
-    this.playerAvatar.updateCircleLife(this.player.life)
+    this.playerAvatar.updateLife(this.player.life)
     this.playerAvatar.on("pointerdown", throttle(() => {
       store.dispatch(
         broadcastEmote(
@@ -156,18 +156,18 @@ export default class BoardManager {
       this.scene.room?.state.players.forEach(p => {
         if(p.id === opponentId) opponentLife = p.life
       })
-      this.opponentAvatar.updateCircleLife(opponentLife)
+      this.opponentAvatar.updateLife(opponentLife)
       this.animationManager.animatePokemon(this.opponentAvatar, this.opponentAvatar.action)
     }
   }
 
   updateAvatarLife(playerId: string, value: number){
     if(this.player.id === playerId){
-      this.playerAvatar.updateCircleLife(value)
+      this.playerAvatar.updateLife(value)
     }
     
     if(this.opponentAvatar && this.opponentAvatar.id === playerId){
-      this.opponentAvatar.updateCircleLife(value)
+      this.opponentAvatar.updateLife(value)
     }
   }
 
