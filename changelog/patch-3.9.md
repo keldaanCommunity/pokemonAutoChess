@@ -63,7 +63,7 @@ Emotes communication between players ingame
 
 # Bugfix
 
--
+- Shell bell now heals from any source of damage, not only attacks
 
 # UI
 
