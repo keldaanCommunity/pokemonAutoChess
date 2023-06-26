@@ -36,6 +36,7 @@ Emotes communication between players ingame
 - Buff Cyndaquill line: Cyndaquill: Attack 6 → 7 ; Quilava: Attack 11 → 13 ; Typlosion HP 230 → 250, Attack 21 → 25
 - Buff Overheat: 20 → 30 special damage
 - Nerf Spiritomb: range 3 → 2
+- Nerf Chandelure: HP: 180 → 160, Attack: 16 → 15
 - Castform & Volcanion now change weather depending on your dominant synergy
 - Buff Gible: move from Epic to Rare
 - Castform now change weather depending on your dominant synergy
@@ -46,6 +47,8 @@ Emotes communication between players ingame
 - Buff Draco Meteor damage 20 -> 25
 - Buff Jynx: mana 90 -> 80 ; attack 10 -> 12
 - Nerf Triattack duration: 2/4/8 → 2/3/5 seconds
+- Adjusted Stomp damage multiplier: 2/4/8→ 3/4/5
+- Buff Echo additional damage: 1/2/3 → 3/6/9
 
 # Changes to Synergies
 
