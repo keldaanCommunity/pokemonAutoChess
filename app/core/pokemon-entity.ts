@@ -439,10 +439,6 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       this.status.triggerParalysis(5000, this)
     }
 
-    if (this.items.has(Item.SHELL_BELL)) {
-      this.handleHeal(Math.floor(0.3 * totalTakenDamage), this, 0)
-    }
-
 
     if (this.items.has(Item.UPGRADE)) {
       this.addAttackSpeed(5)
@@ -557,6 +553,10 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
         lifesteal = 0.5
       }
       this.handleHeal(Math.floor(lifesteal * damage), this, 0)
+    }
+
+    if (this.items.has(Item.SHELL_BELL)) {
+      this.handleHeal(Math.floor(0.3 * damage), this, 0)
     }
   }
 
