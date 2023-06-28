@@ -4674,3 +4674,21 @@ export class MagmaStormStrategy extends AttackStrategy {
     target.status.triggerMagmaStorm(target, pokemon)
   }
 }
+
+export class SlashingClawStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    let damage = pokemon.stars === 3 ? 60 : pokemon.stars === 2 ? 30 : 15
+    if (target.status.wound) {
+      damage = Math.ceil(damage * 1.3)
+    }
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    target.status.triggerWound(5000, target, pokemon, board)
+  }
+}

@@ -178,8 +178,7 @@ export const CommonShop = new Array<Pkm>(
   Pkm.ARON,
   Pkm.MUDKIP,
   Pkm.CHIMCHAR,
-  Pkm.LITWICK,
-  Pkm.HEATRAN
+  Pkm.LITWICK
 )
 
 export const UncommonShop = new Array<Pkm>(
