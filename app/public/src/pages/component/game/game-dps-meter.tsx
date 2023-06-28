@@ -6,21 +6,26 @@ import GameBlueHealDpsMeter from "./game-blue-heal-dps-meter"
 import GameRedHealDpsMeter from "./game-red-heal-dps-meter"
 import { useAppSelector } from "../../../hooks"
 import { getAvatarSrc } from "../../../utils"
-import "./game-dps-meter.css"
 import { loadPreferences, savePreferences } from "../../../preferences"
+import "./game-dps-meter.css"
 
 let lastOpponentName = ""
+let lastOpponentAvatar = ""
 
 export default function GameDpsMeter() {
   const opponentName = useAppSelector(
     (state) => state.game.currentPlayerOpponentName
   )
-  if(opponentName != lastOpponentName && opponentName != "") {
-    lastOpponentName = opponentName
-  }
   const opponentAvatar = useAppSelector(
     (state) => state.game.currentPlayerOpponentAvatar
   )
+  if(opponentName != lastOpponentName && opponentName != "") {
+    lastOpponentName = opponentName
+  }
+  if(opponentAvatar != lastOpponentAvatar && opponentAvatar != ""){
+    lastOpponentAvatar = opponentAvatar
+  }
+  
   const avatar = useAppSelector((state) => state.game.currentPlayerAvatar)
   const name = useAppSelector((state) => state.game.currentPlayerName)
   const [isOpen, setOpen] = useState(loadPreferences().showDpsMeter)
@@ -30,7 +35,7 @@ export default function GameDpsMeter() {
     savePreferences({ showDpsMeter: !isOpen })
   }
 
-  if (opponentAvatar == "") {
+  if (opponentAvatar == "" && lastOpponentAvatar == "") {
     return null
   } else {
     return (
@@ -58,7 +63,7 @@ export default function GameDpsMeter() {
             <h2>Vs</h2>
             <div>
               <img
-                src={getAvatarSrc(opponentAvatar)}
+                src={getAvatarSrc(opponentAvatar || lastOpponentAvatar)}
                 className="pokemon-portrait"
               ></img>
               <p>{opponentName || lastOpponentName}</p>
