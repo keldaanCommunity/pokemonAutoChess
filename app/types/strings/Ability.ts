@@ -964,6 +964,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.SLASHING_CLAW]: {
+    eng: "Slashing Claw",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1927,6 +1933,12 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
   },
   [Ability.MAGMA_STORM]: {
     eng: `The target becomes trapped within a maelstrom of fire that deals [80,SP] ${Damage.SPECIAL} before moving to an adjacent target`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.SLASHING_CLAW]: {
+    eng: `Deals [15,30,60,SP] to the target and ${Status.WOUND} it for 5 seconds. If the target is already ${Status.WOUND}, deals 30% bonus ${Damage.SPECIAL}`,
     esp: "",
     prt: "",
     fra: ""
