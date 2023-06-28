@@ -830,6 +830,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.ERUPTION,
+      frames: this.game.anims.generateFrameNames(Ability.ERUPTION, {
+        start: 0,
+        end: 10,
+        zeroPad: 3
+      }),
+      duration: 500,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.SLASHING_CLAW,
       frames: this.game.anims.generateFrameNames(Ability.SLASHING_CLAW, {
         start: 0,

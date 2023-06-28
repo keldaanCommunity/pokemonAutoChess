@@ -110,6 +110,11 @@ export default class LoadingManager {
       "/assets/attacks"
     )
     scene.load.multiatlas(
+      "ERUPTION",
+      "/assets/attacks/ERUPTION.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
       "SLASHING_CLAW",
       "/assets/attacks/SLASHING_CLAW.json",
       "/assets/attacks"

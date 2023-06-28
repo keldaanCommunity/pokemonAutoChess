@@ -711,7 +711,7 @@ export class Numel extends Pokemon {
       AttackSprite.FIRE_MELEE,
       1,
       100,
-      Ability.BURN,
+      Ability.ERUPTION,
       shiny,
       emotion,
       false
@@ -734,7 +734,7 @@ export class Camerupt extends Pokemon {
       AttackSprite.FIRE_MELEE,
       2,
       100,
-      Ability.BURN,
+      Ability.ERUPTION,
       shiny,
       emotion,
       false
@@ -757,7 +757,7 @@ export class MegaCamerupt extends Pokemon {
       AttackSprite.FIRE_MELEE,
       3,
       100,
-      Ability.BURN,
+      Ability.ERUPTION,
       shiny,
       emotion,
       true

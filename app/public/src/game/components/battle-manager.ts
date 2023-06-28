@@ -2347,6 +2347,29 @@ export default class BattleManager {
             )
             break
 
+          case Ability.ERUPTION:
+            coordinates = transformAttackCoordinate(targetX + 3, targetY + 3)
+            coordinatesTarget = transformAttackCoordinate(targetX, targetY)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.ERUPTION,
+              "000"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.anims.play(Ability.ERUPTION)
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              x: coordinatesTarget[0],
+              y: coordinatesTarget[1],
+              ease: "linear",
+              duration: 500,
+              onComplete: () => {
+                specialProjectile.destroy()
+              }
+            })
+            break
+
           case Ability.SLASHING_CLAW:
             coordinates = transformAttackCoordinate(targetX, targetY)
             specialProjectile = this.scene.add.sprite(

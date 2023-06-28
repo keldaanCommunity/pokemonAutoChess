@@ -2,7 +2,6 @@ import { Langage } from ".."
 import { Ability } from "../enum/Ability"
 import { Damage, Stat } from "../enum/Game"
 import { Status } from "../enum/Status"
-import { Weather } from "../enum/Weather"
 
 export const AbilityName: { [key in Ability]: Langage } = {
   [Ability.SOFT_BOILED]: {
@@ -967,6 +966,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
   },
   [Ability.SLASHING_CLAW]: {
     eng: "Slashing Claw",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.ERUPTION]: {
+    eng: "Eruption",
     esp: "",
     prt: "",
     fra: ""
@@ -1939,6 +1944,12 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
   },
   [Ability.SLASHING_CLAW]: {
     eng: `Deals [15,30,60,SP] to the target and ${Status.WOUND} it for 5 seconds. If the target is already ${Status.WOUND}, deals 30% bonus ${Damage.SPECIAL}`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.ERUPTION]: {
+    eng: `Fires [20,30,40] projectiles in the air. Every projectile deals [30,60,120,SP] ${Damage.SPECIAL} and ${Status.BURN} for 5 seconds`,
     esp: "",
     prt: "",
     fra: ""
