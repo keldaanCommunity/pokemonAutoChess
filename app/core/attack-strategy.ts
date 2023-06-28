@@ -73,7 +73,7 @@ export class AttackStrategy {
     if (pokemon.items.has(Item.STAR_DUST)) {
       pokemon.handleShield(Math.round(0.5 * pokemon.maxMana), pokemon, false)
       pokemon.count.starDustCount++
-    }    
+    }
 
     if (crit) {
       pokemon.onCritical(target, board)
