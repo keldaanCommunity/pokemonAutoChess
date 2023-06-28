@@ -8058,7 +8058,7 @@ export class Heatran extends Pokemon {
       AttackSprite.FIRE_RANGE,
       2,
       100,
-      Ability.BURN,
+      Ability.MAGMA_STORM,
       shiny,
       emotion,
       true

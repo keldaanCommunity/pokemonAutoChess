@@ -157,7 +157,8 @@ import {
   AbsorbStrategy,
   RolloutStrategy,
   ThrashStrategy,
-  SolarBeamStrategy
+  SolarBeamStrategy,
+  MagmaStormStrategy
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -319,7 +320,8 @@ export enum Ability {
   ABSORB = "ABSORB",
   ROLLOUT = "ROLLOUT",
   THRASH = "THRASH",
-  SOLAR_BEAM = "SOLAR_BEAM"
+  SOLAR_BEAM = "SOLAR_BEAM",
+  MAGMA_STORM = "MAGMA_STORM"
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -400,21 +402,21 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.ROCK_SMASH]: new RockSmashStrategy(),
   [Ability.HEAD_SMASH]: new HeadSmashStrategy(),
   [Ability.DEFAULT]: new AttackStrategy(),
-  DIAMOND_STORM: new DiamondStormStrategy(),
-  DRACO_ENERGY: new DracoEnergyStrategy(),
-  DYNAMAX_CANNON: new DynamaxCannonStrategy(),
-  DYNAMIC_PUNCH: new DynamicPunchStrategy(),
-  ELECTRO_BOOST: new ElectroBoostStrategy(),
-  ELECTRO_WEB: new ElectroWebStrategy(),
-  FIRE_TRICK: new FireTrickStrategy(),
-  FLAME_CHARGE: new FlameChargeStrategy(),
-  LEECH_SEED: new LeechSeedStrategy(),
-  LOCK_ON: new LockOnStrategy(),
-  PSYCH_UP: new PsychUpStrategy(),
-  RAZOR_WIND: new RazorWindStrategy(),
-  TWISTING_NEITHER: new TwistingNeitherStrategy(),
-  EARTHQUAKE: new EarthquakeStrategy(),
-  SOFT_BOILED: new SoftBoiledStrategy(),
+  [Ability.DIAMOND_STORM]: new DiamondStormStrategy(),
+  [Ability.DRACO_ENERGY]: new DracoEnergyStrategy(),
+  [Ability.DYNAMAX_CANNON]: new DynamaxCannonStrategy(),
+  [Ability.DYNAMIC_PUNCH]: new DynamicPunchStrategy(),
+  [Ability.ELECTRO_BOOST]: new ElectroBoostStrategy(),
+  [Ability.ELECTRO_WEB]: new ElectroWebStrategy(),
+  [Ability.FIRE_TRICK]: new FireTrickStrategy(),
+  [Ability.FLAME_CHARGE]: new FlameChargeStrategy(),
+  [Ability.LEECH_SEED]: new LeechSeedStrategy(),
+  [Ability.LOCK_ON]: new LockOnStrategy(),
+  [Ability.PSYCH_UP]: new PsychUpStrategy(),
+  [Ability.RAZOR_WIND]: new RazorWindStrategy(),
+  [Ability.TWISTING_NEITHER]: new TwistingNeitherStrategy(),
+  [Ability.EARTHQUAKE]: new EarthquakeStrategy(),
+  [Ability.SOFT_BOILED]: new SoftBoiledStrategy(),
   [Ability.ELECTRIC_SURGE]: new ElectricSurgeStrategy(),
   [Ability.PSYCHIC_SURGE]: new PsychicSurgeStrategy(),
   [Ability.MIND_BLOWN]: new MindBlownStrategy(),
@@ -481,5 +483,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.ABSORB]: new AbsorbStrategy(),
   [Ability.ROLLOUT]: new RolloutStrategy(),
   [Ability.THRASH]: new ThrashStrategy(),
-  [Ability.SOLAR_BEAM]: new SolarBeamStrategy()
+  [Ability.SOLAR_BEAM]: new SolarBeamStrategy(),
+  [Ability.MAGMA_STORM]: new MagmaStormStrategy()
 }

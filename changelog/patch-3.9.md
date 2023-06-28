@@ -49,6 +49,7 @@ Emotes communication between players ingame
 - Nerf Triattack duration: 2/4/8 → 2/3/5 seconds
 - Adjusted Stomp damage multiplier: 2/4/8→ 3/4/5
 - Buff Echo additional damage: 1/2/3 → 3/6/9
+- Heatran: New Magma Storm ability: The foe becomes trapped within a maelstrom of fire that deals 80 special damage before moving to an adjacent target
 - Buff Azelf mana 110 -> 80
 
 # Changes to Synergies

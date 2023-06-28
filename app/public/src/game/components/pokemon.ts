@@ -87,6 +87,7 @@ export default class Pokemon extends DraggableObject {
   confusion: GameObjects.Sprite | undefined
   paralysis: GameObjects.Sprite | undefined
   armorReduction: GameObjects.Sprite | undefined
+  magmaStorm: GameObjects.Sprite | undefined
   poison: GameObjects.Sprite | undefined
   protect: GameObjects.Sprite | undefined
   resurection: GameObjects.Sprite | undefined
@@ -99,7 +100,6 @@ export default class Pokemon extends DraggableObject {
   stars: number
   playerId: string
   shouldShowTooltip: boolean
-  
 
   constructor(
     scene: GameScene,
@@ -231,7 +231,7 @@ export default class Pokemon extends DraggableObject {
       //this.setEffects(p, scene);
     }
     this.add(this.sprite)
-    this.draggable = (playerId === scene.uid && !inBattle)
+    this.draggable = playerId === scene.uid && !inBattle
     if (instanceofPokemonEntity(pokemon)) {
       const p = <IPokemonEntity>pokemon
       this.mana = p.mana

@@ -2498,7 +2498,7 @@ export class SolarBeamStrategy extends AttackStrategy {
     }
     effectInLine(board, pokemon, target, (targetInLine) => {
       if (targetInLine != null && targetInLine.team !== pokemon.team) {
-        if(pokemon.simulation.weather === Weather.SUN){
+        if (pokemon.simulation.weather === Weather.SUN) {
           targetInLine.status.triggerBurn(3000, targetInLine, pokemon, board)
         }
 
@@ -3190,9 +3190,9 @@ export class StompStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     let damageFactor = 3
-    if(pokemon.stars === 2){
+    if (pokemon.stars === 2) {
       damageFactor = 4
-    } else if(pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL){
+    } else if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
       damageFactor = 5
     }
     const damage = pokemon.atk * damageFactor
@@ -4659,5 +4659,18 @@ export class ThrashStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target, crit)
     pokemon.addAttack(Math.ceil(1.1 * pokemon.baseAtk), false)
     pokemon.status.triggerConfusion(3000, pokemon)
+  }
+}
+
+export class MagmaStormStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    target.status.triggerMagmaStorm(target, pokemon)
   }
 }
