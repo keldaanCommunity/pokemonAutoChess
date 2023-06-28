@@ -66,18 +66,19 @@ export default class AttackingState extends PokemonState {
         pokemon.strategy.process(pokemon, this, board, target, crit)
       } else {
         // BASIC ATTACK
+        pokemon.count.attackCount++
         this.attack(pokemon, board, targetCoordinate)
         if (
           pokemon.effects.includes(Effect.RISING_VOLTAGE) ||
           pokemon.effects.includes(Effect.OVERDRIVE)
         ) {
-          let tripleAttackChance = 0
+          let isTripleAttack = false
           if (pokemon.effects.includes(Effect.RISING_VOLTAGE)) {
-            tripleAttackChance = 0.3
+            isTripleAttack = (pokemon.count.attackCount % 4 === 0)
           } else if (pokemon.effects.includes(Effect.OVERDRIVE)) {
-            tripleAttackChance = 0.5
+            isTripleAttack = (pokemon.count.attackCount % 3 === 0)
           }
-          if (Math.random() < tripleAttackChance) {
+          if (isTripleAttack) {
             pokemon.count.tripleAttackCount++
             this.attack(pokemon, board, targetCoordinate)
             this.attack(pokemon, board, targetCoordinate)
@@ -94,7 +95,6 @@ export default class AttackingState extends PokemonState {
     board: Board,
     coordinates: { x: number; y: number }
   ) {
-    pokemon.count.attackCount++
     pokemon.targetX = coordinates.x
     pokemon.targetY = coordinates.y
 

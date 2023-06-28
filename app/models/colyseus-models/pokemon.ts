@@ -7702,7 +7702,7 @@ export class Azelf extends Pokemon {
       3,
       AttackSprite.PSYCHIC_RANGE,
       1,
-      110,
+      80,
       Ability.SONG_OF_DESIRE,
       shiny,
       emotion,

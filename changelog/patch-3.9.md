@@ -50,9 +50,11 @@ Emotes communication between players ingame
 - Adjusted Stomp damage multiplier: 2/4/8→ 3/4/5
 - Buff Echo additional damage: 1/2/3 → 3/6/9
 - Heatran: New Magma Storm ability: The foe becomes trapped within a maelstrom of fire that deals 80 special damage before moving to an adjacent target
+- Buff Azelf mana 110 -> 80
 
 # Changes to Synergies
 
+- Nerf electric, but make it more consistent: (3) every fourth attack is a triple attack (6) every third attack is a triple attack
 - Nerf Human heal: (2) 15% → 10% ; (4) 30% → 25% ; (6): 60% → 50%
 - Fairy splash now acts the same way as any other special damage, that is trigger Pokemonomicon, be absorbed by Rune Protect and be reflected by Power Lens
 - Nerf Fairy, Strange Steam (6): Shocks deal 60 -> 55 special damage
@@ -67,7 +69,7 @@ Emotes communication between players ingame
 
 # Bugfix
 
--
+- Shell bell now heals from any source of damage, not only attacks
 
 # UI
 
