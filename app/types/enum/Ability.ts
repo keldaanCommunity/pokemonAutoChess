@@ -158,7 +158,8 @@ import {
   RolloutStrategy,
   ThrashStrategy,
   SolarBeamStrategy,
-  MagmaStormStrategy
+  MagmaStormStrategy,
+  SlashingClawStrategy
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -321,7 +322,8 @@ export enum Ability {
   ROLLOUT = "ROLLOUT",
   THRASH = "THRASH",
   SOLAR_BEAM = "SOLAR_BEAM",
-  MAGMA_STORM = "MAGMA_STORM"
+  MAGMA_STORM = "MAGMA_STORM",
+  SLASHING_CLAW = "SLASHING_CLAW"
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -484,5 +486,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.ROLLOUT]: new RolloutStrategy(),
   [Ability.THRASH]: new ThrashStrategy(),
   [Ability.SOLAR_BEAM]: new SolarBeamStrategy(),
-  [Ability.MAGMA_STORM]: new MagmaStormStrategy()
+  [Ability.MAGMA_STORM]: new MagmaStormStrategy(),
+  [Ability.SLASHING_CLAW]: new SlashingClawStrategy()
 }
