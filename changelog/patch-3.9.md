@@ -52,6 +52,7 @@ Emotes communication between players ingame
 - Heatran: New Magma Storm ability: The foe becomes trapped within a maelstrom of fire that deals 80 special damage before moving to an adjacent target
 - Buff Azelf mana 110 -> 80
 - Sneasel: New Slahing Claw ability: Deals 15/30/60 special damage to the target and wound it for 5 seconds. If the target is already wound, deals 30% bonus special damage
+- Numel: New Eruption ability: Fires 20/30/40 projectiles in the air. Every projectile deals 30/60/120 and burns for 5 seconds
 
 # Changes to Synergies
 

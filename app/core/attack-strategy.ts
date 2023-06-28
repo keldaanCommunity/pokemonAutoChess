@@ -9,7 +9,12 @@ import { Synergy } from "../types/enum/Synergy"
 import { AbilityStrategy, Ability } from "../types/enum/Ability"
 import PokemonFactory from "../models/pokemon-factory"
 import { Pkm } from "../types/enum/Pokemon"
-import { chance, pickRandomIn, shuffleArray } from "../utils/random"
+import {
+  chance,
+  pickRandomIn,
+  randomBetween,
+  shuffleArray
+} from "../utils/random"
 import { effectInLine, OrientationArray } from "../utils/orientation"
 import { logger } from "../utils/logger"
 import { DEFAULT_ATK_SPEED } from "../types/Config"
@@ -4690,5 +4695,46 @@ export class SlashingClawStrategy extends AttackStrategy {
     }
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     target.status.triggerWound(5000, target, pokemon, board)
+  }
+}
+
+export class EruptionStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30
+    const numberOfProjectiles =
+      pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 30 : 20
+
+    for (let i = 0; i < numberOfProjectiles; i++) {
+      const x = randomBetween(0, board.rows)
+      const y = randomBetween(0, board.columns)
+      const value = board.getValue(x, y)
+      if (value && value.team !== pokemon.team) {
+        value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: Ability.ERUPTION,
+        positionX: pokemon.positionX,
+        positionY: pokemon.positionY,
+        targetX: x,
+        targetY: y
+      })
+    }
+
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    target.status.triggerBurn(5000, target, pokemon, board)
   }
 }
