@@ -231,11 +231,11 @@ export const lobbySlice = createSlice({
     addRoom: (state, action: PayloadAction<RoomAvailable>) => {
       const metadata: IPreparationMetadata | IGameMetadata =
         action.payload.metadata
-      const rooms =
-        metadata.type === "preparation"
-          ? state.preparationRooms
-          : state.gameRooms
       if (metadata && metadata.name) {
+        const rooms =
+          metadata.type === "preparation"
+            ? state.preparationRooms
+            : state.gameRooms
         const roomIndex = rooms.findIndex(
           (room) => room.roomId === action.payload.roomId
         )

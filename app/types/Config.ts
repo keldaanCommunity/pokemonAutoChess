@@ -1,5 +1,5 @@
 import { Synergy } from "./enum/Synergy"
-import { Pkm, PkmIndex } from "./enum/Pokemon"
+import { Pkm, PkmDuo, PkmProposition } from "./enum/Pokemon"
 import { Item } from "./enum/Item"
 import { AttackType, Rarity, Stat } from "./enum/Game"
 import { Emotion } from "."
@@ -257,7 +257,7 @@ export const LegendaryShop = new Array<Pkm>(
   Pkm.SOLOSIS
 )
 
-export const Mythical1Shop = new Array<Pkm>(
+export const Mythical1Shop = new Array<PkmProposition>(
   Pkm.AERODACTYL,
   Pkm.BLACEPHALON,
   Pkm.REGIDRAGO,
@@ -269,8 +269,7 @@ export const Mythical1Shop = new Array<Pkm>(
   Pkm.UXIE,
   Pkm.MESPRIT,
   Pkm.AZELF,
-  Pkm.LATIAS,
-  Pkm.LATIOS,
+  PkmDuo.LATIOS_LATIAS,
   Pkm.ZAPDOS,
   Pkm.MOLTRES,
   Pkm.ARTICUNO,
@@ -306,7 +305,7 @@ export const Mythical1Shop = new Array<Pkm>(
   Pkm.MARACTUS
 )
 
-export const Mythical2Shop = new Array<Pkm>(
+export const Mythical2Shop = new Array<PkmProposition>(
   Pkm.RESHIRAM,
   Pkm.ZEKROM,
   Pkm.STAKATAKA,

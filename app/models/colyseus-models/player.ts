@@ -18,7 +18,7 @@ import { IPokemonConfig } from "../mongo-models/user-metadata"
 import PokemonCollection from "./pokemon-collection"
 import HistoryItem from "./history-item"
 import { Item } from "../../types/enum/Item"
-import { Pkm } from "../../types/enum/Pokemon"
+import { Pkm, PkmProposition } from "../../types/enum/Pokemon"
 import GameRoom from "../../rooms/game-room"
 import { Weather } from "../../types/enum/Weather"
 
@@ -50,7 +50,7 @@ export default class Player extends Schema implements IPlayer {
   @type("string") title: Title | ""
   @type("string") role: Role
   @type(["string"]) itemsProposition = new ArraySchema<Item>()
-  @type(["string"]) pokemonsProposition = new ArraySchema<Pkm>()
+  @type(["string"]) pokemonsProposition = new ArraySchema<PkmProposition>()
   @type("float32") loadingProgress: number = 0
   effects: Effects = new Effects()
   isBot: boolean

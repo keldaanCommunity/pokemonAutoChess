@@ -1,12 +1,14 @@
 .game-pokemon-portrait {
-  image-rendering: pixelated;
+  position: relative;
+  --container-height: 6vw;
+  --portrait-size: calc(var(--container-height) - 5px);
   width: 7.5vw;
-  height: 6vw;
+  height: var(--container-height);
+  image-rendering: pixelated;  
   padding: 0;
   background-repeat: no-repeat;
   background-size: contain;
   cursor: var(--cursor-hover);
-  position: relative;
 }
 
 .game-pokemon-portrait.empty {
@@ -66,4 +68,39 @@
   border: 1px solid white;
   border-radius: 4px;
   image-rendering: pixelated;
+}
+
+
+.game-pokemon-portrait-duo-part {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 4px;
+  width: var(--portrait-size);
+  height: var(--portrait-size);
+  background-size: contain;
+  background-repeat: no-repeat;
+  border-radius: 8px;
+  image-rendering: pixelated;
+}
+
+.game-pokemon-portrait-duo-part-down {
+  clip-path: polygon(
+    0 calc(var(--portrait-size) * 0.5), 
+    var(--portrait-size) calc(var(--portrait-size) * 0.52), 
+    var(--portrait-size) var(--portrait-size), 
+    0 var(--portrait-size) 
+  );
+  background-position: 0 calc(var(--portrait-size) * 0.2);  
+}
+
+.game-pokemon-portrait-duo-part-up {
+  clip-path: polygon(
+    0 calc(var(--portrait-size) * 0.5), 
+    var(--portrait-size) calc(var(--portrait-size) * 0.48),
+    var(--portrait-size) 0,
+    0 0
+  );
+  transform: scaleX(-1);
+  background-position: 0 calc(var(--portrait-size) * -0.25);
 }

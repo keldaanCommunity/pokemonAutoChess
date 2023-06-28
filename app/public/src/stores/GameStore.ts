@@ -8,11 +8,8 @@ import Synergies from "../../../models/colyseus-models/synergies"
 import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
 import PokemonCollection from "../../../models/colyseus-models/pokemon-collection"
 import { Synergy } from "../../../types/enum/Synergy"
-import { Pkm } from "../../../types/enum/Pokemon"
+import { Pkm, PkmProposition } from "../../../types/enum/Pokemon"
 import { Item } from "../../../types/enum/Item"
-import { toast } from "react-toastify"
-import React from "react"
-import { getAvatarSrc } from "../utils"
 import { StageDuration } from "../../../types/Config"
 import { getGameScene } from "../pages/game"
 
@@ -33,7 +30,7 @@ interface GameStateStore {
   experienceManager: ExperienceManager
   shop: Pkm[]
   itemsProposition: string[]
-  pokemonsProposition: Pkm[]
+  pokemonsProposition: PkmProposition[]
   currentPlayerSynergies: [string, number][]
   currentPlayerOpponentId: string
   currentPlayerOpponentName: string
@@ -148,10 +145,10 @@ export const gameSlice = createSlice({
     setItemsProposition: (state, action: PayloadAction<ArraySchema<Item>>) => {
       state.itemsProposition = JSON.parse(JSON.stringify(action.payload))
     },
-    setPokemonProposition: (state, action: PayloadAction<Pkm[]>) => {
+    setPokemonProposition: (state, action: PayloadAction<PkmProposition[]>) => {
       state.pokemonsProposition = JSON.parse(JSON.stringify(action.payload))
     },
-    setAdditionalPokemons: (state, action: PayloadAction<Pkm[]>) => {
+    setAdditionalPokemons: (state, action: PayloadAction<PkmProposition[]>) => {
       state.additionalPokemons = JSON.parse(JSON.stringify(action.payload))
     },
     setSynergies: (

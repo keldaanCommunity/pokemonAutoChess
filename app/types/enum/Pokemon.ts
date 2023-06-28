@@ -1734,6 +1734,16 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.MARACTUS]: Pkm.MARACTUS
 }
 
+export enum PkmDuo {
+  LATIOS_LATIAS = "latios_latias"
+}
+
+export type PkmProposition = Pkm | PkmDuo
+
+export const PkmDuos = {
+  [PkmDuo.LATIOS_LATIAS]: [Pkm.LATIOS, Pkm.LATIAS]
+}
+
 export const AnimationConfig: {
   [key in Pkm]: { attack: AnimationType; ability: AnimationType, emote: AnimationType }
 } = {
