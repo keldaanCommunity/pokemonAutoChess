@@ -1,12 +1,13 @@
 import { Schema, type } from "@colyseus/schema"
 import Board from "../../core/board"
 import PokemonEntity from "../../core/pokemon-entity"
-import { IStatus } from "../../types"
+import { IStatus, Transfer } from "../../types"
 import { Effect } from "../../types/enum/Effect"
 import { AttackType } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Weather } from "../../types/enum/Weather"
 import { max } from "../../utils/number"
+import { Ability } from "../../types/enum/Ability"
 
 export default class Status extends Schema implements IStatus {
   @type("boolean") burn = false
@@ -27,12 +28,14 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") grassField = false
   @type("boolean") fairyField = false
   @type("boolean") spikeArmor = false
+  magmaStorm = false
   soulDew = false
   deltaOrb = false
   burnOrigin: PokemonEntity | undefined = undefined
   poisonOrigin: PokemonEntity | undefined = undefined
   silenceOrigin: PokemonEntity | undefined = undefined
   woundOrigin: PokemonEntity | undefined = undefined
+  magmaStormOrigin: PokemonEntity | null = null
   burnCooldown = 0
   burnDamageCooldown = 1000
   silenceCooldown = 0
@@ -49,6 +52,7 @@ export default class Status extends Schema implements IStatus {
   runeProtectCooldown = 0
   spikeArmorCooldown = 0
   synchroCooldown = 3000
+  magmaStormCooldown = 0
   synchro = false
   tree = false
   resurectingCooldown = 0
@@ -123,6 +127,51 @@ export default class Status extends Schema implements IStatus {
 
     if (this.resurecting) {
       this.updateResurecting(dt, pokemon)
+    }
+
+    if (this.magmaStorm) {
+      this.updateMagmaStorm(dt, board, pokemon)
+    }
+  }
+
+  triggerMagmaStorm(pkm: PokemonEntity, origin: PokemonEntity | null) {
+    if (!this.magmaStorm && origin) {
+      this.magmaStorm = true
+      this.magmaStormCooldown = 500
+      this.magmaStormOrigin = origin
+    }
+  }
+
+  updateMagmaStorm(dt: number, board: Board, pkm: PokemonEntity) {
+    if (this.magmaStormCooldown - dt <= 0) {
+      this.magmaStorm = false
+      const adjacentCells = board.getAdjacentCells(pkm.positionX, pkm.positionY)
+      for (let i = 0; i < adjacentCells.length; i++) {
+        const cell = adjacentCells[i]
+        if (cell && cell.value && cell.value.team === pkm.team) {
+          cell.value.status.triggerMagmaStorm(cell.value, this.magmaStormOrigin)
+          break
+        }
+      }
+      pkm.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pkm.simulation.id,
+        skill: Ability.MAGMA_STORM,
+        positionX: pkm.positionX,
+        positionY: pkm.positionY,
+        targetX: pkm.positionX,
+        targetY: pkm.positionY
+      })
+      pkm.handleSpecialDamage(
+        80,
+        board,
+        AttackType.SPECIAL,
+        this.magmaStormOrigin,
+        false
+      )
+      this.magmaStormOrigin = null
+      this.magmaStormCooldown = 0
+    } else {
+      this.magmaStormCooldown = this.magmaStormCooldown - dt
     }
   }
 

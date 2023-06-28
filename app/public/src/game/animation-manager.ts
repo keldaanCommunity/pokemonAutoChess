@@ -830,6 +830,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.MAGMA_STORM,
+      frames: this.game.anims.generateFrameNames(Ability.MAGMA_STORM, {
+        start: 0,
+        end: 6,
+        zeroPad: 3
+      }),
+      duration: 800,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.SOLAR_BEAM,
       frames: this.game.anims.generateFrameNames(Ability.SOLAR_BEAM, {
         start: 0,
@@ -1866,7 +1877,7 @@ export default class AnimationManager {
     }
     try {
       this.play(entity, animation)
-    } catch(err){
+    } catch (err) {
       logger.warn(`Can't play animation ${animation} for ${entity.name}`)
     }
   }

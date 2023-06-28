@@ -958,6 +958,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.MAGMA_STORM]: {
+    eng: "Magma Storm",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1915,6 +1921,12 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
   },
   [Ability.SOLAR_BEAM]: {
     eng: `Deals [30,60,120,SP] ${Damage.SPECIAL} in a straight line behind the target. If the weather is sunny, targets are ${Status.BURN} for 3s and restores 40 ${Stat.MANA}`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.MAGMA_STORM]: {
+    eng: `The target becomes trapped within a maelstrom of fire that deals [80,SP] ${Damage.SPECIAL} before moving to an adjacent target`,
     esp: "",
     prt: "",
     fra: ""
