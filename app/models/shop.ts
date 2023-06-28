@@ -1,5 +1,5 @@
 import PokemonFactory from "./pokemon-factory"
-import { Pkm, PkmDuos, PkmFamily, PkmProposition } from "../types/enum/Pokemon"
+import { Pkm, PkmDuo, PkmDuos, PkmFamily, PkmProposition } from "../types/enum/Pokemon"
 import Player from "./colyseus-models/player"
 import {
   Probability,

@@ -73,7 +73,7 @@ export class AttackStrategy {
     if (pokemon.items.has(Item.STAR_DUST)) {
       pokemon.handleShield(Math.round(0.5 * pokemon.maxMana), pokemon, false)
       pokemon.count.starDustCount++
-    }
+    }    
 
     if (crit) {
       pokemon.onCritical(target, board)
@@ -2555,7 +2555,7 @@ export class DracoMeteorStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = 25
+    const damage = 50
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
         tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
@@ -4736,5 +4736,57 @@ export class EruptionStrategy extends AttackStrategy {
 
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     target.status.triggerBurn(5000, target, pokemon, board)
+  }
+}
+
+export class MistBallStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    let damage = 50
+
+    effectInLine(board, pokemon, target, (targetInLine) => {
+      if (targetInLine != null && targetInLine.team !== pokemon.team) {
+        targetInLine.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        targetInLine.addAbilityPower(-20)
+      }
+    })
+  }
+}
+
+export class LusterPurgeStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    let damage = 50
+
+    effectInLine(board, pokemon, target, (targetInLine) => {
+      if (targetInLine != null && targetInLine.team !== pokemon.team) {
+        targetInLine.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        targetInLine.addSpecialDefense(-2)
+      }
+    })
   }
 }

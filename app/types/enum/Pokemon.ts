@@ -2938,14 +2938,14 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.LATIAS]: {
-    attack: AnimationType.RearUp,
-    ability: AnimationType.Special2,
-    emote: AnimationType.Shoot
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Attack,
+    emote: AnimationType.RearUp
   },
   [Pkm.LATIOS]: {
-    attack: AnimationType.RearUp,
-    ability: AnimationType.Special0,
-    emote: AnimationType.Shoot
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Attack,
+    emote: AnimationType.RearUp
   },
   [Pkm.MESPRIT]: {
     attack: AnimationType.Hover,

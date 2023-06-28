@@ -178,8 +178,6 @@ export class OnPokemonPropositionCommand extends Command<
       const pokemonsObtained: Pokemon[] = (pkm in PkmDuos ? PkmDuos[pkm] : [pkm]).map(p => PokemonFactory.createPokemonFromName(p))
       let hasSpaceOnBench = freeCellsOnBench.length >= pokemonsObtained.length
 
-      console.log({ hasSpaceOnBench, allowBuy, freeCellsOnBench })
-
       if (allowBuy && hasSpaceOnBench) {
         pokemonsObtained.forEach(pokemon => {
           const freeCellX = this.room.getFirstAvailablePositionInBench(player.id)

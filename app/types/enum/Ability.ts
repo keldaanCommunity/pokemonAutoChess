@@ -160,7 +160,9 @@ import {
   SolarBeamStrategy,
   MagmaStormStrategy,
   SlashingClawStrategy,
-  EruptionStrategy
+  EruptionStrategy,
+  MistBallStrategy,
+  LusterPurgeStrategy
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -325,7 +327,9 @@ export enum Ability {
   SOLAR_BEAM = "SOLAR_BEAM",
   MAGMA_STORM = "MAGMA_STORM",
   SLASHING_CLAW = "SLASHING_CLAW",
-  ERUPTION = "ERUPTION"
+  ERUPTION = "ERUPTION",
+  MIST_BALL = "MIST_BALL",
+  LUSTER_PURGE = "LUSTER_PURGE"
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -490,5 +494,7 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.SOLAR_BEAM]: new SolarBeamStrategy(),
   [Ability.MAGMA_STORM]: new MagmaStormStrategy(),
   [Ability.SLASHING_CLAW]: new SlashingClawStrategy(),
-  [Ability.ERUPTION]: new EruptionStrategy()
+  [Ability.ERUPTION]: new EruptionStrategy(),
+  [Ability.MIST_BALL]: new MistBallStrategy(),
+  [Ability.LUSTER_PURGE]: new LusterPurgeStrategy(),
 }

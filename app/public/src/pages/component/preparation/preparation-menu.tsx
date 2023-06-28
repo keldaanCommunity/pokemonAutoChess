@@ -232,7 +232,6 @@ export default function PreparationMenu(props: {
 
         <button
           className={cc("bubbly", "ready-button", isReady ? "green" : "orange")}
-          style={{ marginLeft: "4em" }}
           onClick={() => {
             dispatch(toggleReady())
           }}

@@ -1880,6 +1880,16 @@ export default class AnimationManager {
       duration: 1000,
       repeat: 0
     })
+
+    this.game.anims.create({
+      key: Ability.MIST_BALL,
+      frames: this.game.anims.generateFrameNames(Ability.MIST_BALL, {
+        frames: [0,1,2,3,4,3,2,1],
+        zeroPad: 3
+      }),
+      duration: 500,
+      repeat: -1
+    })
   }
 
   animatePokemon(entity: Pokemon, action: PokemonActionState) {
@@ -1900,7 +1910,7 @@ export default class AnimationManager {
     try {
       this.play(entity, animation)
     } catch (err) {
-      logger.warn(`Can't play animation ${animation} for ${entity.name}`)
+      logger.warn(`Can't play animation ${animation} for ${entity.name}`, err)
     }
   }
 

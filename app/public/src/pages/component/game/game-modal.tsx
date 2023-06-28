@@ -1,12 +1,6 @@
 import React, { Dispatch, SetStateAction } from "react"
 import Modal from "react-bootstrap/Modal"
 
-const buttonStyle = {
-  marginLeft: "10px",
-  marginTop: "10px",
-  marginRight: "10px"
-}
-
 export default function GameModal(props: {
   modalInfo: string
   modalTitle: string
@@ -29,7 +23,6 @@ export default function GameModal(props: {
       </Modal.Body>
       <Modal.Footer>
         <button
-          style={buttonStyle}
           className="bubbly blue"
           onClick={() => {
             props.hideModal(false)
@@ -38,7 +31,6 @@ export default function GameModal(props: {
           Close
         </button>
         <button
-          style={buttonStyle}
           className="bubbly red"
           onClick={props.leave}
         >

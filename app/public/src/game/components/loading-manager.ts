@@ -461,6 +461,11 @@ export default class LoadingManager {
       "/assets/attacks/DEATH_WING.json",
       "/assets/attacks"
     )
+    scene.load.multiatlas(
+      "MIST_BALL",
+      "/assets/attacks/MIST_BALL.json",
+      "/assets/attacks"
+    )
   }
 }
 
