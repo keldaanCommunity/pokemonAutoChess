@@ -18,7 +18,7 @@ import { Synergy, SynergyEffects } from "../types/enum/Synergy"
 import { Pkm } from "../types/enum/Pokemon"
 import { IdleState } from "./idle-state"
 import PokemonFactory from "../models/pokemon-factory"
-import { clamp, roundTo2Digits } from "../utils/number"
+import { clamp, max, min, roundTo2Digits } from "../utils/number"
 import { Passive } from "../types/enum/Passive"
 import { DEFAULT_CRIT_CHANCE, DEFAULT_CRIT_DAMAGE } from "../types/Config"
 import { removeInArray } from "../utils/array"
@@ -273,27 +273,27 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   addDodgeChance(value: number) {
-    this.dodge = Math.min(0.9, this.dodge + value)
+    this.dodge = max(0.9)(this.dodge + value)
   }
 
   addAbilityPower(value: number, apBoost = false) {
     const boost = apBoost ? (value * this.ap) / 100 : 0
-    this.ap = Math.round(this.ap + Math.round(value + boost))
+    this.ap = min(0)(Math.round(this.ap + Math.round(value + boost)))
   }
 
   addDefense(value: number, apBoost = false) {
     const boost = apBoost ? (value * this.ap) / 100 : 0
-    this.def = Math.max(0, this.def + Math.round(value + boost))
+    this.def = min(0)(this.def + Math.round(value + boost))
   }
 
   addSpecialDefense(value: number, apBoost = false) {
     const boost = apBoost ? (value * this.ap) / 100 : 0
-    this.speDef = Math.max(0, this.speDef + Math.round(value + boost))
+    this.speDef = min(0)(this.speDef + Math.round(value + boost))
   }
 
   addAttack(value: number, apBoost = false) {
     const boost = apBoost ? (value * this.ap) / 100 : 0
-    this.atk = Math.max(0, this.atk + Math.round(value + boost))
+    this.atk = min(0)(this.atk + Math.round(value + boost))
   }
 
   addAttackSpeed(value: number, apBoost = false) {
@@ -420,6 +420,15 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
         crit
       )
       removeInArray(this.effects, Effect.TELEPORT_NEXT_ATTACK)
+    }
+
+    if(this.passive === Passive.SHARED_VISION){
+      board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
+        if (ally && ally.passive === Passive.SHARED_VISION && this.team === ally.team) {
+          ally.targetX = this.targetX
+          ally.targetY = this.targetY
+        }
+      })
     }
   }
 

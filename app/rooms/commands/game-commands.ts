@@ -35,12 +35,12 @@ import {
   IPokemonEntity,
   Transfer
 } from "../../types"
-import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
+import { Pkm, PkmDuos, PkmIndex, PkmProposition } from "../../types/enum/Pokemon"
 import { Pokemon } from "../../models/colyseus-models/pokemon"
 import { chance, pickRandomIn } from "../../utils/random"
 import { logger } from "../../utils/logger"
 import { Passive } from "../../types/enum/Passive"
-import { getAvatarString, getPortraitSrc } from "../../public/src/utils"
+import { getAvatarString } from "../../public/src/utils"
 
 export class OnShopCommand extends Command<
   GameRoom,
@@ -124,10 +124,10 @@ export class OnPokemonPropositionCommand extends Command<
   GameRoom,
   {
     playerId: string
-    pkm: Pkm
+    pkm: PkmProposition
   }
 > {
-  execute({ playerId, pkm }) {
+  execute({ playerId, pkm }: { playerId: string, pkm: PkmProposition }) {
     const player = this.state.players.get(playerId)
     if (
       player &&
@@ -138,45 +138,54 @@ export class OnPokemonPropositionCommand extends Command<
         this.state.additionalPokemons.push(pkm)
         this.state.shop.addAdditionalPokemon(pkm)
       }
-      const pokemon = PokemonFactory.createPokemonFromName(
-        pkm,
-        player.pokemonCollection.get(PkmIndex[pkm])
-      )
 
       let allowBuy = true
       if (
-        Mythical1Shop.includes(pokemon.name) &&
+        Mythical1Shop.includes(pkm) &&
         this.state.stageLevel !== MythicalPicksStages[0]
       ) {
-        allowBuy = false
+        allowBuy = false // wrong stage
       }
       if (
-        Mythical2Shop.includes(pokemon.name) &&
+        Mythical2Shop.includes(pkm) &&
         this.state.stageLevel !== MythicalPicksStages[1]
       ) {
-        allowBuy = false
+        allowBuy = false // wrong stage
       }
+
       player.board.forEach((p) => {
         if (
-          Mythical1Shop.includes(pokemon.name) &&
+          Mythical1Shop.includes(pkm) &&
           Mythical1Shop.includes(p.name)
         ) {
           allowBuy = false // already picked a T10 mythical
         }
         if (
-          Mythical2Shop.includes(pokemon.name) &&
+          Mythical2Shop.includes(pkm) &&
           Mythical2Shop.includes(p.name)
         ) {
           allowBuy = false // already picked a T20 mythical
         }
       })
+      
+      let freeCellsOnBench: number[] = []
+      for (let i = 0; i < 8; i++) {
+        if (this.room.isPositionEmpty(playerId, i, 0)) {
+          freeCellsOnBench.push(i)
+        }
+      }
 
-      if (allowBuy) {
-        const x = this.room.getFirstAvailablePositionInBench(player.id)
-        if (x === undefined) return
-        pokemon.positionX = x
-        pokemon.positionY = 0
-        player.board.set(pokemon.id, pokemon)
+      const pokemonsObtained: Pokemon[] = (pkm in PkmDuos ? PkmDuos[pkm] : [pkm]).map(p => PokemonFactory.createPokemonFromName(p))
+      let hasSpaceOnBench = freeCellsOnBench.length >= pokemonsObtained.length
+
+      if (allowBuy && hasSpaceOnBench) {
+        pokemonsObtained.forEach(pokemon => {
+          const freeCellX = this.room.getFirstAvailablePositionInBench(player.id)
+          if (freeCellX === undefined) return
+          pokemon.positionX = freeCellX
+          pokemon.positionY = 0
+          player.board.set(pokemon.id, pokemon)
+        })
 
         while (player.pokemonsProposition.length > 0) {
           player.pokemonsProposition.pop()

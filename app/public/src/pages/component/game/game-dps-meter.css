@@ -10,7 +10,6 @@
   overflow-y: scroll;
   max-height: 78%;
   color: #fff;
-  z-index: 10;
 }
 
 .game-dps-meter header {

@@ -28,7 +28,7 @@ import { Ability } from "./enum/Ability"
 import { Synergy } from "./enum/Synergy"
 import HistoryItem from "../models/colyseus-models/history-item"
 import { Item } from "./enum/Item"
-import { Pkm } from "./enum/Pokemon"
+import { Pkm, PkmProposition } from "./enum/Pokemon"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { IPokemonRecord } from "../models/colyseus-models/game-record"
 import GameRoom from "../rooms/game-room"
@@ -337,7 +337,7 @@ export interface IPlayer {
   title: Title | ""
   role: Role
   itemsProposition: ArraySchema<Item>
-  pokemonsProposition: ArraySchema<Pkm>
+  pokemonsProposition: ArraySchema<PkmProposition>
   rerollCount: number
   loadingProgress: number
   effects: Effects

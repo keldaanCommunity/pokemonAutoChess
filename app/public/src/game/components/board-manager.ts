@@ -365,10 +365,6 @@ export default class BoardManager {
     return benchSize
   }
 
-  get isBenchFull(): boolean {
-    return this.getBenchSize() >= 8
-  }
-
   handleBoardEvent(event: IBoardEvent) {
     if (
       event.type === BoardEvent.LIGHTNING &&

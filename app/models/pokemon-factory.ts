@@ -7,7 +7,7 @@ import {
   PkmCost
 } from "../types/Config"
 import { PokemonActionState, Rarity } from "../types/enum/Game"
-import { Pkm, PkmFamily } from "../types/enum/Pokemon"
+import { Pkm, PkmDuos, PkmFamily, PkmProposition } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { logger } from "../utils/logger"
 import { pickRandomIn } from "../utils/random"
@@ -2004,7 +2004,8 @@ export default class PokemonFactory {
     } else if (pokemon.rarity === Rarity.HATCH) {
       return [3, 4, 5][pokemon.stars - 1]
     } else if (pokemon.rarity === Rarity.MYTHICAL) {
-      return Mythical1Shop.includes(name) ? 15 : 20
+      const duo = Object.entries(PkmDuos).find(([key, duo]) => duo.includes(pokemon.name))
+      return Math.ceil((Mythical1Shop.includes(duo ? duo[0] as PkmProposition : name) ? 15 : 20) * (duo ? 0.5 : 1))
     } else if (PokemonFactory.getPokemonBaseEvolution(name) == Pkm.EEVEE) {
       return PkmCost[pokemon.rarity]
     } else {
