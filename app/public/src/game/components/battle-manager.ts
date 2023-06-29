@@ -3371,41 +3371,54 @@ export default class BattleManager {
             break
 
           case Ability.MIST_BALL:
-          case Ability.LUSTER_PURGE: {
-            const [dx, dy] = OrientationVector[orientation]
-            coordinatesTarget = transformAttackCoordinate(targetX, targetY)
+            coordinatesTarget = transformAttackCoordinate(targetX, 6)
             coordinates = transformAttackCoordinate(positionX, positionY)
-            const finalCoordinates = transformAttackCoordinate(
-              positionX + dx * 8,
-              positionY + dy * 8
-            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
               Ability.MIST_BALL,
-              "003"
+              `000`
             )
             specialProjectile.setDepth(7)
-            specialProjectile.setScale(0.5)
+            specialProjectile.setScale(1.5, 1.5)
             specialProjectile.anims.play(Ability.MIST_BALL)
-            specialProjectile.setTint(
-              skill === Ability.MIST_BALL ? 0xf0b0ff : 0xffffff
-            )
-
             this.scene.tweens.add({
               targets: specialProjectile,
-              x: finalCoordinates[0],
-              y: finalCoordinates[1],
-              ease: "linear",
-              yoyo: false,
-              duration: 1500,
+              x: coordinatesTarget[0],
+              y: coordinatesTarget[1],
+              ease: "Power2",
+              yoyo: true,
+              duration: 1000,
               onComplete: () => {
                 specialProjectile.destroy()
               }
             })
-
             break
-          }
+
+          case Ability.LUSTER_PURGE:
+            coordinatesTarget = transformAttackCoordinate(targetX, 6)
+            coordinates = transformAttackCoordinate(positionX, positionY)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.LUSTER_PURGE,
+              `000`
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(1.5, 1.5)
+            specialProjectile.anims.play(Ability.LUSTER_PURGE)
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              x: coordinatesTarget[0],
+              y: coordinatesTarget[1],
+              ease: "Power2",
+              yoyo: true,
+              duration: 1000,
+              onComplete: () => {
+                specialProjectile.destroy()
+              }
+            })
+            break
 
           default:
             break

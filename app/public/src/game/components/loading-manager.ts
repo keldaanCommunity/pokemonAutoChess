@@ -471,6 +471,11 @@ export default class LoadingManager {
       "/assets/attacks/MIST_BALL.json",
       "/assets/attacks"
     )
+    scene.load.multiatlas(
+      "LUSTER_PURGE",
+      "/assets/attacks/LUSTER_PURGE.json",
+      "/assets/attacks"
+    )
   }
 }
 
