@@ -1895,11 +1895,25 @@ export default class AnimationManager {
     this.game.anims.create({
       key: Ability.MIST_BALL,
       frames: this.game.anims.generateFrameNames(Ability.MIST_BALL, {
-        frames: [0, 1, 2, 3, 4, 3, 2, 1],
+        start: 0,
+        end: 4,
         zeroPad: 3
       }),
+      yoyo: true,
       duration: 500,
-      repeat: -1
+      repeat: 2
+    })
+
+    this.game.anims.create({
+      key: Ability.LUSTER_PURGE,
+      frames: this.game.anims.generateFrameNames(Ability.LUSTER_PURGE, {
+        start: 0,
+        end: 4,
+        zeroPad: 3
+      }),
+      yoyo: true,
+      duration: 500,
+      repeat: 2
     })
   }
 
