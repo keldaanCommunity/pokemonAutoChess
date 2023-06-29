@@ -830,6 +830,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.MUD_BUBBLE,
+      frames: this.game.anims.generateFrameNames(Ability.MUD_BUBBLE, {
+        start: 0,
+        end: 5,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.ERUPTION,
       frames: this.game.anims.generateFrameNames(Ability.ERUPTION, {
         start: 0,
@@ -1884,7 +1895,7 @@ export default class AnimationManager {
     this.game.anims.create({
       key: Ability.MIST_BALL,
       frames: this.game.anims.generateFrameNames(Ability.MIST_BALL, {
-        frames: [0,1,2,3,4,3,2,1],
+        frames: [0, 1, 2, 3, 4, 3, 2, 1],
         zeroPad: 3
       }),
       duration: 500,

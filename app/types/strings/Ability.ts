@@ -988,6 +988,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     prt: "",
     fra: ""
   },
+  [Ability.MUD_BUBBLE]: {
+    eng: "Mud Bubble",
+    esp: "",
+    prt: "",
+    fra: ""
+  }
 }
 
 export const AbilityDescription: { [key in Ability]: Langage } = {
@@ -1978,4 +1984,10 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     prt: "",
     fra: ""
   },
+  [Ability.MUD_BUBBLE]: {
+    eng: "Heals the caster for [10,20,40,SP]",
+    esp: "",
+    prt: "",
+    fra: ""
+  }
 }

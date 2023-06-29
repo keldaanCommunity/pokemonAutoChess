@@ -54,9 +54,10 @@ Emotes communication between players ingame
 - Buff Echo additional damage: 1/2/3 → 3/6/9
 - Heatran: New Magma Storm ability: The foe becomes trapped within a maelstrom of fire that deals 80 special damage before moving to an adjacent target
 - Buff Azelf mana 110 -> 80
-- Sneasel: New Slahing Claw ability: Deals 15/30/60 special damage to the target and wound it for 5 seconds. If the target is already wound, deals 30% bonus special damage
+- Sneasel: Buff mana 100 -> 40 New Slahing Claw ability: Deals 15/30/60 special damage to the target and wound it for 5 seconds. If the target is already wound, deals 30% bonus special damage
 - Numel: New Eruption ability: Fires 20/30/40 projectiles in the air. Every projectile deals 30/60/120 and burns for 5 seconds
 - Buff Lotad range 2 -> 3
+- Mudkip: Buff mana 100 -> 50 New Passive and ability. Passive: Water Spring: whenever an enemy uses their ability, gain 5 mana. Active: Mud Bubble Heals the caster for 10/20/40.
 
 # Changes to Synergies
 

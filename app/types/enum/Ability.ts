@@ -162,7 +162,8 @@ import {
   SlashingClawStrategy,
   EruptionStrategy,
   MistBallStrategy,
-  LusterPurgeStrategy
+  LusterPurgeStrategy,
+  MudBubbleStrategy
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -329,7 +330,8 @@ export enum Ability {
   SLASHING_CLAW = "SLASHING_CLAW",
   ERUPTION = "ERUPTION",
   MIST_BALL = "MIST_BALL",
-  LUSTER_PURGE = "LUSTER_PURGE"
+  LUSTER_PURGE = "LUSTER_PURGE",
+  MUD_BUBBLE = "MUD_BUBBLE"
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -497,4 +499,5 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.ERUPTION]: new EruptionStrategy(),
   [Ability.MIST_BALL]: new MistBallStrategy(),
   [Ability.LUSTER_PURGE]: new LusterPurgeStrategy(),
+  [Ability.MUD_BUBBLE]: new MudBubbleStrategy()
 }
