@@ -7603,18 +7603,20 @@ export class Latias extends Pokemon {
       [Synergy.PSYCHIC, Synergy.DRAGON],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
-      200,
-      15,
-      5,
-      1,
+      120,
+      10,
+      2,
+      2,
       3,
       AttackSprite.FIRE_RANGE,
       1,
       100,
-      Ability.DRACO_METEOR,
+      Ability.MIST_BALL,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.SHARED_VISION
     )
   }
 }
@@ -7626,18 +7628,20 @@ export class Latios extends Pokemon {
       [Synergy.PSYCHIC, Synergy.DRAGON],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
-      200,
-      20,
-      1,
-      1,
+      120,
+      10,
+      2,
+      2,
       3,
       AttackSprite.FIRE_RANGE,
       1,
       100,
-      Ability.DRACO_METEOR,
+      Ability.LUSTER_PURGE,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.SHARED_VISION
     )
   }
 }

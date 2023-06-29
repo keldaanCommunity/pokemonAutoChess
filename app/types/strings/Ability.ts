@@ -975,7 +975,19 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
-  }
+  },
+  [Ability.LUSTER_PURGE]: {
+    eng: "Luster Purge",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.MIST_BALL]: {
+    eng: "Mist Ball",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
 }
 
 export const AbilityDescription: { [key in Ability]: Langage } = {
@@ -1208,9 +1220,9 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.DRACO_METEOR]: {
-    eng: `Area of effect attack that deals [25,SP] ${Damage.SPECIAL} to all enemies`,
-    esp: `Ataque de área de efecto que causa [20,SP] ${Damage.SPECIAL} a todos los enemigos`,
-    fra: `Inflige [20,SP] ${Damage.SPECIAL} à tous les pokémons ennemis.`,
+    eng: `Area of effect attack that deals [50,SP] ${Damage.SPECIAL} to all enemies`,
+    esp: `Ataque de área de efecto que causa [50,SP] ${Damage.SPECIAL} a todos los enemigos`,
+    fra: `Inflige [50,SP] ${Damage.SPECIAL} à tous les pokémons ennemis.`,
     prt: ``
   },
   [Ability.BLAZE_KICK]: {
@@ -1953,5 +1965,17 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     esp: "",
     prt: "",
     fra: ""
-  }
+  },
+  [Ability.LUSTER_PURGE]: {
+    eng: `Launches a ball of light in a straight line that deals [50,SP] ${Damage.SPECIAL} and lowers the ${Stat.SPE_DEF} of all enemies hit by 2`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.MIST_BALL]: {
+    eng: `Launches a mist bubble in a straight line that deals [50,SP] ${Damage.SPECIAL} and lowers the ${Stat.AP} of all enemies hit by 20%`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
 }

@@ -35,5 +35,6 @@ export const PassiveDescription: { [key in Passive]: string } = {
   [Passive.WINDY]: `Change weather to ${Weather.WINDY}`,
   [Passive.AIRLOCK]: `Neutralize weather effects, getting back to ${Weather.NEUTRAL}`,
   [Passive.WURMPLE]: `Wurmple can evolve into Silcoon or Cascoon, depending on the weather at previous stage`,
-  [Passive.HYDRATATION]: `${Synergy.GRASS} synergy is healing 5 additional ${Stat.HP} per second under the ${Weather.RAIN}`
+  [Passive.HYDRATATION]: `${Synergy.GRASS} synergy is healing 5 additional ${Stat.HP} per second under the ${Weather.RAIN}`,
+  [Passive.SHARED_VISION]: `Shared vision: all Pokemon with shared vision will attack the same target, if at range`
 }

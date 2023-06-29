@@ -14,7 +14,7 @@ import {
   type,
   SetSchema
 } from "@colyseus/schema"
-import { Pkm } from "../../types/enum/Pokemon"
+import { PkmProposition } from "../../types/enum/Pokemon"
 import { pickRandomIn } from "../../utils/random"
 
 export default class GameState extends Schema {
@@ -24,7 +24,7 @@ export default class GameState extends Schema {
   @type({ map: Player }) players = new MapSchema<Player>()
   @type({ map: PokemonAvatarModel }) avatars = new MapSchema<PokemonAvatarModel>()
   @type({ map: FloatingItem }) floatingItems = new MapSchema<FloatingItem>()
-  @type(["string"]) additionalPokemons = new ArraySchema<Pkm>()
+  @type(["string"]) additionalPokemons = new ArraySchema<PkmProposition>()
   @type("uint8") stageLevel = 1
   @type("string") mapName: string
   @type("string") weather: Weather

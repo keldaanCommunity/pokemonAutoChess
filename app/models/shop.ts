@@ -1,5 +1,5 @@
 import PokemonFactory from "./pokemon-factory"
-import { Pkm, PkmFamily } from "../types/enum/Pokemon"
+import { Pkm, PkmDuo, PkmDuos, PkmFamily, PkmProposition } from "../types/enum/Pokemon"
 import Player from "./colyseus-models/player"
 import {
   Probability,
@@ -47,7 +47,8 @@ export default class Shop {
     })
   }
 
-  addAdditionalPokemon(pkm: Pkm) {
+  addAdditionalPokemon(pkmProposition: PkmProposition) {
+    const pkm: Pkm = pkmProposition in PkmDuos ? PkmDuos[pkmProposition][0] : pkmProposition
     const p = PokemonFactory.createPokemonFromName(pkm)
     switch (p.rarity) {
       case Rarity.COMMON:
@@ -126,7 +127,7 @@ export default class Shop {
     }
   }
 
-  assignMythicalPropositions(player: Player, list: Pkm[]) {
+  assignMythicalPropositions(player: Player, list: PkmProposition[]) {
     const mythicals = [...list]
     const synergies = Array.from(player.synergies)
       .filter(([synergy, value]) => value > 0)
@@ -136,18 +137,20 @@ export default class Shop {
       .slice(0, 2)
       .map(([synergy, value]) => synergy)
 
-    const mythicalsTopSynergy = mythicals.filter((m) =>
-      PokemonFactory.createPokemonFromName(m).types.some((t) =>
+    const mythicalsTopSynergy = mythicals.filter((m) => {
+      let pkm: Pkm = m in PkmDuos ? PkmDuos[m][0] : m
+      return PokemonFactory.createPokemonFromName(pkm).types.some((t) =>
         top2Synergies.includes(t)
       )
-    )
-    const mythicalsCommonSynergy = mythicals.filter((m) =>
-      PokemonFactory.createPokemonFromName(m).types.some((t) =>
+    })
+    const mythicalsCommonSynergy = mythicals.filter((m) => {
+      let pkm: Pkm = m in PkmDuos ? PkmDuos[m][0] : m
+      return PokemonFactory.createPokemonFromName(pkm).types.some((t) =>
         synergies.includes(t)
       )
-    )
+    })
 
-    const shop: Pkm[] = []
+    const shop: PkmProposition[] = []
     if (mythicalsTopSynergy.length > 0) {
       const pkm = pickRandomIn(mythicalsTopSynergy)
       removeInArray(mythicals, pkm)

@@ -1734,6 +1734,16 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.MARACTUS]: Pkm.MARACTUS
 }
 
+export enum PkmDuo {
+  LATIOS_LATIAS = "latios_latias"
+}
+
+export type PkmProposition = Pkm | PkmDuo
+
+export const PkmDuos = {
+  [PkmDuo.LATIOS_LATIAS]: [Pkm.LATIOS, Pkm.LATIAS]
+}
+
 export const AnimationConfig: {
   [key in Pkm]: { attack: AnimationType; ability: AnimationType, emote: AnimationType }
 } = {
@@ -2928,14 +2938,14 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.LATIAS]: {
-    attack: AnimationType.RearUp,
-    ability: AnimationType.Special2,
-    emote: AnimationType.Shoot
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Attack,
+    emote: AnimationType.RearUp
   },
   [Pkm.LATIOS]: {
-    attack: AnimationType.RearUp,
-    ability: AnimationType.Special0,
-    emote: AnimationType.Shoot
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Attack,
+    emote: AnimationType.RearUp
   },
   [Pkm.MESPRIT]: {
     attack: AnimationType.Hover,

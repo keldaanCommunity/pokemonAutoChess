@@ -30,11 +30,14 @@ Emotes communication between players ingame
 
 # Changes to Pokemon / Abilities
 
+- New mechanic: Mythic duos. Get 2 mythicals for one for emblematic duos
+- Latias/Latios are now a duo. Adjusted stats, new abilities, new passive
 - Give Human synergy to: Jynx, Cacnea line, Mr Mime, Gothita line, Monferno line, Electabuzz, Electivire ; adjusted stats accordingly
 - Nerf Freeze tier 3: freeze duration 4 → 3 seconds
 - Buff Chatter: Mana 120 → 100, Confusion chance now scales with AP
 - Buff Cyndaquill line: Cyndaquill: Attack 6 → 7 ; Quilava: Attack 11 → 13 ; Typlosion HP 230 → 250, Attack 21 → 25
 - Buff Overheat: 20 → 30 special damage
+- Buff Draco Meteor: 25 → 50 special damage
 - Nerf Spiritomb: range 3 → 2
 - Nerf Chandelure: HP: 180 → 160, Attack: 16 → 15
 - Castform & Volcanion now change weather depending on your dominant synergy

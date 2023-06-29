@@ -7,7 +7,7 @@ import PreparationState from "../../../rooms/states/preparation-state"
 import GameState from "../../../rooms/states/game-state"
 import AfterGameState from "../../../rooms/states/after-game-state"
 import { BotDifficulty } from "../../../types/enum/Game"
-import { Pkm } from "../../../types/enum/Pokemon"
+import { PkmProposition } from "../../../types/enum/Pokemon"
 
 interface INetwork {
   client: Client
@@ -165,7 +165,7 @@ export const networkSlice = createSlice({
     shopClick: (state, action: PayloadAction<number>) => {
       state.game?.send(Transfer.SHOP, { id: action.payload })
     },
-    pokemonPropositionClick: (state, action: PayloadAction<Pkm>) => {
+    pokemonPropositionClick: (state, action: PayloadAction<PkmProposition>) => {
       state.game?.send(Transfer.POKEMON_PROPOSITION, action.payload)
     },
     itemClick: (state, action: PayloadAction<string>) => {
