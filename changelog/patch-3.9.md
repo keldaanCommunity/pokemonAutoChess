@@ -81,6 +81,7 @@ Emotes communication between players ingame
 # UI
 
 - Evolutions are now shown as main portrait in shop
+- Added sponsored Doublade sprites ($140, Emmuffin)
 
 # Misc
 
