@@ -19,6 +19,7 @@ import { effectInLine, OrientationArray } from "../utils/orientation"
 import { logger } from "../utils/logger"
 import { DEFAULT_ATK_SPEED } from "../types/Config"
 import { max, min } from "../utils/number"
+import { distanceC } from "../utils/distance"
 import { Transfer } from "../types"
 import { Passive } from "../types/enum/Passive"
 
@@ -2137,13 +2138,13 @@ export class PoisonStrategy extends AttackStrategy {
       }
     })
     closestEnemies.sort((a, b) => {
-      const distanceA = board.distance(
+      const distanceA = distanceC(
         a.positionX,
         a.positionY,
         pokemon.positionX,
         pokemon.positionY
       )
-      const distanceB = board.distance(
+      const distanceB = distanceC(
         b.positionX,
         b.positionY,
         pokemon.positionX,
@@ -4777,17 +4778,24 @@ export class MistBallStrategy extends AttackStrategy {
           pokemon,
           crit
         )
-        targetInLine.handleSpecialDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
-        )
-        targetInLine.addAbilityPower(-10)
         targetInLine.addAbilityPower(-10)
       }
     })
+
+    pokemon.simulation.room.clock.setTimeout(() => {
+      effectInLine(board, pokemon, target, (targetInLine) => {
+        if (targetInLine != null && targetInLine.team !== pokemon.team) {
+          targetInLine.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+          targetInLine.addAbilityPower(-10)
+        }
+      })
+    }, 1000)
   }
 }
 
@@ -4811,17 +4819,24 @@ export class LusterPurgeStrategy extends AttackStrategy {
           pokemon,
           crit
         )
-        targetInLine.handleSpecialDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
-        )
-        targetInLine.addSpecialDefense(-1)
         targetInLine.addSpecialDefense(-1)
       }
     })
+
+    pokemon.simulation.room.clock.setTimeout(() => {
+      effectInLine(board, pokemon, target, (targetInLine) => {
+        if (targetInLine != null && targetInLine.team !== pokemon.team) {
+          targetInLine.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+          targetInLine.addSpecialDefense(-1)
+        }
+      })
+    }, 1000)
   }
 }
 
@@ -4836,5 +4851,80 @@ export class MudBubbleStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target, crit)
     const heal = pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10
     pokemon.handleHeal(heal, pokemon, 1)
+  }
+}
+
+export class LinkCableStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const farthestTargetCoordinate = state.getFarthestTargetCoordinate(pokemon, board)
+    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(
+      pokemon,
+      board
+    )
+
+    if (farthestCoordinate && farthestTargetCoordinate) {
+      pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
+      pokemon.targetX = farthestTargetCoordinate.x
+      pokemon.targetY = farthestTargetCoordinate.y
+    }
+
+    pokemon.simulation.room.clock.setTimeout(() => {
+      if(pokemon.life <= 0) return;
+      const partner = board.find(
+        (x, y, entity) =>
+          entity.skill === Ability.LINK_CABLE && entity.id !== pokemon.id && entity.team === pokemon.team
+      )
+      if (partner) {
+        const damage = 50
+        effectInLine(board, pokemon, partner, (targetInLine) => {
+          if (targetInLine != null && targetInLine.team !== pokemon.team) {
+            targetInLine.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
+          }        
+        })
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: "LINK_CABLE_link",
+          positionX: pokemon.positionX,
+          positionY: pokemon.positionY,
+          targetX: partner.positionX,
+          targetY: partner.positionY
+        })
+      } else {
+        const damage = 50
+        const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+        cells.forEach((cell) => {
+          if (cell.value && cell.value.team !== pokemon.team) {
+            cell.value.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
+          }
+        })
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: "LINK_CABLE_discharge",
+          positionX: pokemon.positionX,
+          positionY: pokemon.positionY,
+          targetX: pokemon.targetX,
+          targetY: pokemon.targetY
+        })
+      }
+    }, 300)
   }
 }

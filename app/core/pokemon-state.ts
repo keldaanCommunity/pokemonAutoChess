@@ -17,6 +17,7 @@ import { logger } from "../utils/logger"
 import { Passive } from "../types/enum/Passive"
 import { Weather } from "../types/enum/Weather"
 import { min } from "../utils/number"
+import { distanceC } from "../utils/distance"
 
 export default class PokemonState {
   handleHeal(
@@ -563,7 +564,7 @@ export default class PokemonState {
         value.team !== pokemon.team &&
         value.isTargettable
       ) {
-        const candidateDistance = board.distance(
+        const candidateDistance = distanceC(
           pokemon.positionX,
           pokemon.positionY,
           x,
@@ -596,7 +597,7 @@ export default class PokemonState {
         value.team !== pokemon.team &&
         value.isTargettable
       ) {
-        const distance = board.distance(
+        const distance = distanceC(
           pokemon.positionX,
           pokemon.positionY,
           x,
@@ -672,7 +673,7 @@ export default class PokemonState {
             .map((cell) => ({
               x: cell.x,
               y: cell.y,
-              distance: board.distance(
+              distance: distanceC(
                 pokemon.positionX,
                 pokemon.positionY,
                 cell.x,
@@ -703,7 +704,7 @@ export default class PokemonState {
         value.id !== pokemon.id &&
         value.isTargettable
       ) {
-        const candidateDistance = board.distance(
+        const candidateDistance = distanceC(
           pokemon.positionX,
           pokemon.positionY,
           x,

@@ -13,7 +13,6 @@ const csvWriter = createObjectCsvWriter({
     { id: "category", title: "Category" },
     { id: "tier", title: "Tier" },
     { id: "additional", title: "Additional pick" },
-    { id: "duo", title: "Duo" },
     { id: "type1", title: "Type 1" },
     { id: "type2", title: "Type 2" },
     { id: "type3", title: "Type 3" },
@@ -29,7 +28,8 @@ const csvWriter = createObjectCsvWriter({
     { id: "familyType1", title: "Family Type 1" },
     { id: "familyType2", title: "Family Type 2" },
     { id: "familyType3", title: "Family Type 3" },
-    { id: "familyType4", title: "Family Type 4" }
+    { id: "familyType4", title: "Family Type 4" },
+    { id: "duo", title: "Duo" },
   ]
 })
 
@@ -39,7 +39,6 @@ interface PokemonData {
   category: string
   tier: number
   additional: boolean
-  duo: boolean
   type1: string
   type2: string
   type3: string
@@ -56,6 +55,7 @@ interface PokemonData {
   familyType2: string
   familyType3: string
   familyType4: string
+  duo: boolean
 }
 
 const data: PokemonData[] = []
