@@ -4766,7 +4766,7 @@ export class MistBallStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = 50
+    const damage = 25
 
     effectInLine(board, pokemon, target, (targetInLine) => {
       if (targetInLine != null && targetInLine.team !== pokemon.team) {
@@ -4777,7 +4777,15 @@ export class MistBallStrategy extends AttackStrategy {
           pokemon,
           crit
         )
-        targetInLine.addAbilityPower(-20)
+        targetInLine.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        targetInLine.addAbilityPower(-10)
+        targetInLine.addAbilityPower(-10)
       }
     })
   }
@@ -4792,7 +4800,7 @@ export class LusterPurgeStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = 50
+    const damage = 25
 
     effectInLine(board, pokemon, target, (targetInLine) => {
       if (targetInLine != null && targetInLine.team !== pokemon.team) {
@@ -4803,7 +4811,15 @@ export class LusterPurgeStrategy extends AttackStrategy {
           pokemon,
           crit
         )
-        targetInLine.addSpecialDefense(-2)
+        targetInLine.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        targetInLine.addSpecialDefense(-1)
+        targetInLine.addSpecialDefense(-1)
       }
     })
   }
