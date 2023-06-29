@@ -20,6 +20,7 @@ import { logger } from "../utils/logger"
 import { DEFAULT_ATK_SPEED } from "../types/Config"
 import { max, min } from "../utils/number"
 import { Transfer } from "../types"
+import { Passive } from "../types/enum/Passive"
 
 export class AttackStrategy {
   process(
@@ -65,6 +66,23 @@ export class AttackStrategy {
         }
       })
     }
+
+    board.forEach((x, y, pkm) => {
+      if (
+        pkm?.passive === Passive.WATER_SPRING &&
+        pkm &&
+        pkm.team !== pokemon.team &&
+        pkm.id !== pokemon.id
+      ) {
+        pkm.setMana(pkm.mana + 5)
+        pkm.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: pkm.skill,
+          positionX: pkm.positionX,
+          positionY: pkm.positionY
+        })
+      }
+    })
 
     if (pokemon.items.has(Item.AQUA_EGG)) {
       pokemon.setMana(pokemon.mana + 20)
@@ -4748,7 +4766,7 @@ export class MistBallStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 50
+    const damage = 50
 
     effectInLine(board, pokemon, target, (targetInLine) => {
       if (targetInLine != null && targetInLine.team !== pokemon.team) {
@@ -4774,7 +4792,7 @@ export class LusterPurgeStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 50
+    const damage = 50
 
     effectInLine(board, pokemon, target, (targetInLine) => {
       if (targetInLine != null && targetInLine.team !== pokemon.team) {
@@ -4788,5 +4806,19 @@ export class LusterPurgeStrategy extends AttackStrategy {
         targetInLine.addSpecialDefense(-2)
       }
     })
+  }
+}
+
+export class MudBubbleStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const heal = pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10
+    pokemon.handleHeal(heal, pokemon, 1)
   }
 }

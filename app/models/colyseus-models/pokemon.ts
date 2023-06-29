@@ -4534,11 +4534,13 @@ export class Mudkip extends Pokemon {
       1,
       AttackSprite.WATER_MELEE,
       1,
-      100,
-      Ability.SOAK,
+      50,
+      Ability.MUD_BUBBLE,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.WATER_SPRING
     )
   }
 }
@@ -4557,11 +4559,13 @@ export class Marshtomp extends Pokemon {
       1,
       AttackSprite.WATER_MELEE,
       2,
-      100,
-      Ability.SOAK,
+      50,
+      Ability.MUD_BUBBLE,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.WATER_SPRING
     )
   }
 }
@@ -4580,11 +4584,13 @@ export class Swampert extends Pokemon {
       1,
       AttackSprite.WATER_MELEE,
       3,
-      100,
-      Ability.SOAK,
+      50,
+      Ability.MUD_BUBBLE,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.WATER_SPRING
     )
   }
 }
