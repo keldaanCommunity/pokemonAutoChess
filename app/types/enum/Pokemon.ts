@@ -3342,8 +3342,8 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.DOUBLADE]: {
-    attack: AnimationType.Attack,
-    ability: AnimationType.Attack,
+    attack: AnimationType.Slice,
+    ability: AnimationType.SpAttack,
     emote: AnimationType.Shoot
   },
   [Pkm.AEGISLASH]: {
