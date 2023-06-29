@@ -56,6 +56,7 @@ Emotes communication between players ingame
 - Buff Azelf mana 110 -> 80
 - Sneasel: New Slahing Claw ability: Deals 15/30/60 special damage to the target and wound it for 5 seconds. If the target is already wound, deals 30% bonus special damage
 - Numel: New Eruption ability: Fires 20/30/40 projectiles in the air. Every projectile deals 30/60/120 and burns for 5 seconds
+- Buff Lotad range 2 -> 3
 
 # Changes to Synergies
 
