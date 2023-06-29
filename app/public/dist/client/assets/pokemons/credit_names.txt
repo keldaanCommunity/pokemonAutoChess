@@ -146,9 +146,9 @@ Ichor	<@!779213287576436746>
 JuanmaSG	<@!479305531522154507>	https://twitter.com/JuanmaSG55
 Caitemis	<@!330751862590406656>	https://www.deviantart.com/caitemis
 Ray2064	<@!540823632054714388>	Ray2064#5222
-[avalancheman]	<@!783493257506062387>	[milesbehemoth@gmail.com]
+avalancheman	<@!783493257506062387>	milesbehemoth@gmail.com
 anon	<@!215638650434617345>	
-FlarosOverfield	<@!207815740399681538>	
+MilesFarber	<@!207815740399681538>	
 Jeongsugi	<@!537560911716810763>	정수기#1834
 	<@!776403448220483615>	
 	<@!940303989680009339>	
@@ -204,3 +204,4 @@ Yari	YARI	Yari#1038
 VersuS/CelestialDrago	<@!305445863235518464>	
 Chesyon	<@!178935491867967490>	https://twitter.com/chesyon
 3P1C	<@!169247379453640706>	
+Dutch-Spaniard	<@!529381471107022856>	

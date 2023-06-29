@@ -1745,7 +1745,11 @@ export const PkmDuos = {
 }
 
 export const AnimationConfig: {
-  [key in Pkm]: { attack: AnimationType; ability: AnimationType, emote: AnimationType }
+  [key in Pkm]: {
+    attack: AnimationType
+    ability: AnimationType
+    emote: AnimationType
+  }
 } = {
   [Pkm.EGG]: {
     attack: AnimationType.Attack,
@@ -2058,17 +2062,17 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.MUDKIP]: {
-    attack: AnimationType.Pose,
+    attack: AnimationType.Attack,
     ability: AnimationType.Twirl,
     emote: AnimationType.Shoot
   },
   [Pkm.MARSHTOMP]: {
-    attack: AnimationType.Withdraw,
+    attack: AnimationType.Attack,
     ability: AnimationType.Swing,
     emote: AnimationType.Shoot
   },
   [Pkm.SWAMPERT]: {
-    attack: AnimationType.Shoot,
+    attack: AnimationType.Attack,
     ability: AnimationType.Swing,
     emote: AnimationType.Shoot
   },
@@ -4621,5 +4625,5 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Twirl,
     emote: AnimationType.Shoot
-  },
+  }
 }
