@@ -1973,13 +1973,13 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     fra: ""
   },
   [Ability.LUSTER_PURGE]: {
-    eng: `Launches a ball of light in a straight line that deals [50,SP] ${Damage.SPECIAL} and lowers the ${Stat.SPE_DEF} of all enemies hit by 2`,
+    eng: `Launches a ball of light in a straight line that deals [25,SP] ${Damage.SPECIAL} twice and lowers twice the ${Stat.SPE_DEF} of all enemies hit by 1`,
     esp: "",
     prt: "",
     fra: ""
   },
   [Ability.MIST_BALL]: {
-    eng: `Launches a mist bubble in a straight line that deals [50,SP] ${Damage.SPECIAL} and lowers the ${Stat.AP} of all enemies hit by 20%`,
+    eng: `Launches a mist bubble in a straight line that deals [25,SP] ${Damage.SPECIAL} twice and lowers twice the ${Stat.AP} of all enemies hit by 10%`,
     esp: "",
     prt: "",
     fra: ""
