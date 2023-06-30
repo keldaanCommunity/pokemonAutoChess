@@ -100,7 +100,9 @@ export class OnJoinCommand extends Command<
                       user.title,
                       user.role,
                       client.auth.email === undefined &&
-                        client.auth.photoURL === undefined
+                        client.auth.photoURL === undefined,
+                      client.auth.metadata.creationTime,
+                      client.auth.metadata.lastSignInTime
                     )
                   )
                 }
@@ -135,7 +137,9 @@ export class OnJoinCommand extends Command<
                 "",
                 Role.BASIC,
                 client.auth.email === undefined &&
-                  client.auth.photoURL === undefined
+                  client.auth.photoURL === undefined,
+                client.auth.metadata.creationTime,
+                client.auth.metadata.lastSignInTime
               )
             )
           }
@@ -710,7 +714,9 @@ export class OnSearchByIdCommand extends Command<
                     user.titles,
                     user.title,
                     user.role,
-                    false
+                    false,
+                    client.auth.metadata.creationTime,
+                    client.auth.metadata.lastSignInTime
                   )
                 )
               }

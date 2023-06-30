@@ -24,7 +24,9 @@ export interface ILobbyUser {
   titles: Title[]
   title: "" | Title
   role: Role
-  anonymous: boolean
+  anonymous: boolean,
+  creationTime: string,
+  lastSignInTime: string
 }
 export default class LobbyUser extends Schema implements ILobbyUser {
   @type("string") id: string
@@ -46,6 +48,8 @@ export default class LobbyUser extends Schema implements ILobbyUser {
   @type("string") title: "" | Title
   @type("string") role: Role
   @type("boolean") anonymous: boolean
+  @type("string") creationTime: string
+  @type("string") lastSignInTime: string
 
   constructor(
     id: string,
@@ -64,7 +68,9 @@ export default class LobbyUser extends Schema implements ILobbyUser {
     titles: Title[],
     title: "" | Title,
     role: Role,
-    anonymous: boolean
+    anonymous: boolean,
+    creationTime: string,
+    lastSignInTime: string
   ) {
     super()
     this.id = id
@@ -80,6 +86,8 @@ export default class LobbyUser extends Schema implements ILobbyUser {
     this.title = title
     this.role = role
     this.anonymous = anonymous
+    this.creationTime = creationTime
+    this.lastSignInTime = lastSignInTime
 
     if (history && history.length && history.length != 0) {
       history.forEach((h) => {
