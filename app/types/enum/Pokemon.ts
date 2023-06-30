@@ -575,7 +575,9 @@ export enum Pkm {
   PRIMEAPE = "primeape",
   SUNKERN = "sunkern",
   SUNFLORA = "sunflora",
-  MARACTUS = "maractus"
+  MARACTUS = "maractus",
+  MINUN = "minun",
+  PLUSLE = "plusle"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1153,7 +1155,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.PRIMEAPE]: "0057",
   [Pkm.SUNKERN]: "0191",
   [Pkm.SUNFLORA]: "0192",
-  [Pkm.MARACTUS]: "0556"
+  [Pkm.MARACTUS]: "0556",
+  [Pkm.PLUSLE]: "0311",
+  [Pkm.MINUN]: "0312"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1731,17 +1735,21 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.PRIMEAPE]: Pkm.MANKEY,
   [Pkm.SUNKERN]: Pkm.SUNKERN,
   [Pkm.SUNFLORA]: Pkm.SUNKERN,
-  [Pkm.MARACTUS]: Pkm.MARACTUS
+  [Pkm.MARACTUS]: Pkm.MARACTUS,
+  [Pkm.PLUSLE]: Pkm.PLUSLE,
+  [Pkm.MINUN]: Pkm.MINUN
 }
 
 export enum PkmDuo {
-  LATIOS_LATIAS = "latios_latias"
+  LATIOS_LATIAS = "latios_latias",
+  PLUSLE_MINUN = "plusle_minun"
 }
 
 export type PkmProposition = Pkm | PkmDuo
 
 export const PkmDuos = {
-  [PkmDuo.LATIOS_LATIAS]: [Pkm.LATIOS, Pkm.LATIAS]
+  [PkmDuo.LATIOS_LATIAS]: [Pkm.LATIOS, Pkm.LATIAS],
+  [PkmDuo.PLUSLE_MINUN]: [Pkm.PLUSLE, Pkm.MINUN]
 }
 
 export const AnimationConfig: {
@@ -4624,6 +4632,16 @@ export const AnimationConfig: {
   [Pkm.MARACTUS]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Twirl,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.PLUSLE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shock,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.MINUN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shock,
     emote: AnimationType.Shoot
   }
 }

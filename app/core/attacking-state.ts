@@ -6,6 +6,7 @@ import PokemonEntity from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
 import { PokemonActionState } from "../types/enum/Game"
 import { chance } from "../utils/random"
+import { distanceC } from "../utils/distance"
 import { Synergy } from "../types/enum/Synergy"
 
 export default class AttackingState extends PokemonState {
@@ -27,7 +28,7 @@ export default class AttackingState extends PokemonState {
           target &&
           target.team !== pokemon.team &&
           target.isTargettable &&
-          board.distance(
+          distanceC(
             pokemon.positionX,
             pokemon.positionY,
             targetCoordinate.x,
@@ -45,7 +46,7 @@ export default class AttackingState extends PokemonState {
       if (!targetCoordinate) {
         pokemon.toMovingState()
       } else if (
-        board.distance(
+        distanceC(
           pokemon.positionX,
           pokemon.positionY,
           targetCoordinate.x,

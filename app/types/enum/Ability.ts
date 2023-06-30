@@ -163,7 +163,8 @@ import {
   EruptionStrategy,
   MistBallStrategy,
   LusterPurgeStrategy,
-  MudBubbleStrategy
+  MudBubbleStrategy,
+  LinkCableStrategy
 } from "../../core/attack-strategy"
 
 export enum Ability {
@@ -331,7 +332,8 @@ export enum Ability {
   ERUPTION = "ERUPTION",
   MIST_BALL = "MIST_BALL",
   LUSTER_PURGE = "LUSTER_PURGE",
-  MUD_BUBBLE = "MUD_BUBBLE"
+  MUD_BUBBLE = "MUD_BUBBLE",
+  LINK_CABLE= "LINK_CABLE"
 }
 
 export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
@@ -499,5 +501,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.ERUPTION]: new EruptionStrategy(),
   [Ability.MIST_BALL]: new MistBallStrategy(),
   [Ability.LUSTER_PURGE]: new LusterPurgeStrategy(),
-  [Ability.MUD_BUBBLE]: new MudBubbleStrategy()
+  [Ability.MUD_BUBBLE]: new MudBubbleStrategy(),
+  [Ability.LINK_CABLE]: new LinkCableStrategy()
 }

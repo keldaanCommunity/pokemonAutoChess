@@ -993,6 +993,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.LINK_CABLE]: {
+    eng: "Link Cable",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1986,6 +1992,12 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
   },
   [Ability.MUD_BUBBLE]: {
     eng: "Heals the caster for [10,20,40,SP]",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.LINK_CABLE]: {
+    eng: `Dash into a new spot, then triggers an electric arc between Plusle and Minun that deals [50,SP] ${Damage.SPECIAL}. If Plusle or Minun are alone, deals this damage to adjacent enemies instead.`,
     esp: "",
     prt: "",
     fra: ""

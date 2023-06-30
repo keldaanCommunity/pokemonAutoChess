@@ -1,0 +1,125 @@
+{
+	"textures": [
+		{
+			"image": "LINK_CABLE.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 79,
+				"h": 242
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "000",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 240
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 240
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 32,
+						"h": 240
+					}
+				},
+				{
+					"filename": "001",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 240
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 0,
+						"w": 18,
+						"h": 239
+					},
+					"frame": {
+						"x": 35,
+						"y": 1,
+						"w": 18,
+						"h": 239
+					}
+				},
+				{
+					"filename": "002",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 240
+					},
+					"spriteSourceSize": {
+						"x": 15,
+						"y": 0,
+						"w": 9,
+						"h": 237
+					},
+					"frame": {
+						"x": 55,
+						"y": 1,
+						"w": 9,
+						"h": 237
+					}
+				},
+				{
+					"filename": "003",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 240
+					},
+					"spriteSourceSize": {
+						"x": 18,
+						"y": 0,
+						"w": 5,
+						"h": 236
+					},
+					"frame": {
+						"x": 66,
+						"y": 1,
+						"w": 5,
+						"h": 236
+					}
+				},
+				{
+					"filename": "004",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 240
+					},
+					"spriteSourceSize": {
+						"x": 18,
+						"y": 0,
+						"w": 5,
+						"h": 235
+					},
+					"frame": {
+						"x": 73,
+						"y": 1,
+						"w": 5,
+						"h": 235
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:9f97eb1b52cfb35d86fe4c98609317c3:c15ca90b8ed12d0b386a722800a6ab80:35b5594509b5eb171a751c3f220fcdeb$"
+	}
+}
