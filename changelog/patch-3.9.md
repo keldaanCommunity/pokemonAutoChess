@@ -8,10 +8,7 @@ patch announcement
 
 Dual mythicals mechanic
 Minus and Plusle
-Solgaleo and Lunala ? if we get the sprites of Lunala
-Charcadet - Armarouge/Ceruledge
 Latios & Latias rework as dual
-Tournament info & pantheon in the game ?
 Show player avatars on the side of the board
 Emotes communication between players ingame
 
