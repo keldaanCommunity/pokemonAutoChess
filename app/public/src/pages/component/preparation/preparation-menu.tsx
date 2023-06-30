@@ -29,6 +29,7 @@ export default function PreparationMenu(props: {
   const dispatch = useAppDispatch()
   const [inputValue, setInputValue] = useState<string>("")
   const users: IGameUser[] = useAppSelector((state) => state.preparation.users)
+  const user = useAppSelector((state) => state.preparation.user)
   const ownerName: string = useAppSelector(
     (state) => state.preparation.ownerName
   )
@@ -163,7 +164,7 @@ export default function PreparationMenu(props: {
             </label>
             <div className="spacer"></div>
           </div>
-          <div className="actions">
+          {user && !user.anonymous && (<div className="actions">
             <input
               maxLength={30}
               type="text"
@@ -181,7 +182,7 @@ export default function PreparationMenu(props: {
             >
               Change room name
             </button>
-          </div>
+          </div>)}
         </>
       )}
 
