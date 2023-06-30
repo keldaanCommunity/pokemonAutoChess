@@ -322,6 +322,7 @@ import {
   Miltank,
   MimeJr,
   Mimikyu,
+  Minun,
   Moltres,
   Monferno,
   MrMime,
@@ -365,6 +366,7 @@ import {
   Pineco,
   Piplup,
   PirouetteMeloetta,
+  Plusle,
   Pokemon,
   Politoed,
   Poliwag,
@@ -1953,6 +1955,10 @@ export default class PokemonFactory {
         return new Sunflora(s, e)
       case Pkm.MARACTUS:
         return new Maractus(s, e)
+      case Pkm.PLUSLE:
+        return new Plusle(s, e)
+      case Pkm.MINUN:
+        return new Minun(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:

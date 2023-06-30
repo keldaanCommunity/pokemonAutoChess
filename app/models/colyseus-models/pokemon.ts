@@ -13541,3 +13541,51 @@ export class Maractus extends Pokemon {
     )
   }
 }
+
+export class Plusle extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.PLUSLE,
+      [Synergy.ELECTRIC, Synergy.FAIRY],
+      Rarity.MYTHICAL,
+      Pkm.DEFAULT,
+      130,
+      13,
+      3,
+      3,
+      1,
+      AttackSprite.ELECTRIC_MELEE,
+      1,
+      70,
+      Ability.LINK_CABLE,
+      shiny,
+      emotion,
+      false,
+      false
+    )
+  }
+}
+
+export class Minun extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.MINUN,
+      [Synergy.ELECTRIC, Synergy.FAIRY],
+      Rarity.MYTHICAL,
+      Pkm.DEFAULT,
+      130,
+      13,
+      3,
+      3,
+      1,
+      AttackSprite.ELECTRIC_MELEE,
+      1,
+      70,
+      Ability.LINK_CABLE,
+      shiny,
+      emotion,
+      false,
+      false
+    )
+  }
+}

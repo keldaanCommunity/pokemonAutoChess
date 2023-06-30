@@ -476,6 +476,11 @@ export default class LoadingManager {
       "/assets/attacks/LUSTER_PURGE.json",
       "/assets/attacks"
     )
+    scene.load.multiatlas(
+      "LINK_CABLE",
+      "/assets/attacks/LINK_CABLE.json",
+      "/assets/attacks"
+    )
   }
 }
 

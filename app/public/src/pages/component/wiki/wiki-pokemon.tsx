@@ -7,7 +7,7 @@ import { ITracker } from "../../../../../types/ITracker"
 import PRECOMPUTED_RARITY_POKEMONS_ALL from "../../../../../models/precomputed/type-rarity-all.json"
 import tracker from "../../../../dist/client/assets/pokemons/tracker.json"
 import { Rarity } from "../../../../../types/enum/Game"
-import { Pkm, PkmIndex, PkmFamily } from "../../../../../types/enum/Pokemon"
+import { Pkm, PkmIndex, PkmFamily, PkmDuos, PkmProposition } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
 import { Mythical1Shop, Mythical2Shop } from "../../../../../types/Config"
 
@@ -27,15 +27,23 @@ export default function WikiPokemon(props: { rarity: Rarity }) {
       {
         label: "Stage 10",
         pokemons: precomputed[props.rarity].filter(
-          (p) =>
-            Mythical1Shop.includes(p) || Mythical1Shop.includes(PkmFamily[p])
+          (p) => {
+            const duo = Object.keys(PkmDuos).find(key => PkmDuos[key].includes(p)) as PkmProposition | undefined
+            return Mythical1Shop.includes(p)
+             || Mythical1Shop.includes(PkmFamily[p]) 
+             || (duo && Mythical1Shop.includes(duo))
+          }
         )
       },
       {
         label: "Stage 20",
         pokemons: precomputed[props.rarity].filter(
-          (p) =>
-            Mythical2Shop.includes(p) || Mythical2Shop.includes(PkmFamily[p])
+          (p) => {
+            const duo = Object.keys(PkmDuos).find(key => PkmDuos[key].includes(p)) as PkmProposition | undefined
+            return Mythical2Shop.includes(p)
+             || Mythical2Shop.includes(PkmFamily[p]) 
+             || (duo && Mythical2Shop.includes(duo))
+          }
         )
       }
     ]

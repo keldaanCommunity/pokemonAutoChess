@@ -24,6 +24,7 @@ import {
   OrientationVector,
   OrientationArray
 } from "../../../../utils/orientation"
+import { distanceE } from "../../../../utils/distance"
 
 export default class BattleManager {
   group: GameObjects.Group
@@ -697,7 +698,7 @@ export default class BattleManager {
 
   displayAbility(
     id: string,
-    skill: Ability,
+    skill: Ability | string,
     orientation: Orientation,
     positionX: number,
     positionY: number,
@@ -3419,6 +3420,58 @@ export default class BattleManager {
               }
             })
             break
+
+          case "LINK_CABLE_link": {
+            coordinates = transformAttackCoordinate(positionX, positionY)
+            const distance = distanceE(positionX, positionY, targetX, targetY)
+            const coordinatesTarget = transformAttackCoordinate(
+              targetX,
+              targetY
+            )
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.LINK_CABLE,
+              `000`
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, distance * 0.36)
+            specialProjectile.setOrigin(0.5, 0)
+            specialProjectile.setRotation(
+              Math.atan2(
+                coordinatesTarget[1] - coordinates[1],
+                coordinatesTarget[0] - coordinates[0]
+              ) - Math.PI/2
+            )
+            specialProjectile.anims.play(Ability.LINK_CABLE)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
+          }
+
+          case "LINK_CABLE_discharge": {
+            coordinates = transformAttackCoordinate(positionX, positionY)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              "specials",
+              `${Ability.DISCHARGE}/000`
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.DISCHARGE)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
+          }
 
           default:
             break

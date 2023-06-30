@@ -1915,6 +1915,17 @@ export default class AnimationManager {
       duration: 500,
       repeat: 2
     })
+
+    this.game.anims.create({
+      key: Ability.LINK_CABLE,
+      frames: this.game.anims.generateFrameNames(Ability.LINK_CABLE, {
+        start: 0,
+        end: 4,
+        zeroPad: 3
+      }),
+      duration: 500,
+      repeat: 0
+    })
   }
 
   animatePokemon(entity: Pokemon, action: PokemonActionState) {

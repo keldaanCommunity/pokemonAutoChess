@@ -3,6 +3,7 @@ import PokemonEntity from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
 import { PokemonActionState } from "../types/enum/Game"
 import { Synergy } from "../types/enum/Synergy"
+import { distanceC } from "../utils/distance"
 
 export default class MovingState extends PokemonState {
   update(pokemon: PokemonEntity, dt: number, board: Board, weather: string) {
@@ -14,7 +15,7 @@ export default class MovingState extends PokemonState {
       // eslint-disable-next-line no-empty
       if (!targetCoordinate) {
       } else if (
-        board.distance(
+        distanceC(
           pokemon.positionX,
           pokemon.positionY,
           targetCoordinate.x,
@@ -55,7 +56,7 @@ export default class MovingState extends PokemonState {
 
       cells.forEach((cell) => {
         if (cell.value === undefined) {
-          const candidateDistance = board.distance(
+          const candidateDistance = distanceC(
             coordinates.x,
             coordinates.y,
             cell.x,
