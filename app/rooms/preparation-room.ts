@@ -16,7 +16,8 @@ import {
   OnRoomNameCommand,
   OnRoomPasswordCommand,
   OnToggleEloCommand,
-  OnKickPlayerCommand
+  OnKickPlayerCommand,
+  OnDeleteRoomCommand
 } from "./commands/preparation-commands"
 import { BotDifficulty } from "../types/enum/Game"
 import { IPreparationMetadata, Transfer } from "../types"
@@ -86,6 +87,14 @@ export default class PreparationRoom extends Room<PreparationState> {
     this.onMessage(Transfer.KICK, (client, message) => {
       try {
         this.dispatcher.dispatch(new OnKickPlayerCommand(), { client, message })
+      } catch (error) {
+        logger.error(error)
+      }
+    })
+
+    this.onMessage(Transfer.DELETE_ROOM, (client) => {
+      try {
+        this.dispatcher.dispatch(new OnDeleteRoomCommand(), { client })
       } catch (error) {
         logger.error(error)
       }
