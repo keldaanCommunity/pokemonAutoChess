@@ -46,8 +46,6 @@ scolipede,0545/AnimData.xml
 scolipede,0545/0000/0001/AnimData.xml
 mega-manectric,0310/0001/AnimData.xml
 mega-manectric,0310/0001/0001/AnimData.xml
-doublade,0680/AnimData.xml
-doublade,0680/0000/0001/AnimData.xml
 palpitoad,0536/0000/0001/AnimData.xml
 seismitoad,0537/AnimData.xml
 seismitoad,0537/0000/0001/AnimData.xml
