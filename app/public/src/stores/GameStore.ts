@@ -206,12 +206,16 @@ export const gameSlice = createSlice({
       }
       getGameScene()?.board?.updateAvatarLife(action.payload.id, action.payload.value)
     },
-    setCurrentPlayerExperienceManager: (
+    setPlayerExperienceManager: (
       state,
       action: PayloadAction<{ value: ExperienceManager; id: string }>
     ) => {
       if (state.currentPlayerId === action.payload.id) {
         state.currentPlayerExperienceManager = action.payload.value
+      }
+      const player = state.players.find((e) => e.id === action.payload.id)
+      if(player){
+        player.experienceManager = action.payload.value
       }
     },
     setCurrentPlayerMoney: (
@@ -476,7 +480,7 @@ export const {
   setLoadingProgress,
   setPlayer,
   setCurrentPlayerAvatar,
-  setCurrentPlayerExperienceManager,
+  setPlayerExperienceManager,
   setCurrentPlayerMoney,
   setLife,
   setBoardSize,

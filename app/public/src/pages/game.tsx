@@ -29,7 +29,7 @@ import {
   setPlayer,
   setBoardSize,
   setCurrentPlayerMoney,
-  setCurrentPlayerExperienceManager,
+  setPlayerExperienceManager,
   setCurrentPlayerAvatar,
   setCurrentPlayerName,
   setLoadingProgress,
@@ -425,7 +425,7 @@ export default function Game() {
             dispatch(setExperienceManager(value))
           }
           dispatch(
-            setCurrentPlayerExperienceManager({
+            setPlayerExperienceManager({
               id: player.id,
               value: value
             })

@@ -407,7 +407,7 @@ export default class Simulation extends Schema implements ISimulation {
           )
           break
         case Effect.NIGHT:
-          pokemon.addCritChance(0.2)
+          pokemon.addCritChance(10)
           break
         case Effect.SNOW:
           pokemon.addAttackSpeed(-25)
