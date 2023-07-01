@@ -34,7 +34,7 @@ export default function AnonymousButton() {
       <div>
         <button
           className="firebaseui-idp-button anonymous"
-          style={{ marginBottom: "10px", display: "flex" }}
+          style={{ display: "flex", alignItems: "center" }}
           onClick={signIn}
         >
           <img style={{ width: "30px" }} src="assets/ui/unown.svg" />
