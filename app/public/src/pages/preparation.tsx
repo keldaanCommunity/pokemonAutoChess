@@ -79,8 +79,6 @@ export default function Preparation() {
     }
 
     const initialize = async (r: Room<PreparationState>, uid: string) => {
-      r.onLeave(() => setToLobby(true))
-      
       r.state.users.forEach((u) => {
         dispatch(addUser(u))
       })

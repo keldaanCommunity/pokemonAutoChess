@@ -83,3 +83,7 @@ Emotes communication between players ingame
 # Misc
 
 - Draw now preserve existing streak, but does not increase it
+- disallow changing room name if anonymous
+- disallow room creation for anonymous users with accounts created less than 10 mins ago
+- allow mods to kick and delete rooms
+- prevent anonymous accounts from changing their name
