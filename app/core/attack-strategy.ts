@@ -3201,6 +3201,7 @@ export class TormentStrategy extends AttackStrategy {
         break
     }
     pokemon.addAttackSpeed(boost, true)
+    pokemon.cooldown = 500 / pokemon.atkSpeed
   }
 }
 
