@@ -33,7 +33,7 @@ patch announcement
 
 # Bugfix
 
-- 
+-  fix duration of Maractus ability
 
 # UI
 
