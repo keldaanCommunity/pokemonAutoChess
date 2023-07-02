@@ -2,7 +2,7 @@ import { Rarity } from "../../../../../types/enum/Game"
 import React from "react"
 import ReactTooltip from "react-tooltip"
 import { useAppSelector } from "../../../hooks"
-import { Probability, RarityColor } from "../../../../../types/Config"
+import { RarityProbabilityPerLevel, RarityColor } from "../../../../../types/Config"
 
 export default function GameRarityPercentage() {
   const level = useAppSelector((state) => state.game.experienceManager.level)
@@ -33,7 +33,7 @@ export default function GameRarityPercentage() {
             {RarityTiers.map((rarity, index) => (
               <tr key={"detail-" + rarity}>
                 <td style={{ color: RarityColor[rarity] }}>{rarity}</td>
-                <td>{Math.ceil(Probability[level][index] * 100)}%</td>
+                <td>{Math.ceil(RarityProbabilityPerLevel[level][index] * 100)}%</td>
               </tr>
             ))}
           </tbody>
@@ -50,7 +50,7 @@ export default function GameRarityPercentage() {
         {RarityTiers.map((rarity, index) => {
           return (
             <div key={rarity} style={{ backgroundColor: RarityColor[rarity] }}>
-              {Math.ceil(Probability[level][index] * 100)}%
+              {Math.ceil(RarityProbabilityPerLevel[level][index] * 100)}%
             </div>
           )
         })}

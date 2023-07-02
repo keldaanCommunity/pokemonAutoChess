@@ -41,4 +41,4 @@ patch announcement
 
 # Misc
 
-- 
+- Rarity percentages per level have been slightly adjusted at levels 4, 6, 7 and 8
