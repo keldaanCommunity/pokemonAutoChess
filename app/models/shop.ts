@@ -1,8 +1,8 @@
 import PokemonFactory from "./pokemon-factory"
-import { Pkm, PkmDuo, PkmDuos, PkmFamily, PkmProposition } from "../types/enum/Pokemon"
+import { Pkm, PkmDuos, PkmFamily, PkmProposition } from "../types/enum/Pokemon"
 import Player from "./colyseus-models/player"
 import {
-  Probability,
+  RarityProbabilityPerLevel,
   DITTO_RATE,
   PoolSize,
   CommonShop,
@@ -200,7 +200,7 @@ export default class Shop {
   }
 
   pickPokemon(player: Player) {
-    const playerProbality = Probability[player.experienceManager.level]
+    const rarityProbability = RarityProbabilityPerLevel[player.experienceManager.level]
     const ditto_seed = Math.random()
     const rarity_seed = Math.random()
     let pokemon = Pkm.MAGIKARP
@@ -217,8 +217,8 @@ export default class Shop {
       }
     })
 
-    for (let i = 0; i < playerProbality.length; i++) {
-      threshold += playerProbality[i]
+    for (let i = 0; i < rarityProbability.length; i++) {
+      threshold += rarityProbability[i]
       if (rarity_seed < threshold) {
         switch (i) {
           case 0:
