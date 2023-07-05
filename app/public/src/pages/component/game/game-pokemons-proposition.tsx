@@ -64,7 +64,7 @@ export default function GamePokemonsPropositions() {
             })}
           </div>
           {isBenchFull && (
-            <p>You mush have one free slot on the bench, or two for Duos</p>
+            <p>You must have one free slot on the bench, or two for Duos</p>
           )}
         </div>
 

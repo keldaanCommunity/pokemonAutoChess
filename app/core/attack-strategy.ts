@@ -1977,7 +1977,7 @@ export class SpikeArmorStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const duration =
-      pokemon.stars === 3 ? 10000 : pokemon.stars === 2 ? 5000 : 3000
+      pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL ? 10000 : pokemon.stars === 2 ? 5000 : 3000
     pokemon.status.triggerSpikeArmor(duration)
   }
 }
@@ -3201,6 +3201,7 @@ export class TormentStrategy extends AttackStrategy {
         break
     }
     pokemon.addAttackSpeed(boost, true)
+    pokemon.cooldown = 500 / pokemon.atkSpeed
   }
 }
 
