@@ -1010,7 +1010,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.EARTHQUAKE]: {
-    eng: `Deals damage [30,60,120,SP] ${Damage.SPECIAL} to all enemy units in the same column/line`,
+    eng: `Deals damage [30,60,120,SP] ${Damage.SPECIAL} to all enemy units in the same column/line of the attacker`,
     esp: ``,
     fra: ``,
     prt: ``
