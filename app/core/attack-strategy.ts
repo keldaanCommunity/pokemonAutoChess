@@ -288,16 +288,16 @@ export class EarthquakeStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     let damage = 30
-    if (pokemon.stars == 2) {
+    if (pokemon.stars === 2) {
       damage = 60
     }
-    if (pokemon.stars == 3 || pokemon.rarity === Rarity.MYTHICAL) {
+    if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
       damage = 120
     }
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (
-        (tg && pokemon.team != tg.team && target.positionY == y) ||
-        (tg && pokemon.team != tg.team && target.positionX == x)
+        (tg && pokemon.team !== tg.team && pokemon.positionY === y) ||
+        (tg && pokemon.team !== tg.team && pokemon.positionX === x)
       ) {
         tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
         tg.count.earthquakeCount++
