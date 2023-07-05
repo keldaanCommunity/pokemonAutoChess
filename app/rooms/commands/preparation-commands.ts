@@ -340,7 +340,11 @@ export class OnDeleteRoomCommand extends Command<
   execute({ client }) {
     try {
       const user = this.state.users.get(client.auth?.uid)
-      if (user && [Role.ADMIN, Role.MODERATOR].includes(user.role)) {
+      if (user && [Role.ADMIN, Role.MODERATOR].includes(user.role)) {        
+        this.room.clients.forEach(cli => {
+          cli.send(Transfer.KICK)
+          cli.leave()
+        })
         this.room.clients.forEach((cli) => {
           cli.send(Transfer.KICK)
           cli.leave()
