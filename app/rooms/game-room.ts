@@ -717,8 +717,12 @@ export default class GameRoom extends Room<GameState> {
         }
         else{
           logger.error("ERROR, no opponent found. Players size:", this.state.players.size)
+          logger.error("ERROR, sortArray =")
+          sortArray.forEach(p=>logger.error(p))
+          logger.error("ERROR, potentials = ")
+          potentials.forEach(p=>logger.error(p))
           this.state.players.forEach(player=>{
-            logger.error(player.id, player.name)
+            logger.error(player.id, player.name, player.alive)
             logger.error(player.opponents)
           })
         }
