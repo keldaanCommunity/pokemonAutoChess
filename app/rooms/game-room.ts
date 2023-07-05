@@ -698,6 +698,9 @@ export default class GameRoom extends Room<GameState> {
           sortArray.forEach(p=>logger.error(p))
           logger.error("ERROR, potentials = ")
           potentials.forEach(p=>logger.error(p))
+          logger.error("ERROR, potentail = ", potential)
+          logger.error("ERROR, id", id)
+          logger.error("ERROR",opponent)
           this.state.players.forEach(player=>{
             logger.error(player.id, player.name, player.alive)
             logger.error(player.opponents)
