@@ -26,6 +26,7 @@ patch announcement
 - Nerf Miltank ; mana 90 → 100
 - Change Poochyena ability: Bite → Growl
 - Buff Bite damage: 30/60/120 → 40/80/120
+- Buff Crabhammer: 30/60/120 → 40/80/120 damage ; 3x more chance to crit if reaper cloth ; deals true damage when execute
 
 # Changes to Synergies
 

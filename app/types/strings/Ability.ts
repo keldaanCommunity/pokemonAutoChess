@@ -1466,7 +1466,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   CRABHAMMER: {
-    eng: `Deals [30,60,120,SP] ${Damage.SPECIAL}. Execute the target if below 30%`,
+    eng: `Deals [40,80,120,SP] ${Damage.SPECIAL}. High chance of crit. Execute the target if below 30%`,
     esp: ``,
     prt: ``,
     fra: ``
