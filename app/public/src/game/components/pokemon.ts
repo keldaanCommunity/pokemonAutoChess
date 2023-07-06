@@ -7,7 +7,8 @@ import ItemsContainer from "./items-container"
 import { Effect } from "../../../../types/enum/Effect"
 import {
   transformAttackCoordinate,
-  getAttackScale
+  getAttackScale,
+  transformCoordinate
 } from "../../pages/utils/utils"
 import {
   IPokemon,
@@ -642,6 +643,25 @@ export default class Pokemon extends DraggableObject {
     resurectAnim.anims.play("RESURECT")
     resurectAnim.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
       resurectAnim.destroy()
+    })
+  }
+
+  fishingAnimation() {
+    const coordinates = transformCoordinate(this.positionX, this.positionY)
+    const specialProjectile = this.scene.add.sprite(
+      coordinates[0],
+      coordinates[1],
+      Ability.DIVE,
+      "000"
+    )
+    specialProjectile.setDepth(7)
+    specialProjectile.setScale(1, 1)
+    specialProjectile.anims.play(Ability.DIVE)
+    specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+      specialProjectile.destroy()
+      this.state = PokemonActionState.IDLE
+      const g = <GameScene>this.scene
+      g.animationManager?.animatePokemon(this, PokemonActionState.IDLE)
     })
   }
 

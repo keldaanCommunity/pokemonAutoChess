@@ -28,7 +28,12 @@ import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
 import { getPortraitSrc } from "../utils"
 import { IPokemonRecord } from "../../../models/colyseus-models/game-record"
 import { Synergy } from "../../../types/enum/Synergy"
-import { AttackType, HealType, Orientation } from "../../../types/enum/Game"
+import {
+  AttackType,
+  HealType,
+  Orientation,
+  PokemonActionState
+} from "../../../types/enum/Game"
 import { Weather } from "../../../types/enum/Weather"
 import store from "../stores"
 import { logger } from "../../../utils/logger"
@@ -717,7 +722,10 @@ class GameContainer {
     if (this.game != null && this.game.scene.getScene("gameScene")) {
       const g = <GameScene>this.game.scene.getScene("gameScene")
       if (g.board && g.board.player && g.board.player.id == player.id) {
-        g.board.addPokemon(pokemon)
+        const pokemonUI = g.board.addPokemon(pokemon)
+        if (pokemon.action === PokemonActionState.FISH) {
+          pokemonUI.fishingAnimation()
+        }
       }
     }
   }

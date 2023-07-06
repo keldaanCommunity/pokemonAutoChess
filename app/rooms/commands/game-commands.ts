@@ -1352,7 +1352,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
           const x = this.room.getFirstAvailablePositionInBench(player.id)
           fish.positionX = x !== undefined ? x : -1
           fish.positionY = 0
-          fish.action = PokemonActionState.HOP
+          fish.action = PokemonActionState.FISH
           player.board.set(fish.id, fish)
         }
 

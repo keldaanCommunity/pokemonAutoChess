@@ -1930,7 +1930,7 @@ export default class AnimationManager {
 
   animatePokemon(entity: Pokemon, action: PokemonActionState) {
     let animation = AnimationType.Idle
-    if (action === PokemonActionState.HOP) {
+    if (action === PokemonActionState.HOP || action === PokemonActionState.FISH) {
       animation = AnimationType.Hop
     } else if (action === PokemonActionState.HURT) {
       animation = AnimationType.Hurt
