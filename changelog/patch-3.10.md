@@ -22,11 +22,12 @@ patch announcement
 - Buff Rapidash HP 180 → 220
 - Adjusted stats for Paras line ; Buff Parasect HP: 110 → 180
 - Reduce cooldown of Torment ability: 1s/AS → 500ms/AS
-
+- Totodile moved from Uncommon to Rare - adjusted stats accordingly
 
 # Changes to Synergies
 
-- 
+- Water dodge chance: 25/50/75 → 30/50/70
+
 
 # Changes to Items
 
