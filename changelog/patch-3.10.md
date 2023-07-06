@@ -23,6 +23,7 @@ patch announcement
 - Adjusted stats for Paras line ; Buff Parasect HP: 110 → 180
 - Reduce cooldown of Torment ability: 1s/AS → 500ms/AS
 - Totodile moved from Uncommon to Rare - adjusted stats accordingly
+- Nerf Miltank ; mana 90 → 100
 
 # Changes to Synergies
 

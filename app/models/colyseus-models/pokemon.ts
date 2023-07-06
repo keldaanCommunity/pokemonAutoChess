@@ -6338,7 +6338,7 @@ export class Miltank extends Pokemon {
       1,
       AttackSprite.NORMAL_MELEE,
       1,
-      90,
+      100,
       Ability.ROLLOUT,
       shiny,
       emotion,
