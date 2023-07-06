@@ -1310,7 +1310,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.BITE]: {
-    eng: `30% Life steal mono target that deals [30,60,120,SP] ${Damage.SPECIAL}`,
+    eng: `Deals [40,80,120,SP] ${Damage.SPECIAL} damage to the target and heals for 30% of the damage`,
     esp: `50% Vida robar mono objetivo de ataque físico que inflige 30,50,70 de daño.`,
     fra: `Attaque monocible avec 50% de vol de vie faisant 30,50,70 dégats spéciaux.`,
     prt: ``

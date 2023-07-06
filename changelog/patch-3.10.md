@@ -24,6 +24,8 @@ patch announcement
 - Reduce cooldown of Torment ability: 1s/AS → 500ms/AS
 - Totodile moved from Uncommon to Rare - adjusted stats accordingly
 - Nerf Miltank ; mana 90 → 100
+- Change Poochyena ability: Bite → Growl
+- Buff Bite damage: 30/60/120 → 40/80/120
 
 # Changes to Synergies
 
