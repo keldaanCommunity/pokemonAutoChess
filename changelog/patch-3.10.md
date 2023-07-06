@@ -27,6 +27,7 @@ patch announcement
 - Change Poochyena ability: Bite → Growl
 - Buff Bite damage: 30/60/120 → 40/80/120
 - Buff Crabhammer: 30/60/120 → 40/80/120 damage ; 3x more chance to crit if reaper cloth ; deals true damage when execute
+- Nerf Castform-Hail: 5→2 def/spedef gained per cast
 
 # Changes to Synergies
 

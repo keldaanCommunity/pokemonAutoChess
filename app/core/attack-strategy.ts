@@ -4069,8 +4069,8 @@ export class ForecastStrategy extends AttackStrategy {
           p.setMana(p.mana + Math.round(20 * (1 + pokemon.ap / 100)))
         }
         if (pokemon.name === Pkm.CASTFORM_HAIL) {
-          p.addDefense(5, true)
-          p.addSpecialDefense(5, true)
+          p.addDefense(2, true)
+          p.addSpecialDefense(2, true)
         }
       }
     })
