@@ -22,6 +22,7 @@ patch announcement
 - Buff Rapidash HP 180 → 220
 - Adjusted stats for Paras line ; Buff Parasect HP: 110 → 180
 - Reduce cooldown of Torment ability: 1s/AS → 500ms/AS
+- Shadow Clone: clones now get 80% or original max HP and 30 Shield (scales with AP)
 
 
 # Changes to Synergies
