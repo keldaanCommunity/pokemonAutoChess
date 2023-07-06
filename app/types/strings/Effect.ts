@@ -162,17 +162,17 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.RAIN_DANCE]: {
-    eng: `30% chance to dodge`,
+    eng: `30% chance to dodge. Fish a pokemon after every PvP fight.`,
     esp: ``,
     fra: ``
   },
   [Effect.DRIZZLE]: {
-    eng: `50% chance to dodge`,
+    eng: `50% chance to dodge. Rare pokemons can be fished.`,
     esp: ``,
     fra: ``
   },
   [Effect.PRIMORDIAL_SEA]: {
-    eng: `70% chance to dodge`,
+    eng: `70% chance to dodge. Epic pokemons can be fished.`,
     esp: ``,
     fra: ``
   },

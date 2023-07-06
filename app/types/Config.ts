@@ -110,7 +110,7 @@ export const RarityColor: { [key in Rarity]: string } = {
   [Rarity.HATCH]: "#b9915a"
 }
 
-export const RarityProbability: { [key in Rarity]: number } = {
+export const BoosterRarityProbability: { [key in Rarity]: number } = {
   [Rarity.COMMON]: 0.15,
   [Rarity.UNCOMMON]: 0.2,
   [Rarity.RARE]: 0.2,
@@ -354,6 +354,31 @@ export const HatchList = new Array<Pkm>(
   Pkm.FROAKIE,
   Pkm.TEPIG
 )
+
+export const FishRarityProbability: { [waterLevel: number]: { [key in Rarity]?: number } } = {
+  1: {
+    [Rarity.SPECIAL]: 0.5,
+    [Rarity.COMMON]: 0.4,
+    [Rarity.UNCOMMON]: 0.1,
+    [Rarity.RARE]: 0,
+    [Rarity.EPIC]: 0
+  },
+  2: {
+    [Rarity.SPECIAL]: 0.4,
+    [Rarity.COMMON]: 0.3,
+    [Rarity.UNCOMMON]: 0.2,
+    [Rarity.RARE]: 0.1,
+    [Rarity.EPIC]: 0
+  },
+  3: {
+    [Rarity.SPECIAL]: 0.3,
+    [Rarity.COMMON]: 0.2,
+    [Rarity.UNCOMMON]: 0.2,
+    [Rarity.RARE]: 0.2,
+    [Rarity.EPIC]: 0.1
+  },
+}
+
 
 export const MAX_PLAYERS_PER_LOBBY = 8
 

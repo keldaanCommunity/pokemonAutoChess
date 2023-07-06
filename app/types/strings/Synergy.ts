@@ -161,7 +161,7 @@ export const SynergyDescription: {
     fra: ""
   },
   [Synergy.WATER]: {
-    eng: `Water pokemons have a chance to dodge basic attacks`,
+    eng: `Water pokemons have a chance to dodge basic attacks. A new water pokemon is fished after each PvP turn and put on your bench.`,
     esp: "",
     fra: ""
   },

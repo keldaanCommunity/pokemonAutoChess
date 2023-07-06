@@ -9,7 +9,8 @@ import {
   EpicShop,
   LegendaryShop,
   RareShop,
-  UncommonShop
+  UncommonShop,
+  FishRarityProbability
 } from "../types/Config"
 import { Rarity } from "../types/enum/Game"
 import { pickRandomIn, shuffleArray } from "../utils/random"
@@ -17,6 +18,7 @@ import { clamp } from "../utils/number"
 import { removeInArray } from "../utils/array"
 import { Pokemon } from "./colyseus-models/pokemon"
 import { logger } from "../utils/logger"
+import { Synergy } from "../types/enum/Synergy"
 
 export function getPoolSize(rarity: Rarity, maxStars: number): number {
   return PoolSize[rarity][clamp(maxStars, 1, 3) - 1]
@@ -178,14 +180,16 @@ export default class Shop {
     shop.forEach((pkm) => player.pokemonsProposition.push(pkm))
   }
 
-  getRandomPokemonFromPool(pool: Map<Pkm, number>, finals: Array<Pkm>): Pkm {
+  getRandomPokemonFromPool(pool: Map<Pkm, number>, finals: Array<Pkm>, specificTypeWanted?: Synergy): Pkm {
     let pkm = Pkm.MAGIKARP
     const potential = new Array<Pkm>()
     pool.forEach((value, pkm) => {
       if (!finals.includes(pkm)) {
-        for (let i = 0; i < value; i++) {
-          potential.push(pkm)
-        }
+        if(!specificTypeWanted || PokemonFactory.createPokemonFromName(pkm).types.includes(specificTypeWanted)){
+          for (let i = 0; i < value; i++) {
+            potential.push(pkm)
+          }
+        }        
       }
     })
     if (potential.length > 0) {
@@ -199,7 +203,7 @@ export default class Shop {
     return pkm
   }
 
-  pickPokemon(player: Player) {
+  pickPokemon(player: Player): Pkm {
     const rarityProbability = RarityProbabilityPerLevel[player.experienceManager.level]
     const ditto_seed = Math.random()
     const rarity_seed = Math.random()
@@ -247,5 +251,46 @@ export default class Shop {
     }
 
     return pokemon
+  }
+
+  fishPokemon(player: Player, fishingLevel: number): Pkm {
+    const rarityProbability = FishRarityProbability[fishingLevel]
+    const rarity_seed = Math.random()
+    let fish: Pkm = Pkm.MAGIKARP
+    let threshold = 0
+    const finals = new Array<Pkm>()
+
+    player.board.forEach((pokemon: Pokemon) => {
+      if (pokemon.final) {
+        finals.push(PkmFamily[pokemon.name])
+      }
+    })
+
+    for (let rarity in rarityProbability) {
+      threshold += rarityProbability[rarity]
+      if (rarity_seed < threshold) {
+        switch (rarity) {
+          case Rarity.COMMON:
+            fish = this.getRandomPokemonFromPool(this.commonPool, finals, Synergy.WATER)
+            break
+          case Rarity.UNCOMMON:
+            fish = this.getRandomPokemonFromPool(this.uncommonPool, finals, Synergy.WATER)
+            break            
+          case Rarity.RARE:
+            fish = this.getRandomPokemonFromPool(this.rarePool, finals, Synergy.WATER)
+            break
+          case Rarity.EPIC:
+            fish = this.getRandomPokemonFromPool(this.epicPool, finals, Synergy.WATER)
+            break
+          case Rarity.SPECIAL:
+          default:
+            fish = Pkm.MAGIKARP
+            break
+        }
+        break
+      }
+    }
+
+    return fish
   }
 }

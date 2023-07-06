@@ -1972,7 +1972,7 @@ export default class PokemonFactory {
     return pokemon.rarity
   }
 
-  static createRandomEgg() {
+  static createRandomEgg(): Pokemon {
     const egg = PokemonFactory.createPokemonFromName(Pkm.EGG)
     egg.action = PokemonActionState.SLEEP
     egg.evolution = pickRandomIn(HatchList)
@@ -2007,6 +2007,8 @@ export default class PokemonFactory {
     const pokemon: Pokemon = PokemonFactory.createPokemonFromName(name)
     if (name === Pkm.EGG) {
       return 2
+    } else if(name === Pkm.MAGIKARP){
+      return 1
     } else if (pokemon.rarity === Rarity.HATCH) {
       return [3, 4, 5][pokemon.stars - 1]
     } else if (pokemon.rarity === Rarity.MYTHICAL) {
