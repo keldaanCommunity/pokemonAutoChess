@@ -31,6 +31,7 @@ patch announcement
 # Changes to Synergies
 
 - Water dodge chance: 25/50/75 → 30/50/70
+- Water rework: A new water pokemon is fished after each PvP turn and put on your bench.
 
 # Changes to Items
 
