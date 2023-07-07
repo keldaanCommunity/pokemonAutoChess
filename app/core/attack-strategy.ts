@@ -1756,7 +1756,8 @@ export class ShadowCloneStrategy extends AttackStrategy {
         farthestCoordinate.y,
         pokemon.team
       )
-      clone.life = pokemon.life
+      clone.life = 0.8 * pokemon.life
+      clone.handleShield(30, clone, true)
       clone.isClone = true
     }
   }

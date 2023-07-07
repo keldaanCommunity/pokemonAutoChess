@@ -1118,7 +1118,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.SHADOW_CLONE]: {
-    eng: `The pokemon creates an identical clone of himself next to his target. This clone inherits from the pokemon items and stats`,
+    eng: `The pokemon creates an identical clone of himself next to his target. This clone inherits from the pokemon items and stats, 80% of its max ${Stat.HP} and [30,SP] ${Stat.SHIELD}`,
     esp: ``,
     fra: ``,
     prt: ``
