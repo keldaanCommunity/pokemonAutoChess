@@ -12,8 +12,6 @@ patch announcement
 
 # New Pokemons:
 
-
-
 # Changes to Pokemon / Abilities
 
 - Nerf Gible line stats
@@ -28,23 +26,23 @@ patch announcement
 - Buff Bite damage: 30/60/120 → 40/80/120
 - Buff Crabhammer: 30/60/120 → 40/80/120 damage ; 3x more chance to crit if reaper cloth ; deals true damage when execute
 - Nerf Castform-Hail: 5→2 def/spedef gained per cast
+- Nerf Cubone line mana: 60 → 80
 
 # Changes to Synergies
 
 - Water dodge chance: 25/50/75 → 30/50/70
 
-
 # Changes to Items
 
-- 
+-
 
 # Bugfix
 
--  fix duration of Maractus ability
+- fix duration of Maractus ability
 
 # UI
 
-- 
+-
 
 # Misc
 
