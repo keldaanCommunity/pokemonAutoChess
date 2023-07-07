@@ -162,7 +162,7 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.RAIN_DANCE]: {
-    eng: `25% chance to dodge`,
+    eng: `30% chance to dodge`,
     esp: ``,
     fra: ``
   },
@@ -172,7 +172,7 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.PRIMORDIAL_SEA]: {
-    eng: `75% chance to dodge`,
+    eng: `70% chance to dodge`,
     esp: ``,
     fra: ``
   },

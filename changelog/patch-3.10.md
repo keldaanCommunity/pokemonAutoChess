@@ -22,12 +22,21 @@ patch announcement
 - Buff Rapidash HP 180 → 220
 - Adjusted stats for Paras line ; Buff Parasect HP: 110 → 180
 - Reduce cooldown of Torment ability: 1s/AS → 500ms/AS
+
 - Shadow Clone: clones now get 80% or original max HP and 30 Shield (scales with AP)
+
+
+- Totodile moved from Uncommon to Rare - adjusted stats accordingly
+- Nerf Miltank ; mana 90 → 100
+- Change Poochyena ability: Bite → Growl
+- Buff Bite damage: 30/60/120 → 40/80/120
+- Buff Crabhammer: 30/60/120 → 40/80/120 damage ; 3x more chance to crit if reaper cloth ; deals true damage when execut
 
 
 # Changes to Synergies
 
-- 
+- Water dodge chance: 25/50/75 → 30/50/70
+
 
 # Changes to Items
 

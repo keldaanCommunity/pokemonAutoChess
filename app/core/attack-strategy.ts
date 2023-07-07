@@ -654,16 +654,21 @@ export class CrabHammerStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 30
+    let damage = 40
     if (pokemon.stars == 2) {
-      damage = 60
+      damage = 80
     } else if (pokemon.stars == 3) {
       damage = 120
     }
+    if(pokemon.items.has(Item.REAPER_CLOTH)){
+      crit = chance(3 * pokemon.critChance / 100)
+    }
+    let attackType = AttackType.SPECIAL
     if (target.life / target.hp < 0.3) {
       damage = target.life
+      attackType = AttackType.TRUE
     }
-    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    target.handleSpecialDamage(damage, board, attackType, pokemon, crit)
   }
 }
 
@@ -2937,10 +2942,10 @@ export class BiteStrategy extends AttackStrategy {
     let damage = 0
     switch (pokemon.stars) {
       case 1:
-        damage = 30
+        damage = 40
         break
       case 2:
-        damage = 60
+        damage = 80
         break
       case 3:
         damage = 120
@@ -2949,7 +2954,7 @@ export class BiteStrategy extends AttackStrategy {
         break
     }
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    pokemon.handleHeal(Math.floor(0.33 * damage), pokemon, 1)
+    pokemon.handleHeal(Math.floor(0.3 * damage), pokemon, 1)
   }
 }
 
