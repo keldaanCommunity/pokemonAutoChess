@@ -101,15 +101,6 @@ export default class AttackingState extends PokemonState {
 
     const target = board.getValue(coordinates.x, coordinates.y)
     if (target) {
-      let isAttackSuccessful = true
-      if (chance(target.dodge) && !pokemon.items.has(Item.XRAY_VISION)) {
-        isAttackSuccessful = false
-        target.count.dodgeCount += 1
-      }
-      if (target.status.protect) {
-        isAttackSuccessful = false
-      }
-
       pokemon.orientation = board.orientation(
         pokemon.positionX,
         pokemon.positionY,
@@ -123,6 +114,17 @@ export default class AttackingState extends PokemonState {
       let trueDamage = 0
       let totalTakenDamage = 0
       const attackType = pokemon.attackType
+
+      let isAttackSuccessful = true
+      if (chance(target.dodge) && !pokemon.items.has(Item.XRAY_VISION)) {
+        isAttackSuccessful = false
+        physicalDamage = 0
+        target.count.dodgeCount += 1
+      }
+      if (target.status.protect) {
+        physicalDamage = 0
+        isAttackSuccessful = false
+      }
 
       if (Math.random() * 100 < pokemon.critChance) {
         pokemon.onCritical(target, board)
@@ -148,7 +150,7 @@ export default class AttackingState extends PokemonState {
         physicalDamage -= trueDamage
 
         // Apply ghost true damage
-        if (trueDamage > 0 && isAttackSuccessful) {
+        if (trueDamage > 0) {
           const { takenDamage } = target.handleDamage({
             damage: trueDamage,
             board,
@@ -160,7 +162,7 @@ export default class AttackingState extends PokemonState {
         }
       }
 
-      if (physicalDamage > 0 && isAttackSuccessful) {
+      if (physicalDamage > 0) {
         // Apply attack physical damage
         const { takenDamage } = target.handleDamage({
           damage: physicalDamage,
@@ -172,7 +174,7 @@ export default class AttackingState extends PokemonState {
         totalTakenDamage += takenDamage
       }
 
-      const totalDamage = isAttackSuccessful ? physicalDamage + trueDamage : 0
+      const totalDamage = physicalDamage + trueDamage
       pokemon.onAttack({
         target,
         board,
