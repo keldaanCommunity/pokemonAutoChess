@@ -148,7 +148,7 @@ export default class AttackingState extends PokemonState {
         physicalDamage -= trueDamage
 
         // Apply ghost true damage
-        if (trueDamage > 0) {
+        if (trueDamage > 0 && isAttackSuccessful) {
           const { takenDamage } = target.handleDamage({
             damage: trueDamage,
             board,
@@ -160,7 +160,7 @@ export default class AttackingState extends PokemonState {
         }
       }
 
-      if (physicalDamage > 0) {
+      if (physicalDamage > 0 && isAttackSuccessful) {
         // Apply attack physical damage
         const { takenDamage } = target.handleDamage({
           damage: physicalDamage,
@@ -172,7 +172,7 @@ export default class AttackingState extends PokemonState {
         totalTakenDamage += takenDamage
       }
 
-      const totalDamage = physicalDamage + trueDamage
+      const totalDamage = isAttackSuccessful ? physicalDamage + trueDamage : 0
       pokemon.onAttack({
         target,
         board,

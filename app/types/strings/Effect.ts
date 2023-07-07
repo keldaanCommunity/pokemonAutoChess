@@ -100,7 +100,7 @@ export const EffectName: { [key in Effect]: string } = {
   [Effect.MISTY]: "Misty",
   [Effect.WINDY]: "Windy",
   [Effect.NIGHT]: "Night",
-  [Effect.HYDRATATION]: "Hydratation",
+  [Effect.HYDRATATION]: "Hydratation"
 }
 
 export const EffectDescription: {

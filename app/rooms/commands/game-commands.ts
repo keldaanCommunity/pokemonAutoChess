@@ -64,7 +64,6 @@ export class OnShopCommand extends Command<
           player.pokemonCollection.get(PkmIndex[name])
         )
         if (
-          pokemon.name !== Pkm.MAGIKARP &&
           player.money >= pokemon.cost &&
           (this.room.getBenchSize(player.board) < 8 ||
             (this.room.getPossibleEvolution(player.board, pokemon.name) &&
@@ -228,14 +227,9 @@ export class OnDragDropCommand extends Command<
         }
         const x = parseInt(detail.x)
         const y = parseInt(detail.y)
-        if (pokemon.name == Pkm.DITTO) {
+        if (pokemon.name === Pkm.DITTO) {
           const pokemonToClone = this.room.getPokemonByPosition(playerId, x, y)
-          if (
-            pokemonToClone &&
-            ![Rarity.MYTHICAL, Rarity.SPECIAL, Rarity.HATCH].includes(
-              pokemonToClone.rarity
-            )
-          ) {
+          if (pokemonToClone && pokemonToClone.canBeCloned) {
             dittoReplaced = true
             const replaceDitto = PokemonFactory.createPokemonFromName(
               PokemonFactory.getPokemonBaseEvolution(pokemonToClone.name),
@@ -1208,7 +1202,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
             const coordinate = this.room.getFirstAvailablePositionInTeam(
               player.id
             )
-            const p = this.room.getFirstPokemonOnBench(player.board)
+            const p = this.room.getFirstPlaceablePokemonOnBench(player.board)
             if (coordinate && p) {
               const detail: { id: string; x: number; y: number } = {
                 id: p.id,
@@ -1354,6 +1348,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
           fish.positionY = 0
           fish.action = PokemonActionState.FISH
           player.board.set(fish.id, fish)
+          this.room.updateEvolution(player.id)
         }
 
         player.opponentName = ""

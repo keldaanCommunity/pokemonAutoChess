@@ -92,6 +92,14 @@ export class Pokemon extends Schema implements IPokemon {
       this.evolutionTimer = EvolutionTime.EVOLVE_HATCH
     }
   }
+
+  get canBePlaced(): boolean {
+    return ![Pkm.DITTO, Pkm.EGG].includes(this.name)
+  }
+
+  get canBeCloned(): boolean {
+    return this.rarity !== Rarity.MYTHICAL && this.rarity !== Rarity.HATCH && ![Pkm.DITTO, Pkm.EGG].includes(this.name)
+  }
 }
 
 export class Ditto extends Pokemon {
@@ -5993,7 +6001,9 @@ export class Magikarp extends Pokemon {
       Ability.SPLASH,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.MAGIKARP
     )
   }
 }
@@ -6073,7 +6083,7 @@ export class Spearow extends Pokemon {
       Pkm.SPEAROW,
       [Synergy.FLYING, Synergy.NORMAL],
       Rarity.SPECIAL,
-      Pkm.DEFAULT,
+      Pkm.FEAROW,
       30,
       4,
       1,

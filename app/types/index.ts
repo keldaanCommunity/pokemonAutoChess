@@ -372,6 +372,8 @@ export interface IPokemon {
   emotion: Emotion
   final: boolean
   action: PokemonActionState
+  canBePlaced: boolean
+  canBeCloned: boolean
 }
 
 export interface IExperienceManager {
