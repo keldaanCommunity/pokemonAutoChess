@@ -408,7 +408,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.effects.includes(Effect.TELEPORT_NEXT_ATTACK)) {
-      const crit = this.items.has(Item.REAPER_CLOTH) && chance(this.critChance)
+      const crit = this.items.has(Item.REAPER_CLOTH) && chance(this.critChance / 100)
       if (crit) {
         this.onCritical(target, board)
       }
