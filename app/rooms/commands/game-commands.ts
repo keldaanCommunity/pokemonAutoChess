@@ -270,7 +270,7 @@ export class OnDragDropCommand extends Command<
               this.room.swap(playerId, pokemon, x, y)
               success = true
             } else {
-              if (pokemon.rarity != Rarity.SPECIAL) {
+              if (pokemon.canBePlaced) {
                 // Prevents a pokemon to go on the board only if it's adding a pokemon from the bench on a full board
                 if (!isBoardFull || !dropToEmptyPlace || !dropFromBench) {
                   this.room.swap(playerId, pokemon, x, y)
@@ -1187,6 +1187,34 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         this.state.shop.assignMythicalPropositions(player, Mythical2Shop)
       })
     }
+
+    const isPVE = this.checkForPVE()
+    this.state.players.forEach((player: Player) => {
+      if (
+        this.room.getBenchSize(player.board) < 8 &&
+        !isPVE &&
+        (player.effects.list.includes(Effect.RAIN_DANCE) ||
+          player.effects.list.includes(Effect.DRIZZLE) ||
+          player.effects.list.includes(Effect.PRIMORDIAL_SEA))
+      ) {
+        const fishingLevel = player.effects.list.includes(Effect.PRIMORDIAL_SEA)
+          ? 3
+          : player.effects.list.includes(Effect.DRIZZLE)
+          ? 2
+          : 1
+        const pkm = this.state.shop.fishPokemon(player, fishingLevel)
+        const fish = PokemonFactory.createPokemonFromName(pkm)
+        const x = this.room.getFirstAvailablePositionInBench(player.id)
+        fish.positionX = x !== undefined ? x : -1
+        fish.positionY = 0
+        fish.action = PokemonActionState.FISH
+        player.board.set(fish.id, fish)
+        this.room.updateEvolution(player.id)
+        this.clock.setTimeout(() => {
+          fish.action = PokemonActionState.IDLE
+        }, 1000)
+      }
+    })
   }
 
   checkForLazyTeam() {
@@ -1325,30 +1353,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
             egg.positionY = 0
             player.board.set(egg.id, egg)
           }
-        }
-
-        if (
-          this.room.getBenchSize(player.board) < 8 &&
-          !isPVE &&
-          (player.effects.list.includes(Effect.RAIN_DANCE) ||
-            player.effects.list.includes(Effect.DRIZZLE) ||
-            player.effects.list.includes(Effect.PRIMORDIAL_SEA))
-        ) {
-          const fishingLevel = player.effects.list.includes(
-            Effect.PRIMORDIAL_SEA
-          )
-            ? 3
-            : player.effects.list.includes(Effect.DRIZZLE)
-            ? 2
-            : 1
-          const pkm = this.state.shop.fishPokemon(player, fishingLevel)
-          const fish = PokemonFactory.createPokemonFromName(pkm)
-          const x = this.room.getFirstAvailablePositionInBench(player.id)
-          fish.positionX = x !== undefined ? x : -1
-          fish.positionY = 0
-          fish.action = PokemonActionState.FISH
-          player.board.set(fish.id, fish)
-          this.room.updateEvolution(player.id)
         }
 
         player.opponentName = ""

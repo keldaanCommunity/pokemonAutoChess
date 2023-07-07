@@ -661,7 +661,6 @@ export default class Pokemon extends DraggableObject {
       specialProjectile.destroy()
     })
     this.sprite.once(Phaser.Animations.Events.ANIMATION_REPEAT, () => {
-      this.state = PokemonActionState.IDLE
       const g = <GameScene>this.scene
       g.animationManager?.animatePokemon(this, PokemonActionState.IDLE)
     })
