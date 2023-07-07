@@ -654,11 +654,13 @@ export default class Pokemon extends DraggableObject {
       Ability.DIVE,
       "000"
     )
-    specialProjectile.setDepth(7)
+    specialProjectile.setDepth(this.sprite.depth - 1)
     specialProjectile.setScale(1, 1)
     specialProjectile.anims.play(Ability.DIVE)
     specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
       specialProjectile.destroy()
+    })
+    this.sprite.once(Phaser.Animations.Events.ANIMATION_REPEAT, () => {
       this.state = PokemonActionState.IDLE
       const g = <GameScene>this.scene
       g.animationManager?.animatePokemon(this, PokemonActionState.IDLE)
