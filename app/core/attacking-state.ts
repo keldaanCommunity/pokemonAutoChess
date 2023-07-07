@@ -118,7 +118,7 @@ export default class AttackingState extends PokemonState {
       if (chance(target.dodge) && !pokemon.items.has(Item.XRAY_VISION)) {
         isAttackSuccessful = false
         physicalDamage = 0
-        pokemon.count.dodgeCount += 1
+        target.count.dodgeCount += 1
       }
       if (target.status.protect) {
         isAttackSuccessful = false
