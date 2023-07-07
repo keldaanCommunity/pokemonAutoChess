@@ -100,15 +100,6 @@ export default class AttackingState extends PokemonState {
 
     const target = board.getValue(coordinates.x, coordinates.y)
     if (target) {
-      let isAttackSuccessful = true
-      if (chance(target.dodge) && !pokemon.items.has(Item.XRAY_VISION)) {
-        isAttackSuccessful = false
-        pokemon.count.dodgeCount += 1
-      }
-      if (target.status.protect) {
-        isAttackSuccessful = false
-      }
-
       pokemon.orientation = board.orientation(
         pokemon.positionX,
         pokemon.positionY,
@@ -122,6 +113,17 @@ export default class AttackingState extends PokemonState {
       let trueDamage = 0
       let totalTakenDamage = 0
       const attackType = pokemon.attackType
+
+      let isAttackSuccessful = true
+      if (chance(target.dodge) && !pokemon.items.has(Item.XRAY_VISION)) {
+        isAttackSuccessful = false
+        physicalDamage = 0
+        pokemon.count.dodgeCount += 1
+      }
+      if (target.status.protect) {
+        isAttackSuccessful = false
+        physicalDamage = 0
+      }
 
       if (Math.random() * 100 < pokemon.critChance) {
         pokemon.onCritical(target, board)
