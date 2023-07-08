@@ -921,6 +921,84 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.GIGATON_HAMMER]: {
+    eng: "Gigaton Hammer",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.ACROBATICS]: {
+    eng: "Acrobatics",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.ABSORB]: {
+    eng: "Absorb",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.ROLLOUT]: {
+    eng: "Rollout",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.THRASH]: {
+    eng: "Thrash",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.SOLAR_BEAM]: {
+    eng: "Solar Beam",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.MAGMA_STORM]: {
+    eng: "Magma Storm",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.SLASHING_CLAW]: {
+    eng: "Slashing Claw",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.ERUPTION]: {
+    eng: "Eruption",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.LUSTER_PURGE]: {
+    eng: "Luster Purge",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.MIST_BALL]: {
+    eng: "Mist Ball",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.MUD_BUBBLE]: {
+    eng: "Mud Bubble",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.LINK_CABLE]: {
+    eng: "Link Cable",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1016,13 +1094,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.TRI_ATTACK]: {
-    eng: `Deals [25,50,100,SP] special damage. ${Status.BURN}, ${Status.FREEZE} and ${Status.WOUND} the target for [2,4,8] seconds`,
+    eng: `Deals [25,50,100,SP] special damage. ${Status.BURN}, ${Status.FREEZE} and ${Status.WOUND} the target for [2,3,5] seconds`,
     esp: ``,
     fra: ``,
     prt: ``
   },
   [Ability.ECHO]: {
-    eng: `Deals [3,6,9,SP] ${Damage.SPECIAL}, + [1,2,4,SP] each time the pokemon uses its ability`,
+    eng: `Deals [3,6,9,SP] ${Damage.SPECIAL} to the enemy team, increasing by [3,6,9,SP] every time the pokemon uses its ability`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -1094,8 +1172,8 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.FREEZE]: {
-    eng: `${Status.FREEZE} the whole enemy team for [1,2,4] seconds`,
-    esp: `Congela todo el equipo durante 1,2,4 segundos`,
+    eng: `${Status.FREEZE} the whole enemy team for [1,2,3] seconds`,
+    esp: `Congela todo el equipo durante 1,2,3 segundos`,
     fra: `Gèle la cible durant 1,2,4 secondes`,
     prt: ``
   },
@@ -1154,9 +1232,9 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.DRACO_METEOR]: {
-    eng: `Area of effect attack that deals [20,SP] ${Damage.SPECIAL} to all enemies`,
-    esp: `Ataque de área de efecto que causa [20,SP] ${Damage.SPECIAL} a todos los enemigos`,
-    fra: `Inflige [20,SP] ${Damage.SPECIAL} à tous les pokémons ennemis.`,
+    eng: `Area of effect attack that deals [50,SP] ${Damage.SPECIAL} to all enemies`,
+    esp: `Ataque de área de efecto que causa [50,SP] ${Damage.SPECIAL} a todos los enemigos`,
+    fra: `Inflige [50,SP] ${Damage.SPECIAL} à tous les pokémons ennemis.`,
     prt: ``
   },
   [Ability.BLAZE_KICK]: {
@@ -1268,9 +1346,9 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.STOMP]: {
-    eng: `Mono target that deals [2,4,6,SP] x ${Stat.ATK} ${Damage.SPECIAL}`,
-    esp: `Daño físico del objetivo mono [2,4,6,SP] x ${Stat.ATK} ${Damage.SPECIAL}`,
-    fra: `Attaque mono cible faisant [2,4,6,SP] x ${Stat.ATK} ${Damage.SPECIAL} dégats physiques`,
+    eng: `Mono target that deals [3,4,5,SP] x ${Stat.ATK} ${Damage.SPECIAL}`,
+    esp: `Daño físico del objetivo mono [3,4,5,SP] x ${Stat.ATK} ${Damage.SPECIAL}`,
+    fra: `Attaque mono cible faisant [3,4,5,SP] x ${Stat.ATK} ${Damage.SPECIAL} dégats physiques`,
     prt: ``
   },
   [Ability.PAYBACK]: {
@@ -1538,7 +1616,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.CHATTER]: {
-    eng: `Deal [10,SP] ${Damage.SPECIAL} to all enemies. Every enemy has 30% chance to be ${Status.CONFUSION} for 1 second`,
+    eng: `Deal [10,SP] ${Damage.SPECIAL} to all enemies. Every enemy has [30,SP]% chance to be ${Status.CONFUSION} for 1 second`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1574,7 +1652,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   [Ability.SPIKE_ARMOR]: {
-    eng: `For [3,5,10] seconds, targets that melee attack this Pokémon receive ${Status.WOUND} and take ${Damage.SPECIAL} equal to his current ${Stat.DEF}`,
+    eng: `For [3,5,10] seconds, targets that melee attack this Pokémon receive ${Status.WOUND} and take ${Damage.SPECIAL} equal to [100,SP]% of current ${Stat.DEF}`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1739,7 +1817,7 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     fra: ""
   },
   [Ability.OVERHEAT]: {
-    eng: `Deals [20, SP] ${Damage.SPECIAL} to all enemies. Double damage if target is ${Status.BURN}`,
+    eng: `Deals [30, SP] ${Damage.SPECIAL} to all enemies. Double damage if target is ${Status.BURN}`,
     esp: "",
     prt: "",
     fra: ""
@@ -1835,13 +1913,91 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     fra: ""
   },
   [Ability.POISON_POWDER]: {
-    eng: `Dash into the enemy backline, dealing [30,60,120,SP] and applying ${Status.POISON} for 5 seconds to every enemy on the path.`,
+    eng: `Dash into the enemy backline, dealing [30,60,120,SP] and applying ${Status.POISON} for 5 seconds to every enemy on the path`,
     esp: "",
     prt: "",
     fra: ""
   },
   [Ability.ICY_WIND]: {
     eng: `Deals [30,60,120,SP] ${Damage.SPECIAL} and decrease target ${Stat.ATK_SPEED} by [10,20,40]%`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.GIGATON_HAMMER]: {
+    eng: `Deals [100,200,400,SP] ${Damage.SPECIAL} but ${Status.SILENCE} itself for 6 seconds`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.ACROBATICS]: {
+    eng: `Deals [20,40,80,SP] ${Damage.SPECIAL}. If the caster have no items, deals an extra [20,30,40,SP] ${Damage.SPECIAL}`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.ABSORB]: {
+    eng: `Deals [30,60,120,SP] ${Damage.SPECIAL} and heals [3,6,12,SP] to adjacent allies`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.ROLLOUT]: {
+    eng: `Buff the ${Stat.DEF} by [5,SP] and deals 6x the ${Stat.DEF} as ${Damage.SPECIAL}`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.THRASH]: {
+    eng: `Buff ${Stat.ATK} by 110% and become ${Status.CONFUSION} for 3s`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.SOLAR_BEAM]: {
+    eng: `Deals [30,60,120,SP] ${Damage.SPECIAL} in a straight line behind the target. If the weather is sunny, targets are ${Status.BURN} for 3s and restores 40 ${Stat.MANA}`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.MAGMA_STORM]: {
+    eng: `The target becomes trapped within a maelstrom of fire that deals [80,SP] ${Damage.SPECIAL} before moving to an adjacent target`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.SLASHING_CLAW]: {
+    eng: `Deals [15,30,60,SP] to the target and ${Status.WOUND} it for 5 seconds. If the target is already ${Status.WOUND}, deals 30% bonus ${Damage.SPECIAL}`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.ERUPTION]: {
+    eng: `Fires [20,30,40] projectiles in the air. Every projectile deals [30,60,120,SP] ${Damage.SPECIAL} and ${Status.BURN} for 5 seconds`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.LUSTER_PURGE]: {
+    eng: `Launches a ball of light in a straight line that deals [25,SP] ${Damage.SPECIAL} twice and lowers twice the ${Stat.SPE_DEF} of all enemies hit by 1`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.MIST_BALL]: {
+    eng: `Launches a mist bubble in a straight line that deals [25,SP] ${Damage.SPECIAL} twice and lowers twice the ${Stat.AP} of all enemies hit by 10%`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.MUD_BUBBLE]: {
+    eng: "Heals the caster for [10,20,40,SP]",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.LINK_CABLE]: {
+    eng: `Dash into a new spot, then triggers an electric arc between Plusle and Minun that deals [50,SP] ${Damage.SPECIAL}. If Plusle or Minun are alone, deals this damage to adjacent enemies instead.`,
     esp: "",
     prt: "",
     fra: ""

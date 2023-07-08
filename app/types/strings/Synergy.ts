@@ -166,7 +166,7 @@ export const SynergyDescription: {
     fra: ""
   },
   [Synergy.ELECTRIC]: {
-    eng: `Electric pokemons basic attacks have a chance to trigger two additional attacks`,
+    eng: `Electric pokemons basic attacks can trigger two additional attacks`,
     esp: "",
     fra: ""
   },

@@ -26,8 +26,6 @@ primal-Kyogre,0382/0001/0001/AnimData.xml
 primal-Groudon,0383/0001/AnimData.xml
 primal-Groudon,0383/0001/0001/AnimData.xml
 zweilous,0634/0000/0001/AnimData.xml
-hydreigon,0635/AnimData.xml
-hydreigon,0635/0000/0001/AnimData.xml
 krokorok,0552/AnimData.xml
 krokorok,0552/0000/0001/AnimData.xml
 krookodile,0553/AnimData.xml
@@ -40,8 +38,6 @@ tyrunt,0696/AnimData.xml
 tyrunt,0696/0000/0001/AnimData.xml
 tyrantrum,0697/AnimData.xml
 tyrantrum,0697/0000/0001/AnimData.xml
-fraxure,0611/AnimData.xml
-fraxure,0611/0000/0001/AnimData.xml
 venipede,0543/AnimData.xml
 venipede,0543/0000/0001/AnimData.xml
 whirlipede,0544/AnimData.xml
@@ -50,8 +46,6 @@ scolipede,0545/AnimData.xml
 scolipede,0545/0000/0001/AnimData.xml
 mega-manectric,0310/0001/AnimData.xml
 mega-manectric,0310/0001/0001/AnimData.xml
-doublade,0680/AnimData.xml
-doublade,0680/0000/0001/AnimData.xml
 palpitoad,0536/0000/0001/AnimData.xml
 seismitoad,0537/AnimData.xml
 seismitoad,0537/0000/0001/AnimData.xml

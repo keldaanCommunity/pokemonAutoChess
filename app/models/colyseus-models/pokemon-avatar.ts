@@ -1,11 +1,11 @@
 import { Schema, type } from "@colyseus/schema"
 import { Constraint } from "matter-js"
-import { getInformations } from "../../public/src/utils"
+import { getPokemonConfigFromAvatar } from "../../public/src/utils"
 import { IPokemonAvatar } from "../../types"
 import { Orientation, PokemonActionState } from "../../types/enum/Game"
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 
-export class PokemonAvatar extends Schema implements IPokemonAvatar {
+export class PokemonAvatarModel extends Schema implements IPokemonAvatar {
   @type("string") id: string
   @type("string") name: Pkm = Pkm.RATTATA
   @type("boolean") shiny: boolean
@@ -27,14 +27,8 @@ export class PokemonAvatar extends Schema implements IPokemonAvatar {
     this.targetX = x
     this.targetY = y
     this.timer = timer
-    const informations = getInformations(avatar)
-    Object.keys(PkmIndex).forEach((pkm_) => {
-      const pkm = pkm_ as Pkm
-      const index = PkmIndex[pkm]
-      if (index === informations.index) {
-        this.name = pkm
-      }
-    })
-    this.shiny = informations.shiny
+    const { index, shiny } = getPokemonConfigFromAvatar(avatar)
+    this.name = Object.keys(PkmIndex).find((pkm) => PkmIndex[pkm] === index) as Pkm
+    this.shiny = shiny
   }
 }

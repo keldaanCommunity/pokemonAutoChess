@@ -18,7 +18,7 @@ import { Synergy, SynergyEffects } from "../types/enum/Synergy"
 import { Pkm } from "../types/enum/Pokemon"
 import { IdleState } from "./idle-state"
 import PokemonFactory from "../models/pokemon-factory"
-import { clamp, roundTo2Digits } from "../utils/number"
+import { clamp, max, min, roundTo2Digits } from "../utils/number"
 import { Passive } from "../types/enum/Passive"
 import { DEFAULT_CRIT_CHANCE, DEFAULT_CRIT_DAMAGE } from "../types/Config"
 import { removeInArray } from "../utils/array"
@@ -78,6 +78,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   shieldDone: number
   flyingProtection = 0
   growGroundTimer = 0
+  grassHealCooldown = 1000
   sandstormDamageTimer = 0
   fairySplashCooldown = 0
   echo = 0
@@ -201,8 +202,8 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
         specialDamage = Math.round(specialDamage * attacker.critDamage)
       }
       if (attacker && attacker.items.has(Item.POKEMONOMICON)) {
-        this.status.triggerBurn(2000, this, attacker, board)
-        this.status.triggerWound(2000, this, attacker, board)
+        this.status.triggerBurn(3000, this, attacker, board)
+        this.status.triggerWound(3000, this, attacker, board)
       }
       if (this.items.has(Item.POWER_LENS) && specialDamage >= 1 && attacker) {
         attacker.handleDamage({
@@ -272,27 +273,27 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   addDodgeChance(value: number) {
-    this.dodge = Math.min(0.9, this.dodge + value)
+    this.dodge = max(0.9)(this.dodge + value)
   }
 
   addAbilityPower(value: number, apBoost = false) {
     const boost = apBoost ? (value * this.ap) / 100 : 0
-    this.ap = Math.round(this.ap + Math.round(value + boost))
+    this.ap = min(0)(Math.round(this.ap + Math.round(value + boost)))
   }
 
   addDefense(value: number, apBoost = false) {
     const boost = apBoost ? (value * this.ap) / 100 : 0
-    this.def = Math.max(0, this.def + Math.round(value + boost))
+    this.def = min(0)(this.def + Math.round(value + boost))
   }
 
   addSpecialDefense(value: number, apBoost = false) {
     const boost = apBoost ? (value * this.ap) / 100 : 0
-    this.speDef = Math.max(0, this.speDef + Math.round(value + boost))
+    this.speDef = min(0)(this.speDef + Math.round(value + boost))
   }
 
   addAttack(value: number, apBoost = false) {
     const boost = apBoost ? (value * this.ap) / 100 : 0
-    this.atk = Math.max(0, this.atk + Math.round(value + boost))
+    this.atk = min(0)(this.atk + Math.round(value + boost))
   }
 
   addAttackSpeed(value: number, apBoost = false) {
@@ -397,7 +398,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       this.setMana(this.mana + 8)
     }
     if (this.status.deltaOrb) {
-      this.setMana(this.mana + 3)
+      this.setMana(this.mana + 4)
     }
 
     if (this.effects.includes(Effect.DRAGON_ENERGY)) {
@@ -420,6 +421,15 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       )
       removeInArray(this.effects, Effect.TELEPORT_NEXT_ATTACK)
     }
+
+    if(this.passive === Passive.SHARED_VISION){
+      board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
+        if (ally && ally.passive === Passive.SHARED_VISION && this.team === ally.team) {
+          ally.targetX = this.targetX
+          ally.targetY = this.targetY
+        }
+      })
+    }
   }
 
   // called after every successful attack (not dodged or protected)
@@ -436,10 +446,6 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (target && target.items.has(Item.SMOKE_BALL)) {
       this.status.triggerParalysis(5000, this)
-    }
-
-    if (this.items.has(Item.SHELL_BELL)) {
-      this.handleHeal(Math.floor(0.3 * totalTakenDamage), this, 0)
     }
 
 
@@ -535,7 +541,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     if (target.status.spikeArmor && this.range === 1) {
       this.status.triggerWound(2000, this, target, board)
       this.handleDamage({
-        damage: target.def,
+        damage: Math.round(target.def * (1 + target.ap / 100)),
         board,
         attackType: AttackType.SPECIAL,
         attacker: target,
@@ -549,13 +555,17 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.hasSynergyEffect(Synergy.HUMAN)) {
       let lifesteal = 0
       if (this.effects.includes(Effect.MEDITATE)) {
-        lifesteal = 0.15
+        lifesteal = 0.1
       } else if (this.effects.includes(Effect.FOCUS_ENERGY)) {
-        lifesteal = 0.3
+        lifesteal = 0.25
       } else if (this.effects.includes(Effect.CALM_MIND)) {
-        lifesteal = 0.6
+        lifesteal = 0.5
       }
       this.handleHeal(Math.floor(lifesteal * damage), this, 0)
+    }
+
+    if (this.items.has(Item.SHELL_BELL)) {
+      this.handleHeal(Math.floor(0.3 * damage), this, 0)
     }
   }
 
@@ -570,13 +580,13 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
           pokemon.effects.includes(Effect.STRANGE_STEAM) ||
           pokemon.effects.includes(Effect.AROMATIC_MIST))
       ) {
-        let d = 0
+        let damage = 0
         if (pokemon.effects.includes(Effect.AROMATIC_MIST)) {
-          d = 10
+          damage = 10
         } else if (pokemon.effects.includes(Effect.FAIRY_WIND)) {
-          d = 30
+          damage = 30
         } else if (pokemon.effects.includes(Effect.STRANGE_STEAM)) {
-          d = 60
+          damage = 55
         }
         const cells = board.getAdjacentCells(
           pokemon.positionX,
@@ -586,13 +596,13 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
         cells.forEach((cell) => {
           if (cell.value && pokemon.team !== cell.value.team) {
             cell.value.count.fairyCritCount++
-            cell.value.handleDamage({
-              damage: d,
+            cell.value.handleSpecialDamage(
+              damage,
               board,
-              attackType: AttackType.SPECIAL,
-              attacker: pokemon,
-              shouldTargetGainMana: true
-            })
+              AttackType.SPECIAL,
+              pokemon,
+              false
+            )
           }
         })
 

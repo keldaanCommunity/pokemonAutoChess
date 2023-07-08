@@ -6,6 +6,7 @@
   left: 0;
   bottom: 0;
   right: 0;
+  background: black;
 }
 
 .game-loading-screen li {
@@ -24,6 +25,14 @@
   text-align: center;
   font-family: monospace;
   font-size: 28pt;
+}
+
+.game-loading-screen .error {
+  color: red;
+}
+
+.game-loading-screen button {
+  margin: auto;
 }
 
 .game-loading-screen footer {

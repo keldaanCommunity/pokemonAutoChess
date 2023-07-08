@@ -7,6 +7,7 @@ import {
   transformMiniGameXCoordinate,
   transformMiniGameYCoordinate
 } from "../../pages/utils/utils"
+import PokemonAvatar from "./pokemon-avatar"
 
 export default class MinigameManager {
   pokemons: Map<string, Pokemon>
@@ -95,13 +96,12 @@ export default class MinigameManager {
   }
 
   addPokemon(pokemon: IPokemonAvatar) {
-    const pokemonUI = new Pokemon(
+    const pokemonUI = new PokemonAvatar(
       this.scene,
       transformMiniGameXCoordinate(pokemon.x),
       transformMiniGameYCoordinate(pokemon.y),
       pokemon,
-      pokemon.id,
-      true
+      pokemon.id
     )
 
     if (pokemonUI.isCurrentPlayerAvatar) {      
@@ -158,7 +158,9 @@ export default class MinigameManager {
           break
 
         case "timer":
-          pokemonUI.updateCircleTimer(value)
+          if(pokemonUI instanceof PokemonAvatar){
+            pokemonUI.updateCircleTimer(value)
+          }
           break
       }
     }

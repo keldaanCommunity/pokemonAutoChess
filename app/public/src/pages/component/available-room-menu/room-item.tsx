@@ -13,7 +13,7 @@ export default function RoomItem(props: {
     <div className="room-item">
       <span className="room-name">{props.room.metadata?.name}</span>
       {props.room.metadata?.password && (
-        <img alt="Private" className="lock-icon" src="/assets/ui/lock.svg" />
+        <img alt="Private" title="Private Lobby (password protected)" className="lock-icon" src="/assets/ui/lock.svg" />
       )}
       {props.room.metadata?.noElo && (
         <img

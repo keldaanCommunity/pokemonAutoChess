@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react"
+import React, { Dispatch, SetStateAction, useState } from "react"
 import PreparationMenuUser from "./preparation-menu-user"
 import { IGameUser } from "../../../../../models/colyseus-models/game-user"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
@@ -9,7 +9,8 @@ import {
   changeRoomPassword,
   gameStartRequest,
   toggleReady,
-  toggleEloRoom
+  toggleEloRoom,
+  deleteRoom
 } from "../../../stores/NetworkStore"
 import firebase from "firebase/compat/app"
 import { Room } from "colyseus.js"
@@ -22,6 +23,7 @@ import { throttle } from "../../../../../utils/function"
 import Elo from "../elo"
 import InlineAvatar from "../inline-avatar"
 import { IBot } from "../../../../../models/mongo-models/bot-v2"
+import { Role } from "../../../../../types"
 
 export default function PreparationMenu(props: {
   setToGame: Dispatch<SetStateAction<boolean>>
@@ -29,6 +31,7 @@ export default function PreparationMenu(props: {
   const dispatch = useAppDispatch()
   const [inputValue, setInputValue] = useState<string>("")
   const users: IGameUser[] = useAppSelector((state) => state.preparation.users)
+  const user = useAppSelector((state) => state.preparation.user)
   const ownerName: string = useAppSelector(
     (state) => state.preparation.ownerName
   )
@@ -105,6 +108,16 @@ export default function PreparationMenu(props: {
     }
   }, 1000)
 
+  const deleteRoomButton =
+    user?.role && [Role.ADMIN, Role.MODERATOR].includes(user.role) ? (
+      <button
+        className="bubbly red"
+        onClick={() => {
+          dispatch(deleteRoom())
+        }}
+      >Delete room</button>
+    ) : null
+
   return (
     <div className="preparation-menu nes-container is-centered">
       <h1>
@@ -163,7 +176,7 @@ export default function PreparationMenu(props: {
             </label>
             <div className="spacer"></div>
           </div>
-          <div className="actions">
+          {user && !user.anonymous && (<div className="actions">
             <input
               maxLength={30}
               type="text"
@@ -181,11 +194,12 @@ export default function PreparationMenu(props: {
             >
               Change room name
             </button>
-          </div>
+          </div>)}
         </>
       )}
 
       <div className="actions">
+        {deleteRoomButton}
         {isOwner ? (
           <>
             <button
@@ -232,7 +246,6 @@ export default function PreparationMenu(props: {
 
         <button
           className={cc("bubbly", "ready-button", isReady ? "green" : "orange")}
-          style={{ marginLeft: "4em" }}
           onClick={() => {
             dispatch(toggleReady())
           }}

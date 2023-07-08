@@ -565,6 +565,19 @@ export enum Pkm {
   BEAUTIFLY = "beautifly",
   CASCOON = "cascoon",
   DUSTOX = "dustox",
+  TINKATINK = "tinkatink",
+  TINKATUFF = "tinkatuff",
+  TINKATON = "tinkaton",
+  PARAS = "paras",
+  PARASECT = "parasect",
+  MILTANK = "miltank",
+  MANKEY = "mankey",
+  PRIMEAPE = "primeape",
+  SUNKERN = "sunkern",
+  SUNFLORA = "sunflora",
+  MARACTUS = "maractus",
+  MINUN = "minun",
+  PLUSLE = "plusle"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1132,6 +1145,19 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.BEAUTIFLY]: "0267",
   [Pkm.CASCOON]: "0268",
   [Pkm.DUSTOX]: "0269",
+  [Pkm.TINKATINK]: "0957",
+  [Pkm.TINKATUFF]: "0958",
+  [Pkm.TINKATON]: "0959",
+  [Pkm.PARAS]: "0046",
+  [Pkm.PARASECT]: "0047",
+  [Pkm.MILTANK]: "0241",
+  [Pkm.MANKEY]: "0056",
+  [Pkm.PRIMEAPE]: "0057",
+  [Pkm.SUNKERN]: "0191",
+  [Pkm.SUNFLORA]: "0192",
+  [Pkm.MARACTUS]: "0556",
+  [Pkm.PLUSLE]: "0311",
+  [Pkm.MINUN]: "0312"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1699,2265 +1725,2923 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.BEAUTIFLY]: Pkm.WURMPLE,
   [Pkm.CASCOON]: Pkm.WURMPLE,
   [Pkm.DUSTOX]: Pkm.WURMPLE,
+  [Pkm.TINKATINK]: Pkm.TINKATINK,
+  [Pkm.TINKATUFF]: Pkm.TINKATINK,
+  [Pkm.TINKATON]: Pkm.TINKATINK,
+  [Pkm.PARAS]: Pkm.PARAS,
+  [Pkm.PARASECT]: Pkm.PARAS,
+  [Pkm.MILTANK]: Pkm.MILTANK,
+  [Pkm.MANKEY]: Pkm.MANKEY,
+  [Pkm.PRIMEAPE]: Pkm.MANKEY,
+  [Pkm.SUNKERN]: Pkm.SUNKERN,
+  [Pkm.SUNFLORA]: Pkm.SUNKERN,
+  [Pkm.MARACTUS]: Pkm.MARACTUS,
+  [Pkm.PLUSLE]: Pkm.PLUSLE,
+  [Pkm.MINUN]: Pkm.MINUN
+}
+
+export enum PkmDuo {
+  LATIOS_LATIAS = "latios_latias",
+  PLUSLE_MINUN = "plusle_minun"
+}
+
+export type PkmProposition = Pkm | PkmDuo
+
+export const PkmDuos = {
+  [PkmDuo.LATIOS_LATIAS]: [Pkm.LATIOS, Pkm.LATIAS],
+  [PkmDuo.PLUSLE_MINUN]: [Pkm.PLUSLE, Pkm.MINUN]
 }
 
 export const AnimationConfig: {
-  [key in Pkm]: { attack: AnimationType; ability: AnimationType }
+  [key in Pkm]: {
+    attack: AnimationType
+    ability: AnimationType
+    emote: AnimationType
+  }
 } = {
   [Pkm.EGG]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.DITTO]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.BULBASAUR]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.IVYSAUR]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.VENUSAUR]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.CHARMANDER]: {
     attack: AnimationType.Kick,
-    ability: AnimationType.DeepBreath
+    ability: AnimationType.DeepBreath,
+    emote: AnimationType.Shoot
   },
   [Pkm.CHARMELEON]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.DeepBreath
+    ability: AnimationType.DeepBreath,
+    emote: AnimationType.Shoot
   },
   [Pkm.CHARIZARD]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.SQUIRTLE]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.DeepBreath
+    ability: AnimationType.DeepBreath,
+    emote: AnimationType.Shoot
   },
   [Pkm.WARTORTLE]: {
     attack: AnimationType.Ricochet,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.BLASTOISE]: {
     attack: AnimationType.Ricochet,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.GEODUDE]: {
     attack: AnimationType.Punch,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.GRAVELER]: {
     attack: AnimationType.Slam,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.GOLEM]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.AZURILL]: {
     attack: AnimationType.Swing,
-    ability: AnimationType.Special0
+    ability: AnimationType.Special0,
+    emote: AnimationType.Shoot
   },
   [Pkm.MARILL]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Twirl
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Shoot
   },
   [Pkm.AZUMARILL]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Twirl
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Shoot
   },
   [Pkm.ZUBAT]: {
     attack: AnimationType.Eat,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.GOLBAT]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.CROBAT]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.MAREEP]: {
     attack: AnimationType.Emit,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.FLAFFY]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.AMPHAROS]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.CLEFFA]: {
     attack: AnimationType.Dance,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.CLEFAIRY]: {
     attack: AnimationType.Dance,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.CLEFABLE]: {
     attack: AnimationType.Dance,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.IGGLYBUFF]: {
     attack: AnimationType.Special1,
-    ability: AnimationType.EventSleep
+    ability: AnimationType.EventSleep,
+    emote: AnimationType.Shoot
   },
   [Pkm.WIGGLYTUFF]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Sleep
+    ability: AnimationType.Sleep,
+    emote: AnimationType.Shoot
   },
   [Pkm.JIGGLYPUFF]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.CATERPIE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.METAPOD]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.BUTTERFREE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.WEEDLE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Strike
+    ability: AnimationType.Strike,
+    emote: AnimationType.Shoot
   },
   [Pkm.KAKUNA]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.BEEDRILL]: {
     attack: AnimationType.Jab,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.PIDGEY]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.FlapAround
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Shoot
   },
   [Pkm.PIDGEOTTO]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.FlapAround
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Shoot
   },
   [Pkm.PIDGEOT]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.FlapAround
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Shoot
   },
   [Pkm.HOPPIP]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Twirl
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Shoot
   },
   [Pkm.SKIPLOOM]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Twirl
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Shoot
   },
   [Pkm.JUMPLUFF]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.SEEDOT]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.NUZLEAF]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.SHIFTRY]: {
     attack: AnimationType.MultiStrike,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.STARLY]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.STARAVIA]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.STARAPTOR]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.CHIKORITA]: {
     attack: AnimationType.DeepBreath,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.BAYLEEF]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.MEGANIUM]: {
     attack: AnimationType.Shake,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.CYNDAQUIL]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.QUILAVA]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Strike
+    ability: AnimationType.Strike,
+    emote: AnimationType.Shoot
   },
   [Pkm.TYPHLOSION]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.TOTODILE]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.HitGround
+    ability: AnimationType.HitGround,
+    emote: AnimationType.Shoot
   },
   [Pkm.CROCONAW]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.FERALIGATR]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.TREECKO]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Pose
+    ability: AnimationType.Pose,
+    emote: AnimationType.Shoot
   },
   [Pkm.GROVYLE]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Special17
+    ability: AnimationType.Special17,
+    emote: AnimationType.Shoot
   },
   [Pkm.SCEPTILE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Strike
+    ability: AnimationType.Strike,
+    emote: AnimationType.Shoot
   },
   [Pkm.TORCHIC]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Hop
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
   },
   [Pkm.COMBUSKEN]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.BLAZIKEN]: {
     attack: AnimationType.Slam,
-    ability: AnimationType.Kick
+    ability: AnimationType.Kick,
+    emote: AnimationType.Shoot
   },
   [Pkm.MUDKIP]: {
-    attack: AnimationType.Pose,
-    ability: AnimationType.Twirl
+    attack: AnimationType.Attack,
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Shoot
   },
   [Pkm.MARSHTOMP]: {
-    attack: AnimationType.Withdraw,
-    ability: AnimationType.Swing
+    attack: AnimationType.Attack,
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shoot
   },
   [Pkm.SWAMPERT]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Swing
+    attack: AnimationType.Attack,
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shoot
   },
   [Pkm.TURTWIG]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Hop
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
   },
   [Pkm.GROTLE]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Hop
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
   },
   [Pkm.TORTERRA]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Hop
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
   },
   [Pkm.CHIMCHAR]: {
     attack: AnimationType.MultiStrike,
-    ability: AnimationType.DeepBreath
+    ability: AnimationType.DeepBreath,
+    emote: AnimationType.Shoot
   },
   [Pkm.MONFERNO]: {
     attack: AnimationType.MultiStrike,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.INFERNAPE]: {
     attack: AnimationType.MultiStrike,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.PIPLUP]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Swing
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shoot
   },
   [Pkm.PRINPLUP]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Swing
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shoot
   },
   [Pkm.EMPOLEON]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Swing
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shoot
   },
   [Pkm.NIDORANF]: {
     attack: AnimationType.MultiScratch,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.NIDORINA]: {
     attack: AnimationType.MultiScratch,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.NIDOQUEEN]: {
     attack: AnimationType.MultiScratch,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.NIDORANM]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Emit
+    ability: AnimationType.Emit,
+    emote: AnimationType.Shoot
   },
   [Pkm.NIDORINO]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Emit
+    ability: AnimationType.Emit,
+    emote: AnimationType.Shoot
   },
   [Pkm.NIDOKING]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.RearUp
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
   },
   [Pkm.PICHU]: {
     attack: AnimationType.Appeal,
-    ability: AnimationType.Shock
+    ability: AnimationType.Shock,
+    emote: AnimationType.Shoot
   },
   [Pkm.PIKACHU]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Shock
+    ability: AnimationType.Shock,
+    emote: AnimationType.Shoot
   },
   [Pkm.RAICHU]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Shock
+    ability: AnimationType.Shock,
+    emote: AnimationType.Shoot
   },
   [Pkm.MACHOP]: {
     attack: AnimationType.Kick,
-    ability: AnimationType.Strike
+    ability: AnimationType.Strike,
+    emote: AnimationType.Shoot
   },
   [Pkm.MACHOKE]: {
     attack: AnimationType.Kick,
-    ability: AnimationType.Punch
+    ability: AnimationType.Punch,
+    emote: AnimationType.Shoot
   },
   [Pkm.MACHAMP]: {
     attack: AnimationType.Kick,
-    ability: AnimationType.Punch
+    ability: AnimationType.Punch,
+    emote: AnimationType.Shoot
   },
   [Pkm.HORSEA]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.SEADRA]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.KINGDRA]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.TRAPINCH]: {
     attack: AnimationType.Bite,
-    ability: AnimationType.Swing
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shoot
   },
   [Pkm.VIBRAVA]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Swing
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shoot
   },
   [Pkm.FLYGON]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Swing
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shoot
   },
   [Pkm.SPHEAL]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.RearUp
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
   },
   [Pkm.SEALEO]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.RearUp
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
   },
   [Pkm.WALREIN]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.RearUp
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
   },
   [Pkm.ARON]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Hop
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
   },
   [Pkm.LAIRON]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Hop
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
   },
   [Pkm.AGGRON]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.DigOut
+    ability: AnimationType.DigOut,
+    emote: AnimationType.Shoot
   },
   [Pkm.MAGNEMITE]: {
     attack: AnimationType.SpAttack,
-    ability: AnimationType.Double
+    ability: AnimationType.Double,
+    emote: AnimationType.Shoot
   },
   [Pkm.MAGNETON]: {
     attack: AnimationType.SpAttack,
-    ability: AnimationType.Double
+    ability: AnimationType.Double,
+    emote: AnimationType.Shoot
   },
   [Pkm.MAGNEZONE]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.SpAttack
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Shoot
   },
   [Pkm.RHYHORN]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Stomp
+    ability: AnimationType.Stomp,
+    emote: AnimationType.Shoot
   },
   [Pkm.RHYDON]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Stomp
+    ability: AnimationType.Stomp,
+    emote: AnimationType.Shoot
   },
   [Pkm.RHYPERIOR]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Rumble
+    ability: AnimationType.Rumble,
+    emote: AnimationType.Shoot
   },
   [Pkm.TOGEPI]: {
     attack: AnimationType.Appeal,
-    ability: AnimationType.Dance
+    ability: AnimationType.Dance,
+    emote: AnimationType.Shoot
   },
   [Pkm.TOGETIC]: {
     attack: AnimationType.Hover,
-    ability: AnimationType.Dance
+    ability: AnimationType.Dance,
+    emote: AnimationType.Shoot
   },
   [Pkm.TOGEKISS]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Hover
+    ability: AnimationType.Hover,
+    emote: AnimationType.Shoot
   },
   [Pkm.DUSKULL]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.SpAttack
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Shoot
   },
   [Pkm.DUSCLOPS]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.SpAttack
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Shoot
   },
   [Pkm.DUSKNOIR]: {
     attack: AnimationType.Emit,
-    ability: AnimationType.Special3
+    ability: AnimationType.Special3,
+    emote: AnimationType.Shoot
   },
   [Pkm.LOTAD]: {
     attack: AnimationType.Shake,
-    ability: AnimationType.Double
+    ability: AnimationType.Double,
+    emote: AnimationType.Shoot
   },
   [Pkm.LOMBRE]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Double
+    ability: AnimationType.Double,
+    emote: AnimationType.Shoot
   },
   [Pkm.LUDICOLO]: {
     attack: AnimationType.Special0,
-    ability: AnimationType.Double
+    ability: AnimationType.Double,
+    emote: AnimationType.Shoot
   },
   [Pkm.SHINX]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.LUXIO]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.LUXRAY]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.POLIWAG]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.POLIWHIRL]: {
     attack: AnimationType.RearUp,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.POLITOED]: {
     attack: AnimationType.RearUp,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.ABRA]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.KADABRA]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.ALAKAZAM]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Special1
+    ability: AnimationType.Special1,
+    emote: AnimationType.Shoot
   },
   [Pkm.GASTLY]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Lick
+    ability: AnimationType.Lick,
+    emote: AnimationType.Shoot
   },
   [Pkm.HAUNTER]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.MultiStrike
+    ability: AnimationType.MultiStrike,
+    emote: AnimationType.Shoot
   },
   [Pkm.GENGAR]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Special2
+    ability: AnimationType.Special2,
+    emote: AnimationType.Shoot
   },
   [Pkm.DRATINI]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.RearUp
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
   },
   [Pkm.DRAGONAIR]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.DRAGONITE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Emit
+    ability: AnimationType.Emit,
+    emote: AnimationType.Shoot
   },
   [Pkm.LARVITAR]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.PUPITAR]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.TYRANITAR]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.SLAKOTH]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Appeal
+    ability: AnimationType.Appeal,
+    emote: AnimationType.Shoot
   },
   [Pkm.VIGOROTH]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Dance
+    ability: AnimationType.Dance,
+    emote: AnimationType.Shoot
   },
   [Pkm.SLAKING]: {
     attack: AnimationType.Punch,
-    ability: AnimationType.Dance
+    ability: AnimationType.Dance,
+    emote: AnimationType.Shoot
   },
   [Pkm.RALTS]: {
     attack: AnimationType.Appeal,
-    ability: AnimationType.Pull
+    ability: AnimationType.Pull,
+    emote: AnimationType.Shoot
   },
   [Pkm.KIRLIA]: {
     attack: AnimationType.Twirl,
-    ability: AnimationType.Pose
+    ability: AnimationType.Pose,
+    emote: AnimationType.Shoot
   },
   [Pkm.GARDEVOIR]: {
     attack: AnimationType.Appeal,
-    ability: AnimationType.Special2
+    ability: AnimationType.Special2,
+    emote: AnimationType.Shoot
   },
   [Pkm.BAGON]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Bite
+    ability: AnimationType.Bite,
+    emote: AnimationType.Shoot
   },
   [Pkm.SHELGON]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.SALAMENCE]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.BELDUM]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Swing
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shoot
   },
   [Pkm.METANG]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.MultiScratch
+    ability: AnimationType.MultiScratch,
+    emote: AnimationType.Shoot
   },
   [Pkm.METAGROSS]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Ricochet
+    ability: AnimationType.Ricochet,
+    emote: AnimationType.Shoot
   },
   [Pkm.GIBLE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.GABITE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.GARCHOMP]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.RearUp
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
   },
   [Pkm.ELEKID]: {
     attack: AnimationType.Punch,
-    ability: AnimationType.Shock
+    ability: AnimationType.Shock,
+    emote: AnimationType.Shoot
   },
   [Pkm.ELECTABUZZ]: {
     attack: AnimationType.Punch,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.ELECTIVIRE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Emit
+    ability: AnimationType.Emit,
+    emote: AnimationType.Shoot
   },
   [Pkm.MAGBY]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.DeepBreath
+    ability: AnimationType.DeepBreath,
+    emote: AnimationType.Shoot
   },
   [Pkm.MAGMAR]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.MAGMORTAR]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.MUNCHLAX]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.DeepBreath
+    ability: AnimationType.DeepBreath,
+    emote: AnimationType.Shoot
   },
   [Pkm.SNORLAX]: {
     attack: AnimationType.Stomp,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.GROWLITHE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.ARCANINE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.ONIX]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.STEELIX]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.MEGA_STEELIX]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.SCYTHER]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Slice
+    ability: AnimationType.Slice,
+    emote: AnimationType.Shoot
   },
   [Pkm.SCIZOR]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.MultiScratch
+    ability: AnimationType.MultiScratch,
+    emote: AnimationType.Shoot
   },
   [Pkm.MEGA_SCIZOR]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.RIOLU]: {
     attack: AnimationType.RearUp,
-    ability: AnimationType.Pose
+    ability: AnimationType.Pose,
+    emote: AnimationType.Shoot
   },
   [Pkm.LUCARIO]: {
     attack: AnimationType.RearUp,
-    ability: AnimationType.Pose
+    ability: AnimationType.Pose,
+    emote: AnimationType.Shoot
   },
   [Pkm.MEGA_LUCARIO]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.MAGIKARP]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Hop
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
   },
   [Pkm.RATTATA]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.RATICATE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.SPEAROW]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.FEAROW]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.GYARADOS]: {
     attack: AnimationType.RearUp,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.LUGIA]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Hover
+    ability: AnimationType.Hover,
+    emote: AnimationType.Shoot
   },
   [Pkm.GIRATINA]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.SpAttack
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Shoot
   },
   [Pkm.ZAPDOS]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Emit
+    ability: AnimationType.Emit,
+    emote: AnimationType.Shoot
   },
   [Pkm.MOLTRES]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Pose
+    ability: AnimationType.Pose,
+    emote: AnimationType.Shoot
   },
   [Pkm.ARTICUNO]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.RearUp
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
   },
   [Pkm.DIALGA]: {
     attack: AnimationType.RearUp,
-    ability: AnimationType.Special0
+    ability: AnimationType.Special0,
+    emote: AnimationType.Shoot
   },
   [Pkm.PALKIA]: {
     attack: AnimationType.Special0,
-    ability: AnimationType.RearUp
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
   },
   [Pkm.SUICUNE]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Roar
+    ability: AnimationType.Roar,
+    emote: AnimationType.Shoot
   },
   [Pkm.RAIKOU]: {
     attack: AnimationType.Shock,
-    ability: AnimationType.Roar
+    ability: AnimationType.Roar,
+    emote: AnimationType.Shoot
   },
   [Pkm.ENTEI]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Roar
+    ability: AnimationType.Roar,
+    emote: AnimationType.Shoot
   },
   [Pkm.REGICE]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.RearUp
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
   },
   [Pkm.REGIROCK]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.REGISTEEL]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.RearUp
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
   },
   [Pkm.KYOGRE]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Swell
+    ability: AnimationType.Swell,
+    emote: AnimationType.Shoot
   },
   [Pkm.GROUDON]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Emit
+    ability: AnimationType.Emit,
+    emote: AnimationType.Shoot
   },
   [Pkm.RAYQUAZA]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.RearUp
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
   },
   [Pkm.REGIGIGAS]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Special0
+    ability: AnimationType.Special0,
+    emote: AnimationType.Shoot
   },
   [Pkm.EEVEE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.DeepBreath
+    ability: AnimationType.DeepBreath,
+    emote: AnimationType.Shoot
   },
   [Pkm.VAPOREON]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.RearUp
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
   },
   [Pkm.JOLTEON]: {
     attack: AnimationType.Shock,
-    ability: AnimationType.Pose
+    ability: AnimationType.Pose,
+    emote: AnimationType.Shoot
   },
   [Pkm.FLAREON]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.ESPEON]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.UMBREON]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Eat
+    ability: AnimationType.Eat,
+    emote: AnimationType.Shoot
   },
   [Pkm.LEAFEON]: {
     attack: AnimationType.QuickStrike,
-    ability: AnimationType.DeepBreath
+    ability: AnimationType.DeepBreath,
+    emote: AnimationType.Shoot
   },
   [Pkm.SYLVEON]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.MEDITITE]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.SpAttack
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Shoot
   },
   [Pkm.MEDICHAM]: {
     attack: AnimationType.Charge,
-    ability: AnimationType.SpAttack
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Shoot
   },
   [Pkm.MEGA_MEDICHAM]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.NUMEL]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.RearUp
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
   },
   [Pkm.CAMERUPT]: {
     attack: AnimationType.Rotate,
-    ability: AnimationType.RearUp
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
   },
   [Pkm.MEGA_CAMERUPT]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.DARKRAI]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Sink
+    ability: AnimationType.Sink,
+    emote: AnimationType.Shoot
   },
   [Pkm.LITWICK]: {
     attack: AnimationType.Sink,
-    ability: AnimationType.Pose
+    ability: AnimationType.Pose,
+    emote: AnimationType.Shoot
   },
   [Pkm.LAMPENT]: {
     attack: AnimationType.Emit,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.CHANDELURE]: {
     attack: AnimationType.Emit,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.SLOWPOKE]: {
     attack: AnimationType.Charge,
-    ability: AnimationType.Swing
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shoot
   },
   [Pkm.SLOWBRO]: {
     attack: AnimationType.Charge,
-    ability: AnimationType.Shake
+    ability: AnimationType.Shake,
+    emote: AnimationType.Shoot
   },
   [Pkm.SLOWKING]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Swing
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shoot
   },
   [Pkm.BELLSPROUT]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.WEEPINBELL]: {
     attack: AnimationType.MultiStrike,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.VICTREEBEL]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Swing
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shoot
   },
   [Pkm.SWINUB]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Shake
+    ability: AnimationType.Shake,
+    emote: AnimationType.Shoot
   },
   [Pkm.PILOSWINE]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Hop
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
   },
   [Pkm.MAMOSWINE]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Special0
+    ability: AnimationType.Special0,
+    emote: AnimationType.Shoot
   },
   [Pkm.SNORUNT]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Strike
+    ability: AnimationType.Strike,
+    emote: AnimationType.Shoot
   },
   [Pkm.GLALIE]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Bite
+    ability: AnimationType.Bite,
+    emote: AnimationType.Shoot
   },
   [Pkm.FROSLASS]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.SNOVER]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.RearUp
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
   },
   [Pkm.ABOMASNOW]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.RearUp
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
   },
   [Pkm.MEGA_ABOMASNOW]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.VANILLITE]: {
     attack: AnimationType.DeepBreath,
-    ability: AnimationType.HitGround
+    ability: AnimationType.HitGround,
+    emote: AnimationType.Shoot
   },
   [Pkm.VANILLISH]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.VANILLUXE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.GLACEON]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Pose
+    ability: AnimationType.Pose,
+    emote: AnimationType.Shoot
   },
   [Pkm.VOLCARONA]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Hop
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
   },
   [Pkm.LANDORUS]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.THUNDURUS]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.TORNADUS]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.KELDEO]: {
     attack: AnimationType.Swing,
-    ability: AnimationType.RearUp
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
   },
   [Pkm.TERRAKION]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.VIRIZION]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.RearUp
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
   },
   [Pkm.COBALION]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Swing
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shoot
   },
   [Pkm.MANAPHY]: {
     attack: AnimationType.RearUp,
-    ability: AnimationType.Double
+    ability: AnimationType.Double,
+    emote: AnimationType.Shoot
   },
   [Pkm.ROTOM]: {
     attack: AnimationType.Emit,
-    ability: AnimationType.Double
+    ability: AnimationType.Double,
+    emote: AnimationType.Shoot
   },
   [Pkm.SPIRITOMB]: {
     attack: AnimationType.Withdraw,
-    ability: AnimationType.Special1
+    ability: AnimationType.Special1,
+    emote: AnimationType.Shoot
   },
   [Pkm.ABSOL]: {
     attack: AnimationType.QuickStrike,
-    ability: AnimationType.SpAttack
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Shoot
   },
   [Pkm.LAPRAS]: {
     attack: AnimationType.Swing,
-    ability: AnimationType.RearUp
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
   },
   [Pkm.LATIAS]: {
-    attack: AnimationType.RearUp,
-    ability: AnimationType.Special2
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Attack,
+    emote: AnimationType.RearUp
   },
   [Pkm.LATIOS]: {
-    attack: AnimationType.RearUp,
-    ability: AnimationType.Special0
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Attack,
+    emote: AnimationType.RearUp
   },
   [Pkm.MESPRIT]: {
     attack: AnimationType.Hover,
-    ability: AnimationType.DeepBreath
+    ability: AnimationType.DeepBreath,
+    emote: AnimationType.Shoot
   },
   [Pkm.AZELF]: {
     attack: AnimationType.Hover,
-    ability: AnimationType.Special1
+    ability: AnimationType.Special1,
+    emote: AnimationType.Shoot
   },
   [Pkm.UXIE]: {
     attack: AnimationType.Hover,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.MEWTWO]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Pose
+    ability: AnimationType.Pose,
+    emote: AnimationType.Shoot
   },
   [Pkm.KYUREM]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.RESHIRAM]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.ZEKROM]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.CELEBI]: {
     attack: AnimationType.DeepBreath,
-    ability: AnimationType.Special0
+    ability: AnimationType.Special0,
+    emote: AnimationType.Shoot
   },
   [Pkm.VICTINI]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.JIRACHI]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Pose
+    ability: AnimationType.Pose,
+    emote: AnimationType.Shoot
   },
   [Pkm.ARCEUS]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Pose
+    ability: AnimationType.Pose,
+    emote: AnimationType.Shoot
   },
   [Pkm.DEOXYS]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Emit
+    ability: AnimationType.Emit,
+    emote: AnimationType.Shoot
   },
   [Pkm.SHAYMIN]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Emit
+    ability: AnimationType.Emit,
+    emote: AnimationType.Shoot
   },
   [Pkm.CRESSELIA]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Twirl
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Shoot
   },
   [Pkm.HEATRAN]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Emit
+    ability: AnimationType.Emit,
+    emote: AnimationType.Shoot
   },
   [Pkm.HO_OH]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Jab
+    ability: AnimationType.Jab,
+    emote: AnimationType.Shoot
   },
   [Pkm.AERODACTYL]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Strike
+    ability: AnimationType.Strike,
+    emote: AnimationType.Shoot
   },
   [Pkm.PRIMAL_KYOGRE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.PRIMAL_GROUDON]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.MEOWTH]: {
     attack: AnimationType.MultiStrike,
-    ability: AnimationType.Pose
+    ability: AnimationType.Pose,
+    emote: AnimationType.Shoot
   },
   [Pkm.PERSIAN]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.DEINO]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.ZWEILOUS]: {
     attack: AnimationType.Jab,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.HYDREIGON]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.SANDILE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.KROKOROK]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.KROOKODILE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.SOLOSIS]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.DUOSION]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.RearUp
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
   },
   [Pkm.REUNICLUS]: {
     attack: AnimationType.MultiStrike,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.MEGA_RAYQUAZA]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.SWABLU]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Hop
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
   },
   [Pkm.ODDISH]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Hop
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
   },
   [Pkm.GLOOM]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Hop
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
   },
   [Pkm.VILEPLUME]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Twirl
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Shoot
   },
   [Pkm.BELLOSSOM]: {
     attack: AnimationType.Special0,
-    ability: AnimationType.Twirl
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Shoot
   },
   [Pkm.AMAURA]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.DeepBreath
+    ability: AnimationType.DeepBreath,
+    emote: AnimationType.Shoot
   },
   [Pkm.AURORUS]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.RearUp
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
   },
   [Pkm.ANORITH]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Scratch
+    ability: AnimationType.Scratch,
+    emote: AnimationType.Shoot
   },
   [Pkm.ARMALDO]: {
     attack: AnimationType.Scratch,
-    ability: AnimationType.Special0
+    ability: AnimationType.Special0,
+    emote: AnimationType.Shoot
   },
   [Pkm.ARCHEN]: {
     attack: AnimationType.Swing,
-    ability: AnimationType.FlapAround
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Shoot
   },
   [Pkm.ARCHEOPS]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Strike
+    ability: AnimationType.Strike,
+    emote: AnimationType.Shoot
   },
   [Pkm.SHIELDON]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.BASTIODON]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.TIRTOUGA]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.CARRACOSTA]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.LILEEP]: {
     attack: AnimationType.SpAttack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.CRADILY]: {
     attack: AnimationType.SpAttack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.CRANIDOS]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.RAMPARDOS]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.KABUTO]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.KABUTOPS]: {
     attack: AnimationType.MultiStrike,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.OMANYTE]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Withdraw
+    ability: AnimationType.Withdraw,
+    emote: AnimationType.Shoot
   },
   [Pkm.OMASTAR]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Withdraw
+    ability: AnimationType.Withdraw,
+    emote: AnimationType.Shoot
   },
   [Pkm.TYRUNT]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.TYRANTRUM]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.BUDEW]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Swing
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shoot
   },
   [Pkm.ROSELIA]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Swing
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shoot
   },
   [Pkm.ROSERADE]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Swing
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shoot
   },
   [Pkm.BUNEARY]: {
     attack: AnimationType.QuickStrike,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.LOPUNNY]: {
     attack: AnimationType.QuickStrike,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.MEGA_LOPUNNY]: {
     attack: AnimationType.QuickStrike,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.AXEW]: {
     attack: AnimationType.Bite,
-    ability: AnimationType.Emit
+    ability: AnimationType.Emit,
+    emote: AnimationType.Shoot
   },
   [Pkm.FRAXURE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.HAXORUS]: {
     attack: AnimationType.Slice,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.VENIPEDE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.WHIRLIPEDE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.SCOLIPEDE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.PORYGON]: {
     attack: AnimationType.RearUp,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.PORYGON_2]: {
     attack: AnimationType.RearUp,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.PORYGON_Z]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Swing
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shoot
   },
   [Pkm.ELECTRIKE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shock
+    ability: AnimationType.Shock,
+    emote: AnimationType.Shoot
   },
   [Pkm.MANECTRIC]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shock
+    ability: AnimationType.Shock,
+    emote: AnimationType.Shoot
   },
   [Pkm.MEGA_MANECTRIC]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.SHUPPET]: {
     attack: AnimationType.SpAttack,
-    ability: AnimationType.Double
+    ability: AnimationType.Double,
+    emote: AnimationType.Shoot
   },
   [Pkm.BANETTE]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Double
+    ability: AnimationType.Double,
+    emote: AnimationType.Shoot
   },
   [Pkm.MEGA_BANETTE]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Double
+    ability: AnimationType.Double,
+    emote: AnimationType.Shoot
   },
   [Pkm.HONEDGE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Head
+    ability: AnimationType.Head,
+    emote: AnimationType.Shoot
   },
   [Pkm.DOUBLADE]: {
-    attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    attack: AnimationType.Slice,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Shoot
   },
   [Pkm.AEGISLASH]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.CUBONE]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.SpAttack
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Shoot
   },
   [Pkm.MAROWAK]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.ALOLAN_MAROWAK]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Punch
+    ability: AnimationType.Punch,
+    emote: AnimationType.Shoot
   },
   [Pkm.WHISMUR]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Appeal
+    ability: AnimationType.Appeal,
+    emote: AnimationType.Shoot
   },
   [Pkm.LOUDRED]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Appeal
+    ability: AnimationType.Appeal,
+    emote: AnimationType.Shoot
   },
   [Pkm.EXPLOUD]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.TYMPOLE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.PALPITOAD]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.SEISMITOAD]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.SEWADDLE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.SWADLOON]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.LEAVANNY]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.PIKIPEK]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.TRUMBEAK]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.TOUCANNON]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.FLABEBE]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Swell
+    ability: AnimationType.Swell,
+    emote: AnimationType.Shoot
   },
   [Pkm.FLOETTE]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Swell
+    ability: AnimationType.Swell,
+    emote: AnimationType.Shoot
   },
   [Pkm.FLORGES]: {
     attack: AnimationType.Appeal,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.JANGMO_O]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.HAKAMO_O]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.KOMMO_O]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.MELOETTA]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Twirl
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Shoot
   },
   [Pkm.ALTARIA]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Hop
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
   },
   [Pkm.MEGA_ALTARIA]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.CASTFORM]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.CASTFORM_SUN]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.CASTFORM_RAIN]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Hop
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
   },
   [Pkm.CASTFORM_HAIL]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Twirl
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Shoot
   },
   [Pkm.CORPHISH]: {
     attack: AnimationType.Bite,
-    ability: AnimationType.Hop
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
   },
   [Pkm.CRAWDAUNT]: {
     attack: AnimationType.Bite,
-    ability: AnimationType.Hop
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
   },
   [Pkm.JOLTIK]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Hop
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
   },
   [Pkm.GALVANTULA]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Hop
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
   },
   [Pkm.GENESECT]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.RELICANTH]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.HATENNA]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Hop
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
   },
   [Pkm.HATTREM]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Hop
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
   },
   [Pkm.HATTERENE]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.FENNEKIN]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.BRAIXEN]: {
     attack: AnimationType.Appeal,
-    ability: AnimationType.Hop
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
   },
   [Pkm.DELPHOX]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.MAKUHITA]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.HARIYAMA]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.REGIELEKI]: {
     attack: AnimationType.Charge,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.REGIDRAGO]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.GUZZLORD]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.ETERNATUS]: {
     attack: AnimationType.Charge,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.PONYTA]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Walk
+    ability: AnimationType.Walk,
+    emote: AnimationType.Shoot
   },
   [Pkm.RAPIDASH]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Walk
+    ability: AnimationType.Walk,
+    emote: AnimationType.Shoot
   },
   [Pkm.NINCADA]: {
     attack: AnimationType.MultiScratch,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.NINJASK]: {
     attack: AnimationType.MultiScratch,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.SHEDNINJA]: {
     attack: AnimationType.Scratch,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.NOIBAT]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Hover
+    ability: AnimationType.Hover,
+    emote: AnimationType.Shoot
   },
   [Pkm.NOIVERN]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Hover
+    ability: AnimationType.Hover,
+    emote: AnimationType.Shoot
   },
   [Pkm.PUMPKABOO]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.GOURGEIST]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Hover
+    ability: AnimationType.Hover,
+    emote: AnimationType.Shoot
   },
   [Pkm.CACNEA]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.SpAttack
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Shoot
   },
   [Pkm.CACTURNE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.SpAttack
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Shoot
   },
   [Pkm.TAUROS]: {
     attack: AnimationType.Stomp,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.DEFAULT]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.HAPPINY]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shake
+    ability: AnimationType.Shake,
+    emote: AnimationType.Shoot
   },
   [Pkm.CHANSEY]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.SpAttack
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Shoot
   },
   [Pkm.BLISSEY]: {
     attack: AnimationType.MultiStrike,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.TAPU_KOKO]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Emit
+    ability: AnimationType.Emit,
+    emote: AnimationType.Shoot
   },
   [Pkm.TAPU_LELE]: {
     attack: AnimationType.Hop,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.STAKATAKA]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Sleep
+    ability: AnimationType.Sleep,
+    emote: AnimationType.Shoot
   },
   [Pkm.BLACEPHALON]: {
     attack: AnimationType.Hop,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.HOUNDOUR]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.RearUp
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
   },
   [Pkm.HOUNDOOM]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.RearUp
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
   },
   [Pkm.MEGA_HOUNDOOM]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shake
+    ability: AnimationType.Shake,
+    emote: AnimationType.Shoot
   },
   [Pkm.CLAMPERL]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Hop
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
   },
   [Pkm.HUNTAIL]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.GOREBYSS]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.SMOOCHUM]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Twirl
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Shoot
   },
   [Pkm.JYNX]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Slap
+    ability: AnimationType.Slap,
+    emote: AnimationType.Shoot
   },
   [Pkm.SALANDIT]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Hop
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
   },
   [Pkm.SALAZZLE]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Hop
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
   },
   [Pkm.VENONAT]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.VENOMOTH]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.FlapAround
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Shoot
   },
   [Pkm.VOLTORB]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Hurt
+    ability: AnimationType.Hurt,
+    emote: AnimationType.Shoot
   },
   [Pkm.ELECTRODE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Hurt
+    ability: AnimationType.Hurt,
+    emote: AnimationType.Shoot
   },
   [Pkm.SLUGMA]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.MAGCARGO]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Hurt
+    ability: AnimationType.Hurt,
+    emote: AnimationType.Shoot
   },
   [Pkm.SNEASEL]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.DeepBreath
+    ability: AnimationType.DeepBreath,
+    emote: AnimationType.Shoot
   },
   [Pkm.WEAVILE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.CROAGUNK]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Strike
+    ability: AnimationType.Strike,
+    emote: AnimationType.Shoot
   },
   [Pkm.TOXICROAK]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Strike
+    ability: AnimationType.Strike,
+    emote: AnimationType.Shoot
   },
   [Pkm.CHINCHOU]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Hop
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
   },
   [Pkm.LANTURN]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Hop
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
   },
   [Pkm.POOCHYENA]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.MIGHTYENA]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.BRONZOR]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.SpAttack
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Shoot
   },
   [Pkm.BRONZONG]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Emit
+    ability: AnimationType.Emit,
+    emote: AnimationType.Shoot
   },
   [Pkm.DRIFLOON]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Swell
+    ability: AnimationType.Swell,
+    emote: AnimationType.Shoot
   },
   [Pkm.DRIFBLIM]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Idle
+    ability: AnimationType.Idle,
+    emote: AnimationType.Shoot
   },
   [Pkm.SHROOMISH]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.BRELOOM]: {
     attack: AnimationType.MultiStrike,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.TENTACOOL]: {
     attack: AnimationType.Slam,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.TENTACRUEL]: {
     attack: AnimationType.Slam,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.SNUBULL]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.GRANBULL]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.SEVIPER]: {
     attack: AnimationType.Bite,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.VULPIX]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.RearUp
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
   },
   [Pkm.NINETALES]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.RearUp
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
   },
   [Pkm.ALOLAN_VULPIX]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.RearUp
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
   },
   [Pkm.ALOLAN_NINETALES]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.RearUp
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
   },
   [Pkm.BUIZEL]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.FLOATZEL]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.MAWILE]: {
     attack: AnimationType.Bite,
-    ability: AnimationType.Swing
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shoot
   },
   [Pkm.KECLEON]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.CARBINK]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Hop
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
   },
   [Pkm.DIANCIE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Hurt
+    ability: AnimationType.Hurt,
+    emote: AnimationType.Shoot
   },
   [Pkm.CHATOT]: {
     attack: AnimationType.Special0,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.GOOMY]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.SLIGOO]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.GOODRA]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.MEW]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.BOUNSWEET]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Hop
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
   },
   [Pkm.STEENEE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Hop
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
   },
   [Pkm.TSAREENA]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Kick
+    ability: AnimationType.Kick,
+    emote: AnimationType.Shoot
   },
   [Pkm.VOLCANION]: {
     attack: AnimationType.Charge,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.APPLIN]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Hurt
+    ability: AnimationType.Hurt,
+    emote: AnimationType.Shoot
   },
   [Pkm.APPLETUN]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Hurt
+    ability: AnimationType.Hurt,
+    emote: AnimationType.Shoot
   },
   [Pkm.OSHAWOTT]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.DEWOTT]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Hop
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
   },
   [Pkm.SAMUROTT]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Strike
+    ability: AnimationType.Strike,
+    emote: AnimationType.Shoot
   },
   [Pkm.SNOM]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.FROSMOTH]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Hop
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
   },
   [Pkm.WAILMER]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Hurt
+    ability: AnimationType.Hurt,
+    emote: AnimationType.Shoot
   },
   [Pkm.WAILORD]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Hurt
+    ability: AnimationType.Hurt,
+    emote: AnimationType.Shoot
   },
   [Pkm.DREEPY]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.DRAKLOAK]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.DRAGAPULT]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.SNIVY]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Appeal
+    ability: AnimationType.Appeal,
+    emote: AnimationType.Shoot
   },
   [Pkm.SERVINE]: {
     attack: AnimationType.Slice,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.SERPERIOR]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.SCORBUNNY]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Kick
+    ability: AnimationType.Kick,
+    emote: AnimationType.Shoot
   },
   [Pkm.RABOOT]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Kick
+    ability: AnimationType.Kick,
+    emote: AnimationType.Shoot
   },
   [Pkm.CINDERACE]: {
     attack: AnimationType.Slam,
-    ability: AnimationType.Kick
+    ability: AnimationType.Kick,
+    emote: AnimationType.Shoot
   },
   [Pkm.POPPLIO]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.BRIONNE]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.PRIMARINA]: {
     attack: AnimationType.Charge,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.GOTHITA]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.GOTHORITA]: {
     attack: AnimationType.Appeal,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.GOTHITELLE]: {
     attack: AnimationType.Appeal,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.SANDSHREW]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Withdraw
+    ability: AnimationType.Withdraw,
+    emote: AnimationType.Shoot
   },
   [Pkm.SANDSLASH]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Withdraw
+    ability: AnimationType.Withdraw,
+    emote: AnimationType.Shoot
   },
   [Pkm.FARFETCH_D]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.UNOWN_A]: {
     attack: AnimationType.Swing,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.UNOWN_B]: {
     attack: AnimationType.Swing,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.UNOWN_C]: {
     attack: AnimationType.Swing,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.UNOWN_D]: {
     attack: AnimationType.Swing,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.UNOWN_E]: {
     attack: AnimationType.Swing,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.UNOWN_F]: {
     attack: AnimationType.Swing,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.UNOWN_G]: {
     attack: AnimationType.Swing,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.UNOWN_H]: {
     attack: AnimationType.Swing,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.UNOWN_I]: {
     attack: AnimationType.Swing,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.UNOWN_J]: {
     attack: AnimationType.Swing,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.UNOWN_K]: {
     attack: AnimationType.Swing,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.UNOWN_L]: {
     attack: AnimationType.Swing,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.UNOWN_M]: {
     attack: AnimationType.Swing,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.UNOWN_N]: {
     attack: AnimationType.Swing,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.UNOWN_O]: {
     attack: AnimationType.Swing,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.UNOWN_P]: {
     attack: AnimationType.Swing,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.UNOWN_Q]: {
     attack: AnimationType.Swing,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.UNOWN_R]: {
     attack: AnimationType.Swing,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.UNOWN_S]: {
     attack: AnimationType.Swing,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.UNOWN_T]: {
     attack: AnimationType.Swing,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.UNOWN_U]: {
     attack: AnimationType.Swing,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.UNOWN_V]: {
     attack: AnimationType.Swing,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.UNOWN_W]: {
     attack: AnimationType.Swing,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.UNOWN_X]: {
     attack: AnimationType.Rotate,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.UNOWN_Y]: {
     attack: AnimationType.Swing,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.UNOWN_Z]: {
     attack: AnimationType.Swing,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.UNOWN_QUESTION]: {
     attack: AnimationType.Swing,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.UNOWN_EXCLAMATION]: {
     attack: AnimationType.Swing,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.TAPU_FINI]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.TAPU_BULU]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.DIGLETT]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.DigIn
+    ability: AnimationType.DigIn,
+    emote: AnimationType.Shoot
   },
   [Pkm.DUGTRIO]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.DigIn
+    ability: AnimationType.DigIn,
+    emote: AnimationType.Shoot
   },
   [Pkm.ROWLET]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.DARTIX]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.DECIDUEYE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.ZORUA]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.ZOROARK]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.HISUI_ZORUA]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.HISUI_ZOROARK]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.FROAKIE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.FROGADIER]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.GRENINJA]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Hurt
+    ability: AnimationType.Hurt,
+    emote: AnimationType.Shoot
   },
   [Pkm.TYROGUE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.HITMONLEE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Kick
+    ability: AnimationType.Kick,
+    emote: AnimationType.Shoot
   },
   [Pkm.HITMONCHAN]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Uppercut
+    ability: AnimationType.Uppercut,
+    emote: AnimationType.Shoot
   },
   [Pkm.HITMONTOP]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Swing
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shoot
   },
   [Pkm.MIMIKYU]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.GRIMER]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.MUK]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.ALOLAN_GRIMER]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.ALOLAN_MUK]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.CARVANHA]: {
     attack: AnimationType.Bite,
-    ability: AnimationType.Swell
+    ability: AnimationType.Swell,
+    emote: AnimationType.Shoot
   },
   [Pkm.SHARPEDO]: {
     attack: AnimationType.Bite,
-    ability: AnimationType.Swell
+    ability: AnimationType.Swell,
+    emote: AnimationType.Shoot
   },
   [Pkm.PINECO]: {
     attack: AnimationType.Ricochet,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.FORRETRESS]: {
     attack: AnimationType.Ricochet,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.SEEL]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.DEWGONG]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.ALOLAN_GEODUDE]: {
     attack: AnimationType.Punch,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.ALOLAN_GRAVELER]: {
     attack: AnimationType.Slam,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.ALOLAN_GOLEM]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.EKANS]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.ARBOK]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.MIME_JR]: {
     attack: AnimationType.MultiStrike,
-    ability: AnimationType.Twirl
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Shoot
   },
   [Pkm.MR_MIME]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.ORIGIN_GIRATINA]: {
     attack: AnimationType.Scratch,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.PIROUETTE_MELOETTA]: {
     attack: AnimationType.Swing,
-    ability: AnimationType.Twirl
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Shoot
   },
   [Pkm.MELMETAL]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.HOOPA]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.HOOPA_UNBOUND]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.SILVALLY]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.TYPE_NULL]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.ZERAORA]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.XERNEAS]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.YVELTAL]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.MARSHADOW]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.HOOTHOOT]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.NOCTOWL]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.BONSLEY]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.SUDOWOODO]: {
     attack: AnimationType.Slam,
-    ability: AnimationType.Attack
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.PHIONE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.COMBEE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Hover
+    ability: AnimationType.Hover,
+    emote: AnimationType.Shoot
   },
   [Pkm.VESPIQUEEN]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.SpAttack
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Shoot
   },
   [Pkm.SHUCKLE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Withdraw
+    ability: AnimationType.Withdraw,
+    emote: AnimationType.Shoot
   },
   [Pkm.TEPIG]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.PIGNITE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.EMBOAR]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.WYNAUT]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.WOBBUFFET]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Withdraw
+    ability: AnimationType.Withdraw,
+    emote: AnimationType.Shoot
   },
   [Pkm.LUNATONE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.SOLROCK]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Rotate
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
   },
   [Pkm.POLIWRATH]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.RearUp
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
   },
   [Pkm.SHAYMIN_SKY]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   },
   [Pkm.WURMPLE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.SILCOON]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Withdraw
+    ability: AnimationType.Withdraw,
+    emote: AnimationType.Shoot
   },
   [Pkm.BEAUTIFLY]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.FlapAround
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Shoot
   },
   [Pkm.CASCOON]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Withdraw
+    ability: AnimationType.Withdraw,
+    emote: AnimationType.Shoot
   },
   [Pkm.DUSTOX]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.FlapAround
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Shoot
   },
+  [Pkm.TINKATINK]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.TINKATUFF]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.TINKATON]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.PARAS]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Strike,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.PARASECT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Strike,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.MILTANK]: {
+    attack: AnimationType.Stomp,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.MANKEY]: {
+    attack: AnimationType.MultiStrike,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.PRIMEAPE]: {
+    attack: AnimationType.MultiStrike,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SUNKERN]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SUNFLORA]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.MARACTUS]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.PLUSLE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shock,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.MINUN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shock,
+    emote: AnimationType.Shoot
+  }
 }

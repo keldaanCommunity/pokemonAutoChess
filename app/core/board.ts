@@ -1,5 +1,6 @@
 import { IPokemonEntity } from "../types"
 import { Orientation } from "../types/enum/Game"
+import { distanceC } from "../utils/distance"
 import { logger } from "../utils/logger"
 import { pickRandomIn } from "../utils/random"
 import PokemonEntity from "./pokemon-entity"
@@ -55,9 +56,18 @@ export default class Board {
     }
   }
 
-  distance(x0: number, y0: number, x1: number, y1: number) {
-    // chebyshev distance
-    return Math.max(Math.abs(y0 - y1), Math.abs(x0 - x1))
+  find(
+    predicate: (x: number, y: number, entity: PokemonEntity) => boolean
+  ): PokemonEntity | null {
+    for (let y = 0; y < this.rows; y++) {
+      for (let x = 0; x < this.columns; x++) {
+        const cell = this.cells[this.columns * y + x]
+        if(cell && predicate(x, y, cell)){
+          return cell
+        }
+      }
+    }
+    return null
   }
 
   distanceC(x0: number, y0: number, x1: number, y1: number) {
@@ -137,7 +147,7 @@ export default class Board {
     for (let y = 0; y < this.rows; y++) {
       for (let x = 0; x < this.columns; x++) {
         if (x == cellX && y == cellY) continue
-        const distance = this.distance(cellX, cellY, x, y)
+        const distance = distanceC(cellX, cellY, x, y)
         if (
           y >= 0 &&
           y < this.rows &&
@@ -234,7 +244,7 @@ export default class Board {
     })
     if (candidates.length > 0) {
       candidates.sort(
-        (a, b) => this.distance(x, y, b.x, b.y) - this.distance(x, y, a.x, a.y)
+        (a, b) => distanceC(x, y, b.x, b.y) - distanceC(x, y, a.x, a.y)
       )
       return candidates[0]
     } else {

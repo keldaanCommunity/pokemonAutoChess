@@ -39,6 +39,11 @@ export default function RoomMenu(props: {
   )
   const uid: string = useAppSelector((state) => state.network.uid)
   const lobbyUsers: ILobbyUser[] = useAppSelector((state) => state.lobby.users)
+  const user = useAppSelector((state) => state.lobby.user)
+  const isFreshNewUser =
+    user &&
+    user.anonymous &&
+    Date.now() - new Date(user.creationTime).getTime() < 10 * 60 * 1000
   const [isJoining, setJoining] = useState<boolean>(false)
 
   const navigate = useNavigate()
@@ -141,22 +146,32 @@ export default function RoomMenu(props: {
       </TabList>
 
       <TabPanel>
-        {preparationRooms.length === 0 && (
-          <p className="subtitle">Click on Create Room to play!</p>
+        {user ? (
+          <>
+            {preparationRooms.length === 0 && (
+              <p className="subtitle">
+                {isFreshNewUser ? "Join a lobby" : "Click on Create Room"} to
+                play!
+              </p>
+            )}
+            <ul className="hidden-scrollable">
+              {preparationRooms.map((r) => (
+                <li key={r.roomId}>
+                  <RoomItem room={r} click={joinRoom} />
+                </li>
+              ))}
+            </ul>
+            <button
+              onClick={createRoom}
+              disabled={isFreshNewUser}
+              className="bubbly green create-room-button"
+            >
+              Create Room
+            </button>
+          </>
+        ) : (
+          <p className="subtitle">Loading...</p>
         )}
-        <ul className="hidden-scrollable">
-          {preparationRooms.map((r) => (
-            <li key={r.roomId}>
-              <RoomItem room={r} click={joinRoom} />
-            </li>
-          ))}
-        </ul>
-        <button
-          onClick={createRoom}
-          className="bubbly green create-room-button"
-        >
-          Create Room
-        </button>
       </TabPanel>
       <TabPanel>
         <ul className="hidden-scrollable">

@@ -7,7 +7,7 @@ import {
   PkmCost
 } from "../types/Config"
 import { PokemonActionState, Rarity } from "../types/enum/Game"
-import { Pkm, PkmFamily } from "../types/enum/Pokemon"
+import { Pkm, PkmDuos, PkmFamily, PkmProposition } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { logger } from "../utils/logger"
 import { pickRandomIn } from "../utils/random"
@@ -286,6 +286,8 @@ import {
   Mamoswine,
   Manaphy,
   Manectric,
+  Mankey,
+  Maractus,
   Mareep,
   Marill,
   Marowak,
@@ -317,8 +319,10 @@ import {
   Mew,
   Mewtwo,
   Mightyena,
+  Miltank,
   MimeJr,
   Mimikyu,
+  Minun,
   Moltres,
   Monferno,
   MrMime,
@@ -347,6 +351,8 @@ import {
   Oshawott,
   Palkia,
   Palpitoad,
+  Paras,
+  Parasect,
   Persian,
   Phione,
   Pichu,
@@ -360,6 +366,7 @@ import {
   Pineco,
   Piplup,
   PirouetteMeloetta,
+  Plusle,
   Pokemon,
   Politoed,
   Poliwag,
@@ -374,6 +381,7 @@ import {
   PrimalGroudon,
   PrimalKyogre,
   Primarina,
+  Primeape,
   Prinplup,
   Pumpkaboo,
   Pupitar,
@@ -467,6 +475,8 @@ import {
   Steenee,
   Sudowoodo,
   Suicune,
+  Sunflora,
+  Sunkern,
   Swablu,
   Swadloon,
   Swampert,
@@ -483,6 +493,9 @@ import {
   Tepig,
   Terrakion,
   Thundurus,
+  Tinkatink,
+  Tinkaton,
+  Tinkatuff,
   Tirtouga,
   Togekiss,
   Togepi,
@@ -1920,6 +1933,32 @@ export default class PokemonFactory {
         return new Cascoon(s, e)
       case Pkm.DUSTOX:
         return new Dustox(s, e)
+      case Pkm.TINKATINK:
+        return new Tinkatink(s, e)
+      case Pkm.TINKATUFF:
+        return new Tinkatuff(s, e)
+      case Pkm.TINKATON:
+        return new Tinkaton(s, e)
+      case Pkm.PARAS:
+        return new Paras(s, e)
+      case Pkm.PARASECT:
+        return new Parasect(s, e)
+      case Pkm.MILTANK:
+        return new Miltank(s, e)
+      case Pkm.MANKEY:
+        return new Mankey(s, e)
+      case Pkm.PRIMEAPE:
+        return new Primeape(s, e)
+      case Pkm.SUNKERN:
+        return new Sunkern(s, e)
+      case Pkm.SUNFLORA:
+        return new Sunflora(s, e)
+      case Pkm.MARACTUS:
+        return new Maractus(s, e)
+      case Pkm.PLUSLE:
+        return new Plusle(s, e)
+      case Pkm.MINUN:
+        return new Minun(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:
@@ -1971,7 +2010,8 @@ export default class PokemonFactory {
     } else if (pokemon.rarity === Rarity.HATCH) {
       return [3, 4, 5][pokemon.stars - 1]
     } else if (pokemon.rarity === Rarity.MYTHICAL) {
-      return Mythical1Shop.includes(name) ? 15 : 20
+      const duo = Object.entries(PkmDuos).find(([key, duo]) => duo.includes(pokemon.name))
+      return Math.ceil((Mythical1Shop.includes(duo ? duo[0] as PkmProposition : name) ? 15 : 20) * (duo ? 0.5 : 1))
     } else if (PokemonFactory.getPokemonBaseEvolution(name) == Pkm.EEVEE) {
       return PkmCost[pokemon.rarity]
     } else {

@@ -110,6 +110,56 @@ export default class LoadingManager {
       "/assets/attacks"
     )
     scene.load.multiatlas(
+      "MUD_BUBBLE",
+      "/assets/attacks/MUD_BUBBLE.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
+      "ERUPTION",
+      "/assets/attacks/ERUPTION.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
+      "SLASHING_CLAW",
+      "/assets/attacks/SLASHING_CLAW.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
+      "MAGMA_STORM",
+      "/assets/attacks/MAGMA_STORM.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
+      "SOLAR_BEAM",
+      "/assets/attacks/SOLAR_BEAM.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
+      "THRASH",
+      "/assets/attacks/THRASH.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
+      "ROLLOUT",
+      "/assets/attacks/ROLLOUT.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
+      "ABSORB",
+      "/assets/attacks/ABSORB.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
+      "ACROBATICS",
+      "/assets/attacks/ACROBATICS.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
+      "GIGATON_HAMMER",
+      "/assets/attacks/GIGATON_HAMMER.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
       "ICY_WIND",
       "/assets/attacks/ICY_WIND.json",
       "/assets/attacks"
@@ -414,6 +464,21 @@ export default class LoadingManager {
     scene.load.multiatlas(
       "DEATH_WING",
       "/assets/attacks/DEATH_WING.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
+      "MIST_BALL",
+      "/assets/attacks/MIST_BALL.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
+      "LUSTER_PURGE",
+      "/assets/attacks/LUSTER_PURGE.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
+      "LINK_CABLE",
+      "/assets/attacks/LINK_CABLE.json",
       "/assets/attacks"
     )
   }

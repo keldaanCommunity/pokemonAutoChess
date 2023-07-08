@@ -17,6 +17,8 @@ import { logger } from "../utils/logger"
 import { Passive } from "../types/enum/Passive"
 import { Weather } from "../types/enum/Weather"
 import { max, min } from "../utils/number"
+import { min } from "../utils/number"
+import { distanceC } from "../utils/distance"
 
 export default class PokemonState {
   handleHeal(
@@ -485,8 +487,27 @@ export default class PokemonState {
             pokemon.addAttack(3)
           }
         }
+      }
+    }
+
+    if (
+      pokemon.effects.includes(Effect.INGRAIN) ||
+      pokemon.effects.includes(Effect.GROWTH) ||
+      pokemon.effects.includes(Effect.SPORE)
+    ) {
+      if (pokemon.grassHealCooldown - dt <= 0) {
+        let heal = pokemon.effects.includes(Effect.SPORE)
+          ? 18
+          : pokemon.effects.includes(Effect.GROWTH)
+          ? 10
+          : 5
+          if(pokemon.effects.includes(Effect.HYDRATATION) && pokemon.simulation.weather === Weather.RAIN){
+            heal += 5
+          }
+          pokemon.handleHeal(heal, pokemon, 0)
+          pokemon.grassHealCooldown = 1000
       } else {
-        pokemon.growGroundTimer = 3000
+        pokemon.grassHealCooldown = pokemon.grassHealCooldown - dt
       }
     }
 
@@ -543,7 +564,7 @@ export default class PokemonState {
         value.team !== pokemon.team &&
         value.isTargettable
       ) {
-        const candidateDistance = board.distance(
+        const candidateDistance = distanceC(
           pokemon.positionX,
           pokemon.positionY,
           x,
@@ -576,7 +597,7 @@ export default class PokemonState {
         value.team !== pokemon.team &&
         value.isTargettable
       ) {
-        const distance = board.distance(
+        const distance = distanceC(
           pokemon.positionX,
           pokemon.positionY,
           x,
@@ -657,7 +678,7 @@ export default class PokemonState {
             .map((cell) => ({
               x: cell.x,
               y: cell.y,
-              distance: board.distance(
+              distance: distanceC(
                 pokemon.positionX,
                 pokemon.positionY,
                 cell.x,
@@ -688,7 +709,7 @@ export default class PokemonState {
         value.id !== pokemon.id &&
         value.isTargettable
       ) {
-        const candidateDistance = board.distance(
+        const candidateDistance = distanceC(
           pokemon.positionX,
           pokemon.positionY,
           x,

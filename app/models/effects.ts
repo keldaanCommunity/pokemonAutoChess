@@ -5,6 +5,7 @@ import { SynergyTriggers } from "../types/Config"
 import { MapSchema } from "@colyseus/schema"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { Ability } from "../types/enum/Ability"
+import { Passive } from "../types/enum/Passive"
 
 export class Effects {
   list: Effect[]
@@ -38,6 +39,9 @@ export class Effects {
       }
       if (p.skill === Ability.PSYCHIC_SURGE) {
         this.list.push(Effect.PSYCHIC_TERRAIN)
+      }
+      if(p.passive === Passive.HYDRATATION) {
+        this.list.push(Effect.HYDRATATION)
       }
     })
   }

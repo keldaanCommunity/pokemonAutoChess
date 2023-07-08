@@ -1,7 +1,7 @@
 #root .game-dps-meter {
   position: absolute;
-  right: 10vw;
-  top: 0.5%;
+  right: 6vw;
+  top: calc(1.5% + 10px + 2vw);
   width: 15%;
   display: flex;
   flex-flow: column;
@@ -72,7 +72,7 @@
 
 #game-dps-icon {
   position: absolute;
-  right: calc(9vw - 50px);
+  right: 6vw;
   top: 0.5%;
 }
 
@@ -81,6 +81,6 @@
 }
 
 #game-dps-icon img {
-  height: 48px;
-  width: 48px;
+  height: 2vw;
+  width: 2vw;
 }

@@ -13,7 +13,6 @@ import {
 } from "../../types/Config"
 import { Item, BasicItems } from "../../types/enum/Item"
 import { BattleResult } from "../../types/enum/Game"
-import { Weather } from "../../types/enum/Weather"
 import Player from "../../models/colyseus-models/player"
 import PokemonFactory from "../../models/pokemon-factory"
 import ItemFactory from "../../models/item-factory"
@@ -21,7 +20,7 @@ import UserMetadata from "../../models/mongo-models/user-metadata"
 import GameRoom from "../game-room"
 import { Client, updateLobby } from "colyseus"
 import { Effect } from "../../types/enum/Effect"
-import { Title, FIGHTING_PHASE_DURATION } from "../../types"
+import { Title, FIGHTING_PHASE_DURATION, Emotion } from "../../types"
 import { MapSchema } from "@colyseus/schema"
 import {
   GamePhaseState,
@@ -36,12 +35,12 @@ import {
   IPokemonEntity,
   Transfer
 } from "../../types"
-import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
+import { Pkm, PkmDuos, PkmIndex, PkmProposition } from "../../types/enum/Pokemon"
 import { Pokemon } from "../../models/colyseus-models/pokemon"
-import { Ability } from "../../types/enum/Ability"
 import { chance, pickRandomIn } from "../../utils/random"
 import { logger } from "../../utils/logger"
 import { Passive } from "../../types/enum/Passive"
+import { getAvatarString } from "../../public/src/utils"
 
 export class OnShopCommand extends Command<
   GameRoom,
@@ -125,10 +124,10 @@ export class OnPokemonPropositionCommand extends Command<
   GameRoom,
   {
     playerId: string
-    pkm: Pkm
+    pkm: PkmProposition
   }
 > {
-  execute({ playerId, pkm }) {
+  execute({ playerId, pkm }: { playerId: string, pkm: PkmProposition }) {
     const player = this.state.players.get(playerId)
     if (
       player &&
@@ -139,45 +138,54 @@ export class OnPokemonPropositionCommand extends Command<
         this.state.additionalPokemons.push(pkm)
         this.state.shop.addAdditionalPokemon(pkm)
       }
-      const pokemon = PokemonFactory.createPokemonFromName(
-        pkm,
-        player.pokemonCollection.get(PkmIndex[pkm])
-      )
 
       let allowBuy = true
       if (
-        Mythical1Shop.includes(pokemon.name) &&
+        Mythical1Shop.includes(pkm) &&
         this.state.stageLevel !== MythicalPicksStages[0]
       ) {
-        allowBuy = false
+        allowBuy = false // wrong stage
       }
       if (
-        Mythical2Shop.includes(pokemon.name) &&
+        Mythical2Shop.includes(pkm) &&
         this.state.stageLevel !== MythicalPicksStages[1]
       ) {
-        allowBuy = false
+        allowBuy = false // wrong stage
       }
+
       player.board.forEach((p) => {
         if (
-          Mythical1Shop.includes(pokemon.name) &&
+          Mythical1Shop.includes(pkm) &&
           Mythical1Shop.includes(p.name)
         ) {
           allowBuy = false // already picked a T10 mythical
         }
         if (
-          Mythical2Shop.includes(pokemon.name) &&
+          Mythical2Shop.includes(pkm) &&
           Mythical2Shop.includes(p.name)
         ) {
           allowBuy = false // already picked a T20 mythical
         }
       })
+      
+      const freeCellsOnBench: number[] = []
+      for (let i = 0; i < 8; i++) {
+        if (this.room.isPositionEmpty(playerId, i, 0)) {
+          freeCellsOnBench.push(i)
+        }
+      }
 
-      if (allowBuy) {
-        const x = this.room.getFirstAvailablePositionInBench(player.id)
-        if (x === undefined) return
-        pokemon.positionX = x
-        pokemon.positionY = 0
-        player.board.set(pokemon.id, pokemon)
+      const pokemonsObtained: Pokemon[] = (pkm in PkmDuos ? PkmDuos[pkm] : [pkm]).map(p => PokemonFactory.createPokemonFromName(p))
+      const hasSpaceOnBench = freeCellsOnBench.length >= pokemonsObtained.length
+
+      if (allowBuy && hasSpaceOnBench) {
+        pokemonsObtained.forEach(pokemon => {
+          const freeCellX = this.room.getFirstAvailablePositionInBench(player.id)
+          if (freeCellX === undefined) return
+          pokemon.positionX = freeCellX
+          pokemon.positionY = 0
+          player.board.set(pokemon.id, pokemon)
+        })
 
         while (player.pokemonsProposition.length > 0) {
           player.pokemonsProposition.pop()
@@ -1042,6 +1050,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
             client?.send(Transfer.PLAYER_DAMAGE, playerDamage)
           }
         }
+
         player.addBattleResult(
           player.opponentName,
           currentResult,
@@ -1065,10 +1074,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
       const currentResult = player.getCurrentBattleResult()
       const lastPlayerResult = player.getLastPlayerBattleResult()
 
-      if (
-        currentResult == BattleResult.DRAW ||
-        currentResult != lastPlayerResult
-      ) {
+      if(currentResult === BattleResult.DRAW){
+        // preserve existing streak but lose HP
+      } else if (currentResult !== lastPlayerResult) {
         player.streak = 0
       } else {
         player.streak = Math.min(player.streak + 1, 5)
@@ -1323,6 +1331,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         }
 
         player.opponentName = ""
+        player.opponentId = ""
+        player.opponentAvatar = ""
+        player.opponentTitle = ""
+
         if (!player.isBot) {
           if (!player.shopLocked) {
             this.state.shop.assignShop(player)
@@ -1398,8 +1410,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     this.state.players.forEach((player: Player, key: string) => {
       if (player.alive) {
         if (stageIndex != -1) {
+          player.opponentId = "pve"
           player.opponentName = NeutralStage[stageIndex].name
-          player.opponentAvatar = NeutralStage[stageIndex].avatar
+          player.opponentAvatar = getAvatarString(PkmIndex[NeutralStage[stageIndex].avatar], this.state.shinyEncounter, Emotion.NORMAL)
           player.opponentTitle = "Wild"
           const pveBoard = PokemonFactory.getNeutralPokemonsByLevelStage(
             this.state.stageLevel,

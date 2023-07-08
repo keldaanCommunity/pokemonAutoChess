@@ -6,6 +6,7 @@ import PokemonEntity from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
 import { PokemonActionState } from "../types/enum/Game"
 import { chance } from "../utils/random"
+import { distanceC } from "../utils/distance"
 import { Synergy } from "../types/enum/Synergy"
 
 export default class AttackingState extends PokemonState {
@@ -27,7 +28,7 @@ export default class AttackingState extends PokemonState {
           target &&
           target.team !== pokemon.team &&
           target.isTargettable &&
-          board.distance(
+          distanceC(
             pokemon.positionX,
             pokemon.positionY,
             targetCoordinate.x,
@@ -45,7 +46,7 @@ export default class AttackingState extends PokemonState {
       if (!targetCoordinate) {
         pokemon.toMovingState()
       } else if (
-        board.distance(
+        distanceC(
           pokemon.positionX,
           pokemon.positionY,
           targetCoordinate.x,
@@ -66,18 +67,19 @@ export default class AttackingState extends PokemonState {
         pokemon.strategy.process(pokemon, this, board, target, crit)
       } else {
         // BASIC ATTACK
+        pokemon.count.attackCount++
         this.attack(pokemon, board, targetCoordinate)
         if (
           pokemon.effects.includes(Effect.RISING_VOLTAGE) ||
           pokemon.effects.includes(Effect.OVERDRIVE)
         ) {
-          let tripleAttackChance = 0
+          let isTripleAttack = false
           if (pokemon.effects.includes(Effect.RISING_VOLTAGE)) {
-            tripleAttackChance = 0.3
+            isTripleAttack = (pokemon.count.attackCount % 4 === 0)
           } else if (pokemon.effects.includes(Effect.OVERDRIVE)) {
-            tripleAttackChance = 0.5
+            isTripleAttack = (pokemon.count.attackCount % 3 === 0)
           }
-          if (Math.random() < tripleAttackChance) {
+          if (isTripleAttack) {
             pokemon.count.tripleAttackCount++
             this.attack(pokemon, board, targetCoordinate)
             this.attack(pokemon, board, targetCoordinate)
@@ -94,21 +96,11 @@ export default class AttackingState extends PokemonState {
     board: Board,
     coordinates: { x: number; y: number }
   ) {
-    pokemon.count.attackCount++
     pokemon.targetX = coordinates.x
     pokemon.targetY = coordinates.y
 
     const target = board.getValue(coordinates.x, coordinates.y)
     if (target) {
-      let isAttackSuccessful = true
-      if (chance(target.dodge) && !pokemon.items.has(Item.XRAY_VISION)) {
-        isAttackSuccessful = false
-        pokemon.count.dodgeCount += 1
-      }
-      if (target.status.protect) {
-        isAttackSuccessful = false
-      }
-
       pokemon.orientation = board.orientation(
         pokemon.positionX,
         pokemon.positionY,
@@ -122,6 +114,17 @@ export default class AttackingState extends PokemonState {
       let trueDamage = 0
       let totalTakenDamage = 0
       const attackType = pokemon.attackType
+
+      let isAttackSuccessful = true
+      if (chance(target.dodge) && !pokemon.items.has(Item.XRAY_VISION)) {
+        isAttackSuccessful = false
+        physicalDamage = 0
+        target.count.dodgeCount += 1
+      }
+      if (target.status.protect) {
+        isAttackSuccessful = false
+        physicalDamage = 0
+      }
 
       if (Math.random() * 100 < pokemon.critChance) {
         pokemon.onCritical(target, board)

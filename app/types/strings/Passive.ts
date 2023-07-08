@@ -1,6 +1,7 @@
 import { Stat } from "../enum/Game"
 import { Passive } from "../enum/Passive"
 import { Status } from "../enum/Status"
+import { Synergy } from "../enum/Synergy"
 import { Weather } from "../enum/Weather"
 
 export const PassiveDescription: { [key in Passive]: string } = {
@@ -8,7 +9,7 @@ export const PassiveDescription: { [key in Passive]: string } = {
   [Passive.TYROGUE]: `Will choose a combat discipline based on the first item given`,
   [Passive.PROTEAN2]: `The pokemon acquires the typing of the 2 highest synergies on the team`,
   [Passive.PROTEAN3]: `The pokemon acquires the typing of the 3 highest synergies on the team`,
-  [Passive.CASTFORM]: `Castform changes form depending on the weather`,
+  [Passive.CASTFORM]: `Castform changes its form and the weather to ${Weather.SUN}, ${Weather.RAIN} or ${Weather.SNOW} depending on your dominant synergy between ${Synergy.FIRE} ${Synergy.WATER} ${Synergy.ICE}`,
   [Passive.PHIONE]: `Phione is looking for an Aqua Egg`,
   [Passive.PRIMAL]: `Legend has it that you could unleash the ancient powers of these pokemons`,
   [Passive.WONDER_GUARD]: `Reduce received damage and received healing to 1`,
@@ -32,5 +33,9 @@ export const PassiveDescription: { [key in Passive]: string } = {
   [Passive.STORM]: `Change weather to ${Weather.STORM}`,
   [Passive.NIGHT]: `Change weather to ${Weather.NIGHT}`,
   [Passive.WINDY]: `Change weather to ${Weather.WINDY}`,
+  [Passive.AIRLOCK]: `Neutralize weather effects, getting back to ${Weather.NEUTRAL}`,
   [Passive.WURMPLE]: `Wurmple can evolve into Silcoon or Cascoon, depending on the weather at previous stage`,
+  [Passive.HYDRATATION]: `${Synergy.GRASS} synergy is healing 5 additional ${Stat.HP} per second under the ${Weather.RAIN}`,
+  [Passive.SHARED_VISION]: `Shared vision: all Pokemon with shared vision will attack the same target, if at range`,
+  [Passive.WATER_SPRING]: `Whenever an enemy uses their ability, gain 5 ${Stat.MANA}`
 }

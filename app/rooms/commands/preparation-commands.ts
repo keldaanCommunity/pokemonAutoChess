@@ -291,14 +291,16 @@ export class OnKickPlayerCommand extends Command<
 > {
   execute({ client, message: userId }) {
     try {
-      if (client.auth.uid === this.state.ownerId) {
+      const user = this.state.users.get(client.auth.uid)
+      if (client.auth.uid === this.state.ownerId
+        || (user && [Role.ADMIN, Role.MODERATOR].includes(user.role))) {
         this.room.clients.forEach((cli) => {
           if (cli.auth.uid === userId && this.state.users.has(userId)) {
             const user = this.state.users.get(userId)!
             if (user.role === Role.BASIC) {
               this.room.broadcast(Transfer.MESSAGES, {
                 name: "Server",
-                payload: `${user.name} was kicked by ${this.state.ownerName}.`,
+                payload: `${user.name} was kicked out of the room`,
                 avatar: this.state.users.get(client.auth.uid)?.avatar,
                 time: Date.now()
               })
@@ -314,6 +316,28 @@ export class OnKickPlayerCommand extends Command<
             }
           }
         })
+      }
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+}
+
+export class OnDeleteRoomCommand extends Command<
+  PreparationRoom,
+  {
+    client: Client
+  }
+> {
+  execute({ client }) {
+    try {
+      const user = this.state.users.get(client.auth.uid)
+      if (user && [Role.ADMIN, Role.MODERATOR].includes(user.role)) {        
+        this.room.clients.forEach(cli => {
+          cli.send(Transfer.KICK)
+          cli.leave()
+        })
+        this.room.disconnect()
       }
     } catch (error) {
       logger.error(error)

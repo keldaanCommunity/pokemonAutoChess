@@ -187,6 +187,9 @@ async function splitIndex(index: string) {
           if (!actions.includes(AnimationConfig[conf as Pkm].ability)) {
             actions.push(AnimationConfig[conf as Pkm].ability)
           }
+          if (!actions.includes(AnimationConfig[conf as Pkm].emote)) {
+            actions.push(AnimationConfig[conf as Pkm].emote)
+          }
         } else {
           actions.push(AnimationType.Attack)
         }

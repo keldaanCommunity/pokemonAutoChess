@@ -1,0 +1,251 @@
+{
+	"textures": [
+		{
+			"image": "ERUPTION.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 251,
+				"h": 181
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "010",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 112,
+						"h": 96
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 0,
+						"w": 99,
+						"h": 91
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 99,
+						"h": 91
+					}
+				},
+				{
+					"filename": "009",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 96,
+						"h": 96
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 2,
+						"w": 94,
+						"h": 92
+					},
+					"frame": {
+						"x": 102,
+						"y": 1,
+						"w": 94,
+						"h": 92
+					}
+				},
+				{
+					"filename": "008",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 96,
+						"h": 96
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 1,
+						"w": 90,
+						"h": 83
+					},
+					"frame": {
+						"x": 1,
+						"y": 94,
+						"w": 90,
+						"h": 83
+					}
+				},
+				{
+					"filename": "005",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 56
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 4,
+						"w": 46,
+						"h": 47
+					},
+					"frame": {
+						"x": 198,
+						"y": 1,
+						"w": 46,
+						"h": 47
+					}
+				},
+				{
+					"filename": "000",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 198,
+						"y": 50,
+						"w": 32,
+						"h": 32
+					}
+				},
+				{
+					"filename": "002",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 24,
+						"h": 24
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 2,
+						"w": 18,
+						"h": 18
+					},
+					"frame": {
+						"x": 232,
+						"y": 50,
+						"w": 18,
+						"h": 18
+					}
+				},
+				{
+					"filename": "003",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 1,
+						"w": 14,
+						"h": 14
+					},
+					"frame": {
+						"x": 232,
+						"y": 70,
+						"w": 14,
+						"h": 14
+					}
+				},
+				{
+					"filename": "001",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 24,
+						"h": 24
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 24,
+						"h": 24
+					},
+					"frame": {
+						"x": 198,
+						"y": 84,
+						"w": 24,
+						"h": 24
+					}
+				},
+				{
+					"filename": "004",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 24,
+						"h": 24
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 24,
+						"h": 22
+					},
+					"frame": {
+						"x": 224,
+						"y": 86,
+						"w": 24,
+						"h": 22
+					}
+				},
+				{
+					"filename": "007",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 96,
+						"h": 96
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 2,
+						"w": 72,
+						"h": 79
+					},
+					"frame": {
+						"x": 93,
+						"y": 95,
+						"w": 72,
+						"h": 79
+					}
+				},
+				{
+					"filename": "006",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 72,
+						"h": 72
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 2,
+						"w": 64,
+						"h": 70
+					},
+					"frame": {
+						"x": 167,
+						"y": 110,
+						"w": 64,
+						"h": 70
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:10dfe889dd07b18b1557724bb6005404:f27a2e1a39affb9789a4d42fd2b79add:466df496d7b9a829759ce2e16b4bae9b$"
+	}
+}

@@ -28,7 +28,7 @@ import { Ability } from "./enum/Ability"
 import { Synergy } from "./enum/Synergy"
 import HistoryItem from "../models/colyseus-models/history-item"
 import { Item } from "./enum/Item"
-import { Pkm } from "./enum/Pokemon"
+import { Pkm, PkmProposition } from "./enum/Pokemon"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { IPokemonRecord } from "../models/colyseus-models/game-record"
 import GameRoom from "../rooms/game-room"
@@ -157,6 +157,7 @@ export enum Transfer {
   REQUEST_BOT_LEADERBOARD = "REQUEST_BOT_LEADERBOARD",
   POKEMON_PROPOSITION = "POKEMON_PROPOSITION",
   KICK = "KICK",
+  DELETE_ROOM = "DELETE_ROOM",
   BAN = "BAN",
   BANNED = "BANNED",
   POKEMON_DAMAGE = "POKEMON_DAMAGE",
@@ -175,7 +176,8 @@ export enum Transfer {
   DELETE_BOT_DATABASE = "DELETE_BOT_DATABASE",
   BOT_DATABASE_LOG = "BOT_DATABASE_LOG",
   UNBAN = "UNBAN",
-  BOARD_EVENT = "BOARD_EVENT"
+  BOARD_EVENT = "BOARD_EVENT",
+  ABILITY = "ABILITY"
 }
 
 export enum AttackSprite {
@@ -322,6 +324,7 @@ export interface IPlayer {
   shopLocked: boolean
   streak: number
   interest: number
+  opponentId: string
   opponentName: string
   opponentAvatar: string
   opponentTitle: string
@@ -335,7 +338,7 @@ export interface IPlayer {
   title: Title | ""
   role: Role
   itemsProposition: ArraySchema<Item>
-  pokemonsProposition: ArraySchema<Pkm>
+  pokemonsProposition: ArraySchema<PkmProposition>
   rerollCount: number
   loadingProgress: number
   effects: Effects
@@ -419,12 +422,6 @@ export function instanceofPokemonEntity(
   return "mana" in obj
 }
 
-export function instanceofPokemonAvatar(
-  obj: IPokemon | IPokemonEntity | IPokemonAvatar
-) {
-  return !("stars" in obj)
-}
-
 export interface IPokemonEntity {
   simulation: ISimulation
   addAbilityPower(value: number): void
@@ -477,6 +474,7 @@ export interface IPokemonEntity {
 }
 
 export interface IStatus {
+  magmaStorm: boolean
   burn: boolean
   silence: boolean
   poisonStacks: number

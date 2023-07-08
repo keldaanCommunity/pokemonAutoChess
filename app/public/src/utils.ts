@@ -4,20 +4,30 @@ export function getPortraitSrc(
   index: string,
   shiny?: boolean,
   emotion?: Emotion
-) {
-  const shinyPad = shiny ? (index.length === 4 ? "/0000/0001" : "/0001") : ""
-  const emotionWithFallback = emotion ? emotion : Emotion.NORMAL
-  return `${CDN_PORTRAIT_URL}${index.replace(
-    "-",
-    "/"
-  )}${shinyPad}/${emotionWithFallback}.png`
+) {  
+  return getAvatarSrc(getAvatarString(index, shiny, emotion))
 }
 
 export function getAvatarSrc(avatar: string) {
   return `${CDN_PORTRAIT_URL}${avatar.replace("-", "/")}.png`
 }
 
-export function getInformations(avatar: string) {
+export function getAvatarString(
+  index: string,
+  shiny?: boolean,
+  emotion?: Emotion
+): string {
+  const shinyPad = shiny ? (index.length === 4 ? "/0000/0001" : "/0001") : ""  
+  return `${index.replace("-", "/")}${shinyPad}/${emotion || Emotion.NORMAL}`
+}
+
+export interface IPokemonAvatarConfig {
+  index: string
+  emotion: Emotion,
+  shiny: boolean  
+}
+
+export function getPokemonConfigFromAvatar(avatar: string): IPokemonAvatarConfig {
   let emotion = Emotion.NORMAL
   let shiny = false
   let index = "0019"

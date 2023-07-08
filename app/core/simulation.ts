@@ -38,6 +38,7 @@ import { Passive } from "../types/enum/Passive"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") weather: Weather = Weather.NEUTRAL
+  @type("string") winnerId = ""
   @type({ map: PokemonEntity }) blueTeam = new MapSchema<IPokemonEntity>()
   @type({ map: PokemonEntity }) redTeam = new MapSchema<IPokemonEntity>()
   @type({ map: Dps }) blueDpsMeter = new MapSchema<Dps>()
@@ -52,6 +53,7 @@ export default class Simulation extends Schema implements ISimulation {
   flowerSpawn: boolean[] = [false, false]
   stageLevel = 0
   player: IPlayer | undefined
+  opponent: IPlayer | undefined
   id: string
   stormLightningTimer = 0
 
@@ -70,6 +72,7 @@ export default class Simulation extends Schema implements ISimulation {
     weather: Weather
   ) {
     this.player = player
+    this.opponent = opponent ?? undefined
     this.stageLevel = stageLevel
     this.weather = weather
 
@@ -101,6 +104,7 @@ export default class Simulation extends Schema implements ISimulation {
     this.redEffects = opponent?.effects?.list ?? []
 
     this.finished = false
+    this.winnerId = ""
     this.flowerSpawn = [false, false]
     this.stormLightningTimer = randomBetween(4000, 8000)
 
@@ -403,7 +407,7 @@ export default class Simulation extends Schema implements ISimulation {
           )
           break
         case Effect.NIGHT:
-          pokemon.addCritChance(0.2)
+          pokemon.addCritChance(10)
           break
         case Effect.SNOW:
           pokemon.addAttackSpeed(-25)
@@ -484,7 +488,7 @@ export default class Simulation extends Schema implements ISimulation {
               pokemon.positionY
             )
             if (value) {
-              value.addAbilityPower(30)
+              value.addAbilityPower(40)
             }
           })
         }
@@ -855,64 +859,39 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.BATTLE_ARMOR:
           if (types.includes(Synergy.ROCK)) {
-            pokemon.handleShield(50, pokemon)
+            pokemon.handleShield(40, pokemon)
             pokemon.effects.push(Effect.BATTLE_ARMOR)
           }
           break
 
         case Effect.MOUTAIN_RESISTANCE:
           if (types.includes(Synergy.ROCK)) {
-            pokemon.handleShield(100, pokemon)
+            pokemon.handleShield(80, pokemon)
             pokemon.effects.push(Effect.MOUTAIN_RESISTANCE)
           }
           break
 
         case Effect.DIAMOND_STORM:
           if (types.includes(Synergy.ROCK)) {
-            pokemon.handleShield(200, pokemon)
+            pokemon.handleShield(160, pokemon)
             pokemon.effects.push(Effect.DIAMOND_STORM)
           }
           break
 
         case Effect.PHANTOM_FORCE:
-          if (types.includes(Synergy.GHOST)) {
-            pokemon.effects.push(Effect.PHANTOM_FORCE)
-          }
-          break
-
         case Effect.CURSE:
-          if (types.includes(Synergy.GHOST)) {
-            pokemon.effects.push(Effect.CURSE)
-          }
-          break
-
         case Effect.SHADOW_TAG:
-          if (types.includes(Synergy.GHOST)) {
-            pokemon.effects.push(Effect.SHADOW_TAG)
-          }
-          break
-
         case Effect.WANDERING_SPIRIT:
           if (types.includes(Synergy.GHOST)) {
-            pokemon.effects.push(Effect.WANDERING_SPIRIT)
+            pokemon.effects.push(effect)
           }
           break
 
         case Effect.AROMATIC_MIST:
-          if (types.includes(Synergy.FAIRY)) {
-            pokemon.effects.push(Effect.AROMATIC_MIST)
-          }
-          break
-
         case Effect.FAIRY_WIND:
-          if (types.includes(Synergy.FAIRY)) {
-            pokemon.effects.push(Effect.FAIRY_WIND)
-          }
-          break
-
         case Effect.STRANGE_STEAM:
           if (types.includes(Synergy.FAIRY)) {
-            pokemon.effects.push(Effect.STRANGE_STEAM)
+            pokemon.effects.push(effect)
           }
           break
 
@@ -969,25 +948,23 @@ export default class Simulation extends Schema implements ISimulation {
           break
 
         case Effect.DUBIOUS_DISC:
-          if (types.includes(Synergy.ARTIFICIAL) && pokemon.items.size != 0) {
-            pokemon.addAttack(4 * pokemon.items.size)
-            pokemon.handleShield(20 * pokemon.items.size, pokemon)
-            pokemon.effects.push(Effect.DUBIOUS_DISC)
-          }
-          break
-
         case Effect.LINK_CABLE:
-          if (types.includes(Synergy.ARTIFICIAL) && pokemon.items.size != 0) {
-            pokemon.addAttack(7 * pokemon.items.size)
-            pokemon.handleShield(30 * pokemon.items.size, pokemon)
-            pokemon.effects.push(Effect.LINK_CABLE)
-          }
-          break
-
         case Effect.GOOGLE_SPECS:
-          if (types.includes(Synergy.ARTIFICIAL) && pokemon.items.size != 0) {
-            pokemon.addAttack(10 * pokemon.items.size)
-            pokemon.handleShield(50 * pokemon.items.size, pokemon)
+          if (types.includes(Synergy.ARTIFICIAL) && pokemon.items.size > 0) {
+            const nbItems =
+              pokemon.items.size + (pokemon.items.has(Item.WONDER_BOX) ? 1 : 0)
+            const attackBoost = {
+              [Effect.DUBIOUS_DISC]: 4,
+              [Effect.LINK_CABLE]: 7,
+              [Effect.GOOGLE_SPECS]: 10
+            }[effect]
+            const shieldBoost = {
+              [Effect.DUBIOUS_DISC]: 20,
+              [Effect.LINK_CABLE]: 30,
+              [Effect.GOOGLE_SPECS]: 50
+            }[effect]
+            pokemon.addAttack(attackBoost * nbItems)
+            pokemon.handleShield(shieldBoost * nbItems, pokemon)
             pokemon.effects.push(Effect.GOOGLE_SPECS)
           }
           break
@@ -1037,48 +1014,95 @@ export default class Simulation extends Schema implements ISimulation {
     playerBoard: MapSchema<Pokemon, string>,
     opponentBoard: MapSchema<Pokemon, string>
   ): Weather {
-    const countPerWeather = new Map<Weather, number>()
+    function getDominantWeather(
+      count: Map<Weather, number>,
+      weathers: Weather[] = [...count.keys()]
+    ): Weather | null {
+      const sortedCount = weathers
+        .map((w) => [w, count.get(w) ?? 0] as [Weather, number])
+        .sort((a, b) => b[1] - a[1])
+
+      if (sortedCount.length === 0) return null
+      if (sortedCount.length === 1) return sortedCount[0][0]
+      if (sortedCount.length >= 2 && sortedCount[0][1] === sortedCount[1][1])
+        return null
+      return sortedCount[0][0]
+    }
+
+    const boardWeatherScore = new Map<Weather, number>()
     ;[playerBoard, opponentBoard].forEach((board) => {
+      const playerWeatherScore = new Map<Weather, number>()
       board.forEach((pkm) => {
         if (pkm.positionY != 0) {
           if (WeatherPassives.has(pkm.passive)) {
             const weather = WeatherPassives.get(pkm.passive)!
-            countPerWeather.set(
+            boardWeatherScore.set(
               weather,
-              (countPerWeather.get(weather) ?? 0) + 100
+              (boardWeatherScore.get(weather) ?? 0) + 100
+            )
+            playerWeatherScore.set(
+              weather,
+              (playerWeatherScore.get(weather) ?? 0) + 100
             )
           }
           pkm.types.forEach((type) => {
             if (WeatherAssociatedToSynergy.has(type)) {
               const weather = WeatherAssociatedToSynergy.get(type)!
-              countPerWeather.set(
+              boardWeatherScore.set(
                 weather,
-                (countPerWeather.get(weather) ?? 0) + 1
+                (boardWeatherScore.get(weather) ?? 0) + 1
+              )
+              playerWeatherScore.set(
+                weather,
+                (playerWeatherScore.get(weather) ?? 0) + 1
               )
             }
           })
         }
       })
+
+      // apply special weather passives
+      board.forEach((pkm) => {
+        if (pkm.positionY != 0) {
+          if (pkm.passive === Passive.CASTFORM) {
+            const dominant = getDominantWeather(playerWeatherScore, [
+              Weather.SUN,
+              Weather.RAIN,
+              Weather.SNOW
+            ])
+            if (dominant) {
+              boardWeatherScore.set(
+                dominant,
+                (boardWeatherScore.get(dominant) ?? 0) + 100
+              )
+            }
+          }
+        }
+      })
     })
 
+    //logger.debug("boardWeatherScore", boardWeatherScore)
     const MIN_THRESHOLD = 8
-    const entries = [...countPerWeather.entries()].sort((a, b) => b[1] - a[1])
-    if (entries.length === 0 || entries[0][1] < MIN_THRESHOLD)
-      return Weather.NEUTRAL
-    if (entries.length >= 2 && entries[0][1] === entries[1][1]) {
-      return Weather.NEUTRAL
+    const dominantWeather = getDominantWeather(boardWeatherScore)
+    if (
+      dominantWeather &&
+      boardWeatherScore.get(dominantWeather)! >= MIN_THRESHOLD
+    ) {
+      return dominantWeather
     }
-    return entries[0][0]
+    return Weather.NEUTRAL
   }
 
   update(dt: number) {
     if (this.blueTeam.size == 0 || this.redTeam.size == 0) {
       this.finished = true
       if (this.blueTeam.size == 0) {
+        this.winnerId = this.opponent ? this.opponent.id : "pve"
         this.redTeam.forEach((p) => {
           p.action = PokemonActionState.HOP
         })
       } else {
+        this.winnerId = this.player?.id ?? ""
         this.blueTeam.forEach((p) => {
           p.action = PokemonActionState.HOP
         })
@@ -1168,5 +1192,6 @@ export default class Simulation extends Schema implements ISimulation {
     })
 
     this.weather = Weather.NEUTRAL
+    this.winnerId = ""
   }
 }

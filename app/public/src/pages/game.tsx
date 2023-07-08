@@ -21,6 +21,7 @@ import {
   setShopLocked,
   setStageLevel,
   setStreak,
+  setOpponentId,
   setOpponentName,
   setOpponentAvatar,
   setOpponentTitle,
@@ -28,7 +29,7 @@ import {
   setPlayer,
   setBoardSize,
   setCurrentPlayerMoney,
-  setCurrentPlayerExperienceManager,
+  setPlayerExperienceManager,
   setCurrentPlayerAvatar,
   setCurrentPlayerName,
   setLoadingProgress,
@@ -45,7 +46,6 @@ import {
   removeRedHealDpsMeter,
   removeBlueHealDpsMeter,
   leaveGame,
-  displayEmote,
   setCurrentPlayerTitle,
   setPokemonProposition,
   setAdditionalPokemons
@@ -115,7 +115,9 @@ export default function Game() {
 
   const [initialized, setInitialized] = useState<boolean>(false)
   const [loaded, setLoaded] = useState<boolean>(false)
-  const [reconnected, setReconnected] = useState<boolean>(false)
+  const [connected, setConnected] = useState<boolean>(false)
+  const [connecting, setConnecting] = useState<boolean>(false)
+  const [connectError, setConnectError] = useState<string>("")
   const [modalTitle, setModalTitle] = useState<string>("")
   const [modalInfo, setModalInfo] = useState<string>("")
   const [modalBoolean, setModalBoolean] = useState<boolean>(false)
@@ -123,27 +125,47 @@ export default function Game() {
   const [toAuth, setToAuth] = useState<boolean>(false)
   const container = useRef<HTMLDivElement>(null)
 
-  const MAX_ATTEMPS_RECONNECT = 2
+  const MAX_ATTEMPS_RECONNECT = 3
 
-  async function tryToReconnectToLastGame(attempts = 1) {
-    try {
-      const cachedReconnectionToken = localStorage.getItem(
-        "cachedReconnectionToken"
-      )
-      if (cachedReconnectionToken) {
-        const r: Room<GameState> = await client.reconnect(
-          cachedReconnectionToken
-        )
-        localStorage.setItem("cachedReconnectionToken", r.reconnectionToken)
-        dispatch(joinGame(r))
+  function connectToGame(attempts = 1) {
+    logger.debug(`connectToGame attempt ${attempts} / ${MAX_ATTEMPS_RECONNECT}`)
+    const cachedReconnectionToken = localStorage.getItem(
+      "cachedReconnectionToken"
+    )
+    if (cachedReconnectionToken) {
+      setConnecting(true)
+      const statusMessage = document.querySelector("#status-message")
+      if (statusMessage) {
+        statusMessage.textContent = `Connecting to game...`
       }
-    } catch (error) {
-      if (attempts < MAX_ATTEMPS_RECONNECT) {
-        setTimeout(() => tryToReconnectToLastGame(attempts + 1), 100)
-      } else {
-        logger.error("reconnect error", error)
-        setToAuth(true)
-      }
+
+      client
+        .reconnect(cachedReconnectionToken)
+        .then((room: Room) => {
+          localStorage.setItem(
+            "cachedReconnectionToken",
+            room.reconnectionToken
+          )
+          dispatch(joinGame(room))
+          setConnected(true)
+          setConnecting(false)
+        })
+        .catch((error) => {
+          if (attempts < MAX_ATTEMPS_RECONNECT) {
+            setTimeout(() => connectToGame(attempts + 1), 1000)
+          } else {
+            let connectError = error.message
+            if (error.code === 4212) {
+              // room disposed
+              connectError = "This game does no longer exist"
+            }
+            //TODO: handle more known error codes with informative messages
+            setConnectError(connectError)
+            logger.error("reconnect error", error)
+          }
+        })
+    } else {
+      setToAuth(true) // no reconnection token
     }
   }
 
@@ -191,29 +213,29 @@ export default function Game() {
   }
 
   useEffect(() => {
-    const reconnect = async () => {
-      setReconnected(true)
+    const connect = () => {
+      setConnecting(true)
+      logger.debug("connecting to game")
       if (!firebase.apps.length) {
         firebase.initializeApp(FIREBASE_CONFIG)
       }
 
-      firebase.auth().onAuthStateChanged(async (user) => {
+      firebase.auth().onAuthStateChanged((user) => {
         if (user) {
           dispatch(logIn(user))
-
-          tryToReconnectToLastGame()
+          connectToGame()
         }
       })
     }
 
-    if (!reconnected) {
-      reconnect()
-    }
-
-    if (!initialized && room != undefined && container?.current) {
+    if (!connected) {
+      if (!connecting) {
+        connect()
+      }
+    } else if (!initialized && room != undefined && container?.current) {
+      logger.debug("initializing game")
       setInitialized(true)
       dispatch(requestTilemap())
-
       gameContainer = new GameContainer(container.current, uid, room)
       document.getElementById("game")?.addEventListener(Transfer.DRAG_DROP, ((
         event: CustomEvent<IDragDropMessage>
@@ -251,11 +273,18 @@ export default function Game() {
         gameContainer.setTilemap(tilemap)
       })
       room.onMessage(Transfer.BROADCAST_EMOTE, (message) => {
-        dispatch(displayEmote({ id: message.id, emote: message.emote }))
+        const g = gameContainer.game?.scene.getScene("gameScene") as GameScene
+          if (g && g.board) {
+            g.board.displayEmote(message.id, message.emote)
+          }
       })
 
       room.onMessage(Transfer.POKEMON_DAMAGE, (message) => {
         gameContainer.handleDisplayDamage(message)
+      })
+
+      room.onMessage(Transfer.ABILITY, (message) => {
+        gameContainer.handleDisplayAbility(message)
       })
 
       room.onMessage(Transfer.POKEMON_HEAL, (message) => {
@@ -370,6 +399,9 @@ export default function Game() {
           })
         }
 
+        player.listen("opponentId", (value, previousValue) => {
+          dispatch(setOpponentId({ id: player.id, value: value }))
+        })
         player.listen("opponentName", (value, previousValue) => {
           dispatch(setOpponentName({ id: player.id, value: value }))
         })
@@ -393,7 +425,7 @@ export default function Game() {
             dispatch(setExperienceManager(value))
           }
           dispatch(
-            setCurrentPlayerExperienceManager({
+            setPlayerExperienceManager({
               id: player.id,
               value: value
             })
@@ -566,7 +598,16 @@ export default function Game() {
         gameContainer.initializeSpectactor(uid)
       })
     }
-  }, [reconnected, initialized, room, dispatch, client, uid, currentPlayerId])
+  }, [
+    connected,
+    connecting,
+    initialized,
+    room,
+    dispatch,
+    client,
+    uid,
+    currentPlayerId
+  ])
 
   if (toAuth) {
     return <Navigate to={"/"} />
@@ -598,7 +639,7 @@ export default function Game() {
           <GameOptionsIcon leave={leave} />
         </>
       ) : (
-        <GameLoadingScreen />
+        <GameLoadingScreen connectError={connectError} />
       )}
       <div id="game" ref={container}></div>
     </div>

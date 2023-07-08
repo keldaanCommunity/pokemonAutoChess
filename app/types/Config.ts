@@ -1,5 +1,5 @@
 import { Synergy } from "./enum/Synergy"
-import { Pkm, PkmIndex } from "./enum/Pokemon"
+import { Pkm, PkmDuo, PkmProposition } from "./enum/Pokemon"
 import { Item } from "./enum/Item"
 import { AttackType, Rarity, Stat } from "./enum/Game"
 import { Emotion } from "."
@@ -129,15 +129,15 @@ export const AttackTypeColor: { [key in AttackType] } = {
   [AttackType.TRUE]: "#FFD800"
 }
 
-export const Probability: { [key: number]: number[] } = {
+export const RarityProbabilityPerLevel: { [key: number]: number[] } = {
   1: [1, 0, 0, 0, 0],
   2: [1, 0, 0, 0, 0],
   3: [0.7, 0.3, 0, 0, 0],
-  4: [0.55, 0.3, 0.15, 0, 0],
+  4: [0.55, 0.35, 0.10, 0, 0],
   5: [0.4, 0.3, 0.25, 0.05, 0],
-  6: [0.29, 0.295, 0.31, 0.1, 0.005],
-  7: [0.24, 0.28, 0.31, 0.15, 0.02],
-  8: [0.2, 0.24, 0.31, 0.2, 0.05],
+  6: [0.29, 0.31, 0.295, 0.1, 0.005],
+  7: [0.22, 0.28, 0.33, 0.15, 0.02],
+  8: [0.16, 0.24, 0.33, 0.22, 0.05],
   9: [0.1, 0.19, 0.31, 0.3, 0.1]
 }
 
@@ -217,7 +217,8 @@ export const RareShop = new Array<Pkm>(
   Pkm.VANILLITE,
   Pkm.BAGON,
   Pkm.HONEDGE,
-  Pkm.ABRA
+  Pkm.ABRA,
+  Pkm.GIBLE
 )
 
 export const EpicShop = new Array<Pkm>(
@@ -225,7 +226,6 @@ export const EpicShop = new Array<Pkm>(
   Pkm.SLAKOTH,
   Pkm.RALTS,
   Pkm.BELDUM,
-  Pkm.GIBLE,
   Pkm.ELEKID,
   Pkm.SNORUNT,
   Pkm.BUDEW,
@@ -236,7 +236,8 @@ export const EpicShop = new Array<Pkm>(
   Pkm.BOUNSWEET,
   Pkm.OSHAWOTT,
   Pkm.JANGMO_O,
-  Pkm.WURMPLE
+  Pkm.WURMPLE,
+  Pkm.TINKATINK
 )
 
 export const LegendaryShop = new Array<Pkm>(
@@ -256,7 +257,7 @@ export const LegendaryShop = new Array<Pkm>(
   Pkm.SOLOSIS
 )
 
-export const Mythical1Shop = new Array<Pkm>(
+export const Mythical1Shop = new Array<PkmProposition>(
   Pkm.AERODACTYL,
   Pkm.BLACEPHALON,
   Pkm.REGIDRAGO,
@@ -268,8 +269,7 @@ export const Mythical1Shop = new Array<Pkm>(
   Pkm.UXIE,
   Pkm.MESPRIT,
   Pkm.AZELF,
-  Pkm.LATIAS,
-  Pkm.LATIOS,
+  PkmDuo.LATIOS_LATIAS,
   Pkm.ZAPDOS,
   Pkm.MOLTRES,
   Pkm.ARTICUNO,
@@ -300,10 +300,13 @@ export const Mythical1Shop = new Array<Pkm>(
   Pkm.ZERAORA,
   Pkm.SHUCKLE,
   Pkm.LUNATONE,
-  Pkm.SOLROCK
+  Pkm.SOLROCK,
+  Pkm.MILTANK,
+  Pkm.MARACTUS,
+  PkmDuo.PLUSLE_MINUN
 )
 
-export const Mythical2Shop = new Array<Pkm>(
+export const Mythical2Shop = new Array<PkmProposition>(
   Pkm.RESHIRAM,
   Pkm.ZEKROM,
   Pkm.STAKATAKA,
@@ -370,61 +373,61 @@ export const ItemProposalStages = [2, 3]
 export const AdditionalPicksStages = [5, 8]
 export const MythicalPicksStages = [10, 20]
 
-export const NeutralStage: { turn: number; name: string; avatar: string }[] = [
+export const NeutralStage: { turn: number; name: string; avatar: Pkm }[] = [
   {
     turn: 1,
     name: "Magikarp",
-    avatar: `${PkmIndex[Pkm.MAGIKARP].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: Pkm.MAGIKARP
   },
   {
     turn: 2,
     name: "Raticate",
-    avatar: `${PkmIndex[Pkm.RATICATE].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: Pkm.RATICATE
   },
   {
     turn: 3,
     name: "Fearow",
-    avatar: `${PkmIndex[Pkm.FEAROW].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: Pkm.FEAROW
   },
   {
     turn: 9,
     name: "Gyarados",
-    avatar: `${PkmIndex[Pkm.GYARADOS].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: Pkm.GYARADOS
   },
   {
     turn: 14,
     name: "Lugia",
-    avatar: `${PkmIndex[Pkm.LUGIA].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: Pkm.LUGIA
   },
   {
     turn: 19,
     name: "Giratina",
-    avatar: `${PkmIndex[Pkm.GIRATINA].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: Pkm.GIRATINA
   },
   {
     turn: 24,
     name: "Zapdos",
-    avatar: `${PkmIndex[Pkm.ZAPDOS].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: Pkm.ZAPDOS
   },
   {
     turn: 29,
     name: "Dialga",
-    avatar: `${PkmIndex[Pkm.DIALGA].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: Pkm.DIALGA
   },
   {
     turn: 34,
     name: "Suicune",
-    avatar: `${PkmIndex[Pkm.SUICUNE].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: Pkm.SUICUNE
   },
   {
     turn: 39,
     name: "Regice",
-    avatar: `${PkmIndex[Pkm.REGICE].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: Pkm.REGICE
   },
   {
     turn: 44,
     name: "Rayquaza",
-    avatar: `${PkmIndex[Pkm.RAYQUAZA].replace("-", "/")}/${Emotion.NORMAL}`
+    avatar: Pkm.RAYQUAZA
   }
 ]
 

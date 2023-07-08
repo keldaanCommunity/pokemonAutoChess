@@ -16,7 +16,8 @@ import {
   OnRoomNameCommand,
   OnRoomPasswordCommand,
   OnToggleEloCommand,
-  OnKickPlayerCommand
+  OnKickPlayerCommand,
+  OnDeleteRoomCommand
 } from "./commands/preparation-commands"
 import { BotDifficulty } from "../types/enum/Game"
 import { IPreparationMetadata, Transfer } from "../types"
@@ -91,6 +92,14 @@ export default class PreparationRoom extends Room<PreparationState> {
       }
     })
 
+    this.onMessage(Transfer.DELETE_ROOM, (client) => {
+      try {
+        this.dispatcher.dispatch(new OnDeleteRoomCommand(), { client })
+      } catch (error) {
+        logger.error(error)
+      }
+    })
+
     this.onMessage(Transfer.CHANGE_ROOM_NAME, (client, message) => {
       try {
         this.dispatcher.dispatch(new OnRoomNameCommand(), { client, message })
@@ -143,22 +152,24 @@ export default class PreparationRoom extends Room<PreparationState> {
     })
     this.onMessage(Transfer.NEW_MESSAGE, (client, message) => {
       try {
-        const user = this.state.users.get(client.auth.uid)
-        const MAX_MESSAGE_LENGTH = 250
-        message = cleanProfanity(message.substring(0, MAX_MESSAGE_LENGTH))
+        if (client.auth) {
+          const user = this.state.users.get(client.auth.uid)
+          const MAX_MESSAGE_LENGTH = 250
+          message = cleanProfanity(message.substring(0, MAX_MESSAGE_LENGTH))
 
-        if (user && !user.anonymous && message != "") {
-          this.dispatcher.dispatch(new OnMessageCommand(), {
-            client: client,
-            message: {
-              author: user.name,
-              authorId: user.id,
-              avatar: user.avatar,
-              payload: message,
-              time: Date.now(),
-              id: nanoid()
-            }
-          })
+          if (user && !user.anonymous && message != "") {
+            this.dispatcher.dispatch(new OnMessageCommand(), {
+              client: client,
+              message: {
+                author: user.name,
+                authorId: user.id,
+                avatar: user.avatar,
+                payload: message,
+                time: Date.now(),
+                id: nanoid()
+              }
+            })
+          }
         }
       } catch (error) {
         logger.error(error)

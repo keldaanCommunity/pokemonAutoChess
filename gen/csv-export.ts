@@ -1,5 +1,5 @@
 import { createObjectCsvWriter } from "csv-writer"
-import { Pkm, PkmFamily, PkmIndex } from "../app/types/enum/Pokemon"
+import { Pkm, PkmDuos, PkmFamily, PkmIndex } from "../app/types/enum/Pokemon"
 import PokemonFactory from "../app/models/pokemon-factory"
 import { Ability } from "../app/types/enum/Ability"
 import { Rarity } from "../app/types/enum/Game"
@@ -28,7 +28,8 @@ const csvWriter = createObjectCsvWriter({
     { id: "familyType1", title: "Family Type 1" },
     { id: "familyType2", title: "Family Type 2" },
     { id: "familyType3", title: "Family Type 3" },
-    { id: "familyType4", title: "Family Type 4" }
+    { id: "familyType4", title: "Family Type 4" },
+    { id: "duo", title: "Duo" },
   ]
 })
 
@@ -54,6 +55,7 @@ interface PokemonData {
   familyType2: string
   familyType3: string
   familyType4: string
+  duo: boolean
 }
 
 const data: PokemonData[] = []
@@ -79,6 +81,7 @@ Object.values(Pkm)
         category: pokemon.rarity,
         tier: pokemon.stars,
         additional: pokemon.additional,
+        duo: Object.values(PkmDuos).some(duo => duo.includes(pkm)),
         type1: pokemon.types[0] ?? "",
         type2: pokemon.types[1] ?? "",
         type3: pokemon.types[2] ?? "",

@@ -2,6 +2,7 @@ import { Effect } from "../enum/Effect"
 import { Damage, Stat } from "../enum/Game"
 import { Status } from "../enum/Status"
 import { Synergy } from "../enum/Synergy"
+import { Weather } from "../enum/Weather"
 
 export const EffectName: { [key in Effect]: string } = {
   [Effect.INGRAIN]: `Ingrain`,
@@ -98,7 +99,8 @@ export const EffectName: { [key in Effect]: string } = {
   [Effect.STORM]: "Storm",
   [Effect.MISTY]: "Misty",
   [Effect.WINDY]: "Windy",
-  [Effect.NIGHT]: "Night"
+  [Effect.NIGHT]: "Night",
+  [Effect.HYDRATATION]: "Hydratation",
 }
 
 export const EffectDescription: {
@@ -175,12 +177,12 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.RISING_VOLTAGE]: {
-    eng: `30% chance of triple attack`,
+    eng: `Every fourth attack is a triple attack`,
     esp: ``,
     fra: ``
   },
   [Effect.OVERDRIVE]: {
-    eng: `50% chance of triple attack`,
+    eng: `Every third attack is a triple attack`,
     esp: ``,
     fra: ``
   },
@@ -315,17 +317,17 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.MEDITATE]: {
-    eng: `Heal for 15% ${Stat.HP} of the damage`,
+    eng: `Heal for 10% ${Stat.HP} of the damage`,
     esp: ``,
     fra: ``
   },
   [Effect.FOCUS_ENERGY]: {
-    eng: `Heal for 30% ${Stat.HP} of the damage`,
+    eng: `Heal for 25% ${Stat.HP} of the damage`,
     esp: ``,
     fra: ``
   },
   [Effect.CALM_MIND]: {
-    eng: `Heal for 60% ${Stat.HP} of the damage`,
+    eng: `Heal for 50% ${Stat.HP} of the damage`,
     esp: ``,
     fra: ``
   },
@@ -400,17 +402,17 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.BATTLE_ARMOR]: {
-    eng: `Gain 50 ${Stat.SHIELD}`,
+    eng: `Gain 40 ${Stat.SHIELD}`,
     esp: ``,
     fra: ``
   },
   [Effect.MOUTAIN_RESISTANCE]: {
-    eng: `Gain 100 ${Stat.SHIELD}`,
+    eng: `Gain 80 ${Stat.SHIELD}`,
     esp: ``,
     fra: ``
   },
   [Effect.DIAMOND_STORM]: {
-    eng: `Gain 200 ${Stat.SHIELD}`,
+    eng: `Gain 160 ${Stat.SHIELD}`,
     esp: ``,
     fra: ``
   },
@@ -445,7 +447,7 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.STRANGE_STEAM]: {
-    eng: `Shocks deal 60 ${Damage.SPECIAL}`,
+    eng: `Shocks deal 55 ${Damage.SPECIAL}`,
     esp: ``,
     fra: ``
   },
@@ -576,6 +578,11 @@ export const EffectDescription: {
   },
   [Effect.NIGHT]: {
     eng: `+20% ${Stat.CRIT_CHANCE}\n+30% ${Status.SLEEP} duration`,
+    esp: "",
+    fra: ""
+  },
+  [Effect.HYDRATATION]: {
+    eng: `${Synergy.GRASS} synergy is healing 5 additional ${Stat.HP} per second under the ${Weather.RAIN}`,
     esp: "",
     fra: ""
   }

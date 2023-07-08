@@ -830,6 +830,116 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.MUD_BUBBLE,
+      frames: this.game.anims.generateFrameNames(Ability.MUD_BUBBLE, {
+        start: 0,
+        end: 5,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
+      key: Ability.ERUPTION,
+      frames: this.game.anims.generateFrameNames(Ability.ERUPTION, {
+        start: 0,
+        end: 10,
+        zeroPad: 3
+      }),
+      duration: 500,
+      repeat: 0
+    })
+
+    this.game.anims.create({
+      key: Ability.SLASHING_CLAW,
+      frames: this.game.anims.generateFrameNames(Ability.SLASHING_CLAW, {
+        start: 0,
+        end: 14,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
+      key: Ability.MAGMA_STORM,
+      frames: this.game.anims.generateFrameNames(Ability.MAGMA_STORM, {
+        start: 0,
+        end: 6,
+        zeroPad: 3
+      }),
+      duration: 800,
+      repeat: 0
+    })
+
+    this.game.anims.create({
+      key: Ability.SOLAR_BEAM,
+      frames: this.game.anims.generateFrameNames(Ability.SOLAR_BEAM, {
+        start: 0,
+        end: 3,
+        zeroPad: 3
+      }),
+      duration: 120,
+      repeat: 4
+    })
+
+    this.game.anims.create({
+      key: Ability.THRASH,
+      frames: this.game.anims.generateFrameNames(Ability.THRASH, {
+        start: 0,
+        end: 6,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
+      key: Ability.ROLLOUT,
+      frames: this.game.anims.generateFrameNames(Ability.ROLLOUT, {
+        start: 0,
+        end: 6,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
+      key: Ability.ABSORB,
+      frames: this.game.anims.generateFrameNames(Ability.ABSORB, {
+        start: 0,
+        end: 2,
+        zeroPad: 3
+      }),
+      duration: 600,
+      repeat: 0
+    })
+
+    this.game.anims.create({
+      key: Ability.ACROBATICS,
+      frames: this.game.anims.generateFrameNames(Ability.ACROBATICS, {
+        start: 0,
+        end: 3,
+        zeroPad: 3
+      }),
+      duration: 300,
+      repeat: 0
+    })
+
+    this.game.anims.create({
+      key: Ability.GIGATON_HAMMER,
+      frames: this.game.anims.generateFrameNames(Ability.GIGATON_HAMMER, {
+        start: 0,
+        end: 3,
+        zeroPad: 3
+      }),
+      duration: 200,
+      repeat: 4
+    })
+
+    this.game.anims.create({
       key: Ability.COUNTER,
       frames: this.game.anims.generateFrameNames(Ability.COUNTER, {
         start: 0,
@@ -1781,6 +1891,41 @@ export default class AnimationManager {
       duration: 1000,
       repeat: 0
     })
+
+    this.game.anims.create({
+      key: Ability.MIST_BALL,
+      frames: this.game.anims.generateFrameNames(Ability.MIST_BALL, {
+        start: 0,
+        end: 4,
+        zeroPad: 3
+      }),
+      yoyo: true,
+      duration: 500,
+      repeat: 2
+    })
+
+    this.game.anims.create({
+      key: Ability.LUSTER_PURGE,
+      frames: this.game.anims.generateFrameNames(Ability.LUSTER_PURGE, {
+        start: 0,
+        end: 4,
+        zeroPad: 3
+      }),
+      yoyo: true,
+      duration: 500,
+      repeat: 2
+    })
+
+    this.game.anims.create({
+      key: Ability.LINK_CABLE,
+      frames: this.game.anims.generateFrameNames(Ability.LINK_CABLE, {
+        start: 0,
+        end: 4,
+        zeroPad: 3
+      }),
+      duration: 500,
+      repeat: 0
+    })
   }
 
   animatePokemon(entity: Pokemon, action: PokemonActionState) {
@@ -1798,7 +1943,11 @@ export default class AnimationManager {
     } else if (action === PokemonActionState.ATTACK) {
       animation = AnimationConfig[entity.name as Pkm].attack
     }
-    this.play(entity, animation)
+    try {
+      this.play(entity, animation)
+    } catch (err) {
+      logger.warn(`Can't play animation ${animation} for ${entity.name}`, err)
+    }
   }
 
   play(entity: Pokemon, animation: AnimationType) {
