@@ -201,7 +201,7 @@ export const SynergyDescription: {
     fra: ""
   },
   [Synergy.DRAGON]: {
-    eng: `Dragon amplify synergies and gains stats and extra effects on their abilities when fully evolved.`,
+    eng: `Dragon amplify synergies and gains more stats when fully evolved.`,
     esp: "",
     fra: ""
   },
