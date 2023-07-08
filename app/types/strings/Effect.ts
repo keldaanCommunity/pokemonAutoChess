@@ -277,12 +277,12 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.DRAGON_ENERGY]: {
-    eng: `Gain +5% ${Stat.ATK_SPEED}`,
+    eng: `Dragon's second synergy counts double (not the third)`,
     esp: ``,
     fra: ``
   },
   [Effect.DRAGON_DANCE]: {
-    eng: `Gain +10%  ${Stat.ATK_SPEED}`,
+    eng: `Dragons gain 30 ${Stat.HP}, 10% ${Stat.ATK_SPEED} and 10% ${Stat.AP} per evolution stage. Mythicals are considered stage 3.`,
     esp: ``,
     fra: ``
   },

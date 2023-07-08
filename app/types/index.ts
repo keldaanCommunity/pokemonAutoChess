@@ -428,6 +428,8 @@ export interface IPokemonEntity {
   simulation: ISimulation
   addAbilityPower(value: number): void
   addAttack(atk: number): void
+  addAttackSpeed(as: number): void
+  addLife(life: number): void
   handleShield(shieldBonus: number, pokemon: IPokemonEntity)
   update(dt: number, board: Board, weather: string)
   physicalDamage: number

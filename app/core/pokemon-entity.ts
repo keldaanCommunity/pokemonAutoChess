@@ -272,6 +272,10 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
+  addLife(value: number){
+    this.life = min(0)(this.life + value)
+  }
+
   addDodgeChance(value: number) {
     this.dodge = max(0.9)(this.dodge + value)
   }
@@ -399,12 +403,6 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     }
     if (this.status.deltaOrb) {
       this.setMana(this.mana + 4)
-    }
-
-    if (this.effects.includes(Effect.DRAGON_ENERGY)) {
-      this.addAttackSpeed(5)
-    } else if (this.effects.includes(Effect.DRAGON_DANCE)) {
-      this.addAttackSpeed(10)
     }
 
     if (this.effects.includes(Effect.TELEPORT_NEXT_ATTACK)) {

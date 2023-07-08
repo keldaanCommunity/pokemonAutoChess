@@ -1,4 +1,5 @@
 import { MapSchema } from "@colyseus/schema"
+import { SynergyTriggers } from "../../types/Config"
 import { Item } from "../../types/enum/Item"
 import { Pkm, PkmFamily } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
@@ -23,20 +24,31 @@ export default class Synergies
     })
 
     const typesPerFamily = new Map<Pkm, Set<Synergy>>()
+    const dragonDoubleTypes: Synergy[] = []
     board.forEach((pkm: Pokemon) => {
       if (pkm.positionY != 0) {
         const family = PkmFamily[pkm.name]
         if (!typesPerFamily.has(family)) typesPerFamily.set(family, new Set())
         const types: Set<Synergy> = typesPerFamily.get(family)!
         pkm.types.forEach((type) => types.add(type))
+        if (pkm.types.includes(Synergy.DRAGON)) {
+          dragonDoubleTypes.push(pkm.types[0])
+        }
       }
     })
 
     typesPerFamily.forEach((types) => {
-      types.forEach((type) => {
+      types.forEach((type, i) => {
         this.set(type, (this.get(type) ?? 0) + 1)
       })
     })
+
+    if ((this.get(Synergy.DRAGON) ?? 0) >= SynergyTriggers[Synergy.DRAGON][0]) {
+      console.log("activate double types", dragonDoubleTypes)
+      dragonDoubleTypes.forEach((type) => {
+        this.set(type, (this.get(type) ?? 0) + 1)
+      })
+    }
   }
 
   setToZero() {
