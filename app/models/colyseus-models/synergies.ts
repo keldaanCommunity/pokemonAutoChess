@@ -24,7 +24,7 @@ export default class Synergies
     })
 
     const typesPerFamily = new Map<Pkm, Set<Synergy>>()
-    const dragonDoubleTypes: Synergy[] = []
+    const dragonDoubleTypes = new Map<Pkm, Set<Synergy>>()
     board.forEach((pkm: Pokemon) => {
       if (pkm.positionY != 0) {
         const family = PkmFamily[pkm.name]
@@ -32,7 +32,9 @@ export default class Synergies
         const types: Set<Synergy> = typesPerFamily.get(family)!
         pkm.types.forEach((type) => types.add(type))
         if (pkm.types.includes(Synergy.DRAGON)) {
-          dragonDoubleTypes.push(pkm.types[0])
+          if (!dragonDoubleTypes.has(family))
+            dragonDoubleTypes.set(family, new Set())
+          dragonDoubleTypes.get(family)!.add(pkm.types[1])
         }
       }
     })
@@ -44,9 +46,10 @@ export default class Synergies
     })
 
     if ((this.get(Synergy.DRAGON) ?? 0) >= SynergyTriggers[Synergy.DRAGON][0]) {
-      console.log("activate double types", dragonDoubleTypes)
-      dragonDoubleTypes.forEach((type) => {
-        this.set(type, (this.get(type) ?? 0) + 1)
+      dragonDoubleTypes.forEach((types) => {
+        types.forEach((type, i) => {
+          this.set(type, (this.get(type) ?? 0) + 1)
+        })
       })
     }
   }
