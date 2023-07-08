@@ -16,7 +16,7 @@ import { chance, pickRandomIn } from "../utils/random"
 import { logger } from "../utils/logger"
 import { Passive } from "../types/enum/Passive"
 import { Weather } from "../types/enum/Weather"
-import { min } from "../utils/number"
+import { max, min } from "../utils/number"
 
 export default class PokemonState {
   handleHeal(
@@ -119,42 +119,40 @@ export default class PokemonState {
     } else if (pokemon.status.protect) {
       death = false
       takenDamage = 0
-    } else if(pokemon.items.has(Item.SHINY_CHARM) && chance(0.15)){  
+    } else if (pokemon.items.has(Item.SHINY_CHARM) && chance(0.15)) {
       death = false
-      takenDamage = 0    
+      takenDamage = 0
       pokemon.status.triggerProtect(1000)
     } else {
-      let reducedDamage = damage
-
       if (pokemon.items.has(Item.POKE_DOLL)) {
-        reducedDamage = Math.ceil(reducedDamage * 0.7)
+        damage = Math.ceil(damage * 0.7)
       }
 
       if (attacker && attacker.status.electricField) {
-        reducedDamage = Math.ceil(reducedDamage * 1.2)
+        damage = Math.ceil(damage * 1.2)
       }
 
       if (attacker && attacker.status.psychicField) {
-        reducedDamage = Math.ceil(reducedDamage * 1.2)
+        damage = Math.ceil(damage * 1.2)
       }
 
       if (attacker && attacker.status.grassField) {
-        reducedDamage = Math.ceil(reducedDamage * 1.2)
+        damage = Math.ceil(damage * 1.2)
       }
 
       if (attacker && attacker.status.fairyField) {
-        reducedDamage = Math.ceil(reducedDamage * 1.2)
+        damage = Math.ceil(damage * 1.2)
       }
 
       if (attacker && attacker.items.has(Item.FIRE_GEM)) {
-        reducedDamage = Math.ceil(reducedDamage + pokemon.hp * 0.1)
+        damage = Math.ceil(damage + pokemon.hp * 0.1)
       }
 
       if (
         pokemon.simulation.weather === Weather.MISTY &&
         attackType === AttackType.SPECIAL
       ) {
-        reducedDamage = Math.ceil(reducedDamage * 1.2)
+        damage = Math.ceil(damage * 1.2)
       }
 
       if (
@@ -164,19 +162,20 @@ export default class PokemonState {
       ) {
         attackType = AttackType.TRUE
       }
-      const armorFactor = 0.1
+
+      const ARMOR_FACTOR = 0.1
       const def = pokemon.status.armorReduction
         ? Math.round(pokemon.def / 2)
         : pokemon.def
       const speDef = pokemon.status.armorReduction
         ? Math.round(pokemon.speDef / 2)
         : pokemon.speDef
+
+      let reducedDamage = damage
       if (attackType == AttackType.PHYSICAL) {
-        const ritodamage = damage / (1 + armorFactor * def)
-        reducedDamage = Math.max(0, Math.round(ritodamage))
+        reducedDamage = damage / (1 + ARMOR_FACTOR * def)
       } else if (attackType == AttackType.SPECIAL) {
-        const ritodamage = damage / (1 + armorFactor * speDef)
-        reducedDamage = Math.max(0, Math.round(ritodamage))
+        reducedDamage = damage / (1 + ARMOR_FACTOR * speDef)
       } else if (attackType == AttackType.TRUE) {
         reducedDamage = damage
       }
@@ -195,7 +194,7 @@ export default class PokemonState {
         reducedDamage = reducedDamage - damageBlocked
       }
 
-      reducedDamage = Math.max(1, reducedDamage) // should deal 1 damage at least
+      reducedDamage = min(1)(reducedDamage) // should deal 1 damage at least
 
       if (isNaN(reducedDamage)) {
         reducedDamage = 0
@@ -223,11 +222,11 @@ export default class PokemonState {
 
         takenDamage += damageOnShield
         pokemon.shield = pokemon.shield - damageOnShield
-        residualDamage = Math.max(0, reducedDamage - damageOnShield)
+        residualDamage = min(0)(reducedDamage - damageOnShield)
       }
 
       if (pokemon.passive == Passive.WONDER_GUARD) {
-        residualDamage = 1
+        residualDamage = max(1)(residualDamage)
       }
 
       takenDamage += Math.min(residualDamage, pokemon.life)
@@ -646,10 +645,15 @@ export default class PokemonState {
     }>()
 
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
-      if (value !== undefined && value.team !== pokemon.team && value.isTargettable) {
+      if (
+        value !== undefined &&
+        value.team !== pokemon.team &&
+        value.isTargettable
+      ) {
         candidateCells.push(
-          ...board.getAdjacentCells(x, y)
-            .filter(cell => board.getValue(cell.x, cell.y) === undefined)
+          ...board
+            .getAdjacentCells(x, y)
+            .filter((cell) => board.getValue(cell.x, cell.y) === undefined)
             .map((cell) => ({
               x: cell.x,
               y: cell.y,
