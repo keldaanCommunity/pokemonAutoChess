@@ -455,10 +455,12 @@ export default class Simulation extends Schema implements ISimulation {
         if (pokemon.effects.includes(Effect.AUTOMATE)) {
           pokemon.addAttack(pokemon.baseAtk)
         }
+        if (pokemon.effects.includes(Effect.DRAGON_SCALES)) {
+          pokemon.addLife(30 * pokemon.stars)
+        }
         if (pokemon.effects.includes(Effect.DRAGON_DANCE)) {
           pokemon.addAbilityPower(10 * pokemon.stars)
           pokemon.addAttackSpeed(10 * pokemon.stars)
-          pokemon.addLife(30 * pokemon.stars)
         }
         let shieldBonus = 0
         if (pokemon.effects.includes(Effect.STAMINA)) {
@@ -901,14 +903,10 @@ export default class Simulation extends Schema implements ISimulation {
           break
 
         case Effect.DRAGON_ENERGY:
-          if (types.includes(Synergy.DRAGON)) {
-            pokemon.effects.push(Effect.DRAGON_ENERGY)
-          }
-          break
-
+        case Effect.DRAGON_SCALES:
         case Effect.DRAGON_DANCE:
           if (types.includes(Synergy.DRAGON)) {
-            pokemon.effects.push(Effect.DRAGON_DANCE)
+            pokemon.effects.push(effect)
           }
           break
 

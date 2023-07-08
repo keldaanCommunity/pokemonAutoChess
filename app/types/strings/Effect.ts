@@ -40,6 +40,7 @@ export const EffectName: { [key in Effect]: string } = {
   [Effect.VENOMOUS]: `Venomous`,
   [Effect.TOXIC]: `Toxic`,
   [Effect.DRAGON_ENERGY]: `Dragon Energy`,
+  [Effect.DRAGON_SCALES]: `Dragon Scales`,
   [Effect.DRAGON_DANCE]: `Dragon Dance`,
   [Effect.BULK_UP]: `Bulk Up`,
   [Effect.RAGE]: `Rage`,
@@ -281,8 +282,13 @@ export const EffectDescription: {
     esp: ``,
     fra: ``
   },
+  [Effect.DRAGON_SCALES]: {
+    eng: `Dragons gain 30 ${Stat.HP} per evolution stage (3 for Mythicals)`,
+    esp: ``,
+    fra: ``
+  },
   [Effect.DRAGON_DANCE]: {
-    eng: `Dragons gain 30 ${Stat.HP}, 10% ${Stat.ATK_SPEED} and 10% ${Stat.AP} per evolution stage. Mythicals are considered stage 3.`,
+    eng: `Dragons gain 10% ${Stat.ATK_SPEED} and 10% ${Stat.AP} per evolution stage (3 for Mythicals)`,
     esp: ``,
     fra: ``
   },

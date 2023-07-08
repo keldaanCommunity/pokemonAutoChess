@@ -34,6 +34,7 @@ export enum Effect {
   VENOMOUS,
   TOXIC,
   DRAGON_ENERGY,
+  DRAGON_SCALES,
   DRAGON_DANCE,
   BULK_UP,
   RAGE,
