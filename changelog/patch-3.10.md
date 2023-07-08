@@ -36,7 +36,7 @@ patch announcement
 
 # Changes to Items
 
--
+- Upgrade: 5% → 4% AS per stack
 
 # Bugfix
 

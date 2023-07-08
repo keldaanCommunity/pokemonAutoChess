@@ -408,7 +408,8 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.effects.includes(Effect.TELEPORT_NEXT_ATTACK)) {
-      const crit = this.items.has(Item.REAPER_CLOTH) && chance(this.critChance / 100)
+      const crit =
+        this.items.has(Item.REAPER_CLOTH) && chance(this.critChance / 100)
       if (crit) {
         this.onCritical(target, board)
       }
@@ -422,9 +423,13 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       removeInArray(this.effects, Effect.TELEPORT_NEXT_ATTACK)
     }
 
-    if(this.passive === Passive.SHARED_VISION){
+    if (this.passive === Passive.SHARED_VISION) {
       board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
-        if (ally && ally.passive === Passive.SHARED_VISION && this.team === ally.team) {
+        if (
+          ally &&
+          ally.passive === Passive.SHARED_VISION &&
+          this.team === ally.team
+        ) {
           ally.targetX = this.targetX
           ally.targetY = this.targetY
         }
@@ -449,7 +454,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.items.has(Item.UPGRADE)) {
-      this.addAttackSpeed(5)
+      this.addAttackSpeed(4)
       this.count.upgradeCount++
     }
 
