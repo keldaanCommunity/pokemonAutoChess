@@ -110,7 +110,7 @@ export const RarityColor: { [key in Rarity]: string } = {
   [Rarity.HATCH]: "#b9915a"
 }
 
-export const RarityProbability: { [key in Rarity]: number } = {
+export const BoosterRarityProbability: { [key in Rarity]: number } = {
   [Rarity.COMMON]: 0.15,
   [Rarity.UNCOMMON]: 0.2,
   [Rarity.RARE]: 0.2,
@@ -133,7 +133,7 @@ export const RarityProbabilityPerLevel: { [key: number]: number[] } = {
   1: [1, 0, 0, 0, 0],
   2: [1, 0, 0, 0, 0],
   3: [0.7, 0.3, 0, 0, 0],
-  4: [0.55, 0.35, 0.10, 0, 0],
+  4: [0.55, 0.35, 0.1, 0, 0],
   5: [0.4, 0.3, 0.25, 0.05, 0],
   6: [0.29, 0.31, 0.295, 0.1, 0.005],
   7: [0.22, 0.28, 0.33, 0.15, 0.02],
@@ -354,6 +354,39 @@ export const HatchList = new Array<Pkm>(
   Pkm.FROAKIE,
   Pkm.TEPIG
 )
+
+export function getEvolutionCountNeeded(pkm: Pkm): number {
+  if (pkm === Pkm.MAGIKARP) {
+    return 9
+  }
+  return 3
+}
+
+export const FishRarityProbability: {
+  [waterLevel: number]: { [key in Rarity]?: number }
+} = {
+  1: {
+    [Rarity.SPECIAL]: 0.5,
+    [Rarity.COMMON]: 0.4,
+    [Rarity.UNCOMMON]: 0.1,
+    [Rarity.RARE]: 0,
+    [Rarity.EPIC]: 0
+  },
+  2: {
+    [Rarity.SPECIAL]: 0.4,
+    [Rarity.COMMON]: 0.3,
+    [Rarity.UNCOMMON]: 0.2,
+    [Rarity.RARE]: 0.1,
+    [Rarity.EPIC]: 0
+  },
+  3: {
+    [Rarity.SPECIAL]: 0.3,
+    [Rarity.COMMON]: 0.2,
+    [Rarity.UNCOMMON]: 0.2,
+    [Rarity.RARE]: 0.2,
+    [Rarity.EPIC]: 0.1
+  }
+}
 
 export const MAX_PLAYERS_PER_LOBBY = 8
 

@@ -1,6 +1,7 @@
 import { AnimationType } from "../Animation"
 
 export enum Pkm {
+  DEFAULT = "default",
   EGG = "Egg",
   DITTO = "ditto",
   BULBASAUR = "bulbasaur",
@@ -380,7 +381,6 @@ export enum Pkm {
   CACNEA = "cacnea",
   CACTURNE = "cacturne",
   TAUROS = "tauros",
-  DEFAULT = "default",
   HAPPINY = "happiny",
   CHANSEY = "chansey",
   BLISSEY = "blissey",

@@ -94,7 +94,7 @@ export default class BoardManager {
     })
   }
 
-  addPokemon(pokemon: IPokemon) {
+  addPokemon(pokemon: IPokemon): Pokemon {
     const coordinates = transformCoordinate(
       pokemon.positionX,
       pokemon.positionY
@@ -113,6 +113,8 @@ export default class BoardManager {
     if (pokemon.positionY != 0 && this.mode === BoardMode.BATTLE) {
       pokemonUI.setVisible(false)
     }
+
+    return pokemonUI
   }
 
   removePokemon(pokemonToRemove: IPokemon) {

@@ -75,9 +75,9 @@ export default class AttackingState extends PokemonState {
         ) {
           let isTripleAttack = false
           if (pokemon.effects.includes(Effect.RISING_VOLTAGE)) {
-            isTripleAttack = (pokemon.count.attackCount % 4 === 0)
+            isTripleAttack = pokemon.count.attackCount % 4 === 0
           } else if (pokemon.effects.includes(Effect.OVERDRIVE)) {
-            isTripleAttack = (pokemon.count.attackCount % 3 === 0)
+            isTripleAttack = pokemon.count.attackCount % 3 === 0
           }
           if (isTripleAttack) {
             pokemon.count.tripleAttackCount++
@@ -101,15 +101,6 @@ export default class AttackingState extends PokemonState {
 
     const target = board.getValue(coordinates.x, coordinates.y)
     if (target) {
-      let isAttackSuccessful = true
-      if (chance(target.dodge) && !pokemon.items.has(Item.XRAY_VISION)) {
-        isAttackSuccessful = false
-        pokemon.count.dodgeCount += 1
-      }
-      if (target.status.protect) {
-        isAttackSuccessful = false
-      }
-
       pokemon.orientation = board.orientation(
         pokemon.positionX,
         pokemon.positionY,
@@ -123,6 +114,17 @@ export default class AttackingState extends PokemonState {
       let trueDamage = 0
       let totalTakenDamage = 0
       const attackType = pokemon.attackType
+
+      let isAttackSuccessful = true
+      if (chance(target.dodge) && !pokemon.items.has(Item.XRAY_VISION)) {
+        isAttackSuccessful = false
+        physicalDamage = 0
+        target.count.dodgeCount += 1
+      }
+      if (target.status.protect) {
+        physicalDamage = 0
+        isAttackSuccessful = false
+      }
 
       if (Math.random() * 100 < pokemon.critChance) {
         pokemon.onCritical(target, board)
