@@ -128,34 +128,34 @@ export default class PokemonState {
       let reducedDamage = damage
 
       if (pokemon.items.has(Item.POKE_DOLL)) {
-        reducedDamage = Math.ceil(reducedDamage * 0.7)
+        damage = Math.ceil(damage * 0.7)
       }
 
       if (attacker && attacker.status.electricField) {
-        reducedDamage = Math.ceil(reducedDamage * 1.2)
+        damage = Math.ceil(damage * 1.2)
       }
 
       if (attacker && attacker.status.psychicField) {
-        reducedDamage = Math.ceil(reducedDamage * 1.2)
+        damage = Math.ceil(damage * 1.2)
       }
 
       if (attacker && attacker.status.grassField) {
-        reducedDamage = Math.ceil(reducedDamage * 1.2)
+        damage = Math.ceil(damage * 1.2)
       }
 
       if (attacker && attacker.status.fairyField) {
-        reducedDamage = Math.ceil(reducedDamage * 1.2)
+        damage = Math.ceil(damage * 1.2)
       }
 
       if (attacker && attacker.items.has(Item.FIRE_GEM)) {
-        reducedDamage = Math.ceil(reducedDamage + pokemon.hp * 0.1)
+        damage = Math.ceil(damage + pokemon.hp * 0.1)
       }
 
       if (
         pokemon.simulation.weather === Weather.MISTY &&
         attackType === AttackType.SPECIAL
       ) {
-        reducedDamage = Math.ceil(reducedDamage * 1.2)
+        damage = Math.ceil(damage * 1.2)
       }
 
       if (
