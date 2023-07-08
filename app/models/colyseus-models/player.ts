@@ -18,9 +18,10 @@ import { IPokemonConfig } from "../mongo-models/user-metadata"
 import PokemonCollection from "./pokemon-collection"
 import HistoryItem from "./history-item"
 import { Item } from "../../types/enum/Item"
-import { Pkm, PkmProposition } from "../../types/enum/Pokemon"
+import { Pkm, PkmIndex, PkmProposition } from "../../types/enum/Pokemon"
 import GameRoom from "../../rooms/game-room"
 import { Weather } from "../../types/enum/Weather"
+import PokemonFactory from "../pokemon-factory"
 
 export default class Player extends Schema implements IPlayer {
   @type("string") id: string
@@ -136,5 +137,21 @@ export default class Player extends Schema implements IPlayer {
       }
     })
     return p
+  }
+
+  transformPokemon(pokemon: Pokemon, newEntry: Pkm) {
+    const newPokemon = PokemonFactory.createPokemonFromName(
+      newEntry,
+      this.pokemonCollection.get(PkmIndex[newEntry])
+    )
+    pokemon.items.forEach((item) => {
+      newPokemon.items.add(item)
+    })
+    newPokemon.positionX = pokemon.positionX
+    newPokemon.positionY = pokemon.positionY
+    this.board.delete(pokemon.id)
+    this.board.set(newPokemon.id, newPokemon)
+    this.synergies.update(this.board)
+    this.effects.update(this.synergies, this.board)
   }
 }

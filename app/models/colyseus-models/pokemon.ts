@@ -11,6 +11,7 @@ import { Rarity, AttackType, PokemonActionState } from "../../types/enum/Game"
 import { Ability } from "../../types/enum/Ability"
 import { Synergy } from "../../types/enum/Synergy"
 import { Passive } from "../../types/enum/Passive"
+import Player from "./player"
 
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string
@@ -98,8 +99,14 @@ export class Pokemon extends Schema implements IPokemon {
   }
 
   get canBeCloned(): boolean {
-    return this.rarity !== Rarity.MYTHICAL && this.rarity !== Rarity.HATCH && ![Pkm.DITTO, Pkm.EGG].includes(this.name)
+    return (
+      this.rarity !== Rarity.MYTHICAL &&
+      this.rarity !== Rarity.HATCH &&
+      ![Pkm.DITTO, Pkm.EGG].includes(this.name)
+    )
   }
+
+  onChangePosition(x: number, y: number, player: Player) {}
 }
 
 export class Ditto extends Pokemon {
@@ -6247,19 +6254,27 @@ export class Giratina extends Pokemon {
       [Synergy.DRAGON, Synergy.GHOST],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
-      300,
+      250,
       30,
-      5,
-      5,
+      6,
+      6,
+      1,
+      AttackSprite.DRAGON_MELEE,
       2,
-      AttackSprite.GHOST_RANGE,
-      3,
       40,
       Ability.SHADOW_SNEAK,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.GIRATINA
     )
+  }
+
+  onChangePosition(x: number, y: number, player: Player) {
+    if (y !== 3) {
+      player.transformPokemon(this, Pkm.ORIGIN_GIRATINA)
+    }
   }
 }
 
@@ -6267,22 +6282,30 @@ export class OriginGiratina extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.ORIGIN_GIRATINA,
-      [Synergy.DRAGON, Synergy.GHOST],
+      [Synergy.DRAGON, Synergy.GHOST, Synergy.FLYING],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
-      400,
+      200,
       40,
-      6,
-      6,
-      1,
+      2,
+      2,
+      2,
       AttackSprite.GHOST_RANGE,
-      3,
+      2,
       40,
       Ability.SHADOW_SNEAK,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.GIRATINA
     )
+  }
+
+  onChangePosition(x: number, y: number, player: Player) {
+    if (y === 3) {
+      player.transformPokemon(this, Pkm.GIRATINA)
+    }
   }
 }
 

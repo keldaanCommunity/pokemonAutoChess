@@ -337,7 +337,6 @@ export const Mythical2Shop = new Array<PkmProposition>(
   Pkm.KYOGRE,
   Pkm.GROUDON,
   Pkm.VOLCANION,
-  Pkm.ORIGIN_GIRATINA,
   Pkm.MARSHADOW,
   Pkm.XERNEAS,
   Pkm.YVELTAL
