@@ -17,7 +17,6 @@ import { logger } from "../utils/logger"
 import { Passive } from "../types/enum/Passive"
 import { Weather } from "../types/enum/Weather"
 import { max, min } from "../utils/number"
-import { min } from "../utils/number"
 import { distanceC } from "../utils/distance"
 
 export default class PokemonState {
@@ -501,11 +500,14 @@ export default class PokemonState {
           : pokemon.effects.includes(Effect.GROWTH)
           ? 10
           : 5
-          if(pokemon.effects.includes(Effect.HYDRATATION) && pokemon.simulation.weather === Weather.RAIN){
-            heal += 5
-          }
-          pokemon.handleHeal(heal, pokemon, 0)
-          pokemon.grassHealCooldown = 1000
+        if (
+          pokemon.effects.includes(Effect.HYDRATATION) &&
+          pokemon.simulation.weather === Weather.RAIN
+        ) {
+          heal += 5
+        }
+        pokemon.handleHeal(heal, pokemon, 0)
+        pokemon.grassHealCooldown = 1000
       } else {
         pokemon.grassHealCooldown = pokemon.grassHealCooldown - dt
       }
@@ -597,12 +599,7 @@ export default class PokemonState {
         value.team !== pokemon.team &&
         value.isTargettable
       ) {
-        const distance = distanceC(
-          pokemon.positionX,
-          pokemon.positionY,
-          x,
-          y
-        )
+        const distance = distanceC(pokemon.positionX, pokemon.positionY, x, y)
         pokemons.push({ distance, x, y })
       }
     })
