@@ -1055,10 +1055,12 @@ export default class Simulation extends Schema implements ISimulation {
                 weather,
                 (boardWeatherScore.get(weather) ?? 0) + 1
               )
-              playerWeatherScore.set(
-                weather,
-                (playerWeatherScore.get(weather) ?? 0) + 1
-              )
+              if (pkm.passive !== Passive.CASTFORM) {
+                playerWeatherScore.set(
+                  weather,
+                  (playerWeatherScore.get(weather) ?? 0) + 1
+                )
+              }
             }
           })
         }
