@@ -201,9 +201,9 @@ export const SynergyDescription: {
     fra: ""
   },
   [Synergy.DRAGON]: {
-    eng: `Dragon pokemons gain ${Stat.ATK_SPEED} after every basic attack`,
-    esp: "Dragón",
-    fra: "Dragon"
+    eng: `Dragon amplify synergies and gains more stats when fully evolved.`,
+    esp: "",
+    fra: ""
   },
   [Synergy.FIELD]: {
     eng: `When a field pokemon dies, all the other field pokemons are healed and gain ${Stat.ATK_SPEED}`,

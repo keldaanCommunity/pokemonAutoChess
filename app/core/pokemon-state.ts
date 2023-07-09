@@ -120,9 +120,9 @@ export default class PokemonState {
     } else if (pokemon.status.protect) {
       death = false
       takenDamage = 0
-    } else if(pokemon.items.has(Item.SHINY_CHARM) && chance(0.15)){  
+    } else if (pokemon.items.has(Item.SHINY_CHARM) && chance(0.15)) {
       death = false
-      takenDamage = 0    
+      takenDamage = 0
       pokemon.status.triggerProtect(1000)
     } else {
       let reducedDamage = damage
@@ -501,11 +501,14 @@ export default class PokemonState {
           : pokemon.effects.includes(Effect.GROWTH)
           ? 10
           : 5
-          if(pokemon.effects.includes(Effect.HYDRATATION) && pokemon.simulation.weather === Weather.RAIN){
-            heal += 5
-          }
-          pokemon.handleHeal(heal, pokemon, 0)
-          pokemon.grassHealCooldown = 1000
+        if (
+          pokemon.effects.includes(Effect.HYDRATATION) &&
+          pokemon.simulation.weather === Weather.RAIN
+        ) {
+          heal += 5
+        }
+        pokemon.handleHeal(heal, pokemon, 0)
+        pokemon.grassHealCooldown = 1000
       } else {
         pokemon.grassHealCooldown = pokemon.grassHealCooldown - dt
       }
@@ -597,12 +600,7 @@ export default class PokemonState {
         value.team !== pokemon.team &&
         value.isTargettable
       ) {
-        const distance = distanceC(
-          pokemon.positionX,
-          pokemon.positionY,
-          x,
-          y
-        )
+        const distance = distanceC(pokemon.positionX, pokemon.positionY, x, y)
         pokemons.push({ distance, x, y })
       }
     })
@@ -666,10 +664,15 @@ export default class PokemonState {
     }>()
 
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
-      if (value !== undefined && value.team !== pokemon.team && value.isTargettable) {
+      if (
+        value !== undefined &&
+        value.team !== pokemon.team &&
+        value.isTargettable
+      ) {
         candidateCells.push(
-          ...board.getAdjacentCells(x, y)
-            .filter(cell => board.getValue(cell.x, cell.y) === undefined)
+          ...board
+            .getAdjacentCells(x, y)
+            .filter((cell) => board.getValue(cell.x, cell.y) === undefined)
             .map((cell) => ({
               x: cell.x,
               y: cell.y,
