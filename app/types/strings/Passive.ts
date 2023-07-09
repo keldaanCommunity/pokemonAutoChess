@@ -38,5 +38,6 @@ export const PassiveDescription: { [key in Passive]: string } = {
   [Passive.HYDRATATION]: `${Synergy.GRASS} synergy is healing 5 additional ${Stat.HP} per second under the ${Weather.RAIN}`,
   [Passive.SHARED_VISION]: `Shared vision: all Pokemon with shared vision will attack the same target, if at range`,
   [Passive.WATER_SPRING]: `Whenever an enemy uses their ability, gain 5 ${Stat.MANA}`,
-  [Passive.MAGIKARP]: `9 Magikarp evolve in Gyriados`
+  [Passive.MAGIKARP]: `9 Magikarp evolve in Gyriados`,
+  [Passive.GIRATINA]: `Giratina switches between its Altered Forme and Origin Forme depending on its position on the board`
 }

@@ -28,6 +28,7 @@ patch announcement
 - Buff Crabhammer: 30/60/120 → 40/80/120 damage ; 3x more chance to crit if reaper cloth ; deals true damage when execute
 - Nerf Castform-Hail: 5→2 def/spedef gained per cast
 - Nerf Cubone line mana: 60 → 80
+- Giratina can now can switch between forms depending on its position on the board
 
 # Changes to Synergies
 
