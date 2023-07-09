@@ -29,6 +29,10 @@ patch announcement
 - Nerf Castform-Hail: 5→2 def/spedef gained per cast
 - Nerf Cubone line mana: 60 → 80
 - Giratina can now can switch between forms depending on its position on the board
+- Diglett: Ground/Rock → Ground/Normal
+- Cubone: Ground/Rock → Ground/Ghost
+- Oshawott: Water/Monster/Fighting → Water/Field/Fighting
+- Suicune: Water/Ice → Water/Ice/Field
 
 # Changes to Synergies
 

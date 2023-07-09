@@ -1474,7 +1474,7 @@ export class Oshawott extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.OSHAWOTT,
-      [Synergy.WATER, Synergy.MONSTER, Synergy.FIGHTING],
+      [Synergy.WATER, Synergy.FIELD, Synergy.FIGHTING],
       Rarity.EPIC,
       Pkm.DEWOTT,
       90,
@@ -1497,7 +1497,7 @@ export class Dewott extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.DEWOTT,
-      [Synergy.WATER, Synergy.MONSTER, Synergy.FIGHTING],
+      [Synergy.WATER, Synergy.FIELD, Synergy.FIGHTING],
       Rarity.EPIC,
       Pkm.SAMUROTT,
       150,
@@ -1520,7 +1520,7 @@ export class Samurott extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.SAMUROTT,
-      [Synergy.WATER, Synergy.MONSTER, Synergy.FIGHTING],
+      [Synergy.WATER, Synergy.FIELD, Synergy.FIGHTING],
       Rarity.EPIC,
       Pkm.DEFAULT,
       260,
@@ -2471,7 +2471,7 @@ export class Cubone extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.CUBONE,
-      [Synergy.GROUND, Synergy.ROCK],
+      [Synergy.GROUND, Synergy.GHOST],
       Rarity.EPIC,
       Pkm.MAROWAK,
       100,
@@ -2494,7 +2494,7 @@ export class Marowak extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.MAROWAK,
-      [Synergy.GROUND, Synergy.ROCK],
+      [Synergy.GROUND, Synergy.GHOST],
       Rarity.EPIC,
       Pkm.ALOLAN_MAROWAK,
       180,
@@ -6019,7 +6019,7 @@ export class Gyarados extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.GYARADOS,
-      [Synergy.WATER, Synergy.FLYING],
+      [Synergy.DRAGON, Synergy.WATER, Synergy.FLYING],
       Rarity.SPECIAL,
       Pkm.DEFAULT,
       300,
@@ -6525,7 +6525,7 @@ export class Suicune extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.SUICUNE,
-      [Synergy.WATER, Synergy.ICE],
+      [Synergy.WATER, Synergy.ICE, Synergy.FIELD],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       300,
@@ -12567,7 +12567,7 @@ export class Diglett extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.DIGLETT,
-      [Synergy.GROUND, Synergy.ROCK],
+      [Synergy.GROUND, Synergy.NORMAL],
       Rarity.UNCOMMON,
       Pkm.DUGTRIO,
       75,
@@ -12591,7 +12591,7 @@ export class Dugtrio extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.DUGTRIO,
-      [Synergy.GROUND, Synergy.ROCK],
+      [Synergy.GROUND, Synergy.NORMAL],
       Rarity.UNCOMMON,
       Pkm.DEFAULT,
       160,
