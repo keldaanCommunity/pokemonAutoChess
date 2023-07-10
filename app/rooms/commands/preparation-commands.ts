@@ -223,7 +223,10 @@ export class OnRoomNameCommand extends Command<
 > {
   execute({ client, message }) {
     try {
-      if (client.auth.uid == this.state.ownerId && this.state.name != message) {
+      if (
+        client.auth?.uid == this.state.ownerId &&
+        this.state.name != message
+      ) {
         this.room.setName(message)
         this.state.name = message
       }
@@ -243,7 +246,7 @@ export class OnRoomPasswordCommand extends Command<
   execute({ client, message: password }) {
     try {
       if (
-        client.auth.uid == this.state.ownerId &&
+        client.auth?.uid == this.state.ownerId &&
         this.state.password != password
       ) {
         this.room.setPassword(password)
@@ -264,7 +267,10 @@ export class OnToggleEloCommand extends Command<
 > {
   execute({ client, message: noElo }) {
     try {
-      if (client.auth.uid === this.state.ownerId && this.state.noElo != noElo) {
+      if (
+        client.auth?.uid === this.state.ownerId &&
+        this.state.noElo != noElo
+      ) {
         this.state.noElo = noElo
         this.room.toggleElo(noElo)
         this.room.broadcast(Transfer.MESSAGES, {
@@ -291,11 +297,13 @@ export class OnKickPlayerCommand extends Command<
 > {
   execute({ client, message: userId }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
-      if (client.auth.uid === this.state.ownerId
-        || (user && [Role.ADMIN, Role.MODERATOR].includes(user.role))) {
+      const user = this.state.users.get(client.auth?.uid)
+      if (
+        client.auth?.uid === this.state.ownerId ||
+        (user && [Role.ADMIN, Role.MODERATOR].includes(user.role))
+      ) {
         this.room.clients.forEach((cli) => {
-          if (cli.auth.uid === userId && this.state.users.has(userId)) {
+          if (cli.auth?.uid === userId && this.state.users.has(userId)) {
             const user = this.state.users.get(userId)!
             if (user.role === Role.BASIC) {
               this.room.broadcast(Transfer.MESSAGES, {
@@ -331,9 +339,9 @@ export class OnDeleteRoomCommand extends Command<
 > {
   execute({ client }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
-      if (user && [Role.ADMIN, Role.MODERATOR].includes(user.role)) {        
-        this.room.clients.forEach(cli => {
+      const user = this.state.users.get(client.auth?.uid)
+      if (user && [Role.ADMIN, Role.MODERATOR].includes(user.role)) {
+        this.room.clients.forEach((cli) => {
           cli.send(Transfer.KICK)
           cli.leave()
         })
@@ -355,7 +363,7 @@ export class OnLeaveCommand extends Command<
   execute({ client, consented }) {
     try {
       if (client.auth?.uid) {
-        const user = this.state.users.get(client.auth.uid)
+        const user = this.state.users.get(client.auth?.uid)
         if (user) {
           this.room.broadcast(Transfer.MESSAGES, {
             name: "Server",
@@ -397,7 +405,7 @@ export class OnToggleReadyCommand extends Command<
   execute({ client }) {
     try {
       // logger.debug(this.state.users.get(client.auth.uid).ready);
-      if (client.auth.uid && this.state.users.has(client.auth.uid)) {
+      if (client.auth?.uid && this.state.users.has(client.auth.uid)) {
         const user = this.state.users.get(client.auth.uid)!
         user.ready = !user.ready
       }
@@ -622,7 +630,7 @@ export class OnListBotsCommand extends Command<PreparationRoom> {
           }
 
           this.room.clients.forEach((client) => {
-            if (client.auth.uid === this.state.ownerId) {
+            if (client.auth?.uid === this.state.ownerId) {
               client.send(Transfer.REQUEST_BOT_LIST, bots)
             }
           })
