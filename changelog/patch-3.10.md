@@ -37,12 +37,14 @@ patch announcement
 - Oshawott: Water/Monster/Fighting → Water/Field/Fighting
 - Suicune: Water/Ice → Water/Ice/Field
 - Nerf Litwick: Attack 5 -> 4 Lampent 9 -> 8
+- Diamond Storm ability rework: Deals 200% (scales) of current Defense as special damage to surrounding enemies
 
 # Changes to Synergies
 
 - Dragon rework: Dragon amplify synergies and gains more stats when fully evolved.
 - Water dodge chance: 25/50/75 → 30/50/70
-- Water rework: A new water pokemon is fished after each PvP turn and put on your bench.
+- Water rework: A new water pokemon is fished after each PvP turn and put on your bench
+- Rock rework: Rock pokemons gain Defense and better resist to critical damage
 
 # Changes to Items
 

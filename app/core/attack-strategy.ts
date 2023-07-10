@@ -692,17 +692,17 @@ export class DiamondStormStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let buff = 3
-    if (pokemon.stars === 2) {
-      buff = 6
-    } else if (pokemon.stars === 3) {
-      buff = 9
-    }
+    const damage = Math.round(2 * pokemon.def * (1 + pokemon.ap / 100))
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
-    pokemon.addDefense(buff, true)
     cells.forEach((cell) => {
-      if (cell.value && cell.value.team === pokemon.team) {
-        cell.value.addDefense(buff, true)
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
       }
     })
   }

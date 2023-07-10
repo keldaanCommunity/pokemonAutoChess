@@ -864,21 +864,21 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.BATTLE_ARMOR:
           if (types.includes(Synergy.ROCK)) {
-            pokemon.handleShield(40, pokemon)
+            pokemon.addDefense(5)
             pokemon.effects.push(Effect.BATTLE_ARMOR)
           }
           break
 
         case Effect.MOUTAIN_RESISTANCE:
           if (types.includes(Synergy.ROCK)) {
-            pokemon.handleShield(80, pokemon)
+            pokemon.addDefense(10)
             pokemon.effects.push(Effect.MOUTAIN_RESISTANCE)
           }
           break
 
         case Effect.DIAMOND_STORM:
           if (types.includes(Synergy.ROCK)) {
-            pokemon.handleShield(160, pokemon)
+            pokemon.addDefense(20)
             pokemon.effects.push(Effect.DIAMOND_STORM)
           }
           break

@@ -241,7 +241,7 @@ export const SynergyDescription: {
     fra: ""
   },
   [Synergy.ROCK]: {
-    eng: `Rock pokemons gain ${Stat.SHIELD} at the start of the combat`,
+    eng: `Rock pokemons gain ${Stat.DEF} and better resist to critical damage`,
     esp: "",
     fra: ""
   },

@@ -1478,7 +1478,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   DIAMOND_STORM: {
-    eng: `+[3,6,9,SP] ${Stat.DEF} to adjacent allies`,
+    eng: `Deals [200,SP]% of current ${Stat.DEF} as special damage to surrounding enemies`,
     esp: ``,
     prt: ``,
     fra: ``
