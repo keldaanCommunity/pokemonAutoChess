@@ -72,6 +72,10 @@ export type PrecomputedTypePokemonAll = {
   [key in Synergy]: Pkm[]
 }
 
+export type PrecomputedAbility = {
+  [key in Ability]: Pkm[]
+}
+
 export type Langage = {
   eng: string
   esp: string
