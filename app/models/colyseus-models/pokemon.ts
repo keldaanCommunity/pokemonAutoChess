@@ -106,6 +106,7 @@ export class Pokemon extends Schema implements IPokemon {
     )
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   onChangePosition(x: number, y: number, player: Player) {}
 }
 
