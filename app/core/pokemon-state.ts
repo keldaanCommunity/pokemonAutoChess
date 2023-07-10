@@ -145,10 +145,6 @@ export default class PokemonState {
         damage = Math.ceil(damage * 1.2)
       }
 
-      if (attacker && attacker.items.has(Item.FIRE_GEM)) {
-        damage = Math.ceil(damage + pokemon.hp * 0.1)
-      }
-
       if (
         pokemon.simulation.weather === Weather.MISTY &&
         attackType === AttackType.SPECIAL
