@@ -37,6 +37,7 @@ patch announcement
 - Oshawott: Water/Monster/Fighting → Water/Field/Fighting
 - Suicune: Water/Ice → Water/Ice/Field
 - Nerf Litwick: Attack 5 -> 4 Lampent 9 -> 8
+- Diamond Storm ability rework: Deals 200% (scales) of current Defense as special damage to surrounding enemies
 
 # Changes to Synergies
 
