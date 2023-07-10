@@ -28,6 +28,7 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") grassField = false
   @type("boolean") fairyField = false
   @type("boolean") spikeArmor = false
+  @type("boolean") magicBounce = false
   magmaStorm = false
   soulDew = false
   deltaOrb = false
@@ -51,6 +52,7 @@ export default class Status extends Schema implements IStatus {
   armorReductionCooldown = 0
   runeProtectCooldown = 0
   spikeArmorCooldown = 0
+  magicBounceCooldown = 0
   synchroCooldown = 3000
   magmaStormCooldown = 0
   synchro = false
@@ -119,6 +121,10 @@ export default class Status extends Schema implements IStatus {
 
     if (this.spikeArmor) {
       this.updateSpikeArmor(dt)
+    }
+
+    if (this.magicBounce) {
+      this.updateMagicBounce(dt)
     }
 
     if (this.synchro) {
@@ -524,6 +530,19 @@ export default class Status extends Schema implements IStatus {
       this.spikeArmor = false
     } else {
       this.spikeArmorCooldown = this.spikeArmorCooldown - dt
+    }
+  }
+
+  triggerMagicBounce(timer: number) {
+    this.magicBounce = true
+    this.magicBounceCooldown = timer
+  }
+
+  updateMagicBounce(dt: number) {
+    if (this.magicBounceCooldown - dt <= 0) {
+      this.magicBounce = false
+    } else {
+      this.magicBounceCooldown = this.magicBounceCooldown - dt
     }
   }
 

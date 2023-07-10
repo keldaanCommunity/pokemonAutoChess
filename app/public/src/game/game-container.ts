@@ -255,7 +255,8 @@ class GameContainer {
         "soulDew",
         "spikeArmor",
         "synchro",
-        "wound"
+        "wound",
+        "magicBounce"
       ]
 
       fields.forEach((field) => {
@@ -369,7 +370,8 @@ class GameContainer {
         "soulDew",
         "spikeArmor",
         "synchro",
-        "wound"
+        "wound",
+        "magicBounce"
       ]
 
       fields.forEach((field) => {
@@ -541,7 +543,7 @@ class GameContainer {
   handlePokemonStatusChange(
     playerId: string,
     pokemon: IPokemonEntity,
-    field: string
+    field: NonFunctionPropNames<Status>
   ) {
     // logger.debug('simulation change' + change.field);
     if (this.game && this.game.scene && this.game.scene.getScene("gameScene")) {

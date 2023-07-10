@@ -391,6 +391,11 @@ export default class LoadingManager {
       "/assets/attacks"
     )
     scene.load.multiatlas(
+      "MAGIC_BOUNCE",
+      "/assets/attacks/MAGIC_BOUNCE.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
       "FAKE_TEARS",
       "/assets/attacks/FAKE_TEARS.json",
       "/assets/attacks"

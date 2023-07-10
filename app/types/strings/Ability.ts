@@ -999,6 +999,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.MAGIC_BOUNCE]: {
+    eng: "Magic Bounce",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1998,6 +2004,12 @@ Snow: also gives [2,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
   },
   [Ability.LINK_CABLE]: {
     eng: `Dash into a new spot, then triggers an electric arc between Plusle and Minun that deals [50,SP] ${Damage.SPECIAL}. If Plusle or Minun are alone, deals this damage to adjacent enemies instead.`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.MAGIC_BOUNCE]: {
+    eng: `For [3,6,12] seconds, whenever this pokemon is hit by an ability, the caster is ${Status.SILENCE} for 4 seconds and take ${Damage.SPECIAL} equal to this pokemon current ${Stat.SPE_DEF}`,
     esp: "",
     prt: "",
     fra: ""

@@ -97,6 +97,17 @@ export class AttackStrategy {
     if (crit) {
       pokemon.onCritical(target, board)
     }
+
+    if (target.status.magicBounce) {
+      pokemon.status.triggerSilence(4000, pokemon, target, board)
+      pokemon.handleSpecialDamage(
+        target.speDef,
+        board,
+        AttackType.SPECIAL,
+        target,
+        false
+      )
+    }
   }
 }
 
@@ -4945,5 +4956,20 @@ export class LinkCableStrategy extends AttackStrategy {
         })
       }
     }, 300)
+  }
+}
+
+export class MagicBounceStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const timer =
+      pokemon.stars === 3 ? 12000 : pokemon.stars === 2 ? 6000 : 3000
+    pokemon.status.triggerMagicBounce(timer)
   }
 }

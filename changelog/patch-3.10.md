@@ -12,6 +12,9 @@ patch announcement
 
 # New Pokemons:
 
+- Pinsir
+- Natu, Xatu
+
 # Changes to Pokemon / Abilities
 
 - Nerf Gible line stats
