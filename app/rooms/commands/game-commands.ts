@@ -166,7 +166,7 @@ export class OnPokemonPropositionCommand extends Command<
         }
       })
 
-      let freeCellsOnBench: number[] = []
+      const freeCellsOnBench: number[] = []
       for (let i = 0; i < 8; i++) {
         if (this.room.isPositionEmpty(playerId, i, 0)) {
           freeCellsOnBench.push(i)
@@ -175,8 +175,13 @@ export class OnPokemonPropositionCommand extends Command<
 
       const pokemonsObtained: Pokemon[] = (
         pkm in PkmDuos ? PkmDuos[pkm] : [pkm]
-      ).map((p) => PokemonFactory.createPokemonFromName(p))
-      let hasSpaceOnBench = freeCellsOnBench.length >= pokemonsObtained.length
+      ).map((p) =>
+        PokemonFactory.createPokemonFromName(
+          p,
+          player.pokemonCollection.get(PkmIndex[p])
+        )
+      )
+      const hasSpaceOnBench = freeCellsOnBench.length >= pokemonsObtained.length
 
       if (allowBuy && hasSpaceOnBench) {
         pokemonsObtained.forEach((pokemon) => {
