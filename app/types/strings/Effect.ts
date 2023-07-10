@@ -408,17 +408,17 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.BATTLE_ARMOR]: {
-    eng: `Gain 40 ${Stat.SHIELD}`,
+    eng: `Gain 5 ${Stat.DEF}, receive -30% critical damage`,
     esp: ``,
     fra: ``
   },
   [Effect.MOUTAIN_RESISTANCE]: {
-    eng: `Gain 80 ${Stat.SHIELD}`,
+    eng: `Gain 10 ${Stat.DEF}, receive -50% critical damage`,
     esp: ``,
     fra: ``
   },
   [Effect.DIAMOND_STORM]: {
-    eng: `Gain 160 ${Stat.SHIELD}`,
+    eng: `Gain 20 ${Stat.DEF}, receive -70% critical damage`,
     esp: ``,
     fra: ``
   },
