@@ -48,7 +48,7 @@ Child-Of-Hades	CHILD_OF_HADES	https://www.deviantart.com/child-of-hades
 smartini	<@!136476806055198720>	smartini#1851
 JemDragons	<@!408301000445788180>	https://twitter.com/JemDragons?s=09
 Sunny	<@!273341077874802689>	https://twitter.com/temporalsunrise
-Deleca7755	<@!273958644788363265>	Deleca7755#2927
+Deleca7755	<@!273958644788363265>	https://badylird.com/
 Atwer	<@!371674727183286272>	
 chime	<@!183561486893842432>	<@!183561486893842432>
 RibbonDove	<@!739154982044958801>	https://twitter.com/ribbondove
@@ -205,3 +205,5 @@ VersuS/CelestialDrago	<@!305445863235518464>
 Chesyon	<@!178935491867967490>	https://twitter.com/chesyon
 3P1C	<@!169247379453640706>	
 Dutch-Spaniard	<@!529381471107022856>	
+	<@!833717817445974046>	
+SingingMudkip	<@!220580080194289664>	

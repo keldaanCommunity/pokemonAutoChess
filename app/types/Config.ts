@@ -303,7 +303,8 @@ export const Mythical1Shop = new Array<PkmProposition>(
   Pkm.SOLROCK,
   Pkm.MILTANK,
   Pkm.MARACTUS,
-  PkmDuo.PLUSLE_MINUN
+  PkmDuo.PLUSLE_MINUN,
+  Pkm.PINSIR
 )
 
 export const Mythical2Shop = new Array<PkmProposition>(
