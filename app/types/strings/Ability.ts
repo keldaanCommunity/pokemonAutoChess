@@ -1190,7 +1190,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.WHEEL_OF_FIRE]: {
-    eng: `Sends a fire wheel that makes a round trip doing [20,40,80,SP] ${Damage.SPECIAL}.`,
+    eng: `Sends a fire wheel that makes a round trip doing [20,40,80,SP] ${Damage.SPECIAL}`,
     esp: `Envía una rueda de fuego que hace un viaje de ida y vuelta haciendo 30,40,50 de daño especial.`,
     fra: `Envoie une boule de feu faisant un aller retour, endommageant les pokémons pour 30,40,50 dégats spéciaux`,
     prt: ``

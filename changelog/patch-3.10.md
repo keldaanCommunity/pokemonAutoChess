@@ -56,7 +56,7 @@ patch announcement
 
 # UI
 
--
+- Add Ability list in the wiki
 
 # Misc
 
