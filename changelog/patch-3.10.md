@@ -43,6 +43,10 @@ patch announcement
 # Changes to Items
 
 - Upgrade: 5% → 4% AS per stack
+- Reaper Cloth: Critical hit chance 15% -> 20% Ability power 15% -> 20%
+- Red Orb: Attack 10 -> 8
+- Star Dust: Shield 50% -> 60%
+- Flame Orb: Remove Wound counterpart
 
 # Bugfix
 

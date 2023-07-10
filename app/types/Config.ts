@@ -722,7 +722,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.CHOICE_SPECS]: { [Stat.AP]: 100 },
   [Item.SOUL_DEW]: { [Stat.AP]: 10, [Stat.MANA]: 15 },
   [Item.UPGRADE]: { [Stat.AP]: 10, [Stat.ATK_SPEED]: 10 },
-  [Item.REAPER_CLOTH]: { [Stat.AP]: 15, [Stat.CRIT_CHANCE]: 15 },
+  [Item.REAPER_CLOTH]: { [Stat.AP]: 20, [Stat.CRIT_CHANCE]: 20 },
   [Item.POKEMONOMICON]: { [Stat.AP]: 10, [Stat.SHIELD]: 15 },
   [Item.POWER_LENS]: { [Stat.AP]: 10, [Stat.SPE_DEF]: 1 },
   [Item.SHELL_BELL]: { [Stat.AP]: 10, [Stat.ATK]: 1 },
@@ -756,7 +756,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.ASSAULT_VEST]: { [Stat.SPE_DEF]: 18 },
   [Item.AMULET_COIN]: { [Stat.SPE_DEF]: 1, [Stat.ATK]: 1 },
   [Item.POKE_DOLL]: { [Stat.SPE_DEF]: 1, [Stat.DEF]: 1 },
-  [Item.RED_ORB]: { [Stat.ATK]: 10 },
+  [Item.RED_ORB]: { [Stat.ATK]: 8 },
   [Item.MAX_REVIVE]: { [Stat.ATK]: 1, [Stat.DEF]: 1 },
   [Item.ROCKY_HELMET]: { [Stat.DEF]: 12 }
 }

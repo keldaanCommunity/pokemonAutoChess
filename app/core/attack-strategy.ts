@@ -90,7 +90,7 @@ export class AttackStrategy {
     }
 
     if (pokemon.items.has(Item.STAR_DUST)) {
-      pokemon.handleShield(Math.round(0.5 * pokemon.maxMana), pokemon, false)
+      pokemon.handleShield(Math.round(0.6 * pokemon.maxMana), pokemon, false)
       pokemon.count.starDustCount++
     }
 
@@ -660,8 +660,8 @@ export class CrabHammerStrategy extends AttackStrategy {
     } else if (pokemon.stars == 3) {
       damage = 120
     }
-    if(pokemon.items.has(Item.REAPER_CLOTH)){
-      crit = chance(3 * pokemon.critChance / 100)
+    if (pokemon.items.has(Item.REAPER_CLOTH)) {
+      crit = chance((3 * pokemon.critChance) / 100)
     }
     let attackType = AttackType.SPECIAL
     if (target.life / target.hp < 0.3) {
@@ -1983,7 +1983,11 @@ export class SpikeArmorStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const duration =
-      pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL ? 10000 : pokemon.stars === 2 ? 5000 : 3000
+      pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL
+        ? 10000
+        : pokemon.stars === 2
+        ? 5000
+        : 3000
     pokemon.status.triggerSpikeArmor(duration)
   }
 }
@@ -4870,7 +4874,10 @@ export class LinkCableStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const farthestTargetCoordinate = state.getFarthestTargetCoordinate(pokemon, board)
+    const farthestTargetCoordinate = state.getFarthestTargetCoordinate(
+      pokemon,
+      board
+    )
     const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(
       pokemon,
       board
@@ -4883,10 +4890,12 @@ export class LinkCableStrategy extends AttackStrategy {
     }
 
     pokemon.simulation.room.clock.setTimeout(() => {
-      if(pokemon.life <= 0) return;
+      if (pokemon.life <= 0) return
       const partner = board.find(
         (x, y, entity) =>
-          entity.skill === Ability.LINK_CABLE && entity.id !== pokemon.id && entity.team === pokemon.team
+          entity.skill === Ability.LINK_CABLE &&
+          entity.id !== pokemon.id &&
+          entity.team === pokemon.team
       )
       if (partner) {
         const damage = 50
@@ -4899,7 +4908,7 @@ export class LinkCableStrategy extends AttackStrategy {
               pokemon,
               crit
             )
-          }        
+          }
         })
         pokemon.simulation.room.broadcast(Transfer.ABILITY, {
           id: pokemon.simulation.id,
@@ -4911,7 +4920,10 @@ export class LinkCableStrategy extends AttackStrategy {
         })
       } else {
         const damage = 50
-        const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+        const cells = board.getAdjacentCells(
+          pokemon.positionX,
+          pokemon.positionY
+        )
         cells.forEach((cell) => {
           if (cell.value && cell.value.team !== pokemon.team) {
             cell.value.handleSpecialDamage(

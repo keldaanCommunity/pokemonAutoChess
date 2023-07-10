@@ -544,8 +544,6 @@ export default class Simulation extends Schema implements ISimulation {
             pokemon as PokemonEntity,
             this.board
           )
-          pokemon.status.wound = true
-          pokemon.status.woundCooldown = 60000
         }
       })
     })

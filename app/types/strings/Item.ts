@@ -89,7 +89,7 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
   [Item.AQUA_EGG]: `The holder gains +50 starting ${Stat.MANA} and regains 20 ${Stat.MANA} after casting its ability`,
   [Item.BLUE_ORB]: `Every third attack from the holder unleashes a chain lightning that bounces to 2 enemies, burning 20 ${Stat.MANA}`,
   [Item.SCOPE_LENS]: `Gains 25% ${Stat.CRIT_CHANCE}. Critical hits steal 15 ${Stat.MANA} from the target.`,
-  [Item.STAR_DUST]: `After casting ability, gain 50% of max ${Stat.MANA} as ${Stat.SHIELD}`,
+  [Item.STAR_DUST]: `After casting ability, gain 60% of max ${Stat.MANA} as ${Stat.SHIELD}`,
   [Item.DELTA_ORB]: `Holder and adjacent allies in the same row gain 4 bonus ${Stat.MANA} per hit`,
   [Item.MANA_SCARF]: `The holder attacks restore 8 additional ${Stat.MANA}`,
   [Item.SMOKE_BALL]: `Enemies attacking the holder are ${Status.PARALYSIS} for 5 seconds, reducing their ${Stat.ATK_SPEED} by 40%`,
@@ -109,12 +109,12 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
   [Item.ORAN_BERRY]: `+150 ${Stat.SHIELD} when combat begins`,
   [Item.SHINY_CHARM]: `Give 15% chance to avoid incoming damage and trigger ${Status.PROTECT} for 1 second`,
   [Item.GRACIDEA_FLOWER]: `When combat begins, the holder and adjacent allies in the same row gain +30% ${Stat.ATK_SPEED}`,
-  [Item.FLAME_ORB]: `Holder is burned and cannot heal during the fight, but increase its ${Stat.ATK} by 100%`,
+  [Item.FLAME_ORB]: `Holder is burned but increase its ${Stat.ATK} by 100%`,
   [Item.ASSAULT_VEST]: `+18 ${Stat.SPE_DEF}`,
   [Item.AMULET_COIN]:
     "+1 gold each time the holder knocks down an opponent (max 5 gold per stage)",
   [Item.POKE_DOLL]: "Reduce all incoming damage by 30%",
-  [Item.RED_ORB]: `+10 ${Stat.ATK}. Each attack of the holder deals 20% additional ${Damage.TRUE}`,
+  [Item.RED_ORB]: `+8 ${Stat.ATK}. Each attack of the holder deals 20% additional ${Damage.TRUE}`,
   [Item.MAX_REVIVE]: `Give ${Status.RESURECTION}, preventing the holder first KO and restoring to max ${Stat.HP}`,
   [Item.ROCKY_HELMET]: `+12 ${Stat.DEF}. Negates critical bonus damage from incoming critical hits.`
 })
