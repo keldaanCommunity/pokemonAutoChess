@@ -33,6 +33,7 @@ patch announcement
 - Cubone: Ground/Rock → Ground/Ghost
 - Oshawott: Water/Monster/Fighting → Water/Field/Fighting
 - Suicune: Water/Ice → Water/Ice/Field
+- Nerf Litwick: Attack 5 -> 4 Lampent 9 -> 8
 
 # Changes to Synergies
 
