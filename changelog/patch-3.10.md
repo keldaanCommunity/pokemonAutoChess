@@ -47,6 +47,7 @@ patch announcement
 # Bugfix
 
 - fix duration of Maractus ability
+- do not count Castform synergies for getting the dominant synergy
 
 # UI
 
