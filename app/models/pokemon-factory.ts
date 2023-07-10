@@ -329,6 +329,7 @@ import {
   Mudkip,
   Muk,
   Munchlax,
+  Natu,
   Nidoking,
   Nidoqueen,
   NidoranF,
@@ -581,6 +582,7 @@ import {
   Wobbuffet,
   Wurmple,
   Wynaut,
+  Xatu,
   Xerneas,
   Yveltal,
   Zapdos,
@@ -1962,6 +1964,10 @@ export default class PokemonFactory {
         return new Minun(s, e)
       case Pkm.PINSIR:
         return new Pinisir(s, e)
+      case Pkm.NATU:
+        return new Natu(s, e)
+      case Pkm.XATU:
+        return new Xatu(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:

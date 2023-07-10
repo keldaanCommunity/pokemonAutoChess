@@ -9840,6 +9840,53 @@ export class Gourgeist extends Pokemon {
   }
 }
 
+export class Natu extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.NATU,
+      [Synergy.PSYCHIC, Synergy.FLYING],
+      Rarity.UNCOMMON,
+      Pkm.XATU,
+      90,
+      5,
+      2,
+      2,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      1,
+      70,
+      Ability.MAGIC_BOUNCE,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+export class Xatu extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.XATU,
+      [Synergy.PSYCHIC, Synergy.FLYING],
+      Rarity.UNCOMMON,
+      Pkm.DEFAULT,
+      180,
+      12,
+      3,
+      3,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      2,
+      70,
+      Ability.MAGIC_BOUNCE,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
 export class Noibat extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(

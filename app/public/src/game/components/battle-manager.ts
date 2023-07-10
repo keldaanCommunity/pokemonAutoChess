@@ -25,6 +25,7 @@ import {
   OrientationArray
 } from "../../../../utils/orientation"
 import { distanceE } from "../../../../utils/distance"
+import Status from "../../../../models/colyseus-models/status"
 
 export default class BattleManager {
   group: GameObjects.Group
@@ -116,7 +117,11 @@ export default class BattleManager {
     }
   }
 
-  changeStatus(playerId: string, pokemon: IPokemonEntity, field: string) {
+  changeStatus(
+    playerId: string,
+    pokemon: IPokemonEntity,
+    field: NonFunctionPropNames<Status>
+  ) {
     if (this.player.id == playerId && this.group) {
       const children = this.group.getChildren()
       for (let i = 0; i < children.length; i++) {
@@ -208,6 +213,12 @@ export default class BattleManager {
               pkm.addSpikeArmor()
             } else {
               pkm.removeSpikeArmor()
+            }
+          } else if (field == "magicBounce") {
+            if (pokemon.status.magicBounce) {
+              pkm.addMagicBounce()
+            } else {
+              pkm.removeMagicBounce()
             }
           } else if (field == "electricField") {
             if (pokemon.status.electricField) {
@@ -3441,7 +3452,8 @@ export default class BattleManager {
               Math.atan2(
                 coordinatesTarget[1] - coordinates[1],
                 coordinatesTarget[0] - coordinates[0]
-              ) - Math.PI/2
+              ) -
+                Math.PI / 2
             )
             specialProjectile.anims.play(Ability.LINK_CABLE)
             specialProjectile.once(
