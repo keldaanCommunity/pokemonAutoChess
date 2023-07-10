@@ -139,13 +139,13 @@ export default class Shop {
       .map(([synergy, value]) => synergy)
 
     const mythicalsTopSynergy = mythicals.filter((m) => {
-      let pkm: Pkm = m in PkmDuos ? PkmDuos[m][0] : m
+      const pkm: Pkm = m in PkmDuos ? PkmDuos[m][0] : m
       return PokemonFactory.createPokemonFromName(pkm).types.some((t) =>
         top2Synergies.includes(t)
       )
     })
     const mythicalsCommonSynergy = mythicals.filter((m) => {
-      let pkm: Pkm = m in PkmDuos ? PkmDuos[m][0] : m
+      const pkm: Pkm = m in PkmDuos ? PkmDuos[m][0] : m
       return PokemonFactory.createPokemonFromName(pkm).types.some((t) =>
         synergies.includes(t)
       )
@@ -272,7 +272,7 @@ export default class Shop {
       }
     })
 
-    for (let rarity in rarityProbability) {
+    for (const rarity in rarityProbability) {
       threshold += rarityProbability[rarity]
       if (rarity_seed < threshold) {
         switch (rarity) {

@@ -6428,6 +6428,30 @@ export class Moltres extends Pokemon {
   }
 }
 
+export class Pinisir extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.PINSIR,
+      [Synergy.BUG, Synergy.HUMAN],
+      Rarity.MYTHICAL,
+      Pkm.DEFAULT,
+      180,
+      22,
+      3,
+      3,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      1,
+      85,
+      Ability.GUILLOTINE,
+      shiny,
+      emotion,
+      true,
+      false
+    )
+  }
+}
+
 export class Articuno extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
