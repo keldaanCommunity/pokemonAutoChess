@@ -90,7 +90,12 @@ export const SynergyEffects: { [key in Synergy]: Effect[] } = Object.freeze({
     Effect.FAIRY_WIND,
     Effect.STRANGE_STEAM
   ],
-  [Synergy.ICE]: [Effect.FROSTY, Effect.SHEER_COLD],
+  [Synergy.ICE]: [
+    Effect.CHILLY,
+    Effect.FROSTY,
+    Effect.FREEZING,
+    Effect.SHEER_COLD
+  ],
   [Synergy.FOSSIL]: [
     Effect.ANCIENT_POWER,
     Effect.ELDER_POWER,
