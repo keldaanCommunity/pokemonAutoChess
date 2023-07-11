@@ -272,8 +272,8 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  addLife(value: number){
-    this.life = min(0)(this.life + value)
+  addMaxHP(value: number) {
+    this.hp = min(1)(this.hp + value)
   }
 
   addDodgeChance(value: number) {
@@ -639,25 +639,20 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       const isPowerTrip = this.effects.includes(Effect.POWER_TRIP)
 
       if (isPursuit || isBrutalSwing || isPowerTrip) {
-        let defBoost = 0
-        let healBoost = 0
+        let lifeBoost = 0
         let attackBoost = 0
         if (isPursuit) {
-          defBoost = 2
-          healBoost = 30
+          lifeBoost = 30
           attackBoost = 3
         } else if (isBrutalSwing) {
-          defBoost = 4
-          healBoost = 60
+          lifeBoost = 60
           attackBoost = 6
         } else if (isPowerTrip) {
-          defBoost = 6
-          healBoost = 90
+          lifeBoost = 90
           attackBoost = 9
         }
-        this.addSpecialDefense(defBoost)
-        this.addDefense(defBoost)
-        this.handleHeal(healBoost, this, 0)
+        this.addMaxHP(lifeBoost)
+        this.handleHeal(lifeBoost, this, 0)
         this.addAttack(attackBoost)
         this.count.monsterExecutionCount++
       }

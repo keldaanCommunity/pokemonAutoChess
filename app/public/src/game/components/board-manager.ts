@@ -156,7 +156,10 @@ export default class BoardManager {
       if (pointer.rightButtonDown()) {
         this.playerAvatar.toggleEmoteMenu()
       } else {
-        this.animationManager.play(this.playerAvatar, AnimationConfig[this.playerAvatar.name].emote)
+        this.animationManager.play(
+          this.playerAvatar,
+          AnimationConfig[this.playerAvatar.name].emote
+        )
       }
     })
     this.animationManager.animatePokemon(

@@ -308,17 +308,17 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.PURSUIT]: {
-    eng: `When knocking down its target, grants 2 ${Stat.DEF}, 2 ${Stat.SPE_DEF}, 3 ${Stat.ATK} and heal 30 ${Stat.HP}`,
+    eng: `When knocking down its target, gain 3 ${Stat.ATK} and 30 max ${Stat.HP}`,
     esp: ``,
     fra: ``
   },
   [Effect.BRUTAL_SWING]: {
-    eng: `When knocking down its target, grants 4 ${Stat.DEF}, 4 ${Stat.SPE_DEF}, 6 ${Stat.ATK} and heal 60 ${Stat.HP}`,
+    eng: `When knocking down its target, gain 6 ${Stat.ATK} and 60 max ${Stat.HP}`,
     esp: ``,
     fra: ``
   },
   [Effect.POWER_TRIP]: {
-    eng: `When knocking down its target, grants 6 ${Stat.DEF}, 6 ${Stat.SPE_DEF}, 9 ${Stat.ATK} and heal 90 ${Stat.HP}`,
+    eng: `When knocking down its target, gain 9 ${Stat.ATK} and 90 max ${Stat.HP}`,
     esp: ``,
     fra: ``
   },
