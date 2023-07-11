@@ -115,6 +115,10 @@ export default class AttackingState extends PokemonState {
       let totalTakenDamage = 0
       const attackType = pokemon.attackType
 
+      if (pokemon.items.has(Item.FIRE_GEM)) {
+        physicalDamage = Math.round(physicalDamage + target.hp * 0.1)
+      }
+
       let isAttackSuccessful = true
       if (chance(target.dodge) && !pokemon.items.has(Item.XRAY_VISION)) {
         isAttackSuccessful = false
