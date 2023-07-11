@@ -256,7 +256,7 @@ export const SynergyDescription: {
     fra: ""
   },
   [Synergy.ICE]: {
-    eng: `All allies have a chance to ${Status.FREEZE} the enemy for 2 seconds after a hit`,
+    eng: `All allies gain ${Stat.SPE_DEF} and have a chance to ${Status.FREEZE} the enemy for 2 seconds after a hit`,
     esp: "",
     fra: ""
   },

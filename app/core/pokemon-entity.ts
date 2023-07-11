@@ -470,8 +470,12 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.hasSynergyEffect(Synergy.ICE)) {
       let freezeChance = 0
-      if (this.effects.includes(Effect.FROSTY)) {
+      if (this.effects.includes(Effect.CHILLY)) {
         freezeChance = 0.1
+      } else if (this.effects.includes(Effect.FROSTY)) {
+        freezeChance = 0.2
+      } else if (this.effects.includes(Effect.FREEZING)) {
+        freezeChance = 0.3
       } else if (this.effects.includes(Effect.SHEER_COLD)) {
         freezeChance = 0.4
       }

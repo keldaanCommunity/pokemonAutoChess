@@ -75,7 +75,9 @@ export const EffectName: { [key in Effect]: string } = {
   [Effect.AROMATIC_MIST]: `Aromatic Mist`,
   [Effect.FAIRY_WIND]: `Fairy Wind`,
   [Effect.STRANGE_STEAM]: `Strange Steam`,
+  [Effect.CHILLY]: `Chilly`,
   [Effect.FROSTY]: `Frosty`,
+  [Effect.FREEZING]: `Freezing`,
   [Effect.SHEER_COLD]: `Sheer Cold`,
   [Effect.ANCIENT_POWER]: `Ancient Power`,
   [Effect.ELDER_POWER]: `Elder Power`,
@@ -457,13 +459,23 @@ export const EffectDescription: {
     esp: ``,
     fra: ``
   },
+  [Effect.CHILLY]: {
+    eng: `+3 ${Stat.SPE_DEF}, 10% chance to ${Status.FREEZE}`,
+    esp: ``,
+    fra: ``
+  },
   [Effect.FROSTY]: {
-    eng: `10% chance to ${Status.FREEZE}`,
+    eng: `+6 ${Stat.SPE_DEF}, 20% chance to ${Status.FREEZE}`,
+    esp: ``,
+    fra: ``
+  },
+  [Effect.FREEZING]: {
+    eng: `+10 ${Stat.SPE_DEF}, 30% chance to ${Status.FREEZE}`,
     esp: ``,
     fra: ``
   },
   [Effect.SHEER_COLD]: {
-    eng: `40% chance to ${Status.FREEZE}`,
+    eng: `+15 ${Stat.SPE_DEF}, 40% chance to ${Status.FREEZE}`,
     esp: ``,
     fra: ``
   },
