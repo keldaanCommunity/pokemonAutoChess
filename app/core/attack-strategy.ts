@@ -1386,13 +1386,16 @@ export class AuroraBeamStrategy extends AttackStrategy {
           crit
         )
         let freezeChance = 0
-        if (pokemon.effects.includes(Effect.FROSTY)) {
-          freezeChance += 0.1
+        if (pokemon.effects.includes(Effect.CHILLY)) {
+          freezeChance = 0.1
+        } else if (pokemon.effects.includes(Effect.FROSTY)) {
+          freezeChance = 0.2
+        } else if (pokemon.effects.includes(Effect.FREEZING)) {
+          freezeChance = 0.3
+        } else if (pokemon.effects.includes(Effect.SHEER_COLD)) {
+          freezeChance = 0.4
         }
-        if (pokemon.effects.includes(Effect.SHEER_COLD)) {
-          freezeChance += 0.3
-        }
-        if (Math.random() < freezeChance) {
+        if (chance(freezeChance)) {
           targetInLine.status.triggerFreeze(2000, target)
         }
       }
