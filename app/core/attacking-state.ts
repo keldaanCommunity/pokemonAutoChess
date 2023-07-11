@@ -75,9 +75,9 @@ export default class AttackingState extends PokemonState {
         ) {
           let isTripleAttack = false
           if (pokemon.effects.includes(Effect.RISING_VOLTAGE)) {
-            isTripleAttack = (pokemon.count.attackCount % 4 === 0)
+            isTripleAttack = pokemon.count.attackCount % 4 === 0
           } else if (pokemon.effects.includes(Effect.OVERDRIVE)) {
-            isTripleAttack = (pokemon.count.attackCount % 3 === 0)
+            isTripleAttack = pokemon.count.attackCount % 3 === 0
           }
           if (isTripleAttack) {
             pokemon.count.tripleAttackCount++
@@ -114,6 +114,10 @@ export default class AttackingState extends PokemonState {
       let trueDamage = 0
       let totalTakenDamage = 0
       const attackType = pokemon.attackType
+
+      if (pokemon.items.has(Item.FIRE_GEM)) {
+        physicalDamage = Math.round(physicalDamage + target.hp * 0.1)
+      }
 
       let isAttackSuccessful = true
       if (chance(target.dodge) && !pokemon.items.has(Item.XRAY_VISION)) {
