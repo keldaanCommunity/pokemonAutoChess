@@ -55,7 +55,7 @@ patch announcement
 - Star Dust: Shield 50% -> 60%
 - Flame Orb: Remove Wound counterpart
 - Power lens buff: +1 Spe Def → + 5 Spe Def
-- Fluffy tail buff: 1 Def → 5 De
+- Fluffy tail buff: 1 Def → 5 Def
 - Assault Vest buff: 18 Spe Def → 20 Spe Def. Reduce Burn and Poison damage by 50%
 - Razor Fang: Critical hits apply Armor reduction for 4 seconds
 
