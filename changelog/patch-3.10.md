@@ -45,6 +45,7 @@ patch announcement
 - Water dodge chance: 25/50/75 → 30/50/70
 - Water rework: A new water pokemon is fished after each PvP turn and put on your bench
 - Rock rework: Rock pokemons gain Defense and better resist to critical damage
+- Monster rework: Monster pokemons gain Attack, heal and increase their max HP, and grow in size every time they knock down an opponent
 
 # Changes to Items
 

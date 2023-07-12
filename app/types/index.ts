@@ -433,7 +433,7 @@ export interface IPokemonEntity {
   addAbilityPower(value: number): void
   addAttack(atk: number): void
   addAttackSpeed(as: number): void
-  addLife(life: number): void
+  addMaxHP(life: number): void
   handleShield(shieldBonus: number, pokemon: IPokemonEntity)
   update(dt: number, board: Board, weather: string)
   physicalDamage: number
@@ -526,6 +526,7 @@ export interface ICount {
   futureSightCount: number
   healOrderCount: number
   attackOrderCount: number
+  monsterExecutionCount: number
 }
 
 export interface IPreparationMetadata {

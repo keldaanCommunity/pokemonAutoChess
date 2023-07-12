@@ -211,7 +211,7 @@ export const SynergyDescription: {
     fra: ""
   },
   [Synergy.MONSTER]: {
-    eng: `Monster pokemons heal and gain bonus stats every time they knock down an opponent`,
+    eng: `Monster pokemons gain Attack, heal and increase their max HP, and grow in size every time they knock down an opponent`,
     esp: "",
     fra: ""
   },
