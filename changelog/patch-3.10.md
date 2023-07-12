@@ -17,7 +17,8 @@ patch announcement
 
 # Changes to Pokemon / Abilities
 
-- Nerf Gible line stats
+- Gible line is back to Epic
+- Larvitar line is now Rare
 - Buff Sunflora attack 14 → 18 and mana 100 → 80
 - Buff Mankey line HP: 100/200 → 120/240
 - Buff Rapidash HP 180 → 220
@@ -38,6 +39,7 @@ patch announcement
 - Suicune: Water/Ice → Water/Ice/Field
 - Nerf Litwick: Attack 5 -> 4 Lampent 9 -> 8
 - Diamond Storm ability rework: Deals 200% (scales) of current Defense as special damage to surrounding enemies
+- Buff Makuhita HP: 70 → 80 and Hariyama HP 160 → 170
 
 # Changes to Synergies
 
