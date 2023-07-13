@@ -94,7 +94,7 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
   [Item.MANA_SCARF]: `The holder attacks restore 8 additional ${Stat.MANA}`,
   [Item.SMOKE_BALL]: `Enemies attacking the holder are ${Status.PARALYSIS} for 5 seconds, reducing their ${Stat.ATK_SPEED} by 40%`,
   [Item.XRAY_VISION]: `+50% ${Stat.ATK_SPEED}. The holder attacks can no longer miss.`,
-  [Item.RAZOR_FANG]: `+100% ${Stat.CRIT_DAMAGE}`,
+  [Item.RAZOR_FANG]: `+100% ${Stat.CRIT_DAMAGE}. Critical hits apply ${Status.ARMOR_REDUCTION} for 4 seconds.`,
   [Item.LEFTOVERS]: `During the combat, the holder attack heals adjacent allies on the same row for 5% of their max ${Stat.HP}`,
   [Item.CHOICE_SCARF]:
     "On hit deal 50% basic attack damage to an adjacent enemy",
@@ -110,7 +110,7 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
   [Item.SHINY_CHARM]: `Give 15% chance to avoid incoming damage and trigger ${Status.PROTECT} for 1 second`,
   [Item.GRACIDEA_FLOWER]: `When combat begins, the holder and adjacent allies in the same row gain +30% ${Stat.ATK_SPEED}`,
   [Item.FLAME_ORB]: `Holder is burned but increase its ${Stat.ATK} by 100%`,
-  [Item.ASSAULT_VEST]: `+18 ${Stat.SPE_DEF}`,
+  [Item.ASSAULT_VEST]: `+20 ${Stat.SPE_DEF}. Reduce ${Status.BURN} and ${Status.POISON} damage by 50%`,
   [Item.AMULET_COIN]:
     "+1 gold each time the holder knocks down an opponent (max 5 gold per stage)",
   [Item.POKE_DOLL]: "Reduce all incoming damage by 30%",

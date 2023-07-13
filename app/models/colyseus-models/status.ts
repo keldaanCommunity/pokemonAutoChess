@@ -283,6 +283,10 @@ export default class Status extends Schema implements IStatus {
           burnDamage = Math.round(burnDamage * 0.7)
         }
 
+        if (pkm.items.has(Item.ASSAULT_VEST)) {
+          burnDamage = Math.round(burnDamage * 0.5)
+        }
+
         pkm.handleDamage({
           damage: burnDamage,
           board,
@@ -366,6 +370,10 @@ export default class Status extends Schema implements IStatus {
         let poisonDamage = Math.ceil(pkm.hp * 0.05 * this.poisonStacks)
         if (pkm.simulation.weather === Weather.RAIN) {
           poisonDamage = Math.round(poisonDamage * 0.7)
+        }
+
+        if (pkm.items.has(Item.ASSAULT_VEST)) {
+          poisonDamage = Math.round(poisonDamage * 0.5)
         }
 
         pkm.handleDamage({

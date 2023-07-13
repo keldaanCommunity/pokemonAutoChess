@@ -621,6 +621,10 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       target.setMana(target.mana - 15)
       target.count.manaBurnCount++
     }
+
+    if (this.items.has(Item.RAZOR_FANG)) {
+      target.status.triggerArmorReduction(4000)
+    }
   }
 
   onKill(target: PokemonEntity, board: Board) {
