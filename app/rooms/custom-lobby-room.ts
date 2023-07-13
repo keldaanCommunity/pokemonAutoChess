@@ -79,9 +79,9 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       })
     }
 
-    if (process.env.WEBHOOK_URL) {
+    if (process.env.DISCORD_WEBHOOK_URL) {
       this.discordWebhook = new WebhookClient({
-        url: process.env.WEBHOOK_URL
+        url: process.env.DISCORD_WEBHOOK_URL
       })
     }
 
@@ -414,30 +414,27 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     }
   }
 
-  fetchChat(){
-    ChatV2.find(
-      { time: { $gt: Date.now() - 86400000 } },
-      (err, messages) => {
-        if (err) {
-          logger.error(err)
-        } else {
-          messages.forEach((message) => {
-            this.state.addMessage(
-              nanoid(),
-              message.payload,
-              message.authorId,
-              message.author,
-              message.avatar,
-              message.time,
-              false
-            )
-          })
-        }
+  fetchChat() {
+    ChatV2.find({ time: { $gt: Date.now() - 86400000 } }, (err, messages) => {
+      if (err) {
+        logger.error(err)
+      } else {
+        messages.forEach((message) => {
+          this.state.addMessage(
+            nanoid(),
+            message.payload,
+            message.authorId,
+            message.author,
+            message.avatar,
+            message.time,
+            false
+          )
+        })
       }
-    )
+    })
   }
 
-  fetchMeta(){
+  fetchMeta() {
     Meta.find(
       {},
       [
