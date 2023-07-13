@@ -26,11 +26,11 @@ const port = Number(process.env.PORT) || 9000
 admin.initializeApp({
   credential: admin.credential.cert({
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    projectId: process.env.PROJECT_ID!,
+    projectId: process.env.FIREBASE_PROJECT_ID!,
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    clientEmail: process.env.CLIENT_EMAIL!,
+    clientEmail: process.env.FIREBASE_CLIENT_EMAIL!,
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    privateKey: process.env.PRIVATE_KEY!.replace(/\\n/g, "\n")
+    privateKey: process.env.FIREBASE_PRIVATE_KEY!.replace(/\\n/g, "\n")
   })
 })
 
