@@ -329,6 +329,7 @@ import {
   Mudkip,
   Muk,
   Munchlax,
+  Natu,
   Nidoking,
   Nidoqueen,
   NidoranF,
@@ -364,6 +365,7 @@ import {
   Pikipek,
   Piloswine,
   Pineco,
+  Pinisir,
   Piplup,
   PirouetteMeloetta,
   Plusle,
@@ -580,6 +582,7 @@ import {
   Wobbuffet,
   Wurmple,
   Wynaut,
+  Xatu,
   Xerneas,
   Yveltal,
   Zapdos,
@@ -1959,6 +1962,12 @@ export default class PokemonFactory {
         return new Plusle(s, e)
       case Pkm.MINUN:
         return new Minun(s, e)
+      case Pkm.PINSIR:
+        return new Pinisir(s, e)
+      case Pkm.NATU:
+        return new Natu(s, e)
+      case Pkm.XATU:
+        return new Xatu(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:
@@ -1972,7 +1981,7 @@ export default class PokemonFactory {
     return pokemon.rarity
   }
 
-  static createRandomEgg() {
+  static createRandomEgg(): Pokemon {
     const egg = PokemonFactory.createPokemonFromName(Pkm.EGG)
     egg.action = PokemonActionState.SLEEP
     egg.evolution = pickRandomIn(HatchList)
@@ -2007,11 +2016,19 @@ export default class PokemonFactory {
     const pokemon: Pokemon = PokemonFactory.createPokemonFromName(name)
     if (name === Pkm.EGG) {
       return 2
+    } else if (name === Pkm.MAGIKARP) {
+      return 1
     } else if (pokemon.rarity === Rarity.HATCH) {
       return [3, 4, 5][pokemon.stars - 1]
     } else if (pokemon.rarity === Rarity.MYTHICAL) {
-      const duo = Object.entries(PkmDuos).find(([key, duo]) => duo.includes(pokemon.name))
-      return Math.ceil((Mythical1Shop.includes(duo ? duo[0] as PkmProposition : name) ? 15 : 20) * (duo ? 0.5 : 1))
+      const duo = Object.entries(PkmDuos).find(([key, duo]) =>
+        duo.includes(pokemon.name)
+      )
+      return Math.ceil(
+        (Mythical1Shop.includes(duo ? (duo[0] as PkmProposition) : name)
+          ? 15
+          : 20) * (duo ? 0.5 : 1)
+      )
     } else if (PokemonFactory.getPokemonBaseEvolution(name) == Pkm.EEVEE) {
       return PkmCost[pokemon.rarity]
     } else {

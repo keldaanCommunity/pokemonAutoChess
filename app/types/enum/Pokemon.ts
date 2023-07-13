@@ -1,6 +1,7 @@
 import { AnimationType } from "../Animation"
 
 export enum Pkm {
+  DEFAULT = "default",
   EGG = "Egg",
   DITTO = "ditto",
   BULBASAUR = "bulbasaur",
@@ -380,7 +381,6 @@ export enum Pkm {
   CACNEA = "cacnea",
   CACTURNE = "cacturne",
   TAUROS = "tauros",
-  DEFAULT = "default",
   HAPPINY = "happiny",
   CHANSEY = "chansey",
   BLISSEY = "blissey",
@@ -577,7 +577,10 @@ export enum Pkm {
   SUNFLORA = "sunflora",
   MARACTUS = "maractus",
   MINUN = "minun",
-  PLUSLE = "plusle"
+  PLUSLE = "plusle",
+  PINSIR = "pinsir",
+  NATU = "natu",
+  XATU = "xatu"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1157,7 +1160,10 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.SUNFLORA]: "0192",
   [Pkm.MARACTUS]: "0556",
   [Pkm.PLUSLE]: "0311",
-  [Pkm.MINUN]: "0312"
+  [Pkm.MINUN]: "0312",
+  [Pkm.PINSIR]: "0127",
+  [Pkm.NATU]: "0177",
+  [Pkm.XATU]: "0178"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1737,7 +1743,10 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.SUNFLORA]: Pkm.SUNKERN,
   [Pkm.MARACTUS]: Pkm.MARACTUS,
   [Pkm.PLUSLE]: Pkm.PLUSLE,
-  [Pkm.MINUN]: Pkm.MINUN
+  [Pkm.MINUN]: Pkm.MINUN,
+  [Pkm.PINSIR]: Pkm.PINSIR,
+  [Pkm.NATU]: Pkm.NATU,
+  [Pkm.XATU]: Pkm.NATU
 }
 
 export enum PkmDuo {
@@ -4642,6 +4651,21 @@ export const AnimationConfig: {
   [Pkm.MINUN]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shock,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.PINSIR]: {
+    attack: AnimationType.Slice,
+    ability: AnimationType.Double,
+    emote: AnimationType.Charge
+  },
+  [Pkm.NATU]: {
+    attack: AnimationType.Jab,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Hover
+  },
+  [Pkm.XATU]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Attack,
     emote: AnimationType.Shoot
   }
 }

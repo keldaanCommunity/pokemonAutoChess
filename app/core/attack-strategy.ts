@@ -90,12 +90,23 @@ export class AttackStrategy {
     }
 
     if (pokemon.items.has(Item.STAR_DUST)) {
-      pokemon.handleShield(Math.round(0.5 * pokemon.maxMana), pokemon, false)
+      pokemon.handleShield(Math.round(0.6 * pokemon.maxMana), pokemon, false)
       pokemon.count.starDustCount++
     }
 
     if (crit) {
       pokemon.onCritical(target, board)
+    }
+
+    if (target.status.magicBounce) {
+      pokemon.status.triggerSilence(4000, pokemon, target, board)
+      pokemon.handleSpecialDamage(
+        target.speDef,
+        board,
+        AttackType.SPECIAL,
+        target,
+        false
+      )
     }
   }
 }
@@ -288,16 +299,16 @@ export class EarthquakeStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     let damage = 30
-    if (pokemon.stars == 2) {
+    if (pokemon.stars === 2) {
       damage = 60
     }
-    if (pokemon.stars == 3 || pokemon.rarity === Rarity.MYTHICAL) {
+    if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
       damage = 120
     }
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (
-        (tg && pokemon.team != tg.team && target.positionY == y) ||
-        (tg && pokemon.team != tg.team && target.positionX == x)
+        (tg && pokemon.team !== tg.team && pokemon.positionY === y) ||
+        (tg && pokemon.team !== tg.team && pokemon.positionX === x)
       ) {
         tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
         tg.count.earthquakeCount++
@@ -654,16 +665,21 @@ export class CrabHammerStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 30
+    let damage = 40
     if (pokemon.stars == 2) {
-      damage = 60
+      damage = 80
     } else if (pokemon.stars == 3) {
       damage = 120
     }
+    if (pokemon.items.has(Item.REAPER_CLOTH)) {
+      crit = chance((3 * pokemon.critChance) / 100)
+    }
+    let attackType = AttackType.SPECIAL
     if (target.life / target.hp < 0.3) {
       damage = target.life
+      attackType = AttackType.TRUE
     }
-    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    target.handleSpecialDamage(damage, board, attackType, pokemon, crit)
   }
 }
 
@@ -676,17 +692,17 @@ export class DiamondStormStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let buff = 3
-    if (pokemon.stars === 2) {
-      buff = 6
-    } else if (pokemon.stars === 3) {
-      buff = 9
-    }
+    const damage = Math.round(2 * pokemon.def * (1 + pokemon.ap / 100))
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
-    pokemon.addDefense(buff, true)
     cells.forEach((cell) => {
-      if (cell.value && cell.value.team === pokemon.team) {
-        cell.value.addDefense(buff, true)
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
       }
     })
   }
@@ -1370,13 +1386,16 @@ export class AuroraBeamStrategy extends AttackStrategy {
           crit
         )
         let freezeChance = 0
-        if (pokemon.effects.includes(Effect.FROSTY)) {
-          freezeChance += 0.1
+        if (pokemon.effects.includes(Effect.CHILLY)) {
+          freezeChance = 0.1
+        } else if (pokemon.effects.includes(Effect.FROSTY)) {
+          freezeChance = 0.2
+        } else if (pokemon.effects.includes(Effect.FREEZING)) {
+          freezeChance = 0.3
+        } else if (pokemon.effects.includes(Effect.SHEER_COLD)) {
+          freezeChance = 0.4
         }
-        if (pokemon.effects.includes(Effect.SHEER_COLD)) {
-          freezeChance += 0.3
-        }
-        if (Math.random() < freezeChance) {
+        if (chance(freezeChance)) {
           targetInLine.status.triggerFreeze(2000, target)
         }
       }
@@ -1751,7 +1770,8 @@ export class ShadowCloneStrategy extends AttackStrategy {
         farthestCoordinate.y,
         pokemon.team
       )
-      clone.life = pokemon.life
+      clone.life = 0.8 * pokemon.life
+      clone.handleShield(30, clone, true)
       clone.isClone = true
     }
   }
@@ -1977,7 +1997,11 @@ export class SpikeArmorStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const duration =
-      pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL ? 10000 : pokemon.stars === 2 ? 5000 : 3000
+      pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL
+        ? 10000
+        : pokemon.stars === 2
+        ? 5000
+        : 3000
     pokemon.status.triggerSpikeArmor(duration)
   }
 }
@@ -2936,10 +2960,10 @@ export class BiteStrategy extends AttackStrategy {
     let damage = 0
     switch (pokemon.stars) {
       case 1:
-        damage = 30
+        damage = 40
         break
       case 2:
-        damage = 60
+        damage = 80
         break
       case 3:
         damage = 120
@@ -2948,7 +2972,7 @@ export class BiteStrategy extends AttackStrategy {
         break
     }
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    pokemon.handleHeal(Math.floor(0.33 * damage), pokemon, 1)
+    pokemon.handleHeal(Math.floor(0.3 * damage), pokemon, 1)
   }
 }
 
@@ -4064,8 +4088,8 @@ export class ForecastStrategy extends AttackStrategy {
           p.setMana(p.mana + Math.round(20 * (1 + pokemon.ap / 100)))
         }
         if (pokemon.name === Pkm.CASTFORM_HAIL) {
-          p.addDefense(5, true)
-          p.addSpecialDefense(5, true)
+          p.addDefense(2, true)
+          p.addSpecialDefense(2, true)
         }
       }
     })
@@ -4864,7 +4888,10 @@ export class LinkCableStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const farthestTargetCoordinate = state.getFarthestTargetCoordinate(pokemon, board)
+    const farthestTargetCoordinate = state.getFarthestTargetCoordinate(
+      pokemon,
+      board
+    )
     const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(
       pokemon,
       board
@@ -4877,10 +4904,12 @@ export class LinkCableStrategy extends AttackStrategy {
     }
 
     pokemon.simulation.room.clock.setTimeout(() => {
-      if(pokemon.life <= 0) return;
+      if (pokemon.life <= 0) return
       const partner = board.find(
         (x, y, entity) =>
-          entity.skill === Ability.LINK_CABLE && entity.id !== pokemon.id && entity.team === pokemon.team
+          entity.skill === Ability.LINK_CABLE &&
+          entity.id !== pokemon.id &&
+          entity.team === pokemon.team
       )
       if (partner) {
         const damage = 50
@@ -4893,7 +4922,7 @@ export class LinkCableStrategy extends AttackStrategy {
               pokemon,
               crit
             )
-          }        
+          }
         })
         pokemon.simulation.room.broadcast(Transfer.ABILITY, {
           id: pokemon.simulation.id,
@@ -4905,7 +4934,10 @@ export class LinkCableStrategy extends AttackStrategy {
         })
       } else {
         const damage = 50
-        const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+        const cells = board.getAdjacentCells(
+          pokemon.positionX,
+          pokemon.positionY
+        )
         cells.forEach((cell) => {
           if (cell.value && cell.value.team !== pokemon.team) {
             cell.value.handleSpecialDamage(
@@ -4927,5 +4959,20 @@ export class LinkCableStrategy extends AttackStrategy {
         })
       }
     }, 300)
+  }
+}
+
+export class MagicBounceStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const timer =
+      pokemon.stars === 3 ? 12000 : pokemon.stars === 2 ? 6000 : 3000
+    pokemon.status.triggerMagicBounce(timer)
   }
 }

@@ -80,7 +80,7 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
   [Item.ICE_STONE]: "The holder gains the ice type",
   [Item.CHOICE_SPECS]: `The holder gains 100% bonus ${Stat.AP}`,
   [Item.SOUL_DEW]: `During combat, the holder gains 8% ${Stat.AP} every second`,
-  [Item.UPGRADE]: `Successful attacks grant +5% bonus ${Stat.ATK_SPEED} for the rest of combat`,
+  [Item.UPGRADE]: `Successful attacks grant +4% bonus ${Stat.ATK_SPEED} for the rest of combat`,
   [Item.REAPER_CLOTH]: "The holder spells can critically strike",
   [Item.POKEMONOMICON]: `When the holder deals ${Damage.SPECIAL}, they burn and wound the target for 3 seconds`,
   [Item.POWER_LENS]: `50% of incoming ${Damage.SPECIAL} is also dealt to the attacker`,
@@ -89,15 +89,15 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
   [Item.AQUA_EGG]: `The holder gains +50 starting ${Stat.MANA} and regains 20 ${Stat.MANA} after casting its ability`,
   [Item.BLUE_ORB]: `Every third attack from the holder unleashes a chain lightning that bounces to 2 enemies, burning 20 ${Stat.MANA}`,
   [Item.SCOPE_LENS]: `Gains 25% ${Stat.CRIT_CHANCE}. Critical hits steal 15 ${Stat.MANA} from the target.`,
-  [Item.STAR_DUST]: `After casting ability, gain 50% of max ${Stat.MANA} as ${Stat.SHIELD}`,
+  [Item.STAR_DUST]: `After casting ability, gain 60% of max ${Stat.MANA} as ${Stat.SHIELD}`,
   [Item.DELTA_ORB]: `Holder and adjacent allies in the same row gain 4 bonus ${Stat.MANA} per hit`,
   [Item.MANA_SCARF]: `The holder attacks restore 8 additional ${Stat.MANA}`,
   [Item.SMOKE_BALL]: `Enemies attacking the holder are ${Status.PARALYSIS} for 5 seconds, reducing their ${Stat.ATK_SPEED} by 40%`,
   [Item.XRAY_VISION]: `+50% ${Stat.ATK_SPEED}. The holder attacks can no longer miss.`,
-  [Item.RAZOR_FANG]: `+100% ${Stat.CRIT_DAMAGE}`,
+  [Item.RAZOR_FANG]: `+100% ${Stat.CRIT_DAMAGE}. Critical hits apply ${Status.ARMOR_REDUCTION} for 4 seconds.`,
   [Item.LEFTOVERS]: `During the combat, the holder attack heals adjacent allies on the same row for 5% of their max ${Stat.HP}`,
   [Item.CHOICE_SCARF]:
-    "The holder basic attacks hit a second adjacent enemy for 50% of the damage",
+    "On hit deal 50% basic attack damage to an adjacent enemy",
   [Item.FIRE_GEM]: `Attacks do double damage on ${Stat.SHIELD} and deal 10% of target max ${Stat.HP} as additional damage`,
   [Item.DEFENSIVE_RIBBON]: `When the holder takes damage, gain 1 stack. Every 2 stacks, the holder gains +1 ${Stat.DEF}, +1 ${Stat.ATK} and +5% ${Stat.ATK_SPEED} (max 20 stacks)`,
   [Item.WONDER_BOX]:
@@ -109,12 +109,12 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
   [Item.ORAN_BERRY]: `+150 ${Stat.SHIELD} when combat begins`,
   [Item.SHINY_CHARM]: `Give 15% chance to avoid incoming damage and trigger ${Status.PROTECT} for 1 second`,
   [Item.GRACIDEA_FLOWER]: `When combat begins, the holder and adjacent allies in the same row gain +30% ${Stat.ATK_SPEED}`,
-  [Item.FLAME_ORB]: `Holder is burned and cannot heal during the fight, but increase its ${Stat.ATK} by 100%`,
-  [Item.ASSAULT_VEST]: `+18 ${Stat.SPE_DEF}`,
+  [Item.FLAME_ORB]: `Holder is burned but increase its ${Stat.ATK} by 100%`,
+  [Item.ASSAULT_VEST]: `+20 ${Stat.SPE_DEF}. Reduce ${Status.BURN} and ${Status.POISON} damage by 50%`,
   [Item.AMULET_COIN]:
     "+1 gold each time the holder knocks down an opponent (max 5 gold per stage)",
   [Item.POKE_DOLL]: "Reduce all incoming damage by 30%",
-  [Item.RED_ORB]: `+10 ${Stat.ATK}. Each attack of the holder deals 20% additional ${Damage.TRUE}`,
+  [Item.RED_ORB]: `+8 ${Stat.ATK}. Each attack of the holder deals 20% additional ${Damage.TRUE}`,
   [Item.MAX_REVIVE]: `Give ${Status.RESURECTION}, preventing the holder first KO and restoring to max ${Stat.HP}`,
   [Item.ROCKY_HELMET]: `+12 ${Stat.DEF}. Negates critical bonus damage from incoming critical hits.`
 })

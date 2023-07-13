@@ -455,6 +455,14 @@ export default class Simulation extends Schema implements ISimulation {
         if (pokemon.effects.includes(Effect.AUTOMATE)) {
           pokemon.addAttack(pokemon.baseAtk)
         }
+        if (pokemon.effects.includes(Effect.DRAGON_SCALES)) {
+          pokemon.addMaxHP(30 * pokemon.stars)
+          pokemon.life = pokemon.hp
+        }
+        if (pokemon.effects.includes(Effect.DRAGON_DANCE)) {
+          pokemon.addAbilityPower(10 * pokemon.stars)
+          pokemon.addAttackSpeed(10 * pokemon.stars)
+        }
         let shieldBonus = 0
         if (pokemon.effects.includes(Effect.STAMINA)) {
           shieldBonus = 15
@@ -537,8 +545,6 @@ export default class Simulation extends Schema implements ISimulation {
             pokemon as PokemonEntity,
             this.board
           )
-          pokemon.status.wound = true
-          pokemon.status.woundCooldown = 60000
         }
       })
     })
@@ -627,7 +633,7 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.RAIN_DANCE:
           if (types.includes(Synergy.WATER)) {
-            pokemon.addDodgeChance(0.25)
+            pokemon.addDodgeChance(0.3)
             pokemon.effects.push(Effect.RAIN_DANCE)
           }
           break
@@ -641,7 +647,7 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.PRIMORDIAL_SEA:
           if (types.includes(Synergy.WATER)) {
-            pokemon.addDodgeChance(0.75)
+            pokemon.addDodgeChance(0.7)
             pokemon.effects.push(Effect.PRIMORDIAL_SEA)
           }
           break
@@ -859,21 +865,21 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.BATTLE_ARMOR:
           if (types.includes(Synergy.ROCK)) {
-            pokemon.handleShield(40, pokemon)
+            pokemon.addDefense(5)
             pokemon.effects.push(Effect.BATTLE_ARMOR)
           }
           break
 
         case Effect.MOUTAIN_RESISTANCE:
           if (types.includes(Synergy.ROCK)) {
-            pokemon.handleShield(80, pokemon)
+            pokemon.addDefense(10)
             pokemon.effects.push(Effect.MOUTAIN_RESISTANCE)
           }
           break
 
         case Effect.DIAMOND_STORM:
           if (types.includes(Synergy.ROCK)) {
-            pokemon.handleShield(160, pokemon)
+            pokemon.addDefense(20)
             pokemon.effects.push(Effect.DIAMOND_STORM)
           }
           break
@@ -896,23 +902,31 @@ export default class Simulation extends Schema implements ISimulation {
           break
 
         case Effect.DRAGON_ENERGY:
+        case Effect.DRAGON_SCALES:
+        case Effect.DRAGON_DANCE:
           if (types.includes(Synergy.DRAGON)) {
-            pokemon.effects.push(Effect.DRAGON_ENERGY)
+            pokemon.effects.push(effect)
           }
           break
 
-        case Effect.DRAGON_DANCE:
-          if (types.includes(Synergy.DRAGON)) {
-            pokemon.effects.push(Effect.DRAGON_DANCE)
-          }
+        case Effect.CHILLY:
+          pokemon.effects.push(Effect.FROSTY)
+          pokemon.addSpecialDefense(3)
           break
 
         case Effect.FROSTY:
           pokemon.effects.push(Effect.FROSTY)
+          pokemon.addSpecialDefense(6)
+          break
+
+        case Effect.FREEZING:
+          pokemon.effects.push(Effect.FROSTY)
+          pokemon.addSpecialDefense(10)
           break
 
         case Effect.SHEER_COLD:
           pokemon.effects.push(Effect.SHEER_COLD)
+          pokemon.addSpecialDefense(15)
           break
 
         case Effect.POISONOUS:
@@ -1052,10 +1066,12 @@ export default class Simulation extends Schema implements ISimulation {
                 weather,
                 (boardWeatherScore.get(weather) ?? 0) + 1
               )
-              playerWeatherScore.set(
-                weather,
-                (playerWeatherScore.get(weather) ?? 0) + 1
-              )
+              if (pkm.passive !== Passive.CASTFORM) {
+                playerWeatherScore.set(
+                  weather,
+                  (playerWeatherScore.get(weather) ?? 0) + 1
+                )
+              }
             }
           })
         }

@@ -26,7 +26,7 @@ import CustomLobbyRoom from "../custom-lobby-room"
 import { Pkm, PkmFamily, PkmIndex } from "../../types/enum/Pokemon"
 import PokemonConfig from "../../models/colyseus-models/pokemon-config"
 import PRECOMPUTED_RARITY_POKEMONS from "../../models/precomputed/type-rarity-all.json"
-import { RarityProbability, getEmotionCost } from "../../types/Config"
+import { BoosterRarityProbability, getEmotionCost } from "../../types/Config"
 import { Rarity } from "../../types/enum/Game"
 import { sum } from "../../utils/array"
 import { pickRandomIn } from "../../utils/random"
@@ -379,11 +379,11 @@ export class OpenBoosterCommand extends Command<
 function pickRandomPokemonBooster(): Pkm {
   let pkm = Pkm.MAGIKARP
   const rarities = Object.keys(Rarity) as Rarity[]
-  const seed = Math.random() * sum(Object.values(RarityProbability))
+  const seed = Math.random() * sum(Object.values(BoosterRarityProbability))
   let threshold = 0
   for (let i = 0; i < rarities.length; i++) {
     const rarity = rarities[i]
-    const rarityProbability = RarityProbability[rarity]
+    const rarityProbability = BoosterRarityProbability[rarity]
     threshold += rarityProbability
     if (
       seed < threshold &&

@@ -72,6 +72,10 @@ export type PrecomputedTypePokemonAll = {
   [key in Synergy]: Pkm[]
 }
 
+export type PrecomputedAbility = {
+  [key in Ability]: Pkm[]
+}
+
 export type Langage = {
   eng: string
   esp: string
@@ -372,6 +376,8 @@ export interface IPokemon {
   emotion: Emotion
   final: boolean
   action: PokemonActionState
+  canBePlaced: boolean
+  canBeCloned: boolean
 }
 
 export interface IExperienceManager {
@@ -426,6 +432,8 @@ export interface IPokemonEntity {
   simulation: ISimulation
   addAbilityPower(value: number): void
   addAttack(atk: number): void
+  addAttackSpeed(as: number): void
+  addMaxHP(life: number): void
   handleShield(shieldBonus: number, pokemon: IPokemonEntity)
   update(dt: number, board: Board, weather: string)
   physicalDamage: number
@@ -518,6 +526,7 @@ export interface ICount {
   futureSightCount: number
   healOrderCount: number
   attackOrderCount: number
+  monsterExecutionCount: number
 }
 
 export interface IPreparationMetadata {

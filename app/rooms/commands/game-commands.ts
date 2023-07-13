@@ -35,7 +35,12 @@ import {
   IPokemonEntity,
   Transfer
 } from "../../types"
-import { Pkm, PkmDuos, PkmIndex, PkmProposition } from "../../types/enum/Pokemon"
+import {
+  Pkm,
+  PkmDuos,
+  PkmIndex,
+  PkmProposition
+} from "../../types/enum/Pokemon"
 import { Pokemon } from "../../models/colyseus-models/pokemon"
 import { chance, pickRandomIn } from "../../utils/random"
 import { logger } from "../../utils/logger"
@@ -59,7 +64,6 @@ export class OnShopCommand extends Command<
           player.pokemonCollection.get(PkmIndex[name])
         )
         if (
-          pokemon.name !== Pkm.MAGIKARP &&
           player.money >= pokemon.cost &&
           (this.room.getBenchSize(player.board) < 8 ||
             (this.room.getPossibleEvolution(player.board, pokemon.name) &&
@@ -127,7 +131,7 @@ export class OnPokemonPropositionCommand extends Command<
     pkm: PkmProposition
   }
 > {
-  execute({ playerId, pkm }: { playerId: string, pkm: PkmProposition }) {
+  execute({ playerId, pkm }: { playerId: string; pkm: PkmProposition }) {
     const player = this.state.players.get(playerId)
     if (
       player &&
@@ -154,20 +158,14 @@ export class OnPokemonPropositionCommand extends Command<
       }
 
       player.board.forEach((p) => {
-        if (
-          Mythical1Shop.includes(pkm) &&
-          Mythical1Shop.includes(p.name)
-        ) {
+        if (Mythical1Shop.includes(pkm) && Mythical1Shop.includes(p.name)) {
           allowBuy = false // already picked a T10 mythical
         }
-        if (
-          Mythical2Shop.includes(pkm) &&
-          Mythical2Shop.includes(p.name)
-        ) {
+        if (Mythical2Shop.includes(pkm) && Mythical2Shop.includes(p.name)) {
           allowBuy = false // already picked a T20 mythical
         }
       })
-      
+
       const freeCellsOnBench: number[] = []
       for (let i = 0; i < 8; i++) {
         if (this.room.isPositionEmpty(playerId, i, 0)) {
@@ -175,12 +173,21 @@ export class OnPokemonPropositionCommand extends Command<
         }
       }
 
-      const pokemonsObtained: Pokemon[] = (pkm in PkmDuos ? PkmDuos[pkm] : [pkm]).map(p => PokemonFactory.createPokemonFromName(p))
+      const pokemonsObtained: Pokemon[] = (
+        pkm in PkmDuos ? PkmDuos[pkm] : [pkm]
+      ).map((p) =>
+        PokemonFactory.createPokemonFromName(
+          p,
+          player.pokemonCollection.get(PkmIndex[p])
+        )
+      )
       const hasSpaceOnBench = freeCellsOnBench.length >= pokemonsObtained.length
 
       if (allowBuy && hasSpaceOnBench) {
-        pokemonsObtained.forEach(pokemon => {
-          const freeCellX = this.room.getFirstAvailablePositionInBench(player.id)
+        pokemonsObtained.forEach((pokemon) => {
+          const freeCellX = this.room.getFirstAvailablePositionInBench(
+            player.id
+          )
           if (freeCellX === undefined) return
           pokemon.positionX = freeCellX
           pokemon.positionY = 0
@@ -225,14 +232,9 @@ export class OnDragDropCommand extends Command<
         }
         const x = parseInt(detail.x)
         const y = parseInt(detail.y)
-        if (pokemon.name == Pkm.DITTO) {
+        if (pokemon.name === Pkm.DITTO) {
           const pokemonToClone = this.room.getPokemonByPosition(playerId, x, y)
-          if (
-            pokemonToClone &&
-            ![Rarity.MYTHICAL, Rarity.SPECIAL, Rarity.HATCH].includes(
-              pokemonToClone.rarity
-            )
-          ) {
+          if (pokemonToClone && pokemonToClone.canBeCloned) {
             dittoReplaced = true
             const replaceDitto = PokemonFactory.createPokemonFromName(
               PokemonFactory.getPokemonBaseEvolution(pokemonToClone.name),
@@ -273,10 +275,11 @@ export class OnDragDropCommand extends Command<
               this.room.swap(playerId, pokemon, x, y)
               success = true
             } else {
-              if (pokemon.rarity != Rarity.SPECIAL) {
+              if (pokemon.canBePlaced) {
                 // Prevents a pokemon to go on the board only if it's adding a pokemon from the bench on a full board
                 if (!isBoardFull || !dropToEmptyPlace || !dropFromBench) {
                   this.room.swap(playerId, pokemon, x, y)
+                  pokemon.onChangePosition(x, y, player)
                   success = true
                 }
               }
@@ -1074,7 +1077,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
       const currentResult = player.getCurrentBattleResult()
       const lastPlayerResult = player.getLastPlayerBattleResult()
 
-      if(currentResult === BattleResult.DRAW){
+      if (currentResult === BattleResult.DRAW) {
         // preserve existing streak but lose HP
       } else if (currentResult !== lastPlayerResult) {
         player.streak = 0
@@ -1190,6 +1193,34 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         this.state.shop.assignMythicalPropositions(player, Mythical2Shop)
       })
     }
+
+    const isPVE = this.checkForPVE()
+    this.state.players.forEach((player: Player) => {
+      if (
+        this.room.getBenchSize(player.board) < 8 &&
+        !isPVE &&
+        (player.effects.list.includes(Effect.RAIN_DANCE) ||
+          player.effects.list.includes(Effect.DRIZZLE) ||
+          player.effects.list.includes(Effect.PRIMORDIAL_SEA))
+      ) {
+        const fishingLevel = player.effects.list.includes(Effect.PRIMORDIAL_SEA)
+          ? 3
+          : player.effects.list.includes(Effect.DRIZZLE)
+          ? 2
+          : 1
+        const pkm = this.state.shop.fishPokemon(player, fishingLevel)
+        const fish = PokemonFactory.createPokemonFromName(pkm)
+        const x = this.room.getFirstAvailablePositionInBench(player.id)
+        fish.positionX = x !== undefined ? x : -1
+        fish.positionY = 0
+        fish.action = PokemonActionState.FISH
+        player.board.set(fish.id, fish)
+        this.room.updateEvolution(player.id)
+        this.clock.setTimeout(() => {
+          fish.action = PokemonActionState.IDLE
+        }, 1000)
+      }
+    })
   }
 
   checkForLazyTeam() {
@@ -1205,7 +1236,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
             const coordinate = this.room.getFirstAvailablePositionInTeam(
               player.id
             )
-            const p = this.room.getFirstPokemonOnBench(player.board)
+            const p = this.room.getFirstPlaceablePokemonOnBench(player.board)
             if (coordinate && p) {
               const detail: { id: string; x: number; y: number } = {
                 id: p.id,
@@ -1318,10 +1349,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
           (player.effects.list.includes(Effect.HATCHER) ||
             player.effects.list.includes(Effect.BREEDER))
         ) {
-          const chance = player.effects.list.includes(Effect.BREEDER)
+          const eggChance = player.effects.list.includes(Effect.BREEDER)
             ? 1
             : 0.2 * player.streak
-          if (Math.random() < chance) {
+          if (chance(eggChance)) {
             const egg = PokemonFactory.createRandomEgg()
             const x = this.room.getFirstAvailablePositionInBench(player.id)
             egg.positionX = x !== undefined ? x : -1
@@ -1412,7 +1443,11 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         if (stageIndex != -1) {
           player.opponentId = "pve"
           player.opponentName = NeutralStage[stageIndex].name
-          player.opponentAvatar = getAvatarString(PkmIndex[NeutralStage[stageIndex].avatar], this.state.shinyEncounter, Emotion.NORMAL)
+          player.opponentAvatar = getAvatarString(
+            PkmIndex[NeutralStage[stageIndex].avatar],
+            this.state.shinyEncounter,
+            Emotion.NORMAL
+          )
           player.opponentTitle = "Wild"
           const pveBoard = PokemonFactory.getNeutralPokemonsByLevelStage(
             this.state.stageLevel,

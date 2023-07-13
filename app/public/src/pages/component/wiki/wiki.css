@@ -110,7 +110,23 @@
   margin: 0.5em;
 }
 
+#wiki-ability .nes-container {
+  padding: 0.5em;
+  margin: 0.5em;
+}
+
+#wiki-ability > ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
+}
 #wiki-weather > ul > .nes-container {
+  padding: 0.5em 1em 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+#wiki-ability > ul > .nes-container {
   padding: 0.5em 1em 0;
   display: flex;
   flex-direction: column;
@@ -138,6 +154,13 @@
 }
 
 #wiki-weather .nes-container ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  padding: 0;
+}
+
+#wiki-ability .nes-container ul {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5em;

@@ -1125,6 +1125,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.MAGIC_BOUNCE,
+      frames: this.game.anims.generateFrameNames(Ability.MAGIC_BOUNCE, {
+        start: 0,
+        end: 14,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: -1
+    })
+
+    this.game.anims.create({
       key: Ability.SEED_FLARE,
       frames: this.game.anims.generateFrameNames(Ability.SEED_FLARE, {
         start: 0,
@@ -1930,7 +1941,10 @@ export default class AnimationManager {
 
   animatePokemon(entity: Pokemon, action: PokemonActionState) {
     let animation = AnimationType.Idle
-    if (action === PokemonActionState.HOP) {
+    if (
+      action === PokemonActionState.HOP ||
+      action === PokemonActionState.FISH
+    ) {
       animation = AnimationType.Hop
     } else if (action === PokemonActionState.HURT) {
       animation = AnimationType.Hurt

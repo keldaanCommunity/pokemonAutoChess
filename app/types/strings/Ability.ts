@@ -999,6 +999,12 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.MAGIC_BOUNCE]: {
+    eng: "Magic Bounce",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
@@ -1010,7 +1016,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.EARTHQUAKE]: {
-    eng: `Deals damage [30,60,120,SP] ${Damage.SPECIAL} to all enemy units in the same column/line`,
+    eng: `Deals damage [30,60,120,SP] ${Damage.SPECIAL} to all enemy units in the same column/line of the attacker`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -1118,7 +1124,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.SHADOW_CLONE]: {
-    eng: `The pokemon creates an identical clone of himself next to his target. This clone inherits from the pokemon items and stats`,
+    eng: `The pokemon creates an identical clone of himself next to his target. This clone inherits from the pokemon items and stats, 80% of its max ${Stat.HP} and [30,SP] ${Stat.SHIELD}`,
     esp: ``,
     fra: ``,
     prt: ``
@@ -1190,7 +1196,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.WHEEL_OF_FIRE]: {
-    eng: `Sends a fire wheel that makes a round trip doing [20,40,80,SP] ${Damage.SPECIAL}.`,
+    eng: `Sends a fire wheel that makes a round trip doing [20,40,80,SP] ${Damage.SPECIAL}`,
     esp: `Envía una rueda de fuego que hace un viaje de ida y vuelta haciendo 30,40,50 de daño especial.`,
     fra: `Envoie une boule de feu faisant un aller retour, endommageant les pokémons pour 30,40,50 dégats spéciaux`,
     prt: ``
@@ -1310,7 +1316,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.BITE]: {
-    eng: `30% Life steal mono target that deals [30,60,120,SP] ${Damage.SPECIAL}`,
+    eng: `Deals [40,80,120,SP] ${Damage.SPECIAL} damage to the target and heals for 30% of the damage`,
     esp: `50% Vida robar mono objetivo de ataque físico que inflige 30,50,70 de daño.`,
     fra: `Attaque monocible avec 50% de vol de vie faisant 30,50,70 dégats spéciaux.`,
     prt: ``
@@ -1466,13 +1472,13 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     fra: ``
   },
   CRABHAMMER: {
-    eng: `Deals [30,60,120,SP] ${Damage.SPECIAL}. Execute the target if below 30%`,
+    eng: `Deals [40,80,120,SP] ${Damage.SPECIAL}. High chance of crit. Execute the target if below 30%`,
     esp: ``,
     prt: ``,
     fra: ``
   },
   DIAMOND_STORM: {
-    eng: `+[3,6,9,SP] ${Stat.DEF} to adjacent allies`,
+    eng: `Deals [200,SP]% of current ${Stat.DEF} as special damage to surrounding enemies`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1769,7 +1775,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     eng: `Gives [10,SP] ${Stat.SHIELD} to your team, plus additional bonus depending on the weather:
 Sun: also gives [5,SP] ${Stat.ATK}
 Rain: also gives [20,SP] ${Stat.MANA}
-Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
+Snow: also gives [2,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     esp: "",
     prt: "",
     fra: "Météo"
@@ -1998,6 +2004,12 @@ Snow: also gives [5,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
   },
   [Ability.LINK_CABLE]: {
     eng: `Dash into a new spot, then triggers an electric arc between Plusle and Minun that deals [50,SP] ${Damage.SPECIAL}. If Plusle or Minun are alone, deals this damage to adjacent enemies instead.`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.MAGIC_BOUNCE]: {
+    eng: `For [3,6,12] seconds, whenever this pokemon is hit by an ability, the caster is ${Status.SILENCE} for 4 seconds and take ${Damage.SPECIAL} equal to this pokemon current ${Stat.SPE_DEF}`,
     esp: "",
     prt: "",
     fra: ""

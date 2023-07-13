@@ -77,7 +77,7 @@ export const SynergyTriggers: { [key in Synergy]: number[] } = {
   [Synergy.STEEL]: [2, 4, 6],
   [Synergy.GROUND]: [2, 4, 6],
   [Synergy.POISON]: [3, 5, 7],
-  [Synergy.DRAGON]: [3, 5],
+  [Synergy.DRAGON]: [3, 5, 7],
   [Synergy.FIELD]: [3, 6, 9],
   [Synergy.MONSTER]: [2, 4, 6],
   [Synergy.HUMAN]: [2, 4, 6],
@@ -88,7 +88,7 @@ export const SynergyTriggers: { [key in Synergy]: number[] } = {
   [Synergy.ROCK]: [2, 4, 6],
   [Synergy.GHOST]: [2, 4, 6, 8],
   [Synergy.FAIRY]: [2, 4, 6],
-  [Synergy.ICE]: [3, 5],
+  [Synergy.ICE]: [3, 4, 5, 6],
   [Synergy.FOSSIL]: [2, 4, 6],
   [Synergy.SOUND]: [2, 4, 6],
   [Synergy.ARTIFICIAL]: [2, 4, 6],
@@ -110,7 +110,7 @@ export const RarityColor: { [key in Rarity]: string } = {
   [Rarity.HATCH]: "#b9915a"
 }
 
-export const RarityProbability: { [key in Rarity]: number } = {
+export const BoosterRarityProbability: { [key in Rarity]: number } = {
   [Rarity.COMMON]: 0.15,
   [Rarity.UNCOMMON]: 0.2,
   [Rarity.RARE]: 0.2,
@@ -133,7 +133,7 @@ export const RarityProbabilityPerLevel: { [key: number]: number[] } = {
   1: [1, 0, 0, 0, 0],
   2: [1, 0, 0, 0, 0],
   3: [0.7, 0.3, 0, 0, 0],
-  4: [0.55, 0.35, 0.10, 0, 0],
+  4: [0.55, 0.35, 0.1, 0, 0],
   5: [0.4, 0.3, 0.25, 0.05, 0],
   6: [0.29, 0.31, 0.295, 0.1, 0.005],
   7: [0.22, 0.28, 0.33, 0.15, 0.02],
@@ -303,7 +303,8 @@ export const Mythical1Shop = new Array<PkmProposition>(
   Pkm.SOLROCK,
   Pkm.MILTANK,
   Pkm.MARACTUS,
-  PkmDuo.PLUSLE_MINUN
+  PkmDuo.PLUSLE_MINUN,
+  Pkm.PINSIR
 )
 
 export const Mythical2Shop = new Array<PkmProposition>(
@@ -337,7 +338,6 @@ export const Mythical2Shop = new Array<PkmProposition>(
   Pkm.KYOGRE,
   Pkm.GROUDON,
   Pkm.VOLCANION,
-  Pkm.ORIGIN_GIRATINA,
   Pkm.MARSHADOW,
   Pkm.XERNEAS,
   Pkm.YVELTAL
@@ -354,6 +354,39 @@ export const HatchList = new Array<Pkm>(
   Pkm.FROAKIE,
   Pkm.TEPIG
 )
+
+export function getEvolutionCountNeeded(pkm: Pkm): number {
+  if (pkm === Pkm.MAGIKARP) {
+    return 9
+  }
+  return 3
+}
+
+export const FishRarityProbability: {
+  [waterLevel: number]: { [key in Rarity]?: number }
+} = {
+  1: {
+    [Rarity.SPECIAL]: 0.5,
+    [Rarity.COMMON]: 0.4,
+    [Rarity.UNCOMMON]: 0.1,
+    [Rarity.RARE]: 0,
+    [Rarity.EPIC]: 0
+  },
+  2: {
+    [Rarity.SPECIAL]: 0.4,
+    [Rarity.COMMON]: 0.3,
+    [Rarity.UNCOMMON]: 0.2,
+    [Rarity.RARE]: 0.1,
+    [Rarity.EPIC]: 0
+  },
+  3: {
+    [Rarity.SPECIAL]: 0.3,
+    [Rarity.COMMON]: 0.2,
+    [Rarity.UNCOMMON]: 0.2,
+    [Rarity.RARE]: 0.2,
+    [Rarity.EPIC]: 0.1
+  }
+}
 
 export const MAX_PLAYERS_PER_LOBBY = 8
 
@@ -690,9 +723,9 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.CHOICE_SPECS]: { [Stat.AP]: 100 },
   [Item.SOUL_DEW]: { [Stat.AP]: 10, [Stat.MANA]: 15 },
   [Item.UPGRADE]: { [Stat.AP]: 10, [Stat.ATK_SPEED]: 10 },
-  [Item.REAPER_CLOTH]: { [Stat.AP]: 15, [Stat.CRIT_CHANCE]: 15 },
+  [Item.REAPER_CLOTH]: { [Stat.AP]: 20, [Stat.CRIT_CHANCE]: 20 },
   [Item.POKEMONOMICON]: { [Stat.AP]: 10, [Stat.SHIELD]: 15 },
-  [Item.POWER_LENS]: { [Stat.AP]: 10, [Stat.SPE_DEF]: 1 },
+  [Item.POWER_LENS]: { [Stat.AP]: 10, [Stat.SPE_DEF]: 5 },
   [Item.SHELL_BELL]: { [Stat.AP]: 10, [Stat.ATK]: 1 },
   [Item.LUCKY_EGG]: { [Stat.AP]: 10, [Stat.DEF]: 1 },
   [Item.AQUA_EGG]: { [Stat.MANA]: 50 },
@@ -716,15 +749,15 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.RUNE_PROTECT]: { [Stat.CRIT_CHANCE]: 5, [Stat.SHIELD]: 15 },
   [Item.WIDE_LENS]: { [Stat.CRIT_CHANCE]: 5, [Stat.SPE_DEF]: 1 },
   [Item.RAZOR_CLAW]: { [Stat.CRIT_CHANCE]: 55, [Stat.ATK]: 1 },
-  [Item.FLUFFY_TAIL]: { [Stat.CRIT_CHANCE]: 5, [Stat.SPE_DEF]: 1 },
+  [Item.FLUFFY_TAIL]: { [Stat.CRIT_CHANCE]: 5, [Stat.SPE_DEF]: 5 },
   [Item.ORAN_BERRY]: { [Stat.SHIELD]: 150 },
   [Item.SHINY_CHARM]: { [Stat.SHIELD]: 15, [Stat.SPE_DEF]: 1 },
   [Item.GRACIDEA_FLOWER]: { [Stat.SHIELD]: 15, [Stat.ATK]: 1 },
   [Item.FLAME_ORB]: { [Stat.SHIELD]: 15, [Stat.DEF]: 1 },
-  [Item.ASSAULT_VEST]: { [Stat.SPE_DEF]: 18 },
+  [Item.ASSAULT_VEST]: { [Stat.SPE_DEF]: 20 },
   [Item.AMULET_COIN]: { [Stat.SPE_DEF]: 1, [Stat.ATK]: 1 },
   [Item.POKE_DOLL]: { [Stat.SPE_DEF]: 1, [Stat.DEF]: 1 },
-  [Item.RED_ORB]: { [Stat.ATK]: 10 },
+  [Item.RED_ORB]: { [Stat.ATK]: 8 },
   [Item.MAX_REVIVE]: { [Stat.ATK]: 1, [Stat.DEF]: 1 },
   [Item.ROCKY_HELMET]: { [Stat.DEF]: 12 }
 }

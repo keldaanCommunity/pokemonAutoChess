@@ -161,7 +161,7 @@ export const SynergyDescription: {
     fra: ""
   },
   [Synergy.WATER]: {
-    eng: `Water pokemons have a chance to dodge basic attacks`,
+    eng: `Water pokemons have a chance to dodge basic attacks. A new water pokemon is fished after each PvP turn and put on your bench.`,
     esp: "",
     fra: ""
   },
@@ -201,9 +201,9 @@ export const SynergyDescription: {
     fra: ""
   },
   [Synergy.DRAGON]: {
-    eng: `Dragon pokemons gain ${Stat.ATK_SPEED} after every basic attack`,
-    esp: "Dragón",
-    fra: "Dragon"
+    eng: `Dragon amplify synergies and gains more stats when fully evolved.`,
+    esp: "",
+    fra: ""
   },
   [Synergy.FIELD]: {
     eng: `When a field pokemon dies, all the other field pokemons are healed and gain ${Stat.ATK_SPEED}`,
@@ -211,7 +211,7 @@ export const SynergyDescription: {
     fra: ""
   },
   [Synergy.MONSTER]: {
-    eng: `Monster pokemons heal and gain bonus stats every time they knock down an opponent`,
+    eng: `Monster pokemons gain Attack, heal and increase their max HP, and grow in size every time they knock down an opponent`,
     esp: "",
     fra: ""
   },
@@ -241,7 +241,7 @@ export const SynergyDescription: {
     fra: ""
   },
   [Synergy.ROCK]: {
-    eng: `Rock pokemons gain ${Stat.SHIELD} at the start of the combat`,
+    eng: `Rock pokemons gain ${Stat.DEF} and better resist to critical damage`,
     esp: "",
     fra: ""
   },
@@ -256,7 +256,7 @@ export const SynergyDescription: {
     fra: ""
   },
   [Synergy.ICE]: {
-    eng: `All allies have a chance to ${Status.FREEZE} the enemy for 2 seconds after a hit`,
+    eng: `All allies gain ${Stat.SPE_DEF} and have a chance to ${Status.FREEZE} the enemy for 2 seconds after a hit`,
     esp: "",
     fra: ""
   },

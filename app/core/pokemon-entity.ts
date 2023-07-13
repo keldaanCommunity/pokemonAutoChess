@@ -272,6 +272,10 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
+  addMaxHP(value: number) {
+    this.hp = min(1)(this.hp + value)
+  }
+
   addDodgeChance(value: number) {
     this.dodge = max(0.9)(this.dodge + value)
   }
@@ -401,14 +405,9 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       this.setMana(this.mana + 4)
     }
 
-    if (this.effects.includes(Effect.DRAGON_ENERGY)) {
-      this.addAttackSpeed(5)
-    } else if (this.effects.includes(Effect.DRAGON_DANCE)) {
-      this.addAttackSpeed(10)
-    }
-
     if (this.effects.includes(Effect.TELEPORT_NEXT_ATTACK)) {
-      const crit = this.items.has(Item.REAPER_CLOTH) && chance(this.critChance)
+      const crit =
+        this.items.has(Item.REAPER_CLOTH) && chance(this.critChance / 100)
       if (crit) {
         this.onCritical(target, board)
       }
@@ -422,9 +421,13 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       removeInArray(this.effects, Effect.TELEPORT_NEXT_ATTACK)
     }
 
-    if(this.passive === Passive.SHARED_VISION){
+    if (this.passive === Passive.SHARED_VISION) {
       board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
-        if (ally && ally.passive === Passive.SHARED_VISION && this.team === ally.team) {
+        if (
+          ally &&
+          ally.passive === Passive.SHARED_VISION &&
+          this.team === ally.team
+        ) {
           ally.targetX = this.targetX
           ally.targetY = this.targetY
         }
@@ -448,9 +451,8 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       this.status.triggerParalysis(5000, this)
     }
 
-
     if (this.items.has(Item.UPGRADE)) {
-      this.addAttackSpeed(5)
+      this.addAttackSpeed(4)
       this.count.upgradeCount++
     }
 
@@ -468,8 +470,12 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.hasSynergyEffect(Synergy.ICE)) {
       let freezeChance = 0
-      if (this.effects.includes(Effect.FROSTY)) {
+      if (this.effects.includes(Effect.CHILLY)) {
         freezeChance = 0.1
+      } else if (this.effects.includes(Effect.FROSTY)) {
+        freezeChance = 0.2
+      } else if (this.effects.includes(Effect.FREEZING)) {
+        freezeChance = 0.3
       } else if (this.effects.includes(Effect.SHEER_COLD)) {
         freezeChance = 0.4
       }
@@ -615,6 +621,10 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       target.setMana(target.mana - 15)
       target.count.manaBurnCount++
     }
+
+    if (this.items.has(Item.RAZOR_FANG)) {
+      target.status.triggerArmorReduction(4000)
+    }
   }
 
   onKill(target: PokemonEntity, board: Board) {
@@ -637,25 +647,20 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       const isPowerTrip = this.effects.includes(Effect.POWER_TRIP)
 
       if (isPursuit || isBrutalSwing || isPowerTrip) {
-        let defBoost = 0
-        let healBoost = 0
+        let lifeBoost = 0
         let attackBoost = 0
         if (isPursuit) {
-          defBoost = 2
-          healBoost = 30
+          lifeBoost = 30
           attackBoost = 3
         } else if (isBrutalSwing) {
-          defBoost = 4
-          healBoost = 60
+          lifeBoost = 60
           attackBoost = 6
         } else if (isPowerTrip) {
-          defBoost = 6
-          healBoost = 90
+          lifeBoost = 90
           attackBoost = 9
         }
-        this.addSpecialDefense(defBoost)
-        this.addDefense(defBoost)
-        this.handleHeal(healBoost, this, 0)
+        this.addMaxHP(lifeBoost)
+        this.handleHeal(lifeBoost, this, 0)
         this.addAttack(attackBoost)
         this.count.monsterExecutionCount++
       }

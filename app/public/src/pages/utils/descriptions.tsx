@@ -25,11 +25,7 @@ const Statuses = Object.keys(Status)
 const Weathers = Object.keys(Weather)
 const Synergies = Object.keys(Synergy)
 
-export function addIconsToDescription(
-  description: string,
-  tier: number = 0,
-  ap: number = 0
-) {
+export function addIconsToDescription(description: string, tier = 0, ap = 0) {
   const matchIcon = description.match(iconRegExp)
   if (matchIcon === null) return description
   const descriptionParts = description.split(iconRegExp)

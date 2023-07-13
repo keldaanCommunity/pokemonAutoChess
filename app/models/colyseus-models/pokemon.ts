@@ -11,6 +11,7 @@ import { Rarity, AttackType, PokemonActionState } from "../../types/enum/Game"
 import { Ability } from "../../types/enum/Ability"
 import { Synergy } from "../../types/enum/Synergy"
 import { Passive } from "../../types/enum/Passive"
+import Player from "./player"
 
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string
@@ -92,6 +93,21 @@ export class Pokemon extends Schema implements IPokemon {
       this.evolutionTimer = EvolutionTime.EVOLVE_HATCH
     }
   }
+
+  get canBePlaced(): boolean {
+    return ![Pkm.DITTO, Pkm.EGG].includes(this.name)
+  }
+
+  get canBeCloned(): boolean {
+    return (
+      this.rarity !== Rarity.MYTHICAL &&
+      this.rarity !== Rarity.HATCH &&
+      ![Pkm.DITTO, Pkm.EGG].includes(this.name)
+    )
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onChangePosition(x: number, y: number, player: Player) {}
 }
 
 export class Ditto extends Pokemon {
@@ -355,7 +371,7 @@ export class Swablu extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.SWABLU,
-      [Synergy.FAIRY, Synergy.DRAGON, Synergy.SOUND],
+      [Synergy.NORMAL, Synergy.FAIRY, Synergy.SOUND],
       Rarity.LEGENDARY,
       Pkm.ALTARIA,
       100,
@@ -378,7 +394,7 @@ export class Altaria extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.ALTARIA,
-      [Synergy.FAIRY, Synergy.DRAGON, Synergy.SOUND],
+      [Synergy.DRAGON, Synergy.FAIRY, Synergy.SOUND],
       Rarity.LEGENDARY,
       Pkm.MEGA_ALTARIA,
       200,
@@ -401,7 +417,7 @@ export class MegaAltaria extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.MEGA_ALTARIA,
-      [Synergy.FAIRY, Synergy.DRAGON, Synergy.SOUND],
+      [Synergy.DRAGON, Synergy.FAIRY, Synergy.SOUND],
       Rarity.LEGENDARY,
       Pkm.DEFAULT,
       300,
@@ -957,9 +973,9 @@ export class Garchomp extends Pokemon {
       Rarity.RARE,
       Pkm.DEFAULT,
       240,
-      28,
-      5,
-      4,
+      32,
+      6,
+      6,
       1,
       AttackSprite.DRAGON_MELEE,
       3,
@@ -1459,7 +1475,7 @@ export class Oshawott extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.OSHAWOTT,
-      [Synergy.WATER, Synergy.MONSTER, Synergy.FIGHTING],
+      [Synergy.WATER, Synergy.FIELD, Synergy.FIGHTING],
       Rarity.EPIC,
       Pkm.DEWOTT,
       90,
@@ -1482,7 +1498,7 @@ export class Dewott extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.DEWOTT,
-      [Synergy.WATER, Synergy.MONSTER, Synergy.FIGHTING],
+      [Synergy.WATER, Synergy.FIELD, Synergy.FIGHTING],
       Rarity.EPIC,
       Pkm.SAMUROTT,
       150,
@@ -1505,7 +1521,7 @@ export class Samurott extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.SAMUROTT,
-      [Synergy.WATER, Synergy.MONSTER, Synergy.FIGHTING],
+      [Synergy.WATER, Synergy.FIELD, Synergy.FIGHTING],
       Rarity.EPIC,
       Pkm.DEFAULT,
       260,
@@ -1529,12 +1545,12 @@ export class Larvitar extends Pokemon {
     super(
       Pkm.LARVITAR,
       [Synergy.DARK, Synergy.MONSTER, Synergy.ROCK],
-      Rarity.EPIC,
+      Rarity.RARE,
       Pkm.PUPITAR,
-      90,
-      8,
+      75,
+      7,
       4,
-      4,
+      2,
       1,
       AttackSprite.ROCK_MELEE,
       1,
@@ -1552,12 +1568,12 @@ export class Pupitar extends Pokemon {
     super(
       Pkm.PUPITAR,
       [Synergy.DARK, Synergy.MONSTER, Synergy.ROCK],
-      Rarity.EPIC,
+      Rarity.RARE,
       Pkm.TYRANITAR,
-      140,
-      15,
+      130,
+      14,
       6,
-      6,
+      4,
       1,
       AttackSprite.ROCK_MELEE,
       2,
@@ -1575,12 +1591,12 @@ export class Tyranitar extends Pokemon {
     super(
       Pkm.TYRANITAR,
       [Synergy.DARK, Synergy.MONSTER, Synergy.ROCK],
-      Rarity.EPIC,
+      Rarity.RARE,
       Pkm.DEFAULT,
-      230,
-      33,
+      210,
+      28,
       8,
-      8,
+      5,
       1,
       AttackSprite.ROCK_MELEE,
       3,
@@ -1808,7 +1824,7 @@ export class Litwick extends Pokemon {
       Rarity.COMMON,
       Pkm.LAMPENT,
       50,
-      5,
+      4,
       1,
       1,
       3,
@@ -1831,7 +1847,7 @@ export class Lampent extends Pokemon {
       Rarity.COMMON,
       Pkm.CHANDELURE,
       90,
-      9,
+      8,
       1,
       1,
       3,
@@ -2456,7 +2472,7 @@ export class Cubone extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.CUBONE,
-      [Synergy.GROUND, Synergy.ROCK],
+      [Synergy.GROUND, Synergy.GHOST],
       Rarity.EPIC,
       Pkm.MAROWAK,
       100,
@@ -2466,7 +2482,7 @@ export class Cubone extends Pokemon {
       1,
       AttackSprite.ROCK_MELEE,
       1,
-      60,
+      80,
       Ability.BONEMERANG,
       shiny,
       emotion,
@@ -2479,7 +2495,7 @@ export class Marowak extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.MAROWAK,
-      [Synergy.GROUND, Synergy.ROCK],
+      [Synergy.GROUND, Synergy.GHOST],
       Rarity.EPIC,
       Pkm.ALOLAN_MAROWAK,
       180,
@@ -2489,7 +2505,7 @@ export class Marowak extends Pokemon {
       1,
       AttackSprite.ROCK_MELEE,
       2,
-      60,
+      80,
       Ability.BONEMERANG,
       shiny,
       emotion,
@@ -2512,7 +2528,7 @@ export class AlolanMarowak extends Pokemon {
       1,
       AttackSprite.FIRE_MELEE,
       3,
-      60,
+      80,
       Ability.BONEMERANG,
       shiny,
       emotion,
@@ -3352,7 +3368,7 @@ export class Trapinch extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.TRAPINCH,
-      [Synergy.GROUND, Synergy.BUG],
+      [Synergy.BUG, Synergy.GROUND],
       Rarity.RARE,
       Pkm.VIBRAVA,
       80,
@@ -3375,11 +3391,11 @@ export class Vibrava extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.VIBRAVA,
-      [Synergy.GROUND, Synergy.DRAGON, Synergy.BUG],
+      [Synergy.DRAGON, Synergy.BUG, Synergy.GROUND],
       Rarity.RARE,
       Pkm.FLYGON,
       120,
-      14,
+      13,
       4,
       4,
       1,
@@ -3398,11 +3414,11 @@ export class Flygon extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.FLYGON,
-      [Synergy.GROUND, Synergy.DRAGON, Synergy.BUG],
+      [Synergy.DRAGON, Synergy.BUG, Synergy.GROUND],
       Rarity.RARE,
       Pkm.DEFAULT,
       220,
-      28,
+      26,
       4,
       4,
       1,
@@ -3766,7 +3782,7 @@ export class Horsea extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.HORSEA,
-      [Synergy.WATER, Synergy.DRAGON],
+      [Synergy.DRAGON, Synergy.WATER],
       Rarity.UNCOMMON,
       Pkm.SEADRA,
       70,
@@ -3789,7 +3805,7 @@ export class Seadra extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.SEADRA,
-      [Synergy.WATER, Synergy.DRAGON],
+      [Synergy.DRAGON, Synergy.WATER],
       Rarity.UNCOMMON,
       Pkm.KINGDRA,
       140,
@@ -3812,7 +3828,7 @@ export class Kingdra extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.KINGDRA,
-      [Synergy.WATER, Synergy.DRAGON],
+      [Synergy.DRAGON, Synergy.WATER],
       Rarity.UNCOMMON,
       Pkm.DEFAULT,
       250,
@@ -5152,10 +5168,10 @@ export class Totodile extends Pokemon {
     super(
       Pkm.TOTODILE,
       [Synergy.WATER, Synergy.MONSTER, Synergy.AQUATIC],
-      Rarity.UNCOMMON,
+      Rarity.RARE,
       Pkm.CROCONAW,
-      60,
-      6,
+      75,
+      7,
       2,
       2,
       1,
@@ -5175,10 +5191,10 @@ export class Croconaw extends Pokemon {
     super(
       Pkm.CROCONAW,
       [Synergy.WATER, Synergy.MONSTER, Synergy.AQUATIC],
-      Rarity.UNCOMMON,
+      Rarity.RARE,
       Pkm.FERALIGATR,
-      110,
-      12,
+      130,
+      15,
       3,
       3,
       1,
@@ -5198,10 +5214,10 @@ export class Feraligatr extends Pokemon {
     super(
       Pkm.FERALIGATR,
       [Synergy.WATER, Synergy.MONSTER, Synergy.AQUATIC],
-      Rarity.UNCOMMON,
+      Rarity.RARE,
       Pkm.DEFAULT,
-      200,
-      22,
+      240,
+      28,
       5,
       5,
       1,
@@ -5910,7 +5926,7 @@ export class Charmander extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.CHARMANDER,
-      [Synergy.FIRE, Synergy.DRAGON],
+      [Synergy.DRAGON, Synergy.FIRE],
       Rarity.COMMON,
       Pkm.CHARMELEON,
       60,
@@ -5933,7 +5949,7 @@ export class Charmeleon extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.CHARMELEON,
-      [Synergy.FIRE, Synergy.DRAGON],
+      [Synergy.DRAGON, Synergy.FIRE],
       Rarity.COMMON,
       Pkm.CHARIZARD,
       120,
@@ -5956,7 +5972,7 @@ export class Charizard extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.CHARIZARD,
-      [Synergy.FIRE, Synergy.DRAGON, Synergy.FLYING],
+      [Synergy.DRAGON, Synergy.FIRE, Synergy.FLYING],
       Rarity.COMMON,
       Pkm.DEFAULT,
       220,
@@ -5993,7 +6009,9 @@ export class Magikarp extends Pokemon {
       Ability.SPLASH,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.MAGIKARP
     )
   }
 }
@@ -6002,7 +6020,7 @@ export class Gyarados extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.GYARADOS,
-      [Synergy.WATER, Synergy.FLYING],
+      [Synergy.DRAGON, Synergy.WATER, Synergy.FLYING],
       Rarity.SPECIAL,
       Pkm.DEFAULT,
       300,
@@ -6073,7 +6091,7 @@ export class Spearow extends Pokemon {
       Pkm.SPEAROW,
       [Synergy.FLYING, Synergy.NORMAL],
       Rarity.SPECIAL,
-      Pkm.DEFAULT,
+      Pkm.FEAROW,
       30,
       4,
       1,
@@ -6237,19 +6255,27 @@ export class Giratina extends Pokemon {
       [Synergy.DRAGON, Synergy.GHOST],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
-      300,
+      250,
       30,
-      5,
-      5,
+      6,
+      6,
+      1,
+      AttackSprite.DRAGON_MELEE,
       2,
-      AttackSprite.GHOST_RANGE,
-      3,
       40,
       Ability.SHADOW_SNEAK,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.GIRATINA
     )
+  }
+
+  onChangePosition(x: number, y: number, player: Player) {
+    if (y !== 3) {
+      player.transformPokemon(this, Pkm.ORIGIN_GIRATINA)
+    }
   }
 }
 
@@ -6257,22 +6283,30 @@ export class OriginGiratina extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.ORIGIN_GIRATINA,
-      [Synergy.DRAGON, Synergy.GHOST],
+      [Synergy.DRAGON, Synergy.GHOST, Synergy.FLYING],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
-      400,
+      200,
       40,
-      6,
-      6,
-      1,
+      2,
+      2,
+      2,
       AttackSprite.GHOST_RANGE,
-      3,
+      2,
       40,
       Ability.SHADOW_SNEAK,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.GIRATINA
     )
+  }
+
+  onChangePosition(x: number, y: number, player: Player) {
+    if (y === 3) {
+      player.transformPokemon(this, Pkm.GIRATINA)
+    }
   }
 }
 
@@ -6338,7 +6372,7 @@ export class Miltank extends Pokemon {
       1,
       AttackSprite.NORMAL_MELEE,
       1,
-      90,
+      100,
       Ability.ROLLOUT,
       shiny,
       emotion,
@@ -6394,6 +6428,30 @@ export class Moltres extends Pokemon {
   }
 }
 
+export class Pinisir extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.PINSIR,
+      [Synergy.BUG, Synergy.HUMAN],
+      Rarity.MYTHICAL,
+      Pkm.DEFAULT,
+      180,
+      22,
+      3,
+      3,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      1,
+      85,
+      Ability.GUILLOTINE,
+      shiny,
+      emotion,
+      true,
+      false
+    )
+  }
+}
+
 export class Articuno extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
@@ -6423,14 +6481,14 @@ export class Dialga extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.DIALGA,
-      [Synergy.STEEL, Synergy.DRAGON],
+      [Synergy.DRAGON, Synergy.STEEL],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       300,
-      30,
+      25,
       5,
       5,
-      2,
+      1,
       AttackSprite.FIRE_RANGE,
       2,
       150,
@@ -6450,7 +6508,7 @@ export class Palkia extends Pokemon {
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       300,
-      30,
+      25,
       5,
       5,
       1,
@@ -6492,7 +6550,7 @@ export class Suicune extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.SUICUNE,
-      [Synergy.WATER, Synergy.ICE],
+      [Synergy.WATER, Synergy.ICE, Synergy.FIELD],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       300,
@@ -7606,7 +7664,7 @@ export class Latias extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.LATIAS,
-      [Synergy.PSYCHIC, Synergy.DRAGON],
+      [Synergy.DRAGON, Synergy.PSYCHIC],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       120,
@@ -7631,7 +7689,7 @@ export class Latios extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.LATIOS,
-      [Synergy.PSYCHIC, Synergy.DRAGON],
+      [Synergy.DRAGON, Synergy.PSYCHIC],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       120,
@@ -7824,7 +7882,7 @@ export class Reshiram extends Pokemon {
       [Synergy.DRAGON, Synergy.FIRE],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
-      250,
+      200,
       30,
       3,
       6,
@@ -7848,7 +7906,7 @@ export class Zekrom extends Pokemon {
       [Synergy.DRAGON, Synergy.ELECTRIC],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
-      250,
+      200,
       30,
       3,
       6,
@@ -9267,7 +9325,7 @@ export class Guzzlord extends Pokemon {
       [Synergy.DRAGON, Synergy.DARK],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
-      300,
+      250,
       22,
       3,
       3,
@@ -9289,7 +9347,7 @@ export class Eternatus extends Pokemon {
       [Synergy.DRAGON, Synergy.POISON],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
-      250,
+      200,
       30,
       3,
       3,
@@ -9782,6 +9840,53 @@ export class Gourgeist extends Pokemon {
   }
 }
 
+export class Natu extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.NATU,
+      [Synergy.PSYCHIC, Synergy.FLYING],
+      Rarity.UNCOMMON,
+      Pkm.XATU,
+      90,
+      5,
+      2,
+      2,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      1,
+      70,
+      Ability.MAGIC_BOUNCE,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+export class Xatu extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.XATU,
+      [Synergy.PSYCHIC, Synergy.FLYING],
+      Rarity.UNCOMMON,
+      Pkm.DEFAULT,
+      180,
+      12,
+      3,
+      3,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      2,
+      70,
+      Ability.MAGIC_BOUNCE,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
 export class Noibat extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
@@ -9928,7 +10033,7 @@ export class Makuhita extends Pokemon {
       [Synergy.FIGHTING, Synergy.MONSTER],
       Rarity.RARE,
       Pkm.HARIYAMA,
-      70,
+      80,
       8,
       3,
       3,
@@ -9951,7 +10056,7 @@ export class Hariyama extends Pokemon {
       [Synergy.FIGHTING, Synergy.MONSTER],
       Rarity.RARE,
       Pkm.DEFAULT,
-      160,
+      170,
       22,
       5,
       5,
@@ -10793,7 +10898,7 @@ export class Poochyena extends Pokemon {
       AttackSprite.NORMAL_MELEE,
       1,
       75,
-      Ability.BITE,
+      Ability.GROWL,
       shiny,
       emotion,
       false,
@@ -10817,7 +10922,7 @@ export class Mightyena extends Pokemon {
       AttackSprite.NORMAL_MELEE,
       2,
       75,
-      Ability.BITE,
+      Ability.GROWL,
       shiny,
       emotion,
       true,
@@ -11117,7 +11222,7 @@ export class Applin extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.APPLIN,
-      [Synergy.GRASS, Synergy.DRAGON],
+      [Synergy.DRAGON, Synergy.GRASS],
       Rarity.EPIC,
       Pkm.APPLETUN,
       130,
@@ -11141,7 +11246,7 @@ export class Appletun extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.APPLETUN,
-      [Synergy.GRASS, Synergy.DRAGON],
+      [Synergy.DRAGON, Synergy.GRASS],
       Rarity.EPIC,
       Pkm.DEFAULT,
       250,
@@ -11385,7 +11490,7 @@ export class Drakloak extends Pokemon {
       [Synergy.DRAGON, Synergy.GHOST],
       Rarity.HATCH,
       Pkm.DRAGAPULT,
-      150,
+      140,
       12,
       3,
       3,
@@ -11410,8 +11515,8 @@ export class Dragapult extends Pokemon {
       [Synergy.DRAGON, Synergy.GHOST],
       Rarity.HATCH,
       Pkm.DEFAULT,
-      260,
-      26,
+      190,
+      22,
       3,
       3,
       2,
@@ -12534,7 +12639,7 @@ export class Diglett extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.DIGLETT,
-      [Synergy.GROUND, Synergy.ROCK],
+      [Synergy.GROUND, Synergy.NORMAL],
       Rarity.UNCOMMON,
       Pkm.DUGTRIO,
       75,
@@ -12558,7 +12663,7 @@ export class Dugtrio extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.DUGTRIO,
-      [Synergy.GROUND, Synergy.ROCK],
+      [Synergy.GROUND, Synergy.NORMAL],
       Rarity.UNCOMMON,
       Pkm.DEFAULT,
       160,

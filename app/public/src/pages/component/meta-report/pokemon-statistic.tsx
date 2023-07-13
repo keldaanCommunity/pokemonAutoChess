@@ -16,9 +16,9 @@ export default function PokemonStatistic(props: {
     height: "60px",
     imageRendering: "pixelated"
   }
-  const portrait = PkmIndex[props.pokemon.name]
-    ? getPortraitSrc(PkmIndex[props.pokemon.name])
-    : getPortraitSrc(PkmIndex[Pkm.MAGIKARP])
+  const portrait = getPortraitSrc(
+    PkmIndex[props.pokemon.name] ?? PkmIndex[Pkm.MAGIKARP]
+  )
   return (
     <div
       style={{ backgroundColor: "rgb(84, 89, 107)", margin: "10px" }}

@@ -22,7 +22,11 @@ import {
   OnDragDropCombineCommand,
   OnPokemonPropositionCommand
 } from "./commands/game-commands"
-import { ExpPlace, RequiredStageLevelForXpElligibility } from "../types/Config"
+import {
+  ExpPlace,
+  getEvolutionCountNeeded,
+  RequiredStageLevelForXpElligibility
+} from "../types/Config"
 import { Item, BasicItems } from "../types/enum/Item"
 import PokemonFactory from "../models/pokemon-factory"
 import EloRank from "elo-rank"
@@ -725,8 +729,12 @@ export default class GameRoom extends Room<GameState> {
     pokemon.positionY = y
   }
 
-  getPokemonByPosition(playerId: string, x: number, y: number) {
-    let pkm: IPokemon | undefined
+  getPokemonByPosition(
+    playerId: string,
+    x: number,
+    y: number
+  ): Pokemon | undefined {
+    let pkm: Pokemon | undefined
     const player = this.state.players.get(playerId)
     if (player) {
       player.board.forEach((pokemon, key) => {
@@ -798,11 +806,11 @@ export default class GameRoom extends Room<GameState> {
     player.effects.update(player.synergies, player.board)
   }
 
-  updateEvolution(id: string) {
+  updateEvolution(playerId: string) {
     let evolve = false
     const itemsToAdd = new Array<Item>()
     const basicItemsToAdd = new Array<Item>()
-    const player = this.state.players.get(id)
+    const player = this.state.players.get(playerId)
     if (!player) return false
 
     player.board.forEach((pokemon, key) => {
@@ -814,8 +822,8 @@ export default class GameRoom extends Room<GameState> {
 
       if (
         pokemonEvolutionName !== Pkm.DEFAULT &&
-        ![Rarity.SPECIAL, Rarity.HATCH].includes(pokemon.rarity) &&
-        count >= 3
+        pokemon.rarity !== Rarity.HATCH &&
+        count >= getEvolutionCountNeeded(pokemon.name)
       ) {
         let coord: { x: number; y: number } | undefined
 
@@ -970,7 +978,7 @@ export default class GameRoom extends Room<GameState> {
     let boardSize = 0
 
     board.forEach((pokemon, key) => {
-      if (pokemon.positionY == 0 && pokemon.rarity !== Rarity.SPECIAL) {
+      if (pokemon.positionY == 0 && pokemon.canBePlaced) {
         boardSize++
       }
     })
@@ -986,18 +994,16 @@ export default class GameRoom extends Room<GameState> {
         count++
       }
     })
-    return count >= 2
+    return count >= getEvolutionCountNeeded(name) - 1
   }
 
-  getFirstPokemonOnBench(board: MapSchema<Pokemon>): Pokemon | undefined {
+  getFirstPlaceablePokemonOnBench(
+    board: MapSchema<Pokemon>
+  ): Pokemon | undefined {
     let pkm: Pokemon | undefined = undefined
     let found = false
     board.forEach((pokemon, key) => {
-      if (
-        pokemon.positionY == 0 &&
-        pokemon.rarity != Rarity.SPECIAL &&
-        !found
-      ) {
+      if (pokemon.positionY == 0 && pokemon.canBePlaced && !found) {
         found = true
         pkm = pokemon
       }

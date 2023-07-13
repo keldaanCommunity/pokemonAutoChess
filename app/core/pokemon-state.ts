@@ -153,6 +153,13 @@ export default class PokemonState {
       }
 
       if (
+        pokemon.simulation.weather === Weather.MISTY &&
+        attackType === AttackType.SPECIAL
+      ) {
+        reducedDamage = Math.ceil(reducedDamage * 1.2)
+      }
+
+      if (
         attacker &&
         attacker.skill == Ability.LOCK_ON &&
         pokemon.status.armorReduction

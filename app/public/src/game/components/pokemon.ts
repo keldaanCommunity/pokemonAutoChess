@@ -7,7 +7,8 @@ import ItemsContainer from "./items-container"
 import { Effect } from "../../../../types/enum/Effect"
 import {
   transformAttackCoordinate,
-  getAttackScale
+  getAttackScale,
+  transformCoordinate
 } from "../../pages/utils/utils"
 import {
   IPokemon,
@@ -93,6 +94,7 @@ export default class Pokemon extends DraggableObject {
   resurection: GameObjects.Sprite | undefined
   runeProtect: GameObjects.Sprite | undefined
   spikeArmor: GameObjects.Sprite | undefined
+  magicBounce: GameObjects.Sprite | undefined
   electricField: GameObjects.Sprite | undefined
   psychicField: GameObjects.Sprite | undefined
   grassField: GameObjects.Sprite | undefined
@@ -645,6 +647,26 @@ export default class Pokemon extends DraggableObject {
     })
   }
 
+  fishingAnimation() {
+    const coordinates = transformCoordinate(this.positionX, this.positionY)
+    const specialProjectile = this.scene.add.sprite(
+      coordinates[0],
+      coordinates[1],
+      Ability.DIVE,
+      "000"
+    )
+    specialProjectile.setDepth(this.sprite.depth - 1)
+    specialProjectile.setScale(1, 1)
+    specialProjectile.anims.play(Ability.DIVE)
+    specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+      specialProjectile.destroy()
+    })
+    this.sprite.once(Phaser.Animations.Events.ANIMATION_REPEAT, () => {
+      const g = <GameScene>this.scene
+      g.animationManager?.animatePokemon(this, PokemonActionState.IDLE)
+    })
+  }
+
   specialAttackAnimation(group: Phaser.GameObjects.Group, ultCount: number) {
     if (this.skill && this.skill === Ability.GROWTH) {
       this.sprite.setScale(2 + 0.5 * ultCount)
@@ -1003,6 +1025,29 @@ export default class Pokemon extends DraggableObject {
     if (this.spikeArmor) {
       this.remove(this.spikeArmor, true)
       this.spikeArmor = undefined
+    }
+  }
+
+  addMagicBounce() {
+    if (!this.magicBounce) {
+      this.magicBounce = new GameObjects.Sprite(
+        this.scene,
+        0,
+        0,
+        Ability.SPIKE_ARMOR,
+        "000"
+      )
+      this.magicBounce.setScale(2, 2)
+      this.scene.add.existing(this.magicBounce)
+      this.magicBounce.anims.play(Ability.MAGIC_BOUNCE)
+      this.add(this.magicBounce)
+    }
+  }
+
+  removeMagicBounce() {
+    if (this.magicBounce) {
+      this.remove(this.magicBounce, true)
+      this.magicBounce = undefined
     }
   }
 

@@ -40,6 +40,7 @@ export const EffectName: { [key in Effect]: string } = {
   [Effect.VENOMOUS]: `Venomous`,
   [Effect.TOXIC]: `Toxic`,
   [Effect.DRAGON_ENERGY]: `Dragon Energy`,
+  [Effect.DRAGON_SCALES]: `Dragon Scales`,
   [Effect.DRAGON_DANCE]: `Dragon Dance`,
   [Effect.BULK_UP]: `Bulk Up`,
   [Effect.RAGE]: `Rage`,
@@ -74,7 +75,9 @@ export const EffectName: { [key in Effect]: string } = {
   [Effect.AROMATIC_MIST]: `Aromatic Mist`,
   [Effect.FAIRY_WIND]: `Fairy Wind`,
   [Effect.STRANGE_STEAM]: `Strange Steam`,
+  [Effect.CHILLY]: `Chilly`,
   [Effect.FROSTY]: `Frosty`,
+  [Effect.FREEZING]: `Freezing`,
   [Effect.SHEER_COLD]: `Sheer Cold`,
   [Effect.ANCIENT_POWER]: `Ancient Power`,
   [Effect.ELDER_POWER]: `Elder Power`,
@@ -100,7 +103,7 @@ export const EffectName: { [key in Effect]: string } = {
   [Effect.MISTY]: "Misty",
   [Effect.WINDY]: "Windy",
   [Effect.NIGHT]: "Night",
-  [Effect.HYDRATATION]: "Hydratation",
+  [Effect.HYDRATATION]: "Hydratation"
 }
 
 export const EffectDescription: {
@@ -162,17 +165,17 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.RAIN_DANCE]: {
-    eng: `25% chance to dodge`,
+    eng: `30% chance to dodge. Fish a pokemon after every PvP fight.`,
     esp: ``,
     fra: ``
   },
   [Effect.DRIZZLE]: {
-    eng: `50% chance to dodge`,
+    eng: `50% chance to dodge. Rare pokemons can be fished.`,
     esp: ``,
     fra: ``
   },
   [Effect.PRIMORDIAL_SEA]: {
-    eng: `75% chance to dodge`,
+    eng: `70% chance to dodge. Epic pokemons can be fished.`,
     esp: ``,
     fra: ``
   },
@@ -277,12 +280,17 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.DRAGON_ENERGY]: {
-    eng: `Gain +5% ${Stat.ATK_SPEED}`,
+    eng: `Dragon's second synergy counts double (not the third)`,
+    esp: ``,
+    fra: ``
+  },
+  [Effect.DRAGON_SCALES]: {
+    eng: `Dragons gain 30 ${Stat.HP} per evolution stage (3 for Mythicals)`,
     esp: ``,
     fra: ``
   },
   [Effect.DRAGON_DANCE]: {
-    eng: `Gain +10%  ${Stat.ATK_SPEED}`,
+    eng: `Dragons gain 10% ${Stat.ATK_SPEED} and 10% ${Stat.AP} per evolution stage (3 for Mythicals)`,
     esp: ``,
     fra: ``
   },
@@ -302,17 +310,17 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.PURSUIT]: {
-    eng: `When knocking down its target, grants 2 ${Stat.DEF}, 2 ${Stat.SPE_DEF}, 3 ${Stat.ATK} and heal 30 ${Stat.HP}`,
+    eng: `When knocking down its target, gain 3 ${Stat.ATK} and 30 max ${Stat.HP}`,
     esp: ``,
     fra: ``
   },
   [Effect.BRUTAL_SWING]: {
-    eng: `When knocking down its target, grants 4 ${Stat.DEF}, 4 ${Stat.SPE_DEF}, 6 ${Stat.ATK} and heal 60 ${Stat.HP}`,
+    eng: `When knocking down its target, gain 6 ${Stat.ATK} and 60 max ${Stat.HP}`,
     esp: ``,
     fra: ``
   },
   [Effect.POWER_TRIP]: {
-    eng: `When knocking down its target, grants 6 ${Stat.DEF}, 6 ${Stat.SPE_DEF}, 9 ${Stat.ATK} and heal 90 ${Stat.HP}`,
+    eng: `When knocking down its target, gain 9 ${Stat.ATK} and 90 max ${Stat.HP}`,
     esp: ``,
     fra: ``
   },
@@ -402,17 +410,17 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.BATTLE_ARMOR]: {
-    eng: `Gain 40 ${Stat.SHIELD}`,
+    eng: `Gain 5 ${Stat.DEF}, receive -30% critical damage`,
     esp: ``,
     fra: ``
   },
   [Effect.MOUTAIN_RESISTANCE]: {
-    eng: `Gain 80 ${Stat.SHIELD}`,
+    eng: `Gain 10 ${Stat.DEF}, receive -50% critical damage`,
     esp: ``,
     fra: ``
   },
   [Effect.DIAMOND_STORM]: {
-    eng: `Gain 160 ${Stat.SHIELD}`,
+    eng: `Gain 20 ${Stat.DEF}, receive -70% critical damage`,
     esp: ``,
     fra: ``
   },
@@ -451,13 +459,23 @@ export const EffectDescription: {
     esp: ``,
     fra: ``
   },
+  [Effect.CHILLY]: {
+    eng: `+3 ${Stat.SPE_DEF}, 10% chance to ${Status.FREEZE}`,
+    esp: ``,
+    fra: ``
+  },
   [Effect.FROSTY]: {
-    eng: `10% chance to ${Status.FREEZE}`,
+    eng: `+6 ${Stat.SPE_DEF}, 20% chance to ${Status.FREEZE}`,
+    esp: ``,
+    fra: ``
+  },
+  [Effect.FREEZING]: {
+    eng: `+10 ${Stat.SPE_DEF}, 30% chance to ${Status.FREEZE}`,
     esp: ``,
     fra: ``
   },
   [Effect.SHEER_COLD]: {
-    eng: `40% chance to ${Status.FREEZE}`,
+    eng: `+15 ${Stat.SPE_DEF}, 40% chance to ${Status.FREEZE}`,
     esp: ``,
     fra: ``
   },
