@@ -545,7 +545,7 @@ export const AbilityName: { [key in Ability]: Langage } = {
     fra: ``
   },
   TWISTING_NETHER: {
-    eng: `Twisting Neither`,
+    eng: `Twisting Nether`,
     esp: ``,
     prt: ``,
     fra: ``
