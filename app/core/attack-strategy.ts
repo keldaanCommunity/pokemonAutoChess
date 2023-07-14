@@ -1050,7 +1050,7 @@ export class RazorWindStrategy extends AttackStrategy {
   }
 }
 
-export class TwistingNeitherStrategy extends AttackStrategy {
+export class TwistingNeiherStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1060,8 +1060,8 @@ export class TwistingNeitherStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const cells = board.getCellsInRadius(
-      pokemon.positionX,
-      pokemon.positionY,
+      target.positionX,
+      target.positionY,
       2
     )
     cells.forEach((cell) => {

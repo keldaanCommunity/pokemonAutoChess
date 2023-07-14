@@ -1048,17 +1048,17 @@ export default class BattleManager {
             )
             break
 
-          case Ability.TWISTING_NEITHER:
+          case Ability.TWISTING_NETHER:
             coordinates = transformAttackCoordinate(targetX, targetY)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
               "pmd-replace",
-              `${Ability.TWISTING_NEITHER}/000`
+              `${Ability.TWISTING_NETHER}/000`
             )
             specialProjectile.setDepth(7)
             specialProjectile.setScale(4, 4)
-            specialProjectile.anims.play(Ability.TWISTING_NEITHER)
+            specialProjectile.anims.play(Ability.TWISTING_NETHER)
             specialProjectile.once(
               Phaser.Animations.Events.ANIMATION_COMPLETE,
               () => {
@@ -1073,11 +1073,11 @@ export default class BattleManager {
               coordinates[0],
               coordinates[1],
               "pmd-replace",
-              `${Ability.TWISTING_NEITHER}/000`
+              `${Ability.TWISTING_NETHER}/000`
             )
             specialProjectile.setDepth(7)
             specialProjectile.setScale(4, 4)
-            specialProjectile.anims.play(Ability.TWISTING_NEITHER)
+            specialProjectile.anims.play(Ability.TWISTING_NETHER)
             specialProjectile.once(
               Phaser.Animations.Events.ANIMATION_COMPLETE,
               () => {

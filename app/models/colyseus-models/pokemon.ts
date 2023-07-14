@@ -9333,7 +9333,7 @@ export class Guzzlord extends Pokemon {
       AttackSprite.FIRE_RANGE,
       2,
       120,
-      Ability.TWISTING_NEITHER,
+      Ability.TWISTING_NETHER,
       shiny,
       emotion,
       true
