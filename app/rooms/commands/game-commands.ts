@@ -46,6 +46,7 @@ import { chance, pickRandomIn } from "../../utils/random"
 import { logger } from "../../utils/logger"
 import { Passive } from "../../types/enum/Passive"
 import { getAvatarString } from "../../public/src/utils"
+import { max } from "../../utils/number"
 
 export class OnShopCommand extends Command<
   GameRoom,
@@ -1032,8 +1033,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   }
 
   computeLife() {
-    const isPVE = this.checkForPVE()
-    this.state.players.forEach((player, key) => {
+    this.state.players.forEach((player) => {
       if (player.alive) {
         const currentResult = player.getCurrentBattleResult()
 
@@ -1053,36 +1053,26 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
             client?.send(Transfer.PLAYER_DAMAGE, playerDamage)
           }
         }
-
-        player.addBattleResult(
-          player.opponentName,
-          currentResult,
-          player.opponentAvatar,
-          isPVE,
-          player.simulation.weather
-        )
       }
     })
   }
 
-  computeStreak() {
-    if (this.checkForPVE()) {
-      return
-    }
-
+  computeStreak(isPVE: boolean) {
+    if (isPVE) return // PVE rounds do not change the current streak
     this.state.players.forEach((player, key) => {
       if (!player.alive) {
         return
       }
       const currentResult = player.getCurrentBattleResult()
-      const lastPlayerResult = player.getLastPlayerBattleResult()
+      const currentStreakType = player.getCurrentStreakType()
 
       if (currentResult === BattleResult.DRAW) {
         // preserve existing streak but lose HP
-      } else if (currentResult !== lastPlayerResult) {
+      } else if (currentResult !== currentStreakType) {
+        // reset streak
         player.streak = 0
       } else {
-        player.streak = Math.min(player.streak + 1, 5)
+        player.streak = max(5)(player.streak + 1)
       }
     })
   }
@@ -1106,6 +1096,21 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
           client?.send(Transfer.PLAYER_INCOME, income)
         }
         player.experienceManager.addExperience(2)
+      }
+    })
+  }
+
+  registerBattleResults(isPVE: boolean) {
+    this.state.players.forEach((player) => {
+      if (player.alive) {
+        const currentResult = player.getCurrentBattleResult()
+        player.addBattleResult(
+          player.opponentName,
+          currentResult,
+          player.opponentAvatar,
+          isPVE,
+          player.simulation.weather
+        )
       }
     })
   }
@@ -1309,8 +1314,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     const isPVE = this.checkForPVE()
 
     this.computeAchievements()
-    this.computeStreak()
+    this.computeStreak(isPVE)
     this.computeLife()
+    this.registerBattleResults(isPVE)
     this.rankPlayers()
     this.checkDeath()
     this.computeIncome()

@@ -66,6 +66,7 @@ patch announcement
 - fix duration of Maractus ability
 - do not count Castform synergies for getting the dominant synergy
 - Fix shiny pokemon bug
+- fix streak resetting one round after a draw
 
 # UI
 
