@@ -106,6 +106,10 @@ export class Pokemon extends Schema implements IPokemon {
     )
   }
 
+  get isOnBench(): boolean {
+    return this.positionY === 0
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onChangePosition(x: number, y: number, player: Player) {}
 }

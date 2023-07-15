@@ -251,6 +251,10 @@ export default class Pokemon extends DraggableObject {
     this.setDepth(5)
   }
 
+  get isOnBench(): boolean {
+    return this.positionY === 0
+  }
+
   updateTooltipPosition() {
     if (this.detail) {
       const absX = this.x + this.detail.width / 2 + 40

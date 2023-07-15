@@ -259,7 +259,7 @@ export class OnDragDropCommand extends Command<
           }
         } else {
           const dropOnBench = y == 0
-          const dropFromBench = pokemon.positionY == 0
+          const dropFromBench = pokemon.isOnBench
           // Drag and drop pokemons through bench has no limitation
           if (dropOnBench && dropFromBench) {
             this.room.swap(playerId, pokemon, x, y)
@@ -661,6 +661,10 @@ export class OnSellDropCommand extends Command<
 
     if (player) {
       const pokemon = player.board.get(detail.pokemonId)
+      if (pokemon && !pokemon.isOnBench && this.state.phase === GamePhaseState.FIGHT){
+        return; // can't sell a pokemon currently fighting
+      }
+
       if (pokemon) {
         this.state.shop.releasePokemon(pokemon.name)
         player.money += PokemonFactory.getSellPrice(pokemon.name)
