@@ -135,6 +135,7 @@ export class OnPokemonPropositionCommand extends Command<
     const player = this.state.players.get(playerId)
     if (
       player &&
+      player.pokemonsProposition.length > 0 &&
       !this.state.additionalPokemons.includes(pkm) &&
       this.room.getBenchSize(player.board) < 8
     ) {
@@ -661,8 +662,12 @@ export class OnSellDropCommand extends Command<
 
     if (player) {
       const pokemon = player.board.get(detail.pokemonId)
-      if (pokemon && !pokemon.isOnBench && this.state.phase === GamePhaseState.FIGHT){
-        return; // can't sell a pokemon currently fighting
+      if (
+        pokemon &&
+        !pokemon.isOnBench &&
+        this.state.phase === GamePhaseState.FIGHT
+      ) {
+        return // can't sell a pokemon currently fighting
       }
 
       if (pokemon) {
