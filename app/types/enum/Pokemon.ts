@@ -4104,144 +4104,144 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.UNOWN_A]: {
-    attack: AnimationType.Swing,
+    attack: AnimationType.Charge,
     ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Rotate
   },
   [Pkm.UNOWN_B]: {
-    attack: AnimationType.Swing,
+    attack: AnimationType.Charge,
     ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Rotate
   },
   [Pkm.UNOWN_C]: {
-    attack: AnimationType.Swing,
+    attack: AnimationType.Charge,
     ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Rotate
   },
   [Pkm.UNOWN_D]: {
-    attack: AnimationType.Swing,
+    attack: AnimationType.Charge,
     ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Rotate
   },
   [Pkm.UNOWN_E]: {
-    attack: AnimationType.Swing,
+    attack: AnimationType.Charge,
     ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Rotate
   },
   [Pkm.UNOWN_F]: {
-    attack: AnimationType.Swing,
+    attack: AnimationType.Charge,
     ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Rotate
   },
   [Pkm.UNOWN_G]: {
-    attack: AnimationType.Swing,
+    attack: AnimationType.Charge,
     ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Rotate
   },
   [Pkm.UNOWN_H]: {
-    attack: AnimationType.Swing,
+    attack: AnimationType.Charge,
     ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Rotate
   },
   [Pkm.UNOWN_I]: {
-    attack: AnimationType.Swing,
+    attack: AnimationType.Charge,
     ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Rotate
   },
   [Pkm.UNOWN_J]: {
-    attack: AnimationType.Swing,
+    attack: AnimationType.Charge,
     ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Rotate
   },
   [Pkm.UNOWN_K]: {
-    attack: AnimationType.Swing,
+    attack: AnimationType.Charge,
     ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Rotate
   },
   [Pkm.UNOWN_L]: {
-    attack: AnimationType.Swing,
+    attack: AnimationType.Charge,
     ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Rotate
   },
   [Pkm.UNOWN_M]: {
-    attack: AnimationType.Swing,
+    attack: AnimationType.Charge,
     ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Rotate
   },
   [Pkm.UNOWN_N]: {
-    attack: AnimationType.Swing,
+    attack: AnimationType.Charge,
     ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Rotate
   },
   [Pkm.UNOWN_O]: {
-    attack: AnimationType.Swing,
+    attack: AnimationType.Charge,
     ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Rotate
   },
   [Pkm.UNOWN_P]: {
-    attack: AnimationType.Swing,
+    attack: AnimationType.Charge,
     ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Rotate
   },
   [Pkm.UNOWN_Q]: {
-    attack: AnimationType.Swing,
+    attack: AnimationType.Charge,
     ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Rotate
   },
   [Pkm.UNOWN_R]: {
-    attack: AnimationType.Swing,
+    attack: AnimationType.Charge,
     ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Rotate
   },
   [Pkm.UNOWN_S]: {
-    attack: AnimationType.Swing,
+    attack: AnimationType.Charge,
     ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Rotate
   },
   [Pkm.UNOWN_T]: {
-    attack: AnimationType.Swing,
+    attack: AnimationType.Charge,
     ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Rotate
   },
   [Pkm.UNOWN_U]: {
-    attack: AnimationType.Swing,
+    attack: AnimationType.Charge,
     ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Rotate
   },
   [Pkm.UNOWN_V]: {
-    attack: AnimationType.Swing,
+    attack: AnimationType.Charge,
     ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Rotate
   },
   [Pkm.UNOWN_W]: {
-    attack: AnimationType.Swing,
+    attack: AnimationType.Charge,
     ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Rotate
   },
   [Pkm.UNOWN_X]: {
-    attack: AnimationType.Rotate,
+    attack: AnimationType.Charge,
     ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Rotate
   },
   [Pkm.UNOWN_Y]: {
-    attack: AnimationType.Swing,
+    attack: AnimationType.Charge,
     ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Rotate
   },
   [Pkm.UNOWN_Z]: {
-    attack: AnimationType.Swing,
+    attack: AnimationType.Charge,
     ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Rotate
   },
   [Pkm.UNOWN_QUESTION]: {
-    attack: AnimationType.Swing,
+    attack: AnimationType.Charge,
     ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Rotate
   },
   [Pkm.UNOWN_EXCLAMATION]: {
-    attack: AnimationType.Swing,
+    attack: AnimationType.Charge,
     ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Rotate
   },
   [Pkm.TAPU_FINI]: {
     attack: AnimationType.Attack,

@@ -6,7 +6,7 @@ import Board from "./board"
 import PokemonEntity from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
 import { Synergy } from "../types/enum/Synergy"
-import { AbilityStrategy, Ability } from "../types/enum/Ability"
+import { Ability } from "../types/enum/Ability"
 import PokemonFactory from "../models/pokemon-factory"
 import { Pkm } from "../types/enum/Pokemon"
 import {
@@ -22,6 +22,7 @@ import { max, min } from "../utils/number"
 import { distanceC } from "../utils/distance"
 import { Transfer } from "../types"
 import { Passive } from "../types/enum/Passive"
+import { AbilityStrategy } from "./abilities"
 
 export class AttackStrategy {
   process(

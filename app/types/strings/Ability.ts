@@ -1005,10 +1005,184 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.HIDDEN_POWER_A]: {
+    eng: "Hidden Power (A)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_B]: {
+    eng: "Hidden Power (B)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_C]: {
+    eng: "Hidden Power (C)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_D]: {
+    eng: "Hidden Power (D)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_E]: {
+    eng: "Hidden Power (E)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_F]: {
+    eng: "Hidden Power (F)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_G]: {
+    eng: "Hidden Power (G)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_H]: {
+    eng: "Hidden Power (H)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_I]: {
+    eng: "Hidden Power (I)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_J]: {
+    eng: "Hidden Power (J)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_K]: {
+    eng: "Hidden Power (K)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_L]: {
+    eng: "Hidden Power (L)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_M]: {
+    eng: "Hidden Power (M)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_N]: {
+    eng: "Hidden Power (N)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_O]: {
+    eng: "Hidden Power (O)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_P]: {
+    eng: "Hidden Power (P)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_Q]: {
+    eng: "Hidden Power (Q)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_R]: {
+    eng: "Hidden Power (R)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_S]: {
+    eng: "Hidden Power (S)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_T]: {
+    eng: "Hidden Power (T)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_U]: {
+    eng: "Hidden Power (U)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_V]: {
+    eng: "Hidden Power (V)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_W]: {
+    eng: "Hidden Power (W)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_X]: {
+    eng: "Hidden Power (X)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_Y]: {
+    eng: "Hidden Power (Y)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_Z]: {
+    eng: "Hidden Power (Z)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_QM]: {
+    eng: "Hidden Power (?)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_EM]: {
+    eng: "Hidden Power (!)",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
 export const AbilityDescription: { [key in Ability]: Langage } = {
+  [Ability.DEFAULT]: {
+    eng: ``,
+    esp: ``,
+    fra: ``,
+    prt: ``
+  },
   [Ability.SOFT_BOILED]: {
     eng: `Cures every status effects and grants [20,40,80,SP] ${Stat.SHIELD} for every ally`,
     esp: ``,
@@ -1137,12 +1311,6 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
   },
   [Ability.LIQUIDATION]: {
     eng: `Deals [20,40,80,SP] ${Damage.SPECIAL} and remove [1,2,4] ${Stat.DEF} from the target`,
-    esp: ``,
-    fra: ``,
-    prt: ``
-  },
-  [Ability.DEFAULT]: {
-    eng: ``,
     esp: ``,
     fra: ``,
     prt: ``
@@ -2010,6 +2178,174 @@ Snow: also gives [2,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
   },
   [Ability.MAGIC_BOUNCE]: {
     eng: `For [3,6,12] seconds, whenever this pokemon is hit by an ability, the caster is ${Status.SILENCE} for 4 seconds and take ${Damage.SPECIAL} equal to this pokemon current ${Stat.SPE_DEF}`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_A]: {
+    eng: "Hidden Power (A)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_B]: {
+    eng: "Hidden Power (B)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_C]: {
+    eng: "Hidden Power (C)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_D]: {
+    eng: "Hidden Power (D)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_E]: {
+    eng: "Hidden Power (E)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_F]: {
+    eng: "Hidden Power (F)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_G]: {
+    eng: "Hidden Power (G)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_H]: {
+    eng: "Hidden Power (H)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_I]: {
+    eng: "Hidden Power (I)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_J]: {
+    eng: "Hidden Power (J)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_K]: {
+    eng: "Hidden Power (K)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_L]: {
+    eng: "Hidden Power (L)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_M]: {
+    eng: "Hidden Power (M)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_N]: {
+    eng: "Hidden Power (N)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_O]: {
+    eng: "Hidden Power (O)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_P]: {
+    eng: "Hidden Power (P)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_Q]: {
+    eng: "Hidden Power (Q)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_R]: {
+    eng: "Hidden Power (R)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_S]: {
+    eng: "Hidden Power (S)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_T]: {
+    eng: "Hidden Power (T)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_U]: {
+    eng: "Hidden Power (U)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_V]: {
+    eng: "Hidden Power (V)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_W]: {
+    eng: "Hidden Power (W)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_X]: {
+    eng: "Hidden Power (X)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_Y]: {
+    eng: "Hidden Power (Y)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_Z]: {
+    eng: "Hidden Power (Z)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_QM]: {
+    eng: "Hidden Power (?)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_EM]: {
+    eng: "Hidden Power (!)",
     esp: "",
     prt: "",
     fra: ""
