@@ -168,15 +168,18 @@ export default class UnownManager {
     this.scene.tweens.add({
       targets: circle,
       radius: 500,
-      ease: "Quintic.easeInOut",
-      duration: 2500,
-      onUpdate: function () {
+      ease: "Quintic.easeOut",
+      duration: 3000,
+      onUpdate: function (tween) {
         Phaser.Actions.RotateAroundDistance(
           unownsGroup.getChildren(),
           { x, y },
-          0.02,
+          -0.015,
           circle.radius
         )
+        if (tween.progress > 0.8) {
+          unownsGroup.setAlpha((1 - tween.progress) * 5)
+        }
       },
       onComplete() {
         unownsGroup.destroy(true, true)

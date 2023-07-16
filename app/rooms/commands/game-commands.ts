@@ -46,6 +46,7 @@ import { chance, pickRandomIn } from "../../utils/random"
 import { logger } from "../../utils/logger"
 import { Passive } from "../../types/enum/Passive"
 import { getAvatarString } from "../../public/src/utils"
+import { HiddenPowerAbilities } from "../../core/abilities"
 
 export class OnShopCommand extends Command<
   GameRoom,
@@ -1403,6 +1404,13 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
                 }
               }
             }
+          }
+          if (pokemon.passive === Passive.UNOWN && !pokemon.isOnBench) {
+            // remove after one fight
+            player.board.delete(key)
+            player.board.delete(pokemon.id)
+            player.synergies.update(player.board)
+            player.effects.update(player.synergies, player.board)
           }
         })
         // Refreshes effects (like tapu Terrains)

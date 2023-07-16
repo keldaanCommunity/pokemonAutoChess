@@ -106,6 +106,10 @@ export class Pokemon extends Schema implements IPokemon {
     )
   }
 
+  get isOnBench(): boolean {
+    return this.positionY === 0
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onChangePosition(x: number, y: number, player: Player) {}
 }
@@ -12010,7 +12014,9 @@ export class UnownA extends Pokemon {
       Ability.HIDDEN_POWER_A,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12032,7 +12038,9 @@ export class UnownB extends Pokemon {
       Ability.HIDDEN_POWER_B,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12055,7 +12063,9 @@ export class UnownC extends Pokemon {
       Ability.HIDDEN_POWER_C,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12078,7 +12088,9 @@ export class UnownD extends Pokemon {
       Ability.HIDDEN_POWER_D,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12101,7 +12113,9 @@ export class UnownE extends Pokemon {
       Ability.HIDDEN_POWER_E,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12124,7 +12138,9 @@ export class UnownF extends Pokemon {
       Ability.HIDDEN_POWER_F,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12147,7 +12163,9 @@ export class UnownG extends Pokemon {
       Ability.HIDDEN_POWER_G,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12170,7 +12188,9 @@ export class UnownH extends Pokemon {
       Ability.HIDDEN_POWER_H,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12193,7 +12213,9 @@ export class UnownI extends Pokemon {
       Ability.HIDDEN_POWER_I,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12216,7 +12238,9 @@ export class UnownJ extends Pokemon {
       Ability.HIDDEN_POWER_J,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12239,7 +12263,9 @@ export class UnownK extends Pokemon {
       Ability.HIDDEN_POWER_K,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12262,7 +12288,9 @@ export class UnownL extends Pokemon {
       Ability.HIDDEN_POWER_L,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12285,7 +12313,9 @@ export class UnownM extends Pokemon {
       Ability.HIDDEN_POWER_M,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12308,7 +12338,9 @@ export class UnownN extends Pokemon {
       Ability.HIDDEN_POWER_N,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12331,7 +12363,9 @@ export class UnownO extends Pokemon {
       Ability.HIDDEN_POWER_O,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12354,7 +12388,9 @@ export class UnownP extends Pokemon {
       Ability.HIDDEN_POWER_P,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12377,7 +12413,9 @@ export class UnownQ extends Pokemon {
       Ability.HIDDEN_POWER_Q,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12400,7 +12438,9 @@ export class UnownR extends Pokemon {
       Ability.HIDDEN_POWER_R,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12423,7 +12463,9 @@ export class UnownS extends Pokemon {
       Ability.HIDDEN_POWER_S,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12446,7 +12488,9 @@ export class UnownT extends Pokemon {
       Ability.HIDDEN_POWER_T,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12469,7 +12513,9 @@ export class UnownU extends Pokemon {
       Ability.HIDDEN_POWER_U,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12492,7 +12538,9 @@ export class UnownV extends Pokemon {
       Ability.HIDDEN_POWER_V,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12515,7 +12563,9 @@ export class UnownW extends Pokemon {
       Ability.HIDDEN_POWER_W,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12538,7 +12588,9 @@ export class UnownX extends Pokemon {
       Ability.HIDDEN_POWER_X,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12561,7 +12613,9 @@ export class UnownY extends Pokemon {
       Ability.HIDDEN_POWER_Y,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12584,7 +12638,9 @@ export class UnownZ extends Pokemon {
       Ability.HIDDEN_POWER_Z,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12607,7 +12663,9 @@ export class UnownQuestion extends Pokemon {
       Ability.HIDDEN_POWER_QM,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12630,7 +12688,9 @@ export class UnownExclamation extends Pokemon {
       Ability.HIDDEN_POWER_EM,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }

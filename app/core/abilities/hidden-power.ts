@@ -1,5 +1,4 @@
 import { Ability } from "../../types/enum/Ability"
-import { Effect } from "../../types/enum/Effect"
 import { AttackType } from "../../types/enum/Game"
 import { AttackStrategy } from "../attack-strategy"
 import Board from "../board"
@@ -19,7 +18,7 @@ export class HiddenPowerStrategy extends AttackStrategy {
       damage: pokemon.life,
       board,
       attackType: AttackType.TRUE,
-      attacker: pokemon,
+      attacker: null,
       shouldTargetGainMana: false
     })
   }

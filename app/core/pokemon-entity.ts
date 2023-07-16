@@ -181,7 +181,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     damage: number
     board: Board
     attackType: AttackType
-    attacker: PokemonEntity
+    attacker: PokemonEntity | null
     shouldTargetGainMana: boolean
   }) {
     return this.state.handleDamage({ target: this, ...params })
