@@ -362,7 +362,7 @@ export default class BoardManager {
     let benchSize = 0
 
     this.pokemons.forEach((pokemon, key) => {
-      if (pokemon.positionY == 0) {
+      if (pokemon.isOnBench) {
         benchSize++
       }
     })
