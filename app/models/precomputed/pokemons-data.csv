@@ -479,7 +479,7 @@ Index,Name,Category,Tier,Additional pick,Type 1,Type 2,Type 3,Type 4,HP,Attack,D
 0786,tapu-lele,MYTHICAL,1,false,PSYCHIC,FAIRY,,,200,17,3,3,3,100,PSYCHIC_SURGE,tapu-lele,PSYCHIC,FAIRY,,,false
 0787,tapu-bulu,MYTHICAL,1,false,GRASS,FAIRY,,,200,19,6,6,1,100,GRASSY_SURGE,tapu-bulu,GRASS,FAIRY,,,false
 0788,tapu-fini,MYTHICAL,1,false,WATER,FAIRY,,,200,17,3,3,3,100,MISTY_SURGE,tapu-fini,WATER,FAIRY,,,false
-0799,guzzlord,MYTHICAL,2,false,DRAGON,DARK,,,250,22,3,3,3,120,TWISTING_NEITHER,guzzlord,DRAGON,DARK,,,false
+0799,guzzlord,MYTHICAL,2,false,DRAGON,DARK,,,250,22,3,3,3,120,TWISTING_NETHER,guzzlord,DRAGON,DARK,,,false
 0802,marshadow,MYTHICAL,2,false,GHOST,FIGHTING,,,250,35,6,6,1,90,SPECTRAL_THIEF,marshadow,GHOST,FIGHTING,,,false
 0805,stakataka,MYTHICAL,2,false,ROCK,STEEL,,,300,5,15,15,1,100,IRON_DEFENSE,stakataka,ROCK,STEEL,,,false
 0806,blacephalon,MYTHICAL,1,false,FIRE,GHOST,,,200,15,3,3,3,80,MIND_BLOWN,blacephalon,FIRE,GHOST,,,false
