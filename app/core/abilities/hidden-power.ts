@@ -2,11 +2,14 @@ import PokemonFactory from "../../models/pokemon-factory"
 import { Ability } from "../../types/enum/Ability"
 import { AttackType } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
-import { Pkm } from "../../types/enum/Pokemon"
+import { Pkm, PkmFamily } from "../../types/enum/Pokemon"
+import { Synergy } from "../../types/enum/Synergy"
+import { pickRandomIn } from "../../utils/random"
 import { AttackStrategy } from "../attack-strategy"
 import Board from "../board"
 import PokemonEntity from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
+import PRECOMPUTED_TYPE_POKEMONS from "../../models/precomputed/type-pokemons.json"
 
 export class HiddenPowerStrategy extends AttackStrategy {
   process(
@@ -187,6 +190,20 @@ export class HiddenPowerKStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemon(
+      pokemon,
+      pokemon.team
+    )
+    const hitmonlee = pokemon.simulation.addPokemon(
+      PokemonFactory.createPokemonFromName(Pkm.HITMONLEE),
+      coord.x,
+      coord.y,
+      pokemon.team,
+      false
+    )
+    hitmonlee.items.add(Item.RED_ORB)
+    hitmonlee.simulation.applyItemsEffects(hitmonlee)
+    hitmonlee.mana = hitmonlee.maxMana - 1
   }
 }
 
@@ -247,6 +264,25 @@ export class HiddenPowerPStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    const numberToSpawn = 5
+    const bugs = [
+      ...PRECOMPUTED_TYPE_POKEMONS[Synergy.BUG].pokemons,
+      ...PRECOMPUTED_TYPE_POKEMONS[Synergy.BUG].additionalPokemons
+    ] as Pkm[]
+    for (let i = 0; i < numberToSpawn; i++) {
+      const bug = pickRandomIn(bugs)
+      const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemon(
+        pokemon,
+        pokemon.team
+      )
+      pokemon.simulation.addPokemon(
+        PokemonFactory.createPokemonFromName(bug),
+        coord.x,
+        coord.y,
+        pokemon.team,
+        false
+      )
+    }
   }
 }
 
@@ -271,6 +307,47 @@ export class HiddenPowerRStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    let coord = pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemon(
+      pokemon,
+      pokemon.team
+    )
+    const geodude = pokemon.simulation.addPokemon(
+      PokemonFactory.createPokemonFromName(Pkm.GEODUDE),
+      coord.x,
+      coord.y,
+      pokemon.team,
+      false
+    )
+    geodude.items.add(Item.ROCKY_HELMET)
+    geodude.simulation.applyItemsEffects(geodude)
+
+    coord = pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemon(
+      pokemon,
+      pokemon.team
+    )
+    const graveler = pokemon.simulation.addPokemon(
+      PokemonFactory.createPokemonFromName(Pkm.GRAVELER),
+      coord.x,
+      coord.y,
+      pokemon.team,
+      false
+    )
+    graveler.items.add(Item.ROCKY_HELMET)
+    graveler.simulation.applyItemsEffects(graveler)
+
+    coord = pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemon(
+      pokemon,
+      pokemon.team
+    )
+    const golem = pokemon.simulation.addPokemon(
+      PokemonFactory.createPokemonFromName(Pkm.GOLEM),
+      coord.x,
+      coord.y,
+      pokemon.team,
+      false
+    )
+    golem.items.add(Item.ROCKY_HELMET)
+    golem.simulation.applyItemsEffects(golem)
   }
 }
 
@@ -295,6 +372,20 @@ export class HiddenPowerTStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemon(
+      pokemon,
+      pokemon.team
+    )
+    const tapu = pokemon.simulation.addPokemon(
+      PokemonFactory.createPokemonFromName(Pkm.TAPU_LELE),
+      coord.x,
+      coord.y,
+      pokemon.team,
+      false
+    )
+    tapu.items.add(Item.CHOICE_SPECS)
+    tapu.simulation.applyItemsEffects(tapu)
+    tapu.mana = tapu.maxMana
   }
 }
 
@@ -307,6 +398,20 @@ export class HiddenPowerUStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemon(
+      pokemon,
+      pokemon.team
+    )
+    const uxie = pokemon.simulation.addPokemon(
+      PokemonFactory.createPokemonFromName(Pkm.UXIE),
+      coord.x,
+      coord.y,
+      pokemon.team,
+      false
+    )
+    uxie.items.add(Item.AQUA_EGG)
+    uxie.simulation.applyItemsEffects(uxie)
+    uxie.mana = uxie.maxMana - 1
   }
 }
 
@@ -355,6 +460,22 @@ export class HiddenPowerYStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    const numberToSpawn = 2
+    for (let i = 0; i < numberToSpawn; i++) {
+      const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemon(
+        pokemon,
+        pokemon.team
+      )
+      const meditite = pokemon.simulation.addPokemon(
+        PokemonFactory.createPokemonFromName(Pkm.MEDITITE),
+        coord.x,
+        coord.y,
+        pokemon.team,
+        false
+      )
+      meditite.items.add(Item.SOUL_DEW)
+      meditite.simulation.applyItemsEffects(meditite)
+    }
   }
 }
 
@@ -391,6 +512,30 @@ export class HiddenPowerEMStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    const unowns = (Object.keys(PkmFamily) as Pkm[]).filter(
+      (pkm) => PkmFamily[pkm] === Pkm.UNOWN_A
+    )
+    const corners = [
+      [0, 0],
+      [board.columns - 1, 0],
+      [0, board.rows - 1],
+      [board.columns - 1, board.rows - 1]
+    ]
+    corners.forEach(([x, y]) => {
+      const unown = PokemonFactory.createPokemonFromName(pickRandomIn(unowns))
+      const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardTo(
+        x,
+        y,
+        pokemon.team
+      )
+      pokemon.simulation.addPokemon(
+        unown,
+        coord.x,
+        coord.y,
+        pokemon.team,
+        false
+      )
+    })
   }
 }
 

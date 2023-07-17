@@ -2245,7 +2245,7 @@ Snow: also gives [2,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     fra: ""
   },
   [Ability.HIDDEN_POWER_K]: {
-    eng: `Spawn Kicklee with max ${Stat.MANA}`,
+    eng: `Spawn Hitmonlee with a Red Orb and max ${Stat.MANA}`,
     esp: "",
     prt: "",
     fra: ""
@@ -2299,13 +2299,13 @@ Snow: also gives [2,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     fra: ""
   },
   [Ability.HIDDEN_POWER_T]: {
-    eng: `Spawn Tapu-Lele with max ${Stat.MANA}`,
+    eng: `Spawn Tapu-Lele with Choice Specs and max ${Stat.MANA}`,
     esp: "",
     prt: "",
     fra: ""
   },
   [Ability.HIDDEN_POWER_U]: {
-    eng: `Spawn Uxie with max ${Stat.MANA}`,
+    eng: `Spawn Uxie with Aqua Egg and max ${Stat.MANA}`,
     esp: "",
     prt: "",
     fra: ""
