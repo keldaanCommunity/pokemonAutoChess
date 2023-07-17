@@ -944,27 +944,27 @@ export default class GameRoom extends Room<GameState> {
   }
 
   getBenchSize(board: MapSchema<Pokemon>) {
-    let boardSize = 0
+    let benchSize = 0
 
     board.forEach((pokemon, key) => {
-      if (pokemon.positionY == 0) {
-        boardSize++
+      if (pokemon.isOnBench) {
+        benchSize++
       }
     })
 
-    return boardSize
+    return benchSize
   }
 
   getBenchSizeWithoutNeutral(board: MapSchema<Pokemon>) {
-    let boardSize = 0
+    let benchSize = 0
 
     board.forEach((pokemon, key) => {
-      if (pokemon.positionY == 0 && pokemon.canBePlaced) {
-        boardSize++
+      if (pokemon.isOnBench && pokemon.canBePlaced) {
+        benchSize++
       }
     })
 
-    return boardSize
+    return benchSize
   }
 
   getPossibleEvolution(board: MapSchema<Pokemon>, name: Pkm) {
@@ -984,7 +984,7 @@ export default class GameRoom extends Room<GameState> {
     let pkm: Pokemon | undefined = undefined
     let found = false
     board.forEach((pokemon, key) => {
-      if (pokemon.positionY == 0 && pokemon.canBePlaced && !found) {
+      if (pokemon.isOnBench && pokemon.canBePlaced && !found) {
         found = true
         pkm = pokemon
       }
