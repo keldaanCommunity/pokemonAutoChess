@@ -71,8 +71,6 @@ export default function WikiAbility() {
           id="pokemon-detail"
           className="customeTheme game-pokemon-detail-tooltip"
           effect="float"
-          place="bottom"
-          offset={{ bottom: 20 }}
         >
           <GamePokemonDetail pokemon={hoveredPokemon} />
         </ReactTooltip>

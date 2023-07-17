@@ -28,7 +28,7 @@ Object.values(Weather).forEach((weather) => {
 
 export default function WikiWeather() {
   const [hoveredPokemon, setHoveredPokemon] = useState<Pokemon>()
-  
+
   return (
     <div id="wiki-weather">
       <div className="nes-container">
@@ -88,8 +88,6 @@ export default function WikiWeather() {
           id="pokemon-detail"
           className="customeTheme game-pokemon-detail-tooltip"
           effect="float"
-          place="bottom"
-          offset={{ bottom: 20 }}
         >
           <GamePokemonDetail pokemon={hoveredPokemon} />
         </ReactTooltip>
@@ -105,9 +103,9 @@ function getPokemonsInfluencingWeather(weather: Weather) {
       (pkm) =>
         pkm.skill != Ability.DEFAULT &&
         pkm.passive != null &&
-        (pkm.passive === PassiveAssociatedToWeather.get(weather)
-        || (pkm.name === Pkm.CASTFORM_SUN && weather === Weather.SUN)
-        || (pkm.name === Pkm.CASTFORM_RAIN && weather === Weather.RAIN)
-        || (pkm.name === Pkm.CASTFORM_HAIL && weather === Weather.SNOW))
+        (pkm.passive === PassiveAssociatedToWeather.get(weather) ||
+          (pkm.name === Pkm.CASTFORM_SUN && weather === Weather.SUN) ||
+          (pkm.name === Pkm.CASTFORM_RAIN && weather === Weather.RAIN) ||
+          (pkm.name === Pkm.CASTFORM_HAIL && weather === Weather.SNOW))
     )
 }
