@@ -7,6 +7,7 @@ import { Ability } from "../../../../../types/enum/Ability"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
+import { Passive } from "../../../../../types/enum/Passive"
 
 export default function PokemonCarousel(props: {
   type: Synergy | "all"
@@ -27,6 +28,7 @@ export default function PokemonCarousel(props: {
       if (
         v !== Pkm.DEFAULT &&
         pkm.skill !== Ability.DEFAULT &&
+        pkm.passive !== Passive.UNOWN &&
         (props.type === "all" || pkm.types.includes(Synergy[props.type]))
       ) {
         filteredCollection.push(pkm)

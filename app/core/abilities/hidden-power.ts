@@ -1,5 +1,8 @@
+import PokemonFactory from "../../models/pokemon-factory"
 import { Ability } from "../../types/enum/Ability"
 import { AttackType } from "../../types/enum/Game"
+import { Item } from "../../types/enum/Item"
+import { Pkm } from "../../types/enum/Pokemon"
 import { AttackStrategy } from "../attack-strategy"
 import Board from "../board"
 import PokemonEntity from "../pokemon-entity"
@@ -33,6 +36,21 @@ export class HiddenPowerAStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    const corners = [
+      [0, 0],
+      [board.columns - 1, 0],
+      [0, board.rows - 1],
+      [board.columns - 1, board.rows - 1]
+    ]
+    corners.forEach(([x, y]) => {
+      const abra = PokemonFactory.createPokemonFromName(Pkm.ABRA)
+      const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardTo(
+        x,
+        y,
+        pokemon.team
+      )
+      pokemon.simulation.addPokemon(abra, coord.x, coord.y, pokemon.team, false)
+    })
   }
 }
 
@@ -141,6 +159,22 @@ export class HiddenPowerJStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    const numberToSpawn = 2
+    for (let i = 0; i < numberToSpawn; i++) {
+      const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemon(
+        pokemon,
+        pokemon.team
+      )
+      const sharpedo = pokemon.simulation.addPokemon(
+        PokemonFactory.createPokemonFromName(Pkm.SHARPEDO),
+        coord.x,
+        coord.y,
+        pokemon.team,
+        false
+      )
+      sharpedo.items.add(Item.RAZOR_CLAW)
+      sharpedo.simulation.applyItemsEffects(sharpedo)
+    }
   }
 }
 

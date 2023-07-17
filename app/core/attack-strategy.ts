@@ -199,7 +199,7 @@ export class BeatUpStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target, crit)
     for (let i = 0; i < pokemon.stars; i++) {
       const houndour = PokemonFactory.createPokemonFromName(Pkm.HOUNDOUR)
-      const coord = pokemon.simulation.getClosestAvailablePlaceOnBoard(
+      const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemon(
         pokemon,
         pokemon.team
       )
@@ -3525,9 +3525,9 @@ export class TeleportStrategy extends AttackStrategy {
 
     const potentialCells = [
       [0, 0],
-      [0, 5],
-      [7, 5],
-      [7, 0]
+      [0, board.rows - 1],
+      [board.columns - 1, board.rows - 1],
+      [board.columns - 1, 0]
     ]
     shuffleArray(potentialCells)
 

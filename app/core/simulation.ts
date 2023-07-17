@@ -170,7 +170,7 @@ export default class Simulation extends Schema implements ISimulation {
               bugTeam[i].name,
               player.pokemonCollection.get(bugTeam[i].index)
             )
-            const coord = this.getClosestAvailablePlaceOnBoard(
+            const coord = this.getClosestAvailablePlaceOnBoardToPokemon(
               bugTeam[i],
               teamIndex
             )
@@ -253,11 +253,13 @@ export default class Simulation extends Schema implements ISimulation {
     return { x: candidateX, y: candidateY }
   }
 
-  getClosestAvailablePlaceOnBoard(
-    pokemon: IPokemon | IPokemonEntity,
+  getClosestAvailablePlaceOnBoardTo(
+    positionX: number,
+    positionY: number,
     teamIndex: number
   ): { x: number; y: number } {
     const placesToConsiderByOrderOfPriority = [
+      [0, 0],
       [-1, 0],
       [+1, 0],
       [0, -1],
@@ -294,11 +296,8 @@ export default class Simulation extends Schema implements ISimulation {
       [+3, +1]
     ]
     for (const [dx, dy] of placesToConsiderByOrderOfPriority) {
-      const x = pokemon.positionX + dx
-      const y =
-        teamIndex === 0
-          ? pokemon.positionY - 1 + dy
-          : 5 - (pokemon.positionY - 1) - dy
+      const x = positionX + dx
+      const y = teamIndex === 0 ? positionY - 1 + dy : 5 - (positionY - 1) - dy
 
       if (
         x >= 0 &&
@@ -311,6 +310,17 @@ export default class Simulation extends Schema implements ISimulation {
       }
     }
     return this.getFirstAvailablePlaceOnBoard(teamIndex)
+  }
+
+  getClosestAvailablePlaceOnBoardToPokemon(
+    pokemon: IPokemon | IPokemonEntity,
+    teamIndex: number
+  ): { x: number; y: number } {
+    return this.getClosestAvailablePlaceOnBoardTo(
+      pokemon.positionX,
+      pokemon.positionY,
+      teamIndex
+    )
   }
 
   applyStat(pokemon: PokemonEntity, stat: Stat, value: number) {
