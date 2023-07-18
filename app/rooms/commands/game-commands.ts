@@ -20,7 +20,7 @@ import UserMetadata from "../../models/mongo-models/user-metadata"
 import GameRoom from "../game-room"
 import { Client, updateLobby } from "colyseus"
 import { Effect } from "../../types/enum/Effect"
-import { Title, FIGHTING_PHASE_DURATION, Emotion } from "../../types"
+import { Title, FIGHTING_PHASE_DURATION, Emotion, IPlayer } from "../../types"
 import { MapSchema } from "@colyseus/schema"
 import {
   GamePhaseState,
@@ -783,6 +783,28 @@ export class OnJoinCommand extends Command<
   }
 }
 
+export class OnFishPokemonCommand extends Command<
+  GameRoom,
+  {
+    player: IPlayer
+    fishingLevel: number
+  }
+> {
+  execute({ player, fishingLevel }) {
+    const pkm = this.state.shop.fishPokemon(player, fishingLevel)
+    const fish = PokemonFactory.createPokemonFromName(pkm)
+    const x = this.room.getFirstAvailablePositionInBench(player.id)
+    fish.positionX = x !== undefined ? x : -1
+    fish.positionY = 0
+    fish.action = PokemonActionState.FISH
+    player.board.set(fish.id, fish)
+    this.room.updateEvolution(player.id)
+    this.clock.setTimeout(() => {
+      fish.action = PokemonActionState.IDLE
+    }, 1000)
+  }
+}
+
 export class OnUpdateCommand extends Command<
   GameRoom,
   {
@@ -1196,6 +1218,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     }
 
     const isPVE = this.checkForPVE()
+    const commands = new Array<Command>()
+
     this.state.players.forEach((player: Player) => {
       if (
         this.room.getBenchSize(player.board) < 8 &&
@@ -1209,19 +1233,16 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
           : player.effects.list.includes(Effect.DRIZZLE)
           ? 2
           : 1
-        const pkm = this.state.shop.fishPokemon(player, fishingLevel)
-        const fish = PokemonFactory.createPokemonFromName(pkm)
-        const x = this.room.getFirstAvailablePositionInBench(player.id)
-        fish.positionX = x !== undefined ? x : -1
-        fish.positionY = 0
-        fish.action = PokemonActionState.FISH
-        player.board.set(fish.id, fish)
-        this.room.updateEvolution(player.id)
-        this.clock.setTimeout(() => {
-          fish.action = PokemonActionState.IDLE
-        }, 1000)
+        commands.push(
+          new OnFishPokemonCommand().setPayload({
+            player,
+            fishingLevel
+          })
+        )
       }
     })
+
+    return commands
   }
 
   checkForLazyTeam() {

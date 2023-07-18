@@ -2191,13 +2191,13 @@ Snow: also gives [2,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     fra: ""
   },
   [Ability.HIDDEN_POWER_B]: {
-    eng: "Burn the opponent team for 10 seconds",
+    eng: "Burn the opponent team for 30 seconds",
     esp: "",
     prt: "",
     fra: ""
   },
   [Ability.HIDDEN_POWER_C]: {
-    eng: "Gain 1 gold for every enemy KO",
+    eng: "Give Amulet Coin to all your team. The item is removed at the end of the fight.",
     esp: "",
     prt: "",
     fra: ""
@@ -2269,7 +2269,7 @@ Snow: also gives [2,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     fra: ""
   },
   [Ability.HIDDEN_POWER_O]: {
-    eng: "Give Oran Berry to all your team",
+    eng: "Give Oran Berry to all your team. The item is removed at the end of the fight.",
     esp: "",
     prt: "",
     fra: ""
@@ -2323,7 +2323,7 @@ Snow: also gives [2,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     fra: ""
   },
   [Ability.HIDDEN_POWER_X]: {
-    eng: "Gives XRay vision item to all your team. Items vanish after the fight",
+    eng: "Gives XRay Vision to all your team. The item is removed at the end of the fight.",
     esp: "",
     prt: "",
     fra: ""

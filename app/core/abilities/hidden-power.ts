@@ -10,6 +10,7 @@ import Board from "../board"
 import PokemonEntity from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
 import PRECOMPUTED_TYPE_POKEMONS from "../../models/precomputed/type-pokemons.json"
+import { OnFishPokemonCommand } from "../../rooms/commands/game-commands"
 
 export class HiddenPowerStrategy extends AttackStrategy {
   process(
@@ -66,6 +67,11 @@ export class HiddenPowerBStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
+      if (value && pokemon.team != value.team) {
+        value.status.triggerBurn(30000, value, pokemon, board)
+      }
+    })
   }
 }
 
@@ -78,6 +84,14 @@ export class HiddenPowerCStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
+      if (value && pokemon.team === value.team) {
+        if (pokemon.items.size < 3) {
+          pokemon.items.add(Item.AMULET_COIN)
+          pokemon.simulation.applyItemEffect(pokemon, Item.AMULET_COIN)
+        }
+      }
+    })
   }
 }
 
@@ -114,6 +128,10 @@ export class HiddenPowerFStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    pokemon.simulation.room.dispatcher.dispatch(new OnFishPokemonCommand().setPayload({
+      player: pokemon.simulation.player,
+      fishingLevel: 3
+    }))
   }
 }
 
@@ -252,6 +270,14 @@ export class HiddenPowerOStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
+      if (value && pokemon.team === value.team) {
+        if (pokemon.items.size < 3) {
+          pokemon.items.add(Item.ORAN_BERRY)
+          pokemon.simulation.applyItemEffect(pokemon, Item.ORAN_BERRY)
+        }
+      }
+    })
   }
 }
 
@@ -360,6 +386,11 @@ export class HiddenPowerSStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
+      if (value && pokemon.team != value.team) {
+        value.status.triggerFreeze(4000, value)
+      }
+    })
   }
 }
 
@@ -448,6 +479,14 @@ export class HiddenPowerXStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
+      if (value && pokemon.team === value.team) {
+        if (pokemon.items.size < 3) {
+          pokemon.items.add(Item.XRAY_VISION)
+          pokemon.simulation.applyItemEffect(pokemon, Item.XRAY_VISION)
+        }
+      }
+    })
   }
 }
 
@@ -488,6 +527,11 @@ export class HiddenPowerZStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
+      if (value && pokemon.team != value.team) {
+        value.status.triggerSleep(5000, value)
+      }
+    })
   }
 }
 
