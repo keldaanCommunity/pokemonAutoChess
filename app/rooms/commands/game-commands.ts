@@ -409,7 +409,7 @@ export class OnDragDropItemCommand extends Command<
 
       const pokemon = player.getPokemonAt(x, y)
 
-      if (pokemon === undefined) {
+      if (pokemon === undefined || !pokemon.canHoldItems) {
         client.send(Transfer.DRAG_DROP_FAILED, message)
         return
       }
@@ -497,9 +497,6 @@ export class OnDragDropItemCommand extends Command<
               )
               break
           }
-          break
-        case Pkm.DITTO:
-          client.send(Transfer.DRAG_DROP_FAILED, message)
           break
 
         case Pkm.PHIONE:

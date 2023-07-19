@@ -106,6 +106,10 @@ export class Pokemon extends Schema implements IPokemon {
     )
   }
 
+  get canHoldItems(): boolean {
+    return this.name !== Pkm.DITTO && this.passive !== Passive.UNOWN
+  }
+
   get isOnBench(): boolean {
     return this.positionY === 0
   }
