@@ -9,7 +9,6 @@ import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
 import Pokemon from "./pokemon"
 import { Ability } from "../../../../types/enum/Ability"
-import { HiddenPowerAbilities } from "../../../../core/abilities"
 import { transformAttackCoordinate } from "../../pages/utils/utils"
 
 const SHARDS_PER_ENCOUNTER = 50
@@ -130,19 +129,6 @@ export default class UnownManager {
   }
 
   hiddenPowerAnimation(skill: Ability, originX: number, originY: number) {
-    if (skill === Ability.HIDDEN_POWER_EM) {
-      for (let i = 0; i < 3; i++) {
-        this.hiddenPowerAnimation(Ability.HIDDEN_POWER_QM, originX, originY)
-      }
-      return
-    } else if (skill === Ability.HIDDEN_POWER_QM) {
-      return this.hiddenPowerAnimation(
-        pickRandomIn(HiddenPowerAbilities),
-        originX,
-        originY
-      )
-    }
-
     const [x, y] = transformAttackCoordinate(originX, originY)
     const unownsGroup = this.scene.add.group()
     const letters = UNOWNS_PER_ABILITY.get(skill)
@@ -289,5 +275,26 @@ const UNOWNS_PER_ABILITY = new Map([
     Ability.HIDDEN_POWER_Y,
     [Pkm.UNOWN_Y, Pkm.UNOWN_O, Pkm.UNOWN_G, Pkm.UNOWN_A]
   ],
-  [Ability.HIDDEN_POWER_Z, [Pkm.UNOWN_Z, Pkm.UNOWN_Z, Pkm.UNOWN_Z, Pkm.UNOWN_Z]]
+  [
+    Ability.HIDDEN_POWER_Z,
+    [Pkm.UNOWN_Z, Pkm.UNOWN_Z, Pkm.UNOWN_Z, Pkm.UNOWN_Z]
+  ],
+  [
+    Ability.HIDDEN_POWER_EM,
+    [
+      Pkm.UNOWN_EXCLAMATION,
+      Pkm.UNOWN_EXCLAMATION,
+      Pkm.UNOWN_EXCLAMATION,
+      Pkm.UNOWN_EXCLAMATION
+    ]
+  ],
+  [
+    Ability.HIDDEN_POWER_QM,
+    [
+      Pkm.UNOWN_QUESTION,
+      Pkm.UNOWN_QUESTION,
+      Pkm.UNOWN_QUESTION,
+      Pkm.UNOWN_QUESTION
+    ]
+  ]
 ])
