@@ -1,6 +1,6 @@
 import PokemonFactory from "../../models/pokemon-factory"
 import { Ability } from "../../types/enum/Ability"
-import { AttackType } from "../../types/enum/Game"
+import { AttackType, PokemonActionState } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Pkm, PkmFamily, PkmIndex } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
@@ -10,9 +10,9 @@ import Board from "../board"
 import PokemonEntity from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
 import PRECOMPUTED_TYPE_POKEMONS from "../../models/precomputed/type-pokemons.json"
-import { OnFishPokemonCommand } from "../../rooms/commands/game-commands"
 import ItemFactory from "../../models/item-factory"
 import { AbilityStrategy } from "."
+import { Transfer } from "../../types"
 
 export class HiddenPowerStrategy extends AttackStrategy {
   process(
@@ -156,12 +156,22 @@ export class HiddenPowerFStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, state, board, target, crit)
-    unown.simulation.room.dispatcher.dispatch(
-      new OnFishPokemonCommand().setPayload({
-        player: unown.simulation.player!,
-        fishingLevel: 3
-      })
+    const fishingLevel = 3
+    const player = unown.simulation.player!
+    const pkm = player.simulation.room.state.shop.fishPokemon(
+      player,
+      fishingLevel
     )
+    const fish = PokemonFactory.createPokemonFromName(pkm)
+    const x = unown.simulation.room.getFirstAvailablePositionInBench(player.id)
+    fish.positionX = x !== undefined ? x : -1
+    fish.positionY = 0
+    fish.action = PokemonActionState.FISH
+    player.board.set(fish.id, fish)
+    unown.simulation.room.updateEvolution(player.id)
+    unown.simulation.room.clock.setTimeout(() => {
+      fish.action = PokemonActionState.IDLE
+    }, 1000)
   }
 }
 
@@ -336,6 +346,15 @@ export class HiddenPowerNStrategy extends HiddenPowerStrategy {
               target,
               false
             )
+            pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+              id: pokemon.simulation.id,
+              skill: Ability.EXPLOSION,
+              positionX: pokemon.positionX,
+              positionY: pokemon.positionY,
+              targetX: target.positionX,
+              targetY: target.positionY,
+              orientation: pokemon.orientation
+            })
           }
         }
       }
@@ -569,6 +588,15 @@ export class HiddenPowerVStrategy extends HiddenPowerStrategy {
           enemy,
           false
         )
+        unown.simulation.room.broadcast(Transfer.ABILITY, {
+          id: unown.simulation.id,
+          skill: Ability.EXPLOSION,
+          positionX: unown.positionX,
+          positionY: unown.positionY,
+          targetX: enemy.positionX,
+          targetY: enemy.positionY,
+          orientation: unown.orientation
+        })
       }
     })
   }

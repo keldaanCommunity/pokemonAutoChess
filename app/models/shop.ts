@@ -19,6 +19,7 @@ import { removeInArray } from "../utils/array"
 import { Pokemon } from "./colyseus-models/pokemon"
 import { logger } from "../utils/logger"
 import { Synergy } from "../types/enum/Synergy"
+import { IPlayer } from "../types"
 
 export function getPoolSize(rarity: Rarity, maxStars: number): number {
   return PoolSize[rarity][clamp(maxStars, 1, 3) - 1]
@@ -259,7 +260,7 @@ export default class Shop {
     return pokemon
   }
 
-  fishPokemon(player: Player, fishingLevel: number): Pkm {
+  fishPokemon(player: IPlayer, fishingLevel: number): Pkm {
     const rarityProbability = FishRarityProbability[fishingLevel]
     const rarity_seed = Math.random()
     let fish: Pkm = Pkm.MAGIKARP

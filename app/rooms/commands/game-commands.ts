@@ -46,7 +46,6 @@ import { chance, pickRandomIn } from "../../utils/random"
 import { logger } from "../../utils/logger"
 import { Passive } from "../../types/enum/Passive"
 import { getAvatarString } from "../../public/src/utils"
-import { HiddenPowerAbilities } from "../../core/abilities"
 
 export class OnShopCommand extends Command<
   GameRoom,
@@ -783,28 +782,6 @@ export class OnJoinCommand extends Command<
   }
 }
 
-export class OnFishPokemonCommand extends Command<
-  GameRoom,
-  {
-    player: IPlayer
-    fishingLevel: number
-  }
-> {
-  execute({ player, fishingLevel }) {
-    const pkm = this.state.shop.fishPokemon(player, fishingLevel)
-    const fish = PokemonFactory.createPokemonFromName(pkm)
-    const x = this.room.getFirstAvailablePositionInBench(player.id)
-    fish.positionX = x !== undefined ? x : -1
-    fish.positionY = 0
-    fish.action = PokemonActionState.FISH
-    player.board.set(fish.id, fish)
-    this.room.updateEvolution(player.id)
-    this.clock.setTimeout(() => {
-      fish.action = PokemonActionState.IDLE
-    }, 1000)
-  }
-}
-
 export class OnUpdateCommand extends Command<
   GameRoom,
   {
@@ -1233,12 +1210,17 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
           : player.effects.list.includes(Effect.DRIZZLE)
           ? 2
           : 1
-        commands.push(
-          new OnFishPokemonCommand().setPayload({
-            player,
-            fishingLevel
-          })
-        )
+        const pkm = this.state.shop.fishPokemon(player, fishingLevel)
+        const fish = PokemonFactory.createPokemonFromName(pkm)
+        const x = this.room.getFirstAvailablePositionInBench(player.id)
+        fish.positionX = x !== undefined ? x : -1
+        fish.positionY = 0
+        fish.action = PokemonActionState.FISH
+        player.board.set(fish.id, fish)
+        this.room.updateEvolution(player.id)
+        this.clock.setTimeout(() => {
+          fish.action = PokemonActionState.IDLE
+        }, 1000)
       }
     })
 

@@ -1,7 +1,6 @@
 import { Langage } from ".."
 import { Ability } from "../enum/Ability"
 import { Damage, Stat } from "../enum/Game"
-import { Pkm } from "../enum/Pokemon"
 import { Status } from "../enum/Status"
 import { Synergy } from "../enum/Synergy"
 
@@ -2263,7 +2262,7 @@ Snow: also gives [2,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     fra: ""
   },
   [Ability.HIDDEN_POWER_N]: {
-    eng: `Your whole team cast ${AbilityName[Ability.EXPLOSION]}`,
+    eng: `Your whole team cast ${AbilityName[Ability.EXPLOSION].eng}`,
     esp: "",
     prt: "",
     fra: ""
@@ -2311,7 +2310,7 @@ Snow: also gives [2,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     fra: ""
   },
   [Ability.HIDDEN_POWER_V]: {
-    eng: `Cast ${AbilityName[Ability.THUNDER]} on all the enemy team`,
+    eng: `Cast ${AbilityName[Ability.THUNDER].eng} on all the enemy team`,
     esp: "",
     prt: "",
     fra: ""

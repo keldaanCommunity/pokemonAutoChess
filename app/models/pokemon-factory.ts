@@ -7,6 +7,7 @@ import {
   PkmCost
 } from "../types/Config"
 import { PokemonActionState, Rarity } from "../types/enum/Game"
+import { Passive } from "../types/enum/Passive"
 import { Pkm, PkmDuos, PkmFamily, PkmProposition } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { logger } from "../utils/logger"
@@ -2017,6 +2018,8 @@ export default class PokemonFactory {
     if (name === Pkm.EGG) {
       return 2
     } else if (name === Pkm.MAGIKARP) {
+      return 1
+    } else if (pokemon.passive === Passive.UNOWN) {
       return 1
     } else if (pokemon.rarity === Rarity.HATCH) {
       return [3, 4, 5][pokemon.stars - 1]
