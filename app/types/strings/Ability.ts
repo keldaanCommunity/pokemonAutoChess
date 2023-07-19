@@ -2214,7 +2214,7 @@ Snow: also gives [2,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     fra: ""
   },
   [Ability.HIDDEN_POWER_F]: {
-    eng: `Fish a random ${Synergy.WATER} Pokemon`,
+    eng: `Fish 2 random ${Synergy.WATER} Pokemon at max fishing level`,
     esp: "",
     prt: "",
     fra: ""

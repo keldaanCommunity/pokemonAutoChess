@@ -157,21 +157,27 @@ export class HiddenPowerFStrategy extends HiddenPowerStrategy {
   ) {
     super.process(unown, state, board, target, crit)
     const fishingLevel = 3
+    const nbFishes = 2
     const player = unown.simulation.player!
-    const pkm = player.simulation.room.state.shop.fishPokemon(
-      player,
-      fishingLevel
-    )
-    const fish = PokemonFactory.createPokemonFromName(pkm)
-    const x = unown.simulation.room.getFirstAvailablePositionInBench(player.id)
-    fish.positionX = x !== undefined ? x : -1
-    fish.positionY = 0
-    fish.action = PokemonActionState.FISH
-    player.board.set(fish.id, fish)
-    unown.simulation.room.updateEvolution(player.id)
-    unown.simulation.room.clock.setTimeout(() => {
-      fish.action = PokemonActionState.IDLE
-    }, 1000)
+
+    for (let i = 0; i < nbFishes; i++) {
+      const pkm = player.simulation.room.state.shop.fishPokemon(
+        player,
+        fishingLevel
+      )
+      const fish = PokemonFactory.createPokemonFromName(pkm)
+      const x = unown.simulation.room.getFirstAvailablePositionInBench(
+        player.id
+      )
+      fish.positionX = x !== undefined ? x : -1
+      fish.positionY = 0
+      fish.action = PokemonActionState.FISH
+      player.board.set(fish.id, fish)
+      unown.simulation.room.updateEvolution(player.id)
+      unown.simulation.room.clock.setTimeout(() => {
+        fish.action = PokemonActionState.IDLE
+      }, 1000)
+    }
   }
 }
 
