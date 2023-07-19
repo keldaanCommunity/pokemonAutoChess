@@ -1027,7 +1027,7 @@ export const AbilityName: { [key in Ability]: Langage } = {
     fra: ""
   },
   [Ability.HIDDEN_POWER_D]: {
-    eng: "Hidden Power (DUST)",
+    eng: "Hidden Power (DITO)",
     esp: "",
     prt: "",
     fra: ""
@@ -2197,13 +2197,13 @@ Snow: also gives [2,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     fra: ""
   },
   [Ability.HIDDEN_POWER_C]: {
-    eng: "Give Amulet Coin to all your team. The item is removed at the end of the fight.",
+    eng: "Give Amulet Coin to your whole team. The item is removed at the end of the fight.",
     esp: "",
     prt: "",
     fra: ""
   },
   [Ability.HIDDEN_POWER_D]: {
-    eng: `Get a random ${Synergy.FOSSIL} pokemon on your bench`,
+    eng: `Get a Ditto on your bench`,
     esp: "",
     prt: "",
     fra: ""
@@ -2251,25 +2251,25 @@ Snow: also gives [2,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     fra: ""
   },
   [Ability.HIDDEN_POWER_L]: {
-    eng: `Your team gains 100 maximum ${Stat.HP}`,
+    eng: `Give Max Revive to your whole team. The item is removed at the end of the fight.`,
     esp: "",
     prt: "",
     fra: ""
   },
   [Ability.HIDDEN_POWER_M]: {
-    eng: `Your team gains 100 ${Stat.MANA}`,
+    eng: `Your whole team gets max ${Stat.MANA}`,
     esp: "",
     prt: "",
     fra: ""
   },
   [Ability.HIDDEN_POWER_N]: {
-    eng: `All your team cast ${AbilityName[Ability.EXPLOSION]}`,
+    eng: `Your whole team cast ${AbilityName[Ability.EXPLOSION]}`,
     esp: "",
     prt: "",
     fra: ""
   },
   [Ability.HIDDEN_POWER_O]: {
-    eng: "Give Oran Berry to all your team. The item is removed at the end of the fight.",
+    eng: "Give Oran Berry to your whole team. The item is removed at the end of the fight.",
     esp: "",
     prt: "",
     fra: ""
@@ -2323,7 +2323,7 @@ Snow: also gives [2,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     fra: ""
   },
   [Ability.HIDDEN_POWER_X]: {
-    eng: "Gives XRay Vision to all your team. The item is removed at the end of the fight.",
+    eng: "Gives XRay Vision to your whole team. The item is removed at the end of the fight.",
     esp: "",
     prt: "",
     fra: ""
