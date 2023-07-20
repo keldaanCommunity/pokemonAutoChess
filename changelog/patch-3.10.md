@@ -4,7 +4,7 @@ patch announcement
 
 > July, 15th
 
-# Patch 3.10: CODENAME TO BE FOUND
+# Patch 3.10: NEW WAVE
 
 ---
 
@@ -37,9 +37,11 @@ patch announcement
 - Cubone: Ground/Rock → Ground/Ghost
 - Oshawott: Water/Monster/Fighting → Water/Field/Fighting
 - Suicune: Water/Ice → Water/Ice/Field
-- Nerf Litwick: Attack 5 -> 4 Lampent 9 -> 8
 - Diamond Storm ability rework: Deals 200% (scales) of current Defense as special damage to surrounding enemies
 - Buff Makuhita HP: 70 → 80 and Hariyama HP 160 → 170
+- Buff Latias: Mana 100 → 90 , Mist ball damage 25 → 30, AP reduction 10 → 30
+- Buff Latios: Mana 100 → 90, Luster Purge damage 25 → 30, Spe def reduction -1 → -3
+- Buff Link Cable: now when Minun and Plusle are both on field, trigger discharge and deal damage to all targets adjacent to both Minun and Plusle
 
 # Changes to Synergies
 

@@ -4789,7 +4789,7 @@ export class MistBallStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = 25
+    const damage = 30
 
     effectInLine(board, pokemon, target, (targetInLine) => {
       if (targetInLine != null && targetInLine.team !== pokemon.team) {
@@ -4800,7 +4800,7 @@ export class MistBallStrategy extends AttackStrategy {
           pokemon,
           crit
         )
-        targetInLine.addAbilityPower(-10)
+        targetInLine.addAbilityPower(-30)
       }
     })
 
@@ -4814,7 +4814,7 @@ export class MistBallStrategy extends AttackStrategy {
             pokemon,
             crit
           )
-          targetInLine.addAbilityPower(-10)
+          targetInLine.addAbilityPower(-30)
         }
       })
     }, 1000)
@@ -4830,7 +4830,7 @@ export class LusterPurgeStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = 25
+    const damage = 30
 
     effectInLine(board, pokemon, target, (targetInLine) => {
       if (targetInLine != null && targetInLine.team !== pokemon.team) {
@@ -4841,7 +4841,7 @@ export class LusterPurgeStrategy extends AttackStrategy {
           pokemon,
           crit
         )
-        targetInLine.addSpecialDefense(-1)
+        targetInLine.addSpecialDefense(-3)
       }
     })
 
@@ -4855,7 +4855,7 @@ export class LusterPurgeStrategy extends AttackStrategy {
             pokemon,
             crit
           )
-          targetInLine.addSpecialDefense(-1)
+          targetInLine.addSpecialDefense(-3)
         }
       })
     }, 1000)
@@ -4910,16 +4910,31 @@ export class LinkCableStrategy extends AttackStrategy {
       )
       if (partner) {
         const damage = 50
+        const targetsHit = new Set<PokemonEntity>()
         effectInLine(board, pokemon, partner, (targetInLine) => {
           if (targetInLine != null && targetInLine.team !== pokemon.team) {
-            targetInLine.handleSpecialDamage(
-              damage,
-              board,
-              AttackType.SPECIAL,
-              pokemon,
-              crit
-            )
+            targetsHit.add(targetInLine)
           }
+        })
+        board.getAdjacentCells(pokemon.positionX, pokemon.positionY).forEach((cell) => {
+          if (cell.value && cell.value.team !== pokemon.team) {
+            targetsHit.add(cell.value)
+          }
+        })
+        board.getAdjacentCells(partner.positionX, partner.positionY).forEach((cell) => {
+          if (cell.value && cell.value.team !== pokemon.team) {
+            targetsHit.add(cell.value)
+          }
+        })
+
+        targetsHit.forEach(target => {
+          target.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
         })
         pokemon.simulation.room.broadcast(Transfer.ABILITY, {
           id: pokemon.simulation.id,
@@ -4928,6 +4943,22 @@ export class LinkCableStrategy extends AttackStrategy {
           positionY: pokemon.positionY,
           targetX: partner.positionX,
           targetY: partner.positionY
+        })
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: "LINK_CABLE_discharge",
+          positionX: pokemon.positionX,
+          positionY: pokemon.positionY,
+          targetX: pokemon.targetX,
+          targetY: pokemon.targetY
+        })
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: "LINK_CABLE_discharge",
+          positionX: partner.positionX,
+          positionY: partner.positionY,
+          targetX: partner.targetX,
+          targetY: partner.targetY
         })
       } else {
         const damage = 50
