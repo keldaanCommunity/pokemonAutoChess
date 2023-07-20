@@ -357,7 +357,6 @@ export interface IPokemon {
   evolution: Pkm
   positionX: number
   positionY: number
-  cost: number
   attackSprite: AttackSprite
   atkSpeed: number
   def: number

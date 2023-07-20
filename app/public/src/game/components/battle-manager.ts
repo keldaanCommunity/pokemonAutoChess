@@ -3484,6 +3484,37 @@ export default class BattleManager {
             break
           }
 
+          case Ability.HIDDEN_POWER_A:
+          case Ability.HIDDEN_POWER_B:
+          case Ability.HIDDEN_POWER_C:
+          case Ability.HIDDEN_POWER_D:
+          case Ability.HIDDEN_POWER_E:
+          case Ability.HIDDEN_POWER_F:
+          case Ability.HIDDEN_POWER_G:
+          case Ability.HIDDEN_POWER_H:
+          case Ability.HIDDEN_POWER_I:
+          case Ability.HIDDEN_POWER_J:
+          case Ability.HIDDEN_POWER_K:
+          case Ability.HIDDEN_POWER_L:
+          case Ability.HIDDEN_POWER_M:
+          case Ability.HIDDEN_POWER_N:
+          case Ability.HIDDEN_POWER_O:
+          case Ability.HIDDEN_POWER_P:
+          case Ability.HIDDEN_POWER_Q:
+          case Ability.HIDDEN_POWER_R:
+          case Ability.HIDDEN_POWER_S:
+          case Ability.HIDDEN_POWER_T:
+          case Ability.HIDDEN_POWER_U:
+          case Ability.HIDDEN_POWER_V:
+          case Ability.HIDDEN_POWER_W:
+          case Ability.HIDDEN_POWER_X:
+          case Ability.HIDDEN_POWER_Y:
+          case Ability.HIDDEN_POWER_Z:
+          case Ability.HIDDEN_POWER_QM:
+          case Ability.HIDDEN_POWER_EM:
+            this.scene.unownManager?.hiddenPowerAnimation(skill, positionX, positionY)
+            break
+
           default:
             break
         }

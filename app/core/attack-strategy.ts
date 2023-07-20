@@ -6,7 +6,7 @@ import Board from "./board"
 import PokemonEntity from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
 import { Synergy } from "../types/enum/Synergy"
-import { AbilityStrategy, Ability } from "../types/enum/Ability"
+import { Ability } from "../types/enum/Ability"
 import PokemonFactory from "../models/pokemon-factory"
 import { Pkm } from "../types/enum/Pokemon"
 import {
@@ -22,6 +22,7 @@ import { max, min } from "../utils/number"
 import { distanceC } from "../utils/distance"
 import { Transfer } from "../types"
 import { Passive } from "../types/enum/Passive"
+import { AbilityStrategy } from "./abilities"
 
 export class AttackStrategy {
   process(
@@ -198,7 +199,7 @@ export class BeatUpStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target, crit)
     for (let i = 0; i < pokemon.stars; i++) {
       const houndour = PokemonFactory.createPokemonFromName(Pkm.HOUNDOUR)
-      const coord = pokemon.simulation.getClosestAvailablePlaceOnBoard(
+      const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemon(
         pokemon,
         pokemon.team
       )
@@ -1050,7 +1051,7 @@ export class RazorWindStrategy extends AttackStrategy {
   }
 }
 
-export class TwistingNeiherStrategy extends AttackStrategy {
+export class TwistingNetherStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1059,11 +1060,7 @@ export class TwistingNeiherStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const cells = board.getCellsInRadius(
-      target.positionX,
-      target.positionY,
-      2
-    )
+    const cells = board.getCellsInRadius(target.positionX, target.positionY, 2)
     cells.forEach((cell) => {
       if (cell && cell.value && cell.value.team !== pokemon.team) {
         cell.value.handleSpecialDamage(
@@ -3524,9 +3521,9 @@ export class TeleportStrategy extends AttackStrategy {
 
     const potentialCells = [
       [0, 0],
-      [0, 5],
-      [7, 5],
-      [7, 0]
+      [0, board.rows - 1],
+      [board.columns - 1, board.rows - 1],
+      [board.columns - 1, 0]
     ]
     shuffleArray(potentialCells)
 

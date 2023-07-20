@@ -2,7 +2,7 @@ import React from "react"
 import ReactTooltip from "react-tooltip"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
-import { PkmCost, RarityColor } from "../../../../../types/Config"
+import { RarityColor } from "../../../../../types/Config"
 import { getPortraitSrc } from "../../../utils"
 import { GamePokemonDetail } from "./game-pokemon-detail"
 import SynergyIcon from "../icons/synergy-icon"
@@ -27,7 +27,9 @@ export default function GamePokemonPortrait(props: {
     const pokemonCollection = useAppSelector(
       (state) => state.game.pokemonCollection
     )
-    const pokemonConfig: IPokemonConfig | undefined = pokemonCollection.get(props.pokemon.index)
+    const pokemonConfig: IPokemonConfig | undefined = pokemonCollection.get(
+      props.pokemon.index
+    )
 
     const uid: string = useAppSelector((state) => state.network.uid)
     const currentPlayerId: string = useAppSelector(
@@ -63,8 +65,13 @@ export default function GamePokemonPortrait(props: {
     if (count === 2 && countEvol === 2 && pokemonEvolution2 != null)
       pokemonEvolution = pokemonEvolution2
 
-    const pokemonInPortrait = (willEvolve && pokemonEvolution) ? PokemonFactory.createPokemonFromName(pokemonEvolution) : props.pokemon
-    const pokemonInPortraitConfig = pokemonCollection.get(pokemonInPortrait.index)
+    const pokemonInPortrait =
+      willEvolve && pokemonEvolution
+        ? PokemonFactory.createPokemonFromName(pokemonEvolution)
+        : props.pokemon
+    const pokemonInPortraitConfig = pokemonCollection.get(
+      pokemonInPortrait.index
+    )
 
     return (
       <div
@@ -112,9 +119,11 @@ export default function GamePokemonPortrait(props: {
             />
           </div>
         )}
-        {props.origin === "shop" && <div className="game-pokemon-portrait-cost">
-          <Money value={PkmCost[props.pokemon.rarity]} />
-        </div>}
+        {props.origin === "shop" && (
+          <div className="game-pokemon-portrait-cost">
+            <Money value={PokemonFactory.getBuyPrice(props.pokemon.name)} />
+          </div>
+        )}
         <ul className="game-pokemon-portrait-types">
           {props.pokemon.types.map((type) => {
             return (

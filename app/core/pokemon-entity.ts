@@ -8,12 +8,13 @@ import Count from "../models/colyseus-models/count"
 import Simulation from "./simulation"
 import { Schema, type, ArraySchema, SetSchema } from "@colyseus/schema"
 import { AttackStrategy } from "./attack-strategy"
+import { AbilityStrategy } from "./abilities"
 import Board from "./board"
 import PokemonState from "./pokemon-state"
 import { IPokemonEntity, IPokemon, Emotion, AttackSprite } from "../types"
 import { AttackType, Rarity } from "../types/enum/Game"
 import { Effect } from "../types/enum/Effect"
-import { AbilityStrategy, Ability } from "../types/enum/Ability"
+import { Ability } from "../types/enum/Ability"
 import { Synergy, SynergyEffects } from "../types/enum/Synergy"
 import { Pkm } from "../types/enum/Pokemon"
 import { IdleState } from "./idle-state"
@@ -180,7 +181,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     damage: number
     board: Board
     attackType: AttackType
-    attacker: PokemonEntity
+    attacker: PokemonEntity | null
     shouldTargetGainMana: boolean
   }) {
     return this.state.handleDamage({ target: this, ...params })

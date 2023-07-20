@@ -2,6 +2,7 @@ import { Langage } from ".."
 import { Ability } from "../enum/Ability"
 import { Damage, Stat } from "../enum/Game"
 import { Status } from "../enum/Status"
+import { Synergy } from "../enum/Synergy"
 
 export const AbilityName: { [key in Ability]: Langage } = {
   [Ability.SOFT_BOILED]: {
@@ -1005,10 +1006,184 @@ export const AbilityName: { [key in Ability]: Langage } = {
     esp: "",
     prt: "",
     fra: ""
+  },
+  [Ability.HIDDEN_POWER_A]: {
+    eng: "Hidden Power (ABRA)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_B]: {
+    eng: "Hidden Power (BURN)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_C]: {
+    eng: "Hidden Power (COIN)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_D]: {
+    eng: "Hidden Power (DITO)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_E]: {
+    eng: "Hidden Power (EGGS)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_F]: {
+    eng: "Hidden Power (FISH)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_G]: {
+    eng: "Hidden Power (GOLD)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_H]: {
+    eng: "Hidden Power (HEAL)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_I]: {
+    eng: "Hidden Power (ITEM)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_J]: {
+    eng: "Hidden Power (JAWS)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_K]: {
+    eng: "Hidden Power (KICK)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_L]: {
+    eng: "Hidden Power (LIFE)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_M]: {
+    eng: "Hidden Power (MANA)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_N]: {
+    eng: "Hidden Power (NUKE)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_O]: {
+    eng: "Hidden Power (ORAN)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_P]: {
+    eng: "Hidden Power (PEST)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_Q]: {
+    eng: "Hidden Power (QUIT)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_R]: {
+    eng: "Hidden Power (ROCK)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_S]: {
+    eng: "Hidden Power (STOP)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_T]: {
+    eng: "Hidden Power (TAPU)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_U]: {
+    eng: "Hidden Power (UXIE)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_V]: {
+    eng: "Hidden Power (VOLT)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_W]: {
+    eng: "Hidden Power (WISH)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_X]: {
+    eng: "Hidden Power (XRAY)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_Y]: {
+    eng: "Hidden Power (YOGA)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_Z]: {
+    eng: "Hidden Power (ZZZZ)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_QM]: {
+    eng: "Hidden Power (?)",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_EM]: {
+    eng: "Hidden Power (!)",
+    esp: "",
+    prt: "",
+    fra: ""
   }
 }
 
 export const AbilityDescription: { [key in Ability]: Langage } = {
+  [Ability.DEFAULT]: {
+    eng: ``,
+    esp: ``,
+    fra: ``,
+    prt: ``
+  },
   [Ability.SOFT_BOILED]: {
     eng: `Cures every status effects and grants [20,40,80,SP] ${Stat.SHIELD} for every ally`,
     esp: ``,
@@ -1137,12 +1312,6 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
   },
   [Ability.LIQUIDATION]: {
     eng: `Deals [20,40,80,SP] ${Damage.SPECIAL} and remove [1,2,4] ${Stat.DEF} from the target`,
-    esp: ``,
-    fra: ``,
-    prt: ``
-  },
-  [Ability.DEFAULT]: {
-    eng: ``,
     esp: ``,
     fra: ``,
     prt: ``
@@ -2010,6 +2179,174 @@ Snow: also gives [2,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
   },
   [Ability.MAGIC_BOUNCE]: {
     eng: `For [3,6,12] seconds, whenever this pokemon is hit by an ability, the caster is ${Status.SILENCE} for 4 seconds and take ${Damage.SPECIAL} equal to this pokemon current ${Stat.SPE_DEF}`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_A]: {
+    eng: "Spawn 4 Abra at every corner of the board",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_B]: {
+    eng: "Burn the opponent team for 30 seconds",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_C]: {
+    eng: "Give Amulet Coin to your whole team. The item is removed at the end of the fight.",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_D]: {
+    eng: `Get a Ditto on your bench`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_E]: {
+    eng: "Get a Pokemon Egg on your bench. It hatches in the next stage",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_F]: {
+    eng: `Fish 2 random ${Synergy.WATER} Pokemon at max fishing level`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_G]: {
+    eng: "Gain 5 Gold",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_H]: {
+    eng: `Heal your team to Max ${Stat.HP}`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_I]: {
+    eng: "Get a random item component",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_J]: {
+    eng: "Spawn 2 Sharpedo with Razor Claws",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_K]: {
+    eng: `Spawn Hitmonlee with a Red Orb and max ${Stat.MANA}`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_L]: {
+    eng: `Give Max Revive to your whole team. The item is removed at the end of the fight.`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_M]: {
+    eng: `Your whole team gets max ${Stat.MANA}`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_N]: {
+    eng: `Your whole team cast ${AbilityName[Ability.EXPLOSION].eng}`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_O]: {
+    eng: "Give Oran Berry to your whole team. The item is removed at the end of the fight.",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_P]: {
+    eng: `Spawn 5 random ${Synergy.BUG} pokemon at their first stage of evolution`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_Q]: {
+    eng: "Immediately ends the fight with a draw",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_R]: {
+    eng: "Spawn Geodude, Graveler and Golem with Rocky Helmets",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_S]: {
+    eng: `${Status.FREEZE} the opponent team for 4 seconds`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_T]: {
+    eng: `Spawn Tapu-Lele with Choice Specs and max ${Stat.MANA}`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_U]: {
+    eng: `Spawn Uxie with Aqua Egg and max ${Stat.MANA}`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_V]: {
+    eng: `Cast ${AbilityName[Ability.THUNDER].eng} on all the enemy team`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_W]: {
+    eng: "Get a high rarity pokemon matching your top synergy",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_X]: {
+    eng: "Gives XRay Vision to your whole team. The item is removed at the end of the fight.",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_Y]: {
+    eng: "Spawn 2 Meditite with a Soul Dew",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_Z]: {
+    eng: `Put the enemy team ${Status.SLEEP} for 5 seconds`,
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_QM]: {
+    eng: "Get 4 random Unown on your bench",
+    esp: "",
+    prt: "",
+    fra: ""
+  },
+  [Ability.HIDDEN_POWER_EM]: {
+    eng: "Spawn 4 random Unown at every corner of the board",
     esp: "",
     prt: "",
     fra: ""

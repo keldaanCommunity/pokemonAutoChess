@@ -80,7 +80,7 @@ The private key is a json that contain those informations:
   "token_uri": "<token_uri>",
   "auth_provider_x509_cert_url": "<auth_provider_x509_cert_url>",
   "client_x509_cert_url": "<client_x509_cert_url>",
-  "universe_domain": "<universe_domain>
+  "universe_domain": "<universe_domain>"
 }
 ```
 

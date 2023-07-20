@@ -23,7 +23,7 @@ import {
   CDN_PORTRAIT_URL
 } from "../../types"
 import CustomLobbyRoom from "../custom-lobby-room"
-import { Pkm, PkmFamily, PkmIndex } from "../../types/enum/Pokemon"
+import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
 import PokemonConfig from "../../models/colyseus-models/pokemon-config"
 import PRECOMPUTED_RARITY_POKEMONS from "../../models/precomputed/type-rarity-all.json"
 import { BoosterRarityProbability, getEmotionCost } from "../../types/Config"
@@ -274,7 +274,7 @@ export class OnNewMessageCommand extends Command<
     try {
       const MAX_MESSAGE_LENGTH = 250
       message = cleanProfanity(message.substring(0, MAX_MESSAGE_LENGTH))
-      
+
       const user = this.state.users.get(client.auth.uid)
       if (user && !user.anonymous && message != "") {
         this.state.addMessage(
@@ -607,12 +607,9 @@ export class BuyEmotionCommand extends Command<
                   u.titles.push(Title.DUCHESS)
                 }
 
-                const unowns = (Object.keys(PkmFamily) as Pkm[]).filter(
-                  (pkm) => PkmFamily[pkm] === Pkm.UNOWN_A
-                )
                 if (
                   !u.titles.includes(Title.ARCHEOLOGIST) &&
-                  unowns.every((name) => {
+                  Unowns.every((name) => {
                     const index = PkmIndex[name]
                     const collection = u.pokemonCollection.get(index)
                     const isUnlocked =
@@ -918,7 +915,10 @@ export class AddBotCommand extends Command<
           }
 
           this.room.bots.set(resultCreate.id, resultCreate)
-          this.room.broadcast(Transfer.REQUEST_BOT_LIST, createBotList(this.room.bots))
+          this.room.broadcast(
+            Transfer.REQUEST_BOT_LIST,
+            createBotList(this.room.bots)
+          )
         } else {
           client.send(
             Transfer.BOT_DATABASE_LOG,
@@ -978,7 +978,10 @@ export class DeleteBotCommand extends Command<
         }
 
         this.room.bots.delete(id)
-        this.room.broadcast(Transfer.REQUEST_BOT_LIST, createBotList(this.room.bots))
+        this.room.broadcast(
+          Transfer.REQUEST_BOT_LIST,
+          createBotList(this.room.bots)
+        )
       }
     } catch (error) {
       logger.error(error)

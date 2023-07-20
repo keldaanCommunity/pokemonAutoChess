@@ -1,7 +1,7 @@
 import PokemonCollectionItem from "./pokemon-collection-item"
 import React, { Dispatch, SetStateAction } from "react"
 import { ITracker } from "../../../../../types/ITracker"
-import { Pkm, PkmIndex, PkmFamily } from "../../../../../types/enum/Pokemon"
+import { Pkm, PkmIndex, Unowns } from "../../../../../types/enum/Pokemon"
 import { useAppSelector } from "../../../hooks"
 import "./unown-panel.css"
 import { Emotion } from "../../../../../types/enum/Emotion"
@@ -24,29 +24,27 @@ export default function UnownPanel(props: {
     .replace(/\s+$/gm, "")
     .split("")
 
-  const unowns = (Object.keys(PkmFamily) as Pkm[])
-    .filter((pkm) => PkmFamily[pkm] === Pkm.UNOWN_A)
-    .flatMap((pkm: Pkm) => {
-      const pathIndex = PkmIndex[pkm].split("-")
-      let metadata: ITracker | undefined = undefined
-      if (pathIndex.length == 1) {
-        metadata = props.metadata[PkmIndex[pkm]]
-      } else if (pathIndex.length == 2) {
-        metadata = props.metadata[pathIndex[0]].subgroups[pathIndex[1]]
+  const unowns = Unowns.flatMap((pkm: Pkm) => {
+    const pathIndex = PkmIndex[pkm].split("-")
+    let metadata: ITracker | undefined = undefined
+    if (pathIndex.length == 1) {
+      metadata = props.metadata[PkmIndex[pkm]]
+    } else if (pathIndex.length == 2) {
+      metadata = props.metadata[pathIndex[0]].subgroups[pathIndex[1]]
+    }
+    if (metadata) {
+      const config = pokemonCollection.find((p) => p.id === PkmIndex[pkm])
+      const { emotions, shinyEmotions } = config ?? {
+        dust: 0,
+        emotions: [] as Emotion[],
+        shinyEmotions: [] as Emotion[]
       }
-      if (metadata) {
-        const config = pokemonCollection.find((p) => p.id === PkmIndex[pkm])
-        const { emotions, shinyEmotions } = config ?? {
-          dust: 0,
-          emotions: [] as Emotion[],
-          shinyEmotions: [] as Emotion[]
-        }
-        const isUnlocked = emotions?.length > 0 || shinyEmotions?.length > 0
-        return [{ pkm, metadata, config, isUnlocked }]
-      } else {
-        return []
-      }
-    })
+      const isUnlocked = emotions?.length > 0 || shinyEmotions?.length > 0
+      return [{ pkm, metadata, config, isUnlocked }]
+    } else {
+      return []
+    }
+  })
 
   return (
     <div>
