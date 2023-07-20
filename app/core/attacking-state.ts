@@ -115,6 +115,10 @@ export default class AttackingState extends PokemonState {
       let totalTakenDamage = 0
       const attackType = pokemon.attackType
 
+      if (pokemon.items.has(Item.FIRE_GEM)) {
+        physicalDamage = Math.round(physicalDamage + target.hp * 0.1)
+      }
+
       let isAttackSuccessful = true
       if (chance(target.dodge) && !pokemon.items.has(Item.XRAY_VISION)) {
         isAttackSuccessful = false
@@ -122,12 +126,11 @@ export default class AttackingState extends PokemonState {
         target.count.dodgeCount += 1
       }
       if (target.status.protect) {
-        physicalDamage = 0
         isAttackSuccessful = false
+        physicalDamage = 0
       }
 
-      const crit = chance(pokemon.critChance / 100)
-      if (crit) {
+      if (Math.random() * 100 < pokemon.critChance) {
         pokemon.onCritical(target, board)
         if (target.items.has(Item.ROCKY_HELMET) === false) {
           let opponentCritDamage = pokemon.critDamage

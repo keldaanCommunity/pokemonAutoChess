@@ -434,6 +434,9 @@ export default class GameRoom extends Room<GameState> {
         ) {
           // if player left game during the loading screen or before stage 4, remove it from the players
           this.state.players.delete(client.auth.uid)
+          this.state.players.forEach((player) => {
+            player.opponents.delete(client.auth.uid)
+          })
           logger.info(
             `${client.auth.displayName} has been removed from players list`
           )
@@ -695,6 +698,22 @@ export default class GameRoom extends Room<GameState> {
           player.opponentAvatar = opponent.avatar
           player.opponentTitle = TitleName[opponent.title] ?? ""
           return id
+        } else {
+          logger.error(
+            "ERROR, no opponent found. Players size:",
+            this.state.players.size
+          )
+          logger.error("ERROR, sortArray =")
+          sortArray.forEach((p) => logger.error(p))
+          logger.error("ERROR, potentials = ")
+          potentials.forEach((p) => logger.error(p))
+          logger.error("ERROR, potentail = ", potential)
+          logger.error("ERROR, id", id)
+          logger.error("ERROR", opponent)
+          this.state.players.forEach((player) => {
+            logger.error(player.id, player.name, player.alive)
+            logger.error(player.opponents)
+          })
         }
       }
     }

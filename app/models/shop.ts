@@ -225,6 +225,7 @@ export default class Shop {
   pickPokemon(player: Player): Pkm {
     const rarityProbability =
       RarityProbabilityPerLevel[player.experienceManager.level]
+    const ditto_seed = Math.random()
     const rarity_seed = Math.random()
     let pokemon = Pkm.MAGIKARP
     let threshold = 0
