@@ -105,8 +105,7 @@ export class Pokemon extends Schema implements IPokemon {
   }
 
   get canHoldItems(): boolean {
-    return !Unowns.includes(this.name)
-     && ![Pkm.DITTO, Pkm.EGG].includes(this.name)
+    return ![Pkm.DITTO, Pkm.EGG, ...Unowns].includes(this.name)
   }
 
   get isOnBench(): boolean {
