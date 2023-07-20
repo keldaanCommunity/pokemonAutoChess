@@ -46,6 +46,7 @@ import { chance, pickRandomIn } from "../../utils/random"
 import { logger } from "../../utils/logger"
 import { Passive } from "../../types/enum/Passive"
 import { getAvatarString } from "../../public/src/utils"
+import { max } from "../../utils/number"
 
 export class OnShopCommand extends Command<
   GameRoom,
@@ -141,6 +142,7 @@ export class OnPokemonPropositionCommand extends Command<
     const player = this.state.players.get(playerId)
     if (
       player &&
+      player.pokemonsProposition.length > 0 &&
       !this.state.additionalPokemons.includes(pkm) &&
       this.room.getBenchSize(player.board) < 8
     ) {
@@ -265,7 +267,7 @@ export class OnDragDropCommand extends Command<
           }
         } else {
           const dropOnBench = y == 0
-          const dropFromBench = pokemon.positionY == 0
+          const dropFromBench = pokemon.isOnBench
           // Drag and drop pokemons through bench has no limitation
           if (dropOnBench && dropFromBench) {
             this.room.swap(playerId, pokemon, x, y)
@@ -664,6 +666,14 @@ export class OnSellDropCommand extends Command<
 
     if (player) {
       const pokemon = player.board.get(detail.pokemonId)
+      if (
+        pokemon &&
+        !pokemon.isOnBench &&
+        this.state.phase === GamePhaseState.FIGHT
+      ) {
+        return // can't sell a pokemon currently fighting
+      }
+
       if (pokemon) {
         this.state.shop.releasePokemon(pokemon.name)
         player.money += PokemonFactory.getSellPrice(pokemon.name)
@@ -1035,8 +1045,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   }
 
   computeLife() {
-    const isPVE = this.checkForPVE()
-    this.state.players.forEach((player, key) => {
+    this.state.players.forEach((player) => {
       if (player.alive) {
         const currentResult = player.getCurrentBattleResult()
 
@@ -1056,36 +1065,26 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
             client?.send(Transfer.PLAYER_DAMAGE, playerDamage)
           }
         }
-
-        player.addBattleResult(
-          player.opponentName,
-          currentResult,
-          player.opponentAvatar,
-          isPVE,
-          player.simulation.weather
-        )
       }
     })
   }
 
-  computeStreak() {
-    if (this.checkForPVE()) {
-      return
-    }
-
+  computeStreak(isPVE: boolean) {
+    if (isPVE) return // PVE rounds do not change the current streak
     this.state.players.forEach((player, key) => {
       if (!player.alive) {
         return
       }
       const currentResult = player.getCurrentBattleResult()
-      const lastPlayerResult = player.getLastPlayerBattleResult()
+      const currentStreakType = player.getCurrentStreakType()
 
       if (currentResult === BattleResult.DRAW) {
         // preserve existing streak but lose HP
-      } else if (currentResult !== lastPlayerResult) {
+      } else if (currentResult !== currentStreakType) {
+        // reset streak
         player.streak = 0
       } else {
-        player.streak = Math.min(player.streak + 1, 5)
+        player.streak = max(5)(player.streak + 1)
       }
     })
   }
@@ -1109,6 +1108,21 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
           client?.send(Transfer.PLAYER_INCOME, income)
         }
         player.experienceManager.addExperience(2)
+      }
+    })
+  }
+
+  registerBattleResults(isPVE: boolean) {
+    this.state.players.forEach((player) => {
+      if (player.alive) {
+        const currentResult = player.getCurrentBattleResult()
+        player.addBattleResult(
+          player.opponentName,
+          currentResult,
+          player.opponentAvatar,
+          isPVE,
+          player.simulation.weather
+        )
       }
     })
   }
@@ -1316,8 +1330,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     const isPVE = this.checkForPVE()
 
     this.computeAchievements()
-    this.computeStreak()
+    this.computeStreak(isPVE)
     this.computeLife()
+    this.registerBattleResults(isPVE)
     this.rankPlayers()
     this.checkDeath()
     this.computeIncome()

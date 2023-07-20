@@ -104,10 +104,6 @@ export class Pokemon extends Schema implements IPokemon {
     )
   }
 
-  get canHoldItems(): boolean {
-    return this.name !== Pkm.DITTO && this.passive !== Passive.UNOWN
-  }
-
   get isOnBench(): boolean {
     return this.positionY === 0
   }
@@ -9339,7 +9335,7 @@ export class Guzzlord extends Pokemon {
       AttackSprite.FIRE_RANGE,
       2,
       120,
-      Ability.TWISTING_NEITHER,
+      Ability.TWISTING_NETHER,
       shiny,
       emotion,
       true

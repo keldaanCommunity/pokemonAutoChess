@@ -545,8 +545,8 @@ export const AbilityName: { [key in Ability]: Langage } = {
     prt: ``,
     fra: ``
   },
-  TWISTING_NEITHER: {
-    eng: `Twisting Neither`,
+  TWISTING_NETHER: {
+    eng: `Twisting Nether`,
     esp: ``,
     prt: ``,
     fra: ``
@@ -1718,7 +1718,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``,
     fra: ``
   },
-  TWISTING_NEITHER: {
+  TWISTING_NETHER: {
     eng: `Deals [80,SP] ${Damage.SPECIAL} to adjacent enemies. Every pokemon hit is teleported somewhere.`,
     esp: ``,
     prt: ``,

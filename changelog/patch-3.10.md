@@ -48,6 +48,7 @@ patch announcement
 - Water rework: A new water pokemon is fished after each PvP turn and put on your bench
 - Rock rework: Rock pokemons gain Defense and better resist to critical damage
 - Monster rework: Monster pokemons gain Attack, heal and increase their max HP, and grow in size every time they knock down an opponent
+- Artificial rework: Gain +10/20/30% base Attack, Ability Power and max HP as Shield per held item
 
 # Changes to Items
 
@@ -66,6 +67,8 @@ patch announcement
 - fix duration of Maractus ability
 - do not count Castform synergies for getting the dominant synergy
 - Fix shiny pokemon bug
+- fix Twisting Nether damage zone
+- fix streak resetting one round after a draw
 
 # UI
 
