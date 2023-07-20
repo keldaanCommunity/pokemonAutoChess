@@ -46,6 +46,7 @@ patch announcement
 - Dragon rework: Dragon amplify synergies and gains more stats when fully evolved.
 - Water dodge chance: 25/50/75 → 30/50/70
 - Water rework: A new water pokemon is fished after each PvP turn and put on your bench
+- Psychic rework: you can now find Unowns in shop
 - Rock rework: Rock pokemons gain Defense and better resist to critical damage
 - Monster rework: Monster pokemons gain Attack, heal and increase their max HP, and grow in size every time they knock down an opponent
 - Artificial rework: Gain +10/20/30% base Attack, Ability Power and max HP as Shield per held item

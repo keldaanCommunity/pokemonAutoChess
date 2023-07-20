@@ -176,7 +176,7 @@ export const SynergyDescription: {
     fra: ""
   },
   [Synergy.PSYCHIC]: {
-    eng: `Psychic pokemons gain additional ${Stat.AP}`,
+    eng: `Psychic pokemons gain additional ${Stat.AP} and attract Unowns`,
     esp: "",
     fra: ""
   },
