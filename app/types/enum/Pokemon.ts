@@ -1761,6 +1761,37 @@ export const PkmDuos = {
   [PkmDuo.PLUSLE_MINUN]: [Pkm.PLUSLE, Pkm.MINUN]
 }
 
+export const Unowns: Pkm[] = [
+  Pkm.UNOWN_A,
+  Pkm.UNOWN_B,
+  Pkm.UNOWN_C,
+  Pkm.UNOWN_D,
+  Pkm.UNOWN_E,
+  Pkm.UNOWN_F,
+  Pkm.UNOWN_G,
+  Pkm.UNOWN_H,
+  Pkm.UNOWN_I,
+  Pkm.UNOWN_J,
+  Pkm.UNOWN_K,
+  Pkm.UNOWN_L,
+  Pkm.UNOWN_M,
+  Pkm.UNOWN_N,
+  Pkm.UNOWN_O,
+  Pkm.UNOWN_P,
+  Pkm.UNOWN_Q,
+  Pkm.UNOWN_R,
+  Pkm.UNOWN_S,
+  Pkm.UNOWN_T,
+  Pkm.UNOWN_U,
+  Pkm.UNOWN_V,
+  Pkm.UNOWN_W,
+  Pkm.UNOWN_X,
+  Pkm.UNOWN_Y,
+  Pkm.UNOWN_Z,
+  Pkm.UNOWN_QUESTION,
+  Pkm.UNOWN_EXCLAMATION
+]
+
 export const AnimationConfig: {
   [key in Pkm]: {
     attack: AnimationType

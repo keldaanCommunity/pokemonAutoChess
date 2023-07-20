@@ -40,5 +40,5 @@ export const PassiveDescription: { [key in Passive]: string } = {
   [Passive.WATER_SPRING]: `Whenever an enemy uses their ability, gain 5 ${Stat.MANA}`,
   [Passive.MAGIKARP]: `9 Magikarp evolve in Gyriados`,
   [Passive.GIRATINA]: `Giratina switches between its Altered Forme and Origin Forme depending on its position on the board`,
-  [Passive.UNOWN]: `Unown cannot hold items, do not attack and vanish after casting their ability or after one fight`
+  [Passive.UNOWN]: `Unown cannot hold items and vanish after one fight or after casting their ability`
 }

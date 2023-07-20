@@ -8,7 +8,13 @@ import {
 } from "../types/Config"
 import { PokemonActionState, Rarity } from "../types/enum/Game"
 import { Passive } from "../types/enum/Passive"
-import { Pkm, PkmDuos, PkmFamily, PkmProposition } from "../types/enum/Pokemon"
+import {
+  Pkm,
+  PkmDuos,
+  PkmFamily,
+  PkmProposition,
+  Unowns
+} from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { logger } from "../utils/logger"
 import { pickRandomIn } from "../utils/random"
@@ -2036,6 +2042,15 @@ export default class PokemonFactory {
       return PkmCost[pokemon.rarity]
     } else {
       return PkmCost[pokemon.rarity] * pokemon.stars
+    }
+  }
+
+  static getBuyPrice(name: Pkm): number {
+    if (Unowns.includes(name)) {
+      return 1
+    } else {
+      const pokemon: Pokemon = PokemonFactory.createPokemonFromName(name)
+      return PkmCost[pokemon.rarity]
     }
   }
 }

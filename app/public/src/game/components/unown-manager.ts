@@ -2,7 +2,7 @@ import { GameObjects } from "phaser"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { Transfer } from "../../../../types"
 import { PokemonActionState } from "../../../../types/enum/Game"
-import { PkmFamily, Pkm } from "../../../../types/enum/Pokemon"
+import { Pkm, Unowns } from "../../../../types/enum/Pokemon"
 import { pickRandomIn, coinflip } from "../../../../utils/random"
 import { getGameContainer } from "../../pages/game"
 import AnimationManager from "../animation-manager"
@@ -29,9 +29,6 @@ export default class UnownManager {
   }
 
   addWanderingUnown() {
-    const unowns = (Object.keys(PkmFamily) as Pkm[]).filter(
-      (pkm) => PkmFamily[pkm] === Pkm.UNOWN_A
-    )
     const [startX, endX] = coinflip()
       ? [-100, +window.innerWidth + 100]
       : [+window.innerWidth + 100, -100]
@@ -44,7 +41,7 @@ export default class UnownManager {
       this.scene,
       startX,
       startY,
-      PokemonFactory.createPokemonFromName(pickRandomIn(unowns)),
+      PokemonFactory.createPokemonFromName(pickRandomIn(Unowns)),
       "unown",
       false
     )

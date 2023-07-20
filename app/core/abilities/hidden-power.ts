@@ -2,7 +2,7 @@ import PokemonFactory from "../../models/pokemon-factory"
 import { Ability } from "../../types/enum/Ability"
 import { AttackType, PokemonActionState } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
-import { Pkm, PkmFamily, PkmIndex } from "../../types/enum/Pokemon"
+import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { pickRandomIn } from "../../utils/random"
 import { AttackStrategy } from "../attack-strategy"
@@ -596,7 +596,7 @@ export class HiddenPowerVStrategy extends HiddenPowerStrategy {
         )
         unown.simulation.room.broadcast(Transfer.ABILITY, {
           id: unown.simulation.id,
-          skill: Ability.EXPLOSION,
+          skill: Ability.THUNDER,
           positionX: unown.positionX,
           positionY: unown.positionY,
           targetX: enemy.positionX,
@@ -721,12 +721,9 @@ export class HiddenPowerQMStrategy extends HiddenPowerStrategy {
   ) {
     super.process(unown, state, board, target, crit)
     const player = unown.simulation.player!
-    const unowns = (Object.keys(PkmFamily) as Pkm[]).filter(
-      (pkm) => PkmFamily[pkm] === Pkm.UNOWN_A
-    )
     const nbUnownsObtained = 4
     for (let i = 0; i < nbUnownsObtained; i++) {
-      const pkm = pickRandomIn(unowns)
+      const pkm = pickRandomIn(Unowns)
       const x = player.simulation.room.getFirstAvailablePositionInBench(
         player.id
       )
@@ -753,9 +750,6 @@ export class HiddenPowerEMStrategy extends HiddenPowerStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const player = pokemon.simulation.player!
-    const unowns = (Object.keys(PkmFamily) as Pkm[]).filter(
-      (pkm) => PkmFamily[pkm] === Pkm.UNOWN_A
-    )
     const corners = [
       [0, 0],
       [board.columns - 1, 0],
@@ -763,7 +757,7 @@ export class HiddenPowerEMStrategy extends HiddenPowerStrategy {
       [board.columns - 1, board.rows - 1]
     ]
     corners.forEach(([x, y]) => {
-      const unownName = pickRandomIn(unowns)
+      const unownName = pickRandomIn(Unowns)
       const unown = PokemonFactory.createPokemonFromName(
         unownName,
         player.pokemonCollection.get(PkmIndex[unownName])
@@ -783,61 +777,3 @@ export class HiddenPowerEMStrategy extends HiddenPowerStrategy {
     })
   }
 }
-
-export const HiddenPowerAbilities: Ability[] = [
-  Ability.HIDDEN_POWER_A,
-  Ability.HIDDEN_POWER_B,
-  Ability.HIDDEN_POWER_C,
-  Ability.HIDDEN_POWER_D,
-  Ability.HIDDEN_POWER_E,
-  Ability.HIDDEN_POWER_F,
-  Ability.HIDDEN_POWER_G,
-  Ability.HIDDEN_POWER_H,
-  Ability.HIDDEN_POWER_I,
-  Ability.HIDDEN_POWER_J,
-  Ability.HIDDEN_POWER_K,
-  Ability.HIDDEN_POWER_L,
-  Ability.HIDDEN_POWER_M,
-  Ability.HIDDEN_POWER_N,
-  Ability.HIDDEN_POWER_O,
-  Ability.HIDDEN_POWER_P,
-  Ability.HIDDEN_POWER_Q,
-  Ability.HIDDEN_POWER_R,
-  Ability.HIDDEN_POWER_S,
-  Ability.HIDDEN_POWER_T,
-  Ability.HIDDEN_POWER_U,
-  Ability.HIDDEN_POWER_V,
-  Ability.HIDDEN_POWER_W,
-  Ability.HIDDEN_POWER_X,
-  Ability.HIDDEN_POWER_Y,
-  Ability.HIDDEN_POWER_Z
-]
-
-export const HiddenPowerStrategies: (typeof HiddenPowerStrategy)[] = [
-  HiddenPowerAStrategy,
-  HiddenPowerBStrategy,
-  HiddenPowerCStrategy,
-  HiddenPowerDStrategy,
-  HiddenPowerEStrategy,
-  HiddenPowerFStrategy,
-  HiddenPowerGStrategy,
-  HiddenPowerHStrategy,
-  HiddenPowerIStrategy,
-  HiddenPowerJStrategy,
-  HiddenPowerKStrategy,
-  HiddenPowerLStrategy,
-  HiddenPowerMStrategy,
-  HiddenPowerNStrategy,
-  HiddenPowerOStrategy,
-  HiddenPowerPStrategy,
-  HiddenPowerQStrategy,
-  HiddenPowerRStrategy,
-  HiddenPowerSStrategy,
-  HiddenPowerTStrategy,
-  HiddenPowerUStrategy,
-  HiddenPowerVStrategy,
-  HiddenPowerWStrategy,
-  HiddenPowerXStrategy,
-  HiddenPowerYStrategy,
-  HiddenPowerZStrategy
-]

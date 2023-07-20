@@ -210,12 +210,12 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.LIGHT_SCREEN]: {
-    eng: `+100% ${Stat.AP}`,
+    eng: `+100% ${Stat.AP}. Unowns have 5% chance to appear in shop.`,
     esp: ``,
     fra: ``
   },
   [Effect.EERIE_SPELL]: {
-    eng: `+150% ${Stat.AP}`,
+    eng: `+150% ${Stat.AP}. After a fight, get an Unown shop.`,
     esp: ``,
     fra: ``
   },
