@@ -6,7 +6,7 @@ import { nanoid } from "nanoid"
 import { Emotion, IPokemon, AttackSprite } from "../../types"
 import { DEFAULT_ATK_SPEED, EvolutionTime } from "../../types/Config"
 import { Item } from "../../types/enum/Item"
-import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
+import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
 import { Rarity, AttackType, PokemonActionState } from "../../types/enum/Game"
 import { Ability } from "../../types/enum/Ability"
 import { Synergy } from "../../types/enum/Synergy"
@@ -102,6 +102,11 @@ export class Pokemon extends Schema implements IPokemon {
       this.rarity !== Rarity.HATCH &&
       ![Pkm.DITTO, Pkm.EGG].includes(this.name)
     )
+  }
+
+  get canHoldItems(): boolean {
+    return !Unowns.includes(this.name)
+     && ![Pkm.DITTO, Pkm.EGG].includes(this.name)
   }
 
   get isOnBench(): boolean {
