@@ -1051,7 +1051,7 @@ export class RazorWindStrategy extends AttackStrategy {
   }
 }
 
-export class TwistingNeiherStrategy extends AttackStrategy {
+export class TwistingNetherStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1060,11 +1060,7 @@ export class TwistingNeiherStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const cells = board.getCellsInRadius(
-      target.positionX,
-      target.positionY,
-      2
-    )
+    const cells = board.getCellsInRadius(target.positionX, target.positionY, 2)
     cells.forEach((cell) => {
       if (cell && cell.value && cell.value.team !== pokemon.team) {
         cell.value.handleSpecialDamage(
