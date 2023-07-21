@@ -57,7 +57,8 @@ export const TitleName: { [key in Title]: string } = {
     [Title.SHINY_SEEKER]: "Shiny Seeker",
     [Title.ARCHEOLOGIST]: "Archeologist",
     [Title.ALCHEMIST]: "Alchemist",
-    [Title.DENTIST]: "Dentist"
+    [Title.DENTIST]: "Dentist",
+    [Title.FISHERMAN]: "Fisherman"
   }
   
   export const TitleDescription: { [key in Title]: string } = {
@@ -117,6 +118,7 @@ export const TitleName: { [key in Title]: string } = {
     [Title.BOT_BUILDER]: "Reach level 10 to unlock the Bot Builder",
     [Title.SHINY_SEEKER]: "Have over 30 shiny pokemon avatars",
     [Title.ARCHEOLOGIST]: "Decipher the secret message of the Unowns",
-    [Title.DENTIST]: "Own the angry Arbok"
+    [Title.DENTIST]: "Own the angry Arbok",
+    [Title.FISHERMAN]: "Get a Gyarados"
   }
   

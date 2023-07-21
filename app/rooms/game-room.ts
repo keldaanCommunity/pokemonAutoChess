@@ -884,6 +884,10 @@ export default class GameRoom extends Room<GameState> {
           }
         }
 
+        if (pokemon.name === Pkm.MAGIKARP) {
+          player.titles.add(Title.FISHERMAN)
+        }
+
         player.board.forEach((pkm, id) => {
           if (pkm.index == pokemon.index) {
             // logger.debug(pkm.name, pokemon.name)
