@@ -102,3 +102,4 @@ Many items, pokemons and rarity percentages have been tweaked to improve the bal
 # Misc
 
 - Rarity percentages per level have been slightly adjusted at levels 4, 6, 7 and 8
+- New title: Fisherman
