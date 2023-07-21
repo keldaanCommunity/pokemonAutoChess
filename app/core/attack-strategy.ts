@@ -1168,7 +1168,7 @@ export class KingShieldStrategy extends AttackStrategy {
         timer = 2000
         break
       case 3:
-        timer = 4000
+        timer = 3000
         break
       default:
         break
@@ -4916,18 +4916,22 @@ export class LinkCableStrategy extends AttackStrategy {
             targetsHit.add(targetInLine)
           }
         })
-        board.getAdjacentCells(pokemon.positionX, pokemon.positionY).forEach((cell) => {
-          if (cell.value && cell.value.team !== pokemon.team) {
-            targetsHit.add(cell.value)
-          }
-        })
-        board.getAdjacentCells(partner.positionX, partner.positionY).forEach((cell) => {
-          if (cell.value && cell.value.team !== pokemon.team) {
-            targetsHit.add(cell.value)
-          }
-        })
+        board
+          .getAdjacentCells(pokemon.positionX, pokemon.positionY)
+          .forEach((cell) => {
+            if (cell.value && cell.value.team !== pokemon.team) {
+              targetsHit.add(cell.value)
+            }
+          })
+        board
+          .getAdjacentCells(partner.positionX, partner.positionY)
+          .forEach((cell) => {
+            if (cell.value && cell.value.team !== pokemon.team) {
+              targetsHit.add(cell.value)
+            }
+          })
 
-        targetsHit.forEach(target => {
+        targetsHit.forEach((target) => {
           target.handleSpecialDamage(
             damage,
             board,
