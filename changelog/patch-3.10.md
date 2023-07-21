@@ -64,6 +64,7 @@ Many items, pokemons and rarity percentages have been tweaked to improve the bal
 - Buff Latias: Mana 100 → 90 , Mist ball damage 25 → 30, AP reduction 10 → 30
 - Buff Latios: Mana 100 → 90, Luster Purge damage 25 → 30, Spe def reduction -1 → -3
 - Buff Link Cable: now when Minun and Plusle are both on field, trigger discharge and deal damage to all targets adjacent to both Minun and Plusle
+- Buff acrobatics: double damage if caster has no held item 
 
 # Changes to Synergies
 

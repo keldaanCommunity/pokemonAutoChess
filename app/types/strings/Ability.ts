@@ -2106,7 +2106,7 @@ Snow: also gives [2,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     fra: ""
   },
   [Ability.ACROBATICS]: {
-    eng: `Deals [20,40,80,SP] ${Damage.SPECIAL}. If the caster have no items, deals an extra [20,30,40,SP] ${Damage.SPECIAL}`,
+    eng: `Deals [20,40,80,SP] ${Damage.SPECIAL}. Double damage if caster has no held items.`,
     esp: "",
     prt: "",
     fra: ""
