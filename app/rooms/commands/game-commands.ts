@@ -1203,13 +1203,13 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
       })
     }
 
-    const isPVE = this.checkForPVE()
+    const isAfterPVE = this.getPVEIndex(this.state.stageLevel - 1) >= 0
     const commands = new Array<Command>()
 
     this.state.players.forEach((player: Player) => {
       if (
         this.room.getBenchSize(player.board) < 8 &&
-        !isPVE &&
+        !isAfterPVE &&
         (player.effects.list.includes(Effect.RAIN_DANCE) ||
           player.effects.list.includes(Effect.DRIZZLE) ||
           player.effects.list.includes(Effect.PRIMORDIAL_SEA))
