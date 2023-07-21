@@ -913,7 +913,7 @@ export default class GameRoom extends Room<GameState> {
         })
         const pokemonEvolved = PokemonFactory.createPokemonFromName(
           pokemonEvolutionName,
-          player.pokemonCollection.get(PkmIndex[pokemonEvolutionName])
+          player
         )
         for (let i = 0; i < 3; i++) {
           const itemToAdd = itemsToAdd.pop()
@@ -1041,7 +1041,7 @@ export default class GameRoom extends Room<GameState> {
         ) {
           const newPokemon = PokemonFactory.createPokemonFromName(
             newForm,
-            player.pokemonCollection.get(PkmIndex[newForm])
+            player
           )
           pokemon.items.forEach((item) => {
             newPokemon.items.add(item)

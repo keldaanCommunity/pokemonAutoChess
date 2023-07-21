@@ -680,7 +680,10 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
         if (nearestAvailableCoordinate) {
           if (target.effects.includes(Effect.ODD_FLOWER)) {
             target.simulation.addPokemon(
-              PokemonFactory.createPokemonFromName(Pkm.ODDISH),
+              PokemonFactory.createPokemonFromName(
+                Pkm.ODDISH,
+                target.simulation.player
+              ),
               nearestAvailableCoordinate.x,
               nearestAvailableCoordinate.y,
               target.team,
@@ -688,7 +691,10 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
             )
           } else if (target.effects.includes(Effect.GLOOM_FLOWER)) {
             target.simulation.addPokemon(
-              PokemonFactory.createPokemonFromName(Pkm.GLOOM),
+              PokemonFactory.createPokemonFromName(
+                Pkm.GLOOM,
+                target.simulation.player
+              ),
               nearestAvailableCoordinate.x,
               nearestAvailableCoordinate.y,
               target.team,
@@ -696,7 +702,10 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
             )
           } else if (target.effects.includes(Effect.VILE_FLOWER)) {
             target.simulation.addPokemon(
-              PokemonFactory.createPokemonFromName(Pkm.VILEPLUME),
+              PokemonFactory.createPokemonFromName(
+                Pkm.VILEPLUME,
+                target.simulation.player
+              ),
               nearestAvailableCoordinate.x,
               nearestAvailableCoordinate.y,
               target.team,
@@ -704,7 +713,10 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
             )
           } else if (target.effects.includes(Effect.SUN_FLOWER)) {
             target.simulation.addPokemon(
-              PokemonFactory.createPokemonFromName(Pkm.BELLOSSOM),
+              PokemonFactory.createPokemonFromName(
+                Pkm.BELLOSSOM,
+                target.simulation.player
+              ),
               nearestAvailableCoordinate.x,
               nearestAvailableCoordinate.y,
               target.team,

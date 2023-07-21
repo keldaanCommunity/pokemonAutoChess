@@ -168,7 +168,7 @@ export default class Simulation extends Schema implements ISimulation {
           for (let i = 0; i < numberToSpawn; i++) {
             const bug = PokemonFactory.createPokemonFromName(
               bugTeam[i].name,
-              player.pokemonCollection.get(bugTeam[i].index)
+              player
             )
             const coord = this.getClosestAvailablePlaceOnBoardToPokemon(
               bugTeam[i],
@@ -216,14 +216,6 @@ export default class Simulation extends Schema implements ISimulation {
       this.redHealDpsMeter.set(pokemonEntity.id, dpsHeal)
     }
     return pokemonEntity
-  }
-
-  addPokemonEntity(p: PokemonEntity, x: number, y: number, team: number) {
-    const pokemon = PokemonFactory.createPokemonFromName(p.name)
-    p.items.forEach((i) => {
-      pokemon.items.add(i)
-    })
-    return this.addPokemon(pokemon, x, y, team)
   }
 
   getFirstAvailablePlaceOnBoard(teamIndex: number): { x: number; y: number } {

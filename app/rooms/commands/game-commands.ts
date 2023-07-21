@@ -60,10 +60,7 @@ export class OnShopCommand extends Command<
       const player = this.state.players.get(id)
       if (player && player.shop[index]) {
         const name = player.shop[index]
-        const pokemon = PokemonFactory.createPokemonFromName(
-          name,
-          player.pokemonCollection.get(PkmIndex[name])
-        )
+        const pokemon = PokemonFactory.createPokemonFromName(name, player)
         const cost = PokemonFactory.getBuyPrice(name)
         if (
           player.money >= cost &&
@@ -183,12 +180,7 @@ export class OnPokemonPropositionCommand extends Command<
 
       const pokemonsObtained: Pokemon[] = (
         pkm in PkmDuos ? PkmDuos[pkm] : [pkm]
-      ).map((p) =>
-        PokemonFactory.createPokemonFromName(
-          p,
-          player.pokemonCollection.get(PkmIndex[p])
-        )
-      )
+      ).map((p) => PokemonFactory.createPokemonFromName(p, player))
       const hasSpaceOnBench = freeCellsOnBench.length >= pokemonsObtained.length
 
       if (allowBuy && hasSpaceOnBench) {
@@ -246,7 +238,7 @@ export class OnDragDropCommand extends Command<
             dittoReplaced = true
             const replaceDitto = PokemonFactory.createPokemonFromName(
               PokemonFactory.getPokemonBaseEvolution(pokemonToClone.name),
-              player.pokemonCollection.get(PkmIndex[pokemonToClone.name])
+              player
             )
             pokemon.items.forEach((it) => {
               player.items.add(it)
@@ -1228,7 +1220,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
           ? 2
           : 1
         const pkm = this.state.shop.fishPokemon(player, fishingLevel)
-        const fish = PokemonFactory.createPokemonFromName(pkm)
+        const fish = PokemonFactory.createPokemonFromName(pkm, player)
         const x = this.room.getFirstAvailablePositionInBench(player.id)
         fish.positionX = x !== undefined ? x : -1
         fish.positionY = 0
@@ -1404,7 +1396,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
             if (pokemon.evolutionTimer === 0) {
               const pokemonEvolved = PokemonFactory.createPokemonFromName(
                 pokemon.evolution,
-                player.pokemonCollection.get(PkmIndex[pokemon.evolution])
+                player
               )
 
               pokemon.items.forEach((i) => {

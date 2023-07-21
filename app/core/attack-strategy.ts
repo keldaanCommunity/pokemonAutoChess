@@ -198,7 +198,10 @@ export class BeatUpStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     for (let i = 0; i < pokemon.stars; i++) {
-      const houndour = PokemonFactory.createPokemonFromName(Pkm.HOUNDOUR)
+      const houndour = PokemonFactory.createPokemonFromName(
+        Pkm.HOUNDOUR,
+        pokemon.simulation.player
+      )
       const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemon(
         pokemon,
         pokemon.team
@@ -1761,8 +1764,12 @@ export class ShadowCloneStrategy extends AttackStrategy {
     )
 
     if (farthestCoordinate) {
-      const clone = pokemon.simulation.addPokemonEntity(
-        pokemon,
+      const p = PokemonFactory.createPokemonFromName(pokemon.name)
+      pokemon.items.forEach((i) => {
+        p.items.add(i)
+      })
+      const clone = pokemon.simulation.addPokemon(
+        p,
         farthestCoordinate.x,
         farthestCoordinate.y,
         pokemon.team
@@ -4916,18 +4923,22 @@ export class LinkCableStrategy extends AttackStrategy {
             targetsHit.add(targetInLine)
           }
         })
-        board.getAdjacentCells(pokemon.positionX, pokemon.positionY).forEach((cell) => {
-          if (cell.value && cell.value.team !== pokemon.team) {
-            targetsHit.add(cell.value)
-          }
-        })
-        board.getAdjacentCells(partner.positionX, partner.positionY).forEach((cell) => {
-          if (cell.value && cell.value.team !== pokemon.team) {
-            targetsHit.add(cell.value)
-          }
-        })
+        board
+          .getAdjacentCells(pokemon.positionX, pokemon.positionY)
+          .forEach((cell) => {
+            if (cell.value && cell.value.team !== pokemon.team) {
+              targetsHit.add(cell.value)
+            }
+          })
+        board
+          .getAdjacentCells(partner.positionX, partner.positionY)
+          .forEach((cell) => {
+            if (cell.value && cell.value.team !== pokemon.team) {
+              targetsHit.add(cell.value)
+            }
+          })
 
-        targetsHit.forEach(target => {
+        targetsHit.forEach((target) => {
           target.handleSpecialDamage(
             damage,
             board,

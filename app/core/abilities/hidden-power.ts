@@ -50,10 +50,7 @@ export class HiddenPowerAStrategy extends HiddenPowerStrategy {
     ]
     corners.forEach(([x, y]) => {
       const player = unown.simulation.player!
-      const abra = PokemonFactory.createPokemonFromName(
-        Pkm.ABRA,
-        player.pokemonCollection.get(PkmIndex[Pkm.ABRA])
-      )
+      const abra = PokemonFactory.createPokemonFromName(Pkm.ABRA, player)
       const coord = unown.simulation.getClosestAvailablePlaceOnBoardTo(
         x,
         y,
@@ -115,10 +112,7 @@ export class HiddenPowerDStrategy extends HiddenPowerStrategy {
     const player = unown.simulation.player!
     const x = player.simulation.room.getFirstAvailablePositionInBench(player.id)
     if (x !== undefined) {
-      const ditto = PokemonFactory.createPokemonFromName(
-        Pkm.DITTO,
-        player.pokemonCollection.get(PkmIndex[Pkm.DITTO])
-      )
+      const ditto = PokemonFactory.createPokemonFromName(Pkm.DITTO, player)
       ditto.positionX = x
       ditto.positionY = 0
       player.board.set(ditto.id, ditto)
@@ -165,7 +159,7 @@ export class HiddenPowerFStrategy extends HiddenPowerStrategy {
         player,
         fishingLevel
       )
-      const fish = PokemonFactory.createPokemonFromName(pkm)
+      const fish = PokemonFactory.createPokemonFromName(pkm, player)
       const x = unown.simulation.room.getFirstAvailablePositionInBench(
         player.id
       )
@@ -245,10 +239,7 @@ export class HiddenPowerJStrategy extends HiddenPowerStrategy {
         unown.team
       )
       const sharpedo = unown.simulation.addPokemon(
-        PokemonFactory.createPokemonFromName(
-          Pkm.SHARPEDO,
-          player.pokemonCollection.get(PkmIndex[Pkm.SHARPEDO])
-        ),
+        PokemonFactory.createPokemonFromName(Pkm.SHARPEDO, player),
         coord.x,
         coord.y,
         unown.team,
@@ -275,10 +266,7 @@ export class HiddenPowerKStrategy extends HiddenPowerStrategy {
     )
     const player = unown.simulation.player!
     const hitmonlee = unown.simulation.addPokemon(
-      PokemonFactory.createPokemonFromName(
-        Pkm.HITMONLEE,
-        player.pokemonCollection.get(PkmIndex[Pkm.HITMONLEE])
-      ),
+      PokemonFactory.createPokemonFromName(Pkm.HITMONLEE, player),
       coord.x,
       coord.y,
       unown.team,
@@ -410,10 +398,7 @@ export class HiddenPowerPStrategy extends HiddenPowerStrategy {
         pokemon.team
       )
       pokemon.simulation.addPokemon(
-        PokemonFactory.createPokemonFromName(
-          bug,
-          player.pokemonCollection.get(PkmIndex[bug])
-        ),
+        PokemonFactory.createPokemonFromName(bug, player),
         coord.x,
         coord.y,
         pokemon.team,
@@ -451,10 +436,7 @@ export class HiddenPowerRStrategy extends HiddenPowerStrategy {
     )
     const player = unown.simulation.player!
     const geodude = unown.simulation.addPokemon(
-      PokemonFactory.createPokemonFromName(
-        Pkm.GEODUDE,
-        player.pokemonCollection.get(PkmIndex[Pkm.GEODUDE])
-      ),
+      PokemonFactory.createPokemonFromName(Pkm.GEODUDE, player),
       coord.x,
       coord.y,
       unown.team,
@@ -468,10 +450,7 @@ export class HiddenPowerRStrategy extends HiddenPowerStrategy {
       unown.team
     )
     const graveler = unown.simulation.addPokemon(
-      PokemonFactory.createPokemonFromName(
-        Pkm.GRAVELER,
-        player.pokemonCollection.get(PkmIndex[Pkm.GRAVELER])
-      ),
+      PokemonFactory.createPokemonFromName(Pkm.GRAVELER, player),
       coord.x,
       coord.y,
       unown.team,
@@ -485,10 +464,7 @@ export class HiddenPowerRStrategy extends HiddenPowerStrategy {
       unown.team
     )
     const golem = unown.simulation.addPokemon(
-      PokemonFactory.createPokemonFromName(
-        Pkm.GOLEM,
-        player.pokemonCollection.get(PkmIndex[Pkm.GOLEM])
-      ),
+      PokemonFactory.createPokemonFromName(Pkm.GOLEM, player),
       coord.x,
       coord.y,
       unown.team,
@@ -531,10 +507,7 @@ export class HiddenPowerTStrategy extends HiddenPowerStrategy {
     )
     const player = unown.simulation.player!
     const tapu = unown.simulation.addPokemon(
-      PokemonFactory.createPokemonFromName(
-        Pkm.TAPU_LELE,
-        player.pokemonCollection.get(PkmIndex[Pkm.TAPU_LELE])
-      ),
+      PokemonFactory.createPokemonFromName(Pkm.TAPU_LELE, player),
       coord.x,
       coord.y,
       unown.team,
@@ -561,10 +534,7 @@ export class HiddenPowerUStrategy extends HiddenPowerStrategy {
     )
     const player = unown.simulation.player!
     const uxie = unown.simulation.addPokemon(
-      PokemonFactory.createPokemonFromName(
-        Pkm.UXIE,
-        player.pokemonCollection.get(PkmIndex[Pkm.UXIE])
-      ),
+      PokemonFactory.createPokemonFromName(Pkm.UXIE, player),
       coord.x,
       coord.y,
       unown.team,
@@ -629,10 +599,7 @@ export class HiddenPowerWStrategy extends HiddenPowerStrategy {
 
     const x = player.simulation.room.getFirstAvailablePositionInBench(player.id)
     if (x !== undefined) {
-      const pokemon = PokemonFactory.createPokemonFromName(
-        pkm,
-        player.pokemonCollection.get(PkmIndex[pkm])
-      )
+      const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
       pokemon.positionX = x
       pokemon.positionY = 0
       player.board.set(pokemon.id, pokemon)
@@ -679,10 +646,7 @@ export class HiddenPowerYStrategy extends HiddenPowerStrategy {
         unown.team
       )
       const meditite = unown.simulation.addPokemon(
-        PokemonFactory.createPokemonFromName(
-          Pkm.MEDITITE,
-          player.pokemonCollection.get(PkmIndex[Pkm.MEDITITE])
-        ),
+        PokemonFactory.createPokemonFromName(Pkm.MEDITITE, player),
         coord.x,
         coord.y,
         unown.team,
@@ -728,10 +692,7 @@ export class HiddenPowerQMStrategy extends HiddenPowerStrategy {
         player.id
       )
       if (x !== undefined) {
-        const pokemon = PokemonFactory.createPokemonFromName(
-          pkm,
-          player.pokemonCollection.get(PkmIndex[pkm])
-        )
+        const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
         pokemon.positionX = x
         pokemon.positionY = 0
         player.board.set(pokemon.id, pokemon)
@@ -758,10 +719,7 @@ export class HiddenPowerEMStrategy extends HiddenPowerStrategy {
     ]
     corners.forEach(([x, y]) => {
       const unownName = pickRandomIn(Unowns)
-      const unown = PokemonFactory.createPokemonFromName(
-        unownName,
-        player.pokemonCollection.get(PkmIndex[unownName])
-      )
+      const unown = PokemonFactory.createPokemonFromName(unownName, player)
       const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardTo(
         x,
         y,
