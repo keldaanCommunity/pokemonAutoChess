@@ -143,10 +143,7 @@ export default class Player extends Schema implements IPlayer {
   }
 
   transformPokemon(pokemon: Pokemon, newEntry: Pkm) {
-    const newPokemon = PokemonFactory.createPokemonFromName(
-      newEntry,
-      this.pokemonCollection.get(PkmIndex[newEntry])
-    )
+    const newPokemon = PokemonFactory.createPokemonFromName(newEntry, this)
     pokemon.items.forEach((item) => {
       newPokemon.items.add(item)
     })

@@ -1,5 +1,5 @@
 import { MapSchema } from "@colyseus/schema"
-import { Emotion } from "../types"
+import { Emotion, IPlayer } from "../types"
 import {
   EvolutionTime,
   HatchList,
@@ -12,6 +12,7 @@ import {
   Pkm,
   PkmDuos,
   PkmFamily,
+  PkmIndex,
   PkmProposition,
   Unowns
 } from "../types/enum/Pokemon"
@@ -811,8 +812,11 @@ export default class PokemonFactory {
 
   static createPokemonFromName(
     name: Pkm,
-    config?: { selectedShiny?: boolean; selectedEmotion?: Emotion }
+    config?: IPlayer | { selectedShiny?: boolean; selectedEmotion?: Emotion }
   ): Pokemon {
+    if (config && "pokemonCollection" in config) {
+      config = config.pokemonCollection.get(PkmIndex[name])
+    }
     const s = config && config.selectedShiny ? true : false
     const e =
       config && config.selectedEmotion ? config.selectedEmotion : Emotion.NORMAL
