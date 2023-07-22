@@ -560,7 +560,7 @@ export default class GameRoom extends Room<GameState> {
             player.titles.add(Title.GRAND_MASTER)
           }
 
-          if (usr.elo && elligibleToELO) {
+          if (usr.elo != null && elligibleToELO) {
             const elo = computeElo(
               this.transformToSimplePlayer(player),
               rank,
