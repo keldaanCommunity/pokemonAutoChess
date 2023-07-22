@@ -1171,7 +1171,7 @@ export class KingShieldStrategy extends AttackStrategy {
         timer = 2000
         break
       case 3:
-        timer = 4000
+        timer = 3000
         break
       default:
         break
