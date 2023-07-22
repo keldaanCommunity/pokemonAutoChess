@@ -4636,17 +4636,16 @@ export class AcrobaticsStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     let damage = 20
-    let additional = 20
     if (pokemon.stars === 2) {
       damage = 40
-      additional = 30
     }
     if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
       damage = 80
-      additional = 20
     }
-    const total = pokemon.items.size === 0 ? damage + additional : damage
-    target.handleSpecialDamage(total, board, AttackType.SPECIAL, pokemon, crit)
+    if(pokemon.items.size === 0){
+      damage *= 2
+    }
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
 
