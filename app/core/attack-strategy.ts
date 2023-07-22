@@ -198,7 +198,10 @@ export class BeatUpStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     for (let i = 0; i < pokemon.stars; i++) {
-      const houndour = PokemonFactory.createPokemonFromName(Pkm.HOUNDOUR)
+      const houndour = PokemonFactory.createPokemonFromName(
+        Pkm.HOUNDOUR,
+        pokemon.simulation.player
+      )
       const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemon(
         pokemon,
         pokemon.team
@@ -1761,8 +1764,12 @@ export class ShadowCloneStrategy extends AttackStrategy {
     )
 
     if (farthestCoordinate) {
-      const clone = pokemon.simulation.addPokemonEntity(
-        pokemon,
+      const p = PokemonFactory.createPokemonFromName(pokemon.name)
+      pokemon.items.forEach((i) => {
+        p.items.add(i)
+      })
+      const clone = pokemon.simulation.addPokemon(
+        p,
         farthestCoordinate.x,
         farthestCoordinate.y,
         pokemon.team
@@ -4629,17 +4636,16 @@ export class AcrobaticsStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     let damage = 20
-    let additional = 20
     if (pokemon.stars === 2) {
       damage = 40
-      additional = 30
     }
     if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
       damage = 80
-      additional = 20
     }
-    const total = pokemon.items.size === 0 ? damage + additional : damage
-    target.handleSpecialDamage(total, board, AttackType.SPECIAL, pokemon, crit)
+    if(pokemon.items.size === 0){
+      damage *= 2
+    }
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
 

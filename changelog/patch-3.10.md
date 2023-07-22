@@ -64,8 +64,12 @@ Many items, pokemons and rarity percentages have been tweaked to improve the bal
 - Buff Latias: Mana 100 → 90 , Mist ball damage 25 → 30, AP reduction 10 → 30
 - Buff Latios: Mana 100 → 90, Luster Purge damage 25 → 30, Spe def reduction -1 → -3
 - Buff Link Cable: now when Minun and Plusle are both on field, trigger discharge and deal damage to all targets adjacent to both Minun and Plusle
+
 - Buff Doublade: Attack 10 → 13
 - Adjust Aegislash: Attack 18 → 23 ; King shield protect duration: 4 → 3 seconds
+
+- Buff acrobatics: double damage if caster has no held item 
+
 
 # Changes to Synergies
 
@@ -76,6 +80,7 @@ Many items, pokemons and rarity percentages have been tweaked to improve the bal
 - Rock rework: Rock pokemons gain Defense and better resist to critical damage
 - Monster rework: Monster pokemons gain Attack, heal and increase their max HP, and grow in size every time they knock down an opponent
 - Artificial rework: Gain +10/20/30% base Attack, Ability Power and max HP as Shield per held item
+- Ground adjustment: no longer procs first stack immediately, now can go up to 5 stacks
 
 # Changes to Items
 
@@ -104,3 +109,4 @@ Many items, pokemons and rarity percentages have been tweaked to improve the bal
 # Misc
 
 - Rarity percentages per level have been slightly adjusted at levels 4, 6, 7 and 8
+- New title: Fisherman

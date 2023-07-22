@@ -463,7 +463,8 @@ export default class PokemonState {
       pokemon.effects.includes(Effect.DIGGER) ||
       pokemon.effects.includes(Effect.DRILLER)
     ) {
-      if (pokemon.count.growGroundCount < 4) {
+      const MAX_GROUND_STACKS = 5
+      if (pokemon.count.growGroundCount < MAX_GROUND_STACKS) {
         pokemon.growGroundTimer -= dt
         if (pokemon.growGroundTimer <= 0) {
           pokemon.growGroundTimer = 3000

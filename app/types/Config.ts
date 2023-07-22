@@ -366,23 +366,23 @@ export const FishRarityProbability: {
   [waterLevel: number]: { [key in Rarity]?: number }
 } = {
   1: {
-    [Rarity.SPECIAL]: 0.5,
-    [Rarity.COMMON]: 0.4,
+    [Rarity.SPECIAL]: 0.55,
+    [Rarity.COMMON]: 0.35,
     [Rarity.UNCOMMON]: 0.1,
     [Rarity.RARE]: 0,
     [Rarity.EPIC]: 0
   },
   2: {
-    [Rarity.SPECIAL]: 0.4,
-    [Rarity.COMMON]: 0.3,
-    [Rarity.UNCOMMON]: 0.2,
+    [Rarity.SPECIAL]: 0.3,
+    [Rarity.COMMON]: 0.35,
+    [Rarity.UNCOMMON]: 0.25,
     [Rarity.RARE]: 0.1,
     [Rarity.EPIC]: 0
   },
   3: {
-    [Rarity.SPECIAL]: 0.3,
-    [Rarity.COMMON]: 0.2,
-    [Rarity.UNCOMMON]: 0.2,
+    [Rarity.SPECIAL]: 0.1,
+    [Rarity.COMMON]: 0.3,
+    [Rarity.UNCOMMON]: 0.3,
     [Rarity.RARE]: 0.2,
     [Rarity.EPIC]: 0.1
   }

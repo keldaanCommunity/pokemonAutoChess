@@ -49,12 +49,8 @@ export default function SelectedEntity(props: {
   } else if (Object.values(Pkm).includes((props.entity as DetailledPkm).pkm)) {
     const detailledPkm = props.entity as DetailledPkm
     const pokemon = PokemonFactory.createPokemonFromName(detailledPkm.pkm, {
-      dust: 0,
-      emotions: [],
-      id: "",
       selectedEmotion: detailledPkm.emotion,
-      selectedShiny: detailledPkm.shiny,
-      shinyEmotions: []
+      selectedShiny: detailledPkm.shiny
     })
     let pMetadata: ITracker | undefined = undefined
 
