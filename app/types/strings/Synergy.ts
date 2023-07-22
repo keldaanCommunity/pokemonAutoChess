@@ -191,7 +191,7 @@ export const SynergyDescription: {
     fra: ""
   },
   [Synergy.GROUND]: {
-    eng: `Ground pokemons gain bonus ${Stat.ATK}, ${Stat.DEF} and ${Stat.SPE_DEF} every 3 seconds, up to 4 times.`,
+    eng: `Ground pokemons gain bonus ${Stat.ATK}, ${Stat.DEF} and ${Stat.SPE_DEF} every 3 seconds, up to 5 times.`,
     esp: "",
     fra: ""
   },

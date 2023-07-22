@@ -78,7 +78,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   trueDamage: number
   shieldDone: number
   flyingProtection = 0
-  growGroundTimer = 0
+  growGroundTimer = 3000
   grassHealCooldown = 1000
   sandstormDamageTimer = 0
   fairySplashCooldown = 0
