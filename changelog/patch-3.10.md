@@ -49,6 +49,15 @@ Many items, pokemons and rarity percentages have been tweaked to improve the bal
 - Shadow Clone: clones now get 80% or original max HP and 30 Shield (scales with AP)
 - Totodile moved from Uncommon to Rare - adjusted stats accordingly
 - Nerf Miltank ; mana 90 → 100
+- Nerf Froakie HP: 90 → 80
+- Nerf Frogadier: HP: 150 → 140
+- Nerf Greninja: HP: 220 → 200 ; Attack: 28 → 23
+- Nerf Decidueye: HP: 200 → 190 ; Attack: 20 → 18
+- Nerf Primarina: HP: 220 → 190
+- Nerf Emboar: Attack: 20 → 18
+- Adjusted Raboot: Attack: 9 → 12; Def/SpeDef: 6 → 5
+- Nerf Cinderace: Def/SpeDef: 8 → 7
+- Nerf Serperior: Attack: 28 → 24
 - Change Poochyena ability: Bite → Growl
 - Buff Bite damage: 30/60/120 → 40/80/120
 - Buff Crabhammer: 30/60/120 → 40/80/120 damage ; 3x more chance to crit if reaper cloth ; deals true damage when execute
@@ -64,12 +73,9 @@ Many items, pokemons and rarity percentages have been tweaked to improve the bal
 - Buff Latias: Mana 100 → 90 , Mist ball damage 25 → 30, AP reduction 10 → 30
 - Buff Latios: Mana 100 → 90, Luster Purge damage 25 → 30, Spe def reduction -1 → -3
 - Buff Link Cable: now when Minun and Plusle are both on field, trigger discharge and deal damage to all targets adjacent to both Minun and Plusle
-
 - Buff Doublade: Attack 10 → 13
 - Adjust Aegislash: Attack 18 → 23 ; King shield protect duration: 4 → 3 seconds
-
-- Buff acrobatics: double damage if caster has no held item 
-
+- Buff acrobatics: double damage if caster has no held item
 
 # Changes to Synergies
 
