@@ -8,6 +8,7 @@ import { PokemonActionState } from "../types/enum/Game"
 import { chance } from "../utils/random"
 import { distanceC } from "../utils/distance"
 import { Synergy } from "../types/enum/Synergy"
+import { min } from "../utils/number"
 
 export default class AttackingState extends PokemonState {
   update(pokemon: PokemonEntity, dt: number, board: Board, weather: string) {
@@ -146,33 +147,35 @@ export default class AttackingState extends PokemonState {
         }
       }
 
+      let trueDamagePart = 0
       if (pokemon.hasSynergyEffect(Synergy.GHOST)) {
-        const ghostTrueDamageFactor = pokemon.effects.includes(
-          Effect.PHANTOM_FORCE
-        )
-          ? 0.2
-          : pokemon.effects.includes(Effect.CURSE)
-          ? 0.4
-          : pokemon.effects.includes(Effect.SHADOW_TAG)
-          ? 0.7
-          : pokemon.effects.includes(Effect.WANDERING_SPIRIT)
-          ? 1.0
-          : 0.0
-
-        trueDamage = Math.ceil(physicalDamage * ghostTrueDamageFactor)
-        physicalDamage -= trueDamage
-
-        // Apply ghost true damage
-        if (trueDamage > 0) {
-          const { takenDamage } = target.handleDamage({
-            damage: trueDamage,
-            board,
-            attackType: AttackType.TRUE,
-            attacker: pokemon,
-            shouldTargetGainMana: true
-          })
-          totalTakenDamage += takenDamage
+        if (pokemon.effects.includes(Effect.PHANTOM_FORCE)) {
+          trueDamagePart += 0.2
+        } else if (pokemon.effects.includes(Effect.CURSE)) {
+          trueDamagePart += 0.4
+        } else if (pokemon.effects.includes(Effect.SHADOW_TAG)) {
+          trueDamagePart += 0.7
+        } else if (pokemon.effects.includes(Effect.WANDERING_SPIRIT)) {
+          trueDamagePart += 1.0
         }
+      }
+      if (pokemon.items.has(Item.RED_ORB) && target) {
+        trueDamagePart += 0.25
+      }
+
+      if (trueDamagePart > 0) {
+        // Apply true damage part
+        trueDamage = Math.ceil(physicalDamage * trueDamagePart)
+        physicalDamage = min(0)(physicalDamage * (1 - trueDamagePart))
+
+        const { takenDamage } = target.handleDamage({
+          damage: trueDamage,
+          board,
+          attackType: AttackType.TRUE,
+          attacker: pokemon,
+          shouldTargetGainMana: true
+        })
+        totalTakenDamage += takenDamage
       }
 
       if (physicalDamage > 0) {

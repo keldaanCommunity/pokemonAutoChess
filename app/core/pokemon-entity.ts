@@ -455,17 +455,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.items.has(Item.UPGRADE)) {
       this.addAttackSpeed(4)
       this.count.upgradeCount++
-    }
-
-    if (this.items.has(Item.RED_ORB) && target) {
-      target.handleDamage({
-        damage: Math.ceil(this.atk * 0.2),
-        board,
-        attackType: AttackType.TRUE,
-        attacker: this,
-        shouldTargetGainMana: true
-      })
-    }
+    }    
 
     // Synergy effects on hit
 
