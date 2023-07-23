@@ -182,7 +182,6 @@ export const CommonShop = new Array<Pkm>(
 )
 
 export const UncommonShop = new Array<Pkm>(
-  Pkm.TOTODILE,
   Pkm.IGGLYBUFF,
   Pkm.CHIKORITA,
   Pkm.CYNDAQUIL,
@@ -218,11 +217,11 @@ export const RareShop = new Array<Pkm>(
   Pkm.BAGON,
   Pkm.HONEDGE,
   Pkm.ABRA,
-  Pkm.GIBLE
+  Pkm.TOTODILE,
+  Pkm.LARVITAR
 )
 
 export const EpicShop = new Array<Pkm>(
-  Pkm.LARVITAR,
   Pkm.SLAKOTH,
   Pkm.RALTS,
   Pkm.BELDUM,
@@ -237,7 +236,8 @@ export const EpicShop = new Array<Pkm>(
   Pkm.OSHAWOTT,
   Pkm.JANGMO_O,
   Pkm.WURMPLE,
-  Pkm.TINKATINK
+  Pkm.TINKATINK,
+  Pkm.GIBLE
 )
 
 export const LegendaryShop = new Array<Pkm>(
