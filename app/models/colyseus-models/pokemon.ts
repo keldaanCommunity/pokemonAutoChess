@@ -4,9 +4,9 @@
 import { Schema, type, ArraySchema, SetSchema } from "@colyseus/schema"
 import { nanoid } from "nanoid"
 import { Emotion, IPokemon, AttackSprite } from "../../types"
-import { DEFAULT_ATK_SPEED, EvolutionTime, PkmCost } from "../../types/Config"
+import { DEFAULT_ATK_SPEED, EvolutionTime } from "../../types/Config"
 import { Item } from "../../types/enum/Item"
-import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
+import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
 import { Rarity, AttackType, PokemonActionState } from "../../types/enum/Game"
 import { Ability } from "../../types/enum/Ability"
 import { Synergy } from "../../types/enum/Synergy"
@@ -22,7 +22,6 @@ export class Pokemon extends Schema implements IPokemon {
   @type("string") evolution: Pkm
   @type("int8") positionX = -1
   @type("int8") positionY = -1
-  @type("uint8") cost: number
   @type("string") attackSprite: AttackSprite
   @type("float32") atkSpeed = DEFAULT_ATK_SPEED
   @type("uint8") def: number
@@ -69,7 +68,6 @@ export class Pokemon extends Schema implements IPokemon {
     this.rarity = rarity
     this.index = PkmIndex[name]
     this.evolution = evolution
-    this.cost = PkmCost[rarity]
     this.hp = hp
     this.atk = atk
     this.def = def
@@ -104,6 +102,14 @@ export class Pokemon extends Schema implements IPokemon {
       this.rarity !== Rarity.HATCH &&
       ![Pkm.DITTO, Pkm.EGG].includes(this.name)
     )
+  }
+
+  get canHoldItems(): boolean {
+    return ![Pkm.DITTO, Pkm.EGG, ...Unowns].includes(this.name)
+  }
+
+  get isOnBench(): boolean {
+    return this.positionY === 0
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -1433,7 +1439,7 @@ export class Doublade extends Pokemon {
       Rarity.RARE,
       Pkm.AEGISLASH,
       130,
-      10,
+      13,
       5,
       5,
       1,
@@ -1456,7 +1462,7 @@ export class Aegislash extends Pokemon {
       Rarity.RARE,
       Pkm.DEFAULT,
       230,
-      18,
+      23,
       7,
       7,
       1,
@@ -1824,7 +1830,7 @@ export class Litwick extends Pokemon {
       Rarity.COMMON,
       Pkm.LAMPENT,
       50,
-      4,
+      5,
       1,
       1,
       3,
@@ -1847,7 +1853,7 @@ export class Lampent extends Pokemon {
       Rarity.COMMON,
       Pkm.CHANDELURE,
       90,
-      8,
+      9,
       1,
       1,
       3,
@@ -7674,7 +7680,7 @@ export class Latias extends Pokemon {
       3,
       AttackSprite.FIRE_RANGE,
       1,
-      100,
+      90,
       Ability.MIST_BALL,
       shiny,
       emotion,
@@ -7699,7 +7705,7 @@ export class Latios extends Pokemon {
       3,
       AttackSprite.FIRE_RANGE,
       1,
-      100,
+      90,
       Ability.LUSTER_PURGE,
       shiny,
       emotion,
@@ -9333,7 +9339,7 @@ export class Guzzlord extends Pokemon {
       AttackSprite.FIRE_RANGE,
       2,
       120,
-      Ability.TWISTING_NEITHER,
+      Ability.TWISTING_NETHER,
       shiny,
       emotion,
       true
@@ -11589,7 +11595,7 @@ export class Serperior extends Pokemon {
       Rarity.HATCH,
       Pkm.DEFAULT,
       240,
-      28,
+      24,
       1,
       1,
       3,
@@ -11637,9 +11643,9 @@ export class Raboot extends Pokemon {
       Rarity.HATCH,
       Pkm.CINDERACE,
       130,
-      9,
-      6,
-      6,
+      12,
+      5,
+      5,
       1,
       AttackSprite.FIRE_MELEE,
       2,
@@ -11663,8 +11669,8 @@ export class Cinderace extends Pokemon {
       Pkm.DEFAULT,
       200,
       20,
-      8,
-      8,
+      7,
+      7,
       1,
       AttackSprite.FIRE_MELEE,
       3,
@@ -11807,7 +11813,7 @@ export class Primarina extends Pokemon {
       [Synergy.WATER, Synergy.FAIRY, Synergy.SOUND],
       Rarity.HATCH,
       Pkm.DEFAULT,
-      220,
+      190,
       20,
       2,
       4,
@@ -11999,18 +12005,20 @@ export class UnownA extends Pokemon {
       [Synergy.PSYCHIC],
       Rarity.SPECIAL,
       Pkm.DEFAULT,
-      40,
-      4,
+      100,
       1,
       1,
-      2,
+      1,
+      9,
       AttackSprite.PSYCHIC_RANGE,
       1,
       100,
-      Ability.DEFAULT,
+      Ability.HIDDEN_POWER_A,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12021,18 +12029,20 @@ export class UnownB extends Pokemon {
       [Synergy.PSYCHIC],
       Rarity.SPECIAL,
       Pkm.DEFAULT,
-      40,
-      4,
+      100,
       1,
       1,
-      2,
+      1,
+      9,
       AttackSprite.PSYCHIC_RANGE,
       1,
-      100,
-      Ability.DEFAULT,
+      30,
+      Ability.HIDDEN_POWER_B,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12044,18 +12054,20 @@ export class UnownC extends Pokemon {
       [Synergy.PSYCHIC],
       Rarity.SPECIAL,
       Pkm.DEFAULT,
-      40,
-      4,
+      100,
       1,
       1,
-      2,
+      1,
+      9,
       AttackSprite.PSYCHIC_RANGE,
       1,
-      100,
-      Ability.DEFAULT,
+      60,
+      Ability.HIDDEN_POWER_C,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12067,18 +12079,20 @@ export class UnownD extends Pokemon {
       [Synergy.PSYCHIC],
       Rarity.SPECIAL,
       Pkm.DEFAULT,
-      40,
-      4,
+      100,
       1,
       1,
-      2,
+      1,
+      9,
       AttackSprite.PSYCHIC_RANGE,
       1,
-      100,
-      Ability.DEFAULT,
+      150,
+      Ability.HIDDEN_POWER_D,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12090,18 +12104,20 @@ export class UnownE extends Pokemon {
       [Synergy.PSYCHIC],
       Rarity.SPECIAL,
       Pkm.DEFAULT,
-      40,
-      4,
+      100,
       1,
       1,
-      2,
+      1,
+      9,
       AttackSprite.PSYCHIC_RANGE,
       1,
       100,
-      Ability.DEFAULT,
+      Ability.HIDDEN_POWER_E,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12113,18 +12129,20 @@ export class UnownF extends Pokemon {
       [Synergy.PSYCHIC],
       Rarity.SPECIAL,
       Pkm.DEFAULT,
-      40,
-      4,
+      100,
       1,
       1,
-      2,
+      1,
+      9,
       AttackSprite.PSYCHIC_RANGE,
       1,
       100,
-      Ability.DEFAULT,
+      Ability.HIDDEN_POWER_F,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12136,18 +12154,20 @@ export class UnownG extends Pokemon {
       [Synergy.PSYCHIC],
       Rarity.SPECIAL,
       Pkm.DEFAULT,
-      40,
-      4,
+      100,
       1,
       1,
-      2,
+      1,
+      9,
       AttackSprite.PSYCHIC_RANGE,
       1,
       100,
-      Ability.DEFAULT,
+      Ability.HIDDEN_POWER_G,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12159,18 +12179,20 @@ export class UnownH extends Pokemon {
       [Synergy.PSYCHIC],
       Rarity.SPECIAL,
       Pkm.DEFAULT,
-      40,
-      4,
+      100,
       1,
       1,
-      2,
+      1,
+      9,
       AttackSprite.PSYCHIC_RANGE,
       1,
-      100,
-      Ability.DEFAULT,
+      80,
+      Ability.HIDDEN_POWER_H,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12182,18 +12204,20 @@ export class UnownI extends Pokemon {
       [Synergy.PSYCHIC],
       Rarity.SPECIAL,
       Pkm.DEFAULT,
-      40,
-      4,
+      100,
       1,
       1,
-      2,
+      1,
+      9,
       AttackSprite.PSYCHIC_RANGE,
       1,
       100,
-      Ability.DEFAULT,
+      Ability.HIDDEN_POWER_I,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12205,18 +12229,20 @@ export class UnownJ extends Pokemon {
       [Synergy.PSYCHIC],
       Rarity.SPECIAL,
       Pkm.DEFAULT,
-      40,
-      4,
+      100,
       1,
       1,
-      2,
+      1,
+      9,
       AttackSprite.PSYCHIC_RANGE,
       1,
       100,
-      Ability.DEFAULT,
+      Ability.HIDDEN_POWER_J,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12228,18 +12254,20 @@ export class UnownK extends Pokemon {
       [Synergy.PSYCHIC],
       Rarity.SPECIAL,
       Pkm.DEFAULT,
-      40,
-      4,
+      100,
       1,
       1,
-      2,
+      1,
+      9,
       AttackSprite.PSYCHIC_RANGE,
       1,
       100,
-      Ability.DEFAULT,
+      Ability.HIDDEN_POWER_K,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12251,18 +12279,20 @@ export class UnownL extends Pokemon {
       [Synergy.PSYCHIC],
       Rarity.SPECIAL,
       Pkm.DEFAULT,
-      40,
-      4,
+      100,
       1,
       1,
-      2,
+      1,
+      9,
       AttackSprite.PSYCHIC_RANGE,
       1,
       100,
-      Ability.DEFAULT,
+      Ability.HIDDEN_POWER_L,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12274,18 +12304,20 @@ export class UnownM extends Pokemon {
       [Synergy.PSYCHIC],
       Rarity.SPECIAL,
       Pkm.DEFAULT,
-      40,
-      4,
+      100,
       1,
       1,
-      2,
+      1,
+      9,
       AttackSprite.PSYCHIC_RANGE,
       1,
-      100,
-      Ability.DEFAULT,
+      50,
+      Ability.HIDDEN_POWER_M,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12297,18 +12329,20 @@ export class UnownN extends Pokemon {
       [Synergy.PSYCHIC],
       Rarity.SPECIAL,
       Pkm.DEFAULT,
-      40,
-      4,
+      100,
       1,
       1,
-      2,
+      1,
+      9,
       AttackSprite.PSYCHIC_RANGE,
       1,
       100,
-      Ability.DEFAULT,
+      Ability.HIDDEN_POWER_N,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12320,18 +12354,20 @@ export class UnownO extends Pokemon {
       [Synergy.PSYCHIC],
       Rarity.SPECIAL,
       Pkm.DEFAULT,
-      40,
-      4,
+      100,
       1,
       1,
-      2,
+      1,
+      9,
       AttackSprite.PSYCHIC_RANGE,
       1,
       100,
-      Ability.DEFAULT,
+      Ability.HIDDEN_POWER_O,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12343,18 +12379,20 @@ export class UnownP extends Pokemon {
       [Synergy.PSYCHIC],
       Rarity.SPECIAL,
       Pkm.DEFAULT,
-      40,
-      4,
+      100,
       1,
       1,
-      2,
+      1,
+      9,
       AttackSprite.PSYCHIC_RANGE,
       1,
       100,
-      Ability.DEFAULT,
+      Ability.HIDDEN_POWER_P,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12366,18 +12404,20 @@ export class UnownQ extends Pokemon {
       [Synergy.PSYCHIC],
       Rarity.SPECIAL,
       Pkm.DEFAULT,
-      40,
-      4,
+      100,
       1,
       1,
-      2,
+      1,
+      9,
       AttackSprite.PSYCHIC_RANGE,
       1,
-      100,
-      Ability.DEFAULT,
+      200,
+      Ability.HIDDEN_POWER_Q,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12389,18 +12429,20 @@ export class UnownR extends Pokemon {
       [Synergy.PSYCHIC],
       Rarity.SPECIAL,
       Pkm.DEFAULT,
-      40,
-      4,
+      100,
       1,
       1,
-      2,
+      1,
+      9,
       AttackSprite.PSYCHIC_RANGE,
       1,
       100,
-      Ability.DEFAULT,
+      Ability.HIDDEN_POWER_R,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12412,18 +12454,20 @@ export class UnownS extends Pokemon {
       [Synergy.PSYCHIC],
       Rarity.SPECIAL,
       Pkm.DEFAULT,
-      40,
-      4,
+      100,
       1,
       1,
-      2,
+      1,
+      9,
       AttackSprite.PSYCHIC_RANGE,
       1,
       100,
-      Ability.DEFAULT,
+      Ability.HIDDEN_POWER_S,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12435,18 +12479,20 @@ export class UnownT extends Pokemon {
       [Synergy.PSYCHIC],
       Rarity.SPECIAL,
       Pkm.DEFAULT,
-      40,
-      4,
+      100,
       1,
       1,
-      2,
+      1,
+      9,
       AttackSprite.PSYCHIC_RANGE,
       1,
-      100,
-      Ability.DEFAULT,
+      80,
+      Ability.HIDDEN_POWER_T,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12458,18 +12504,20 @@ export class UnownU extends Pokemon {
       [Synergy.PSYCHIC],
       Rarity.SPECIAL,
       Pkm.DEFAULT,
-      40,
-      4,
+      100,
       1,
       1,
-      2,
+      1,
+      9,
       AttackSprite.PSYCHIC_RANGE,
       1,
-      100,
-      Ability.DEFAULT,
+      80,
+      Ability.HIDDEN_POWER_U,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12481,18 +12529,20 @@ export class UnownV extends Pokemon {
       [Synergy.PSYCHIC],
       Rarity.SPECIAL,
       Pkm.DEFAULT,
-      40,
-      4,
+      100,
       1,
       1,
-      2,
+      1,
+      9,
       AttackSprite.PSYCHIC_RANGE,
       1,
       100,
-      Ability.DEFAULT,
+      Ability.HIDDEN_POWER_V,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12504,18 +12554,20 @@ export class UnownW extends Pokemon {
       [Synergy.PSYCHIC],
       Rarity.SPECIAL,
       Pkm.DEFAULT,
-      40,
-      4,
+      100,
       1,
       1,
-      2,
+      1,
+      9,
       AttackSprite.PSYCHIC_RANGE,
       1,
       100,
-      Ability.DEFAULT,
+      Ability.HIDDEN_POWER_W,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12527,18 +12579,20 @@ export class UnownX extends Pokemon {
       [Synergy.PSYCHIC],
       Rarity.SPECIAL,
       Pkm.DEFAULT,
-      40,
-      4,
+      100,
       1,
       1,
-      2,
+      1,
+      9,
       AttackSprite.PSYCHIC_RANGE,
       1,
       100,
-      Ability.DEFAULT,
+      Ability.HIDDEN_POWER_X,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12550,18 +12604,20 @@ export class UnownY extends Pokemon {
       [Synergy.PSYCHIC],
       Rarity.SPECIAL,
       Pkm.DEFAULT,
-      40,
-      4,
+      100,
       1,
       1,
-      2,
+      1,
+      9,
       AttackSprite.PSYCHIC_RANGE,
       1,
-      100,
-      Ability.DEFAULT,
+      50,
+      Ability.HIDDEN_POWER_Y,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12573,18 +12629,20 @@ export class UnownZ extends Pokemon {
       [Synergy.PSYCHIC],
       Rarity.SPECIAL,
       Pkm.DEFAULT,
-      40,
-      4,
+      100,
       1,
       1,
-      2,
+      1,
+      9,
       AttackSprite.PSYCHIC_RANGE,
       1,
       100,
-      Ability.DEFAULT,
+      Ability.HIDDEN_POWER_Z,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12596,18 +12654,20 @@ export class UnownQuestion extends Pokemon {
       [Synergy.PSYCHIC],
       Rarity.SPECIAL,
       Pkm.DEFAULT,
-      40,
-      4,
+      100,
       1,
       1,
-      2,
+      1,
+      9,
       AttackSprite.PSYCHIC_RANGE,
       1,
       100,
-      Ability.DEFAULT,
+      Ability.HIDDEN_POWER_QM,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12619,18 +12679,20 @@ export class UnownExclamation extends Pokemon {
       [Synergy.PSYCHIC],
       Rarity.SPECIAL,
       Pkm.DEFAULT,
-      40,
-      4,
+      100,
       1,
       1,
-      2,
+      1,
+      9,
       AttackSprite.PSYCHIC_RANGE,
       1,
-      100,
-      Ability.DEFAULT,
+      50,
+      Ability.HIDDEN_POWER_EM,
       shiny,
       emotion,
-      false
+      false,
+      false,
+      Passive.UNOWN
     )
   }
 }
@@ -12740,8 +12802,8 @@ export class Decidueye extends Pokemon {
       [Synergy.GRASS, Synergy.FLYING, Synergy.GHOST],
       Rarity.HATCH,
       Pkm.DEFAULT,
-      200,
-      20,
+      190,
+      18,
       2,
       4,
       3,
@@ -13051,7 +13113,7 @@ export class Froakie extends Pokemon {
       [Synergy.WATER, Synergy.AQUATIC, Synergy.DARK],
       Rarity.HATCH,
       Pkm.FROGADIER,
-      90,
+      80,
       7,
       2,
       2,
@@ -13076,7 +13138,7 @@ export class Frogadier extends Pokemon {
       [Synergy.WATER, Synergy.AQUATIC, Synergy.DARK],
       Rarity.HATCH,
       Pkm.GRENINJA,
-      150,
+      140,
       14,
       3,
       4,
@@ -13101,8 +13163,8 @@ export class Greninja extends Pokemon {
       [Synergy.WATER, Synergy.AQUATIC, Synergy.DARK],
       Rarity.HATCH,
       Pkm.DEFAULT,
-      220,
-      28,
+      200,
+      23,
       4,
       6,
       1,
@@ -13416,7 +13478,7 @@ export class Emboar extends Pokemon {
       Rarity.HATCH,
       Pkm.DEFAULT,
       250,
-      20,
+      18,
       7,
       2,
       1,

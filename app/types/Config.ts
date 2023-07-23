@@ -366,23 +366,23 @@ export const FishRarityProbability: {
   [waterLevel: number]: { [key in Rarity]?: number }
 } = {
   1: {
-    [Rarity.SPECIAL]: 0.5,
-    [Rarity.COMMON]: 0.4,
+    [Rarity.SPECIAL]: 0.55,
+    [Rarity.COMMON]: 0.35,
     [Rarity.UNCOMMON]: 0.1,
     [Rarity.RARE]: 0,
     [Rarity.EPIC]: 0
   },
   2: {
-    [Rarity.SPECIAL]: 0.4,
-    [Rarity.COMMON]: 0.3,
-    [Rarity.UNCOMMON]: 0.2,
+    [Rarity.SPECIAL]: 0.3,
+    [Rarity.COMMON]: 0.35,
+    [Rarity.UNCOMMON]: 0.25,
     [Rarity.RARE]: 0.1,
     [Rarity.EPIC]: 0
   },
   3: {
-    [Rarity.SPECIAL]: 0.3,
-    [Rarity.COMMON]: 0.2,
-    [Rarity.UNCOMMON]: 0.2,
+    [Rarity.SPECIAL]: 0.1,
+    [Rarity.COMMON]: 0.3,
+    [Rarity.UNCOMMON]: 0.3,
     [Rarity.RARE]: 0.2,
     [Rarity.EPIC]: 0.1
   }
@@ -757,7 +757,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.ASSAULT_VEST]: { [Stat.SPE_DEF]: 20 },
   [Item.AMULET_COIN]: { [Stat.SPE_DEF]: 1, [Stat.ATK]: 1 },
   [Item.POKE_DOLL]: { [Stat.SPE_DEF]: 1, [Stat.DEF]: 1 },
-  [Item.RED_ORB]: { [Stat.ATK]: 8 },
+  [Item.RED_ORB]: { [Stat.ATK]: 10 },
   [Item.MAX_REVIVE]: { [Stat.ATK]: 1, [Stat.DEF]: 1 },
   [Item.ROCKY_HELMET]: { [Stat.DEF]: 12 }
 }

@@ -43,8 +43,8 @@ Object.values(Pkm).forEach((pkm) => {
 
 Object.keys(data).forEach((type) => {
   const sortByRarity = (a, b) => {
-    const aIndex = PokemonFactory.createPokemonFromName(a).cost
-    const bIndex = PokemonFactory.createPokemonFromName(b).cost
+    const aIndex = PokemonFactory.getBuyPrice(a)
+    const bIndex = PokemonFactory.getBuyPrice(b)
     return aIndex - bIndex
   }
   data[type].pokemons.sort(sortByRarity)

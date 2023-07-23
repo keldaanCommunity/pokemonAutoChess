@@ -168,9 +168,9 @@ export default class Simulation extends Schema implements ISimulation {
           for (let i = 0; i < numberToSpawn; i++) {
             const bug = PokemonFactory.createPokemonFromName(
               bugTeam[i].name,
-              player.pokemonCollection.get(bugTeam[i].index)
+              player
             )
-            const coord = this.getClosestAvailablePlaceOnBoard(
+            const coord = this.getClosestAvailablePlaceOnBoardToPokemon(
               bugTeam[i],
               teamIndex
             )
@@ -218,14 +218,6 @@ export default class Simulation extends Schema implements ISimulation {
     return pokemonEntity
   }
 
-  addPokemonEntity(p: PokemonEntity, x: number, y: number, team: number) {
-    const pokemon = PokemonFactory.createPokemonFromName(p.name)
-    p.items.forEach((i) => {
-      pokemon.items.add(i)
-    })
-    return this.addPokemon(pokemon, x, y, team)
-  }
-
   getFirstAvailablePlaceOnBoard(teamIndex: number): { x: number; y: number } {
     let candidateX = 0,
       candidateY = 0
@@ -253,11 +245,13 @@ export default class Simulation extends Schema implements ISimulation {
     return { x: candidateX, y: candidateY }
   }
 
-  getClosestAvailablePlaceOnBoard(
-    pokemon: IPokemon | IPokemonEntity,
+  getClosestAvailablePlaceOnBoardTo(
+    positionX: number,
+    positionY: number,
     teamIndex: number
   ): { x: number; y: number } {
     const placesToConsiderByOrderOfPriority = [
+      [0, 0],
       [-1, 0],
       [+1, 0],
       [0, -1],
@@ -294,11 +288,8 @@ export default class Simulation extends Schema implements ISimulation {
       [+3, +1]
     ]
     for (const [dx, dy] of placesToConsiderByOrderOfPriority) {
-      const x = pokemon.positionX + dx
-      const y =
-        teamIndex === 0
-          ? pokemon.positionY - 1 + dy
-          : 5 - (pokemon.positionY - 1) - dy
+      const x = positionX + dx
+      const y = teamIndex === 0 ? positionY - 1 + dy : 5 - (positionY - 1) - dy
 
       if (
         x >= 0 &&
@@ -311,6 +302,17 @@ export default class Simulation extends Schema implements ISimulation {
       }
     }
     return this.getFirstAvailablePlaceOnBoard(teamIndex)
+  }
+
+  getClosestAvailablePlaceOnBoardToPokemon(
+    pokemon: IPokemon | IPokemonEntity,
+    teamIndex: number
+  ): { x: number; y: number } {
+    return this.getClosestAvailablePlaceOnBoardTo(
+      pokemon.positionX,
+      pokemon.positionY,
+      teamIndex
+    )
   }
 
   applyStat(pokemon: PokemonEntity, stat: Stat, value: number) {
@@ -968,17 +970,23 @@ export default class Simulation extends Schema implements ISimulation {
             const nbItems =
               pokemon.items.size + (pokemon.items.has(Item.WONDER_BOX) ? 1 : 0)
             const attackBoost = {
-              [Effect.DUBIOUS_DISC]: 4,
-              [Effect.LINK_CABLE]: 7,
-              [Effect.GOOGLE_SPECS]: 10
+              [Effect.DUBIOUS_DISC]: 0.1,
+              [Effect.LINK_CABLE]: 0.2,
+              [Effect.GOOGLE_SPECS]: 0.3
+            }[effect]
+            const apBoost = {
+              [Effect.DUBIOUS_DISC]: 10,
+              [Effect.LINK_CABLE]: 20,
+              [Effect.GOOGLE_SPECS]: 30
             }[effect]
             const shieldBoost = {
-              [Effect.DUBIOUS_DISC]: 20,
-              [Effect.LINK_CABLE]: 30,
-              [Effect.GOOGLE_SPECS]: 50
+              [Effect.DUBIOUS_DISC]: 0.1,
+              [Effect.LINK_CABLE]: 0.2,
+              [Effect.GOOGLE_SPECS]: 0.3
             }[effect]
-            pokemon.addAttack(attackBoost * nbItems)
-            pokemon.handleShield(shieldBoost * nbItems, pokemon)
+            pokemon.addAttack(attackBoost * pokemon.baseAtk * nbItems)
+            pokemon.addAbilityPower(apBoost * nbItems)
+            pokemon.handleShield(shieldBoost * pokemon.hp * nbItems, pokemon)
             pokemon.effects.push(Effect.GOOGLE_SPECS)
           }
           break

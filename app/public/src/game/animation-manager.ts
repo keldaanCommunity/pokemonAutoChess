@@ -286,12 +286,12 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
-      key: Ability.TWISTING_NEITHER,
+      key: Ability.TWISTING_NETHER,
       frames: this.game.anims.generateFrameNames("pmd-replace", {
         start: 0,
         end: 59,
         zeroPad: 3,
-        prefix: `${Ability.TWISTING_NEITHER}/`
+        prefix: `${Ability.TWISTING_NETHER}/`
       }),
       duration: 2000,
       repeat: 0

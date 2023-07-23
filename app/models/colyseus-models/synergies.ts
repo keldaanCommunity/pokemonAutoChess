@@ -6,13 +6,13 @@ import { Synergy } from "../../types/enum/Synergy"
 import { Pokemon } from "./pokemon"
 
 export default class Synergies
-  extends MapSchema<number>
-  implements Map<string, number>
+  extends MapSchema<number, Synergy>
+  implements Map<Synergy, number>
 {
   constructor() {
     super()
     Object.keys(Synergy).forEach((key) => {
-      this.set(key, 0)
+      this.set(key as Synergy, 0)
     })
   }
 

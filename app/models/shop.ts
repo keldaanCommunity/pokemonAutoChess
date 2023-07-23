@@ -1,5 +1,11 @@
 import PokemonFactory from "./pokemon-factory"
-import { Pkm, PkmDuos, PkmFamily, PkmProposition } from "../types/enum/Pokemon"
+import {
+  Pkm,
+  PkmDuos,
+  PkmFamily,
+  PkmProposition,
+  Unowns
+} from "../types/enum/Pokemon"
 import Player from "./colyseus-models/player"
 import {
   RarityProbabilityPerLevel,
@@ -13,12 +19,14 @@ import {
   FishRarityProbability
 } from "../types/Config"
 import { Rarity } from "../types/enum/Game"
-import { pickRandomIn, shuffleArray } from "../utils/random"
+import { chance, pickRandomIn, shuffleArray } from "../utils/random"
 import { clamp } from "../utils/number"
 import { removeInArray } from "../utils/array"
 import { Pokemon } from "./colyseus-models/pokemon"
 import { logger } from "../utils/logger"
 import { Synergy } from "../types/enum/Synergy"
+import { IPlayer } from "../types"
+import { Effect } from "../types/enum/Effect"
 
 export function getPoolSize(rarity: Rarity, maxStars: number): number {
   return PoolSize[rarity][clamp(maxStars, 1, 3) - 1]
@@ -120,11 +128,17 @@ export default class Shop {
     }
   }
 
-  assignShop(player: Player) {
+  assignShop(player: Player, manualRefresh: boolean) {
     player.shop.forEach((pkm) => this.releasePokemon(pkm))
 
-    for (let i = 0; i < 6; i++) {
-      player.shop[i] = this.pickPokemon(player)
+    if (player.effects.list.includes(Effect.EERIE_SPELL) && !manualRefresh) {
+      for (let i = 0; i < 6; i++) {
+        player.shop[i] = pickRandomIn(Unowns)
+      }
+    } else {
+      for (let i = 0; i < 6; i++) {
+        player.shop[i] = this.pickPokemon(player)
+      }
     }
   }
 
@@ -210,14 +224,21 @@ export default class Shop {
 
   pickPokemon(player: Player) {
     const rarityProbability = RarityProbabilityPerLevel[player.experienceManager.level]
-    const ditto_seed = Math.random()
     const rarity_seed = Math.random()
     let pokemon = Pkm.MAGIKARP
     let threshold = 0
     const finals = new Array<Pkm>()
 
-    if (ditto_seed < DITTO_RATE) {
+    if (chance(DITTO_RATE)) {
       return Pkm.DITTO
+    }
+
+    const UNOWN_RATE = 0.05
+    if (
+      player.effects.list.includes(Effect.LIGHT_SCREEN) &&
+      chance(UNOWN_RATE)
+    ) {
+      return pickRandomIn(Unowns)
     }
 
     player.board.forEach((pokemon: Pokemon) => {
@@ -258,7 +279,7 @@ export default class Shop {
     return pokemon
   }
 
-  fishPokemon(player: Player, fishingLevel: number): Pkm {
+  fishPokemon(player: IPlayer, fishingLevel: number): Pkm {
     const rarityProbability = FishRarityProbability[fishingLevel]
     const rarity_seed = Math.random()
     let fish: Pkm = Pkm.MAGIKARP

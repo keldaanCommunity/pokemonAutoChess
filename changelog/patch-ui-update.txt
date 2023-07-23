@@ -41,7 +41,7 @@ New thresholds: ~~3/5/7~~ 2/4/6
 
 **Darkrai Change**
 
-Defenses: ~~3~~ 2 New ability: Twisting Neither (like Guzzlord)
+Defenses: ~~3~~ 2 New ability: Twisting Nether (like Guzzlord)
 
 **Fix Medicham**
 

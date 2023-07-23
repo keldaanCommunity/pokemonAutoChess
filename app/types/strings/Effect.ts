@@ -210,12 +210,12 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.LIGHT_SCREEN]: {
-    eng: `+100% ${Stat.AP}`,
+    eng: `+100% ${Stat.AP}. Unowns have 5% chance to appear in shop.`,
     esp: ``,
     fra: ``
   },
   [Effect.EERIE_SPELL]: {
-    eng: `+150% ${Stat.AP}`,
+    eng: `+150% ${Stat.AP}. After a fight, get an Unown shop.`,
     esp: ``,
     fra: ``
   },
@@ -510,17 +510,17 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.DUBIOUS_DISC]: {
-    eng: `Gain +4 ${Stat.ATK} and +20 ${Stat.SHIELD} per held item`,
+    eng: `Gain +10% base ${Stat.ATK}, ${Stat.AP} and max ${Stat.HP} as ${Stat.SHIELD} per held item`,
     esp: ``,
     fra: ``
   },
   [Effect.LINK_CABLE]: {
-    eng: `Gain +7 ${Stat.ATK} and +30 ${Stat.SHIELD} per held item`,
+    eng: `Gain +20% base ${Stat.ATK}, ${Stat.AP} and max ${Stat.HP} as ${Stat.SHIELD} per held item`,
     esp: ``,
     fra: ``
   },
   [Effect.GOOGLE_SPECS]: {
-    eng: `Gain +10 ${Stat.ATK} and +50 ${Stat.SHIELD} per held item`,
+    eng: `Gain +30% base ${Stat.ATK}, ${Stat.AP}  and max ${Stat.HP} as ${Stat.SHIELD} per held item`,
     esp: ``,
     fra: ``
   },

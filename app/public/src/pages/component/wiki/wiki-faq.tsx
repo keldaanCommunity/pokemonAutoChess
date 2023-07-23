@@ -117,16 +117,19 @@ export default class WikiFaq extends Component {
         <p>
           The elo system in Pokemon Auto Chess works the same as in other elo
           based games like Chess, Lol, Starcraft etc... To gain elo points, you
-          need to beat other bots/players. For example, if you finish 3rd, you
-          won against 4th,5th,6th,7th,8th place and lost to 1st and 2nd place.
+          need to beat other players. The higher your opponent's elo, the more
+          elo you will gain by defeating him, and vice versa. If you don't play
+          for 10 days, your elo will start to decay (-10 elo/day, only if above
+          1250).
         </p>
         <h4 className="nes-text is-success">
           I didn't get elo points in my last game, why ?
         </h4>
         <p>
           The game needs to be finished in order to win/lose elo points. If
-          someone is still in game, you need to wait. Only 8-players/bots game
-          count are eligible to elo rating.
+          someone is still in game, you need to wait. Bots do not give elo, only
+          human players are accounted for elo rating. It is also possible that
+          the game had elo disabled ("Just for fun" mode)
         </p>
         <h4 className="nes-text is-success">
           What are the special damages and physical damages ?
@@ -146,11 +149,11 @@ export default class WikiFaq extends Component {
         </p>
         <h4 className="nes-text is-success">How do you get shiny pokemons ?</h4>
         <p>
-          So when you play games with 8 players/bots, you get experience. With
-          enough experience, you level up and get a booster pack. Each booster
-          pack gives shards for random pokemon. Use these shards to purchase the
-          shiny emotes of a pokemon in the Collection page, then you will get
-          that one pokemon as a shiny ingame.
+          You get experience points by playing games. With enough experience,
+          you level up and get a booster pack. Each booster pack gives shards
+          for random pokemon. Use these shards to purchase the shiny emotes of a
+          pokemon in the Collection page, then you will get that one pokemon as
+          a shiny ingame.
         </p>
         <h4 className="nes-text is-success">How can i support the game ?</h4>
         <p>

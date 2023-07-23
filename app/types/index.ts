@@ -357,7 +357,6 @@ export interface IPokemon {
   evolution: Pkm
   positionX: number
   positionY: number
-  cost: number
   attackSprite: AttackSprite
   atkSpeed: number
   def: number
@@ -609,7 +608,8 @@ export enum Title {
   BOT_BUILDER = "BOT_BUILDER",
   SHINY_SEEKER = "SHINY_SEEKER",
   ARCHEOLOGIST = "ARCHEOLOGIST",
-  DENTIST = "DENTIST"
+  DENTIST = "DENTIST",
+  FISHERMAN = "FISHERMAN"
 }
 
 export interface IBoardEvent {

@@ -119,13 +119,16 @@ export default class Player extends Schema implements IPlayer {
     return this.getLastBattle()?.result ?? ""
   }
 
-  getLastPlayerBattleResult() {
+  getCurrentStreakType(): BattleResult | null {
     for (let i = this.history.length - 1; i >= 0; i--) {
-      if (!this.history[i].isPVE) {
+      if (
+        !this.history[i].isPVE &&
+        this.history[i].result !== BattleResult.DRAW
+      ) {
         return this.history[i].result
       }
     }
-    return ""
+    return null
   }
 
   getPokemonAt(x: number, y: number): Pokemon | undefined {
@@ -140,10 +143,7 @@ export default class Player extends Schema implements IPlayer {
   }
 
   transformPokemon(pokemon: Pokemon, newEntry: Pkm) {
-    const newPokemon = PokemonFactory.createPokemonFromName(
-      newEntry,
-      this.pokemonCollection.get(PkmIndex[newEntry])
-    )
+    const newPokemon = PokemonFactory.createPokemonFromName(newEntry, this)
     pokemon.items.forEach((item) => {
       newPokemon.items.add(item)
     })

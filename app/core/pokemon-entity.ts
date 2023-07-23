@@ -8,12 +8,13 @@ import Count from "../models/colyseus-models/count"
 import Simulation from "./simulation"
 import { Schema, type, ArraySchema, SetSchema } from "@colyseus/schema"
 import { AttackStrategy } from "./attack-strategy"
+import { AbilityStrategy } from "./abilities"
 import Board from "./board"
 import PokemonState from "./pokemon-state"
 import { IPokemonEntity, IPokemon, Emotion, AttackSprite } from "../types"
 import { AttackType, Rarity } from "../types/enum/Game"
 import { Effect } from "../types/enum/Effect"
-import { AbilityStrategy, Ability } from "../types/enum/Ability"
+import { Ability } from "../types/enum/Ability"
 import { Synergy, SynergyEffects } from "../types/enum/Synergy"
 import { Pkm } from "../types/enum/Pokemon"
 import { IdleState } from "./idle-state"
@@ -77,7 +78,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   trueDamage: number
   shieldDone: number
   flyingProtection = 0
-  growGroundTimer = 0
+  growGroundTimer = 3000
   grassHealCooldown = 1000
   sandstormDamageTimer = 0
   fairySplashCooldown = 0
@@ -180,7 +181,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     damage: number
     board: Board
     attackType: AttackType
-    attacker: PokemonEntity
+    attacker: PokemonEntity | null
     shouldTargetGainMana: boolean
   }) {
     return this.state.handleDamage({ target: this, ...params })
@@ -454,17 +455,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.items.has(Item.UPGRADE)) {
       this.addAttackSpeed(4)
       this.count.upgradeCount++
-    }
-
-    if (this.items.has(Item.RED_ORB) && target) {
-      target.handleDamage({
-        damage: Math.ceil(this.atk * 0.2),
-        board,
-        attackType: AttackType.TRUE,
-        attacker: this,
-        shouldTargetGainMana: true
-      })
-    }
+    }    
 
     // Synergy effects on hit
 
@@ -679,7 +670,10 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
         if (nearestAvailableCoordinate) {
           if (target.effects.includes(Effect.ODD_FLOWER)) {
             target.simulation.addPokemon(
-              PokemonFactory.createPokemonFromName(Pkm.ODDISH),
+              PokemonFactory.createPokemonFromName(
+                Pkm.ODDISH,
+                target.simulation.player
+              ),
               nearestAvailableCoordinate.x,
               nearestAvailableCoordinate.y,
               target.team,
@@ -687,7 +681,10 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
             )
           } else if (target.effects.includes(Effect.GLOOM_FLOWER)) {
             target.simulation.addPokemon(
-              PokemonFactory.createPokemonFromName(Pkm.GLOOM),
+              PokemonFactory.createPokemonFromName(
+                Pkm.GLOOM,
+                target.simulation.player
+              ),
               nearestAvailableCoordinate.x,
               nearestAvailableCoordinate.y,
               target.team,
@@ -695,7 +692,10 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
             )
           } else if (target.effects.includes(Effect.VILE_FLOWER)) {
             target.simulation.addPokemon(
-              PokemonFactory.createPokemonFromName(Pkm.VILEPLUME),
+              PokemonFactory.createPokemonFromName(
+                Pkm.VILEPLUME,
+                target.simulation.player
+              ),
               nearestAvailableCoordinate.x,
               nearestAvailableCoordinate.y,
               target.team,
@@ -703,7 +703,10 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
             )
           } else if (target.effects.includes(Effect.SUN_FLOWER)) {
             target.simulation.addPokemon(
-              PokemonFactory.createPokemonFromName(Pkm.BELLOSSOM),
+              PokemonFactory.createPokemonFromName(
+                Pkm.BELLOSSOM,
+                target.simulation.player
+              ),
               nearestAvailableCoordinate.x,
               nearestAvailableCoordinate.y,
               target.team,

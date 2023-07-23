@@ -428,10 +428,7 @@ export default class GameRoom extends Room<GameState> {
       if (client && client.auth && client.auth.displayName) {
         logger.info(`${client.auth.displayName} left game`)
         const player = this.state.players.get(client.auth.uid)
-        if (
-          player &&
-          (player.loadingProgress < 100 || this.state.stageLevel < 4)
-        ) {
+        if (player && this.state.stageLevel < 4) {
           // if player left game during the loading screen or before stage 4, remove it from the players
           this.state.players.delete(client.auth.uid)
           this.state.players.forEach((player) => {
@@ -563,7 +560,7 @@ export default class GameRoom extends Room<GameState> {
             player.titles.add(Title.GRAND_MASTER)
           }
 
-          if (usr.elo && elligibleToELO) {
+          if (usr.elo != null && elligibleToELO) {
             const elo = computeElo(
               this.transformToSimplePlayer(player),
               rank,
@@ -884,6 +881,10 @@ export default class GameRoom extends Room<GameState> {
           }
         }
 
+        if (pokemon.name === Pkm.MAGIKARP) {
+          player.titles.add(Title.FISHERMAN)
+        }
+
         player.board.forEach((pkm, id) => {
           if (pkm.index == pokemon.index) {
             // logger.debug(pkm.name, pokemon.name)
@@ -913,7 +914,7 @@ export default class GameRoom extends Room<GameState> {
         })
         const pokemonEvolved = PokemonFactory.createPokemonFromName(
           pokemonEvolutionName,
-          player.pokemonCollection.get(PkmIndex[pokemonEvolutionName])
+          player
         )
         for (let i = 0; i < 3; i++) {
           const itemToAdd = itemsToAdd.pop()
@@ -963,27 +964,27 @@ export default class GameRoom extends Room<GameState> {
   }
 
   getBenchSize(board: MapSchema<Pokemon>) {
-    let boardSize = 0
+    let benchSize = 0
 
     board.forEach((pokemon, key) => {
-      if (pokemon.positionY == 0) {
-        boardSize++
+      if (pokemon.isOnBench) {
+        benchSize++
       }
     })
 
-    return boardSize
+    return benchSize
   }
 
   getBenchSizeWithoutNeutral(board: MapSchema<Pokemon>) {
-    let boardSize = 0
+    let benchSize = 0
 
     board.forEach((pokemon, key) => {
-      if (pokemon.positionY == 0 && pokemon.canBePlaced) {
-        boardSize++
+      if (pokemon.isOnBench && pokemon.canBePlaced) {
+        benchSize++
       }
     })
 
-    return boardSize
+    return benchSize
   }
 
   getPossibleEvolution(board: MapSchema<Pokemon>, name: Pkm) {
@@ -1003,7 +1004,7 @@ export default class GameRoom extends Room<GameState> {
     let pkm: Pokemon | undefined = undefined
     let found = false
     board.forEach((pokemon, key) => {
-      if (pokemon.positionY == 0 && pokemon.canBePlaced && !found) {
+      if (pokemon.isOnBench && pokemon.canBePlaced && !found) {
         found = true
         pkm = pokemon
       }
@@ -1041,7 +1042,7 @@ export default class GameRoom extends Room<GameState> {
         ) {
           const newPokemon = PokemonFactory.createPokemonFromName(
             newForm,
-            player.pokemonCollection.get(PkmIndex[newForm])
+            player
           )
           pokemon.items.forEach((item) => {
             newPokemon.items.add(item)
