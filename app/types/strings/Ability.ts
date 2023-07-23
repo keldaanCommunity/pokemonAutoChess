@@ -1215,7 +1215,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
     prt: ``
   },
   [Ability.KING_SHIELD]: {
-    eng: `${Status.PROTECT} the user for [1,2,4] seconds and swap his position with the farthest enemy`,
+    eng: `${Status.PROTECT} the user for [1,2,3] seconds and swap his position with the farthest enemy`,
     esp: ``,
     fra: ``,
     prt: ``
