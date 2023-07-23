@@ -1,11 +1,11 @@
 {
   "name": "pokemon-auto-chess",
-  "version": "3.9.0",
+  "version": "3.10.0",
   "description": "",
   "keywords": [],
   "license": "MIT",
   "engines": {
-    "node": "18.16"
+    "node": "18.17"
   },
   "homepage": "https://github.com/keldaanCommunity/pokemonAutoChess#readme",
   "repository": {
