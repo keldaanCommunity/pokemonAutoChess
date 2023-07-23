@@ -500,7 +500,7 @@ export class OnDragDropItemCommand extends Command<
           break
 
         case Pkm.PHIONE:
-          if (item == Item.AQUA_EGG) {
+          if (item === Item.AQUA_EGG) {
             newItemPokemon = PokemonFactory.transformPokemon(
               pokemon,
               Pkm.MANAPHY,
@@ -510,7 +510,7 @@ export class OnDragDropItemCommand extends Command<
           break
 
         case Pkm.GROUDON:
-          if (item == Item.RED_ORB) {
+          if (item === Item.RED_ORB) {
             newItemPokemon = PokemonFactory.transformPokemon(
               pokemon,
               Pkm.PRIMAL_GROUDON,
@@ -519,7 +519,7 @@ export class OnDragDropItemCommand extends Command<
           }
           break
         case Pkm.KYOGRE:
-          if (item == Item.BLUE_ORB) {
+          if (item === Item.BLUE_ORB) {
             newItemPokemon = PokemonFactory.transformPokemon(
               pokemon,
               Pkm.PRIMAL_KYOGRE,
@@ -528,7 +528,7 @@ export class OnDragDropItemCommand extends Command<
           }
           break
         case Pkm.RAYQUAZA:
-          if (item == Item.DELTA_ORB) {
+          if (item === Item.DELTA_ORB) {
             newItemPokemon = PokemonFactory.transformPokemon(
               pokemon,
               Pkm.MEGA_RAYQUAZA,
@@ -537,7 +537,7 @@ export class OnDragDropItemCommand extends Command<
           }
           break
         case Pkm.SHAYMIN:
-          if (item == Item.GRACIDEA_FLOWER) {
+          if (item === Item.GRACIDEA_FLOWER) {
             newItemPokemon = PokemonFactory.transformPokemon(
               pokemon,
               Pkm.SHAYMIN_SKY,

@@ -757,7 +757,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.ASSAULT_VEST]: { [Stat.SPE_DEF]: 20 },
   [Item.AMULET_COIN]: { [Stat.SPE_DEF]: 1, [Stat.ATK]: 1 },
   [Item.POKE_DOLL]: { [Stat.SPE_DEF]: 1, [Stat.DEF]: 1 },
-  [Item.RED_ORB]: { [Stat.ATK]: 8 },
+  [Item.RED_ORB]: { [Stat.ATK]: 10 },
   [Item.MAX_REVIVE]: { [Stat.ATK]: 1, [Stat.DEF]: 1 },
   [Item.ROCKY_HELMET]: { [Stat.DEF]: 12 }
 }
