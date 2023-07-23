@@ -819,6 +819,7 @@ export default class GameRoom extends Room<GameState> {
 
       if (
         pokemonEvolutionName !== Pkm.DEFAULT &&
+        pokemon.name !== Pkm.EGG &&
         pokemon.rarity !== Rarity.HATCH &&
         count >= getEvolutionCountNeeded(pokemon.name)
       ) {
