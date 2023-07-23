@@ -749,7 +749,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.RUNE_PROTECT]: { [Stat.CRIT_CHANCE]: 5, [Stat.SHIELD]: 15 },
   [Item.WIDE_LENS]: { [Stat.CRIT_CHANCE]: 5, [Stat.SPE_DEF]: 1 },
   [Item.RAZOR_CLAW]: { [Stat.CRIT_CHANCE]: 55, [Stat.ATK]: 1 },
-  [Item.FLUFFY_TAIL]: { [Stat.CRIT_CHANCE]: 5, [Stat.SPE_DEF]: 5 },
+  [Item.FLUFFY_TAIL]: { [Stat.CRIT_CHANCE]: 5, [Stat.DEF]: 5 },
   [Item.ORAN_BERRY]: { [Stat.SHIELD]: 150 },
   [Item.SHINY_CHARM]: { [Stat.SHIELD]: 15, [Stat.SPE_DEF]: 1 },
   [Item.GRACIDEA_FLOWER]: { [Stat.SHIELD]: 15, [Stat.ATK]: 1 },
