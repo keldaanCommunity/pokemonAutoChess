@@ -428,10 +428,7 @@ export default class GameRoom extends Room<GameState> {
       if (client && client.auth && client.auth.displayName) {
         logger.info(`${client.auth.displayName} left game`)
         const player = this.state.players.get(client.auth.uid)
-        if (
-          player &&
-          (player.loadingProgress < 100 || this.state.stageLevel < 4)
-        ) {
+        if (player && this.state.stageLevel < 4) {
           // if player left game during the loading screen or before stage 4, remove it from the players
           this.state.players.delete(client.auth.uid)
           this.state.players.forEach((player) => {
@@ -563,7 +560,7 @@ export default class GameRoom extends Room<GameState> {
             player.titles.add(Title.GRAND_MASTER)
           }
 
-          if (usr.elo && elligibleToELO) {
+          if (usr.elo != null && elligibleToELO) {
             const elo = computeElo(
               this.transformToSimplePlayer(player),
               rank,

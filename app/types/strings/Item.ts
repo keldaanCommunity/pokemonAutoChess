@@ -114,7 +114,7 @@ export const ItemDescription: { [key in Item]: string } = Object.freeze({
   [Item.AMULET_COIN]:
     "+1 gold each time the holder knocks down an opponent (max 5 gold per stage)",
   [Item.POKE_DOLL]: "Reduce all incoming damage by 30%",
-  [Item.RED_ORB]: `+8 ${Stat.ATK}. Each attack of the holder deals 20% additional ${Damage.TRUE}`,
+  [Item.RED_ORB]: `+10 ${Stat.ATK}. 25% of attack damage is dealt as ${Damage.TRUE}`,
   [Item.MAX_REVIVE]: `Give ${Status.RESURECTION}, preventing the holder first KO and restoring to max ${Stat.HP}`,
   [Item.ROCKY_HELMET]: `+12 ${Stat.DEF}. Negates critical bonus damage from incoming critical hits.`
 })

@@ -92,7 +92,7 @@ Many items, pokemons and rarity percentages have been tweaked to improve the bal
 
 - Upgrade: 5% → 4% AS per stack
 - Reaper Cloth: Critical hit chance 15% -> 20% Ability power 15% -> 20%
-- Red Orb: Attack 10 -> 8
+- Red Orb: 20% additional true damage → 25% of attack damage is dealt as true damage
 - Star Dust: Shield 50% -> 60%
 - Flame Orb: Remove Wound counterpart
 - Power lens buff: +1 Spe Def → + 5 Spe Def
