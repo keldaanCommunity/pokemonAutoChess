@@ -271,7 +271,7 @@ export const SynergyDescription: {
     fra: ""
   },
   [Synergy.ARTIFICIAL]: {
-    eng: `Artificial pokemons gains ${Stat.ATK} and ${Stat.SHIELD} depending on the number of items held`,
+    eng: `Artificial pokemons gains ${Stat.ATK}, ${Stat.AP} and ${Stat.SHIELD} depending on the number of items held`,
     esp: "",
     fra: ""
   },
