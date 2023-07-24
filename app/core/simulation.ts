@@ -457,7 +457,10 @@ export default class Simulation extends Schema implements ISimulation {
         if (pokemon.effects.includes(Effect.AUTOMATE)) {
           pokemon.addAttack(pokemon.baseAtk)
         }
-        if (pokemon.effects.includes(Effect.DRAGON_SCALES)) {
+        if (
+          pokemon.effects.includes(Effect.DRAGON_SCALES) ||
+          pokemon.effects.includes(Effect.DRAGON_DANCE)
+        ) {
           pokemon.addMaxHP(30 * pokemon.stars)
           pokemon.life = pokemon.hp
         }
