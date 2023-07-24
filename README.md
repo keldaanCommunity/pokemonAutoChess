@@ -102,4 +102,6 @@ npm run dev
 
 Game runs locally on port [http://localhost:9000/](http://localhost:9000/)
 
-Happy coding !
+# Pull Requests
+
+Propose your pull request on the `dev` branch. Topic should probably be dicussed on discord before.
