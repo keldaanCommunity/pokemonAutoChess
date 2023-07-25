@@ -11,7 +11,6 @@ import store from "./stores/index"
 
 import "nes.css/css/nes.min.css"
 import "./styles.css"
-import "./i18n"
 
 ReactDOM.render(
   <Provider store={store}>

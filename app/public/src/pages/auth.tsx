@@ -2,11 +2,8 @@ import React from "react"
 import Login from "./component/auth/login"
 import Media from "./component/auth/media"
 import "./auth.css"
-import { useTranslation } from "react-i18next"
 
 export default function Auth() {
-  const { t } = useTranslation()
-
   const isSupposedlyMobile =
     navigator.maxTouchPoints > 0 &&
     window.matchMedia("(orientation: portrait)").matches
@@ -14,12 +11,14 @@ export default function Auth() {
   return (
     <div className="auth-page">
       {isSupposedlyMobile && (
-        <p className="mobile-warning">{t("mobile_warning")}</p>
+        <p className="mobile-warning">
+          This game is not adapted for mobile, play it on desktop
+        </p>
       )}
       <main>
         <h1>Pokemon Auto Chess</h1>
         <div className="nintendo">
-          <p>{t("nintendo_warning")}</p>
+          <p>Non profit, open source. All rights to The Pokemon Company®</p>
         </div>
 
         <Login />

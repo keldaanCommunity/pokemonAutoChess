@@ -70,11 +70,9 @@ import { IPokemonsStatistic } from "../../../models/mongo-models/pokemons-statis
 import { cc } from "./utils/jsx"
 import "./lobby.css"
 import { BotManagerPanel } from "./component/bot-builder/bot-manager-panel"
-import { useTranslation } from "react-i18next"
 
 export default function Lobby() {
   const dispatch = useAppDispatch()
-  const { t } = useTranslation()
   const client: Client = useAppSelector((state) => state.network.client)
   const room: Room<ICustomLobbyState> | undefined = useAppSelector(
     (state) => state.network.lobby
@@ -356,7 +354,7 @@ export default function Lobby() {
             }}
           >
             <img src="assets/ui/collection.svg" alt="" />
-            {t("collection")}
+            Collection
           </button>
           <button
             className={cc("bubbly", "blue", { shimmer: numberOfBooster > 0 })}
@@ -365,7 +363,7 @@ export default function Lobby() {
             }}
           >
             <img src="assets/ui/booster.svg" alt="" />
-            {t("boosters")}
+            Boosters
           </button>
           <button
             className="bubbly green"
@@ -374,7 +372,7 @@ export default function Lobby() {
             }}
           >
             <img src="assets/ui/wiki.svg" alt="" />
-            {t("wiki")}
+            Wiki
           </button>
           {user?.anonymous === false && user?.title === Title.BOT_BUILDER && (
             <button
@@ -388,7 +386,7 @@ export default function Lobby() {
               }}
             >
               <img src="assets/ui/bot.svg" alt="" />
-              {t("bot_builder")}
+              Bot Builder
             </button>
           )}
           {user?.role === Role.ADMIN ||
@@ -418,7 +416,7 @@ export default function Lobby() {
             }}
           >
             <img src="assets/ui/meta.svg" alt="" />
-            {t("meta")}
+            Meta
           </button>
           <DiscordButton />
           <DonateButton />
@@ -434,7 +432,7 @@ export default function Lobby() {
                 dispatch(logOut())
               }}
             >
-              {t("sign_out")}
+              Sign Out
             </button>
           </Link>
         </nav>

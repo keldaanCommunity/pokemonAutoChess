@@ -14,11 +14,9 @@ import {
   setElligibilityToXP
 } from "../stores/AfterGameStore"
 import { playSound, SOUNDS } from "./utils/audio"
-import { useTranslation } from "react-i18next"
 
 export default function AfterGame() {
   const dispatch = useAppDispatch()
-  const { t } = useTranslation()
   const client: Client = useAppSelector((state) => state.network.client)
   const currentPlayerId: string = useAppSelector((state) => state.network.uid)
   const room: Room<AfterGameState> | undefined = useAppSelector(
@@ -112,7 +110,7 @@ export default function AfterGame() {
             setToLobby(true)
           }}
         >
-          {t("back_to_lobby")}
+          Back to Lobby
         </button>
         <AfterMenu />
       </div>
