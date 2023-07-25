@@ -84,6 +84,7 @@ import GameScene from "../game/scenes/game-scene"
 import { toast } from "react-toastify"
 import { logger } from "../../../utils/logger"
 import { RequiredStageLevelForXpElligibility } from "../../../types/Config"
+import { useTranslation } from "react-i18next"
 
 let gameContainer: GameContainer
 
@@ -103,6 +104,7 @@ export function getGameScene(): GameScene | undefined {
 
 export default function Game() {
   const dispatch = useAppDispatch()
+  const { t } = useTranslation()
   const client: Client = useAppSelector((state) => state.network.client)
   const room: Room<GameState> | undefined = useAppSelector(
     (state) => state.network.game
@@ -274,9 +276,9 @@ export default function Game() {
       })
       room.onMessage(Transfer.BROADCAST_EMOTE, (message) => {
         const g = gameContainer.game?.scene.getScene("gameScene") as GameScene
-          if (g && g.board) {
-            g.board.displayEmote(message.id, message.emote)
-          }
+        if (g && g.board) {
+          g.board.displayEmote(message.id, message.emote)
+        }
       })
 
       room.onMessage(Transfer.POKEMON_DAMAGE, (message) => {

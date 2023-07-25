@@ -1,7 +1,6 @@
 import { GameObjects } from "phaser"
 import { Rarity, Stat } from "../../../../types/enum/Game"
 import { Emotion } from "../../../../types"
-import { AbilityName } from "../../../../types/strings/Ability"
 import { Ability } from "../../../../types/enum/Ability"
 import { getPortraitSrc } from "../../utils"
 import { RarityColor } from "../../../../types/Config"
@@ -13,6 +12,7 @@ import { Pkm, PkmIndex } from "../../../../types/enum/Pokemon"
 import { Passive } from "../../../../types/enum/Passive"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
 import { PassiveDescription } from "../../../../types/strings/Passive"
+import { t } from "i18next"
 
 export default class PokemonDetail extends GameObjects.DOMElement {
   dom: HTMLDivElement
@@ -160,7 +160,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     }
     wrap.appendChild(statsElm)
 
-    if(passive != Passive.NONE) {
+    if (passive != Passive.NONE) {
       this.passiveDescription = document.createElement("div")
       this.passiveDescription.className = "game-pokemon-detail-passive"
       this.updatePassiveDescription(passive, abilityTier, ap)
@@ -174,7 +174,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
       const ultNameWrap = document.createElement("div")
       ultNameWrap.className = "ability-name"
       const ultName = document.createElement("p")
-      ultName.textContent = AbilityName[skill]["eng"]
+      ultName.textContent = t(`ability.${skill}`)
 
       this.abilityDescription = document.createElement("div")
       this.updateAbilityDescription(skill, abilityTier, ap)
@@ -201,7 +201,10 @@ export default class PokemonDetail extends GameObjects.DOMElement {
 
   updatePassiveDescription(passive: Passive, abilityTier: number, ap: number) {
     ReactDOM.render(
-      <p>Passive: {addIconsToDescription(PassiveDescription[passive], abilityTier, ap)}</p>,
+      <p>
+        Passive:{" "}
+        {addIconsToDescription(PassiveDescription[passive], abilityTier, ap)}
+      </p>,
       this.passiveDescription
     )
   }

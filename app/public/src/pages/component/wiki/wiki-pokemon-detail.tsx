@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { CDN_URL } from "../../../../../types"
 import { ICreditName } from "../../../../../types"
-import { AbilityName } from "../../../../../types/strings/Ability"
 import { ITracker } from "../../../../../types/ITracker"
 import Credits from "./Credits"
 import { RarityColor } from "../../../../../types/Config"
@@ -18,11 +17,13 @@ import { Ability } from "../../../../../types/enum/Ability"
 import { Passive } from "../../../../../types/enum/Passive"
 import { PassiveDescription } from "../../../../../types/strings/Passive"
 import { addIconsToDescription } from "../../utils/descriptions"
+import { useTranslation } from "react-i18next"
 
 export default function WikiPokemonDetail(props: {
   pokemon: Pkm
   m: ITracker | undefined
 }) {
+  const { t } = useTranslation()
   const pokemon = PokemonFactory.createPokemonFromName(props.pokemon)
   const [credits, setCredits] = useState<ICreditName[]>()
   const [initialized, setInitialized] = useState<boolean>(false)
@@ -60,13 +61,13 @@ export default function WikiPokemonDetail(props: {
     [Stat.ATK_SPEED]: "atkSpeed",
     [Stat.MANA]: "mana",
     [Stat.AP]: "ap",
-    [Stat.SHIELD]: "shield",
+    [Stat.SHIELD]: "shield"
   }
 
   return (
     <div className="wiki-pokemon-detail">
       <div className="game-pokemon-detail-tooltip">
-        <GamePokemonDetail pokemon={pokemon} ></GamePokemonDetail>
+        <GamePokemonDetail pokemon={pokemon}></GamePokemonDetail>
       </div>
       <dl>
         <dt>Name</dt>
@@ -131,22 +132,27 @@ export default function WikiPokemonDetail(props: {
         <dd>{pokemon.maxMana}</dd>
       </dl>
       <dl>
-        {pokemon.skill !== Ability.DEFAULT && <>
-          <dt>Ability</dt>
-          <dd>
-            {AbilityName[pokemon.skill].eng}
-            <AbilityTooltip
-              ability={pokemon.skill}
-              tier={pokemon.rarity === Rarity.MYTHICAL ? 3 : pokemon.stars}
-            />
-          </dd>
-        </>}
-        {pokemon.passive !== Passive.NONE && <>
-          <dt>Passive</dt>
-          <dd><br/>
-          {addIconsToDescription(PassiveDescription[pokemon.passive])}
-          </dd>
-        </>}
+        {pokemon.skill !== Ability.DEFAULT && (
+          <>
+            <dt>Ability</dt>
+            <dd>
+              {t(`ability.${pokemon.skill}`)}
+              <AbilityTooltip
+                ability={pokemon.skill}
+                tier={pokemon.rarity === Rarity.MYTHICAL ? 3 : pokemon.stars}
+              />
+            </dd>
+          </>
+        )}
+        {pokemon.passive !== Passive.NONE && (
+          <>
+            <dt>Passive</dt>
+            <dd>
+              <br />
+              {addIconsToDescription(PassiveDescription[pokemon.passive])}
+            </dd>
+          </>
+        )}
       </dl>
     </div>
   )

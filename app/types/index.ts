@@ -76,13 +76,6 @@ export type PrecomputedAbility = {
   [key in Ability]: Pkm[]
 }
 
-export type Langage = {
-  eng: string
-  esp: string
-  prt: string
-  fra: string
-}
-
 export enum Role {
   ADMIN = "ADMIN",
   MODERATOR = "MODERATOR",

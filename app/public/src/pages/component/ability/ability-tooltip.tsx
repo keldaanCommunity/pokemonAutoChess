@@ -9,7 +9,7 @@ export function AbilityTooltip(props: {
   tier?: number
   ap?: number
 }) {
-  const description = AbilityDescription[props.ability].eng
+  const description = AbilityDescription[props.ability]
   return (
     <p className="ability-description">
       {addIconsToDescription(description, props.tier, props.ap)}

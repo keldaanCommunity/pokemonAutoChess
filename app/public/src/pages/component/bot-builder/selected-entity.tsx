@@ -9,10 +9,10 @@ import { getPortraitSrc } from "../../../utils"
 import { DetailledPkm, Emotion } from "../../../../../types"
 import tracker from "../../../../dist/client/assets/pokemons/tracker.json"
 import { ITracker } from "../../../../../types/ITracker"
-import { AbilityName } from "../../../../../types/strings/Ability"
 import SynergyIcon from "../icons/synergy-icon"
 import { AbilityTooltip } from "../ability/ability-tooltip"
 import { addIconsToDescription } from "../../utils/descriptions"
+import { t } from "i18next"
 
 const entityStyle: CSS.Properties = {
   position: "absolute",
@@ -137,7 +137,7 @@ export default function SelectedEntity(props: {
           <p>Special Defense: {pokemon.speDef}</p>
           <p>Range: {pokemon.range}</p>
           <p>Mana: {pokemon.maxMana}</p>
-          <p>Abilty: {AbilityName[pokemon.skill].eng}</p>
+          <p>Abilty: {t(`ability.${pokemon.skill}`)}</p>
           <AbilityTooltip ability={pokemon.skill} />
         </div>
       </div>

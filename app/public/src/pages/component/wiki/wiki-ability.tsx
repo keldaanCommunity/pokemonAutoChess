@@ -1,9 +1,6 @@
 import React, { useState } from "react"
 import { Ability } from "../../../../../types/enum/Ability"
-import {
-  AbilityDescription,
-  AbilityName
-} from "../../../../../types/strings/Ability"
+import { AbilityDescription } from "../../../../../types/strings/Ability"
 import { addIconsToDescription } from "../../utils/descriptions"
 import PokemonFactory, {
   isAdditionalPick
@@ -15,6 +12,7 @@ import PRECOMPUTED_ABILITY from "../../../../../models/precomputed/ability.json"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import ReactTooltip from "react-tooltip"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
+import { t } from "i18next"
 
 const precomputed = PRECOMPUTED_ABILITY as PrecomputedAbility
 
@@ -31,10 +29,8 @@ export default function WikiAbility() {
             return (
               <li key={ability} className="nes-container">
                 <div>
-                  <h4>{AbilityName[ability].eng}</h4>
-                  <p>
-                    {addIconsToDescription(AbilityDescription[ability].eng)}
-                  </p>
+                  <h4>{t(`ability.${ability}`)}</h4>
+                  <p>{addIconsToDescription(AbilityDescription[ability])}</p>
                 </div>
                 <div>
                   <ul>
