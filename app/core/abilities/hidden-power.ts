@@ -49,8 +49,7 @@ export class HiddenPowerAStrategy extends HiddenPowerStrategy {
       [board.columns - 1, board.rows - 1]
     ]
     corners.forEach(([x, y]) => {
-      const player = unown.simulation.player!
-      const abra = PokemonFactory.createPokemonFromName(Pkm.ABRA, player)
+      const abra = PokemonFactory.createPokemonFromName(Pkm.ABRA, unown.player)
       const coord = unown.simulation.getClosestAvailablePlaceOnBoardTo(
         x,
         y,
@@ -109,13 +108,17 @@ export class HiddenPowerDStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, state, board, target, crit)
-    const player = unown.simulation.player!
-    const x = player.simulation.room.getFirstAvailablePositionInBench(player.id)
-    if (x !== undefined) {
-      const ditto = PokemonFactory.createPokemonFromName(Pkm.DITTO, player)
-      ditto.positionX = x
-      ditto.positionY = 0
-      player.board.set(ditto.id, ditto)
+    if (unown.team === 0) {
+      const player = unown.player!
+      const x = player.simulation.room.getFirstAvailablePositionInBench(
+        player.id
+      )
+      if (x !== undefined) {
+        const ditto = PokemonFactory.createPokemonFromName(Pkm.DITTO, player)
+        ditto.positionX = x
+        ditto.positionY = 0
+        player.board.set(ditto.id, ditto)
+      }
     }
   }
 }
@@ -129,14 +132,18 @@ export class HiddenPowerEStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, state, board, target, crit)
-    const egg = PokemonFactory.createRandomEgg()
-    const player = unown.simulation.player!
-    const x = player.simulation.room.getFirstAvailablePositionInBench(player.id)
-    if (x !== undefined) {
-      egg.positionX = x
-      egg.positionY = 0
-      egg.evolutionTimer = 1
-      player.board.set(egg.id, egg)
+    if (unown.team === 0) {
+      const egg = PokemonFactory.createRandomEgg()
+      const player = unown.player!
+      const x = player.simulation.room.getFirstAvailablePositionInBench(
+        player.id
+      )
+      if (x !== undefined && unown.team === 0) {
+        egg.positionX = x
+        egg.positionY = 0
+        egg.evolutionTimer = 1
+        player.board.set(egg.id, egg)
+      }
     }
   }
 }
@@ -152,25 +159,27 @@ export class HiddenPowerFStrategy extends HiddenPowerStrategy {
     super.process(unown, state, board, target, crit)
     const fishingLevel = 3
     const nbFishes = 2
-    const player = unown.simulation.player!
+    if (unown.team === 0) {
+      const player = unown.player!
 
-    for (let i = 0; i < nbFishes; i++) {
-      const pkm = player.simulation.room.state.shop.fishPokemon(
-        player,
-        fishingLevel
-      )
-      const fish = PokemonFactory.createPokemonFromName(pkm, player)
-      const x = unown.simulation.room.getFirstAvailablePositionInBench(
-        player.id
-      )
-      fish.positionX = x !== undefined ? x : -1
-      fish.positionY = 0
-      fish.action = PokemonActionState.FISH
-      player.board.set(fish.id, fish)
-      unown.simulation.room.updateEvolution(player.id)
-      unown.simulation.room.clock.setTimeout(() => {
-        fish.action = PokemonActionState.IDLE
-      }, 1000)
+      for (let i = 0; i < nbFishes; i++) {
+        const pkm = player.simulation.room.state.shop.fishPokemon(
+          player,
+          fishingLevel
+        )
+        const fish = PokemonFactory.createPokemonFromName(pkm, player)
+        const x = unown.simulation.room.getFirstAvailablePositionInBench(
+          player.id
+        )
+        fish.positionX = x !== undefined ? x : -1
+        fish.positionY = 0
+        fish.action = PokemonActionState.FISH
+        player.board.set(fish.id, fish)
+        unown.simulation.room.updateEvolution(player.id)
+        unown.simulation.room.clock.setTimeout(() => {
+          fish.action = PokemonActionState.IDLE
+        }, 1000)
+      }
     }
   }
 }
@@ -184,8 +193,9 @@ export class HiddenPowerGStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, state, board, target, crit)
-    const player = unown.simulation.player!
-    player.money += 5
+    if (unown.team === 0 && unown.player) {
+      unown.player.money += 5
+    }
   }
 }
 
@@ -217,8 +227,9 @@ export class HiddenPowerIStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, state, board, target, crit)
-    const player = unown.simulation.player!
-    player.items.add(ItemFactory.createBasicRandomItem())
+    if (unown.team === 0 && unown.player) {
+      unown.player.items.add(ItemFactory.createBasicRandomItem())
+    }
   }
 }
 
@@ -232,14 +243,13 @@ export class HiddenPowerJStrategy extends HiddenPowerStrategy {
   ) {
     super.process(unown, state, board, target, crit)
     const numberToSpawn = 2
-    const player = unown.simulation.player!
     for (let i = 0; i < numberToSpawn; i++) {
       const coord = unown.simulation.getClosestAvailablePlaceOnBoardToPokemon(
         unown,
         unown.team
       )
       const sharpedo = unown.simulation.addPokemon(
-        PokemonFactory.createPokemonFromName(Pkm.SHARPEDO, player),
+        PokemonFactory.createPokemonFromName(Pkm.SHARPEDO, unown.player),
         coord.x,
         coord.y,
         unown.team,
@@ -264,9 +274,8 @@ export class HiddenPowerKStrategy extends HiddenPowerStrategy {
       unown,
       unown.team
     )
-    const player = unown.simulation.player!
     const hitmonlee = unown.simulation.addPokemon(
-      PokemonFactory.createPokemonFromName(Pkm.HITMONLEE, player),
+      PokemonFactory.createPokemonFromName(Pkm.HITMONLEE, unown.player),
       coord.x,
       coord.y,
       unown.team,
@@ -378,14 +387,13 @@ export class HiddenPowerOStrategy extends HiddenPowerStrategy {
 
 export class HiddenPowerPStrategy extends HiddenPowerStrategy {
   process(
-    pokemon: PokemonEntity,
+    unown: PokemonEntity,
     state: PokemonState,
     board: Board,
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
-    const player = pokemon.simulation.player!
+    super.process(unown, state, board, target, crit)
     const numberToSpawn = 5
     const bugs = [
       ...PRECOMPUTED_TYPE_POKEMONS[Synergy.BUG].pokemons,
@@ -393,15 +401,15 @@ export class HiddenPowerPStrategy extends HiddenPowerStrategy {
     ] as Pkm[]
     for (let i = 0; i < numberToSpawn; i++) {
       const bug = pickRandomIn(bugs)
-      const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemon(
-        pokemon,
-        pokemon.team
+      const coord = unown.simulation.getClosestAvailablePlaceOnBoardToPokemon(
+        unown,
+        unown.team
       )
-      pokemon.simulation.addPokemon(
-        PokemonFactory.createPokemonFromName(bug, player),
+      unown.simulation.addPokemon(
+        PokemonFactory.createPokemonFromName(bug, unown.player),
         coord.x,
         coord.y,
-        pokemon.team,
+        unown.team,
         false
       )
     }
@@ -435,9 +443,8 @@ export class HiddenPowerRStrategy extends HiddenPowerStrategy {
       unown,
       unown.team
     )
-    const player = unown.simulation.player!
     const geodude = unown.simulation.addPokemon(
-      PokemonFactory.createPokemonFromName(Pkm.GEODUDE, player),
+      PokemonFactory.createPokemonFromName(Pkm.GEODUDE, unown.player),
       coord.x,
       coord.y,
       unown.team,
@@ -451,7 +458,7 @@ export class HiddenPowerRStrategy extends HiddenPowerStrategy {
       unown.team
     )
     const graveler = unown.simulation.addPokemon(
-      PokemonFactory.createPokemonFromName(Pkm.GRAVELER, player),
+      PokemonFactory.createPokemonFromName(Pkm.GRAVELER, unown.player),
       coord.x,
       coord.y,
       unown.team,
@@ -465,7 +472,7 @@ export class HiddenPowerRStrategy extends HiddenPowerStrategy {
       unown.team
     )
     const golem = unown.simulation.addPokemon(
-      PokemonFactory.createPokemonFromName(Pkm.GOLEM, player),
+      PokemonFactory.createPokemonFromName(Pkm.GOLEM, unown.player),
       coord.x,
       coord.y,
       unown.team,
@@ -506,9 +513,8 @@ export class HiddenPowerTStrategy extends HiddenPowerStrategy {
       unown,
       unown.team
     )
-    const player = unown.simulation.player!
     const tapu = unown.simulation.addPokemon(
-      PokemonFactory.createPokemonFromName(Pkm.TAPU_LELE, player),
+      PokemonFactory.createPokemonFromName(Pkm.TAPU_LELE, unown.player),
       coord.x,
       coord.y,
       unown.team,
@@ -533,9 +539,8 @@ export class HiddenPowerUStrategy extends HiddenPowerStrategy {
       unown,
       unown.team
     )
-    const player = unown.simulation.player!
     const uxie = unown.simulation.addPokemon(
-      PokemonFactory.createPokemonFromName(Pkm.UXIE, player),
+      PokemonFactory.createPokemonFromName(Pkm.UXIE, unown.player),
       coord.x,
       coord.y,
       unown.team,
@@ -588,22 +593,26 @@ export class HiddenPowerWStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, state, board, target, crit)
-    const player = unown.simulation.player!
-    const topSynergy = Array.from(player.synergies).sort(
-      ([s1, v1], [s2, v2]) => v2 - v1
-    )[0][0]
-    const candidates = [
-      ...PRECOMPUTED_TYPE_POKEMONS[topSynergy].pokemons,
-      ...PRECOMPUTED_TYPE_POKEMONS[topSynergy].additionalPokemons
-    ] as Pkm[]
-    const pkm = pickRandomIn(candidates)
+    if (unown.team === 0) {
+      const player = unown.player!
+      const topSynergy = Array.from(player.synergies).sort(
+        ([s1, v1], [s2, v2]) => v2 - v1
+      )[0][0]
+      const candidates = [
+        ...PRECOMPUTED_TYPE_POKEMONS[topSynergy].pokemons,
+        ...PRECOMPUTED_TYPE_POKEMONS[topSynergy].additionalPokemons
+      ] as Pkm[]
+      const pkm = pickRandomIn(candidates)
 
-    const x = player.simulation.room.getFirstAvailablePositionInBench(player.id)
-    if (x !== undefined) {
-      const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
-      pokemon.positionX = x
-      pokemon.positionY = 0
-      player.board.set(pokemon.id, pokemon)
+      const x = player.simulation.room.getFirstAvailablePositionInBench(
+        player.id
+      )
+      if (x !== undefined) {
+        const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
+        pokemon.positionX = x
+        pokemon.positionY = 0
+        player.board.set(pokemon.id, pokemon)
+      }
     }
   }
 }
@@ -640,14 +649,13 @@ export class HiddenPowerYStrategy extends HiddenPowerStrategy {
   ) {
     super.process(unown, state, board, target, crit)
     const numberToSpawn = 2
-    const player = unown.simulation.player!
     for (let i = 0; i < numberToSpawn; i++) {
       const coord = unown.simulation.getClosestAvailablePlaceOnBoardToPokemon(
         unown,
         unown.team
       )
       const meditite = unown.simulation.addPokemon(
-        PokemonFactory.createPokemonFromName(Pkm.MEDITITE, player),
+        PokemonFactory.createPokemonFromName(Pkm.MEDITITE, unown.player),
         coord.x,
         coord.y,
         unown.team,
@@ -685,18 +693,20 @@ export class HiddenPowerQMStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, state, board, target, crit)
-    const player = unown.simulation.player!
-    const nbUnownsObtained = 4
-    for (let i = 0; i < nbUnownsObtained; i++) {
-      const pkm = pickRandomIn(Unowns)
-      const x = player.simulation.room.getFirstAvailablePositionInBench(
-        player.id
-      )
-      if (x !== undefined) {
-        const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
-        pokemon.positionX = x
-        pokemon.positionY = 0
-        player.board.set(pokemon.id, pokemon)
+    if (unown.team === 0) {
+      const player = unown.player!
+      const nbUnownsObtained = 4
+      for (let i = 0; i < nbUnownsObtained; i++) {
+        const pkm = pickRandomIn(Unowns)
+        const x = player.simulation.room.getFirstAvailablePositionInBench(
+          player.id
+        )
+        if (x !== undefined) {
+          const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
+          pokemon.positionX = x
+          pokemon.positionY = 0
+          player.board.set(pokemon.id, pokemon)
+        }
       }
     }
   }
@@ -711,7 +721,7 @@ export class HiddenPowerEMStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const player = pokemon.simulation.player!
+    const player = pokemon.player!
     const corners = [
       [0, 0],
       [board.columns - 1, 0],

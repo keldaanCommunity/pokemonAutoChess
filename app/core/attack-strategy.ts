@@ -200,7 +200,7 @@ export class BeatUpStrategy extends AttackStrategy {
     for (let i = 0; i < pokemon.stars; i++) {
       const houndour = PokemonFactory.createPokemonFromName(
         Pkm.HOUNDOUR,
-        pokemon.simulation.player
+        pokemon.player
       )
       const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemon(
         pokemon,
@@ -235,8 +235,8 @@ export class PaydayStrategy extends AttackStrategy {
       pokemon,
       crit
     )
-    if (death && pokemon.team === 0 && pokemon.simulation.player) {
-      pokemon.simulation.player.money += pokemon.stars
+    if (death && pokemon.team === 0 && pokemon.player) {
+      pokemon.player.money += pokemon.stars
       pokemon.count.moneyCount++
     }
   }
@@ -476,7 +476,7 @@ export class JudgementStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     let synergyLevelsCount = 0
-    const synergies = pokemon.simulation.player?.synergies
+    const synergies = pokemon.player?.synergies
     if (synergies) {
       pokemon.types.forEach((type) => {
         synergyLevelsCount += synergies.get(type) ?? 0
