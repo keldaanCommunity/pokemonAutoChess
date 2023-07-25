@@ -37,7 +37,7 @@
   gap: 0.5em;
 }
 
-#game-stage-info .players-information:not(.has-opponent){
+#game-stage-info .players-information:not(.has-opponent) {
   flex: 0;
 }
 
@@ -101,6 +101,10 @@
 
 .game-stage-path .stage-path.defeat {
   border-color: #8c2022;
+}
+
+.game-stage-path .stage-path.draw {
+  border-color: #cc6a28;
 }
 
 .game-stage-path .stage-path img {

@@ -86,9 +86,15 @@ export default class Player extends Schema implements IPlayer {
   }
 
   getCurrentBattleResult() {
-    if (this.simulation.blueTeam.size == 0) {
+    if (
+      this.simulation.blueTeam.size === 0 &&
+      this.simulation.redTeam.size > 0
+    ) {
       return BattleResult.DEFEAT
-    } else if (this.simulation.redTeam.size == 0) {
+    } else if (
+      this.simulation.redTeam.size === 0 &&
+      this.simulation.blueTeam.size > 0
+    ) {
       return BattleResult.WIN
     }
     return BattleResult.DRAW

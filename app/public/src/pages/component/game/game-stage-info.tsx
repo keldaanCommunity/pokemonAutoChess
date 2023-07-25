@@ -189,7 +189,11 @@ export function StagePath() {
     if (neutralStage) {
       path.push({
         level,
-        icon: getPortraitSrc(PkmIndex[neutralStage.avatar], false, Emotion.NORMAL),
+        icon: getPortraitSrc(
+          PkmIndex[neutralStage.avatar],
+          false,
+          Emotion.NORMAL
+        ),
         title: record?.name ?? neutralStage.name,
         result: record?.result
       })
@@ -225,7 +229,8 @@ export function StagePath() {
             className={cc("stage-path", {
               current: currentLevelPathIndex === i,
               defeat: step.result === BattleResult.DEFEAT,
-              victory: step.result === BattleResult.WIN
+              victory: step.result === BattleResult.WIN,
+              draw: step.result === BattleResult.DRAW
             })}
             data-tip
             data-for={"stage-path-" + i}

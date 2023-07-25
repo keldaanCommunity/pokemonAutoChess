@@ -417,7 +417,8 @@ export class HiddenPowerQStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, state, board, target, crit)
-    unown.simulation.room.state.time = 0
+    unown.simulation.redTeam.clear()
+    unown.simulation.blueTeam.clear()
   }
 }
 
