@@ -2,6 +2,7 @@ import React from "react"
 import Login from "./component/auth/login"
 import Media from "./component/auth/media"
 import "./auth.css"
+import { i } from "@inlang/sdk-js"
 
 export default function Auth() {
   const isSupposedlyMobile =
@@ -11,14 +12,12 @@ export default function Auth() {
   return (
     <div className="auth-page">
       {isSupposedlyMobile && (
-        <p className="mobile-warning">
-          This game is not adapted for mobile, play it on desktop
-        </p>
+        <p className="mobile-warning">{i("mobile_warning")}</p>
       )}
       <main>
         <h1>Pokemon Auto Chess</h1>
         <div className="nintendo">
-          <p>Non profit, open source. All rights to The Pokemon Company®</p>
+          <p>{i("nintendo_warning")}</p>
         </div>
 
         <Login />

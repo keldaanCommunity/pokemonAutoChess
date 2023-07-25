@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom"
-import React from "react"
+import React, { Suspense } from "react"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Auth from "./pages/auth"
 import Lobby from "./pages/lobby"
@@ -11,19 +11,22 @@ import store from "./stores/index"
 
 import "nes.css/css/nes.min.css"
 import "./styles.css"
+import "./i18n"
 
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Auth />} />
-          <Route path="/lobby" element={<Lobby />} />
-          <Route path="/preparation" element={<Preparation />} />
-          <Route path="/game" element={<Game />} />
-          <Route path="/after" element={<AfterGame />} />
-        </Routes>
-      </BrowserRouter>
+      <Suspense fallback="loading">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Auth />} />
+            <Route path="/lobby" element={<Lobby />} />
+            <Route path="/preparation" element={<Preparation />} />
+            <Route path="/game" element={<Game />} />
+            <Route path="/after" element={<AfterGame />} />
+          </Routes>
+        </BrowserRouter>
+      </Suspense>
     </React.StrictMode>
   </Provider>,
 
