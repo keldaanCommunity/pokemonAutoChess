@@ -1,4 +1,11 @@
 {
   "mobile_warning": "This game is not adapted for mobile, play it on desktop",
-  "nintendo_warning": "Non profit, open source. All rights to The Pokemon Company®"
+  "nintendo_warning": "Non profit, open source. All rights to The Pokemon Company®",
+  "collection": "Collection",
+  "wiki": "Wiki",
+  "bot_builder": "BOT Builder",
+  "meta": "Meta",
+  "sign_out": "Sign Out",
+  "back_to_lobby": "Back to lobby",
+  "boosters": "Boosters"
 }
