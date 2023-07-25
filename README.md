@@ -4,6 +4,8 @@ Non profit game. For fans, by fans.
 
 ## All rights to the Pokemon Company. Pokemon Auto Chess can stop at any time, whenever The Pokemon Company wants.
 
+[![translation badge](https://inlang.com/badge?url=github.com/keldaanCommunity/pokemonAutoChess)](https://inlang.com/editor/github.com/keldaanCommunity/pokemonAutoChess?ref=badge)
+
 <a href="https://discord.gg/6JMS7tr">
 <img src="https://img.shields.io/discord/737230355039387749.svg?style=for-the-badge&colorB=7581dc&logo=discord&logoColor=white">
 </a>
