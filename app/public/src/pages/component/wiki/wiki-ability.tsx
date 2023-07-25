@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import { Ability } from "../../../../../types/enum/Ability"
-import { AbilityDescription } from "../../../../../types/strings/Ability"
 import { addIconsToDescription } from "../../utils/descriptions"
 import PokemonFactory, {
   isAdditionalPick
@@ -30,7 +29,9 @@ export default function WikiAbility() {
               <li key={ability} className="nes-container">
                 <div>
                   <h4>{t(`ability.${ability}`)}</h4>
-                  <p>{addIconsToDescription(AbilityDescription[ability])}</p>
+                  <p>
+                    {addIconsToDescription(t(`ability_description.${ability}`))}
+                  </p>
                 </div>
                 <div>
                   <ul>
