@@ -1121,14 +1121,14 @@ export default class Simulation extends Schema implements ISimulation {
   }
 
   update(dt: number) {
-    if (this.blueTeam.size == 0 || this.redTeam.size == 0) {
+    if (this.blueTeam.size === 0 || this.redTeam.size === 0) {
       this.finished = true
-      if (this.blueTeam.size == 0) {
+      if (this.blueTeam.size === 0 && this.redTeam.size > 0) {
         this.winnerId = this.opponent ? this.opponent.id : "pve"
         this.redTeam.forEach((p) => {
           p.action = PokemonActionState.HOP
         })
-      } else {
+      } else if (this.redTeam.size === 0 && this.blueTeam.size > 0) {
         this.winnerId = this.player?.id ?? ""
         this.blueTeam.forEach((p) => {
           p.action = PokemonActionState.HOP
