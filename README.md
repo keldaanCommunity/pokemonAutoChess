@@ -104,6 +104,4 @@ Game runs locally on port [http://localhost:9000/](http://localhost:9000/)
 
 # Extensions
 
-# Pull Requests
-
-Propose your pull request on the `dev` branch. Topic should probably be dicussed on discord before.
+With VS Code, use Prettier, Eslint, Inlang.
