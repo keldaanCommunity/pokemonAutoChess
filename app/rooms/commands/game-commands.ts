@@ -1424,7 +1424,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
             player.board.delete(pokemon.id)
             player.synergies.update(player.board)
             player.effects.update(player.synergies, player.board)
-            this.state.shop.assignShop(player, false) // refresh unown shop in case player lost psychic 6
+            if (!player.shopLocked) {
+              this.state.shop.assignShop(player, false) // refresh unown shop in case player lost psychic 6
+            }
           }
         })
         // Refreshes effects (like tapu Terrains)
