@@ -50,7 +50,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   @type("string") attackSprite: AttackSprite
   @type("string") rarity: Rarity
   @type("string") name: Pkm
-  @type(["uint8"]) effects = new ArraySchema<Effect>()
+  @type(["string"]) effects = new ArraySchema<Effect>()
   @type({ set: "string" }) items = new SetSchema<Item>()
   @type(["string"]) types = new ArraySchema<Synergy>()
   @type("uint8") stars: number
@@ -455,7 +455,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.items.has(Item.UPGRADE)) {
       this.addAttackSpeed(4)
       this.count.upgradeCount++
-    }    
+    }
 
     // Synergy effects on hit
 

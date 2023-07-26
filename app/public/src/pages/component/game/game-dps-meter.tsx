@@ -8,6 +8,7 @@ import { useAppSelector } from "../../../hooks"
 import { getAvatarSrc } from "../../../utils"
 import { loadPreferences, savePreferences } from "../../../preferences"
 import "./game-dps-meter.css"
+import { t } from "i18next"
 
 let lastOpponentName = ""
 let lastOpponentAvatar = ""

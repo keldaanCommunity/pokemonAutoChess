@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction } from "react"
 import Modal from "react-bootstrap/Modal"
+import { t } from "i18next"
 
 export default function GameModal(props: {
   modalInfo: string

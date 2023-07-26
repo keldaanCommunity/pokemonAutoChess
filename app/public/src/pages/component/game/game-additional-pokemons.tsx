@@ -5,6 +5,7 @@ import { useAppSelector } from "../../../hooks"
 import { getPortraitSrc } from "../../../utils"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { GamePokemonDetail } from "./game-pokemon-detail"
+import { t } from "i18next"
 
 export function GameAdditionalPokemons() {
   const additionalPokemons = useAppSelector(
