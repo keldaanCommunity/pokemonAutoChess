@@ -5,6 +5,7 @@ import ReactTooltip from "react-tooltip"
 import CSS from "csstype"
 import { IStep } from "../../../../../models/mongo-models/bot-v2"
 import { getPortraitSrc } from "../../../utils"
+import { t } from "i18next"
 
 const tabStyle: CSS.Properties = {
   margin: "10px",
@@ -78,7 +79,7 @@ export default function TeamEditor(props: {
     <div className="nes-container" style={tabStyle}>
       <div style={{ display: "flex", alignItems: "center" }}>
         <p data-tip data-for={"help"}>
-          Help
+          {t("help")}
         </p>
         <ReactTooltip id={"help"} className="customeTheme" effect="solid">
           <p>{t("help_create_bot")}</p>

@@ -68,19 +68,19 @@ export default function WikiPokemonDetail(props: {
         <GamePokemonDetail pokemon={pokemon}></GamePokemonDetail>
       </div>
       <dl>
-        <dt>Name</dt>
-        <dd className="pokemon-name">{pokemon.name}</dd>
-        <dt>Index</dt>
+        <dt>{t("name")}</dt>
+        <dd className="pokemon-name">{t(`pkm.${pokemon.name}`)}</dd>
+        <dt>{t("index")}</dt>
         <dd className="pokemon-index">{pokemon.index}</dd>
-        <dt>Rarity</dt>
+        <dt>{t("rarity_label")}</dt>
         <dd style={{ color: RarityColor[pokemon.rarity] }}>{pokemon.rarity}</dd>
-        <dt>Types</dt>
+        <dt>{t("synergies")}</dt>
         <dd>
           {pokemon.types.map((type) => (
             <SynergyIcon key={"img" + type} type={type} />
           ))}
         </dd>
-        <dt>Evolution</dt>
+        <dt>{t("evolution")}</dt>
         <dd>
           {!evolution ? (
             "No evolution"
@@ -90,12 +90,12 @@ export default function WikiPokemonDetail(props: {
                 src={getPortraitSrc(evolution.index)}
                 style={{ marginRight: "0.5em" }}
               />
-              <span className="pokemon-name">{evolution.name}</span>
+              <span className="pokemon-name">{t(`pkm.${evolution.name}`)}</span>
             </>
           )}
         </dd>
 
-        <dt>Portrait Credit</dt>
+        <dt>{t("portrait_credit")}</dt>
         {credits && (
           <Credits
             credits={credits}
@@ -104,7 +104,7 @@ export default function WikiPokemonDetail(props: {
           />
         )}
 
-        <dt>Sprite Credit</dt>
+        <dt>{t("sprite_credit")}</dt>
         {credits && (
           <Credits
             credits={credits}
@@ -131,7 +131,7 @@ export default function WikiPokemonDetail(props: {
       <dl>
         {pokemon.skill !== Ability.DEFAULT && (
           <>
-            <dt>Ability</dt>
+            <dt>{t("ability_label")}</dt>
             <dd>
               {t(`ability.${pokemon.skill}`)}
               <AbilityTooltip
@@ -143,7 +143,7 @@ export default function WikiPokemonDetail(props: {
         )}
         {pokemon.passive !== Passive.NONE && (
           <>
-            <dt>Passive</dt>
+            <dt>{t("passive_label")}</dt>
             <dd>
               <br />
               {addIconsToDescription(

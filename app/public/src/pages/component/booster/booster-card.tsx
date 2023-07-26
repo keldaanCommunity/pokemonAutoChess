@@ -5,6 +5,7 @@ import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
 import { cc } from "../../utils/jsx"
 import "./booster-card.css"
+import { t } from "i18next"
 
 export function BoosterCard(props: { pkm: string; shards: number }) {
   const pkm: Pkm = (Object.keys(PkmIndex).find(
@@ -14,7 +15,6 @@ export function BoosterCard(props: { pkm: string; shards: number }) {
   const style = {
     "--rarity-color": RarityColor[pokemon.rarity]
   } as React.CSSProperties
-
   return (
     <div
       className={cc("booster-card", "rarity-" + pokemon.rarity.toLowerCase())}
@@ -26,7 +26,7 @@ export function BoosterCard(props: { pkm: string; shards: number }) {
       </div>
       <div className="front">
         <img src={getPortraitSrc(props.pkm)}></img>
-        <p className="name">{pokemon.name}</p>
+        <p className="name">{t(`pkm.${pokemon.name}`)}</p>
         <p>
           {props.shards} {t("shards")}
         </p>

@@ -2,6 +2,7 @@ import React from "react"
 import { Role } from "../../../../types"
 import { getAvatarSrc } from "../../utils"
 import { RoleBadge } from "./RoleBadge"
+import { t } from "i18next"
 
 export default function InlineAvatar(props: {
   avatar: string

@@ -66,7 +66,7 @@ export default function PokemonEmotionsModal(props: {
             )}
             className={cc({ unlocked: pConfig != null })}
           />
-          <h1>{props.pokemon}</h1>
+          <h1>{t(`pkm.${props.pokemon}`)}</h1>
           <div className="spacer" />
           <p className="dust">
             {dust} <img src={getPortraitSrc(p.index)} alt="dust" />

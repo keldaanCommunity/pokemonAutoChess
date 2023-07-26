@@ -100,7 +100,9 @@ export default function SelectedEntity(props: {
               }}
             >
               {availableEmotions.map((e) => (
-                <option value={e}>{e}</option>
+                <option key={e} value={e}>
+                  {e}
+                </option>
               ))}
             </select>
           </div>
@@ -122,7 +124,7 @@ export default function SelectedEntity(props: {
                 detailledPkm.emotion
               )}
             />
-            <h3>{pokemon.name}</h3>
+            <h3>{t(`pkm.${pokemon.name}`)}</h3>
           </div>
           <p style={{ color: RarityColor[pokemon.rarity] }}>{pokemon.rarity}</p>
           <div>

@@ -37,7 +37,9 @@ export function GamePokemonDetail(props: {
         )}
       />
       <div className="game-pokemon-detail-entry">
-        <p className="game-pokemon-detail-entry-name">{props.pokemon.name}</p>
+        <p className="game-pokemon-detail-entry-name">
+          {t(`pkm.${props.pokemon.name}`)}
+        </p>
         <p
           className="game-pokemon-detail-entry-rarity"
           style={{ color: RarityColor[props.pokemon.rarity] }}

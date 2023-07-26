@@ -62,7 +62,7 @@ export function BotManagerPanel(props: { toggleBotManager: () => void }) {
               }}
             >
               <img src={getAvatarSrc(b.avatar)} className="pokemon-portrait" />
-              <p>{b.name}</p>
+              <p>{t(`pkm.${b.name}`)}</p>
               <p>{b.author}</p>
               <p>{b.id}</p>
               <button

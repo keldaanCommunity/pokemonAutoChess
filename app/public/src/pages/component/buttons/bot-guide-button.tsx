@@ -1,4 +1,5 @@
 import React from "react"
+import { t } from "i18next"
 
 export function BotGuideButton() {
   function handleClick() {
