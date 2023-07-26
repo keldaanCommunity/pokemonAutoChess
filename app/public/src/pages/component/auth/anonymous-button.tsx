@@ -1,4 +1,5 @@
 import { getAuth, signInAnonymously, updateProfile } from "firebase/auth"
+import { t } from "i18next"
 import React from "react"
 import {
   uniqueNamesGenerator,
@@ -42,7 +43,7 @@ export default function AnonymousButton() {
             style={{ color: "#464646", paddingLeft: "5px" }}
             className="firebaseui-idp-text"
           >
-            Join as Guest
+            {t("join_as_guest")}
           </span>
         </button>
       </div>

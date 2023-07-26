@@ -3,6 +3,7 @@ import ReactTooltip from "react-tooltip"
 import { BattleResult } from "../../../../../types/enum/Game"
 import { useAppSelector } from "../../../hooks"
 import { Money } from "../icons/money"
+import { t } from "i18next"
 
 export function GameMoneyInfo() {
   const money = useAppSelector((state) => state.game.currentPlayerMoney)
@@ -43,24 +44,16 @@ export function GameMoneyDetail() {
 
   return (
     <div className="game-money-detail">
-      <p className="help">
-        Each stage, gain 5 gold + 1 extra gold if you won the previous battle.
-      </p>
+      <p className="help">{t("passive_income_hint")}</p>
       <p>
         <Money value={`Streak: ${streak === 0 ? 0 : "+" + streak}`} />{" "}
         {lastBattleResult !== null && `(${streakLabel})`}
       </p>
-      <p className="help">
-        Gain 1 bonus gold for every victory or defeat streak, up to 5 bonus
-        gold.
-      </p>
+      <p className="help">{t("victory_income_hint")}</p>
       <p>
         <Money value={`Interest: +${interest}`} />
       </p>
-      <p className="help">
-        Gain 1 bonus gold per 10 gold saved, up to 5 bonus income at 50 saved
-        gold.
-      </p>
+      <p className="help">{t("additional_income_hint")}</p>
     </div>
   )
 }

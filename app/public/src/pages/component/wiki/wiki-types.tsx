@@ -3,6 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
 import WikiType from "./wiki-type"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import SynergyIcon from "../icons/synergy-icon"
+import { t } from "i18next"
 
 export default function WikiTypes() {
   return (
@@ -15,7 +16,7 @@ export default function WikiTypes() {
             </Tab>
           )
         })}
-        <Tab key="title-all">ALL</Tab>
+        <Tab key="title-all">{t("ALL")}</Tab>
       </TabList>
 
       {(Object.keys(Synergy) as Synergy[]).map((r) => {

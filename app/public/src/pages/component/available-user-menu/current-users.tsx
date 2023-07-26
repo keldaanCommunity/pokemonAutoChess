@@ -5,13 +5,16 @@ import { setTabIndex } from "../../../stores/LobbyStore"
 import { searchById, searchName } from "../../../stores/NetworkStore"
 import Avatar from "../avatar"
 import "./current-users.css"
+import { t } from "i18next"
 
 export default function CurrentUsers() {
   const users: ILobbyUser[] = useAppSelector((state) => state.lobby.users)
 
   return (
     <div className="nes-container hidden-scrollable current-users-menu">
-      <h1>Online: {users.length}</h1>
+      <h1>
+        {t("online")}: {users.length}
+      </h1>
       <ul>
         {users.map((v, i) => (
           <User key={i} v={v} />

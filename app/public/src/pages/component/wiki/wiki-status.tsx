@@ -1,8 +1,8 @@
 import React from "react"
 import { Status } from "../../../../../types/enum/Status"
-import { StatusDescription } from "../../../../../types/strings/Status"
 import { addIconsToDescription } from "../../utils/descriptions"
 import TestStatusAnim from "../anim/TestStatusAnim"
+import { t } from "i18next"
 
 export const PARAMS_ANIM_BY_STATUS: {
   [key in Status]: {
@@ -75,7 +75,7 @@ export default function WikiStatus() {
           ></TestStatusAnim>
           <h2>{addIconsToDescription(status)}</h2>
           <p className="description">
-            {addIconsToDescription(StatusDescription[status]["eng"])}
+            {addIconsToDescription(t(`status_description.${status}`))}
           </p>
         </li>
       ))}

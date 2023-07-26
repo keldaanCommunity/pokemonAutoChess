@@ -27,7 +27,9 @@ export function BoosterCard(props: { pkm: string; shards: number }) {
       <div className="front">
         <img src={getPortraitSrc(props.pkm)}></img>
         <p className="name">{pokemon.name}</p>
-        <p>{props.shards} shards</p>
+        <p>
+          {props.shards} {t("shards")}
+        </p>
       </div>
     </div>
   )

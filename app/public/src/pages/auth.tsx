@@ -17,7 +17,7 @@ export default function Auth() {
         <p className="mobile-warning">{t("mobile_warning")}</p>
       )}
       <main>
-        <h1>Pokemon Auto Chess</h1>
+        <h1>{t("pokemon_auto_chess")}</h1>
         <div className="nintendo">
           <p>{t("nintendo_warning")}</p>
         </div>

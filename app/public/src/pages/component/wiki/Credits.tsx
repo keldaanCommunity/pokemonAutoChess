@@ -1,3 +1,4 @@
+import { t } from "i18next"
 import { ICreditName } from "../../../../../types"
 import React from "react"
 
@@ -33,7 +34,7 @@ export default function Credits(props: {
       <dd>{props.primary.length > 0 && findCredits(props.primary)}</dd>
       {props.secondary.length > 0 && (
         <>
-          <dt>Others</dt>
+          <dt>{t("others")}</dt>
           <dd>
             <ul style={{ paddingLeft: "12ch" }}>
               {props.secondary.map((s) => (

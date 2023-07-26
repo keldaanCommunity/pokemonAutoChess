@@ -1,6 +1,7 @@
 import React from "react"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { lockClick } from "../../../stores/NetworkStore"
+import { t } from "i18next"
 
 export default function GameLock() {
   const dispatch = useAppDispatch()
@@ -12,7 +13,9 @@ export default function GameLock() {
       onClick={() => {
         dispatch(lockClick())
       }}
-      title={`${shopLocked ? "Unlock" : "Lock"} current shop for next turn`}
+      title={`${shopLocked ? t("unlock") : t("lock")} ${t(
+        "current_shop_for_next_turn"
+      )}`}
     >
       <img
         src={`/assets/ui/lock-${shopLocked ? "close" : "open"}.svg`}

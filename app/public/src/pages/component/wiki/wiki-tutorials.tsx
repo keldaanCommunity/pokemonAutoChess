@@ -1,3 +1,4 @@
+import { t } from "i18next"
 import React, { Component } from "react"
 
 export default class WikiTutorials extends Component {
@@ -14,7 +15,7 @@ export default class WikiTutorials extends Component {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             ></iframe>
-            <h3>How to start a game ?</h3>
+            <h3>{t("tutorial.start")}</h3>
           </li>
           <li className="nes-container">
             <iframe
@@ -25,7 +26,7 @@ export default class WikiTutorials extends Component {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             ></iframe>
-            <h3>How to make a lobby with friends ?</h3>
+            <h3>{t("tutorial.friends")}</h3>
           </li>
           <li className="nes-container">
             <iframe
@@ -36,7 +37,7 @@ export default class WikiTutorials extends Component {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             ></iframe>
-            <h3>Game Screen explained</h3>
+            <h3>{t("tutorial.screen")}</h3>
           </li>
           <li className="nes-container">
             <iframe
@@ -47,15 +48,15 @@ export default class WikiTutorials extends Component {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             ></iframe>
-            <h3>5 Tips for Pokemon AutoChess</h3>
+            <h3>{t("tutorial.tips")}</h3>
           </li>
         </ul>
         <p>
-          Thanks to{" "}
+          {t("thanks_to")}
           <a href="https://www.youtube.com/@batotsu2751" target="_blank">
             Batotsu
           </a>{" "}
-          for his work on tutorial videos !
+          {t("tutorial_work")}
         </p>
       </div>
     )

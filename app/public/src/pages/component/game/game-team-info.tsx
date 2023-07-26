@@ -1,6 +1,7 @@
 import React from "react"
 import ReactTooltip from "react-tooltip"
 import { useAppSelector } from "../../../hooks"
+import { t } from "i18next"
 
 export function GameTeamInfo() {
   const experienceManager = useAppSelector(
@@ -18,10 +19,10 @@ export function GameTeamInfo() {
           place="top"
         >
           <p className="help">
-            Place up to <output>{experienceManager.level}</output> pokemons on
-            your board.
+            {t("place_up_to")} <output>{experienceManager.level}</output>{" "}
+            {t("pokemons_on_your_board")}
           </p>
-          <p className="help">Increase your team size by leveling up</p>
+          <p className="help">{t("team_size_hint")}</p>
         </ReactTooltip>
         <span>
           {boardSize}/{experienceManager.level}

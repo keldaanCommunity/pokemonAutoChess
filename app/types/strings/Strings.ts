@@ -1,41 +1,13 @@
-export const Lobby = {
-  PLACE: {
-    eng: "place",
-    esp: "lugar",
-    fra: "place"
-  },
+import { t } from "i18next"
 
-  RANKING: {
-    eng: "Ranking",
-    esp: "Clasificación",
-    fra: "Classement"
-  }
-}
-
-export function getRankLabel(rank: number, lang = "eng") {
+export function getRankLabel(rank: number) {
   switch (rank) {
     case 1:
-      return {
-        eng: "First place",
-        esp: "Primer lugar",
-        fra: "Première place"
-      }[lang]
+      return t("first_place")
     case 2:
-      return {
-        eng: "Second place",
-        esp: "Secondu lugar",
-        fra: "Seconde place"
-      }[lang]
+      return t("second_place")
     case 3:
-      return {
-        eng: "Third place",
-        esp: "Tercer lugar",
-        fra: "Troisième place"
-      }[lang]
+      return t("third_place")
   }
-  return {
-    eng: `${rank}th place`,
-    esp: `Lugar ${rank}`,
-    fra: `${rank}ème place`
-  }[lang]
+  return `${rank} ${t("th_place")}`
 }

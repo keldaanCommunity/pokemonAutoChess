@@ -2,19 +2,15 @@ import React from "react"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { PrecomputedTypePokemon } from "../../../../../types"
 import { Synergy, SynergyEffects } from "../../../../../types/enum/Synergy"
-import {
-  SynergyName,
-  SynergyDescription
-} from "../../../../../types/strings/Synergy"
 import PRECOMPUTED_TYPE_POKEMONS from "../../../../../models/precomputed/type-pokemons.json"
 import { Pkm } from "../../../../../types/enum/Pokemon"
-import { EffectName } from "../../../../../types/strings/Effect"
 import { SynergyTriggers, RarityColor } from "../../../../../types/Config"
 import { useAppSelector } from "../../../hooks"
 import { getPortraitSrc } from "../../../utils"
 import SynergyIcon from "../icons/synergy-icon"
 import { EffectDescriptionComponent } from "./effect-description"
 import { addIconsToDescription } from "../../utils/descriptions"
+import { t } from "i18next"
 
 const precomputed = PRECOMPUTED_TYPE_POKEMONS as PrecomputedTypePokemon
 
@@ -33,14 +29,14 @@ export default function SynergyDetailComponent(props: {
     <div style={{ maxWidth: "480px" }}>
       <div style={{ display: "flex", alignItems: "center" }}>
         <SynergyIcon type={props.type} size="40px" />
-        <h3 style={{ margin: 0 }}>{SynergyName[props.type].eng}</h3>
+        <h3 style={{ margin: 0 }}>{t(`synergy.${props.type}`)}</h3>
       </div>
-      <p>{addIconsToDescription(SynergyDescription[props.type].eng)}</p>
+      <p>{addIconsToDescription(t(`synergy_description.${props.type}`))}</p>
 
       {SynergyEffects[props.type].map((d, i) => {
         return (
           <div
-            key={EffectName[d]}
+            key={t(`effect.${d}`)}
             style={{
               color:
                 levelReached === SynergyTriggers[props.type][i]
@@ -59,7 +55,7 @@ export default function SynergyDetailComponent(props: {
             }}
           >
             <h5 style={{ fontSize: "1.3vw" }}>
-              ({SynergyTriggers[props.type][i]}) {EffectName[d]}
+              ({SynergyTriggers[props.type][i]}) {t(`effect.${d}`)}
             </h5>
             <EffectDescriptionComponent effect={d} />
           </div>

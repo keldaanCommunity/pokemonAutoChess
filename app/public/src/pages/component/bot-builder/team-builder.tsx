@@ -24,6 +24,7 @@ import {
   ReadWriteMode
 } from "../../../../../types"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
+import { t } from "i18next"
 
 const buttonsStyle: CSS.Properties = {
   left: "10px",
@@ -273,7 +274,7 @@ export default function TeamBuilder(props: { toggleBuilder: () => void }) {
           }}
           className="bubbly blue"
         >
-          Lobby
+          {t("lobby")}
         </button>
         <button
           style={buttonStyle}
@@ -283,7 +284,7 @@ export default function TeamBuilder(props: { toggleBuilder: () => void }) {
           }}
           className="bubbly orange"
         >
-          Import/Load
+          {t("import")}/{t("load")}
         </button>
         <button
           style={buttonStyle}
@@ -293,7 +294,7 @@ export default function TeamBuilder(props: { toggleBuilder: () => void }) {
           }}
           className="bubbly orange"
         >
-          Export
+          {t("export")}
         </button>
         <BotGuideButton />
         <button
@@ -309,19 +310,16 @@ export default function TeamBuilder(props: { toggleBuilder: () => void }) {
           data-tip
           data-for={"mode"}
         >
-          {mode} Mode
+          {mode} {t("mode")}
           <ReactTooltip
             id={"mode"}
             className="customeTheme"
             effect="solid"
             place="bottom"
           >
-            <p>Click to change the current edition mode.</p>
-            <p>
-              {" "}
-              The WRITE mode allow you to place pokemons and items on the board.
-            </p>
-            <p> The ERASE mode allow you to erase pokemons from the board.</p>
+            <p>{t("current_edition_click")}</p>
+            <p>{t("write_mode_hint")}</p>
+            <p> {t("erase_mode_hint")}</p>
           </ReactTooltip>
         </button>
         <button
@@ -339,10 +337,10 @@ export default function TeamBuilder(props: { toggleBuilder: () => void }) {
             effect="solid"
             place="bottom"
           >
-            <p>Click to copy the current step.</p>
-            <p> You can then paste this step later elsewhere.</p>
+            <p>{t("copy_current_step")}</p>
+            <p> {t("paste_current_step")}</p>
           </ReactTooltip>
-          Copy Step
+          {t("copy_step")}
         </button>
         <button
           style={buttonStyle}
@@ -365,14 +363,10 @@ export default function TeamBuilder(props: { toggleBuilder: () => void }) {
             effect="solid"
             place="bottom"
           >
-            <p>Click to paste the copied step on your current step.</p>
-            <p>
-              {" "}
-              It will replace the board of the current step with the one you
-              copied.
-            </p>
+            <p>{t("paste_current_step_click")}</p>
+            <p>{t("paste_current_step_hint")}</p>
           </ReactTooltip>
-          Paste Step
+          {t("paste_step")}
         </button>
       </div>
       <BuilderSynergies />

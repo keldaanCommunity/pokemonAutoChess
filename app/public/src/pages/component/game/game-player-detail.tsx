@@ -5,6 +5,7 @@ import { ArraySchema } from "@colyseus/schema"
 import { Life } from "../icons/life"
 import { Money } from "../icons/money"
 import { getAvatarSrc } from "../../../utils"
+import { t } from "i18next"
 
 export default function GamePlayerDetail(props: {
   name: string
@@ -23,7 +24,9 @@ export default function GamePlayerDetail(props: {
         }}
       >
         <span className="player-name">{props.name}</span>
-        <span>Lvl {props.level}</span>
+        <span>
+          {t("lvl")} {props.level}
+        </span>
         <div className="nes-container">
           <Life value={props.life} />
         </div>
@@ -46,9 +49,11 @@ export default function GamePlayerDetail(props: {
               <img
                 style={{
                   border:
-                    record.result === BattleResult.WIN ? "4px solid #4aa52e"
-                    : record.result === BattleResult.DRAW ? "4px solid #cc6a28"
-                    : "4px solid #8c2022",
+                    record.result === BattleResult.WIN
+                      ? "4px solid #4aa52e"
+                      : record.result === BattleResult.DRAW
+                      ? "4px solid #cc6a28"
+                      : "4px solid #8c2022",
                   marginLeft: "6px",
                   borderRadius: "12px"
                 }}

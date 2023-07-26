@@ -6,6 +6,7 @@ import { getAvatarSrc } from "../../../utils"
 import "./game-player-loading.css"
 import { cc } from "../../utils/jsx"
 import { getGameScene } from "../../game"
+import { t } from "i18next"
 
 export default function GamePlayerLoadingBar(props: { player: IPlayer }) {
   const selfPlayerId = getGameScene()?.uid
@@ -33,7 +34,9 @@ export default function GamePlayerLoadingBar(props: { player: IPlayer }) {
       </div>
 
       <p>{props.player.name}</p>
-      <p>ELO: {props.player.elo}</p>
+      <p>
+        {t("elo")}: {props.player.elo}
+      </p>
     </div>
   )
 }

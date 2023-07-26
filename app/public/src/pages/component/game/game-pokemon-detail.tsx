@@ -5,8 +5,6 @@ import { RarityColor } from "../../../../../types/Config"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Rarity, Stat } from "../../../../../types/enum/Game"
 import { Passive } from "../../../../../types/enum/Passive"
-import { PassiveDescription } from "../../../../../types/strings/Passive"
-import { StatLabel } from "../../../../../types/strings/Stat"
 import { getPortraitSrc } from "../../../utils"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { AbilityTooltip } from "../ability/ability-tooltip"
@@ -60,7 +58,7 @@ export function GamePokemonDetail(props: {
             <img
               src={`assets/icons/${stat}.png`}
               alt={stat}
-              title={StatLabel[stat]["eng"]}
+              title={t(`stat.${stat}`)}
             />
             <p>{value}</p>
           </div>
@@ -70,8 +68,10 @@ export function GamePokemonDetail(props: {
       {props.pokemon.passive !== Passive.NONE && (
         <div className="game-pokemon-detail-passive">
           <p>
-            Passive:{" "}
-            {addIconsToDescription(PassiveDescription[props.pokemon.passive])}
+            {t("passive")}:
+            {addIconsToDescription(
+              t(`passive_description.${props.pokemon.passive}`)
+            )}
           </p>
         </div>
       )}

@@ -3,6 +3,7 @@ import { useAppSelector } from "../../../hooks"
 import { useAppDispatch } from "../../../hooks"
 import { levelClick } from "../../../stores/NetworkStore"
 import { Money } from "../icons/money"
+import { t } from "i18next"
 
 export default function GameExperience() {
   const dispatch = useAppDispatch()
@@ -14,7 +15,9 @@ export default function GameExperience() {
 
   return (
     <div className="nes-container game-experience">
-      <span>Lvl {experienceManager.level}</span>
+      <span>
+        {t("lvl")} {experienceManager.level}
+      </span>
       <button
         className="bubbly orange buy-xp-button"
         title="Buy 4 XP for 4 gold (shortcut: F)"

@@ -7,6 +7,7 @@ import { IMeta } from "../../../../../models/mongo-models/meta"
 import { IItemsStatistic } from "../../../../../models/mongo-models/items-statistic"
 import PokemonStatistic from "./pokemon-statistic"
 import { IPokemonsStatistic } from "../../../../../models/mongo-models/pokemons-statistic"
+import { t } from "i18next"
 
 const buttonStyle = {
   marginLeft: "10px",
@@ -81,9 +82,9 @@ export default function MetaReport(props: {
       >
         <Tabs>
           <TabList>
-            <Tab key="team-comps">Meta Report</Tab>
-            <Tab key="items">Item Report</Tab>
-            <Tab key="pokemons">Pokemon Report</Tab>
+            <Tab key="team-comps">{t("meta_report")}</Tab>
+            <Tab key="items">{t("item_report")}</Tab>
+            <Tab key="pokemons">{t("pokemon_report")}</Tab>
           </TabList>
 
           <TabPanel key="team-comps-panel">
@@ -96,7 +97,7 @@ export default function MetaReport(props: {
                 paddingLeft: "15px"
               }}
             >
-              <h3>Best Team Compositions</h3>
+              <h3>{t("best_team_compositions")}</h3>
               <div
                 style={{
                   display: "flex",
@@ -107,7 +108,7 @@ export default function MetaReport(props: {
                 }}
                 className="my-select"
               >
-                <p style={{ margin: "0px" }}>Rank</p>
+                <p style={{ margin: "0px" }}>{t("rank")}</p>
                 <select
                   value={rankingBy}
                   onChange={(e) => {
@@ -116,13 +117,13 @@ export default function MetaReport(props: {
                   style={{ background: "none", border: "none", color: "white" }}
                 >
                   <option style={optStyle} value="count">
-                    by popularity
+                    {t("by_poularity")}
                   </option>
                   <option style={optStyle} value="mean_rank">
-                    by average place
+                    {t("by_average_place")}
                   </option>
                   <option style={optStyle} value="winrate">
-                    by winrate
+                    {t("by_winrate")}
                   </option>
                 </select>
               </div>
@@ -144,7 +145,7 @@ export default function MetaReport(props: {
                 paddingLeft: "15px"
               }}
             >
-              <h3>Best Items</h3>
+              <h3>{t("best_items")}</h3>
               <div
                 style={{
                   display: "flex",
@@ -155,7 +156,7 @@ export default function MetaReport(props: {
                 }}
                 className="my-select"
               >
-                <p style={{ margin: "0px" }}>Rank</p>
+                <p style={{ margin: "0px" }}>{t("rank")}</p>
                 <select
                   value={itemRankingBy}
                   onChange={(e) => {
@@ -164,10 +165,10 @@ export default function MetaReport(props: {
                   style={{ background: "none", border: "none", color: "white" }}
                 >
                   <option style={optStyle} value="count">
-                    by popularity
+                    {t("by_popularity")}
                   </option>
                   <option style={optStyle} value="rank">
-                    by average place
+                    {t("by_average_place")}
                   </option>
                 </select>
               </div>
@@ -188,7 +189,7 @@ export default function MetaReport(props: {
                 paddingLeft: "15px"
               }}
             >
-              <h3>Best Pokemons</h3>
+              <h3>{t("best_pokemons")}</h3>
               <div
                 style={{
                   display: "flex",
@@ -199,7 +200,7 @@ export default function MetaReport(props: {
                 }}
                 className="my-select"
               >
-                <p style={{ margin: "0px" }}>Rank</p>
+                <p style={{ margin: "0px" }}>{t("rank")}</p>
                 <select
                   value={pokemonRankingBy}
                   onChange={(e) => {
@@ -208,10 +209,10 @@ export default function MetaReport(props: {
                   style={{ background: "none", border: "none", color: "white" }}
                 >
                   <option style={optStyle} value="count">
-                    by popularity
+                    {t("by_popularity")}
                   </option>
                   <option style={optStyle} value="rank">
-                    by average place
+                    {t("by_average_place")}
                   </option>
                 </select>
               </div>

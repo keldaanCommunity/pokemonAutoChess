@@ -2,6 +2,7 @@ import React from "react"
 import DiscordButton from "../buttons/discord-button"
 import GithubButton from "../buttons/github-button"
 import PolicyButton from "../buttons/policy-button"
+import { t } from "i18next"
 
 export default function Media() {
   return (
@@ -11,11 +12,11 @@ export default function Media() {
       <PolicyButton />
       <span>V3.9</span>
       <p>
-        Made by 2 fans, for fans
+        {t("made_for_fans")}
         <br />
-        Non profit / Open Source game
+        {t("non_profit")} / {t("open_source")}
         <br />
-        All rights to The Pokemon Company®
+        {t("copyright")}
       </p>
     </div>
   )

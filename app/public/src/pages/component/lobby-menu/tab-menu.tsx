@@ -7,6 +7,7 @@ import { setTabIndex } from "../../../stores/LobbyStore"
 import BotLeaderboard from "./bot-leaderboard"
 import PlayerLeaderboard from "./player-leaderboard"
 import LevelLeaderboard from "./level-leaderboard"
+import { t } from "i18next"
 import "react-tabs/style/react-tabs.css"
 import "./tab-menu.css"
 
@@ -24,11 +25,11 @@ export default function TabMenu() {
       }}
     >
       <TabList>
-        <Tab>Elo</Tab>
-        <Tab>Level</Tab>
-        <Tab>Bots</Tab>
-        <Tab>Profile</Tab>
-        <Tab>Search</Tab>
+        <Tab>{t("elo")}</Tab>
+        <Tab>{t("level")}</Tab>
+        <Tab>{t("bots")}</Tab>
+        <Tab>{t("profile")}</Tab>
+        <Tab>{t("search")}</Tab>
       </TabList>
       <TabPanel>
         <PlayerLeaderboard />

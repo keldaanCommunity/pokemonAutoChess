@@ -9,6 +9,7 @@ import { Synergy } from "../../../../../types/enum/Synergy"
 import { computeElo } from "../../../../../core/elo"
 import "./after-menu.css"
 import { Role } from "../../../../../types"
+import { t } from "i18next"
 
 export default function AfterMenu() {
   const players = useAppSelector((state) => state.after.players)
@@ -20,8 +21,10 @@ export default function AfterMenu() {
   const currentPlayerId: string = useAppSelector((state) => state.network.uid)
   const currentPlayer = players.find((p) => p.id === currentPlayerId)
   const playerRank = currentPlayer ? currentPlayer.rank : null
-  const humans = players.filter(p => p.role !== Role.BOT)
-  const newElo = currentPlayer ? computeElo(currentPlayer, currentPlayer.rank, currentPlayer.elo, humans) : null
+  const humans = players.filter((p) => p.role !== Role.BOT)
+  const newElo = currentPlayer
+    ? computeElo(currentPlayer, currentPlayer.rank, currentPlayer.elo, humans)
+    : null
   const shouldShowElo = elligibleToELO && currentPlayer && newElo
 
   return (
@@ -54,10 +57,10 @@ export default function AfterMenu() {
         <table>
           <thead>
             <tr>
-              <th>Rank</th>
-              <th>Player</th>
-              <th>Team</th>
-              <th>Synergies</th>
+              <th>{t("rank")}</th>
+              <th>{t("player")}</th>
+              <th>{t("team")}</th>
+              <th>{t("synergies")}</th>
             </tr>
           </thead>
           <tbody>
@@ -97,6 +100,6 @@ export default function AfterMenu() {
   )
 }
 
-function isNotIncomplete(s: { name: Synergy, value: number }){
+function isNotIncomplete(s: { name: Synergy; value: number }) {
   return s.value >= SynergyTriggers[s.name][0]
 }

@@ -4,7 +4,7 @@ import ReactTooltip from "react-tooltip"
 import SynergyDetailComponent from "./synergy-detail-component"
 import SynergyIcon from "../icons/synergy-icon"
 import { Synergy } from "../../../../../types/enum/Synergy"
-import { SynergyName } from "../../../../../types/strings/Synergy"
+import { t } from "i18next"
 
 export default function SynergyComponent(props: {
   type: Synergy
@@ -88,7 +88,7 @@ export default function SynergyComponent(props: {
           })}
         </div>
         <p style={{ margin: "0px", textAlign: "center" }}>
-          {SynergyName[props.type]["eng"]}
+          {t(`synergy.${props.type}`)}
         </p>
       </div>
     </div>

@@ -14,7 +14,7 @@ export function BotGuideButton() {
         handleClick()
       }}
     >
-      How to make a bot Guide
+      {t("how_to_make_a_bot_guide")}
     </button>
   )
 }

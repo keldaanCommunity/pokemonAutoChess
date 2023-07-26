@@ -4,14 +4,12 @@ import { Emotion } from "../../../../types"
 import { Ability } from "../../../../types/enum/Ability"
 import { getPortraitSrc } from "../../utils"
 import { RarityColor } from "../../../../types/Config"
-import { StatLabel } from "../../../../types/strings/Stat"
 import React from "react"
 import ReactDOM from "react-dom"
 import { AbilityTooltip } from "../../pages/component/ability/ability-tooltip"
 import { Pkm, PkmIndex } from "../../../../types/enum/Pokemon"
 import { Passive } from "../../../../types/enum/Passive"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
-import { PassiveDescription } from "../../../../types/strings/Passive"
 import { t } from "i18next"
 
 export default class PokemonDetail extends GameObjects.DOMElement {
@@ -153,7 +151,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
       const statImg = document.createElement("img")
       statImg.src = `assets/icons/${stat}.png`
       statImg.alt = stat
-      statImg.title = StatLabel[stat]["eng"]
+      statImg.title = t(`stat.${stat}`)
       statElm.appendChild(statImg)
       statElm.appendChild(elm)
       statsElm.appendChild(statElm)
@@ -203,7 +201,11 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     ReactDOM.render(
       <p>
         Passive:{" "}
-        {addIconsToDescription(PassiveDescription[passive], abilityTier, ap)}
+        {addIconsToDescription(
+          t(`passive_description.${passive}`),
+          abilityTier,
+          ap
+        )}
       </p>,
       this.passiveDescription
     )

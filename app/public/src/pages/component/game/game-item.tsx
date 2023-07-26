@@ -1,9 +1,9 @@
 import React from "react"
-import { ItemName, ItemDescription } from "../../../../../types/strings/Item"
 import CSS from "csstype"
 import { useAppDispatch } from "../../../hooks"
 import { itemClick } from "../../../stores/NetworkStore"
 import { addIconsToDescription } from "../../utils/descriptions"
+import { t } from "i18next"
 
 const style: CSS.Properties = {
   width: "320px",
@@ -22,8 +22,8 @@ export default function GameItem(props: { item: string }) {
         style={{ width: "96px", height: "96px", imageRendering: "pixelated" }}
         src={"assets/item/" + props.item + ".png"}
       ></img>
-      <h3>{ItemName[props.item]}</h3>
-      <p>{addIconsToDescription(ItemDescription[props.item])}</p>
+      <h3>{t(`item.${props.item}`)}</h3>
+      <p>{addIconsToDescription(t(`item_description.${props.item}`))}</p>
       <button
         onClick={() => {
           dispatch(itemClick(props.item))

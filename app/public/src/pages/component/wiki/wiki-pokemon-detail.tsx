@@ -10,12 +10,10 @@ import { getPortraitSrc } from "../../../utils"
 import SynergyIcon from "../icons/synergy-icon"
 import { AbilityTooltip } from "../ability/ability-tooltip"
 import { Rarity, Stat } from "../../../../../types/enum/Game"
-import { StatLabel } from "../../../../../types/strings/Stat"
 import "./wiki-pokemon-detail.css"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Passive } from "../../../../../types/enum/Passive"
-import { PassiveDescription } from "../../../../../types/strings/Passive"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { useTranslation } from "react-i18next"
 
@@ -120,14 +118,13 @@ export default function WikiPokemonDetail(props: {
           <React.Fragment key={stat}>
             <dt>
               <img src={`assets/icons/${stat}.png`} alt="" />{" "}
-              {StatLabel[stat]["eng"]}
+              {t(`stat.${stat}`)}
             </dt>
             <dd>{pokemon[statProp[stat]]}</dd>
           </React.Fragment>
         ))}
         <dt>
-          <img src={`assets/icons/mana.png`} alt="" />{" "}
-          {StatLabel[Stat.MAX_MANA]["eng"]}
+          <img src={`assets/icons/mana.png`} alt="" /> {t("stat.MAX_MANA")}
         </dt>
         <dd>{pokemon.maxMana}</dd>
       </dl>
@@ -149,7 +146,9 @@ export default function WikiPokemonDetail(props: {
             <dt>Passive</dt>
             <dd>
               <br />
-              {addIconsToDescription(PassiveDescription[pokemon.passive])}
+              {addIconsToDescription(
+                t(`passive_description.${pokemon.passive}`)
+              )}
             </dd>
           </>
         )}

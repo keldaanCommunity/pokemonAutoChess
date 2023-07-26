@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { sendMessage } from "../../../stores/NetworkStore"
 import ChatHistory from "./chat-history"
 import "./chat.css"
+import { t } from "i18next"
 
 export default function Chat(props: { source: string }) {
   const dispatch = useAppDispatch()
@@ -12,7 +13,7 @@ export default function Chat(props: { source: string }) {
 
   return (
     <div className="nes-container user-chat">
-      <h1>{user?.anonymous ? "Chat disabled for anonymous" : "Chat"}</h1>
+      <h1>{user?.anonymous ? t("chat_disabled_anonymous") : "Chat"}</h1>
       <ChatHistory source={props.source} />
       <form
         onSubmit={(e) => {
@@ -25,17 +26,13 @@ export default function Chat(props: { source: string }) {
       >
         <input
           placeholder={
-            user?.anonymous
-              ? "Chat disabled for anonymous users"
-              : "Type here ..."
+            user?.anonymous ? t("chat_disabled_anonymous") : t("type_here")
           }
           disabled={user?.anonymous}
           id="name_field"
           type="text"
           title={
-            user?.anonymous
-              ? "Chat disabled for anonymous users"
-              : "Type here ..."
+            user?.anonymous ? t("chat_disabled_anonymous") : t("type_here")
           }
           onChange={(e) => {
             setCurrentText(e.target.value)
@@ -48,12 +45,10 @@ export default function Chat(props: { source: string }) {
           className="bubbly blue"
           disabled={user?.anonymous}
           title={
-            user?.anonymous
-              ? "Chat disabled for anonymous users"
-              : "Send message"
+            user?.anonymous ? t("chat_disabled_anonymous") : t("send_message")
           }
         >
-          Send
+          {t("send")}
         </button>
       </form>
     </div>

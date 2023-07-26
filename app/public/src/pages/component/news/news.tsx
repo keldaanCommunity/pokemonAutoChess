@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { marked } from "marked"
 import "./news.css"
+import { t } from "i18next"
 
 export default function News() {
   const [newsContent, setNewsContent] = useState("")
@@ -17,9 +18,9 @@ export default function News() {
 
   return (
     <div className="nes-container news">
-      <h1>News</h1>
+      <h1>{t("news")}</h1>
       {isLoading ? (
-        <p>Loading...</p>
+        <p>{t("loading")}</p>
       ) : (
         <div
           className="content nes-container"

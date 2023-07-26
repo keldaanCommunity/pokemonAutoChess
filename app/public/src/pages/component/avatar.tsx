@@ -1,9 +1,9 @@
 import React from "react"
 import Elo from "./elo"
 import { Role } from "../../../../types"
-import { TitleName } from "../../../../types/strings/Title"
 import { RoleBadge } from "./RoleBadge"
 import { getAvatarSrc } from "../../utils"
+import { t } from "i18next"
 
 export default function Avatar(props: {
   elo: number | undefined
@@ -53,7 +53,7 @@ export default function Avatar(props: {
       </div>
       <div style={{ display: "flex", gap: "5px", alignItems: "center" }}>
         <p className="player-title" style={{ margin: "0px" }}>
-          {TitleName[props.title]}
+          {t(`title.${props.title}`)}
         </p>
         {elo}
       </div>

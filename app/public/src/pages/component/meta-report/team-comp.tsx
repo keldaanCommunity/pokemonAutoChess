@@ -4,6 +4,7 @@ import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { getPortraitSrc } from "../../../utils"
 import SynergyIcon from "../icons/synergy-icon"
+import { t } from "i18next"
 
 function capitalizeFirstLetter(string: string) {
   if (string) {
@@ -111,10 +112,18 @@ export default function TeamComp(props: { team: IMeta }) {
       </div>
 
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <p>Average Place: {props.team.mean_rank.toFixed(2)}</p>
-        <p>Winrate: {props.team.winrate.toFixed(2)} %</p>
-        <p>Popularity: {props.team.ratio.toFixed(2)} %</p>
-        <p>Count: {props.team.count}</p>
+        <p>
+          {t("average_place")}: {props.team.mean_rank.toFixed(2)}
+        </p>
+        <p>
+          {t("winrate")}: {props.team.winrate.toFixed(2)} %
+        </p>
+        <p>
+          {t("popularity")}: {props.team.ratio.toFixed(2)} %
+        </p>
+        <p>
+          {t("count")}: {props.team.count}
+        </p>
       </div>
     </div>
   )

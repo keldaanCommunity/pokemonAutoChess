@@ -43,7 +43,6 @@ import {
   IPokemon,
   Transfer
 } from "../types"
-import { TitleName } from "../types/strings/Title"
 import { Pkm, PkmFamily, PkmIndex } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { Pokemon } from "../models/colyseus-models/pokemon"
@@ -693,7 +692,7 @@ export default class GameRoom extends Room<GameState> {
           player.opponentId = id
           player.opponentName = opponent.name
           player.opponentAvatar = opponent.avatar
-          player.opponentTitle = TitleName[opponent.title] ?? ""
+          player.opponentTitle = opponent.title ?? ""
           return id
         } else {
           logger.error(

@@ -1,10 +1,5 @@
 import React from "react"
 import { useAppSelector } from "../../../hooks"
-import { TitleName } from "../../../../../types/strings/Title"
-import {
-  WeatherLabel,
-  WeatherDescription
-} from "../../../../../types/strings/Weather"
 import { getAvatarSrc, getPortraitSrc } from "../../../utils"
 import { cc } from "../../utils/jsx"
 import TimerBar from "./game-timer-bar"
@@ -23,6 +18,7 @@ import SynergyIcon from "../icons/synergy-icon"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Emotion } from "../../../../../types"
+import { t } from "i18next"
 
 export default function GameStageInfo() {
   const name = useAppSelector((state) => state.game.currentPlayerName)
@@ -52,23 +48,25 @@ export default function GameStageInfo() {
             place="bottom"
           >
             <p>
-              <span className="help">PVE Stages:</span>{" "}
+              <span className="help">{t("pve_stages")}:</span>{" "}
               {NeutralStage.map((s) => s.turn).join(", ")}
             </p>
             <p>
-              <span className="help">Carousel Stages:</span>{" "}
+              <span className="help">{t("carousel_stages")}:</span>{" "}
               {CarouselStages.join(", ")}
             </p>
             <p>
-              <span className="help">Additional picks:</span> Stages{" "}
-              {AdditionalPicksStages.join(" and ")}
+              <span className="help">{t("additional_picks")}:</span>{" "}
+              {t("stages")} {AdditionalPicksStages.join(t("and"))}
             </p>
             <p>
-              <span className="help">Mythical picks:</span> Stages{" "}
-              {MythicalPicksStages.join(" and ")}
+              <span className="help">{t("mythical_picks")}:</span> {t("stages")}{" "}
+              {MythicalPicksStages.join(t("and"))}
             </p>
           </ReactTooltip>
-          <p>Stage {stageLevel}</p>
+          <p>
+            {t("stage")} {stageLevel}
+          </p>
         </div>
 
         {opponentName === "" && <StagePath />}
@@ -80,7 +78,7 @@ export default function GameStageInfo() {
         >
           <div className="player-information">
             <img src={getAvatarSrc(avatar)} className="pokemon-portrait" />
-            {title && <p className="player-title">{TitleName[title]}</p>}
+            {title && <p className="player-title">{t(`title.${title}`)}</p>}
             <p className="player-name">{name}</p>
           </div>
           {opponentName && (
@@ -114,9 +112,11 @@ export default function GameStageInfo() {
             >
               <span>
                 <SynergyIcon type={SynergyAssociatedToWeather.get(weather)!} />
-                {WeatherLabel[weather]}
+                {t(`weather.${weather}`)}
               </span>
-              <p>{addIconsToDescription(WeatherDescription[weather])}</p>
+              <p>
+                {addIconsToDescription(t(`weather_description.${weather}`))}
+              </p>
             </ReactTooltip>
             <img src={`/assets/icons/weather/${weather.toLowerCase()}.svg`} />
           </div>
@@ -189,7 +189,11 @@ export function StagePath() {
     if (neutralStage) {
       path.push({
         level,
-        icon: getPortraitSrc(PkmIndex[neutralStage.avatar], false, Emotion.NORMAL),
+        icon: getPortraitSrc(
+          PkmIndex[neutralStage.avatar],
+          false,
+          Emotion.NORMAL
+        ),
         title: record?.name ?? neutralStage.name,
         result: record?.result
       })

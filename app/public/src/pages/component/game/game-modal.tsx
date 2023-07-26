@@ -28,13 +28,10 @@ export default function GameModal(props: {
             props.hideModal(false)
           }}
         >
-          Close
+          {t("close")}
         </button>
-        <button
-          className="bubbly red"
-          onClick={props.leave}
-        >
-          Leave game
+        <button className="bubbly red" onClick={props.leave}>
+          {t("leave_game")}
         </button>
       </Modal.Footer>
     </Modal>

@@ -6,6 +6,7 @@ import { getPortraitSrc } from "../../../utils"
 import { getEmotionCost } from "../../../../../types/Config"
 import { cc } from "../../utils/jsx"
 import "./pokemon-emotion.css"
+import { t } from "i18next"
 
 export default function PokemonEmotion(props: {
   index: string
@@ -48,7 +49,7 @@ export default function PokemonEmotion(props: {
     >
       <img src={getPortraitSrc(props.index, props.shiny, props.emotion)} />
       {props.unlocked ? (
-        <p>{props.emotion}</p>
+        <p>{t(`emotion.${props.emotion}`)}</p>
       ) : (
         <p>
           <span>{cost}</span>

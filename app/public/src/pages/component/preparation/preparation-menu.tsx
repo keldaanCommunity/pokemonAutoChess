@@ -24,6 +24,7 @@ import Elo from "../elo"
 import InlineAvatar from "../inline-avatar"
 import { IBot } from "../../../../../models/mongo-models/bot-v2"
 import { Role } from "../../../../../types"
+import { t } from "i18next"
 
 export default function PreparationMenu(props: {
   setToGame: Dispatch<SetStateAction<boolean>>
@@ -64,8 +65,10 @@ export default function PreparationMenu(props: {
   const [botsSelection, setBotsSelection] = useState<Set<IBot>>(new Set())
 
   const humans = users.filter((u) => !u.isBot)
-  const isElligibleForELO = users.filter(u => !u.isBot).length >= 2
-  const averageElo = Math.round(humans.reduce((acc, u) => acc + u.elo, 0) / humans.length)
+  const isElligibleForELO = users.filter((u) => !u.isBot).length >= 2
+  const averageElo = Math.round(
+    humans.reduce((acc, u) => acc + u.elo, 0) / humans.length
+  )
 
   function sortBy(criteria: string) {
     if (sortBotsCriteria === criteria) {
@@ -88,7 +91,7 @@ export default function PreparationMenu(props: {
 
   function makePrivate() {
     if (password === null) {
-      const newPassword = prompt(`Enter a password for the room`)
+      const newPassword = prompt(t("enter_password"))
       dispatch(changeRoomPassword(newPassword))
     } else {
       dispatch(changeRoomPassword(null))
@@ -115,7 +118,9 @@ export default function PreparationMenu(props: {
         onClick={() => {
           dispatch(deleteRoom())
         }}
-      >Delete room</button>
+      >
+        {t("delete_room")}
+      </button>
     ) : null
 
   return (
@@ -125,17 +130,27 @@ export default function PreparationMenu(props: {
       </h1>
 
       <div className="elo-elligibility">
-        {noElo === true ? <p><img
-          alt="Just for fun"
-          title="Just for fun (no ELO gain/loss)"
-          className="noelo-icon"
-          src="/assets/ui/noelo.png"
-          style={{ borderRadius: "50%" }}
-        />This game is just for fun, no ELO gain/loss !</p>
-        : isElligibleForELO ? <p>✔ This game is elligible for ELO gain/loss. Average ELO: {averageElo} ; GLHF !</p>
-        : users.length > 1 ?<p>❌Games with bots only are not elligible for ELO gain/loss.</p>
-        : <p>Add bots or wait for more players to join your room</p>
-        }
+        {noElo === true ? (
+          <p>
+            <img
+              alt="Just for fun"
+              title="Just for fun (no ELO gain/loss)"
+              className="noelo-icon"
+              src="/assets/ui/noelo.png"
+              style={{ borderRadius: "50%" }}
+            />
+            {t("just_for_fun_hint")}
+          </p>
+        ) : isElligibleForELO ? (
+          <p>
+            {t("elligible_elo_hint")} {t("average_elo")}: {averageElo} ;{" "}
+            {t("GLHF")} !
+          </p>
+        ) : users.length > 1 ? (
+          <p>{t("not_elligible_elo_hint")}</p>
+        ) : (
+          <p>A{t("add_bot_or_wait_hint")}</p>
+        )}
       </div>
 
       <div className="preparation-menu-users">
@@ -162,7 +177,7 @@ export default function PreparationMenu(props: {
                 onChange={() => makePrivate()}
               />
               <span>
-                Private lobby {password && ` (Password: ${password})`}
+                {t("private_lobby")} {password && ` (Password: ${password})`}
               </span>
             </label>
             <label title="No ELO gain or loss for this game">
@@ -172,29 +187,31 @@ export default function PreparationMenu(props: {
                 checked={noElo === true}
                 onChange={() => toggleElo()}
               />
-              <span>Just for fun</span>
+              <span>{t("just_for_fun")}</span>
             </label>
             <div className="spacer"></div>
           </div>
-          {user && !user.anonymous && (<div className="actions">
-            <input
-              maxLength={30}
-              type="text"
-              className="my-input"
-              placeholder={name}
-              style={{ flex: 1 }}
-              onChange={(e) => {
-                setInputValue(e.target.value)
-              }}
-            />
-            <button
-              style={{ marginLeft: "10px" }}
-              className="bubbly blue"
-              onClick={() => dispatch(changeRoomName(inputValue))}
-            >
-              Change room name
-            </button>
-          </div>)}
+          {user && !user.anonymous && (
+            <div className="actions">
+              <input
+                maxLength={30}
+                type="text"
+                className="my-input"
+                placeholder={name}
+                style={{ flex: 1 }}
+                onChange={(e) => {
+                  setInputValue(e.target.value)
+                }}
+              />
+              <button
+                style={{ marginLeft: "10px" }}
+                className="bubbly blue"
+                onClick={() => dispatch(changeRoomName(inputValue))}
+              >
+                {t("change_room_name")}
+              </button>
+            </div>
+          )}
         </>
       )}
 
@@ -213,7 +230,7 @@ export default function PreparationMenu(props: {
                 }
               }}
             >
-              Add Bot
+              {t("add_bot")}
             </button>
 
             <select
@@ -223,20 +240,20 @@ export default function PreparationMenu(props: {
                 setBotDifficulty(parseInt(e.target.value))
               }}
             >
-              <option value={BotDifficulty.EASY}>Easy (&lt;800)</option>
-              <option value={BotDifficulty.MEDIUM}>Normal (800-1099)</option>
-              <option value={BotDifficulty.HARD}>Hard (1100-1400)</option>
-              <option value={BotDifficulty.EXTREME}>Extreme (&gt;1400)</option>
-              <option value={BotDifficulty.CUSTOM}>Custom</option>
+              <option value={BotDifficulty.EASY}>{t("easy_bot")}</option>
+              <option value={BotDifficulty.MEDIUM}>{t("normal_bot")}</option>
+              <option value={BotDifficulty.HARD}>{t("hard_bot")}</option>
+              <option value={BotDifficulty.EXTREME}>{t("extreme_bot")}</option>
+              <option value={BotDifficulty.CUSTOM}>{t("custom_bot")}</option>
             </select>
           </>
         ) : (
           <p className="room-leader">
-            Room leader: {ownerName}{" "}
+            {t("room_leader")}: {ownerName}{" "}
             {password && (
               <>
                 <br />
-                Room password: {password}
+                {t("room_password")}: {password}
               </>
             )}
           </p>
@@ -250,7 +267,7 @@ export default function PreparationMenu(props: {
             dispatch(toggleReady())
           }}
         >
-          Ready {isReady ? "✔" : "?"}
+          {t("ready")} {isReady ? "✔" : "?"}
         </button>
 
         {isOwner && (
@@ -263,7 +280,7 @@ export default function PreparationMenu(props: {
             data-tip
             data-for={"start-game"}
           >
-            Start Game
+            {t("start_game")}
           </button>
         )}
       </div>
@@ -271,7 +288,7 @@ export default function PreparationMenu(props: {
       {isOwner && botsListSorted != null && (
         <dialog open className="nes-container bots-list">
           <header>
-            <h2>Select bots for this game</h2>
+            <h2>{t("select_bots_for_this_game")}</h2>
             <div className="spacer"></div>
             <input
               type="search"
@@ -287,7 +304,7 @@ export default function PreparationMenu(props: {
               }}
               className="bubbly pink"
             >
-              Sort by ELO
+              {t("sort_by_elo")}
             </button>
             <button
               onClick={() => {
@@ -295,7 +312,7 @@ export default function PreparationMenu(props: {
               }}
               className="bubbly blue"
             >
-              Sort by name
+              {t("sort_by_name")}
             </button>
           </header>
           <ul>
@@ -330,7 +347,7 @@ export default function PreparationMenu(props: {
                 dispatch(setBotsList(null))
               }}
             >
-              Cancel
+              {t("cancel")}
             </button>
             <button
               className="bubbly blue"
@@ -339,7 +356,8 @@ export default function PreparationMenu(props: {
                 dispatch(setBotsList(null))
               }}
             >
-              Add {botsSelection.size} bot{botsSelection.size === 1 ? "" : "s"}
+              {t("add")} {botsSelection.size} {t("bot")}
+              {botsSelection.size === 1 ? "" : "s"}
             </button>
           </footer>
         </dialog>

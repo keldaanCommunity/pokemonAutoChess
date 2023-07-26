@@ -21,6 +21,7 @@ import GameState from "../../../../../rooms/states/game-state"
 import { useNavigate } from "react-router"
 import { MAX_PLAYERS_PER_LOBBY } from "../../../../../types/Config"
 import { logger } from "../../../../../utils/logger"
+import { t } from "i18next"
 
 export default function RoomMenu(props: {
   toPreparation: boolean
@@ -141,8 +142,10 @@ export default function RoomMenu(props: {
   return (
     <Tabs className="nes-container room-menu">
       <TabList>
-        <Tab>Available Rooms</Tab>
-        <Tab>In Game ({gameRooms.length})</Tab>
+        <Tab>{t("available_rooms")}</Tab>
+        <Tab>
+          {t("in_game")} ({gameRooms.length})
+        </Tab>
       </TabList>
 
       <TabPanel>
@@ -150,8 +153,7 @@ export default function RoomMenu(props: {
           <>
             {preparationRooms.length === 0 && (
               <p className="subtitle">
-                {isFreshNewUser ? "Join a lobby" : "Click on Create Room"} to
-                play!
+                {isFreshNewUser ? t("join_a_lobby") : t("click_on_create_room")}
               </p>
             )}
             <ul className="hidden-scrollable">
@@ -166,11 +168,11 @@ export default function RoomMenu(props: {
               disabled={isFreshNewUser}
               className="bubbly green create-room-button"
             >
-              Create Room
+              {t("create_room")}
             </button>
           </>
         ) : (
-          <p className="subtitle">Loading...</p>
+          <p className="subtitle">{t("loading")}</p>
         )}
       </TabPanel>
       <TabPanel>

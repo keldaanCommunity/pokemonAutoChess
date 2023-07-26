@@ -1,9 +1,9 @@
 import React from "react"
-import { ItemName } from "../../../../../types/strings/Item"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import CSS from "csstype"
 import { IItemsStatistic } from "../../../../../models/mongo-models/items-statistic"
 import { getPortraitSrc } from "../../../utils"
+import { t } from "i18next"
 
 const pStyle = {
   fontSize: "1.1vw"
@@ -26,9 +26,13 @@ export default function ItemStatistic(props: { item: IItemsStatistic }) {
           style={imgStyle}
           src={"assets/item/" + props.item.name + ".png"}
         ></img>
-        <p style={pStyle}>{ItemName[props.item.name]}</p>
-        <p style={pStyle}>Average Place: {props.item.rank}</p>
-        <p style={pStyle}>Count: {props.item.count}</p>
+        <p style={pStyle}>{t(`item.${props.item.name}`)}</p>
+        <p style={pStyle}>
+          {t("average_place")}: {props.item.rank}
+        </p>
+        <p style={pStyle}>
+          {t("count")}: {props.item.count}
+        </p>
         <div style={{ display: "flex" }}>
           {props.item.pokemons.map((pokemon) => {
             return (

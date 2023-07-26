@@ -3,18 +3,9 @@ import { Damage, Stat } from "../../../../types/enum/Game"
 import { Status } from "../../../../types/enum/Status"
 import { Synergy } from "../../../../types/enum/Synergy"
 import { Weather } from "../../../../types/enum/Weather"
-import { StatLabel } from "../../../../types/strings/Stat"
-import {
-  StatusDescription,
-  StatusLabel
-} from "../../../../types/strings/Status"
-import { SynergyName } from "../../../../types/strings/Synergy"
-import {
-  WeatherDescription,
-  WeatherLabel
-} from "../../../../types/strings/Weather"
 import SynergyIcon from "../component/icons/synergy-icon"
 import { cc } from "./jsx"
+import { t } from "i18next"
 
 export const iconRegExp =
   /(?<=\W|^)(?:PHYSICAL|SPECIAL|TRUE|ATK|ATK_SPEED|CRIT_CHANCE|CRIT_DAMAGE|DEF|HP|MANA|RANGE|SHIELD|SPE_DEF|AP|BURN|SILENCE|POISON|FREEZE|PROTECT|SLEEP|CONFUSION|WOUND|RESURECTION|PARALYSIS|ARMOR_REDUCTION|GRASS_FIELD|FAIRY_FIELD|RUNE_PROTECT|ELECTRIC_FIELD|PSYCHIC_FIELD|SUN|RAIN|WINDY|SNOW|SANDSTORM|MISTY|STORM|NEUTRAL|NIGHT|NORMAL|GRASS|FIRE|WATER|ELECTRIC|FIGHTING|PSYCHIC|DARK|STEEL|GROUND|POISON|DRAGON|FIELD|MONSTER|HUMAN|AQUATIC|BUG|FLYING|FLORA|ROCK|GHOST|FAIRY|ICE|FOSSIL|SOUND|ARTIFICIAL|BABY|\[[^\]]+\])(?=\W|$)/g
@@ -52,7 +43,7 @@ export function addIconsToDescription(description: string, tier = 0, ap = 0) {
         d = (
           <span key={i} className="description-icon stat">
             <img src={`assets/icons/${token}.png`} />
-            <span className="stat-label">{StatLabel[token].eng}</span>
+            <span className="stat-label">{t(`stat.${token}`)}</span>
           </span>
         )
       } else if (Statuses.includes(token as Status)) {
@@ -60,10 +51,10 @@ export function addIconsToDescription(description: string, tier = 0, ap = 0) {
           <span
             key={i}
             className="description-icon status"
-            title={StatusDescription[token].eng}
+            title={t(`status_description.${token}`)}
           >
             <img src={`assets/icons/${token}.png`} />
-            <span className="status-label">{StatusLabel[token].eng}</span>
+            <span className="status-label">{t(`status.${token}`)}</span>
           </span>
         )
       } else if (Weathers.includes(token as Weather)) {
@@ -71,17 +62,17 @@ export function addIconsToDescription(description: string, tier = 0, ap = 0) {
           <span
             key={i}
             className="description-icon weather"
-            title={WeatherDescription[token]}
+            title={t(`weather_description.${token}`)}
           >
             <img src={`assets/icons/weather/${token.toLowerCase()}.svg`} />
-            <span className="weather-label">{WeatherLabel[token]}</span>
+            <span className="weather-label">{t(`weather.${token}`)}</span>
           </span>
         )
       } else if (Synergies.includes(token as Synergy)) {
         d = (
           <span key={i} className="description-icon synergy">
             <SynergyIcon key={i} type={token as Synergy} size="20px" />
-            <span className="synergy-label">{SynergyName[token].eng}</span>
+            <span className="synergy-label">{t(`synergy.${token}`)}</span>
           </span>
         )
       } else if (/\[[^\]]+\]/.test(token)) {
