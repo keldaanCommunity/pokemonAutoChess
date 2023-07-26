@@ -1,6 +1,6 @@
 import PokemonFactory from "../../models/pokemon-factory"
 import { Ability } from "../../types/enum/Ability"
-import { AttackType, PokemonActionState } from "../../types/enum/Game"
+import { AttackType, PokemonActionState, Rarity } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
@@ -595,20 +595,32 @@ export class HiddenPowerWStrategy extends HiddenPowerStrategy {
     super.process(unown, state, board, target, crit)
     if (unown.team === 0) {
       const player = unown.player!
-      const topSynergy = Array.from(player.synergies).sort(
-        ([s1, v1], [s2, v2]) => v2 - v1
-      )[0][0]
-      const candidates = [
-        ...PRECOMPUTED_TYPE_POKEMONS[topSynergy].pokemons,
-        ...PRECOMPUTED_TYPE_POKEMONS[topSynergy].additionalPokemons
-      ] as Pkm[]
-      const pkm = pickRandomIn(candidates)
-
       const x = player.simulation.room.getFirstAvailablePositionInBench(
         player.id
       )
       if (x !== undefined) {
-        const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
+        const synergiesSortedByLevel = Array.from(player.synergies).sort(
+          ([s1, v1], [s2, v2]) => v2 - v1
+        )
+        const topSynergyCount = synergiesSortedByLevel[0][1]
+        const topSynergies = synergiesSortedByLevel.filter(
+          ([s, v]) => v >= topSynergyCount
+        )
+        const topSynergy = pickRandomIn(topSynergies)[0]
+        const candidates = (
+          [
+            ...PRECOMPUTED_TYPE_POKEMONS[topSynergy].pokemons,
+            ...PRECOMPUTED_TYPE_POKEMONS[topSynergy].additionalPokemons
+          ] as Pkm[]
+        )
+          .map((p) => PokemonFactory.createPokemonFromName(p, player))
+          .filter(
+            (p) =>
+              p.stars === 1 &&
+              [Rarity.RARE, Rarity.EPIC, Rarity.LEGENDARY].includes(p.rarity)
+          )
+
+        const pokemon = pickRandomIn(candidates)
         pokemon.positionX = x
         pokemon.positionY = 0
         player.board.set(pokemon.id, pokemon)
