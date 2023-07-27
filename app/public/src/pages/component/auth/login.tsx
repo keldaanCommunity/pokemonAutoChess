@@ -9,6 +9,7 @@ import { logIn, logOut } from "../../../stores/NetworkStore"
 import { FIREBASE_CONFIG } from "../../utils/utils"
 import AnonymousButton from "./anonymous-button"
 import "./login.css"
+import { t } from "i18next"
 
 export default function Login() {
   const dispatch = useAppDispatch()
@@ -61,11 +62,13 @@ export default function Login() {
   } else {
     return (
       <div id="play-panel">
-        <p className="welcome-text">Welcome {displayName}</p>
+        <p className="welcome-text">
+          {t("welcome")} {displayName}
+        </p>
         <ul className="actions">
           <li>
             <Link className="bubbly green" to={"/lobby"}>
-              Join Lobby
+              {t("join_lobby")}
             </Link>
           </li>
           <li>
@@ -76,7 +79,7 @@ export default function Login() {
                 dispatch(logOut())
               }}
             >
-              Sign-out
+              {t("sign_out")}
             </button>
           </li>
         </ul>

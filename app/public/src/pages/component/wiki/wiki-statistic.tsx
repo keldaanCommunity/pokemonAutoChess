@@ -1,6 +1,7 @@
 import React from "react"
 import CSS from "csstype"
 import { addIconsToDescription } from "../../utils/descriptions"
+import { t } from "i18next"
 
 const imgStyle: CSS.Properties = {
   width: "64px",
@@ -14,88 +15,72 @@ export default function WikiStatistic() {
     <ul className="wiki-stat">
       <li className="nes-container">
         <img style={imgStyle} src="assets/icons/HP.png"></img>
-        <p>Health points</p>
+        <p>{t("stat.HP")}</p>
       </li>
       <li className="nes-container">
         <img style={imgStyle} src="assets/icons/SHIELD.png"></img>
-        <p>Shield</p>
-        <p className="description">
-          Temporary health points.
-          <br />
-          Cannot be healed.
-        </p>
+        <p>{t("stat.SHIELD")}</p>
+        <p className="description">{t("stat_description.SHIELD")}</p>
       </li>
       <li className="nes-container">
         <img style={imgStyle} src="assets/icons/DEF.png"></img>
-        <p>Defense points</p>
+        <p>{t("stat.DEF")}</p>
         <p className="description">
-          {addIconsToDescription(`Reduces PHYSICAL received`)}
+          {addIconsToDescription(t("stat_description.DEF"))}
         </p>
       </li>
       <li className="nes-container">
         <img style={imgStyle} src="assets/icons/SPE_DEF.png"></img>
-        <p>Special Defense points</p>
+        <p>{t("stat.SPE_DEF")}</p>
         <p className="description">
-          {addIconsToDescription(`Reduces SPECIAL received`)}
+          {addIconsToDescription(t("stat_description.SPE_DEF"))}
         </p>
       </li>
       <li className="nes-container">
         <img style={imgStyle} src="assets/icons/MANA.png"></img>
-        <p>Mana points</p>
+        <p>{t("stat.MAX_MANA")}</p>
         <p className="description">
-          {addIconsToDescription(
-            `Amount of mana required to cast ability. Pokemons receive mana with time (10 per second), when attacking (5 per attack) and when receiving damage (10% of incoming damage)`
-          )}
+          {addIconsToDescription(t("stat_description.MAX_MANA"))}
         </p>
       </li>
       <li className="nes-container">
         <img style={imgStyle} src="assets/icons/AP.png"></img>
-        <p>Ability Power (%)</p>
+        <p>{t("stat.AP")} (%)</p>
         <p className="description">
-          {addIconsToDescription(
-            `Increase SPECIAL and ability effects in various ways.`
-          )}
+          {addIconsToDescription(t("stat_description.AP"))}
         </p>
       </li>
       <li className="nes-container">
         <img style={imgStyle} src="assets/icons/ATK.png"></img>
-        <p>Attack Damage</p>
+        <p>{t("stat.ATK")}</p>
         <p className="description">
-          {addIconsToDescription(`Damage inflicted on each basic attack`)}
+          {addIconsToDescription(t("stat_description.ATK"))}
         </p>
       </li>
       <li className="nes-container">
         <img style={imgStyle} src="assets/icons/RANGE.png"></img>
-        <p>Attack Range</p>
+        <p>{t("stat.RANGE")}</p>
         <p className="description">
-          {addIconsToDescription(`1-range pokemon are melee`)}
+          {addIconsToDescription(t("stat_description.RANGE"))}
         </p>
       </li>
       <li className="nes-container">
         <img style={imgStyle} src="assets/icons/ATK_SPEED.png"></img>
-        <p>Attack Speed (Attack/second)</p>
-        <p className="description">
-          Number of attacks per second.
-          <br />
-          Maximum 2.5
-        </p>
+        <p>{t("stat.ATK_SPEED")}</p>
+        <p className="description">{t("stat_description.ATK_SPEED")}</p>
       </li>
       <li className="nes-container">
         <img style={imgStyle} src="assets/icons/CRIT_CHANCE.png"></img>
-        <p>Critical hit chance (%)</p>
+        <p>{t("stat.CRIT_CHANCE")}</p>
         <p className="description">
-          {addIconsToDescription(
-            `Critical hits deal 2x more damage. Abilities cannot crit by default.`
-          )}
+          {addIconsToDescription(t("stat_description.CRIT_CHANCE"))}
         </p>
       </li>
       <li className="nes-container">
         <img style={imgStyle} src="assets/icons/CRIT_DAMAGE.png"></img>
-        <p>Critical hit damage</p>
+        <p>{t("stat.CRIT_DAMAGE")}</p>
         <p className="description">
-          {addIconsToDescription(
-            `Multiplier for critical hits additional damage`
-          )}
+          {addIconsToDescription(t("stat_description.CRIT_DAMAGE"))}
         </p>
       </li>
     </ul>

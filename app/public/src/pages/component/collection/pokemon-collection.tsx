@@ -9,6 +9,7 @@ import SynergyIcon from "../icons/synergy-icon"
 import PokemonEmotionsModal from "./pokemon-emotions-modal"
 import UnownPanel from "./unown-panel"
 import "./pokemon-collection.css"
+import { t } from "i18next"
 
 export default function PokemonCollection(props: {
   toggleCollection: () => void
@@ -30,7 +31,7 @@ export default function PokemonCollection(props: {
           }}
           className="bubbly blue"
         >
-          Back to Lobby
+          {t("back_to_lobby")}
         </button>
         <div className="spacer"></div>
         <label>
@@ -40,7 +41,7 @@ export default function PokemonCollection(props: {
             checked={shinyOnly === true}
             onChange={(e) => setShinyOnly(!shinyOnly)}
           />
-          <span>Shiny Hunter</span>
+          <span>{t("shiny_hunter")}</span>
         </label>
         <button
           onClick={() => {
@@ -54,7 +55,7 @@ export default function PokemonCollection(props: {
             readOnly
             checked={filter === "all"}
           />
-          <span>Show all</span>
+          <span>{t("show_all")}</span>
         </button>
         <button
           onClick={() => {
@@ -68,7 +69,7 @@ export default function PokemonCollection(props: {
             readOnly
             checked={filter === "locked"}
           />
-          <span>Show locked</span>
+          <span>{t("show_locked")}</span>
         </button>
         <button
           onClick={() => {
@@ -82,7 +83,7 @@ export default function PokemonCollection(props: {
             readOnly
             checked={filter === "unlockable"}
           />
-          <span>Show unlockable</span>
+          <span>{t("show_unlockable")}</span>
         </button>
         <button
           onClick={() => {
@@ -96,7 +97,7 @@ export default function PokemonCollection(props: {
             readOnly
             checked={filter === "unlocked"}
           />
-          <span>Show unlocked</span>
+          <span>{t("show_unlocked")}</span>
         </button>
       </header>
       <div className="nes-container">

@@ -5,6 +5,7 @@ import { useAppSelector } from "../../../hooks"
 import { getPortraitSrc } from "../../../utils"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { GamePokemonDetail } from "./game-pokemon-detail"
+import { t } from "i18next"
 
 export function GameAdditionalPokemons() {
   const additionalPokemons = useAppSelector(
@@ -25,10 +26,7 @@ export function GameAdditionalPokemons() {
           effect="solid"
           place="top"
         >
-          <p className="help">
-            Each player picked two additional Pokemon to be available in all
-            players shop for this game.
-          </p>
+          <p className="help">{t("additional_pokemon_hint")}</p>
         </ReactTooltip>
         <div
           className="nes-container game-additional-pokemons"

@@ -30,9 +30,11 @@ import { playSound, SOUNDS } from "./utils/audio"
 import { IBot } from "../../../models/mongo-models/bot-v2"
 import { logger } from "../../../utils/logger"
 import { GameUser } from "../../../models/colyseus-models/game-user"
+import { useTranslation } from "react-i18next"
 
 export default function Preparation() {
   const dispatch = useAppDispatch()
+  const { t } = useTranslation()
   const client: Client = useAppSelector((state) => state.network.client)
   const room: Room<PreparationState> | undefined = useAppSelector(
     (state) => state.network.preparation
@@ -228,7 +230,7 @@ export default function Preparation() {
                 room?.connection.close()
               }}
             >
-              Return to Lobby
+              {t("back_to_lobby")}
             </button>
           </Link>
         </nav>

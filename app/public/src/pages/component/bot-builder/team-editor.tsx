@@ -5,6 +5,7 @@ import ReactTooltip from "react-tooltip"
 import CSS from "csstype"
 import { IStep } from "../../../../../models/mongo-models/bot-v2"
 import { getPortraitSrc } from "../../../utils"
+import { t } from "i18next"
 
 const tabStyle: CSS.Properties = {
   margin: "10px",
@@ -78,30 +79,15 @@ export default function TeamEditor(props: {
     <div className="nes-container" style={tabStyle}>
       <div style={{ display: "flex", alignItems: "center" }}>
         <p data-tip data-for={"help"}>
-          Help
+          {t("help")}
         </p>
         <ReactTooltip id={"help"} className="customeTheme" effect="solid">
-          <p>To create a bot, you need to fill a certain number of steps.</p>
-          <p>
-            Each step represents the state of your bot at a moment in the game
-          </p>
-          <p>
-            The bot will start with the team defined on step 1. Then, it will go
-            to step 2 and so on
-          </p>
-          <p>
-            The team of the step 2 should always be stronger than the step 1
-            team
-          </p>
-          <p>
-            As the player cannot get more than 10 pokemons/step, your bot is not
-            allowed too.
-          </p>
+          <p>{t("help_create_bot")}</p>
         </ReactTooltip>
 
         <div className="nes-field is-inline">
           <label style={labelStyle} htmlFor="default_select">
-            Avatar
+            {t("avatar")}
           </label>
           <div style={{ width: "auto" }} className="my-select">
             <select
@@ -126,7 +112,7 @@ export default function TeamEditor(props: {
         </div>
         <div className="nes-field is-inline">
           <label style={labelStyle} htmlFor="inline_field">
-            Author
+            {t("author")}
           </label>
           <input
             onChange={props.handleAuthorChange}
@@ -139,7 +125,7 @@ export default function TeamEditor(props: {
         </div>
         <div className="nes-field is-inline">
           <label style={labelStyle} htmlFor="inline_field">
-            Elo
+            {t("elo")}
           </label>
           <input
             onChange={props.handleEloChange}
@@ -190,28 +176,17 @@ export default function TeamEditor(props: {
                       textColor="#000000"
                       effect="solid"
                     >
-                      <p>
-                        Points required represent how much your bot needs to
-                        work to get to the next step
-                      </p>
-                      <p>
-                        Once your bot has acquired enough points, it will go to
-                        the next step
-                      </p>
+                      <p>{t("points_required_hint")}</p>
+                      <p>{t("next_step_hint")}</p>
                       <ul className="nes-list is-disc">
-                        <li>For a victory, your bot will get 1.5 point</li>
-                        <li>
-                          For a defeat or a draw, your bot will get 1 point
-                        </li>
+                        <li>{t("victory_step_hint")}</li>
+                        <li>{t("defeat_step_hint")}</li>
                       </ul>
-                      <p>
-                        The more points you require, the longer the bot will
-                        stay on this step
-                      </p>
+                      <p>{t("step_bot_hint")}</p>
                     </ReactTooltip>
-                    Points required: {props.steps[i].roundsRequired}
+                    {t("points_required")}: {props.steps[i].roundsRequired}
                   </label>
-                  <p>Faster</p>
+                  <p>{t("faster")}</p>
                   <div style={{ flexGrow: "0.4" }}>
                     <input
                       onChange={props.handleRoundsRequiredChange}
@@ -224,7 +199,7 @@ export default function TeamEditor(props: {
                       step="1"
                     />
                   </div>
-                  <p>Slower</p>
+                  <p>{t("slower")}</p>
                 </div>
                 <div
                   style={{

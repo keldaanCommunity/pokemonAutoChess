@@ -4,6 +4,7 @@ import { useAppSelector } from "../../../hooks"
 import { getGameScene } from "../../game"
 import "./game-loading-screen.css"
 import { Navigate } from "react-router"
+import { t } from "i18next"
 
 export default function GameLoadingScreen(props: { connectError: string }) {
   const players = useAppSelector((state) => state.game.players)
@@ -41,17 +42,16 @@ export default function GameLoadingScreen(props: { connectError: string }) {
           max="100"
         ></progress>
         <p id="status-message">{statusMessage}</p>
-        {props.connectError && <>
-          <p className="error">{props.connectError}</p>
-          <button onClick={() => setToAuth(true)} className="bubbly blue">
-            Back to Lobby
-          </button>
-        </>}
+        {props.connectError && (
+          <>
+            <p className="error">{props.connectError}</p>
+            <button onClick={() => setToAuth(true)} className="bubbly blue">
+              {t("back_to_lobby")}
+            </button>
+          </>
+        )}
       </div>
-      <footer>
-        Players disconnected for more than 3 minutes are kicked out of the
-        game. Game will start after 5 minutes max of loading no matter what.
-      </footer>
+      <footer>{t("players_disconnected_hint")}</footer>
     </div>
   )
 }

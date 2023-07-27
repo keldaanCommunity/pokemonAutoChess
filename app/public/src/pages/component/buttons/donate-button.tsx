@@ -1,3 +1,4 @@
+import { t } from "i18next"
 import React from "react"
 
 export default function DonateButton() {
@@ -5,7 +6,7 @@ export default function DonateButton() {
     <a href="https://en.tipeee.com/pokemon-auto-chess" target="_blank">
       <button className="bubbly pink">
         <img src="assets/ui/donate.svg" alt="" />
-        <span className="btn-txt">Donate</span>
+        <span className="btn-txt">{t("donate")}</span>
         <img
           src="assets/ui/tipeee.svg"
           style={{

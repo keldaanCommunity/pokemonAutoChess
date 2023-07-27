@@ -8,6 +8,7 @@ import { AdditionalPicksStages } from "../../../../../types/Config"
 import { getGameScene } from "../../game"
 import { Pkm, PkmDuo, PkmDuos } from "../../../../../types/enum/Pokemon"
 import "./game-pokemon-propositions.css"
+import { t } from "i18next"
 
 export default function GamePokemonsPropositions() {
   const dispatch = useAppDispatch()
@@ -17,7 +18,10 @@ export default function GamePokemonsPropositions() {
   const stageLevel = useAppSelector((state) => state.game.stageLevel)
 
   const board = getGameScene()?.board
-  const isBenchFull = board && board.getBenchSize() >= (pokemonsProposition.some(p => p in PkmDuo) ? 7 : 8)
+  const isBenchFull =
+    board &&
+    board.getBenchSize() >=
+      (pokemonsProposition.some((p) => p in PkmDuo) ? 7 : 8)
   const life = useAppSelector((state) => state.game.currentPlayerLife)
 
   const [visible, setVisible] = useState(true)
@@ -29,13 +33,11 @@ export default function GamePokemonsPropositions() {
           style={{ visibility: visible ? "visible" : "hidden" }}
         >
           {AdditionalPicksStages.includes(stageLevel) && (
-            <h2>
-              Pick an additional Pokemon. It will be available to everyone.
-            </h2>
+            <h2>{t("pick_additional_pokemon_hint")}</h2>
           )}
           <div className="game-pokemons-proposition-list">
             {pokemonsProposition.map((proposition, index) => {
-              if(proposition in PkmDuos){
+              if (proposition in PkmDuos) {
                 return (
                   <GamePokemonDuoPortrait
                     key={"proposition" + index}
@@ -48,7 +50,9 @@ export default function GamePokemonsPropositions() {
                   />
                 )
               } else {
-                const p = PokemonFactory.createPokemonFromName(proposition as Pkm)
+                const p = PokemonFactory.createPokemonFromName(
+                  proposition as Pkm
+                )
                 return (
                   <GamePokemonPortrait
                     key={"proposition" + index}
@@ -63,9 +67,7 @@ export default function GamePokemonsPropositions() {
               }
             })}
           </div>
-          {isBenchFull && (
-            <p>You must have one free slot on the bench, or two for Duos</p>
-          )}
+          {isBenchFull && <p>{t("free_slot_hint")}</p>}
         </div>
 
         <div className="show-hide-action">
@@ -75,7 +77,7 @@ export default function GamePokemonsPropositions() {
               setVisible(!visible)
             }}
           >
-            {visible ? "Hide" : "Show"}
+            {visible ? t("hide") : t("show")}
           </button>
         </div>
       </div>

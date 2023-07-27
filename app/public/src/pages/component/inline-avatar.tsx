@@ -1,8 +1,8 @@
 import React from "react"
 import { Role } from "../../../../types"
-import { TitleName } from "../../../../types/strings/Title"
 import { getAvatarSrc } from "../../utils"
 import { RoleBadge } from "./RoleBadge"
+import { t } from "i18next"
 
 export default function InlineAvatar(props: {
   avatar: string
@@ -24,7 +24,7 @@ export default function InlineAvatar(props: {
         src={getAvatarSrc(props.avatar)}
       />
       {props.title && (
-        <span className="player-title">{TitleName[props.title]}</span>
+        <span className="player-title">{t(`title.${props.title}`)}</span>
       )}
       <span
         style={{

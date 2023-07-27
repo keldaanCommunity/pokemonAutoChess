@@ -5,14 +5,12 @@ import { RarityColor } from "../../../../../types/Config"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Rarity, Stat } from "../../../../../types/enum/Game"
 import { Passive } from "../../../../../types/enum/Passive"
-import { AbilityName } from "../../../../../types/strings/Ability"
-import { PassiveDescription } from "../../../../../types/strings/Passive"
-import { StatLabel } from "../../../../../types/strings/Stat"
 import { getPortraitSrc } from "../../../utils"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { AbilityTooltip } from "../ability/ability-tooltip"
 import SynergyIcon from "../icons/synergy-icon"
 import "./game-pokemon-detail.css"
+import { t } from "i18next"
 
 export function GamePokemonDetail(props: {
   pokemon: Pokemon
@@ -39,7 +37,9 @@ export function GamePokemonDetail(props: {
         )}
       />
       <div className="game-pokemon-detail-entry">
-        <p className="game-pokemon-detail-entry-name">{props.pokemon.name}</p>
+        <p className="game-pokemon-detail-entry-name">
+          {t(`pkm.${props.pokemon.name}`)}
+        </p>
         <p
           className="game-pokemon-detail-entry-rarity"
           style={{ color: RarityColor[props.pokemon.rarity] }}
@@ -60,7 +60,7 @@ export function GamePokemonDetail(props: {
             <img
               src={`assets/icons/${stat}.png`}
               alt={stat}
-              title={StatLabel[stat]["eng"]}
+              title={t(`stat.${stat}`)}
             />
             <p>{value}</p>
           </div>
@@ -69,14 +69,19 @@ export function GamePokemonDetail(props: {
 
       {props.pokemon.passive !== Passive.NONE && (
         <div className="game-pokemon-detail-passive">
-          <p>Passive: {addIconsToDescription(PassiveDescription[props.pokemon.passive])}</p>
+          <p>
+            {t("passive")}:
+            {addIconsToDescription(
+              t(`passive_description.${props.pokemon.passive}`)
+            )}
+          </p>
         </div>
       )}
 
       {props.pokemon.skill !== Ability.DEFAULT && (
         <div className="game-pokemon-detail-ult">
           <div className="ability-name">
-            <p>{AbilityName[props.pokemon.skill].eng}</p>
+            <p>{t(`ability.${props.pokemon.skill}`)}</p>
           </div>
           <div>
             <AbilityTooltip
@@ -89,7 +94,7 @@ export function GamePokemonDetail(props: {
             />
           </div>
         </div>
-      )} 
+      )}
     </div>
   )
 }

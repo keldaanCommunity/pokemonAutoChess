@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { getAvatarSrc } from "../../../utils"
 import CSS from "csstype"
 import { addBotDatabase, deleteBotDatabase } from "../../../stores/NetworkStore"
+import { t } from "i18next"
 
 const buttonsStyle: CSS.Properties = {
   left: "10px",
@@ -30,7 +31,7 @@ export function BotManagerPanel(props: { toggleBotManager: () => void }) {
           }}
           className="bubbly blue"
         >
-          Lobby
+          {t("lobby")}
         </button>
       </div>
       <div style={{ display: "flex" }}>
@@ -61,7 +62,7 @@ export function BotManagerPanel(props: { toggleBotManager: () => void }) {
               }}
             >
               <img src={getAvatarSrc(b.avatar)} className="pokemon-portrait" />
-              <p>{b.name}</p>
+              <p>{t(`pkm.${b.name}`)}</p>
               <p>{b.author}</p>
               <p>{b.id}</p>
               <button
@@ -70,7 +71,7 @@ export function BotManagerPanel(props: { toggleBotManager: () => void }) {
                 }}
                 className="bubbly red"
               >
-                Delete
+                {t("delete")}
               </button>
             </div>
           ))}
@@ -89,7 +90,7 @@ export function BotManagerPanel(props: { toggleBotManager: () => void }) {
           }}
           className="nes-container"
         >
-          <h3>Load bot with Url</h3>
+          <h3>{t("load_bot_with_url")}</h3>
           <input
             value={url}
             onChange={(e) => {
@@ -103,7 +104,7 @@ export function BotManagerPanel(props: { toggleBotManager: () => void }) {
               dispatch(addBotDatabase(url))
             }}
           >
-            Load
+            {t("load")}
           </button>
           <div style={{ height: "60%", overflow: "scroll", width: "90%" }}>
             {logs.map((l, i) => (

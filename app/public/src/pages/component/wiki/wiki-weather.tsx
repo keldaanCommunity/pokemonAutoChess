@@ -11,15 +11,12 @@ import {
   SynergyAssociatedToWeather,
   Weather
 } from "../../../../../types/enum/Weather"
-import {
-  WeatherDescription,
-  WeatherLabel
-} from "../../../../../types/strings/Weather"
 import { getPortraitSrc } from "../../../utils"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
 import SynergyIcon from "../icons/synergy-icon"
+import { t } from "i18next"
 
 const pokemonsByWeather: Map<Weather, Pokemon[]> = new Map()
 Object.values(Weather).forEach((weather) => {
@@ -32,16 +29,8 @@ export default function WikiWeather() {
   return (
     <div id="wiki-weather">
       <div className="nes-container">
-        <p>
-          The dominant type of pokemons on the board during a battle can
-          influence the weather. The weather has various effects on all of your
-          team's and opponent's pokemons.
-        </p>
-        <p>
-          It will require at least 8 pokemons of this type on the board to
-          change the weather. Some powerful pokemons also have the ability to
-          change weather by their own.
-        </p>
+        <p>{t("weather_dominant_hint")}</p>
+        <p>{t("weather_dominant_hint2")}</p>
       </div>
       <ul>
         {Object.values(Weather).map((weather: Weather) => (
@@ -51,11 +40,11 @@ export default function WikiWeather() {
                 className="weather-icon"
                 src={`/assets/icons/weather/${weather.toLowerCase()}.svg`}
               />
-              <h2>{WeatherLabel[weather]}</h2>
+              <h2>{t(`weather.${weather}`)}</h2>
               <SynergyIcon type={SynergyAssociatedToWeather.get(weather)!} />
             </header>
             <p className="description">
-              {addIconsToDescription(WeatherDescription[weather])}
+              {addIconsToDescription(t(`weather_description.${weather}`))}
             </p>
             <ul>
               {(pokemonsByWeather.get(weather) ?? []).map((p) => (

@@ -10,26 +10,27 @@ import WikiStatus from "./wiki-status"
 import WikiWeather from "./wiki-weather"
 import "./wiki.css"
 import WikiAbility from "./wiki-ability"
+import { t } from "i18next"
 
 export default function Wiki(props: { toggleWiki: () => void }) {
   return (
     <div id="wiki-page">
       <button onClick={props.toggleWiki} className="bubbly blue">
-        Back to Lobby
+        {t("back_to_lobby")}
       </button>
 
       <div className="nes-container">
         <Tabs>
           <TabList>
-            <Tab key="title-faq">F.A.Q.</Tab>
-            <Tab key="title-tutorials">HOW TO PLAY ?</Tab>
-            <Tab key="title-pokemon">POKEMONS</Tab>
-            <Tab key="title-items">ITEMS</Tab>
-            <Tab key="title-types">SYNERGIES</Tab>
-            <Tab key="title-statistic">STATISTICS</Tab>
-            <Tab key="title-status">STATUS</Tab>
-            <Tab key="title-weather">WEATHER</Tab>
-            <Tab key="title-ability">ABILITIES</Tab>
+            <Tab key="title-faq">{t("faq.faq")}</Tab>
+            <Tab key="title-tutorials">{t("how_to_play")}</Tab>
+            <Tab key="title-pokemon">{t("pokemons_label")}</Tab>
+            <Tab key="title-items">{t("items_label")}</Tab>
+            <Tab key="title-types">{t("synergies_label")}</Tab>
+            <Tab key="title-statistic">{t("statistics_label")}</Tab>
+            <Tab key="title-status">{t("status_label")}</Tab>
+            <Tab key="title-weather">{t("weather_label")}</Tab>
+            <Tab key="title-ability">{t("abilities_label")}</Tab>
           </TabList>
 
           <TabPanel key="faq">

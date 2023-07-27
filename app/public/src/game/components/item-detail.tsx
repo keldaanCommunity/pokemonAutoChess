@@ -2,12 +2,11 @@ import { GameObjects } from "phaser"
 import React from "react"
 import ReactDOM from "react-dom"
 import ReactTooltip from "react-tooltip"
-import { ItemDescription, ItemName } from "../../../../types/strings/Item"
 import { ItemRecipe, ItemStats } from "../../../../types/Config"
 import { Item } from "../../../../types/enum/Item"
-import { StatLabel } from "../../../../types/strings/Stat"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
 import "./item-detail.css"
+import { t } from "i18next"
 
 export function ItemDetailTooltip({
   item,
@@ -23,21 +22,21 @@ export function ItemDetailTooltip({
   return (
     <div className="game-item-detail">
       <img className="game-item-detail-icon" src={`assets/item/${item}.png`} />
-      <p className="game-item-detail-name">{ItemName[item]}</p>
+      <p className="game-item-detail-name">{t(`item.${item}`)}</p>
       <div className="game-item-detail-stats">
         {Object.entries(ItemStats[item]).map(([stat, value]) => (
           <div key={stat}>
             <img
               src={`assets/icons/${stat}.png`}
               alt={stat}
-              title={StatLabel[stat]["eng"]}
+              title={t(`stat.${stat}`)}
             />
             <span>+{value}</span>
           </div>
         ))}
       </div>
       <p className="game-item-detail-description">
-        {addIconsToDescription(ItemDescription[item])}
+        {addIconsToDescription(t(`item_description.${item}`))}
       </p>
       {recipes.length > 0 && depth <= 1 && (
         <div className="game-item-detail-combinations">

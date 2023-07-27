@@ -6,7 +6,6 @@ import WinTileset from "../colyseus-models/win-tileset"
 export interface IUserMetadata {
   uid: string
   displayName: string
-  langage: string
   avatar: string
   wins: number
   exp: number
@@ -38,10 +37,6 @@ const userMetadataSchema = new Schema({
   },
   displayName: {
     type: String
-  },
-  langage: {
-    type: String,
-    default: "eng"
   },
   avatar: {
     type: String,

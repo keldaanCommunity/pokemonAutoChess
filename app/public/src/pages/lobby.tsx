@@ -160,7 +160,6 @@ export default function Lobby() {
                 "name",
                 "avatar",
                 "elo",
-                "langage",
                 "wins",
                 "exp",
                 "level",

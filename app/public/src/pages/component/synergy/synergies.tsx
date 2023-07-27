@@ -3,6 +3,7 @@ import { SynergyTriggers } from "../../../../../types/Config"
 import SynergyComponent from "./synergy-component"
 import CSS from "csstype"
 import { Synergy } from "../../../../../types/enum/Synergy"
+import { t } from "i18next"
 
 const style: CSS.Properties = {
   position: "absolute",
@@ -24,7 +25,7 @@ export default function Synergies(props: { synergies: [string, number][] }) {
     return (
       <div style={style} className="nes-container hidden-scrollable">
         <h5 style={{ padding: "10px", textAlign: "center", fontSize: "1.3vw" }}>
-          Synergies
+          {t("synergies")}
         </h5>
         {Object.keys(Synergy)
           .sort((a, b) => {

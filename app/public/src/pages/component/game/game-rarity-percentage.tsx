@@ -2,7 +2,11 @@ import { Rarity } from "../../../../../types/enum/Game"
 import React from "react"
 import ReactTooltip from "react-tooltip"
 import { useAppSelector } from "../../../hooks"
-import { RarityProbabilityPerLevel, RarityColor } from "../../../../../types/Config"
+import {
+  RarityProbabilityPerLevel,
+  RarityColor
+} from "../../../../../types/Config"
+import { t } from "i18next"
 
 export default function GameRarityPercentage() {
   const level = useAppSelector((state) => state.game.experienceManager.level)
@@ -21,26 +25,26 @@ export default function GameRarityPercentage() {
         effect="solid"
         place="top"
       >
-        <p>Encouter rates</p>
+        <p>{t("encounter_rates")}</p>
         <table style={{ width: "10vw" }}>
           <thead>
             <tr>
-              <th>Rarity</th>
-              <th>Rate</th>
+              <th>{t("rarity")}</th>
+              <th>{t("rate")}</th>
             </tr>
           </thead>
           <tbody>
             {RarityTiers.map((rarity, index) => (
               <tr key={"detail-" + rarity}>
                 <td style={{ color: RarityColor[rarity] }}>{rarity}</td>
-                <td>{Math.ceil(RarityProbabilityPerLevel[level][index] * 100)}%</td>
+                <td>
+                  {Math.ceil(RarityProbabilityPerLevel[level][index] * 100)}%
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
-        <p className="help">
-          Increase your level to raise your chances to get higher tier Pokémon.
-        </p>
+        <p className="help">{t("increase_level_hint")}</p>
       </ReactTooltip>
       <div
         className="nes-container game-rarity-percentage"

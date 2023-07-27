@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
 import { Title } from "../../../../../types"
-import { TitleName, TitleDescription } from "../../../../../types/strings/Title"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import {
   changeAvatar,
@@ -12,6 +11,7 @@ import { getPortraitSrc } from "../../../utils"
 import { cc } from "../../utils/jsx"
 import PlayerBox from "./player-box"
 import History from "./history"
+import { t } from "i18next"
 
 export default function Profile() {
   const user = useAppSelector((state) => state.lobby.user)
@@ -21,10 +21,10 @@ export default function Profile() {
 
       <Tabs>
         <TabList>
-          <Tab>Name</Tab>
-          <Tab>Avatar</Tab>
-          <Tab>Title</Tab>
-          <Tab>Game History</Tab>
+          <Tab>{t("name")}</Tab>
+          <Tab>{t("avatar")}</Tab>
+          <Tab>{t("title_label")}</Tab>
+          <Tab>{t("game_history")}</Tab>
         </TabList>
 
         <TabPanel>
@@ -49,10 +49,12 @@ function NameTab() {
   const dispatch = useAppDispatch()
   const user = useAppSelector((state) => state.lobby.user)
 
-  if(user && user.anonymous){
-    return <div className="nes-container">
-      <p>Anonymous users cannot change their name.</p>
-    </div>
+  if (user && user.anonymous) {
+    return (
+      <div className="nes-container">
+        <p>{t("anonymous_users_name_hint")}</p>
+      </div>
+    )
   }
 
   return user ? (
@@ -154,8 +156,8 @@ function TitleTab() {
             }
           }}
         >
-          <span>{TitleName[k]}</span>
-          <p>{TitleDescription[k]}</p>
+          <span>{t(`title.${k}`)}</span>
+          <p>{t(`title_description.${k}`)}</p>
         </li>
       ))}
     </ul>

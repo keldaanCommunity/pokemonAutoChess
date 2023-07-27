@@ -8,6 +8,7 @@ import { useAppSelector } from "../../../hooks"
 import { getAvatarSrc } from "../../../utils"
 import { loadPreferences, savePreferences } from "../../../preferences"
 import "./game-dps-meter.css"
+import { t } from "i18next"
 
 let lastOpponentName = ""
 let lastOpponentAvatar = ""
@@ -19,13 +20,13 @@ export default function GameDpsMeter() {
   const opponentAvatar = useAppSelector(
     (state) => state.game.currentPlayerOpponentAvatar
   )
-  if(opponentName != lastOpponentName && opponentName != "") {
+  if (opponentName != lastOpponentName && opponentName != "") {
     lastOpponentName = opponentName
   }
-  if(opponentAvatar != lastOpponentAvatar && opponentAvatar != ""){
+  if (opponentAvatar != lastOpponentAvatar && opponentAvatar != "") {
     lastOpponentAvatar = opponentAvatar
   }
-  
+
   const avatar = useAppSelector((state) => state.game.currentPlayerAvatar)
   const name = useAppSelector((state) => state.game.currentPlayerName)
   const [isOpen, setOpen] = useState(loadPreferences().showDpsMeter)
@@ -55,8 +56,8 @@ export default function GameDpsMeter() {
           <header>
             <div>
               <img
-              src={getAvatarSrc(avatar)}
-              className="pokemon-portrait"
+                src={getAvatarSrc(avatar)}
+                className="pokemon-portrait"
               ></img>
               <p>{name}</p>
             </div>
@@ -72,10 +73,10 @@ export default function GameDpsMeter() {
           <Tabs>
             <TabList>
               <Tab key="damage">
-                <p>Damage</p>
+                <p>{t("damage")}</p>
               </Tab>
               <Tab key="heal">
-                <p>Heal</p>
+                <p>{t("heal")}</p>
               </Tab>
             </TabList>
 

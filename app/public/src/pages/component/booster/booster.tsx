@@ -5,6 +5,7 @@ import { openBooster } from "../../../stores/NetworkStore"
 import { cc } from "../../utils/jsx"
 import { BoosterCard } from "./booster-card"
 import "./booster.css"
+import { t } from "i18next"
 
 export default function Booster(props: { toggle: () => void }) {
   const dispatch = useAppDispatch()
@@ -21,13 +22,11 @@ export default function Booster(props: { toggle: () => void }) {
         }}
         className="bubbly blue"
       >
-        Back to Lobby
+        {t("back_to_lobby")}
       </button>
       <div className="nes-container">
         <p className="help">
-          {numberOfBooster === 0
-            ? "Play more games to level up and earn new boosters."
-            : "Open boosters to unlock new avatars and complete your collection !"}
+          {numberOfBooster === 0 ? t("boosters_hint") : t("open_boosters_hint")}
         </p>
         <div className="actions">
           <p>
@@ -44,7 +43,7 @@ export default function Booster(props: { toggle: () => void }) {
             className={cc("bubbly", { blue: numberOfBooster > 0 })}
             disabled={numberOfBooster <= 0}
           >
-            Open a Booster
+            {t("open_booster")}
           </button>
         </div>
         <div className="boosters-content">

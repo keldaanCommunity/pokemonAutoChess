@@ -12,7 +12,6 @@ export interface ILobbyUser {
   name: string
   avatar: string
   elo: number
-  langage: string
   wins: number
   exp: number
   level: number
@@ -24,8 +23,8 @@ export interface ILobbyUser {
   titles: Title[]
   title: "" | Title
   role: Role
-  anonymous: boolean,
-  creationTime: string,
+  anonymous: boolean
+  creationTime: string
   lastSignInTime: string
 }
 export default class LobbyUser extends Schema implements ILobbyUser {
@@ -34,7 +33,6 @@ export default class LobbyUser extends Schema implements ILobbyUser {
   @type("string") avatar: string
   @type("uint16") elo: number
   @type(MapTileset) map = new MapTileset()
-  @type("string") langage: string
   @type("uint16") wins: number
   @type("uint16") exp: number
   @type("uint16") level: number
@@ -56,7 +54,6 @@ export default class LobbyUser extends Schema implements ILobbyUser {
     name: string,
     elo: number,
     avatar: string,
-    langage: string,
     wins: number,
     exp: number,
     level: number,
@@ -77,7 +74,6 @@ export default class LobbyUser extends Schema implements ILobbyUser {
     this.name = name
     this.avatar = avatar
     this.elo = elo
-    this.langage = langage
     this.wins = wins
     this.exp = exp
     this.level = level

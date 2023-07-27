@@ -12,6 +12,7 @@ import { ITracker } from "../../../../../types/ITracker"
 import tracker from "../../../../dist/client/assets/pokemons/tracker.json"
 import { cc } from "../../utils/jsx"
 import "./pokemon-emotions-modal.css"
+import { t } from "i18next"
 
 export default function PokemonEmotionsModal(props: {
   pokemon: Pkm
@@ -65,7 +66,7 @@ export default function PokemonEmotionsModal(props: {
             )}
             className={cc({ unlocked: pConfig != null })}
           />
-          <h1>{props.pokemon}</h1>
+          <h1>{t(`pkm.${props.pokemon}`)}</h1>
           <div className="spacer" />
           <p className="dust">
             {dust} <img src={getPortraitSrc(p.index)} alt="dust" />
@@ -74,7 +75,7 @@ export default function PokemonEmotionsModal(props: {
       </Modal.Header>
       <Modal.Body>
         <section>
-          <p>Normal Emotions</p>
+          <p>{t("normal_emotions")}</p>
           <div>
             {availableEmotions.map((e) => {
               return (
@@ -92,7 +93,7 @@ export default function PokemonEmotionsModal(props: {
           </div>
         </section>
         <section>
-          <p>Shiny Emotions</p>
+          <p>{t("shiny_emotions")}</p>
           <div>
             {availableEmotions.map((e) => {
               return (
@@ -116,12 +117,12 @@ export default function PokemonEmotionsModal(props: {
           disabled={dust < 500}
           onClick={() => dispatch(buyBooster({ index: p.index }))}
         >
-          Buy a new booster for 500{" "}
+          {t("buy_booster_500")}
           <img src={getPortraitSrc(p.index)} alt="dust" />
         </button>
         <div className="spacer"></div>
         <button className="bubbly red" onClick={props.onHide}>
-          Close
+          {t("close")}
         </button>
       </Modal.Footer>
     </Modal>

@@ -7,6 +7,7 @@ import { RemoveButton } from "../buttons/remove-button"
 import Elo from "../elo"
 import InlineAvatar from "../inline-avatar"
 import "./preparation-menu-user.css"
+import { t } from "i18next"
 
 export default function PreparationMenuUser(props: {
   key: string
@@ -16,21 +17,22 @@ export default function PreparationMenuUser(props: {
 }) {
   const dispatch = useAppDispatch()
   const user = useAppSelector((state) => state.preparation.user)
-  const canKick = (props.isOwner || (user && [Role.MODERATOR, Role.ADMIN].includes(user.role)))
+  const canKick =
+    props.isOwner || (user && [Role.MODERATOR, Role.ADMIN].includes(user.role))
 
   const removeButton = props.user.isBot ? (
     <RemoveButton
       onClick={() => {
         dispatch(removeBot(props.user.id))
       }}
-      title="Remove Bot"
+      title={t("remove_bot")}
     />
   ) : canKick && props.user.id !== user?.id ? (
     <RemoveButton
       onClick={() => {
         dispatch(kick(props.user.id))
       }}
-      title="Kick User"
+      title={t("kick_user")}
     />
   ) : null
 

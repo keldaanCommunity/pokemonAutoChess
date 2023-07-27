@@ -1,11 +1,6 @@
 import React, { useState } from "react"
 import ReactTooltip from "react-tooltip"
 import PRECOMPUTED_TYPE_POKEMONS_ALL from "../../../../../models/precomputed/type-pokemons-all.json"
-import {
-  SynergyName,
-  SynergyDescription
-} from "../../../../../types/strings/Synergy"
-import { EffectName } from "../../../../../types/strings/Effect"
 import { SynergyTriggers, RarityColor } from "../../../../../types/Config"
 import { Synergy, SynergyEffects } from "../../../../../types/enum/Synergy"
 import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
@@ -13,22 +8,27 @@ import { getPortraitSrc } from "../../../utils"
 import SynergyIcon from "../icons/synergy-icon"
 import { EffectDescriptionComponent } from "../synergy/effect-description"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
-import PokemonFactory, { isAdditionalPick } from "../../../../../models/pokemon-factory"
+import PokemonFactory, {
+  isAdditionalPick
+} from "../../../../../models/pokemon-factory"
 import { groupBy } from "../../../../../utils/array"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import { Rarity } from "../../../../../types/enum/Game"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import { Ability } from "../../../../../types/enum/Ability"
+import { t } from "i18next"
 
 export default function WikiType(props: { type: Synergy | "all" }) {
   const [hoveredPokemon, setHoveredPokemon] = useState<Pokemon>()
 
   let pokemonsNames: Pkm[]
   if (props.type === "all") {
-    pokemonsNames = Object.values(Pkm).filter(p => p!== Pkm.DEFAULT)
+    pokemonsNames = Object.values(Pkm).filter((p) => p !== Pkm.DEFAULT)
   } else {
-    pokemonsNames = PRECOMPUTED_TYPE_POKEMONS_ALL[props.type].filter(p => p!== Pkm.DEFAULT) as Pkm[]
+    pokemonsNames = PRECOMPUTED_TYPE_POKEMONS_ALL[props.type].filter(
+      (p) => p !== Pkm.DEFAULT
+    ) as Pkm[]
   }
 
   const pokemons = pokemonsNames
@@ -45,13 +45,13 @@ export default function WikiType(props: { type: Synergy | "all" }) {
     })
 
   const pokemonsPerRarity = groupBy(pokemons, (p) => p.rarity)
-  for (let rarity in pokemonsPerRarity) {
-    pokemonsPerRarity[rarity].sort(
-      (a: Pokemon, b: Pokemon) => {
-        const isAddA = isAdditionalPick(a.name), isAddB= isAdditionalPick(b.name)
-        if(isAddA !== isAddB) return +isAddA - +isAddB
-        return a.index < b.index ? -1 : 1
-      })
+  for (const rarity in pokemonsPerRarity) {
+    pokemonsPerRarity[rarity].sort((a: Pokemon, b: Pokemon) => {
+      const isAddA = isAdditionalPick(a.name),
+        isAddB = isAdditionalPick(b.name)
+      if (isAddA !== isAddB) return +isAddA - +isAddB
+      return a.index < b.index ? -1 : 1
+    })
   }
 
   return (
@@ -59,13 +59,19 @@ export default function WikiType(props: { type: Synergy | "all" }) {
       {props.type !== "all" && (
         <>
           <h2>
-            <SynergyIcon type={props.type} /> {SynergyName[props.type].eng}
+            <SynergyIcon type={props.type} /> {t(`synergy.${props.type}`)}
           </h2>
-          <p>{addIconsToDescription(SynergyDescription[props.type].eng)}</p>
+          <p>{addIconsToDescription(t(`synergy_description.${props.type}`))}</p>
           {SynergyEffects[props.type].map((effect, i) => {
             return (
-              <div key={EffectName[effect]} style={{ display: "flex", alignItems: "center" }}>
-                <span>({SynergyTriggers[props.type][i]}) {EffectName[effect]}:&nbsp;</span>
+              <div
+                key={t(`effect.${effect}`)}
+                style={{ display: "flex", alignItems: "center" }}
+              >
+                <span>
+                  ({SynergyTriggers[props.type][i]}) {t(`effect.${effect}`)}
+                  :&nbsp;
+                </span>
                 <EffectDescriptionComponent effect={effect} />
               </div>
             )

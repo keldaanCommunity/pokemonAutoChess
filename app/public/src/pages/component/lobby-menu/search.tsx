@@ -14,6 +14,7 @@ import {
 } from "../../../stores/NetworkStore"
 import { getAvatarSrc } from "../../../utils"
 import PlayerBox from "./player-box"
+import { t } from "i18next"
 
 export default function Search() {
   const dispatch = useAppDispatch()
@@ -28,10 +29,15 @@ export default function Search() {
       <button
         className="bubbly green"
         onClick={() => {
-          dispatch(giveBooster({ numberOfBoosters: Number(prompt("How many boosters ?")) || 1, uid: user.id }))
+          dispatch(
+            giveBooster({
+              numberOfBoosters: Number(prompt("How many boosters ?")) || 1,
+              uid: user.id
+            })
+          )
         }}
       >
-        <p style={{ margin: "0px" }}>Give boosters</p>
+        <p style={{ margin: "0px" }}>{t("give_boosters")}</p>
       </button>
     ) : null
 
@@ -43,7 +49,7 @@ export default function Search() {
           dispatch(ban({ uid: user.id, name: user.name }))
         }}
       >
-        <p style={{ margin: "0px" }}>Ban User</p>
+        <p style={{ margin: "0px" }}>{t("ban_user")}</p>
       </button>
     ) : null
 
@@ -55,7 +61,7 @@ export default function Search() {
           dispatch(unban({ uid: user.id, name: user.name }))
         }}
       >
-        <p style={{ margin: "0px" }}>Unban User</p>
+        <p style={{ margin: "0px" }}>{t("unban_user")}</p>
       </button>
     ) : null
 
@@ -67,7 +73,7 @@ export default function Search() {
           dispatch(setModerator(user.id))
         }}
       >
-        <p style={{ margin: "0px" }}>Set Moderator</p>
+        <p style={{ margin: "0px" }}>{t("set_moderator")}</p>
       </button>
     ) : null
 
@@ -79,7 +85,7 @@ export default function Search() {
           dispatch(setBotManager(user.id))
         }}
       >
-        <p style={{ margin: "0px" }}>Set Bot Manager</p>
+        <p style={{ margin: "0px" }}>{t("set_bot_manager")}</p>
       </button>
     ) : null
 
@@ -104,7 +110,7 @@ export default function Search() {
             dispatch(giveTitle({ uid: user.id, title: title }))
           }}
         >
-          Give Title
+          {t("give_title")}
         </button>
       </div>
     ) : null
@@ -145,14 +151,16 @@ export default function Search() {
       {user && (
         <div className="player-history nes-container">
           <PlayerBox user={user} />
-          {(role === Role.ADMIN || role === Role.MODERATOR) && <div className="actions">
-            {modButton}
-            {botManagerButton}
-            {giveButton}
-            {titleButton}
-            {banButton}
-            {unbanButton}
-          </div>}
+          {(role === Role.ADMIN || role === Role.MODERATOR) && (
+            <div className="actions">
+              {modButton}
+              {botManagerButton}
+              {giveButton}
+              {titleButton}
+              {banButton}
+              {unbanButton}
+            </div>
+          )}
           <History history={user.history} />
         </div>
       )}

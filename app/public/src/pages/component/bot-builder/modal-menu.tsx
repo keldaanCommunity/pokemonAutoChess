@@ -4,6 +4,7 @@ import { IBot } from "../../../../../models/mongo-models/bot-v2"
 import { ModalMode } from "../../../../../types"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { requestBotData } from "../../../stores/NetworkStore"
+import { t } from "i18next"
 
 const textAreaStyle = {
   height: "400px"
@@ -41,7 +42,7 @@ export default function ModalMenu(props: {
   const url =
     props.pasteBinUrl.length == 0 ? null : (
       <h5>
-        URL created !:<a href={props.pasteBinUrl}>{props.pasteBinUrl}</a>
+        {t("url_created")}:<a href={props.pasteBinUrl}>{props.pasteBinUrl}</a>
       </h5>
     )
   const [textArea, handleTextAreaChange] = useState<string>("")
@@ -52,20 +53,13 @@ export default function ModalMenu(props: {
           <Modal.Title>Export</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>
-            You can export your current work by copy pasting the following data.
-            You can then import the bot data later.
-          </p>
+          <p>{t("export_hint")}</p>
           <textarea
             style={textAreaStyle}
             className="nes-textarea"
             defaultValue={JSON.stringify(props.bot, null, 2)}
           ></textarea>
-          <p>
-            If you think that your bot is ready, you can submit your bot to the
-            discord community. Your bot will be reviewed in the discord channel
-            #bot-creation.
-          </p>
+          <p>{t("bot_ready_submission")}</p>
           {url}
         </Modal.Body>
         <Modal.Footer>
@@ -74,7 +68,7 @@ export default function ModalMenu(props: {
             className="bubbly red"
             onClick={props.hideModal}
           >
-            Cancel
+            {t("cancel")}
           </button>
           <button
             style={buttonStyle}
@@ -83,7 +77,7 @@ export default function ModalMenu(props: {
               props.createBot()
             }}
           >
-            Submit your bot
+            {t("submit_your_bot")}
           </button>
         </Modal.Footer>
       </Modal>
@@ -92,12 +86,12 @@ export default function ModalMenu(props: {
     return (
       <Modal show={props.modalBoolean} onHide={props.hideModal} size="lg">
         <Modal.Header>
-          <Modal.Title>Import</Modal.Title>
+          <Modal.Title>{t("import")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>Get started with an existing BOT or paste your own BOT data</p>
+          <p>{t("get_started_bot")}</p>
           <div className="nes-field is-inline" style={{ marginBottom: "10px" }}>
-            <label htmlFor="default_select">Existing BOT</label>
+            <label htmlFor="default_select">{t("existing_bot")}</label>
             <div className="my-select">
               <select
                 defaultValue=""
@@ -109,11 +103,11 @@ export default function ModalMenu(props: {
                 id="default_select"
               >
                 <option value="" hidden>
-                  Select...
+                  {t("select")}
                 </option>
                 {botList.map((bot) => (
                   <option key={bot.id} value={bot.id}>
-                    {bot.name} by {bot.author}
+                    {bot.name} {t("by")} {bot.author}
                   </option>
                 ))}
               </select>
@@ -135,7 +129,7 @@ export default function ModalMenu(props: {
             className="bubbly red"
             onClick={props.hideModal}
           >
-            Cancel
+            {t("cancel")}
           </button>
           <button
             style={buttonStyle}
@@ -144,7 +138,7 @@ export default function ModalMenu(props: {
               props.importBot(textArea)
             }}
           >
-            Import
+            {t("import")}
           </button>
         </Modal.Footer>
       </Modal>

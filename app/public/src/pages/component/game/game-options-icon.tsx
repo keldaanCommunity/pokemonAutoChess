@@ -3,7 +3,7 @@ import "./game-options-icon.css"
 import GameOptionsModal from "./game-options-modal"
 
 export default function GameOptionsIcon(props: { leave: () => void }) {
-  let [isOpen, setOpen] = useState<boolean>(false)
+  const [isOpen, setOpen] = useState<boolean>(false)
 
   const handleKeyPress = useCallback(
     (event) => {

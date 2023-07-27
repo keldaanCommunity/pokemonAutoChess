@@ -1,3 +1,4 @@
+import { t } from "i18next"
 import React from "react"
 
 export default function PolicyButton() {
@@ -7,7 +8,7 @@ export default function PolicyButton() {
       target="_blank"
     >
       <button type="button" className="bubbly">
-        Policy
+        {t("policy")}
       </button>
     </a>
   )

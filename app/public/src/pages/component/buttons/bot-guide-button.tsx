@@ -1,4 +1,5 @@
 import React from "react"
+import { t } from "i18next"
 
 export function BotGuideButton() {
   function handleClick() {
@@ -14,7 +15,7 @@ export function BotGuideButton() {
         handleClick()
       }}
     >
-      How to make a bot Guide
+      {t("how_to_make_a_bot_guide")}
     </button>
   )
 }

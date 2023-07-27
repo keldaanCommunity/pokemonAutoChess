@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import { Item } from "../../../../../types/enum/Item"
-import { ItemDescription, ItemName } from "../../../../../types/strings/Item"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { RarityColor } from "../../../../../types/Config"
@@ -9,10 +8,10 @@ import { getPortraitSrc } from "../../../utils"
 import { DetailledPkm, Emotion } from "../../../../../types"
 import tracker from "../../../../dist/client/assets/pokemons/tracker.json"
 import { ITracker } from "../../../../../types/ITracker"
-import { AbilityName } from "../../../../../types/strings/Ability"
 import SynergyIcon from "../icons/synergy-icon"
 import { AbilityTooltip } from "../ability/ability-tooltip"
 import { addIconsToDescription } from "../../utils/descriptions"
+import { t } from "i18next"
 
 const entityStyle: CSS.Properties = {
   position: "absolute",
@@ -41,9 +40,9 @@ export default function SelectedEntity(props: {
       <div className="nes-container" style={entityStyle}>
         <div style={{ display: "flex" }}>
           <img style={imgStyle} src={"assets/item/" + props.entity + ".png"} />
-          <h3>{ItemName[props.entity as Item]}</h3>
+          <h3>{t(`item.${props.entity}`)}</h3>
         </div>
-        <p>{addIconsToDescription(ItemDescription[props.entity as Item])}</p>
+        <p>{addIconsToDescription(t(`item_description.${props.entity}`))}</p>
       </div>
     )
   } else if (Object.values(Pkm).includes((props.entity as DetailledPkm).pkm)) {
@@ -74,7 +73,7 @@ export default function SelectedEntity(props: {
       <div className="nes-container" style={entityStyle}>
         <div>
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-            <h3>Shiny:</h3>
+            <h3>{t("shiny")}:</h3>
             <input
               type="checkbox"
               checked={detailledPkm.shiny}
@@ -89,7 +88,7 @@ export default function SelectedEntity(props: {
             <h3>{detailledPkm.shiny ? "Yes" : "No"}</h3>
           </div>
           <div style={{ display: "flex", alignItems: "start", gap: "10px" }}>
-            <h3>Emotion: </h3>
+            <h3>{t("emotion_label")}: </h3>
             <select
               value={detailledPkm.emotion}
               onChange={(e) => {
@@ -101,7 +100,9 @@ export default function SelectedEntity(props: {
               }}
             >
               {availableEmotions.map((e) => (
-                <option value={e}>{e}</option>
+                <option key={e} value={e}>
+                  {e}
+                </option>
               ))}
             </select>
           </div>
@@ -123,7 +124,7 @@ export default function SelectedEntity(props: {
                 detailledPkm.emotion
               )}
             />
-            <h3>{pokemon.name}</h3>
+            <h3>{t(`pkm.${pokemon.name}`)}</h3>
           </div>
           <p style={{ color: RarityColor[pokemon.rarity] }}>{pokemon.rarity}</p>
           <div>
@@ -131,13 +132,27 @@ export default function SelectedEntity(props: {
               return <SynergyIcon type={type} key={"img" + type} />
             })}
           </div>
-          <p>Health: {pokemon.hp}</p>
-          <p>Attack: {pokemon.atk}</p>
-          <p>Defense: {pokemon.def}</p>
-          <p>Special Defense: {pokemon.speDef}</p>
-          <p>Range: {pokemon.range}</p>
-          <p>Mana: {pokemon.maxMana}</p>
-          <p>Abilty: {AbilityName[pokemon.skill].eng}</p>
+          <p>
+            {t("stat.HP")}: {pokemon.hp}
+          </p>
+          <p>
+            {t("stat.ATK")}: {pokemon.atk}
+          </p>
+          <p>
+            {t("stat.DEF")}: {pokemon.def}
+          </p>
+          <p>
+            {t("stat.SPE_DEF")}: {pokemon.speDef}
+          </p>
+          <p>
+            {t("stat.RANGE")}: {pokemon.range}
+          </p>
+          <p>
+            {t("stat.MAX_MANA")}: {pokemon.maxMana}
+          </p>
+          <p>
+            {t("ability_label")}: {t(`ability.${pokemon.skill}`)}
+          </p>
           <AbilityTooltip ability={pokemon.skill} />
         </div>
       </div>

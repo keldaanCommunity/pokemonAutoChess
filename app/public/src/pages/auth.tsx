@@ -16,7 +16,7 @@ export default function Auth() {
         </p>
       )}
       <main>
-        <h1>Pokemon Auto Chess</h1>
+        <h1>{t("pokemon_auto_chess")}</h1>
         <div className="nintendo">
           <p>Non profit, open source. All rights to The Pokemon Company®</p>
         </div>

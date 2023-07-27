@@ -2,6 +2,7 @@ import React, { Dispatch, FormEvent, SetStateAction, useState } from "react"
 import Modal from "react-bootstrap/Modal"
 import { loadPreferences, savePreferences } from "../../../preferences"
 import { getGameScene } from "../../game"
+import { t } from "i18next"
 
 export default function GameOptionsModal(props: {
   show: boolean
@@ -29,12 +30,12 @@ export default function GameOptionsModal(props: {
   return (
     <Modal show={props.show}>
       <Modal.Header>
-        <Modal.Title>Options</Modal.Title>
+        <Modal.Title>{t("options")}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <p>
           <label>
-            Music Volume: {musicVolume} %
+            {t("music_volume")}: {musicVolume} %
             <input
               type="range"
               min="0"
@@ -46,7 +47,7 @@ export default function GameOptionsModal(props: {
         </p>
         <p>
           <label>
-            SFX Volume: {sfxVolume} %
+            {t("sfx_volume")}: {sfxVolume} %
             <input
               type="range"
               min="0"
@@ -59,19 +60,19 @@ export default function GameOptionsModal(props: {
       </Modal.Body>
       <Modal.Footer style={{ justifyContent: "space-between" }}>
         <button className="bubbly red" onClick={props.leave}>
-          Leave game
+          {t("leave_game")}
         </button>
         <button
           className="bubbly green"
           onClick={() => {
-            savePreferences({ 
+            savePreferences({
               musicVolume,
               sfxVolume
             })
             props.hideModal(true)
           }}
         >
-          Save
+          {t("save")}
         </button>
       </Modal.Footer>
     </Modal>

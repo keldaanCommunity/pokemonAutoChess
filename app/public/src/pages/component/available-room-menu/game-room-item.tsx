@@ -2,6 +2,7 @@ import { RoomAvailable } from "colyseus.js"
 import React from "react"
 import { IGameMetadata } from "../../../../../types"
 import "./room-item.css"
+import { t } from "i18next"
 
 export default function GameRoomItem(props: {
   room: RoomAvailable<IGameMetadata>
@@ -11,11 +12,12 @@ export default function GameRoomItem(props: {
     <div className="room-item">
       <span className="room-name">{props.room.metadata?.name}</span>
       <span>
-        {props.room.clients} player{props.room.clients !== 1 ? "s" : ""}, Stage{" "}
+        {props.room.clients} {t("player")}
+        {props.room.clients !== 1 ? "s" : ""}, {t("stage")}{" "}
         {props.room.metadata?.stageLevel}
       </span>
       <button className="bubbly blue" onClick={() => props.onSpectate()}>
-        Spectate
+        {t("spectate")}
       </button>
     </div>
   )
