@@ -29,16 +29,18 @@
     "lint": "npx eslint app/",
     "build-client": "node esbuild.js --build",
     "build-server": "tsc",
-    "build": "npm run build-client && npm run build-server",
+    "build": "npm run translate npm run build-client && npm run build-server",
     "start": "node --optimize_for_size --max_old_space_size=800 ./app/public/dist/server/app/index.js",
     "add-bot": "node ./app/public/dist/server/db-commands/populate-bot.js",
     "monitor-bot": "node ./app/public/dist/server/scheduled/monitor-bot.js",
-    "update-items": "node ./app/public/dist/server/db-commands/update-items.js"
+    "update-items": "node ./app/public/dist/server/db-commands/update-items.js",
+    "translate": "npx @inlang/cli machine translate -f"
   },
   "dependencies": {
     "@colyseus/command": "^0.2.1",
     "@colyseus/monitor": "^0.15.1",
     "@colyseus/ws-transport": "^0.15.0",
+    "@inlang/cli": "^0.13.3",
     "@reduxjs/toolkit": "^1.9.2",
     "@types/bootstrap": "^5.2.6",
     "body-parser": "^1.20.1",
