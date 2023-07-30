@@ -580,5 +580,8 @@
         "PINSIR": "pinsir",
         "NATU": "natu",
         "XATU": "xatu"
-      }
+    },
+    "emotion": {
+        "Teary-Eyed": "Olhos marejados"
+    }
 }

@@ -799,5 +799,7 @@
   "ability_description.LIQUIDATION": "Inflige [20,40,80,SP] SPECIAL et retire [1,2,4] DEF de la cible",
   "ability_description.BURN": "BURN toute l'équipe ennemi pendant [5,10,20] secondes",
   "ability_description.POISON": "POISON les [1,2,3] adversaires les plus proches pendant [3,6,9,SP=0.5] secondes",
-  "ability_description.SLEEP": "SLEEP 2 ennemis sur la rangée arrière pendant [1.5,3,4.5] secondes"
+  "ability_description.SLEEP": "SLEEP 2 ennemis sur la rangée arrière pendant [1.5,3,4.5] secondes",
+  "emotion.Teary-Eyed": "Larmoyant",
+  "ability_description.DEFAULT": "Défault"
 }
