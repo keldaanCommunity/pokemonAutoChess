@@ -779,7 +779,7 @@
     "XATU": "xatu"
   },
   "ability_description": {
-    "DEFAULT": "",
+    "DEFAULT": "Default",
     "SOFT_BOILED": "Cures every status effects and grants [20,40,80,SP] SHIELD for every ally",
     "EARTHQUAKE": "Deals damage [30,60,120,SP] SPECIAL to all enemy units in the same column/line of the attacker",
     "SONG_OF_DESIRE": "The target is CONFUSION for [6,SP] seconds",
