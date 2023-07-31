@@ -70,6 +70,7 @@ import { IPokemonsStatistic } from "../../../models/mongo-models/pokemons-statis
 import { cc } from "./utils/jsx"
 import "./lobby.css"
 import { BotManagerPanel } from "./component/bot-builder/bot-manager-panel"
+import { t } from "i18next"
 
 export default function Lobby() {
   const dispatch = useAppDispatch()
@@ -353,7 +354,7 @@ export default function Lobby() {
             }}
           >
             <img src="assets/ui/collection.svg" alt="" />
-            Collection
+            {t("collection")}
           </button>
           <button
             className={cc("bubbly", "blue", { shimmer: numberOfBooster > 0 })}
@@ -362,7 +363,7 @@ export default function Lobby() {
             }}
           >
             <img src="assets/ui/booster.svg" alt="" />
-            Boosters
+            {t("boosters")}
           </button>
           <button
             className="bubbly green"
@@ -371,7 +372,7 @@ export default function Lobby() {
             }}
           >
             <img src="assets/ui/wiki.svg" alt="" />
-            Wiki
+            {t("wiki")}
           </button>
           {user?.anonymous === false && user?.title === Title.BOT_BUILDER && (
             <button
@@ -385,7 +386,7 @@ export default function Lobby() {
               }}
             >
               <img src="assets/ui/bot.svg" alt="" />
-              Bot Builder
+              {t("bot_builder")}
             </button>
           )}
           {user?.role === Role.ADMIN ||
@@ -401,7 +402,7 @@ export default function Lobby() {
               }}
             >
               <img src="assets/ui/bot.svg" alt="" />
-              BOT Admin
+              {t("BOT Admin")}
             </button>
           ) : null}
 
@@ -415,7 +416,7 @@ export default function Lobby() {
             }}
           >
             <img src="assets/ui/meta.svg" alt="" />
-            Meta
+            {t("meta")}
           </button>
           <DiscordButton />
           <DonateButton />
@@ -431,7 +432,7 @@ export default function Lobby() {
                 dispatch(logOut())
               }}
             >
-              Sign Out
+              {t("sign_out")}
             </button>
           </Link>
         </nav>
