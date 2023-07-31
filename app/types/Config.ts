@@ -357,7 +357,7 @@ export const HatchList = new Array<Pkm>(
 
 export function getEvolutionCountNeeded(pkm: Pkm): number {
   if (pkm === Pkm.MAGIKARP) {
-    return 9
+    return 8
   }
   return 3
 }
