@@ -29,7 +29,8 @@ export default class PokemonState {
     if (
       pokemon.life > 0 &&
       pokemon.life < pokemon.hp &&
-      !pokemon.status.wound
+      !pokemon.status.wound &&
+      !pokemon.status.protect
     ) {
       const boost = apBoost ? (heal * apBoost * pokemon.ap) / 100 : 0
       let healBoosted = Math.round(heal + boost)
