@@ -4415,7 +4415,7 @@ export class SearingShotStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = 20
+    const damage = 50
     const cells = board.getCellsInRadius(
       pokemon.positionX,
       pokemon.positionY,
