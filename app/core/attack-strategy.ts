@@ -4473,7 +4473,7 @@ export class CounterStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const damage = Math.max(0, pokemon.hp - pokemon.life)
-    const cells = board.getAdjacentCells(target.positionX, target.positionY)
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
 
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
@@ -4642,7 +4642,7 @@ export class AcrobaticsStrategy extends AttackStrategy {
     if (pokemon.stars === 3 || pokemon.rarity === Rarity.MYTHICAL) {
       damage = 80
     }
-    if(pokemon.items.size === 0){
+    if (pokemon.items.size === 0) {
       damage *= 2
     }
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
