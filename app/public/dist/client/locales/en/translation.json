@@ -22,7 +22,7 @@
     "SHADOW_CLONE": "Shadow Clone",
     "VOLT_SWITCH": "Volt Switch",
     "LIQUIDATION": "Liquidation",
-    "DEFAULT": "",
+    "DEFAULT": "Default",
     "BURN": "Burn",
     "POISON": "Poison",
     "SLEEP": "Sleep",
@@ -779,7 +779,7 @@
     "XATU": "Xatu"
   },
   "ability_description": {
-    "DEFAULT": "",
+    "DEFAULT": "Default",
     "SOFT_BOILED": "Cures every status effects and grants [20,40,80,SP] SHIELD for every ally",
     "EARTHQUAKE": "Deals damage [30,60,120,SP] SPECIAL to all enemy units in the same column/line of the attacker",
     "SONG_OF_DESIRE": "The target is CONFUSION for [6,SP] seconds",
@@ -1147,10 +1147,10 @@
     "AROMATIC_MIST": "Shocks deal 10 SPECIAL",
     "FAIRY_WIND": "Shocks deal 30 SPECIAL",
     "STRANGE_STEAM": "Shocks deal 55 SPECIAL",
-    "CHILLY": "+3 SPE_DEF, 10% chance toFREEZE",
-    "FROSTY": "+6 SPE_DEF, 20% chance toFREEZE",
-    "FREEZING": "+10 SPE_DEF, 30% chance toFREEZE",
-    "SHEER_COLD": "+15 SPE_DEF, 40% chance toFREEZE",
+    "CHILLY": "+3 SPE_DEF, 10% chance to FREEZE",
+    "FROSTY": "+6 SPE_DEF, 20% chance to FREEZE",
+    "FREEZING": "+10 SPE_DEF, 30% chance to FREEZE",
+    "SHEER_COLD": "+15 SPE_DEF, 40% chance to FREEZE",
     "ANCIENT_POWER": "Revive with 40% HP and +30% ATK",
     "ELDER_POWER": "Revive with 80% HP and +60% ATK.",
     "FORGOTTEN_POWER": "Revive with 100% HP and +100% ATK.",
@@ -1885,5 +1885,6 @@
   "evolution": "Evolution",
   "portrait_credit": "Portrait Credit",
   "sprite_credit": "Sprite Credit",
-  "passive_label": "Passive"
+  "passive_label": "Passive",
+  "bot_admin": "bot_admin"
 }

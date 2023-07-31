@@ -49,7 +49,8 @@ import {
   setLevelLeaderboard,
   setBotLeaderboard,
   setLeaderboard,
-  pushBotLog
+  pushBotLog,
+  setLanguage
 } from "../stores/LobbyStore"
 import {
   ICustomLobbyState,
@@ -70,9 +71,13 @@ import { IPokemonsStatistic } from "../../../models/mongo-models/pokemons-statis
 import { cc } from "./utils/jsx"
 import "./lobby.css"
 import { BotManagerPanel } from "./component/bot-builder/bot-manager-panel"
+import { useTranslation } from "react-i18next"
+import { LanguageButton } from "./component/buttons/language-button"
+import i18n from "../i18n"
 
 export default function Lobby() {
   const dispatch = useAppDispatch()
+  const { t } = useTranslation()
   const client: Client = useAppSelector((state) => state.network.client)
   const room: Room<ICustomLobbyState> | undefined = useAppSelector(
     (state) => state.network.lobby
@@ -90,6 +95,8 @@ export default function Lobby() {
   )
 
   const user = useAppSelector((state) => state.lobby.user)
+  const language = useAppSelector((state) => state.lobby.language)
+
   const numberOfBooster = user?.booster ?? 0
 
   const [lobbyJoined, setLobbyJoined] = useState<boolean>(false)
@@ -170,13 +177,21 @@ export default function Lobby() {
                 "titles",
                 "title",
                 "role",
-                "anonymous"
+                "anonymous",
+                "language"
               ]
 
               fields.forEach((field) => {
                 u.listen(field, (value, previousValue) => {
                   dispatch(changeUser({ id: u.id, field: field, value: value }))
                 })
+              })
+
+              u.listen("language", (value) => {
+                if (value && language !== value) {
+                  dispatch(setLanguage(value))
+                  i18n.changeLanguage(value)
+                }
               })
             })
 
@@ -346,6 +361,19 @@ export default function Lobby() {
     return (
       <main className="lobby">
         <nav>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <button
+              className="bubbly red"
+              onClick={async () => {
+                await room?.leave()
+                await firebase.auth().signOut()
+                dispatch(leaveLobby())
+                dispatch(logOut())
+              }}
+            >
+              {t("sign_out")}
+            </button>
+          </Link>
           <button
             className="bubbly blue"
             onClick={() => {
@@ -353,7 +381,7 @@ export default function Lobby() {
             }}
           >
             <img src="assets/ui/collection.svg" alt="" />
-            Collection
+            {t("collection")}
           </button>
           <button
             className={cc("bubbly", "blue", { shimmer: numberOfBooster > 0 })}
@@ -362,7 +390,7 @@ export default function Lobby() {
             }}
           >
             <img src="assets/ui/booster.svg" alt="" />
-            Boosters
+            {t("boosters")}
           </button>
           <button
             className="bubbly green"
@@ -371,7 +399,7 @@ export default function Lobby() {
             }}
           >
             <img src="assets/ui/wiki.svg" alt="" />
-            Wiki
+            {t("wiki")}
           </button>
           {user?.anonymous === false && user?.title === Title.BOT_BUILDER && (
             <button
@@ -385,7 +413,7 @@ export default function Lobby() {
               }}
             >
               <img src="assets/ui/bot.svg" alt="" />
-              Bot Builder
+              {t("bot_builder")}
             </button>
           )}
           {user?.role === Role.ADMIN ||
@@ -401,7 +429,7 @@ export default function Lobby() {
               }}
             >
               <img src="assets/ui/bot.svg" alt="" />
-              BOT Admin
+              {t("bot_admin")}
             </button>
           ) : null}
 
@@ -415,25 +443,12 @@ export default function Lobby() {
             }}
           >
             <img src="assets/ui/meta.svg" alt="" />
-            Meta
+            {t("meta")}
           </button>
           <DiscordButton />
           <DonateButton />
           <PolicyButton />
-
-          <Link to="/" style={{ textDecoration: "none" }}>
-            <button
-              className="bubbly red"
-              onClick={async () => {
-                await room?.leave()
-                await firebase.auth().signOut()
-                dispatch(leaveLobby())
-                dispatch(logOut())
-              }}
-            >
-              Sign Out
-            </button>
-          </Link>
+          <LanguageButton />
         </nav>
 
         <TabMenu />

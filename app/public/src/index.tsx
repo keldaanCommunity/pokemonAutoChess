@@ -9,6 +9,7 @@ import AfterGame from "./pages/after-game"
 import { Provider } from "react-redux"
 import store from "./stores/index"
 
+import "./i18n"
 import "nes.css/css/nes.min.css"
 import "./styles.css"
 

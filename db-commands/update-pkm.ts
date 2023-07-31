@@ -1,12 +1,11 @@
 import dotenv from "dotenv"
 import { connect } from "mongoose"
 import BotV2 from "../app/models/mongo-models/bot-v2"
-import { Item } from "../app/types/enum/Item"
 import { logger } from "../app/utils/logger"
 import { Pkm } from "../app/types/enum/Pokemon"
 
 export const OldPkm: { [key in Pkm]: string } = {
-  DEFAULT: "default",
+  DEFAULT: "",
   EGG: "Egg",
   DITTO: "ditto",
   BULBASAUR: "bulbasaur",

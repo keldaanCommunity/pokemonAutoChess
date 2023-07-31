@@ -48,8 +48,10 @@ import {
   AddBotCommand,
   DeleteBotCommand,
   OnBotUploadCommand,
-  createBotList
+  createBotList,
+  SelectLanguageCommand
 } from "./commands/lobby-commands"
+import { Language } from "../types/enum/Language"
 
 export default class CustomLobbyRoom extends Room<LobbyState> {
   discordWebhook: WebhookClient | undefined
@@ -175,6 +177,16 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     this.onMessage(Transfer.ADD_BOT_DATABASE, async (client, message) => {
       this.dispatcher.dispatch(new AddBotCommand(), { client, message })
     })
+
+    this.onMessage(
+      Transfer.SELECT_LANGUAGE,
+      async (client, message: Language) => {
+        this.dispatcher.dispatch(new SelectLanguageCommand(), {
+          client,
+          message
+        })
+      }
+    )
 
     this.onMessage(
       Transfer.UNBAN,

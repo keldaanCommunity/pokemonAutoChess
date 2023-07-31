@@ -6,6 +6,7 @@ import PokemonCollection from "./pokemon-collection"
 import PokemonConfig from "./pokemon-config"
 import { IPokemonConfig } from "../mongo-models/user-metadata"
 import { Role, Title } from "../../types"
+import { Language } from "../../types/enum/Language"
 
 export interface ILobbyUser {
   id: string
@@ -26,6 +27,7 @@ export interface ILobbyUser {
   anonymous: boolean
   creationTime: string
   lastSignInTime: string
+  language: Language | ""
 }
 export default class LobbyUser extends Schema implements ILobbyUser {
   @type("string") id: string
@@ -33,6 +35,7 @@ export default class LobbyUser extends Schema implements ILobbyUser {
   @type("string") avatar: string
   @type("uint16") elo: number
   @type(MapTileset) map = new MapTileset()
+  @type("string") language: Language | ""
   @type("uint16") wins: number
   @type("uint16") exp: number
   @type("uint16") level: number
@@ -67,7 +70,8 @@ export default class LobbyUser extends Schema implements ILobbyUser {
     role: Role,
     anonymous: boolean,
     creationTime: string,
-    lastSignInTime: string
+    lastSignInTime: string,
+    language: string
   ) {
     super()
     this.id = id
@@ -84,6 +88,7 @@ export default class LobbyUser extends Schema implements ILobbyUser {
     this.anonymous = anonymous
     this.creationTime = creationTime
     this.lastSignInTime = lastSignInTime
+    this.language = language
 
     if (history && history.length && history.length != 0) {
       history.forEach((h) => {

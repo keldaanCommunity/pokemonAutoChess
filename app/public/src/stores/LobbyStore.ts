@@ -20,6 +20,8 @@ import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
 import { Synergy } from "../../../types/enum/Synergy"
 import { IPokemonsStatistic } from "../../../models/mongo-models/pokemons-statistic"
 import { playSound, SOUNDS } from "../pages/utils/audio"
+import { Language } from "../../../types/enum/Language"
+import i18n from "../i18n"
 
 interface IUserLobbyState {
   botLogDatabase: string[]
@@ -43,9 +45,11 @@ interface IUserLobbyState {
   pokemonCollection: IPokemonConfig[]
   boosterContent: string[]
   suggestions: ISuggestionUser[]
+  language: Language
 }
 
 const initialState: IUserLobbyState = {
+  language: Language.en,
   botLogDatabase: [],
   suggestions: [],
   boosterContent: [],
@@ -296,11 +300,15 @@ export const lobbySlice = createSlice({
     setSuggestions: (state, action: PayloadAction<ISuggestionUser[]>) => {
       state.suggestions = action.payload
     },
+    setLanguage: (state, action: PayloadAction<Language>) => {
+      state.language = action.payload
+    },
     leaveLobby: () => initialState
   }
 })
 
 export const {
+  setLanguage,
   removeMessage,
   setBoosterContent,
   addPokemonConfig,
