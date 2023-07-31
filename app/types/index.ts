@@ -174,7 +174,8 @@ export enum Transfer {
   BOT_DATABASE_LOG = "BOT_DATABASE_LOG",
   UNBAN = "UNBAN",
   BOARD_EVENT = "BOARD_EVENT",
-  ABILITY = "ABILITY"
+  ABILITY = "ABILITY",
+  SELECT_LANGUAGE = "SELECT_LANGUAGE"
 }
 
 export enum AttackSprite {

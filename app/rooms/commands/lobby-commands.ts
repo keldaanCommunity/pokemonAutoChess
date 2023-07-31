@@ -24,6 +24,7 @@ import {
 } from "../../types"
 import CustomLobbyRoom from "../custom-lobby-room"
 import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
+import { Language } from "../../types/enum/Language"
 import PokemonConfig from "../../models/colyseus-models/pokemon-config"
 import PRECOMPUTED_RARITY_POKEMONS from "../../models/precomputed/type-rarity-all.json"
 import { BoosterRarityProbability, getEmotionCost } from "../../types/Config"
@@ -101,7 +102,8 @@ export class OnJoinCommand extends Command<
                       client.auth.email === undefined &&
                         client.auth.photoURL === undefined,
                       client.auth.metadata.creationTime,
-                      client.auth.metadata.lastSignInTime
+                      client.auth.metadata.lastSignInTime,
+                      user.language
                     )
                   )
                 }
@@ -137,7 +139,8 @@ export class OnJoinCommand extends Command<
                 client.auth.email === undefined &&
                   client.auth.photoURL === undefined,
                 client.auth.metadata.creationTime,
-                client.auth.metadata.lastSignInTime
+                client.auth.metadata.lastSignInTime,
+                ""
               )
             )
           }
@@ -710,7 +713,8 @@ export class OnSearchByIdCommand extends Command<
                     user.role,
                     false,
                     client.auth.metadata.creationTime,
-                    client.auth.metadata.lastSignInTime
+                    client.auth.metadata.lastSignInTime,
+                    user.language
                   )
                 )
               }
@@ -833,6 +837,26 @@ export class UnbanUserCommand extends Command<
             )
           }
         })
+      }
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+}
+
+export class SelectLanguageCommand extends Command<
+  CustomLobbyRoom,
+  { client: Client; message: Language }
+> {
+  async execute({ client, message }: { client: Client; message: Language }) {
+    try {
+      const u = this.state.users.get(client.auth.uid)
+      if (client.auth.uid && u) {
+        UserMetadata.findOne({ uid: client.auth.uid }, (err, user) => {
+          user.language = message
+          user.save()
+        })
+        u.language = message
       }
     } catch (error) {
       logger.error(error)
