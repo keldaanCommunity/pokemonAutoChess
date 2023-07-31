@@ -4505,7 +4505,7 @@ export class CounterStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const damage = Math.max(0, pokemon.hp - pokemon.life)
-    const cells = board.getAdjacentCells(target.positionX, target.positionY)
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
 
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
