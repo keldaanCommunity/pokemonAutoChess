@@ -1147,10 +1147,10 @@
     "AROMATIC_MIST": "Shocks deal 10 SPECIAL",
     "FAIRY_WIND": "Shocks deal 30 SPECIAL",
     "STRANGE_STEAM": "Shocks deal 55 SPECIAL",
-    "CHILLY": "+3 SPE_DEF, 10% chance toFREEZE",
-    "FROSTY": "+6 SPE_DEF, 20% chance toFREEZE",
-    "FREEZING": "+10 SPE_DEF, 30% chance toFREEZE",
-    "SHEER_COLD": "+15 SPE_DEF, 40% chance toFREEZE",
+    "CHILLY": "+3 SPE_DEF, 10% chance to FREEZE",
+    "FROSTY": "+6 SPE_DEF, 20% chance to FREEZE",
+    "FREEZING": "+10 SPE_DEF, 30% chance to FREEZE",
+    "SHEER_COLD": "+15 SPE_DEF, 40% chance to FREEZE",
     "ANCIENT_POWER": "Revive with 40% HP and +30% ATK",
     "ELDER_POWER": "Revive with 80% HP and +60% ATK.",
     "FORGOTTEN_POWER": "Revive with 100% HP and +100% ATK.",
@@ -1886,5 +1886,5 @@
   "portrait_credit": "Portrait Credit",
   "sprite_credit": "Sprite Credit",
   "passive_label": "Passive",
-  "BOT Admin": "BOT Admin"
+  "bot_admin": "bot_admin"
 }

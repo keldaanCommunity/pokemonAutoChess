@@ -2,10 +2,12 @@ import { Schema, model } from "mongoose"
 import { Emotion, Role, Title } from "../../types"
 import MapTileset from "../colyseus-models/map-tileset"
 import WinTileset from "../colyseus-models/win-tileset"
+import { Language } from "../../types/enum/Language"
 
 export interface IUserMetadata {
   uid: string
   displayName: string
+  language: Language | ""
   avatar: string
   wins: number
   exp: number
@@ -37,6 +39,10 @@ const userMetadataSchema = new Schema({
   },
   displayName: {
     type: String
+  },
+  language: {
+    type: String,
+    default: "en"
   },
   avatar: {
     type: String,

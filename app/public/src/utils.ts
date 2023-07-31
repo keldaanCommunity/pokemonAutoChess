@@ -1,10 +1,11 @@
 import { CDN_PORTRAIT_URL, Emotion } from "../../types"
+import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 
 export function getPortraitSrc(
-  index: string,
+  index?: string,
   shiny?: boolean,
   emotion?: Emotion
-) {  
+) {
   return getAvatarSrc(getAvatarString(index, shiny, emotion))
 }
 
@@ -13,21 +14,30 @@ export function getAvatarSrc(avatar: string) {
 }
 
 export function getAvatarString(
-  index: string,
+  index?: string,
   shiny?: boolean,
   emotion?: Emotion
 ): string {
-  const shinyPad = shiny ? (index.length === 4 ? "/0000/0001" : "/0001") : ""  
-  return `${index.replace("-", "/")}${shinyPad}/${emotion || Emotion.NORMAL}`
+  const defaultIndex = index ? index : PkmIndex[Pkm.MAGIKARP]
+  const shinyPad = shiny
+    ? defaultIndex.length === 4
+      ? "/0000/0001"
+      : "/0001"
+    : ""
+  return `${defaultIndex.replace("-", "/")}${shinyPad}/${
+    emotion || Emotion.NORMAL
+  }`
 }
 
 export interface IPokemonAvatarConfig {
   index: string
-  emotion: Emotion,
-  shiny: boolean  
+  emotion: Emotion
+  shiny: boolean
 }
 
-export function getPokemonConfigFromAvatar(avatar: string): IPokemonAvatarConfig {
+export function getPokemonConfigFromAvatar(
+  avatar: string
+): IPokemonAvatarConfig {
   let emotion = Emotion.NORMAL
   let shiny = false
   let index = "0019"

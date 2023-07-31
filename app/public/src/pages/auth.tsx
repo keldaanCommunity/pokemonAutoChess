@@ -2,9 +2,10 @@ import React from "react"
 import Login from "./component/auth/login"
 import Media from "./component/auth/media"
 import "./auth.css"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function Auth() {
+  const { t } = useTranslation()
   const isSupposedlyMobile =
     navigator.maxTouchPoints > 0 &&
     window.matchMedia("(orientation: portrait)").matches
