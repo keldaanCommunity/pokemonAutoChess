@@ -1727,7 +1727,7 @@
   "buy_booster_500": "Compra un nuevo refuerzo por 500",
   "close": "Cerca",
   "additional_pokemon_hint": "Cada jugador eligió dos Pokémon adicionales para que estén disponibles en todas las tiendas de jugadores para este juego.",
-  "damage": "Daño",
+  "damage_label": "Daño",
   "heal": "Sanar",
   "lvl": "nivel",
   "lose_game_hint": "Pierdes el juego cuando no tienes más puntos de salud.",
@@ -1844,5 +1844,13 @@
   "portrait_credit": "Crédito de retrato",
   "sprite_credit": "Crédito de sprites",
   "passive_label": "Pasivo",
-  "bot_admin": "Admin BOT"
+  "bot_admin": "Admin BOT",
+  "change_name": "Cambiar nombre",
+  "change": "Cambiar",
+  "change_avatar": "Cambiar avatar",
+  "play_more_games_hint": "¡Juega más juegos para ganar refuerzos y desbloquear nuevos avatares!",
+  "damage.SPECIAL": "Daño especial",
+  "damage.PHYSICAL": "Daño físico",
+  "damage.TRUE": "Daño verdadero",
+  "faq.damage_label": "¿Qué son los daños especiales y los daños físicos?"
 }

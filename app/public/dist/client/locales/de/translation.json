@@ -1727,7 +1727,7 @@
   "buy_booster_500": "Kaufen Sie einen neuen Booster für 500",
   "close": "Schließen",
   "additional_pokemon_hint": "Jeder Spieler wählte zwei zusätzliche Pokémon aus, die im All-Player-Shop für dieses Spiel verfügbar sein sollten.",
-  "damage": "Schaden",
+  "damage_label": "Schaden",
   "heal": "Heilen",
   "lvl": "Lvl",
   "lose_game_hint": "Sie verlieren das Spiel, wenn Sie keine Gesundheitspunkte mehr haben",
@@ -1844,5 +1844,13 @@
   "portrait_credit": "Porträtkredit",
   "sprite_credit": "Sprite-Credit",
   "passive_label": "Passiv",
-  "bot_admin": "BOT-Admin"
+  "bot_admin": "BOT-Admin",
+  "change_name": "Namen ändern",
+  "change": "Ändern",
+  "change_avatar": "Avatar ändern",
+  "play_more_games_hint": "Spielen Sie mehr Spiele, um Booster zu verdienen und neue Avatare freizuschalten!",
+  "damage.SPECIAL": "Besonderer Schaden",
+  "damage.PHYSICAL": "Körperlicher Schaden",
+  "damage.TRUE": "Wahrer Schaden",
+  "faq.damage_label": "Was sind Sonderschäden und Sachschäden?"
 }

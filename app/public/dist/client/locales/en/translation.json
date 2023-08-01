@@ -1,4 +1,9 @@
 {
+  "damage": {
+    "SPECIAL": "Special damage",
+    "PHYSICAL": "Physical damage",
+    "TRUE": "True damage"
+  },
   "ability": {
     "SOFT_BOILED": "Soft-Boiled",
     "EARTHQUAKE": "Earthquake",
@@ -1649,7 +1654,7 @@
     "elo_answer": "The elo system in Pokemon Auto Chess works the same as in other elo based games like Chess, Lol, Starcraft etc... To gain elo points, you need to beat other players. The higher your opponent's elo, the more elo you will gain by defeating him, and vice versa. If you don't play for 10 days, your elo will start to decay (-10 elo/day).",
     "missing_points": "I didn't get elo points in my last game, why ?",
     "missing_points_answer": "The game needs to be finished in order to win/lose elo points. If someone is still in game, you need to wait. Bots do not give elo, only human players are accounted for elo rating. It is also possible that the game had elo disabled (\"Just for fun\" mode)",
-    "damage": "What are the special damages and physical damages ?",
+    "damage_label": "What are the special damages and physical damages ?",
     "damage_answer": "Auto attacks mostly deal Physical damage, while Abilities mostly deal Special damage. Some abilities however can deal true damage or physical damage.",
     "defense": "Can you tell me how defense works? Is it flat damage reduction?",
     "defense_answer": "Same system as League of Legends: damage: atk * (hp / hp * (1+(0.1*def))). Defense works for physical damage, special defense for special damage",
@@ -1769,7 +1774,7 @@
   "buy_booster_500": "Buy a new booster for 500 ",
   "close": "Close",
   "additional_pokemon_hint": "Each player picked two additional Pokemon to be available in all   players shop for this game.",
-  "damage": "Damage",
+  "damage_label": "damage_label",
   "heal": "Heal",
   "lvl": "Lvl",
   "lose_game_hint": "You lose the game when you have no more Health Points",
@@ -1886,5 +1891,9 @@
   "portrait_credit": "Portrait Credit",
   "sprite_credit": "Sprite Credit",
   "passive_label": "Passive",
-  "bot_admin": "bot_admin"
+  "bot_admin": "bot_admin",
+  "change_name": "Change Name",
+  "change": "Change",
+  "change_avatar": "Change Avatar",
+  "play_more_games_hint": "Play more games to earn boosters and unlock new avatars !"
 }

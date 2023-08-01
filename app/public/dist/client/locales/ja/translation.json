@@ -1727,7 +1727,7 @@
   "buy_booster_500": "新しいブースターを500で購入する",
   "close": "近い",
   "additional_pokemon_hint": "各プレイヤーは、このゲームのすべてのプレイヤーのショップで入手できる追加のポケモンを 2 匹選びました。",
-  "damage": "ダメージ",
+  "damage_label": "ダメージ",
   "heal": "癒し",
   "lvl": "レベル",
   "lose_game_hint": "ヘルスポイントがなくなるとゲームに負けます",
@@ -1844,5 +1844,13 @@
   "portrait_credit": "ポートレートクレジット",
   "sprite_credit": "スプライトクレジット",
   "passive_label": "受け身",
-  "bot_admin": "ボット管理者"
+  "bot_admin": "ボット管理者",
+  "change_name": "名前の変更",
+  "change": "変化",
+  "change_avatar": "アバターの変更",
+  "play_more_games_hint": "もっとゲームをプレイしてブースターを獲得し、新しいアバターのロックを解除しましょう!",
+  "damage.SPECIAL": "特殊ダメージ",
+  "damage.PHYSICAL": "物理的損傷",
+  "damage.TRUE": "真のダメージ",
+  "faq.damage_label": "特別損害、物的損害とは何ですか？"
 }

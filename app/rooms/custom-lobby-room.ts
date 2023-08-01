@@ -11,7 +11,10 @@ import { connect } from "mongoose"
 import BannedUser from "../models/mongo-models/banned-user"
 import ChatV2 from "../models/mongo-models/chat-v2"
 import UserMetadata from "../models/mongo-models/user-metadata"
-import { ILeaderboardInfo } from "../models/colyseus-models/leaderboard-info"
+import {
+  ILeaderboardInfo,
+  ILeaderboardBotInfo
+} from "../models/colyseus-models/leaderboard-info"
 import admin from "firebase-admin"
 import { WebhookClient } from "discord.js"
 import BotV2, { IBot } from "../models/mongo-models/bot-v2"
@@ -60,7 +63,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
   metaItems: IItemsStatistic[]
   metaPokemons: IPokemonsStatistic[]
   leaderboard: ILeaderboardInfo[]
-  botLeaderboard: ILeaderboardInfo[]
+  botLeaderboard: ILeaderboardBotInfo[]
   levelLeaderboard: ILeaderboardInfo[]
   pastebin: PastebinAPI | undefined = undefined
   unsubscribeLobby: (() => void) | undefined
@@ -93,7 +96,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     this.metaItems = new Array<IItemsStatistic>()
     this.metaPokemons = new Array<IPokemonsStatistic>()
     this.leaderboard = new Array<ILeaderboardInfo>()
-    this.botLeaderboard = new Array<ILeaderboardInfo>()
+    this.botLeaderboard = new Array<ILeaderboardBotInfo>()
     this.levelLeaderboard = new Array<ILeaderboardInfo>()
   }
 
@@ -540,10 +543,11 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
         ids.push(bot.id)
         this.bots.set(bot.id, bot)
         this.botLeaderboard.push({
-          name: `${bot.name} by @${bot.author}`,
+          name: bot.name,
           avatar: bot.avatar,
           rank: i + 1,
-          value: bot.elo
+          value: bot.elo,
+          author: bot.author
         })
       })
     })

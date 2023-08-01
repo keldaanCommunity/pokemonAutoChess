@@ -1727,7 +1727,7 @@
   "buy_booster_500": "Acquista un nuovo booster per 500",
   "close": "Vicino",
   "additional_pokemon_hint": "Ogni giocatore ha scelto due Pokemon aggiuntivi da rendere disponibili nel negozio di tutti i giocatori per questo gioco.",
-  "damage": "Danno",
+  "damage_label": "Danno",
   "heal": "Guarire",
   "lvl": "liv",
   "lose_game_hint": "Perdi la partita quando non hai più punti salute",
@@ -1844,5 +1844,13 @@
   "portrait_credit": "Credito ritratto",
   "sprite_credit": "Credito Sprite",
   "passive_label": "Passivo",
-  "bot_admin": "Ammin BOT"
+  "bot_admin": "Ammin BOT",
+  "change_name": "Cambia nome",
+  "change": "Modifica",
+  "change_avatar": "Cambia avatar",
+  "play_more_games_hint": "Gioca a più giochi per guadagnare booster e sbloccare nuovi avatar!",
+  "damage.SPECIAL": "Danno speciale",
+  "damage.PHYSICAL": "Danno fisico",
+  "damage.TRUE": "Vero danno",
+  "faq.damage_label": "Quali sono i danni speciali ei danni fisici?"
 }

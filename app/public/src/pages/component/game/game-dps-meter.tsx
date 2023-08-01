@@ -72,8 +72,8 @@ export default function GameDpsMeter() {
           </header>
           <Tabs>
             <TabList>
-              <Tab key="damage">
-                <p>{t("damage")}</p>
+              <Tab key="damage_label">
+                <p>{t("damage_label")}</p>
               </Tab>
               <Tab key="heal">
                 <p>{t("heal")}</p>

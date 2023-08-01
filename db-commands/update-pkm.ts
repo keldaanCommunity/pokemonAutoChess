@@ -598,18 +598,19 @@ async function main() {
     for (let i = 0; i < bots.length; i++) {
       let modified = false
       const bot = bots[i]
+      console.log(bot.name)
+      const botName = replaceWithNewName(bot.name)
+      console.log(botName)
+      if (botName) {
+        bot.name = botName
+        modified = true
+      }
       bot.steps.forEach((step) => {
         step.board.forEach((p) => {
-          const oldPkmIndex = Object.values(OldPkm).findIndex(
-            (pkm) => p.name === pkm
-          )
-          if (oldPkmIndex !== -1) {
-            const newPkmName = Object.keys(OldPkm)[oldPkmIndex]
-            console.log("replacing", p.name, " with ", newPkmName)
-            p.name = newPkmName as Pkm
+          const name = replaceWithNewName(p.name)
+          if (name) {
+            p.name = name as Pkm
             modified = true
-          } else {
-            console.log("error with", p.name)
           }
         })
       })
@@ -625,3 +626,19 @@ async function main() {
 }
 
 main()
+
+function replaceWithNewName(name: string) {
+  if (Object.values(Pkm).includes(name as Pkm)) {
+    return undefined
+  } else {
+    const oldPkmIndex = Object.values(OldPkm).findIndex((pkm) => name === pkm)
+    if (oldPkmIndex !== -1) {
+      const newPkmName = Object.keys(OldPkm)[oldPkmIndex]
+      console.log("replacing", name, " with ", newPkmName)
+      return newPkmName as Pkm
+    } else {
+      console.log("error with", name)
+      return undefined
+    }
+  }
+}

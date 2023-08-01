@@ -111,4 +111,4 @@ const bot = new Schema(
   }
 )
 
-export default model<IBot>("BotV2", bot)
+export default model<IBot>("botV2", bot)

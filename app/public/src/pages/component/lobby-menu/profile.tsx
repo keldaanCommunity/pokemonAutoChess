@@ -59,7 +59,7 @@ function NameTab() {
 
   return user ? (
     <div className="nes-container">
-      <h3>Change Name</h3>
+      <h3>{t("change_name")}</h3>
       <div className="nes-field is-inline" style={{ gap: "0.5em" }}>
         <input
           type="text"
@@ -73,7 +73,7 @@ function NameTab() {
           className="bubbly blue"
           onClick={() => dispatch(changeName(inputValue))}
         >
-          Change
+          {t("change")}
         </button>
       </div>
     </div>
@@ -88,11 +88,9 @@ function AvatarTab() {
 
   return (
     <div className="nes-container">
-      <h3>Change Avatar</h3>
+      <h3>{t("change_avatar")}</h3>
       <div style={{ display: "flex", flexWrap: "wrap" }}>
-        {pokemonCollection.length === 0 && (
-          <p>Play more games to earn boosters and unlock new avatars !</p>
-        )}
+        {pokemonCollection.length === 0 && <p>{t("play_more_games_hint")}</p>}
         {pokemonCollection.map((pokemonConfig) => {
           return pokemonConfig.emotions.map((emotion) => {
             return (
