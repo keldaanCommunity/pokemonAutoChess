@@ -1,13 +1,17 @@
 import React from "react"
-import { ILeaderboardInfo } from "../../../../../models/colyseus-models/leaderboard-info"
+import {
+  ILeaderboardBotInfo,
+  ILeaderboardInfo
+} from "../../../../../models/colyseus-models/leaderboard-info"
 import { useAppDispatch } from "../../../hooks"
 import { setTabIndex } from "../../../stores/LobbyStore"
 import { searchName } from "../../../stores/NetworkStore"
 import Elo from "../elo"
 import { getAvatarSrc } from "../../../utils"
+import { t } from "i18next"
 
 export default function LeaderboardItem(props: {
-  item: ILeaderboardInfo
+  item: ILeaderboardInfo | ILeaderboardBotInfo
   isBot: boolean
   noElo: boolean | undefined
 }) {
@@ -42,8 +46,13 @@ export default function LeaderboardItem(props: {
           padding: "0 0.5em"
         }}
       >
-        {props.item.name}
+        {props.isBot ? t(`pkm.${props.item.name}`) : props.item.name}
       </span>
+      {props.isBot && (
+        <span>
+          {t("by")} @{(props.item as ILeaderboardBotInfo).author}
+        </span>
+      )}
       <div>
         {props.noElo ? props.item.value : <Elo elo={props.item.value} />}
       </div>

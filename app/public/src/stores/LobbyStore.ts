@@ -3,7 +3,8 @@ import LobbyUser, {
   ILobbyUser
 } from "../../../models/colyseus-models/lobby-user"
 import Message from "../../../models/colyseus-models/message"
-import LeaderboardInfo, {
+import {
+  ILeaderboardBotInfo,
   ILeaderboardInfo
 } from "../../../models/colyseus-models/leaderboard-info"
 import { RoomAvailable } from "colyseus.js"
@@ -28,7 +29,7 @@ interface IUserLobbyState {
   messages: IChatV2[]
   users: ILobbyUser[]
   leaderboard: ILeaderboardInfo[]
-  botLeaderboard: ILeaderboardInfo[]
+  botLeaderboard: ILeaderboardBotInfo[]
   levelLeaderboard: ILeaderboardInfo[]
   user: ILobbyUser | undefined
   searchedUser: ILobbyUser | undefined
@@ -177,13 +178,16 @@ export const lobbySlice = createSlice({
         (m) => m.payload !== action.payload.payload
       )
     },
-    setLeaderboard: (state, action: PayloadAction<LeaderboardInfo[]>) => {
+    setLeaderboard: (state, action: PayloadAction<ILeaderboardInfo[]>) => {
       state.leaderboard = action.payload
     },
-    setBotLeaderboard: (state, action: PayloadAction<LeaderboardInfo[]>) => {
+    setBotLeaderboard: (
+      state,
+      action: PayloadAction<ILeaderboardBotInfo[]>
+    ) => {
       state.botLeaderboard = action.payload
     },
-    setLevelLeaderboard: (state, action: PayloadAction<LeaderboardInfo[]>) => {
+    setLevelLeaderboard: (state, action: PayloadAction<ILeaderboardInfo[]>) => {
       state.levelLeaderboard = action.payload
     },
     addPokemonConfig: (state, action: PayloadAction<IPokemonConfig>) => {

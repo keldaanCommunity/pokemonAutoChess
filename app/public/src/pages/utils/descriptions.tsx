@@ -36,7 +36,7 @@ export function addIconsToDescription(description: string, tier = 0, ap = 0) {
                 : "damage-true"
             }
           >
-            {token.toLowerCase()} damage
+            {t(`damage.${token}`)}
           </span>
         )
       } else if (Stats.includes(token as Stat)) {

@@ -1845,4 +1845,12 @@
     "sprite_credit": "Sprite-tegoed",
     "passive_label": "Passief",
     "bot_admin": "BOT-beheerder"
+    "change_name": "Naam veranderen",
+    "change": "Wijziging",
+    "change_avatar": "Avatar wijzigen",
+    "play_more_games_hint": "Speel meer games om boosters te verdienen en nieuwe avatars te ontgrendelen!",
+    "damage.SPECIAL": "Bijzondere schade",
+    "damage.PHYSICAL": "Lichamelijke schade",
+    "damage.TRUE": "Ware schade",
+    "faq.damage_label": "schade"
 }
