@@ -1,4 +1,4 @@
-{
+    {
     "pokemon_auto_chess": "Pokemon Auto Chess",
     "ability.SOFT_BOILED": "Halfgaar",
     "ability.CONFUSING_MIND": "Verwarrende Gedachten",
@@ -1853,4 +1853,4 @@
     "damage.PHYSICAL": "Lichamelijke schade",
     "damage.TRUE": "Ware schade",
     "faq.damage_label": "schade"
-}
+    }
