@@ -1557,7 +1557,7 @@
   "weather_description.STORM": "Blitze schlagen zufällig auf dem Spielbrett ein und verursachen 100 SPEZIAL (ELEKTRISCHER sind immun)\n+30 % PARALYSE-Dauer",
   "weather_description.MISTY": "+20 % SPEZIAL\n+30 % STILLE-Dauer",
   "weather_description.SNOW": "-25 % Basis-ATK_SPEED\n+30 % FREEZE-Dauer",
-  "weather_description.SANDSTORM": "5SPECIAL pro Sekunde (GROUND sind immun)\n Dauer von VERWIRRUNG +30 %",
+  "weather_description.SANDSTORM": "5 SPECIAL pro Sekunde (GROUND sind immun)\n Dauer von VERWIRRUNG +30 %",
   "emotion.Normal": "Normal",
   "emotion.Happy": "Glücklich",
   "emotion.Pain": "Schmerz",

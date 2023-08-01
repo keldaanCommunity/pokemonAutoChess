@@ -1591,10 +1591,10 @@
     "WINDY": "+10% dodge chance (+20% if FLYING)",
     "RAIN": "+3 MANA per second\n-30% BURN and POISON damage",
     "NIGHT": "+10% CRIT_CHANCE\n+30% SLEEP duration",
-    "STORM": "Lightning randomly strikes on the board, dealing 100SPECIAL (ELECTRIC are immune)\n+30% PARALYSIS duration",
+    "STORM": "Lightning randomly strikes on the board, dealing 100 SPECIAL (ELECTRIC are immune)\n+30% PARALYSIS duration",
     "MISTY": "+20%SPECIAL\n+30% SILENCE duration",
     "SNOW": "-25% base ATK_SPEED\n+30% FREEZE duration",
-    "SANDSTORM": "5SPECIAL per second (GROUND are immune)\n CONFUSION duration +30%"
+    "SANDSTORM": "5 SPECIAL per second (GROUND are immune)\n CONFUSION duration +30%"
   },
   "emotion": {
     "Normal": "Normal",

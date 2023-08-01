@@ -1608,10 +1608,10 @@
     "WINDY": "+10% de chance de esquiva (+20% se VOAR)",
     "RAIN": "+3 MANA por segundo\n-30% de dano de QUEIMADURA e VENENO",
     "NIGHT": "+10% CRIT_CHANCE\n+30% de duração do SONO",
-    "STORM": "Um raio atinge aleatoriamente o tabuleiro, causando 100SPECIAL (ELECTRIC são imunes)\n+30% de duração da PARALISIA",
+    "STORM": "Um raio atinge aleatoriamente o tabuleiro, causando 100 SPECIAL (ELECTRIC são imunes)\n+30% de duração da PARALISIA",
     "MISTY": "+20% ESPECIAL\n+30% de duração do SILÊNCIO",
     "SNOW": "-25% base ATK_SPEED\n+30% de duração de CONGELAMENTO",
-    "SANDSTORM": "5SPECIAL por segundo (TERRA são imunes)\n Duração da CONFUSÃO +30%"
+    "SANDSTORM": "5 SPECIAL por segundo (TERRA são imunes)\n Duração da CONFUSÃO +30%"
   },
   "faq": {
     "official_game": "Isso é um jogo oficial?",
