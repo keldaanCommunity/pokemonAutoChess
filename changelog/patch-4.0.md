@@ -19,3 +19,5 @@ patch announcement
 - Internationalization with languages: de, en es, fr, it, ja, nl pt
 
 # Misc
+
+- Improve Water Shuriken
