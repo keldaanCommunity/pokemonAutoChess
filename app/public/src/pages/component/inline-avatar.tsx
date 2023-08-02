@@ -34,7 +34,7 @@ export default function InlineAvatar(props: {
           padding: "0 0.5em"
         }}
       >
-        {props.name}
+        {props.role === Role.BOT ? t(`pkm.${props.name}`) : props.name}
       </span>
       {props.role && <RoleBadge role={props.role} />}
     </div>

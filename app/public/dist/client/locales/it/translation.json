@@ -1852,5 +1852,12 @@
   "damage.SPECIAL": "Danno speciale",
   "damage.PHYSICAL": "Danno fisico",
   "damage.TRUE": "Vero danno",
-  "faq.damage_label": "Quali sono i danni speciali ei danni fisici?"
+  "faq.damage_label": "Quali sono i danni speciali ei danni fisici?",
+  "buy_xp": "Acquista PE 4",
+  "streak": "Strisciante",
+  "interest": "Interesse",
+  "carousel": "Giostra",
+  "mythical_pick": "Scelta mitica",
+  "additional_pick": "Scelta aggiuntiva",
+  "fight": "combattimento"
 }

@@ -1852,5 +1852,12 @@
   "damage.SPECIAL": "特殊ダメージ",
   "damage.PHYSICAL": "物理的損傷",
   "damage.TRUE": "真のダメージ",
-  "faq.damage_label": "特別損害、物的損害とは何ですか？"
+  "faq.damage_label": "特別損害、物的損害とは何ですか？",
+  "buy_xp": "XP 4 を購入する",
+  "streak": "ストリーク",
+  "interest": "興味",
+  "carousel": "カルーセル",
+  "mythical_pick": "神話のピック",
+  "additional_pick": "追加のピック",
+  "fight": "喧嘩"
 }

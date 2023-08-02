@@ -1895,5 +1895,12 @@
     "SPECIAL": "Dano especial",
     "PHYSICAL": "Dano físico",
     "TRUE": "Dano verdadeiro"
-  }
+  },
+  "buy_xp": "Compre XP 4",
+  "streak": "Onda",
+  "interest": "Interesse",
+  "carousel": "Carrossel",
+  "mythical_pick": "escolha mítica",
+  "additional_pick": "Escolha adicional",
+  "fight": "lutar"
 }

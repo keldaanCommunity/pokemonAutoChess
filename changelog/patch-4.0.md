@@ -20,4 +20,5 @@ patch announcement
 
 # Misc
 
-- Improve Water Shuriken
+- Improve Water Shuriken aim
+- Metronome: Cannot cast Hidden Power anymore

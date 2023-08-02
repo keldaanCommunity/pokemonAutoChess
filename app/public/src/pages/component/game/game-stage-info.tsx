@@ -159,7 +159,7 @@ export function StagePath() {
       path.push({
         level,
         icon: "/assets/ui/carousel.svg",
-        title: `Carousel`
+        title: t("carousel")
       })
       if (level === stageLevel && phase === GamePhaseState.MINIGAME) {
         currentLevelPathIndex = path.length - 1
@@ -169,7 +169,7 @@ export function StagePath() {
       path.push({
         level,
         icon: "/assets/ui/mythical.svg",
-        title: `Mythical pick`
+        title: t("mythical_pick")
       })
       if (level === stageLevel && phase === GamePhaseState.PICK) {
         currentLevelPathIndex = path.length - 1
@@ -178,7 +178,7 @@ export function StagePath() {
       path.push({
         level,
         icon: "/assets/ui/additional-pick.svg",
-        title: `Additional pick`
+        title: t("additional_pick")
       })
       if (level === stageLevel && phase === GamePhaseState.PICK) {
         currentLevelPathIndex = path.length - 1
@@ -206,7 +206,7 @@ export function StagePath() {
         icon: record?.avatar
           ? getAvatarSrc(record.avatar)
           : "/assets/ui/battle.svg",
-        title: record?.name ?? `Fight`,
+        title: record?.name ?? t("fight"),
         result: record?.result
       })
       if (level === stageLevel && currentLevelPathIndex === undefined) {

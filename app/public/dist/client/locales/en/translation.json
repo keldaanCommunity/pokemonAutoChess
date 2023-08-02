@@ -1895,5 +1895,12 @@
   "change_name": "Change Name",
   "change": "Change",
   "change_avatar": "Change Avatar",
-  "play_more_games_hint": "Play more games to earn boosters and unlock new avatars !"
+  "play_more_games_hint": "Play more games to earn boosters and unlock new avatars !",
+  "buy_xp": "Buy XP 4",
+  "streak": "Streak",
+  "interest": "Interest",
+  "carousel": "Carousel",
+  "mythical_pick": "Mythical pick",
+  "additional_pick": "Additional pick",
+  "fight": "fight"
 }

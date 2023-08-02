@@ -71,7 +71,7 @@ export default class LobbyUser extends Schema implements ILobbyUser {
     anonymous: boolean,
     creationTime: string,
     lastSignInTime: string,
-    language: string
+    language: Language | ""
   ) {
     super()
     this.id = id

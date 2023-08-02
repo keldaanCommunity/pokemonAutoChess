@@ -1844,7 +1844,7 @@
   "portrait_credit": "Portret tegoed",
   "sprite_credit": "Sprite-tegoed",
   "passive_label": "Passief",
-  "bot_admin": "BOT-beheerder"
+  "bot_admin": "BOT-beheerder",
   "change_name": "Naam veranderen",
   "change": "Wijziging",
   "change_avatar": "Avatar wijzigen",
@@ -1852,5 +1852,13 @@
   "damage.SPECIAL": "Bijzondere schade",
   "damage.PHYSICAL": "Lichamelijke schade",
   "damage.TRUE": "Ware schade",
-  "faq.damage_label": "Wat zijn de speciale schade en fysieke schade?"
+  "faq.damage_label": "Wat zijn de speciale schade en fysieke schade?",
+  "damage_label": "schade_label",
+  "buy_xp": "XP4 kopen",
+  "streak": "Streep",
+  "interest": "Interesse",
+  "carousel": "Carrousel",
+  "mythical_pick": "Mythische keuze",
+  "additional_pick": "Extra keuze",
+  "fight": "gevecht"
 }

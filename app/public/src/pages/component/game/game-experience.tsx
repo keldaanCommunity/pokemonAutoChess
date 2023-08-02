@@ -25,7 +25,7 @@ export default function GameExperience() {
           dispatch(levelClick())
         }}
       >
-        <Money value="Buy XP 4" />
+        <Money value={t("buy_xp")} />
       </button>
       <div className="progress-bar">
         <progress

@@ -1852,5 +1852,12 @@
   "damage.SPECIAL": "Besonderer Schaden",
   "damage.PHYSICAL": "Körperlicher Schaden",
   "damage.TRUE": "Wahrer Schaden",
-  "faq.damage_label": "Was sind Sonderschäden und Sachschäden?"
+  "faq.damage_label": "Was sind Sonderschäden und Sachschäden?",
+  "buy_xp": "Kaufen Sie XP 4",
+  "streak": "Strähne",
+  "interest": "Interesse",
+  "carousel": "Karussell",
+  "mythical_pick": "Mythische Wahl",
+  "additional_pick": "Zusätzliche Auswahl",
+  "fight": "Streit"
 }

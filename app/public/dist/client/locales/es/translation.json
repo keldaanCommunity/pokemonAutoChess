@@ -1852,5 +1852,12 @@
   "damage.SPECIAL": "Daño especial",
   "damage.PHYSICAL": "Daño físico",
   "damage.TRUE": "Daño verdadero",
-  "faq.damage_label": "¿Qué son los daños especiales y los daños físicos?"
+  "faq.damage_label": "¿Qué son los daños especiales y los daños físicos?",
+  "buy_xp": "Comprar XP 4",
+  "streak": "Racha",
+  "interest": "Interés",
+  "carousel": "Carrusel",
+  "mythical_pick": "Púa mítica",
+  "additional_pick": "selección adicional",
+  "fight": "luchar"
 }

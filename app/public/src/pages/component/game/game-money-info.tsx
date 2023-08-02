@@ -46,12 +46,12 @@ export function GameMoneyDetail() {
     <div className="game-money-detail">
       <p className="help">{t("passive_income_hint")}</p>
       <p>
-        <Money value={`Streak: ${streak === 0 ? 0 : "+" + streak}`} />{" "}
+        <Money value={`${t("streak")}: ${streak === 0 ? 0 : "+" + streak}`} />{" "}
         {lastBattleResult !== null && `(${streakLabel})`}
       </p>
       <p className="help">{t("victory_income_hint")}</p>
       <p>
-        <Money value={`Interest: +${interest}`} />
+        <Money value={`${t("interest")}: +${interest}`} />
       </p>
       <p className="help">{t("additional_income_hint")}</p>
     </div>
