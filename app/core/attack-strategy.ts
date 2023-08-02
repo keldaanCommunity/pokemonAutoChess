@@ -4021,6 +4021,15 @@ export class WaterShurikenStrategy extends AttackStrategy {
         break
     }
 
+    pokemon.orientation = board.orientation(
+      pokemon.positionX,
+      pokemon.positionY,
+      target.positionX,
+      target.positionY,
+      pokemon,
+      target
+    )
+
     const orientations = [
       pokemon.orientation,
       OrientationArray[(OrientationArray.indexOf(pokemon.orientation) + 1) % 8],
