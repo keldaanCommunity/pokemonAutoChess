@@ -44,7 +44,7 @@ export function GamePokemonDetail(props: {
           className="game-pokemon-detail-entry-rarity"
           style={{ color: RarityColor[props.pokemon.rarity] }}
         >
-          {props.pokemon.rarity}
+          {t(`rarity.${props.pokemon.rarity}`)}
         </p>
       </div>
 

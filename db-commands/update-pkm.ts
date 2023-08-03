@@ -584,7 +584,9 @@ export const OldPkm: { [key in Pkm]: string } = {
   PLUSLE: "plusle",
   PINSIR: "pinsir",
   NATU: "natu",
-  XATU: "xatu"
+  XATU: "xatu",
+  [Pkm.GLIGAR]: "gligar",
+  [Pkm.GLISCOR]: "gliscor"
 }
 
 async function main() {

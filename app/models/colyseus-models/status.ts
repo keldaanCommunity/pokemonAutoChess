@@ -8,6 +8,7 @@ import { Item } from "../../types/enum/Item"
 import { Weather } from "../../types/enum/Weather"
 import { max } from "../../utils/number"
 import { Ability } from "../../types/enum/Ability"
+import { Passive } from "../../types/enum/Passive"
 
 export default class Status extends Schema implements IStatus {
   @type("boolean") burn = false
@@ -376,13 +377,18 @@ export default class Status extends Schema implements IStatus {
           poisonDamage = Math.round(poisonDamage * 0.5)
         }
 
-        pkm.handleDamage({
-          damage: poisonDamage,
-          board,
-          attackType: AttackType.TRUE,
-          attacker: this.poisonOrigin,
-          shouldTargetGainMana: false
-        })
+        if (pkm.passive === Passive.POISON_HEAL) {
+          pkm.handleHeal(poisonDamage, pkm, 0)
+        } else {
+          pkm.handleDamage({
+            damage: poisonDamage,
+            board,
+            attackType: AttackType.TRUE,
+            attacker: this.poisonOrigin,
+            shouldTargetGainMana: false
+          })
+        }
+
         this.poisonDamageCooldown = 1000
       }
     } else {

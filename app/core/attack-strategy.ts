@@ -1184,10 +1184,37 @@ export class KingShieldStrategy extends AttackStrategy {
       const tg = board.getValue(x, y)
 
       if (tg) {
-        tg.positionX = oldX
-        tg.positionY = oldY
+        pokemon.moveTo(x, y, board)
       }
-      pokemon.moveTo(x, y, board)
+    }
+  }
+}
+
+export class PoisonJabStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 80 : 40
+    const farthestTarget = state.getFarthestTargetCoordinate(pokemon, board)
+    if (farthestTarget) {
+      const x = farthestTarget.x
+      const y = farthestTarget.y
+      const oldX = pokemon.positionX
+      const oldY = pokemon.positionY
+
+      const tg = board.getValue(x, y)
+
+      if (tg) {
+        tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+        tg.status.triggerPoison(4000, tg, pokemon, board)
+        pokemon.status.triggerPoison(4000, pokemon, pokemon, board)
+        pokemon.moveTo(x, y, board)
+      }
     }
   }
 }
