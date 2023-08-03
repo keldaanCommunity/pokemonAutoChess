@@ -8668,6 +8668,56 @@ export class Archeops extends Pokemon {
   }
 }
 
+export class Gligar extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.GLIGAR,
+      [Synergy.GROUND, Synergy.FLYING],
+      Rarity.RARE,
+      Pkm.GLISCOR,
+      70,
+      6,
+      2,
+      2,
+      1,
+      AttackSprite.ROCK_MELEE,
+      1,
+      90,
+      Ability.POISON_JAB,
+      shiny,
+      emotion,
+      false,
+      true,
+      Passive.POISON_HEAL
+    )
+  }
+}
+
+export class Gliscor extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.GLISCOR,
+      [Synergy.GROUND, Synergy.FLYING],
+      Rarity.RARE,
+      Pkm.DEFAULT,
+      170,
+      18,
+      4,
+      4,
+      1,
+      AttackSprite.ROCK_MELEE,
+      2,
+      90,
+      Ability.POISON_JAB,
+      shiny,
+      emotion,
+      true,
+      true,
+      Passive.POISON_HEAL
+    )
+  }
+}
+
 export class Shieldon extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(

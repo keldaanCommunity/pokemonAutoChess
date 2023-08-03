@@ -73,7 +73,9 @@ export default function WikiPokemonDetail(props: {
         <dt>{t("index")}</dt>
         <dd className="pokemon-index">{pokemon.index}</dd>
         <dt>{t("rarity_label")}</dt>
-        <dd style={{ color: RarityColor[pokemon.rarity] }}>{pokemon.rarity}</dd>
+        <dd style={{ color: RarityColor[pokemon.rarity] }}>
+          {t(`rarity.${pokemon.rarity}`)}
+        </dd>
         <dt>{t("synergies")}</dt>
         <dd>
           {pokemon.types.map((type) => (

@@ -188,7 +188,7 @@ export default function Lobby() {
               })
 
               u.listen("language", (value) => {
-                if (value && language !== value) {
+                if (value) {
                   dispatch(setLanguage(value))
                   i18n.changeLanguage(value)
                 }

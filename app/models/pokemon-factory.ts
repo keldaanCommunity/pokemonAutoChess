@@ -189,6 +189,8 @@ import {
   Giratina,
   Glaceon,
   Glalie,
+  Gligar,
+  Gliscor,
   Gloom,
   Golbat,
   Golem,
@@ -1979,6 +1981,10 @@ export default class PokemonFactory {
         return new Natu(s, e)
       case Pkm.XATU:
         return new Xatu(s, e)
+      case Pkm.GLIGAR:
+        return new Gligar(s, e)
+      case Pkm.GLISCOR:
+        return new Gliscor(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:

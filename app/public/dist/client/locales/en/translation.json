@@ -1,4 +1,14 @@
 {
+  "rarity": {
+    "COMMON": "Common",
+    "UNCOMMON": "Uncommon",
+    "RARE": "Rare",
+    "EPIC": "Epic",
+    "LEGENDARY": "Legendary",
+    "MYTHICAL": "Mythical",
+    "HATCH": "Hatch",
+    "SPECIAL": "Special"
+  },
   "damage": {
     "SPECIAL": "Special damage",
     "PHYSICAL": "Physical damage",
@@ -199,7 +209,8 @@
     "HIDDEN_POWER_Y": "Hidden Power (YOGA)",
     "HIDDEN_POWER_Z": "Hidden Power (ZZZZ)",
     "HIDDEN_POWER_QM": "Hidden Power (?)",
-    "HIDDEN_POWER_EM": "Hidden Power (!)"
+    "HIDDEN_POWER_EM": "Hidden Power (!)",
+    "POISON_JAB": "Poison Jab"
   },
   "pkm": {
     "DEFAULT": "default",
@@ -781,7 +792,9 @@
     "PLUSLE": "Plusle",
     "PINSIR": "Pinsir",
     "NATU": "Natu",
-    "XATU": "Xatu"
+    "XATU": "Xatu",
+    "GLIGAR": "Gligar",
+    "GLISCOR": "Gliscor"
   },
   "ability_description": {
     "DEFAULT": "Default",
@@ -978,7 +991,8 @@
     "HIDDEN_POWER_Y": "Spawn 2 Meditite with a Soul Dew",
     "HIDDEN_POWER_Z": "Put the enemy team SLEEP for 5 seconds",
     "HIDDEN_POWER_QM": "Get 4 random Unown on your bench",
-    "HIDDEN_POWER_EM": "Spawn 4 random Unown at every corner of the board"
+    "HIDDEN_POWER_EM": "Spawn 4 random Unown at every corner of the board",
+    "POISON_JAB": "Deals [40, 80, 120, SP] SPECIAL, swaps places with the target, and POISON both the target and the caster for 4s"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1330,7 +1344,8 @@
     "WATER_SPRING": "Whenever an enemy uses their ability, gain 5 MANA",
     "MAGIKARP": "9 Magikarp evolve in Gyarados",
     "GIRATINA": "Giratina switches between its Altered Forme and Origin Forme depending on its position on the board",
-    "UNOWN": "Unown cannot hold items and vanish after one fight or after casting their ability"
+    "UNOWN": "Unown cannot hold items and vanish after one fight or after casting their ability",
+    "POISON_HEAL": "If the Pokémon is POISON, it will gain HP instead of taking damage"
   },
   "stat": {
     "ATK": "Attack",
@@ -1796,7 +1811,7 @@
   "hide": "Hide",
   "show": "Show",
   "encounter_rates": "Encouter rates",
-  "rarity": "Rarity",
+  "rarity_label": "rarity_label",
   "rate": "Rate",
   "increase_level_hint": "Increase your level to raise your chances to get higher tier Pokémon.",
   "refresh_gold_hint": "Refresh shop for 1 gold (shortcut: D)",
@@ -1886,7 +1901,6 @@
   "pokemon_auto_chess": "Pokemon Auto Chess",
   "help": "Help",
   "index": "Index",
-  "rarity_label": "Rarity",
   "evolution": "Evolution",
   "portrait_credit": "Portrait Credit",
   "sprite_credit": "Sprite Credit",

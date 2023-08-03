@@ -579,7 +579,9 @@
     "PLUSLE": "plusle",
     "PINSIR": "pinsir",
     "NATU": "natu",
-    "XATU": "xatu"
+    "XATU": "xatu",
+    "GLIGAR": "Gligar",
+    "GLISCOR": "Gliscor"
   },
   "emotion": {
     "Teary-Eyed": "Olhos marejados",
@@ -798,7 +800,8 @@
     "HIDDEN_POWER_Y": "Poder Oculto (YOGA)",
     "HIDDEN_POWER_Z": "Poder Oculto (ZZZZ)",
     "HIDDEN_POWER_QM": "Poder escondido (?)",
-    "HIDDEN_POWER_EM": "Poder escondido (!)"
+    "HIDDEN_POWER_EM": "Poder escondido (!)",
+    "POISON_JAB": "Jab Venenoso"
   },
   "ability_description": {
     "DEFAULT": "Padrão",
@@ -995,7 +998,8 @@
     "HIDDEN_POWER_Y": "Gere 2 Meditite com um Soul Dew",
     "HIDDEN_POWER_Z": "Coloque o time inimigo DORMIR por 5 segundos",
     "HIDDEN_POWER_QM": "Obtenha 4 Unown aleatórios em seu banco",
-    "HIDDEN_POWER_EM": "Gere 4 Unowns aleatórios em cada canto do tabuleiro"
+    "HIDDEN_POWER_EM": "Gere 4 Unowns aleatórios em cada canto do tabuleiro",
+    "POISON_JAB": "Oferece [40, 80, 120, SP] ESPECIAL, troca de lugar com o alvo e ENVENENA o alvo e o lançador por 4s"
   },
   "effect": {
     "INGRAIN": "Inerente",
@@ -1347,7 +1351,8 @@
     "WATER_SPRING": "Sempre que um inimigo usar sua habilidade, ganhe 5 MANA",
     "MAGIKARP": "9 Magikarp evolui em Gyarados",
     "GIRATINA": "Giratina alterna entre sua Forma Alterada e Forma de Origem, dependendo de sua posição no tabuleiro",
-    "UNOWN": "Unown não pode segurar itens e desaparece após uma luta ou após lançar sua habilidade"
+    "UNOWN": "Unown não pode segurar itens e desaparece após uma luta ou após lançar sua habilidade",
+    "POISON_HEAL": "Se o Pokémon for POISON, ele ganhará HP ao invés de receber dano"
   },
   "stat": {
     "ATK": "Ataque",
@@ -1791,7 +1796,7 @@
   "hide": "Esconder",
   "show": "Mostrar",
   "encounter_rates": "Taxas de encontro",
-  "rarity": "Raridade",
+  "rarity_label": "Raridade",
   "rate": "Avaliar",
   "increase_level_hint": "Aumente seu nível para aumentar suas chances de obter Pokémon de nível superior.",
   "refresh_gold_hint": "Atualize a loja por 1 ouro (atalho: D)",
@@ -1881,7 +1886,6 @@
   "pokemon_auto_chess": "Pokémon Auto Xadrez",
   "help": "Ajuda",
   "index": "Índice",
-  "rarity_label": "Raridade",
   "evolution": "Evolução",
   "portrait_credit": "Crédito do retrato",
   "sprite_credit": "Crédito Sprite",
@@ -1902,5 +1906,15 @@
   "carousel": "Carrossel",
   "mythical_pick": "escolha mítica",
   "additional_pick": "Escolha adicional",
-  "fight": "lutar"
+  "fight": "lutar",
+  "rarity": {
+    "COMMON": "Comum",
+    "UNCOMMON": "Incomum",
+    "RARE": "Cru",
+    "EPIC": "Épico",
+    "LEGENDARY": "Lendário",
+    "MYTHICAL": "Mítico",
+    "HATCH": "Escotilha",
+    "SPECIAL": "Especial"
+  }
 }

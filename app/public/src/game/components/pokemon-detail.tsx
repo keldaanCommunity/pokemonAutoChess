@@ -107,12 +107,12 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     wrap.appendChild(entry)
 
     const pokemonName = document.createElement("p")
-    pokemonName.textContent = name
+    pokemonName.textContent = t(`pkm.${name}`)
     pokemonName.className = "game-pokemon-detail-entry-name"
     entry.appendChild(pokemonName)
 
     const pokemonRarity = document.createElement("p")
-    pokemonRarity.textContent = rarity
+    pokemonRarity.textContent = t(`rarity.${rarity}`)
     pokemonRarity.style.color = RarityColor[rarity]
     pokemonRarity.className = "game-pokemon-detail-entry-rarity"
     entry.appendChild(pokemonRarity)

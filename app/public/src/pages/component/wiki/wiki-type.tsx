@@ -83,7 +83,9 @@ export default function WikiType(props: { type: Synergy | "all" }) {
           {(Object.values(Rarity) as Rarity[]).map((rarity) => {
             return (
               <tr key={rarity}>
-                <td style={{ color: RarityColor[rarity] }}>{rarity}</td>
+                <td style={{ color: RarityColor[rarity] }}>
+                  {t(`rarity.${rarity}`)}
+                </td>
                 <td>
                   {(pokemonsPerRarity[rarity] ?? []).map((p) => {
                     return (

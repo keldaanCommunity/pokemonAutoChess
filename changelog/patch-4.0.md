@@ -8,6 +8,8 @@ patch announcement
 
 # New Pokemons:
 
+Gligar,Gliscor
+
 # Changes to Pokemon
 
 # Changes to Synergies

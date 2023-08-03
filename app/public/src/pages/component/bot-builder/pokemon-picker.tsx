@@ -53,10 +53,7 @@ export default function PokemonPicker(props: {
       </TabList>
 
       {Object.keys(PRECOMPUTED_TYPE_POKEMONS_ALL).map((key) => {
-        const pokemons = PRECOMPUTED_TYPE_POKEMONS_ALL[key].filter(p => {
-          const pkm = PokemonFactory.createPokemonFromName(p)
-          return pkm.rarity !== Rarity.SPECIAL
-        })
+        const pokemons = PRECOMPUTED_TYPE_POKEMONS_ALL[key]
         return (
           <TabPanel key={key} style={{ display: "flex", flexWrap: "wrap" }}>
             {pokemons.map((pkm) => {

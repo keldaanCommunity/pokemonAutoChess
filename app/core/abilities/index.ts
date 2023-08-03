@@ -166,7 +166,8 @@ import {
   LusterPurgeStrategy,
   MudBubbleStrategy,
   LinkCableStrategy,
-  MagicBounceStrategy
+  MagicBounceStrategy,
+  PoisonJabStrategy
 } from "../attack-strategy"
 import {
   HiddenPowerAStrategy,
@@ -396,5 +397,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.HIDDEN_POWER_Y]: new HiddenPowerYStrategy(),
   [Ability.HIDDEN_POWER_Z]: new HiddenPowerZStrategy(),
   [Ability.HIDDEN_POWER_QM]: new HiddenPowerQMStrategy(),
-  [Ability.HIDDEN_POWER_EM]: new HiddenPowerEMStrategy()
+  [Ability.HIDDEN_POWER_EM]: new HiddenPowerEMStrategy(),
+  [Ability.POISON_JAB]: new PoisonJabStrategy()
 }

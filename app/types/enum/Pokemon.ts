@@ -580,7 +580,9 @@ export enum Pkm {
   PLUSLE = "PLUSLE",
   PINSIR = "PINSIR",
   NATU = "NATU",
-  XATU = "XATU"
+  XATU = "XATU",
+  GLIGAR = "GLIGAR",
+  GLISCOR = "GLISCOR"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1163,7 +1165,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.MINUN]: "0312",
   [Pkm.PINSIR]: "0127",
   [Pkm.NATU]: "0177",
-  [Pkm.XATU]: "0178"
+  [Pkm.XATU]: "0178",
+  [Pkm.GLIGAR]: "0207",
+  [Pkm.GLISCOR]: "0472"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1746,7 +1750,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.MINUN]: Pkm.MINUN,
   [Pkm.PINSIR]: Pkm.PINSIR,
   [Pkm.NATU]: Pkm.NATU,
-  [Pkm.XATU]: Pkm.NATU
+  [Pkm.XATU]: Pkm.NATU,
+  [Pkm.GLIGAR]: Pkm.GLIGAR,
+  [Pkm.GLISCOR]: Pkm.GLIGAR
 }
 
 export enum PkmDuo {
@@ -4697,6 +4703,16 @@ export const AnimationConfig: {
   [Pkm.XATU]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.GLIGAR]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.MultiStrike,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.GLISCOR]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   }
 }

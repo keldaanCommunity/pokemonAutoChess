@@ -29,14 +29,16 @@ export default function GameRarityPercentage() {
         <table style={{ width: "10vw" }}>
           <thead>
             <tr>
-              <th>{t("rarity")}</th>
+              <th>{t("rarity_label")}</th>
               <th>{t("rate")}</th>
             </tr>
           </thead>
           <tbody>
             {RarityTiers.map((rarity, index) => (
               <tr key={"detail-" + rarity}>
-                <td style={{ color: RarityColor[rarity] }}>{rarity}</td>
+                <td style={{ color: RarityColor[rarity] }}>
+                  {t(`rarity.${rarity}`)}
+                </td>
                 <td>
                   {Math.ceil(RarityProbabilityPerLevel[level][index] * 100)}%
                 </td>

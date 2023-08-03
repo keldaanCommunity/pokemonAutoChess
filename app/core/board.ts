@@ -30,6 +30,10 @@ export default class Board {
   setValue(x: number, y: number, value: PokemonEntity | undefined) {
     if (y >= 0 && y < this.rows && x >= 0 && x < this.columns) {
       this.cells[this.columns * y + x] = value
+      if (value) {
+        value.positionX = x
+        value.positionY = y
+      }
     }
   }
 
@@ -62,7 +66,7 @@ export default class Board {
     for (let y = 0; y < this.rows; y++) {
       for (let x = 0; x < this.columns; x++) {
         const cell = this.cells[this.columns * y + x]
-        if(cell && predicate(x, y, cell)){
+        if (cell && predicate(x, y, cell)) {
           return cell
         }
       }
@@ -205,7 +209,7 @@ export default class Board {
     let x = x0,
       y = y0
     for (let ix = 0, iy = 0; ix < nx || iy < ny; ) {
-      let decision = (1 + 2 * ix) * ny - (1 + 2 * iy) * nx
+      const decision = (1 + 2 * ix) * ny - (1 + 2 * iy) * nx
       if (decision === 0) {
         // next step is diagonal
         x += sign_x
@@ -253,8 +257,8 @@ export default class Board {
   }
 
   getFlyAwayCell(x: number, y: number): Cell | null {
-    let cx = Math.round((x + this.columns * 0.5) % this.columns)
-    let cy = Math.round((y + this.rows * 0.5) % this.rows)
+    const cx = Math.round((x + this.columns * 0.5) % this.columns)
+    const cy = Math.round((y + this.rows * 0.5) % this.rows)
     let radius = 1
     const candidates: Cell[] = [{ x: cx, y: cy, value: this.getValue(cx, cy) }]
     while (candidates[0].value !== undefined && radius < 5) {
