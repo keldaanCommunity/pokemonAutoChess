@@ -8672,7 +8672,7 @@ export class Gligar extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.GLIGAR,
-      [Synergy.GROUND, Synergy.FLYING],
+      [Synergy.GROUND, Synergy.POISON, Synergy.FLYING],
       Rarity.RARE,
       Pkm.GLISCOR,
       70,
@@ -8697,7 +8697,7 @@ export class Gliscor extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.GLISCOR,
-      [Synergy.GROUND, Synergy.FLYING],
+      [Synergy.GROUND, Synergy.POISON, Synergy.FLYING],
       Rarity.RARE,
       Pkm.DEFAULT,
       170,
