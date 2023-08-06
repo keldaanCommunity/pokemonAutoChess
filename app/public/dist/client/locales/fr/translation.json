@@ -1,13 +1,13 @@
 {
   "rarity": {
-    "COMMON": "Common",
-    "UNCOMMON": "Uncommon",
+    "COMMON": "Commun",
+    "UNCOMMON": "Peu Commun",
     "RARE": "Rare",
-    "EPIC": "Epic",
-    "LEGENDARY": "Legendary",
-    "MYTHICAL": "Mythical",
-    "HATCH": "Hatch",
-    "SPECIAL": "Special"
+    "EPIC": "Épique",
+    "LEGENDARY": "Légendaire",
+    "MYTHICAL": "Mythique",
+    "HATCH": "Éclos",
+    "SPECIAL": "Spécial"
   },
   "mobile_warning": "Ce jeu n'est pas adapté pour mobile.",
   "nintendo_warning": "Sans but lucratif, open source. Tous les droits à The Pokemon Company®",
