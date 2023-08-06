@@ -1,9 +1,18 @@
 {
-  "rarity": "Rarity",
+  "rarity": {
+    "COMMON": "Common",
+    "UNCOMMON": "Uncommon",
+    "RARE": "Rare",
+    "EPIC": "Epic",
+    "LEGENDARY": "Legendary",
+    "MYTHICAL": "Mythical",
+    "HATCH": "Hatch",
+    "SPECIAL": "Special"
+  },
   "damage": {
-    "SPECIAL": "Special damage",
-    "PHYSICAL": "Physical damage",
-    "TRUE": "True damage"
+    "SPECIAL": "special damage",
+    "PHYSICAL": "physical damage",
+    "TRUE": "true damage"
   },
   "ability": {
     "SOFT_BOILED": "Soft-Boiled",
