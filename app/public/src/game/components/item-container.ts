@@ -7,6 +7,7 @@ import { getGameScene } from "../../pages/game"
 
 export default class ItemContainer extends DraggableObject {
   detail: ItemDetail
+  persistDetails: boolean
   sprite: GameObjects.Image
   tempDetail: ItemDetail | undefined
   tempSprite: GameObjects.Image | undefined
@@ -65,47 +66,70 @@ export default class ItemContainer extends DraggableObject {
     this.add(this.detail)
 
     this.setInteractive()
-    this.input.dropZone = true
-    this.draggable = (this.pokemonId === null)
+    this.setDropZone(true)
+    this.draggable = this.pokemonId === null
+    this.persistDetails = false
   }
 
+  setDropZone(value: boolean) {
+    if (this.input) {
+      this.input.dropZone = value
+    }
+  }
 
   onPointerOver() {
-    //this.openDetail()
     super.onPointerOver()
-    this.input.dropZone = false
-    if (this.draggable) {
-      this.circle?.setFillStyle(0x68829e)
+
+    if (!this.persistDetails) {
+      if (this.draggable) {
+        this.circle?.setFillStyle(0x68829e)
+      }
+
+      if (!this.detail.visible) {
+        this.openDetail()
+      }
     }
+
+    this.setDropZone(false)
   }
 
   onPointerOut() {
     super.onPointerOut()
+
     if (!this.dragDisabled) {
-      this.input.dropZone = true
+      this.setDropZone(true)
     }
-    if (this.draggable) {
-      this.circle?.setFillStyle(0x61738a)
+
+    if (!this.persistDetails) {
+      if (this.draggable) {
+        this.circle?.setFillStyle(0x61738a)
+      }
+
+      if (this.detail.visible) {
+        this.closeDetail()
+      }
     }
   }
 
   onPointerDown(pointer: Phaser.Input.Pointer) {
     super.onPointerDown(pointer)
     this.parentContainer.bringToTop(this)
+
+    // right click should open/close details
     if (pointer.rightButtonDown()) {
-      if (!this.detail.visible) {
-        this.openDetail()
-        this.input.dropZone = false
-      } else {
-        this.closeDetail()
-        this.input.dropZone = true
+      this.togglePersistDetails()
+      this.toggleVisibility()
+    } else if (this.detail.visible) {
+      if (this.persistDetails) {
+        this.togglePersistDetails()
       }
+      this.closeDetail()
     }
   }
 
   onPointerUp() {
     super.onPointerUp()
-    this.input.dropZone = false
+    this.setDropZone(false)
   }
 
   openDetail() {
@@ -125,7 +149,25 @@ export default class ItemContainer extends DraggableObject {
         this.tempSprite.destroy()
       }
     }
+
     this.detail.setVisible(false)
+  }
+
+  toggleVisibility() {
+    if (!this.persistDetails) {
+      if (this.detail.visible) {
+        this.closeDetail()
+      } else {
+        this.openDetail()
+      }
+    }
+  }
+
+  togglePersistDetails() {
+    const shouldPersist = !this.persistDetails
+    this.persistDetails = shouldPersist
+
+    this.circle?.setFillStyle(shouldPersist ? 0x32a852 : 0x61738a)
   }
 
   showTempDetail(item: Item) {

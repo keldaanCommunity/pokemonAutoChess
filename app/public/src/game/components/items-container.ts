@@ -63,6 +63,11 @@ export default class ItemsContainer extends GameObjects.Container {
   closeDetails() {
     for (let i = 0; i < this.list.length; i++) {
       const it = <ItemContainer>this.list[i]
+
+      if (it.persistDetails) {
+        it.togglePersistDetails()
+      }
+
       it.closeDetail()
     }
   }
