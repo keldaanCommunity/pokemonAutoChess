@@ -65,55 +65,47 @@ export default class ItemContainer extends DraggableObject {
     this.add(this.detail)
 
     this.setInteractive()
-    this.setDropZone(true)
-    this.draggable = this.pokemonId === null
+    this.input.dropZone = true
+    this.draggable = (this.pokemonId === null)
   }
 
-  setDropZone(value: boolean) {
-    if (this.input) {
-      this.input.dropZone = value
-    }
-  }
 
   onPointerOver() {
+    //this.openDetail()
     super.onPointerOver()
-    this.setDropZone(false)
-
+    this.input.dropZone = false
     if (this.draggable) {
       this.circle?.setFillStyle(0x68829e)
-    }
-
-    if (!this.detail.visible) {
-      this.openDetail()
-      this.setDropZone(false)
     }
   }
 
   onPointerOut() {
     super.onPointerOut()
     if (!this.dragDisabled) {
-      this.setDropZone(true)
+      this.input.dropZone = true
     }
     if (this.draggable) {
       this.circle?.setFillStyle(0x61738a)
-    }
-    if (this.detail.visible) {
-      this.closeDetail()
-      this.setDropZone(true)
     }
   }
 
   onPointerDown(pointer: Phaser.Input.Pointer) {
     super.onPointerDown(pointer)
     this.parentContainer.bringToTop(this)
-    if (this.detail.visible) {
-      this.closeDetail()
+    if (pointer.rightButtonDown()) {
+      if (!this.detail.visible) {
+        this.openDetail()
+        this.input.dropZone = false
+      } else {
+        this.closeDetail()
+        this.input.dropZone = true
+      }
     }
   }
 
   onPointerUp() {
     super.onPointerUp()
-    this.setDropZone(false)
+    this.input.dropZone = false
   }
 
   openDetail() {
