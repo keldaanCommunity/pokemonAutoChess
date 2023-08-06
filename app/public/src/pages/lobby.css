@@ -1,12 +1,8 @@
 .lobby {
   height: 100vh;
   padding: 1vw;
-  display: grid;
-  grid-template:
-    "nav nav nav nav" min-content
-    "user rooms online news" 1fr
-    "user rooms online chat" 1fr
-    / 30vw 25vw 15vw 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 1vw;
 }
 
@@ -47,22 +43,22 @@
 }
 
 .lobby .room-menu {
-  grid-area: rooms;
+  width: 480px;
   height: 100%;
 }
 
 .lobby .current-users-menu {
-  grid-area: online;
+  width: 300px;
   height: 100%;
 }
 
 .lobby .user-chat {
-  grid-area: chat;
   overflow-y: auto;
+  height: 100%;
 }
 
 .lobby .news {
-  grid-area: news;
+  height: 100%;
 }
 
 .lobby h1 {
@@ -94,4 +90,18 @@
     margin-top: 1em;
     max-height: 80vh;
   }
+}
+
+.main-lobby {
+  display: flex;
+  gap: 4px;
+  overflow: scroll;
+  justify-content: space-between;
+}
+
+.main-lobby .news-chat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 388px;
 }

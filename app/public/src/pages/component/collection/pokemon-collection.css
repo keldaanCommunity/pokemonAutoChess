@@ -1,6 +1,8 @@
 #pokemon-collection {
-  height: 100vh;
-  padding: 1vw;
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  padding-bottom: 40px;
 }
 
 #pokemon-collection > .nes-container {

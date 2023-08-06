@@ -11,9 +11,7 @@ import UnownPanel from "./unown-panel"
 import "./pokemon-collection.css"
 import { t } from "i18next"
 
-export default function PokemonCollection(props: {
-  toggleCollection: () => void
-}) {
+export default function PokemonCollection() {
   const metadata = tracker as unknown as { [key: string]: ITracker }
   const [selectedPokemon, setSelectedPokemon] = useState<Pkm | undefined>(
     undefined
@@ -25,15 +23,6 @@ export default function PokemonCollection(props: {
   return (
     <div id="pokemon-collection">
       <header>
-        <button
-          onClick={() => {
-            props.toggleCollection()
-          }}
-          className="bubbly blue"
-        >
-          {t("back_to_lobby")}
-        </button>
-        <div className="spacer"></div>
         <label>
           <input
             type="checkbox"

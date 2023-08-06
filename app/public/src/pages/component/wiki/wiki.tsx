@@ -12,13 +12,9 @@ import "./wiki.css"
 import WikiAbility from "./wiki-ability"
 import { t } from "i18next"
 
-export default function Wiki(props: { toggleWiki: () => void }) {
+export default function Wiki() {
   return (
     <div id="wiki-page">
-      <button onClick={props.toggleWiki} className="bubbly blue">
-        {t("back_to_lobby")}
-      </button>
-
       <div className="nes-container">
         <Tabs>
           <TabList>

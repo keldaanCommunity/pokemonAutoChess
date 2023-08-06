@@ -7,7 +7,7 @@ import { BoosterCard } from "./booster-card"
 import "./booster.css"
 import { t } from "i18next"
 
-export default function Booster(props: { toggle: () => void }) {
+export default function Booster() {
   const dispatch = useAppDispatch()
   const user = useAppSelector((state) => state.lobby.user)
   const numberOfBooster = user ? user.booster : 0
@@ -15,15 +15,6 @@ export default function Booster(props: { toggle: () => void }) {
 
   return (
     <div id="boosters-page">
-      <button
-        onClick={() => {
-          dispatch(setBoosterContent([]))
-          props.toggle()
-        }}
-        className="bubbly blue"
-      >
-        {t("back_to_lobby")}
-      </button>
       <div className="nes-container">
         <p className="help">
           {numberOfBooster === 0 ? t("boosters_hint") : t("open_boosters_hint")}

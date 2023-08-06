@@ -16,7 +16,7 @@ import { BotDifficulty } from "../../../types/enum/Game"
 import { PkmProposition } from "../../../types/enum/Pokemon"
 import { Language } from "../../../types/enum/Language"
 
-interface INetwork {
+export interface INetwork {
   client: Client
   lobby: Room<ICustomLobbyState> | undefined
   preparation: Room<PreparationState> | undefined

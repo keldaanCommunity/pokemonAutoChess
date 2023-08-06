@@ -1,12 +1,12 @@
 #boosters-page {
-  height: 100vh;
+  height: 100%;
   padding: 1vw;
 }
 
 #boosters-page > .nes-container {
   position: relative;
   margin: 1vw 0 0 0;
-  height: calc(100vh - 6vw);
+  height: 90%;
   overflow-y: auto;
   background-image: url("assets/ui/back1.png");
   background-size: cover;
@@ -40,4 +40,11 @@
 #boosters-page .actions img {
   height: 128px;
   width: 128px;
+}
+
+.boosters-content {
+  height: 50%;
+  display: flex;
+  align-items: center;
+  gap: 40px;
 }

@@ -12,7 +12,7 @@ export default function Chat(props: { source: string }) {
   const MAX_MESSAGE_LENGTH = 250
 
   return (
-    <div className="nes-container user-chat">
+    <div className="nes-container user-chat ">
       <h1>{user?.anonymous ? t("chat_disabled_anonymous") : "Chat"}</h1>
       <ChatHistory source={props.source} />
       <form

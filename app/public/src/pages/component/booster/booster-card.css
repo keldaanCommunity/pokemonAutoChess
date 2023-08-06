@@ -1,7 +1,5 @@
 .booster-card {
-  position: absolute;
   transition: all 1s ease-out;
-  top: 20vh;
   width: 10vw;
   height: 15vw;
   animation: 1s ease-in-out distribute;
@@ -73,26 +71,6 @@
     left: 50vw;
     transform: translateX(-50%);
   }
-}
-
-.booster-card:nth-child(1) {
-  left: 15vw;
-}
-
-.booster-card:nth-child(2) {
-  left: 30vw;
-}
-
-.booster-card:nth-child(3) {
-  left: 45vw;
-}
-
-.booster-card:nth-child(4) {
-  left: 60vw;
-}
-
-.booster-card:nth-child(5) {
-  left: 75vw;
 }
 
 .booster-card .back img {

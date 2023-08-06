@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react"
-import { Link, Navigate } from "react-router-dom"
+import React, { useCallback, useEffect, useState } from "react"
+import { Navigate } from "react-router-dom"
 import Chat from "./component/chat/chat"
 import News from "./component/news/news"
 import CurrentUsers from "./component/available-user-menu/current-users"
@@ -7,10 +7,7 @@ import RoomMenu from "./component/available-room-menu/room-menu"
 import TabMenu from "./component/lobby-menu/tab-menu"
 import firebase from "firebase/compat/app"
 import { FIREBASE_CONFIG } from "./utils/utils"
-import { Client, Room, RoomAvailable } from "colyseus.js"
-import DiscordButton from "./component/buttons/discord-button"
-import DonateButton from "./component/buttons/donate-button"
-import PolicyButton from "./component/buttons/policy-button"
+import { Room, RoomAvailable } from "colyseus.js"
 import Wiki from "./component/wiki/wiki"
 import TeamBuilder from "./component/bot-builder/team-builder"
 import MetaReport from "./component/meta-report/meta-report"
@@ -18,12 +15,10 @@ import { useAppDispatch, useAppSelector } from "../hooks"
 import {
   joinLobby,
   logIn,
-  logOut,
-  requestMeta,
-  requestBotList,
   requestLeaderboard,
   requestBotLeaderboard,
-  requestLevelLeaderboard
+  requestLevelLeaderboard,
+  INetwork
 } from "../stores/NetworkStore"
 import {
   setBotData,
@@ -39,7 +34,6 @@ import {
   removeUser,
   setSearchedUser,
   setUser,
-  leaveLobby,
   changePokemonConfig,
   addPokemonConfig,
   setBoosterContent,
@@ -50,14 +44,14 @@ import {
   setBotLeaderboard,
   setLeaderboard,
   pushBotLog,
-  setLanguage
+  setLanguage,
+  IUserLobbyState
 } from "../stores/LobbyStore"
 import {
   ICustomLobbyState,
   ISuggestionUser,
   NonFunctionPropNames,
   Role,
-  Title,
   Transfer
 } from "../../../types"
 import LobbyUser from "../../../models/colyseus-models/lobby-user"
@@ -68,44 +62,39 @@ import PokemonCollection from "./component/collection/pokemon-collection"
 import PokemonConfig from "../../../models/colyseus-models/pokemon-config"
 import Booster from "./component/booster/booster"
 import { IPokemonsStatistic } from "../../../models/mongo-models/pokemons-statistic"
-import { cc } from "./utils/jsx"
 import "./lobby.css"
 import { BotManagerPanel } from "./component/bot-builder/bot-manager-panel"
-import { useTranslation } from "react-i18next"
-import { LanguageButton } from "./component/buttons/language-button"
 import i18n from "../i18n"
+import { Header } from "./header"
+
+export type Page =
+  | "main_lobby"
+  | "booster"
+  | "bot_builder"
+  | "bot_manager"
+  | "collection"
+  | "meta"
+  | "wiki"
 
 export default function Lobby() {
   const dispatch = useAppDispatch()
-  const { t } = useTranslation()
-  const client: Client = useAppSelector((state) => state.network.client)
-  const room: Room<ICustomLobbyState> | undefined = useAppSelector(
-    (state) => state.network.lobby
-  )
-  const uid: string = useAppSelector((state) => state.network.uid)
-  const meta: IMeta[] = useAppSelector((state) => state.lobby.meta)
-  const metaItems: IItemsStatistic[] = useAppSelector(
-    (state) => state.lobby.metaItems
-  )
-  const metaPokemons: IPokemonsStatistic[] = useAppSelector(
-    (state) => state.lobby.metaPokemons
-  )
-  const botList: { name: string; avatar: string }[] = useAppSelector(
-    (state) => state.lobby.botList
-  )
-
-  const user = useAppSelector((state) => state.lobby.user)
-  const language = useAppSelector((state) => state.lobby.language)
-
-  const numberOfBooster = user?.booster ?? 0
+  const {
+    client,
+    meta,
+    metaItems,
+    metaPokemons,
+    user
+  }: Partial<INetwork> & Partial<IUserLobbyState> = useAppSelector((state) => ({
+    client: state.network.client,
+    meta: state.lobby.meta,
+    metaItems: state.lobby.metaItems,
+    metaPokemons: state.lobby.metaPokemons,
+    botList: state.lobby.botList,
+    user: state.lobby.user
+  }))
 
   const [lobbyJoined, setLobbyJoined] = useState<boolean>(false)
-  const [showWiki, toggleWiki] = useState<boolean>(false)
-  const [showMeta, toggleMeta] = useState<boolean>(false)
-  const [showBuilder, toggleBuilder] = useState<boolean>(false)
-  const [showBotManager, toggleBotManager] = useState<boolean>()
-  const [showCollection, toggleCollection] = useState<boolean>(false)
-  const [showBooster, toggleBooster] = useState<boolean>(false)
+  const [page, setPage] = useState<Page>("main_lobby")
   const [toPreparation, setToPreparation] = useState<boolean>(false)
   const [toAuth, setToAuth] = useState<boolean>(false)
 
@@ -313,153 +302,65 @@ export default function Lobby() {
     }
   }, [lobbyJoined, dispatch, client])
 
+  const changePage = useCallback((nextPage: Page) => setPage(nextPage), [])
+
+  const backToLobby = useCallback(() => changePage("main_lobby"), [changePage])
+
   if (toAuth) {
     return <Navigate to={"/"} />
   }
+
   if (toPreparation) {
     return <Navigate to="/preparation"></Navigate>
   }
-  if (showCollection) {
-    return (
-      <PokemonCollection
-        toggleCollection={() => toggleCollection(!showCollection)}
-      />
-    )
-  }
-  if (showBooster) {
-    return (
-      <Booster
-        toggle={() => {
-          toggleBooster(!showBooster)
-        }}
-      />
-    )
-  }
-  if (showWiki) {
-    return <Wiki toggleWiki={() => toggleWiki(!showWiki)} />
-  }
-  if (showMeta && meta.length > 0 && metaItems.length > 0) {
-    return (
-      <MetaReport
-        toggleMeta={() => toggleMeta(!showMeta)}
-        meta={meta}
-        metaItems={metaItems}
-        metaPokemons={metaPokemons}
-      />
-    )
-  }
-  if (showBotManager && user?.role !== Role.BASIC) {
-    return (
-      <BotManagerPanel
-        toggleBotManager={() => toggleBotManager(!showBotManager)}
-      />
-    )
-  }
-  if (showBuilder) {
-    return <TeamBuilder toggleBuilder={() => toggleBuilder(!showBuilder)} />
-  } else {
-    return (
-      <main className="lobby">
-        <nav>
-          <Link to="/" style={{ textDecoration: "none" }}>
-            <button
-              className="bubbly red"
-              onClick={async () => {
-                await room?.leave()
-                await firebase.auth().signOut()
-                dispatch(leaveLobby())
-                dispatch(logOut())
-              }}
-            >
-              {t("sign_out")}
-            </button>
-          </Link>
-          <button
-            className="bubbly blue"
-            onClick={() => {
-              toggleCollection(!showCollection)
-            }}
-          >
-            <img src="assets/ui/collection.svg" alt="" />
-            {t("collection")}
-          </button>
-          <button
-            className={cc("bubbly", "blue", { shimmer: numberOfBooster > 0 })}
-            onClick={() => {
-              toggleBooster(!showBooster)
-            }}
-          >
-            <img src="assets/ui/booster.svg" alt="" />
-            {t("boosters")}
-          </button>
-          <button
-            className="bubbly green"
-            onClick={() => {
-              toggleWiki(!showWiki)
-            }}
-          >
-            <img src="assets/ui/wiki.svg" alt="" />
-            {t("wiki")}
-          </button>
-          {user?.anonymous === false && user?.title === Title.BOT_BUILDER && (
-            <button
-              disabled={user?.anonymous}
-              className="bubbly green"
-              onClick={() => {
-                if (user?.anonymous === false && botList.length == 0) {
-                  dispatch(requestBotList())
-                }
-                toggleBuilder(!showBuilder)
-              }}
-            >
-              <img src="assets/ui/bot.svg" alt="" />
-              {t("bot_builder")}
-            </button>
-          )}
-          {user?.role === Role.ADMIN ||
-          user?.role === Role.MODERATOR ||
-          user?.role === Role.BOT_MANAGER ? (
-            <button
-              className="bubbly green"
-              onClick={() => {
-                if (user?.role !== Role.BASIC && botList.length == 0) {
-                  dispatch(requestBotList())
-                }
-                toggleBotManager(!showBotManager)
-              }}
-            >
-              <img src="assets/ui/bot.svg" alt="" />
-              {t("bot_admin")}
-            </button>
-          ) : null}
 
-          <button
-            className="bubbly green"
-            onClick={() => {
-              if (meta.length == 0 || metaItems.length == 0) {
-                dispatch(requestMeta())
-              }
-              toggleMeta(!showMeta)
-            }}
-          >
-            <img src="assets/ui/meta.svg" alt="" />
-            {t("meta")}
-          </button>
-          <DiscordButton />
-          <DonateButton />
-          <PolicyButton />
-          <LanguageButton />
-        </nav>
+  return (
+    <main className="lobby">
+      <Header changePage={changePage} showBackButton={page !== "main_lobby"} />
 
-        <TabMenu />
-        <RoomMenu
+      {page === "collection" && <PokemonCollection />}
+
+      {page === "booster" && <Booster />}
+
+      {page === "wiki" && <Wiki />}
+
+      {page === "meta" && meta.length > 0 && metaItems.length > 0 && (
+        <MetaReport
+          meta={meta}
+          metaItems={metaItems}
+          metaPokemons={metaPokemons}
+        />
+      )}
+
+      {page === "bot_manager" && user?.role !== Role.BASIC && (
+        <BotManagerPanel />
+      )}
+
+      {page === "bot_builder" && <TeamBuilder />}
+
+      {page === "main_lobby" && (
+        <MainLobby
           toPreparation={toPreparation}
           setToPreparation={setToPreparation}
         />
-        <CurrentUsers />
+      )}
+    </main>
+  )
+}
+
+function MainLobby({ toPreparation, setToPreparation }) {
+  return (
+    <div className="main-lobby">
+      <TabMenu />
+      <RoomMenu
+        toPreparation={toPreparation}
+        setToPreparation={setToPreparation}
+      />
+      <CurrentUsers />
+      <div className="news-chat">
         <News />
         <Chat source="lobby" />
-      </main>
-    )
-  }
+      </div>
+    </div>
+  )
 }

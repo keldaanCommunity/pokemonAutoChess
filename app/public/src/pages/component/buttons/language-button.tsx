@@ -5,7 +5,7 @@ import { Language, LanguageFlag } from "../../../../../types/enum/Language"
 import { selectLanguage } from "../../../stores/NetworkStore"
 
 export function LanguageButton() {
-  const { t, i18n } = useTranslation()
+  const { i18n } = useTranslation()
   const dispatch = useAppDispatch()
   const selectedLanguage = useAppSelector((state) => state.lobby.language)
   const language = selectedLanguage ? selectedLanguage : i18n.language
