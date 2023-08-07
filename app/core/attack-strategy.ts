@@ -1712,16 +1712,16 @@ export class PetalDanceStrategy extends AttackStrategy {
 
     switch (pokemon.stars) {
       case 1:
-        damage = 15
-        count = 2
+        damage = 20
+        count = 3
         break
       case 2:
         damage = 30
         count = 4
         break
       case 3:
-        damage = 60
-        count = 6
+        damage = 50
+        count = 5
         break
       default:
         break
@@ -2704,7 +2704,7 @@ export class CalmMindStrategy extends AttackStrategy {
   }
 }
 
-export class ComsicPowerStrategy extends AttackStrategy {
+export class CosmicPowerStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
