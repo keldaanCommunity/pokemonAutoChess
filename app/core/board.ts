@@ -205,7 +205,7 @@ export default class Board {
     let x = x0,
       y = y0
     for (let ix = 0, iy = 0; ix < nx || iy < ny; ) {
-      let decision = (1 + 2 * ix) * ny - (1 + 2 * iy) * nx
+      const decision = (1 + 2 * ix) * ny - (1 + 2 * iy) * nx
       if (decision === 0) {
         // next step is diagonal
         x += sign_x
@@ -253,8 +253,8 @@ export default class Board {
   }
 
   getFlyAwayCell(x: number, y: number): Cell | null {
-    let cx = Math.round((x + this.columns * 0.5) % this.columns)
-    let cy = Math.round((y + this.rows * 0.5) % this.rows)
+    const cx = Math.round((x + this.columns * 0.5) % this.columns)
+    const cy = Math.round((y + this.rows * 0.5) % this.rows)
     let radius = 1
     const candidates: Cell[] = [{ x: cx, y: cy, value: this.getValue(cx, cy) }]
     while (candidates[0].value !== undefined && radius < 5) {

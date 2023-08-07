@@ -6151,7 +6151,7 @@ export class Meloetta extends Pokemon {
       4,
       AttackSprite.PSYCHIC_RANGE,
       2,
-      120,
+      60,
       Ability.RELIC_SONG,
       shiny,
       emotion,
