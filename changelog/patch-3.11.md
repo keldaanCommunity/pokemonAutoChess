@@ -6,6 +6,7 @@
  - Buff Victini: Searing shot 20 40 special damage
  - Buff Gyarados: 9 8 magikarp are needed to evolve into Gyarados
  - Nerf Arceus: Atk ~~30~~ -> 25
+ - Nerf Meloetta: Relic song: Emits a note. After the third note, put asleep the whole enemy team.Buff mana 120 -> 60
 
 # Changes to Synergies
 
