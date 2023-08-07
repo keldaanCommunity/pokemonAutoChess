@@ -170,12 +170,12 @@ export const EffectDescription: {
     fra: ``
   },
   [Effect.DRIZZLE]: {
-    eng: `50% chance to dodge. Rare pokemons can be fished.`,
+    eng: `45% chance to dodge. Rare pokemons can be fished.`,
     esp: ``,
     fra: ``
   },
   [Effect.PRIMORDIAL_SEA]: {
-    eng: `70% chance to dodge. Epic pokemons can be fished.`,
+    eng: `60% chance to dodge. Epic pokemons can be fished.`,
     esp: ``,
     fra: ``
   },

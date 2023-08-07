@@ -6813,7 +6813,7 @@ export class Kyogre extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.KYOGRE,
-      [Synergy.WATER, Synergy.AQUATIC],
+      [Synergy.WATER, Synergy.MONSTER],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       300,
@@ -7193,7 +7193,7 @@ export class Farfetchd extends Pokemon {
       [Synergy.FLYING, Synergy.NORMAL],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
-      220,
+      200,
       20,
       4,
       4,
@@ -8194,7 +8194,7 @@ export class PrimalKyogre extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.PRIMAL_KYOGRE,
-      [Synergy.WATER, Synergy.ELECTRIC, Synergy.AQUATIC],
+      [Synergy.WATER, Synergy.ELECTRIC, Synergy.MONSTER],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       400,
