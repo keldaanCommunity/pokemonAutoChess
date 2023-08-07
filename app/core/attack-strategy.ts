@@ -1467,19 +1467,21 @@ export class RelicSongStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const duration = Math.round(2000 * (1 + pokemon.ap / 200))
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
-      if (tg && pokemon.team != tg.team) {
-        tg.status.triggerSleep(duration, tg)
-        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
-          id: pokemon.simulation.id,
-          skill: pokemon.skill,
-          positionX: tg.positionX,
-          positionY: tg.positionX,
-          orientation: tg.orientation
-        })
-      }
-    })
+    if(pokemon.count.ult % 3 === 0){
+      const duration = Math.round(2000 * (1 + pokemon.ap / 200))
+      board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
+        if (tg && pokemon.team != tg.team) {
+          tg.status.triggerSleep(duration, tg)
+          pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+            id: pokemon.simulation.id,
+            skill: pokemon.skill,
+            positionX: tg.positionX,
+            positionY: tg.positionX,
+            orientation: tg.orientation
+          })
+        }
+      })
+    }
   }
 }
 
