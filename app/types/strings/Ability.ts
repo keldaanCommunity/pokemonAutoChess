@@ -1942,7 +1942,7 @@ export const AbilityDescription: { [key in Ability]: Langage } = {
   },
   [Ability.FORECAST]: {
     eng: `Gives [10,SP] ${Stat.SHIELD} to your team, plus additional bonus depending on the weather:
-Sun: also gives [5,SP] ${Stat.ATK}
+Sun: also gives [3,SP] ${Stat.ATK}
 Rain: also gives [20,SP] ${Stat.MANA}
 Snow: also gives [2,SP] ${Stat.DEF} / ${Stat.SPE_DEF}`,
     esp: "",
