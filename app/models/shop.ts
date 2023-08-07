@@ -1,10 +1,10 @@
 import PokemonFactory from "./pokemon-factory"
 import {
+  getUnownsPoolPerStage,
   Pkm,
   PkmDuos,
   PkmFamily,
-  PkmProposition,
-  Unowns
+  PkmProposition
 } from "../types/enum/Pokemon"
 import Player from "./colyseus-models/player"
 import {
@@ -132,8 +132,10 @@ export default class Shop {
     player.shop.forEach((pkm) => this.releasePokemon(pkm))
 
     if (player.effects.list.includes(Effect.EERIE_SPELL) && !manualRefresh) {
+      const stageLevel = player.simulation.stageLevel
+      const unowns = getUnownsPoolPerStage(stageLevel)
       for (let i = 0; i < 6; i++) {
-        player.shop[i] = pickRandomIn(Unowns)
+        player.shop[i] = pickRandomIn(unowns)
       }
     } else {
       for (let i = 0; i < 6; i++) {
@@ -223,7 +225,8 @@ export default class Shop {
   }
 
   pickPokemon(player: Player) {
-    const rarityProbability = RarityProbabilityPerLevel[player.experienceManager.level]
+    const rarityProbability =
+      RarityProbabilityPerLevel[player.experienceManager.level]
     const rarity_seed = Math.random()
     let pokemon = Pkm.MAGIKARP
     let threshold = 0
@@ -238,7 +241,8 @@ export default class Shop {
       player.effects.list.includes(Effect.LIGHT_SCREEN) &&
       chance(UNOWN_RATE)
     ) {
-      return pickRandomIn(Unowns)
+      const unowns = getUnownsPoolPerStage(player.simulation.stageLevel)
+      return pickRandomIn(unowns)
     }
 
     player.board.forEach((pokemon: Pokemon) => {
