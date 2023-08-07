@@ -3581,7 +3581,7 @@ export class Igglybuff extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.IGGLYBUFF,
-      [Synergy.FAIRY, Synergy.BABY, Synergy.SOUND],
+      [Synergy.BABY, Synergy.SOUND, Synergy.NORMAL],
       Rarity.UNCOMMON,
       Pkm.JIGGLYPUFF,
       65,

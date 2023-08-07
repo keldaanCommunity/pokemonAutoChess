@@ -15,6 +15,7 @@
  - Nerf Tapu Bulu Spedef/def ~~6~~ -> 5 Atk ~~19~~ -> 17
  - Change Budew Petal Dance: Deals 20/30/50 to 3/4/5 targets
  - Buff Phione Atk ~~12~~ -> 14
+ - Change Igglybuff: ~~Baby/Fairy/Sound~~ -> Baby/Normal/Sound
  
 # Changes to Synergies
 
@@ -31,5 +32,6 @@
 # Bugfix
 
  - Fix Wobbuffet ability
+ - Improve Dash ability: Use of the Manhattan distance instead of Chebyshev
 
 # Misc
