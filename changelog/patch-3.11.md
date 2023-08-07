@@ -16,6 +16,7 @@
 - Change Budew Petal Dance: Deals 20/30/50 to 3/4/5 targets
 - Buff Phione Atk ~~12~~ -> 14
 - Change Igglybuff: ~~Baby/Fairy/Sound~~ -> Baby/Normal/Sound
+- Nerf Clefairy Metronome: Can no longer trigger Hidden power abilities
 
 # Changes to Synergies
 
@@ -34,5 +35,7 @@
 
 - Fix Wobbuffet ability
 - Improve Dash ability: Use of the Manhattan distance instead of Chebyshev
+- Greninja: Improve water shuriken aim
+- Metronome ability animation is now displayed correctly
 
 # Misc

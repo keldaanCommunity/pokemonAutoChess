@@ -6,7 +6,7 @@ import Board from "./board"
 import PokemonEntity from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
 import { Synergy } from "../types/enum/Synergy"
-import { Ability } from "../types/enum/Ability"
+import { Ability, CopyableAbility } from "../types/enum/Ability"
 import PokemonFactory from "../models/pokemon-factory"
 import { Pkm } from "../types/enum/Pokemon"
 import {
@@ -397,10 +397,7 @@ export class KnowledgeThiefStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    if (
-      target.skill !== Ability.KNOWLEDGE_THIEF &&
-      target.skill !== Ability.MIMIC
-    ) {
+    if (CopyableAbility[target.skill]) {
       AbilityStrategy[target.skill].process(pokemon, state, board, target, crit)
     }
   }
@@ -3894,10 +3891,22 @@ export class MetronomeStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
 
-    const strategy = pickRandomIn(
-      Object.values(AbilityStrategy) as AttackStrategy[]
+    const skill = pickRandomIn(
+      (Object.keys(Ability) as Ability[])
+        .filter((a) => CopyableAbility[a])
     )
-    strategy.process(pokemon, state, board, target, crit)
+
+    pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+      id: pokemon.simulation.id,
+      skill: skill,
+      positionX: pokemon.positionX,
+      positionY: pokemon.positionY,
+      targetX: target.positionX,
+      targetY: target.positionY,
+      orientation: pokemon.orientation
+    })
+
+    AbilityStrategy[skill].process(pokemon, state, board, target, crit)
   }
 }
 
@@ -4020,6 +4029,15 @@ export class WaterShurikenStrategy extends AttackStrategy {
       default:
         break
     }
+
+    pokemon.orientation = board.orientation(
+      pokemon.positionX,
+      pokemon.positionY,
+      target.positionX,
+      target.positionY,
+      pokemon,
+      target
+    )
 
     const orientations = [
       pokemon.orientation,
@@ -4224,10 +4242,7 @@ export class MimicStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    if (
-      target.skill !== Ability.KNOWLEDGE_THIEF &&
-      target.skill !== Ability.MIMIC
-    ) {
+    if (CopyableAbility[target.skill]) {
       AbilityStrategy[target.skill].process(pokemon, state, board, target, crit)
     }
   }

@@ -27,7 +27,9 @@ export default class PokemonAvatar extends Pokemon {
       scene,
       x,
       y,
-      PokemonFactory.createPokemonFromName(pokemon.name),
+      PokemonFactory.createPokemonFromName(pokemon.name, {
+        selectedShiny: pokemon.shiny
+      }),
       playerId,
       false
     )
@@ -36,7 +38,7 @@ export default class PokemonAvatar extends Pokemon {
     this.emoteBubble = null
     this.emoteMenu = null
     this.isCurrentPlayerAvatar = this.playerId === scene.uid
-    if(scene.room?.state.phase === GamePhaseState.MINIGAME){
+    if (scene.room?.state.phase === GamePhaseState.MINIGAME) {
       this.drawCircles()
     } else {
       this.drawLifebar()
@@ -87,11 +89,11 @@ export default class PokemonAvatar extends Pokemon {
   }
 
   drawSpeechBubble(emoteAvatar: string, isOpponent: boolean) {
-    if(this.emoteMenu){
+    if (this.emoteMenu) {
       this.emoteMenu.destroy()
       this.emoteMenu = null
     }
-    
+
     this.emoteBubble = new EmoteBubble(this.scene, emoteAvatar, isOpponent)
     this.add(this.emoteBubble)
 
@@ -100,14 +102,14 @@ export default class PokemonAvatar extends Pokemon {
     this.emoteBubble.setPosition(x, y)
 
     setTimeout(() => {
-      if(this.emoteBubble){
+      if (this.emoteBubble) {
         this.emoteBubble.destroy()
         this.emoteBubble = null
-      } 
+      }
     }, 3000)
   }
 
-  drawLifebar(){
+  drawLifebar() {
     this.lifebar = new LifeBar(
       this.scene,
       0,
@@ -121,10 +123,10 @@ export default class PokemonAvatar extends Pokemon {
   }
 
   toggleEmoteMenu() {
-    if(this.emoteMenu){
+    if (this.emoteMenu) {
       this.emoteMenu.destroy()
       this.emoteMenu = null
-    } else if(this.isCurrentPlayerAvatar){
+    } else if (this.isCurrentPlayerAvatar) {
       this.emoteMenu = new EmoteMenu(this.scene, this.index, this.shiny)
       this.add(this.emoteMenu)
     }
@@ -134,11 +136,12 @@ export default class PokemonAvatar extends Pokemon {
 export class EmoteBubble extends GameObjects.DOMElement {
   dom: HTMLDivElement
 
-  constructor(scene: Phaser.Scene, emoteAvatar: string, isOpponent: boolean){
+  constructor(scene: Phaser.Scene, emoteAvatar: string, isOpponent: boolean) {
     super(scene, 0, 0)
 
     this.dom = document.createElement("div")
-    this.dom.className = "game-emote-bubble " + (isOpponent ? "opponent" : "current")
+    this.dom.className =
+      "game-emote-bubble " + (isOpponent ? "opponent" : "current")
 
     const emoteImg = document.createElement("img")
     emoteImg.src = getAvatarSrc(emoteAvatar)
