@@ -8006,7 +8006,7 @@ export class Arceus extends Pokemon {
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       300,
-      30,
+      25,
       5,
       5,
       1,
