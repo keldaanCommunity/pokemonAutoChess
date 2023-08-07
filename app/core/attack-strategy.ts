@@ -4123,7 +4123,7 @@ export class ForecastStrategy extends AttackStrategy {
       if (p && pokemon.team === p.team) {
         p.handleShield(10, pokemon, true)
         if (pokemon.name === Pkm.CASTFORM_SUN) {
-          p.addAttack(5, true)
+          p.addAttack(3, true)
         }
         if (pokemon.name === Pkm.CASTFORM_RAIN) {
           p.setMana(p.mana + Math.round(20 * (1 + pokemon.ap / 100)))
