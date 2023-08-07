@@ -17,7 +17,7 @@ import { logger } from "../utils/logger"
 import { Passive } from "../types/enum/Passive"
 import { Weather } from "../types/enum/Weather"
 import { max, min } from "../utils/number"
-import { distanceC } from "../utils/distance"
+import { distanceC, distanceM } from "../utils/distance"
 
 export default class PokemonState {
   handleHeal(
@@ -673,7 +673,7 @@ export default class PokemonState {
             .map((cell) => ({
               x: cell.x,
               y: cell.y,
-              distance: distanceC(
+              distance: distanceM(
                 pokemon.positionX,
                 pokemon.positionY,
                 cell.x,
