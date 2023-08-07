@@ -3918,12 +3918,22 @@ export class MetronomeStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
 
-    const strategy = pickRandomIn(
+    const skill = pickRandomIn(
       (Object.keys(Ability) as Ability[])
         .filter((a) => CopyableAbility[a])
-        .map((a) => AbilityStrategy[a])
     )
-    strategy.process(pokemon, state, board, target, crit)
+
+    pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+      id: pokemon.simulation.id,
+      skill: skill,
+      positionX: pokemon.positionX,
+      positionY: pokemon.positionY,
+      targetX: target.positionX,
+      targetY: target.positionY,
+      orientation: pokemon.orientation
+    })
+
+    AbilityStrategy[skill].process(pokemon, state, board, target, crit)
   }
 }
 
