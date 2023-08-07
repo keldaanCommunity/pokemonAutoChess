@@ -11,6 +11,9 @@
  - Buff Mew: Atk ~~12~~ -> 18 Range ~~3~~ -> 4
  - Change Kyogre: ~~Water/Aquatic~~ -> Water/Monster
  - Nerf Farfetchd: ~~220~~ -> 200
+ - Buff Solrock/Lunatone: Atk ~~15~~ -> 20
+ - Nerf Tapu Bulu Spedef/def ~~6~~ -> 5 Atk ~~19~~ -> 17
+ - Change Budew Petal Dance: Deals 20/30/50 to 3/4/5 targets
  
 # Changes to Synergies
 
