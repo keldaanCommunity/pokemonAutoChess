@@ -12686,7 +12686,7 @@ export class UnownExclamation extends Pokemon {
       9,
       AttackSprite.PSYCHIC_RANGE,
       1,
-      50,
+      100,
       Ability.HIDDEN_POWER_EM,
       shiny,
       emotion,

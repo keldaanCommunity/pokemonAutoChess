@@ -740,8 +740,9 @@ export class HiddenPowerEMStrategy extends HiddenPowerStrategy {
       [0, board.rows - 1],
       [board.columns - 1, board.rows - 1]
     ]
+    const candidates = Unowns.filter((u) => u !== Pkm.UNOWN_EXCLAMATION)
     corners.forEach(([x, y]) => {
-      const unownName = pickRandomIn(Unowns)
+      const unownName = pickRandomIn(candidates)
       const unown = PokemonFactory.createPokemonFromName(unownName, player)
       const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardTo(
         x,
