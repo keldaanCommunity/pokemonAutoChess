@@ -103,7 +103,8 @@ export const EffectName: { [key in Effect]: string } = {
   [Effect.MISTY]: "Misty",
   [Effect.WINDY]: "Windy",
   [Effect.NIGHT]: "Night",
-  [Effect.HYDRATATION]: "Hydratation"
+  [Effect.HYDRATATION]: "Hydratation",
+  [Effect.COOL_BREEZE]: "Cool Breeze"
 }
 
 export const EffectDescription: {
@@ -456,6 +457,11 @@ export const EffectDescription: {
   },
   [Effect.STRANGE_STEAM]: {
     eng: `Shocks deal 55 ${Damage.SPECIAL}`,
+    esp: ``,
+    fra: ``
+  },
+  [Effect.COOL_BREEZE]: {
+    eng: `+1 ${Stat.SPE_DEF}`,
     esp: ``,
     fra: ``
   },

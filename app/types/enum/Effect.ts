@@ -69,6 +69,7 @@ export enum Effect {
   AROMATIC_MIST,
   FAIRY_WIND,
   STRANGE_STEAM,
+  COOL_BREEZE,
   CHILLY,
   FROSTY,
   FREEZING,
