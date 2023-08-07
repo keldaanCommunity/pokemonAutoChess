@@ -17,6 +17,7 @@
  
 # Changes to Synergies
 
+ - Buff Ice: (2) Cool Breeze: All pokemons gains +1 special defense 
  - Nerf Water: ~~30/50/70%~~ 30/45/60% dodge
 
 # Changes to Items
