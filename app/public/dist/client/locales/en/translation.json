@@ -10,9 +10,9 @@
     "SPECIAL": "Special"
   },
   "damage": {
-    "SPECIAL": "Special damage",
-    "PHYSICAL": "Physical damage",
-    "TRUE": "True damage"
+    "SPECIAL": "special damage",
+    "PHYSICAL": "physical damage",
+    "TRUE": "true damage"
   },
   "ability": {
     "SOFT_BOILED": "Soft-Boiled",
@@ -1682,7 +1682,8 @@
     "code": "What language/library is used to code the game ?",
     "code_answer": "TypeScript, Phaser, Colyseus. If you want to contribute",
     "pull_requests": "pull requests are open",
-    "faq": "F.A.Q."
+    "faq": "F.A.Q.",
+    "damage": "What are the special damages and physical damages ?"
   },
   "tutorial": {
     "start": "How to start a game ?",
