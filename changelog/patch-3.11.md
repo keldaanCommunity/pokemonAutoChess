@@ -8,6 +8,7 @@
  - Nerf Arceus: Atk ~~30~~ -> 25
  - Nerf Meloetta: Relic song: Emits a note. After the third note, put asleep the whole enemy team.Buff mana 120 -> 60
  - Nerf Castform: Atk ~~20~~ -> 18 Castform-Sun ability ~~5~~->3 atk
+ - Buff Mew: Atk ~~12~~ -> 18 Range ~~3~~ -> 4
 
 # Changes to Synergies
 
