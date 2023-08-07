@@ -494,10 +494,10 @@ export default class PokemonState {
     ) {
       if (pokemon.grassHealCooldown - dt <= 0) {
         let heal = pokemon.effects.includes(Effect.SPORE)
-          ? 18
+          ? 16
           : pokemon.effects.includes(Effect.GROWTH)
-          ? 10
-          : 5
+          ? 8
+          : 4
         if (
           pokemon.effects.includes(Effect.HYDRATATION) &&
           pokemon.simulation.weather === Weather.RAIN

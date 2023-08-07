@@ -131,17 +131,17 @@ export const EffectDescription: {
     fra: `80 ${Stat.SHIELD}`
   },
   [Effect.INGRAIN]: {
-    eng: `Restore 5 ${Stat.HP} per second`,
+    eng: `Restore 4 ${Stat.HP} per second`,
     esp: ``,
     fra: ``
   },
   [Effect.GROWTH]: {
-    eng: `Restore 10 ${Stat.HP} per second`,
+    eng: `Restore 8 ${Stat.HP} per second`,
     esp: ``,
     fra: ``
   },
   [Effect.SPORE]: {
-    eng: `Restore 18 ${Stat.HP} per second`,
+    eng: `Restore 16 ${Stat.HP} per second`,
     esp: ``,
     fra: ``
   },
