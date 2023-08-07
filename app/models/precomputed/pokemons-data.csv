@@ -392,7 +392,7 @@ Index,Name,Category,Tier,Additional pick,Type 1,Type 2,Type 3,Type 4,HP,Attack,D
 0491,darkrai,MYTHICAL,2,false,DARK,GHOST,,,300,30,2,2,2,120,DARK_VOID,darkrai,DARK,GHOST,,,false
 0492,shaymin,MYTHICAL,2,false,GRASS,FLORA,,,200,30,5,5,3,100,SEED_FLARE,shaymin,GRASS,FLORA,FLYING,,false
 0492-0001,shaymin-sky,MYTHICAL,2,false,GRASS,FLORA,FLYING,,300,30,5,5,3,100,SEED_FLARE,shaymin,GRASS,FLORA,FLYING,,false
-0493,arceus,MYTHICAL,2,false,,,,,300,30,5,5,1,100,JUDGEMENT,arceus,,,,,false
+0493,arceus,MYTHICAL,2,false,,,,,300,25,5,5,1,100,JUDGEMENT,arceus,,,,,false
 0494,victini,MYTHICAL,2,false,FIRE,PSYCHIC,,,300,30,5,5,1,100,SEARING_SHOT,victini,FIRE,PSYCHIC,,,false
 0495,snivy,HATCH,1,false,GRASS,FIELD,,,90,5,1,1,3,80,VENOSHOCK,snivy,GRASS,FIELD,,,false
 0496,servine,HATCH,2,false,GRASS,FIELD,,,160,11,1,1,3,80,VENOSHOCK,snivy,GRASS,FIELD,,,false
