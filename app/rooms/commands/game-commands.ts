@@ -890,7 +890,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         case Effect.STEEL_SURGE:
           player.titles.add(Title.ENGINEER)
           break
-        case Effect.SANDSTORM:
+        case Effect.DRILLER:
           player.titles.add(Title.GEOLOGIST)
           break
         case Effect.TOXIC:
