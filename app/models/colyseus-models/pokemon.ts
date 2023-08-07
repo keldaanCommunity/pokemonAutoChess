@@ -7534,7 +7534,7 @@ export class Phione extends Pokemon {
       Rarity.MYTHICAL,
       Pkm.MANAPHY,
       160,
-      12,
+      14,
       2,
       2,
       3,

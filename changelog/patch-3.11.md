@@ -14,11 +14,13 @@
  - Buff Solrock/Lunatone: Atk ~~15~~ -> 20
  - Nerf Tapu Bulu Spedef/def ~~6~~ -> 5 Atk ~~19~~ -> 17
  - Change Budew Petal Dance: Deals 20/30/50 to 3/4/5 targets
+ - Buff Phione Atk ~~12~~ -> 14
  
 # Changes to Synergies
 
  - Buff Ice: (2) Cool Breeze: All pokemons gains +1 special defense 
- - Nerf Water: ~~30/50/70%~~ 30/45/60% dodge
+ - Nerf Water: Give ~~30/50/70%~~ 30/45/60% dodge
+ - Nerf Normal: Give ~~15/30/45/60~~ 10/25/35/55 shield
 
 # Changes to Items
 
