@@ -593,7 +593,9 @@
     "NATU": "Natu",
     "XATU": "Xatu",
     "GLIGAR": "Scorplane",
-    "GLISCOR": "Scorvol"
+    "GLISCOR": "Scorvol",
+    "SHELLDER": "Décortiqueur",
+    "CLOYSTER": "Cloyster"
   },
   "ability": {
     "PECK": "Picpic",
@@ -791,7 +793,8 @@
     "HIDDEN_POWER_QM": "Puissance Cachée (?)",
     "HIDDEN_POWER_EM": "Puissance Cachée (!)",
     "DEFAULT": "Défaut",
-    "POISON_JAB": "Direct Toxik"
+    "POISON_JAB": "Direct Toxik",
+    "SHELL_SMASH": "Écrasement d'obus"
   },
   "ability_description": {
     "SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés",
@@ -989,7 +992,8 @@
     "POISON_JAB": "Inflige [40, 80, 120, SP] SPECIAL, change de place avec la cible et POISON à la fois la cible et le lanceur pendant 4s",
     "RELIC_SONG": "Émet une note. Après la troisième note, DORMIR toute l'équipe ennemie pendant [2,SP=0.5] secondes",
     "PETAL_DANCE": "Inflige [20,30,50,SP] SPÉCIAL à [3,4,5] Pokémon ennemis",
-    "FORECAST": "Donne [10, SP] BOUCLIER à votre équipe, plus un bonus supplémentaire en fonction de la météo :\n Soleil : donne également [3, SP] ATK\n Pluie : donne également [20,SP] MANA\n Neige : donne également [2,SP] DEF / SPE_DEF"
+    "FORECAST": "Donne [10, SP] BOUCLIER à votre équipe, plus un bonus supplémentaire en fonction de la météo :\n Soleil : donne également [3, SP] ATK\n Pluie : donne également [20,SP] MANA\n Neige : donne également [2,SP] DEF / SPE_DEF",
+    "SHELL_SMASH": "Inflige [15, 30, SP] SPÉCIAL aux ennemis adjacents ; gagnez 2 ATK, 20% AP et 20% ATK_SPEED, et perdez 1 DEF, 1 SPE_DEF"
   },
   "emotion": {
     "Teary-Eyed": "Larmoyant",
@@ -1214,7 +1218,8 @@
     "MISTY": "+20% SPECIAL\n+30 % de durée de SILENCE",
     "WINDY": "+10 % de chances d'esquiver (+20 % en FLYING)",
     "NIGHT": "+20% CRIT_CHANCE\n+30 % de durée de SLEEP",
-    "HYDRATATION": "La synergie GRASS soigne 5 HP supplémentaires par seconde sous la RAIN"
+    "HYDRATATION": "La synergie GRASS soigne 5 HP supplémentaires par seconde sous la RAIN",
+    "COOL_BREEZE": "+1 SPE_DEF"
   },
   "item": {
     "FOSSIL_STONE": "Fossile Dome",

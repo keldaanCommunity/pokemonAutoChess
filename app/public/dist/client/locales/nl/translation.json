@@ -1873,5 +1873,10 @@
   "ability_description.PETAL_DANCE": "Deel [20,30,50,SP] SPECIAL uit aan [3,4,5] vijandige Pokémon",
   "ability_description.FORECAST": "Geeft [10,SP] SHIELD aan je team, plus extra bonus afhankelijk van het weer:\n Zon: geeft ook [3,SP] ATK\n Regen: geeft ook [20,SP] MANA\n Sneeuw: geeft ook [2,SP] DEF / SPE_DEF",
   "effect.COOL_BREEZE": "Koel briesje",
-  "passive_description.WURMPLE": "Wurmple evolueert afhankelijk van het weer in de vorige fase:\nCascoon: NACHT, STORM, ZANDSTORM, SNEEUW\nSilcoon: ZON, REGEN, NEVEL, WINDERIG\nWillekeurig indien NEUTRAAL"
+  "passive_description.WURMPLE": "Wurmple evolueert afhankelijk van het weer in de vorige fase:\nCascoon: NACHT, STORM, ZANDSTORM, SNEEUW\nSilcoon: ZON, REGEN, NEVEL, WINDERIG\nWillekeurig indien NEUTRAAL",
+  "ability.SHELL_SMASH": "Shell-smash",
+  "pkm.SHELLDER": "Schelder",
+  "pkm.CLOYSTER": "Klooster",
+  "ability_description.SHELL_SMASH": "Geeft [15, 30, SP] SPECIAAL aan aangrenzende vijanden; win 2 ATK, 20% AP en 20% ATK_SPEED, en verlies 1 DEF, 1 SPE_DEF",
+  "effect_description.COOL_BREEZE": "+1 SPE_DEF"
 }

@@ -1178,8 +1178,6 @@ export class KingShieldStrategy extends AttackStrategy {
     if (farthestTarget) {
       const x = farthestTarget.x
       const y = farthestTarget.y
-      const oldX = pokemon.positionX
-      const oldY = pokemon.positionY
 
       const tg = board.getValue(x, y)
 
@@ -1204,8 +1202,6 @@ export class PoisonJabStrategy extends AttackStrategy {
     if (farthestTarget) {
       const x = farthestTarget.x
       const y = farthestTarget.y
-      const oldX = pokemon.positionX
-      const oldY = pokemon.positionY
 
       const tg = board.getValue(x, y)
 
@@ -1467,7 +1463,7 @@ export class RelicSongStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    if(pokemon.count.ult % 3 === 0){
+    if (pokemon.count.ult % 3 === 0) {
       const duration = Math.round(2000 * (1 + pokemon.ap / 200))
       board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
         if (tg && pokemon.team != tg.team) {
@@ -3919,8 +3915,7 @@ export class MetronomeStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target, crit)
 
     const skill = pickRandomIn(
-      (Object.keys(Ability) as Ability[])
-        .filter((a) => CopyableAbility[a])
+      (Object.keys(Ability) as Ability[]).filter((a) => CopyableAbility[a])
     )
 
     pokemon.simulation.room.broadcast(Transfer.ABILITY, {
@@ -5056,5 +5051,35 @@ export class MagicBounceStrategy extends AttackStrategy {
     const timer =
       pokemon.stars === 3 ? 12000 : pokemon.stars === 2 ? 6000 : 3000
     pokemon.status.triggerMagicBounce(timer)
+  }
+}
+
+export class ShellSmashStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = pokemon.stars === 1 ? 15 : 30
+    const cells = board.getAdjacentCells(target.positionX, target.positionY)
+    cells.forEach((cell) => {
+      if (cell && cell.value && cell.value.team !== pokemon.team) {
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
+    })
+    pokemon.addAbilityPower(20, false)
+    pokemon.addAttack(2, false)
+    pokemon.addAttackSpeed(20, false)
+    pokemon.addDefense(-1, false)
+    pokemon.addSpecialDefense(-1, false)
   }
 }

@@ -210,7 +210,8 @@
     "HIDDEN_POWER_Z": "Hidden Power (ZZZZ)",
     "HIDDEN_POWER_QM": "Hidden Power (?)",
     "HIDDEN_POWER_EM": "Hidden Power (!)",
-    "POISON_JAB": "Poison Jab"
+    "POISON_JAB": "Poison Jab",
+    "SHELL_SMASH": "Shell Smash"
   },
   "pkm": {
     "DEFAULT": "default",
@@ -794,7 +795,9 @@
     "NATU": "Natu",
     "XATU": "Xatu",
     "GLIGAR": "Gligar",
-    "GLISCOR": "Gliscor"
+    "GLISCOR": "Gliscor",
+    "SHELLDER": "Shellder",
+    "CLOYSTER": "Cloyster"
   },
   "ability_description": {
     "DEFAULT": "Default",
@@ -992,7 +995,8 @@
     "HIDDEN_POWER_Z": "Put the enemy team SLEEP for 5 seconds",
     "HIDDEN_POWER_QM": "Get 4 random Unown on your bench",
     "HIDDEN_POWER_EM": "Spawn 4 random Unown at every corner of the board",
-    "POISON_JAB": "Deals [40, 80, 120, SP] SPECIAL, swaps places with the target, and POISON both the target and the caster for 4s"
+    "POISON_JAB": "Deals [40, 80, 120, SP] SPECIAL, swaps places with the target, and POISON both the target and the caster for 4s",
+    "SHELL_SMASH": "Deals [15, 30, SP] SPECIAL to adjacent enemies; gain 2 ATK, 20% AP and 20% ATK_SPEED, and lose 1 DEF, 1 SPE_DEF"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1167,6 +1171,7 @@
     "AROMATIC_MIST": "Shocks deal 10 SPECIAL",
     "FAIRY_WIND": "Shocks deal 30 SPECIAL",
     "STRANGE_STEAM": "Shocks deal 55 SPECIAL",
+    "COOL_BREEZE": "+1 SPE_DEF",
     "CHILLY": "+3 SPE_DEF, 10% chance to FREEZE",
     "FROSTY": "+6 SPE_DEF, 20% chance to FREEZE",
     "FREEZING": "+10 SPE_DEF, 30% chance to FREEZE",
@@ -1791,7 +1796,7 @@
   "buy_booster_500": "Buy a new booster for 500 ",
   "close": "Close",
   "additional_pokemon_hint": "Each player picked two additional Pokemon to be available in all   players shop for this game.",
-  "damage_label": "damage_label",
+  "damage_label": "Damage",
   "heal": "Heal",
   "lvl": "Lvl",
   "lose_game_hint": "You lose the game when you have no more Health Points",

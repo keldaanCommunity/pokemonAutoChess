@@ -1872,5 +1872,10 @@
   "ability_description.FORECAST": "Gibt Ihrem Team [10,SP] SHIELD sowie einen zusätzlichen Bonus je nach Wetterlage:\n Sonne: gibt auch [3,SP] ATK\n Regen: Gibt auch [20,SP] MANA\n Schnee: gibt auch [2,SP] DEF / SPE_DEF",
   "ability_description.SEARING_SHOT": "Ein Inferno aus scharlachroten Flammen verbrennt alles um den Benutzer herum. Verursacht [40,SP] SPECIAL und VERBRENNT 3 Sekunden lang alle Gegner innerhalb von 2 Feldern um Victini.",
   "effect.COOL_BREEZE": "Kühle Brise",
-  "passive_description.WURMPLE": "Wurmple entwickelt sich abhängig vom Wetter in der vorherigen Phase:\nCascoon: NACHT, STURM, SANDSTURM, SCHNEE\nSilcoon: SONNE, REGEN, NEBEL, WINDIG\nZufällig, wenn NEUTRAL"
+  "passive_description.WURMPLE": "Wurmple entwickelt sich abhängig vom Wetter in der vorherigen Phase:\nCascoon: NACHT, STURM, SANDSTURM, SCHNEE\nSilcoon: SONNE, REGEN, NEBEL, WINDIG\nZufällig, wenn NEUTRAL",
+  "ability.SHELL_SMASH": "Granatenzertrümmerung",
+  "pkm.SHELLDER": "Shellder",
+  "pkm.CLOYSTER": "Cloyster",
+  "ability_description.SHELL_SMASH": "Fügt benachbarten Feinden [15, 30, SP] SPECIAL zu; Gewinne 2 ATK, 20 % AP und 20 % ATK_SPEED und verliere 1 DEF, 1 SPE_DEF",
+  "effect_description.COOL_BREEZE": "+1 SPE_DEF"
 }
