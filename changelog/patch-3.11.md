@@ -38,5 +38,6 @@
 - Fix Wobbuffet ability
 - Improve Dash ability: Use of the Manhattan distance instead of Chebyshev
 - Greninja: Improve water shuriken aim
+- Mythical dragons now correctly apply tier 3 dragon synergy effects
 
 # Misc
