@@ -17,6 +17,9 @@
 - Buff Phione Atk ~~12~~ -> 14
 - Change Igglybuff: ~~Baby/Fairy/Sound~~ -> Baby/Normal/Sound
 - Nerf Clefairy Metronome: Can no longer trigger Hidden power abilities
+- Nerf Unown-Exclamation: Mana 50 → 100 ; can no longer summon another Unown-Exclamation
+- Nerf Unown-Question: can no longer summon another Unown-Question
+- The pool of Unowns now depends on the stage level, split in 3 tiers: stage 0-9, stage 10-19, stage >= 20 ; some Unowns now ony appear on a certain tier
 
 # Changes to Synergies
 
@@ -37,5 +40,6 @@
 - Improve Dash ability: Use of the Manhattan distance instead of Chebyshev
 - Greninja: Improve water shuriken aim
 - Metronome ability animation is now displayed correctly
+- Mythical dragons now correctly apply tier 3 dragon synergy effects
 
 # Misc

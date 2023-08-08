@@ -10,6 +10,7 @@ import {
   AttackType,
   BoardEvent,
   PokemonActionState,
+  Rarity,
   Stat,
   Team
 } from "../types/enum/Game"
@@ -461,12 +462,16 @@ export default class Simulation extends Schema implements ISimulation {
           pokemon.effects.includes(Effect.DRAGON_SCALES) ||
           pokemon.effects.includes(Effect.DRAGON_DANCE)
         ) {
-          pokemon.addMaxHP(30 * pokemon.stars)
+          const dragonTier =
+            pokemon.rarity === Rarity.MYTHICAL ? 3 : pokemon.stars
+          pokemon.addMaxHP(30 * dragonTier)
           pokemon.life = pokemon.hp
         }
         if (pokemon.effects.includes(Effect.DRAGON_DANCE)) {
-          pokemon.addAbilityPower(10 * pokemon.stars)
-          pokemon.addAttackSpeed(10 * pokemon.stars)
+          const dragonTier =
+            pokemon.rarity === Rarity.MYTHICAL ? 3 : pokemon.stars
+          pokemon.addAbilityPower(10 * dragonTier)
+          pokemon.addAttackSpeed(10 * dragonTier)
         }
         let shieldBonus = 0
         if (pokemon.effects.includes(Effect.STAMINA)) {
@@ -918,7 +923,7 @@ export default class Simulation extends Schema implements ISimulation {
           pokemon.effects.push(Effect.COOL_BREEZE)
           pokemon.addSpecialDefense(1)
           break
-        
+
         case Effect.CHILLY:
           pokemon.effects.push(Effect.FROSTY)
           pokemon.addSpecialDefense(3)
