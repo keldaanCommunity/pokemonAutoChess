@@ -17,6 +17,9 @@
 - Buff Phione Atk ~~12~~ -> 14
 - Change Igglybuff: ~~Baby/Fairy/Sound~~ -> Baby/Normal/Sound
 - Nerf Clefairy Metronome: Can no longer trigger Hidden power abilities. But the animation is now displayed client side.
+- Nerf Unown-Exclamation: Mana 50 → 100 ; can no longer summon another Unown-Exclamation
+- Nerf Unown-Question: can no longer summon another Unown-Question
+- The pool of Unowns now depends on the stage level, split in 3 tiers: stage 0-9, stage 10-19, stage >= 20 ; some Unowns now ony appear on a certain tier
 
 # Changes to Synergies
 
