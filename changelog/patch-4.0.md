@@ -19,8 +19,6 @@ Gligar,Gliscor
 # UI
 
 - Internationalization with languages: de, en es, fr, it, ja, nl pt
+- New icons for status
 
 # Misc
-
-- Improve Water Shuriken aim
-- Metronome: Cannot cast Hidden Power anymore
