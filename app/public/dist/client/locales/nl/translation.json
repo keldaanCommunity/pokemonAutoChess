@@ -1877,5 +1877,6 @@
   "ability.SHELL_SMASH": "Shell-smash",
   "pkm.SHELLDER": "Schelder",
   "pkm.CLOYSTER": "Klooster",
-  "ability_description.SHELL_SMASH": "Geeft [15, 30, SP] SPECIAAL aan aangrenzende vijanden; win 2 ATK, 20% AP en 20% ATK_SPEED, en verlies 1 DEF, 1 SPE_DEF"
+  "ability_description.SHELL_SMASH": "Geeft [15, 30, SP] SPECIAAL aan aangrenzende vijanden; win 2 ATK, 20% AP en 20% ATK_SPEED, en verlies 1 DEF, 1 SPE_DEF",
+  "effect_description.COOL_BREEZE": "+1 SPE_DEF"
 }

@@ -1171,6 +1171,7 @@
     "AROMATIC_MIST": "Shocks deal 10 SPECIAL",
     "FAIRY_WIND": "Shocks deal 30 SPECIAL",
     "STRANGE_STEAM": "Shocks deal 55 SPECIAL",
+    "COOL_BREEZE": "+1 SPE_DEF",
     "CHILLY": "+3 SPE_DEF, 10% chance to FREEZE",
     "FROSTY": "+6 SPE_DEF, 20% chance to FREEZE",
     "FREEZING": "+10 SPE_DEF, 30% chance to FREEZE",

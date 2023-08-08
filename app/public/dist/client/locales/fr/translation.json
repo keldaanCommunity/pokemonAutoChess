@@ -1218,7 +1218,8 @@
     "MISTY": "+20% SPECIAL\n+30 % de durée de SILENCE",
     "WINDY": "+10 % de chances d'esquiver (+20 % en FLYING)",
     "NIGHT": "+20% CRIT_CHANCE\n+30 % de durée de SLEEP",
-    "HYDRATATION": "La synergie GRASS soigne 5 HP supplémentaires par seconde sous la RAIN"
+    "HYDRATATION": "La synergie GRASS soigne 5 HP supplémentaires par seconde sous la RAIN",
+    "COOL_BREEZE": "+1 SPE_DEF"
   },
   "item": {
     "FOSSIL_STONE": "Fossile Dome",

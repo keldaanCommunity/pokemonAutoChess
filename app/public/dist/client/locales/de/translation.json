@@ -1876,5 +1876,6 @@
   "ability.SHELL_SMASH": "Granatenzertrümmerung",
   "pkm.SHELLDER": "Shellder",
   "pkm.CLOYSTER": "Cloyster",
-  "ability_description.SHELL_SMASH": "Fügt benachbarten Feinden [15, 30, SP] SPECIAL zu; Gewinne 2 ATK, 20 % AP und 20 % ATK_SPEED und verliere 1 DEF, 1 SPE_DEF"
+  "ability_description.SHELL_SMASH": "Fügt benachbarten Feinden [15, 30, SP] SPECIAL zu; Gewinne 2 ATK, 20 % AP und 20 % ATK_SPEED und verliere 1 DEF, 1 SPE_DEF",
+  "effect_description.COOL_BREEZE": "+1 SPE_DEF"
 }

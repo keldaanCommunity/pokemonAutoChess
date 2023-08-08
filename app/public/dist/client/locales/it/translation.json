@@ -1876,5 +1876,6 @@
   "ability.SHELL_SMASH": "Colpo di conchiglia",
   "pkm.SHELLDER": "Shellder",
   "pkm.CLOYSTER": "Chiostro",
-  "ability_description.SHELL_SMASH": "Infligge [15, 30, SP] SPECIAL ai nemici adiacenti; guadagni 2 ATK, 20% AP e 20% ATK_SPEED e perdi 1 DEF, 1 SPE_DEF"
+  "ability_description.SHELL_SMASH": "Infligge [15, 30, SP] SPECIAL ai nemici adiacenti; guadagni 2 ATK, 20% AP e 20% ATK_SPEED e perdi 1 DEF, 1 SPE_DEF",
+  "effect_description.COOL_BREEZE": "+1 SPE_DEF"
 }

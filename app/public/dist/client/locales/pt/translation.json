@@ -1206,7 +1206,8 @@
     "MISTY": "+20% SPECIAL\n+30% de duração do SILENCE",
     "WINDY": "+10% de chance de esquiva (+20% se FLYING)",
     "NIGHT": "+20% CRIT_CHANCE\n+30% de duração do SLEEP",
-    "HYDRATATION": "A sinergia GRASS está curando 5 HP adicionais por segundo sob a RAIN"
+    "HYDRATATION": "A sinergia GRASS está curando 5 HP adicionais por segundo sob a RAIN",
+    "COOL_BREEZE": "+1 SPE_DEF"
   },
   "item": {
     "FOSSIL_STONE": "Pedra Fóssil",

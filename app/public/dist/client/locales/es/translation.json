@@ -1876,5 +1876,6 @@
   "ability.SHELL_SMASH": "Golpe de concha",
   "pkm.SHELLDER": "desgranador",
   "pkm.CLOYSTER": "claustro",
-  "ability_description.SHELL_SMASH": "Otorga [15, 30, SP] ESPECIAL a los enemigos adyacentes; gana 2 ATK, 20% AP y 20% ATK_SPEED, y pierde 1 DEF, 1 SPE_DEF"
+  "ability_description.SHELL_SMASH": "Otorga [15, 30, SP] ESPECIAL a los enemigos adyacentes; gana 2 ATK, 20% AP y 20% ATK_SPEED, y pierde 1 DEF, 1 SPE_DEF",
+  "effect_description.COOL_BREEZE": "+1 ESP_DEF"
 }

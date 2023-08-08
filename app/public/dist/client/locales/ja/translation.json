@@ -1876,5 +1876,6 @@
   "ability.SHELL_SMASH": "シェルスマッシュ",
   "pkm.SHELLDER": "シェルダー",
   "pkm.CLOYSTER": "クロイスター",
-  "ability_description.SHELL_SMASH": "隣接する敵に[15, 30, SP] SPECIALを与える。 ATKが2、APが20%、ATK_SPEEDが20%増加し、DEFが1、SPE_DEFが1減少します"
+  "ability_description.SHELL_SMASH": "隣接する敵に[15, 30, SP] SPECIALを与える。 ATKが2、APが20%、ATK_SPEEDが20%増加し、DEFが1、SPE_DEFが1減少します",
+  "effect_description.COOL_BREEZE": "+1 SPE_DEF"
 }
