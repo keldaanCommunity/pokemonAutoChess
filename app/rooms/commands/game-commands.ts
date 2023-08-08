@@ -20,7 +20,7 @@ import UserMetadata from "../../models/mongo-models/user-metadata"
 import GameRoom from "../game-room"
 import { Client, updateLobby } from "colyseus"
 import { Effect } from "../../types/enum/Effect"
-import { Title, FIGHTING_PHASE_DURATION, Emotion, IPlayer } from "../../types"
+import { Title, FIGHTING_PHASE_DURATION, Emotion } from "../../types"
 import { MapSchema } from "@colyseus/schema"
 import {
   GamePhaseState,
