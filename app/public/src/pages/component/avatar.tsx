@@ -52,9 +52,11 @@ export default function Avatar(props: {
         <RoleBadge role={props.role} />
       </div>
       <div style={{ display: "flex", gap: "5px", alignItems: "center" }}>
-        <p className="player-title" style={{ margin: "0px" }}>
-          {t(`title.${props.title}`)}
-        </p>
+        {props.title && (
+          <p className="player-title" style={{ margin: "0px" }}>
+            {t(`title.${props.title}`)}
+          </p>
+        )}
         {elo}
       </div>
     </div>
