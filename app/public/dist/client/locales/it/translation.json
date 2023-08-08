@@ -1872,5 +1872,9 @@
   "ability_description.PETAL_DANCE": "Distribuisci [20,30,50,SP] SPECIAL a [3,4,5] Pokémon nemici",
   "ability_description.FORECAST": "Dà [10,SP] SCUDO alla tua squadra, oltre a bonus aggiuntivi a seconda del tempo:\n Sole: dà anche [3,SP] ATK\n Pioggia: dà anche [20,SP] MANA\n Neve: dà anche [2,SP] DEF / SPE_DEF",
   "effect.COOL_BREEZE": "Brezza fresca",
-  "passive_description.WURMPLE": "Wurmple si evolve a seconda del tempo nella fase precedente:\nCascoon: NOTTE, TEMPESTA, TEMPESTA DI SABBIA, NEVE\nSilcoon: SOLE, PIOGGIA, NEBBIA, VENTO\nCasuale se NEUTRO"
+  "passive_description.WURMPLE": "Wurmple si evolve a seconda del tempo nella fase precedente:\nCascoon: NOTTE, TEMPESTA, TEMPESTA DI SABBIA, NEVE\nSilcoon: SOLE, PIOGGIA, NEBBIA, VENTO\nCasuale se NEUTRO",
+  "ability.SHELL_SMASH": "Colpo di conchiglia",
+  "pkm.SHELLDER": "Shellder",
+  "pkm.CLOYSTER": "Chiostro",
+  "ability_description.SHELL_SMASH": "Infligge [15, 30, SP] SPECIAL ai nemici adiacenti; guadagni 2 ATK, 20% AP e 20% ATK_SPEED e perdi 1 DEF, 1 SPE_DEF"
 }

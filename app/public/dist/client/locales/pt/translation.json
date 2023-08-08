@@ -581,7 +581,9 @@
     "NATU": "natu",
     "XATU": "xatu",
     "GLIGAR": "Gligar",
-    "GLISCOR": "Gliscor"
+    "GLISCOR": "Gliscor",
+    "SHELLDER": "Shellder",
+    "CLOYSTER": "Claustro"
   },
   "emotion": {
     "Teary-Eyed": "Olhos marejados",
@@ -801,7 +803,8 @@
     "HIDDEN_POWER_Z": "Poder Oculto (ZZZZ)",
     "HIDDEN_POWER_QM": "Poder escondido (?)",
     "HIDDEN_POWER_EM": "Poder escondido (!)",
-    "POISON_JAB": "Jab Venenoso"
+    "POISON_JAB": "Jab Venenoso",
+    "SHELL_SMASH": "Shell Smash"
   },
   "ability_description": {
     "DEFAULT": "Padrão",
@@ -999,7 +1002,8 @@
     "POISON_JAB": "Oferece [40, 80, 120, SP] SPECIAL, troca de lugar com o alvo e POISON o alvo e o lançador por 4s",
     "RELIC_SONG": "Emite uma nota. Após a terceira nota, DORMIR todo o time inimigo por [2,SP=0.5] segundos",
     "PETAL_DANCE": "Distribua [20,30,50,SP] ESPECIAL a [3,4,5] Pokémon inimigos",
-    "FORECAST": "Dá [10,SP] SHIELD ao seu time, além de bônus adicional dependendo do clima:\n Sol: também dá [3,SP] ATK\n Chuva: também dá [20,SP] MANA\n Snow: também dá [2,SP] DEF / SPE_DEF"
+    "FORECAST": "Dá [10,SP] SHIELD ao seu time, além de bônus adicional dependendo do clima:\n Sol: também dá [3,SP] ATK\n Chuva: também dá [20,SP] MANA\n Snow: também dá [2,SP] DEF / SPE_DEF",
+    "SHELL_SMASH": "Oferece [15, 30, SP] ESPECIAL aos inimigos adjacentes; ganhe 2 ATK, 20% AP e 20% ATK_SPEED e perca 1 DEF, 1 SPE_DEF"
   },
   "effect": {
     "INGRAIN": "Inerente",

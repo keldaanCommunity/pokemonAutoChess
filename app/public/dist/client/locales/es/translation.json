@@ -1872,5 +1872,9 @@
   "ability_description.FORECAST": "Otorga [10,SP] SHIELD a tu equipo, además de una bonificación adicional según el clima:\n Sol: también da [3,SP] ATK\n Lluvia: también da [20,SP] MANA\n Nieve: también da [2,SP] DEF / SPE_DEF",
   "ability_description.SEARING_SHOT": "Un infierno de llamas escarlatas incendia todo alrededor del usuario. Otorga [40,SP] ESPECIAL y QUEMA durante 3 segundos a todos los enemigos dentro de 2 mosaicos de Victini.",
   "effect.COOL_BREEZE": "Brisa fresca",
-  "passive_description.WURMPLE": "Wurmple evoluciona dependiendo del clima en la etapa anterior:\nCascoon: NOCHE, TORMENTA, TORMENTA DE ARENA, NIEVE\nSilcoon: SOL, LLUVIA, NIEBLA, VIENTO\nAleatorio si es NEUTRO"
+  "passive_description.WURMPLE": "Wurmple evoluciona dependiendo del clima en la etapa anterior:\nCascoon: NOCHE, TORMENTA, TORMENTA DE ARENA, NIEVE\nSilcoon: SOL, LLUVIA, NIEBLA, VIENTO\nAleatorio si es NEUTRO",
+  "ability.SHELL_SMASH": "Golpe de concha",
+  "pkm.SHELLDER": "desgranador",
+  "pkm.CLOYSTER": "claustro",
+  "ability_description.SHELL_SMASH": "Otorga [15, 30, SP] ESPECIAL a los enemigos adyacentes; gana 2 ATK, 20% AP y 20% ATK_SPEED, y pierde 1 DEF, 1 SPE_DEF"
 }

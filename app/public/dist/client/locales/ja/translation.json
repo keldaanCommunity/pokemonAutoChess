@@ -1872,5 +1872,9 @@
   "ability_description.PETAL_DANCE": "敵のポケモン[3,4,5]に[20,30,50,SP]SPECIALを与える",
   "ability_description.FORECAST": "チームに [10,SP] SHIELD を与え、さらに天候に応じて追加ボーナスを与えます。\n 太陽：[3,SP]の攻撃力も付与\n 雨: [20,SP] マナも与えます\n 雪: [2,SP] DEF / SPE_DEF も与える",
   "effect.COOL_BREEZE": "涼風",
-  "passive_description.WURMPLE": "ワームルは前段階の天候に応じて進化します。\nカスクーン: 夜、嵐、砂嵐、雪\nシルクーン: 太陽、雨、霧、風\nニュートラルの場合はランダム"
+  "passive_description.WURMPLE": "ワームルは前段階の天候に応じて進化します。\nカスクーン: 夜、嵐、砂嵐、雪\nシルクーン: 太陽、雨、霧、風\nニュートラルの場合はランダム",
+  "ability.SHELL_SMASH": "シェルスマッシュ",
+  "pkm.SHELLDER": "シェルダー",
+  "pkm.CLOYSTER": "クロイスター",
+  "ability_description.SHELL_SMASH": "隣接する敵に[15, 30, SP] SPECIALを与える。 ATKが2、APが20%、ATK_SPEEDが20%増加し、DEFが1、SPE_DEFが1減少します"
 }
