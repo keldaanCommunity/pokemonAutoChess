@@ -54,13 +54,13 @@ export default class WikiFaq extends Component {
         <h4 className="nes-text is-success">{t("faq.support")}</h4>
         <p>
           {t("faq.support_answer")}
-          <a href="https://en.tipeee.com/pokemon-auto-chess">Tipeee</a>.
+          &nbsp;<a href="https://en.tipeee.com/pokemon-auto-chess">Tipeee</a>.
         </p>
         <h4 className="nes-text is-success">{t("faq.mobile")}</h4>
         <p>{t("faq.mobile_answer")}</p>
         <h4 className="nes-text is-success">{t("faq.code")}</h4>
         <p>
-          {t("faq.code_answer")},
+          {t("faq.code_answer")},&nbsp;
           <a
             href="https://github.com/keldaanCommunity/pokemonAutoChess"
             target="_blank"
