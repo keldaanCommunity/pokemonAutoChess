@@ -6,7 +6,8 @@ export enum Language {
   es = "es",
   it = "it",
   ja = "ja",
-  nl = "nl"
+  nl = "nl",
+  bg = "bg"
 }
 
 export const LanguageFlag: { [key in Language]: string } = {
@@ -17,5 +18,6 @@ export const LanguageFlag: { [key in Language]: string } = {
   [Language.es]: "🇪🇸",
   [Language.it]: "🇮🇹",
   [Language.ja]: "🇯🇵",
-  [Language.nl]: "🇳🇱"
+  [Language.nl]: "🇳🇱",
+  [Language.bg]: "🇧🇬"
 }

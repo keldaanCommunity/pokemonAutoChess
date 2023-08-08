@@ -9989,6 +9989,55 @@ export class Noivern extends Pokemon {
     )
   }
 }
+
+export class Shellder extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.SHELLDER,
+      [Synergy.WATER, Synergy.ICE, Synergy.ROCK],
+      Rarity.UNCOMMON,
+      Pkm.CLOYSTER,
+      70,
+      5,
+      5,
+      2,
+      1,
+      AttackSprite.WATER_MELEE,
+      1,
+      110,
+      Ability.SHELL_SMASH,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Cloyster extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.CLOYSTER,
+      [Synergy.WATER, Synergy.ICE, Synergy.ROCK],
+      Rarity.UNCOMMON,
+      Pkm.DEFAULT,
+      150,
+      11,
+      8,
+      2,
+      1,
+      AttackSprite.WATER_MELEE,
+      2,
+      110,
+      Ability.SHELL_SMASH,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
 export class Buizel extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(

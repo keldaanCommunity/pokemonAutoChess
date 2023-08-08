@@ -194,7 +194,8 @@ export enum Ability {
   HIDDEN_POWER_Z = "HIDDEN_POWER_Z",
   HIDDEN_POWER_QM = "HIDDEN_POWER_QM",
   HIDDEN_POWER_EM = "HIDDEN_POWER_EM",
-  POISON_JAB = "POISON_JAB"
+  POISON_JAB = "POISON_JAB",
+  SHELL_SMASH = "SHELL_SMASH"
 }
 
 export const CopyableAbility: { [key in Ability]: boolean } = {
@@ -393,5 +394,6 @@ export const CopyableAbility: { [key in Ability]: boolean } = {
   [Ability.HIDDEN_POWER_Z]: false,
   [Ability.HIDDEN_POWER_QM]: false,
   [Ability.HIDDEN_POWER_EM]: false,
-  [Ability.POISON_JAB]: true
+  [Ability.POISON_JAB]: true,
+  [Ability.SHELL_SMASH]: true
 }

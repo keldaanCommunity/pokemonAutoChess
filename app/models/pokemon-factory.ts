@@ -106,6 +106,7 @@ import {
   Clefable,
   Clefairy,
   Cleffa,
+  Cloyster,
   Cobalion,
   Combee,
   Combusken,
@@ -450,6 +451,7 @@ import {
   ShayminSky,
   Shedninja,
   Shelgon,
+  Shellder,
   Shieldon,
   Shiftry,
   Shinx,
@@ -1985,6 +1987,10 @@ export default class PokemonFactory {
         return new Gligar(s, e)
       case Pkm.GLISCOR:
         return new Gliscor(s, e)
+      case Pkm.SHELLDER:
+        return new Shellder(s, e)
+      case Pkm.CLOYSTER:
+        return new Cloyster(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:
