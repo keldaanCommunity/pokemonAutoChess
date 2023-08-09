@@ -1878,5 +1878,10 @@
   "pkm.SHELLDER": "Schelder",
   "pkm.CLOYSTER": "Klooster",
   "ability_description.SHELL_SMASH": "Geeft [15, 30, SP] SPECIAAL aan aangrenzende vijanden; win 2 ATK, 20% AP en 20% ATK_SPEED, en verlies 1 DEF, 1 SPE_DEF",
-  "effect_description.COOL_BREEZE": "+1 SPE_DEF"
+  "effect_description.COOL_BREEZE": "+1 SPE_DEF",
+  "ability.HELPING_HAND": "Helpende hand",
+  "pkm.FURRET": "Furret",
+  "pkm.SENTRET": "schildwacht",
+  "ability_description.HELPING_HAND": "Verdubbel de schade van de volgende spreuk van de dichtstbijzijnde [2,4,6] bondgenoten",
+  "language": "Taal"
 }

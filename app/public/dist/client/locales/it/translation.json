@@ -1877,5 +1877,10 @@
   "pkm.SHELLDER": "Shellder",
   "pkm.CLOYSTER": "Chiostro",
   "ability_description.SHELL_SMASH": "Infligge [15, 30, SP] SPECIAL ai nemici adiacenti; guadagni 2 ATK, 20% AP e 20% ATK_SPEED e perdi 1 DEF, 1 SPE_DEF",
-  "effect_description.COOL_BREEZE": "+1 SPE_DEF"
+  "effect_description.COOL_BREEZE": "+1 SPE_DEF",
+  "ability.HELPING_HAND": "Mano amica",
+  "pkm.FURRET": "Furretto",
+  "pkm.SENTRET": "Sentret",
+  "ability_description.HELPING_HAND": "Raddoppia il danno del prossimo incantesimo lanciato dagli alleati [2,4,6] più vicini",
+  "language": "Lingua"
 }

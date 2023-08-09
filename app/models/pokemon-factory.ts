@@ -178,6 +178,7 @@ import {
   Frogadier,
   Froslass,
   Frosmoth,
+  Furret,
   Gabite,
   Galvantula,
   Garchomp,
@@ -442,6 +443,7 @@ import {
   Seedot,
   Seel,
   Seismitoad,
+  Sentret,
   Serperior,
   Servine,
   Seviper,
@@ -1991,6 +1993,10 @@ export default class PokemonFactory {
         return new Shellder(s, e)
       case Pkm.CLOYSTER:
         return new Cloyster(s, e)
+      case Pkm.SENTRET:
+        return new Sentret(s, e)
+      case Pkm.FURRET:
+        return new Furret(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:

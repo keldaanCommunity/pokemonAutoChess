@@ -1877,5 +1877,10 @@
   "pkm.SHELLDER": "シェルダー",
   "pkm.CLOYSTER": "クロイスター",
   "ability_description.SHELL_SMASH": "隣接する敵に[15, 30, SP] SPECIALを与える。 ATKが2、APが20%、ATK_SPEEDが20%増加し、DEFが1、SPE_DEFが1減少します",
-  "effect_description.COOL_BREEZE": "+1 SPE_DEF"
+  "effect_description.COOL_BREEZE": "+1 SPE_DEF",
+  "ability.HELPING_HAND": "救いの手",
+  "pkm.FURRET": "ファーレット",
+  "pkm.SENTRET": "セントレ",
+  "ability_description.HELPING_HAND": "最も近い[2,4,6]人の味方が次に唱える呪文のダメージが2倍になる",
+  "language": "言語"
 }

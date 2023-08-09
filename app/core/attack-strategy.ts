@@ -19,7 +19,7 @@ import { effectInLine, OrientationArray } from "../utils/orientation"
 import { logger } from "../utils/logger"
 import { DEFAULT_ATK_SPEED } from "../types/Config"
 import { max, min } from "../utils/number"
-import { distanceC } from "../utils/distance"
+import { distanceC, distanceM } from "../utils/distance"
 import { Transfer } from "../types"
 import { Passive } from "../types/enum/Passive"
 import { AbilityStrategy } from "./abilities"
@@ -5081,5 +5081,45 @@ export class ShellSmashStrategy extends AttackStrategy {
     pokemon.addAttackSpeed(20, false)
     pokemon.addDefense(-1, false)
     pokemon.addSpecialDefense(-1, false)
+  }
+}
+
+export class HelpingHandStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const buffs = pokemon.stars === 3 ? 6 : pokemon.stars === 2 ? 4 : 2
+    const allies = new Array<{ pkm: PokemonEntity; distance: number }>()
+    board.forEach((x, y, cell) => {
+      if (cell && cell.team === pokemon.team && pokemon.id !== cell.id) {
+        allies.push({
+          pkm: cell,
+          distance: distanceM(
+            pokemon.positionX,
+            pokemon.positionY,
+            cell.positionX,
+            cell.positionY
+          )
+        })
+      }
+    })
+    allies.sort((a, b) => a.distance - b.distance)
+    for (let i = 0; i < buffs; i++) {
+      const ally = allies[i]?.pkm
+      if (ally) {
+        ally.status.doubleDamage = true
+        ally.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: Ability.HELPING_HAND,
+          positionX: ally.positionX,
+          positionY: ally.positionY
+        })
+      }
+    }
   }
 }

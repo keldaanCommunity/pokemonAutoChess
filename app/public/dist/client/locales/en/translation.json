@@ -211,7 +211,8 @@
     "HIDDEN_POWER_QM": "Hidden Power (?)",
     "HIDDEN_POWER_EM": "Hidden Power (!)",
     "POISON_JAB": "Poison Jab",
-    "SHELL_SMASH": "Shell Smash"
+    "SHELL_SMASH": "Shell Smash",
+    "HELPING_HAND": "Helping Hand"
   },
   "pkm": {
     "DEFAULT": "default",
@@ -797,7 +798,9 @@
     "GLIGAR": "Gligar",
     "GLISCOR": "Gliscor",
     "SHELLDER": "Shellder",
-    "CLOYSTER": "Cloyster"
+    "CLOYSTER": "Cloyster",
+    "FURRET": "Furret",
+    "SENTRET": "Sentret"
   },
   "ability_description": {
     "DEFAULT": "Default",
@@ -996,7 +999,8 @@
     "HIDDEN_POWER_QM": "Get 4 random Unown on your bench",
     "HIDDEN_POWER_EM": "Spawn 4 random Unown at every corner of the board",
     "POISON_JAB": "Deals [40, 80, 120, SP] SPECIAL, swaps places with the target, and POISON both the target and the caster for 4s",
-    "SHELL_SMASH": "Deals [15, 30, SP] SPECIAL to adjacent enemies; gain 2 ATK, 20% AP and 20% ATK_SPEED, and lose 1 DEF, 1 SPE_DEF"
+    "SHELL_SMASH": "Deals [15, 30, SP] SPECIAL to adjacent enemies; gain 2 ATK, 20% AP and 20% ATK_SPEED, and lose 1 DEF, 1 SPE_DEF",
+    "HELPING_HAND": "Double the damage of the next spell casted by the nearest [2,4,6] allies"
   },
   "effect": {
     "INGRAIN": "Ingrain",

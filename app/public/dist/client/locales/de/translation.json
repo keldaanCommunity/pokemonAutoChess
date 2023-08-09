@@ -1877,5 +1877,10 @@
   "pkm.SHELLDER": "Shellder",
   "pkm.CLOYSTER": "Cloyster",
   "ability_description.SHELL_SMASH": "Fügt benachbarten Feinden [15, 30, SP] SPECIAL zu; Gewinne 2 ATK, 20 % AP und 20 % ATK_SPEED und verliere 1 DEF, 1 SPE_DEF",
-  "effect_description.COOL_BREEZE": "+1 SPE_DEF"
+  "effect_description.COOL_BREEZE": "+1 SPE_DEF",
+  "ability.HELPING_HAND": "Helfende Hand",
+  "pkm.FURRET": "Furret",
+  "pkm.SENTRET": "Sentret",
+  "ability_description.HELPING_HAND": "Verdoppeln Sie den Schaden des nächsten Zaubers, der von den nächsten [2,4,6] Verbündeten gewirkt wird",
+  "language": "Sprache"
 }

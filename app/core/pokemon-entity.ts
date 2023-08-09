@@ -209,6 +209,10 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       return { death: false, takenDamage: 0 }
     } else {
       let specialDamage = damage + (damage * (attacker ? attacker.ap : 0)) / 100
+      if (attacker && attacker.status.doubleDamage) {
+        specialDamage *= 2
+        attacker.status.doubleDamage = false
+      }
       if (crit && attacker && this.items.has(Item.ROCKY_HELMET) === false) {
         specialDamage = Math.round(specialDamage * attacker.critDamage)
       }
