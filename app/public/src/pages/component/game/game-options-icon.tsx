@@ -33,6 +33,7 @@ export default function GameOptionsIcon(props: { leave: () => void }) {
         <img src="/assets/ui/options.svg" />
       </div>
       <GameOptionsModal
+        ingame={true}
         show={isOpen}
         hideModal={() => {
           setOpen(false)

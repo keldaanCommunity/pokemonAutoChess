@@ -1805,7 +1805,7 @@
   "private_lobby": "Privé lobby",
   "change_room_name": "Wijzig de naam van de kamer",
   "add_bot": "Bot toevoegen",
-  "easy_bot": "Makkelijk (&lt;800)",
+  "easy_bot": "Makkelijk (<800)",
   "normal_bot": "Normaal (800-1099)",
   "hard_bot": "Moeilijk (1100-1400)",
   "extreme_bot": "Extreem (>1400)",
