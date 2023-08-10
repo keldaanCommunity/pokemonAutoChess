@@ -308,6 +308,13 @@ export interface IFloatingItem {
   y: number
 }
 
+export interface IPortal {
+  id: string
+  x: number
+  y: number
+  symbols: Synergy[]
+}
+
 export interface IPlayer {
   id: string
   name: string

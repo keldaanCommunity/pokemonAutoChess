@@ -95,7 +95,7 @@ export default class GameRoom extends Room<GameState> {
     this.setState(
       new GameState(options.preparationId, options.name, options.noElo)
     )
-    this.miniGame.create(this.state.avatars, this.state.floatingItems)
+    this.miniGame.create(this.state.avatars, this.state.floatingItems, this.state.portals)
     Object.keys(PRECOMPUTED_TYPE_POKEMONS).forEach((type) => {
       PRECOMPUTED_TYPE_POKEMONS[type].additionalPokemons.forEach((p) => {
         const pokemon = PokemonFactory.createPokemonFromName(p)

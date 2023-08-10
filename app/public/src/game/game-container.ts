@@ -17,7 +17,8 @@ import {
   IPokemonEntity,
   Transfer,
   NonFunctionPropNames,
-  ISimplePlayer
+  ISimplePlayer,
+  IPortal
 } from "../../../types"
 import PokemonEntity from "../../../core/pokemon-entity"
 import { Item } from "../../../types/enum/Item"
@@ -42,6 +43,7 @@ import { FloatingItem } from "../../../models/colyseus-models/floating-item"
 import Status from "../../../models/colyseus-models/status"
 import Count from "../../../models/colyseus-models/count"
 import { Ability } from "../../../types/enum/Ability"
+import { Portal } from "../../../models/colyseus-models/portal"
 
 class GameContainer {
   room: Room<GameState>
@@ -136,6 +138,21 @@ class GameContainer {
     this.room.state.floatingItems.onRemove((value, key) => {
       this.handleFloatingItemRemove(value)
     })
+
+    this.room.state.portals.onAdd((portal) => {
+      this.handlePortalAdd(portal)
+      const fields: NonFunctionPropNames<Portal>[] = ["x", "y", "avatarId"]
+      fields.forEach((field) => {
+        portal.listen(field, (value, previousValue) => {
+          this.handlePortalChange(portal, field, value)
+        })
+      })
+    })
+
+    this.room.state.portals.onRemove((value, key) => {
+      this.handlePortalRemove(value)
+    })
+
     this.room.onError((err) => logger.error("room error", err))
   }
 
@@ -702,6 +719,9 @@ class GameContainer {
       }
     }
   }
+
+  /* Player avatars */
+
   handleAvatarAdd(avatar: IPokemonAvatar) {
     if (this.game != null && this.game.scene.getScene("gameScene")) {
       const g = <GameScene>this.game.scene.getScene("gameScene")
@@ -711,6 +731,26 @@ class GameContainer {
     }
   }
 
+  handleAvatarRemove(avatar: IPokemonAvatar) {
+    if (this.game != null && this.game.scene.getScene("gameScene")) {
+      const g = <GameScene>this.game.scene.getScene("gameScene")
+      if (g.minigameManager) {
+        g.minigameManager.removePokemon(avatar)
+      }
+    }
+  }
+
+  handleAvatarChange(avatar: IPokemonAvatar, field: string, value: any) {
+    if (this.game != null && this.game.scene.getScene("gameScene")) {
+      const g = <GameScene>this.game.scene.getScene("gameScene")
+      if (g.minigameManager) {
+        g.minigameManager.changePokemon(avatar, field, value)
+      }
+    }
+  }
+
+  /* Floating items */
+
   handleFloatingItemAdd(floatingItem: IFloatingItem) {
     if (this.game != null && this.game.scene.getScene("gameScene")) {
       const g = <GameScene>this.game.scene.getScene("gameScene")
@@ -719,6 +759,59 @@ class GameContainer {
       }
     }
   }
+
+  handleFloatingItemRemove(floatingItem: IFloatingItem) {
+    if (this.game != null && this.game.scene.getScene("gameScene")) {
+      const g = <GameScene>this.game.scene.getScene("gameScene")
+      if (g.minigameManager) {
+        g.minigameManager.removeItem(floatingItem)
+      }
+    }
+  }
+
+  handleFloatingItemChange(
+    floatingItem: IFloatingItem,
+    field: string,
+    value: any
+  ) {
+    if (this.game != null && this.game.scene.getScene("gameScene")) {
+      const g = <GameScene>this.game.scene.getScene("gameScene")
+      if (g.minigameManager) {
+        g.minigameManager.changeItem(floatingItem, field, value)
+      }
+    }
+  }
+
+  /* Portals */
+
+  handlePortalAdd(portal: Portal) {
+    if (this.game != null && this.game.scene.getScene("gameScene")) {
+      const g = <GameScene>this.game.scene.getScene("gameScene")
+      if (g.minigameManager) {
+        g.minigameManager.addPortal(portal)
+      }
+    }
+  }
+
+  handlePortalRemove(portal: Portal) {
+    if (this.game != null && this.game.scene.getScene("gameScene")) {
+      const g = <GameScene>this.game.scene.getScene("gameScene")
+      if (g.minigameManager) {
+        g.minigameManager.removePortal(portal)
+      }
+    }
+  }
+
+  handlePortalChange(portal: IPortal, field: string, value: any) {
+    if (this.game != null && this.game.scene.getScene("gameScene")) {
+      const g = <GameScene>this.game.scene.getScene("gameScene")
+      if (g.minigameManager) {
+        g.minigameManager.changePortal(portal, field, value)
+      }
+    }
+  }
+
+  /* Board pokemons */
 
   handleBoardPokemonAdd(player: IPlayer, pokemon: IPokemon) {
     if (this.game != null && this.game.scene.getScene("gameScene")) {
@@ -741,24 +834,6 @@ class GameContainer {
     }
   }
 
-  handleAvatarRemove(avatar: IPokemonAvatar) {
-    if (this.game != null && this.game.scene.getScene("gameScene")) {
-      const g = <GameScene>this.game.scene.getScene("gameScene")
-      if (g.minigameManager) {
-        g.minigameManager.removePokemon(avatar)
-      }
-    }
-  }
-
-  handleFloatingItemRemove(floatingItem: IFloatingItem) {
-    if (this.game != null && this.game.scene.getScene("gameScene")) {
-      const g = <GameScene>this.game.scene.getScene("gameScene")
-      if (g.minigameManager) {
-        g.minigameManager.removeItem(floatingItem)
-      }
-    }
-  }
-
   handleBoardPokemonChange(
     player: IPlayer,
     pokemon: IPokemon,
@@ -769,28 +844,6 @@ class GameContainer {
       const g = <GameScene>this.game.scene.getScene("gameScene")
       if (g.board && g.board.player && g.board.player.id == player.id) {
         g.board.changePokemon(pokemon, field, value)
-      }
-    }
-  }
-
-  handleAvatarChange(avatar: IPokemonAvatar, field: string, value: any) {
-    if (this.game != null && this.game.scene.getScene("gameScene")) {
-      const g = <GameScene>this.game.scene.getScene("gameScene")
-      if (g.minigameManager) {
-        g.minigameManager.changePokemon(avatar, field, value)
-      }
-    }
-  }
-
-  handleFloatingItemChange(
-    floatingItem: IFloatingItem,
-    field: string,
-    value: any
-  ) {
-    if (this.game != null && this.game.scene.getScene("gameScene")) {
-      const g = <GameScene>this.game.scene.getScene("gameScene")
-      if (g.minigameManager) {
-        g.minigameManager.changeItem(floatingItem, field, value)
       }
     }
   }

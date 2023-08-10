@@ -1,6 +1,6 @@
 import Pokemon from "./pokemon"
 import { FloatingItem } from "./floating-item"
-import { IFloatingItem, IPokemonAvatar } from "../../../../types"
+import { IFloatingItem, IPokemonAvatar, IPortal } from "../../../../types"
 import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
 import {
@@ -8,10 +8,12 @@ import {
   transformMiniGameYCoordinate
 } from "../../pages/utils/utils"
 import PokemonAvatar from "./pokemon-avatar"
+import { Portal } from "./portal"
 
 export default class MinigameManager {
   pokemons: Map<string, Pokemon>
   items: Map<string, FloatingItem>
+  portals: Map<string, Portal>
   uid: string
   scene: GameScene
   display: boolean
@@ -26,6 +28,7 @@ export default class MinigameManager {
   ) {
     this.pokemons = new Map<string, Pokemon>()
     this.items = new Map<string, FloatingItem>()
+    this.portals = new Map<string, Portal>()
     this.uid = uid
     this.scene = scene
     this.display = false
@@ -46,6 +49,12 @@ export default class MinigameManager {
     })
   }
 
+  buildPortals(portals: Map<string, IPortal>) {
+    portals.forEach((portal) => {
+      this.addPortal(portal)
+    })
+  }
+
   getVector(x: number, y: number) {
     const avatar = this.pokemons.get(this.uid)
     if (avatar) {
@@ -57,6 +66,8 @@ export default class MinigameManager {
       return { x: 0, y: 0 }
     }
   }
+
+  /* Floating Items */
 
   addItem(item: IFloatingItem) {
     const it = new FloatingItem(
@@ -95,6 +106,46 @@ export default class MinigameManager {
     }
   }
 
+  /* Portals */
+  addPortal(portal: IPortal) {
+    const p = new Portal(
+      this.scene,
+      portal.id,
+      transformMiniGameXCoordinate(portal.x),
+      transformMiniGameYCoordinate(portal.y),
+      portal.symbols
+    )
+    this.portals.set(p.id, p)
+  }
+
+  removePortal(portalToRemove: IPortal) {
+    const portalUI = this.portals.get(portalToRemove.id)
+    if (portalUI) {
+      portalUI.destroy(true)
+    }
+    this.portals.delete(portalToRemove.id)
+  }
+
+  changePortal(portal: IPortal, field: string, value: any) {
+    const portalUI = this.portals.get(portal.id)
+    if (portalUI) {
+      switch (field) {
+        case "x":
+          portalUI.x = transformMiniGameXCoordinate(value)
+          break
+
+        case "y":
+          portalUI.y = transformMiniGameYCoordinate(value)
+          break
+
+        case "avatarId":
+          portalUI.onGrab(value)
+      }
+    }
+  }
+
+  /* Pokemon avatars */
+
   addPokemon(pokemon: IPokemonAvatar) {
     const pokemonUI = new PokemonAvatar(
       this.scene,
@@ -104,12 +155,15 @@ export default class MinigameManager {
       pokemon.id
     )
 
-    if (pokemonUI.isCurrentPlayerAvatar) {      
-      const arrowIndicator = this.scene.add.sprite(
-        pokemonUI.x + pokemonUI.width / 2 - 8,
-        pokemonUI.y - 70,
-        "arrowDown"
-      ).setDepth(10).setScale(2)
+    if (pokemonUI.isCurrentPlayerAvatar) {
+      const arrowIndicator = this.scene.add
+        .sprite(
+          pokemonUI.x + pokemonUI.width / 2 - 8,
+          pokemonUI.y - 70,
+          "arrowDown"
+        )
+        .setDepth(10)
+        .setScale(2)
       this.scene.tweens.add({
         targets: arrowIndicator,
         y: pokemonUI.y - 50,
@@ -158,7 +212,7 @@ export default class MinigameManager {
           break
 
         case "timer":
-          if(pokemonUI instanceof PokemonAvatar){
+          if (pokemonUI instanceof PokemonAvatar) {
             pokemonUI.updateCircleTimer(value)
           }
           break

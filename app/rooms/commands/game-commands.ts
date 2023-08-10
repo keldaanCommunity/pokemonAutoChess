@@ -3,7 +3,7 @@ import {
   ItemProposalStages,
   ItemRecipe,
   NeutralStage,
-  CarouselStages,
+  ItemCarouselStages,
   StageDuration,
   AdditionalPicksStages,
   MythicalPicksStages,
@@ -845,7 +845,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         return kickCommands
       }
 
-      if (CarouselStages.includes(this.state.stageLevel)) {
+      if (
+        ItemCarouselStages.includes(this.state.stageLevel) ||
+        MythicalPicksStages.includes(this.state.stageLevel)
+      ) {
         this.initializeMinigamePhase()
       } else {
         this.initializePickingPhase()
@@ -1445,7 +1448,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
       (p: Player) => p.life > 0
     ).length
     const minigamePhaseDuration =
-      this.state.stageLevel === CarouselStages[0]
+      this.state.stageLevel === ItemCarouselStages[0]
         ? 15000
         : 14000 + nbPlayersAlive * 2000
     this.state.time = minigamePhaseDuration

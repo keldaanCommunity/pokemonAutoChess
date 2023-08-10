@@ -1,5 +1,6 @@
 import { PokemonAvatarModel } from "../../models/colyseus-models/pokemon-avatar"
 import { FloatingItem } from "../../models/colyseus-models/floating-item"
+import { Portal } from "../../models/colyseus-models/portal"
 import { MapSchema } from "@colyseus/schema"
 import {
   Bodies,
@@ -16,14 +17,17 @@ import { PokemonActionState } from "../../types/enum/Game"
 import { BasicItems, Item } from "../../types/enum/Item"
 import { pickRandomIn } from "../../utils/random"
 import { clamp } from "../../utils/number"
+import { ItemCarouselStages, MythicalPicksStages } from "../../types/Config"
 
 const PLAYER_VELOCITY = 2
 const ITEM_ROTATION_SPEED = 0.0004
+const PORTAL_ROTATION_SPEED = 0.0003
 const CAROUSEL_RADIUS = 140
 
 export class MiniGame {
   avatars: MapSchema<PokemonAvatarModel> | undefined
   items: MapSchema<FloatingItem> | undefined
+  portals: MapSchema<Portal> | undefined
   bodies: Map<string, Body>
   alivePlayers: Player[]
   engine: Engine
@@ -65,6 +69,24 @@ export class MiniGame {
               Math.sin(t + (Math.PI * 2 * item.index) / this.items!.size) *
                 CAROUSEL_RADIUS
             Body.setPosition(itemBody, { x, y })
+          }
+        }
+      })
+
+      this.portals?.forEach((portal) => {
+        if (portal.avatarId === "") {
+          const portalBody = this.bodies.get(portal.id)
+          if (portalBody) {
+            const t = this.engine.timing.timestamp * PORTAL_ROTATION_SPEED
+            const x =
+              this.centerX +
+              Math.cos(t + (Math.PI * 2 * portal.index) / this.portals!.size) *
+                CAROUSEL_RADIUS
+            const y =
+              this.centerY +
+              Math.sin(t + (Math.PI * 2 * portal.index) / this.portals!.size) *
+                CAROUSEL_RADIUS
+            Body.setPosition(portalBody, { x, y })
           }
         }
       })
@@ -127,12 +149,25 @@ export class MiniGame {
           }
         }
       }
+
+      if (
+        (this.portals?.has(pairs[0].bodyA.label) ||
+          this.portals?.has(pairs[0].bodyB.label)) &&
+        (this.avatars?.has(pairs[0].bodyA.label) ||
+          this.avatars?.has(pairs[0].bodyB.label))
+      ) {
+      }
     })
   }
 
-  create(avatars: MapSchema<PokemonAvatarModel>, items: MapSchema<FloatingItem>) {
+  create(
+    avatars: MapSchema<PokemonAvatarModel>,
+    items: MapSchema<FloatingItem>,
+    portals: MapSchema<Portal>
+  ) {
     this.avatars = avatars
     this.items = items
+    this.portals = portals
   }
 
   initialize(players: MapSchema<Player>, stageLevel: number) {
@@ -181,6 +216,14 @@ export class MiniGame {
       Composite.add(this.engine.world, body)
     })
 
+    if (MythicalPicksStages.includes(stageLevel)) {
+      this.initializePortalCarousel()
+    } else if (ItemCarouselStages.includes(stageLevel)) {
+      this.initializeItemsCarousel()
+    }
+  }
+
+  initializeItemsCarousel() {
     const nbItemsToPick = clamp(this.alivePlayers.length + 3, 5, 9)
     const items = this.pickRandomItems(nbItemsToPick)
 
@@ -197,6 +240,20 @@ export class MiniGame {
     }
   }
 
+  initializePortalCarousel() {
+    const nbPortals = clamp(this.alivePlayers.length + 1, 3, 9)
+    for (let i = 0; i < nbPortals; i++) {
+      const x = this.centerX + Math.cos((Math.PI * 2 * i) / nbPortals) * 110
+      const y = this.centerY + Math.sin((Math.PI * 2 * i) / nbPortals) * 100
+      const portal = new Portal(x, y, i)
+      this.portals?.set(portal.id, portal)
+      const body = Bodies.circle(x, y, 35)
+      body.label = portal.id
+      this.bodies.set(portal.id, body)
+      Composite.add(this.engine.world, body)
+    }
+  }
+
   update(dt: number) {
     Engine.update(this.engine, dt)
     this.avatars?.forEach((a) => {
@@ -205,16 +262,19 @@ export class MiniGame {
       }
     })
     this.bodies.forEach((body, id) => {
-      const avatar = this.avatars?.get(id)
-      if (avatar) {
+      if (this.avatars?.has(id)) {
+        const avatar = this.avatars.get(id)!
         avatar.x = body.position.x
         avatar.y = body.position.y
         this.updatePlayerVector(id)
-      }
-      const item = this.items?.get(id)
-      if (item) {
+      } else if (this.items?.has(id)) {
+        const item = this.items.get(id)!
         item.x = body.position.x
         item.y = body.position.y
+      } else if (this.portals?.has(id)) {
+        const portal = this.portals.get(id)!
+        portal.x = body.position.x
+        portal.y = body.position.y
       }
     })
   }
@@ -278,22 +338,51 @@ export class MiniGame {
     this.avatars!.forEach((avatar) => {
       const player = players.get(avatar.id)
       if (avatar.itemId === "" && player && !player.isBot) {
-        // give a random item if none was taken
-        const remainingItems = [...this.items!.entries()].filter(
-          ([itemId, item]) => item.avatarId == ""
-        )
-        avatar.itemId = pickRandomIn(remainingItems)[0]
+        if (this.items) {
+          // give a random item if none was taken
+          const remainingItems = [...this.items.entries()].filter(
+            ([itemId, item]) => item.avatarId == ""
+          )
+          if (remainingItems.length > 0) {
+            avatar.itemId = pickRandomIn(remainingItems)[0]
+          }
+        }
+
+        if (this.portals) {
+          // send to random portal if none was taken
+          const remainingPortals = [...this.portals.entries()].filter(
+            ([portalId, portal]) => portal.avatarId == ""
+          )
+          if (remainingPortals.length > 0) {
+            avatar.portalId = pickRandomIn(remainingPortals)[0]
+          }
+        }
       }
 
-      const item = this.items?.get(avatar.itemId)
+      if (avatar.itemId) {
+        const item = this.items?.get(avatar.itemId)
 
-      if (item && player && !player.isBot) {
-        player.items.add(item.name)
+        if (item && player && !player.isBot) {
+          player.items.add(item.name)
+        }
+        this.avatars!.delete(avatar.id)
       }
-      this.avatars!.delete(avatar.id)
+
+      if (avatar.portalId) {
+        //TODO: assign mythical propositions
+      }
     })
-    this.items!.forEach((item) => {
-      this.items!.delete(item.id)
-    })
+
+    if (this.items) {
+      this.items.forEach((item) => {
+        this.items!.delete(item.id)
+      })
+    }
+
+    if (this.portals) {
+      this.portals.forEach((item) => {
+        this.portals!.delete(item.id)
+      })
+    }
   }
 }

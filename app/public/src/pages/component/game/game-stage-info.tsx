@@ -6,7 +6,7 @@ import TimerBar from "./game-timer-bar"
 import ReactTooltip from "react-tooltip"
 import {
   AdditionalPicksStages,
-  CarouselStages,
+  ItemCarouselStages,
   MythicalPicksStages,
   NeutralStage
 } from "../../../../../types/Config"
@@ -53,7 +53,7 @@ export default function GameStageInfo() {
             </p>
             <p>
               <span className="help">{t("carousel_stages")}:</span>{" "}
-              {CarouselStages.join(", ")}
+              {ItemCarouselStages.join(", ")}
             </p>
             <p>
               <span className="help">{t("additional_picks")}:</span>{" "}
@@ -155,7 +155,7 @@ export function StagePath() {
       }
     }
 
-    if (CarouselStages.includes(level)) {
+    if (ItemCarouselStages.includes(level)) {
       path.push({
         level,
         icon: "/assets/ui/carousel.svg",

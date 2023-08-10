@@ -62,6 +62,7 @@ export default class LoadingManager {
       "/assets/ui/snowflakes.json",
       "/assets/ui/"
     )
+    scene.load.multiatlas("portal", "/assets/ui/portal.json", "/assets/ui/")
 
     scene.load.image("money", "/assets/ui/money.svg")
     scene.load.image("arrowDown", "/assets/ui/arrowDown.png")
