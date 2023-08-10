@@ -4,7 +4,8 @@ import {
   Orientation,
   SpriteType,
   PokemonTint,
-  PokemonActionState
+  PokemonActionState,
+  OrientationFlip
 } from "../../../types/enum/Game"
 import { AnimationType, AnimationComplete } from "../../../types/Animation"
 import { Ability } from "../../../types/enum/Ability"
@@ -1964,7 +1965,7 @@ export default class AnimationManager {
     })
   }
 
-  animatePokemon(entity: Pokemon, action: PokemonActionState) {
+  animatePokemon(entity: Pokemon, action: PokemonActionState, flip: boolean) {
     let animation = AnimationType.Idle
     if (
       action === PokemonActionState.HOP ||
@@ -1983,24 +1984,26 @@ export default class AnimationManager {
       animation = AnimationConfig[entity.name as Pkm].attack
     }
     try {
-      this.play(entity, animation)
+      this.play(entity, animation, flip)
     } catch (err) {
       logger.warn(`Can't play animation ${animation} for ${entity.name}`, err)
     }
   }
 
-  play(entity: Pokemon, animation: AnimationType) {
-    const orientation =
-      AnimationComplete[animation] === true
-        ? entity.orientation
-        : Orientation.DOWN
+  play(entity: Pokemon, animation: AnimationType, flip: boolean) {
+    const orientation = flip
+      ? OrientationFlip[entity.orientation]
+      : entity.orientation
+
+    const orientationCorrected =
+      AnimationComplete[animation] === true ? orientation : Orientation.DOWN
 
     const textureIndex = entity.scene.textures.exists(entity.index)
       ? entity.index
       : "0000"
     const tint = entity.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL
-    const animKey = `${textureIndex}/${tint}/${animation}/${SpriteType.ANIM}/${orientation}`
-    const shadowKey = `${textureIndex}/${tint}/${animation}/${SpriteType.SHADOW}/${orientation}`
+    const animKey = `${textureIndex}/${tint}/${animation}/${SpriteType.ANIM}/${orientationCorrected}`
+    const shadowKey = `${textureIndex}/${tint}/${animation}/${SpriteType.SHADOW}/${orientationCorrected}`
     entity.sprite.anims.play(animKey)
     entity.shadow.anims.play(shadowKey)
   }

@@ -10,9 +10,6 @@ import { loadPreferences, savePreferences } from "../../../preferences"
 import "./game-dps-meter.css"
 import { useTranslation } from "react-i18next"
 
-let lastOpponentName = ""
-let lastOpponentAvatar = ""
-
 export default function GameDpsMeter() {
   const { t } = useTranslation()
   const opponentName = useAppSelector(
@@ -21,12 +18,6 @@ export default function GameDpsMeter() {
   const opponentAvatar = useAppSelector(
     (state) => state.game.currentPlayerOpponentAvatar
   )
-  if (opponentName != lastOpponentName && opponentName != "") {
-    lastOpponentName = opponentName
-  }
-  if (opponentAvatar != lastOpponentAvatar && opponentAvatar != "") {
-    lastOpponentAvatar = opponentAvatar
-  }
 
   const avatar = useAppSelector((state) => state.game.currentPlayerAvatar)
   const name = useAppSelector((state) => state.game.currentPlayerName)
@@ -37,7 +28,7 @@ export default function GameDpsMeter() {
     savePreferences({ showDpsMeter: !isOpen })
   }
 
-  if (opponentAvatar == "" && lastOpponentAvatar == "") {
+  if (opponentAvatar == "") {
     return null
   } else {
     return (
@@ -65,10 +56,10 @@ export default function GameDpsMeter() {
             <h2>Vs</h2>
             <div>
               <img
-                src={getAvatarSrc(opponentAvatar || lastOpponentAvatar)}
+                src={getAvatarSrc(opponentAvatar)}
                 className="pokemon-portrait"
               ></img>
-              <p>{opponentName || lastOpponentName}</p>
+              <p>{opponentName}</p>
             </div>
           </header>
           <Tabs>

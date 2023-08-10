@@ -7,9 +7,7 @@ import {
   CollectionSchema
 } from "@colyseus/schema"
 import { Pokemon } from "./pokemon"
-import Simulation from "../../core/simulation"
 import Synergies from "./synergies"
-import { Effects } from "../effects"
 import ExperienceManager from "./experience-manager"
 import { BattleResult } from "../../types/enum/Game"
 import { IPlayer, Role, Title } from "../../types"
@@ -22,14 +20,15 @@ import { Pkm, PkmProposition } from "../../types/enum/Pokemon"
 import GameRoom from "../../rooms/game-room"
 import { Weather } from "../../types/enum/Weather"
 import PokemonFactory from "../pokemon-factory"
+import { Effects } from "../effects"
 
 export default class Player extends Schema implements IPlayer {
   @type("string") id: string
+  @type("string") simulationId = ""
   @type("string") name: string
   @type("string") avatar: string
   @type({ map: Pokemon }) board = new MapSchema<Pokemon>()
   @type(["string"]) shop = new ArraySchema<Pkm>()
-  @type(Simulation) simulation: Simulation
   @type(ExperienceManager) experienceManager = new ExperienceManager()
   @type({ map: "uint8" }) synergies = new Synergies()
   @type("uint8") money = process.env.MODE == "dev" ? 400 : 6
@@ -68,8 +67,7 @@ export default class Player extends Schema implements IPlayer {
     rank: number,
     pokemonCollection: Map<string, IPokemonConfig>,
     title: Title | "",
-    role: Role,
-    room: GameRoom
+    role: Role
   ) {
     super()
     this.id = id
@@ -81,23 +79,7 @@ export default class Player extends Schema implements IPlayer {
     this.title = title
     this.role = role
     this.pokemonCollection = new PokemonCollection(pokemonCollection)
-    this.simulation = new Simulation(id, room)
     if (isBot) this.loadingProgress = 100
-  }
-
-  getCurrentBattleResult() {
-    if (
-      this.simulation.blueTeam.size === 0 &&
-      this.simulation.redTeam.size > 0
-    ) {
-      return BattleResult.DEFEAT
-    } else if (
-      this.simulation.redTeam.size === 0 &&
-      this.simulation.blueTeam.size > 0
-    ) {
-      return BattleResult.WIN
-    }
-    return BattleResult.DRAW
   }
 
   addBattleResult(
@@ -105,12 +87,20 @@ export default class Player extends Schema implements IPlayer {
     result: BattleResult,
     avatar: string,
     isPVE: boolean,
-    weather: Weather
+    weather: Weather | undefined
   ) {
     if (this.history.length >= 5) {
       this.history.shift()
     }
-    this.history.push(new HistoryItem(name, result, avatar, isPVE, weather))
+    this.history.push(
+      new HistoryItem(
+        name,
+        result,
+        avatar,
+        isPVE,
+        weather ? weather : Weather.NEUTRAL
+      )
+    )
   }
 
   getLastBattle(): HistoryItem | null {

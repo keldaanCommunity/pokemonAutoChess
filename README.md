@@ -104,11 +104,24 @@ npm run dev
 
 Game runs locally on port [http://localhost:9000/](http://localhost:9000/)
 
+### Administration rights
+
+You might want to have full access right on your local version. To do so, you can set your role to `ADMIN` by editing your player rights in the `usermetadatas` table.
+
 # Extensions
 
 With VS Code, use Prettier, Eslint, Inlang.
 
 # Development
 
- - Everytime you make a change for the player, add an entry in the changelog (`changelog` folder)
- - To add a new pokemon, you'll need a TexturePacker license key
+- Everytime you make a change for the player, add an entry in the changelog (`changelog` folder)
+- To add a new pokemon, you'll need a TexturePacker license key
+
+## Internationalisation
+
+- In VSCode, use the inlang (i18n) extension
+- Bind the Inlang: Extract Message on a keyboard touch, for example (²)
+- Select the string you want to translate. Press ², a prompt will ask the id you want for this string. It'll add the corresponding entry in the english translation file.
+- Once you are finished, you can run npm run translate to machine translate the missing translations
+
+Please note that we only support the english language. Other languages are managed by the community.

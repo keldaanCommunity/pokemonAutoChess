@@ -269,7 +269,7 @@ export default class MinigameManager {
       })
     }
 
-    this.animationManager.animatePokemon(pokemonUI, pokemon.action)
+    this.animationManager.animatePokemon(pokemonUI, pokemon.action, false)
     this.pokemons.set(pokemonUI.playerId, pokemonUI)
   }
 
@@ -287,12 +287,12 @@ export default class MinigameManager {
       switch (field) {
         case "orientation":
           pokemonUI.orientation = value
-          this.animationManager.animatePokemon(pokemonUI, pokemonUI.action)
+          this.animationManager.animatePokemon(pokemonUI, pokemonUI.action, false)
           break
 
         case "action":
           pokemonUI.action = value
-          this.animationManager.animatePokemon(pokemonUI, value)
+          this.animationManager.animatePokemon(pokemonUI, value, false)
           break
 
         case "x":

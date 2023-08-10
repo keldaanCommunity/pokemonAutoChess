@@ -8,6 +8,7 @@ import { Item } from "../types/enum/Item"
 import { Effect } from "../types/enum/Effect"
 import {
   AttackType,
+  BattleResult,
   BoardEvent,
   PokemonActionState,
   Rarity,
@@ -36,6 +37,7 @@ import { getPath } from "../public/src/pages/utils/utils"
 import GameRoom from "../rooms/game-room"
 import { pickRandomIn, randomBetween } from "../utils/random"
 import { Passive } from "../types/enum/Passive"
+import Player from "../models/colyseus-models/player"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") weather: Weather = Weather.NEUTRAL
@@ -46,6 +48,9 @@ export default class Simulation extends Schema implements ISimulation {
   @type({ map: Dps }) redDpsMeter = new MapSchema<Dps>()
   @type({ map: DpsHeal }) blueHealDpsMeter = new MapSchema<DpsHeal>()
   @type({ map: DpsHeal }) redHealDpsMeter = new MapSchema<DpsHeal>()
+  @type("string") id: string
+  @type("string") bluePlayerId: string
+  @type("string") redPlayerId: string
   room: GameRoom
   blueEffects = new Array<Effect>()
   redEffects = new Array<Effect>()
@@ -53,56 +58,40 @@ export default class Simulation extends Schema implements ISimulation {
   finished = false
   flowerSpawn: boolean[] = [false, false]
   stageLevel = 0
-  player: IPlayer | undefined
-  opponent: IPlayer | undefined
-  id: string
+  bluePlayer: Player | undefined
+  redPlayer: Player | undefined
   stormLightningTimer = 0
 
-  constructor(id: string, room: GameRoom) {
-    super()
-    this.id = id
-    this.room = room
-  }
-
-  initialize(
+  constructor(
+    id: string,
+    room: GameRoom,
     blueTeam: MapSchema<Pokemon>,
     redTeam: MapSchema<Pokemon>,
-    player: IPlayer,
-    opponent: IPlayer | null, // null if PVE round
+    bluePlayer: Player,
+    redPlayer: Player | undefined,
     stageLevel: number,
     weather: Weather
   ) {
-    this.player = player
-    this.opponent = opponent ?? undefined
+    super()
+    this.id = id
+    this.room = room
+    this.bluePlayer = bluePlayer
+    this.redPlayer = redPlayer
+    this.bluePlayerId = bluePlayer.id
+    this.redPlayerId = redPlayer?.id ? redPlayer?.id : ""
     this.stageLevel = stageLevel
     this.weather = weather
 
-    this.blueDpsMeter.forEach((dps, key) => {
-      this.blueDpsMeter.delete(key)
-    })
-
-    this.redDpsMeter.forEach((dps, key) => {
-      this.redDpsMeter.delete(key)
-    })
-
-    this.blueHealDpsMeter.forEach((dps, key) => {
-      this.blueHealDpsMeter.delete(key)
-    })
-
-    this.redHealDpsMeter.forEach((dps, key) => {
-      this.redHealDpsMeter.delete(key)
-    })
-
     this.board = new Board(6, 8)
-    this.blueEffects = player?.effects?.list ?? []
-    this.redEffects = opponent?.effects?.list ?? []
+    this.blueEffects = bluePlayer?.effects?.list ?? []
+    this.redEffects = redPlayer?.effects?.list ?? []
     // logger.debug({ blueEffects, redEffects })
 
     this.room.updateCastform(this.weather)
 
     // update effects after castform transformation
-    this.blueEffects = player?.effects?.list ?? []
-    this.redEffects = opponent?.effects?.list ?? []
+    this.blueEffects = bluePlayer?.effects?.list ?? []
+    this.redEffects = redPlayer?.effects?.list ?? []
 
     this.finished = false
     this.winnerId = ""
@@ -131,17 +120,20 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     ;[
-      { team: blueTeam, effects: this.blueEffects },
-      { team: redTeam, effects: this.redEffects }
+      { team: blueTeam, effects: this.blueEffects, player: bluePlayer },
+      { team: redTeam, effects: this.redEffects, player: redPlayer }
     ].forEach(
       ({
         team,
-        effects
+        effects,
+        player
       }: {
-        team: MapSchema<Pokemon, string>
+        team: MapSchema<Pokemon>
         effects: Effect[]
+        player: Player | undefined
       }) => {
         if (
+          player &&
           [Effect.INFESTATION, Effect.HORDE, Effect.HEART_OF_THE_SWARM].some(
             (e) => effects.includes(e)
           )
@@ -182,6 +174,59 @@ export default class Simulation extends Schema implements ISimulation {
     )
 
     this.applyPostEffects()
+  }
+
+  getCurrentBattleResult(playerId: string) {
+    if (this.blueTeam.size === 0 && this.redTeam.size > 0) {
+      return playerId === this.bluePlayer?.id
+        ? BattleResult.DEFEAT
+        : BattleResult.WIN
+    } else if (this.redTeam.size === 0 && this.blueTeam.size > 0) {
+      return playerId === this.redPlayer?.id
+        ? BattleResult.DEFEAT
+        : BattleResult.WIN
+    }
+    return BattleResult.DRAW
+  }
+
+  getEffects(playerId: string) {
+    return playerId === this.bluePlayer?.id
+      ? this.blueEffects
+      : playerId === this.redPlayer?.id
+      ? this.redEffects
+      : undefined
+  }
+
+  getDpsMeter(playerId: string) {
+    return playerId === this.bluePlayer?.id
+      ? this.blueDpsMeter
+      : playerId === this.redPlayer?.id
+      ? this.redDpsMeter
+      : undefined
+  }
+
+  getHealDpsMeter(playerId: string) {
+    return playerId === this.bluePlayer?.id
+      ? this.blueHealDpsMeter
+      : playerId === this.redPlayer?.id
+      ? this.redHealDpsMeter
+      : undefined
+  }
+
+  getTeam(playerId: string) {
+    return playerId === this.bluePlayer?.id
+      ? this.blueTeam
+      : playerId === this.redPlayer?.id
+      ? this.redTeam
+      : undefined
+  }
+
+  getOpponentTeam(playerId: string) {
+    return playerId === this.bluePlayer?.id
+      ? this.redTeam
+      : playerId === this.redPlayer?.id
+      ? this.blueTeam
+      : undefined
   }
 
   addPokemon(
@@ -1045,101 +1090,16 @@ export default class Simulation extends Schema implements ISimulation {
     })
   }
 
-  getWeather(
-    playerBoard: MapSchema<Pokemon, string>,
-    opponentBoard: MapSchema<Pokemon, string>
-  ): Weather {
-    function getDominantWeather(
-      count: Map<Weather, number>,
-      weathers: Weather[] = [...count.keys()]
-    ): Weather | null {
-      const sortedCount = weathers
-        .map((w) => [w, count.get(w) ?? 0] as [Weather, number])
-        .sort((a, b) => b[1] - a[1])
-
-      if (sortedCount.length === 0) return null
-      if (sortedCount.length === 1) return sortedCount[0][0]
-      if (sortedCount.length >= 2 && sortedCount[0][1] === sortedCount[1][1])
-        return null
-      return sortedCount[0][0]
-    }
-
-    const boardWeatherScore = new Map<Weather, number>()
-    ;[playerBoard, opponentBoard].forEach((board) => {
-      const playerWeatherScore = new Map<Weather, number>()
-      board.forEach((pkm) => {
-        if (pkm.positionY != 0) {
-          if (WeatherPassives.has(pkm.passive)) {
-            const weather = WeatherPassives.get(pkm.passive)!
-            boardWeatherScore.set(
-              weather,
-              (boardWeatherScore.get(weather) ?? 0) + 100
-            )
-            playerWeatherScore.set(
-              weather,
-              (playerWeatherScore.get(weather) ?? 0) + 100
-            )
-          }
-          pkm.types.forEach((type) => {
-            if (WeatherAssociatedToSynergy.has(type)) {
-              const weather = WeatherAssociatedToSynergy.get(type)!
-              boardWeatherScore.set(
-                weather,
-                (boardWeatherScore.get(weather) ?? 0) + 1
-              )
-              if (pkm.passive !== Passive.CASTFORM) {
-                playerWeatherScore.set(
-                  weather,
-                  (playerWeatherScore.get(weather) ?? 0) + 1
-                )
-              }
-            }
-          })
-        }
-      })
-
-      // apply special weather passives
-      board.forEach((pkm) => {
-        if (pkm.positionY != 0) {
-          if (pkm.passive === Passive.CASTFORM) {
-            const dominant = getDominantWeather(playerWeatherScore, [
-              Weather.SUN,
-              Weather.RAIN,
-              Weather.SNOW
-            ])
-            if (dominant) {
-              boardWeatherScore.set(
-                dominant,
-                (boardWeatherScore.get(dominant) ?? 0) + 100
-              )
-            }
-          }
-        }
-      })
-    })
-
-    //logger.debug("boardWeatherScore", boardWeatherScore)
-    const MIN_THRESHOLD = 8
-    const dominantWeather = getDominantWeather(boardWeatherScore)
-    if (
-      dominantWeather &&
-      boardWeatherScore.get(dominantWeather)! >= MIN_THRESHOLD
-    ) {
-      return dominantWeather
-    }
-    return Weather.NEUTRAL
-  }
-
   update(dt: number) {
     if (this.blueTeam.size === 0 || this.redTeam.size === 0) {
       this.finished = true
       if (this.blueTeam.size === 0 && this.redTeam.size > 0) {
-        this.winnerId = this.opponent ? this.opponent.id : "pve"
+        this.winnerId = this.redPlayer ? this.redPlayer.id : "pve"
         this.redTeam.forEach((p) => {
           p.action = PokemonActionState.HOP
         })
       } else if (this.redTeam.size === 0 && this.blueTeam.size > 0) {
-        this.winnerId = this.player?.id ?? ""
+        this.winnerId = this.bluePlayer?.id ?? ""
         this.blueTeam.forEach((p) => {
           p.action = PokemonActionState.HOP
         })
@@ -1201,18 +1161,12 @@ export default class Simulation extends Schema implements ISimulation {
             false
           )
         }
-        if (this.player) {
-          const client = this.room.clients.find(
-            (cli) => cli.auth.uid === this.player!.id
-          )
-          if (client) {
-            client.send(Transfer.BOARD_EVENT, {
-              type: BoardEvent.LIGHTNING,
-              x,
-              y
-            })
-          }
-        }
+        this.room.broadcast(Transfer.BOARD_EVENT, {
+          type: BoardEvent.LIGHTNING,
+          x,
+          y,
+          id: this.id
+        })
       }
     }
   }

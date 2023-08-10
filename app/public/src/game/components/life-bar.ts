@@ -1,3 +1,4 @@
+import { Team } from "../../../../types/enum/Game"
 import Bar from "./bar"
 
 export default class LifeBar extends Bar {
@@ -9,9 +10,19 @@ export default class LifeBar extends Bar {
     width: number,
     max: number,
     maxShield: number,
-    team: number
+    team: Team,
+    flip: boolean
   ) {
-    super(scene, x, y, width, 7, max, max, team === 1 ? "#e76e55" : "#76c442")
+    super(
+      scene,
+      x,
+      y,
+      width,
+      7,
+      max,
+      max,
+      team === 1 ? (flip ? "#76c442" : "#e76e55") : flip ? "#e76e55" : "#76c442"
+    )
 
     this.shieldProgress = document.createElement("div")
     this.shieldProgress.className = "progress-bar"

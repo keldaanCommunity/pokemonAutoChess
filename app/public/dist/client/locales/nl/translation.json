@@ -1884,5 +1884,6 @@
   "pkm.FURRET": "Furret",
   "pkm.SENTRET": "schildwacht",
   "ability_description.HELPING_HAND": "Verdubbel de schade van de volgende spreuk van de dichtstbijzijnde [2,4,6] bondgenoten",
-  "language": "Taal"
+  "language": "Taal",
+  "community_translations": "Vertalingen worden beheerd door de gemeenschap. Als u wilt toevoegen of\r\n              help een vertaling te verbeteren, ga naar"
 }

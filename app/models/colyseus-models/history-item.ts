@@ -4,7 +4,7 @@ import { Weather } from "../../types/enum/Weather"
 
 export default class HistoryItem extends Schema {
   @type("string") name: string
-  @type("uint8") result: BattleResult
+  @type("string") result: BattleResult
   @type("string") avatar: string
   @type("boolean") isPVE: boolean
   @type("string") weather: Weather

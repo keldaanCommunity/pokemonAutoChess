@@ -22,7 +22,7 @@ export default function SynergyDetailComponent(props: {
   const additionalPokemons = useAppSelector(
     (state) => state.game.additionalPokemons
   )
-  if (SynergyTriggers.hasOwnProperty(props.type) === false) return null
+  if (Object.hasOwn(SynergyTriggers, props.type) === false) return null
   const levelReached = SynergyTriggers[props.type]
     .filter((n) => n <= props.value)
     .at(-1)
@@ -37,7 +37,7 @@ export default function SynergyDetailComponent(props: {
       {SynergyEffects[props.type].map((d, i) => {
         return (
           <div
-            key={t(`effect.${d}`)}
+            key={d}
             style={{
               color:
                 levelReached === SynergyTriggers[props.type][i]

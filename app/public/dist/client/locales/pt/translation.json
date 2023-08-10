@@ -1929,5 +1929,6 @@
     "HATCH": "Escotilha",
     "SPECIAL": "Especial"
   },
-  "language": "Linguagem"
+  "language": "Linguagem",
+  "community_translations": "As traduções são gerenciadas pela comunidade. Se você quiser adicionar ou\r\n              ajudar a melhorar uma tradução, acesse"
 }

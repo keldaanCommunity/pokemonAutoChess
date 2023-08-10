@@ -1882,5 +1882,6 @@
   "pkm.FURRET": "ファーレット",
   "pkm.SENTRET": "セントレ",
   "ability_description.HELPING_HAND": "最も近い[2,4,6]人の味方が次に唱える呪文のダメージが2倍になる",
-  "language": "言語"
+  "language": "言語",
+  "community_translations": "翻訳はコミュニティによって管理されます。追加したい場合や、\r\n              翻訳の改善にご協力ください。"
 }

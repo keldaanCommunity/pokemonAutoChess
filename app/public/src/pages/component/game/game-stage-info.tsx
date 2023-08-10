@@ -22,21 +22,29 @@ import { useTranslation } from "react-i18next"
 
 export default function GameStageInfo() {
   const { t } = useTranslation()
+  const phase = useAppSelector((state) => state.game.phase)
   const name = useAppSelector((state) => state.game.currentPlayerName)
   const title = useAppSelector((state) => state.game.currentPlayerTitle)
   const avatar = useAppSelector((state) => state.game.currentPlayerAvatar)
-  const weather = useAppSelector((state) => state.game.currentPlayerWeather)
+  const weather = useAppSelector((state) => state.game.weather)
 
   const stageLevel = useAppSelector((state) => state.game.stageLevel)
-  const opponentName = useAppSelector(
+  const currentPlayerOpponentName = useAppSelector(
     (state) => state.game.currentPlayerOpponentName
   )
-  const opponentAvatar = useAppSelector(
+  const currentPlayerOpponentAvatar = useAppSelector(
     (state) => state.game.currentPlayerOpponentAvatar
   )
-  const opponentTitle = useAppSelector(
+  const currentPlayerOpponentTitle = useAppSelector(
     (state) => state.game.currentPlayerOpponentTitle
   )
+
+  const opponentName =
+    phase === GamePhaseState.FIGHT ? currentPlayerOpponentName : ""
+  const opponentAvatar =
+    phase === GamePhaseState.FIGHT ? currentPlayerOpponentAvatar : ""
+  const opponentTitle =
+    phase === GamePhaseState.FIGHT ? currentPlayerOpponentTitle : ""
 
   return (
     <>

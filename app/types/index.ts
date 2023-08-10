@@ -32,9 +32,9 @@ import { Pkm, PkmProposition } from "./enum/Pokemon"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { IPokemonRecord } from "../models/colyseus-models/game-record"
 import GameRoom from "../rooms/game-room"
-import { Effects } from "../models/effects"
 import { Passive } from "./enum/Passive"
 import { Weather } from "./enum/Weather"
+import { Effects } from "../models/effects"
 
 export * from "./enum/Emotion"
 
@@ -325,7 +325,7 @@ export interface IPlayer {
   avatar: string
   board: MapSchema<Pokemon>
   shop: ArraySchema<Pkm>
-  simulation: ISimulation
+  simulationId: string
   experienceManager: ExperienceManager
   synergies: Synergies
   money: number
@@ -403,6 +403,8 @@ export interface ISimulation {
   redDpsMeter: MapSchema<Dps>
   blueHealDpsMeter: MapSchema<DpsHeal>
   redHealDpsMeter: MapSchema<DpsHeal>
+  bluePlayerId: string
+  redPlayerId: string
 }
 
 export interface IDps {

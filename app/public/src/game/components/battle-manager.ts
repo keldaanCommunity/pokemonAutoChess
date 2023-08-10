@@ -2,12 +2,7 @@ import { GameObjects } from "phaser"
 import Pokemon from "./pokemon"
 import { transformAttackCoordinate } from "../../pages/utils/utils"
 import GameScene from "../scenes/game-scene"
-import {
-  ICount,
-  IPlayer,
-  IPokemonEntity,
-  NonFunctionPropNames
-} from "../../../../types"
+import { IPokemonEntity, NonFunctionPropNames } from "../../../../types"
 import AnimationManager from "../animation-manager"
 import {
   AttackType,
@@ -26,50 +21,70 @@ import {
 } from "../../../../utils/orientation"
 import { distanceE } from "../../../../utils/distance"
 import Status from "../../../../models/colyseus-models/status"
+import Simulation from "../../../../core/simulation"
+import Player from "../../../../models/colyseus-models/player"
 
 export default class BattleManager {
   group: GameObjects.Group
   scene: GameScene
-  player: IPlayer
+  simulation: Simulation | undefined
   animationManager: AnimationManager
+  player: Player
 
   constructor(
     scene: GameScene,
     group: GameObjects.Group,
-    player: IPlayer,
-    animationManager: AnimationManager
+    simulation: Simulation | undefined,
+    animationManager: AnimationManager,
+    player: Player
   ) {
     this.group = group
     this.scene = scene
-    this.player = player
+    this.simulation = simulation
     this.animationManager = animationManager
+    this.player = player
+  }
+
+  get flip() {
+    return this.player.id !== this.simulation?.bluePlayerId
   }
 
   buildPokemons() {
-    this.player.simulation.blueTeam.forEach((pkm, key) => {
-      this.addPokemon(this.player.id, pkm)
+    this.simulation?.blueTeam.forEach((pkm, key) => {
+      this.simulation?.id && this.addPokemon(this.simulation.id, pkm)
     })
 
-    this.player.simulation.redTeam.forEach((pkm, key) => {
-      this.addPokemon(this.player.id, pkm)
+    this.simulation?.redTeam.forEach((pkm, key) => {
+      this.simulation?.id && this.addPokemon(this.simulation.id, pkm)
     })
   }
 
-  addPokemon(playerId: string, pokemon: IPokemonEntity) {
-    if (this.player.id == playerId) {
+  addPokemon(simulationId: string, pokemon: IPokemonEntity) {
+    if (
+      this.simulation?.id === simulationId &&
+      !(this.group.getChildren() as Pokemon[]).find(
+        (child) => child.id === pokemon.id
+      )
+    ) {
       const coordinates = transformAttackCoordinate(
         pokemon.positionX,
-        pokemon.positionY
+        pokemon.positionY,
+        this.flip
       )
       const pokemonUI = new Pokemon(
         this.scene,
         coordinates[0],
         coordinates[1],
         pokemon,
-        playerId,
-        true
+        simulationId,
+        true,
+        this.flip
       )
-      this.animationManager.animatePokemon(pokemonUI, PokemonActionState.WALK)
+      this.animationManager.animatePokemon(
+        pokemonUI,
+        PokemonActionState.WALK,
+        this.flip
+      )
       this.group.add(pokemonUI)
     }
   }
@@ -78,21 +93,25 @@ export default class BattleManager {
     this.group.clear(true, true)
   }
 
-  removePokemon(playerId: string, pokemon: IPokemonEntity) {
-    if (this.player.id == playerId) {
+  removePokemon(simulationId: string, pokemon: IPokemonEntity) {
+    if (this.simulation?.id == simulationId) {
       this.group.getChildren().forEach((p) => {
         const pkm = <Pokemon>p
         if (pkm.id == pokemon.id) {
-          this.animationManager.animatePokemon(pkm, PokemonActionState.HURT)
+          this.animationManager.animatePokemon(
+            pkm,
+            PokemonActionState.HURT,
+            this.flip
+          )
           pkm.deathAnimation()
         }
       })
     }
   }
 
-  addPokemonItem(playerId: string, value: Item, pokemon: IPokemonEntity) {
+  addPokemonItem(simulationId: string, value: Item, pokemon: IPokemonEntity) {
     // logger.debug(change);
-    if (this.player.id === playerId) {
+    if (this.simulation?.id === simulationId) {
       const children = this.group.getChildren()
       for (let i = 0; i < children.length; i++) {
         const pkm = <Pokemon>children[i]
@@ -104,8 +123,12 @@ export default class BattleManager {
     }
   }
 
-  removePokemonItem(playerId: string, value: Item, pokemon: IPokemonEntity) {
-    if (this.player.id == playerId && this.group) {
+  removePokemonItem(
+    simulationId: string,
+    value: Item,
+    pokemon: IPokemonEntity
+  ) {
+    if (this.simulation?.id == simulationId && this.group) {
       const children = this.group.getChildren()
       for (let i = 0; i < children.length; i++) {
         const pkm = <Pokemon>children[i]
@@ -118,11 +141,11 @@ export default class BattleManager {
   }
 
   changeStatus(
-    playerId: string,
+    simulationId: string,
     pokemon: IPokemonEntity,
     field: NonFunctionPropNames<Status>
   ) {
-    if (this.player.id == playerId && this.group) {
+    if (this.simulation?.id == simulationId && this.group) {
       const children = this.group.getChildren()
       for (let i = 0; i < children.length; i++) {
         const pkm = <Pokemon>children[i]
@@ -139,7 +162,8 @@ export default class BattleManager {
               pkm.addSleep()
               this.animationManager.animatePokemon(
                 pkm,
-                PokemonActionState.SLEEP
+                PokemonActionState.SLEEP,
+                this.flip
               )
             } else {
               pkm.removeSleep()
@@ -251,13 +275,13 @@ export default class BattleManager {
   }
 
   changeCount(
-    playerId: string,
+    simulationId: string,
     pokemon: IPokemonEntity,
     field: NonFunctionPropNames<Count>,
     value: any
   ) {
     // logger.debug(field, value);
-    if (this.player.id == playerId && this.group) {
+    if (this.simulation?.id == simulationId && this.group) {
       const children = this.group.getChildren()
       for (let i = 0; i < children.length; i++) {
         const pkm = <Pokemon>children[i]
@@ -275,7 +299,8 @@ export default class BattleManager {
             if (value != 0) {
               this.animationManager.play(
                 pkm,
-                AnimationConfig[pkm.name as Pkm].ability
+                AnimationConfig[pkm.name as Pkm].ability,
+                this.flip
               )
               pkm.specialAttackAnimation(this.group, value)
             }
@@ -354,7 +379,8 @@ export default class BattleManager {
               ) {
                 this.animationManager.animatePokemon(
                   pkm,
-                  PokemonActionState.ATTACK
+                  PokemonActionState.ATTACK,
+                  this.flip
                 )
                 pkm.attackAnimation()
               }
@@ -380,13 +406,13 @@ export default class BattleManager {
   }
 
   changePokemon(
-    playerId: string,
+    simulationId: string,
     pokemon: IPokemonEntity,
     field: string,
     value: any,
     previousValue: any
   ) {
-    if (this.player.id == playerId && this.group) {
+    if (this.simulation?.id == simulationId && this.group) {
       const children = this.group.getChildren()
       for (let i = 0; i < children.length; i++) {
         const pkm = <Pokemon>children[i]
@@ -400,7 +426,8 @@ export default class BattleManager {
             }
             const coordinates = transformAttackCoordinate(
               pokemon.positionX,
-              pokemon.positionY
+              pokemon.positionY,
+              this.flip
             )
             if (pokemon.skill == Ability.TELEPORT) {
               pkm.x = coordinates[0]
@@ -419,11 +446,15 @@ export default class BattleManager {
           } else if (field == "orientation") {
             pkm.orientation = pokemon.orientation
             if (pokemon.action !== PokemonActionState.SLEEP) {
-              this.animationManager.animatePokemon(pkm, pokemon.action)
+              this.animationManager.animatePokemon(
+                pkm,
+                pokemon.action,
+                this.flip
+              )
             }
           } else if (field == "action") {
             pkm.action = pokemon.action
-            this.animationManager.animatePokemon(pkm, value)
+            this.animationManager.animatePokemon(pkm, value, this.flip)
           } else if (field == "critChance") {
             pkm.critChance = pokemon.critChance
             if (pkm.detail) {
@@ -507,7 +538,11 @@ export default class BattleManager {
             }
           } else if (field === "index") {
             pkm.index = value
-            this.animationManager.animatePokemon(pkm, PokemonActionState.IDLE)
+            this.animationManager.animatePokemon(
+              pkm,
+              PokemonActionState.IDLE,
+              this.flip
+            )
           }
           break
         }
@@ -718,7 +753,7 @@ export default class BattleManager {
   ) {
     const targetX = targetX_ ? targetX_ : -1
     const targetY = targetY_ ? targetY_ : -1
-    if (this.player.id === id) {
+    if (this.simulation?.id === id) {
       if (skill) {
         let coordinates: number[]
         let specialProjectile: GameObjects.Sprite
@@ -729,7 +764,7 @@ export default class BattleManager {
 
         switch (skill) {
           case Ability.FIRE_BLAST:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -748,7 +783,7 @@ export default class BattleManager {
             break
 
           case Ability.FIRE_SPIN:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -767,7 +802,11 @@ export default class BattleManager {
             break
 
           case Ability.CORRUPTED_NATURE:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -786,7 +825,7 @@ export default class BattleManager {
             break
 
           case Ability.CRABHAMMER:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -805,7 +844,11 @@ export default class BattleManager {
             break
 
           case Ability.DIAMOND_STORM:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -824,7 +867,7 @@ export default class BattleManager {
             break
 
           case Ability.DRACO_ENERGY:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -843,7 +886,7 @@ export default class BattleManager {
             break
 
           case Ability.DYNAMAX_CANNON:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -862,7 +905,7 @@ export default class BattleManager {
             break
 
           case Ability.DYNAMIC_PUNCH:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -881,7 +924,7 @@ export default class BattleManager {
             break
 
           case Ability.ELECTRO_WEB:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -900,7 +943,7 @@ export default class BattleManager {
             break
 
           case Ability.FIRE_TRICK:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -919,8 +962,16 @@ export default class BattleManager {
             break
 
           case Ability.FLAME_CHARGE:
-            coordinatesTarget = transformAttackCoordinate(targetX, targetY)
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinatesTarget = transformAttackCoordinate(
+              targetX,
+              targetY,
+              this.flip
+            )
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -946,8 +997,16 @@ export default class BattleManager {
             break
 
           case Ability.AQUA_JET:
-            coordinatesTarget = transformAttackCoordinate(targetX, targetY)
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinatesTarget = transformAttackCoordinate(
+              targetX,
+              targetY,
+              this.flip
+            )
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -973,7 +1032,7 @@ export default class BattleManager {
             break
 
           case Ability.LEECH_SEED:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -992,7 +1051,7 @@ export default class BattleManager {
             break
 
           case Ability.LOCK_ON:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1011,7 +1070,11 @@ export default class BattleManager {
             break
 
           case Ability.PSYCH_UP:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1030,7 +1093,7 @@ export default class BattleManager {
             break
 
           case Ability.RAZOR_WIND:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1049,7 +1112,7 @@ export default class BattleManager {
             break
 
           case Ability.TWISTING_NETHER:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1067,7 +1130,7 @@ export default class BattleManager {
             break
 
           case Ability.DARK_VOID:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1086,8 +1149,16 @@ export default class BattleManager {
             break
 
           case Ability.WHEEL_OF_FIRE:
-            coordinatesTarget = transformAttackCoordinate(targetX, targetY)
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinatesTarget = transformAttackCoordinate(
+              targetX,
+              targetY,
+              this.flip
+            )
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1111,8 +1182,16 @@ export default class BattleManager {
             break
 
           case Ability.BLUE_FLARE:
-            coordinatesTarget = transformAttackCoordinate(targetX, targetY)
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinatesTarget = transformAttackCoordinate(
+              targetX,
+              targetY,
+              this.flip
+            )
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1136,8 +1215,16 @@ export default class BattleManager {
             break
 
           case Ability.SHADOW_BALL:
-            coordinatesTarget = transformAttackCoordinate(targetX, targetY)
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinatesTarget = transformAttackCoordinate(
+              targetX,
+              targetY,
+              this.flip
+            )
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1161,8 +1248,16 @@ export default class BattleManager {
             break
 
           case Ability.FUSION_BOLT:
-            coordinatesTarget = transformAttackCoordinate(targetX, targetY)
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinatesTarget = transformAttackCoordinate(
+              targetX,
+              targetY,
+              this.flip
+            )
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1186,8 +1281,16 @@ export default class BattleManager {
             break
 
           case Ability.ICY_WIND:
-            coordinatesTarget = transformAttackCoordinate(targetX, targetY)
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinatesTarget = transformAttackCoordinate(
+              targetX,
+              targetY,
+              this.flip
+            )
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1211,8 +1314,16 @@ export default class BattleManager {
             break
 
           case Ability.SOLAR_BEAM:
-            coordinatesTarget = transformAttackCoordinate(targetX, targetY)
-            coordinates = transformAttackCoordinate(targetX, targetY - 3)
+            coordinatesTarget = transformAttackCoordinate(
+              targetX,
+              targetY,
+              this.flip
+            )
+            coordinates = transformAttackCoordinate(
+              targetX,
+              targetY - 3,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1236,8 +1347,8 @@ export default class BattleManager {
             break
 
           case Ability.ORIGIN_PULSE:
-            coordinatesTarget = transformAttackCoordinate(0, targetY)
-            coordinates = transformAttackCoordinate(8, targetY)
+            coordinatesTarget = transformAttackCoordinate(0, targetY, this.flip)
+            coordinates = transformAttackCoordinate(8, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1259,7 +1370,11 @@ export default class BattleManager {
             break
 
           case Ability.SEED_FLARE:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1278,7 +1393,7 @@ export default class BattleManager {
             break
 
           case Ability.SEISMIC_TOSS:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1297,7 +1412,7 @@ export default class BattleManager {
             break
 
           case Ability.GUILLOTINE:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1316,7 +1431,7 @@ export default class BattleManager {
             break
 
           case Ability.ROCK_SLIDE:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1335,8 +1450,16 @@ export default class BattleManager {
             break
 
           case Ability.HEAT_WAVE:
-            coordinates = transformAttackCoordinate(positionX, positionY)
-            coordinatesTarget = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
+            coordinatesTarget = transformAttackCoordinate(
+              targetX,
+              targetY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinatesTarget[0],
               coordinatesTarget[1],
@@ -1361,7 +1484,7 @@ export default class BattleManager {
             break
 
           case Ability.THUNDER:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1380,7 +1503,7 @@ export default class BattleManager {
             break
 
           case Ability.HYDRO_PUMP:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1399,7 +1522,7 @@ export default class BattleManager {
             break
 
           case Ability.DRACO_METEOR:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1418,7 +1541,7 @@ export default class BattleManager {
             break
 
           case Ability.BLAZE_KICK:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1437,7 +1560,11 @@ export default class BattleManager {
             break
 
           case Ability.WISH:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1456,7 +1583,11 @@ export default class BattleManager {
             break
 
           case Ability.CALM_MIND:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1475,7 +1606,11 @@ export default class BattleManager {
             break
 
           case Ability.COSMIC_POWER:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1494,7 +1629,11 @@ export default class BattleManager {
             break
 
           case Ability.CHATTER:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1513,7 +1652,11 @@ export default class BattleManager {
             break
 
           case Ability.IRON_DEFENSE:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1532,7 +1675,11 @@ export default class BattleManager {
             break
 
           case Ability.METRONOME:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1551,7 +1698,7 @@ export default class BattleManager {
             break
 
           case Ability.SOAK:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1570,7 +1717,7 @@ export default class BattleManager {
             break
 
           case Ability.IRON_TAIL:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1589,7 +1736,11 @@ export default class BattleManager {
             break
 
           case Ability.BLAST_BURN:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1608,7 +1759,11 @@ export default class BattleManager {
             break
 
           case Ability.CHARGE:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1627,7 +1782,11 @@ export default class BattleManager {
             break
 
           case Ability.DISCHARGE:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1646,7 +1805,11 @@ export default class BattleManager {
             break
 
           case Ability.SMOG:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1665,7 +1828,7 @@ export default class BattleManager {
             break
 
           case Ability.BITE:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1684,7 +1847,7 @@ export default class BattleManager {
             break
 
           case Ability.DRAGON_TAIL:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1703,7 +1866,7 @@ export default class BattleManager {
             break
 
           case Ability.DRAGON_BREATH:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1722,7 +1885,7 @@ export default class BattleManager {
             break
 
           case Ability.ICICLE_CRASH:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1741,7 +1904,11 @@ export default class BattleManager {
             break
 
           case Ability.ROOT:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1760,7 +1927,11 @@ export default class BattleManager {
             break
 
           case Ability.TORMENT:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1779,7 +1950,7 @@ export default class BattleManager {
             break
 
           case Ability.STOMP:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1798,7 +1969,7 @@ export default class BattleManager {
             break
 
           case Ability.PAYBACK:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1817,7 +1988,7 @@ export default class BattleManager {
             break
 
           case Ability.NIGHT_SLASH:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1836,7 +2007,7 @@ export default class BattleManager {
             break
 
           case Ability.BUG_BUZZ:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1855,7 +2026,7 @@ export default class BattleManager {
             break
 
           case Ability.VENOSHOCK:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1874,7 +2045,7 @@ export default class BattleManager {
             break
 
           case Ability.LEECH_LIFE:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1893,7 +2064,11 @@ export default class BattleManager {
             break
 
           case Ability.HAPPY_HOUR:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1912,7 +2087,11 @@ export default class BattleManager {
             break
 
           case Ability.TELEPORT:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1931,7 +2110,11 @@ export default class BattleManager {
             break
 
           case Ability.NASTY_PLOT:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1950,7 +2133,7 @@ export default class BattleManager {
             break
 
           case Ability.THIEF:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1969,7 +2152,7 @@ export default class BattleManager {
             break
 
           case Ability.STUN_SPORE:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -1988,7 +2171,7 @@ export default class BattleManager {
             break
 
           case Ability.METEOR_MASH:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2008,10 +2191,15 @@ export default class BattleManager {
 
           case Ability.HURRICANE: {
             const [dx, dy] = OrientationVector[orientation]
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             const finalCoordinates = transformAttackCoordinate(
               positionX + dx * 8,
-              positionY + dy * 8
+              positionY + dy * 8,
+              this.flip
             )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
@@ -2045,7 +2233,11 @@ export default class BattleManager {
           }
 
           case Ability.ROAR_OF_TIME:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2064,7 +2256,7 @@ export default class BattleManager {
             break
 
           case Ability.ROCK_TOMB:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2083,7 +2275,11 @@ export default class BattleManager {
             break
 
           case Ability.ILLUSION:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2102,7 +2298,11 @@ export default class BattleManager {
             break
 
           case Ability.SLACK_OFF:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2121,7 +2321,7 @@ export default class BattleManager {
             break
 
           case Ability.ROCK_SMASH:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2140,7 +2340,7 @@ export default class BattleManager {
             break
 
           case Ability.LIQUIDATION:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2159,8 +2359,16 @@ export default class BattleManager {
             break
 
           case Ability.SPARKLING_ARIA:
-            coordinatesTarget = transformAttackCoordinate(targetX, targetY)
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinatesTarget = transformAttackCoordinate(
+              targetX,
+              targetY,
+              this.flip
+            )
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2184,8 +2392,12 @@ export default class BattleManager {
             break
 
           case Ability.SKY_ATTACK:
-            coordinatesTarget = transformAttackCoordinate(targetX, targetY)
-            coordinates = transformAttackCoordinate(targetX, 9)
+            coordinatesTarget = transformAttackCoordinate(
+              targetX,
+              targetY,
+              this.flip
+            )
+            coordinates = transformAttackCoordinate(targetX, 9, false)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2208,8 +2420,16 @@ export default class BattleManager {
             break
 
           case Ability.ACROBATICS:
-            coordinatesTarget = transformAttackCoordinate(targetX, targetY)
-            coordinates = transformAttackCoordinate(targetX + 1, targetY + 1)
+            coordinatesTarget = transformAttackCoordinate(
+              targetX,
+              targetY,
+              this.flip
+            )
+            coordinates = transformAttackCoordinate(
+              targetX + 1,
+              targetY + 1,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2232,8 +2452,16 @@ export default class BattleManager {
             break
 
           case Ability.ROLLOUT:
-            coordinates = transformAttackCoordinate(positionX, positionY)
-            coordinatesTarget = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
+            coordinatesTarget = transformAttackCoordinate(
+              targetX,
+              targetY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2256,7 +2484,7 @@ export default class BattleManager {
             break
 
           case Ability.PAYDAY:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2275,8 +2503,16 @@ export default class BattleManager {
             break
 
           case Ability.VOLT_SWITCH:
-            coordinatesTarget = transformAttackCoordinate(targetX, targetY)
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinatesTarget = transformAttackCoordinate(
+              targetX,
+              targetY,
+              this.flip
+            )
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2302,7 +2538,7 @@ export default class BattleManager {
             break
 
           case Ability.STEAM_ERUPTION:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2321,7 +2557,11 @@ export default class BattleManager {
             break
 
           case Ability.SEARING_SHOT:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2340,7 +2580,7 @@ export default class BattleManager {
             break
 
           case Ability.APPLE_ACID:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2359,7 +2599,11 @@ export default class BattleManager {
             break
 
           case Ability.HELPING_HAND:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2378,7 +2622,11 @@ export default class BattleManager {
             break
 
           case Ability.MUD_BUBBLE:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2397,8 +2645,16 @@ export default class BattleManager {
             break
 
           case Ability.ERUPTION:
-            coordinates = transformAttackCoordinate(targetX + 3, targetY + 3)
-            coordinatesTarget = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(
+              targetX + 3,
+              targetY + 3,
+              this.flip
+            )
+            coordinatesTarget = transformAttackCoordinate(
+              targetX,
+              targetY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2420,7 +2676,7 @@ export default class BattleManager {
             break
 
           case Ability.SLASHING_CLAW:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2439,7 +2695,7 @@ export default class BattleManager {
             break
 
           case Ability.MAGMA_STORM:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2458,7 +2714,11 @@ export default class BattleManager {
             break
 
           case Ability.THRASH:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2477,7 +2737,11 @@ export default class BattleManager {
             break
 
           case Ability.ABSORB:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2496,7 +2760,7 @@ export default class BattleManager {
             break
 
           case Ability.GIGATON_HAMMER:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2515,7 +2779,11 @@ export default class BattleManager {
             break
 
           case Ability.COUNTER:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2534,7 +2802,7 @@ export default class BattleManager {
             break
 
           case Ability.HEX:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2553,7 +2821,7 @@ export default class BattleManager {
             break
 
           case Ability.SPECTRAL_THIEF:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2570,7 +2838,11 @@ export default class BattleManager {
               }
             )
 
-            selfCoordinates = transformAttackCoordinate(positionX, positionY)
+            selfCoordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             selfAnimation = this.scene.add.sprite(
               selfCoordinates[0],
               selfCoordinates[1],
@@ -2589,7 +2861,7 @@ export default class BattleManager {
             break
 
           case Ability.PLASMA_FIST:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2608,7 +2880,7 @@ export default class BattleManager {
             break
 
           case Ability.SACRED_SWORD:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2627,7 +2899,7 @@ export default class BattleManager {
             break
 
           case Ability.JUDGEMENT:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2646,7 +2918,7 @@ export default class BattleManager {
             break
 
           case Ability.SHADOW_SNEAK:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2665,7 +2937,11 @@ export default class BattleManager {
             break
 
           case Ability.DIVE:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2684,8 +2960,8 @@ export default class BattleManager {
             break
 
           case Ability.HYPER_VOICE:
-            coordinatesTarget = transformAttackCoordinate(8, targetY)
-            coordinates = transformAttackCoordinate(0, targetY)
+            coordinatesTarget = transformAttackCoordinate(8, targetY, this.flip)
+            coordinates = transformAttackCoordinate(0, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2707,7 +2983,11 @@ export default class BattleManager {
             break
 
           case Ability.SHADOW_CLONE:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2726,7 +3006,11 @@ export default class BattleManager {
             break
 
           case Ability.ECHO:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2745,7 +3029,11 @@ export default class BattleManager {
             break
 
           case Ability.EXPLOSION:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2764,7 +3052,11 @@ export default class BattleManager {
             break
 
           case Ability.CLANGOROUS_SOUL:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2783,7 +3075,11 @@ export default class BattleManager {
             break
 
           case Ability.GROWL:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2802,7 +3098,11 @@ export default class BattleManager {
             break
 
           case Ability.DISARMING_VOICE:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2821,7 +3121,11 @@ export default class BattleManager {
             break
 
           case Ability.RELIC_SONG:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2840,7 +3144,7 @@ export default class BattleManager {
             break
 
           case Ability.HIGH_JUMP_KICK:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2859,7 +3163,7 @@ export default class BattleManager {
             break
 
           case Ability.SHELL_TRAP:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2878,7 +3182,11 @@ export default class BattleManager {
             break
 
           case Ability.SHELL_SMASH:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2897,8 +3205,16 @@ export default class BattleManager {
             break
 
           case Ability.TRI_ATTACK:
-            coordinatesTarget = transformAttackCoordinate(targetX, targetY)
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinatesTarget = transformAttackCoordinate(
+              targetX,
+              targetY,
+              this.flip
+            )
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2919,8 +3235,8 @@ export default class BattleManager {
             break
 
           case Ability.BONEMERANG:
-            coordinatesTarget = transformAttackCoordinate(targetX, 6)
-            coordinates = transformAttackCoordinate(targetX, 0)
+            coordinatesTarget = transformAttackCoordinate(targetX, 6, this.flip)
+            coordinates = transformAttackCoordinate(targetX, 0, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2945,11 +3261,20 @@ export default class BattleManager {
 
           case Ability.AURORA_BEAM: {
             const [dx, dy] = OrientationVector[orientation]
-            coordinates = transformAttackCoordinate(positionX, positionY)
-            coordinatesTarget = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
+            coordinatesTarget = transformAttackCoordinate(
+              targetX,
+              targetY,
+              this.flip
+            )
             const finalCoordinates = transformAttackCoordinate(
               positionX + dx * 8,
-              positionY + dy * 8
+              positionY + dy * 8,
+              this.flip
             )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
@@ -2982,7 +3307,7 @@ export default class BattleManager {
           }
 
           case Ability.SONG_OF_DESIRE:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -2998,7 +3323,11 @@ export default class BattleManager {
                 specialProjectile.destroy()
               }
             )
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             additionalProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -3017,7 +3346,7 @@ export default class BattleManager {
             break
 
           case Ability.CONFUSING_MIND:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -3033,7 +3362,11 @@ export default class BattleManager {
                 specialProjectile.destroy()
               }
             )
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             additionalProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -3052,7 +3385,11 @@ export default class BattleManager {
             break
 
           case Ability.MIND_BLOWN:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             additionalProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -3071,7 +3408,11 @@ export default class BattleManager {
             break
 
           case Ability.SOFT_BOILED:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -3090,7 +3431,11 @@ export default class BattleManager {
             break
 
           case Ability.FAKE_TEARS:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -3109,8 +3454,16 @@ export default class BattleManager {
             break
 
           case Ability.DRAGON_DARTS:
-            coordinatesTarget = transformAttackCoordinate(targetX, targetY)
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinatesTarget = transformAttackCoordinate(
+              targetX,
+              targetY,
+              this.flip
+            )
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -3141,11 +3494,20 @@ export default class BattleManager {
 
           case Ability.SPIRIT_SHACKLE: {
             const [dx, dy] = OrientationVector[orientation]
-            coordinatesTarget = transformAttackCoordinate(targetX, targetY)
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinatesTarget = transformAttackCoordinate(
+              targetX,
+              targetY,
+              this.flip
+            )
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             const finalCoordinates = transformAttackCoordinate(
               positionX + dx * 8,
-              positionY + dy * 8
+              positionY + dy * 8,
+              this.flip
             )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
@@ -3179,7 +3541,11 @@ export default class BattleManager {
           }
 
           case Ability.WATER_SHURIKEN: {
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             const orientations = [
               orientation,
               OrientationArray[(OrientationArray.indexOf(orientation) + 1) % 8],
@@ -3189,7 +3555,8 @@ export default class BattleManager {
               const [dx, dy] = OrientationVector[orientation]
               const finalCoordinates = transformAttackCoordinate(
                 positionX + dx * 8,
-                positionY + dy * 8
+                positionY + dy * 8,
+                this.flip
               )
               const projectile = this.scene.add.sprite(
                 coordinates[0],
@@ -3217,7 +3584,7 @@ export default class BattleManager {
 
           case Ability.MACH_PUNCH:
           case Ability.UPPERCUT:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -3239,7 +3606,7 @@ export default class BattleManager {
             break
 
           case Ability.MAWASHI_GERI:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -3261,7 +3628,11 @@ export default class BattleManager {
             break
 
           case Ability.TRIPLE_KICK:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             for (let i = 0; i < 3; i++) {
               setTimeout(() => {
                 const projectile = this.scene.add.sprite(
@@ -3280,7 +3651,7 @@ export default class BattleManager {
             break
 
           case Ability.STRING_SHOT:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -3302,7 +3673,7 @@ export default class BattleManager {
             break
 
           case Ability.STICKY_WEB:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -3325,7 +3696,11 @@ export default class BattleManager {
             break
 
           case Ability.WONDER_GUARD:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -3344,7 +3719,7 @@ export default class BattleManager {
             break
 
           case Ability.X_SCISSOR:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -3363,7 +3738,7 @@ export default class BattleManager {
             break
 
           case Ability.DEATH_WING:
-            coordinates = transformAttackCoordinate(targetX, targetY)
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -3382,7 +3757,11 @@ export default class BattleManager {
             break
 
           case Ability.GEOMANCY:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1] - 50,
@@ -3401,7 +3780,11 @@ export default class BattleManager {
             break
 
           case Ability.OVERHEAT:
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -3420,8 +3803,12 @@ export default class BattleManager {
             break
 
           case Ability.MIST_BALL:
-            coordinatesTarget = transformAttackCoordinate(targetX, 6)
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinatesTarget = transformAttackCoordinate(targetX, 6, this.flip)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -3445,8 +3832,12 @@ export default class BattleManager {
             break
 
           case Ability.LUSTER_PURGE:
-            coordinatesTarget = transformAttackCoordinate(targetX, 6)
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinatesTarget = transformAttackCoordinate(targetX, 6, this.flip)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -3470,11 +3861,16 @@ export default class BattleManager {
             break
 
           case "LINK_CABLE_link": {
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             const distance = distanceE(positionX, positionY, targetX, targetY)
             const coordinatesTarget = transformAttackCoordinate(
               targetX,
-              targetY
+              targetY,
+              this.flip
             )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
@@ -3503,7 +3899,11 @@ export default class BattleManager {
           }
 
           case "LINK_CABLE_discharge": {
-            coordinates = transformAttackCoordinate(positionX, positionY)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -3553,7 +3953,8 @@ export default class BattleManager {
             this.scene.unownManager?.hiddenPowerAnimation(
               skill,
               positionX,
-              positionY
+              positionY,
+              this.flip
             )
             break
 
@@ -3572,8 +3973,12 @@ export default class BattleManager {
     index: string,
     id: string
   ) {
-    if (this.player.id === id) {
-      const coordinates = transformAttackCoordinate(positionX, positionY)
+    if (this.simulation?.id === id) {
+      const coordinates = transformAttackCoordinate(
+        positionX,
+        positionY,
+        this.flip
+      )
       const color =
         type === AttackType.PHYSICAL
           ? "#e76e55"
@@ -3592,8 +3997,12 @@ export default class BattleManager {
     index: string,
     id: string
   ) {
-    if (this.player.id === id) {
-      const coordinates = transformAttackCoordinate(positionX, positionY)
+    if (this.simulation?.id === id) {
+      const coordinates = transformAttackCoordinate(
+        positionX,
+        positionY,
+        this.flip
+      )
       const color = type === HealType.HEAL ? "#92cc41" : "#8d8d8d"
       this.displayTween(color, coordinates, index, amount)
     }
@@ -3669,17 +4078,19 @@ export default class BattleManager {
     })
   }
 
-  setPlayer(player: IPlayer) {
-    if (player.id != this.player.id) {
-      this.player = player
-      this.group.getChildren().forEach((p) => {
-        const pkm = p as Pokemon
-        if (pkm.projectile) {
-          pkm.projectile.destroy(true)
-        }
-      })
-      this.group.clear(true, true)
-      this.buildPokemons()
-    }
+  setSimulation(simulation: Simulation) {
+    this.simulation = simulation
+    this.group.getChildren().forEach((p) => {
+      const pkm = p as Pokemon
+      if (pkm.projectile) {
+        pkm.projectile.destroy(true)
+      }
+    })
+    this.group.clear(true, true)
+    this.buildPokemons()
+  }
+
+  setPlayer(player: Player) {
+    this.player = player
   }
 }

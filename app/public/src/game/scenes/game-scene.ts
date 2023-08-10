@@ -27,6 +27,7 @@ import { Item } from "../../../../types/enum/Item"
 import Player from "../../../../models/colyseus-models/player"
 import MinigameManager from "../components/minigame-manager"
 import LoadingManager from "../components/loading-manager"
+import Simulation from "../../../../core/simulation"
 
 export default class GameScene extends Scene {
   tilemap: DesignTiled | undefined
@@ -135,8 +136,9 @@ export default class GameScene extends Scene {
       this.battle = new BattleManager(
         this,
         this.battleGroup,
-        player,
-        this.animationManager
+        this.room.state.simulations.get(player.simulationId),
+        this.animationManager,
+        player
       )
 
       this.weatherManager = new WeatherManager(this)
@@ -177,9 +179,13 @@ export default class GameScene extends Scene {
   }
 
   setPlayer(player: Player) {
-    this.board?.setPlayer(player)
     this.battle?.setPlayer(player)
+    this.board?.setPlayer(player)
     this.itemsContainer?.setPlayer(player)
+  }
+
+  setSimulation(simulation: Simulation) {
+    this.battle?.setSimulation(simulation)
   }
 
   refreshShop() {

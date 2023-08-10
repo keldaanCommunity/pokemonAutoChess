@@ -121,13 +121,13 @@ export default class Shop {
     }
   }
 
-  refillShop(player: Player) {
+  refillShop(player: Player, stageLevel: number) {
     // No need to release pokemons since they won't be changed
     const PkmList = player.shop.map((pokemon) => {
       if (pokemon != Pkm.MAGIKARP && pokemon != Pkm.DEFAULT) {
         return pokemon
       }
-      return this.pickPokemon(player)
+      return this.pickPokemon(player, stageLevel)
     })
 
     for (let i = 0; i < SHOP_SIZE; i++) {
@@ -135,18 +135,17 @@ export default class Shop {
     }
   }
 
-  assignShop(player: Player, manualRefresh: boolean) {
+  assignShop(player: Player, manualRefresh: boolean, stageLevel: number) {
     player.shop.forEach((pkm) => this.releasePokemon(pkm))
 
     if (player.effects.list.includes(Effect.EERIE_SPELL) && !manualRefresh) {
-      const stageLevel = player.simulation.stageLevel
       const unowns = getUnownsPoolPerStage(stageLevel)
       for (let i = 0; i < SHOP_SIZE; i++) {
         player.shop[i] = pickRandomIn(unowns)
       }
     } else {
       for (let i = 0; i < SHOP_SIZE; i++) {
-        player.shop[i] = this.pickPokemon(player)
+        player.shop[i] = this.pickPokemon(player, stageLevel)
       }
     }
   }
@@ -210,7 +209,7 @@ export default class Shop {
     return pkm
   }
 
-  pickPokemon(player: Player) {
+  pickPokemon(player: Player, stageLevel: number) {
     const rarityProbability =
       RarityProbabilityPerLevel[player.experienceManager.level]
     const rarity_seed = Math.random()
@@ -227,7 +226,7 @@ export default class Shop {
       player.effects.list.includes(Effect.LIGHT_SCREEN) &&
       chance(UNOWN_RATE)
     ) {
-      const unowns = getUnownsPoolPerStage(player.simulation.stageLevel)
+      const unowns = getUnownsPoolPerStage(stageLevel)
       return pickRandomIn(unowns)
     }
 

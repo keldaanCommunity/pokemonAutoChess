@@ -36,6 +36,17 @@ export enum Orientation {
   DOWNRIGHT = "1"
 }
 
+export const OrientationFlip: { [key in Orientation]: Orientation } = {
+  [Orientation.DOWN]: Orientation.UP,
+  [Orientation.DOWNLEFT]: Orientation.UPLEFT,
+  [Orientation.LEFT]: Orientation.LEFT,
+  [Orientation.UPLEFT]: Orientation.DOWNLEFT,
+  [Orientation.UP]: Orientation.DOWN,
+  [Orientation.UPRIGHT]: Orientation.DOWNRIGHT,
+  [Orientation.RIGHT]: Orientation.RIGHT,
+  [Orientation.DOWNRIGHT]: Orientation.UPRIGHT
+}
+
 export enum AttackType {
   PHYSICAL,
   SPECIAL,
@@ -48,9 +59,9 @@ export enum HealType {
 }
 
 export enum BattleResult {
-  WIN,
-  DEFEAT,
-  DRAW
+  WIN = "WIN",
+  DEFEAT = "DEFEAT",
+  DRAW = "DRAW"
 }
 
 export enum BotDifficulty {
