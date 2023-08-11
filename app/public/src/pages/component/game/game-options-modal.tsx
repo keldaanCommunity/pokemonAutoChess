@@ -1,8 +1,20 @@
-import React, { Dispatch, FormEvent, SetStateAction, useState } from "react"
+import React, {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useState
+} from "react"
 import Modal from "react-bootstrap/Modal"
-import { loadPreferences, savePreferences } from "../../../preferences"
+import {
+  IPreferencesState,
+  loadPreferences,
+  savePreferences
+} from "../../../preferences"
 import { getGameScene } from "../../game"
 import { t } from "i18next"
+
+import "./game-options-modal.css"
 
 export default function GameOptionsModal(props: {
   show: boolean
@@ -10,22 +22,44 @@ export default function GameOptionsModal(props: {
   leave: () => void
 }) {
   const initialPreferences = loadPreferences()
-  const [musicVolume, setMusicVolume] = useState(initialPreferences.musicVolume)
-  const [sfxVolume, setSFXVolume] = useState(initialPreferences.sfxVolume)
+  const [unsavedPreferences, setUnsavedPreferences] =
+    useState(initialPreferences)
 
-  function changeMusicVolume(e: FormEvent<HTMLInputElement>) {
-    const newValue = Number((e.target as HTMLInputElement).value)
-    setMusicVolume(newValue)
-    const gameScene = getGameScene()
-    if (gameScene && gameScene.music) {
-      ;(gameScene.music as Phaser.Sound.WebAudioSound).setVolume(newValue / 100)
-    }
-  }
+  const getValue = useCallback(
+    (
+      target: HTMLInputElement,
+      key: keyof IPreferencesState
+    ): number | boolean => {
+      switch (key) {
+        case "pokemonDetailsOnHover":
+        case "showDpsMeter":
+          return target.checked
+        default:
+          return Number.parseFloat(target.value)
+      }
+    },
+    []
+  )
 
-  function changeSFXVolume(e: FormEvent<HTMLInputElement>) {
-    const newValue = Number((e.target as HTMLInputElement).value)
-    setSFXVolume(newValue)
-  }
+  const changePreferences = useCallback(
+    (e: ChangeEvent<HTMLInputElement>, key: keyof IPreferencesState) => {
+      const newValue = getValue(e.target, key)
+      setUnsavedPreferences((prevPrefs) => {
+        return {
+          ...prevPrefs,
+          [key]: newValue
+        }
+      })
+
+      if (key === "musicVolume" && typeof newValue === "number") {
+        const gameScene = getGameScene()
+        if (gameScene && gameScene.music) {
+          gameScene.music.setVolume(newValue / 100)
+        }
+      }
+    },
+    [getValue]
+  )
 
   return (
     <Modal show={props.show}>
@@ -34,27 +68,47 @@ export default function GameOptionsModal(props: {
       </Modal.Header>
       <Modal.Body>
         <p>
-          <label>
-            {t("music_volume")}: {musicVolume} %
+          <label className="full-width">
+            {t("music_volume")}: {unsavedPreferences.musicVolume} %
             <input
               type="range"
               min="0"
               max="100"
-              value={musicVolume}
-              onInput={changeMusicVolume}
+              value={unsavedPreferences.musicVolume}
+              onInput={useCallback(
+                (e) => changePreferences(e, "musicVolume"),
+                [changePreferences]
+              )}
+            ></input>
+          </label>
+        </p>
+        <p>
+          <label className="full-width">
+            {t("sfx_volume")}: {unsavedPreferences.sfxVolume} %
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value={unsavedPreferences.sfxVolume}
+              onInput={useCallback(
+                (e) => changePreferences(e, "sfxVolume"),
+                [changePreferences]
+              )}
             ></input>
           </label>
         </p>
         <p>
           <label>
-            {t("sfx_volume")}: {sfxVolume} %
             <input
-              type="range"
-              min="0"
-              max="100"
-              value={sfxVolume}
-              onInput={changeSFXVolume}
-            ></input>
+              type="checkbox"
+              className="nes-checkbox"
+              checked={unsavedPreferences.pokemonDetailsOnHover}
+              onChange={useCallback(
+                (e) => changePreferences(e, "pokemonDetailsOnHover"),
+                [changePreferences]
+              )}
+            />
+            <span>Show pokemon details on hover</span>
           </label>
         </p>
       </Modal.Body>
@@ -64,13 +118,10 @@ export default function GameOptionsModal(props: {
         </button>
         <button
           className="bubbly green"
-          onClick={() => {
-            savePreferences({
-              musicVolume,
-              sfxVolume
-            })
+          onClick={useCallback(() => {
+            savePreferences(unsavedPreferences)
             props.hideModal(true)
-          }}
+          }, [props, unsavedPreferences])}
         >
           {t("save")}
         </button>

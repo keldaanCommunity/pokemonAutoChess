@@ -38,6 +38,7 @@ import {
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_DAMAGE
 } from "../../../../types/Config"
+import { loadPreferences } from "../../preferences"
 
 export default class Pokemon extends DraggableObject {
   evolution: Pkm
@@ -101,6 +102,7 @@ export default class Pokemon extends DraggableObject {
   fairyField: GameObjects.Sprite | undefined
   stars: number
   playerId: string
+  shouldShowTooltipOnHover: boolean
   shouldShowTooltip: boolean
 
   constructor(
@@ -249,6 +251,8 @@ export default class Pokemon extends DraggableObject {
       this.critChance = DEFAULT_CRIT_CHANCE
     }
     this.setDepth(5)
+
+    this.shouldShowTooltipOnHover = loadPreferences().pokemonDetailsOnHover
   }
 
   get isOnBench(): boolean {
@@ -279,57 +283,76 @@ export default class Pokemon extends DraggableObject {
     }
   }
 
+  openDetail() {
+    const s = <GameScene>this.scene
+    if (s.lastPokemonDetail && s.lastPokemonDetail != this) {
+      s.lastPokemonDetail.closeDetail()
+      s.lastPokemonDetail = undefined
+    }
+
+    this.detail = new PokemonDetail(
+      this.scene,
+      0,
+      0,
+      this.name,
+      this.rarity,
+      this.life || this.hp,
+      this.atk,
+      this.def,
+      this.speDef,
+      this.range,
+      this.atkSpeed,
+      this.critChance,
+      this.critDamage,
+      this.ap,
+      this.mana || this.maxMana,
+      this.types,
+      this.skill,
+      this.passive,
+      this.emotion,
+      this.shiny,
+      this.index,
+      this.rarity === Rarity.MYTHICAL ? 3 : this.stars,
+      this.evolution
+    )
+    this.detail.setPosition(
+      this.detail.width / 2 + 40,
+      -this.detail.height / 2 - 40
+    )
+    this.add(this.detail)
+    s.lastPokemonDetail = this
+  }
+
   onPointerDown(pointer: Phaser.Input.Pointer) {
     super.onPointerDown(pointer)
-    // close detail when dragging
-    this.closeDetail()
+
+    if (pointer.rightButtonDown() && !this.shouldShowTooltipOnHover) {
+      if (!this.detail) {
+        this.openDetail()
+      } else {
+        this.closeDetail()
+      }
+    } else {
+      // close detail when dragging
+      this.closeDetail()
+    }
   }
 
   onPointerOut(): void {
-    super.onPointerOut();
-    this.closeDetail()
+    super.onPointerOut()
+    if (this.shouldShowTooltipOnHover) {
+      this.closeDetail()
+    }
   }
 
   onPointerOver() {
     super.onPointerOver()
-    if (this.shouldShowTooltip) {
-      const s = <GameScene>this.scene
-      if (s.lastPokemonDetail && s.lastPokemonDetail != this) {
-        s.lastPokemonDetail.closeDetail()
-        s.lastPokemonDetail = undefined
-      }
 
-      this.detail = new PokemonDetail(
-        this.scene,
-        0,
-        0,
-        this.name,
-        this.rarity,
-        this.life || this.hp,
-        this.atk,
-        this.def,
-        this.speDef,
-        this.range,
-        this.atkSpeed,
-        this.critChance,
-        this.critDamage,
-        this.ap,
-        this.mana || this.maxMana,
-        this.types,
-        this.skill,
-        this.passive,
-        this.emotion,
-        this.shiny,
-        this.index,
-        this.rarity === Rarity.MYTHICAL ? 3 : this.stars,
-        this.evolution
-      )
-      this.detail.setPosition(
-        this.detail.width / 2 + 40,
-        -this.detail.height / 2 - 40
-      )
-      this.add(this.detail)
-      s.lastPokemonDetail = this
+    // recheck preferences
+    this.shouldShowTooltipOnHover = loadPreferences().pokemonDetailsOnHover
+
+    if (this.shouldShowTooltipOnHover && this.shouldShowTooltip) {
+      this.openDetail()
     }
   }
 
