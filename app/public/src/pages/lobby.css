@@ -1,9 +1,11 @@
 .lobby {
-  height: 100vh;
-  padding: 1vw;
-  display: flex;
-  flex-direction: column;
+  height: 100%;
   gap: 1vw;
+  display: flex;
+}
+
+.lobby-container {
+  padding: 10px;
 }
 
 .lobby nav {
@@ -48,7 +50,7 @@
 }
 
 .lobby .current-users-menu {
-  width: 300px;
+  min-width: 333px;
   height: 100%;
 }
 
@@ -92,16 +94,62 @@
   }
 }
 
+
+
 .main-lobby {
   display: flex;
   gap: 4px;
   overflow: scroll;
   justify-content: space-between;
+  height: 100%;
+}
+
+.main-lobby > div {
+  min-width: 405px;
 }
 
 .main-lobby .news-chat {
   display: flex;
-  flex-direction: column;
   gap: 4px;
-  max-width: 388px;
+}
+
+@media (max-width: 1400px) {
+  .main-lobby .news-chat {
+    flex-direction: column;
+  }
+}
+
+.menu-item {
+  width: 100%;
+}
+
+.menu-item a {
+  width: 100%;
+  cursor: var(--cursor-hover) !important;
+}
+
+.menu-item a span {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.ps-menu-root ul {
+  width: 100%;
+}
+
+.lobby-container {
+  padding: 20px;
+}
+
+.icon {
+  position: relative;
+}
+
+.notification {
+  position: absolute;
+  top: 0;
+  right: -12px;
+  height: 6px;
+  font-size: 6px;
 }

@@ -22,7 +22,7 @@ export default function PokemonCollection() {
 
   return (
     <div id="pokemon-collection">
-      <header>
+      <header className="nes-container">
         <label>
           <input
             type="checkbox"

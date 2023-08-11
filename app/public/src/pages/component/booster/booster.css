@@ -6,7 +6,7 @@
 #boosters-page > .nes-container {
   position: relative;
   margin: 1vw 0 0 0;
-  height: 90%;
+  height: 75vh;
   overflow-y: auto;
   background-image: url("assets/ui/back1.png");
   background-size: cover;

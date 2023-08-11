@@ -1,14 +1,14 @@
 #pokemon-collection {
   display: flex;
   flex-direction: column;
-  height: 90%;
-  padding-bottom: 40px;
+  align-items: center;
+  gap: 4px;
 }
 
 #pokemon-collection > .nes-container {
-  margin-top: 1vw;
-  max-height: calc(100vh - 6vw);
+  max-height: calc(100vh - 16vw);
   overflow-y: auto;
+  align-items: center;
 }
 
 #pokemon-collection .pokemon-carousel {
@@ -25,7 +25,7 @@
 }
 
 #pokemon-collection header label {
-  align-self: center;
+  margin-bottom: 0;
 }
 
 #pokemon-collection header .nes-checkbox + span::before {

@@ -1,4 +1,4 @@
-import React, { useCallback } from "react"
+import React, { useCallback, useState } from "react"
 import { Link } from "react-router-dom"
 import firebase from "firebase/compat/app"
 import DiscordButton from "./component/buttons/discord-button"
@@ -17,15 +17,29 @@ import { cc } from "./utils/jsx"
 import "./lobby.css"
 import { useTranslation } from "react-i18next"
 import { LanguageButton } from "./component/buttons/language-button"
-import { Page } from "./lobby"
+import { Page, Modals } from "./lobby"
+import {
+  Sidebar,
+  Menu,
+  MenuItem,
+  SubMenu,
+  MenuItemProps
+} from "react-pro-sidebar"
 
 interface HeaderProps {
+  changeModal: (nextModal: Modals) => void
   changePage: (nextPage: Page) => void
   showBackButton: boolean
 }
 
 export function Header(props: HeaderProps) {
-  const { changePage, showBackButton } = props
+  return <MainSidebar {...props} />
+}
+
+function MainSidebar(props: HeaderProps) {
+  const { changeModal, changePage, showBackButton } = props
+  const [collapsed, setCollapsed] = useState(true)
+
   const dispatch = useAppDispatch()
   const { t } = useTranslation()
   const {
@@ -62,72 +76,134 @@ export function Header(props: HeaderProps) {
     if (meta.length == 0 || metaItems.length == 0) {
       dispatch(requestMeta())
     }
-    changePage("meta")
-  }, [changePage, dispatch, meta.length, metaItems.length])
+    changeModal("meta")
+  }, [changeModal, dispatch, meta.length, metaItems.length])
+
+  const signOut = useCallback(async () => {
+    await lobby?.leave()
+    await firebase.auth().signOut()
+    dispatch(leaveLobby())
+    dispatch(logOut())
+  }, [dispatch, lobby])
 
   return (
-    <nav>
-      {showBackButton && (
-        <button onClick={() => changePage("main_lobby")} className="bubbly">
-          {t("back_to_lobby")}
-        </button>
-      )}
+    <Sidebar
+      collapsed={collapsed}
+      backgroundColor="#61738a"
+      className="sidebar"
+      breakPoint="lg"
+    >
+      <Menu>
+        {showBackButton && (
+          <NavLink
+            text={t(collapsed ? "lobby" : "back_to_lobby")}
+            location="main_lobby"
+            handleClick={changePage}
+          />
+        )}
+        <NavLink
+          text={t("news")}
+          location="news"
+          icon="📰"
+          handleClick={changeModal}
+        />
+        <NavLink
+          text={t("collection")}
+          location="collection"
+          svg="collection"
+          handleClick={changeModal}
+        />
+        <NavLink
+          text={t("boosters")}
+          location="booster"
+          svg="booster"
+          handleClick={changeModal}
+          shimmer={numberOfBooster > 0}
+        />
+        <NavLink
+          text={t("wiki")}
+          location="wiki"
+          svg="wiki"
+          handleClick={changeModal}
+        />
+        {user?.anonymous === false && user?.title === Title.BOT_BUILDER && (
+          <NavLink
+            text={t("bot_builder")}
+            svg="bot"
+            onClick={botBuilderOnClick}
+          />
+        )}
 
-      <button className="bubbly blue" onClick={() => changePage("collection")}>
-        <img src="assets/ui/collection.svg" alt="" />
-        {t("collection")}
-      </button>
-      <button
-        className={cc("bubbly", "blue", { shimmer: numberOfBooster > 0 })}
-        onClick={() => changePage("booster")}
-      >
-        <img src="assets/ui/booster.svg" alt="" />
-        {t("boosters")}
-      </button>
-      <button className="bubbly green" onClick={() => changePage("wiki")}>
-        <img src="assets/ui/wiki.svg" alt="" />
-        {t("wiki")}
-      </button>
-      {user?.anonymous === false && user?.title === Title.BOT_BUILDER && (
-        <button
-          disabled={user?.anonymous}
-          className="bubbly green"
-          onClick={botBuilderOnClick}
-        >
-          <img src="assets/ui/bot.svg" alt="" />
-          {t("bot_builder")}
-        </button>
-      )}
-      {user?.role === Role.ADMIN ||
-      user?.role === Role.MODERATOR ||
-      user?.role === Role.BOT_MANAGER ? (
-        <button className="bubbly green" onClick={botBuilderAdminOnClick}>
-          <img src="assets/ui/bot.svg" alt="" />
-          {t("bot_admin")}
-        </button>
-      ) : null}
+        {(user?.role === Role.ADMIN ||
+          user?.role === Role.MODERATOR ||
+          user?.role === Role.BOT_MANAGER) && (
+          <NavLink
+            text={t("bot_admin")}
+            svg="bot"
+            onClick={botBuilderAdminOnClick}
+          />
+        )}
 
-      <button className="bubbly green" onClick={metaOnClick}>
-        <img src="assets/ui/meta.svg" alt="" />
-        {t("meta")}
-      </button>
-      <DiscordButton />
-      <DonateButton />
-      <PolicyButton />
-      <LanguageButton />
-      <Link to="/" style={{ textDecoration: "none" }}>
-        <button
-          className="bubbly red"
-          onClick={async () => {
-            await lobby?.leave()
-            await firebase.auth().signOut()
-            dispatch(leaveLobby())
-            dispatch(logOut())
-          }}
-        >
-          {t("sign_out")}
-        </button>
-      </Link>
-    </nav>
+        <NavLink text={t("meta")} svg="meta" onClick={metaOnClick} />
+        <NavLink icon="🚪" text={t("sign_out")} onClick={signOut} />
+        <NavLink
+          onClick={() => setCollapsed(!collapsed)}
+          icon={collapsed ? "🢂" : "🢀"}
+        />
+      </Menu>
+    </Sidebar>
+  )
+}
+
+type NavLinkProps = MenuItemProps &
+  NavPageLink & {
+    text?: string
+    svg?: string
+    shimmer?: boolean
+  }
+
+type NavPageLink = {
+  location?: any
+  handleClick?: (update: any) => void
+}
+
+function NavLink(props: NavLinkProps) {
+  const {
+    text,
+    location,
+    handleClick,
+    shimmer = false,
+    svg,
+    icon,
+    onClick
+  } = props
+
+  return (
+    <MenuItem
+      className="menu-item"
+      onClick={(e) => {
+        onClick?.(e)
+
+        if (location) {
+          handleClick?.(location)
+        }
+      }}
+      icon={
+        <div className="icon">
+          {shimmer && <span className="notification">🔴</span>}
+          {svg ? (
+            <img width={20} height={20} src={`assets/ui/${svg}.svg`} />
+          ) : (
+            icon
+          )}
+        </div>
+      }
+      suffix={shimmer && "🔥"}
+      rootStyles={{
+        cursor: "inherit"
+      }}
+    >
+      {text}
+    </MenuItem>
   )
 }
