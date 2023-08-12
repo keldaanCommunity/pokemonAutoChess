@@ -17,7 +17,7 @@ import { logger } from "../utils/logger"
 import { Passive } from "../types/enum/Passive"
 import { Weather } from "../types/enum/Weather"
 import { max, min } from "../utils/number"
-import { distanceC } from "../utils/distance"
+import { distanceC, distanceM } from "../utils/distance"
 
 export default class PokemonState {
   handleHeal(
@@ -29,7 +29,8 @@ export default class PokemonState {
     if (
       pokemon.life > 0 &&
       pokemon.life < pokemon.hp &&
-      !pokemon.status.wound
+      !pokemon.status.wound &&
+      !pokemon.status.protect
     ) {
       const boost = apBoost ? (heal * apBoost * pokemon.ap) / 100 : 0
       let healBoosted = Math.round(heal + boost)
@@ -493,10 +494,10 @@ export default class PokemonState {
     ) {
       if (pokemon.grassHealCooldown - dt <= 0) {
         let heal = pokemon.effects.includes(Effect.SPORE)
-          ? 18
+          ? 16
           : pokemon.effects.includes(Effect.GROWTH)
-          ? 10
-          : 5
+          ? 8
+          : 4
         if (
           pokemon.effects.includes(Effect.HYDRATATION) &&
           pokemon.simulation.weather === Weather.RAIN
@@ -672,7 +673,7 @@ export default class PokemonState {
             .map((cell) => ({
               x: cell.x,
               y: cell.y,
-              distance: distanceC(
+              distance: distanceM(
                 pokemon.positionX,
                 pokemon.positionY,
                 cell.x,

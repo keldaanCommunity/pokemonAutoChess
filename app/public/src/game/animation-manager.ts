@@ -830,6 +830,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.HELPING_HAND,
+      frames: this.game.anims.generateFrameNames(Ability.HELPING_HAND, {
+        start: 0,
+        end: 13,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.MUD_BUBBLE,
       frames: this.game.anims.generateFrameNames(Ability.MUD_BUBBLE, {
         start: 0,

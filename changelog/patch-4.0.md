@@ -8,7 +8,7 @@ patch announcement
 
 # New Pokemons:
 
-Gligar,Gliscor
+Gligar,Gliscor,Shellder,Cloyster, Furret, Sentret
 
 # Changes to Pokemon
 
@@ -19,9 +19,7 @@ Gligar,Gliscor
 # UI
 
 - Internationalization with languages: de, en es, fr, it, ja, nl pt
+- New icons for status
 - Discord and Donate buttons now open links in a new tab
 
 # Misc
-
-- Improve Water Shuriken aim
-- Metronome: Cannot cast Hidden Power anymore

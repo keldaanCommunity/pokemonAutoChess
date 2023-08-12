@@ -107,3 +107,8 @@ Game runs locally on port [http://localhost:9000/](http://localhost:9000/)
 # Extensions
 
 With VS Code, use Prettier, Eslint, Inlang.
+
+# Development
+
+ - Everytime you make a change for the player, add an entry in the changelog (`changelog` folder)
+ - To add a new pokemon, you'll need a TexturePacker license key

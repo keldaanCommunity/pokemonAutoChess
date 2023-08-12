@@ -88,7 +88,7 @@ export const SynergyTriggers: { [key in Synergy]: number[] } = {
   [Synergy.ROCK]: [2, 4, 6],
   [Synergy.GHOST]: [2, 4, 6, 8],
   [Synergy.FAIRY]: [2, 4, 6],
-  [Synergy.ICE]: [3, 4, 5, 6],
+  [Synergy.ICE]: [2, 3, 4, 5, 6],
   [Synergy.FOSSIL]: [2, 4, 6],
   [Synergy.SOUND]: [2, 4, 6],
   [Synergy.ARTIFICIAL]: [2, 4, 6],
@@ -357,7 +357,7 @@ export const HatchList = new Array<Pkm>(
 
 export function getEvolutionCountNeeded(pkm: Pkm): number {
   if (pkm === Pkm.MAGIKARP) {
-    return 9
+    return 8
   }
   return 3
 }

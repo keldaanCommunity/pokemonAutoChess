@@ -582,7 +582,11 @@ export enum Pkm {
   NATU = "NATU",
   XATU = "XATU",
   GLIGAR = "GLIGAR",
-  GLISCOR = "GLISCOR"
+  GLISCOR = "GLISCOR",
+  SHELLDER = "SHELLDER",
+  CLOYSTER = "CLOYSTER",
+  SENTRET = "SENTRET",
+  FURRET = "FURRET"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1167,7 +1171,11 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.NATU]: "0177",
   [Pkm.XATU]: "0178",
   [Pkm.GLIGAR]: "0207",
-  [Pkm.GLISCOR]: "0472"
+  [Pkm.GLISCOR]: "0472",
+  [Pkm.SHELLDER]: "0090",
+  [Pkm.CLOYSTER]: "0091",
+  [Pkm.SENTRET]: "0161",
+  [Pkm.FURRET]: "0162"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1752,7 +1760,11 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.NATU]: Pkm.NATU,
   [Pkm.XATU]: Pkm.NATU,
   [Pkm.GLIGAR]: Pkm.GLIGAR,
-  [Pkm.GLISCOR]: Pkm.GLIGAR
+  [Pkm.GLISCOR]: Pkm.GLIGAR,
+  [Pkm.SHELLDER]: Pkm.SHELLDER,
+  [Pkm.CLOYSTER]: Pkm.SHELLDER,
+  [Pkm.SENTRET]: Pkm.SENTRET,
+  [Pkm.FURRET]: Pkm.FURRET
 }
 
 export enum PkmDuo {
@@ -1797,6 +1809,85 @@ export const Unowns: Pkm[] = [
   Pkm.UNOWN_QUESTION,
   Pkm.UNOWN_EXCLAMATION
 ]
+
+export const UnownsStage1 = [
+  Pkm.UNOWN_A,
+  Pkm.UNOWN_B,
+  Pkm.UNOWN_C,
+  Pkm.UNOWN_D,
+  Pkm.UNOWN_E,
+  Pkm.UNOWN_F,
+  Pkm.UNOWN_G,
+  Pkm.UNOWN_H,
+  Pkm.UNOWN_I,
+  Pkm.UNOWN_L,
+  Pkm.UNOWN_M,
+  Pkm.UNOWN_N,
+  Pkm.UNOWN_O,
+  Pkm.UNOWN_Q,
+  Pkm.UNOWN_S,
+  Pkm.UNOWN_V,
+  Pkm.UNOWN_W,
+  Pkm.UNOWN_X,
+  Pkm.UNOWN_Z
+]
+
+export const UnownsStage2 = [
+  Pkm.UNOWN_A,
+  Pkm.UNOWN_B,
+  Pkm.UNOWN_D,
+  Pkm.UNOWN_G,
+  Pkm.UNOWN_H,
+  Pkm.UNOWN_I,
+  Pkm.UNOWN_J,
+  Pkm.UNOWN_K,
+  Pkm.UNOWN_L,
+  Pkm.UNOWN_M,
+  Pkm.UNOWN_N,
+  Pkm.UNOWN_O,
+  Pkm.UNOWN_P,
+  Pkm.UNOWN_Q,
+  Pkm.UNOWN_R,
+  Pkm.UNOWN_S,
+  Pkm.UNOWN_T,
+  Pkm.UNOWN_U,
+  Pkm.UNOWN_V,
+  Pkm.UNOWN_W,
+  Pkm.UNOWN_X,
+  Pkm.UNOWN_Y,
+  Pkm.UNOWN_Z,
+  Pkm.UNOWN_QUESTION
+]
+
+export const UnownsStage3 = [
+  Pkm.UNOWN_B,
+  Pkm.UNOWN_G,
+  Pkm.UNOWN_H,
+  Pkm.UNOWN_J,
+  Pkm.UNOWN_K,
+  Pkm.UNOWN_L,
+  Pkm.UNOWN_M,
+  Pkm.UNOWN_N,
+  Pkm.UNOWN_O,
+  Pkm.UNOWN_P,
+  Pkm.UNOWN_R,
+  Pkm.UNOWN_S,
+  Pkm.UNOWN_T,
+  Pkm.UNOWN_U,
+  Pkm.UNOWN_V,
+  Pkm.UNOWN_W,
+  Pkm.UNOWN_X,
+  Pkm.UNOWN_Y,
+  Pkm.UNOWN_Z,
+  Pkm.UNOWN_QUESTION,
+  Pkm.UNOWN_EXCLAMATION
+]
+
+export function getUnownsPoolPerStage(stageLevel: number) {
+  if (stageLevel < 10) return UnownsStage1
+  else if (stageLevel < 20) return UnownsStage2
+  else return UnownsStage3
+}
 
 export const AnimationConfig: {
   [key in Pkm]: {
@@ -4713,6 +4804,26 @@ export const AnimationConfig: {
   [Pkm.GLISCOR]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SHELLDER]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Withdraw,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.CLOYSTER]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Withdraw,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SENTRET]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.FURRET]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.RearUp,
     emote: AnimationType.Shoot
   }
 }
