@@ -22,5 +22,6 @@ Gligar,Gliscor,Shellder,Cloyster, Furret, Sentret
 - New icons for status
 - Synergies now displayed when hovering over a player's icon in game
 - Option to toggle on/off displaying a pokemon's details via hover in preferences
+- Discord and Donate buttons now open links in a new tab
 
 # Misc
