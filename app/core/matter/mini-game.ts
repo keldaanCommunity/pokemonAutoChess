@@ -21,7 +21,7 @@ import {
   ItemCarouselStages,
   Mythical1Shop,
   Mythical2Shop,
-  MythicalPicksStages,
+  PortalCarouselStages,
   SynergyTriggers
 } from "../../types/Config"
 import { Synergy } from "../../types/enum/Synergy"
@@ -31,6 +31,7 @@ import GameState from "../../rooms/states/game-state"
 const PLAYER_VELOCITY = 2
 const ITEM_ROTATION_SPEED = 0.0004
 const PORTAL_ROTATION_SPEED = 0.0003
+const SYMBOL_ROTATION_SPEED = 0.0006
 const CAROUSEL_RADIUS = 140
 const NB_SYMBOLS_PER_PLAYER = 4
 
@@ -237,7 +238,7 @@ export class MiniGame {
       if (stageLevel < 5) {
         retentionDelay = 5000
       }
-      if (MythicalPicksStages.includes(stageLevel)) {
+      if (PortalCarouselStages.includes(stageLevel)) {
         retentionDelay = 7000
       }
 
@@ -267,7 +268,7 @@ export class MiniGame {
       Composite.add(this.engine.world, body)
     })
 
-    if (MythicalPicksStages.includes(stageLevel)) {
+    if (PortalCarouselStages.includes(stageLevel)) {
       this.initializePortalCarousel()
     } else if (ItemCarouselStages.includes(stageLevel)) {
       this.initializeItemsCarousel()
@@ -328,7 +329,7 @@ export class MiniGame {
         const portal = this.portals.get(id)!
         portal.x = body.position.x
         portal.y = body.position.y
-        const t = this.engine.timing.timestamp * ITEM_ROTATION_SPEED
+        const t = this.engine.timing.timestamp * SYMBOL_ROTATION_SPEED
         const symbols = [...this.symbols!.values()].filter(
           (symbol) => symbol.portalId === portal.id
         )
@@ -503,7 +504,7 @@ export class MiniGame {
         const symbols = [...(this.symbols?.values() ?? [])].filter(
           (symbol) => symbol.portalId === avatar.portalId
         )
-        if (state.stageLevel === MythicalPicksStages[0]) {
+        if (state.stageLevel === PortalCarouselStages[0]) {
           state.players.forEach((player: Player) => {
             state.shop.assignMythicalPropositions(
               player,
@@ -513,7 +514,7 @@ export class MiniGame {
           })
         }
 
-        if (state.stageLevel === MythicalPicksStages[1]) {
+        if (state.stageLevel === PortalCarouselStages[1]) {
           state.players.forEach((player: Player) => {
             state.shop.assignMythicalPropositions(
               player,

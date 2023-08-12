@@ -15,7 +15,7 @@ export class PokemonAvatarModel extends Schema implements IPokemonAvatar {
   @type("number") targetY: number
   @type("string") action: PokemonActionState = PokemonActionState.IDLE
   @type("string") orientation: Orientation = Orientation.DOWNLEFT
-  @type("number") timer: number  
+  @type("number") timer: number
   itemId: string = ""
   portalId: string = ""
   constraint: Constraint | undefined

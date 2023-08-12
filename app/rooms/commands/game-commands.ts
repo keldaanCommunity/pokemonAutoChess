@@ -6,7 +6,7 @@ import {
   ItemCarouselStages,
   StageDuration,
   AdditionalPicksStages,
-  MythicalPicksStages,
+  PortalCarouselStages,
   Mythical1Shop,
   Mythical2Shop,
   MAX_PLAYERS_PER_LOBBY
@@ -151,13 +151,13 @@ export class OnPokemonPropositionCommand extends Command<
       let allowBuy = true
       if (
         Mythical1Shop.includes(pkm) &&
-        this.state.stageLevel !== MythicalPicksStages[0]
+        this.state.stageLevel !== PortalCarouselStages[0]
       ) {
         allowBuy = false // wrong stage
       }
       if (
         Mythical2Shop.includes(pkm) &&
-        this.state.stageLevel !== MythicalPicksStages[1]
+        this.state.stageLevel !== PortalCarouselStages[1]
       ) {
         allowBuy = false // wrong stage
       }
@@ -847,7 +847,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
 
       if (
         ItemCarouselStages.includes(this.state.stageLevel) ||
-        MythicalPicksStages.includes(this.state.stageLevel)
+        PortalCarouselStages.includes(this.state.stageLevel)
       ) {
         this.initializeMinigamePhase()
       } else {
@@ -1192,7 +1192,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
           }
         }
       })
-    }    
+    }
 
     const isAfterPVE = this.getPVEIndex(this.state.stageLevel - 1) >= 0
     const commands = new Array<Command>()

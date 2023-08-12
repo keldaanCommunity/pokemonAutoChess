@@ -7,7 +7,7 @@ import ReactTooltip from "react-tooltip"
 import {
   AdditionalPicksStages,
   ItemCarouselStages,
-  MythicalPicksStages,
+  PortalCarouselStages,
   NeutralStage
 } from "../../../../../types/Config"
 import "./game-stage-info.css"
@@ -61,7 +61,7 @@ export default function GameStageInfo() {
             </p>
             <p>
               <span className="help">{t("mythical_picks")}:</span> {t("stages")}{" "}
-              {MythicalPicksStages.join(t("and"))}
+              {PortalCarouselStages.join(t("and"))}
             </p>
           </ReactTooltip>
           <p>
@@ -165,7 +165,7 @@ export function StagePath() {
         currentLevelPathIndex = path.length - 1
       }
     }
-    if (MythicalPicksStages.includes(level)) {
+    if (PortalCarouselStages.includes(level)) {
       path.push({
         level,
         icon: "/assets/ui/mythical.svg",

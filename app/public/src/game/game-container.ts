@@ -512,30 +512,24 @@ class GameContainer {
   }
 
   handleDragDropFailed(message: any) {
-    const g = this.gameScene
-    if (g && message.updateBoard) {
-      const tg = g.lastDragDropPokemon
-      if (tg) {
-        const coordinates = transformCoordinate(tg.positionX, tg.positionY)
-        tg.x = coordinates[0]
-        tg.y = coordinates[1]
-      }
+    const gameScene = this.gameScene
+    if (gameScene?.lastDragDropPokemon && message.updateBoard) {
+      const tg = gameScene.lastDragDropPokemon
+      const coordinates = transformCoordinate(tg.positionX, tg.positionY)
+      tg.x = coordinates[0]
+      tg.y = coordinates[1]
     }
 
-    if (g && message.updateItems) {
-      g.itemsContainer?.updateItems()
+    if (gameScene && message.updateItems) {
+      gameScene.itemsContainer?.updateItems()
     }
   }
 
   onPlayerClick(id: string) {
-    const g = this.gameScene
-    if (g) {
-      const player = this.room.state.players.get(id)
-      this.player = player
-      if (player) {
-        g.setPlayer(player)
-        this.handleWeatherChange(player, player.simulation.weather)
-      }
+    if (this.gameScene && this.room.state.players.has(id)) {
+      const player = this.room.state.players.get(id)!
+      this.gameScene.setPlayer(player)
+      this.handleWeatherChange(player, player.simulation.weather)
     }
   }
 
