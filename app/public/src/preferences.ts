@@ -1,15 +1,17 @@
 const KEY = "pac_preferences"
 
-interface IPreferencesState {
+export interface IPreferencesState {
   musicVolume: number
   sfxVolume: number
   showDpsMeter: boolean
+  pokemonDetailsOnHover: boolean
 }
 
 const defaultPreferences: IPreferencesState = {
   musicVolume: 30,
   sfxVolume: 30,
-  showDpsMeter: false
+  showDpsMeter: false,
+  pokemonDetailsOnHover: true
 }
 
 export function loadPreferences(): IPreferencesState {

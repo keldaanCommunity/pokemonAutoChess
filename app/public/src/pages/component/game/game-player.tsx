@@ -1,14 +1,32 @@
 import React from "react"
 import ReactTooltip from "react-tooltip"
+import { CircularProgressbarWithChildren } from "react-circular-progressbar"
+import { Room } from "colyseus.js"
+
 import GamePlayerDetail from "./game-player-detail"
+import GameState from "../../../../../rooms/states/game-state"
+import Synergies from "../../../../../models/colyseus-models/synergies"
 import { IPlayer } from "../../../../../types"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { setPlayer } from "../../../stores/GameStore"
-import { CircularProgressbarWithChildren } from "react-circular-progressbar"
-import "react-circular-progressbar/dist/styles.css"
 import { getAvatarSrc } from "../../../utils"
-import "./game-player.css"
 import { cc } from "../../utils/jsx"
+
+import "react-circular-progressbar/dist/styles.css"
+import "./game-player.css"
+
+function getSynergiesFromNetworkPlayer(
+  game: Room<GameState> | undefined,
+  player: IPlayer
+): Synergies {
+  const state = game?.serializer?.getState()
+  const networkSynergies = state?.players?.get(player.id)?.synergies?.toJSON()
+  if (networkSynergies) {
+    return networkSynergies
+  } else {
+    return player.synergies
+  }
+}
 
 export default function GamePlayer(props: {
   player: IPlayer
@@ -16,10 +34,11 @@ export default function GamePlayer(props: {
   index: number
 }) {
   const dispatch = useAppDispatch()
-  const game = useAppSelector((state) => state.network.game)
-  const spectatedPlayerId: string = useAppSelector(
-    (state) => state.game.currentPlayerId
-  )
+  const { game, spectatedPlayerId } = useAppSelector((state) => ({
+    game: state.network.game,
+    spectatedPlayerId: state.game.currentPlayerId
+  }))
+
   const selfPlayerId = useAppSelector((state) => state.network.uid)
 
   function playerClick() {
@@ -31,6 +50,8 @@ export default function GamePlayer(props: {
       }
     }
   }
+
+  const synergies = getSynergiesFromNetworkPlayer(game, props.player)
 
   return (
     <div
@@ -63,6 +84,7 @@ export default function GamePlayer(props: {
           money={props.player.money}
           level={props.player.experienceManager.level}
           history={props.player.history}
+          synergies={synergies}
         />
       </ReactTooltip>
     </div>

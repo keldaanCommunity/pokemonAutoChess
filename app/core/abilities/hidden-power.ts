@@ -2,7 +2,7 @@ import PokemonFactory from "../../models/pokemon-factory"
 import { Ability } from "../../types/enum/Ability"
 import { AttackType, PokemonActionState, Rarity } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
-import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
+import { getUnownsPoolPerStage, Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { pickRandomIn } from "../../utils/random"
 import { AttackStrategy } from "../attack-strategy"
@@ -707,9 +707,13 @@ export class HiddenPowerQMStrategy extends HiddenPowerStrategy {
     super.process(unown, state, board, target, crit)
     if (unown.team === 0) {
       const player = unown.player!
+      const stageLevel = unown.simulation.stageLevel
+      const candidates = getUnownsPoolPerStage(stageLevel).filter(
+        (u) => u !== Pkm.UNOWN_QUESTION
+      )
       const nbUnownsObtained = 4
       for (let i = 0; i < nbUnownsObtained; i++) {
-        const pkm = pickRandomIn(Unowns)
+        const pkm = pickRandomIn(candidates)
         const x = player.simulation.room.getFirstAvailablePositionInBench(
           player.id
         )
@@ -740,8 +744,12 @@ export class HiddenPowerEMStrategy extends HiddenPowerStrategy {
       [0, board.rows - 1],
       [board.columns - 1, board.rows - 1]
     ]
+    const stageLevel = pokemon.simulation.stageLevel
+    const candidates = getUnownsPoolPerStage(stageLevel).filter(
+      (u) => u !== Pkm.UNOWN_EXCLAMATION
+    )
     corners.forEach(([x, y]) => {
-      const unownName = pickRandomIn(Unowns)
+      const unownName = pickRandomIn(candidates)
       const unown = PokemonFactory.createPokemonFromName(unownName, player)
       const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardTo(
         x,

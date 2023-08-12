@@ -1,0 +1,9 @@
+.full-width {
+    width: 100%
+}
+
+/* prevents weird tearing at wider screens */
+.nes-checkbox + span::before,
+.nes-checkbox:checked + span::before {
+    top: 0px !important;
+}

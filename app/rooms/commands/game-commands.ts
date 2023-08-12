@@ -20,7 +20,7 @@ import UserMetadata from "../../models/mongo-models/user-metadata"
 import GameRoom from "../game-room"
 import { Client, updateLobby } from "colyseus"
 import { Effect } from "../../types/enum/Effect"
-import { Title, FIGHTING_PHASE_DURATION, Emotion, IPlayer } from "../../types"
+import { Title, FIGHTING_PHASE_DURATION, Emotion } from "../../types"
 import { MapSchema } from "@colyseus/schema"
 import {
   GamePhaseState,
@@ -890,7 +890,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         case Effect.STEEL_SURGE:
           player.titles.add(Title.ENGINEER)
           break
-        case Effect.SANDSTORM:
+        case Effect.DRILLER:
           player.titles.add(Title.GEOLOGIST)
           break
         case Effect.TOXIC:

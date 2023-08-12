@@ -11,6 +11,10 @@
   list-style: none;
 }
 
+#wiki-page li[role="tab"] {
+  text-transform: uppercase;
+}
+
 #wiki-page > .nes-container {
   margin: 1em 0;
   color: white;

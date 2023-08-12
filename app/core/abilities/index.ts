@@ -149,7 +149,7 @@ import {
   PeckStrategy,
   SplashStrategy,
   CounterStrategy,
-  ComsicPowerStrategy,
+  CosmicPowerStrategy,
   PoisonPowderStrategy,
   SilverWindStrategy,
   IcyWindStrategy,
@@ -167,7 +167,9 @@ import {
   MudBubbleStrategy,
   LinkCableStrategy,
   MagicBounceStrategy,
-  PoisonJabStrategy
+  PoisonJabStrategy,
+  ShellSmashStrategy,
+  HelpingHandStrategy
 } from "../attack-strategy"
 import {
   HiddenPowerAStrategy,
@@ -352,7 +354,7 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.PECK]: new PeckStrategy(),
   [Ability.SPLASH]: new SplashStrategy(),
   [Ability.COUNTER]: new CounterStrategy(),
-  [Ability.COSMIC_POWER]: new ComsicPowerStrategy(),
+  [Ability.COSMIC_POWER]: new CosmicPowerStrategy(),
   [Ability.POISON_POWDER]: new PoisonPowderStrategy(),
   [Ability.SILVER_WIND]: new SilverWindStrategy(),
   [Ability.ICY_WIND]: new IcyWindStrategy(),
@@ -398,5 +400,7 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.HIDDEN_POWER_Z]: new HiddenPowerZStrategy(),
   [Ability.HIDDEN_POWER_QM]: new HiddenPowerQMStrategy(),
   [Ability.HIDDEN_POWER_EM]: new HiddenPowerEMStrategy(),
-  [Ability.POISON_JAB]: new PoisonJabStrategy()
+  [Ability.POISON_JAB]: new PoisonJabStrategy(),
+  [Ability.SHELL_SMASH]: new ShellSmashStrategy(),
+  [Ability.HELPING_HAND]: new HelpingHandStrategy()
 }

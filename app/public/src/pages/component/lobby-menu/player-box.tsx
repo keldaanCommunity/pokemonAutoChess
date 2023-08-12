@@ -20,7 +20,9 @@ export default function PlayerBox(props: { user: ILobbyUser }) {
             src={getAvatarSrc(props.user.avatar)}
             className="pokemon-portrait"
           />
-          <p className="player-title">{t(`title.${props.user.title}`)}</p>
+          {props.user.title && (
+            <p className="player-title">{t(`title.${props.user.title}`)}</p>
+          )}
           <RoleBadge role={props.user.role} />
           <p
             style={{
