@@ -35,6 +35,14 @@ admin.initializeApp({
 })
 
 const app = express()
+app.use(function (req, res, next) {
+  res.setTimeout(20000, function () {
+    logger.error("ERROR 408: Request has timed out.")
+    res.send(408)
+  })
+  next()
+})
+
 const httpServer = http.createServer(app)
 const gameServer = new Server({
   transport: new WebSocketTransport({
