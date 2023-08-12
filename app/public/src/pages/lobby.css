@@ -29,6 +29,7 @@
 .lobby .user-menu {
   grid-area: user;
   height: 100%;
+  width: 25%;
   display: flex;
   flex-direction: column;
 }
@@ -47,7 +48,7 @@
 
 .lobby .room-menu {
   height: 100%;
-  min-width: 25%;
+  width: 25%;
   font-size: 16px;
 }
 
@@ -55,10 +56,11 @@
   display: flex;
   font-size: 16px;
   overflow-x: scroll;
+  overflow-y: hidden;
 }
 
 .lobby .current-users-menu {
-  min-width: 333px;
+  width: 100%;
   height: 100%;
 }
 
@@ -69,6 +71,7 @@
 .lobby .user-chat {
   overflow-y: auto;
   height: 100%;
+  width: 100%;
 }
 
 .lobby .news {
@@ -84,6 +87,20 @@
 
 .lobby h2 {
   font-size: 1.25vw;
+}
+
+.lobby-container .bot-panel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.bot-panel .header {
+  display: flex;
+  width: 100%;
+  height: 70px;
+  justify-content: space-between;
 }
 
 @media (max-width: 640px) {
@@ -109,16 +126,16 @@
 
 
 .main-lobby {
-  display: flex;
-  gap: 4px;
-  overflow: scroll;
-  justify-content: space-between;
   height: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
 }
 
 .main-lobby .news-chat {
   display: flex;
   gap: 4px;
+  width: 50%;
 }
 
 @media (max-width: 1400px) {

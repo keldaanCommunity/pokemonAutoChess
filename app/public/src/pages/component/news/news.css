@@ -1,19 +1,25 @@
 .news {
+  color: white;
   background-image: url(assets/ui/back1.png);
   background-size: cover;
   background-position-x: left;
   display: flex;
   flex-flow: column nowrap;
-  justify-content: flex-start;
-  align-items: stretch;
-  overflow-y: auto;
+  align-items: center;
+  font-size: 22px;
+}
+
+.news h1 {
+  font-size: 180%;
+  text-align: center;
+  text-shadow: 2px 2px 2px #00000040;
 }
 
 .news .content {
-  color: white;
   text-align: left;
   flex: 1;
-  overflow-y: auto;
+  max-height: 80vh;
+  overflow-y: scroll;
   background-color: #54596b;
   line-height: 1em;
   font-size: 80%;
@@ -21,12 +27,6 @@
 
 #root .news .content {
   padding: 0.5em;
-}
-
-.news .content h1 {
-  font-size: 180%;
-  text-align: center;
-  text-shadow: 2px 2px 2px #00000040;
 }
 
 .news .content h2 {

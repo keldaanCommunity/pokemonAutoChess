@@ -19,12 +19,10 @@
   margin: 1em 0;
   color: white;
   background-color: #54596b;
-  max-height: 90%;
-  overflow: scroll
 }
 
 #wiki-page > .nes-container > .react-tabs > .react-tabs__tab-panel {
-  height: 100%;
+  height: 75vh;
   padding-bottom: 40px;
   overflow-y: auto;
 }

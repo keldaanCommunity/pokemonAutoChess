@@ -267,8 +267,8 @@ export default function TeamBuilder() {
   }
 
   return (
-    <div>
-      <div style={buttonsStyle}>
+    <div className="bot-panel">
+      <div className="header" style={buttonsStyle}>
         <button
           style={buttonStyle}
           onClick={() => {

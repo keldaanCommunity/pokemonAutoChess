@@ -28,7 +28,7 @@ export default function PokemonCollection() {
             type="checkbox"
             className="nes-checkbox is-dark"
             checked={shinyOnly === true}
-            onChange={(e) => setShinyOnly(!shinyOnly)}
+            onChange={() => setShinyOnly(!shinyOnly)}
           />
           <span>{t("shiny_hunter")}</span>
         </label>
@@ -91,7 +91,7 @@ export default function PokemonCollection() {
       </header>
       <div className="nes-container">
         <Tabs>
-          <TabList>
+          <TabList className="pokemon-collection-tabs">
             <Tab key="title-all">{t("ALL")}</Tab>
             {(Object.keys(Synergy) as Synergy[]).map((type) => {
               return (

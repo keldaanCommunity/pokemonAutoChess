@@ -123,7 +123,6 @@ export function MainSidebar(props: MainSidebarProps) {
       collapsed={collapsed}
       backgroundColor="#61738a"
       className="sidebar"
-      breakPoint="lg"
       ref={sidebarRef}
     >
       <Menu>
@@ -167,6 +166,7 @@ export function MainSidebar(props: MainSidebarProps) {
           <NavLink
             text={t("bot_builder")}
             svg="bot"
+            menuItemColor="green"
             onClick={botBuilderOnClick}
           />
         )}
@@ -177,6 +177,7 @@ export function MainSidebar(props: MainSidebarProps) {
           <NavLink
             text={t("bot_admin")}
             svg="bot"
+            menuItemColor="green"
             onClick={botBuilderAdminOnClick}
           />
         )}
@@ -195,8 +196,8 @@ export function MainSidebar(props: MainSidebarProps) {
         />
 
         <NavLink
-          png="clock"
           text={t("sign_out")}
+          svg="exit-door"
           menuItemColor="red"
           onClick={signOut}
         />

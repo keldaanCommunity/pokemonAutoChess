@@ -109,10 +109,12 @@ export default function Lobby() {
 
         {page === "bot_builder" && <TeamBuilder />}
 
-        <MainLobby
-          toPreparation={toPreparation}
-          setToPreparation={setToPreparation}
-        />
+        {page === "main_lobby" && (
+          <MainLobby
+            toPreparation={toPreparation}
+            setToPreparation={setToPreparation}
+          />
+        )}
       </div>
     </main>
   )

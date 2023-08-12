@@ -6,8 +6,6 @@
 }
 
 #pokemon-collection > .nes-container {
-  max-height: calc(100vh - 16vw);
-  overflow-y: auto;
   align-items: center;
 }
 
@@ -16,6 +14,8 @@
   flex-wrap: wrap;
   gap: 1vw;
   justify-content: center;
+  overflow-y: scroll;
+  max-height: 65vh;
 }
 
 #pokemon-collection header {
@@ -34,4 +34,19 @@
 
 #pokemon-collection .unown-icon {
   margin: -28px;
+}
+
+.pokemon-collection-tabs {
+  display: flex;
+  align-items: center;
+  max-width: 90vw;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  padding-left: 0;
+}
+
+.pokemon-collection-tabs li {
+  display: flex;
+  align-items: center;
+  height: 55px;
 }
