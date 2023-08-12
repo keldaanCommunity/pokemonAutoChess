@@ -23,5 +23,9 @@ Gligar,Gliscor,Shellder,Cloyster, Furret, Sentret
 - Synergies now displayed when hovering over a player's icon in game
 - Option to toggle on/off displaying a pokemon's details via hover in preferences
 - Discord and Donate buttons now open links in a new tab
+- New Sidebar! All your favorite menu buttons now exist in the sidebar
+  - Hover over with your mouse to expand sidebar
+  - Sidebar available on Preparation Room
+- Multiple pages have been converted to modals, allowing for easy access both in lobby and in the preparation room
 
 # Misc
