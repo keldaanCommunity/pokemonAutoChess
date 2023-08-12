@@ -23,6 +23,7 @@ import {
   SynergyTriggers
 } from "../../types/Config"
 import { Synergy } from "../../types/enum/Synergy"
+import { logger } from "../../utils/logger"
 
 const PLAYER_VELOCITY = 2
 const ITEM_ROTATION_SPEED = 0.0004
@@ -107,6 +108,7 @@ export class MiniGame {
         (this.avatars?.has(pairs[0].bodyA.label) ||
           this.avatars?.has(pairs[0].bodyB.label))
       ) {
+        // when avatar collides with an item
         let avatar: PokemonAvatarModel | undefined,
           avatarBody: Body | undefined,
           item: FloatingItem | undefined,
@@ -163,6 +165,40 @@ export class MiniGame {
         (this.avatars?.has(pairs[0].bodyA.label) ||
           this.avatars?.has(pairs[0].bodyB.label))
       ) {
+        // when avatar collides with a portal
+        let avatar: PokemonAvatarModel | undefined,
+          avatarBody: Body | undefined,
+          portal: Portal | undefined,
+          portalBody: Body | undefined
+
+        if (this.avatars?.has(pairs[0].bodyA.label)) {
+          avatar = this.avatars.get(pairs[0].bodyA.label)
+          avatarBody = pairs[0].bodyA
+          portal = this.portals.get(pairs[0].bodyB.label)
+          portalBody = pairs[0].bodyB
+        } else {
+          avatar = this.avatars.get(pairs[0].bodyB.label)
+          avatarBody = pairs[0].bodyB
+          portal = this.portals.get(pairs[0].bodyA.label)
+          portalBody = pairs[0].bodyA
+        }
+
+        if (
+          avatarBody &&
+          portalBody &&
+          avatar &&
+          portal &&
+          avatar.portalId === "" &&
+          portal.avatarId === ""
+        ) {
+          logger.debug(`${avatar.name} is taking portal ${portal.id}`)
+          portal.avatarId = avatar.id
+          avatar.portalId = portal.id
+          Composite.remove(this.engine.world, avatarBody)
+          Composite.remove(this.engine.world, avatarBody)
+          this.bodies.delete(avatar.id)
+          this.bodies.delete(portal.id)
+        }
       }
     })
   }
@@ -197,6 +233,9 @@ export class MiniGame {
         4000 + (this.alivePlayers.length - player.rank) * 2000
       if (stageLevel < 5) {
         retentionDelay = 5000
+      }
+      if (MythicalPicksStages.includes(stageLevel)) {
+        retentionDelay = 7000
       }
 
       const avatar = new PokemonAvatarModel(
@@ -256,7 +295,7 @@ export class MiniGame {
       const y = this.centerY + Math.sin((Math.PI * 2 * i) / nbPortals) * 100
       const portal = new Portal(x, y, i)
       this.portals?.set(portal.id, portal)
-      const body = Bodies.circle(x, y, 35)
+      const body = Bodies.circle(x, y, 30)
       body.label = portal.id
       this.bodies.set(portal.id, body)
       Composite.add(this.engine.world, body)
@@ -334,17 +373,33 @@ export class MiniGame {
         // add as many symbols as synergy levels reached
         candidatesSymbols.push(...new Array(level).fill(type))
       })
+      //logger.debug("symbols from synergies", candidatesSymbols)
       if (candidatesSymbols.length < 4) {
         // if player has reached less than 4 synergy level triggers, we complete with random other incomplete synergies
         const incompleteSynergies = synergiesTriggerLevels
-          .filter(([type, level]) => level === 0)
+          .filter(
+            ([type, level]) => level === 0 && player.synergies.get(type)! > 0
+          )
           .map(([type, level]) => type)
         candidatesSymbols.push(
           ...pickNRandomIn(incompleteSynergies, 4 - candidatesSymbols.length)
         )
+        /*logger.debug(
+          "completing symbols with incomplete synergies",
+          incompleteSynergies
+        )*/
+      }
+      while (candidatesSymbols.length < 4) {
+        // if still incomplete, complete with random
+        candidatesSymbols.push(pickRandomIn(Synergy))
+        /*logger.debug(
+          "completing symbols with random synergies",
+          candidatesSymbols
+        )*/
       }
 
       const symbols = pickNRandomIn(candidatesSymbols, NB_SYMBOLS_PER_PLAYER)
+      //logger.debug(`symbols chosen for player ${player.name}`, symbols)
       symbols.forEach((type, i) => {
         const symbol = new SynergySymbol(avatar.x, avatar.y, type, i)
         this.symbols?.set(symbol.id, symbol)
@@ -358,7 +413,7 @@ export class MiniGame {
       setTimeout(() => {
         symbol.index = Math.floor(i / portalIds.length)
         symbol.portalId = portalIds[i % portalIds.length]
-      }, 1000 + 1000 * (i / symbols.length))
+      }, 1500 + 1500 * (i / symbols.length))
     })
   }
 
@@ -407,25 +462,29 @@ export class MiniGame {
     })
     this.avatars!.forEach((avatar) => {
       const player = players.get(avatar.id)
-      if (avatar.itemId === "" && player && !player.isBot) {
-        if (this.items) {
-          // give a random item if none was taken
-          const remainingItems = [...this.items.entries()].filter(
-            ([itemId, item]) => item.avatarId == ""
-          )
-          if (remainingItems.length > 0) {
-            avatar.itemId = pickRandomIn(remainingItems)[0]
-          }
+      if (avatar.itemId === "" && player && !player.isBot && this.items) {
+        // give a random item if none was taken
+        const remainingItems = [...this.items.entries()].filter(
+          ([itemId, item]) => item.avatarId == ""
+        )
+        if (remainingItems.length > 0) {
+          avatar.itemId = pickRandomIn(remainingItems)[0]
         }
+      }
 
-        if (this.portals) {
-          // send to random portal if none was taken
-          const remainingPortals = [...this.portals.entries()].filter(
-            ([portalId, portal]) => portal.avatarId == ""
-          )
-          if (remainingPortals.length > 0) {
-            avatar.portalId = pickRandomIn(remainingPortals)[0]
-          }
+      if (
+        avatar.portalId === "" &&
+        player &&
+        !player.isBot &&
+        this.portals &&
+        this.avatars
+      ) {
+        // send to random portal if none was taken
+        const remainingPortals = [...this.portals.entries()].filter(
+          ([portalId, portal]) => portal.avatarId == ""
+        )
+        if (remainingPortals.length > 0) {
+          avatar.portalId = pickRandomIn(remainingPortals)[0]
         }
       }
 

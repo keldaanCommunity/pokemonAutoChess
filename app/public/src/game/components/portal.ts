@@ -1,6 +1,6 @@
 import { GameObjects } from "phaser"
+import { ISynergySymbol } from "../../../../types"
 import { Synergy } from "../../../../types/enum/Synergy"
-import GameScene from "../scenes/game-scene"
 
 export class Portal extends GameObjects.Container {
   sprite: GameObjects.Sprite
@@ -15,23 +15,23 @@ export class Portal extends GameObjects.Container {
     this.add(this.sprite)
     this.scene.add.existing(this)
   }
-
-  onGrab(playerId) {
-    const currentPlayerId: string = (this.scene as GameScene).uid!
-  }
 }
 
-export class SynergySymbol extends GameObjects.Sprite {
+export class SynergySymbol
+  extends GameObjects.Sprite
+  implements ISynergySymbol
+{
   id: string
+  synergy: Synergy
 
   constructor(
     scene: Phaser.Scene,
     id: string,
     x: number,
     y: number,
-    type: Synergy
+    synergy: Synergy
   ) {
-    super(scene, x, y, "types", type + ".png")
+    super(scene, x, y, "types", synergy + ".png")
     this.id = id
     this.scene.add.existing(this)
   }

@@ -318,7 +318,7 @@ export interface ISynergySymbol {
   id: string
   x: number
   y: number
-  type: Synergy
+  synergy: Synergy
 }
 
 export interface IPlayer {

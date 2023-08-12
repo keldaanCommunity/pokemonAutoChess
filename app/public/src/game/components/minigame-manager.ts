@@ -15,6 +15,7 @@ import {
 import PokemonAvatar from "./pokemon-avatar"
 import { Portal, SynergySymbol } from "./portal"
 import { clamp } from "../../../../utils/number"
+import { logger } from "../../../../utils/logger"
 
 export default class MinigameManager {
   pokemons: Map<string, Pokemon>
@@ -47,23 +48,26 @@ export default class MinigameManager {
   }
 
   update() {
-    const interpolatePosition = (item) => {
-      if (!item.data) return
-      const { serverX, serverY } = item.data.values
-      item.x = Phaser.Math.Linear(
-        item.x,
-        serverX,
-        clamp(100 / Math.abs(serverX - item.x), 0.05, 0.25)
-      )
-      item.y = Phaser.Math.Linear(
-        item.y,
-        serverY,
-        clamp(100 / Math.abs(serverY - item.y), 0.05, 0.25)
-      )
-    }
-    this.items.forEach(interpolatePosition)
-    this.portals.forEach(interpolatePosition)
-    this.symbols.forEach(interpolatePosition)
+    const interpolatePosition =
+      (min = 0.2, max = min, acceleration = 100) =>
+      (item) => {
+        if (!item.data) return
+        const { serverX, serverY } = item.data.values
+        item.x = Phaser.Math.Linear(
+          item.x,
+          serverX,
+          clamp(acceleration / Math.abs(serverX - item.x), min, max)
+        )
+        item.y = Phaser.Math.Linear(
+          item.y,
+          serverY,
+          clamp(acceleration / Math.abs(serverY - item.y), 0.05, 0.25)
+        )
+      }
+    this.pokemons.forEach(interpolatePosition(0.2))
+    this.items.forEach(interpolatePosition(0.05, 0.25, 100))
+    this.portals.forEach(interpolatePosition(0.05, 0.25, 100))
+    this.symbols.forEach(interpolatePosition(0.02, 0.25, 50))
   }
 
   buildPokemons(avatars: Map<string, IPokemonAvatar>) {
@@ -167,7 +171,26 @@ export default class MinigameManager {
           break
 
         case "avatarId":
-          portalUI.onGrab(value)
+          logger.debug("change portal.avatarId", value)
+          if (value != "") {
+            const avatar = this.pokemons.get(value)
+            logger.debug(
+              `Player ${value} (${avatar?.playerId}) has taken portal ${portal.id}`
+            )
+            this.symbols.forEach((symbol) => {
+              if (symbol.getData("portalId") === portal.id) {
+                this.removeSymbol(symbol)
+              }
+            })
+            this.scene.tweens.add({
+              targets: [portalUI, avatar],
+              x: portalUI.x,
+              y: portalUI.y,
+              scale: 0,
+              duration: 800,
+              ease: Phaser.Math.Easing.Sine.In
+            })
+          }
       }
     }
   }
@@ -179,7 +202,7 @@ export default class MinigameManager {
       symbol.id,
       transformMiniGameXCoordinate(symbol.x),
       transformMiniGameYCoordinate(symbol.y),
-      symbol.type
+      symbol.synergy
     )
     this.symbols.set(s.id, s)
   }
@@ -189,7 +212,9 @@ export default class MinigameManager {
     if (symbolUI) {
       symbolUI.destroy(true)
     }
-    this.symbols.delete(symbolToRemove.id)
+    if (this.symbols.has(symbolToRemove.id)) {
+      this.symbols.delete(symbolToRemove.id)
+    }
   }
 
   changeSymbol(symbol: ISynergySymbol, field: string, value: any) {
@@ -205,7 +230,7 @@ export default class MinigameManager {
           break
 
         case "portalId":
-          const portal = this.portals.get(value)
+          symbolUI.setData("portalId", value)
           break
       }
     }
@@ -271,11 +296,11 @@ export default class MinigameManager {
           break
 
         case "x":
-          pokemonUI.x = transformMiniGameXCoordinate(value)
+          pokemonUI.setData("serverX", transformMiniGameXCoordinate(value))
           break
 
         case "y":
-          pokemonUI.y = transformMiniGameYCoordinate(value)
+          pokemonUI.setData("serverY", transformMiniGameYCoordinate(value))
           break
 
         case "timer":

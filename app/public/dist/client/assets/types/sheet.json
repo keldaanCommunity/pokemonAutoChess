@@ -4,7 +4,7 @@
 			"image": "sheet.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 936,
+				"w": 972,
 				"h": 36
 			},
 			"scale": 1,
@@ -52,7 +52,7 @@
 					}
 				},
 				{
-					"filename": "BUG.png",
+					"filename": "BABY.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -73,7 +73,7 @@
 					}
 				},
 				{
-					"filename": "DARK.png",
+					"filename": "BUG.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -94,7 +94,7 @@
 					}
 				},
 				{
-					"filename": "DRAGON.png",
+					"filename": "DARK.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -115,7 +115,7 @@
 					}
 				},
 				{
-					"filename": "ELECTRIC.png",
+					"filename": "DRAGON.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -136,7 +136,7 @@
 					}
 				},
 				{
-					"filename": "FAIRY.png",
+					"filename": "ELECTRIC.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -157,7 +157,7 @@
 					}
 				},
 				{
-					"filename": "FIELD.png",
+					"filename": "FAIRY.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -178,7 +178,7 @@
 					}
 				},
 				{
-					"filename": "FIGHTING.png",
+					"filename": "FIELD.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -199,7 +199,7 @@
 					}
 				},
 				{
-					"filename": "FIRE.png",
+					"filename": "FIGHTING.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -220,7 +220,7 @@
 					}
 				},
 				{
-					"filename": "FLORA.png",
+					"filename": "FIRE.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -241,7 +241,7 @@
 					}
 				},
 				{
-					"filename": "FLYING.png",
+					"filename": "FLORA.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -262,7 +262,7 @@
 					}
 				},
 				{
-					"filename": "FOSSIL.png",
+					"filename": "FLYING.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -283,7 +283,7 @@
 					}
 				},
 				{
-					"filename": "GHOST.png",
+					"filename": "FOSSIL.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -304,7 +304,7 @@
 					}
 				},
 				{
-					"filename": "GRASS.png",
+					"filename": "GHOST.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -325,7 +325,7 @@
 					}
 				},
 				{
-					"filename": "GROUND.png",
+					"filename": "GRASS.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -346,7 +346,7 @@
 					}
 				},
 				{
-					"filename": "HUMAN.png",
+					"filename": "GROUND.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -367,7 +367,7 @@
 					}
 				},
 				{
-					"filename": "ICE.png",
+					"filename": "HUMAN.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -388,7 +388,7 @@
 					}
 				},
 				{
-					"filename": "MONSTER.png",
+					"filename": "ICE.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -409,7 +409,7 @@
 					}
 				},
 				{
-					"filename": "NORMAL.png",
+					"filename": "MONSTER.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -430,7 +430,7 @@
 					}
 				},
 				{
-					"filename": "POISON.png",
+					"filename": "NORMAL.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -451,7 +451,7 @@
 					}
 				},
 				{
-					"filename": "PSYCHIC.png",
+					"filename": "POISON.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -472,7 +472,7 @@
 					}
 				},
 				{
-					"filename": "ROCK.png",
+					"filename": "PSYCHIC.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -493,7 +493,7 @@
 					}
 				},
 				{
-					"filename": "SOUND.png",
+					"filename": "ROCK.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -514,7 +514,7 @@
 					}
 				},
 				{
-					"filename": "STEEL.png",
+					"filename": "SOUND.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -535,7 +535,7 @@
 					}
 				},
 				{
-					"filename": "WATER.png",
+					"filename": "STEEL.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -554,6 +554,27 @@
 						"w": 34,
 						"h": 34
 					}
+				},
+				{
+					"filename": "WATER.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 34,
+						"h": 34
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 34,
+						"h": 34
+					},
+					"frame": {
+						"x": 937,
+						"y": 1,
+						"w": 34,
+						"h": 34
+					}
 				}
 			]
 		}
@@ -561,6 +582,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:bf625608fada3482d49ede09c3df5cbc:2557f9ad43b10d35b4f178846c6cf32e:9c44ecd7e9a522007eaff2949095bc1d$"
+		"smartupdate": "$TexturePacker:SmartUpdate:3e1bb17a0cf1ab7385658347177aeaee:ae5c07cc7d86b1124d345e88a84cca6b:9c44ecd7e9a522007eaff2949095bc1d$"
 	}
 }
