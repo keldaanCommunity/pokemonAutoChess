@@ -830,7 +830,7 @@ export class OnUpdateCommand extends Command<
 export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   execute() {
     if (this.state.phase == GamePhaseState.MINIGAME) {
-      this.room.miniGame.stop(this.state.players)
+      this.room.miniGame.stop(this.state)
       this.initializePickingPhase()
     } else if (this.state.phase == GamePhaseState.PICK) {
       this.stopPickingPhase()
@@ -1192,19 +1192,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
           }
         }
       })
-    }
-
-    if (this.state.stageLevel === MythicalPicksStages[0]) {
-      this.state.players.forEach((player: Player) => {
-        this.state.shop.assignMythicalPropositions(player, Mythical1Shop)
-      })
-    }
-
-    if (this.state.stageLevel === MythicalPicksStages[1]) {
-      this.state.players.forEach((player: Player) => {
-        this.state.shop.assignMythicalPropositions(player, Mythical2Shop)
-      })
-    }
+    }    
 
     const isAfterPVE = this.getPVEIndex(this.state.stageLevel - 1) >= 0
     const commands = new Array<Command>()

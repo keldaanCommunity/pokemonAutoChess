@@ -15,7 +15,7 @@ export function pickRandomIn<T>(list: T[] | Record<any, T>): T {
   return list[Math.floor(Math.random() * list.length)]
 }
 
-export function pickNRandomIn<T>(array: T[], number = 1): T[] {
+export function pickNRandomIn<T>(array: T[], number: number): T[] {
   const selection: T[] = [],
     options = [...array]
   shuffleArray(options)

@@ -16,10 +16,17 @@ import {
   LegendaryShop,
   RareShop,
   UncommonShop,
-  FishRarityProbability
+  FishRarityProbability,
+  SHOP_SIZE,
+  NB_MYTHICAL_PROPOSITIONS
 } from "../types/Config"
 import { Rarity } from "../types/enum/Game"
-import { chance, pickRandomIn, shuffleArray } from "../utils/random"
+import {
+  chance,
+  pickNRandomIn,
+  pickRandomIn,
+  shuffleArray
+} from "../utils/random"
 import { clamp } from "../utils/number"
 import { removeInArray } from "../utils/array"
 import { Pokemon } from "./colyseus-models/pokemon"
@@ -123,7 +130,7 @@ export default class Shop {
       return this.pickPokemon(player)
     })
 
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < SHOP_SIZE; i++) {
       player.shop[i] = PkmList[i]
     }
   }
@@ -134,65 +141,44 @@ export default class Shop {
     if (player.effects.list.includes(Effect.EERIE_SPELL) && !manualRefresh) {
       const stageLevel = player.simulation.stageLevel
       const unowns = getUnownsPoolPerStage(stageLevel)
-      for (let i = 0; i < 6; i++) {
+      for (let i = 0; i < SHOP_SIZE; i++) {
         player.shop[i] = pickRandomIn(unowns)
       }
     } else {
-      for (let i = 0; i < 6; i++) {
+      for (let i = 0; i < SHOP_SIZE; i++) {
         player.shop[i] = this.pickPokemon(player)
       }
     }
   }
 
-  assignMythicalPropositions(player: Player, list: PkmProposition[]) {
+  assignMythicalPropositions(
+    player: Player,
+    list: PkmProposition[],
+    synergies: Synergy[]
+  ) {
     const mythicals = [...list]
-    const synergies = Array.from(player.synergies)
-      .filter(([synergy, value]) => value > 0)
-      .map(([synergy, value]) => synergy)
-    const top2Synergies = Array.from(player.synergies)
-      .sort(([s1, v1], [s2, v2]) => v2 - v1)
-      .slice(0, 2)
-      .map(([synergy, value]) => synergy)
 
-    const mythicalsTopSynergy = mythicals.filter((m) => {
-      const pkm: Pkm = m in PkmDuos ? PkmDuos[m][0] : m
-      return PokemonFactory.createPokemonFromName(pkm).types.some((t) =>
-        top2Synergies.includes(t)
-      )
-    })
-    const mythicalsCommonSynergy = mythicals.filter((m) => {
-      const pkm: Pkm = m in PkmDuos ? PkmDuos[m][0] : m
-      return PokemonFactory.createPokemonFromName(pkm).types.some((t) =>
-        synergies.includes(t)
-      )
-    })
-
-    const shop: PkmProposition[] = []
-    if (mythicalsTopSynergy.length > 0) {
-      const pkm = pickRandomIn(mythicalsTopSynergy)
-      removeInArray(mythicals, pkm)
-      removeInArray(mythicalsTopSynergy, pkm)
-      removeInArray(mythicalsCommonSynergy, pkm)
-      shop.push(pkm)
-    }
-
-    for (let i = 0; i < 2; i++) {
-      if (mythicalsCommonSynergy.length > 0) {
-        const pkm = pickRandomIn(mythicalsCommonSynergy)
-        removeInArray(mythicals, pkm)
-        removeInArray(mythicalsCommonSynergy, pkm)
-        shop.push(pkm)
+    // ensure we have at least one synergy per proposition
+    if (synergies.length > NB_MYTHICAL_PROPOSITIONS) {
+      synergies = pickNRandomIn(synergies, NB_MYTHICAL_PROPOSITIONS)
+    } else if (synergies.length < NB_MYTHICAL_PROPOSITIONS) {
+      while (synergies.length < NB_MYTHICAL_PROPOSITIONS) {
+        synergies.push(pickRandomIn(Synergy))
       }
     }
 
-    while (shop.length < 6) {
-      const pkm = pickRandomIn(mythicals)
-      removeInArray(mythicals, pkm)
-      shop.push(pkm)
+    for (let i = 0; i < NB_MYTHICAL_PROPOSITIONS; i++) {
+      const synergy = synergies[i]
+      const candidates = mythicals.filter((m) => {
+        const pkm: Pkm = m in PkmDuos ? PkmDuos[m][0] : m
+        return PokemonFactory.createPokemonFromName(pkm).types.includes(synergy)
+      })
+      const selectedProposition = pickRandomIn(
+        candidates.length > 0 ? candidates : mythicals
+      )
+      removeInArray(mythicals, selectedProposition)
+      player.pokemonsProposition.push(selectedProposition)
     }
-
-    shuffleArray(shop)
-    shop.forEach((pkm) => player.pokemonsProposition.push(pkm))
   }
 
   getRandomPokemonFromPool(

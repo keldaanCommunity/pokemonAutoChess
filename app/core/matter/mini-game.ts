@@ -19,11 +19,14 @@ import { pickNRandomIn, pickRandomIn, shuffleArray } from "../../utils/random"
 import { clamp } from "../../utils/number"
 import {
   ItemCarouselStages,
+  Mythical1Shop,
+  Mythical2Shop,
   MythicalPicksStages,
   SynergyTriggers
 } from "../../types/Config"
 import { Synergy } from "../../types/enum/Synergy"
 import { logger } from "../../utils/logger"
+import GameState from "../../rooms/states/game-state"
 
 const PLAYER_VELOCITY = 2
 const ITEM_ROTATION_SPEED = 0.0004
@@ -455,7 +458,8 @@ export class MiniGame {
     }
   }
 
-  stop(players: MapSchema<Player>) {
+  stop(state: GameState) {
+    const players: MapSchema<Player> = state.players
     this.bodies.forEach((body, key) => {
       Composite.remove(this.engine.world, body)
       this.bodies.delete(key)
@@ -496,7 +500,28 @@ export class MiniGame {
       }
 
       if (avatar.portalId) {
-        //TODO: assign mythical propositions
+        const symbols = [...(this.symbols?.values() ?? [])].filter(
+          (symbol) => symbol.portalId === avatar.portalId
+        )
+        if (state.stageLevel === MythicalPicksStages[0]) {
+          state.players.forEach((player: Player) => {
+            state.shop.assignMythicalPropositions(
+              player,
+              Mythical1Shop,
+              symbols.map((s) => s.synergy)
+            )
+          })
+        }
+
+        if (state.stageLevel === MythicalPicksStages[1]) {
+          state.players.forEach((player: Player) => {
+            state.shop.assignMythicalPropositions(
+              player,
+              Mythical2Shop,
+              symbols.map((s) => s.synergy)
+            )
+          })
+        }
       }
 
       this.avatars!.delete(avatar.id)
