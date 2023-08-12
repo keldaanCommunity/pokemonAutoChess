@@ -1,6 +1,11 @@
 import Pokemon from "./pokemon"
 import { FloatingItem } from "./floating-item"
-import { IFloatingItem, IPokemonAvatar, IPortal } from "../../../../types"
+import {
+  IFloatingItem,
+  IPokemonAvatar,
+  IPortal,
+  ISynergySymbol
+} from "../../../../types"
 import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
 import {
@@ -8,12 +13,14 @@ import {
   transformMiniGameYCoordinate
 } from "../../pages/utils/utils"
 import PokemonAvatar from "./pokemon-avatar"
-import { Portal } from "./portal"
+import { Portal, SynergySymbol } from "./portal"
+import { clamp } from "../../../../utils/number"
 
 export default class MinigameManager {
   pokemons: Map<string, Pokemon>
   items: Map<string, FloatingItem>
   portals: Map<string, Portal>
+  symbols: Map<string, SynergySymbol>
   uid: string
   scene: GameScene
   display: boolean
@@ -29,12 +36,34 @@ export default class MinigameManager {
     this.pokemons = new Map<string, Pokemon>()
     this.items = new Map<string, FloatingItem>()
     this.portals = new Map<string, Portal>()
+    this.symbols = new Map<string, SynergySymbol>()
     this.uid = uid
     this.scene = scene
     this.display = false
     this.animationManager = animationManager
     this.buildPokemons(avatars)
     this.buildItems(items)
+    this.scene.events.on("update", () => this.update())
+  }
+
+  update() {
+    const interpolatePosition = (item) => {
+      if (!item.data) return
+      const { serverX, serverY } = item.data.values
+      item.x = Phaser.Math.Linear(
+        item.x,
+        serverX,
+        clamp(100 / Math.abs(serverX - item.x), 0.05, 0.25)
+      )
+      item.y = Phaser.Math.Linear(
+        item.y,
+        serverY,
+        clamp(100 / Math.abs(serverY - item.y), 0.05, 0.25)
+      )
+    }
+    this.items.forEach(interpolatePosition)
+    this.portals.forEach(interpolatePosition)
+    this.symbols.forEach(interpolatePosition)
   }
 
   buildPokemons(avatars: Map<string, IPokemonAvatar>) {
@@ -93,11 +122,11 @@ export default class MinigameManager {
     if (itemUI) {
       switch (field) {
         case "x":
-          itemUI.x = transformMiniGameXCoordinate(value)
+          itemUI.setData("serverX", transformMiniGameXCoordinate(value))
           break
 
         case "y":
-          itemUI.y = transformMiniGameYCoordinate(value)
+          itemUI.setData("serverY", transformMiniGameYCoordinate(value))
           break
 
         case "avatarId":
@@ -112,8 +141,7 @@ export default class MinigameManager {
       this.scene,
       portal.id,
       transformMiniGameXCoordinate(portal.x),
-      transformMiniGameYCoordinate(portal.y),
-      portal.symbols
+      transformMiniGameYCoordinate(portal.y)
     )
     this.portals.set(p.id, p)
   }
@@ -131,15 +159,54 @@ export default class MinigameManager {
     if (portalUI) {
       switch (field) {
         case "x":
-          portalUI.x = transformMiniGameXCoordinate(value)
+          portalUI.setData("serverX", transformMiniGameXCoordinate(value))
           break
 
         case "y":
-          portalUI.y = transformMiniGameYCoordinate(value)
+          portalUI.setData("serverY", transformMiniGameYCoordinate(value))
           break
 
         case "avatarId":
           portalUI.onGrab(value)
+      }
+    }
+  }
+
+  /* Synergy symbols */
+  addSymbol(symbol: ISynergySymbol) {
+    const s = new SynergySymbol(
+      this.scene,
+      symbol.id,
+      transformMiniGameXCoordinate(symbol.x),
+      transformMiniGameYCoordinate(symbol.y),
+      symbol.type
+    )
+    this.symbols.set(s.id, s)
+  }
+
+  removeSymbol(symbolToRemove: ISynergySymbol) {
+    const symbolUI = this.symbols.get(symbolToRemove.id)
+    if (symbolUI) {
+      symbolUI.destroy(true)
+    }
+    this.symbols.delete(symbolToRemove.id)
+  }
+
+  changeSymbol(symbol: ISynergySymbol, field: string, value: any) {
+    const symbolUI = this.symbols.get(symbol.id)
+    if (symbolUI) {
+      switch (field) {
+        case "x":
+          symbolUI.setData("serverX", transformMiniGameXCoordinate(value))
+          break
+
+        case "y":
+          symbolUI.setData("serverY", transformMiniGameYCoordinate(value))
+          break
+
+        case "portalId":
+          const portal = this.portals.get(value)
+          break
       }
     }
   }

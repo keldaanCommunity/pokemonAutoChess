@@ -6,13 +6,7 @@ export class Portal extends GameObjects.Container {
   sprite: GameObjects.Sprite
   id: string
 
-  constructor(
-    scene: Phaser.Scene,
-    id: string,
-    x: number,
-    y: number,
-    symbols: Synergy[]
-  ) {
+  constructor(scene: Phaser.Scene, id: string, x: number, y: number) {
     super(scene, x, y)
     this.id = id
     this.sprite = new GameObjects.Sprite(scene, 0, 0, "portal")
@@ -20,17 +14,25 @@ export class Portal extends GameObjects.Container {
     this.sprite.setScale(2)
     this.add(this.sprite)
     this.scene.add.existing(this)
-
-    for (let symbol of symbols) {
-      //TODO: draw symbols
-    }
-  }
-
-  update(...args: any[]): void {
-    //TODO: rotate symbols in the portal
   }
 
   onGrab(playerId) {
     const currentPlayerId: string = (this.scene as GameScene).uid!
+  }
+}
+
+export class SynergySymbol extends GameObjects.Sprite {
+  id: string
+
+  constructor(
+    scene: Phaser.Scene,
+    id: string,
+    x: number,
+    y: number,
+    type: Synergy
+  ) {
+    super(scene, x, y, "types", type + ".png")
+    this.id = id
+    this.scene.add.existing(this)
   }
 }

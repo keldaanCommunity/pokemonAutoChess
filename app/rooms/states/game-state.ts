@@ -16,7 +16,7 @@ import {
 } from "@colyseus/schema"
 import { PkmProposition } from "../../types/enum/Pokemon"
 import { pickRandomIn } from "../../utils/random"
-import { Portal } from "../../models/colyseus-models/portal"
+import { Portal, SynergySymbol } from "../../models/colyseus-models/portal"
 
 export default class GameState extends Schema {
   @type("string") afterGameId = ""
@@ -27,6 +27,7 @@ export default class GameState extends Schema {
     new MapSchema<PokemonAvatarModel>()
   @type({ map: FloatingItem }) floatingItems = new MapSchema<FloatingItem>()
   @type({ map: Portal }) portals = new MapSchema<Portal>()
+  @type({ map: SynergySymbol }) symbols = new MapSchema<SynergySymbol>()
   @type(["string"]) additionalPokemons = new ArraySchema<PkmProposition>()
   @type("uint8") stageLevel = 1
   @type("string") mapName: string

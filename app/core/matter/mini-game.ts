@@ -1,6 +1,6 @@
 import { PokemonAvatarModel } from "../../models/colyseus-models/pokemon-avatar"
 import { FloatingItem } from "../../models/colyseus-models/floating-item"
-import { Portal } from "../../models/colyseus-models/portal"
+import { Portal, SynergySymbol } from "../../models/colyseus-models/portal"
 import { MapSchema } from "@colyseus/schema"
 import {
   Bodies,
@@ -15,19 +15,26 @@ import Player from "../../models/colyseus-models/player"
 import { getOrientation } from "../../public/src/pages/utils/utils"
 import { PokemonActionState } from "../../types/enum/Game"
 import { BasicItems, Item } from "../../types/enum/Item"
-import { pickRandomIn } from "../../utils/random"
+import { pickNRandomIn, pickRandomIn, shuffleArray } from "../../utils/random"
 import { clamp } from "../../utils/number"
-import { ItemCarouselStages, MythicalPicksStages } from "../../types/Config"
+import {
+  ItemCarouselStages,
+  MythicalPicksStages,
+  SynergyTriggers
+} from "../../types/Config"
+import { Synergy } from "../../types/enum/Synergy"
 
 const PLAYER_VELOCITY = 2
 const ITEM_ROTATION_SPEED = 0.0004
 const PORTAL_ROTATION_SPEED = 0.0003
 const CAROUSEL_RADIUS = 140
+const NB_SYMBOLS_PER_PLAYER = 4
 
 export class MiniGame {
   avatars: MapSchema<PokemonAvatarModel> | undefined
   items: MapSchema<FloatingItem> | undefined
   portals: MapSchema<Portal> | undefined
+  symbols: MapSchema<SynergySymbol> | undefined
   bodies: Map<string, Body>
   alivePlayers: Player[]
   engine: Engine
@@ -163,11 +170,13 @@ export class MiniGame {
   create(
     avatars: MapSchema<PokemonAvatarModel>,
     items: MapSchema<FloatingItem>,
-    portals: MapSchema<Portal>
+    portals: MapSchema<Portal>,
+    symbols: MapSchema<SynergySymbol>
   ) {
     this.avatars = avatars
     this.items = items
     this.portals = portals
+    this.symbols = symbols
   }
 
   initialize(players: MapSchema<Player>, stageLevel: number) {
@@ -252,6 +261,8 @@ export class MiniGame {
       this.bodies.set(portal.id, body)
       Composite.add(this.engine.world, body)
     }
+
+    this.pickRandomSynergySymbols()
   }
 
   update(dt: number) {
@@ -275,6 +286,18 @@ export class MiniGame {
         const portal = this.portals.get(id)!
         portal.x = body.position.x
         portal.y = body.position.y
+        const t = this.engine.timing.timestamp * ITEM_ROTATION_SPEED
+        const symbols = [...this.symbols!.values()].filter(
+          (symbol) => symbol.portalId === portal.id
+        )
+        symbols.forEach((symbol) => {
+          symbol.x =
+            portal.x +
+            Math.cos(t + (Math.PI * 2 * symbol.index) / symbols.length) * 25
+          symbol.y =
+            portal.y +
+            Math.sin(t + (Math.PI * 2 * symbol.index) / symbols.length) * 25
+        })
       }
     })
   }
@@ -290,6 +313,53 @@ export class MiniGame {
       items.push(item)
     }
     return items
+  }
+
+  pickRandomSynergySymbols() {
+    this.avatars?.forEach((avatar) => {
+      const player = this.alivePlayers.find((p) => p.id === avatar.id)!
+      const synergiesTriggerLevels: [Synergy, number][] = Array.from(
+        player.synergies
+      ).map(([type, value]) => {
+        const levelReached = SynergyTriggers[type]
+          .filter((n) => n <= value)
+          .at(-1)
+        return [
+          type,
+          levelReached ? SynergyTriggers[type].indexOf(levelReached) + 1 : 0
+        ]
+      })
+      const candidatesSymbols: Synergy[] = []
+      synergiesTriggerLevels.forEach(([type, level]) => {
+        // add as many symbols as synergy levels reached
+        candidatesSymbols.push(...new Array(level).fill(type))
+      })
+      if (candidatesSymbols.length < 4) {
+        // if player has reached less than 4 synergy level triggers, we complete with random other incomplete synergies
+        const incompleteSynergies = synergiesTriggerLevels
+          .filter(([type, level]) => level === 0)
+          .map(([type, level]) => type)
+        candidatesSymbols.push(
+          ...pickNRandomIn(incompleteSynergies, 4 - candidatesSymbols.length)
+        )
+      }
+
+      const symbols = pickNRandomIn(candidatesSymbols, NB_SYMBOLS_PER_PLAYER)
+      symbols.forEach((type, i) => {
+        const symbol = new SynergySymbol(avatar.x, avatar.y, type, i)
+        this.symbols?.set(symbol.id, symbol)
+      })
+    })
+
+    // randomly distribute symbols accross portals
+    const portalIds = shuffleArray([...this.portals!.keys()])
+    const symbols = shuffleArray([...this.symbols!.values()])
+    symbols.forEach((symbol, i) => {
+      setTimeout(() => {
+        symbol.index = Math.floor(i / portalIds.length)
+        symbol.portalId = portalIds[i % portalIds.length]
+      }, 1000 + 1000 * (i / symbols.length))
+    })
   }
 
   applyVector(id: string, x: number, y: number) {
@@ -361,16 +431,16 @@ export class MiniGame {
 
       if (avatar.itemId) {
         const item = this.items?.get(avatar.itemId)
-
         if (item && player && !player.isBot) {
           player.items.add(item.name)
         }
-        this.avatars!.delete(avatar.id)
       }
 
       if (avatar.portalId) {
         //TODO: assign mythical propositions
       }
+
+      this.avatars!.delete(avatar.id)
     })
 
     if (this.items) {
@@ -380,8 +450,14 @@ export class MiniGame {
     }
 
     if (this.portals) {
-      this.portals.forEach((item) => {
-        this.portals!.delete(item.id)
+      this.portals.forEach((portal) => {
+        this.portals!.delete(portal.id)
+      })
+    }
+
+    if (this.symbols) {
+      this.symbols.forEach((symbol) => {
+        this.symbols!.delete(symbol.id)
       })
     }
   }

@@ -1948,7 +1948,7 @@ export default class AnimationManager {
         end: 7,
         zeroPad: 3
       }),
-      duration: 333,
+      duration: 600,
       repeat: -1
     })
   }

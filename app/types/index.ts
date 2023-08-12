@@ -312,7 +312,13 @@ export interface IPortal {
   id: string
   x: number
   y: number
-  symbols: Synergy[]
+}
+
+export interface ISynergySymbol {
+  id: string
+  x: number
+  y: number
+  type: Synergy
 }
 
 export interface IPlayer {
