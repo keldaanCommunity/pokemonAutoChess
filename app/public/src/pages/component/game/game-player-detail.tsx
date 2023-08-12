@@ -49,7 +49,7 @@ export default function GamePlayerDetail(props: {
         {props.history.map((record, i) => {
           return (
             <div
-              key={i}
+              key={`${record.name}${i}_game-player-detail`}
               style={{
                 display: "flex",
                 justifyContent: "space-around",
@@ -79,8 +79,8 @@ export default function GamePlayerDetail(props: {
         {synergyList.map((synergy, i) => {
           return (
             <div
-              key={i}
-              style={{
+            key={`${synergy}${i}_game-player-detail`}
+            style={{
                 display: "flex",
                 justifyContent: "space-around",
                 alignItems: "center",
