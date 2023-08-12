@@ -20,5 +20,6 @@ Gligar,Gliscor,Shellder,Cloyster, Furret, Sentret
 
 - Internationalization with languages: de, en es, fr, it, ja, nl pt
 - New icons for status
+- Discord and Donate buttons now open links in a new tab
 
 # Misc
