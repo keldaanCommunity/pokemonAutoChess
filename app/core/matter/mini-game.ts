@@ -500,28 +500,24 @@ export class MiniGame {
         }
       }
 
-      if (avatar.portalId) {
+      if (avatar.portalId && player) {
         const symbols = [...(this.symbols?.values() ?? [])].filter(
           (symbol) => symbol.portalId === avatar.portalId
         )
         if (state.stageLevel === PortalCarouselStages[0]) {
-          state.players.forEach((player: Player) => {
-            state.shop.assignMythicalPropositions(
-              player,
-              Mythical1Shop,
-              symbols.map((s) => s.synergy)
-            )
-          })
+          state.shop.assignMythicalPropositions(
+            player,
+            Mythical1Shop,
+            symbols.map((s) => s.synergy)
+          )
         }
 
         if (state.stageLevel === PortalCarouselStages[1]) {
-          state.players.forEach((player: Player) => {
-            state.shop.assignMythicalPropositions(
-              player,
-              Mythical2Shop,
-              symbols.map((s) => s.synergy)
-            )
-          })
+          state.shop.assignMythicalPropositions(
+            player,
+            Mythical2Shop,
+            symbols.map((s) => s.synergy)
+          )
         }
       }
 
