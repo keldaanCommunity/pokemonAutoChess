@@ -55,7 +55,7 @@
 .main-lobby ul.react-tabs__tab-list {
   display: flex;
   font-size: 16px;
-  overflow-x: scroll;
+  overflow-x: auto;
   overflow-y: hidden;
 }
 
@@ -123,8 +123,6 @@
   }
 }
 
-
-
 .main-lobby {
   height: 100%;
   display: flex;
@@ -147,4 +145,3 @@
 .lobby-container {
   padding: 20px;
 }
-
