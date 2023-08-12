@@ -338,7 +338,6 @@ export default class Pokemon extends DraggableObject {
     }
 
     if (pointer.rightButtonDown()) {
-      console.log(this, this.scene)
       if (this.scene && !this.detail) {
         this.openDetail()
       } else {
