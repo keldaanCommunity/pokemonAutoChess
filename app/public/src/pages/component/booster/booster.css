@@ -7,7 +7,7 @@
   position: relative;
   margin: 1vw 0 0 0;
   height: 75vh;
-  overflow-y: auto;
+  overflow: hidden;
   background-image: url("assets/ui/back1.png");
   background-size: cover;
   display: flex;
