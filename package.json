@@ -74,7 +74,6 @@
     "phaser3-rex-plugins": "^1.1.80",
     "react": "^17.0.2",
     "react-bootstrap": "^2.7.0",
-    "react-bootstrap-sidebar-menu": "^2.0.3",
     "react-circular-progressbar": "^2.1.0",
     "react-dom": "^17.0.2",
     "react-firebaseui": "^6.0.0",
