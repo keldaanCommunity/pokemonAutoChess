@@ -19,6 +19,7 @@ Gligar,Gliscor
 # UI
 
 - Internationalization with languages: de, en es, fr, it, ja, nl pt
+- Discord and Donate buttons now open links in a new tab
 
 # Misc
 
