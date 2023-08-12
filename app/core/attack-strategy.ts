@@ -19,7 +19,7 @@ import { effectInLine, OrientationArray } from "../utils/orientation"
 import { logger } from "../utils/logger"
 import { DEFAULT_ATK_SPEED } from "../types/Config"
 import { max, min } from "../utils/number"
-import { distanceC } from "../utils/distance"
+import { distanceC, distanceM } from "../utils/distance"
 import { Transfer } from "../types"
 import { Passive } from "../types/enum/Passive"
 import { AbilityStrategy } from "./abilities"
@@ -1178,8 +1178,6 @@ export class KingShieldStrategy extends AttackStrategy {
     if (farthestTarget) {
       const x = farthestTarget.x
       const y = farthestTarget.y
-      const oldX = pokemon.positionX
-      const oldY = pokemon.positionY
 
       const tg = board.getValue(x, y)
 
@@ -1204,8 +1202,6 @@ export class PoisonJabStrategy extends AttackStrategy {
     if (farthestTarget) {
       const x = farthestTarget.x
       const y = farthestTarget.y
-      const oldX = pokemon.positionX
-      const oldY = pokemon.positionY
 
       const tg = board.getValue(x, y)
 
@@ -1467,19 +1463,21 @@ export class RelicSongStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const duration = Math.round(2000 * (1 + pokemon.ap / 200))
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
-      if (tg && pokemon.team != tg.team) {
-        tg.status.triggerSleep(duration, tg)
-        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
-          id: pokemon.simulation.id,
-          skill: pokemon.skill,
-          positionX: tg.positionX,
-          positionY: tg.positionX,
-          orientation: tg.orientation
-        })
-      }
-    })
+    if (pokemon.count.ult % 3 === 0) {
+      const duration = Math.round(2000 * (1 + pokemon.ap / 200))
+      board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
+        if (tg && pokemon.team != tg.team) {
+          tg.status.triggerSleep(duration, tg)
+          pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+            id: pokemon.simulation.id,
+            skill: pokemon.skill,
+            positionX: tg.positionX,
+            positionY: tg.positionX,
+            orientation: tg.orientation
+          })
+        }
+      })
+    }
   }
 }
 
@@ -1710,16 +1708,16 @@ export class PetalDanceStrategy extends AttackStrategy {
 
     switch (pokemon.stars) {
       case 1:
-        damage = 15
-        count = 2
+        damage = 20
+        count = 3
         break
       case 2:
         damage = 30
         count = 4
         break
       case 3:
-        damage = 60
-        count = 6
+        damage = 50
+        count = 5
         break
       default:
         break
@@ -2702,7 +2700,7 @@ export class CalmMindStrategy extends AttackStrategy {
   }
 }
 
-export class ComsicPowerStrategy extends AttackStrategy {
+export class CosmicPowerStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3916,12 +3914,21 @@ export class MetronomeStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
 
-    const strategy = pickRandomIn(
-      (Object.keys(Ability) as Ability[])
-        .filter((a) => CopyableAbility[a])
-        .map((a) => AbilityStrategy[a])
+    const skill = pickRandomIn(
+      (Object.keys(Ability) as Ability[]).filter((a) => CopyableAbility[a])
     )
-    strategy.process(pokemon, state, board, target, crit)
+
+    pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+      id: pokemon.simulation.id,
+      skill: skill,
+      positionX: pokemon.positionX,
+      positionY: pokemon.positionY,
+      targetX: target.positionX,
+      targetY: target.positionY,
+      orientation: pokemon.orientation
+    })
+
+    AbilityStrategy[skill].process(pokemon, state, board, target, crit)
   }
 }
 
@@ -4121,7 +4128,7 @@ export class ForecastStrategy extends AttackStrategy {
       if (p && pokemon.team === p.team) {
         p.handleShield(10, pokemon, true)
         if (pokemon.name === Pkm.CASTFORM_SUN) {
-          p.addAttack(5, true)
+          p.addAttack(3, true)
         }
         if (pokemon.name === Pkm.CASTFORM_RAIN) {
           p.setMana(p.mana + Math.round(20 * (1 + pokemon.ap / 100)))
@@ -4447,7 +4454,7 @@ export class SearingShotStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = 20
+    const damage = 40
     const cells = board.getCellsInRadius(
       pokemon.positionX,
       pokemon.positionY,
@@ -4505,7 +4512,7 @@ export class CounterStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const damage = Math.max(0, pokemon.hp - pokemon.life)
-    const cells = board.getAdjacentCells(target.positionX, target.positionY)
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
 
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
@@ -5044,5 +5051,75 @@ export class MagicBounceStrategy extends AttackStrategy {
     const timer =
       pokemon.stars === 3 ? 12000 : pokemon.stars === 2 ? 6000 : 3000
     pokemon.status.triggerMagicBounce(timer)
+  }
+}
+
+export class ShellSmashStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = pokemon.stars === 1 ? 15 : 30
+    const cells = board.getAdjacentCells(target.positionX, target.positionY)
+    cells.forEach((cell) => {
+      if (cell && cell.value && cell.value.team !== pokemon.team) {
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
+    })
+    pokemon.addAbilityPower(20, false)
+    pokemon.addAttack(2, false)
+    pokemon.addAttackSpeed(20, false)
+    pokemon.addDefense(-1, false)
+    pokemon.addSpecialDefense(-1, false)
+  }
+}
+
+export class HelpingHandStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const buffs = pokemon.stars === 3 ? 6 : pokemon.stars === 2 ? 4 : 2
+    const allies = new Array<{ pkm: PokemonEntity; distance: number }>()
+    board.forEach((x, y, cell) => {
+      if (cell && cell.team === pokemon.team && pokemon.id !== cell.id) {
+        allies.push({
+          pkm: cell,
+          distance: distanceM(
+            pokemon.positionX,
+            pokemon.positionY,
+            cell.positionX,
+            cell.positionY
+          )
+        })
+      }
+    })
+    allies.sort((a, b) => a.distance - b.distance)
+    for (let i = 0; i < buffs; i++) {
+      const ally = allies[i]?.pkm
+      if (ally) {
+        ally.status.doubleDamage = true
+        ally.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: Ability.HELPING_HAND,
+          positionX: ally.positionX,
+          positionY: ally.positionY
+        })
+      }
+    }
   }
 }

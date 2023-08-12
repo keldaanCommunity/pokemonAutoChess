@@ -53,7 +53,7 @@ export function addIconsToDescription(description: string, tier = 0, ap = 0) {
             className="description-icon status"
             title={t(`status_description.${token}`)}
           >
-            <img src={`assets/icons/${token}.png`} />
+            <img src={`assets/icons/${token}.svg`} />
             <span className="status-label">{t(`status.${token}`)}</span>
           </span>
         )

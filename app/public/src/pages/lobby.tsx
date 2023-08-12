@@ -72,7 +72,7 @@ import { cc } from "./utils/jsx"
 import "./lobby.css"
 import { BotManagerPanel } from "./component/bot-builder/bot-manager-panel"
 import { useTranslation } from "react-i18next"
-import { LanguageButton } from "./component/buttons/language-button"
+import { OptionsButton } from "./component/buttons/options-button"
 import i18n from "../i18n"
 
 export default function Lobby() {
@@ -95,7 +95,6 @@ export default function Lobby() {
   )
 
   const user = useAppSelector((state) => state.lobby.user)
-  const language = useAppSelector((state) => state.lobby.language)
 
   const numberOfBooster = user?.booster ?? 0
 
@@ -361,19 +360,6 @@ export default function Lobby() {
     return (
       <main className="lobby">
         <nav>
-          <Link to="/" style={{ textDecoration: "none" }}>
-            <button
-              className="bubbly red"
-              onClick={async () => {
-                await room?.leave()
-                await firebase.auth().signOut()
-                dispatch(leaveLobby())
-                dispatch(logOut())
-              }}
-            >
-              {t("sign_out")}
-            </button>
-          </Link>
           <button
             className="bubbly blue"
             onClick={() => {
@@ -448,7 +434,20 @@ export default function Lobby() {
           <DiscordButton />
           <DonateButton />
           <PolicyButton />
-          <LanguageButton />
+          <OptionsButton />
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <button
+              className="bubbly red"
+              onClick={async () => {
+                await room?.leave()
+                await firebase.auth().signOut()
+                dispatch(leaveLobby())
+                dispatch(logOut())
+              }}
+            >
+              {t("sign_out")}
+            </button>
+          </Link>
         </nav>
 
         <TabMenu />
