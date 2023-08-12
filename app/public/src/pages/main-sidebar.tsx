@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react"
+import React, { useCallback, useEffect, useRef, useState } from "react"
 import firebase from "firebase/compat/app"
 import DiscordButton from "./component/buttons/discord-button"
 import DonateButton from "./component/buttons/donate-button"
@@ -40,6 +40,7 @@ export function MainSidebar(props: MainSidebarProps) {
     (nextModal: Modals) => setModal(nextModal),
     []
   )
+  const sidebarRef = useRef<HTMLHtmlElement>(null)
 
   const dispatch = useAppDispatch()
   const { t } = useTranslation()
@@ -87,12 +88,43 @@ export function MainSidebar(props: MainSidebarProps) {
     dispatch(logOut())
   }, [dispatch, lobby])
 
+  useEffect(() => {
+    if (!sidebarRef.current) {
+      return
+    }
+
+    const ref = sidebarRef.current
+
+    const enableSidebar = () => {
+      if (collapsed) {
+        setCollapsed(false)
+      }
+    }
+
+    const disableSidebar = () => {
+      if (!collapsed) {
+        setCollapsed(true)
+      }
+    }
+
+    ref.addEventListener("mouseenter", enableSidebar)
+    ref.addEventListener("mouseleave", disableSidebar)
+
+    return () => {
+      if (ref) {
+        ref.removeEventListener("mouseenter", enableSidebar)
+        ref.removeEventListener("mouseleave", disableSidebar)
+      }
+    }
+  }, [collapsed])
+
   return (
     <Sidebar
       collapsed={collapsed}
       backgroundColor="#61738a"
       className="sidebar"
       breakPoint="lg"
+      ref={sidebarRef}
     >
       <Menu>
         {showBackButton && (
@@ -152,7 +184,7 @@ export function MainSidebar(props: MainSidebarProps) {
         <NavLink
           text={t("news")}
           location="news"
-          icon="📰"
+          svg="newspaper"
           handleClick={changeModal}
         />
         <NavLink
@@ -167,12 +199,6 @@ export function MainSidebar(props: MainSidebarProps) {
           text={t("sign_out")}
           menuItemColor="red"
           onClick={signOut}
-        />
-
-        <NavLink
-          onClick={() => setCollapsed(!collapsed)}
-          png={collapsed ? "arrow-right" : "arrow-left"}
-          menuItemColor=""
         />
       </Menu>
       {!collapsed ? (
