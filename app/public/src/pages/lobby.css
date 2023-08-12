@@ -103,25 +103,6 @@
   justify-content: space-between;
 }
 
-@media (max-width: 640px) {
-  .lobby {
-    overflow-y: auto;
-    display: block;
-  }
-
-  .lobby nav {
-    flex-wrap: wrap;
-  }
-
-  .lobby h1 {
-    font-size: 4vw;
-  }
-
-  .lobby > .nes-container {
-    margin-top: 1em;
-    max-height: 80vh;
-  }
-}
 
 
 
@@ -148,3 +129,31 @@
   padding: 20px;
 }
 
+@media (max-width: 640px) {
+  .lobby nav {
+    flex-wrap: wrap;
+  }
+
+  .lobby h1 {
+    font-size: 4vw;
+  }
+
+  .lobby > .nes-container {
+    margin-top: 1em;
+    max-height: 80vh;
+  }
+
+  .lobby-container {
+    padding: 0;
+  }
+
+  .main-lobby {
+    flex-direction: column;
+    overflow-y: scroll;
+  }
+
+  .main-lobby.main-lobby > div {
+    width: 100%;
+    min-height: 300px;
+  }
+}
