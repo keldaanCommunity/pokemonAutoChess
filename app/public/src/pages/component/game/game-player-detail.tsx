@@ -1,6 +1,8 @@
-import React from "react"
+import React, { useMemo } from "react"
 import HistoryItem from "../../../../../models/colyseus-models/history-item"
 import { BattleResult } from "../../../../../types/enum/Game"
+import Synergies from "../../../../../models/colyseus-models/synergies"
+import { SynergyTriggers } from "../../../../../types/Config"
 import { ArraySchema } from "@colyseus/schema"
 import { Life } from "../icons/life"
 import { Money } from "../icons/money"
@@ -13,7 +15,16 @@ export default function GamePlayerDetail(props: {
   money: number
   level: number
   history: ArraySchema<HistoryItem>
+  synergies: Synergies
 }) {
+  const synergyList = useMemo(
+    () =>
+      Object.entries(props.synergies)
+        .filter(([syn, val]) => val >= SynergyTriggers[syn][0])
+        .map(([syn]) => syn),
+    [props.synergies]
+  )
+
   return (
     <div>
       <div
@@ -60,6 +71,28 @@ export default function GamePlayerDetail(props: {
                 src={getAvatarSrc(record.avatar)}
               />
               <p>{record.name.slice(0, 4)}</p>
+            </div>
+          )
+        })}
+      </div>
+      <div style={{ display: "flex", justifyContent: "start" }}>
+        {synergyList.map((synergy, i) => {
+          return (
+            <div
+              key={i}
+              style={{
+                display: "flex",
+                justifyContent: "space-around",
+                alignItems: "center",
+                flexFlow: "column"
+              }}
+            >
+              <img
+                src={`assets/types/${synergy}.svg`}
+                alt={synergy}
+                title={synergy}
+                className="synergy-icon"
+              />
             </div>
           )
         })}
