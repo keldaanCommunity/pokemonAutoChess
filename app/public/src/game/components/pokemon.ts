@@ -253,6 +253,13 @@ export default class Pokemon extends DraggableObject {
     this.setDepth(5)
 
     this.shouldShowTooltipOnHover = loadPreferences().pokemonDetailsOnHover
+
+    // prevents persisting details between game transitions
+    const s = <GameScene>this.scene
+    if (s.lastPokemonDetail) {
+      s.lastPokemonDetail.closeDetail()
+      s.lastPokemonDetail = undefined
+    }
   }
 
   get isOnBench(): boolean {
@@ -326,8 +333,13 @@ export default class Pokemon extends DraggableObject {
   onPointerDown(pointer: Phaser.Input.Pointer) {
     super.onPointerDown(pointer)
 
-    if (pointer.rightButtonDown() && !this.shouldShowTooltipOnHover) {
-      if (!this.detail) {
+    if (!this.shouldShowTooltip) {
+      return;
+    }
+
+    if (pointer.rightButtonDown()) {
+      console.log(this, this.scene)
+      if (this.scene && !this.detail) {
         this.openDetail()
       } else {
         this.closeDetail()
@@ -347,6 +359,10 @@ export default class Pokemon extends DraggableObject {
 
   onPointerOver() {
     super.onPointerOver()
+
+    if (!this.shouldShowTooltip) {
+      return
+    }
 
     // recheck preferences
     this.shouldShowTooltipOnHover = loadPreferences().pokemonDetailsOnHover
