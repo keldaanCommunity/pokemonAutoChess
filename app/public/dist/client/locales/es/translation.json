@@ -1803,10 +1803,10 @@
   "private_lobby": "Vestíbulo privado",
   "change_room_name": "Cambiar el nombre de la habitación",
   "add_bot": "Agregar robot",
-  "easy_bot": "Fácil (&lt;800)",
+  "easy_bot": "Fácil (<800)",
   "normal_bot": "normal (800-1099)",
   "hard_bot": "Duro (1100-1400)",
-  "extreme_bot": "Extremo (&gt;1400)",
+  "extreme_bot": "Extremo (>1400)",
   "custom_bot": "Costumbre",
   "room_leader": "Líder de sala",
   "room_password": "Contraseña de la habitación",
@@ -1877,5 +1877,10 @@
   "pkm.SHELLDER": "desgranador",
   "pkm.CLOYSTER": "claustro",
   "ability_description.SHELL_SMASH": "Otorga [15, 30, SP] ESPECIAL a los enemigos adyacentes; gana 2 ATK, 20% AP y 20% ATK_SPEED, y pierde 1 DEF, 1 SPE_DEF",
-  "effect_description.COOL_BREEZE": "+1 ESP_DEF"
+  "effect_description.COOL_BREEZE": "+1 ESP_DEF",
+  "ability.HELPING_HAND": "mano amiga",
+  "pkm.FURRET": "furret",
+  "pkm.SENTRET": "centinela",
+  "ability_description.HELPING_HAND": "Duplica el daño del siguiente hechizo lanzado por los [2,4,6] aliados más cercanos",
+  "language": "Idioma"
 }

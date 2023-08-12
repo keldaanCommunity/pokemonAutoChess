@@ -583,7 +583,9 @@
     "GLIGAR": "Gligar",
     "GLISCOR": "Gliscor",
     "SHELLDER": "Shellder",
-    "CLOYSTER": "Claustro"
+    "CLOYSTER": "Claustro",
+    "FURRET": "Furret",
+    "SENTRET": "Sentret"
   },
   "emotion": {
     "Teary-Eyed": "Olhos marejados",
@@ -804,7 +806,8 @@
     "HIDDEN_POWER_QM": "Poder escondido (?)",
     "HIDDEN_POWER_EM": "Poder escondido (!)",
     "POISON_JAB": "Jab Venenoso",
-    "SHELL_SMASH": "Shell Smash"
+    "SHELL_SMASH": "Shell Smash",
+    "HELPING_HAND": "Mão amiga"
   },
   "ability_description": {
     "DEFAULT": "Padrão",
@@ -1003,7 +1006,8 @@
     "RELIC_SONG": "Emite uma nota. Após a terceira nota, DORMIR todo o time inimigo por [2,SP=0.5] segundos",
     "PETAL_DANCE": "Distribua [20,30,50,SP] ESPECIAL a [3,4,5] Pokémon inimigos",
     "FORECAST": "Dá [10,SP] SHIELD ao seu time, além de bônus adicional dependendo do clima:\n Sol: também dá [3,SP] ATK\n Chuva: também dá [20,SP] MANA\n Snow: também dá [2,SP] DEF / SPE_DEF",
-    "SHELL_SMASH": "Oferece [15, 30, SP] ESPECIAL aos inimigos adjacentes; ganhe 2 ATK, 20% AP e 20% ATK_SPEED e perca 1 DEF, 1 SPE_DEF"
+    "SHELL_SMASH": "Oferece [15, 30, SP] ESPECIAL aos inimigos adjacentes; ganhe 2 ATK, 20% AP e 20% ATK_SPEED e perca 1 DEF, 1 SPE_DEF",
+    "HELPING_HAND": "Dobre o dano do próximo feitiço lançado pelos aliados mais próximos [2,4,6]"
   },
   "effect": {
     "INGRAIN": "Inerente",
@@ -1862,10 +1866,10 @@
   "private_lobby": "Lobby privado",
   "change_room_name": "Alterar nome da sala",
   "add_bot": "Adicionar bot",
-  "easy_bot": "Fácil (&lt;800)",
+  "easy_bot": "Fácil (<800)",
   "normal_bot": "Normal (800-1099)",
   "hard_bot": "Difícil (1100-1400)",
-  "extreme_bot": "Extremo (&gt;1400)",
+  "extreme_bot": "Extremo (>1400)",
   "custom_bot": "Personalizado",
   "room_leader": "líder de sala",
   "room_password": "senha da sala",
@@ -1923,5 +1927,6 @@
     "MYTHICAL": "Mítico",
     "HATCH": "Escotilha",
     "SPECIAL": "Especial"
-  }
+  },
+  "language": "Linguagem"
 }

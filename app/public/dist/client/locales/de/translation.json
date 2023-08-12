@@ -1803,10 +1803,10 @@
   "private_lobby": "Private Lobby",
   "change_room_name": "Raumnamen ändern",
   "add_bot": "Bot hinzufügen",
-  "easy_bot": "Einfach (&lt;800)",
+  "easy_bot": "Einfach (<800)",
   "normal_bot": "Normal (800-1099)",
   "hard_bot": "Schwer (1100-1400)",
-  "extreme_bot": "Extrem (&gt;1400)",
+  "extreme_bot": "Extrem (>1400)",
   "custom_bot": "Brauch",
   "room_leader": "Raumleiter",
   "room_password": "Zimmer Passwort",
@@ -1877,5 +1877,10 @@
   "pkm.SHELLDER": "Shellder",
   "pkm.CLOYSTER": "Cloyster",
   "ability_description.SHELL_SMASH": "Fügt benachbarten Feinden [15, 30, SP] SPECIAL zu; Gewinne 2 ATK, 20 % AP und 20 % ATK_SPEED und verliere 1 DEF, 1 SPE_DEF",
-  "effect_description.COOL_BREEZE": "+1 SPE_DEF"
+  "effect_description.COOL_BREEZE": "+1 SPE_DEF",
+  "ability.HELPING_HAND": "Helfende Hand",
+  "pkm.FURRET": "Furret",
+  "pkm.SENTRET": "Sentret",
+  "ability_description.HELPING_HAND": "Verdoppeln Sie den Schaden des nächsten Zaubers, der von den nächsten [2,4,6] Verbündeten gewirkt wird",
+  "language": "Sprache"
 }

@@ -103,7 +103,7 @@ export default function PokemonCollection(props: {
       <div className="nes-container">
         <Tabs>
           <TabList>
-            <Tab key="title-all">ALL</Tab>
+            <Tab key="title-all">{t("ALL")}</Tab>
             {(Object.keys(Synergy) as Synergy[]).map((type) => {
               return (
                 <Tab key={"title-" + type}>

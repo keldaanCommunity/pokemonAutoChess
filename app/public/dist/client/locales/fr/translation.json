@@ -595,7 +595,9 @@
     "GLIGAR": "Scorplane",
     "GLISCOR": "Scorvol",
     "SHELLDER": "Décortiqueur",
-    "CLOYSTER": "Cloyster"
+    "CLOYSTER": "Cloyster",
+    "FURRET": "Fourreau",
+    "SENTRET": "Sentret"
   },
   "ability": {
     "PECK": "Picpic",
@@ -794,7 +796,8 @@
     "HIDDEN_POWER_EM": "Puissance Cachée (!)",
     "DEFAULT": "Défaut",
     "POISON_JAB": "Direct Toxik",
-    "SHELL_SMASH": "Écrasement d'obus"
+    "SHELL_SMASH": "Écrasement d'obus",
+    "HELPING_HAND": "Coup de main"
   },
   "ability_description": {
     "SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés",
@@ -993,7 +996,8 @@
     "RELIC_SONG": "Émet une note. Après la troisième note, DORMIR toute l'équipe ennemie pendant [2,SP=0.5] secondes",
     "PETAL_DANCE": "Inflige [20,30,50,SP] SPÉCIAL à [3,4,5] Pokémon ennemis",
     "FORECAST": "Donne [10, SP] BOUCLIER à votre équipe, plus un bonus supplémentaire en fonction de la météo :\n Soleil : donne également [3, SP] ATK\n Pluie : donne également [20,SP] MANA\n Neige : donne également [2,SP] DEF / SPE_DEF",
-    "SHELL_SMASH": "Inflige [15, 30, SP] SPÉCIAL aux ennemis adjacents ; gagnez 2 ATK, 20% AP et 20% ATK_SPEED, et perdez 1 DEF, 1 SPE_DEF"
+    "SHELL_SMASH": "Inflige [15, 30, SP] SPÉCIAL aux ennemis adjacents ; gagnez 2 ATK, 20% AP et 20% ATK_SPEED, et perdez 1 DEF, 1 SPE_DEF",
+    "HELPING_HAND": "Double les dégâts du prochain sort lancé par les alliés [2,4,6] les plus proches"
   },
   "emotion": {
     "Teary-Eyed": "Larmoyant",
@@ -1609,7 +1613,7 @@
     "SURVIVOR": "Gagnez une partie avec seulement 1 HP restant",
     "GAMBLER": "Actualisez la boutique plus de 60 fois en une seule partie",
     "BOT_BUILDER": "Atteignez le niveau 10 pour débloquer le Constructeur de Bots",
-    "SHINY_SEEKER": "Avoir plus de 30 avatars de pokémons chromatiques",
+    "SHINY_SEEKER": "Avoir plus de 30 avatars de pokémons shiny",
     "ARCHEOLOGIST": "Déchiffrez le message secret des Zarbi",
     "DENTIST": "Débloquer le portrait Arbok en colère",
     "FISHERMAN": "Obtenez un Léviator"
@@ -1685,7 +1689,8 @@
     "code": "Quel langage/bibliothèque est utilisé pour coder le jeu ?",
     "code_answer": "TypeScript, Phaser, Colyseus. Si vous souhaitez contribuer",
     "pull_requests": "les pull requests sont ouvertes",
-    "faq": "FAQ."
+    "faq": "FAQ.",
+    "damage": "Quels sont les dommages spéciaux et les dommages physiques ?"
   },
   "tutorial": {
     "start": "Comment démarrer une partie ?",
@@ -1764,7 +1769,7 @@
   "help_create_bot": "Pour créer un bot, vous devez remplir un certain nombre d'étapes. Chaque étape représente l'état de votre bot à un moment du jeu. Le bot démarrera avec l'équipe définie à l'étape 1. Ensuite, il ira à l'étape 2 et ainsi de suite L'équipe de l'étape 2 devrait toujours être plus forte que l'étape 1 équipe Comme le joueur ne peut pas obtenir plus de 10 pokémons/étape, votre bot n'est pas autorisé non plus.",
   "avatar": "Avatar",
   "author": "Auteur",
-  "elo": "Élo",
+  "elo": "Elo",
   "points_required_hint": "Les points requis représentent la quantité de travail nécessaire à votre bot pour passer à l'étape suivante",
   "next_step_hint": "Une fois que votre bot a acquis suffisamment de points, il passera à l'étape suivante",
   "victory_step_hint": "Pour une victoire, votre bot obtiendra 1,5 point",
@@ -1780,13 +1785,13 @@
   "chat_disabled_anonymous": "Chat désactivé pour les utilisateurs anonymes",
   "type_here": "Écrivez ici ...",
   "send_message": "Envoyer le message",
-  "shiny_hunter": "Chasseur chromatique",
+  "shiny_hunter": "Chasseur de shiny",
   "show_all": "Afficher tout",
-  "show_locked": "Afficher verrouillé",
-  "show_unlockable": "Afficher déverrouillable",
-  "show_unlocked": "Afficher déverrouillé",
-  "normal_emotions": "Émotions normales",
-  "shiny_emotions": "Émotions chromatiques",
+  "show_locked": "Bloqués",
+  "show_unlockable": "Débloquables",
+  "show_unlocked": "Débloqués",
+  "normal_emotions": "Emotes normales",
+  "shiny_emotions": "Emotes shiny",
   "buy_booster_500": "Achetez un nouveau booster pour 500",
   "close": "Fermer",
   "additional_pokemon_hint": "Chaque joueur a choisi deux Pokémon supplémentaires qui seront disponibles dans la boutique de tous les joueurs pour ce jeu.",
@@ -1922,5 +1927,6 @@
   "carousel": "Carrousel",
   "mythical_pick": "Choix mythique",
   "additional_pick": "Choix supplémentaire",
-  "fight": "lutte"
+  "fight": "lutte",
+  "language": "Langue"
 }

@@ -216,7 +216,6 @@ export default function PreparationMenu(props: {
       )}
 
       <div className="actions">
-        {deleteRoomButton}
         {isOwner ? (
           <>
             <button
@@ -284,6 +283,9 @@ export default function PreparationMenu(props: {
           </button>
         )}
       </div>
+      {user?.role && [Role.ADMIN, Role.MODERATOR].includes(user.role) ? (
+        <div className="actions">{deleteRoomButton}</div>
+      ) : null}
 
       {isOwner && botsListSorted != null && (
         <dialog open className="nes-container bots-list">

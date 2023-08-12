@@ -10177,6 +10177,54 @@ export class Hariyama extends Pokemon {
     )
   }
 }
+
+export class Sentret extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.SENTRET,
+      [Synergy.GROUND, Synergy.NORMAL, Synergy.FIELD],
+      Rarity.RARE,
+      Pkm.FURRET,
+      80,
+      7,
+      3,
+      3,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      1,
+      100,
+      Ability.HELPING_HAND,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+export class Furret extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.FURRET,
+      [Synergy.GROUND, Synergy.NORMAL, Synergy.FIELD],
+      Rarity.RARE,
+      Pkm.DEFAULT,
+      200,
+      16,
+      4,
+      4,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      2,
+      80,
+      Ability.HELPING_HAND,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
 export class Joltik extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
