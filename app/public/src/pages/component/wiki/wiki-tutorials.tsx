@@ -52,7 +52,7 @@ export default class WikiTutorials extends Component {
           </li>
         </ul>
         <p>
-          {t("thanks_to")}
+          {t("thanks_to")}&nbsp;
           <a href="https://www.youtube.com/@batotsu2751" target="_blank">
             Batotsu
           </a>{" "}

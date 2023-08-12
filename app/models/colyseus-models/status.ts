@@ -59,6 +59,7 @@ export default class Status extends Schema implements IStatus {
   synchro = false
   tree = false
   resurectingCooldown = 0
+  doubleDamage = false
 
   clearNegativeStatus() {
     this.burnCooldown = 0

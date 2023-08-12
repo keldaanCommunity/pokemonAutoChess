@@ -3581,7 +3581,7 @@ export class Igglybuff extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.IGGLYBUFF,
-      [Synergy.FAIRY, Synergy.BABY, Synergy.SOUND],
+      [Synergy.BABY, Synergy.SOUND, Synergy.NORMAL],
       Rarity.UNCOMMON,
       Pkm.JIGGLYPUFF,
       65,
@@ -6151,7 +6151,7 @@ export class Meloetta extends Pokemon {
       4,
       AttackSprite.PSYCHIC_RANGE,
       2,
-      120,
+      60,
       Ability.RELIC_SONG,
       shiny,
       emotion,
@@ -6675,7 +6675,7 @@ export class Lunatone extends Pokemon {
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       200,
-      15,
+      20,
       2,
       2,
       2,
@@ -6700,7 +6700,7 @@ export class Solrock extends Pokemon {
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       200,
-      15,
+      20,
       2,
       2,
       2,
@@ -6813,7 +6813,7 @@ export class Kyogre extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.KYOGRE,
-      [Synergy.WATER, Synergy.AQUATIC],
+      [Synergy.WATER, Synergy.MONSTER],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       300,
@@ -7193,7 +7193,7 @@ export class Farfetchd extends Pokemon {
       [Synergy.FLYING, Synergy.NORMAL],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
-      220,
+      200,
       20,
       4,
       4,
@@ -7242,7 +7242,7 @@ export class Castform extends Pokemon {
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       180,
-      20,
+      18,
       3,
       3,
       2,
@@ -7267,7 +7267,7 @@ export class CastformSun extends Pokemon {
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       180,
-      20,
+      18,
       3,
       3,
       2,
@@ -7292,7 +7292,7 @@ export class CastformRain extends Pokemon {
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       180,
-      20,
+      18,
       3,
       3,
       2,
@@ -7317,7 +7317,7 @@ export class CastformHail extends Pokemon {
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       180,
-      20,
+      18,
       3,
       3,
       2,
@@ -7534,7 +7534,7 @@ export class Phione extends Pokemon {
       Rarity.MYTHICAL,
       Pkm.MANAPHY,
       160,
-      12,
+      14,
       2,
       2,
       3,
@@ -7793,10 +7793,10 @@ export class Mew extends Pokemon {
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       200,
-      12,
+      18,
       2,
       2,
-      3,
+      4,
       AttackSprite.PSYCHIC_RANGE,
       1,
       80,
@@ -8006,7 +8006,7 @@ export class Arceus extends Pokemon {
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       300,
-      30,
+      25,
       5,
       5,
       1,
@@ -8194,7 +8194,7 @@ export class PrimalKyogre extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.PRIMAL_KYOGRE,
-      [Synergy.WATER, Synergy.ELECTRIC, Synergy.AQUATIC],
+      [Synergy.WATER, Synergy.ELECTRIC, Synergy.MONSTER],
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       400,
@@ -9669,9 +9669,9 @@ export class TapuBulu extends Pokemon {
       Rarity.MYTHICAL,
       Pkm.DEFAULT,
       200,
-      19,
-      6,
-      6,
+      17,
+      5,
+      5,
       1,
       AttackSprite.GRASS_MELEE,
       1,
@@ -9989,6 +9989,55 @@ export class Noivern extends Pokemon {
     )
   }
 }
+
+export class Shellder extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.SHELLDER,
+      [Synergy.WATER, Synergy.ICE, Synergy.ROCK],
+      Rarity.UNCOMMON,
+      Pkm.CLOYSTER,
+      70,
+      5,
+      5,
+      2,
+      1,
+      AttackSprite.WATER_MELEE,
+      1,
+      110,
+      Ability.SHELL_SMASH,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Cloyster extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.CLOYSTER,
+      [Synergy.WATER, Synergy.ICE, Synergy.ROCK],
+      Rarity.UNCOMMON,
+      Pkm.DEFAULT,
+      150,
+      11,
+      8,
+      2,
+      1,
+      AttackSprite.WATER_MELEE,
+      2,
+      110,
+      Ability.SHELL_SMASH,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
 export class Buizel extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
@@ -10128,6 +10177,54 @@ export class Hariyama extends Pokemon {
     )
   }
 }
+
+export class Sentret extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.SENTRET,
+      [Synergy.GROUND, Synergy.NORMAL, Synergy.FIELD],
+      Rarity.RARE,
+      Pkm.FURRET,
+      80,
+      7,
+      3,
+      3,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      1,
+      100,
+      Ability.HELPING_HAND,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+export class Furret extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.FURRET,
+      [Synergy.GROUND, Synergy.NORMAL, Synergy.FIELD],
+      Rarity.RARE,
+      Pkm.DEFAULT,
+      200,
+      16,
+      4,
+      4,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      2,
+      80,
+      Ability.HELPING_HAND,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
 export class Joltik extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
@@ -12736,7 +12833,7 @@ export class UnownExclamation extends Pokemon {
       9,
       AttackSprite.PSYCHIC_RANGE,
       1,
-      50,
+      100,
       Ability.HIDDEN_POWER_EM,
       shiny,
       emotion,
