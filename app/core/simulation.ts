@@ -10,6 +10,7 @@ import {
   AttackType,
   BoardEvent,
   PokemonActionState,
+  Rarity,
   Stat,
   Team
 } from "../types/enum/Game"
@@ -461,25 +462,29 @@ export default class Simulation extends Schema implements ISimulation {
           pokemon.effects.includes(Effect.DRAGON_SCALES) ||
           pokemon.effects.includes(Effect.DRAGON_DANCE)
         ) {
-          pokemon.addMaxHP(30 * pokemon.stars)
+          const dragonTier =
+            pokemon.rarity === Rarity.MYTHICAL ? 3 : pokemon.stars
+          pokemon.addMaxHP(30 * dragonTier)
           pokemon.life = pokemon.hp
         }
         if (pokemon.effects.includes(Effect.DRAGON_DANCE)) {
-          pokemon.addAbilityPower(10 * pokemon.stars)
-          pokemon.addAttackSpeed(10 * pokemon.stars)
+          const dragonTier =
+            pokemon.rarity === Rarity.MYTHICAL ? 3 : pokemon.stars
+          pokemon.addAbilityPower(10 * dragonTier)
+          pokemon.addAttackSpeed(10 * dragonTier)
         }
         let shieldBonus = 0
         if (pokemon.effects.includes(Effect.STAMINA)) {
-          shieldBonus = 15
+          shieldBonus = 10
         }
         if (pokemon.effects.includes(Effect.STRENGTH)) {
-          shieldBonus += 30
+          shieldBonus += 25
         }
         if (pokemon.effects.includes(Effect.ROCK_SMASH)) {
-          shieldBonus += 45
+          shieldBonus += 35
         }
         if (pokemon.effects.includes(Effect.PURE_POWER)) {
-          shieldBonus += 60
+          shieldBonus += 55
         }
         if (shieldBonus >= 0) {
           pokemon.handleShield(shieldBonus, pokemon)
@@ -645,14 +650,14 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.DRIZZLE:
           if (types.includes(Synergy.WATER)) {
-            pokemon.addDodgeChance(0.5)
+            pokemon.addDodgeChance(0.45)
             pokemon.effects.push(Effect.DRIZZLE)
           }
           break
 
         case Effect.PRIMORDIAL_SEA:
           if (types.includes(Synergy.WATER)) {
-            pokemon.addDodgeChance(0.7)
+            pokemon.addDodgeChance(0.6)
             pokemon.effects.push(Effect.PRIMORDIAL_SEA)
           }
           break
@@ -912,6 +917,11 @@ export default class Simulation extends Schema implements ISimulation {
           if (types.includes(Synergy.DRAGON)) {
             pokemon.effects.push(effect)
           }
+          break
+
+        case Effect.COOL_BREEZE:
+          pokemon.effects.push(Effect.COOL_BREEZE)
+          pokemon.addSpecialDefense(1)
           break
 
         case Effect.CHILLY:
