@@ -46,99 +46,101 @@ const bottomContainerStyle: CSS.Properties = {
   right: "0px"
 }
 
-export default function TeamBuilder(props: { toggleBuilder: () => void }) {
+const DEFAULT_BOT_STATE = {
+  steps: [
+    {
+      roundsRequired: 2,
+      board: []
+    },
+    {
+      roundsRequired: 2,
+      board: []
+    },
+    {
+      roundsRequired: 2,
+      board: []
+    },
+    {
+      roundsRequired: 2,
+      board: []
+    },
+    {
+      roundsRequired: 2,
+      board: []
+    },
+    {
+      roundsRequired: 2,
+      board: []
+    },
+    {
+      roundsRequired: 2,
+      board: []
+    },
+    {
+      roundsRequired: 2,
+      board: []
+    },
+    {
+      roundsRequired: 2,
+      board: []
+    },
+    {
+      roundsRequired: 2,
+      board: []
+    },
+    {
+      roundsRequired: 2,
+      board: []
+    },
+    {
+      roundsRequired: 2,
+      board: []
+    },
+    {
+      roundsRequired: 2,
+      board: []
+    },
+    {
+      roundsRequired: 2,
+      board: []
+    },
+    {
+      roundsRequired: 2,
+      board: []
+    },
+    {
+      roundsRequired: 2,
+      board: []
+    },
+    {
+      roundsRequired: 2,
+      board: []
+    },
+    {
+      roundsRequired: 2,
+      board: []
+    },
+    {
+      roundsRequired: 2,
+      board: []
+    },
+    {
+      roundsRequired: 2,
+      board: []
+    }
+  ],
+  avatar: PkmIndex[Pkm.DITTO],
+  author: "",
+  elo: 1200,
+  name: Pkm.DITTO,
+  id: ""
+}
+
+export default function TeamBuilder() {
   const dispatch = useAppDispatch()
   const [step, setStep] = useState<number>(0)
   const [copyStep, setCopyStep] = useState<IStep | undefined>(undefined)
-  const [bot, setBot] = useState<IBot>({
-    steps: [
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      }
-    ],
-    avatar: PkmIndex[Pkm.DITTO],
-    author: "",
-    elo: 1200,
-    name: Pkm.DITTO,
-    id: ""
-  })
+  const [bot, setBot] = useState<IBot>(DEFAULT_BOT_STATE)
   const [entity, setEntity] = useState<Item | DetailledPkm>({
     pkm: Pkm.DEFAULT,
     shiny: false,
@@ -265,17 +267,8 @@ export default function TeamBuilder(props: { toggleBuilder: () => void }) {
   }
 
   return (
-    <div>
-      <div style={buttonsStyle}>
-        <button
-          style={buttonStyle}
-          onClick={() => {
-            props.toggleBuilder()
-          }}
-          className="bubbly blue"
-        >
-          {t("lobby")}
-        </button>
+    <div className="bot-panel">
+      <div className="header" style={buttonsStyle}>
         <button
           style={buttonStyle}
           onClick={() => {

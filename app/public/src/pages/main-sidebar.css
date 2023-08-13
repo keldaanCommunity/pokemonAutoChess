@@ -1,0 +1,105 @@
+.menu-item {
+    width: 100%;
+}
+
+.menu-item a {
+    width: 100%;
+    cursor: var(--cursor-hover) !important;
+}
+
+.menu-item a span {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.ps-menu-root ul {
+    width: 100%;
+}
+
+.icon {
+    position: relative;
+    display: flex;
+}
+
+.notification {
+    position: absolute;
+    top: 0;
+    right: -12px;
+    height: 6px;
+    font-size: 6px;
+}
+
+.menu-item {
+    color: #333;
+}
+
+.menu-item.default,
+.menu-item.default a:hover {
+    background: white;
+    box-shadow: inset -3px -3px #acacac
+}
+
+.menu-item.default a:hover {
+    background: #d7d7d7;
+}
+
+.menu-item.blue,
+.menu-item.blue a:hover {
+    background: #109fff;
+    box-shadow: inset -3px -3px #006bb3;
+}
+
+.menu-item.blue a:hover {
+    background: #1195ec;
+}
+
+.menu-item.green,
+.menu-item.green a:hover {
+    background: #92cc41;
+    box-shadow: inset -3px -3px #65a013;
+}
+
+.menu-item.green a:hover {
+    background: #76c442;
+}
+
+.menu-item.red,
+.menu-item.red a:hover {
+    background: #e76e55;
+    box-shadow: inset -3px -3px #8c2022;
+}
+
+.menu-item.red a:hover {
+    background: #c25c48;
+}
+
+.ps-sidebar-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 0 12px 0 0;
+}
+
+.sidebar.sidebar {
+    border-right: 4px solid black;
+    border-radius: 12px;
+}
+
+.additional-links {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 12px;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 12px;
+}
+
+.additional-links a {
+    width: 80%;
+}
+
+.additional-links button {
+    width: 100%;
+}

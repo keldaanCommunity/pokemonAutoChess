@@ -1,0 +1,9 @@
+.basic-modal {
+    width: 100%;
+    max-width: 75vw;
+}
+
+.hide-bg {
+    background: none;
+    border: none;
+}

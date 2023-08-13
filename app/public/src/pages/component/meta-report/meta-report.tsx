@@ -27,7 +27,6 @@ export default function MetaReport(props: {
   meta: IMeta[]
   metaItems: IItemsStatistic[]
   metaPokemons: IPokemonsStatistic[]
-  toggleMeta: () => void
 }) {
   const [rankingBy, setRanking] = useState<string>("count")
   const [itemRankingBy, setItemRanking] = useState<string>("count")
@@ -69,13 +68,6 @@ export default function MetaReport(props: {
   }
   return (
     <div>
-      <button
-        className="bubbly green"
-        style={buttonStyle}
-        onClick={props.toggleMeta}
-      >
-        Lobby
-      </button>
       <div
         className="nes-container"
         style={{ margin: "10px", height: "90vh", color: "white" }}

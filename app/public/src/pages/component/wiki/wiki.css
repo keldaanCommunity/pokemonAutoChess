@@ -1,6 +1,6 @@
 #wiki-page {
-  height: 100vh;
-  padding: 1vw;
+  height: 100%;
+  padding-bottom: 24px;
 }
 
 #wiki-page ul {
@@ -22,7 +22,8 @@
 }
 
 #wiki-page > .nes-container > .react-tabs > .react-tabs__tab-panel {
-  height: calc(100vh - 8vw - 4em);
+  height: 75vh;
+  padding-bottom: 40px;
   overflow-y: auto;
 }
 
