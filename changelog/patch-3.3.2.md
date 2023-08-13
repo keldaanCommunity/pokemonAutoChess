@@ -3,7 +3,7 @@
 
 # Changes to Pokemon
 - Rework Abra: reduce attack cooldown after teleport ; now deals special damage after teleport instead of buffing attack
-- Nerf Virizion: max mana 90 → 120
+- Nerf Virizion: max PP 90 → 120
 - Nerf Meloetta Relic Song: Base duration reduced from 3 seconds to 2 seconds, AP scaling reduced by 50%
 
 # Changes to Synergies

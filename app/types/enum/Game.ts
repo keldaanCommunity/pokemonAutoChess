@@ -78,8 +78,8 @@ export enum Stat {
   SPE_DEF = "SPE_DEF",
   HP = "HP",
   RANGE = "RANGE",
-  MANA = "MANA",
-  MAX_MANA = "MAX_MANA",
+  PP = "PP",
+  MAX_PP = "MAX_PP",
   CRIT_CHANCE = "CRIT_CHANCE",
   CRIT_DAMAGE = "CRIT_DAMAGE",
   AP = "AP",
@@ -98,5 +98,5 @@ export enum Team {
 }
 
 export enum BoardEvent {
-  LIGHTNING = "LIGHTNING",
+  LIGHTNING = "LIGHTNING"
 }

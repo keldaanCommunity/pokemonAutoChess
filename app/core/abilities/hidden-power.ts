@@ -283,7 +283,7 @@ export class HiddenPowerKStrategy extends HiddenPowerStrategy {
     )
     hitmonlee.items.add(Item.RED_ORB)
     hitmonlee.simulation.applyItemsEffects(hitmonlee)
-    hitmonlee.mana = hitmonlee.maxMana - 1
+    hitmonlee.pp = hitmonlee.maxPP - 1
   }
 }
 
@@ -321,7 +321,7 @@ export class HiddenPowerMStrategy extends HiddenPowerStrategy {
     board.forEach(
       (x: number, y: number, pokemon: PokemonEntity | undefined) => {
         if (pokemon && unown.team === pokemon.team) {
-          pokemon.mana = pokemon.maxMana
+          pokemon.pp = pokemon.maxPP
         }
       }
     )
@@ -522,7 +522,7 @@ export class HiddenPowerTStrategy extends HiddenPowerStrategy {
     )
     tapu.items.add(Item.CHOICE_SPECS)
     tapu.simulation.applyItemsEffects(tapu)
-    tapu.mana = tapu.maxMana
+    tapu.pp = tapu.maxPP
   }
 }
 
@@ -548,7 +548,7 @@ export class HiddenPowerUStrategy extends HiddenPowerStrategy {
     )
     uxie.items.add(Item.AQUA_EGG)
     uxie.simulation.applyItemsEffects(uxie)
-    uxie.mana = uxie.maxMana - 1
+    uxie.pp = uxie.maxPP - 1
   }
 }
 

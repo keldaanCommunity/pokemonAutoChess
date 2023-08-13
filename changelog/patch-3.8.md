@@ -30,7 +30,7 @@ More Wounding abilities
 - Poison & Nightmare now have poison duration scale with AP
 - Buff Sharpedo ~~18~~ 21 atk
 - Nerf Virizion Sacred Sword ~~120~~ 90 true damage
-- Bounsweet Hp ~~110~~ >>>> 100 mana ~~90~~ 100
+- Bounsweet Hp ~~110~~ >>>> 100 PP ~~90~~ 100
 - Lanturn Buff ~~14~~ 16 atk
 - Buff Delphox ~~15~~ 18 atk
 - Buff Victini Range ~~2~~ 1 Searing Shot ~~20~~ 30 damage Atk ~~20~~ 30
@@ -62,7 +62,7 @@ More Wounding abilities
 
 # Bugfix
 
-- Many on-hit effects now only apply when the attack is successful (not dodged or protected). This concerns: Aquatic mana burn, Fire attack buff, Poison chance, Freeze chance, Silence chance, Upgrade stacks, Red Orb damage, Smoke Ball debuff, Spike Armor
+- Many on-hit effects now only apply when the attack is successful (not dodged or protected). This concerns: Aquatic PP burn, Fire attack buff, Poison chance, Freeze chance, Silence chance, Upgrade stacks, Red Orb damage, Smoke Ball debuff, Spike Armor
 - Choice scarf was not applying damage correctly with Ghost true damage
 - Leftovers heal was triggering twice for the item holder
 - Fix a bug where the attack speed of a pkm was stuck at .4 even with upgrade buff

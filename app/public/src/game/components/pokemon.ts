@@ -30,7 +30,7 @@ import {
 } from "../../../../types/enum/Game"
 import { Ability } from "../../../../types/enum/Ability"
 import { Passive } from "../../../../types/enum/Passive"
-import ManaBar from "./mana-bar"
+import PowerBar from "./power-bar"
 import { Synergy } from "../../../../types/enum/Synergy"
 import { Pkm } from "../../../../types/enum/Pokemon"
 import { clamp } from "../../../../utils/number"
@@ -76,9 +76,9 @@ export default class Pokemon extends DraggableObject {
   types: Synergy[]
   lifebar: Lifebar | undefined
   detail: PokemonDetail | undefined
-  mana: number | undefined
-  maxMana: number
-  manabar: ManaBar | undefined
+  pp: number | undefined
+  maxPP: number
+  powerbar: PowerBar | undefined
   sprite: GameObjects.Sprite
   shadow: GameObjects.Sprite
   wound: GameObjects.Sprite | undefined
@@ -136,7 +136,7 @@ export default class Pokemon extends DraggableObject {
     this.speDef = pokemon.speDef
     this.attackType = pokemon.attackType
     this.types = pokemon.types
-    this.maxMana = pokemon.maxMana
+    this.maxPP = pokemon.maxPP
     this.atkSpeed = pokemon.atkSpeed
     this.targetX = null
     this.targetY = null
@@ -231,14 +231,14 @@ export default class Pokemon extends DraggableObject {
       }
 
       this.setLifeBar(p, scene)
-      this.setManaBar(p, scene)
+      this.setPowerBar(p, scene)
       //this.setEffects(p, scene);
     }
     this.add(this.sprite)
     this.draggable = playerId === scene.uid && !inBattle
     if (instanceofPokemonEntity(pokemon)) {
       const p = <IPokemonEntity>pokemon
-      this.mana = p.mana
+      this.pp = p.pp
       this.team = p.team
       this.shield = p.shield
       this.life = p.life
@@ -312,7 +312,7 @@ export default class Pokemon extends DraggableObject {
       this.critChance,
       this.critDamage,
       this.ap,
-      this.mana || this.maxMana,
+      this.pp || this.maxPP,
       this.types,
       this.skill,
       this.passive,
@@ -334,7 +334,7 @@ export default class Pokemon extends DraggableObject {
     super.onPointerDown(pointer)
 
     if (!this.shouldShowTooltip) {
-      return;
+      return
     }
 
     if (pointer.rightButtonDown()) {
@@ -771,17 +771,17 @@ export default class Pokemon extends DraggableObject {
     }
   }
 
-  setManaBar(pokemon: IPokemonEntity, scene: Phaser.Scene) {
-    if (pokemon.mana !== undefined) {
-      this.manabar = new ManaBar(
+  setPowerBar(pokemon: IPokemonEntity, scene: Phaser.Scene) {
+    if (pokemon.pp !== undefined) {
+      this.powerbar = new PowerBar(
         scene,
         0,
         this.height / 2 + 12,
         60,
-        pokemon.maxMana
+        pokemon.maxPP
       )
-      this.manabar.setAmount(pokemon.mana)
-      this.add(this.manabar)
+      this.powerbar.setAmount(pokemon.pp)
+      this.add(this.powerbar)
     }
   }
 
