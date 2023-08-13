@@ -195,7 +195,7 @@ export class MiniGame {
           avatar.portalId === "" &&
           portal.avatarId === ""
         ) {
-          logger.debug(`${avatar.name} is taking portal ${portal.id}`)
+          //logger.debug(`${avatar.name} is taking portal ${portal.id}`)
           portal.avatarId = avatar.id
           avatar.portalId = portal.id
           Composite.remove(this.engine.world, avatarBody)
@@ -239,7 +239,7 @@ export class MiniGame {
         retentionDelay = 5000
       }
       if (PortalCarouselStages.includes(stageLevel)) {
-        retentionDelay = 7000
+        retentionDelay = 8000
       }
 
       const avatar = new PokemonAvatarModel(
@@ -295,8 +295,8 @@ export class MiniGame {
   initializePortalCarousel() {
     const nbPortals = clamp(this.alivePlayers.length + 1, 3, 9)
     for (let i = 0; i < nbPortals; i++) {
-      const x = this.centerX + Math.cos((Math.PI * 2 * i) / nbPortals) * 110
-      const y = this.centerY + Math.sin((Math.PI * 2 * i) / nbPortals) * 100
+      const x = this.centerX + Math.cos((Math.PI * 2 * i) / nbPortals) * 115
+      const y = this.centerY + Math.sin((Math.PI * 2 * i) / nbPortals) * 115
       const portal = new Portal(x, y, i)
       this.portals?.set(portal.id, portal)
       const body = Bodies.circle(x, y, 30)

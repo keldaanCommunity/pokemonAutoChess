@@ -9,7 +9,10 @@ import {
   PortalCarouselStages,
   Mythical1Shop,
   Mythical2Shop,
-  MAX_PLAYERS_PER_LOBBY
+  MAX_PLAYERS_PER_LOBBY,
+  ITEM_CAROUSEL_BASE_DURATION,
+  PORTAL_CAROUSEL_BASE_DURATION,
+  FIGHTING_PHASE_DURATION
 } from "../../types/Config"
 import { Item, BasicItems } from "../../types/enum/Item"
 import { BattleResult } from "../../types/enum/Game"
@@ -20,7 +23,7 @@ import UserMetadata from "../../models/mongo-models/user-metadata"
 import GameRoom from "../game-room"
 import { Client, updateLobby } from "colyseus"
 import { Effect } from "../../types/enum/Effect"
-import { Title, FIGHTING_PHASE_DURATION, Emotion } from "../../types"
+import { Title, Emotion } from "../../types"
 import { MapSchema } from "@colyseus/schema"
 import {
   GamePhaseState,
@@ -1435,10 +1438,13 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     const nbPlayersAlive = [...this.state.players.values()].filter(
       (p: Player) => p.life > 0
     ).length
-    const minigamePhaseDuration =
-      this.state.stageLevel === ItemCarouselStages[0]
-        ? 15000
-        : 14000 + nbPlayersAlive * 2000
+
+    let minigamePhaseDuration = ITEM_CAROUSEL_BASE_DURATION
+    if (PortalCarouselStages.includes(this.state.stageLevel)) {
+      minigamePhaseDuration = PORTAL_CAROUSEL_BASE_DURATION
+    } else if (this.state.stageLevel !== ItemCarouselStages[0]) {
+      minigamePhaseDuration += nbPlayersAlive * 2000
+    }
     this.state.time = minigamePhaseDuration
     this.room.miniGame.initialize(this.state.players, this.state.stageLevel)
   }
