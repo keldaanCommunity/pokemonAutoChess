@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react"
 import firebase from "firebase/compat/app"
-import DiscordButton from "./component/buttons/discord-button"
 import DonateButton from "./component/buttons/donate-button"
 import PolicyButton from "./component/buttons/policy-button"
 import { useAppDispatch, useAppSelector } from "../hooks"
@@ -137,14 +136,14 @@ export function MainSidebar(props: MainSidebarProps) {
           text={t("collection")}
           location="collection"
           svg="collection"
-          menuItemColor="blue"
+          className="blue"
           handleClick={changeModal}
         />
         <NavLink
           text={t("boosters")}
           location="booster"
           svg="booster"
-          menuItemColor="blue"
+          className="blue"
           handleClick={changeModal}
           shimmer={numberOfBooster > 0}
         />
@@ -152,13 +151,13 @@ export function MainSidebar(props: MainSidebarProps) {
           text={t("wiki")}
           location="wiki"
           svg="wiki"
-          menuItemColor="green"
+          className="green"
           handleClick={changeModal}
         />
         <NavLink
           text={t("meta")}
           svg="meta"
-          menuItemColor="green"
+          className="green"
           onClick={metaOnClick}
         />
 
@@ -166,7 +165,6 @@ export function MainSidebar(props: MainSidebarProps) {
           <NavLink
             text={t("bot_builder")}
             svg="bot"
-            menuItemColor="green"
             onClick={botBuilderOnClick}
           />
         )}
@@ -177,7 +175,6 @@ export function MainSidebar(props: MainSidebarProps) {
           <NavLink
             text={t("bot_admin")}
             svg="bot"
-            menuItemColor="green"
             onClick={botBuilderAdminOnClick}
           />
         )}
@@ -195,20 +192,53 @@ export function MainSidebar(props: MainSidebarProps) {
           handleClick={changeModal}
         />
 
+        <div className="spacer"></div>
+
+        {!collapsed && (
+          <div className="additional-links">
+            <a
+              href="https://github.com/keldaanCommunity/pokemonAutoChess/blob/master/policy.md"
+              target="_blank"
+            >
+              {t("policy")}
+            </a>
+          </div>
+        )}
+
+        <NavLink
+          text={
+            <>
+              {t("donate")}
+              <img
+                src="assets/ui/tipeee.svg"
+                style={{
+                  height: "1.25em",
+                  display: "inline-block"
+                }}
+              />
+            </>
+          }
+          svg="donate"
+          className="tipeee"
+          onClick={() =>
+            window.open("https://en.tipeee.com/pokemon-auto-chess", "_blank")
+          }
+        />
+
+        <NavLink
+          text="Discord"
+          svg="discord"
+          className="discord"
+          onClick={() => window.open("https://discord.gg/6JMS7tr", "_blank")}
+        />
+
         <NavLink
           text={t("sign_out")}
           svg="exit-door"
-          menuItemColor="red"
+          className="red logout"
           onClick={signOut}
         />
       </Menu>
-      {!collapsed ? (
-        <div className="additional-links">
-          <DiscordButton />
-          <DonateButton />
-          <PolicyButton />
-        </div>
-      ) : null}
 
       <Modals modal={modal} setModal={setModal} />
     </Sidebar>
@@ -217,11 +247,11 @@ export function MainSidebar(props: MainSidebarProps) {
 
 type NavLinkProps = MenuItemProps &
   NavPageLink & {
-    text?: string
+    text?: string | Element
     svg?: string
     png?: string
     shimmer?: boolean
-    menuItemColor?: string
+    className?: string
   }
 
 type NavPageLink = {
@@ -238,21 +268,19 @@ function NavLink(props: NavLinkProps) {
     svg,
     png,
     icon,
-    menuItemColor = "default",
+    className = "default",
     onClick
   } = props
 
   return (
     <MenuItem
-      className={cc("menu-item", menuItemColor)}
+      className={cc("menu-item", className, shimmer ? "shimmer" : "")}
       onClick={(e) => {
         onClick?.(e)
-
         if (location) {
           handleClick?.(location)
         }
       }}
-      title={text}
       icon={
         <div className="icon">
           {shimmer && (
@@ -261,17 +289,14 @@ function NavLink(props: NavLinkProps) {
             </span>
           )}
           {svg ? (
-            <img width={20} height={20} src={`assets/ui/${svg}.svg`} />
+            <img width={32} height={32} src={`assets/ui/${svg}.svg`} />
           ) : png ? (
-            <img height={20} src={`assets/ui/${png}.png`} />
+            <img height={32} src={`assets/ui/${png}.png`} />
           ) : (
             icon
           )}
         </div>
       }
-      rootStyles={{
-        cursor: "inherit"
-      }}
     >
       {text}
     </MenuItem>

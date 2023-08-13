@@ -10,11 +10,7 @@
 }
 
 .lobby nav {
-  display: flex;
-  justify-content: space-between;
-  gap: 1vw;
-  grid-area: nav;
-  flex-wrap: wrap;
+  height: 100%;
 }
 
 .lobby nav a:hover {
@@ -102,7 +98,6 @@
   height: 70px;
   justify-content: space-between;
 }
-
 
 .main-lobby {
   height: 100%;
