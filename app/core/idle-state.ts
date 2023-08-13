@@ -9,8 +9,8 @@ export class IdleState extends PokemonState {
     super.update(pokemon, dt, board, weather)
 
     if (pokemon.status.tree) {
-      if (pokemon.mana >= pokemon.maxMana) {
-        pokemon.mana = 0
+      if (pokemon.pp >= pokemon.maxPP) {
+        pokemon.pp = 0
         pokemon.status.tree = false
         pokemon.toMovingState()
       }
@@ -30,9 +30,9 @@ export class IdleState extends PokemonState {
 
   onEnter(pokemon: PokemonEntity) {
     super.onEnter(pokemon)
-    if(pokemon.status.tree) {
+    if (pokemon.status.tree) {
       pokemon.action = PokemonActionState.IDLE
-    } else if(pokemon.status.resurecting){
+    } else if (pokemon.status.resurecting) {
       pokemon.action = PokemonActionState.HURT
     } else {
       pokemon.action = PokemonActionState.SLEEP

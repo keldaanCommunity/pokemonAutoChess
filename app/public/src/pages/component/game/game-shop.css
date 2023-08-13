@@ -120,6 +120,7 @@
 .buy-xp-button.bubbly {
   font-size: 1vw;
   white-space: nowrap;
+  padding: 0.25em 0.5em;
 }
 
 .game-experience .progress-bar {
@@ -150,7 +151,7 @@
 #game-money-info {
   position: absolute;
   bottom: 100%;
-  left:7vw;
+  left: 7vw;
   width: 5vw;
   background-image: url("assets/ui/money-bg.png");
   background-size: 70px 40px;
@@ -204,6 +205,7 @@
 .game-shop .information > div {
   background: #61738a;
   display: flex;
+  justify-content: space-evenly;
   align-items: center;
   border-radius: 0 7px 0 0;
   height: 100%;

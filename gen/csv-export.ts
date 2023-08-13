@@ -22,14 +22,14 @@ const csvWriter = createObjectCsvWriter({
     { id: "def", title: "Defense" },
     { id: "spedef", title: "Special Defense" },
     { id: "range", title: "Attack Range" },
-    { id: "mana", title: "Max Mana" },
+    { id: "pp", title: "Max PP" },
     { id: "ability", title: "Ability" },
     { id: "family", title: "Family" },
     { id: "familyType1", title: "Family Type 1" },
     { id: "familyType2", title: "Family Type 2" },
     { id: "familyType3", title: "Family Type 3" },
     { id: "familyType4", title: "Family Type 4" },
-    { id: "duo", title: "Duo" },
+    { id: "duo", title: "Duo" }
   ]
 })
 
@@ -48,7 +48,7 @@ interface PokemonData {
   def: number
   spedef: number
   range: number
-  mana: number
+  pp: number
   ability: string
   family: string
   familyType1: string
@@ -81,7 +81,7 @@ Object.values(Pkm)
         category: pokemon.rarity,
         tier: pokemon.stars,
         additional: pokemon.additional,
-        duo: Object.values(PkmDuos).some(duo => duo.includes(pkm)),
+        duo: Object.values(PkmDuos).some((duo) => duo.includes(pkm)),
         type1: pokemon.types[0] ?? "",
         type2: pokemon.types[1] ?? "",
         type3: pokemon.types[2] ?? "",
@@ -91,7 +91,7 @@ Object.values(Pkm)
         def: pokemon.def,
         spedef: pokemon.speDef,
         range: pokemon.range,
-        mana: pokemon.maxMana,
+        pp: pokemon.maxPP,
         ability: pokemon.skill,
         family: PkmFamily[pkm],
         familyType1: familyTypes[0] ?? "",

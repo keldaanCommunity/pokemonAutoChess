@@ -149,7 +149,7 @@ export default function SelectedEntity(props: {
             {t("stat.RANGE")}: {pokemon.range}
           </p>
           <p>
-            {t("stat.MAX_MANA")}: {pokemon.maxMana}
+            {t("stat.MAX_PP")}: {pokemon.maxPP}
           </p>
           <p>
             {t("ability_label")}: {t(`ability.${pokemon.skill}`)}

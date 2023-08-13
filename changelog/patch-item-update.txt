@@ -15,8 +15,8 @@ There is 8 items: Fossil Stone, Twisted Spoon, Mystic Water, Miracle Seed, Magne
 You can combine 2 of those items to get a powerfull tier 2 item.
 
 Fossil Stone: Give it to a Ditto to obtain a random fossil
-Twisted Spoon: +1 spell attack damage
-Mystic Water: +15 mana
+Twisted Spoon: +1 AP
+Mystic Water: +15 PP
 Magnet: +10% attack speed
 Black Glasses: +5% critical hit
 Miracle Seed: +15 health
@@ -37,15 +37,15 @@ Soul Dew: During combat, the holder gains 3 spell damage every 5 seconds
 Upgrade: Attacks grant +6% bonus Attack Speed for the rest of combat
 Reaper Cloth: The holder spells can critically strike (20% chance, 2x damage)
 Pokemonomicon: When the holder deals damage with their Ability, they burn and wound the target for 3 seconds
-Water Incense: When an enemy cast an ability, they take incense damage equal to 20% of their max mana
+Water Incense: When an enemy cast an ability, they take incense damage equal to 20% of their max PP
 Shell Bell: The holder spells heal for 40% of the damage dealt
 Lucky Egg: When combat begins, the holder and all allies within 2 hexes in the same row gain 20 shield points
-Aqua Egg: The holder gains 50 mana. After casting their ability the holder gains 20 mana
+Aqua Egg: The holder gains 50 PP. After casting their ability the holder gains 20 PP
 Blue Orb: The holder gains 10% bonus Attack Speed. Every third attack from the holder unleashes a chain lightning that bounces to 4 enemies, dealing 8 magic damage
 Zoom Lens: The holder gains 4 attack damage and 4 spell damage
 Bright Powder: Every 5 seconds, the holder throws a bright powder within 1 hex, healing them for 18% of their missing health
 Delta Orb: When combat begins, the holder and all allies within 1 hex in the same row gain 3 Ability Power for the rest of combat
-Mana Scarf: The holder attacks restore 8 additional mana
+Mana Scarf: The holder attacks restore 8 additional PP
 Smoke Ball: Reduce the attack speed of enemy attackers by 30% for 5 seconds
 XRay Vision: Increase the holders attack range by 1 hex and grants 55% bonus attack speed. The holder attacks can no longer miss.
 Razor Fang: When the holder inflicts a critical hit, the targets Armor is reduced by 70% for 5 seconds. This effect does not stack.
@@ -57,7 +57,7 @@ Wonder Box: At the beginning of each battle phase, the holder equips 2 temporary
 Rune Protect: When combat begins, the holder and all allies whithin 1 hex in the same row gain a shield that block the damage and effects of the first enemy ability
 Wide Lens: The holder gains 20% bonus attack speed. The holder is immune to poison/fire
 Razor Claw: The holder gains 75% Critical Strike Chance and 10% Critical Strike Damage
-Fluffy Tail: When combat begins, every enemy in the same column have their max mana increased by 30%
+Fluffy Tail: When combat begins, every enemy in the same column have their max PP increased by 30%
 Oran Berry: Grants 100 bonus hp
 Shiny Charm: When combat begins, every enemy in the same column falls asleep for 3 seconds
 Focus Band: When combat begins, the holder and all allies within 1 hexes in the same row gain +30% Attack Speed for the rest of combat

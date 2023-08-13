@@ -16,7 +16,7 @@
 
 - Kings Rock has been replaced by Amulet coin, the effect does not change
 - Water Incense replaced by Power Lens: 50% of received spell damage is reflected to the attacker
-- Bright Powder replaced by Star Dust: After casting ability, gain 50% of Max Mana as Shield
+- Bright Powder replaced by Star Dust: After casting ability, gain 50% of Max PP as Shield
 - Buff Souldew
 
 # Changes to Stages

@@ -6,7 +6,7 @@
 - Buff Victini: Searing shot ~~20~~ → 40 special damage
 - Buff Gyarados: ~~9~~ → 8 magikarp are needed to evolve into Gyarados
 - Nerf Arceus: Atk ~~30~~ -> 25
-- Nerf Meloetta: Relic song: Emits a note. After the third note, put asleep the whole enemy team.Buff mana 120 -> 60
+- Nerf Meloetta: Relic song: Emits a note. After the third note, put asleep the whole enemy team. Buff PP 120 -> 60
 - Nerf Castform: Atk ~~20~~ -> 18 Castform-Sun ability ~~5~~->3 atk
 - Buff Mew: Atk ~~12~~ -> 18 Range ~~3~~ -> 4
 - Change Kyogre: ~~Water/Aquatic~~ -> Water/Monster
@@ -17,7 +17,7 @@
 - Buff Phione Atk ~~12~~ -> 14
 - Change Igglybuff: ~~Baby/Fairy/Sound~~ -> Baby/Normal/Sound
 - Nerf Clefairy Metronome: Can no longer trigger Hidden power abilities
-- Nerf Unown-Exclamation: Mana 50 → 100 ; can no longer summon another Unown-Exclamation
+- Nerf Unown-Exclamation: PP 50 → 100 ; can no longer summon another Unown-Exclamation
 - Nerf Unown-Question: can no longer summon another Unown-Question
 - The pool of Unowns now depends on the stage level, split in 3 tiers: stage 0-9, stage 10-19, stage >= 20 ; some Unowns now ony appear on a certain tier
 

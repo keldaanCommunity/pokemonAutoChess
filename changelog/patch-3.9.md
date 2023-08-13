@@ -31,7 +31,7 @@ Emotes communication between players ingame
 - Latias/Latios are now a duo. Adjusted stats, new abilities, new passive
 - Give Human synergy to: Jynx, Cacnea line, Mr Mime, Gothita line, Monferno line, Electabuzz, Electivire ; adjusted stats accordingly
 - Nerf Freeze tier 3: freeze duration 4 → 3 seconds
-- Buff Chatter: Mana 120 → 100, Confusion chance now scales with AP
+- Buff Chatter: PP 120 → 100, Confusion chance now scales with AP
 - Buff Cyndaquill line: Cyndaquill: Attack 6 → 7 ; Quilava: Attack 11 → 13 ; Typlosion HP 230 → 250, Attack 21 → 25
 - Buff Overheat: 20 → 30 special damage
 - Buff Draco Meteor: 25 → 50 special damage
@@ -45,16 +45,16 @@ Emotes communication between players ingame
 - New Ability Acrobatics for Hoppip Deals 20/40/80 damage. If the caster have no items, deals an extra 20/30/40 damage
 - Buff Woobuffet hp 200-> 250
 - Buff Draco Meteor damage 20 -> 25
-- Buff Jynx: mana 90 -> 80 ; attack 10 -> 12
+- Buff Jynx: PP 90 -> 80 ; attack 10 -> 12
 - Nerf Triattack duration: 2/4/8 → 2/3/5 seconds
 - Adjusted Stomp damage multiplier: 2/4/8→ 3/4/5
 - Buff Echo additional damage: 1/2/3 → 3/6/9
 - Heatran: New Magma Storm ability: The foe becomes trapped within a maelstrom of fire that deals 80 special damage before moving to an adjacent target
-- Buff Azelf mana 110 -> 80
-- Sneasel: Buff mana 100 -> 40 New Slahing Claw ability: Deals 15/30/60 special damage to the target and wound it for 5 seconds. If the target is already wound, deals 30% bonus special damage
+- Buff Azelf PP 110 -> 80
+- Sneasel: Buff PP 100 -> 40 New Slahing Claw ability: Deals 15/30/60 special damage to the target and wound it for 5 seconds. If the target is already wound, deals 30% bonus special damage
 - Numel: New Eruption ability: Fires 20/30/40 projectiles in the air. Every projectile deals 30/60/120 and burns for 5 seconds
 - Buff Lotad range 2 -> 3
-- Mudkip: Buff mana 100 -> 50 New Passive and ability. Passive: Water Spring: whenever an enemy uses their ability, gain 5 mana. Active: Mud Bubble Heals the caster for 10/20/40.
+- Mudkip: Buff PP 100 -> 50 New Passive and ability. Passive: Water Spring: whenever an enemy uses their ability, gain 5 PP. Active: Mud Bubble Heals the caster for 10/20/40.
 
 # Changes to Synergies
 
@@ -69,7 +69,7 @@ Emotes communication between players ingame
 - Buff Pokemonomicon: Wound/Burn duration 2 → 3 seconds ; now works with any source of special damage, not only abilities
 - Nerf Souldew: gains 10% → 8% AP every second
 - Buff Lucky Egg: +30% → +40% AP
-- Buff Delta Orb: +3 → +4 Mana
+- Buff Delta Orb: +3 → +4 PP
 
 # Bugfix
 

@@ -51,13 +51,13 @@ export default function WikiPokemonDetail(props: {
     [Stat.ATK]: "atk",
     [Stat.DEF]: "def",
     [Stat.HP]: "hp",
-    [Stat.MAX_MANA]: "maxMana",
+    [Stat.MAX_PP]: "maxPP",
     [Stat.RANGE]: "range",
     [Stat.SPE_DEF]: "speDef",
     [Stat.CRIT_CHANCE]: "critChance",
     [Stat.CRIT_DAMAGE]: "critDamage",
     [Stat.ATK_SPEED]: "atkSpeed",
-    [Stat.MANA]: "mana",
+    [Stat.PP]: "pp",
     [Stat.AP]: "ap",
     [Stat.SHIELD]: "shield"
   }
@@ -126,9 +126,9 @@ export default function WikiPokemonDetail(props: {
           </React.Fragment>
         ))}
         <dt>
-          <img src={`assets/icons/mana.png`} alt="" /> {t("stat.MAX_MANA")}
+          <img src={`assets/icons/pp.png`} alt="" /> {t("stat.PP")}
         </dt>
-        <dd>{pokemon.maxMana}</dd>
+        <dd>{pokemon.maxPP}</dd>
       </dl>
       <dl>
         {pokemon.skill !== Ability.DEFAULT && (
