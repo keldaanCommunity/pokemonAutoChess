@@ -40,8 +40,8 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   @type("string") id: string
   @type("string") orientation = Orientation.DOWNLEFT
   @type("uint16") hp: number
-  @type("uint8") mana = 0
-  @type("uint8") maxMana: number
+  @type("uint8") pp = 0
+  @type("uint8") maxPP: number
   @type("uint16") atk: number
   @type("uint16") def: number
   @type("uint16") speDef: number
@@ -128,7 +128,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     this.speDef = pokemon.speDef
     this.attackType = pokemon.attackType
     this.hp = pokemon.hp
-    this.maxMana = pokemon.maxMana
+    this.maxPP = pokemon.maxPP
     this.life = pokemon.hp
     this.atkSpeed = pokemon.atkSpeed
     this.range = pokemon.range
@@ -266,13 +266,13 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     this.changeState(new IdleState())
   }
 
-  setMana(mana: number) {
+  setPP(pp: number) {
     if (
       !this.status.silence &&
       !this.status.protect &&
       !this.status.resurecting
     ) {
-      this.mana = Math.max(0, Math.min(mana, this.maxMana))
+      this.pp = Math.max(0, Math.min(pp, this.maxPP))
     }
   }
 
@@ -354,7 +354,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     trueDamage: number
     totalDamage: number
   }) {
-    this.setMana(this.mana + 5)
+    this.setPP(this.pp + 5)
 
     if (this.items.has(Item.BLUE_ORB)) {
       this.count.staticHolderCount++
@@ -365,7 +365,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
         board.forEach((x, y, tg) => {
           if (tg && this.team != tg.team && c > 0) {
             tg.count.staticCount++
-            tg.setMana(tg.mana - 20)
+            tg.setPP(tg.pp - 20)
             tg.count.manaBurnCount++
             c--
           }
@@ -412,10 +412,10 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.items.has(Item.MANA_SCARF)) {
-      this.setMana(this.mana + 8)
+      this.setPP(this.pp + 8)
     }
     if (this.status.deltaOrb) {
-      this.setMana(this.mana + 4)
+      this.setPP(this.pp + 4)
     }
 
     if (this.effects.includes(Effect.TELEPORT_NEXT_ATTACK)) {
@@ -518,9 +518,9 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
         ? 30
         : 45
       if (chance(burnManaChance)) {
-        target.setMana(target.mana - 20)
+        target.setPP(target.pp - 20)
         target.count.manaBurnCount++
-        this.setMana(this.mana + manaGain)
+        this.setPP(this.pp + manaGain)
       }
     }
 
@@ -620,8 +620,8 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     })
 
     if (this.items.has(Item.SCOPE_LENS)) {
-      this.setMana(this.mana + 15)
-      target.setMana(target.mana - 15)
+      this.setPP(this.pp + 15)
+      target.setPP(target.pp - 15)
       target.count.manaBurnCount++
     }
 
@@ -738,7 +738,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     )
     this.life = cloneForStatsReference.hp
     this.shield = 0
-    this.mana = 0
+    this.pp = 0
     this.ap = 0
     this.atk = cloneForStatsReference.atk
     this.def = cloneForStatsReference.def

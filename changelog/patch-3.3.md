@@ -14,7 +14,7 @@
 # Gameplay
 - Add Just for fun mode, allowing people to play unraked
 - Add custom bot picker in preparation menu
-- Burn and poison ticks do not give mana to attacker anymore
+- Burn and poison ticks do not give PP to attacker anymore
 - Ranged dark Pokemons no longer jump to the farthest target
 
 # UI

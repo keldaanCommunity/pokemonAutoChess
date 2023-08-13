@@ -25,7 +25,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
   ap: HTMLDivElement
   abilityDescription: HTMLDivElement
   passiveDescription: HTMLDivElement
-  mana: HTMLDivElement
+  pp: HTMLDivElement
 
   constructor(
     scene: Phaser.Scene,
@@ -42,7 +42,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     critChance: number,
     critDamage: number,
     ap: number,
-    mana: number,
+    pp: number,
     types: string[],
     skill: Ability,
     passive: Passive,
@@ -86,8 +86,8 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     this.ap = document.createElement("p")
     this.ap.textContent = ap.toString()
 
-    this.mana = document.createElement("p")
-    this.mana.innerHTML = mana.toString()
+    this.pp = document.createElement("p")
+    this.pp.innerHTML = pp.toString()
 
     const avatar = document.createElement("img")
     avatar.className = "game-pokemon-detail-portrait"
@@ -137,7 +137,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
       { stat: Stat.ATK, elm: this.atk },
       { stat: Stat.ATK_SPEED, elm: this.atkSpeed },
       { stat: Stat.CRIT_DAMAGE, elm: this.critDamage },
-      { stat: Stat.MANA, elm: this.mana },
+      { stat: Stat.PP, elm: this.pp },
       { stat: Stat.SPE_DEF, elm: this.speDef },
       { stat: Stat.AP, elm: this.ap },
       { stat: Stat.RANGE, elm: this.range },

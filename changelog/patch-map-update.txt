@@ -65,7 +65,7 @@ quadruple types for alolan marowak: ground/mineral/fire/ghost
 
 **Gastly nerf**
 
-Max mana: ~~100~~ 120 mana
+Max PP: ~~100~~ 120 PP
 
 **Charmander Change**
 

@@ -57,7 +57,7 @@ export default class AttackingState extends PokemonState {
         pokemon.toMovingState()
       } else if (
         target &&
-        pokemon.mana >= pokemon.maxMana &&
+        pokemon.pp >= pokemon.maxPP &&
         !pokemon.status.silence
       ) {
         // CAST ABILITY

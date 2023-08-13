@@ -31,7 +31,7 @@ export class Pokemon extends Schema implements IPokemon {
   @type("uint16") hp: number
   @type("uint8") range: number
   @type("uint8") stars: number
-  @type("uint8") maxMana: number
+  @type("uint8") maxPP: number
   @type("string") skill: Ability
   @type("string") passive: Passive = Passive.NONE
   @type({ set: "string" }) items = new SetSchema<Item>()
@@ -54,7 +54,7 @@ export class Pokemon extends Schema implements IPokemon {
     range: number,
     attackSprite: AttackSprite,
     stars: number,
-    maxMana: number,
+    maxPP: number,
     skill: Ability,
     shiny: boolean,
     emotion: Emotion,
@@ -76,7 +76,7 @@ export class Pokemon extends Schema implements IPokemon {
     this.attackSprite = attackSprite
     this.attackType = AttackType.PHYSICAL
     this.stars = stars
-    this.maxMana = maxMana
+    this.maxPP = maxPP
     this.skill = skill
     this.passive = passive ?? Passive.NONE
     this.shiny = shiny

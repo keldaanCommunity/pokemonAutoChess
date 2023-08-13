@@ -462,11 +462,11 @@ export default class BattleManager {
               pkm.shield = pokemon.shield
               pkm.lifebar?.setShieldAmount(pkm.shield)
             }
-          } else if (field == "mana") {
-            pkm.mana = pokemon.mana
-            pkm.manabar?.setAmount(pkm.mana)
+          } else if (field == "pp") {
+            pkm.pp = pokemon.pp
+            pkm.powerbar?.setAmount(pkm.pp)
             if (pkm.detail) {
-              pkm.detail.updateValue(pkm.detail.mana, previousValue, value)
+              pkm.detail.updateValue(pkm.detail.pp, previousValue, value)
             }
           } else if (field == "atk") {
             pkm.atk = pokemon.atk

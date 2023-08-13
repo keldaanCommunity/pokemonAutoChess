@@ -33,7 +33,7 @@ I added a new threshold (8) and i nerfed the thresholds 2,4,6
 
 **Nerf Fighting**
 
-~~5/15~~ 5/10 mana granted
+~~5/15~~ 5/10 PP granted
 
 **Up Sound**
 

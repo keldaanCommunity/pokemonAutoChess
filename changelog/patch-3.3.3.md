@@ -7,7 +7,7 @@
 - Slacking: New Slack off ability
 - Darkrai: New Dark void ability: Deals 30 special damage to all enemies. If any affected target was Silenced, they are put to sleep for 2s
 - Moltres: New Overheat ability: Deals 20 special damage to all enemies. Double damage if target is burn
-- Articuno: nerf mana: 100 → 120
+- Articuno: nerf PP: 100 → 120
 - Buff Frogadier and Greninja ; all the Greninja line is now 1-range
 - Nerf Salamence: range 2 → 1 ; adjusted def & spe def
 
@@ -17,7 +17,7 @@
 - New Fossil 6 synergy level: (6) Forgotten Power: Revive with 100% Health Points and +100% attack
 
 # Changes to Items
-- Replace Zoom Lens by Scope Lens: Gains 25% critical chance. Critical hits steal 20 Mana from the target
+- Replace Zoom Lens by Scope Lens: Gains 25% critical chance. Critical hits steal 20 PP from the target
 - Rocky Helmet no longer prevents "on critical" effects, such as fairy splash damage
 - Rocky Helmet now also negates bonus damage from critical special damage
 - Max Revive now gives Resurection status, and so can no longer be stacked with another Resurection from an ability
@@ -26,7 +26,7 @@
 
 # Gameplay
 - Add a Spectate mode for games
-- Mana generation from incoming damage is now based on incoming damage before reduction from def/spedef/items
+- PP generation from incoming damage is now based on incoming damage before reduction from def/spedef/items
 - Critical hits for abilities now also applies "on critical" effects, such as fairy splash damage
 - Critical chance for special damage is now computed once and no longer per target. Previously, an area of effect ability could trigger critical hit on only part of the targets.
 - Improve the accuracy of abilities Aqua Jet, Flame Charge, Volt Switch and Flame Wheel.
