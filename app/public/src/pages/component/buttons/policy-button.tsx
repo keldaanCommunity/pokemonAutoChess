@@ -1,7 +1,8 @@
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 import React from "react"
 
 export default function PolicyButton() {
+  const { t } = useTranslation()
   return (
     <a
       href="https://github.com/keldaanCommunity/pokemonAutoChess/blob/master/policy.md"

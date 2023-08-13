@@ -1,7 +1,8 @@
 import React from "react"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export function BotGuideButton() {
+  const { t } = useTranslation()
   function handleClick() {
     window.location.href =
       "https://docs.google.com/document/d/1vBS4BEV5160Wmy_9Fi_J3ug_bFsyEWDzWFNzcjVvfi4/edit"

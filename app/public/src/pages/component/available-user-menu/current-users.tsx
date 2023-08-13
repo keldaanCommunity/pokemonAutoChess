@@ -5,9 +5,10 @@ import { setTabIndex } from "../../../stores/LobbyStore"
 import { searchById, searchName } from "../../../stores/NetworkStore"
 import Avatar from "../avatar"
 import "./current-users.css"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function CurrentUsers() {
+  const { t } = useTranslation()
   const users: ILobbyUser[] = useAppSelector((state) => state.lobby.users)
 
   return (

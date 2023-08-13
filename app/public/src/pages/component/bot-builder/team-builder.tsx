@@ -24,7 +24,7 @@ import {
   ReadWriteMode
 } from "../../../../../types"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 const buttonsStyle: CSS.Properties = {
   left: "10px",
@@ -137,6 +137,7 @@ const DEFAULT_BOT_STATE = {
 }
 
 export default function TeamBuilder() {
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const [step, setStep] = useState<number>(0)
   const [copyStep, setCopyStep] = useState<IStep | undefined>(undefined)

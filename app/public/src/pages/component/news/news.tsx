@@ -1,9 +1,10 @@
 import React, { useState } from "react"
 import { marked } from "marked"
 import "./news.css"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function News() {
+  const { t } = useTranslation()
   const [newsContent, setNewsContent] = useState("")
   const [isLoading, setIsLoading] = useState(true)
   fetch(

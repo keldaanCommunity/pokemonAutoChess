@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { getAvatarSrc } from "../../../utils"
 import CSS from "csstype"
 import { addBotDatabase, deleteBotDatabase } from "../../../stores/NetworkStore"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 const buttonsStyle: CSS.Properties = {
   left: "10px",
@@ -17,6 +17,7 @@ const buttonStyle: CSS.Properties = {
 }
 
 export function BotManagerPanel() {
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const logs = useAppSelector((state) => state.lobby.botLogDatabase)
   const bots = useAppSelector((state) => state.lobby.botList)

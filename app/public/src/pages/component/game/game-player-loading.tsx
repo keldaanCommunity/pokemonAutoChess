@@ -6,9 +6,10 @@ import { getAvatarSrc } from "../../../utils"
 import "./game-player-loading.css"
 import { cc } from "../../utils/jsx"
 import { getGameScene } from "../../game"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function GamePlayerLoadingBar(props: { player: IPlayer }) {
+  const { t } = useTranslation()
   const selfPlayerId = getGameScene()?.uid
   const loadingPercent = props.player.loadingProgress
 

@@ -5,9 +5,10 @@ import { openBooster } from "../../../stores/NetworkStore"
 import { cc } from "../../utils/jsx"
 import { BoosterCard } from "./booster-card"
 import "./booster.css"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function Booster() {
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const { user, boosterContent } = useAppSelector((state) => ({
     user: state.lobby.user,

@@ -6,7 +6,7 @@ import { ItemRecipe, ItemStats } from "../../../../types/Config"
 import { Item } from "../../../../types/enum/Item"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
 import "./item-detail.css"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export function ItemDetailTooltip({
   item,
@@ -15,6 +15,7 @@ export function ItemDetailTooltip({
   item: Item
   depth: number
 }) {
+  const { t } = useTranslation()
   const recipes = Object.entries(ItemRecipe).filter(([result, recipe]) =>
     recipe.includes(item)
   )

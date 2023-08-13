@@ -3,7 +3,7 @@ import { SynergyTriggers } from "../../../../../types/Config"
 import SynergyComponent from "./synergy-component"
 import CSS from "csstype"
 import { Synergy } from "../../../../../types/enum/Synergy"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 const style: CSS.Properties = {
   position: "absolute",
@@ -21,6 +21,7 @@ const style: CSS.Properties = {
 }
 
 export default function Synergies(props: { synergies: [string, number][] }) {
+  const { t } = useTranslation()
   if (props.synergies && props.synergies.length > 0) {
     return (
       <div style={style} className="nes-container hidden-scrollable">

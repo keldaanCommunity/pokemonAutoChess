@@ -11,9 +11,10 @@ import { getPortraitSrc } from "../../../utils"
 import { cc } from "../../utils/jsx"
 import PlayerBox from "./player-box"
 import History from "./history"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function Profile() {
+  const { t } = useTranslation()
   const user = useAppSelector((state) => state.lobby.user)
   return user ? (
     <>
@@ -45,6 +46,7 @@ export default function Profile() {
 }
 
 function NameTab() {
+  const { t } = useTranslation()
   const [inputValue, setInputValue] = useState<string>("")
   const dispatch = useAppDispatch()
   const user = useAppSelector((state) => state.lobby.user)
@@ -81,6 +83,7 @@ function NameTab() {
 }
 
 function AvatarTab() {
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const pokemonCollection = useAppSelector(
     (state) => state.lobby.pokemonCollection
@@ -137,6 +140,7 @@ function AvatarTab() {
 }
 
 function TitleTab() {
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const user = useAppSelector((state) => state.lobby.user)
   return user ? (

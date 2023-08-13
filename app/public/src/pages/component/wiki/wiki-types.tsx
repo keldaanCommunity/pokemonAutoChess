@@ -3,9 +3,10 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
 import WikiType from "./wiki-type"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import SynergyIcon from "../icons/synergy-icon"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function WikiTypes() {
+  const { t } = useTranslation()
   return (
     <Tabs>
       <TabList>

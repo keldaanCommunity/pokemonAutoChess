@@ -3,7 +3,7 @@ import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import CSS from "csstype"
 import { IPokemonsStatistic } from "../../../../../models/mongo-models/pokemons-statistic"
 import { getPortraitSrc } from "../../../utils"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 const pStyle = {
   fontSize: "1.1vw"
@@ -12,6 +12,7 @@ const pStyle = {
 export default function PokemonStatistic(props: {
   pokemon: IPokemonsStatistic
 }) {
+  const { t } = useTranslation()
   const imgStyle: CSS.Properties = {
     width: "60px",
     height: "60px",

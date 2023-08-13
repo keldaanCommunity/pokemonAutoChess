@@ -10,12 +10,13 @@ import { addIconsToDescription } from "../../utils/descriptions"
 import { AbilityTooltip } from "../ability/ability-tooltip"
 import SynergyIcon from "../icons/synergy-icon"
 import "./game-pokemon-detail.css"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export function GamePokemonDetail(props: {
   pokemon: Pokemon
   pokemonConfig?: IPokemonConfig
 }) {
+  const { t } = useTranslation()
   const pokemonStats = [
     { stat: Stat.HP, value: props.pokemon.hp },
     { stat: Stat.DEF, value: props.pokemon.def },

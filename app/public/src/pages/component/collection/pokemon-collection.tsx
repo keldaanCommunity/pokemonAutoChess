@@ -9,9 +9,10 @@ import SynergyIcon from "../icons/synergy-icon"
 import PokemonEmotionsModal from "./pokemon-emotions-modal"
 import UnownPanel from "./unown-panel"
 import "./pokemon-collection.css"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function PokemonCollection() {
+  const { t } = useTranslation()
   const metadata = tracker as unknown as { [key: string]: ITracker }
   const [selectedPokemon, setSelectedPokemon] = useState<Pkm | undefined>(
     undefined

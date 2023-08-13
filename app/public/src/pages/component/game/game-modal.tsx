@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from "react"
 import Modal from "react-bootstrap/Modal"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function GameModal(props: {
   modalInfo: string
@@ -9,6 +9,7 @@ export default function GameModal(props: {
   hideModal: Dispatch<SetStateAction<boolean>>
   leave: () => void
 }) {
+  const { t } = useTranslation()
   return (
     <Modal
       show={props.modalBoolean}

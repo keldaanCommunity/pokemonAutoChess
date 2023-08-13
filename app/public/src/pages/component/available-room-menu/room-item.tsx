@@ -4,12 +4,13 @@ import { IPreparationMetadata } from "../../../../../types"
 import { cc } from "../../utils/jsx"
 import "./room-item.css"
 import { MAX_PLAYERS_PER_LOBBY } from "../../../../../types/Config"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function RoomItem(props: {
   room: RoomAvailable<IPreparationMetadata>
   click: (room: RoomAvailable<IPreparationMetadata>) => Promise<void>
 }) {
+  const { t } = useTranslation()
   return (
     <div className="room-item">
       <span className="room-name">{props.room.metadata?.name}</span>

@@ -1,5 +1,5 @@
 import { getAuth, signInAnonymously, updateProfile } from "firebase/auth"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 import React from "react"
 import {
   uniqueNamesGenerator,
@@ -16,6 +16,7 @@ const customConfig: Config = {
 }
 
 export default function AnonymousButton() {
+  const { t } = useTranslation()
   async function signIn() {
     const auth = getAuth()
     try {

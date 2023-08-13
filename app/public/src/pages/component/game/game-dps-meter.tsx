@@ -8,12 +8,13 @@ import { useAppSelector } from "../../../hooks"
 import { getAvatarSrc } from "../../../utils"
 import { loadPreferences, savePreferences } from "../../../preferences"
 import "./game-dps-meter.css"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 let lastOpponentName = ""
 let lastOpponentAvatar = ""
 
 export default function GameDpsMeter() {
+  const { t } = useTranslation()
   const opponentName = useAppSelector(
     (state) => state.game.currentPlayerOpponentName
   )

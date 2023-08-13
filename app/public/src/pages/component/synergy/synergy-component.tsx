@@ -4,13 +4,14 @@ import ReactTooltip from "react-tooltip"
 import SynergyDetailComponent from "./synergy-detail-component"
 import SynergyIcon from "../icons/synergy-icon"
 import { Synergy } from "../../../../../types/enum/Synergy"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function SynergyComponent(props: {
   type: Synergy
   value: number
   index: number
 }) {
+  const { t } = useTranslation()
   const levelReached = SynergyTriggers[props.type]
     .filter((n) => n <= props.value)
     .at(-1)

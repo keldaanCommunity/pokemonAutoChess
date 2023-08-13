@@ -17,9 +17,10 @@ import { Rarity } from "../../../../../types/enum/Game"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import { Ability } from "../../../../../types/enum/Ability"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function WikiType(props: { type: Synergy | "all" }) {
+  const { t } = useTranslation()
   const [hoveredPokemon, setHoveredPokemon] = useState<Pokemon>()
 
   let pokemonsNames: Pkm[]

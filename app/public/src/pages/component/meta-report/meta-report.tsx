@@ -7,7 +7,7 @@ import { IMeta } from "../../../../../models/mongo-models/meta"
 import { IItemsStatistic } from "../../../../../models/mongo-models/items-statistic"
 import PokemonStatistic from "./pokemon-statistic"
 import { IPokemonsStatistic } from "../../../../../models/mongo-models/pokemons-statistic"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 const buttonStyle = {
   marginLeft: "10px",
@@ -28,6 +28,7 @@ export default function MetaReport(props: {
   metaItems: IItemsStatistic[]
   metaPokemons: IPokemonsStatistic[]
 }) {
+  const { t } = useTranslation()
   const [rankingBy, setRanking] = useState<string>("count")
   const [itemRankingBy, setItemRanking] = useState<string>("count")
   const [pokemonRankingBy, setPokemonRanking] = useState<string>("count")

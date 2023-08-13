@@ -3,7 +3,7 @@ import CSS from "csstype"
 import { useAppDispatch } from "../../../hooks"
 import { itemClick } from "../../../stores/NetworkStore"
 import { addIconsToDescription } from "../../utils/descriptions"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 const style: CSS.Properties = {
   width: "320px",
@@ -15,6 +15,7 @@ const style: CSS.Properties = {
 }
 
 export default function GameItem(props: { item: string }) {
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
   return (
     <div className="nes-container" style={style}>

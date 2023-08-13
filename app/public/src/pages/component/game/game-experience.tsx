@@ -3,9 +3,10 @@ import { useAppSelector } from "../../../hooks"
 import { useAppDispatch } from "../../../hooks"
 import { levelClick } from "../../../stores/NetworkStore"
 import { Money } from "../icons/money"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function GameExperience() {
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
 
   const experienceManager = useAppSelector(

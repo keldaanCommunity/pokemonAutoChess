@@ -5,9 +5,10 @@ import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
 import { cc } from "../../utils/jsx"
 import "./booster-card.css"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export function BoosterCard(props: { pkm: string; shards: number }) {
+  const { t } = useTranslation()
   const pkm: Pkm = (Object.keys(PkmIndex).find(
     (p) => PkmIndex[p] === props.pkm
   ) ?? Pkm.DITTO) as Pkm

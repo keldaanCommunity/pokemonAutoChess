@@ -1,9 +1,10 @@
 import React from "react"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { lockClick } from "../../../stores/NetworkStore"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function GameLock() {
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const shopLocked = useAppSelector((state) => state.game.shopLocked)
 

@@ -3,7 +3,7 @@ import Elo from "./elo"
 import { Role } from "../../../../types"
 import { RoleBadge } from "./RoleBadge"
 import { getAvatarSrc } from "../../utils"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function Avatar(props: {
   elo: number | undefined
@@ -12,6 +12,7 @@ export default function Avatar(props: {
   title: string
   role: Role
 }) {
+  const { t } = useTranslation()
   const elo = props.elo ? <Elo elo={props.elo} /> : null
 
   return (

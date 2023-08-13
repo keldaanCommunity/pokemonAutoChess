@@ -63,6 +63,7 @@ export default function UnownPanel(props: {
               config={unown.config}
               setPokemon={props.setPokemon}
               filter={props.filter}
+              shinyOnly={false}
             />
           )
         })}

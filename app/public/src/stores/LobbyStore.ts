@@ -191,7 +191,7 @@ export const lobbySlice = createSlice({
       state.levelLeaderboard = action.payload
     },
     addPokemonConfig: (state, action: PayloadAction<IPokemonConfig>) => {
-      state.pokemonCollection.push(JSON.parse(JSON.stringify(action.payload)))
+      state.pokemonCollection.push(action.payload)
     },
     changePokemonConfig: (
       state,

@@ -1,7 +1,7 @@
 import React from "react"
 import CSS from "csstype"
 import { addIconsToDescription } from "../../utils/descriptions"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 const imgStyle: CSS.Properties = {
   width: "64px",
@@ -11,6 +11,7 @@ const imgStyle: CSS.Properties = {
 }
 
 export default function WikiStatistic() {
+  const { t } = useTranslation()
   return (
     <ul className="wiki-stat">
       <li className="nes-container">

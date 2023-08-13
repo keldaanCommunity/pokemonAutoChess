@@ -136,8 +136,6 @@ function MainLobby({ toPreparation, setToPreparation }) {
   )
 }
 
-
-
 const join = async (dispatch, client, setToAuth) => {
   if (!firebase.apps.length) {
     firebase.initializeApp(FIREBASE_CONFIG)
@@ -176,15 +174,21 @@ const join = async (dispatch, client, setToAuth) => {
               ]
 
               fields.forEach((field) => {
-                pokemonConfig.listen(field, (value, previousValue) => {
-                  dispatch(
-                    changePokemonConfig({
-                      id: pokemonConfig.id,
-                      field: field,
-                      value: value
-                    })
-                  )
-                })
+                pokemonConfig.listen(
+                  field,
+                  (value, previousValue) => {
+                    if (previousValue !== undefined) {
+                      dispatch(
+                        changePokemonConfig({
+                          id: pokemonConfig.id,
+                          field: field,
+                          value: value
+                        })
+                      )
+                    }
+                  },
+                  false
+                )
               })
             }, false)
             dispatch(setUser(u))

@@ -6,9 +6,10 @@ import {
   RarityProbabilityPerLevel,
   RarityColor
 } from "../../../../../types/Config"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function GameRarityPercentage() {
+  const { t } = useTranslation()
   const level = useAppSelector((state) => state.game.experienceManager.level)
   const RarityTiers = [
     Rarity.COMMON,

@@ -11,7 +11,7 @@ import { ITracker } from "../../../../../types/ITracker"
 import SynergyIcon from "../icons/synergy-icon"
 import { AbilityTooltip } from "../ability/ability-tooltip"
 import { addIconsToDescription } from "../../utils/descriptions"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 const entityStyle: CSS.Properties = {
   position: "absolute",
@@ -32,6 +32,7 @@ export default function SelectedEntity(props: {
   entity: Item | DetailledPkm
   selectEntity: React.Dispatch<React.SetStateAction<DetailledPkm | Item>>
 }) {
+  const { t } = useTranslation()
   const [metadata, setMetadata] = useState<{ [key: string]: ITracker }>(
     tracker as unknown as { [key: string]: ITracker }
   )
