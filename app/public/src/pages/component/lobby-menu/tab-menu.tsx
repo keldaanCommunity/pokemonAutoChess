@@ -10,11 +10,15 @@ import LevelLeaderboard from "./level-leaderboard"
 import { t } from "i18next"
 import "react-tabs/style/react-tabs.css"
 import "./tab-menu.css"
+import CurrentUsers from "../available-user-menu/current-users"
 
 export default function TabMenu() {
   const dispatch = useAppDispatch()
 
-  const tabIndex: number = useAppSelector((state) => state.lobby.tabIndex)
+  const { tabIndex, users } = useAppSelector((state) => ({
+    tabIndex: state.lobby.tabIndex,
+    users: state.lobby.users
+  }))
 
   return (
     <Tabs
@@ -25,12 +29,17 @@ export default function TabMenu() {
       }}
     >
       <TabList>
+        <Tab>
+          {t("online")}: {users.length}
+        </Tab>
         <Tab>{t("elo")}</Tab>
         <Tab>{t("level")}</Tab>
         <Tab>{t("bots")}</Tab>
-        <Tab>{t("profile")}</Tab>
         <Tab>{t("search")}</Tab>
       </TabList>
+      <TabPanel>
+        <CurrentUsers />
+      </TabPanel>
       <TabPanel>
         <PlayerLeaderboard />
       </TabPanel>
@@ -39,9 +48,6 @@ export default function TabMenu() {
       </TabPanel>
       <TabPanel>
         <BotLeaderboard />
-      </TabPanel>
-      <TabPanel>
-        <Profile />
       </TabPanel>
       <TabPanel>
         <Search />

@@ -123,13 +123,12 @@ export default function Lobby() {
 function MainLobby({ toPreparation, setToPreparation }) {
   return (
     <div className="main-lobby">
-      <TabMenu />
       <RoomMenu
         toPreparation={toPreparation}
         setToPreparation={setToPreparation}
       />
       <div className="news-chat">
-        <CurrentUsers />
+        <TabMenu />
         <Chat source="lobby" />
       </div>
     </div>

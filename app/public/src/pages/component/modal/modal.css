@@ -7,3 +7,7 @@
     background: none;
     border: none;
 }
+
+.basic-modal .modal-body {
+    justify-content: center;
+}

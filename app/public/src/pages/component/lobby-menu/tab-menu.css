@@ -18,6 +18,8 @@ ul.titles {
   flex-direction: column;
   padding: 0;
   margin: 0;
+  overflow-y: scroll;
+  height: 55vh;
 }
 
 ul.titles > li {

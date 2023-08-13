@@ -26,6 +26,7 @@ import MetaReport from "./component/meta-report/meta-report"
 import { BasicModal } from "./component/modal/modal"
 import News from "./component/news/news"
 import Wiki from "./component/wiki/wiki"
+import Profile from "./component/lobby-menu/profile"
 
 interface MainSidebarProps {
   changePage?: (nextPage: Page) => void
@@ -194,6 +195,14 @@ export function MainSidebar(props: MainSidebarProps) {
           location="options"
           handleClick={changeModal}
         />
+        {user && (
+          <NavLink
+            text={t("profile")}
+            svg="character"
+            location="profile"
+            handleClick={changeModal}
+          />
+        )}
 
         <NavLink
           text={t("sign_out")}
@@ -285,6 +294,7 @@ export type Modals =
   | "booster"
   | "news"
   | "options"
+  | "profile"
 
 function Modals({
   modal,
@@ -320,6 +330,7 @@ function Modals({
       <BasicModal
         handleClose={closeModal}
         show={modal === "booster"}
+        display="block"
         body={<Booster />}
       />
       <BasicModal
@@ -344,6 +355,11 @@ function Modals({
         ingame={false}
         hideModal={closeModal}
         leave={closeModal}
+      />
+      <BasicModal
+        handleClose={closeModal}
+        show={modal === "profile"}
+        body={<Profile />}
       />
     </>
   )

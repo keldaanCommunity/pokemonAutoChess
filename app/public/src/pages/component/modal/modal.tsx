@@ -7,10 +7,18 @@ interface BasicModalProps extends ModalProps {
   title?: string
   body: JSX.Element
   confirmText?: string
+  display?: string
 }
 
 export function BasicModal(props: BasicModalProps) {
-  const { show, handleClose, title, body, confirmText } = props
+  const {
+    show,
+    handleClose,
+    title,
+    body,
+    confirmText,
+    display = "flex"
+  } = props
 
   return (
     <Modal
@@ -24,7 +32,7 @@ export function BasicModal(props: BasicModalProps) {
           <Modal.Title>{title}</Modal.Title>
         </Modal.Header>
       )}
-      <Modal.Body>{body}</Modal.Body>
+      <Modal.Body style={{ display: display }}>{body}</Modal.Body>
       {confirmText && (
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

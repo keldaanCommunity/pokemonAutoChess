@@ -27,9 +27,10 @@
 }
 
 .lobby .user-menu {
-  grid-area: user;
   height: 100%;
-  width: 25%;
+  min-height: 340px;
+  width: 100%;
+  min-width: 440px;
   display: flex;
   flex-direction: column;
 }
@@ -48,7 +49,7 @@
 
 .lobby .room-menu {
   height: 100%;
-  width: 25%;
+  width: 50%;
   font-size: 16px;
 }
 
@@ -114,7 +115,7 @@
 .main-lobby .news-chat {
   display: flex;
   gap: 4px;
-  width: 50%;
+  width: 100%;
 }
 
 @media (max-width: 1400px) {

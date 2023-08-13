@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
+import { t } from "i18next"
 import { Title } from "../../../../../types"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import {
@@ -11,12 +12,19 @@ import { getPortraitSrc } from "../../../utils"
 import { cc } from "../../utils/jsx"
 import PlayerBox from "./player-box"
 import History from "./history"
-import { t } from "i18next"
+import { ILobbyUser } from "../../../../../models/colyseus-models/lobby-user"
 
 export default function Profile() {
-  const user = useAppSelector((state) => state.lobby.user)
-  return user ? (
-    <>
+  const { user } = useAppSelector((state) => ({
+    user: state.lobby.user
+  }))
+
+  if (!user) {
+    return null
+  }
+
+  return (
+    <div className="profile-container nes-container">
       <PlayerBox user={user} />
 
       <Tabs>
@@ -28,28 +36,27 @@ export default function Profile() {
         </TabList>
 
         <TabPanel>
-          <NameTab />
+          <NameTab user={user} />
         </TabPanel>
         <TabPanel>
           <AvatarTab />
         </TabPanel>
         <TabPanel>
-          <TitleTab />
+          <TitleTab user={user} />
         </TabPanel>
         <TabPanel>
           <History history={user.history} />
         </TabPanel>
       </Tabs>
-    </>
-  ) : null
+    </div>
+  )
 }
 
-function NameTab() {
+function NameTab({ user }: { user: ILobbyUser }) {
   const [inputValue, setInputValue] = useState<string>("")
   const dispatch = useAppDispatch()
-  const user = useAppSelector((state) => state.lobby.user)
 
-  if (user && user.anonymous) {
+  if (user.anonymous) {
     return (
       <div className="nes-container">
         <p>{t("anonymous_users_name_hint")}</p>
@@ -57,7 +64,7 @@ function NameTab() {
     )
   }
 
-  return user ? (
+  return (
     <div className="nes-container">
       <h3>{t("change_name")}</h3>
       <div className="nes-field is-inline" style={{ gap: "0.5em" }}>
@@ -77,7 +84,7 @@ function NameTab() {
         </button>
       </div>
     </div>
-  ) : null
+  )
 }
 
 function AvatarTab() {
@@ -136,12 +143,11 @@ function AvatarTab() {
   )
 }
 
-function TitleTab() {
+function TitleTab({ user }: { user: ILobbyUser }) {
   const dispatch = useAppDispatch()
-  const user = useAppSelector((state) => state.lobby.user)
-  return user ? (
+  return (
     <ul className="titles">
-      {Object.keys(Title).map((k, i) => (
+      {Object.keys(Title).map((k) => (
         <li
           key={k}
           className={cc("clickable", {
@@ -159,5 +165,5 @@ function TitleTab() {
         </li>
       ))}
     </ul>
-  ) : null
+  )
 }

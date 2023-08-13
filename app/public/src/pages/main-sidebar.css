@@ -103,3 +103,9 @@
 .additional-links button {
     width: 100%;
 }
+
+.profile-container {
+    width: 50vw;
+    max-height: 80vh;
+    overflow: hidden;
+}

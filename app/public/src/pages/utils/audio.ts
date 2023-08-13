@@ -31,12 +31,20 @@ export function preloadSounds() {
 
 function setupSounds() {
   document.body.addEventListener("mouseover", (e) => {
-    if (e.target instanceof HTMLButtonElement) {
+    if (
+      e.target instanceof HTMLButtonElement ||
+      e.target instanceof HTMLAnchorElement
+    ) {
       playSound(SOUNDS.BUTTON_HOVER)
     }
   })
   document.body.addEventListener("click", (e) => {
-    if (e.target instanceof HTMLButtonElement) {
+    console.log(e.target)
+    if (
+      e.target instanceof HTMLButtonElement ||
+      e.target instanceof HTMLAnchorElement ||
+      (e.target as HTMLElement).parentElement instanceof HTMLAnchorElement // sidebar item clicks are img/span within <a />
+    ) {
       playSound(SOUNDS.BUTTON_CLICK)
     }
   })
