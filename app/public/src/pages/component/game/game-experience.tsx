@@ -21,7 +21,7 @@ export default function GameExperience() {
       </span>
       <button
         className="bubbly orange buy-xp-button"
-        title="Buy 4 XP for 4 gold (shortcut: F)"
+        title={t("buy_xp_tooltip")}
         onClick={() => {
           dispatch(levelClick())
         }}
