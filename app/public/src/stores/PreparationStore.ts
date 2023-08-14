@@ -38,8 +38,7 @@ export const preparationSlice = createSlice({
       state.user = u
     },
     pushMessage: (state, action: PayloadAction<IChatV2>) => {
-      const m: IChatV2 = JSON.parse(JSON.stringify(action.payload))
-      state.messages.push(m)
+      state.messages.push(structuredClone(action.payload))
     },
     addUser: (state, action: PayloadAction<IGameUser>) => {
       const u: IGameUser = JSON.parse(JSON.stringify(action.payload))

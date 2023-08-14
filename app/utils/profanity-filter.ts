@@ -21,8 +21,9 @@ export function cleanProfanity(string: string): string {
           ? "koffing"
           : word
       })
-      .join(splitRegex.exec(string)![0])
+      .join(" ")
   } catch (error) {
+    console.error(error)
     return "error"
   }
 }

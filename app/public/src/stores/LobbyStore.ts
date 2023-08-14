@@ -170,8 +170,7 @@ export const lobbySlice = createSlice({
       state.botLogDatabase.push(action.payload)
     },
     pushMessage: (state, action: PayloadAction<Message>) => {
-      const m: IChatV2 = JSON.parse(JSON.stringify(action.payload))
-      state.messages.push(m)
+      state.messages.push(structuredClone(action.payload))
     },
     removeMessage: (state, action: PayloadAction<Message>) => {
       state.messages = state.messages.filter(
