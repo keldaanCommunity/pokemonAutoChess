@@ -9,7 +9,7 @@ import {
 } from "../types/enum/Game"
 import Board from "./board"
 import PokemonEntity from "./pokemon-entity"
-import { IPokemonEntity, Transfer, FIGHTING_PHASE_DURATION } from "../types"
+import { IPokemonEntity, Transfer } from "../types"
 import { Synergy, SynergyEffects } from "../types/enum/Synergy"
 import { Ability } from "../types/enum/Ability"
 import { chance, pickRandomIn } from "../utils/random"
@@ -18,6 +18,7 @@ import { Passive } from "../types/enum/Passive"
 import { Weather } from "../types/enum/Weather"
 import { max, min } from "../utils/number"
 import { distanceC, distanceM } from "../utils/distance"
+import { FIGHTING_PHASE_DURATION } from "../types/Config"
 
 export default class PokemonState {
   handleHeal(

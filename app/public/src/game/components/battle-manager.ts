@@ -3605,6 +3605,7 @@ export default class BattleManager {
     index: string,
     amount: number
   ) {
+    if (!this.scene.sys.displayList) return // prevents an exception
     const fontSize =
       amount < 10
         ? "20px"

@@ -5,7 +5,7 @@ import Shop from "../../models/shop"
 import Design, { DesignTiled } from "../../core/design"
 import BotManager from "../../core/bot-manager"
 import { DungeonData, Dungeon, StageDuration } from "../../types/Config"
-import { GamePhaseState, } from "../../types/enum/Game"
+import { GamePhaseState } from "../../types/enum/Game"
 import { Weather } from "../../types/enum/Weather"
 import {
   Schema,
@@ -16,14 +16,18 @@ import {
 } from "@colyseus/schema"
 import { PkmProposition } from "../../types/enum/Pokemon"
 import { pickRandomIn } from "../../utils/random"
+import { Portal, SynergySymbol } from "../../models/colyseus-models/portal"
 
 export default class GameState extends Schema {
   @type("string") afterGameId = ""
   @type("uint8") roundTime = StageDuration[1]
   @type("uint8") phase = GamePhaseState.PICK
   @type({ map: Player }) players = new MapSchema<Player>()
-  @type({ map: PokemonAvatarModel }) avatars = new MapSchema<PokemonAvatarModel>()
+  @type({ map: PokemonAvatarModel }) avatars =
+    new MapSchema<PokemonAvatarModel>()
   @type({ map: FloatingItem }) floatingItems = new MapSchema<FloatingItem>()
+  @type({ map: Portal }) portals = new MapSchema<Portal>()
+  @type({ map: SynergySymbol }) symbols = new MapSchema<SynergySymbol>()
   @type(["string"]) additionalPokemons = new ArraySchema<PkmProposition>()
   @type("uint8") stageLevel = 1
   @type("string") mapName: string

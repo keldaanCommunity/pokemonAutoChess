@@ -91,6 +91,7 @@ export default class AnimationManager {
     })
     this.createAttacksAnimations()
     this.createSpecialAttacksAnimations()
+    this.createMinigameAnimations()
     createStatusAnimations(this.game)
   }
 
@@ -1947,6 +1948,19 @@ export default class AnimationManager {
       }),
       duration: 500,
       repeat: 0
+    })
+  }
+
+  createMinigameAnimations() {
+    this.game.anims.create({
+      key: "portal",
+      frames: this.game.anims.generateFrameNames("portal", {
+        start: 0,
+        end: 7,
+        zeroPad: 3
+      }),
+      duration: 600,
+      repeat: -1
     })
   }
 

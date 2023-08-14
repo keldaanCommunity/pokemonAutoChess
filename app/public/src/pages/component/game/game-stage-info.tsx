@@ -6,8 +6,8 @@ import TimerBar from "./game-timer-bar"
 import ReactTooltip from "react-tooltip"
 import {
   AdditionalPicksStages,
-  CarouselStages,
-  MythicalPicksStages,
+  ItemCarouselStages,
+  PortalCarouselStages,
   NeutralStage
 } from "../../../../../types/Config"
 import "./game-stage-info.css"
@@ -54,7 +54,7 @@ export default function GameStageInfo() {
             </p>
             <p>
               <span className="help">{t("carousel_stages")}:</span>{" "}
-              {CarouselStages.join(", ")}
+              {ItemCarouselStages.join(", ")}
             </p>
             <p>
               <span className="help">{t("additional_picks")}:</span>{" "}
@@ -62,7 +62,7 @@ export default function GameStageInfo() {
             </p>
             <p>
               <span className="help">{t("mythical_picks")}:</span> {t("stages")}{" "}
-              {MythicalPicksStages.join(t("and"))}
+              {PortalCarouselStages.join(t("and"))}
             </p>
           </ReactTooltip>
           <p>
@@ -157,7 +157,7 @@ export function StagePath() {
       }
     }
 
-    if (CarouselStages.includes(level)) {
+    if (ItemCarouselStages.includes(level)) {
       path.push({
         level,
         icon: "/assets/ui/carousel.svg",
@@ -167,7 +167,7 @@ export function StagePath() {
         currentLevelPathIndex = path.length - 1
       }
     }
-    if (MythicalPicksStages.includes(level)) {
+    if (PortalCarouselStages.includes(level)) {
       path.push({
         level,
         icon: "/assets/ui/mythical.svg",

@@ -355,6 +355,9 @@ export const HatchList = new Array<Pkm>(
   Pkm.TEPIG
 )
 
+export const NB_MYTHICAL_PROPOSITIONS = 6
+export const SHOP_SIZE = 6
+
 export function getEvolutionCountNeeded(pkm: Pkm): number {
   if (pkm === Pkm.MAGIKARP) {
     return 8
@@ -396,15 +399,18 @@ export const DEFAULT_CRIT_DAMAGE = 2
 
 export const StageDuration: Record<number | "DEFAULT", number> = {
   1: 20,
-  10: 50,
-  20: 50,
+  10: 40,
+  20: 40,
   DEFAULT: 30
 }
+export const FIGHTING_PHASE_DURATION = 40000
+export const ITEM_CAROUSEL_BASE_DURATION = 15000
+export const PORTAL_CAROUSEL_BASE_DURATION = 20000
 
-export const CarouselStages = [4, 7, 12, 17, 22, 27, 32, 37, 42]
+export const ItemCarouselStages = [4, 7, 12, 17, 22, 27, 32, 37, 42]
 export const ItemProposalStages = [2, 3]
 export const AdditionalPicksStages = [5, 8]
-export const MythicalPicksStages = [10, 20]
+export const PortalCarouselStages = [10, 20]
 
 export const NeutralStage: { turn: number; name: string; avatar: Pkm }[] = [
   {

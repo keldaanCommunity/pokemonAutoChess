@@ -3,13 +3,16 @@ import {
   ItemProposalStages,
   ItemRecipe,
   NeutralStage,
-  CarouselStages,
+  ItemCarouselStages,
   StageDuration,
   AdditionalPicksStages,
-  MythicalPicksStages,
+  PortalCarouselStages,
   Mythical1Shop,
   Mythical2Shop,
-  MAX_PLAYERS_PER_LOBBY
+  MAX_PLAYERS_PER_LOBBY,
+  ITEM_CAROUSEL_BASE_DURATION,
+  PORTAL_CAROUSEL_BASE_DURATION,
+  FIGHTING_PHASE_DURATION
 } from "../../types/Config"
 import { Item, BasicItems } from "../../types/enum/Item"
 import { BattleResult } from "../../types/enum/Game"
@@ -20,7 +23,7 @@ import UserMetadata from "../../models/mongo-models/user-metadata"
 import GameRoom from "../game-room"
 import { Client, updateLobby } from "colyseus"
 import { Effect } from "../../types/enum/Effect"
-import { Title, FIGHTING_PHASE_DURATION, Emotion } from "../../types"
+import { Title, Emotion } from "../../types"
 import { MapSchema } from "@colyseus/schema"
 import {
   GamePhaseState,
@@ -151,13 +154,13 @@ export class OnPokemonPropositionCommand extends Command<
       let allowBuy = true
       if (
         Mythical1Shop.includes(pkm) &&
-        this.state.stageLevel !== MythicalPicksStages[0]
+        this.state.stageLevel !== PortalCarouselStages[0]
       ) {
         allowBuy = false // wrong stage
       }
       if (
         Mythical2Shop.includes(pkm) &&
-        this.state.stageLevel !== MythicalPicksStages[1]
+        this.state.stageLevel !== PortalCarouselStages[1]
       ) {
         allowBuy = false // wrong stage
       }
@@ -830,7 +833,7 @@ export class OnUpdateCommand extends Command<
 export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   execute() {
     if (this.state.phase == GamePhaseState.MINIGAME) {
-      this.room.miniGame.stop(this.state.players)
+      this.room.miniGame.stop(this.state)
       this.initializePickingPhase()
     } else if (this.state.phase == GamePhaseState.PICK) {
       this.stopPickingPhase()
@@ -845,7 +848,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         return kickCommands
       }
 
-      if (CarouselStages.includes(this.state.stageLevel)) {
+      if (
+        ItemCarouselStages.includes(this.state.stageLevel) ||
+        PortalCarouselStages.includes(this.state.stageLevel)
+      ) {
         this.initializeMinigamePhase()
       } else {
         this.initializePickingPhase()
@@ -1191,18 +1197,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
       })
     }
 
-    if (this.state.stageLevel === MythicalPicksStages[0]) {
-      this.state.players.forEach((player: Player) => {
-        this.state.shop.assignMythicalPropositions(player, Mythical1Shop)
-      })
-    }
-
-    if (this.state.stageLevel === MythicalPicksStages[1]) {
-      this.state.players.forEach((player: Player) => {
-        this.state.shop.assignMythicalPropositions(player, Mythical2Shop)
-      })
-    }
-
     const isAfterPVE = this.getPVEIndex(this.state.stageLevel - 1) >= 0
     const commands = new Array<Command>()
 
@@ -1444,10 +1438,13 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     const nbPlayersAlive = [...this.state.players.values()].filter(
       (p: Player) => p.life > 0
     ).length
-    const minigamePhaseDuration =
-      this.state.stageLevel === CarouselStages[0]
-        ? 15000
-        : 14000 + nbPlayersAlive * 2000
+
+    let minigamePhaseDuration = ITEM_CAROUSEL_BASE_DURATION
+    if (PortalCarouselStages.includes(this.state.stageLevel)) {
+      minigamePhaseDuration = PORTAL_CAROUSEL_BASE_DURATION
+    } else if (this.state.stageLevel !== ItemCarouselStages[0]) {
+      minigamePhaseDuration += nbPlayersAlive * 2000
+    }
     this.state.time = minigamePhaseDuration
     this.room.miniGame.initialize(this.state.players, this.state.stageLevel)
   }

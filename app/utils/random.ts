@@ -15,7 +15,7 @@ export function pickRandomIn<T>(list: T[] | Record<any, T>): T {
   return list[Math.floor(Math.random() * list.length)]
 }
 
-export function pickNRandomIn<T>(array: T[], number = 1): T[] {
+export function pickNRandomIn<T>(array: T[], number: number): T[] {
   const selection: T[] = [],
     options = [...array]
   shuffleArray(options)
@@ -29,11 +29,12 @@ export function pickNRandomIn<T>(array: T[], number = 1): T[] {
  * Randomize array element order in-place.
  * Using Durstenfeld shuffle algorithm.
  */
-export function shuffleArray(array: Array<any>) {
+export function shuffleArray<T extends Array<any>>(array: T): T {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1))
     const temp = array[i]
     array[i] = array[j]
     array[j] = temp
   }
+  return array
 }
