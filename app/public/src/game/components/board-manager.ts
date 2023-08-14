@@ -117,7 +117,7 @@ export default class BoardManager {
 
     this.animationManager.animatePokemon(pokemonUI, pokemon.action, false)
     this.pokemons.set(pokemonUI.id, pokemonUI)
-    if (pokemon.positionY != 0 && this.mode === BoardMode.BATTLE) {
+    if (pokemon.positionY != 0 && this.mode !== BoardMode.PICK) {
       pokemonUI.setVisible(false)
     }
 
