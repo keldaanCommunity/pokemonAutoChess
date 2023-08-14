@@ -18,8 +18,8 @@ export function transformCoordinate(x: number, y: number) {
   }
 }
 
-export function transformAttackCoordinate(x: number, y: number) {
-  return [28 * 24 + 96 * x, 664 - 96 * y]
+export function transformAttackCoordinate(x: number, y: number, flip: boolean) {
+  return [28 * 24 + 96 * x, flip ? 184 + 96 * y : 664 - 96 * y]
 }
 
 export function transformMiniGameXCoordinate(x: number) {

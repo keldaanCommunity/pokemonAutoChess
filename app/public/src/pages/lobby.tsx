@@ -66,12 +66,8 @@ export type Page = "main_lobby" | "bot_builder" | "bot_manager"
 
 export default function Lobby() {
   const dispatch = useAppDispatch()
-  const { client, user }: Partial<INetwork> & Partial<IUserLobbyState> =
-    useAppSelector((state) => ({
-      client: state.network.client,
-      botList: state.lobby.botList,
-      user: state.lobby.user
-    }))
+  const client = useAppSelector((state) => state.network.client)
+  const user = useAppSelector((state) => state.lobby.user)
 
   const [lobbyJoined, setLobbyJoined] = useState<boolean>(false)
   const [page, setPage] = useState<Page>("main_lobby")

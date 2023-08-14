@@ -40,12 +40,14 @@ import Status from "../../../models/colyseus-models/status"
 import Count from "../../../models/colyseus-models/count"
 import { Ability } from "../../../types/enum/Ability"
 import { Portal, SynergySymbol } from "../../../models/colyseus-models/portal"
+import Simulation from "../../../core/simulation"
 
 class GameContainer {
   room: Room<GameState>
   div: HTMLDivElement
   game: Phaser.Game | undefined
   player: Player | undefined
+  simulation: Simulation | undefined
   tilemap: DesignTiled | undefined
   uid: string
   spectate: boolean
@@ -58,6 +60,274 @@ class GameContainer {
     this.uid = uid
     this.spectate = false
     this.initializeEvents()
+  }
+
+  resetSimulation() {
+    this.simulation = undefined
+    this.gameScene?.battle?.clear()
+  }
+
+  initializeSimulation(simulation: Simulation) {
+    if (
+      simulation.bluePlayerId === this.player?.id ||
+      simulation.redPlayerId === this.player?.id
+    ) {
+      this.setSimulation(simulation)
+    }
+
+    simulation.listen("winnerId", (winnerId) => {
+      if (this.gameScene?.board?.player.simulationId === simulation.id) {
+        this.gameScene.board.victoryAnimation(winnerId)
+      }
+    })
+
+    simulation.listen("weather", (value, previousValue) => {
+      this.handleWeatherChange(simulation, value)
+    })
+
+    simulation.blueTeam.onAdd((p, key) => {
+      const pokemon = <PokemonEntity>p
+      this.gameScene?.battle?.addPokemon(simulation.id, pokemon)
+      const fields: NonFunctionPropNames<Status>[] = [
+        "armorReduction",
+        "burn",
+        "confusion",
+        "deltaOrb",
+        "electricField",
+        "fairyField",
+        "freeze",
+        "grassField",
+        "paralysis",
+        "poisonStacks",
+        "protect",
+        "psychicField",
+        "resurection",
+        "resurecting",
+        "runeProtect",
+        "silence",
+        "sleep",
+        "soulDew",
+        "spikeArmor",
+        "synchro",
+        "wound",
+        "magicBounce"
+      ]
+
+      fields.forEach((field) => {
+        pokemon.status.listen(field, (value, previousValue) => {
+          this.gameScene?.battle?.changeStatus(simulation.id, pokemon, field)
+        })
+      })
+
+      pokemon.onChange((changes) => {
+        const fields: NonFunctionPropNames<PokemonEntity>[] = [
+          "positionX",
+          "positionY",
+          "orientation",
+          "action",
+          "critChance",
+          "critDamage",
+          "ap",
+          "atkSpeed",
+          "life",
+          "shield",
+          "pp",
+          "atk",
+          "def",
+          "speDef",
+          "range",
+          "targetX",
+          "targetY",
+          "team",
+          "index"
+        ]
+
+        fields.forEach((field) => {
+          pokemon.listen(field, (value, previousValue) => {
+            this.gameScene?.battle?.changePokemon(
+              simulation.id,
+              pokemon,
+              field,
+              value,
+              previousValue
+            )
+          })
+        })
+      })
+
+      pokemon.items.onAdd((value, key) => {
+        this.gameScene?.battle?.addPokemonItem(simulation.id, value, pokemon)
+      })
+      pokemon.items.onRemove((value, key) => {
+        this.gameScene?.battle?.removePokemonItem(simulation.id, value, pokemon)
+      })
+
+      const fieldsCount: NonFunctionPropNames<Count>[] = [
+        "crit",
+        "dodgeCount",
+        "ult",
+        "petalDanceCount",
+        "futureSightCount",
+        "earthquakeCount",
+        "fieldCount",
+        "soundCount",
+        "growGroundCount",
+        "fairyCritCount",
+        "powerLensCount",
+        "starDustCount",
+        "mindBlownCount",
+        "spellBlockedCount",
+        "manaBurnCount",
+        "staticCount",
+        "moneyCount",
+        "attackCount",
+        "tripleAttackCount",
+        "monsterExecutionCount",
+        "upgradeCount",
+        "soulDewCount",
+        "defensiveRibbonCount",
+        "attackOrderCount",
+        "healOrderCount"
+      ]
+
+      fieldsCount.forEach((field) => {
+        pokemon.count.listen(field, (value, previousValue) => {
+          this.gameScene?.battle?.changeCount(
+            simulation.id,
+            pokemon,
+            field,
+            value
+          )
+        })
+      })
+    })
+
+    simulation.redTeam.onAdd((p, key) => {
+      // logger.debug('add pokemon');
+      const pokemon = <PokemonEntity>p
+      this.gameScene?.battle?.addPokemon(simulation.id, pokemon)
+
+      const fields: NonFunctionPropNames<Status>[] = [
+        "armorReduction",
+        "burn",
+        "confusion",
+        "deltaOrb",
+        "electricField",
+        "fairyField",
+        "freeze",
+        "grassField",
+        "paralysis",
+        "poisonStacks",
+        "protect",
+        "psychicField",
+        "resurection",
+        "runeProtect",
+        "silence",
+        "sleep",
+        "soulDew",
+        "spikeArmor",
+        "synchro",
+        "wound",
+        "magicBounce"
+      ]
+
+      fields.forEach((field) => {
+        pokemon.status.listen(field, (value, previousValue) => {
+          this.gameScene?.battle?.changeStatus(simulation.id, pokemon, field)
+        })
+      })
+
+      pokemon.onChange((changes) => {
+        const fields: NonFunctionPropNames<PokemonEntity>[] = [
+          "positionX",
+          "positionY",
+          "orientation",
+          "action",
+          "critChance",
+          "critDamage",
+          "ap",
+          "atkSpeed",
+          "life",
+          "shield",
+          "pp",
+          "atk",
+          "def",
+          "speDef",
+          "range",
+          "targetX",
+          "targetY",
+          "team",
+          "index"
+        ]
+
+        fields.forEach((field) => {
+          pokemon.listen(field, (value, previousValue) => {
+            this.gameScene?.battle?.changePokemon(
+              simulation.id,
+              pokemon,
+              field,
+              value,
+              previousValue
+            )
+          })
+        })
+      })
+
+      pokemon.items.onAdd((value, key) => {
+        // logger.debug('added', value, key)
+        this.gameScene?.battle?.addPokemonItem(simulation.id, value, pokemon)
+      })
+      pokemon.items.onRemove((value, key) => {
+        // logger.debug('removed', value, key)
+        this.gameScene?.battle?.removePokemonItem(simulation.id, value, pokemon)
+      })
+      const fieldsCount: NonFunctionPropNames<Count>[] = [
+        "crit",
+        "dodgeCount",
+        "ult",
+        "petalDanceCount",
+        "futureSightCount",
+        "earthquakeCount",
+        "fieldCount",
+        "soundCount",
+        "growGroundCount",
+        "fairyCritCount",
+        "powerLensCount",
+        "starDustCount",
+        "mindBlownCount",
+        "spellBlockedCount",
+        "manaBurnCount",
+        "staticCount",
+        "moneyCount",
+        "attackCount",
+        "tripleAttackCount",
+        "monsterExecutionCount",
+        "upgradeCount",
+        "soulDewCount",
+        "defensiveRibbonCount",
+        "healOrderCount",
+        "attackOrderCount"
+      ]
+
+      fieldsCount.forEach((field) => {
+        pokemon.count.listen(field, (value, previousValue) => {
+          this.gameScene?.battle?.changeCount(
+            simulation.id,
+            pokemon,
+            field,
+            value
+          )
+        })
+      })
+    })
+    simulation.blueTeam.onRemove((pokemon, key) => {
+      // logger.debug('remove pokemon');
+      this.gameScene?.battle?.removePokemon(simulation.id, pokemon)
+    })
+    simulation.redTeam.onRemove((pokemon, key) => {
+      // logger.debug('remove pokemon');
+      this.gameScene?.battle?.removePokemon(simulation.id, pokemon)
+    })
   }
 
   initializeGame() {
@@ -265,142 +535,6 @@ class GameContainer {
         this.gameScene?.itemsContainer?.removeItem(value)
       }
     })
-
-    player.simulation.listen("weather", (value, previousValue) => {
-      this.handleWeatherChange(player, value)
-    })
-
-    for (let team of [player.simulation.blueTeam, player.simulation.redTeam]) {
-      team.onAdd((p, key) => {
-        // logger.debug('add pokemon');
-        const pokemon = <PokemonEntity>p
-        this.gameScene?.battle?.addPokemon(player.id, pokemon)
-
-        const fields: NonFunctionPropNames<Status>[] = [
-          "armorReduction",
-          "burn",
-          "confusion",
-          "deltaOrb",
-          "electricField",
-          "fairyField",
-          "freeze",
-          "grassField",
-          "paralysis",
-          "poisonStacks",
-          "protect",
-          "psychicField",
-          "resurection",
-          "resurecting",
-          "runeProtect",
-          "silence",
-          "sleep",
-          "soulDew",
-          "spikeArmor",
-          "synchro",
-          "wound",
-          "magicBounce"
-        ]
-
-        fields.forEach((field) => {
-          pokemon.status.listen(field, (value, previousValue) => {
-            this.gameScene?.battle?.changeStatus(player.id, pokemon, field)
-          })
-        })
-
-        pokemon.onChange((changes) => {
-          const fields: NonFunctionPropNames<PokemonEntity>[] = [
-            "positionX",
-            "positionY",
-            "orientation",
-            "action",
-            "critChance",
-            "critDamage",
-            "ap",
-            "atkSpeed",
-            "life",
-            "shield",
-            "pp",
-            "atk",
-            "def",
-            "speDef",
-            "range",
-            "targetX",
-            "targetY",
-            "team",
-            "index"
-          ]
-
-          fields.forEach((field) => {
-            pokemon.listen(field, (value, previousValue) => {
-              // logger.debug('simulation change' + change.field);
-              this.gameScene?.battle?.changePokemon(
-                player.id,
-                pokemon,
-                field,
-                value,
-                previousValue
-              )
-            })
-          })
-        })
-
-        pokemon.items.onAdd((value, key) => {
-          // logger.debug('added', value, key)
-          if (player.id === this.spectatedPlayerId) {
-            this.gameScene?.battle?.addPokemonItem(player.id, value, pokemon)
-          }
-        })
-        pokemon.items.onRemove((value, key) => {
-          // logger.debug('removed', value, key)
-          if (player.id === this.spectatedPlayerId) {
-            this.gameScene?.battle?.removePokemonItem(player.id, value, pokemon)
-          }
-        })
-
-        const fieldsCount: NonFunctionPropNames<Count>[] = [
-          "crit",
-          "dodgeCount",
-          "ult",
-          "petalDanceCount",
-          "futureSightCount",
-          "earthquakeCount",
-          "fieldCount",
-          "soundCount",
-          "growGroundCount",
-          "fairyCritCount",
-          "powerLensCount",
-          "starDustCount",
-          "mindBlownCount",
-          "spellBlockedCount",
-          "manaBurnCount",
-          "staticCount",
-          "moneyCount",
-          "attackCount",
-          "tripleAttackCount",
-          "monsterExecutionCount",
-          "upgradeCount",
-          "soulDewCount",
-          "defensiveRibbonCount",
-          "attackOrderCount",
-          "healOrderCount"
-        ]
-
-        fieldsCount.forEach((field) => {
-          pokemon.count.listen(field, (value, previousValue) => {
-            this.gameScene?.battle?.changeCount(
-              player.id,
-              pokemon,
-              field,
-              value
-            )
-          })
-        })
-      })
-
-      team.onRemove((pokemon, key) => {
-        this.gameScene?.battle?.removePokemon(player.id, pokemon)
-      })
-    }
   }
 
   initializeSpectactor(uid: string) {
@@ -420,26 +554,31 @@ class GameContainer {
     return store.getState().game.currentPlayerId
   }
 
-  handleWeatherChange(player: Player, value: Weather) {
-    const weatherManager = this.gameScene?.weatherManager
-    if (weatherManager && player.id === this.spectatedPlayerId) {
-      weatherManager.clearWeather()
-      if (value === Weather.RAIN) {
-        weatherManager.addRain()
-      } else if (value === Weather.SUN) {
-        weatherManager.addSun()
-      } else if (value === Weather.SANDSTORM) {
-        weatherManager.addSandstorm()
-      } else if (value === Weather.SNOW) {
-        weatherManager.addSnow()
-      } else if (value === Weather.NIGHT) {
-        weatherManager.addNight()
-      } else if (value === Weather.WINDY) {
-        weatherManager.addWind()
-      } else if (value === Weather.STORM) {
-        weatherManager.addStorm()
-      } else if (value === Weather.MISTY) {
-        weatherManager.addMist()
+  get simulationId(): string {
+    return this.simulation?.id ? this.simulation.id : ""
+  }
+
+  handleWeatherChange(simulation: Simulation, value: Weather) {
+    if (this.gameScene && simulation.id === this.player?.id) {
+      if (this.gameScene.weatherManager) {
+        this.gameScene.weatherManager.clearWeather()
+        if (value === Weather.RAIN) {
+          this.gameScene.weatherManager.addRain()
+        } else if (value === Weather.SUN) {
+          this.gameScene.weatherManager.addSun()
+        } else if (value === Weather.SANDSTORM) {
+          this.gameScene.weatherManager.addSandstorm()
+        } else if (value === Weather.SNOW) {
+          this.gameScene.weatherManager.addSnow()
+        } else if (value === Weather.NIGHT) {
+          this.gameScene.weatherManager.addNight()
+        } else if (value === Weather.WINDY) {
+          this.gameScene.weatherManager.addWind()
+        } else if (value === Weather.STORM) {
+          this.gameScene.weatherManager.addStorm()
+        } else if (value === Weather.MISTY) {
+          this.gameScene.weatherManager.addMist()
+        }
       }
     }
   }
@@ -526,11 +665,27 @@ class GameContainer {
   }
 
   onPlayerClick(id: string) {
-    if (this.gameScene && this.room.state.players.has(id)) {
-      const player = this.room.state.players.get(id)!
-      this.gameScene.setPlayer(player)
-      this.handleWeatherChange(player, player.simulation.weather)
+    const player = this.room.state.players.get(id)
+    if (player) {
+      this.setPlayer(player)
+      const simulation = this.room.state.simulations.get(player.simulationId)
+      if (simulation) {
+        this.setSimulation(simulation)
+      }
     }
+  }
+
+  setPlayer(player: Player) {
+    this.player = player
+    this.gameScene?.setPlayer(player)
+  }
+
+  setSimulation(simulation: Simulation) {
+    this.simulation = simulation
+    if (this.gameScene?.battle) {
+      this.gameScene?.battle.setSimulation(this.simulation)
+    }
+    this.handleWeatherChange(simulation, simulation.weather)
   }
 
   onDragDrop(event: CustomEvent<IDragDropMessage>) {

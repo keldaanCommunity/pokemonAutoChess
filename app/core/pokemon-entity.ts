@@ -1,5 +1,5 @@
 import { Item } from "../types/enum/Item"
-import { Orientation, PokemonActionState } from "../types/enum/Game"
+import { Orientation, PokemonActionState, Team } from "../types/enum/Game"
 import MovingState from "./moving-state"
 import AttackingState from "./attacking-state"
 import { nanoid } from "nanoid"
@@ -174,7 +174,9 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   get player(): IPlayer | undefined {
-    return this.team === 0 ? this.simulation.player : this.simulation.opponent
+    return this.team === Team.BLUE_TEAM
+      ? this.simulation.bluePlayer
+      : this.simulation.redPlayer
   }
 
   hasSynergyEffect(synergy: Synergy): boolean {
@@ -403,7 +405,8 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.items.has(Item.LEFTOVERS)) {
-      ;[-1, 0, 1].forEach((offset) => {
+      const neighbours = [-1, 0, 1]
+      neighbours.forEach((offset) => {
         const value = board.getValue(this.positionX + offset, this.positionY)
         if (value && value.team === this.team) {
           this.handleHeal(value.hp * 0.05, this, 0)
@@ -633,7 +636,6 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   onKill(target: PokemonEntity, board: Board) {
     if (
       this.items.has(Item.AMULET_COIN) &&
-      this.team === 0 &&
       this.player &&
       this.count.moneyCount < 5
     ) {

@@ -26,7 +26,8 @@ import {
   PokemonActionState,
   SpriteType,
   PokemonTint,
-  Rarity
+  Rarity,
+  Team
 } from "../../../../types/enum/Game"
 import { Ability } from "../../../../types/enum/Ability"
 import { Passive } from "../../../../types/enum/Passive"
@@ -104,6 +105,7 @@ export default class Pokemon extends DraggableObject {
   playerId: string
   shouldShowTooltipOnHover: boolean
   shouldShowTooltip: boolean
+  flip: boolean
 
   constructor(
     scene: GameScene,
@@ -111,9 +113,11 @@ export default class Pokemon extends DraggableObject {
     y: number,
     pokemon: IPokemonEntity | IPokemon,
     playerId: string,
-    inBattle: boolean
+    inBattle: boolean,
+    flip: boolean
   ) {
     super(scene, x, y, 75, 75, playerId !== scene.uid)
+    this.flip = flip
     this.playerId = playerId
     this.shouldShowTooltip = true
     this.stars = pokemon.stars
@@ -182,7 +186,11 @@ export default class Pokemon extends DraggableObject {
         const g = <GameScene>scene
         // go back to idle anim if no more animation in queue
         if (pokemon.action !== PokemonActionState.HURT) {
-          g.animationManager?.animatePokemon(this, PokemonActionState.IDLE)
+          g.animationManager?.animatePokemon(
+            this,
+            PokemonActionState.IDLE,
+            this.flip
+          )
         }
       }
     )
@@ -387,7 +395,7 @@ export default class Pokemon extends DraggableObject {
     }
 
     if (x && y) {
-      const coordinates = transformAttackCoordinate(x, y)
+      const coordinates = transformAttackCoordinate(x, y, this.flip)
 
       this.projectile = this.scene.add.sprite(
         coordinates[0],
@@ -405,7 +413,8 @@ export default class Pokemon extends DraggableObject {
   petalDanceAnimation() {
     const coordinates = transformAttackCoordinate(
       this.positionX,
-      this.positionY
+      this.positionY,
+      this.flip
     )
     const specialProjectile = this.scene.add.sprite(
       coordinates[0],
@@ -424,7 +433,8 @@ export default class Pokemon extends DraggableObject {
   futureSightAnimation() {
     const coordinates = transformAttackCoordinate(
       this.positionX,
-      this.positionY
+      this.positionY,
+      this.flip
     )
     const specialProjectile = this.scene.add.sprite(
       coordinates[0],
@@ -443,7 +453,8 @@ export default class Pokemon extends DraggableObject {
   fieldDeathAnimation() {
     const coordinates = transformAttackCoordinate(
       this.positionX,
-      this.positionY
+      this.positionY,
+      this.flip
     )
     const specialProjectile = this.scene.add.sprite(
       coordinates[0],
@@ -462,7 +473,8 @@ export default class Pokemon extends DraggableObject {
   fairyCritAnimation() {
     const coordinates = transformAttackCoordinate(
       this.positionX,
-      this.positionY
+      this.positionY,
+      this.flip
     )
     const specialProjectile = this.scene.add.sprite(
       coordinates[0],
@@ -481,7 +493,8 @@ export default class Pokemon extends DraggableObject {
   soundAnimation() {
     const coordinates = transformAttackCoordinate(
       this.positionX,
-      this.positionY
+      this.positionY,
+      this.flip
     )
     const specialProjectile = this.scene.add.sprite(
       coordinates[0],
@@ -500,7 +513,8 @@ export default class Pokemon extends DraggableObject {
   growGroundAnimation() {
     const coordinates = transformAttackCoordinate(
       this.positionX,
-      this.positionY
+      this.positionY,
+      this.flip
     )
     const specialProjectile = this.scene.add.sprite(
       coordinates[0],
@@ -519,7 +533,8 @@ export default class Pokemon extends DraggableObject {
   powerLensAnimation() {
     const coordinates = transformAttackCoordinate(
       this.positionX,
-      this.positionY
+      this.positionY,
+      this.flip
     )
     const specialProjectile = this.scene.add.sprite(
       coordinates[0],
@@ -538,7 +553,8 @@ export default class Pokemon extends DraggableObject {
   starDustAnimation() {
     const coordinates = transformAttackCoordinate(
       this.positionX,
-      this.positionY
+      this.positionY,
+      this.flip
     )
     const specialProjectile = this.scene.add.sprite(
       coordinates[0],
@@ -557,7 +573,8 @@ export default class Pokemon extends DraggableObject {
   staticAnimation() {
     const coordinates = transformAttackCoordinate(
       this.positionX,
-      this.positionY
+      this.positionY,
+      this.flip
     )
     const specialProjectile = this.scene.add.sprite(
       coordinates[0],
@@ -576,7 +593,8 @@ export default class Pokemon extends DraggableObject {
   healOrderAnimation() {
     const coordinates = transformAttackCoordinate(
       this.positionX,
-      this.positionY
+      this.positionY,
+      this.flip
     )
     const specialProjectile = this.scene.add.sprite(
       coordinates[0],
@@ -595,7 +613,8 @@ export default class Pokemon extends DraggableObject {
   attackOrderAnimation() {
     const coordinates = transformAttackCoordinate(
       this.positionX,
-      this.positionY
+      this.positionY,
+      this.flip
     )
     const specialProjectile = this.scene.add.sprite(
       coordinates[0],
@@ -614,7 +633,8 @@ export default class Pokemon extends DraggableObject {
   earthquakeAnimation() {
     const coordinates = transformAttackCoordinate(
       this.positionX,
-      this.positionY
+      this.positionY,
+      this.flip
     )
     const specialProjectile = this.scene.add.sprite(
       coordinates[0],
@@ -633,7 +653,8 @@ export default class Pokemon extends DraggableObject {
   mindBlownAnimation() {
     const coordinates = transformAttackCoordinate(
       this.positionX,
-      this.positionY
+      this.positionY,
+      this.flip
     )
     const specialProjectile = this.scene.add.sprite(
       coordinates[0],
@@ -681,7 +702,8 @@ export default class Pokemon extends DraggableObject {
 
     const coordinates = transformAttackCoordinate(
       this.positionX,
-      this.positionY
+      this.positionY,
+      this.flip
     )
     const resurectAnim = this.scene.add.sprite(
       coordinates[0],
@@ -713,7 +735,11 @@ export default class Pokemon extends DraggableObject {
     })
     this.sprite.once(Phaser.Animations.Events.ANIMATION_REPEAT, () => {
       const g = <GameScene>this.scene
-      g.animationManager?.animatePokemon(this, PokemonActionState.IDLE)
+      g.animationManager?.animatePokemon(
+        this,
+        PokemonActionState.IDLE,
+        this.flip
+      )
     })
   }
 
@@ -730,7 +756,11 @@ export default class Pokemon extends DraggableObject {
       this.targetX != -1 &&
       this.targetY != -1
     ) {
-      const coordinates = transformAttackCoordinate(this.targetX, this.targetY)
+      const coordinates = transformAttackCoordinate(
+        this.targetX,
+        this.targetY,
+        this.flip
+      )
 
       if (this.scene) {
         // logger.debug(`Shooting a projectile to (${this.targetX},${this.targetY})`);
@@ -763,7 +793,8 @@ export default class Pokemon extends DraggableObject {
         60,
         pokemon.life + pokemon.shield,
         pokemon.shield,
-        pokemon.team
+        pokemon.team as Team,
+        this.flip
       )
       this.lifebar.setAmount(pokemon.life)
       this.lifebar.setShieldAmount(pokemon.shield)

@@ -1883,5 +1883,6 @@
   "pkm.FURRET": "Furret",
   "pkm.SENTRET": "Sentret",
   "ability_description.HELPING_HAND": "Verdoppeln Sie den Schaden des nächsten Zaubers, der von den nächsten [2,4,6] Verbündeten gewirkt wird",
-  "language": "Sprache"
+  "language": "Sprache",
+  "community_translations": "Übersetzungen werden von der Community verwaltet. Wenn Sie oder hinzufügen möchten\r\n              Helfen Sie dabei, eine Übersetzung zu verbessern, gehen Sie zu"
 }

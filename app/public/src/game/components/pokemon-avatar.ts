@@ -31,6 +31,7 @@ export default class PokemonAvatar extends Pokemon {
         selectedShiny: pokemon.shiny
       }),
       playerId,
+      false,
       false
     )
     this.shouldShowTooltip = false
@@ -117,7 +118,8 @@ export default class PokemonAvatar extends Pokemon {
       60,
       100,
       0,
-      this.isCurrentPlayerAvatar ? 0 : 1
+      this.isCurrentPlayerAvatar ? 0 : 1,
+      false
     )
     this.add(this.lifebar)
   }

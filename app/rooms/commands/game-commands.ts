@@ -50,6 +50,9 @@ import { logger } from "../../utils/logger"
 import { Passive } from "../../types/enum/Passive"
 import { getAvatarString } from "../../public/src/utils"
 import { max } from "../../utils/number"
+import { getWeather } from "../../utils/weather"
+import Simulation from "../../core/simulation"
+import { nanoid } from "nanoid"
 
 export class OnShopCommand extends Command<
   GameRoom,
@@ -94,12 +97,12 @@ export class OnShopCommand extends Command<
             player.board.set(pokemon.id, pokemon)
 
             if (pokemon.rarity == Rarity.MYTHICAL) {
-              this.state.shop.assignShop(player, false)
+              this.state.shop.assignShop(player, false, this.state.stageLevel)
             } else if (
               pokemon.passive === Passive.UNOWN &&
               player.effects.list.includes(Effect.EERIE_SPELL)
             ) {
-              this.state.shop.assignShop(player, true)
+              this.state.shop.assignShop(player, true, this.state.stageLevel)
             } else {
               player.shop[index] = Pkm.DEFAULT
             }
@@ -695,7 +698,7 @@ export class OnRefreshCommand extends Command<
   execute(id) {
     const player = this.state.players.get(id)
     if (player && player.money >= 1 && player.alive) {
-      this.state.shop.assignShop(player, true)
+      this.state.shop.assignShop(player, true, this.state.stageLevel)
       player.money -= 1
       player.rerollCount++
     }
@@ -756,8 +759,7 @@ export class OnJoinCommand extends Command<
             this.state.players.size + 1,
             user.pokemonCollection,
             user.title,
-            user.role,
-            this.room
+            user.role
           )
 
           this.state.players.set(client.auth.uid, player)
@@ -768,7 +770,7 @@ export class OnJoinCommand extends Command<
             )
           }
 
-          this.state.shop.assignShop(player, false)
+          this.state.shop.assignShop(player, false, this.state.stageLevel)
           if (this.state.players.size >= MAX_PLAYERS_PER_LOBBY) {
             let nbHumanPlayers = 0
             this.state.players.forEach((p) => {
@@ -808,13 +810,11 @@ export class OnUpdateCommand extends Command<
       } else if (this.state.phase == GamePhaseState.FIGHT) {
         let everySimulationFinished = true
 
-        this.state.players.forEach((player, key) => {
-          if (!player.simulation.finished) {
-            if (everySimulationFinished) {
-              everySimulationFinished = false
-            }
-            player.simulation.update(deltaTime)
+        this.state.simulations.forEach((simulation) => {
+          if (!simulation.finished) {
+            everySimulationFinished = false
           }
+          simulation.update(deltaTime)
         })
 
         if (everySimulationFinished) {
@@ -867,107 +867,119 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
 
   checkSuccess(player: Player) {
     player.titles.add(Title.NOVICE)
-    player.simulation.blueEffects.forEach((effect) => {
-      switch (effect) {
-        case Effect.PURE_POWER:
-          player.titles.add(Title.POKEFAN)
-          break
-        case Effect.SPORE:
-          player.titles.add(Title.POKEMON_RANGER)
-          break
-        case Effect.DESOLATE_LAND:
-          player.titles.add(Title.KINDLER)
-          break
-        case Effect.PRIMORDIAL_SEA:
-          player.titles.add(Title.FIREFIGHTER)
-          break
-        case Effect.OVERDRIVE:
-          player.titles.add(Title.ELECTRICIAN)
-          break
-        case Effect.JUSTIFIED:
-          player.titles.add(Title.BLACK_BELT)
-          break
-        case Effect.EERIE_SPELL:
-          player.titles.add(Title.TELEKINESIST)
-          break
-        case Effect.BEAT_UP:
-          player.titles.add(Title.DELINQUENT)
-          break
-        case Effect.STEEL_SURGE:
-          player.titles.add(Title.ENGINEER)
-          break
-        case Effect.DRILLER:
-          player.titles.add(Title.GEOLOGIST)
-          break
-        case Effect.TOXIC:
-          player.titles.add(Title.TEAM_ROCKET_GRUNT)
-          break
-        case Effect.DRAGON_DANCE:
-          player.titles.add(Title.DRAGON_TAMER)
-          break
-        case Effect.ANGER_POINT:
-          player.titles.add(Title.CAMPER)
-          break
-        case Effect.POWER_TRIP:
-          player.titles.add(Title.MYTH_TRAINER)
-          break
-        case Effect.CALM_MIND:
-          player.titles.add(Title.RIVAL)
-          break
-        case Effect.WATER_VEIL:
-          player.titles.add(Title.DIVER)
-          break
-        case Effect.HEART_OF_THE_SWARM:
-          player.titles.add(Title.BUG_MANIAC)
-          break
-        case Effect.MAX_GUARD:
-          player.titles.add(Title.BIRD_KEEPER)
-          break
-        case Effect.SUN_FLOWER:
-          player.titles.add(Title.GARDENER)
-          break
-        case Effect.GOOGLE_SPECS:
-          player.titles.add(Title.ALCHEMIST)
-          break
-        case Effect.DIAMOND_STORM:
-          player.titles.add(Title.HIKER)
-          break
-        case Effect.CURSE:
-          player.titles.add(Title.HEX_MANIAC)
-          break
-        case Effect.STRANGE_STEAM:
-          player.titles.add(Title.CUTE_MANIAC)
-          break
-        case Effect.SHEER_COLD:
-          player.titles.add(Title.SKIER)
-          break
-        case Effect.FORGOTTEN_POWER:
-          player.titles.add(Title.MUSEUM_DIRECTOR)
-          break
-        case Effect.PRESTO:
-          player.titles.add(Title.MUSICIAN)
-          break
-        case Effect.BREEDER:
-          player.titles.add(Title.BABYSITTER)
-          break
-        default:
-          break
+    const effects = this.state.simulations
+      .get(player.simulationId)
+      ?.getEffects(player.id)
+    if (effects) {
+      effects.forEach((effect) => {
+        switch (effect) {
+          case Effect.PURE_POWER:
+            player.titles.add(Title.POKEFAN)
+            break
+          case Effect.SPORE:
+            player.titles.add(Title.POKEMON_RANGER)
+            break
+          case Effect.DESOLATE_LAND:
+            player.titles.add(Title.KINDLER)
+            break
+          case Effect.PRIMORDIAL_SEA:
+            player.titles.add(Title.FIREFIGHTER)
+            break
+          case Effect.OVERDRIVE:
+            player.titles.add(Title.ELECTRICIAN)
+            break
+          case Effect.JUSTIFIED:
+            player.titles.add(Title.BLACK_BELT)
+            break
+          case Effect.EERIE_SPELL:
+            player.titles.add(Title.TELEKINESIST)
+            break
+          case Effect.BEAT_UP:
+            player.titles.add(Title.DELINQUENT)
+            break
+          case Effect.STEEL_SURGE:
+            player.titles.add(Title.ENGINEER)
+            break
+          case Effect.DRILLER:
+            player.titles.add(Title.GEOLOGIST)
+            break
+          case Effect.TOXIC:
+            player.titles.add(Title.TEAM_ROCKET_GRUNT)
+            break
+          case Effect.DRAGON_DANCE:
+            player.titles.add(Title.DRAGON_TAMER)
+            break
+          case Effect.ANGER_POINT:
+            player.titles.add(Title.CAMPER)
+            break
+          case Effect.POWER_TRIP:
+            player.titles.add(Title.MYTH_TRAINER)
+            break
+          case Effect.CALM_MIND:
+            player.titles.add(Title.RIVAL)
+            break
+          case Effect.WATER_VEIL:
+            player.titles.add(Title.DIVER)
+            break
+          case Effect.HEART_OF_THE_SWARM:
+            player.titles.add(Title.BUG_MANIAC)
+            break
+          case Effect.MAX_GUARD:
+            player.titles.add(Title.BIRD_KEEPER)
+            break
+          case Effect.SUN_FLOWER:
+            player.titles.add(Title.GARDENER)
+            break
+          case Effect.GOOGLE_SPECS:
+            player.titles.add(Title.ALCHEMIST)
+            break
+          case Effect.DIAMOND_STORM:
+            player.titles.add(Title.HIKER)
+            break
+          case Effect.CURSE:
+            player.titles.add(Title.HEX_MANIAC)
+            break
+          case Effect.STRANGE_STEAM:
+            player.titles.add(Title.CUTE_MANIAC)
+            break
+          case Effect.SHEER_COLD:
+            player.titles.add(Title.SKIER)
+            break
+          case Effect.FORGOTTEN_POWER:
+            player.titles.add(Title.MUSEUM_DIRECTOR)
+            break
+          case Effect.PRESTO:
+            player.titles.add(Title.MUSICIAN)
+            break
+          case Effect.BREEDER:
+            player.titles.add(Title.BABYSITTER)
+            break
+          default:
+            break
+        }
+      })
+      if (effects.length >= 5) {
+        player.titles.add(Title.HARLEQUIN)
       }
-    })
-    if (player.simulation.blueEffects.length >= 5) {
-      player.titles.add(Title.HARLEQUIN)
-    }
-    let shield = 0
-    let heal = 0
-    player.simulation.blueHealDpsMeter.forEach((v) => {
-      shield += v.shield
-      heal += v.heal
-    })
-    if (shield > 1000) {
-      player.titles.add(Title.GARDIAN)
-    }
-    if (heal > 1000) {
-      player.titles.add(Title.NURSE)
+      let shield = 0
+      let heal = 0
+      const dpsMeter = this.state.simulations
+        .get(player.simulationId)
+        ?.getHealDpsMeter(player.id)
+
+      if (dpsMeter) {
+        dpsMeter.forEach((v) => {
+          shield += v.shield
+          heal += v.heal
+        })
+      }
+
+      if (shield > 1000) {
+        player.titles.add(Title.GARDIAN)
+      }
+      if (heal > 1000) {
+        player.titles.add(Title.NURSE)
+      }
     }
   }
 
@@ -1045,14 +1057,20 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   computeLife() {
     this.state.players.forEach((player) => {
       if (player.alive) {
-        const currentResult = player.getCurrentBattleResult()
+        const currentResult = this.state.simulations
+          .get(player.simulationId)
+          ?.getCurrentBattleResult(player.id)
 
+        const opponentTeam = this.state.simulations
+          .get(player.simulationId)
+          ?.getOpponentTeam(player.id)
         if (
-          currentResult == BattleResult.DEFEAT ||
-          currentResult == BattleResult.DRAW
+          opponentTeam &&
+          (currentResult === BattleResult.DEFEAT ||
+            currentResult === BattleResult.DRAW)
         ) {
           const playerDamage = this.computePlayerDamage(
-            player.simulation.redTeam,
+            opponentTeam,
             this.state.stageLevel
           )
           player.life -= playerDamage
@@ -1073,7 +1091,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
       if (!player.alive) {
         return
       }
-      const currentResult = player.getCurrentBattleResult()
+      const currentResult = this.state.simulations
+        .get(player.simulationId)
+        ?.getCurrentBattleResult(player.id)
       const currentStreakType = player.getCurrentStreakType()
 
       if (currentResult === BattleResult.DRAW) {
@@ -1113,14 +1133,18 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   registerBattleResults(isPVE: boolean) {
     this.state.players.forEach((player) => {
       if (player.alive) {
-        const currentResult = player.getCurrentBattleResult()
-        player.addBattleResult(
-          player.opponentName,
-          currentResult,
-          player.opponentAvatar,
-          isPVE,
-          player.simulation.weather
-        )
+        const currentResult = this.state.simulations
+          .get(player.simulationId)
+          ?.getCurrentBattleResult(player.id)
+        if (currentResult) {
+          player.addBattleResult(
+            player.opponentName,
+            currentResult,
+            player.opponentAvatar,
+            isPVE,
+            this.state.simulations.get(player.simulationId)?.weather
+          )
+        }
       }
     })
   }
@@ -1322,9 +1346,11 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     this.rankPlayers()
     this.checkDeath()
     this.computeIncome()
+    this.state.simulations.forEach((simulation) => {
+      simulation.stop()
+    })
 
     this.state.players.forEach((player: Player, key: string) => {
-      player.simulation.stop()
       if (player.alive) {
         if (player.isBot) {
           player.experienceManager.level = Math.min(
@@ -1369,16 +1395,11 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
           }
         }
 
-        player.opponentName = ""
-        player.opponentId = ""
-        player.opponentAvatar = ""
-        player.opponentTitle = ""
-
         if (!player.isBot) {
           if (!player.shopLocked) {
-            this.state.shop.assignShop(player, false)
+            this.state.shop.assignShop(player, false, this.state.stageLevel)
           } else {
-            this.state.shop.refillShop(player)
+            this.state.shop.refillShop(player, this.state.stageLevel)
             player.shopLocked = false
           }
         }
@@ -1419,7 +1440,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
             player.synergies.update(player.board)
             player.effects.update(player.synergies, player.board)
             if (!player.shopLocked) {
-              this.state.shop.assignShop(player, false) // refresh unown shop in case player lost psychic 6
+              this.state.shop.assignShop(player, false, this.state.stageLevel) // refresh unown shop in case player lost psychic 6
             }
           }
         })
@@ -1449,7 +1470,24 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     this.room.miniGame.initialize(this.state.players, this.state.stageLevel)
   }
 
+  getSetDistance(set: Set<string>) {
+    const players = new Array<Player>()
+    let distance = 0
+    set.forEach((id) => {
+      const player = this.state.players.get(id)
+      player && players.push(player)
+    })
+    const playerA = players[0]
+    const playerB = players[1]
+    if (playerA && playerB) {
+      const d = playerA.opponents.get(playerB.id)
+      distance = d ? d : 0
+    }
+    return distance
+  }
+
   initializeFightingPhase() {
+    this.state.simulations.clear()
     this.state.phase = GamePhaseState.FIGHT
     this.state.time = FIGHTING_PHASE_DURATION
     this.room.setMetadata({ stageLevel: this.state.stageLevel })
@@ -1459,9 +1497,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     const stageIndex = this.getPVEIndex(this.state.stageLevel)
     this.state.shinyEncounter = this.state.stageLevel === 9 && chance(1 / 20)
 
-    this.state.players.forEach((player: Player, key: string) => {
-      if (player.alive) {
-        if (stageIndex != -1) {
+    if (stageIndex !== -1) {
+      this.state.players.forEach((player: Player, key: string) => {
+        if (player.alive) {
           player.opponentId = "pve"
           player.opponentName = NeutralStage[stageIndex].name
           player.opponentAvatar = getAvatarString(
@@ -1474,36 +1512,93 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
             this.state.stageLevel,
             this.state.shinyEncounter
           )
-          const weather = player.simulation.getWeather(player.board, pveBoard)
-          player.simulation.initialize(
+          const weather = getWeather(player.board, pveBoard)
+          const simulation = new Simulation(
+            nanoid(),
+            this.room,
             player.board,
             pveBoard,
             player,
-            null,
+            undefined,
             this.state.stageLevel,
             weather
           )
-        } else {
-          const opponentId = this.room.computeRandomOpponent(key)
-          if (opponentId) {
-            const opponent = this.state.players.get(opponentId)
-            if (opponent) {
-              const weather = player.simulation.getWeather(
-                player.board,
-                opponent.board
-              )
-              player.simulation.initialize(
-                player.board,
-                opponent.board,
-                player,
-                opponent,
-                this.state.stageLevel,
-                weather
-              )
+          player.simulationId = simulation.id
+          this.state.simulations.set(simulation.id, simulation)
+        }
+      })
+    } else {
+      this.state.players.forEach((player) => {
+        this.state.players.forEach((p) => {
+          if (player.id !== p.id) {
+            if (!player.opponents.has(p.id) && p.alive) {
+              player.opponents.set(p.id, 0)
             }
+            if (player.opponents.has(p.id) && !p.alive) {
+              player.opponents.delete(p.id)
+            }
+          }
+        })
+      })
+      let matchups = new Array<Set<string>>()
+      this.state.players.forEach((player) => {
+        this.state.players.forEach((p) => {
+          if (
+            player.id !== p.id &&
+            player.alive &&
+            p.alive &&
+            !matchups.find(
+              (matchup) => matchup.has(player.id) && matchup.has(p.id)
+            )
+          ) {
+            matchups.push(new Set([p.id, player.id]))
+          }
+        })
+      })
+      matchups.sort((a, b) => this.getSetDistance(a) - this.getSetDistance(b))
+      while (matchups.length > 0) {
+        const matchup = matchups.shift()
+        if (matchup) {
+          const players = new Array<Player>()
+          matchup.forEach((id) => {
+            const player = this.state.players.get(id)
+            player && players.push(player)
+          })
+          const playerA = players[0]
+          const playerB = players[1]
+          if (playerA && playerB) {
+            const weather = getWeather(playerA.board, playerB.board)
+            const simulationId = nanoid()
+            const simulation = new Simulation(
+              simulationId,
+              this.room,
+              playerA.board,
+              playerB.board,
+              playerA,
+              playerB,
+              this.state.stageLevel,
+              weather
+            )
+            playerA.simulationId = simulationId
+            playerB.simulationId = simulationId
+            playerA.opponents.set(playerB.id, this.state.stageLevel)
+            playerB.opponents.set(playerA.id, this.state.stageLevel)
+            playerA.opponentId = playerB.id
+            playerB.opponentId = playerA.id
+            playerA.opponentName = playerB.name
+            playerB.opponentName = playerA.name
+            playerA.opponentAvatar = playerB.avatar
+            playerB.opponentAvatar = playerA.avatar
+            playerA.opponentTitle = playerB.title ?? ""
+            playerB.opponentTitle = playerA.title ?? ""
+            this.state.simulations.set(simulation.id, simulation)
+
+            matchups = matchups.filter(
+              (matchup) => !(matchup.has(playerA.id) || matchup.has(playerB.id))
+            )
           }
         }
       }
-    })
+    }
   }
 }

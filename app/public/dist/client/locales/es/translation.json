@@ -1883,5 +1883,6 @@
   "pkm.FURRET": "furret",
   "pkm.SENTRET": "centinela",
   "ability_description.HELPING_HAND": "Duplica el daño del siguiente hechizo lanzado por los [2,4,6] aliados más cercanos",
-  "language": "Idioma"
+  "language": "Idioma",
+  "community_translations": "Las traducciones son gestionadas por la comunidad. Si desea agregar o\r\n              ayuda a mejorar una traducción, dirígete a"
 }

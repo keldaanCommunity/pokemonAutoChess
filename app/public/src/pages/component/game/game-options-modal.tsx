@@ -96,8 +96,7 @@ export default function GameOptionsModal(props: {
               </label>
             </p>
             <p>
-              Translations are managed by the community. If you want to add or
-              help improve a translation, head over to&nbsp;
+              {t("community_translations")}
               <a
                 href="https://discord.com/channels/737230355039387749/1134014553529790464"
                 target="_blank"

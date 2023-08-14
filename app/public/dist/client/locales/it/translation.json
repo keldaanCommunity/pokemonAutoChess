@@ -1882,5 +1882,6 @@
   "pkm.FURRET": "Furretto",
   "pkm.SENTRET": "Sentret",
   "ability_description.HELPING_HAND": "Raddoppia il danno del prossimo incantesimo lanciato dagli alleati [2,4,6] più vicini",
-  "language": "Lingua"
+  "language": "Lingua",
+  "community_translations": "Le traduzioni sono gestite dalla comunità. Se vuoi aggiungere o\r\n              aiuta a migliorare una traduzione, vai su"
 }

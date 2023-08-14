@@ -12,6 +12,7 @@ import { ITracker } from "../../../../types/ITracker"
 import { cc } from "../../pages/utils/jsx"
 import { IPlayer } from "../../../../types"
 import { logger } from "../../../../utils/logger"
+import { useTranslation } from "react-i18next"
 
 const sendEmote = throttle(function (
   index: string,
@@ -27,6 +28,7 @@ export function EmoteMenuComponent(props: {
   index: string
   shiny: boolean
 }) {
+  const { t } = useTranslation()
   let emotions: Emotion[] = [
     Emotion.HAPPY,
     Emotion.JOYOUS,
@@ -55,7 +57,9 @@ export function EmoteMenuComponent(props: {
   }
   const pConfig = pokemonCollection[props.index]
 
-  return (
+  return emotions.length === 0 ? (
+    <div>{t("no_emotions_available")}</div>
+  ) : (
     <ul>
       {emotions.map((emotion) => {
         const unlocked = pConfig && pConfig.emotions.includes(emotion)
@@ -63,7 +67,7 @@ export function EmoteMenuComponent(props: {
           <li key={emotion}>
             <img
               src={getPortraitSrc(props.index, props.shiny, emotion)}
-              title={emotion + (!unlocked ? " (locked)":"")}
+              title={emotion + (!unlocked ? " (locked)" : "")}
               className={cc({ locked: !unlocked })}
               onClick={() =>
                 unlocked && sendEmote(props.index, props.shiny, emotion)

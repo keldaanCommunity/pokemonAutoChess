@@ -1,6 +1,6 @@
 import { Item } from "../types/enum/Item"
 import { Effect } from "../types/enum/Effect"
-import { AttackType, Rarity } from "../types/enum/Game"
+import { AttackType, Rarity, Team } from "../types/enum/Game"
 import { Weather } from "../types/enum/Weather"
 import Board from "./board"
 import PokemonEntity from "./pokemon-entity"
@@ -235,7 +235,7 @@ export class PaydayStrategy extends AttackStrategy {
       pokemon,
       crit
     )
-    if (death && pokemon.team === 0 && pokemon.player) {
+    if (death && pokemon.player) {
       pokemon.player.money += pokemon.stars
       pokemon.count.moneyCount++
     }
@@ -2282,7 +2282,7 @@ export class SleepStrategy extends AttackStrategy {
       }
     })
     rank.sort((a, b) => {
-      if (a.team === 0) {
+      if (a.team === Team.BLUE_TEAM) {
         return a.positionY - b.positionY
       } else {
         return b.positionY - a.positionY

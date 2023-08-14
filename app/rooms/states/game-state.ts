@@ -17,7 +17,7 @@ import {
 import { PkmProposition } from "../../types/enum/Pokemon"
 import { pickRandomIn } from "../../utils/random"
 import { Portal, SynergySymbol } from "../../models/colyseus-models/portal"
-
+import Simulation from "../../core/simulation"
 export default class GameState extends Schema {
   @type("string") afterGameId = ""
   @type("uint8") roundTime = StageDuration[1]
@@ -34,6 +34,7 @@ export default class GameState extends Schema {
   @type("string") weather: Weather
   @type("boolean") noElo = false
   @type({ set: "string" }) spectators = new SetSchema<string>()
+  @type({ map: Simulation }) simulations = new MapSchema<Simulation>()
   time = StageDuration[1] * 1000
   botManager: BotManager = new BotManager()
   shop: Shop = new Shop()

@@ -128,8 +128,7 @@ export default class GameRoom extends Room<GameState> {
           this.state.players.size + 1,
           new Map<string, IPokemonConfig>(),
           "",
-          Role.BOT,
-          this
+          Role.BOT
         )
         this.state.players.set(user.id, player)
         this.state.botManager.addBot(player)
@@ -661,58 +660,6 @@ export default class GameRoom extends Room<GameState> {
       }
     })
     return simplePlayer
-  }
-
-  computeRandomOpponent(playerId: string) {
-    const player = this.state.players.get(playerId)
-    if (player) {
-      this.state.players.forEach((p) => {
-        if (player.id !== p.id) {
-          if (!player.opponents.has(p.id) && p.alive) {
-            player.opponents.set(p.id, 0)
-          }
-          if (player.opponents.has(p.id) && !p.alive) {
-            player.opponents.delete(p.id)
-          }
-        }
-      })
-      const sortArray = Array.from(player.opponents)
-      sortArray.sort((a, b) => {
-        return a[1] - b[1]
-      })
-
-      if (sortArray.length > 0) {
-        const min = sortArray[0][1]
-        const potentials = sortArray.filter((o) => o[1] === min)
-        const potential = pickRandomIn(potentials)
-        const id = potential[0]
-        const opponent = this.state.players.get(id)
-        if (opponent) {
-          player.opponents.set(id, this.state.stageLevel)
-          player.opponentId = id
-          player.opponentName = opponent.name
-          player.opponentAvatar = opponent.avatar
-          player.opponentTitle = opponent.title ?? ""
-          return id
-        } else {
-          logger.error(
-            "ERROR, no opponent found. Players size:",
-            this.state.players.size
-          )
-          logger.error("ERROR, sortArray =")
-          sortArray.forEach((p) => logger.error(p))
-          logger.error("ERROR, potentials = ")
-          potentials.forEach((p) => logger.error(p))
-          logger.error("ERROR, potentail = ", potential)
-          logger.error("ERROR, id", id)
-          logger.error("ERROR", opponent)
-          this.state.players.forEach((player) => {
-            logger.error(player.id, player.name, player.alive)
-            logger.error(player.opponents)
-          })
-        }
-      }
-    }
   }
 
   swap(playerId: string, pokemon: IPokemon, x: number, y: number) {

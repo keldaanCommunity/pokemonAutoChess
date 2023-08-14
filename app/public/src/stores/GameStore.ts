@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { GamePhaseState } from "../../../types/enum/Game"
 import { Weather } from "../../../types/enum/Weather"
-import { IDps, IDpsHeal, IPlayer } from "../../../types"
+import { IDps, IDpsHeal, IPlayer, ISimulation } from "../../../types"
 import { ArraySchema, MapSchema } from "@colyseus/schema"
 import ExperienceManager from "../../../models/colyseus-models/experience-manager"
 import Synergies from "../../../models/colyseus-models/synergies"
@@ -12,6 +12,8 @@ import { Pkm, PkmProposition } from "../../../types/enum/Pokemon"
 import { Item } from "../../../types/enum/Item"
 import { StageDuration } from "../../../types/Config"
 import { getGameScene } from "../pages/game"
+import { removeInArray } from "../../../utils/array"
+import Simulation from "../../../core/simulation"
 
 interface GameStateStore {
   afterGameId: string
@@ -19,10 +21,12 @@ interface GameStateStore {
   roundTime: number
   phase: GamePhaseState
   players: IPlayer[]
+  simulations: ISimulation[]
   stageLevel: number
   mapName: string
   noElo: boolean
   currentPlayerId: string
+  currentSimulationId: string
   money: number
   interest: number
   streak: number
@@ -43,7 +47,7 @@ interface GameStateStore {
   currentPlayerName: string
   currentPlayerAvatar: string
   currentPlayerTitle: string
-  currentPlayerWeather: Weather
+  weather: Weather
   blueDpsMeter: IDps[]
   redDpsMeter: IDps[]
   blueHealDpsMeter: IDpsHeal[]
@@ -58,11 +62,13 @@ const initialState: GameStateStore = {
   roundTime: StageDuration[1],
   phase: GamePhaseState.PICK,
   players: new Array<IPlayer>(),
+  simulations: new Array<ISimulation>(),
   stageLevel: 0,
   mapName: "",
-  currentPlayerWeather: Weather.NEUTRAL,
+  weather: Weather.NEUTRAL,
   noElo: false,
   currentPlayerId: "",
+  currentSimulationId: "",
   money: 5,
   interest: 0,
   streak: 0,
@@ -181,7 +187,10 @@ export const gameSlice = createSlice({
     ) => {
       if (state.currentPlayerId === action.payload.id) {
         state.currentPlayerOpponentAvatar = action.payload.value
-        getGameScene()?.board?.updateOpponentAvatar(state.currentPlayerOpponentId, state.currentPlayerOpponentAvatar)
+        getGameScene()?.board?.updateOpponentAvatar(
+          state.currentPlayerOpponentId,
+          state.currentPlayerOpponentAvatar
+        )
       }
     },
     setOpponentTitle: (
@@ -204,7 +213,10 @@ export const gameSlice = createSlice({
       if (state.currentPlayerId === action.payload.id) {
         state.currentPlayerLife = action.payload.value
       }
-      getGameScene()?.board?.updateAvatarLife(action.payload.id, action.payload.value)
+      getGameScene()?.board?.updateAvatarLife(
+        action.payload.id,
+        action.payload.value
+      )
     },
     setPlayerExperienceManager: (
       state,
@@ -214,7 +226,7 @@ export const gameSlice = createSlice({
         state.currentPlayerExperienceManager = action.payload.value
       }
       const player = state.players.find((e) => e.id === action.payload.id)
-      if(player){
+      if (player) {
         player.experienceManager = action.payload.value
       }
     },
@@ -259,52 +271,61 @@ export const gameSlice = createSlice({
         player.loadingProgress = action.payload.value
       }
     },
-    setCurrentPlayerWeather: (
+    setWeather: (
       state,
       action: PayloadAction<{ value: Weather; id: string }>
     ) => {
-      if (state.currentPlayerId === action.payload.id) {
-        state.currentPlayerWeather = action.payload.value
+      if (state.currentSimulationId === action.payload.id) {
+        state.weather = action.payload.value
+      }
+    },
+    setSimulation: (state, action: PayloadAction<Simulation>) => {
+      if (
+        state.currentPlayerId === action.payload.bluePlayerId ||
+        state.currentPlayerId === action.payload.redPlayerId
+      ) {
+        state.currentSimulationId = action.payload.id
+        state.weather = action.payload.weather
+        state.blueDpsMeter = new Array<IDps>()
+        state.redDpsMeter = new Array<IDps>()
+        state.blueHealDpsMeter = new Array<IDpsHeal>()
+        state.redHealDpsMeter = new Array<IDpsHeal>()
+        action.payload.blueDpsMeter.forEach((dps) => {
+          state.blueDpsMeter.push(JSON.parse(JSON.stringify(dps)))
+        })
+        action.payload.redDpsMeter.forEach((dps) => {
+          state.redDpsMeter.push(JSON.parse(JSON.stringify(dps)))
+        })
+        action.payload.redHealDpsMeter.forEach((dps) => {
+          state.redHealDpsMeter.push(JSON.parse(JSON.stringify(dps)))
+        })
+        action.payload.blueHealDpsMeter.forEach((dps) => {
+          state.blueHealDpsMeter.push(JSON.parse(JSON.stringify(dps)))
+        })
       }
     },
     setPlayer: (state, action: PayloadAction<IPlayer>) => {
       state.currentPlayerId = action.payload.id
+      state.currentSimulationId = action.payload.simulationId
       state.currentPlayerMoney = action.payload.money
       state.currentPlayerExperienceManager = action.payload.experienceManager
       state.currentPlayerOpponentId = action.payload.opponentId
       state.currentPlayerOpponentName = action.payload.opponentName
       state.currentPlayerOpponentAvatar = action.payload.opponentAvatar
       state.currentPlayerOpponentTitle = action.payload.opponentTitle
-      state.currentPlayerWeather = action.payload.simulation.weather
       state.currentPlayerLife = action.payload.life
       state.currentPlayerSynergies = Array.from(action.payload.synergies)
       state.currentPlayerAvatar = action.payload.avatar
       state.currentPlayerName = action.payload.name
       state.currentPlayerTitle = action.payload.title
       state.currentPlayerBoardSize = action.payload.boardSize
-      state.blueDpsMeter = new Array<IDps>()
-      state.redDpsMeter = new Array<IDps>()
-      state.blueHealDpsMeter = new Array<IDpsHeal>()
-      state.redHealDpsMeter = new Array<IDpsHeal>()
-      action.payload.simulation.blueDpsMeter.forEach((dps) => {
-        state.blueDpsMeter.push(JSON.parse(JSON.stringify(dps)))
-      })
-      action.payload.simulation.redDpsMeter.forEach((dps) => {
-        state.redDpsMeter.push(JSON.parse(JSON.stringify(dps)))
-      })
-      action.payload.simulation.redHealDpsMeter.forEach((dps) => {
-        state.redHealDpsMeter.push(JSON.parse(JSON.stringify(dps)))
-      })
-      action.payload.simulation.blueHealDpsMeter.forEach((dps) => {
-        state.blueHealDpsMeter.push(JSON.parse(JSON.stringify(dps)))
-      })
     },
     addRedDpsMeter: (
       state,
       action: PayloadAction<{ value: IDps; id: string }>
     ) => {
       if (
-        state.currentPlayerId === action.payload.id &&
+        state.currentSimulationId === action.payload.id &&
         state.redDpsMeter.find((d) => d.id == action.payload.value.id) ===
           undefined
       ) {
@@ -316,7 +337,7 @@ export const gameSlice = createSlice({
       action: PayloadAction<{ value: IDps; id: string }>
     ) => {
       if (
-        state.currentPlayerId === action.payload.id &&
+        state.currentSimulationId === action.payload.id &&
         state.blueDpsMeter.find((d) => d.id == action.payload.value.id) ===
           undefined
       ) {
@@ -330,7 +351,7 @@ export const gameSlice = createSlice({
       action: PayloadAction<{ value: IDpsHeal; id: string }>
     ) => {
       if (
-        state.currentPlayerId === action.payload.id &&
+        state.currentSimulationId === action.payload.id &&
         state.redHealDpsMeter.find((d) => d.id == action.payload.value.id) ===
           undefined
       ) {
@@ -344,7 +365,7 @@ export const gameSlice = createSlice({
       action: PayloadAction<{ value: IDpsHeal; id: string }>
     ) => {
       if (
-        state.currentPlayerId === action.payload.id &&
+        state.currentSimulationId === action.payload.id &&
         state.blueHealDpsMeter.find((d) => d.id == action.payload.value.id) ===
           undefined
       ) {
@@ -359,10 +380,10 @@ export const gameSlice = createSlice({
         id: string
         field: string
         value: string | number
-        playerId: string
+        simulationId: string
       }>
     ) => {
-      if (state.currentPlayerId === action.payload.playerId) {
+      if (state.currentSimulationId === action.payload.simulationId) {
         const index = state.redDpsMeter.findIndex(
           (e) => action.payload.id == e.id
         )
@@ -377,10 +398,10 @@ export const gameSlice = createSlice({
         id: string
         field: string
         value: string | number
-        playerId: string
+        simulationId: string
       }>
     ) => {
-      if (state.currentPlayerId === action.payload.playerId) {
+      if (state.currentSimulationId === action.payload.simulationId) {
         const index = state.blueDpsMeter.findIndex(
           (e) => action.payload.id == e.id
         )
@@ -397,10 +418,10 @@ export const gameSlice = createSlice({
         id: string
         field: string
         value: string | number
-        playerId: string
+        simulationId: string
       }>
     ) => {
-      if (state.currentPlayerId === action.payload.playerId) {
+      if (state.currentSimulationId === action.payload.simulationId) {
         const index = state.redHealDpsMeter.findIndex(
           (e) => action.payload.id == e.id
         )
@@ -417,10 +438,10 @@ export const gameSlice = createSlice({
         id: string
         field: string
         value: string | number
-        playerId: string
+        simulationId: string
       }>
     ) => {
-      if (state.currentPlayerId === action.payload.playerId) {
+      if (state.currentSimulationId === action.payload.simulationId) {
         const index = state.blueHealDpsMeter.findIndex(
           (e) => action.payload.id == e.id
         )
@@ -432,22 +453,22 @@ export const gameSlice = createSlice({
       }
     },
     removeRedDpsMeter: (state, action: PayloadAction<string>) => {
-      if (state.currentPlayerId === action.payload) {
+      if (state.currentSimulationId === action.payload) {
         state.redDpsMeter = new Array<IDps>()
       }
     },
     removeBlueDpsMeter: (state, action: PayloadAction<string>) => {
-      if (state.currentPlayerId === action.payload) {
+      if (state.currentSimulationId === action.payload) {
         state.blueDpsMeter = new Array<IDps>()
       }
     },
     removeRedHealDpsMeter: (state, action: PayloadAction<string>) => {
-      if (state.currentPlayerId === action.payload) {
+      if (state.currentSimulationId === action.payload) {
         state.redHealDpsMeter = new Array<IDpsHeal>()
       }
     },
     removeBlueHealDpsMeter: (state, action: PayloadAction<string>) => {
-      if (state.currentPlayerId === action.payload) {
+      if (state.currentSimulationId === action.payload) {
         state.blueHealDpsMeter = new Array<IDpsHeal>()
       }
     },
@@ -459,6 +480,7 @@ export const gameSlice = createSlice({
 })
 
 export const {
+  setSimulation,
   setAdditionalPokemons,
   setPokemonProposition,
   setPokemonCollection,
@@ -494,7 +516,7 @@ export const {
   setPhase,
   setStageLevel,
   setMapName,
-  setCurrentPlayerWeather,
+  setWeather,
   setNoELO,
   addPlayer,
   setExperienceManager,

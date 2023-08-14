@@ -56,42 +56,48 @@ export default class BoardManager {
     } else {
       this.pickMode()
     }
+  }
 
-    player.simulation.listen("winnerId", (winnerId) => {
-      //logger.debug({ winnerId, playerId: this.player.id, opponentId: this.opponentAvatar?.playerId })
-      if (winnerId === this.player.id) {
-        this.animationManager.animatePokemon(
-          this.playerAvatar,
-          PokemonActionState.HOP
-        )
-        if (this.opponentAvatar) {
-          this.animationManager.animatePokemon(
-            this.opponentAvatar,
-            PokemonActionState.HURT
-          )
-        }
-      } else if (winnerId === this.opponentAvatar?.playerId) {
+  victoryAnimation(winnerId: string) {
+    //logger.debug({ winnerId, playerId: this.player.id, opponentId: this.opponentAvatar?.playerId })
+    if (winnerId === this.player.id) {
+      this.animationManager.animatePokemon(
+        this.playerAvatar,
+        PokemonActionState.HOP,
+        false
+      )
+      if (this.opponentAvatar) {
         this.animationManager.animatePokemon(
           this.opponentAvatar,
-          PokemonActionState.HOP
+          PokemonActionState.HURT,
+          false
         )
-        this.animationManager.animatePokemon(
-          this.playerAvatar,
-          PokemonActionState.HURT
-        )
-      } else {
-        this.animationManager.animatePokemon(
-          this.playerAvatar,
-          PokemonActionState.IDLE
-        )
-        if (this.opponentAvatar) {
-          this.animationManager.animatePokemon(
-            this.opponentAvatar,
-            PokemonActionState.IDLE
-          )
-        }
       }
-    })
+    } else if (winnerId === this.opponentAvatar?.playerId) {
+      this.animationManager.animatePokemon(
+        this.opponentAvatar,
+        PokemonActionState.HOP,
+        false
+      )
+      this.animationManager.animatePokemon(
+        this.playerAvatar,
+        PokemonActionState.HURT,
+        false
+      )
+    } else {
+      this.animationManager.animatePokemon(
+        this.playerAvatar,
+        PokemonActionState.IDLE,
+        false
+      )
+      if (this.opponentAvatar) {
+        this.animationManager.animatePokemon(
+          this.opponentAvatar,
+          PokemonActionState.IDLE,
+          false
+        )
+      }
+    }
   }
 
   addPokemon(pokemon: IPokemon): Pokemon {
@@ -105,10 +111,11 @@ export default class BoardManager {
       coordinates[1],
       pokemon,
       this.player.id,
+      false,
       false
     )
 
-    this.animationManager.animatePokemon(pokemonUI, pokemon.action)
+    this.animationManager.animatePokemon(pokemonUI, pokemon.action, false)
     this.pokemons.set(pokemonUI.id, pokemonUI)
     if (pokemon.positionY != 0 && this.mode === BoardMode.BATTLE) {
       pokemonUI.setVisible(false)
@@ -158,13 +165,15 @@ export default class BoardManager {
       } else {
         this.animationManager.play(
           this.playerAvatar,
-          AnimationConfig[this.playerAvatar.name].emote
+          AnimationConfig[this.playerAvatar.name].emote,
+          false
         )
       }
     })
     this.animationManager.animatePokemon(
       this.playerAvatar,
-      this.playerAvatar.action
+      this.playerAvatar.action,
+      false
     )
   }
 
@@ -200,7 +209,8 @@ export default class BoardManager {
       this.opponentAvatar.updateLife(opponentLife)
       this.animationManager.animatePokemon(
         this.opponentAvatar,
-        this.opponentAvatar.action
+        this.opponentAvatar.action,
+        false
       )
     }
   }
@@ -326,7 +336,7 @@ export default class BoardManager {
           break
 
         case "action":
-          this.animationManager.animatePokemon(pokemonUI, value)
+          this.animationManager.animatePokemon(pokemonUI, value, false)
           break
 
         default:
@@ -384,7 +394,8 @@ export default class BoardManager {
     if (this.playerAvatar && this.playerAvatar.playerId === playerId) {
       this.animationManager.play(
         this.playerAvatar,
-        AnimationConfig[this.playerAvatar.name].emote
+        AnimationConfig[this.playerAvatar.name].emote,
+        false
       )
       this.playerAvatar.drawSpeechBubble(emote, false)
     } else if (
@@ -393,14 +404,15 @@ export default class BoardManager {
     ) {
       this.animationManager.play(
         this.opponentAvatar,
-        AnimationConfig[this.opponentAvatar.name].emote
+        AnimationConfig[this.opponentAvatar.name].emote,
+        false
       )
       this.opponentAvatar.drawSpeechBubble(emote, true)
     }
   }
 
   triggerLightning(x: number, y: number) {
-    const coordinates = transformAttackCoordinate(x, y)
+    const coordinates = transformAttackCoordinate(x, y, false)
     const thunderSprite = this.scene.add.sprite(
       coordinates[0],
       coordinates[1],

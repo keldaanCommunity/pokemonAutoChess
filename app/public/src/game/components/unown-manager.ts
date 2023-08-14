@@ -43,9 +43,10 @@ export default class UnownManager {
       startY,
       PokemonFactory.createPokemonFromName(pickRandomIn(Unowns)),
       "unown",
+      false,
       false
     )
-    this.animationManager.animatePokemon(unown, PokemonActionState.IDLE)
+    this.animationManager.animatePokemon(unown, PokemonActionState.IDLE, false)
 
     const tween = this.scene.tweens.add({
       targets: unown,
@@ -125,8 +126,13 @@ export default class UnownManager {
     })
   }
 
-  hiddenPowerAnimation(skill: Ability, originX: number, originY: number) {
-    const [x, y] = transformAttackCoordinate(originX, originY)
+  hiddenPowerAnimation(
+    skill: Ability,
+    originX: number,
+    originY: number,
+    flip: boolean
+  ) {
+    const [x, y] = transformAttackCoordinate(originX, originY, flip)
     const unownsGroup = this.scene.add.group()
     const letters = UNOWNS_PER_ABILITY.get(skill)
     for (let n = 0; n < 8; n++) {
@@ -137,11 +143,16 @@ export default class UnownManager {
           y,
           PokemonFactory.createPokemonFromName(letter),
           "unown",
-          false
+          false,
+          flip
         )
         unown.draggable = false
         unownsGroup.add(unown)
-        this.animationManager.animatePokemon(unown, PokemonActionState.IDLE)
+        this.animationManager.animatePokemon(
+          unown,
+          PokemonActionState.IDLE,
+          flip
+        )
       })
     }
 
