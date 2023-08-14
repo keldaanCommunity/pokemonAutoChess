@@ -405,8 +405,8 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.items.has(Item.LEFTOVERS)) {
-      const neighnours = [-1, 0, 1]
-      neighnours.forEach((offset) => {
+      const neighbours = [-1, 0, 1]
+      neighbours.forEach((offset) => {
         const value = board.getValue(this.positionX + offset, this.positionY)
         if (value && value.team === this.team) {
           this.handleHeal(value.hp * 0.05, this, 0)

@@ -235,7 +235,7 @@ export class PaydayStrategy extends AttackStrategy {
       pokemon,
       crit
     )
-    if (death && pokemon.team === Team.BLUE_TEAM && pokemon.player) {
+    if (death && pokemon.player) {
       pokemon.player.money += pokemon.stars
       pokemon.count.moneyCount++
     }
