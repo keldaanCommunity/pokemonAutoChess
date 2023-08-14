@@ -8,13 +8,14 @@ import { setTabIndex } from "../../../stores/LobbyStore"
 import { searchName } from "../../../stores/NetworkStore"
 import Elo from "../elo"
 import { getAvatarSrc } from "../../../utils"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function LeaderboardItem(props: {
   item: ILeaderboardInfo | ILeaderboardBotInfo
   isBot: boolean
   noElo: boolean | undefined
 }) {
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
   return (
     <div

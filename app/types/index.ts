@@ -371,7 +371,7 @@ export interface IPokemon {
   hp: number
   range: number
   stars: number
-  maxMana: number
+  maxPP: number
   skill: Ability
   passive: Passive
   items: SetSchema<Item>
@@ -429,7 +429,7 @@ export interface IDpsHeal {
 export function instanceofPokemonEntity(
   obj: IPokemon | IPokemonEntity | IPokemonAvatar
 ) {
-  return "mana" in obj
+  return "pp" in obj
 }
 
 export interface IPokemonEntity {
@@ -452,8 +452,8 @@ export interface IPokemonEntity {
   orientation: Orientation
   critChance: number
   hp: number
-  mana: number
-  maxMana: number
+  pp: number
+  maxPP: number
   atk: number
   def: number
   speDef: number

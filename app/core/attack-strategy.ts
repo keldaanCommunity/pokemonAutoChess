@@ -32,7 +32,7 @@ export class AttackStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    pokemon.mana = 0
+    pokemon.pp = 0
     pokemon.count.ult += 1
     pokemon.simulation.room.broadcast(Transfer.ABILITY, {
       id: pokemon.simulation.id,
@@ -63,7 +63,7 @@ export class AttackStrategy {
             ally.addAttackSpeed(5, false)
           }
           if (pokemon.effects.includes(Effect.PRESTO)) {
-            ally.setMana(ally.mana + 3)
+            ally.setPP(ally.pp + 3)
           }
         }
       })
@@ -76,7 +76,7 @@ export class AttackStrategy {
         pkm.team !== pokemon.team &&
         pkm.id !== pokemon.id
       ) {
-        pkm.setMana(pkm.mana + 5)
+        pkm.setPP(pkm.pp + 5)
         pkm.simulation.room.broadcast(Transfer.ABILITY, {
           id: pokemon.simulation.id,
           skill: pkm.skill,
@@ -87,11 +87,11 @@ export class AttackStrategy {
     })
 
     if (pokemon.items.has(Item.AQUA_EGG)) {
-      pokemon.setMana(pokemon.mana + 20)
+      pokemon.setPP(pokemon.pp + 20)
     }
 
     if (pokemon.items.has(Item.STAR_DUST)) {
-      pokemon.handleShield(Math.round(0.6 * pokemon.maxMana), pokemon, false)
+      pokemon.handleShield(Math.round(0.6 * pokemon.maxPP), pokemon, false)
       pokemon.count.starDustCount++
     }
 
@@ -586,7 +586,7 @@ export class ShadowBallStrategy extends AttackStrategy {
 
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.setMana(target.mana - 15)
+    target.setPP(target.pp - 15)
     target.count.manaBurnCount++
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
@@ -597,7 +597,7 @@ export class ShadowBallStrategy extends AttackStrategy {
           pokemon,
           crit
         )
-        cell.value.setMana(cell.value.mana - 15)
+        cell.value.setPP(cell.value.pp - 15)
         cell.value.count.manaBurnCount++
       }
     })
@@ -1507,7 +1507,7 @@ export class DisarmingVoiceStrategy extends AttackStrategy {
     heal = Math.round(heal * (1 + pokemon.ap / 200))
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team === tg.team && tg.id !== pokemon.id) {
-        tg.setMana(tg.mana + heal)
+        tg.setPP(tg.pp + heal)
         pokemon.simulation.room.broadcast(Transfer.ABILITY, {
           id: pokemon.simulation.id,
           skill: pokemon.skill,
@@ -1542,8 +1542,8 @@ export class HighJumpKickStrategy extends AttackStrategy {
       default:
         break
     }
-    pokemon.setMana(target.mana)
-    target.setMana(0)
+    pokemon.setPP(target.pp)
+    target.setPP(0)
     target.count.manaBurnCount++
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
@@ -2410,7 +2410,7 @@ export class GuillotineStrategy extends AttackStrategy {
       crit
     )
     if (death) {
-      pokemon.setMana(pokemon.maxMana)
+      pokemon.setPP(pokemon.maxPP)
     }
   }
 }
@@ -2568,7 +2568,7 @@ export class SolarBeamStrategy extends AttackStrategy {
     let damage = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30
     if (pokemon.simulation.weather === Weather.SUN) {
       damage = damage * 2
-      pokemon.setMana(pokemon.mana + 40)
+      pokemon.setPP(pokemon.pp + 40)
     }
     effectInLine(board, pokemon, target, (targetInLine) => {
       if (targetInLine != null && targetInLine.team !== pokemon.team) {
@@ -2772,7 +2772,7 @@ export class SoakStrategy extends AttackStrategy {
 
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (ally && pokemon.team == ally.team) {
-        ally.setMana(ally.mana + 10)
+        ally.setPP(ally.pp + 10)
       }
     })
 
@@ -3899,7 +3899,7 @@ export class DragonDartsStrategy extends AttackStrategy {
       )
     }
     if (target.life <= 0) {
-      pokemon.setMana(pokemon.mana + 40)
+      pokemon.setPP(pokemon.pp + 40)
     }
   }
 }
@@ -4131,7 +4131,7 @@ export class ForecastStrategy extends AttackStrategy {
           p.addAttack(3, true)
         }
         if (pokemon.name === Pkm.CASTFORM_RAIN) {
-          p.setMana(p.mana + Math.round(20 * (1 + pokemon.ap / 100)))
+          p.setPP(p.pp + Math.round(20 * (1 + pokemon.ap / 100)))
         }
         if (pokemon.name === Pkm.CASTFORM_HAIL) {
           p.addDefense(2, true)
@@ -4357,13 +4357,13 @@ export class ShellTrapStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     target.status.triggerSilence(3000, target, pokemon, board)
-    target.setMana(target.mana - 40)
+    target.setPP(target.pp - 40)
 
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
 
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.setMana(cell.value.mana - 40)
+        cell.value.setPP(cell.value.pp - 40)
       }
     })
   }

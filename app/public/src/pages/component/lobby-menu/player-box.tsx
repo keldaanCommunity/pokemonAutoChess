@@ -3,9 +3,10 @@ import { ILobbyUser } from "../../../../../models/colyseus-models/lobby-user"
 import { getAvatarSrc } from "../../../utils"
 import Elo from "../elo"
 import { RoleBadge } from "../RoleBadge"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function PlayerBox(props: { user: ILobbyUser }) {
+  const { t } = useTranslation()
   return (
     <div className="player-box" style={{ marginBottom: "1em" }}>
       <div

@@ -24,11 +24,12 @@ import Elo from "../elo"
 import InlineAvatar from "../inline-avatar"
 import { IBot } from "../../../../../models/mongo-models/bot-v2"
 import { Role } from "../../../../../types"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function PreparationMenu(props: {
   setToGame: Dispatch<SetStateAction<boolean>>
 }) {
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const [inputValue, setInputValue] = useState<string>("")
   const users: IGameUser[] = useAppSelector((state) => state.preparation.users)

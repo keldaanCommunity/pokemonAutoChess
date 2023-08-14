@@ -12,9 +12,10 @@ import PokemonFactory from "../../../../../models/pokemon-factory"
 import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { addSynergiesFromStones } from "../../../../../models/colyseus-models/synergies"
 import "./history.css"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function History(props: { history: IGameRecord[] }) {
+  const { t } = useTranslation()
   return (
     <article className="game-history-list">
       <h2>{t("game_history")}</h2>

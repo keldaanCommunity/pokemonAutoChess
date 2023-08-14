@@ -10,6 +10,10 @@
   color: #ffd800;
 }
 
+.description-icon {
+  white-space: nowrap;
+}
+
 .description-icon > img {
   display: inline-block;
   vertical-align: -2px;

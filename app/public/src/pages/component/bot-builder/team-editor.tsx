@@ -5,7 +5,7 @@ import ReactTooltip from "react-tooltip"
 import CSS from "csstype"
 import { IStep } from "../../../../../models/mongo-models/bot-v2"
 import { getPortraitSrc } from "../../../utils"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 const tabStyle: CSS.Properties = {
   margin: "10px",
@@ -75,6 +75,7 @@ export default function TeamEditor(props: {
   handleRoundsRequiredChange: (e: any) => void
   handleEloChange: (e: any) => void
 }) {
+  const { t } = useTranslation()
   return (
     <div className="nes-container" style={tabStyle}>
       <div style={{ display: "flex", alignItems: "center" }}>

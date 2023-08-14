@@ -1,33 +1,43 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { setBoosterContent } from "../../../stores/LobbyStore"
 import { openBooster } from "../../../stores/NetworkStore"
 import { cc } from "../../utils/jsx"
 import { BoosterCard } from "./booster-card"
 import "./booster.css"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
-export default function Booster(props: { toggle: () => void }) {
+export default function Booster() {
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
-  const user = useAppSelector((state) => state.lobby.user)
+  const { user, boosterContent } = useAppSelector((state) => ({
+    user: state.lobby.user,
+    boosterContent: state.lobby.boosterContent
+  }))
+
   const numberOfBooster = user ? user.booster : 0
-  const boosterContent = useAppSelector((state) => state.lobby.boosterContent)
+
+  // reset current boosters on close
+  useEffect(
+    () => () => {
+      dispatch(setBoosterContent([]))
+    },
+    [dispatch]
+  )
 
   return (
     <div id="boosters-page">
-      <button
-        onClick={() => {
-          dispatch(setBoosterContent([]))
-          props.toggle()
-        }}
-        className="bubbly blue"
-      >
-        {t("back_to_lobby")}
-      </button>
       <div className="nes-container">
         <p className="help">
           {numberOfBooster === 0 ? t("boosters_hint") : t("open_boosters_hint")}
         </p>
+
+        <div className="boosters-content">
+          {boosterContent.map((pkm, i) => (
+            <BoosterCard key={"booster" + i} pkm={pkm} shards={50} />
+          ))}
+        </div>
+
         <div className="actions">
           <p>
             <span>{numberOfBooster}</span>
@@ -45,11 +55,6 @@ export default function Booster(props: { toggle: () => void }) {
           >
             {t("open_booster")}
           </button>
-        </div>
-        <div className="boosters-content">
-          {boosterContent.map((pkm, i) => (
-            <BoosterCard key={"booster" + i} pkm={pkm} shards={50} />
-          ))}
         </div>
       </div>
     </div>

@@ -10,7 +10,7 @@ import { getPortraitSrc } from "../../../utils"
 import SynergyIcon from "../icons/synergy-icon"
 import { EffectDescriptionComponent } from "./effect-description"
 import { addIconsToDescription } from "../../utils/descriptions"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 const precomputed = PRECOMPUTED_TYPE_POKEMONS as PrecomputedTypePokemon
 
@@ -18,6 +18,7 @@ export default function SynergyDetailComponent(props: {
   type: Synergy
   value: number
 }) {
+  const { t } = useTranslation()
   const additionalPokemons = useAppSelector(
     (state) => state.game.additionalPokemons
   )

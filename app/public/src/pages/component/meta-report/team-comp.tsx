@@ -4,7 +4,7 @@ import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { getPortraitSrc } from "../../../utils"
 import SynergyIcon from "../icons/synergy-icon"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 function capitalizeFirstLetter(string: string) {
   if (string) {
@@ -35,6 +35,7 @@ function rankPokemon(a: Pkm, b: Pkm, pokemons: { [key in Pkm]?: number }) {
 }
 
 export default function TeamComp(props: { team: IMeta }) {
+  const { t } = useTranslation()
   const sortedTypes = props.team.types
     ? (Object.keys(props.team.types) as Synergy[]).sort((a, b) => {
         return rankType(a, b, props.team.types)

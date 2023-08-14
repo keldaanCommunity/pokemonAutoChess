@@ -1,4 +1,4 @@
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 import { ICreditName } from "../../../../../types"
 import React from "react"
 
@@ -7,6 +7,7 @@ export default function Credits(props: {
   primary: string
   secondary: string[]
 }) {
+  const { t } = useTranslation()
   function findCredits(id: string) {
     let contact = ""
     let name = ""

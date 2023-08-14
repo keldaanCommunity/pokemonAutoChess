@@ -241,18 +241,26 @@ p:last-child {
 }
 
 .game-emote-bubble {
-	position: relative;
-	background: white;
-	border-radius: .4em;
+  position: relative;
+  background: white;
+  border-radius: 0.4em;
   padding: 4px;
   animation: 3000ms forwards speech-bubble;
 }
 
-@keyframes speech-bubble { 
-  0% { opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { opacity: 0; }
+@keyframes speech-bubble {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 .game-emote-bubble img {
@@ -262,30 +270,30 @@ p:last-child {
 }
 
 .game-emote-bubble:after {
-	content: '';
-	position: absolute;
-	left: 50%;
-	width: 0;
-	height: 0;
-	border: 20px solid transparent;
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border: 20px solid transparent;
 }
 
 .game-emote-bubble.current::after {
   bottom: 0;
   border-top-color: white;
-	border-bottom: 0;
-	border-left: 0;
-	margin-left: -10px;
-	margin-bottom: -19px;
+  border-bottom: 0;
+  border-left: 0;
+  margin-left: -10px;
+  margin-bottom: -19px;
 }
 
 .game-emote-bubble.opponent:after {
   top: 0;
-	border-bottom-color: white;
-	border-top: 0;
-	border-right: 0;
-	margin-right: -10px;
-	margin-top: -19px;
+  border-bottom-color: white;
+  border-top: 0;
+  border-right: 0;
+  margin-right: -10px;
+  margin-top: -19px;
 }
 
 .toast-new-pokemon {
@@ -660,6 +668,7 @@ p:last-child {
 
 .shimmer::after {
   content: "";
+  pointer-events: none;
   display: block;
   position: absolute;
   top: 0;
@@ -677,6 +686,7 @@ p:last-child {
   );
   background-size: 400% 400%;
   background-repeat: no-repeat;
+  cursor: var(--cursor-hover);
 }
 
 .pokemon-portrait {

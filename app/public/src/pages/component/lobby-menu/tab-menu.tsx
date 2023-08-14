@@ -7,11 +7,12 @@ import { setTabIndex } from "../../../stores/LobbyStore"
 import BotLeaderboard from "./bot-leaderboard"
 import PlayerLeaderboard from "./player-leaderboard"
 import LevelLeaderboard from "./level-leaderboard"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 import "react-tabs/style/react-tabs.css"
 import "./tab-menu.css"
 
 export default function TabMenu() {
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
 
   const tabIndex: number = useAppSelector((state) => state.lobby.tabIndex)

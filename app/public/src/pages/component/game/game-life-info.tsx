@@ -2,9 +2,10 @@ import React from "react"
 import ReactTooltip from "react-tooltip"
 import { useAppSelector } from "../../../hooks"
 import { Life } from "../icons/life"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export function GameLifeInfo() {
+  const { t } = useTranslation()
   const life = useAppSelector((state) => state.game.currentPlayerLife)
   return (
     <div id="game-life-info" className="nes-container life information">

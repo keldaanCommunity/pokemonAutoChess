@@ -2,12 +2,13 @@ import { RoomAvailable } from "colyseus.js"
 import React from "react"
 import { IGameMetadata } from "../../../../../types"
 import "./room-item.css"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function GameRoomItem(props: {
   room: RoomAvailable<IGameMetadata>
   onSpectate: () => any
 }) {
+  const { t } = useTranslation()
   return (
     <div className="room-item">
       <span className="room-name">{props.room.metadata?.name}</span>

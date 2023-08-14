@@ -6,7 +6,7 @@ import { getPortraitSrc } from "../../../utils"
 import { getEmotionCost } from "../../../../../types/Config"
 import { cc } from "../../utils/jsx"
 import "./pokemon-emotion.css"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function PokemonEmotion(props: {
   index: string
@@ -16,6 +16,7 @@ export default function PokemonEmotion(props: {
   emotion: Emotion
   dust: number
 }) {
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const cost = getEmotionCost(props.emotion, props.shiny)
   const canUnlock = !props.unlocked && cost <= props.dust

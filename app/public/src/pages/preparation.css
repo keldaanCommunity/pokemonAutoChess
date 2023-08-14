@@ -1,17 +1,14 @@
 .preparation-page {
-  padding: 1vw;
-}
-
-.preparation-page nav {
-  margin-bottom: 0.5em;
   display: flex;
-  gap: 0.5em;
+  height: 100%;
 }
 
 .preparation-page main {
   display: flex;
   justify-content: center;
   gap: 1em;
+  width: 100%;
+  align-items: center;
 }
 
 .preparation-page .preparation-menu,

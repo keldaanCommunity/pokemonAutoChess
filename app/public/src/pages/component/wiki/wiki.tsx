@@ -10,15 +10,12 @@ import WikiStatus from "./wiki-status"
 import WikiWeather from "./wiki-weather"
 import "./wiki.css"
 import WikiAbility from "./wiki-ability"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
-export default function Wiki(props: { toggleWiki: () => void }) {
+export default function Wiki() {
+  const { t } = useTranslation()
   return (
     <div id="wiki-page">
-      <button onClick={props.toggleWiki} className="bubbly blue">
-        {t("back_to_lobby")}
-      </button>
-
       <div className="nes-container">
         <Tabs>
           <TabList>

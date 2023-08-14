@@ -24,7 +24,7 @@ import { playSound, SOUNDS } from "../pages/utils/audio"
 import { Language } from "../../../types/enum/Language"
 import i18n from "../i18n"
 
-interface IUserLobbyState {
+export interface IUserLobbyState {
   botLogDatabase: string[]
   messages: IChatV2[]
   users: ILobbyUser[]
@@ -191,7 +191,7 @@ export const lobbySlice = createSlice({
       state.levelLeaderboard = action.payload
     },
     addPokemonConfig: (state, action: PayloadAction<IPokemonConfig>) => {
-      state.pokemonCollection.push(JSON.parse(JSON.stringify(action.payload)))
+      state.pokemonCollection.push(action.payload)
     },
     changePokemonConfig: (
       state,

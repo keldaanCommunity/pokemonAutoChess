@@ -9,9 +9,10 @@ import { Synergy } from "../../../../../types/enum/Synergy"
 import { computeElo } from "../../../../../core/elo"
 import "./after-menu.css"
 import { Role } from "../../../../../types"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function AfterMenu() {
+  const { t } = useTranslation()
   const players = useAppSelector((state) => state.after.players)
     .slice()
     .sort((a, b) => a.rank - b.rank)

@@ -5,9 +5,10 @@ import { useAppSelector } from "../../../hooks"
 import { getPortraitSrc } from "../../../utils"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { GamePokemonDetail } from "./game-pokemon-detail"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export function GameAdditionalPokemons() {
+  const { t } = useTranslation()
   const additionalPokemons = useAppSelector(
     (state) => state.game.additionalPokemons
   )

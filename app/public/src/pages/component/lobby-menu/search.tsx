@@ -14,9 +14,10 @@ import {
 } from "../../../stores/NetworkStore"
 import { getAvatarSrc } from "../../../utils"
 import PlayerBox from "./player-box"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function Search() {
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const user = useAppSelector((state) => state.lobby.searchedUser)
   const suggestions = useAppSelector((state) => state.lobby.suggestions)

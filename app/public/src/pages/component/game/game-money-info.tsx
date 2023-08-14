@@ -3,7 +3,7 @@ import ReactTooltip from "react-tooltip"
 import { BattleResult } from "../../../../../types/enum/Game"
 import { useAppSelector } from "../../../hooks"
 import { Money } from "../icons/money"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export function GameMoneyInfo() {
   const money = useAppSelector((state) => state.game.currentPlayerMoney)
@@ -25,6 +25,7 @@ export function GameMoneyInfo() {
 }
 
 export function GameMoneyDetail() {
+  const { t } = useTranslation()
   const streak = useAppSelector((state) => state.game.streak)
   const currentPlayer = useAppSelector((state) =>
     state.game.players.find((p) => p.id === state.game.currentPlayerId)

@@ -1,21 +1,16 @@
 .lobby {
-  height: 100vh;
-  padding: 1vw;
-  display: grid;
-  grid-template:
-    "nav nav nav nav" min-content
-    "user rooms online news" 1fr
-    "user rooms online chat" 1fr
-    / 30vw 25vw 15vw 1fr;
+  height: 100%;
   gap: 1vw;
+  display: flex;
+}
+
+.lobby-container {
+  padding: 10px;
+  width: 100%;
 }
 
 .lobby nav {
-  display: flex;
-  justify-content: space-between;
-  gap: 1vw;
-  grid-area: nav;
-  flex-wrap: wrap;
+  height: 100%;
 }
 
 .lobby nav a:hover {
@@ -30,6 +25,7 @@
 .lobby .user-menu {
   grid-area: user;
   height: 100%;
+  width: 25%;
   display: flex;
   flex-direction: column;
 }
@@ -47,22 +43,35 @@
 }
 
 .lobby .room-menu {
-  grid-area: rooms;
   height: 100%;
+  width: 25%;
+  font-size: 16px;
+}
+
+.main-lobby ul.react-tabs__tab-list {
+  display: flex;
+  font-size: 16px;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .lobby .current-users-menu {
-  grid-area: online;
+  width: 100%;
   height: 100%;
 }
 
+.lobby .current-users-menu ul {
+  display: unset;
+}
+
 .lobby .user-chat {
-  grid-area: chat;
   overflow-y: auto;
+  height: 100%;
+  width: 100%;
 }
 
 .lobby .news {
-  grid-area: news;
+  height: 100%;
 }
 
 .lobby h1 {
@@ -76,12 +85,44 @@
   font-size: 1.25vw;
 }
 
-@media (max-width: 640px) {
-  .lobby {
-    overflow-y: auto;
-    display: block;
-  }
+.lobby-container .bot-panel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
 
+.bot-panel .header {
+  display: flex;
+  width: 100%;
+  height: 70px;
+  justify-content: space-between;
+}
+
+.main-lobby {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.main-lobby .news-chat {
+  display: flex;
+  gap: 4px;
+  width: 50%;
+}
+
+@media (max-width: 1400px) {
+  .main-lobby .news-chat {
+    flex-direction: column;
+  }
+}
+
+.lobby-container {
+  padding: 20px;
+}
+
+@media (max-width: 640px) {
   .lobby nav {
     flex-wrap: wrap;
   }
@@ -93,5 +134,19 @@
   .lobby > .nes-container {
     margin-top: 1em;
     max-height: 80vh;
+  }
+
+  .lobby-container {
+    padding: 0;
+  }
+
+  .main-lobby {
+    flex-direction: column;
+    overflow-y: scroll;
+  }
+
+  .main-lobby.main-lobby > div {
+    width: 100%;
+    min-height: 300px;
   }
 }

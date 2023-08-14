@@ -1,6 +1,6 @@
 import Bar from "./bar"
 
-export default class ManaBar extends Bar {
+export default class PowerBar extends Bar {
   constructor(
     scene: Phaser.Scene,
     x: number,

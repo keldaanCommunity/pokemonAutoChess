@@ -319,7 +319,7 @@ class GameContainer {
             "atkSpeed",
             "life",
             "shield",
-            "mana",
+            "pp",
             "atk",
             "def",
             "speDef",

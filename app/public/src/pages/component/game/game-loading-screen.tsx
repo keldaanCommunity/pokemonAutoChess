@@ -4,9 +4,10 @@ import { useAppSelector } from "../../../hooks"
 import { getGameScene } from "../../game"
 import "./game-loading-screen.css"
 import { Navigate } from "react-router"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function GameLoadingScreen(props: { connectError: string }) {
+  const { t } = useTranslation()
   const players = useAppSelector((state) => state.game.players)
   const currentPlayerId = useAppSelector((state) => state.network.uid)
   const progress = players.find(

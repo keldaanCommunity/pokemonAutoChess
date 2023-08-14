@@ -9,9 +9,10 @@ import { logIn, logOut } from "../../../stores/NetworkStore"
 import { FIREBASE_CONFIG } from "../../utils/utils"
 import AnonymousButton from "./anonymous-button"
 import "./login.css"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function Login() {
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const uid = useAppSelector((state) => state.network.uid)
   const displayName = useAppSelector((state) => state.network.displayName)

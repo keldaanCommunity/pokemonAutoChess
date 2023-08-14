@@ -8,9 +8,10 @@ import { AdditionalPicksStages } from "../../../../../types/Config"
 import { getGameScene } from "../../game"
 import { Pkm, PkmDuo, PkmDuos } from "../../../../../types/enum/Pokemon"
 import "./game-pokemon-propositions.css"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function GamePokemonsPropositions() {
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const pokemonsProposition = useAppSelector(
     (state) => state.game.pokemonsProposition

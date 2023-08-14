@@ -16,7 +16,7 @@ import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
 import SynergyIcon from "../icons/synergy-icon"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 const pokemonsByWeather: Map<Weather, Pokemon[]> = new Map()
 Object.values(Weather).forEach((weather) => {
@@ -24,6 +24,7 @@ Object.values(Weather).forEach((weather) => {
 })
 
 export default function WikiWeather() {
+  const { t } = useTranslation()
   const [hoveredPokemon, setHoveredPokemon] = useState<Pokemon>()
 
   return (

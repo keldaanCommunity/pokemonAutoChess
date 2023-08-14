@@ -12,24 +12,24 @@ import { ITracker } from "../../../../../types/ITracker"
 import tracker from "../../../../dist/client/assets/pokemons/tracker.json"
 import { cc } from "../../utils/jsx"
 import "./pokemon-emotions-modal.css"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function PokemonEmotionsModal(props: {
   pokemon: Pkm
   onHide: () => any
 }) {
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const pokemonCollection = useAppSelector(
     (state) => state.lobby.pokemonCollection
   )
   const metadata = tracker as unknown as { [key: string]: ITracker }
 
-  let p: Pokemon
   let pMetadata: ITracker | undefined = undefined
 
   const availableEmotions: Emotion[] = []
 
-  p = PokemonFactory.createPokemonFromName(props.pokemon)
+  const p = PokemonFactory.createPokemonFromName(props.pokemon)
 
   const pathIndex = p.index.split("-")
   if (pathIndex.length == 1) {

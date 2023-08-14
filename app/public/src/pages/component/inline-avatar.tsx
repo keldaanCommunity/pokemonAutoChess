@@ -2,7 +2,7 @@ import React from "react"
 import { Role } from "../../../../types"
 import { getAvatarSrc } from "../../utils"
 import { RoleBadge } from "./RoleBadge"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function InlineAvatar(props: {
   avatar: string
@@ -10,6 +10,7 @@ export default function InlineAvatar(props: {
   title?: string
   role?: Role
 }) {
+  const { t } = useTranslation()
   return (
     <div
       className="inline-avatar"

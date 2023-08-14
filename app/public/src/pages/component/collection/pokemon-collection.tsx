@@ -9,11 +9,10 @@ import SynergyIcon from "../icons/synergy-icon"
 import PokemonEmotionsModal from "./pokemon-emotions-modal"
 import UnownPanel from "./unown-panel"
 import "./pokemon-collection.css"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
-export default function PokemonCollection(props: {
-  toggleCollection: () => void
-}) {
+export default function PokemonCollection() {
+  const { t } = useTranslation()
   const metadata = tracker as unknown as { [key: string]: ITracker }
   const [selectedPokemon, setSelectedPokemon] = useState<Pkm | undefined>(
     undefined
@@ -24,22 +23,13 @@ export default function PokemonCollection(props: {
 
   return (
     <div id="pokemon-collection">
-      <header>
-        <button
-          onClick={() => {
-            props.toggleCollection()
-          }}
-          className="bubbly blue"
-        >
-          {t("back_to_lobby")}
-        </button>
-        <div className="spacer"></div>
+      <header className="nes-container">
         <label>
           <input
             type="checkbox"
             className="nes-checkbox is-dark"
             checked={shinyOnly === true}
-            onChange={(e) => setShinyOnly(!shinyOnly)}
+            onChange={() => setShinyOnly(!shinyOnly)}
           />
           <span>{t("shiny_hunter")}</span>
         </label>
@@ -102,7 +92,7 @@ export default function PokemonCollection(props: {
       </header>
       <div className="nes-container">
         <Tabs>
-          <TabList>
+          <TabList className="pokemon-collection-tabs">
             <Tab key="title-all">{t("ALL")}</Tab>
             {(Object.keys(Synergy) as Synergy[]).map((type) => {
               return (

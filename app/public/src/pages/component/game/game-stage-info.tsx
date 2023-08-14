@@ -18,9 +18,10 @@ import SynergyIcon from "../icons/synergy-icon"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Emotion } from "../../../../../types"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function GameStageInfo() {
+  const { t } = useTranslation()
   const name = useAppSelector((state) => state.game.currentPlayerName)
   const title = useAppSelector((state) => state.game.currentPlayerTitle)
   const avatar = useAppSelector((state) => state.game.currentPlayerAvatar)
@@ -135,6 +136,7 @@ type PathStep = {
 }
 
 export function StagePath() {
+  const { t } = useTranslation()
   const currentPlayer = useAppSelector((state) =>
     state.game.players.find((p) => p.id === state.game.currentPlayerId)
   )

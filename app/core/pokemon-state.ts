@@ -265,7 +265,7 @@ export default class PokemonState {
 
       if (pokemon) {
         if (shouldTargetGainMana) {
-          pokemon.setMana(pokemon.mana + Math.ceil(damage / 10))
+          pokemon.setPP(pokemon.pp + Math.ceil(damage / 10))
         }
 
         if (
@@ -531,9 +531,9 @@ export default class PokemonState {
     }
 
     if (pokemon.manaCooldown <= 0) {
-      pokemon.setMana(pokemon.mana + 10)
+      pokemon.setPP(pokemon.pp + 10)
       if (pokemon.simulation.weather === Weather.RAIN) {
-        pokemon.setMana(pokemon.mana + 3)
+        pokemon.setPP(pokemon.pp + 3)
       }
       pokemon.manaCooldown = 1000
     } else {

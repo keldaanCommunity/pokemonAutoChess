@@ -1,7 +1,7 @@
 import React from "react"
 import CSS from "csstype"
 import { addIconsToDescription } from "../../utils/descriptions"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 const imgStyle: CSS.Properties = {
   width: "64px",
@@ -11,11 +11,12 @@ const imgStyle: CSS.Properties = {
 }
 
 export default function WikiStatistic() {
+  const { t } = useTranslation()
   return (
     <ul className="wiki-stat">
       <li className="nes-container">
         <img style={imgStyle} src="assets/icons/HP.png"></img>
-        <p>{t("stat.HP")}</p>
+        <p>{t("stat.HEALTH_POINTS")}</p>
       </li>
       <li className="nes-container">
         <img style={imgStyle} src="assets/icons/SHIELD.png"></img>
@@ -37,15 +38,15 @@ export default function WikiStatistic() {
         </p>
       </li>
       <li className="nes-container">
-        <img style={imgStyle} src="assets/icons/MANA.png"></img>
-        <p>{t("stat.MAX_MANA")}</p>
+        <img style={imgStyle} src="assets/icons/PP.png"></img>
+        <p>{t("stat.POWER_POINTS")}</p>
         <p className="description">
-          {addIconsToDescription(t("stat_description.MAX_MANA"))}
+          {addIconsToDescription(t("stat_description.MAX_PP"))}
         </p>
       </li>
       <li className="nes-container">
         <img style={imgStyle} src="assets/icons/AP.png"></img>
-        <p>{t("stat.AP")} (%)</p>
+        <p>{t("stat.AP")}</p>
         <p className="description">
           {addIconsToDescription(t("stat_description.AP"))}
         </p>

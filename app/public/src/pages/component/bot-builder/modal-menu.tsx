@@ -4,7 +4,7 @@ import { IBot } from "../../../../../models/mongo-models/bot-v2"
 import { ModalMode } from "../../../../../types"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { requestBotData } from "../../../stores/NetworkStore"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 const textAreaStyle = {
   height: "400px"
@@ -27,12 +27,14 @@ export default function ModalMenu(props: {
   botData: IBot
   modalBoolean: boolean
 }) {
+  const { t } = useTranslation()
+  const dispatch = useAppDispatch()
   useEffect(() => {
     if (props.botData?.avatar) {
       handleTextAreaChange(JSON.stringify(props.botData))
     }
   }, [props.botData])
-  const dispatch = useAppDispatch()
+
   const botList: {
     name: string
     avatar: string

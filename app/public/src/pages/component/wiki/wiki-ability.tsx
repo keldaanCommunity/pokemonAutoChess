@@ -11,11 +11,12 @@ import PRECOMPUTED_ABILITY from "../../../../../models/precomputed/ability.json"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import ReactTooltip from "react-tooltip"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 const precomputed = PRECOMPUTED_ABILITY as PrecomputedAbility
 
 export default function WikiAbility() {
+  const { t } = useTranslation()
   const [hoveredPokemon, setHoveredPokemon] = useState<Pokemon>()
 
   return (

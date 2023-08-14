@@ -21,13 +21,14 @@ import GameState from "../../../../../rooms/states/game-state"
 import { useNavigate } from "react-router"
 import { MAX_PLAYERS_PER_LOBBY } from "../../../../../types/Config"
 import { logger } from "../../../../../utils/logger"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function RoomMenu(props: {
   toPreparation: boolean
   setToPreparation: Dispatch<SetStateAction<boolean>>
 }) {
   const dispatch = useAppDispatch()
+  const { t } = useTranslation()
   const preparationRooms: RoomAvailable[] = useAppSelector(
     (state) => state.lobby.preparationRooms
   )

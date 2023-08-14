@@ -3,13 +3,14 @@ import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import CSS from "csstype"
 import { IItemsStatistic } from "../../../../../models/mongo-models/items-statistic"
 import { getPortraitSrc } from "../../../utils"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 const pStyle = {
   fontSize: "1.1vw"
 }
 
 export default function ItemStatistic(props: { item: IItemsStatistic }) {
+  const { t } = useTranslation()
   const imgStyle: CSS.Properties = {
     width: "60px",
     height: "60px",

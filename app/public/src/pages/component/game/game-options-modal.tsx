@@ -33,7 +33,7 @@ export default function GameOptionsModal(props: {
   const { t, i18n } = useTranslation()
   const dispatch = useAppDispatch()
   const language = i18n.language
-  
+
     const getValue = useCallback(
     (
       target: HTMLInputElement,
@@ -75,7 +75,7 @@ export default function GameOptionsModal(props: {
       <Modal.Header>
         <Modal.Title>{t("options")}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className="game-options-modal-body">
         {!props.ingame && (
           <>
             <p>

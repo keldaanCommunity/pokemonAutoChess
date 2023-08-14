@@ -7,7 +7,7 @@ import { ArraySchema } from "@colyseus/schema"
 import { Life } from "../icons/life"
 import { Money } from "../icons/money"
 import { getAvatarSrc } from "../../../utils"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function GamePlayerDetail(props: {
   name: string
@@ -17,6 +17,7 @@ export default function GamePlayerDetail(props: {
   history: ArraySchema<HistoryItem>
   synergies: Synergies
 }) {
+  const { t } = useTranslation()
   const synergyList = useMemo(
     () =>
       Object.entries(props.synergies)
@@ -79,8 +80,8 @@ export default function GamePlayerDetail(props: {
         {synergyList.map((synergy, i) => {
           return (
             <div
-            key={`${synergy}${i}_game-player-detail`}
-            style={{
+              key={`${synergy}${i}_game-player-detail`}
+              style={{
                 display: "flex",
                 justifyContent: "space-around",
                 alignItems: "center",

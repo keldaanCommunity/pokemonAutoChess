@@ -1,9 +1,10 @@
 import React from "react"
 import ReactTooltip from "react-tooltip"
 import { useAppSelector } from "../../../hooks"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export function GameTeamInfo() {
+  const { t } = useTranslation()
   const experienceManager = useAppSelector(
     (state) => state.game.currentPlayerExperienceManager
   )

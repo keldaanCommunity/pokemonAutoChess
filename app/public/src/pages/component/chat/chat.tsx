@@ -3,9 +3,10 @@ import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { sendMessage } from "../../../stores/NetworkStore"
 import ChatHistory from "./chat-history"
 import "./chat.css"
-import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 export default function Chat(props: { source: string }) {
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const [currentText, setCurrentText] = useState<string>("")
   const user = useAppSelector((state) => state[props.source].user)

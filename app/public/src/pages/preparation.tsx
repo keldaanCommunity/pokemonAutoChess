@@ -30,11 +30,10 @@ import { playSound, SOUNDS } from "./utils/audio"
 import { IBot } from "../../../models/mongo-models/bot-v2"
 import { logger } from "../../../utils/logger"
 import { GameUser } from "../../../models/colyseus-models/game-user"
-import { useTranslation } from "react-i18next"
+import { MainSidebar } from "./main-sidebar"
 
 export default function Preparation() {
   const dispatch = useAppDispatch()
-  const { t } = useTranslation()
   const client: Client = useAppSelector((state) => state.network.client)
   const room: Room<PreparationState> | undefined = useAppSelector(
     (state) => state.network.preparation
@@ -221,19 +220,13 @@ export default function Preparation() {
   } else {
     return (
       <div className="preparation-page">
-        <nav>
-          <Link to="/lobby" style={{ textDecoration: "none" }}>
-            <button
-              className="bubbly blue"
-              onClick={async () => {
-                dispatch(leavePreparation())
-                room?.connection.close()
-              }}
-            >
-              {t("back_to_lobby")}
-            </button>
-          </Link>
-        </nav>
+        <MainSidebar
+          showBackButton
+          changePage={async () => {
+            dispatch(leavePreparation())
+            room?.connection.close()
+          }}
+        />
         <main>
           <PreparationMenu setToGame={setToGame} />
           <Chat source="preparation" />
