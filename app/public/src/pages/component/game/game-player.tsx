@@ -44,7 +44,7 @@ export default function GamePlayer(props: {
       <Tooltip
         id={"detail-" + props.player.id}
         className="customeTheme"
-        textColor="#000000"
+        style={{ color: "#000000" }}
         place="left"
         data-tooltip-offset={{ left: 30, bottom: props.index === 0 ? 50 : 0 }}
       >
