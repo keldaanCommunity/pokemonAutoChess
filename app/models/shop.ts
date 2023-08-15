@@ -13,7 +13,7 @@ import {
   PoolSize,
   CommonShop,
   EpicShop,
-  LegendaryShop,
+  UltraShop,
   RareShop,
   UncommonShop,
   FishRarityProbability,
@@ -21,12 +21,7 @@ import {
   NB_MYTHICAL_PROPOSITIONS
 } from "../types/Config"
 import { Rarity } from "../types/enum/Game"
-import {
-  chance,
-  pickNRandomIn,
-  pickRandomIn,
-  shuffleArray
-} from "../utils/random"
+import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
 import { clamp } from "../utils/number"
 import { removeInArray } from "../utils/array"
 import { Pokemon } from "./colyseus-models/pokemon"
@@ -59,8 +54,8 @@ export default class Shop {
     EpicShop.forEach((pkm) => {
       this.epicPool.set(pkm, getPoolSize(Rarity.EPIC, 3))
     })
-    LegendaryShop.forEach((pkm) => {
-      this.legendaryPool.set(pkm, getPoolSize(Rarity.LEGENDARY, 3))
+    UltraShop.forEach((pkm) => {
+      this.legendaryPool.set(pkm, getPoolSize(Rarity.ULTRA, 3))
     })
   }
 
@@ -81,8 +76,8 @@ export default class Shop {
       case Rarity.EPIC:
         this.epicPool.set(pkm, getPoolSize(Rarity.EPIC, 2))
         break
-      case Rarity.LEGENDARY:
-        this.legendaryPool.set(pkm, getPoolSize(Rarity.LEGENDARY, 2))
+      case Rarity.ULTRA:
+        this.legendaryPool.set(pkm, getPoolSize(Rarity.ULTRA, 2))
         break
       default:
         break
@@ -113,7 +108,7 @@ export default class Shop {
       if (value !== undefined) {
         this.epicPool.set(family, value + entityNumber)
       }
-    } else if (pokemon.rarity === Rarity.LEGENDARY) {
+    } else if (pokemon.rarity === Rarity.ULTRA) {
       const value = this.legendaryPool.get(family)
       if (value !== undefined) {
         this.legendaryPool.set(family, value + entityNumber)
@@ -150,7 +145,7 @@ export default class Shop {
     }
   }
 
-  assignMythicalPropositions(
+  assignUniquePropositions(
     player: Player,
     list: PkmProposition[],
     synergies: Synergy[]

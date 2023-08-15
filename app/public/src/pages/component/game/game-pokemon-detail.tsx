@@ -47,6 +47,11 @@ export function GamePokemonDetail(props: {
         >
           {t(`rarity.${props.pokemon.rarity}`)}
         </p>
+        <p className="game-pokemon-detail-entry-tier">
+          {Array.from({ length: props.pokemon.stars }, () => (
+            <img src="assets/ui/star.svg" height="16"></img>
+          ))}
+        </p>
       </div>
 
       <div className="game-pokemon-detail-types">
@@ -87,11 +92,7 @@ export function GamePokemonDetail(props: {
           <div>
             <AbilityTooltip
               ability={props.pokemon.skill}
-              tier={
-                props.pokemon.rarity === Rarity.MYTHICAL
-                  ? 3
-                  : props.pokemon.stars
-              }
+              tier={props.pokemon.stars}
             />
           </div>
         </div>

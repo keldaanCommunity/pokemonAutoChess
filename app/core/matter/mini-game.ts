@@ -19,8 +19,8 @@ import { pickNRandomIn, pickRandomIn, shuffleArray } from "../../utils/random"
 import { clamp } from "../../utils/number"
 import {
   ItemCarouselStages,
-  Mythical1Shop,
-  Mythical2Shop,
+  UniqueShop,
+  LegendaryShop,
   PortalCarouselStages,
   SynergyTriggers
 } from "../../types/Config"
@@ -505,17 +505,17 @@ export class MiniGame {
           (symbol) => symbol.portalId === avatar.portalId
         )
         if (state.stageLevel === PortalCarouselStages[0]) {
-          state.shop.assignMythicalPropositions(
+          state.shop.assignUniquePropositions(
             player,
-            Mythical1Shop,
+            UniqueShop,
             symbols.map((s) => s.synergy)
           )
         }
 
         if (state.stageLevel === PortalCarouselStages[1]) {
-          state.shop.assignMythicalPropositions(
+          state.shop.assignUniquePropositions(
             player,
-            Mythical2Shop,
+            LegendaryShop,
             symbols.map((s) => s.synergy)
           )
         }

@@ -64,7 +64,7 @@ export default function GameStageInfo() {
               {t("stages")} {AdditionalPicksStages.join(t("and"))}
             </p>
             <p>
-              <span className="help">{t("mythical_picks")}:</span> {t("stages")}{" "}
+              <span className="help">{t("unique_picks")}:</span> {t("stages")}{" "}
               {PortalCarouselStages.join(t("and"))}
             </p>
           </Tooltip>
@@ -169,7 +169,7 @@ export function StagePath() {
       path.push({
         level,
         icon: "/assets/ui/mythical.svg",
-        title: t("mythical_pick")
+        title: t("unique_pick")
       })
       if (level === stageLevel && phase === GamePhaseState.PICK) {
         currentLevelPathIndex = path.length - 1

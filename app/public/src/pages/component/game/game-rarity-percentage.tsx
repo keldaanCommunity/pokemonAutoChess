@@ -16,7 +16,7 @@ export default function GameRarityPercentage() {
     Rarity.UNCOMMON,
     Rarity.RARE,
     Rarity.EPIC,
-    Rarity.LEGENDARY
+    Rarity.ULTRA
   ]
   return (
     <>

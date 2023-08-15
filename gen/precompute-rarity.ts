@@ -14,6 +14,8 @@ const data = {
   [Rarity.UNCOMMON]: [],
   [Rarity.RARE]: [],
   [Rarity.EPIC]: [],
+  [Rarity.ULTRA]: [],
+  [Rarity.UNIQUE]: [],
   [Rarity.LEGENDARY]: [],
   [Rarity.MYTHICAL]: [],
   [Rarity.SPECIAL]: [],
@@ -24,7 +26,10 @@ Object.keys(Rarity).forEach((rarity) => {
   const pokemonCandidates = new Array<Pokemon>()
   Object.values(Pkm).forEach((pkm) => {
     const pokemon = PokemonFactory.createPokemonFromName(pkm)
-    if (pokemon.rarity == rarity && (pokemon.skill != Ability.DEFAULT || pokemon.passive !== Passive.NONE)) {
+    if (
+      pokemon.rarity == rarity &&
+      (pokemon.skill != Ability.DEFAULT || pokemon.passive !== Passive.NONE)
+    ) {
       pokemonCandidates.push(pokemon)
     }
   })

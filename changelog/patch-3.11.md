@@ -40,6 +40,6 @@
 - Improve Dash ability: Use of the Manhattan distance instead of Chebyshev
 - Greninja: Improve water shuriken aim
 - Metronome ability animation is now displayed correctly
-- Mythical dragons now correctly apply tier 3 dragon synergy effects
+- Unique dragons now correctly apply tier 3 dragon synergy effects
 
 # Misc

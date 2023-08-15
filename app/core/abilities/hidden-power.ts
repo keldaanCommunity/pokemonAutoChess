@@ -617,7 +617,7 @@ export class HiddenPowerWStrategy extends HiddenPowerStrategy {
           .filter(
             (p) =>
               p.stars === 1 &&
-              [Rarity.RARE, Rarity.EPIC, Rarity.LEGENDARY].includes(p.rarity)
+              [Rarity.RARE, Rarity.EPIC, Rarity.ULTRA].includes(p.rarity)
           )
 
         const pokemon = pickRandomIn(candidates)

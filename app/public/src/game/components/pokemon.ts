@@ -327,7 +327,7 @@ export default class Pokemon extends DraggableObject {
       this.emotion,
       this.shiny,
       this.index,
-      this.rarity === Rarity.MYTHICAL ? 3 : this.stars,
+      this.stars,
       this.evolution
     )
     this.detail.setPosition(

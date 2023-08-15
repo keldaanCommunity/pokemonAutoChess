@@ -57,6 +57,8 @@ export type DetailledPkm = { pkm: Pkm; shiny: boolean; emotion: Emotion }
 export type PrecomputedTypePokemon = {
   [key in Synergy]: {
     pokemons: Pkm[]
+    uniquePokemons: Pkm[]
+    legendaryPokemons: Pkm[]
     mythicalPokemons: Pkm[]
     additionalPokemons: Pkm[]
   }
