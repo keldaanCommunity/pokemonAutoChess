@@ -507,16 +507,12 @@ export default class Simulation extends Schema implements ISimulation {
           pokemon.effects.includes(Effect.DRAGON_SCALES) ||
           pokemon.effects.includes(Effect.DRAGON_DANCE)
         ) {
-          const dragonTier =
-            pokemon.rarity === Rarity.MYTHICAL ? 3 : pokemon.stars
-          pokemon.addMaxHP(30 * dragonTier)
+          pokemon.addMaxHP(30 * pokemon.stars)
           pokemon.life = pokemon.hp
         }
         if (pokemon.effects.includes(Effect.DRAGON_DANCE)) {
-          const dragonTier =
-            pokemon.rarity === Rarity.MYTHICAL ? 3 : pokemon.stars
-          pokemon.addAbilityPower(10 * dragonTier)
-          pokemon.addAttackSpeed(10 * dragonTier)
+          pokemon.addAbilityPower(10 * pokemon.stars)
+          pokemon.addAttackSpeed(10 * pokemon.stars)
         }
         let shieldBonus = 0
         if (pokemon.effects.includes(Effect.STAMINA)) {

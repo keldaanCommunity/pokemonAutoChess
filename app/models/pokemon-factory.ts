@@ -1,11 +1,6 @@
 import { MapSchema } from "@colyseus/schema"
 import { Emotion, IPlayer } from "../types"
-import {
-  EvolutionTime,
-  HatchList,
-  Mythical1Shop,
-  PkmCost
-} from "../types/Config"
+import { EvolutionTime, HatchList, UniqueShop, PkmCost } from "../types/Config"
 import { PokemonActionState, Rarity } from "../types/enum/Game"
 import { Passive } from "../types/enum/Passive"
 import {
@@ -2025,15 +2020,18 @@ export default class PokemonFactory {
         currentFossils.push(PkmFamily[p.name])
       }
     })
-    const possibleFossils = new Array<Pkm>()
-    ;(PRECOMPUTED_TYPE_POKEMONS[Synergy.FOSSIL].pokemons as Pkm[]).forEach(
-      (p) => {
-        const pkm = PokemonFactory.createPokemonFromName(p)
-        if (!currentFossils.includes(p) && pkm.rarity !== Rarity.MYTHICAL) {
-          possibleFossils.push(p)
-        }
-      }
-    )
+    const possibleFossils = (
+      PRECOMPUTED_TYPE_POKEMONS[Synergy.FOSSIL].pokemons as Pkm[]
+    ).filter((p) => {
+      const pokemon = PokemonFactory.createPokemonFromName(p)
+      return (
+        currentFossils.includes(p) === false &&
+        [Rarity.UNIQUE, Rarity.LEGENDARY, Rarity.MYTHICAL].includes(
+          pokemon.rarity
+        ) === false
+      )
+    })
+
     if (possibleFossils.length > 0) {
       return pickRandomIn(possibleFossils)
     } else {
@@ -2051,12 +2049,16 @@ export default class PokemonFactory {
       return 1
     } else if (pokemon.rarity === Rarity.HATCH) {
       return [3, 4, 5][pokemon.stars - 1]
-    } else if (pokemon.rarity === Rarity.MYTHICAL) {
+    } else if (
+      [Rarity.UNIQUE, Rarity.LEGENDARY, Rarity.MYTHICAL].includes(
+        pokemon.rarity
+      )
+    ) {
       const duo = Object.entries(PkmDuos).find(([key, duo]) =>
         duo.includes(pokemon.name)
       )
       return Math.ceil(
-        (Mythical1Shop.includes(duo ? (duo[0] as PkmProposition) : name)
+        (UniqueShop.includes(duo ? (duo[0] as PkmProposition) : name)
           ? 15
           : 20) * (duo ? 0.5 : 1)
       )

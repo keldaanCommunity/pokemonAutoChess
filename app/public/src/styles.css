@@ -597,9 +597,7 @@ p:last-child {
 }
 
 .react-tabs__tab--selected {
-  border-radius: 12px 12px 0px 0px !important;
-  color: #fff !important;
-  background-color: rgb(84, 89, 107) !important;
+  background-color: rgb(84, 89, 107);
 }
 
 /* react-tooltip */

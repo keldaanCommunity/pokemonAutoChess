@@ -15,7 +15,6 @@
     "stats stats stats"
     "passive passive passive"
     "ult ult ult";
-    
 }
 
 .game-pokemon-detail p {
@@ -36,7 +35,7 @@
 }
 
 .game-pokemon-detail-entry-rarity {
-  font-size: 85%;
+  font-variant: small-caps;
 }
 
 .game-pokemon-detail-portrait {

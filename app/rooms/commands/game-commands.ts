@@ -7,8 +7,8 @@ import {
   StageDuration,
   AdditionalPicksStages,
   PortalCarouselStages,
-  Mythical1Shop,
-  Mythical2Shop,
+  UniqueShop,
+  LegendaryShop,
   MAX_PLAYERS_PER_LOBBY,
   ITEM_CAROUSEL_BASE_DURATION,
   PORTAL_CAROUSEL_BASE_DURATION,
@@ -75,7 +75,11 @@ export class OnShopCommand extends Command<
               this.room.getBenchSize(player.board) == 8))
         ) {
           let allowBuy = true
-          if (pokemon.rarity === Rarity.MYTHICAL) {
+          if (
+            [Rarity.UNIQUE, Rarity.LEGENDARY, Rarity.MYTHICAL].includes(
+              pokemon.rarity
+            )
+          ) {
             player.board.forEach((p) => {
               if (p.name === pokemon.name) {
                 allowBuy = false
@@ -96,9 +100,7 @@ export class OnShopCommand extends Command<
             pokemon.positionY = 0
             player.board.set(pokemon.id, pokemon)
 
-            if (pokemon.rarity == Rarity.MYTHICAL) {
-              this.state.shop.assignShop(player, false, this.state.stageLevel)
-            } else if (
+            if (
               pokemon.passive === Passive.UNOWN &&
               player.effects.list.includes(Effect.EERIE_SPELL)
             ) {
@@ -156,23 +158,23 @@ export class OnPokemonPropositionCommand extends Command<
 
       let allowBuy = true
       if (
-        Mythical1Shop.includes(pkm) &&
+        UniqueShop.includes(pkm) &&
         this.state.stageLevel !== PortalCarouselStages[0]
       ) {
         allowBuy = false // wrong stage
       }
       if (
-        Mythical2Shop.includes(pkm) &&
+        LegendaryShop.includes(pkm) &&
         this.state.stageLevel !== PortalCarouselStages[1]
       ) {
         allowBuy = false // wrong stage
       }
 
       player.board.forEach((p) => {
-        if (Mythical1Shop.includes(pkm) && Mythical1Shop.includes(p.name)) {
+        if (UniqueShop.includes(pkm) && UniqueShop.includes(p.name)) {
           allowBuy = false // already picked a T10 mythical
         }
-        if (Mythical2Shop.includes(pkm) && Mythical2Shop.includes(p.name)) {
+        if (LegendaryShop.includes(pkm) && LegendaryShop.includes(p.name)) {
           allowBuy = false // already picked a T20 mythical
         }
       })
