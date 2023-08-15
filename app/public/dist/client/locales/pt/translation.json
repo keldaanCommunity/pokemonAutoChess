@@ -888,7 +888,7 @@
     "CRABHAMMER": "Ofertas [40,80,120,SP] SPECIAL. Alta chance de crit. Execute a meta se estiver abaixo de 30%",
     "DIAMOND_STORM": "Causa [200,SP]% da DEF atual como dano especial aos inimigos ao redor",
     "DRACO_ENERGY": "Ofertas [100,SP] % de regidraco HP como SPECIAL",
-    "DYNAMAX_CANNON": "Atire um raio dynamax em linha reta, tratando cada pokémon atingido [80,SP] % de seu HP como SPECIAL",
+    "DYNAMAX_CANNON": "Atire um raio dynamax em linha reta, tratando cada pokémon atingido [50,SP]% de seu HP como SPECIAL",
     "DYNAMIC_PUNCH": "Distribui [20,40,80,SP] SPECIAL e deixa o alvo CONFUSION por [1.5,3,6] segundos",
     "ELECTRO_BOOST": "Todos os aliados elétricos recebem RUNE_PROTECT e são imunes a danos especiais e alterações de status por 5s",
     "ELECTRO_WEB": "Rouba [15,30,60] % dos inimigos adjacentes ATK_SPEED",
