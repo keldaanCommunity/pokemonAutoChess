@@ -6,6 +6,8 @@ import Lobby from "./pages/lobby"
 import Preparation from "./pages/preparation"
 import Game from "./pages/game"
 import AfterGame from "./pages/after-game"
+import TeamBuilder from "./pages/component/bot-builder/team-builder"
+import { BotManagerPanel } from "./pages/component/bot-builder/bot-manager-panel"
 import { Provider } from "react-redux"
 import store from "./stores/index"
 
@@ -27,6 +29,8 @@ root.render(
             <Route path="/preparation" element={<Preparation />} />
             <Route path="/game" element={<Game />} />
             <Route path="/after" element={<AfterGame />} />
+            <Route path="/bot-builder" element={<TeamBuilder />} />
+            <Route path="/bot-admin" element={<BotManagerPanel />} />
           </Routes>
         </BrowserRouter>
       </Suspense>

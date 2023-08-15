@@ -63,7 +63,6 @@ import GamePlayers from "./component/game/game-players"
 import GameShop from "./component/game/game-shop"
 import GameSynergies from "./component/game/game-synergies"
 import GameModal from "./component/game/game-modal"
-import GameOptionsIcon from "./component/game/game-options-icon"
 import GameLoadingScreen from "./component/game/game-loading-screen"
 import AfterGameState from "../../../rooms/states/after-game-state"
 import {
@@ -87,6 +86,7 @@ import { toast } from "react-toastify"
 import { logger } from "../../../utils/logger"
 import { RequiredStageLevelForXpElligibility } from "../../../types/Config"
 import { useTranslation } from "react-i18next"
+import { MainSidebar } from "./main-sidebar"
 
 let gameContainer: GameContainer
 
@@ -645,9 +645,10 @@ export default function Game() {
   }
 
   return (
-    <div>
+    <div id="game-wrapper">
       {loaded ? (
         <>
+          <MainSidebar page="game" leave={leave} leaveLabel={t("leave_game")} />
           <GameModal
             modalBoolean={modalBoolean}
             modalTitle={modalTitle}
@@ -663,7 +664,6 @@ export default function Game() {
           <GamePokemonsProposition />
           <GameDpsMeter />
           <GameToasts />
-          <GameOptionsIcon leave={leave} />
         </>
       ) : (
         <GameLoadingScreen connectError={connectError} />

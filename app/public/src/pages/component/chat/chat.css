@@ -3,15 +3,14 @@
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: stretch;
-  background-image: url("assets/ui/back1.png");
+  background-image: url("assets/ui/back2.png");
   background-size: cover;
-  background-position-x: right;
+  background-position-x: center;
 }
 
 #root .user-chat h1 {
   color: white;
   text-align: center;
-  margin: 0;
 }
 
 .user-chat form {

@@ -22,6 +22,8 @@
 
 .preparation-page .user-chat {
   flex: 0 1 30em;
+  background-position: right;
+  background-image: url(assets/ui/back1.png);
 }
 
 @media (max-width: 640px) {

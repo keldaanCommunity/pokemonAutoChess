@@ -1,23 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from "react"
-import firebase from "firebase/compat/app"
-import DonateButton from "./component/buttons/donate-button"
-import PolicyButton from "./component/buttons/policy-button"
+import { useNavigate } from "react-router"
+import { useTranslation } from "react-i18next"
+import { Sidebar, Menu, MenuItem, MenuItemProps } from "react-pro-sidebar"
 import { useAppDispatch, useAppSelector } from "../hooks"
-import {
-  logOut,
-  requestMeta,
-  requestBotList,
-  INetwork
-} from "../stores/NetworkStore"
-import { IUserLobbyState, leaveLobby } from "../stores/LobbyStore"
+import { requestMeta, INetwork } from "../stores/NetworkStore"
+import { IUserLobbyState } from "../stores/LobbyStore"
 import { Role, Title } from "../../../types"
 import { cc } from "./utils/jsx"
-import "./lobby.css"
-import { useTranslation } from "react-i18next"
-import { Page } from "./lobby"
-import { Sidebar, Menu, MenuItem, MenuItemProps } from "react-pro-sidebar"
-
-import "./main-sidebar.css"
 import Booster from "./component/booster/booster"
 import PokemonCollection from "./component/collection/pokemon-collection"
 import GameOptionsModal from "./component/game/game-options-modal"
@@ -25,15 +14,22 @@ import MetaReport from "./component/meta-report/meta-report"
 import { BasicModal } from "./component/modal/modal"
 import News from "./component/news/news"
 import Wiki from "./component/wiki/wiki"
+import pkg from "../../../../package.json"
+
+import "./main-sidebar.css"
+
+export type Page = "main_lobby" | "preparation" | "game"
 
 interface MainSidebarProps {
-  changePage?: (nextPage: Page) => void
-  showBackButton?: boolean
+  page: Page
+  leave: () => void
+  leaveLabel: string
 }
 
 export function MainSidebar(props: MainSidebarProps) {
-  const { changePage, showBackButton } = props
+  const { page, leave, leaveLabel } = props
   const [collapsed, setCollapsed] = useState(true)
+  const navigate = useNavigate()
   const [modal, setModal] = useState<Modals>()
   const changeModal = useCallback(
     (nextModal: Modals) => setModal(nextModal),
@@ -44,34 +40,19 @@ export function MainSidebar(props: MainSidebarProps) {
   const dispatch = useAppDispatch()
   const { t } = useTranslation()
   const {
-    lobby,
     meta,
     metaItems,
-    botList,
     user
   }: Partial<INetwork> & Partial<IUserLobbyState> = useAppSelector((state) => ({
-    lobby: state.network.lobby,
     meta: state.lobby.meta,
     metaItems: state.lobby.metaItems,
     botList: state.lobby.botList,
     user: state.lobby.user
   }))
 
+  const version = pkg.version
+
   const numberOfBooster = user?.booster ?? 0
-
-  const botBuilderOnClick = useCallback(() => {
-    if (user?.anonymous === false && botList.length == 0) {
-      dispatch(requestBotList())
-    }
-    changePage?.("bot_builder")
-  }, [botList.length, changePage, dispatch, user?.anonymous])
-
-  const botBuilderAdminOnClick = useCallback(() => {
-    if (user?.role !== Role.BASIC && botList.length == 0) {
-      dispatch(requestBotList())
-    }
-    changePage?.("bot_manager")
-  }, [botList.length, changePage, dispatch, user?.role])
 
   const metaOnClick = useCallback(() => {
     if (meta.length == 0 || metaItems.length == 0) {
@@ -79,13 +60,6 @@ export function MainSidebar(props: MainSidebarProps) {
     }
     changeModal("meta")
   }, [changeModal, dispatch, meta.length, metaItems.length])
-
-  const signOut = useCallback(async () => {
-    await lobby?.leave()
-    await firebase.auth().signOut()
-    dispatch(leaveLobby())
-    dispatch(logOut())
-  }, [dispatch, lobby])
 
   useEffect(() => {
     if (!sidebarRef.current) {
@@ -125,76 +99,74 @@ export function MainSidebar(props: MainSidebarProps) {
       ref={sidebarRef}
     >
       <Menu>
-        {showBackButton && (
+        <div className="sidebar-logo">
+          <img src={`assets/ui/colyseus-icon.png`} />
+          <div>
+            <h1>Pokemon Auto Chess</h1>
+            <small>v{version}</small>
+          </div>
+        </div>
+
+        {page !== "game" && (
           <NavLink
-            text={t("back_to_lobby")}
-            png="colyseus-icon"
-            onClick={() => (window.location.href = "/lobby")}
-          />
+            location="collection"
+            svg="collection"
+            className="blue"
+            handleClick={changeModal}
+          >
+            {t("collection")}
+          </NavLink>
+        )}
+        {page !== "game" && (
+          <NavLink
+            location="booster"
+            svg="booster"
+            className="blue"
+            handleClick={changeModal}
+            shimmer={numberOfBooster > 0}
+          >
+            {t("boosters")}
+          </NavLink>
         )}
         <NavLink
-          text={t("collection")}
-          location="collection"
-          svg="collection"
-          className="blue"
-          handleClick={changeModal}
-        />
-        <NavLink
-          text={t("boosters")}
-          location="booster"
-          svg="booster"
-          className="blue"
-          handleClick={changeModal}
-          shimmer={numberOfBooster > 0}
-        />
-        <NavLink
-          text={t("wiki")}
           location="wiki"
           svg="wiki"
           className="green"
           handleClick={changeModal}
-        />
-        <NavLink
-          text={t("meta")}
-          svg="meta"
-          className="green"
-          onClick={metaOnClick}
-        />
+        >
+          {t("wiki")}
+        </NavLink>
+        <NavLink svg="meta" className="green" onClick={metaOnClick}>
+          {t("meta")}
+        </NavLink>
 
-        {user?.anonymous === false && user?.title === Title.BOT_BUILDER && (
-          <NavLink
-            text={t("bot_builder")}
-            svg="bot"
-            onClick={botBuilderOnClick}
-          />
-        )}
+        {page !== "game" &&
+          user?.anonymous === false &&
+          user?.title === Title.BOT_BUILDER && (
+            <NavLink svg="bot" onClick={() => navigate("/bot-builder")}>
+              {t("bot_builder")}
+            </NavLink>
+          )}
 
-        {(user?.role === Role.ADMIN ||
-          user?.role === Role.MODERATOR ||
-          user?.role === Role.BOT_MANAGER) && (
-          <NavLink
-            text={t("bot_admin")}
-            svg="bot"
-            onClick={botBuilderAdminOnClick}
-          />
-        )}
+        {page !== "game" &&
+          (user?.role === Role.ADMIN ||
+            user?.role === Role.MODERATOR ||
+            user?.role === Role.BOT_MANAGER) && (
+            <NavLink svg="bot" onClick={() => navigate("/bot-admin")}>
+              {t("bot_admin")}
+            </NavLink>
+          )}
 
-        <NavLink
-          text={t("news")}
-          location="news"
-          svg="newspaper"
-          handleClick={changeModal}
-        />
-        <NavLink
-          text={t("options")}
-          svg="options"
-          location="options"
-          handleClick={changeModal}
-        />
+        <NavLink location="news" svg="newspaper" handleClick={changeModal}>
+          {t("news")}
+        </NavLink>
+        <NavLink svg="options" location="options" handleClick={changeModal}>
+          {t("options")}
+        </NavLink>
 
         <div className="spacer"></div>
 
-        {!collapsed && (
+        {!collapsed && page !== "game" && (
           <div className="additional-links">
             <a
               href="https://github.com/keldaanCommunity/pokemonAutoChess/blob/master/policy.md"
@@ -205,39 +177,38 @@ export function MainSidebar(props: MainSidebarProps) {
           </div>
         )}
 
-        <NavLink
-          text={
-            <>
-              {t("donate")}
-              <img
-                src="assets/ui/tipeee.svg"
-                style={{
-                  height: "1.25em",
-                  display: "inline-block"
-                }}
-              />
-            </>
-          }
-          svg="donate"
-          className="tipeee"
-          onClick={() =>
-            window.open("https://en.tipeee.com/pokemon-auto-chess", "_blank")
-          }
-        />
+        {page !== "game" && (
+          <NavLink
+            svg="donate"
+            className="tipeee"
+            onClick={() =>
+              window.open("https://en.tipeee.com/pokemon-auto-chess", "_blank")
+            }
+          >
+            {t("donate")}
+            <img
+              src="assets/ui/tipeee.svg"
+              style={{
+                height: "1.25em",
+                display: "inline-block"
+              }}
+            />
+          </NavLink>
+        )}
 
-        <NavLink
-          text="Discord"
-          svg="discord"
-          className="discord"
-          onClick={() => window.open("https://discord.gg/6JMS7tr", "_blank")}
-        />
+        {page !== "game" && (
+          <NavLink
+            svg="discord"
+            className="discord"
+            onClick={() => window.open("https://discord.gg/6JMS7tr", "_blank")}
+          >
+            Discord
+          </NavLink>
+        )}
 
-        <NavLink
-          text={t("sign_out")}
-          svg="exit-door"
-          className="red logout"
-          onClick={signOut}
-        />
+        <NavLink svg="exit-door" className="red logout" onClick={leave}>
+          {leaveLabel}
+        </NavLink>
       </Menu>
 
       <Modals modal={modal} setModal={setModal} />
@@ -247,7 +218,6 @@ export function MainSidebar(props: MainSidebarProps) {
 
 type NavLinkProps = MenuItemProps &
   NavPageLink & {
-    text?: string | Element
     svg?: string
     png?: string
     shimmer?: boolean
@@ -261,7 +231,7 @@ type NavPageLink = {
 
 function NavLink(props: NavLinkProps) {
   const {
-    text,
+    children,
     location,
     handleClick,
     shimmer = false,
@@ -298,7 +268,7 @@ function NavLink(props: NavLinkProps) {
         </div>
       }
     >
-      {text}
+      {children}
     </MenuItem>
   )
 }
