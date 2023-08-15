@@ -21,7 +21,7 @@
 
 # Changes to Stages
 
-- Mythical picks at stage 10 and 20 are less random, giving at least one choice that matches your top 2 synergies
+- Unique picks at stage 10 and 20 are less random, giving at least one choice that matches your top 2 synergies
 
 # Bugfix
 

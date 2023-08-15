@@ -13,7 +13,7 @@ import {
   PoolSize,
   CommonShop,
   EpicShop,
-  LegendaryShop,
+  UltraShop,
   RareShop,
   UncommonShop,
   FishRarityProbability,
@@ -21,12 +21,7 @@ import {
   NB_MYTHICAL_PROPOSITIONS
 } from "../types/Config"
 import { Rarity } from "../types/enum/Game"
-import {
-  chance,
-  pickNRandomIn,
-  pickRandomIn,
-  shuffleArray
-} from "../utils/random"
+import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
 import { clamp } from "../utils/number"
 import { removeInArray } from "../utils/array"
 import { Pokemon } from "./colyseus-models/pokemon"
@@ -59,7 +54,7 @@ export default class Shop {
     EpicShop.forEach((pkm) => {
       this.epicPool.set(pkm, getPoolSize(Rarity.EPIC, 3))
     })
-    LegendaryShop.forEach((pkm) => {
+    UltraShop.forEach((pkm) => {
       this.legendaryPool.set(pkm, getPoolSize(Rarity.ULTRA, 3))
     })
   }
@@ -150,7 +145,7 @@ export default class Shop {
     }
   }
 
-  assignMythicalPropositions(
+  assignUniquePropositions(
     player: Player,
     list: PkmProposition[],
     synergies: Synergy[]

@@ -1,11 +1,6 @@
 import { MapSchema } from "@colyseus/schema"
 import { Emotion, IPlayer } from "../types"
-import {
-  EvolutionTime,
-  HatchList,
-  Mythical1Shop,
-  PkmCost
-} from "../types/Config"
+import { EvolutionTime, HatchList, UniqueShop, PkmCost } from "../types/Config"
 import { PokemonActionState, Rarity } from "../types/enum/Game"
 import { Passive } from "../types/enum/Passive"
 import {
@@ -2063,7 +2058,7 @@ export default class PokemonFactory {
         duo.includes(pokemon.name)
       )
       return Math.ceil(
-        (Mythical1Shop.includes(duo ? (duo[0] as PkmProposition) : name)
+        (UniqueShop.includes(duo ? (duo[0] as PkmProposition) : name)
           ? 15
           : 20) * (duo ? 0.5 : 1)
       )

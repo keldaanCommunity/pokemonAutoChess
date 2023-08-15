@@ -121,10 +121,10 @@ export const BoosterRarityProbability: { [key in Rarity]: number } = {
   [Rarity.UNCOMMON]: 0.2,
   [Rarity.RARE]: 0.2,
   [Rarity.EPIC]: 0.15,
-  [Rarity.ULTRA]: 0.05,
+  [Rarity.ULTRA]: 0.06,
   [Rarity.UNIQUE]: 0.08,
   [Rarity.LEGENDARY]: 0.05,
-  [Rarity.MYTHICAL]: 0.02,
+  [Rarity.MYTHICAL]: 0.01,
   [Rarity.HATCH]: 0.1,
   [Rarity.SPECIAL]: 0
 }
@@ -250,7 +250,7 @@ export const EpicShop = new Array<Pkm>(
   Pkm.GIBLE
 )
 
-export const LegendaryShop = new Array<Pkm>(
+export const UltraShop = new Array<Pkm>(
   Pkm.GASTLY,
   Pkm.ONIX,
   Pkm.SCYTHER,
@@ -267,7 +267,7 @@ export const LegendaryShop = new Array<Pkm>(
   Pkm.SOLOSIS
 )
 
-export const Mythical1Shop = new Array<PkmProposition>(
+export const UniqueShop = new Array<PkmProposition>(
   Pkm.AERODACTYL,
   Pkm.BLACEPHALON,
   Pkm.REGIDRAGO,
@@ -317,7 +317,7 @@ export const Mythical1Shop = new Array<PkmProposition>(
   Pkm.PINSIR
 )
 
-export const Mythical2Shop = new Array<PkmProposition>(
+export const LegendaryShop = new Array<PkmProposition>(
   Pkm.RESHIRAM,
   Pkm.ZEKROM,
   Pkm.STAKATAKA,

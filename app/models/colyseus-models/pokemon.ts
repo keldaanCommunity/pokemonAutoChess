@@ -8172,7 +8172,7 @@ export class PrimalGroudon extends Pokemon {
     super(
       Pkm.PRIMAL_GROUDON,
       [Synergy.GROUND, Synergy.FIRE],
-      Rarity.LEGENDARY,
+      Rarity.MYTHICAL,
       Pkm.DEFAULT,
       400,
       30,
@@ -8197,7 +8197,7 @@ export class PrimalKyogre extends Pokemon {
     super(
       Pkm.PRIMAL_KYOGRE,
       [Synergy.WATER, Synergy.ELECTRIC, Synergy.MONSTER],
-      Rarity.LEGENDARY,
+      Rarity.MYTHICAL,
       Pkm.DEFAULT,
       400,
       20,
@@ -8222,7 +8222,7 @@ export class MegaRayquaza extends Pokemon {
     super(
       Pkm.MEGA_RAYQUAZA,
       [Synergy.DRAGON, Synergy.FLYING],
-      Rarity.LEGENDARY,
+      Rarity.MYTHICAL,
       Pkm.DEFAULT,
       400,
       30,
