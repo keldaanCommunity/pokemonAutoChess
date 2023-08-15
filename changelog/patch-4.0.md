@@ -8,8 +8,8 @@ patch announcement
 
 # Gameplay
 
-- New Minigame for portals
-- Fights are now 1vs1
+- New Minigame for unique picks: Portals !
+- You now see the same battle than your opponent, and can send emotes to him. "Ghost" opponents now are only added when the number of opponents alive is odd.
 
 # New Pokemons:
 
@@ -23,6 +23,8 @@ Gligar,Gliscor,Shellder,Cloyster, Furret, Sentret
 
 # UI
 
+- Pokemon categories renamed: Legendary becomes Ultra, Mythical T10 becomes Unique, Mythical T20 becomes Legendary
+- Pokemon now have their tier displayed in their tooltip as stars
 - Internationalization with languages: de, en es, fr, it, ja, nl pt
 - New icons for status
 - Discord and Donate buttons now open links in a new tab
@@ -34,3 +36,5 @@ Gligar,Gliscor,Shellder,Cloyster, Furret, Sentret
   - Hover over with your mouse to expand sidebar
 
 # Misc
+
+- Boosters rarity percentages have been adjusted with the changes to rarity categories
