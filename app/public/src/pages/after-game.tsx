@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { Navigate } from "react-router-dom"
 import AfterMenu from "./component/after/after-menu"
 import { Client, Room } from "colyseus.js"
@@ -22,13 +22,13 @@ export default function AfterGame() {
   const room: Room<AfterGameState> | undefined = useAppSelector(
     (state) => state.network.after
   )
-  const [initialized, setInitialized] = useState<boolean>(false)
+  const initialized = useRef<boolean>(false)
   const [toLobby, setToLobby] = useState<boolean>(false)
   const [toAuth, setToAuth] = useState<boolean>(false)
 
   useEffect(() => {
     const reconnect = async () => {
-      setInitialized(true)
+      initialized.current = true
       if (!firebase.apps.length) {
         firebase.initializeApp(FIREBASE_CONFIG)
       }
@@ -86,7 +86,7 @@ export default function AfterGame() {
       })
     }
 
-    if (!initialized) {
+    if (!initialized.current) {
       reconnect()
     }
   })

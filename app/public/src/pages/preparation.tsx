@@ -38,7 +38,7 @@ export default function Preparation() {
   const room: Room<PreparationState> | undefined = useAppSelector(
     (state) => state.network.preparation
   )
-  const [initialized, setInitialized] = useState<boolean>(false)
+  const initialized = useRef<boolean>(false)
   const [toGame, setToGame] = useState<boolean>(false)
   const [toAuth, setToAuth] = useState<boolean>(false)
   const [toLobby, setToLobby] = useState<boolean>(false)
@@ -46,7 +46,6 @@ export default function Preparation() {
 
   useEffect(() => {
     const reconnect = async () => {
-      setInitialized(true)
       if (!firebase.apps.length) {
         firebase.initializeApp(FIREBASE_CONFIG)
       }
@@ -55,21 +54,22 @@ export default function Preparation() {
         if (user) {
           dispatch(logIn(user))
           try {
-            const cachedReconnectionToken = localStorage.getItem(
-              "cachedReconnectionToken"
-            )
-            console.log(client)
-            console.log(cachedReconnectionToken)
-            if (cachedReconnectionToken) {
-              const r: Room<PreparationState> = await client.reconnect(
-                cachedReconnectionToken
+            if (!initialized.current) {
+              initialized.current = true
+              const cachedReconnectionToken = localStorage.getItem(
+                "cachedReconnectionToken"
               )
-              localStorage.setItem(
-                "cachedReconnectionToken",
-                r.reconnectionToken
-              )
-              await initialize(r, user.uid)
-              dispatch(joinPreparation(r))
+              if (cachedReconnectionToken) {
+                const r: Room<PreparationState> = await client.reconnect(
+                  cachedReconnectionToken
+                )
+                localStorage.setItem(
+                  "cachedReconnectionToken",
+                  r.reconnectionToken
+                )
+                await initialize(r, user.uid)
+                dispatch(joinPreparation(r))
+              }
             }
           } catch (error) {
             setToAuth(true)
@@ -206,7 +206,7 @@ export default function Preparation() {
       })
     }
 
-    if (!initialized) {
+    if (!initialized.current) {
       reconnect()
     }
   })

@@ -15,6 +15,7 @@ export default class Bot {
     this.player = player
     this.step = 0
     this.progress = 0
+    this.initialize()
   }
 
   async initialize() {

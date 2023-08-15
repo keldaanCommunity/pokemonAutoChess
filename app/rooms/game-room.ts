@@ -486,24 +486,21 @@ export default class GameRoom extends Room<GameState> {
         elligibleToXP && !this.state.noElo && humans.length >= 2
 
       if (elligibleToXP) {
-        bots.forEach((player) => {
-          BotV2.find({ id: player.id }, (err, results) => {
-            if (err != null) logger.error(err)
-            else if (results) {
-              results.forEach((bot) => {
-                bot.elo = computeElo(
-                  this.transformToSimplePlayer(player),
-                  player.rank,
-                  bot.elo,
-                  [...humans, ...bots].map((p) =>
-                    this.transformToSimplePlayer(p)
-                  )
-                )
-                bot.save()
-              })
-            }
-          })
-        })
+        for (let i = 0; i < bots.length; i++) {
+          const player = bots[i]
+          const results = await BotV2.find({ id: player.id })
+          if (results) {
+            results.forEach((bot) => {
+              bot.elo = computeElo(
+                this.transformToSimplePlayer(player),
+                player.rank,
+                bot.elo,
+                [...humans, ...bots].map((p) => this.transformToSimplePlayer(p))
+              )
+              bot.save()
+            })
+          }
+        }
 
         for (let i = 0; i < humans.length; i++) {
           const player = humans[i]

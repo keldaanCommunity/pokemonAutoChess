@@ -467,6 +467,7 @@ type OnAddBotPayload = {
 export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
   async execute(data: OnAddBotPayload) {
     if (this.state.users.size >= MAX_PLAYERS_PER_LOBBY) {
+      logger.info("MAX_PLAYERS_PER_LOBBY exceeded")
       return
     }
 
@@ -509,23 +510,21 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
 
       if (bots) {
         if (bots.length <= 0) {
-          if (bots.length <= 0) {
-            this.room.broadcast(Transfer.MESSAGES, {
-              name: user.name,
-              payload: "Error: No bots found",
-              avatar: user.avatar,
-              time: Date.now()
-            })
-          } else if (this.state.users.size >= MAX_PLAYERS_PER_LOBBY) {
-            this.room.broadcast(Transfer.MESSAGES, {
-              name: user.name,
-              payload: "Room is already full",
-              avatar: user.avatar,
-              time: Date.now()
-            })
-          }
-          bot = pickRandomIn(bots)
+          this.room.broadcast(Transfer.MESSAGES, {
+            name: user.name,
+            payload: "Error: No bots found",
+            avatar: user.avatar,
+            time: Date.now()
+          })
+        } else if (this.state.users.size >= MAX_PLAYERS_PER_LOBBY) {
+          this.room.broadcast(Transfer.MESSAGES, {
+            name: user.name,
+            payload: "Room is already full",
+            avatar: user.avatar,
+            time: Date.now()
+          })
         }
+        bot = pickRandomIn(bots)
       }
     }
 

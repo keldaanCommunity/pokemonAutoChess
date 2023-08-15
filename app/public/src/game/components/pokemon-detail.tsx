@@ -5,7 +5,7 @@ import { Ability } from "../../../../types/enum/Ability"
 import { getPortraitSrc } from "../../utils"
 import { RarityColor } from "../../../../types/Config"
 import React from "react"
-import ReactDOM from "react-dom"
+import ReactDOM from "react-dom/client"
 import { AbilityTooltip } from "../../pages/component/ability/ability-tooltip"
 import { Pkm, PkmIndex } from "../../../../types/enum/Pokemon"
 import { Passive } from "../../../../types/enum/Passive"
@@ -26,6 +26,8 @@ export default class PokemonDetail extends GameObjects.DOMElement {
   abilityDescription: HTMLDivElement
   passiveDescription: HTMLDivElement
   pp: HTMLDivElement
+  abilityDescriptionRoot: ReactDOM.Root
+  passiveDescriptionRoot: ReactDOM.Root
 
   constructor(
     scene: Phaser.Scene,
@@ -161,6 +163,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     if (passive != Passive.NONE) {
       this.passiveDescription = document.createElement("div")
       this.passiveDescription.className = "game-pokemon-detail-passive"
+      this.passiveDescriptionRoot = ReactDOM.createRoot(this.passiveDescription)
       this.updatePassiveDescription(passive, abilityTier, ap)
       wrap.appendChild(this.passiveDescription)
     }
@@ -175,6 +178,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
       ultName.textContent = t(`ability.${skill}`)
 
       this.abilityDescription = document.createElement("div")
+      this.abilityDescriptionRoot = ReactDOM.createRoot(this.abilityDescription)
       this.updateAbilityDescription(skill, abilityTier, ap)
       ultNameWrap.appendChild(ultName)
       ult.appendChild(ultNameWrap)
@@ -191,14 +195,13 @@ export default class PokemonDetail extends GameObjects.DOMElement {
   }
 
   updateAbilityDescription(skill: Ability, abilityTier: number, ap: number) {
-    ReactDOM.render(
-      <AbilityTooltip ability={skill} tier={abilityTier} ap={ap} />,
-      this.abilityDescription
+    this.abilityDescriptionRoot.render(
+      <AbilityTooltip ability={skill} tier={abilityTier} ap={ap} />
     )
   }
 
   updatePassiveDescription(passive: Passive, abilityTier: number, ap: number) {
-    ReactDOM.render(
+    this.passiveDescriptionRoot.render(
       <p>
         Passive:{" "}
         {addIconsToDescription(
@@ -206,8 +209,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
           abilityTier,
           ap
         )}
-      </p>,
-      this.passiveDescription
+      </p>
     )
   }
 }

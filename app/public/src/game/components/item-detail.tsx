@@ -1,6 +1,6 @@
 import { GameObjects } from "phaser"
 import React from "react"
-import ReactDOM from "react-dom"
+import ReactDOM from "react-dom/client"
 import { Tooltip } from "react-tooltip"
 import { ItemRecipe, ItemStats } from "../../../../types/Config"
 import { Item } from "../../../../types/enum/Item"
@@ -87,7 +87,8 @@ export default class ItemDetail extends GameObjects.DOMElement {
     this.dom = document.createElement("div")
     this.dom.className = "nes-container"
     this.setElement(this.dom)
-    ReactDOM.render(<ItemDetailTooltip item={name} depth={1} />, this.dom)
+    const root = ReactDOM.createRoot(this.dom)
+    root.render(<ItemDetailTooltip item={name} depth={1} />)
   }
 
   setVisible(bool: boolean) {

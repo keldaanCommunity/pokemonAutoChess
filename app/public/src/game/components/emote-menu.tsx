@@ -1,5 +1,5 @@
 import React from "react"
-import ReactDOM from "react-dom"
+import ReactDOM from "react-dom/client"
 import { GameObjects } from "phaser"
 import { Emotion } from "../../../../types/enum/Emotion"
 import { getAvatarString, getPortraitSrc } from "../../utils"
@@ -91,14 +91,10 @@ export default class EmoteMenu extends GameObjects.DOMElement {
     this.dom = document.createElement("div")
     this.dom.className = "nes-container emote-menu"
     this.setElement(this.dom)
+    const root = ReactDOM.createRoot(this.dom)
     if (player) {
-      ReactDOM.render(
-        <EmoteMenuComponent
-          player={player}
-          index={avatarIndex}
-          shiny={shiny}
-        />,
-        this.dom
+      root.render(
+        <EmoteMenuComponent player={player} index={avatarIndex} shiny={shiny} />
       )
     } else {
       logger.error(`Cant' find player bound to EmoteMenu`)
