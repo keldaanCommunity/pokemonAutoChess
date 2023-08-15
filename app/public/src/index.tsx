@@ -1,4 +1,4 @@
-import ReactDOM from "react-dom"
+import { createRoot } from "react-dom/client"
 import React, { Suspense } from "react"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Auth from "./pages/auth"
@@ -13,7 +13,10 @@ import "./i18n"
 import "nes.css/css/nes.min.css"
 import "./styles.css"
 
-ReactDOM.render(
+const container = document.getElementById("root")
+const root = createRoot(container!)
+
+root.render(
   <Provider store={store}>
     <React.StrictMode>
       <Suspense fallback="loading">
@@ -28,9 +31,7 @@ ReactDOM.render(
         </BrowserRouter>
       </Suspense>
     </React.StrictMode>
-  </Provider>,
-
-  document.getElementById("root")
+  </Provider>
 )
 
 if (navigator.serviceWorker) {

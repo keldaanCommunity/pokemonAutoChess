@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
+import StyledFirebaseAuth from "../StyledFirebaseAuth"
 import firebase from "firebase/compat/app"
 import "firebase/compat/auth"
 import { Link } from "react-router-dom"

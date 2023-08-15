@@ -1,5 +1,5 @@
 import PokemonFactory from "../models/pokemon-factory"
-import BOT, { IBot } from "../models/mongo-models/bot-v2"
+import { BotV2, IBot } from "../models/mongo-models/bot-v2"
 import Player from "../models/colyseus-models/player"
 import { BattleResult } from "../types/enum/Game"
 import { Emotion } from "../types"
@@ -15,15 +15,18 @@ export default class Bot {
     this.player = player
     this.step = 0
     this.progress = 0
+  }
 
-    BOT.findOne({ id: player.id }, ["steps"], null, (err, bot) => {
-      if (bot) {
-        this.scenario = bot
+  async initialize() {
+    try {
+      const data = await BotV2.findOne({ id: this.player.id }, ["steps"])
+      if (data) {
+        this.scenario = data
         this.updatePlayerTeam()
-      } else {
-        logger.error("Bot not found")
       }
-    })
+    } catch (error) {
+      logger.error(error)
+    }
   }
 
   updateProgress() {

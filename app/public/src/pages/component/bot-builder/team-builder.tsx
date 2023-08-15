@@ -7,10 +7,10 @@ import ModalMenu from "./modal-menu"
 import ItemPicker from "./item-picker"
 import PokemonPicker from "./pokemon-picker"
 import TeamEditor from "./team-editor"
-import ReactTooltip from "react-tooltip"
+import { Tooltip } from "react-tooltip"
 import { IBot, IStep } from "../../../../../models/mongo-models/bot-v2"
 import CSS from "csstype"
-import produce from "immer"
+import { produce } from "immer"
 import { useAppSelector, useAppDispatch } from "../../../hooks"
 import { createBot } from "../../../stores/NetworkStore"
 import { setBotCreatorSynergies } from "../../../stores/LobbyStore"
@@ -301,20 +301,14 @@ export default function TeamBuilder() {
             )
           }
           className="bubbly green"
-          data-tip
-          data-for={"mode"}
+          data-tooltip-id={"mode"}
         >
           {mode} {t("mode")}
-          <ReactTooltip
-            id={"mode"}
-            className="customeTheme"
-            effect="solid"
-            place="bottom"
-          >
+          <Tooltip id={"mode"} className="customeTheme" place="bottom">
             <p>{t("current_edition_click")}</p>
             <p>{t("write_mode_hint")}</p>
             <p> {t("erase_mode_hint")}</p>
-          </ReactTooltip>
+          </Tooltip>
         </button>
         <button
           style={buttonStyle}
@@ -322,18 +316,12 @@ export default function TeamBuilder() {
             setCopyStep(JSON.parse(JSON.stringify(bot.steps[step])))
           }}
           className="bubbly green"
-          data-tip
-          data-for={"copy"}
+          data-tooltip-id={"copy"}
         >
-          <ReactTooltip
-            id={"copy"}
-            className="customeTheme"
-            effect="solid"
-            place="bottom"
-          >
+          <Tooltip id={"copy"} className="customeTheme" place="bottom">
             <p>{t("copy_current_step")}</p>
             <p> {t("paste_current_step")}</p>
-          </ReactTooltip>
+          </Tooltip>
           {t("copy_step")}
         </button>
         <button
@@ -348,18 +336,12 @@ export default function TeamBuilder() {
             }
           }}
           className="bubbly green"
-          data-tip
-          data-for={"paste"}
+          data-tooltip-id={"paste"}
         >
-          <ReactTooltip
-            id={"paste"}
-            className="customeTheme"
-            effect="solid"
-            place="bottom"
-          >
+          <Tooltip id={"paste"} className="customeTheme" place="bottom">
             <p>{t("paste_current_step_click")}</p>
             <p>{t("paste_current_step_hint")}</p>
-          </ReactTooltip>
+          </Tooltip>
           {t("paste_step")}
         </button>
       </div>
@@ -379,10 +361,11 @@ export default function TeamBuilder() {
           mode == ReadWriteMode.WRITE ? write(x, y) : erase(x, y)
         }}
         handleEloChange={(e) => {
-          if (!isNaN(e.target.value)) {
+          const v = parseInt(e.target.value)
+          if (!isNaN(v)) {
             setBot(
               produce((draft) => {
-                draft.elo = e.target.value
+                draft.elo = v
               })
             )
           }
@@ -405,7 +388,8 @@ export default function TeamBuilder() {
         handleRoundsRequiredChange={(e) =>
           setBot(
             produce((draft) => {
-              draft.steps[step].roundsRequired = e.target.value
+              const v = parseInt(e.target.value)
+              draft.steps[step].roundsRequired = v
             })
           )
         }

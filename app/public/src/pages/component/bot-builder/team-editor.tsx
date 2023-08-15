@@ -1,7 +1,7 @@
-import React from "react"
+import React, { ChangeEvent } from "react"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
-import ReactTooltip from "react-tooltip"
+import { Tooltip } from "react-tooltip"
 import CSS from "csstype"
 import { IStep } from "../../../../../models/mongo-models/bot-v2"
 import { getPortraitSrc } from "../../../utils"
@@ -70,21 +70,19 @@ export default function TeamEditor(props: {
   elo: number
   handleTabClick: (i: number) => void
   handleEditorClick: (x: number, y: number) => void
-  handleAuthorChange: (e: any) => void
-  handleAvatarChange: (e: any) => void
-  handleRoundsRequiredChange: (e: any) => void
-  handleEloChange: (e: any) => void
+  handleAuthorChange: (e: ChangeEvent<HTMLInputElement>) => void
+  handleAvatarChange: (e: ChangeEvent<HTMLSelectElement>) => void
+  handleRoundsRequiredChange: (e: ChangeEvent<HTMLInputElement>) => void
+  handleEloChange: (e: ChangeEvent<HTMLInputElement>) => void
 }) {
   const { t } = useTranslation()
   return (
     <div className="nes-container" style={tabStyle}>
       <div style={{ display: "flex", alignItems: "center" }}>
-        <p data-tip data-for={"help"}>
-          {t("help")}
-        </p>
-        <ReactTooltip id={"help"} className="customeTheme" effect="solid">
+        <p data-tooltip-id={"help"}>{t("help")}</p>
+        <Tooltip id={"help"} className="customeTheme">
           <p>{t("help_create_bot")}</p>
-        </ReactTooltip>
+        </Tooltip>
 
         <div className="nes-field is-inline">
           <label style={labelStyle} htmlFor="default_select">
@@ -166,16 +164,11 @@ export default function TeamEditor(props: {
                     marginBottom: "10px"
                   }}
                 >
-                  <label
-                    htmlFor="default_select"
-                    data-tip
-                    data-for={"step-" + i}
-                  >
-                    <ReactTooltip
+                  <label htmlFor="default_select" data-tooltip-id={"step-" + i}>
+                    <Tooltip
                       id={"step-" + i}
                       className="customeTheme"
-                      textColor="#000000"
-                      effect="solid"
+                      style={{ color: "#000000" }}
                     >
                       <p>{t("points_required_hint")}</p>
                       <p>{t("next_step_hint")}</p>
@@ -184,7 +177,7 @@ export default function TeamEditor(props: {
                         <li>{t("defeat_step_hint")}</li>
                       </ul>
                       <p>{t("step_bot_hint")}</p>
-                    </ReactTooltip>
+                    </Tooltip>
                     {t("points_required")}: {props.steps[i].roundsRequired}
                   </label>
                   <p>{t("faster")}</p>

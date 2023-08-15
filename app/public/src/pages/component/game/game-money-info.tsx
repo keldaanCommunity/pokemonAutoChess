@@ -1,5 +1,5 @@
 import React from "react"
-import ReactTooltip from "react-tooltip"
+import { Tooltip } from "react-tooltip"
 import { BattleResult } from "../../../../../types/enum/Game"
 import { useAppSelector } from "../../../hooks"
 import { Money } from "../icons/money"
@@ -9,15 +9,10 @@ export function GameMoneyInfo() {
   const money = useAppSelector((state) => state.game.currentPlayerMoney)
   return (
     <div id="game-money-info" className="nes-container money information">
-      <div data-tip data-for="detail-money">
-        <ReactTooltip
-          id="detail-money"
-          className="customeTheme"
-          effect="solid"
-          place="top"
-        >
+      <div data-tooltip-id="detail-money">
+        <Tooltip id="detail-money" className="customeTheme" place="top">
           <GameMoneyDetail />
-        </ReactTooltip>
+        </Tooltip>
         <Money value={money} />
       </div>
     </div>

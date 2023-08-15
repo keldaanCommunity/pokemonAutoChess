@@ -58,6 +58,8 @@ export default function Preparation() {
             const cachedReconnectionToken = localStorage.getItem(
               "cachedReconnectionToken"
             )
+            console.log(client)
+            console.log(cachedReconnectionToken)
             if (cachedReconnectionToken) {
               const r: Room<PreparationState> = await client.reconnect(
                 cachedReconnectionToken

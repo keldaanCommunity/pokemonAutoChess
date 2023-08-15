@@ -1,13 +1,13 @@
 import { Command } from "@colyseus/command"
 import { Client, logger, RoomListingData } from "colyseus"
 import { ArraySchema } from "@colyseus/schema"
-import { MessageEmbed } from "discord.js"
+import { EmbedBuilder } from "discord.js"
 import { nanoid } from "nanoid"
 import { CallbackError, FilterQuery } from "mongoose"
 import { GameRecord } from "../../models/colyseus-models/game-record"
 import LobbyUser from "../../models/colyseus-models/lobby-user"
 import BannedUser from "../../models/mongo-models/banned-user"
-import BotV2, { IBot } from "../../models/mongo-models/bot-v2"
+import { BotV2, IBot } from "../../models/mongo-models/bot-v2"
 import UserMetadata, {
   IUserMetadata,
   IPokemonConfig
@@ -43,7 +43,7 @@ export class OnJoinCommand extends Command<
     rooms: RoomListingData<any>[] | undefined
   }
 > {
-  execute({
+  async execute({
     client,
     rooms = []
   }: {
@@ -56,96 +56,89 @@ export class OnJoinCommand extends Command<
       logger.info(`${client.auth.displayName} ${client.id} join lobby room`)
       client.send(Transfer.ROOMS, rooms)
       // client.send(Transfer.REQUEST_BOT_DATA, this.bots);
-      UserMetadata.findOne(
-        { uid: client.auth.uid },
-        (err: any, user: IUserMetadata) => {
-          if (user) {
-            // load existing account
-            DetailledStatistic.find(
-              { playerId: client.auth.uid },
-              ["pokemons", "time", "rank", "elo"],
-              { limit: 10, sort: { time: -1 } },
-              (err, stats) => {
-                if (err) {
-                  logger.error(err)
-                } else {
-                  const records = new ArraySchema<GameRecord>()
-                  stats.forEach((record) => {
-                    records.push(
-                      new GameRecord(
-                        record.time,
-                        record.rank,
-                        record.elo,
-                        record.pokemons
-                      )
-                    )
-                  })
+      const user = await UserMetadata.findOne({ uid: client.auth.uid })
 
-                  this.state.users.set(
-                    client.auth.uid,
-                    new LobbyUser(
-                      user.uid,
-                      user.displayName,
-                      user.elo,
-                      user.avatar,
-                      user.wins,
-                      user.exp,
-                      user.level,
-                      user.donor,
-                      records,
-                      user.honors,
-                      user.pokemonCollection,
-                      user.booster,
-                      user.titles,
-                      user.title,
-                      user.role,
-                      client.auth.email === undefined &&
-                        client.auth.photoURL === undefined,
-                      client.auth.metadata.creationTime,
-                      client.auth.metadata.lastSignInTime,
-                      user.language
-                    )
-                  )
-                }
-              }
-            )
-          } else {
-            // create new user account
-            const numberOfBoosters = 3
-            UserMetadata.create({
-              uid: client.auth.uid,
-              displayName: client.auth.displayName,
-              booster: numberOfBoosters,
-              pokemonCollection: new Map<string, IPokemonConfig>()
-            })
-            this.state.users.set(
-              client.auth.uid,
-              new LobbyUser(
-                client.auth.uid,
-                client.auth.displayName,
-                1000,
-                "0019/Normal",
-                0,
-                0,
-                0,
-                false,
-                [],
-                [],
-                new Map<string, IPokemonConfig>(),
-                numberOfBoosters,
-                [],
-                "",
-                Role.BASIC,
-                client.auth.email === undefined &&
-                  client.auth.photoURL === undefined,
-                client.auth.metadata.creationTime,
-                client.auth.metadata.lastSignInTime,
-                ""
+      if (user) {
+        // load existing account
+        const stats = await DetailledStatistic.find(
+          { playerId: client.auth.uid },
+          ["pokemons", "time", "rank", "elo"],
+          { limit: 10, sort: { time: -1 } }
+        )
+        if (stats) {
+          const records = new ArraySchema<GameRecord>()
+          stats.forEach((record) => {
+            records.push(
+              new GameRecord(
+                record.time,
+                record.rank,
+                record.elo,
+                record.pokemons
               )
             )
-          }
+          })
+
+          this.state.users.set(
+            client.auth.uid,
+            new LobbyUser(
+              user.uid,
+              user.displayName,
+              user.elo,
+              user.avatar,
+              user.wins,
+              user.exp,
+              user.level,
+              user.donor,
+              records,
+              user.honors,
+              user.pokemonCollection,
+              user.booster,
+              user.titles,
+              user.title,
+              user.role,
+              client.auth.email === undefined &&
+                client.auth.photoURL === undefined,
+              client.auth.metadata.creationTime,
+              client.auth.metadata.lastSignInTime,
+              user.language
+            )
+          )
         }
-      )
+      } else {
+        // create new user account
+        const numberOfBoosters = 3
+        UserMetadata.create({
+          uid: client.auth.uid,
+          displayName: client.auth.displayName,
+          booster: numberOfBoosters,
+          pokemonCollection: new Map<string, IPokemonConfig>()
+        })
+        this.state.users.set(
+          client.auth.uid,
+          new LobbyUser(
+            client.auth.uid,
+            client.auth.displayName,
+            1000,
+            "0019/Normal",
+            0,
+            0,
+            0,
+            false,
+            [],
+            [],
+            new Map<string, IPokemonConfig>(),
+            numberOfBoosters,
+            [],
+            "",
+            Role.BASIC,
+            client.auth.email === undefined &&
+              client.auth.photoURL === undefined,
+            client.auth.metadata.creationTime,
+            client.auth.metadata.lastSignInTime,
+            ""
+          )
+        )
+      }
     } catch (error) {
       logger.error(error)
     }
@@ -172,7 +165,7 @@ export class GiveTitleCommand extends Command<
   CustomLobbyRoom,
   { client: Client; uid: string; title: Title }
 > {
-  execute({
+  async execute({
     client,
     uid,
     title
@@ -186,17 +179,15 @@ export class GiveTitleCommand extends Command<
       const targetUser = this.state.users.get(uid)
 
       if (u && u.role && u.role === Role.ADMIN) {
-        UserMetadata.findOne({ uid }, (err, user) => {
-          if (err) logger.error(err)
-          else if (user && user.titles && !user.titles.includes(title)) {
-            user.titles.push(title)
-            user.save()
+        const user = await UserMetadata.findOne({ uid })
+        if (user && user.titles && !user.titles.includes(title)) {
+          user.titles.push(title)
+          user.save()
 
-            if (targetUser) {
-              targetUser.titles.push(title)
-            }
+          if (targetUser) {
+            targetUser.titles.push(title)
           }
-        })
+        }
       }
     } catch (error) {
       logger.error(error)
@@ -208,7 +199,7 @@ export class GiveBoostersCommand extends Command<
   CustomLobbyRoom,
   { client: Client; uid: string; numberOfBoosters: number }
 > {
-  execute({
+  async execute({
     client,
     uid,
     numberOfBoosters = 1
@@ -222,17 +213,15 @@ export class GiveBoostersCommand extends Command<
       const targetUser = this.state.users.get(uid)
 
       if (u && u.role && u.role === Role.ADMIN) {
-        UserMetadata.findOne({ uid: uid }, (err, user) => {
-          if (err) logger.error(err)
-          else if (user) {
-            user.booster += numberOfBoosters
-            user.save()
+        const user = await UserMetadata.findOne({ uid: uid })
+        if (user) {
+          user.booster += numberOfBoosters
+          user.save()
 
-            if (targetUser) {
-              targetUser.booster = user.booster
-            }
+          if (targetUser) {
+            targetUser.booster = user.booster
           }
-        })
+        }
       }
     } catch (error) {
       logger.error(error)
@@ -244,23 +233,29 @@ export class GiveRoleCommand extends Command<
   CustomLobbyRoom,
   { client: Client; uid: string; role: Role }
 > {
-  execute({ client, uid, role }: { client: Client; uid: string; role: Role }) {
+  async execute({
+    client,
+    uid,
+    role
+  }: {
+    client: Client
+    uid: string
+    role: Role
+  }) {
     try {
       const u = this.state.users.get(client.auth.uid)
       const targetUser = this.state.users.get(uid)
       // logger.debug(u.role, uid)
       if (u && u.role === Role.ADMIN) {
-        UserMetadata.findOne({ uid: uid }, (err, user) => {
-          if (err) logger.error(err)
-          else if (user) {
-            user.role = role
-            user.save()
+        const user = await UserMetadata.findOne({ uid: uid })
+        if (user) {
+          user.role = role
+          user.save()
 
-            if (targetUser) {
-              targetUser.role = user.role
-            }
+          if (targetUser) {
+            targetUser.role = user.role
           }
-        })
+        }
       }
     } catch (error) {
       logger.error(error)
@@ -318,7 +313,7 @@ export class OpenBoosterCommand extends Command<
   CustomLobbyRoom,
   { client: Client }
 > {
-  execute({ client }: { client: Client }) {
+  async execute({ client }: { client: Client }) {
     try {
       const user = this.state.users.get(client.auth.uid)
       if (!user) return
@@ -344,31 +339,28 @@ export class OpenBoosterCommand extends Command<
           }
         })
 
-        UserMetadata.findOne(
-          { uid: client.auth.uid },
-          (err, u: FilterQuery<IUserMetadata>) => {
-            if (err) logger.error(err)
-            else if (u) {
-              u.booster = user.booster
-              boosterIndex.forEach((i) => {
-                const c = u.pokemonCollection.get(i)
-                if (c) {
-                  c.dust += DUST_PER_BOOSTER
-                } else {
-                  u.pokemonCollection.set(i, {
-                    id: i,
-                    emotions: [],
-                    shinyEmotions: [],
-                    dust: DUST_PER_BOOSTER,
-                    selectedEmotion: Emotion.NORMAL,
-                    selectedShiny: false
-                  })
-                }
+        const u = await UserMetadata.findOne({ uid: client.auth.uid })
+
+        if (u) {
+          u.booster = user.booster
+          boosterIndex.forEach((i) => {
+            const c = u.pokemonCollection.get(i)
+            if (c) {
+              c.dust += DUST_PER_BOOSTER
+            } else {
+              u.pokemonCollection.set(i, {
+                id: i,
+                emotions: [],
+                shinyEmotions: [],
+                dust: DUST_PER_BOOSTER,
+                selectedEmotion: Emotion.NORMAL,
+                selectedShiny: false
               })
-              u.save()
             }
-          }
-        )
+          })
+          u.save()
+        }
+
         client.send(Transfer.BOOSTER_CONTENT, boosterIndex)
       }
     } catch (error) {
@@ -402,19 +394,17 @@ export class ChangeNameCommand extends Command<
   CustomLobbyRoom,
   { client: Client; name: string }
 > {
-  execute({ client, name }: { client: Client; name: string }) {
+  async execute({ client, name }: { client: Client; name: string }) {
     try {
       const user = this.state.users.get(client.auth.uid)
       if (!user) return
       if (USERNAME_REGEXP.test(name)) {
         user.name = name
-        UserMetadata.findOne({ uid: client.auth.uid }, (err, user) => {
-          if (err) logger.error(err)
-          else if (user) {
-            user.displayName = name
-            user.save()
-          }
-        })
+        const usr = await UserMetadata.findOne({ uid: client.auth.uid })
+        if (usr) {
+          usr.displayName = name
+          usr.save()
+        }
       }
     } catch (error) {
       logger.error(error)
@@ -426,7 +416,7 @@ export class ChangeTitleCommand extends Command<
   CustomLobbyRoom,
   { client: Client; title: Title | "" }
 > {
-  execute({ client, title }: { client: Client; title: Title | "" }) {
+  async execute({ client, title }: { client: Client; title: Title | "" }) {
     try {
       const user = this.state.users.get(client.auth.uid)
       if (user) {
@@ -434,13 +424,11 @@ export class ChangeTitleCommand extends Command<
           title = "" // remove title if user already has it
         }
         user.title = title
-        UserMetadata.findOne({ uid: client.auth.uid }, (err, user) => {
-          if (err) logger.error(err)
-          else if (user) {
-            user.title = title
-            user.save()
-          }
-        })
+        const usr = await UserMetadata.findOne({ uid: client.auth.uid })
+        if (usr) {
+          usr.title = title
+          usr.save()
+        }
       }
     } catch (error) {
       logger.error(error)
@@ -452,7 +440,7 @@ export class ChangeSelectedEmotionCommand extends Command<
   CustomLobbyRoom,
   { client: Client; index: string; emotion: Emotion; shiny: boolean }
 > {
-  execute({
+  async execute({
     client,
     emotion,
     index,
@@ -478,17 +466,13 @@ export class ChangeSelectedEmotionCommand extends Command<
         ) {
           pokemonConfig.selectedEmotion = emotion
           pokemonConfig.selectedShiny = shiny
-          UserMetadata.findOne({ uid: client.auth.uid }, (err, u) => {
-            if (err) logger.error(err)
-            else if (u) {
-              if (u.pokemonCollection.has(index)) {
-                const pokemonConfig = u.pokemonCollection.get(index)
-                pokemonConfig.selectedEmotion = emotion
-                pokemonConfig.selectedShiny = shiny
-                u.save()
-              }
-            }
-          })
+          const u = await UserMetadata.findOne({ uid: client.auth.uid })
+          const pkmConfig = u?.pokemonCollection.get(index)
+          if (u && pkmConfig) {
+            pkmConfig.selectedEmotion = emotion
+            pkmConfig.selectedShiny = shiny
+            u.save()
+          }
         }
       }
     } catch (error) {
@@ -501,7 +485,7 @@ export class ChangeAvatarCommand extends Command<
   CustomLobbyRoom,
   { client: Client; index: string; emotion: Emotion; shiny: boolean }
 > {
-  execute({
+  async execute({
     client,
     index,
     emotion,
@@ -523,16 +507,11 @@ export class ChangeAvatarCommand extends Command<
             .replace(CDN_PORTRAIT_URL, "")
             .replace(".png", "")
           user.avatar = portrait
-          UserMetadata.findOne(
-            { uid: client.auth.uid },
-            (err: CallbackError, u: FilterQuery<IUserMetadata>) => {
-              if (err) logger.error(err)
-              else if (u) {
-                u.avatar = portrait
-                u.save()
-              }
-            }
-          )
+          const u = await UserMetadata.findOne({ uid: client.auth.uid })
+          if (u) {
+            u.avatar = portrait
+            u.save()
+          }
         }
       }
     } catch (error) {
@@ -545,7 +524,7 @@ export class BuyEmotionCommand extends Command<
   CustomLobbyRoom,
   { client: Client; index: string; emotion: Emotion; shiny: boolean }
 > {
-  execute({
+  async execute({
     client,
     emotion,
     index,
@@ -570,72 +549,71 @@ export class BuyEmotionCommand extends Command<
           pokemonConfig.dust -= cost
           pokemonConfig.selectedEmotion = emotion
           pokemonConfig.selectedShiny = shiny
-          UserMetadata.findOne({ uid: client.auth.uid }, (err, u) => {
-            if (err) logger.error(err)
-            else if (u) {
-              let numberOfShinies = 0
-              u.pokemonCollection.forEach((c) => {
-                numberOfShinies += c.shinyEmotions.length
-              })
-              if (
-                numberOfShinies > 30 &&
-                !u.titles.includes(Title.SHINY_SEEKER)
-              ) {
-                u.titles.push(Title.SHINY_SEEKER)
-              }
-              if (
-                u.pokemonCollection.size >= 30 &&
-                !u.titles.includes(Title.DUKE)
-              ) {
-                u.titles.push(Title.DUKE)
-              }
-              if (
-                emotion === Emotion.ANGRY &&
-                index === PkmIndex[Pkm.ARBOK] &&
-                !u.titles.includes(Title.DENTIST)
-              ) {
-                u.titles.push(Title.DENTIST)
-              }
-              if (u.pokemonCollection.has(index)) {
-                const uPokemonConfig = u.pokemonCollection.get(index)
-                if (
-                  uPokemonConfig.shinyEmotions.length >=
-                    Object.keys(Emotion).length &&
-                  uPokemonConfig.emotions.length >=
-                    Object.keys(Emotion).length &&
-                  !u.titles.includes(Title.DUCHESS)
-                ) {
-                  u.titles.push(Title.DUCHESS)
-                }
-
-                if (
-                  !u.titles.includes(Title.ARCHEOLOGIST) &&
-                  Unowns.every((name) => {
-                    const index = PkmIndex[name]
-                    const collection = u.pokemonCollection.get(index)
-                    const isUnlocked =
-                      collection &&
-                      (collection.emotions.length > 0 ||
-                        collection.shinyEmotions.length > 0)
-                    return isUnlocked || index === index
-                  })
-                ) {
-                  u.titles.push(Title.ARCHEOLOGIST)
-                }
-
-                if (shiny) {
-                  uPokemonConfig.shinyEmotions.push(emotion)
-                } else {
-                  uPokemonConfig.emotions.push(emotion)
-                }
-
-                uPokemonConfig.dust -= cost
-                uPokemonConfig.selectedEmotion = emotion
-                uPokemonConfig.selectedShiny = shiny
-                u.save()
-              }
+          const u = await UserMetadata.findOne({ uid: client.auth.uid })
+          if (u) {
+            let numberOfShinies = 0
+            u.pokemonCollection.forEach((c) => {
+              numberOfShinies += c.shinyEmotions.length
+            })
+            if (
+              numberOfShinies > 30 &&
+              !u.titles.includes(Title.SHINY_SEEKER)
+            ) {
+              u.titles.push(Title.SHINY_SEEKER)
             }
-          })
+            if (
+              u.pokemonCollection.size >= 30 &&
+              !u.titles.includes(Title.DUKE)
+            ) {
+              u.titles.push(Title.DUKE)
+            }
+            if (
+              emotion === Emotion.ANGRY &&
+              index === PkmIndex[Pkm.ARBOK] &&
+              !u.titles.includes(Title.DENTIST)
+            ) {
+              u.titles.push(Title.DENTIST)
+            }
+
+            const uPokemonConfig = u.pokemonCollection.get(index)
+
+            if (uPokemonConfig) {
+              if (
+                uPokemonConfig.shinyEmotions.length >=
+                  Object.keys(Emotion).length &&
+                uPokemonConfig.emotions.length >= Object.keys(Emotion).length &&
+                !u.titles.includes(Title.DUCHESS)
+              ) {
+                u.titles.push(Title.DUCHESS)
+              }
+
+              if (
+                !u.titles.includes(Title.ARCHEOLOGIST) &&
+                Unowns.every((name) => {
+                  const index = PkmIndex[name]
+                  const collection = u.pokemonCollection.get(index)
+                  const isUnlocked =
+                    collection &&
+                    (collection.emotions.length > 0 ||
+                      collection.shinyEmotions.length > 0)
+                  return isUnlocked || index === index
+                })
+              ) {
+                u.titles.push(Title.ARCHEOLOGIST)
+              }
+
+              if (shiny) {
+                uPokemonConfig.shinyEmotions.push(emotion)
+              } else {
+                uPokemonConfig.emotions.push(emotion)
+              }
+
+              uPokemonConfig.dust -= cost
+              uPokemonConfig.selectedEmotion = emotion
+              uPokemonConfig.selectedShiny = shiny
+              u.save()
+            }
+          }
         }
       }
     } catch (error) {
@@ -648,7 +626,7 @@ export class BuyBoosterCommand extends Command<
   CustomLobbyRoom,
   { client: Client; index: string }
 > {
-  execute({ client, index }: { client: Client; index: string }) {
+  async execute({ client, index }: { client: Client; index: string }) {
     try {
       const user = this.state.users.get(client.auth.uid)
       if (!user) return
@@ -658,14 +636,13 @@ export class BuyBoosterCommand extends Command<
         if (pokemonConfig.dust >= BOOSTER_COST) {
           pokemonConfig.dust -= BOOSTER_COST
           user.booster += 1
-          UserMetadata.findOne({ uid: client.auth.uid }, (err, u) => {
-            if (err) logger.error(err)
-            else if (u) {
-              u.pokemonCollection.get(index).dust = pokemonConfig.dust
-              u.booster = user.booster
-              u.save()
-            }
-          })
+          const u = await UserMetadata.findOne({ uid: client.auth.uid })
+          const pkmConfig = u?.pokemonCollection.get(index)
+          if (u && pkmConfig) {
+            pkmConfig.dust = pokemonConfig.dust
+            u.booster = user.booster
+            u.save()
+          }
         }
       }
     } catch (error) {
@@ -678,52 +655,44 @@ export class OnSearchByIdCommand extends Command<
   CustomLobbyRoom,
   { client: Client; uid: string }
 > {
-  execute({ client, uid }: { client: Client; uid: string }) {
+  async execute({ client, uid }: { client: Client; uid: string }) {
     try {
-      UserMetadata.findOne({ uid }, (err, user) => {
-        if (err) logger.error(err)
-        else if (user) {
-          DetailledStatistic.find(
-            { playerId: user.uid },
-            ["pokemons", "time", "rank", "elo"],
-            { limit: 10, sort: { time: -1 } },
-            (err, stats) => {
-              if (err) {
-                logger.error(err)
-              } else {
-                client.send(
-                  Transfer.USER,
-                  new LobbyUser(
-                    user.uid,
-                    user.displayName,
-                    user.elo,
-                    user.avatar,
-                    user.wins,
-                    user.exp,
-                    user.level,
-                    user.donor,
-                    stats.map((r) => {
-                      return new GameRecord(r.time, r.rank, r.elo, r.pokemons)
-                    }),
-                    user.honors,
-                    user.pokemonCollection,
-                    user.booster,
-                    user.titles,
-                    user.title,
-                    user.role,
-                    false,
-                    client.auth.metadata.creationTime,
-                    client.auth.metadata.lastSignInTime,
-                    user.language
-                  )
-                )
-              }
-            }
+      const user = await UserMetadata.findOne({ uid: uid })
+      if (user) {
+        const statistic = await DetailledStatistic.find(
+          { playerId: user.uid },
+          ["pokemons", "time", "rank", "elo"],
+          { limit: 10, sort: { time: -1 } }
+        )
+        if (statistic) {
+          client.send(
+            Transfer.USER,
+            new LobbyUser(
+              user.uid,
+              user.displayName,
+              user.elo,
+              user.avatar,
+              user.wins,
+              user.exp,
+              user.level,
+              user.donor,
+              statistic.map((r) => {
+                return new GameRecord(r.time, r.rank, r.elo, r.pokemons)
+              }),
+              user.honors,
+              user.pokemonCollection,
+              user.booster,
+              user.titles,
+              user.title,
+              user.role,
+              false,
+              client.auth.metadata.creationTime,
+              client.auth.metadata.lastSignInTime,
+              user.language
+            )
           )
-        } else {
-          client.send(Transfer.USER, {})
         }
-      })
+      }
     } catch (error) {
       logger.error(error)
     }
@@ -734,30 +703,27 @@ export class OnSearchCommand extends Command<
   CustomLobbyRoom,
   { client: Client; name: string }
 > {
-  execute({ client, name }: { client: Client; name: string }) {
+  async execute({ client, name }: { client: Client; name: string }) {
     try {
       if (USERNAME_REGEXP.test(name)) {
         const regExp = new RegExp(name)
-        UserMetadata.find(
+        const users = await UserMetadata.find(
           { displayName: { $regex: regExp, $options: "i" } },
           ["uid", "elo", "displayName", "level", "avatar"],
-          { limit: 100, sort: { level: -1 } },
-          (err, users) => {
-            if (err) logger.error(err)
-            else if (users) {
-              const suggestions: Array<ISuggestionUser> = users.map((u) => {
-                return {
-                  id: u.uid,
-                  elo: u.elo,
-                  name: u.displayName,
-                  level: u.level,
-                  avatar: u.avatar
-                }
-              })
-              client.send(Transfer.SUGGESTIONS, suggestions)
-            }
-          }
+          { limit: 100, sort: { level: -1 } }
         )
+        if (users) {
+          const suggestions: Array<ISuggestionUser> = users.map((u) => {
+            return {
+              id: u.uid,
+              elo: u.elo,
+              name: u.displayName,
+              level: u.level,
+              avatar: u.avatar
+            }
+          })
+          client.send(Transfer.SUGGESTIONS, suggestions)
+        }
       }
     } catch (error) {
       logger.error(error)
@@ -769,7 +735,7 @@ export class BanUserCommand extends Command<
   CustomLobbyRoom,
   { client: Client; uid: string; name: string }
 > {
-  execute({
+  async execute({
     client,
     uid,
     name
@@ -782,22 +748,18 @@ export class BanUserCommand extends Command<
       const user = this.state.users.get(client.auth.uid)
       if (user && (user.role === Role.ADMIN || user.role === Role.MODERATOR)) {
         this.state.removeMessages(uid)
-        BannedUser.findOne({ uid }, (err, banned) => {
-          if (err) {
-            logger.error(err)
-          }
-          if (!banned) {
-            BannedUser.create({
-              uid,
-              author: user.name,
-              time: Date.now(),
-              name
-            })
-            client.send(Transfer.BANNED, `${user.name} banned the user ${name}`)
-          } else {
-            client.send(Transfer.BANNED, `${name} was already banned`)
-          }
-        })
+        const banned = await BannedUser.findOne({ uid })
+        if (!banned) {
+          BannedUser.create({
+            uid,
+            author: user.name,
+            time: Date.now(),
+            name
+          })
+          client.send(Transfer.BANNED, `${user.name} banned the user ${name}`)
+        } else {
+          client.send(Transfer.BANNED, `${name} was already banned`)
+        }
         this.room.clients.forEach((c) => {
           if (c.auth.uid === uid) {
             c.send(Transfer.BAN)
@@ -852,10 +814,11 @@ export class SelectLanguageCommand extends Command<
     try {
       const u = this.state.users.get(client.auth.uid)
       if (client.auth.uid && u) {
-        UserMetadata.findOne({ uid: client.auth.uid }, (err, user) => {
+        const user = await UserMetadata.findOne({ uid: client.auth.uid })
+        if (user) {
           user.language = message
           user.save()
-        })
+        }
         u.language = message
       }
     } catch (error) {
@@ -914,7 +877,7 @@ export class AddBotCommand extends Command<
             id: nanoid()
           })
 
-          const dsEmbed = new MessageEmbed()
+          const dsEmbed = new EmbedBuilder()
             .setTitle(
               `BOT ${json.name} by @${json.author} loaded by ${user.name}`
             )
@@ -978,7 +941,7 @@ export class DeleteBotCommand extends Command<
           Transfer.BOT_DATABASE_LOG,
           JSON.stringify(resultDelete, null, 2)
         )
-        const dsEmbed = new MessageEmbed()
+        const dsEmbed = new EmbedBuilder()
           .setTitle(
             `BOT ${botData?.name} by @${botData?.author} deleted by ${user.name}`
           )
@@ -1045,7 +1008,7 @@ export class OnBotUploadCommand extends Command<
           format: "json"
         })
         .then((data: unknown) => {
-          const dsEmbed = new MessageEmbed()
+          const dsEmbed = new EmbedBuilder()
             .setTitle(`BOT ${bot.name} created by ${bot.author}`)
             .setURL(data as string)
             .setAuthor({

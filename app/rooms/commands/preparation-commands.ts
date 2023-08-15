@@ -4,7 +4,7 @@ import { GameUser, IGameUser } from "../../models/colyseus-models/game-user"
 import UserMetadata, {
   IUserMetadata
 } from "../../models/mongo-models/user-metadata"
-import BotV2, { IBot } from "../../models/mongo-models/bot-v2"
+import { BotV2, IBot } from "../../models/mongo-models/bot-v2"
 import { Client } from "colyseus"
 import PreparationRoom from "../preparation-room"
 import { Emotion, IChatV2, Role, Transfer } from "../../types"
@@ -14,6 +14,7 @@ import { logger } from "../../utils/logger"
 import { entries, values } from "../../utils/schemas"
 import { MAX_PLAYERS_PER_LOBBY } from "../../types/Config"
 import { memoryUsage } from "node:process"
+import { FilterQuery } from "mongoose"
 
 export class OnJoinCommand extends Command<
   PreparationRoom,
@@ -23,7 +24,7 @@ export class OnJoinCommand extends Command<
     auth: any
   }
 > {
-  execute({ client, options, auth }) {
+  async execute({ client, options, auth }) {
     try {
       let numberOfHumanPlayers = 0
       this.state.users.forEach((u) => {
@@ -48,43 +49,39 @@ export class OnJoinCommand extends Command<
           time: Date.now()
         })
       } else {
-        UserMetadata.findOne(
-          { uid: auth.uid },
-          (err: any, user: IUserMetadata) => {
-            if (this.state.users.size >= MAX_PLAYERS_PER_LOBBY) {
-              // lobby has been filled while waiting for the database
-              client.send(Transfer.KICK)
-              client.leave()
-              return
-            }
-            if (user) {
-              this.state.users.set(
-                client.auth.uid,
-                new GameUser(
-                  user.uid,
-                  user.displayName,
-                  user.elo,
-                  user.avatar,
-                  false,
-                  false,
-                  user.title,
-                  user.role,
-                  auth.email === undefined
-                )
-              )
-              if (user.uid == this.state.ownerId) {
-                // logger.debug(user.displayName);
-                this.state.ownerName = user.displayName
-              }
-              this.room.broadcast(Transfer.MESSAGES, {
-                name: "Server",
-                payload: `${user.displayName} joined.`,
-                avatar: user.avatar,
-                time: Date.now()
-              })
-            }
+        const u = await UserMetadata.findOne({ uid: auth.uid })
+        if (this.state.users.size >= MAX_PLAYERS_PER_LOBBY) {
+          // lobby has been filled while waiting for the database
+          client.send(Transfer.KICK)
+          client.leave()
+          return
+        }
+        if (u) {
+          this.state.users.set(
+            client.auth.uid,
+            new GameUser(
+              u.uid,
+              u.displayName,
+              u.elo,
+              u.avatar,
+              false,
+              false,
+              u.title,
+              u.role,
+              auth.email === undefined
+            )
+          )
+          if (u.uid == this.state.ownerId) {
+            // logger.debug(user.displayName);
+            this.state.ownerName = u.displayName
           }
-        )
+          this.room.broadcast(Transfer.MESSAGES, {
+            name: "Server",
+            payload: `${u.displayName} joined.`,
+            avatar: u.avatar,
+            time: Date.now()
+          })
+        }
       }
 
       if (this.state.users.size >= MAX_PLAYERS_PER_LOBBY) {
@@ -425,42 +422,37 @@ export class InitializeBotsCommand extends Command<
     ownerId: string
   }
 > {
-  execute(ownerId) {
+  async execute({ ownerId }) {
     try {
-      UserMetadata.findOne(
-        { uid: ownerId },
-        (err: any, user: IUserMetadata) => {
-          if (!user) {
-            return
-          }
+      const user = await UserMetadata.findOne({ uid: ownerId })
+      if (user) {
+        const difficulty = { $gt: user.elo - 100, $lt: user.elo + 100 }
 
-          const difficulty = { $gt: user.elo - 100, $lt: user.elo + 100 }
+        const bots = await BotV2.find(
+          { elo: difficulty },
+          ["avatar", "elo", "name"],
+          null
+        ).limit(7)
 
-          BotV2.find({ elo: difficulty }, ["avatar", "elo", "name"], null)
-            .limit(7)
-            .exec((err, bots) => {
-              if (!bots) {
-                return
-              }
-              bots.forEach((bot) => {
-                this.state.users.set(
-                  bot.avatar,
-                  new GameUser(
-                    bot.avatar,
-                    bot.name,
-                    bot.elo,
-                    bot.avatar,
-                    true,
-                    true,
-                    "",
-                    Role.BOT,
-                    false
-                  )
-                )
-              })
-            })
+        if (bots) {
+          bots.forEach((bot) => {
+            this.state.users.set(
+              bot.avatar,
+              new GameUser(
+                bot.avatar,
+                bot.name,
+                bot.elo,
+                bot.avatar,
+                true,
+                true,
+                "",
+                Role.BOT,
+                false
+              )
+            )
+          })
         }
-      )
+      }
     } catch (error) {
       logger.error(error)
     }
@@ -479,82 +471,87 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
     }
 
     const { type, user } = data
-    const bot: IBot =
-      typeof type === "object"
-        ? type
-        : await new Promise((resolve) => {
-            const difficulty = type
-            let d
+    let bot: IBot | undefined
+    if (typeof type === "object") {
+      bot = type
+    } else {
+      const difficulty = type
+      let d: FilterQuery<IBot> | undefined
 
-            switch (difficulty) {
-              case BotDifficulty.EASY:
-                d = { $lt: 800 }
-                break
-              case BotDifficulty.MEDIUM:
-                d = { $gte: 800, $lt: 1100 }
-                break
-              case BotDifficulty.HARD:
-                d = { $gte: 1100, $lt: 1400 }
-                break
-              case BotDifficulty.EXTREME:
-                d = { $gte: 1400 }
-                break
-            }
+      switch (difficulty) {
+        case BotDifficulty.EASY:
+          d = { $lt: 800 }
+          break
+        case BotDifficulty.MEDIUM:
+          d = { $gte: 800, $lt: 1100 }
+          break
+        case BotDifficulty.HARD:
+          d = { $gte: 1100, $lt: 1400 }
+          break
+        case BotDifficulty.EXTREME:
+          d = { $gte: 1400 }
+          break
+      }
 
-            const userArray = new Array<string>()
-            this.state.users.forEach((value: GameUser, key: string) => {
-              if (value.isBot) {
-                userArray.push(key)
-              }
+      const userArray = new Array<string>()
+      this.state.users.forEach((value: GameUser, key: string) => {
+        if (value.isBot) {
+          userArray.push(key)
+        }
+      })
+
+      const bots = await BotV2.find({ id: { $nin: userArray }, elo: d }, [
+        "avatar",
+        "elo",
+        "name",
+        "id"
+      ])
+
+      if (bots) {
+        if (bots.length <= 0) {
+          if (bots.length <= 0) {
+            this.room.broadcast(Transfer.MESSAGES, {
+              name: user.name,
+              payload: "Error: No bots found",
+              avatar: user.avatar,
+              time: Date.now()
             })
+          } else if (this.state.users.size >= MAX_PLAYERS_PER_LOBBY) {
+            this.room.broadcast(Transfer.MESSAGES, {
+              name: user.name,
+              payload: "Room is already full",
+              avatar: user.avatar,
+              time: Date.now()
+            })
+          }
+          bot = pickRandomIn(bots)
+        }
+      }
+    }
 
-            BotV2.find(
-              { id: { $nin: userArray }, elo: d },
-              ["avatar", "elo", "name", "id"],
-              null,
-              (err, bots) => {
-                if (err) return logger.error(err)
-                if (bots.length <= 0) {
-                  this.room.broadcast(Transfer.MESSAGES, {
-                    name: user.name,
-                    payload: "Error: No bots found",
-                    avatar: user.avatar,
-                    time: Date.now()
-                  })
-                  return
-                }
-
-                if (this.state.users.size >= MAX_PLAYERS_PER_LOBBY) {
-                  return
-                } else {
-                  const bot = pickRandomIn(bots)
-                  resolve(bot)
-                }
-              }
-            )
-          })
-
-    this.state.users.set(
-      bot.id,
-      new GameUser(
+    if (bot) {
+      this.state.users.set(
         bot.id,
-        bot.name,
-        bot.elo,
-        bot.avatar,
-        true,
-        true,
-        "",
-        Role.BOT,
-        false
+        new GameUser(
+          bot.id,
+          bot.name,
+          bot.elo,
+          bot.avatar,
+          true,
+          true,
+          "",
+          Role.BOT,
+          false
+        )
       )
-    )
 
-    this.room.broadcast(Transfer.MESSAGES, {
-      name: user.name,
-      payload: `Bot ${bot.name} added.`,
-      avatar: user.avatar,
-      time: Date.now()
-    })
+      this.room.broadcast(Transfer.MESSAGES, {
+        name: user.name,
+        payload: `Bot ${bot.name} added.`,
+        avatar: user.avatar,
+        time: Date.now()
+      })
+    }
   }
 }
 
@@ -601,7 +598,7 @@ export class OnRemoveBotCommand extends Command<
 }
 
 export class OnListBotsCommand extends Command<PreparationRoom> {
-  execute(data: { user: IUserMetadata }) {
+  async execute(data: { user: IUserMetadata }) {
     try {
       if (this.state.users.size >= MAX_PLAYERS_PER_LOBBY) {
         return
@@ -617,29 +614,28 @@ export class OnListBotsCommand extends Command<PreparationRoom> {
 
       const { user } = data
 
-      BotV2.find(
-        { id: { $nin: userArray } },
-        ["avatar", "elo", "name", "id"],
-        null,
-        (err, bots) => {
-          if (err) return logger.error(err)
-          if (bots.length <= 0) {
-            this.room.broadcast(Transfer.MESSAGES, {
-              name: user.displayName,
-              payload: `Error: No bots found`,
-              avatar: user.avatar,
-              time: Date.now()
-            })
-            return
-          }
+      const bots = await BotV2.find({ id: { $nin: userArray } }, [
+        "avatar",
+        "elo",
+        "name",
+        "id"
+      ])
 
-          this.room.clients.forEach((client) => {
-            if (client.auth?.uid === this.state.ownerId) {
-              client.send(Transfer.REQUEST_BOT_LIST, bots)
-            }
+      if (bots) {
+        if (bots.length <= 0) {
+          this.room.broadcast(Transfer.MESSAGES, {
+            name: user.displayName,
+            payload: `Error: No bots found`,
+            avatar: user.avatar,
+            time: Date.now()
           })
         }
-      )
+        this.room.clients.forEach((client) => {
+          if (client.auth?.uid === this.state.ownerId) {
+            client.send(Transfer.REQUEST_BOT_LIST, bots)
+          }
+        })
+      }
     } catch (error) {
       logger.error(error)
     }

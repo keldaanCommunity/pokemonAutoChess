@@ -1,5 +1,5 @@
 import React from "react"
-import ReactTooltip from "react-tooltip"
+import { Tooltip } from "react-tooltip"
 import { useAppSelector } from "../../../hooks"
 import { useTranslation } from "react-i18next"
 
@@ -12,19 +12,14 @@ export function GameTeamInfo() {
 
   return (
     <div id="game-team-info" className="nes-container team-size information">
-      <div data-tip data-for="detail-team-size">
-        <ReactTooltip
-          id="detail-team-size"
-          className="customeTheme"
-          effect="solid"
-          place="top"
-        >
+      <div data-tooltip-id="detail-team-size">
+        <Tooltip id="detail-team-size" className="customeTheme" place="top">
           <p className="help">
             {t("place_up_to")} <output>{experienceManager.level}</output>{" "}
             {t("pokemons_on_your_board")}
           </p>
           <p className="help">{t("team_size_hint")}</p>
-        </ReactTooltip>
+        </Tooltip>
         <span>
           {boardSize}/{experienceManager.level}
         </span>

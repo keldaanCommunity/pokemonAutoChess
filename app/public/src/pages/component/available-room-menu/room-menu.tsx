@@ -62,9 +62,11 @@ export default function RoomMenu(props: {
           ownerId: uid,
           ownerName: lobbyUser?.name ? lobbyUser.name : uid
         })
-        localStorage.setItem("cachedReconnectionToken", room.reconnectionToken)
         await lobby.leave()
-        room.connection.close()
+        //room.connection.close()
+        localStorage.setItem("cachedReconnectionToken", room.reconnectionToken)
+        // console.log(client)
+        // console.log(room.reconnectionToken)
         dispatch(leaveLobby())
         props.setToPreparation(true)
       }
