@@ -881,7 +881,16 @@ export default class BattleManager {
             break
 
           case Ability.DYNAMAX_CANNON:
-            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
+            coordinatesTarget = transformAttackCoordinate(
+              targetX,
+              targetY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
@@ -890,6 +899,13 @@ export default class BattleManager {
             )
             specialProjectile.setDepth(7)
             specialProjectile.setScale(2, 2)
+            specialProjectile.setRotation(
+              Math.atan2(
+                coordinatesTarget[1] - coordinates[1],
+                coordinatesTarget[0] - coordinates[0]
+              ) +
+                Math.PI / 2
+            )
             specialProjectile.anims.play(Ability.DYNAMAX_CANNON)
             specialProjectile.once(
               Phaser.Animations.Events.ANIMATION_COMPLETE,

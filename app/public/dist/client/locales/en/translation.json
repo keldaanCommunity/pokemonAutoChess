@@ -885,7 +885,7 @@
     "CRABHAMMER": "Deal [40,80,120,SP] SPECIAL to the target with a high chance to deal a critical hit. Execute the target if they are below 30% HP",
     "DIAMOND_STORM": "Deal [200,SP]% of the user's DEF as SPECIAL to all adjacent enemy Pokémon",
     "DRACO_ENERGY": "Deal [100,SP]% of the user's HP as SPECIAL to the target",
-    "DYNAMAX_CANNON": "Shoot a Dynamax beam in a straight line. Enemy Pokémon hit take [80,SP]% of their HP as SPECIAL",
+    "DYNAMAX_CANNON": "Shoot a Dynamax beam in a straight line. Enemy Pokémon hit take [50,SP]% of their max HP as SPECIAL",
     "DYNAMIC_PUNCH": "Deal [20,40,80,SP] SPECIAL to the target and make them CONFUSION for [1.5,3,6] seconds",
     "ELECTRO_BOOST": "All allied Electric Pokémon receive RUNE_PROTECT and are immune to SPECIAL and status alterations for 5 seconds",
     "ELECTRO_WEB": "Steal [15,30,60]% ATK_SPEED from all adjacent enemy Pokémon",

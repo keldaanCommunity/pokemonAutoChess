@@ -17,6 +17,9 @@ Gligar,Gliscor,Shellder,Cloyster, Furret, Sentret
 
 # Changes to Pokemon
 
+- Eternatus rework: gains Fossil Synergy, change range to 1 ; adjusted stats
+- Dynamax Cannon (Eternatus, Mewtwo): now can fire in 8 directions, and deal damage based on target Max HP instead of current HP
+
 # Changes to Synergies
 
 # Changes to Items

@@ -729,10 +729,10 @@ export class DynamaxCannonStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
 
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
-      if (tg && pokemon.team != tg.team && x == target.positionX) {
-        tg.handleSpecialDamage(
-          Math.ceil(tg.life * 0.8),
+    effectInLine(board, pokemon, target, (targetInLine) => {
+      if (targetInLine != null && targetInLine.team !== pokemon.team) {
+        targetInLine.handleSpecialDamage(
+          Math.ceil(targetInLine.hp * 0.5),
           board,
           AttackType.SPECIAL,
           pokemon,

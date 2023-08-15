@@ -3722,9 +3722,9 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.ETERNATUS]: {
-    attack: AnimationType.Charge,
-    ability: AnimationType.Attack,
-    emote: AnimationType.Shoot
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Charge
   },
   [Pkm.PONYTA]: {
     attack: AnimationType.Attack,
