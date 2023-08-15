@@ -47,6 +47,11 @@ export function GamePokemonDetail(props: {
         >
           {t(`rarity.${props.pokemon.rarity}`)}
         </p>
+        <p className="game-pokemon-detail-entry-tier">
+          {Array.from({ length: props.pokemon.stars }, () => (
+            <img src="assets/ui/star.svg" height="16"></img>
+          ))}
+        </p>
       </div>
 
       <div className="game-pokemon-detail-types">

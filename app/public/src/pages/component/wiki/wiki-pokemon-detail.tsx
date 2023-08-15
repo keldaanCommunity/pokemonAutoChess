@@ -76,8 +76,12 @@ export default function WikiPokemonDetail(props: {
         <dd style={{ color: RarityColor[pokemon.rarity] }}>
           {t(`rarity.${pokemon.rarity}`)}
         </dd>
-        <dt>{t("tier")}</dt>
-        <dd>{pokemon.stars}</dd>
+        <dt style={{ verticalAlign: "middle" }}>{t("tier")}</dt>
+        <dd>
+          {Array.from({ length: pokemon.stars }, () => (
+            <img src="assets/ui/star.svg" height="24"></img>
+          ))}
+        </dd>
         <dt>{t("synergies")}</dt>
         <dd>
           {pokemon.types.map((type) => (
@@ -138,10 +142,7 @@ export default function WikiPokemonDetail(props: {
             <dt>{t("ability_label")}</dt>
             <dd>
               {t(`ability.${pokemon.skill}`)}
-              <AbilityTooltip
-                ability={pokemon.skill}
-                tier={pokemon.stars}
-              />
+              <AbilityTooltip ability={pokemon.skill} tier={pokemon.stars} />
             </dd>
           </>
         )}
