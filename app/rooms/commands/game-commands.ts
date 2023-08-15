@@ -744,11 +744,12 @@ export class OnJoinCommand extends Command<
     auth: any
   }
 > {
-  execute({ client, options, auth }) {
-    if (options.spectate === true) {
-      this.state.spectators.add(client.auth.uid)
-    } else {
-      UserMetadata.findOne({ uid: auth.uid }, (err, user) => {
+  async execute({ client, options, auth }) {
+    try {
+      if (options.spectate === true) {
+        this.state.spectators.add(client.auth.uid)
+      } else {
+        const user = await UserMetadata.findOne({ uid: auth.uid })
         if (user) {
           const player = new Player(
             user.uid,
@@ -787,7 +788,9 @@ export class OnJoinCommand extends Command<
             }
           }
         }
-      })
+      }
+    } catch (error) {
+      logger.error(error)
     }
   }
 }

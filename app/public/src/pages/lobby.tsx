@@ -1,4 +1,11 @@
-import React, { useCallback, useEffect, useState } from "react"
+import React, {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useRef,
+  useState
+} from "react"
 import { Navigate } from "react-router-dom"
 import Chat from "./component/chat/chat"
 import CurrentUsers from "./component/available-user-menu/current-users"
@@ -6,7 +13,7 @@ import RoomMenu from "./component/available-room-menu/room-menu"
 import TabMenu from "./component/lobby-menu/tab-menu"
 import firebase from "firebase/compat/app"
 import { FIREBASE_CONFIG } from "./utils/utils"
-import { Room, RoomAvailable } from "colyseus.js"
+import { Client, Room, RoomAvailable } from "colyseus.js"
 import TeamBuilder from "./component/bot-builder/team-builder"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import {
@@ -61,26 +68,27 @@ import "./lobby.css"
 import { BotManagerPanel } from "./component/bot-builder/bot-manager-panel"
 import i18n from "../i18n"
 import { MainSidebar } from "./main-sidebar"
+import store from "../stores"
 
 export type Page = "main_lobby" | "bot_builder" | "bot_manager"
 
 export default function Lobby() {
   const dispatch = useAppDispatch()
-  const client = useAppSelector((state) => state.network.client)
   const user = useAppSelector((state) => state.lobby.user)
 
-  const [lobbyJoined, setLobbyJoined] = useState<boolean>(false)
+  const lobbyJoined = useRef<boolean>(false)
   const [page, setPage] = useState<Page>("main_lobby")
 
   const [toPreparation, setToPreparation] = useState<boolean>(false)
   const [toAuth, setToAuth] = useState<boolean>(false)
 
   useEffect(() => {
-    if (!lobbyJoined) {
+    const client = store.getState().network.client
+    if (!lobbyJoined.current) {
       join(dispatch, client, setToAuth)
-      setLobbyJoined(true)
+      lobbyJoined.current = true
     }
-  }, [lobbyJoined, dispatch, client])
+  }, [lobbyJoined, dispatch])
 
   const changePage = useCallback((nextPage: Page) => setPage(nextPage), [])
 
@@ -132,7 +140,11 @@ function MainLobby({ toPreparation, setToPreparation }) {
   )
 }
 
-const join = async (dispatch, client, setToAuth) => {
+async function join(
+  dispatch,
+  client: Client,
+  setToAuth: Dispatch<SetStateAction<boolean>>
+) {
   if (!firebase.apps.length) {
     firebase.initializeApp(FIREBASE_CONFIG)
   }

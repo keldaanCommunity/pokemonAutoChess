@@ -4,10 +4,9 @@ import GameState from "./states/game-state"
 import Player from "../models/colyseus-models/player"
 import { MapSchema } from "@colyseus/schema"
 import UserMetadata, {
-  IPokemonConfig,
-  IUserMetadata
+  IPokemonConfig
 } from "../models/mongo-models/user-metadata"
-import BOT from "../models/mongo-models/bot-v2"
+import { BotV2 } from "../models/mongo-models/bot-v2"
 import {
   OnShopCommand,
   OnItemCommand,
@@ -95,7 +94,12 @@ export default class GameRoom extends Room<GameState> {
     this.setState(
       new GameState(options.preparationId, options.name, options.noElo)
     )
-    this.miniGame.create(this.state.avatars, this.state.floatingItems, this.state.portals, this.state.symbols)
+    this.miniGame.create(
+      this.state.avatars,
+      this.state.floatingItems,
+      this.state.portals,
+      this.state.symbols
+    )
     Object.keys(PRECOMPUTED_TYPE_POKEMONS).forEach((type) => {
       PRECOMPUTED_TYPE_POKEMONS[type].additionalPokemons.forEach((p) => {
         const pokemon = PokemonFactory.createPokemonFromName(p)
@@ -315,29 +319,27 @@ export default class GameRoom extends Room<GameState> {
       }
     )
 
-    this.onMessage(Transfer.UNOWN_ENCOUNTER, (client, unownIndex) => {
+    this.onMessage(Transfer.UNOWN_ENCOUNTER, async (client, unownIndex) => {
       try {
         if (client.auth) {
           const DUST_PER_ENCOUNTER = 50
-          UserMetadata.findOne(
-            { uid: client.auth.uid },
-            (err, u: FilterQuery<IUserMetadata>) => {
-              const c = u.pokemonCollection.get(unownIndex)
-              if (c) {
-                c.dust += DUST_PER_ENCOUNTER
-              } else {
-                u.pokemonCollection.set(unownIndex, {
-                  id: unownIndex,
-                  emotions: [],
-                  shinyEmotions: [],
-                  dust: DUST_PER_ENCOUNTER,
-                  selectedEmotion: Emotion.NORMAL,
-                  selectedShiny: false
-                })
-              }
-              u.save()
+          const u = await UserMetadata.findOne({ uid: client.auth.uid })
+          if (u) {
+            const c = u.pokemonCollection.get(unownIndex)
+            if (c) {
+              c.dust += DUST_PER_ENCOUNTER
+            } else {
+              u.pokemonCollection.set(unownIndex, {
+                id: unownIndex,
+                emotions: [],
+                shinyEmotions: [],
+                dust: DUST_PER_ENCOUNTER,
+                selectedEmotion: Emotion.NORMAL,
+                selectedShiny: false
+              })
             }
-          )
+            u.save()
+          }
         }
       } catch (error) {
         logger.error(error)
@@ -448,45 +450,46 @@ export default class GameRoom extends Room<GameState> {
     }
   }
 
-  onDispose() {
+  async onDispose() {
     // logger.info(`dispose game room`);
-    this.state.endTime = Date.now()
-    const players: components["schemas"]["GameHistory"]["players"] = []
-    this.state.players.forEach((p) => {
-      if (!p.isBot) {
-        players.push(this.transformToSimplePlayer(p))
-      }
-    })
-    History.create({
-      id: this.state.preparationId,
-      name: this.state.name,
-      startTime: this.state.startTime,
-      endTime: this.state.endTime,
-      players
-    })
+    try {
+      this.state.endTime = Date.now()
+      const players: components["schemas"]["GameHistory"]["players"] = []
+      this.state.players.forEach((p) => {
+        if (!p.isBot) {
+          players.push(this.transformToSimplePlayer(p))
+        }
+      })
+      History.create({
+        id: this.state.preparationId,
+        name: this.state.name,
+        startTime: this.state.startTime,
+        endTime: this.state.endTime,
+        players
+      })
 
-    const humans: Player[] = []
-    const bots: Player[] = []
+      const humans: Player[] = []
+      const bots: Player[] = []
 
-    this.state.players.forEach((player) => {
-      if (player.isBot) {
-        bots.push(player)
-      } else {
-        humans.push(player)
-      }
-    })
+      this.state.players.forEach((player) => {
+        if (player.isBot) {
+          bots.push(player)
+        } else {
+          humans.push(player)
+        }
+      })
 
-    const elligibleToXP =
-      this.state.players.size >= 2 &&
-      this.state.stageLevel >= RequiredStageLevelForXpElligibility
-    const elligibleToELO =
-      elligibleToXP && !this.state.noElo && humans.length >= 2
+      const elligibleToXP =
+        this.state.players.size >= 2 &&
+        this.state.stageLevel >= RequiredStageLevelForXpElligibility
+      const elligibleToELO =
+        elligibleToXP && !this.state.noElo && humans.length >= 2
 
-    if (elligibleToXP) {
-      bots.forEach((player) => {
-        BOT.find({ id: player.id }, (err, results) => {
-          if (err != null) logger.error(err)
-          else if (results) {
+      if (elligibleToXP) {
+        for (let i = 0; i < bots.length; i++) {
+          const player = bots[i]
+          const results = await BotV2.find({ id: player.id })
+          if (results) {
             results.forEach((bot) => {
               bot.elo = computeElo(
                 this.transformToSimplePlayer(player),
@@ -497,127 +500,128 @@ export default class GameRoom extends Room<GameState> {
               bot.save()
             })
           }
-        })
-      })
-
-      humans.forEach((player) => {
-        const exp = ExpPlace[player.rank - 1]
-        let rank = player.rank
-
-        if (!this.state.gameFinished && player.life > 0) {
-          let rankOfLastPlayerAlive = this.state.players.size
-          this.state.players.forEach((plyr) => {
-            if (plyr.life <= 0 && plyr.rank < rankOfLastPlayerAlive) {
-              rankOfLastPlayerAlive = plyr.rank
-            }
-          })
-          rank = rankOfLastPlayerAlive
         }
 
-        UserMetadata.findOne({ uid: player.id }, (err: any, usr: any) => {
-          if (err) {
-            return logger.error(err)
-          }
-          const expThreshold = 1000
-          if (usr.exp + exp >= expThreshold) {
-            usr.level += 1
-            usr.booster += 1
-            usr.exp = usr.exp + exp - expThreshold
-          } else {
-            usr.exp = usr.exp + exp
-          }
-          usr.exp = !isNaN(usr.exp) ? usr.exp : 0
+        for (let i = 0; i < humans.length; i++) {
+          const player = humans[i]
+          const exp = ExpPlace[player.rank - 1]
+          let rank = player.rank
 
-          if (rank === 1) {
-            usr.wins += 1
-          }
-
-          if (usr.level >= 10) {
-            player.titles.add(Title.ROOKIE)
-            player.titles.add(Title.BOT_BUILDER)
-          }
-          if (usr.level >= 20) {
-            player.titles.add(Title.AMATEUR)
-          }
-          if (usr.level >= 30) {
-            player.titles.add(Title.VETERAN)
-          }
-          if (usr.level >= 50) {
-            player.titles.add(Title.PRO)
-          }
-          if (usr.level >= 100) {
-            player.titles.add(Title.EXPERT)
-          }
-          if (usr.level >= 150) {
-            player.titles.add(Title.ELITE)
-          }
-          if (usr.level >= 200) {
-            player.titles.add(Title.MASTER)
-          }
-          if (usr.level >= 300) {
-            player.titles.add(Title.GRAND_MASTER)
-          }
-
-          if (usr.elo != null && elligibleToELO) {
-            const elo = computeElo(
-              this.transformToSimplePlayer(player),
-              rank,
-              usr.elo,
-              humans.map((p) => this.transformToSimplePlayer(p))
-            )
-            if (elo) {
-              if (elo > 1100) {
-                player.titles.add(Title.GYM_TRAINER)
+          if (!this.state.gameFinished && player.life > 0) {
+            let rankOfLastPlayerAlive = this.state.players.size
+            this.state.players.forEach((plyr) => {
+              if (plyr.life <= 0 && plyr.rank < rankOfLastPlayerAlive) {
+                rankOfLastPlayerAlive = plyr.rank
               }
-              if (elo > 1200) {
-                player.titles.add(Title.GYM_CHALLENGER)
-              }
-              if (elo > 1400) {
-                player.titles.add(Title.GYM_LEADER)
-              }
-              usr.elo = elo
-            }
-
-            const dbrecord = this.transformToSimplePlayer(player)
-            DetailledStatistic.create({
-              time: Date.now(),
-              name: dbrecord.name,
-              pokemons: dbrecord.pokemons,
-              rank: dbrecord.rank,
-              avatar: dbrecord.avatar,
-              playerId: dbrecord.id,
-              elo: elo
             })
+            rank = rankOfLastPlayerAlive
           }
 
-          if (player.life === 100 && rank === 1) {
-            player.titles.add(Title.TYRANT)
-          }
-          if (player.life === 1 && rank === 1) {
-            player.titles.add(Title.SURVIVOR)
-          }
-
-          if (player.rerollCount > 60) {
-            player.titles.add(Title.GAMBLER)
-          }
-
-          if (usr.titles === undefined) {
-            usr.titles = []
-          }
-
-          player.titles.forEach((t) => {
-            if (!usr.titles.includes(t)) {
-              logger.info("title added ", t)
-              usr.titles.push(t)
+          const usr = await UserMetadata.findOne({ uid: player.id })
+          if (usr) {
+            const expThreshold = 1000
+            if (usr.exp + exp >= expThreshold) {
+              usr.level += 1
+              usr.booster += 1
+              usr.exp = usr.exp + exp - expThreshold
+            } else {
+              usr.exp = usr.exp + exp
             }
-          })
-          //logger.debug(usr);
-          //usr.markModified('metadata');
-          usr.save()
-        })
-      })
+            usr.exp = !isNaN(usr.exp) ? usr.exp : 0
+
+            if (rank === 1) {
+              usr.wins += 1
+            }
+
+            if (usr.level >= 10) {
+              player.titles.add(Title.ROOKIE)
+              player.titles.add(Title.BOT_BUILDER)
+            }
+            if (usr.level >= 20) {
+              player.titles.add(Title.AMATEUR)
+            }
+            if (usr.level >= 30) {
+              player.titles.add(Title.VETERAN)
+            }
+            if (usr.level >= 50) {
+              player.titles.add(Title.PRO)
+            }
+            if (usr.level >= 100) {
+              player.titles.add(Title.EXPERT)
+            }
+            if (usr.level >= 150) {
+              player.titles.add(Title.ELITE)
+            }
+            if (usr.level >= 200) {
+              player.titles.add(Title.MASTER)
+            }
+            if (usr.level >= 300) {
+              player.titles.add(Title.GRAND_MASTER)
+            }
+
+            if (usr.elo != null && elligibleToELO) {
+              const elo = computeElo(
+                this.transformToSimplePlayer(player),
+                rank,
+                usr.elo,
+                humans.map((p) => this.transformToSimplePlayer(p))
+              )
+              if (elo) {
+                if (elo > 1100) {
+                  player.titles.add(Title.GYM_TRAINER)
+                }
+                if (elo > 1200) {
+                  player.titles.add(Title.GYM_CHALLENGER)
+                }
+                if (elo > 1400) {
+                  player.titles.add(Title.GYM_LEADER)
+                }
+                usr.elo = elo
+              }
+
+              const dbrecord = this.transformToSimplePlayer(player)
+              DetailledStatistic.create({
+                time: Date.now(),
+                name: dbrecord.name,
+                pokemons: dbrecord.pokemons,
+                rank: dbrecord.rank,
+                avatar: dbrecord.avatar,
+                playerId: dbrecord.id,
+                elo: elo
+              })
+            }
+
+            if (player.life === 100 && rank === 1) {
+              player.titles.add(Title.TYRANT)
+            }
+            if (player.life === 1 && rank === 1) {
+              player.titles.add(Title.SURVIVOR)
+            }
+
+            if (player.rerollCount > 60) {
+              player.titles.add(Title.GAMBLER)
+            }
+
+            if (usr.titles === undefined) {
+              usr.titles = []
+            }
+
+            player.titles.forEach((t) => {
+              if (!usr.titles.includes(t)) {
+                logger.info("title added ", t)
+                usr.titles.push(t)
+              }
+            })
+            //logger.debug(usr);
+            //usr.markModified('metadata');
+            usr.save()
+          }
+        }
+      }
+      this.dispatcher.stop()
+    } catch (error) {
+      logger.error(error)
     }
-    this.dispatcher.stop()
   }
 
   transformToSimplePlayer(player: Player): IGameHistorySimplePlayer {

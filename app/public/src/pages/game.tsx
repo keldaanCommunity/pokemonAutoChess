@@ -113,10 +113,10 @@ export default function Game() {
   )
   const spectate = currentPlayerId !== uid
 
-  const [initialized, setInitialized] = useState<boolean>(false)
+  const initialized = useRef<boolean>(false)
+  const connecting = useRef<boolean>(false)
+  const connected = useRef<boolean>(false)
   const [loaded, setLoaded] = useState<boolean>(false)
-  const [connected, setConnected] = useState<boolean>(false)
-  const [connecting, setConnecting] = useState<boolean>(false)
   const [connectError, setConnectError] = useState<string>("")
   const [modalTitle, setModalTitle] = useState<string>("")
   const [modalInfo, setModalInfo] = useState<string>("")
@@ -133,7 +133,7 @@ export default function Game() {
       "cachedReconnectionToken"
     )
     if (cachedReconnectionToken) {
-      setConnecting(true)
+      connecting.current = true
       const statusMessage = document.querySelector("#status-message")
       if (statusMessage) {
         statusMessage.textContent = `Connecting to game...`
@@ -147,8 +147,8 @@ export default function Game() {
             room.reconnectionToken
           )
           dispatch(joinGame(room))
-          setConnected(true)
-          setConnecting(false)
+          connected.current = true
+          connecting.current = false
         })
         .catch((error) => {
           if (attempts < MAX_ATTEMPS_RECONNECT) {
@@ -229,7 +229,7 @@ export default function Game() {
 
   useEffect(() => {
     const connect = () => {
-      setConnecting(true)
+      connecting.current = true
       logger.debug("connecting to game")
       if (!firebase.apps.length) {
         firebase.initializeApp(FIREBASE_CONFIG)
@@ -243,13 +243,17 @@ export default function Game() {
       })
     }
 
-    if (!connected) {
-      if (!connecting) {
+    if (!connected.current) {
+      if (!connecting.current) {
         connect()
       }
-    } else if (!initialized && room != undefined && container?.current) {
+    } else if (
+      !initialized.current &&
+      room != undefined &&
+      container?.current
+    ) {
       logger.debug("initializing game")
-      setInitialized(true)
+      initialized.current = true
       dispatch(requestTilemap())
       gameContainer = new GameContainer(container.current, uid, room)
       document.getElementById("game")?.addEventListener(Transfer.DRAG_DROP, ((

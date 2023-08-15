@@ -7,7 +7,7 @@ import {
 } from "colyseus"
 import { Dispatcher } from "@colyseus/command"
 import LobbyState from "./states/lobby-state"
-import { connect } from "mongoose"
+import { connect, createConnection } from "mongoose"
 import BannedUser from "../models/mongo-models/banned-user"
 import ChatV2 from "../models/mongo-models/chat-v2"
 import UserMetadata from "../models/mongo-models/user-metadata"
@@ -17,7 +17,7 @@ import {
 } from "../models/colyseus-models/leaderboard-info"
 import admin from "firebase-admin"
 import { WebhookClient } from "discord.js"
-import BotV2, { IBot } from "../models/mongo-models/bot-v2"
+import { BotV2, IBot } from "../models/mongo-models/bot-v2"
 import Meta, { IMeta } from "../models/mongo-models/meta"
 import ItemsStatistic, {
   IItemsStatistic
@@ -368,21 +368,10 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       }
     )
 
-    return new Promise((resolve) => {
-      connect(
-        process.env.MONGO_URI ? process.env.MONGO_URI : "Default Mongo URI",
-        {},
-        (err) => {
-          if (err != null) {
-            logger.error("Error connecting to Mongo", err)
-          }
-          this.fetchChat()
-          this.fetchLeaderboards()
-          this.fetchMeta()
-        }
-      )
-      resolve()
-    })
+    await connect(process.env.MONGO_URI!)
+    await this.fetchChat()
+    await this.fetchLeaderboards()
+    await this.fetchMeta()
   }
 
   async onAuth(client: Client, options: any, request: any) {
@@ -429,11 +418,12 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     }
   }
 
-  fetchChat() {
-    ChatV2.find({ time: { $gt: Date.now() - 86400000 } }, (err, messages) => {
-      if (err) {
-        logger.error(err)
-      } else {
+  async fetchChat() {
+    try {
+      const messages = await ChatV2.find({
+        time: { $gt: Date.now() - 86400000 }
+      })
+      if (messages) {
         messages.forEach((message) => {
           this.state.addMessage(
             nanoid(),
@@ -446,13 +436,14 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
           )
         })
       }
-    })
+    } catch (error) {
+      logger.error(error)
+    }
   }
 
-  fetchMeta() {
-    Meta.find(
-      {},
-      [
+  async fetchMeta() {
+    try {
+      const docs = await Meta.find({}, [
         "cluster_id",
         "count",
         "ratio",
@@ -460,79 +451,71 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
         "mean_rank",
         "types",
         "pokemons"
-      ],
-      (err, docs) => {
-        if (err) {
-          logger.error(err)
-        } else {
-          docs.forEach((doc) => {
-            this.meta.push(doc)
-          })
-        }
-      }
-    )
-    ItemsStatistic.find({}, (err, docs) => {
-      if (err) {
-        logger.error(err)
-      } else {
+      ])
+
+      if (docs) {
         docs.forEach((doc) => {
+          this.meta.push(doc)
+        })
+      }
+
+      const items = await ItemsStatistic.find()
+      if (items) {
+        items.forEach((doc) => {
           this.metaItems.push(doc)
         })
       }
-    })
-    PokemonsStatistic.find({}, (err, docs) => {
-      if (err) {
-        logger.error(err)
-      } else {
-        docs.forEach((doc) => {
+
+      const stats = await PokemonsStatistic.find()
+      if (stats) {
+        stats.forEach((doc) => {
           this.metaPokemons.push(doc)
         })
       }
-    })
+    } catch (error) {
+      logger.error(error)
+    }
   }
 
-  fetchLeaderboards() {
-    UserMetadata.find(
+  async fetchLeaderboards() {
+    const users = await UserMetadata.find(
       {},
       ["displayName", "avatar", "elo"],
-      { limit: 100, sort: { elo: -1 } },
-      (err, users) => {
-        if (err) {
-          logger.error(err)
-        } else {
-          for (let i = 0; i < users.length; i++) {
-            const user = users[i]
-            this.leaderboard.push({
-              name: user.displayName,
-              rank: i + 1,
-              avatar: user.avatar,
-              value: user.elo
-            })
-          }
-        }
-      }
+      { limit: 100, sort: { elo: -1 } }
     )
-    UserMetadata.find(
+
+    if (users) {
+      for (let i = 0; i < users.length; i++) {
+        const user = users[i]
+        this.leaderboard.push({
+          name: user.displayName,
+          rank: i + 1,
+          avatar: user.avatar,
+          value: user.elo
+        })
+      }
+    }
+
+    const levelUsers = await UserMetadata.find(
       {},
       ["displayName", "avatar", "level"],
-      { limit: 100, sort: { level: -1 } },
-      (err, users) => {
-        if (err) {
-          logger.error(err)
-        } else {
-          for (let i = 0; i < users.length; i++) {
-            const user = users[i]
-            this.levelLeaderboard.push({
-              name: user.displayName,
-              rank: i + 1,
-              avatar: user.avatar,
-              value: user.level
-            })
-          }
-        }
-      }
+      { limit: 100, sort: { level: -1 } }
     )
-    BotV2.find({}, {}, { sort: { elo: -1 } }, (_err, bots) => {
+
+    if (levelUsers) {
+      for (let i = 0; i < levelUsers.length; i++) {
+        const user = levelUsers[i]
+        this.levelLeaderboard.push({
+          name: user.displayName,
+          rank: i + 1,
+          avatar: user.avatar,
+          value: user.level
+        })
+      }
+    }
+
+    const bots = await BotV2.find({}, {}, { sort: { elo: -1 } })
+    if (bots) {
       const ids = new Array<string>()
       bots.forEach((bot, i) => {
         if (ids.includes(bot.id)) {
@@ -550,6 +533,6 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
           author: bot.author
         })
       })
-    })
+    }
   }
 }

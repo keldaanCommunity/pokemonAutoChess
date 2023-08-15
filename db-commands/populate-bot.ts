@@ -1,6 +1,6 @@
 import dotenv from "dotenv"
 import { connect } from "mongoose"
-import BotV2 from "../app/models/mongo-models/bot-v2"
+import { BotV2 } from "../app/models/mongo-models/bot-v2"
 import { PastebinAPI } from "pastebin-ts/dist/api"
 import { nanoid } from "nanoid"
 import { logger } from "../app/utils/logger"

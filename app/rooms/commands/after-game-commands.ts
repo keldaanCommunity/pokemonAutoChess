@@ -5,8 +5,9 @@ import { Emotion, Transfer } from "../../types"
 import { logger } from "../../utils/logger"
 
 export class OnJoinCommand extends Command {
-  execute({ client, options, auth }) {
-    UserMetadata.findOne({ uid: auth.uid }, (err, user) => {
+  async execute({ client, options, auth }) {
+    try {
+      const user = await UserMetadata.findOne({ uid: auth.uid })
       if (user) {
         this.state.users.set(
           client.auth.uid,
@@ -30,7 +31,9 @@ export class OnJoinCommand extends Command {
           time: Date.now()
         })
       }
-    })
+    } catch (error) {
+      logger.error(error)
+    }
   }
 }
 

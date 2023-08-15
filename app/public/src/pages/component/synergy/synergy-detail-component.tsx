@@ -26,6 +26,7 @@ export default function SynergyDetailComponent(props: {
   const levelReached = SynergyTriggers[props.type]
     .filter((n) => n <= props.value)
     .at(-1)
+
   return (
     <div style={{ maxWidth: "480px" }}>
       <div style={{ display: "flex", alignItems: "center" }}>
