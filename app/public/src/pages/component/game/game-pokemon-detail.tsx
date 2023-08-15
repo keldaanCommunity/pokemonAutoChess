@@ -87,11 +87,7 @@ export function GamePokemonDetail(props: {
           <div>
             <AbilityTooltip
               ability={props.pokemon.skill}
-              tier={
-                props.pokemon.rarity === Rarity.MYTHICAL
-                  ? 3
-                  : props.pokemon.stars
-              }
+              tier={props.pokemon.stars}
             />
           </div>
         </div>

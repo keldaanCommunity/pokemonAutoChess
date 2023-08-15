@@ -9,7 +9,13 @@ import { logger } from "../app/utils/logger"
 const data: Partial<
   Record<
     Synergy,
-    { pokemons: Pkm[]; mythicalPokemons: Pkm[]; additionalPokemons: Pkm[] }
+    {
+      pokemons: Pkm[]
+      uniquePokemons: Pkm[]
+      legendaryPokemons: Pkm[]
+      mythicalPokemons: Pkm[]
+      additionalPokemons: Pkm[]
+    }
   >
 > = {}
 
@@ -24,12 +30,18 @@ Object.values(Pkm).forEach((pkm) => {
     if (type in data === false) {
       data[type] = {
         pokemons: [],
+        uniquePokemons: [],
+        legendaryPokemons: [],
         mythicalPokemons: [],
         additionalPokemons: []
       }
     }
 
-    if (pokemon.rarity === Rarity.MYTHICAL) {
+    if (pokemon.rarity === Rarity.UNIQUE) {
+      data[type]!.uniquePokemons.push(pokemon.name)
+    } else if (pokemon.rarity === Rarity.LEGENDARY) {
+      data[type]!.legendaryPokemons.push(pokemon.name)
+    } else if (pokemon.rarity === Rarity.MYTHICAL) {
       data[type]!.mythicalPokemons.push(pokemon.name)
     } else if (pokemon.additional) {
       if (!data[type]!.additionalPokemons.includes(PkmFamily[pkm])) {

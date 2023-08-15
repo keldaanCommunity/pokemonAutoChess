@@ -22,7 +22,7 @@ export default function SynergyDetailComponent(props: {
   const additionalPokemons = useAppSelector(
     (state) => state.game.additionalPokemons
   )
-  if (Object.hasOwn(SynergyTriggers, props.type) === false) return null
+  if (SynergyTriggers.hasOwnProperty(props.type) === false) return null
   const levelReached = SynergyTriggers[props.type]
     .filter((n) => n <= props.value)
     .at(-1)
@@ -71,12 +71,26 @@ export default function SynergyDetailComponent(props: {
         })}
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
-        {precomputed[props.type].mythicalPokemons.map((p) => {
+        {precomputed[props.type].uniquePokemons.map((p) => {
           const pokemon = PokemonFactory.createPokemonFromName(p as Pkm)
           const s = { border: "3px solid " + RarityColor[pokemon.rarity] }
           return <img key={p} style={s} src={getPortraitSrc(pokemon.index)} />
         })}
       </div>
+      <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
+        {precomputed[props.type].legendaryPokemons.map((p) => {
+          const pokemon = PokemonFactory.createPokemonFromName(p as Pkm)
+          const s = { border: "3px solid " + RarityColor[pokemon.rarity] }
+          return <img key={p} style={s} src={getPortraitSrc(pokemon.index)} />
+        })}
+      </div>
+      {/*<div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
+        {precomputed[props.type].mythicalPokemons.map((p) => {
+          const pokemon = PokemonFactory.createPokemonFromName(p as Pkm)
+          const s = { border: "3px solid " + RarityColor[pokemon.rarity] }
+          return <img key={p} style={s} src={getPortraitSrc(pokemon.index)} />
+        })}
+      </div>*/}
       <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
         {precomputed[props.type].additionalPokemons.map((p) => {
           if (additionalPokemons.includes(p)) {

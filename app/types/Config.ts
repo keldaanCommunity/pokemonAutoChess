@@ -9,8 +9,10 @@ export const RarityHpCost: { [key in Rarity]: number } = Object.freeze({
   [Rarity.UNCOMMON]: 1,
   [Rarity.RARE]: 2,
   [Rarity.EPIC]: 2,
+  [Rarity.ULTRA]: 3,
+  [Rarity.UNIQUE]: 3,
   [Rarity.LEGENDARY]: 3,
-  [Rarity.MYTHICAL]: 4,
+  [Rarity.MYTHICAL]: 3,
   [Rarity.SPECIAL]: 1,
   [Rarity.HATCH]: 4
 })
@@ -20,8 +22,10 @@ export const PkmCost: { [key in Rarity]: number } = Object.freeze({
   [Rarity.UNCOMMON]: 2,
   [Rarity.RARE]: 3,
   [Rarity.EPIC]: 4,
-  [Rarity.MYTHICAL]: 6,
-  [Rarity.LEGENDARY]: 5,
+  [Rarity.ULTRA]: 5,
+  [Rarity.UNIQUE]: 10,
+  [Rarity.LEGENDARY]: 10,
+  [Rarity.MYTHICAL]: 10,
   [Rarity.SPECIAL]: 5,
   [Rarity.HATCH]: 4
 })
@@ -104,6 +108,8 @@ export const RarityColor: { [key in Rarity]: string } = {
   [Rarity.UNCOMMON]: "#3bc95e",
   [Rarity.RARE]: "#41bfcc",
   [Rarity.EPIC]: "#ca6cee",
+  [Rarity.ULTRA]: "#E24916",
+  [Rarity.UNIQUE]: "#ffffff",
   [Rarity.LEGENDARY]: "#e6cb49",
   [Rarity.MYTHICAL]: "#ffc0cb",
   [Rarity.SPECIAL]: "#967FFF",
@@ -115,8 +121,10 @@ export const BoosterRarityProbability: { [key in Rarity]: number } = {
   [Rarity.UNCOMMON]: 0.2,
   [Rarity.RARE]: 0.2,
   [Rarity.EPIC]: 0.15,
+  [Rarity.ULTRA]: 0.05,
+  [Rarity.UNIQUE]: 0.08,
   [Rarity.LEGENDARY]: 0.05,
-  [Rarity.MYTHICAL]: 0.15,
+  [Rarity.MYTHICAL]: 0.02,
   [Rarity.HATCH]: 0.1,
   [Rarity.SPECIAL]: 0
 }
@@ -151,7 +159,9 @@ export const PoolSize: { [key in Rarity]: [number, number, number] } = {
   [Rarity.UNCOMMON]: [1, 13, 22],
   [Rarity.RARE]: [1, 9, 18],
   [Rarity.EPIC]: [1, 7, 14],
-  [Rarity.LEGENDARY]: [1, 5, 10],
+  [Rarity.ULTRA]: [1, 5, 10],
+  [Rarity.UNIQUE]: [1, 1, 1],
+  [Rarity.LEGENDARY]: [1, 1, 1],
   [Rarity.MYTHICAL]: [1, 1, 1],
   [Rarity.SPECIAL]: [0, 0, 0],
   [Rarity.HATCH]: [0, 0, 0]

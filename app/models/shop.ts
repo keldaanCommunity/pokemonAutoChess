@@ -60,7 +60,7 @@ export default class Shop {
       this.epicPool.set(pkm, getPoolSize(Rarity.EPIC, 3))
     })
     LegendaryShop.forEach((pkm) => {
-      this.legendaryPool.set(pkm, getPoolSize(Rarity.LEGENDARY, 3))
+      this.legendaryPool.set(pkm, getPoolSize(Rarity.ULTRA, 3))
     })
   }
 
@@ -81,8 +81,8 @@ export default class Shop {
       case Rarity.EPIC:
         this.epicPool.set(pkm, getPoolSize(Rarity.EPIC, 2))
         break
-      case Rarity.LEGENDARY:
-        this.legendaryPool.set(pkm, getPoolSize(Rarity.LEGENDARY, 2))
+      case Rarity.ULTRA:
+        this.legendaryPool.set(pkm, getPoolSize(Rarity.ULTRA, 2))
         break
       default:
         break
@@ -113,7 +113,7 @@ export default class Shop {
       if (value !== undefined) {
         this.epicPool.set(family, value + entityNumber)
       }
-    } else if (pokemon.rarity === Rarity.LEGENDARY) {
+    } else if (pokemon.rarity === Rarity.ULTRA) {
       const value = this.legendaryPool.get(family)
       if (value !== undefined) {
         this.legendaryPool.set(family, value + entityNumber)

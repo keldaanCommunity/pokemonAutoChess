@@ -75,7 +75,11 @@ export class OnShopCommand extends Command<
               this.room.getBenchSize(player.board) == 8))
         ) {
           let allowBuy = true
-          if (pokemon.rarity === Rarity.MYTHICAL) {
+          if (
+            [Rarity.UNIQUE, Rarity.LEGENDARY, Rarity.MYTHICAL].includes(
+              pokemon.rarity
+            )
+          ) {
             player.board.forEach((p) => {
               if (p.name === pokemon.name) {
                 allowBuy = false
@@ -96,9 +100,7 @@ export class OnShopCommand extends Command<
             pokemon.positionY = 0
             player.board.set(pokemon.id, pokemon)
 
-            if (pokemon.rarity == Rarity.MYTHICAL) {
-              this.state.shop.assignShop(player, false, this.state.stageLevel)
-            } else if (
+            if (
               pokemon.passive === Passive.UNOWN &&
               player.effects.list.includes(Effect.EERIE_SPELL)
             ) {

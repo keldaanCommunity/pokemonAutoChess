@@ -76,6 +76,8 @@ export default function WikiPokemonDetail(props: {
         <dd style={{ color: RarityColor[pokemon.rarity] }}>
           {t(`rarity.${pokemon.rarity}`)}
         </dd>
+        <dt>{t("tier")}</dt>
+        <dd>{pokemon.stars}</dd>
         <dt>{t("synergies")}</dt>
         <dd>
           {pokemon.types.map((type) => (
@@ -138,7 +140,7 @@ export default function WikiPokemonDetail(props: {
               {t(`ability.${pokemon.skill}`)}
               <AbilityTooltip
                 ability={pokemon.skill}
-                tier={pokemon.rarity === Rarity.MYTHICAL ? 3 : pokemon.stars}
+                tier={pokemon.stars}
               />
             </dd>
           </>
