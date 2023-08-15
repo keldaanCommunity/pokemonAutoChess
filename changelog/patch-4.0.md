@@ -10,7 +10,7 @@ patch announcement
 
 - New Minigame for unique picks: Portals !
 - You now see the same battle than your opponent, and can send emotes to him. "Ghost" opponents now are only added when the number of opponents alive is odd.
-
+- 
 # New Pokemons:
 
 Gligar,Gliscor,Shellder,Cloyster, Furret, Sentret
@@ -26,10 +26,12 @@ Gligar,Gliscor,Shellder,Cloyster, Furret, Sentret
 
 # UI
 
+
 - Pokemon categories renamed: Legendary becomes Ultra, Mythical T10 becomes Unique, Mythical T20 becomes Legendary
 - Pokemon now have their tier displayed in their tooltip as stars
 - Internationalization with languages: de, en es, fr, it, ja, nl pt
 - New icons for status
+- Mana has been renamed Power Points (PP)
 - Discord and Donate buttons now open links in a new tab
 - Option to toggle on/off displaying a pokemon's details via hover in preferences
 - Synergies now displayed when hovering over a player's icon in game
@@ -37,6 +39,13 @@ Gligar,Gliscor,Shellder,Cloyster, Furret, Sentret
 - New Sidebar! All your favorite menu buttons now exist in the sidebar
   - Sidebar available on Preparation Room
   - Hover over with your mouse to expand sidebar
+
+# Bugfix
+
+- Other players items are no longer interactive
+- Unicode emotes can be sent again in chat
+- Prevent showing evolutions on board during minigame phases
+- SFX volume preference is now used correctly for notifications volume
 
 # Misc
 

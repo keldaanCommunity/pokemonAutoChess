@@ -66,9 +66,8 @@ export default class ItemContainer extends DraggableObject {
 
     this.setInteractive()
     this.input.dropZone = true
-    this.draggable = (this.pokemonId === null)
+    this.draggable = this.pokemonId === null && playerId === currentPlayerUid
   }
-
 
   onPointerOver() {
     //this.openDetail()
