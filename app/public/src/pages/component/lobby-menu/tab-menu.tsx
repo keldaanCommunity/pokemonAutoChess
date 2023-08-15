@@ -25,6 +25,7 @@ export default function TabMenu() {
         dispatch(setTabIndex(i))
       }}
     >
+      <h1>{t("leaderboard")}</h1>
       <TabList>
         <Tab>{t("elo")}</Tab>
         <Tab>{t("level")}</Tab>

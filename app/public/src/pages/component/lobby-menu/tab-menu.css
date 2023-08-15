@@ -1,9 +1,10 @@
 .user-menu {
-  background: url("assets/ui/back2.png");
+  background: url("assets/ui/back1.png");
   flex-basis: 30%;
   height: 90vh;
   overflow-y: scroll;
   background-size: cover;
+  background-position: left;
   color: white;
 }
 

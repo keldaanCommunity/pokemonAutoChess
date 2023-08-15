@@ -209,7 +209,20 @@ p:last-child {
 
 #game {
   height: 100vh;
-  width: 100vw;
+  width: calc(100vw - 80px);
+}
+
+#game-wrapper {
+  position: relative;
+  left: 80px;
+  width: calc(100vw - 80px);
+}
+
+#game-wrapper .ps-sidebar-root {
+  position: absolute;
+  top: 0;
+  left: -80px;
+  bottom: 0;
 }
 
 .multi-range {

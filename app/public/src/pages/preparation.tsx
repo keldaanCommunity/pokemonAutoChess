@@ -31,8 +31,10 @@ import { IBot } from "../../../models/mongo-models/bot-v2"
 import { logger } from "../../../utils/logger"
 import { GameUser } from "../../../models/colyseus-models/game-user"
 import { MainSidebar } from "./main-sidebar"
+import { useTranslation } from "react-i18next"
 
 export default function Preparation() {
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const client: Client = useAppSelector((state) => state.network.client)
   const room: Room<PreparationState> | undefined = useAppSelector(
@@ -223,10 +225,13 @@ export default function Preparation() {
     return (
       <div className="preparation-page">
         <MainSidebar
-          showBackButton
-          changePage={async () => {
+          page="preparation"
+          leaveLabel={t("leave_room")}
+          leave={async () => {
+            await room?.leave(true)
             dispatch(leavePreparation())
-            room?.connection.close()
+            setToLobby(true)
+            playSound(SOUNDS.LEAVE_ROOM)
           }}
         />
         <main>

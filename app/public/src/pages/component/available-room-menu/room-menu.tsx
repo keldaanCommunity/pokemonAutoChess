@@ -142,6 +142,7 @@ export default function RoomMenu(props: {
 
   return (
     <Tabs className="nes-container room-menu">
+      <h1>{t("rooms")}</h1>
       <TabList>
         <Tab>{t("available_rooms")}</Tab>
         <Tab>

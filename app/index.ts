@@ -12,7 +12,7 @@ import admin from "firebase-admin"
 import PRECOMPUTED_TYPE_POKEMONS_ALL from "./models/precomputed/type-pokemons-all.json"
 import AfterGameRoom from "./rooms/after-game-room"
 import CustomLobbyRoom from "./rooms/custom-lobby-room"
-import PreprationRoom from "./rooms/preparation-room"
+import PreparationRoom from "./rooms/preparation-room"
 import GameRoom from "./rooms/game-room"
 import { Pkm } from "./types/enum/Pokemon"
 import { Item } from "./types/enum/Item"
@@ -133,6 +133,14 @@ app.get("/after", (req, res) => {
   res.sendFile(viewsSrc)
 })
 
+app.get("/bot-builder", (req, res) => {
+  res.sendFile(viewsSrc)
+})
+
+app.get("/bot-admin", (req, res) => {
+  res.sendFile(viewsSrc)
+})
+
 app.get("/pokemons", (req, res) => {
   res.send(Pkm)
 })
@@ -165,7 +173,7 @@ app.use("/colyseus", basicAuthMiddleware, monitor())
 
 gameServer.define("after-game", AfterGameRoom)
 gameServer.define("lobby", CustomLobbyRoom)
-gameServer.define("room", PreprationRoom).enableRealtimeListing()
+gameServer.define("room", PreparationRoom).enableRealtimeListing()
 gameServer.define("game", GameRoom).enableRealtimeListing()
 
 // Start

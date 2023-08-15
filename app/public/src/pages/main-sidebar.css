@@ -1,3 +1,36 @@
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  color: white;
+  width: 100%;
+}
+
+.sidebar-logo img {
+  width: 54px;
+  margin: 8px 0px 8px 12px;
+}
+
+.sidebar .sidebar-logo > div {
+  overflow: hidden;
+}
+
+.sidebar .sidebar-logo h1 {
+  color: inherit;
+  font-size: 1.2rem;
+  white-space: nowrap;
+  margin-bottom: 0;
+}
+
+.sidebar .sidebar-logo small {
+  display: block;
+  font-size: 1rem;
+  opacity: 0.75;
+}
+
+.sidebar.ps-collapsed .sidebar-logo div {
+  color: transparent;
+}
+
 .menu-item {
   width: 100%;
 }
@@ -11,6 +44,10 @@
   display: flex;
   gap: 8px;
   align-items: center;
+}
+
+.ps-menu-root {
+  height: 100%;
 }
 
 .ps-menu-root ul {
@@ -77,12 +114,12 @@
 
 .menu-item.red,
 .menu-item.red a:hover {
-  background: #e76e55;
-  box-shadow: inset 0 -3px #8c2022;
+  background: #af412b;
+  box-shadow: inset 0 -3px #570f10;
 }
 
 .menu-item.red a:hover {
-  background: #c25c48;
+  background: #852d1c;
 }
 
 .menu-item.discord,
@@ -112,7 +149,7 @@
   border-radius: 0 12px 0 0;
 }
 
-.lobby .sidebar {
+#root .ps-sidebar-root {
   border-right: 4px solid black;
   border-radius: 0 12px 12px 0;
   overflow: auto;

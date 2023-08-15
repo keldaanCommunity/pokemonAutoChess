@@ -14,7 +14,6 @@ import TabMenu from "./component/lobby-menu/tab-menu"
 import firebase from "firebase/compat/app"
 import { FIREBASE_CONFIG } from "./utils/utils"
 import { Client, Room, RoomAvailable } from "colyseus.js"
-import TeamBuilder from "./component/bot-builder/team-builder"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import {
   joinLobby,
@@ -22,7 +21,7 @@ import {
   requestLeaderboard,
   requestBotLeaderboard,
   requestLevelLeaderboard,
-  INetwork
+  logOut
 } from "../stores/NetworkStore"
 import {
   setBotData,
@@ -49,13 +48,12 @@ import {
   setLeaderboard,
   pushBotLog,
   setLanguage,
-  IUserLobbyState
+  leaveLobby
 } from "../stores/LobbyStore"
 import {
   ICustomLobbyState,
   ISuggestionUser,
   NonFunctionPropNames,
-  Role,
   Transfer
 } from "../../../types"
 import LobbyUser from "../../../models/colyseus-models/lobby-user"
@@ -64,23 +62,23 @@ import { IMeta } from "../../../models/mongo-models/meta"
 import { IItemsStatistic } from "../../../models/mongo-models/items-statistic"
 import PokemonConfig from "../../../models/colyseus-models/pokemon-config"
 import { IPokemonsStatistic } from "../../../models/mongo-models/pokemons-statistic"
-import "./lobby.css"
-import { BotManagerPanel } from "./component/bot-builder/bot-manager-panel"
 import i18n from "../i18n"
 import { MainSidebar } from "./main-sidebar"
 import store from "../stores"
+import { useTranslation } from "react-i18next"
 
-export type Page = "main_lobby" | "bot_builder" | "bot_manager"
+import "./lobby.css"
 
 export default function Lobby() {
   const dispatch = useAppDispatch()
   const user = useAppSelector((state) => state.lobby.user)
+  const lobby = useAppSelector((state) => state.network.lobby)
 
   const lobbyJoined = useRef<boolean>(false)
-  const [page, setPage] = useState<Page>("main_lobby")
 
   const [toPreparation, setToPreparation] = useState<boolean>(false)
   const [toAuth, setToAuth] = useState<boolean>(false)
+  const { t } = useTranslation()
 
   useEffect(() => {
     const client = store.getState().network.client
@@ -90,7 +88,12 @@ export default function Lobby() {
     }
   }, [lobbyJoined, dispatch])
 
-  const changePage = useCallback((nextPage: Page) => setPage(nextPage), [])
+  const signOut = useCallback(async () => {
+    await lobby?.leave()
+    await firebase.auth().signOut()
+    dispatch(leaveLobby())
+    dispatch(logOut())
+  }, [dispatch, lobby])
 
   if (toAuth) {
     return <Navigate to={"/"} />
@@ -103,22 +106,15 @@ export default function Lobby() {
   return (
     <main className="lobby">
       <MainSidebar
-        changePage={changePage}
-        showBackButton={page !== "main_lobby"}
+        page="main_lobby"
+        leave={signOut}
+        leaveLabel={t("sign_out")}
       />
       <div className="lobby-container">
-        {page === "bot_manager" && user?.role !== Role.BASIC && (
-          <BotManagerPanel />
-        )}
-
-        {page === "bot_builder" && <TeamBuilder />}
-
-        {page === "main_lobby" && (
-          <MainLobby
-            toPreparation={toPreparation}
-            setToPreparation={setToPreparation}
-          />
-        )}
+        <MainLobby
+          toPreparation={toPreparation}
+          setToPreparation={setToPreparation}
+        />
       </div>
     </main>
   )
