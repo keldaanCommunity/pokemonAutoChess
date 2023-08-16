@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { getAvatarSrc } from "../../../utils"
-import { addBotDatabase, deleteBotDatabase } from "../../../stores/NetworkStore"
+import { addBotDatabase, deleteBotDatabase, requestBotList } from "../../../stores/NetworkStore"
 import { useTranslation } from "react-i18next"
 
 export function BotManagerPanel() {
@@ -10,6 +10,10 @@ export function BotManagerPanel() {
   const logs = useAppSelector((state) => state.lobby.botLogDatabase)
   const bots = useAppSelector((state) => state.lobby.botList)
   const [url, setUrl] = useState<string>("")
+  if (bots.length === 0) {
+    dispatch(requestBotList())
+  }
+
   return (
     <div style={{ display: "flex" }}>
       <div

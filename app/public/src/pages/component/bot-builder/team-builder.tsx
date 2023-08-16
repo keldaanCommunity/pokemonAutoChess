@@ -12,7 +12,7 @@ import { IBot, IStep } from "../../../../../models/mongo-models/bot-v2"
 import CSS from "csstype"
 import { produce } from "immer"
 import { useAppSelector, useAppDispatch } from "../../../hooks"
-import { createBot } from "../../../stores/NetworkStore"
+import { createBot, requestBotList } from "../../../stores/NetworkStore"
 import { setBotCreatorSynergies } from "../../../stores/LobbyStore"
 import BuilderSynergies from "./builder-synergies"
 import { Synergy } from "../../../../../types/enum/Synergy"
@@ -153,6 +153,11 @@ export default function TeamBuilder() {
 
   const pastebinUrl: string = useAppSelector((state) => state.lobby.pastebinUrl)
   const botData: IBot = useAppSelector((state) => state.lobby.botData)
+  const bots = useAppSelector((state) => state.lobby.botList)
+
+  if (bots.length === 0) {
+    dispatch(requestBotList())
+  }
 
   function updateSynergies(i: number) {
     const newSynergies = new Map<Synergy, number>()

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router"
 import { useTranslation } from "react-i18next"
 import { Sidebar, Menu, MenuItem, MenuItemProps } from "react-pro-sidebar"
 import { useAppDispatch, useAppSelector } from "../hooks"
-import { requestMeta, INetwork, requestBotList } from "../stores/NetworkStore"
+import { requestMeta, INetwork } from "../stores/NetworkStore"
 import { IUserLobbyState } from "../stores/LobbyStore"
 import { Role, Title } from "../../../types"
 import { cc } from "./utils/jsx"
@@ -61,12 +61,6 @@ export function MainSidebar(props: MainSidebarProps) {
     }
     changeModal("meta")
   }, [changeModal, dispatch, meta.length, metaItems.length])
-
-  const botAdminOnClick = useCallback(() => {
-    if (botList.length === 0) {
-      dispatch(requestBotList())
-    }
-  }, [botList.length, dispatch])
 
   useEffect(() => {
     if (!sidebarRef.current) {
@@ -161,10 +155,7 @@ export function MainSidebar(props: MainSidebarProps) {
             user?.role === Role.BOT_MANAGER) && (
             <NavLink
               svg="bot"
-              onClick={() => {
-                botAdminOnClick()
-                navigate("/bot-admin")
-              }}
+              onClick={() => navigate("/bot-admin")}
             >
               {t("bot_admin")}
             </NavLink>
