@@ -1,20 +1,8 @@
 import React, { useState } from "react"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { getAvatarSrc } from "../../../utils"
-import CSS from "csstype"
 import { addBotDatabase, deleteBotDatabase } from "../../../stores/NetworkStore"
 import { useTranslation } from "react-i18next"
-
-const buttonsStyle: CSS.Properties = {
-  left: "10px",
-  display: "flex"
-}
-
-const buttonStyle: CSS.Properties = {
-  marginLeft: "10px",
-  marginTop: "10px",
-  marginRight: "10px"
-}
 
 export function BotManagerPanel() {
   const { t } = useTranslation()
