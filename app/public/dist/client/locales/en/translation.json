@@ -1329,9 +1329,9 @@
     "PHIONE": "Phione is looking for an Aqua Egg",
     "PRIMAL": "Legend has it that you could unleash the ancient powers of these pokemons",
     "WONDER_GUARD": "Reduce received damage and received healing to 1",
-    "ELECTRIC_SURGE": "Give ELECTRIC_FIELD to your Electric Pokemon, boosting their damage by 20%",
-    "GRASSY_SURGE": "Give GRASS_FIELD to your Grass Pokemon, boosting their damage by 20%",
-    "MISTY_SURGE": "Give FAIRY_FIELD to your Fairy Pokemon, boosting their damage by 20%",
+    "ELECTRIC_SURGE": "Give ELECTRIC_FIELD to your ELECTRIC Pokemon, boosting their damage by 20%",
+    "GRASSY_SURGE": "Give GRASS_FIELD to your GRASS Pokemon, boosting their damage by 20%",
+    "MISTY_SURGE": "Give FAIRY_FIELD to your FAIRY Pokemon, boosting their damage by 20%",
     "PSYCHIC_SURGE": "Give PSYCHIC_FIELD to your Psychic Pokemon, boosting their damage by 20%",
     "EEVEE": "Eevee can evolve into one of the 8 Eeveelutions when given a synergy stone",
     "TREE": "Pretends to be a tree and does not attack but gain 2 ATK per second instead (stackable).\nStarts attacking when PP bar is full",
@@ -1420,10 +1420,10 @@
     "PARALYSIS": "Reduce ATK_SPEED by 40%",
     "ARMOR_REDUCTION": "Reduce DEF & SPE_DEF by 50%",
     "RUNE_PROTECT": "Protects from SPECIAL and status alterations.",
-    "ELECTRIC_FIELD": "Increase damage dealt by 20% (Electric only)",
-    "PSYCHIC_FIELD": "Increase damage dealt by 20% (Psychic only)",
-    "GRASS_FIELD": "Increase damage dealt by 20% (Grass only)",
-    "FAIRY_FIELD": "Increase damage dealt by 20% (Fairy only)"
+    "ELECTRIC_FIELD": "Increase damage dealt by 20% (ELECTRIC only)",
+    "PSYCHIC_FIELD": "Increase damage dealt by 20% (PSYCHIC only)",
+    "GRASS_FIELD": "Increase damage dealt by 20% (GRASS only)",
+    "FAIRY_FIELD": "Increase damage dealt by 20% (FAIRY only)"
   },
   "synergy": {
     "NORMAL": "Normal",

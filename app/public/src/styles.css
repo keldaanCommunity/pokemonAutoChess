@@ -38,6 +38,10 @@ body.grab.grabbing {
   border: 1px solid #000000;
 }
 
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 body {
   margin: 0;
   width: 100vw;
