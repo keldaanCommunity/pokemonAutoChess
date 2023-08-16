@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Tooltip } from "react-tooltip"
+import ReactTooltip from "react-tooltip"
 import PRECOMPUTED_TYPE_POKEMONS_ALL from "../../../../../models/precomputed/type-pokemons-all.json"
 import { SynergyTriggers, RarityColor } from "../../../../../types/Config"
 import { Synergy, SynergyEffects } from "../../../../../types/enum/Synergy"
@@ -100,7 +100,8 @@ export default function WikiType(props: { type: Synergy | "all" }) {
                           src={getPortraitSrc(p.index)}
                           alt={p.name}
                           title={p.name}
-                          data-tooltip-id="pokemon-detail"
+                          data-tip
+                          data-for="pokemon-detail"
                           onMouseOver={() => {
                             setHoveredPokemon(p)
                           }}
@@ -115,15 +116,15 @@ export default function WikiType(props: { type: Synergy | "all" }) {
         </tbody>
       </table>
       {hoveredPokemon && (
-        <Tooltip
+        <ReactTooltip
           id="pokemon-detail"
           className="customeTheme game-pokemon-detail-tooltip"
-          float={true}
+          effect="float"
           place="bottom"
-          data-tooltip-offset={{ bottom: 20 }}
+          offset={{ bottom: 20 }}
         >
           <GamePokemonDetail pokemon={hoveredPokemon} />
-        </Tooltip>
+        </ReactTooltip>
       )}
     </div>
   )

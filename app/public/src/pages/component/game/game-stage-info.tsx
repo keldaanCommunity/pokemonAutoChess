@@ -3,7 +3,7 @@ import { useAppSelector } from "../../../hooks"
 import { getAvatarSrc, getPortraitSrc } from "../../../utils"
 import { cc } from "../../utils/jsx"
 import TimerBar from "./game-timer-bar"
-import { Tooltip } from "react-tooltip"
+import ReactTooltip from "react-tooltip"
 import {
   AdditionalPicksStages,
   ItemCarouselStages,
@@ -49,8 +49,12 @@ export default function GameStageInfo() {
   return (
     <>
       <div id="game-stage-info" className="nes-container">
-        <div className="stage-information" data-tooltip-id="detail-stage">
-          <Tooltip id="detail-stage" className="customeTheme" place="bottom">
+        <div className="stage-information" data-tip data-for="detail-stage">
+          <ReactTooltip
+            id="detail-stage"
+            className="customeTheme"
+            place="bottom"
+          >
             <p>
               <span className="help">{t("pve_stages")}:</span>{" "}
               {NeutralStage.map((s) => s.turn).join(", ")}
@@ -67,7 +71,7 @@ export default function GameStageInfo() {
               <span className="help">{t("unique_picks")}:</span> {t("stages")}{" "}
               {PortalCarouselStages.join(t("and"))}
             </p>
-          </Tooltip>
+          </ReactTooltip>
           <p>
             {t("stage")} {stageLevel}
           </p>
@@ -103,8 +107,12 @@ export default function GameStageInfo() {
         </div>
 
         {opponentName != "" && (
-          <div className="weather-information" data-tooltip-id="detail-weather">
-            <Tooltip
+          <div
+            className="weather-information"
+            data-tip
+            data-for="detail-weather"
+          >
+            <ReactTooltip
               id="detail-weather"
               className="customeTheme"
               place="bottom"
@@ -116,7 +124,7 @@ export default function GameStageInfo() {
               <p>
                 {addIconsToDescription(t(`weather_description.${weather}`))}
               </p>
-            </Tooltip>
+            </ReactTooltip>
             <img src={`/assets/icons/weather/${weather.toLowerCase()}.svg`} />
           </div>
         )}
@@ -232,15 +240,16 @@ export function StagePath() {
               victory: step.result === BattleResult.WIN,
               draw: step.result === BattleResult.DRAW
             })}
-            data-tooltip-id={"stage-path-" + i}
+            data-tip
+            data-for={"stage-path-" + i}
           >
-            <Tooltip
+            <ReactTooltip
               id={"stage-path-" + i}
               className="customeTheme"
               place="bottom"
             >
               {step.title}
-            </Tooltip>
+            </ReactTooltip>
             <img src={step.icon}></img>
           </div>
           {i < path.length - 1 && <span>―</span>}

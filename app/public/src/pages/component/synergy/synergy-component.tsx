@@ -1,6 +1,6 @@
 import React from "react"
 import { SynergyTriggers } from "../../../../../types/Config"
-import { Tooltip } from "react-tooltip"
+import ReactTooltip from "react-tooltip"
 import SynergyDetailComponent from "./synergy-detail-component"
 import SynergyIcon from "../icons/synergy-icon"
 import { Synergy } from "../../../../../types/enum/Synergy"
@@ -35,16 +35,17 @@ export default function SynergyComponent(props: {
             : "none",
         cursor: "var(--cursor-hover)"
       }}
-      data-tooltip-id={"detail-" + props.type}
+      data-tip
+      data-for={"detail-" + props.type}
     >
-      <Tooltip
+      <ReactTooltip
         id={"detail-" + props.type}
         className="customeTheme"
         place="right"
-        data-tooltip-offset={{ bottom: (5 - props.index) * 50 }}
+        offset={{ bottom: (5 - props.index) * 50 }}
       >
         <SynergyDetailComponent type={props.type} value={props.value} />
-      </Tooltip>
+      </ReactTooltip>
 
       <SynergyIcon type={props.type} size="40px" />
       <span

@@ -1,5 +1,5 @@
 import React from "react"
-import { Tooltip } from "react-tooltip"
+import ReactTooltip from "react-tooltip"
 import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
 import { RarityColor } from "../../../../../types/Config"
 import { getPortraitSrc } from "../../../utils"
@@ -44,7 +44,8 @@ export default function GamePokemonDuoPortrait(props: {
               "game-pokemon-portrait-duo-part",
               "game-pokemon-portrait-duo-part-" + (i === 0 ? "down" : "up")
             )}
-            data-tooltip-id={`tooltip-${props.origin}-${props.index}-${p.index}`}
+            data-tip
+            data-for={`tooltip-${props.origin}-${props.index}-${p.index}`}
             style={{
               backgroundImage: `url("${getPortraitSrc(
                 p.index,
@@ -53,13 +54,13 @@ export default function GamePokemonDuoPortrait(props: {
               )}")`
             }}
           ></div>
-          <Tooltip
+          <ReactTooltip
             id={`tooltip-${props.origin}-${props.index}-${p.index}`}
             className="customeTheme game-pokemon-detail-tooltip"
             place="bottom"
           >
             <GamePokemonDetail pokemon={p} pokemonConfig={duoConfig[i]} />
-          </Tooltip>
+          </ReactTooltip>
         </React.Fragment>
       ))}
       <ul className="game-pokemon-portrait-types">

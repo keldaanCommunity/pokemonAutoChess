@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Tooltip } from "react-tooltip"
+import ReactTooltip from "react-tooltip"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import PokemonFactory, {
   isAdditionalPick
@@ -55,7 +55,8 @@ export default function WikiWeather() {
                     className={cc("pokemon-portrait", {
                       additional: isAdditionalPick(p.name)
                     })}
-                    data-tooltip-id="pokemon-detail"
+                    data-tip
+                    data-for="pokemon-detail"
                     onMouseOver={() => {
                       setHoveredPokemon(p)
                     }}
@@ -73,13 +74,13 @@ export default function WikiWeather() {
         ))}
       </ul>
       {hoveredPokemon && (
-        <Tooltip
+        <ReactTooltip
           id="pokemon-detail"
           className="customeTheme game-pokemon-detail-tooltip"
-          float={true}
+          effect="float"
         >
           <GamePokemonDetail pokemon={hoveredPokemon} />
-        </Tooltip>
+        </ReactTooltip>
       )}
     </div>
   )
