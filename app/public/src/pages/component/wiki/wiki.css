@@ -69,8 +69,10 @@
 
 #wiki-page .wiki-status li {
   list-style: none;
-  display: grid;
-  grid-template: auto 1fr / 150px 1fr;
+}
+
+#wiki-page .wiki-status div {
+  display: flex;
 }
 
 #wiki-page .wiki-stat li {
