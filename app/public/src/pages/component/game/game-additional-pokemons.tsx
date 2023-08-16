@@ -1,5 +1,5 @@
 import React from "react"
-import { Tooltip } from "react-tooltip"
+import ReactTooltip from "react-tooltip"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { useAppSelector } from "../../../hooks"
 import { getPortraitSrc } from "../../../utils"
@@ -21,35 +21,37 @@ export function GameAdditionalPokemons() {
   } else {
     return (
       <>
-        <Tooltip
+        <ReactTooltip
           id="detail-additional-pokemons"
           className="customeTheme"
           place="top"
         >
           <p className="help">{t("additional_pokemon_hint")}</p>
-        </Tooltip>
+        </ReactTooltip>
         <div
           className="nes-container game-additional-pokemons"
-          data-tooltip-id="detail-additional-pokemons"
+          data-tip
+          data-for="detail-additional-pokemons"
         >
           {additionalPokemons.map((p, index) => {
             const pokemon = PokemonFactory.createPokemonFromName(p)
             return (
               <React.Fragment key={"additional-pokemon-tooltip-" + index}>
-                <Tooltip
+                <ReactTooltip
                   id={"additional-pokemon-" + p}
                   className="customeTheme game-pokemon-detail-tooltip"
                   place="top"
-                  data-tooltip-offset={{ top: index < 4 ? 60 : 130 }}
+                  offset={{ top: index < 4 ? 60 : 130 }}
                 >
                   <GamePokemonDetail
                     pokemon={pokemon}
                     pokemonConfig={pokemonCollection.get(pokemon.index)}
                   />
-                </Tooltip>
+                </ReactTooltip>
                 <img
                   src={getPortraitSrc(PkmIndex[p])}
-                  data-tooltip-id={"additional-pokemon-" + p}
+                  data-tip
+                  data-for={"additional-pokemon-" + p}
                 />
               </React.Fragment>
             )

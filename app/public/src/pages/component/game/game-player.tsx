@@ -1,5 +1,5 @@
 import React from "react"
-import { Tooltip } from "react-tooltip"
+import ReactTooltip from "react-tooltip"
 import { CircularProgressbarWithChildren } from "react-circular-progressbar"
 
 import GamePlayerDetail from "./game-player-detail"
@@ -37,16 +37,17 @@ export default function GamePlayer(props: {
         dead: props.player.life <= 0
       })}
       onClick={playerClick}
-      data-tooltip-id={"detail-" + props.player.id}
+      data-tip
+      data-for={"detail-" + props.player.id}
     >
       <CircularProgressbarWithChildren value={props.player.life} />
       <div className="nes-container life-text">{props.player.life}</div>
-      <Tooltip
+      <ReactTooltip
         id={"detail-" + props.player.id}
         className="customeTheme"
-        style={{ color: "#000000" }}
+        textColor="#000000"
         place="left"
-        data-tooltip-offset={{ left: 30, bottom: props.index === 0 ? 50 : 0 }}
+        offset={{ left: 30, bottom: props.index === 0 ? 50 : 0 }}
       >
         <GamePlayerDetail
           name={props.player.name}
@@ -56,7 +57,7 @@ export default function GamePlayer(props: {
           history={props.player.history}
           synergies={props.player.synergies}
         />
-      </Tooltip>
+      </ReactTooltip>
     </div>
   )
 }

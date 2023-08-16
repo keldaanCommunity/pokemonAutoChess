@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from "react"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
-import { Tooltip } from "react-tooltip"
+import ReactTooltip from "react-tooltip"
 import CSS from "csstype"
 import { IStep } from "../../../../../models/mongo-models/bot-v2"
 import { getPortraitSrc } from "../../../utils"
@@ -79,10 +79,12 @@ export default function TeamEditor(props: {
   return (
     <div className="nes-container" style={tabStyle}>
       <div style={{ display: "flex", alignItems: "center" }}>
-        <p data-tooltip-id={"help"}>{t("help")}</p>
-        <Tooltip id={"help"} className="customeTheme">
+        <p data-tip data-for={"help"}>
+          {t("help")}
+        </p>
+        <ReactTooltip id={"help"} className="customeTheme">
           <p>{t("help_create_bot")}</p>
-        </Tooltip>
+        </ReactTooltip>
 
         <div className="nes-field is-inline">
           <label style={labelStyle} htmlFor="default_select">
@@ -164,11 +166,15 @@ export default function TeamEditor(props: {
                     marginBottom: "10px"
                   }}
                 >
-                  <label htmlFor="default_select" data-tooltip-id={"step-" + i}>
-                    <Tooltip
+                  <label
+                    htmlFor="default_select"
+                    data-tip
+                    data-for={"step-" + i}
+                  >
+                    <ReactTooltip
                       id={"step-" + i}
                       className="customeTheme"
-                      style={{ color: "#000000" }}
+                      textColor="#000000"
                     >
                       <p>{t("points_required_hint")}</p>
                       <p>{t("next_step_hint")}</p>
@@ -177,7 +183,7 @@ export default function TeamEditor(props: {
                         <li>{t("defeat_step_hint")}</li>
                       </ul>
                       <p>{t("step_bot_hint")}</p>
-                    </Tooltip>
+                    </ReactTooltip>
                     {t("points_required")}: {props.steps[i].roundsRequired}
                   </label>
                   <p>{t("faster")}</p>

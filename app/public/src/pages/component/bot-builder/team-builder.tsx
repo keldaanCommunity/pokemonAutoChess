@@ -7,7 +7,7 @@ import ModalMenu from "./modal-menu"
 import ItemPicker from "./item-picker"
 import PokemonPicker from "./pokemon-picker"
 import TeamEditor from "./team-editor"
-import { Tooltip } from "react-tooltip"
+import ReactTooltip from "react-tooltip"
 import { IBot, IStep } from "../../../../../models/mongo-models/bot-v2"
 import CSS from "csstype"
 import { produce } from "immer"
@@ -301,14 +301,15 @@ export default function TeamBuilder() {
             )
           }
           className="bubbly green"
-          data-tooltip-id={"mode"}
+          data-tip
+          data-for={"mode"}
         >
           {mode} {t("mode")}
-          <Tooltip id={"mode"} className="customeTheme" place="bottom">
+          <ReactTooltip id={"mode"} className="customeTheme" place="bottom">
             <p>{t("current_edition_click")}</p>
             <p>{t("write_mode_hint")}</p>
             <p> {t("erase_mode_hint")}</p>
-          </Tooltip>
+          </ReactTooltip>
         </button>
         <button
           style={buttonStyle}
@@ -316,12 +317,13 @@ export default function TeamBuilder() {
             setCopyStep(JSON.parse(JSON.stringify(bot.steps[step])))
           }}
           className="bubbly green"
-          data-tooltip-id={"copy"}
+          data-tip
+          data-for={"copy"}
         >
-          <Tooltip id={"copy"} className="customeTheme" place="bottom">
+          <ReactTooltip id={"copy"} className="customeTheme" place="bottom">
             <p>{t("copy_current_step")}</p>
             <p> {t("paste_current_step")}</p>
-          </Tooltip>
+          </ReactTooltip>
           {t("copy_step")}
         </button>
         <button
@@ -336,12 +338,13 @@ export default function TeamBuilder() {
             }
           }}
           className="bubbly green"
-          data-tooltip-id={"paste"}
+          data-tip
+          data-for={"paste"}
         >
-          <Tooltip id={"paste"} className="customeTheme" place="bottom">
+          <ReactTooltip id={"paste"} className="customeTheme" place="bottom">
             <p>{t("paste_current_step_click")}</p>
             <p>{t("paste_current_step_hint")}</p>
-          </Tooltip>
+          </ReactTooltip>
           {t("paste_step")}
         </button>
       </div>

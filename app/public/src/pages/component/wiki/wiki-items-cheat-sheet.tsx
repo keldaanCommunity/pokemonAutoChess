@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import { ItemRecipe } from "../../../../../types/Config"
 import { BasicItems, Item } from "../../../../../types/enum/Item"
-import { Tooltip } from "react-tooltip"
+import ReactTooltip from "react-tooltip"
 import CSS from "csstype"
-import { ItemDetailTooltip } from "../../../game/components/item-detail.tsx"
+import { ItemDetailTooltip } from "../../../game/components/item-detail"
 
 const imgStyle: CSS.Properties = {
   imageRendering: "pixelated",
@@ -34,7 +34,8 @@ export default function WikiItemsCheatSheet() {
                 <th
                   key={i}
                   style={{ paddingBottom: "30px" }}
-                  data-tooltip-id="detail-item"
+                  data-tip
+                  data-for="detail-item"
                   onMouseOver={() => setItemHovered(i)}
                 >
                   <img style={imgStyle} src={"assets/item/" + i + ".png"}></img>
@@ -47,7 +48,8 @@ export default function WikiItemsCheatSheet() {
               <tr key={"tr-" + i}>
                 <th
                   style={{ paddingRight: "30px" }}
-                  data-tooltip-id="detail-item"
+                  data-tip
+                  data-for="detail-item"
                   onMouseOver={() => setItemHovered(i)}
                 >
                   <img style={imgStyle} src={"assets/item/" + i + ".png"}></img>
@@ -68,7 +70,8 @@ export default function WikiItemsCheatSheet() {
                     <td
                       style={{ paddingRight: "5px" }}
                       key={"td-" + i + "-" + j}
-                      data-tooltip-id="detail-item"
+                      data-tip
+                      data-for="detail-item"
                       onMouseOver={() => setItemHovered(tier2Item)}
                     >
                       <img
@@ -84,9 +87,12 @@ export default function WikiItemsCheatSheet() {
         </tbody>
       </table>
       {itemHovered && (
-        <Tooltip id="detail-item" className="customeTheme item-detail-tooltip">
+        <ReactTooltip
+          id="detail-item"
+          className="customeTheme item-detail-tooltip"
+        >
           <ItemDetailTooltip item={itemHovered} depth={1} />
-        </Tooltip>
+        </ReactTooltip>
       )}
     </div>
   )
