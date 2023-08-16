@@ -614,7 +614,7 @@ export default class PokemonState {
     }
   }
 
-  getMostSurroundedCoordianteAvailablePlace(
+  getMostSurroundedCoordinateAvailablePlace(
     pokemon: PokemonEntity,
     board: Board
   ): { x: number; y: number } | undefined {

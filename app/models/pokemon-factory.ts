@@ -476,6 +476,7 @@ import {
   Solrock,
   Spearow,
   Spheal,
+  Spectrier,
   Spiritomb,
   Squirtle,
   Stakataka,
@@ -1992,6 +1993,8 @@ export default class PokemonFactory {
         return new Sentret(s, e)
       case Pkm.FURRET:
         return new Furret(s, e)
+      case Pkm.SPECTRIER:
+        return new Spectrier(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:

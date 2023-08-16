@@ -51,7 +51,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     emotion: Emotion,
     shiny: boolean,
     index: string,
-    abilityTier: number,
+    stars: number,
     evolution: Pkm
   ) {
     super(scene, x, y)
@@ -119,6 +119,16 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     pokemonRarity.className = "game-pokemon-detail-entry-rarity"
     entry.appendChild(pokemonRarity)
 
+    const pokemonStars = document.createElement("p")
+    pokemonStars.className = "game-pokemon-detail-entry-tier"
+    for (let i = 0; i < stars; i++) {
+      const img = document.createElement("img")
+      img.src = "assets/ui/star.svg"
+      img.setAttribute("height", "16")
+      pokemonStars.appendChild(img)
+    }
+    entry.appendChild(pokemonStars)
+
     const typesList = document.createElement("div")
     typesList.className = "game-pokemon-detail-types"
     types.forEach((type) => {
@@ -164,7 +174,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
       this.passiveDescription = document.createElement("div")
       this.passiveDescription.className = "game-pokemon-detail-passive"
       this.passiveDescriptionRoot = ReactDOM.createRoot(this.passiveDescription)
-      this.updatePassiveDescription(passive, abilityTier, ap)
+      this.updatePassiveDescription(passive, stars, ap)
       wrap.appendChild(this.passiveDescription)
     }
 
@@ -179,7 +189,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
 
       this.abilityDescription = document.createElement("div")
       this.abilityDescriptionRoot = ReactDOM.createRoot(this.abilityDescription)
-      this.updateAbilityDescription(skill, abilityTier, ap)
+      this.updateAbilityDescription(skill, stars, ap)
       ultNameWrap.appendChild(ultName)
       ult.appendChild(ultNameWrap)
       ult.appendChild(this.abilityDescription)

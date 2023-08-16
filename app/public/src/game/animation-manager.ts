@@ -986,6 +986,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.ASTRAL_BARRAGE,
+      frames: this.game.anims.generateFrameNames(Ability.ASTRAL_BARRAGE, {
+        start: 0,
+        end: 2,
+        zeroPad: 3
+      }),
+      duration: 150,
+      repeat: -1
+    })
+
+    this.game.anims.create({
       key: Ability.PLASMA_FIST,
       frames: this.game.anims.generateFrameNames(Ability.PLASMA_FIST, {
         start: 0,

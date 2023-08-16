@@ -169,7 +169,8 @@ import {
   MagicBounceStrategy,
   PoisonJabStrategy,
   ShellSmashStrategy,
-  HelpingHandStrategy
+  HelpingHandStrategy,
+  AstralBarrageStrategy
 } from "../attack-strategy"
 import {
   HiddenPowerAStrategy,
@@ -402,5 +403,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.HIDDEN_POWER_EM]: new HiddenPowerEMStrategy(),
   [Ability.POISON_JAB]: new PoisonJabStrategy(),
   [Ability.SHELL_SMASH]: new ShellSmashStrategy(),
-  [Ability.HELPING_HAND]: new HelpingHandStrategy()
+  [Ability.HELPING_HAND]: new HelpingHandStrategy(),
+  [Ability.ASTRAL_BARRAGE]: new AstralBarrageStrategy()
 }

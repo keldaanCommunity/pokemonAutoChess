@@ -2915,7 +2915,7 @@ export class DiveStrategy extends AttackStrategy {
     const damage = pokemon.stars === 3 ? 60 : pokemon.stars === 2 ? 30 : 15
     const freezeDuration = 1500
     const mostSurroundedCoordinate =
-      state.getMostSurroundedCoordianteAvailablePlace(pokemon, board)
+      state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
 
     if (mostSurroundedCoordinate) {
       pokemon.moveTo(
@@ -5088,6 +5088,51 @@ export class HelpingHandStrategy extends AttackStrategy {
           positionY: ally.positionY
         })
       }
+    }
+  }
+}
+
+export class AstralBarrageStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    let damagePerGhost = 20
+
+    const enemies: PokemonEntity[] = []
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
+      if (tg && pokemon.team != tg.team) {
+        enemies.push(tg)
+      }
+    })
+
+    const nbGhosts = 3 * (1 + (2 * pokemon.ap) / 100)
+    for (let i = 0; i < nbGhosts; i++) {
+      const randomTarget = pickRandomIn(enemies)
+      setTimeout(() => {
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: Ability.ASTRAL_BARRAGE,
+          positionX: pokemon.positionX,
+          positionY: pokemon.positionY,
+          targetX: randomTarget.positionX,
+          targetY: randomTarget.positionY,
+          orientation: pokemon.orientation
+        })
+        if (randomTarget?.life > 0) {
+          randomTarget.handleSpecialDamage(
+            damagePerGhost,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      }, 100 * i)
     }
   }
 }
