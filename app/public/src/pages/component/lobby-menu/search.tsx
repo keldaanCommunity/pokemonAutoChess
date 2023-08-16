@@ -47,7 +47,10 @@ export default function Search() {
       <button
         className="bubbly red"
         onClick={() => {
-          dispatch(ban({ uid: user.id, name: user.name }))
+          const reason = prompt(`Reason for the ban:`)
+          dispatch(
+            ban({ uid: user.id, name: user.name, reason: reason ? reason : "" })
+          )
         }}
       >
         <p style={{ margin: "0px" }}>{t("ban_user")}</p>
