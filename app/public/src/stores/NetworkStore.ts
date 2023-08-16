@@ -252,7 +252,10 @@ export const networkSlice = createSlice({
     deleteRoom: (state) => {
       state.preparation?.send(Transfer.DELETE_ROOM)
     },
-    ban: (state, action: PayloadAction<{ uid: string; name: string }>) => {
+    ban: (
+      state,
+      action: PayloadAction<{ uid: string; name: string; reason: string }>
+    ) => {
       state.lobby?.send(Transfer.BAN, action.payload)
     },
     unban: (state, action: PayloadAction<{ uid: string; name: string }>) => {

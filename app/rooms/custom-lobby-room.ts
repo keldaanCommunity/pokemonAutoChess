@@ -58,6 +58,7 @@ import { Language } from "../types/enum/Language"
 
 export default class CustomLobbyRoom extends Room<LobbyState> {
   discordWebhook: WebhookClient | undefined
+  discordBanWebhook: WebhookClient | undefined
   bots: Map<string, IBot>
   meta: IMeta[]
   metaItems: IItemsStatistic[]
@@ -87,6 +88,12 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     if (process.env.DISCORD_WEBHOOK_URL) {
       this.discordWebhook = new WebhookClient({
         url: process.env.DISCORD_WEBHOOK_URL
+      })
+    }
+
+    if (process.env.DISCORD_BAN_WEBHOOK_URL) {
+      this.discordBanWebhook = new WebhookClient({
+        url: process.env.DISCORD_BAN_WEBHOOK_URL
       })
     }
 
@@ -200,8 +207,16 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
 
     this.onMessage(
       Transfer.BAN,
-      (client, { uid, name }: { uid: string; name: string }) => {
-        this.dispatcher.dispatch(new BanUserCommand(), { client, uid, name })
+      (
+        client,
+        { uid, name, reason }: { uid: string; name: string; reason: string }
+      ) => {
+        this.dispatcher.dispatch(new BanUserCommand(), {
+          client,
+          uid,
+          name,
+          reason
+        })
       }
     )
 

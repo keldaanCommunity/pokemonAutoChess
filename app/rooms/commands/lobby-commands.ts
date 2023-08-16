@@ -733,16 +733,18 @@ export class OnSearchCommand extends Command<
 
 export class BanUserCommand extends Command<
   CustomLobbyRoom,
-  { client: Client; uid: string; name: string }
+  { client: Client; uid: string; name: string; reason: string }
 > {
   async execute({
     client,
     uid,
-    name
+    name,
+    reason
   }: {
     client: Client
     uid: string
     name: string
+    reason: string
   }) {
     try {
       const user = this.state.users.get(client.auth.uid)
@@ -757,6 +759,24 @@ export class BanUserCommand extends Command<
             name
           })
           client.send(Transfer.BANNED, `${user.name} banned the user ${name}`)
+
+          const dsEmbed = new EmbedBuilder()
+            .setTitle(`${user.name} banned the user ${name}`)
+            .setAuthor({
+              name: user.name,
+              iconURL: getAvatarSrc(user.avatar)
+            })
+            .setDescription(
+              `${user.name} banned the user ${name}. Reason: ${reason}`
+            )
+            .setThumbnail(getAvatarSrc(user.avatar))
+          try {
+            this.room.discordBanWebhook?.send({
+              embeds: [dsEmbed]
+            })
+          } catch (error) {
+            logger.error(error)
+          }
         } else {
           client.send(Transfer.BANNED, `${name} was already banned`)
         }
@@ -777,7 +797,7 @@ export class UnbanUserCommand extends Command<
   CustomLobbyRoom,
   { client: Client; uid: string; name: string }
 > {
-  execute({
+  async execute({
     client,
     uid,
     name
@@ -789,16 +809,25 @@ export class UnbanUserCommand extends Command<
     try {
       const user = this.state.users.get(client.auth.uid)
       if (user && (user.role === Role.ADMIN || user.role === Role.MODERATOR)) {
-        BannedUser.deleteOne({ uid }, (err, res) => {
-          if (err) {
-            logger.error(err)
-          } else if (res?.deletedCount > 0) {
-            client.send(
-              Transfer.BANNED,
-              `${user.name} unbanned the user ${name}`
-            )
+        const res = await BannedUser.deleteOne({ uid })
+        if (res.deletedCount > 0) {
+          client.send(Transfer.BANNED, `${user.name} unbanned the user ${name}`)
+          const dsEmbed = new EmbedBuilder()
+            .setTitle(`${user.name} unbanned the user ${name}`)
+            .setAuthor({
+              name: user.name,
+              iconURL: getAvatarSrc(user.avatar)
+            })
+            .setDescription(`${user.name} unbanned the user ${name}`)
+            .setThumbnail(getAvatarSrc(user.avatar))
+          try {
+            this.room.discordBanWebhook?.send({
+              embeds: [dsEmbed]
+            })
+          } catch (error) {
+            logger.error(error)
           }
-        })
+        }
       }
     } catch (error) {
       logger.error(error)
