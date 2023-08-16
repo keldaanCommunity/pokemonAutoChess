@@ -68,11 +68,8 @@ export default function WikiStatus() {
     <ul className="wiki-status">
       {Object.values(Status).map((status) => (
         <li key={status} className="nes-container">
-          <div>
-            <img src={`assets/status/${status}.gif`} alt={status} />
-            <h2>{addIconsToDescription(status)}</h2>
-          </div>
-
+          <img src={`assets/status/demo/${status}.png`} alt={status} />
+          <h2>{addIconsToDescription(status)}</h2>
           <p className="description">
             {addIconsToDescription(t(`status_description.${status}`))}
           </p>

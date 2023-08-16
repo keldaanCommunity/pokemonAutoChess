@@ -69,10 +69,9 @@
 
 #wiki-page .wiki-status li {
   list-style: none;
-}
-
-#wiki-page .wiki-status div {
-  display: flex;
+  display: grid;
+  grid-template: auto 1fr / 150px 1fr;
+  padding: 0.5em;
 }
 
 #wiki-page .wiki-stat li {
@@ -82,7 +81,8 @@
 }
 
 #wiki-page .wiki-status .test-anim-wrapper,
-#wiki-page .wiki-stat li img {
+#wiki-page .wiki-status li > img,
+#wiki-page .wiki-stat li > img {
   grid-row: 1/3;
 }
 
