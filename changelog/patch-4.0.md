@@ -23,6 +23,7 @@ Gligar,Gliscor,Shellder,Cloyster, Furret, Sentret
 - Buff all Seel/Dewgong stats
 - Change Igglypuff sleep ability: Put Asleep 1/2/3 enemies in the back lines for 2.5 seconds
 - Nerf Miltank Buff the defense by 5 and deals ~~6x~~ -> 5x the defense as special damage
+- Nerf Lopynny Mana ~~60~~ -> 80
 
 # Changes to Synergies
 
