@@ -2237,22 +2237,8 @@ export class SleepStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let timer = 0
-    switch (pokemon.stars) {
-      case 1:
-        timer = 1500
-        break
-      case 2:
-        timer = 3000
-        break
-      case 3:
-        timer = 4500
-        break
-      default:
-        break
-    }
-
-    const count = 2
+    const timer = 2500
+    const count = pokemon.stars
     const rank = new Array<PokemonEntity>()
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
@@ -4693,7 +4679,7 @@ export class RolloutStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const multiplier = 6
+    const multiplier = 5
     const defenseBoost = 5
 
     pokemon.addDefense(defenseBoost, true)
@@ -5101,7 +5087,7 @@ export class AstralBarrageStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damagePerGhost = 20
+    const damagePerGhost = 20
 
     const enemies: PokemonEntity[] = []
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {

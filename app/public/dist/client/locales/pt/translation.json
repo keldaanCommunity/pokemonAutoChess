@@ -585,7 +585,8 @@
     "SHELLDER": "Shellder",
     "CLOYSTER": "Claustro",
     "FURRET": "Furret",
-    "SENTRET": "Sentret"
+    "SENTRET": "Sentret",
+    "SPECTRIER": "Spectrier"
   },
   "emotion": {
     "Teary-Eyed": "Olhos marejados",
@@ -807,7 +808,8 @@
     "HIDDEN_POWER_EM": "Poder escondido (!)",
     "POISON_JAB": "Jab Venenoso",
     "SHELL_SMASH": "Shell Smash",
-    "HELPING_HAND": "Mão amiga"
+    "HELPING_HAND": "Mão amiga",
+    "ASTRAL_BARRAGE": "barragem astral"
   },
   "ability_description": {
     "DEFAULT": "Padrão",
@@ -963,7 +965,7 @@
     "GIGATON_HAMMER": "Oferece [100,200,400,SP] SPECIAL, mas SILENCE por 6 segundos",
     "ACROBATICS": "Ofertas [20,40,80,SP] SPECIAL. Dano dobrado se o lançador não tiver itens retidos.",
     "ABSORB": "Oferece [30,60,120,SP] SPECIAL e cura [3,6,12,SP] para aliados adjacentes",
-    "ROLLOUT": "Aumenta a DEF em [5,SP] e trata 6x a DEF como SPECIAL",
+    "ROLLOUT": "Aumenta a DEF em [5,SP] e trata 5x a DEF como SPECIAL",
     "THRASH": "Aumente o ATK em 110% e torne-se CONFUSION por 3s",
     "SOLAR_BEAM": "Distribui [30,60,120,SP] SPECIAL em linha reta atrás do alvo. Se o tempo estiver ensolarado, os alvos são BURN por 3s e restauram 40 PP",
     "MAGMA_STORM": "O alvo fica preso em um redemoinho de fogo que causa [80, SP] SPECIAL antes de se mover para um alvo adjacente",
@@ -1007,7 +1009,8 @@
     "PETAL_DANCE": "Distribua [20,30,50,SP] ESPECIAL a [3,4,5] Pokémon inimigos",
     "FORECAST": "Dá [10,SP] SHIELD ao seu time, além de bônus adicional dependendo do clima:\n Sol: também dá [3,SP] ATK\n Chuva: também dá [20,SP] PP\n Snow: também dá [2,SP] DEF / SPE_DEF",
     "SHELL_SMASH": "Oferece [15, 30, SP] ESPECIAL aos inimigos adjacentes; ganhe 2 ATK, 20% AP e 20% ATK_SPEED e perca 1 DEF, 1 SPE_DEF",
-    "HELPING_HAND": "Dobre o dano do próximo feitiço lançado pelos aliados mais próximos [2,4,6]"
+    "HELPING_HAND": "Dobre o dano do próximo feitiço lançado pelos aliados mais próximos [2,4,6]",
+    "ASTRAL_BARRAGE": "Envia [3,SP=2] pequenos fantasmas em Pokémon adversários aleatórios. Cada um deles oferece 20 ESPECIAIS"
   },
   "effect": {
     "INGRAIN": "Inerente",
@@ -1362,7 +1365,8 @@
     "MAGIKARP": "8 Magikarp evolui em Gyarados",
     "GIRATINA": "Giratina alterna entre sua Forma Alterada e Forma de Origem, dependendo de sua posição no tabuleiro",
     "UNOWN": "Unown não pode segurar itens e desaparece após uma luta ou após lançar sua habilidade",
-    "POISON_HEAL": "Se o Pokémon for POISON, ele ganhará HP ao invés de receber dano"
+    "POISON_HEAL": "Se o Pokémon for POISON, ele ganhará HP ao invés de receber dano",
+    "GRIM_NEIGH": "Quando o Pokémon nocauteia um inimigo, ele emite um som de relincho aterrorizante que aumenta seu PA em 30"
   },
   "stat": {
     "ATK": "Ataque",
@@ -1377,7 +1381,8 @@
     "POWER_POINTS": "Power Points",
     "MAX_PP": "Maximo PP",
     "AP": "Poder de abilidade",
-    "SHIELD": "Escudo"
+    "SHIELD": "Escudo",
+    "HEALTH_POINTS": "Pontos de Saúde (HP)"
   },
   "stat_description": {
     "ATK": "Dano infligido em cada ataque básico",
@@ -1927,8 +1932,16 @@
     "LEGENDARY": "Lendário",
     "MYTHICAL": "Mítico",
     "HATCH": "Escotilha",
-    "SPECIAL": "Especial"
+    "SPECIAL": "Especial",
+    "ULTRA": "Ultra",
+    "UNIQUE": "Exclusivo"
   },
   "language": "Linguagem",
-  "community_translations": "As traduções são gerenciadas pela comunidade. Se você quiser adicionar ou\r\n              ajudar a melhorar uma tradução, acesse"
+  "community_translations": "As traduções são gerenciadas pela comunidade. Se você quiser adicionar ou\r\n              ajudar a melhorar uma tradução, acesse",
+  "leaderboard": "Entre os melhores",
+  "rooms": "quartos",
+  "leave_room": "sair da sala",
+  "tier": "Nível",
+  "buy_xp_tooltip": "Compre 4 XP por 4 ouro (atalho: F)",
+  "no_emotions_available": "Nenhuma emoção disponível"
 }

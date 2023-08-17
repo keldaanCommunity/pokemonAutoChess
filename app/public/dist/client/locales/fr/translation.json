@@ -651,7 +651,7 @@
     "LIQUIDATION": "Aqua-Brèche",
     "BURN": "Brûlure",
     "POISON": "Empoisonnement",
-    "SLEEP": "SLEEP",
+    "SLEEP": "Sommeil",
     "SILENCE": "Silence",
     "PROTECT": "Abri",
     "FREEZE": "Gel",
@@ -826,7 +826,6 @@
     "LIQUIDATION": "Inflige [20,40,80,SP] SPECIAL et retire [1,2,4] DEF de la cible",
     "BURN": "Inflige BURN à toute l'équipe ennemie pendant [5,10,20] secondes",
     "POISON": "POISON les [1,2,3] adversaires les plus proches pendant [3,6,9,SP=0.5] secondes",
-    "SLEEP": "SLEEP 2 ennemis sur la rangée arrière pendant [1.5,3,4.5] secondes",
     "DEFAULT": "Défault",
     "SILENCE": "SILENCE toute l'équipe ennemie pendant [2,4,8] secondes",
     "PROTECT": "PROTECT l'utilisateur, devenant invulnérable pendant [5,SP=0.5] secondes.",
@@ -957,7 +956,7 @@
     "GIGATON_HAMMER": "Inflige [100,200,400,SP] SPECIAL mais se SILENCE pendant 6 secondes",
     "ACROBATICS": "Inflige [20,40,80,SP] SPECIAL. Dégâts doublés si le lanceur ne tient aucun objet.",
     "ABSORB": "Inflige [30,60,120,SP] SPECIAL et soigne [3,6,12,SP] aux alliés adjacents",
-    "ROLLOUT": "Augmente la DEF de [5, SP] et inflige 6x la DEF en SPECIAL",
+    "ROLLOUT": "Augmente la DEF de [5, SP] et inflige 5x la DEF en SPECIAL",
     "THRASH": "Augmente l'ATK de 110% et inflige CONFUSION au porteur pendant 3 secondes",
     "SOLAR_BEAM": "Inflige [30,60,120,SP] SPECIAL en ligne droite derrière la cible. Si le temps est SUN, les cibles sont BURN pendant 3 secondes et restaurent 40 PP",
     "MAGMA_STORM": "La cible est piégée dans un maelström de feu qui inflige [80, SP] SPECIAL avant de se déplacer vers une cible adjacente",
@@ -1002,7 +1001,8 @@
     "FORECAST": "Donne [10, SP] SHIELD à votre équipe, plus un bonus supplémentaire en fonction de la météo :\n Soleil : donne également [3, SP] ATK\n Pluie : donne également [20,SP] PP\n Neige : donne également [2,SP] DEF / SPE_DEF",
     "SHELL_SMASH": "Inflige [15, 30, SP] SPÉCIAL aux ennemis adjacents ; gagne 2 ATK, 20% AP et 20% ATK_SPEED, et perd 1 DEF, 1 SPE_DEF",
     "HELPING_HAND": "Double les dégâts de la prochaine capacité lancée par les [2,4,6] alliés les plus proches",
-    "ASTRAL_BARRAGE": "Attaque des ennemis aléatoires avec [3,SP=2] petits spectres, chacun infligeant 20 SPECIAL"
+    "ASTRAL_BARRAGE": "Attaque des ennemis aléatoires avec [3,SP=2] petits spectres, chacun infligeant 20 SPECIAL",
+    "SLEEP": "Faites dormir [1,2,3] Pokémon ennemis dans la ligne de fond pendant 2,5 secondes"
   },
   "emotion": {
     "Teary-Eyed": "Larmoyant",
@@ -1938,5 +1938,10 @@
   "additional_pick": "Choix supplémentaire",
   "fight": "lutte",
   "language": "Langue",
-  "community_translations": "Les traductions sont gérées par la communauté. Si vous souhaitez ajouter ou\r\n              aider à améliorer une traduction, rendez-vous sur"
+  "community_translations": "Les traductions sont gérées par la communauté. Si vous souhaitez ajouter ou\r\n              aider à améliorer une traduction, rendez-vous sur",
+  "leaderboard": "Classement",
+  "rooms": "Pièces",
+  "leave_room": "Quitter la pièce",
+  "tier": "Étage",
+  "no_emotions_available": "Aucune émotion disponible"
 }

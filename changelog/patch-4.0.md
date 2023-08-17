@@ -10,7 +10,8 @@ patch announcement
 
 - New Minigame for unique picks: Portals !
 - You now see the same battle than your opponent, and can send emotes to him. "Ghost" opponents now are only added when the number of opponents alive is odd.
-- 
+-
+
 # New Pokemons:
 
 Gligar,Gliscor,Shellder,Cloyster, Furret, Sentret
@@ -19,13 +20,15 @@ Gligar,Gliscor,Shellder,Cloyster, Furret, Sentret
 
 - Eternatus rework: gains Fossil Synergy, change range to 1 ; adjusted stats
 - Dynamax Cannon (Eternatus, Mewtwo): now can fire in 8 directions, and deal damage based on target Max HP instead of current HP
+- Buff all Seel/Dewgong stats
+- Change Igglypuff sleep ability: Put Asleep 1/2/3 enemies in the back lines for 2.5 seconds
+- Nerf Miltank Buff the defense by 5 and deals ~~6x~~ -> 5x the defense as special damage
 
 # Changes to Synergies
 
 # Changes to Items
 
 # UI
-
 
 - Pokemon categories renamed: Legendary becomes Ultra, Mythical T10 becomes Unique, Mythical T20 becomes Legendary
 - Pokemon now have their tier displayed in their tooltip as stars
