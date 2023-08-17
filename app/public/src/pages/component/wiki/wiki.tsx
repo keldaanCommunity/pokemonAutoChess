@@ -12,15 +12,19 @@ import "./wiki.css"
 import WikiAbility from "./wiki-ability"
 import { useTranslation } from "react-i18next"
 
-export default function Wiki() {
+export default function Wiki({ inGame = false }: { inGame: boolean }) {
   const { t } = useTranslation()
   return (
     <div id="wiki-page">
       <div className="nes-container">
         <Tabs>
           <TabList>
-            <Tab key="title-faq">{t("faq.faq")}</Tab>
-            <Tab key="title-tutorials">{t("how_to_play")}</Tab>
+            {!inGame && (
+              <>
+                <Tab key="title-faq">{t("faq.faq")}</Tab>
+                <Tab key="title-tutorials">{t("how_to_play")}</Tab>
+              </>
+            )}
             <Tab key="title-pokemon">{t("pokemons_label")}</Tab>
             <Tab key="title-items">{t("items_label")}</Tab>
             <Tab key="title-types">{t("synergies_label")}</Tab>
@@ -30,12 +34,16 @@ export default function Wiki() {
             <Tab key="title-ability">{t("abilities_label")}</Tab>
           </TabList>
 
-          <TabPanel key="faq">
-            <WikiFaq />
-          </TabPanel>
-          <TabPanel key="tutorials">
-            <WikiTutorials />
-          </TabPanel>
+          {!inGame && (
+            <>
+              <TabPanel key="faq">
+                <WikiFaq />
+              </TabPanel>
+              <TabPanel key="tutorials">
+                <WikiTutorials />
+              </TabPanel>
+            </>
+          )}
           <TabPanel key="pokemon">
             <WikiContent />
           </TabPanel>

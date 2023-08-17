@@ -42,12 +42,10 @@ export function MainSidebar(props: MainSidebarProps) {
   const {
     meta,
     metaItems,
-    user,
-    botList
+    user
   }: Partial<INetwork> & Partial<IUserLobbyState> = useAppSelector((state) => ({
     meta: state.lobby.meta,
     metaItems: state.lobby.metaItems,
-    botList: state.lobby.botList,
     user: state.lobby.user
   }))
 
@@ -153,10 +151,7 @@ export function MainSidebar(props: MainSidebarProps) {
           (user?.role === Role.ADMIN ||
             user?.role === Role.MODERATOR ||
             user?.role === Role.BOT_MANAGER) && (
-            <NavLink
-              svg="bot"
-              onClick={() => navigate("/bot-admin")}
-            >
+            <NavLink svg="bot" onClick={() => navigate("/bot-admin")}>
               {t("bot_admin")}
             </NavLink>
           )}
@@ -215,7 +210,7 @@ export function MainSidebar(props: MainSidebarProps) {
         </NavLink>
       </Menu>
 
-      <Modals modal={modal} setModal={setModal} />
+      <Modals modal={modal} setModal={setModal} page={page} />
     </Sidebar>
   )
 }
@@ -287,10 +282,12 @@ export type Modals =
 
 function Modals({
   modal,
-  setModal
+  setModal,
+  page
 }: {
   modal?: Modals
   setModal: (nextModal?: Modals) => void
+  page: Page
 }) {
   const {
     meta,
@@ -324,7 +321,7 @@ function Modals({
       <BasicModal
         handleClose={closeModal}
         show={modal === "wiki"}
-        body={<Wiki />}
+        body={<Wiki inGame={page === "game"} />}
       />
       <BasicModal
         title={"meta"}
