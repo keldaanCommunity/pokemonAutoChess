@@ -6147,7 +6147,7 @@ export class Meloetta extends Pokemon {
       Rarity.LEGENDARY,
       Pkm.DEFAULT,
       250,
-      30,
+      25,
       5,
       5,
       4,
