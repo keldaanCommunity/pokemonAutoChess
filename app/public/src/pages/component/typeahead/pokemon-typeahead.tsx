@@ -15,6 +15,7 @@ export function PokemonTypeahead({ onChange }: TypeaheadProps<Pkm>) {
 
   return (
     <Typeahead
+      id="pokemon-typeahead"
       options={pokemonOptions}
       placeholder="Select a pokemon"
       onChange={(option) => {

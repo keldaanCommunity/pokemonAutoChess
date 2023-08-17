@@ -10,6 +10,7 @@ export function StatusTypeahead({ onChange }: TypeaheadProps) {
 
   return (
     <Typeahead
+      id="status-typeahead"
       options={statusOptions}
       placeholder="Select a status"
       onChange={(option) => {
