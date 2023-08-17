@@ -590,7 +590,8 @@ export const OldPkm: { [key in Pkm]: string } = {
   [Pkm.SHELLDER]: "shellder",
   [Pkm.CLOYSTER]: "cloyster",
   [Pkm.SENTRET]: "sentret",
-  [Pkm.FURRET]: "furret"
+  [Pkm.FURRET]: "furret",
+  [Pkm.SPECTRIER]: "spectrier"
 }
 
 async function main() {
