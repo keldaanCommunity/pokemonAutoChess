@@ -153,11 +153,15 @@ export function MainSidebar(props: MainSidebarProps) {
           (user?.role === Role.ADMIN ||
             user?.role === Role.MODERATOR ||
             user?.role === Role.BOT_MANAGER) && (
-            <NavLink
-              svg="bot"
-              onClick={() => navigate("/bot-admin")}
-            >
+            <NavLink svg="bot" onClick={() => navigate("/bot-admin")}>
               {t("bot_admin")}
+            </NavLink>
+          )}
+
+        {page !== "game" &&
+          (user?.role === Role.ADMIN || user?.role === Role.MODERATOR) && (
+            <NavLink svg="bot" onClick={() => navigate("/sprite-debug")}>
+              Debug sprite
             </NavLink>
           )}
 

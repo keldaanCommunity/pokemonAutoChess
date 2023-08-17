@@ -1,0 +1,51 @@
+.sprite-debug-root {
+    width: 100%;
+    height: 100%;
+
+    --sidebar-offset: 90px;
+}
+
+/* TODO Remove this after the absolute sidebar update goes in */
+.sprite-debug-root aside.sidebar {
+    position: absolute;
+    height: 100%;
+    z-index: 999;
+}
+
+.sprite-debug-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+
+    padding: 40px;
+    padding-left: calc(var(--sidebar-offset));
+}
+
+.sprite-debug-toolbar {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+
+}
+
+.sprite-debug-toolbar > div {
+    background-color: #006bb3;
+    border-radius: 4px;
+    color: white;
+    border: 2px solid black;
+    padding: 4px 12px;
+}
+
+.sprite-debug-sprite {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.sprite-debug-sprite canvas {
+    border: 2px solid black;
+    border-radius: 4px;
+}

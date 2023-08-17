@@ -9,6 +9,7 @@ import AfterGame from "./pages/after-game"
 import TeamBuilder from "./pages/component/bot-builder/team-builder"
 import { BotManagerPanel } from "./pages/component/bot-builder/bot-manager-panel"
 import { Provider } from "react-redux"
+import { SpriteDebug } from "./pages/component/lobby-menu/sprite-debug"
 import store from "./stores/index"
 
 import "./i18n"
@@ -31,6 +32,7 @@ root.render(
             <Route path="/after" element={<AfterGame />} />
             <Route path="/bot-builder" element={<TeamBuilder />} />
             <Route path="/bot-admin" element={<BotManagerPanel />} />
+            <Route path="/sprite-debug" element={<SpriteDebug />} />
           </Routes>
         </BrowserRouter>
       </Suspense>

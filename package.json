@@ -74,6 +74,7 @@
     "phaser3-rex-plugins": "^1.60.4",
     "react": "^18.2.0",
     "react-bootstrap": "^2.8.0",
+    "react-bootstrap-typeahead": "^6.2.3",
     "react-circular-progressbar": "^2.1.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^13.1.2",
