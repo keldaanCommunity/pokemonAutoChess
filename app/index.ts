@@ -141,6 +141,10 @@ app.get("/bot-admin", (req, res) => {
   res.sendFile(viewsSrc)
 })
 
+app.get("/sprite-debug", (req, res) => {
+  res.sendFile(viewsSrc)
+})
+
 app.get("/pokemons", (req, res) => {
   res.send(Pkm)
 })

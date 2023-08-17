@@ -156,6 +156,13 @@ export function MainSidebar(props: MainSidebarProps) {
             </NavLink>
           )}
 
+        {page !== "game" &&
+          (user?.role === Role.ADMIN || user?.role === Role.MODERATOR) && (
+            <NavLink svg="bot" onClick={() => navigate("/sprite-debug")}>
+              Debug sprite
+            </NavLink>
+          )}
+
         <NavLink location="news" svg="newspaper" handleClick={changeModal}>
           {t("news")}
         </NavLink>
