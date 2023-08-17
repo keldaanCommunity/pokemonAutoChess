@@ -198,6 +198,11 @@ export default class LoadingManager {
       "/assets/attacks"
     )
     scene.load.multiatlas(
+      "ASTRAL_BARRAGE",
+      "/assets/attacks/ASTRAL_BARRAGE.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
       "PLASMA_FIST",
       "/assets/attacks/PLASMA_FIST.json",
       "/assets/attacks"

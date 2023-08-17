@@ -724,6 +724,10 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
         }
       }
     }
+
+    if (this.passive === Passive.GRIM_NEIGH) {
+      this.addAbilityPower(30)
+    }
   }
 
   flyAway(board: Board) {

@@ -13905,3 +13905,28 @@ export class Minun extends Pokemon {
     )
   }
 }
+
+export class Spectrier extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.SPECTRIER,
+      [Synergy.GHOST, Synergy.FIELD],
+      Rarity.LEGENDARY,
+      Pkm.DEFAULT,
+      280,
+      25,
+      5,
+      10,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      3,
+      100,
+      Ability.ASTRAL_BARRAGE,
+      shiny,
+      emotion,
+      false,
+      false,
+      Passive.GRIM_NEIGH
+    )
+  }
+}

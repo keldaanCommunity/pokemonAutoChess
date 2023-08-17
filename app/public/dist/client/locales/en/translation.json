@@ -214,7 +214,8 @@
     "HIDDEN_POWER_EM": "Hidden Power (!)",
     "POISON_JAB": "Poison Jab",
     "SHELL_SMASH": "Shell Smash",
-    "HELPING_HAND": "Helping Hand"
+    "HELPING_HAND": "Helping Hand",
+    "ASTRAL_BARRAGE": "Astral Barrage"
   },
   "pkm": {
     "DEFAULT": "default",
@@ -802,7 +803,8 @@
     "SHELLDER": "Shellder",
     "CLOYSTER": "Cloyster",
     "FURRET": "Furret",
-    "SENTRET": "Sentret"
+    "SENTRET": "Sentret",
+    "SPECTRIER": "Spectrier"
   },
   "ability_description": {
     "DEFAULT": "Default",
@@ -1002,7 +1004,8 @@
     "HIDDEN_POWER_EM": "Spawn 4 random Unown at every corner of the board",
     "POISON_JAB": "Deals [40, 80, 120, SP] SPECIAL, swaps places with the target, and POISON both the target and the caster for 4s",
     "SHELL_SMASH": "Deals [15, 30, SP] SPECIAL to adjacent enemies; gain 2 ATK, 20% AP and 20% ATK_SPEED, and lose 1 DEF, 1 SPE_DEF",
-    "HELPING_HAND": "Double the damage of the next spell casted by the nearest [2,4,6] allies"
+    "HELPING_HAND": "Double the damage of the next spell casted by the nearest [2,4,6] allies",
+    "ASTRAL_BARRAGE": "Sends [3,SP=2] small ghosts at random opposing Pokémon. Each of them deals 20 SPECIAL"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1357,7 +1360,8 @@
     "MAGIKARP": "8 Magikarp evolve in Gyarados",
     "GIRATINA": "Giratina switches between its Altered Forme and Origin Forme depending on its position on the board",
     "UNOWN": "Unown cannot hold items and vanish after one fight or after casting their ability",
-    "POISON_HEAL": "If the Pokémon is POISON, it will gain HP instead of taking damage"
+    "POISON_HEAL": "If the Pokémon is POISON, it will gain HP instead of taking damage",
+    "GRIM_NEIGH": "When the Pokémon knocks out an enemy, it emits a terrifying whinny sound that increases its AP by 30"
   },
   "stat": {
     "ATK": "Attack",
@@ -1658,7 +1662,7 @@
     "income_answer": "You get 5 gold per round whether you draw, win or lose. You get 1 bonus income per 10 gold saved. A maximum of 5 bonus income accrued at 50 saved gold. You get 1 bonus gold if you win. If you win multiple times, you will also gain extra gold; one bonus gold for every victory/defeat, up to 5 bonus gold for 5 streak wins / 5 streak defeat. Wins/Defeats against PVE are not taken into account.",
     "collection": "What is the purpose of the collection/booster ?",
     "collection_answer": "When opening boosters, you get pokemon shards. Those shards are specific to every pokemon. In the collection tab, you can buy pokemon emotions with those shards. You can see pokemon emotions as a detailed customization. When selecting an emotion pokemon portrait, the pokemon will appear everywhere with the same emotion portrait that you have selected. Eveyone will see the emotion that you picked for this pokemon. Moreover, if you have selected a shiny emotion, the pokemon will appear shiny to everyone else.",
-    "avatars": ">How do I get new avatars ?",
+    "avatars": "How do I get new avatars ?",
     "avatars_answer": "When buying a pokemon emotion, it will be available in your profile avatar list.",
     "boosters": "How do I gain boosters ?",
     "boosters_answer": "You gain boosters each time you level up.",
