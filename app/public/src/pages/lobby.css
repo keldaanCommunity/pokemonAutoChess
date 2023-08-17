@@ -1,4 +1,6 @@
 .lobby {
+  --sidebar-offset: 90px;
+
   height: 100%;
   gap: 1vw;
   display: flex;
@@ -6,6 +8,7 @@
 
 .lobby-container {
   padding: 10px;
+  padding-left: calc(var(--sidebar-offset));
   width: 100%;
 }
 
@@ -116,10 +119,6 @@
   .main-lobby .news-chat {
     flex-direction: column;
   }
-}
-
-.lobby-container {
-  padding: 20px;
 }
 
 @media (max-width: 640px) {
