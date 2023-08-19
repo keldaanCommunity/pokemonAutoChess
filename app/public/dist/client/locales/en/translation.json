@@ -1827,6 +1827,7 @@
   "language": "Language",
   "music_volume": "Music Volume",
   "sfx_volume": "SFX Volume",
+  "show_details_on_hover": "Show details on hover instead of right click",
   "save": "Save",
   "passive": "Passive",
   "pick_additional_pokemon_hint": "Pick an additional Pokemon. It will be available to everyone.",

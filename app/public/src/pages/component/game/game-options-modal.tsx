@@ -8,7 +8,7 @@ import React, {
 import Modal from "react-bootstrap/Modal"
 import {
   IPreferencesState,
-  loadPreferences,
+  getPreferences,
   savePreferences
 } from "../../../preferences"
 import { getGameScene } from "../../game"
@@ -26,7 +26,7 @@ export default function GameOptionsModal(props: {
   leave: () => void
   ingame: boolean
 }) {
-  const initialPreferences = loadPreferences()
+  const initialPreferences = getPreferences()
   const [unsavedPreferences, setUnsavedPreferences] =
     useState(initialPreferences)
 
@@ -34,13 +34,13 @@ export default function GameOptionsModal(props: {
   const dispatch = useAppDispatch()
   const language = i18n.language
 
-    const getValue = useCallback(
+  const getValue = useCallback(
     (
       target: HTMLInputElement,
       key: keyof IPreferencesState
     ): number | boolean => {
       switch (key) {
-        case "pokemonDetailsOnHover":
+        case "showDetailsOnHover":
         case "showDpsMeter":
           return target.checked
         default:
@@ -141,13 +141,13 @@ export default function GameOptionsModal(props: {
             <input
               type="checkbox"
               className="nes-checkbox"
-              checked={unsavedPreferences.pokemonDetailsOnHover}
+              checked={unsavedPreferences.showDetailsOnHover}
               onChange={useCallback(
-                (e) => changePreferences(e, "pokemonDetailsOnHover"),
+                (e) => changePreferences(e, "showDetailsOnHover"),
                 [changePreferences]
               )}
             />
-            <span>Show pokemon details on hover</span>
+            <span>{t("show_details_on_hover")}</span>
           </label>
         </p>
       </Modal.Body>
