@@ -2,19 +2,19 @@ import React, { useCallback, useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router"
 import { useTranslation } from "react-i18next"
 import { Sidebar, Menu, MenuItem, MenuItemProps } from "react-pro-sidebar"
-import { useAppDispatch, useAppSelector } from "../hooks"
-import { requestMeta, INetwork } from "../stores/NetworkStore"
-import { IUserLobbyState } from "../stores/LobbyStore"
-import { Role, Title } from "../../../types"
-import { cc } from "./utils/jsx"
-import Booster from "./component/booster/booster"
-import PokemonCollection from "./component/collection/pokemon-collection"
-import GameOptionsModal from "./component/game/game-options-modal"
-import MetaReport from "./component/meta-report/meta-report"
-import { BasicModal } from "./component/modal/modal"
-import News from "./component/news/news"
-import Wiki from "./component/wiki/wiki"
-import pkg from "../../../../package.json"
+import { useAppDispatch, useAppSelector } from "../../hooks"
+import { requestMeta, INetwork } from "../../stores/NetworkStore"
+import { IUserLobbyState } from "../../stores/LobbyStore"
+import { Role, Title } from "../../../../types"
+import { cc } from "../utils/jsx"
+import Booster from "./booster/booster"
+import PokemonCollection from "./collection/pokemon-collection"
+import GameOptionsModal from "./game/game-options-modal"
+import MetaReport from "./meta-report/meta-report"
+import { BasicModal } from "./modal/modal"
+import News from "./news/news"
+import Wiki from "./wiki/wiki"
+import pkg from "../../../../../package.json"
 
 import "./main-sidebar.css"
 
@@ -158,7 +158,7 @@ export function MainSidebar(props: MainSidebarProps) {
 
         {page !== "game" &&
           (user?.role === Role.ADMIN || user?.role === Role.MODERATOR) && (
-            <NavLink svg="bot" onClick={() => navigate("/sprite-debug")}>
+            <NavLink svg="tooling" onClick={() => navigate("/sprite-debug")}>
               Debug sprite
             </NavLink>
           )}
@@ -344,7 +344,7 @@ function Modals({
       />
       <GameOptionsModal
         show={modal === "options"}
-        ingame={false}
+        ingame={page === "game"}
         hideModal={closeModal}
         leave={closeModal}
       />

@@ -40,6 +40,7 @@ import {
   DEFAULT_CRIT_DAMAGE
 } from "../../../../types/Config"
 import { loadPreferences } from "../../preferences"
+import { DebugScene } from "../scenes/debug-scene"
 
 export default class Pokemon extends DraggableObject {
   evolution: Pkm
@@ -108,7 +109,7 @@ export default class Pokemon extends DraggableObject {
   flip: boolean
 
   constructor(
-    scene: GameScene,
+    scene: GameScene | DebugScene,
     x: number,
     y: number,
     pokemon: IPokemonEntity | IPokemon,
@@ -700,23 +701,15 @@ export default class Pokemon extends DraggableObject {
       this.lifebar.setAmount(0)
     }
 
-    const coordinates = transformAttackCoordinate(
-      this.positionX,
-      this.positionY,
-      this.flip
-    )
-    const resurectAnim = this.scene.add.sprite(
-      coordinates[0],
-      coordinates[1],
-      "RESURECT",
-      "000"
-    )
+    const resurectAnim = this.scene.add.sprite(0, -10, "RESURECT", "000")
     resurectAnim.setDepth(7)
     resurectAnim.setScale(2, 2)
     resurectAnim.anims.play("RESURECT")
     resurectAnim.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
       resurectAnim.destroy()
     })
+
+    this.add(resurectAnim)
   }
 
   fishingAnimation() {

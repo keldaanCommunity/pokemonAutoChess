@@ -80,7 +80,6 @@
   grid-template: auto 1fr / 80px 1fr;
 }
 
-#wiki-page .wiki-status .test-anim-wrapper,
 #wiki-page .wiki-status li > img,
 #wiki-page .wiki-stat li > img {
   grid-row: 1/3;

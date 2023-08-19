@@ -10,16 +10,15 @@ import {
 import { AnimationType, AnimationComplete } from "../../../types/Animation"
 import { Ability } from "../../../types/enum/Ability"
 import Pokemon from "./components/pokemon"
-import GameScene from "./scenes/game-scene"
 import durations from "../../dist/client/assets/pokemons/durations.json"
 import indexList from "../../dist/client/assets/pokemons/indexList.json"
 import { logger } from "../../../utils/logger"
 import { AnimationConfig, Pkm, PkmIndex } from "../../../types/enum/Pokemon"
 
 export default class AnimationManager {
-  game: GameScene
+  game: Phaser.Scene
 
-  constructor(game: GameScene) {
+  constructor(game: Phaser.Scene) {
     this.game = game
 
     indexList.forEach((index) => {
@@ -2001,7 +2000,7 @@ export default class AnimationManager {
     }
   }
 
-  play(entity: Pokemon, animation: AnimationType, flip: boolean) {
+  play(entity: Pokemon, animation: AnimationType, flip: boolean, loop = false) {
     const orientation = flip
       ? OrientationFlip[entity.orientation]
       : entity.orientation
@@ -2015,8 +2014,13 @@ export default class AnimationManager {
     const tint = entity.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL
     const animKey = `${textureIndex}/${tint}/${animation}/${SpriteType.ANIM}/${orientationCorrected}`
     const shadowKey = `${textureIndex}/${tint}/${animation}/${SpriteType.SHADOW}/${orientationCorrected}`
-    entity.sprite.anims.play(animKey)
-    entity.shadow.anims.play(shadowKey)
+    if (loop) {
+      entity.sprite.anims.play({ key: animKey, repeat: -1 })
+      entity.shadow.anims.play({ key: shadowKey, repeat: -1 })
+    } else {
+      entity.sprite.anims.play(animKey)
+      entity.shadow.anims.play(shadowKey)
+    }
   }
 }
 

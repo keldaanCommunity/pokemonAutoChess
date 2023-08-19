@@ -63,7 +63,7 @@ import { IItemsStatistic } from "../../../models/mongo-models/items-statistic"
 import PokemonConfig from "../../../models/colyseus-models/pokemon-config"
 import { IPokemonsStatistic } from "../../../models/mongo-models/pokemons-statistic"
 import i18n from "../i18n"
-import { MainSidebar } from "./main-sidebar"
+import { MainSidebar } from "./component/main-sidebar"
 import store from "../stores"
 import { useTranslation } from "react-i18next"
 

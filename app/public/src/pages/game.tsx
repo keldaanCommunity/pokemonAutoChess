@@ -86,7 +86,7 @@ import { toast } from "react-toastify"
 import { logger } from "../../../utils/logger"
 import { RequiredStageLevelForXpElligibility } from "../../../types/Config"
 import { useTranslation } from "react-i18next"
-import { MainSidebar } from "./main-sidebar"
+import { MainSidebar } from "./component/main-sidebar"
 
 let gameContainer: GameContainer
 
