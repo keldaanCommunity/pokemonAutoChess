@@ -25,6 +25,10 @@ Gligar,Gliscor,Shellder,Cloyster, Furret, Sentret
 - Nerf Miltank Buff the defense by 5 and deals ~~6x~~ -> 5x the defense as special damage
 - Nerf Lopynny Mana ~~60~~ -> 80
 - Nerf Meloetta Attack ~~30~~ -> 25
+- Moved Zapdos, Articuno and Moltres from Unique to Legendary ; adjusted stats
+- Buff Overheat (Moltres): 30 → 40 special damage
+- Buff Charge (Zapdos): now also increase Attack Speed
+- New ability for Articuno: Blizzard
 
 # Changes to Synergies
 

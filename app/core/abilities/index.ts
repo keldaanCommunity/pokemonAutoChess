@@ -170,7 +170,8 @@ import {
   PoisonJabStrategy,
   ShellSmashStrategy,
   HelpingHandStrategy,
-  AstralBarrageStrategy
+  AstralBarrageStrategy,
+  BlizzardStrategy
 } from "../attack-strategy"
 import {
   HiddenPowerAStrategy,
@@ -273,6 +274,7 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.SILENCE]: new SilenceStrategy(),
   [Ability.CONFUSION]: new ConfusionStrategy(),
   [Ability.FREEZE]: new FreezeStrategy(),
+  [Ability.BLIZZARD]: new BlizzardStrategy(),
   [Ability.PROTECT]: new ProtectStrategy(),
   [Ability.POISON]: new PoisonStrategy(),
   [Ability.ORIGIN_PULSE]: new OriginPulseStrategy(),
