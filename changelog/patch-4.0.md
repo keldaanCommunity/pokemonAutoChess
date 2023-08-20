@@ -54,4 +54,5 @@ Gligar,Gliscor,Shellder,Cloyster, Furret, Sentret
 
 # Misc
 
+- Game is now preloaded at room preparation screen, which should reduce first loading times
 - Boosters rarity percentages have been adjusted with the changes to rarity categories
