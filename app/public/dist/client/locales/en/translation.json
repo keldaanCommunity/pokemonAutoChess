@@ -1946,5 +1946,9 @@
   "additional_pick": "Additional pick",
   "fight": "fight",
   "community_translations": "Translations are managed by the community. If you want to add or\r\n              help improve a translation, head over to ",
-  "no_emotions_available": "No Emotions available"
+  "no_emotions_available": "No Emotions available",
+  "finished_preloading": "Finished preloading",
+  "preloading_start": "Preloading game...",
+  "loading_asset": "Loading asset:",
+  "loading_complete": "Loading complete, waiting for other players..."
 }

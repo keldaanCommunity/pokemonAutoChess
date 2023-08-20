@@ -1941,7 +1941,10 @@
   "community_translations": "Les traductions sont gérées par la communauté. Si vous souhaitez ajouter ou\r\n              aider à améliorer une traduction, rendez-vous sur",
   "leaderboard": "Classement",
   "rooms": "Salons",
-  "leave_room": "Quitter la pièce",
+  "leave_room": "Quitter ce salon",
   "tier": "Étage",
-  "no_emotions_available": "Aucune émotion disponible"
+  "no_emotions_available": "Aucune émotion disponible",
+  "preloading_start": "Préchargement du jeu...",
+  "loading_asset": "Chargement:",
+  "loading_complete": "Chargement terminé, en attente des autres joueurs..."
 }
