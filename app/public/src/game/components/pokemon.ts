@@ -339,6 +339,7 @@ export default class Pokemon extends DraggableObject {
   onPointerDown(pointer: Phaser.Input.Pointer) {
     super.onPointerDown(pointer)
     if (
+      this.shouldShowTooltip &&
       !getPreferences().showDetailsOnHover &&
       pointer.rightButtonDown() &&
       this.scene &&
@@ -352,14 +353,14 @@ export default class Pokemon extends DraggableObject {
 
   onPointerUp(): void {
     super.onPointerUp()
-    if (getPreferences().showDetailsOnHover && !this.detail) {
+    if (this.shouldShowTooltip && getPreferences().showDetailsOnHover && !this.detail) {
       this.openDetail()
     }
   }
 
   onPointerOut(): void {
     super.onPointerOut()
-    if (getPreferences().showDetailsOnHover) {
+    if (this.shouldShowTooltip && getPreferences().showDetailsOnHover) {
       this.closeDetail()
     }
   }
@@ -367,7 +368,7 @@ export default class Pokemon extends DraggableObject {
   onPointerOver() {
     super.onPointerOver()
 
-    if (getPreferences().showDetailsOnHover && this.shouldShowTooltip) {
+    if (getPreferences().showDetailsOnHover && this.shouldShowTooltip && this.detail == null) {
       this.openDetail()
     }
   }
