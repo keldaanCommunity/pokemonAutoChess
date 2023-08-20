@@ -1,0 +1,102 @@
+import React, { useState } from "react"
+import { t } from "i18next"
+import { useNavigate } from "react-router-dom"
+
+import DebugScene from "./component/debug/debug-scene"
+import { MainSidebar } from "./component/main-sidebar"
+import { PokemonTypeahead } from "./component/typeahead/pokemon-typeahead"
+
+import { AnimationConfig, Pkm } from "../../../types/enum/Pokemon"
+import { Orientation } from "../../../types/enum/Game"
+import { Status } from "../../../types/enum/Status"
+import { AnimationType } from "../../../types/Animation"
+
+import "./sprite-debug.css"
+
+export function SpriteDebug() {
+  const navigate = useNavigate()
+  const [pkm, setPkm] = useState<Pkm>(Pkm.RATTATA)
+  const [orientation, setOrientation] = useState<Orientation>(
+    Orientation.DOWNLEFT
+  )
+  const [animationType, setAnimType] = useState<AnimationType>(
+    AnimationType.Idle
+  )
+  const [status, setStatus] = useState<Status | "">("")
+
+  return (
+    <div className="sprite-debug-root">
+      <MainSidebar
+        page="main_lobby"
+        leave={() => navigate("/lobby")}
+        leaveLabel={t("back_to_lobby")}
+      />
+      <div className="sprite-debug-container">
+        <div className="sprite-debug-toolbar">
+          <div className="nes-container">
+            <PokemonTypeahead
+              value={pkm}
+              onChange={(pkm) => pkm && setPkm(pkm)}
+            />
+          </div>
+          <div className="nes-container">
+            <label htmlFor="sprite-debug-orientation">Orientation</label>
+            <select
+              id="sprite-debug-orientation"
+              value={orientation}
+              onChange={(e) =>
+                setOrientation(e.currentTarget.value as Orientation)
+              }
+            >
+              {Object.entries(Orientation).map(([k, v]) => (
+                <option value={v}>{k}</option>
+              ))}
+            </select>
+          </div>
+          <div className="nes-container">
+            <label htmlFor="sprite-debug-anim-type">Anim type</label>
+            <select
+              id="sprite-debug-anim-type"
+              value={animationType}
+              onChange={(e) =>
+                setAnimType(e.currentTarget.value as AnimationType)
+              }
+            >
+              <option value={AnimationType.Idle}>Idle</option>
+              <option value={AnimationType.Walk}>Walk</option>
+              <option value={AnimationType.Sleep}>Sleep</option>
+              <option value={AnimationType.Hurt}>Hurt</option>
+              <option value={AnimationType.Hop}>Hop</option>
+              <option value={AnimationConfig[pkm].attack}>Attack</option>
+              <option value={AnimationConfig[pkm].ability}>Ability</option>
+              <option value={AnimationConfig[pkm].emote}>Emote</option>
+            </select>
+          </div>
+          <div className="nes-container">
+            <label htmlFor="sprite-debug-status">Status</label>
+            <select
+              id="sprite-debug-status"
+              value={status}
+              onChange={(e) => setStatus(e.currentTarget.value as Status)}
+            >
+              <option value="">None</option>
+              {Object.entries(Status).map(([k, v]) => (
+                <option value={v}>{k}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+        <div className="sprite-debug-sprite">
+          <DebugScene
+            pkm={pkm}
+            orientation={orientation}
+            animationType={animationType}
+            status={status}
+            width={800}
+            height={800}
+          />
+        </div>
+      </div>
+    </div>
+  )
+}

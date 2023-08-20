@@ -30,7 +30,7 @@ import { playSound, SOUNDS } from "./utils/audio"
 import { IBot } from "../../../models/mongo-models/bot-v2"
 import { logger } from "../../../utils/logger"
 import { GameUser } from "../../../models/colyseus-models/game-user"
-import { MainSidebar } from "./main-sidebar"
+import { MainSidebar } from "./component/main-sidebar"
 import { useTranslation } from "react-i18next"
 
 export default function Preparation() {

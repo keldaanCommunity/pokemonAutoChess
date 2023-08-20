@@ -1,0 +1,11 @@
+#debug-scene {
+  position: relative;
+}
+
+#debug-scene #status-message {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: white;
+  background-color: black;
+}

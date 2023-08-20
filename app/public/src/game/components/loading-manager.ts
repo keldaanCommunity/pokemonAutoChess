@@ -2,20 +2,15 @@ import { GameObjects } from "phaser"
 import { getPortraitSrc } from "../../utils"
 import GameScene from "../scenes/game-scene"
 import indexList from "../../../dist/client/assets/pokemons/indexList.json"
-import { Transfer } from "../../../../types"
 
 export default class LoadingManager {
-  scene: GameScene
+  scene: Phaser.Scene
   loadingBar: GameObjects.Container
   statusMessage: string
 
-  constructor(scene: GameScene) {
+  constructor(scene: Phaser.Scene) {
     this.scene = scene
     this.statusMessage = "Loading..."
-
-    scene.load.on("progress", (value: number) => {
-      this.scene.room?.send(Transfer.LOADING_PROGRESS, value * 100)
-    })
 
     this.scene.load.on("fileprogress", (file, percentComplete) => {
       if (percentComplete < 1) {
@@ -24,7 +19,6 @@ export default class LoadingManager {
     })
 
     this.scene.load.on("complete", () => {
-      this.scene.room?.send(Transfer.LOADING_COMPLETE)
       this.statusMessage = "Loading complete, waiting for other players..."
     })
 
@@ -42,7 +36,7 @@ export default class LoadingManager {
       )
     })
 
-    if (scene.tilemap) {
+    if (scene instanceof GameScene && scene.tilemap) {
       scene.load.audio("sound", [
         `https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChessMusic/main/music/${scene.tilemap.tilesets[0].name}.mp3`
       ])
