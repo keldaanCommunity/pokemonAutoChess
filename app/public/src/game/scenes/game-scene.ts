@@ -22,7 +22,7 @@ import {
   Transfer
 } from "../../../../types"
 import { DesignTiled } from "../../../../core/design"
-import { loadPreferences } from "../../preferences"
+import { getPreferences } from "../../preferences"
 import { Item } from "../../../../types/enum/Item"
 import Player from "../../../../models/colyseus-models/player"
 import MinigameManager from "../components/minigame-manager"
@@ -158,7 +158,7 @@ export default class GameScene extends Scene {
       this.music = this.sound.add("sound", {
         loop: true
       }) as Phaser.Sound.WebAudioSound
-      const musicVolume = loadPreferences().musicVolume / 100
+      const musicVolume = getPreferences().musicVolume / 100
       this.music.play({ volume: musicVolume, loop: true })
     }
   }

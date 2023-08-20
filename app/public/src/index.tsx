@@ -11,11 +11,13 @@ import { BotManagerPanel } from "./pages/component/bot-builder/bot-manager-panel
 import { Provider } from "react-redux"
 import { SpriteDebug } from "./pages/sprite-debug"
 import store from "./stores/index"
+import { loadPreferences } from "./preferences"
 
 import "./i18n"
 import "nes.css/css/nes.min.css"
 import "./styles.css"
 
+loadPreferences()
 const container = document.getElementById("root")
 const root = createRoot(container!)
 

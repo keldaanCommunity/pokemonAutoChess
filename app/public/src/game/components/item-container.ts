@@ -4,6 +4,7 @@ import ItemDetail from "./item-detail"
 import { Item } from "../../../../types/enum/Item"
 import ItemsContainer from "./items-container"
 import { getGameScene } from "../../pages/game"
+import { getPreferences } from "../../preferences"
 
 export default class ItemContainer extends DraggableObject {
   detail: ItemDetail
@@ -17,6 +18,7 @@ export default class ItemContainer extends DraggableObject {
   scene: Phaser.Scene
   pokemonId: string | null
   playerId: string
+  mouseoutTimeout: ReturnType<typeof setTimeout>
 
   constructor(
     scene: Phaser.Scene,
@@ -57,9 +59,24 @@ export default class ItemContainer extends DraggableObject {
     this.detail.setDepth(100)
     this.detail.setPosition(
       this.detail.width * 0.5 + 40,
-      this.detail.height * 0.5 + 40
+      this.detail.height * 0.5
     )
     this.detail.setVisible(false)
+    this.detail.dom.addEventListener("mouseenter", () => {
+      clearTimeout(this.mouseoutTimeout)
+    })
+    this.detail.dom.addEventListener("mouseleave", () => {
+      if (getPreferences().showDetailsOnHover) {
+        this.mouseoutTimeout = setTimeout(
+          () => {
+            if (this.detail.visible) {
+              this.closeDetail()
+            }
+          },
+          this.pokemonId === null ? 100 : 0
+        )
+      }
+    })
     this.name = item
     this.add(this.sprite)
     this.add(this.detail)
@@ -70,8 +87,11 @@ export default class ItemContainer extends DraggableObject {
   }
 
   onPointerOver() {
-    //this.openDetail()
     super.onPointerOver()
+    if (getPreferences().showDetailsOnHover && !this.detail.visible) {
+      clearTimeout(this.mouseoutTimeout)
+      this.openDetail()
+    }
     this.input.dropZone = false
     if (this.draggable) {
       this.circle?.setFillStyle(0x68829e)
@@ -86,12 +106,22 @@ export default class ItemContainer extends DraggableObject {
     if (this.draggable) {
       this.circle?.setFillStyle(0x61738a)
     }
+    if (getPreferences().showDetailsOnHover) {
+      this.mouseoutTimeout = setTimeout(
+        () => {
+          if (this.detail.visible) {
+            this.closeDetail()
+          }
+        },
+        this.pokemonId === null ? 100 : 0
+      )
+    }
   }
 
   onPointerDown(pointer: Phaser.Input.Pointer) {
     super.onPointerDown(pointer)
     this.parentContainer.bringToTop(this)
-    if (pointer.rightButtonDown()) {
+    if (pointer.rightButtonDown() && !getPreferences().showDetailsOnHover) {
       if (!this.detail.visible) {
         this.openDetail()
         this.input.dropZone = false

@@ -6,7 +6,7 @@ import GameBlueHealDpsMeter from "./game-blue-heal-dps-meter"
 import GameRedHealDpsMeter from "./game-red-heal-dps-meter"
 import { useAppSelector } from "../../../hooks"
 import { getAvatarSrc } from "../../../utils"
-import { loadPreferences, savePreferences } from "../../../preferences"
+import { getPreferences, savePreferences } from "../../../preferences"
 import "./game-dps-meter.css"
 import { useTranslation } from "react-i18next"
 
@@ -21,7 +21,7 @@ export default function GameDpsMeter() {
 
   const avatar = useAppSelector((state) => state.game.currentPlayerAvatar)
   const name = useAppSelector((state) => state.game.currentPlayerName)
-  const [isOpen, setOpen] = useState(loadPreferences().showDpsMeter)
+  const [isOpen, setOpen] = useState(getPreferences().showDpsMeter)
 
   function toggleOpen() {
     setOpen(!isOpen)

@@ -1,4 +1,4 @@
-import { loadPreferences } from "../../preferences"
+import { getPreferences } from "../../preferences"
 
 export const SOUNDS = {
   BUTTON_CLICK: "buttonclick.mp3",
@@ -47,7 +47,7 @@ setupSounds()
 
 export function playSound(key: Soundkey) {
   if (AUDIO_ELEMENTS[key]) {
-    AUDIO_ELEMENTS[key]!.volume = loadPreferences().sfxVolume / 100
+    AUDIO_ELEMENTS[key]!.volume = getPreferences().sfxVolume / 100
     AUDIO_ELEMENTS[key]!.play()
   }
 }
