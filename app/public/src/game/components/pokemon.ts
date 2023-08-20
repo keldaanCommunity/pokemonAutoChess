@@ -39,7 +39,7 @@ import {
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_DAMAGE
 } from "../../../../types/Config"
-import { loadPreferences } from "../../preferences"
+import { getPreferences } from "../../preferences"
 
 export default class Pokemon extends DraggableObject {
   evolution: Pkm
@@ -103,7 +103,6 @@ export default class Pokemon extends DraggableObject {
   fairyField: GameObjects.Sprite | undefined
   stars: number
   playerId: string
-  shouldShowTooltipOnHover: boolean
   shouldShowTooltip: boolean
   flip: boolean
 
@@ -260,8 +259,6 @@ export default class Pokemon extends DraggableObject {
     }
     this.setDepth(5)
 
-    this.shouldShowTooltipOnHover = loadPreferences().pokemonDetailsOnHover
-
     // prevents persisting details between game transitions
     const s = <GameScene>this.scene
     if (s.lastPokemonDetail) {
@@ -340,26 +337,28 @@ export default class Pokemon extends DraggableObject {
 
   onPointerDown(pointer: Phaser.Input.Pointer) {
     super.onPointerDown(pointer)
-
-    if (!this.shouldShowTooltip) {
-      return
-    }
-
-    if (pointer.rightButtonDown()) {
-      if (this.scene && !this.detail) {
-        this.openDetail()
-      } else {
-        this.closeDetail()
-      }
+    if (
+      !getPreferences().showDetailsOnHover &&
+      pointer.rightButtonDown() &&
+      this.scene &&
+      !this.detail
+    ) {
+      this.openDetail()
     } else {
-      // close detail when dragging
       this.closeDetail()
+    }
+  }
+
+  onPointerUp(): void {
+    super.onPointerUp()
+    if (getPreferences().showDetailsOnHover && !this.detail) {
+      this.openDetail()
     }
   }
 
   onPointerOut(): void {
     super.onPointerOut()
-    if (this.shouldShowTooltipOnHover) {
+    if (getPreferences().showDetailsOnHover) {
       this.closeDetail()
     }
   }
@@ -367,14 +366,7 @@ export default class Pokemon extends DraggableObject {
   onPointerOver() {
     super.onPointerOver()
 
-    if (!this.shouldShowTooltip) {
-      return
-    }
-
-    // recheck preferences
-    this.shouldShowTooltipOnHover = loadPreferences().pokemonDetailsOnHover
-
-    if (this.shouldShowTooltipOnHover && this.shouldShowTooltip) {
+    if (getPreferences().showDetailsOnHover && this.shouldShowTooltip) {
       this.openDetail()
     }
   }
