@@ -13,10 +13,6 @@ import { SpriteDebug } from "./pages/sprite-debug"
 import store from "./stores/index"
 import { loadPreferences } from "./preferences"
 
-import { QueryClient, QueryClientProvider } from "react-query"
-
-const queryClient = new QueryClient()
-
 import "./i18n"
 import "nes.css/css/nes.min.css"
 import "./styles.css"
@@ -29,20 +25,18 @@ root.render(
   <Provider store={store}>
     <React.StrictMode>
       <Suspense fallback="loading">
-        <QueryClientProvider client={queryClient}>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Auth />} />
-              <Route path="/lobby" element={<Lobby />} />
-              <Route path="/preparation" element={<Preparation />} />
-              <Route path="/game" element={<Game />} />
-              <Route path="/after" element={<AfterGame />} />
-              <Route path="/bot-builder" element={<TeamBuilder />} />
-              <Route path="/bot-admin" element={<BotManagerPanel />} />
-              <Route path="/sprite-debug" element={<SpriteDebug />} />
-            </Routes>
-          </BrowserRouter>
-        </QueryClientProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Auth />} />
+            <Route path="/lobby" element={<Lobby />} />
+            <Route path="/preparation" element={<Preparation />} />
+            <Route path="/game" element={<Game />} />
+            <Route path="/after" element={<AfterGame />} />
+            <Route path="/bot-builder" element={<TeamBuilder />} />
+            <Route path="/bot-admin" element={<BotManagerPanel />} />
+            <Route path="/sprite-debug" element={<SpriteDebug />} />
+          </Routes>
+        </BrowserRouter>
       </Suspense>
     </React.StrictMode>
   </Provider>
