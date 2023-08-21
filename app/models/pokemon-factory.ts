@@ -780,9 +780,9 @@ export default class PokemonFactory {
   static transformPokemon(
     before: Pokemon,
     afterName: Pkm,
-    afterConfig?: IPokemonConfig
+    player?: IPlayer
   ) {
-    const transformation = this.createPokemonFromName(afterName, afterConfig)
+    const transformation = this.createPokemonFromName(afterName, player)
     transformation.positionX = before.positionX
     transformation.positionY = before.positionY
     transformation.items = before.items

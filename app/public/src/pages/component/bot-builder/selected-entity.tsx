@@ -33,9 +33,6 @@ export default function SelectedEntity(props: {
   selectEntity: React.Dispatch<React.SetStateAction<DetailledPkm | Item>>
 }) {
   const { t } = useTranslation()
-  const [metadata, setMetadata] = useState<{ [key: string]: ITracker }>(
-    tracker as unknown as { [key: string]: ITracker }
-  )
   if (Object.keys(Item).includes(props.entity as Item)) {
     return (
       <div className="nes-container" style={entityStyle}>
@@ -57,9 +54,9 @@ export default function SelectedEntity(props: {
     const availableEmotions: Emotion[] = []
     const pathIndex = pokemon.index.split("-")
     if (pathIndex.length == 1) {
-      pMetadata = metadata[pokemon.index]
+      pMetadata = tracker[pokemon.index]
     } else if (pathIndex.length == 2) {
-      pMetadata = metadata[pathIndex[0]].subgroups[pathIndex[1]]
+      pMetadata = tracker[pathIndex[0]].subgroups[pathIndex[1]]
     }
 
     if (pMetadata) {

@@ -14,7 +14,7 @@ patch announcement
 
 # New Pokemons:
 
-Gligar,Gliscor,Shellder,Cloyster, Furret, Sentret
+Gligar,Gliscor,Shellder,Cloyster,Furret,Sentret,Spectrier
 
 # Changes to Pokemon
 

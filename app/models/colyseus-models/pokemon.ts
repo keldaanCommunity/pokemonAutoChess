@@ -8675,22 +8675,22 @@ export class Gligar extends Pokemon {
     super(
       Pkm.GLIGAR,
       [Synergy.GROUND, Synergy.POISON, Synergy.FLYING],
-      Rarity.RARE,
+      Rarity.UNIQUE,
       Pkm.GLISCOR,
-      70,
-      6,
-      2,
-      2,
+      130,
+      14,
+      3,
+      3,
       1,
       AttackSprite.ROCK_MELEE,
-      1,
+      2,
       90,
       Ability.POISON_JAB,
       shiny,
       emotion,
       false,
       true,
-      Passive.POISON_HEAL
+      Passive.GLIGAR
     )
   }
 }
@@ -8700,7 +8700,7 @@ export class Gliscor extends Pokemon {
     super(
       Pkm.GLISCOR,
       [Synergy.GROUND, Synergy.POISON, Synergy.FLYING],
-      Rarity.RARE,
+      Rarity.UNIQUE,
       Pkm.DEFAULT,
       170,
       18,
@@ -8708,7 +8708,7 @@ export class Gliscor extends Pokemon {
       4,
       1,
       AttackSprite.ROCK_MELEE,
-      2,
+      3,
       90,
       Ability.POISON_JAB,
       shiny,
@@ -13341,7 +13341,7 @@ export class Tyrogue extends Pokemon {
       3,
       1,
       AttackSprite.FIGHTING_MELEE,
-      3,
+      2,
       100,
       Ability.MACH_PUNCH,
       shiny,

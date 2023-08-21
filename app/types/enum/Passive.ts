@@ -35,6 +35,7 @@ export enum Passive {
   MAGIKARP = "MAGIKARP",
   GIRATINA = "GIRATINA",
   UNOWN = "UNOWN",
+  GLIGAR = "GLIGAR",
   POISON_HEAL = "POISON_HEAL",
   GRIM_NEIGH = "GRIM_NEIGH"
 }
