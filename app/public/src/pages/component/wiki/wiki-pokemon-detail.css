@@ -26,6 +26,7 @@
 
 .wiki-pokemon-detail dd {
   display: inline;
+  white-space: pre-line;
 }
 
 .wiki-pokemon-detail dt::after {

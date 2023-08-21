@@ -6,15 +6,30 @@ import { Weather } from "../../../../types/enum/Weather"
 import SynergyIcon from "../component/icons/synergy-icon"
 import { cc } from "./jsx"
 import { t } from "i18next"
-
-export const iconRegExp =
-  /(?<=\W|^)(?:PHYSICAL|SPECIAL|TRUE|ATK|ATK_SPEED|CRIT_CHANCE|CRIT_DAMAGE|DEF|HP|PP|RANGE|SHIELD|SPE_DEF|AP|BURN|SILENCE|POISON|FREEZE|PROTECT|SLEEP|CONFUSION|WOUND|RESURECTION|PARALYSIS|ARMOR_REDUCTION|GRASS_FIELD|FAIRY_FIELD|RUNE_PROTECT|ELECTRIC_FIELD|PSYCHIC_FIELD|SUN|RAIN|WINDY|SNOW|SANDSTORM|MISTY|STORM|NEUTRAL|NIGHT|NORMAL|GRASS|FIRE|WATER|ELECTRIC|FIGHTING|PSYCHIC|DARK|STEEL|GROUND|POISON|DRAGON|FIELD|MONSTER|HUMAN|AQUATIC|BUG|FLYING|FLORA|ROCK|GHOST|FAIRY|ICE|FOSSIL|SOUND|ARTIFICIAL|BABY|\[[^\]]+\])(?=\W|$)/g
+import { Item } from "../../../../types/enum/Item"
 
 const DamageTypes = Object.keys(Damage)
-const Stats = Object.values(Stat)
+const Stats = Object.keys(Stat)
 const Statuses = Object.keys(Status)
 const Weathers = Object.keys(Weather)
 const Synergies = Object.keys(Synergy)
+const Items = Object.keys(Item)
+
+export const iconRegExp = new RegExp(
+  `(?<=\\W|^)(?:${[
+    ...DamageTypes,
+    ...Stats,
+    ...Statuses,
+    ...Weathers,
+    ...Synergies,
+    ...Items
+  ].join("|")}|\\[[^\\]]+\\])(?=\\W|$)`,
+  "g"
+)
+
+const oldRegEx =
+  /(?<=\W|^)(?:PHYSICAL|SPECIAL|TRUE|ATK|ATK_SPEED|CRIT_CHANCE|CRIT_DAMAGE|DEF|HP|PP|RANGE|SHIELD|SPE_DEF|AP|BURN|SILENCE|POISON|FREEZE|PROTECT|SLEEP|CONFUSION|WOUND|RESURECTION|PARALYSIS|ARMOR_REDUCTION|GRASS_FIELD|FAIRY_FIELD|RUNE_PROTECT|ELECTRIC_FIELD|PSYCHIC_FIELD|SUN|RAIN|WINDY|SNOW|SANDSTORM|MISTY|STORM|NEUTRAL|NIGHT|NORMAL|GRASS|FIRE|WATER|ELECTRIC|FIGHTING|PSYCHIC|DARK|STEEL|GROUND|POISON|DRAGON|FIELD|MONSTER|HUMAN|AQUATIC|BUG|FLYING|FLORA|ROCK|GHOST|FAIRY|ICE|FOSSIL|SOUND|ARTIFICIAL|BABY|\[[^\]]+\])(?=\W|$)/g
+console.log({ iconRegExp, oldRegEx })
 
 export function addIconsToDescription(description: string, tier = 0, ap = 0) {
   const matchIcon = description.match(iconRegExp)
@@ -66,6 +81,17 @@ export function addIconsToDescription(description: string, tier = 0, ap = 0) {
           >
             <img src={`assets/icons/weather/${token.toLowerCase()}.svg`} />
             <span className="weather-label">{t(`weather.${token}`)}</span>
+          </span>
+        )
+      } else if (Items.includes(token as Item)) {
+        d = (
+          <span
+            key={i}
+            className="description-icon item"
+            title={t(`item_description.${token}`)}
+          >
+            <img src={`assets/item/${token}.png`} />
+            <span className="item-label">{t(`item.${token}`)}</span>
           </span>
         )
       } else if (Synergies.includes(token as Synergy)) {

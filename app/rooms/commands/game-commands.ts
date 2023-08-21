@@ -443,7 +443,6 @@ export class OnDragDropItemCommand extends Command<
       // SPECIAL CASES: create a new pokemon on item equip
       let newPokemon: Pokemon | undefined = undefined
       const equipAfterTransform = true
-      let evol = Pkm.HITMONTOP
 
       switch (pokemon.name) {
         case Pkm.EEVEE:
@@ -554,6 +553,7 @@ export class OnDragDropItemCommand extends Command<
           }
           break
         case Pkm.TYROGUE:
+          let evol = Pkm.HITMONTOP
           if (
             item === Item.CHARCOAL ||
             item === Item.MAGNET ||
