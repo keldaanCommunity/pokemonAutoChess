@@ -1,33 +1,17 @@
 import React from "react"
 import { SynergyTriggers } from "../../../../../types/Config"
 import SynergyComponent from "./synergy-component"
-import CSS from "csstype"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { useTranslation } from "react-i18next"
 
-const style: CSS.Properties = {
-  position: "absolute",
-  left: "0.5%",
-  display: "flex",
-  justifyContent: "space-between",
-  width: "8%",
-  top: "9%",
-  flexFlow: "column",
-  maxHeight: "73%",
-  overflowY: "scroll",
-  padding: "0px",
-  color: "#fff",
-  backgroundColor: "#61738a"
-}
+import "./synergies.css"
 
 export default function Synergies(props: { synergies: [string, number][] }) {
   const { t } = useTranslation()
   if (props.synergies && props.synergies.length > 0) {
     return (
-      <div style={style} className="nes-container hidden-scrollable">
-        <h5 style={{ padding: "10px", textAlign: "center", fontSize: "1.3vw" }}>
-          {t("synergies")}
-        </h5>
+      <div className="synergies-container nes-container hidden-scrollable">
+        <h5 className="synergies-header">{t("synergies")}</h5>
         {Object.keys(Synergy)
           .sort((a, b) => {
             const fa = props.synergies.find((e) => e[0] == a)
@@ -45,9 +29,7 @@ export default function Synergies(props: { synergies: [string, number][] }) {
             }
           })
           .map((type, index) => {
-            // logger.debug(type);
             const s = props.synergies.find((e) => e[0] == type)
-            // logger.debug(s);
             if (s && s[1] > 0) {
               return (
                 <SynergyComponent

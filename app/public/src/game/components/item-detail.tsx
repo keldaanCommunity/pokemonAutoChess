@@ -1,5 +1,5 @@
 import { GameObjects } from "phaser"
-import React from "react"
+import React, { useMemo } from "react"
 import ReactDOM from "react-dom/client"
 import ReactTooltip from "react-tooltip"
 import { ItemRecipe, ItemStats } from "../../../../types/Config"
@@ -16,8 +16,10 @@ export function ItemDetailTooltip({
   depth: number
 }) {
   const { t } = useTranslation()
-  const recipes = Object.entries(ItemRecipe).filter(([result, recipe]) =>
-    recipe.includes(item)
+  const recipes = useMemo(
+    () =>
+      Object.entries(ItemRecipe).filter(([, recipe]) => recipe.includes(item)),
+    [item]
   )
 
   return (

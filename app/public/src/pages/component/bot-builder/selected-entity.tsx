@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { Item } from "../../../../../types/enum/Item"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import PokemonFactory from "../../../../../models/pokemon-factory"
@@ -33,9 +33,8 @@ export default function SelectedEntity(props: {
   selectEntity: React.Dispatch<React.SetStateAction<DetailledPkm | Item>>
 }) {
   const { t } = useTranslation()
-  const [metadata, setMetadata] = useState<{ [key: string]: ITracker }>(
-    tracker as unknown as { [key: string]: ITracker }
-  )
+  const metadata = tracker as unknown as { [key: string]: ITracker }
+
   if (Object.keys(Item).includes(props.entity as Item)) {
     return (
       <div className="nes-container" style={entityStyle}>
