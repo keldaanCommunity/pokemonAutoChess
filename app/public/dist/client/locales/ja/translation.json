@@ -1898,5 +1898,13 @@
   "leave_room": "部屋を出る",
   "tier": "階層",
   "buy_xp_tooltip": "4 XP を 4 ゴールドで購入 (ショートカット: F)",
-  "no_emotions_available": "利用できる感情はありません"
+  "no_emotions_available": "利用できる感情はありません",
+  "ability.WATERFALL": "滝",
+  "ability_description.BLIZZARD": "敵ポケモン全員を3秒間フリーズさせ、[15,SP]のスペシャルを与える。敵がすでにフリーズ状態の場合、ダメージが2倍になります",
+  "ability_description.WATERFALL": "SHIELD自体[30,60,120,SP]用",
+  "show_details_on_hover": "右クリックではなくホバーで詳細を表示",
+  "finished_preloading": "プリロードが完了しました",
+  "preloading_start": "ゲームをプリロード中...",
+  "loading_asset": "アセットのロード:",
+  "loading_complete": "ロードが完了しました。他のプレイヤーを待っています..."
 }

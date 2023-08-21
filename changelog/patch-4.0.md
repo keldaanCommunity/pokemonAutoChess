@@ -29,6 +29,7 @@ Gligar,Gliscor,Shellder,Cloyster, Furret, Sentret
 - Buff Overheat (Moltres): 30 → 40 special damage
 - Buff Charge (Zapdos): now also increase Attack Speed
 - New ability for Articuno: Blizzard
+- New ability for Totodile: for Waterfall
 
 # Changes to Synergies
 

@@ -5185,8 +5185,8 @@ export class Totodile extends Pokemon {
       1,
       AttackSprite.WATER_MELEE,
       1,
-      100,
-      Ability.BITE,
+      90,
+      Ability.WATERFALL,
       shiny,
       emotion,
       false
@@ -5208,8 +5208,8 @@ export class Croconaw extends Pokemon {
       1,
       AttackSprite.WATER_MELEE,
       2,
-      100,
-      Ability.BITE,
+      90,
+      Ability.WATERFALL,
       shiny,
       emotion,
       false
@@ -5231,8 +5231,8 @@ export class Feraligatr extends Pokemon {
       1,
       AttackSprite.WATER_MELEE,
       3,
-      100,
-      Ability.BITE,
+      90,
+      Ability.WATERFALL,
       shiny,
       emotion,
       true

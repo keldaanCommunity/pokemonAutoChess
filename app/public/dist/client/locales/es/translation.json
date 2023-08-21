@@ -1898,5 +1898,13 @@
   "leave_room": "Dejar la habitación",
   "tier": "Nivel",
   "buy_xp_tooltip": "Compre 4 XP por 4 de oro (atajo: F)",
-  "no_emotions_available": "No hay emociones disponibles"
+  "no_emotions_available": "No hay emociones disponibles",
+  "ability.WATERFALL": "Cascada",
+  "ability_description.BLIZZARD": "CONGELA a todos los Pokémon enemigos durante 3 segundos e inflige [15,SP] ESPECIAL. Daño doble si el enemigo ya está CONGELADO",
+  "ability_description.WATERFALL": "SHIELD mismo para [30,60,120,SP]",
+  "show_details_on_hover": "Mostrar detalles al pasar el mouse en lugar de hacer clic con el botón derecho",
+  "finished_preloading": "Precarga terminada",
+  "preloading_start": "Precargando juego...",
+  "loading_asset": "Cargando activo:",
+  "loading_complete": "Cargando completa, esperando a otros jugadores..."
 }

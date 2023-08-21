@@ -831,6 +831,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.WATERFALL,
+      frames: this.game.anims.generateFrameNames(Ability.WATERFALL, {
+        start: 0,
+        end: 7,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.HELPING_HAND,
       frames: this.game.anims.generateFrameNames(Ability.HELPING_HAND, {
         start: 0,

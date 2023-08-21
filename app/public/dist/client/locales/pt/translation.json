@@ -809,7 +809,9 @@
     "POISON_JAB": "Jab Venenoso",
     "SHELL_SMASH": "Shell Smash",
     "HELPING_HAND": "Mão amiga",
-    "ASTRAL_BARRAGE": "barragem astral"
+    "ASTRAL_BARRAGE": "barragem astral",
+    "BLIZZARD": "Nevasca",
+    "WATERFALL": "Cachoeira"
   },
   "ability_description": {
     "DEFAULT": "Padrão",
@@ -1010,7 +1012,9 @@
     "FORECAST": "Dá [10,SP] SHIELD ao seu time, além de bônus adicional dependendo do clima:\n Sol: também dá [3,SP] ATK\n Chuva: também dá [20,SP] PP\n Snow: também dá [2,SP] DEF / SPE_DEF",
     "SHELL_SMASH": "Oferece [15, 30,SP] ESPECIAL aos inimigos adjacentes; ganhe 2 ATK, 20% AP e 20% ATK_SPEED e perca 1 DEF, 1 SPE_DEF",
     "HELPING_HAND": "Dobre o dano do próximo feitiço lançado pelos aliados mais próximos [2,4,6]",
-    "ASTRAL_BARRAGE": "Envia [3,SP=2] pequenos fantasmas em Pokémon adversários aleatórios. Cada um deles oferece 20 ESPECIAIS"
+    "ASTRAL_BARRAGE": "Envia [3,SP=2] pequenos fantasmas em Pokémon adversários aleatórios. Cada um deles oferece 20 ESPECIAIS",
+    "BLIZZARD": "CONGELE todos os Pokémon inimigos por 3 segundos e dê [15,SP] ESPECIAL. Dano dobrado se o inimigo já estiver CONGELADO",
+    "WATERFALL": "SHIELD por [30,60,120,SP]"
   },
   "effect": {
     "INGRAIN": "Inerente",
@@ -1943,5 +1947,10 @@
   "leave_room": "sair da sala",
   "tier": "Nível",
   "buy_xp_tooltip": "Compre 4 XP por 4 ouro (atalho: F)",
-  "no_emotions_available": "Nenhuma emoção disponível"
+  "no_emotions_available": "Nenhuma emoção disponível",
+  "show_details_on_hover": "Mostrar detalhes ao passar o mouse em vez de clicar com o botão direito",
+  "finished_preloading": "Pré-carregamento finalizado",
+  "preloading_start": "Pré-carregando o jogo...",
+  "loading_asset": "Carregando recurso:",
+  "loading_complete": "Carregando completo, aguardando outros jogadores..."
 }

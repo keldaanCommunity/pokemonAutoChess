@@ -801,7 +801,9 @@
     "POISON_JAB": "Direct Toxik",
     "SHELL_SMASH": "Écrasement d'obus",
     "HELPING_HAND": "Coup de main",
-    "ASTRAL_BARRAGE": "Éclat Spectral"
+    "ASTRAL_BARRAGE": "Éclat Spectral",
+    "BLIZZARD": "Tempête De Neige",
+    "WATERFALL": "Cascade"
   },
   "ability_description": {
     "SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés",
@@ -1002,7 +1004,9 @@
     "SHELL_SMASH": "Inflige [15,30,SP] SPÉCIAL aux ennemis adjacents ; gagne 2 ATK, 20% AP et 20% ATK_SPEED, et perd 1 DEF, 1 SPE_DEF",
     "HELPING_HAND": "Double les dégâts de la prochaine capacité lancée par les [2,4,6] alliés les plus proches",
     "ASTRAL_BARRAGE": "Attaque des ennemis aléatoires avec [3,SP=2] petits spectres, chacun infligeant 20 SPECIAL",
-    "SLEEP": "Faites dormir [1,2,3] Pokémon ennemis dans la ligne de fond pendant 2,5 secondes"
+    "SLEEP": "Faites dormir [1,2,3] Pokémon ennemis dans la ligne de fond pendant 2,5 secondes",
+    "BLIZZARD": "GELEZ tous les Pokémon ennemis pendant 3 secondes et infligez [15, SP] SPÉCIAL. Double dégâts si l'ennemi est déjà GEL",
+    "WATERFALL": "SHIELD lui-même pour [30,60,120,SP]"
   },
   "emotion": {
     "Teary-Eyed": "Larmoyant",
@@ -1946,5 +1950,7 @@
   "no_emotions_available": "Aucune émotion disponible",
   "preloading_start": "Préchargement du jeu...",
   "loading_asset": "Chargement:",
-  "loading_complete": "Chargement terminé, en attente des autres joueurs..."
+  "loading_complete": "Chargement terminé, en attente des autres joueurs...",
+  "show_details_on_hover": "Afficher les détails au survol au lieu du clic droit",
+  "finished_preloading": "Préchargement terminé"
 }

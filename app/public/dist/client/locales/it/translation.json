@@ -1898,5 +1898,13 @@
   "leave_room": "Lasciare la stanza",
   "tier": "Livello",
   "buy_xp_tooltip": "Acquista 4 XP per 4 oro (scorciatoia: F)",
-  "no_emotions_available": "Nessuna emozione disponibile"
+  "no_emotions_available": "Nessuna emozione disponibile",
+  "ability.WATERFALL": "Cascata",
+  "ability_description.BLIZZARD": "CONGELA tutti i Pokémon nemici per 3 secondi e infliggi [15,SP] SPECIALE. Doppio danno se il nemico è già FREEZE",
+  "ability_description.WATERFALL": "SCUDO stesso per [30,60,120,SP]",
+  "show_details_on_hover": "Mostra i dettagli al passaggio del mouse invece che con il clic destro",
+  "finished_preloading": "Precarica terminata",
+  "preloading_start": "Precaricamento del gioco...",
+  "loading_asset": "Caricamento risorsa:",
+  "loading_complete": "Caricamento completato, in attesa di altri giocatori..."
 }

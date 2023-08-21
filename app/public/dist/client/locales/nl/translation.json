@@ -1898,5 +1898,13 @@
   "leave_room": "Verlaat Kamer",
   "tier": "Laag",
   "buy_xp_tooltip": "Koop 4 XP voor 4 goud (snelkoppeling: F)",
-  "no_emotions_available": "Geen Emoties beschikbaar"
+  "no_emotions_available": "Geen Emoties beschikbaar",
+  "ability.WATERFALL": "Waterval",
+  "ability_description.BLIZZARD": "BEVRIEZ alle vijandelijke Pokémon gedurende 3 seconden en deel [15,SP] SPECIAL. Dubbele schade als de vijand al VRIJ is",
+  "ability_description.WATERFALL": "SHIELD zelf voor [30,60,120,SP]",
+  "show_details_on_hover": "Toon details bij zweven in plaats van rechtsklikken",
+  "finished_preloading": "Klaar met voorladen",
+  "preloading_start": "Spel voorladen...",
+  "loading_asset": "Activa laden:",
+  "loading_complete": "Laden voltooid, wachten op andere spelers..."
 }

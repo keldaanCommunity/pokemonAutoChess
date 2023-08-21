@@ -3025,6 +3025,20 @@ export class SacredSwordStrategy extends AttackStrategy {
   }
 }
 
+export class WaterfallStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const shield = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30
+    pokemon.handleShield(shield, pokemon, true)
+  }
+}
+
 export class XScissorStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,

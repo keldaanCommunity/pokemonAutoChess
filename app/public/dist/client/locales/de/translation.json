@@ -1898,5 +1898,13 @@
   "leave_room": "Zimmer verlassen",
   "tier": "Stufe",
   "buy_xp_tooltip": "Kaufe 4 XP für 4 Gold (Abkürzung: F)",
-  "no_emotions_available": "Keine Emotionen verfügbar"
+  "no_emotions_available": "Keine Emotionen verfügbar",
+  "ability.WATERFALL": "Wasserfall",
+  "ability_description.BLIZZARD": "FRIERE alle gegnerischen Pokémon 3 Sekunden lang ein und verursache [15,SP] SPECIAL. Doppelter Schaden, wenn der Feind bereits eingefroren ist",
+  "ability_description.WATERFALL": "SHIELD sich selbst für [30,60,120,SP]",
+  "show_details_on_hover": "Details anzeigen, wenn Sie mit der Maus darüber fahren, anstatt mit der rechten Maustaste zu klicken",
+  "finished_preloading": "Vorladen abgeschlossen",
+  "preloading_start": "Spiel wird vorab geladen...",
+  "loading_asset": "Asset wird geladen:",
+  "loading_complete": "Der Ladevorgang ist abgeschlossen, ich warte auf andere Spieler ..."
 }
