@@ -48,6 +48,7 @@ export default class AfterGameRoom extends Room<AfterGameState> {
       const token = await admin.auth().verifyIdToken(options.idToken)
       const user = await admin.auth().getUser(token.uid)
       const isBanned = await BannedUser.findOne({ uid: user.uid })
+      client.userData = { playerId: user.uid, displayName: user.displayName }
 
       if (!user.displayName) {
         throw "No display name"
@@ -62,7 +63,7 @@ export default class AfterGameRoom extends Room<AfterGameState> {
   }
 
   onJoin(client: Client, options: any, auth: any) {
-    logger.info(`${client.auth.email} join after game`)
+    logger.info(`${client.userData.email} join after game`)
   }
 
   async onLeave(client: Client, consented: boolean) {
@@ -74,8 +75,8 @@ export default class AfterGameRoom extends Room<AfterGameState> {
       // allow disconnected client to reconnect into this room until 20 seconds
       await this.allowReconnection(client, 20)
     } catch (e) {
-      if (client && client.auth && client.auth.displayName) {
-        logger.info(`${client.auth.displayName} leave after game room`)
+      if (client && client.userData) {
+        logger.info(`${client.userData.displayName} leave after game room`)
       }
     }
   }
