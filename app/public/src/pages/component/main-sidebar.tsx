@@ -377,9 +377,8 @@ function Modals({
       />
       <GameOptionsModal
         show={modal === "options"}
-        ingame={page === "game"}
+        page={page}
         hideModal={closeModal}
-        leave={closeModal}
       />
     </>
   )
