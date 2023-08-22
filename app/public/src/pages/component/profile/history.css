@@ -1,22 +1,28 @@
 .game-history-list {
-  gap: 0.5em;
+  display: flex;
+  flex-direction: column;
 }
 
 .game-history-list h2 {
   margin: 0.5em 0;
+  text-align: center;
+}
+
+.game-history-list div {
+  flex: 1;
+  overflow-y: auto;
 }
 
 .game-history.nes-container {
   display: grid;
   align-items: center;
   gap: 0 0.5em;
-  grid-template-areas: 
-  "top elo team"
-  "syn syn team"
-  "date date team";
-  grid-template-columns: 5ch 7ch 1fr;
+  grid-template-areas:
+    "top elo syn team"
+    "date date syn team";
+  grid-template-columns: 5ch 7ch 10ch 1fr;
   background-color: #54596b;
-  margin: 0.25em 0;
+  margin: 0 0 0.5em 0;
   padding: 0.25em;
   justify-items: center;
 }
@@ -29,22 +35,27 @@
   justify-self: start;
 }
 
-.game-history .top { grid-area: top; }
-.game-history .elo { grid-area: elo; }
+.game-history .top {
+  grid-area: top;
+}
+.game-history .elo {
+  grid-area: elo;
+}
 
-.game-history .date { 
-  grid-area: date; 
+.game-history .date {
+  grid-area: date;
   color: gray;
   font-size: 0.8em;
   margin: 0;
-  text-align: center;
 }
 
 .game-history .synergies {
   grid-area: syn;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  justify-self: start;
   list-style: none;
   padding: 0;
   margin: 0;

@@ -88,46 +88,30 @@ aside.sidebar {
   color: #333;
 }
 
-.menu-item.default,
-.menu-item.default a:hover {
+.menu-item a.ps-menu-button {
   background: #54596b;
-  box-shadow: inset 0 -3px #393d49;
+  border-bottom: 3px solid #00000060;
 }
 
-.menu-item.default a:hover {
-  background: #474c5c;
-}
-
-.menu-item.blue,
-.menu-item.blue a:hover {
-  background: #109fff;
-  box-shadow: inset 0 -3px #006bb3;
-}
-
-.menu-item.blue a:hover {
+.menu-item a.ps-menu-button:hover {
   background: #1195ec;
 }
 
-.menu-item.green,
-.menu-item.green a:hover {
-  background: #92cc41;
-  box-shadow: inset 0 -3px #65a013;
+/*
+.menu-item a.ps-menu-button {
+  background: linear-gradient(200deg, #54596b, #393d49);
 }
 
-.menu-item.green a:hover {
-  background: #76c442;
-}
-
-.menu-item.red,
-.menu-item.red a:hover {
-  background: #af412b;
-  box-shadow: inset 0 -3px #570f10;
+.menu-item a.ps-menu-button:hover {
+  background: #1195ec;
+  box-shadow: inset 0 0 8px #006bb3;
 }
 
 .menu-item.red a:hover {
-  background: #852d1c;
+  background: #e76e55;
+  box-shadow: inset 0 0 8px #570f10;
 }
-
+*/
 .menu-item.discord,
 .menu-item.discord a:hover {
   background: #5865f2;

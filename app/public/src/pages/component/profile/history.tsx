@@ -19,28 +19,30 @@ export default function History(props: { history: IGameRecord[] }) {
   return (
     <article className="game-history-list">
       <h2>{t("game_history")}</h2>
-      {(!props.history || props.history.length === 0) && (
-        <p>{t("no_history_found")}</p>
-      )}
-      {props.history &&
-        props.history.map((r) => (
-          <div key={r.time} className="nes-container game-history">
-            <span className="top">
-              {t("top")} {r.rank}
-            </span>
-            <Elo elo={r.elo} />
-            <ul className="synergies">
-              {getTopSynergies(r.pokemons).map(([type, value]) => (
-                <li>
-                  <SynergyIcon type={type} />
-                  <span>{value}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="date">{formatDate(r.time)}</p>
-            <Team team={r.pokemons}></Team>
-          </div>
-        ))}
+      <div>
+        {(!props.history || props.history.length === 0) && (
+          <p>{t("no_history_found")}</p>
+        )}
+        {props.history &&
+          props.history.map((r) => (
+            <div key={r.time} className="nes-container game-history">
+              <span className="top">
+                {t("top")} {r.rank}
+              </span>
+              <Elo elo={r.elo} />
+              <ul className="synergies">
+                {getTopSynergies(r.pokemons).map(([type, value]) => (
+                  <li key={r.time + type}>
+                    <SynergyIcon type={type} />
+                    <span>{value}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="date">{formatDate(r.time)}</p>
+              <Team team={r.pokemons}></Team>
+            </div>
+          ))}
+      </div>
     </article>
   )
 }

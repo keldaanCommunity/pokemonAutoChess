@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next"
 export default function PlayerBox(props: { user: ILobbyUser }) {
   const { t } = useTranslation()
   return (
-    <div className="player-box" style={{ marginBottom: "1em" }}>
+    <div className="player-box">
       <div
         style={{
           display: "flex",

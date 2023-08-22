@@ -1,0 +1,62 @@
+.profile.nes-container {
+  color: white;
+  display: grid;
+  grid-template-areas:
+    "card     history"
+    "search   history"
+    "actions  history";
+  grid-template-columns: 600px 1fr;
+  grid-template-rows: auto auto 1fr;
+  height: 90vh;
+  padding: 0 0.5em 0.5em 1em;
+}
+
+.profile h1 {
+  font-size: 2rem;
+  margin: 0.5em;
+  text-align: center;
+}
+
+.profile .profile-box {
+  grid-area: card;
+}
+
+.profile .search-bar {
+  grid-area: search;
+  margin: 0.5em 0;
+}
+
+.profile .profile-actions {
+  grid-area: actions;
+  max-height: 100%;
+  overflow-y: scroll;
+}
+
+.profile-actions .react-tabs {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-actions .react-tabs__tab-list {
+  margin-bottom: 0;
+}
+
+.profile-actions .react-tabs__tab-panel {
+  flex: 1;
+  overflow-y: auto;
+  background-color: rgb(84, 89, 107);
+  padding: 1em;
+}
+
+.profile-actions .nes-container {
+  height: 100%;
+  background-color: #54596b;
+}
+
+.profile .game-history-list {
+  grid-area: history;
+  margin-left: 1em;
+  max-height: 100%;
+  overflow-y: scroll;
+}

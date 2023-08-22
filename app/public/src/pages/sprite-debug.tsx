@@ -34,6 +34,7 @@ export function SpriteDebug() {
       <div className="sprite-debug-container">
         <div className="sprite-debug-toolbar">
           <div className="nes-container">
+            <label htmlFor="pokemon-typeahead">Pokemon</label>
             <PokemonTypeahead
               value={pkm}
               onChange={(pkm) => pkm && setPkm(pkm)}

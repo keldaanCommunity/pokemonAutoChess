@@ -264,9 +264,8 @@ export const lobbySlice = createSlice({
         (room) => room.roomId !== action.payload
       )
     },
-    setSearchedUser: (state, action: PayloadAction<LobbyUser>) => {
-      const u: ILobbyUser = JSON.parse(JSON.stringify(action.payload))
-      state.searchedUser = u
+    setSearchedUser: (state, action: PayloadAction<LobbyUser | undefined>) => {
+      state.searchedUser = action.payload
     },
     setMeta: (state, action: PayloadAction<IMeta[]>) => {
       state.meta = action.payload
