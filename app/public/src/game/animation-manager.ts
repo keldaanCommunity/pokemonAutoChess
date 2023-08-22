@@ -22,7 +22,8 @@ export default class AnimationManager {
     this.game = game
 
     indexList.forEach((index) => {
-      ;(Object.values(PokemonTint) as PokemonTint[]).forEach((shiny) => {
+      const tints = Object.values(PokemonTint) as PokemonTint[]
+      tints.forEach((shiny) => {
         const actions: AnimationType[] = [
           AnimationType.Idle,
           AnimationType.Walk,
@@ -42,12 +43,16 @@ export default class AnimationManager {
           if (!actions.includes(AnimationConfig[conf as Pkm].ability)) {
             actions.push(AnimationConfig[conf as Pkm].ability)
           }
+          if (!actions.includes(AnimationConfig[conf as Pkm].emote)) {
+            actions.push(AnimationConfig[conf as Pkm].emote)
+          }
         } else {
           actions.push(AnimationType.Attack)
         }
 
         actions.forEach((action) => {
-          ;(Object.values(SpriteType) as SpriteType[]).forEach((mode) => {
+          const modes = Object.values(SpriteType) as SpriteType[]
+          modes.forEach((mode) => {
             const directionArray =
               AnimationComplete[action] === false
                 ? [Orientation.DOWN]
