@@ -124,15 +124,17 @@ export function MainSidebar(props: MainSidebarProps) {
           {t("news")}
         </NavLink>
 
-        <NavLink
-          location="profile"
-          svg="profile"
-          handleClick={(newModal) => {
-            changeModal(newModal)
-          }}
-        >
-          {t("profile")}
-        </NavLink>
+        {page === "main_lobby" && (
+          <NavLink
+            location="profile"
+            svg="profile"
+            handleClick={(newModal) => {
+              changeModal(newModal)
+            }}
+          >
+            {t("profile")}
+          </NavLink>
+        )}
 
         {page !== "game" && (
           <NavLink
