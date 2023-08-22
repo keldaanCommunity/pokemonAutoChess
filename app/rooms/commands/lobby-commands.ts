@@ -53,15 +53,15 @@ export class OnJoinCommand extends Command<
     rooms: RoomListingData<any>[] | undefined
   }) {
     try {
-      logger.info(`${client.auth.displayName} ${client.id} join lobby room`)
+      logger.info(`${client.userData.displayName} ${client.id} join lobby room`)
       client.send(Transfer.ROOMS, rooms)
       // client.send(Transfer.REQUEST_BOT_DATA, this.bots);
-      const user = await UserMetadata.findOne({ uid: client.auth.uid })
+      const user = await UserMetadata.findOne({ uid: client.userData.playerId })
 
       if (user) {
         // load existing account
         const stats = await DetailledStatistic.find(
-          { playerId: client.auth.uid },
+          { playerId: client.userData.uid },
           ["pokemons", "time", "rank", "elo"],
           { limit: 10, sort: { time: -1 } }
         )
@@ -79,7 +79,7 @@ export class OnJoinCommand extends Command<
           })
 
           this.state.users.set(
-            client.auth.uid,
+            client.userData.playerId,
             new LobbyUser(
               user.uid,
               user.displayName,
@@ -108,16 +108,16 @@ export class OnJoinCommand extends Command<
         // create new user account
         const numberOfBoosters = 3
         UserMetadata.create({
-          uid: client.auth.uid,
-          displayName: client.auth.displayName,
+          uid: client.userData.playerId,
+          displayName: client.userData.displayName,
           booster: numberOfBoosters,
           pokemonCollection: new Map<string, IPokemonConfig>()
         })
         this.state.users.set(
-          client.auth.uid,
+          client.userData.playerId,
           new LobbyUser(
-            client.auth.uid,
-            client.auth.displayName,
+            client.userData.uid,
+            client.userData.displayName,
             1000,
             "0019/Normal",
             0,
@@ -151,9 +151,9 @@ export class OnLeaveCommand extends Command<
 > {
   execute({ client }: { client: Client }) {
     try {
-      if (client && client.auth && client.auth.displayName && client.auth.uid) {
-        logger.info(`${client.auth.displayName} ${client.id} leave lobby`)
-        this.state.users.delete(client.auth.uid)
+      if (client && client.userData) {
+        logger.info(`${client.userData.displayName} ${client.id} leave lobby`)
+        this.state.users.delete(client.userData.uid)
       }
     } catch (error) {
       logger.error(error)
@@ -175,7 +175,7 @@ export class GiveTitleCommand extends Command<
     title: Title
   }) {
     try {
-      const u = this.state.users.get(client.auth.uid)
+      const u = this.state.users.get(client.userData.playerId)
       const targetUser = this.state.users.get(uid)
 
       if (u && u.role && u.role === Role.ADMIN) {
@@ -209,7 +209,7 @@ export class GiveBoostersCommand extends Command<
     numberOfBoosters: number
   }) {
     try {
-      const u = this.state.users.get(client.auth.uid)
+      const u = this.state.users.get(client.userData.playerId)
       const targetUser = this.state.users.get(uid)
 
       if (u && u.role && u.role === Role.ADMIN) {
@@ -243,7 +243,7 @@ export class GiveRoleCommand extends Command<
     role: Role
   }) {
     try {
-      const u = this.state.users.get(client.auth.uid)
+      const u = this.state.users.get(client.userData.playerId)
       const targetUser = this.state.users.get(uid)
       // logger.debug(u.role, uid)
       if (u && u.role === Role.ADMIN) {
@@ -271,7 +271,7 @@ export class OnNewMessageCommand extends Command<
       const MAX_MESSAGE_LENGTH = 250
       message = cleanProfanity(message.substring(0, MAX_MESSAGE_LENGTH))
 
-      const user = this.state.users.get(client.auth.uid)
+      const user = this.state.users.get(client.userData.playerId)
       if (user && !user.anonymous && message != "") {
         this.state.addMessage(
           nanoid(),
@@ -295,7 +295,7 @@ export class RemoveMessageCommand extends Command<
 > {
   execute({ client, messageId }: { client: Client; messageId: string }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
+      const user = this.state.users.get(client.userData.playerId)
       if (
         user &&
         user.role &&
@@ -315,7 +315,7 @@ export class OpenBoosterCommand extends Command<
 > {
   async execute({ client }: { client: Client }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
+      const user = this.state.users.get(client.userData.playerId)
       if (!user) return
 
       const DUST_PER_BOOSTER = 50
@@ -339,7 +339,7 @@ export class OpenBoosterCommand extends Command<
           }
         })
 
-        const u = await UserMetadata.findOne({ uid: client.auth.uid })
+        const u = await UserMetadata.findOne({ uid: client.userData.playerId })
 
         if (u) {
           u.booster = user.booster
@@ -396,11 +396,13 @@ export class ChangeNameCommand extends Command<
 > {
   async execute({ client, name }: { client: Client; name: string }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
+      const user = this.state.users.get(client.userData.playerId)
       if (!user) return
       if (USERNAME_REGEXP.test(name)) {
         user.name = name
-        const usr = await UserMetadata.findOne({ uid: client.auth.uid })
+        const usr = await UserMetadata.findOne({
+          uid: client.userData.playerId
+        })
         if (usr) {
           usr.displayName = name
           usr.save()
@@ -418,13 +420,15 @@ export class ChangeTitleCommand extends Command<
 > {
   async execute({ client, title }: { client: Client; title: Title | "" }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
+      const user = this.state.users.get(client.userData.playerId)
       if (user) {
         if (user.title === title) {
           title = "" // remove title if user already has it
         }
         user.title = title
-        const usr = await UserMetadata.findOne({ uid: client.auth.uid })
+        const usr = await UserMetadata.findOne({
+          uid: client.userData.playerId
+        })
         if (usr) {
           usr.title = title
           usr.save()
@@ -452,7 +456,7 @@ export class ChangeSelectedEmotionCommand extends Command<
     shiny: boolean
   }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
+      const user = this.state.users.get(client.userData.playerId)
       if (!user) return
       const pokemonConfig = user.pokemonCollection.get(index)
       if (pokemonConfig) {
@@ -466,7 +470,9 @@ export class ChangeSelectedEmotionCommand extends Command<
         ) {
           pokemonConfig.selectedEmotion = emotion
           pokemonConfig.selectedShiny = shiny
-          const u = await UserMetadata.findOne({ uid: client.auth.uid })
+          const u = await UserMetadata.findOne({
+            uid: client.userData.playerId
+          })
           const pkmConfig = u?.pokemonCollection.get(index)
           if (u && pkmConfig) {
             pkmConfig.selectedEmotion = emotion
@@ -497,7 +503,7 @@ export class ChangeAvatarCommand extends Command<
     shiny: boolean
   }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
+      const user = this.state.users.get(client.userData.playerId)
       if (!user) return
       const config = user.pokemonCollection.get(index)
       if (config) {
@@ -507,7 +513,9 @@ export class ChangeAvatarCommand extends Command<
             .replace(CDN_PORTRAIT_URL, "")
             .replace(".png", "")
           user.avatar = portrait
-          const u = await UserMetadata.findOne({ uid: client.auth.uid })
+          const u = await UserMetadata.findOne({
+            uid: client.userData.playerId
+          })
           if (u) {
             u.avatar = portrait
             u.save()
@@ -536,7 +544,7 @@ export class BuyEmotionCommand extends Command<
     shiny: boolean
   }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
+      const user = this.state.users.get(client.userData.playerId)
       if (!user) return
       const pokemonConfig = user.pokemonCollection.get(index)
       if (pokemonConfig) {
@@ -549,7 +557,9 @@ export class BuyEmotionCommand extends Command<
           pokemonConfig.dust -= cost
           pokemonConfig.selectedEmotion = emotion
           pokemonConfig.selectedShiny = shiny
-          const u = await UserMetadata.findOne({ uid: client.auth.uid })
+          const u = await UserMetadata.findOne({
+            uid: client.userData.playerId
+          })
           if (u) {
             let numberOfShinies = 0
             u.pokemonCollection.forEach((c) => {
@@ -628,7 +638,7 @@ export class BuyBoosterCommand extends Command<
 > {
   async execute({ client, index }: { client: Client; index: string }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
+      const user = this.state.users.get(client.userData.playerId)
       if (!user) return
       const pokemonConfig = user.pokemonCollection.get(index)
       if (pokemonConfig) {
@@ -636,7 +646,9 @@ export class BuyBoosterCommand extends Command<
         if (pokemonConfig.dust >= BOOSTER_COST) {
           pokemonConfig.dust -= BOOSTER_COST
           user.booster += 1
-          const u = await UserMetadata.findOne({ uid: client.auth.uid })
+          const u = await UserMetadata.findOne({
+            uid: client.userData.playerId
+          })
           const pkmConfig = u?.pokemonCollection.get(index)
           if (u && pkmConfig) {
             pkmConfig.dust = pokemonConfig.dust
@@ -747,7 +759,7 @@ export class BanUserCommand extends Command<
     reason: string
   }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
+      const user = this.state.users.get(client.userData.playerId)
       if (user && (user.role === Role.ADMIN || user.role === Role.MODERATOR)) {
         this.state.removeMessages(uid)
         const banned = await BannedUser.findOne({ uid })
@@ -781,7 +793,7 @@ export class BanUserCommand extends Command<
           client.send(Transfer.BANNED, `${name} was already banned`)
         }
         this.room.clients.forEach((c) => {
-          if (c.auth.uid === uid) {
+          if (c.userData.playerId === uid) {
             c.send(Transfer.BAN)
             c.leave()
           }
@@ -807,7 +819,7 @@ export class UnbanUserCommand extends Command<
     name: string
   }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
+      const user = this.state.users.get(client.userData.playerId)
       if (user && (user.role === Role.ADMIN || user.role === Role.MODERATOR)) {
         const res = await BannedUser.deleteOne({ uid })
         if (res.deletedCount > 0) {
@@ -841,9 +853,11 @@ export class SelectLanguageCommand extends Command<
 > {
   async execute({ client, message }: { client: Client; message: Language }) {
     try {
-      const u = this.state.users.get(client.auth.uid)
-      if (client.auth.uid && u) {
-        const user = await UserMetadata.findOne({ uid: client.auth.uid })
+      const u = this.state.users.get(client.userData.playerId)
+      if (u) {
+        const user = await UserMetadata.findOne({
+          uid: client.userData.playerId
+        })
         if (user) {
           user.language = message
           user.save()
@@ -862,7 +876,7 @@ export class AddBotCommand extends Command<
 > {
   async execute({ client, message }: { client: Client; message: any }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
+      const user = this.state.users.get(client.userData.playerId)
       if (
         user &&
         (user.role === Role.ADMIN ||
@@ -952,7 +966,7 @@ export class DeleteBotCommand extends Command<
 > {
   async execute({ client, message }: { client: Client; message: string }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
+      const user = this.state.users.get(client.userData.playerId)
       if (
         user &&
         (user.role === Role.ADMIN ||
@@ -1028,7 +1042,7 @@ export class OnBotUploadCommand extends Command<
 > {
   execute({ client, bot }: { client: Client; bot: IBot }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
+      const user = this.state.users.get(client.userData.playerId)
       if (!user) return
       this.room.pastebin
         ?.createPaste({

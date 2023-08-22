@@ -13,6 +13,7 @@ import GameOptionsModal from "./game/game-options-modal"
 import MetaReport from "./meta-report/meta-report"
 import { BasicModal } from "./modal/modal"
 import News from "./news/news"
+import { useNews } from "./news/useNews"
 import Wiki from "./wiki/wiki"
 import pkg from "../../../../../package.json"
 
@@ -48,6 +49,8 @@ export function MainSidebar(props: MainSidebarProps) {
     metaItems: state.lobby.metaItems,
     user: state.lobby.user
   }))
+
+  const { isNewVersion, updateNewsVersion } = useNews()
 
   const version = pkg.version
 
@@ -163,7 +166,17 @@ export function MainSidebar(props: MainSidebarProps) {
             </NavLink>
           )}
 
-        <NavLink location="news" svg="newspaper" handleClick={changeModal}>
+        <NavLink
+          location="news"
+          svg="newspaper"
+          handleClick={(newModal) => {
+            changeModal(newModal)
+            if (isNewVersion) {
+              updateNewsVersion()
+            }
+          }}
+          shimmer={isNewVersion}
+        >
           {t("news")}
         </NavLink>
         <NavLink svg="options" location="options" handleClick={changeModal}>

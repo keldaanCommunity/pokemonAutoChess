@@ -46,6 +46,7 @@
     "SILENCE": "Silence",
     "PROTECT": "Protect",
     "FREEZE": "Freeze",
+    "BLIZZARD": "Blizzard",
     "CONFUSION": "Confusion",
     "FIRE_BLAST": "Fire Blast",
     "WHEEL_OF_FIRE": "Flame Wheel",
@@ -215,7 +216,8 @@
     "POISON_JAB": "Poison Jab",
     "SHELL_SMASH": "Shell Smash",
     "HELPING_HAND": "Helping Hand",
-    "ASTRAL_BARRAGE": "Astral Barrage"
+    "ASTRAL_BARRAGE": "Astral Barrage",
+    "WATERFALL": "Waterfall"
   },
   "pkm": {
     "DEFAULT": "default",
@@ -836,6 +838,7 @@
     "SILENCE": "SILENCE all enemy Pokémon for [2,4,8] seconds",
     "PROTECT": "PROTECT the user, becoming invulnerable for [5,SP=0.5] seconds",
     "FREEZE": "FREEZE all enemy Pokémon for [1,2,3] seconds",
+    "BLIZZARD": "FREEZE all enemy Pokémon for 3 seconds and deal [15,SP] SPECIAL. Double damage if enemy is already FREEZE",
     "CONFUSION": "CONFUSION the target for [3,5,7] seconds. If the target is already CONFUSION, deal [75,150,300,SP] SPECIAL instead",
     "FIRE_BLAST": "Shoot a Fire Blast, dealing [30,60,120,SP] SPECIAL to the target",
     "WHEEL_OF_FIRE": "Shoot a returning Flame Wheel, dealing [20,40,80,SP] SPECIAL to all enemy Pokémon hit",
@@ -856,7 +859,7 @@
     "SEED_FLARE": "Shaymin's body emits a shockwave, dealing [30,SP] SPECIAL to all enemy Pokémon, and decreasing their SPE_DEF by 2",
     "IRON_TAIL": "Deal [20,40,80,SP] SPECIAL to the target and buff the user's DEF by [1,3,5]",
     "BLAST_BURN": "Deal [30,60,120,SP] SPECIAL in an area around the user",
-    "CHARGE": "Buff all allied Electric Pokémon's ATK by [20,SP]%",
+    "CHARGE": "Buff all allied Electric Pokémon's ATK and ATK_SPEED by [20,SP]%",
     "DISCHARGE": "Deal [25,50,75,SP] SPECIAL to nearby enemy Pokémon and make them PARALYSIS for 5 seconds",
     "BITE": "Deal [40,80,120,SP] SPECIAL to the target and heal the user for 30% of the damage dealt",
     "DRAGON_TAIL": "Deal [30,60,120,SP] SPECIAL to the target and buff the user's DEF and SPE_DEF by [1,2,3,SP]",
@@ -936,13 +939,13 @@
     "MAWASHI_GERI": "Deals [80,SP] SPECIAL. Double damage if attacker has a better ATK than target",
     "FORECAST": "Gives [10,SP] SHIELD to your team, plus additional bonus depending on the weather: \n Sun: also gives [3,SP] ATK \n Rain: also gives [20,SP] PP \n Snow: also gives [2,SP] DEF / SPE_DEF",
     "X_SCISSOR": "Deals [20,40,80,SP] TRUE twice",
-    "PLASMA_FIST": "Deals [120, SP] SPECIAL with 25% lifesteal",
-    "SPECTRAL_THIEF": "Disappears and reappears dealing [50, SP] SPECIAL, stealing all the statistic boost of the target",
+    "PLASMA_FIST": "Deals [120,SP] SPECIAL with 25% lifesteal",
+    "SPECTRAL_THIEF": "Disappears and reappears dealing [50,SP] SPECIAL, stealing all the statistic boost of the target",
     "GEOMANCY": "Gain [15,SP] ATK, [5,SP] SPE_DEF and 30% ATK_SPEED",
     "DEATH_WING": "Deals [150,SP] SPECIAL and heals for 75% of the damage taken by the target",
     "SLACK_OFF": "Clear all negative status, heal [30,40,50,SP=0.5] % of max HP and put the caster SLEEP for 5 seconds",
-    "DARK_VOID": "Deals [30, SP] SPECIAL to all enemies. If any affected target was SILENCE, they are put SLEEP for 2 seconds",
-    "OVERHEAT": "Deals [30, SP] SPECIAL to all enemies. Double damage if target is BURN",
+    "DARK_VOID": "Deals [30,SP] SPECIAL to all enemies. If any affected target was SILENCE, they are put SLEEP for 2 seconds",
+    "OVERHEAT": "Deals [40,SP] SPECIAL to all enemies. Double damage if target is BURN",
     "HYPNOSIS": "Put SLEEP 1 enemy in the back lines for [2,3.5,6,SP=0.5] seconds",
     "MIMIC": "Copies the ability of the current target",
     "HEX": "Deals [20,40,80,SP] SPECIAL to the target. Doubles damage if target is BURN, CONFUSION, FREEZE, PARALYSIS, POISON, SILENCE, SLEEP or WOUND",
@@ -1005,7 +1008,8 @@
     "POISON_JAB": "Deals [40,80,120,SP] SPECIAL, swaps places with the target, and POISON both the target and the caster for 4 seconds",
     "SHELL_SMASH": "Deals [15,30,SP] SPECIAL to adjacent enemies; gain 2 ATK, 20% AP and 20% ATK_SPEED, and lose 1 DEF, 1 SPE_DEF",
     "HELPING_HAND": "Double the damage of the next spell casted by the nearest [2,4,6] allies",
-    "ASTRAL_BARRAGE": "Sends [3,SP=2] small ghosts at random opposing Pokémon. Each of them deals 20 SPECIAL"
+    "ASTRAL_BARRAGE": "Sends [3,SP=2] small ghosts at random opposing Pokémon. Each of them deals 20 SPECIAL",
+    "WATERFALL": "SHIELD itself for [30,60,120,SP]"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1945,5 +1949,9 @@
   "additional_pick": "Additional pick",
   "fight": "fight",
   "community_translations": "Translations are managed by the community. If you want to add or\r\n              help improve a translation, head over to ",
-  "no_emotions_available": "No Emotions available"
+  "no_emotions_available": "No Emotions available",
+  "finished_preloading": "Finished preloading",
+  "preloading_start": "Preloading game...",
+  "loading_asset": "Loading asset:",
+  "loading_complete": "Loading complete, waiting for other players..."
 }

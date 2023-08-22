@@ -71,7 +71,6 @@ import "./lobby.css"
 
 export default function Lobby() {
   const dispatch = useAppDispatch()
-  const user = useAppSelector((state) => state.lobby.user)
   const lobby = useAppSelector((state) => state.network.lobby)
 
   const lobbyJoined = useRef<boolean>(false)

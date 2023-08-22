@@ -1,21 +1,12 @@
-import React, { useState } from "react"
-import { marked } from "marked"
-import "./news.css"
+import React from "react"
 import { useTranslation } from "react-i18next"
+import { useNews } from "./useNews"
+
+import "./news.css"
 
 export default function News() {
+  const { newsContent, isLoading } = useNews()
   const { t } = useTranslation()
-  const [newsContent, setNewsContent] = useState("")
-  const [isLoading, setIsLoading] = useState(true)
-  fetch(
-    `https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/news.md`
-  )
-    .then((res) => res.text())
-    .then((md) => marked.parse(md, { mangle: false, headerIds: false }))
-    .then((html) => {
-      setNewsContent(html)
-      setIsLoading(false)
-    })
 
   return (
     <div className="nes-container news">

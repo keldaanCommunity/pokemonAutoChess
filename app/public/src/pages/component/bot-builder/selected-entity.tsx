@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { Item } from "../../../../../types/enum/Item"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import PokemonFactory from "../../../../../models/pokemon-factory"

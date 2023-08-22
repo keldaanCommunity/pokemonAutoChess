@@ -1102,7 +1102,7 @@ export class OverheatStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target, crit)
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
-        let damage = 30
+        let damage = 40
         if (tg.status.burn) {
           damage *= 2
         }
@@ -2214,6 +2214,32 @@ export class FreezeStrategy extends AttackStrategy {
   }
 }
 
+export class BlizzardStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const freezeDuration = 3000
+    const damage = 15
+    board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
+      if (enemy && pokemon.team != enemy.team) {
+        enemy.status.triggerFreeze(freezeDuration, enemy)
+        enemy.handleSpecialDamage(
+          enemy.status.freeze ? damage * 2 : damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
+    })
+  }
+}
+
 export class ProtectStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
@@ -2821,6 +2847,7 @@ export class ChargeStrategy extends AttackStrategy {
         ally.types.includes(Synergy.ELECTRIC)
       ) {
         ally.addAttack(pokemon.baseAtk * buff, true)
+        ally.addAttackSpeed(buff * 100, true)
       }
     })
   }
@@ -2995,6 +3022,20 @@ export class SacredSwordStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target, crit)
     const damage = 90
     target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
+  }
+}
+
+export class WaterfallStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const shield = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30
+    pokemon.handleShield(shield, pokemon, true)
   }
 }
 

@@ -335,7 +335,7 @@ class GameContainer {
     // Create Phaser game
     const config = {
       type: Phaser.AUTO,
-      width: 2000,
+      width: 1950,
       height: 1000,
       parent: this.div,
       pixelArt: true,

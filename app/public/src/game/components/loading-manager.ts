@@ -2,6 +2,7 @@ import { GameObjects } from "phaser"
 import { getPortraitSrc } from "../../utils"
 import GameScene from "../scenes/game-scene"
 import indexList from "../../../dist/client/assets/pokemons/indexList.json"
+import { t } from "i18next"
 
 export default class LoadingManager {
   scene: Phaser.Scene
@@ -10,16 +11,16 @@ export default class LoadingManager {
 
   constructor(scene: Phaser.Scene) {
     this.scene = scene
-    this.statusMessage = "Loading..."
+    this.statusMessage = t("loading")
 
     this.scene.load.on("fileprogress", (file, percentComplete) => {
       if (percentComplete < 1) {
-        this.statusMessage = "Loading asset: " + file.key
+        this.statusMessage = t("loading_asset") + " " + file.key
       }
     })
 
     this.scene.load.on("complete", () => {
-      this.statusMessage = "Loading complete, waiting for other players..."
+      this.statusMessage = t("loading_complete")
     })
 
     this.preload()
@@ -103,6 +104,11 @@ export default class LoadingManager {
     scene.load.multiatlas(
       "APPLE_ACID",
       "/assets/attacks/APPLE_ACID.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
+      "WATERFALL",
+      "/assets/attacks/WATERFALL.json",
       "/assets/attacks"
     )
     scene.load.multiatlas(

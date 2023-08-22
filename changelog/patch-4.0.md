@@ -25,6 +25,13 @@ Gligar,Gliscor,Shellder,Cloyster,Furret,Sentret,Spectrier
 - Nerf Miltank Buff the defense by 5 and deals ~~6x~~ -> 5x the defense as special damage
 - Nerf Lopynny Mana ~~60~~ -> 80
 - Nerf Meloetta Attack ~~30~~ -> 25
+- Moved Zapdos, Articuno and Moltres from Unique to Legendary ; adjusted stats
+- Buff Overheat (Moltres): 30 → 40 special damage
+- Buff Charge (Zapdos): now also increase Attack Speed
+- New ability for Articuno: Blizzard
+- New ability for Totodile: for Waterfall
+- Buff Nidorino/Nidoking/Nidorina/Nidoqueen HP
+- Buff Cubone/Marowak/Alolan Marowak HP/Attack/Def ; removed Rock from Alolan Marowak
 
 # Changes to Synergies
 
@@ -54,4 +61,5 @@ Gligar,Gliscor,Shellder,Cloyster,Furret,Sentret,Spectrier
 
 # Misc
 
+- Game is now preloaded at room preparation screen, which should reduce first loading times
 - Boosters rarity percentages have been adjusted with the changes to rarity categories
