@@ -97,38 +97,15 @@ aside.sidebar {
   background: #1195ec;
 }
 
-/*
-.menu-item a.ps-menu-button {
-  background: linear-gradient(200deg, #54596b, #393d49);
-}
-
-.menu-item a.ps-menu-button:hover {
-  background: #1195ec;
-  box-shadow: inset 0 0 8px #006bb3;
-}
-
-.menu-item.red a:hover {
+.menu-item.red a.ps-menu-button:hover {
   background: #e76e55;
-  box-shadow: inset 0 0 8px #570f10;
-}
-*/
-.menu-item.discord,
-.menu-item.discord a:hover {
-  background: #5865f2;
-  box-shadow: inset 0 -3px #2e3581;
 }
 
-.menu-item.discord a:hover {
+.menu-item.discord a.ps-menu-button:hover {
   background: #444ebe;
 }
 
-.menu-item.tipeee,
-.menu-item.tipeee a:hover {
-  background: #d64758;
-  box-shadow: inset 0 -3px #70252d;
-}
-
-.menu-item.tipeee a:hover {
+.menu-item.tipeee a.ps-menu-button:hover {
   background: #b13c49;
 }
 
