@@ -63,7 +63,7 @@ export default class AfterGameRoom extends Room<AfterGameState> {
   }
 
   onJoin(client: Client, options: any, auth: any) {
-    logger.info(`${client.auth.email} join after game`)
+    logger.info(`${client.userData.displayName} join after game`)
   }
 
   async onLeave(client: Client, consented: boolean) {

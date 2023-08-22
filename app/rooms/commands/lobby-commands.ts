@@ -793,7 +793,7 @@ export class BanUserCommand extends Command<
           client.send(Transfer.BANNED, `${name} was already banned`)
         }
         this.room.clients.forEach((c) => {
-          if (c.auth.uid === uid) {
+          if (c.userData.playerId === uid) {
             c.send(Transfer.BAN)
             c.leave()
           }
