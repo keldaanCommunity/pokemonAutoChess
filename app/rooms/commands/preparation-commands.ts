@@ -58,7 +58,7 @@ export class OnJoinCommand extends Command<
         }
         if (u) {
           this.state.users.set(
-            client.auth.uid,
+            client.userData.playerId,
             new GameUser(
               u.uid,
               u.displayName,
@@ -275,7 +275,7 @@ export class OnToggleEloCommand extends Command<
           payload: `Room leader ${
             noElo ? "disabled" : "enabled"
           } ELO gain for this game.`,
-          avatar: this.state.users.get(client.auth.uid)?.avatar,
+          avatar: this.state.users.get(client.userData.playerId)?.avatar,
           time: Date.now()
         })
       }
@@ -306,7 +306,7 @@ export class OnKickPlayerCommand extends Command<
               this.room.broadcast(Transfer.MESSAGES, {
                 name: "Server",
                 payload: `${user.name} was kicked out of the room`,
-                avatar: this.state.users.get(client.auth.uid)?.avatar,
+                avatar: this.state.users.get(client.userData.playerId)?.avatar,
                 time: Date.now()
               })
               cli.send(Transfer.KICK)
@@ -315,7 +315,7 @@ export class OnKickPlayerCommand extends Command<
               this.room.broadcast(Transfer.MESSAGES, {
                 name: "Server",
                 payload: `${this.state.ownerName} tried to kick a moderator ( ${user.name} ).`,
-                avatar: this.state.users.get(client.auth.uid)?.avatar,
+                avatar: this.state.users.get(client.userData.playerId)?.avatar,
                 time: Date.now()
               })
             }
@@ -372,9 +372,9 @@ export class OnLeaveCommand extends Command<
             avatar: user.avatar,
             time: Date.now()
           })
-          this.state.users.delete(client.auth.uid)
+          this.state.users.delete(client.userData.playerId)
 
-          if (client.auth.uid === this.state.ownerId) {
+          if (client.userData.playerId === this.state.ownerId) {
             const newOwner = values(this.state.users).find(
               (user) => user.id !== this.state.ownerId
             )
@@ -405,9 +405,9 @@ export class OnToggleReadyCommand extends Command<
 > {
   execute({ client }) {
     try {
-      // logger.debug(this.state.users.get(client.auth.uid).ready);
-      if (client.auth?.uid && this.state.users.has(client.auth.uid)) {
-        const user = this.state.users.get(client.auth.uid)!
+      // logger.debug(this.state.users.get(client.userData.playerId).ready);
+      if (client.userData?.playerId && this.state.users.has(client.userData.playerId)) {
+        const user = this.state.users.get(client.userData.playerId)!
         user.ready = !user.ready
       }
     } catch (error) {

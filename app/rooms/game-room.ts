@@ -42,7 +42,7 @@ import {
   IPokemon,
   Transfer
 } from "../types"
-import { Pkm, PkmFamily, PkmIndex } from "../types/enum/Pokemon"
+import { Pkm, PkmFamily } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { IGameUser } from "../models/colyseus-models/game-user"
@@ -51,10 +51,9 @@ import { components } from "../api-v1/openapi"
 import { Title, Role } from "../types"
 import PRECOMPUTED_TYPE_POKEMONS from "../models/precomputed/type-pokemons.json"
 import BannedUser from "../models/mongo-models/banned-user"
-import { coinflip, pickRandomIn, shuffleArray } from "../utils/random"
+import { coinflip, shuffleArray } from "../utils/random"
 import { Rarity } from "../types/enum/Game"
 import { Weather } from "../types/enum/Weather"
-import { FilterQuery } from "mongoose"
 import { MiniGame } from "../core/matter/mini-game"
 import { logger } from "../utils/logger"
 import { computeElo } from "../core/elo"
@@ -146,10 +145,10 @@ export default class GameRoom extends Room<GameState> {
     }, 5 * 60 * 1000) // maximum 5 minutes of loading game, game will start no matter what after that
 
     this.onMessage(Transfer.ITEM, (client, message) => {
-      if (!this.state.gameFinished && client.auth) {
+      if (!this.state.gameFinished && client.userData) {
         try {
           this.dispatcher.dispatch(new OnItemCommand(), {
-            playerId: client.auth.uid,
+            playerId: client.userData.playerId,
             id: message.id
           })
         } catch (error) {
@@ -159,10 +158,10 @@ export default class GameRoom extends Room<GameState> {
     })
 
     this.onMessage(Transfer.SHOP, (client, message) => {
-      if (!this.state.gameFinished && client.auth) {
+      if (!this.state.gameFinished && client.userData) {
         try {
           this.dispatcher.dispatch(new OnShopCommand(), {
-            id: client.auth.uid,
+            id: client.userData.playerId,
             index: message.id
           })
         } catch (error) {
@@ -172,10 +171,10 @@ export default class GameRoom extends Room<GameState> {
     })
 
     this.onMessage(Transfer.POKEMON_PROPOSITION, (client, message) => {
-      if (!this.state.gameFinished && client.auth) {
+      if (!this.state.gameFinished && client.userData) {
         try {
           this.dispatcher.dispatch(new OnPokemonPropositionCommand(), {
-            playerId: client.auth.uid,
+            playerId: client.userData.playerId,
             pkm: message
           })
         } catch (error) {
@@ -248,8 +247,12 @@ export default class GameRoom extends Room<GameState> {
       Transfer.VECTOR,
       (client, message: { x: number; y: number }) => {
         try {
-          if (client.auth) {
-            this.miniGame.applyVector(client.auth.uid, message.x, message.y)
+          if (client.userData) {
+            this.miniGame.applyVector(
+              client.userData.playerId,
+              message.x,
+              message.y
+            )
           }
         } catch (error) {
           logger.error(error)
@@ -278,9 +281,12 @@ export default class GameRoom extends Room<GameState> {
     })
 
     this.onMessage(Transfer.REFRESH, (client, message) => {
-      if (!this.state.gameFinished && client.auth) {
+      if (!this.state.gameFinished && client.userData) {
         try {
-          this.dispatcher.dispatch(new OnRefreshCommand(), client.auth.uid)
+          this.dispatcher.dispatch(
+            new OnRefreshCommand(),
+            client.userData.playerId
+          )
         } catch (error) {
           logger.error("refresh error", message)
         }
@@ -288,9 +294,12 @@ export default class GameRoom extends Room<GameState> {
     })
 
     this.onMessage(Transfer.LOCK, (client, message) => {
-      if (!this.state.gameFinished && client.auth) {
+      if (!this.state.gameFinished && client.userData) {
         try {
-          this.dispatcher.dispatch(new OnLockCommand(), client.auth.uid)
+          this.dispatcher.dispatch(
+            new OnLockCommand(),
+            client.userData.playerId
+          )
         } catch (error) {
           logger.error("lock error", message)
         }
@@ -298,9 +307,12 @@ export default class GameRoom extends Room<GameState> {
     })
 
     this.onMessage(Transfer.LEVEL_UP, (client, message) => {
-      if (!this.state.gameFinished && client.auth) {
+      if (!this.state.gameFinished && client.userData) {
         try {
-          this.dispatcher.dispatch(new OnLevelUpCommand(), client.auth.uid)
+          this.dispatcher.dispatch(
+            new OnLevelUpCommand(),
+            client.userData.playerId
+          )
         } catch (error) {
           logger.error("level up error", message)
         }
@@ -310,9 +322,9 @@ export default class GameRoom extends Room<GameState> {
     this.onMessage(
       Transfer.BROADCAST_EMOTE,
       (client: Client, message: string) => {
-        if (client.auth) {
+        if (client.userData) {
           this.broadcast(Transfer.BROADCAST_EMOTE, {
-            id: client.auth.uid,
+            id: client.userData.playerId,
             emote: message
           })
         }
@@ -321,9 +333,11 @@ export default class GameRoom extends Room<GameState> {
 
     this.onMessage(Transfer.UNOWN_ENCOUNTER, async (client, unownIndex) => {
       try {
-        if (client.auth) {
+        if (client.userData) {
           const DUST_PER_ENCOUNTER = 50
-          const u = await UserMetadata.findOne({ uid: client.auth.uid })
+          const u = await UserMetadata.findOne({
+            uid: client.userData.playerId
+          })
           if (u) {
             const c = u.pokemonCollection.get(unownIndex)
             if (c) {
@@ -347,8 +361,8 @@ export default class GameRoom extends Room<GameState> {
     })
 
     this.onMessage(Transfer.LOADING_PROGRESS, (client, progress: number) => {
-      if (client.auth) {
-        const player = this.state.players.get(client.auth.uid)
+      if (client.userData) {
+        const player = this.state.players.get(client.userData.playerId)
         if (player) {
           player.loadingProgress = progress
         }
@@ -356,8 +370,8 @@ export default class GameRoom extends Room<GameState> {
     })
 
     this.onMessage(Transfer.LOADING_COMPLETE, (client) => {
-      if (client.auth) {
-        const player = this.state.players.get(client.auth.uid)
+      if (client.userData) {
+        const player = this.state.players.get(client.userData.playerId)
         if (player) {
           player.loadingProgress = 100
         }
@@ -396,6 +410,7 @@ export default class GameRoom extends Room<GameState> {
       const token = await admin.auth().verifyIdToken(options.idToken)
       const user = await admin.auth().getUser(token.uid)
       const isBanned = await BannedUser.findOne({ uid: user.uid })
+      client.userData = { playerId: user.uid, displayName: user.displayName }
 
       if (!user.displayName) {
         throw "No display name"
@@ -415,8 +430,8 @@ export default class GameRoom extends Room<GameState> {
 
   async onLeave(client: Client, consented: boolean) {
     try {
-      if (client && client.auth && client.auth.displayName) {
-        logger.info(`${client.auth.displayName} has been disconnected`)
+      if (client && client.userData) {
+        logger.info(`${client.userData.displayName} has been disconnected`)
       }
       if (consented) {
         throw new Error("consented leave")
@@ -425,17 +440,17 @@ export default class GameRoom extends Room<GameState> {
       // allow disconnected client to reconnect into this room until 3 minutes
       await this.allowReconnection(client, 180)
     } catch (e) {
-      if (client && client.auth && client.auth.displayName) {
-        logger.info(`${client.auth.displayName} left game`)
-        const player = this.state.players.get(client.auth.uid)
+      if (client && client.userData) {
+        logger.info(`${client.userData.displayName} left game`)
+        const player = this.state.players.get(client.userData.playerId)
         if (player && this.state.stageLevel < 4) {
           // if player left game during the loading screen or before stage 4, remove it from the players
-          this.state.players.delete(client.auth.uid)
+          this.state.players.delete(client.userData.playerId)
           this.state.players.forEach((player) => {
-            player.opponents.delete(client.auth.uid)
+            player.opponents.delete(client.userData.playerId)
           })
           logger.info(
-            `${client.auth.displayName} has been removed from players list`
+            `${client.userData.displayName} has been removed from players list`
           )
         }
       }
