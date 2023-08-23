@@ -3,6 +3,7 @@ import { AnimationType } from "../../../../types/Animation"
 import { Orientation } from "../../../../types/enum/Game"
 import { Pkm } from "../../../../types/enum/Pokemon"
 import { Status } from "../../../../types/enum/Status"
+import { logger } from "../../../../utils/logger"
 import AnimationManager from "../animation-manager"
 import LoadingManager from "../components/loading-manager"
 import Pokemon from "../components/pokemon"
@@ -65,7 +66,14 @@ export class DebugScene extends Phaser.Scene {
     )
     this.pokemon.orientation = orientation
     if (animationType in AnimationType) {
-      this.animationManager.play(this.pokemon, animationType, false, true)
+      try {
+        this.animationManager.play(this.pokemon, animationType, false, true)
+      } catch (err) {
+        logger.error(
+          `Error playing animation ${this.pokemon.name} ${animationType}`,
+          err
+        )
+      }
     }
     this.applyStatusAnimation(status)
   }
