@@ -1899,6 +1899,11 @@ export const AnimationConfig: {
     emote: AnimationType
   }
 } = {
+  [Pkm.DEFAULT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
+  },
   [Pkm.EGG]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Attack,
@@ -1907,7 +1912,7 @@ export const AnimationConfig: {
   [Pkm.DITTO]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Attack,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Hop
   },
   [Pkm.BULBASAUR]: {
     attack: AnimationType.Shoot,
@@ -1927,7 +1932,7 @@ export const AnimationConfig: {
   [Pkm.CHARMANDER]: {
     attack: AnimationType.Kick,
     ability: AnimationType.DeepBreath,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Pose
   },
   [Pkm.CHARMELEON]: {
     attack: AnimationType.Strike,
@@ -1942,7 +1947,7 @@ export const AnimationConfig: {
   [Pkm.SQUIRTLE]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.DeepBreath,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Pose
   },
   [Pkm.WARTORTLE]: {
     attack: AnimationType.Ricochet,
@@ -1976,7 +1981,7 @@ export const AnimationConfig: {
   },
   [Pkm.MARILL]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Twirl,
+    ability: AnimationType.Withdraw,
     emote: AnimationType.Shoot
   },
   [Pkm.AZUMARILL]: {
@@ -1985,14 +1990,14 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.ZUBAT]: {
-    attack: AnimationType.Eat,
+    attack: AnimationType.Shoot,
     ability: AnimationType.Attack,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Charge
   },
   [Pkm.GOLBAT]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Attack,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Charge
   },
   [Pkm.CROBAT]: {
     attack: AnimationType.Shoot,
@@ -2007,7 +2012,7 @@ export const AnimationConfig: {
   [Pkm.FLAFFY]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Charge,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Pose
   },
   [Pkm.AMPHAROS]: {
     attack: AnimationType.Shoot,
@@ -2015,23 +2020,23 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.CLEFFA]: {
-    attack: AnimationType.Dance,
+    attack: AnimationType.Shoot,
     ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Dance
   },
   [Pkm.CLEFAIRY]: {
-    attack: AnimationType.Dance,
+    attack: AnimationType.Attack,
     ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Dance
   },
   [Pkm.CLEFABLE]: {
-    attack: AnimationType.Dance,
+    attack: AnimationType.Attack,
     ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Dance
   },
   [Pkm.IGGLYBUFF]: {
     attack: AnimationType.Special1,
-    ability: AnimationType.EventSleep,
+    ability: AnimationType.Special6,
     emote: AnimationType.Shoot
   },
   [Pkm.WIGGLYTUFF]: {
@@ -2077,17 +2082,17 @@ export const AnimationConfig: {
   [Pkm.PIDGEY]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.FlapAround,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Attack
   },
   [Pkm.PIDGEOTTO]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.FlapAround,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Attack
   },
   [Pkm.PIDGEOT]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.FlapAround,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Attack
   },
   [Pkm.HOPPIP]: {
     attack: AnimationType.Shoot,
@@ -2135,8 +2140,8 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.CHIKORITA]: {
-    attack: AnimationType.DeepBreath,
-    ability: AnimationType.Charge,
+    attack: AnimationType.Slam,
+    ability: AnimationType.DeepBreath,
     emote: AnimationType.Shoot
   },
   [Pkm.BAYLEEF]: {
@@ -2145,8 +2150,8 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.MEGANIUM]: {
-    attack: AnimationType.Shake,
-    ability: AnimationType.Charge,
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shake,
     emote: AnimationType.Shoot
   },
   [Pkm.CYNDAQUIL]: {
@@ -2302,12 +2307,12 @@ export const AnimationConfig: {
   [Pkm.PICHU]: {
     attack: AnimationType.Appeal,
     ability: AnimationType.Shock,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Pose
   },
   [Pkm.PIKACHU]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Shock,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Pose
   },
   [Pkm.RAICHU]: {
     attack: AnimationType.Shoot,
@@ -2317,17 +2322,17 @@ export const AnimationConfig: {
   [Pkm.MACHOP]: {
     attack: AnimationType.Kick,
     ability: AnimationType.Strike,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Yawn
   },
   [Pkm.MACHOKE]: {
     attack: AnimationType.Kick,
     ability: AnimationType.Punch,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Charge
   },
   [Pkm.MACHAMP]: {
     attack: AnimationType.Kick,
     ability: AnimationType.Punch,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Charge
   },
   [Pkm.HORSEA]: {
     attack: AnimationType.Shoot,
@@ -2422,12 +2427,12 @@ export const AnimationConfig: {
   [Pkm.TOGEPI]: {
     attack: AnimationType.Appeal,
     ability: AnimationType.Dance,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Dance
   },
   [Pkm.TOGETIC]: {
     attack: AnimationType.Hover,
-    ability: AnimationType.Dance,
-    emote: AnimationType.Shoot
+    ability: AnimationType.DeepBreath,
+    emote: AnimationType.Pose
   },
   [Pkm.TOGEKISS]: {
     attack: AnimationType.Shoot,
@@ -2481,8 +2486,8 @@ export const AnimationConfig: {
   },
   [Pkm.POLIWAG]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    ability: AnimationType.Charge,
+    emote: AnimationType.Appeal
   },
   [Pkm.POLIWHIRL]: {
     attack: AnimationType.RearUp,
@@ -2491,7 +2496,7 @@ export const AnimationConfig: {
   },
   [Pkm.POLITOED]: {
     attack: AnimationType.RearUp,
-    ability: AnimationType.Rotate,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
   [Pkm.ABRA]: {
@@ -2502,12 +2507,12 @@ export const AnimationConfig: {
   [Pkm.KADABRA]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Charge,
-    emote: AnimationType.Shoot
+    emote: AnimationType.SpAttack
   },
   [Pkm.ALAKAZAM]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Special1,
-    emote: AnimationType.Shoot
+    ability: AnimationType.Charge,
+    emote: AnimationType.Special1
   },
   [Pkm.GASTLY]: {
     attack: AnimationType.Shoot,
@@ -2516,13 +2521,13 @@ export const AnimationConfig: {
   },
   [Pkm.HAUNTER]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.MultiStrike,
-    emote: AnimationType.Shoot
+    ability: AnimationType.Charge,
+    emote: AnimationType.Lick
   },
   [Pkm.GENGAR]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Special2,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Pose
   },
   [Pkm.DRATINI]: {
     attack: AnimationType.Attack,
@@ -2672,12 +2677,12 @@ export const AnimationConfig: {
   [Pkm.GROWLITHE]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Rumble
   },
   [Pkm.ARCANINE]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Rumble
   },
   [Pkm.ONIX]: {
     attack: AnimationType.Shoot,
@@ -2750,9 +2755,9 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.GYARADOS]: {
-    attack: AnimationType.RearUp,
-    ability: AnimationType.Attack,
-    emote: AnimationType.Shoot
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.RearUp
   },
   [Pkm.LUGIA]: {
     attack: AnimationType.Shoot,
@@ -2772,12 +2777,12 @@ export const AnimationConfig: {
   [Pkm.MOLTRES]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Pose,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Pose
   },
   [Pkm.ARTICUNO]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.RearUp,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Pose
   },
   [Pkm.DIALGA]: {
     attack: AnimationType.RearUp,
@@ -2851,8 +2856,8 @@ export const AnimationConfig: {
   },
   [Pkm.JOLTEON]: {
     attack: AnimationType.Shock,
-    ability: AnimationType.Pose,
-    emote: AnimationType.Shoot
+    ability: AnimationType.DeepBreath,
+    emote: AnimationType.Pose
   },
   [Pkm.FLAREON]: {
     attack: AnimationType.Attack,
@@ -2866,7 +2871,7 @@ export const AnimationConfig: {
   },
   [Pkm.UMBREON]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Eat,
+    ability: AnimationType.DeepBreath,
     emote: AnimationType.Shoot
   },
   [Pkm.LEAFEON]: {
@@ -2941,7 +2946,7 @@ export const AnimationConfig: {
   },
   [Pkm.SLOWKING]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Swing,
+    ability: AnimationType.RearUp,
     emote: AnimationType.Shoot
   },
   [Pkm.BELLSPROUT]: {
@@ -3116,8 +3121,8 @@ export const AnimationConfig: {
   },
   [Pkm.MEWTWO]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Pose,
-    emote: AnimationType.Shoot
+    ability: AnimationType.Punch,
+    emote: AnimationType.Pose
   },
   [Pkm.KYUREM]: {
     attack: AnimationType.Attack,
@@ -3197,11 +3202,11 @@ export const AnimationConfig: {
   [Pkm.MEOWTH]: {
     attack: AnimationType.MultiStrike,
     ability: AnimationType.Pose,
-    emote: AnimationType.Shoot
+    emote: AnimationType.DeepBreath
   },
   [Pkm.PERSIAN]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Shoot,
+    ability: AnimationType.Attack,
     emote: AnimationType.Shoot
   },
   [Pkm.DEINO]: {
@@ -3261,23 +3266,23 @@ export const AnimationConfig: {
   },
   [Pkm.ODDISH]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Hop,
-    emote: AnimationType.Shoot
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Twirl
   },
   [Pkm.GLOOM]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Hop,
-    emote: AnimationType.Shoot
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Twirl
   },
   [Pkm.VILEPLUME]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Twirl,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Twirl
   },
   [Pkm.BELLOSSOM]: {
     attack: AnimationType.Special0,
     ability: AnimationType.Twirl,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Pose
   },
   [Pkm.AMAURA]: {
     attack: AnimationType.Attack,
@@ -3502,17 +3507,17 @@ export const AnimationConfig: {
   [Pkm.CUBONE]: {
     attack: AnimationType.Strike,
     ability: AnimationType.SpAttack,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Pose
   },
   [Pkm.MAROWAK]: {
     attack: AnimationType.Strike,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Charge
   },
   [Pkm.ALOLAN_MAROWAK]: {
     attack: AnimationType.Strike,
     ability: AnimationType.Punch,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Charge
   },
   [Pkm.WHISMUR]: {
     attack: AnimationType.Shoot,
@@ -3732,12 +3737,12 @@ export const AnimationConfig: {
   [Pkm.PONYTA]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Walk,
-    emote: AnimationType.Shoot
+    emote: AnimationType.RearUp
   },
   [Pkm.RAPIDASH]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Walk,
-    emote: AnimationType.Shoot
+    emote: AnimationType.RearUp
   },
   [Pkm.NINCADA]: {
     attack: AnimationType.MultiScratch,
@@ -3787,12 +3792,7 @@ export const AnimationConfig: {
   [Pkm.TAUROS]: {
     attack: AnimationType.Stomp,
     ability: AnimationType.Attack,
-    emote: AnimationType.Shoot
-  },
-  [Pkm.DEFAULT]: {
-    attack: AnimationType.Attack,
-    ability: AnimationType.Attack,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Charge
   },
   [Pkm.HAPPINY]: {
     attack: AnimationType.Attack,
@@ -3886,18 +3886,18 @@ export const AnimationConfig: {
   },
   [Pkm.VENOMOTH]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.FlapAround,
-    emote: AnimationType.Shoot
+    ability: AnimationType.Attack,
+    emote: AnimationType.FlapAround
   },
   [Pkm.VOLTORB]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Hurt,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Pose
   },
   [Pkm.ELECTRODE]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Hurt,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Twirl
   },
   [Pkm.SLUGMA]: {
     attack: AnimationType.Shoot,
@@ -3982,11 +3982,11 @@ export const AnimationConfig: {
   [Pkm.TENTACOOL]: {
     attack: AnimationType.Slam,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Twirl
   },
   [Pkm.TENTACRUEL]: {
     attack: AnimationType.Slam,
-    ability: AnimationType.Charge,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
   [Pkm.SNUBULL]: {
@@ -4007,17 +4007,17 @@ export const AnimationConfig: {
   [Pkm.VULPIX]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.RearUp,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Pose
   },
   [Pkm.NINETALES]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.RearUp,
-    emote: AnimationType.Shoot
+    emote: AnimationType.DeepBreath
   },
   [Pkm.ALOLAN_VULPIX]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.RearUp,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Pose
   },
   [Pkm.ALOLAN_NINETALES]: {
     attack: AnimationType.Shoot,
@@ -4227,12 +4227,12 @@ export const AnimationConfig: {
   [Pkm.SANDSLASH]: {
     attack: AnimationType.Strike,
     ability: AnimationType.Withdraw,
-    emote: AnimationType.Shoot
+    emote: AnimationType.DeepBreath
   },
   [Pkm.FARFETCH_D]: {
     attack: AnimationType.Strike,
     ability: AnimationType.Attack,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Charge
   },
   [Pkm.UNOWN_A]: {
     attack: AnimationType.Rotate,
@@ -4387,12 +4387,12 @@ export const AnimationConfig: {
   [Pkm.DIGLETT]: {
     attack: AnimationType.Attack,
     ability: AnimationType.DigIn,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Special0
   },
   [Pkm.DUGTRIO]: {
     attack: AnimationType.Attack,
     ability: AnimationType.DigIn,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Special0
   },
   [Pkm.ROWLET]: {
     attack: AnimationType.Attack,
@@ -4452,12 +4452,12 @@ export const AnimationConfig: {
   [Pkm.HITMONLEE]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Kick,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Withdraw
   },
   [Pkm.HITMONCHAN]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Uppercut,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Punch
   },
   [Pkm.HITMONTOP]: {
     attack: AnimationType.Attack,
@@ -4472,22 +4472,22 @@ export const AnimationConfig: {
   [Pkm.GRIMER]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Pose
   },
   [Pkm.MUK]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Charge
   },
   [Pkm.ALOLAN_GRIMER]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Pose
   },
   [Pkm.ALOLAN_MUK]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Charge
   },
   [Pkm.CARVANHA]: {
     attack: AnimationType.Bite,
@@ -4627,7 +4627,7 @@ export const AnimationConfig: {
   [Pkm.SUDOWOODO]: {
     attack: AnimationType.Slam,
     ability: AnimationType.Attack,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Charge
   },
   [Pkm.PHIONE]: {
     attack: AnimationType.Attack,
@@ -4752,12 +4752,12 @@ export const AnimationConfig: {
   [Pkm.MANKEY]: {
     attack: AnimationType.MultiStrike,
     ability: AnimationType.Charge,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Twirl
   },
   [Pkm.PRIMEAPE]: {
     attack: AnimationType.MultiStrike,
     ability: AnimationType.Charge,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Strike
   },
   [Pkm.SUNKERN]: {
     attack: AnimationType.Shoot,
@@ -4766,8 +4766,8 @@ export const AnimationConfig: {
   },
   [Pkm.SUNFLORA]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Attack,
-    emote: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Pose
   },
   [Pkm.MARACTUS]: {
     attack: AnimationType.Attack,
