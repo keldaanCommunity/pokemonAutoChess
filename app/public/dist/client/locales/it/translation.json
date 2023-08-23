@@ -780,7 +780,7 @@
   "pkm.XATU": "xatu",
   "ability_description.DEFAULT": "Predefinito",
   "ability_description.SOFT_BOILED": "Cura tutti gli effetti di stato e garantisce [20,40,80,SP] SHIELD per ogni alleato",
-  "ability_description.EARTHQUAKE": "Infligge danno [30,60,120,SP] SPECIAL a tutte le unità nemiche nella stessa colonna/linea dell'attaccante",
+  "ability_description.EARTHQUAKE": "Infligge danno [120,SP] SPECIAL a tutte le unità nemiche nella stessa colonna/linea dell'attaccante",
   "ability_description.SONG_OF_DESIRE": "L'obiettivo è CONFUSION per [6,SP] secondi",
   "ability_description.CONFUSING_MIND": "Infligge [40,SP] SPECIAL al bersaglio e ai suoi pokemon adiacenti, facendoli CONFUSION per 3 secondi",
   "ability_description.KNOWLEDGE_THIEF": "Lancia il massimo del bersaglio",

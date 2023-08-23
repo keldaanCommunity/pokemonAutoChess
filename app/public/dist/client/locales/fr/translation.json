@@ -807,7 +807,7 @@
   },
   "ability_description": {
     "SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés",
-    "EARTHQUAKE": "Inflige [30,60,120,SP] SPECIAL à tous les ennemis présents sur la même ligne/colonne que l'attaquant",
+    "EARTHQUAKE": "Inflige [120,SP] SPECIAL à tous les ennemis présents sur la même ligne/colonne que l'attaquant",
     "SONG_OF_DESIRE": "Rend la cible CONFUSION pendant [6,SP] secondes",
     "CONFUSING_MIND": "Inflige [40,SP] SPECIAL à la cible et les Pokémon adjacents, les laissant CONFUSION pendant 3 secondes",
     "KNOWLEDGE_THIEF": "Utilise le talent de la cible",

@@ -816,7 +816,7 @@
   "ability_description": {
     "DEFAULT": "Padrão",
     "SOFT_BOILED": "Cura todos os efeitos de status e concede [20,40,80,SP] SHIELD para cada aliado",
-    "EARTHQUAKE": "Causa dano [30,60,120,SP] SPECIAL a todas as unidades inimigas na mesma coluna/linha do atacante",
+    "EARTHQUAKE": "Causa dano [120,SP] SPECIAL a todas as unidades inimigas na mesma coluna/linha do atacante",
     "SONG_OF_DESIRE": "O alvo é CONFUSION por [6,SP] segundos",
     "CONFUSING_MIND": "Causa [40,SP] SPECIAL ao alvo e seus pokémons adjacentes, tornando-os CONFUSION por 3 segundos",
     "KNOWLEDGE_THIEF": "Lançar o máximo do alvo",

@@ -780,7 +780,7 @@
   "pkm.XATU": "ザトゥ",
   "ability_description.DEFAULT": "デフォルト",
   "ability_description.SOFT_BOILED": "すべての状態異常を治し、味方全員に[20,40,80,SP]のSHIELDを与える",
-  "ability_description.EARTHQUAKE": "攻撃側と同じ列/列の敵ユニット全員に[30,60,120,SP]SPECIALダメージを与える",
+  "ability_description.EARTHQUAKE": "攻撃側と同じ列/列の敵ユニット全員に[120,SP]SPECIALダメージを与える",
   "ability_description.SONG_OF_DESIRE": "目標は[6,SP]秒間の混乱です",
   "ability_description.CONFUSING_MIND": "ターゲットとその隣接するポケモンに[40,SP]のSPECIALを与え、3秒間混乱状態にする",
   "ability_description.KNOWLEDGE_THIEF": "究極のターゲットを発射する",

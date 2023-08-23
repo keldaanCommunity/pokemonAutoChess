@@ -7566,7 +7566,7 @@ export class Manaphy extends Pokemon {
       4,
       3,
       AttackSprite.PSYCHIC_RANGE,
-      3,
+      4,
       100,
       Ability.NASTY_PLOT,
       shiny,
@@ -8066,7 +8066,9 @@ export class Shaymin extends Pokemon {
       Ability.SEED_FLARE,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.SHAYMIN
     )
   }
 }
@@ -8084,7 +8086,7 @@ export class ShayminSky extends Pokemon {
       5,
       3,
       AttackSprite.GRASS_RANGE,
-      3,
+      4,
       100,
       Ability.SEED_FLARE,
       shiny,
@@ -8180,7 +8182,7 @@ export class PrimalGroudon extends Pokemon {
       10,
       1,
       AttackSprite.FIRE_MELEE,
-      3,
+      4,
       100,
       Ability.EARTHQUAKE,
       shiny,
@@ -8205,7 +8207,7 @@ export class PrimalKyogre extends Pokemon {
       3,
       3,
       AttackSprite.WATER_RANGE,
-      3,
+      4,
       100,
       Ability.ORIGIN_PULSE,
       shiny,
@@ -8230,7 +8232,7 @@ export class MegaRayquaza extends Pokemon {
       5,
       3,
       AttackSprite.FIRE_RANGE,
-      3,
+      4,
       100,
       Ability.DRACO_METEOR,
       shiny,
