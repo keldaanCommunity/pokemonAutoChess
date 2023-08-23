@@ -559,7 +559,7 @@ class GameContainer {
   }
 
   handleWeatherChange(simulation: Simulation, value: Weather) {
-    if (this.gameScene && simulation.id === this.player?.id) {
+    if (this.gameScene && simulation.id === this.player?.simulationId) {
       if (this.gameScene.weatherManager) {
         this.gameScene.weatherManager.clearWeather()
         if (value === Weather.RAIN) {
