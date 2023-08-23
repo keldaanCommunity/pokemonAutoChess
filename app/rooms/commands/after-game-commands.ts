@@ -5,12 +5,12 @@ import { Emotion, Transfer } from "../../types"
 import { logger } from "../../utils/logger"
 
 export class OnJoinCommand extends Command {
-  async execute({ client }) {
+  async execute({ client, options, auth }) {
     try {
-      const user = await UserMetadata.findOne({ uid: client.userData.playerId })
+      const user = await UserMetadata.findOne({ uid: auth.uid })
       if (user) {
         this.state.users.set(
-          client.userData.playerId,
+          client.auth.uid,
           new GameUser(
             user.uid,
             user.displayName,
@@ -40,15 +40,13 @@ export class OnJoinCommand extends Command {
 export class OnLeaveCommand extends Command {
   execute({ client, consented }) {
     try {
-      if (client.userData) {
-        this.room.broadcast(Transfer.MESSAGES, {
-          name: "Server",
-          payload: `${client.userData.displayName} left.`,
-          avatar: `0081/${Emotion.NORMAL}`,
-          time: Date.now()
-        })
-        this.state.users.delete(client.userData.playerId)
-      }
+      this.room.broadcast(Transfer.MESSAGES, {
+        name: "Server",
+        payload: `${client.auth.displayName} left.`,
+        avatar: `0081/${Emotion.NORMAL}`,
+        time: Date.now()
+      })
+      this.state.users.delete(client.auth.uid)
     } catch (error) {
       logger.error(error)
     }
