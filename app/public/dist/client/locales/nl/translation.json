@@ -778,7 +778,7 @@
   "pkm.XATU": "Xatu",
   "ability_description.DEFAULT": "Standaard",
   "ability_description.SOFT_BOILED": "Geneest alle status effecten en geeft [20,40,80,SP] SHIELD aan elke vriendelijke Pokémon",
-  "ability_description.EARTHQUAKE": "Breng [30,60,120,SP] SPECIAL toe aan alle vijandelijke Pokémon in dezelfde kolom als de gebruiker",
+  "ability_description.EARTHQUAKE": "Breng [120,SP] SPECIAL toe aan alle vijandelijke Pokémon in dezelfde kolom als de gebruiker",
   "ability_description.SONG_OF_DESIRE": "Het doelwit is CONFUSION gedurende [6,SP] seconden",
   "ability_description.CONFUSING_MIND": "Brengt [40,SP] SPECIAL toe aan het doelwit en de Pokémon ernaast, waardoor ze 3 seconden lang CONFUSION zijn",
   "ability_description.KNOWLEDGE_THIEF": "Gebruik de vaardigheid van het doelwit",

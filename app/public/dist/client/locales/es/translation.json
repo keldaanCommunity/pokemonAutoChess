@@ -780,7 +780,7 @@
   "pkm.XATU": "xatú",
   "ability_description.DEFAULT": "Por defecto",
   "ability_description.SOFT_BOILED": "Cura todos los efectos de estado y otorga [20,40,80,SP] SHIELD para cada aliado",
-  "ability_description.EARTHQUAKE": "Inflige daño [30,60,120,SP] SPECIAL a todas las unidades enemigas en la misma columna/línea del atacante",
+  "ability_description.EARTHQUAKE": "Inflige daño [120,SP] SPECIAL a todas las unidades enemigas en la misma columna/línea del atacante",
   "ability_description.SONG_OF_DESIRE": "El objetivo es CONFUSION durante [6,SP] segundos",
   "ability_description.CONFUSING_MIND": "Otorga [40,SP] SPECIAL al objetivo y a sus Pokémon adyacentes, confundiéndolos durante 3 segundos.",
   "ability_description.KNOWLEDGE_THIEF": "Lanza lo último del objetivo.",

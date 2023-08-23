@@ -37,5 +37,6 @@ export enum Passive {
   UNOWN = "UNOWN",
   GLIGAR = "GLIGAR",
   POISON_HEAL = "POISON_HEAL",
-  GRIM_NEIGH = "GRIM_NEIGH"
+  GRIM_NEIGH = "GRIM_NEIGH",
+  SHAYMIN = "SHAYMIN"
 }
