@@ -225,7 +225,7 @@ export class OnDragDropCommand extends Command<
       updateBoard: true,
       updateItems: true
     }
-    const playerId = client.userData.playerId
+    const playerId = client.auth.uid
     const player = this.state.players.get(playerId)
 
     if (player) {
@@ -323,7 +323,7 @@ export class OnDragDropCombineCommand extends Command<
   }
 > {
   execute({ client, detail }) {
-    const playerId = client.userData.playerId
+    const playerId = client.auth.uid
     const message = {
       updateBoard: true,
       updateItems: true
@@ -395,7 +395,7 @@ export class OnDragDropItemCommand extends Command<
 > {
   execute({ client, detail }) {
     const commands = new Array<Command>()
-    const playerId = client.userData.playerId
+    const playerId = client.auth.uid
     const message = {
       updateBoard: true,
       updateItems: true
@@ -662,7 +662,7 @@ export class OnSellDropCommand extends Command<
   }
 > {
   execute({ client, detail }) {
-    const player = this.state.players.get(client.userData.playerId)
+    const player = this.state.players.get(client.auth.uid)
 
     if (player) {
       const pokemon = player.board.get(detail.pokemonId)
@@ -749,7 +749,7 @@ export class OnJoinCommand extends Command<
   async execute({ client, options, auth }) {
     try {
       if (options.spectate === true) {
-        this.state.spectators.add(client.userData.playerId)
+        this.state.spectators.add(client.auth.uid)
       } else {
         const user = await UserMetadata.findOne({ uid: auth.uid })
         if (user) {
@@ -765,11 +765,11 @@ export class OnJoinCommand extends Command<
             user.role
           )
 
-          this.state.players.set(client.userData.playerId, player)
+          this.state.players.set(client.auth.uid, player)
 
-          if (client && client.userData) {
+          if (client && client.auth && client.auth.displayName) {
             logger.info(
-              `${client.userData.displayName} ${client.id} join game room`
+              `${client.auth.displayName} ${client.id} join game room`
             )
           }
 
@@ -1081,7 +1081,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
           player.life -= playerDamage
           if (playerDamage > 0) {
             const client = this.room.clients.find(
-              (cli) => cli.userData.playerId === player.id
+              (cli) => cli.auth.uid === player.id
             )
             client?.send(Transfer.PLAYER_DAMAGE, playerDamage)
           }
@@ -1126,7 +1126,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         player.money += income
         if (income > 0) {
           const client = this.room.clients.find(
-            (cli) => cli.userData.playerId === player.id
+            (cli) => cli.auth.uid === player.id
           )
           client?.send(Transfer.PLAYER_INCOME, income)
         }
@@ -1365,7 +1365,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
         } else {
           if (Math.random() < 0.037) {
             const client = this.room.clients.find(
-              (cli) => cli.userData.playerId === player.id
+              (cli) => cli.auth.uid === player.id
             )
             if (client) {
               setTimeout(() => {

@@ -152,8 +152,8 @@ export default class PreparationRoom extends Room<PreparationState> {
     })
     this.onMessage(Transfer.NEW_MESSAGE, (client, message) => {
       try {
-        if (client.userData) {
-          const user = this.state.users.get(client.userData.playerId)
+        if (client.auth) {
+          const user = this.state.users.get(client.auth.uid)
           const MAX_MESSAGE_LENGTH = 250
           message = cleanProfanity(message.substring(0, MAX_MESSAGE_LENGTH))
 
@@ -179,7 +179,7 @@ export default class PreparationRoom extends Room<PreparationState> {
       Transfer.ADD_BOT,
       (client: Client, botType: IBot | BotDifficulty) => {
         try {
-          const user = this.state.users.get(client.userData.playerId)
+          const user = this.state.users.get(client.auth.uid)
           if (user) {
             this.dispatcher.dispatch(new OnAddBotCommand(), {
               type: botType,
@@ -193,7 +193,7 @@ export default class PreparationRoom extends Room<PreparationState> {
     )
     this.onMessage(Transfer.REMOVE_BOT, (client: Client, t: string) => {
       try {
-        const user = this.state.users.get(client.userData?.playerId)
+        const user = this.state.users.get(client.auth.uid)
         if (user) {
           this.dispatcher.dispatch(new OnRemoveBotCommand(), {
             target: t,
@@ -206,7 +206,7 @@ export default class PreparationRoom extends Room<PreparationState> {
     })
     this.onMessage(Transfer.REQUEST_BOT_LIST, (client: Client) => {
       try {
-        const user = this.state.users.get(client.userData?.playerId)
+        const user = this.state.users.get(client.auth.uid)
 
         this.dispatcher.dispatch(new OnListBotsCommand(), {
           user: user
@@ -223,8 +223,6 @@ export default class PreparationRoom extends Room<PreparationState> {
       const token = await admin.auth().verifyIdToken(options.idToken)
       const user = await admin.auth().getUser(token.uid)
       const isBanned = await BannedUser.findOne({ uid: user.uid })
-      client.userData = { playerId: user.uid, displayName: user.displayName }
-
       const isAlreadyInRoom = this.state.users.has(user.uid)
       let numberOfHumanPlayers = 0
       this.state.users.forEach((u) => {
@@ -251,18 +249,18 @@ export default class PreparationRoom extends Room<PreparationState> {
   }
 
   onJoin(client: Client, options: any, auth: any) {
-    if (client && client.userData) {
+    if (client && client.auth && client.auth.displayName) {
       logger.info(
-        `${client.userData.displayName} ${client.id} join preparation room`
+        `${client.auth.displayName} ${client.id} join preparation room`
       )
       this.dispatcher.dispatch(new OnJoinCommand(), { client, options, auth })
     }
   }
 
   async onLeave(client: Client, consented: boolean) {
-    if (client && client.userData) {
+    if (client && client.auth && client.auth.displayName) {
       logger.info(
-        `${client.userData.displayName} ${client.id} is leaving preparation room`
+        `${client.auth.displayName} ${client.id} is leaving preparation room`
       )
     }
     try {
@@ -272,9 +270,9 @@ export default class PreparationRoom extends Room<PreparationState> {
       // allow disconnected client to reconnect into this room until 10 seconds
       await this.allowReconnection(client, 10)
     } catch (e) {
-      if (client && client.userData) {
+      if (client && client.auth && client.auth.displayName) {
         logger.info(
-          `${client.userData.displayName} ${client.id} leave preparation room`
+          `${client.auth.displayName} ${client.id} leave preparation room`
         )
       }
       this.dispatcher.dispatch(new OnLeaveCommand(), { client, consented })
