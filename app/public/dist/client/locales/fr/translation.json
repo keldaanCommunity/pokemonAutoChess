@@ -1952,5 +1952,7 @@
   "loading_asset": "Chargement:",
   "loading_complete": "Chargement terminé, en attente des autres joueurs...",
   "show_details_on_hover": "Afficher les détails au survol au lieu du clic droit",
-  "finished_preloading": "Préchargement terminé"
+  "finished_preloading": "Préchargement terminé",
+  "select_pokemon": "Sélectionnez un pokemon",
+  "search_player": "Chercher par nom de joueur..."
 }

@@ -9,6 +9,7 @@ import { Role, Title } from "../../../../types"
 import { cc } from "../utils/jsx"
 import Booster from "./booster/booster"
 import PokemonCollection from "./collection/pokemon-collection"
+import Profile from "./profile/profile"
 import GameOptionsModal from "./game/game-options-modal"
 import MetaReport from "./meta-report/meta-report"
 import { BasicModal } from "./modal/modal"
@@ -109,6 +110,32 @@ export function MainSidebar(props: MainSidebarProps) {
           </div>
         </div>
 
+        <NavLink
+          location="news"
+          svg="newspaper"
+          handleClick={(newModal) => {
+            changeModal(newModal)
+            if (isNewVersion) {
+              updateNewsVersion()
+            }
+          }}
+          shimmer={isNewVersion}
+        >
+          {t("news")}
+        </NavLink>
+
+        {page === "main_lobby" && (
+          <NavLink
+            location="profile"
+            svg="profile"
+            handleClick={(newModal) => {
+              changeModal(newModal)
+            }}
+          >
+            {t("profile")}
+          </NavLink>
+        )}
+
         {page !== "game" && (
           <NavLink
             location="collection"
@@ -166,19 +193,6 @@ export function MainSidebar(props: MainSidebarProps) {
             </NavLink>
           )}
 
-        <NavLink
-          location="news"
-          svg="newspaper"
-          handleClick={(newModal) => {
-            changeModal(newModal)
-            if (isNewVersion) {
-              updateNewsVersion()
-            }
-          }}
-          shimmer={isNewVersion}
-        >
-          {t("news")}
-        </NavLink>
         <NavLink svg="options" location="options" handleClick={changeModal}>
           {t("options")}
         </NavLink>
@@ -293,6 +307,7 @@ function NavLink(props: NavLinkProps) {
 }
 
 export type Modals =
+  | "profile"
   | "meta"
   | "wiki"
   | "collection"
@@ -330,6 +345,11 @@ function Modals({
       />
       <BasicModal
         handleClose={closeModal}
+        show={modal === "profile"}
+        body={<Profile />}
+      />
+      <BasicModal
+        handleClose={closeModal}
         show={modal === "collection"}
         body={<PokemonCollection />}
       />
@@ -357,9 +377,8 @@ function Modals({
       />
       <GameOptionsModal
         show={modal === "options"}
-        ingame={page === "game"}
+        page={page}
         hideModal={closeModal}
-        leave={closeModal}
       />
     </>
   )

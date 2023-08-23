@@ -1868,6 +1868,7 @@
   "set_moderator": "Set Moderator",
   "set_bot_manager": "Set Bot Manager",
   "give_title": "Give Title",
+  "back_to_my_profile": "Back to my profile",
   "bots": "Bots",
   "profile": "Profile",
   "search": "Search",
@@ -1952,5 +1953,7 @@
   "finished_preloading": "Finished preloading",
   "preloading_start": "Preloading game...",
   "loading_asset": "Loading asset:",
-  "loading_complete": "Loading complete, waiting for other players..."
+  "loading_complete": "Loading complete, waiting for other players...",
+  "select_pokemon": "Select a pokemon",
+  "search_player": "Search by Player Name..."
 }

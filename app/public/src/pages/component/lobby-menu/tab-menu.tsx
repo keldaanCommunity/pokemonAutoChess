@@ -1,6 +1,4 @@
 import React from "react"
-import Profile from "./profile"
-import Search from "./search"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { setTabIndex } from "../../../stores/LobbyStore"
@@ -30,8 +28,6 @@ export default function TabMenu() {
         <Tab>{t("elo")}</Tab>
         <Tab>{t("level")}</Tab>
         <Tab>{t("bots")}</Tab>
-        <Tab>{t("profile")}</Tab>
-        <Tab>{t("search")}</Tab>
       </TabList>
       <TabPanel>
         <PlayerLeaderboard />
@@ -41,12 +37,6 @@ export default function TabMenu() {
       </TabPanel>
       <TabPanel>
         <BotLeaderboard />
-      </TabPanel>
-      <TabPanel>
-        <Profile />
-      </TabPanel>
-      <TabPanel>
-        <Search />
       </TabPanel>
     </Tabs>
   )

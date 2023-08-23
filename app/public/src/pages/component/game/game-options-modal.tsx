@@ -17,14 +17,14 @@ import { useAppDispatch } from "../../../hooks"
 import { Language } from "../../../../../types/enum/Language"
 import { LanguageNames } from "../../../../dist/client/locales"
 import { selectLanguage } from "../../../stores/NetworkStore"
+import { Page } from "../main-sidebar"
 
 import "./game-options-modal.css"
 
 export default function GameOptionsModal(props: {
   show: boolean
-  hideModal: Dispatch<SetStateAction<boolean>>
-  leave: () => void
-  ingame: boolean
+  hideModal: Dispatch<SetStateAction<void>>
+  page: Page
 }) {
   const initialPreferences = getPreferences()
   const [unsavedPreferences, setUnsavedPreferences] =
@@ -76,7 +76,7 @@ export default function GameOptionsModal(props: {
         <Modal.Title>{t("options")}</Modal.Title>
       </Modal.Header>
       <Modal.Body className="game-options-modal-body">
-        {!props.ingame && (
+        {props.page === "main_lobby" && (
           <>
             <p>
               <label>
@@ -152,14 +152,14 @@ export default function GameOptionsModal(props: {
         </p>
       </Modal.Body>
       <Modal.Footer style={{ justifyContent: "space-between" }}>
-        <button className="bubbly red" onClick={props.leave}>
-          {t(props.ingame ? "leave_game" : "cancel")}
+        <button className="bubbly red" onClick={() => props.hideModal()}>
+          {t("cancel")}
         </button>
         <button
           className="bubbly green"
           onClick={useCallback(() => {
             savePreferences(unsavedPreferences)
-            props.hideModal(true)
+            props.hideModal()
           }, [props, unsavedPreferences])}
         >
           {t("save")}

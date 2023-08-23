@@ -1,29 +1,102 @@
 import React, { useState } from "react"
+import { useTranslation } from "react-i18next"
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
+import PlayerBox from "./player-box"
 import History from "./history"
-import { Role, Title } from "../../../../../types"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import {
-  searchName,
-  searchById,
-  giveBooster,
-  setModerator,
-  giveTitle,
   ban,
+  giveBooster,
+  giveTitle,
+  searchName,
   setBotManager,
+  setModerator,
   unban
 } from "../../../stores/NetworkStore"
-import { getAvatarSrc } from "../../../utils"
-import PlayerBox from "./player-box"
-import { useTranslation } from "react-i18next"
+import { SearchBar } from "./search-bar"
+import { NameTab } from "./name-tab"
+import { AvatarTab } from "./avatar-tab"
+import { TitleTab } from "./title-tab"
+import { Title, Role } from "../../../../../types"
+import SearchResults from "./search-results"
+import "./profile.css"
+import { setSearchedUser, setSuggestions } from "../../../stores/LobbyStore"
 
-export default function Search() {
+export default function Profile() {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
-  const user = useAppSelector((state) => state.lobby.searchedUser)
+  const user = useAppSelector(
+    (state) => state.lobby.searchedUser || state.lobby.user
+  )
+  const searchedUser = useAppSelector((state) => state.lobby.searchedUser)
   const suggestions = useAppSelector((state) => state.lobby.suggestions)
-  const [currentText, setCurrentText] = useState<string>("")
+
+  function onSearchQueryChange(query: string) {
+    if(query ){
+      dispatch(searchName(query))
+    } else {
+      resetSearch()
+    }
+  }
+
+  function resetSearch() {
+    dispatch(setSearchedUser(undefined))
+    dispatch(setSuggestions([]))
+  }
+
+  return user ? (
+    <div className="nes-container profile">
+      <div className="profile-box">
+        <h1>{t("profile")}</h1>
+        {user && <PlayerBox user={user} />}
+      </div>
+
+      <SearchBar onChange={onSearchQueryChange} />
+
+      <div className="profile-actions">
+        {searchedUser ? (
+          <OtherProfileActions resetSearch={resetSearch} />
+        ) : suggestions.length > 0 ? (
+          <SearchResults />
+        ) : (
+          <MyProfileMenu></MyProfileMenu>
+        )}
+      </div>
+
+      <History history={user.history} />
+    </div>
+  ) : null
+}
+
+function MyProfileMenu() {
+  const { t } = useTranslation()
+  return (
+    <Tabs>
+      <TabList>
+        <Tab>{t("name")}</Tab>
+        <Tab>{t("avatar")}</Tab>
+        <Tab>{t("title_label")}</Tab>
+      </TabList>
+
+      <TabPanel>
+        <NameTab />
+      </TabPanel>
+      <TabPanel>
+        <AvatarTab />
+      </TabPanel>
+      <TabPanel>
+        <TitleTab />
+      </TabPanel>
+    </Tabs>
+  )
+}
+
+function OtherProfileActions({ resetSearch }) {
+  const { t } = useTranslation()
+  const dispatch = useAppDispatch()
   const role = useAppSelector((state) => state.lobby.user?.role)
   const [title, setTitle] = useState<Title>(Title.ACE_TRAINER)
+  const user = useAppSelector((state) => state.lobby.searchedUser)
 
   const giveButton =
     user && role && role === Role.ADMIN ? (
@@ -119,55 +192,17 @@ export default function Search() {
       </div>
     ) : null
 
-  return (
-    <div>
-      <div className="nes-field is-inline">
-        <input
-          type="text"
-          className="my-input"
-          placeholder="Player Name..."
-          value={currentText}
-          onChange={(e) => {
-            setCurrentText(e.target.value)
-            dispatch(searchName(e.target.value))
-          }}
-        />
-      </div>
-
-      <ul className="search-suggestions">
-        {suggestions.map((suggestion) => (
-          <li
-            className="player-box clickable"
-            key={suggestion.id}
-            onClick={(e) => {
-              dispatch(searchById(suggestion.id))
-            }}
-          >
-            <img
-              src={getAvatarSrc(suggestion.avatar)}
-              className="pokemon-portrait"
-            />
-            <p>{suggestion.name}</p>
-          </li>
-        ))}
-      </ul>
-
-      {user && (
-        <div className="player-history nes-container">
-          <PlayerBox user={user} />
-          {(role === Role.ADMIN || role === Role.MODERATOR) && (
-            <div className="actions">
-              {modButton}
-              {botManagerButton}
-              {giveButton}
-              {titleButton}
-              {banButton}
-              {unbanButton}
-            </div>
-          )}
-          <History history={user.history} />
-        </div>
-      )}
+  return role === Role.ADMIN || role === Role.MODERATOR ? (
+    <div className="actions">
+      {modButton}
+      {botManagerButton}
+      {giveButton}
+      {titleButton}
+      {banButton}
+      {unbanButton}
+      <button className="bubbly blue" onClick={resetSearch}>
+        {t("back_to_my_profile")}
+      </button>
     </div>
-  )
+  ) : null
 }
