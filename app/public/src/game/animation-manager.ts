@@ -50,7 +50,7 @@ export default class AnimationManager {
           actions.push(AnimationType.Attack)
         }
 
-        logger.debug(`Init animations: ${index} => ${actions.join(",")}`)
+        //logger.debug(`Init animations: ${index} => ${actions.join(",")}`)
 
         actions.forEach((action) => {
           const modes = Object.values(SpriteType) as SpriteType[]
