@@ -441,67 +441,66 @@ export class OnDragDropItemCommand extends Command<
       }
 
       // SPECIAL CASES: create a new pokemon on item equip
-      let newItemPokemon: Pokemon | undefined = undefined
+      let newPokemon: Pokemon | undefined = undefined
       const equipAfterTransform = true
-      let evol = Pkm.HITMONTOP
 
       switch (pokemon.name) {
         case Pkm.EEVEE:
           switch (item) {
             case Item.WATER_STONE:
-              newItemPokemon = PokemonFactory.transformPokemon(
+              newPokemon = PokemonFactory.transformPokemon(
                 pokemon,
                 Pkm.VAPOREON,
-                player.pokemonCollection.get(PkmIndex[Pkm.VAPOREON])
+                player
               )
               break
             case Item.FIRE_STONE:
-              newItemPokemon = PokemonFactory.transformPokemon(
+              newPokemon = PokemonFactory.transformPokemon(
                 pokemon,
                 Pkm.FLAREON,
-                player.pokemonCollection.get(PkmIndex[Pkm.FLAREON])
+                player
               )
               break
             case Item.THUNDER_STONE:
-              newItemPokemon = PokemonFactory.transformPokemon(
+              newPokemon = PokemonFactory.transformPokemon(
                 pokemon,
                 Pkm.JOLTEON,
-                player.pokemonCollection.get(PkmIndex[Pkm.JOLTEON])
+                player
               )
               break
             case Item.DUSK_STONE:
-              newItemPokemon = PokemonFactory.transformPokemon(
+              newPokemon = PokemonFactory.transformPokemon(
                 pokemon,
                 Pkm.UMBREON,
-                player.pokemonCollection.get(PkmIndex[Pkm.UMBREON])
+                player
               )
               break
             case Item.MOON_STONE:
-              newItemPokemon = PokemonFactory.transformPokemon(
+              newPokemon = PokemonFactory.transformPokemon(
                 pokemon,
                 Pkm.SYLVEON,
-                player.pokemonCollection.get(PkmIndex[Pkm.SYLVEON])
+                player
               )
               break
             case Item.LEAF_STONE:
-              newItemPokemon = PokemonFactory.transformPokemon(
+              newPokemon = PokemonFactory.transformPokemon(
                 pokemon,
                 Pkm.LEAFEON,
-                player.pokemonCollection.get(PkmIndex[Pkm.LEAFEON])
+                player
               )
               break
             case Item.DAWN_STONE:
-              newItemPokemon = PokemonFactory.transformPokemon(
+              newPokemon = PokemonFactory.transformPokemon(
                 pokemon,
                 Pkm.ESPEON,
-                player.pokemonCollection.get(PkmIndex[Pkm.ESPEON])
+                player
               )
               break
             case Item.ICE_STONE:
-              newItemPokemon = PokemonFactory.transformPokemon(
+              newPokemon = PokemonFactory.transformPokemon(
                 pokemon,
                 Pkm.GLACEON,
-                player.pokemonCollection.get(PkmIndex[Pkm.GLACEON])
+                player
               )
               break
           }
@@ -509,51 +508,52 @@ export class OnDragDropItemCommand extends Command<
 
         case Pkm.PHIONE:
           if (item === Item.AQUA_EGG) {
-            newItemPokemon = PokemonFactory.transformPokemon(
+            newPokemon = PokemonFactory.transformPokemon(
               pokemon,
               Pkm.MANAPHY,
-              player.pokemonCollection.get(PkmIndex[Pkm.MANAPHY])
+              player
             )
           }
           break
 
         case Pkm.GROUDON:
           if (item === Item.RED_ORB) {
-            newItemPokemon = PokemonFactory.transformPokemon(
+            newPokemon = PokemonFactory.transformPokemon(
               pokemon,
               Pkm.PRIMAL_GROUDON,
-              player.pokemonCollection.get(PkmIndex[Pkm.PRIMAL_GROUDON])
+              player
             )
           }
           break
         case Pkm.KYOGRE:
           if (item === Item.BLUE_ORB) {
-            newItemPokemon = PokemonFactory.transformPokemon(
+            newPokemon = PokemonFactory.transformPokemon(
               pokemon,
               Pkm.PRIMAL_KYOGRE,
-              player.pokemonCollection.get(PkmIndex[Pkm.PRIMAL_KYOGRE])
+              player
             )
           }
           break
         case Pkm.RAYQUAZA:
           if (item === Item.DELTA_ORB) {
-            newItemPokemon = PokemonFactory.transformPokemon(
+            newPokemon = PokemonFactory.transformPokemon(
               pokemon,
               Pkm.MEGA_RAYQUAZA,
-              player.pokemonCollection.get(PkmIndex[Pkm.MEGA_RAYQUAZA])
+              player
             )
           }
           break
         case Pkm.SHAYMIN:
           if (item === Item.GRACIDEA_FLOWER) {
-            newItemPokemon = PokemonFactory.transformPokemon(
+            newPokemon = PokemonFactory.transformPokemon(
               pokemon,
               Pkm.SHAYMIN_SKY,
-              player.pokemonCollection.get(PkmIndex[Pkm.SHAYMIN_SKY])
+              player
             )
           }
           break
         case Pkm.TYROGUE:
+          let evol = Pkm.HITMONTOP
           if (
             item === Item.CHARCOAL ||
             item === Item.MAGNET ||
@@ -572,23 +572,28 @@ export class OnDragDropItemCommand extends Command<
           ) {
             evol = Pkm.HITMONCHAN
           }
-          newItemPokemon = PokemonFactory.transformPokemon(
-            pokemon,
-            evol,
-            player.pokemonCollection.get(PkmIndex[evol])
-          )
+          newPokemon = PokemonFactory.transformPokemon(pokemon, evol, player)
+          break
+        case Pkm.GLIGAR:
+          if (item === Item.RAZOR_FANG) {
+            newPokemon = PokemonFactory.transformPokemon(
+              pokemon,
+              Pkm.GLISCOR,
+              player
+            )
+          }
           break
       }
 
-      if (newItemPokemon) {
+      if (newPokemon) {
         // delete the extra pokemons
         player.board.delete(pokemon.id)
-        player.board.set(newItemPokemon.id, newItemPokemon)
+        player.board.set(newPokemon.id, newPokemon)
         player.synergies.update(player.board)
         player.effects.update(player.synergies, player.board)
         player.boardSize = this.room.getTeamSize(player.board)
         if (equipAfterTransform) {
-          newItemPokemon.items.add(item)
+          newPokemon.items.add(item)
         }
         player.items.delete(item)
         return

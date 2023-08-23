@@ -76,7 +76,7 @@ export function GamePokemonDetail(props: {
       {props.pokemon.passive !== Passive.NONE && (
         <div className="game-pokemon-detail-passive">
           <p>
-            {t("passive")}:
+            {t("passive")}:&nbsp;
             {addIconsToDescription(
               t(`passive_description.${props.pokemon.passive}`)
             )}
