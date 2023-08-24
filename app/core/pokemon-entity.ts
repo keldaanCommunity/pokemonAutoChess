@@ -605,8 +605,10 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
           pokemon.positionY
         )
 
+        const splashTarget = pokemon === this ? target : this
+
         cells.forEach((cell) => {
-          if (cell.value && pokemon.team !== cell.value.team) {
+          if (cell.value === splashTarget) {
             cell.value.count.fairyCritCount++
             cell.value.handleSpecialDamage(
               damage,

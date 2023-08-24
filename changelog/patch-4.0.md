@@ -37,6 +37,8 @@ Gligar,Gliscor,Shellder,Cloyster,Furret,Sentret,Spectrier
 
 # Changes to Synergies
 
+- Fairy: splash damage has no longer an area of effect: it only deals damage to the attacker/target.
+
 # Changes to Items
 
 # UI
