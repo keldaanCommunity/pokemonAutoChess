@@ -34,15 +34,18 @@ export class AttackStrategy {
   ) {
     pokemon.pp = 0
     pokemon.count.ult += 1
-    pokemon.simulation.room.broadcast(Transfer.ABILITY, {
-      id: pokemon.simulation.id,
-      skill: pokemon.skill,
-      positionX: pokemon.positionX,
-      positionY: pokemon.positionY,
-      targetX: target.positionX,
-      targetY: target.positionY,
-      orientation: pokemon.orientation
-    })
+
+    if (![Ability.PYRO_BALL].includes(pokemon.skill)) {
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: pokemon.skill,
+        positionX: pokemon.positionX,
+        positionY: pokemon.positionY,
+        targetX: target.positionX,
+        targetY: target.positionY,
+        orientation: pokemon.orientation
+      })
+    }
 
     if (pokemon.types.includes(Synergy.SOUND)) {
       pokemon.count.soundCount++
@@ -302,7 +305,7 @@ export class EarthquakeStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 120
+    const damage = 120
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (
         (tg && pokemon.team !== tg.team && pokemon.positionY === y) ||
@@ -5154,6 +5157,51 @@ export class AstralBarrageStrategy extends AttackStrategy {
           )
         }
       }, 100 * i)
+    }
+  }
+}
+
+export class PyroBallStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10
+
+    const farthestCoordinate = state.getFarthestTargetCoordinate(pokemon, board)
+    if (farthestCoordinate) {
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: pokemon.skill,
+        positionX: pokemon.positionX,
+        positionY: pokemon.positionY,
+        targetX: farthestCoordinate.x,
+        targetY: farthestCoordinate.y,
+        orientation: pokemon.orientation
+      })
+
+      const cells = board.getCellsBetween(
+        pokemon.positionX,
+        pokemon.positionY,
+        farthestCoordinate.x,
+        farthestCoordinate.y
+      )
+      cells.forEach((cell) => {
+        if (cell.value && cell.value.team != pokemon.team) {
+          cell.value.status.triggerBurn(2000, cell.value, pokemon, board)
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      })
     }
   }
 }

@@ -32,6 +32,7 @@ Gligar,Gliscor,Shellder,Cloyster,Furret,Sentret,Spectrier
 - New ability for Totodile: for Waterfall
 - Buff Nidorino/Nidoking/Nidorina/Nidoqueen HP
 - Buff Cubone/Marowak/Alolan Marowak HP/Attack/Def ; removed Rock from Alolan Marowak
+- New ability for Scorbunny: Pyro Ball
 
 # Changes to Synergies
 

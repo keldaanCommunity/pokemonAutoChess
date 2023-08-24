@@ -598,7 +598,7 @@ export default class PokemonState {
         value.team !== pokemon.team &&
         value.isTargettable
       ) {
-        const distance = distanceC(pokemon.positionX, pokemon.positionY, x, y)
+        const distance = distanceM(pokemon.positionX, pokemon.positionY, x, y)
         pokemons.push({ distance, x, y })
       }
     })
