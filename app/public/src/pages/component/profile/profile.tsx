@@ -54,9 +54,7 @@ export default function Profile() {
       <SearchBar onChange={onSearchQueryChange} />
 
       <div className="profile-actions">
-        <OtherProfileActions resetSearch={resetSearch} />
-
-        {searchedUser && searchedUser.id !== user?.id ? (
+        {searchedUser ? (
           <OtherProfileActions resetSearch={resetSearch} />
         ) : suggestions.length > 0 ? (
           <SearchResults />
