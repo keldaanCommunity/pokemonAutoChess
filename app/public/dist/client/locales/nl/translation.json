@@ -1906,5 +1906,12 @@
   "finished_preloading": "Klaar met voorladen",
   "preloading_start": "Spel voorladen...",
   "loading_asset": "Activa laden:",
-  "loading_complete": "Laden voltooid, wachten op andere spelers..."
+  "loading_complete": "Laden voltooid, wachten op andere spelers...",
+  "ability.PYRO_BALL": "Pyro-bal",
+  "ability_description.PYRO_BALL": "De gebruiker valt aan door een kleine steen aan te steken en deze als een vurige bal naar het verste doelwit te lanceren, waarbij hij [10,20,40,SP] SPECIAL uitdeelt en 2 seconden lang alles onderweg verbrandt",
+  "passive_description.GLIGAR": "Gligar is op zoek naar een RAZOR_FANG",
+  "passive_description.SHAYMIN": "Shaymin is op zoek naar een GRACIDEA_BLOEM",
+  "back_to_my_profile": "Terug naar mijn profiel",
+  "select_pokemon": "Selecteer een Pokemon",
+  "search_player": "Zoeken op spelersnaam..."
 }

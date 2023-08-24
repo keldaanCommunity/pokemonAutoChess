@@ -1906,5 +1906,12 @@
   "finished_preloading": "プリロードが完了しました",
   "preloading_start": "ゲームをプリロード中...",
   "loading_asset": "アセットのロード:",
-  "loading_complete": "ロードが完了しました。他のプレイヤーを待っています..."
+  "loading_complete": "ロードが完了しました。他のプレイヤーを待っています...",
+  "ability.PYRO_BALL": "パイロボール",
+  "ability_description.PYRO_BALL": "ユーザーは小さな石に点火し、それを火の玉として最も遠くのターゲットに発射して攻撃し、[10,20,40,SP] SPECIAL を与え、途中のすべてを 2 秒間燃やします",
+  "passive_description.GLIGAR": "グライガーはRAZOR_FANGを探しています",
+  "passive_description.SHAYMIN": "シェイミはGRACIDEA_FLOWERを探しています",
+  "back_to_my_profile": "私のプロフィールに戻る",
+  "select_pokemon": "ポケモンを選択してください",
+  "search_player": "プレイヤー名で検索..."
 }

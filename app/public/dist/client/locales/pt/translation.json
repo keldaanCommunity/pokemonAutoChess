@@ -811,7 +811,8 @@
     "HELPING_HAND": "Mão amiga",
     "ASTRAL_BARRAGE": "barragem astral",
     "BLIZZARD": "Nevasca",
-    "WATERFALL": "Cachoeira"
+    "WATERFALL": "Cachoeira",
+    "PYRO_BALL": "Bola pirotécnica"
   },
   "ability_description": {
     "DEFAULT": "Padrão",
@@ -1014,7 +1015,8 @@
     "HELPING_HAND": "Dobre o dano do próximo feitiço lançado pelos aliados mais próximos [2,4,6]",
     "ASTRAL_BARRAGE": "Envia [3,SP=2] pequenos fantasmas em Pokémon adversários aleatórios. Cada um deles oferece 20 ESPECIAIS",
     "BLIZZARD": "CONGELE todos os Pokémon inimigos por 3 segundos e dê [15,SP] ESPECIAL. Dano dobrado se o inimigo já estiver CONGELADO",
-    "WATERFALL": "SHIELD por [30,60,120,SP]"
+    "WATERFALL": "SHIELD por [30,60,120,SP]",
+    "PYRO_BALL": "O usuário ataca acendendo uma pequena pedra e lançando-a como uma bola de fogo no alvo mais distante, distribuindo [10,20,40,SP] ESPECIAL e QUEIMADURA por 2s em tudo que estiver em seu caminho"
   },
   "effect": {
     "INGRAIN": "Inerente",
@@ -1370,7 +1372,9 @@
     "GIRATINA": "Giratina alterna entre sua Forma Alterada e Forma de Origem, dependendo de sua posição no tabuleiro",
     "UNOWN": "Unown não pode segurar itens e desaparece após uma luta ou após lançar sua habilidade",
     "POISON_HEAL": "Se o Pokémon for POISON, ele ganhará HP ao invés de receber dano",
-    "GRIM_NEIGH": "Quando o Pokémon nocauteia um inimigo, ele emite um som de relincho aterrorizante que aumenta seu PA em 30"
+    "GRIM_NEIGH": "Quando o Pokémon nocauteia um inimigo, ele emite um som de relincho aterrorizante que aumenta seu PA em 30",
+    "GLIGAR": "Gligar está procurando por um RAZOR_FANG",
+    "SHAYMIN": "Shaymin está procurando uma GRACIDEA_FLOWER"
   },
   "stat": {
     "ATK": "Ataque",
@@ -1952,5 +1956,8 @@
   "finished_preloading": "Pré-carregamento finalizado",
   "preloading_start": "Pré-carregando o jogo...",
   "loading_asset": "Carregando recurso:",
-  "loading_complete": "Carregando completo, aguardando outros jogadores..."
+  "loading_complete": "Carregando completo, aguardando outros jogadores...",
+  "back_to_my_profile": "Voltar ao meu perfil",
+  "select_pokemon": "Selecione um pokémon",
+  "search_player": "Pesquisar por nome do jogador..."
 }
