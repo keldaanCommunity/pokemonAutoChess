@@ -379,10 +379,10 @@ export class Swablu extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.SWABLU,
-      [Synergy.NORMAL, Synergy.FAIRY, Synergy.SOUND],
+      [Synergy.FAIRY, Synergy.SOUND],
       Rarity.ULTRA,
       Pkm.ALTARIA,
-      100,
+      120,
       12,
       3,
       3,
@@ -11283,11 +11283,11 @@ export class Snubull extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.SNUBULL,
-      [Synergy.NORMAL, Synergy.FAIRY, Synergy.FIELD],
+      [Synergy.FAIRY, Synergy.FIELD],
       Rarity.EPIC,
       Pkm.GRANBULL,
-      100,
-      8,
+      115,
+      10,
       3,
       2,
       1,
@@ -11307,11 +11307,11 @@ export class Granbull extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.GRANBULL,
-      [Synergy.NORMAL, Synergy.FAIRY, Synergy.FIELD],
+      [Synergy.FAIRY, Synergy.FIELD],
       Rarity.EPIC,
       Pkm.DEFAULT,
-      200,
-      20,
+      265,
+      24,
       6,
       3,
       1,

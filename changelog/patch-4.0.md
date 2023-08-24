@@ -32,6 +32,8 @@ Gligar,Gliscor,Shellder,Cloyster,Furret,Sentret,Spectrier
 - New ability for Totodile: for Waterfall
 - Buff Nidorino/Nidoking/Nidorina/Nidoqueen HP
 - Buff Cubone/Marowak/Alolan Marowak HP/Attack/Def ; removed Rock from Alolan Marowak
+- Snubull/Granbull: removed Normal type, increased HP
+- Swablu: removed Normal type, increased HP
 
 # Changes to Synergies
 
