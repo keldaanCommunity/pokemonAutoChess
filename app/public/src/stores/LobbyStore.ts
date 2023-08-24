@@ -23,6 +23,7 @@ import { IPokemonsStatistic } from "../../../models/mongo-models/pokemons-statis
 import { playSound, SOUNDS } from "../pages/utils/audio"
 import { Language } from "../../../types/enum/Language"
 import i18n from "../i18n"
+import PokemonCollection from "../../../models/colyseus-models/pokemon-collection"
 
 export interface IUserLobbyState {
   botLogDatabase: string[]
@@ -190,7 +191,7 @@ export const lobbySlice = createSlice({
       state.levelLeaderboard = action.payload
     },
     addPokemonConfig: (state, action: PayloadAction<IPokemonConfig>) => {
-      state.pokemonCollection.push(action.payload)
+      state.pokemonCollection = [...state.pokemonCollection, action.payload]
     },
     changePokemonConfig: (
       state,
@@ -199,9 +200,10 @@ export const lobbySlice = createSlice({
       const index = state.pokemonCollection.findIndex(
         (p) => p.id === action.payload.id
       )
+      const clonedCollection = [...state.pokemonCollection]
       if (index !== -1) {
-        state.pokemonCollection[index][action.payload.field] =
-          action.payload.value
+        clonedCollection[index][action.payload.field] = action.payload.value
+        state.pokemonCollection = clonedCollection
       }
     },
     addUser: (state, action: PayloadAction<LobbyUser>) => {

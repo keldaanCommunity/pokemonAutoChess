@@ -1,7 +1,6 @@
 import React from "react"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { removeMessage, searchById } from "../../../stores/NetworkStore"
-import { setTabIndex } from "../../../stores/LobbyStore"
 import { IChatV2, Role } from "../../../../../types"
 import { getAvatarSrc } from "../../../utils"
 
@@ -45,7 +44,6 @@ export default function ChatMessage(props: { message: IChatV2 }) {
         title={formatDate(props.message.time)}
         onClick={() => {
           dispatch(searchById(props.message.authorId))
-          dispatch(setTabIndex(4))
         }}
       >
         {props.message.author}
