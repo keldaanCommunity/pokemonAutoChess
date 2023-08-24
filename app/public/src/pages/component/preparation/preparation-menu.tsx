@@ -26,9 +26,7 @@ import { IBot } from "../../../../../models/mongo-models/bot-v2"
 import { Role } from "../../../../../types"
 import { useTranslation } from "react-i18next"
 
-export default function PreparationMenu(props: {
-  setToGame: Dispatch<SetStateAction<boolean>>
-}) {
+export default function PreparationMenu() {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const [inputValue, setInputValue] = useState<string>("")

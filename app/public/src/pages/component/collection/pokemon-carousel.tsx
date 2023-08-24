@@ -1,6 +1,6 @@
 import PokemonCollectionItem from "./pokemon-collection-item"
 import PokemonFactory from "../../../../../models/pokemon-factory"
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react"
+import React, { Dispatch, SetStateAction, useCallback, useMemo } from "react"
 import { useAppSelector } from "../../../hooks"
 import { ITracker } from "../../../../../types/ITracker"
 import { Ability } from "../../../../../types/enum/Ability"
@@ -19,23 +19,31 @@ export default function PokemonCarousel(props: {
   const pokemonCollection = useAppSelector(
     (state) => state.lobby.pokemonCollection
   )
-  const [elligiblePokemons, setElligiblePokemons] = useState<Pokemon[]>([])
 
-  useEffect(() => {
-    const filteredCollection: Pokemon[] = []
-    ;(Object.values(Pkm) as Pkm[]).forEach((v) => {
-      const pkm = PokemonFactory.createPokemonFromName(v)
-      if (
-        v !== Pkm.DEFAULT &&
-        pkm.skill !== Ability.DEFAULT &&
-        pkm.passive !== Passive.UNOWN &&
-        (props.type === "all" || pkm.types.includes(Synergy[props.type]))
-      ) {
-        filteredCollection.push(pkm)
-      }
-    })
-    setElligiblePokemons(filteredCollection)
-  }, [props.filter])
+  const elligiblePokemons: Pokemon[] = useMemo(
+    () =>
+      (Object.values(Pkm) as Pkm[])
+        .map((v) => {
+          const pkm = PokemonFactory.createPokemonFromName(v)
+          if (
+            v !== Pkm.DEFAULT &&
+            pkm.skill !== Ability.DEFAULT &&
+            pkm.passive !== Passive.UNOWN &&
+            (props.type === "all" || pkm.types.includes(Synergy[props.type]))
+          ) {
+            return pkm
+          }
+
+          return undefined
+        })
+        .filter((pkm): pkm is Pokemon => !!pkm),
+    [props.type]
+  )
+
+  const getConfig = useCallback(
+    (index) => pokemonCollection.find((p) => p.id == index),
+    [pokemonCollection]
+  )
 
   return (
     <div className="pokemon-carousel">
@@ -54,7 +62,7 @@ export default function PokemonCarousel(props: {
               name={pkm.name}
               index={pkm.index}
               metadata={m}
-              config={pokemonCollection.find((p) => p.id == pkm.index)}
+              config={getConfig(pkm.index)}
               filter={props.filter}
               shinyOnly={props.shinyOnly}
               setPokemon={props.setPokemon}

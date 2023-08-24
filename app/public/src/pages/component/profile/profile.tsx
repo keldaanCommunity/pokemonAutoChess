@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
 import PlayerBox from "./player-box"
@@ -25,47 +25,49 @@ import { setSearchedUser, setSuggestions } from "../../../stores/LobbyStore"
 export default function Profile() {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
-  const user = useAppSelector(
-    (state) => state.lobby.searchedUser || state.lobby.user
-  )
-  const searchedUser = useAppSelector((state) => state.lobby.searchedUser)
+  const user = useAppSelector((state) => state.lobby.user)
   const suggestions = useAppSelector((state) => state.lobby.suggestions)
+  const searchedUser = useAppSelector((state) => state.lobby.searchedUser)
+
+  const profile = searchedUser ?? user
 
   function onSearchQueryChange(query: string) {
-    if(query ){
+    if (query) {
       dispatch(searchName(query))
     } else {
       resetSearch()
     }
   }
 
-  function resetSearch() {
+  const resetSearch = useCallback(() => {
     dispatch(setSearchedUser(undefined))
     dispatch(setSuggestions([]))
-  }
+  }, [dispatch])
 
-  return user ? (
+  return (
     <div className="nes-container profile">
       <div className="profile-box">
         <h1>{t("profile")}</h1>
-        {user && <PlayerBox user={user} />}
+        {profile && <PlayerBox user={profile} />}
       </div>
 
       <SearchBar onChange={onSearchQueryChange} />
 
       <div className="profile-actions">
-        {searchedUser ? (
+        <OtherProfileActions resetSearch={resetSearch} />
+
+        {searchedUser && searchedUser.id !== user?.id ? (
           <OtherProfileActions resetSearch={resetSearch} />
         ) : suggestions.length > 0 ? (
           <SearchResults />
         ) : (
-          <MyProfileMenu></MyProfileMenu>
+          <MyProfileMenu />
         )}
       </div>
 
-      <History history={user.history} />
+      {profile && <History history={profile.history} />}
     </div>
-  ) : null
+  )
 }
 
 function MyProfileMenu() {

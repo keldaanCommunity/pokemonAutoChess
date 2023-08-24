@@ -506,7 +506,8 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
           name: user.displayName,
           rank: i + 1,
           avatar: user.avatar,
-          value: user.elo
+          value: user.elo,
+          id: user.id
         })
       }
     }
@@ -524,7 +525,8 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
           name: user.displayName,
           rank: i + 1,
           avatar: user.avatar,
-          value: user.level
+          value: user.level,
+          id: user.id
         })
       }
     }

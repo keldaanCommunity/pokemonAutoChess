@@ -1,7 +1,5 @@
 import React from "react"
 import { Emotion } from "../../../../../types"
-import { useAppDispatch } from "../../../hooks"
-import { buyEmotion, changeSelectedEmotion } from "../../../stores/NetworkStore"
 import { getPortraitSrc } from "../../../utils"
 import { getEmotionCost } from "../../../../../types/Config"
 import { cc } from "../../utils/jsx"
@@ -15,9 +13,9 @@ export default function PokemonEmotion(props: {
   path: string
   emotion: Emotion
   dust: number
+  onClick: () => void
 }) {
   const { t } = useTranslation()
-  const dispatch = useAppDispatch()
   const cost = getEmotionCost(props.emotion, props.shiny)
   const canUnlock = !props.unlocked && cost <= props.dust
 
@@ -28,25 +26,7 @@ export default function PokemonEmotion(props: {
         unlockable: canUnlock,
         shimmer: canUnlock
       })}
-      onClick={() => {
-        if (props.unlocked) {
-          dispatch(
-            changeSelectedEmotion({
-              index: props.index,
-              emotion: props.emotion,
-              shiny: props.shiny
-            })
-          )
-        } else {
-          dispatch(
-            buyEmotion({
-              index: props.index,
-              emotion: props.emotion,
-              shiny: props.shiny
-            })
-          )
-        }
-      }}
+      onClick={props.onClick}
     >
       <img src={getPortraitSrc(props.index, props.shiny, props.emotion)} />
       {props.unlocked ? (
