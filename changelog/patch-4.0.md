@@ -34,6 +34,7 @@ Gligar,Gliscor,Shellder,Cloyster,Furret,Sentret,Spectrier
 - Buff Cubone/Marowak/Alolan Marowak HP/Attack/Def ; removed Rock from Alolan Marowak
 
 # Changes to Synergies
+- Buff fire: burn chances ~~20/20/30/40%~~ → 30/40/50/100%
 
 # Changes to Items
 

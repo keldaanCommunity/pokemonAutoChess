@@ -493,15 +493,15 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.hasSynergyEffect(Synergy.FIRE)) {
       let burnChance = 0
       if (this.effects.includes(Effect.BLAZE)) {
-        burnChance = 0.2
+        burnChance = 0.3
       } else if (this.effects.includes(Effect.VICTORY_STAR)) {
-        burnChance = 0.2
+        burnChance = 0.4
         this.addAttack(1)
       } else if (this.effects.includes(Effect.DROUGHT)) {
-        burnChance = 0.3
+        burnChance = 0.5
         this.addAttack(2)
       } else if (this.effects.includes(Effect.DESOLATE_LAND)) {
-        burnChance = 0.4
+        burnChance = 1
         this.addAttack(3)
       }
       if (chance(burnChance)) {
