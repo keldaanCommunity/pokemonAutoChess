@@ -205,21 +205,6 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerCharm(timer: number) {
-    if (!this.charm && !this.runeProtect) {
-      this.charm = true
-      this.charmCooldown = timer
-    }
-  }
-
-  updateCharm(dt: number) {
-    if (this.charmCooldown - dt <= 0) {
-      this.charm = false
-    } else {
-      this.charmCooldown = this.charmCooldown - dt
-    }
-  }
-
   triggerSynchro() {
     if (!this.synchro) {
       this.synchro = true
@@ -495,6 +480,21 @@ export default class Status extends Schema implements IStatus {
       this.confusion = false
     } else {
       this.confusionCooldown = this.confusionCooldown - dt
+    }
+  }
+
+  triggerCharm(timer: number, pkm: PokemonEntity) {
+    if (!this.charm && !pkm.isImmuneToStatusChange) {
+      this.charm = true
+      this.charmCooldown = timer
+    }
+  }
+
+  updateCharm(dt: number) {
+    if (this.charmCooldown - dt <= 0) {
+      this.charm = false
+    } else {
+      this.charmCooldown = this.charmCooldown - dt
     }
   }
 

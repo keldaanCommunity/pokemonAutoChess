@@ -7756,7 +7756,7 @@ export class Mesprit extends Pokemon {
       AttackSprite.PSYCHIC_RANGE,
       3,
       90,
-      Ability.CONFUSING_MIND,
+      Ability.SONG_OF_DESIRE,
       shiny,
       emotion,
       true
@@ -7778,8 +7778,8 @@ export class Azelf extends Pokemon {
       3,
       AttackSprite.PSYCHIC_RANGE,
       3,
-      80,
-      Ability.SONG_OF_DESIRE,
+      90,
+      Ability.CONFUSING_MIND,
       shiny,
       emotion,
       true

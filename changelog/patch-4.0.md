@@ -10,7 +10,7 @@ patch announcement
 
 - New Minigame for unique picks: Portals !
 - You now see the same battle than your opponent, and can send emotes to him. "Ghost" opponents now are only added when the number of opponents alive is odd.
--
+- New status effect: Charmed - Prevents attacking the target and forces to get closer to it
 
 # New Pokemons:
 
@@ -34,10 +34,12 @@ Gligar,Gliscor,Shellder,Cloyster,Furret,Sentret,Spectrier
 - Buff Cubone/Marowak/Alolan Marowak HP/Attack/Def ; removed Rock from Alolan Marowak
 - Snubull/Granbull: removed Normal type, increased HP
 - Swablu: removed Normal type, increased HP
+- Azelf: new ability: Confusing Mind ; Confuse the target for 6 seconds
+- Mesprit: new ability: Song of desire ; Charms the target for 6 seconds
 
 # Changes to Synergies
 
-- Fairy: splash damage has no longer an area of effect: it only deals damage to the attacker/target.
+- Fairy rework: splash damage has no longer an area of effect: it only deals damage to the attacker/target. If the target is not at range, it is charmed for 2 seconds
 
 # Changes to Items
 
