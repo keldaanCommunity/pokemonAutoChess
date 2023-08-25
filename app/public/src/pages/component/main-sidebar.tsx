@@ -370,8 +370,7 @@ function Modals({
         body={<Wiki inGame={page === "game"} />}
       />
       <BasicModal
-        title={"meta"}
-        show={modal === "meta" && meta.length > 0 && metaItems.length > 0}
+        show={modal === "meta"}
         handleClose={closeModal}
         body={
           <MetaReport

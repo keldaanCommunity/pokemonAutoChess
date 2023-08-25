@@ -1,0 +1,380 @@
+[
+  {
+    "_id": { "$oid": "64e7ef36c618ca548976703b" },
+    "pokemons": ["COMBUSKEN", "HONEDGE", "EEVEE"],
+    "rank": 4.29,
+    "count": 136,
+    "name": "FOSSIL_STONE"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca548976703c" },
+    "pokemons": ["ROSELIA", "KYOGRE", "SHAYMIN"],
+    "rank": 3.73,
+    "count": 279,
+    "name": "TWISTED_SPOON"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca548976703d" },
+    "pokemons": ["ROSELIA", "PHIONE", "CELEBI"],
+    "rank": 3.82,
+    "count": 300,
+    "name": "MYSTIC_WATER"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca548976703e" },
+    "pokemons": ["LAMPENT", "VOLCARONA", "ROSELIA"],
+    "rank": 3.68,
+    "count": 317,
+    "name": "MAGNET"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca548976703f" },
+    "pokemons": ["CHARMELEON", "ARCEUS", "DOUBLADE"],
+    "rank": 3.92,
+    "count": 268,
+    "name": "BLACK_GLASSES"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca5489767040" },
+    "pokemons": ["SHAYMIN", "XERNEAS", "ARCEUS"],
+    "rank": 4.02,
+    "count": 279,
+    "name": "MIRACLE_SEED"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca5489767041" },
+    "pokemons": ["TAPU_BULU", "MARACTUS", "MONFERNO"],
+    "rank": 4.09,
+    "count": 244,
+    "name": "NEVER_MELT_ICE"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca5489767042" },
+    "pokemons": ["GROUDON", "CHARMELEON", "RAIKOU"],
+    "rank": 3.79,
+    "count": 248,
+    "name": "CHARCOAL"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca5489767043" },
+    "pokemons": ["SUICUNE", "VIBRAVA", "GYARADOS"],
+    "rank": 3.84,
+    "count": 232,
+    "name": "HEART_SCALE"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca5489767044" },
+    "pokemons": ["RHYDON", "TAPU_BULU", "KYOGRE"],
+    "rank": 3.83,
+    "count": 290,
+    "name": "OLD_AMBER"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca5489767045" },
+    "pokemons": ["ESPEON", "TOGETIC", "DRAGAPULT"],
+    "rank": 3.44,
+    "count": 371,
+    "name": "DAWN_STONE"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca5489767046" },
+    "pokemons": ["VAPOREON", "DRAGONAIR", "SLIGOO"],
+    "rank": 3.62,
+    "count": 465,
+    "name": "WATER_STONE"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca5489767047" },
+    "pokemons": ["JOLTEON", "QUILAVA", "TYPLOSION"],
+    "rank": 3.47,
+    "count": 515,
+    "name": "THUNDER_STONE"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca5489767048" },
+    "pokemons": ["FLAREON", "MACHOKE", "COBALION"],
+    "rank": 3.8,
+    "count": 561,
+    "name": "FIRE_STONE"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca5489767049" },
+    "pokemons": ["SYLVEON", "MILTANK", "FARFETCH-D"],
+    "rank": 3.31,
+    "count": 692,
+    "name": "MOON_STONE"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca548976704a" },
+    "pokemons": ["UMBREON", "DOUBLADE", "LAMPENT"],
+    "rank": 4.08,
+    "count": 304,
+    "name": "DUSK_STONE"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca548976704b" },
+    "pokemons": ["LEAFEON", "KAKUNA", "SEVIPER"],
+    "rank": 3.4,
+    "count": 554,
+    "name": "LEAF_STONE"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca548976704c" },
+    "pokemons": ["GLACEON", "DEWOTT", "TINKATUFF"],
+    "rank": 4.11,
+    "count": 204,
+    "name": "ICE_STONE"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca548976704d" },
+    "pokemons": ["KIRLIA", "VOLCARONA", "ROSELIA"],
+    "rank": 3.6,
+    "count": 621,
+    "name": "CHOICE_SPECS"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca548976704e" },
+    "pokemons": ["ROSELIA", "CROBAT", "VOLCARONA"],
+    "rank": 3.6,
+    "count": 1383,
+    "name": "SOUL_DEW"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca548976704f" },
+    "pokemons": ["VOLCARONA", "VIRIZION", "MAWILE"],
+    "rank": 3.97,
+    "count": 2294,
+    "name": "UPGRADE"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca5489767050" },
+    "pokemons": ["CROBAT", "VOLCARONA", "ROSELIA"],
+    "rank": 3.62,
+    "count": 392,
+    "name": "REAPER_CLOTH"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca5489767051" },
+    "pokemons": ["LOUDRED", "SHAYMIN", "ROSELIA"],
+    "rank": 3.54,
+    "count": 298,
+    "name": "POKEMONOMICON"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca5489767052" },
+    "pokemons": ["LAPRAS", "MARACTUS", "TAPU_BULU"],
+    "rank": 3.5,
+    "count": 262,
+    "name": "POWER_LENS"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca5489767053" },
+    "pokemons": ["TAPU_BULU", "VIRIZION", "MAWILE"],
+    "rank": 3.91,
+    "count": 520,
+    "name": "SHELL_BELL"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca5489767054" },
+    "pokemons": ["JOLTEON", "VOLCARONA", "VAPOREON"],
+    "rank": 3.6,
+    "count": 403,
+    "name": "LUCKY_EGG"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca5489767055" },
+    "pokemons": ["MANAPHY", "VOLCARONA", "ROSELIA"],
+    "rank": 3.82,
+    "count": 737,
+    "name": "AQUA_EGG"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca5489767056" },
+    "pokemons": ["PRIMAL-KYOGRE", "LUDICOLO", "BLACEPHALON"],
+    "rank": 3.31,
+    "count": 368,
+    "name": "BLUE_ORB"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca5489767057" },
+    "pokemons": ["INFERNAPE", "TAPU_BULU", "KELDEO"],
+    "rank": 3.72,
+    "count": 624,
+    "name": "SCOPE_LENS"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca5489767058" },
+    "pokemons": ["INFERNAPE", "VIRIZION", "MILTANK"],
+    "rank": 3.67,
+    "count": 577,
+    "name": "STAR_DUST"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca5489767059" },
+    "pokemons": ["MEGA-RAYQUAZA", "TAPU_BULU", "LAPRAS"],
+    "rank": 3.68,
+    "count": 503,
+    "name": "DELTA_ORB"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca548976705a" },
+    "pokemons": ["JOLTEON", "MESPRIT", "VOLCARONA"],
+    "rank": 3.64,
+    "count": 708,
+    "name": "MANA_SCARF"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca548976705b" },
+    "pokemons": ["TAPU_BULU", "MARACTUS", "BEEDRILL"],
+    "rank": 3.57,
+    "count": 395,
+    "name": "SMOKE_BALL"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca548976705c" },
+    "pokemons": ["VOLCARONA", "XERNEAS", "MELOETTA"],
+    "rank": 3.48,
+    "count": 685,
+    "name": "XRAY_VISION"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca548976705d" },
+    "pokemons": ["VIRIZION", "KELDEO", "ZERAORA"],
+    "rank": 3.91,
+    "count": 387,
+    "name": "RAZOR_FANG"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca548976705e" },
+    "pokemons": ["TAPU_BULU", "SWAMPERT", "MARACTUS"],
+    "rank": 3.55,
+    "count": 596,
+    "name": "LEFTOVERS"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca548976705f" },
+    "pokemons": ["LOMBRE", "VIRIZION", "VOLCARONA"],
+    "rank": 3.74,
+    "count": 431,
+    "name": "CHOICE_SCARF"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca5489767060" },
+    "pokemons": ["VOLCARONA", "LOMBRE", "LUDICOLO"],
+    "rank": 3.39,
+    "count": 535,
+    "name": "FIRE_GEM"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca5489767061" },
+    "pokemons": ["TAPU_BULU", "VIRIZION", "MARACTUS"],
+    "rank": 3.57,
+    "count": 1225,
+    "name": "DEFENSIVE_RIBBON"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca5489767062" },
+    "pokemons": ["TAPU_BULU", "SHAYMIN", "LAPRAS"],
+    "rank": 3.51,
+    "count": 982,
+    "name": "WONDER_BOX"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca5489767063" },
+    "pokemons": ["TOGETIC", "IVYSAUR", "JIGGLYPUFF"],
+    "rank": 3.24,
+    "count": 848,
+    "name": "RUNE_PROTECT"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca5489767064" },
+    "pokemons": ["TAPU_BULU", "MAWILE", "SEVIPER"],
+    "rank": 3.82,
+    "count": 730,
+    "name": "WIDE_LENS"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca5489767065" },
+    "pokemons": ["XERNEAS", "VOLCARONA", "VIRIZION"],
+    "rank": 3.57,
+    "count": 595,
+    "name": "RAZOR_CLAW"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca5489767066" },
+    "pokemons": ["TINKATUFF", "DOUBLADE", "XERNEAS"],
+    "rank": 3.66,
+    "count": 226,
+    "name": "FLUFFY_TAIL"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca5489767067" },
+    "pokemons": ["CHARIZARD", "TAUROS", "MARACTUS"],
+    "rank": 3.48,
+    "count": 597,
+    "name": "ORAN_BERRY"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca5489767068" },
+    "pokemons": ["TAPU_BULU", "MARACTUS", "HATTREM"],
+    "rank": 3.43,
+    "count": 540,
+    "name": "SHINY_CHARM"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca5489767069" },
+    "pokemons": ["SHAYMIN-SKY", "JIGGLYPUFF", "CELEBI"],
+    "rank": 3.14,
+    "count": 871,
+    "name": "GRACIDEA_FLOWER"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca548976706a" },
+    "pokemons": ["VOLCARONA", "CHARMELEON", "VIRIZION"],
+    "rank": 3.74,
+    "count": 285,
+    "name": "FLAME_ORB"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca548976706b" },
+    "pokemons": ["MARACTUS", "VIRIZION", "TAPU_BULU"],
+    "rank": 3.67,
+    "count": 562,
+    "name": "ASSAULT_VEST"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca548976706c" },
+    "pokemons": ["CROBAT", "CHARMELEON", "MARACTUS"],
+    "rank": 3.78,
+    "count": 528,
+    "name": "AMULET_COIN"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca548976706d" },
+    "pokemons": ["TAPU_BULU", "MARACTUS", "LAPRAS"],
+    "rank": 3.64,
+    "count": 1003,
+    "name": "POKE_DOLL"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca548976706e" },
+    "pokemons": ["LOMBRE", "LUDICOLO", "PRIMAL-GROUDON"],
+    "rank": 3.76,
+    "count": 701,
+    "name": "RED_ORB"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca548976706f" },
+    "pokemons": ["TAPU_BULU", "MARACTUS", "LAPRAS"],
+    "rank": 3.72,
+    "count": 1221,
+    "name": "MAX_REVIVE"
+  },
+  {
+    "_id": { "$oid": "64e7ef36c618ca5489767070" },
+    "pokemons": ["MARACTUS", "MILTANK", "LAPRAS"],
+    "rank": 3.59,
+    "count": 470,
+    "name": "ROCKY_HELMET"
+  }
+]

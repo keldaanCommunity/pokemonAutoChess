@@ -9,18 +9,8 @@ import PokemonStatistic from "./pokemon-statistic"
 import { IPokemonsStatistic } from "../../../../../models/mongo-models/pokemons-statistic"
 import { useTranslation } from "react-i18next"
 
-const buttonStyle = {
-  marginLeft: "10px",
-  marginTop: "10px",
-  marginRight: "10px"
-}
-
 const optStyle = {
   color: "black"
-}
-
-const tabStyle = {
-  fontSize: "1.2vw"
 }
 
 export default function MetaReport(props: {
@@ -123,6 +113,7 @@ export default function MetaReport(props: {
             </div>
 
             <div style={{ height: "70vh", overflowY: "scroll" }}>
+              {sortedMeta.length === 0 && <p>No data available</p>}
               {sortedMeta.map((team) => {
                 return <TeamComp team={team} key={team.cluster_id} />
               })}
@@ -167,6 +158,7 @@ export default function MetaReport(props: {
               </div>
             </div>
             <div style={{ height: "70vh", overflowY: "scroll" }}>
+              {sortedMetaItems.length === 0 && <p>No data available</p>}
               {sortedMetaItems.map((item) => {
                 return <ItemStatistic item={item} key={item.name} />
               })}
@@ -211,6 +203,7 @@ export default function MetaReport(props: {
               </div>
             </div>
             <div style={{ height: "70vh", overflowY: "scroll" }}>
+              {sortedMetaPokemons.length === 0 && <p>No data available</p>}
               {sortedMetaPokemons.map((pokemon) => {
                 return <PokemonStatistic pokemon={pokemon} key={pokemon.name} />
               })}
