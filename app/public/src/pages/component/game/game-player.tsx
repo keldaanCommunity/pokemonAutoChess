@@ -7,26 +7,9 @@ import { IPlayer } from "../../../../../types"
 import { useAppSelector } from "../../../hooks"
 import { getAvatarSrc } from "../../../utils"
 import { cc } from "../../utils/jsx"
-import Synergies from "../../../../../models/colyseus-models/synergies"
-import GameState from "../../../../../rooms/states/game-state"
 
 import "react-circular-progressbar/dist/styles.css"
 import "./game-player.css"
-
-function getSynergiesFromNetworkPlayer(
-  gameState: GameState | undefined,
-  player: IPlayer
-): Synergies {
-  if (!gameState) {
-    return player.synergies
-  }
-  const networkSynergies = gameState.players.get(player.id)?.synergies?.toJSON()
-  if (networkSynergies) {
-    return networkSynergies
-  } else {
-    return player.synergies
-  }
-}
 
 export default function GamePlayer(props: {
   player: IPlayer
@@ -36,14 +19,11 @@ export default function GamePlayer(props: {
   const spectatedPlayerId = useAppSelector(
     (state) => state.game.currentPlayerId
   )
-  const game = useAppSelector((state) => state.network.game)
   const selfPlayerId = useAppSelector((state) => state.network.uid)
 
   function playerClick() {
     props.click(props.player.id)
   }
-
-  const synergies = getSynergiesFromNetworkPlayer(game?.state, props.player)
 
   return (
     <div
@@ -75,7 +55,7 @@ export default function GamePlayer(props: {
           money={props.player.money}
           level={props.player.experienceManager.level}
           history={props.player.history}
-          synergies={synergies}
+          synergies={props.player.synergies}
         />
       </ReactTooltip>
     </div>
