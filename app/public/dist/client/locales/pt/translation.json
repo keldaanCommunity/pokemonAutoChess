@@ -1214,7 +1214,7 @@
     "SUN": "+30% de dano de BURN\n-30% de duração de FREEZE",
     "RAIN": "+3 PP por segundo\n-30% de dano de BURN e POISON",
     "STORM": "Relâmpago cai aleatoriamente no tabuleiro (ELECTRIC são imunes)\n+30% de duração da PARALYSIS",
-    "MISTY": "+20% SPECIAL\n+30% de duração do SILENCE",
+    "MISTY": "+20% SPECIAL\n+30% de duração do CHARM",
     "WINDY": "+10% de chance de esquiva (+20% se FLYING)",
     "NIGHT": "+20% CRIT_CHANCE\n+30% de duração do SLEEP",
     "HYDRATATION": "A sinergia GRASS está curando 5 HP adicionais por segundo sob a RAIN",
@@ -1633,7 +1633,7 @@
     "RAIN": "+3 PP por segundo\n-30% de dano de BURN e POISON",
     "NIGHT": "+10% CRIT_CHANCE\n+30% de duração do SLEEP",
     "STORM": "Um raio atinge aleatoriamente o tabuleiro, causando 100 SPECIAL (ELECTRIC são imunes)\n+30% de duração da PARALYSIS",
-    "MISTY": "+20% SPECIAL\n+30% de duração do SILENCE",
+    "MISTY": "+20% SPECIAL\n+30% de duração do CHARM",
     "SNOW": "-25% base ATK_SPEED\n+30% de duração de FREEZE",
     "SANDSTORM": "5 SPECIAL por segundo (TERRA são imunes)\n Duração da CONFUSION +30%"
   },

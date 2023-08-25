@@ -1210,7 +1210,7 @@
     "SUN": "+30% BURN damage\n-30% FREEZE duration",
     "RAIN": "+3 PP per second\n-30% BURN and POISON damage",
     "STORM": "Lightning randomly falls on the board (ELECTRIC are immune)\n+30% PARALYSIS duration",
-    "MISTY": "+20% SPECIAL\n+30% SILENCE duration",
+    "MISTY": "+20% SPECIAL\n+30% CHARM duration",
     "WINDY": "+10% dodge chance (+20% if FLYING)",
     "NIGHT": "+20% CRIT_CHANCE\n+30% SLEEP duration",
     "HYDRATATION": "GRASS synergy is healing 5 additional HP per second under the RAIN"
@@ -1633,7 +1633,7 @@
     "RAIN": "+3 PP per second\n-30% BURN and POISON damage",
     "NIGHT": "+10% CRIT_CHANCE\n+30% SLEEP duration",
     "STORM": "Lightning randomly strikes on the board, dealing 100 SPECIAL (ELECTRIC are immune)\n+30% PARALYSIS duration",
-    "MISTY": "+20%SPECIAL\n+30% SILENCE duration",
+    "MISTY": "+20%SPECIAL\n+30% CHARM duration",
     "SNOW": "-25% base ATK_SPEED\n+30% FREEZE duration",
     "SANDSTORM": "5 SPECIAL per second (GROUND are immune)\n CONFUSION duration +30%"
   },

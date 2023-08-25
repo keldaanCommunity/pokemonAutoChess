@@ -40,8 +40,7 @@ Gligar,Gliscor,Shellder,Cloyster,Furret,Sentret,Spectrier
 # Changes to Synergies
 
 - Fairy rework: splash damage has no longer an area of effect: it only deals damage to the attacker/target. If the target is not at range, it is charmed for 2 seconds
-
-# Changes to Items
+- Misty weather now increase Charmed duration instead of Silence duration
 
 # UI
 

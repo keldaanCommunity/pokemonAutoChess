@@ -332,9 +332,6 @@ export default class Status extends Schema implements IStatus {
   ) {
     if (!this.silence && !pkm.isImmuneToStatusChange) {
       this.silence = true
-      if (pkm.simulation.weather === Weather.MISTY) {
-        timer = Math.round(timer * 1.3)
-      }
       this.silenceCooldown = timer
       if (origin) {
         this.silenceOrigin = origin
@@ -486,6 +483,9 @@ export default class Status extends Schema implements IStatus {
   triggerCharm(timer: number, pkm: PokemonEntity) {
     if (!this.charm && !pkm.isImmuneToStatusChange) {
       this.charm = true
+      if (pkm.simulation.weather === Weather.MISTY) {
+        timer = Math.round(timer * 1.3)
+      }
       this.charmCooldown = timer
     }
   }

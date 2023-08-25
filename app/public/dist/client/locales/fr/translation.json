@@ -1228,7 +1228,7 @@
     "SUN": "+30% de dégâts de BURN\n-30% de durée de FREEZE",
     "RAIN": "+3 PP par seconde\n-30% de dégâts de BURN et POISON",
     "STORM": "La foudre tombe au hasard sur le plateau (les ELECTRIC sont immunisés)\n+30% de durée de PARALYSIS",
-    "MISTY": "+20% SPECIAL\n+30 % de durée de SILENCE",
+    "MISTY": "+20% SPECIAL\n+30 % de durée de CHARM",
     "WINDY": "+10% de chances d'esquiver (+20% si FLYING)",
     "NIGHT": "+20% CRIT_CHANCE\n+30 % de durée de SLEEP",
     "HYDRATATION": "La synergie GRASS soigne 5 HP supplémentaires par seconde sous la RAIN",
@@ -1650,7 +1650,7 @@
     "RAIN": "+3 PP par seconde\n-30% de dégâts de BURN et POISON",
     "NIGHT": "+10% CRIT_CHANCE\n+30% de durée de SLEEP",
     "STORM": "La foudre frappe au hasard sur le plateau, infligeant 100 SPECIAL (les ELECTRIC sont immunisés)\n+30% de durée de PARALYSIS",
-    "MISTY": "+20% SPECIAL\n+30% de durée de SILENCE",
+    "MISTY": "+20% SPECIAL\n+30% de durée de CHARM",
     "SNOW": "-25% de ATK_SPEED de base\n+30% de durée de FREEZE",
     "SANDSTORM": "Inflige 5 SPECIAL par seconde (les GROUND sont immunisés)\n Durée CONFUSION +30%"
   },
