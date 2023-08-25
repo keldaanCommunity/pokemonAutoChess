@@ -22,8 +22,6 @@ import { Synergy } from "../../../types/enum/Synergy"
 import { IPokemonsStatistic } from "../../../models/mongo-models/pokemons-statistic"
 import { playSound, SOUNDS } from "../pages/utils/audio"
 import { Language } from "../../../types/enum/Language"
-import i18n from "../i18n"
-import PokemonCollection from "../../../models/colyseus-models/pokemon-collection"
 
 export interface IUserLobbyState {
   botLogDatabase: string[]
