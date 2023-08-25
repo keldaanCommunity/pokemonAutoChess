@@ -623,7 +623,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
           )
         } else {
           // not at range, charm it instead
-          splashTarget.status.triggerCharm(2000)
+          splashTarget.status.triggerCharm(2000, splashTarget)
         }
 
         pokemon.fairySplashCooldown = 1
