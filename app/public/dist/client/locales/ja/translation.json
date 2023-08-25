@@ -1288,7 +1288,7 @@
   "passive_description.MISTY_SURGE": "フェアリーポケモンにFAIRY_FIELDを与えるとダメージが20%アップする",
   "passive_description.PSYCHIC_SURGE": "サイキックポケモンに PSYCHIC_FIELD を与え、ダメージが 20% 増加する",
   "passive_description.EEVEE": "イーブイは、シナジーストーンを与えると 8 つのイーブイリューションのいずれかに進化できます",
-  "passive_description.TREE": "木のふりをして攻撃はしませんが、代わりに毎秒 2 ATK を獲得します (重複可能)。\nMANAバーが満タンになると攻撃開始",
+  "passive_description.SUDOWOODO": "木のふりをして攻撃はしませんが、代わりに毎秒 2 ATK を獲得します (重複可能)。\nMANAバーが満タンになると攻撃開始",
   "passive_description.DITTO": "同様に戦うことはできませんが、ドロップしてポケモンの 1 匹の基本的な姿のコピーを作成するために変身することができます (ミシカルとハッチを除く)",
   "passive_description.EGG": "中で何かが動いているのを感じることができる",
   "passive_description.HATCH": "孵化したポケモンは4段階で自動進化",

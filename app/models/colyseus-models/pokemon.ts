@@ -8595,7 +8595,8 @@ export class Wynaut extends Pokemon {
       shiny,
       emotion,
       false,
-      true
+      true,
+      Passive.WOBBUFFET
     )
   }
 }
@@ -8607,7 +8608,7 @@ export class Wobbuffet extends Pokemon {
       [Synergy.PSYCHIC],
       Rarity.COMMON,
       Pkm.DEFAULT,
-      250,
+      180,
       10,
       2,
       2,
@@ -8619,7 +8620,8 @@ export class Wobbuffet extends Pokemon {
       shiny,
       emotion,
       true,
-      true
+      true,
+      Passive.WOBBUFFET
     )
   }
 }
@@ -13470,7 +13472,7 @@ export class Bonsley extends Pokemon {
       emotion,
       false,
       true,
-      Passive.TREE
+      Passive.SUDOWOODO
     )
   }
 }
@@ -13495,7 +13497,7 @@ export class Sudowoodo extends Pokemon {
       emotion,
       true,
       true,
-      Passive.TREE
+      Passive.SUDOWOODO
     )
   }
 }
