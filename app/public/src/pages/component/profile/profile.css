@@ -24,6 +24,30 @@
 .profile .search-bar {
   grid-area: search;
   margin: 0.5em 0;
+
+  position: relative;
+}
+
+.profile .search-bar .my-input {
+  border-radius: 12px;
+}
+
+.profile .search-bar .clear-button {
+  position: absolute;
+  right: 0;
+  display: flex;
+  align-items: center;
+  border: none;
+  background: none;
+  width: 42px;
+  color: gray;
+  z-index: 3;
+}
+
+.profile .search-bar .clear-button:hover,
+.profile .search-bar .clear-button:focus {
+  box-shadow: none;
+  color: black;
 }
 
 .profile .profile-actions {
@@ -47,6 +71,9 @@
   overflow-y: auto;
   background-color: rgb(84, 89, 107);
   padding: 1em;
+  border-radius: 0 0 12px 12px;
+  border: 4px solid black;
+  border-top: 0;
 }
 
 .profile-actions .nes-container {

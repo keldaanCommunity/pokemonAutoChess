@@ -3274,6 +3274,37 @@ export default class BattleManager {
             })
             break
 
+          case Ability.PYRO_BALL:
+            coordinatesTarget = transformAttackCoordinate(
+              targetX,
+              targetY,
+              this.flip
+            )
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.PYRO_BALL,
+              "000"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.anims.play(Ability.PYRO_BALL)
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              x: coordinatesTarget[0],
+              y: coordinatesTarget[1],
+              duration: 500,
+              scale: 2,
+              onComplete: () => {
+                specialProjectile.destroy()
+              }
+            })
+            break
+
           case Ability.BONEMERANG:
             coordinatesTarget = transformAttackCoordinate(targetX, 6, this.flip)
             coordinates = transformAttackCoordinate(targetX, 0, this.flip)

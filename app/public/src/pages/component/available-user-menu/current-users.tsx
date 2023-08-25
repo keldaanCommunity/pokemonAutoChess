@@ -1,8 +1,7 @@
 import React from "react"
 import { ILobbyUser } from "../../../../../models/colyseus-models/lobby-user"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { setTabIndex } from "../../../stores/LobbyStore"
-import { searchById, searchName } from "../../../stores/NetworkStore"
+import { searchById } from "../../../stores/NetworkStore"
 import Avatar from "../avatar"
 import "./current-users.css"
 import { useTranslation } from "react-i18next"
@@ -32,7 +31,6 @@ function User(props: { key: number; v: ILobbyUser }) {
       className="clickable"
       onClick={() => {
         dispatch(searchById(props.v.id))
-        dispatch(setTabIndex(4))
       }}
     >
       <Avatar

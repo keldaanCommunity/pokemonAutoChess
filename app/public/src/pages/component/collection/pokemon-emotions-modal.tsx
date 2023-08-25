@@ -1,11 +1,14 @@
-import React from "react"
+import React, { useCallback, useMemo, useState } from "react"
 import Modal from "react-bootstrap/esm/Modal"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { buyBooster } from "../../../stores/NetworkStore"
+import {
+  buyBooster,
+  buyEmotion,
+  changeSelectedEmotion
+} from "../../../stores/NetworkStore"
 import PokemonEmotion from "./pokemon-emotion"
 import { getPortraitSrc } from "../../../utils"
 import { Pkm } from "../../../../../types/enum/Pokemon"
-import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { Emotion } from "../../../../../types"
 import { ITracker } from "../../../../../types/ITracker"
@@ -16,39 +19,71 @@ import { useTranslation } from "react-i18next"
 
 export default function PokemonEmotionsModal(props: {
   pokemon: Pkm
-  onHide: () => any
+  onHide: () => void
 }) {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const pokemonCollection = useAppSelector(
     (state) => state.lobby.pokemonCollection
   )
+
   const metadata = tracker as unknown as { [key: string]: ITracker }
 
-  let pMetadata: ITracker | undefined = undefined
+  const p = useMemo(
+    () => PokemonFactory.createPokemonFromName(props.pokemon),
+    [props.pokemon]
+  )
 
-  const availableEmotions: Emotion[] = []
+  const pMetadata: ITracker | undefined = useMemo(() => {
+    const pathIndex = p.index.split("-")
+    if (pathIndex.length == 1) {
+      return metadata[p.index]
+    } else if (pathIndex.length == 2) {
+      return metadata[pathIndex[0]].subgroups[pathIndex[1]]
+    } else {
+      return undefined
+    }
+  }, [metadata, p.index])
 
-  const p = PokemonFactory.createPokemonFromName(props.pokemon)
+  const availableEmotions: Emotion[] = useMemo(
+    () =>
+      Object.keys(pMetadata?.portrait_files ?? {})
+        .map((k) => {
+          const possibleEmotion = k as Emotion
+          if (Object.values(Emotion).includes(possibleEmotion)) {
+            return possibleEmotion
+          }
+        })
+        .filter((emo): emo is Emotion => !!emo),
+    [pMetadata]
+  )
 
-  const pathIndex = p.index.split("-")
-  if (pathIndex.length == 1) {
-    pMetadata = metadata[p.index]
-  } else if (pathIndex.length == 2) {
-    pMetadata = metadata[pathIndex[0]].subgroups[pathIndex[1]]
-  }
+  const pConfig = useMemo(() => {
+    const foundPokemon = pokemonCollection.find((c) => c.id == p.index) ?? {
+      dust: 0,
+      emotions: [],
+      shinyEmotions: [],
+      selectedEmotion: Emotion.NORMAL,
+      selectedShiny: false,
+      id: "0000"
+    }
 
-  if (pMetadata) {
-    Object.keys(pMetadata.portrait_files).forEach((k) => {
-      const possibleEmotion = k as Emotion
-      if (Object.values(Emotion).includes(possibleEmotion)) {
-        availableEmotions.push(possibleEmotion)
+    return foundPokemon
+  }, [p.index, pokemonCollection])
+
+  const handlePokemonEmotionClick = useCallback(
+    (
+      unlocked: boolean,
+      update: { index: string; emotion: Emotion; shiny: boolean }
+    ) => {
+      if (unlocked) {
+        dispatch(changeSelectedEmotion(update))
+      } else {
+        dispatch(buyEmotion(update))
       }
-    })
-  }
-
-  const pConfig = pokemonCollection.find((c) => c.id == p.index)
-  const dust = pConfig?.dust ?? 0
+    },
+    [dispatch]
+  )
 
   return (
     <Modal
@@ -61,15 +96,15 @@ export default function PokemonEmotionsModal(props: {
           <img
             src={getPortraitSrc(
               p.index,
-              pConfig?.selectedShiny,
-              pConfig?.selectedEmotion
+              pConfig.selectedShiny,
+              pConfig.selectedEmotion
             )}
             className={cc({ unlocked: pConfig != null })}
           />
           <h1>{t(`pkm.${props.pokemon}`)}</h1>
           <div className="spacer" />
           <p className="dust">
-            {dust} <img src={getPortraitSrc(p.index)} alt="dust" />
+            {pConfig.dust} <img src={getPortraitSrc(p.index)} alt="dust" />
           </p>
         </Modal.Title>
       </Modal.Header>
@@ -86,7 +121,13 @@ export default function PokemonEmotionsModal(props: {
                   unlocked={pConfig && pConfig.emotions.includes(e)}
                   path={p.index.replace("-", "/")}
                   emotion={e}
-                  dust={dust}
+                  dust={pConfig.dust}
+                  onClick={() =>
+                    handlePokemonEmotionClick(
+                      Boolean(pConfig && pConfig.emotions.includes(e)),
+                      { index: p.index, emotion: e, shiny: false }
+                    )
+                  }
                 />
               )
             })}
@@ -104,7 +145,13 @@ export default function PokemonEmotionsModal(props: {
                   unlocked={pConfig && pConfig.shinyEmotions.includes(e)}
                   path={`${p.index.replace("-", "/")}/0000/0001`}
                   emotion={e}
-                  dust={dust}
+                  dust={pConfig.dust}
+                  onClick={() =>
+                    handlePokemonEmotionClick(
+                      Boolean(pConfig && pConfig.emotions.includes(e)),
+                      { index: p.index, emotion: e, shiny: true }
+                    )
+                  }
                 />
               )
             })}
@@ -114,7 +161,7 @@ export default function PokemonEmotionsModal(props: {
       <Modal.Footer>
         <button
           className="bubbly blue"
-          disabled={dust < 500}
+          disabled={pConfig.dust < 500}
           onClick={() => dispatch(buyBooster({ index: p.index }))}
         >
           {t("buy_booster_500")}

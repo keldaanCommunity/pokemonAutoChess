@@ -838,6 +838,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.PYRO_BALL,
+      frames: this.game.anims.generateFrameNames(Ability.PYRO_BALL, {
+        start: 0,
+        end: 3,
+        zeroPad: 3
+      }),
+      duration: 200,
+      repeat: -1
+    })
+
+    this.game.anims.create({
       key: Ability.WATERFALL,
       frames: this.game.anims.generateFrameNames(Ability.WATERFALL, {
         start: 0,

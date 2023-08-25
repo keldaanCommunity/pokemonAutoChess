@@ -36,6 +36,7 @@ Gligar,Gliscor,Shellder,Cloyster,Furret,Sentret,Spectrier
 - Swablu: removed Normal type, increased HP
 - Azelf: new ability: Confusing Mind ; Confuse the target for 6 seconds
 - Mesprit: new ability: Song of desire ; Charms the target for 6 seconds
+- New ability for Scorbunny: Pyro Ball
 
 # Changes to Synergies
 

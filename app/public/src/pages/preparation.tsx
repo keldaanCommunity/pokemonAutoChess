@@ -240,7 +240,7 @@ export default function Preparation() {
         backgroundColor: "#000000"
       })
     }
-  }, [preloading])
+  }, [preloading, t])
 
   if (toGame) {
     return <Navigate to="/game" />
@@ -264,7 +264,7 @@ export default function Preparation() {
           }}
         />
         <main>
-          <PreparationMenu setToGame={setToGame} />
+          <PreparationMenu />
           <Chat source="preparation" />
         </main>
         <footer>

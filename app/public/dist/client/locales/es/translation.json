@@ -1906,5 +1906,12 @@
   "finished_preloading": "Precarga terminada",
   "preloading_start": "Precargando juego...",
   "loading_asset": "Cargando activo:",
-  "loading_complete": "Cargando completa, esperando a otros jugadores..."
+  "loading_complete": "Cargando completa, esperando a otros jugadores...",
+  "ability.PYRO_BALL": "Bola pirotécnica",
+  "ability_description.PYRO_BALL": "El usuario ataca encendiendo una pequeña piedra y lanzándola como una bola de fuego al objetivo más lejano, causando [10,20,40,SP] ESPECIAL y QUEMA durante 2 s todo lo que encuentre en su camino.",
+  "passive_description.GLIGAR": "Gligar está buscando un RAZOR_FANG",
+  "passive_description.SHAYMIN": "Shaymin está buscando una GRACIDEA_FLOWER",
+  "back_to_my_profile": "Volver a mi perfil",
+  "select_pokemon": "Selecciona un pokemon",
+  "search_player": "Buscar por nombre de jugador..."
 }

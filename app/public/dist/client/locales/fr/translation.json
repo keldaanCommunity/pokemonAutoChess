@@ -803,7 +803,8 @@
     "HELPING_HAND": "Coup de main",
     "ASTRAL_BARRAGE": "Éclat Spectral",
     "BLIZZARD": "Tempête De Neige",
-    "WATERFALL": "Cascade"
+    "WATERFALL": "Cascade",
+    "PYRO_BALL": "Boule Pyro"
   },
   "ability_description": {
     "SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés",
@@ -1006,7 +1007,8 @@
     "ASTRAL_BARRAGE": "Attaque des ennemis aléatoires avec [3,SP=2] petits spectres, chacun infligeant 20 SPECIAL",
     "SLEEP": "Faites dormir [1,2,3] Pokémon ennemis dans la ligne de fond pendant 2,5 secondes",
     "BLIZZARD": "GELEZ tous les Pokémon ennemis pendant 3 secondes et infligez [15, SP] SPÉCIAL. Double dégâts si l'ennemi est déjà GEL",
-    "WATERFALL": "SHIELD lui-même pour [30,60,120,SP]"
+    "WATERFALL": "SHIELD lui-même pour [30,60,120,SP]",
+    "PYRO_BALL": "L'utilisateur attaque en allumant une petite pierre et en la lançant comme une boule de feu sur la cible la plus éloignée, infligeant [10,20,40,SP] SPECIAL et BRÛLANT pendant 2 secondes tout ce qui se trouve sur son passage."
   },
   "emotion": {
     "Teary-Eyed": "Larmoyant",
@@ -1384,7 +1386,9 @@
     "UNOWN": "Zarbi ne peut pas tenir d'objets et disparaît après un combat ou après avoir lancé sa capacité",
     "POISON_HEAL": "Si le Pokémon est POISON, il gagnera des HP au lieu de subir des dégâts",
     "WURMPLE": "Chenipotte évolue en fonction de la météo à la manche précédente :\nBlindalys : NUIT, TEMPÊTE, TEMPÊTE DE SABLE, NEIGE\nArmulys : SOLEIL, PLUIE, BRUME, VENT\nAléatoire si NEUTRE",
-    "GRIM_NEIGH": "Quand le Pokémon met un ennemi K.O., il émet un hennissement terrifiant qui augmente son AP de 30."
+    "GRIM_NEIGH": "Quand le Pokémon met un ennemi K.O., il émet un hennissement terrifiant qui augmente son AP de 30.",
+    "GLIGAR": "Gligar recherche un RAZOR_FANG",
+    "SHAYMIN": "Shaymin recherche une GRACIDEA_FLOWER"
   },
   "stat": {
     "ATK": "Attaque",
@@ -1956,5 +1960,6 @@
   "show_details_on_hover": "Afficher les détails au survol au lieu du clic droit",
   "finished_preloading": "Préchargement terminé",
   "select_pokemon": "Sélectionnez un pokemon",
-  "search_player": "Chercher par nom de joueur..."
+  "search_player": "Chercher par nom de joueur...",
+  "back_to_my_profile": "Retour à mon profil"
 }
