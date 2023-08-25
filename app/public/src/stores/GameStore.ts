@@ -164,6 +164,15 @@ export const gameSlice = createSlice({
       if (state.currentPlayerId === action.payload.id) {
         state.currentPlayerSynergies = Array.from(action.payload.value)
       }
+
+      const playerToUpdate = state.players.findIndex(
+        (player) => player.id === action.payload.id
+      )
+
+      if (playerToUpdate !== -1) {
+        state.players.at(playerToUpdate)!.synergies =
+          action.payload.value.toJSON()
+      }
     },
     setOpponentId: (
       state,

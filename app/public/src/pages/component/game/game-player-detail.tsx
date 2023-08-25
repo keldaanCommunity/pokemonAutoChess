@@ -80,7 +80,7 @@ export default function GamePlayerDetail(props: {
         {synergyList.map((synergy, i) => {
           return (
             <div
-              key={`${synergy}${i}_game-player-detail`}
+              key={`${props.name}_${synergy}${i}_game-player-detail`}
               style={{
                 display: "flex",
                 justifyContent: "space-around",
