@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useCallback, useEffect, useRef, useState } from "react"
 import Phaser from "phaser"
 import { DebugScene } from "../../../game/scenes/debug-scene"
 import { Pkm } from "../../../../../types/enum/Pokemon"
@@ -30,12 +30,14 @@ export default function DebugSceneContainer({
   const [loaded, setLoaded] = useState<boolean>(false)
 
   const [statusMessage, setStatusMessage] = useState<string>("")
+
   const onProgress = () =>
     setStatusMessage(debugScene?.current?.loadingManager?.statusMessage ?? "")
-  const onComplete = () => {
+
+  const onComplete = useCallback(() => {
     setLoaded(true)
     debugScene.current?.updateScene(pkm, orientation, animationType, status)
-  }
+  }, [animationType, orientation, pkm, status])
 
   useEffect(() => {
     if (!initialized.current) {
@@ -61,7 +63,7 @@ export default function DebugSceneContainer({
         }
       })
     }
-  }, [initialized])
+  }, [height, initialized, onComplete, width])
 
   useEffect(() => {
     if (initialized.current === true && loaded === true) {

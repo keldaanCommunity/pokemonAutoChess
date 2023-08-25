@@ -1906,5 +1906,12 @@
   "finished_preloading": "Vorladen abgeschlossen",
   "preloading_start": "Spiel wird vorab geladen...",
   "loading_asset": "Asset wird geladen:",
-  "loading_complete": "Der Ladevorgang ist abgeschlossen, ich warte auf andere Spieler ..."
+  "loading_complete": "Der Ladevorgang ist abgeschlossen, ich warte auf andere Spieler ...",
+  "ability.PYRO_BALL": "Pyroball",
+  "ability_description.PYRO_BALL": "Der Benutzer greift an, indem er einen kleinen Stein entzündet und ihn als feurige Kugel auf das am weitesten entfernte Ziel schleudert, wodurch er alles, was ihm in den Weg kommt, [10,20,40,SP] SPECIAL und BURN für 2 Sekunden zufügt",
+  "passive_description.GLIGAR": "Gligar sucht nach einem RAZOR_FANG",
+  "passive_description.SHAYMIN": "Shaymin ist auf der Suche nach einer GRACIDEA_FLOWER",
+  "back_to_my_profile": "Zurück zu meinem Profil",
+  "select_pokemon": "Wähle ein Pokémon aus",
+  "search_player": "Nach Spielernamen suchen..."
 }

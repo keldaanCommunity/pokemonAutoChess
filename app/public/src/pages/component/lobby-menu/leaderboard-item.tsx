@@ -4,8 +4,7 @@ import {
   ILeaderboardInfo
 } from "../../../../../models/colyseus-models/leaderboard-info"
 import { useAppDispatch } from "../../../hooks"
-import { setTabIndex } from "../../../stores/LobbyStore"
-import { searchName } from "../../../stores/NetworkStore"
+import { searchById } from "../../../stores/NetworkStore"
 import Elo from "../elo"
 import { getAvatarSrc } from "../../../utils"
 import { useTranslation } from "react-i18next"
@@ -26,9 +25,8 @@ export default function LeaderboardItem(props: {
         alignItems: "center"
       }}
       onClick={() => {
-        if (!props.isBot) {
-          dispatch(searchName(props.item.name))
-          dispatch(setTabIndex(4))
+        if (!props.isBot && "id" in props.item) {
+          dispatch(searchById(props.item.id))
         }
       }}
     >

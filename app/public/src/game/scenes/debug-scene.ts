@@ -91,6 +91,7 @@ export class DebugScene extends Phaser.Scene {
       this.pokemon.removeResurection()
       this.pokemon.removeParalysis()
       this.pokemon.removeArmorReduction()
+      this.pokemon.removeCharm()
       this.pokemon.removeRuneProtect()
       this.pokemon.removeSpikeArmor()
       this.pokemon.removeMagicBounce()
@@ -134,6 +135,9 @@ export class DebugScene extends Phaser.Scene {
       }
       if (status == Status.ARMOR_REDUCTION) {
         this.pokemon.addArmorReduction()
+      }
+      if (status == Status.CHARM) {
+        this.pokemon.addCharm()
       }
       if (status == Status.RUNE_PROTECT) {
         this.pokemon.addRuneProtect()

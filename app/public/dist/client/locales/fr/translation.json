@@ -803,13 +803,14 @@
     "HELPING_HAND": "Coup de main",
     "ASTRAL_BARRAGE": "Éclat Spectral",
     "BLIZZARD": "Tempête De Neige",
-    "WATERFALL": "Cascade"
+    "WATERFALL": "Cascade",
+    "PYRO_BALL": "Boule Pyro"
   },
   "ability_description": {
     "SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés",
     "EARTHQUAKE": "Inflige [120,SP] SPECIAL à tous les ennemis présents sur la même ligne/colonne que l'attaquant",
-    "SONG_OF_DESIRE": "Rend la cible CONFUSION pendant [6,SP] secondes",
-    "CONFUSING_MIND": "Inflige [40,SP] SPECIAL à la cible et les Pokémon adjacents, les laissant CONFUSION pendant 3 secondes",
+    "SONG_OF_DESIRE": "Rend la cible CHARM pendant [6,SP] secondes",
+    "CONFUSING_MIND": "Rend la cible CONFUSION pendant [6,SP] secondes",
     "KNOWLEDGE_THIEF": "Utilise le talent de la cible",
     "KING_SHIELD": "PROTECT l'utilisateur pendant [1,2,3] secondes et échange sa position avec l'ennemi le plus éloigné",
     "EXPLOSION": "Inflige [50,100,200,SP] SPECIAL à tous les ennemis adjacents. Inflige également les dégâts au lanceur.",
@@ -1006,7 +1007,8 @@
     "ASTRAL_BARRAGE": "Attaque des ennemis aléatoires avec [3,SP=2] petits spectres, chacun infligeant 20 SPECIAL",
     "SLEEP": "Faites dormir [1,2,3] Pokémon ennemis dans la ligne de fond pendant 2,5 secondes",
     "BLIZZARD": "Inflige [15,SP] SPECIAL et FREEZE pendant 3 secondes à tous les Pokémon ennemis. Double dégâts si l'ennemi est déjà FREEZE",
-    "WATERFALL": "SHIELD lui-même pour [30,60,120,SP]"
+    "WATERFALL": "SHIELD lui-même pour [30,60,120,SP]",
+    "PYRO_BALL": "L'utilisateur attaque en allumant une petite pierre et en la lançant comme une boule de feu sur la cible la plus éloignée, infligeant [10,20,40,SP] SPECIAL et BURN pendant 2 secondes tout ce qui se trouve sur son passage."
   },
   "emotion": {
     "Teary-Eyed": "Larmoyant",
@@ -1228,7 +1230,7 @@
     "SUN": "+30% de dégâts de BURN\n-30% de durée de FREEZE",
     "RAIN": "+3 PP par seconde\n-30% de dégâts de BURN et POISON",
     "STORM": "La foudre tombe au hasard sur le plateau (les ELECTRIC sont immunisés)\n+30% de durée de PARALYSIS",
-    "MISTY": "+20% SPECIAL\n+30 % de durée de SILENCE",
+    "MISTY": "+20% SPECIAL\n+30 % de durée de CHARM",
     "WINDY": "+10% de chances d'esquiver (+20% si FLYING)",
     "NIGHT": "+20% CRIT_CHANCE\n+30 % de durée de SLEEP",
     "HYDRATATION": "La synergie GRASS soigne 5 HP supplémentaires par seconde sous la RAIN",
@@ -1384,7 +1386,9 @@
     "UNOWN": "Zarbi ne peut pas tenir d'objets et disparaît après un combat ou après avoir lancé sa capacité",
     "POISON_HEAL": "Si le Pokémon est POISON, il gagnera des HP au lieu de subir des dégâts",
     "WURMPLE": "Chenipotte évolue en fonction de la météo à la manche précédente :\nBlindalys : NUIT, TEMPÊTE, TEMPÊTE DE SABLE, NEIGE\nArmulys : SOLEIL, PLUIE, BRUME, VENT\nAléatoire si NEUTRE",
-    "GRIM_NEIGH": "Quand le Pokémon met un ennemi K.O., il émet un hennissement terrifiant qui augmente son AP de 30."
+    "GRIM_NEIGH": "Quand le Pokémon met un ennemi K.O., il émet un hennissement terrifiant qui augmente son AP de 30.",
+    "GLIGAR": "Gligar recherche un RAZOR_FANG",
+    "SHAYMIN": "Shaymin recherche une GRACIDEA_FLOWER"
   },
   "stat": {
     "ATK": "Attaque",
@@ -1428,6 +1432,7 @@
     "RESURECTION": "Résurrection",
     "PARALYSIS": "Paralysie",
     "ARMOR_REDUCTION": "Réduction d'armure",
+    "CHARM": "Charmé",
     "RUNE_PROTECT": "Immunité magique",
     "ELECTRIC_FIELD": "Champ électrique",
     "PSYCHIC_FIELD": "Champ psychique",
@@ -1441,6 +1446,7 @@
     "FREEZE": "Empêche de bouger ou d'attaquer",
     "PROTECT": "Protège de toute source de dégâts, mais empêche le gain de PP",
     "SLEEP": "Empêche de bouger ou d'attaquer. Recevoir des attaques réduit la durée de l'effet.",
+    "CHARM": "Empêche d'attaquer la cible et force à s'en rapprocher",
     "CONFUSION": "Forcer à changer de cible tout le temps et parfois s'infliger des dégâts",
     "WOUND": "Empêche toute source de soin",
     "RESURECTION": "Empêche de tomber KO une fois, restaurant au maximum des HP",
@@ -1503,7 +1509,7 @@
     "FLORA": "Quand le premier pokémon flore est mort, une fleur sort de sa tombe...",
     "ROCK": "Les pokémons de roche gagnent en DEF et résistent mieux aux dégâts critiques",
     "GHOST": "Les pokémons fantômes ont 50 % de chances de SILENCE lorsqu'ils sont touchés et infligent un pourcentage de leurs dégâts comme TRUE",
-    "FAIRY": "Les pokémons féeriques choquent les ennemis proches chaque fois qu'ils infligent ou reçoivent un coup critique",
+    "FAIRY": "Les pokémons féeriques choquent leur cible chaque fois qu'ils infligent ou reçoivent un coup critique, ou les rend CHARM pendant 2 secondes s'ils sont à distance",
     "ICE": "Tous les alliés gagnent SPE_DEF et ont une chance de FREEZE l'ennemi pendant 2 secondes après un coup",
     "FOSSIL": "Lors de leur premier KO, les pokémons fossiles reviennent à la vie avec une ATK augmentée",
     "SOUND": "Les pokémons sonores émettent un cri lorsqu'ils utilisent leurs capacités, réveillant les alliés en SLEEP et leur donnant des statistiques bonus",
@@ -1648,7 +1654,7 @@
     "RAIN": "+3 PP par seconde\n-30% de dégâts de BURN et POISON",
     "NIGHT": "+10% CRIT_CHANCE\n+30% de durée de SLEEP",
     "STORM": "La foudre frappe au hasard sur le plateau, infligeant 100 SPECIAL (les ELECTRIC sont immunisés)\n+30% de durée de PARALYSIS",
-    "MISTY": "+20% SPECIAL\n+30% de durée de SILENCE",
+    "MISTY": "+20% SPECIAL\n+30% de durée de CHARM",
     "SNOW": "-25% de ATK_SPEED de base\n+30% de durée de FREEZE",
     "SANDSTORM": "Inflige 5 SPECIAL par seconde (les GROUND sont immunisés)\n Durée CONFUSION +30%"
   },
@@ -1954,5 +1960,6 @@
   "show_details_on_hover": "Afficher les détails au survol au lieu du clic droit",
   "finished_preloading": "Préchargement terminé",
   "select_pokemon": "Sélectionnez un pokemon",
-  "search_player": "Chercher par nom de joueur..."
+  "search_player": "Chercher par nom de joueur...",
+  "back_to_my_profile": "Retour à mon profil"
 }

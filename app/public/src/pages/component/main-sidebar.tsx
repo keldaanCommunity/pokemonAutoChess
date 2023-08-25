@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next"
 import { Sidebar, Menu, MenuItem, MenuItemProps } from "react-pro-sidebar"
 import { useAppDispatch, useAppSelector } from "../../hooks"
 import { requestMeta, INetwork } from "../../stores/NetworkStore"
-import { IUserLobbyState } from "../../stores/LobbyStore"
+import { IUserLobbyState, setSearchedUser } from "../../stores/LobbyStore"
 import { Role, Title } from "../../../../types"
 import { cc } from "../utils/jsx"
 import Booster from "./booster/booster"
@@ -324,17 +324,20 @@ function Modals({
   setModal: (nextModal?: Modals) => void
   page: Page
 }) {
-  const {
-    meta,
-    metaItems,
-    metaPokemons
-  }: Partial<INetwork> & Partial<IUserLobbyState> = useAppSelector((state) => ({
-    meta: state.lobby.meta,
-    metaItems: state.lobby.metaItems,
-    metaPokemons: state.lobby.metaPokemons
-  }))
+  const meta = useAppSelector((state) => state.lobby.meta)
+  const metaItems = useAppSelector((state) => state.lobby.metaItems)
+  const metaPokemons = useAppSelector((state) => state.lobby.metaPokemons)
+  const searchedUser = useAppSelector((state) => state.lobby.searchedUser)
+
+  const dispatch = useAppDispatch()
 
   const closeModal = useCallback(() => setModal(undefined), [setModal])
+
+  useEffect(() => {
+    if (searchedUser && modal !== "profile") {
+      setModal("profile")
+    }
+  }, [modal, searchedUser, setModal])
 
   return (
     <>
@@ -344,7 +347,10 @@ function Modals({
         body={<News />}
       />
       <BasicModal
-        handleClose={closeModal}
+        handleClose={() => {
+          closeModal()
+          dispatch(setSearchedUser(undefined))
+        }}
         show={modal === "profile"}
         body={<Profile />}
       />

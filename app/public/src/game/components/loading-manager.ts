@@ -107,6 +107,11 @@ export default class LoadingManager {
       "/assets/attacks"
     )
     scene.load.multiatlas(
+      "PYRO_BALL",
+      "/assets/attacks/PYRO_BALL.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
       "WATERFALL",
       "/assets/attacks/WATERFALL.json",
       "/assets/attacks"
@@ -533,6 +538,7 @@ export function loadStatusMultiAtlas(scene: Phaser.Scene) {
     "/assets/status/ARMOR_REDUCTION.json",
     "/assets/status"
   )
+  scene.load.multiatlas("charm", "/assets/status/CHARM.json", "/assets/status")
   scene.load.multiatlas(
     "ELECTRIC_SURGE",
     "/assets/status/ELECTRIC_SURGE.json",

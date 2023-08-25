@@ -10,7 +10,7 @@ patch announcement
 
 - New Minigame for unique picks: Portals !
 - You now see the same battle than your opponent, and can send emotes to him. "Ghost" opponents now are only added when the number of opponents alive is odd.
--
+- New status effect: Charmed - Prevents attacking the target and forces to get closer to it
 
 # New Pokemons:
 
@@ -29,14 +29,20 @@ Gligar,Gliscor,Shellder,Cloyster,Furret,Sentret,Spectrier
 - Buff Overheat (Moltres): 30 → 40 special damage
 - Buff Charge (Zapdos): now also increase Attack Speed
 - New ability for Articuno: Blizzard
-- New ability for Totodile: for Waterfall
+- New ability for Totodile: Waterfall
 - Buff Nidorino/Nidoking/Nidorina/Nidoqueen HP
 - Buff Cubone/Marowak/Alolan Marowak HP/Attack/Def ; removed Rock from Alolan Marowak
+- Snubull/Granbull: removed Normal type, increased HP
+- Swablu: removed Normal type, increased HP
+- Azelf: new ability: Confusing Mind ; Confuse the target for 6 seconds
+- Mesprit: new ability: Song of desire ; Charms the target for 6 seconds
+- New ability for Scorbunny: Pyro Ball
 
 # Changes to Synergies
 - Buff fire: burn chances ~~20/20/30/40%~~ → 30/40/50/100%
 
-# Changes to Items
+- Fairy rework: splash damage has no longer an area of effect: it only deals damage to the attacker/target. If the target is not at range, it is charmed for 2 seconds
+- Misty weather now increase Charmed duration instead of Silence duration
 
 # UI
 
