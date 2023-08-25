@@ -329,7 +329,7 @@ export class SongOfDesireStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target, crit)
     const duration = 6000 * (1 + pokemon.ap / 100)
 
-    target.status.triggerConfusion(duration, target)
+    target.status.triggerCharm(duration, target)
   }
 }
 
@@ -359,25 +359,9 @@ export class ConfusingMindStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const cells = board.getAdjacentCells(target.positionX, target.positionY)
-    const damage = 40
-    const confusionDuration = 3
+    const duration = 6000 * (1 + pokemon.ap / 100)
 
-    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.status.triggerConfusion(confusionDuration * 1000, target)
-
-    cells.forEach((cell) => {
-      if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.handleSpecialDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
-        )
-        cell.value.status.triggerConfusion(confusionDuration * 1000, cell.value)
-      }
-    })
+    target.status.triggerCharm(duration, target)
   }
 }
 

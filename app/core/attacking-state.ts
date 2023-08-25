@@ -46,6 +46,8 @@ export default class AttackingState extends PokemonState {
       // no target case
       if (!targetCoordinate) {
         pokemon.toMovingState()
+      } else if (pokemon.status.charm) {
+        pokemon.toMovingState()
       } else if (
         distanceC(
           pokemon.positionX,

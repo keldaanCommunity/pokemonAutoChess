@@ -91,6 +91,7 @@ class GameContainer {
       const fields: NonFunctionPropNames<Status>[] = [
         "armorReduction",
         "burn",
+        "charm",
         "confusion",
         "deltaOrb",
         "electricField",
@@ -210,6 +211,7 @@ class GameContainer {
       const fields: NonFunctionPropNames<Status>[] = [
         "armorReduction",
         "burn",
+        "charm",
         "confusion",
         "deltaOrb",
         "electricField",

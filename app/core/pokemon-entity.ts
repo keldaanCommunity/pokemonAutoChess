@@ -30,6 +30,7 @@ import { Passive } from "../types/enum/Passive"
 import { DEFAULT_CRIT_CHANCE, DEFAULT_CRIT_DAMAGE } from "../types/Config"
 import { removeInArray } from "../utils/array"
 import { chance } from "../utils/random"
+import { distanceC } from "../utils/distance"
 
 export default class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
@@ -600,23 +601,30 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
         } else if (pokemon.effects.includes(Effect.STRANGE_STEAM)) {
           damage = 55
         }
-        const cells = board.getAdjacentCells(
-          pokemon.positionX,
-          pokemon.positionY
-        )
 
-        cells.forEach((cell) => {
-          if (cell.value && pokemon.team !== cell.value.team) {
-            cell.value.count.fairyCritCount++
-            cell.value.handleSpecialDamage(
-              damage,
-              board,
-              AttackType.SPECIAL,
-              pokemon,
-              false
-            )
-          }
-        })
+        const splashTarget = pokemon === this ? target : this
+
+        if (
+          distanceC(
+            pokemon.positionX,
+            pokemon.positionY,
+            splashTarget.positionX,
+            splashTarget.positionY
+          ) <= 1
+        ) {
+          // melee range
+          pokemon.count.fairyCritCount++
+          splashTarget.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            false
+          )
+        } else {
+          // not at range, charm it instead
+          splashTarget.status.triggerCharm(2000, splashTarget)
+        }
 
         pokemon.fairySplashCooldown = 1
       }

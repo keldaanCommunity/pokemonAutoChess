@@ -91,6 +91,7 @@ export default class Pokemon extends DraggableObject {
   confusion: GameObjects.Sprite | undefined
   paralysis: GameObjects.Sprite | undefined
   armorReduction: GameObjects.Sprite | undefined
+  charm: GameObjects.Sprite | undefined
   magmaStorm: GameObjects.Sprite | undefined
   poison: GameObjects.Sprite | undefined
   protect: GameObjects.Sprite | undefined
@@ -353,7 +354,11 @@ export default class Pokemon extends DraggableObject {
 
   onPointerUp(): void {
     super.onPointerUp()
-    if (this.shouldShowTooltip && getPreferences().showDetailsOnHover && !this.detail) {
+    if (
+      this.shouldShowTooltip &&
+      getPreferences().showDetailsOnHover &&
+      !this.detail
+    ) {
       this.openDetail()
     }
   }
@@ -368,7 +373,11 @@ export default class Pokemon extends DraggableObject {
   onPointerOver() {
     super.onPointerOver()
 
-    if (getPreferences().showDetailsOnHover && this.shouldShowTooltip && this.detail == null) {
+    if (
+      getPreferences().showDetailsOnHover &&
+      this.shouldShowTooltip &&
+      this.detail == null
+    ) {
       this.openDetail()
     }
   }
@@ -977,6 +986,23 @@ export default class Pokemon extends DraggableObject {
     if (this.armorReduction) {
       this.remove(this.armorReduction, true)
       this.armorReduction = undefined
+    }
+  }
+
+  addCharm() {
+    if (!this.charm) {
+      this.charm = new GameObjects.Sprite(this.scene, 0, -40, "charm", "000")
+      this.charm.setScale(2, 2)
+      this.scene.add.existing(this.charm)
+      this.charm.anims.play("charm")
+      this.add(this.charm)
+    }
+  }
+
+  removeCharm() {
+    if (this.charm) {
+      this.remove(this.charm, true)
+      this.charm = undefined
     }
   }
 
