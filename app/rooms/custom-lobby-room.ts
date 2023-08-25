@@ -495,7 +495,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
   async fetchLeaderboards() {
     const users = await UserMetadata.find(
       {},
-      ["displayName", "avatar", "elo"],
+      ["displayName", "avatar", "elo", "uid"],
       { limit: 100, sort: { elo: -1 } }
     )
 
@@ -507,14 +507,14 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
           rank: i + 1,
           avatar: user.avatar,
           value: user.elo,
-          id: user.id
+          id: user.uid
         })
       }
     }
 
     const levelUsers = await UserMetadata.find(
       {},
-      ["displayName", "avatar", "level"],
+      ["displayName", "avatar", "level", "uid"],
       { limit: 100, sort: { level: -1 } }
     )
 
@@ -526,7 +526,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
           rank: i + 1,
           avatar: user.avatar,
           value: user.level,
-          id: user.id
+          id: user.uid
         })
       }
     }

@@ -4,8 +4,7 @@ import {
   ILeaderboardInfo
 } from "../../../../../models/colyseus-models/leaderboard-info"
 import { useAppDispatch } from "../../../hooks"
-import { setTabIndex } from "../../../stores/LobbyStore"
-import { searchById, searchName } from "../../../stores/NetworkStore"
+import { searchById } from "../../../stores/NetworkStore"
 import Elo from "../elo"
 import { getAvatarSrc } from "../../../utils"
 import { useTranslation } from "react-i18next"

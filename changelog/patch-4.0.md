@@ -39,6 +39,7 @@ Gligar,Gliscor,Shellder,Cloyster,Furret,Sentret,Spectrier
 - New ability for Scorbunny: Pyro Ball
 
 # Changes to Synergies
+- Buff fire: burn chances ~~20/20/30/40%~~ → 30/40/50/100%
 
 - Fairy rework: splash damage has no longer an area of effect: it only deals damage to the attacker/target. If the target is not at range, it is charmed for 2 seconds
 - Misty weather now increase Charmed duration instead of Silence duration
