@@ -143,9 +143,9 @@ export function addIconsToDescription(description: string, tier = 0, ap = 0) {
     }
 
     return (
-      <span key={i}>
+      <>
         {d} {f}
-      </span>
+      </>
     )
   })
 }

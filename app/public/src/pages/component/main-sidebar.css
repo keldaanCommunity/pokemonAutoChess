@@ -94,7 +94,8 @@ aside.sidebar {
 }
 
 .menu-item:first-of-type a.ps-menu-button,
-.spacer + .menu-item a.ps-menu-button {
+.spacer + .menu-item a.ps-menu-button,
+.additional-links + .menu-item a.ps-menu-button {
   border-top: 3px solid #00000060;
 }
 
