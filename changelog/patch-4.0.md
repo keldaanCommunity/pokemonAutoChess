@@ -29,7 +29,7 @@ Gligar,Gliscor,Shellder,Cloyster,Furret,Sentret,Spectrier
 - Buff Overheat (Moltres): 30 → 40 special damage
 - Buff Charge (Zapdos): now also increase Attack Speed
 - New ability for Articuno: Blizzard
-- New ability for Totodile: for Waterfall
+- New ability for Totodile: Waterfall
 - Buff Nidorino/Nidoking/Nidorina/Nidoqueen HP
 - Buff Cubone/Marowak/Alolan Marowak HP/Attack/Def ; removed Rock from Alolan Marowak
 - Snubull/Granbull: removed Normal type, increased HP
