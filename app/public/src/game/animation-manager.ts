@@ -2183,6 +2183,7 @@ export function createStatusAnimations(game: Phaser.Scene) {
     repeatDelay: 500
   })
 
+
   game.anims.create({
     key: "armorReduction",
     frames: game.anims.generateFrameNames("armorReduction", {
@@ -2191,6 +2192,17 @@ export function createStatusAnimations(game: Phaser.Scene) {
       zeroPad: 3
     }),
     frameRate: 3,
+    repeat: -1
+  })
+
+  game.anims.create({
+    key: "charm",
+    frames: game.anims.generateFrameNames("charm", {
+      start: 0,
+      end: 3,
+      zeroPad: 3
+    }),
+    frameRate: 8,
     repeat: -1
   })
 

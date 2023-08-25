@@ -11,20 +11,18 @@ export default class MovingState extends PokemonState {
     if (pokemon.cooldown <= 0) {
       pokemon.cooldown = 500
       const targetCoordinate = this.getNearestTargetCoordinate(pokemon, board)
-      // no target case
-      // eslint-disable-next-line no-empty
-      if (!targetCoordinate) {
-      } else if (
-        distanceC(
+      if (targetCoordinate) {
+        const distance = distanceC(
           pokemon.positionX,
           pokemon.positionY,
           targetCoordinate.x,
           targetCoordinate.y
-        ) <= pokemon.range
-      ) {
-        pokemon.toAttackingState()
-      } else {
-        this.move(pokemon, board, targetCoordinate)
+        )
+        if (distance <= pokemon.range && !pokemon.status.charm) {
+          pokemon.toAttackingState()
+        } else if (distance > 1) {
+          this.move(pokemon, board, targetCoordinate)
+        }
       }
     } else {
       pokemon.cooldown = Math.max(0, pokemon.cooldown - dt)

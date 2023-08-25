@@ -1489,7 +1489,6 @@
     "FLORA": "Quando o primeiro pokémon da flora estiver morto, uma flor surgirá de seu túmulo...",
     "ROCK": "Pokémons de pedra ganham DEF e resistem melhor a danos críticos",
     "GHOST": "Os pokémons fantasmas têm 50% de chance de SILENCIAR ao acertar e causam uma porcentagem de seu dano como TRUE",
-    "FAIRY": "Os pokémons fadas dão choque nos inimigos próximos sempre que desferem ou recebem um ataque crítico",
     "ICE": "Todos os aliados ganham SPE_DEF e têm chance de FREEZE o inimigo por 2 segundos após um acerto",
     "FOSSIL": "Em seu primeiro KO, os pokémons fósseis voltam à vida com ATK aumentado",
     "SOUND": "Os pokémons do som emitem um grito quando usam suas habilidades, acordando os aliados adormecidos e dando-lhes estatísticas de bônus",

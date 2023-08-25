@@ -8,6 +8,7 @@ export default function WikiStatus() {
   const statusList: Status[] = [
     Status.ARMOR_REDUCTION,
     Status.BURN,
+    Status.CHARM,
     Status.CONFUSION,
     Status.FREEZE,
     Status.PARALYSIS,

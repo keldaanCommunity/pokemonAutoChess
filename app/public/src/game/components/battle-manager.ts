@@ -226,6 +226,12 @@ export default class BattleManager {
             } else {
               pkm.removeArmorReduction()
             }
+          } else if (field == "charm") {
+            if (pokemon.status.charm) {
+              pkm.addCharm()
+            } else {
+              pkm.removeCharm()
+            }
           } else if (field == "runeProtect") {
             if (pokemon.status.runeProtect) {
               pkm.addRuneProtect()
