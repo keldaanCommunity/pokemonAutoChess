@@ -37,8 +37,10 @@ Gligar,Gliscor,Shellder,Cloyster,Furret,Sentret,Spectrier
 - Azelf: new ability: Confusing Mind ; Confuse the target for 6 seconds
 - Mesprit: new ability: Song of desire ; Charms the target for 6 seconds
 - New ability for Scorbunny: Pyro Ball
+- Nerf Wobbuffet: HP ~~250~~ 180 ; new passive: cannot move or attack until PP bar is full
 
 # Changes to Synergies
+
 - Buff fire: burn chances ~~20/20/30/40%~~ → 30/40/50/100%
 
 - Fairy rework: splash damage has no longer an area of effect: it only deals damage to the attacker/target. If the target is not at range, it is charmed for 2 seconds
@@ -52,8 +54,8 @@ Gligar,Gliscor,Shellder,Cloyster,Furret,Sentret,Spectrier
 - New icons for status
 - Mana has been renamed Power Points (PP)
 - Discord and Donate buttons now open links in a new tab
-- Option to toggle on/off displaying a pokemon's details via hover in preferences
-- Synergies now displayed when hovering over a player's icon in game
+- Add option to toggle on/off displaying a pokemon's details via hover in preferences
+- Synergies are now displayed when hovering over a player's icon in game
 - Multiple pages have been converted to modals, allowing for easy access both in lobby and in the preparation room
 - New Sidebar! All your favorite menu buttons now exist in the sidebar
   - Sidebar available on Preparation Room

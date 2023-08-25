@@ -152,7 +152,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       this.types.push(type)
     })
 
-    if (this.passive === Passive.TREE) {
+    if (this.passive === Passive.SUDOWOODO || this.passive === Passive.WOBBUFFET) {
       this.status.tree = true
       this.toIdleState()
     }
