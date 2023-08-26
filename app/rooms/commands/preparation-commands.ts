@@ -430,7 +430,7 @@ export class InitializeBotsCommand extends Command<
 
         const bots = await BotV2.find(
           { elo: difficulty },
-          ["avatar", "elo", "name"],
+          ["avatar", "elo", "name", "id"],
           null
         ).limit(7)
 
@@ -439,7 +439,7 @@ export class InitializeBotsCommand extends Command<
             this.state.users.set(
               bot.avatar,
               new GameUser(
-                bot.avatar,
+                bot.id,
                 bot.name,
                 bot.elo,
                 bot.avatar,
