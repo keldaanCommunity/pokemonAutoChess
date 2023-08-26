@@ -3,7 +3,6 @@
   flex-direction: column;
   background-image: url("assets/ui/back1.png");
   background-size: cover;
-  overflow-y: scroll;
 }
 
 .room-menu .subtitle {
@@ -16,6 +15,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 }
 
 .room-menu .react-tabs__tab-panel ul {
