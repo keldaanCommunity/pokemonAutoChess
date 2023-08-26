@@ -9,7 +9,7 @@ patch announcement
 # Gameplay
 
 - New Minigame for unique picks: Portals !
-- You now see the same battle than your opponent, and can send emotes to him. "Ghost" opponents now are only added when the number of opponents alive is odd.
+- You now see the same battle than your opponent, and can send emotes to him.
 - New status effect: Charmed - Prevents attacking the target and forces to get closer to it
 
 # New Pokemons:
