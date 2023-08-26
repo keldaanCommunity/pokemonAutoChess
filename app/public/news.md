@@ -2,13 +2,13 @@
 
 # Patch 4.0: Portal Away !
 
-# A new portal world
+## A new portal world
 
 - New Minigame for unique picks: Portals !
 - You now see the same battle than your opponent, and can send emotes to him
 - New status effect: Charmed - Prevents attacking the target and forces to get closer to it
 
-# New Pokémons emerge from the portal
+## New Pokémons emerge from the portal
 
 ![Gligar](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0207/Normal.png)
 ![Gliscor](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0207/Normal.png)
@@ -18,7 +18,7 @@
 ![Furret](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0162/Normal.png)
 ![Spectrier](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0897/Normal.png)
 
-# Fairy charm
+## Fairy charm
 
 Fairy rework: splash damage has no longer an area of effect: it only deals damage to the attacker/target. If the target is not at range, it is charmed for 2 seconds
 
