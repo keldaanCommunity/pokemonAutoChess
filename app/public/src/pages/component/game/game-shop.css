@@ -1,7 +1,7 @@
 .game-shop.nes-container {
   position: absolute;
-  left: 10vw;
-  right: 10vw;
+  left: 8vw;
+  right: 8vw;
   bottom: 5px;
   background: #54596b;
   display: flex;

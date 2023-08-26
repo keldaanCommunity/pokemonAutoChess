@@ -14,21 +14,22 @@ import "./game-shop.css"
 
 export default function GameShop() {
   useAppSelector((state) => state.game.money) // required for reactivity
-  return <>
-    <div className="game-shop nes-container">
-      <GameMoneyInfo />
-      <GameLifeInfo />
-      <GameTeamInfo />
-      <div className="nes-container game-shop-actions">
-        <GameRarityPercentage />
-        <GameLock />
-        <GameRefresh />
+  return (
+    <>
+      <div className="game-shop nes-container">
+        <GameMoneyInfo />
+        <GameLifeInfo />
+        <GameTeamInfo />
+        <div className="nes-container game-shop-actions">
+          <GameRarityPercentage />
+          <GameLock />
+          <GameRefresh />
+        </div>
+        <GameAdditionalPokemons />
+        <GameStore />
+        <GameExperience />
       </div>
-      <GameAdditionalPokemons />
-      <GameStore />
-      <GameExperience />
-    </div>
-    <ToastContainer
+      <ToastContainer
         className="toast"
         containerId="toast-money"
         enableMultiContainer
@@ -39,7 +40,7 @@ export default function GameShop() {
         closeOnClick
         limit={1}
         closeButton={false}
-        style={{ left: `19.5vw`, bottom: `9vw` }}
+        style={{ left: `calc(80px + 17.5vw)`, bottom: `9vw` }}
       />
       <ToastContainer
         className="toast"
@@ -52,7 +53,8 @@ export default function GameShop() {
         closeOnClick
         limit={1}
         closeButton={false}
-        style={{ left: `13.5vw`, bottom: `9vw` }}
+        style={{ left: `calc(80px + 11.5vw)`, bottom: `9vw` }}
       />
-  </>
+    </>
+  )
 }
