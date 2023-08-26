@@ -280,9 +280,6 @@ export const UniqueShop = new Array<PkmProposition>(
   Pkm.MESPRIT,
   Pkm.AZELF,
   PkmDuo.LATIOS_LATIAS,
-  Pkm.ZAPDOS,
-  Pkm.MOLTRES,
-  Pkm.ARTICUNO,
   Pkm.LAPRAS,
   Pkm.ABSOL,
   Pkm.SPIRITOMB,
@@ -350,7 +347,10 @@ export const LegendaryShop = new Array<PkmProposition>(
   Pkm.VOLCANION,
   Pkm.MARSHADOW,
   Pkm.XERNEAS,
-  Pkm.YVELTAL
+  Pkm.YVELTAL,
+  Pkm.ZAPDOS,
+  Pkm.MOLTRES,
+  Pkm.ARTICUNO
 )
 
 export const HatchList = new Array<Pkm>(
