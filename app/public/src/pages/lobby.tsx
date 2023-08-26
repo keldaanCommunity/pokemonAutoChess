@@ -196,6 +196,13 @@ async function join(
             }, false)
             dispatch(setUser(u))
             setSearchedUser(u)
+
+            u.listen("language", (value) => {
+              if (value) {
+                dispatch(setLanguage(value))
+                i18n.changeLanguage(value)
+              }
+            })
           }
           const fields: NonFunctionPropNames<LobbyUser>[] = [
             "id",
@@ -212,21 +219,13 @@ async function join(
             "titles",
             "title",
             "role",
-            "anonymous",
-            "language"
+            "anonymous"
           ]
 
           fields.forEach((field) => {
             u.listen(field, (value, previousValue) => {
               dispatch(changeUser({ id: u.id, field: field, value: value }))
             })
-          })
-
-          u.listen("language", (value) => {
-            if (value) {
-              dispatch(setLanguage(value))
-              i18n.changeLanguage(value)
-            }
           })
         })
 
