@@ -77,11 +77,11 @@ export default class PreparationRoom extends Room<PreparationState> {
     // logger.debug(defaultRoomName);
     this.setState(new PreparationState(options.ownerId, n))
     this.maxClients = 8
-    if (options.ownerId) {
-      this.dispatcher.dispatch(new InitializeBotsCommand(), {
-        ownerId: options.ownerId
-      })
-    }
+    // if (options.ownerId) {
+    //   this.dispatcher.dispatch(new InitializeBotsCommand(), {
+    //     ownerId: options.ownerId
+    //   })
+    // }
     this.setName(n)
 
     this.onMessage(Transfer.KICK, (client, message) => {

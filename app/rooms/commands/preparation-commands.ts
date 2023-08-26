@@ -428,16 +428,17 @@ export class InitializeBotsCommand extends Command<
       if (user) {
         const difficulty = { $gt: user.elo - 100, $lt: user.elo + 100 }
 
-        const bots = await BotV2.find(
-          { elo: difficulty },
-          ["avatar", "elo", "name", "id"],
-          null
-        ).limit(7)
+        const bots = await BotV2.find({ elo: difficulty }, [
+          "avatar",
+          "elo",
+          "name",
+          "id"
+        ]).limit(7)
 
         if (bots) {
           bots.forEach((bot) => {
             this.state.users.set(
-              bot.avatar,
+              bot.id,
               new GameUser(
                 bot.id,
                 bot.name,
