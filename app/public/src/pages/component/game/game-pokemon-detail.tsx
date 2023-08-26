@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useMemo } from "react"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
 import { RarityColor } from "../../../../../types/Config"
@@ -17,14 +17,24 @@ export function GamePokemonDetail(props: {
   pokemonConfig?: IPokemonConfig
 }) {
   const { t } = useTranslation()
-  const pokemonStats = [
-    { stat: Stat.HP, value: props.pokemon.hp },
-    { stat: Stat.DEF, value: props.pokemon.def },
-    { stat: Stat.ATK, value: props.pokemon.atk },
-    { stat: Stat.PP, value: props.pokemon.maxPP },
-    { stat: Stat.SPE_DEF, value: props.pokemon.speDef },
-    { stat: Stat.RANGE, value: props.pokemon.range }
-  ]
+  const pokemonStats = useMemo(
+    () => [
+      { stat: Stat.HP, value: props.pokemon.hp },
+      { stat: Stat.DEF, value: props.pokemon.def },
+      { stat: Stat.ATK, value: props.pokemon.atk },
+      { stat: Stat.PP, value: props.pokemon.maxPP },
+      { stat: Stat.SPE_DEF, value: props.pokemon.speDef },
+      { stat: Stat.RANGE, value: props.pokemon.range }
+    ],
+    [
+      props.pokemon.atk,
+      props.pokemon.def,
+      props.pokemon.hp,
+      props.pokemon.maxPP,
+      props.pokemon.range,
+      props.pokemon.speDef
+    ]
+  )
 
   return (
     <div className="game-pokemon-detail in-shop">
@@ -48,8 +58,8 @@ export function GamePokemonDetail(props: {
           {t(`rarity.${props.pokemon.rarity}`)}
         </p>
         <p className="game-pokemon-detail-entry-tier">
-          {Array.from({ length: props.pokemon.stars }, () => (
-            <img src="assets/ui/star.svg" height="16"></img>
+          {Array.from({ length: props.pokemon.stars }, (_, index) => (
+            <img key={index} src="assets/ui/star.svg" height="16"></img>
           ))}
         </p>
       </div>

@@ -136,7 +136,8 @@ export function MainSidebar(props: MainSidebarProps) {
           </NavLink>
         )}
 
-        {page !== "game" && (
+        {/** TODO Enable these once we populate preparation room pokemonCollection */}
+        {page === "main_lobby" && (
           <NavLink
             location="collection"
             svg="collection"
@@ -146,7 +147,7 @@ export function MainSidebar(props: MainSidebarProps) {
             {t("collection")}
           </NavLink>
         )}
-        {page !== "game" && (
+        {page === "main_lobby" && (
           <NavLink
             location="booster"
             svg="booster"

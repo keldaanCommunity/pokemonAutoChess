@@ -7,7 +7,7 @@ import {
 } from "colyseus"
 import { Dispatcher } from "@colyseus/command"
 import LobbyState from "./states/lobby-state"
-import { connect, createConnection } from "mongoose"
+import { connect } from "mongoose"
 import BannedUser from "../models/mongo-models/banned-user"
 import ChatV2 from "../models/mongo-models/chat-v2"
 import UserMetadata from "../models/mongo-models/user-metadata"
