@@ -9,6 +9,10 @@
 - New status effect: Charmed - Prevents attacking the target and forces to get closer to it
 - Game is now translated in 9 languages
 
+## Language everywhere
+
+- Added community translation for de, en es, fr, it, ja, nl pt
+
 ## New Pokémons emerge from the portal
 
 ![Gligar](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0207/Normal.png)

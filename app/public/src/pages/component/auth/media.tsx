@@ -11,7 +11,7 @@ export default function Media() {
       <DiscordButton />
       <GithubButton />
       <PolicyButton />
-      <span>V3.9</span>
+      <span>V4.0</span>
       <p>
         {t("made_for_fans")}
         <br />
