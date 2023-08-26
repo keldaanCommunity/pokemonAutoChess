@@ -12,12 +12,12 @@ const defaultPreferences: IPreferencesState = {
   musicVolume: 30,
   sfxVolume: 30,
   showDpsMeter: false,
-  showDetailsOnHover: true,
+  showDetailsOnHover: false,
   currentVersion: undefined
 }
 
 let preferences: IPreferencesState = loadPreferences()
-export function getPreferences(){
+export function getPreferences() {
   return preferences
 }
 
