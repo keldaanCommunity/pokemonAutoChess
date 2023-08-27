@@ -271,15 +271,7 @@ export class OnNewMessageCommand extends Command<
 
       const user = this.state.users.get(client.auth.uid)
       if (user && !user.anonymous && message != "") {
-        this.state.addMessage(
-          nanoid(),
-          message,
-          user.id,
-          user.name,
-          user.avatar,
-          Date.now(),
-          true
-        )
+        this.state.addMessage(message, user.id, user.name, user.avatar)
       }
     } catch (error) {
       logger.error(error)
