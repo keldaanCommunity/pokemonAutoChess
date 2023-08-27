@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useRef, useState } from "react"
 import TeamComp from "./team-comp"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
 
@@ -8,52 +8,58 @@ import { IItemsStatistic } from "../../../../../models/mongo-models/items-statis
 import PokemonStatistic from "./pokemon-statistic"
 import { IPokemonsStatistic } from "../../../../../models/mongo-models/pokemons-statistic"
 import { useTranslation } from "react-i18next"
+import { requestMeta } from "../../../stores/NetworkStore"
+import { useAppDispatch, useAppSelector } from "../../../hooks"
 
 const optStyle = {
   color: "black"
 }
 
-export default function MetaReport(props: {
-  meta: IMeta[]
-  metaItems: IItemsStatistic[]
-  metaPokemons: IPokemonsStatistic[]
-}) {
+export default function MetaReport() {
   const { t } = useTranslation()
+  const dispatch = useAppDispatch()
+
   const [rankingBy, setRanking] = useState<string>("count")
   const [itemRankingBy, setItemRanking] = useState<string>("count")
   const [pokemonRankingBy, setPokemonRanking] = useState<string>("count")
+  const hasLoadedMeta = useRef<boolean>(false)
 
-  const meta = props.meta.slice()
-  const metaItems = props.metaItems.slice()
-  const metaPokemons = props.metaPokemons.slice()
+  const meta = useAppSelector((state) => state.lobby.meta)
+  const metaItems = useAppSelector((state) => state.lobby.metaItems)
+  const metaPokemons = useAppSelector((state) => state.lobby.metaPokemons)
+
+  if (hasLoadedMeta.current === false) {
+    dispatch(requestMeta())
+    hasLoadedMeta.current = true
+  }
 
   let sortedMeta = new Array<IMeta>()
   let sortedMetaItems = new Array<IItemsStatistic>()
   let sortedMetaPokemons = new Array<IPokemonsStatistic>()
   if (rankingBy == "count" || rankingBy == "winrate") {
-    sortedMeta = meta.sort((a, b) => {
+    sortedMeta = [...meta].sort((a, b) => {
       return b[rankingBy] - a[rankingBy]
     })
   } else {
-    sortedMeta = meta.sort((a, b) => {
+    sortedMeta = [...meta].sort((a, b) => {
       return a[rankingBy] - b[rankingBy]
     })
   }
   if (itemRankingBy == "count") {
-    sortedMetaItems = metaItems.sort((a, b) => {
+    sortedMetaItems = [...metaItems].sort((a, b) => {
       return b[itemRankingBy] - a[itemRankingBy]
     })
   } else {
-    sortedMetaItems = metaItems.sort((a, b) => {
+    sortedMetaItems = [...metaItems].sort((a, b) => {
       return a[itemRankingBy] - b[itemRankingBy]
     })
   }
   if (pokemonRankingBy == "count") {
-    sortedMetaPokemons = metaPokemons.sort((a, b) => {
+    sortedMetaPokemons = [...metaPokemons].sort((a, b) => {
       return b[pokemonRankingBy] - a[pokemonRankingBy]
     })
   } else {
-    sortedMetaPokemons = metaPokemons.sort((a, b) => {
+    sortedMetaPokemons = [...metaPokemons].sort((a, b) => {
       return a[pokemonRankingBy] - b[pokemonRankingBy]
     })
   }

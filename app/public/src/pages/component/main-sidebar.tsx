@@ -3,8 +3,7 @@ import { useNavigate } from "react-router"
 import { useTranslation } from "react-i18next"
 import { Sidebar, Menu, MenuItem, MenuItemProps } from "react-pro-sidebar"
 import { useAppDispatch, useAppSelector } from "../../hooks"
-import { requestMeta, INetwork } from "../../stores/NetworkStore"
-import { IUserLobbyState, setSearchedUser } from "../../stores/LobbyStore"
+import { setSearchedUser } from "../../stores/LobbyStore"
 import { Role, Title } from "../../../../types"
 import { cc } from "../utils/jsx"
 import Booster from "./booster/booster"
@@ -39,30 +38,14 @@ export function MainSidebar(props: MainSidebarProps) {
   )
   const sidebarRef = useRef<HTMLHtmlElement>(null)
 
-  const dispatch = useAppDispatch()
   const { t } = useTranslation()
-  const {
-    meta,
-    metaItems,
-    user
-  }: Partial<INetwork> & Partial<IUserLobbyState> = useAppSelector((state) => ({
-    meta: state.lobby.meta,
-    metaItems: state.lobby.metaItems,
-    user: state.lobby.user
-  }))
+  const user = useAppSelector((state) => state.lobby.user)
 
   const { isNewVersion, updateNewsVersion } = useNews()
 
   const version = pkg.version
 
   const numberOfBooster = user?.booster ?? 0
-
-  const metaOnClick = useCallback(() => {
-    if (meta.length == 0 || metaItems.length == 0) {
-      dispatch(requestMeta())
-    }
-    changeModal("meta")
-  }, [changeModal, dispatch, meta.length, metaItems.length])
 
   useEffect(() => {
     if (!sidebarRef.current) {
@@ -125,13 +108,7 @@ export function MainSidebar(props: MainSidebarProps) {
         </NavLink>
 
         {page === "main_lobby" && (
-          <NavLink
-            location="profile"
-            svg="profile"
-            handleClick={(newModal) => {
-              changeModal(newModal)
-            }}
-          >
+          <NavLink location="profile" svg="profile" handleClick={changeModal}>
             {t("profile")}
           </NavLink>
         )}
@@ -166,7 +143,12 @@ export function MainSidebar(props: MainSidebarProps) {
         >
           {t("wiki")}
         </NavLink>
-        <NavLink svg="meta" className="green" onClick={metaOnClick}>
+        <NavLink
+          svg="meta"
+          className="green"
+          location="meta"
+          handleClick={changeModal}
+        >
           {t("meta")}
         </NavLink>
 
@@ -325,9 +307,6 @@ function Modals({
   setModal: (nextModal?: Modals) => void
   page: Page
 }) {
-  const meta = useAppSelector((state) => state.lobby.meta)
-  const metaItems = useAppSelector((state) => state.lobby.metaItems)
-  const metaPokemons = useAppSelector((state) => state.lobby.metaPokemons)
   const searchedUser = useAppSelector((state) => state.lobby.searchedUser)
 
   const dispatch = useAppDispatch()
@@ -373,13 +352,7 @@ function Modals({
       <BasicModal
         show={modal === "meta"}
         handleClose={closeModal}
-        body={
-          <MetaReport
-            meta={meta}
-            metaItems={metaItems}
-            metaPokemons={metaPokemons}
-          />
-        }
+        body={<MetaReport />}
       />
       <GameOptionsModal
         show={modal === "options"}
