@@ -10,6 +10,7 @@ import LobbyState from "./states/lobby-state"
 import { connect, createConnection } from "mongoose"
 import BannedUser from "../models/mongo-models/banned-user"
 import ChatV2 from "../models/mongo-models/chat-v2"
+import Message from "../models/colyseus-models/message"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import {
   ILeaderboardInfo,
@@ -440,14 +441,15 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       })
       if (messages) {
         messages.forEach((message) => {
-          this.state.addMessage(
-            nanoid(),
-            message.payload,
-            message.authorId,
-            message.author,
-            message.avatar,
-            message.time,
-            false
+          this.state.messages.push(
+            new Message(
+              message.id,
+              message.payload,
+              message.authorId,
+              message.author,
+              message.avatar,
+              message.time
+            )
           )
         })
       }
