@@ -42,7 +42,7 @@ import {
   IPokemon,
   Transfer
 } from "../types"
-import { Pkm, PkmFamily, PkmIndex } from "../types/enum/Pokemon"
+import { Pkm, PkmFamily } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { IGameUser } from "../models/colyseus-models/game-user"
@@ -51,14 +51,14 @@ import { components } from "../api-v1/openapi"
 import { Title, Role } from "../types"
 import PRECOMPUTED_TYPE_POKEMONS from "../models/precomputed/type-pokemons.json"
 import BannedUser from "../models/mongo-models/banned-user"
-import { coinflip, pickRandomIn, shuffleArray } from "../utils/random"
+import { coinflip, shuffleArray } from "../utils/random"
 import { Rarity } from "../types/enum/Game"
 import { Weather } from "../types/enum/Weather"
-import { FilterQuery } from "mongoose"
 import { MiniGame } from "../core/matter/mini-game"
 import { logger } from "../utils/logger"
 import { computeElo } from "../core/elo"
 import { Passive } from "../types/enum/Passive"
+import { getAvatarString } from "../public/src/utils"
 
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>
@@ -648,8 +648,7 @@ export default class GameRoom extends Room<GameState> {
 
     player.board.forEach((pokemon: IPokemon) => {
       if (pokemon.positionY != 0) {
-        const shinyPad = pokemon.shiny ? "/0000/0001" : ""
-        const avatar = `${pokemon.index}${shinyPad}/${pokemon.emotion}`
+        const avatar = getAvatarString(pokemon.index, pokemon.shiny, pokemon.emotion)
         const s: IGameHistoryPokemonRecord = {
           name: pokemon.name,
           avatar: avatar,
