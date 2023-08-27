@@ -152,7 +152,10 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       this.types.push(type)
     })
 
-    if (this.passive === Passive.SUDOWOODO || this.passive === Passive.WOBBUFFET) {
+    if (
+      this.passive === Passive.SUDOWOODO ||
+      this.passive === Passive.WOBBUFFET
+    ) {
       this.status.tree = true
       this.toIdleState()
     }
@@ -410,7 +413,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       neighbours.forEach((offset) => {
         const value = board.getValue(this.positionX + offset, this.positionY)
         if (value && value.team === this.team) {
-          this.handleHeal(value.hp * 0.05, this, 0)
+          value.handleHeal(value.hp * 0.05, this, 0)
         }
       })
     }
