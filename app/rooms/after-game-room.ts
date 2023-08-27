@@ -42,7 +42,7 @@ export default class AfterGameRoom extends Room<AfterGameState> {
     }
   }
 
-  async onAuth(client: Client, options: any, request: any) {
+  async onAuth(client: Client, options, request) {
     try {
       super.onAuth(client, options, request)
       const token = await admin.auth().verifyIdToken(options.idToken)
@@ -61,7 +61,7 @@ export default class AfterGameRoom extends Room<AfterGameState> {
     }
   }
 
-  onJoin(client: Client, options: any, auth: any) {
+  onJoin(client: Client) {
     logger.info(`${client.auth.email} join after game`)
   }
 

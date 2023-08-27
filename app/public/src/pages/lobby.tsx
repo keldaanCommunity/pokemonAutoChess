@@ -156,7 +156,7 @@ async function join(
         room.state.messages.onAdd((m) => {
           dispatch(pushMessage(m))
         })
-        room.state.messages.onRemove((m, k) => {
+        room.state.messages.onRemove((m) => {
           dispatch(removeMessage(m))
         })
 
@@ -164,7 +164,7 @@ async function join(
           dispatch(addUser(u))
 
           if (u.id == user.uid) {
-            u.pokemonCollection.onAdd((p, key) => {
+            u.pokemonCollection.onAdd((p) => {
               const pokemonConfig = p as PokemonConfig
               dispatch(addPokemonConfig(pokemonConfig))
               const fields: NonFunctionPropNames<PokemonConfig>[] = [
@@ -217,7 +217,7 @@ async function join(
           ]
 
           fields.forEach((field) => {
-            u.listen(field, (value, previousValue) => {
+            u.listen(field, (value) => {
               dispatch(changeUser({ id: u.id, field: field, value: value }))
             })
           })
@@ -280,7 +280,7 @@ async function join(
           }
         )
 
-        room.onMessage(Transfer.ADD_ROOM, ([roomId, room]) => {
+        room.onMessage(Transfer.ADD_ROOM, ([, room]) => {
           if (room.name === "room" || room.name === "game") {
             dispatch(addRoom(room))
           }

@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Client, Room } from "colyseus.js"
 import firebase from "firebase/compat/app"
-import React, { useEffect, useRef, useState } from "react"
+import React, { useCallback, useEffect, useRef, useState } from "react"
 import GameState from "../../../rooms/states/game-state"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import {
@@ -95,9 +94,7 @@ export function getGameContainer(): GameContainer {
 }
 
 export function getGameScene(): GameScene | undefined {
-  return gameContainer?.game?.scene?.getScene("gameScene") as
-    | GameScene
-    | undefined
+  return gameContainer?.game?.scene?.getScene<GameScene>("gameScene")
 }
 
 export default function Game() {
@@ -127,47 +124,52 @@ export default function Game() {
 
   const MAX_ATTEMPS_RECONNECT = 3
 
-  function connectToGame(attempts = 1) {
-    logger.debug(`connectToGame attempt ${attempts} / ${MAX_ATTEMPS_RECONNECT}`)
-    const cachedReconnectionToken = localStorage.getItem(
-      "cachedReconnectionToken"
-    )
-    if (cachedReconnectionToken) {
-      connecting.current = true
-      const statusMessage = document.querySelector("#status-message")
-      if (statusMessage) {
-        statusMessage.textContent = `Connecting to game...`
-      }
+  const connectToGame = useCallback(
+    async (attempts = 1) => {
+      logger.debug(
+        `connectToGame attempt ${attempts} / ${MAX_ATTEMPS_RECONNECT}`
+      )
+      const cachedReconnectionToken = localStorage.getItem(
+        "cachedReconnectionToken"
+      )
+      if (cachedReconnectionToken) {
+        connecting.current = true
+        const statusMessage = document.querySelector("#status-message")
+        if (statusMessage) {
+          statusMessage.textContent = `Connecting to game...`
+        }
 
-      client
-        .reconnect(cachedReconnectionToken)
-        .then((room: Room) => {
-          localStorage.setItem(
-            "cachedReconnectionToken",
-            room.reconnectionToken
-          )
-          dispatch(joinGame(room))
-          connected.current = true
-          connecting.current = false
-        })
-        .catch((error) => {
-          if (attempts < MAX_ATTEMPS_RECONNECT) {
-            setTimeout(() => connectToGame(attempts + 1), 1000)
-          } else {
-            let connectError = error.message
-            if (error.code === 4212) {
-              // room disposed
-              connectError = "This game does no longer exist"
+        client
+          .reconnect(cachedReconnectionToken)
+          .then((room: Room) => {
+            localStorage.setItem(
+              "cachedReconnectionToken",
+              room.reconnectionToken
+            )
+            dispatch(joinGame(room))
+            connected.current = true
+            connecting.current = false
+          })
+          .catch((error) => {
+            if (attempts < MAX_ATTEMPS_RECONNECT) {
+              setTimeout(async () => await connectToGame(attempts + 1), 1000)
+            } else {
+              let connectError = error.message
+              if (error.code === 4212) {
+                // room disposed
+                connectError = "This game does no longer exist"
+              }
+              //TODO: handle more known error codes with informative messages
+              setConnectError(connectError)
+              logger.error("reconnect error", error)
             }
-            //TODO: handle more known error codes with informative messages
-            setConnectError(connectError)
-            logger.error("reconnect error", error)
-          }
-        })
-    } else {
-      setToAuth(true) // no reconnection token
-    }
-  }
+          })
+      } else {
+        setToAuth(true) // no reconnection token
+      }
+    },
+    [client, dispatch]
+  )
 
   function playerClick(id: string) {
     gameContainer.onPlayerClick(id)
@@ -184,7 +186,7 @@ export default function Game() {
     }
   }
 
-  async function leave() {
+  const leave = useCallback(async () => {
     const savedPlayers = new Array<ISimplePlayer>()
 
     const token = await firebase.auth().currentUser?.getIdToken()
@@ -225,28 +227,26 @@ export default function Game() {
     } catch (error) {
       logger.warn("Room already closed")
     }
-  }
+  }, [client, dispatch, room])
 
   useEffect(() => {
     const connect = () => {
-      connecting.current = true
       logger.debug("connecting to game")
       if (!firebase.apps.length) {
         firebase.initializeApp(FIREBASE_CONFIG)
       }
 
-      firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
+      firebase.auth().onAuthStateChanged(async (user) => {
+        if (user && !connecting.current) {
+          connecting.current = true
           dispatch(logIn(user))
-          connectToGame()
+          await connectToGame()
         }
       })
     }
 
     if (!connected.current) {
-      if (!connecting.current) {
-        connect()
-      }
+      connect()
     } else if (
       !initialized.current &&
       room != undefined &&
@@ -292,7 +292,7 @@ export default function Game() {
         gameContainer.setTilemap(tilemap)
       })
       room.onMessage(Transfer.BROADCAST_EMOTE, (message) => {
-        const g = gameContainer.game?.scene.getScene("gameScene") as GameScene
+        const g = getGameScene()
         if (g && g.board) {
           g.board.displayEmote(message.id, message.emote)
         }
@@ -332,7 +332,7 @@ export default function Game() {
 
       room.onMessage(Transfer.UNOWN_WANDERING, () => {
         if (gameContainer.game) {
-          const g: any = gameContainer.game.scene.getScene("gameScene")
+          const g = getGameScene()
           if (g && g.unownManager) {
             g.unownManager.addWanderingUnown()
           }
@@ -341,7 +341,7 @@ export default function Game() {
 
       room.onMessage(Transfer.BOARD_EVENT, (event: IBoardEvent) => {
         if (gameContainer.game) {
-          const g = gameContainer.game.scene.getScene("gameScene") as GameScene
+          const g = getGameScene()
           if (g && g.board) {
             g.board.handleBoardEvent(event)
           }
@@ -350,35 +350,37 @@ export default function Game() {
 
       room.onMessage(Transfer.GAME_END, leave)
 
-      room.state.listen("roundTime", (value, previousValue) => {
+      room.state.listen("roundTime", (value) => {
         dispatch(setRoundTime(value))
       })
 
-      room.state.listen("phase", (value, previousValue) => {
+      room.state.listen("phase", (value) => {
         if (gameContainer.game) {
-          const g: any = gameContainer.game.scene.getScene("gameScene")
-          g.updatePhase()
+          const g = getGameScene()
+          if (g) {
+            g.updatePhase()
+          }
         }
         dispatch(setPhase(value))
       })
 
-      room.state.listen("stageLevel", (value, previousValue) => {
+      room.state.listen("stageLevel", (value) => {
         dispatch(setStageLevel(value))
       })
 
-      room.state.listen("mapName", (value, previousValue) => {
+      room.state.listen("mapName", (value) => {
         dispatch(setMapName(value))
       })
 
-      room.state.listen("noElo", (value, previousValue) => {
+      room.state.listen("noElo", (value) => {
         dispatch(setNoELO(value))
       })
 
-      room.state.additionalPokemons.onAdd((pkm) => {
+      room.state.additionalPokemons.onAdd(() => {
         dispatch(setAdditionalPokemons(room.state.additionalPokemons))
       })
 
-      room.state.simulations.onRemove((simulation) => {
+      room.state.simulations.onRemove(() => {
         gameContainer.resetSimulation()
       })
 
@@ -390,7 +392,7 @@ export default function Game() {
           dispatch(setWeather({ id: simulation.id, value: value }))
         })
 
-        simulation.blueDpsMeter.onAdd((dps, key) => {
+        simulation.blueDpsMeter.onAdd((dps) => {
           dispatch(addBlueDpsMeter({ value: dps, id: simulation.id }))
           const fields: NonFunctionPropNames<IDps>[] = [
             "id",
@@ -400,7 +402,7 @@ export default function Game() {
             "trueDamage"
           ]
           fields.forEach((field) => {
-            dps.listen(field, (value, previousValue) => {
+            dps.listen(field, (value) => {
               dispatch(
                 changeBlueDpsMeter({
                   id: dps.id,
@@ -413,11 +415,11 @@ export default function Game() {
           })
         })
 
-        simulation.blueDpsMeter.onRemove((dps, key) => {
+        simulation.blueDpsMeter.onRemove(() => {
           dispatch(removeBlueDpsMeter(simulation.id))
         })
 
-        simulation.redDpsMeter.onAdd((dps, key) => {
+        simulation.redDpsMeter.onAdd((dps) => {
           dispatch(addRedDpsMeter({ value: dps, id: simulation.id }))
           const fields: NonFunctionPropNames<IDps>[] = [
             "id",
@@ -427,7 +429,7 @@ export default function Game() {
             "trueDamage"
           ]
           fields.forEach((field) => {
-            dps.listen(field, (value, previousValue) => {
+            dps.listen(field, (value) => {
               dispatch(
                 changeRedDpsMeter({
                   id: dps.id,
@@ -439,11 +441,11 @@ export default function Game() {
             })
           })
         })
-        simulation.redDpsMeter.onRemove((dps, key) => {
+        simulation.redDpsMeter.onRemove(() => {
           dispatch(removeRedDpsMeter(simulation.id))
         })
 
-        simulation.blueHealDpsMeter.onAdd((dps, key) => {
+        simulation.blueHealDpsMeter.onAdd((dps) => {
           dispatch(addBlueHealDpsMeter({ value: dps, id: simulation.id }))
           const fields: NonFunctionPropNames<IDpsHeal>[] = [
             "heal",
@@ -453,7 +455,7 @@ export default function Game() {
           ]
 
           fields.forEach((field) => {
-            dps.listen(field, (value, previousValue) => {
+            dps.listen(field, (value) => {
               dispatch(
                 changeBlueHealDpsMeter({
                   id: dps.id,
@@ -465,11 +467,11 @@ export default function Game() {
             })
           })
         })
-        simulation.blueHealDpsMeter.onRemove((dps, key) => {
+        simulation.blueHealDpsMeter.onRemove(() => {
           dispatch(removeBlueHealDpsMeter(simulation.id))
         })
 
-        simulation.redHealDpsMeter.onAdd((dps, key) => {
+        simulation.redHealDpsMeter.onAdd((dps) => {
           dispatch(addRedHealDpsMeter({ value: dps, id: simulation.id }))
           const fields: NonFunctionPropNames<IDpsHeal>[] = [
             "heal",
@@ -479,7 +481,7 @@ export default function Game() {
           ]
 
           fields.forEach((field) => {
-            dps.listen(field, (value, previousValue) => {
+            dps.listen(field, (value) => {
               dispatch(
                 changeRedHealDpsMeter({
                   id: dps.id,
@@ -491,13 +493,12 @@ export default function Game() {
             })
           })
         })
-        simulation.redHealDpsMeter.onRemove((dps, key) => {
+        simulation.redHealDpsMeter.onRemove(() => {
           dispatch(removeRedHealDpsMeter(simulation.id))
         })
       })
 
       room.state.players.onAdd((player) => {
-        // dispatch(changePlayer({ id: player.id, change: change }))
         gameContainer.initializePlayer(player)
         dispatch(addPlayer(player))
 
@@ -508,7 +509,7 @@ export default function Game() {
           dispatch(setPokemonCollection(player.pokemonCollection))
           dispatch(setPlayer(player))
 
-          player.listen("alive", (value, previousValue) => {
+          player.listen("alive", (value) => {
             const rankPhrase = getRankLabel(player.rank)!
             const titlePhrase = "Game Over"
             if (value === false) {
@@ -517,45 +518,45 @@ export default function Game() {
               setModalBoolean(true)
             }
           })
-          player.listen("interest", (value, previousValue) => {
+          player.listen("interest", (value) => {
             dispatch(setInterest(value))
           })
-          player.listen("shop", (value, previousValue) => {
+          player.listen("shop", (value) => {
             dispatch(setShop(value))
           })
-          player.listen("shopLocked", (value, previousValue) => {
+          player.listen("shopLocked", (value) => {
             dispatch(setShopLocked(value))
           })
-          player.listen("money", (value, previousValue) => {
+          player.listen("money", (value) => {
             dispatch(setMoney(value))
           })
-          player.listen("streak", (value, previousValue) => {
+          player.listen("streak", (value) => {
             dispatch(setStreak(value))
           })
         }
 
-        player.listen("opponentId", (value, previousValue) => {
+        player.listen("opponentId", (value) => {
           dispatch(setOpponentId({ id: player.id, value: value }))
         })
-        player.listen("opponentName", (value, previousValue) => {
+        player.listen("opponentName", (value) => {
           dispatch(setOpponentName({ id: player.id, value: value }))
         })
-        player.listen("opponentAvatar", (value, previousValue) => {
+        player.listen("opponentAvatar", (value) => {
           dispatch(setOpponentAvatar({ id: player.id, value: value }))
         })
-        player.listen("opponentTitle", (value, previousValue) => {
+        player.listen("opponentTitle", (value) => {
           dispatch(setOpponentTitle({ id: player.id, value: value }))
         })
-        player.listen("boardSize", (value, previousValue) => {
+        player.listen("boardSize", (value) => {
           dispatch(setBoardSize({ id: player.id, value: value }))
         })
-        player.listen("life", (value, previousValue) => {
+        player.listen("life", (value) => {
           dispatch(setLife({ id: player.id, value: value }))
         })
-        player.listen("money", (value, previousValue) => {
+        player.listen("money", (value) => {
           dispatch(setCurrentPlayerMoney({ id: player.id, value: value }))
         })
-        player.listen("experienceManager", (value, previousValue) => {
+        player.listen("experienceManager", (value) => {
           if (player.id === uid) {
             dispatch(setExperienceManager(value))
           }
@@ -566,16 +567,16 @@ export default function Game() {
             })
           )
         })
-        player.listen("avatar", (value, previousValue) => {
+        player.listen("avatar", (value) => {
           dispatch(setCurrentPlayerAvatar({ id: player.id, value: value }))
         })
-        player.listen("name", (value, previousValue) => {
+        player.listen("name", (value) => {
           dispatch(setCurrentPlayerName({ id: player.id, value: value }))
         })
-        player.listen("title", (value, previousValue) => {
+        player.listen("title", (value) => {
           dispatch(setCurrentPlayerTitle({ id: player.id, value: value }))
         })
-        player.listen("loadingProgress", (value, previousValue) => {
+        player.listen("loadingProgress", (value) => {
           dispatch(setLoadingProgress({ id: player.id, value: value }))
         })
 
@@ -587,34 +588,34 @@ export default function Game() {
         ]
 
         fields.forEach((field) => {
-          player.listen(field, (value, previousValue) => {
+          player.listen(field, (value) => {
             dispatch(
               changePlayer({ id: player.id, field: field, value: value })
             )
           })
         })
 
-        player.synergies.onChange((value, key) => {
+        player.synergies.onChange(() => {
           dispatch(setSynergies({ id: player.id, value: player.synergies }))
         })
 
-        player.itemsProposition.onAdd((changes) => {
+        player.itemsProposition.onAdd(() => {
           if (player.id == uid) {
             dispatch(setItemsProposition(player.itemsProposition))
           }
         })
-        player.itemsProposition.onRemove((changes) => {
+        player.itemsProposition.onRemove(() => {
           if (player.id == uid) {
             dispatch(setItemsProposition(player.itemsProposition))
           }
         })
 
-        player.pokemonsProposition.onAdd((changes) => {
+        player.pokemonsProposition.onAdd(() => {
           if (player.id == uid) {
             dispatch(setPokemonProposition(player.pokemonsProposition))
           }
         })
-        player.pokemonsProposition.onRemove((changes) => {
+        player.pokemonsProposition.onRemove(() => {
           if (player.id == uid) {
             dispatch(setPokemonProposition(player.pokemonsProposition))
           }
@@ -633,7 +634,9 @@ export default function Game() {
     dispatch,
     client,
     uid,
-    currentPlayerId
+    currentPlayerId,
+    connectToGame,
+    leave
   ])
 
   if (toAuth) {
