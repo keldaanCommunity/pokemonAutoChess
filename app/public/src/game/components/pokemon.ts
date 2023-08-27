@@ -183,7 +183,7 @@ export default class Pokemon extends DraggableObject {
     this.sprite.setScale(2, 2)
     this.sprite.on(
       Phaser.Animations.Events.ANIMATION_COMPLETE,
-      (animation, frame, gameObject, frameKey: string) => {
+      () => {
         const g = <GameScene>scene
         // go back to idle anim if no more animation in queue
         if (pokemon.action !== PokemonActionState.HURT) {
@@ -289,6 +289,11 @@ export default class Pokemon extends DraggableObject {
     }
   }
 
+  destroy(fromScene?: boolean | undefined): void {
+    super.destroy(fromScene)
+    this.closeDetail()
+  }
+
   closeDetail() {
     if (this.detail) {
       this.detail.dom.remove()
@@ -333,6 +338,8 @@ export default class Pokemon extends DraggableObject {
       this.detail.width / 2 + 40,
       -this.detail.height / 2 - 40
     )
+
+    this.detail.removeInteractive()
     this.add(this.detail)
     s.lastPokemonDetail = this
   }
@@ -370,13 +377,14 @@ export default class Pokemon extends DraggableObject {
     }
   }
 
-  onPointerOver() {
-    super.onPointerOver()
+  onPointerOver(pointer) {
+    super.onPointerOver(pointer)
 
     if (
       getPreferences().showDetailsOnHover &&
       this.shouldShowTooltip &&
-      this.detail == null
+      this.detail == null &&
+      !pointer.leftButtonDown() // we're dragging another pokemon
     ) {
       this.openDetail()
     }

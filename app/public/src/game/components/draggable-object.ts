@@ -16,14 +16,16 @@ export default class DraggableObject extends GameObjects.Container {
     this.dragDisabled = dragDisabled
     this.setSize(width, height)
     this.setInteractive()
-      .on("pointerover", () => this.onPointerOver())
+      .on("pointerover", (pointer: Phaser.Input.Pointer) => {
+        this.onPointerOver(pointer)
+      })
       .on("pointerout", () => this.onPointerOut())
       .on(
         "pointerdown",
         (
           pointer: Phaser.Input.Pointer,
-          x: number,
-          y: number,
+          _x: number,
+          _y: number,
           event: Phaser.Types.Input.EventData
         ) => {
           event.stopPropagation()
@@ -38,12 +40,13 @@ export default class DraggableObject extends GameObjects.Container {
     return !this.dragDisabled
   }
 
-  set draggable(isDraggable: boolean){
+  set draggable(isDraggable: boolean) {
     this.dragDisabled = !isDraggable
     this.scene.input.setDraggable(this, isDraggable)
   }
 
-  onPointerOver() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  onPointerOver(pointer) {
     if (!this.dragDisabled) {
       document.body.classList.add("grab")
     }
@@ -55,6 +58,7 @@ export default class DraggableObject extends GameObjects.Container {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onPointerDown(pointer) {
     if (!this.dragDisabled) {
       document.body.classList.add("grabbing")
