@@ -82,17 +82,23 @@ export default class ItemContainer extends DraggableObject {
     this.add(this.detail)
 
     this.setInteractive()
-    this.input.dropZone = true
+    this.updateDropZone(true)
     this.draggable = this.pokemonId === null && playerId === currentPlayerUid
   }
 
-  onPointerOver() {
-    super.onPointerOver()
+  updateDropZone(value: boolean) {
+    if (this.input) {
+      this.input.dropZone = value
+    }
+  }
+
+  onPointerOver(pointer) {
+    super.onPointerOver(pointer)
     if (getPreferences().showDetailsOnHover && !this.detail.visible) {
       clearTimeout(this.mouseoutTimeout)
       this.openDetail()
     }
-    this.input.dropZone = false
+    this.updateDropZone(false)
     if (this.draggable) {
       this.circle?.setFillStyle(0x68829e)
     }
@@ -101,7 +107,7 @@ export default class ItemContainer extends DraggableObject {
   onPointerOut() {
     super.onPointerOut()
     if (!this.dragDisabled) {
-      this.input.dropZone = true
+      this.updateDropZone(true)
     }
     if (this.draggable) {
       this.circle?.setFillStyle(0x61738a)
@@ -124,17 +130,17 @@ export default class ItemContainer extends DraggableObject {
     if (pointer.rightButtonDown() && !getPreferences().showDetailsOnHover) {
       if (!this.detail.visible) {
         this.openDetail()
-        this.input.dropZone = false
+        this.updateDropZone(false)
       } else {
         this.closeDetail()
-        this.input.dropZone = true
+        this.updateDropZone(true)
       }
     }
   }
 
   onPointerUp() {
     super.onPointerUp()
-    this.input.dropZone = false
+    this.updateDropZone(false)
   }
 
   openDetail() {
@@ -202,5 +208,10 @@ export default class ItemContainer extends DraggableObject {
     } else {
       this.countText.setText(value.toString())
     }
+  }
+
+  destroy(fromScene?: boolean | undefined): void {
+    super.destroy(fromScene)
+    this.closeDetail()
   }
 }

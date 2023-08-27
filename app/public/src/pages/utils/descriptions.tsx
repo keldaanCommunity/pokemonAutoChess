@@ -27,10 +27,6 @@ export const iconRegExp = new RegExp(
   "g"
 )
 
-const oldRegEx =
-  /(?<=\W|^)(?:PHYSICAL|SPECIAL|TRUE|ATK|ATK_SPEED|CRIT_CHANCE|CRIT_DAMAGE|DEF|HP|PP|RANGE|SHIELD|SPE_DEF|AP|BURN|SILENCE|POISON|FREEZE|PROTECT|SLEEP|CONFUSION|WOUND|RESURECTION|PARALYSIS|ARMOR_REDUCTION|GRASS_FIELD|FAIRY_FIELD|RUNE_PROTECT|ELECTRIC_FIELD|PSYCHIC_FIELD|SUN|RAIN|WINDY|SNOW|SANDSTORM|MISTY|STORM|NEUTRAL|NIGHT|NORMAL|GRASS|FIRE|WATER|ELECTRIC|FIGHTING|PSYCHIC|DARK|STEEL|GROUND|POISON|DRAGON|FIELD|MONSTER|HUMAN|AQUATIC|BUG|FLYING|FLORA|ROCK|GHOST|FAIRY|ICE|FOSSIL|SOUND|ARTIFICIAL|BABY|\[[^\]]+\])(?=\W|$)/g
-console.log({ iconRegExp, oldRegEx })
-
 export function addIconsToDescription(description: string, tier = 0, ap = 0) {
   const matchIcon = description.match(iconRegExp)
   if (matchIcon === null) return description
@@ -143,9 +139,9 @@ export function addIconsToDescription(description: string, tier = 0, ap = 0) {
     }
 
     return (
-      <>
+      <span key={i}>
         {d} {f}
-      </>
+      </span>
     )
   })
 }

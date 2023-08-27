@@ -3,13 +3,11 @@ import { Client, logger, RoomListingData } from "colyseus"
 import { ArraySchema } from "@colyseus/schema"
 import { EmbedBuilder } from "discord.js"
 import { nanoid } from "nanoid"
-import { CallbackError, FilterQuery } from "mongoose"
 import { GameRecord } from "../../models/colyseus-models/game-record"
 import LobbyUser from "../../models/colyseus-models/lobby-user"
 import BannedUser from "../../models/mongo-models/banned-user"
 import { BotV2, IBot } from "../../models/mongo-models/bot-v2"
 import UserMetadata, {
-  IUserMetadata,
   IPokemonConfig
 } from "../../models/mongo-models/user-metadata"
 import DetailledStatistic from "../../models/mongo-models/detailled-statistic-v2"
