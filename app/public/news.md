@@ -7,11 +7,12 @@
 - New Minigame for unique picks: Portals !
 - You now see the same battle than your opponent, and can send emotes to him
 - New status effect: Charmed - Prevents attacking the target and forces to get closer to it
+- Game is now translated in 9 languages
 
 ## New Pokémons emerge from the portal
 
 ![Gligar](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0207/Normal.png)
-![Gliscor](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0207/Normal.png)
+![Gliscor](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0472/Normal.png)
 ![Shellder](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0090/Normal.png)
 ![Cloyster](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0091/Normal.png)
 ![Sentret](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0161/Normal.png)
