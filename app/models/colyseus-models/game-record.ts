@@ -12,7 +12,7 @@ export class PokemonRecord extends Schema implements IPokemonRecord {
   @type("string") avatar: string
   @type(["string"]) items = new ArraySchema<Item>()
 
-  constructor(mongoPokemon: any) {
+  constructor(mongoPokemon: IPokemonRecord) {
     super()
     this.name = mongoPokemon.name
     this.avatar = mongoPokemon.avatar

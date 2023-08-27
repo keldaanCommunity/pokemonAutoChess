@@ -18,7 +18,7 @@ export function getAvatarString(
   shiny?: boolean,
   emotion?: Emotion
 ): string {
-  const defaultIndex = index ? index : PkmIndex[Pkm.MAGIKARP]
+  const defaultIndex = index ?? PkmIndex[Pkm.MAGIKARP]
   const shinyPad = shiny
     ? defaultIndex.length === 4
       ? "/0000/0001"
