@@ -533,9 +533,8 @@ export default class BattleManager {
               pkm.targetY = null
             }
           } else if (field == "team") {
-            if (pkm.lifebar && pkm.lifebar.progress) {
-              pkm.lifebar.progress.style.backgroundColor =
-                value === 1 ? "#e76e55" : "#76c442"
+            if (pkm.lifebar) {
+              pkm.lifebar.setTeam(value, this.flip)
             }
           } else if (field === "index") {
             pkm.index = value
