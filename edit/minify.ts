@@ -27,7 +27,7 @@ function minifySheet(id) {
     }
 
     fs.writeFileSync(
-      "sheets/indexList.json",
+        "../app/public/dist/client/assets/pokemons/indexList.json",
       JSON.stringify(indexList, null, 0)
     )
   } catch (error) {
@@ -49,12 +49,6 @@ function minifyAll() {
     minifySheet(id)
   })
 
-  const file = fs.createWriteStream("sheets/indexList.json")
-  file.on("error", function (err) {
-    logger.error(err)
-  })
-  file.write(JSON.stringify(indexes))
-  file.end()
   logger.debug(`indexList.json updated`)
 }
 
