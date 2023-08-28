@@ -577,11 +577,11 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       } else if (this.effects.includes(Effect.CALM_MIND)) {
         lifesteal = 0.5
       }
-      this.handleHeal(Math.floor(lifesteal * damage), this, 0)
+      this.handleHeal(Math.ceil(lifesteal * damage), this, 0)
     }
 
     if (this.items.has(Item.SHELL_BELL)) {
-      this.handleHeal(Math.floor(0.3 * damage), this, 0)
+      this.handleHeal(Math.ceil(0.3 * damage), this, 0)
     }
   }
 
