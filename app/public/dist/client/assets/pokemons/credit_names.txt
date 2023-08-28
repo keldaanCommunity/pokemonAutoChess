@@ -34,7 +34,7 @@ Akai	<@!496039052370509824>	Akai#2823
 	<@!557599571170033664>	
 felis_licht	FELIS_LICHT	https://www.deviantart.com/felis-licht
 C_Pariah	<@!322382592202637322>	
-Aviivix	<@!196351316681818112>	Aviivix#2695
+Aviivix	<@!196351316681818112>	https://twitter.com/aviivix/
 RoyalRust	<@!388709039678423040>	
 Davilos	<@!457965696190513152>	https://www.deviantart.com/nddavilos
 Mojo	<@!314519507869761556>	
@@ -45,7 +45,7 @@ Palika	<@!118458522685014017>	https://twitter.com/_Palika_
 Vex	<@!157339721729572864>	
 	<@!288402314253959169>	
 Child-Of-Hades	CHILD_OF_HADES	https://www.deviantart.com/child-of-hades
-smartini	<@!136476806055198720>	smartini#1851
+smartini	<@!136476806055198720>	https://github.com/CSCMe
 JemDragons	<@!408301000445788180>	https://twitter.com/JemDragons?s=09
 Sunny	<@!273341077874802689>	https://twitter.com/temporalsunrise
 Deleca7755	<@!273958644788363265>	https://badylird.com/
@@ -76,7 +76,7 @@ Meganai	<@!336650663293616140>
 Jarleypeño	JARLEYPENO	https://www.deviantart.com/applecone413
 <@!755070698753359913>	<@!755070698753359913>	
 Tainted#3886	<@!283571466891427841>	
-Leafia_Barrett	<@!149282718578901001>	Leafia_Barrett#1703
+leafia_barrett	<@!149282718578901001>	leafbarrett@gmail.com
 	<@!469728607636422656>	
 	<@!199989579682414592>	
 XxWindpawxX	<@!192118698859954178>	<@!192118698859954178>
@@ -111,14 +111,14 @@ LornaWR	<@!598484619897077761>	https://twitter.com/LornaWR_
 	<@!828520880299966525>	
 	<@!340299853345325056>	
 Mr_L	<@!177522243985866754>	
-Murpi	<@!593113130213572610>	teffa1103@gmail.com
+Murpi	<@!593113130213572610>	https://www.tumblr.com/blog/murpiisavailable
 "motherhenna(Helen)"	MOTHERHENNA	<@!543717476421074945>
 Fearless-Quit	<@!801938240562397194>	
 PhillipsYoung	<@!772726854188400641>	https://twitter.com/PhilliYoung196
 	<@!182636701460594688>	
 	<@!173876028593274880>	
 Pokenoice	<@!724070439051329616>	https://www.deviantart.com/adam1258
-EverAsh	<@!555360707617488904>	<@!555360707617488904>
+deltaflare	<@!555360707617488904>	<@555360707617488904>
 	<@!479369543958003731>	
 Emboarger	<@!237286997645983744>	
 	<@!215504160991346689>	
@@ -150,14 +150,14 @@ Ray2064	<@!540823632054714388>	Ray2064#5222
 avalancheman	<@!783493257506062387>	milesbehemoth@gmail.com
 anon	<@!215638650434617345>	
 MilesFarber	<@!207815740399681538>	
-Jeongsugi	<@!537560911716810763>	정수기#1834
+Sugi	<@!537560911716810763>	<@537560911716810763>
 	<@!776403448220483615>	
 	<@!940303989680009339>	
 	<@!315528859921678336>	
 	<@!967585139485999154>	
 PikaNiko	<@!675870876532736010>	https://github.com/PikAsriel
 AlexGroeger	<@!141718238336778241>	
-VGStar	<@!229363481852379136>	VGStar#7739
+Novie	<@!229363481852379136>	<https://twitter.com/themagolord>
 3Monika4	<@!270755102178934785>	Monika#7381
 Pepper	<@!304391035209908244>	https://twitter.com/thesaltypepper8
 ScytherGust	<@!861005464682889266>	
@@ -212,5 +212,8 @@ dariosparks	<@!399615223083958283>
 ErrantWitch	<@!124232530651119618>	
 mothbeanie	<@!168876782575943680>	https://twitter.com/mothbeanie
 Deeshura	<@!157796074457661440>	https://github.com/Deeshura
-silverfox88	<@!476409795239477248>	Discord:silverfox88
+Ginnie	<@!722542425196724289>	
+silverfox88	<@!476409795239477248>	https://twitter.com/realsilverfox88
 Hemlock	<@!165623433458089984>	https://baphomets.neocities.org/
+AllPatchedUp	<@!289213609773498368>	patchedupgalaxy@gmail.com
+FrivolousAqua	<@!496032574179770379>	https://twitter.com/FrivolousAqua
