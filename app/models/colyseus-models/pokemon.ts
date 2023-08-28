@@ -7351,13 +7351,12 @@ export class Landorus extends Pokemon {
       AttackSprite.FLYING_RANGE,
       3,
       100,
-      //Ability.ROCK_SLIDE,
-      Ability.DEFAULT,
+      Ability.DEFAULT, //Ability.ROCK_SLIDE,
       shiny,
       emotion,
       true,
       false,
-      Passive.SANDSTORM
+      Passive.NONE //Passive.SANDSTORM
     )
   }
 }
@@ -7878,7 +7877,7 @@ export class Kyurem extends Pokemon {
       emotion,
       true,
       false,
-      Passive.SNOW
+      Passive.NONE // Passive.SNOW
     )
   }
 }
