@@ -552,7 +552,7 @@ export class OnDragDropItemCommand extends Command<
             )
           }
           break
-        case Pkm.TYROGUE:
+        case Pkm.TYROGUE: {
           let evol = Pkm.HITMONTOP
           if (
             item === Item.CHARCOAL ||
@@ -574,6 +574,7 @@ export class OnDragDropItemCommand extends Command<
           }
           newPokemon = PokemonFactory.transformPokemon(pokemon, evol, player)
           break
+        }
         case Pkm.GLIGAR:
           if (item === Item.RAZOR_FANG) {
             newPokemon = PokemonFactory.transformPokemon(
@@ -748,7 +749,7 @@ export class OnJoinCommand extends Command<
   {
     client: Client
     options: { spectate?: boolean }
-    auth: any
+    auth
   }
 > {
   async execute({ client, options, auth }) {
@@ -840,7 +841,7 @@ export class OnUpdateCommand extends Command<
   }
 }
 
-export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
+export class OnUpdatePhaseCommand extends Command<GameRoom> {
   execute() {
     if (this.state.phase == GamePhaseState.MINIGAME) {
       this.room.miniGame.stop(this.state)
@@ -870,7 +871,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   }
 
   computeAchievements() {
-    this.state.players.forEach((player, key) => {
+    this.state.players.forEach((player) => {
       this.checkSuccess(player)
     })
   }
@@ -1031,7 +1032,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
 
   rankPlayers() {
     const rankArray = new Array<{ id: string; life: number; level: number }>()
-    this.state.players.forEach((player, key) => {
+    this.state.players.forEach((player) => {
       if (!player.alive) {
         return
       }
@@ -1097,7 +1098,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
 
   computeStreak(isPVE: boolean) {
     if (isPVE) return // PVE rounds do not change the current streak
-    this.state.players.forEach((player, key) => {
+    this.state.players.forEach((player) => {
       if (!player.alive) {
         return
       }
@@ -1118,7 +1119,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   }
 
   computeIncome() {
-    this.state.players.forEach((player, key) => {
+    this.state.players.forEach((player) => {
       let income = 0
       if (player.alive && !player.isBot) {
         player.interest = Math.min(Math.floor(player.money / 10), 5)
@@ -1160,7 +1161,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   }
 
   checkDeath() {
-    this.state.players.forEach((player: Player, key: string) => {
+    this.state.players.forEach((player: Player) => {
       if (player.life <= 0 && player.alive) {
         if (!player.isBot) {
           player.shop.forEach((pkm) => {
@@ -1316,7 +1317,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
   }
 
   stopPickingPhase() {
-    this.state.players.forEach((player, key) => {
+    this.state.players.forEach((player) => {
       if (player.itemsProposition.length > 0) {
         if (player.itemsProposition.length === 3) {
           // auto pick if not chosen
@@ -1360,7 +1361,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
       simulation.stop()
     })
 
-    this.state.players.forEach((player: Player, key: string) => {
+    this.state.players.forEach((player: Player) => {
       if (player.alive) {
         if (player.isBot) {
           player.experienceManager.level = Math.min(
@@ -1508,7 +1509,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom, any> {
     this.state.shinyEncounter = this.state.stageLevel === 9 && chance(1 / 20)
 
     if (stageIndex !== -1) {
-      this.state.players.forEach((player: Player, key: string) => {
+      this.state.players.forEach((player: Player) => {
         if (player.alive) {
           player.opponentId = "pve"
           player.opponentName = NeutralStage[stageIndex].name

@@ -84,7 +84,7 @@ export const networkSlice = createSlice({
       state.after = undefined
     },
     joinGame: (state, action: PayloadAction<Room<GameState>>) => {
-      state.game = action.payload
+      Object.assign(state, { game: action.payload })
       state.preparation?.connection.close()
       state.preparation = undefined
       state.lobby?.connection.close()
