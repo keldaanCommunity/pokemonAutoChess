@@ -302,8 +302,11 @@ async function main() {
     await splitIndex(specificIndexToSplit)
     saveDurationsFile()
   } else {
+    logger.info("started spliting all ...")
     await splitAll()
+    logger.info("saving durations files ...")
     saveDurationsFile()
+    logger.info("saving missing files ...")
     saveMissingFiles()
   }
 }
