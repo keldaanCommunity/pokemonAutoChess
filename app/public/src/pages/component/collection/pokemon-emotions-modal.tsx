@@ -148,7 +148,7 @@ export default function PokemonEmotionsModal(props: {
                   dust={pConfig.dust}
                   onClick={() =>
                     handlePokemonEmotionClick(
-                      Boolean(pConfig && pConfig.emotions.includes(e)),
+                      Boolean(pConfig && pConfig.shinyEmotions.includes(e)),
                       { index: p.index, emotion: e, shiny: true }
                     )
                   }
