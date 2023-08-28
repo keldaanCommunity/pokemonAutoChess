@@ -111,7 +111,7 @@ function renderChar(
         ></span>
       )
     default:
-      unown = unowns.find((u) => u.pkm === "unown-" + c.toLowerCase())
+      unown = unowns.find((u) => u.pkm === "UNOWN_" + c.toUpperCase())
       return (
         <span
           key={"char" + index}
