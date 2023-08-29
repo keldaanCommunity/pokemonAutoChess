@@ -59,6 +59,7 @@
 
 .game-dps-progress-wrapper p {
   position: relative;
+  margin-top: -6px;
   margin-bottom: -6px;
   margin-left: 4px;
 }

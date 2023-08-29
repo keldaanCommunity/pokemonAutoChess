@@ -1,47 +1,50 @@
 .avatar.player-box {
-    display: flex;
-    align-items: center;
-    padding: 0;
-    gap: 12px;
-    overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  gap: 12px;
+  overflow: hidden;
 }
 
 .player-portrait {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
 }
 
 .avatar .pokemon-portrait {
-    width: 55px;
-    height: 55px;
-    border-radius: 10px 0 0 10px;
+  width: 60px;
+  height: 60px;
+  border-radius: 10px 0 0 10px;
 }
 
 .player-name {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    font-size: 1rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 1.5rem;
+  line-height: 1;
 }
 
 .player-title-role {
-    display: flex;
-    align-content: center;
-    align-items: center;
-    gap: 4px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  gap: 4px;
+  font-size: 1.25rem;
 }
 
 .player-title-role .player-title {
-    margin: 0;
+  margin: 0;
+  font-size: 1rem;
 }
 
 .avatar .elo {
-    margin-right: 8px;
+  margin-right: 8px;
 }
 
 .avatar .elo img {
-    height: 45px;
-    width: 45px;
+  height: 45px;
+  width: 45px;
 }

@@ -328,6 +328,7 @@ export interface IPlayer {
   board: MapSchema<Pokemon>
   shop: ArraySchema<Pkm>
   simulationId: string
+  simulationTeamIndex: number
   experienceManager: ExperienceManager
   synergies: Synergies
   money: number
@@ -355,6 +356,7 @@ export interface IPlayer {
   effects: Effects
   isBot: boolean
 }
+
 export interface IPokemon {
   id: string
   name: Pkm

@@ -1535,6 +1535,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             weather
           )
           player.simulationId = simulation.id
+          player.simulationTeamIndex = 0
           this.state.simulations.set(simulation.id, simulation)
         }
       })
@@ -1592,6 +1593,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             )
             playerA.simulationId = simulationId
             playerB.simulationId = simulationId
+            playerA.simulationTeamIndex = 0
+            playerB.simulationTeamIndex = 1
             playerA.opponents.set(playerB.id, this.state.stageLevel)
             playerB.opponents.set(playerA.id, this.state.stageLevel)
             playerA.opponentId = playerB.id

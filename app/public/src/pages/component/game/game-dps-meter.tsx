@@ -3,10 +3,10 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
 import { useAppSelector } from "../../../hooks"
 import { getAvatarSrc } from "../../../utils"
 import { getPreferences, savePreferences } from "../../../preferences"
-import "./game-dps-meter.css"
 import { useTranslation } from "react-i18next"
 import GamePlayerDpsMeter from "./game-player-dps-meter"
 import GamePlayerHpsMeter from "./game-player-hps-meter"
+import "./game-dps-meter.css"
 
 export default function GameDpsMeter() {
   const { t } = useTranslation()
@@ -16,10 +16,19 @@ export default function GameDpsMeter() {
   const opponentAvatar = useAppSelector(
     (state) => state.game.currentPlayerOpponentAvatar
   )
+
+  const teamIndex = useAppSelector(
+    (state) => state.game.currentSimulationTeamIndex
+  )
   const blueDpsMeter = useAppSelector((state) => state.game.blueDpsMeter)
   const redDpsMeter = useAppSelector((state) => state.game.redDpsMeter)
+  const myDpsMeter = teamIndex === 0 ? blueDpsMeter : redDpsMeter
+  const opponentDpsMeter = teamIndex === 0 ? redDpsMeter : blueDpsMeter
+
   const blueHpsMeter = useAppSelector((state) => state.game.blueHealDpsMeter)
   const redHpsMeter = useAppSelector((state) => state.game.redHealDpsMeter)
+  const myHpsMeter = teamIndex === 0 ? blueHpsMeter : redHpsMeter
+  const opponentHpsMeter = teamIndex === 0 ? redHpsMeter : blueHpsMeter
 
   const avatar = useAppSelector((state) => state.game.currentPlayerAvatar)
   const name = useAppSelector((state) => state.game.currentPlayerName)
@@ -73,13 +82,13 @@ export default function GameDpsMeter() {
           </TabList>
 
           <TabPanel>
-            <GamePlayerDpsMeter dpsMeter={blueDpsMeter} />
-            <GamePlayerDpsMeter dpsMeter={redDpsMeter} />
+            <GamePlayerDpsMeter dpsMeter={myDpsMeter} />
+            <GamePlayerDpsMeter dpsMeter={opponentDpsMeter} />
           </TabPanel>
 
           <TabPanel>
-            <GamePlayerHpsMeter hpsMeter={blueHpsMeter} />
-            <GamePlayerHpsMeter hpsMeter={redHpsMeter} />
+            <GamePlayerHpsMeter hpsMeter={myHpsMeter} />
+            <GamePlayerHpsMeter hpsMeter={opponentHpsMeter} />
           </TabPanel>
         </Tabs>
       </div>

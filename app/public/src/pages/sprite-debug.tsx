@@ -37,7 +37,12 @@ export function SpriteDebug() {
             <label htmlFor="pokemon-typeahead">Pokemon</label>
             <PokemonTypeahead
               value={pkm}
-              onChange={(pkm) => pkm && setPkm(pkm)}
+              onChange={(pkm) => {
+                if (pkm) {
+                  setPkm(pkm)
+                  setAnimType(AnimationType.Idle)
+                }
+              }}
             />
           </div>
           <div className="nes-container">
