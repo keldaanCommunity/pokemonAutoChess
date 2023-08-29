@@ -133,7 +133,7 @@ export default class BoardManager {
   }
 
   buildPokemons() {
-    this.player.board.forEach((pokemon, key) => {
+    this.player.board.forEach((pokemon) => {
       this.addPokemon(pokemon)
     })
   }
@@ -155,21 +155,11 @@ export default class BoardManager {
       504,
       696,
       playerAvatar,
-      this.player.id
+      this.player.id,
+      this.animationManager
     )
     this.playerAvatar.orientation = Orientation.UPRIGHT
     this.playerAvatar.updateLife(this.player.life)
-    this.playerAvatar.on("pointerdown", (pointer) => {
-      if (pointer.rightButtonDown()) {
-        this.playerAvatar.toggleEmoteMenu()
-      } else {
-        this.animationManager.play(
-          this.playerAvatar,
-          AnimationConfig[this.playerAvatar.name].emote,
-          false
-        )
-      }
-    })
     this.animationManager.animatePokemon(
       this.playerAvatar,
       this.playerAvatar.action,
@@ -202,7 +192,8 @@ export default class BoardManager {
         1512,
         122,
         opponentAvatar,
-        opponentId
+        opponentId,
+        this.animationManager
       )
       this.opponentAvatar.disableInteractive()
       this.opponentAvatar.orientation = Orientation.DOWNLEFT
@@ -269,7 +260,7 @@ export default class BoardManager {
 
   setPlayer(player: Player) {
     if (player.id != this.player.id) {
-      this.pokemons.forEach((pokemon, key) => {
+      this.pokemons.forEach((pokemon) => {
         pokemon.destroy(true)
       })
       this.pokemons.clear()
@@ -304,8 +295,7 @@ export default class BoardManager {
     }
   }
 
-  changePokemon(pokemon: IPokemon, field: string, value: any) {
-    // logger.debug('change', change.field, pokemon.name);
+  changePokemon(pokemon: IPokemon, field: string, value) {
     const pokemonUI = this.pokemons.get(pokemon.id)
     let coordinates: number[]
     if (pokemonUI) {
@@ -371,7 +361,7 @@ export default class BoardManager {
   getBenchSize(): number {
     let benchSize = 0
 
-    this.pokemons.forEach((pokemon, key) => {
+    this.pokemons.forEach((pokemon) => {
       if (pokemon.isOnBench) {
         benchSize++
       }
