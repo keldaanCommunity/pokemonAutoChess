@@ -200,7 +200,8 @@ export enum Ability {
   ASTRAL_BARRAGE = "ASTRAL_BARRAGE",
   BLIZZARD = "BLIZZARD",
   WATERFALL = "WATERFALL",
-  PYRO_BALL = "PYRO_BALL"
+  PYRO_BALL = "PYRO_BALL",
+  WHIRLPOOL = "WHIRLPOOL"
 }
 
 export const CopyableAbility: { [key in Ability]: boolean } = {
@@ -405,5 +406,6 @@ export const CopyableAbility: { [key in Ability]: boolean } = {
   [Ability.ASTRAL_BARRAGE]: true,
   [Ability.BLIZZARD]: true,
   [Ability.WATERFALL]: true,
-  [Ability.PYRO_BALL]: true
+  [Ability.PYRO_BALL]: true,
+  [Ability.WHIRLPOOL]: true
 }

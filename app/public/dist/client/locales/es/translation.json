@@ -1913,5 +1913,10 @@
   "passive_description.SHAYMIN": "Shaymin está buscando una GRACIDEA_FLOWER",
   "back_to_my_profile": "Volver a mi perfil",
   "select_pokemon": "Selecciona un pokemon",
-  "search_player": "Buscar por nombre de jugador..."
+  "search_player": "Buscar por nombre de jugador...",
+  "ability.WHIRLPOOL": "Torbellino",
+  "ability_description.WHIRLPOOL": "Fija al enemigo más lejano y desata una lluvia de 4 remolinos hacia él. Cada uno inflige 125 % de ATK FÍSICO al primer enemigo golpeado.",
+  "passive_description.WOBBUFFET": "No se mueve ni ataca hasta que la barra de PP esté llena.",
+  "status.CHARM": "Encantado",
+  "status_description.CHARM": "Impide atacar al objetivo y obliga a acercarse a él."
 }

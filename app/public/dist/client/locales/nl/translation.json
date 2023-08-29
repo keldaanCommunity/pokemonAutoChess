@@ -1913,5 +1913,10 @@
   "passive_description.SHAYMIN": "Shaymin is op zoek naar een GRACIDEA_BLOEM",
   "back_to_my_profile": "Terug naar mijn profiel",
   "select_pokemon": "Selecteer een Pokemon",
-  "search_player": "Zoeken op spelersnaam..."
+  "search_player": "Zoeken op spelersnaam...",
+  "ability.WHIRLPOOL": "Bubbelbad",
+  "ability_description.WHIRLPOOL": "Richt je op de verste vijand en laat een hagel van 4 draaikolken op hen los. Elk deelt 125% ATK FYSIEKE uit aan de eerste vijandelijke treffer",
+  "passive_description.WOBBUFFET": "Beweegt of valt niet aan totdat de PP-balk vol is",
+  "status.CHARM": "Gecharmeerd",
+  "status_description.CHARM": "Voorkomt het aanvallen van het doelwit en dwingt er dichter bij te komen"
 }
