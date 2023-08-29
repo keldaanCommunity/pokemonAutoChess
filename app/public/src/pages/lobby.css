@@ -63,7 +63,8 @@
 }
 
 .lobby .current-users-menu ul {
-  display: unset;
+  display: flex;
+  flex-direction: column;
 }
 
 .lobby .user-chat {

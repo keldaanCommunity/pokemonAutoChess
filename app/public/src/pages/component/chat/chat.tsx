@@ -30,7 +30,6 @@ export default function Chat(props: { source: string }) {
             user?.anonymous ? t("chat_disabled_anonymous") : t("type_here")
           }
           disabled={user?.anonymous}
-          id="name_field"
           type="text"
           title={
             user?.anonymous ? t("chat_disabled_anonymous") : t("type_here")
