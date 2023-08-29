@@ -3304,6 +3304,42 @@ export default class BattleManager {
             })
             break
 
+          case Ability.WHIRLPOOL:
+            coordinatesTarget = transformAttackCoordinate(
+              targetX,
+              targetY,
+              this.flip
+            )
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
+
+            for (let i = 0; i < 4; i++) {
+              const whirlpool = this.scene.add.sprite(
+                coordinates[0],
+                coordinates[1],
+                Ability.WHIRLPOOL,
+                "000"
+              )
+              whirlpool.setDepth(7)
+              whirlpool.anims.play(Ability.WHIRLPOOL)
+              this.scene.tweens.add({
+                targets: whirlpool,
+                x: coordinatesTarget[0],
+                y: coordinatesTarget[1],
+                duration: 1000,
+                scale: 2,
+                delay: i * 100,
+                ease: "Power1",
+                onComplete: () => {
+                  whirlpool.destroy()
+                }
+              })
+            }
+            break
+
           case Ability.BONEMERANG:
             coordinatesTarget = transformAttackCoordinate(targetX, 6, this.flip)
             coordinates = transformAttackCoordinate(targetX, 0, this.flip)

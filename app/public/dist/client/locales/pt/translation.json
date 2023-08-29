@@ -812,7 +812,8 @@
     "ASTRAL_BARRAGE": "barragem astral",
     "BLIZZARD": "Nevasca",
     "WATERFALL": "Cachoeira",
-    "PYRO_BALL": "Bola pirotécnica"
+    "PYRO_BALL": "Bola pirotécnica",
+    "WHIRLPOOL": "Hidromassagem"
   },
   "ability_description": {
     "DEFAULT": "Padrão",
@@ -1016,7 +1017,8 @@
     "ASTRAL_BARRAGE": "Envia [3,SP=2] pequenos fantasmas em Pokémon adversários aleatórios. Cada um deles oferece 20 ESPECIAIS",
     "BLIZZARD": "CONGELE todos os Pokémon inimigos por 3 segundos e dê [15,SP] ESPECIAL. Dano dobrado se o inimigo já estiver CONGELADO",
     "WATERFALL": "SHIELD por [30,60,120,SP]",
-    "PYRO_BALL": "O usuário ataca acendendo uma pequena pedra e lançando-a como uma bola de fogo no alvo mais distante, distribuindo [10,20,40,SP] ESPECIAL e QUEIMADURA por 2s em tudo que estiver em seu caminho"
+    "PYRO_BALL": "O usuário ataca acendendo uma pequena pedra e lançando-a como uma bola de fogo no alvo mais distante, distribuindo [10,20,40,SP] ESPECIAL e QUEIMADURA por 2s em tudo que estiver em seu caminho",
+    "WHIRLPOOL": "Fixe-se no inimigo mais distante e solte uma saraivada de 4 redemoinhos em direção a ele. Cada um causa 125% de ATQ FÍSICO ao primeiro inimigo atingido"
   },
   "effect": {
     "INGRAIN": "Inerente",
@@ -1374,7 +1376,8 @@
     "POISON_HEAL": "Se o Pokémon for POISON, ele ganhará HP ao invés de receber dano",
     "GRIM_NEIGH": "Quando o Pokémon nocauteia um inimigo, ele emite um som de relincho aterrorizante que aumenta seu PA em 30",
     "GLIGAR": "Gligar está procurando por um RAZOR_FANG",
-    "SHAYMIN": "Shaymin está procurando uma GRACIDEA_FLOWER"
+    "SHAYMIN": "Shaymin está procurando uma GRACIDEA_FLOWER",
+    "WOBBUFFET": "Não se move ou ataca até que a barra PP esteja cheia"
   },
   "stat": {
     "ATK": "Ataque",
@@ -1422,7 +1425,8 @@
     "ELECTRIC_FIELD": "Campo elétrico",
     "PSYCHIC_FIELD": "Campo Psíquico",
     "GRASS_FIELD": "Campo de grama",
-    "FAIRY_FIELD": "campo de fada"
+    "FAIRY_FIELD": "campo de fada",
+    "CHARM": "Encantado"
   },
   "status_description": {
     "BURN": "Causa 5% do HP máximo como TRUE a cada segundo",
@@ -1440,7 +1444,8 @@
     "ELECTRIC_FIELD": "Aumente o dano causado em 20% (somente elétrico)",
     "PSYCHIC_FIELD": "Aumente o dano causado em 20% (somente psíquico)",
     "GRASS_FIELD": "Aumenta o dano causado em 20% (somente grama)",
-    "FAIRY_FIELD": "Aumente o dano causado em 20% (somente Fada)"
+    "FAIRY_FIELD": "Aumente o dano causado em 20% (somente Fada)",
+    "CHARM": "Impede atacar o alvo e força a aproximação dele"
   },
   "synergy": {
     "NORMAL": "Normal",
@@ -1497,7 +1502,8 @@
     "FOSSIL": "Em seu primeiro KO, os pokémons fósseis voltam à vida com ATK aumentado",
     "SOUND": "Os pokémons do som emitem um grito quando usam suas habilidades, acordando os aliados adormecidos e dando-lhes estatísticas de bônus",
     "ARTIFICIAL": "Pokémon artificiais ganham ATK e SHIELD dependendo do número de itens mantidos",
-    "BABY": "Os bebês podem trazer ovos de Pokémon para confortá-lo após uma derrota"
+    "BABY": "Os bebês podem trazer ovos de Pokémon para confortá-lo após uma derrota",
+    "FAIRY": "Sempre que Pokémon Fada causam ou recebem um acerto crítico, eles recebem um choque se estiverem ao alcance corpo a corpo, ou ficam ENCANTADOS por 2 segundos se não estiverem ao alcance"
   },
   "title": {
     "NOVICE": "Novato",

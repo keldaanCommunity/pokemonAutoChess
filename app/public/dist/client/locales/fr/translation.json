@@ -804,7 +804,8 @@
     "ASTRAL_BARRAGE": "Éclat Spectral",
     "BLIZZARD": "Tempête De Neige",
     "WATERFALL": "Cascade",
-    "PYRO_BALL": "Boule Pyro"
+    "PYRO_BALL": "Boule Pyro",
+    "WHIRLPOOL": "Tourbillon"
   },
   "ability_description": {
     "SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés",
@@ -1008,7 +1009,8 @@
     "SLEEP": "Faites dormir [1,2,3] Pokémon ennemis dans la ligne de fond pendant 2,5 secondes",
     "BLIZZARD": "Inflige [15,SP] SPECIAL et FREEZE pendant 3 secondes à tous les Pokémon ennemis. Double dégâts si l'ennemi est déjà FREEZE",
     "WATERFALL": "SHIELD lui-même pour [30,60,120,SP]",
-    "PYRO_BALL": "L'utilisateur attaque en allumant une petite pierre et en la lançant comme une boule de feu sur la cible la plus éloignée, infligeant [10,20,40,SP] SPECIAL et BURN pendant 2 secondes tout ce qui se trouve sur son passage."
+    "PYRO_BALL": "L'utilisateur attaque en allumant une petite pierre et en la lançant comme une boule de feu sur la cible la plus éloignée, infligeant [10,20,40,SP] SPECIAL et BURN pendant 2 secondes tout ce qui se trouve sur son passage.",
+    "WHIRLPOOL": "Verrouillez l'ennemi le plus éloigné et déchaînez une grêle de 4 tourbillons vers lui. Chacun inflige 125 % d'ATK PHYSIQUE au premier ennemi touché."
   },
   "emotion": {
     "Teary-Eyed": "Larmoyant",

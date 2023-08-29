@@ -1913,5 +1913,10 @@
   "passive_description.SHAYMIN": "シェイミはGRACIDEA_FLOWERを探しています",
   "back_to_my_profile": "私のプロフィールに戻る",
   "select_pokemon": "ポケモンを選択してください",
-  "search_player": "プレイヤー名で検索..."
+  "search_player": "プレイヤー名で検索...",
+  "ability.WHIRLPOOL": "渦巻き",
+  "ability_description.WHIRLPOOL": "最も遠い敵をロックオンし、敵に向けて 4 つの渦を降らせます。それぞれが敵の最初の攻撃に 125% の物理攻撃力を与えます",
+  "passive_description.WOBBUFFET": "PPバーがいっぱいになるまで移動も攻撃もしない",
+  "status.CHARM": "チャームド〜魔女3姉妹",
+  "status_description.CHARM": "ターゲットへの攻撃を防ぎ、強制的にターゲットに近づく"
 }

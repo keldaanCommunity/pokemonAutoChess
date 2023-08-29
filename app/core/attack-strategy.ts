@@ -35,7 +35,7 @@ export class AttackStrategy {
     pokemon.pp = 0
     pokemon.count.ult += 1
 
-    if (![Ability.PYRO_BALL].includes(pokemon.skill)) {
+    if (![Ability.PYRO_BALL, Ability.WHIRLPOOL].includes(pokemon.skill)) {
       pokemon.simulation.room.broadcast(Transfer.ABILITY, {
         id: pokemon.simulation.id,
         skill: pokemon.skill,
@@ -5186,6 +5186,52 @@ export class PyroBallStrategy extends AttackStrategy {
           )
         }
       })
+    }
+  }
+}
+
+export class WhirlpoolStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const farthestCoordinate = state.getFarthestTargetCoordinate(pokemon, board)
+
+    if (farthestCoordinate) {
+      const cells = board.getCellsBetween(
+        pokemon.positionX,
+        pokemon.positionY,
+        farthestCoordinate.x,
+        farthestCoordinate.y
+      )
+      for (let i = 0; i < cells.length; i++) {
+        const cell = cells[i]
+        if (cell && cell.value && cell.value.team !== pokemon.team) {
+          pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+            id: pokemon.simulation.id,
+            skill: pokemon.skill,
+            positionX: pokemon.positionX,
+            positionY: pokemon.positionY,
+            targetX: cell.x,
+            targetY: cell.y,
+            orientation: pokemon.orientation
+          })
+          for (let i = 0; i < 4; i++) {
+            cell.value.handleSpecialDamage(
+              Math.ceil(pokemon.atk * 1.25),
+              board,
+              AttackType.PHYSICAL,
+              pokemon,
+              crit
+            )
+          }
+          break
+        }
+      }
     }
   }
 }

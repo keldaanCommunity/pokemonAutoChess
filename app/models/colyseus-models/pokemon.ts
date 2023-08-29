@@ -3801,7 +3801,7 @@ export class Horsea extends Pokemon {
       AttackSprite.WATER_RANGE,
       1,
       100,
-      Ability.HYDRO_PUMP,
+      Ability.WHIRLPOOL,
       shiny,
       emotion,
       false
@@ -3824,7 +3824,7 @@ export class Seadra extends Pokemon {
       AttackSprite.WATER_RANGE,
       2,
       100,
-      Ability.HYDRO_PUMP,
+      Ability.WHIRLPOOL,
       shiny,
       emotion,
       false
@@ -3847,7 +3847,7 @@ export class Kingdra extends Pokemon {
       AttackSprite.WATER_RANGE,
       3,
       100,
-      Ability.HYDRO_PUMP,
+      Ability.WHIRLPOOL,
       shiny,
       emotion,
       true

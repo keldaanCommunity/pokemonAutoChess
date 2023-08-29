@@ -838,6 +838,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.WHIRLPOOL,
+      frames: this.game.anims.generateFrameNames(Ability.WHIRLPOOL, {
+        start: 0,
+        end: 10,
+        zeroPad: 3
+      }),
+      duration: 500,
+      repeat: 1
+    })
+
+    this.game.anims.create({
       key: Ability.PYRO_BALL,
       frames: this.game.anims.generateFrameNames(Ability.PYRO_BALL, {
         start: 0,
@@ -2193,7 +2204,6 @@ export function createStatusAnimations(game: Phaser.Scene) {
     repeat: -1,
     repeatDelay: 500
   })
-
 
   game.anims.create({
     key: "armorReduction",

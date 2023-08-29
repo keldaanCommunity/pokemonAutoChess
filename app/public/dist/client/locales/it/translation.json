@@ -1913,5 +1913,10 @@
   "passive_description.SHAYMIN": "Shaymin sta cercando un GRACIDEA_FLOWER",
   "back_to_my_profile": "Torna al mio profilo",
   "select_pokemon": "Seleziona un Pokémon",
-  "search_player": "Cerca per nome giocatore..."
+  "search_player": "Cerca per nome giocatore...",
+  "ability.WHIRLPOOL": "Idromassaggio",
+  "ability_description.WHIRLPOOL": "Punta sul nemico più lontano e scatena una grandinata di 4 vortici verso di lui. Ciascuno infligge il 125% ATK FISICO al primo nemico colpito",
+  "passive_description.WOBBUFFET": "Non si muove né attacca finché la barra PP non è piena",
+  "status.CHARM": "Ammaliato",
+  "status_description.CHARM": "Impedisce di attaccare il bersaglio e costringe ad avvicinarsi ad esso"
 }

@@ -1913,5 +1913,10 @@
   "passive_description.SHAYMIN": "Shaymin ist auf der Suche nach einer GRACIDEA_FLOWER",
   "back_to_my_profile": "Zurück zu meinem Profil",
   "select_pokemon": "Wähle ein Pokémon aus",
-  "search_player": "Nach Spielernamen suchen..."
+  "search_player": "Nach Spielernamen suchen...",
+  "ability.WHIRLPOOL": "Whirlpool",
+  "ability_description.WHIRLPOOL": "Erfassen Sie den am weitesten entfernten Feind und entfesseln Sie einen Hagel von 4 Strudeln auf ihn. Jeder Angriff fügt dem ersten getroffenen Gegner 125 % PHYSISCHE ANG zu",
+  "passive_description.WOBBUFFET": "Bewegt sich nicht und greift nicht an, bis die PP-Leiste voll ist",
+  "status.CHARM": "Fasziniert",
+  "status_description.CHARM": "Verhindert den Angriff auf das Ziel und zwingt dazu, sich ihm zu nähern"
 }

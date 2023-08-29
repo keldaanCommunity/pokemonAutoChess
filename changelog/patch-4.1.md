@@ -12,11 +12,9 @@ patch announcement
 
 # New Pokemons:
 
-Gligar,Gliscor,Shellder,Cloyster,Furret,Sentret,Spectrier
-
 # Changes to Pokemon
 
--
+- New ability Whirlpool for Horsea
 
 # Changes to Synergies
 
