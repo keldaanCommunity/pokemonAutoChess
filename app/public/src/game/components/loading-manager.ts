@@ -508,6 +508,11 @@ export default class LoadingManager {
       "/assets/attacks/LINK_CABLE.json",
       "/assets/attacks"
     )
+    scene.load.multiatlas(
+      "GRASS_HEAL",
+      "/assets/attacks/GRASS_HEAL.json",
+      "/assets/attacks"
+    )
   }
 }
 

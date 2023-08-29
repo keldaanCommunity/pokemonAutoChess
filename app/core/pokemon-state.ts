@@ -495,10 +495,10 @@ export default class PokemonState {
     ) {
       if (pokemon.grassHealCooldown - dt <= 0) {
         let heal = pokemon.effects.includes(Effect.SPORE)
-          ? 16
+          ? 30
           : pokemon.effects.includes(Effect.GROWTH)
-          ? 8
-          : 4
+          ? 15
+          : 8
         if (
           pokemon.effects.includes(Effect.HYDRATATION) &&
           pokemon.simulation.weather === Weather.RAIN
@@ -506,7 +506,13 @@ export default class PokemonState {
           heal += 5
         }
         pokemon.handleHeal(heal, pokemon, 0)
-        pokemon.grassHealCooldown = 1000
+        pokemon.grassHealCooldown = 2000
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: "GRASS_HEAL",
+          positionX: pokemon.positionX,
+          positionY: pokemon.positionY
+        })
       } else {
         pokemon.grassHealCooldown = pokemon.grassHealCooldown - dt
       }
