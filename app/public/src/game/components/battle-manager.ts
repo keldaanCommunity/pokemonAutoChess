@@ -4069,6 +4069,30 @@ export default class BattleManager {
             break
           }
 
+          case "GRASS_HEAL": {
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              "GRASS_HEAL",
+              "GRASS_HEAL/000"
+            )
+            specialProjectile.setDepth(1)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play("GRASS_HEAL")
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
+          }
+
           case Ability.HIDDEN_POWER_A:
           case Ability.HIDDEN_POWER_B:
           case Ability.HIDDEN_POWER_C:

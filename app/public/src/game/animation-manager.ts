@@ -2295,4 +2295,15 @@ export function createStatusAnimations(game: Phaser.Scene) {
     repeat: -1,
     yoyo: true
   })
+
+  game.anims.create({
+    key: "GRASS_HEAL",
+    frames: game.anims.generateFrameNames("GRASS_HEAL", {
+      start: 0,
+      end: 4,
+      zeroPad: 3
+    }),
+    frameRate: 8,
+    repeat: 0
+  })
 }
