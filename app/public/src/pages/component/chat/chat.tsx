@@ -5,12 +5,13 @@ import ChatHistory from "./chat-history"
 import "./chat.css"
 import { useTranslation } from "react-i18next"
 
+const MAX_MESSAGE_LENGTH = 250
+
 export default function Chat(props: { source: string }) {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const [currentText, setCurrentText] = useState<string>("")
   const user = useAppSelector((state) => state[props.source].user)
-  const MAX_MESSAGE_LENGTH = 250
 
   return (
     <div className="nes-container user-chat">

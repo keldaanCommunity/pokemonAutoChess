@@ -35,6 +35,12 @@
   overflow-y: auto;
 }
 
+.chat-history .date {
+  color: white;
+  width: 100%;
+  text-align: center;
+}
+
 .chat button {
   padding: 0.25em;
   align-self: start;

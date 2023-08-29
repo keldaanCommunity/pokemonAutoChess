@@ -11,7 +11,9 @@ export default function ChatMessage(props: { message: IChatV2 }) {
   const preparationUser = useAppSelector((state) => state.preparation.user)
   const user = lobbyUser ?? preparationUser
   const role = user?.role
-  const time = formatDate(props.message.time)
+  const time = new Date(props.message.time).toLocaleTimeString(undefined, {
+    timeStyle: "short"
+  })
 
   return (
     <div className="chat">
@@ -55,25 +57,5 @@ export default function ChatMessage(props: { message: IChatV2 }) {
         <p className="chat-message">{props.message.payload}</p>
       </div>
     </div>
-  )
-}
-
-function pad(number: number) {
-  if (number < 10) {
-    return "0" + number
-  }
-  return number
-}
-
-function formatDate(n: number) {
-  const date = new Date(n)
-  return (
-    pad(date.getMonth() + 1) +
-    "/" +
-    pad(date.getDate()) +
-    " " +
-    pad(date.getHours()) +
-    ":" +
-    pad(date.getMinutes())
   )
 }
