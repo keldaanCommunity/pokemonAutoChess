@@ -5,61 +5,30 @@ import { RoleBadge } from "./RoleBadge"
 import { getAvatarSrc } from "../../utils"
 import { useTranslation } from "react-i18next"
 
+import "./avatar.css"
+
 export default function Avatar(props: {
-  elo: number | undefined
   name: string
   avatar: string
-  title: string
-  role: Role
+  elo?: number
+  title?: string
+  role?: Role
 }) {
   const { t } = useTranslation()
-  const elo = props.elo ? <Elo elo={props.elo} /> : null
 
   return (
-    <div
-      className="player-box"
-      style={{
-        display: "flex",
-        justifyContent: "space-around",
-        alignItems: "center",
-        flexFlow: "column"
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          gap: "5px",
-          justifyContent: "space-between",
-          alignItems: "center",
-          maxWidth: "100%"
-        }}
-      >
-        <img
-          style={{ width: "40px", height: "40px" }}
-          className="pokemon-portrait"
-          src={getAvatarSrc(props.avatar)}
-        />
-
-        <span
-          style={{
-            overflow: "hidden",
-            whiteSpace: "nowrap",
-            textOverflow: "ellipsis",
-            padding: "0 0.5em"
-          }}
-        >
-          {props.name}
+    <div className="avatar player-box">
+      <img className="pokemon-portrait" src={getAvatarSrc(props.avatar)} />
+      <div className="player-portrait">
+        <span className="player-title-role">
+          {props.title && (
+            <p className="player-title">{t(`title.${props.title}`)}</p>
+          )}
+          {props.role && <RoleBadge role={props.role} />}
         </span>
-        <RoleBadge role={props.role} />
+        <span className="player-name">{props.name}</span>
       </div>
-      <div style={{ display: "flex", gap: "5px", alignItems: "center" }}>
-        {props.title && (
-          <p className="player-title" style={{ margin: "0px" }}>
-            {t(`title.${props.title}`)}
-          </p>
-        )}
-        {elo}
-      </div>
+      {props.elo && <Elo elo={props.elo} />}
     </div>
   )
 }
