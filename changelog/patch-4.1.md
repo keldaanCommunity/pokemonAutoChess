@@ -8,7 +8,7 @@ patch announcement
 
 # Gameplay
 
--
+- Paralysis, Freeze and Sleep status now prevents dodging attacks
 
 # New Pokemons:
 
