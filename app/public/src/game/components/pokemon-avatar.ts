@@ -8,6 +8,8 @@ import GameScene from "../scenes/game-scene"
 import Pokemon from "./pokemon"
 import LifeBar from "./life-bar"
 import EmoteMenu from "./emote-menu"
+import AnimationManager from "../animation-manager"
+import { AnimationConfig } from "../../../../types/enum/Pokemon"
 
 export default class PokemonAvatar extends Pokemon {
   circleHitbox: GameObjects.Ellipse | undefined
@@ -15,13 +17,15 @@ export default class PokemonAvatar extends Pokemon {
   isCurrentPlayerAvatar: boolean
   emoteBubble: EmoteBubble | null
   emoteMenu: EmoteMenu | null
+  animationManager: AnimationManager
 
   constructor(
     scene: GameScene,
     x: number,
     y: number,
     pokemon: IPokemonAvatar,
-    playerId: string
+    playerId: string,
+    animationManager: AnimationManager
   ) {
     super(
       scene,
@@ -44,6 +48,7 @@ export default class PokemonAvatar extends Pokemon {
     } else {
       this.drawLifebar()
     }
+    this.animationManager = animationManager
   }
 
   drawCircles() {
@@ -131,6 +136,20 @@ export default class PokemonAvatar extends Pokemon {
     } else if (this.isCurrentPlayerAvatar) {
       this.emoteMenu = new EmoteMenu(this.scene, this.index, this.shiny)
       this.add(this.emoteMenu)
+    }
+  }
+
+  onPointerDown(pointer: Phaser.Input.Pointer): void {
+    super.onPointerDown(pointer)
+
+    if (!this.isCurrentPlayerAvatar) {
+      return // don't allow others to animate/emote if they don't control
+    }
+
+    if (pointer.rightButtonDown()) {
+      this.toggleEmoteMenu()
+    } else {
+      this.animationManager.play(this, AnimationConfig[this.name].emote, false)
     }
   }
 }
