@@ -64,7 +64,7 @@ export class OnShopCommand extends Command<
   execute({ id, index }) {
     if (id !== undefined && index !== undefined && this.state.players.has(id)) {
       const player = this.state.players.get(id)
-      if (player && player.shop[index]) {
+      if (player && player.shop[index] && player.shop[index] !== Pkm.DEFAULT) {
         const name = player.shop[index]
         const pokemon = PokemonFactory.createPokemonFromName(name, player)
         const cost = PokemonFactory.getBuyPrice(name)
