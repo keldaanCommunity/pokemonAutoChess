@@ -12,7 +12,6 @@ import { Pkm, PkmProposition } from "../../../types/enum/Pokemon"
 import { Item } from "../../../types/enum/Item"
 import { StageDuration } from "../../../types/Config"
 import { getGameScene } from "../pages/game"
-import { removeInArray } from "../../../utils/array"
 import Simulation from "../../../core/simulation"
 
 interface GameStateStore {
@@ -27,6 +26,7 @@ interface GameStateStore {
   noElo: boolean
   currentPlayerId: string
   currentSimulationId: string
+  currentSimulationTeamIndex: number
   money: number
   interest: number
   streak: number
@@ -69,6 +69,7 @@ const initialState: GameStateStore = {
   noElo: false,
   currentPlayerId: "",
   currentSimulationId: "",
+  currentSimulationTeamIndex: 0,
   money: 5,
   interest: 0,
   streak: 0,
@@ -294,6 +295,8 @@ export const gameSlice = createSlice({
         state.currentPlayerId === action.payload.redPlayerId
       ) {
         state.currentSimulationId = action.payload.id
+        state.currentSimulationTeamIndex =
+          state.currentPlayerId === action.payload.bluePlayerId ? 0 : 1
         state.weather = action.payload.weather
         state.blueDpsMeter = new Array<IDps>()
         state.redDpsMeter = new Array<IDps>()
@@ -316,6 +319,7 @@ export const gameSlice = createSlice({
     setPlayer: (state, action: PayloadAction<IPlayer>) => {
       state.currentPlayerId = action.payload.id
       state.currentSimulationId = action.payload.simulationId
+      state.currentSimulationTeamIndex = action.payload.simulationTeamIndex
       state.currentPlayerMoney = action.payload.money
       state.currentPlayerExperienceManager = action.payload.experienceManager
       state.currentPlayerOpponentId = action.payload.opponentId

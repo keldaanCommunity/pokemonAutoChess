@@ -24,6 +24,7 @@ import { Effects } from "../effects"
 export default class Player extends Schema implements IPlayer {
   @type("string") id: string
   @type("string") simulationId = ""
+  @type("number") simulationTeamIndex: number = 0
   @type("string") name: string
   @type("string") avatar: string
   @type({ map: Pokemon }) board = new MapSchema<Pokemon>()
