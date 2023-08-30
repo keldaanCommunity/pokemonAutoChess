@@ -11,6 +11,7 @@ import PokemonCollection from "./collection/pokemon-collection"
 import Profile from "./profile/profile"
 import GameOptionsModal from "./game/game-options-modal"
 import MetaReport from "./meta-report/meta-report"
+import KeybindInfo from "./keybind-info/keybind-info"
 import { BasicModal } from "./modal/modal"
 import News from "./news/news"
 import { useNews } from "./news/useNews"
@@ -176,6 +177,12 @@ export function MainSidebar(props: MainSidebarProps) {
             </NavLink>
           )}
 
+        {page === "game" && (
+          <NavLink svg="keyboard" location="keybinds" handleClick={changeModal}>
+            Key bindings
+          </NavLink>
+        )}
+
         <NavLink svg="options" location="options" handleClick={changeModal}>
           {t("options")}
         </NavLink>
@@ -297,6 +304,7 @@ export type Modals =
   | "booster"
   | "news"
   | "options"
+  | "keybinds"
 
 function Modals({
   modal,
@@ -353,6 +361,11 @@ function Modals({
         show={modal === "meta"}
         handleClose={closeModal}
         body={<MetaReport />}
+      />
+      <BasicModal
+        show={modal === "keybinds"}
+        handleClose={closeModal}
+        body={<KeybindInfo />}
       />
       <GameOptionsModal
         show={modal === "options"}

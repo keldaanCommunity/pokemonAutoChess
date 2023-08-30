@@ -18,13 +18,14 @@ export function BasicModal(props: BasicModalProps) {
       dialogClassName="basic-modal"
       show={show}
       onHide={handleClose}
+      centered
     >
       {title && (
         <Modal.Header closeButton>
           <Modal.Title>{title}</Modal.Title>
         </Modal.Header>
       )}
-      <Modal.Body>{body}</Modal.Body>
+      <Modal.Body className="basic-modal-body">{body}</Modal.Body>
       {confirmText && (
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

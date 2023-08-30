@@ -121,16 +121,18 @@ export default class MinigameManager {
     this.items.delete(itemToRemove.id)
   }
 
-  changeItem(item: IFloatingItem, field: string, value: any) {
+  changeItem(item: IFloatingItem, field: string, value: string | number) {
     const itemUI = this.items.get(item.id)
+    const coordinate =
+      typeof value === "number" ? value : Number.parseFloat(value)
     if (itemUI) {
       switch (field) {
         case "x":
-          itemUI.setData("serverX", transformMiniGameXCoordinate(value))
+          itemUI.setData("serverX", transformMiniGameXCoordinate(coordinate))
           break
 
         case "y":
-          itemUI.setData("serverY", transformMiniGameYCoordinate(value))
+          itemUI.setData("serverY", transformMiniGameYCoordinate(coordinate))
           break
 
         case "avatarId":
@@ -158,21 +160,23 @@ export default class MinigameManager {
     this.portals.delete(portalToRemove.id)
   }
 
-  changePortal(portal: IPortal, field: string, value: any) {
+  changePortal(portal: IPortal, field: string, value: string | number) {
     const portalUI = this.portals.get(portal.id)
+    const coordinate =
+      typeof value === "number" ? value : Number.parseFloat(value)
     if (portalUI) {
       switch (field) {
         case "x":
-          portalUI.setData("serverX", transformMiniGameXCoordinate(value))
+          portalUI.setData("serverX", transformMiniGameXCoordinate(coordinate))
           break
 
         case "y":
-          portalUI.setData("serverY", transformMiniGameYCoordinate(value))
+          portalUI.setData("serverY", transformMiniGameYCoordinate(coordinate))
           break
 
         case "avatarId":
           logger.debug("change portal.avatarId", value)
-          if (value != "") {
+          if (value != "" && typeof value === "string") {
             const avatar = this.pokemons.get(value)
             logger.debug(
               `Player ${value} (${avatar?.playerId}) has taken portal ${portal.id}`
@@ -217,16 +221,18 @@ export default class MinigameManager {
     }
   }
 
-  changeSymbol(symbol: ISynergySymbol, field: string, value: any) {
+  changeSymbol(symbol: ISynergySymbol, field: string, value: string | number) {
     const symbolUI = this.symbols.get(symbol.id)
+    const coordinate =
+      typeof value === "number" ? value : Number.parseFloat(value)
     if (symbolUI) {
       switch (field) {
         case "x":
-          symbolUI.setData("serverX", transformMiniGameXCoordinate(value))
+          symbolUI.setData("serverX", transformMiniGameXCoordinate(coordinate))
           break
 
         case "y":
-          symbolUI.setData("serverY", transformMiniGameYCoordinate(value))
+          symbolUI.setData("serverY", transformMiniGameYCoordinate(coordinate))
           break
 
         case "portalId":
@@ -244,7 +250,8 @@ export default class MinigameManager {
       transformMiniGameXCoordinate(pokemon.x),
       transformMiniGameYCoordinate(pokemon.y),
       pokemon,
-      pokemon.id
+      pokemon.id,
+      this.animationManager
     )
 
     if (pokemonUI.isCurrentPlayerAvatar) {
@@ -281,13 +288,17 @@ export default class MinigameManager {
     this.pokemons.delete(pokemonToRemove.id)
   }
 
-  changePokemon(pokemon: IPokemonAvatar, field: string, value: any) {
+  changePokemon(pokemon: IPokemonAvatar, field: string, value) {
     const pokemonUI = this.pokemons.get(pokemon.id)
     if (pokemonUI) {
       switch (field) {
         case "orientation":
           pokemonUI.orientation = value
-          this.animationManager.animatePokemon(pokemonUI, pokemonUI.action, false)
+          this.animationManager.animatePokemon(
+            pokemonUI,
+            pokemonUI.action,
+            false
+          )
           break
 
         case "action":

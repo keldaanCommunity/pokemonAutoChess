@@ -8,6 +8,8 @@ import GameScene from "../scenes/game-scene"
 import Pokemon from "./pokemon"
 import LifeBar from "./life-bar"
 import EmoteMenu from "./emote-menu"
+import AnimationManager from "../animation-manager"
+import { AnimationConfig } from "../../../../types/enum/Pokemon"
 
 export default class PokemonAvatar extends Pokemon {
   circleHitbox: GameObjects.Ellipse | undefined
@@ -15,13 +17,15 @@ export default class PokemonAvatar extends Pokemon {
   isCurrentPlayerAvatar: boolean
   emoteBubble: EmoteBubble | null
   emoteMenu: EmoteMenu | null
+  animationManager: AnimationManager
 
   constructor(
     scene: GameScene,
     x: number,
     y: number,
     pokemon: IPokemonAvatar,
-    playerId: string
+    playerId: string,
+    animationManager: AnimationManager
   ) {
     super(
       scene,
@@ -44,6 +48,27 @@ export default class PokemonAvatar extends Pokemon {
     } else {
       this.drawLifebar()
     }
+    this.animationManager = animationManager
+    this.registerKeys()
+  }
+
+  registerKeys() {
+    this.scene.input.keyboard!.on("keydown-A", () => {
+      if (this.isCurrentPlayerAvatar && this.scene && this.scene.game) {
+        this.playAnimation()
+      }
+    })
+    this.scene.input.keyboard!.on("keydown-S", () => {
+      const scene = this.scene as GameScene
+      if (
+        this.isCurrentPlayerAvatar &&
+        this.scene &&
+        scene.room?.state.phase !== GamePhaseState.MINIGAME &&
+        this.scene.game
+      ) {
+        this.toggleEmoteMenu()
+      }
+    })
   }
 
   drawCircles() {
@@ -131,6 +156,32 @@ export default class PokemonAvatar extends Pokemon {
     } else if (this.isCurrentPlayerAvatar) {
       this.emoteMenu = new EmoteMenu(this.scene, this.index, this.shiny)
       this.add(this.emoteMenu)
+    }
+  }
+
+  playAnimation() {
+    try {
+      this.animationManager.play(this, AnimationConfig[this.name].emote, false)
+    } catch (err) {
+      console.error("could not play animation", err)
+    }
+  }
+
+  onPointerDown(pointer: Phaser.Input.Pointer): void {
+    super.onPointerDown(pointer)
+    const scene = this.scene as GameScene
+
+    if (
+      !this.isCurrentPlayerAvatar ||
+      scene.room?.state.phase === GamePhaseState.MINIGAME
+    ) {
+      return
+    }
+
+    if (pointer.rightButtonDown()) {
+      this.toggleEmoteMenu()
+    } else {
+      this.playAnimation()
     }
   }
 }

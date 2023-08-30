@@ -31,12 +31,12 @@ export default function ChatHistory(props: { source: string }) {
     <div className="chat-history" ref={domRef}>
       {Object.entries(dateSeparatedChat).map(([date, chatMessages]) => {
         return (
-          <>
+          <div key={date}>
             <div className="date">{date}</div>
             {chatMessages.map((message, index) => {
               return <ChatMessage key={index} message={message} />
             })}
-          </>
+          </div>
         )
       })}
     </div>
