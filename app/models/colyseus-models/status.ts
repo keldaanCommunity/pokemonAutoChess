@@ -382,7 +382,7 @@ export default class Status extends Schema implements IStatus {
           poisonDamage = Math.round(poisonDamage * 0.5)
         }
 
-        if (pkm.passive === Passive.POISON_HEAL) {
+        if (pkm.passive === Passive.POISON_HEAL || pkm.passive === Passive.GLIGAR) {
           pkm.handleHeal(poisonDamage, pkm, 0)
         } else {
           pkm.handleDamage({
