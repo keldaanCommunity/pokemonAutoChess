@@ -3,6 +3,11 @@
     max-width: 75vw;
 }
 
+.basic-modal-body {
+    display: flex;
+    justify-content: center;
+}
+
 .hide-bg {
     background: none;
     border: none;

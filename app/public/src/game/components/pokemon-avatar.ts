@@ -49,6 +49,26 @@ export default class PokemonAvatar extends Pokemon {
       this.drawLifebar()
     }
     this.animationManager = animationManager
+    this.registerKeys()
+  }
+
+  registerKeys() {
+    this.scene.input.keyboard!.on("keydown-A", () => {
+      if (this.isCurrentPlayerAvatar && this.scene && this.scene.game) {
+        this.playAnimation()
+      }
+    })
+    this.scene.input.keyboard!.on("keydown-S", () => {
+      const scene = this.scene as GameScene
+      if (
+        this.isCurrentPlayerAvatar &&
+        this.scene &&
+        scene.room?.state.phase !== GamePhaseState.MINIGAME &&
+        this.scene.game
+      ) {
+        this.toggleEmoteMenu()
+      }
+    })
   }
 
   drawCircles() {
@@ -139,17 +159,29 @@ export default class PokemonAvatar extends Pokemon {
     }
   }
 
+  playAnimation() {
+    try {
+      this.animationManager.play(this, AnimationConfig[this.name].emote, false)
+    } catch (err) {
+      console.error("could not play animation", err)
+    }
+  }
+
   onPointerDown(pointer: Phaser.Input.Pointer): void {
     super.onPointerDown(pointer)
+    const scene = this.scene as GameScene
 
-    if (!this.isCurrentPlayerAvatar) {
-      return // don't allow others to animate/emote if they don't control
+    if (
+      !this.isCurrentPlayerAvatar ||
+      scene.room?.state.phase === GamePhaseState.MINIGAME
+    ) {
+      return
     }
 
     if (pointer.rightButtonDown()) {
       this.toggleEmoteMenu()
     } else {
-      this.animationManager.play(this, AnimationConfig[this.name].emote, false)
+      this.playAnimation()
     }
   }
 }
