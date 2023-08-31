@@ -26,6 +26,10 @@ patch announcement
 - Human heal is now rounded up (buff Human in early game)
 - Grass adjustment: heals frequency every 1→2 seconds ; heal amount 4/8/16 → 8/15/30
 
+## Changes to Items
+
+- Shiny Charm rework: Prevents damage and give Protect for 3 seconds the first time the holders gets below 30% HP
+
 # UI
 
 - Grass heal proc now has an animation

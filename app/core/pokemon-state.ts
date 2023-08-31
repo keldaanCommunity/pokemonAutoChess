@@ -122,10 +122,6 @@ export default class PokemonState {
     } else if (pokemon.status.protect) {
       death = false
       takenDamage = 0
-    } else if (pokemon.items.has(Item.SHINY_CHARM) && chance(0.15)) {
-      death = false
-      takenDamage = 0
-      pokemon.status.triggerProtect(1000)
     } else {
       if (pokemon.items.has(Item.POKE_DOLL)) {
         damage = Math.ceil(damage * 0.7)
@@ -257,6 +253,17 @@ export default class PokemonState {
           y: pokemon.positionY,
           id: pokemon.simulation.id
         })
+      }
+
+      if (
+        pokemon.items.has(Item.SHINY_CHARM) &&
+        pokemon.life - residualDamage < 0.3 * pokemon.hp
+      ) {
+        death = false
+        takenDamage = 0
+        residualDamage = 0
+        pokemon.status.triggerProtect(3000)
+        pokemon.items.delete(Item.SHINY_CHARM)
       }
 
       pokemon.life = Math.max(0, pokemon.life - residualDamage)

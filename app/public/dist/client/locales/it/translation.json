@@ -1266,7 +1266,7 @@
   "item_description.RAZOR_CLAW": "L'holder guadagna +55% CRIT_CHANCE",
   "item_description.FLUFFY_TAIL": "Il possessore è immune a tutte le alterazioni di stato",
   "item_description.ORAN_BERRY": "+150 SHIELD all'inizio del combattimento",
-  "item_description.SHINY_CHARM": "Dà il 15% di possibilità di evitare danni in arrivo e attivare PROTECT per 1 secondo",
+  "item_description.SHINY_CHARM": "Previene i danni e fornisce PROTECT per 3 secondi la prima volta che il titolare scende al di sotto del 30% di HP",
   "item_description.GRACIDEA_FLOWER": "Quando inizia il combattimento, il detentore e gli alleati adiacenti nella stessa fila ottengono +30% ATK_SPEED",
   "item_description.FLAME_ORB": "Il possessore è bruciato ma aumenta il suo ATT del 100%",
   "item_description.ASSAULT_VEST": "+20 SPE_DEF. Riduce i danni da BURN e POISON del 50%",
