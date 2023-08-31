@@ -601,7 +601,8 @@ import {
   Zoroark,
   Zorua,
   Zubat,
-  Zweilous
+  Zweilous,
+  Torkoal
 } from "./colyseus-models/pokemon"
 import { IPokemonConfig } from "./mongo-models/user-metadata"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
@@ -777,11 +778,7 @@ export default class PokemonFactory {
   // transforms a pokemon into another pokemon,
   // transferring its items and position to
   // the new pokemon
-  static transformPokemon(
-    before: Pokemon,
-    afterName: Pkm,
-    player?: IPlayer
-  ) {
+  static transformPokemon(before: Pokemon, afterName: Pkm, player?: IPlayer) {
     const transformation = this.createPokemonFromName(afterName, player)
     transformation.positionX = before.positionX
     transformation.positionY = before.positionY
@@ -1995,6 +1992,8 @@ export default class PokemonFactory {
         return new Furret(s, e)
       case Pkm.SPECTRIER:
         return new Spectrier(s, e)
+      case Pkm.TORKOAL:
+        return new Torkoal(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:

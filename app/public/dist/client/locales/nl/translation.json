@@ -1918,5 +1918,8 @@
   "ability_description.WHIRLPOOL": "Richt je op de verste vijand en laat een hagel van 4 draaikolken op hen los. Elk deelt 125% ATK FYSIEKE uit aan de eerste vijandelijke treffer",
   "passive_description.WOBBUFFET": "Beweegt of valt niet aan totdat de PP-balk vol is",
   "status.CHARM": "Gecharmeerd",
-  "status_description.CHARM": "Voorkomt het aanvallen van het doelwit en dwingt er dichter bij te komen"
+  "status_description.CHARM": "Voorkomt het aanvallen van het doelwit en dwingt er dichter bij te komen",
+  "ability.SMOKE_SCREEN": "Rookgordijn",
+  "pkm.TORKOAL": "Torkoal",
+  "ability_description.SMOKE_SCREEN": "Kanaal ondergronds en verschijnt opnieuw in het midden van het vijandelijke team, waarbij [10,20,40,SP] SPECIAL, BURN en ARMOR_REDUCTION alle aangrenzende eenheden gedurende 2 seconden worden uitgedeeld"
 }

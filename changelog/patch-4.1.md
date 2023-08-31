@@ -12,6 +12,8 @@ patch announcement
 
 # New Pokemons:
 
+- Torkoal
+
 # Changes to Pokemon
 
 - New ability Whirlpool for Horsea
