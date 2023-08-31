@@ -12,7 +12,7 @@ patch announcement
 
 # New Pokemons:
 
-- Torkoal
+- Torkoal, Delibird
 
 # Changes to Pokemon
 

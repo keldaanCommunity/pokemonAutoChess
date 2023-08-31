@@ -107,6 +107,11 @@ export default class LoadingManager {
       "/assets/attacks"
     )
     scene.load.multiatlas(
+      "PRESENT",
+      "/assets/attacks/PRESENT.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
       "WHIRLPOOL",
       "/assets/attacks/WHIRLPOOL.json",
       "/assets/attacks"

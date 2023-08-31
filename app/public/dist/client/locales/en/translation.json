@@ -220,7 +220,8 @@
     "WATERFALL": "Waterfall",
     "PYRO_BALL": "Pyro Ball",
     "WHIRLPOOL": "Whirlpool",
-    "SMOKE_SCREEN": "Smoke Screen"
+    "SMOKE_SCREEN": "Smoke Screen",
+    "PRESENT": "Present"
   },
   "pkm": {
     "DEFAULT": "default",
@@ -810,7 +811,8 @@
     "FURRET": "Furret",
     "SENTRET": "Sentret",
     "SPECTRIER": "Spectrier",
-    "TORKOAL": "Torkoal"
+    "TORKOAL": "Torkoal",
+    "DELIBIRD": "Delibird"
   },
   "ability_description": {
     "DEFAULT": "Default",
@@ -1016,7 +1018,8 @@
     "WATERFALL": "SHIELD itself for [30,60,120,SP]",
     "PYRO_BALL": "The user attacks by igniting a small stone and launching it as a fiery ball at the farthest target, dealing [10,20,40,SP] SPECIAL and BURN for 2s everything on its way",
     "WHIRLPOOL": "Lock on to the farthest enemy and unleash a hail of 4 whirlpools toward them. Each deals 125% ATK PHYSICAL (scales with AP) to the first ennemy hit",
-    "SMOKE_SCREEN": "Channel undergound and reappears in the middle of the enemy team, dealing [10,20,40,SP] SPECIAL, BURN and ARMOR_REDUCTION all adjacent units for 2 second"
+    "SMOKE_SCREEN": "Channel undergound and reappears in the middle of the enemy team, dealing [10,20,40,SP] SPECIAL, BURN and ARMOR_REDUCTION all adjacent units for 2 second",
+    "PRESENT": "Either deals 100% HP SPECIAL or heal 100% HP of the target"
   },
   "effect": {
     "INGRAIN": "Ingrain",
