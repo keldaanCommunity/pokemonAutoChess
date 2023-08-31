@@ -999,7 +999,7 @@
     "HIDDEN_POWER_Z": "Mettre l'équipe ennemie en SLEEP pendant 5 secondes",
     "HIDDEN_POWER_QM": "Invoque 4 Zarbi aléatoires sur votre banc",
     "HIDDEN_POWER_EM": "Invoque 4 Zarbi aléatoires à chaque coin du plateau",
-    "POISON_JAB": "Inflige [40,80,120,SP] SPECIAL, change de place avec la cible et POISON à la fois la cible et le lanceur pendant 4 secondes",
+    "POISON_JAB": "Inflige [30,60,90,120,SP] SPECIAL, change de place avec la cible et POISON à la fois la cible et le lanceur pendant 4 secondes",
     "RELIC_SONG": "Émet une note. Après la troisième note, SLEEP toute l'équipe ennemie pendant [2,SP=0.5] secondes",
     "PETAL_DANCE": "Inflige [20,30,50,SP] SPECIAL à [3,4,5] Pokémon ennemis",
     "FORECAST": "Donne [10,SP] SHIELD à votre équipe, plus un bonus supplémentaire en fonction de la météo :\n Soleil : donne également [3,SP] ATK\n Pluie : donne également [20,SP] PP\n Neige : donne également [2,SP] DEF / SPE_DEF",
@@ -1390,7 +1390,7 @@
     "POISON_HEAL": "Si le Pokémon est POISON, il gagnera des HP au lieu de subir des dégâts",
     "WURMPLE": "Chenipotte évolue en fonction de la météo à la manche précédente :\nBlindalys : NUIT, TEMPÊTE, TEMPÊTE DE SABLE, NEIGE\nArmulys : SOLEIL, PLUIE, BRUME, VENT\nAléatoire si NEUTRE",
     "GRIM_NEIGH": "Quand le Pokémon met un ennemi K.O., il émet un hennissement terrifiant qui augmente son AP de 30.",
-    "GLIGAR": "Gligar recherche un RAZOR_FANG",
+    "GLIGAR": "Gligar recherche un RAZOR_FANG. Si le Pokémon est POISON, il gagnera des HP au lieu de subir des dégâts.",
     "SHAYMIN": "Shaymin recherche une GRACIDEA_FLOWER"
   },
   "stat": {

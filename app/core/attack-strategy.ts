@@ -1164,7 +1164,7 @@ export class PoisonJabStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 80 : 40
+    const damage = [30,60,90,120][pokemon.stars - 1] ?? 30
     const farthestTarget = state.getFarthestTargetCoordinate(pokemon, board)
     if (farthestTarget) {
       const x = farthestTarget.x

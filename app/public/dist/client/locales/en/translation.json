@@ -1007,7 +1007,7 @@
     "HIDDEN_POWER_Z": "Put the enemy team SLEEP for 5 seconds",
     "HIDDEN_POWER_QM": "Get 4 random Unown on your bench",
     "HIDDEN_POWER_EM": "Spawn 4 random Unown at every corner of the board",
-    "POISON_JAB": "Deals [40,80,120,SP] SPECIAL, swaps places with the target, and POISON both the target and the caster for 4 seconds",
+    "POISON_JAB": "Deals [30,60,90,120,SP] SPECIAL, swaps places with the target, and POISON both the target and the caster for 4 seconds",
     "SHELL_SMASH": "Deals [15,30,SP] SPECIAL to adjacent enemies; gain 2 ATK, 20% AP and 20% ATK_SPEED, and lose 1 DEF, 1 SPE_DEF",
     "HELPING_HAND": "Double the damage of the next spell casted by the nearest [2,4,6] allies",
     "ASTRAL_BARRAGE": "Sends [3,SP=2] small ghosts at random opposing Pokémon. Each of them deals 20 SPECIAL",
@@ -1369,7 +1369,7 @@
     "MAGIKARP": "8 Magikarp evolve in Gyarados",
     "GIRATINA": "Giratina switches between its Altered Forme and Origin Forme depending on its position on the board",
     "UNOWN": "Unown cannot hold items and vanish after one fight or after casting their ability",
-    "GLIGAR": "Gligar is looking for a RAZOR_FANG",
+    "GLIGAR": "Gligar is looking for a RAZOR_FANG. If the Pokémon is POISON, it will gain HP instead of taking damage",
     "POISON_HEAL": "If the Pokémon is POISON, it will gain HP instead of taking damage",
     "GRIM_NEIGH": "When the Pokémon knocks out an enemy, it emits a terrifying whinny sound that increases its AP by 30",
     "SHAYMIN": "Shaymin is looking for a GRACIDEA_FLOWER"
