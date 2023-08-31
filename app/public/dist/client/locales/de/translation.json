@@ -1918,5 +1918,8 @@
   "ability_description.WHIRLPOOL": "Erfassen Sie den am weitesten entfernten Feind und entfesseln Sie einen Hagel von 4 Strudeln auf ihn. Jeder Angriff fügt dem ersten getroffenen Gegner 125 % PHYSISCHE ANG zu",
   "passive_description.WOBBUFFET": "Bewegt sich nicht und greift nicht an, bis die PP-Leiste voll ist",
   "status.CHARM": "Fasziniert",
-  "status_description.CHARM": "Verhindert den Angriff auf das Ziel und zwingt dazu, sich ihm zu nähern"
+  "status_description.CHARM": "Verhindert den Angriff auf das Ziel und zwingt dazu, sich ihm zu nähern",
+  "ability.SMOKE_SCREEN": "Nebelwand",
+  "pkm.TORKOAL": "Torkoal",
+  "ability_description.SMOKE_SCREEN": "Kanalisiert den Untergrund und erscheint wieder in der Mitte des gegnerischen Teams, was allen benachbarten Einheiten 2 Sekunden lang [10,20,40,SP] SPECIAL, BURN und ARMOR_REDUCTION zufügt"
 }

@@ -8168,6 +8168,31 @@ export class HooH extends Pokemon {
   }
 }
 
+export class Torkoal extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.TORKOAL,
+      [Synergy.FIRE, Synergy.GROUND],
+      Rarity.UNIQUE,
+      Pkm.DEFAULT,
+      240,
+      10,
+      10,
+      2,
+      1,
+      AttackSprite.FIRE_MELEE,
+      3,
+      105,
+      Ability.SMOKE_SCREEN,
+      shiny,
+      emotion,
+      true,
+      false,
+      Passive.SUN
+    )
+  }
+}
+
 export class PrimalGroudon extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(

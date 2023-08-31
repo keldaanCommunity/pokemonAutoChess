@@ -586,7 +586,8 @@
     "CLOYSTER": "Claustro",
     "FURRET": "Furret",
     "SENTRET": "Sentret",
-    "SPECTRIER": "Spectrier"
+    "SPECTRIER": "Spectrier",
+    "TORKOAL": "Torkoal"
   },
   "emotion": {
     "Teary-Eyed": "Olhos marejados",
@@ -813,7 +814,8 @@
     "BLIZZARD": "Nevasca",
     "WATERFALL": "Cachoeira",
     "PYRO_BALL": "Bola pirotécnica",
-    "WHIRLPOOL": "Hidromassagem"
+    "WHIRLPOOL": "Hidromassagem",
+    "SMOKE_SCREEN": "Cortina de Fumaça"
   },
   "ability_description": {
     "DEFAULT": "Padrão",
@@ -1018,7 +1020,8 @@
     "BLIZZARD": "CONGELE todos os Pokémon inimigos por 3 segundos e dê [15,SP] ESPECIAL. Dano dobrado se o inimigo já estiver CONGELADO",
     "WATERFALL": "SHIELD por [30,60,120,SP]",
     "PYRO_BALL": "O usuário ataca acendendo uma pequena pedra e lançando-a como uma bola de fogo no alvo mais distante, distribuindo [10,20,40,SP] ESPECIAL e QUEIMADURA por 2s em tudo que estiver em seu caminho",
-    "WHIRLPOOL": "Fixe-se no inimigo mais distante e solte uma saraivada de 4 redemoinhos em direção a ele. Cada um causa 125% de ATQ FÍSICO ao primeiro inimigo atingido"
+    "WHIRLPOOL": "Fixe-se no inimigo mais distante e solte uma saraivada de 4 redemoinhos em direção a ele. Cada um causa 125% de ATQ FÍSICO ao primeiro inimigo atingido",
+    "SMOKE_SCREEN": "Canaliza e reaparece no meio do time inimigo, causando [10,20,40,SP] SPECIAL, BURN e ARMOR_REDUCTION em todas as unidades adjacentes por 2 segundos"
   },
   "effect": {
     "INGRAIN": "Inerente",

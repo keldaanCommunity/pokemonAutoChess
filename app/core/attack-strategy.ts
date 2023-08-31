@@ -35,7 +35,11 @@ export class AttackStrategy {
     pokemon.pp = 0
     pokemon.count.ult += 1
 
-    if (![Ability.PYRO_BALL, Ability.WHIRLPOOL].includes(pokemon.skill)) {
+    if (
+      ![Ability.PYRO_BALL, Ability.WHIRLPOOL, Ability.SMOKE_SCREEN].includes(
+        pokemon.skill
+      )
+    ) {
       pokemon.simulation.room.broadcast(Transfer.ABILITY, {
         id: pokemon.simulation.id,
         skill: pokemon.skill,
@@ -1164,7 +1168,7 @@ export class PoisonJabStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [30,60,90,120][pokemon.stars - 1] ?? 30
+    const damage = [30, 60, 90, 120][pokemon.stars - 1] ?? 30
     const farthestTarget = state.getFarthestTargetCoordinate(pokemon, board)
     if (farthestTarget) {
       const x = farthestTarget.x
@@ -2930,6 +2934,65 @@ export class DiveStrategy extends AttackStrategy {
             crit
           )
           cell.value.status.triggerFreeze(freezeDuration, cell.value)
+        }
+      })
+    }
+  }
+}
+
+export class SmokeScreenStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10
+    const duration = 2000
+    const mostSurroundedCoordinate =
+      state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
+
+    if (mostSurroundedCoordinate) {
+      pokemon.moveTo(
+        mostSurroundedCoordinate.x,
+        mostSurroundedCoordinate.y,
+        board
+      )
+
+      const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: pokemon.skill,
+        positionX: pokemon.positionX,
+        positionY: pokemon.positionY,
+        targetX: pokemon.positionX,
+        targetY: pokemon.positionY,
+        orientation: pokemon.orientation
+      })
+
+      cells.forEach((cell) => {
+        if (cell.value && cell.value.team !== pokemon.team) {
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+          cell.value.status.triggerBurn(duration, cell.value, pokemon, board)
+          cell.value.status.triggerArmorReduction(duration)
+          pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+            id: pokemon.simulation.id,
+            skill: pokemon.skill,
+            positionX: pokemon.positionX,
+            positionY: pokemon.positionY,
+            targetX: cell.x,
+            targetY: cell.y,
+            orientation: pokemon.orientation
+          })
         }
       })
     }

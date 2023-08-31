@@ -238,6 +238,11 @@ export default class LoadingManager {
       "/assets/attacks"
     )
     scene.load.multiatlas(
+      "SMOKE_SCREEN",
+      "/assets/attacks/SMOKE_SCREEN.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
       "LIQUIDATION",
       "/assets/attacks/LIQUIDATION.json",
       "/assets/attacks"

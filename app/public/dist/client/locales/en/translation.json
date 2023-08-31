@@ -219,7 +219,8 @@
     "ASTRAL_BARRAGE": "Astral Barrage",
     "WATERFALL": "Waterfall",
     "PYRO_BALL": "Pyro Ball",
-    "WHIRLPOOL": "Whirlpool"
+    "WHIRLPOOL": "Whirlpool",
+    "SMOKE_SCREEN": "Smoke Screen"
   },
   "pkm": {
     "DEFAULT": "default",
@@ -808,7 +809,8 @@
     "CLOYSTER": "Cloyster",
     "FURRET": "Furret",
     "SENTRET": "Sentret",
-    "SPECTRIER": "Spectrier"
+    "SPECTRIER": "Spectrier",
+    "TORKOAL": "Torkoal"
   },
   "ability_description": {
     "DEFAULT": "Default",
@@ -1013,7 +1015,8 @@
     "ASTRAL_BARRAGE": "Sends [3,SP=2] small ghosts at random opposing Pokémon. Each of them deals 20 SPECIAL",
     "WATERFALL": "SHIELD itself for [30,60,120,SP]",
     "PYRO_BALL": "The user attacks by igniting a small stone and launching it as a fiery ball at the farthest target, dealing [10,20,40,SP] SPECIAL and BURN for 2s everything on its way",
-    "WHIRLPOOL": "Lock on to the farthest enemy and unleash a hail of 4 whirlpools toward them. Each deals 125% ATK PHYSICAL (scales with AP) to the first ennemy hit"
+    "WHIRLPOOL": "Lock on to the farthest enemy and unleash a hail of 4 whirlpools toward them. Each deals 125% ATK PHYSICAL (scales with AP) to the first ennemy hit",
+    "SMOKE_SCREEN": "Channel undergound and reappears in the middle of the enemy team, dealing [10,20,40,SP] SPECIAL, BURN and ARMOR_REDUCTION all adjacent units for 2 second"
   },
   "effect": {
     "INGRAIN": "Ingrain",

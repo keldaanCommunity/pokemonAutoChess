@@ -587,7 +587,8 @@ export enum Pkm {
   CLOYSTER = "CLOYSTER",
   SENTRET = "SENTRET",
   FURRET = "FURRET",
-  SPECTRIER = "SPECTRIER"
+  SPECTRIER = "SPECTRIER",
+  TORKOAL = "TORKOAL"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1177,7 +1178,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.CLOYSTER]: "0091",
   [Pkm.SENTRET]: "0161",
   [Pkm.FURRET]: "0162",
-  [Pkm.SPECTRIER]: "0897"
+  [Pkm.SPECTRIER]: "0897",
+  [Pkm.TORKOAL]: "0324"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1767,7 +1769,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.CLOYSTER]: Pkm.SHELLDER,
   [Pkm.SENTRET]: Pkm.SENTRET,
   [Pkm.FURRET]: Pkm.FURRET,
-  [Pkm.SPECTRIER]: Pkm.SPECTRIER
+  [Pkm.SPECTRIER]: Pkm.SPECTRIER,
+  [Pkm.TORKOAL]: Pkm.TORKOAL
 }
 
 export enum PkmDuo {
@@ -4833,5 +4836,10 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.RearUp
+  },
+  [Pkm.TORKOAL]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
   }
 }

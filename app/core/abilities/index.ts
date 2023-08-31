@@ -174,7 +174,8 @@ import {
   BlizzardStrategy,
   WaterfallStrategy,
   PyroBallStrategy,
-  WhirlpoolStrategy
+  WhirlpoolStrategy,
+  SmokeScreenStrategy
 } from "../attack-strategy"
 import {
   HiddenPowerAStrategy,
@@ -412,5 +413,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.ASTRAL_BARRAGE]: new AstralBarrageStrategy(),
   [Ability.WATERFALL]: new WaterfallStrategy(),
   [Ability.PYRO_BALL]: new PyroBallStrategy(),
-  [Ability.WHIRLPOOL]: new WhirlpoolStrategy()
+  [Ability.WHIRLPOOL]: new WhirlpoolStrategy(),
+  [Ability.SMOKE_SCREEN]: new SmokeScreenStrategy()
 }
