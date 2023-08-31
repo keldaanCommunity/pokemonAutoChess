@@ -838,6 +838,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.PRESENT,
+      frames: this.game.anims.generateFrameNames(Ability.PRESENT, {
+        start: 0,
+        end: 32,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.WHIRLPOOL,
       frames: this.game.anims.generateFrameNames(Ability.WHIRLPOOL, {
         start: 0,

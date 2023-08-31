@@ -602,7 +602,8 @@ import {
   Zorua,
   Zubat,
   Zweilous,
-  Torkoal
+  Torkoal,
+  Delibird
 } from "./colyseus-models/pokemon"
 import { IPokemonConfig } from "./mongo-models/user-metadata"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
@@ -1994,6 +1995,8 @@ export default class PokemonFactory {
         return new Spectrier(s, e)
       case Pkm.TORKOAL:
         return new Torkoal(s, e)
+      case Pkm.DELIBIRD:
+        return new Delibird(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:

@@ -3055,6 +3055,29 @@ export class AppleAcidStrategy extends AttackStrategy {
   }
 }
 
+export class PresentStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    if (Math.random() > 0.5) {
+      target.handleHeal(target.hp, pokemon, 0)
+    } else {
+      target.handleSpecialDamage(
+        target.hp,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+    }
+  }
+}
+
 export class SacredSwordStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,

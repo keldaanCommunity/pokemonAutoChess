@@ -7644,6 +7644,29 @@ export class Absol extends Pokemon {
   }
 }
 
+export class Delibird extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.DELIBIRD,
+      [Synergy.ICE, Synergy.FLYING, Synergy.FIELD],
+      Rarity.UNIQUE,
+      Pkm.DEFAULT,
+      200,
+      20,
+      5,
+      5,
+      1,
+      AttackSprite.ICE_MELEE,
+      3,
+      100,
+      Ability.PRESENT,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
 export class Lapras extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
