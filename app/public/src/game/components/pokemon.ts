@@ -275,6 +275,14 @@ export default class Pokemon extends DraggableObject {
 
   updateTooltipPosition() {
     if (this.detail) {
+      if (this.input && getPreferences().showDetailsOnHover) {
+        this.detail.setPosition(
+          this.input.localX + 200,
+          this.input.localY - 175
+        )
+        return;
+      }
+
       const absX = this.x + this.detail.width / 2 + 40
       const minX = this.detail.width / 2
       const maxX = window.innerWidth - this.detail.width / 2
