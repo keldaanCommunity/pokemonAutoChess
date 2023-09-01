@@ -29,6 +29,7 @@ patch announcement
 # UI
 
 - Grass heal proc now has an animation
+- Add a modal to reconnect to previous game from lobby
 
 # Bugfix
 
