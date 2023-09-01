@@ -228,6 +228,7 @@ export enum Pkm {
   VANILLISH = "VANILLISH",
   VANILLUXE = "VANILLUXE",
   GLACEON = "GLACEON",
+  LARVESTA = "LARVESTA",
   VOLCARONA = "VOLCARONA",
   LANDORUS = "LANDORUS",
   THUNDURUS = "THUNDURUS",
@@ -822,6 +823,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.VANILLISH]: "0583",
   [Pkm.VANILLUXE]: "0584",
   [Pkm.GLACEON]: "0471",
+  [Pkm.LARVESTA]: "0636",
   [Pkm.VOLCARONA]: "0637",
   [Pkm.LANDORUS]: "0645",
   [Pkm.THUNDURUS]: "0642",
@@ -1387,7 +1389,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.VANILLITE]: Pkm.VANILLITE,
   [Pkm.VANILLISH]: Pkm.VANILLITE,
   [Pkm.VANILLUXE]: Pkm.VANILLITE,
-  [Pkm.VOLCARONA]: Pkm.VOLCARONA,
+  [Pkm.LARVESTA]: Pkm.LARVESTA,
+  [Pkm.VOLCARONA]: Pkm.LARVESTA,
   [Pkm.LANDORUS]: Pkm.LANDORUS,
   [Pkm.TORNADUS]: Pkm.TORNADUS,
   [Pkm.THUNDURUS]: Pkm.THUNDURUS,
@@ -3035,9 +3038,14 @@ export const AnimationConfig: {
     ability: AnimationType.Pose,
     emote: AnimationType.Shoot
   },
+  [Pkm.LARVESTA]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
+  },
   [Pkm.VOLCARONA]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Hop,
+    ability: AnimationType.Attack,
     emote: AnimationType.Shoot
   },
   [Pkm.LANDORUS]: {

@@ -603,7 +603,8 @@ import {
   Zubat,
   Zweilous,
   Torkoal,
-  Delibird
+  Delibird,
+  Larvesta
 } from "./colyseus-models/pokemon"
 import { IPokemonConfig } from "./mongo-models/user-metadata"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
@@ -1271,6 +1272,8 @@ export default class PokemonFactory {
         return new Vanillish(s, e)
       case Pkm.VANILLUXE:
         return new Vanilluxe(s, e)
+      case Pkm.LARVESTA:
+        return new Larvesta(s, e)
       case Pkm.VOLCARONA:
         return new Volcarona(s, e)
       case Pkm.LANDORUS:

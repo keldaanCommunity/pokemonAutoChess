@@ -287,7 +287,6 @@ export const UniqueShop = new Array<PkmProposition>(
   Pkm.PHIONE,
   Pkm.COBALION,
   Pkm.KELDEO,
-  Pkm.VOLCARONA,
   Pkm.TAPU_KOKO,
   Pkm.TAPU_LELE,
   Pkm.SEVIPER,

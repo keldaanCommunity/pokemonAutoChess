@@ -7142,12 +7142,36 @@ export class Darkrai extends Pokemon {
   }
 }
 
+export class Larvesta extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.LARVESTA,
+      [Synergy.FIRE, Synergy.BUG],
+      Rarity.EPIC,
+      Pkm.VOLCARONA,
+      100,
+      10,
+      2,
+      2,
+      3,
+      AttackSprite.PSYCHIC_RANGE,
+      1,
+      100,
+      Ability.FIRE_BLAST,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
 export class Volcarona extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.VOLCARONA,
       [Synergy.FIRE, Synergy.BUG],
-      Rarity.UNIQUE,
+      Rarity.EPIC,
       Pkm.DEFAULT,
       200,
       20,
@@ -7155,11 +7179,12 @@ export class Volcarona extends Pokemon {
       2,
       3,
       AttackSprite.PSYCHIC_RANGE,
-      3,
+      2,
       100,
       Ability.FIRE_BLAST,
       shiny,
       emotion,
+      true,
       true
     )
   }
