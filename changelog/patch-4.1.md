@@ -33,6 +33,7 @@ patch announcement
 # UI
 
 - Grass heal proc now has an animation
+- Show number of titles unlocked
 
 # Bugfix
 
