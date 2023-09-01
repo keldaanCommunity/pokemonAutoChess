@@ -9,7 +9,8 @@ export function TitleTab() {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const user = useAppSelector((state) => state.lobby.user)
-  return user ? (
+  return user ? <div>
+    <p>{user.titles.length} / {Object.keys(Title).length} {t("titles_unlocked")}</p>
     <ul className="titles">
       {Object.keys(Title).map((k, i) => (
         <li
@@ -29,5 +30,5 @@ export function TitleTab() {
         </li>
       ))}
     </ul>
-  ) : null
+  </div> : null
 }

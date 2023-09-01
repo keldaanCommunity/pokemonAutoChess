@@ -1970,5 +1970,6 @@
   "loading_asset": "Loading asset:",
   "loading_complete": "Loading complete, waiting for other players...",
   "select_pokemon": "Select a pokemon",
-  "search_player": "Search by Player Name..."
+  "search_player": "Search by Player Name...",
+  "titles_unlocked": "titles unlocked"
 }

@@ -1967,5 +1967,6 @@
   "finished_preloading": "Préchargement terminé",
   "select_pokemon": "Sélectionnez un pokemon",
   "search_player": "Chercher par nom de joueur...",
-  "back_to_my_profile": "Retour à mon profil"
+  "back_to_my_profile": "Retour à mon profil",
+  "titles_unlocked": "titres débloqués"
 }
