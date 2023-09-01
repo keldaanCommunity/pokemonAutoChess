@@ -1327,7 +1327,7 @@
     "RAZOR_CLAW": "The holder gains +55% CRIT_CHANCE",
     "FLUFFY_TAIL": "Holder is immune to all status alterations",
     "ORAN_BERRY": "+150 SHIELD when combat begins",
-    "SHINY_CHARM": "Give 15% chance to avoid incoming damage and trigger PROTECT for 1 second",
+    "SHINY_CHARM": "Prevents damage and give PROTECT for 3 seconds the first time the holders gets below 30% HP",
     "GRACIDEA_FLOWER": "When combat begins, the holder and adjacent allies in the same row gain +30% ATK_SPEED",
     "FLAME_ORB": "Holder is burned but increase its ATK by 100%",
     "ASSAULT_VEST": "+20 SPE_DEF. Reduce BURN and POISON damage by 50%",
