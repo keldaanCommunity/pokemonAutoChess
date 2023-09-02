@@ -45,7 +45,7 @@ export default class Bot {
       this.progress >= this.scenario.steps[this.step + 1].roundsRequired
     ) {
       this.step += 1
-      this.progress = 0
+      this.progress -= this.scenario.steps[this.step].roundsRequired
       this.updatePlayerTeam()
     }
   }
