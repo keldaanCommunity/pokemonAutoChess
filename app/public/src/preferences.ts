@@ -1,4 +1,4 @@
-const KEY = "pac_preferences"
+import { localStore, LocalStoreKeys } from "./pages/utils/store"
 
 export interface IPreferencesState {
   musicVolume: number
@@ -22,21 +22,16 @@ export function getPreferences() {
 }
 
 export function loadPreferences(): IPreferencesState {
-  try {
-    const serializedState = localStorage.getItem(KEY)
-    if (!serializedState) return defaultPreferences
-    return { ...defaultPreferences, ...JSON.parse(serializedState) }
-  } catch (e) {
+  if (localStore.has(LocalStoreKeys.PREFERENCES)) {
+    return {
+      ...defaultPreferences,
+      ...localStore.get(LocalStoreKeys.PREFERENCES)
+    }
+  } else {
     return defaultPreferences
   }
 }
 
 export async function savePreferences(modified: Partial<IPreferencesState>) {
-  try {
-    preferences = Object.assign(loadPreferences(), modified)
-    const serializedState = JSON.stringify(preferences)
-    localStorage.setItem(KEY, serializedState)
-  } catch (e) {
-    // Ignore if could not be saved
-  }
+  localStore.put(LocalStoreKeys.PREFERENCES, modified)
 }

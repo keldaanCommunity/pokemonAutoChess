@@ -33,6 +33,7 @@ import { GameUser } from "../../../models/colyseus-models/game-user"
 import { MainSidebar } from "./component/main-sidebar"
 import { useTranslation } from "react-i18next"
 import { PreloadingScene } from "../game/scenes/preloading-scene"
+import { localStore, LocalStoreKeys } from "./utils/store"
 
 export default function Preparation() {
   const { t } = useTranslation()
@@ -65,16 +66,17 @@ export default function Preparation() {
           try {
             if (!initialized.current) {
               initialized.current = true
-              const cachedReconnectionToken = localStorage.getItem(
-                "cachedReconnectionToken"
+              const cachedReconnectionToken = localStore.get(
+                LocalStoreKeys.RECONNECTION_TOKEN
               )
               if (cachedReconnectionToken) {
                 const r: Room<PreparationState> = await client.reconnect(
                   cachedReconnectionToken
                 )
-                localStorage.setItem(
-                  "cachedReconnectionToken",
-                  r.reconnectionToken
+                localStore.set(
+                  LocalStoreKeys.RECONNECTION_TOKEN,
+                  r.reconnectionToken,
+                  30
                 )
                 await initialize(r, user.uid)
                 dispatch(joinPreparation(r))
@@ -184,9 +186,10 @@ export default function Preparation() {
 
           dispatch(gameStart(game.id))
           playSound(SOUNDS.START_GAME)
-          localStorage.setItem(
-            "cachedReconnectionToken",
-            game.reconnectionToken
+          localStore.set(
+            LocalStoreKeys.RECONNECTION_TOKEN,
+            game.reconnectionToken,
+            5 * 60 // 5 minutes to start game
           )
           await r.leave()
           game.connection.close()
@@ -203,10 +206,11 @@ export default function Preparation() {
           const game: Room<GameState> = await client.joinById(message.id, {
             idToken: token
           })
-          localStorage.setItem(
-            "cachedReconnectionToken",
-            game.reconnectionToken
-          )
+          localStore.set(
+            LocalStoreKeys.RECONNECTION_TOKEN,
+            game.reconnectionToken,
+            5 * 60
+          ) // 5 minutes allowed to start game
           await r.leave()
           game.connection.close()
           dispatch(leavePreparation())

@@ -1729,6 +1729,8 @@
     "screen": "Game Screen explained",
     "tips": "5 Tips for Pokemon AutoChess"
   },
+  "yes": "Yes",
+  "no": "No",
   "title_label": "Title",
   "mobile_warning": "This game is not adapted for mobile, play it on desktop",
   "nintendo_warning": "Non profit, open source. All rights to The Pokemon Company®",
@@ -1971,5 +1973,7 @@
   "loading_asset": "Loading asset:",
   "loading_complete": "Loading complete, waiting for other players...",
   "select_pokemon": "Select a pokemon",
-  "search_player": "Search by Player Name..."
+  "search_player": "Search by Player Name...",
+  "game-reconnect-modal-title": "Reconnect to game",
+  "game-reconnect-modal-body": "You left a game in progress. Do you want to reconnect to your previous game ?"
 }
