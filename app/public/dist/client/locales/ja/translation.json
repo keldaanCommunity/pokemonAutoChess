@@ -425,6 +425,7 @@
   "pkm.VANILLISH": "バニリッシュ",
   "pkm.VANILLUXE": "バニラックス",
   "pkm.GLACEON": "グレイシア",
+  "pkm.LARVESTA": "メラルバ",
   "pkm.VOLCARONA": "ヴォルカローナ",
   "pkm.LANDORUS": "ランドロス",
   "pkm.THUNDURUS": "トゥンドゥルス",
@@ -1921,5 +1922,13 @@
   "status_description.CHARM": "ターゲットへの攻撃を防ぎ、強制的にターゲットに近づく",
   "ability.SMOKE_SCREEN": "煙幕",
   "pkm.TORKOAL": "トルコール",
-  "ability_description.SMOKE_SCREEN": "チャンネルが通過し、敵チームの中央に再出現し、隣接するすべてのユニットに 2 秒間 [10,20,40,SP] SPECIAL、BURN、ARMOR_REDUCTION を与える"
+  "ability_description.SMOKE_SCREEN": "チャンネルが通過し、敵チームの中央に再出現し、隣接するすべてのユニットに 2 秒間 [10,20,40,SP] SPECIAL、BURN、ARMOR_REDUCTION を与える",
+  "ability.PRESENT": "現在",
+  "pkm.DELIBIRD": "デリバード",
+  "pkm.IRON_BUNDLE": "鉄の束",
+  "ability_description.PRESENT": "100% HP SPECIAL を与えるか、ターゲットの HP 100% を回復する",
+  "yes": "はい",
+  "no": "いいえ",
+  "game-reconnect-modal-title": "ゲームに再接続する",
+  "game-reconnect-modal-body": "進行中のゲームを放置しました。以前のゲームに再接続しますか?"
 }

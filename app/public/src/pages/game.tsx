@@ -86,6 +86,7 @@ import { logger } from "../../../utils/logger"
 import { RequiredStageLevelForXpElligibility } from "../../../types/Config"
 import { useTranslation } from "react-i18next"
 import { MainSidebar } from "./component/main-sidebar"
+import { localStore, LocalStoreKeys } from "./utils/store"
 
 let gameContainer: GameContainer
 
@@ -129,8 +130,8 @@ export default function Game() {
       logger.debug(
         `connectToGame attempt ${attempts} / ${MAX_ATTEMPS_RECONNECT}`
       )
-      const cachedReconnectionToken = localStorage.getItem(
-        "cachedReconnectionToken"
+      const cachedReconnectionToken = localStore.get(
+        LocalStoreKeys.RECONNECTION_TOKEN
       )
       if (cachedReconnectionToken) {
         connecting.current = true
@@ -142,9 +143,11 @@ export default function Game() {
         client
           .reconnect(cachedReconnectionToken)
           .then((room: Room) => {
-            localStorage.setItem(
-              "cachedReconnectionToken",
-              room.reconnectionToken
+            // store game token for 1 hour
+            localStore.set(
+              LocalStoreKeys.RECONNECTION_TOKEN,
+              room.reconnectionToken,
+              60 * 60
             )
             dispatch(joinGame(room))
             connected.current = true
@@ -217,7 +220,7 @@ export default function Game() {
       elligibleToXP,
       elligibleToELO
     })
-    localStorage.setItem("cachedReconnectionToken", r.reconnectionToken)
+    localStore.set(LocalStoreKeys.RECONNECTION_TOKEN, r.reconnectionToken, 30)
     r.connection.close()
     dispatch(leaveGame())
     setToAfter(true)

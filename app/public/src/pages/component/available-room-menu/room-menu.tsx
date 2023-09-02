@@ -22,6 +22,7 @@ import { useNavigate } from "react-router"
 import { MAX_PLAYERS_PER_LOBBY } from "../../../../../types/Config"
 import { logger } from "../../../../../utils/logger"
 import { useTranslation } from "react-i18next"
+import { localStore, LocalStoreKeys } from "../../utils/store"
 
 export default function RoomMenu(props: {
   toPreparation: boolean
@@ -64,7 +65,11 @@ export default function RoomMenu(props: {
         })
         await lobby.leave()
         room.connection.close()
-        localStorage.setItem("cachedReconnectionToken", room.reconnectionToken)
+        localStore.set(
+          LocalStoreKeys.RECONNECTION_TOKEN,
+          room.reconnectionToken,
+          30
+        )
         dispatch(leaveLobby())
         props.setToPreparation(true)
       }
@@ -100,9 +105,10 @@ export default function RoomMenu(props: {
               idToken: token
             }
           )
-          localStorage.setItem(
-            "cachedReconnectionToken",
-            room.reconnectionToken
+          localStore.set(
+            LocalStoreKeys.RECONNECTION_TOKEN,
+            room.reconnectionToken,
+            30
           )
           await lobby.leave()
           room.connection.close()
@@ -130,7 +136,11 @@ export default function RoomMenu(props: {
             spectate: true
           }
         )
-        localStorage.setItem("cachedReconnectionToken", game.reconnectionToken)
+        localStore.set(
+          LocalStoreKeys.RECONNECTION_TOKEN,
+          game.reconnectionToken,
+          30
+        )
         await lobby.leave()
         game.connection.close()
         dispatch(leaveLobby())

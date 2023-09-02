@@ -227,6 +227,7 @@
     "VANILLISH": "Vanillish",
     "VANILLUXE": "Vanilluxe",
     "GLACEON": "Glaceon",
+    "LARVESTA": "Larvesta",
     "VOLCARONA": "Volcarona",
     "LANDORUS": "Landorus",
     "THUNDURUS": "Thundurus",
@@ -587,7 +588,9 @@
     "FURRET": "Козирка",
     "SENTRET": "Сентрет",
     "SPECTRIER": "Спектър",
-    "TORKOAL": "Торкоал"
+    "TORKOAL": "Торкоал",
+    "DELIBIRD": "Делибърд",
+    "IRON_BUNDLE": "Железен пакет"
   },
   "rarity": {
     "COMMON": "често срещани",
@@ -810,7 +813,8 @@
     "WATERFALL": "Водопад",
     "PYRO_BALL": "Пиротопка",
     "WHIRLPOOL": "водовъртеж",
-    "SMOKE_SCREEN": "Димна завеса"
+    "SMOKE_SCREEN": "Димна завеса",
+    "PRESENT": "Настояще"
   },
   "ability_description": {
     "DEFAULT": "По подразбиране",
@@ -1016,7 +1020,8 @@
     "WATERFALL": "Самият SHIELD за [30,60,120,SP]",
     "PYRO_BALL": "Потребителят атакува, като запалва малък камък и го изстрелва като огнена топка към най-отдалечената цел, нанасяйки [10,20,40,SP] СПЕЦИАЛНИ и ИЗГАРЯйки всичко по пътя си за 2s",
     "WHIRLPOOL": "Насочете се към най-отдалечения враг и отприщете градушка от 4 водовъртежа към него. Всеки нанася 125% ATK ФИЗИЧЕСКА на първия ударен враг",
-    "SMOKE_SCREEN": "Каналът е под земята и се появява отново в средата на вражеския отбор, нанасяйки [10,20,40,SP] SPECIAL, BURN и ARMOR_REDUCTION на всички съседни единици за 2 секунди"
+    "SMOKE_SCREEN": "Каналът е под земята и се появява отново в средата на вражеския отбор, нанасяйки [10,20,40,SP] SPECIAL, BURN и ARMOR_REDUCTION на всички съседни единици за 2 секунди",
+    "PRESENT": "Или нанася 100% HP SPECIAL, или лекува 100% HP на целта"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1967,5 +1972,9 @@
   "loading_complete": "Зареждането приключи, чакаме други играчи...",
   "back_to_my_profile": "Обратно към моя профил",
   "select_pokemon": "Изберете покемон",
-  "search_player": "Търсене по име на играч..."
+  "search_player": "Търсене по име на играч...",
+  "yes": "да",
+  "no": "Не",
+  "game-reconnect-modal-title": "Свържете се отново с играта",
+  "game-reconnect-modal-body": "Напуснахте игра в ход. Искате ли да се свържете отново с предишната си игра?"
 }

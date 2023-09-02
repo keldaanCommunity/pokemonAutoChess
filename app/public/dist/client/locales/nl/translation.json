@@ -422,6 +422,7 @@
   "pkm.VANILLISH": "Vanillish",
   "pkm.VANILLUXE": "Vanilluxe",
   "pkm.GLACEON": "Glaceon",
+  "pkm.LARVESTA": "Larvesta",
   "pkm.VOLCARONA": "Volcarona",
   "pkm.LANDORUS": "Landorus",
   "pkm.THUNDURUS": "Thundurus",
@@ -1921,5 +1922,13 @@
   "status_description.CHARM": "Voorkomt het aanvallen van het doelwit en dwingt er dichter bij te komen",
   "ability.SMOKE_SCREEN": "Rookgordijn",
   "pkm.TORKOAL": "Torkoal",
-  "ability_description.SMOKE_SCREEN": "Kanaal ondergronds en verschijnt opnieuw in het midden van het vijandelijke team, waarbij [10,20,40,SP] SPECIAL, BURN en ARMOR_REDUCTION alle aangrenzende eenheden gedurende 2 seconden worden uitgedeeld"
+  "ability_description.SMOKE_SCREEN": "Kanaal ondergronds en verschijnt opnieuw in het midden van het vijandelijke team, waarbij [10,20,40,SP] SPECIAL, BURN en ARMOR_REDUCTION alle aangrenzende eenheden gedurende 2 seconden worden uitgedeeld",
+  "ability.PRESENT": "Cadeau",
+  "pkm.DELIBIRD": "Delivogel",
+  "pkm.IRON_BUNDLE": "IJzeren bundel",
+  "ability_description.PRESENT": "Biedt 100% HP SPECIAL of geneest 100% HP van het doelwit",
+  "yes": "Ja",
+  "no": "Nee",
+  "game-reconnect-modal-title": "Maak opnieuw verbinding met het spel",
+  "game-reconnect-modal-body": "Je hebt een lopende game verlaten. Wil je opnieuw verbinding maken met je vorige game?"
 }

@@ -241,6 +241,7 @@
     "VANILLISH": "Sorboul",
     "VANILLUXE": "Sorbouboul",
     "GLACEON": "Givrali",
+    "LARVESTA": "Pyronille",
     "VOLCARONA": "Pyrax",
     "LANDORUS": "Démétéros",
     "THUNDURUS": "Fulguris",
@@ -601,7 +602,9 @@
     "FURRET": "Fourreau",
     "SENTRET": "Sentret",
     "SPECTRIER": "Spectreval",
-    "TORKOAL": "Torkoal"
+    "TORKOAL": "Torkoal",
+    "DELIBIRD": "Délibird",
+    "IRON_BUNDLE": "Paquet de fer"
   },
   "ability": {
     "PECK": "Picpic",
@@ -807,7 +810,8 @@
     "WATERFALL": "Cascade",
     "PYRO_BALL": "Boule Pyro",
     "WHIRLPOOL": "Tourbillon",
-    "SMOKE_SCREEN": "Écran de fumée"
+    "SMOKE_SCREEN": "Écran de fumée",
+    "PRESENT": "Présent"
   },
   "ability_description": {
     "SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés",
@@ -1013,7 +1017,8 @@
     "WATERFALL": "SHIELD lui-même pour [30,60,120,SP]",
     "PYRO_BALL": "L'utilisateur attaque en allumant une petite pierre et en la lançant comme une boule de feu sur la cible la plus éloignée, infligeant [10,20,40,SP] SPECIAL et BURN pendant 2 secondes tout ce qui se trouve sur son passage.",
     "WHIRLPOOL": "Verrouillez l'ennemi le plus éloigné et déchaînez une grêle de 4 tourbillons vers lui. Chacun inflige 125 % d'ATK PHYSIQUE au premier ennemi touché.",
-    "SMOKE_SCREEN": "Canalisation souterraine et réapparition au milieu de l'équipe ennemie, infligeant [10,20,40,SP] SPECIAL, BURN et ARMOR_REDUCTION à toutes les unités adjacentes pendant 2 secondes."
+    "SMOKE_SCREEN": "Canalisation souterraine et réapparition au milieu de l'équipe ennemie, infligeant [10,20,40,SP] SPECIAL, BURN et ARMOR_REDUCTION à toutes les unités adjacentes pendant 2 secondes.",
+    "PRESENT": "Soit inflige 100 % de HP SPÉCIAL, soit soigne 100 % de HP de la cible"
   },
   "emotion": {
     "Teary-Eyed": "Larmoyant",
@@ -1968,5 +1973,9 @@
   "select_pokemon": "Sélectionnez un pokemon",
   "search_player": "Chercher par nom de joueur...",
   "back_to_my_profile": "Retour à mon profil",
-  "titles_unlocked": "titres débloqués"
+  "titles_unlocked": "titres débloqués",
+  "yes": "Oui",
+  "no": "Non",
+  "game-reconnect-modal-title": "Reconnexion au jeu",
+  "game-reconnect-modal-body": "Vous avez quitté une partie en cours. Voulez-vous vous reconnecter à votre partie précédente ?"
 }

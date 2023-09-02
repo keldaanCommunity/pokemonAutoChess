@@ -425,6 +425,7 @@
   "pkm.VANILLISH": "avainillado",
   "pkm.VANILLUXE": "vanilluxe",
   "pkm.GLACEON": "glaceon",
+  "pkm.LARVESTA": "Larvesta",
   "pkm.VOLCARONA": "Volcarona",
   "pkm.LANDORUS": "Landorus",
   "pkm.THUNDURUS": "trueno",
@@ -1921,5 +1922,13 @@
   "status_description.CHARM": "Impide atacar al objetivo y obliga a acercarse a él.",
   "ability.SMOKE_SCREEN": "Cortina de humo",
   "pkm.TORKOAL": "Torkoal",
-  "ability_description.SMOKE_SCREEN": "Canaliza el subterráneo y reaparece en medio del equipo enemigo, causando [10,20,40,SP] SPECIAL, BURN y ARMOR_REDUCTION a todas las unidades adyacentes durante 2 segundos."
+  "ability_description.SMOKE_SCREEN": "Canaliza el subterráneo y reaparece en medio del equipo enemigo, causando [10,20,40,SP] SPECIAL, BURN y ARMOR_REDUCTION a todas las unidades adyacentes durante 2 segundos.",
+  "ability.PRESENT": "Presente",
+  "pkm.DELIBIRD": "Delibird",
+  "pkm.IRON_BUNDLE": "Paquete de hierro",
+  "ability_description.PRESENT": "O reparte 100% HP ESPECIAL o cura 100% HP del objetivo",
+  "yes": "Sí",
+  "no": "No",
+  "game-reconnect-modal-title": "Vuelve a conectarte al juego",
+  "game-reconnect-modal-body": "Dejaste un juego en progreso. ¿Quieres volver a conectarte a tu juego anterior?"
 }

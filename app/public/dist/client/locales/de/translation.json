@@ -425,6 +425,7 @@
   "pkm.VANILLISH": "Vanillin",
   "pkm.VANILLUXE": "Vanilluxe",
   "pkm.GLACEON": "Glaceon",
+  "pkm.LARVESTA": "Larvesta",
   "pkm.VOLCARONA": "Volcarona",
   "pkm.LANDORUS": "Landorus",
   "pkm.THUNDURUS": "Donnerwetter",
@@ -1921,5 +1922,13 @@
   "status_description.CHARM": "Verhindert den Angriff auf das Ziel und zwingt dazu, sich ihm zu nähern",
   "ability.SMOKE_SCREEN": "Nebelwand",
   "pkm.TORKOAL": "Torkoal",
-  "ability_description.SMOKE_SCREEN": "Kanalisiert den Untergrund und erscheint wieder in der Mitte des gegnerischen Teams, was allen benachbarten Einheiten 2 Sekunden lang [10,20,40,SP] SPECIAL, BURN und ARMOR_REDUCTION zufügt"
+  "ability_description.SMOKE_SCREEN": "Kanalisiert den Untergrund und erscheint wieder in der Mitte des gegnerischen Teams, was allen benachbarten Einheiten 2 Sekunden lang [10,20,40,SP] SPECIAL, BURN und ARMOR_REDUCTION zufügt",
+  "ability.PRESENT": "Gegenwärtig",
+  "pkm.DELIBIRD": "Delibird",
+  "pkm.IRON_BUNDLE": "Eisenbündel",
+  "ability_description.PRESENT": "Verursacht entweder 100 % HP SPECIAL oder heilt 100 % HP des Ziels",
+  "yes": "Ja",
+  "no": "NEIN",
+  "game-reconnect-modal-title": "Stellen Sie die Verbindung zum Spiel wieder her",
+  "game-reconnect-modal-body": "Sie haben ein laufendes Spiel verlassen. Möchten Sie die Verbindung zu Ihrem vorherigen Spiel wiederherstellen?"
 }

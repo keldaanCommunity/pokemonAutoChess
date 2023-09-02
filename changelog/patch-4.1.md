@@ -12,7 +12,7 @@ patch announcement
 
 # New Pokemons:
 
-- Torkoal, Delibird
+- Torkoal, Delibird, Iron Bundle, Larvesta
 
 # Changes to Pokemon
 
@@ -20,6 +20,7 @@ patch announcement
 - Buff Gligar: Tier 2 → 3, HP 130→160, Attack 14→16, Mana 90→75 ; give Poison Heal passive to Gligar
 - Buff Gliscor: Tier 3 → 4, HP 170→200, Attack 18→20, Mana 90→75
 - Nerf Poison Jab damage: 40/80/120 → 30/60/90/120
+- Volcarona: moved from Unique to Epic additional pick
 
 # Changes to Synergies
 
@@ -34,6 +35,7 @@ patch announcement
 
 - Grass heal proc now has an animation
 - Show number of titles unlocked
+- Add a modal to reconnect to previous game from lobby
 
 # Bugfix
 
