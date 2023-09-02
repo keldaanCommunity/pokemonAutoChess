@@ -34,6 +34,7 @@ patch announcement
 # UI
 
 - Grass heal proc now has an animation
+- Show number of titles unlocked
 - Add a modal to reconnect to previous game from lobby
 
 # Bugfix
