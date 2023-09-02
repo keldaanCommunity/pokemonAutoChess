@@ -12,6 +12,7 @@ import Profile from "./profile/profile"
 import GameOptionsModal from "./game/game-options-modal"
 import MetaReport from "./meta-report/meta-report"
 import KeybindInfo from "./keybind-info/keybind-info"
+import TeamBuilder from "./bot-builder/team-builder"
 import { BasicModal } from "./modal/modal"
 import News from "./news/news"
 import { useNews } from "./news/useNews"
@@ -151,6 +152,14 @@ export function MainSidebar(props: MainSidebarProps) {
           handleClick={changeModal}
         >
           {t("meta")}
+        </NavLink>
+
+        <NavLink
+          svg="team-builder"
+          location="team-builder"
+          handleClick={changeModal}
+        >
+          {t("team_builder")}
         </NavLink>
 
         {page !== "game" &&
@@ -300,6 +309,7 @@ export type Modals =
   | "profile"
   | "meta"
   | "wiki"
+  | "team-builder"
   | "collection"
   | "booster"
   | "news"
@@ -320,6 +330,7 @@ function Modals({
   const dispatch = useAppDispatch()
 
   const closeModal = useCallback(() => setModal(undefined), [setModal])
+  const { t } = useTranslation()
 
   useEffect(() => {
     if (searchedUser && modal !== "profile") {
@@ -366,6 +377,12 @@ function Modals({
         show={modal === "keybinds"}
         handleClose={closeModal}
         body={<KeybindInfo />}
+      />
+      <BasicModal
+        show={modal === "team-builder"}
+        handleClose={closeModal}
+        title={t("team_builder")}
+        body={<TeamBuilder />}
       />
       <GameOptionsModal
         show={modal === "options"}

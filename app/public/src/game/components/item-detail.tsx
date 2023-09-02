@@ -10,10 +10,10 @@ import { useTranslation } from "react-i18next"
 
 export function ItemDetailTooltip({
   item,
-  depth
+  depth = 1
 }: {
   item: Item
-  depth: number
+  depth?: number
 }) {
   const { t } = useTranslation()
   const recipes = useMemo(
@@ -92,6 +92,6 @@ export default class ItemDetail extends GameObjects.DOMElement {
     this.dom.className = "nes-container"
     this.setElement(this.dom)
     const root = ReactDOM.createRoot(this.dom)
-    root.render(<ItemDetailTooltip item={name} depth={1} />)
+    root.render(<ItemDetailTooltip item={name} />)
   }
 }

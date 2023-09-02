@@ -1,6 +1,5 @@
 #wiki-page {
   height: 100%;
-  padding-bottom: 24px;
 }
 
 #wiki-page ul {
@@ -16,7 +15,6 @@
 }
 
 #wiki-page > .nes-container {
-  margin: 1em 0;
   color: white;
   background-color: #54596b;
 }

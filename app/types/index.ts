@@ -52,7 +52,7 @@ export type NonFunctionPropNames<T> = {
   [K in keyof T]: T[K] extends Function ? never : K
 }[keyof T]
 
-export type DetailledPkm = { pkm: Pkm; shiny: boolean; emotion: Emotion }
+export type PkmWithConfig = { name: Pkm; shiny?: boolean; emotion?: Emotion }
 
 export type PrecomputedTypePokemon = {
   [key in Synergy]: {

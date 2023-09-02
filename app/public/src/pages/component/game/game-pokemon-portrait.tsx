@@ -98,7 +98,8 @@ export default function GamePokemonPortrait(props: {
         >
           <GamePokemonDetail
             pokemon={pokemonInPortrait}
-            pokemonConfig={pokemonInPortraitConfig}
+            emotion={pokemonInPortraitConfig?.selectedEmotion}
+            shiny={pokemonInPortraitConfig?.selectedShiny}
           />
         </ReactTooltip>
         {willEvolve && pokemonEvolution && (

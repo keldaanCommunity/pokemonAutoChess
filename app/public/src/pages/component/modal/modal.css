@@ -1,14 +1,21 @@
 .basic-modal {
-    width: 100%;
-    max-width: 75vw;
+  width: 100%;
+  max-width: 75vw;
+}
+
+.basic-modal-header {
+  border: 4px solid black;
+  background-color: #54596b;
+  color: white;
 }
 
 .basic-modal-body {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
+  padding: 0;
 }
 
 .hide-bg {
-    background: none;
-    border: none;
+  background: none;
+  border: none;
 }

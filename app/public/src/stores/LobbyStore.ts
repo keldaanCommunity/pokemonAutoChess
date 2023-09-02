@@ -41,7 +41,6 @@ export interface IUserLobbyState {
   metaPokemons: IPokemonsStatistic[]
   pastebinUrl: string
   botData: IBot
-  synergies: [Synergy, number][]
   pokemonCollection: IPokemonConfig[]
   boosterContent: string[]
   suggestions: ISuggestionUser[]
@@ -69,7 +68,6 @@ const initialState: IUserLobbyState = {
   metaItems: [],
   metaPokemons: [],
   pastebinUrl: "",
-  synergies: [],
   botData: {
     steps: [
       {
@@ -289,12 +287,6 @@ export const lobbySlice = createSlice({
     },
     setBotData: (state, action: PayloadAction<IBot>) => {
       state.botData = action.payload
-    },
-    setBotCreatorSynergies: (
-      state,
-      action: PayloadAction<Map<Synergy, number>>
-    ) => {
-      state.synergies = Array.from(action.payload)
     },
     setBoosterContent: (state, action: PayloadAction<string[]>) => {
       state.boosterContent = action.payload

@@ -45,7 +45,10 @@ export function GameAdditionalPokemons() {
                 >
                   <GamePokemonDetail
                     pokemon={pokemon}
-                    pokemonConfig={pokemonCollection.get(pokemon.index)}
+                    emotion={
+                      pokemonCollection.get(pokemon.index)?.selectedEmotion
+                    }
+                    shiny={pokemonCollection.get(pokemon.index)?.selectedShiny}
                   />
                 </ReactTooltip>
                 <img

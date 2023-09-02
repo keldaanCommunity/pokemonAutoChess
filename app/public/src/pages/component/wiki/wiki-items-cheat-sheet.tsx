@@ -13,7 +13,7 @@ const imgStyle: CSS.Properties = {
 }
 
 export default function WikiItemsCheatSheet() {
-  const [itemHovered, setItemHovered] = useState<Item>(null)
+  const [itemHovered, setItemHovered] = useState<Item>()
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <table>
@@ -91,7 +91,7 @@ export default function WikiItemsCheatSheet() {
           id="detail-item"
           className="customeTheme item-detail-tooltip"
         >
-          <ItemDetailTooltip item={itemHovered} depth={1} />
+          <ItemDetailTooltip item={itemHovered} />
         </ReactTooltip>
       )}
     </div>
