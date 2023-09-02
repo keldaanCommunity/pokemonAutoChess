@@ -232,6 +232,7 @@ export const OldPkm: { [key in Pkm]: string } = {
   VANILLISH: "vanillish",
   VANILLUXE: "vanilluxe",
   GLACEON: "glaceon",
+  LARVESTA: "larvesta",
   VOLCARONA: "volcarona",
   LANDORUS: "landorus",
   THUNDURUS: "thundurus",
