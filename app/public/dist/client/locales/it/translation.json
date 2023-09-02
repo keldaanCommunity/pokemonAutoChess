@@ -1922,5 +1922,13 @@
   "status_description.CHARM": "Impedisce di attaccare il bersaglio e costringe ad avvicinarsi ad esso",
   "ability.SMOKE_SCREEN": "Cortina fumogena",
   "pkm.TORKOAL": "Torkoal",
-  "ability_description.SMOKE_SCREEN": "Canalizza sottoterra e riappare al centro della squadra nemica, infliggendo [10,20,40,SP] SPECIAL, BURN e ARMOR_REDUCTION a tutte le unità adiacenti per 2 secondi"
+  "ability_description.SMOKE_SCREEN": "Canalizza sottoterra e riappare al centro della squadra nemica, infliggendo [10,20,40,SP] SPECIAL, BURN e ARMOR_REDUCTION a tutte le unità adiacenti per 2 secondi",
+  "ability.PRESENT": "Presente",
+  "pkm.DELIBIRD": "Delibird",
+  "pkm.IRON_BUNDLE": "Fascio di ferro",
+  "ability_description.PRESENT": "Infligge il 100% di HP SPECIAL o cura il 100% di HP del bersaglio",
+  "yes": "SÌ",
+  "no": "NO",
+  "game-reconnect-modal-title": "Riconnettiti al gioco",
+  "game-reconnect-modal-body": "Hai lasciato una partita in corso. Vuoi riconnetterti al gioco precedente?"
 }

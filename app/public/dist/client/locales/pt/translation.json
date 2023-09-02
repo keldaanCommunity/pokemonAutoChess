@@ -588,7 +588,9 @@
     "FURRET": "Furret",
     "SENTRET": "Sentret",
     "SPECTRIER": "Spectrier",
-    "TORKOAL": "Torkoal"
+    "TORKOAL": "Torkoal",
+    "DELIBIRD": "Delibird",
+    "IRON_BUNDLE": "Pacote de Ferro"
   },
   "emotion": {
     "Teary-Eyed": "Olhos marejados",
@@ -816,7 +818,8 @@
     "WATERFALL": "Cachoeira",
     "PYRO_BALL": "Bola pirotécnica",
     "WHIRLPOOL": "Hidromassagem",
-    "SMOKE_SCREEN": "Cortina de Fumaça"
+    "SMOKE_SCREEN": "Cortina de Fumaça",
+    "PRESENT": "Presente"
   },
   "ability_description": {
     "DEFAULT": "Padrão",
@@ -1022,7 +1025,8 @@
     "WATERFALL": "SHIELD por [30,60,120,SP]",
     "PYRO_BALL": "O usuário ataca acendendo uma pequena pedra e lançando-a como uma bola de fogo no alvo mais distante, distribuindo [10,20,40,SP] ESPECIAL e QUEIMADURA por 2s em tudo que estiver em seu caminho",
     "WHIRLPOOL": "Fixe-se no inimigo mais distante e solte uma saraivada de 4 redemoinhos em direção a ele. Cada um causa 125% de ATQ FÍSICO ao primeiro inimigo atingido",
-    "SMOKE_SCREEN": "Canaliza e reaparece no meio do time inimigo, causando [10,20,40,SP] SPECIAL, BURN e ARMOR_REDUCTION em todas as unidades adjacentes por 2 segundos"
+    "SMOKE_SCREEN": "Canaliza e reaparece no meio do time inimigo, causando [10,20,40,SP] SPECIAL, BURN e ARMOR_REDUCTION em todas as unidades adjacentes por 2 segundos",
+    "PRESENT": "Dá 100% de HP ESPECIAL ou cura 100% de HP do alvo"
   },
   "effect": {
     "INGRAIN": "Inerente",
@@ -1968,5 +1972,9 @@
   "loading_complete": "Carregando completo, aguardando outros jogadores...",
   "back_to_my_profile": "Voltar ao meu perfil",
   "select_pokemon": "Selecione um pokémon",
-  "search_player": "Pesquisar por nome do jogador..."
+  "search_player": "Pesquisar por nome do jogador...",
+  "yes": "Sim",
+  "no": "Não",
+  "game-reconnect-modal-title": "Reconecte-se ao jogo",
+  "game-reconnect-modal-body": "Você saiu de um jogo em andamento. Deseja se reconectar ao jogo anterior?"
 }

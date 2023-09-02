@@ -12,7 +12,7 @@ patch announcement
 
 # New Pokemons:
 
-- Torkoal, Delibird, Larvesta
+- Torkoal, Delibird, Iron Bundle, Larvesta
 
 # Changes to Pokemon
 
