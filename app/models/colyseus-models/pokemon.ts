@@ -7692,6 +7692,29 @@ export class Delibird extends Pokemon {
   }
 }
 
+export class IronBundle extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.IRON_BUNDLE,
+      [Synergy.ICE, Synergy.FLYING, Synergy.ARTIFICIAL],
+      Rarity.UNIQUE,
+      Pkm.DEFAULT,
+      200,
+      16,
+      4,
+      4,
+      1,
+      AttackSprite.ICE_MELEE,
+      3,
+      100,
+      Ability.AURORA_BEAM,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
 export class Lapras extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(

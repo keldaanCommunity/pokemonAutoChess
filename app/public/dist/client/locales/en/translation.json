@@ -813,7 +813,8 @@
     "SENTRET": "Sentret",
     "SPECTRIER": "Spectrier",
     "TORKOAL": "Torkoal",
-    "DELIBIRD": "Delibird"
+    "DELIBIRD": "Delibird",
+    "IRON_BUNDLE": "Iron Bundle"
   },
   "ability_description": {
     "DEFAULT": "Default",
