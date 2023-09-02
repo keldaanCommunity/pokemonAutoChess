@@ -15,7 +15,7 @@ import {
   ISuggestionUser
 } from "../../../types"
 import { IMeta } from "../../../models/mongo-models/meta"
-import { IBot } from "../../../models/mongo-models/bot-v2"
+import { IBot, IStep } from "../../../models/mongo-models/bot-v2"
 import { IItemsStatistic } from "../../../models/mongo-models/items-statistic"
 import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
 import { Synergy } from "../../../types/enum/Synergy"
@@ -69,88 +69,10 @@ const initialState: IUserLobbyState = {
   metaPokemons: [],
   pastebinUrl: "",
   botData: {
-    steps: [
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      }
-    ],
+    steps: Array.from({ length: 31 }, () => ({
+      roundsRequired: 1,
+      board: []
+    })) as IStep[],
     avatar: "ditto",
     author: "",
     elo: 1200,
@@ -326,7 +248,6 @@ export const {
   setPastebinUrl,
   setBotData,
   leaveLobby,
-  setBotCreatorSynergies,
   setSuggestions,
   pushBotLog
 } = lobbySlice.actions

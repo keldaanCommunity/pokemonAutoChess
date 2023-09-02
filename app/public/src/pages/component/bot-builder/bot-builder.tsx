@@ -1,64 +1,42 @@
-import React, { useState } from "react"
-import { Item } from "../../../../../types/enum/Item"
-import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
-import PokemonFactory from "../../../../../models/pokemon-factory"
-import SelectedEntity from "./selected-entity"
-import ModalMenu from "./modal-menu"
-import ItemPicker from "./item-picker"
-import PokemonPicker from "./pokemon-picker"
-import TeamEditor from "./team-editor"
-import ReactTooltip from "react-tooltip"
-import { IBot, IStep } from "../../../../../models/mongo-models/bot-v2"
-import CSS from "csstype"
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { useTranslation } from "react-i18next"
+import { useNavigate } from "react-router"
+import { Navigate } from "react-router-dom"
 import { produce } from "immer"
+import ModalMenu from "./modal-menu"
+import {
+  IBot,
+  IDetailledPokemon
+} from "../../../../../models/mongo-models/bot-v2"
 import { useAppSelector, useAppDispatch } from "../../../hooks"
 import { createBot, requestBotList } from "../../../stores/NetworkStore"
-import { setBotCreatorSynergies } from "../../../stores/LobbyStore"
-import { Synergy } from "../../../../../types/enum/Synergy"
 import { BotGuideButton } from "../buttons/bot-guide-button"
-import {
-  DetailledPkm,
-  Emotion,
-  ModalMode,
-  ReadWriteMode
-} from "../../../../../types"
+import { Emotion, ModalMode } from "../../../../../types"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
-import { useTranslation } from "react-i18next"
-import { DEFAULT_BOT_STATE } from "./bot-logic"
-import Synergies from "../synergy/synergies"
+import {
+  DEFAULT_BOT_STATE,
+  getMaxItemComponents,
+  getNbComponentsOnBoard,
+  getPowerEvaluation,
+  getPowerScore,
+  POWER_AVERAGES,
+  rewriteBotRoundsRequiredto1
+} from "./bot-logic"
+import TeamBuilder from "./team-builder"
+import "./bot-builder.css"
+import ScoreIndicator from "./score-indicator"
+import { max, min } from "../../../../../utils/number"
+import store from "../../../stores"
+import { join } from "../../lobby"
 
-const buttonsStyle: CSS.Properties = {
-  left: "10px",
-  position: "absolute",
-  display: "flex"
-}
-
-const buttonStyle: CSS.Properties = {
-  marginLeft: "10px",
-  marginTop: "10px",
-  marginRight: "10px"
-}
-
-const bottomContainerStyle: CSS.Properties = {
-  display: "flex",
-  width: "87%",
-  position: "absolute",
-  bottom: "0px",
-  right: "0px"
-}
+const MAX_STAGE = 30
 
 export default function BotBuilder() {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
-  const [step, setStep] = useState<number>(0)
-  const [copyStep, setCopyStep] = useState<IStep | undefined>(undefined)
+  const navigate = useNavigate()
+  const [currentStage, setStage] = useState<number>(0)
   const [bot, setBot] = useState<IBot>(DEFAULT_BOT_STATE)
-  const [entity, setEntity] = useState<Item | DetailledPkm>({
-    name: Pkm.DEFAULT,
-    shiny: false,
-    emotion: Emotion.NORMAL
-  })
-  const [mode, setMode] = useState<ReadWriteMode>(ReadWriteMode.WRITE)
   const [modalMode, setModalMode] = useState<ModalMode>(ModalMode.IMPORT)
   const [modalBoolean, setModalBoolean] = useState<boolean>(false)
 
@@ -66,113 +44,48 @@ export default function BotBuilder() {
   const botData: IBot = useAppSelector((state) => state.lobby.botData)
   const bots = useAppSelector((state) => state.lobby.botList)
 
+  useEffect(() => {
+    const onKey = (ev: KeyboardEvent) => {
+      if (ev.key === "ArrowRight") nextStep()
+      if (ev.key === "ArrowLeft") prevStep()
+    }
+    window.addEventListener("keydown", onKey, false)
+    return () => {
+      window.removeEventListener("keydown", onKey, false)
+    }
+  })
+
+  const [toAuth, setToAuth] = useState<boolean>(false)
+  const lobbyJoined = useRef<boolean>(false)
+  useEffect(() => {
+    const client = store.getState().network.client
+    if (!lobbyJoined.current) {
+      join(dispatch, client, setToAuth)
+      lobbyJoined.current = true
+    }
+  }, [lobbyJoined, dispatch])
+
+  if (toAuth) {
+    return <Navigate to={"/"} />
+  }
+
+  const prevStep = useCallback(
+    () => setStage(min(0)(currentStage - 1)),
+    [currentStage]
+  )
+  const nextStep = useCallback(
+    () => setStage(max(MAX_STAGE)(currentStage + 1)),
+    [currentStage]
+  )
+
   if (bots.length === 0) {
     dispatch(requestBotList())
-  }
-
-  function updateSynergies(i: number) {
-    const newSynergies = new Map<Synergy, number>()
-    ;(Object.keys(Synergy) as Synergy[]).forEach((s) => {
-      newSynergies.set(s, 0)
-    })
-    const pokemonNames = new Array<Pkm>()
-    bot.steps[i].board.forEach((pkm) => {
-      const family = PkmFamily[pkm.name]
-      const pkmTypes = PokemonFactory.createPokemonFromName(pkm.name).types
-      if (!pokemonNames.includes(family)) {
-        pokemonNames.push(family)
-        pkmTypes.forEach((type: Synergy) => {
-          const v = newSynergies.get(type)
-          if (v) {
-            newSynergies.set(type, v + 1)
-          } else {
-            newSynergies.set(type, 1)
-          }
-        })
-      }
-    })
-    dispatch(setBotCreatorSynergies(newSynergies))
-  }
-
-  function write(x: number, y: number) {
-    if (Object.values(Pkm).includes((entity as DetailledPkm).name)) {
-      writePokemon(x, y)
-    }
-    if (Object.keys(Item).includes(entity as Item)) {
-      writeItem(x, y)
-    }
-  }
-
-  function writeItem(x: number, y: number) {
-    const potential = bot.steps[step].board.findIndex(
-      (p) => p.x == x && p.y == y
-    )
-    const e = entity as Item
-    if (potential >= 0) {
-      if (bot.steps[step].board[potential].items.length < 3) {
-        setBot(
-          produce((draft) => {
-            draft.steps[step].board[potential].items.push(e)
-          })
-        )
-      } else {
-        setBot(
-          produce((draft) => {
-            draft.steps[step].board[potential].items = [e]
-          })
-        )
-      }
-    }
-  }
-
-  function writePokemon(x: number, y: number) {
-    const potential = bot.steps[step].board.findIndex(
-      (p) => p.x == x && p.y == y
-    )
-    const e = entity as DetailledPkm
-    if (potential >= 0) {
-      setBot(
-        produce((draft) => {
-          draft.steps[step].board[potential].name = e.name
-          draft.steps[step].board[potential].shiny = e.shiny
-          draft.steps[step].board[potential].emotion = e.emotion
-        })
-      )
-    } else {
-      setBot(
-        produce((draft) => {
-          draft.steps[step].board.push({
-            name: e.name,
-            emotion: e.emotion,
-            shiny: e.shiny,
-            x: x,
-            y: y,
-            items: []
-          })
-        })
-      )
-    }
-    updateSynergies(step)
-  }
-
-  function erase(x: number, y: number) {
-    const potential = bot.steps[step].board.findIndex(
-      (p) => p.x == x && p.y == y
-    )
-    if (potential >= 0) {
-      setBot(
-        produce((draft) => {
-          draft.steps[step].board.splice(potential, 1)
-        })
-      )
-    }
   }
 
   function importBot(text: string) {
     try {
       const b: IBot = JSON.parse(text)
-      setBot(b)
-      updateSynergies(step)
+      setBot(rewriteBotRoundsRequiredto1(b))
       setModalBoolean(false)
     } catch (e) {
       alert(e)
@@ -183,13 +96,37 @@ export default function BotBuilder() {
     dispatch(createBot(bot))
   }
 
-  const synergies = useAppSelector((state) => state.lobby.synergies)
+  function updateStep(board: IDetailledPokemon[]) {
+    bot.steps[currentStage].board = board
+    setBot({ ...bot })
+  }
+
+  const board = useMemo(
+    () => bot.steps[currentStage]?.board ?? [],
+    [bot, currentStage]
+  )
+  const nbComponentsOnBoard = useMemo(
+    () => getNbComponentsOnBoard(board),
+    [board]
+  )
+  const nbMaxComponentsOnBoard = useMemo(
+    () => getMaxItemComponents(currentStage),
+    [currentStage]
+  )
+  const powerScore = useMemo(() => getPowerScore(board), [board])
+  const powerEvaluation = useMemo(
+    () => getPowerEvaluation(powerScore, currentStage),
+    [board, currentStage]
+  )
 
   return (
-    <div className="bot-panel">
-      <div className="header" style={buttonsStyle}>
+    <div id="bot-builder">
+      <header>
+        <button onClick={() => navigate("/lobby")} className="bubbly blue">
+          {t("back_to_lobby")}
+        </button>
+        <div className="spacer"></div>
         <button
-          style={buttonStyle}
           onClick={() => {
             setModalMode(ModalMode.IMPORT)
             setModalBoolean(true)
@@ -199,7 +136,6 @@ export default function BotBuilder() {
           {t("import")}/{t("load")}
         </button>
         <button
-          style={buttonStyle}
           onClick={() => {
             setModalMode(ModalMode.EXPORT)
             setModalBoolean(true)
@@ -209,118 +145,42 @@ export default function BotBuilder() {
           {t("export")}
         </button>
         <BotGuideButton />
-        <button
-          style={buttonStyle}
-          onClick={() =>
-            setMode(
-              mode == ReadWriteMode.WRITE
-                ? ReadWriteMode.ERASE
-                : ReadWriteMode.WRITE
-            )
+      </header>
+      <div className="step-info nes-container">
+        <div className="step-control">
+          <button onClick={prevStep} disabled={currentStage <= 0}>
+            <img src="assets/ui/arrow-left.svg" alt="←" />
+          </button>
+          <span>
+            {t("stage")} {currentStage}
+          </span>
+          <button onClick={nextStep} disabled={currentStage >= MAX_STAGE}>
+            <img src="assets/ui/arrow-right.svg" alt="→" />
+          </button>
+        </div>
+        <span
+          className={
+            nbComponentsOnBoard > nbMaxComponentsOnBoard ? "invalid" : "valid"
           }
-          className="bubbly green"
-          data-tip
-          data-for={"mode"}
         >
-          {mode} {t("mode")}
-          <ReactTooltip id={"mode"} className="customeTheme" place="bottom">
-            <p>{t("current_edition_click")}</p>
-            <p>{t("write_mode_hint")}</p>
-            <p> {t("erase_mode_hint")}</p>
-          </ReactTooltip>
-        </button>
-        <button
-          style={buttonStyle}
-          onClick={() => {
-            setCopyStep(JSON.parse(JSON.stringify(bot.steps[step])))
-          }}
-          className="bubbly green"
-          data-tip
-          data-for={"copy"}
-        >
-          <ReactTooltip id={"copy"} className="customeTheme" place="bottom">
-            <p>{t("copy_current_step")}</p>
-            <p> {t("paste_current_step")}</p>
-          </ReactTooltip>
-          {t("copy_step")}
-        </button>
-        <button
-          style={buttonStyle}
-          onClick={() => {
-            if (copyStep) {
-              setBot(
-                produce((draft) => {
-                  draft.steps[step] = copyStep
-                })
-              )
-            }
-          }}
-          className="bubbly green"
-          data-tip
-          data-for={"paste"}
-        >
-          <ReactTooltip id={"paste"} className="customeTheme" place="bottom">
-            <p>{t("paste_current_step_click")}</p>
-            <p>{t("paste_current_step_hint")}</p>
-          </ReactTooltip>
-          {t("paste_step")}
-        </button>
+          {t("item_components")}: {nbComponentsOnBoard} /{" "}
+          {nbMaxComponentsOnBoard}
+        </span>
+        <span>
+          {t("board_power")}: {powerScore}
+        </span>
+        <div>
+          <ScoreIndicator value={powerEvaluation} />
+        </div>
       </div>
-      <Synergies synergies={synergies} />
-      <TeamEditor
-        step={step}
-        steps={bot.steps}
+      <TeamBuilder
         avatar={bot.avatar}
         author={bot.author}
+        board={board}
+        updateBoard={updateStep}
         name={bot.name}
-        elo={bot.elo}
-        handleTabClick={(i: number) => {
-          updateSynergies(i)
-          setStep(i)
-        }}
-        handleEditorClick={(x, y) => {
-          mode == ReadWriteMode.WRITE ? write(x, y) : erase(x, y)
-        }}
-        handleEloChange={(e) => {
-          const v = parseInt(e.target.value)
-          if (!isNaN(v)) {
-            setBot(
-              produce((draft) => {
-                draft.elo = v
-              })
-            )
-          }
-        }}
-        handleAuthorChange={(e) => {
-          setBot(
-            produce((draft) => {
-              draft.author = e.target.value
-            })
-          )
-        }}
-        handleAvatarChange={(e) =>
-          setBot(
-            produce((draft) => {
-              draft.name = e.target.value
-              draft.avatar = `${PkmIndex[e.target.value]}/${Emotion.NORMAL}`
-            })
-          )
-        }
-        handleRoundsRequiredChange={(e) =>
-          setBot(
-            produce((draft) => {
-              const v = parseInt(e.target.value)
-              draft.steps[step].roundsRequired = v
-            })
-          )
-        }
+        elo={bot.elo}        
       />
-      <SelectedEntity entity={entity} selectEntity={setEntity} />
-
-      <div style={bottomContainerStyle}>
-        <ItemPicker selectEntity={setEntity} />
-        <PokemonPicker selectEntity={setEntity} />
-      </div>
 
       <ModalMenu
         modalBoolean={modalBoolean}

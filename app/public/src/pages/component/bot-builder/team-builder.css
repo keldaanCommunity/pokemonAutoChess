@@ -7,11 +7,11 @@
   gap: 5px;
   height: 75vh;
   overflow-y: auto;
-  border-radius: 0 0 12px 12px;
 }
 
 .basic-modal-body > #team-builder {
   margin-top: -4px;
+  border-radius: 0 0 12px 12px;
 }
 
 #team-builder .synergies-container {
@@ -67,6 +67,7 @@
 
 #selected-entity {
   grid-area: selected;
+  align-self: start;
 }
 
 #selected-entity fieldset {

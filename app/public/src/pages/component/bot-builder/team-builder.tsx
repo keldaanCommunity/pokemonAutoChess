@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 import { Item } from "../../../../../types/enum/Item"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import PokemonFactory from "../../../../../models/pokemon-factory"
@@ -13,14 +13,26 @@ import Synergies from "../synergy/synergies"
 import "./team-builder.css"
 import { computeSynergies } from "../../../../../models/colyseus-models/synergies"
 
-export default function TeamBuilder() {
+export default function TeamBuilder(props: {
+  board: IDetailledPokemon[]
+  updateBoard?: (board: IDetailledPokemon[]) => void
+}) {
   const [selection, setSelection] = useState<Item | PkmWithConfig>({
-    name: Pkm.DEFAULT,
+    name: Pkm.MAGIKARP,
     shiny: false,
     emotion: Emotion.NORMAL
   })
 
-  const [board, setBoard] = useState<IDetailledPokemon[]>([])
+  const [board, setBoard] = useState<IDetailledPokemon[]>(props.board ?? [])
+  useEffect(() => {
+    if (props.board) setBoard(props.board) // keep local state in sync with parent prop
+  }, [props.board])
+
+  function updateBoard(board) {
+    if (props.updateBoard) props.updateBoard(board)
+    else setBoard(board)
+  }
+
   const [selectedPokemon, setSelectedPokemon] = useState<IDetailledPokemon>()
 
   const synergies: [Synergy, number][] = useMemo(() => {
@@ -46,7 +58,7 @@ export default function TeamBuilder() {
     if (i >= 0) board.splice(i, 1)
     const newPokemon: IDetailledPokemon = { ...pkm, x, y, items: [] }
     setSelectedPokemon(newPokemon)
-    setBoard([...board, newPokemon])
+    updateBoard([...board, newPokemon])
   }
 
   function addItem(x: number, y: number, item: Item) {
@@ -56,13 +68,13 @@ export default function TeamBuilder() {
     } else if (p && p.items.length >= 3) {
       p.items = [item]
     }
-    setBoard([...board])
+    updateBoard([...board])
   }
 
   function handleEditorClick(x: number, y: number, rightClick: boolean) {
     const pokemonOnCell = board.find((p) => p.x === x && p.y === y)
     if (rightClick) {
-      setBoard(board.filter((p) => p !== pokemonOnCell))
+      updateBoard(board.filter((p) => p !== pokemonOnCell))
       if (
         selectedPokemon &&
         selectedPokemon.x === x &&
@@ -87,7 +99,7 @@ export default function TeamBuilder() {
       if (pkm) {
         pkm.x = x
         pkm.y = y
-        setBoard([...board])
+        updateBoard([...board])
       }
     } else if (e.dataTransfer.getData("pokemon") != "") {
       const pkm: PkmWithConfig = {
@@ -109,7 +121,7 @@ export default function TeamBuilder() {
     if (selectedPokemon != null) {
       selectedPokemon.emotion = pkm.emotion
       selectedPokemon.shiny = pkm.shiny
-      setBoard([...board])
+      updateBoard([...board])
     }
   }
 

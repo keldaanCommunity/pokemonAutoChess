@@ -16,7 +16,7 @@ export default function SelectedEntity(props: {
   const { t } = useTranslation()
   if (Object.keys(Item).includes(props.entity as Item)) {
     return (
-      <div className="nes-container">
+      <div id="selected-entity" className="nes-container">
         <ItemDetailTooltip item={props.entity as Item} />
       </div>
     )

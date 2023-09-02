@@ -9,7 +9,6 @@ export function BotGuideButton() {
   }
   return (
     <button
-      style={{ marginTop: "10px" }}
       type="button"
       className="bubbly"
       onClick={() => {

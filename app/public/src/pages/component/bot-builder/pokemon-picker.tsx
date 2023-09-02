@@ -16,7 +16,9 @@ export default function PokemonPicker(props: {
 }) {
   const tabs = [...Object.keys(PRECOMPUTED_TYPE_POKEMONS_ALL), "none"]
   const pokemonsPerTab = tabs.map((t) =>
-    t === "none" ? [Pkm.KECLEON, Pkm.ARCEUS] : PRECOMPUTED_TYPE_POKEMONS_ALL[t]
+    t === "none"
+      ? [Pkm.KECLEON, Pkm.ARCEUS]
+      : PRECOMPUTED_TYPE_POKEMONS_ALL[t].filter((p) => p !== Pkm.DEFAULT)
   )
   const [hoveredPokemon, setHoveredPokemon] = useState<Pkm>()
 

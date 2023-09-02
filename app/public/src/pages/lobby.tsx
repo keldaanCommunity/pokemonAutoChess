@@ -135,7 +135,7 @@ function MainLobby({ toPreparation, setToPreparation }) {
   )
 }
 
-async function join(
+export async function join(
   dispatch,
   client: Client,
   setToAuth: Dispatch<SetStateAction<boolean>>

@@ -1,0 +1,56 @@
+#bot-builder {
+  color: white;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  height: 100vh;
+}
+
+#bot-builder header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  gap: 1em;
+}
+
+#bot-builder .step-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 1440px;
+  margin: 0 auto;
+}
+
+#bot-builder .step-control {
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  width: 320px;
+}
+
+#bot-builder .step-control button {
+  background-color: #4f5160;
+}
+
+#bot-builder button[disabled] {
+  opacity: 0.5;
+}
+
+#bot-builder .step-control img {
+  height: 48px;
+}
+
+#bot-builder .step-control span {
+  flex: 1;
+  white-space: nowrap;
+  text-align: center;
+}
+
+#bot-builder #team-builder {
+  flex: 1;
+}
+
+#bot-builder .invalid {
+  color: red;
+}

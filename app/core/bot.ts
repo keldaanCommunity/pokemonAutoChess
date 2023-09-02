@@ -31,13 +31,7 @@ export default class Bot {
   }
 
   updateProgress() {
-    if (this.player.getLastBattleResult() == BattleResult.DEFEAT) {
-      this.progress += 1
-    } else if (this.player.getLastBattleResult() == BattleResult.DRAW) {
-      this.progress += 1
-    } else if (this.player.getLastBattleResult() == BattleResult.WIN) {
-      this.progress += 1.5
-    }
+    this.progress += 1
 
     if (
       this.scenario &&
