@@ -13628,7 +13628,7 @@ export class Vespiqueen extends Pokemon {
       [Synergy.BUG, Synergy.FLORA],
       Rarity.EPIC,
       Pkm.DEFAULT,
-      250,
+      210,
       20,
       4,
       4,
