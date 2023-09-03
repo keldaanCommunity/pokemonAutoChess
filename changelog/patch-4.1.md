@@ -27,7 +27,7 @@ patch announcement
 - Nerf Ludicolo: Attack 26 → 22
 - Nerf Genesect: HP: 220 → 200, Mana 70 → 80
 - Nerf Lock-On: Duration 8 → 4 seconds
-
+- Nerf Houdour: HP: 90 → 85 ; Houndour Line Mana 120 → 125
 
 # Changes to Synergies
 
