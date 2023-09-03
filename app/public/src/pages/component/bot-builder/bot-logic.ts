@@ -7,6 +7,7 @@ import PokemonFactory from "../../../../../models/pokemon-factory"
 import { Rarity } from "../../../../../types/enum/Game"
 import { BasicItems, Item } from "../../../../../types/enum/Item"
 import { PkmIndex, Pkm, PkmDuos } from "../../../../../types/enum/Pokemon"
+import { logger } from "../../../../../utils/logger"
 import { clamp, min } from "../../../../../utils/number"
 
 export const MAX_BOTS_STAGE = 30
@@ -111,7 +112,7 @@ export function getCategory(pkm: Pkm): string {
 Object.values(Pkm).forEach((pkm) => {
   const c = getCategory(pkm)
   if (c in POWER_SCORE_BY_CATEGORY === false) {
-    console.warn(`Couldn't find power category for ${pkm}: ${c}`)
+    logger.warn(`Couldn't find power category for ${pkm}: ${c}`)
   }
 })
 
