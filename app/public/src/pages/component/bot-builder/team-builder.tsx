@@ -19,9 +19,10 @@ import BotAvatar from "./bot-avatar"
 
 export default function TeamBuilder(props: {
   bot?: IBot
-  setBot?: React.Dispatch<React.SetStateAction<IBot>>
+  onChangeAvatar?: (pkm: PkmWithConfig) => void
   board: IDetailledPokemon[]
   updateBoard?: (board: IDetailledPokemon[]) => void
+  error?: string
 }) {
   const [selection, setSelection] = useState<Item | PkmWithConfig>({
     name: Pkm.MAGIKARP,
@@ -131,6 +132,16 @@ export default function TeamBuilder(props: {
     }
   }
 
+  function changeAvatar() {
+    if (
+      selection &&
+      props.onChangeAvatar &&
+      Object.values(Pkm).includes((selection as PkmWithConfig).name)
+    ) {
+      props.onChangeAvatar(selection as PkmWithConfig)
+    }
+  }
+
   return (
     <div id="team-builder" className="nes-container">
       <Synergies synergies={synergies} />
@@ -142,9 +153,14 @@ export default function TeamBuilder(props: {
       <SelectedEntity entity={selection} onChange={updateSelectedPokemon} />
       <ItemPicker selectEntity={setSelection} />
       <PokemonPicker selectEntity={setSelection} />
-      {props.bot && props.setBot && (
-        <BotAvatar bot={props.bot} setBot={props.setBot} selection={selection} />
+      {props.bot && props.onChangeAvatar && (
+        <BotAvatar
+          bot={props.bot}
+          onChangeAvatar={props.onChangeAvatar}
+          onClick={changeAvatar}
+        />
       )}
+      {props.error && <p className="error">{props.error}</p>}
     </div>
   )
 }

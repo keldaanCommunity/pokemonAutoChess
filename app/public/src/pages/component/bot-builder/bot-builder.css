@@ -54,3 +54,10 @@
 #bot-builder .invalid {
   color: red;
 }
+
+#bot-builder .error {
+  position: absolute;
+  left: 50%;
+  color: red;
+  transform: translateX(-50%);
+}

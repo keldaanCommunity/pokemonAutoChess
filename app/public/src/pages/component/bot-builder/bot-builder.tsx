@@ -9,8 +9,7 @@ import {
 } from "../../../../../models/mongo-models/bot-v2"
 import { useAppSelector, useAppDispatch } from "../../../hooks"
 import { createBot, requestBotList } from "../../../stores/NetworkStore"
-import { BotGuideButton } from "../buttons/bot-guide-button"
-import { ModalMode } from "../../../../../types"
+import { ModalMode, PkmWithConfig } from "../../../../../types"
 import {
   DEFAULT_BOT_STATE,
   estimateElo,
@@ -19,7 +18,8 @@ import {
   getPowerEvaluation,
   getPowerScore,
   MAX_BOTS_STAGE,
-  rewriteBotRoundsRequiredto1
+  rewriteBotRoundsRequiredto1,
+  validateBoard
 } from "./bot-logic"
 import TeamBuilder from "./team-builder"
 import "./bot-builder.css"
@@ -28,6 +28,8 @@ import { max, min } from "../../../../../utils/number"
 import store from "../../../stores"
 import { join } from "../../lobby"
 import DiscordButton from "../buttons/discord-button"
+import { getAvatarString } from "../../../utils"
+import { PkmIndex } from "../../../../../types/enum/Pokemon"
 
 export default function BotBuilder() {
   const { t } = useTranslation()
@@ -37,10 +39,12 @@ export default function BotBuilder() {
   const [bot, setBot] = useState<IBot>(DEFAULT_BOT_STATE)
   const [modalMode, setModalMode] = useState<ModalMode>(ModalMode.IMPORT)
   const [modalBoolean, setModalBoolean] = useState<boolean>(false)
+  const [violation, setViolation] = useState<string>()
 
   const pastebinUrl: string = useAppSelector((state) => state.lobby.pastebinUrl)
   const botData: IBot = useAppSelector((state) => state.lobby.botData)
   const bots = useAppSelector((state) => state.lobby.botList)
+  const displayName = useAppSelector((state) => state.lobby.user?.name)
 
   useEffect(() => {
     const onKey = (ev: KeyboardEvent) => {
@@ -90,14 +94,27 @@ export default function BotBuilder() {
     }
   }
 
+  function changeAvatar(pkm: PkmWithConfig) {
+    bot.name = pkm.name.toUpperCase()
+    bot.avatar = getAvatarString(PkmIndex[pkm.name], pkm.shiny, pkm.emotion)
+    completeBotInfo()
+  }
+
+  function completeBotInfo() {
+    setBot({
+      ...bot,
+      author: displayName ?? "Anonymous",
+      elo: estimateElo(bot)
+    })
+  }
+
   function create() {
     dispatch(createBot(bot))
   }
 
   function updateStep(board: IDetailledPokemon[]) {
     bot.steps[currentStage].board = board
-    bot.elo = estimateElo(bot)
-    setBot({ ...bot })
+    completeBotInfo()
   }
 
   const board = useMemo(
@@ -118,6 +135,17 @@ export default function BotBuilder() {
     [board, currentStage]
   )
 
+  useEffect(() => {
+    setViolation(undefined)
+    try {
+      validateBoard(board, currentStage)
+    } catch (err: any) {
+      if (err instanceof Error) {
+        setViolation(err.message)
+      }
+    }
+  }, [board, currentStage])
+
   return (
     <div id="bot-builder">
       <header>
@@ -136,6 +164,7 @@ export default function BotBuilder() {
         </button>
         <button
           onClick={() => {
+            completeBotInfo()
             setModalMode(ModalMode.EXPORT)
             setModalBoolean(true)
           }}
@@ -174,9 +203,10 @@ export default function BotBuilder() {
       </div>
       <TeamBuilder
         bot={bot}
-        setBot={setBot}
+        onChangeAvatar={changeAvatar}
         board={board}
         updateBoard={updateStep}
+        error={violation}
       />
 
       <ModalMenu

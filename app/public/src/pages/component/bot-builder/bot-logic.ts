@@ -130,8 +130,8 @@ export function getPowerEvaluation(powerScore: number, stage: number) {
   )
 }
 
-export function getMaxItemComponents(step: number): number {
-  if (step === 0) return 0
+export function getMaxItemComponents(stage: number): number {
+  if (stage === 0) return 0
   /*
   Stage 4 = 3 full items 
   Stage 11 = 4 full items 
@@ -140,7 +140,7 @@ export function getMaxItemComponents(step: number): number {
   Stage 26 = 7 full items 
   Stage 31 = 8 full items 
   */
-  return (step >= 4 ? 3 : step) * 2 + Math.floor(min(0)(step - 6) / 5) * 2
+  return (stage >= 4 ? 3 : stage) * 2 + Math.floor(min(0)(stage - 6) / 5) * 2
 }
 
 export function getNbComponentsOnBoard(board: IDetailledPokemon[]): number {
@@ -186,4 +186,39 @@ export function estimateElo(bot: IBot): number {
   if (averageScore < 80) return 1200
   if (averageScore < 90) return 1300
   return 1400
+}
+
+export function validateBoard(board: IDetailledPokemon[], stage: number) {
+  const team = board.map((p) => PokemonFactory.createPokemonFromName(p.name))
+  const items = getNbComponentsOnBoard(board)
+  const maxItems = getMaxItemComponents(stage)
+
+  const uniques = team.filter((p) => p.rarity === Rarity.UNIQUE)
+  const legendaries = team.filter((p) => p.rarity === Rarity.LEGENDARY)
+  const mythicals = team.filter((p) => p.rarity === Rarity.MYTHICAL)
+
+  if (stage < 11 && uniques.length > 0) {
+    throw new Error(`Unique Pokemons can't be played before stage 11`)
+  }
+  if (stage < 21 && legendaries.length > 0) {
+    throw new Error(`Legendary Pokemons can't be played before stage 21`)
+  }
+  if (stage < 21 && mythicals.length > 0) {
+    throw new Error(`Mythical Pokemons can't be played before stage 21`)
+  }
+  if (uniques.length > 1) {
+    throw new Error(`Only one Unique Pokemon can be played`)
+  }
+  if (legendaries.length > 1) {
+    throw new Error(`Only one Legendary Pokemon can be played`)
+  }
+  if (mythicals.length > 1) {
+    throw new Error(`Only one Mythical Pokemon can be played`)
+  }
+  if (team.length > 9) {
+    throw new Error(`Maximum 9 Pokemon can be played in a team`)
+  }
+  if (items > maxItems) {
+    throw new Error(`Too many item components are used at this stage`)
+  }
 }
