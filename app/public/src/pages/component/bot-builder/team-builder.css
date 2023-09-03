@@ -22,6 +22,7 @@
   grid-area: board;
   display: grid;
   place-content: center;
+  position: relative;
 }
 
 #team-editor table {
@@ -97,9 +98,6 @@
 
 #pokemon-picker {
   grid-area: pokemons;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: start;
 }
 
 #pokemon-picker img.pokemon {
@@ -107,4 +105,34 @@
   height: 40px;
   image-rendering: pixelated;
   cursor: var(--cursor-hover);
+}
+
+#pokemon-picker .react-tabs__tab {
+  padding: 4px 8px;
+  text-align: center;
+  vertical-align: bottom;
+  min-width: 40px;
+  line-height: 40px;
+  font-size: 1.5rem;
+}
+
+#pokemon-picker .react-tabs__tab img {
+  display: block;
+}
+
+#bot-info {
+  position: absolute;
+  top: 4px;
+  left: 280px;
+}
+
+#bot-info .bot-avatar {
+  width: 80px;
+  height: 80px;
+  border: 4px solid black;
+  border-radius: 8px;
+}
+
+#bot-info p {
+  margin: 0;
 }

@@ -6,14 +6,20 @@ import SelectedEntity from "./selected-entity"
 import ItemPicker from "./item-picker"
 import PokemonPicker from "./pokemon-picker"
 import TeamEditor from "./team-editor"
-import { IDetailledPokemon } from "../../../../../models/mongo-models/bot-v2"
+import {
+  IBot,
+  IDetailledPokemon
+} from "../../../../../models/mongo-models/bot-v2"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { PkmWithConfig, Emotion } from "../../../../../types"
 import Synergies from "../synergy/synergies"
 import "./team-builder.css"
 import { computeSynergies } from "../../../../../models/colyseus-models/synergies"
+import BotAvatar from "./bot-avatar"
 
 export default function TeamBuilder(props: {
+  bot?: IBot
+  setBot?: React.Dispatch<React.SetStateAction<IBot>>
   board: IDetailledPokemon[]
   updateBoard?: (board: IDetailledPokemon[]) => void
 }) {
@@ -136,6 +142,9 @@ export default function TeamBuilder(props: {
       <SelectedEntity entity={selection} onChange={updateSelectedPokemon} />
       <ItemPicker selectEntity={setSelection} />
       <PokemonPicker selectEntity={setSelection} />
+      {props.bot && props.setBot && (
+        <BotAvatar bot={props.bot} setBot={props.setBot} selection={selection} />
+      )}
     </div>
   )
 }

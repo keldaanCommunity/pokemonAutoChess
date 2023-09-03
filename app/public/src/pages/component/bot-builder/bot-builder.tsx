@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router"
 import { Navigate } from "react-router-dom"
-import { produce } from "immer"
 import ModalMenu from "./modal-menu"
 import {
   IBot,
@@ -11,15 +10,15 @@ import {
 import { useAppSelector, useAppDispatch } from "../../../hooks"
 import { createBot, requestBotList } from "../../../stores/NetworkStore"
 import { BotGuideButton } from "../buttons/bot-guide-button"
-import { Emotion, ModalMode } from "../../../../../types"
-import { PkmIndex } from "../../../../../types/enum/Pokemon"
+import { ModalMode } from "../../../../../types"
 import {
   DEFAULT_BOT_STATE,
+  estimateElo,
   getMaxItemComponents,
   getNbComponentsOnBoard,
   getPowerEvaluation,
   getPowerScore,
-  POWER_AVERAGES,
+  MAX_BOTS_STAGE,
   rewriteBotRoundsRequiredto1
 } from "./bot-logic"
 import TeamBuilder from "./team-builder"
@@ -28,8 +27,6 @@ import ScoreIndicator from "./score-indicator"
 import { max, min } from "../../../../../utils/number"
 import store from "../../../stores"
 import { join } from "../../lobby"
-
-const MAX_STAGE = 30
 
 export default function BotBuilder() {
   const { t } = useTranslation()
@@ -74,7 +71,7 @@ export default function BotBuilder() {
     [currentStage]
   )
   const nextStep = useCallback(
-    () => setStage(max(MAX_STAGE)(currentStage + 1)),
+    () => setStage(max(MAX_BOTS_STAGE)(currentStage + 1)),
     [currentStage]
   )
 
@@ -98,6 +95,7 @@ export default function BotBuilder() {
 
   function updateStep(board: IDetailledPokemon[]) {
     bot.steps[currentStage].board = board
+    bot.elo = estimateElo(bot)
     setBot({ ...bot })
   }
 
@@ -154,7 +152,7 @@ export default function BotBuilder() {
           <span>
             {t("stage")} {currentStage}
           </span>
-          <button onClick={nextStep} disabled={currentStage >= MAX_STAGE}>
+          <button onClick={nextStep} disabled={currentStage >= MAX_BOTS_STAGE}>
             <img src="assets/ui/arrow-right.svg" alt="→" />
           </button>
         </div>
@@ -174,12 +172,10 @@ export default function BotBuilder() {
         </div>
       </div>
       <TeamBuilder
-        avatar={bot.avatar}
-        author={bot.author}
+        bot={bot}
+        setBot={setBot}
         board={board}
         updateBoard={updateStep}
-        name={bot.name}
-        elo={bot.elo}        
       />
 
       <ModalMenu

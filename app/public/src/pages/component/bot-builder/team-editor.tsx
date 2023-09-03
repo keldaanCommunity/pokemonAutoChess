@@ -8,8 +8,8 @@ export default function TeamEditor(props: {
   handleEditorClick: (x: number, y: number, rightClick: boolean) => void
   handleDrop: (x: number, y: number, e: React.DragEvent) => void
 }) {
-  function handleOnDragStart(e: React.DragEvent, p: IDetailledPokemon){
-    e.dataTransfer.setData("cell", [p.x,p.y].join(","))
+  function handleOnDragStart(e: React.DragEvent, p: IDetailledPokemon) {
+    e.dataTransfer.setData("cell", [p.x, p.y].join(","))
   }
 
   function handleOnDragOver(e: React.DragEvent) {
@@ -75,7 +75,7 @@ export default function TeamEditor(props: {
             )
           })}
         </tbody>
-      </table>
+      </table>      
     </div>
   )
 }

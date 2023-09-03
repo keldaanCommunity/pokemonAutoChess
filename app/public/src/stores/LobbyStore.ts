@@ -18,10 +18,10 @@ import { IMeta } from "../../../models/mongo-models/meta"
 import { IBot, IStep } from "../../../models/mongo-models/bot-v2"
 import { IItemsStatistic } from "../../../models/mongo-models/items-statistic"
 import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
-import { Synergy } from "../../../types/enum/Synergy"
 import { IPokemonsStatistic } from "../../../models/mongo-models/pokemons-statistic"
 import { playSound, SOUNDS } from "../pages/utils/audio"
 import { Language } from "../../../types/enum/Language"
+import { MAX_BOTS_STAGE } from "../pages/component/bot-builder/bot-logic"
 
 export interface IUserLobbyState {
   botLogDatabase: string[]
@@ -69,7 +69,7 @@ const initialState: IUserLobbyState = {
   metaPokemons: [],
   pastebinUrl: "",
   botData: {
-    steps: Array.from({ length: 31 }, () => ({
+    steps: Array.from({ length: MAX_BOTS_STAGE + 1 }, () => ({
       roundsRequired: 1,
       board: []
     })) as IStep[],

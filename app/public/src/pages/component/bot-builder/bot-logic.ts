@@ -9,12 +9,14 @@ import { BasicItems, Item } from "../../../../../types/enum/Item"
 import { PkmIndex, Pkm, PkmDuos } from "../../../../../types/enum/Pokemon"
 import { clamp, min } from "../../../../../utils/number"
 
+export const MAX_BOTS_STAGE = 30
+
 export const DEFAULT_BOT_STATE = {
-  steps: Array.from({ length: 31 }, () => ({
+  steps: Array.from({ length: MAX_BOTS_STAGE + 1 }, () => ({
     roundsRequired: 1,
     board: []
   })) as IStep[],
-  avatar: PkmIndex[Pkm.DITTO],
+  avatar: PkmIndex[Pkm.DITTO] + "/Normal",
   author: "",
   elo: 1200,
   name: Pkm.DITTO,
@@ -64,6 +66,28 @@ export const POWER_AVERAGES = [
   2, 3, 3.5, 4, 4.5, 5, 6, 7, 8, 9, 11, 11.5, 12, 13, 14, 15, 16, 17, 18, 19,
   24, 25, 25.5, 26, 27, 27.5, 28, 28.5, 29, 29.5, 30
 ]
+
+export const BOT_SCORES = {
+  INCOMPLETE: { label: "Incomplete", color: "#999" },
+  VERY_EASY: { label: "Very Easy", color: "#109fff" },
+  EASY: { label: "Easy", color: "#92cc41" },
+  MEDIUM: { label: "Medium", color: "yellow" },
+  HARD: { label: "Hard", color: "#f7d51d" },
+  VERY_HARD: { label: "Very Hard", color: "#e76e55" },
+  ILLEGAL: { label: "Illegal", color: "#761c1e" }
+}
+
+export function getBotScore(value: number) {
+  let score = BOT_SCORES.INCOMPLETE
+  if (value < 10) score = BOT_SCORES.INCOMPLETE
+  else if (value < 26) score = BOT_SCORES.VERY_EASY
+  else if (value < 42) score = BOT_SCORES.EASY
+  else if (value < 58) score = BOT_SCORES.MEDIUM
+  else if (value < 74) score = BOT_SCORES.HARD
+  else if (value < 90) score = BOT_SCORES.VERY_HARD
+  else score = BOT_SCORES.ILLEGAL
+  return score
+}
 
 export function getCategory(pkm: Pkm): string {
   const p = PokemonFactory.createPokemonFromName(pkm)
@@ -142,4 +166,24 @@ export function rewriteBotRoundsRequiredto1(bot: IBot) {
   })
   bot.steps = oneSteps
   return bot
+}
+
+export function estimateElo(bot: IBot): number {
+  const averageScore =
+    bot.steps
+      .map((step, stage) =>
+        getPowerEvaluation(getPowerScore(step.board), stage)
+      )
+      .reduce((total, score) => total + score, 0) / bot.steps.length
+
+  if (averageScore < 10) return 500
+  if (averageScore < 20) return 600
+  if (averageScore < 30) return 700
+  if (averageScore < 40) return 800
+  if (averageScore < 50) return 900
+  if (averageScore < 60) return 1000
+  if (averageScore < 70) return 1100
+  if (averageScore < 80) return 1200
+  if (averageScore < 90) return 1300
+  return 1400
 }
