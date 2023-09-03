@@ -28,6 +28,7 @@ patch announcement
 - Nerf Genesect: HP: 220 → 200, Mana 70 → 80
 - Nerf Lock-On: Duration 8 → 4 seconds
 - Nerf Houdour: HP: 90 → 85 ; Houndour Line Mana 120 → 125
+- Nerf Forretress: HP 210 → 200 ; Spe def 5 → 3 ; Mana 80 → 120
 
 # Changes to Synergies
 
