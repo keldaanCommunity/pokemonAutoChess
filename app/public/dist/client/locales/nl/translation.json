@@ -861,7 +861,7 @@
   "ability_description.FIRE_TRICK": "Breng [20,40,80,SP] SPECIAL toe aan het doelwit en teleporteer hen naar een hoek van het slagveld",
   "ability_description.FLAME_CHARGE": "Ren naar de achterkant van het vijandelijke team en breng [30,60,120,SP] SPECIAL toe aan alle geraakte vijandelijke Pokémon",
   "ability_description.LEECH_SEED": "Pas de POISON status toe op het doelwit voor [3,6,12] seconden, en herstel de gebruiker's HP met [20,40,80,SP]",
-  "ability_description.LOCK_ON": "Genesect neemt het doelwit in het vizier. Genesect doet TRUE aan het doelwit, en de volgende 8 seconden heeft het doelwit het ARMOR_REDUCTION status",
+  "ability_description.LOCK_ON": "Genesect neemt het doelwit in het vizier. Genesect doet TRUE aan het doelwit, en de volgende 4 seconden heeft het doelwit het ARMOR_REDUCTION status",
   "ability_description.PSYCH_UP": "Breng [10,20,40,SP] SPECIAL toe aan het doelwit en past de SILENCE status toe aan hen en aangrenzende vijandelijke Pokémon",
   "ability_description.RAZOR_WIND": "Breng [20,40,80,SP] SPECIAL toe aan het doelwit en pas de PARALYSIS status toe hen en aangrenzende vijandelijke Pokémon",
   "ability_description.TWISTING_NETHER": "Breng [80,SP] SPECIAL toe aan alle aangrenzende vijandelijke Pokémon en teleporteer ze willekeurig over het slagveld",

@@ -863,7 +863,7 @@
   "ability_description.FIRE_TRICK": "[20,40,80,SP] SPECIALを達成し、ターゲットをマップの隅にテレポートします",
   "ability_description.FLAME_CHARGE": "敵後衛に突進し[30,60,120,SP]SPECIALを与える",
   "ability_description.LEECH_SEED": "[3,6,12]秒間ターゲットに毒を与え、HPを[20,40,80,SP]回復します",
-  "ability_description.LOCK_ON": "ターゲットをロックし、8秒間ARMOR_REDUCTIONを与えます。ゲノセクトはそれに真の対処をするようになりました",
+  "ability_description.LOCK_ON": "ターゲットをロックし、4秒間ARMOR_REDUCTIONを与えます。ゲノセクトはそれに真の対処をするようになりました",
   "ability_description.PSYCH_UP": "[10,20,40,SP] SPECIALを与え、ターゲットとその隣接する敵を沈黙させます",
   "ability_description.RAZOR_WIND": "対象に[20,40,80,SP]SPECIALを与え、周囲の敵を麻痺させる",
   "ability_description.TWISTING_NETHER": "隣接する敵に[80,SP]SPECIALを与える。すべてのポケモンがヒットすると、どこかにテレポートされます。",

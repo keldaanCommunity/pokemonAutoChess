@@ -863,7 +863,7 @@
   "ability_description.FIRE_TRICK": "Otorga [20,40,80,SP] SPECIAL y teletransporta al objetivo a una esquina del mapa",
   "ability_description.FLAME_CHARGE": "Corre hacia la retaguardia enemiga y reparte [30,60,120,SP] SPECIAL",
   "ability_description.LEECH_SEED": "POISON al objetivo durante [3,6,12] segundos y cura [20,40,80,SP] HP",
-  "ability_description.LOCK_ON": "Bloquea el objetivo y dale ARMOR_REDUCTION durante 8 s. Genesect ahora es TRUE",
+  "ability_description.LOCK_ON": "Bloquea el objetivo y dale ARMOR_REDUCTION durante 4 s. Genesect ahora es TRUE",
   "ability_description.PSYCH_UP": "Otorga [10,20,40,SP] SPECIAL y SILENCE al objetivo y a sus enemigos adyacentes",
   "ability_description.RAZOR_WIND": "Otorga [20,40,80,SP] SPECIAL al objetivo y crea enemigos a su alrededor PARALYSIS",
   "ability_description.TWISTING_NETHER": "Otorga [80,SP] SPECIAL a los enemigos adyacentes. Cada golpe de Pokémon se teletransporta a alguna parte.",

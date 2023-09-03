@@ -25,6 +25,9 @@ patch announcement
 - Nerf WonderGuard: Paralysis duration ~~5 seconds (scales)~~ 3 seconds
 - Nerf Vespiqueen: HP 250 → 210
 - Nerf Ludicolo: Attack 26 → 22
+- Nerf Genesect: HP: 220 → 200, Mana 70 → 80
+- Nerf Lock-On: Duration 8 → 4 seconds
+
 
 # Changes to Synergies
 

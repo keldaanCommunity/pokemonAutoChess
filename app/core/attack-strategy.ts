@@ -967,7 +967,7 @@ export class LockOnStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    target.status.triggerArmorReduction(8000)
+    target.status.triggerArmorReduction(4000)
   }
 }
 
