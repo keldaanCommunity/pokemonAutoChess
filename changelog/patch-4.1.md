@@ -23,6 +23,7 @@ patch announcement
 - Volcarona: moved from Unique to Epic additional pick
 - Nerf Lucario: Mana 90→100, Attack 24→20
 - Nerf WonderGuard: Paralysis duration ~~5 seconds (scales)~~ 3 seconds
+- Nerf Ninjask Mana 80 → 100 ; Shedninja Mana 60 → 100
 - Nerf Vespiqueen: HP 250 → 210
 - Nerf Ludicolo: Attack 26 → 22
 - Nerf Genesect: HP: 220 → 200, Mana 70 → 80
