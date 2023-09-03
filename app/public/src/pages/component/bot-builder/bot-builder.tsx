@@ -27,6 +27,7 @@ import ScoreIndicator from "./score-indicator"
 import { max, min } from "../../../../../utils/number"
 import store from "../../../stores"
 import { join } from "../../lobby"
+import DiscordButton from "../buttons/discord-button"
 
 export default function BotBuilder() {
   const { t } = useTranslation()
@@ -142,7 +143,7 @@ export default function BotBuilder() {
         >
           {t("export")}
         </button>
-        <BotGuideButton />
+        <DiscordButton channel="bot-creation" />
       </header>
       <div className="step-info nes-container">
         <div className="step-control">

@@ -1,13 +1,15 @@
 import React from "react"
 
-export default function DiscordButton() {
+export default function DiscordButton(props: { channel?: string }) {
+  let url = "https://discord.gg/6JMS7tr"
+  if(props.channel === "bot-creation") url = "https://discord.com/channels/737230355039387749/914503292875325461"
   return (
     <a
-      href="https://discord.gg/6JMS7tr"
+      href={url}
       target="_blank"
       rel="noopener noreferrer"
     >
-      <button type="button" className="bubbly">
+      <button type="button" className="bubbly discord">
         <img
           src="assets/ui/discord.svg"
           style={{ height: "1.4em", margin: "0" }}
