@@ -867,7 +867,7 @@
   "ability_description.PSYCH_UP": "Infliggi [10,20,40,SP] SPECIAL e SILENCE il bersaglio e i suoi nemici adiacenti",
   "ability_description.RAZOR_WIND": "Infligge [20,40,80,SP] SPECIAL al bersaglio e crea una PARALYSIS dei nemici circostanti",
   "ability_description.TWISTING_NETHER": "Infligge [80,SP] SPECIAL ai nemici adiacenti. Ogni pokemon colpito viene teletrasportato da qualche parte.",
-  "ability_description.WONDER_GUARD": "Infligge [30,60,120,SP] SPECIAL e rende tutti i nemici adiacenti PARALYSIS per [5,SP] secondi",
+  "ability_description.WONDER_GUARD": "Infligge [30,60,120,SP] SPECIAL e rende tutti i nemici adiacenti PARALYSIS per 3 secondi",
   "ability_description.ELECTRIC_SURGE": "Aumenta l'ATK_SPEED di tutti i Pokémon ELECTRIC del [10,SP]%",
   "ability_description.PSYCHIC_SURGE": "Aumenta i AP di tutti i Pokémon PSYCHIC del [5,SP]%, tranne il lanciatore",
   "ability_description.MIND_BLOWN": "Infligge il [50,SP]% dei HP attuali target come SPECIAL",

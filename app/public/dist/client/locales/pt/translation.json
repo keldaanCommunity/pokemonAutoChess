@@ -911,7 +911,7 @@
     "PSYCH_UP": "Distribua [10,20,40,SP] SPECIAL e SILENCE o alvo e seus inimigos adjacentes",
     "RAZOR_WIND": "Causa [20,40,80,SP] SPECIAL ao alvo e causa PARALYSIS nos inimigos ao redor",
     "TWISTING_NETHER": "Oferece [80,SP] SPECIAL aos inimigos adjacentes. Todo pokémon atingido é teletransportado para algum lugar.",
-    "WONDER_GUARD": "Oferece [30,60,120,SP] SPECIAL e deixa todos os inimigos adjacentes PARALYSIS por [5,SP] segundos",
+    "WONDER_GUARD": "Oferece [30,60,120,SP] SPECIAL e deixa todos os inimigos adjacentes PARALYSIS por 3 segundos",
     "ELECTRIC_SURGE": "Aumente a ATK_SPEED de todos os Pokémon ELECTRIC em [10,SP]%",
     "PSYCHIC_SURGE": "Aumente o AP de todos os pokémons PSYCHIC em [5,SP]%, exceto o lançador",
     "MIND_BLOWN": "Distribui [50,SP] % do HP alvo atual como SPECIAL",

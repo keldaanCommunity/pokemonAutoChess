@@ -22,6 +22,8 @@ patch announcement
 - Nerf Poison Jab damage: 40/80/120 → 30/60/90/120
 - Volcarona: moved from Unique to Epic additional pick
 - Nerf Lucario: Mana 90→100, Attack 24→20
+- Nerf WonderGuard: Paralysis duration ~~5 seconds (scales)~~ 3 seconds
+
 
 
 # Changes to Synergies

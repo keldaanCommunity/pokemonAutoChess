@@ -865,7 +865,7 @@
   "ability_description.PSYCH_UP": "Breng [10,20,40,SP] SPECIAL toe aan het doelwit en past de SILENCE status toe aan hen en aangrenzende vijandelijke Pokémon",
   "ability_description.RAZOR_WIND": "Breng [20,40,80,SP] SPECIAL toe aan het doelwit en pas de PARALYSIS status toe hen en aangrenzende vijandelijke Pokémon",
   "ability_description.TWISTING_NETHER": "Breng [80,SP] SPECIAL toe aan alle aangrenzende vijandelijke Pokémon en teleporteer ze willekeurig over het slagveld",
-  "ability_description.WONDER_GUARD": "Breng [30,60,120,SP] SPECIAL toe aan alle aangrenzende vijandelijke Pokémon en pas de PARALYSIS status toe aan hen voor [5,SP] seconden",
+  "ability_description.WONDER_GUARD": "Breng [30,60,120,SP] SPECIAL toe aan alle aangrenzende vijandelijke Pokémon en pas de PARALYSIS status toe aan hen voor 3 seconden",
   "ability_description.ELECTRIC_SURGE": "Verhoog ATK_SPEED van alle ELECTRIC pokemons met [10,SP]%",
   "ability_description.PSYCHIC_SURGE": "Verhoog AP van alle PSYCHIC Pokemons met [5,SP]%, behalve de caster",
   "ability_description.MIND_BLOWN": "Biedt [50,SP] % van de beoogde huidige HP aan als SPECIAL",

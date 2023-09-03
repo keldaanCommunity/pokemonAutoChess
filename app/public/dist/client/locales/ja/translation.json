@@ -867,7 +867,7 @@
   "ability_description.PSYCH_UP": "[10,20,40,SP] SPECIALを与え、ターゲットとその隣接する敵を沈黙させます",
   "ability_description.RAZOR_WIND": "対象に[20,40,80,SP]SPECIALを与え、周囲の敵を麻痺させる",
   "ability_description.TWISTING_NETHER": "隣接する敵に[80,SP]SPECIALを与える。すべてのポケモンがヒットすると、どこかにテレポートされます。",
-  "ability_description.WONDER_GUARD": "[30,60,120,SP] SPECIALを与え、隣接するすべての敵を[5,SP]秒間麻痺させる",
+  "ability_description.WONDER_GUARD": "[30,60,120,SP] SPECIALを与え、隣接するすべての敵を3秒間麻痺させる",
   "ability_description.ELECTRIC_SURGE": "すべてのでんきポケモンのATK_SPEEDを[10,SP]%アップ",
   "ability_description.PSYCHIC_SURGE": "術者を除く全てのサイキックポケモンのAPを[5,SP]%増加させる",
   "ability_description.MIND_BLOWN": "対象の現在HPの[50,SP]%をSPECIALとして与える",
