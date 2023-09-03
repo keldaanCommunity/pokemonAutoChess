@@ -404,8 +404,7 @@ export class WonderGuardStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        const duration = Math.round(3000 * (1 + pokemon.ap / 100))
-        cell.value.status.triggerParalysis(duration, cell.value)
+        cell.value.status.triggerParalysis(3000, cell.value)
         cell.value.handleSpecialDamage(
           damage,
           board,
@@ -968,7 +967,7 @@ export class LockOnStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    target.status.triggerArmorReduction(8000)
+    target.status.triggerArmorReduction(4000)
   }
 }
 
