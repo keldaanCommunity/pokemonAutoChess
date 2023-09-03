@@ -24,7 +24,7 @@ patch announcement
 - Nerf Lucario: Mana 90→100, Attack 24→20
 - Nerf WonderGuard: Paralysis duration ~~5 seconds (scales)~~ 3 seconds
 - Nerf Vespiqueen: HP 250 → 210
-
+- Nerf Ludicolo: Attack 26 → 22
 
 # Changes to Synergies
 

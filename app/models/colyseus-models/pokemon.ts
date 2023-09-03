@@ -2806,7 +2806,7 @@ export class Ludicolo extends Pokemon {
       Rarity.RARE,
       Pkm.DEFAULT,
       260,
-      26,
+      22,
       4,
       4,
       3,
