@@ -134,9 +134,12 @@ export default class Simulation extends Schema implements ISimulation {
       }) => {
         if (
           player &&
-          [Effect.INFESTATION, Effect.HORDE, Effect.HEART_OF_THE_SWARM].some(
-            (e) => effects.includes(e)
-          )
+          [
+            Effect.COCOON,
+            Effect.INFESTATION,
+            Effect.HORDE,
+            Effect.HEART_OF_THE_SWARM
+          ].some((e) => effects.includes(e))
         ) {
           const teamIndex = team === blueTeam ? 0 : 1
           const bugTeam = new Array<IPokemon>()
@@ -148,14 +151,17 @@ export default class Simulation extends Schema implements ISimulation {
           bugTeam.sort((a, b) => b.hp - a.hp)
 
           let numberToSpawn = 0
-          if (effects.includes(Effect.INFESTATION)) {
+          if (effects.includes(Effect.COCOON)) {
             numberToSpawn = 1
           }
-          if (effects.includes(Effect.HORDE)) {
+          if (effects.includes(Effect.INFESTATION)) {
             numberToSpawn = 2
           }
+          if (effects.includes(Effect.HORDE)) {
+            numberToSpawn = 3
+          }
           if (effects.includes(Effect.HEART_OF_THE_SWARM)) {
-            numberToSpawn = 4
+            numberToSpawn = 5
           }
 
           for (let i = 0; i < numberToSpawn; i++) {
@@ -1001,6 +1007,7 @@ export default class Simulation extends Schema implements ISimulation {
           }
           break
 
+        case Effect.COCOON:
         case Effect.INFESTATION:
         case Effect.HORDE:
         case Effect.HEART_OF_THE_SWARM:

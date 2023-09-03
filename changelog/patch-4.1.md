@@ -26,6 +26,7 @@ patch announcement
 
 - Human heal is now rounded up (buff Human in early game)
 - Grass adjustment: heals frequency every 1→2 seconds ; heal amount 4/8/16 → 8/15/30
+- Bug: 2/4/6 → 2/4/6/8 ; Number of copies: 1/2/4 → 1/2/3/5
 
 ## Changes to Items
 
