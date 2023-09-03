@@ -11240,7 +11240,7 @@ export class Drifloon extends Pokemon {
       [Synergy.GHOST, Synergy.FLYING],
       Rarity.RARE,
       Pkm.DRIFBLIM,
-      100,
+      120,
       5,
       2,
       2,

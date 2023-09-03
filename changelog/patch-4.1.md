@@ -31,6 +31,7 @@ patch announcement
 - Nerf Forretress: HP 210 → 200 ; Spe def 5 → 3 ; Mana 80 → 120
 - Buff Pinsir: HP: 180 → 190 ; Attack 22 → 25
 - Buff Carvanha: HP: 60 → 75 ; Attack 8 → 10
+- Buff Drifloon: HP: 100 → 120
 
 # Changes to Synergies
 
