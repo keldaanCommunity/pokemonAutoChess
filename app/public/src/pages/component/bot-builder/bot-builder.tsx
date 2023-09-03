@@ -80,6 +80,13 @@ export default function BotBuilder() {
     [currentStage]
   )
 
+  useEffect(() => {
+    if (currentStage >= 1 && bot.steps[currentStage].board.length === 0) {
+      // automatically copy from last step
+      updateStep([...bot.steps[currentStage - 1].board])
+    }
+  }, [currentStage])
+
   if (bots.length === 0) {
     dispatch(requestBotList())
   }
