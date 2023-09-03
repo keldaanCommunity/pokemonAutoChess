@@ -372,7 +372,7 @@ import {
   Pikipek,
   Piloswine,
   Pineco,
-  Pinisir,
+  Pinsir,
   Piplup,
   PirouetteMeloetta,
   Plusle,
@@ -1978,7 +1978,7 @@ export default class PokemonFactory {
       case Pkm.MINUN:
         return new Minun(s, e)
       case Pkm.PINSIR:
-        return new Pinisir(s, e)
+        return new Pinsir(s, e)
       case Pkm.NATU:
         return new Natu(s, e)
       case Pkm.XATU:

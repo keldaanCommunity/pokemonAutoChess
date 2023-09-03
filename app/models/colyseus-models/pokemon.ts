@@ -6436,15 +6436,15 @@ export class Moltres extends Pokemon {
   }
 }
 
-export class Pinisir extends Pokemon {
+export class Pinsir extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.PINSIR,
       [Synergy.BUG, Synergy.HUMAN],
       Rarity.UNIQUE,
       Pkm.DEFAULT,
-      180,
-      22,
+      190,
+      25,
       3,
       3,
       1,
