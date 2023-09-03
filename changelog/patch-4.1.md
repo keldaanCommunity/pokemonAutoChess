@@ -21,6 +21,8 @@ patch announcement
 - Buff Gliscor: Tier 3 → 4, HP 170→200, Attack 18→20, Mana 90→75
 - Nerf Poison Jab damage: 40/80/120 → 30/60/90/120
 - Volcarona: moved from Unique to Epic additional pick
+- Nerf Lucario: Mana 90→100, Attack 24→20
+
 
 # Changes to Synergies
 
