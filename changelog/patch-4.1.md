@@ -9,6 +9,7 @@ patch announcement
 # Gameplay
 
 - Paralysis, Freeze and Sleep status now prevents dodging attacks
+- New Team Builder menu: plan your team with items and synergies
 
 # New Pokemons:
 
@@ -33,6 +34,7 @@ patch announcement
 # UI
 
 - Grass heal proc now has an animation
+- Fully Redesigned Bot Builder
 
 # Bugfix
 
