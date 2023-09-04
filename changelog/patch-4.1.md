@@ -33,6 +33,8 @@ patch announcement
 - Buff Pinsir: HP: 180 → 190 ; Attack 22 → 25
 - Buff Carvanha: HP: 60 → 75 ; Attack 8 → 10
 - Buff Drifloon: HP: 100 → 120
+- Adjusted Onix line stats: Onix Attack 10 → 9 ; Steelix Attack 9 → 14, Spe Def 10 → 5
+- Nerf Scizor: HP 210 → 180, Mega-Scizor HP 290 → 250
 
 # Changes to Synergies
 
