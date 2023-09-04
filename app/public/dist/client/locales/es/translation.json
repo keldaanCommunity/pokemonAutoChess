@@ -1105,7 +1105,7 @@
   "effect_description.TOXIC": "70% de probabilidad de POISON. Máximo de acumulaciones de POISON +2",
   "effect_description.DRAGON_ENERGY": "La segunda sinergia de Dragon cuenta el doble (no la tercera)",
   "effect_description.DRAGON_SCALES": "Los dragones ganan 30 HP por etapa de evolución",
-  "effect_description.DRAGON_DANCE": "Los dragones ganan 10% ATK_SPEED y 10% AP por etapa de evolución",
+  "effect_description.DRAGON_DANCE": "Los dragones ganan 20% ATK_SPEED y 20% AP por etapa de evolución",
   "effect_description.BULK_UP": "Cura 30 HP y gana 20% ATK_SPEED",
   "effect_description.RAGE": "Cura 30 HP y gana 25% ATK_SPEED",
   "effect_description.ANGER_POINT": "Cura 30 HP y gana 30% ATK_SPEED",

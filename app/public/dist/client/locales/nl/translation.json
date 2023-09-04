@@ -1104,7 +1104,7 @@
   "effect_description.TOXIC": "70% kans op POISON. Maximale stapels POISON +2",
   "effect_description.DRAGON_ENERGY": "Dragon's tweede synergie telt dubbel (niet de derde)",
   "effect_description.DRAGON_SCALES": "Draken krijgen 30 HP per evolutiefase",
-  "effect_description.DRAGON_DANCE": "Draken krijgen 10% ATK_SPEED en 10% AP per evolutiefase",
+  "effect_description.DRAGON_DANCE": "Draken krijgen 20% ATK_SPEED en 20% AP per evolutiefase",
   "effect_description.BULK_UP": "Genees 30 HP en krijg 20% ATK_SPEED",
   "effect_description.RAGE": "Genees 30 HP en krijg 25% ATK_SPEED",
   "effect_description.ANGER_POINT": "Genees 30 HP en krijg 30% ATK_SPEED",

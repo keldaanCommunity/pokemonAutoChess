@@ -1106,7 +1106,7 @@
   "effect_description.TOXIC": "70% di possibilità di POISON. Pile massime di POISON +2",
   "effect_description.DRAGON_ENERGY": "La seconda sinergia di Dragon conta doppio (non la terza)",
   "effect_description.DRAGON_SCALES": "I draghi guadagnano 30 HP per fase evolutiva (3 per i mitici)",
-  "effect_description.DRAGON_DANCE": "I draghi ottengono il 10% di ATK_SPEED e il 10% di AP per fase evolutiva (3 per i mitici)",
+  "effect_description.DRAGON_DANCE": "I draghi ottengono il 20% di ATK_SPEED e il 20% di AP per fase evolutiva (3 per i mitici)",
   "effect_description.BULK_UP": "Cura 30 HP e ottieni il 20% di ATK_SPEED",
   "effect_description.RAGE": "Cura 30 HP e ottieni il 25% di ATK_SPEED",
   "effect_description.ANGER_POINT": "Cura 30 HP e ottieni il 30% di ATK_SPEED",
