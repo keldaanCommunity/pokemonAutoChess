@@ -43,6 +43,10 @@ async function main() {
               logger.debug(p.name, bot.author, bot.name, item)
               p.items[j] = Item.ICE_STONE
               modified = true
+            } else if (item === "RUNE_PROTECT") {
+              logger.debug(p.name, bot.author, bot.name, item)
+              p.items[j] = Item.CLEANSE_TAG
+              modified = true
             }
           }
         })

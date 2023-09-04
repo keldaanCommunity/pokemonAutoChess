@@ -189,10 +189,6 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     )
   }
 
-  get isImmuneToStatusChange() {
-    return this.items.has(Item.FLUFFY_TAIL) || this.status.runeProtect
-  }
-
   handleDamage(params: {
     damage: number
     board: Board
@@ -210,7 +206,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     attacker: PokemonEntity | null,
     crit: boolean
   ): { death: boolean; takenDamage: number } {
-    if (this.status.runeProtect) {
+    if (this.status.protect) {
       this.count.spellBlockedCount++
       return { death: false, takenDamage: 0 }
     } else {
@@ -250,8 +246,8 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     return this.state.handleHeal(this, heal, caster, apBoost)
   }
 
-  handleShield(shield: number, caster: IPokemonEntity, apBoost?: boolean) {
-    return this.state.handleShield(this, shield, caster, apBoost)
+  addShield(shield: number, caster: IPokemonEntity, apBoost?: boolean) {
+    return this.state.addShield(this, shield, caster, apBoost)
   }
 
   changeState(state: PokemonState) {

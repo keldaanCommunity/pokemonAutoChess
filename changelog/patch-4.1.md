@@ -9,6 +9,7 @@ patch announcement
 # Gameplay
 
 - Paralysis, Freeze and Sleep status now prevents dodging attacks
+- Rune Protect status no longer prevents special damage
 
 # New Pokemons:
 
@@ -45,6 +46,8 @@ patch announcement
 - Shiny Charm rework: Prevents damage and give Protect for 3 seconds the first time the holders gets below 30% HP
 - Nerf Fire gem: 10 → 8% max HP additional damage
 - Nerf Gracidea flower: 30 → 25% attack speed
+- Fluffy Tail now gives Rune Protect status (only visual change)
+- Changed Rune Protect to Cleanse Tag: when combat begins, the holder and adjacent allies on the same row receive Rune protect for 6 seconds and 25% Max HP as Shield.
 
 # UI
 

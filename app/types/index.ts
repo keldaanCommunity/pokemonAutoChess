@@ -444,7 +444,7 @@ export interface IPokemonEntity {
   addAttack(atk: number): void
   addAttackSpeed(as: number): void
   addMaxHP(life: number): void
-  handleShield(shieldBonus: number, pokemon: IPokemonEntity)
+  addShield(shieldBonus: number, pokemon: IPokemonEntity)
   update(dt: number, board: Board, weather: string)
   physicalDamage: number
   specialDamage: number
