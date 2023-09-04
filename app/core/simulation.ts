@@ -577,7 +577,7 @@ export default class Simulation extends Schema implements ISimulation {
               pokemon.positionY
             )
             if (value) {
-              value.addAttackSpeed(30)
+              value.addAttackSpeed(25)
             }
           })
         }
