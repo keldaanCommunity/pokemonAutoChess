@@ -1269,7 +1269,7 @@
   "item_description.FLUFFY_TAIL": "El titular es inmune a todas las alteraciones de estado.",
   "item_description.ORAN_BERRY": "+150 SHIELD cuando comienza el combate",
   "item_description.SHINY_CHARM": "Previene daños y otorga PROTECT durante 3 segundos la primera vez que los poseedores bajan del 30% de HP.",
-  "item_description.GRACIDEA_FLOWER": "Cuando comienza el combate, el poseedor y los aliados adyacentes en la misma fila ganan +30 % ATK_SPEED",
+  "item_description.GRACIDEA_FLOWER": "Cuando comienza el combate, el poseedor y los aliados adyacentes en la misma fila ganan +25 % ATK_SPEED",
   "item_description.FLAME_ORB": "El titular se quema pero aumenta su ATK en un 100%",
   "item_description.ASSAULT_VEST": "+20 SPE_DEF. Reduce el daño de BURN y POISON en un 50%",
   "item_description.AMULET_COIN": "+1 de oro cada vez que el poseedor derriba a un oponente (máximo 5 de oro por etapa)",
