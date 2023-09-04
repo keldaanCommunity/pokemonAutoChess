@@ -1261,7 +1261,7 @@
   "item_description.RAZOR_FANG": "+100% CRIT_DAMAGE。クリティカルヒットには ARMOR_REDUCTION が 4 秒間適用されます。",
   "item_description.LEFTOVERS": "戦闘中、ホルダーの攻撃により、同じ列の隣接する味方が最大HPの5%回復します。",
   "item_description.CHOICE_SCARF": "ヒット時、隣接する敵に50%の基本攻撃ダメージを与える",
-  "item_description.FIRE_GEM": "攻撃はSHIELDに2倍のダメージを与え、追加ダメージとしてターゲットの最大HPの10％を与えます",
+  "item_description.FIRE_GEM": "攻撃はSHIELDに2倍のダメージを与え、追加ダメージとしてターゲットの最大HPの8％を与えます",
   "item_description.DEFENSIVE_RIBBON": "ホルダーがダメージを受けると、1スタックを獲得します。 2スタックごとに、保持者は+1 DEF、+1 ATK、+5% ATK_SPEEDを獲得します（最大20スタック）",
   "item_description.WONDER_BOX": "各戦闘の開始時に、ワンダーボックスが 2 つの一時的なアイテムに置き換えられます (最大 3 つのアイテムを保持)",
   "item_description.RUNE_PROTECT": "戦闘が始まると、所有者と隣接するすべての味方は 6 秒間 RUNE_PROTECT を受け、SPECIAL とステータス変更に対する耐性を獲得します。",

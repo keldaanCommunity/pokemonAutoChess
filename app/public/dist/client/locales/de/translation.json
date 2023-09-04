@@ -1260,7 +1260,7 @@
   "item_description.RAZOR_FANG": "+100 % CRIT_DAMAGE. Kritische Treffer bewirken 4 Sekunden lang ARMOR_REDUCTION.",
   "item_description.LEFTOVERS": "Während des Kampfes heilt der Angriff des Halters benachbarte Verbündete in derselben Reihe um 5 % ihrer maximalen HP",
   "item_description.CHOICE_SCARF": "Bei einem Treffer füge einem benachbarten Feind 50 % des Grundangriffsschadens zu",
-  "item_description.FIRE_GEM": "Angriffe verursachen auf SHIELD doppelten Schaden und verursachen 10 % der maximalen HP des Ziels als zusätzlichen Schaden",
+  "item_description.FIRE_GEM": "Angriffe verursachen auf SHIELD doppelten Schaden und verursachen 8 % der maximalen HP des Ziels als zusätzlichen Schaden",
   "item_description.DEFENSIVE_RIBBON": "Wenn der Träger Schaden erleidet, erhältst du 1 Stapel. Alle 2 Stapel erhält der Besitzer +1 DEF, +1 ATK und +5 % ATK_SPEED (maximal 20 Stapel).",
   "item_description.WONDER_BOX": "Zu Beginn jeder Schlacht wird die Wunderkiste durch 2 temporäre Gegenstände ersetzt (maximal 3 Gegenstände enthalten).",
   "item_description.RUNE_PROTECT": "Wenn der Kampf beginnt, erhalten der Träger und alle benachbarten Verbündeten 6 Sekunden lang RUNE_PROTECT, wodurch sie immun gegen SPECIAL und Statusänderungen sind",

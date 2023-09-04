@@ -1261,7 +1261,7 @@
   "item_description.RAZOR_FANG": "+100% CRIT_DAMAGE. I colpi critici applicano ARMOR_REDUCTION per 4 secondi.",
   "item_description.LEFTOVERS": "Durante il combattimento, l'attacco del possessore cura gli alleati adiacenti sulla stessa fila per il 5% dei loro HP massimi",
   "item_description.CHOICE_SCARF": "Quando viene colpito, infliggi il 50% dell'attacco base a un nemico adiacente",
-  "item_description.FIRE_GEM": "Gli attacchi infliggono il doppio dei danni a SHIELD e infliggono il 10% degli HP massimi del bersaglio come danno aggiuntivo",
+  "item_description.FIRE_GEM": "Gli attacchi infliggono il doppio dei danni a SHIELD e infliggono il 8% degli HP massimi del bersaglio come danno aggiuntivo",
   "item_description.DEFENSIVE_RIBBON": "Quando il possessore subisce danni, guadagna 1 stack. Ogni 2 stack, l'holder guadagna +1 DEF, +1 ATK e +5% ATK_SPEED (max 20 stack)",
   "item_description.WONDER_BOX": "All'inizio di ogni battaglia, la scatola delle meraviglie viene sostituita da 2 oggetti temporanei (max 3 oggetti posseduti)",
   "item_description.RUNE_PROTECT": "Quando inizia il combattimento, il possessore e tutti gli alleati adiacenti ricevono RUNE_PROTECT per 6 secondi, rendendoli immuni aSPECIAL e alle alterazioni di stato",

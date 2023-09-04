@@ -1323,7 +1323,7 @@
     "RAZOR_FANG": "+100% CRIT_DAMAGE. Critical hits apply ARMOR_REDUCTION for 4 seconds.",
     "LEFTOVERS": "During the combat, the holder attack heals adjacent allies on the same row for 5% of their max HP",
     "CHOICE_SCARF": "On hit deal 50% basic attack damage to an adjacent enemy",
-    "FIRE_GEM": "Attacks do double damage on SHIELD and deal 10% of target max HP as additional damage",
+    "FIRE_GEM": "Attacks do double damage on SHIELD and deal 8 % of target max HP as additional damage",
     "DEFENSIVE_RIBBON": "When the holder takes damage, gain 1 stack. Every 2 stacks, the holder gains +1 DEF, +1 ATK and +5% ATK_SPEED (max 20 stacks)",
     "WONDER_BOX": "At the beginning of each battle, WONDER_BOX is replaced by 2 temporary items (max 3 items held)",
     "RUNE_PROTECT": "When combat begins, the holder and all adjacent allies receive RUNE_PROTECT for 6 seconds, making them immune to SPECIAL and status alterations",

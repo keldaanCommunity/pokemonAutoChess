@@ -43,6 +43,7 @@ patch announcement
 ## Changes to Items
 
 - Shiny Charm rework: Prevents damage and give Protect for 3 seconds the first time the holders gets below 30% HP
+- Nerf Fire gem: 10 → 8% max HP additional damage
 
 # UI
 

@@ -1259,7 +1259,7 @@
   "item_description.RAZOR_FANG": "+100% CRIT_DAMAGE. Critical hits passen ARMOR_REDUCTION gedurende 4 seconden toe.",
   "item_description.LEFTOVERS": "Tijdens het gevecht geneest de aanval van de houder aangrenzende bondgenoten op dezelfde rij voor 5% van hun maximale HP",
   "item_description.CHOICE_SCARF": "Bij treffer wordt 50% basisaanvalschade toegebracht aan een aangrenzende vijand",
-  "item_description.FIRE_GEM": "Aanvallen richten dubbele schade aan op SHIELD en brengen 10% van de maximale HP als extra schade toe",
+  "item_description.FIRE_GEM": "Aanvallen richten dubbele schade aan op SHIELD en brengen 8% van de maximale HP als extra schade toe",
   "item_description.DEFENSIVE_RIBBON": "Als de houder schade oploopt, krijg je 1 stapel. Elke 2 stapels krijgt de houder +1 DEF, +1 ATK en +5% ATK_SPEED (max. 20 stapels)",
   "item_description.WONDER_BOX": "Aan het begin van elk gevecht wordt de wonderdoos vervangen door 2 tijdelijke items (max. 3 items vastgehouden)",
   "item_description.RUNE_PROTECT": "Wanneer het gevecht begint, ontvangen de houder en alle aangrenzende bondgenoten RUNE_PROTECT gedurende 6 seconden, waardoor ze immuun zijn voor SPECIAL en statusveranderingen",

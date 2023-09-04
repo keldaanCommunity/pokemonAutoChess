@@ -119,7 +119,7 @@ export default class AttackingState extends PokemonState {
       const attackType = pokemon.attackType
 
       if (pokemon.items.has(Item.FIRE_GEM)) {
-        physicalDamage = Math.round(physicalDamage + target.hp * 0.1)
+        physicalDamage = Math.round(physicalDamage + target.hp * 0.08)
       }
 
       let isAttackSuccessful = true

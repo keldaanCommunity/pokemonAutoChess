@@ -1342,7 +1342,7 @@
     "RAZOR_FANG": "+100% CRIT_DAMAGE. Les coups critiques appliquent ARMOR_REDUCTION pendant 4 secondes.",
     "LEFTOVERS": "Pendant le combat, l'attaque du porteur soigne les alliés adjacents sur la même ligne pour 5% de leurs HP max",
     "CHOICE_SCARF": "Chaque attaque inflige 50% de dégâts d'ATK de base à un ennemi adjacent à la cible",
-    "FIRE_GEM": "Les attaques infligent le double de dégâts au SHIELD et infligent 10 % des HP max de la cible en dégâts supplémentaires.",
+    "FIRE_GEM": "Les attaques infligent le double de dégâts au SHIELD et infligent 8 % des HP max de la cible en dégâts supplémentaires.",
     "DEFENSIVE_RIBBON": "Lorsque le porteur subit des dégâts, gagne 1 charge. Toutes les 2 charges, le détenteur gagne +1 DEF, +1 ATK et +5 % ATK_SPEED (max 20 charges)",
     "WONDER_BOX": "Au début de chaque bataille, la Boîte à Merveilles est remplacée par 2 objets temporaires (max 3 objets portés)",
     "RUNE_PROTECT": "Lorsque le combat commence, le détenteur et tous les alliés adjacents reçoivent RUNE_PROTECT pendant 6 secondes, ce qui les rend immunisés contre SPECIAL et les altérations de statut",
