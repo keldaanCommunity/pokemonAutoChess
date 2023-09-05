@@ -134,9 +134,12 @@ export default class Simulation extends Schema implements ISimulation {
       }) => {
         if (
           player &&
-          [Effect.INFESTATION, Effect.HORDE, Effect.HEART_OF_THE_SWARM].some(
-            (e) => effects.includes(e)
-          )
+          [
+            Effect.COCOON,
+            Effect.INFESTATION,
+            Effect.HORDE,
+            Effect.HEART_OF_THE_SWARM
+          ].some((e) => effects.includes(e))
         ) {
           const teamIndex = team === blueTeam ? 0 : 1
           const bugTeam = new Array<IPokemon>()
@@ -148,14 +151,17 @@ export default class Simulation extends Schema implements ISimulation {
           bugTeam.sort((a, b) => b.hp - a.hp)
 
           let numberToSpawn = 0
-          if (effects.includes(Effect.INFESTATION)) {
+          if (effects.includes(Effect.COCOON)) {
             numberToSpawn = 1
           }
-          if (effects.includes(Effect.HORDE)) {
+          if (effects.includes(Effect.INFESTATION)) {
             numberToSpawn = 2
           }
+          if (effects.includes(Effect.HORDE)) {
+            numberToSpawn = 3
+          }
           if (effects.includes(Effect.HEART_OF_THE_SWARM)) {
-            numberToSpawn = 4
+            numberToSpawn = 5
           }
 
           for (let i = 0; i < numberToSpawn; i++) {
@@ -388,7 +394,7 @@ export default class Simulation extends Schema implements ISimulation {
         pokemon.addCritDamage(value)
         break
       case Stat.SHIELD:
-        pokemon.handleShield(value, pokemon)
+        pokemon.addShield(value, pokemon)
         break
       case Stat.HP:
         pokemon.handleHeal(value, pokemon, 0)
@@ -511,8 +517,8 @@ export default class Simulation extends Schema implements ISimulation {
           pokemon.life = pokemon.hp
         }
         if (pokemon.effects.includes(Effect.DRAGON_DANCE)) {
-          pokemon.addAbilityPower(10 * pokemon.stars)
-          pokemon.addAttackSpeed(10 * pokemon.stars)
+          pokemon.addAbilityPower(20 * pokemon.stars)
+          pokemon.addAttackSpeed(20 * pokemon.stars)
         }
         let shieldBonus = 0
         if (pokemon.effects.includes(Effect.STAMINA)) {
@@ -528,7 +534,7 @@ export default class Simulation extends Schema implements ISimulation {
           shieldBonus += 55
         }
         if (shieldBonus >= 0) {
-          pokemon.handleShield(shieldBonus, pokemon)
+          pokemon.addShield(shieldBonus, pokemon)
           const cells = this.board.getAdjacentCells(
             pokemon.positionX,
             pokemon.positionY
@@ -536,30 +542,30 @@ export default class Simulation extends Schema implements ISimulation {
 
           cells.forEach((cell) => {
             if (cell.value && pokemon.team == cell.value.team) {
-              cell.value.handleShield(shieldBonus, pokemon)
+              cell.value.addShield(shieldBonus, pokemon)
             }
           })
         }
         if (pokemon.items.has(Item.LUCKY_EGG)) {
           ;[-1, 0, 1].forEach((offset) => {
-            const value = this.board.getValue(
+            const ally = this.board.getValue(
               pokemon.positionX + offset,
               pokemon.positionY
             )
-            if (value) {
-              value.addAbilityPower(40)
+            if (ally && ally.team === pokemon.team) {
+              ally.addAbilityPower(40)
             }
           })
         }
-        if (pokemon.items.has(Item.RUNE_PROTECT)) {
-          const cells = this.board.getAdjacentCells(
-            pokemon.positionX,
-            pokemon.positionY
-          )
-          pokemon.status.triggerRuneProtect(6000)
-          cells.forEach((cell) => {
-            if (cell.value && pokemon.team == cell.value.team) {
-              cell.value.status.triggerRuneProtect(6000)
+        if (pokemon.items.has(Item.CLEANSE_TAG)) {
+          ;[-1, 0, 1].forEach((offset) => {
+            const ally = this.board.getValue(
+              pokemon.positionX + offset,
+              pokemon.positionY
+            )
+            if (ally && ally.team === pokemon.team) {
+              ally.addShield(Math.ceil(0.25 * ally.hp), ally, false)
+              ally.status.triggerRuneProtect(6000)
             }
           })
         }
@@ -571,7 +577,7 @@ export default class Simulation extends Schema implements ISimulation {
               pokemon.positionY
             )
             if (value) {
-              value.addAttackSpeed(30)
+              value.addAttackSpeed(25)
             }
           })
         }
@@ -596,6 +602,10 @@ export default class Simulation extends Schema implements ISimulation {
             pokemon as PokemonEntity,
             this.board
           )
+        }
+
+        if (pokemon.items.has(Item.FLUFFY_TAIL)) {
+          pokemon.status.triggerRuneProtect(60000)
         }
       })
     })
@@ -1001,6 +1011,7 @@ export default class Simulation extends Schema implements ISimulation {
           }
           break
 
+        case Effect.COCOON:
         case Effect.INFESTATION:
         case Effect.HORDE:
         case Effect.HEART_OF_THE_SWARM:
@@ -1040,7 +1051,7 @@ export default class Simulation extends Schema implements ISimulation {
             }[effect]
             pokemon.addAttack(attackBoost * pokemon.baseAtk * nbItems)
             pokemon.addAbilityPower(apBoost * nbItems)
-            pokemon.handleShield(shieldBoost * pokemon.hp * nbItems, pokemon)
+            pokemon.addShield(shieldBoost * pokemon.hp * nbItems, pokemon)
             pokemon.effects.push(Effect.GOOGLE_SPECS)
           }
           break

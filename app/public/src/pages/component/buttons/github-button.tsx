@@ -1,19 +1,15 @@
 import React from "react"
 
 export default function GithubButton() {
-  function handleClick() {
-    window.location.href =
-      "https://github.com/keldaanCommunity/pokemonAutoChess"
-  }
   return (
-    <button
-      type="button"
-      className="bubbly"
-      onClick={() => {
-        handleClick()
-      }}
+    <a
+      href="https://github.com/keldaanCommunity/pokemonAutoChess"
+      target="_blank"
+      rel="noopener noreferrer"
     >
-      Github
-    </button>
+      <button type="button" className="bubbly">
+        Github
+      </button>
+    </a>
   )
 }

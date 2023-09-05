@@ -14,6 +14,7 @@ import {
   setElligibilityToXP
 } from "../stores/AfterGameStore"
 import { playSound, SOUNDS } from "./utils/audio"
+import { localStore, LocalStoreKeys } from "./utils/store"
 
 export default function AfterGame() {
   const dispatch = useAppDispatch()
@@ -36,8 +37,8 @@ export default function AfterGame() {
         if (user) {
           dispatch(logIn(user))
           try {
-            const cachedReconnectionToken = localStorage.getItem(
-              "cachedReconnectionToken"
+            const cachedReconnectionToken = localStore.get(
+              LocalStoreKeys.RECONNECTION_TOKEN
             )
             if (cachedReconnectionToken) {
               const r: Room<AfterGameState> = await client.reconnect(
@@ -50,8 +51,8 @@ export default function AfterGame() {
             }
           } catch (error) {
             setTimeout(async () => {
-              const cachedReconnectionToken = localStorage.getItem(
-                "cachedReconnectionToken"
+              const cachedReconnectionToken = localStore.get(
+                LocalStoreKeys.RECONNECTION_TOKEN
               )
               if (cachedReconnectionToken) {
                 const r: Room<AfterGameState> = await client.reconnect(
@@ -71,7 +72,7 @@ export default function AfterGame() {
     }
 
     const initialize = async (r: Room<AfterGameState>) => {
-      localStorage.setItem("cachedReconnectionToken", r.reconnectionToken)
+      localStore.set(LocalStoreKeys.RECONNECTION_TOKEN, r.reconnectionToken, 30)
       r.state.players.onAdd((player) => {
         dispatch(addPlayer(player))
         if (player.id === currentPlayerId) {
@@ -107,6 +108,7 @@ export default function AfterGame() {
               room.connection.close()
             }
             dispatch(leaveAfter())
+            localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
             setToLobby(true)
           }}
         >

@@ -284,7 +284,7 @@
     "pokemons": ["TOGETIC", "IVYSAUR", "JIGGLYPUFF"],
     "rank": 3.24,
     "count": 848,
-    "name": "RUNE_PROTECT"
+    "name": "CLEANSE_TAG"
   },
   {
     "_id": { "$oid": "64e7ef36c618ca5489767064" },

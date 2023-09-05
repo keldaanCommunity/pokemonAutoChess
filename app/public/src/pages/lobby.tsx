@@ -68,14 +68,20 @@ import store from "../stores"
 import { useTranslation } from "react-i18next"
 
 import "./lobby.css"
+import { localStore, LocalStoreKeys } from "./utils/store"
+import { Modal } from "react-bootstrap"
 
 export default function Lobby() {
   const dispatch = useAppDispatch()
   const lobby = useAppSelector((state) => state.network.lobby)
 
   const lobbyJoined = useRef<boolean>(false)
+  const [reconnectionToken, setReconnectionToken] = useState<string | null>(
+    null
+  )
 
   const [toPreparation, setToPreparation] = useState<boolean>(false)
+  const [toGame, setToGame] = useState<boolean>(false)
   const [toAuth, setToAuth] = useState<boolean>(false)
   const { t } = useTranslation()
 
@@ -84,6 +90,7 @@ export default function Lobby() {
     if (!lobbyJoined.current) {
       join(dispatch, client, setToAuth)
       lobbyJoined.current = true
+      setReconnectionToken(localStore.get(LocalStoreKeys.RECONNECTION_TOKEN))
     }
   }, [lobbyJoined, dispatch])
 
@@ -102,6 +109,10 @@ export default function Lobby() {
     return <Navigate to="/preparation"></Navigate>
   }
 
+  if (toGame) {
+    return <Navigate to="/game"></Navigate>
+  }
+
   return (
     <main className="lobby">
       <MainSidebar
@@ -115,6 +126,28 @@ export default function Lobby() {
           setToPreparation={setToPreparation}
         />
       </div>
+      <Modal show={reconnectionToken != null}>
+        <Modal.Header>
+          <Modal.Title>{t("game-reconnect-modal-title")}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="game-reconnect-modal-body">
+          {t("game-reconnect-modal-body")}
+        </Modal.Body>
+        <Modal.Footer style={{ justifyContent: "space-evenly" }}>
+          <button className="bubbly green" onClick={() => setToGame(true)}>
+            {t("yes")}
+          </button>
+          <button
+            className="bubbly red"
+            onClick={() => {
+              localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
+              setReconnectionToken(null)
+            }}
+          >
+            {t("no")}
+          </button>
+        </Modal.Footer>
+      </Modal>
     </main>
   )
 }

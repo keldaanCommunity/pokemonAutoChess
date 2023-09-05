@@ -22,6 +22,10 @@ Source: [https://github.com/keldaanCommunity/pokemonAutoChess](https://github.co
 
 ## Getting started
 
+Install [https://nodejs.org/en](Node LTS).
+
+Main libs used 
+
 Pokemon Auto Chess use mongoDB to store its data and Firebase for authentication. Those 2 dependencies requires credentials to use. Credentials will be stored in a `.env` at the root of the repository.
 
 ### MongoDB

@@ -86,7 +86,7 @@ export const SynergyTriggers: { [key in Synergy]: number[] } = {
   [Synergy.MONSTER]: [2, 4, 6],
   [Synergy.HUMAN]: [2, 4, 6],
   [Synergy.AQUATIC]: [2, 4, 6],
-  [Synergy.BUG]: [2, 4, 6],
+  [Synergy.BUG]: [2, 4, 6, 8],
   [Synergy.FLYING]: [2, 4, 6, 8],
   [Synergy.FLORA]: [3, 4, 5, 6],
   [Synergy.ROCK]: [2, 4, 6],
@@ -287,7 +287,6 @@ export const UniqueShop = new Array<PkmProposition>(
   Pkm.PHIONE,
   Pkm.COBALION,
   Pkm.KELDEO,
-  Pkm.VOLCARONA,
   Pkm.TAPU_KOKO,
   Pkm.TAPU_LELE,
   Pkm.SEVIPER,
@@ -314,7 +313,8 @@ export const UniqueShop = new Array<PkmProposition>(
   Pkm.PINSIR,
   Pkm.GLIGAR,
   Pkm.DELIBIRD,
-  Pkm.TORKOAL
+  Pkm.TORKOAL,
+  Pkm.IRON_BUNDLE
 )
 
 export const LegendaryShop = new Array<PkmProposition>(
@@ -705,7 +705,7 @@ export const ItemRecipe: { [key in Item]?: Item[] } = {
   [Item.FIRE_GEM]: [Item.MAGNET, Item.CHARCOAL],
   [Item.DEFENSIVE_RIBBON]: [Item.MAGNET, Item.HEART_SCALE],
   [Item.WONDER_BOX]: [Item.BLACK_GLASSES, Item.BLACK_GLASSES],
-  [Item.RUNE_PROTECT]: [Item.BLACK_GLASSES, Item.MIRACLE_SEED],
+  [Item.CLEANSE_TAG]: [Item.BLACK_GLASSES, Item.MIRACLE_SEED],
   [Item.WIDE_LENS]: [Item.BLACK_GLASSES, Item.NEVER_MELT_ICE],
   [Item.RAZOR_CLAW]: [Item.BLACK_GLASSES, Item.CHARCOAL],
   [Item.FLUFFY_TAIL]: [Item.BLACK_GLASSES, Item.HEART_SCALE],
@@ -766,7 +766,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.FIRE_GEM]: { [Stat.ATK_SPEED]: 10, [Stat.ATK]: 1 },
   [Item.DEFENSIVE_RIBBON]: { [Stat.ATK_SPEED]: 10, [Stat.DEF]: 1 },
   [Item.WONDER_BOX]: { [Stat.CRIT_CHANCE]: 10 },
-  [Item.RUNE_PROTECT]: { [Stat.CRIT_CHANCE]: 5, [Stat.SHIELD]: 15 },
+  [Item.CLEANSE_TAG]: { [Stat.CRIT_CHANCE]: 5, [Stat.SHIELD]: 15 },
   [Item.WIDE_LENS]: { [Stat.CRIT_CHANCE]: 5, [Stat.SPE_DEF]: 1 },
   [Item.RAZOR_CLAW]: { [Stat.CRIT_CHANCE]: 55, [Stat.ATK]: 1 },
   [Item.FLUFFY_TAIL]: { [Stat.CRIT_CHANCE]: 5, [Stat.DEF]: 5 },

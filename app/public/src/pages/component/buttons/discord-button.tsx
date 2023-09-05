@@ -9,11 +9,8 @@ export default function DiscordButton(props: { channel?: string }) {
       target="_blank"
       rel="noopener noreferrer"
     >
-      <button type="button" className="bubbly discord">
-        <img
-          src="assets/ui/discord.svg"
-          style={{ height: "1.4em", margin: "0" }}
-        />
+      <button type="button" className="bubbly">
+        Discord
       </button>
     </a>
   )

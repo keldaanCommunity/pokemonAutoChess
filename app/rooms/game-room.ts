@@ -431,9 +431,6 @@ export default class GameRoom extends Room<GameState> {
         if (player && this.state.stageLevel < 4) {
           // if player left game during the loading screen or before stage 4, remove it from the players
           this.state.players.delete(client.auth.uid)
-          this.state.players.forEach((player) => {
-            player.opponents.delete(client.auth.uid)
-          })
           logger.info(
             `${client.auth.displayName} has been removed from players list`
           )

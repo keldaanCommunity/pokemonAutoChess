@@ -66,7 +66,7 @@ export default class PokemonState {
     }
   }
 
-  handleShield(
+  addShield(
     pokemon: IPokemonEntity,
     shield: number,
     caster: IPokemonEntity,
