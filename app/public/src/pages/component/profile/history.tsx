@@ -9,11 +9,7 @@ import SynergyIcon from "../icons/synergy-icon"
 import { formatDate } from "../../utils/date"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import PokemonFactory from "../../../../../models/pokemon-factory"
-import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
-import {
-  addSynergiesFromStones,
-  computeSynergies
-} from "../../../../../models/colyseus-models/synergies"
+import { computeSynergies } from "../../../../../models/colyseus-models/synergies"
 import "./history.css"
 import { useTranslation } from "react-i18next"
 
