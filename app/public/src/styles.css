@@ -86,6 +86,13 @@ a {
   color: #fff !important;
 }
 
+.custom-bg {
+  background-image: url("assets/ui/back1.jpg");
+  background-size: cover;
+  background-position-y: bottom;
+  background-attachment: fixed;
+}
+
 input[type="range"] {
   height: 38px;
   -webkit-appearance: none;

@@ -3,9 +3,6 @@
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: stretch;
-  background-image: url("assets/ui/back1.png");
-  background-size: cover;
-  background-position-x: 100%;
 }
 
 #root .user-chat h1 {
