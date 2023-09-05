@@ -68,9 +68,6 @@ export function computeSynergies(board: IPokemon[]): Map<Synergy, number> {
 }
 
 export function addSynergiesFromStones(pkm: IPokemon) {
-  if (pkm.items == null) {
-    console.error("items is undefined ?", pkm)
-  }
   if (pkm.items.has(Item.FIRE_STONE) && !pkm.types.includes(Synergy.FIRE)) {
     pkm.types.push(Synergy.FIRE)
   }
