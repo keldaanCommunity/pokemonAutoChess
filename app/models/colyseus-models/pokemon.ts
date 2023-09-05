@@ -2104,7 +2104,7 @@ export class Deino extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.DEINO,
-      [Synergy.DARK, Synergy.DRAGON, Synergy.MONSTER],
+      [Synergy.DARK, Synergy.DRAGON],
       Rarity.RARE,
       Pkm.ZWEILOUS,
       80,
@@ -2127,7 +2127,7 @@ export class Zweilous extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.ZWEILOUS,
-      [Synergy.DARK, Synergy.DRAGON, Synergy.MONSTER],
+      [Synergy.DARK, Synergy.DRAGON],
       Rarity.RARE,
       Pkm.HYDREIGON,
       120,
@@ -2150,7 +2150,7 @@ export class Hydreigon extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.HYDREIGON,
-      [Synergy.DARK, Synergy.DRAGON, Synergy.MONSTER],
+      [Synergy.DARK, Synergy.DRAGON],
       Rarity.RARE,
       Pkm.DEFAULT,
       220,
