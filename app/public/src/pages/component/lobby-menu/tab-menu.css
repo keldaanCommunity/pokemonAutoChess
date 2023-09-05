@@ -4,7 +4,7 @@
   height: 90vh;
   overflow-y: scroll;
   background-size: cover;
-  background-position: left;
+  background-position-x: 0%;
   color: white;
 }
 
