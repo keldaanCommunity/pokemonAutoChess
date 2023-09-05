@@ -11,7 +11,7 @@ export default function CurrentUsers() {
   const users: ILobbyUser[] = useAppSelector((state) => state.lobby.users)
 
   return (
-    <div className="nes-container hidden-scrollable current-users-menu">
+    <div className="nes-container hidden-scrollable current-users-menu custom-bg">
       <h1>
         {t("online")}: {users.length}
       </h1>

@@ -9,7 +9,7 @@ export default function News() {
   const { t } = useTranslation()
 
   return (
-    <div className="nes-container news">
+    <div className="nes-container news custom-bg">
       <h1>{t("news")}</h1>
       {isLoading ? (
         <p>{t("loading")}</p>

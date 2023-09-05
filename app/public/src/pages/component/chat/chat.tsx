@@ -14,7 +14,7 @@ export default function Chat(props: { source: string }) {
   const user = useAppSelector((state) => state[props.source].user)
 
   return (
-    <div className="nes-container user-chat">
+    <div className="nes-container user-chat custom-bg">
       <h1>{user?.anonymous ? t("chat_disabled_anonymous") : "Chat"}</h1>
       <ChatHistory source={props.source} />
       <form

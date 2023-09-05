@@ -1,8 +1,5 @@
 .current-users-menu {
   overflow-y: scroll;
-  background-image: url("assets/ui/back1.png");
-  background-size: cover;
-  background-position-x: 77%;
   color: white;
 }
 

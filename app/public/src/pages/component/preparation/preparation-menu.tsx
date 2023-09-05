@@ -123,7 +123,7 @@ export default function PreparationMenu() {
     ) : null
 
   return (
-    <div className="preparation-menu nes-container is-centered">
+    <div className="preparation-menu nes-container is-centered custom-bg">
       <h1>
         {name}: {users.length}/8
       </h1>
