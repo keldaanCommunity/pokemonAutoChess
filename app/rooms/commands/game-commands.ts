@@ -1,4 +1,8 @@
+import { Client, updateLobby } from "colyseus"
 import { Command } from "@colyseus/command"
+import { MapSchema } from "@colyseus/schema"
+import { nanoid } from "nanoid"
+
 import {
   ItemProposalStages,
   ItemRecipe,
@@ -21,10 +25,8 @@ import PokemonFactory from "../../models/pokemon-factory"
 import ItemFactory from "../../models/item-factory"
 import UserMetadata from "../../models/mongo-models/user-metadata"
 import GameRoom from "../game-room"
-import { Client, updateLobby } from "colyseus"
 import { Effect } from "../../types/enum/Effect"
 import { Title, Emotion } from "../../types"
-import { MapSchema } from "@colyseus/schema"
 import {
   GamePhaseState,
   Rarity,
@@ -52,7 +54,7 @@ import { getAvatarString } from "../../public/src/utils"
 import { max } from "../../utils/number"
 import { getWeather } from "../../utils/weather"
 import Simulation from "../../core/simulation"
-import { nanoid } from "nanoid"
+import { selectMatchups } from "../../core/matchmaking"
 
 export class OnShopCommand extends Command<
   GameRoom,
@@ -1481,22 +1483,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     this.room.miniGame.initialize(this.state.players, this.state.stageLevel)
   }
 
-  getSetDistance(set: Set<string>) {
-    const players = new Array<Player>()
-    let distance = 0
-    set.forEach((id) => {
-      const player = this.state.players.get(id)
-      player && players.push(player)
-    })
-    const playerA = players[0]
-    const playerB = players[1]
-    if (playerA && playerB) {
-      const d = playerA.opponents.get(playerB.id)
-      distance = d ? d : 0
-    }
-    return distance
-  }
-
   initializeFightingPhase() {
     this.state.simulations.clear()
     this.state.phase = GamePhaseState.FIGHT
@@ -1540,79 +1526,49 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         }
       })
     } else {
-      this.state.players.forEach((player) => {
-        this.state.players.forEach((p) => {
-          if (player.id !== p.id) {
-            if (!player.opponents.has(p.id) && p.alive) {
-              player.opponents.set(p.id, 0)
-            }
-            if (player.opponents.has(p.id) && !p.alive) {
-              player.opponents.delete(p.id)
-            }
-          }
-        })
-      })
-      let matchups = new Array<Set<string>>()
-      this.state.players.forEach((player) => {
-        this.state.players.forEach((p) => {
-          if (
-            player.id !== p.id &&
-            player.alive &&
-            p.alive &&
-            !matchups.find(
-              (matchup) => matchup.has(player.id) && matchup.has(p.id)
-            )
-          ) {
-            matchups.push(new Set([p.id, player.id]))
-          }
-        })
-      })
-      matchups.sort((a, b) => this.getSetDistance(a) - this.getSetDistance(b))
-      while (matchups.length > 0) {
-        const matchup = matchups.shift()
-        if (matchup) {
-          const players = new Array<Player>()
-          matchup.forEach((id) => {
-            const player = this.state.players.get(id)
-            player && players.push(player)
-          })
-          const playerA = players[0]
-          const playerB = players[1]
-          if (playerA && playerB) {
-            const weather = getWeather(playerA.board, playerB.board)
-            const simulationId = nanoid()
-            const simulation = new Simulation(
-              simulationId,
-              this.room,
-              playerA.board,
-              playerB.board,
-              playerA,
-              playerB,
-              this.state.stageLevel,
-              weather
-            )
-            playerA.simulationId = simulationId
-            playerB.simulationId = simulationId
-            playerA.simulationTeamIndex = 0
-            playerB.simulationTeamIndex = 1
-            playerA.opponents.set(playerB.id, this.state.stageLevel)
-            playerB.opponents.set(playerA.id, this.state.stageLevel)
-            playerA.opponentId = playerB.id
-            playerB.opponentId = playerA.id
-            playerA.opponentName = playerB.name
-            playerB.opponentName = playerA.name
-            playerA.opponentAvatar = playerB.avatar
-            playerB.opponentAvatar = playerA.avatar
-            playerA.opponentTitle = playerB.title ?? ""
-            playerB.opponentTitle = playerA.title ?? ""
-            this.state.simulations.set(simulation.id, simulation)
+      const matchups = selectMatchups(this.state)
 
-            matchups = matchups.filter(
-              (matchup) => !(matchup.has(playerA.id) || matchup.has(playerB.id))
-            )
-          }
+      matchups.forEach((matchup) => {
+        const playerA = matchup.a,
+          playerB = matchup.b
+        const weather = getWeather(playerA.board, playerB.board)
+        const simulationId = nanoid()
+        const simulation = new Simulation(
+          simulationId,
+          this.room,
+          playerA.board,
+          playerB.board,
+          playerA,
+          playerB,
+          this.state.stageLevel,
+          weather
+        )
+        playerA.simulationId = simulationId
+        playerA.simulationTeamIndex = 0
+        playerA.opponents.set(
+          playerB.id,
+          (playerA.opponents.get(playerB.id) ?? 0) + 1
+        )
+        playerA.opponentId = playerB.id
+        playerA.opponentName = playerB.name
+        playerA.opponentAvatar = playerB.avatar
+        playerA.opponentTitle = playerB.title ?? ""
+
+        if (!matchup.ghost) {
+          playerB.simulationId = simulationId
+          playerB.simulationTeamIndex = 1
+          playerB.opponents.set(
+            playerA.id,
+            (playerB.opponents.get(playerA.id) ?? 0) + 1
+          )
+          playerB.opponentId = playerA.id
+          playerB.opponentName = playerA.name
+          playerB.opponentAvatar = playerA.avatar
+          playerB.opponentTitle = playerA.title ?? ""
         }
-      }
+
+        this.state.simulations.set(simulation.id, simulation)
+      })
     }
   }
 }
