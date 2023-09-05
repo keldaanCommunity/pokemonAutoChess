@@ -4,6 +4,10 @@ import {
   IStep
 } from "../../../../../models/mongo-models/bot-v2"
 import PokemonFactory from "../../../../../models/pokemon-factory"
+import {
+  AdditionalPicksStages,
+  PortalCarouselStages
+} from "../../../../../types/Config"
 import { Rarity } from "../../../../../types/enum/Game"
 import { BasicItems, Item } from "../../../../../types/enum/Item"
 import { PkmIndex, Pkm, PkmDuos } from "../../../../../types/enum/Pokemon"
@@ -197,15 +201,46 @@ export function validateBoard(board: IDetailledPokemon[], stage: number) {
   const uniques = team.filter((p) => p.rarity === Rarity.UNIQUE)
   const legendaries = team.filter((p) => p.rarity === Rarity.LEGENDARY)
   const mythicals = team.filter((p) => p.rarity === Rarity.MYTHICAL)
+  const additionalCommon = team.filter(
+    (p) =>
+      (p.additional && p.rarity === Rarity.COMMON) ||
+      p.rarity === Rarity.UNCOMMON
+  )
+  const additionalRare = team.filter(
+    (p) =>
+      (p.additional && p.rarity === Rarity.RARE) || p.rarity === Rarity.EPIC
+  )
 
-  if (stage < 11 && uniques.length > 0) {
-    throw new Error(`Unique Pokemons can't be played before stage 11`)
+  if (stage <= PortalCarouselStages[0] && uniques.length > 0) {
+    throw new Error(
+      `Unique Pokemons can't be played before stage ${
+        PortalCarouselStages[0] + 1
+      }`
+    )
   }
-  if (stage < 21 && legendaries.length > 0) {
-    throw new Error(`Legendary Pokemons can't be played before stage 21`)
+  if (stage <= PortalCarouselStages[1] && legendaries.length > 0) {
+    throw new Error(
+      `Legendary Pokemons can't be played before stage ${
+        PortalCarouselStages[1] + 1
+      }`
+    )
   }
-  if (stage < 21 && mythicals.length > 0) {
-    throw new Error(`Mythical Pokemons can't be played before stage 21`)
+  if (stage <= PortalCarouselStages[1] && mythicals.length > 0) {
+    throw new Error(
+      `Mythical Pokemons can't be played before stage ${
+        PortalCarouselStages[1] + 1
+      }`
+    )
+  }
+  if (stage < AdditionalPicksStages[0] && additionalCommon.length > 0) {
+    throw new Error(
+      `Common/Uncommon additional picks can't be played before stage ${AdditionalPicksStages[0]}`
+    )
+  }
+  if (stage < AdditionalPicksStages[1] && additionalRare.length > 0) {
+    throw new Error(
+      `Rare/Epic additional picks can't be played before stage ${AdditionalPicksStages[1]}`
+    )
   }
   if (uniques.length > 1) {
     throw new Error(`Only one Unique Pokemon can be played`)
