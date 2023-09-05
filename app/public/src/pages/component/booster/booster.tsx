@@ -27,7 +27,7 @@ export default function Booster() {
 
   return (
     <div id="boosters-page">
-      <div className="nes-container">
+      <div className="nes-container custom-bg">
         <p className="help">
           {numberOfBooster === 0 ? t("boosters_hint") : t("open_boosters_hint")}
         </p>

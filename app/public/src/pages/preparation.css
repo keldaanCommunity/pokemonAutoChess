@@ -22,8 +22,6 @@
 
 .preparation-page .user-chat {
   flex: 0 1 30em;
-  background-position: right;
-  background-image: url(assets/ui/back1.png);
 }
 
 .preparation-page footer {

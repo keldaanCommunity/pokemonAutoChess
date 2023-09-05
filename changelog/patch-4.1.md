@@ -59,6 +59,14 @@ patch announcement
 - Fully Redesigned Bot Builder
 - Show number of titles unlocked
 - Add a modal to reconnect to previous game from lobby
+- The key "S" now toggles the emote menu in game
+- The key "A" now plays a user avatar's animation in game
+- User in-game avatars can now use animations during carousel phases
+- Added in-game modal for displaying all possible keybinds
+- Redesigned **Online** avatars
+- Improved **Chat** timestamp displays
+- Pokemon details shown on hover not attach to mouse instead of pokemon
+  - This should help avoid situations where you're unable to click/hover on pokemon to the right of what's being hovered
 
 # Bugfix
 

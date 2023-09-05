@@ -1,9 +1,6 @@
 .room-menu {
   display: flex;
   flex-direction: column;
-  background-image: url("assets/ui/back1.png");
-  background-position-x: 42%;
-  background-size: cover;
 }
 
 .room-menu .subtitle {

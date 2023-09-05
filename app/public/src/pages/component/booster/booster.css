@@ -1,5 +1,6 @@
 #boosters-page {
   height: 100%;
+  width: 100%;
   padding: 1vw;
 }
 
@@ -8,8 +9,6 @@
   margin: 1vw 0 0 0;
   height: 75vh;
   overflow: hidden;
-  background-image: url("assets/ui/back1.png");
-  background-size: cover;
   display: flex;
   flex-direction: column;
   align-items: center;
