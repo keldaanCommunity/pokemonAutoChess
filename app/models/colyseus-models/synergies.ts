@@ -18,7 +18,7 @@ export default class Synergies
   }
 
   update(board: MapSchema<Pokemon>) {
-    const pokemons: Pokemon[] = Object.values(board)
+    const pokemons: Pokemon[] = [...board.values()]
     const updatedSynergies = computeSynergies(pokemons)
     updatedSynergies.forEach((value, synergy) => this.set(synergy, value))
   }
