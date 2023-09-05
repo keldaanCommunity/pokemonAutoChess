@@ -20,7 +20,7 @@ import BotAvatar from "./bot-avatar"
 export default function TeamBuilder(props: {
   bot?: IBot
   onChangeAvatar?: (pkm: PkmWithConfig) => void
-  board: IDetailledPokemon[]
+  board?: IDetailledPokemon[]
   updateBoard?: (board: IDetailledPokemon[]) => void
   error?: string
 }) {
