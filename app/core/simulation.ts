@@ -394,7 +394,7 @@ export default class Simulation extends Schema implements ISimulation {
         pokemon.addCritDamage(value)
         break
       case Stat.SHIELD:
-        pokemon.handleShield(value, pokemon)
+        pokemon.addShield(value, pokemon)
         break
       case Stat.HP:
         pokemon.handleHeal(value, pokemon, 0)
@@ -534,7 +534,7 @@ export default class Simulation extends Schema implements ISimulation {
           shieldBonus += 55
         }
         if (shieldBonus >= 0) {
-          pokemon.handleShield(shieldBonus, pokemon)
+          pokemon.addShield(shieldBonus, pokemon)
           const cells = this.board.getAdjacentCells(
             pokemon.positionX,
             pokemon.positionY
@@ -542,30 +542,30 @@ export default class Simulation extends Schema implements ISimulation {
 
           cells.forEach((cell) => {
             if (cell.value && pokemon.team == cell.value.team) {
-              cell.value.handleShield(shieldBonus, pokemon)
+              cell.value.addShield(shieldBonus, pokemon)
             }
           })
         }
         if (pokemon.items.has(Item.LUCKY_EGG)) {
           ;[-1, 0, 1].forEach((offset) => {
-            const value = this.board.getValue(
+            const ally = this.board.getValue(
               pokemon.positionX + offset,
               pokemon.positionY
             )
-            if (value) {
-              value.addAbilityPower(40)
+            if (ally && ally.team === pokemon.team) {
+              ally.addAbilityPower(40)
             }
           })
         }
-        if (pokemon.items.has(Item.RUNE_PROTECT)) {
-          const cells = this.board.getAdjacentCells(
-            pokemon.positionX,
-            pokemon.positionY
-          )
-          pokemon.status.triggerRuneProtect(6000)
-          cells.forEach((cell) => {
-            if (cell.value && pokemon.team == cell.value.team) {
-              cell.value.status.triggerRuneProtect(6000)
+        if (pokemon.items.has(Item.CLEANSE_TAG)) {
+          ;[-1, 0, 1].forEach((offset) => {
+            const ally = this.board.getValue(
+              pokemon.positionX + offset,
+              pokemon.positionY
+            )
+            if (ally && ally.team === pokemon.team) {
+              ally.addShield(Math.ceil(0.25 * ally.hp), ally, false)
+              ally.status.triggerRuneProtect(6000)
             }
           })
         }
@@ -602,6 +602,10 @@ export default class Simulation extends Schema implements ISimulation {
             pokemon as PokemonEntity,
             this.board
           )
+        }
+
+        if (pokemon.items.has(Item.FLUFFY_TAIL)) {
+          pokemon.status.triggerRuneProtect(60000)
         }
       })
     })
@@ -1047,7 +1051,7 @@ export default class Simulation extends Schema implements ISimulation {
             }[effect]
             pokemon.addAttack(attackBoost * pokemon.baseAtk * nbItems)
             pokemon.addAbilityPower(apBoost * nbItems)
-            pokemon.handleShield(shieldBoost * pokemon.hp * nbItems, pokemon)
+            pokemon.addShield(shieldBoost * pokemon.hp * nbItems, pokemon)
             pokemon.effects.push(Effect.GOOGLE_SPECS)
           }
           break

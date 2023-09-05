@@ -98,7 +98,7 @@ export class AttackStrategy {
     }
 
     if (pokemon.items.has(Item.STAR_DUST)) {
-      pokemon.handleShield(Math.round(0.6 * pokemon.maxPP), pokemon, false)
+      pokemon.addShield(Math.round(0.6 * pokemon.maxPP), pokemon, false)
       pokemon.count.starDustCount++
     }
 
@@ -293,7 +293,7 @@ export class SoftBoiledStrategy extends AttackStrategy {
           positionY: tg.positionX,
           orientation: pokemon.orientation
         })
-        tg.handleShield(shield, pokemon, true)
+        tg.addShield(shield, pokemon, true)
         tg.status.clearNegativeStatus()
       }
     })
@@ -1767,7 +1767,7 @@ export class ShadowCloneStrategy extends AttackStrategy {
         pokemon.team
       )
       clone.life = 0.8 * pokemon.life
-      clone.handleShield(30, clone, true)
+      clone.addShield(30, clone, true)
       clone.isClone = true
     }
   }
@@ -3101,7 +3101,7 @@ export class WaterfallStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const shield = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30
-    pokemon.handleShield(shield, pokemon, true)
+    pokemon.addShield(shield, pokemon, true)
   }
 }
 
@@ -3716,17 +3716,17 @@ export class ThiefStrategy extends AttackStrategy {
     // update artificial synergy bonuses
     if (pokemon.effects.includes(Effect.DUBIOUS_DISC)) {
       pokemon.addAttack(4 * l, true)
-      pokemon.handleShield(20 * l, pokemon)
+      pokemon.addShield(20 * l, pokemon)
     }
 
     if (pokemon.effects.includes(Effect.LINK_CABLE)) {
       pokemon.addAttack(7 * l, true)
-      pokemon.handleShield(30 * l, pokemon)
+      pokemon.addShield(30 * l, pokemon)
     }
 
     if (pokemon.effects.includes(Effect.GOOGLE_SPECS)) {
       pokemon.addAttack(10 * l, true)
-      pokemon.handleShield(50 * l, pokemon)
+      pokemon.addShield(50 * l, pokemon)
     }
 
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
@@ -4187,7 +4187,7 @@ export class ForecastStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target, crit)
     board.forEach((x: number, y: number, p: PokemonEntity | undefined) => {
       if (p && pokemon.team === p.team) {
-        p.handleShield(10, pokemon, true)
+        p.addShield(10, pokemon, true)
         if (pokemon.name === Pkm.CASTFORM_SUN) {
           p.addAttack(3, true)
         }
