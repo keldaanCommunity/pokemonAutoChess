@@ -8,6 +8,7 @@
   grid-template-columns: 600px 1fr;
   grid-template-rows: auto auto 1fr;
   height: 90vh;
+  width: 100%;
   padding: 0 0.5em 0.5em 1em;
 }
 

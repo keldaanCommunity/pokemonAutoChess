@@ -67,7 +67,13 @@ export default function MetaReport() {
     <div>
       <div
         className="nes-container"
-        style={{ margin: "10px", height: "90vh", color: "white" }}
+        style={{
+          margin: "10px",
+          height: "90vh",
+          color: "white",
+          width: "100%",
+          minWidth: "80vw"
+        }}
       >
         <Tabs>
           <TabList>
