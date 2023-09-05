@@ -1,17 +1,18 @@
-/* div here needed to prevent overridden styles from nes-container */
-div.synergies-container {
-  position: absolute;
-  left: 0.5%;
+.synergies-container {
   display: flex;
-  justify-content: space-between;
-  top: 9%;
   flex-flow: column;
-  max-height: 73%;
   overflow-y: scroll;
-  padding: 0px;
   color: #fff;
   background-color: #61738a;
   font-size: 1em;
+}
+
+#game-wrapper .synergies-container {
+  position: absolute;
+  left: 0.5%;
+  top: 9%;
+  max-height: 73%;
+  padding: 0;
 }
 
 .synergies-header {

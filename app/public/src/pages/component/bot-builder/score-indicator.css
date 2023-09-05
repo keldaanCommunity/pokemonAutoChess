@@ -1,0 +1,31 @@
+.score-indicator {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.score-indicator-bars {
+  width: 240px;
+  height: 24px;
+  display: flex;
+  position: relative;
+  border: 4px solid black;
+}
+
+.score-indicator .cursor {
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 60%;
+  transform: translateX(-50%);
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 20px solid black;
+}
+
+.score-indicator span {
+  text-transform: uppercase;
+  margin-right: 1em;
+  width: 10ch;
+  display: inline-block;
+}

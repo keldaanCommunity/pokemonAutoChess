@@ -21,7 +21,7 @@ export function BasicModal(props: BasicModalProps) {
       centered
     >
       {title && (
-        <Modal.Header closeButton>
+        <Modal.Header closeButton className="basic-modal-header">
           <Modal.Title>{title}</Modal.Title>
         </Modal.Header>
       )}

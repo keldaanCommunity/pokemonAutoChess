@@ -9,6 +9,7 @@ patch announcement
 # Gameplay
 
 - Paralysis, Freeze and Sleep status now prevents dodging attacks
+- New Team Builder menu: plan your team with items and synergies
 - Rune Protect status no longer prevents special damage
 
 # New Pokemons:
@@ -55,6 +56,7 @@ patch announcement
 # UI
 
 - Grass heal proc now has an animation
+- Fully Redesigned Bot Builder
 - Show number of titles unlocked
 - Add a modal to reconnect to previous game from lobby
 

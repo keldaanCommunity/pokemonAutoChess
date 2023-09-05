@@ -6,16 +6,6 @@ import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { requestBotData } from "../../../stores/NetworkStore"
 import { useTranslation } from "react-i18next"
 
-const textAreaStyle = {
-  height: "400px"
-}
-
-const buttonStyle = {
-  marginLeft: "10px",
-  marginTop: "10px",
-  marginRight: "10px"
-}
-
 export default function ModalMenu(props: {
   showModal: (mode: ModalMode) => void
   bot: IBot
@@ -57,7 +47,7 @@ export default function ModalMenu(props: {
         <Modal.Body>
           <p>{t("export_hint")}</p>
           <textarea
-            style={textAreaStyle}
+            rows={10}
             className="nes-textarea"
             defaultValue={JSON.stringify(props.bot, null, 2)}
           ></textarea>
@@ -65,15 +55,10 @@ export default function ModalMenu(props: {
           {url}
         </Modal.Body>
         <Modal.Footer>
-          <button
-            style={buttonStyle}
-            className="bubbly red"
-            onClick={props.hideModal}
-          >
+          <button className="bubbly red" onClick={props.hideModal}>
             {t("cancel")}
           </button>
           <button
-            style={buttonStyle}
             className="bubbly green"
             onClick={() => {
               props.createBot()
@@ -92,32 +77,30 @@ export default function ModalMenu(props: {
         </Modal.Header>
         <Modal.Body>
           <p>{t("get_started_bot")}</p>
-          <div className="nes-field is-inline" style={{ marginBottom: "10px" }}>
-            <label htmlFor="default_select">{t("existing_bot")}</label>
-            <div className="my-select">
-              <select
-                defaultValue=""
-                onChange={(e) => {
-                  if (e.target.value.length != 0) {
-                    dispatch(requestBotData(e.target.value))
-                  }
-                }}
-                id="default_select"
-              >
-                <option value="" hidden>
-                  {t("select")}
+          <div className="nes-field is-inline" style={{ marginBottom: "1em" }}>
+            <label htmlFor="bot_select">{t("existing_bot")}</label>
+            <select
+              id="bot_select"
+              defaultValue=""
+              onChange={(e) => {
+                if (e.target.value.length != 0) {
+                  dispatch(requestBotData(e.target.value))
+                }
+              }}
+            >
+              <option value="" hidden>
+                {t("select")}
+              </option>
+              {botList.map((bot) => (
+                <option key={bot.id} value={bot.id}>
+                  {bot.name} {t("by")} {bot.author}
                 </option>
-                {botList.map((bot) => (
-                  <option key={bot.id} value={bot.id}>
-                    {bot.name} {t("by")} {bot.author}
-                  </option>
-                ))}
-              </select>
-            </div>
+              ))}
+            </select>
           </div>
 
           <textarea
-            style={textAreaStyle}
+            rows={10}
             value={textArea}
             onChange={(e) => {
               handleTextAreaChange(e.target.value)
@@ -126,15 +109,10 @@ export default function ModalMenu(props: {
           ></textarea>
         </Modal.Body>
         <Modal.Footer>
-          <button
-            style={buttonStyle}
-            className="bubbly red"
-            onClick={props.hideModal}
-          >
+          <button className="bubbly red" onClick={props.hideModal}>
             {t("cancel")}
           </button>
           <button
-            style={buttonStyle}
             className="bubbly green"
             onClick={() => {
               props.importBot(textArea)
@@ -149,38 +127,3 @@ export default function ModalMenu(props: {
     return null
   }
 }
-/*
-    constructor(props:{
-
-    }){
-        super(props);
-        state = {
-          textArea: ''
-        };
-    }
-
-    handleScenariosChange(e){
-      if(e.target.value.length !=0){
-        props.requestBotData(e.target.value)
-      }
-    }
-
-    handleTextAreaChange(e){
-      setState({
-        textArea: e.target.value
-      })
-    }
-
-    convertBotDataToJSON(){
-      return JSON.stringify(props.botData)
-    }
-
-    componentDidUpdate(prevProps, prevState){
-      if(prevProps.botData.avatar != props.botData.avatar){
-
-        setState({
-          textArea: JSON.stringify(props.botData)
-        })
-      }
-    }
-*/

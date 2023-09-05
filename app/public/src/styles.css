@@ -431,6 +431,20 @@ p:last-child {
   box-shadow: inset 6px 6px 0px 0px #902c74;
 }
 
+.bubbly.discord {
+  background: #444ebe;
+  color: white;
+  box-shadow: inset -6px -6px 0px 0px #2d347e;
+}
+.bubbly.discord:not([disabled]):hover {
+  background: #4a54bf;
+}
+
+.bubbly.discord:not([disabled]):active {
+  background: #444ebe;
+  box-shadow: inset 6px 6px 0px 0px #2d347e;
+}
+
 .bubbly[disabled] {
   background: #d3d3d3;
   box-shadow: inset -6px -6px 0px 0px #adafbc;

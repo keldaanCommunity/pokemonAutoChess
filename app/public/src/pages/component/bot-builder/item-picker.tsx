@@ -1,39 +1,40 @@
-import React from "react"
+import React, { useState } from "react"
 import { Item } from "../../../../../types/enum/Item"
-import CSS from "csstype"
-import { DetailledPkm } from "../../../../../types"
-
-const itemPoolStyle: CSS.Properties = {
-  display: "flex",
-  flexWrap: "wrap",
-  margin: "10px",
-  marginTop: "0px"
-}
-
-const imgStyle: CSS.Properties = {
-  width: "40px",
-  height: "40px",
-  imageRendering: "pixelated",
-  cursor: "var(--cursor-hover)"
-}
+import { PkmWithConfig } from "../../../../../types"
+import ReactTooltip from "react-tooltip"
+import { ItemDetailTooltip } from "../../../game/components/item-detail"
 
 export default function ItemPicker(props: {
-  selectEntity: React.Dispatch<React.SetStateAction<DetailledPkm | Item>>
+  selectEntity: React.Dispatch<React.SetStateAction<PkmWithConfig | Item>>
 }) {
+  const [itemHovered, setItemHovered] = useState<Item>()
+
+  function handleOnDragStart(e: React.DragEvent, item: Item) {
+    e.dataTransfer.setData("item", item)
+  }
+
   return (
-    <div className="nes-container" style={itemPoolStyle}>
-      {(Object.keys(Item) as Item[]).map((item) => {
-        return (
-          <div
-            onClick={() => {
-              props.selectEntity(item)
-            }}
-            key={item}
-          >
-            <img style={imgStyle} src={"assets/item/" + Item[item] + ".png"} />
-          </div>
-        )
-      })}
+    <div id="item-picker" className="nes-container">
+      {(Object.keys(Item) as Item[]).map((item) => (
+        <img
+          key={item}
+          src={"assets/item/" + Item[item] + ".png"}
+          data-tip
+          data-for="detail-item"
+          onMouseOver={() => setItemHovered(item)}
+          onClick={() => props.selectEntity(item)}
+          draggable
+          onDragStart={(e) => handleOnDragStart(e, item)}
+        />
+      ))}
+      {itemHovered && (
+        <ReactTooltip
+          id="detail-item"
+          className="customeTheme item-detail-tooltip"
+        >
+          <ItemDetailTooltip item={itemHovered} />
+        </ReactTooltip>
+      )}
     </div>
   )
 }

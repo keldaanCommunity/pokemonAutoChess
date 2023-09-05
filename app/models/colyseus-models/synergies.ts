@@ -1,4 +1,5 @@
 import { MapSchema } from "@colyseus/schema"
+import { IPokemon } from "../../types"
 import { SynergyTriggers } from "../../types/Config"
 import { Item } from "../../types/enum/Item"
 import { Pkm, PkmFamily } from "../../types/enum/Pokemon"
@@ -17,51 +18,56 @@ export default class Synergies
   }
 
   update(board: MapSchema<Pokemon>) {
-    this.setToZero()
-
-    board.forEach((pkm: Pokemon) => {
-      addSynergiesFromStones(pkm)
-    })
-
-    const typesPerFamily = new Map<Pkm, Set<Synergy>>()
-    const dragonDoubleTypes = new Map<Pkm, Set<Synergy>>()
-    board.forEach((pkm: Pokemon) => {
-      if (pkm.positionY != 0) {
-        const family = PkmFamily[pkm.name]
-        if (!typesPerFamily.has(family)) typesPerFamily.set(family, new Set())
-        const types: Set<Synergy> = typesPerFamily.get(family)!
-        pkm.types.forEach((type) => types.add(type))
-        if (pkm.types.includes(Synergy.DRAGON)) {
-          if (!dragonDoubleTypes.has(family))
-            dragonDoubleTypes.set(family, new Set())
-          dragonDoubleTypes.get(family)!.add(pkm.types[1])
-        }
-      }
-    })
-
-    typesPerFamily.forEach((types) => {
-      types.forEach((type, i) => {
-        this.set(type, (this.get(type) ?? 0) + 1)
-      })
-    })
-
-    if ((this.get(Synergy.DRAGON) ?? 0) >= SynergyTriggers[Synergy.DRAGON][0]) {
-      dragonDoubleTypes.forEach((types) => {
-        types.forEach((type, i) => {
-          this.set(type, (this.get(type) ?? 0) + 1)
-        })
-      })
-    }
-  }
-
-  setToZero() {
-    this.forEach((value, key) => {
-      this.set(key, 0)
-    })
+    const pokemons: Pokemon[] = Object.values(board)
+    const updatedSynergies = computeSynergies(pokemons)
+    updatedSynergies.forEach((value, synergy) => this.set(synergy, value))
   }
 }
 
-export function addSynergiesFromStones(pkm: Pokemon) {
+export function computeSynergies(board: IPokemon[]): Map<Synergy, number> {
+  const synergies = new Map<Synergy, number>()
+  Object.keys(Synergy).forEach((key) => {
+    synergies.set(key as Synergy, 0)
+  })
+
+  const typesPerFamily = new Map<Pkm, Set<Synergy>>()
+  const dragonDoubleTypes = new Map<Pkm, Set<Synergy>>()
+
+  board.forEach((pkm: IPokemon) => {
+    addSynergiesFromStones(pkm)
+    if (pkm.positionY != 0) {
+      const family = PkmFamily[pkm.name]
+      if (!typesPerFamily.has(family)) typesPerFamily.set(family, new Set())
+      const types: Set<Synergy> = typesPerFamily.get(family)!
+      pkm.types.forEach((type) => types.add(type))
+      if (pkm.types.includes(Synergy.DRAGON)) {
+        if (!dragonDoubleTypes.has(family))
+          dragonDoubleTypes.set(family, new Set())
+        dragonDoubleTypes.get(family)!.add(pkm.types[1])
+      }
+    }
+  })
+
+  typesPerFamily.forEach((types) => {
+    types.forEach((type, i) => {
+      synergies.set(type, (synergies.get(type) ?? 0) + 1)
+    })
+  })
+
+  if (
+    (synergies.get(Synergy.DRAGON) ?? 0) >= SynergyTriggers[Synergy.DRAGON][0]
+  ) {
+    dragonDoubleTypes.forEach((types) => {
+      types.forEach((type, i) => {
+        synergies.set(type, (synergies.get(type) ?? 0) + 1)
+      })
+    })
+  }
+
+  return synergies
+}
+
+export function addSynergiesFromStones(pkm: IPokemon) {
   if (pkm.items.has(Item.FIRE_STONE) && !pkm.types.includes(Synergy.FIRE)) {
     pkm.types.push(Synergy.FIRE)
   }

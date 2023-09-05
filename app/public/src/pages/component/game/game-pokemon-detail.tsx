@@ -1,6 +1,5 @@
 import React, { useMemo } from "react"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
-import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
 import { RarityColor } from "../../../../../types/Config"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Stat } from "../../../../../types/enum/Game"
@@ -11,10 +10,12 @@ import { AbilityTooltip } from "../ability/ability-tooltip"
 import SynergyIcon from "../icons/synergy-icon"
 import "./game-pokemon-detail.css"
 import { useTranslation } from "react-i18next"
+import { Emotion } from "../../../../../types"
 
 export function GamePokemonDetail(props: {
   pokemon: Pokemon
-  pokemonConfig?: IPokemonConfig
+  shiny?: boolean
+  emotion?: Emotion
 }) {
   const { t } = useTranslation()
   const pokemonStats = useMemo(
@@ -43,8 +44,8 @@ export function GamePokemonDetail(props: {
         style={{ borderColor: RarityColor[props.pokemon.rarity] }}
         src={getPortraitSrc(
           props.pokemon.index,
-          props.pokemonConfig?.selectedShiny ?? props.pokemon.shiny,
-          props.pokemonConfig?.selectedEmotion ?? props.pokemon.emotion
+          props.shiny ?? props.pokemon.shiny,
+          props.emotion ?? props.pokemon.emotion
         )}
       />
       <div className="game-pokemon-detail-entry">

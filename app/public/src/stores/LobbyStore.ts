@@ -15,13 +15,13 @@ import {
   ISuggestionUser
 } from "../../../types"
 import { IMeta } from "../../../models/mongo-models/meta"
-import { IBot } from "../../../models/mongo-models/bot-v2"
+import { IBot, IStep } from "../../../models/mongo-models/bot-v2"
 import { IItemsStatistic } from "../../../models/mongo-models/items-statistic"
 import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
-import { Synergy } from "../../../types/enum/Synergy"
 import { IPokemonsStatistic } from "../../../models/mongo-models/pokemons-statistic"
 import { playSound, SOUNDS } from "../pages/utils/audio"
 import { Language } from "../../../types/enum/Language"
+import { MAX_BOTS_STAGE } from "../pages/component/bot-builder/bot-logic"
 
 export interface IUserLobbyState {
   botLogDatabase: string[]
@@ -41,7 +41,6 @@ export interface IUserLobbyState {
   metaPokemons: IPokemonsStatistic[]
   pastebinUrl: string
   botData: IBot
-  synergies: [Synergy, number][]
   pokemonCollection: IPokemonConfig[]
   boosterContent: string[]
   suggestions: ISuggestionUser[]
@@ -69,90 +68,11 @@ const initialState: IUserLobbyState = {
   metaItems: [],
   metaPokemons: [],
   pastebinUrl: "",
-  synergies: [],
   botData: {
-    steps: [
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      },
-      {
-        roundsRequired: 2,
-        board: []
-      }
-    ],
+    steps: Array.from({ length: MAX_BOTS_STAGE + 1 }, () => ({
+      roundsRequired: 1,
+      board: []
+    })) as IStep[],
     avatar: "ditto",
     author: "",
     elo: 1200,
@@ -290,12 +210,6 @@ export const lobbySlice = createSlice({
     setBotData: (state, action: PayloadAction<IBot>) => {
       state.botData = action.payload
     },
-    setBotCreatorSynergies: (
-      state,
-      action: PayloadAction<Map<Synergy, number>>
-    ) => {
-      state.synergies = Array.from(action.payload)
-    },
     setBoosterContent: (state, action: PayloadAction<string[]>) => {
       state.boosterContent = action.payload
     },
@@ -334,7 +248,6 @@ export const {
   setPastebinUrl,
   setBotData,
   leaveLobby,
-  setBotCreatorSynergies,
   setSuggestions,
   pushBotLog
 } = lobbySlice.actions

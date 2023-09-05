@@ -1,0 +1,138 @@
+#team-builder {
+  display: grid;
+  grid-template-areas: "synergies board selected" "synergies pokemons items";
+  grid-template-columns: 250px 1fr 340px;
+  grid-template-rows: 1fr 340px;
+  min-width: 1400px;
+  gap: 5px;
+  height: 75vh;
+  overflow-y: auto;
+}
+
+.basic-modal-body > #team-builder {
+  margin-top: -4px;
+  border-radius: 0 0 12px 12px;
+}
+
+#team-builder .synergies-container {
+  grid-area: synergies;
+}
+
+#team-editor {
+  grid-area: board;
+  display: grid;
+  place-content: center;
+  position: relative;
+}
+
+#team-editor table {
+  border-top: 4px dotted red;
+}
+
+#team-editor td {
+  width: 84px;
+  height: 84px;
+  cursor: var(--cursor-hover);
+  padding: 0;
+  background-color: #54596b;
+  border: 4px solid black;
+  position: relative;
+}
+
+#team-editor td.dragover {
+  background-color: #109fff;
+}
+
+#team-editor td img {
+  width: 80px;
+  height: 80px;
+  image-rendering: pixelated;
+}
+
+#team-editor td .pokemon-items {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 1px;
+}
+
+#team-editor td .pokemon-items > img {
+  height: 26px;
+  width: 26px;
+  object-fit: contain;
+  border-radius: 50%;
+  border: 2px solid black;
+  background-color: #54596b;
+}
+
+#selected-entity {
+  grid-area: selected;
+  align-self: start;
+}
+
+#selected-entity fieldset {
+  color: white;
+  font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+#selected-entity .nes-checkbox + span::before {
+  top: 0;
+}
+
+#item-picker {
+  grid-area: items;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: start;
+}
+
+#item-picker > img {
+  width: 40px;
+  height: 40px;
+  image-rendering: pixelated;
+  cursor: var(--cursor-hover);
+}
+
+#pokemon-picker {
+  grid-area: pokemons;
+}
+
+#pokemon-picker img.pokemon {
+  width: 40px;
+  height: 40px;
+  image-rendering: pixelated;
+  cursor: var(--cursor-hover);
+}
+
+#pokemon-picker .react-tabs__tab {
+  padding: 4px 8px;
+  text-align: center;
+  vertical-align: bottom;
+  min-width: 40px;
+  line-height: 40px;
+  font-size: 1.5rem;
+}
+
+#pokemon-picker .react-tabs__tab img {
+  display: block;
+}
+
+#bot-info {
+  position: absolute;
+  top: 4px;
+  left: 280px;
+}
+
+#bot-info .bot-avatar {
+  width: 80px;
+  height: 80px;
+  border: 4px solid black;
+  border-radius: 8px;
+}
+
+#bot-info p {
+  margin: 0;
+}

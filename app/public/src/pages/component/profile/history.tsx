@@ -10,7 +10,10 @@ import { formatDate } from "../../utils/date"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
-import { addSynergiesFromStones } from "../../../../../models/colyseus-models/synergies"
+import {
+  addSynergiesFromStones,
+  computeSynergies
+} from "../../../../../models/colyseus-models/synergies"
 import "./history.css"
 import { useTranslation } from "react-i18next"
 
@@ -48,26 +51,16 @@ export default function History(props: { history: IGameRecord[] }) {
 }
 
 function getTopSynergies(team: IPokemonRecord[]): [Synergy, number][] {
-  const synergies = new Map<Synergy, number>()
-  const typesPerFamily = new Map<Pkm, Set<Synergy>>()
-
-  team.forEach((pkmRecord: IPokemonRecord) => {
-    const pkm = PokemonFactory.createPokemonFromName(pkmRecord.name)
-    pkmRecord.items.forEach((item) => {
-      pkm.items.add(item)
+  const synergies = computeSynergies(
+    team.map((pkmRecord) => {
+      const pkm = PokemonFactory.createPokemonFromName(pkmRecord.name)
+      pkm.positionY = 1 // just to not be counted on bench
+      pkmRecord.items.forEach((item) => {
+        pkm.items.add(item)
+      })
+      return pkm
     })
-    addSynergiesFromStones(pkm)
-    const family = PkmFamily[pkm.name]
-    if (!typesPerFamily.has(family)) typesPerFamily.set(family, new Set())
-    const types: Set<Synergy> = typesPerFamily.get(family)!
-    pkm.types.forEach((type) => types.add(type))
-  })
-
-  typesPerFamily.forEach((types) => {
-    types.forEach((type) => {
-      synergies.set(type, (synergies.get(type) ?? 0) + 1)
-    })
-  })
+  )
 
   const topSynergies = [...synergies.entries()]
     .sort((a, b) => b[1] - a[1])

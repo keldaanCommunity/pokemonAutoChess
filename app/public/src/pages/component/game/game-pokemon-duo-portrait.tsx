@@ -59,7 +59,11 @@ export default function GamePokemonDuoPortrait(props: {
             className="customeTheme game-pokemon-detail-tooltip"
             place="bottom"
           >
-            <GamePokemonDetail pokemon={p} pokemonConfig={duoConfig[i]} />
+            <GamePokemonDetail
+              pokemon={p}
+              emotion={duoConfig[i]?.selectedEmotion}
+              shiny={duoConfig[i]?.selectedShiny}
+            />
           </ReactTooltip>
         </React.Fragment>
       ))}

@@ -51,7 +51,6 @@ export class DebugScene extends Phaser.Scene {
     animationType: AnimationType,
     status: Status | ""
   ) {
-    console.log("update scene", pkm, orientation, animationType, status)
     if (this.pokemon) {
       this.pokemon.destroy(true)
     }

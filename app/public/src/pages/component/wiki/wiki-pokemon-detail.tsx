@@ -9,7 +9,7 @@ import { Pkm } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
 import SynergyIcon from "../icons/synergy-icon"
 import { AbilityTooltip } from "../ability/ability-tooltip"
-import { Rarity, Stat } from "../../../../../types/enum/Game"
+import { Stat } from "../../../../../types/enum/Game"
 import "./wiki-pokemon-detail.css"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
 import { Ability } from "../../../../../types/enum/Ability"
@@ -65,7 +65,7 @@ export default function WikiPokemonDetail(props: {
   return (
     <div className="wiki-pokemon-detail">
       <div className="game-pokemon-detail-tooltip">
-        <GamePokemonDetail pokemon={pokemon}></GamePokemonDetail>
+        <GamePokemonDetail pokemon={pokemon} />
       </div>
       <dl>
         <dt>{t("name")}</dt>
