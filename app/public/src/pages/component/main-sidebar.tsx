@@ -12,7 +12,6 @@ import Profile from "./profile/profile"
 import GameOptionsModal from "./game/game-options-modal"
 import MetaReport from "./meta-report/meta-report"
 import KeybindInfo from "./keybind-info/keybind-info"
-import TeamBuilder from "./bot-builder/team-builder"
 import { BasicModal } from "./modal/modal"
 import News from "./news/news"
 import { useNews } from "./news/useNews"
@@ -20,6 +19,7 @@ import Wiki from "./wiki/wiki"
 import pkg from "../../../../../package.json"
 
 import "./main-sidebar.css"
+import TeamBuilderModal from "./bot-builder/team-builder-modal"
 
 export type Page = "main_lobby" | "preparation" | "game"
 
@@ -378,11 +378,9 @@ function Modals({
         handleClose={closeModal}
         body={<KeybindInfo />}
       />
-      <BasicModal
+      <TeamBuilderModal
         show={modal === "team-builder"}
         handleClose={closeModal}
-        title={t("team_builder")}
-        body={<TeamBuilder />}
       />
       <GameOptionsModal
         show={modal === "options"}

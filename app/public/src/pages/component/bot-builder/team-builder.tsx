@@ -21,7 +21,7 @@ export default function TeamBuilder(props: {
   bot?: IBot
   onChangeAvatar?: (pkm: PkmWithConfig) => void
   board: IDetailledPokemon[]
-  updateBoard?: (board: IDetailledPokemon[]) => void
+  updateBoard: (board: IDetailledPokemon[]) => void
   error?: string
 }) {
   const [selection, setSelection] = useState<Item | PkmWithConfig>({
