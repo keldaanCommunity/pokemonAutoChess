@@ -707,4 +707,18 @@ p:last-child {
   border-radius: 4px;
   box-shadow: 2px 2px 0 #00000060;
   image-rendering: pixelated;
+  position: relative;
+}
+
+.pokemon-portrait.additional::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  right: 0px;
+  height: 12px;
+  width: 12px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABISURBVChTjZABCgAgCAO1///ZWqlpRXggQptNZMqIduBa0+6IRN/iMr2ACaNWEX9H7kg49Q0zz+WSAwMQfuBXi3FKixfuRNQBW78Y/CRSBzwAAAAASUVORK5CYII=);
+  background-size: cover;
+  image-rendering: pixelated;
+  filter: invert(1);
 }

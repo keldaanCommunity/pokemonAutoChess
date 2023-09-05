@@ -2,7 +2,7 @@
   display: grid;
   grid-template-areas: "synergies board selected" "synergies pokemons items";
   grid-template-columns: 250px 1fr 340px;
-  grid-template-rows: 1fr 340px;
+  grid-template-rows: 1fr 420px;
   min-width: 1400px;
   gap: 5px;
   height: 75vh;
@@ -98,6 +98,7 @@
 
 #pokemon-picker {
   grid-area: pokemons;
+  overflow-y: auto;
 }
 
 #pokemon-picker img.pokemon {
@@ -108,16 +109,22 @@
 }
 
 #pokemon-picker .react-tabs__tab {
-  padding: 4px 8px;
+  padding: 0;
   text-align: center;
   vertical-align: bottom;
-  min-width: 40px;
+  min-width: 1ch;
   line-height: 40px;
-  font-size: 1.5rem;
 }
 
 #pokemon-picker .react-tabs__tab img {
   display: block;
+}
+
+#rarity-grid {
+  display: grid;
+  grid-template: auto / 8ch 1fr 8ch 1fr;
+  margin: 0;
+  gap: 0 0.5em;
 }
 
 #bot-info {
