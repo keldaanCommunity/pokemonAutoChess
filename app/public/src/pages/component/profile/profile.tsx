@@ -21,6 +21,7 @@ import { Title, Role } from "../../../../../types"
 import SearchResults from "./search-results"
 import "./profile.css"
 import { setSearchedUser, setSuggestions } from "../../../stores/LobbyStore"
+import { GadgetsTab } from "./gadgets-tab"
 
 export default function Profile() {
   const { t } = useTranslation()
@@ -76,6 +77,7 @@ function MyProfileMenu() {
         <Tab>{t("name")}</Tab>
         <Tab>{t("avatar")}</Tab>
         <Tab>{t("title_label")}</Tab>
+        <Tab>{t("gadgets")}</Tab>
       </TabList>
 
       <TabPanel>
@@ -86,6 +88,9 @@ function MyProfileMenu() {
       </TabPanel>
       <TabPanel>
         <TitleTab />
+      </TabPanel>
+      <TabPanel>
+        <GadgetsTab />
       </TabPanel>
     </Tabs>
   )

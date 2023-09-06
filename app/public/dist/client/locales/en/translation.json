@@ -1980,5 +1980,20 @@
   "key_desc_refresh": "Refresh shop",
   "key_desc_avatar_anim": "Play avatar animation",
   "key_desc_avatar_emotes": "Toggle emote menu",
-  "jukebox": "Jukebox"
+  "jukebox": "Jukebox",
+  "gadgets": "Gadgets",
+  "gadgets_unlocked": "gadgets unlocked",
+  "gadget": {
+    "trainer_card": "Trainer Card",
+    "trainer_card_desc": "Let you change your name, avatar and title",
+    "bag": "Bag",
+    "bag_desc": "Used to store your collection and boosters cards",
+    "team_planner": "Team Planner",
+    "team_planner_desc": "Prepare your composition in advance",
+    "bot_builder": "Bot Builder",
+    "bot_builder_desc": "Create your own bots and submit them to have a chance to be included in the game",
+    "jukebox": "Jukebox",
+    "jukebox_desc": "Choose your music ingame"
+  },
+  "level_required": "Level required"
 }
