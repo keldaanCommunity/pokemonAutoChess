@@ -2,9 +2,16 @@
 patch announcement
 ---
 
-> September,
+> September, 9th
 
 # Patch 4.1
+
+# Introducing player gadgets
+
+- Players now unlock new tools in the sidebar menu, called "gadgets", when they reach certain level. You can see your gadgets in your profile
+- New gadget: Team Planner (level 10 required): Prepare your composition in advance before or during a game
+- New gadget: Jukebox (level 30 required): Choose your music ingame
+- Bot Builder is now a gadget unlocked at level 20
 
 # Gameplay
 
@@ -62,11 +69,10 @@ patch announcement
 - The key "S" now toggles the emote menu in game
 - The key "A" now plays a user avatar's animation in game
 - User in-game avatars can now use animations during carousel phases
-- Added in-game modal for displaying all possible keybinds
+- Added in-game modal for displaying all the keyboard shortcuts
 - Redesigned **Online** avatars
 - Improved **Chat** timestamp displays
-- Pokemon details shown on hover not attach to mouse instead of pokemon
-  - This should help avoid situations where you're unable to click/hover on pokemon to the right of what's being hovered
+- Pokemon details shown on hover not attach to mouse instead of pokemon. This should help avoid situations where you're unable to click/hover on pokemon to the right of what's being hovered
 
 # Bugfix
 
