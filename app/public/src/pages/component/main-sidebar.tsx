@@ -43,12 +43,14 @@ export function MainSidebar(props: MainSidebarProps) {
 
   const { t } = useTranslation()
   const user = useAppSelector((state) => state.lobby.user)
+  const profile = useAppSelector((state) => state.network.profile)
+  const profileLevel = profile?.level ?? 0
 
   const { isNewVersion, updateNewsVersion } = useNews()
 
   const version = pkg.version
 
-  const numberOfBooster = user?.booster ?? 0
+  const numberOfBooster = profile?.booster ?? 0
 
   useEffect(() => {
     if (!sidebarRef.current) {
@@ -117,7 +119,7 @@ export function MainSidebar(props: MainSidebarProps) {
         )}
 
         {/** TODO Enable these once we populate preparation room pokemonCollection */}
-        {page === "main_lobby" && (
+        {page === "main_lobby" && profileLevel >= 1 && (
           <NavLink
             location="collection"
             svg="collection"
@@ -127,7 +129,7 @@ export function MainSidebar(props: MainSidebarProps) {
             {t("collection")}
           </NavLink>
         )}
-        {page === "main_lobby" && (
+        {page === "main_lobby" && profileLevel >= 1 && (
           <NavLink
             location="booster"
             svg="booster"
@@ -155,21 +157,21 @@ export function MainSidebar(props: MainSidebarProps) {
           {t("meta")}
         </NavLink>
 
-        <NavLink
-          svg="team-builder"
-          location="team-builder"
-          handleClick={changeModal}
-        >
-          {t("team_builder")}
-        </NavLink>
+        {profileLevel >= 10 && (
+          <NavLink
+            svg="team-builder"
+            location="team-builder"
+            handleClick={changeModal}
+          >
+            {t("team_builder")}
+          </NavLink>
+        )}
 
-        {page !== "game" &&
-          user?.anonymous === false &&
-          user?.title === Title.BOT_BUILDER && (
-            <NavLink svg="bot" onClick={() => navigate("/bot-builder")}>
-              {t("bot_builder")}
-            </NavLink>
-          )}
+        {page !== "game" && user?.anonymous === false && profileLevel >= 20 && (
+          <NavLink svg="bot" onClick={() => navigate("/bot-builder")}>
+            {t("bot_builder")}
+          </NavLink>
+        )}
 
         {page !== "game" &&
           (user?.role === Role.ADMIN ||
@@ -193,7 +195,7 @@ export function MainSidebar(props: MainSidebarProps) {
           </NavLink>
         )}
 
-        {page === "game" && user?.level && user.level >= 20 && (
+        {page === "game" && profileLevel >= 30 && (
           <NavLink
             svg="compact-disc"
             location="jukebox"

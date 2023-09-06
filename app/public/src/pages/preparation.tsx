@@ -7,7 +7,7 @@ import { FIREBASE_CONFIG } from "./utils/utils"
 import PreparationState from "../../../rooms/states/preparation-state"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import { Client, Room } from "colyseus.js"
-import { gameStart, joinPreparation, logIn } from "../stores/NetworkStore"
+import { gameStart, joinPreparation, logIn, setProfile } from "../stores/NetworkStore"
 import {
   addUser,
   changeUser,
@@ -34,6 +34,7 @@ import { MainSidebar } from "./component/main-sidebar"
 import { useTranslation } from "react-i18next"
 import { PreloadingScene } from "../game/scenes/preloading-scene"
 import { localStore, LocalStoreKeys } from "./utils/store"
+import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 
 export default function Preparation() {
   const { t } = useTranslation()
@@ -216,6 +217,10 @@ export default function Preparation() {
           dispatch(leavePreparation())
           setToGame(true)
         }
+      })
+
+      r.onMessage(Transfer.USER_PROFILE, (user: IUserMetadata) => {
+        dispatch(setProfile(user))
       })
     }
 

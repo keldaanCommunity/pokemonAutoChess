@@ -396,6 +396,8 @@ export default class GameRoom extends Room<GameState> {
       const token = await admin.auth().verifyIdToken(options.idToken)
       const user = await admin.auth().getUser(token.uid)
       const isBanned = await BannedUser.findOne({ uid: user.uid })
+      const userProfile = await UserMetadata.findOne({ uid: user.uid })
+      client.send(Transfer.USER_PROFILE, userProfile)
 
       if (!user.displayName) {
         throw "No display name"
