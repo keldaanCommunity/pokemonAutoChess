@@ -22,12 +22,12 @@ import {
   Transfer
 } from "../../../../types"
 import { DesignTiled } from "../../../../core/design"
-import { getPreferences } from "../../preferences"
 import { Item } from "../../../../types/enum/Item"
 import Player from "../../../../models/colyseus-models/player"
 import MinigameManager from "../components/minigame-manager"
 import LoadingManager from "../components/loading-manager"
 import Simulation from "../../../../core/simulation"
+import { playMusic } from "../../pages/utils/audio"
 
 export default class GameScene extends Scene {
   tilemap: DesignTiled | undefined
@@ -155,11 +155,7 @@ export default class GameScene extends Scene {
         this.animationManager,
         this.uid
       )
-      this.music = this.sound.add("sound", {
-        loop: true
-      }) as Phaser.Sound.WebAudioSound
-      const musicVolume = getPreferences().musicVolume / 100
-      this.music.play({ volume: musicVolume, loop: true })
+      playMusic(this, this.tilemap.tilesets[0].name)
     }
   }
 

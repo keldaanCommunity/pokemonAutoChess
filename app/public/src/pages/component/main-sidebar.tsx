@@ -16,10 +16,11 @@ import { BasicModal } from "./modal/modal"
 import News from "./news/news"
 import { useNews } from "./news/useNews"
 import Wiki from "./wiki/wiki"
+import TeamBuilderModal from "./bot-builder/team-builder-modal"
+import Jukebox from "./jukebox/jukebox"
 import pkg from "../../../../../package.json"
 
 import "./main-sidebar.css"
-import TeamBuilderModal from "./bot-builder/team-builder-modal"
 
 export type Page = "main_lobby" | "preparation" | "game"
 
@@ -188,7 +189,17 @@ export function MainSidebar(props: MainSidebarProps) {
 
         {page === "game" && (
           <NavLink svg="keyboard" location="keybinds" handleClick={changeModal}>
-            Key bindings
+            {t("key_bindings")}
+          </NavLink>
+        )}
+
+        {page === "game" && user?.level && user.level >= 20 && (
+          <NavLink
+            svg="compact-disc"
+            location="jukebox"
+            handleClick={changeModal}
+          >
+            Jukebox
           </NavLink>
         )}
 
@@ -315,6 +326,7 @@ export type Modals =
   | "news"
   | "options"
   | "keybinds"
+  | "jukebox"
 
 function Modals({
   modal,
@@ -387,6 +399,7 @@ function Modals({
         page={page}
         hideModal={closeModal}
       />
+      <Jukebox show={modal === "jukebox"} handleClose={closeModal} />
     </>
   )
 }

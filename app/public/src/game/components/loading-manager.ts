@@ -38,7 +38,7 @@ export default class LoadingManager {
     })
 
     if (scene instanceof GameScene && scene.tilemap) {
-      scene.load.audio("sound", [
+      scene.load.audio("music_"+scene.tilemap.tilesets[0].name, [
         `https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChessMusic/main/music/${scene.tilemap.tilesets[0].name}.mp3`
       ])
       scene.load.image(
