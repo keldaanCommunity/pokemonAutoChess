@@ -10,6 +10,11 @@
   text-transform: uppercase;
 }
 
+#wiki-page .synergies-tabs li[role="tab"] {
+  padding: 4px 6px;
+  line-height: 40px;
+}
+
 #wiki-page > .nes-container {
   color: white;
   background-color: #54596b;
@@ -25,7 +30,7 @@
   text-transform: capitalize;
 }
 
-#wiki-page .pokemon-portrait {  
+#wiki-page .pokemon-portrait {
   display: inline-block;
   margin: 2px;
 }
