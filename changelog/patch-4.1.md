@@ -74,4 +74,4 @@ patch announcement
 
 # Misc
 
--
+- Ice 2, Ice 3 and Flora 3 no longer gives a Portal symbol
