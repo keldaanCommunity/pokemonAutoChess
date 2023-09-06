@@ -8788,7 +8788,7 @@ export class Gligar extends Pokemon {
       shiny,
       emotion,
       false,
-      true,
+      false,
       Passive.GLIGAR
     )
   }
