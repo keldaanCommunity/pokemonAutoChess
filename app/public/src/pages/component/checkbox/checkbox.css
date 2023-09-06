@@ -1,0 +1,10 @@
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: var(--cursor-hover);
+}
+
+.checkbox-container span {
+    line-height: 16px;
+}

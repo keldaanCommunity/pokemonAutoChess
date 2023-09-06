@@ -2,8 +2,3 @@
   width: 100%;
 }
 
-/* prevents weird tearing at wider screens */
-.game-options-modal-body .nes-checkbox + span::before,
-.game-options-modal-body .nes-checkbox:checked + span::before {
-  top: 0.35em;
-}
