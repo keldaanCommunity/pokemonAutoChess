@@ -534,10 +534,10 @@ export default class GameRoom extends Room<GameState> {
 
             if (usr.level >= 10) {
               player.titles.add(Title.ROOKIE)
-              player.titles.add(Title.BOT_BUILDER)
             }
             if (usr.level >= 20) {
               player.titles.add(Title.AMATEUR)
+              player.titles.add(Title.BOT_BUILDER)
             }
             if (usr.level >= 30) {
               player.titles.add(Title.VETERAN)
@@ -647,7 +647,11 @@ export default class GameRoom extends Room<GameState> {
 
     player.board.forEach((pokemon: IPokemon) => {
       if (pokemon.positionY != 0) {
-        const avatar = getAvatarString(pokemon.index, pokemon.shiny, pokemon.emotion)
+        const avatar = getAvatarString(
+          pokemon.index,
+          pokemon.shiny,
+          pokemon.emotion
+        )
         const s: IGameHistoryPokemonRecord = {
           name: pokemon.name,
           avatar: avatar,
