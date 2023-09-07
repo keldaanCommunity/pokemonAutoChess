@@ -966,7 +966,7 @@
     "SPLASH": "Just flops and splashes around to no effect at all...",
     "PECK": "Deals [10,20,30,SP] SPECIAL to the target",
     "COUNTER": "Pokemon lashes out at adjacent enemies dealing [100,SP]% of its missing HP as SPECIAL",
-    "COSMIC_POWER": "Buff adjacent pokemons AP by [10,20,30]",
+    "COSMIC_POWER": "Buff your team AP by [20,SP]",
     "STICKY_WEB": "Deals [10,20,40,SP] SPECIAL and PARALYSIS the target and adjacent enemies for 4 seconds",
     "SILVER_WIND": "Dash into the enemy backline, dealing [30,60,120,SP] SPECIAL to every enemy on the path. Then gain 1 ATK, 1 DEF, 1 SPE_DEF, 10% AP and 10% ATK_SPEED",
     "POISON_POWDER": "Dash into the enemy backline, dealing [30,60,120,SP] and applying POISON for 5 seconds to every enemy on the path",

@@ -922,7 +922,7 @@
   "ability_description.SPLASH": "Es flattert und spritzt einfach herum, ohne jegliche Wirkung ...",
   "ability_description.PECK": "Fügt dem Ziel [10,20,30,SP] SPECIAL zu",
   "ability_description.COUNTER": "Das Pokémon schlägt auf benachbarte Gegner ein und verursacht SPECIAL schaden in Höhe seiner fehlenden HP (Skalierung mit AP).",
-  "ability_description.COSMIC_POWER": "Verbessere die AP benachbarter Pokémon um [10,20,30]",
+  "ability_description.COSMIC_POWER": "Verbessere die AP deines Teams um [20,SP]",
   "ability_description.STICKY_WEB": "Verursacht [10,20,40,SP] SPECIAL und PARALYSIS das Ziel und benachbarte Feinde für 4 Sekunden",
   "ability_description.SILVER_WIND": "Stürme in die gegnerische Hinterlinie und füge jedem Feind auf dem Weg [30,60,120,SP] SPECIAL zu. Dann erhältst du 1 ATK, 1 DEF, 1 SPE_DEF, 10 % AP und 10 % ATK_SPEED",
   "ability_description.POISON_POWDER": "Stürme in die gegnerische Hinterlinie, verursache [30,60,120,SP] und verursache 5 Sekunden lang POISON auf jeden Feind auf dem Weg",

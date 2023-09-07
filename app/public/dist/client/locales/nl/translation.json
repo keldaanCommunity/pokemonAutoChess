@@ -921,7 +921,7 @@
   "ability_description.SPLASH": "Gewoon floppen en spetteren zonder enig effect...",
   "ability_description.PECK": "Biedt [10,20,30,SP] SPECIAL aan het doelwit",
   "ability_description.COUNTER": "Pokemon haalt uit naar aangrenzende vijanden die SPECIAL uitdelen gelijk aan zijn ontbrekende HP (schaal met AP)",
-  "ability_description.COSMIC_POWER": "Verbeter aangrenzende pokemons AP met [10,20,30]",
+  "ability_description.COSMIC_POWER": "Verbeter de AP van je team met [20,SP]",
   "ability_description.STICKY_WEB": "Deelt [10,20,40,SP] SPECIAL uit en verlamt het doelwit en aangrenzende vijanden gedurende 4 seconden",
   "ability_description.SILVER_WIND": "Stort je in de achterlijn van de vijand en deel [30,60,120,SP] SPECIAL uit aan elke vijand op het pad. Krijg dan 1 ATK, 1 DEF, 1 SPE_DEF, 10% AP en 10% ATK_SPEED",
   "ability_description.POISON_POWDER": "Stort je in de achterlijn van de vijand, deel [30,60,120,SP] en breng gedurende 5 seconden POISON aan op elke vijand op het pad",

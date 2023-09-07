@@ -923,7 +923,7 @@
   "ability_description.SPLASH": "Solo flop e spruzzi senza alcun effetto...",
   "ability_description.PECK": "Infligge [10,20,30,SP] SPECIAL al bersaglio",
   "ability_description.COUNTER": "I Pokemon si scagliano contro i nemici adiacenti infliggendo SPECIAL pari ai suoi HP mancanti (Scala con AP)",
-  "ability_description.COSMIC_POWER": "Aumenta i AP dei pokemon adiacenti di [10,20,30]",
+  "ability_description.COSMIC_POWER": "Aumenta i AP della tua squadra di [20,SP]",
   "ability_description.STICKY_WEB": "Infligge [10,20,40,SP] SPECIAL e PARALYSIS al bersaglio e ai nemici adiacenti per 4 secondi",
   "ability_description.SILVER_WIND": "Scatta nelle retrovie nemiche, infliggendo [30,60,120,SP] SPECIAL a tutti i nemici sul percorso. Quindi ottieni 1 ATK, 1 DEF, 1 SPE_DEF, 10% AP e 10% ATK_SPEED",
   "ability_description.POISON_POWDER": "Scatta nelle retrovie nemiche, infliggendo [30,60,120,SP] e applicando POISON per 5 secondi a ogni nemico sul percorso",
