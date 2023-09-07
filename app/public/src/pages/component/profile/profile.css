@@ -77,7 +77,7 @@
   border-top: 0;
 }
 
-.profile-actions .nes-container {
+.profile-actions > .nes-container {
   height: 100%;
   background-color: #54596b;
 }
@@ -87,4 +87,37 @@
   margin-left: 1em;
   max-height: 100%;
   overflow-y: scroll;
+}
+
+.profile .gadgets {
+  padding: 0;
+}
+
+.profile .gadget {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 0 1em;
+  margin-top: 1em;
+}
+
+.profile .gadget > img {
+  grid-row: 1/4;
+  width: 80px;
+  margin: auto;
+}
+
+.profile .gadget span {
+  font-size: 2rem;
+}
+
+.profile .gadget small {
+  color: red;
+}
+
+.profile .gadget p {
+  margin: 0;
+  line-height: 1em;
+  font-size: 0.75em;
+  color: #ccc;
 }

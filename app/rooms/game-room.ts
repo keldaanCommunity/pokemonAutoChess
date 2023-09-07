@@ -396,6 +396,8 @@ export default class GameRoom extends Room<GameState> {
       const token = await admin.auth().verifyIdToken(options.idToken)
       const user = await admin.auth().getUser(token.uid)
       const isBanned = await BannedUser.findOne({ uid: user.uid })
+      const userProfile = await UserMetadata.findOne({ uid: user.uid })
+      client.send(Transfer.USER_PROFILE, userProfile)
 
       if (!user.displayName) {
         throw "No display name"
@@ -532,10 +534,10 @@ export default class GameRoom extends Room<GameState> {
 
             if (usr.level >= 10) {
               player.titles.add(Title.ROOKIE)
-              player.titles.add(Title.BOT_BUILDER)
             }
             if (usr.level >= 20) {
               player.titles.add(Title.AMATEUR)
+              player.titles.add(Title.BOT_BUILDER)
             }
             if (usr.level >= 30) {
               player.titles.add(Title.VETERAN)
@@ -645,7 +647,11 @@ export default class GameRoom extends Room<GameState> {
 
     player.board.forEach((pokemon: IPokemon) => {
       if (pokemon.positionY != 0) {
-        const avatar = getAvatarString(pokemon.index, pokemon.shiny, pokemon.emotion)
+        const avatar = getAvatarString(
+          pokemon.index,
+          pokemon.shiny,
+          pokemon.emotion
+        )
         const s: IGameHistoryPokemonRecord = {
           name: pokemon.name,
           avatar: avatar,

@@ -21,7 +21,8 @@ import {
   requestLeaderboard,
   requestBotLeaderboard,
   requestLevelLeaderboard,
-  logOut
+  logOut,
+  setProfile
 } from "../stores/NetworkStore"
 import {
   setBotData,
@@ -70,6 +71,7 @@ import { useTranslation } from "react-i18next"
 import "./lobby.css"
 import { localStore, LocalStoreKeys } from "./utils/store"
 import { Modal } from "react-bootstrap"
+import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 
 export default function Lobby() {
   const dispatch = useAppDispatch()
@@ -321,6 +323,10 @@ export async function join(
         room.onMessage(Transfer.REMOVE_ROOM, (roomId: string) =>
           dispatch(removeRoom(roomId))
         )
+
+        room.onMessage(Transfer.USER_PROFILE, (user: IUserMetadata) => {
+          dispatch(setProfile(user))
+        })
 
         room.onMessage(Transfer.USER, (user: LobbyUser) =>
           dispatch(setSearchedUser(user))

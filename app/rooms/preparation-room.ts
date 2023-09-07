@@ -2,6 +2,7 @@ import { Client, Room, updateLobby } from "colyseus"
 import { Dispatcher } from "@colyseus/command"
 import PreparationState from "./states/preparation-state"
 import admin from "firebase-admin"
+import { nanoid } from "nanoid"
 import {
   OnGameStartCommand,
   OnGameStartRequestCommand,
@@ -25,10 +26,10 @@ import { components } from "../api-v1/openapi"
 import { GameUser } from "../models/colyseus-models/game-user"
 import BannedUser from "../models/mongo-models/banned-user"
 import { IBot } from "../models/mongo-models/bot-v2"
+import UserMetadata from "../models/mongo-models/user-metadata"
 import { logger } from "../utils/logger"
 import { cleanProfanity } from "../utils/profanity-filter"
 import { MAX_PLAYERS_PER_LOBBY } from "../types/Config"
-import { nanoid } from "nanoid"
 
 export default class PreparationRoom extends Room<PreparationState> {
   dispatcher: Dispatcher<this>
@@ -223,6 +224,9 @@ export default class PreparationRoom extends Room<PreparationState> {
       const token = await admin.auth().verifyIdToken(options.idToken)
       const user = await admin.auth().getUser(token.uid)
       const isBanned = await BannedUser.findOne({ uid: user.uid })
+      const userProfile = await UserMetadata.findOne({ uid: user.uid })
+      client.send(Transfer.USER_PROFILE, userProfile)
+
       const isAlreadyInRoom = this.state.users.has(user.uid)
       let numberOfHumanPlayers = 0
       this.state.users.forEach((u) => {

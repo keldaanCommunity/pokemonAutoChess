@@ -5,6 +5,8 @@ import AfterGameState from "./states/after-game-state"
 import admin from "firebase-admin"
 import BannedUser from "../models/mongo-models/banned-user"
 import { logger } from "../utils/logger"
+import UserMetadata from "../models/mongo-models/user-metadata"
+import { Transfer } from "../types"
 
 export default class AfterGameRoom extends Room<AfterGameState> {
   dispatcher: Dispatcher<this>
@@ -48,6 +50,8 @@ export default class AfterGameRoom extends Room<AfterGameState> {
       const token = await admin.auth().verifyIdToken(options.idToken)
       const user = await admin.auth().getUser(token.uid)
       const isBanned = await BannedUser.findOne({ uid: user.uid })
+      const userProfile = await UserMetadata.findOne({ uid: user.uid })
+      client.send(Transfer.USER_PROFILE, userProfile)
 
       if (!user.displayName) {
         throw "No display name"
