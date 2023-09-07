@@ -51,6 +51,8 @@ patch announcement
 - Grass adjustment: heals frequency every 1→2 seconds ; heal amount 4/8/16 → 8/15/30
 - Bug: 2/4/6 → 2/4/6/8 ; Number of copies: 1/2/4 → 1/2/3/5
 - Buff Dragon Dance: 10% → 20% AS and AP
+- Added Fairy 8: Moon Force: all enemy team is charmed for 2 seconds at the start of the fight
+- Buff Fairy: shock damage 10/30/55 → 15/30/60 special damage
 
 ## Changes to Items
 

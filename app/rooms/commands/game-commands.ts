@@ -952,7 +952,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           case Effect.CURSE:
             player.titles.add(Title.HEX_MANIAC)
             break
-          case Effect.STRANGE_STEAM:
+          case Effect.MOON_FORCE:
             player.titles.add(Title.CUTE_MANIAC)
             break
           case Effect.SHEER_COLD:
