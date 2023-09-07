@@ -1971,5 +1971,6 @@
   "team_builder": "Team Builder",
   "titles_unlocked": "titles unlocked",
   "game-reconnect-modal-title": "Reconnect to game",
-  "game-reconnect-modal-body": "You left a game in progress. Do you want to reconnect to your previous game ?"
+  "game-reconnect-modal-body": "You left a game in progress. Do you want to reconnect to your previous game ?",
+  "toggle_locked": "Show locked"
 }

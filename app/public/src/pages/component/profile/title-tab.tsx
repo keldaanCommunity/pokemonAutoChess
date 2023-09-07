@@ -14,13 +14,13 @@ export function TitleTab() {
   return user ? (
     <div>
       <p>
-        {user.titles.length} / {Object.keys(Title).length}
+        {user.titles.length} / {Object.keys(Title).length}{" "}
         {t("titles_unlocked")}
       </p>
       <Checkbox
         checked={showUnlocked}
         onToggle={setShowUnlocked}
-        label="Show locked"
+        label={t('toggle_locked')}
         isDark
       />
       <ul className="titles">
