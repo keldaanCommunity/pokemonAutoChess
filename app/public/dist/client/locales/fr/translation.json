@@ -958,7 +958,7 @@
     "SPLASH": "Juste des flops et des éclaboussures sans aucun effet du tout...",
     "PECK": "Inflige [10,20,30,SP] SPECIAL à la cible",
     "COUNTER": "Inflige aux ennemies adjacents [100,SP]% de ses HP manquants en SPECIAL",
-    "COSMIC_POWER": "Augmente la AP des pokémons adjacents de [10,20,30]",
+    "COSMIC_POWER": "Augmente la AP de votre équipe de [20,SP]",
     "STICKY_WEB": "Inflige [10,20,40,SP] SPECIAL et PARALYSIS à la cible et les ennemis autour pendant 4 secondes",
     "SILVER_WIND": "Fonce dans la ligne de fond ennemie, infligeant [30,60,120,SP] SPECIAL à chaque ennemi sur le chemin. Puis gagne 1 ATK, 1 DEF, 1 SPE_DEF, 10% AP et 10% ATK_SPEED",
     "POISON_POWDER": "Fonce dans la ligne de fond ennemie, infligeant [30,60,120,SP] et appliquant POISON pendant 5 secondes à chaque ennemi sur le chemin",

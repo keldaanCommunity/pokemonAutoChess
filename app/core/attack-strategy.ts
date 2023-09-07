@@ -2683,12 +2683,10 @@ export class CosmicPowerStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
-    const ap = pokemon.stars === 3 ? 30 : pokemon.stars === 2 ? 20 : 10
-    pokemon.addAbilityPower(ap, false)
-    cells.forEach((cell) => {
-      if (cell.value && pokemon.team === cell.value.team) {
-        cell.value.addAbilityPower(ap, false)
+    const apGain = Math.round(20 * (1 + pokemon.ap / 100))
+    board.forEach((x, y, ally) => {
+      if (ally && ally.team === pokemon.team) {
+        ally.addAbilityPower(apGain, false)
       }
     })
   }

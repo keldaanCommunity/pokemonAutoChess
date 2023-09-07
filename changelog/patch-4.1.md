@@ -44,6 +44,9 @@ patch announcement
 - Buff Drifloon: HP: 100 → 120
 - Adjusted Onix line stats: Onix Attack 10 → 9 ; Steelix Attack 9 → 14, Spe Def 10 → 5
 - Nerf Scizor: HP 210 → 180, Mega-Scizor HP 290 → 250
+- Buff Solrock: now has Fire synergy
+- Buff Lunatone: now has Dark synergy
+- Adapted Cosmic Power: ~~30 AP for adjacent allies~~ 20 AP for your whole team (scales with AP)
 
 # Changes to Synergies
 

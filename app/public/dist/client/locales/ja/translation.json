@@ -923,7 +923,7 @@
   "ability_description.SPLASH": "パタパタと飛び散るだけで、まったく効果がありません...",
   "ability_description.PECK": "対象者に【10,20,30,SP】SPECIALを与える",
   "ability_description.COUNTER": "ポケモンは隣接する敵に激しく攻撃し、不足している HP に等しい SPECIAL を与えます (AP に応じて調整)",
-  "ability_description.COSMIC_POWER": "隣接するポケモンのAPを[10,20,30]バフする",
+  "ability_description.COSMIC_POWER": "チームAPを[20,SP]バフします",
   "ability_description.STICKY_WEB": "ターゲットと隣接する敵に4秒間[10,20,40,SP]SPECIALと麻痺を与える",
   "ability_description.SILVER_WIND": "敵の後衛にダッシュし、進路上のすべての敵に[30,60,120,SP]のSPECIALを与える。その後、ATK 1、DEF 1、SPE_DEF 1、AP 10%、ATK_SPEED 10% を獲得します。",
   "ability_description.POISON_POWDER": "敵の後衛にダッシュし、[30,60,120,SP]を与え、パス上のすべての敵に5秒間POISONを適用します",

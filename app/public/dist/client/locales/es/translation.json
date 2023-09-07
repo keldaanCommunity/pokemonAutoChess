@@ -922,7 +922,7 @@
   "ability_description.SPLASH": "Simplemente se cae y salpica sin ningún efecto...",
   "ability_description.PECK": "Otorga [10,20,30,SP] SPECIAL al objetivo",
   "ability_description.COUNTER": "Pokémon arremete contra los enemigos adyacentes y les inflige SPECIAL igual a su HP faltante (escala con AP)",
-  "ability_description.COSMIC_POWER": "Buff pokemons adyacentes AP por [10,20,30]",
+  "ability_description.COSMIC_POWER": "Mejora el AP de tu equipo en [20,SP]",
   "ability_description.STICKY_WEB": "Otorga [10,20,40,SP] SPECIAL y PARALYSIS al objetivo y a los enemigos adyacentes durante 4 segundos",
   "ability_description.SILVER_WIND": "Corre hacia la retaguardia enemiga y reparte [30,60,120,SP] SPECIAL a todos los enemigos en el camino. Luego gana 1 ATK, 1 DEF, 1 SPE_DEF, 10% AP y 10% ATK_SPEED",
   "ability_description.POISON_POWDER": "Corre hacia la retaguardia enemiga, inflige [30,60,120,SP] y aplica POISON durante 5 segundos a todos los enemigos en el camino",
