@@ -81,7 +81,9 @@ patch announcement
 
 # Bugfix
 
--
+- Fix a bug that could prevent human players from replacing a bot in a full lobby
+- Fix a bug that prevented kicking a user out of a lobby
+- Fix a bug which allowed adding more than 8 bots in a lobby when spamming click
 
 # Misc
 
