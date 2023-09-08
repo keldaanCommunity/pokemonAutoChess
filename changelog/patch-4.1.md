@@ -18,6 +18,7 @@ patch announcement
 - Paralysis, Freeze and Sleep status now prevents dodging attacks
 - New Team Builder menu: plan your team with items and synergies
 - Rune Protect status no longer prevents special damage
+- When the number of alive players is odd, one player now fight a copy of an opponent. This copy (the "ghost") does not take round damage if losing.
 
 # New Pokemons:
 
