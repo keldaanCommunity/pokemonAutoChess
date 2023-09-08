@@ -26,12 +26,9 @@ export class OnJoinCommand extends Command<
 > {
   async execute({ client, options, auth }) {
     try {
-      let numberOfHumanPlayers = 0
-      this.state.users.forEach((u) => {
-        if (!u.isBot) {
-          numberOfHumanPlayers++
-        }
-      })
+      let numberOfHumanPlayers = values(this.state.users).filter(
+        (u) => !u.isBot
+      ).length
       if (numberOfHumanPlayers >= MAX_PLAYERS_PER_LOBBY) {
         client.send(Transfer.KICK)
         client.leave()
@@ -50,8 +47,11 @@ export class OnJoinCommand extends Command<
         })
       } else {
         const u = await UserMetadata.findOne({ uid: auth.uid })
-        if (this.state.users.size >= MAX_PLAYERS_PER_LOBBY) {
-          // lobby has been filled while waiting for the database
+        let numberOfHumanPlayers = values(this.state.users).filter(
+          (u) => !u.isBot
+        ).length
+        if (numberOfHumanPlayers >= MAX_PLAYERS_PER_LOBBY) {
+          // lobby has been filled with someone else while waiting for the database
           client.send(Transfer.KICK)
           client.leave()
           return
@@ -84,8 +84,22 @@ export class OnJoinCommand extends Command<
         }
       }
 
-      if (this.state.users.size >= MAX_PLAYERS_PER_LOBBY) {
-        return [new OnRemoveBotCommand().setPayload({ target: undefined })]
+      while (this.state.users.size > MAX_PLAYERS_PER_LOBBY) {
+        // delete a random bot to make room
+        const users = entries(this.state.users)
+        const entryToDelete = users.find(([key, user]) => user.isBot)
+        if (entryToDelete) {
+          const [key, bot] = entryToDelete
+          this.room.broadcast(Transfer.MESSAGES, {
+            payload: `Bot ${bot.name} removed to make room for new player.`,
+            time: Date.now()
+          })
+          this.state.users.delete(key)
+        } else {
+          throw new Error(
+            `There is more than 8 players in the lobby which was not supposed to happen`
+          )
+        }
       }
     } catch (error) {
       logger.error(error)
@@ -309,6 +323,7 @@ export class OnKickPlayerCommand extends Command<
                 avatar: this.state.users.get(client.auth.uid)?.avatar,
                 time: Date.now()
               })
+              this.state.users.delete(userId)
               cli.send(Transfer.KICK)
               cli.leave()
             } else {
@@ -468,15 +483,20 @@ type OnAddBotPayload = {
 export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
   async execute(data: OnAddBotPayload) {
     if (this.state.users.size >= MAX_PLAYERS_PER_LOBBY) {
-      logger.info("MAX_PLAYERS_PER_LOBBY exceeded")
+      this.room.broadcast(Transfer.MESSAGES, {
+        payload: "Room is full",
+        time: Date.now()
+      })
       return
     }
 
     const { type, user } = data
     let bot: IBot | undefined
     if (typeof type === "object") {
+      // pick a specific bot chosen by the user
       bot = type
     } else {
+      // pick a random bot per difficulty
       const difficulty = type
       let d: FilterQuery<IBot> | undefined
 
@@ -495,41 +515,41 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
           break
       }
 
-      const userArray = new Array<string>()
+      const existingBots = new Array<string>()
       this.state.users.forEach((value: GameUser, key: string) => {
         if (value.isBot) {
-          userArray.push(key)
+          existingBots.push(key)
         }
       })
 
-      const bots = await BotV2.find({ id: { $nin: userArray }, elo: d }, [
+      const bots = await BotV2.find({ id: { $nin: existingBots }, elo: d }, [
         "avatar",
         "elo",
         "name",
         "id"
       ])
 
-      if (bots) {
-        if (bots.length <= 0) {
-          this.room.broadcast(Transfer.MESSAGES, {
-            name: user.name,
-            payload: "Error: No bots found",
-            avatar: user.avatar,
-            time: Date.now()
-          })
-        } else if (this.state.users.size >= MAX_PLAYERS_PER_LOBBY) {
-          this.room.broadcast(Transfer.MESSAGES, {
-            name: user.name,
-            payload: "Room is already full",
-            avatar: user.avatar,
-            time: Date.now()
-          })
-        }
-        bot = pickRandomIn(bots)
+      if (bots.length <= 0) {
+        this.room.broadcast(Transfer.MESSAGES, {
+          payload: "Error: No bots found",
+          time: Date.now()
+        })
+        return
       }
+
+      bot = pickRandomIn(bots)
     }
 
     if (bot) {
+      // we checked again the lobby size because of the async request ahead
+      if (this.state.users.size >= MAX_PLAYERS_PER_LOBBY) {
+        this.room.broadcast(Transfer.MESSAGES, {
+          payload: "Room is full",
+          time: Date.now()
+        })
+        return
+      }
+
       this.state.users.set(
         bot.id,
         new GameUser(
@@ -564,24 +584,6 @@ export class OnRemoveBotCommand extends Command<
 > {
   execute({ target, user }) {
     try {
-      // if no message, delete a random bot
-      if (!target) {
-        const users = entries(this.state.users)
-        const entryToDelete = users.find(([key, user]) => user.isBot)
-        if (entryToDelete) {
-          const [key, bot] = entryToDelete
-          this.room.broadcast(Transfer.MESSAGES, {
-            name: user?.displayName ?? "Server",
-            payload: `Bot ${bot.name} removed to make room for new player.`,
-            avatar: user?.avatar ? user.avatar : `0081/${Emotion.NORMAL}`,
-            time: Date.now()
-          })
-          this.state.users.delete(key)
-        }
-        logger.info("no bots in lobby")
-        return
-      }
-
       const name = this.state.users.get(target)?.name
       if (name && this.state.users.delete(target)) {
         this.room.broadcast(Transfer.MESSAGES, {
