@@ -1,0 +1,42 @@
+.game-jukebox-modal-body select {
+  display: block;
+  width: 100%;
+}
+
+.game-jukebox-modal-body .actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.game-jukebox-modal-body .compact-disc {
+  position: relative;
+}
+
+.game-jukebox-modal-body .compact-disc > span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -45%);
+}
+
+.game-jukebox-modal-body .compact-disc img {
+  height: 80px;
+  width: 80px;
+  animation: rotate infinite 2s linear;
+  filter: invert();
+}
+
+.game-jukebox-modal-body .compact-disc.loading img {
+  animation: rotate infinite 1s reverse;
+  opacity: 0.25;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -6673,7 +6673,7 @@ export class Lunatone extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.LUNATONE,
-      [Synergy.ROCK, Synergy.PSYCHIC],
+      [Synergy.ROCK, Synergy.PSYCHIC, Synergy.DARK],
       Rarity.UNIQUE,
       Pkm.DEFAULT,
       200,
@@ -6698,7 +6698,7 @@ export class Solrock extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.SOLROCK,
-      [Synergy.ROCK, Synergy.PSYCHIC],
+      [Synergy.ROCK, Synergy.PSYCHIC, Synergy.FIRE],
       Rarity.UNIQUE,
       Pkm.DEFAULT,
       200,
@@ -8788,7 +8788,7 @@ export class Gligar extends Pokemon {
       shiny,
       emotion,
       false,
-      true,
+      false,
       Passive.GLIGAR
     )
   }

@@ -16,7 +16,7 @@ import { getOrientation } from "../../public/src/pages/utils/utils"
 import { PokemonActionState } from "../../types/enum/Game"
 import { BasicItems, Item } from "../../types/enum/Item"
 import { pickNRandomIn, pickRandomIn, shuffleArray } from "../../utils/random"
-import { clamp } from "../../utils/number"
+import { clamp, min } from "../../utils/number"
 import {
   ItemCarouselStages,
   UniqueShop,
@@ -364,12 +364,16 @@ export class MiniGame {
       const synergiesTriggerLevels: [Synergy, number][] = Array.from(
         player.synergies
       ).map(([type, value]) => {
-        const levelReached = SynergyTriggers[type]
+        const lastTrigger = SynergyTriggers[type]
           .filter((n) => n <= value)
           .at(-1)
+        let levelReached = lastTrigger ? SynergyTriggers[type].indexOf(lastTrigger) + 1 : 0
+        // removing low triggers synergies
+        if(type === Synergy.ICE) levelReached = min(0)(levelReached - 2)
+        if(type === Synergy.FLORA) levelReached = min(0)(levelReached - 1)
         return [
           type,
-          levelReached ? SynergyTriggers[type].indexOf(levelReached) + 1 : 0
+          levelReached
         ]
       })
       const candidatesSymbols: Synergy[] = []

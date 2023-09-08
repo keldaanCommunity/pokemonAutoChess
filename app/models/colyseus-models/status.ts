@@ -1,7 +1,7 @@
 import { Schema, type } from "@colyseus/schema"
 import Board from "../../core/board"
 import PokemonEntity from "../../core/pokemon-entity"
-import { IStatus, Transfer } from "../../types"
+import { IPokemonEntity, IStatus, Transfer } from "../../types"
 import { Effect } from "../../types/enum/Effect"
 import { AttackType } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
@@ -484,7 +484,7 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerCharm(timer: number, pkm: PokemonEntity) {
+  triggerCharm(timer: number, pkm: IPokemonEntity) {
     if (!this.charm && !this.runeProtect) {
       this.charm = true
       if (pkm.simulation.weather === Weather.MISTY) {

@@ -40,7 +40,7 @@ export default function GameShop() {
         closeOnClick
         limit={1}
         closeButton={false}
-        style={{ left: `calc(80px + 17.5vw)`, bottom: `9vw` }}
+        style={{ left: `calc(var(--sidebar-width) + 17.5vw)`, bottom: `9vw` }}
       />
       <ToastContainer
         className="toast"
@@ -53,7 +53,7 @@ export default function GameShop() {
         closeOnClick
         limit={1}
         closeButton={false}
-        style={{ left: `calc(80px + 11.5vw)`, bottom: `9vw` }}
+        style={{ left: `calc(var(--sidebar-width) + 11.5vw)`, bottom: `9vw` }}
       />
     </>
   )

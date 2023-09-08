@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next"
 export default function WikiTypes() {
   const { t } = useTranslation()
   return (
-    <Tabs>
+    <Tabs className="synergies-tabs">
       <TabList>
         {(Object.keys(Synergy) as Synergy[]).map((type) => {
           return (

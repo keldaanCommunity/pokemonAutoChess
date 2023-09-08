@@ -15,6 +15,7 @@ import AfterGameState from "../../../rooms/states/after-game-state"
 import { BotDifficulty } from "../../../types/enum/Game"
 import { PkmProposition } from "../../../types/enum/Pokemon"
 import { Language } from "../../../types/enum/Language"
+import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 
 export interface INetwork {
   client: Client
@@ -24,6 +25,7 @@ export interface INetwork {
   after: Room<AfterGameState> | undefined
   uid: string
   displayName: string
+  profile: IUserMetadata | undefined
 }
 
 const endpoint = `${window.location.protocol.replace("http", "ws")}//${
@@ -37,7 +39,8 @@ const initalState: INetwork = {
   game: undefined,
   after: undefined,
   uid: "",
-  displayName: ""
+  displayName: "",
+  profile: undefined
 }
 
 export const networkSlice = createSlice({
@@ -64,6 +67,9 @@ export const networkSlice = createSlice({
       state.game = undefined
       state.after?.connection.close()
       state.after = undefined
+    },
+    setProfile: (state, action: PayloadAction<IUserMetadata>) => {
+      state.profile = action.payload
     },
     joinLobby: (state, action: PayloadAction<Room<ICustomLobbyState>>) => {
       state.lobby = action.payload
@@ -299,6 +305,7 @@ export const {
   gameStartRequest,
   logIn,
   logOut,
+  setProfile,
   joinLobby,
   sendMessage,
   searchName,

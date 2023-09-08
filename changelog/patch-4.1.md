@@ -2,15 +2,23 @@
 patch announcement
 ---
 
-> September,
+> September, 9th
 
 # Patch 4.1
+
+# Introducing player gadgets
+
+- Players now unlock new tools in the sidebar menu, called "gadgets", when they reach certain level. You can see your gadgets in your profile
+- New gadget: Team Planner (level 10 required): Prepare your composition in advance before or during a game
+- New gadget: Jukebox (level 30 required): Choose your music ingame
+- Bot Builder is now a gadget unlocked at level 20
 
 # Gameplay
 
 - Paralysis, Freeze and Sleep status now prevents dodging attacks
 - New Team Builder menu: plan your team with items and synergies
 - Rune Protect status no longer prevents special damage
+- When the number of alive players is odd, one player now fight a copy of an opponent. This copy (the "ghost") does not take round damage if losing.
 
 # New Pokemons:
 
@@ -18,7 +26,7 @@ patch announcement
 
 # Changes to Pokemon
 
-- New ability Whirlpool for Horsea
+- New ability for Horsea: Whirlpool
 - Buff Gligar: Tier 2 → 3, HP 130→160, Attack 14→16, Mana 90→75 ; give Poison Heal passive to Gligar
 - Buff Gliscor: Tier 3 → 4, HP 170→200, Attack 18→20, Mana 90→75
 - Nerf Poison Jab damage: 40/80/120 → 30/60/90/120
@@ -37,6 +45,9 @@ patch announcement
 - Buff Drifloon: HP: 100 → 120
 - Adjusted Onix line stats: Onix Attack 10 → 9 ; Steelix Attack 9 → 14, Spe Def 10 → 5
 - Nerf Scizor: HP 210 → 180, Mega-Scizor HP 290 → 250
+- Buff Solrock: now has Fire synergy
+- Buff Lunatone: now has Dark synergy
+- Adapted Cosmic Power: ~~30 AP for adjacent allies~~ 20 AP for your whole team (scales with AP)
 
 # Changes to Synergies
 
@@ -44,6 +55,9 @@ patch announcement
 - Grass adjustment: heals frequency every 1→2 seconds ; heal amount 4/8/16 → 8/15/30
 - Bug: 2/4/6 → 2/4/6/8 ; Number of copies: 1/2/4 → 1/2/3/5
 - Buff Dragon Dance: 10% → 20% AS and AP
+- Added Fairy 8: Moon Force: all enemy team is charmed for 2 seconds at the start of the fight
+- Buff Fairy: shock damage 10/30/55 → 15/30/60 special damage
+- Ice 2, Ice 3 and Flora 3 no longer gives a Portal symbol
 
 ## Changes to Items
 
@@ -56,22 +70,20 @@ patch announcement
 # UI
 
 - Grass heal proc now has an animation
-- Fully Redesigned Bot Builder
-- Show number of titles unlocked
-- Add a modal to reconnect to previous game from lobby
+- Fully redesigned Bot Builder
+- Add Gadgets menu in player profile
+- Show number of titles unlocked in Titles menu
+- Add a modal to reconnect to previous game from the lobby
 - The key "S" now toggles the emote menu in game
 - The key "A" now plays a user avatar's animation in game
 - User in-game avatars can now use animations during carousel phases
-- Added in-game modal for displaying all possible keybinds
+- Added in-game modal for displaying all the keyboard shortcuts
 - Redesigned **Online** avatars
 - Improved **Chat** timestamp displays
-- Pokemon details shown on hover not attach to mouse instead of pokemon
-  - This should help avoid situations where you're unable to click/hover on pokemon to the right of what's being hovered
+- Pokemon details shown on hover not attach to mouse instead of pokemon. This should help avoid situations where you're unable to click/hover on pokemon to the right of what's being hovered
 
 # Bugfix
 
--
-
-# Misc
-
--
+- Fix a bug that could prevent human players from replacing a bot in a full lobby
+- Fix a bug that prevented kicking a user out of a lobby
+- Fix a bug which allowed adding more than 8 bots in a lobby when spamming click

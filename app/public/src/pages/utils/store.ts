@@ -81,7 +81,8 @@ export class LocalStore<Key extends string> extends Store<Key> {
 
 export enum LocalStoreKeys {
   PREFERENCES = "pac_preferences",
-  RECONNECTION_TOKEN = "cachedReconnectionToken"
+  RECONNECTION_TOKEN = "cachedReconnectionToken",
+  TEAM_PLANNER = "team_planner"
 }
 
 export const localStore = new LocalStore<LocalStoreKeys>()

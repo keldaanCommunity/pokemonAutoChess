@@ -13,7 +13,7 @@ aside.sidebar {
 
 .sidebar-logo img {
   width: 54px;
-  margin: 8px 0px 8px 12px;
+  margin: 8px 0px 8px 4px;
 }
 
 .sidebar .sidebar-logo > div {
@@ -31,6 +31,11 @@ aside.sidebar {
   display: block;
   font-size: 1rem;
   opacity: 0.75;
+}
+
+#root .sidebar.ps-collapsed {
+  width: 60px;
+  min-width: 60px;
 }
 
 .sidebar.ps-collapsed .sidebar-logo div {
@@ -69,6 +74,10 @@ aside.sidebar {
 
 .ps-menu-label {
   color: white;
+}
+
+#root .ps-menu-button {
+  padding-left: 10px;
 }
 
 .ps-menu-button .icon {

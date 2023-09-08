@@ -51,7 +51,7 @@ import {
   setAdditionalPokemons,
   setSimulation
 } from "../stores/GameStore"
-import { logIn, joinGame, requestTilemap } from "../stores/NetworkStore"
+import { logIn, joinGame, requestTilemap, setProfile } from "../stores/NetworkStore"
 import { FIREBASE_CONFIG } from "./utils/utils"
 import GameContainer from "../game/game-container"
 import { Navigate } from "react-router-dom"
@@ -87,6 +87,7 @@ import { RequiredStageLevelForXpElligibility } from "../../../types/Config"
 import { useTranslation } from "react-i18next"
 import { MainSidebar } from "./component/main-sidebar"
 import { localStore, LocalStoreKeys } from "./utils/store"
+import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 
 let gameContainer: GameContainer
 
@@ -352,6 +353,10 @@ export default function Game() {
       })
 
       room.onMessage(Transfer.GAME_END, leave)
+
+      room.onMessage(Transfer.USER_PROFILE, (user: IUserMetadata) => {
+        dispatch(setProfile(user))
+      })
 
       room.state.listen("roundTime", (value) => {
         dispatch(setRoundTime(value))
