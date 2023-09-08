@@ -30,6 +30,7 @@ import UserMetadata from "../models/mongo-models/user-metadata"
 import { logger } from "../utils/logger"
 import { cleanProfanity } from "../utils/profanity-filter"
 import { MAX_PLAYERS_PER_LOBBY } from "../types/Config"
+import { values } from "../utils/schemas"
 
 export default class PreparationRoom extends Room<PreparationState> {
   dispatcher: Dispatcher<this>
@@ -228,12 +229,7 @@ export default class PreparationRoom extends Room<PreparationState> {
       client.send(Transfer.USER_PROFILE, userProfile)
 
       const isAlreadyInRoom = this.state.users.has(user.uid)
-      let numberOfHumanPlayers = 0
-      this.state.users.forEach((u) => {
-        if (!u.isBot) {
-          numberOfHumanPlayers++
-        }
-      })
+      let numberOfHumanPlayers = values(this.state.users).filter(u => !u.isBot).length
       if (numberOfHumanPlayers >= MAX_PLAYERS_PER_LOBBY) {
         throw "room is full"
       } else if (this.state.gameStarted) {

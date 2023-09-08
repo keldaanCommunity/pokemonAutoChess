@@ -1,13 +1,18 @@
 import React, { useEffect, useRef, useState } from "react"
 import Chat from "./component/chat/chat"
 import PreparationMenu from "./component/preparation/preparation-menu"
-import { Link, Navigate } from "react-router-dom"
+import { Navigate } from "react-router-dom"
 import firebase from "firebase/compat/app"
 import { FIREBASE_CONFIG } from "./utils/utils"
 import PreparationState from "../../../rooms/states/preparation-state"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import { Client, Room } from "colyseus.js"
-import { gameStart, joinPreparation, logIn, setProfile } from "../stores/NetworkStore"
+import {
+  gameStart,
+  joinPreparation,
+  logIn,
+  setProfile
+} from "../stores/NetworkStore"
 import {
   addUser,
   changeUser,
@@ -165,6 +170,7 @@ export default function Preparation() {
 
       r.onMessage(Transfer.KICK, async () => {
         await r.leave(false)
+        localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
         dispatch(leavePreparation())
         setToLobby(true)
         playSound(SOUNDS.LEAVE_ROOM)
@@ -267,6 +273,7 @@ export default function Preparation() {
           leaveLabel={t("leave_room")}
           leave={async () => {
             await room?.leave(true)
+            localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
             dispatch(leavePreparation())
             setToLobby(true)
             playSound(SOUNDS.LEAVE_ROOM)
