@@ -590,15 +590,18 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
         pokemon.fairySplashCooldown === 0 &&
         (pokemon.effects.includes(Effect.FAIRY_WIND) ||
           pokemon.effects.includes(Effect.STRANGE_STEAM) ||
-          pokemon.effects.includes(Effect.AROMATIC_MIST))
+          pokemon.effects.includes(Effect.AROMATIC_MIST) ||
+          pokemon.effects.includes(Effect.MOON_FORCE))
       ) {
         let damage = 0
         if (pokemon.effects.includes(Effect.AROMATIC_MIST)) {
-          damage = 10
+          damage = 15
         } else if (pokemon.effects.includes(Effect.FAIRY_WIND)) {
           damage = 30
         } else if (pokemon.effects.includes(Effect.STRANGE_STEAM)) {
-          damage = 55
+          damage = 60
+        } else if (pokemon.effects.includes(Effect.MOON_FORCE)) {
+          damage = 80
         }
 
         const splashTarget = pokemon === this ? target : this

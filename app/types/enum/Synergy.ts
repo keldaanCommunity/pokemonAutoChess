@@ -61,7 +61,12 @@ export const SynergyEffects: { [key in Synergy]: Effect[] } = Object.freeze({
   [Synergy.MONSTER]: [Effect.PURSUIT, Effect.BRUTAL_SWING, Effect.POWER_TRIP],
   [Synergy.HUMAN]: [Effect.MEDITATE, Effect.FOCUS_ENERGY, Effect.CALM_MIND],
   [Synergy.AQUATIC]: [Effect.SWIFT_SWIM, Effect.HYDRATION, Effect.WATER_VEIL],
-  [Synergy.BUG]: [Effect.COCOON, Effect.INFESTATION, Effect.HORDE, Effect.HEART_OF_THE_SWARM],
+  [Synergy.BUG]: [
+    Effect.COCOON,
+    Effect.INFESTATION,
+    Effect.HORDE,
+    Effect.HEART_OF_THE_SWARM
+  ],
   [Synergy.FLYING]: [
     Effect.TAILWIND,
     Effect.FEATHER_DANCE,
@@ -88,7 +93,8 @@ export const SynergyEffects: { [key in Synergy]: Effect[] } = Object.freeze({
   [Synergy.FAIRY]: [
     Effect.AROMATIC_MIST,
     Effect.FAIRY_WIND,
-    Effect.STRANGE_STEAM
+    Effect.STRANGE_STEAM,
+    Effect.MOON_FORCE
   ],
   [Synergy.ICE]: [
     Effect.COOL_BREEZE,
