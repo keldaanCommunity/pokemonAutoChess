@@ -148,7 +148,7 @@ export default function PreparationMenu() {
         ) : users.length > 1 ? (
           <p>{t("not_elligible_elo_hint")}</p>
         ) : (
-          <p>A{t("add_bot_or_wait_hint")}</p>
+          <p>{t("add_bot_or_wait_hint")}</p>
         )}
       </div>
 

@@ -7,6 +7,8 @@
   --cursor-hover: url("assets/ui/cursor-hover.png") 14 0, pointer;
   --cursor-grab: url("assets/ui/cursor-grab.png") 14 8, grab;
   --cursor-grabbing: url("assets/ui/cursor-grabbing.png") 14 8, grabbing;
+
+  --sidebar-width: 60px;
 }
 
 body.grab {
@@ -220,19 +222,19 @@ p:last-child {
 
 #game {
   height: 100vh;
-  width: calc(100vw - 80px);
+  width: calc(100vw - var(--sidebar-width));
 }
 
 #game-wrapper {
   position: relative;
-  left: 80px;
-  width: calc(100vw - 80px);
+  left: 60px;
+  width: calc(100vw - var(--sidebar-width));
 }
 
 #game-wrapper .ps-sidebar-root {
   position: absolute;
   top: 0;
-  left: -80px;
+  left: calc(-1 * var(--sidebar-width));
   bottom: 0;
 }
 

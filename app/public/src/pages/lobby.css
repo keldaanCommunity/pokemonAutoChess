@@ -1,6 +1,4 @@
 .lobby {
-  --sidebar-offset: 90px;
-
   height: 100%;
   gap: 1vw;
   display: flex;
@@ -8,7 +6,7 @@
 
 .lobby-container {
   padding: 10px;
-  padding-left: calc(var(--sidebar-offset));
+  padding-left: calc(var(--sidebar-width) + 10px);
   width: 100%;
 }
 
