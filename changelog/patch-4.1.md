@@ -25,7 +25,7 @@ patch announcement
 
 # Changes to Pokemon
 
-- New ability Whirlpool for Horsea
+- New ability for Horsea: Whirlpool
 - Buff Gligar: Tier 2 → 3, HP 130→160, Attack 14→16, Mana 90→75 ; give Poison Heal passive to Gligar
 - Buff Gliscor: Tier 3 → 4, HP 170→200, Attack 18→20, Mana 90→75
 - Nerf Poison Jab damage: 40/80/120 → 30/60/90/120
@@ -56,6 +56,7 @@ patch announcement
 - Buff Dragon Dance: 10% → 20% AS and AP
 - Added Fairy 8: Moon Force: all enemy team is charmed for 2 seconds at the start of the fight
 - Buff Fairy: shock damage 10/30/55 → 15/30/60 special damage
+- Ice 2, Ice 3 and Flora 3 no longer gives a Portal symbol
 
 ## Changes to Items
 
@@ -68,9 +69,10 @@ patch announcement
 # UI
 
 - Grass heal proc now has an animation
-- Fully Redesigned Bot Builder
-- Show number of titles unlocked
-- Add a modal to reconnect to previous game from lobby
+- Fully redesigned Bot Builder
+- Add Gadgets menu in player profile
+- Show number of titles unlocked in Titles menu
+- Add a modal to reconnect to previous game from the lobby
 - The key "S" now toggles the emote menu in game
 - The key "A" now plays a user avatar's animation in game
 - User in-game avatars can now use animations during carousel phases
@@ -84,7 +86,3 @@ patch announcement
 - Fix a bug that could prevent human players from replacing a bot in a full lobby
 - Fix a bug that prevented kicking a user out of a lobby
 - Fix a bug which allowed adding more than 8 bots in a lobby when spamming click
-
-# Misc
-
-- Ice 2, Ice 3 and Flora 3 no longer gives a Portal symbol
