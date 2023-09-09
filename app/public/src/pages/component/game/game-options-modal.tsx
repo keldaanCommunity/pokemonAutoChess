@@ -18,6 +18,7 @@ import { Language } from "../../../../../types/enum/Language"
 import { LanguageNames } from "../../../../dist/client/locales"
 import { selectLanguage } from "../../../stores/NetworkStore"
 import { Page } from "../main-sidebar"
+import { Checkbox } from "../checkbox/checkbox"
 
 import "./game-options-modal.css"
 
@@ -137,18 +138,18 @@ export default function GameOptionsModal(props: {
           </label>
         </p>
         <p>
-          <label>
-            <input
-              type="checkbox"
-              className="nes-checkbox"
-              checked={unsavedPreferences.showDetailsOnHover}
-              onChange={useCallback(
-                (e) => changePreferences(e, "showDetailsOnHover"),
-                [changePreferences]
-              )}
-            />
-            <span>{t("show_details_on_hover")}</span>
-          </label>
+          <Checkbox
+            checked={unsavedPreferences.showDetailsOnHover}
+            onToggle={(checked) =>
+              setUnsavedPreferences((prevPrefs) => {
+                return {
+                  ...prevPrefs,
+                  showDetailsOnHover: checked
+                }
+              })
+            }
+            label={t("show_details_on_hover")}
+          />
         </p>
       </Modal.Body>
       <Modal.Footer style={{ justifyContent: "space-between" }}>

@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from "react"
+import React, { useState } from "react"
 import PreparationMenuUser from "./preparation-menu-user"
 import { IGameUser } from "../../../../../models/colyseus-models/game-user"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
@@ -25,6 +25,7 @@ import InlineAvatar from "../inline-avatar"
 import { IBot } from "../../../../../models/mongo-models/bot-v2"
 import { Role } from "../../../../../types"
 import { useTranslation } from "react-i18next"
+import { Checkbox } from "../checkbox/checkbox"
 
 export default function PreparationMenu() {
   const { t } = useTranslation()
@@ -168,26 +169,22 @@ export default function PreparationMenu() {
       {isOwner && (
         <>
           <div className="actions">
-            <label title="Add a password to this room">
-              <input
-                type="checkbox"
-                className="nes-checkbox is-dark"
-                checked={password != null}
-                onChange={() => makePrivate()}
-              />
-              <span>
-                {t("private_lobby")} {password && ` (Password: ${password})`}
-              </span>
-            </label>
-            <label title="No ELO gain or loss for this game">
-              <input
-                type="checkbox"
-                className="nes-checkbox is-dark"
-                checked={noElo === true}
-                onChange={() => toggleElo()}
-              />
-              <span>{t("just_for_fun")}</span>
-            </label>
+            <Checkbox
+              checked={password != null}
+              onToggle={makePrivate}
+              label={`${t("private_lobby")} ${
+                password ? "Password: " + password : ""
+              }`}
+              isDark
+              title="Add a password to this room"
+            />
+            <Checkbox
+              checked={noElo}
+              onToggle={toggleElo}
+              label={t("just_for_fun")}
+              isDark
+              title="No ELO gain or loss for this game"
+            />
             <div className="spacer"></div>
           </div>
           {user && !user.anonymous && (

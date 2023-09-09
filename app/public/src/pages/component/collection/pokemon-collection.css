@@ -28,10 +28,6 @@
   margin-bottom: 0;
 }
 
-#pokemon-collection header .nes-checkbox + span::before {
-  top: calc(0.65em - 8px);
-}
-
 #pokemon-collection .unown-icon {
   margin: -28px;
 }
@@ -49,4 +45,8 @@
   display: flex;
   align-items: center;
   height: 55px;
+}
+
+#pokemon-collection .bubbly {
+  height: 50px;
 }

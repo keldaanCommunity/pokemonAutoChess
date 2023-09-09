@@ -10,6 +10,7 @@ import PokemonEmotionsModal from "./pokemon-emotions-modal"
 import UnownPanel from "./unown-panel"
 import "./pokemon-collection.css"
 import { useTranslation } from "react-i18next"
+import { Checkbox } from "../checkbox/checkbox"
 
 export default function PokemonCollection() {
   const { t } = useTranslation()
@@ -24,28 +25,24 @@ export default function PokemonCollection() {
   return (
     <div id="pokemon-collection">
       <header className="nes-container">
-        <label>
-          <input
-            type="checkbox"
-            className="nes-checkbox is-dark"
-            checked={shinyOnly === true}
-            onChange={() => setShinyOnly(!shinyOnly)}
-          />
-          <span>{t("shiny_hunter")}</span>
-        </label>
+        <Checkbox
+          checked={shinyOnly}
+          onToggle={setShinyOnly}
+          label={t("shiny_hunter")}
+          isDark
+        />
         <button
           onClick={() => {
             setFilter("all")
           }}
           className="bubbly pink"
         >
-          <input
-            type="checkbox"
-            className="nes-checkbox is-dark"
-            readOnly
+          <Checkbox
             checked={filter === "all"}
+            label={t("show_all")}
+            isDark
+            readOnly
           />
-          <span>{t("show_all")}</span>
         </button>
         <button
           onClick={() => {
@@ -53,13 +50,12 @@ export default function PokemonCollection() {
           }}
           className="bubbly red"
         >
-          <input
-            type="checkbox"
-            className="nes-checkbox is-dark"
-            readOnly
+          <Checkbox
             checked={filter === "locked"}
+            label={t("show_locked")}
+            isDark
+            readOnly
           />
-          <span>{t("show_locked")}</span>
         </button>
         <button
           onClick={() => {
@@ -67,13 +63,11 @@ export default function PokemonCollection() {
           }}
           className="bubbly orange"
         >
-          <input
-            type="checkbox"
-            className="nes-checkbox"
-            readOnly
+          <Checkbox
             checked={filter === "unlockable"}
+            label={t("show_unlockable")}
+            readOnly
           />
-          <span>{t("show_unlockable")}</span>
         </button>
         <button
           onClick={() => {
@@ -81,13 +75,12 @@ export default function PokemonCollection() {
           }}
           className="bubbly green"
         >
-          <input
-            type="checkbox"
-            className="nes-checkbox is-dark"
-            readOnly
+          <Checkbox
             checked={filter === "unlocked"}
+            label={t("show_unlocked")}
+            isDark
+            readOnly
           />
-          <span>{t("show_unlocked")}</span>
         </button>
       </header>
       <div className="nes-container">

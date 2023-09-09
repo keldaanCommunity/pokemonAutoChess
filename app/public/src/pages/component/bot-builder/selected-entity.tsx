@@ -8,6 +8,7 @@ import { ITracker } from "../../../../../types/ITracker"
 import { useTranslation } from "react-i18next"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
+import { Checkbox } from "../checkbox/checkbox"
 
 export default function SelectedEntity(props: {
   entity: Item | PkmWithConfig
@@ -49,20 +50,17 @@ export default function SelectedEntity(props: {
     return (
       <div id="selected-entity" className="nes-container">
         <fieldset>
-          <label>
-            <input
-              type="checkbox"
-              className="nes-checkbox is-dark"
-              checked={detailledPkm.shiny}
-              onChange={() => {
-                props.onChange({
-                  ...detailledPkm,
-                  shiny: !detailledPkm.shiny
-                })
-              }}
-            />
-            <span>{t("shiny")}</span>
-          </label>
+          <Checkbox
+            checked={Boolean(detailledPkm.shiny)}
+            onToggle={() => {
+              props.onChange({
+                ...detailledPkm,
+                shiny: !detailledPkm.shiny
+              })
+            }}
+            label={t("shiny")}
+            isDark
+          />
           <label>
             {t("emotion_label")}:
             <select
