@@ -20,6 +20,7 @@ patch announcement
 - Rune Protect status no longer prevents special damage
 - When receiving Rune Protect status, all negative status alterations are cleared
 - When the number of alive players is odd, one player now fight a copy of an opponent. This copy (the "ghost") does not take round damage if losing.
+- Players can no longer push another player during minigame phase if he is in its bubble
 
 # New Pokemons:
 
