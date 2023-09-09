@@ -549,6 +549,7 @@ export default class Status extends Schema implements IStatus {
   triggerRuneProtect(timer: number) {
     if (!this.runeProtect) {
       this.runeProtect = true
+      this.clearNegativeStatus()
       this.runeProtectCooldown = timer
     }
   }
