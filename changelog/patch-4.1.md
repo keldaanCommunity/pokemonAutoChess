@@ -20,6 +20,7 @@ patch announcement
 - Rune Protect status no longer prevents special damage
 - When receiving Rune Protect status, all negative status alterations are cleared
 - When the number of alive players is odd, one player now fight a copy of an opponent. This copy (the "ghost") does not take round damage if losing.
+- Players can no longer push another player during minigame phase if he is in its bubble
 
 # New Pokemons:
 
@@ -50,6 +51,7 @@ patch announcement
 - Buff Lunatone: now has Dark synergy
 - Adapted Cosmic Power: ~~30 AP for adjacent allies~~ 20 AP for your whole team (scales with AP)
 - Nerf Overheat (Moltres): ~~+100%~~ +30% bonus damage if target is burned
+- Adjusted stats of Magmortar: HP: 300 → 280, Def/SpeDef: 1 → 3
 
 # Changes to Synergies
 
