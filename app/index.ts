@@ -21,7 +21,10 @@ import { logger } from "./utils/logger"
 
 dotenv.config()
 
-const port = Number(process.env.PORT) || 9000
+let port = Number(process.env.PORT) || 9000
+if(process.env.NODE_APP_INSTANCE){
+  port = Number(process.env.PORT) + Number(process.env.NODE_APP_INSTANCE); // pm2 mode
+}
 
 admin.initializeApp({
   credential: admin.credential.cert({
