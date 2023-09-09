@@ -18,6 +18,7 @@ patch announcement
 - Paralysis, Freeze and Sleep status now prevents dodging attacks
 - Rune Protect status no longer prevents special damage, but clear existing negative status when received
 - When the number of alive players is odd, one player now fight a copy of an opponent. This copy (the "ghost") does not take round damage if losing.
+- Players can no longer push another player during minigame phase if he is in its bubble
 
 # New Pokemons:
 
@@ -48,6 +49,7 @@ patch announcement
 - Buff Lunatone: now has Dark synergy
 - Adapted Cosmic Power: ~~30 AP for adjacent allies~~ 20 AP for your whole team (scales with AP)
 - Adapted Aurora Veil: Duration: 1.5/2.5/3.5 → 3 seconds at all tiers; now also gives 10/20/30 Shield (scales with AP)
+- Adjusted stats of Magmortar: HP: 300 → 280, Def/SpeDef: 1 → 3
 
 # Changes to Synergies
 

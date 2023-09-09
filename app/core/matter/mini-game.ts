@@ -264,6 +264,7 @@ export class MiniGame {
       this.avatars!.set(avatar.id, avatar)
       const body = Bodies.circle(x, y, 25)
       body.label = avatar.id
+      body.collisionFilter.mask = 0 // disable collision until release time
       this.bodies.set(avatar.id, body)
       Composite.add(this.engine.world, body)
     })
@@ -367,14 +368,13 @@ export class MiniGame {
         const lastTrigger = SynergyTriggers[type]
           .filter((n) => n <= value)
           .at(-1)
-        let levelReached = lastTrigger ? SynergyTriggers[type].indexOf(lastTrigger) + 1 : 0
+        let levelReached = lastTrigger
+          ? SynergyTriggers[type].indexOf(lastTrigger) + 1
+          : 0
         // removing low triggers synergies
-        if(type === Synergy.ICE) levelReached = min(0)(levelReached - 2)
-        if(type === Synergy.FLORA) levelReached = min(0)(levelReached - 1)
-        return [
-          type,
-          levelReached
-        ]
+        if (type === Synergy.ICE) levelReached = min(0)(levelReached - 2)
+        if (type === Synergy.FLORA) levelReached = min(0)(levelReached - 1)
+        return [type, levelReached]
       })
       const candidatesSymbols: Synergy[] = []
       synergiesTriggerLevels.forEach(([type, level]) => {
@@ -438,6 +438,10 @@ export class MiniGame {
     const avatar = this.avatars?.get(id)
     const body = this.bodies.get(id)
     if (body && avatar && avatar.timer <= 0) {
+      if (!avatar.itemId) {
+        body.collisionFilter.mask = 1 // activate collision if moving avatar without item
+      }
+
       const distanceToTarget = Math.sqrt(
         (avatar.targetX - avatar.x) ** 2 + (avatar.targetY - avatar.y) ** 2
       )
