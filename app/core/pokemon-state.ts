@@ -73,7 +73,7 @@ export default class PokemonState {
     apBoost?: boolean
   ) {
     if (pokemon.life > 0) {
-      const boost = apBoost ? (shield * pokemon.ap) / 100 : 0
+      const boost = apBoost ? (shield * caster.ap) / 100 : 0
       const shieldBoosted = Math.round(shield + boost)
       pokemon.shield += shieldBoosted
       if (caster && shieldBoosted > 0) {

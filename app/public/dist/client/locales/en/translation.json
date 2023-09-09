@@ -917,7 +917,7 @@
     "BEAT_UP": "Summon [1,2,3] Houndour (no items)",
     "BLUE_FLARE": "Inflicts [50,SP] SPECIAL + 20 per stage of FIRE synergy",
     "FUSION_BOLT": "Inflicts [50,SP] SPECIAL + 40 per stage of ELECTRIC synergy",
-    "AURORA_VEIL": "All allies receive RUNE_PROTECT for [1.5,2.5,3.5] seconds",
+    "AURORA_VEIL": "All allies receive [10,20,40,SP] SHIELD and RUNE_PROTECT for 3 seconds",
     "AQUA_JET": "Dash into the enemy backline, dealing [30,60,120,SP] SPECIAL",
     "JUDGEMENT": "Inflicts [10,SP] special damage to the target, multiplied by the sum of Arceus synergy levels",
     "CHATTER": "Deal [10,SP] SPECIAL to all enemies. Every enemy has [30,SP]% chance to be CONFUSION for 1 second",
