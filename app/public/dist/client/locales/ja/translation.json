@@ -910,7 +910,7 @@
   "ability_description.DEATH_WING": "[150,SP] SPECIALを与え、対象が受けたダメージの75%を回復",
   "ability_description.SLACK_OFF": "すべてのマイナスステータスをクリアし、最大HPの[30,40,50,SP=0.5]%回復し、術者を5秒間睡眠状態にします",
   "ability_description.DARK_VOID": "敵全体に[30,SP]SPECIALを与える。影響を受けたターゲットが SILENCE だった場合、それらは 2 秒間 SLEEP になります。",
-  "ability_description.OVERHEAT": "敵全体に[40,SP]SPECIALを与える。ターゲットが火傷の場合、ダメージが2倍",
+  "ability_description.OVERHEAT": "敵全体に[40,SP]SPECIALを与える。ターゲットが_BURNの場合+30%ダメージ",
   "ability_description.HYPNOSIS": "敵1体を後列に[2,3.5,6,SP=0.5]秒間睡眠させる",
   "ability_description.MIMIC": "現在のターゲットの能力をコピーします",
   "ability_description.HEX": "ターゲットに[20,40,80,SP]SPECIALを与える。対象が火傷、混乱、凍結、麻痺、毒、沈黙、睡眠、負傷の場合、ダメージが2倍になる",

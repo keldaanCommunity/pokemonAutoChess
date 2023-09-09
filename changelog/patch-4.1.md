@@ -49,6 +49,7 @@ patch announcement
 - Buff Solrock: now has Fire synergy
 - Buff Lunatone: now has Dark synergy
 - Adapted Cosmic Power: ~~30 AP for adjacent allies~~ 20 AP for your whole team (scales with AP)
+- Nerf Overheat (Moltres): ~~+100%~~ +30% bonus damage if target is burned
 
 # Changes to Synergies
 

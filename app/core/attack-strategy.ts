@@ -1088,7 +1088,7 @@ export class OverheatStrategy extends AttackStrategy {
       if (tg && pokemon.team != tg.team) {
         let damage = 40
         if (tg.status.burn) {
-          damage *= 2
+          damage = Math.round(damage * 1.3)
         }
         tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
       }

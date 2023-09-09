@@ -910,7 +910,7 @@
   "ability_description.DEATH_WING": "Verursacht [150,SP] SPECIAL und heilt 75 % des vom Ziel erlittenen Schadens",
   "ability_description.SLACK_OFF": "Lösche alle negativen Status, heile [30,40,50,SP=0,5] % der maximalen HP und versetze den Zauberer für 5 Sekunden in den SLEEP",
   "ability_description.DARK_VOID": "Fügt allen Feinden [30,SP] SPECIAL zu. Wenn ein betroffenes Ziel SILENCE war, wird es für 2 Sekunden in SLEEP versetzt",
-  "ability_description.OVERHEAT": "Fügt allen Feinden [40,SP] SPECIAL zu. Doppelter Schaden, wenn das Ziel BURN ist",
+  "ability_description.OVERHEAT": "Fügt allen Feinden [40,SP] SPECIAL zu. +30 % Schaden wenn das Ziel BURN ist",
   "ability_description.HYPNOSIS": "Platziere SLEEP 1 Feind für [2,3,5,6,SP=0,5] Sekunden in den hinteren Reihen",
   "ability_description.MIMIC": "Kopiert die Fähigkeit des aktuellen Ziels",
   "ability_description.HEX": "Fügt dem Ziel [20,40,80,SP] SPECIAL zu. Verdoppelt den Schaden, wenn das Ziel BURN, CONFUSION, FREEZE, PARALYSIS, POISON, SILENCE, SLEEP oder WOUND ist",
