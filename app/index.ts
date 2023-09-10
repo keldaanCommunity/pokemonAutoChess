@@ -3,7 +3,7 @@ import path from "path"
 import http from "http"
 import express, { ErrorRequestHandler } from "express"
 import cors from "cors"
-import { Server } from "colyseus"
+import { RedisDriver, RedisPresence, Server } from "colyseus"
 import { monitor } from "@colyseus/monitor"
 import basicAuth from "express-basic-auth"
 import { WebSocketTransport } from "@colyseus/ws-transport"
@@ -19,7 +19,8 @@ import { Item } from "./types/enum/Item"
 import { SynergyTriggers } from "./types/Config"
 import { logger } from "./utils/logger"
 
-dotenv.config()
+dotenv.config({path: path.join(__dirname, "../../../../../.env")});
+console.log(path.join(__dirname, "../../../../../.env"))
 
 let port = Number(process.env.PORT) || 9000
 if(process.env.NODE_APP_INSTANCE){
@@ -41,8 +42,11 @@ const app = express()
 const httpServer = http.createServer(app)
 const gameServer = new Server({
   transport: new WebSocketTransport({
-    server: httpServer
-  })
+    server: httpServer,
+  }),
+  presence: new RedisPresence(),
+  driver: new RedisDriver(),
+  publicAddress: `localhost:${port}`
 })
 
 app.use(bodyParser.json())
