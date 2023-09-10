@@ -13,12 +13,10 @@ patch announcement
 - New gadget: Jukebox (level 30 required): Choose your music ingame
 - Bot Builder is now a gadget unlocked at level 20
 
-# Gameplay
+# General gameplay changes:
 
 - Paralysis, Freeze and Sleep status now prevents dodging attacks
-- New Team Builder menu: plan your team with items and synergies
-- Rune Protect status no longer prevents special damage
-- When receiving Rune Protect status, all negative status alterations are cleared
+- Rune Protect status no longer prevents special damage, but clear existing negative status when received
 - When the number of alive players is odd, one player now fight a copy of an opponent. This copy (the "ghost") does not take round damage if losing.
 - Players can no longer push another player during minigame phase if he is in its bubble
 
@@ -50,6 +48,7 @@ patch announcement
 - Buff Solrock: now has Fire synergy
 - Buff Lunatone: now has Dark synergy
 - Adapted Cosmic Power: ~~30 AP for adjacent allies~~ 20 AP for your whole team (scales with AP)
+- Adapted Aurora Veil: Duration: 1.5/2.5/3.5 → 3 seconds at all tiers; now also gives 10/20/30 Shield (scales with AP)
 - Nerf Overheat (Moltres): ~~+100%~~ +30% bonus damage if target is burned
 - Adjusted stats of Magmortar: HP: 300 → 280, Def/SpeDef: 1 → 3
 
