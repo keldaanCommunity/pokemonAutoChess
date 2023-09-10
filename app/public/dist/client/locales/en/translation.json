@@ -1911,7 +1911,7 @@
   "average_elo": "Average ELO",
   "GLHF": "GLHF",
   "not_elligible_elo_hint": "❌Games with bots only are not elligible for ELO gain/loss.",
-  "add_bot_or_wait_hint": "dd bots or wait for more players to join your room",
+  "add_bot_or_wait_hint": "Add bots or wait for more players to join your room",
   "private_lobby": "Private lobby",
   "change_room_name": "Change room name",
   "add_bot": "Add Bot",

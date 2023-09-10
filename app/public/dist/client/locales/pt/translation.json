@@ -1882,7 +1882,7 @@
   "average_elo": "ELO médio",
   "GLHF": "GLHF",
   "not_elligible_elo_hint": "❌Jogos apenas com bots não são elegíveis para ganho/perda ELO.",
-  "add_bot_or_wait_hint": "dd bots ou espere que mais jogadores entrem na sua sala",
+  "add_bot_or_wait_hint": "Adicione bots ou espere que mais jogadores entrem na sua sala",
   "private_lobby": "Lobby privado",
   "change_room_name": "Alterar nome da sala",
   "add_bot": "Adicionar bot",
