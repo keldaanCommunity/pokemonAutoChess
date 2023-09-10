@@ -910,7 +910,7 @@
   "ability_description.DEATH_WING": "Infligge [150 SP] SPECIAL e cura il 75% dei danni subiti dal bersaglio",
   "ability_description.SLACK_OFF": "Cancella tutti gli stati negativi, guarisci il [30,40,50,SP=0.5]% dei HP massimi e metti l'incantatore in SLEEP per 5 secondi",
   "ability_description.DARK_VOID": "Infligge [30 SP] SPECIAL a tutti i nemici. Se uno dei bersagli interessati era SILENCE, viene messo SLEEP per 2 secondi",
-  "ability_description.OVERHEAT": "Infligge [40 SP] SPECIAL a tutti i nemici. Danno doppio se il bersaglio è BURN",
+  "ability_description.OVERHEAT": "Infligge [40 SP] SPECIAL a tutti i nemici. Danno +30% se il bersaglio è BURN",
   "ability_description.HYPNOSIS": "Metti SLEEP 1 nemico nelle retrovie per [2,3.5,6,SP=0.5] secondi",
   "ability_description.MIMIC": "Copia l'abilità del bersaglio attuale",
   "ability_description.HEX": "Infligge [20,40,80,SP] SPECIAL al bersaglio. Raddoppia i danni se il bersaglio è BURN, CONFUSION, FREEZE, PARALYSIS, POISON, SILENCE, SLEEP o WOUND",

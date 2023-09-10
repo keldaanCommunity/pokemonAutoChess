@@ -49,6 +49,7 @@ patch announcement
 - Buff Lunatone: now has Dark synergy
 - Adapted Cosmic Power: ~~30 AP for adjacent allies~~ 20 AP for your whole team (scales with AP)
 - Adapted Aurora Veil: Duration: 1.5/2.5/3.5 → 3 seconds at all tiers; now also gives 10/20/30 Shield (scales with AP)
+- Nerf Overheat (Moltres): ~~+100%~~ +30% bonus damage if target is burned
 - Adjusted stats of Magmortar: HP: 300 → 280, Def/SpeDef: 1 → 3
 
 # Changes to Synergies

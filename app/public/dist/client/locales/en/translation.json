@@ -953,7 +953,7 @@
     "DEATH_WING": "Deals [150,SP] SPECIAL and heals for 75% of the damage taken by the target",
     "SLACK_OFF": "Clear all negative status, heal [30,40,50,SP=0.5] % of max HP and put the caster SLEEP for 5 seconds",
     "DARK_VOID": "Deals [30,SP] SPECIAL to all enemies. If any affected target was SILENCE, they are put SLEEP for 2 seconds",
-    "OVERHEAT": "Deals [40,SP] SPECIAL to all enemies. Double damage if target is BURN",
+    "OVERHEAT": "Deals [40,SP] SPECIAL to all enemies. +30% damage if target is BURN",
     "HYPNOSIS": "Put SLEEP 1 enemy in the back lines for [2,3.5,6,SP=0.5] seconds",
     "MIMIC": "Copies the ability of the current target",
     "HEX": "Deals [20,40,80,SP] SPECIAL to the target. Doubles damage if target is BURN, CONFUSION, FREEZE, PARALYSIS, POISON, SILENCE, SLEEP or WOUND",
