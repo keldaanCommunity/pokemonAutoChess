@@ -25,6 +25,8 @@
 
 Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752/1132756077662961666)
 
+---
+
 > August, 26th
 
 # Patch 4.0: Portal Away !
