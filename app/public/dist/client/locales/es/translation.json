@@ -910,7 +910,7 @@
   "ability_description.DEATH_WING": "Inflige [150,SP] SPECIAL y cura el 75 % del daño recibido por el objetivo",
   "ability_description.SLACK_OFF": "Borra todos los estados negativos, cura [30,40,50,SP=0.5] % de HP máximo y pon al taumaturgo a SLEEP durante 5 segundos",
   "ability_description.DARK_VOID": "Otorga [30,SP] SPECIAL a todos los enemigos. Si algún objetivo afectado estaba en SILENCE, se pone en SLEEP durante 2 segundos",
-  "ability_description.OVERHEAT": "Otorga [40,SP] SPECIAL a todos los enemigos. Daño doble si el objetivo está BURN",
+  "ability_description.OVERHEAT": "Otorga [40,SP] SPECIAL a todos los enemigos. Daño +30% si el objetivo está BURN",
   "ability_description.HYPNOSIS": "Pon a SLEEP a 1 enemigo en la retaguardia durante [2,3,5,6,SP=0,5] segundos",
   "ability_description.MIMIC": "Copia la habilidad del objetivo actual",
   "ability_description.HEX": "Otorga [20,40,80,SP] SPECIAL al objetivo. Duplica el daño si el objetivo está BURN, CONFUSION, FREEZE, PARALYSIS, POISON, SILENCE, SLEEP o WOUND",
