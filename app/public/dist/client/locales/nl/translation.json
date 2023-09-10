@@ -1795,7 +1795,7 @@
   "average_elo": "Gemiddelde ELO",
   "GLHF": "GLHF",
   "not_elligible_elo_hint": "❌Games met alleen bots komen niet in aanmerking voor ELO winst/verlies.",
-  "add_bot_or_wait_hint": "dd bots of wacht tot meer spelers je kamer binnenkomen",
+  "add_bot_or_wait_hint": "Voeg bots of wacht tot meer spelers je kamer binnenkomen",
   "private_lobby": "Privé lobby",
   "change_room_name": "Wijzig de naam van de kamer",
   "add_bot": "Bot toevoegen",
