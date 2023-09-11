@@ -910,7 +910,7 @@
     "BEAT_UP": "Invoquer [1,2,3] Houndour (aucun objet)",
     "BLUE_FLARE": "Inflige [50,SP] SPECIAL + 20 par niveau de synergie FIRE",
     "FUSION_BOLT": "Inflige [50,SP] SPECIAL + 40 par niveau de synergie ELECTRIC",
-    "AURORA_VEIL": "Tous les alliés reçoivent [10,20,40,SP] SHIELD et RUNE_PROTECT pendant 3 secondes",
+    "AURORA_VEIL": "Tous les alliés reçoivent [5,10,15,SP] SHIELD et RUNE_PROTECT pendant 3 secondes",
     "AQUA_JET": "Fonce dans la ligne de fond ennemie, infligeant [30,60,120,SP] SPECIAL à tous les ennemis sur le chemin",
     "JUDGEMENT": "Inflige [10,SP] SPECIAL à la cible, multipliés par la somme des niveaux de synergies d'Arceus",
     "CHATTER": "Inflige [10,SP] SPECIAL à tous les ennemis. Chaque ennemi a [30,SP] % de chances d'être CONFUSION pendant 1 seconde",

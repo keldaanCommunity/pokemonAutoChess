@@ -781,18 +781,18 @@ export class AuroraVeilStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     let runeProtectDuration = 3000
-    let shield = 10
+    let shield = 5
     if (pokemon.stars === 2) {
-      shield = 20
+      shield = 10
     }
     if (pokemon.stars === 3) {
-      shield = 40
+      shield = 15
     }
     shield = Math.round(shield * (1 + pokemon.ap / 100))
 
     board.forEach((x, y, tg) => {
       if (tg && pokemon.team == tg.team) {
-        tg.addShield(shield, pokemon, true)
+        tg.addShield(shield, pokemon, false)
         tg.status.triggerRuneProtect(runeProtectDuration)
       }
     })
