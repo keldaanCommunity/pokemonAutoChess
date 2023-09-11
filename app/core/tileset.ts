@@ -40,7 +40,9 @@ export default class Tileset {
 
   async initialize() {
     this.img = await Jimp.read(
-      `app/public/dist/client/assets/tilesets/${this.id}.png`
+      process.env.NODE_APP_INSTANCE
+        ? `../../client/assets/tilesets/${this.id}.png`
+        : `app/public/dist/client/assets/tilesets/${this.id}.png`
     )
     this.computeMapping()
   }

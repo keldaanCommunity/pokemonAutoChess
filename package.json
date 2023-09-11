@@ -20,7 +20,7 @@
     "ogus",
     "sylvainpolletvillard"
   ],
-  "main": "dist/server/index.js",
+  "main": "public/dist/server/app/index.js",
   "scripts": {
     "reset": "rm -rf node_modules/ && rm -f app/public/js/*",
     "dev-client": "node esbuild.js --dev",
@@ -33,11 +33,15 @@
     "start": "node --optimize_for_size --max_old_space_size=800 ./app/public/dist/server/app/index.js",
     "add-bot": "node ./app/public/dist/server/db-commands/populate-bot.js",
     "monitor-bot": "node ./app/public/dist/server/scheduled/monitor-bot.js",
-    "translate": "npx @inlang/cli machine translate -f"
+    "translate": "npx @inlang/cli machine translate -f",
+    "pm2": "pm2 start ecosystem.config.js",
+    "start-pm2": "npm run build && npm run pm2"
   },
   "dependencies": {
     "@colyseus/command": "^0.2.1",
     "@colyseus/monitor": "^0.15.1",
+    "@colyseus/redis-driver": "^0.15.3",
+    "@colyseus/redis-presence": "^0.15.2",
     "@colyseus/ws-transport": "^0.15.0",
     "@inlang/cli": "^0.13.3",
     "@reduxjs/toolkit": "^1.9.2",

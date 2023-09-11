@@ -7,7 +7,6 @@ import {
 } from "colyseus"
 import { Dispatcher } from "@colyseus/command"
 import LobbyState from "./states/lobby-state"
-import { connect } from "mongoose"
 import BannedUser from "../models/mongo-models/banned-user"
 import ChatV2 from "../models/mongo-models/chat-v2"
 import Message from "../models/colyseus-models/message"
@@ -383,8 +382,6 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
         })
       }
     )
-
-    await connect(process.env.MONGO_URI!)
     await this.fetchChat()
     await this.fetchLeaderboards()
     await this.fetchMeta()
