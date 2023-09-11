@@ -20,7 +20,7 @@ import { SynergyTriggers } from "./types/Config"
 import { logger } from "./utils/logger"
 import { connect } from "mongoose"
 
-process.env.NODE_ENV === "production"
+process.env.NODE_APP_INSTANCE
   ? dotenv.config({ path: path.join(__dirname, "../../../../../.env") })
   : dotenv.config()
 // console.log(path.join(__dirname, "../../../../../.env"))
