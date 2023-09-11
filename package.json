@@ -20,7 +20,7 @@
     "ogus",
     "sylvainpolletvillard"
   ],
-  "main": "dist/server/index.js",
+  "main": "public/dist/server/app/index.js",
   "scripts": {
     "reset": "rm -rf node_modules/ && rm -f app/public/js/*",
     "dev-client": "node esbuild.js --dev",

@@ -19,12 +19,13 @@ import { Item } from "./types/enum/Item"
 import { SynergyTriggers } from "./types/Config"
 import { logger } from "./utils/logger"
 
-dotenv.config({path: path.join(__dirname, "../../../../../.env")});
-console.log(path.join(__dirname, "../../../../../.env"))
+dotenv.config({ path: path.join(__dirname, "../../../../../.env") })
+// console.log(path.join(__dirname, "../../../../../.env"))
+// console.log(process.env)
 
 let port = Number(process.env.PORT) || 9000
-if(process.env.NODE_APP_INSTANCE){
-  port = Number(process.env.PORT) + Number(process.env.NODE_APP_INSTANCE); // pm2 mode
+if (process.env.NODE_APP_INSTANCE) {
+  port = Number(process.env.PORT) + Number(process.env.NODE_APP_INSTANCE) // pm2 mode
 }
 
 admin.initializeApp({
@@ -42,10 +43,10 @@ const app = express()
 const httpServer = http.createServer(app)
 const gameServer = new Server({
   transport: new WebSocketTransport({
-    server: httpServer,
+    server: httpServer
   }),
-  presence: new RedisPresence(),
-  driver: new RedisDriver(),
+  presence: new RedisPresence(process.env.REDIS_URI),
+  driver: new RedisDriver(process.env.REDIS_URI),
   publicAddress: `localhost:${port}`
 })
 
