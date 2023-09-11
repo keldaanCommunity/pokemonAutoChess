@@ -217,6 +217,7 @@ export default class GameScene extends Scene {
   }
 
   updatePhase() {
+    this.weatherManager?.clearWeather()
     this.resetDragState()
     if (this.room?.state.phase == GamePhaseState.FIGHT) {
       this.board?.battleMode()
