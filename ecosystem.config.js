@@ -3,7 +3,7 @@ const os = require("os");
 
 module.exports = {
     apps: [{
-        port        : 3000,
+        port        : 9000,
         name        : "colyseus",
         cwd         : "./app/public/dist/server/app",
         script      : "index.js", // your entrypoint file

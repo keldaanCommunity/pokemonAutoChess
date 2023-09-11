@@ -3,7 +3,7 @@ import path from "path"
 import http from "http"
 import express, { ErrorRequestHandler } from "express"
 import cors from "cors"
-import { RedisDriver, RedisPresence, Server } from "colyseus"
+import { RedisDriver, RedisPresence, Server, ServerOptions } from "colyseus"
 import { monitor } from "@colyseus/monitor"
 import basicAuth from "express-basic-auth"
 import { WebSocketTransport } from "@colyseus/ws-transport"
@@ -18,8 +18,11 @@ import { Pkm } from "./types/enum/Pokemon"
 import { Item } from "./types/enum/Item"
 import { SynergyTriggers } from "./types/Config"
 import { logger } from "./utils/logger"
+import { connect } from "mongoose"
 
-dotenv.config({ path: path.join(__dirname, "../../../../../.env") })
+process.env.NODE_ENV === "production"
+  ? dotenv.config({ path: path.join(__dirname, "../../../../../.env") })
+  : dotenv.config()
 // console.log(path.join(__dirname, "../../../../../.env"))
 // console.log(process.env)
 
@@ -41,14 +44,19 @@ admin.initializeApp({
 
 const app = express()
 const httpServer = http.createServer(app)
-const gameServer = new Server({
+
+const properties: ServerOptions = {
   transport: new WebSocketTransport({
     server: httpServer
   }),
-  presence: new RedisPresence(process.env.REDIS_URI),
-  driver: new RedisDriver(process.env.REDIS_URI),
   publicAddress: `localhost:${port}`
-})
+}
+
+if (process.env.NODE_ENV === "production") {
+  properties.presence = new RedisPresence(process.env.REDIS_URI)
+  properties.driver = new RedisDriver(process.env.REDIS_URI)
+}
+const gameServer = new Server(properties)
 
 app.use(bodyParser.json())
 
@@ -189,5 +197,9 @@ gameServer.define("room", PreparationRoom).enableRealtimeListing()
 gameServer.define("game", GameRoom).enableRealtimeListing()
 
 // Start
-gameServer.listen(port)
-logger.info(`Game server started, listening on port ${port}`)
+async function main() {
+  await connect(process.env.MONGO_URI!)
+  gameServer.listen(port)
+  logger.info(`Game server started, listening on port ${port}`)
+}
+main()
