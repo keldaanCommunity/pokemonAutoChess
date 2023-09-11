@@ -35,7 +35,7 @@
     "monitor-bot": "node ./app/public/dist/server/scheduled/monitor-bot.js",
     "translate": "npx @inlang/cli machine translate -f",
     "pm2": "pm2 start ecosystem.config.js",
-    "start-horizontal": "npm run build && npm run pm2"
+    "start-pm2": "npm run build && npm run pm2"
   },
   "dependencies": {
     "@colyseus/command": "^0.2.1",
