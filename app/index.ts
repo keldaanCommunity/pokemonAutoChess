@@ -52,9 +52,8 @@ const properties: ServerOptions = {
 }
 
 if (process.env.NODE_APP_INSTANCE) {
-  properties.publicAddress = `localhost:${port}`
-  properties.presence = new RedisPresence({ host: process.env.REDIS_URI })
-  properties.driver = new RedisDriver({ host: process.env.REDIS_URI })
+  properties.presence = new RedisPresence(process.env.REDIS_URI!)
+  properties.driver = new RedisDriver(process.env.REDIS_URI!)
 }
 const gameServer = new Server(properties)
 
