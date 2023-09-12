@@ -101,9 +101,17 @@ export default function TeamBuilder(props: {
 
   function handleDrop(x: number, y: number, e: React.DragEvent) {
     if (e.dataTransfer.getData("cell") != "") {
-      const [originX, originY] = e.dataTransfer.getData("cell").split(",")
-      const pkm = board.find((p) => p.x === +originX && p.y === +originY)
+      const [originX, originY] = e.dataTransfer
+        .getData("cell")
+        .split(",")
+        .map(Number)
+      const pkm = board.find((p) => p.x === originX && p.y === originY)
+      const otherPokemonOnCell = board.find((p) => p.x === x && p.y === y)
       if (pkm) {
+        if (otherPokemonOnCell) {
+          otherPokemonOnCell.x = originX
+          otherPokemonOnCell.y = originY
+        }
         pkm.x = x
         pkm.y = y
         updateBoard([...board])
