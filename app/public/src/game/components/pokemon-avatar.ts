@@ -9,7 +9,8 @@ import Pokemon from "./pokemon"
 import LifeBar from "./life-bar"
 import EmoteMenu from "./emote-menu"
 import AnimationManager from "../animation-manager"
-import { AnimationConfig } from "../../../../types/enum/Pokemon"
+import store from "../../stores"
+import { toggleAnimation } from "../../stores/NetworkStore"
 
 export default class PokemonAvatar extends Pokemon {
   circleHitbox: GameObjects.Ellipse | undefined
@@ -161,7 +162,7 @@ export default class PokemonAvatar extends Pokemon {
 
   playAnimation() {
     try {
-      this.animationManager.play(this, AnimationConfig[this.name].emote, false)
+      store.dispatch(toggleAnimation())
     } catch (err) {
       console.error("could not play animation", err)
     }

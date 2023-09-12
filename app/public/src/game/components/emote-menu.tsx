@@ -5,7 +5,7 @@ import { Emotion } from "../../../../types/enum/Emotion"
 import { getAvatarString, getPortraitSrc } from "../../utils"
 import "./emote-menu.css"
 import { throttle } from "../../../../utils/function"
-import { broadcastEmote } from "../../stores/NetworkStore"
+import { toggleAnimation } from "../../stores/NetworkStore"
 import store from "../../stores"
 import tracker from "../../../dist/client/assets/pokemons/tracker.json"
 import { ITracker } from "../../../../types/ITracker"
@@ -19,7 +19,7 @@ const sendEmote = throttle(function (
   shiny: boolean,
   emotion: Emotion
 ) {
-  store.dispatch(broadcastEmote(getAvatarString(index, shiny, emotion)))
+  store.dispatch(toggleAnimation(getAvatarString(index, shiny, emotion)))
 },
 3000)
 
