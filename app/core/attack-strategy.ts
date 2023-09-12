@@ -53,6 +53,9 @@ export class AttackStrategy {
 
     if (pokemon.types.includes(Synergy.SOUND)) {
       pokemon.count.soundCount++
+      const chimechoBoost = !!board.find(
+        (x, y, e) => e.passive === Passive.CHIMECHO && e.team === pokemon.team
+      )
       board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
         if (ally && pokemon.team === ally.team) {
           ally.status.sleep = false
@@ -61,16 +64,17 @@ export class AttackStrategy {
             pokemon.effects.includes(Effect.ALLEGRO) ||
             pokemon.effects.includes(Effect.PRESTO)
           ) {
-            ally.addAttack(1, false)
+            ally.addAttack(chimechoBoost ? 2 : 1, false)
           }
           if (
             pokemon.effects.includes(Effect.ALLEGRO) ||
             pokemon.effects.includes(Effect.PRESTO)
           ) {
-            ally.addAttackSpeed(5, false)
+            ally.addAttackSpeed(chimechoBoost ? 10 : 5, false)
           }
           if (pokemon.effects.includes(Effect.PRESTO)) {
-            ally.setPP(ally.pp + 3)
+            const manaBoost = chimechoBoost ? 6 : 3
+            ally.setPP(ally.pp + manaBoost)
           }
         }
       })
