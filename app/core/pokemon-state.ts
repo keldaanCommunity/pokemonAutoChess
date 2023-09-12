@@ -407,14 +407,14 @@ export default class PokemonState {
         if (pokemon.passive === Passive.ELECTRIC_SURGE) {
           board.forEach((x, y, pkm) => {
             if (pkm && pkm.team == pokemon.team && pkm.status.electricField) {
-              pkm.status.electricField = false
+              pkm.removeElectricField()
             }
           })
           effectsRemovedList.push(Effect.ELECTRIC_TERRAIN)
         } else if (pokemon.passive === Passive.PSYCHIC_SURGE) {
           board.forEach((x, y, pkm) => {
             if (pkm && pkm.team == pokemon.team && pkm.status.psychicField) {
-              pkm.status.psychicField = false
+              pkm.removePsychicField()
             }
           })
           effectsRemovedList.push(Effect.PSYCHIC_TERRAIN)

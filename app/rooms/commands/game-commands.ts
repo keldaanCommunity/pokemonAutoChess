@@ -595,6 +595,15 @@ export class OnDragDropItemCommand extends Command<
             )
           }
           break
+        case Pkm.RAICHU:
+          if (item === Item.DAWN_STONE) {
+            newPokemon = PokemonFactory.transformPokemon(
+              pokemon,
+              Pkm.ALOLAN_RAICHU,
+              player
+            )
+          }
+          break
       }
 
       if (newPokemon) {

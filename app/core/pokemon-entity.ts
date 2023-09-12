@@ -328,6 +328,34 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     )
   }
 
+  addPsychicField() {
+    this.status.psychicField = true
+    if (this.passive === Passive.SURGE_SURFER) {
+      this.addAttackSpeed(30, false)
+    }
+  }
+
+  removePsychicField() {
+    this.status.psychicField = false
+    if (this.passive === Passive.SURGE_SURFER) {
+      this.addAttackSpeed(-30, false)
+    }
+  }
+
+  addElectricField() {
+    this.status.electricField = true
+    if (this.passive === Passive.SURGE_SURFER) {
+      this.addAttackSpeed(30, false)
+    }
+  }
+
+  removeElectricField() {
+    this.status.electricField = false
+    if (this.passive === Passive.SURGE_SURFER) {
+      this.addAttackSpeed(-30, false)
+    }
+  }
+
   addCritDamage(value: number, apBoost = false) {
     const boost = apBoost ? (value * this.ap) / 100 : 0
     this.critDamage = Math.max(
