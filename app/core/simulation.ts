@@ -1079,14 +1079,14 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.PSYCHIC_TERRAIN:
           if (types.includes(Synergy.PSYCHIC)) {
-            pokemon.status.psychicField = true
+            pokemon.addPsychicField()
             pokemon.effects.push(Effect.PSYCHIC_TERRAIN)
           }
           break
 
         case Effect.ELECTRIC_TERRAIN:
           if (types.includes(Synergy.ELECTRIC)) {
-            pokemon.status.electricField = true
+            pokemon.addElectricField()
             pokemon.effects.push(Effect.ELECTRIC_TERRAIN)
           }
           break

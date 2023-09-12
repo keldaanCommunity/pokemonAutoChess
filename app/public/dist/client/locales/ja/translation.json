@@ -798,7 +798,7 @@
   "ability_description.ECHO": "敵チームに[3,6,9,SP]のSPECIALを与え、ポケモンが能力を使うたびに[3,6,9,SP]ずつ増加します",
   "ability_description.HYPER_VOICE": "連続で [50,100,200,SP] SPECIAL を与え、すべてのターゲットを [1,2,3] 秒間混乱状態にします",
   "ability_description.SHADOW_CLONE": "ポケモンはターゲットの隣に自分と同じクローンを作成します。この分身はポケモンのアイテムとステータス、最大HPの80%と[30,SP]のシールドを継承します。",
-  "ability_description.VOLT_SWITCH": "敵後衛に突進し[30,60,120,SP]SPECIALを与える",
+  "ability_description.VOLT_SWITCH": "敵後衛に突進し[30,60,120,180,SP]SPECIALを与える",
   "ability_description.LIQUIDATION": "[20,40,80,SP] SPECIALを与え、ターゲットからDEFを[1,2,4]削除します",
   "ability_description.BURN": "敵チーム全体を[5,10,20]秒間燃やす",
   "ability_description.POISON": "[3,6,9,SP=0.5]秒間、[1,2,3]人の最も近い敵にPOISONを適用します",

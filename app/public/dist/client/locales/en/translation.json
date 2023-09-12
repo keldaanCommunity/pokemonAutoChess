@@ -818,7 +818,8 @@
     "IRON_BUNDLE": "Iron Bundle",
     "KARTANA": "Kartana",
     "CHINGLING": "Chingling",
-    "CHIMECHO": "Chimecho"
+    "CHIMECHO": "Chimecho",
+    "ALOLAN_RAICHU": "Alolan Raichu"
   },
   "ability_description": {
     "DEFAULT": "Default",
@@ -842,7 +843,7 @@
     "PETAL_DANCE": "Deal [20,30,50,SP] SPECIAL to [3,4,5] enemy Pokémon",
     "HYPER_VOICE": "Deal [50,100,200,SP] SPECIAL to all enemy Pokémon in the same column as the user and make them CONFUSION for [1,2,3] seconds",
     "SHADOW_CLONE": "The user creates an identical clone of themselves next to their target. The clone has the same items and stats as the user, has 80% of its max HP and [30,SP] SHIELD",
-    "VOLT_SWITCH": "Dash into the enemy team's backline, dealing [30,60,120,SP] SPECIAL to all enemy Pokémon hit",
+    "VOLT_SWITCH": "Dash into the enemy team's backline, dealing [30,60,120,180,SP] SPECIAL to all enemy Pokémon hit",
     "LIQUIDATION": "Deal [20,40,80,SP] SPECIAL and lower the target's DEF by [1,2,4]",
     "BURN": "BURN all enemy Pokémon for [5,10,20] seconds",
     "POISON": "Apply POISON to the [1,2,3] closest enemy Pokémon for [3,6,9,SP=0.5] seconds",
@@ -1392,7 +1393,9 @@
     "SHAYMIN": "Shaymin is looking for a GRACIDEA_FLOWER",
     "BEAST_BOOST": "Upon kill, the pokémon gains 5 ATK",
     "CHINGLING": "Chingling is looking for a STAR_DUST",
-    "CHIMECHO": "Resonates to sounds from allies, which doubles SOUND synergy bonus while Chimecho is alive"
+    "CHIMECHO": "Resonates to sounds from allies, which doubles SOUND synergy bonus while Chimecho is alive",
+    "RAICHU": "Raichu is looking for a DAWN_STONE",
+    "SURGE_SURFER": "The surge surfer gets +30% ATK_SPEED in ELECTRIC_FIELD or PSYCHIC_FIELD"
   },
   "stat": {
     "ATK": "Attack",

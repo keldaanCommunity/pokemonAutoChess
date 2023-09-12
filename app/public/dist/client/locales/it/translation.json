@@ -798,7 +798,7 @@
   "ability_description.ECHO": "Infligge [3,6,9,SP] SPECIAL alla squadra nemica, aumentando di [3,6,9,SP] ogni volta che il pokemon usa la sua abilità",
   "ability_description.HYPER_VOICE": "Infligge [50.100.200.SP] SPECIAL di fila e fa sì che tutti i bersagli colpiscano CONFUSION per [1,2,3] secondi",
   "ability_description.SHADOW_CLONE": "Il pokemon crea un clone identico di se stesso accanto al suo bersaglio. Questo clone eredita dai pokemon oggetti e statistiche, l'80% dei suoi HP massimi e [30,SP] SHIELD",
-  "ability_description.VOLT_SWITCH": "Scatta nelle retrovie nemiche, infliggendo [30,60,120,SP] SPECIAL",
+  "ability_description.VOLT_SWITCH": "Scatta nelle retrovie nemiche, infliggendo [30,60,120,180,SP] SPECIAL",
   "ability_description.LIQUIDATION": "Infligge [20,40,80,SP] SPECIAL e rimuove [1,2,4] DEF dal bersaglio",
   "ability_description.BURN": "BURN l'intera squadra nemica per [5,10,20] secondi",
   "ability_description.POISON": "Applica POISON a [1,2,3] avversari più vicini per [3,6,9,SP=0.5] secondi",
