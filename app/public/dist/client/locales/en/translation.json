@@ -816,7 +816,9 @@
     "TORKOAL": "Torkoal",
     "DELIBIRD": "Delibird",
     "IRON_BUNDLE": "Iron Bundle",
-    "KARTANA": "Kartana"
+    "KARTANA": "Kartana",
+    "CHINGLING": "Chingling",
+    "CHIMECHO": "Chimecho"
   },
   "ability_description": {
     "DEFAULT": "Default",
@@ -1388,7 +1390,9 @@
     "POISON_HEAL": "If the Pokémon is POISON, it will gain HP instead of taking damage",
     "GRIM_NEIGH": "When the Pokémon knocks out an enemy, it emits a terrifying whinny sound that increases its AP by 30",
     "SHAYMIN": "Shaymin is looking for a GRACIDEA_FLOWER",
-    "BEAST_BOOST": "Upon kill, the pokémon gains 5 ATK"
+    "BEAST_BOOST": "Upon kill, the pokémon gains 5 ATK",
+    "CHINGLING": "Chingling is looking for a STAR_DUST",
+    "CHIMECHO": "Resonates to sounds from allies, which doubles SOUND synergy bonus while Chimecho is alive"
   },
   "stat": {
     "ATK": "Attack",

@@ -13427,6 +13427,56 @@ export class Greninja extends Pokemon {
   }
 }
 
+export class Chingling extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.CHINGLING,
+      [Synergy.SOUND, Synergy.PSYCHIC, Synergy.BABY],
+      Rarity.UNIQUE,
+      Pkm.CHIMECHO,
+      180,
+      8,
+      2,
+      4,
+      3,
+      AttackSprite.PSYCHIC_RANGE,
+      2,
+      80,
+      Ability.ECHO,
+      shiny,
+      emotion,
+      false,
+      false,
+      Passive.CHINGLING
+    )
+  }
+}
+
+export class Chimecho extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.CHIMECHO,
+      [Synergy.SOUND, Synergy.PSYCHIC],
+      Rarity.UNIQUE,
+      Pkm.DEFAULT,
+      200,
+      15,
+      3,
+      6,
+      3,
+      AttackSprite.PSYCHIC_RANGE,
+      3,
+      80,
+      Ability.ECHO,
+      shiny,
+      emotion,
+      true,
+      false,
+      Passive.CHIMECHO
+    )
+  }
+}
+
 export class Tyrogue extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
