@@ -3493,7 +3493,7 @@ export class Raichu extends Pokemon {
       Pkm.RAICHU,
       [Synergy.ELECTRIC, Synergy.FAIRY],
       Rarity.COMMON,
-      Pkm.DEFAULT,
+      Pkm.ALOLAN_RAICHU,
       220,
       18,
       5,
@@ -3505,7 +3505,34 @@ export class Raichu extends Pokemon {
       Ability.VOLT_SWITCH,
       shiny,
       emotion,
-      true
+      false,
+      false,
+      Passive.RAICHU
+    )
+  }
+}
+
+export class AlolanRaichu extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ALOLAN_RAICHU,
+      [Synergy.ELECTRIC, Synergy.FAIRY, Synergy.PSYCHIC],
+      Rarity.COMMON,
+      Pkm.DEFAULT,
+      230,
+      20,
+      6,
+      6,
+      1,
+      AttackSprite.ELECTRIC_MELEE,
+      4,
+      140,
+      Ability.VOLT_SWITCH,
+      shiny,
+      emotion,
+      true,
+      false,
+      Passive.SURGE_SURFER
     )
   }
 }

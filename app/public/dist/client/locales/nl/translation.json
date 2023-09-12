@@ -796,7 +796,7 @@
   "ability_description.ECHO": "Breng [3,6,9,SP] SPECIAL toe aan alle vijandelijke Pokémon. Elke keer als de gebruiker deze vaardigheid gebruikt gaat de schade omhoog met [3,6,9,SP]",
   "ability_description.HYPER_VOICE": "Breng [50,100,200,SP] SPECIAL toe aan alle vijandelijke Pokémon in dezelfde kolom als de gebruiker en maak ze CONFUSION for [1,2,3] seconds",
   "ability_description.SHADOW_CLONE": "De gebruiker maakt een identieke kloon van zichzelf naast zijn doelwit. De kloon heeft dezelfde items en statistieken als de gebruiker, heeft 80% van zijn maximale HP en [30,SP] SHIELD",
-  "ability_description.VOLT_SWITCH": "Ren naar de achterkant van het vijandelijke team en breng [30,60,120,SP] SPECIAL toe aan alle geraakte vijandelijke Pokémon",
+  "ability_description.VOLT_SWITCH": "Ren naar de achterkant van het vijandelijke team en breng [30,60,120,180,SP] SPECIAL toe aan alle geraakte vijandelijke Pokémon",
   "ability_description.LIQUIDATION": "Breng [20,40,80,SP] SPECIAL toe en verlaag de DEF van het doelwit met [1,2,4]",
   "ability_description.BURN": "Pas de BURN status toe op alle vijandelijke Pokémon voor [5,10,20] seconden",
   "ability_description.POISON": "Pas de POISON status toe op de [1,2,3] dichtstbijzijnde vijandelijke Pokémon voor [3,6,9,SP=0,5] seconden",
