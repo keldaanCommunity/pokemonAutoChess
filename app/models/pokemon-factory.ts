@@ -605,7 +605,8 @@ import {
   Torkoal,
   Delibird,
   Larvesta,
-  IronBundle
+  IronBundle,
+  Kartana
 } from "./colyseus-models/pokemon"
 import { IPokemonConfig } from "./mongo-models/user-metadata"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
@@ -2003,6 +2004,8 @@ export default class PokemonFactory {
         return new Delibird(s, e)
       case Pkm.IRON_BUNDLE:
         return new IronBundle(s, e)
+      case Pkm.KARTANA:
+        return new Kartana(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:

@@ -681,6 +681,10 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       }
     }
 
+    if (this.passive === Passive.BEAST_BOOST) {
+      this.addAttack(5)
+    }
+
     if (
       target.effects.includes(Effect.ODD_FLOWER) ||
       target.effects.includes(Effect.GLOOM_FLOWER) ||

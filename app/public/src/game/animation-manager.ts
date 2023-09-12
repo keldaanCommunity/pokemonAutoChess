@@ -838,6 +838,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.LEAF_BLADE,
+      frames: this.game.anims.generateFrameNames(Ability.LEAF_BLADE, {
+        start: 0,
+        end: 26,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.PRESENT,
       frames: this.game.anims.generateFrameNames(Ability.PRESENT, {
         start: 0,

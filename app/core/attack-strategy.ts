@@ -780,7 +780,7 @@ export class AuroraVeilStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let runeProtectDuration = 3000
+    const runeProtectDuration = 3000
     let shield = 5
     if (pokemon.stars === 2) {
       shield = 10
@@ -3090,6 +3090,25 @@ export class SacredSwordStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target, crit)
     const damage = 90
     target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
+  }
+}
+
+export class LeafBladeStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, true)
+    target.handleSpecialDamage(
+      pokemon.atk,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      true
+    )
   }
 }
 
