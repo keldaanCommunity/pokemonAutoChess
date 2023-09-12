@@ -1,6 +1,6 @@
 # New Pokemons:
 
-Kartana
+Kartana, Chingling, Chimecho
 
 # Changes to Pokemon & Abilities
 

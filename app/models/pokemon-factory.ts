@@ -606,7 +606,9 @@ import {
   Delibird,
   Larvesta,
   IronBundle,
-  Kartana
+  Kartana,
+  Chimecho,
+  Chingling
 } from "./colyseus-models/pokemon"
 import { IPokemonConfig } from "./mongo-models/user-metadata"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
@@ -2006,6 +2008,10 @@ export default class PokemonFactory {
         return new IronBundle(s, e)
       case Pkm.KARTANA:
         return new Kartana(s, e)
+      case Pkm.CHINGLING:
+        return new Chingling(s, e)
+      case Pkm.CHIMECHO:
+        return new Chimecho(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:

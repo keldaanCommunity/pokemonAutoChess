@@ -586,6 +586,15 @@ export class OnDragDropItemCommand extends Command<
             )
           }
           break
+        case Pkm.CHINGLING:
+          if (item === Item.STAR_DUST) {
+            newPokemon = PokemonFactory.transformPokemon(
+              pokemon,
+              Pkm.CHIMECHO,
+              player
+            )
+          }
+          break
       }
 
       if (newPokemon) {
