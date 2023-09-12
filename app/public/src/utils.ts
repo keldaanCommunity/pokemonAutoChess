@@ -10,7 +10,7 @@ export function getPortraitSrc(
 }
 
 export function getAvatarSrc(avatar: string) {
-  return `${CDN_PORTRAIT_URL}${avatar.replace("-", "/")}.png`
+  return `${CDN_PORTRAIT_URL}${avatar}.png`
 }
 
 export function getAvatarString(
