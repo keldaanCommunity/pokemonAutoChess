@@ -78,16 +78,28 @@ export default function TeamBuilder(props: {
     updateBoard([...board])
   }
 
-  function handleEditorClick(x: number, y: number, rightClick: boolean) {
+  function handleEditorClick(
+    x: number,
+    y: number,
+    rightClick: boolean,
+    itemIndex?: number
+  ) {
     const pokemonOnCell = board.find((p) => p.x === x && p.y === y)
     if (rightClick) {
-      updateBoard(board.filter((p) => p !== pokemonOnCell))
-      if (
-        selectedPokemon &&
-        selectedPokemon.x === x &&
-        selectedPokemon.y === y
-      ) {
-        setSelectedPokemon(undefined)
+      if (itemIndex !== undefined) {
+        // remove item
+        pokemonOnCell?.items.splice(itemIndex, 1)
+        updateBoard([...board])
+      } else {
+        // remove pokemon
+        updateBoard(board.filter((p) => p !== pokemonOnCell))
+        if (
+          selectedPokemon &&
+          selectedPokemon.x === x &&
+          selectedPokemon.y === y
+        ) {
+          setSelectedPokemon(undefined)
+        }
       }
     } else if (pokemonOnCell) {
       setSelection(pokemonOnCell)
