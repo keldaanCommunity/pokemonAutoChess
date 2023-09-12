@@ -175,7 +175,6 @@ export default class MinigameManager {
           break
 
         case "avatarId":
-          logger.debug("change portal.avatarId", value)
           if (value != "" && typeof value === "string") {
             const avatar = this.pokemons.get(value)
             logger.debug(

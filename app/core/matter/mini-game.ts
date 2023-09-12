@@ -25,8 +25,8 @@ import {
   SynergyTriggers
 } from "../../types/Config"
 import { Synergy } from "../../types/enum/Synergy"
-import { logger } from "../../utils/logger"
 import GameState from "../../rooms/states/game-state"
+import { entries } from "../../utils/schemas"
 
 const PLAYER_VELOCITY = 2
 const ITEM_ROTATION_SPEED = 0.0004
@@ -486,14 +486,14 @@ export class MiniGame {
       }
 
       if (
-        avatar.portalId === "" &&
+        avatar.portalId == "" &&
         player &&
         !player.isBot &&
         this.portals &&
         this.avatars
       ) {
         // send to random portal if none was taken
-        const remainingPortals = [...this.portals.entries()].filter(
+        const remainingPortals = entries(this.portals).filter(
           ([portalId, portal]) => portal.avatarId == ""
         )
         if (remainingPortals.length > 0) {
