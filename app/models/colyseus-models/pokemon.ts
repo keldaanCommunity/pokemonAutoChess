@@ -14029,3 +14029,28 @@ export class Spectrier extends Pokemon {
     )
   }
 }
+
+export class Kartana extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.KARTANA,
+      [Synergy.GRASS, Synergy.STEEL],
+      Rarity.LEGENDARY,
+      Pkm.DEFAULT,
+      200,
+      40,
+      10,
+      1,
+      1,
+      AttackSprite.GRASS_MELEE,
+      3,
+      95,
+      Ability.LEAF_BLADE,
+      shiny,
+      emotion,
+      false,
+      false,
+      Passive.BEAST_BOOST
+    )
+  }
+}
