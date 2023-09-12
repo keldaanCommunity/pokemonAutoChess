@@ -78,16 +78,28 @@ export default function TeamBuilder(props: {
     updateBoard([...board])
   }
 
-  function handleEditorClick(x: number, y: number, rightClick: boolean) {
+  function handleEditorClick(
+    x: number,
+    y: number,
+    rightClick: boolean,
+    itemIndex?: number
+  ) {
     const pokemonOnCell = board.find((p) => p.x === x && p.y === y)
     if (rightClick) {
-      updateBoard(board.filter((p) => p !== pokemonOnCell))
-      if (
-        selectedPokemon &&
-        selectedPokemon.x === x &&
-        selectedPokemon.y === y
-      ) {
-        setSelectedPokemon(undefined)
+      if (itemIndex !== undefined) {
+        // remove item
+        pokemonOnCell?.items.splice(itemIndex, 1)
+        updateBoard([...board])
+      } else {
+        // remove pokemon
+        updateBoard(board.filter((p) => p !== pokemonOnCell))
+        if (
+          selectedPokemon &&
+          selectedPokemon.x === x &&
+          selectedPokemon.y === y
+        ) {
+          setSelectedPokemon(undefined)
+        }
       }
     } else if (pokemonOnCell) {
       setSelection(pokemonOnCell)
@@ -101,9 +113,17 @@ export default function TeamBuilder(props: {
 
   function handleDrop(x: number, y: number, e: React.DragEvent) {
     if (e.dataTransfer.getData("cell") != "") {
-      const [originX, originY] = e.dataTransfer.getData("cell").split(",")
-      const pkm = board.find((p) => p.x === +originX && p.y === +originY)
+      const [originX, originY] = e.dataTransfer
+        .getData("cell")
+        .split(",")
+        .map(Number)
+      const pkm = board.find((p) => p.x === originX && p.y === originY)
+      const otherPokemonOnCell = board.find((p) => p.x === x && p.y === y)
       if (pkm) {
+        if (otherPokemonOnCell) {
+          otherPokemonOnCell.x = originX
+          otherPokemonOnCell.y = originY
+        }
         pkm.x = x
         pkm.y = y
         updateBoard([...board])

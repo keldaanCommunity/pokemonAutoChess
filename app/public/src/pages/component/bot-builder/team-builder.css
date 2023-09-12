@@ -1,4 +1,5 @@
 #team-builder {
+  width: 100%;
   display: grid;
   grid-template-areas: "synergies board selected" "synergies pokemons items";
   grid-template-columns: 250px 1fr 340px;
@@ -38,6 +39,7 @@
   background-color: #54596b;
   border: 4px solid black;
   position: relative;
+  background-clip: padding-box;
 }
 
 #team-editor td.dragover {
