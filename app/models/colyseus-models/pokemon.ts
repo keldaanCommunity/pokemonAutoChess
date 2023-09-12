@@ -7204,7 +7204,7 @@ export class Chatot extends Pokemon {
       3,
       AttackSprite.PSYCHIC_RANGE,
       3,
-      120,
+      100,
       Ability.CHATTER,
       shiny,
       emotion,
