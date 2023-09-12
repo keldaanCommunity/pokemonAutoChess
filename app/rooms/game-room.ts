@@ -308,10 +308,10 @@ export default class GameRoom extends Room<GameState> {
     })
 
     this.onMessage(
-      Transfer.BROADCAST_EMOTE,
-      (client: Client, message: string) => {
+      Transfer.TOGGLE_ANIMATION,
+      (client: Client, message?: string) => {
         if (client.auth) {
-          this.broadcast(Transfer.BROADCAST_EMOTE, {
+          this.broadcast(Transfer.TOGGLE_ANIMATION, {
             id: client.auth.uid,
             emote: message
           })

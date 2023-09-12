@@ -320,6 +320,8 @@ export default class MinigameManager {
           }
           break
       }
+    } else {
+      logger.warn("cant find pokemon for id", pokemon.id)
     }
   }
 }
