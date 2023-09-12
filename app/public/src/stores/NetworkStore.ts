@@ -216,8 +216,8 @@ export const networkSlice = createSlice({
     openBooster: (state) => {
       state.lobby?.send(Transfer.OPEN_BOOSTER)
     },
-    broadcastEmote: (state, action: PayloadAction<string>) => {
-      state.game?.send(Transfer.BROADCAST_EMOTE, action.payload)
+    toggleAnimation: (state, action: PayloadAction<string | undefined>) => {
+      state.game?.send(Transfer.TOGGLE_ANIMATION, action.payload)
     },
     searchById: (state, action: PayloadAction<string>) => {
       state.lobby?.send(Transfer.SEARCH_BY_ID, action.payload)
@@ -294,7 +294,7 @@ export const {
   giveBooster,
   setModerator,
   setBotManager,
-  broadcastEmote,
+  toggleAnimation,
   openBooster,
   changeSelectedEmotion,
   buyEmotion,

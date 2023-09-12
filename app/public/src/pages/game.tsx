@@ -88,6 +88,7 @@ import { useTranslation } from "react-i18next"
 import { MainSidebar } from "./component/main-sidebar"
 import { localStore, LocalStoreKeys } from "./utils/store"
 import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
+import { PokemonActionState } from "../../../types/enum/Game"
 
 let gameContainer: GameContainer
 
@@ -295,10 +296,19 @@ export default function Game() {
       room.onMessage(Transfer.REQUEST_TILEMAP, (tilemap) => {
         gameContainer.setTilemap(tilemap)
       })
-      room.onMessage(Transfer.BROADCAST_EMOTE, (message) => {
+      room.onMessage(Transfer.TOGGLE_ANIMATION, (message) => {
         const g = getGameScene()
+        if (g && g.minigameManager.pokemons.size > 0) {
+          // early return here to prevent toggling animation twice
+          return g.minigameManager.changePokemon(
+            message,
+            "action",
+            PokemonActionState.EMOTE
+          )
+        }
+
         if (g && g.board) {
-          g.board.displayEmote(message.id, message.emote)
+          g.board.toggleAnimation(message.id, message?.emote)
         }
       })
 

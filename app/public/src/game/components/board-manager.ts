@@ -380,24 +380,23 @@ export default class BoardManager {
     }
   }
 
-  displayEmote(playerId: string, emote: string) {
-    if (this.playerAvatar && this.playerAvatar.playerId === playerId) {
+  toggleAnimation(playerId: string, emote?: string) {
+    const player =
+      this.playerAvatar.playerId === playerId
+        ? this.playerAvatar
+        : this.opponentAvatar?.playerId === playerId
+        ? this.opponentAvatar
+        : undefined
+    if (player) {
       this.animationManager.play(
-        this.playerAvatar,
-        AnimationConfig[this.playerAvatar.name].emote,
+        player,
+        AnimationConfig[player.name].emote,
         false
       )
-      this.playerAvatar.drawSpeechBubble(emote, false)
-    } else if (
-      this.opponentAvatar &&
-      this.opponentAvatar.playerId === playerId
-    ) {
-      this.animationManager.play(
-        this.opponentAvatar,
-        AnimationConfig[this.opponentAvatar.name].emote,
-        false
-      )
-      this.opponentAvatar.drawSpeechBubble(emote, true)
+
+      if (emote) {
+        player.drawSpeechBubble(emote, false)
+      }
     }
   }
 

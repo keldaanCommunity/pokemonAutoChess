@@ -2037,24 +2037,36 @@ export default class AnimationManager {
     })
   }
 
-  animatePokemon(entity: Pokemon, action: PokemonActionState, flip: boolean) {
-    let animation = AnimationType.Idle
-    if (
-      action === PokemonActionState.HOP ||
-      action === PokemonActionState.FISH
-    ) {
-      animation = AnimationType.Hop
-    } else if (action === PokemonActionState.HURT) {
-      animation = AnimationType.Hurt
-    } else if (action === PokemonActionState.IDLE) {
-      animation = AnimationType.Idle
-    } else if (action === PokemonActionState.SLEEP) {
-      animation = AnimationType.Sleep
-    } else if (action === PokemonActionState.WALK) {
-      animation = AnimationType.Walk
-    } else if (action === PokemonActionState.ATTACK) {
-      animation = AnimationConfig[entity.name as Pkm].attack
+  convertPokemonActionStateToAnimationType(
+    state: PokemonActionState,
+    entity: Pokemon
+  ): AnimationType {
+    switch (state) {
+      case PokemonActionState.HOP:
+      case PokemonActionState.FISH:
+        return AnimationType.Hop
+      case PokemonActionState.HURT:
+        return AnimationType.Hurt
+      case PokemonActionState.SLEEP:
+        return AnimationType.Sleep
+      case PokemonActionState.WALK:
+        return AnimationType.Walk
+      case PokemonActionState.ATTACK:
+        return AnimationConfig[entity.name as Pkm].attack
+      case PokemonActionState.EMOTE:
+        return AnimationConfig[entity.name as Pkm].emote
+      case PokemonActionState.IDLE:
+      default:
+        return AnimationType.Idle
     }
+  }
+
+  animatePokemon(entity: Pokemon, action: PokemonActionState, flip: boolean) {
+    const animation = this.convertPokemonActionStateToAnimationType(
+      action,
+      entity
+    )
+
     try {
       this.play(entity, animation, flip)
     } catch (err) {
@@ -2070,9 +2082,10 @@ export default class AnimationManager {
     const orientationCorrected =
       AnimationComplete[animation] === true ? orientation : Orientation.DOWN
 
-    const textureIndex = entity.scene.textures.exists(entity.index)
-      ? entity.index
-      : "0000"
+    const textureIndex =
+      entity.scene && entity.scene.textures.exists(entity.index)
+        ? entity.index
+        : "0000"
     const tint = entity.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL
     const animKey = `${textureIndex}/${tint}/${animation}/${SpriteType.ANIM}/${orientationCorrected}`
     const shadowKey = `${textureIndex}/${tint}/${animation}/${SpriteType.SHADOW}/${orientationCorrected}`
