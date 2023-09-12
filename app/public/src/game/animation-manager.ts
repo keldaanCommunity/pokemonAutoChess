@@ -107,7 +107,7 @@ export default class AnimationManager {
       key: Ability.COSMIC_POWER,
       frames: this.game.anims.generateFrameNames("COSMIC_POWER", {
         start: 0,
-        end: 36,
+        end: 29,
         zeroPad: 3
       }),
       duration: 1000,
@@ -118,7 +118,7 @@ export default class AnimationManager {
       key: Ability.SOFT_BOILED,
       frames: this.game.anims.generateFrameNames("SOFT_BOILED", {
         start: 0,
-        end: 32,
+        end: 28,
         zeroPad: 3
       }),
       duration: 1000,
@@ -765,7 +765,7 @@ export default class AnimationManager {
       key: Ability.ROAR_OF_TIME,
       frames: this.game.anims.generateFrameNames("ROAR_OF_TIME", {
         start: 0,
-        end: 28,
+        end: 27,
         zeroPad: 3
       }),
       duration: 1000,
@@ -819,7 +819,7 @@ export default class AnimationManager {
       key: Ability.ICY_WIND,
       frames: this.game.anims.generateFrameNames(Ability.ICY_WIND, {
         start: 0,
-        end: 19,
+        end: 3,
         zeroPad: 3
       }),
       duration: 300,
@@ -841,7 +841,7 @@ export default class AnimationManager {
       key: Ability.PRESENT,
       frames: this.game.anims.generateFrameNames(Ability.PRESENT, {
         start: 0,
-        end: 32,
+        end: 20,
         zeroPad: 3
       }),
       duration: 1000,
@@ -918,7 +918,7 @@ export default class AnimationManager {
       key: Ability.SLASHING_CLAW,
       frames: this.game.anims.generateFrameNames(Ability.SLASHING_CLAW, {
         start: 0,
-        end: 14,
+        end: 13,
         zeroPad: 3
       }),
       duration: 1000,
@@ -1083,7 +1083,7 @@ export default class AnimationManager {
       key: Ability.SHADOW_SNEAK,
       frames: this.game.anims.generateFrameNames(Ability.SHADOW_SNEAK, {
         start: 0,
-        end: 34,
+        end: 31,
         zeroPad: 3
       }),
       duration: 1000,
@@ -1169,7 +1169,7 @@ export default class AnimationManager {
       key: Ability.ECHO,
       frames: this.game.anims.generateFrameNames(Ability.ECHO, {
         start: 0,
-        end: 36,
+        end: 22,
         zeroPad: 3
       }),
       duration: 1000,
@@ -1191,7 +1191,7 @@ export default class AnimationManager {
       key: Ability.SHADOW_BALL,
       frames: this.game.anims.generateFrameNames(Ability.SHADOW_BALL, {
         start: 0,
-        end: 43,
+        end: 39,
         zeroPad: 3
       }),
       duration: 1000,
@@ -1202,7 +1202,7 @@ export default class AnimationManager {
       key: Ability.SPIKE_ARMOR,
       frames: this.game.anims.generateFrameNames(Ability.SPIKE_ARMOR, {
         start: 0,
-        end: 14,
+        end: 13,
         zeroPad: 3
       }),
       duration: 1000,
@@ -1213,7 +1213,7 @@ export default class AnimationManager {
       key: Ability.MAGIC_BOUNCE,
       frames: this.game.anims.generateFrameNames(Ability.MAGIC_BOUNCE, {
         start: 0,
-        end: 14,
+        end: 13,
         zeroPad: 3
       }),
       duration: 1000,
@@ -1247,7 +1247,7 @@ export default class AnimationManager {
       key: Ability.SONG_OF_DESIRE,
       frames: this.game.anims.generateFrameNames(Ability.SONG_OF_DESIRE, {
         start: 0,
-        end: 43,
+        end: 41,
         zeroPad: 3
       }),
       duration: 1000,
@@ -1291,7 +1291,7 @@ export default class AnimationManager {
       key: Ability.HIGH_JUMP_KICK,
       frames: this.game.anims.generateFrameNames(Ability.HIGH_JUMP_KICK, {
         start: 0,
-        end: 21,
+        end: 20,
         zeroPad: 3
       }),
       duration: 1000,
@@ -1302,7 +1302,7 @@ export default class AnimationManager {
       key: Ability.TRI_ATTACK,
       frames: this.game.anims.generateFrameNames(Ability.TRI_ATTACK, {
         start: 0,
-        end: 20,
+        end: 10,
         zeroPad: 3
       }),
       duration: 1000,
@@ -1324,7 +1324,7 @@ export default class AnimationManager {
       key: Ability.FUSION_BOLT,
       frames: this.game.anims.generateFrameNames(Ability.FUSION_BOLT, {
         start: 0,
-        end: 17,
+        end: 12,
         zeroPad: 3
       }),
       duration: 1000,
@@ -1346,7 +1346,7 @@ export default class AnimationManager {
       key: Ability.DISARMING_VOICE,
       frames: this.game.anims.generateFrameNames(Ability.DISARMING_VOICE, {
         start: 0,
-        end: 43,
+        end: 38,
         zeroPad: 3
       }),
       duration: 1000,
@@ -1368,7 +1368,7 @@ export default class AnimationManager {
       key: Ability.CLANGOROUS_SOUL,
       frames: this.game.anims.generateFrameNames(Ability.CLANGOROUS_SOUL, {
         start: 0,
-        end: 18,
+        end: 17,
         zeroPad: 3
       }),
       duration: 1000,
@@ -1423,7 +1423,7 @@ export default class AnimationManager {
       key: Ability.SMOG,
       frames: this.game.anims.generateFrameNames(Ability.SMOG, {
         start: 0,
-        end: 10,
+        end: 8,
         zeroPad: 3
       }),
       duration: 1000,
@@ -1500,7 +1500,7 @@ export default class AnimationManager {
       key: "FAIRY_CRIT",
       frames: this.game.anims.generateFrameNames("FAIRY_CRIT", {
         start: 0,
-        end: 19,
+        end: 14,
         zeroPad: 3
       }),
       duration: 1000,
@@ -1892,7 +1892,7 @@ export default class AnimationManager {
       key: Ability.SPARKLING_ARIA,
       frames: this.game.anims.generateFrameNames(Ability.SPARKLING_ARIA, {
         start: 0,
-        end: 52,
+        end: 43,
         zeroPad: 3
       }),
       duration: 1000,
