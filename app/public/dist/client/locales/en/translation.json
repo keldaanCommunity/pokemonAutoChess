@@ -221,7 +221,8 @@
     "PYRO_BALL": "Pyro Ball",
     "WHIRLPOOL": "Whirlpool",
     "SMOKE_SCREEN": "Smoke Screen",
-    "PRESENT": "Present"
+    "PRESENT": "Present",
+    "LEAF_BLADE": "Leaf Blade"
   },
   "pkm": {
     "DEFAULT": "default",
@@ -814,7 +815,8 @@
     "SPECTRIER": "Spectrier",
     "TORKOAL": "Torkoal",
     "DELIBIRD": "Delibird",
-    "IRON_BUNDLE": "Iron Bundle"
+    "IRON_BUNDLE": "Iron Bundle",
+    "KARTANA": "Kartana"
   },
   "ability_description": {
     "DEFAULT": "Default",
@@ -1021,7 +1023,8 @@
     "PYRO_BALL": "The user attacks by igniting a small stone and launching it as a fiery ball at the farthest target, dealing [10,20,40,SP] SPECIAL and BURN for 2s everything on its way",
     "WHIRLPOOL": "Lock on to the farthest enemy and unleash a hail of 4 whirlpools toward them. Each deals 125% ATK PHYSICAL (scales with AP) to the first ennemy hit",
     "SMOKE_SCREEN": "Channel undergound and reappears in the middle of the enemy team, dealing [10,20,40,SP] SPECIAL, BURN and ARMOR_REDUCTION all adjacent units for 2 second",
-    "PRESENT": "Either deals 100% HP SPECIAL or heal 100% HP of the target"
+    "PRESENT": "Either deals 100% HP SPECIAL or heal 100% HP of the target",
+    "LEAF_BLADE": "Next attack will be a SPECIAL critical hit"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1384,7 +1387,8 @@
     "GLIGAR": "Gligar is looking for a RAZOR_FANG. If the Pokémon is POISON, it will gain HP instead of taking damage",
     "POISON_HEAL": "If the Pokémon is POISON, it will gain HP instead of taking damage",
     "GRIM_NEIGH": "When the Pokémon knocks out an enemy, it emits a terrifying whinny sound that increases its AP by 30",
-    "SHAYMIN": "Shaymin is looking for a GRACIDEA_FLOWER"
+    "SHAYMIN": "Shaymin is looking for a GRACIDEA_FLOWER",
+    "BEAST_BOOST": "Upon kill, the pokémon gains 5 ATK"
   },
   "stat": {
     "ATK": "Attack",

@@ -38,7 +38,7 @@ export default class LoadingManager {
     })
 
     if (scene instanceof GameScene && scene.tilemap) {
-      scene.load.audio("music_"+scene.tilemap.tilesets[0].name, [
+      scene.load.audio("music_" + scene.tilemap.tilesets[0].name, [
         `https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChessMusic/main/music/${scene.tilemap.tilesets[0].name}.mp3`
       ])
       scene.load.image(
@@ -104,6 +104,11 @@ export default class LoadingManager {
     scene.load.multiatlas(
       "APPLE_ACID",
       "/assets/attacks/APPLE_ACID.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
+      "LEAF_BLADE",
+      "/assets/attacks/LEAF_BLADE.json",
       "/assets/attacks"
     )
     scene.load.multiatlas(
