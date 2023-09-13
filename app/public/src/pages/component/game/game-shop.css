@@ -78,7 +78,7 @@
   background-color: rgb(97, 115, 138);
   width: 8vw;
   height: 6vw;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .game-additional-pokemons > img {

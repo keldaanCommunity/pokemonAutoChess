@@ -17,6 +17,7 @@
 
 #team-builder .synergies-container {
   grid-area: synergies;
+  overflow: visible;
 }
 
 #team-editor {

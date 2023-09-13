@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Item } from "../../../../../types/enum/Item"
 import { PkmWithConfig } from "../../../../../types"
-import ReactTooltip from "react-tooltip"
+import { Tooltip } from "react-tooltip"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 
 export default function ItemPicker(props: {
@@ -19,8 +19,7 @@ export default function ItemPicker(props: {
         <img
           key={item}
           src={"assets/item/" + Item[item] + ".png"}
-          data-tip
-          data-for="detail-item"
+          data-tooltip-id="detail-item"
           onMouseOver={() => setItemHovered(item)}
           onClick={() => props.selectEntity(item)}
           draggable
@@ -28,12 +27,9 @@ export default function ItemPicker(props: {
         />
       ))}
       {itemHovered && (
-        <ReactTooltip
-          id="detail-item"
-          className="customeTheme item-detail-tooltip"
-        >
+        <Tooltip id="detail-item" className="customeTheme item-detail-tooltip">
           <ItemDetailTooltip item={itemHovered} />
-        </ReactTooltip>
+        </Tooltip>
       )}
     </div>
   )

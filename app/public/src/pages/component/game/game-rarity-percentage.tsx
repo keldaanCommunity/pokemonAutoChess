@@ -1,6 +1,6 @@
 import { Rarity } from "../../../../../types/enum/Game"
 import React from "react"
-import ReactTooltip from "react-tooltip"
+import { Tooltip } from "react-tooltip"
 import { useAppSelector } from "../../../hooks"
 import {
   RarityProbabilityPerLevel,
@@ -20,7 +20,7 @@ export default function GameRarityPercentage() {
   ]
   return (
     <>
-      <ReactTooltip
+      <Tooltip
         id="detail-game-rarity-percentage"
         className="customeTheme"
         place="top"
@@ -47,11 +47,10 @@ export default function GameRarityPercentage() {
           </tbody>
         </table>
         <p className="help">{t("increase_level_hint")}</p>
-      </ReactTooltip>
+      </Tooltip>
       <div
         className="nes-container game-rarity-percentage"
-        data-tip
-        data-for="detail-game-rarity-percentage"
+        data-tooltip-id="detail-game-rarity-percentage"
       >
         {RarityTiers.map((rarity, index) => {
           return (
