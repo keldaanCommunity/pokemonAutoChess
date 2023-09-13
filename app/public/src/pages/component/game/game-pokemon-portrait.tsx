@@ -1,5 +1,5 @@
 import React from "react"
-import ReactTooltip from "react-tooltip"
+import { Tooltip } from "react-tooltip"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
 import { RarityColor } from "../../../../../types/Config"
@@ -88,10 +88,9 @@ export default function GamePokemonPortrait(props: {
           )}")`
         }}
         onClick={props.click}
-        data-tip
-        data-for={`tooltip-${props.origin}-${props.index}`}
+        data-tooltip-id={`tooltip-${props.origin}-${props.index}`}
       >
-        <ReactTooltip
+        <Tooltip
           id={`tooltip-${props.origin}-${props.index}`}
           className="customeTheme game-pokemon-detail-tooltip"
           place="bottom"
@@ -101,7 +100,7 @@ export default function GamePokemonPortrait(props: {
             emotion={pokemonInPortraitConfig?.selectedEmotion}
             shiny={pokemonInPortraitConfig?.selectedShiny}
           />
-        </ReactTooltip>
+        </Tooltip>
         {willEvolve && pokemonEvolution && (
           <div className="game-pokemon-portrait-evolution">
             <img

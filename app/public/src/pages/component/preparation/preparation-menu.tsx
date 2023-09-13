@@ -272,8 +272,7 @@ export default function PreparationMenu() {
               orange: !allUsersReady
             })}
             onClick={ownerId == uid ? startGame : undefined}
-            data-tip
-            data-for={"start-game"}
+            data-tooltip-id={"start-game"}
           >
             {t("start_game")}
           </button>

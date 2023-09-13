@@ -1,5 +1,5 @@
 import React from "react"
-import ReactTooltip from "react-tooltip"
+import { Tooltip } from "react-tooltip"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { useAppSelector } from "../../../hooks"
 import { getPortraitSrc } from "../../../utils"
@@ -21,27 +21,26 @@ export function GameAdditionalPokemons() {
   } else {
     return (
       <>
-        <ReactTooltip
+        <Tooltip
           id="detail-additional-pokemons"
           className="customeTheme"
-          place="top"
+          place="left"
         >
           <p className="help">{t("additional_pokemon_hint")}</p>
-        </ReactTooltip>
+        </Tooltip>
         <div
           className="nes-container game-additional-pokemons"
-          data-tip
-          data-for="detail-additional-pokemons"
+          data-tooltip-id="detail-additional-pokemons"
         >
           {additionalPokemons.map((p, index) => {
             const pokemon = PokemonFactory.createPokemonFromName(p)
             return (
               <React.Fragment key={"additional-pokemon-tooltip-" + index}>
-                <ReactTooltip
+                <Tooltip
                   id={"additional-pokemon-" + p}
                   className="customeTheme game-pokemon-detail-tooltip"
                   place="top"
-                  offset={{ top: index < 4 ? 60 : 130 }}
+                  data-tooltip-offset={{ top: index < 4 ? 60 : 130 }}
                 >
                   <GamePokemonDetail
                     pokemon={pokemon}
@@ -50,11 +49,10 @@ export function GameAdditionalPokemons() {
                     }
                     shiny={pokemonCollection.get(pokemon.index)?.selectedShiny}
                   />
-                </ReactTooltip>
+                </Tooltip>
                 <img
                   src={getPortraitSrc(PkmIndex[p])}
-                  data-tip
-                  data-for={"additional-pokemon-" + p}
+                  data-tooltip-id={"additional-pokemon-" + p}
                 />
               </React.Fragment>
             )

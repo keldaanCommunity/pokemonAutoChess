@@ -72,6 +72,7 @@ export const networkSlice = createSlice({
       state.profile = action.payload
     },
     joinLobby: (state, action: PayloadAction<Room<ICustomLobbyState>>) => {
+      state.lobby?.connection.close()
       state.lobby = action.payload
       state.preparation?.connection.close()
       state.preparation = undefined

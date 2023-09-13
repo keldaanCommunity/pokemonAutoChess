@@ -1,7 +1,7 @@
 import { GameObjects } from "phaser"
 import React, { useMemo } from "react"
 import ReactDOM from "react-dom/client"
-import ReactTooltip from "react-tooltip"
+import { Tooltip } from "react-tooltip"
 import { ItemRecipe, ItemStats } from "../../../../types/Config"
 import { Item } from "../../../../types/enum/Item"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
@@ -50,31 +50,29 @@ export function ItemDetailTooltip({
                 <p>+</p>
                 <img
                   src={`assets/item/${otherComponent}.png`}
-                  data-tip
-                  data-for={"item-tooltip-" + otherComponent}
+                  data-tooltip-id={"item-tooltip-" + otherComponent}
                 />
-                <ReactTooltip
+                <Tooltip
                   id={"item-tooltip-" + otherComponent}
-                  effect="float"
+                  float
                   place="right"
                   className="customeTheme item-detail-tooltip"
                 >
                   <ItemDetailTooltip item={otherComponent} depth={depth + 1} />
-                </ReactTooltip>
+                </Tooltip>
                 <p>=</p>
                 <img
                   src={`assets/item/${result}.png`}
-                  data-tip
-                  data-for={"item-tooltip-" + result}
+                  data-tooltip-id={"item-tooltip-" + result}
                 />
-                <ReactTooltip
+                <Tooltip
                   id={"item-tooltip-" + result}
-                  effect="float"
+                  float
                   place="right"
                   className="customeTheme item-detail-tooltip"
                 >
                   <ItemDetailTooltip item={result as Item} depth={depth + 1} />
-                </ReactTooltip>
+                </Tooltip>
               </div>
             )
           })}

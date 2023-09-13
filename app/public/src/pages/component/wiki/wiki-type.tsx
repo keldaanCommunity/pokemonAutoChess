@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import ReactTooltip from "react-tooltip"
+import { Tooltip } from "react-tooltip"
 import PRECOMPUTED_TYPE_POKEMONS_ALL from "../../../../../models/precomputed/type-pokemons-all.json"
 import { SynergyTriggers, RarityColor } from "../../../../../types/Config"
 import { Synergy, SynergyEffects } from "../../../../../types/enum/Synergy"
@@ -21,7 +21,6 @@ import { useTranslation } from "react-i18next"
 
 export default function WikiType(props: { type: Synergy | "all" }) {
   const { t } = useTranslation()
-  const [hoveredPokemon, setHoveredPokemon] = useState<Pokemon>()
 
   let pokemonsNames: Pkm[]
   if (props.type === "all") {
@@ -98,14 +97,14 @@ export default function WikiType(props: { type: Synergy | "all" }) {
                       >
                         <img
                           src={getPortraitSrc(p.index)}
-                          alt={p.name}
-                          title={p.name}
-                          data-tip
-                          data-for="pokemon-detail"
-                          onMouseOver={() => {
-                            setHoveredPokemon(p)
-                          }}
+                          data-tooltip-id={`pokemon-detail-${p.index}`}
                         />
+                        <Tooltip
+                          id={`pokemon-detail-${p.index}`}
+                          className="customeTheme game-pokemon-detail-tooltip"
+                        >
+                          <GamePokemonDetail pokemon={p} />
+                        </Tooltip>
                       </div>
                     )
                   })}
@@ -115,17 +114,6 @@ export default function WikiType(props: { type: Synergy | "all" }) {
           })}
         </tbody>
       </table>
-      {hoveredPokemon && (
-        <ReactTooltip
-          id="pokemon-detail"
-          className="customeTheme game-pokemon-detail-tooltip"
-          effect="float"
-          place="bottom"
-          offset={{ bottom: 20 }}
-        >
-          <GamePokemonDetail pokemon={hoveredPokemon} />
-        </ReactTooltip>
-      )}
     </div>
   )
 }
