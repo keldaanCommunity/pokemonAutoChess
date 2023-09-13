@@ -450,7 +450,17 @@ export default class GameRoom extends Room<GameState> {
   }
 
   async onDispose() {
-    // logger.info(`dispose game room`);
+    const numberOfPlayersAlive = this.getNumberOfPlayersAlive(
+      this.state.players
+    )
+
+    if (numberOfPlayersAlive > 1) {
+      logger.warn(
+        `Game room has been disposed while they were still ${numberOfPlayersAlive} players alive.`
+      )
+      return // we skip elo compute/game history in case of technical issue such as a crash of node
+    }
+
     try {
       this.state.endTime = Date.now()
       const players: components["schemas"]["GameHistory"]["players"] = []
