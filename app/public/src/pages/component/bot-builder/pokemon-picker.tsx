@@ -8,7 +8,7 @@ import { PkmWithConfig, Emotion } from "../../../../../types"
 import SynergyIcon from "../icons/synergy-icon"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
-import ReactTooltip from "react-tooltip"
+import { Tooltip } from "react-tooltip"
 import PokemonFactory, {
   isAdditionalPick
 } from "../../../../../models/pokemon-factory"
@@ -111,12 +111,8 @@ function PokemonPickerTab(props: {
                       shiny: false
                     })
                   }}
-                  onMouseOver={() => {
-                    setHoveredPokemon(p)
-                  }}
                   key={p.name}
-                  data-tip
-                  data-for="pokemon-detail"
+                  data-tooltip-id="pokemon-detail"
                   draggable
                   onDragStart={(e) => handleOnDragStart(e, p.name)}
                 >
@@ -127,17 +123,6 @@ function PokemonPickerTab(props: {
           </React.Fragment>
         ))}
       </dl>
-      {hoveredPokemon && (
-        <ReactTooltip
-          id="pokemon-detail"
-          className="customeTheme game-pokemon-detail-tooltip"
-          effect="float"
-          place="top"
-          offset={{ top: 20 }}
-        >
-          <GamePokemonDetail pokemon={hoveredPokemon} />
-        </ReactTooltip>
-      )}
     </>
   )
 }

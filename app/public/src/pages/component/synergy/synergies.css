@@ -1,10 +1,10 @@
 .synergies-container {
   display: flex;
   flex-flow: column;
-  overflow-y: scroll;
   color: #fff;
   background-color: #61738a;
   font-size: 1em;
+  overflow: "visible";
 }
 
 #game-wrapper .synergies-container {

@@ -9,7 +9,7 @@ import { cc } from "../../utils/jsx"
 import { PrecomputedAbility } from "../../../../../types"
 import PRECOMPUTED_ABILITY from "../../../../../models/precomputed/ability.json"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
-import ReactTooltip from "react-tooltip"
+import { Tooltip } from "react-tooltip"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
 import { useTranslation } from "react-i18next"
 
@@ -44,17 +44,12 @@ export default function WikiAbility() {
                             className={cc("pokemon-portrait", {
                               additional: isAdditionalPick(p.name)
                             })}
-                            data-tip
-                            data-for="pokemon-detail"
+                            data-tooltip-id="pokemon-detail"
                             onMouseOver={() => {
                               setHoveredPokemon(p)
                             }}
                           >
-                            <img
-                              src={getPortraitSrc(p.index)}
-                              alt={p.name}
-                              title={p.name}
-                            />
+                            <img src={getPortraitSrc(p.index)} />
                           </div>
                         </li>
                       ))}
@@ -65,13 +60,13 @@ export default function WikiAbility() {
           })}
       </ul>
       {hoveredPokemon && (
-        <ReactTooltip
+        <Tooltip
           id="pokemon-detail"
           className="customeTheme game-pokemon-detail-tooltip"
-          effect="float"
+          float
         >
           <GamePokemonDetail pokemon={hoveredPokemon} />
-        </ReactTooltip>
+        </Tooltip>
       )}
     </div>
   )
