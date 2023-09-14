@@ -1583,6 +1583,15 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           playerB.opponentName = playerA.name
           playerB.opponentAvatar = playerA.avatar
           playerB.opponentTitle = playerA.title ?? ""
+        } else {
+          playerA.opponentId = "ghost-id"
+          playerA.opponentName = `Ghost of ${playerB.name}`
+          playerA.opponentAvatar = getAvatarString(
+            PkmIndex[Pkm.GASTLY],
+            true,
+            Emotion.HAPPY
+          )
+          playerA.opponentTitle = "Ghost"
         }
 
         this.state.simulations.set(simulation.id, simulation)
