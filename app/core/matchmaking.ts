@@ -45,9 +45,13 @@ export function selectMatchups(state: GameState): Matchup[] {
       (m) => m.a === remainingPlayer || m.b === remainingPlayer
     )[0]
     ghostMatchup.ghost = true
+    if (ghostMatchup.a.id !== remainingPlayer.id) {
+      ghostMatchup.b = ghostMatchup.a
+      ghostMatchup.a = remainingPlayer
+    }
     selectedMatchups.push(ghostMatchup)
   }
-/*
+  /*
   logger.debug("Matchmaking round " + state.stageLevel)
   selectedMatchups.forEach((matchup) => {
     logger.debug(
