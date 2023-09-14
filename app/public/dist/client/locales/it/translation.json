@@ -1919,7 +1919,7 @@
   "ability.PRESENT": "Presente",
   "pkm.DELIBIRD": "Delibird",
   "pkm.IRON_BUNDLE": "Fascio di ferro",
-  "ability_description.PRESENT": "Infligge il 100% di HP SPECIAL o cura il 100% di HP del bersaglio",
+  "ability_description.PRESENT": "Infligge 80, 150, 300 SPECIAL o cura 80 HP del bersaglio",
   "yes": "SÌ",
   "no": "NO",
   "game-reconnect-modal-title": "Riconnettiti al gioco",

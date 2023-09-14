@@ -1919,7 +1919,7 @@
   "ability.PRESENT": "Cadeau",
   "pkm.DELIBIRD": "Delivogel",
   "pkm.IRON_BUNDLE": "IJzeren bundel",
-  "ability_description.PRESENT": "Biedt 100% HP SPECIAL of geneest 100% HP van het doelwit",
+  "ability_description.PRESENT": "Deelt 80, 150, 300 SPECIAL uit, of geneest 80 HP van het doelwit",
   "yes": "Ja",
   "no": "Nee",
   "game-reconnect-modal-title": "Maak opnieuw verbinding met het spel",

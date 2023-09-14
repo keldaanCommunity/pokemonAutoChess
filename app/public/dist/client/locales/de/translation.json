@@ -1919,7 +1919,7 @@
   "ability.PRESENT": "Gegenwärtig",
   "pkm.DELIBIRD": "Delibird",
   "pkm.IRON_BUNDLE": "Eisenbündel",
-  "ability_description.PRESENT": "Verursacht entweder 100 % HP SPECIAL oder heilt 100 % HP des Ziels",
+  "ability_description.PRESENT": "Verursacht entweder 80, 150, 300 SPECIAL oder heilt 80 HP des Ziels",
   "yes": "Ja",
   "no": "NEIN",
   "game-reconnect-modal-title": "Stellen Sie die Verbindung zum Spiel wieder her",

@@ -603,7 +603,7 @@
     "SENTRET": "Sentret",
     "SPECTRIER": "Spectreval",
     "TORKOAL": "Torkoal",
-    "DELIBIRD": "Délibird",
+    "DELIBIRD": "Cadoizo",
     "IRON_BUNDLE": "Paquet de fer"
   },
   "ability": {
@@ -811,7 +811,7 @@
     "PYRO_BALL": "Boule Pyro",
     "WHIRLPOOL": "Tourbillon",
     "SMOKE_SCREEN": "Écran de fumée",
-    "PRESENT": "Présent"
+    "PRESENT": "Cadeau"
   },
   "ability_description": {
     "SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés",
@@ -1018,7 +1018,7 @@
     "PYRO_BALL": "L'utilisateur attaque en allumant une petite pierre et en la lançant comme une boule de feu sur la cible la plus éloignée, infligeant [10,20,40,SP] SPECIAL et BURN pendant 2 secondes tout ce qui se trouve sur son passage.",
     "WHIRLPOOL": "Verrouillez l'ennemi le plus éloigné et déchaînez une grêle de 4 tourbillons vers lui. Chacun inflige 125 % d'ATK PHYSIQUE au premier ennemi touché.",
     "SMOKE_SCREEN": "Canalisation souterraine et réapparition au milieu de l'équipe ennemie, infligeant [10,20,40,SP] SPECIAL, BURN et ARMOR_REDUCTION à toutes les unités adjacentes pendant 2 secondes.",
-    "PRESENT": "Soit inflige 100 % de HP SPÉCIAL, soit soigne 100 % de HP de la cible"
+    "PRESENT": "Peut soit infliger 80, 150 ou 300 SPECIAL à la cible, soit la soigner de 80 HP"
   },
   "emotion": {
     "Teary-Eyed": "Larmoyant",

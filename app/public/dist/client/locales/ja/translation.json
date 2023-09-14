@@ -1919,7 +1919,7 @@
   "ability.PRESENT": "現在",
   "pkm.DELIBIRD": "デリバード",
   "pkm.IRON_BUNDLE": "鉄の束",
-  "ability_description.PRESENT": "100% HP SPECIAL を与えるか、ターゲットの HP 100% を回復する",
+  "ability_description.PRESENT": "80、150、300 SPECIAL を与えるか、ターゲットの HP を 80 回復します",
   "yes": "はい",
   "no": "いいえ",
   "game-reconnect-modal-title": "ゲームに再接続する",

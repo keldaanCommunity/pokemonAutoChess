@@ -1919,7 +1919,7 @@
   "ability.PRESENT": "Presente",
   "pkm.DELIBIRD": "Delibird",
   "pkm.IRON_BUNDLE": "Paquete de hierro",
-  "ability_description.PRESENT": "O reparte 100% HP ESPECIAL o cura 100% HP del objetivo",
+  "ability_description.PRESENT": "O reparte 80, 150, 300 SPECIAL o cura 80 HP del objetivo",
   "yes": "Sí",
   "no": "No",
   "game-reconnect-modal-title": "Vuelve a conectarte al juego",

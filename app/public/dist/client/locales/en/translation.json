@@ -1026,7 +1026,7 @@
     "PYRO_BALL": "The user attacks by igniting a small stone and launching it as a fiery ball at the farthest target, dealing [10,20,40,SP] SPECIAL and BURN for 2s everything on its way",
     "WHIRLPOOL": "Lock on to the farthest enemy and unleash a hail of 4 whirlpools toward them. Each deals 125% ATK PHYSICAL (scales with AP) to the first ennemy hit",
     "SMOKE_SCREEN": "Channel undergound and reappears in the middle of the enemy team, dealing [10,20,40,SP] SPECIAL, BURN and ARMOR_REDUCTION all adjacent units for 2 second",
-    "PRESENT": "Either deals 100% HP SPECIAL or heal 100% HP of the target",
+    "PRESENT": "Either deals 80, 150, 300 SPECIAL, or heal 80 HP of the target",
     "LEAF_BLADE": "Next attack will be a SPECIAL critical hit"
   },
   "effect": {

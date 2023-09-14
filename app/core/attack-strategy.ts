@@ -1,6 +1,6 @@
 import { Item } from "../types/enum/Item"
 import { Effect } from "../types/enum/Effect"
-import { AttackType, Rarity, Team } from "../types/enum/Game"
+import { AttackType, Team } from "../types/enum/Game"
 import { Weather } from "../types/enum/Weather"
 import Board from "./board"
 import PokemonEntity from "./pokemon-entity"
@@ -3068,16 +3068,20 @@ export class PresentStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    if (Math.random() > 0.5) {
-      target.handleHeal(target.hp, pokemon, 0)
+    const chance = Math.random()
+    /* 80 damage: 40%
+       150 damage: 30%
+       300 damage: 10%
+       heal 80HP: 20%
+    */
+    if (chance < 0.2) {
+      target.handleHeal(80, pokemon, 0)
+    } else if (chance < 0.6) {
+      target.handleSpecialDamage(80, board, AttackType.SPECIAL, pokemon, crit)
+    } else if (chance < 0.9) {
+      target.handleSpecialDamage(150, board, AttackType.SPECIAL, pokemon, crit)
     } else {
-      target.handleSpecialDamage(
-        target.hp,
-        board,
-        AttackType.SPECIAL,
-        pokemon,
-        crit
-      )
+      target.handleSpecialDamage(300, board, AttackType.SPECIAL, pokemon, crit)
     }
   }
 }
