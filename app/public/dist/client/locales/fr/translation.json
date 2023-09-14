@@ -1759,6 +1759,7 @@
   "stage": "Tour",
   "spectate": "Regarder",
   "join": "Rejoindre",
+  "reconnect": "Reconnexion",
   "just_for_fun": "Juste pour le fun",
   "password_protected": "Lobby privé (protégé par mot de passe)",
   "private": "Privé",

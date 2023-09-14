@@ -15,7 +15,6 @@ import PreparationState from "../../../../../rooms/states/preparation-state"
 import { leaveLobby } from "../../../stores/LobbyStore"
 import { ILobbyUser } from "../../../../../models/colyseus-models/lobby-user"
 import GameRoomItem from "./game-room-item"
-import "./room-menu.css"
 import { throttle } from "../../../../../utils/function"
 import GameState from "../../../../../rooms/states/game-state"
 import { useNavigate } from "react-router"
@@ -23,6 +22,7 @@ import { MAX_PLAYERS_PER_LOBBY } from "../../../../../types/Config"
 import { logger } from "../../../../../utils/logger"
 import { useTranslation } from "react-i18next"
 import { localStore, LocalStoreKeys } from "../../utils/store"
+import "./room-menu.css"
 
 export default function RoomMenu(props: {
   toPreparation: boolean
@@ -76,7 +76,7 @@ export default function RoomMenu(props: {
     }
   }, 1000)
 
-  const joinRoom = throttle(async function join(
+  const joinPrepRoom = throttle(async function join(
     selectedRoom: RoomAvailable<IPreparationMetadata>
   ) {
     if (
@@ -122,18 +122,19 @@ export default function RoomMenu(props: {
   },
   1000)
 
-  const spectateRoom = throttle(async function spectate(
-    selectedRoom: RoomAvailable<IGameMetadata>
+  const joinGame = throttle(async function joinGame(
+    selectedRoom: RoomAvailable<IGameMetadata>,
+    spectate: boolean
   ) {
     if (lobby && !isJoining) {
       setJoining(true)
-      const token = await firebase.auth().currentUser?.getIdToken()
-      if (token) {
+      const idToken = await firebase.auth().currentUser?.getIdToken()
+      if (idToken) {
         const game: Room<GameState> = await client.joinById(
           selectedRoom.roomId,
           {
-            idToken: token,
-            spectate: true
+            idToken,
+            spectate
           }
         )
         localStore.set(
@@ -171,7 +172,7 @@ export default function RoomMenu(props: {
             <ul className="hidden-scrollable">
               {preparationRooms.map((r) => (
                 <li key={r.roomId}>
-                  <RoomItem room={r} click={joinRoom} />
+                  <RoomItem room={r} click={joinPrepRoom} />
                 </li>
               ))}
             </ul>
@@ -191,7 +192,10 @@ export default function RoomMenu(props: {
         <ul className="hidden-scrollable">
           {gameRooms.map((r) => (
             <li key={r.roomId}>
-              <GameRoomItem room={r} onSpectate={() => spectateRoom(r)} />
+              <GameRoomItem
+                room={r}
+                onJoin={(spectate) => joinGame(r, spectate)}
+              />
             </li>
           ))}
         </ul>

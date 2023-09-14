@@ -1777,6 +1777,7 @@
   "stage": "Stage",
   "spectate": "Spectate",
   "join": "Join",
+  "reconnect": "Reconnect",
   "just_for_fun": "Just for fun",
   "password_protected": "Private Lobby (password protected)",
   "private": "Private",
