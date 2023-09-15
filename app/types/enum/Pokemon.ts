@@ -595,7 +595,8 @@ export enum Pkm {
   KARTANA = "KARTANA",
   CHINGLING = "CHINGLING",
   CHIMECHO = "CHIMECHO",
-  ALOLAN_RAICHU = "ALOLAN_RAICHU"
+  ALOLAN_RAICHU = "ALOLAN_RAICHU",
+  DHELMISE = "DHELMISE"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1193,7 +1194,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.KARTANA]: "0798",
   [Pkm.CHINGLING]: "0433",
   [Pkm.CHIMECHO]: "0358",
-  [Pkm.ALOLAN_RAICHU]: "0026-0001"
+  [Pkm.ALOLAN_RAICHU]: "0026-0001",
+  [Pkm.DHELMISE]: "0781"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1791,7 +1793,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.KARTANA]: Pkm.KARTANA,
   [Pkm.CHINGLING]: Pkm.CHINGLING,
   [Pkm.CHIMECHO]: Pkm.CHINGLING,
-  [Pkm.ALOLAN_RAICHU]: Pkm.PICHU
+  [Pkm.ALOLAN_RAICHU]: Pkm.PICHU,
+  [Pkm.DHELMISE]: Pkm.DHELMISE
 }
 
 export enum PkmDuo {
@@ -4896,6 +4899,11 @@ export const AnimationConfig: {
   [Pkm.ALOLAN_RAICHU]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shock,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.DHELMISE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
     emote: AnimationType.Shoot
   }
 }

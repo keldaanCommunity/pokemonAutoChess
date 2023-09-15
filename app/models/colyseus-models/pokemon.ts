@@ -14131,3 +14131,26 @@ export class Kartana extends Pokemon {
     )
   }
 }
+
+export class Dhelmise extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.DHELMISE,
+      [Synergy.GRASS, Synergy.GHOST, Synergy.STEEL],
+      Rarity.UNIQUE,
+      Pkm.DEFAULT,
+      200,
+      18,
+      5,
+      5,
+      1,
+      AttackSprite.GRASS_MELEE,
+      3,
+      110,
+      Ability.ANCHOR_SHOT,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
