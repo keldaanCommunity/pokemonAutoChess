@@ -1200,10 +1200,11 @@
     "FAIRY_WIND": "Шокове сделка 30 SPECIAL",
     "STRANGE_STEAM": "Шокове сделка 60 SPECIAL",
     "MOON_FORCE": "Шокове сделка 80 SPECIAL. Целият противников отбор е CHARM за 2 секунди в началото на битката.",
-    "CHILLY": "+3 SPE_DEF, 10% шанс за FREEZE",
-    "FROSTY": "+6 SPE_DEF, 20% шанс за FREEZE",
-    "FREEZING": "+10 SPE_DEF, 30% шанс за FREEZE",
-    "SHEER_COLD": "+15 SPE_DEF, 40% шанс за FREEZE",
+    "COOL_BREEZE": "+2 SPE_DEF",
+    "CHILLY": "+4 SPE_DEF, 10% шанс за FREEZE",
+    "FROSTY": "+8 SPE_DEF, 20% шанс за FREEZE",
+    "FREEZING": "+15 SPE_DEF, 30% шанс за FREEZE",
+    "SHEER_COLD": "+30 SPE_DEF, 40% шанс за FREEZE",
     "ANCIENT_POWER": "Съживете с 40% HP и +30% ATK",
     "ELDER_POWER": "Съживете с 80% HP и +60% ATK.",
     "FORGOTTEN_POWER": "Съживете със 100% HP и +100% ATK.",
@@ -1229,7 +1230,6 @@
     "WINDY": "+10% шанс за избягване (+20%, ако ЛЕТИТЕ)",
     "NIGHT": "+20% CRIT_CHANCE\n+30% продължителност на SLEEP",
     "HYDRATATION": "Синергията на GRASS лекува 5 допълнителни HP в секунда под ДЪЖДА",
-    "COOL_BREEZE": "+1 SPE_DEF"
   },
   "item": {
     "FOSSIL_STONE": "Фосил Стоун",

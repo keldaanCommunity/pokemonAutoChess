@@ -1205,10 +1205,11 @@
     "FAIRY_WIND": "Oferta de choques 30 SPECIAL",
     "STRANGE_STEAM": "Oferta de choques 60 SPECIAL",
     "MOON_FORCE": "Oferta de choques 80 SPECIAL. Toda a equipe adversária fica CHARM por 2 segundos no início da luta.",
-    "CHILLY": "+3 SPE_DEF, 10% de chance de FREEZE",
-    "FROSTY": "+6 SPE_DEF, 20% de chance de FREEZE",
-    "FREEZING": "+10 SPE_DEF, 30% de chance de FREEZE",
-    "SHEER_COLD": "+15 SPE_DEF, 40% de chance de FREEZE",
+    "COOL_BREEZE": "+2 SPE_DEF",
+    "CHILLY": "+4 SPE_DEF, 10% de chance de FREEZE",
+    "FROSTY": "+8 SPE_DEF, 20% de chance de FREEZE",
+    "FREEZING": "+15 SPE_DEF, 30% de chance de FREEZE",
+    "SHEER_COLD": "+30 SPE_DEF, 40% de chance de FREEZE",
     "ANCIENT_POWER": "Revive com 40% HP e +30% ATK",
     "ELDER_POWER": "Revive com 80% HP e +60% ATK.",
     "FORGOTTEN_POWER": "Revive com 100% HP e +100% ATK.",
@@ -1233,8 +1234,7 @@
     "MISTY": "+20% SPECIAL\n+30% de duração do CHARM",
     "WINDY": "+10% de chance de esquiva (+20% se FLYING)",
     "NIGHT": "+20% CRIT_CHANCE\n+30% de duração do SLEEP",
-    "HYDRATATION": "A sinergia GRASS está curando 5 HP adicionais por segundo sob a RAIN",
-    "COOL_BREEZE": "+1 SPE_DEF"
+    "HYDRATATION": "A sinergia GRASS está curando 5 HP adicionais por segundo sob a RAIN"
   },
   "item": {
     "FOSSIL_STONE": "Pedra Fóssil",
