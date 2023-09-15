@@ -2646,6 +2646,25 @@ export default class BattleManager {
             )
             break
 
+          case Ability.ANCHOR_SHOT:
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.ANCHOR_SHOT,
+              "000"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.ANCHOR_SHOT)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
+
           case Ability.LEAF_BLADE:
             coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
@@ -4020,7 +4039,7 @@ export default class BattleManager {
             break
 
           case Ability.MIST_BALL:
-            coordinatesTarget = transformAttackCoordinate(targetX, 6, this.flip)
+            coordinatesTarget = transformAttackCoordinate(targetX, 6, false)
             coordinates = transformAttackCoordinate(
               positionX,
               positionY,
@@ -4049,7 +4068,7 @@ export default class BattleManager {
             break
 
           case Ability.LUSTER_PURGE:
-            coordinatesTarget = transformAttackCoordinate(targetX, 6, this.flip)
+            coordinatesTarget = transformAttackCoordinate(targetX, 6, false)
             coordinates = transformAttackCoordinate(
               positionX,
               positionY,

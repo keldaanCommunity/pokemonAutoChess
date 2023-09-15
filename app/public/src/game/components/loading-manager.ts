@@ -107,6 +107,11 @@ export default class LoadingManager {
       "/assets/attacks"
     )
     scene.load.multiatlas(
+      "ANCHOR_SHOT",
+      "/assets/attacks/ANCHOR_SHOT.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
       "LEAF_BLADE",
       "/assets/attacks/LEAF_BLADE.json",
       "/assets/attacks"

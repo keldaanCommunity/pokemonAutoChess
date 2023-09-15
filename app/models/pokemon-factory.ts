@@ -609,7 +609,8 @@ import {
   Kartana,
   Chimecho,
   Chingling,
-  AlolanRaichu
+  AlolanRaichu,
+  Dhelmise
 } from "./colyseus-models/pokemon"
 import { IPokemonConfig } from "./mongo-models/user-metadata"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
@@ -2015,6 +2016,8 @@ export default class PokemonFactory {
         return new Chimecho(s, e)
       case Pkm.ALOLAN_RAICHU:
         return new AlolanRaichu(s, e)
+      case Pkm.DHELMISE:
+        return new Dhelmise(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:

@@ -36,9 +36,12 @@ export class AttackStrategy {
     pokemon.count.ult += 1
 
     if (
-      ![Ability.PYRO_BALL, Ability.WHIRLPOOL, Ability.SMOKE_SCREEN].includes(
-        pokemon.skill
-      )
+      ![
+        Ability.PYRO_BALL,
+        Ability.WHIRLPOOL,
+        Ability.SMOKE_SCREEN,
+        Ability.ANCHOR_SHOT
+      ].includes(pokemon.skill)
     ) {
       pokemon.simulation.room.broadcast(Transfer.ABILITY, {
         id: pokemon.simulation.id,
@@ -5339,6 +5342,54 @@ export class WhirlpoolStrategy extends AttackStrategy {
             )
           }
           break
+        }
+      }
+    }
+  }
+}
+
+export class AnchorShotStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = pokemon.stars === 3 ? 80 : pokemon.stars === 2 ? 40 : 20
+    const farthestCoordinate = state.getFarthestTargetCoordinate(pokemon, board)
+    if (farthestCoordinate) {
+      const farthestTarget = board.getValue(
+        farthestCoordinate.x,
+        farthestCoordinate.y
+      )
+      if (farthestTarget) {
+        const adjacentCells = board.getAdjacentCells(
+          pokemon.positionX,
+          pokemon.positionY
+        )
+        const potentials = shuffleArray(
+          adjacentCells
+            .filter((v) => v.value === undefined)
+            .map((v) => ({ x: v.x, y: v.y }))
+        )
+        if (potentials.length > 0) {
+          const potential = potentials[0]
+          pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+            id: pokemon.simulation.id,
+            skill: Ability.ANCHOR_SHOT,
+            targetX: farthestTarget.positionX,
+            targetY: farthestTarget.positionY
+          })
+          farthestTarget.moveTo(potential.x, potential.y, board)
+          farthestTarget.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
         }
       }
     }
