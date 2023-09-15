@@ -177,7 +177,8 @@ import {
   WhirlpoolStrategy,
   SmokeScreenStrategy,
   PresentStrategy,
-  LeafBladeStrategy
+  LeafBladeStrategy,
+  AnchorShotStrategy
 } from "../attack-strategy"
 import {
   HiddenPowerAStrategy,
@@ -418,5 +419,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.WHIRLPOOL]: new WhirlpoolStrategy(),
   [Ability.SMOKE_SCREEN]: new SmokeScreenStrategy(),
   [Ability.PRESENT]: new PresentStrategy(),
-  [Ability.LEAF_BLADE]: new LeafBladeStrategy()
+  [Ability.LEAF_BLADE]: new LeafBladeStrategy(),
+  [Ability.ANCHOR_SHOT]: new AnchorShotStrategy()
 }
