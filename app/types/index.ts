@@ -550,7 +550,7 @@ export interface IPreparationMetadata {
 
 export interface IGameMetadata {
   name: string
-  nbPlayers: number
+  playerIds: string[]
   stageLevel: number
   type: "game"
 }
