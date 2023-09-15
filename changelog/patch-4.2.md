@@ -1,6 +1,6 @@
 # New Pokemons:
 
-Kartana, Chingling, Chimecho, Alolan Raichu
+Kartana, Chingling, Chimecho, Alolan Raichu, Dhelmise
 
 # Changes to Pokemon & Abilities
 

@@ -222,7 +222,8 @@
     "WHIRLPOOL": "Whirlpool",
     "SMOKE_SCREEN": "Smoke Screen",
     "PRESENT": "Present",
-    "LEAF_BLADE": "Leaf Blade"
+    "LEAF_BLADE": "Leaf Blade",
+    "ANCHOR_SHOT": "Anchor Shot"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -819,7 +820,8 @@
     "KARTANA": "Kartana",
     "CHINGLING": "Chingling",
     "CHIMECHO": "Chimecho",
-    "ALOLAN_RAICHU": "Alolan Raichu"
+    "ALOLAN_RAICHU": "Alolan Raichu",
+    "DHELMISE": "Dhelmise"
   },
   "ability_description": {
     "DEFAULT": "",
@@ -1027,7 +1029,8 @@
     "WHIRLPOOL": "Lock on to the farthest enemy and unleash a hail of 4 whirlpools toward them. Each deals 125% ATK PHYSICAL (scales with AP) to the first ennemy hit",
     "SMOKE_SCREEN": "Channel undergound and reappears in the middle of the enemy team, dealing [10,20,40,SP] SPECIAL, BURN and ARMOR_REDUCTION all adjacent units for 2 second",
     "PRESENT": "Either deals 80, 150, 300 SPECIAL, or heal 80 HP of the target",
-    "LEAF_BLADE": "Next attack will be a SPECIAL critical hit"
+    "LEAF_BLADE": "Next attack will be a SPECIAL critical hit",
+    "ANCHOR_SHOT": "Grab the farthest pokémon and deals [20,40,80,SP] SPECIAL"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1777,6 +1780,7 @@
   "stage": "Stage",
   "spectate": "Spectate",
   "join": "Join",
+  "reconnect": "Reconnect",
   "just_for_fun": "Just for fun",
   "password_protected": "Private Lobby (password protected)",
   "private": "Private",

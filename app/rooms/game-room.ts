@@ -86,7 +86,7 @@ export default class GameRoom extends Room<GameState> {
     logger.trace("create game room")
     this.setMetadata(<IGameMetadata>{
       name: options.name,
-      nbPlayers: Object.values(options.users).length,
+      playerIds: Object.keys(options.users),
       stageLevel: 0,
       type: "game"
     })
