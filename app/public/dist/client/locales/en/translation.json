@@ -39,7 +39,7 @@
     "SHADOW_CLONE": "Shadow Clone",
     "VOLT_SWITCH": "Volt Switch",
     "LIQUIDATION": "Liquidation",
-    "DEFAULT": "Default",
+    "DEFAULT": "",
     "BURN": "Burn",
     "POISON": "Poison",
     "SLEEP": "Sleep",
@@ -225,7 +225,7 @@
     "LEAF_BLADE": "Leaf Blade"
   },
   "pkm": {
-    "DEFAULT": "default",
+    "DEFAULT": "MissingNo.",
     "EGG": "Egg",
     "DITTO": "Ditto",
     "BULBASAUR": "Bulbasaur",
@@ -822,7 +822,7 @@
     "ALOLAN_RAICHU": "Alolan Raichu"
   },
   "ability_description": {
-    "DEFAULT": "Default",
+    "DEFAULT": "",
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
     "EARTHQUAKE": "Deal [120,SP] SPECIAL to all enemy Pokémon in the same column as the user",
     "SONG_OF_DESIRE": "The target is CHARM for [6,SP] seconds",

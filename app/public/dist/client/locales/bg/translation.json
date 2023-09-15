@@ -1,6 +1,6 @@
 {
   "pkm": {
-    "DEFAULT": "default",
+    "DEFAULT": "MissingNo.",
     "EGG": "Egg",
     "DITTO": "Ditto",
     "BULBASAUR": "Bulbasaur",
@@ -632,7 +632,7 @@
     "SHADOW_CLONE": "Shadow Clone",
     "VOLT_SWITCH": "Превключвател за напрежение",
     "LIQUIDATION": "Ликвидация",
-    "DEFAULT": "По подразбиране",
+    "DEFAULT": "",
     "BURN": "Горя",
     "POISON": "отрова",
     "SLEEP": "сън",
@@ -817,7 +817,7 @@
     "PRESENT": "Настояще"
   },
   "ability_description": {
-    "DEFAULT": "По подразбиране",
+    "DEFAULT": "",
     "SOFT_BOILED": "Лекува всички ефекти на състоянието и предоставя [20,40,80,SP] SHIELD на всеки съюзен покемон",
     "EARTHQUAKE": "Раздайте [120,SP] SPECIAL на всички вражески покемони в същата колона като потребителя",
     "SONG_OF_DESIRE": "Целта е CHARM за [6,SP] секунди",

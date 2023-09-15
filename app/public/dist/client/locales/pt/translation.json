@@ -1,6 +1,6 @@
 {
   "pkm": {
-    "DEFAULT": "default",
+    "DEFAULT": "MissingNo.",
     "EGG": "Egg",
     "DITTO": "Ditto",
     "BULBASAUR": "Bulbasaur",
@@ -637,7 +637,7 @@
     "SHADOW_CLONE": "clone das sombras",
     "VOLT_SWITCH": "Interruptor Volt",
     "LIQUIDATION": "Liquidação",
-    "DEFAULT": "Padrão",
+    "DEFAULT": "",
     "BURN": "Queimar",
     "POISON": "Tóxico",
     "SLEEP": "Dormir",
@@ -822,7 +822,7 @@
     "PRESENT": "Presente"
   },
   "ability_description": {
-    "DEFAULT": "Padrão",
+    "DEFAULT": "",
     "SOFT_BOILED": "Cura todos os efeitos de status e concede [20,40,80,SP] SHIELD para cada aliado",
     "EARTHQUAKE": "Causa dano [120,SP] SPECIAL a todas as unidades inimigas na mesma coluna/linha do atacante",
     "SONG_OF_DESIRE": "O alvo é CHARM por [6,SP] segundos",
