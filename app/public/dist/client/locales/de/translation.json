@@ -1320,7 +1320,7 @@
   "item_description.GRACIDEA_FLOWER": "Wenn der Kampf beginnt, erhalten der Träger und benachbarte Verbündete in derselben Reihe +25 % ATK_SPEED",
   "item_description.FLAME_ORB": "Der Halter wird verbrannt, erhöht aber seine ATK um 100 %.",
   "item_description.ASSAULT_VEST": "+20 SPE_DEF. Reduziert den Schaden durch VERBRENNUNGEN und POISON um 50 %",
-  "item_description.AMULET_COIN": "+1 Gold jedes Mal, wenn der Besitzer einen Gegner niederschlägt (maximal 5 Gold pro Stufe)",
+  "item_description.AMULET_COIN": "+1 Gold jedes Mal, wenn der Besitzer einen Gegner niederschlägt",
   "item_description.POKE_DOLL": "Reduziere den gesamten eingehenden Schaden um 30 %",
   "item_description.RED_ORB": "+10 ATK. 25 % des Angriffsschadens werden als TRUE verursacht",
   "item_description.MAX_REVIVE": "Geben Sie RESURECTION, verhindern Sie, dass der Besitzer zuerst KO macht, und stellen Sie die maximalen HP wieder her",

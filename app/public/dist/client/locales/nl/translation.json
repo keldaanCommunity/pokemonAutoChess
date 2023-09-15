@@ -1320,7 +1320,7 @@
   "item_description.GRACIDEA_FLOWER": "Wanneer het gevecht begint, krijgen de houder en aangrenzende bondgenoten in dezelfde rij +25% ATK_SPEED",
   "item_description.FLAME_ORB": "Houder is verbrand, maar verhoogt zijn ATK met 100%",
   "item_description.ASSAULT_VEST": "+20 SPE_DEF. Verminder BURN en POISON schade met 50%",
-  "item_description.AMULET_COIN": "+1 goud elke keer dat de houder een tegenstander neerhaalt (max. 5 goud per level)",
+  "item_description.AMULET_COIN": "+1 goud elke keer dat de houder een tegenstander neerhaalt",
   "item_description.POKE_DOLL": "Verminder alle inkomende schade met 30%",
   "item_description.RED_ORB": "+10ATK. 25% van de aanvalsschade wordt behandeld als TRUE",
   "item_description.MAX_REVIVE": "Geef RESURECTION, voorkom dat de houder als eerste knock-out gaat en herstel tot max. HP",

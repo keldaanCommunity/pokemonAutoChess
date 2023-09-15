@@ -1320,7 +1320,7 @@
   "item_description.GRACIDEA_FLOWER": "戦闘が始まると、所有者と同じ列の隣接する味方のATK_SPEEDが+25%増加します",
   "item_description.FLAME_ORB": "ホルダーは火傷しますが、攻撃力が100％増加します",
   "item_description.ASSAULT_VEST": "+20 SPE_DEF。 BURNとPOISONのダメージを50%軽減",
-  "item_description.AMULET_COIN": "ホルダーが敵を倒すたびに +1 ゴールド (ステージごとに最大 5 ゴールド)",
+  "item_description.AMULET_COIN": "ホルダーが敵を倒すたびに +1 ゴールド",
   "item_description.POKE_DOLL": "すべての受けるダメージを30%軽減",
   "item_description.RED_ORB": "+10攻撃力。攻撃ダメージの25%がTRUEとして与えられる",
   "item_description.MAX_REVIVE": "RESURECTIONを与え、ホルダーの最初のKOを防ぎ、最大HPまで回復します",
