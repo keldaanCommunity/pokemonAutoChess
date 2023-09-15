@@ -34,7 +34,7 @@
   "ability.SHADOW_CLONE": "Schaduwkloon",
   "ability.VOLT_SWITCH": "Voltwissel",
   "ability.LIQUIDATION": "Liquidatie",
-  "ability.DEFAULT": "Standaard",
+  "ability.DEFAULT": "",
   "ability.BURN": "Burn",
   "ability.POISON": "Poison",
   "ability.SLEEP": "Sleep",

@@ -34,7 +34,7 @@
   "ability.SHADOW_CLONE": "Clones Sombra",
   "ability.VOLT_SWITCH": "Voltio Cambio",
   "ability.LIQUIDATION": "Hidroariete",
-  "ability.DEFAULT": "Por defecto",
+  "ability.DEFAULT": "",
   "ability.BURN": "Quemar",
   "ability.POISON": "Veneno",
   "ability.SLEEP": "Dormir",
