@@ -5,7 +5,7 @@ Kartana, Chingling, Chimecho, Alolan Raichu, Dhelmise
 # Changes to Pokemon & Abilities
 
 - Chatot PP ~~120~~ → 100
-- Corphish/Crawdaunt ~~110~~ → 100
+- Corphish/Crawdaunt PP ~~110~~ → 100
 
 # Changes to Synergies
 
