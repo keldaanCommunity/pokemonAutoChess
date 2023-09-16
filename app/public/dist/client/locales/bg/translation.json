@@ -39,7 +39,7 @@
     "SHADOW_CLONE": "Shadow Clone",
     "VOLT_SWITCH": "Превключвател за напрежение",
     "LIQUIDATION": "Ликвидация",
-    "DEFAULT": "По подразбиране",
+    "DEFAULT": "",
     "BURN": "Горя",
     "POISON": "отрова",
     "SLEEP": "сън",
@@ -224,7 +224,7 @@
     "PRESENT": "Настояще"
   },
   "pkm": {
-    "DEFAULT": "default",
+    "DEFAULT": "MissingNo.",
     "EGG": "Egg",
     "DITTO": "Ditto",
     "BULBASAUR": "Bulbasaur",
@@ -817,7 +817,7 @@
     "IRON_BUNDLE": "Железен пакет"
   },
   "ability_description": {
-    "DEFAULT": "По подразбиране",
+    "DEFAULT": "",
     "SOFT_BOILED": "Лекува всички ефекти на състоянието и предоставя [20,40,80,SP] SHIELD на всеки съюзен покемон",
     "EARTHQUAKE": "Раздайте [120,SP] SPECIAL на всички вражески покемони в същата колона като потребителя",
     "SONG_OF_DESIRE": "Целта е CHARM за [6,SP] секунди",
@@ -1021,7 +1021,7 @@
     "PYRO_BALL": "Потребителят атакува, като запалва малък камък и го изстрелва като огнена топка към най-отдалечената цел, нанасяйки [10,20,40,SP] СПЕЦИАЛНИ и ИЗГАРЯйки всичко по пътя си за 2s",
     "WHIRLPOOL": "Насочете се към най-отдалечения враг и отприщете градушка от 4 водовъртежа към него. Всеки нанася 125% ATK ФИЗИЧЕСКА на първия ударен враг",
     "SMOKE_SCREEN": "Каналът е под земята и се появява отново в средата на вражеския отбор, нанасяйки [10,20,40,SP] SPECIAL, BURN и ARMOR_REDUCTION на всички съседни единици за 2 секунди",
-    "PRESENT": "Или нанася 100% HP SPECIAL, или лекува 100% HP на целта"
+    "PRESENT": "Или нанася 80, 150, 300 SPECIAL, или лекува 80 HP на целта"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1200,11 +1200,11 @@
     "FAIRY_WIND": "Шокове сделка 30 SPECIAL",
     "STRANGE_STEAM": "Шокове сделка 60 SPECIAL",
     "MOON_FORCE": "Шокове сделка 80 SPECIAL. Целият противников отбор е CHARM за 2 секунди в началото на битката.",
-    "COOL_BREEZE": "+1 SPE_DEF",
-    "CHILLY": "+3 SPE_DEF, 10% шанс за FREEZE",
-    "FROSTY": "+6 SPE_DEF, 20% шанс за FREEZE",
-    "FREEZING": "+10 SPE_DEF, 30% шанс за FREEZE",
-    "SHEER_COLD": "+15 SPE_DEF, 40% шанс за FREEZE",
+    "COOL_BREEZE": "+2 SPE_DEF",
+    "CHILLY": "+4 SPE_DEF, 10% шанс за FREEZE",
+    "FROSTY": "+8 SPE_DEF, 20% шанс за FREEZE",
+    "FREEZING": "+15 SPE_DEF, 30% шанс за FREEZE",
+    "SHEER_COLD": "+30 SPE_DEF, 40% шанс за FREEZE",
     "ANCIENT_POWER": "Съживете с 40% HP и +30% ATK",
     "ELDER_POWER": "Съживете с 80% HP и +60% ATK.",
     "FORGOTTEN_POWER": "Съживете със 100% HP и +100% ATK.",

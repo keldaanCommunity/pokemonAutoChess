@@ -39,7 +39,7 @@
     "SHADOW_CLONE": "Shadow Clone",
     "VOLT_SWITCH": "Volt Switch",
     "LIQUIDATION": "Liquidation",
-    "DEFAULT": "Default",
+    "DEFAULT": "",
     "BURN": "Burn",
     "POISON": "Poison",
     "SLEEP": "Sleep",
@@ -226,7 +226,7 @@
     "ANCHOR_SHOT": "Anchor Shot"
   },
   "pkm": {
-    "DEFAULT": "default",
+    "DEFAULT": "MissingNo.",
     "EGG": "Egg",
     "DITTO": "Ditto",
     "BULBASAUR": "Bulbasaur",
@@ -824,7 +824,7 @@
     "DHELMISE": "Dhelmise"
   },
   "ability_description": {
-    "DEFAULT": "Default",
+    "DEFAULT": "",
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
     "EARTHQUAKE": "Deal [120,SP] SPECIAL to all enemy Pokémon in the same column as the user",
     "SONG_OF_DESIRE": "The target is CHARM for [6,SP] seconds",
@@ -1028,7 +1028,7 @@
     "PYRO_BALL": "The user attacks by igniting a small stone and launching it as a fiery ball at the farthest target, dealing [10,20,40,SP] SPECIAL and BURN for 2s everything on its way",
     "WHIRLPOOL": "Lock on to the farthest enemy and unleash a hail of 4 whirlpools toward them. Each deals 125% ATK PHYSICAL (scales with AP) to the first ennemy hit",
     "SMOKE_SCREEN": "Channel undergound and reappears in the middle of the enemy team, dealing [10,20,40,SP] SPECIAL, BURN and ARMOR_REDUCTION all adjacent units for 2 second",
-    "PRESENT": "Either deals 100% HP SPECIAL or heal 100% HP of the target",
+    "PRESENT": "Either deals 80, 150, 300 SPECIAL, or heal 80 HP of the target",
     "LEAF_BLADE": "Next attack will be a SPECIAL critical hit",
     "ANCHOR_SHOT": "Grab the farthest pokémon and deals [20,40,80,SP] SPECIAL"
   },
@@ -1209,11 +1209,11 @@
     "FAIRY_WIND": "Shocks deal 30 SPECIAL",
     "STRANGE_STEAM": "Shocks deal 60 SPECIAL",
     "MOON_FORCE": "Shocks deal 80 SPECIAL. All the opponent team is CHARM for 2 seconds at the start of the fight.",
-    "COOL_BREEZE": "+1 SPE_DEF",
-    "CHILLY": "+3 SPE_DEF, 10% chance to FREEZE",
-    "FROSTY": "+6 SPE_DEF, 20% chance to FREEZE",
-    "FREEZING": "+10 SPE_DEF, 30% chance to FREEZE",
-    "SHEER_COLD": "+15 SPE_DEF, 40% chance to FREEZE",
+    "COOL_BREEZE": "+2 SPE_DEF",
+    "CHILLY": "+4 SPE_DEF, 10% chance to FREEZE",
+    "FROSTY": "+8 SPE_DEF, 20% chance to FREEZE",
+    "FREEZING": "+15 SPE_DEF, 30% chance to FREEZE",
+    "SHEER_COLD": "+30 SPE_DEF, 40% chance to FREEZE",
     "ANCIENT_POWER": "Revive with 40% HP and +30% ATK",
     "ELDER_POWER": "Revive with 80% HP and +60% ATK.",
     "FORGOTTEN_POWER": "Revive with 100% HP and +100% ATK.",
