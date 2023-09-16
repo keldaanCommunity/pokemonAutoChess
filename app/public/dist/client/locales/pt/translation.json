@@ -39,7 +39,7 @@
     "SHADOW_CLONE": "clone das sombras",
     "VOLT_SWITCH": "Interruptor Volt",
     "LIQUIDATION": "Liquidação",
-    "DEFAULT": "Padrão",
+    "DEFAULT": "",
     "BURN": "Queimar",
     "POISON": "Tóxico",
     "SLEEP": "Dormir",
@@ -224,7 +224,7 @@
     "PRESENT": "Presente"
   },
   "pkm": {
-    "DEFAULT": "default",
+    "DEFAULT": "MissingNo.",
     "EGG": "Egg",
     "DITTO": "Ditto",
     "BULBASAUR": "Bulbasaur",
@@ -817,7 +817,7 @@
     "IRON_BUNDLE": "Pacote de Ferro"
   },
   "ability_description": {
-    "DEFAULT": "Padrão",
+    "DEFAULT": "",
     "SOFT_BOILED": "Cura todos os efeitos de status e concede [20,40,80,SP] SHIELD para cada aliado",
     "EARTHQUAKE": "Causa dano [120,SP] SPECIAL a todas as unidades inimigas na mesma coluna/linha do atacante",
     "SONG_OF_DESIRE": "O alvo é CHARM por [6,SP] segundos",
@@ -1021,7 +1021,7 @@
     "PYRO_BALL": "O usuário ataca acendendo uma pequena pedra e lançando-a como uma bola de fogo no alvo mais distante, distribuindo [10,20,40,SP] ESPECIAL e QUEIMADURA por 2s em tudo que estiver em seu caminho",
     "WHIRLPOOL": "Fixe-se no inimigo mais distante e solte uma saraivada de 4 redemoinhos em direção a ele. Cada um causa 125% de ATQ FÍSICO ao primeiro inimigo atingido",
     "SMOKE_SCREEN": "Canaliza e reaparece no meio do time inimigo, causando [10,20,40,SP] SPECIAL, BURN e ARMOR_REDUCTION em todas as unidades adjacentes por 2 segundos",
-    "PRESENT": "Dá 100% de HP ESPECIAL ou cura 100% de HP do alvo"
+    "PRESENT": "Causa 80, 150, 300 SPECIAL ou cura 80 HP do alvo"
   },
   "effect": {
     "INGRAIN": "Inerente",
@@ -1200,11 +1200,11 @@
     "FAIRY_WIND": "Oferta de choques 30 SPECIAL",
     "STRANGE_STEAM": "Oferta de choques 60 SPECIAL",
     "MOON_FORCE": "Oferta de choques 80 SPECIAL. Toda a equipe adversária fica CHARM por 2 segundos no início da luta.",
-    "COOL_BREEZE": "+1 SPE_DEF",
-    "CHILLY": "+3 SPE_DEF, 10% de chance de FREEZE",
-    "FROSTY": "+6 SPE_DEF, 20% de chance de FREEZE",
-    "FREEZING": "+10 SPE_DEF, 30% de chance de FREEZE",
-    "SHEER_COLD": "+15 SPE_DEF, 40% de chance de FREEZE",
+    "COOL_BREEZE": "+2 SPE_DEF",
+    "CHILLY": "+4 SPE_DEF, 10% de chance de FREEZE",
+    "FROSTY": "+8 SPE_DEF, 20% de chance de FREEZE",
+    "FREEZING": "+15 SPE_DEF, 30% de chance de FREEZE",
+    "SHEER_COLD": "+30 SPE_DEF, 40% de chance de FREEZE",
     "ANCIENT_POWER": "Revive com 40% HP e +30% ATK",
     "ELDER_POWER": "Revive com 80% HP e +60% ATK.",
     "FORGOTTEN_POWER": "Revive com 100% HP e +100% ATK.",
