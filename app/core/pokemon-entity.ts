@@ -672,11 +672,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   onKill(target: PokemonEntity, board: Board) {
-    if (
-      this.items.has(Item.AMULET_COIN) &&
-      this.player &&
-      this.count.moneyCount < 5
-    ) {
+    if (this.items.has(Item.AMULET_COIN) && this.player) {
       this.player.money += 1
       this.count.moneyCount++
     }
