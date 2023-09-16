@@ -1337,7 +1337,7 @@
     "GRACIDEA_FLOWER": "Lorsque le combat commence, le porteur et les alliés adjacents dans la même ligne gagnent 25% ATK_SPEED",
     "FLAME_ORB": "Le porteur est BURN pendant le combat mais augmente son ATK de 100%",
     "ASSAULT_VEST": "+20 SPE_DEF. Réduit les dégâts de BURN et POISON de 50 %",
-    "AMULET_COIN": "+1 pièce à chaque fois que le porteur met KO un adversaire (max 5 pièces par manche)",
+    "AMULET_COIN": "+1 pièce à chaque fois que le porteur met KO un adversaire",
     "POKE_DOLL": "Réduit tous les dégâts subis de 30%",
     "RED_ORB": "+10 ATK. 25% des dégâts d'attaque sont infligés comme TRUE",
     "MAX_REVIVE": "Donne RESURECTION, empêchant le premier KO du porteur et le restaurant au max de ses HP",
