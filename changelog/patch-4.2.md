@@ -13,6 +13,8 @@ Kartana, Chingling, Chimecho, Alolan Raichu, Dhelmise
 
 # Changes to Items
 
+- remove Amulet's coin cap of 5 gold max per round
+
 # Gameplay
 
 # UI
