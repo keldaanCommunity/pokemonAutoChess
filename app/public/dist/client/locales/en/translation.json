@@ -2011,7 +2011,9 @@
     "bot_builder": "Bot Builder",
     "bot_builder_desc": "Create your own bots and submit them to have a chance to be included in the game",
     "jukebox": "Jukebox",
-    "jukebox_desc": "Choose your music ingame"
+    "jukebox_desc": "Choose your music ingame",
+    "map": "Map",
+    "map_desc": "Choose the map before game as room leader"
   },
   "level_required": "Level required"
 }

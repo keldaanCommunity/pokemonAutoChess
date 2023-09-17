@@ -18,6 +18,7 @@ import { useNews } from "./news/useNews"
 import Wiki from "./wiki/wiki"
 import TeamBuilderModal from "./bot-builder/team-builder-modal"
 import Jukebox from "./jukebox/jukebox"
+import { GADGETS } from "../../../../core/gadgets"
 import pkg from "../../../../../package.json"
 
 import "./main-sidebar.css"
@@ -119,7 +120,7 @@ export function MainSidebar(props: MainSidebarProps) {
         )}
 
         {/** TODO Enable these once we populate preparation room pokemonCollection */}
-        {page === "main_lobby" && profileLevel >= 1 && (
+        {page === "main_lobby" && profileLevel >= GADGETS.BAG.levelRequired && (
           <NavLink
             location="collection"
             svg="collection"
@@ -129,7 +130,7 @@ export function MainSidebar(props: MainSidebarProps) {
             {t("collection")}
           </NavLink>
         )}
-        {page === "main_lobby" && profileLevel >= 1 && (
+        {page === "main_lobby" && profileLevel >= GADGETS.BAG.levelRequired && (
           <NavLink
             location="booster"
             svg="booster"
@@ -157,7 +158,7 @@ export function MainSidebar(props: MainSidebarProps) {
           {t("meta")}
         </NavLink>
 
-        {profileLevel >= 10 && (
+        {profileLevel >= GADGETS.TEAM_PLANNER.levelRequired && (
           <NavLink
             svg="team-builder"
             location="team-builder"
@@ -167,11 +168,13 @@ export function MainSidebar(props: MainSidebarProps) {
           </NavLink>
         )}
 
-        {page !== "game" && user?.anonymous === false && profileLevel >= 20 && (
-          <NavLink svg="bot" onClick={() => navigate("/bot-builder")}>
-            {t("bot_builder")}
-          </NavLink>
-        )}
+        {page !== "game" &&
+          user?.anonymous === false &&
+          profileLevel >= GADGETS.BOT_BUILDER.levelRequired && (
+            <NavLink svg="bot" onClick={() => navigate("/bot-builder")}>
+              {t("bot_builder")}
+            </NavLink>
+          )}
 
         {page !== "game" &&
           (user?.role === Role.ADMIN ||
@@ -195,7 +198,7 @@ export function MainSidebar(props: MainSidebarProps) {
           </NavLink>
         )}
 
-        {page === "game" && profileLevel >= 30 && (
+        {page === "game" && profileLevel >= GADGETS.JUKEBOX.levelRequired && (
           <NavLink
             svg="compact-disc"
             location="jukebox"
