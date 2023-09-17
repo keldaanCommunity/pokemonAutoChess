@@ -57,7 +57,7 @@ export default function WikiPokemonDetail(props: {
     [Stat.CRIT_CHANCE]: "critChance",
     [Stat.CRIT_DAMAGE]: "critDamage",
     [Stat.ATK_SPEED]: "atkSpeed",
-    [Stat.PP]: "pp",
+    [Stat.PP]: "maxPP",
     [Stat.AP]: "ap",
     [Stat.SHIELD]: "shield"
   }
@@ -78,8 +78,8 @@ export default function WikiPokemonDetail(props: {
         </dd>
         <dt style={{ verticalAlign: "middle" }}>{t("tier")}</dt>
         <dd>
-          {Array.from({ length: pokemon.stars }, () => (
-            <img src="assets/ui/star.svg" height="24"></img>
+          {Array.from({ length: pokemon.stars }, (_, i) => (
+            <img src="assets/ui/star.svg" height="24" key={"star" + i}></img>
           ))}
         </dd>
         <dt>{t("synergies")}</dt>
@@ -122,19 +122,17 @@ export default function WikiPokemonDetail(props: {
         )}
       </dl>
       <dl>
-        {[Stat.HP, Stat.ATK, Stat.DEF, Stat.SPE_DEF, Stat.RANGE].map((stat) => (
-          <React.Fragment key={stat}>
-            <dt>
-              <img src={`assets/icons/${stat}.png`} alt="" />{" "}
-              {t(`stat.${stat}`)}
-            </dt>
-            <dd>{pokemon[statProp[stat]]}</dd>
-          </React.Fragment>
-        ))}
-        <dt>
-          <img src={`assets/icons/pp.png`} alt="" /> {t("stat.PP")}
-        </dt>
-        <dd>{pokemon.maxPP}</dd>
+        {[Stat.HP, Stat.PP, Stat.RANGE, Stat.ATK, Stat.DEF, Stat.SPE_DEF].map(
+          (stat) => (
+            <React.Fragment key={stat}>
+              <dt>
+                <img src={`assets/icons/${stat}.png`} alt="" />{" "}
+                {t(`stat.${stat}`)}
+              </dt>
+              <dd>{pokemon[statProp[stat]]}</dd>
+            </React.Fragment>
+          )
+        )}
       </dl>
       <dl>
         {pokemon.skill !== Ability.DEFAULT && (
