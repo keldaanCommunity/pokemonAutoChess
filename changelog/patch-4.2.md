@@ -12,6 +12,8 @@ Chatot PP ~~120~~ -> 100
 
 # Gameplay
 
+- New gadget: Map - Choose the map before game as room leader
+
 # UI
 
 # Bugfix
