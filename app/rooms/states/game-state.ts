@@ -17,7 +17,8 @@ import {
 import { PkmProposition } from "../../types/enum/Pokemon"
 import { pickRandomIn } from "../../utils/random"
 import { Portal, SynergySymbol } from "../../models/colyseus-models/portal"
-import Simulation from "../../core/simulation"
+import Simulation from "../../core/simulation"
+
 export default class GameState extends Schema {
   @type("string") afterGameId = ""
   @type("uint8") roundTime = StageDuration[1]
@@ -49,12 +50,12 @@ export default class GameState extends Schema {
   preparationId: string
   shinyEncounter = false
 
-  constructor(preparationId: string, name: string, noElo: boolean) {
+  constructor(preparationId: string, name: string, noElo: boolean, selectedMap: Dungeon | "random") {
     super()
     this.preparationId = preparationId
     this.startTime = Date.now()
     this.name = name
-    this.id = pickRandomIn(Dungeon)
+    this.id = selectedMap === "random" ? pickRandomIn(Dungeon) : selectedMap
     this.noElo = noElo
     this.mapName = DungeonData[this.id].name
     this.weather = Weather.NEUTRAL

@@ -20,6 +20,11 @@
   flex: 0 1 50em;
 }
 
+.preparation-menu span {
+  color: white;
+  text-shadow: 1px 1px 2px black;
+}
+
 .preparation-page .user-chat {
   flex: 0 1 30em;
 }

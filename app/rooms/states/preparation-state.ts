@@ -1,5 +1,6 @@
 import { GameUser } from "../../models/colyseus-models/game-user"
 import { Schema, MapSchema, type } from "@colyseus/schema"
+import { Dungeon } from "../../types/Config"
 
 export interface IPreparationState {
   users: MapSchema<GameUser>
@@ -7,6 +8,7 @@ export interface IPreparationState {
   ownerId: string
   ownerName: string
   name: string
+  selectedMap: Dungeon | "random"
 }
 
 export default class PreparationState
@@ -20,6 +22,7 @@ export default class PreparationState
   @type("string") name: string
   @type("string") password: string | null
   @type("boolean") noElo: boolean
+  @type("string") selectedMap: Dungeon | "random"
 
   constructor(ownerId: string | undefined, name: string) {
     super()
@@ -29,5 +32,6 @@ export default class PreparationState
     this.ownerName = ""
     this.password = null
     this.noElo = false
+    this.selectedMap = "random"
   }
 }

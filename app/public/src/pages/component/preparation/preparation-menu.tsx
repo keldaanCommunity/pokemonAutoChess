@@ -52,6 +52,10 @@ export default function PreparationMenu() {
   const room: Room<PreparationState> | undefined = useAppSelector(
     (state) => state.network.preparation
   )
+  const selectedMap: string = useAppSelector(
+    (state) => state.preparation.selectedMap
+  )
+
   const [modal, setModal] = useState<string>()
 
   const profile = useAppSelector((state) => state.network.profile)
@@ -168,14 +172,14 @@ export default function PreparationMenu() {
           <div className="spacer"></div>
           <div className="gadgets">
             {profileLevel >= GADGETS.MAP.levelRequired && (
-              <img
-                width={48}
-                height={48}
-                src="assets/ui/map.svg"
+              <div
                 onClick={() => {
                   setModal("maps")
                 }}
-              />
+              >
+                <span>{t("map." + selectedMap)}</span>
+                <img width={48} height={48} src="assets/ui/map.svg" />
+              </div>
             )}
           </div>
         </div>

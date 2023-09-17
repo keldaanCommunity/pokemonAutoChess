@@ -26,7 +26,8 @@ import {
   setOwnerName,
   setPassword,
   setNoELO,
-  setUser
+  setUser,
+  setSelectedMap
 } from "../stores/PreparationStore"
 import GameState from "../../../rooms/states/game-state"
 import { NonFunctionPropNames, Transfer } from "../../../types"
@@ -127,6 +128,10 @@ export default function Preparation() {
         dispatch(setNoELO(value))
       })
 
+      r.state.listen("selectedMap", (value, previousValue) => {
+        dispatch(setSelectedMap(value))
+      })
+
       r.state.users.onAdd((u) => {
         dispatch(addUser(u))
 
@@ -188,7 +193,8 @@ export default function Preparation() {
             idToken: token,
             name: r.state.name,
             preparationId: r.id,
-            noElo: r.state.noElo
+            noElo: r.state.noElo,
+            selectedMap: r.state.selectedMap
           })
 
           dispatch(gameStart(game.id))
