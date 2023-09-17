@@ -1,0 +1,40 @@
+#bot-select-modal {
+  position: fixed;
+  color: white;
+  top: 5vh;
+  left: 5vw;
+  right: 5vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  z-index: 20;
+  display: grid;
+  grid-template-rows: min-content 1fr min-content;
+  grid-template-columns: 1fr;
+}
+
+#bot-select-modal header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  gap: 8px;
+}
+
+#bot-select-modal ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, auto));
+  grid-auto-rows: min-content;
+  padding: 0;
+  overflow: auto;
+  width: 1500px;
+  max-width: 100%;
+  gap: 8px;
+}
+
+#bot-select-modal li:hover {
+  cursor: var(--cursor-hover);
+  filter: contrast(1.1) brightness(1.1);
+}
+
+#bot-select-modal li.selected {
+  background-color: #109fff;
+}

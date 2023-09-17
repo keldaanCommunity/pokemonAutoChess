@@ -17,24 +17,19 @@ export default function InlineAvatar(props: {
       style={{
         display: "flex",
         alignItems: "center",
-        justifyContent: "start"
+        justifyContent: "start",
+        gap: "0.25em"
       }}
     >
       <img
         style={{ width: "40px", height: "40px" }}
         src={getAvatarSrc(props.avatar)}
+        className="pokemon-portrait"
       />
       {props.title && (
         <span className="player-title">{t(`title.${props.title}`)}</span>
       )}
-      <span
-        style={{
-          overflow: "hidden",
-          whiteSpace: "nowrap",
-          textOverflow: "ellipsis",
-          padding: "0 0.5em"
-        }}
-      >
+      <span className="player-name">
         {props.role === Role.BOT ? t(`pkm.${props.name}`) : props.name}
       </span>
       {props.role && <RoleBadge role={props.role} />}
