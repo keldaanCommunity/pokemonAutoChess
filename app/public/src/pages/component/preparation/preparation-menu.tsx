@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useRef, useState } from "react"
 import PreparationMenuUser from "./preparation-menu-user"
 import { IGameUser } from "../../../../../models/colyseus-models/game-user"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
@@ -25,6 +25,7 @@ import { Checkbox } from "../checkbox/checkbox"
 import { GADGETS } from "../../../../../core/gadgets"
 import { BotSelectModal } from "./bot-select-modal"
 import { IBot } from "../../../../../models/mongo-models/bot-v2"
+import { MapSelectModal } from "./map-select-modal"
 
 export default function PreparationMenu() {
   const { t } = useTranslation()
@@ -51,6 +52,7 @@ export default function PreparationMenu() {
   const room: Room<PreparationState> | undefined = useAppSelector(
     (state) => state.network.preparation
   )
+  const [modal, setModal] = useState<string>()
 
   const profile = useAppSelector((state) => state.network.profile)
   const profileLevel = profile?.level ?? 0
@@ -80,8 +82,6 @@ export default function PreparationMenu() {
   function toggleElo() {
     dispatch(toggleEloRoom(!noElo))
   }
-
-  function openMapSelect() {}
 
   const startGame = throttle(async function startGame() {
     if (room) {
@@ -172,7 +172,9 @@ export default function PreparationMenu() {
                 width={48}
                 height={48}
                 src="assets/ui/map.svg"
-                onClick={openMapSelect}
+                onClick={() => {
+                  setModal("maps")
+                }}
               />
             )}
           </div>
@@ -274,6 +276,14 @@ export default function PreparationMenu() {
       </div>
 
       {isOwner && botsList != null && <BotSelectModal bots={botsList} />}
+      {isOwner && (
+        <MapSelectModal
+          show={modal === "maps"}
+          handleClose={() => {
+            setModal(undefined)
+          }}
+        />
+      )}
     </div>
   )
 }
