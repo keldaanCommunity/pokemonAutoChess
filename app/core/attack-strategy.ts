@@ -1121,7 +1121,7 @@ export class HypnosisStrategy extends AttackStrategy {
       const x = farthestTarget.x
       const y = farthestTarget.y
       let duration =
-        pokemon.stars === 3 ? 6000 : pokemon.stars === 2 ? 3000 : 1500
+        pokemon.stars === 3 ? 6000 : pokemon.stars === 2 ? 4000 : 2000
       const tg = board.getValue(x, y)
       if (tg) {
         duration *= 1 + pokemon.ap / 200

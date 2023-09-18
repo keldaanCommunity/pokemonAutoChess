@@ -10575,7 +10575,7 @@ export class Noctowl extends Pokemon {
       Rarity.UNCOMMON,
       Pkm.DEFAULT,
       170,
-      6,
+      10,
       3,
       5,
       1,

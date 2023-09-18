@@ -15,6 +15,7 @@ Kartana, Chingling, Chimecho, Alolan Raichu, Dhelmise
   - Emboar HP ~~250~~ → 220 ; Def ~~7~~ → 6
 - Nerf Machamp Attack ~~26~~ → 22
 - Buff Apple Acid: now also lower Defense
+- Buff Noctowl: Attack ~~6~~ → 10 ; Hypnosis duration: ~~3.5~~ → 4
 
 # Changes to Synergies
 
