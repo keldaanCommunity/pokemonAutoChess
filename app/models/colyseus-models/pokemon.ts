@@ -4418,7 +4418,7 @@ export class Machamp extends Pokemon {
       Rarity.UNCOMMON,
       Pkm.DEFAULT,
       220,
-      26,
+      22,
       5,
       5,
       1,

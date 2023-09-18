@@ -13,6 +13,7 @@ Kartana, Chingling, Chimecho, Alolan Raichu, Dhelmise
     - Tepig Def ~~5~~ → 4
     - Pignite HP ~~150~~ → 140 ; Def ~~6~~ → 5
     - Emboar HP ~~250~~ → 220 ; Def ~~7~~ → 6
+- Nerf Machamp Attack ~~26~~ → 22
 
 
 # Changes to Synergies
