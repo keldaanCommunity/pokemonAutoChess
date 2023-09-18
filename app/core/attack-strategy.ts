@@ -3049,14 +3049,15 @@ export class AppleAcidStrategy extends AttackStrategy {
         damage = 30
         break
       case 2:
-        damage = 50
+        damage = 60
         break
       case 3:
-        damage = 70
+        damage = 120
         break
       default:
         break
     }
+    pokemon.addDefense(-3, true)
     pokemon.addSpecialDefense(-3, true)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }

@@ -10,11 +10,11 @@ Kartana, Chingling, Chimecho, Alolan Raichu, Dhelmise
 - Nerf Zekrom PP ~~90~~ → 100
 - Nerf Cinderace PP ~~35~~ → 50
 - Nerf Tepig line HP & Defense
-    - Tepig Def ~~5~~ → 4
-    - Pignite HP ~~150~~ → 140 ; Def ~~6~~ → 5
-    - Emboar HP ~~250~~ → 220 ; Def ~~7~~ → 6
+  - Tepig Def ~~5~~ → 4
+  - Pignite HP ~~150~~ → 140 ; Def ~~6~~ → 5
+  - Emboar HP ~~250~~ → 220 ; Def ~~7~~ → 6
 - Nerf Machamp Attack ~~26~~ → 22
-
+- Buff Apple Acid: now also lower Defense
 
 # Changes to Synergies
 
