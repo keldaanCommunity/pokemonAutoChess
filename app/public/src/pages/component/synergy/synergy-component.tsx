@@ -5,6 +5,7 @@ import SynergyDetailComponent from "./synergy-detail-component"
 import SynergyIcon from "../icons/synergy-icon"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { useTranslation } from "react-i18next"
+import ReactDOM from "react-dom"
 
 export default function SynergyComponent(props: {
   type: Synergy
@@ -37,14 +38,17 @@ export default function SynergyComponent(props: {
       }}
       data-tooltip-id={"detail-" + props.type}
     >
-      <Tooltip
-        id={"detail-" + props.type}
-        className="customeTheme"
-        place="right"
-        data-tooltip-offset={{ bottom: (5 - props.index) * 50 }}
-      >
-        <SynergyDetailComponent type={props.type} value={props.value} />
-      </Tooltip>
+      {ReactDOM.createPortal(
+        <Tooltip
+          id={"detail-" + props.type}
+          className="customeTheme"
+          place="right"
+          data-tooltip-offset={{ bottom: (5 - props.index) * 50 }}
+        >
+          <SynergyDetailComponent type={props.type} value={props.value} />
+        </Tooltip>,
+        document.body
+      )}
 
       <SynergyIcon type={props.type} size="40px" />
       <span
@@ -59,7 +63,8 @@ export default function SynergyComponent(props: {
       <div
         style={{
           display: "flex",
-          flexFlow: "column"
+          flexFlow: "column",
+          lineHeight: 1.25
         }}
       >
         <div
