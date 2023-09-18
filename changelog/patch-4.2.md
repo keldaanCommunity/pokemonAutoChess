@@ -4,8 +4,16 @@ Kartana, Chingling, Chimecho, Alolan Raichu, Dhelmise
 
 # Changes to Pokemon & Abilities
 
-- Chatot PP ~~120~~ → 100
-- Corphish/Crawdaunt PP ~~110~~ → 100
+- Buff Chatot PP ~~120~~ → 100
+- Buff Corphish/Crawdaunt PP ~~110~~ → 100
+- Nerf Reshiram PP ~~90~~ → 100
+- Nerf Zekrom PP ~~90~~ → 100
+- Nerf Cinderace PP ~~35~~ → 50
+- Nerf Tepig line HP & Defense
+    - Tepig Def ~~5~~ → 4
+    - Pignite HP ~~150~~ → 140 ; Def ~~6~~ → 5
+    - Emboar HP ~~250~~ → 220 ; Def ~~7~~ → 6
+
 
 # Changes to Synergies
 

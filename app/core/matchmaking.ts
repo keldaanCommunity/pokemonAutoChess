@@ -46,6 +46,7 @@ export function selectMatchups(state: GameState): Matchup[] {
     )[0]
     ghostMatchup.ghost = true
     if (ghostMatchup.a.id !== remainingPlayer.id) {
+      // ensure remaining player is player A in ghost round
       ghostMatchup.b = ghostMatchup.a
       ghostMatchup.a = remainingPlayer
     }
