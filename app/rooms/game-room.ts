@@ -22,6 +22,7 @@ import {
   OnPokemonPropositionCommand
 } from "./commands/game-commands"
 import {
+  Dungeon,
   ExpPlace,
   getEvolutionCountNeeded,
   RequiredStageLevelForXpElligibility
@@ -82,6 +83,7 @@ export default class GameRoom extends Room<GameState> {
     name: string
     idToken: string
     noElo: boolean
+    selectedMap: Dungeon | "random"
   }) {
     logger.trace("create game room")
     this.setMetadata(<IGameMetadata>{
@@ -92,7 +94,12 @@ export default class GameRoom extends Room<GameState> {
     })
     // logger.debug(options);
     this.setState(
-      new GameState(options.preparationId, options.name, options.noElo)
+      new GameState(
+        options.preparationId,
+        options.name,
+        options.noElo,
+        options.selectedMap
+      )
     )
     this.miniGame.create(
       this.state.avatars,

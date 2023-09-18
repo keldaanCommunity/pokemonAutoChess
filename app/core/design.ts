@@ -2,6 +2,7 @@ import { Dungeon, TerrainType, Mask } from "../types/Config"
 import Tileset, { TilesetTiled } from "./tileset"
 import Terrain from "./terrain"
 import Masker from "./masker"
+import { logger } from "../utils/logger"
 
 export type LayerTiled = {
   data: number[]
@@ -44,11 +45,8 @@ export default class Design {
   frequency: number
   persistance: number
   tileset: Tileset
-  minArena: number[] = [13, 2]
-  maxArena: number[] = [29, 18]
-  leftBorder: number[] = [14, 15]
-  rightBorder: number[] = [28, 15]
-  preview: boolean
+  arenaRect: [x1: number, y1: number, x2: number, y2: number] = [13, 2, 29, 18]
+  wallRect: [x1: number, y1: number, x2: number, y2: number] = [14, 15, 28, 15]
 
   constructor(
     id: Dungeon,
@@ -56,19 +54,17 @@ export default class Design {
     persistance: number,
     width?: number,
     height?: number,
-    minArena?: number[],
-    maxArena?: number[],
-    preview?: boolean
+    arenaRect?: [x1: number, y1: number, x2: number, y2: number],
+    wallRect?: [x1: number, y1: number, x2: number, y2: number]
   ) {
     this.id = id
     this.frequency = frequency
     this.persistance = persistance
-    this.width = preview ? 6 : width ? width : this.width
-    this.height = preview ? 6 : height ? height : this.height
-    this.minArena = minArena ? minArena : this.minArena
-    this.maxArena = maxArena ? maxArena : this.maxArena
+    this.width = width ?? this.width
+    this.height = height ?? this.height
+    this.arenaRect = arenaRect ?? this.arenaRect
+    this.wallRect = wallRect ?? this.wallRect
     this.tileset = new Tileset(this.id)
-    this.preview = preview ? preview : false
   }
 
   async create() {
@@ -95,36 +91,49 @@ export default class Design {
       const row: number[] = []
       for (let j = 0; j < this.width; j++) {
         const v = generation[i][j]
-        if (this.preview) {
-          if (i === 0 || i === 1) {
-            row.push(TerrainType.WALL)
-          } else if (i === 2 || i === 3) {
-            row.push(TerrainType.GROUND)
-          } else {
-            row.push(TerrainType.WATER)
-          }
+        if (v > 0.66) {
+          row.push(TerrainType.WALL)
+        } else if (v > 0.33) {
+          row.push(TerrainType.GROUND)
         } else {
-          if (v > 0.66) {
-            row.push(TerrainType.WALL)
-          } else if (v > 0.33) {
-            row.push(TerrainType.GROUND)
-          } else {
-            row.push(TerrainType.WATER)
-          }
+          row.push(TerrainType.WATER)
         }
       }
       this.terrain.push(row)
     }
 
-    for (let i = this.minArena[0]; i < this.maxArena[0]; i++) {
-      for (let j = this.minArena[1]; j < this.maxArena[1]; j++) {
-        this.terrain[j][i] = TerrainType.GROUND
+    for (let i = this.arenaRect[0]; i <= this.arenaRect[2]; i++) {
+      for (let j = this.arenaRect[1]; j <= this.arenaRect[3]; j++) {
+        if (j in this.terrain && i in this.terrain[j]) {
+          this.terrain[j][i] = TerrainType.GROUND
+        } else {
+          logger.error(`Arena rect is out of terrain`, {
+            arenaRect: this.arenaRect,
+            width: this.width,
+            height: this.height
+          })
+        }
       }
     }
 
-    for (let i = this.leftBorder[0]; i < this.rightBorder[0]; i++) {
-      if (this.terrain[this.leftBorder[1]]) {
-        this.terrain[this.leftBorder[1]][i] = TerrainType.WALL
+    for (let i = this.wallRect[0]; i <= this.wallRect[2]; i++) {
+      for (let j = this.wallRect[1]; j <= this.wallRect[3]; j++) {
+        if (j in this.terrain && i in this.terrain[j]) {
+          if (
+            i === this.wallRect[0] ||
+            j === this.wallRect[1] ||
+            i === this.wallRect[2] ||
+            j === this.wallRect[3]
+          ) {
+            this.terrain[j][i] = TerrainType.WALL
+          }
+        } else {
+          logger.error(`Wall rect is out of terrain`, {
+            wallRect: this.wallRect,
+            width: this.width,
+            height: this.height
+          })
+        }
       }
     }
 
@@ -135,10 +144,12 @@ export default class Design {
   drawGroundRect(x: number, y: number, width: number, height: number) {
     for (let i = x; i < x + width; i++) {
       for (let j = y; j < y + height; j++) {
-        this.terrain[j][i] =
-          i === x || i === x + width - 1 || j === y || j === y + height - 1
-            ? TerrainType.WALL
-            : TerrainType.GROUND
+        if (j in this.terrain && i in this.terrain[j]) {
+          this.terrain[j][i] =
+            i === x || i === x + width - 1 || j === y || j === y + height - 1
+              ? TerrainType.WALL
+              : TerrainType.GROUND
+        }
       }
     }
   }

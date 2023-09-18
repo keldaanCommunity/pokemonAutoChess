@@ -129,6 +129,16 @@ export default class PreparationRoom extends Room<PreparationState> {
       }
     })
 
+    this.onMessage(Transfer.SELECT_TILEMAP, (client, message) => {
+      try {
+        if (client.auth?.uid === this.state.ownerId) {
+          this.state.selectedMap = message
+        }
+      } catch (error) {
+        logger.error(error)
+      }
+    })
+
     this.onMessage(Transfer.GAME_START_REQUEST, (client) => {
       try {
         this.dispatcher.dispatch(new OnGameStartRequestCommand(), { client })
@@ -229,7 +239,9 @@ export default class PreparationRoom extends Room<PreparationState> {
       client.send(Transfer.USER_PROFILE, userProfile)
 
       const isAlreadyInRoom = this.state.users.has(user.uid)
-      let numberOfHumanPlayers = values(this.state.users).filter(u => !u.isBot).length
+      let numberOfHumanPlayers = values(this.state.users).filter(
+        (u) => !u.isBot
+      ).length
       if (numberOfHumanPlayers >= MAX_PLAYERS_PER_LOBBY) {
         throw "room is full"
       } else if (this.state.gameStarted) {

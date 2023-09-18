@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useRef, useState } from "react"
 import PreparationMenuUser from "./preparation-menu-user"
 import { IGameUser } from "../../../../../models/colyseus-models/game-user"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
@@ -15,17 +15,17 @@ import {
 import firebase from "firebase/compat/app"
 import { Room } from "colyseus.js"
 import { BotDifficulty } from "../../../../../types/enum/Game"
-import { setBotsList } from "../../../stores/PreparationStore"
 import PreparationState from "../../../../../rooms/states/preparation-state"
 import "./preparation-menu.css"
 import { cc } from "../../utils/jsx"
 import { throttle } from "../../../../../utils/function"
-import Elo from "../elo"
-import InlineAvatar from "../inline-avatar"
-import { IBot } from "../../../../../models/mongo-models/bot-v2"
 import { Role } from "../../../../../types"
 import { useTranslation } from "react-i18next"
 import { Checkbox } from "../checkbox/checkbox"
+import { GADGETS } from "../../../../../core/gadgets"
+import { BotSelectModal } from "./bot-select-modal"
+import { IBot } from "../../../../../models/mongo-models/bot-v2"
+import { MapSelectModal } from "./map-select-modal"
 
 export default function PreparationMenu() {
   const { t } = useTranslation()
@@ -52,6 +52,15 @@ export default function PreparationMenu() {
   const room: Room<PreparationState> | undefined = useAppSelector(
     (state) => state.network.preparation
   )
+  const selectedMap: string = useAppSelector(
+    (state) => state.preparation.selectedMap
+  )
+
+  const [modal, setModal] = useState<string>()
+
+  const profile = useAppSelector((state) => state.network.profile)
+  const profileLevel = profile?.level ?? 0
+
   const [botDifficulty, setBotDifficulty] = useState<BotDifficulty>(
     BotDifficulty.MEDIUM
   )
@@ -59,35 +68,11 @@ export default function PreparationMenu() {
   const isReady = users.find((user) => user.id === uid)?.ready
   const allUsersReady = users.every((user) => user.ready)
 
-  const [sortBotsOrder, setSortBotsOrder] = useState<boolean>(false)
-  const [sortBotsCriteria, setSortBotsCriteria] = useState<string>("name")
-  const [queryBot, setQueryBot] = useState<string>("")
-  const [botsSelection, setBotsSelection] = useState<Set<IBot>>(new Set())
-
   const humans = users.filter((u) => !u.isBot)
   const isElligibleForELO = users.filter((u) => !u.isBot).length >= 2
   const averageElo = Math.round(
     humans.reduce((acc, u) => acc + u.elo, 0) / humans.length
   )
-
-  function sortBy(criteria: string) {
-    if (sortBotsCriteria === criteria) {
-      setSortBotsOrder(!sortBotsOrder)
-    } else {
-      setSortBotsCriteria(criteria)
-      setSortBotsOrder(false)
-    }
-  }
-
-  const botsListSorted = botsList
-    ? [...botsList]
-        .filter((b) => b.name.includes(queryBot))
-        .sort(
-          (a, b) =>
-            (a[sortBotsCriteria] < b[sortBotsCriteria] ? -1 : 1) *
-            (sortBotsOrder ? -1 : 1)
-        )
-    : null
 
   function makePrivate() {
     if (password === null) {
@@ -167,28 +152,43 @@ export default function PreparationMenu() {
       </div>
 
       {isOwner && (
-        <>
-          <div className="actions">
-            <Checkbox
-              checked={password != null}
-              onToggle={makePrivate}
-              label={`${t("private_lobby")} ${
-                password ? "Password: " + password : ""
-              }`}
-              isDark
-              title="Add a password to this room"
-            />
-            <Checkbox
-              checked={noElo}
-              onToggle={toggleElo}
-              label={t("just_for_fun")}
-              isDark
-              title="No ELO gain or loss for this game"
-            />
-            <div className="spacer"></div>
+        <div className="actions">
+          <Checkbox
+            checked={password != null}
+            onToggle={makePrivate}
+            label={`${t("private_lobby")} ${
+              password ? "Password: " + password : ""
+            }`}
+            isDark
+            title="Add a password to this room"
+          />
+          <Checkbox
+            checked={noElo}
+            onToggle={toggleElo}
+            label={t("just_for_fun")}
+            isDark
+            title="No ELO gain or loss for this game"
+          />
+          <div className="spacer"></div>
+          <div className="gadgets">
+            {profileLevel >= GADGETS.MAP.levelRequired && (
+              <div
+                onClick={() => {
+                  setModal("maps")
+                }}
+              >
+                <span>{t("map." + selectedMap)}</span>
+                <img width={48} height={48} src="assets/ui/map.svg" />
+              </div>
+            )}
           </div>
+        </div>
+      )}
+      {(isOwner ||
+        (user?.role && [Role.ADMIN, Role.MODERATOR].includes(user.role))) && (
+        <div className="actions">
           {user && !user.anonymous && (
-            <div className="actions">
+            <>
               <input
                 maxLength={30}
                 type="text"
@@ -206,9 +206,10 @@ export default function PreparationMenu() {
               >
                 {t("change_room_name")}
               </button>
-            </div>
+              {deleteRoomButton}
+            </>
           )}
-        </>
+        </div>
       )}
 
       <div className="actions">
@@ -218,7 +219,6 @@ export default function PreparationMenu() {
               className="bubbly blue"
               onClick={() => {
                 if (botDifficulty === BotDifficulty.CUSTOM) {
-                  setQueryBot("")
                   dispatch(listBots())
                 } else {
                   dispatch(addBot(botDifficulty))
@@ -278,86 +278,15 @@ export default function PreparationMenu() {
           </button>
         )}
       </div>
-      {user?.role && [Role.ADMIN, Role.MODERATOR].includes(user.role) ? (
-        <div className="actions">{deleteRoomButton}</div>
-      ) : null}
 
-      {isOwner && botsListSorted != null && (
-        <dialog open className="nes-container bots-list">
-          <header>
-            <h2>{t("select_bots_for_this_game")}</h2>
-            <div className="spacer"></div>
-            <input
-              type="search"
-              className="my-input"
-              style={{ maxWidth: "20ch" }}
-              placeholder="Search by name"
-              value={queryBot}
-              onInput={(e) => setQueryBot((e.target as HTMLInputElement).value)}
-            />
-            <button
-              onClick={() => {
-                sortBy("elo")
-              }}
-              className="bubbly pink"
-            >
-              {t("sort_by_elo")}
-            </button>
-            <button
-              onClick={() => {
-                sortBy("name")
-              }}
-              className="bubbly blue"
-            >
-              {t("sort_by_name")}
-            </button>
-          </header>
-          <ul>
-            {botsListSorted.map((bot) => (
-              <li
-                className={cc(
-                  "nes-container",
-                  "player-box",
-                  "preparation-menu-user",
-                  { selected: botsSelection.has(bot) }
-                )}
-                onClick={() => {
-                  if (botsSelection.has(bot)) {
-                    botsSelection.delete(bot)
-                  } else {
-                    botsSelection.add(bot)
-                  }
-                  setBotsSelection(new Set([...botsSelection]))
-                }}
-                key={"proposition-bot-" + bot.id}
-              >
-                <Elo elo={bot.elo} />
-                <InlineAvatar avatar={bot.avatar} name={bot.name} />
-              </li>
-            ))}
-          </ul>
-          {botsListSorted.length === 0 && <p>No bots found !</p>}
-          <footer className="actions">
-            <button
-              className="bubbly red"
-              onClick={() => {
-                dispatch(setBotsList(null))
-              }}
-            >
-              {t("cancel")}
-            </button>
-            <button
-              className="bubbly blue"
-              onClick={() => {
-                botsSelection.forEach((bot) => dispatch(addBot(bot)))
-                dispatch(setBotsList(null))
-              }}
-            >
-              {t("add")} {botsSelection.size} {t("bot")}
-              {botsSelection.size === 1 ? "" : "s"}
-            </button>
-          </footer>
-        </dialog>
+      {isOwner && botsList != null && <BotSelectModal bots={botsList} />}
+      {isOwner && (
+        <MapSelectModal
+          show={modal === "maps"}
+          handleClose={() => {
+            setModal(undefined)
+          }}
+        />
       )}
     </div>
   )

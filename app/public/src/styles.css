@@ -542,6 +542,11 @@ p:last-child {
   box-shadow: #2d334b 4px 4px 0px;
 }
 
+.player-box .player-name {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
 .player-box p {
   margin: 0;
 }

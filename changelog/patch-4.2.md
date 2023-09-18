@@ -23,6 +23,8 @@ Kartana, Chingling, Chimecho, Alolan Raichu, Dhelmise
 
 # Gameplay
 
+- New gadget: Map - Choose the map before game as room leader
+
 # UI
 
 # Bugfix

@@ -1,0 +1,37 @@
+#map-select-modal {
+  flex: 1;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(392px, auto));
+  grid-auto-rows: min-content;
+  padding: 0;
+  max-height: 85vh;
+  gap: 8px;
+  padding: 16px;
+  justify-content: space-evenly;
+  border-radius: 0 0 12px 12px;
+}
+
+#map-select-modal li {
+  list-style: none;
+  position: relative;
+  border: 4px solid black;
+}
+
+#map-select-modal li span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  text-shadow: 3px 3px 2px black, -3px -3px 2px black, -3px 3px 2px black,
+    3px -3px 2px black;
+}
+
+#map-select-modal li:hover {
+  cursor: var(--cursor-hover);
+  filter: contrast(1.1) brightness(1.1);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+}
