@@ -16,6 +16,7 @@ Kartana, Chingling, Chimecho, Alolan Raichu, Dhelmise
 - Nerf Machamp Attack ~~26~~ → 22
 - Buff Apple Acid: now also lower Defense
 - Buff Noctowl: Attack ~~6~~ → 10 ; Hypnosis duration: ~~3.5~~ → 4
+- Buff Mime Jr / Mr Mime: PP ~~90~~ → 85
 
 # Changes to Synergies
 
