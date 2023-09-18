@@ -913,7 +913,7 @@
   "ability_description.JUDGEMENT": "Infligge [10,SP] danni speciali al bersaglio, moltiplicati per la somma dei livelli di sinergia di Arceus",
   "ability_description.CHATTER": "Infliggi [10,SP] SPECIAL a tutti i nemici. Ogni nemico ha il [30,SP]% di possibilità di essere CONFUSION per 1 secondo",
   "ability_description.STEAM_ERUPTION": "Infligge [80,SP] SPECIAL al bersaglio e a tutti i nemici adiacenti, bruciandoli per 3 secondi",
-  "ability_description.APPLE_ACID": "Infligge [30,60,120,SP] SPECIAL al bersaglio e abbassa la sua SPE_DEF di 3 punti",
+  "ability_description.APPLE_ACID": "Infligge [30,60,120,SP] SPECIAL al bersaglio e abbassa la sua DEF e SPE_DEF di 3 punti",
   "ability_description.SACRED_SWORD": "Distribuisce [90,SP] TRUE al bersaglio",
   "ability_description.SHADOW_BALL": "Infligge [45,90,180,SP] SPECIAL e fa bruciare 15 PP al bersaglio e ai nemici adiacenti",
   "ability_description.DIVE": "Si tuffa sott'acqua e riappare nel mezzo della squadra nemica, infliggendo [15,30,60,SP] SPECIAL e FREEZE tutte le unità adiacenti per 1,5 secondi",

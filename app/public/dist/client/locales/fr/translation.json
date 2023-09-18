@@ -922,7 +922,7 @@
     "JUDGEMENT": "Inflige [10,SP] SPECIAL à la cible, multipliés par la somme des niveaux de synergies d'Arceus",
     "CHATTER": "Inflige [10,SP] SPECIAL à tous les ennemis. Chaque ennemi a [30,SP] % de chances d'être CONFUSION pendant 1 seconde",
     "STEAM_ERUPTION": "Inflige [80,SP] SPECIAL à la cible et à tous les ennemis adjacents, et les BURN pendant 3 secondes",
-    "APPLE_ACID": "Inflige [30,60,120,SP] SPECIAL à la cible et réduit sa SPE_DEF de 3 points",
+    "APPLE_ACID": "Inflige [30,60,120,SP] SPECIAL à la cible et réduit sa DEF et SPE_DEF de 3 points",
     "SACRED_SWORD": "Inflige [90,SP] TRUE à la cible",
     "SHADOW_BALL": "Inflige [45,90,180,SP] SPECIAL et brûle 15 PP à la cible et aux ennemis adjacents",
     "DIVE": "Plonge sous l'eau et réapparaît au milieu de l'équipe ennemie, infligeant [15,30,60,SP] SPECIAL et FREEZE toutes les unités adjacentes pendant 1,5 seconde",
