@@ -39,7 +39,12 @@
   justify-content: space-between;
   align-items: center;
   gap: 0.5em;
-  margin-bottom: 0.5em;
+  margin-top: 0.25em;
+}
+
+.preparation-menu .actions span {
+  color: white;
+  text-shadow: 1px 1px 2px black;
 }
 
 .preparation-menu .room-leader {
@@ -48,45 +53,4 @@
   text-shadow: 2px 2px 2px black;
   margin: 0 0.5em;
   text-align: left;
-}
-
-.preparation-menu .bots-list {
-  position: fixed;
-  color: white;
-  top: 5vh;
-  left: 5vw;
-  right: 5vw;
-  max-height: 90vh;
-  overflow-y: auto;
-  z-index: 20;
-  display: grid;
-  grid-template-rows: min-content 1fr min-content;
-  grid-template-columns: 1fr;
-}
-
-.preparation-menu .bots-list header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 8px;
-  gap: 8px;
-}
-
-.preparation-menu .bots-list ul {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, auto));
-  grid-auto-rows: min-content;
-  padding: 0;
-  overflow: auto;
-  width: 1320px;
-  max-width: 100%;
-  gap: 8px;
-}
-
-.preparation-menu .bots-list li:hover {
-  cursor: var(--cursor-hover);
-  filter: contrast(1.1) brightness(1.1);
-}
-
-.preparation-menu .bots-list li.selected {
-  background-color: #109fff;
 }

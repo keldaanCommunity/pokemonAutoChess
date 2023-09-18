@@ -167,6 +167,9 @@ export const networkSlice = createSlice({
     requestTilemap: (state) => {
       state.game?.send(Transfer.REQUEST_TILEMAP)
     },
+    selectTilemap: (state, action: PayloadAction<string>) => {
+      state.preparation?.send(Transfer.SELECT_TILEMAP, action.payload)
+    },
     refreshClick: (state) => {
       state.game?.send(Transfer.REFRESH)
     },
@@ -325,6 +328,7 @@ export const {
   toggleReady,
   toggleEloRoom,
   requestTilemap,
+  selectTilemap,
   itemClick,
   shopClick,
   levelClick,
