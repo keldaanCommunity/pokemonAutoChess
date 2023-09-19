@@ -1,5 +1,7 @@
 import React from "react"
-import PokemonFactory from "../../../../../models/pokemon-factory"
+import PokemonFactory, {
+  isAdditionalPick
+} from "../../../../../models/pokemon-factory"
 import { PrecomputedTypePokemon } from "../../../../../types"
 import { Synergy, SynergyEffects } from "../../../../../types/enum/Synergy"
 import PRECOMPUTED_TYPE_POKEMONS from "../../../../../models/precomputed/type-pokemons.json"
@@ -11,6 +13,8 @@ import SynergyIcon from "../icons/synergy-icon"
 import { EffectDescriptionComponent } from "./effect-description"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { useTranslation } from "react-i18next"
+import { cc } from "../../utils/jsx"
+import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 
 const precomputed = PRECOMPUTED_TYPE_POKEMONS as PrecomputedTypePokemon
 
@@ -66,42 +70,52 @@ export default function SynergyDetailComponent(props: {
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {precomputed[props.type].pokemons.map((p) => {
           const pokemon = PokemonFactory.createPokemonFromName(p as Pkm)
-          const s = { border: "3px solid " + RarityColor[pokemon.rarity] }
-          return <img key={p} style={s} src={getPortraitSrc(pokemon.index)} />
+          return <PokemonPortrait p={pokemon} />
         })}
       </div>
-      <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
-        {precomputed[props.type].uniquePokemons.map((p) => {
-          const pokemon = PokemonFactory.createPokemonFromName(p as Pkm)
-          const s = { border: "3px solid " + RarityColor[pokemon.rarity] }
-          return <img key={p} style={s} src={getPortraitSrc(pokemon.index)} />
-        })}
-      </div>
-      <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
-        {precomputed[props.type].legendaryPokemons.map((p) => {
-          const pokemon = PokemonFactory.createPokemonFromName(p as Pkm)
-          const s = { border: "3px solid " + RarityColor[pokemon.rarity] }
-          return <img key={p} style={s} src={getPortraitSrc(pokemon.index)} />
-        })}
-      </div>
-      {/*<div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
-        {precomputed[props.type].mythicalPokemons.map((p) => {
-          const pokemon = PokemonFactory.createPokemonFromName(p as Pkm)
-          const s = { border: "3px solid " + RarityColor[pokemon.rarity] }
-          return <img key={p} style={s} src={getPortraitSrc(pokemon.index)} />
-        })}
-      </div>*/}
       <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
         {precomputed[props.type].additionalPokemons.map((p) => {
           if (additionalPokemons.includes(p)) {
             const pokemon = PokemonFactory.createPokemonFromName(p as Pkm)
-            const s = { border: "3px solid " + RarityColor[pokemon.rarity] }
-            return <img key={p} style={s} src={getPortraitSrc(pokemon.index)} />
+            return <PokemonPortrait p={pokemon} />
           } else {
             return null
           }
         })}
       </div>
+      <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
+        {precomputed[props.type].uniquePokemons.map((p) => {
+          const pokemon = PokemonFactory.createPokemonFromName(p as Pkm)
+          return <PokemonPortrait p={pokemon} />
+        })}
+      </div>
+      <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
+        {precomputed[props.type].legendaryPokemons.map((p) => {
+          const pokemon = PokemonFactory.createPokemonFromName(p as Pkm)
+          return <PokemonPortrait p={pokemon} />
+        })}
+      </div>
+      {/*<div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
+        {precomputed[props.type].mythicalPokemons.map((p) => {
+          const pokemon = PokemonFactory.createPokemonFromName(p as Pkm)
+          return <PokemonPortrait p={pokemon} />
+        })}
+      </div>*/}
+    </div>
+  )
+}
+function PokemonPortrait(props: { p: Pokemon }) {
+  return (
+    <div
+      className={cc("pokemon-portrait", {
+        additional: isAdditionalPick(props.p.name)
+      })}
+      key={props.p.name}
+    >
+      <img
+        style={{ border: "3px solid " + RarityColor[props.p.rarity] }}
+        src={getPortraitSrc(props.p.index)}
+      />
     </div>
   )
 }
