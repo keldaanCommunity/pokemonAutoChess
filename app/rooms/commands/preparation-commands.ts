@@ -68,7 +68,7 @@ export class OnJoinCommand extends Command<
               false,
               u.title,
               u.role,
-              auth.email === undefined
+              auth.email === undefined && auth.photoURL === undefined
             )
           )
           if (u.uid == this.state.ownerId) {

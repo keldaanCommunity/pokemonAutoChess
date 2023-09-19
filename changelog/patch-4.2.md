@@ -40,4 +40,6 @@ Kartana, Chingling, Chimecho, Alolan Raichu, Dhelmise
 
 # Bugfix
 
+- Non-anonymous accounts without an email address can now talk in preparation chat like they do in main lobby chat
+
 # Misc
