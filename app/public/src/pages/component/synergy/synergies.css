@@ -4,7 +4,7 @@
   color: #fff;
   background-color: #61738a;
   font-size: 1em;
-  overflow: "visible";
+  overflow-y: auto;
 }
 
 #game-wrapper .synergies-container {
