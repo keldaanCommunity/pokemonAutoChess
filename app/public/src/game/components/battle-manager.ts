@@ -4300,7 +4300,7 @@ export default class BattleManager {
         "000"
       )
       sprite.setDepth(7)
-      sprite.setScale(3, 3)
+      sprite.setScale(4, 4)
       sprite.anims.play(Effect.GAS)
       this.boardEventSprites[index] = sprite
     }
