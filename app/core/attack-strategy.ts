@@ -1,6 +1,6 @@
 import { Item } from "../types/enum/Item"
 import { Effect } from "../types/enum/Effect"
-import { AttackType, Team } from "../types/enum/Game"
+import { AttackType, BoardEvent, Team } from "../types/enum/Game"
 import { Weather } from "../types/enum/Weather"
 import Board from "./board"
 import PokemonEntity from "./pokemon-entity"
@@ -2845,7 +2845,7 @@ export class ChargeStrategy extends AttackStrategy {
   }
 }
 
-export class SmogStrategy extends AttackStrategy {
+export class SludgeStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5398,5 +5398,28 @@ export class AnchorShotStrategy extends AttackStrategy {
         }
       }
     }
+  }
+}
+
+export class SmogStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+
+    cells.forEach((cell) => {
+      board.effects[cell.y * board.columns + cell.x] = Effect.GAS
+      pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
+        id: pokemon.simulation.id,
+        type: BoardEvent.GAS,
+        x: cell.x,
+        y: cell.y
+      })
+    })
   }
 }

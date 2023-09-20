@@ -115,7 +115,7 @@ export enum Ability {
   MISTY_SURGE = "MISTY_SURGE",
   SKY_ATTACK = "SKY_ATTACK",
   ILLUSION = "ILLUSION",
-  SMOG = "SMOG",
+  SLUDGE = "SLUDGE",
   AURORA_BEAM = "AURORA_BEAM",
   AGILITY = "AGILITY",
   SPIRIT_SHACKLE = "SPIRIT_SHACKLE",
@@ -205,7 +205,8 @@ export enum Ability {
   SMOKE_SCREEN = "SMOKE_SCREEN",
   PRESENT = "PRESENT",
   LEAF_BLADE = "LEAF_BLADE",
-  ANCHOR_SHOT = "ANCHOR_SHOT"
+  ANCHOR_SHOT = "ANCHOR_SHOT",
+  SMOG = "SMOG"
 }
 
 export const CopyableAbility: { [key in Ability]: boolean } = {
@@ -325,7 +326,7 @@ export const CopyableAbility: { [key in Ability]: boolean } = {
   [Ability.MISTY_SURGE]: true,
   [Ability.SKY_ATTACK]: true,
   [Ability.ILLUSION]: true,
-  [Ability.SMOG]: true,
+  [Ability.SLUDGE]: true,
   [Ability.AURORA_BEAM]: true,
   [Ability.AGILITY]: true,
   [Ability.SPIRIT_SHACKLE]: true,
@@ -415,5 +416,6 @@ export const CopyableAbility: { [key in Ability]: boolean } = {
   [Ability.SMOKE_SCREEN]: true,
   [Ability.PRESENT]: true,
   [Ability.LEAF_BLADE]: true,
-  [Ability.ANCHOR_SHOT]: true
+  [Ability.ANCHOR_SHOT]: true,
+  [Ability.SMOG]: true
 }
