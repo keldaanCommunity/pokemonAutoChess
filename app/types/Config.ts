@@ -4,6 +4,9 @@ import { Item } from "./enum/Item"
 import { AttackType, Rarity, Stat } from "./enum/Game"
 import { Emotion } from "."
 
+export const BOARD_WIDTH = 8
+export const BOARD_HEIGHT = 6
+
 export const RarityHpCost: { [key in Rarity]: number } = Object.freeze({
   [Rarity.COMMON]: 1,
   [Rarity.UNCOMMON]: 1,
@@ -168,6 +171,7 @@ export const PoolSize: { [key in Rarity]: [number, number, number] } = {
 }
 
 export const CommonShop = new Array<Pkm>(
+  Pkm.KOFFING, // TEMP
   Pkm.POLIWAG,
   Pkm.CHARMANDER,
   Pkm.GEODUDE,

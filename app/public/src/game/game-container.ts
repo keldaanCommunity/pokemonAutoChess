@@ -41,6 +41,7 @@ import Count from "../../../models/colyseus-models/count"
 import { Ability } from "../../../types/enum/Ability"
 import { Portal, SynergySymbol } from "../../../models/colyseus-models/portal"
 import Simulation from "../../../core/simulation"
+import { Effect } from "../../../types/enum/Effect"
 
 class GameContainer {
   room: Room<GameState>

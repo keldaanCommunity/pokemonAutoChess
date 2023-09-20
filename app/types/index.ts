@@ -627,6 +627,6 @@ export enum Title {
 
 export interface IBoardEvent {
   type: BoardEvent
-  x?: number
-  y?: number
+  x: number
+  y: number
 }

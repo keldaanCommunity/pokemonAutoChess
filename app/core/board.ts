@@ -1,4 +1,5 @@
 import { IPokemonEntity } from "../types"
+import { Effect } from "../types/enum/Effect"
 import { Orientation } from "../types/enum/Game"
 import { distanceC } from "../utils/distance"
 import { logger } from "../utils/logger"
@@ -14,11 +15,13 @@ export default class Board {
   rows: number
   columns: number
   cells: Array<PokemonEntity | undefined>
+  effects: Array<Effect | undefined>
 
   constructor(rows: number, colums: number) {
     this.rows = rows
     this.columns = colums
     this.cells = new Array<PokemonEntity | undefined>(this.rows * this.columns)
+    this.effects = new Array<Effect | undefined>(this.rows * this.columns)
   }
 
   getValue(x: number, y: number): PokemonEntity | undefined {
@@ -270,5 +273,11 @@ export default class Board {
     }
 
     return candidates[0].value === undefined ? candidates[0] : null
+  }
+
+  getEffectOnCell(x: number, y: number): Effect | undefined {
+    if (y >= 0 && y < this.rows && x >= 0 && x < this.columns) {
+      return this.effects[this.columns * y + x]
+    }
   }
 }

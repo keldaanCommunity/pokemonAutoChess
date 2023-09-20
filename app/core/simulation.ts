@@ -11,28 +11,16 @@ import {
   BattleResult,
   BoardEvent,
   PokemonActionState,
-  Rarity,
   Stat,
   Team
 } from "../types/enum/Game"
-import {
-  Weather,
-  WeatherAssociatedToSynergy,
-  WeatherEffects,
-  WeatherPassives
-} from "../types/enum/Weather"
+import { Weather, WeatherEffects } from "../types/enum/Weather"
 import Dps from "./dps"
 import DpsHeal from "./dps-heal"
 import ItemFactory from "../models/item-factory"
-import {
-  ISimulation,
-  IPokemonEntity,
-  IPokemon,
-  IPlayer,
-  Transfer
-} from "../types"
+import { ISimulation, IPokemonEntity, IPokemon, Transfer } from "../types"
 import { Synergy } from "../types/enum/Synergy"
-import { ItemStats } from "../types/Config"
+import { BOARD_HEIGHT, BOARD_WIDTH, ItemStats } from "../types/Config"
 import { getPath } from "../public/src/pages/utils/utils"
 import GameRoom from "../rooms/game-room"
 import { pickRandomIn, randomBetween } from "../utils/random"
@@ -54,7 +42,7 @@ export default class Simulation extends Schema implements ISimulation {
   room: GameRoom
   blueEffects = new Array<Effect>()
   redEffects = new Array<Effect>()
-  board: Board = new Board(6, 8)
+  board: Board = new Board(BOARD_HEIGHT, BOARD_WIDTH)
   finished = false
   flowerSpawn: boolean[] = [false, false]
   stageLevel = 0
@@ -82,7 +70,7 @@ export default class Simulation extends Schema implements ISimulation {
     this.stageLevel = stageLevel
     this.weather = weather
 
-    this.board = new Board(6, 8)
+    this.board = new Board(BOARD_HEIGHT, BOARD_WIDTH)
     this.blueEffects = bluePlayer?.effects?.list ?? []
     this.redEffects = redPlayer?.effects?.list ?? []
     // logger.debug({ blueEffects, redEffects })
@@ -1176,10 +1164,10 @@ export default class Simulation extends Schema implements ISimulation {
           )
         }
         this.room.broadcast(Transfer.BOARD_EVENT, {
+          id: this.id,
           type: BoardEvent.LIGHTNING,
           x,
-          y,
-          id: this.id
+          y
         })
       }
     }

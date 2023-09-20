@@ -2,14 +2,18 @@ import { GameObjects } from "phaser"
 import Pokemon from "./pokemon"
 import { transformAttackCoordinate } from "../../pages/utils/utils"
 import GameScene from "../scenes/game-scene"
-import { IPokemonEntity, NonFunctionPropNames } from "../../../../types"
+import {
+  IBoardEvent,
+  IPokemonEntity,
+  NonFunctionPropNames
+} from "../../../../types"
 import AnimationManager from "../animation-manager"
 import {
   AttackType,
   PokemonActionState,
   HealType,
-  Rarity,
-  Orientation
+  Orientation,
+  BoardEvent
 } from "../../../../types/enum/Game"
 import { Ability } from "../../../../types/enum/Ability"
 import { Item } from "../../../../types/enum/Item"
@@ -23,6 +27,8 @@ import { distanceE } from "../../../../utils/distance"
 import Status from "../../../../models/colyseus-models/status"
 import Simulation from "../../../../core/simulation"
 import Player from "../../../../models/colyseus-models/player"
+import { Effect } from "../../../../types/enum/Effect"
+import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../types/Config"
 
 export default class BattleManager {
   group: GameObjects.Group
@@ -30,6 +36,7 @@ export default class BattleManager {
   simulation: Simulation | undefined
   animationManager: AnimationManager
   player: Player
+  boardEventSprites: Array<GameObjects.Sprite | null>
 
   constructor(
     scene: GameScene,
@@ -43,6 +50,7 @@ export default class BattleManager {
     this.simulation = simulation
     this.animationManager = animationManager
     this.player = player
+    this.boardEventSprites = new Array(BOARD_WIDTH * BOARD_HEIGHT).fill(null)
   }
 
   get flip() {
@@ -90,7 +98,18 @@ export default class BattleManager {
   }
 
   clear() {
+    console.log("clear", this.boardEventSprites)
+    this.group.getChildren().forEach((p) => {
+      const pkm = p as Pokemon
+      if (pkm.projectile) {
+        pkm.projectile.destroy(true)
+      }
+    })
     this.group.clear(true, true)
+    this.boardEventSprites.forEach((sprite) => {
+      if (sprite) sprite.destroy(true)
+    })
+    this.boardEventSprites = new Array(BOARD_WIDTH * BOARD_HEIGHT).fill(null)
   }
 
   removePokemon(simulationId: string, pokemon: IPokemonEntity) {
@@ -1833,6 +1852,29 @@ export default class BattleManager {
               `000`
             )
             specialProjectile.setDepth(7)
+            specialProjectile.setScale(4, 4)
+            specialProjectile.anims.play(Ability.SMOG)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
+
+          case Ability.SLUDGE:
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.SMOG,
+              `000`
+            )
+            specialProjectile.setDepth(1)
             specialProjectile.setScale(3, 3)
             specialProjectile.anims.play(Ability.SMOG)
             specialProjectile.once(
@@ -4225,6 +4267,45 @@ export default class BattleManager {
     }
   }
 
+  displayBoardEvent(event: IBoardEvent) {
+    const coordinates = transformAttackCoordinate(event.x, event.y, this.flip)
+    const index = event.y * BOARD_WIDTH + event.x
+
+    const existingBoardEventSprite = this.boardEventSprites[index]
+    if (existingBoardEventSprite != null) {
+      existingBoardEventSprite.destroy(true)
+      this.boardEventSprites[index] = null
+    }
+
+    if (event.type === BoardEvent.LIGHTNING) {
+      const thunderSprite = this.scene.add.sprite(
+        coordinates[0],
+        coordinates[1],
+        "specials",
+        `${Ability.THUNDER}/000`
+      )
+      thunderSprite.setDepth(7)
+      thunderSprite.setScale(2, 2)
+      thunderSprite.anims.play(Ability.THUNDER)
+      thunderSprite.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+        thunderSprite.destroy()
+      })
+    }
+
+    if (event.type === BoardEvent.GAS) {
+      const sprite = this.scene.add.sprite(
+        coordinates[0],
+        coordinates[1],
+        Effect.GAS,
+        "000"
+      )
+      sprite.setDepth(7)
+      sprite.setScale(3, 3)
+      sprite.anims.play(Effect.GAS)
+      this.boardEventSprites[index] = sprite
+    }
+  }
+
   displayDamage(
     positionX: number,
     positionY: number,
@@ -4340,13 +4421,7 @@ export default class BattleManager {
 
   setSimulation(simulation: Simulation) {
     this.simulation = simulation
-    this.group.getChildren().forEach((p) => {
-      const pkm = p as Pokemon
-      if (pkm.projectile) {
-        pkm.projectile.destroy(true)
-      }
-    })
-    this.group.clear(true, true)
+    this.clear()
     this.buildPokemons()
   }
 

@@ -100,5 +100,6 @@ export enum Effect {
   NIGHT = "NIGHT",
   WINDY = "WINDY",
   HYDRATATION = "HYDRATATION",
-  COOL_BREEZE = "COOL_BREEZE"
+  COOL_BREEZE = "COOL_BREEZE",
+  GAS = "GAS"
 }
