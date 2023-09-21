@@ -33,6 +33,7 @@ export const POWER_SCORE_BY_CATEGORY = {
   "COMMON 2S T2": 2.5,
   "COMMON 3S T2": 2,
   "COMMON 3S T3": 4,
+  "COMMON 3S T4": 5,
   "UNCOMMON T1": 1.25,
   "UNCOMMON 2S T2": 3,
   "UNCOMMON 3S T2": 2.5,
