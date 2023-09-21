@@ -35,6 +35,7 @@ Kartana, Chingling, Chimecho, Alolan Raichu, Dhelmise
 # Gameplay
 
 - New gadget: Map - Choose the map before game as room leader
+- Not picking a portal at round 10 and 20 now gives you 6 random propositions instead of picking a random remaining portal
 
 # UI
 
