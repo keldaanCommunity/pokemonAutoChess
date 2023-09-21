@@ -362,6 +362,15 @@ export default function Game() {
         }
       })
 
+      room.onMessage(Transfer.SIMULATION_STOP, () => {
+        if (gameContainer.game) {
+          const g = getGameScene()
+          if (g && g.battle) {
+            g.battle.clear()
+          }
+        }
+      })
+
       room.onMessage(Transfer.GAME_END, leave)
 
       room.onMessage(Transfer.USER_PROFILE, (user: IUserMetadata) => {

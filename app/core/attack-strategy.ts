@@ -5410,10 +5410,23 @@ export class SmogStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+    const cells = board.getCellsInFront(pokemon, target)
+    const damage = pokemon.stars === 1 ? 10 : pokemon.stars === 2 ? 20 : 40
 
     cells.forEach((cell) => {
-      board.effects[cell.y * board.columns + cell.x] = Effect.GAS
+      const index = cell.y * board.columns + cell.x
+      if (board.effects[index] === Effect.GAS) return // already gas on this cell
+      board.effects[index] = Effect.GAS
+      if (cell.value) {
+        cell.value.effects.push(Effect.GAS)
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
       pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
         id: pokemon.simulation.id,
         type: BoardEvent.GAS,

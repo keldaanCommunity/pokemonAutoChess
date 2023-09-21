@@ -98,7 +98,6 @@ export default class BattleManager {
   }
 
   clear() {
-    console.log("clear", this.boardEventSprites)
     this.group.getChildren().forEach((p) => {
       const pkm = p as Pokemon
       if (pkm.projectile) {
@@ -106,9 +105,6 @@ export default class BattleManager {
       }
     })
     this.group.clear(true, true)
-    this.boardEventSprites.forEach((sprite) => {
-      if (sprite) sprite.destroy(true)
-    })
     this.boardEventSprites = new Array(BOARD_WIDTH * BOARD_HEIGHT).fill(null)
   }
 
@@ -1851,7 +1847,7 @@ export default class BattleManager {
               Ability.SMOG,
               `000`
             )
-            specialProjectile.setDepth(7)
+            specialProjectile.setDepth(1)
             specialProjectile.setScale(4, 4)
             specialProjectile.anims.play(Ability.SMOG)
             specialProjectile.once(
@@ -4273,7 +4269,7 @@ export default class BattleManager {
 
     const existingBoardEventSprite = this.boardEventSprites[index]
     if (existingBoardEventSprite != null) {
-      existingBoardEventSprite.destroy(true)
+      this.group.remove(existingBoardEventSprite, true, true)
       this.boardEventSprites[index] = null
     }
 
@@ -4300,9 +4296,17 @@ export default class BattleManager {
         "000"
       )
       sprite.setDepth(7)
-      sprite.setScale(4, 4)
+      sprite.setScale(3, 3)
+      sprite.setAlpha(0)
       sprite.anims.play(Effect.GAS)
       this.boardEventSprites[index] = sprite
+      this.group.add(sprite)
+
+      this.scene.tweens.add({
+        targets: sprite,
+        alpha: 1,
+        duration: 500
+      })
     }
   }
 

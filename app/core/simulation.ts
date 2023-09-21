@@ -1186,5 +1186,6 @@ export default class Simulation extends Schema implements ISimulation {
 
     this.weather = Weather.NEUTRAL
     this.winnerId = ""
+    this.room.broadcast(Transfer.SIMULATION_STOP)
   }
 }
