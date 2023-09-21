@@ -2854,13 +2854,14 @@ export class SludgeStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const buff = pokemon.stars === 3 ? 6 : pokemon.stars === 2 ? 4 : 2
-    pokemon.addDefense(buff, true)
-    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+    const nbStacks = pokemon.stars === 1 ? 2 : pokemon.stars === 2 ? 3 : 4
+    const cells = board.getCellsInFront(pokemon, target)
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.status.triggerPoison(3000, cell.value, pokemon, board)
+        for (let i = 0; i < nbStacks; i++) {
+          cell.value.status.triggerPoison(3000, cell.value, pokemon, board)
+        }
       }
     })
   }

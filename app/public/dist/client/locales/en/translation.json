@@ -945,7 +945,7 @@
     "MISTY_SURGE": "Increase SPE_DEF of all FAIRY pokemons by [5,SP]",
     "SKY_ATTACK": "Rises in the air and fall on the farthest target, PROTECT the attacker for .5 second and deals [120,SP] SPECIAL",
     "ILLUSION": "User recovers [30,50,70,SP=0.5] HP points and copies the form as well as the ATK,DEF, SPE_DEF, and RANGE of the targeted Pokemon",
-    "SLUDGE": "Buff DEF by [1,2,4,SP] and poison adjacent enemies for 3s",
+    "SLUDGE": "Throws trash onto the 3 squares in front, which inflicts [2,3,4] stacks of POISON for [3,SP] seconds",
     "SMOG": "Projects a cloud of stinking gas onto 3 tiles in front, dealing [10,20,40,SP] SPECIAL. Gas stays on board until the end of the fight and reduce the accuracy of pokemons inside by 50%.",
     "AURORA_BEAM": "Fires a beam in a line. All targets hit take [30,60,120,SP] SPECIAL and can be FREEZE (chance based on current ice synergy)",
     "AGILITY": "Increase ATK_SPEED by [10,20,30,SP] % (stacks)",

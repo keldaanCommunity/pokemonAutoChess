@@ -926,7 +926,6 @@
   "ability_description.MISTY_SURGE": "Verhoog SPE_DEF van alle FAIRY pokemons met [5,SP]",
   "ability_description.SKY_ATTACK": "Stijgt in de lucht en valt op het verste doelwit, PROTECT de aanvaller gedurende 0,5 seconde en deelt [120,SP] SPECIAL uit",
   "ability_description.ILLUSION": "Gebruiker herstelt [30,50,70,SP=0,5] HP-punten en kopieert het formulier evenals de ATK,DEF, SPE_DEF en RANGE van de gerichte Pokemon",
-  "ability_description.SLUDGE": "Verbeter DEF met [1,2,4,SP] en vergiftig aangrenzende vijanden gedurende 3s",
   "ability_description.AURORA_BEAM": "Vuurt een straal af in een lijn. Alle doelwitten raken [30,60,120,SP] SPECIAL en kunnen worden FREEZE (kans gebaseerd op huidige ijssynergie)",
   "ability_description.AGILITY": "Verhoog ATK_SPEED met [10,20,30,SP] % (stacks)",
   "ability_description.SPIRIT_SHACKLE": "Schiet een doordringende pijl die [30,60,90,SP] SPECIAL uitdeelt in een lijn achter het doelwit en verwondt gedurende 4 seconden op iedereen die wordt geraakt",

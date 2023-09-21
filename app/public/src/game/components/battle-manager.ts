@@ -1859,19 +1859,16 @@ export default class BattleManager {
             break
 
           case Ability.SLUDGE:
-            coordinates = transformAttackCoordinate(
-              positionX,
-              positionY,
-              this.flip
-            )
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
               Ability.SMOG,
               `000`
             )
-            specialProjectile.setDepth(1)
+            specialProjectile.setDepth(7)
             specialProjectile.setScale(3, 3)
+            specialProjectile.setTint(0xa0c020)
             specialProjectile.anims.play(Ability.SMOG)
             specialProjectile.once(
               Phaser.Animations.Events.ANIMATION_COMPLETE,

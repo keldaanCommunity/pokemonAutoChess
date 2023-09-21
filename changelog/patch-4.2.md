@@ -1,6 +1,12 @@
 # New Pokemons:
 
-Kartana, Chingling, Chimecho, Alolan Raichu, Dhelmise
+- Kartana
+- Chingling
+- Chimecho
+- Alolan Raichu
+- Dhelmise
+- Koffing
+- Weezing
 
 # Changes to Pokemon & Abilities
 
@@ -17,6 +23,7 @@ Kartana, Chingling, Chimecho, Alolan Raichu, Dhelmise
 - Buff Apple Acid: now also lower Defense
 - Buff Noctowl: Attack ~~6~~ → 10 ; Hypnosis duration: ~~3.5~~ → 4
 - Buff Mime Jr / Mr Mime: PP ~~90~~ → 85
+- New ability for Grimer / Alolan Grimer: Sludge - Throws trash onto the 3 squares in front, which inflicts 2/3 stacks of POISON for 3 seconds.
 
 # Changes to Synergies
 
@@ -35,6 +42,7 @@ Kartana, Chingling, Chimecho, Alolan Raichu, Dhelmise
 # Gameplay
 
 - New gadget: Map - Choose the map before game as room leader
+- New mechanic: board effects - Koffing ability Smog is an exemple of ability using this mechanic
 
 # UI
 

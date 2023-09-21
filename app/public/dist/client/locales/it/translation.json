@@ -926,7 +926,6 @@
   "ability_description.MISTY_SURGE": "Aumenta SPE_DEF di tutti i Pokémon FAIRY di [5,SP]",
   "ability_description.SKY_ATTACK": "Si alza in aria e cade sul bersaglio più lontano, PROTECT l'attaccante per 0,5 secondi e infligge [120 SP] SPECIAL",
   "ability_description.ILLUSION": "L'utente recupera [30,50,70,SP=0.5] punti HP e copia la forma, ATK, DEF, SPE_DEF e RANGE del Pokemon preso di mira",
-  "ability_description.SLUDGE": "Aumenta la DEF di [1,2,4,SP] e avvelena i nemici adiacenti per 3 secondi",
   "ability_description.AURORA_BEAM": "Spara un raggio in linea. Tutti i bersagli colpiti prendono [30,60,120,SP] SPECIAL e possono essere CONGELATI (probabilità basata sull'attuale sinergia di ghiaccio)",
   "ability_description.AGILITY": "Aumenta ATK_SPEED del [10,20,30,SP]% (stack)",
   "ability_description.SPIRIT_SHACKLE": "Scaglia una Freccia perforante che infligge [30,60,90,SP] SPECIAL in una linea dietro il bersaglio e infligge WOUND per 4 secondi a tutti quelli colpiti",
