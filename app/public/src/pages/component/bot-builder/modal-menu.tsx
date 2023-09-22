@@ -14,16 +14,16 @@ export default function ModalMenu(props: {
   importBot: (text: string) => void
   pasteBinUrl: string
   createBot: () => void
-  botData: IBot
   modalBoolean: boolean
 }) {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
+  const botData: IBot = useAppSelector((state) => state.lobby.botData)
   useEffect(() => {
-    if (props.botData?.avatar) {
-      handleTextAreaChange(JSON.stringify(props.botData))
+    if (botData?.avatar) {
+      handleTextAreaChange(JSON.stringify(botData))
     }
-  }, [props.botData])
+  }, [botData])
 
   const botList: {
     name: string

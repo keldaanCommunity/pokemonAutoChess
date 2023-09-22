@@ -919,7 +919,7 @@ export class AddBotCommand extends Command<
           this.room.bots.set(resultCreate.id, resultCreate)
           this.room.broadcast(
             Transfer.REQUEST_BOT_LIST,
-            createBotList(this.room.bots)
+            createBotList(this.room.bots, { withSteps: false })
           )
         } else {
           client.send(
@@ -982,7 +982,7 @@ export class DeleteBotCommand extends Command<
         this.room.bots.delete(id)
         this.room.broadcast(
           Transfer.REQUEST_BOT_LIST,
-          createBotList(this.room.bots)
+          createBotList(this.room.bots, { withSteps: true })
         )
       }
     } catch (error) {
@@ -992,23 +992,17 @@ export class DeleteBotCommand extends Command<
   }
 }
 
-export function createBotList(bots: Map<string, IBot>) {
-  const botList = new Array<{
-    name: string
-    avatar: string
-    author: string
-    id: string
-  }>()
-
-  bots.forEach((b) => {
-    botList.push({
-      name: b.name,
-      avatar: b.avatar,
-      id: b.id,
-      author: b.author
-    })
-  })
-  return botList
+export function createBotList(
+  bots: Map<string, IBot>,
+  options: { withSteps: boolean } = { withSteps: true }
+): Partial<IBot>[] {
+  return [...bots.values()].map((bot) => ({
+    name: bot.name,
+    avatar: bot.avatar,
+    id: bot.id,
+    author: bot.author,
+    ...(options.withSteps ? { steps: bot.steps } : {})
+  }))
 }
 
 export class OnBotUploadCommand extends Command<

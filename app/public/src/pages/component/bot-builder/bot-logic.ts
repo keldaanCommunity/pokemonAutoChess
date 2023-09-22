@@ -168,6 +168,7 @@ export function rewriteBotRoundsRequiredto1(bot: IBot) {
       oneSteps.push({ board: step.board, roundsRequired: 1 })
     }
   })
+  bot = structuredClone(bot)
   bot.steps = oneSteps
   return bot
 }
@@ -190,6 +191,18 @@ export function estimateElo(bot: IBot): number {
   if (averageScore < 80) return 1200
   if (averageScore < 90) return 1300
   return 1400
+}
+
+export function validateBot(bot: IBot) {
+  const errors: string[] = []
+  for (let stage = 0; stage < bot.steps.length; stage++) {
+    try {
+      validateBoard(bot.steps[stage].board, stage)
+    } catch (err) {
+      errors.push(`Stage ${stage}: ${err}`)
+    }
+  }
+  return errors
 }
 
 export function validateBoard(board: IDetailledPokemon[], stage: number) {

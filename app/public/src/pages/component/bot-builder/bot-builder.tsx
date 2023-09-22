@@ -1,14 +1,18 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router"
-import { Navigate } from "react-router-dom"
+import { Navigate, useSearchParams } from "react-router-dom"
 import ModalMenu from "./modal-menu"
 import {
   IBot,
   IDetailledPokemon
 } from "../../../../../models/mongo-models/bot-v2"
 import { useAppSelector, useAppDispatch } from "../../../hooks"
-import { createBot, requestBotList } from "../../../stores/NetworkStore"
+import {
+  createBot,
+  requestBotData,
+  requestBotList
+} from "../../../stores/NetworkStore"
 import { ModalMode, PkmWithConfig } from "../../../../../types"
 import {
   DEFAULT_BOT_STATE,
@@ -26,15 +30,17 @@ import "./bot-builder.css"
 import ScoreIndicator from "./score-indicator"
 import { max, min } from "../../../../../utils/number"
 import store from "../../../stores"
-import { join } from "../../lobby"
+import { joinLobbyRoom } from "../../lobby"
 import DiscordButton from "../buttons/discord-button"
 import { getAvatarString } from "../../../utils"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
+import { logger } from "../../../../../utils/logger"
 
 export default function BotBuilder() {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const [queryParams, setQueryParams] = useSearchParams()
   const [currentStage, setStage] = useState<number>(1)
   const [bot, setBot] = useState<IBot>(DEFAULT_BOT_STATE)
   const [modalMode, setModalMode] = useState<ModalMode>(ModalMode.IMPORT)
@@ -45,6 +51,7 @@ export default function BotBuilder() {
   const botData: IBot = useAppSelector((state) => state.lobby.botData)
   const bots = useAppSelector((state) => state.lobby.botList)
   const displayName = useAppSelector((state) => state.lobby.user?.name)
+  const lobby = useAppSelector((state) => state.lobby)
 
   useEffect(() => {
     const onKey = (ev: KeyboardEvent) => {
@@ -62,10 +69,28 @@ export default function BotBuilder() {
   useEffect(() => {
     const client = store.getState().network.client
     if (!lobbyJoined.current) {
-      join(dispatch, client, setToAuth)
+      joinLobbyRoom(dispatch, client).catch((err) => {
+        logger.error(err)
+        setToAuth(true)
+      })
       lobbyJoined.current = true
     }
   }, [lobbyJoined, dispatch])
+
+  useEffect(() => {
+    const botId = queryParams.get("bot")
+    if (botId && lobby) {
+      if (botData && botData.id === botId) {
+        // import by query param
+        setBot(rewriteBotRoundsRequiredto1(botData))
+        logger.debug(`bot ${botId} imported`)
+      } else {
+        logger.debug(`loading bot ${botId}`)
+        // query param but no matching bot data, so we request it
+        dispatch(requestBotData(botId))
+      }
+    }
+  }, [lobby, queryParams, botData])
 
   if (toAuth) {
     return <Navigate to={"/"} />
@@ -87,15 +112,18 @@ export default function BotBuilder() {
     }
   }, [currentStage])
 
-  if (bots.length === 0) {
-    dispatch(requestBotList())
-  }
+  useEffect(() => {
+    if (bots.length === 0) {
+      dispatch(requestBotList())
+    }
+  }, [bots])
 
   function importBot(text: string) {
     try {
       const b: IBot = JSON.parse(text)
       setBot(rewriteBotRoundsRequiredto1(b))
       setModalBoolean(false)
+      setQueryParams({ bot: b.id })
     } catch (e) {
       alert(e)
     }
@@ -108,6 +136,11 @@ export default function BotBuilder() {
   }
 
   function completeBotInfo() {
+    if (bot.id) {
+      // fork existing bot
+      setQueryParams({})
+      bot.id = ""
+    }
     setBot({
       ...bot,
       author: displayName ?? "Anonymous",
@@ -230,7 +263,6 @@ export default function BotBuilder() {
         importBot={importBot}
         pasteBinUrl={pastebinUrl}
         createBot={create}
-        botData={botData}
       />
     </div>
   )
