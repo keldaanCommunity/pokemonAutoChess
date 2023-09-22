@@ -274,7 +274,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       !this.status.protect &&
       !this.status.resurecting
     ) {
-      this.pp = Math.max(0, Math.min(pp, this.maxPP))
+      this.pp = clamp(pp, 0, this.maxPP)
     }
   }
 

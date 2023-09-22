@@ -923,7 +923,7 @@
   "ability_description.SPARKLING_ARIA": "Infligge [15,30,60,SP] SPECIAL al bersaglio e ai nemici adiacenti. Se gli alleati adiacenti sono USTIONI, l'ustione viene curata.",
   "ability_description.DRAGON_DARTS": "Lancia 3 freccette che infliggono [10,25,50,SP] SPECIAL al bersaglio. Se il bersaglio muore, recupera 40 PP.",
   "ability_description.GRASSY_SURGE": "Aumenta l'ATK di tutti i Pokémon GRASS di [5,SP]",
-  "ability_description.MISTY_SURGE": "Aumenta SPE_DEF di tutti i Pokémon FAIRY di [5,SP]",
+  "ability_description.MISTY_SURGE": "Dai [30,SP] PP agli alleati FAIRY",
   "ability_description.SKY_ATTACK": "Si alza in aria e cade sul bersaglio più lontano, PROTECT l'attaccante per 0,5 secondi e infligge [120 SP] SPECIAL",
   "ability_description.ILLUSION": "L'utente recupera [30,50,70,SP=0.5] punti HP e copia la forma, ATK, DEF, SPE_DEF e RANGE del Pokemon preso di mira",
   "ability_description.AURORA_BEAM": "Spara un raggio in linea. Tutti i bersagli colpiti prendono [30,60,120,SP] SPECIAL e possono essere CONGELATI (probabilità basata sull'attuale sinergia di ghiaccio)",
