@@ -44,7 +44,7 @@ export default function BotBuilder() {
   const [currentStage, setStage] = useState<number>(1)
   const [bot, setBot] = useState<IBot>(DEFAULT_BOT_STATE)
   const [modalMode, setModalMode] = useState<ModalMode>(ModalMode.IMPORT)
-  const [modalBoolean, setModalBoolean] = useState<boolean>(false)
+  const [modalVisible, setModalVisible] = useState<boolean>(false)
   const [violation, setViolation] = useState<string>()
 
   const pastebinUrl: string = useAppSelector((state) => state.lobby.pastebinUrl)
@@ -84,7 +84,7 @@ export default function BotBuilder() {
         // import by query param
         setBot(rewriteBotRoundsRequiredto1(structuredClone(botData)))
         logger.debug(`bot ${botId} imported`)
-      } else if (!botData) {
+      } else if (!modalVisible) {
         logger.debug(`loading bot ${botId}`)
         // query param but no matching bot data, so we request it
         dispatch(requestBotData(botId))
@@ -122,7 +122,7 @@ export default function BotBuilder() {
     try {
       const b: IBot = JSON.parse(text)
       setBot(rewriteBotRoundsRequiredto1(b))
-      setModalBoolean(false)
+      setModalVisible(false)
       setQueryParams({ bot: b.id })
     } catch (e) {
       alert(e)
@@ -196,7 +196,7 @@ export default function BotBuilder() {
         <button
           onClick={() => {
             setModalMode(ModalMode.IMPORT)
-            setModalBoolean(true)
+            setModalVisible(true)
           }}
           className="bubbly orange"
         >
@@ -206,7 +206,7 @@ export default function BotBuilder() {
           onClick={() => {
             completeBotInfo()
             setModalMode(ModalMode.EXPORT)
-            setModalBoolean(true)
+            setModalVisible(true)
           }}
           className="bubbly orange"
         >
@@ -250,14 +250,14 @@ export default function BotBuilder() {
       />
 
       <ModalMenu
-        modalBoolean={modalBoolean}
+        visible={modalVisible}
         showModal={(mode: ModalMode) => {
           setModalMode(mode)
-          setModalBoolean(true)
+          setModalVisible(true)
         }}
         bot={bot}
         hideModal={() => {
-          setModalBoolean(false)
+          setModalVisible(false)
         }}
         modalMode={modalMode}
         importBot={importBot}
