@@ -82,9 +82,9 @@ export default function BotBuilder() {
     if (botId && lobby) {
       if (botData && botData.id === botId) {
         // import by query param
-        setBot(rewriteBotRoundsRequiredto1(botData))
+        setBot(rewriteBotRoundsRequiredto1(structuredClone(botData)))
         logger.debug(`bot ${botId} imported`)
-      } else {
+      } else if (!botData) {
         logger.debug(`loading bot ${botId}`)
         // query param but no matching bot data, so we request it
         dispatch(requestBotData(botId))
@@ -113,10 +113,10 @@ export default function BotBuilder() {
   }, [currentStage])
 
   useEffect(() => {
-    if (bots.length === 0) {
+    if (lobby && bots.length === 0) {
       dispatch(requestBotList())
     }
-  }, [bots])
+  }, [bots, lobby])
 
   function importBot(text: string) {
     try {
