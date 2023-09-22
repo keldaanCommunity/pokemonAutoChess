@@ -1,7 +1,10 @@
 import { IPokemonEntity } from "../types"
+import { Effect } from "../types/enum/Effect"
 import { Orientation } from "../types/enum/Game"
+import { removeInArray } from "../utils/array"
 import { distanceC } from "../utils/distance"
 import { logger } from "../utils/logger"
+import { OrientationArray, OrientationVector } from "../utils/orientation"
 import { pickRandomIn } from "../utils/random"
 import PokemonEntity from "./pokemon-entity"
 
@@ -14,11 +17,13 @@ export default class Board {
   rows: number
   columns: number
   cells: Array<PokemonEntity | undefined>
+  effects: Array<Effect | undefined>
 
   constructor(rows: number, colums: number) {
     this.rows = rows
     this.columns = colums
     this.cells = new Array<PokemonEntity | undefined>(this.rows * this.columns)
+    this.effects = new Array<Effect | undefined>(this.rows * this.columns)
   }
 
   getValue(x: number, y: number): PokemonEntity | undefined {
@@ -29,10 +34,28 @@ export default class Board {
 
   setValue(x: number, y: number, value: PokemonEntity | undefined) {
     if (y >= 0 && y < this.rows && x >= 0 && x < this.columns) {
-      this.cells[this.columns * y + x] = value
+      const index = this.columns * y + x
+      this.cells[index] = value
       if (value) {
+        const effectOnPreviousCell =
+          this.effects[value.positionY * this.columns + value.positionX]
+        if (effectOnPreviousCell != null) {
+          /*logger.debug(
+            `${value.name} lost effect ${effectOnPreviousCell} by moving out of board effect`
+          )*/
+          removeInArray(value.effects, effectOnPreviousCell)
+        }
+
         value.positionX = x
         value.positionY = y
+
+        const effectOnNewCell = this.effects[index]
+        if (effectOnNewCell != null) {
+          /*logger.debug(
+            `${value.name} gained effect ${effectOnNewCell} by moving into board effect`
+          )*/
+          value.effects.push(effectOnNewCell)
+        }
       }
     }
   }
@@ -142,6 +165,33 @@ export default class Board {
         }
       }
     }
+    return cells
+  }
+
+  getCellsInFront(pokemon: PokemonEntity, target: PokemonEntity) {
+    const cells = new Array<Cell>()
+
+    pokemon.orientation = this.orientation(
+      pokemon.positionX,
+      pokemon.positionY,
+      target.positionX,
+      target.positionY,
+      pokemon,
+      target
+    )
+
+    const orientations = [
+      pokemon.orientation,
+      OrientationArray[(OrientationArray.indexOf(pokemon.orientation) + 1) % 8],
+      OrientationArray[(OrientationArray.indexOf(pokemon.orientation) + 7) % 8]
+    ]
+
+    orientations.forEach((orientation) => {
+      let x = pokemon.positionX + OrientationVector[orientation][0]
+      let y = pokemon.positionY + OrientationVector[orientation][1]
+      cells.push({ x, y, value: this.cells[this.columns * y + x] })
+    })
+
     return cells
   }
 
@@ -270,5 +320,11 @@ export default class Board {
     }
 
     return candidates[0].value === undefined ? candidates[0] : null
+  }
+
+  getEffectOnCell(x: number, y: number): Effect | undefined {
+    if (y >= 0 && y < this.rows && x >= 0 && x < this.columns) {
+      return this.effects[this.columns * y + x]
+    }
   }
 }

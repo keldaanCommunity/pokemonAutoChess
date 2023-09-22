@@ -610,9 +610,10 @@ import {
   Chimecho,
   Chingling,
   AlolanRaichu,
-  Dhelmise
+  Dhelmise,
+  Koffing,
+  Weezing
 } from "./colyseus-models/pokemon"
-import { IPokemonConfig } from "./mongo-models/user-metadata"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
 
 export default class PokemonFactory {
@@ -2018,6 +2019,10 @@ export default class PokemonFactory {
         return new AlolanRaichu(s, e)
       case Pkm.DHELMISE:
         return new Dhelmise(s, e)
+      case Pkm.KOFFING:
+        return new Koffing(s, e)
+      case Pkm.WEEZING:
+        return new Weezing(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:

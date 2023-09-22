@@ -175,6 +175,7 @@ export enum Transfer {
   BOT_DATABASE_LOG = "BOT_DATABASE_LOG",
   UNBAN = "UNBAN",
   BOARD_EVENT = "BOARD_EVENT",
+  SIMULATION_STOP = "SIMULATION_STOP",
   ABILITY = "ABILITY",
   SELECT_LANGUAGE = "SELECT_LANGUAGE",
   USER_PROFILE = "USER_PROFILE"
@@ -627,6 +628,6 @@ export enum Title {
 
 export interface IBoardEvent {
   type: BoardEvent
-  x?: number
-  y?: number
+  x: number
+  y: number
 }

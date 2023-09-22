@@ -70,14 +70,14 @@ export default function SynergyDetailComponent(props: {
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {precomputed[props.type].pokemons.map((p) => {
           const pokemon = PokemonFactory.createPokemonFromName(p as Pkm)
-          return <PokemonPortrait p={pokemon} />
+          return <PokemonPortrait p={pokemon} key={p} />
         })}
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
         {precomputed[props.type].additionalPokemons.map((p) => {
           if (additionalPokemons.includes(p)) {
             const pokemon = PokemonFactory.createPokemonFromName(p as Pkm)
-            return <PokemonPortrait p={pokemon} />
+            return <PokemonPortrait p={pokemon} key={p} />
           } else {
             return null
           }
@@ -86,13 +86,13 @@ export default function SynergyDetailComponent(props: {
       <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
         {precomputed[props.type].uniquePokemons.map((p) => {
           const pokemon = PokemonFactory.createPokemonFromName(p as Pkm)
-          return <PokemonPortrait p={pokemon} />
+          return <PokemonPortrait p={pokemon} key={p} />
         })}
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
         {precomputed[props.type].legendaryPokemons.map((p) => {
           const pokemon = PokemonFactory.createPokemonFromName(p as Pkm)
-          return <PokemonPortrait p={pokemon} />
+          return <PokemonPortrait p={pokemon} key={p} />
         })}
       </div>
       {/*<div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>

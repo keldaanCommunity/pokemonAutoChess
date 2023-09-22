@@ -14,6 +14,7 @@ import durations from "../../dist/client/assets/pokemons/durations.json"
 import indexList from "../../dist/client/assets/pokemons/indexList.json"
 import { logger } from "../../../utils/logger"
 import { AnimationConfig, Pkm, PkmIndex } from "../../../types/enum/Pokemon"
+import { Effect } from "../../../types/enum/Effect"
 
 export default class AnimationManager {
   game: Phaser.Scene
@@ -98,6 +99,7 @@ export default class AnimationManager {
     })
     this.createAttacksAnimations()
     this.createSpecialAttacksAnimations()
+    this.createZoneEffectsAnimations()
     this.createMinigameAnimations()
     createStatusAnimations(this.game)
   }
@@ -1584,6 +1586,19 @@ export default class AnimationManager {
       }),
       duration: 1000,
       repeat: 0
+    })
+  }
+
+  createZoneEffectsAnimations() {
+    this.game.anims.create({
+      key: Effect.GAS,
+      frames: this.game.anims.generateFrameNames(Effect.GAS, {
+        start: 0,
+        end: 3,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: -1
     })
   }
 

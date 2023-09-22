@@ -370,16 +370,6 @@ export default class BoardManager {
     return benchSize
   }
 
-  handleBoardEvent(event: IBoardEvent) {
-    if (
-      event.type === BoardEvent.LIGHTNING &&
-      event.x != null &&
-      event.y != null
-    ) {
-      this.triggerLightning(event.x, event.y)
-    }
-  }
-
   toggleAnimation(playerId: string, emote?: string) {
     const player =
       this.playerAvatar.playerId === playerId
@@ -398,21 +388,5 @@ export default class BoardManager {
         player.drawSpeechBubble(emote, false)
       }
     }
-  }
-
-  triggerLightning(x: number, y: number) {
-    const coordinates = transformAttackCoordinate(x, y, false)
-    const thunderSprite = this.scene.add.sprite(
-      coordinates[0],
-      coordinates[1],
-      "specials",
-      `${Ability.THUNDER}/000`
-    )
-    thunderSprite.setDepth(7)
-    thunderSprite.setScale(2, 2)
-    thunderSprite.anims.play(Ability.THUNDER)
-    thunderSprite.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
-      thunderSprite.destroy()
-    })
   }
 }

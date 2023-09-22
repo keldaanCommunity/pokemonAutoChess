@@ -596,7 +596,9 @@ export enum Pkm {
   CHINGLING = "CHINGLING",
   CHIMECHO = "CHIMECHO",
   ALOLAN_RAICHU = "ALOLAN_RAICHU",
-  DHELMISE = "DHELMISE"
+  DHELMISE = "DHELMISE",
+  KOFFING = "KOFFING",
+  WEEZING = "WEEZING"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -704,6 +706,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.MAGNEMITE]: "0081",
   [Pkm.MAGNETON]: "0082",
   [Pkm.MAGNEZONE]: "0462",
+  [Pkm.KOFFING]: "0109",
+  [Pkm.WEEZING]: "0110",
   [Pkm.RHYHORN]: "0111",
   [Pkm.RHYDON]: "0112",
   [Pkm.RHYPERIOR]: "0464",
@@ -1794,7 +1798,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.CHINGLING]: Pkm.CHINGLING,
   [Pkm.CHIMECHO]: Pkm.CHINGLING,
   [Pkm.ALOLAN_RAICHU]: Pkm.PICHU,
-  [Pkm.DHELMISE]: Pkm.DHELMISE
+  [Pkm.DHELMISE]: Pkm.DHELMISE,
+  [Pkm.KOFFING]: Pkm.KOFFING,
+  [Pkm.WEEZING]: Pkm.WEEZING
 }
 
 export enum PkmDuo {
@@ -4904,6 +4910,16 @@ export const AnimationConfig: {
   [Pkm.DHELMISE]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.KOFFING]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Gas,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.WEEZING]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Gas,
     emote: AnimationType.Shoot
   }
 }
