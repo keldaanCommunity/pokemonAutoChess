@@ -8,7 +8,7 @@ import { PokemonActionState } from "../types/enum/Game"
 import { chance } from "../utils/random"
 import { distanceC } from "../utils/distance"
 import { Synergy } from "../types/enum/Synergy"
-import { min } from "../utils/number"
+import { max, min } from "../utils/number"
 
 export default class AttackingState extends PokemonState {
   update(pokemon: PokemonEntity, dt: number, board: Board, weather: string) {
@@ -123,8 +123,14 @@ export default class AttackingState extends PokemonState {
       }
 
       let isAttackSuccessful = true
+      let dodgeChance = target.dodge
+      if (pokemon.effects.includes(Effect.GAS)) {
+        dodgeChance += 0.5
+      }
+      dodgeChance = max(0.9)(dodgeChance)
+
       if (
-        chance(target.dodge) &&
+        chance(dodgeChance) &&
         !pokemon.items.has(Item.XRAY_VISION) &&
         !target.status.paralysis &&
         !target.status.sleep &&

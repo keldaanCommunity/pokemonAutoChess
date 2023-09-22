@@ -926,7 +926,6 @@
   "ability_description.MISTY_SURGE": "全てのフェアリーポケモンのSPE_DEFを[5,SP]増加させる",
   "ability_description.SKY_ATTACK": "空中に上昇し、最も遠いターゲットに落下し、攻撃者を0.5秒間保護し、[120,SP] SPECIALを与える",
   "ability_description.ILLUSION": "使用者はHPを[30,50,70,SP=0.5]回復し、対象のポケモンの姿とATK・DEF・SPE_DEF・RANGEをコピーする",
-  "ability_description.SMOG": "DEFを[1,2,4,SP]増加させ、隣接する敵に3秒間毒を与える",
   "ability_description.AURORA_BEAM": "一列にビームを発射します。ヒットしたすべてのターゲットは [30,60,120,SP] SPECIAL を取得し、フリーズすることができます (現在の氷の相乗効果に基づく確率)",
   "ability_description.AGILITY": "ATK_SPEEDを[10,20,30,SP]%増加(重複)",
   "ability_description.SPIRIT_SHACKLE": "[30,60,90,SP]SPECIALを与える貫通矢をターゲットの後ろ一列に発射し、命中した全員に4秒間WOUNDを適用する",

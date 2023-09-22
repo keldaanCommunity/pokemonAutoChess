@@ -117,7 +117,7 @@ import {
   MistySurgeStrategy,
   SkyAttackStrategy,
   IllusionStrategy,
-  SmogStrategy,
+  SludgeStrategy,
   AuroraBeamStrategy,
   AgilityStrategy,
   SpiritShackleStrategy,
@@ -178,7 +178,8 @@ import {
   SmokeScreenStrategy,
   PresentStrategy,
   LeafBladeStrategy,
-  AnchorShotStrategy
+  AnchorShotStrategy,
+  SmogStrategy
 } from "../attack-strategy"
 import {
   HiddenPowerAStrategy,
@@ -332,7 +333,7 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.MISTY_SURGE]: new MistySurgeStrategy(),
   [Ability.SKY_ATTACK]: new SkyAttackStrategy(),
   [Ability.ILLUSION]: new IllusionStrategy(),
-  [Ability.SMOG]: new SmogStrategy(),
+  [Ability.SLUDGE]: new SludgeStrategy(),
   [Ability.AURORA_BEAM]: new AuroraBeamStrategy(),
   [Ability.AGILITY]: new AgilityStrategy(),
   [Ability.SPIRIT_SHACKLE]: new SpiritShackleStrategy(),
@@ -420,5 +421,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.SMOKE_SCREEN]: new SmokeScreenStrategy(),
   [Ability.PRESENT]: new PresentStrategy(),
   [Ability.LEAF_BLADE]: new LeafBladeStrategy(),
-  [Ability.ANCHOR_SHOT]: new AnchorShotStrategy()
+  [Ability.ANCHOR_SHOT]: new AnchorShotStrategy(),
+  [Ability.SMOG]: new SmogStrategy()
 }

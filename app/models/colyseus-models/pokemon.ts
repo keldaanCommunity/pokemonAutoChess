@@ -13204,7 +13204,7 @@ export class Grimer extends Pokemon {
       AttackSprite.POISON_MELEE,
       1,
       100,
-      Ability.SMOG,
+      Ability.SLUDGE,
       shiny,
       emotion,
       false,
@@ -13228,7 +13228,7 @@ export class Muk extends Pokemon {
       AttackSprite.POISON_MELEE,
       2,
       100,
-      Ability.SMOG,
+      Ability.SLUDGE,
       shiny,
       emotion,
       true,
@@ -13252,7 +13252,7 @@ export class AlolanGrimer extends Pokemon {
       AttackSprite.POISON_MELEE,
       1,
       100,
-      Ability.SMOG,
+      Ability.SLUDGE,
       shiny,
       emotion,
       false,
@@ -13276,7 +13276,7 @@ export class AlolanMuk extends Pokemon {
       AttackSprite.POISON_MELEE,
       2,
       100,
-      Ability.SMOG,
+      Ability.SLUDGE,
       shiny,
       emotion,
       true,
@@ -14150,6 +14150,54 @@ export class Dhelmise extends Pokemon {
       Ability.ANCHOR_SHOT,
       shiny,
       emotion,
+      true
+    )
+  }
+}
+
+export class Koffing extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.KOFFING,
+      [Synergy.POISON, Synergy.ARTIFICIAL],
+      Rarity.UNCOMMON,
+      Pkm.WEEZING,
+      85,
+      5,
+      3,
+      3,
+      1,
+      AttackSprite.POISON_MELEE,
+      1,
+      40,
+      Ability.SMOG,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Weezing extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.WEEZING,
+      [Synergy.POISON, Synergy.ARTIFICIAL],
+      Rarity.UNCOMMON,
+      Pkm.DEFAULT,
+      190,
+      10,
+      5,
+      5,
+      1,
+      AttackSprite.POISON_MELEE,
+      2,
+      40,
+      Ability.SMOG,
+      shiny,
+      emotion,
+      true,
       true
     )
   }

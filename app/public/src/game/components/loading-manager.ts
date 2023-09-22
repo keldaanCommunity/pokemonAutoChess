@@ -533,6 +533,7 @@ export default class LoadingManager {
       "/assets/attacks/GRASS_HEAL.json",
       "/assets/attacks"
     )
+    scene.load.multiatlas("GAS", "/assets/attacks/GAS.json", "/assets/attacks")
   }
 }
 

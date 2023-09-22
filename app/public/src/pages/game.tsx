@@ -356,8 +356,17 @@ export default function Game() {
       room.onMessage(Transfer.BOARD_EVENT, (event: IBoardEvent) => {
         if (gameContainer.game) {
           const g = getGameScene()
-          if (g && g.board) {
-            g.board.handleBoardEvent(event)
+          if (g && g.battle) {
+            g.battle.displayBoardEvent(event)
+          }
+        }
+      })
+
+      room.onMessage(Transfer.SIMULATION_STOP, () => {
+        if (gameContainer.game) {
+          const g = getGameScene()
+          if (g && g.battle) {
+            g.battle.clear()
           }
         }
       })
