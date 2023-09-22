@@ -865,6 +865,7 @@ export class ElectroWebStrategy extends AttackStrategy {
     } else if (pokemon.stars == 3) {
       steal = 60
     }
+    steal = Math.round(steal * (1 + pokemon.ap / 100))
     board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
       .forEach((cell) => {
@@ -1413,23 +1414,11 @@ export class GrowlStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let d = 0
-    switch (pokemon.stars) {
-      case 1:
-        d = 3000
-        break
-      case 2:
-        d = 6000
-        break
-      case 3:
-        d = 9000
-        break
-      default:
-        break
-    }
+    let duration = [3000, 6000, 9000][pokemon.stars - 1] ?? 9000
+    duration = Math.round(duration * (1 + pokemon.ap / 100))
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
-        tg.status.triggerWound(d, tg, pokemon, board)
+        tg.status.triggerWound(duration, tg, pokemon, board)
       }
     })
   }
