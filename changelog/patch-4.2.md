@@ -42,10 +42,16 @@
 # Gameplay
 
 - New gadget: Map - Choose the map before game as room leader
+
 - New mechanic: board effects - Koffing ability Smog is an exemple of ability using this mechanic
+
+- Not picking a portal at round 10 and 20 now gives you 6 random propositions instead of picking a random remaining portal
+
 
 # UI
 
 # Bugfix
+
+- Non-anonymous accounts without an email address can now talk in preparation chat like they do in main lobby chat
 
 # Misc

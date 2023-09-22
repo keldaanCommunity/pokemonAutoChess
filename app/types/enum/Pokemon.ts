@@ -1789,7 +1789,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.SHELLDER]: Pkm.SHELLDER,
   [Pkm.CLOYSTER]: Pkm.SHELLDER,
   [Pkm.SENTRET]: Pkm.SENTRET,
-  [Pkm.FURRET]: Pkm.FURRET,
+  [Pkm.FURRET]: Pkm.SENTRET,
   [Pkm.SPECTRIER]: Pkm.SPECTRIER,
   [Pkm.TORKOAL]: Pkm.TORKOAL,
   [Pkm.DELIBIRD]: Pkm.DELIBIRD,

@@ -35,7 +35,7 @@ export default function BotBuilder() {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const [currentStage, setStage] = useState<number>(0)
+  const [currentStage, setStage] = useState<number>(1)
   const [bot, setBot] = useState<IBot>(DEFAULT_BOT_STATE)
   const [modalMode, setModalMode] = useState<ModalMode>(ModalMode.IMPORT)
   const [modalBoolean, setModalBoolean] = useState<boolean>(false)
@@ -72,7 +72,7 @@ export default function BotBuilder() {
   }
 
   const prevStep = useCallback(
-    () => setStage(min(0)(currentStage - 1)),
+    () => setStage(min(1)(currentStage - 1)),
     [currentStage]
   )
   const nextStep = useCallback(

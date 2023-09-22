@@ -204,33 +204,27 @@ export function validateBoard(board: IDetailledPokemon[], stage: number) {
   const mythicals = team.filter((p) => p.rarity === Rarity.MYTHICAL)
   const additionalCommon = team.filter(
     (p) =>
-      (p.additional && p.rarity === Rarity.COMMON) ||
-      p.rarity === Rarity.UNCOMMON
+      p.additional &&
+      (p.rarity === Rarity.COMMON || p.rarity === Rarity.UNCOMMON)
   )
   const additionalRare = team.filter(
     (p) =>
-      (p.additional && p.rarity === Rarity.RARE) || p.rarity === Rarity.EPIC
+      p.additional && (p.rarity === Rarity.RARE || p.rarity === Rarity.EPIC)
   )
 
-  if (stage <= PortalCarouselStages[0] && uniques.length > 0) {
+  if (stage < PortalCarouselStages[0] && uniques.length > 0) {
     throw new Error(
-      `Unique Pokemons can't be played before stage ${
-        PortalCarouselStages[0] + 1
-      }`
+      `Unique Pokemons can't be played before stage ${PortalCarouselStages[0]}`
     )
   }
-  if (stage <= PortalCarouselStages[1] && legendaries.length > 0) {
+  if (stage < PortalCarouselStages[1] && legendaries.length > 0) {
     throw new Error(
-      `Legendary Pokemons can't be played before stage ${
-        PortalCarouselStages[1] + 1
-      }`
+      `Legendary Pokemons can't be played before stage ${PortalCarouselStages[1]}`
     )
   }
-  if (stage <= PortalCarouselStages[1] && mythicals.length > 0) {
+  if (stage < PortalCarouselStages[1] && mythicals.length > 0) {
     throw new Error(
-      `Mythical Pokemons can't be played before stage ${
-        PortalCarouselStages[1] + 1
-      }`
+      `Mythical Pokemons can't be played before stage ${PortalCarouselStages[1]}`
     )
   }
   if (stage < AdditionalPicksStages[0] && additionalCommon.length > 0) {
