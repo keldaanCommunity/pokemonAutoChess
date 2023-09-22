@@ -485,20 +485,9 @@ export class MiniGame {
         }
       }
 
-      if (
-        avatar.portalId == "" &&
-        player &&
-        !player.isBot &&
-        this.portals &&
-        this.avatars
-      ) {
-        // send to random portal if none was taken
-        const remainingPortals = entries(this.portals).filter(
-          ([portalId, portal]) => portal.avatarId == ""
-        )
-        if (remainingPortals.length > 0) {
-          avatar.portalId = pickRandomIn(remainingPortals)[0]
-        }
+      if (avatar.portalId == "" && player && !player.isBot) {
+        // random propositions if no portal was taken
+        avatar.portalId = "random"
       }
 
       if (avatar.itemId) {
