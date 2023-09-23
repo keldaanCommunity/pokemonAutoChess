@@ -932,7 +932,7 @@
     "SPARKLING_ARIA": "Causa [15,30,60,SP] SPECIAL ao alvo e aos inimigos adjacentes. Se aliados adjacentes forem BURN, a queimadura é curada.",
     "DRAGON_DARTS": "Lança 3 dardos que causam [10,25,50,SP] SPECIAL cada para o alvo. Se o alvo morrer, recupere 40 PP.",
     "GRASSY_SURGE": "Aumente o ATK de todos os pokémons GRASS em [5,SP]",
-    "MISTY_SURGE": "Aumente a SPE_DEF de todos os pokémons FAIRY em [5,SP]",
+    "MISTY_SURGE": "Dê [30,SP] PP para aliados FAIRY",
     "SKY_ATTACK": "Sobe no ar e cai no alvo mais distante, PROTECT o atacante por 0,5 segundo e aplica [120,SP] SPECIAL",
     "ILLUSION": "O usuário recupera [30,50,70,SP=0,5] pontos HP e copia o formulário, bem como o ATK,DEF, SPE_DEF e RANGE do Pokémon alvo",
     "AURORA_BEAM": "Dispara um feixe em uma linha. Todos os alvos atingidos recebem [30,60,120,SP] SPECIAL e podem ser FREEZE (chance baseada na sinergia de gelo atual)",

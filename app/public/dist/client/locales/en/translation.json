@@ -942,7 +942,7 @@
     "SPARKLING_ARIA": "Deals [15,30,60,SP] SPECIAL to the target and adjacent enemies. If adjacent allies are BURN, the burn is healed.",
     "DRAGON_DARTS": "Throws 3 darts that deals [10,25,50,SP] SPECIAL each to the target. If the target dies, regain 40 PP.",
     "GRASSY_SURGE": "Increase ATK of all GRASS pokemons by [5,SP]",
-    "MISTY_SURGE": "Increase SPE_DEF of all FAIRY pokemons by [5,SP]",
+    "MISTY_SURGE": "Give [30,SP] PP to FAIRY allies",
     "SKY_ATTACK": "Rises in the air and fall on the farthest target, PROTECT the attacker for .5 second and deals [120,SP] SPECIAL",
     "ILLUSION": "User recovers [30,50,70,SP=0.5] HP points and copies the form as well as the ATK,DEF, SPE_DEF, and RANGE of the targeted Pokemon",
     "SLUDGE": "Throws trash onto the 3 squares in front, which inflicts [2,3,4] stacks of POISON for [3,SP] seconds",

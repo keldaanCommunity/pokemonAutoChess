@@ -933,7 +933,7 @@
     "SPARKLING_ARIA": "Inflige [15,30,60,SP] SPECIAL à la cible et aux ennemis adjacents. Si des alliés adjacents sont BRÛLÉS, la brûlure est soignée.",
     "DRAGON_DARTS": "Lance 3 fléchettes qui infligent [10,25,50,SP] SPECIAL chacune à la cible. Si la cible meurt, récupère 40 PP.",
     "GRASSY_SURGE": "Augmente l'ATK de tous les pokémons GRASS de [5,SP]",
-    "MISTY_SURGE": "Augmente la SPE_DEF de tous les pokemons FAIRY de [5,SP]",
+    "MISTY_SURGE": "Donne [30,SP] PP à tous les alliés FAIRY",
     "SKY_ATTACK": "S'élève dans les airs et tombe sur la cible la plus éloignée, PROTECT l'attaquant pendant 0,5 seconde et inflige [120,SP] SPECIAL",
     "ILLUSION": "L'utilisateur récupère [30,50,70,SP = 0,5] points HP et copie le formulaire ainsi que l'ATK, la DEF, la SPE_DEF et la RANGE du Pokémon ciblé",
     "SLUDGE": "Jette des détritus sur 3 cases devant, ce qui inflige [2,3,4] cumuls de POISON pendant [3,SP] secondes",

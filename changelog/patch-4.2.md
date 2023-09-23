@@ -24,6 +24,7 @@
 - Buff Noctowl: Attack ~~6~~ → 10 ; Hypnosis duration: ~~3.5~~ → 4
 - Buff Mime Jr / Mr Mime: PP ~~90~~ → 85
 - New ability for Grimer / Alolan Grimer: Sludge - Throws trash onto the 3 squares in front, which inflicts 2/3 stacks of POISON for 3 seconds.
+- Changed Misty Surge (Tapu Fini): now gives 30 PP instead of 5 Special Defense
 
 # Changes to Synergies
 

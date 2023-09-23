@@ -923,7 +923,7 @@
   "ability_description.SPARKLING_ARIA": "Geeft [15,30,60,SP] SPECIAL aan het doelwit en aangrenzende vijanden. Als aangrenzende bondgenoten BURN zijn, is de brandwond genezen.",
   "ability_description.DRAGON_DARTS": "Gooit 3 darts die elk [10,25,50,SP] SPECIAL naar het doel verdelen. Als het doelwit sterft, krijg je 40 PP terug.",
   "ability_description.GRASSY_SURGE": "Verhoog ATK van alle GRASS pokemons met [5,SP]",
-  "ability_description.MISTY_SURGE": "Verhoog SPE_DEF van alle FAIRY pokemons met [5,SP]",
+  "ability_description.MISTY_SURGE": "Geef [30,SP] PP aan FAIRY bondgenoten",
   "ability_description.SKY_ATTACK": "Stijgt in de lucht en valt op het verste doelwit, PROTECT de aanvaller gedurende 0,5 seconde en deelt [120,SP] SPECIAL uit",
   "ability_description.ILLUSION": "Gebruiker herstelt [30,50,70,SP=0,5] HP-punten en kopieert het formulier evenals de ATK,DEF, SPE_DEF en RANGE van de gerichte Pokemon",
   "ability_description.AURORA_BEAM": "Vuurt een straal af in een lijn. Alle doelwitten raken [30,60,120,SP] SPECIAL en kunnen worden FREEZE (kans gebaseerd op huidige ijssynergie)",

@@ -923,7 +923,7 @@
   "ability_description.SPARKLING_ARIA": "ターゲットと隣接する敵に[15,30,60,SP]SPECIALを与える。隣接する味方が火傷している場合、火傷は回復します。",
   "ability_description.DRAGON_DARTS": "ターゲットにそれぞれ[10,25,50,SP]SPECIALを与えるダーツを3本投げます。ターゲットが死亡した場合、40 PP を回復します。",
   "ability_description.GRASSY_SURGE": "すべての草ポケモンの攻撃力[5,SP]アップ",
-  "ability_description.MISTY_SURGE": "全てのフェアリーポケモンのSPE_DEFを[5,SP]増加させる",
+  "ability_description.MISTY_SURGE": "味方 FAIRY に [30,SP] PP を与える",
   "ability_description.SKY_ATTACK": "空中に上昇し、最も遠いターゲットに落下し、攻撃者を0.5秒間保護し、[120,SP] SPECIALを与える",
   "ability_description.ILLUSION": "使用者はHPを[30,50,70,SP=0.5]回復し、対象のポケモンの姿とATK・DEF・SPE_DEF・RANGEをコピーする",
   "ability_description.AURORA_BEAM": "一列にビームを発射します。ヒットしたすべてのターゲットは [30,60,120,SP] SPECIAL を取得し、フリーズすることができます (現在の氷の相乗効果に基づく確率)",

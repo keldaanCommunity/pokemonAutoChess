@@ -922,7 +922,7 @@
   "ability_description.SPARKLING_ARIA": "Fügt dem Ziel und angrenzenden Feinden [15,30,60,SP] SPECIAL zu. Wenn benachbarte Verbündete BURN, wird die Verbrennung geheilt.",
   "ability_description.DRAGON_DARTS": "Wirft 3 Pfeile, die dem Ziel jeweils [10,25,50,SP] SPECIAL zufügen. Wenn das Ziel stirbt, erhältst du 40 PP zurück.",
   "ability_description.GRASSY_SURGE": "Erhöhe die ATK aller GRASS Pokémon um [5,SP]",
-  "ability_description.MISTY_SURGE": "Erhöhe SPE_DEF aller FAIRY Pokémon um [5,SP]",
+  "ability_description.MISTY_SURGE": "Gib [30,SP] PP an FAIRY Verbündete",
   "ability_description.SKY_ATTACK": "Erhebt sich in die Luft und fällt auf das am weitesten entfernte Ziel, SCHÜTZT den Angreifer für 0,5 Sekunden und verursacht [120,SP] SPECIAL",
   "ability_description.ILLUSION": "Der Benutzer gewinnt [30,50,70,SP=0,5] HP-Punkte zurück und kopiert die Form sowie die ATK, DEF, SPE_DEF und RANGE des Ziel-Pokémon",
   "ability_description.AURORA_BEAM": "Feuert einen Strahl in einer Linie ab. Alle getroffenen Ziele erhalten [30,60,120,SP] SPECIAL und können eingefroren werden (Chance basiert auf der aktuellen Eissynergie).",
