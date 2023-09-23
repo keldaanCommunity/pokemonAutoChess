@@ -61,9 +61,18 @@ export default function TeamBuilder(props: {
   }, [board])
 
   function addPokemon(x: number, y: number, pkm: PkmWithConfig) {
+    let existingItems
     const i = board.findIndex((p) => p.x === x && p.y === y)
-    if (i >= 0) board.splice(i, 1)
-    const newPokemon: IDetailledPokemon = { ...pkm, x, y, items: [] }
+    if (i >= 0) {
+      existingItems = board[i].items
+      board.splice(i, 1)
+    }
+    const newPokemon: IDetailledPokemon = {
+      ...pkm,
+      x,
+      y,
+      items: existingItems ?? []
+    }
     setSelectedPokemon(newPokemon)
     updateBoard([...board, newPokemon])
   }

@@ -266,13 +266,19 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       this.dispatcher.dispatch(new OnBotUploadCommand(), { client, bot })
     })
 
-    this.onMessage(Transfer.REQUEST_BOT_LIST, (client) => {
-      try {
-        client.send(Transfer.REQUEST_BOT_LIST, createBotList(this.bots))
-      } catch (error) {
-        logger.error(error)
+    this.onMessage(
+      Transfer.REQUEST_BOT_LIST,
+      (client, options?: { withSteps: boolean }) => {
+        try {
+          client.send(
+            Transfer.REQUEST_BOT_LIST,
+            createBotList(this.bots, options)
+          )
+        } catch (error) {
+          logger.error(error)
+        }
       }
-    })
+    )
 
     this.onMessage(Transfer.REQUEST_BOT_DATA, (client, bot) => {
       try {
