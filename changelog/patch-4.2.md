@@ -42,13 +42,12 @@
 # Gameplay
 
 - New gadget: Map - Choose the map before game as room leader
-
 - New mechanic: board effects - Koffing ability Smog is an exemple of ability using this mechanic
-
 - Not picking a portal at round 10 and 20 now gives you 6 random propositions instead of picking a random remaining portal
 
-
 # UI
+
+- Various fixes and improvements to the Bot Builder
 
 # Bugfix
 

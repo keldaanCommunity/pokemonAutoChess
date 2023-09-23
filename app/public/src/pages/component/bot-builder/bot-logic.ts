@@ -70,7 +70,8 @@ export const POWER_SCORE_BY_CATEGORY = {
 
 export const POWER_AVERAGES = [
   2, 3, 3.5, 4, 4.5, 5, 6, 7, 8, 9, 11, 11.5, 12, 13, 14, 15, 16, 17, 18, 19,
-  24, 25, 25.5, 26, 27, 27.5, 28, 28.5, 29, 29.5, 30
+  24, 25, 25.5, 26, 27, 27.5, 28, 28.5, 29, 29.5, 30, 30.5, 31, 31.5, 32, 32.5,
+  33, 33.5, 34, 34.5, 35, 35.5, 36, 36.5, 37, 37.5, 38, 38.5, 39, 39.5, 40
 ]
 
 export const BOT_SCORES = {
@@ -129,11 +130,8 @@ export function getPowerScore(board: IDetailledPokemon[]): number {
 }
 
 export function getPowerEvaluation(powerScore: number, stage: number) {
-  return clamp(
-    50 + (100 * (powerScore - POWER_AVERAGES[stage])) / POWER_AVERAGES[stage],
-    0,
-    100
-  )
+  const powerAverage = POWER_AVERAGES[stage] ?? 40
+  return clamp(50 + (100 * (powerScore - powerAverage)) / powerAverage, 0, 100)
 }
 
 export function getMaxItemComponents(stage: number): number {
@@ -170,6 +168,7 @@ export function rewriteBotRoundsRequiredto1(bot: IBot) {
       oneSteps.push({ board: step.board, roundsRequired: 1 })
     }
   })
+  bot = structuredClone(bot)
   bot.steps = oneSteps
   return bot
 }
@@ -192,6 +191,18 @@ export function estimateElo(bot: IBot): number {
   if (averageScore < 80) return 1200
   if (averageScore < 90) return 1300
   return 1400
+}
+
+export function validateBot(bot: IBot) {
+  const errors: string[] = []
+  for (let stage = 0; stage < bot.steps.length; stage++) {
+    try {
+      validateBoard(bot.steps[stage].board, stage)
+    } catch (err) {
+      errors.push(`Stage ${stage}: ${err}`)
+    }
+  }
+  return errors
 }
 
 export function validateBoard(board: IDetailledPokemon[], stage: number) {

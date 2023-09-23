@@ -5,14 +5,14 @@ import { useTranslation } from "react-i18next"
 export default function GameModal(props: {
   modalInfo: string
   modalTitle: string
-  modalBoolean: boolean
+  visible: boolean
   hideModal: Dispatch<SetStateAction<boolean>>
   leave: () => void
 }) {
   const { t } = useTranslation()
   return (
     <Modal
-      show={props.modalBoolean}
+      show={props.visible}
       onHide={() => {
         props.hideModal(false)
       }}

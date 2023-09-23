@@ -1,14 +1,18 @@
 import React from "react"
+import { useTranslation } from "react-i18next"
 import { IBot } from "../../../../../models/mongo-models/bot-v2"
 import { PkmWithConfig, Emotion } from "../../../../../types"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { getAvatarSrc } from "../../../utils"
+import { validateBot } from "./bot-logic"
 
 export default function BotAvatar(props: {
-  bot: IBot,
+  bot: IBot
   onChangeAvatar: (pkm: PkmWithConfig) => void
   onClick: () => void
 }) {
+  const { t } = useTranslation()
+
   function handleOnDragOver(e: React.DragEvent) {
     e.preventDefault()
   }
@@ -23,6 +27,8 @@ export default function BotAvatar(props: {
     }
   }
 
+  const errors = validateBot(props.bot)
+
   return (
     <div id="bot-info">
       <img
@@ -36,6 +42,15 @@ export default function BotAvatar(props: {
         {props.bot.name} {props.bot.author && "by " + props.bot.author}
       </p>
       <p>ELO: {props.bot.elo}</p>
+      <p>
+        {errors.length > 0 ? (
+          <span style={{ color: "red" }} title={errors.join("\n")}>
+            {t("invalid")}
+          </span>
+        ) : (
+          <span style={{ color: "lime" }}>{t("valid")}</span>
+        )}
+      </p>
     </div>
   )
 }
