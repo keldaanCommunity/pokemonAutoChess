@@ -520,14 +520,14 @@ export class MistySurgeStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const buff = 5
+    const ppGain = Math.round(30 * (1 + pokemon.ap / 100))
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (
         ally &&
         pokemon.team == ally.team &&
         ally.types.includes(Synergy.FAIRY)
       ) {
-        ally.addSpecialDefense(buff, true)
+        ally.setPP(ally.pp + ppGain)
       }
     })
   }
