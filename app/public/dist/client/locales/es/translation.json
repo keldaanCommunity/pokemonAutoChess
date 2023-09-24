@@ -1009,7 +1009,7 @@
   "ability_description.PYRO_BALL": "El usuario ataca encendiendo una pequeña piedra y lanzándola como una bola de fuego al objetivo más lejano, causando [10,20,40,SP] SPECIAL y QUEMA durante 2 s todo lo que encuentre en su camino.",
   "ability_description.WHIRLPOOL": "Fija al enemigo más lejano y desata una lluvia de 4 remolinos hacia él. Cada uno inflige 125 % de ATK FÍSICO al primer enemigo golpeado.",
   "ability_description.SMOKE_SCREEN": "Canaliza el subterráneo y reaparece en medio del equipo enemigo, causando [10,20,40,SP] SPECIAL, BURN y ARMOR_REDUCTION a todas las unidades adyacentes durante 2 segundos.",
-  "ability_description.PRESENT": "O reparte 80, 150, 300 SPECIAL o cura 80 HP del objetivo",
+  "ability_description.PRESENT": "O reparte [80,SP], [150,SP], [300,SP] SPECIAL o cura 80 HP del objetivo",
   "effect.INGRAIN": "Arraigar",
   "effect.GROWTH": "Crecimiento",
   "effect.SPORE": "Espora",

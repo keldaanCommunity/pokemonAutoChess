@@ -1021,7 +1021,7 @@
     "PYRO_BALL": "L'utilisateur attaque en allumant une petite pierre et en la lançant comme une boule de feu sur la cible la plus éloignée, infligeant [10,20,40,SP] SPECIAL et BURN pendant 2 secondes tout ce qui se trouve sur son passage.",
     "WHIRLPOOL": "Verrouillez l'ennemi le plus éloigné et déchaînez une grêle de 4 tourbillons vers lui. Chacun inflige 125 % d'ATK PHYSIQUE au premier ennemi touché.",
     "SMOKE_SCREEN": "Canalisation souterraine et réapparition au milieu de l'équipe ennemie, infligeant [10,20,40,SP] SPECIAL, BURN et ARMOR_REDUCTION à toutes les unités adjacentes pendant 2 secondes.",
-    "PRESENT": "Peut soit infliger 80, 150 ou 300 SPECIAL à la cible, soit la soigner de 80 HP"
+    "PRESENT": "Peut soit infliger [80,SP], [150,SP], [300,SP] SPECIAL à la cible, soit la soigner de 80 HP"
   },
   "effect": {
     "INGRAIN": "Enraciné",

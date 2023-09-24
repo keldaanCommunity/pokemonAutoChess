@@ -1009,7 +1009,7 @@
   "ability_description.PYRO_BALL": "De gebruiker valt aan door een kleine steen aan te steken en deze als een vurige bal naar het verste doelwit te lanceren, waarbij hij [10,20,40,SP] SPECIAL uitdeelt en 2 seconden lang alles onderweg verbrandt",
   "ability_description.WHIRLPOOL": "Richt je op de verste vijand en laat een hagel van 4 draaikolken op hen los. Elk deelt 125% ATK FYSIEKE uit aan de eerste vijandelijke treffer",
   "ability_description.SMOKE_SCREEN": "Kanaal ondergronds en verschijnt opnieuw in het midden van het vijandelijke team, waarbij [10,20,40,SP] SPECIAL, BURN en ARMOR_REDUCTION alle aangrenzende eenheden gedurende 2 seconden worden uitgedeeld",
-  "ability_description.PRESENT": "Deelt 80, 150, 300 SPECIAL uit, of geneest 80 HP van het doelwit",
+  "ability_description.PRESENT": "Deelt [80,SP], [150,SP], [300,SP] SPECIAL uit, of geneest 80 HP van het doelwit",
   "effect.INGRAIN": "ingeburgerd",
   "effect.GROWTH": "Groei",
   "effect.SPORE": "Spoor",

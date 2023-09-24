@@ -1009,7 +1009,7 @@
   "ability_description.PYRO_BALL": "L'utilizzatore attacca accendendo una piccola pietra e lanciandola come una palla infuocata contro il bersaglio più lontano, infliggendo [10,20,40,SP] SPECIAL e BRUCIA per 2 secondi tutto ciò che incontra sulla sua strada",
   "ability_description.WHIRLPOOL": "Punta sul nemico più lontano e scatena una grandinata di 4 vortici verso di lui. Ciascuno infligge il 125% ATK FISICO al primo nemico colpito",
   "ability_description.SMOKE_SCREEN": "Canalizza sottoterra e riappare al centro della squadra nemica, infliggendo [10,20,40,SP] SPECIAL, BURN e ARMOR_REDUCTION a tutte le unità adiacenti per 2 secondi",
-  "ability_description.PRESENT": "Infligge 80, 150, 300 SPECIAL o cura 80 HP del bersaglio",
+  "ability_description.PRESENT": "Infligge [80,SP], [150,SP], [300,SP] SPECIAL o cura 80 HP del bersaglio",
   "effect.INGRAIN": "Ingranato",
   "effect.GROWTH": "Crescita",
   "effect.SPORE": "Spora",

@@ -1018,7 +1018,7 @@
     "PYRO_BALL": "O usuário ataca acendendo uma pequena pedra e lançando-a como uma bola de fogo no alvo mais distante, distribuindo [10,20,40,SP] SPECIAL e QUEIMADURA por 2s em tudo que estiver em seu caminho",
     "WHIRLPOOL": "Fixe-se no inimigo mais distante e solte uma saraivada de 4 redemoinhos em direção a ele. Cada um causa 125% de ATQ FÍSICO ao primeiro inimigo atingido",
     "SMOKE_SCREEN": "Canaliza e reaparece no meio do time inimigo, causando [10,20,40,SP] SPECIAL, BURN e ARMOR_REDUCTION em todas as unidades adjacentes por 2 segundos",
-    "PRESENT": "Causa 80, 150, 300 SPECIAL ou cura 80 HP do alvo"
+    "PRESENT": "Causa [80,SP], [150,SP], [300,SP] SPECIAL ou cura 80 HP do alvo"
   },
   "effect": {
     "INGRAIN": "Inerente",

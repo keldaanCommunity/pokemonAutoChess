@@ -1008,7 +1008,7 @@
   "ability_description.PYRO_BALL": "Der Benutzer greift an, indem er einen kleinen Stein entzündet und ihn als feurige Kugel auf das am weitesten entfernte Ziel schleudert, wodurch er alles, was ihm in den Weg kommt, [10,20,40,SP] SPECIAL und BURN für 2 Sekunden zufügt",
   "ability_description.WHIRLPOOL": "Erfassen Sie den am weitesten entfernten Feind und entfesseln Sie einen Hagel von 4 Strudeln auf ihn. Jeder Angriff fügt dem ersten getroffenen Gegner 125 % PHYSISCHE ANG zu",
   "ability_description.SMOKE_SCREEN": "Kanalisiert den Untergrund und erscheint wieder in der Mitte des gegnerischen Teams, was allen benachbarten Einheiten 2 Sekunden lang [10,20,40,SP] SPECIAL, BURN und ARMOR_REDUCTION zufügt",
-  "ability_description.PRESENT": "Verursacht entweder 80, 150, 300 SPECIAL oder heilt 80 HP des Ziels",
+  "ability_description.PRESENT": "Verursacht entweder [80,SP], [150,SP], [300,SP] SPECIAL oder heilt 80 HP des Ziels",
   "effect.INGRAIN": "Ingrain",
   "effect.GROWTH": "Wachstum",
   "effect.SPORE": "Spore",
