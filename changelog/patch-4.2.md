@@ -28,6 +28,7 @@
 - Growl: added AP scaling
 - New ability for Snover line: Blizzard ; PP 80→100
 - Abomasnow and MegaAbomasnow now have Monster synergy
+- Ability King's Shield rework: ~~1/2/3~~ seconds Protect → 1.5 seconds Protect and ~10/20/30~ shield
 
 # Changes to Synergies
 
