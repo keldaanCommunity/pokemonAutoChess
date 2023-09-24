@@ -1,14 +1,16 @@
 import { MapSchema } from "@colyseus/schema"
 import { Emotion, IPlayer } from "../types"
-import { EvolutionTime, HatchList, UniqueShop, PkmCost } from "../types/Config"
+import {
+  EvolutionTime,
+  HatchList,
+  RarityCost
+} from "../types/Config"
 import { PokemonActionState, Rarity } from "../types/enum/Game"
-import { Passive } from "../types/enum/Passive"
 import {
   Pkm,
   PkmDuos,
   PkmFamily,
   PkmIndex,
-  PkmProposition,
   Unowns
 } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
@@ -2076,10 +2078,12 @@ export default class PokemonFactory {
       return 2
     } else if (name === Pkm.MAGIKARP) {
       return 1
-    } else if (pokemon.passive === Passive.UNOWN) {
+    } else if (name === Pkm.GYARADOS) {
+      return 10
+    } else if (Unowns.includes(name)) {
       return 1
     } else if (pokemon.rarity === Rarity.HATCH) {
-      return [3, 4, 5][pokemon.stars - 1]
+      return [3, 4, 5][pokemon.stars - 1] ?? 5
     } else if (
       [Rarity.UNIQUE, Rarity.LEGENDARY, Rarity.MYTHICAL].includes(
         pokemon.rarity
@@ -2088,24 +2092,24 @@ export default class PokemonFactory {
       const duo = Object.entries(PkmDuos).find(([key, duo]) =>
         duo.includes(pokemon.name)
       )
-      return Math.ceil(
-        (UniqueShop.includes(duo ? (duo[0] as PkmProposition) : name)
-          ? 15
-          : 20) * (duo ? 0.5 : 1)
-      )
+      if(pokemon.rarity === Rarity.UNIQUE){
+        return duo ? 8 : 15
+      } else {
+        return duo ? 10 : 20        
+      }
     } else if (PokemonFactory.getPokemonBaseEvolution(name) == Pkm.EEVEE) {
-      return PkmCost[pokemon.rarity]
+      return RarityCost[pokemon.rarity]
     } else {
-      return PkmCost[pokemon.rarity] * pokemon.stars
+      return RarityCost[pokemon.rarity] * pokemon.stars
     }
   }
 
   static getBuyPrice(name: Pkm): number {
-    if (Unowns.includes(name)) {
-      return 1
+    if (name === Pkm.DITTO) {
+      return 5
     } else {
       const pokemon: Pokemon = PokemonFactory.createPokemonFromName(name)
-      return PkmCost[pokemon.rarity]
+      return RarityCost[pokemon.rarity]
     }
   }
 }

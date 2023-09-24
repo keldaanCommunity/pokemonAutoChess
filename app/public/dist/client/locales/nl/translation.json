@@ -879,7 +879,7 @@
   "ability_description.METEOR_MASH": "Breng [30,50,70,SP] SPECIAL toe in een gebied rond het doelwit. Verbeter de gebruiker's ATK met [5,SP]",
   "ability_description.HURRICANE": "Breng [25,50,100,SP] SPECIAL toe aan alle vijandelijke Pokémon achter het doelwit en pas de PARALYSIS status op ze toe voor 4 seconden",
   "ability_description.HEAL_BLOCK": "Pas de WOUND status toe op alle aangrenzende vijandelijke Pokémon gedurende [5,10,15] seconden",
-  "ability_description.ROAR_OF_TIME": "Geef RESURECTION aan de vriendelijke Pokémon met de meeste items",
+  "ability_description.ROAR_OF_TIME": "Geef RESURECTION en [20,SP]% ATK_SPEED aan je sterkste bondgenoot (de meeste items > de meeste sterren > meest zeldzaam)",
   "ability_description.ROCK_TOMB": "Breng [30,60,120,SP] SPECIAL toe aan het doelwit en verlaag hun ATK_SPEED met [10,20,40]%",
   "ability_description.ROCK_SMASH": "Breng [20,40,80,SP] SPECIAL toe aan het doelwit en pas de SILENCE status toe voor [3,6,9] seconden",
   "ability_description.HEAD_SMASH": "De gebruiker's HP gaat [5,10,15,SP] omlaag en deelt [40,80,150,SP] SPECIAL uit aan het doelwit. Het doelwit wordt vernietigd als het doelwit de SLEEP of FREEZE status heeft",

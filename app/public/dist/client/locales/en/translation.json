@@ -898,7 +898,7 @@
     "METEOR_MASH": "Deal [30,50,70,SP] SPECIAL in an area around the target. Buff the user's ATK by [5,SP]",
     "HURRICANE": "Deal [25,50,100,SP] SPECIAL to all enemy Pokémon behind the target and make them PARALYSIS for 4 seconds",
     "HEAL_BLOCK": "Apply WOUND to all adjacent enemy Pokémon for [5,10,15] seconds",
-    "ROAR_OF_TIME": "Give RESURECTION to the allied Pokémon that has the most items",
+    "ROAR_OF_TIME": "Give RESURECTION and [20,SP]% ATK_SPEED to your strongest ally (most items > most stars > most rare)",
     "ROCK_TOMB": "Deal [30,60,120,SP] SPECIAL to the target and decrease their ATK_SPEED by [10,20,40]%",
     "ROCK_SMASH": "Deal [20,40,80,SP] SPECIAL to the target and SILENCE them for [3,6,9] seconds",
     "HEAD_SMASH": "The user hurts itself for [5,10,15,SP] HP and deals [40,80,150,SP] SPECIAL to the target. Execute the target if they are SLEEP or FREEZE",

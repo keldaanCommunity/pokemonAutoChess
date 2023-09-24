@@ -888,7 +888,7 @@
     "METEOR_MASH": "Área de efeito ao redor do alvo que causa [30,50,70,SP] SPECIAL. Buff o ATK do pokémon em [5,SP].",
     "HURRICANE": "Ataque de área de efeito que causa [25,50,100,SP] SPECIAL em uma linha atrás do alvo e causa PARALYSIS por 4 segundos",
     "HEAL_BLOCK": "Aplique WOUND a todos os inimigos adjacentes por [5,10,15] segundos",
-    "ROAR_OF_TIME": "Dê RESURECTION ao pokémon que tiver mais itens no seu time.",
+    "ROAR_OF_TIME": "Dê RESURECTION e [20,SP]% ATK_SPEED ao seu aliado mais forte (mais itens > mais estrelas > mais raros)",
     "ROCK_TOMB": "Ataque de alvo mono que causa [30,60,120,SP] SPECIAL e diminui o ATK_SPEED do alvo em [10,20,40] %",
     "ROCK_SMASH": "Ataque monoalvo que causa [20,40,80,SP] SPECIAL e SILENCE por [3,6,9] segundos",
     "HEAD_SMASH": "O pokémon se machuca em [5,10,15,SP] HP e causa [40,80,150,SP] SPECIAL. Execute se o alvo estiver SLEEP ou FREEZE",

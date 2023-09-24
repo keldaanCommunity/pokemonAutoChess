@@ -879,7 +879,7 @@
   "ability_description.METEOR_MASH": "Area di effetto attorno al bersaglio che infligge [30,50,70,SP] SPECIAL. Aumenta l'ATK dei pokemon di [5,SP].",
   "ability_description.HURRICANE": "Attacco ad area che infligge [25,50,100,SP] SPECIAL in una linea dietro il bersaglio e provoca PARALYSIS per 4 secondi",
   "ability_description.HEAL_BLOCK": "Applica WOUND a tutti i nemici adiacenti per [5,10,15] secondi",
-  "ability_description.ROAR_OF_TIME": "Dai RESURECTION al pokemon che ha più oggetti nella tua squadra.",
+  "ability_description.ROAR_OF_TIME": "Dai RESURECTION e [20,SP]% ATK_SPEED al tuo alleato più forte (la maggior parte degli oggetti > la maggior parte delle stelle > il più raro)",
   "ability_description.ROCK_TOMB": "Attacco a bersaglio singolo che infligge [30,60,120,SP] SPECIAL e riduce l'ATK_SPEED bersaglio del [10,20,40]%",
   "ability_description.ROCK_SMASH": "Attacco a bersaglio singolo che infligge [20,40,80,SP] bersaglio SPECIAL e SILENCE per [3,6,9] secondi",
   "ability_description.HEAD_SMASH": "Il pokemon si ferisce per [5,10,15,SP] HP e infligge [40,80,150,SP] SPECIAL. Esegui se il target è SLEEP o FREEZE",

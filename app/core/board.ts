@@ -1,3 +1,4 @@
+import PokemonFactory from "../models/pokemon-factory"
 import { IPokemonEntity } from "../types"
 import { Effect } from "../types/enum/Effect"
 import { Orientation } from "../types/enum/Game"
@@ -326,5 +327,30 @@ export default class Board {
     if (y >= 0 && y < this.rows && x >= 0 && x < this.columns) {
       return this.effects[this.columns * y + x]
     }
+  }
+
+  getStrongestUnitOnBoard(team?: number): PokemonEntity | undefined {
+    /*
+    strongest is defined as:
+    1) number of items
+    2) stars level
+    3) rarity cost
+    */
+    let strongest,
+      bestScore = 0
+    this.forEach((x, y, pokemon) => {
+      if (pokemon && (pokemon.team === team || team === undefined)) {
+        let score = 0
+        score += 100 * pokemon.items.size
+        score += 10 * pokemon.stars
+        score += PokemonFactory.getSellPrice(pokemon.name)
+
+        if (score > bestScore) {
+          bestScore = score
+          strongest = pokemon
+        }
+      }
+    })
+    return strongest
   }
 }

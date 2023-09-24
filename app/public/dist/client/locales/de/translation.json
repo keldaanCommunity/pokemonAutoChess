@@ -878,7 +878,7 @@
   "ability_description.METEOR_MASH": "Wirkungsbereich um das Ziel, das [30,50,70,SP] SPECIAL verursacht. Verbessere den ATK des Pokémon um [5,SP].",
   "ability_description.HURRICANE": "Flächenangriff, der [25,50,100,SP] SPECIAL in einer Linie hinter dem Ziel verursacht und 4 Sekunden lang PARALYSIS bewirkt",
   "ability_description.HEAL_BLOCK": "Füge allen umstehenden Feinden [5,10,15] Sekunden lang WOUND zu",
-  "ability_description.ROAR_OF_TIME": "Gib dem Pokémon, das die meisten Gegenstände in deinem Team hat, RESURECTION.",
+  "ability_description.ROAR_OF_TIME": "Gib deinem stärksten Verbündeten RESURECTION und [20,SP]% ATK_SPEED (die meisten Gegenstände > die meisten Sterne > die seltensten)",
   "ability_description.ROCK_TOMB": "Mono-Zielangriff, der [30,60,120,SP] SPECIAL verursacht und die ATK_SPEED des Ziels um [10,20,40] % verringert",
   "ability_description.ROCK_SMASH": "Mono-Zielangriff, der dem Ziel [3,6,9] Sekunden lang [20,40,80,SP] SPECIAL und SILENCE zufügt",
   "ability_description.HEAD_SMASH": "Das Pokémon verletzt sich selbst für [5,10,15,SP] HP und verursacht [40,80,150,SP] SPECIAL. Ausführen, wenn das Ziel SLEEP oder FREEZE ist",

@@ -879,7 +879,7 @@
   "ability_description.METEOR_MASH": "対象を中心に範囲に[30,50,70,SP]のSPECIALを与える。ポケモンの攻撃力を[5,SP]増加させます。",
   "ability_description.HURRICANE": "対象の後方一列に[25,50,100,SP]のSPECIALを与える範囲攻撃、4秒間麻痺させる",
   "ability_description.HEAL_BLOCK": "[5,10,15]秒間、隣接するすべての敵にWOUNDを適用します",
-  "ability_description.ROAR_OF_TIME": "チーム内で最も多くのアイテムを持っているポケモンに「RESURECTION」を与える。",
+  "ability_description.ROAR_OF_TIME": "最も強い味方に RESURECTION と [20,SP]% ATK_SPEED を与える (最も多くのアイテム > 最も多くのスター > 最もレア)",
   "ability_description.ROCK_TOMB": "[30,60,120,SP] SPECIALを与える単一ターゲット攻撃とターゲットATK_SPEEDを[10,20,40]%減少させる",
   "ability_description.ROCK_SMASH": "[20,40,80,SP]のSPECIALと[3,6,9]秒間の沈黙をターゲットに与える単一ターゲット攻撃",
   "ability_description.HEAD_SMASH": "ポケモンは自身のHPを[5,10,15,SP]ダメージし、[40,80,150,SP]のSPECIALを与える。対象がSLEEPまたはFREEZEの場合に実行",

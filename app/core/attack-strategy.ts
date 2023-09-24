@@ -1922,20 +1922,13 @@ export class RoarOfTimeStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    const atkSpeedBuff = Math.round(20 * (1+pokemon.ap/100))
 
-    let candidate = pokemon
-    board.forEach((x: number, y: number, pkm: PokemonEntity | undefined) => {
-      if (
-        pkm &&
-        pokemon.team == pkm.team &&
-        pkm.items.size > candidate.items.size &&
-        !pkm.status.resurection
-      ) {
-        candidate = pkm
-      }
-    })
-
-    candidate.status.resurection = true
+    const strongest = board.getStrongestUnitOnBoard(pokemon.team)
+    if(strongest){
+      strongest.status.resurection = true
+      strongest.addAttackSpeed(atkSpeedBuff, false)
+    }
   }
 }
 

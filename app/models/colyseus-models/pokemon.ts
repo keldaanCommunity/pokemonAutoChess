@@ -6064,7 +6064,7 @@ export class Gyarados extends Pokemon {
       1,
       1,
       AttackSprite.WATER_MELEE,
-      2,
+      3,
       100,
       Ability.HYDRO_PUMP,
       shiny,
