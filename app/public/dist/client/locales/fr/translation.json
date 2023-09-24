@@ -959,7 +959,7 @@
     "HEX": "Inflige [20,40,80,SP] SPECIAL à la cible. Double les dégâts si la cible a BURN, CONFUSION, FREEZE, PARALYSIS, POISON, SILENCE, SLEEP ou WOUND",
     "GROWTH": "Augmente la taille du lanceur et son ATK de [10,SP]. Pousse deux fois plus vite si la météo est SUN",
     "HEAL_ORDER": "Inflige [25,45,65,SP] SPECIAL aux ennemis adjacents et soigne [25,45,65,SP] aux alliés adjacents",
-    "SHELL_TRAP": "SILENCE la cible pendant 3 secondes et supprime 40 PP de la cible et des ennemis autour d'elle",
+    "SHELL_TRAP": "SILENCE la cible pendant 3 secondes et supprime [40,SP] PP de la cible et des ennemis autour d'elle",
     "DIG": "Creuse sous terre et réapparaît à côté de l'ennemi le plus éloigné, infligeant [10,20,40,SP] SPECIAL à tous les ennemis sur le chemin",
     "FIRE_SPIN": "Attaque à zone d'effet qui inflige [20,40,100,SP] SPECIAL autour de la cible et BURN tous les ennemis touchés pendant 3 secondes",
     "SEARING_SHOT": "Un brasier de flammes écarlates embrase tout autour de l'utilisateur. Inflige [40,SP] SPECIAL et BURN pendant 3 secondes tous les ennemis à moins de 2 tuiles de Victini.",

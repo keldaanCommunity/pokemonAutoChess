@@ -115,7 +115,7 @@ export class AttackStrategy {
 
     if (target.status.magicBounce) {
       pokemon.status.triggerSilence(4000, pokemon, target, board)
-      const damage = Math.round(target.speDef * (1+target.ap/100))
+      const damage = Math.round(target.speDef * (1 + target.ap / 100))
       pokemon.handleSpecialDamage(
         damage,
         board,
@@ -1922,10 +1922,10 @@ export class RoarOfTimeStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const atkSpeedBuff = Math.round(20 * (1+pokemon.ap/100))
+    const atkSpeedBuff = Math.round(20 * (1 + pokemon.ap / 100))
 
     const strongest = board.getStrongestUnitOnBoard(pokemon.team)
-    if(strongest){
+    if (strongest) {
       strongest.status.resurection = true
       strongest.addAttackSpeed(atkSpeedBuff, false)
     }
@@ -4395,13 +4395,14 @@ export class ShellTrapStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     target.status.triggerSilence(3000, target, pokemon, board)
-    target.setPP(target.pp - 40)
+    const ppBurn = Math.round(40 * (1 + pokemon.ap / 100))
+    target.setPP(target.pp - ppBurn)
 
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
 
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.setPP(cell.value.pp - 40)
+        cell.value.setPP(cell.value.pp - ppBurn)
       }
     })
   }

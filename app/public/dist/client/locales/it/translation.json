@@ -947,7 +947,7 @@
   "ability_description.HEX": "Infligge [20,40,80,SP] SPECIAL al bersaglio. Raddoppia i danni se il bersaglio è BURN, CONFUSION, FREEZE, PARALYSIS, POISON, SILENCE, SLEEP o WOUND",
   "ability_description.GROWTH": "Aumenta le dimensioni del corpo e l'ATK di [10,SP]. Cresce due volte più velocemente se il tempo è soleggiato",
   "ability_description.HEAL_ORDER": "Infligge [25,45,65,SP] SPECIAL ai nemici adiacenti e guarisce [25,45,65,SP] agli alleati adiacenti",
-  "ability_description.SHELL_TRAP": "SILENCE il bersaglio per 3 secondi e rimuove 40 PP dal bersaglio e dai nemici attorno ad esso",
+  "ability_description.SHELL_TRAP": "SILENCE il bersaglio per 3 secondi e rimuove [40,SP] PP dal bersaglio e dai nemici attorno ad esso",
   "ability_description.DIG": "Scava sottoterra e riappare accanto al nemico più lontano, infliggendo [10,20,40,SP] SPECIAL a tutti i nemici lungo la strada",
   "ability_description.FIRE_SPIN": "Attacco ad area che infligge [20,40,100,SP] SPECIAL intorno al bersaglio e BURN tutti i nemici colpiti per 3 secondi",
   "ability_description.SEARING_SHOT": "Un inferno di fiamme scarlatte incendia tutto ciò che circonda l'utilizzatore. Infligge [40,SP] SPECIAL e BURN per 3 secondi tutti i nemici entro 2 caselle da Victini.",

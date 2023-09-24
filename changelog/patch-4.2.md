@@ -33,6 +33,7 @@
 - Magic Bounce: added AP scaling
 - Roar of Time: now targets your strongest ally (most items > most stars > most rare) and give it 20% attack speed (scales with AP)
 - Gyarados is now 3 stars and can be sold for 10 gold
+- Shell Trap: added AP scaling
 
 # Changes to Synergies
 
