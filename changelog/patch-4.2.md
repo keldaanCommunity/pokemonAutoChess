@@ -26,6 +26,10 @@
 - New ability for Grimer / Alolan Grimer: Sludge - Throws trash onto the 3 squares in front, which inflicts 2/3 stacks of POISON for 3 seconds.
 - Changed Misty Surge (Tapu Fini): now gives 30 PP instead of 5 Special Defense
 - Nerf Marshadow: Attack ~~35~~ 28, Def/SpeDef: ~~6~~ 5, PP ~~90~~ 120, Special damage of Spectral Thief ~~50~~ 80
+- Nerf Tyrogue: HP ~~200~~ 150
+- Nerf Hitmonchan: HP ~~200~~ 180, Def/Spedef ~~9~~ 7, Uppercut damage ~~80~~ 60
+- Nerf Hitmonlee: HP ~~200~~ 180, Attack ~~30~~ 25, Mawashi Geri damage ~~80~~ 60
+- Adjusted Hitmontop: HP ~~200~~ 180, Attack ~~25~~ 22, Def/Spedef ~~6~~ 5, PP ~~100~~ 75
 
 # Changes to Synergies
 
