@@ -4787,7 +4787,7 @@ export class ThrashStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    pokemon.addAttack(Math.ceil(1.1 * pokemon.baseAtk), false)
+    pokemon.addAttack(pokemon.baseAtk, true)
     pokemon.status.triggerConfusion(3000, pokemon)
   }
 }

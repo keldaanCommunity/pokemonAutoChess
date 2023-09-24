@@ -963,7 +963,7 @@
   "ability_description.ACROBATICS": "お得 [20,40,80,SP] SPECIAL。キャスターがアイテムを持っていない場合、ダメージは2倍になります。",
   "ability_description.ABSORB": "隣接する味方に[30,60,120,SP]SPECIALを与え、[3,6,12,SP]回復",
   "ability_description.ROLLOUT": "DEFを[5,SP]バフし、SPECIALとしてDEFを5倍にする",
-  "ability_description.THRASH": "ATKを110%バフし、3秒間混乱状態になる",
+  "ability_description.THRASH": "ATKを[100,SP]%バフし、3秒間混乱状態になる",
   "ability_description.SOLAR_BEAM": "ターゲットの後ろの直線で[30,60,120,SP] SPECIALを達成します。天気が晴れの場合、ターゲットは3秒間燃焼し、40 MANAを回復します",
   "ability_description.MAGMA_STORM": "ターゲットは火の大渦の中に閉じ込められ、隣接するターゲットに移動する前に [80,SP] SPECIAL を与える",
   "ability_description.SLASHING_CLAW": "ターゲットに[15,30,60,SP]を与え、5秒間WOUNDします。ターゲットがすでに傷ついている場合、30% のボーナス SPECIAL を与えます",

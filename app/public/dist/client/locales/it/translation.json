@@ -963,7 +963,7 @@
   "ability_description.ACROBATICS": "Offerte [20,40,80,SP] SPECIAL. Danno doppio se l'incantatore non ha oggetti trattenuti.",
   "ability_description.ABSORB": "Infligge [30,60,120,SP] SPECIAL e cura [3,6,12,SP] agli alleati adiacenti",
   "ability_description.ROLLOUT": "Buffa la DEF di [5,SP] e infligge 5 volte la DEF come SPECIAL",
-  "ability_description.THRASH": "Aumenta l'ATT del 110% e diventa CONFUSION per 3 secondi",
+  "ability_description.THRASH": "Aumenta l'ATT del [100,SP]% e diventa CONFUSION per 3 secondi",
   "ability_description.SOLAR_BEAM": "Distribuisce [30,60,120,SP] SPECIAL in linea retta dietro il bersaglio. Se il tempo è soleggiato, i bersagli vengono BURN per 3 secondi e ripristinano 40 PP",
   "ability_description.MAGMA_STORM": "Il bersaglio rimane intrappolato in un vortice di fuoco che infligge [80,SP] SPECIAL prima di spostarsi su un bersaglio adiacente",
   "ability_description.SLASHING_CLAW": "Infligge [15,30,60,SP] al bersaglio e lo WOUND per 5 secondi. Se il bersaglio è già WOUND, infligge il 30% di bonus SPECIAL",

@@ -963,7 +963,7 @@
   "ability_description.ACROBATICS": "Ofertas [20,40,80,SP] SPECIAL. Daño doble si el lanzador no tiene elementos retenidos.",
   "ability_description.ABSORB": "Otorga [30,60,120,SP] SPECIAL y cura [3,6,12,SP] a los aliados adyacentes",
   "ability_description.ROLLOUT": "Mejora la DEF en [5,SP] y ofrece 5 veces la DEF como SPECIAL",
-  "ability_description.THRASH": "Mejora el ATK en un 110 % y conviértete en CONFUSION durante 3 s.",
+  "ability_description.THRASH": "Mejora el ATK en un [100,SP]% y conviértete en CONFUSION durante 3 s.",
   "ability_description.SOLAR_BEAM": "Reparte [30,60,120,SP] SPECIAL en línea recta detrás del objetivo. Si el clima es soleado, los objetivos se BURN durante 3 s y restauran 40 PP",
   "ability_description.MAGMA_STORM": "El objetivo queda atrapado en una vorágine de fuego que inflige [80,SP] SPECIAL antes de moverse a un objetivo adyacente",
   "ability_description.SLASHING_CLAW": "Inflige [15,30,60,SP] al objetivo y lo WOUND durante 5 segundos. Si el objetivo ya está WOUND, otorga un 30 % de bonificación SPECIAL",

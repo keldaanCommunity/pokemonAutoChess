@@ -962,7 +962,7 @@
   "ability_description.ACROBATICS": "Angebote [20,40,80,SP] SPECIAL. Doppelter Schaden, wenn der Zauberer keine Gegenstände hat.",
   "ability_description.ABSORB": "Fügt benachbarten Verbündeten [30,60,120,SP] SPECIAL zu und heilt [3,6,12,SP].",
   "ability_description.ROLLOUT": "Verstärke die DEF um [5,SP] und verteile das 5-fache der DEF als SPECIAL",
-  "ability_description.THRASH": "Erhöht den ANG um 110 % und wird 3 Sekunden lang zu CONFUSION",
+  "ability_description.THRASH": "Erhöht den ANG um [100,SP]% und wird 3 Sekunden lang zu CONFUSION",
   "ability_description.SOLAR_BEAM": "Verursacht [30,60,120,SP] SPECIAL in einer geraden Linie hinter dem Ziel. Bei sonnigem Wetter werden Ziele 3 Sekunden lang BURN und stellen 40 PP wieder her",
   "ability_description.MAGMA_STORM": "Das Ziel wird in einem Mahlstrom aus Feuer gefangen, der [80,SP] SPECIAL verursacht, bevor er sich zu einem benachbarten Ziel bewegt",
   "ability_description.SLASHING_CLAW": "Fügt dem Ziel [15,30,60,SP] zu und verwundet es 5 Sekunden lang. Wenn das Ziel bereits WOUND ist, wird ein SPECIAL bonus von 30 % gewährt",

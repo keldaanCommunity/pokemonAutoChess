@@ -963,7 +963,7 @@
   "ability_description.ACROBATICS": "Aanbiedingen [20,40,80,SP] SPECIAL. Dubbele schade als caster geen vastgehouden items heeft.",
   "ability_description.ABSORB": "Biedt [30,60,120,SP] SPECIAL en geneest [3,6,12,SP] aan aangrenzende bondgenoten",
   "ability_description.ROLLOUT": "Buff de DEF met [5,SP] en deelt 5x de DEF uit als SPECIAL",
-  "ability_description.THRASH": "Verbeter ATK met 110% en word CONFUSION voor 3s",
+  "ability_description.THRASH": "Verbeter ATK met [100,SP]% en word CONFUSION voor 3s",
   "ability_description.SOLAR_BEAM": "Deals [30,60,120,SP] SPECIAL in een rechte lijn achter het doelwit. Als het zonnig weer is, zijn doelen BURN voor 3s en herstelt 40 PP",
   "ability_description.MAGMA_STORM": "Het doelwit komt vast te zitten in een maalstroom van vuur die [80,SP] SPECIAL uitdeelt voordat het naar een aangrenzend doelwit gaat",
   "ability_description.SLASHING_CLAW": "Deelt [15,30,60,SP] uit aan het doelwit en VERWOND het gedurende 5 seconden. Als het doelwit al WOUND is, wordt er 30% bonus SPECIAL uitgedeeld",
