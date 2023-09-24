@@ -2173,30 +2173,6 @@ export class PoisonStrategy extends AttackStrategy {
   }
 }
 
-export class FreezeStrategy extends AttackStrategy {
-  process(
-    pokemon: PokemonEntity,
-    state: PokemonState,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
-    super.process(pokemon, state, board, target, crit)
-    let timer = 1000
-    if (pokemon.stars === 2) {
-      timer = 2000
-    }
-    if (pokemon.stars === 3) {
-      timer = 3000
-    }
-    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
-      if (value && pokemon.team != value.team) {
-        value.status.triggerFreeze(timer, value)
-      }
-    })
-  }
-}
-
 export class BlizzardStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
@@ -2206,8 +2182,8 @@ export class BlizzardStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const freezeDuration = 3000
-    const damage = 15
+    const freezeDuration = [1000, 2000, 3000][pokemon.stars - 1] ?? 3000
+    const damage = [5, 10, 15][pokemon.stars - 1] ?? 15
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
       if (enemy && pokemon.team != enemy.team) {
         enemy.status.triggerFreeze(freezeDuration, enemy)

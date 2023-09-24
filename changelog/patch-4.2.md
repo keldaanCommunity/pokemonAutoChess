@@ -26,6 +26,8 @@
 - New ability for Grimer / Alolan Grimer: Sludge - Throws trash onto the 3 squares in front, which inflicts 2/3 stacks of POISON for 3 seconds.
 - ElectroWeb: added AP scaling
 - Growl: added AP scaling
+- New ability for Snover line: Blizzard ; PP 80→100
+- Abomasnow and MegaAbomasnow now have Monster synergy
 
 # Changes to Synergies
 
