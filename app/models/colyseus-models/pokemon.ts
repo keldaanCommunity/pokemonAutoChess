@@ -6800,7 +6800,7 @@ export class Registeel extends Pokemon {
       Rarity.UNIQUE,
       Pkm.DEFAULT,
       200,
-      20,
+      25,
       6,
       6,
       1,

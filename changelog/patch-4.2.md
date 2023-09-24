@@ -31,6 +31,11 @@
 - Nerf Hitmonlee: HP ~~200~~ 180, Attack ~~30~~ 25, Mawashi Geri damage ~~80~~ 60
 - Adjusted Hitmontop: HP ~~200~~ 180, Attack ~~25~~ 22, Def/Spedef ~~6~~ 5, PP ~~100~~ 75
 - Buff Minun & Plusle: HP ~~130~~ 140, PP ~~70~~ 60
+- Buff Mesprit: ability now targets a unit in the backline
+- Buff Regirock: Def ~~6~~ 10
+- Buff Regice: Spedef ~~6~~ 10
+- Buff Registeel: Attack ~~20~~ 25
+
 
 # Changes to Synergies
 
