@@ -3688,7 +3688,7 @@ export class SpectralThiefStrategy extends AttackStrategy {
       pokemon,
       board
     )
-    const damage = 50
+    const damage = 80
     if (farthestCoordinate) {
       target.handleSpecialDamage(
         damage,

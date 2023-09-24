@@ -25,6 +25,7 @@
 - Buff Mime Jr / Mr Mime: PP ~~90~~ → 85
 - New ability for Grimer / Alolan Grimer: Sludge - Throws trash onto the 3 squares in front, which inflicts 2/3 stacks of POISON for 3 seconds.
 - Changed Misty Surge (Tapu Fini): now gives 30 PP instead of 5 Special Defense
+- Nerf Marshadow: Attack ~~35~~ 28, Def/SpeDef: ~~6~~ 5, PP ~~90~~ 120, Special damage of Spectral Thief ~~50~~ 80
 
 # Changes to Synergies
 
