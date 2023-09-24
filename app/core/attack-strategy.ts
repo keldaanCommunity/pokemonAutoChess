@@ -3068,8 +3068,9 @@ export class LeafBladeStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, true)
+    const damage = Math.round(pokemon.atk * (1 + pokemon.ap / 100))
     target.handleSpecialDamage(
-      pokemon.atk,
+      damage,
       board,
       AttackType.SPECIAL,
       pokemon,

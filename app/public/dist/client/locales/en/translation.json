@@ -1031,7 +1031,7 @@
     "WHIRLPOOL": "Lock on to the farthest enemy and unleash a hail of 4 whirlpools toward them. Each deals 125% ATK PHYSICAL (scales with AP) to the first ennemy hit",
     "SMOKE_SCREEN": "Channel undergound and reappears in the middle of the enemy team, dealing [10,20,40,SP] SPECIAL, BURN and ARMOR_REDUCTION all adjacent units for 2 second",
     "PRESENT": "Either deals 80, 150, 300 SPECIAL, or heal 80 HP of the target",
-    "LEAF_BLADE": "Next attack will be a SPECIAL critical hit",
+    "LEAF_BLADE": "Next attack is a guaranteed critical hit dealing [100,SP]% of ATK as SPECIAL",
     "ANCHOR_SHOT": "Grab the farthest pokémon and deals [20,40,80,SP] SPECIAL"
   },
   "effect": {
