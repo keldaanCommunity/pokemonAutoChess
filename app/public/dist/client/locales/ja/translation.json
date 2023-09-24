@@ -1007,7 +1007,7 @@
   "ability_description.ASTRAL_BARRAGE": "ランダムな相手ポケモンに[3,SP=2]の小さなゴーストを送ります。それぞれ20 SPECIALを提供します",
   "ability_description.WATERFALL": "SHIELD自体[30,60,120,SP]用",
   "ability_description.PYRO_BALL": "ユーザーは小さな石に点火し、それを火の玉として最も遠くのターゲットに発射して攻撃し、[10,20,40,SP] SPECIAL を与え、途中のすべてを 2 秒間燃やします",
-  "ability_description.WHIRLPOOL": "最も遠い敵をロックオンし、敵に向けて 4 つの渦を降らせます。それぞれが敵の最初の攻撃に 125% の物理攻撃力を与えます",
+  "ability_description.WHIRLPOOL": "最も遠い敵をロックオンし、敵に向けて 4 つの渦を降らせます。それぞれが敵の最初の攻撃に [125,SP]% の物理攻撃力を与えます",
   "ability_description.SMOKE_SCREEN": "チャンネルが通過し、敵チームの中央に再出現し、隣接するすべてのユニットに 2 秒間 [10,20,40,SP] SPECIAL、BURN、ARMOR_REDUCTION を与える",
   "ability_description.PRESENT": "[80,SP]、[150,SP]、[300,SP] SPECIAL を与えるか、ターゲットの HP を 80 回復します",
   "effect.INGRAIN": "イングレイン",
