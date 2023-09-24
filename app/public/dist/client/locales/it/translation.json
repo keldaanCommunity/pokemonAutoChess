@@ -832,7 +832,7 @@
   "ability_description.LIQUIDATION": "Infligge [20,40,80,SP] SPECIAL e rimuove [1,2,4] DEF dal bersaglio",
   "ability_description.BURN": "BURN l'intera squadra nemica per [5,10,20] secondi",
   "ability_description.POISON": "Applica POISON a [1,2,3] avversari più vicini per [3,6,9,SP=0.5] secondi",
-  "ability_description.SLEEP": "Addormenta [1,2,3] Pokémon nemici nelle retrovie per 2,5 secondi",
+  "ability_description.SLEEP": "Addormenta [1,2,3] Pokémon nemici nelle retrovie per [2,SP] secondi",
   "ability_description.SILENCE": "SILENCE l'intera squadra nemica per [2,4,8] secondi",
   "ability_description.PROTECT": "PROTECT l'utente, diventando invulnerabile per [5,SP=0.5] secondi.",
   "ability_description.BLIZZARD": "FREEZE tutti i Pokémon nemici per [1,2,3] secondi e infliggi [5,10,15,SP] SPECIAL. Doppio danno se il nemico è già FREEZE",

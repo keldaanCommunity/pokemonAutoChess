@@ -831,7 +831,7 @@
   "ability_description.LIQUIDATION": "Verursacht [20,40,80,SP] SPECIAL und entfernt [1,2,4] DEF vom Ziel",
   "ability_description.BURN": "BURN Sie das gesamte gegnerische Team für [5,10,20] Sekunden",
   "ability_description.POISON": "Wende Gift auf [1,2,3] nächste Gegner für [3,6,9,SP=0,5] Sekunden an",
-  "ability_description.SLEEP": "Lass [1,2,3] gegnerische Pokémon in der Backline 2,5 Sekunden lang SCHLAFEN",
+  "ability_description.SLEEP": "Lass [1,2,3] gegnerische Pokémon in der Backline [2,SP] Sekunden lang SCHLAFEN",
   "ability_description.SILENCE": "Bringen Sie das gesamte gegnerische Team für [2,4,8] Sekunden zum Schweigen",
   "ability_description.PROTECT": "PROTECT Sie den Benutzer und machen Sie ihn für [5,SP=0,5] Sekunden unverwundbar.",
   "ability_description.BLIZZARD": "FRIERE alle gegnerischen Pokémon [1,2,3] Sekunden lang ein und verursache [5,10,15,SP] SPECIAL. Doppelter Schaden, wenn der Feind bereits eingefroren ist",

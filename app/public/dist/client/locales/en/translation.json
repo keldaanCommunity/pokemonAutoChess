@@ -851,7 +851,7 @@
     "LIQUIDATION": "Deal [20,40,80,SP] SPECIAL and lower the target's DEF by [1,2,4]",
     "BURN": "BURN all enemy Pokémon for [5,10,20] seconds",
     "POISON": "Apply POISON to the [1,2,3] closest enemy Pokémon for [3,6,9,SP=0.5] seconds",
-    "SLEEP": "Make [1,2,3] enemy Pokémon in the backline SLEEP for 2.5 seconds",
+    "SLEEP": "Make [1,2,3] enemy Pokémon in the backline SLEEP for [2,SP] seconds",
     "SILENCE": "SILENCE all enemy Pokémon for [2,4,8] seconds",
     "PROTECT": "PROTECT the user, becoming invulnerable for [5,SP=0.5] seconds",
     "BLIZZARD": "FREEZE all enemy Pokémon for [1,2,3] seconds and deal [5,10,15,SP] SPECIAL. Double damage if enemy is already FREEZE",

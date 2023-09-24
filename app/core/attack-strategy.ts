@@ -2206,7 +2206,7 @@ export class SleepStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const timer = 2500
+    const timer = Math.round(2000 * (1 + pokemon.ap / 100))
     const count = pokemon.stars
     const rank = new Array<PokemonEntity>()
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {

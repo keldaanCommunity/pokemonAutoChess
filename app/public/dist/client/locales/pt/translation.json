@@ -841,7 +841,7 @@
     "LIQUIDATION": "Distribui [20,40,80,SP] SPECIAL e remove [1,2,4] DEF do alvo",
     "BURN": "QUEIME todo o time inimigo por [5,10,20] segundos",
     "POISON": "Aplique POISON em [1,2,3] oponentes mais próximos por [3,6,9,SP=0,5] segundos",
-    "SLEEP": "Coloque SLEEP 2 inimigos nas linhas de trás por [1,5,3,4,5] segundos",
+    "SLEEP": "Faça com que [1,2,3] Pokémon inimigos na linha de fundo SLEEP por [2,SP] segundos",
     "SILENCE": "SILENCE toda a equipe inimiga por [2,4,8] segundos",
     "PROTECT": "PROTECT o usuário, tornando-se invulnerável por [5,SP=0,5] segundos.",
     "BLIZZARD": "FREEZE todos os Pokémon inimigos por 3 segundos e dê [5,10,15,SP] SPECIAL. Dano dobrado se o inimigo já estiver FREEZE",

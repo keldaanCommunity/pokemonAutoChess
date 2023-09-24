@@ -832,7 +832,7 @@
   "ability_description.LIQUIDATION": "Breng [20,40,80,SP] SPECIAL toe en verlaag de DEF van het doelwit met [1,2,4]",
   "ability_description.BURN": "Pas de BURN status toe op alle vijandelijke Pokémon voor [5,10,20] seconden",
   "ability_description.POISON": "Pas de POISON status toe op de [1,2,3] dichtstbijzijnde vijandelijke Pokémon voor [3,6,9,SP=0,5] seconden",
-  "ability_description.SLEEP": "Maak [1,2,3] vijandige Pokémon in de backline SLAAP gedurende 2,5 seconden",
+  "ability_description.SLEEP": "Maak [1,2,3] vijandige Pokémon in de backline SLAAP gedurende [2,SP] seconden",
   "ability_description.SILENCE": "Pas de SILENCE status toe op alle vijandelijke Pokémon voor [2,4,8] seconden",
   "ability_description.PROTECT": "PROTECT de gebruiker en word [5,SP=0,5] seconden onkwetsbaar",
   "ability_description.BLIZZARD": "FREEZE alle vijandelijke Pokémon gedurende [1,2,3] seconden en deel [5,10,15,SP] SPECIAL. Dubbele schade als de vijand al FREEZE is",

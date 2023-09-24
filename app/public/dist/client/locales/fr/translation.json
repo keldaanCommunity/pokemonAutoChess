@@ -842,7 +842,7 @@
     "LIQUIDATION": "Inflige [20,40,80,SP] SPECIAL et retire [1,2,4] DEF de la cible",
     "BURN": "Inflige BURN à toute l'équipe ennemie pendant [5,10,20] secondes",
     "POISON": "POISON les [1,2,3] adversaires les plus proches pendant [3,6,9,SP=0.5] secondes",
-    "SLEEP": "Faites dormir [1,2,3] Pokémon ennemis dans la ligne de fond pendant 2,5 secondes",
+    "SLEEP": "Faites dormir [1,2,3] Pokémon ennemis dans la ligne de fond pendant [2,SP] secondes",
     "SILENCE": "SILENCE toute l'équipe ennemie pendant [2,4,8] secondes",
     "PROTECT": "PROTECT l'utilisateur, devenant invulnérable pendant [5,SP=0.5] secondes.",
     "BLIZZARD": "Inflige [5,10,15,SP] SPECIAL et FREEZE pendant [1,2,3] secondes à tous les Pokémon ennemis. Double dégâts si l'ennemi est déjà FREEZE",
