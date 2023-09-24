@@ -812,7 +812,7 @@
   "ability_description.SONG_OF_DESIRE": "Das Ziel ist [6,SP] Sekunden lang CONFUSION",
   "ability_description.CONFUSING_MIND": "Fügt dem Ziel und seinen benachbarten Pokémon [40,SP] SPECIAL zu, was sie 3 Sekunden lang CONFUSION",
   "ability_description.KNOWLEDGE_THIEF": "Starten Sie das ultimative Ziel",
-  "ability_description.KING_SHIELD": "PROTECT Sie den Benutzer für [1,2,3] Sekunden und tauschen Sie seine Position mit dem am weitesten entfernten Feind",
+  "ability_description.KING_SHIELD": "PROTECT Sie den Benutzer für 1.5 Sekunden, gewährt [10,20,30,SP] SHIELD und tauschen Sie seine Position mit dem am weitesten entfernten Feind",
   "ability_description.EXPLOSION": "Fügt allen benachbarten Feinden [50.100.200,SP] SPECIAL zu. Schädigen Sie auch den Benutzer.",
   "ability_description.NIGHTMARE": "Vergifte das gesamte gegnerische Team für [2,4,8,SP=0,5] Sekunden",
   "ability_description.CLANGOROUS_SOUL": "Stärken Sie die benachbarten Verbündeten mit [2,4,8] ATK und [1,2,4] DEF / SPE_DEF",

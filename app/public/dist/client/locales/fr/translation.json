@@ -823,7 +823,7 @@
     "SONG_OF_DESIRE": "Rend la cible CHARM pendant [6,SP] secondes",
     "CONFUSING_MIND": "Rend la cible CONFUSION pendant [6,SP] secondes",
     "KNOWLEDGE_THIEF": "Utilise le talent de la cible",
-    "KING_SHIELD": "PROTECT l'utilisateur pendant [1,2,3] secondes et échange sa position avec l'ennemi le plus éloigné",
+    "KING_SHIELD": "PROTECT l'utilisateur pendant 1.5 secondes, gagne [10,20,30,SP] SHIELD et échange sa position avec l'ennemi le plus éloigné",
     "EXPLOSION": "Inflige [50,100,200,SP] SPECIAL à tous les ennemis adjacents. Inflige également les dégâts au lanceur.",
     "NIGHTMARE": "Inflige POISON à toute l'équipe ennemie pendant [2,4,8,SP=0.5] secondes",
     "CLANGOROUS_SOUL": "Octroie [2,4,8] ATK et [1,2,4] DEF / SPE_DEF aux alliés adjacents",

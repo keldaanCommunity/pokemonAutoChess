@@ -1141,21 +1141,10 @@ export class KingShieldStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let timer = 0
-    switch (pokemon.stars) {
-      case 1:
-        timer = 1000
-        break
-      case 2:
-        timer = 2000
-        break
-      case 3:
-        timer = 3000
-        break
-      default:
-        break
-    }
-    pokemon.status.triggerProtect(timer)
+    let duration = 1500
+    let shield = [10, 20, 30][pokemon.stars - 1] ?? 30
+    pokemon.status.triggerProtect(duration)
+    pokemon.addShield(shield, pokemon, true)
     const farthestTarget = state.getFarthestTargetCoordinate(pokemon, board)
     if (farthestTarget) {
       const x = farthestTarget.x

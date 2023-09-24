@@ -813,7 +813,7 @@
   "ability_description.SONG_OF_DESIRE": "El objetivo es CONFUSION durante [6,SP] segundos",
   "ability_description.CONFUSING_MIND": "Otorga [40,SP] SPECIAL al objetivo y a sus Pokémon adyacentes, confundiéndolos durante 3 segundos.",
   "ability_description.KNOWLEDGE_THIEF": "Lanza lo último del objetivo.",
-  "ability_description.KING_SHIELD": "PROTECT al usuario durante [1,2,3] segundos e intercambia su posición con la del enemigo más lejano",
+  "ability_description.KING_SHIELD": "PROTECT al usuario durante 1.5 segundos, otorga [10,20,30,SP] SHIELD e intercambia su posición con la del enemigo más lejano",
   "ability_description.EXPLOSION": "Otorga [50,100,200,SP] SPECIAL a todos los enemigos adyacentes. También dañar al usuario.",
   "ability_description.NIGHTMARE": "POISON a todo el equipo enemigo durante [2,4,8,SP=0.5] segundos",
   "ability_description.CLANGOROUS_SOUL": "Mejora a los aliados adyacentes con [2,4,8] ATK y [1,2,4] DEF / SPE_DEF",

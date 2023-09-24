@@ -813,7 +813,7 @@
   "ability_description.SONG_OF_DESIRE": "Het doelwit is CONFUSION gedurende [6,SP] seconden",
   "ability_description.CONFUSING_MIND": "Brengt [40,SP] SPECIAL toe aan het doelwit en de Pokémon ernaast, waardoor ze 3 seconden lang CONFUSION zijn",
   "ability_description.KNOWLEDGE_THIEF": "Gebruik de vaardigheid van het doelwit",
-  "ability_description.KING_SHIELD": "PROTECT de gebruiker gedurende [1,2,3] seconden en wissel van positie met de verste vijandelijke Pokémon",
+  "ability_description.KING_SHIELD": "PROTECT de gebruiker gedurende 1.5 seconden, geeft [10,20,30,SP] SHIELD en wissel van positie met de verste vijandelijke Pokémon",
   "ability_description.EXPLOSION": "Breng [50,100,200,SP] SPECIAL toe aan alle aangrenzende vijandelijke Pokémon. Beschadigt ook de gebruiker",
   "ability_description.NIGHTMARE": "POISON alle vijandelijke Pokémon voor [2,4,8,SP=0,5] seconden",
   "ability_description.CLANGOROUS_SOUL": "Buff aangrenzende vriendelijke Pokémon's ATK met [2,4,8] en DEF / SPE_DEF met [1,2,4]",
