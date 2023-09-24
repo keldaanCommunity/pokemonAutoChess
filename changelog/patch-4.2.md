@@ -24,11 +24,13 @@
 - Buff Noctowl: Attack ~~6~~ → 10 ; Hypnosis duration: ~~3.5~~ → 4
 - Buff Mime Jr / Mr Mime: PP ~~90~~ → 85
 - New ability for Grimer / Alolan Grimer: Sludge - Throws trash onto the 3 squares in front, which inflicts 2/3 stacks of POISON for 3 seconds.
-- ElectroWeb: added AP scaling
+- Electro Web: added AP scaling
 - Growl: added AP scaling
 - New ability for Snover line: Blizzard ; PP 80→100
 - Abomasnow and MegaAbomasnow now have Monster synergy
 - Ability King's Shield rework: ~~1/2/3~~ seconds Protect → 1.5 seconds Protect and ~10/20/30~ shield
+- Lock On: added AP scaling to Armor Reduction duration
+- Magic Bounce: added AP scaling
 
 # Changes to Synergies
 

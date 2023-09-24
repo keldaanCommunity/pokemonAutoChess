@@ -115,8 +115,9 @@ export class AttackStrategy {
 
     if (target.status.magicBounce) {
       pokemon.status.triggerSilence(4000, pokemon, target, board)
+      const damage = Math.round(target.speDef * (1+target.ap/100))
       pokemon.handleSpecialDamage(
-        target.speDef,
+        damage,
         board,
         AttackType.SPECIAL,
         target,
@@ -979,7 +980,8 @@ export class LockOnStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    target.status.triggerArmorReduction(4000)
+    const duration = Math.round(3000 * (1 + pokemon.ap / 100))
+    target.status.triggerArmorReduction(duration)
   }
 }
 
@@ -3069,13 +3071,7 @@ export class LeafBladeStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target, true)
     const damage = Math.round(pokemon.atk * (1 + pokemon.ap / 100))
-    target.handleSpecialDamage(
-      damage,
-      board,
-      AttackType.SPECIAL,
-      pokemon,
-      true
-    )
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, true)
   }
 }
 
