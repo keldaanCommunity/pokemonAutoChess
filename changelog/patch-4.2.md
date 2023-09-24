@@ -30,6 +30,7 @@
 - Nerf Hitmonchan: HP ~~200~~ 180, Def/Spedef ~~9~~ 7, Uppercut damage ~~80~~ 60
 - Nerf Hitmonlee: HP ~~200~~ 180, Attack ~~30~~ 25, Mawashi Geri damage ~~80~~ 60
 - Adjusted Hitmontop: HP ~~200~~ 180, Attack ~~25~~ 22, Def/Spedef ~~6~~ 5, PP ~~100~~ 75
+- Buff Minun & Plusle: HP ~~130~~ 140, PP ~~70~~ 60
 
 # Changes to Synergies
 
