@@ -126,8 +126,10 @@ export const lobbySlice = createSlice({
     },
     addUser: (state, action: PayloadAction<LobbyUser>) => {
       const u: ILobbyUser = JSON.parse(JSON.stringify(action.payload))
-      state.users.push(u)
-      state.users.sort((a, b) => b.elo - a.elo)
+      if (!state.users.find((user) => user.id === u.id)) {
+        state.users.push(u)
+        state.users.sort((a, b) => b.elo - a.elo)
+      }
     },
     changeUser: (
       state,
