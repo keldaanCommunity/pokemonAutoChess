@@ -1,9 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useRef,
-  useState
-} from "react"
+import React, { useCallback, useEffect, useRef, useState } from "react"
 import { Navigate } from "react-router-dom"
 import Chat from "./component/chat/chat"
 import CurrentUsers from "./component/available-user-menu/current-users"
@@ -185,6 +180,11 @@ export async function joinLobbyRoom(
         dispatch(logIn(user))
         try {
           const token = await user.getIdToken()
+
+          const lobby = store.getState().network.lobby
+          if (lobby) {
+            await lobby.leave()
+          }
           const room: Room<ICustomLobbyState> = await client.joinOrCreate(
             "lobby",
             { idToken: token }
