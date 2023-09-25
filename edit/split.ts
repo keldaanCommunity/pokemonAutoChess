@@ -5,10 +5,7 @@ import fs from "fs"
 import gracefulFs from "graceful-fs"
 import { AnimationConfig, Pkm } from "../app/types/enum/Pokemon"
 import PokemonFactory from "../app/models/pokemon-factory"
-import {
-  PokemonTint,
-  SpriteType
-} from "../app/types/enum/Game"
+import { PokemonTint, SpriteType } from "../app/types/enum/Game"
 import { logger } from "../app/utils/logger"
 import { AnimationType } from "../app/types/Animation"
 
