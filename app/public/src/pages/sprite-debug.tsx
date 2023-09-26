@@ -55,7 +55,9 @@ export function SpriteDebug() {
               }
             >
               {Object.entries(Orientation).map(([k, v]) => (
-                <option value={v}>{k}</option>
+                <option value={v} key={v}>
+                  {k}
+                </option>
               ))}
             </select>
           </div>
@@ -87,7 +89,9 @@ export function SpriteDebug() {
             >
               <option value="">None</option>
               {Object.entries(Status).map(([k, v]) => (
-                <option value={v}>{k}</option>
+                <option value={v} key={v}>
+                  {k}
+                </option>
               ))}
             </select>
           </div>
