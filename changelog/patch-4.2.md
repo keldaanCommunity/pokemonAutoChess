@@ -22,13 +22,13 @@
 - Buff Regirock: Def ~~6~~ 10
 - Buff Regice: Spedef ~~6~~ 10
 - Buff Registeel: Attack ~~20~~ 25
-- Buff Present (Delibird): Either deals 80, 150, 300 SPECIAL, or heal 80 HP of the target
-- Nerf Marshadow: Attack ~~35~~ 28, Def/SpeDef: ~~6~~ 5, PP ~~90~~ 120, Special damage of Spectral Thief ~~50~~ 80
+- Buff Present (Delibird): Either deals 80, 150, 300 special damage, or heal 80 HP of the target
+- Nerf Marshadow: Attack ~~35~~ 28, Def/SpeDef: ~~6~~ 5, PP ~~90~~ 120, buff Spectral Thief ~~50~~ 80 special damage
 - Nerf Tyrogue: HP ~~200~~ 150
 - Nerf Hitmonchan: HP ~~200~~ 180, Def/Spedef ~~9~~ 7, Uppercut damage ~~80~~ 60
 - Nerf Hitmonlee: HP ~~200~~ 180, Attack ~~30~~ 25, Mawashi Geri damage ~~80~~ 60
 - Adjusted Hitmontop: HP ~~200~~ 180, Attack ~~25~~ 22, Def/Spedef ~~6~~ 5, PP ~~100~~ 75
-- Nerf Dragon Breath
+- Nerf Dragon Breath: ~~30/60/120~~ 25/50/100 special damage
 - Nerf Reshiram PP ~~90~~ → 100
 - Nerf Zekrom PP ~~90~~ → 100
 - Nerf Cinderace PP ~~35~~ → 50

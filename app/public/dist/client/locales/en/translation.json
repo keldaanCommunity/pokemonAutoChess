@@ -881,7 +881,7 @@
     "DISCHARGE": "Deal [25,50,75,SP] SPECIAL to nearby enemy Pokémon and make them PARALYSIS for 5 seconds",
     "BITE": "Deal [40,80,120,SP] SPECIAL to the target and heal the user for 30% of the damage dealt",
     "DRAGON_TAIL": "Deal [30,60,120,SP] SPECIAL to the target and buff the user's DEF and SPE_DEF by [1,2,3,SP]",
-    "DRAGON_BREATH": "Deal [30,60,120,SP] TRUE to all enemy Pokémon behind the target",
+    "DRAGON_BREATH": "Deal [25,50,100,SP] TRUE to all enemy Pokémon behind the target",
     "ICICLE_CRASH": "Deal [20,40,80,SP] SPECIAL in an area around the target",
     "ROOT": "Heal all nearby allied Pokémon by [20,40,80,SP] HP",
     "TORMENT": "Buff ATK_SPEED by [20,40,60,SP]%",

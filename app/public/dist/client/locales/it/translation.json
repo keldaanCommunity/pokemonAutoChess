@@ -862,7 +862,7 @@
   "ability_description.DISCHARGE": "Colpisci i nemici vicini per [25,50,75,SP] SPECIAL e falli PARALYSIS per 5 secondi",
   "ability_description.BITE": "Infligge [40,80,120,SP] danni SPECIAL al bersaglio e guarisce per il 30% del danno",
   "ability_description.DRAGON_TAIL": "Attacco a bersaglio singolo che infligge [30,60,120,SP] SPECIAL e potenzia DEF e SPE_DEF di [1,2,3,SP]",
-  "ability_description.DRAGON_BREATH": "Attacco ad area che infligge [30,60,120,SP] TRUE in una linea dietro il bersaglio",
+  "ability_description.DRAGON_BREATH": "Attacco ad area che infligge [25,50,100,SP] TRUE in una linea dietro il bersaglio",
   "ability_description.ICICLE_CRASH": "Attacco ad area che infligge [20,40,80,SP] SPECIAL intorno al bersaglio",
   "ability_description.ROOT": "Cura tutti i Pokémon alleati vicini di [20,40,80,SP] HP",
   "ability_description.TORMENT": "Aumenta ATK_SPEED del [20,40,60,SP]%",

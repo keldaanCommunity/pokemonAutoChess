@@ -862,7 +862,7 @@
   "ability_description.DISCHARGE": "Breng [25,50,75,SP] SPECIAL toe aan dichtbijzijnde vijandelijke Pokémon en pas de PARALYSYS status op ze toe voor 5 seconden",
   "ability_description.BITE": "Brengt [40,80,120,SP] SPECIAL toe aan het doelwit en herstelt de gebruiker's HP voor 30% van de schade",
   "ability_description.DRAGON_TAIL": "Breng [30,60,120,SP] SPECIAL toe aan het doelwit en verbeter de gebruiker's DEF en SPE_DEF met [1,2,3,SP]",
-  "ability_description.DRAGON_BREATH": "Breng [30,60,120,SP] TRUE toe aan alle vijandelijke Pokémon achter het doelwit",
+  "ability_description.DRAGON_BREATH": "Breng [25,50,100,SP] TRUE toe aan alle vijandelijke Pokémon achter het doelwit",
   "ability_description.ICICLE_CRASH": "Brengt [20,40,80,SP] SPECIAL toe in een gebied rond het doelwit",
   "ability_description.ROOT": "Herstel [20,40,80,SP] HP aan alle dichtbijzijnde vriendelijke Pokémon",
   "ability_description.TORMENT": "Verbeter ATK_SPEED met [20,40,60,SP]%",

@@ -872,7 +872,7 @@
     "DISCHARGE": "Décharge électrique infligeant [25,50,75,SP] SPECIAL aux ennemis proches ainsi que PARALYSIS pendant 5 secondes",
     "BITE": "Inflige [40,80,120,SP] dégâts SPECIAL à la cible et soigne 30 % des dégâts",
     "DRAGON_TAIL": "Attaque à cible unique qui inflige [30,60,120,SP] SPECIAL et améliore la DEF et SPE_DEF de [1,2,3,SP]",
-    "DRAGON_BREATH": "Attaque à zone d'effet qui inflige [30,60,120,SP] TRUE en ligne derrière la cible",
+    "DRAGON_BREATH": "Attaque à zone d'effet qui inflige [25,50,100,SP] TRUE en ligne derrière la cible",
     "ICICLE_CRASH": "Attaque à zone d'effet qui inflige [20,40,80,SP] SPECIAL autour de la cible",
     "ROOT": "Soigne tous les pokemons alliés à proximité de [20,40,80,SP] HP",
     "TORMENT": "Augmente la ATK_SPEED de [20,40,60,SP] %",

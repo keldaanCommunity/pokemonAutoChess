@@ -861,7 +861,7 @@
   "ability_description.DISCHARGE": "Schocken Sie Gegner in der Nähe mit [25,50,75,SP] SPECIAL und paralysieren Sie sie für 5 Sekunden",
   "ability_description.BITE": "Fügt dem Ziel [40,80,120,SP] SPECIAL Schaden zu und heilt ihn um 30 % des Schadens",
   "ability_description.DRAGON_TAIL": "Mono-Zielangriff, der [30,60,120,SP] SPECIAL verursacht und DEF und SPE_DEF um [1,2,3,SP] stärkt.",
-  "ability_description.DRAGON_BREATH": "Flächenangriff, der [30,60,120,SP] TRUE in einer Linie hinter dem Ziel verursacht",
+  "ability_description.DRAGON_BREATH": "Flächenangriff, der [25,50,100,SP] TRUE in einer Linie hinter dem Ziel verursacht",
   "ability_description.ICICLE_CRASH": "Flächenangriff, der [20,40,80,SP] SPECIAL um das Ziel herum verursacht",
   "ability_description.ROOT": "Heile alle verbündeten Pokémon in der Nähe um [20,40,80,SP] HP",
   "ability_description.TORMENT": "Erhöhe ATK_SPEED um [20,40,60,SP] %",
