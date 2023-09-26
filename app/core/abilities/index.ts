@@ -67,7 +67,6 @@ import {
   SleepStrategy,
   SilenceStrategy,
   ConfusionStrategy,
-  FreezeStrategy,
   ProtectStrategy,
   PoisonStrategy,
   OriginPulseStrategy,
@@ -179,7 +178,8 @@ import {
   PresentStrategy,
   LeafBladeStrategy,
   AnchorShotStrategy,
-  SmogStrategy
+  SmogStrategy,
+  PsychicStrategy
 } from "../attack-strategy"
 import {
   HiddenPowerAStrategy,
@@ -281,7 +281,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.SLEEP]: new SleepStrategy(),
   [Ability.SILENCE]: new SilenceStrategy(),
   [Ability.CONFUSION]: new ConfusionStrategy(),
-  [Ability.FREEZE]: new FreezeStrategy(),
   [Ability.BLIZZARD]: new BlizzardStrategy(),
   [Ability.PROTECT]: new ProtectStrategy(),
   [Ability.POISON]: new PoisonStrategy(),
@@ -422,5 +421,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.PRESENT]: new PresentStrategy(),
   [Ability.LEAF_BLADE]: new LeafBladeStrategy(),
   [Ability.ANCHOR_SHOT]: new AnchorShotStrategy(),
-  [Ability.SMOG]: new SmogStrategy()
+  [Ability.SMOG]: new SmogStrategy(),
+  [Ability.PSYCHIC]: new PsychicStrategy()
 }

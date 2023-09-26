@@ -20,17 +20,18 @@ export const RarityHpCost: { [key in Rarity]: number } = Object.freeze({
   [Rarity.HATCH]: 4
 })
 
-export const PkmCost: { [key in Rarity]: number } = Object.freeze({
+// used to evaluate unit value, even if some categories are not found in shop
+export const RarityCost: { [key in Rarity]: number } = Object.freeze({
+  [Rarity.SPECIAL]: 0, // many edgecases with custom buy/sell prices
   [Rarity.COMMON]: 1,
   [Rarity.UNCOMMON]: 2,
   [Rarity.RARE]: 3,
   [Rarity.EPIC]: 4,
+  [Rarity.HATCH]: 4,
   [Rarity.ULTRA]: 5,
-  [Rarity.UNIQUE]: 10,
-  [Rarity.LEGENDARY]: 10,
-  [Rarity.MYTHICAL]: 10,
-  [Rarity.SPECIAL]: 5,
-  [Rarity.HATCH]: 4
+  [Rarity.UNIQUE]: 6,
+  [Rarity.LEGENDARY]: 7,
+  [Rarity.MYTHICAL]: 10
 })
 
 export const EmotionCost: { [key in Emotion]: number } = {

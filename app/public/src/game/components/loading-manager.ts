@@ -107,6 +107,11 @@ export default class LoadingManager {
       "/assets/attacks"
     )
     scene.load.multiatlas(
+      "PSYCHIC",
+      "/assets/attacks/PSYCHIC.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
       "ANCHOR_SHOT",
       "/assets/attacks/ANCHOR_SHOT.json",
       "/assets/attacks"

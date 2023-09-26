@@ -42,7 +42,6 @@ export enum Ability {
   BURN = "BURN",
   SILENCE = "SILENCE",
   SLEEP = "SLEEP",
-  FREEZE = "FREEZE",
   PROTECT = "PROTECT",
   POISON = "POISON",
   CONFUSION = "CONFUSION",
@@ -206,7 +205,8 @@ export enum Ability {
   PRESENT = "PRESENT",
   LEAF_BLADE = "LEAF_BLADE",
   ANCHOR_SHOT = "ANCHOR_SHOT",
-  SMOG = "SMOG"
+  SMOG = "SMOG",
+  PSYCHIC = "PSYCHIC"
 }
 
 export const CopyableAbility: { [key in Ability]: boolean } = {
@@ -253,7 +253,6 @@ export const CopyableAbility: { [key in Ability]: boolean } = {
   [Ability.BURN]: true,
   [Ability.SILENCE]: true,
   [Ability.SLEEP]: true,
-  [Ability.FREEZE]: true,
   [Ability.PROTECT]: true,
   [Ability.POISON]: true,
   [Ability.CONFUSION]: true,
@@ -417,5 +416,6 @@ export const CopyableAbility: { [key in Ability]: boolean } = {
   [Ability.PRESENT]: true,
   [Ability.LEAF_BLADE]: true,
   [Ability.ANCHOR_SHOT]: true,
-  [Ability.SMOG]: true
+  [Ability.SMOG]: true,
+  [Ability.PSYCHIC]: true
 }
