@@ -1149,7 +1149,7 @@
   "effect_description.TOXIC": "70 % Chance auf Vergiftung. Maximale Stapel von POISON +2",
   "effect_description.DRAGON_ENERGY": "Die zweite Synergie des Drachen zählt doppelt (nicht die dritte)",
   "effect_description.DRAGON_SCALES": "Drachen erhalten 30 HP pro tier",
-  "effect_description.DRAGON_DANCE": "Drachen erhalten 20 % ATK_SPEED und 20 % AP pro tier",
+  "effect_description.DRAGON_DANCE": "Drachen erhalten 10 % ATK_SPEED und 10 % AP pro tier",
   "effect_description.BULK_UP": "Heile 30 HP und erhalte 20 % ATK_SPEED",
   "effect_description.RAGE": "Heile 30 HP und erhalte 25 % ATK_SPEED",
   "effect_description.ANGER_POINT": "Heile 30 HP und erhalte 30 % ATK_SPEED",

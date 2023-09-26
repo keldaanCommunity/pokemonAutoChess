@@ -1150,7 +1150,7 @@
   "effect_description.TOXIC": "70%の確率でPOISON付与。 POISONの最大スタック数+2",
   "effect_description.DRAGON_ENERGY": "ドラゴンの 2 番目のシナジーは 2 倍にカウントされます (3 番目ではありません)。",
   "effect_description.DRAGON_SCALES": "ドラゴンは進化段階ごとに 30 HP を獲得します (神話の場合は 3)",
-  "effect_description.DRAGON_DANCE": "ドラゴンは進化段階ごとに 20% の ATK_SPEED と 20% の AP を獲得します (神話の場合は 3)",
+  "effect_description.DRAGON_DANCE": "ドラゴンは進化段階ごとに 10% の ATK_SPEED と 10% の AP を獲得します (神話の場合は 3)",
   "effect_description.BULK_UP": "HPが30回復し、ATK_SPEEDが20%増加します",
   "effect_description.RAGE": "HPを30回復し、ATK_SPEEDが25%増加します",
   "effect_description.ANGER_POINT": "HPが30回復し、ATK_SPEEDが30%増加します",

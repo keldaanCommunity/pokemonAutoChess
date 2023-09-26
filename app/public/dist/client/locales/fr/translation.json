@@ -1166,7 +1166,7 @@
     "TOXIC": "70% de chances d'infliger POISON. Charges max de POISON +2",
     "DRAGON_ENERGY": "La deuxième synergie du Dragon compte double (pas la troisième)",
     "DRAGON_SCALES": "Les dragons gagnent 30 HP par stade d'évolution (3 pour les mythiques)",
-    "DRAGON_DANCE": "Les dragons gagnent 20 % d'ATK_SPEED et 20 % d'AP par stade d'évolution (3 pour les mythiques)",
+    "DRAGON_DANCE": "Les dragons gagnent 10 % d'ATK_SPEED et 10 % d'AP par stade d'évolution (3 pour les mythiques)",
     "BULK_UP": "Soigne 30 HP et gagne 20% ATK_SPEED",
     "RAGE": "Soigne 30 HP et gagne 25% ATK_SPEED",
     "ANGER_POINT": "Soigne 30 HP et gagne 30% ATK_SPEED",

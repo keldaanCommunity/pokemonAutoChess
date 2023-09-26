@@ -1177,7 +1177,7 @@
     "TOXIC": "70% chance to POISON. Max stacks of POISON +2",
     "DRAGON_ENERGY": "Dragon's second synergy counts double (not the third)",
     "DRAGON_SCALES": "Dragons gain 30 HP per tier",
-    "DRAGON_DANCE": "Dragons gain 20% ATK_SPEED and 20% AP per tier",
+    "DRAGON_DANCE": "Dragons gain 10% ATK_SPEED and 10% AP per tier",
     "BULK_UP": "Heal 30 HP and gain 20% ATK_SPEED",
     "RAGE": "Heal 30 HP and gain 25% ATK_SPEED",
     "ANGER_POINT": "Heal 30 HP and gain 30% ATK_SPEED",
