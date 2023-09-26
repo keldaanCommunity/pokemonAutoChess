@@ -1,11 +1,4 @@
-import React, {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useRef,
-  useState
-} from "react"
+import React, { useCallback, useEffect, useRef, useState } from "react"
 import { Navigate } from "react-router-dom"
 import Chat from "./component/chat/chat"
 import CurrentUsers from "./component/available-user-menu/current-users"
@@ -72,6 +65,7 @@ import "./lobby.css"
 import { localStore, LocalStoreKeys } from "./utils/store"
 import { Modal } from "react-bootstrap"
 import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
+import { logger } from "../../../utils/logger"
 
 export default function Lobby() {
   const dispatch = useAppDispatch()
@@ -90,7 +84,10 @@ export default function Lobby() {
   useEffect(() => {
     const client = store.getState().network.client
     if (!lobbyJoined.current) {
-      join(dispatch, client, setToAuth)
+      joinLobbyRoom(dispatch, client).catch((err) => {
+        logger.error(err)
+        setToAuth(true)
+      })
       lobbyJoined.current = true
       setReconnectionToken(localStore.get(LocalStoreKeys.RECONNECTION_TOKEN))
     }
@@ -170,210 +167,208 @@ function MainLobby({ toPreparation, setToPreparation }) {
   )
 }
 
-export async function join(
+export async function joinLobbyRoom(
   dispatch,
-  client: Client,
-  setToAuth: Dispatch<SetStateAction<boolean>>
-) {
+  client: Client
+): Promise<Room<ICustomLobbyState>> {
   if (!firebase.apps.length) {
     firebase.initializeApp(FIREBASE_CONFIG)
   }
+  return new Promise((resolve, reject) => {
+    firebase.auth().onAuthStateChanged(async (user) => {
+      if (user) {
+        dispatch(logIn(user))
+        try {
+          const token = await user.getIdToken()
 
-  firebase.auth().onAuthStateChanged(async (user) => {
-    if (user) {
-      dispatch(logIn(user))
-      try {
-        const token = await user.getIdToken()
-        const room: Room<ICustomLobbyState> = await client.joinOrCreate(
-          "lobby",
-          { idToken: token }
-        )
-        room.state.messages.onAdd((m) => {
-          dispatch(pushMessage(m))
-        })
-        room.state.messages.onRemove((m) => {
-          dispatch(removeMessage(m))
-        })
-
-        room.state.users.onAdd((u) => {
-          dispatch(addUser(u))
-
-          if (u.id == user.uid) {
-            u.pokemonCollection.onAdd((p) => {
-              const pokemonConfig = p as PokemonConfig
-              dispatch(addPokemonConfig(pokemonConfig))
-              const fields: NonFunctionPropNames<PokemonConfig>[] = [
-                "dust",
-                "emotions",
-                "id",
-                "selectedEmotion",
-                "selectedShiny",
-                "shinyEmotions"
-              ]
-
-              fields.forEach((field) => {
-                pokemonConfig.listen(
-                  field,
-                  (value, previousValue) => {
-                    if (previousValue !== undefined) {
-                      dispatch(
-                        changePokemonConfig({
-                          id: pokemonConfig.id,
-                          field: field,
-                          value: value
-                        })
-                      )
-                    }
-                  },
-                  false
-                )
-              })
-            }, false)
-            dispatch(setUser(u))
-            setSearchedUser(u)
-
-            u.listen("language", (value) => {
-              if (value) {
-                dispatch(setLanguage(value))
-                i18n.changeLanguage(value)
-              }
-            })
+          const lobby = store.getState().network.lobby
+          if (lobby) {
+            await lobby.leave()
           }
-          const fields: NonFunctionPropNames<LobbyUser>[] = [
-            "id",
-            "name",
-            "avatar",
-            "elo",
-            "wins",
-            "exp",
-            "level",
-            "donor",
-            "honors",
-            "history",
-            "booster",
-            "titles",
-            "title",
-            "role",
-            "anonymous"
-          ]
+          const room: Room<ICustomLobbyState> = await client.joinOrCreate(
+            "lobby",
+            { idToken: token }
+          )
+          room.state.messages.onAdd((m) => {
+            dispatch(pushMessage(m))
+          })
+          room.state.messages.onRemove((m) => {
+            dispatch(removeMessage(m))
+          })
 
-          fields.forEach((field) => {
-            u.listen(field, (value) => {
-              dispatch(changeUser({ id: u.id, field: field, value: value }))
+          room.state.users.onAdd((u) => {
+            dispatch(addUser(u))
+
+            if (u.id == user.uid) {
+              u.pokemonCollection.onAdd((p) => {
+                const pokemonConfig = p as PokemonConfig
+                dispatch(addPokemonConfig(pokemonConfig))
+                const fields: NonFunctionPropNames<PokemonConfig>[] = [
+                  "dust",
+                  "emotions",
+                  "id",
+                  "selectedEmotion",
+                  "selectedShiny",
+                  "shinyEmotions"
+                ]
+
+                fields.forEach((field) => {
+                  pokemonConfig.listen(
+                    field,
+                    (value, previousValue) => {
+                      if (previousValue !== undefined) {
+                        dispatch(
+                          changePokemonConfig({
+                            id: pokemonConfig.id,
+                            field: field,
+                            value: value
+                          })
+                        )
+                      }
+                    },
+                    false
+                  )
+                })
+              }, false)
+              dispatch(setUser(u))
+              setSearchedUser(u)
+
+              u.listen("language", (value) => {
+                if (value) {
+                  dispatch(setLanguage(value))
+                  i18n.changeLanguage(value)
+                }
+              })
+            }
+            const fields: NonFunctionPropNames<LobbyUser>[] = [
+              "id",
+              "name",
+              "avatar",
+              "elo",
+              "wins",
+              "exp",
+              "level",
+              "donor",
+              "honors",
+              "history",
+              "booster",
+              "titles",
+              "title",
+              "role",
+              "anonymous"
+            ]
+
+            fields.forEach((field) => {
+              u.listen(field, (value) => {
+                dispatch(changeUser({ id: u.id, field: field, value: value }))
+              })
             })
           })
-        })
 
-        room.state.users.onRemove((u) => {
-          dispatch(removeUser(u.id))
-        })
+          room.state.users.onRemove((u) => {
+            dispatch(removeUser(u.id))
+          })
 
-        room.onMessage(Transfer.REQUEST_LEADERBOARD, (l) => {
-          dispatch(setLeaderboard(l))
-        })
+          room.onMessage(Transfer.REQUEST_LEADERBOARD, (l) => {
+            dispatch(setLeaderboard(l))
+          })
 
-        room.onMessage(Transfer.REQUEST_BOT_LEADERBOARD, (l) => {
-          dispatch(setBotLeaderboard(l))
-        })
+          room.onMessage(Transfer.REQUEST_BOT_LEADERBOARD, (l) => {
+            dispatch(setBotLeaderboard(l))
+          })
 
-        room.onMessage(Transfer.REQUEST_LEVEL_LEADERBOARD, (l) => {
-          dispatch(setLevelLeaderboard(l))
-        })
+          room.onMessage(Transfer.REQUEST_LEVEL_LEADERBOARD, (l) => {
+            dispatch(setLevelLeaderboard(l))
+          })
 
-        room.onMessage(Transfer.BAN, () => {
-          setToAuth(true)
-        })
+          room.onMessage(Transfer.BAN, () => reject("banned"))
 
-        room.onMessage(Transfer.BANNED, (message) => {
-          alert(message)
-        })
+          room.onMessage(Transfer.BANNED, (message) => {
+            alert(message)
+          })
 
-        room.onMessage(Transfer.BOT_DATABASE_LOG, (message) => {
-          dispatch(pushBotLog(message))
-        })
+          room.onMessage(Transfer.BOT_DATABASE_LOG, (message) => {
+            dispatch(pushBotLog(message))
+          })
 
-        room.onMessage(Transfer.PASTEBIN_URL, (json: { url: string }) => {
-          dispatch(setPastebinUrl(json.url))
-        })
+          room.onMessage(Transfer.PASTEBIN_URL, (json: { url: string }) => {
+            dispatch(setPastebinUrl(json.url))
+          })
 
-        room.onMessage(Transfer.ROOMS, (rooms: RoomAvailable[]) => {
-          rooms.forEach((room) => dispatch(addRoom(room)))
-        })
+          room.onMessage(Transfer.ROOMS, (rooms: RoomAvailable[]) => {
+            rooms.forEach((room) => dispatch(addRoom(room)))
+          })
 
-        room.onMessage(
-          Transfer.REQUEST_BOT_LIST,
-          (
-            bots: {
-              name: string
-              avatar: string
-              id: string
-              author: string
-            }[]
-          ) => {
+          room.onMessage(Transfer.REQUEST_BOT_LIST, (bots: IBot[]) => {
             dispatch(setBotList(bots))
-          }
-        )
+          })
 
-        room.onMessage(Transfer.ADD_ROOM, ([, room]) => {
-          if (room.name === "room" || room.name === "game") {
-            dispatch(addRoom(room))
-          }
-        })
+          room.onMessage(Transfer.ADD_ROOM, ([, room]) => {
+            if (room.name === "room" || room.name === "game") {
+              dispatch(addRoom(room))
+            }
+          })
 
-        room.onMessage(Transfer.REMOVE_ROOM, (roomId: string) =>
-          dispatch(removeRoom(roomId))
-        )
+          room.onMessage(Transfer.REMOVE_ROOM, (roomId: string) =>
+            dispatch(removeRoom(roomId))
+          )
 
-        room.onMessage(Transfer.USER_PROFILE, (user: IUserMetadata) => {
-          dispatch(setProfile(user))
-        })
+          room.onMessage(Transfer.USER_PROFILE, (user: IUserMetadata) => {
+            dispatch(setProfile(user))
+          })
 
-        room.onMessage(Transfer.USER, (user: LobbyUser) =>
-          dispatch(setSearchedUser(user))
-        )
+          room.onMessage(Transfer.USER, (user: LobbyUser) =>
+            dispatch(setSearchedUser(user))
+          )
 
-        room.onMessage(Transfer.REQUEST_META, (meta: IMeta[]) => {
-          dispatch(setMeta(meta))
-        })
+          room.onMessage(Transfer.REQUEST_META, (meta: IMeta[]) => {
+            dispatch(setMeta(meta))
+          })
 
-        room.onMessage(
-          Transfer.REQUEST_META_ITEMS,
-          (metaItems: IItemsStatistic[]) => {
-            dispatch(setMetaItems(metaItems))
-          }
-        )
+          room.onMessage(
+            Transfer.REQUEST_META_ITEMS,
+            (metaItems: IItemsStatistic[]) => {
+              dispatch(setMetaItems(metaItems))
+            }
+          )
 
-        room.onMessage(
-          Transfer.REQUEST_META_POKEMONS,
-          (metaPokemons: IPokemonsStatistic[]) => {
-            dispatch(setMetaPokemons(metaPokemons))
-          }
-        )
+          room.onMessage(
+            Transfer.REQUEST_META_POKEMONS,
+            (metaPokemons: IPokemonsStatistic[]) => {
+              dispatch(setMetaPokemons(metaPokemons))
+            }
+          )
 
-        room.onMessage(Transfer.REQUEST_BOT_DATA, (data: IBot) => {
-          dispatch(setBotData(data))
-        })
+          room.onMessage(Transfer.REQUEST_BOT_DATA, (data: IBot) => {
+            dispatch(setBotData(data))
+          })
 
-        room.onMessage(Transfer.BOOSTER_CONTENT, (boosterContent: string[]) => {
-          dispatch(setBoosterContent(boosterContent))
-        })
+          room.onMessage(
+            Transfer.BOOSTER_CONTENT,
+            (boosterContent: string[]) => {
+              dispatch(setBoosterContent(boosterContent))
+            }
+          )
 
-        room.onMessage(
-          Transfer.SUGGESTIONS,
-          (suggestions: ISuggestionUser[]) => {
-            dispatch(setSuggestions(suggestions))
-          }
-        )
+          room.onMessage(
+            Transfer.SUGGESTIONS,
+            (suggestions: ISuggestionUser[]) => {
+              dispatch(setSuggestions(suggestions))
+            }
+          )
 
-        dispatch(joinLobby(room))
-        dispatch(requestLeaderboard())
-        dispatch(requestBotLeaderboard())
-        dispatch(requestLevelLeaderboard())
-      } catch (error) {
-        setToAuth(true)
+          dispatch(joinLobby(room))
+          dispatch(requestLeaderboard())
+          dispatch(requestBotLeaderboard())
+          dispatch(requestLevelLeaderboard())
+
+          resolve(room)
+        } catch (error) {
+          reject(error)
+        }
+      } else {
+        reject("not authenticated")
       }
-    } else {
-      setToAuth(true)
-    }
+    })
   })
 }

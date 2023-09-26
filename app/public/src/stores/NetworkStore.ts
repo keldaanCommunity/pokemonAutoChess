@@ -72,7 +72,6 @@ export const networkSlice = createSlice({
       state.profile = action.payload
     },
     joinLobby: (state, action: PayloadAction<Room<ICustomLobbyState>>) => {
-      state.lobby?.connection.close()
       state.lobby = action.payload
       state.preparation?.connection.close()
       state.preparation = undefined
@@ -131,8 +130,11 @@ export const networkSlice = createSlice({
     requestMeta: (state) => {
       state.lobby?.send(Transfer.REQUEST_META)
     },
-    requestBotList: (state) => {
-      state.lobby?.send(Transfer.REQUEST_BOT_LIST)
+    requestBotList: (
+      state,
+      action: PayloadAction<{ withSteps: boolean } | undefined>
+    ) => {
+      state.lobby?.send(Transfer.REQUEST_BOT_LIST, action.payload)
     },
     createBot: (state, action: PayloadAction<IBot>) => {
       state.lobby?.send(Transfer.BOT_CREATION, { bot: action.payload })

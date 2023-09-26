@@ -35,7 +35,7 @@ export interface IUserLobbyState {
   tabIndex: number
   preparationRooms: RoomAvailable[]
   gameRooms: RoomAvailable[]
-  botList: { name: string; avatar: string; id: string; author: string }[]
+  botList: IBot[]
   meta: IMeta[]
   metaItems: IItemsStatistic[]
   metaPokemons: IPokemonsStatistic[]
@@ -126,8 +126,10 @@ export const lobbySlice = createSlice({
     },
     addUser: (state, action: PayloadAction<LobbyUser>) => {
       const u: ILobbyUser = JSON.parse(JSON.stringify(action.payload))
-      state.users.push(u)
-      state.users.sort((a, b) => b.elo - a.elo)
+      if (!state.users.find((user) => user.id === u.id)) {
+        state.users.push(u)
+        state.users.sort((a, b) => b.elo - a.elo)
+      }
     },
     changeUser: (
       state,
@@ -196,12 +198,7 @@ export const lobbySlice = createSlice({
     setMetaPokemons: (state, action: PayloadAction<IPokemonsStatistic[]>) => {
       state.metaPokemons = action.payload
     },
-    setBotList: (
-      state,
-      action: PayloadAction<
-        { name: string; avatar: string; author: string; id: string }[]
-      >
-    ) => {
+    setBotList: (state, action: PayloadAction<IBot[]>) => {
       state.botList = action.payload
     },
     setPastebinUrl: (state, action: PayloadAction<string>) => {

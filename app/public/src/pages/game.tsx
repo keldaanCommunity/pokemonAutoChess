@@ -51,7 +51,12 @@ import {
   setAdditionalPokemons,
   setSimulation
 } from "../stores/GameStore"
-import { logIn, joinGame, requestTilemap, setProfile } from "../stores/NetworkStore"
+import {
+  logIn,
+  joinGame,
+  requestTilemap,
+  setProfile
+} from "../stores/NetworkStore"
 import { FIREBASE_CONFIG } from "./utils/utils"
 import GameContainer from "../game/game-container"
 import { Navigate } from "react-router-dom"
@@ -120,7 +125,7 @@ export default function Game() {
   const [connectError, setConnectError] = useState<string>("")
   const [modalTitle, setModalTitle] = useState<string>("")
   const [modalInfo, setModalInfo] = useState<string>("")
-  const [modalBoolean, setModalBoolean] = useState<boolean>(false)
+  const [modalVisible, setModalVisible] = useState<boolean>(false)
   const [toAfter, setToAfter] = useState<boolean>(false)
   const [toAuth, setToAuth] = useState<boolean>(false)
   const container = useRef<HTMLDivElement>(null)
@@ -291,7 +296,7 @@ export default function Game() {
       room.onMessage(Transfer.BROADCAST_INFO, (message) => {
         setModalTitle(message.title)
         setModalInfo(message.info)
-        setModalBoolean(true)
+        setModalVisible(true)
       })
       room.onMessage(Transfer.REQUEST_TILEMAP, (tilemap) => {
         gameContainer.setTilemap(tilemap)
@@ -542,7 +547,7 @@ export default function Game() {
             if (value === false) {
               setModalTitle(titlePhrase)
               setModalInfo(rankPhrase)
-              setModalBoolean(true)
+              setModalVisible(true)
             }
           })
           player.listen("interest", (value) => {
@@ -680,10 +685,10 @@ export default function Game() {
         <>
           <MainSidebar page="game" leave={leave} leaveLabel={t("leave_game")} />
           <GameModal
-            modalBoolean={modalBoolean}
+            visible={modalVisible}
             modalTitle={modalTitle}
             modalInfo={modalInfo}
-            hideModal={setModalBoolean}
+            hideModal={setModalVisible}
             leave={leave}
           />
           {!spectate && <GameShop />}

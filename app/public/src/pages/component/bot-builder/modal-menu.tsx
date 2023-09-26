@@ -7,23 +7,22 @@ import { requestBotData } from "../../../stores/NetworkStore"
 import { useTranslation } from "react-i18next"
 
 export default function ModalMenu(props: {
-  showModal: (mode: ModalMode) => void
   bot: IBot
   hideModal: () => void
   modalMode: ModalMode
   importBot: (text: string) => void
   pasteBinUrl: string
   createBot: () => void
-  botData: IBot
-  modalBoolean: boolean
+  visible: boolean
 }) {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
+  const botData: IBot = useAppSelector((state) => state.lobby.botData)
   useEffect(() => {
-    if (props.botData?.avatar) {
-      handleTextAreaChange(JSON.stringify(props.botData))
+    if (botData?.avatar) {
+      handleTextAreaChange(JSON.stringify(botData))
     }
-  }, [props.botData])
+  }, [botData])
 
   const botList: {
     name: string
@@ -40,7 +39,7 @@ export default function ModalMenu(props: {
   const [textArea, handleTextAreaChange] = useState<string>("")
   if (props.modalMode == ModalMode.EXPORT) {
     return (
-      <Modal show={props.modalBoolean} onHide={props.hideModal} size="lg">
+      <Modal show={props.visible} onHide={props.hideModal} size="lg">
         <Modal.Header>
           <Modal.Title>Export</Modal.Title>
         </Modal.Header>
@@ -71,7 +70,7 @@ export default function ModalMenu(props: {
     )
   } else if (props.modalMode == ModalMode.IMPORT) {
     return (
-      <Modal show={props.modalBoolean} onHide={props.hideModal} size="lg">
+      <Modal show={props.visible} onHide={props.hideModal} size="lg">
         <Modal.Header>
           <Modal.Title>{t("import")}</Modal.Title>
         </Modal.Header>

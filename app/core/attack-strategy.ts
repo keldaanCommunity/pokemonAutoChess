@@ -339,9 +339,24 @@ export class SongOfDesireStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    const rank = new Array<PokemonEntity>()
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
+      if (tg && pokemon.team != tg.team) {
+        rank.push(tg)
+      }
+    })
+    rank.sort((a, b) => {
+      if (a.team === Team.BLUE_TEAM) {
+        return a.positionY - b.positionY
+      } else {
+        return b.positionY - a.positionY
+      }
+    })
+
+    const targetCharmed = rank[0]
     const duration = 6000 * (1 + pokemon.ap / 100)
 
-    target.status.triggerCharm(duration, target)
+    targetCharmed.status.triggerCharm(duration, target)
   }
 }
 
@@ -521,14 +536,14 @@ export class MistySurgeStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const buff = 5
+    const ppGain = Math.round(30 * (1 + pokemon.ap / 100))
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (
         ally &&
         pokemon.team == ally.team &&
         ally.types.includes(Synergy.FAIRY)
       ) {
-        ally.addSpecialDefense(buff, true)
+        ally.setPP(ally.pp + ppGain)
       }
     })
   }
@@ -3632,7 +3647,7 @@ export class SpectralThiefStrategy extends AttackStrategy {
       pokemon,
       board
     )
-    const damage = 50
+    const damage = 80
     if (farthestCoordinate) {
       target.handleSpecialDamage(
         damage,
@@ -4204,7 +4219,7 @@ export class UppercutStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 80
+    let damage = 60
     if (pokemon.def > target.def) damage *= 2
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
@@ -4219,7 +4234,7 @@ export class MawashiGeriStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 80
+    let damage = 60
     if (pokemon.atk > target.atk) damage *= 2
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }

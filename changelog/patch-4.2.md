@@ -36,6 +36,18 @@
 - Shell Trap: added AP scaling
 - Sleep ability: reduced sleep duration from 2.5 seconds to 2 seconds, but added AP scaling
 - Thrash ability: reduce attack buff from 110% to 100%, but added AP scaling
+- Changed Misty Surge (Tapu Fini): now gives 30 PP instead of 5 Special Defense
+- Nerf Marshadow: Attack ~~35~~ 28, Def/SpeDef: ~~6~~ 5, PP ~~90~~ 120, Special damage of Spectral Thief ~~50~~ 80
+- Nerf Tyrogue: HP ~~200~~ 150
+- Nerf Hitmonchan: HP ~~200~~ 180, Def/Spedef ~~9~~ 7, Uppercut damage ~~80~~ 60
+- Nerf Hitmonlee: HP ~~200~~ 180, Attack ~~30~~ 25, Mawashi Geri damage ~~80~~ 60
+- Adjusted Hitmontop: HP ~~200~~ 180, Attack ~~25~~ 22, Def/Spedef ~~6~~ 5, PP ~~100~~ 75
+- Buff Minun & Plusle: HP ~~130~~ 140, PP ~~70~~ 60
+- Buff Mesprit: ability now targets a unit in the backline
+- Buff Regirock: Def ~~6~~ 10
+- Buff Regice: Spedef ~~6~~ 10
+- Buff Registeel: Attack ~~20~~ 25
+
 
 # Changes to Synergies
 
@@ -54,12 +66,12 @@
 # Gameplay
 
 - New gadget: Map - Choose the map before game as room leader
-
 - New mechanic: board effects - Koffing ability Smog is an exemple of ability using this mechanic
-
 - Not picking a portal at round 10 and 20 now gives you 6 random propositions instead of picking a random remaining portal
 
 # UI
+
+- Various fixes and improvements to the Bot Builder
 
 # Bugfix
 
