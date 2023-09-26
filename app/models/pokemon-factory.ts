@@ -1,10 +1,6 @@
 import { MapSchema } from "@colyseus/schema"
 import { Emotion, IPlayer } from "../types"
-import {
-  EvolutionTime,
-  HatchList,
-  RarityCost
-} from "../types/Config"
+import { EvolutionTime, HatchList, RarityCost } from "../types/Config"
 import { PokemonActionState, Rarity } from "../types/enum/Game"
 import {
   Pkm,
@@ -2098,10 +2094,10 @@ export default class PokemonFactory {
       const duo = Object.entries(PkmDuos).find(([key, duo]) =>
         duo.includes(pokemon.name)
       )
-      if(pokemon.rarity === Rarity.UNIQUE){
+      if (pokemon.rarity === Rarity.UNIQUE) {
         return duo ? 8 : 15
       } else {
-        return duo ? 10 : 20        
+        return duo ? 10 : 20
       }
     } else if (PokemonFactory.getPokemonBaseEvolution(name) == Pkm.EEVEE) {
       return RarityCost[pokemon.rarity]
