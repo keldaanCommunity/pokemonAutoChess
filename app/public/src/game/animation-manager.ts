@@ -143,7 +143,7 @@ export default class AnimationManager {
       key: Ability.CORRUPTED_NATURE,
       frames: this.game.anims.generateFrameNames("pmd-replace", {
         start: 0,
-        end: 48,
+        end: 45,
         zeroPad: 3,
         prefix: `${Ability.CORRUPTED_NATURE}/`
       }),
@@ -179,7 +179,7 @@ export default class AnimationManager {
       key: Ability.DRACO_ENERGY,
       frames: this.game.anims.generateFrameNames("pmd-replace", {
         start: 0,
-        end: 14,
+        end: 13,
         zeroPad: 3,
         prefix: `${Ability.DRACO_ENERGY}/`
       }),
@@ -202,8 +202,8 @@ export default class AnimationManager {
     this.game.anims.create({
       key: Ability.ELECTRO_BOOST,
       frames: this.game.anims.generateFrameNames("pmd-replace", {
-        start: 0,
-        end: 12,
+        start: 3,
+        end: 32,
         zeroPad: 3,
         prefix: `${Ability.ELECTRO_BOOST}/`
       }),
@@ -263,7 +263,7 @@ export default class AnimationManager {
       key: Ability.LOCK_ON,
       frames: this.game.anims.generateFrameNames("pmd-replace", {
         start: 0,
-        end: 26,
+        end: 25,
         zeroPad: 3,
         prefix: `${Ability.LOCK_ON}/`
       }),
@@ -359,7 +359,7 @@ export default class AnimationManager {
       key: Ability.ROCK_SLIDE,
       frames: this.game.anims.generateFrameNames("specials", {
         start: 0,
-        end: 79,
+        end: 78,
         zeroPad: 3,
         prefix: `${Ability.ROCK_SLIDE}/`
       }),
@@ -383,7 +383,7 @@ export default class AnimationManager {
       key: Ability.THUNDER,
       frames: this.game.anims.generateFrameNames("specials", {
         start: 0,
-        end: 12,
+        end: 8,
         zeroPad: 3,
         prefix: `${Ability.THUNDER}/`
       }),
@@ -407,7 +407,7 @@ export default class AnimationManager {
       key: Ability.DRACO_METEOR,
       frames: this.game.anims.generateFrameNames("specials", {
         start: 0,
-        end: 34,
+        end: 32,
         zeroPad: 3,
         prefix: `${Ability.DRACO_METEOR}/`
       }),
@@ -419,7 +419,7 @@ export default class AnimationManager {
       key: Ability.BLAZE_KICK,
       frames: this.game.anims.generateFrameNames("specials", {
         start: 0,
-        end: 15,
+        end: 14,
         zeroPad: 3,
         prefix: `${Ability.BLAZE_KICK}/`
       }),
@@ -443,7 +443,7 @@ export default class AnimationManager {
       key: Ability.CALM_MIND,
       frames: this.game.anims.generateFrameNames("specials", {
         start: 0,
-        end: 45,
+        end: 37,
         zeroPad: 3,
         prefix: `${Ability.CALM_MIND}/`
       }),
@@ -479,7 +479,7 @@ export default class AnimationManager {
       key: Ability.SOAK,
       frames: this.game.anims.generateFrameNames("specials", {
         start: 0,
-        end: 45,
+        end: 42,
         zeroPad: 3,
         prefix: `${Ability.SOAK}/`
       }),
@@ -491,7 +491,7 @@ export default class AnimationManager {
       key: Ability.BLAST_BURN,
       frames: this.game.anims.generateFrameNames("specials", {
         start: 0,
-        end: 16,
+        end: 14,
         zeroPad: 3,
         prefix: `${Ability.BLAST_BURN}/`
       }),
@@ -539,7 +539,7 @@ export default class AnimationManager {
       key: Ability.DRAGON_TAIL,
       frames: this.game.anims.generateFrameNames("specials", {
         start: 0,
-        end: 25,
+        end: 23,
         zeroPad: 3,
         prefix: `${Ability.DRAGON_TAIL}/`
       }),
@@ -575,7 +575,7 @@ export default class AnimationManager {
       key: Ability.ROOT,
       frames: this.game.anims.generateFrameNames("specials", {
         start: 0,
-        end: 48,
+        end: 45,
         zeroPad: 3,
         prefix: `${Ability.ROOT}/`
       }),
@@ -599,7 +599,7 @@ export default class AnimationManager {
       key: Ability.STOMP,
       frames: this.game.anims.generateFrameNames("specials", {
         start: 0,
-        end: 12,
+        end: 9,
         zeroPad: 3,
         prefix: `${Ability.STOMP}/`
       }),
@@ -611,7 +611,7 @@ export default class AnimationManager {
       key: Ability.PAYBACK,
       frames: this.game.anims.generateFrameNames("specials", {
         start: 0,
-        end: 31,
+        end: 18,
         zeroPad: 3,
         prefix: `${Ability.PAYBACK}/`
       }),
@@ -623,7 +623,7 @@ export default class AnimationManager {
       key: Ability.NIGHT_SLASH,
       frames: this.game.anims.generateFrameNames("specials", {
         start: 0,
-        end: 6,
+        end: 4,
         zeroPad: 3,
         prefix: `${Ability.NIGHT_SLASH}/`
       }),
@@ -731,7 +731,7 @@ export default class AnimationManager {
       key: Ability.METEOR_MASH,
       frames: this.game.anims.generateFrameNames("specials", {
         start: 0,
-        end: 45,
+        end: 35,
         zeroPad: 3,
         prefix: `${Ability.METEOR_MASH}/`
       }),
@@ -840,6 +840,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.PSYCHIC,
+      frames: this.game.anims.generateFrameNames(Ability.PSYCHIC, {
+        start: 0,
+        end: 16,
+        zeroPad: 3
+      }),
+      duration: 500,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.ANCHOR_SHOT,
       frames: this.game.anims.generateFrameNames(Ability.ANCHOR_SHOT, {
         start: 0,
@@ -854,7 +865,7 @@ export default class AnimationManager {
       key: Ability.LEAF_BLADE,
       frames: this.game.anims.generateFrameNames(Ability.LEAF_BLADE, {
         start: 0,
-        end: 26,
+        end: 25,
         zeroPad: 3
       }),
       duration: 1000,
@@ -1535,7 +1546,7 @@ export default class AnimationManager {
       key: Ability.HEAD_SMASH,
       frames: this.game.anims.generateFrameNames("specials", {
         start: 0,
-        end: 79,
+        end: 78,
         zeroPad: 3,
         prefix: `${Ability.ROCK_SLIDE}/`
       }),
@@ -1703,7 +1714,7 @@ export default class AnimationManager {
       key: "FIGHTING/range",
       frames: this.game.anims.generateFrameNames("attacks", {
         start: 9,
-        end: 39,
+        end: 37,
         zeroPad: 3,
         prefix: "FIGHTING/range/"
       }),
@@ -1739,7 +1750,7 @@ export default class AnimationManager {
       key: "DRAGON/range",
       frames: this.game.anims.generateFrameNames("attacks", {
         start: 0,
-        end: 45,
+        end: 35,
         zeroPad: 3,
         prefix: "DRAGON/range/"
       }),

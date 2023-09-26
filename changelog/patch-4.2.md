@@ -7,6 +7,8 @@
 - Dhelmise
 - Koffing
 - Weezing
+- Staryu
+- Starmie
 
 # Changes to Pokemon & Abilities
 
@@ -47,7 +49,6 @@
 - Buff Regirock: Def ~~6~~ 10
 - Buff Regice: Spedef ~~6~~ 10
 - Buff Registeel: Attack ~~20~~ 25
-
 
 # Changes to Synergies
 

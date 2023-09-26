@@ -3397,6 +3397,36 @@ export default class BattleManager {
             })
             break
 
+          case Ability.PSYCHIC:
+            coordinatesTarget = transformAttackCoordinate(
+              targetX,
+              targetY,
+              this.flip
+            )
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.PSYCHIC,
+              "000"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.anims.play(Ability.PSYCHIC)
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              x: coordinatesTarget[0],
+              y: coordinatesTarget[1],
+              duration: 500,
+              onComplete: () => {
+                specialProjectile.destroy()
+              }
+            })
+            break
+
           case Ability.PYRO_BALL:
             coordinatesTarget = transformAttackCoordinate(
               targetX,

@@ -614,7 +614,9 @@ import {
   AlolanRaichu,
   Dhelmise,
   Koffing,
-  Weezing
+  Weezing,
+  Staryu,
+  Starmie
 } from "./colyseus-models/pokemon"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
 
@@ -2025,6 +2027,10 @@ export default class PokemonFactory {
         return new Koffing(s, e)
       case Pkm.WEEZING:
         return new Weezing(s, e)
+      case Pkm.STARYU:
+        return new Staryu(s, e)
+      case Pkm.STARMIE:
+        return new Starmie(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:

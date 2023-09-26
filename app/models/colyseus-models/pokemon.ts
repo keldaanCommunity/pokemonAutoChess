@@ -11547,6 +11547,54 @@ export class Appletun extends Pokemon {
   }
 }
 
+export class Staryu extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.STARYU,
+      [Synergy.WATER, Synergy.PSYCHIC],
+      Rarity.RARE,
+      Pkm.STARMIE,
+      80,
+      6,
+      2,
+      3,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      1,
+      100,
+      Ability.PSYCHIC,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Starmie extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.STARMIE,
+      [Synergy.WATER, Synergy.PSYCHIC],
+      Rarity.RARE,
+      Pkm.DEFAULT,
+      180,
+      14,
+      2,
+      3,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      2,
+      100,
+      Ability.PSYCHIC,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
 export class Vulpix extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
