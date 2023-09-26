@@ -179,7 +179,8 @@ import {
   PresentStrategy,
   LeafBladeStrategy,
   AnchorShotStrategy,
-  SmogStrategy
+  SmogStrategy,
+  PsychicStrategy
 } from "../attack-strategy"
 import {
   HiddenPowerAStrategy,
@@ -422,5 +423,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.PRESENT]: new PresentStrategy(),
   [Ability.LEAF_BLADE]: new LeafBladeStrategy(),
   [Ability.ANCHOR_SHOT]: new AnchorShotStrategy(),
-  [Ability.SMOG]: new SmogStrategy()
+  [Ability.SMOG]: new SmogStrategy(),
+  [Ability.PSYCHIC]: new PsychicStrategy()
 }

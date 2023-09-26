@@ -840,6 +840,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.PSYCHIC,
+      frames: this.game.anims.generateFrameNames(Ability.PSYCHIC, {
+        start: 0,
+        end: 16,
+        zeroPad: 3
+      }),
+      duration: 500,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.ANCHOR_SHOT,
       frames: this.game.anims.generateFrameNames(Ability.ANCHOR_SHOT, {
         start: 0,
