@@ -3073,8 +3073,23 @@ export class AppleAcidStrategy extends AttackStrategy {
       default:
         break
     }
-    pokemon.addDefense(-3, true)
-    pokemon.addSpecialDefense(-3, true)
+    target.addDefense(-3, true)
+    target.addSpecialDefense(-3, true)
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+  }
+}
+
+export class PsychicStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 80 : 40
+    target.addSpecialDefense(pokemon.stars, true)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
