@@ -410,7 +410,7 @@
 					}
 				},
 				{
-					"filename": "THUNDER/003",
+					"filename": "THUNDER/002",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -435,7 +435,7 @@
 					}
 				},
 				{
-					"filename": "THUNDER/004",
+					"filename": "THUNDER/003",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -460,7 +460,7 @@
 					}
 				},
 				{
-					"filename": "THUNDER/011",
+					"filename": "THUNDER/007",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -475,6 +475,31 @@
 					},
 					"frame": {
 						"x": 260,
+						"y": 232,
+						"w": 32,
+						"h": 224
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.892857
+					}
+				},
+				{
+					"filename": "THUNDER/004",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 224
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 224
+					},
+					"frame": {
+						"x": 294,
 						"y": 232,
 						"w": 32,
 						"h": 224
@@ -510,32 +535,7 @@
 					}
 				},
 				{
-					"filename": "THUNDER/007",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 32,
-						"h": 224
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 32,
-						"h": 224
-					},
-					"frame": {
-						"x": 294,
-						"y": 232,
-						"w": 32,
-						"h": 224
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.892857
-					}
-				},
-				{
-					"filename": "THUNDER/009",
+					"filename": "THUNDER/006",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -610,7 +610,7 @@
 					}
 				},
 				{
-					"filename": "THUNDER/012",
+					"filename": "THUNDER/008",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -810,7 +810,7 @@
 					}
 				},
 				{
-					"filename": "NIGHT_SLASH/003",
+					"filename": "NIGHT_SLASH/002",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -910,7 +910,7 @@
 					}
 				},
 				{
-					"filename": "BLAST_BURN/013",
+					"filename": "BLAST_BURN/011",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1160,7 +1160,32 @@
 					}
 				},
 				{
-					"filename": "NIGHT_SLASH/002",
+					"filename": "NIGHT_SLASH/001",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 96,
+						"h": 96
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 8,
+						"w": 80,
+						"h": 80
+					},
+					"frame": {
+						"x": 495,
+						"y": 211,
+						"w": 80,
+						"h": 80
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "NIGHT_SLASH/003",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1210,31 +1235,6 @@
 					}
 				},
 				{
-					"filename": "NIGHT_SLASH/006",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 96,
-						"h": 96
-					},
-					"spriteSourceSize": {
-						"x": 8,
-						"y": 8,
-						"w": 80,
-						"h": 80
-					},
-					"frame": {
-						"x": 495,
-						"y": 211,
-						"w": 80,
-						"h": 80
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
 					"filename": "HYDRO_PUMP/016",
 					"rotated": false,
 					"trimmed": true,
@@ -1260,7 +1260,7 @@
 					}
 				},
 				{
-					"filename": "BLAST_BURN/014",
+					"filename": "BLAST_BURN/012",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1335,7 +1335,7 @@
 					}
 				},
 				{
-					"filename": "BLAST_BURN/015",
+					"filename": "BLAST_BURN/013",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1385,7 +1385,7 @@
 					}
 				},
 				{
-					"filename": "BLAST_BURN/016",
+					"filename": "BLAST_BURN/014",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1460,7 +1460,7 @@
 					}
 				},
 				{
-					"filename": "BLAST_BURN/012",
+					"filename": "BLAST_BURN/010",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -2735,7 +2735,7 @@
 					}
 				},
 				{
-					"filename": "BLAST_BURN/007",
+					"filename": "BLAST_BURN/006",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -2885,7 +2885,7 @@
 					}
 				},
 				{
-					"filename": "ROOT/046",
+					"filename": "ROOT/044",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -2910,7 +2910,7 @@
 					}
 				},
 				{
-					"filename": "BLAZE_KICK/013",
+					"filename": "BLAZE_KICK/012",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -2935,7 +2935,7 @@
 					}
 				},
 				{
-					"filename": "BLAZE_KICK/012",
+					"filename": "BLAZE_KICK/011",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -2960,7 +2960,7 @@
 					}
 				},
 				{
-					"filename": "BLAST_BURN/006",
+					"filename": "BLAST_BURN/005",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -3060,7 +3060,7 @@
 					}
 				},
 				{
-					"filename": "BLAST_BURN/008",
+					"filename": "BLAST_BURN/007",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -3235,7 +3235,7 @@
 					}
 				},
 				{
-					"filename": "BLAST_BURN/009",
+					"filename": "BLAST_BURN/008",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -3260,7 +3260,7 @@
 					}
 				},
 				{
-					"filename": "BLAST_BURN/010",
+					"filename": "BLAST_BURN/009",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -4260,7 +4260,7 @@
 					}
 				},
 				{
-					"filename": "PAYBACK/006",
+					"filename": "PAYBACK/003",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -4460,7 +4460,7 @@
 					}
 				},
 				{
-					"filename": "BLAZE_KICK/014",
+					"filename": "BLAZE_KICK/013",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -5160,7 +5160,7 @@
 					}
 				},
 				{
-					"filename": "BLAZE_KICK/011",
+					"filename": "BLAZE_KICK/010",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -5185,7 +5185,7 @@
 					}
 				},
 				{
-					"filename": "BLAZE_KICK/010",
+					"filename": "BLAZE_KICK/009",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -6410,7 +6410,7 @@
 					}
 				},
 				{
-					"filename": "PAYBACK/029",
+					"filename": "PAYBACK/017",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -7585,7 +7585,7 @@
 					}
 				},
 				{
-					"filename": "BLAZE_KICK/009",
+					"filename": "BLAZE_KICK/008",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -8610,7 +8610,7 @@
 					}
 				},
 				{
-					"filename": "PAYBACK/021",
+					"filename": "PAYBACK/012",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -8635,7 +8635,7 @@
 					}
 				},
 				{
-					"filename": "PAYBACK/024",
+					"filename": "PAYBACK/014",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -8735,7 +8735,7 @@
 					}
 				},
 				{
-					"filename": "PAYBACK/015",
+					"filename": "PAYBACK/008",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -8760,7 +8760,7 @@
 					}
 				},
 				{
-					"filename": "PAYBACK/018",
+					"filename": "PAYBACK/010",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -8885,7 +8885,7 @@
 					}
 				},
 				{
-					"filename": "PAYBACK/016",
+					"filename": "PAYBACK/009",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -8935,7 +8935,7 @@
 					}
 				},
 				{
-					"filename": "PAYBACK/022",
+					"filename": "PAYBACK/013",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -9110,7 +9110,7 @@
 					}
 				},
 				{
-					"filename": "PAYBACK/019",
+					"filename": "PAYBACK/011",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -9210,7 +9210,7 @@
 					}
 				},
 				{
-					"filename": "PAYBACK/025",
+					"filename": "PAYBACK/015",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -9710,7 +9710,7 @@
 					}
 				},
 				{
-					"filename": "METEOR_MASH/027",
+					"filename": "METEOR_MASH/026",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -9785,7 +9785,7 @@
 					}
 				},
 				{
-					"filename": "DRAGON_TAIL/023",
+					"filename": "DRAGON_TAIL/022",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -9910,7 +9910,7 @@
 					}
 				},
 				{
-					"filename": "DRAGON_TAIL/025",
+					"filename": "DRAGON_TAIL/023",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -10360,7 +10360,7 @@
 					}
 				},
 				{
-					"filename": "METEOR_MASH/029",
+					"filename": "METEOR_MASH/027",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -10760,7 +10760,7 @@
 					}
 				},
 				{
-					"filename": "ROOT/044",
+					"filename": "ROOT/043",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -10785,7 +10785,7 @@
 					}
 				},
 				{
-					"filename": "ROOT/048",
+					"filename": "ROOT/045",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -10810,7 +10810,7 @@
 					}
 				},
 				{
-					"filename": "PAYBACK/027",
+					"filename": "PAYBACK/016",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -10835,7 +10835,7 @@
 					}
 				},
 				{
-					"filename": "BLAZE_KICK/008",
+					"filename": "BLAZE_KICK/007",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -10860,7 +10860,7 @@
 					}
 				},
 				{
-					"filename": "CALM_MIND/006",
+					"filename": "CALM_MIND/004",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -11160,7 +11160,7 @@
 					}
 				},
 				{
-					"filename": "METEOR_MASH/031",
+					"filename": "METEOR_MASH/028",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -11735,7 +11735,7 @@
 					}
 				},
 				{
-					"filename": "METEOR_MASH/033",
+					"filename": "METEOR_MASH/029",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -11760,7 +11760,7 @@
 					}
 				},
 				{
-					"filename": "BLAZE_KICK/015",
+					"filename": "BLAZE_KICK/014",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -11910,6 +11910,131 @@
 					}
 				},
 				{
+					"filename": "CALM_MIND/009",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 0,
+						"w": 46,
+						"h": 40
+					},
+					"frame": {
+						"x": 1752,
+						"y": 380,
+						"w": 46,
+						"h": 40
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "CALM_MIND/017",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 0,
+						"w": 46,
+						"h": 40
+					},
+					"frame": {
+						"x": 1752,
+						"y": 380,
+						"w": 46,
+						"h": 40
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "CALM_MIND/023",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 0,
+						"w": 46,
+						"h": 40
+					},
+					"frame": {
+						"x": 1752,
+						"y": 380,
+						"w": 46,
+						"h": 40
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "CALM_MIND/029",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 0,
+						"w": 46,
+						"h": 40
+					},
+					"frame": {
+						"x": 1752,
+						"y": 380,
+						"w": 46,
+						"h": 40
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "CALM_MIND/035",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 0,
+						"w": 46,
+						"h": 40
+					},
+					"frame": {
+						"x": 1752,
+						"y": 380,
+						"w": 46,
+						"h": 40
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
 					"filename": "CALM_MIND/011",
 					"rotated": false,
 					"trimmed": true,
@@ -11924,7 +12049,7 @@
 						"h": 40
 					},
 					"frame": {
-						"x": 1752,
+						"x": 1800,
 						"y": 380,
 						"w": 46,
 						"h": 40
@@ -11935,107 +12060,7 @@
 					}
 				},
 				{
-					"filename": "CALM_MIND/019",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 40
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 0,
-						"w": 46,
-						"h": 40
-					},
-					"frame": {
-						"x": 1752,
-						"y": 380,
-						"w": 46,
-						"h": 40
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "CALM_MIND/025",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 40
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 0,
-						"w": 46,
-						"h": 40
-					},
-					"frame": {
-						"x": 1752,
-						"y": 380,
-						"w": 46,
-						"h": 40
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "CALM_MIND/031",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 40
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 0,
-						"w": 46,
-						"h": 40
-					},
-					"frame": {
-						"x": 1752,
-						"y": 380,
-						"w": 46,
-						"h": 40
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "CALM_MIND/041",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 40
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 0,
-						"w": 46,
-						"h": 40
-					},
-					"frame": {
-						"x": 1752,
-						"y": 380,
-						"w": 46,
-						"h": 40
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "CALM_MIND/013",
+					"filename": "CALM_MIND/018",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -12060,7 +12085,7 @@
 					}
 				},
 				{
-					"filename": "CALM_MIND/020",
+					"filename": "CALM_MIND/024",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -12085,7 +12110,7 @@
 					}
 				},
 				{
-					"filename": "CALM_MIND/026",
+					"filename": "CALM_MIND/030",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -12110,32 +12135,7 @@
 					}
 				},
 				{
-					"filename": "CALM_MIND/032",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 40
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 0,
-						"w": 46,
-						"h": 40
-					},
-					"frame": {
-						"x": 1800,
-						"y": 380,
-						"w": 46,
-						"h": 40
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "CALM_MIND/043",
+					"filename": "CALM_MIND/036",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -12410,7 +12410,7 @@
 					}
 				},
 				{
-					"filename": "CALM_MIND/015",
+					"filename": "CALM_MIND/013",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -12435,7 +12435,7 @@
 					}
 				},
 				{
-					"filename": "CALM_MIND/021",
+					"filename": "CALM_MIND/019",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -12460,7 +12460,7 @@
 					}
 				},
 				{
-					"filename": "CALM_MIND/027",
+					"filename": "CALM_MIND/025",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -12485,7 +12485,7 @@
 					}
 				},
 				{
-					"filename": "CALM_MIND/033",
+					"filename": "CALM_MIND/031",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -12510,7 +12510,7 @@
 					}
 				},
 				{
-					"filename": "CALM_MIND/045",
+					"filename": "CALM_MIND/037",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -12610,7 +12610,7 @@
 					}
 				},
 				{
-					"filename": "CALM_MIND/008",
+					"filename": "CALM_MIND/006",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -12660,7 +12660,7 @@
 					}
 				},
 				{
-					"filename": "PAYBACK/031",
+					"filename": "PAYBACK/018",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -12685,7 +12685,7 @@
 					}
 				},
 				{
-					"filename": "CALM_MIND/002",
+					"filename": "CALM_MIND/001",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -12710,7 +12710,7 @@
 					}
 				},
 				{
-					"filename": "CALM_MIND/009",
+					"filename": "CALM_MIND/007",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -12860,7 +12860,7 @@
 					}
 				},
 				{
-					"filename": "CALM_MIND/016",
+					"filename": "CALM_MIND/014",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -12876,6 +12876,106 @@
 					"frame": {
 						"x": 1648,
 						"y": 762,
+						"w": 46,
+						"h": 40
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "CALM_MIND/020",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 0,
+						"w": 46,
+						"h": 40
+					},
+					"frame": {
+						"x": 1648,
+						"y": 762,
+						"w": 46,
+						"h": 40
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "CALM_MIND/026",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 0,
+						"w": 46,
+						"h": 40
+					},
+					"frame": {
+						"x": 1648,
+						"y": 762,
+						"w": 46,
+						"h": 40
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "CALM_MIND/032",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 0,
+						"w": 46,
+						"h": 40
+					},
+					"frame": {
+						"x": 1648,
+						"y": 762,
+						"w": 46,
+						"h": 40
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "CALM_MIND/016",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 0,
+						"w": 46,
+						"h": 40
+					},
+					"frame": {
+						"x": 1648,
+						"y": 804,
 						"w": 46,
 						"h": 40
 					},
@@ -12900,7 +13000,7 @@
 					},
 					"frame": {
 						"x": 1648,
-						"y": 762,
+						"y": 804,
 						"w": 46,
 						"h": 40
 					},
@@ -12925,56 +13025,6 @@
 					},
 					"frame": {
 						"x": 1648,
-						"y": 762,
-						"w": 46,
-						"h": 40
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "CALM_MIND/035",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 40
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 0,
-						"w": 46,
-						"h": 40
-					},
-					"frame": {
-						"x": 1648,
-						"y": 762,
-						"w": 46,
-						"h": 40
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "CALM_MIND/018",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 40
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 0,
-						"w": 46,
-						"h": 40
-					},
-					"frame": {
-						"x": 1648,
 						"y": 804,
 						"w": 46,
 						"h": 40
@@ -12985,57 +13035,7 @@
 					}
 				},
 				{
-					"filename": "CALM_MIND/024",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 40
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 0,
-						"w": 46,
-						"h": 40
-					},
-					"frame": {
-						"x": 1648,
-						"y": 804,
-						"w": 46,
-						"h": 40
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "CALM_MIND/030",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 40
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 0,
-						"w": 46,
-						"h": 40
-					},
-					"frame": {
-						"x": 1648,
-						"y": 804,
-						"w": 46,
-						"h": 40
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "CALM_MIND/039",
+					"filename": "CALM_MIND/034",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -13910,7 +13910,7 @@
 					}
 				},
 				{
-					"filename": "CALM_MIND/017",
+					"filename": "CALM_MIND/015",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -13935,7 +13935,7 @@
 					}
 				},
 				{
-					"filename": "CALM_MIND/023",
+					"filename": "CALM_MIND/021",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -13960,7 +13960,7 @@
 					}
 				},
 				{
-					"filename": "CALM_MIND/029",
+					"filename": "CALM_MIND/027",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -13985,7 +13985,7 @@
 					}
 				},
 				{
-					"filename": "CALM_MIND/037",
+					"filename": "CALM_MIND/033",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -14060,7 +14060,7 @@
 					}
 				},
 				{
-					"filename": "METEOR_MASH/035",
+					"filename": "METEOR_MASH/030",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -14085,7 +14085,7 @@
 					}
 				},
 				{
-					"filename": "CALM_MIND/004",
+					"filename": "CALM_MIND/002",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -14110,7 +14110,7 @@
 					}
 				},
 				{
-					"filename": "CALM_MIND/010",
+					"filename": "CALM_MIND/008",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -14160,7 +14160,7 @@
 					}
 				},
 				{
-					"filename": "CALM_MIND/005",
+					"filename": "CALM_MIND/003",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -14185,7 +14185,7 @@
 					}
 				},
 				{
-					"filename": "CALM_MIND/012",
+					"filename": "CALM_MIND/010",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -14285,7 +14285,7 @@
 					}
 				},
 				{
-					"filename": "PAYBACK/012",
+					"filename": "PAYBACK/006",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -14460,7 +14460,7 @@
 					}
 				},
 				{
-					"filename": "CALM_MIND/007",
+					"filename": "CALM_MIND/005",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -14485,7 +14485,7 @@
 					}
 				},
 				{
-					"filename": "CALM_MIND/014",
+					"filename": "CALM_MIND/012",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -15260,7 +15260,7 @@
 					}
 				},
 				{
-					"filename": "METEOR_MASH/037",
+					"filename": "METEOR_MASH/031",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -16085,7 +16085,7 @@
 					}
 				},
 				{
-					"filename": "DRACO_METEOR/032",
+					"filename": "DRACO_METEOR/031",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -16260,7 +16260,7 @@
 					}
 				},
 				{
-					"filename": "BLAZE_KICK/003",
+					"filename": "BLAZE_KICK/002",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -16310,7 +16310,7 @@
 					}
 				},
 				{
-					"filename": "METEOR_MASH/039",
+					"filename": "METEOR_MASH/032",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -16410,7 +16410,7 @@
 					}
 				},
 				{
-					"filename": "BLAZE_KICK/007",
+					"filename": "BLAZE_KICK/006",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -16510,7 +16510,7 @@
 					}
 				},
 				{
-					"filename": "METEOR_MASH/041",
+					"filename": "METEOR_MASH/033",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -16535,7 +16535,7 @@
 					}
 				},
 				{
-					"filename": "METEOR_MASH/045",
+					"filename": "METEOR_MASH/035",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -16710,7 +16710,7 @@
 					}
 				},
 				{
-					"filename": "PAYBACK/010",
+					"filename": "PAYBACK/005",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -17785,7 +17785,7 @@
 					}
 				},
 				{
-					"filename": "PAYBACK/013",
+					"filename": "PAYBACK/007",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -17860,7 +17860,7 @@
 					}
 				},
 				{
-					"filename": "DRACO_METEOR/034",
+					"filename": "DRACO_METEOR/032",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -17885,7 +17885,7 @@
 					}
 				},
 				{
-					"filename": "METEOR_MASH/043",
+					"filename": "METEOR_MASH/034",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -18060,7 +18060,7 @@
 					}
 				},
 				{
-					"filename": "PAYBACK/002",
+					"filename": "PAYBACK/001",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -18185,7 +18185,7 @@
 					}
 				},
 				{
-					"filename": "SOAK/041",
+					"filename": "SOAK/040",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -18310,7 +18310,7 @@
 					}
 				},
 				{
-					"filename": "PAYBACK/008",
+					"filename": "PAYBACK/004",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -18635,7 +18635,7 @@
 					}
 				},
 				{
-					"filename": "SOAK/043",
+					"filename": "SOAK/041",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -18660,7 +18660,7 @@
 					}
 				},
 				{
-					"filename": "SOAK/045",
+					"filename": "SOAK/042",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -18910,6 +18910,31 @@
 					}
 				},
 				{
+					"filename": "BLAZE_KICK/003",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 72
+					},
+					"spriteSourceSize": {
+						"x": 23,
+						"y": 48,
+						"w": 18,
+						"h": 17
+					},
+					"frame": {
+						"x": 2026,
+						"y": 749,
+						"w": 18,
+						"h": 17
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
 					"filename": "BLAZE_KICK/004",
 					"rotated": false,
 					"trimmed": true,
@@ -18936,31 +18961,6 @@
 				},
 				{
 					"filename": "BLAZE_KICK/005",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 64,
-						"h": 72
-					},
-					"spriteSourceSize": {
-						"x": 23,
-						"y": 48,
-						"w": 18,
-						"h": 17
-					},
-					"frame": {
-						"x": 2026,
-						"y": 749,
-						"w": 18,
-						"h": 17
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "BLAZE_KICK/006",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -19360,7 +19360,7 @@
 					}
 				},
 				{
-					"filename": "PAYBACK/004",
+					"filename": "PAYBACK/002",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -19810,7 +19810,7 @@
 					}
 				},
 				{
-					"filename": "ROCK_SLIDE/079",
+					"filename": "ROCK_SLIDE/078",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -20910,7 +20910,7 @@
 					}
 				},
 				{
-					"filename": "STOMP/002",
+					"filename": "STOMP/001",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -20935,7 +20935,7 @@
 					}
 				},
 				{
-					"filename": "STOMP/004",
+					"filename": "STOMP/002",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -20960,7 +20960,7 @@
 					}
 				},
 				{
-					"filename": "STOMP/005",
+					"filename": "STOMP/003",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -20985,7 +20985,7 @@
 					}
 				},
 				{
-					"filename": "STOMP/006",
+					"filename": "STOMP/004",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -21010,7 +21010,7 @@
 					}
 				},
 				{
-					"filename": "STOMP/007",
+					"filename": "STOMP/005",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -21035,7 +21035,7 @@
 					}
 				},
 				{
-					"filename": "STOMP/008",
+					"filename": "STOMP/006",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -21060,7 +21060,7 @@
 					}
 				},
 				{
-					"filename": "STOMP/009",
+					"filename": "STOMP/007",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -21085,7 +21085,7 @@
 					}
 				},
 				{
-					"filename": "STOMP/010",
+					"filename": "STOMP/008",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -21110,7 +21110,7 @@
 					}
 				},
 				{
-					"filename": "STOMP/012",
+					"filename": "STOMP/009",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
