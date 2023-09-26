@@ -26,6 +26,18 @@
 - Buff Noctowl: Attack ~~6~~ → 10 ; Hypnosis duration: ~~3.5~~ → 4
 - Buff Mime Jr / Mr Mime: PP ~~90~~ → 85
 - New ability for Grimer / Alolan Grimer: Sludge - Throws trash onto the 3 squares in front, which inflicts 2/3 stacks of POISON for 3 seconds.
+- Electro Web: added AP scaling
+- Growl: added AP scaling
+- New ability for Snover line: Blizzard ; PP 80→100
+- Abomasnow and MegaAbomasnow now have Monster synergy
+- Ability King's Shield rework: ~~1/2/3~~ seconds Protect → 1.5 seconds Protect and ~10/20/30~ shield
+- Lock On: added AP scaling to Armor Reduction duration
+- Magic Bounce: added AP scaling
+- Roar of Time: now targets your strongest ally (most items > most stars > most rare) and give it 20% attack speed (scales with AP)
+- Gyarados is now 3 stars and can be sold for 10 gold
+- Shell Trap: added AP scaling
+- Sleep ability: reduced sleep duration from 2.5 seconds to 2 seconds, but added AP scaling
+- Thrash ability: reduce attack buff from 110% to 100%, but added AP scaling
 - Changed Misty Surge (Tapu Fini): now gives 30 PP instead of 5 Special Defense
 - Nerf Marshadow: Attack ~~35~~ 28, Def/SpeDef: ~~6~~ 5, PP ~~90~~ 120, Special damage of Spectral Thief ~~50~~ 80
 - Nerf Tyrogue: HP ~~200~~ 150

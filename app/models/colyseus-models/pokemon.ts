@@ -3179,8 +3179,8 @@ export class Snover extends Pokemon {
       1,
       AttackSprite.ICE_MELEE,
       1,
-      80,
-      Ability.FREEZE,
+      100,
+      Ability.BLIZZARD,
       shiny,
       emotion,
       false
@@ -3192,7 +3192,7 @@ export class Abomasnow extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.ABOMASNOW,
-      [Synergy.GRASS, Synergy.ICE],
+      [Synergy.GRASS, Synergy.ICE, Synergy.MONSTER],
       Rarity.ULTRA,
       Pkm.MEGA_ABOMASNOW,
       260,
@@ -3202,8 +3202,8 @@ export class Abomasnow extends Pokemon {
       1,
       AttackSprite.ICE_MELEE,
       2,
-      80,
-      Ability.FREEZE,
+      100,
+      Ability.BLIZZARD,
       shiny,
       emotion,
       false
@@ -3215,7 +3215,7 @@ export class MegaAbomasnow extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.MEGA_ABOMASNOW,
-      [Synergy.GRASS, Synergy.ICE],
+      [Synergy.GRASS, Synergy.ICE, Synergy.MONSTER],
       Rarity.ULTRA,
       Pkm.DEFAULT,
       400,
@@ -3225,8 +3225,8 @@ export class MegaAbomasnow extends Pokemon {
       1,
       AttackSprite.ICE_MELEE,
       3,
-      80,
-      Ability.FREEZE,
+      100,
+      Ability.BLIZZARD,
       shiny,
       emotion,
       true
@@ -6064,7 +6064,7 @@ export class Gyarados extends Pokemon {
       1,
       1,
       AttackSprite.WATER_MELEE,
-      2,
+      3,
       100,
       Ability.HYDRO_PUMP,
       shiny,
@@ -7970,7 +7970,7 @@ export class Kyurem extends Pokemon {
       AttackSprite.FIRE_RANGE,
       3,
       100,
-      Ability.DEFAULT, //Ability.FREEZE,
+      Ability.DEFAULT, //Ability.BLIZZARD,
       shiny,
       emotion,
       true,
