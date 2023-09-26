@@ -224,7 +224,8 @@
     "SMOKE_SCREEN": "Smoke Screen",
     "PRESENT": "Present",
     "LEAF_BLADE": "Leaf Blade",
-    "ANCHOR_SHOT": "Anchor Shot"
+    "ANCHOR_SHOT": "Anchor Shot",
+    "PSYCHIC": "Psychic"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -824,7 +825,9 @@
     "ALOLAN_RAICHU": "Alolan Raichu",
     "DHELMISE": "Dhelmise",
     "KOFFING": "Koffing",
-    "WEEZING": "Weezing"
+    "WEEZING": "Weezing",
+    "STARYU": "Staryu",
+    "STARMIE": "Starmie"
   },
   "ability_description": {
     "DEFAULT": "",
@@ -1034,7 +1037,8 @@
     "SMOKE_SCREEN": "Channel undergound and reappears in the middle of the enemy team, dealing [10,20,40,SP] SPECIAL, BURN and ARMOR_REDUCTION all adjacent units for 2 second",
     "PRESENT": "Either deals 80, 150, 300 SPECIAL, or heal 80 HP of the target",
     "LEAF_BLADE": "Next attack will be a SPECIAL critical hit",
-    "ANCHOR_SHOT": "Grab the farthest pokémon and deals [20,40,80,SP] SPECIAL"
+    "ANCHOR_SHOT": "Grab the farthest pokémon and deals [20,40,80,SP] SPECIAL",
+    "PSYCHIC": "The target is hit by a strong telekinetic force, dealing [40,80,120,SP] SPECIAL to it while also lowering their SPE_DEF by [1,2,3,SP]"
   },
   "effect": {
     "INGRAIN": "Ingrain",
