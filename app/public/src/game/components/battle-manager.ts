@@ -2682,7 +2682,11 @@ export default class BattleManager {
             break
 
           case Ability.ATTRACT:
-            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
