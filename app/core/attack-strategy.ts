@@ -11,6 +11,7 @@ import PokemonFactory from "../models/pokemon-factory"
 import { Pkm } from "../types/enum/Pokemon"
 import {
   chance,
+  pickNRandomIn,
   pickRandomIn,
   randomBetween,
   shuffleArray
@@ -5431,5 +5432,22 @@ export class MagnetRiseStrategy extends AttackStrategy {
         })
       }
     }
+  }
+}
+
+export class AttractStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const targets = pickNRandomIn(
+      board.cells.filter((v) => v && v.team !== pokemon.team),
+      pokemon.stars
+    )
+    targets?.forEach((t) => t?.status.triggerCharm(2500, t, pokemon, true))
   }
 }

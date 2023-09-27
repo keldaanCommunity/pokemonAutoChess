@@ -12321,6 +12321,54 @@ export class Probopass extends Pokemon {
   }
 }
 
+export class Woobat extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.WOOBAT,
+      [Synergy.FLYING, Synergy.SOUND, Synergy.PSYCHIC],
+      Rarity.UNCOMMON,
+      Pkm.SWOOBAT,
+      80,
+      6,
+      3,
+      3,
+      3,
+      AttackSprite.FAIRY_RANGE,
+      1,
+      90,
+      Ability.ATTRACT,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Swoobat extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.SWOOBAT,
+      [Synergy.FLYING, Synergy.SOUND, Synergy.PSYCHIC],
+      Rarity.UNCOMMON,
+      Pkm.DEFAULT,
+      160,
+      15,
+      5,
+      5,
+      3,
+      AttackSprite.FAIRY_RANGE,
+      2,
+      90,
+      Ability.ATTRACT,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
 export class Pineco extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(

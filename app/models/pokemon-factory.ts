@@ -614,7 +614,9 @@ import {
   Staryu,
   Starmie,
   Nosepass,
-  Probopass
+  Probopass,
+  Woobat,
+  Swoobat
 } from "./colyseus-models/pokemon"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
 
@@ -2033,6 +2035,10 @@ export default class PokemonFactory {
         return new Nosepass(s, e)
       case Pkm.PROBOPASS:
         return new Probopass(s, e)
+      case Pkm.WOOBAT:
+        return new Woobat(s, e)
+      case Pkm.SWOOBAT:
+        return new Swoobat(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:

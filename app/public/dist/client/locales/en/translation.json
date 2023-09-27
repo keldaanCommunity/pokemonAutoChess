@@ -225,7 +225,8 @@
     "LEAF_BLADE": "Leaf Blade",
     "ANCHOR_SHOT": "Anchor Shot",
     "PSYCHIC": "Psychic",
-    "MAGNET_RISE": "Magnet Rise"
+    "MAGNET_RISE": "Magnet Rise",
+    "ATTRACT": "Attract"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -829,7 +830,9 @@
     "STARYU": "Staryu",
     "STARMIE": "Starmie",
     "NOSEPASS": "Nosepass",
-    "PROBOPASS": "Probopass"
+    "PROBOPASS": "Probopass",
+    "WOOBAT": "Woobat",
+    "SWOOBAT": "Swoobat"
   },
   "ability_description": {
     "DEFAULT": "",
@@ -1040,7 +1043,8 @@
     "LEAF_BLADE": "Next attack is a guaranteed critical hit dealing [100,SP]% of ATK as SPECIAL",
     "ANCHOR_SHOT": "Grab the farthest pokémon and deals [20,40,80,SP] SPECIAL",
     "PSYCHIC": "The target is hit by a strong telekinetic force, dealing [40,80,120,SP] SPECIAL to it while also lowering their SPE_DEF by [1,2,3,SP]",
-    "MAGNET_RISE": "Grants PROTECT to [1,2,4] adjacent ally pokémon for 2 seconds"
+    "MAGNET_RISE": "Grants PROTECT to [1,2,4] adjacent ally pokémon for 2 seconds",
+    "ATTRACT": "Make [1,2,3] pokémon chosen randomly CHARM for [2.5,SP] seconds"
   },
   "effect": {
     "INGRAIN": "Ingrain",

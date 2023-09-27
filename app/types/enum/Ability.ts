@@ -207,7 +207,8 @@ export enum Ability {
   ANCHOR_SHOT = "ANCHOR_SHOT",
   SMOG = "SMOG",
   PSYCHIC = "PSYCHIC",
-  MAGNET_RISE = "MAGNET_RISE"
+  MAGNET_RISE = "MAGNET_RISE",
+  ATTRACT = "ATTRACT"
 }
 
 export const CopyableAbility: { [key in Ability]: boolean } = {
@@ -419,5 +420,6 @@ export const CopyableAbility: { [key in Ability]: boolean } = {
   [Ability.ANCHOR_SHOT]: true,
   [Ability.SMOG]: true,
   [Ability.PSYCHIC]: true,
-  [Ability.MAGNET_RISE]: true
+  [Ability.MAGNET_RISE]: true,
+  [Ability.ATTRACT]: true
 }
