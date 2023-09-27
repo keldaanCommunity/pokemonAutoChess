@@ -612,7 +612,9 @@ import {
   Koffing,
   Weezing,
   Staryu,
-  Starmie
+  Starmie,
+  Nosepass,
+  Probopass
 } from "./colyseus-models/pokemon"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
 
@@ -2027,6 +2029,10 @@ export default class PokemonFactory {
         return new Staryu(s, e)
       case Pkm.STARMIE:
         return new Starmie(s, e)
+      case Pkm.NOSEPASS:
+        return new Nosepass(s, e)
+      case Pkm.PROBOPASS:
+        return new Probopass(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:

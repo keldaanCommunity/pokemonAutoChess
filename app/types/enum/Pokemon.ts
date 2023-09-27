@@ -600,7 +600,9 @@ export enum Pkm {
   KOFFING = "KOFFING",
   WEEZING = "WEEZING",
   STARYU = "STARYU",
-  STARMIE = "STARMIE"
+  STARMIE = "STARMIE",
+  NOSEPASS = "NOSEPASS",
+  PROBOPASS = "PROBOPASS"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1203,7 +1205,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.ALOLAN_RAICHU]: "0026-0001",
   [Pkm.DHELMISE]: "0781",
   [Pkm.STARYU]: "0120",
-  [Pkm.STARMIE]: "0121"
+  [Pkm.STARMIE]: "0121",
+  [Pkm.NOSEPASS]: "0299",
+  [Pkm.PROBOPASS]: "0476"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1806,7 +1810,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.KOFFING]: Pkm.KOFFING,
   [Pkm.WEEZING]: Pkm.WEEZING,
   [Pkm.STARYU]: Pkm.STARYU,
-  [Pkm.STARMIE]: Pkm.STARYU
+  [Pkm.STARMIE]: Pkm.STARYU,
+  [Pkm.NOSEPASS]: Pkm.NOSEPASS,
+  [Pkm.PROBOPASS]: Pkm.NOSEPASS
 }
 
 export enum PkmDuo {
@@ -4937,5 +4943,15 @@ export const AnimationConfig: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Attack,
     emote: AnimationType.Charge
+  },
+  [Pkm.NOSEPASS]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Emit,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.PROBOPASS]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Emit,
+    emote: AnimationType.Shoot
   }
 }

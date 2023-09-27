@@ -12273,6 +12273,54 @@ export class Sandslash extends Pokemon {
   }
 }
 
+export class Nosepass extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.NOSEPASS,
+      [Synergy.ROCK, Synergy.ARTIFICIAL],
+      Rarity.UNCOMMON,
+      Pkm.PROBOPASS,
+      60,
+      5,
+      3,
+      3,
+      2,
+      AttackSprite.ROCK_MELEE,
+      1,
+      100,
+      Ability.MAGNET_RISE,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Probopass extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.PROBOPASS,
+      [Synergy.ROCK, Synergy.ARTIFICIAL],
+      Rarity.UNCOMMON,
+      Pkm.DEFAULT,
+      120,
+      10,
+      8,
+      8,
+      2,
+      AttackSprite.ROCK_MELEE,
+      2,
+      100,
+      Ability.MAGNET_RISE,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}
+
 export class Pineco extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(

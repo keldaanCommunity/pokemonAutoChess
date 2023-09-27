@@ -9,6 +9,8 @@
 - Weezing
 - Staryu
 - Starmie
+- Nosepass
+- Probopass
 
 # Changes to Pokemon & Abilities
 
