@@ -484,7 +484,14 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerCharm(timer: number, pkm: IPokemonEntity) {
+  triggerCharm(
+    timer: number,
+    pkm: IPokemonEntity,
+    origin: IPokemonEntity | undefined = undefined,
+    apBoost = false
+  ) {
+    const boost = apBoost && origin ? (timer * origin.ap) / 100 : 0
+    timer = timer + boost
     if (!this.charm && !this.runeProtect) {
       this.charm = true
       if (pkm.simulation.weather === Weather.MISTY) {

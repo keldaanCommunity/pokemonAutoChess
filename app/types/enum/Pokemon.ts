@@ -602,7 +602,9 @@ export enum Pkm {
   STARYU = "STARYU",
   STARMIE = "STARMIE",
   NOSEPASS = "NOSEPASS",
-  PROBOPASS = "PROBOPASS"
+  PROBOPASS = "PROBOPASS",
+  WOOBAT = "WOOBAT",
+  SWOOBAT = "SWOOBAT"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1207,7 +1209,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.STARYU]: "0120",
   [Pkm.STARMIE]: "0121",
   [Pkm.NOSEPASS]: "0299",
-  [Pkm.PROBOPASS]: "0476"
+  [Pkm.PROBOPASS]: "0476",
+  [Pkm.WOOBAT]: "0527",
+  [Pkm.SWOOBAT]: "0528"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1812,7 +1816,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.STARYU]: Pkm.STARYU,
   [Pkm.STARMIE]: Pkm.STARYU,
   [Pkm.NOSEPASS]: Pkm.NOSEPASS,
-  [Pkm.PROBOPASS]: Pkm.NOSEPASS
+  [Pkm.PROBOPASS]: Pkm.NOSEPASS,
+  [Pkm.WOOBAT]: Pkm.WOOBAT,
+  [Pkm.SWOOBAT]: Pkm.WOOBAT
 }
 
 export enum PkmDuo {
@@ -4953,5 +4959,15 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Emit,
     emote: AnimationType.Shoot
+  },
+  [Pkm.WOOBAT]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Hover
+  },
+  [Pkm.SWOOBAT]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Hover
   }
 }
