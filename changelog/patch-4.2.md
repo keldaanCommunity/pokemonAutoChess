@@ -71,10 +71,13 @@
 - New gadget: Map - Choose the map before game as room leader
 - New mechanic: board effects - Koffing ability Smog is an exemple of ability using this mechanic
 - Not picking a portal at round 10 and 20 now gives you 6 random propositions instead of picking a random remaining portal
+- Increase chance to get shiny Gyarados
 
 # UI
 
 - Various fixes and improvements to the Bot Builder
+- PVE component rewards are now shown in treasure chests after a victory
+
 
 # Bugfix
 

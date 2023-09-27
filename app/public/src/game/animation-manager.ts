@@ -2094,6 +2094,28 @@ export default class AnimationManager {
       duration: 600,
       repeat: -1
     })
+
+    this.game.anims.create({
+      key: "open_chest",
+      frames: this.game.anims.generateFrameNames("chest", {
+        start: 1,
+        end: 4,
+        suffix: ".png"
+      }),
+      duration: 600,
+      repeat: 0
+    })
+
+    this.game.anims.create({
+      key: "shine",
+      frames: this.game.anims.generateFrameNames("shine", {
+        start: 0,
+        end: 47,
+        suffix: ".png"
+      }),
+      duration: 1000,
+      repeat: -1
+    })
   }
 
   convertPokemonActionStateToAnimationType(

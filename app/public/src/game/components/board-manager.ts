@@ -1,20 +1,15 @@
 import Pokemon from "./pokemon"
-import {
-  transformAttackCoordinate,
-  transformCoordinate
-} from "../../pages/utils/utils"
-import { IBoardEvent, IPokemon } from "../../../../types"
+import { transformCoordinate } from "../../pages/utils/utils"
+import { IPokemon } from "../../../../types"
 import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
 import { Item } from "../../../../types/enum/Item"
 import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
 import {
-  BoardEvent,
   GamePhaseState,
   Orientation,
   PokemonActionState
 } from "../../../../types/enum/Game"
-import { Ability } from "../../../../types/enum/Ability"
 import { PokemonAvatarModel } from "../../../../models/colyseus-models/pokemon-avatar"
 import Player from "../../../../models/colyseus-models/player"
 import PokemonAvatar from "./pokemon-avatar"
@@ -34,6 +29,8 @@ export default class BoardManager {
   animationManager: AnimationManager
   playerAvatar: PokemonAvatar
   opponentAvatar: PokemonAvatar | null
+  pveChestGroup: Phaser.GameObjects.Group | null
+  pveChest: Phaser.GameObjects.Sprite | null
 
   constructor(
     scene: GameScene,
@@ -72,6 +69,24 @@ export default class BoardManager {
           PokemonActionState.HURT,
           false
         )
+      }
+      if (this.pveChest) {
+        this.pveChest.anims.play("open_chest")
+        this.player.pveRewards.forEach((item, i) => {
+          const itemSprite = this.scene.add.sprite(1512, 122, "item", item)
+          itemSprite.setScale(2)
+          const shinyEffect = this.scene.add.sprite(1512, 122, "shine")
+          shinyEffect.setScale(2)
+          shinyEffect.play("shine")
+          this.pveChestGroup?.addMultiple([itemSprite, shinyEffect])
+          this.scene.tweens.add({
+            targets: [itemSprite, shinyEffect],
+            ease: Phaser.Math.Easing.Quadratic.Out,
+            duration: 1000,
+            y: 75,
+            x: 1512 + (i - (this.player.pveRewards.length - 1) / 2) * 70
+          })
+        })
       }
     } else if (winnerId === this.opponentAvatar?.playerId) {
       this.animationManager.animatePokemon(
@@ -172,7 +187,12 @@ export default class BoardManager {
       this.opponentAvatar.destroy(true)
     }
 
-    if (this.mode === BoardMode.BATTLE && opponentId !== "pve") {
+    if (opponentId === "pve") {
+      this.pveChestGroup = this.scene.add.group()
+      this.pveChest = this.scene.add.sprite(1512, 122, "chest", "1.png")
+      this.pveChest.setScale(2)
+      this.pveChestGroup.add(this.pveChest)
+    } else if (this.mode === BoardMode.BATTLE) {
       let opponentLife = 0
       this.scene.room?.state.players.forEach((p) => {
         if (p.id === opponentId) opponentLife = p.life
@@ -238,6 +258,11 @@ export default class BoardManager {
     if (this.opponentAvatar) {
       this.opponentAvatar.destroy(true)
     }
+    if (this.pveChestGroup) {
+      this.pveChestGroup.destroy(true, true)
+      this.pveChest = null
+      this.pveChestGroup = null
+    }
   }
 
   minigameMode() {
@@ -255,6 +280,11 @@ export default class BoardManager {
     }
     if (this.opponentAvatar) {
       this.opponentAvatar.destroy(true)
+    }
+    if (this.pveChestGroup) {
+      this.pveChestGroup.destroy(true, true)
+      this.pveChest = null
+      this.pveChestGroup = null
     }
   }
 

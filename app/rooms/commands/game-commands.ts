@@ -831,13 +831,12 @@ export class OnUpdateCommand extends Command<
 > {
   execute({ deltaTime }) {
     if (deltaTime) {
-      let updatePhaseNeeded = false
       this.state.time -= deltaTime
       if (Math.round(this.state.time / 1000) != this.state.roundTime) {
         this.state.roundTime = Math.round(this.state.time / 1000)
       }
       if (this.state.time < 0) {
-        updatePhaseNeeded = true
+        this.state.updatePhaseNeeded = true
       } else if (this.state.phase == GamePhaseState.FIGHT) {
         let everySimulationFinished = true
 
@@ -848,13 +847,15 @@ export class OnUpdateCommand extends Command<
           simulation.update(deltaTime)
         })
 
-        if (everySimulationFinished) {
-          updatePhaseNeeded = true
+        if (everySimulationFinished && !this.state.updatePhaseNeeded) {
+          // wait for 3 seconds victory anim before moving to next stage
+          this.state.time = 3000
+          this.state.updatePhaseNeeded = true
         }
       } else if (this.state.phase === GamePhaseState.MINIGAME) {
         this.room.miniGame.update(deltaTime)
       }
-      if (updatePhaseNeeded) {
+      if (this.state.updatePhaseNeeded && this.state.time < 0) {
         return [new OnUpdatePhaseCommand()]
       }
     }
@@ -863,6 +864,7 @@ export class OnUpdateCommand extends Command<
 
 export class OnUpdatePhaseCommand extends Command<GameRoom> {
   execute() {
+    this.state.updatePhaseNeeded = false
     if (this.state.phase == GamePhaseState.MINIGAME) {
       this.room.miniGame.stop(this.state)
       this.initializePickingPhase()
@@ -1400,11 +1402,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             }
           }
         }
-        if (isPVE && player.getLastBattleResult() == BattleResult.WIN) {
-          player.items.add(ItemFactory.createBasicRandomItem())
-          if (this.state.shinyEncounter) {
-            // give a second item if shiny PVE round
-            player.items.add(ItemFactory.createBasicRandomItem())
+        if (isPVE) {
+          while (player.pveRewards.length > 0) {
+            const reward = player.pveRewards.pop()!
+            if (player.getLastBattleResult() === BattleResult.WIN) {
+              player.items.add(reward)
+            }
           }
         }
 
@@ -1510,7 +1513,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     this.state.botManager.updateBots()
 
     const stageIndex = this.getPVEIndex(this.state.stageLevel)
-    this.state.shinyEncounter = this.state.stageLevel === 9 && chance(1 / 20)
+    this.state.shinyEncounter = this.state.stageLevel === 9 && chance(1 / 10)
 
     if (stageIndex !== -1) {
       this.state.players.forEach((player: Player) => {
@@ -1523,6 +1526,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             Emotion.NORMAL
           )
           player.opponentTitle = "Wild"
+          player.pveRewards.push(ItemFactory.createBasicRandomItem())
+          if (this.state.shinyEncounter) {
+            // give a second item if shiny PVE round
+            player.pveRewards.push(ItemFactory.createBasicRandomItem())
+          }
+
           const pveBoard = PokemonFactory.getNeutralPokemonsByLevelStage(
             this.state.stageLevel,
             this.state.shinyEncounter
