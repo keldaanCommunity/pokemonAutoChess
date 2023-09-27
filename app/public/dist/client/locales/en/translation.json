@@ -224,7 +224,8 @@
     "PRESENT": "Present",
     "LEAF_BLADE": "Leaf Blade",
     "ANCHOR_SHOT": "Anchor Shot",
-    "PSYCHIC": "Psychic"
+    "PSYCHIC": "Psychic",
+    "MAGNET_RISE": "Magnet Rise"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -826,7 +827,9 @@
     "KOFFING": "Koffing",
     "WEEZING": "Weezing",
     "STARYU": "Staryu",
-    "STARMIE": "Starmie"
+    "STARMIE": "Starmie",
+    "NOSEPASS": "Nosepass",
+    "PROBOPASS": "Probopass"
   },
   "ability_description": {
     "DEFAULT": "",
@@ -1036,7 +1039,8 @@
     "PRESENT": "Either deals [80,SP], [150,SP], [300,SP] SPECIAL, or heal 80 HP of the target",
     "LEAF_BLADE": "Next attack is a guaranteed critical hit dealing [100,SP]% of ATK as SPECIAL",
     "ANCHOR_SHOT": "Grab the farthest pokémon and deals [20,40,80,SP] SPECIAL",
-    "PSYCHIC": "The target is hit by a strong telekinetic force, dealing [40,80,120,SP] SPECIAL to it while also lowering their SPE_DEF by [1,2,3,SP]"
+    "PSYCHIC": "The target is hit by a strong telekinetic force, dealing [40,80,120,SP] SPECIAL to it while also lowering their SPE_DEF by [1,2,3,SP]",
+    "MAGNET_RISE": "Grants PROTECT to [1,2,4] adjacent ally pokémon for 2 seconds"
   },
   "effect": {
     "INGRAIN": "Ingrain",
