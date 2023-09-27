@@ -42,7 +42,8 @@ export class AttackStrategy {
         Ability.WHIRLPOOL,
         Ability.SMOKE_SCREEN,
         Ability.ANCHOR_SHOT,
-        Ability.MAGNET_RISE
+        Ability.MAGNET_RISE,
+        Ability.ATTRACT
       ].includes(pokemon.skill)
     ) {
       pokemon.simulation.room.broadcast(Transfer.ABILITY, {
@@ -5448,6 +5449,16 @@ export class AttractStrategy extends AttackStrategy {
       board.cells.filter((v) => v && v.team !== pokemon.team),
       pokemon.stars
     )
-    targets?.forEach((t) => t?.status.triggerCharm(2500, t, pokemon, true))
+    targets?.forEach((t) => {
+      if (t) {
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: Ability.ATTRACT,
+          positionX: t.positionX,
+          positionY: t.positionY
+        })
+        t?.status.triggerCharm(2500, t, pokemon, true)
+      }
+    })
   }
 }
