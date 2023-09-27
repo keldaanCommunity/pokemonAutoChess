@@ -11,6 +11,8 @@
 - Starmie
 - Nosepass
 - Probopass
+- Woobat
+- Swoobat
 
 # Changes to Pokemon & Abilities
 
