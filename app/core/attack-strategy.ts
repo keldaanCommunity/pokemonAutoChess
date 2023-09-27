@@ -3165,20 +3165,7 @@ export class DragonBreathStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 0
-    switch (pokemon.stars) {
-      case 1:
-        damage = 30
-        break
-      case 2:
-        damage = 60
-        break
-      case 3:
-        damage = 120
-        break
-      default:
-        break
-    }
+    const damage = [25,50,100][pokemon.stars - 1] ?? 100
     target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
     const secondTarget = board.getValue(target.positionX, target.positionY + 1)
     if (secondTarget && secondTarget != pokemon) {
