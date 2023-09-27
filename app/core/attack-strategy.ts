@@ -40,7 +40,8 @@ export class AttackStrategy {
         Ability.PYRO_BALL,
         Ability.WHIRLPOOL,
         Ability.SMOKE_SCREEN,
-        Ability.ANCHOR_SHOT
+        Ability.ANCHOR_SHOT,
+        Ability.MAGNET_RISE
       ].includes(pokemon.skill)
     ) {
       pokemon.simulation.room.broadcast(Transfer.ABILITY, {
@@ -1158,8 +1159,8 @@ export class KingShieldStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let duration = 1500
-    let shield = [10, 20, 30][pokemon.stars - 1] ?? 30
+    const duration = 1500
+    const shield = [10, 20, 30][pokemon.stars - 1] ?? 30
     pokemon.status.triggerProtect(duration)
     pokemon.addShield(shield, pokemon, true)
     const farthestTarget = state.getFarthestTargetCoordinate(pokemon, board)
@@ -3165,7 +3166,7 @@ export class DragonBreathStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [25,50,100][pokemon.stars - 1] ?? 100
+    const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
     target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
     const secondTarget = board.getValue(target.positionX, target.positionY + 1)
     if (secondTarget && secondTarget != pokemon) {
@@ -5397,5 +5398,38 @@ export class SmogStrategy extends AttackStrategy {
         y: cell.y
       })
     })
+  }
+}
+
+export class MagnetRiseStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const cells = board
+      .getAdjacentCells(pokemon.positionX, pokemon.positionY)
+      .filter((cell) => cell.value && cell.value.team === pokemon.team)
+      .sort((a, b) => a.value!.life - b.value!.life)
+
+    for (
+      let i = 0;
+      i < (pokemon.stars === 3 ? 4 : pokemon.stars === 2 ? 2 : 1);
+      i++
+    ) {
+      const cell = cells.shift()
+      if (cell && cell.value) {
+        cell.value.status.triggerProtect(2000)
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: cell.value.simulation.id,
+          skill: Ability.MAGNET_RISE,
+          positionX: cell.value.positionX,
+          positionY: cell.value.positionY
+        })
+      }
+    }
   }
 }
