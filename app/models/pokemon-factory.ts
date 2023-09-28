@@ -616,7 +616,9 @@ import {
   Nosepass,
   Probopass,
   Woobat,
-  Swoobat
+  Swoobat,
+  Clauncher,
+  Clawitzer
 } from "./colyseus-models/pokemon"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
 
@@ -2039,6 +2041,10 @@ export default class PokemonFactory {
         return new Woobat(s, e)
       case Pkm.SWOOBAT:
         return new Swoobat(s, e)
+      case Pkm.CLAUNCHER:
+        return new Clauncher(s, e)
+      case Pkm.CLAWITZER:
+        return new Clawitzer(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:

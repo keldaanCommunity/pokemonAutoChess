@@ -14346,3 +14346,53 @@ export class Weezing extends Pokemon {
     )
   }
 }
+
+export class Clauncher extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.CLAUNCHER,
+      [Synergy.WATER, Synergy.SOUND],
+      Rarity.RARE,
+      Pkm.CLAWITZER,
+      80,
+      7,
+      1,
+      1,
+      4,
+      AttackSprite.PSYCHIC_RANGE,
+      1,
+      200,
+      Ability.WATER_PULSE,
+      shiny,
+      emotion,
+      false,
+      true,
+      Passive.MEGA_LAUNCHER
+    )
+  }
+}
+
+export class Clawitzer extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.CLAWITZER,
+      [Synergy.WATER, Synergy.SOUND],
+      Rarity.RARE,
+      Pkm.DEFAULT,
+      140,
+      15,
+      3,
+      2,
+      4,
+      AttackSprite.PSYCHIC_RANGE,
+      2,
+      200,
+      Ability.WATER_PULSE,
+      shiny,
+      emotion,
+      true,
+      true,
+      Passive.MEGA_LAUNCHER
+    )
+  }
+}
