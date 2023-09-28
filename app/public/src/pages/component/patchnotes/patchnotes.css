@@ -1,0 +1,57 @@
+.patchnotes {
+  color: white;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  font-size: 22px;
+  text-align: center;
+}
+
+.patchnotes h1 {
+  font-size: 180%;
+  text-shadow: 2px 2px 2px #00000040;
+}
+
+.patchnotes .content {
+  flex: 1;
+  max-width: 1200px;
+  overflow-y: scroll;
+  line-height: 1em;
+  font-size: 80%;
+  padding: 1em 0.5em;
+}
+
+.patchnotes .content h2 {
+  font-size: 120%;
+  border-bottom: 2px solid #80808080;
+}
+
+.patchnotes .content ul {
+  padding: 0;
+  margin: auto;
+  justify-content: center;
+}
+
+.patchnotes .content blockquote {
+  text-align: right;
+  color: gray;
+  margin-bottom: 0.25em;
+}
+
+.patchnotes .content hr {
+  height: 2px;
+  background-color: white;
+  margin: 1em 0;
+}
+
+.patchnotes .content > ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  padding: 0;
+}
+
+.patchnotes .content > ul > li {
+  list-style: none;
+  padding: 0;
+}

@@ -13,8 +13,8 @@ import GameOptionsModal from "./game/game-options-modal"
 import MetaReport from "./meta-report/meta-report"
 import KeybindInfo from "./keybind-info/keybind-info"
 import { BasicModal } from "./modal/modal"
-import News from "./news/news"
-import { useNews } from "./news/useNews"
+import Patchnotes from "./patchnotes/patchnotes"
+import { usePatchVersion } from "./patchnotes/usePatchVersion"
 import Wiki from "./wiki/wiki"
 import TeamBuilderModal from "./bot-builder/team-builder-modal"
 import Jukebox from "./jukebox/jukebox"
@@ -47,7 +47,7 @@ export function MainSidebar(props: MainSidebarProps) {
   const profile = useAppSelector((state) => state.network.profile)
   const profileLevel = profile?.level ?? 0
 
-  const { isNewVersion, updateNewsVersion } = useNews()
+  const { isNewPatch, updateVersionChecked } = usePatchVersion()
 
   const version = pkg.version
 
@@ -104,11 +104,11 @@ export function MainSidebar(props: MainSidebarProps) {
           svg="newspaper"
           handleClick={(newModal) => {
             changeModal(newModal)
-            if (isNewVersion) {
-              updateNewsVersion()
+            if (isNewPatch) {
+              updateVersionChecked()
             }
           }}
-          shimmer={isNewVersion}
+          shimmer={isNewPatch}
         >
           {t("news")}
         </NavLink>
@@ -360,7 +360,7 @@ function Modals({
       <BasicModal
         handleClose={closeModal}
         show={modal === "news"}
-        body={<News />}
+        body={<Patchnotes />}
       />
       <BasicModal
         handleClose={() => {
