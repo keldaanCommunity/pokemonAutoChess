@@ -13,6 +13,8 @@
 - Probopass
 - Woobat
 - Swoobat
+- Clauncher
+- Clawitzer
 
 # Changes to Pokemon & Abilities
 
@@ -77,7 +79,6 @@
 
 - Various fixes and improvements to the Bot Builder
 - PVE component rewards are now shown in treasure chests after a victory
-
 
 # Bugfix
 

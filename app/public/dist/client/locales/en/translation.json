@@ -226,7 +226,8 @@
     "ANCHOR_SHOT": "Anchor Shot",
     "PSYCHIC": "Psychic",
     "MAGNET_RISE": "Magnet Rise",
-    "ATTRACT": "Attract"
+    "ATTRACT": "Attract",
+    "WATER_PULSE": "Water Pulse"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -832,7 +833,9 @@
     "NOSEPASS": "Nosepass",
     "PROBOPASS": "Probopass",
     "WOOBAT": "Woobat",
-    "SWOOBAT": "Swoobat"
+    "SWOOBAT": "Swoobat",
+    "CLAUNCHER": "Clauncher",
+    "CLAWITZER": "Clawitzer"
   },
   "ability_description": {
     "DEFAULT": "",
@@ -1044,7 +1047,8 @@
     "ANCHOR_SHOT": "Grab the farthest pokémon and deals [20,40,80,SP] SPECIAL",
     "PSYCHIC": "The target is hit by a strong telekinetic force, dealing [40,80,120,SP] SPECIAL to it while also lowering their SPE_DEF by [1,2,3,SP]",
     "MAGNET_RISE": "Grants PROTECT to [1,2,4] adjacent ally pokémon for 2 seconds",
-    "ATTRACT": "Make [1,2,3] pokémon chosen randomly CHARM for [2.5,SP] seconds"
+    "ATTRACT": "Make [1,2,3] pokémon chosen randomly CHARM for [2.5,SP] seconds",
+    "WATER_PULSE": "Deals [50,100,150,SP] SPECIAL to the target and adjacent ennemis and make them CONFUSION for 2 seconds"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1412,7 +1416,8 @@
     "CHINGLING": "Chingling is looking for a STAR_DUST",
     "CHIMECHO": "Resonates to sounds from allies, which doubles SOUND synergy bonus while Chimecho is alive",
     "RAICHU": "Raichu is looking for a DAWN_STONE",
-    "SURGE_SURFER": "The surge surfer gets +30% ATK_SPEED in ELECTRIC_FIELD or PSYCHIC_FIELD"
+    "SURGE_SURFER": "The surge surfer gets +30% ATK_SPEED in ELECTRIC_FIELD or PSYCHIC_FIELD",
+    "MEGA_LAUNCHER": "This pokémon ability emits 3 SOUND cries instead of one"
   },
   "stat": {
     "ATK": "Attack",
