@@ -36,28 +36,7 @@ export class AttackStrategy {
     pokemon.pp = 0
     pokemon.count.ult += 1
 
-    if (
-      ![
-        Ability.PYRO_BALL,
-        Ability.WHIRLPOOL,
-        Ability.SMOKE_SCREEN,
-        Ability.ANCHOR_SHOT,
-        Ability.MAGNET_RISE,
-        Ability.ATTRACT
-      ].includes(pokemon.skill)
-    ) {
-      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
-        id: pokemon.simulation.id,
-        skill: pokemon.skill,
-        positionX: pokemon.positionX,
-        positionY: pokemon.positionY,
-        targetX: target.positionX,
-        targetY: target.positionY,
-        orientation: pokemon.orientation
-      })
-    }
-
-    if (pokemon.types.includes(Synergy.SOUND)) {
+    function soundBoost() {
       pokemon.count.soundCount++
       const chimechoBoost = !!board.find(
         (x, y, e) => e.passive === Passive.CHIMECHO && e.team === pokemon.team
@@ -84,6 +63,34 @@ export class AttackStrategy {
           }
         }
       })
+    }
+    if (
+      ![
+        Ability.PYRO_BALL,
+        Ability.WHIRLPOOL,
+        Ability.SMOKE_SCREEN,
+        Ability.ANCHOR_SHOT,
+        Ability.MAGNET_RISE,
+        Ability.ATTRACT
+      ].includes(pokemon.skill)
+    ) {
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: pokemon.skill,
+        positionX: pokemon.positionX,
+        positionY: pokemon.positionY,
+        targetX: target.positionX,
+        targetY: target.positionY,
+        orientation: pokemon.orientation
+      })
+    }
+
+    if (pokemon.types.includes(Synergy.SOUND)) {
+      soundBoost()
+      if (pokemon.passive === Passive.MEGA_LAUNCHER) {
+        soundBoost()
+        soundBoost()
+      }
     }
 
     board.forEach((x, y, pkm) => {
@@ -5460,5 +5467,34 @@ export class AttractStrategy extends AttackStrategy {
         t?.status.triggerCharm(2500, t, pokemon, true)
       }
     })
+  }
+}
+
+export class WaterPulseStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    board
+      .getAdjacentCells(target.positionX, target.positionY)
+      .map((v) => v.value)
+      .filter((v) => v?.team === target.team)
+      .concat(target)
+      .forEach((v) => {
+        if (v) {
+          v.status.triggerConfusion(2000, v)
+          v.handleSpecialDamage(
+            pokemon.stars === 3 ? 150 : pokemon.stars === 2 ? 100 : 50,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      })
   }
 }

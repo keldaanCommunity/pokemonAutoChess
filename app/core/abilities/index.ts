@@ -181,7 +181,8 @@ import {
   SmogStrategy,
   PsychicStrategy,
   MagnetRiseStrategy,
-  AttractStrategy
+  AttractStrategy,
+  WaterPulseStrategy
 } from "../attack-strategy"
 import {
   HiddenPowerAStrategy,
@@ -426,5 +427,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.SMOG]: new SmogStrategy(),
   [Ability.PSYCHIC]: new PsychicStrategy(),
   [Ability.MAGNET_RISE]: new MagnetRiseStrategy(),
-  [Ability.ATTRACT]: new AttractStrategy()
+  [Ability.ATTRACT]: new AttractStrategy(),
+  [Ability.WATER_PULSE]: new WaterPulseStrategy()
 }
