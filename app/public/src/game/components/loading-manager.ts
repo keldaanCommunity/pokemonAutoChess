@@ -58,6 +58,8 @@ export default class LoadingManager {
       "/assets/ui/"
     )
     scene.load.multiatlas("portal", "/assets/ui/portal.json", "/assets/ui/")
+    scene.load.multiatlas("chest", "/assets/ui/chest.json", "/assets/ui/")
+    scene.load.multiatlas("shine", "/assets/ui/shine.json", "/assets/ui/")
     scene.load.multiatlas("types", "/assets/types/sheet.json", "/assets/types/")
 
     scene.load.image("money", "/assets/ui/money.svg")

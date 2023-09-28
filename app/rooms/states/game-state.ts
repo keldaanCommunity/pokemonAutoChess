@@ -18,6 +18,7 @@ import { PkmProposition } from "../../types/enum/Pokemon"
 import { pickRandomIn } from "../../utils/random"
 import { Portal, SynergySymbol } from "../../models/colyseus-models/portal"
 import Simulation from "../../core/simulation"
+import { Item } from "../../types/enum/Item"
 
 export default class GameState extends Schema {
   @type("string") afterGameId = ""
@@ -37,6 +38,7 @@ export default class GameState extends Schema {
   @type({ set: "string" }) spectators = new SetSchema<string>()
   @type({ map: Simulation }) simulations = new MapSchema<Simulation>()
   time = StageDuration[1] * 1000
+  updatePhaseNeeded = false
   botManager: BotManager = new BotManager()
   shop: Shop = new Shop()
   id: Dungeon
@@ -49,6 +51,7 @@ export default class GameState extends Schema {
   endTime: number | undefined = undefined
   preparationId: string
   shinyEncounter = false
+  pveRewards: Item[] = []
 
   constructor(preparationId: string, name: string, noElo: boolean, selectedMap: Dungeon | "random") {
     super()

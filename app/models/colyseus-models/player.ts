@@ -51,6 +51,7 @@ export default class Player extends Schema implements IPlayer {
   @type("string") role: Role
   @type(["string"]) itemsProposition = new ArraySchema<Item>()
   @type(["string"]) pokemonsProposition = new ArraySchema<PkmProposition>()
+  @type(["string"]) pveRewards = new ArraySchema<Item>()
   @type("float32") loadingProgress: number = 0
   effects: Effects = new Effects()
   isBot: boolean
