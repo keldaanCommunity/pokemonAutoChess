@@ -1937,6 +1937,7 @@
   "winrate": "Winrate",
   "popularity": "Popularity",
   "news": "News",
+  "patch_notes": "Patch Notes",
   "remove_bot": "Remove Bot",
   "kick_user": "Kick User",
   "enter_password": "Enter a password for the room",
