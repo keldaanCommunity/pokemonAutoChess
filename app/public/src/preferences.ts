@@ -5,15 +5,13 @@ export interface IPreferencesState {
   sfxVolume: number
   showDpsMeter: boolean
   showDetailsOnHover: boolean
-  currentVersion?: string
 }
 
 const defaultPreferences: IPreferencesState = {
   musicVolume: 30,
   sfxVolume: 30,
   showDpsMeter: false,
-  showDetailsOnHover: false,
-  currentVersion: undefined
+  showDetailsOnHover: false
 }
 
 let preferences: IPreferencesState = loadPreferences()
