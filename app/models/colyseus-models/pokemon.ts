@@ -5282,7 +5282,7 @@ export class Azurill extends Pokemon {
       AttackSprite.WATER_RANGE,
       1,
       100,
-      Ability.HYDRO_PUMP,
+      Ability.PLAY_ROUGH,
       shiny,
       emotion,
       false
@@ -5305,7 +5305,7 @@ export class Marill extends Pokemon {
       AttackSprite.WATER_RANGE,
       2,
       100,
-      Ability.HYDRO_PUMP,
+      Ability.PLAY_ROUGH,
       shiny,
       emotion,
       false
@@ -5328,7 +5328,7 @@ export class Azumarill extends Pokemon {
       AttackSprite.WATER_RANGE,
       3,
       100,
-      Ability.HYDRO_PUMP,
+      Ability.PLAY_ROUGH,
       shiny,
       emotion,
       true

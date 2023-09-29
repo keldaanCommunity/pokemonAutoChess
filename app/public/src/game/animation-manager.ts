@@ -840,6 +840,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.PLAY_ROUGH,
+      frames: this.game.anims.generateFrameNames(Ability.PLAY_ROUGH, {
+        start: 0,
+        end: 22,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.WATER_PULSE,
       frames: this.game.anims.generateFrameNames(Ability.WATER_PULSE, {
         start: 0,
