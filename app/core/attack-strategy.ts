@@ -5498,3 +5498,23 @@ export class WaterPulseStrategy extends AttackStrategy {
       })
   }
 }
+
+export class PlayRoughStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    target.status.triggerCharm(2500, target)
+    target.handleSpecialDamage(
+      pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit
+    )
+  }
+}
