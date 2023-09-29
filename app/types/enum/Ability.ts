@@ -209,7 +209,8 @@ export enum Ability {
   PSYCHIC = "PSYCHIC",
   MAGNET_RISE = "MAGNET_RISE",
   ATTRACT = "ATTRACT",
-  WATER_PULSE = "WATER_PULSE"
+  WATER_PULSE = "WATER_PULSE",
+  PLAY_ROUGH = "PLAY_ROUGH"
 }
 
 export const CopyableAbility: { [key in Ability]: boolean } = {
@@ -423,5 +424,6 @@ export const CopyableAbility: { [key in Ability]: boolean } = {
   [Ability.PSYCHIC]: true,
   [Ability.MAGNET_RISE]: true,
   [Ability.ATTRACT]: true,
-  [Ability.WATER_PULSE]: true
+  [Ability.WATER_PULSE]: true,
+  [Ability.PLAY_ROUGH]: true
 }

@@ -57,6 +57,7 @@
 - Shell Trap: added AP scaling
 - Sleep ability: reduced sleep duration from 2.5 seconds to 2 seconds, but added AP scaling
 - Thrash ability: reduce attack buff from 110% to 100%, but added AP scaling
+- New ability Play Rough for Azurill line: Deals 30/60/120 damage to the target and make it charmed for 2.5 seconds
 
 # Changes to Synergies
 

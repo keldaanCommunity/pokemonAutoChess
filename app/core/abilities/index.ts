@@ -182,7 +182,8 @@ import {
   PsychicStrategy,
   MagnetRiseStrategy,
   AttractStrategy,
-  WaterPulseStrategy
+  WaterPulseStrategy,
+  PlayRoughStrategy
 } from "../attack-strategy"
 import {
   HiddenPowerAStrategy,
@@ -428,5 +429,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.PSYCHIC]: new PsychicStrategy(),
   [Ability.MAGNET_RISE]: new MagnetRiseStrategy(),
   [Ability.ATTRACT]: new AttractStrategy(),
-  [Ability.WATER_PULSE]: new WaterPulseStrategy()
+  [Ability.WATER_PULSE]: new WaterPulseStrategy(),
+  [Ability.PLAY_ROUGH]: new PlayRoughStrategy()
 }

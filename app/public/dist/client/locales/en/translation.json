@@ -227,7 +227,8 @@
     "PSYCHIC": "Psychic",
     "MAGNET_RISE": "Magnet Rise",
     "ATTRACT": "Attract",
-    "WATER_PULSE": "Water Pulse"
+    "WATER_PULSE": "Water Pulse",
+    "PLAY_ROUGH": "Play Rough"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1048,7 +1049,8 @@
     "PSYCHIC": "The target is hit by a strong telekinetic force, dealing [40,80,120,SP] SPECIAL to it while also lowering their SPE_DEF by [1,2,3,SP]",
     "MAGNET_RISE": "Grants PROTECT to [1,2,4] adjacent ally pokémon for 2 seconds",
     "ATTRACT": "Make [1,2,3] pokémon chosen randomly CHARM for [2.5,SP] seconds",
-    "WATER_PULSE": "Deals [50,100,150,SP] SPECIAL to the target and adjacent ennemis and make them CONFUSION for 2 seconds"
+    "WATER_PULSE": "Deals [50,100,150,SP] SPECIAL to the target and adjacent ennemis and make them CONFUSION for 2 seconds",
+    "PLAY_ROUGH": "Deals [30,60,120,SP] SPECIAL to the target and make it CHARM for 2.5 seconds"
   },
   "effect": {
     "INGRAIN": "Ingrain",
