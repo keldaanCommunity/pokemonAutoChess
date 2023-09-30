@@ -1,5 +1,6 @@
 #wiki-page {
   width: 1880px;
+  max-width: 100%;
 }
 
 #wiki-page ul {
