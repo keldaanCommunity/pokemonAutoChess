@@ -55,6 +55,7 @@ import { max } from "../../utils/number"
 import { getWeather } from "../../utils/weather"
 import Simulation from "../../core/simulation"
 import { selectMatchups } from "../../core/matchmaking"
+import { values } from "../../utils/schemas"
 
 export class OnShopCommand extends Command<
   GameRoom,
@@ -776,7 +777,12 @@ export class OnJoinCommand extends Command<
     try {
       if (options.spectate === true) {
         this.state.spectators.add(client.auth.uid)
+      } else if (values(this.state.players).some((p) => p.id === auth.uid)) {
+        logger.info(
+          `${client.auth.displayName} ${client.id} reconnected to game room`
+        )
       } else {
+        // init player
         const user = await UserMetadata.findOne({ uid: auth.uid })
         if (user) {
           const player = new Player(

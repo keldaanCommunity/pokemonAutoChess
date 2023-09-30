@@ -53,6 +53,7 @@
 #game-stage-info .player-information img {
   width: 1.5em;
   height: 1.5em;
+  margin: auto;
 }
 
 #game-stage-info .player-information .player-title {
