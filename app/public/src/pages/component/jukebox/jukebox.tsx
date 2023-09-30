@@ -17,7 +17,9 @@ export default function Jukebox(props: {
 
   const MUSICS: string[] = Object.values(Dungeon)
 
-  const [music, setMusic] = useState<string>("")
+  const [music, setMusic] = useState<string>(
+    getGameScene()?.music?.key?.replace("music_", "") ?? ""
+  )
   const [loading, setLoading] = useState<boolean>(false)
   const [volume, setVolume] = useState<number>(getPreferences().musicVolume)
 
