@@ -2133,6 +2133,8 @@ export default class PokemonFactory {
   static getBuyPrice(name: Pkm): number {
     if (name === Pkm.DITTO) {
       return 5
+    } else if (Unowns.includes(name)) {
+      return 1
     } else {
       const pokemon: Pokemon = PokemonFactory.createPokemonFromName(name)
       return RarityCost[pokemon.rarity]
