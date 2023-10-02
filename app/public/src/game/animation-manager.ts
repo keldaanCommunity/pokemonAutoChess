@@ -862,6 +862,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.AERIAL_ACE,
+      frames: this.game.anims.generateFrameNames(Ability.AERIAL_ACE, {
+        start: 0,
+        end: 3,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.ATTRACT,
       frames: this.game.anims.generateFrameNames(Ability.ATTRACT, {
         start: 0,

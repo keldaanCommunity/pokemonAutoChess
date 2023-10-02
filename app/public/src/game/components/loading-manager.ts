@@ -555,6 +555,11 @@ export default class LoadingManager {
       "/assets/attacks/GRASS_HEAL.json",
       "/assets/attacks"
     )
+    scene.load.multiatlas(
+      "AERIAL_ACE",
+      "/assets/attacks/AERIAL_ACE.json",
+      "/assets/attacks"
+    )
     scene.load.multiatlas("GAS", "/assets/attacks/GAS.json", "/assets/attacks")
   }
 }
