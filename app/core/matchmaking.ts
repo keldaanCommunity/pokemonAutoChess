@@ -1,5 +1,8 @@
 import Player from "../models/colyseus-models/player"
+import { getAvatarString } from "../public/src/utils"
 import GameState from "../rooms/states/game-state"
+import { Emotion } from "../types"
+import { PkmIndex, Pkm } from "../types/enum/Pokemon"
 import { logger } from "../utils/logger"
 
 export type Matchup = { a: Player; b: Player; count: number; ghost?: boolean }
@@ -46,11 +49,20 @@ export function selectMatchups(state: GameState): Matchup[] {
     )[0]
     ghostMatchup.ghost = true
     if (ghostMatchup.a.id !== remainingPlayer.id) {
-      // ensure remaining player is player A in ghost round
+      // ensure remaining player is player A and ghost is playerB in ghost round
       ghostMatchup.b = ghostMatchup.a
       ghostMatchup.a = remainingPlayer
     }
+    /* dereference player so that money gain is not applied to original player when playing as ghost */
+    const ghost: Player = {
+      ...ghostMatchup.b,
+      id: "ghost-id",
+      name: `Ghost of ${ghostMatchup.b.name}`,
+      avatar: getAvatarString(PkmIndex[Pkm.GASTLY], true, Emotion.HAPPY)
+    } as Player
+    ghostMatchup.b = ghost
     selectedMatchups.push(ghostMatchup)
+    //logger.debug(`Round ${state.stageLevel} has ${ghost.name}`)
   }
   /*
   logger.debug("Matchmaking round " + state.stageLevel)
