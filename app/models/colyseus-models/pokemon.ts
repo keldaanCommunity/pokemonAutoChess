@@ -14396,3 +14396,53 @@ export class Clawitzer extends Pokemon {
     )
   }
 }
+
+export class Yanma extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.YANMA,
+      [Synergy.BUG, Synergy.FOSSIL, Synergy.FLYING],
+      Rarity.RARE,
+      Pkm.YANMEGA,
+      70,
+      9,
+      1,
+      1,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      1,
+      100,
+      Ability.AERIAL_ACE,
+      shiny,
+      emotion,
+      false,
+      true,
+      Passive.CLEAR_WING
+    )
+  }
+}
+
+export class Yanmega extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.YANMEGA,
+      [Synergy.BUG, Synergy.FOSSIL, Synergy.FLYING],
+      Rarity.RARE,
+      Pkm.DEFAULT,
+      160,
+      16,
+      2,
+      2,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      2,
+      100,
+      Ability.AERIAL_ACE,
+      shiny,
+      emotion,
+      true,
+      true,
+      Passive.CLEAR_WING
+    )
+  }
+}

@@ -34,11 +34,13 @@ export default class Status extends Schema implements IStatus {
   magmaStorm = false
   soulDew = false
   deltaOrb = false
+  clearWing = false
   burnOrigin: PokemonEntity | undefined = undefined
   poisonOrigin: PokemonEntity | undefined = undefined
   silenceOrigin: PokemonEntity | undefined = undefined
   woundOrigin: PokemonEntity | undefined = undefined
   magmaStormOrigin: PokemonEntity | null = null
+  clearWingCooldown = 1000
   burnCooldown = 0
   burnDamageCooldown = 1000
   silenceCooldown = 0
@@ -147,6 +149,10 @@ export default class Status extends Schema implements IStatus {
     if (this.magmaStorm) {
       this.updateMagmaStorm(dt, board, pokemon)
     }
+
+    if (this.clearWing) {
+      this.updateClearWing(dt, pokemon)
+    }
   }
 
   triggerMagmaStorm(pkm: PokemonEntity, origin: PokemonEntity | null) {
@@ -202,6 +208,23 @@ export default class Status extends Schema implements IStatus {
       this.armorReduction = false
     } else {
       this.armorReductionCooldown = this.armorReductionCooldown - dt
+    }
+  }
+
+  triggerClearWing(timer: number) {
+    if (!this.clearWing) {
+      this.clearWing = true
+      this.clearWingCooldown = timer
+    }
+  }
+
+  updateClearWing(dt: number, pkm: PokemonEntity) {
+    if (this.clearWingCooldown - dt <= 0) {
+      this.clearWing = false
+      this.triggerClearWing(1000)
+      pkm.addAttackSpeed(2, false)
+    } else {
+      this.clearWingCooldown = this.clearWingCooldown - dt
     }
   }
 

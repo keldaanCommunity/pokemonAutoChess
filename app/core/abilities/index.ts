@@ -183,7 +183,8 @@ import {
   MagnetRiseStrategy,
   AttractStrategy,
   WaterPulseStrategy,
-  PlayRoughStrategy
+  PlayRoughStrategy,
+  AerialAceStrategy
 } from "../attack-strategy"
 import {
   HiddenPowerAStrategy,
@@ -430,5 +431,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.MAGNET_RISE]: new MagnetRiseStrategy(),
   [Ability.ATTRACT]: new AttractStrategy(),
   [Ability.WATER_PULSE]: new WaterPulseStrategy(),
-  [Ability.PLAY_ROUGH]: new PlayRoughStrategy()
+  [Ability.PLAY_ROUGH]: new PlayRoughStrategy(),
+  [Ability.AERIAL_ACE]: new AerialAceStrategy()
 }
