@@ -210,7 +210,8 @@ export enum Ability {
   MAGNET_RISE = "MAGNET_RISE",
   ATTRACT = "ATTRACT",
   WATER_PULSE = "WATER_PULSE",
-  PLAY_ROUGH = "PLAY_ROUGH"
+  PLAY_ROUGH = "PLAY_ROUGH",
+  AERIAL_ACE = "AERIAL_ACE"
 }
 
 export const CopyableAbility: { [key in Ability]: boolean } = {
@@ -425,5 +426,6 @@ export const CopyableAbility: { [key in Ability]: boolean } = {
   [Ability.MAGNET_RISE]: true,
   [Ability.ATTRACT]: true,
   [Ability.WATER_PULSE]: true,
-  [Ability.PLAY_ROUGH]: true
+  [Ability.PLAY_ROUGH]: true,
+  [Ability.AERIAL_ACE]: true
 }

@@ -228,7 +228,8 @@
     "MAGNET_RISE": "Magnet Rise",
     "ATTRACT": "Attract",
     "WATER_PULSE": "Water Pulse",
-    "PLAY_ROUGH": "Play Rough"
+    "PLAY_ROUGH": "Play Rough",
+    "AERIAL_ACE": "Aerical Ace"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -836,7 +837,9 @@
     "WOOBAT": "Woobat",
     "SWOOBAT": "Swoobat",
     "CLAUNCHER": "Clauncher",
-    "CLAWITZER": "Clawitzer"
+    "CLAWITZER": "Clawitzer",
+    "YANMEGA": "Yanmega",
+    "YANMA": "Yanma"
   },
   "ability_description": {
     "DEFAULT": "",
@@ -1050,7 +1053,8 @@
     "MAGNET_RISE": "Grants PROTECT to [1,2,4] adjacent ally pokémon for 2 seconds",
     "ATTRACT": "Make [1,2,3] pokémon chosen randomly CHARM for [2.5,SP] seconds",
     "WATER_PULSE": "Deals [50,100,150,SP] SPECIAL to the target and adjacent ennemis and make them CONFUSION for 2 seconds",
-    "PLAY_ROUGH": "Deals [30,60,120,SP] SPECIAL to the target and make it CHARM for 2.5 seconds"
+    "PLAY_ROUGH": "Deals [30,60,120,SP] SPECIAL to the target and make it CHARM for 2.5 seconds",
+    "AERIAL_ACE": "Deals [30,60,90,SP] TRUE"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1419,7 +1423,8 @@
     "CHIMECHO": "Resonates to sounds from allies, which doubles SOUND synergy bonus while Chimecho is alive",
     "RAICHU": "Raichu is looking for a DAWN_STONE",
     "SURGE_SURFER": "The surge surfer gets +30% ATK_SPEED in ELECTRIC_FIELD or PSYCHIC_FIELD",
-    "MEGA_LAUNCHER": "This pokémon ability emits 3 SOUND cries instead of one"
+    "MEGA_LAUNCHER": "This pokémon ability emits 3 SOUND cries instead of one",
+    "CLEAR_WING": "Gains 2% bonus ATK_SPEED each second"
   },
   "stat": {
     "ATK": "Attack",

@@ -5518,3 +5518,22 @@ export class PlayRoughStrategy extends AttackStrategy {
     )
   }
 }
+
+export class AerialAceStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    target.handleSpecialDamage(
+      pokemon.stars === 3 ? 90 : pokemon.stars === 2 ? 60 : 30,
+      board,
+      AttackType.TRUE,
+      pokemon,
+      crit
+    )
+  }
+}

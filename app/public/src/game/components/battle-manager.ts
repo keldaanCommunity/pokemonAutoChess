@@ -2713,24 +2713,24 @@ export default class BattleManager {
             )
             break
 
-            case Ability.PLAY_ROUGH:
-              coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
-              specialProjectile = this.scene.add.sprite(
-                coordinates[0],
-                coordinates[1],
-                Ability.PLAY_ROUGH,
-                "000"
-              )
-              specialProjectile.setDepth(7)
-              specialProjectile.setScale(2, 2)
-              specialProjectile.anims.play(Ability.PLAY_ROUGH)
-              specialProjectile.once(
-                Phaser.Animations.Events.ANIMATION_COMPLETE,
-                () => {
-                  specialProjectile.destroy()
-                }
-              )
-              break
+          case Ability.PLAY_ROUGH:
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.PLAY_ROUGH,
+              "000"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.PLAY_ROUGH)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
 
           case Ability.ATTRACT:
             coordinates = transformAttackCoordinate(
@@ -4252,6 +4252,33 @@ export default class BattleManager {
               ease: "Power2",
               yoyo: true,
               duration: 1000,
+              onComplete: () => {
+                specialProjectile.destroy()
+              }
+            })
+            break
+
+          case Ability.AERIAL_ACE:
+            coordinatesTarget = transformAttackCoordinate(
+              targetX,
+              targetY,
+              false
+            )
+            coordinates = transformAttackCoordinate(targetX, 8, false)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.AERIAL_ACE,
+              `000`
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.AERIAL_ACE)
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              x: coordinatesTarget[0],
+              y: coordinatesTarget[1],
+              duration: 500,
               onComplete: () => {
                 specialProjectile.destroy()
               }
