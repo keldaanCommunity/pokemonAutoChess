@@ -210,9 +210,32 @@ export function validateBoard(board: IDetailledPokemon[], stage: number) {
   const items = getNbComponentsOnBoard(board)
   const maxItems = getMaxItemComponents(stage)
 
-  const uniques = team.filter((p) => p.rarity === Rarity.UNIQUE)
-  const legendaries = team.filter((p) => p.rarity === Rarity.LEGENDARY)
-  const mythicals = team.filter((p) => p.rarity === Rarity.MYTHICAL)
+  const duos = Object.values(PkmDuos)
+
+  function removeDuoPartner(p, index, arr) {
+    const duo = duos.find((duo) => duo.includes(p.name))
+    if (duo != null) {
+      const partnerName = duo.find((x) => x !== p.name)
+      const partner = arr.find((x) => x.name === partnerName)
+      if (partner && arr.indexOf(partner) < index) {
+        return false // duo partner already found in list, we remove the second one
+      }
+    }
+    return true
+  }
+
+  const uniques = team
+    .filter((p) => p.rarity === Rarity.UNIQUE)
+    .filter(removeDuoPartner)
+
+  const legendaries = team
+    .filter((p) => p.rarity === Rarity.LEGENDARY)
+    .filter(removeDuoPartner)
+
+  const mythicals = team
+    .filter((p) => p.rarity === Rarity.MYTHICAL)
+    .filter(removeDuoPartner)
+
   const additionalCommon = team.filter(
     (p) =>
       p.additional &&
@@ -228,16 +251,15 @@ export function validateBoard(board: IDetailledPokemon[], stage: number) {
       `Unique Pokemons can't be played before stage ${PortalCarouselStages[0]}`
     )
   }
-  if (stage < PortalCarouselStages[1] && legendaries.length > 0) {
+  if (
+    stage < PortalCarouselStages[1] &&
+    legendaries.length + mythicals.length > 0
+  ) {
     throw new Error(
-      `Legendary Pokemons can't be played before stage ${PortalCarouselStages[1]}`
+      `Legendary/Mythical Pokemons can't be played before stage ${PortalCarouselStages[1]}`
     )
   }
-  if (stage < PortalCarouselStages[1] && mythicals.length > 0) {
-    throw new Error(
-      `Mythical Pokemons can't be played before stage ${PortalCarouselStages[1]}`
-    )
-  }
+
   if (stage < AdditionalPicksStages[0] && additionalCommon.length > 0) {
     throw new Error(
       `Common/Uncommon additional picks can't be played before stage ${AdditionalPicksStages[0]}`
