@@ -840,6 +840,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.PARABOLIC_CHARGE,
+      frames: this.game.anims.generateFrameNames(Ability.PARABOLIC_CHARGE, {
+        start: 0,
+        end: 12,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.PLAY_ROUGH,
       frames: this.game.anims.generateFrameNames(Ability.PLAY_ROUGH, {
         start: 0,
