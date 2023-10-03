@@ -2,6 +2,8 @@
 
 - Yanma
 - Yanmega
+- Helioptile
+- Heliolisk
 
 # Changes to Pokemon & Abilities
 

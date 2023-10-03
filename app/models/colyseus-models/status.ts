@@ -64,6 +64,8 @@ export default class Status extends Schema implements IStatus {
   tree = false
   resurectingCooldown = 0
   doubleDamage = false
+  drySkin = false
+  drySkinCooldown = 1000
 
   clearNegativeStatus() {
     this.burnCooldown = 0
@@ -153,6 +155,9 @@ export default class Status extends Schema implements IStatus {
     if (this.clearWing) {
       this.updateClearWing(dt, pokemon)
     }
+    if (this.drySkin) {
+      this.updateDrySkin(dt, pokemon)
+    }
   }
 
   triggerMagmaStorm(pkm: PokemonEntity, origin: PokemonEntity | null) {
@@ -225,6 +230,23 @@ export default class Status extends Schema implements IStatus {
       pkm.addAttackSpeed(2, false)
     } else {
       this.clearWingCooldown = this.clearWingCooldown - dt
+    }
+  }
+
+  triggerDrySkin(timer: number) {
+    if (!this.drySkin) {
+      this.drySkin = true
+      this.drySkinCooldown = timer
+    }
+  }
+
+  updateDrySkin(dt: number, pkm: PokemonEntity) {
+    if (this.drySkinCooldown - dt <= 0) {
+      this.drySkin = false
+      this.triggerDrySkin(1000)
+      pkm.handleHeal(8, pkm, 0)
+    } else {
+      this.drySkinCooldown = this.drySkinCooldown - dt
     }
   }
 
