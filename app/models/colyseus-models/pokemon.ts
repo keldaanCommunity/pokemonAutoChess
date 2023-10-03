@@ -14446,3 +14446,53 @@ export class Yanmega extends Pokemon {
     )
   }
 }
+
+export class Helioptile extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.HELIOPTILE,
+      [Synergy.NORMAL, Synergy.ELECTRIC],
+      Rarity.EPIC,
+      Pkm.HELIOLISK,
+      90,
+      10,
+      3,
+      3,
+      3,
+      AttackSprite.ELECTRIC_RANGE,
+      1,
+      80,
+      Ability.PARABOLIC_CHARGE,
+      shiny,
+      emotion,
+      false,
+      true,
+      Passive.DRY_SKIN
+    )
+  }
+}
+
+export class Heliolisk extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.HELIOLISK,
+      [Synergy.NORMAL, Synergy.ELECTRIC],
+      Rarity.EPIC,
+      Pkm.DEFAULT,
+      220,
+      22,
+      4,
+      4,
+      3,
+      AttackSprite.ELECTRIC_RANGE,
+      2,
+      80,
+      Ability.PARABOLIC_CHARGE,
+      shiny,
+      emotion,
+      true,
+      true,
+      Passive.DRY_SKIN
+    )
+  }
+}

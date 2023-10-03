@@ -5537,3 +5537,25 @@ export class AerialAceStrategy extends AttackStrategy {
     )
   }
 }
+
+export class ParabolicChargeStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const heal = pokemon.stars > 1 ? 50 : 25
+    const overHeal = Math.max(0, heal + pokemon.life - pokemon.hp)
+    pokemon.handleHeal(heal, pokemon, 0)
+    target.handleSpecialDamage(
+      (pokemon.stars === 3 ? 100 : pokemon.stars === 2 ? 50 : 25) + overHeal,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit
+    )
+  }
+}

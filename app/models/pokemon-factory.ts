@@ -620,7 +620,9 @@ import {
   Clauncher,
   Clawitzer,
   Yanma,
-  Yanmega
+  Yanmega,
+  Helioptile,
+  Heliolisk
 } from "./colyseus-models/pokemon"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
 
@@ -2051,6 +2053,10 @@ export default class PokemonFactory {
         return new Yanma(s, e)
       case Pkm.YANMEGA:
         return new Yanmega(s, e)
+      case Pkm.HELIOPTILE:
+        return new Helioptile(s, e)
+      case Pkm.HELIOLISK:
+        return new Heliolisk(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:

@@ -2713,6 +2713,37 @@ export default class BattleManager {
             )
             break
 
+          case Ability.PARABOLIC_CHARGE:
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
+            coordinatesTarget = transformAttackCoordinate(
+              targetX,
+              targetY,
+              this.flip
+            )
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.PARABOLIC_CHARGE,
+              "000"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.anims.play(Ability.PARABOLIC_CHARGE)
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              x: coordinatesTarget[0],
+              y: coordinatesTarget[1],
+              ease: "linear",
+              duration: 1000,
+              onComplete: () => {
+                specialProjectile.destroy()
+              }
+            })
+            break
+
           case Ability.PLAY_ROUGH:
             coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
