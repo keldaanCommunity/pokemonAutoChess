@@ -1,3 +1,7 @@
+#pokemon-detail {
+  z-index: 1060; /* 1050 comes from react modal library */
+}
+
 .__react_component_tooltip.game-pokemon-detail-tooltip {
   padding: 5px;
 }

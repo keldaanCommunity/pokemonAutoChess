@@ -8,9 +8,9 @@ import { getPortraitSrc } from "../../../utils"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { AbilityTooltip } from "../ability/ability-tooltip"
 import SynergyIcon from "../icons/synergy-icon"
-import "./game-pokemon-detail.css"
 import { useTranslation } from "react-i18next"
 import { Emotion } from "../../../../../types"
+import "./game-pokemon-detail.css"
 
 export function GamePokemonDetail(props: {
   pokemon: Pokemon
