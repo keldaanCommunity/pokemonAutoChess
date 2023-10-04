@@ -610,7 +610,9 @@ export enum Pkm {
   YANMA = "YANMA",
   YANMEGA = "YANMEGA",
   HELIOPTILE = "HELIOPTILE",
-  HELIOLISK = "HELIOLISK"
+  HELIOLISK = "HELIOLISK",
+  BIDOOF = "BIDOOF",
+  BIBAREL = "BIBAREL"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1223,7 +1225,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.YANMA]: "0193",
   [Pkm.YANMEGA]: "0469",
   [Pkm.HELIOPTILE]: "0694",
-  [Pkm.HELIOLISK]: "0695"
+  [Pkm.HELIOLISK]: "0695",
+  [Pkm.BIDOOF]: "0399",
+  [Pkm.BIBAREL]: "0400"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1836,7 +1840,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.YANMA]: Pkm.YANMA,
   [Pkm.YANMEGA]: Pkm.YANMA,
   [Pkm.HELIOPTILE]: Pkm.HELIOPTILE,
-  [Pkm.HELIOLISK]: Pkm.HELIOPTILE
+  [Pkm.HELIOLISK]: Pkm.HELIOPTILE,
+  [Pkm.BIDOOF]: Pkm.BIDOOF,
+  [Pkm.BIBAREL]: Pkm.BIDOOF
 }
 
 export enum PkmDuo {
@@ -5016,6 +5022,16 @@ export const AnimationConfig: {
   [Pkm.HELIOLISK]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shock,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.BIDOOF]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.BIBAREL]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
     emote: AnimationType.Shoot
   }
 }

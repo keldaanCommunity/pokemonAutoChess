@@ -14496,3 +14496,51 @@ export class Heliolisk extends Pokemon {
     )
   }
 }
+
+export class Bidoof extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.BIDOOF,
+      [Synergy.NORMAL, Synergy.FIELD, Synergy.WATER],
+      Rarity.COMMON,
+      Pkm.BIBAREL,
+      60,
+      5,
+      2,
+      2,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      1,
+      90,
+      Ability.SUPER_FANG,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Bibarel extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.BIBAREL,
+      [Synergy.NORMAL, Synergy.FIELD, Synergy.WATER],
+      Rarity.COMMON,
+      Pkm.DEFAULT,
+      130,
+      12,
+      2,
+      2,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      2,
+      80,
+      Ability.SUPER_FANG,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}

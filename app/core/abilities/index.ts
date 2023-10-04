@@ -185,7 +185,8 @@ import {
   WaterPulseStrategy,
   PlayRoughStrategy,
   AerialAceStrategy,
-  ParabolicChargeStrategy
+  ParabolicChargeStrategy,
+  SuperFangStrategy
 } from "../attack-strategy"
 import {
   HiddenPowerAStrategy,
@@ -434,5 +435,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.WATER_PULSE]: new WaterPulseStrategy(),
   [Ability.PLAY_ROUGH]: new PlayRoughStrategy(),
   [Ability.AERIAL_ACE]: new AerialAceStrategy(),
-  [Ability.PARABOLIC_CHARGE]: new ParabolicChargeStrategy()
+  [Ability.PARABOLIC_CHARGE]: new ParabolicChargeStrategy(),
+  [Ability.SUPER_FANG]: new SuperFangStrategy()
 }

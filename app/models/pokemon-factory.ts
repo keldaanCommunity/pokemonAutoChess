@@ -622,7 +622,9 @@ import {
   Yanma,
   Yanmega,
   Helioptile,
-  Heliolisk
+  Heliolisk,
+  Bidoof,
+  Bibarel
 } from "./colyseus-models/pokemon"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
 
@@ -2057,6 +2059,10 @@ export default class PokemonFactory {
         return new Helioptile(s, e)
       case Pkm.HELIOLISK:
         return new Heliolisk(s, e)
+      case Pkm.BIDOOF:
+        return new Bidoof(s, e)
+      case Pkm.BIBAREL:
+        return new Bibarel(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:

@@ -5559,3 +5559,23 @@ export class ParabolicChargeStrategy extends AttackStrategy {
     )
   }
 }
+
+export class SuperFangStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    target.handleSpecialDamage(
+      target.life / 2,
+      board,
+      AttackType.TRUE,
+      pokemon,
+      crit,
+      false
+    )
+  }
+}
