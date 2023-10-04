@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next"
 import store from "../../../stores"
 import { joinLobbyRoom } from "../../lobby"
 import { Navigate, useNavigate } from "react-router-dom"
-import { validateBot } from "./bot-logic"
+import { rewriteBotRoundsRequiredto1, validateBot } from "./bot-logic"
 import { logger } from "../../../../../utils/logger"
 
 export function BotManagerPanel() {
@@ -97,8 +97,8 @@ function BotsList() {
                 <td style={{ color: "#999", fontSize: "80%" }}>{b.id}</td>
                 <td>
                   {(() => {
-                    let errors = validateBot(b)
-                    if (!errors)
+                    let errors = validateBot(rewriteBotRoundsRequiredto1(b))
+                    if (!errors || errors.length === 0)
                       return <span style={{ color: "lime" }}>{t("valid")}</span>
                     else
                       return (
