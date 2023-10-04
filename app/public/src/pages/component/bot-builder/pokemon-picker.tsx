@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
-import { Pkm } from "../../../../../types/enum/Pokemon"
+import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
 import PRECOMPUTED_TYPE_POKEMONS_ALL from "../../../../../models/precomputed/type-pokemons-all.json"
 import { Item } from "../../../../../types/enum/Item"
 import { getPortraitSrc } from "../../../utils"
@@ -18,6 +18,7 @@ import { Rarity } from "../../../../../types/enum/Game"
 import { RarityColor } from "../../../../../types/Config"
 import { useTranslation } from "react-i18next"
 import { cc } from "../../utils/jsx"
+import ReactDOM from "react-dom"
 
 export default function PokemonPicker(props: {
   selectEntity: React.Dispatch<React.SetStateAction<PkmWithConfig | Item>>
@@ -64,6 +65,7 @@ function PokemonPickerTab(props: {
   const [hoveredPokemon, setHoveredPokemon] = useState<Pokemon>()
 
   function handleOnDragStart(e: React.DragEvent, name: Pkm) {
+    setHoveredPokemon(undefined)
     e.dataTransfer.setData("pokemon", name)
   }
 
@@ -73,7 +75,9 @@ function PokemonPickerTab(props: {
       const isAddA = isAdditionalPick(a.name),
         isAddB = isAdditionalPick(b.name)
       if (isAddA !== isAddB) return +isAddA - +isAddB
-      return a.index < b.index ? -1 : 1
+      return PkmFamily[a.name] === PkmFamily[b.name]
+        ? a.stars - b.stars
+        : PkmIndex[PkmFamily[a.name]].localeCompare(PkmIndex[PkmFamily[b.name]])
     })
   }
 
@@ -111,6 +115,9 @@ function PokemonPickerTab(props: {
                       shiny: false
                     })
                   }}
+                  onMouseOver={() => {
+                    setHoveredPokemon(p)
+                  }}
                   key={p.name}
                   data-tooltip-id="pokemon-detail"
                   draggable
@@ -123,6 +130,17 @@ function PokemonPickerTab(props: {
           </React.Fragment>
         ))}
       </dl>
+      {hoveredPokemon &&
+        ReactDOM.createPortal(
+          <Tooltip
+            id="pokemon-detail"
+            className="customeTheme game-pokemon-detail-tooltip"
+            float
+          >
+            <GamePokemonDetail pokemon={hoveredPokemon} />
+          </Tooltip>,
+          document.body
+        )}
     </>
   )
 }
