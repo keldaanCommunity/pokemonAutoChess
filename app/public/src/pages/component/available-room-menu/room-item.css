@@ -13,7 +13,7 @@
   margin-top: 0.5em;
 }
 
-.room-item .room-name {
+.room-item > span {
   flex: 1;
   word-break: break-word;
 }
