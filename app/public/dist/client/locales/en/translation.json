@@ -231,7 +231,8 @@
     "PLAY_ROUGH": "Play Rough",
     "AERIAL_ACE": "Aerical Ace",
     "PARABOLIC_CHARGE": "Parabolic Charge",
-    "SUPER_FANG": "Super Fang"
+    "SUPER_FANG": "Super Fang",
+    "TEETER_DANCE": "Teeter Dance"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -845,7 +846,8 @@
     "HELIOPTILE": "Helioptile",
     "HELIOLISK": "Heliolisk",
     "BIDOOF": "Bidoof",
-    "BIBAREL": "Bibarel"
+    "BIBAREL": "Bibarel",
+    "SPINDA": "Spinda"
   },
   "ability_description": {
     "DEFAULT": "",
@@ -1062,7 +1064,8 @@
     "PLAY_ROUGH": "Deals [30,60,120,SP] SPECIAL to the target and make it CHARM for 2.5 seconds",
     "AERIAL_ACE": "Deals [30,60,90,SP] TRUE",
     "PARABOLIC_CHARGE": "Heal [25,50] and deals [25,50,100,SP] SPECIAL damage to the target. Excess HP is converted into SPECIAL",
-    "SUPER_FANG": "Deals [30,60,90,SP] SPECIAL. Double damage on GRASS pokémon."
+    "SUPER_FANG": "Deals [30,60,90,SP] SPECIAL. Double damage on GRASS pokémon",
+    "TEETER_DANCE": "CONFUSION every others pokemons for 3 seconds, allies and ennemies"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1433,7 +1436,8 @@
     "SURGE_SURFER": "The surge surfer gets +30% ATK_SPEED in ELECTRIC_FIELD or PSYCHIC_FIELD",
     "MEGA_LAUNCHER": "This pokémon ability emits 3 SOUND cries instead of one",
     "CLEAR_WING": "Gains 2% bonus ATK_SPEED each second",
-    "DRY_SKIN": "Heals 8 HP per second under RAIN. Gains 25% dodge chance under SANDSTORM. Gains 50% AP under SUN"
+    "DRY_SKIN": "Heals 8 HP per second under RAIN. Gains 25% dodge chance under SANDSTORM. Gains 50% AP under SUN",
+    "SPOT_PANDA":"The pokémon is immune to CONFUSION"
   },
   "stat": {
     "ATK": "Attack",

@@ -840,6 +840,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.TEETER_DANCE,
+      frames: this.game.anims.generateFrameNames(Ability.TEETER_DANCE, {
+        start: 0,
+        end: 46,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.SUPER_FANG,
       frames: this.game.anims.generateFrameNames(Ability.SUPER_FANG, {
         start: 0,
