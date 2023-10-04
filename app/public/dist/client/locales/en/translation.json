@@ -1065,7 +1065,7 @@
     "AERIAL_ACE": "Deals [30,60,90,SP] TRUE",
     "PARABOLIC_CHARGE": "Heal [25,50] and deals [25,50,100,SP] SPECIAL damage to the target. Excess HP is converted into SPECIAL",
     "SUPER_FANG": "Deals [30,60,90,SP] SPECIAL. Double damage on GRASS pokémon",
-    "TEETER_DANCE": "CONFUSION every others pokemons for 3 seconds, allies and ennemies"
+    "TEETER_DANCE": "All other Pokémon are CONFUSION for 3 seconds, allies and enemies alike"
   },
   "effect": {
     "INGRAIN": "Ingrain",
