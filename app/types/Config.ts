@@ -192,7 +192,8 @@ export const CommonShop = new Array<Pkm>(
   Pkm.ARON,
   Pkm.MUDKIP,
   Pkm.CHIMCHAR,
-  Pkm.LITWICK
+  Pkm.LITWICK,
+  Pkm.SPINDA
 )
 
 export const UncommonShop = new Array<Pkm>(
@@ -320,7 +321,8 @@ export const UniqueShop = new Array<PkmProposition>(
   Pkm.TORKOAL,
   Pkm.IRON_BUNDLE,
   Pkm.CHINGLING,
-  Pkm.DHELMISE
+  Pkm.DHELMISE,
+  Pkm.SPINDA
 )
 
 export const LegendaryShop = new Array<PkmProposition>(

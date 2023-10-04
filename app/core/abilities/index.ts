@@ -186,7 +186,8 @@ import {
   PlayRoughStrategy,
   AerialAceStrategy,
   ParabolicChargeStrategy,
-  SuperFangStrategy
+  SuperFangStrategy,
+  TeeterDanceStrategy
 } from "../attack-strategy"
 import {
   HiddenPowerAStrategy,
@@ -436,5 +437,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.PLAY_ROUGH]: new PlayRoughStrategy(),
   [Ability.AERIAL_ACE]: new AerialAceStrategy(),
   [Ability.PARABOLIC_CHARGE]: new ParabolicChargeStrategy(),
-  [Ability.SUPER_FANG]: new SuperFangStrategy()
+  [Ability.SUPER_FANG]: new SuperFangStrategy(),
+  [Ability.TEETER_DANCE]: new TeeterDanceStrategy()
 }

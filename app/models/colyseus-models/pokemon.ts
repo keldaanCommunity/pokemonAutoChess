@@ -14544,3 +14544,28 @@ export class Bibarel extends Pokemon {
     )
   }
 }
+
+export class Spinda extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.SPINDA,
+      [Synergy.NORMAL, Synergy.HUMAN, Synergy.SOUND],
+      Rarity.UNIQUE,
+      Pkm.DEFAULT,
+      200,
+      20,
+      5,
+      5,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      3,
+      100,
+      Ability.TEETER_DANCE,
+      shiny,
+      emotion,
+      true,
+      false,
+      Passive.SPOT_PANDA
+    )
+  }
+}

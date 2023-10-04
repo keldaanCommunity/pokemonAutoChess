@@ -4457,6 +4457,28 @@ export default class BattleManager {
             )
             break
 
+          case Ability.TEETER_DANCE:
+            ;(this.group.getChildren() as Pokemon[]).forEach((pkmUI) => {
+              coordinates = transformAttackCoordinate(
+                pkmUI.positionX,
+                pkmUI.positionY,
+                this.flip
+              )
+              const s = this.scene.add.sprite(
+                coordinates[0],
+                coordinates[1],
+                Ability.TEETER_DANCE,
+                "000"
+              )
+              s.setDepth(1)
+              s.setScale(2, 2)
+              s.anims.play(Ability.TEETER_DANCE)
+              s.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+                s.destroy()
+              })
+            })
+            break
+
           default:
             break
         }
