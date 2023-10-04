@@ -1218,7 +1218,7 @@
     "ELECTRIC_TERRAIN": "Erhöht den verursachten Schaden um 20 % (nur elektrisch)",
     "MISTY_TERRAIN": "Erhöht den verursachten Schaden um 20 % (nur Fee)",
     "SANDSTORM": "5 SPECIAL pro Sekunde (BODEN sind immun)\nDauer von CONFUSION +30 %",
-    "SNOW": "-25 % Basis ATK_SPEED\n+30 % FREEZE Dauer",
+    "SNOW": "-25 % Bewegungsgeschwindigkeit\n+30 % FREEZE Dauer",
     "SUN": "+30 % BURN Schaden\n-30 % FREEZE Dauer",
     "RAIN": "+3 PP pro Sekunde\n-30 % VERBRENNUNGS- und POISON-Schaden",
     "STORM": "Blitze fallen zufällig auf die Tafel (ELECTRIC sind immun)\n+30 % PARALYSIS Dauer",
@@ -1647,7 +1647,7 @@
     "NIGHT": "+10 % CRIT_CHANCE\n+30 % SLEEP-Dauer",
     "STORM": "Blitze schlagen zufällig auf dem Spielbrett ein und verursachen 100 SPECIAL (ELECTRIC sind immun)\n+30 % PARALYSIS-Dauer",
     "MISTY": "+20 % SPECIAL\n+30 % SILENCE-Dauer",
-    "SNOW": "-25 % Basis-ATK_SPEED\n+30 % FREEZE-Dauer",
+    "SNOW": "-25 % Bewegungsgeschwindigkeit\n+30 % FREEZE-Dauer",
     "SANDSTORM": "5 SPECIAL pro Sekunde (GROUND sind immun)\n Dauer von CONFUSION +30 %"
   },
   "emotion": {

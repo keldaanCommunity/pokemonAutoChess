@@ -1262,8 +1262,8 @@
     "PSYCHIC_TERRAIN": "Increase damage dealt by 20% (Psychic only)",
     "ELECTRIC_TERRAIN": "Increase damage dealt by 20% (Electric only)",
     "MISTY_TERRAIN": "Increase damage dealt by 20% (Fairy only)",
-    "SANDSTORM": "5 SPECIAL per second (GROUND are immune)\nCONFUSION duration +30%",
-    "SNOW": "-25% base ATK_SPEED\n+30% FREEZE duration",
+    "SANDSTORM": "5 SPECIAL per second (GROUND are immune)\n+30% CONFUSION duration",
+    "SNOW": "-25% movement speed\n+30% FREEZE duration",
     "SUN": "+30% BURN damage\n-30% FREEZE duration",
     "RAIN": "+3 PP per second\n-30% BURN and POISON damage",
     "STORM": "Lightning randomly falls on the board (ELECTRIC are immune)\n+30% PARALYSIS duration",
@@ -1700,8 +1700,8 @@
     "NIGHT": "+10% CRIT_CHANCE\n+30% SLEEP duration",
     "STORM": "Lightning randomly strikes on the board, dealing 100 SPECIAL (ELECTRIC are immune)\n+30% PARALYSIS duration",
     "MISTY": "+20%SPECIAL\n+30% CHARM duration",
-    "SNOW": "-25% base ATK_SPEED\n+30% FREEZE duration",
-    "SANDSTORM": "5 SPECIAL per second (GROUND are immune)\n CONFUSION duration +30%"
+    "SNOW": "-25% movement speed\n+30% FREEZE duration",
+    "SANDSTORM": "5 SPECIAL per second (GROUND are immune)\n+30% CONFUSION duration"
   },
   "emotion": {
     "Normal": "Normal",

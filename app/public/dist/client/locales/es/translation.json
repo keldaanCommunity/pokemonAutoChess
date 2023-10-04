@@ -1219,7 +1219,7 @@
     "ELECTRIC_TERRAIN": "Aumenta el daño infligido en un 20% (solo eléctrico)",
     "MISTY_TERRAIN": "Aumenta el daño infligido en un 20 % (solo hada)",
     "SANDSTORM": "5 SPECIAL por segundo (SUELO son inmunes)\n CONFUSION duración +30%",
-    "SNOW": "-25% base ATK_SPEED\n+30% de duración de FREEZE",
+    "SNOW": "-25% de velocidad de movimiento\n+30% de duración de FREEZE",
     "SUN": "+30 % de daño por BURN\n-30% de duración de FREEZE",
     "RAIN": "+3 PP por segundo\n-30 % de daño por BURN y POISON",
     "STORM": "Un rayo cae al azar en el tablero (ELECTRIC son inmunes)\n+30% de duración de la PARALYSIS",
@@ -1648,7 +1648,7 @@
     "NIGHT": "+10% CRIT_CHANCE\n+30% de duración del SLEEP",
     "STORM": "Un rayo cae aleatoriamente en el tablero y otorga 100 SPECIAL (ELECTRIC es inmune)\n+30% de duración de la PARALYSIS",
     "MISTY": "+20%SPECIAL\n+30% de duración del SILENCE",
-    "SNOW": "-25% base ATK_SPEED\n+30% de duración de FREEZE",
+    "SNOW": "-25% de velocidad de movimiento\n+30% de duración de FREEZE",
     "SANDSTORM": "5 SPECIAL por segundo (GROUND son inmunes)\n CONFUSION duración +30%"
   },
   "emotion": {

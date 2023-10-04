@@ -4,12 +4,13 @@ import PokemonState from "./pokemon-state"
 import { PokemonActionState } from "../types/enum/Game"
 import { Synergy } from "../types/enum/Synergy"
 import { distanceC } from "../utils/distance"
+import { Weather } from "../types/enum/Weather"
 
 export default class MovingState extends PokemonState {
   update(pokemon: PokemonEntity, dt: number, board: Board, weather: string) {
     super.update(pokemon, dt, board, weather)
     if (pokemon.cooldown <= 0) {
-      pokemon.cooldown = 500
+      pokemon.cooldown = weather === Weather.SNOW ? 666 : 500
       const targetCoordinate = this.getNearestTargetCoordinate(pokemon, board)
       if (targetCoordinate) {
         const distance = distanceC(

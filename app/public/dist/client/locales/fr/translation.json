@@ -1222,7 +1222,7 @@
     "ELECTRIC_TERRAIN": "Augmente les dégâts infligés de 20% (ELECTRIC uniquement)",
     "MISTY_TERRAIN": "Augmente les dégâts infligés de 20% (FAIRY uniquement)",
     "SANDSTORM": "5 SPECIAL par seconde (le SOL est immunisé)\nDurée CONFUSION +30%",
-    "SNOW": "-25% de ATK_SPEED de base\n+30% de durée de FREEZE",
+    "SNOW": "-25% de vitesse de déplacement\n+30% de durée de FREEZE",
     "SUN": "+30% de dégâts de BURN\n-30% de durée de FREEZE",
     "RAIN": "+3 PP par seconde\n-30% de dégâts de BURN et POISON",
     "STORM": "La foudre tombe au hasard sur le plateau (les ELECTRIC sont immunisés)\n+30% de durée de PARALYSIS",
@@ -1651,7 +1651,7 @@
     "NIGHT": "+10% CRIT_CHANCE\n+30% de durée de SLEEP",
     "STORM": "La foudre frappe au hasard sur le plateau, infligeant 100 SPECIAL (les ELECTRIC sont immunisés)\n+30% de durée de PARALYSIS",
     "MISTY": "+20% SPECIAL\n+30% de durée de CHARM",
-    "SNOW": "-25% de ATK_SPEED de base\n+30% de durée de FREEZE",
+    "SNOW": "-25% de vitesse de déplacement\n+30% de durée de FREEZE",
     "SANDSTORM": "Inflige 5 SPECIAL par seconde (les GROUND sont immunisés)\n Durée CONFUSION +30%"
   },
   "emotion": {

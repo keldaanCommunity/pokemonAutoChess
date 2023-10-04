@@ -1219,7 +1219,7 @@
     "ELECTRIC_TERRAIN": "Aumenta i danni inflitti del 20% (solo elettricità)",
     "MISTY_TERRAIN": "Aumenta i danni inflitti del 20% (solo Fata)",
     "SANDSTORM": "5 SPECIAL al secondo (i GROUND sono immuni)\nDurata CONFUSION +30%",
-    "SNOW": "-25% ATK_SPEED di base\n+30% alla durata del FREEZE",
+    "SNOW": "-25% velocità di movimento\n+30% alla durata del FREEZE",
     "SUN": "+30% danni da BURN\n-30% durata FREEZE",
     "RAIN": "+3 PP al secondo\n-30% danni da BURN e POISON",
     "STORM": "I fulmini cadono casualmente sul tabellone (gli ELECTRIC sono immuni)\n+30% alla durata della PARALYSIS",
@@ -1648,7 +1648,7 @@
     "NIGHT": "+10% CRIT_CHANCE\n+30% durata SLEEP",
     "STORM": "I fulmini colpiscono casualmente il tabellone, infliggendo 100 SPECIAL (ELECTRIC sono immuni)\n+30% alla durata della PARALYSIS",
     "MISTY": "+20%SPECIAL\n+30% alla durata del SILENCE",
-    "SNOW": "-25% ATK_SPEED di base\n+30% alla durata del FREEZE",
+    "SNOW": "-25% velocità di movimento\n+30% alla durata del FREEZE",
     "SANDSTORM": "5 SPECIAL al secondo (GROUND sono immuni)\n Durata CONFUSION +30%"
   },
   "emotion": {

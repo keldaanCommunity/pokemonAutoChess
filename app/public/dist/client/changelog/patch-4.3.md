@@ -8,6 +8,7 @@
 - Bibarel
 
 # Changes to Pokemon & Abilities
+
 - Buff Giratina Altered form: Attack ~~30~~ → 35
 - Nerf Giratina Origin form: Attack ~~40~~ → 35
 - Nerf Woobat: HP ~~80~~ → 60 Def/SpeDef ~~3~~ → 1
@@ -20,6 +21,8 @@
 # Changes to Items
 
 # Gameplay
+
+- Snow weather effect change: ~~-25% attack speed~~ → -25% movement speed
 
 # UI
 
