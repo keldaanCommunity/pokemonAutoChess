@@ -2074,6 +2074,8 @@ export default class PokemonFactory {
     const pokemon: Pokemon = PokemonFactory.createPokemonFromName(name)
     if (name === Pkm.EGG) {
       return 2
+    } else if (name == Pkm.DITTO) {
+      return 5
     } else if (name === Pkm.MAGIKARP) {
       return 1
     } else if (pokemon.passive === Passive.UNOWN) {
