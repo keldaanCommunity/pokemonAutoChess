@@ -4,6 +4,8 @@
 - Yanmega
 - Helioptile
 - Heliolisk
+- Bidoof
+- Bibarel
 
 # Changes to Pokemon & Abilities
 - Buff Giratina Altered form: Attack ~~30~~ → 35

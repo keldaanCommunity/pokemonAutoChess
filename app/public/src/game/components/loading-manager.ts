@@ -109,6 +109,11 @@ export default class LoadingManager {
       "/assets/attacks"
     )
     scene.load.multiatlas(
+      "SUPER_FANG",
+      "/assets/attacks/SUPER_FANG.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
       "PARABOLIC_CHARGE",
       "/assets/attacks/PARABOLIC_CHARGE.json",
       "/assets/attacks"

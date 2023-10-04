@@ -2713,6 +2713,25 @@ export default class BattleManager {
             )
             break
 
+          case Ability.SUPER_FANG:
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.SUPER_FANG,
+              "000"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(3, 3)
+            specialProjectile.anims.play(Ability.SUPER_FANG)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
+
           case Ability.PARABOLIC_CHARGE:
             coordinates = transformAttackCoordinate(
               positionX,

@@ -840,6 +840,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.SUPER_FANG,
+      frames: this.game.anims.generateFrameNames(Ability.SUPER_FANG, {
+        start: 0,
+        end: 3,
+        zeroPad: 3
+      }),
+      duration: 500,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.PARABOLIC_CHARGE,
       frames: this.game.anims.generateFrameNames(Ability.PARABOLIC_CHARGE, {
         start: 0,
