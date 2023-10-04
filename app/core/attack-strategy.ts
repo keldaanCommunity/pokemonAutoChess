@@ -5569,10 +5569,14 @@ export class SuperFangStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    let damage = pokemon.stars === 3 ? 90 : pokemon.stars === 2 ? 60 : 30
+    if (target.types.includes(Synergy.GRASS)) {
+      damage *= 2
+    }
     target.handleSpecialDamage(
-      target.life / 2,
+      damage,
       board,
-      AttackType.TRUE,
+      AttackType.SPECIAL,
       pokemon,
       crit,
       false
