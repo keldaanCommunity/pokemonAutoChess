@@ -1062,7 +1062,7 @@
     "PLAY_ROUGH": "Deals [30,60,120,SP] SPECIAL to the target and make it CHARM for 2.5 seconds",
     "AERIAL_ACE": "Deals [30,60,90,SP] TRUE",
     "PARABOLIC_CHARGE": "Heal [25,50] and deals [25,50,100,SP] SPECIAL damage to the target. Excess HP is converted into SPECIAL",
-    "SUPER_FANG": "Halves the target HP"
+    "SUPER_FANG": "Deals [30,60,90,SP] SPECIAL. Double damage on GRASS pokémon."
   },
   "effect": {
     "INGRAIN": "Ingrain",

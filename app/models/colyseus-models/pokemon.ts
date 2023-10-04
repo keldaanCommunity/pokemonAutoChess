@@ -14501,7 +14501,7 @@ export class Bidoof extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.BIDOOF,
-      [Synergy.NORMAL, Synergy.FIELD, Synergy.WATER],
+      [Synergy.NORMAL, Synergy.FIELD, Synergy.AQUATIC],
       Rarity.COMMON,
       Pkm.BIBAREL,
       60,
@@ -14525,7 +14525,7 @@ export class Bibarel extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.BIBAREL,
-      [Synergy.NORMAL, Synergy.FIELD, Synergy.WATER],
+      [Synergy.NORMAL, Synergy.FIELD, Synergy.AQUATIC],
       Rarity.COMMON,
       Pkm.DEFAULT,
       130,
