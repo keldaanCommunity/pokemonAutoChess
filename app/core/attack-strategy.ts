@@ -5583,3 +5583,18 @@ export class SuperFangStrategy extends AttackStrategy {
     )
   }
 }
+
+export class TeeterDanceStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    board.cells
+      .filter((v) => v !== undefined)
+      .forEach((v) => v && v.status.triggerConfusion(3000, v))
+  }
+}

@@ -512,7 +512,11 @@ export default class Status extends Schema implements IStatus {
   }
 
   triggerConfusion(timer: number, pkm: PokemonEntity) {
-    if (!this.confusion && !this.runeProtect) {
+    if (
+      !this.confusion &&
+      !this.runeProtect &&
+      pkm.passive !== Passive.SPOT_PANDA
+    ) {
       if (pkm.simulation.weather === Weather.SANDSTORM) {
         timer = Math.round(timer * 1.3)
       }

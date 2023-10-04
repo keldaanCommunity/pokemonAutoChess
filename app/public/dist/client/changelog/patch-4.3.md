@@ -6,8 +6,10 @@
 - Heliolisk
 - Bidoof
 - Bibarel
+- Spinda
 
 # Changes to Pokemon & Abilities
+
 - Buff Giratina Altered form: Attack ~~30~~ → 35
 - Nerf Giratina Origin form: Attack ~~40~~ → 35
 - Nerf Woobat: HP ~~80~~ → 60 Def/SpeDef ~~3~~ → 1
