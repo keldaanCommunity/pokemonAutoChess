@@ -49,5 +49,6 @@ export enum Passive {
   CLEAR_WING = "CLEAR_WING",
   DRY_SKIN = "DRY_SKIN",
   SPOT_PANDA = "SPOT_PANDA",
-  CUBONE = "CUBONE"
+  CUBONE = "CUBONE",
+  GUTS = "GUTS"
 }
