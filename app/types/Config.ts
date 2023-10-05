@@ -321,7 +321,8 @@ export const UniqueShop = new Array<PkmProposition>(
   Pkm.IRON_BUNDLE,
   Pkm.CHINGLING,
   Pkm.DHELMISE,
-  Pkm.SPINDA
+  Pkm.SPINDA,
+  Pkm.HERACROSS
 )
 
 export const LegendaryShop = new Array<PkmProposition>(

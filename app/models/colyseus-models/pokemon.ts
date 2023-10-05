@@ -6796,6 +6796,31 @@ export class Tauros extends Pokemon {
   }
 }
 
+export class Heracross extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.HERACROSS,
+      [Synergy.BUG, Synergy.FIGHTING],
+      Rarity.UNIQUE,
+      Pkm.DEFAULT,
+      190,
+      22,
+      3,
+      3,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      3,
+      100,
+      Ability.CLOSE_COMBAT,
+      shiny,
+      emotion,
+      true,
+      false,
+      Passive.GUTS
+    )
+  }
+}
+
 export class Registeel extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(

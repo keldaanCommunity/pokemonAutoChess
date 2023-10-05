@@ -840,6 +840,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.CLOSE_COMBAT,
+      frames: this.game.anims.generateFrameNames(Ability.CLOSE_COMBAT, {
+        start: 0,
+        end: 6,
+        zeroPad: 3
+      }),
+      duration: 500,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.TEETER_DANCE,
       frames: this.game.anims.generateFrameNames(Ability.TEETER_DANCE, {
         start: 0,

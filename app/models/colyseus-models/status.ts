@@ -35,6 +35,7 @@ export default class Status extends Schema implements IStatus {
   soulDew = false
   deltaOrb = false
   clearWing = false
+  guts = false
   burnOrigin: PokemonEntity | undefined = undefined
   poisonOrigin: PokemonEntity | undefined = undefined
   silenceOrigin: PokemonEntity | undefined = undefined
@@ -325,6 +326,10 @@ export default class Status extends Schema implements IStatus {
       if (origin) {
         this.burnOrigin = origin
       }
+      if (pkm.passive === Passive.GUTS && !this.guts) {
+        this.guts = true
+        pkm.addAttack(5, false)
+      }
     }
   }
 
@@ -356,18 +361,20 @@ export default class Status extends Schema implements IStatus {
     }
 
     if (this.burnCooldown - dt <= 0) {
-      this.burn = false
-      this.burnOrigin = undefined
-      this.burnDamageCooldown = 1000
+      this.healBurn(pkm)
     } else {
       this.burnCooldown = this.burnCooldown - dt
     }
   }
 
-  healBurn() {
+  healBurn(pkm: PokemonEntity) {
     this.burn = false
     this.burnOrigin = undefined
     this.burnDamageCooldown = 1000
+    if (pkm.passive === Passive.GUTS && this.poisonStacks === 0) {
+      this.guts = false
+      pkm.addAttack(-5, false)
+    }
   }
 
   triggerSilence(
@@ -413,6 +420,10 @@ export default class Status extends Schema implements IStatus {
       }
       this.poisonStacks = max(maxStacks)(this.poisonStacks + 1)
       this.poisonCooldown = Math.max(timer, this.poisonCooldown)
+      if (pkm.passive === Passive.GUTS && !this.guts) {
+        this.guts = true
+        pkm.addAttack(5, false)
+      }
     }
   }
 
@@ -453,6 +464,10 @@ export default class Status extends Schema implements IStatus {
       this.poisonStacks = 0
       this.poisonOrigin = undefined
       this.poisonDamageCooldown = 1000
+      if (pkm.passive === Passive.GUTS && !this.burn) {
+        this.guts = false
+        pkm.addAttack(-5, false)
+      }
     } else {
       this.poisonCooldown = this.poisonCooldown - dt
     }
