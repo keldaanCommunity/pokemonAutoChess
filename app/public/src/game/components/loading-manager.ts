@@ -109,6 +109,11 @@ export default class LoadingManager {
       "/assets/attacks"
     )
     scene.load.multiatlas(
+      "CLOSE_COMBAT",
+      "/assets/attacks/CLOSE_COMBAT.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
       "TEETER_DANCE",
       "/assets/attacks/TEETER_DANCE.json",
       "/assets/attacks"

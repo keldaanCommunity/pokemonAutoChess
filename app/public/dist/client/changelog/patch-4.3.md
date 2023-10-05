@@ -9,6 +9,7 @@
 - Spinda
 - Baltoy
 - Claydol
+- Heracross
 
 # Changes to Pokemon & Abilities
 

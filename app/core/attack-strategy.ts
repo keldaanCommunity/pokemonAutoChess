@@ -3923,7 +3923,7 @@ export class SparklingAriaStrategy extends AttackStrategy {
         cell.value.team === pokemon.team &&
         cell.value.status.burn
       ) {
-        cell.value.status.healBurn()
+        cell.value.status.healBurn(cell.value)
       }
     })
   }
@@ -5596,5 +5596,20 @@ export class TeeterDanceStrategy extends AttackStrategy {
     board.cells
       .filter((v) => v !== undefined)
       .forEach((v) => v && v.status.triggerConfusion(3000, v))
+  }
+}
+
+export class CloseCombatStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    pokemon.addDefense(-3, false)
+    pokemon.addSpecialDefense(-3, false)
+    target.handleSpecialDamage(130, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
