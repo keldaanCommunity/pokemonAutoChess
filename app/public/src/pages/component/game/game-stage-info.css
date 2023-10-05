@@ -19,12 +19,12 @@
   text-overflow: ellipsis;
 }
 
-#game-stage-infor .stage-information {
+#game-stage-info .stage-information {
   width: 4vw;
   text-align: center;
 }
 
-#game-stage-info .stage-information p {
+#detail-stage p {
   margin: 0 0.25em;
 }
 
@@ -119,6 +119,7 @@
   height: 1.5em;
 }
 
-#game-stage-info .weather-information p {
+#detail-weather p {
   white-space: pre-line;
+  margin: 0 0.25em;
 }

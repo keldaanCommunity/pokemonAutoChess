@@ -19,6 +19,7 @@ import { addIconsToDescription } from "../../utils/descriptions"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Emotion } from "../../../../../types"
 import { useTranslation } from "react-i18next"
+import ReactDOM from "react-dom"
 
 export default function GameStageInfo() {
   const { t } = useTranslation()
@@ -50,24 +51,27 @@ export default function GameStageInfo() {
     <>
       <div id="game-stage-info" className="nes-container">
         <div className="stage-information" data-tooltip-id="detail-stage">
-          <Tooltip id="detail-stage" className="customeTheme" place="bottom">
-            <p>
-              <span className="help">{t("pve_stages")}:</span>{" "}
-              {NeutralStage.map((s) => s.turn).join(", ")}
-            </p>
-            <p>
-              <span className="help">{t("carousel_stages")}:</span>{" "}
-              {ItemCarouselStages.join(", ")}
-            </p>
-            <p>
-              <span className="help">{t("additional_picks")}:</span>{" "}
-              {t("stages")} {AdditionalPicksStages.join(t("and"))}
-            </p>
-            <p>
-              <span className="help">{t("unique_picks")}:</span> {t("stages")}{" "}
-              {PortalCarouselStages.join(t("and"))}
-            </p>
-          </Tooltip>
+          {ReactDOM.createPortal(
+            <Tooltip id="detail-stage" className="customeTheme" place="bottom">
+              <p>
+                <span className="help">{t("pve_stages")}:</span>{" "}
+                {NeutralStage.map((s) => s.turn).join(", ")}
+              </p>
+              <p>
+                <span className="help">{t("carousel_stages")}:</span>{" "}
+                {ItemCarouselStages.join(", ")}
+              </p>
+              <p>
+                <span className="help">{t("additional_picks")}:</span>{" "}
+                {t("stages")} {AdditionalPicksStages.join(t("and"))}
+              </p>
+              <p>
+                <span className="help">{t("unique_picks")}:</span> {t("stages")}{" "}
+                {PortalCarouselStages.join(t("and"))}
+              </p>
+            </Tooltip>,
+            document.body
+          )}
           <p>
             {t("stage")} {stageLevel}
           </p>
@@ -104,19 +108,24 @@ export default function GameStageInfo() {
 
         {opponentName != "" && (
           <div className="weather-information" data-tooltip-id="detail-weather">
-            <Tooltip
-              id="detail-weather"
-              className="customeTheme"
-              place="bottom"
-            >
-              <span>
-                <SynergyIcon type={SynergyAssociatedToWeather.get(weather)!} />
-                {t(`weather.${weather}`)}
-              </span>
-              <p>
-                {addIconsToDescription(t(`weather_description.${weather}`))}
-              </p>
-            </Tooltip>
+            {ReactDOM.createPortal(
+              <Tooltip
+                id="detail-weather"
+                className="customeTheme"
+                place="bottom"
+              >
+                <span>
+                  <SynergyIcon
+                    type={SynergyAssociatedToWeather.get(weather)!}
+                  />
+                  {t(`weather.${weather}`)}
+                </span>
+                <p>
+                  {addIconsToDescription(t(`weather_description.${weather}`))}
+                </p>
+              </Tooltip>,
+              document.body
+            )}
             <img src={`/assets/icons/weather/${weather.toLowerCase()}.svg`} />
           </div>
         )}
@@ -234,13 +243,16 @@ export function StagePath() {
             })}
             data-tooltip-id={"stage-path-" + i}
           >
-            <Tooltip
-              id={"stage-path-" + i}
-              className="customeTheme"
-              place="bottom"
-            >
-              {step.title}
-            </Tooltip>
+            {ReactDOM.createPortal(
+              <Tooltip
+                id={"stage-path-" + i}
+                className="customeTheme"
+                place="bottom"
+              >
+                {step.title}
+              </Tooltip>,
+              document.body
+            )}
             <img src={step.icon}></img>
           </div>
           {i < path.length - 1 && <span>―</span>}
