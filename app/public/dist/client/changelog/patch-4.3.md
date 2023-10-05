@@ -23,6 +23,8 @@
 
 # Gameplay
 
+- Snow weather effect change: ~~-25% attack speed~~ → -25% movement speed
+
 # UI
 
 # Bugfix
