@@ -613,7 +613,9 @@ export enum Pkm {
   HELIOLISK = "HELIOLISK",
   BIDOOF = "BIDOOF",
   BIBAREL = "BIBAREL",
-  SPINDA = "SPINDA"
+  SPINDA = "SPINDA",
+  BALTOY = "BALTOY",
+  CLAYDOL = "CLAYDOL"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1229,7 +1231,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.HELIOLISK]: "0695",
   [Pkm.BIDOOF]: "0399",
   [Pkm.BIBAREL]: "0400",
-  [Pkm.SPINDA]: "0327"
+  [Pkm.SPINDA]: "0327",
+  [Pkm.BALTOY]: "0343",
+  [Pkm.CLAYDOL]: "0344"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1845,7 +1849,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.HELIOLISK]: Pkm.HELIOPTILE,
   [Pkm.BIDOOF]: Pkm.BIDOOF,
   [Pkm.BIBAREL]: Pkm.BIDOOF,
-  [Pkm.SPINDA]: Pkm.SPINDA
+  [Pkm.SPINDA]: Pkm.SPINDA,
+  [Pkm.BALTOY]: Pkm.BALTOY,
+  [Pkm.CLAYDOL]: Pkm.BALTOY
 }
 
 export enum PkmDuo {
@@ -5041,5 +5047,15 @@ export const AnimationConfig: {
     attack: AnimationType.Slam,
     ability: AnimationType.Twirl,
     emote: AnimationType.Shoot
+  },
+  [Pkm.BALTOY]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Rotate,
+    emote: AnimationType.RearUp
+  },
+  [Pkm.CLAYDOL]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Rotate,
+    emote: AnimationType.RearUp
   }
 }

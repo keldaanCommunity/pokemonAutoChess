@@ -14573,3 +14573,51 @@ export class Spinda extends Pokemon {
     )
   }
 }
+
+export class Baltoy extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.BALTOY,
+      [Synergy.GROUND, Synergy.PSYCHIC, Synergy.ARTIFICIAL],
+      Rarity.EPIC,
+      Pkm.CLAYDOL,
+      80,
+      8,
+      4,
+      4,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      1,
+      70,
+      Ability.CONFUSION,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Claydol extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.CLAYDOL,
+      [Synergy.GROUND, Synergy.PSYCHIC, Synergy.ARTIFICIAL],
+      Rarity.EPIC,
+      Pkm.DEFAULT,
+      150,
+      16,
+      6,
+      6,
+      2,
+      AttackSprite.PSYCHIC_RANGE,
+      2,
+      70,
+      Ability.CONFUSION,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}

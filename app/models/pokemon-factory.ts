@@ -625,7 +625,9 @@ import {
   Heliolisk,
   Bidoof,
   Bibarel,
-  Spinda
+  Spinda,
+  Baltoy,
+  Claydol
 } from "./colyseus-models/pokemon"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
 
@@ -2066,6 +2068,10 @@ export default class PokemonFactory {
         return new Bibarel(s, e)
       case Pkm.SPINDA:
         return new Spinda(s, e)
+      case Pkm.BALTOY:
+        return new Baltoy(s, e)
+      case Pkm.CLAYDOL:
+        return new Claydol(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:
