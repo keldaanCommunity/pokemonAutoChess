@@ -7,6 +7,8 @@
 - Bidoof
 - Bibarel
 - Spinda
+- Baltoy
+- Claydol
 
 # Changes to Pokemon & Abilities
 
