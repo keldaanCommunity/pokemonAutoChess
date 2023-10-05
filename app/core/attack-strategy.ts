@@ -1350,13 +1350,13 @@ export class BonemerangStrategy extends AttackStrategy {
     let damage = 0
     switch (pokemon.stars) {
       case 1:
-        damage = 40
+        damage = 30
         break
       case 2:
-        damage = 80
+        damage = 60
         break
       case 3:
-        damage = 160
+        damage = 90
         break
       default:
         break

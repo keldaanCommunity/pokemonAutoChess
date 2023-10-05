@@ -2494,7 +2494,9 @@ export class Cubone extends Pokemon {
       Ability.BONEMERANG,
       shiny,
       emotion,
-      false
+      false,
+      true,
+      Passive.CUBONE
     )
   }
 }
@@ -2517,7 +2519,9 @@ export class Marowak extends Pokemon {
       Ability.BONEMERANG,
       shiny,
       emotion,
-      false
+      false,
+      true,
+      Passive.CUBONE
     )
   }
 }
@@ -2529,8 +2533,8 @@ export class AlolanMarowak extends Pokemon {
       [Synergy.GROUND, Synergy.FIRE, Synergy.GHOST],
       Rarity.EPIC,
       Pkm.DEFAULT,
-      340,
-      30,
+      250,
+      26,
       8,
       6,
       1,

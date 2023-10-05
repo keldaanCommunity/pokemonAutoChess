@@ -16,6 +16,8 @@
 - Nerf Swoobat: HP ~~160~~ → 130 Def/SpeDef ~~5~~ → 2
 - Buff Staryu: Attack ~~6~~ → 7
 - Buff Starmie: Attack ~~14~~ → 20 SpeDef ~~3~~ → 6
+- Move Cubone/Marowak to additional pool
+- Give a fire stone to Marowak to get an alolan Marowak
 
 # Changes to Synergies
 
