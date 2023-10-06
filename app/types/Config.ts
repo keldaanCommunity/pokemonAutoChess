@@ -192,7 +192,8 @@ export const CommonShop = new Array<Pkm>(
   Pkm.ARON,
   Pkm.MUDKIP,
   Pkm.CHIMCHAR,
-  Pkm.LITWICK
+  Pkm.LITWICK,
+  Pkm.PORYGON
 )
 
 export const UncommonShop = new Array<Pkm>(
@@ -242,7 +243,6 @@ export const EpicShop = new Array<Pkm>(
   Pkm.ELEKID,
   Pkm.SNORUNT,
   Pkm.BUDEW,
-  Pkm.PORYGON,
   Pkm.CUBONE,
   Pkm.HOUNDOUR,
   Pkm.GOOMY,
