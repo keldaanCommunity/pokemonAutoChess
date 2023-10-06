@@ -840,6 +840,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.FISSURE,
+      frames: this.game.anims.generateFrameNames(Ability.FISSURE, {
+        start: 0,
+        end: 3,
+        zeroPad: 3
+      }),
+      duration: 200,
+      repeat: 7
+    })
+
+    this.game.anims.create({
       key: Ability.CLOSE_COMBAT,
       frames: this.game.anims.generateFrameNames(Ability.CLOSE_COMBAT, {
         start: 0,
