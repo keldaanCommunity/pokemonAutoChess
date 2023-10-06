@@ -618,7 +618,9 @@ export enum Pkm {
   CLAYDOL = "CLAYDOL",
   HERACROSS = "HERACROSS",
   PURRLOIN = "PURRLOIN",
-  LIEPARD = "LIEPARD"
+  LIEPARD = "LIEPARD",
+  BARBOACH = "BARBOACH",
+  WHISCASH = "WHISCASH"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1239,7 +1241,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.CLAYDOL]: "0344",
   [Pkm.HERACROSS]: "0214",
   [Pkm.PURRLOIN]: "0509",
-  [Pkm.LIEPARD]: "0510"
+  [Pkm.LIEPARD]: "0510",
+  [Pkm.BARBOACH]: "0339",
+  [Pkm.WHISCASH]: "0340"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1860,7 +1864,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.CLAYDOL]: Pkm.BALTOY,
   [Pkm.HERACROSS]: Pkm.HERACROSS,
   [Pkm.PURRLOIN]: Pkm.PURRLOIN,
-  [Pkm.LIEPARD]: Pkm.PURRLOIN
+  [Pkm.LIEPARD]: Pkm.PURRLOIN,
+  [Pkm.BARBOACH]: Pkm.BARBOACH,
+  [Pkm.WHISCASH]: Pkm.BARBOACH
 }
 
 export enum PkmDuo {
@@ -5081,5 +5087,15 @@ export const AnimationConfig: {
     attack: AnimationType.Strike,
     ability: AnimationType.Charge,
     emote: AnimationType.Shoot
+  },
+  [Pkm.BARBOACH]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Dance
+  },
+  [Pkm.WHISCASH]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Dance
   }
 }

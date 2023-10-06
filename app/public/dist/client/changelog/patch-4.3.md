@@ -12,6 +12,8 @@
 - Heracross
 - Purrloin
 - Liepard
+- Barboach
+- Whiscash
 
 # Changes to Pokemon & Abilities
 

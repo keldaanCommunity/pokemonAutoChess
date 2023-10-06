@@ -14694,3 +14694,53 @@ export class Liepard extends Pokemon {
     )
   }
 }
+
+export class Barboach extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.BARBOACH,
+      [Synergy.WATER, Synergy.GROUND],
+      Rarity.EPIC,
+      Pkm.WHISCASH,
+      120,
+      9,
+      3,
+      4,
+      1,
+      AttackSprite.WATER_MELEE,
+      1,
+      90,
+      Ability.FISSURE,
+      shiny,
+      emotion,
+      false,
+      true,
+      Passive.AQUA_VEIL
+    )
+  }
+}
+
+export class Whiscash extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.WHISCASH,
+      [Synergy.WATER, Synergy.GROUND],
+      Rarity.EPIC,
+      Pkm.DEFAULT,
+      250,
+      22,
+      4,
+      5,
+      1,
+      AttackSprite.WATER_MELEE,
+      2,
+      90,
+      Ability.FISSURE,
+      shiny,
+      emotion,
+      true,
+      true,
+      Passive.AQUA_VEIL
+    )
+  }
+}

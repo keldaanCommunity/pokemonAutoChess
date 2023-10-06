@@ -630,7 +630,9 @@ import {
   Claydol,
   Heracross,
   Purrloin,
-  Liepard
+  Liepard,
+  Barboach,
+  Whiscash
 } from "./colyseus-models/pokemon"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
 
@@ -2081,6 +2083,10 @@ export default class PokemonFactory {
         return new Purrloin(s, e)
       case Pkm.LIEPARD:
         return new Liepard(s, e)
+      case Pkm.BARBOACH:
+        return new Barboach(s, e)
+      case Pkm.WHISCASH:
+        return new Whiscash(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:

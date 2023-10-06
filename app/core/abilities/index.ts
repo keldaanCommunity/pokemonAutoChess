@@ -189,7 +189,8 @@ import {
   SuperFangStrategy,
   TeeterDanceStrategy,
   CloseCombatStrategy,
-  AssistStrategy
+  AssistStrategy,
+  FissureStrategy
 } from "../attack-strategy"
 import {
   HiddenPowerAStrategy,
@@ -442,5 +443,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.SUPER_FANG]: new SuperFangStrategy(),
   [Ability.TEETER_DANCE]: new TeeterDanceStrategy(),
   [Ability.CLOSE_COMBAT]: new CloseCombatStrategy(),
-  [Ability.ASSIST]: new AssistStrategy()
+  [Ability.ASSIST]: new AssistStrategy(),
+  [Ability.FISSURE]: new FissureStrategy()
 }

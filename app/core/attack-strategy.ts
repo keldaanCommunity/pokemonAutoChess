@@ -18,7 +18,7 @@ import {
 } from "../utils/random"
 import { effectInLine, OrientationArray } from "../utils/orientation"
 import { logger } from "../utils/logger"
-import { DEFAULT_ATK_SPEED } from "../types/Config"
+import { BOARD_HEIGHT, BOARD_WIDTH, DEFAULT_ATK_SPEED } from "../types/Config"
 import { max, min } from "../utils/number"
 import { distanceC, distanceM } from "../utils/distance"
 import { Transfer } from "../types"
@@ -72,7 +72,8 @@ export class AttackStrategy {
         Ability.ANCHOR_SHOT,
         Ability.MAGNET_RISE,
         Ability.ATTRACT,
-        Ability.ASSIST
+        Ability.ASSIST,
+        Ability.FISSURE
       ].includes(pokemon.skill)
     ) {
       pokemon.simulation.room.broadcast(Transfer.ABILITY, {
@@ -4865,9 +4866,9 @@ export class EruptionStrategy extends AttackStrategy {
       pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 30 : 20
 
     for (let i = 0; i < numberOfProjectiles; i++) {
-      const x = randomBetween(0, board.rows)
-      const y = randomBetween(0, board.columns)
-      const value = board.getValue(x, y)
+      const x = randomBetween(0, BOARD_WIDTH - 1)
+      const y = randomBetween(0, BOARD_HEIGHT - 1)
+      const value = board.getValue(y, x)
       if (value && value.team !== pokemon.team) {
         value.handleSpecialDamage(
           damage,
@@ -5643,6 +5644,45 @@ export class AssistStrategy extends AttackStrategy {
         orientation: pokemon.orientation
       })
       AbilityStrategy[skill].process(pokemon, state, board, target, crit)
+    }
+  }
+}
+
+export class FissureStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const numberOfRifts = pokemon.stars === 3 ? 4 : pokemon.stars === 2 ? 3 : 2
+    for (let i = 0; i < numberOfRifts; i++) {
+      const x_ = randomBetween(0, BOARD_WIDTH - 1)
+      const y_ = randomBetween(0, BOARD_HEIGHT - 1)
+      const cells = board.getAdjacentCells(x_, y_)
+      cells.push({x: x_, y: y_, value: board.getValue(x_,y_)})
+
+      cells.forEach((cell) => {
+        if (cell && cell.value && cell.value.team !== pokemon.team) {
+          cell.value.handleSpecialDamage(
+            pokemon.stars === 3 ? 75 : pokemon.stars === 2 ? 50 : 25,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: Ability.FISSURE,
+          positionX: pokemon.positionX,
+          positionY: pokemon.positionY,
+          targetX: cell.x,
+          targetY: cell.y
+        })
+      })
     }
   }
 }
