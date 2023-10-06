@@ -1911,7 +1911,9 @@ export class Porygon extends Pokemon {
       Ability.TRI_ATTACK,
       shiny,
       emotion,
-      false
+      false,
+      true,
+      Passive.PORYGON
     )
   }
 }
@@ -1934,7 +1936,9 @@ export class Porygon2 extends Pokemon {
       Ability.TRI_ATTACK,
       shiny,
       emotion,
-      false
+      true,
+      true,
+      Passive.PORYGON
     )
   }
 }
@@ -1957,6 +1961,7 @@ export class PorygonZ extends Pokemon {
       Ability.TRI_ATTACK,
       shiny,
       emotion,
+      true,
       true
     )
   }
@@ -2519,7 +2524,7 @@ export class Marowak extends Pokemon {
       Ability.BONEMERANG,
       shiny,
       emotion,
-      false,
+      true,
       true,
       Passive.CUBONE
     )

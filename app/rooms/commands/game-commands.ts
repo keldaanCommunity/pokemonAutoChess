@@ -606,13 +606,23 @@ export class OnDragDropItemCommand extends Command<
           }
           break
         case Pkm.MAROWAK:
-            if(item === Item.FIRE_STONE){
-                newPokemon = PokemonFactory.transformPokemon(
-                    pokemon,
-                    Pkm.ALOLAN_MAROWAK,
-                    player
-                  )
-            }
+          if (item === Item.FIRE_STONE) {
+            newPokemon = PokemonFactory.transformPokemon(
+              pokemon,
+              Pkm.ALOLAN_MAROWAK,
+              player
+            )
+          }
+          break
+        case Pkm.PORYGON_2:
+          if (item === Item.UPGRADE) {
+            newPokemon = PokemonFactory.transformPokemon(
+              pokemon,
+              Pkm.PORYGON_Z,
+              player
+            )
+          }
+          break
       }
 
       if (newPokemon) {

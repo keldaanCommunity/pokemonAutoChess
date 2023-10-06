@@ -25,6 +25,8 @@
 - Buff Starmie: Attack ~~14~~ → 20 SpeDef ~~3~~ → 6
 - Move Cubone/Marowak to additional pool
 - Give a fire stone to Marowak to get an alolan Marowak
+- Move Porygon/Porygon2 to additional pool
+- Give an upgrade to Porygon2 to get PorygonZ
 
 # Changes to Synergies
 
