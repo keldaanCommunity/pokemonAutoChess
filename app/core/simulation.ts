@@ -107,7 +107,7 @@ export default class Simulation extends Schema implements ISimulation {
       })
     }
 
-    [
+    ;[
       { team: blueTeam, effects: this.blueEffects, player: bluePlayer },
       { team: redTeam, effects: this.redEffects, player: redPlayer }
     ].forEach(
@@ -460,7 +460,7 @@ export default class Simulation extends Schema implements ISimulation {
   }
 
   applyPostEffects() {
-    [this.blueTeam, this.redTeam].forEach((team) => {
+    ;[this.blueTeam, this.redTeam].forEach((team) => {
       const ironDefenseCandidates = Array.from(team.values()).filter((p) =>
         p.effects.includes(Effect.IRON_DEFENSE)
       )
@@ -535,7 +535,7 @@ export default class Simulation extends Schema implements ISimulation {
           })
         }
         if (pokemon.items.has(Item.LUCKY_EGG)) {
-          [-1, 0, 1].forEach((offset) => {
+          ;[-1, 0, 1].forEach((offset) => {
             const ally = this.board.getValue(
               pokemon.positionX + offset,
               pokemon.positionY
@@ -546,7 +546,7 @@ export default class Simulation extends Schema implements ISimulation {
           })
         }
         if (pokemon.items.has(Item.CLEANSE_TAG)) {
-          [-1, 0, 1].forEach((offset) => {
+          ;[-1, 0, 1].forEach((offset) => {
             const ally = this.board.getValue(
               pokemon.positionX + offset,
               pokemon.positionY
@@ -559,7 +559,7 @@ export default class Simulation extends Schema implements ISimulation {
         }
 
         if (pokemon.items.has(Item.GRACIDEA_FLOWER)) {
-          [-1, 0, 1].forEach((offset) => {
+          ;[-1, 0, 1].forEach((offset) => {
             const value = this.board.getValue(
               pokemon.positionX + offset,
               pokemon.positionY
@@ -571,7 +571,7 @@ export default class Simulation extends Schema implements ISimulation {
         }
 
         if (pokemon.items.has(Item.DELTA_ORB)) {
-          [-1, 0, 1].forEach((offset) => {
+          ;[-1, 0, 1].forEach((offset) => {
             const value = this.board.getValue(
               pokemon.positionX + offset,
               pokemon.positionY
@@ -1098,12 +1098,18 @@ export default class Simulation extends Schema implements ISimulation {
       pokemon.status.triggerDrySkin(1000)
     }
     if (
+      this.weather === Weather.RAIN &&
+      pokemon.passive === Passive.AQUA_VEIL
+    ) {
+      pokemon.status.triggerRuneProtect(60000)
+    }
+    if (
       this.weather === Weather.SANDSTORM &&
       pokemon.passive === Passive.DRY_SKIN
     ) {
       pokemon.addDodgeChance(0.25)
     }
-    if(this.weather === Weather.SUN && pokemon.passive === Passive.DRY_SKIN){
+    if (this.weather === Weather.SUN && pokemon.passive === Passive.DRY_SKIN) {
       pokemon.addAbilityPower(50, false)
     }
   }

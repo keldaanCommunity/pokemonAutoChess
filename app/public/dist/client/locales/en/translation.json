@@ -234,7 +234,8 @@
     "SUPER_FANG": "Super Fang",
     "TEETER_DANCE": "Teeter Dance",
     "CLOSE_COMBAT": "Close Combat",
-    "ASSIST": "Assist"
+    "ASSIST": "Assist",
+    "FISSURE": "Fissure"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -854,7 +855,9 @@
     "CLAYDOL": "Claydol",
     "HERACROSS": "Heracross",
     "PURRLOIN": "Purrloin",
-    "LIEPARD": "Liepard"
+    "LIEPARD": "Liepard",
+    "BARBOACH": "Barboach",
+    "WHISCASH": "Whiscash"
   },
   "ability_description": {
     "DEFAULT": "",
@@ -1074,7 +1077,8 @@
     "SUPER_FANG": "Deals [30,60,90,SP] SPECIAL. Double damage on GRASS pokémon",
     "TEETER_DANCE": "All other Pokémon are CONFUSION for 3 seconds, allies and enemies alike",
     "CLOSE_COMBAT":"Deals [130,SP] SPECIAL and reduce the caster DEF and SPE_DEF by 2",
-    "ASSIST": "Copy and cast an ability from an allied pokémon chosen at random"
+    "ASSIST": "Copy and cast an ability from an allied pokémon chosen at random",
+    "FISSURE": "Open [2,3,4] rifts. Each rift deals [25,50,75,SP] SPECIAL"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1448,7 +1452,8 @@
     "DRY_SKIN": "Heals 8 HP per second under RAIN. Gains 25% dodge chance under SANDSTORM. Gains 50% AP under SUN",
     "SPOT_PANDA":"The pokémon is immune to CONFUSION",
     "CUBONE": "Marowak is looking for a FIRE_STONE",
-    "GUTS": "The pokémon gains 5 ATK as long as it is BURN or POISON"
+    "GUTS": "The pokémon gains 5 ATK as long as it is BURN or POISON",
+    "AQUA_VEIL": "Give RUNE_PROTECT under RAIN"
   },
   "stat": {
     "ATK": "Attack",

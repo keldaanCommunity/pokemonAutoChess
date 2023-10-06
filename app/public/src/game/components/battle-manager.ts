@@ -2713,6 +2713,30 @@ export default class BattleManager {
             )
             break
 
+          case Ability.FISSURE:
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.FISSURE,
+              "000"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(1, 1)
+            specialProjectile.anims.play(Ability.FISSURE)
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              scaleX: 3,
+              scaleY: 3,
+              yoyo: true,
+              ease: "linear",
+              duration: 1000,
+              onComplete: () => {
+                specialProjectile.destroy()
+              }
+            })
+            break
+
           case Ability.CLOSE_COMBAT:
             coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
@@ -4477,7 +4501,7 @@ export default class BattleManager {
             break
 
           case Ability.TEETER_DANCE:
-            (this.group.getChildren() as Pokemon[]).forEach((pkmUI) => {
+            ;(this.group.getChildren() as Pokemon[]).forEach((pkmUI) => {
               coordinates = transformAttackCoordinate(
                 pkmUI.positionX,
                 pkmUI.positionY,

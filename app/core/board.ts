@@ -188,8 +188,8 @@ export default class Board {
     ]
 
     orientations.forEach((orientation) => {
-      let x = pokemon.positionX + OrientationVector[orientation][0]
-      let y = pokemon.positionY + OrientationVector[orientation][1]
+      const x = pokemon.positionX + OrientationVector[orientation][0]
+      const y = pokemon.positionY + OrientationVector[orientation][1]
       cells.push({ x, y, value: this.cells[this.columns * y + x] })
     })
 
