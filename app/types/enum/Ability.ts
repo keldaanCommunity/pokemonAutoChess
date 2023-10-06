@@ -215,7 +215,8 @@ export enum Ability {
   PARABOLIC_CHARGE = "PARABOLIC_CHARGE",
   SUPER_FANG = "SUPER_FANG",
   TEETER_DANCE = "TEETER_DANCE",
-  CLOSE_COMBAT = "CLOSE_COMBAT"
+  CLOSE_COMBAT = "CLOSE_COMBAT",
+  ASSIST = "ASSIST"
 }
 
 export const CopyableAbility: { [key in Ability]: boolean } = {
@@ -435,5 +436,6 @@ export const CopyableAbility: { [key in Ability]: boolean } = {
   [Ability.PARABOLIC_CHARGE]: true,
   [Ability.SUPER_FANG]: true,
   [Ability.TEETER_DANCE]: true,
-  [Ability.CLOSE_COMBAT]: true
+  [Ability.CLOSE_COMBAT]: true,
+  [Ability.ASSIST]: false
 }

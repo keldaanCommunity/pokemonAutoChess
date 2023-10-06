@@ -71,7 +71,8 @@ export class AttackStrategy {
         Ability.SMOKE_SCREEN,
         Ability.ANCHOR_SHOT,
         Ability.MAGNET_RISE,
-        Ability.ATTRACT
+        Ability.ATTRACT,
+        Ability.ASSIST
       ].includes(pokemon.skill)
     ) {
       pokemon.simulation.room.broadcast(Transfer.ABILITY, {
@@ -5611,5 +5612,37 @@ export class CloseCombatStrategy extends AttackStrategy {
     pokemon.addDefense(-3, false)
     pokemon.addSpecialDefense(-3, false)
     target.handleSpecialDamage(130, board, AttackType.SPECIAL, pokemon, crit)
+  }
+}
+
+export class AssistStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const skill = pickRandomIn(
+      board.cells
+        .filter(
+          (v) =>
+            v && v.team === pokemon.team && v.skill && CopyableAbility[v.skill]
+        )
+        .map((v) => v?.skill)
+    )
+    if (skill) {
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: skill,
+        positionX: pokemon.positionX,
+        positionY: pokemon.positionY,
+        targetX: target.positionX,
+        targetY: target.positionY,
+        orientation: pokemon.orientation
+      })
+      AbilityStrategy[skill].process(pokemon, state, board, target, crit)
+    }
   }
 }

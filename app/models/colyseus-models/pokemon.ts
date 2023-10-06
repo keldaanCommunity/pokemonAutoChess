@@ -14646,3 +14646,51 @@ export class Claydol extends Pokemon {
     )
   }
 }
+
+export class Purrloin extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.PURRLOIN,
+      [Synergy.DARK, Synergy.FIELD],
+      Rarity.RARE,
+      Pkm.LIEPARD,
+      80,
+      9,
+      1,
+      1,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      1,
+      90,
+      Ability.ASSIST,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Liepard extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.LIEPARD,
+      [Synergy.DARK, Synergy.FIELD],
+      Rarity.RARE,
+      Pkm.DEFAULT,
+      175,
+      22,
+      2,
+      2,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      2,
+      90,
+      Ability.ASSIST,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}

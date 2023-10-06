@@ -10,6 +10,8 @@
 - Baltoy
 - Claydol
 - Heracross
+- Purrloin
+- Liepard
 
 # Changes to Pokemon & Abilities
 

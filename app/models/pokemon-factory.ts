@@ -628,7 +628,9 @@ import {
   Spinda,
   Baltoy,
   Claydol,
-  Heracross
+  Heracross,
+  Purrloin,
+  Liepard
 } from "./colyseus-models/pokemon"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
 
@@ -2075,6 +2077,10 @@ export default class PokemonFactory {
         return new Claydol(s, e)
       case Pkm.HERACROSS:
         return new Heracross(s, e)
+      case Pkm.PURRLOIN:
+        return new Purrloin(s, e)
+      case Pkm.LIEPARD:
+        return new Liepard(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:
