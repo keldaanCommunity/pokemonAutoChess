@@ -233,7 +233,8 @@
     "PARABOLIC_CHARGE": "Parabolic Charge",
     "SUPER_FANG": "Super Fang",
     "TEETER_DANCE": "Teeter Dance",
-    "CLOSE_COMBAT": "Close Combat"
+    "CLOSE_COMBAT": "Close Combat",
+    "ASSIST": "Assist"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -851,7 +852,9 @@
     "SPINDA": "Spinda",
     "BALTOY": "Baltoy",
     "CLAYDOL": "Claydol",
-    "HERACROSS": "Heracross"
+    "HERACROSS": "Heracross",
+    "PURRLOIN": "Purrloin",
+    "LIEPARD": "Liepard"
   },
   "ability_description": {
     "DEFAULT": "",
@@ -1070,7 +1073,8 @@
     "PARABOLIC_CHARGE": "Heal [25,50] and deals [25,50,100,SP] SPECIAL damage to the target. Excess HP is converted into SPECIAL",
     "SUPER_FANG": "Deals [30,60,90,SP] SPECIAL. Double damage on GRASS pokémon",
     "TEETER_DANCE": "All other Pokémon are CONFUSION for 3 seconds, allies and enemies alike",
-    "CLOSE_COMBAT":"Deals [130,SP] SPECIAL and reduce the caster DEF and SPE_DEF by 2"
+    "CLOSE_COMBAT":"Deals [130,SP] SPECIAL and reduce the caster DEF and SPE_DEF by 2",
+    "ASSIST": "Copy and cast an ability from an allied pokémon chosen at random"
   },
   "effect": {
     "INGRAIN": "Ingrain",
