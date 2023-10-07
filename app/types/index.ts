@@ -623,7 +623,8 @@ export enum Title {
   SHINY_SEEKER = "SHINY_SEEKER",
   ARCHEOLOGIST = "ARCHEOLOGIST",
   DENTIST = "DENTIST",
-  FISHERMAN = "FISHERMAN"
+  FISHERMAN = "FISHERMAN",
+  CHOSEN_ONE = "CHOSEN_ONE"
 }
 
 export interface IBoardEvent {

@@ -538,6 +538,19 @@ class GameContainer {
         this.gameScene?.itemsContainer?.removeItem(value)
       }
     })
+
+    player.synergies.onChange((item) => {
+      const lightCount = player.synergies.get(Synergy.LIGHT)
+      if (
+        player.id === this.spectatedPlayerId &&
+        lightCount &&
+        lightCount > 0
+      ) {
+        this.gameScene?.board?.showLightCell()
+      } else {
+        this.gameScene?.board?.hideLightCell()
+      }
+    })
   }
 
   initializeSpectactor(uid: string) {

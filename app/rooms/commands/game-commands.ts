@@ -1011,6 +1011,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           case Effect.BREEDER:
             player.titles.add(Title.BABYSITTER)
             break
+          case Effect.MAX_ILLUMINATION:
+            player.titles.add(Title.CHOSEN_ONE)
+            break
           default:
             break
         }

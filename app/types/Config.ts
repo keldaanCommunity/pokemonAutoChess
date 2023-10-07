@@ -4,6 +4,11 @@ import { Item } from "./enum/Item"
 import { AttackType, Rarity, Stat } from "./enum/Game"
 import { Emotion } from "."
 
+export const ON_ATTACK_MANA = 5
+export const MANA_SCARF_MANA = 8
+export const DELTA_ORB_MANA = 4
+export const SCOPE_LENS_MANA = 15
+
 export const BOARD_WIDTH = 8
 export const BOARD_HEIGHT = 6
 
@@ -100,7 +105,8 @@ export const SynergyTriggers: { [key in Synergy]: number[] } = {
   [Synergy.FOSSIL]: [2, 4, 6],
   [Synergy.SOUND]: [2, 4, 6],
   [Synergy.ARTIFICIAL]: [2, 4, 6],
-  [Synergy.BABY]: [3, 5]
+  [Synergy.BABY]: [3, 5],
+  [Synergy.LIGHT]: [2, 3, 4, 5]
 }
 
 export const RequiredStageLevelForXpElligibility = 10
@@ -192,8 +198,7 @@ export const CommonShop = new Array<Pkm>(
   Pkm.ARON,
   Pkm.MUDKIP,
   Pkm.CHIMCHAR,
-  Pkm.LITWICK,
-  Pkm.PORYGON
+  Pkm.LITWICK
 )
 
 export const UncommonShop = new Array<Pkm>(

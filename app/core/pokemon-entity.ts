@@ -27,7 +27,14 @@ import { IdleState } from "./idle-state"
 import PokemonFactory from "../models/pokemon-factory"
 import { clamp, max, min, roundTo2Digits } from "../utils/number"
 import { Passive } from "../types/enum/Passive"
-import { DEFAULT_CRIT_CHANCE, DEFAULT_CRIT_DAMAGE } from "../types/Config"
+import {
+  DEFAULT_CRIT_CHANCE,
+  DEFAULT_CRIT_DAMAGE,
+  DELTA_ORB_MANA,
+  MANA_SCARF_MANA,
+  ON_ATTACK_MANA,
+  SCOPE_LENS_MANA
+} from "../types/Config"
 import { removeInArray } from "../utils/array"
 import { chance } from "../utils/random"
 import { distanceC } from "../utils/distance"
@@ -271,13 +278,28 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     this.changeState(new IdleState())
   }
 
-  setPP(pp: number) {
+  setPP(pp: number, bonusManaLight?: boolean) {
     if (
       !this.status.silence &&
       !this.status.protect &&
       !this.status.resurecting
     ) {
-      this.pp = clamp(pp, 0, this.maxPP)
+      if (
+        bonusManaLight &&
+        this.effects.every(
+          (e) =>
+            !(
+              e !== Effect.LIGHT_PULSE &&
+              e !== Effect.ETERNAL_LIGHT &&
+              e !== Effect.MAX_ILLUMINATION
+            )
+        )
+      ) {
+        const manaToAdd = Math.max(0, pp - this.pp) * 2
+        this.pp = clamp(this.pp + manaToAdd, 0, this.maxPP)
+      } else {
+        this.pp = clamp(pp, 0, this.maxPP)
+      }
     }
   }
 
@@ -387,7 +409,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     trueDamage: number
     totalDamage: number
   }) {
-    this.setPP(this.pp + 5)
+    this.setPP(this.pp + ON_ATTACK_MANA, true)
 
     if (this.items.has(Item.BLUE_ORB)) {
       this.count.staticHolderCount++
@@ -446,10 +468,10 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.items.has(Item.MANA_SCARF)) {
-      this.setPP(this.pp + 8)
+      this.setPP(this.pp + MANA_SCARF_MANA, true)
     }
     if (this.status.deltaOrb) {
-      this.setPP(this.pp + 4)
+      this.setPP(this.pp + DELTA_ORB_MANA, true)
     }
 
     if (this.effects.includes(Effect.TELEPORT_NEXT_ATTACK)) {
@@ -554,7 +576,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       if (chance(burnManaChance)) {
         target.setPP(target.pp - 20)
         target.count.manaBurnCount++
-        this.setPP(this.pp + manaGain)
+        this.setPP(this.pp + manaGain, true)
       }
     }
 
@@ -664,8 +686,8 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     })
 
     if (this.items.has(Item.SCOPE_LENS)) {
-      this.setPP(this.pp + 15)
-      target.setPP(target.pp - 15)
+      this.setPP(this.pp + SCOPE_LENS_MANA, true)
+      target.setPP(target.pp - SCOPE_LENS_MANA)
       target.count.manaBurnCount++
     }
 
