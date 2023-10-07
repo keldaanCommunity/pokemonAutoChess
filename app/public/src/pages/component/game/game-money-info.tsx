@@ -10,7 +10,7 @@ export function GameMoneyInfo() {
   return (
     <div id="game-money-info" className="nes-container money information">
       <div data-tooltip-id="detail-money">
-        <Tooltip id="detail-money" className="customeTheme" place="top">
+        <Tooltip id="detail-money" className="custom-theme-tooltip" place="top">
           <GameMoneyDetail />
         </Tooltip>
         <Money value={money} />

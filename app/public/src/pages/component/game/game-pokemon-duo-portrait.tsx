@@ -55,7 +55,7 @@ export default function GamePokemonDuoPortrait(props: {
           ></div>
           <Tooltip
             id={`tooltip-${props.origin}-${props.index}-${p.index}`}
-            className="customeTheme game-pokemon-detail-tooltip"
+            className="custom-theme-tooltip game-pokemon-detail-tooltip"
             place="bottom"
           >
             <GamePokemonDetail

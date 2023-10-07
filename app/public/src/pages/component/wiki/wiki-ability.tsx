@@ -62,7 +62,7 @@ export default function WikiAbility() {
       {hoveredPokemon && (
         <Tooltip
           id="pokemon-detail"
-          className="customeTheme game-pokemon-detail-tooltip"
+          className="custom-theme-tooltip game-pokemon-detail-tooltip"
           float
         >
           <GamePokemonDetail pokemon={hoveredPokemon} />

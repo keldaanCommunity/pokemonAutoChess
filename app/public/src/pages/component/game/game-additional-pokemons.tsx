@@ -23,7 +23,7 @@ export function GameAdditionalPokemons() {
       <>
         <Tooltip
           id="detail-additional-pokemons"
-          className="customeTheme"
+          className="custom-theme-tooltip"
           place="left"
         >
           <p className="help">{t("additional_pokemon_hint")}</p>
@@ -38,7 +38,7 @@ export function GameAdditionalPokemons() {
               <React.Fragment key={"additional-pokemon-tooltip-" + index}>
                 <Tooltip
                   id={"additional-pokemon-" + p}
-                  className="customeTheme game-pokemon-detail-tooltip"
+                  className="custom-theme-tooltip game-pokemon-detail-tooltip"
                   place="top"
                   data-tooltip-offset={{ top: index < 4 ? 60 : 130 }}
                 >

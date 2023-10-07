@@ -78,7 +78,7 @@ a {
   outline: inherit;
 }
 
-.customeTheme {
+.custom-theme-tooltip {
   padding: 5px !important;
   opacity: 1 !important;
   border-color: #000 !important;
@@ -87,7 +87,7 @@ a {
   border-radius: 12px !important;
   background-color: #61738a !important;
   color: #fff !important;
-  z-index: 99;
+  z-index: 1060; /* 1050 comes from react-modal library */
 }
 
 .custom-bg {

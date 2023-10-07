@@ -84,7 +84,10 @@ export default function WikiItemsCheatSheet() {
         </tbody>
       </table>
       {itemHovered && (
-        <Tooltip id="detail-item" className="customeTheme item-detail-tooltip">
+        <Tooltip
+          id="detail-item"
+          className="custom-theme-tooltip item-detail-tooltip"
+        >
           <ItemDetailTooltip item={itemHovered} />
         </Tooltip>
       )}

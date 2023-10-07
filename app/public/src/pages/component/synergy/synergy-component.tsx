@@ -41,7 +41,7 @@ export default function SynergyComponent(props: {
       {ReactDOM.createPortal(
         <Tooltip
           id={"detail-" + props.type}
-          className="customeTheme"
+          className="custom-theme-tooltip"
           place="right"
           data-tooltip-offset={{ bottom: (5 - props.index) * 50 }}
         >
