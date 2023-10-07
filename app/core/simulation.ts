@@ -170,6 +170,20 @@ export default class Simulation extends Schema implements ISimulation {
     this.applyPostEffects()
   }
 
+  inLight(pokemon: PokemonEntity) {
+    if (pokemon.team === Team.BLUE_TEAM) {
+      return (
+        pokemon.positionX === this.room.state.lightX &&
+        pokemon.positionY === this.room.state.lightY - 1
+      )
+    } else {
+      return (
+        pokemon.positionX === this.room.state.lightX &&
+        pokemon.positionY === 5 - (this.room.state.lightY - 1)
+      )
+    }
+  }
+
   getCurrentBattleResult(playerId: string) {
     if (this.blueTeam.size === 0 && this.redTeam.size > 0) {
       return playerId === this.bluePlayer?.id
@@ -1084,6 +1098,50 @@ export default class Simulation extends Schema implements ISimulation {
           if (types.includes(Synergy.FAIRY)) {
             pokemon.status.fairyField = true
             pokemon.effects.push(Effect.MISTY_TERRAIN)
+          }
+          break
+
+        case Effect.SHINING_RAY:
+          console.log(
+            pokemon.name,
+            pokemon.positionX,
+            pokemon.positionY,
+            this.room.state.lightX,
+            this.room.state.lightY
+          )
+          if (this.inLight(pokemon)) {
+            pokemon.status.light = true
+            pokemon.effects.push(Effect.SHINING_RAY)
+            pokemon.status.triggerRuneProtect(6000)
+          }
+          break
+
+        case Effect.LIGHT_PULSE:
+          if (this.inLight(pokemon)) {
+            pokemon.status.light = true
+            pokemon.effects.push(Effect.LIGHT_PULSE)
+            pokemon.status.triggerRuneProtect(6000)
+          }
+          break
+
+        case Effect.ETERNAL_LIGHT:
+          if (this.inLight(pokemon)) {
+            pokemon.status.light = true
+            pokemon.effects.push(Effect.ETERNAL_LIGHT)
+            pokemon.status.triggerRuneProtect(6000)
+            pokemon.addAttack(Math.ceil(pokemon.atk * 0.3), false)
+            pokemon.addAbilityPower(30, false)
+          }
+          break
+
+        case Effect.MAX_ILLUMINATION:
+          if (this.inLight(pokemon)) {
+            pokemon.status.light = true
+            pokemon.effects.push(Effect.MAX_ILLUMINATION)
+            pokemon.status.triggerRuneProtect(6000)
+            pokemon.addAttack(Math.ceil(pokemon.atk * 0.3), false)
+            pokemon.addAbilityPower(30, false)
+            pokemon.status.triggerResurection(pokemon)
           }
           break
 

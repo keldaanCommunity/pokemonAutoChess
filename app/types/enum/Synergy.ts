@@ -27,7 +27,8 @@ export enum Synergy {
   FOSSIL = "FOSSIL",
   SOUND = "SOUND",
   ARTIFICIAL = "ARTIFICIAL",
-  BABY = "BABY"
+  BABY = "BABY",
+  LIGHT = "LIGHT"
 }
 
 export const SynergyEffects: { [key in Synergy]: Effect[] } = Object.freeze({
@@ -114,5 +115,11 @@ export const SynergyEffects: { [key in Synergy]: Effect[] } = Object.freeze({
     Effect.LINK_CABLE,
     Effect.GOOGLE_SPECS
   ],
-  [Synergy.BABY]: [Effect.HATCHER, Effect.BREEDER]
+  [Synergy.BABY]: [Effect.HATCHER, Effect.BREEDER],
+  [Synergy.LIGHT]: [
+    Effect.SHINING_RAY,
+    Effect.LIGHT_PULSE,
+    Effect.ETERNAL_LIGHT,
+    Effect.MAX_ILLUMINATION
+  ]
 })

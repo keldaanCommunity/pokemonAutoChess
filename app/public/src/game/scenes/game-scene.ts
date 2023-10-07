@@ -139,7 +139,9 @@ export default class GameScene extends Scene {
         this,
         player,
         this.animationManager,
-        this.uid
+        this.uid,
+        this.room.state.lightX,
+        this.room.state.lightY
       )
       this.battle = new BattleManager(
         this,

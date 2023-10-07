@@ -4,7 +4,13 @@ import { FloatingItem } from "../../models/colyseus-models/floating-item"
 import Shop from "../../models/shop"
 import Design, { DesignTiled } from "../../core/design"
 import BotManager from "../../core/bot-manager"
-import { DungeonData, Dungeon, StageDuration } from "../../types/Config"
+import {
+  DungeonData,
+  Dungeon,
+  StageDuration,
+  BOARD_WIDTH,
+  BOARD_HEIGHT
+} from "../../types/Config"
 import { GamePhaseState } from "../../types/enum/Game"
 import { Weather } from "../../types/enum/Weather"
 import {
@@ -15,7 +21,7 @@ import {
   SetSchema
 } from "@colyseus/schema"
 import { PkmProposition } from "../../types/enum/Pokemon"
-import { pickRandomIn } from "../../utils/random"
+import { pickRandomIn, randomBetween } from "../../utils/random"
 import { Portal, SynergySymbol } from "../../models/colyseus-models/portal"
 import Simulation from "../../core/simulation"
 import { Item } from "../../types/enum/Item"
@@ -37,6 +43,9 @@ export default class GameState extends Schema {
   @type("boolean") noElo = false
   @type({ set: "string" }) spectators = new SetSchema<string>()
   @type({ map: Simulation }) simulations = new MapSchema<Simulation>()
+  @type("uint8") lightX = randomBetween(0, BOARD_WIDTH - 1)
+  @type("uint8") lightY = randomBetween(1, BOARD_HEIGHT / 2 - 1)
+
   time = StageDuration[1] * 1000
   updatePhaseNeeded = false
   botManager: BotManager = new BotManager()
@@ -53,7 +62,12 @@ export default class GameState extends Schema {
   shinyEncounter = false
   pveRewards: Item[] = []
 
-  constructor(preparationId: string, name: string, noElo: boolean, selectedMap: Dungeon | "random") {
+  constructor(
+    preparationId: string,
+    name: string,
+    noElo: boolean,
+    selectedMap: Dungeon | "random"
+  ) {
     super()
     this.preparationId = preparationId
     this.startTime = Date.now()
