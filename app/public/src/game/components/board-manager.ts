@@ -13,6 +13,7 @@ import {
 import { PokemonAvatarModel } from "../../../../models/colyseus-models/pokemon-avatar"
 import Player from "../../../../models/colyseus-models/player"
 import PokemonAvatar from "./pokemon-avatar"
+import { Synergy } from "../../../../types/enum/Synergy"
 
 export enum BoardMode {
   PICK = "pick",
@@ -31,13 +32,20 @@ export default class BoardManager {
   opponentAvatar: PokemonAvatar | null
   pveChestGroup: Phaser.GameObjects.Group | null
   pveChest: Phaser.GameObjects.Sprite | null
+  lightX: number
+  lightY: number
+  lightCell: Phaser.GameObjects.Sprite | null
 
   constructor(
     scene: GameScene,
     player: Player,
     animationManager: AnimationManager,
-    uid: string
+    uid: string,
+    lightX: number,
+    lightY: number
   ) {
+    this.lightX = lightX
+    this.lightY = lightY
     this.pokemons = new Map<string, Pokemon>()
     this.uid = uid
     this.scene = scene
@@ -148,9 +156,35 @@ export default class BoardManager {
   }
 
   buildPokemons() {
+    this.showLightCell()
     this.player.board.forEach((pokemon) => {
       this.addPokemon(pokemon)
     })
+  }
+
+  showLightCell() {
+    this.hideLightCell()
+    if (
+      this.player.synergies.get(Synergy.LIGHT) &&
+      this.player.synergies.get(Synergy.LIGHT)! >= 2
+    ) {
+      const coordinates = transformCoordinate(this.lightX, this.lightY)
+      this.lightCell = this.scene.add.sprite(
+        coordinates[0],
+        coordinates[1],
+        "LIGHT_CELL",
+        "000"
+      )
+      this.lightCell.setDepth(7)
+      this.lightCell.setScale(2, 2)
+      this.lightCell.anims.play("LIGHT_CELL")
+    } else {
+      this.hideLightCell()
+    }
+  }
+
+  hideLightCell() {
+    this.lightCell?.destroy()
   }
 
   updatePlayerAvatar() {
@@ -239,6 +273,7 @@ export default class BoardManager {
   battleMode() {
     // logger.debug('battleMode');
     this.mode = BoardMode.BATTLE
+    this.hideLightCell()
     this.pokemons.forEach((pokemon) => {
       if (pokemon.positionY != 0) {
         pokemon.setVisible(false)
@@ -251,6 +286,7 @@ export default class BoardManager {
   pickMode() {
     // logger.debug('pickMode');
     this.mode = BoardMode.PICK
+    this.showLightCell()
     this.pokemons.forEach((pokemon) => {
       pokemon.setVisible(true)
     })
@@ -267,6 +303,7 @@ export default class BoardManager {
 
   minigameMode() {
     this.mode = BoardMode.MINIGAME
+    this.hideLightCell()
     this.pokemons.forEach((pokemon) => {
       if (pokemon.positionY != 0) {
         pokemon.setVisible(false)

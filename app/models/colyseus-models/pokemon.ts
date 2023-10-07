@@ -885,7 +885,7 @@ export class Electabuzz extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.ELECTABUZZ,
-      [Synergy.ELECTRIC, Synergy.ARTIFICIAL, Synergy.HUMAN],
+      [Synergy.ELECTRIC, Synergy.ARTIFICIAL, Synergy.LIGHT],
       Rarity.EPIC,
       Pkm.ELECTIVIRE,
       180,
@@ -908,7 +908,7 @@ export class Electivire extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.ELECTIVIRE,
-      [Synergy.ELECTRIC, Synergy.ARTIFICIAL, Synergy.HUMAN],
+      [Synergy.ELECTRIC, Synergy.ARTIFICIAL, Synergy.LIGHT],
       Rarity.EPIC,
       Pkm.DEFAULT,
       380,
@@ -1828,7 +1828,7 @@ export class Litwick extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.LITWICK,
-      [Synergy.GHOST, Synergy.FIRE, Synergy.ARTIFICIAL],
+      [Synergy.GHOST, Synergy.FIRE, Synergy.LIGHT],
       Rarity.COMMON,
       Pkm.LAMPENT,
       50,
@@ -1851,7 +1851,7 @@ export class Lampent extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.LAMPENT,
-      [Synergy.GHOST, Synergy.FIRE, Synergy.ARTIFICIAL],
+      [Synergy.GHOST, Synergy.FIRE, Synergy.LIGHT],
       Rarity.COMMON,
       Pkm.CHANDELURE,
       90,
@@ -1874,7 +1874,7 @@ export class Chandelure extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.CHANDELURE,
-      [Synergy.GHOST, Synergy.FIRE, Synergy.ARTIFICIAL],
+      [Synergy.GHOST, Synergy.FIRE, Synergy.LIGHT],
       Rarity.COMMON,
       Pkm.DEFAULT,
       160,
@@ -5418,7 +5418,7 @@ export class Mareep extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.MAREEP,
-      [Synergy.ELECTRIC, Synergy.FIELD],
+      [Synergy.ELECTRIC, Synergy.FIELD, Synergy.LIGHT],
       Rarity.COMMON,
       Pkm.FLAFFY,
       60,
@@ -5441,7 +5441,7 @@ export class Flaffy extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.FLAFFY,
-      [Synergy.ELECTRIC, Synergy.FIELD],
+      [Synergy.ELECTRIC, Synergy.FIELD, Synergy.LIGHT],
       Rarity.COMMON,
       Pkm.AMPHAROS,
       110,
@@ -5464,7 +5464,7 @@ export class Ampharos extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.AMPHAROS,
-      [Synergy.ELECTRIC, Synergy.FIELD],
+      [Synergy.ELECTRIC, Synergy.FIELD, Synergy.LIGHT],
       Rarity.COMMON,
       Pkm.DEFAULT,
       220,
@@ -5510,7 +5510,7 @@ export class Clefairy extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.CLEFAIRY,
-      [Synergy.FAIRY, Synergy.NORMAL],
+      [Synergy.FAIRY, Synergy.NORMAL, Synergy.LIGHT],
       Rarity.COMMON,
       Pkm.CLEFABLE,
       120,
@@ -5533,7 +5533,7 @@ export class Clefable extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.CLEFABLE,
-      [Synergy.FAIRY, Synergy.NORMAL],
+      [Synergy.FAIRY, Synergy.NORMAL, Synergy.LIGHT],
       Rarity.COMMON,
       Pkm.DEFAULT,
       220,
@@ -6734,7 +6734,7 @@ export class Solrock extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.SOLROCK,
-      [Synergy.ROCK, Synergy.PSYCHIC, Synergy.FIRE],
+      [Synergy.ROCK, Synergy.FIRE, Synergy.LIGHT],
       Rarity.UNIQUE,
       Pkm.DEFAULT,
       200,
@@ -7022,7 +7022,7 @@ export class Flareon extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.FLAREON,
-      [Synergy.FIRE, Synergy.FIELD],
+      [Synergy.FIRE, Synergy.FIELD, Synergy.LIGHT],
       Rarity.UNCOMMON,
       Pkm.DEFAULT,
       180,
@@ -8231,7 +8231,7 @@ export class Cresselia extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.CRESSELIA,
-      [Synergy.PSYCHIC, Synergy.FAIRY],
+      [Synergy.PSYCHIC, Synergy.FAIRY, Synergy.LIGHT],
       Rarity.LEGENDARY,
       Pkm.DEFAULT,
       300,
@@ -8279,7 +8279,7 @@ export class HooH extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.HO_OH,
-      [Synergy.FIRE, Synergy.FLYING],
+      [Synergy.FIRE, Synergy.FLYING, Synergy.LIGHT],
       Rarity.LEGENDARY,
       Pkm.DEFAULT,
       300,
@@ -9777,7 +9777,7 @@ export class Xerneas extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.XERNEAS,
-      [Synergy.FAIRY],
+      [Synergy.FAIRY, Synergy.LIGHT],
       Rarity.LEGENDARY,
       Pkm.DEFAULT,
       300,
@@ -11155,7 +11155,7 @@ export class Chinchou extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.CHINCHOU,
-      [Synergy.WATER, Synergy.ELECTRIC],
+      [Synergy.WATER, Synergy.ELECTRIC, Synergy.LIGHT],
       Rarity.UNCOMMON,
       Pkm.LANTURN,
       60,
@@ -11179,7 +11179,7 @@ export class Lanturn extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.LANTURN,
-      [Synergy.WATER, Synergy.ELECTRIC],
+      [Synergy.WATER, Synergy.ELECTRIC, Synergy.LIGHT],
       Rarity.UNCOMMON,
       Pkm.DEFAULT,
       130,
@@ -14485,7 +14485,7 @@ export class Helioptile extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.HELIOPTILE,
-      [Synergy.NORMAL, Synergy.ELECTRIC],
+      [Synergy.NORMAL, Synergy.ELECTRIC, Synergy.LIGHT],
       Rarity.EPIC,
       Pkm.HELIOLISK,
       90,
@@ -14510,7 +14510,7 @@ export class Heliolisk extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.HELIOLISK,
-      [Synergy.NORMAL, Synergy.ELECTRIC],
+      [Synergy.NORMAL, Synergy.ELECTRIC, Synergy.LIGHT],
       Rarity.EPIC,
       Pkm.DEFAULT,
       220,

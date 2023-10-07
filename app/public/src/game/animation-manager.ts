@@ -2169,6 +2169,28 @@ export default class AnimationManager {
       duration: 500,
       repeat: 0
     })
+
+    this.game.anims.create({
+      key: "LIGHT_CELL",
+      frames: this.game.anims.generateFrameNames("LIGHT_CELL", {
+        start: 0,
+        end: 5,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: -1
+    })
+
+    this.game.anims.create({
+      key: "LIGHT_EFFECT",
+      frames: this.game.anims.generateFrameNames("LIGHT_EFFECT", {
+        start: 0,
+        end: 3,
+        zeroPad: 3
+      }),
+      duration: 400,
+      repeat: -1
+    })
   }
 
   createMinigameAnimations() {

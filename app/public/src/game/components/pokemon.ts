@@ -103,6 +103,7 @@ export default class Pokemon extends DraggableObject {
   psychicField: GameObjects.Sprite | undefined
   grassField: GameObjects.Sprite | undefined
   fairyField: GameObjects.Sprite | undefined
+  light: GameObjects.Sprite | undefined
   stars: number
   playerId: string
   shouldShowTooltip: boolean
@@ -181,20 +182,17 @@ export default class Pokemon extends DraggableObject {
     this.sprite.setDepth(3)
     //this.sprite.setOrigin(0,0);
     this.sprite.setScale(2, 2)
-    this.sprite.on(
-      Phaser.Animations.Events.ANIMATION_COMPLETE,
-      () => {
-        const g = <GameScene>scene
-        // go back to idle anim if no more animation in queue
-        if (pokemon.action !== PokemonActionState.HURT) {
-          g.animationManager?.animatePokemon(
-            this,
-            PokemonActionState.IDLE,
-            this.flip
-          )
-        }
+    this.sprite.on(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+      const g = <GameScene>scene
+      // go back to idle anim if no more animation in queue
+      if (pokemon.action !== PokemonActionState.HURT) {
+        g.animationManager?.animatePokemon(
+          this,
+          PokemonActionState.IDLE,
+          this.flip
+        )
       }
-    )
+    })
     this.height = this.sprite.height
     this.width = this.sprite.width
     this.itemsContainer = new ItemsContainer(
@@ -211,6 +209,9 @@ export default class Pokemon extends DraggableObject {
     scene.add.existing(this.shadow)
     this.add(this.shadow)
     if (instanceofPokemonEntity(pokemon)) {
+      if (p.status.light) {
+        this.addLight()
+      }
       if (p.status.electricField) {
         this.addElectricField()
       }
@@ -280,7 +281,7 @@ export default class Pokemon extends DraggableObject {
           this.input.localX + 200,
           this.input.localY - 175
         )
-        return;
+        return
       }
 
       const absX = this.x + this.detail.width / 2 + 40
@@ -1158,6 +1159,22 @@ export default class Pokemon extends DraggableObject {
       this.remove(this.magicBounce, true)
       this.magicBounce = undefined
     }
+  }
+
+  addLight() {
+    console.log("light")
+    this.light = new GameObjects.Sprite(
+      this.scene,
+      0,
+      10,
+      "LIGHT_EFFECT",
+      "000"
+    )
+    this.light.setDepth(0)
+    this.light.setScale(1.5, 1.5)
+    this.scene.add.existing(this.light)
+    this.light.anims.play("LIGHT_EFFECT")
+    this.add(this.light)
   }
 
   addElectricField() {

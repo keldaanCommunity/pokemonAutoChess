@@ -30,6 +30,8 @@
 
 # Changes to Synergies
 
+New Light Synergy
+
 # Changes to Items
 
 # Gameplay
