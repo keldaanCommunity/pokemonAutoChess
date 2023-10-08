@@ -1101,13 +1101,6 @@ export default class Simulation extends Schema implements ISimulation {
           break
 
         case Effect.SHINING_RAY:
-          console.log(
-            pokemon.name,
-            pokemon.positionX,
-            pokemon.positionY,
-            this.room.state.lightX,
-            this.room.state.lightY
-          )
           if (this.inLight(pokemon)) {
             pokemon.status.light = true
             pokemon.effects.push(Effect.SHINING_RAY)

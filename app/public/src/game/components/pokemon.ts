@@ -1162,7 +1162,6 @@ export default class Pokemon extends DraggableObject {
   }
 
   addLight() {
-    console.log("light")
     this.light = new GameObjects.Sprite(
       this.scene,
       0,
