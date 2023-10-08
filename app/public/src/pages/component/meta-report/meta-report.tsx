@@ -71,8 +71,7 @@ export default function MetaReport() {
           margin: "10px",
           height: "90vh",
           color: "white",
-          width: "100%",
-          minWidth: "80vw"
+          width: "80vw"
         }}
       >
         <Tabs>
@@ -214,12 +213,7 @@ export default function MetaReport() {
                 </select>
               </div>
             </div>
-            <div style={{ height: "70vh", overflowY: "scroll" }}>
-              {sortedMetaPokemons.length === 0 && <p>No data available</p>}
-              {sortedMetaPokemons.map((pokemon) => {
-                return <PokemonStatistic pokemon={pokemon} key={pokemon.name} />
-              })}
-            </div>
+            {<PokemonStatistic pokemons={sortedMetaPokemons} />}
           </TabPanel>
         </Tabs>
       </div>
