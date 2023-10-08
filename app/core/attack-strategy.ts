@@ -4861,7 +4861,7 @@ export class EruptionStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30
+    const damage = pokemon.stars === 3 ? 100 : pokemon.stars === 2 ? 50 : 30
     const numberOfProjectiles =
       pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 30 : 20
 
@@ -5662,7 +5662,7 @@ export class FissureStrategy extends AttackStrategy {
       const x_ = randomBetween(0, BOARD_WIDTH - 1)
       const y_ = randomBetween(0, BOARD_HEIGHT - 1)
       const cells = board.getAdjacentCells(x_, y_)
-      cells.push({x: x_, y: y_, value: board.getValue(x_,y_)})
+      cells.push({ x: x_, y: y_, value: board.getValue(x_, y_) })
 
       cells.forEach((cell) => {
         if (cell && cell.value && cell.value.team !== pokemon.team) {
