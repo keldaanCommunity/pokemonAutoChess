@@ -43,7 +43,7 @@ export default function GamePlayer(props: {
       <div className="nes-container life-text">{props.player.life}</div>
       <Tooltip
         id={"detail-" + props.player.id}
-        className="customeTheme"
+        className="custom-theme-tooltip"
         place="left"
         data-tooltip-offset={{ left: 30, bottom: props.index === 0 ? 50 : 0 }}
       >

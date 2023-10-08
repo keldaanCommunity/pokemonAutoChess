@@ -8,7 +8,7 @@
   border-radius: 50%;
   image-rendering: pixelated;
   box-shadow: inset 0 0 0 0.8vh black;
-  z-index: 2000;
+  z-index: 30;
 }
 
 .game-player .CircularProgressbar {
@@ -56,7 +56,7 @@
   padding: 0;
   line-height: 1em;
   transition: margin 100ms ease-out;
-  width: 2.5em
+  width: 2.5em;
 }
 
 .game-player.spectated .life-text {

@@ -13,7 +13,11 @@ export function GameTeamInfo() {
   return (
     <div id="game-team-info" className="nes-container team-size information">
       <div data-tooltip-id="detail-team-size">
-        <Tooltip id="detail-team-size" className="customeTheme" place="top">
+        <Tooltip
+          id="detail-team-size"
+          className="custom-theme-tooltip"
+          place="top"
+        >
           <p className="help">
             {t("place_up_to")} <output>{experienceManager.level}</output>{" "}
             {t("pokemons_on_your_board")}

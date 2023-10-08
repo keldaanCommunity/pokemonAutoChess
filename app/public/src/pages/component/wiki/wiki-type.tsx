@@ -101,7 +101,7 @@ export default function WikiType(props: { type: Synergy | "all" }) {
                         />
                         <Tooltip
                           id={`pokemon-detail-${p.index}`}
-                          className="customeTheme game-pokemon-detail-tooltip"
+                          className="custom-theme-tooltip game-pokemon-detail-tooltip"
                         >
                           <GamePokemonDetail pokemon={p} />
                         </Tooltip>
