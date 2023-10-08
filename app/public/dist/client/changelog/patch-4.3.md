@@ -27,6 +27,10 @@
 - Give a fire stone to Marowak to get an alolan Marowak
 - Move Porygon/Porygon2 to additional pool
 - Give an upgrade to Porygon2 to get PorygonZ
+- Nerf Jolteon and Vaporeon: PP ~~80~~ → 100
+- Nerf Cinderace: HP ~~200~~ 180
+- Nerf Eruption: damage per projectile ~~30/60/120~~ → 30/50/100
+- Buff Tinkatink line: Attack ~~7/14/30~~ → 11/22/44
 
 # Changes to Synergies
 
