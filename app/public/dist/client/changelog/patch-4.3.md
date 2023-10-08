@@ -40,6 +40,8 @@ New Light Synergy
 
 # UI
 
+- Better pokemon report, grouped by families
+
 # Bugfix
 
 # Misc
