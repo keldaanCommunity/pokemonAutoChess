@@ -24,7 +24,7 @@ export class HiddenPowerStrategy extends AttackStrategy {
   ): void {
     super.process(unown, state, board, target, crit)
     unown.handleDamage({
-      damage: unown.life,
+      damage: unown.life + unown.shield,
       board,
       attackType: AttackType.TRUE,
       attacker: null,

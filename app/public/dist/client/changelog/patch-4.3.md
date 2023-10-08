@@ -42,4 +42,6 @@ New Light Synergy
 
 # Bugfix
 
+- Unown now vanish properly when having shield
+
 # Misc
