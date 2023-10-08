@@ -92,7 +92,7 @@ export default function GamePokemonPortrait(props: {
       >
         <Tooltip
           id={`tooltip-${props.origin}-${props.index}`}
-          className="customeTheme game-pokemon-detail-tooltip"
+          className="custom-theme-tooltip game-pokemon-detail-tooltip"
           place="bottom"
         >
           <GamePokemonDetail

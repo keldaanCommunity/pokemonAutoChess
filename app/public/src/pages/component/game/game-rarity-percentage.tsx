@@ -22,7 +22,7 @@ export default function GameRarityPercentage() {
     <>
       <Tooltip
         id="detail-game-rarity-percentage"
-        className="customeTheme"
+        className="custom-theme-tooltip"
         place="top"
       >
         <p>{t("encounter_rates")}</p>

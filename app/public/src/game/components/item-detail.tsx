@@ -56,7 +56,7 @@ export function ItemDetailTooltip({
                   id={"item-tooltip-" + otherComponent}
                   float
                   place="right"
-                  className="customeTheme item-detail-tooltip"
+                  className="custom-theme-tooltip item-detail-tooltip"
                 >
                   <ItemDetailTooltip item={otherComponent} depth={depth + 1} />
                 </Tooltip>
@@ -69,7 +69,7 @@ export function ItemDetailTooltip({
                   id={"item-tooltip-" + result}
                   float
                   place="right"
-                  className="customeTheme item-detail-tooltip"
+                  className="custom-theme-tooltip item-detail-tooltip"
                 >
                   <ItemDetailTooltip item={result as Item} depth={depth + 1} />
                 </Tooltip>

@@ -134,7 +134,7 @@ function PokemonPickerTab(props: {
         ReactDOM.createPortal(
           <Tooltip
             id="pokemon-detail"
-            className="customeTheme game-pokemon-detail-tooltip"
+            className="custom-theme-tooltip game-pokemon-detail-tooltip"
             float
           >
             <GamePokemonDetail pokemon={hoveredPokemon} />

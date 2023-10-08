@@ -3,13 +3,6 @@
   height: 100%;
 }
 
-/* TODO Remove this after the absolute sidebar update goes in */
-.sprite-debug-root aside.sidebar {
-  position: absolute;
-  height: 100%;
-  z-index: 999;
-}
-
 .sprite-debug-container {
   display: flex;
   flex-direction: column;

@@ -10,7 +10,7 @@ export function GameLifeInfo() {
   return (
     <div id="game-life-info" className="nes-container life information">
       <div data-tooltip-id="detail-life">
-        <Tooltip id="detail-life" className="customeTheme" place="top">
+        <Tooltip id="detail-life" className="custom-theme-tooltip" place="top">
           <p className="help">{t("lose_game_hint")}</p>
         </Tooltip>
         <Life value={life} />

@@ -52,7 +52,11 @@ export default function GameStageInfo() {
       <div id="game-stage-info" className="nes-container">
         <div className="stage-information" data-tooltip-id="detail-stage">
           {ReactDOM.createPortal(
-            <Tooltip id="detail-stage" className="customeTheme" place="bottom">
+            <Tooltip
+              id="detail-stage"
+              className="custom-theme-tooltip"
+              place="bottom"
+            >
               <p>
                 <span className="help">{t("pve_stages")}:</span>{" "}
                 {NeutralStage.map((s) => s.turn).join(", ")}
@@ -111,7 +115,7 @@ export default function GameStageInfo() {
             {ReactDOM.createPortal(
               <Tooltip
                 id="detail-weather"
-                className="customeTheme"
+                className="custom-theme-tooltip"
                 place="bottom"
               >
                 <span>
@@ -246,7 +250,7 @@ export function StagePath() {
             {ReactDOM.createPortal(
               <Tooltip
                 id={"stage-path-" + i}
-                className="customeTheme"
+                className="custom-theme-tooltip"
                 place="bottom"
               >
                 {step.title}
