@@ -114,11 +114,6 @@ export default class LoadingManager {
       "/assets/attacks"
     )
     scene.load.multiatlas(
-      "LIGHT_EFFECT",
-      "/assets/attacks/LIGHT_EFFECT.json",
-      "/assets/attacks"
-    )
-    scene.load.multiatlas(
       "FISSURE",
       "/assets/attacks/FISSURE.json",
       "/assets/attacks"
