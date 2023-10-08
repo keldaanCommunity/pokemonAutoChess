@@ -975,7 +975,7 @@
     "SOLAR_BEAM": "Verursacht [30,60,120,SP] SPECIAL in einer geraden Linie hinter dem Ziel. Bei sonnigem Wetter werden Ziele 3 Sekunden lang BURN und stellen 40 PP wieder her",
     "MAGMA_STORM": "Das Ziel wird in einem Mahlstrom aus Feuer gefangen, der [80,SP] SPECIAL verursacht, bevor er sich zu einem benachbarten Ziel bewegt",
     "SLASHING_CLAW": "Fügt dem Ziel [15,30,60,SP] zu und verwundet es 5 Sekunden lang. Wenn das Ziel bereits WOUND ist, wird ein SPECIAL bonus von 30 % gewährt",
-    "ERUPTION": "Feuert [20,30,40] Projektile in die Luft ab. Jedes Projektil verursacht [30,60,120,SP] SPECIAL und BURN für 5 Sekunden",
+    "ERUPTION": "Feuert [20,30,40] Projektile in die Luft ab. Jedes Projektil verursacht [30,50,100,SP] SPECIAL und BURN für 5 Sekunden",
     "LUSTER_PURGE": "Schleudert einen Lichtball in einer geraden Linie, der zweimal [25,SP] SPECIAL verursacht und die SPE_DEF aller getroffenen Feinde um 1 verringert",
     "MIST_BALL": "Startet eine Nebelblase in einer geraden Linie, die zweimal [25,SP] SPECIAL verursacht und die AP aller getroffenen Feinde um das Doppelte um 10 % senkt.",
     "MUD_BUBBLE": "Heilt den Zaubernden um [10,20,40,SP]",

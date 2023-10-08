@@ -1022,7 +1022,7 @@
     "SOLAR_BEAM": "Deals [30,60,120,SP] SPECIAL in a straight line behind the target. If the weather is SUN, targets are BURN for 3 seconds and restores 40 PP",
     "MAGMA_STORM": "The target becomes trapped within a maelstrom of fire that deals [80,SP] SPECIAL before moving to an adjacent target",
     "SLASHING_CLAW": "Deals [15,30,60,SP] to the target and WOUND it for 5 seconds. If the target is already WOUND, deals 30% bonus SPECIAL",
-    "ERUPTION": "Fires [20,30,40] projectiles in the air. Every projectile deals [30,60,120,SP] SPECIAL and BURN for 5 seconds",
+    "ERUPTION": "Fires [20,30,40] projectiles in the air. Every projectile deals [30,50,100,SP] SPECIAL and BURN for 5 seconds",
     "LUSTER_PURGE": "Launches a ball of light in a straight line that deals [25,SP] SPECIAL twice and lowers twice the SPE_DEF of all enemies hit by 1",
     "MIST_BALL": "Launches a mist bubble in a straight line that deals [25,SP] SPECIAL twice and lowers twice the AP of all enemies hit by 10%",
     "MUD_BUBBLE": "Heals the caster for [10,20,40,SP]",

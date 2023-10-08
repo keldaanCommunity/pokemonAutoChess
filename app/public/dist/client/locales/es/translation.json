@@ -976,7 +976,7 @@
     "SOLAR_BEAM": "Reparte [30,60,120,SP] SPECIAL en línea recta detrás del objetivo. Si el clima es soleado, los objetivos se BURN durante 3 s y restauran 40 PP",
     "MAGMA_STORM": "El objetivo queda atrapado en una vorágine de fuego que inflige [80,SP] SPECIAL antes de moverse a un objetivo adyacente",
     "SLASHING_CLAW": "Inflige [15,30,60,SP] al objetivo y lo WOUND durante 5 segundos. Si el objetivo ya está WOUND, otorga un 30 % de bonificación SPECIAL",
-    "ERUPTION": "Dispara [20,30,40] proyectiles en el aire. Cada proyectil inflige [30,60,120,SP] SPECIAL y BURN durante 5 segundos",
+    "ERUPTION": "Dispara [20,30,40] proyectiles en el aire. Cada proyectil inflige [30,50,100,SP] SPECIAL y BURN durante 5 segundos",
     "LUSTER_PURGE": "Lanza una bola de luz en línea recta que inflige [25,SP] SPECIAL dos veces y reduce el doble de SPE_DEF de todos los enemigos alcanzados en 1",
     "MIST_BALL": "Lanza una burbuja de niebla en línea recta que inflige [25,SP] SPECIAL dos veces y reduce el AP de todos los enemigos golpeados en un 10 %",
     "MUD_BUBBLE": "Cura al lanzador por [10,20,40,SP]",

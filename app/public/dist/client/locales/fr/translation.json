@@ -979,7 +979,7 @@
     "SOLAR_BEAM": "Inflige [30,60,120,SP] SPECIAL en ligne droite derrière la cible. Si le temps est SUN, les cibles sont BURN pendant 3 secondes et restaurent 40 PP",
     "MAGMA_STORM": "La cible est piégée dans un maelström de feu qui inflige [80,SP] SPECIAL avant de se déplacer vers une cible adjacente",
     "SLASHING_CLAW": "Inflige [15,30,60,SP] à la cible et la WOUND pendant 5 secondes. Si la cible a déjà WOUND, inflige 30 % de bonus SPECIAL",
-    "ERUPTION": "Tire [20,30,40] projectiles en l'air. Chaque projectile inflige [30,60,120,SP] SPECIAL et BURN pendant 5 secondes",
+    "ERUPTION": "Tire [20,30,40] projectiles en l'air. Chaque projectile inflige [30,50,100,SP] SPECIAL et BURN pendant 5 secondes",
     "LUSTER_PURGE": "Lance une boule de lumière en ligne droite qui inflige [25,SP] SPECIAL deux fois et réduit deux fois la SPE_DEF de tous les ennemis touchés de 1",
     "MIST_BALL": "Lance une bulle de brume en ligne droite qui inflige [25,SP] SPECIAL deux fois et réduit deux fois l'AP de tous les ennemis touchés de 10 %",
     "MUD_BUBBLE": "Soigne le lanceur de [10,20,40,SP] HP",
