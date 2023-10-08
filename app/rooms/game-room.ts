@@ -25,6 +25,7 @@ import {
   Dungeon,
   ExpPlace,
   getEvolutionCountNeeded,
+  ItemRecipe,
   RequiredStageLevelForXpElligibility
 } from "../types/Config"
 import { Item, BasicItems } from "../types/enum/Item"
@@ -169,7 +170,7 @@ export default class GameRoom extends Room<GameState> {
       if (!this.state.gameFinished && client.auth) {
         try {
           this.dispatcher.dispatch(new OnShopCommand(), {
-            id: client.auth.uid,
+            playerId: client.auth.uid,
             index: message.id
           })
         } catch (error) {
@@ -908,6 +909,7 @@ export default class GameRoom extends Room<GameState> {
           pokemonEvolved.positionY = coord.y
           player.board.set(pokemonEvolved.id, pokemonEvolved)
           evolve = true
+          this.updateItemEvolution(playerId, pokemonEvolved)
         } else {
           logger.error("no coordinate found for new evolution")
         }
@@ -921,6 +923,207 @@ export default class GameRoom extends Room<GameState> {
     player.boardSize = this.getTeamSize(player.board)
 
     return evolve
+  }
+
+  updateItemEvolution(playerId: string, pokemon: Pokemon) {
+    const player = this.state.players.get(playerId)
+    if (!player) return false
+
+    pokemon.items.forEach((item) => {
+      let newPokemon: Pokemon | undefined = undefined
+      const equipAfterTransform = true
+
+      switch (pokemon.name) {
+        case Pkm.EEVEE:
+          switch (item) {
+            case Item.WATER_STONE:
+              newPokemon = PokemonFactory.transformPokemon(
+                pokemon,
+                Pkm.VAPOREON,
+                player
+              )
+              break
+            case Item.FIRE_STONE:
+              newPokemon = PokemonFactory.transformPokemon(
+                pokemon,
+                Pkm.FLAREON,
+                player
+              )
+              break
+            case Item.THUNDER_STONE:
+              newPokemon = PokemonFactory.transformPokemon(
+                pokemon,
+                Pkm.JOLTEON,
+                player
+              )
+              break
+            case Item.DUSK_STONE:
+              newPokemon = PokemonFactory.transformPokemon(
+                pokemon,
+                Pkm.UMBREON,
+                player
+              )
+              break
+            case Item.MOON_STONE:
+              newPokemon = PokemonFactory.transformPokemon(
+                pokemon,
+                Pkm.SYLVEON,
+                player
+              )
+              break
+            case Item.LEAF_STONE:
+              newPokemon = PokemonFactory.transformPokemon(
+                pokemon,
+                Pkm.LEAFEON,
+                player
+              )
+              break
+            case Item.DAWN_STONE:
+              newPokemon = PokemonFactory.transformPokemon(
+                pokemon,
+                Pkm.ESPEON,
+                player
+              )
+              break
+            case Item.ICE_STONE:
+              newPokemon = PokemonFactory.transformPokemon(
+                pokemon,
+                Pkm.GLACEON,
+                player
+              )
+              break
+          }
+          break
+
+        case Pkm.PHIONE:
+          if (item === Item.AQUA_EGG) {
+            newPokemon = PokemonFactory.transformPokemon(
+              pokemon,
+              Pkm.MANAPHY,
+              player
+            )
+          }
+          break
+
+        case Pkm.GROUDON:
+          if (item === Item.RED_ORB) {
+            newPokemon = PokemonFactory.transformPokemon(
+              pokemon,
+              Pkm.PRIMAL_GROUDON,
+              player
+            )
+          }
+          break
+        case Pkm.KYOGRE:
+          if (item === Item.BLUE_ORB) {
+            newPokemon = PokemonFactory.transformPokemon(
+              pokemon,
+              Pkm.PRIMAL_KYOGRE,
+              player
+            )
+          }
+          break
+        case Pkm.RAYQUAZA:
+          if (item === Item.DELTA_ORB) {
+            newPokemon = PokemonFactory.transformPokemon(
+              pokemon,
+              Pkm.MEGA_RAYQUAZA,
+              player
+            )
+          }
+          break
+        case Pkm.SHAYMIN:
+          if (item === Item.GRACIDEA_FLOWER) {
+            newPokemon = PokemonFactory.transformPokemon(
+              pokemon,
+              Pkm.SHAYMIN_SKY,
+              player
+            )
+          }
+          break
+        case Pkm.TYROGUE: {
+          let evol = Pkm.HITMONTOP
+          if (
+            item === Item.CHARCOAL ||
+            item === Item.MAGNET ||
+            (item in ItemRecipe && ItemRecipe[item]!.includes(Item.CHARCOAL)) ||
+            (item in ItemRecipe && ItemRecipe[item]!.includes(Item.MAGNET))
+          ) {
+            evol = Pkm.HITMONLEE
+          }
+          if (
+            item === Item.HEART_SCALE ||
+            item === Item.NEVER_MELT_ICE ||
+            (item in ItemRecipe &&
+              ItemRecipe[item]!.includes(Item.HEART_SCALE)) ||
+            (item in ItemRecipe &&
+              ItemRecipe[item]!.includes(Item.NEVER_MELT_ICE))
+          ) {
+            evol = Pkm.HITMONCHAN
+          }
+          newPokemon = PokemonFactory.transformPokemon(pokemon, evol, player)
+          break
+        }
+        case Pkm.GLIGAR:
+          if (item === Item.RAZOR_FANG) {
+            newPokemon = PokemonFactory.transformPokemon(
+              pokemon,
+              Pkm.GLISCOR,
+              player
+            )
+          }
+          break
+        case Pkm.CHINGLING:
+          if (item === Item.STAR_DUST) {
+            newPokemon = PokemonFactory.transformPokemon(
+              pokemon,
+              Pkm.CHIMECHO,
+              player
+            )
+          }
+          break
+        case Pkm.RAICHU:
+          if (item === Item.DAWN_STONE) {
+            newPokemon = PokemonFactory.transformPokemon(
+              pokemon,
+              Pkm.ALOLAN_RAICHU,
+              player
+            )
+          }
+          break
+        case Pkm.MAROWAK:
+          if (item === Item.FIRE_STONE) {
+            newPokemon = PokemonFactory.transformPokemon(
+              pokemon,
+              Pkm.ALOLAN_MAROWAK,
+              player
+            )
+          }
+          break
+        case Pkm.PORYGON_2:
+          if (item === Item.UPGRADE) {
+            newPokemon = PokemonFactory.transformPokemon(
+              pokemon,
+              Pkm.PORYGON_Z,
+              player
+            )
+          }
+          break
+      }
+
+      if (newPokemon) {
+        // delete the extra pokemons
+        player.board.delete(pokemon.id)
+        player.board.set(newPokemon.id, newPokemon)
+        player.synergies.update(player.board)
+        player.effects.update(player.synergies, player.board)
+        player.boardSize = this.getTeamSize(player.board)
+        if (equipAfterTransform) {
+          newPokemon.items.add(item)
+        }
+        player.items.delete(item)
+      }
+    })
   }
 
   getNumberOfPlayersAlive(players: MapSchema<Player>) {

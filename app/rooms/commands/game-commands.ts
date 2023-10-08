@@ -60,62 +60,62 @@ import { values } from "../../utils/schemas"
 export class OnShopCommand extends Command<
   GameRoom,
   {
-    id: string
+    playerId: string
     index: number
   }
 > {
-  execute({ id, index }) {
-    if (id !== undefined && index !== undefined && this.state.players.has(id)) {
-      const player = this.state.players.get(id)
-      if (player && player.shop[index] && player.shop[index] !== Pkm.DEFAULT) {
-        const name = player.shop[index]
-        const pokemon = PokemonFactory.createPokemonFromName(name, player)
-        const cost = PokemonFactory.getBuyPrice(name)
-        if (
-          player.money >= cost &&
-          (this.room.getBenchSize(player.board) < 8 ||
-            (this.room.getPossibleEvolution(player.board, pokemon.name) &&
-              this.room.getBenchSize(player.board) == 8))
-        ) {
-          let allowBuy = true
-          if (
-            [Rarity.UNIQUE, Rarity.LEGENDARY, Rarity.MYTHICAL].includes(
-              pokemon.rarity
-            )
-          ) {
-            player.board.forEach((p) => {
-              if (p.name === pokemon.name) {
-                allowBuy = false
-              }
-            })
-          }
-          if (allowBuy) {
-            player.money -= cost
-            if (
-              pokemon.passive === Passive.PROTEAN2 ||
-              pokemon.passive === Passive.PROTEAN3
-            ) {
-              this.room.checkDynamicSynergies(player, pokemon)
-            }
+  execute({ playerId, index }) {
+    if (
+      playerId === undefined ||
+      index === undefined ||
+      !this.state.players.has(playerId)
+    )
+      return
+    const player = this.state.players.get(playerId)
+    if (!player || !player.shop[index] || player.shop[index] === Pkm.DEFAULT)
+      return
 
-            const x = this.room.getFirstAvailablePositionInBench(player.id)
-            pokemon.positionX = x !== undefined ? x : -1
-            pokemon.positionY = 0
-            player.board.set(pokemon.id, pokemon)
+    const name = player.shop[index]
+    const pokemon = PokemonFactory.createPokemonFromName(name, player)
+    const cost = PokemonFactory.getBuyPrice(name)
+    const benchSize = this.room.getBenchSize(player.board)
 
-            if (
-              pokemon.passive === Passive.UNOWN &&
-              player.effects.list.includes(Effect.EERIE_SPELL)
-            ) {
-              this.state.shop.assignShop(player, true, this.state.stageLevel)
-            } else {
-              player.shop[index] = Pkm.DEFAULT
-            }
-            this.room.updateEvolution(id)
-          }
-        }
-      }
+    let canBuy =
+      player.money >= cost &&
+      (benchSize < 8 ||
+        (this.room.getPossibleEvolution(player.board, pokemon.name) &&
+          benchSize == 8)) &&
+      !(
+        [Rarity.UNIQUE, Rarity.LEGENDARY, Rarity.MYTHICAL].includes(
+          pokemon.rarity
+        ) && values(player.board).some((p) => p.name === pokemon.name)
+      )
+
+    if (!canBuy) return
+
+    player.money -= cost
+    if (
+      pokemon.passive === Passive.PROTEAN2 ||
+      pokemon.passive === Passive.PROTEAN3
+    ) {
+      this.room.checkDynamicSynergies(player, pokemon)
     }
+
+    const x = this.room.getFirstAvailablePositionInBench(player.id)
+    pokemon.positionX = x !== undefined ? x : -1
+    pokemon.positionY = 0
+    player.board.set(pokemon.id, pokemon)
+
+    if (
+      pokemon.passive === Passive.UNOWN &&
+      player.effects.list.includes(Effect.EERIE_SPELL)
+    ) {
+      this.state.shop.assignShop(player, true, this.state.stageLevel)
+    } else {
+      player.shop[index] = Pkm.DEFAULT
+    }
+
+    this.room.updateEvolution(playerId)
   }
 }
 
@@ -404,297 +404,91 @@ export class OnDragDropItemCommand extends Command<
       updateItems: true
     }
     const player = this.state.players.get(playerId)
-    if (player) {
-      message.updateBoard = false
-      message.updateItems = true
+    if (!player) return
 
-      const item = detail.id
+    message.updateBoard = false
+    message.updateItems = true
 
-      if (!player.items.has(item) && !detail.bypass) {
-        client.send(Transfer.DRAG_DROP_FAILED, message)
-        return
-      }
+    const item = detail.id
 
-      const x = parseInt(detail.x)
-      const y = parseInt(detail.y)
+    if (!player.items.has(item) && !detail.bypass) {
+      client.send(Transfer.DRAG_DROP_FAILED, message)
+      return
+    }
 
-      const pokemon = player.getPokemonAt(x, y)
+    const x = parseInt(detail.x)
+    const y = parseInt(detail.y)
 
-      if (pokemon === undefined || !pokemon.canHoldItems) {
-        client.send(Transfer.DRAG_DROP_FAILED, message)
-        return
-      }
-      // check if full items
-      if (pokemon.items.size >= 3) {
-        if (BasicItems.includes(item)) {
-          let includesBasicItem = false
-          pokemon.items.forEach((i) => {
-            if (BasicItems.includes(i)) {
-              includesBasicItem = true
+    const pokemon = player.getPokemonAt(x, y)
+
+    if (pokemon === undefined || !pokemon.canHoldItems) {
+      client.send(Transfer.DRAG_DROP_FAILED, message)
+      return
+    }
+    // check if full items and nothing to combine
+    if (
+      pokemon.items.size >= 3 &&
+      (BasicItems.includes(item) === false ||
+        values(pokemon.items).some((i) => BasicItems.includes(i)) === false)
+    ) {
+      client.send(Transfer.DRAG_DROP_FAILED, message)
+      return
+    }
+
+    if (BasicItems.includes(item)) {
+      const itemToCombine = values(pokemon.items).find((i) =>
+        BasicItems.includes(i)
+      )
+      if (itemToCombine) {
+        Object.keys(ItemRecipe).forEach((n) => {
+          const name = n as Item
+          const recipe = ItemRecipe[name]
+          if (
+            recipe &&
+            ((recipe[0] == itemToCombine && recipe[1] == item) ||
+              (recipe[0] == item && recipe[1] == itemToCombine))
+          ) {
+            pokemon.items.delete(itemToCombine)
+            player.items.delete(item)
+
+            if (pokemon.items.has(name)) {
+              player.items.add(name)
+            } else {
+              const detail: IDragDropItemMessage = {
+                id: name,
+                x: pokemon.positionX,
+                y: pokemon.positionY,
+                bypass: true
+              }
+              commands.push(
+                new OnDragDropItemCommand().setPayload({
+                  client: client,
+                  detail: detail
+                })
+              )
             }
-          })
-          if (!includesBasicItem) {
-            client.send(Transfer.DRAG_DROP_FAILED, message)
-            return
-          }
-        } else {
-          client.send(Transfer.DRAG_DROP_FAILED, message)
-          return
-        }
-      }
-
-      // SPECIAL CASES: create a new pokemon on item equip
-      let newPokemon: Pokemon | undefined = undefined
-      const equipAfterTransform = true
-
-      switch (pokemon.name) {
-        case Pkm.EEVEE:
-          switch (item) {
-            case Item.WATER_STONE:
-              newPokemon = PokemonFactory.transformPokemon(
-                pokemon,
-                Pkm.VAPOREON,
-                player
-              )
-              break
-            case Item.FIRE_STONE:
-              newPokemon = PokemonFactory.transformPokemon(
-                pokemon,
-                Pkm.FLAREON,
-                player
-              )
-              break
-            case Item.THUNDER_STONE:
-              newPokemon = PokemonFactory.transformPokemon(
-                pokemon,
-                Pkm.JOLTEON,
-                player
-              )
-              break
-            case Item.DUSK_STONE:
-              newPokemon = PokemonFactory.transformPokemon(
-                pokemon,
-                Pkm.UMBREON,
-                player
-              )
-              break
-            case Item.MOON_STONE:
-              newPokemon = PokemonFactory.transformPokemon(
-                pokemon,
-                Pkm.SYLVEON,
-                player
-              )
-              break
-            case Item.LEAF_STONE:
-              newPokemon = PokemonFactory.transformPokemon(
-                pokemon,
-                Pkm.LEAFEON,
-                player
-              )
-              break
-            case Item.DAWN_STONE:
-              newPokemon = PokemonFactory.transformPokemon(
-                pokemon,
-                Pkm.ESPEON,
-                player
-              )
-              break
-            case Item.ICE_STONE:
-              newPokemon = PokemonFactory.transformPokemon(
-                pokemon,
-                Pkm.GLACEON,
-                player
-              )
-              break
-          }
-          break
-
-        case Pkm.PHIONE:
-          if (item === Item.AQUA_EGG) {
-            newPokemon = PokemonFactory.transformPokemon(
-              pokemon,
-              Pkm.MANAPHY,
-              player
-            )
-          }
-          break
-
-        case Pkm.GROUDON:
-          if (item === Item.RED_ORB) {
-            newPokemon = PokemonFactory.transformPokemon(
-              pokemon,
-              Pkm.PRIMAL_GROUDON,
-              player
-            )
-          }
-          break
-        case Pkm.KYOGRE:
-          if (item === Item.BLUE_ORB) {
-            newPokemon = PokemonFactory.transformPokemon(
-              pokemon,
-              Pkm.PRIMAL_KYOGRE,
-              player
-            )
-          }
-          break
-        case Pkm.RAYQUAZA:
-          if (item === Item.DELTA_ORB) {
-            newPokemon = PokemonFactory.transformPokemon(
-              pokemon,
-              Pkm.MEGA_RAYQUAZA,
-              player
-            )
-          }
-          break
-        case Pkm.SHAYMIN:
-          if (item === Item.GRACIDEA_FLOWER) {
-            newPokemon = PokemonFactory.transformPokemon(
-              pokemon,
-              Pkm.SHAYMIN_SKY,
-              player
-            )
-          }
-          break
-        case Pkm.TYROGUE: {
-          let evol = Pkm.HITMONTOP
-          if (
-            item === Item.CHARCOAL ||
-            item === Item.MAGNET ||
-            (item in ItemRecipe && ItemRecipe[item].includes(Item.CHARCOAL)) ||
-            (item in ItemRecipe && ItemRecipe[item].includes(Item.MAGNET))
-          ) {
-            evol = Pkm.HITMONLEE
-          }
-          if (
-            item === Item.HEART_SCALE ||
-            item === Item.NEVER_MELT_ICE ||
-            (item in ItemRecipe &&
-              ItemRecipe[item].includes(Item.HEART_SCALE)) ||
-            (item in ItemRecipe &&
-              ItemRecipe[item].includes(Item.NEVER_MELT_ICE))
-          ) {
-            evol = Pkm.HITMONCHAN
-          }
-          newPokemon = PokemonFactory.transformPokemon(pokemon, evol, player)
-          break
-        }
-        case Pkm.GLIGAR:
-          if (item === Item.RAZOR_FANG) {
-            newPokemon = PokemonFactory.transformPokemon(
-              pokemon,
-              Pkm.GLISCOR,
-              player
-            )
-          }
-          break
-        case Pkm.CHINGLING:
-          if (item === Item.STAR_DUST) {
-            newPokemon = PokemonFactory.transformPokemon(
-              pokemon,
-              Pkm.CHIMECHO,
-              player
-            )
-          }
-          break
-        case Pkm.RAICHU:
-          if (item === Item.DAWN_STONE) {
-            newPokemon = PokemonFactory.transformPokemon(
-              pokemon,
-              Pkm.ALOLAN_RAICHU,
-              player
-            )
-          }
-          break
-        case Pkm.MAROWAK:
-          if (item === Item.FIRE_STONE) {
-            newPokemon = PokemonFactory.transformPokemon(
-              pokemon,
-              Pkm.ALOLAN_MAROWAK,
-              player
-            )
-          }
-          break
-        case Pkm.PORYGON_2:
-          if (item === Item.UPGRADE) {
-            newPokemon = PokemonFactory.transformPokemon(
-              pokemon,
-              Pkm.PORYGON_Z,
-              player
-            )
-          }
-          break
-      }
-
-      if (newPokemon) {
-        // delete the extra pokemons
-        player.board.delete(pokemon.id)
-        player.board.set(newPokemon.id, newPokemon)
-        player.synergies.update(player.board)
-        player.effects.update(player.synergies, player.board)
-        player.boardSize = this.room.getTeamSize(player.board)
-        if (equipAfterTransform) {
-          newPokemon.items.add(item)
-        }
-        player.items.delete(item)
-        return
-      }
-
-      if (BasicItems.includes(item)) {
-        let itemToCombine
-        pokemon.items.forEach((i) => {
-          if (BasicItems.includes(i)) {
-            itemToCombine = i
           }
         })
-        if (itemToCombine) {
-          Object.keys(ItemRecipe).forEach((n) => {
-            const name = n as Item
-            const recipe = ItemRecipe[name]
-            if (
-              recipe &&
-              ((recipe[0] == itemToCombine && recipe[1] == item) ||
-                (recipe[0] == item && recipe[1] == itemToCombine))
-            ) {
-              pokemon.items.delete(itemToCombine)
-              player.items.delete(item)
-
-              if (pokemon.items.has(name)) {
-                player.items.add(name)
-              } else {
-                const detail: IDragDropItemMessage = {
-                  id: name,
-                  x: pokemon.positionX,
-                  y: pokemon.positionY,
-                  bypass: true
-                }
-                commands.push(
-                  new OnDragDropItemCommand().setPayload({
-                    client: client,
-                    detail: detail
-                  })
-                )
-              }
-            }
-          })
-        } else {
-          pokemon.items.add(item)
-          player.items.delete(item)
-        }
       } else {
-        if (pokemon.items.has(item)) {
-          client.send(Transfer.DRAG_DROP_FAILED, message)
-          return
-        } else {
-          pokemon.items.add(item)
-          player.items.delete(item)
-        }
+        pokemon.items.add(item)
+        player.items.delete(item)
       }
+    } else {
+      if (pokemon.items.has(item)) {
+        client.send(Transfer.DRAG_DROP_FAILED, message)
+        return
+      } else {
+        pokemon.items.add(item)
+        player.items.delete(item)
+      }
+    }
 
-      player.synergies.update(player.board)
-      player.effects.update(player.synergies, player.board)
-      if (commands.length > 0) {
-        return commands
-      }
+    this.room.updateItemEvolution(playerId, pokemon)
+
+    player.synergies.update(player.board)
+    player.effects.update(player.synergies, player.board)
+    if (commands.length > 0) {
+      return commands
     }
   }
 }
