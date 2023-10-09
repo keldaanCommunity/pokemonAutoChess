@@ -1109,6 +1109,15 @@ export default class GameRoom extends Room<GameState> {
             )
           }
           break
+        case Pkm.SLOWBRO:
+          if (item === Item.ROCKY_HELMET) {
+            newPokemon = PokemonFactory.transformPokemon(
+              pokemon,
+              Pkm.SLOWKING,
+              player
+            )
+          }
+          break
       }
 
       if (newPokemon) {
