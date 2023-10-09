@@ -587,51 +587,15 @@ export class OnJoinCommand extends Command<
 > {
   async execute({ client, options, auth }) {
     try {
+      const players = values(this.state.players)
       if (options.spectate === true) {
         this.state.spectators.add(client.auth.uid)
-      } else if (values(this.state.players).some((p) => p.id === auth.uid)) {
-        logger.info(
-          `${client.auth.displayName} ${client.id} reconnected to game room`
-        )
-      } else {
-        // init player
-        const user = await UserMetadata.findOne({ uid: auth.uid })
-        if (user) {
-          const player = new Player(
-            user.uid,
-            user.displayName,
-            user.elo,
-            user.avatar,
-            false,
-            this.state.players.size + 1,
-            user.pokemonCollection,
-            user.title,
-            user.role
-          )
-
-          this.state.players.set(client.auth.uid, player)
-
-          if (client && client.auth && client.auth.displayName) {
-            logger.info(
-              `${client.auth.displayName} ${client.id} join game room`
-            )
-          }
-
-          this.state.shop.assignShop(player, false, this.state.stageLevel)
-          if (this.state.players.size >= MAX_PLAYERS_PER_LOBBY) {
-            let nbHumanPlayers = 0
-            this.state.players.forEach((p) => {
-              if (!p.isBot) {
-                nbHumanPlayers += 1
-              }
-            })
-            if (nbHumanPlayers === 1) {
-              this.state.players.forEach((p) => {
-                if (!p.isBot) {
-                  p.titles.add(Title.LONE_WOLF)
-                }
-              })
-            }
+      } else if (players.some((p) => p.id === auth.uid)) {
+        logger.info(`${client.auth.displayName} ${client.id} joined game room`)
+        if (this.state.players.size >= MAX_PLAYERS_PER_LOBBY) {
+          const humanPlayers = players.filter((p) => !p.isBot)
+          if (humanPlayers.length === 1) {
+            humanPlayers[0].titles.add(Title.LONE_WOLF)
           }
         }
       }

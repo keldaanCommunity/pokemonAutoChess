@@ -61,6 +61,7 @@ import { logger } from "../utils/logger"
 import { computeElo } from "../core/elo"
 import { Passive } from "../types/enum/Passive"
 import { getAvatarString } from "../public/src/utils"
+import { values } from "../utils/schemas"
 
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>
@@ -78,7 +79,7 @@ export default class GameRoom extends Room<GameState> {
   }
 
   // When room is initialized
-  onCreate(options: {
+  async onCreate(options: {
     users: { [key: string]: IGameUser }
     preparationId: string
     name: string
@@ -145,6 +146,25 @@ export default class GameRoom extends Room<GameState> {
         this.state.players.set(user.id, player)
         this.state.botManager.addBot(player)
         //this.state.shop.assignShop(player)
+      } else {
+        const user = await UserMetadata.findOne({ uid: id })
+        if (user) {
+          // init player
+          const player = new Player(
+            user.uid,
+            user.displayName,
+            user.elo,
+            user.avatar,
+            false,
+            this.state.players.size + 1,
+            user.pokemonCollection,
+            user.title,
+            user.role
+          )
+
+          this.state.players.set(user.uid, player)
+          this.state.shop.assignShop(player, false, 1)
+        }
       }
     }
 
@@ -373,9 +393,7 @@ export default class GameRoom extends Room<GameState> {
           // already started, presumably a user refreshed page and wants to reconnect to game
           client.send(Transfer.LOADING_COMPLETE)
         } else if (
-          Array.from(this.state.players.values()).every(
-            (player) => player.loadingProgress === 100
-          )
+          values(this.state.players).every((p) => p.loadingProgress === 100)
         ) {
           this.broadcast(Transfer.LOADING_COMPLETE)
           this.startGame()
@@ -446,11 +464,7 @@ export default class GameRoom extends Room<GameState> {
           )
         }
       }
-      if (
-        Array.from(this.state.players.values()).every(
-          (player) => player.loadingProgress === 100
-        )
-      ) {
+      if (values(this.state.players).every((p) => p.loadingProgress === 100)) {
         this.broadcast(Transfer.LOADING_COMPLETE)
         this.startGame()
       }
