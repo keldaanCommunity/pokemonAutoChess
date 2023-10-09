@@ -235,7 +235,8 @@
     "TEETER_DANCE": "Teeter Dance",
     "CLOSE_COMBAT": "Close Combat",
     "ASSIST": "Assist",
-    "FISSURE": "Fissure"
+    "FISSURE": "Fissure",
+    "ASSURANCE": "Assurance"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -857,7 +858,9 @@
     "PURRLOIN": "Purrloin",
     "LIEPARD": "Liepard",
     "BARBOACH": "Barboach",
-    "WHISCASH": "Whiscash"
+    "WHISCASH": "Whiscash",
+    "SCRAGGY": "Scraggy",
+    "SCRAFTY": "Scrafty"
   },
   "ability_description": {
     "DEFAULT": "",
@@ -1078,7 +1081,8 @@
     "TEETER_DANCE": "All other Pokémon are CONFUSION for 3 seconds, allies and enemies alike",
     "CLOSE_COMBAT":"Deals [130,SP] SPECIAL and reduce the caster DEF and SPE_DEF by 2",
     "ASSIST": "Copy and cast an ability from an allied pokémon chosen at random",
-    "FISSURE": "Open [2,3,4] rifts. Each rift deals [25,50,75,SP] SPECIAL"
+    "FISSURE": "Open [2,3,4] rifts. Each rift deals [25,50,75,SP] SPECIAL",
+    "ASSURANCE": "Deals [25,50,100,SP] SPECIAL. Doubles if the caster in under 50% HP"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1464,7 +1468,8 @@
     "GUTS": "The pokémon gains 5 ATK as long as it is BURN or POISON",
     "AQUA_VEIL": "Give RUNE_PROTECT under RAIN",
     "PORYGON": "Porygon2 is looking for an UPGRADE",
-    "SLOWBRO": "Slowbro is looking for a ROCKY_HELMET"
+    "SLOWBRO": "Slowbro is looking for a ROCKY_HELMET",
+    "MOXIE":"Every time an enemy pokémon dies, it gains ATK equal to its stars"
   },
   "stat": {
     "ATK": "Attack",

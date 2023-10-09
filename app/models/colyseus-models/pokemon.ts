@@ -14754,3 +14754,53 @@ export class Whiscash extends Pokemon {
     )
   }
 }
+
+export class Scraggy extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.SCRAGGY,
+      [Synergy.DARK, Synergy.FIGHTING],
+      Rarity.COMMON,
+      Pkm.SCRAFTY,
+      60,
+      6,
+      2,
+      2,
+      1,
+      AttackSprite.FIGHTING_MELEE,
+      1,
+      85,
+      Ability.ASSURANCE,
+      shiny,
+      emotion,
+      false,
+      true,
+      Passive.MOXIE
+    )
+  }
+}
+
+export class Scrafty extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.SCRAFTY,
+      [Synergy.DARK, Synergy.FIGHTING],
+      Rarity.COMMON,
+      Pkm.DEFAULT,
+      140,
+      12,
+      4,
+      4,
+      1,
+      AttackSprite.FIGHTING_MELEE,
+      2,
+      85,
+      Ability.ASSURANCE,
+      shiny,
+      emotion,
+      true,
+      true,
+      Passive.MOXIE
+    )
+  }
+}
