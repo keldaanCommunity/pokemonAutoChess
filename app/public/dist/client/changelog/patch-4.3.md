@@ -31,6 +31,8 @@
 - Nerf Cinderace: HP ~~200~~ 180
 - Nerf Eruption: damage per projectile ~~30/60/120~~ → 30/50/100
 - Buff Tinkatink line: Attack ~~7/14/30~~ → 11/22/44
+- Move Slowpoke/Slowbro to additional pool
+- Give a rocky helmet to Slowbro to get a Slowking
 
 # Changes to Synergies
 

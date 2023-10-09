@@ -216,10 +216,10 @@ export const UncommonShop = new Array<Pkm>(
   Pkm.EEVEE,
   Pkm.FLABEBE,
   Pkm.BELLSPROUT,
-  Pkm.SLOWPOKE,
   Pkm.HATENNA,
   Pkm.NIDORANF,
-  Pkm.NIDORANM
+  Pkm.NIDORANM,
+  Pkm.SLOWPOKE
 )
 
 export const RareShop = new Array<Pkm>(

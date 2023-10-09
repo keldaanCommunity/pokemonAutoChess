@@ -1463,7 +1463,8 @@
     "CUBONE": "Marowak is looking for a FIRE_STONE",
     "GUTS": "The pokémon gains 5 ATK as long as it is BURN or POISON",
     "AQUA_VEIL": "Give RUNE_PROTECT under RAIN",
-    "PORYGON": "Porygon2 is looking for an UPGRADE"
+    "PORYGON": "Porygon2 is looking for an UPGRADE",
+    "SLOWBRO": "Slowbro is looking for a ROCKY_HELMET"
   },
   "stat": {
     "ATK": "Attack",
