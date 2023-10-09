@@ -3,8 +3,12 @@ import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
 import CSS from "csstype"
 import { IPokemonsStatistic } from "../../../../../models/mongo-models/pokemons-statistic"
 import { useTranslation } from "react-i18next"
-import PokemonFactory from "../../../../../models/pokemon-factory"
 import { getPortraitSrc } from "../../../utils"
+import STARS from "../../../../../models/precomputed/stars.json"
+import { Synergy } from "../../../../../types/enum/Synergy"
+import PRECOMPUTED_TYPE_ALL from "../../../../../models/precomputed/type-pokemons-all.json"
+import PRECOMPUTED_RARITY_ALL from "../../../../../models/precomputed/type-rarity-all.json"
+import { Rarity } from "../../../../../types/enum/Game"
 
 const pStyle = {
   fontSize: "1.1vw"
@@ -12,6 +16,9 @@ const pStyle = {
 
 export default function PokemonStatistic(props: {
   pokemons: IPokemonsStatistic[]
+  rankingBy: string
+  synergy: Synergy | "all"
+  rarity: Rarity | "all"
 }) {
   const { t } = useTranslation()
   const imgStyle: CSS.Properties = {
@@ -21,7 +28,19 @@ export default function PokemonStatistic(props: {
   }
 
   const families = new Map<Pkm, IPokemonsStatistic[]>()
-  props.pokemons.forEach((pokemon) => {
+
+  const filteredPokemons = props.pokemons
+    .filter((v) =>
+      props.synergy === "all"
+        ? v
+        : PRECOMPUTED_TYPE_ALL[props.synergy].includes(v.name)
+    )
+    .filter((v) =>
+      props.rarity === "all"
+        ? v
+        : PRECOMPUTED_RARITY_ALL[props.rarity].includes(v.name)
+    )
+  filteredPokemons.forEach((pokemon) => {
     const family = families.get(PkmFamily[pokemon.name])
     if (family) {
       family.push(pokemon)
@@ -30,19 +49,23 @@ export default function PokemonStatistic(props: {
     }
   })
   families.forEach((family) => {
-    family.sort(
-      (a, b) =>
-        PokemonFactory.createPokemonFromName(a.name).stars -
-        PokemonFactory.createPokemonFromName(b.name).stars
-    )
+    family.sort((a, b) => STARS[a.name] - STARS[b.name])
   })
 
-  if (props.pokemons.length === 0) {
+  const familiesArray = Array.from(families).sort((a, b) =>
+    props.rankingBy === "count"
+      ? b[1].reduce((prev, curr) => prev + curr.count, 0) -
+        a[1].reduce((prev, curr) => prev + curr.count, 0)
+      : a[1].reduce((prev, curr) => prev + curr.rank, 0) / a[1].length -
+        b[1].reduce((prev, curr) => prev + curr.rank, 0) / b[1].length
+  )
+
+  if (filteredPokemons.length === 0) {
     return <p>No data available</p>
   }
   return (
     <div style={{ height: "70vh", overflowY: "scroll" }}>
-      {Array.from(families).map(([pkm, pokemons], i) => (
+      {familiesArray.map(([pkm, pokemons], i) => (
         <div
           key={pkm}
           style={{ backgroundColor: "rgb(84, 89, 107)", margin: "10px" }}

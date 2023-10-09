@@ -10,6 +10,8 @@ import { IPokemonsStatistic } from "../../../../../models/mongo-models/pokemons-
 import { useTranslation } from "react-i18next"
 import { requestMeta } from "../../../stores/NetworkStore"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
+import { Synergy } from "../../../../../types/enum/Synergy"
+import { Rarity } from "../../../../../types/enum/Game"
 
 const optStyle = {
   color: "black"
@@ -22,6 +24,8 @@ export default function MetaReport() {
   const [rankingBy, setRanking] = useState<string>("count")
   const [itemRankingBy, setItemRanking] = useState<string>("count")
   const [pokemonRankingBy, setPokemonRanking] = useState<string>("count")
+  const [synergy, setSynergy] = useState<Synergy | "all">("all")
+  const [rarity, setRarity] = useState<Rarity | "all">("all")
   const hasLoadedMeta = useRef<boolean>(false)
 
   const meta = useAppSelector((state) => state.lobby.meta)
@@ -212,8 +216,77 @@ export default function MetaReport() {
                   </option>
                 </select>
               </div>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-around",
+                  backgroundColor: "rgb(84, 89, 107)"
+                }}
+                className="my-select"
+              >
+                <p style={{ margin: "0px" }}>{t("synergies")}</p>
+                <select
+                  value={synergy}
+                  onChange={(e) => {
+                    setSynergy(e.target.value as any)
+                  }}
+                  style={{
+                    background: "none",
+                    border: "none",
+                    color: "white"
+                  }}
+                >
+                  <option style={optStyle} value={"all"}>
+                    All
+                  </option>
+                  {Object.keys(Synergy).map((s) => (
+                    <option style={optStyle} value={s}>
+                      {t(`synergy.${s}`)}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-around",
+                  backgroundColor: "rgb(84, 89, 107)"
+                }}
+                className="my-select"
+              >
+                <p style={{ margin: "0px" }}>{t("rarity_label")}</p>
+                <select
+                  value={rarity}
+                  onChange={(e) => {
+                    setRarity(e.target.value as any)
+                  }}
+                  style={{
+                    background: "none",
+                    border: "none",
+                    color: "white"
+                  }}
+                >
+                  <option style={optStyle} value={"all"}>
+                    All
+                  </option>
+                  {Object.keys(Rarity).map((s) => (
+                    <option style={optStyle} value={s}>
+                      {t(`rarity.${s}`)}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
-            {<PokemonStatistic pokemons={sortedMetaPokemons} />}
+            {
+              <PokemonStatistic
+                pokemons={sortedMetaPokemons}
+                rankingBy={pokemonRankingBy}
+                synergy={synergy}
+                rarity={rarity}
+              />
+            }
           </TabPanel>
         </Tabs>
       </div>
