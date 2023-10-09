@@ -7467,13 +7467,12 @@ export class Thundurus extends Pokemon {
       AttackSprite.ELECTRIC_RANGE,
       3,
       80,
-      //Ability.THUNDER,
-      Ability.DEFAULT,
+      Ability.DEFAULT, //Ability.THUNDER,
       shiny,
       emotion,
       true,
       false,
-      Passive.STORM
+      Passive.NONE //Passive.STORM
     )
   }
 }
