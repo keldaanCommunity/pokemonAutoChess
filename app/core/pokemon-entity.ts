@@ -734,6 +734,14 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       this.addAttack(5)
     }
 
+    board.forEach(
+      (x, y, v) =>
+        v &&
+        v.passive === Passive.MOXIE &&
+        v.team === this.team &&
+        v.addAttack(target.stars)
+    )
+
     if (
       target.effects.includes(Effect.ODD_FLOWER) ||
       target.effects.includes(Effect.GLOOM_FLOWER) ||

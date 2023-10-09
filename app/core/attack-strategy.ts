@@ -5686,3 +5686,18 @@ export class FissureStrategy extends AttackStrategy {
     }
   }
 }
+
+export class AssuranceStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = pokemon.stars === 3 ? 100 : pokemon.stars === 2 ? 50: 25
+
+    target.handleSpecialDamage(pokemon.life/pokemon.hp < .5 ? damage * 2 : damage, board, AttackType.SPECIAL, pokemon, crit)
+  }
+}

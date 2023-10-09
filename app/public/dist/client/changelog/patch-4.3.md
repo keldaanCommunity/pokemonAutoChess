@@ -14,6 +14,8 @@
 - Liepard
 - Barboach
 - Whiscash
+- Scraggy
+- Scrafty
 
 # Changes to Pokemon & Abilities
 
