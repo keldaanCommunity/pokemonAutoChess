@@ -1844,7 +1844,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.ALOLAN_RAICHU]: Pkm.PICHU,
   [Pkm.DHELMISE]: Pkm.DHELMISE,
   [Pkm.KOFFING]: Pkm.KOFFING,
-  [Pkm.WEEZING]: Pkm.WEEZING,
+  [Pkm.WEEZING]: Pkm.KOFFING,
   [Pkm.STARYU]: Pkm.STARYU,
   [Pkm.STARMIE]: Pkm.STARYU,
   [Pkm.NOSEPASS]: Pkm.NOSEPASS,
