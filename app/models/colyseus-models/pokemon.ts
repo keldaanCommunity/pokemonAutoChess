@@ -4880,7 +4880,9 @@ export class Slowpoke extends Pokemon {
       Ability.SOAK,
       shiny,
       emotion,
-      false
+      false,
+      true,
+      Passive.SLOWBRO
     )
   }
 }
@@ -4903,7 +4905,9 @@ export class Slowbro extends Pokemon {
       Ability.SOAK,
       shiny,
       emotion,
-      false
+      true,
+      true,
+      Passive.SLOWBRO
     )
   }
 }
@@ -4926,6 +4930,7 @@ export class Slowking extends Pokemon {
       Ability.SOAK,
       shiny,
       emotion,
+      true,
       true
     )
   }
