@@ -1162,17 +1162,11 @@ export default class Pokemon extends DraggableObject {
   }
 
   addLight() {
-    this.light = new GameObjects.Sprite(
-      this.scene,
-      0,
-      10,
-      "LIGHT_EFFECT",
-      "000"
-    )
+    this.light = new GameObjects.Sprite(this.scene, 0, 10, "LIGHT_CELL", "000")
     this.light.setDepth(0)
     this.light.setScale(1.5, 1.5)
     this.scene.add.existing(this.light)
-    this.light.anims.play("LIGHT_EFFECT")
+    this.light.anims.play("LIGHT_CELL")
     this.add(this.light)
   }
 

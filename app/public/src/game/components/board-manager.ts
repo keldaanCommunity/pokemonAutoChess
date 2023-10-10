@@ -175,7 +175,7 @@ export default class BoardManager {
         "LIGHT_CELL",
         "000"
       )
-      this.lightCell.setDepth(7)
+      this.lightCell.setDepth(1)
       this.lightCell.setScale(2, 2)
       this.lightCell.anims.play("LIGHT_CELL")
     } else {
