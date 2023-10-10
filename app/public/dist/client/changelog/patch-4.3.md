@@ -51,6 +51,7 @@ New Light Synergy
 # UI
 
 - Better pokemon report, grouped by families
+- Hit animation particles
 
 # Bugfix
 

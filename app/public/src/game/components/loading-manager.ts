@@ -119,6 +119,11 @@ export default class LoadingManager {
       "/assets/attacks"
     )
     scene.load.multiatlas(
+      "HIT_NEUTRAL",
+      "/assets/attacks/HIT_NEUTRAL.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
       "FISSURE",
       "/assets/attacks/FISSURE.json",
       "/assets/attacks"
