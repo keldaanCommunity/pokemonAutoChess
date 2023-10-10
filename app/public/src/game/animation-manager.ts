@@ -840,6 +840,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.AQUA_RING,
+      frames: this.game.anims.generateFrameNames(Ability.AQUA_RING, {
+        start: 0,
+        end: 20,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.FISSURE,
       frames: this.game.anims.generateFrameNames(Ability.FISSURE, {
         start: 0,
