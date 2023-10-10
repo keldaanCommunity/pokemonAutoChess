@@ -1476,7 +1476,8 @@
     "FOSSIL": "Fossiel",
     "SOUND": "Geluid",
     "ARTIFICIAL": "Kunstmatig",
-    "BABY": "Baby"
+    "BABY": "Baby",
+    "LIGHT": "Licht"
   },
   "synergy_description": {
     "NORMAL": "Normale Pokemons en hun aangrenzende bondgenoten krijgen SHIELD wanneer het gevecht begint",
@@ -1505,7 +1506,8 @@
     "FOSSIL": "Bij hun eerste KO komen fossiele pokemons weer tot leven met verhoogde ATK",
     "SOUND": "Geluidspokemons laten een kreet horen wanneer ze hun vaardigheden gebruiken, slapende bondgenoten wakker maken en bonusstatistieken geven",
     "ARTIFICIAL": "Kunstmatige pokemons krijgen ATK en SHIELD, afhankelijk van het aantal vastgehouden items",
-    "BABY": "Baby's kunnen je Pokemon-eieren brengen om je te troosten na een nederlaag"
+    "BABY": "Baby's kunnen je Pokemon-eieren brengen om je te troosten na een nederlaag",
+    "LIGHT": "Licht onthult een spotlight op het slagveld. De eenheid die aan het begin van het gevecht in de schijnwerpers staat, krijgt unieke bonussen."
   },
   "title": {
     "NOVICE": "Gevorderde",

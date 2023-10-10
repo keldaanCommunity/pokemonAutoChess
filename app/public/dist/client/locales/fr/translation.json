@@ -1512,7 +1512,8 @@
     "FOSSIL": "Fossile",
     "SOUND": "Son",
     "ARTIFICIAL": "Artificiel",
-    "BABY": "Bébé"
+    "BABY": "Bébé",
+    "LIGHT": "Lumière"
   },
   "synergy_description": {
     "NORMAL": "Les pokémons normaux et leurs alliés adjacents gagnent le SHIELD lorsque le combat commence",
@@ -1541,7 +1542,8 @@
     "FOSSIL": "Lors de leur premier KO, les pokémons fossiles reviennent à la vie avec une ATK augmentée",
     "SOUND": "Les pokémons sonores émettent un cri lorsqu'ils utilisent leurs capacités, réveillant les alliés en SLEEP et leur donnant des statistiques bonus",
     "ARTIFICIAL": "Les pokémons artificiels gagnent ATK et SHIELD en fonction du nombre d'objets détenus",
-    "BABY": "Les bébés peuvent vous apporter des œufs Pokémon pour vous réconforter après une défaite"
+    "BABY": "Les bébés peuvent vous apporter des œufs Pokémon pour vous réconforter après une défaite",
+    "LIGHT": "La lumière révèle un projecteur sur le champ de bataille. L’unité sous les projecteurs au début du combat bénéficie de bonus uniques."
   },
   "title": {
     "NOVICE": "Novice",

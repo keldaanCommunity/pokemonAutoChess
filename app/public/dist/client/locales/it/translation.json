@@ -1476,7 +1476,8 @@
     "FOSSIL": "Fossile",
     "SOUND": "Suono",
     "ARTIFICIAL": "Artificiale",
-    "BABY": "Bambino"
+    "BABY": "Bambino",
+    "LIGHT": "Leggero"
   },
   "synergy_description": {
     "NORMAL": "I pokemon normali e i loro alleati adiacenti ottengono SHIELD quando inizia il combattimento",
@@ -1505,7 +1506,8 @@
     "FOSSIL": "Al loro primo KO, i pokemon fossili tornano in vita con un aumento dell'ATK",
     "SOUND": "I pokemon sonori emettono un grido quando usano le loro abilità, svegliando gli alleati addormentati e dando loro statistiche bonus",
     "ARTIFICIAL": "I pokemon artificiali guadagnano ATK e SHIELD a seconda del numero di oggetti posseduti",
-    "BABY": "I bambini possono portarti Pokemon Eggs per confortarti dopo una sconfitta"
+    "BABY": "I bambini possono portarti Pokemon Eggs per confortarti dopo una sconfitta",
+    "LIGHT": "La luce rivela un riflettore sul campo di battaglia. L'unità sotto i riflettori all'inizio del combattimento ottiene bonus unici."
   },
   "title": {
     "NOVICE": "Novizio",

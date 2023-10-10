@@ -1476,7 +1476,8 @@
     "FOSSIL": "Fósil",
     "SOUND": "Sonido",
     "ARTIFICIAL": "Artificial",
-    "BABY": "Bebé"
+    "BABY": "Bebé",
+    "LIGHT": "Luz"
   },
   "synergy_description": {
     "NORMAL": "Los Pokémon normales y sus aliados adyacentes obtienen SHIELD cuando comienza el combate.",
@@ -1505,7 +1506,8 @@
     "FOSSIL": "En su primer KO, los Pokémon fósiles vuelven a la vida con un mayor ATK",
     "SOUND": "Los Pokémon con sonido emiten un grito cuando usan sus habilidades, lo que despierta a los aliados dormidos y les otorga estadísticas adicionales.",
     "ARTIFICIAL": "Los Pokémon artificiales ganan ATK y SHIELD dependiendo de la cantidad de elementos que tengan",
-    "BABY": "Los bebés pueden traerte huevos de Pokémon para consolarte después de una derrota"
+    "BABY": "Los bebés pueden traerte huevos de Pokémon para consolarte después de una derrota",
+    "LIGHT": "La luz revela un foco en el campo de batalla. La unidad que se encuentra en el centro de atención al comienzo del combate obtiene bonificaciones únicas."
   },
   "title": {
     "NOVICE": "Principiante",
