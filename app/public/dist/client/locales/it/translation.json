@@ -39,7 +39,6 @@
     "SHADOW_CLONE": "Clone ombra",
     "VOLT_SWITCH": "Interruttore Volt",
     "LIQUIDATION": "Liquidazione",
-    "DEFAULT": "",
     "BURN": "Bruciare",
     "POISON": "Veleno",
     "SLEEP": "Sonno",
@@ -816,7 +815,6 @@
     "IRON_BUNDLE": "Fascio di ferro"
   },
   "ability_description": {
-    "DEFAULT": "",
     "SOFT_BOILED": "Cura tutti gli effetti di stato e garantisce [20,40,80,SP] SHIELD per ogni alleato",
     "EARTHQUAKE": "Infligge danno [120,SP] SPECIAL a tutte le unità nemiche nella stessa colonna/linea dell'attaccante",
     "SONG_OF_DESIRE": "L'obiettivo è CONFUSION per [6,SP] secondi",
@@ -976,7 +974,7 @@
     "SOLAR_BEAM": "Distribuisce [30,60,120,SP] SPECIAL in linea retta dietro il bersaglio. Se il tempo è soleggiato, i bersagli vengono BURN per 3 secondi e ripristinano 40 PP",
     "MAGMA_STORM": "Il bersaglio rimane intrappolato in un vortice di fuoco che infligge [80,SP] SPECIAL prima di spostarsi su un bersaglio adiacente",
     "SLASHING_CLAW": "Infligge [15,30,60,SP] al bersaglio e lo WOUND per 5 secondi. Se il bersaglio è già WOUND, infligge il 30% di bonus SPECIAL",
-    "ERUPTION": "Spara [20,30,40] proiettili in aria. Ogni proiettile infligge [30,50,100,SP] SPECIAL e BURN per 5 secondi",
+    "ERUPTION": "Spara [20,30,40] proiettili in aria. Ogni proiettile infligge [30,60,120,SP] SPECIAL e BURN per 5 secondi",
     "LUSTER_PURGE": "Lancia una sfera di luce in linea retta che infligge [25,SP] SPECIAL due volte e abbassa due volte la SPE_DEF di tutti i nemici colpiti di 1",
     "MIST_BALL": "Lancia una bolla di nebbia in linea retta che infligge [25,SP] SPECIAL due volte e riduce del 10% i AP di tutti i nemici colpiti del doppio",
     "MUD_BUBBLE": "Cura l'incantatore per [10,20,40,SP]",

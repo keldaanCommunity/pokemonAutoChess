@@ -16,6 +16,8 @@
 - Whiscash
 - Scraggy
 - Scrafty
+- Finneon
+- Lumineon
 
 # Changes to Pokemon & Abilities
 

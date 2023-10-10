@@ -39,7 +39,6 @@
     "SHADOW_CLONE": "Shadow Clone",
     "VOLT_SWITCH": "Volt Switch",
     "LIQUIDATION": "Liquidation",
-    "DEFAULT": "",
     "BURN": "Burn",
     "POISON": "Poison",
     "SLEEP": "Sleep",
@@ -234,9 +233,7 @@
     "SUPER_FANG": "Super Fang",
     "TEETER_DANCE": "Teeter Dance",
     "CLOSE_COMBAT": "Close Combat",
-    "ASSIST": "Assist",
-    "FISSURE": "Fissure",
-    "ASSURANCE": "Assurance"
+    "AQUA_RING": "Aqua Ring"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -855,15 +852,10 @@
     "BALTOY": "Baltoy",
     "CLAYDOL": "Claydol",
     "HERACROSS": "Heracross",
-    "PURRLOIN": "Purrloin",
-    "LIEPARD": "Liepard",
-    "BARBOACH": "Barboach",
-    "WHISCASH": "Whiscash",
-    "SCRAGGY": "Scraggy",
-    "SCRAFTY": "Scrafty"
+    "FINNEON": "Finneon",
+    "LUMINEON": "Lumineon"
   },
   "ability_description": {
-    "DEFAULT": "",
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
     "EARTHQUAKE": "Deal [120,SP] SPECIAL to all enemy Pokémon in the same column as the user",
     "SONG_OF_DESIRE": "The target is CHARM for [6,SP] seconds",
@@ -1025,7 +1017,7 @@
     "SOLAR_BEAM": "Deals [30,60,120,SP] SPECIAL in a straight line behind the target. If the weather is SUN, targets are BURN for 3 seconds and restores 40 PP",
     "MAGMA_STORM": "The target becomes trapped within a maelstrom of fire that deals [80,SP] SPECIAL before moving to an adjacent target",
     "SLASHING_CLAW": "Deals [15,30,60,SP] to the target and WOUND it for 5 seconds. If the target is already WOUND, deals 30% bonus SPECIAL",
-    "ERUPTION": "Fires [20,30,40] projectiles in the air. Every projectile deals [30,50,100,SP] SPECIAL and BURN for 5 seconds",
+    "ERUPTION": "Fires [20,30,40] projectiles in the air. Every projectile deals [30,60,120,SP] SPECIAL and BURN for 5 seconds",
     "LUSTER_PURGE": "Launches a ball of light in a straight line that deals [25,SP] SPECIAL twice and lowers twice the SPE_DEF of all enemies hit by 1",
     "MIST_BALL": "Launches a mist bubble in a straight line that deals [25,SP] SPECIAL twice and lowers twice the AP of all enemies hit by 10%",
     "MUD_BUBBLE": "Heals the caster for [10,20,40,SP]",
@@ -1079,10 +1071,8 @@
     "PARABOLIC_CHARGE": "Heal [25,50] and deals [25,50,100,SP] SPECIAL damage to the target. Excess HP is converted into SPECIAL",
     "SUPER_FANG": "Deals [30,60,90,SP] SPECIAL. Double damage on GRASS pokémon",
     "TEETER_DANCE": "All other Pokémon are CONFUSION for 3 seconds, allies and enemies alike",
-    "CLOSE_COMBAT":"Deals [130,SP] SPECIAL and reduce the caster DEF and SPE_DEF by 2",
-    "ASSIST": "Copy and cast an ability from an allied pokémon chosen at random",
-    "FISSURE": "Open [2,3,4] rifts. Each rift deals [25,50,75,SP] SPECIAL",
-    "ASSURANCE": "Deals [25,50,100,SP] SPECIAL. Doubles if the caster in under 50% HP"
+    "CLOSE_COMBAT": "Deals [130,SP] SPECIAL and reduce the caster DEF and SPE_DEF by 2",
+    "AQUA_RING": "Dives into the middle of the allied team, creating an aquatic ring that heals [20,30,50,SP] HP"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1186,12 +1176,7 @@
     "WINDY": "Windy",
     "NIGHT": "Night",
     "HYDRATATION": "Hydratation",
-    "COOL_BREEZE": "Cool Breeze",
-    "GAS": "Gas",
-    "SHINING_RAY": "Shining Ray",
-    "LIGHT_PULSE": "Light Pulse",
-    "ETERNAL_LIGHT": "Eternal Light",
-    "MAX_ILLUMINATION": "Max Illumination"
+    "COOL_BREEZE": "Cool Breeze"
   },
   "effect_description": {
     "STAMINA": "Gain 10 SHIELD",
@@ -1295,11 +1280,7 @@
     "MISTY": "+20% SPECIAL\n+30% CHARM duration",
     "WINDY": "+10% dodge chance (+20% if FLYING)",
     "NIGHT": "+20% CRIT_CHANCE\n+30% SLEEP duration",
-    "HYDRATATION": "GRASS synergy is healing 5 additional HP per second under the RAIN",
-    "SHINING_RAY":"Give RUNE_PROTECT for 6s",
-    "LIGHT_PULSE": "Doubles PP generation",
-    "ETERNAL_LIGHT": "Increase AP and ATK by 30%",
-    "MAX_ILLUMINATION":"Give RESURECTION"
+    "HYDRATATION": "GRASS synergy is healing 5 additional HP per second under the RAIN"
   },
   "item": {
     "FOSSIL_STONE": "Fossil Stone",
@@ -1463,13 +1444,9 @@
     "MEGA_LAUNCHER": "This pokémon ability emits 3 SOUND cries instead of one",
     "CLEAR_WING": "Gains 2% bonus ATK_SPEED each second",
     "DRY_SKIN": "Heals 8 HP per second under RAIN. Gains 25% dodge chance under SANDSTORM. Gains 50% AP under SUN",
-    "SPOT_PANDA":"The pokémon is immune to CONFUSION",
+    "SPOT_PANDA": "The pokémon is immune to CONFUSION",
     "CUBONE": "Marowak is looking for a FIRE_STONE",
-    "GUTS": "The pokémon gains 5 ATK as long as it is BURN or POISON",
-    "AQUA_VEIL": "Give RUNE_PROTECT under RAIN",
-    "PORYGON": "Porygon2 is looking for an UPGRADE",
-    "SLOWBRO": "Slowbro is looking for a ROCKY_HELMET",
-    "MOXIE":"Every time an enemy pokémon dies, it gains ATK equal to its stars"
+    "GUTS": "The pokémon gains 5 ATK as long as it is BURN or POISON"
   },
   "stat": {
     "ATK": "Attack",
@@ -1566,8 +1543,7 @@
     "FOSSIL": "Fossil",
     "SOUND": "Sound",
     "ARTIFICIAL": "Artificial",
-    "BABY": "Baby",
-    "LIGHT": "Light"
+    "BABY": "Baby"
   },
   "synergy_description": {
     "NORMAL": "Normal pokemons and their adjacent allies gain SHIELD when combat starts",
@@ -1596,8 +1572,7 @@
     "FOSSIL": "On their first KO, fossil pokemons come back to life with increased ATK",
     "SOUND": "Sound pokemons emit a cry when they use their abilities, waking up allies asleep and giving them bonus stats",
     "ARTIFICIAL": "Artificial pokemons gains ATK and SHIELD depending on the number of items held",
-    "BABY": "Babies can bring you Pokemon Eggs to comfort you after a defeat",
-    "LIGHT": "Light reveal a spotlight on the battlefield. The unit standing in the spotlight at the start of combat gains unique bonuses."
+    "BABY": "Babies can bring you Pokemon Eggs to comfort you after a defeat"
   },
   "title": {
     "NOVICE": "Novice",
@@ -1657,8 +1632,7 @@
     "ARCHEOLOGIST": "Archeologist",
     "ALCHEMIST": "Alchemist",
     "DENTIST": "Dentist",
-    "FISHERMAN": "Fisherman",
-    "CHOSEN_ONE": "Chosen One"
+    "FISHERMAN": "Fisherman"
   },
   "title_description": {
     "NOVICE": "Play your first game",
@@ -1718,8 +1692,7 @@
     "SHINY_SEEKER": "Have over 30 shiny pokemon avatars",
     "ARCHEOLOGIST": "Decipher the secret message of the Unowns",
     "DENTIST": "Own the angry Arbok",
-    "FISHERMAN": "Get a Gyarados",
-    "CHOSEN_ONE": "Max Synergy With Light type in a game"
+    "FISHERMAN": "Get a Gyarados"
   },
   "weather": {
     "NEUTRAL": "Calm weather",
@@ -1978,7 +1951,7 @@
   "bots": "Bots",
   "profile": "Profile",
   "search": "Search",
-  "average_place": "Top",
+  "average_place": "Average Place",
   "count": "Count",
   "meta_report": "Meta Report",
   "item_report": "Item Report",

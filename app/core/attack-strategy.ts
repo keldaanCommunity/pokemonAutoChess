@@ -5696,8 +5696,58 @@ export class AssuranceStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = pokemon.stars === 3 ? 100 : pokemon.stars === 2 ? 50: 25
+    const damage = pokemon.stars === 3 ? 100 : pokemon.stars === 2 ? 50 : 25
 
-    target.handleSpecialDamage(pokemon.life/pokemon.hp < .5 ? damage * 2 : damage, board, AttackType.SPECIAL, pokemon, crit)
+    target.handleSpecialDamage(
+      pokemon.life / pokemon.hp < 0.5 ? damage * 2 : damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit
+    )
+  }
+}
+
+export class AquaRingStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const mostSurroundedCoordinate =
+      state.getMostSurroundedCoordinateAvailablePlace(target, board)
+    if (mostSurroundedCoordinate) {
+      pokemon.moveTo(
+        mostSurroundedCoordinate.x,
+        mostSurroundedCoordinate.y,
+        board
+      )
+
+      const cells = board.getAdjacentCells(
+        mostSurroundedCoordinate.x,
+        mostSurroundedCoordinate.y
+      )
+      cells.push({
+        x: mostSurroundedCoordinate.x,
+        y: mostSurroundedCoordinate.y,
+        value: board.getValue(
+          mostSurroundedCoordinate.x,
+          mostSurroundedCoordinate.y
+        )
+      })
+
+      cells.forEach((cell) => {
+        if (cell.value && cell.value.team === pokemon.team) {
+          cell.value.handleHeal(
+            pokemon.stars === 3 ? 50 : pokemon.stars === 2 ? 30 : 20,
+            pokemon,
+            1
+          )
+        }
+      })
+    }
   }
 }

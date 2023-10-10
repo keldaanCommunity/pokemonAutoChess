@@ -191,7 +191,8 @@ import {
   CloseCombatStrategy,
   AssistStrategy,
   FissureStrategy,
-  AssuranceStrategy
+  AssuranceStrategy,
+  AquaRingStrategy
 } from "../attack-strategy"
 import {
   HiddenPowerAStrategy,
@@ -446,5 +447,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.CLOSE_COMBAT]: new CloseCombatStrategy(),
   [Ability.ASSIST]: new AssistStrategy(),
   [Ability.FISSURE]: new FissureStrategy(),
-  [Ability.ASSURANCE]: new AssuranceStrategy()
+  [Ability.ASSURANCE]: new AssuranceStrategy(),
+  [Ability.AQUA_RING]: new AquaRingStrategy()
 }
