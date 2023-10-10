@@ -14803,3 +14803,51 @@ export class Scrafty extends Pokemon {
     )
   }
 }
+
+export class Finneon extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.FINNEON,
+      [Synergy.WATER, Synergy.LIGHT],
+      Rarity.RARE,
+      Pkm.LUMINEON,
+      75,
+      7,
+      2,
+      2,
+      2,
+      AttackSprite.WATER_RANGE,
+      1,
+      90,
+      Ability.AQUA_RING,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Lumineon extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.LUMINEON,
+      [Synergy.WATER, Synergy.LIGHT],
+      Rarity.RARE,
+      Pkm.DEFAULT,
+      180,
+      16,
+      4,
+      4,
+      2,
+      AttackSprite.WATER_RANGE,
+      2,
+      85,
+      Ability.AQUA_RING,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}

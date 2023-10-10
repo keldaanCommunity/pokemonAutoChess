@@ -634,7 +634,9 @@ import {
   Barboach,
   Whiscash,
   Scraggy,
-  Scrafty
+  Scrafty,
+  Finneon,
+  Lumineon
 } from "./colyseus-models/pokemon"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
 
@@ -2093,6 +2095,10 @@ export default class PokemonFactory {
         return new Scraggy(s, e)
       case Pkm.SCRAFTY:
         return new Scrafty(s, e)
+      case Pkm.FINNEON:
+        return new Finneon(s, e)
+      case Pkm.LUMINEON:
+        return new Lumineon(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:

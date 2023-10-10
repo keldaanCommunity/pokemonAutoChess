@@ -39,7 +39,6 @@
     "SHADOW_CLONE": "Schaduwkloon",
     "VOLT_SWITCH": "Voltwissel",
     "LIQUIDATION": "Liquidatie",
-    "DEFAULT": "",
     "BURN": "Burn",
     "POISON": "Poison",
     "SLEEP": "Sleep",
@@ -816,7 +815,6 @@
     "IRON_BUNDLE": "IJzeren bundel"
   },
   "ability_description": {
-    "DEFAULT": "",
     "SOFT_BOILED": "Geneest alle status effecten en geeft [20,40,80,SP] SHIELD aan elke vriendelijke Pokémon",
     "EARTHQUAKE": "Breng [120,SP] SPECIAL toe aan alle vijandelijke Pokémon in dezelfde kolom als de gebruiker",
     "SONG_OF_DESIRE": "Het doelwit is CONFUSION gedurende [6,SP] seconden",
@@ -976,7 +974,7 @@
     "SOLAR_BEAM": "Deals [30,60,120,SP] SPECIAL in een rechte lijn achter het doelwit. Als het zonnig weer is, zijn doelen BURN voor 3s en herstelt 40 PP",
     "MAGMA_STORM": "Het doelwit komt vast te zitten in een maalstroom van vuur die [80,SP] SPECIAL uitdeelt voordat het naar een aangrenzend doelwit gaat",
     "SLASHING_CLAW": "Deelt [15,30,60,SP] uit aan het doelwit en VERWOND het gedurende 5 seconden. Als het doelwit al WOUND is, wordt er 30% bonus SPECIAL uitgedeeld",
-    "ERUPTION": "Vuurt [20,30,40] projectielen af in de lucht. Elk projectiel behandelt [30,50,100,SP] SPECIAL en BURN gedurende 5 seconden",
+    "ERUPTION": "Vuurt [20,30,40] projectielen af in de lucht. Elk projectiel behandelt [30,60,120,SP] SPECIAL en BURN gedurende 5 seconden",
     "LUSTER_PURGE": "Lanceert een lichtbal in een rechte lijn die tweemaal [25,SP] SPECIAL uitdeelt en tweemaal de SPE_DEF verlaagt van alle vijanden die met 1 worden geraakt",
     "MIST_BALL": "Lanceert een mistbel in een rechte lijn die twee keer [25,SP] SPECIAL uitdeelt en het AP van alle geraakte vijanden tweemaal met 10% verlaagt",
     "MUD_BUBBLE": "Geneest de caster voor [10,20,40,SP]",

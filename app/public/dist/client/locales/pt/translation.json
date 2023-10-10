@@ -39,7 +39,6 @@
     "SHADOW_CLONE": "clone das sombras",
     "VOLT_SWITCH": "Interruptor Volt",
     "LIQUIDATION": "Liquidação",
-    "DEFAULT": "",
     "BURN": "Queimar",
     "POISON": "Tóxico",
     "SLEEP": "Dormir",
@@ -816,7 +815,6 @@
     "IRON_BUNDLE": "Pacote de Ferro"
   },
   "ability_description": {
-    "DEFAULT": "",
     "SOFT_BOILED": "Cura todos os efeitos de status e concede [20,40,80,SP] SHIELD para cada aliado",
     "EARTHQUAKE": "Causa dano [120,SP] SPECIAL a todas as unidades inimigas na mesma coluna/linha do atacante",
     "SONG_OF_DESIRE": "O alvo é CHARM por [6,SP] segundos",
@@ -976,7 +974,7 @@
     "SOLAR_BEAM": "Distribui [30,60,120,SP] SPECIAL em linha reta atrás do alvo. Se o tempo estiver ensolarado, os alvos são BURN por 3s e restauram 40 PP",
     "MAGMA_STORM": "O alvo fica preso em um redemoinho de fogo que causa [80,SP] SPECIAL antes de se mover para um alvo adjacente",
     "SLASHING_CLAW": "Causa [15,30,60,SP] ao alvo e o WOUND por 5 segundos. Se o alvo já estiver FERIDO, concede 30% de bônus SPECIAL",
-    "ERUPTION": "Dispara projéteis [20,30,40] no ar. Cada projétil causa [30,50,100,SP] SPECIAL e BURN por 5 segundos",
+    "ERUPTION": "Dispara projéteis [20,30,40] no ar. Cada projétil causa [30,60,120,SP] SPECIAL e BURN por 5 segundos",
     "LUSTER_PURGE": "Lança uma bola de luz em linha reta que causa [25,SP] SPECIAL duas vezes e reduz duas vezes a SPE_DEF de todos os inimigos atingidos por 1",
     "MIST_BALL": "Lança uma bolha de névoa em linha reta que causa [25,SP] SPECIAL duas vezes e reduz em 10% o AP de todos os inimigos atingidos",
     "MUD_BUBBLE": "Cura o lançador em [10,20,40,SP]",
