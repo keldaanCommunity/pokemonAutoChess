@@ -2189,18 +2189,8 @@ export default class AnimationManager {
         zeroPad: 3
       }),
       duration: 1000,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "LIGHT_EFFECT",
-      frames: this.game.anims.generateFrameNames("LIGHT_EFFECT", {
-        start: 0,
-        end: 3,
-        zeroPad: 3
-      }),
-      duration: 400,
-      repeat: -1
+      repeat: -1,
+      yoyo: true
     })
   }
 
