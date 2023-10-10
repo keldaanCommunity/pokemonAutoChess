@@ -813,7 +813,8 @@
     "SPECTRIER": "Spectreval",
     "TORKOAL": "Torkoal",
     "DELIBIRD": "Cadoizo",
-    "IRON_BUNDLE": "Paquet de fer"
+    "IRON_BUNDLE": "Paquet de fer",
+    "KARTANA": "Katagami"
   },
   "ability_description": {
     "SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés",

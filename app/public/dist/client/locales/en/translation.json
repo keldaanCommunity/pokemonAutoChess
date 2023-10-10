@@ -39,7 +39,6 @@
     "SHADOW_CLONE": "Shadow Clone",
     "VOLT_SWITCH": "Volt Switch",
     "LIQUIDATION": "Liquidation",
-    "DEFAULT": "",
     "BURN": "Burn",
     "POISON": "Poison",
     "SLEEP": "Sleep",
@@ -866,7 +865,6 @@
     "LUMINEON": "Lumineon"
   },
   "ability_description": {
-    "DEFAULT": "",
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
     "EARTHQUAKE": "Deal [120,SP] SPECIAL to all enemy Pokémon in the same column as the user",
     "SONG_OF_DESIRE": "The target is CHARM for [6,SP] seconds",
@@ -1082,7 +1080,7 @@
     "PARABOLIC_CHARGE": "Heal [25,50] and deals [25,50,100,SP] SPECIAL damage to the target. Excess HP is converted into SPECIAL",
     "SUPER_FANG": "Deals [30,60,90,SP] SPECIAL. Double damage on GRASS pokémon",
     "TEETER_DANCE": "All other Pokémon are CONFUSION for 3 seconds, allies and enemies alike",
-    "CLOSE_COMBAT":"Deals [130,SP] SPECIAL and reduce the caster DEF and SPE_DEF by 2",
+    "CLOSE_COMBAT": "Deals [130,SP] SPECIAL and reduce the caster DEF and SPE_DEF by 2",
     "ASSIST": "Copy and cast an ability from an allied pokémon chosen at random",
     "FISSURE": "Open [2,3,4] rifts. Each rift deals [25,50,75,SP] SPECIAL",
     "ASSURANCE": "Deals [25,50,100,SP] SPECIAL. Doubles if the caster in under 50% HP",
@@ -1300,10 +1298,10 @@
     "WINDY": "+10% dodge chance (+20% if FLYING)",
     "NIGHT": "+20% CRIT_CHANCE\n+30% SLEEP duration",
     "HYDRATATION": "GRASS synergy is healing 5 additional HP per second under the RAIN",
-    "SHINING_RAY":"Give RUNE_PROTECT for 6s",
+    "SHINING_RAY": "Give RUNE_PROTECT for 6s",
     "LIGHT_PULSE": "Doubles PP generation",
     "ETERNAL_LIGHT": "Increase AP and ATK by 30%",
-    "MAX_ILLUMINATION":"Give RESURECTION"
+    "MAX_ILLUMINATION": "Give RESURECTION"
   },
   "item": {
     "FOSSIL_STONE": "Fossil Stone",
@@ -1467,13 +1465,13 @@
     "MEGA_LAUNCHER": "This pokémon ability emits 3 SOUND cries instead of one",
     "CLEAR_WING": "Gains 2% bonus ATK_SPEED each second",
     "DRY_SKIN": "Heals 8 HP per second under RAIN. Gains 25% dodge chance under SANDSTORM. Gains 50% AP under SUN",
-    "SPOT_PANDA":"The pokémon is immune to CONFUSION",
+    "SPOT_PANDA": "The pokémon is immune to CONFUSION",
     "CUBONE": "Marowak is looking for a FIRE_STONE",
     "GUTS": "The pokémon gains 5 ATK as long as it is BURN or POISON",
     "AQUA_VEIL": "Give RUNE_PROTECT under RAIN",
     "PORYGON": "Porygon2 is looking for an UPGRADE",
     "SLOWBRO": "Slowbro is looking for a ROCKY_HELMET",
-    "MOXIE":"Every time an enemy pokémon dies, it gains ATK equal to its stars"
+    "MOXIE": "Every time an enemy pokémon dies, it gains ATK equal to its stars"
   },
   "stat": {
     "ATK": "Attack",
