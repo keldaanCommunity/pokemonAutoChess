@@ -1926,29 +1926,21 @@ export const Unowns: Pkm[] = [
 
 export const UnownsStage1 = [
   Pkm.UNOWN_A,
-  Pkm.UNOWN_B,
   Pkm.UNOWN_C,
   Pkm.UNOWN_D,
   Pkm.UNOWN_E,
   Pkm.UNOWN_F,
   Pkm.UNOWN_G,
-  Pkm.UNOWN_H,
   Pkm.UNOWN_I,
-  Pkm.UNOWN_L,
-  Pkm.UNOWN_M,
-  Pkm.UNOWN_N,
   Pkm.UNOWN_O,
-  Pkm.UNOWN_Q,
-  Pkm.UNOWN_S,
   Pkm.UNOWN_V,
   Pkm.UNOWN_W,
-  Pkm.UNOWN_X,
-  Pkm.UNOWN_Z
 ]
 
 export const UnownsStage2 = [
   Pkm.UNOWN_A,
   Pkm.UNOWN_B,
+  Pkm.UNOWN_C,
   Pkm.UNOWN_D,
   Pkm.UNOWN_G,
   Pkm.UNOWN_H,
