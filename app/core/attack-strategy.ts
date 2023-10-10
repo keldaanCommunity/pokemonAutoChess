@@ -5403,7 +5403,7 @@ export class SmogStrategy extends AttackStrategy {
         )
       }
       pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
-        id: pokemon.simulation.id,
+        simulationId: pokemon.simulation.id,
         type: BoardEvent.GAS,
         x: cell.x,
         y: cell.y
