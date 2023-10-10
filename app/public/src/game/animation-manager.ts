@@ -2193,6 +2193,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: "HIT_NEUTRAL",
+      frames: this.game.anims.generateFrameNames("HIT_NEUTRAL", {
+        start: 0,
+        end: 3,
+        zeroPad: 3
+      }),
+      duration: 300,
+      yoyo: true
+    })
+
+    this.game.anims.create({
       key: "LIGHT_CELL",
       frames: this.game.anims.generateFrameNames("LIGHT_CELL", {
         start: 0,

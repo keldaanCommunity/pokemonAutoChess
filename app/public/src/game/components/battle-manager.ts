@@ -4618,6 +4618,21 @@ export default class BattleManager {
     }
   }
 
+  displayHit(x: number, y: number) {
+    const hitSprite = this.scene.add.sprite(
+      x + (Math.random() - 0.5) * 30,
+      y + (Math.random() - 0.5) * 30,
+      "HIT_NEUTRAL",
+      "000"
+    )
+    hitSprite.setDepth(7)
+    hitSprite.setScale(2, 2)
+    hitSprite.anims.play("HIT_NEUTRAL")
+    hitSprite.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+      hitSprite.destroy()
+    })
+  }
+
   displayDamage(
     positionX: number,
     positionY: number,
@@ -4639,6 +4654,7 @@ export default class BattleManager {
           ? "#209cee"
           : "#f7d51d"
       this.displayTween(color, coordinates, index, damage)
+      this.displayHit(coordinates[0], coordinates[1])
     }
   }
 
