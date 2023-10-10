@@ -1237,7 +1237,7 @@ export default class Simulation extends Schema implements ISimulation {
           )
         }
         this.room.broadcast(Transfer.BOARD_EVENT, {
-          id: this.id,
+          simulationId: this.id,
           type: BoardEvent.LIGHTNING,
           x,
           y

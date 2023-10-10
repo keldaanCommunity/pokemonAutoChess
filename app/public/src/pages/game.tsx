@@ -361,7 +361,7 @@ export default function Game() {
       room.onMessage(Transfer.BOARD_EVENT, (event: IBoardEvent) => {
         if (gameContainer.game) {
           const g = getGameScene()
-          if (g && g.battle) {
+          if (g?.battle?.simulation?.id === event.simulationId) {
             g.battle.displayBoardEvent(event)
           }
         }

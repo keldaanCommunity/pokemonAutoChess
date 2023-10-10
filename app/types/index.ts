@@ -628,6 +628,7 @@ export enum Title {
 }
 
 export interface IBoardEvent {
+  simulationId: string
   type: BoardEvent
   x: number
   y: number
