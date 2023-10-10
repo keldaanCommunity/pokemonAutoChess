@@ -82,6 +82,13 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateAllStatus(dt: number, pokemon: PokemonEntity, board: Board) {
+    if (
+      pokemon.effects.includes(Effect.POISON_GAS) &&
+      this.poisonStacks === 0
+    ) {
+      this.triggerPoison(1500, pokemon, undefined)
+    }
+
     if (pokemon.status.runeProtect) {
       this.updateRuneProtect(dt)
     }
@@ -267,12 +274,7 @@ export default class Status extends Schema implements IStatus {
         this.burnOrigin.status.triggerBurn(3000, this.burnOrigin, pkm, board)
       }
       if (this.poisonStacks && this.poisonOrigin) {
-        this.poisonOrigin.status.triggerPoison(
-          3000,
-          this.poisonOrigin,
-          pkm,
-          board
-        )
+        this.poisonOrigin.status.triggerPoison(3000, this.poisonOrigin, pkm)
       }
       if (this.wound && this.woundOrigin) {
         this.woundOrigin.status.triggerWound(3000, this.woundOrigin, pkm, board)
@@ -405,8 +407,7 @@ export default class Status extends Schema implements IStatus {
   triggerPoison(
     timer: number,
     pkm: PokemonEntity,
-    origin: PokemonEntity | undefined,
-    board: Board
+    origin: PokemonEntity | undefined
   ) {
     if (!this.runeProtect) {
       let maxStacks = 3
@@ -430,35 +431,38 @@ export default class Status extends Schema implements IStatus {
 
   updatePoison(dt: number, pkm: PokemonEntity, board: Board) {
     if (this.poisonDamageCooldown - dt <= 0) {
-      if (this.poisonOrigin) {
-        let poisonDamage = Math.ceil(pkm.hp * 0.05 * this.poisonStacks)
-        if (pkm.simulation.weather === Weather.RAIN) {
-          poisonDamage = Math.round(poisonDamage * 0.7)
-        }
-
-        if (pkm.items.has(Item.ASSAULT_VEST)) {
-          poisonDamage = Math.round(poisonDamage * 0.5)
-        }
-
-        if (
-          pkm.passive === Passive.POISON_HEAL ||
-          pkm.passive === Passive.GLIGAR
-        ) {
-          pkm.handleHeal(poisonDamage, pkm, 0)
-        } else {
-          pkm.handleDamage({
-            damage: poisonDamage,
-            board,
-            attackType: AttackType.TRUE,
-            attacker: this.poisonOrigin,
-            shouldTargetGainMana: false
-          })
-        }
-
-        this.poisonDamageCooldown = 1000
+      let poisonDamage = Math.ceil(pkm.hp * 0.05 * this.poisonStacks)
+      if (pkm.simulation.weather === Weather.RAIN) {
+        poisonDamage = Math.round(poisonDamage * 0.7)
       }
+
+      if (pkm.items.has(Item.ASSAULT_VEST)) {
+        poisonDamage = Math.round(poisonDamage * 0.5)
+      }
+
+      if (
+        pkm.passive === Passive.POISON_HEAL ||
+        pkm.passive === Passive.GLIGAR
+      ) {
+        pkm.handleHeal(poisonDamage, pkm, 0)
+      } else {
+        pkm.handleDamage({
+          damage: poisonDamage,
+          board,
+          attackType: AttackType.TRUE,
+          attacker: this.poisonOrigin ?? null,
+          shouldTargetGainMana: false
+        })
+      }
+
+      if (pkm.effects.includes(Effect.POISON_GAS)) {
+        // reapply poison stack on every poison tick if in poison gas
+        this.triggerPoison(1500, pkm, undefined)
+      }
+
+      this.poisonDamageCooldown = 1000
     } else {
-      this.poisonDamageCooldown = this.poisonDamageCooldown - dt
+      this.poisonDamageCooldown -= dt
     }
 
     if (this.poisonCooldown - dt <= 0) {

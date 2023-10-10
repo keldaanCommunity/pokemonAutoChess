@@ -624,7 +624,9 @@ export enum Pkm {
   SCRAGGY = "SCRAGGY",
   SCRAFTY = "SCRAFTY",
   FINNEON = "FINNEON",
-  LUMINEON = "LUMINEON"
+  LUMINEON = "LUMINEON",
+  STUNKY = "STUNKY",
+  SKUNTANK = "SKUNTANK"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1251,7 +1253,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.SCRAGGY]: "0559",
   [Pkm.SCRAFTY]: "0560",
   [Pkm.FINNEON]: "0456",
-  [Pkm.LUMINEON]: "0457"
+  [Pkm.LUMINEON]: "0457",
+  [Pkm.STUNKY]: "0434",
+  [Pkm.SKUNTANK]: "0435"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1878,7 +1882,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.SCRAGGY]: Pkm.SCRAGGY,
   [Pkm.SCRAFTY]: Pkm.SCRAGGY,
   [Pkm.FINNEON]: Pkm.FINNEON,
-  [Pkm.LUMINEON]: Pkm.FINNEON
+  [Pkm.LUMINEON]: Pkm.FINNEON,
+  [Pkm.STUNKY]: Pkm.STUNKY,
+  [Pkm.SKUNTANK]: Pkm.STUNKY
 }
 
 export enum PkmDuo {
@@ -1934,7 +1940,7 @@ export const UnownsStage1 = [
   Pkm.UNOWN_I,
   Pkm.UNOWN_O,
   Pkm.UNOWN_V,
-  Pkm.UNOWN_W,
+  Pkm.UNOWN_W
 ]
 
 export const UnownsStage2 = [
@@ -5121,5 +5127,15 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.RearUp
+  },
+  [Pkm.STUNKY]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SKUNTANK]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.DeepBreath,
+    emote: AnimationType.Shoot
   }
 }

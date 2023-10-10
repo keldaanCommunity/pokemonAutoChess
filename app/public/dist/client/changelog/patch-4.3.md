@@ -18,6 +18,8 @@
 - Scrafty
 - Finneon
 - Lumineon
+- Stinky
+- Skuntank
 
 # Changes to Pokemon & Abilities
 

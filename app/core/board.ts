@@ -2,6 +2,7 @@ import PokemonFactory from "../models/pokemon-factory"
 import { IPokemonEntity } from "../types"
 import { Effect } from "../types/enum/Effect"
 import { Orientation } from "../types/enum/Game"
+import { Passive } from "../types/enum/Passive"
 import { removeInArray } from "../utils/array"
 import { distanceC } from "../utils/distance"
 import { logger } from "../utils/logger"
@@ -41,10 +42,12 @@ export default class Board {
         const effectOnPreviousCell =
           this.effects[value.positionY * this.columns + value.positionX]
         if (effectOnPreviousCell != null) {
-          /*logger.debug(
-            `${value.name} lost effect ${effectOnPreviousCell} by moving out of board effect`
-          )*/
+          //logger.debug(`${value.name} lost effect ${effectOnPreviousCell} by moving out of board effect`)
           removeInArray(value.effects, effectOnPreviousCell)
+        }
+
+        if(value.passive === Passive.STENCH){
+          this.effects[value.positionY * this.columns + value.positionX] = Effect.POISON_GAS
         }
 
         value.positionX = x
@@ -52,11 +55,9 @@ export default class Board {
 
         const effectOnNewCell = this.effects[index]
         if (effectOnNewCell != null) {
-          /*logger.debug(
-            `${value.name} gained effect ${effectOnNewCell} by moving into board effect`
-          )*/
+          //logger.debug(`${value.name} gained effect ${effectOnNewCell} by moving into board effect`)
           value.effects.push(effectOnNewCell)
-        }
+        }        
       }
     }
   }

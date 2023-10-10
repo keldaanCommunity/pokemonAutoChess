@@ -14851,3 +14851,53 @@ export class Lumineon extends Pokemon {
     )
   }
 }
+
+export class Stunky extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.STUNKY,
+      [Synergy.DARK, Synergy.POISON],
+      Rarity.EPIC,
+      Pkm.SKUNTANK,
+      125,
+      10,
+      2,
+      2,
+      1,
+      AttackSprite.POISON_MELEE,
+      1,
+      80,
+      Ability.POISON_GAS,
+      shiny,
+      emotion,
+      false,
+      true,
+      Passive.STENCH
+    )
+  }
+}
+
+export class Skuntank extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.SKUNTANK,
+      [Synergy.DARK, Synergy.POISON],
+      Rarity.EPIC,
+      Pkm.DEFAULT,
+      280,
+      22,
+      4,
+      4,
+      1,
+      AttackSprite.POISON_MELEE,
+      2,
+      80,
+      Ability.POISON_GAS,
+      shiny,
+      emotion,
+      true,
+      true,
+      Passive.STENCH
+    )
+  }
+}
