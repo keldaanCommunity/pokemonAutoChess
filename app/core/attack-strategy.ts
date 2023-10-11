@@ -5790,3 +5790,36 @@ export class PoisonGasStrategy extends AttackStrategy {
     })
   }
 }
+
+export class BraveBirdStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const flyAwayCell = board.getFlyAwayCell(
+      pokemon.positionX,
+      pokemon.positionY
+    )
+    if (flyAwayCell) {
+      pokemon.moveTo(flyAwayCell.x, flyAwayCell.y, board)
+      const adjacentEmptyCells = board
+        .getAdjacentCells(flyAwayCell.x, flyAwayCell.y)
+        .filter((v) => v.value === undefined)
+      if (adjacentEmptyCells.length > 0) {
+        const cell = adjacentEmptyCells[0]
+        target.moveTo(cell.x, cell.y, board)
+        target.handleSpecialDamage(
+          pokemon.stars === 3 ? 90 : pokemon.stars === 2 ? 60 : 30,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
+    }
+  }
+}
