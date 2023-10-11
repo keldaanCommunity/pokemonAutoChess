@@ -55,5 +55,6 @@ export enum Passive {
   PORYGON = "PORYGON",
   SLOWBRO = "SLOWBRO",
   MOXIE = "MOXIE",
-  STENCH = "STENCH"
+  STENCH = "STENCH",
+  BELLSPROUT = "BELLSPROUT"
 }

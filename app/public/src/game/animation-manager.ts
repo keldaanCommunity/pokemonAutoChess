@@ -840,6 +840,26 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.MAGICAL_LEAF,
+      frames: this.game.anims.generateFrameNames(Ability.MAGICAL_LEAF, {
+        start: 0,
+        end: 8
+      }),
+      duration: 500,
+      repeat: 0
+    })
+
+    this.game.anims.create({
+      key: "MAGICAL_LEAF_CHARGE",
+      frames: this.game.anims.generateFrameNames("MAGICAL_LEAF_CHARGE", {
+        start: 0,
+        end: 26
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.BRAVE_BIRD,
       frames: this.game.anims.generateFrameNames(Ability.BRAVE_BIRD, {
         start: 0,

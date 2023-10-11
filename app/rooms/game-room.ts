@@ -1132,6 +1132,15 @@ export default class GameRoom extends Room<GameState> {
             )
           }
           break
+        case Pkm.WEEPINBELL:
+          if (item === Item.LEAF_STONE) {
+            newPokemon = PokemonFactory.transformPokemon(
+              pokemon,
+              Pkm.VICTREEBEL,
+              player
+            )
+          }
+          break
       }
 
       if (newPokemon) {

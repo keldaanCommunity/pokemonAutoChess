@@ -214,7 +214,6 @@ export const UncommonShop = new Array<Pkm>(
   Pkm.DUSKULL,
   Pkm.EEVEE,
   Pkm.FLABEBE,
-  Pkm.BELLSPROUT,
   Pkm.HATENNA,
   Pkm.NIDORANF,
   Pkm.NIDORANM
