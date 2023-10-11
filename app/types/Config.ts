@@ -190,7 +190,6 @@ export const CommonShop = new Array<Pkm>(
   Pkm.PIDGEY,
   Pkm.HOPPIP,
   Pkm.SEEDOT,
-  Pkm.STARLY,
   Pkm.SWINUB,
   Pkm.FENNEKIN,
   Pkm.PICHU,

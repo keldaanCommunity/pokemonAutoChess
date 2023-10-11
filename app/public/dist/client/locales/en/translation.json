@@ -237,7 +237,8 @@
     "POISON_GAS": "Poison Gas",
     "ASSIST": "Assist",
     "FISSURE": "Fissure",
-    "ASSURANCE": "Assurance"
+    "ASSURANCE": "Assurance",
+    "BRAVE_BIRD": "Brave Bird"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1088,7 +1089,8 @@
     "POISON_GAS": "A cloud of stinky gas is thrown in the face of all adjacent enemies, inflicting [15,30,60,SP] SPECIAL, POISON and PARALYSIS for 3 seconds",
     "ASSIST": "Copy and cast an ability from an allied pokémon chosen at random",
     "FISSURE": "Open [2,3,4] rifts. Each rift deals [25,50,75,SP] SPECIAL",
-    "ASSURANCE": "Deals [25,50,100,SP] SPECIAL. Doubles if the caster in under 50% HP"
+    "ASSURANCE": "Deals [25,50,100,SP] SPECIAL. Doubles if the caster in under 50% HP",
+    "BRAVE_BIRD": "Flies away with its target dealing [30,60,90,SP] SPECIAL"
   },
   "effect": {
     "INGRAIN": "Ingrain",
