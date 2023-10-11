@@ -235,6 +235,9 @@
     "CLOSE_COMBAT": "Close Combat",
     "AQUA_RING": "Aqua Ring",
     "POISON_GAS": "Poison Gas"
+    "ASSIST": "Assist",
+    "FISSURE": "Fissure",
+    "ASSURANCE": "Assurance"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -853,6 +856,12 @@
     "BALTOY": "Baltoy",
     "CLAYDOL": "Claydol",
     "HERACROSS": "Heracross",
+    "PURRLOIN": "Purrloin",
+    "LIEPARD": "Liepard",
+    "BARBOACH": "Barboach",
+    "WHISCASH": "Whiscash",
+    "SCRAGGY": "Scraggy",
+    "SCRAFTY": "Scrafty",
     "FINNEON": "Finneon",
     "LUMINEON": "Lumineon",
     "STUNKY": "Stunky",
@@ -1020,7 +1029,7 @@
     "SOLAR_BEAM": "Deals [30,60,120,SP] SPECIAL in a straight line behind the target. If the weather is SUN, targets are BURN for 3 seconds and restores 40 PP",
     "MAGMA_STORM": "The target becomes trapped within a maelstrom of fire that deals [80,SP] SPECIAL before moving to an adjacent target",
     "SLASHING_CLAW": "Deals [15,30,60,SP] to the target and WOUND it for 5 seconds. If the target is already WOUND, deals 30% bonus SPECIAL",
-    "ERUPTION": "Fires [20,30,40] projectiles in the air. Every projectile deals [30,60,120,SP] SPECIAL and BURN for 5 seconds",
+    "ERUPTION": "Fires [20,30,40] projectiles in the air. Every projectile deals [30,50,100,SP] SPECIAL and BURN for 5 seconds",
     "LUSTER_PURGE": "Launches a ball of light in a straight line that deals [25,SP] SPECIAL twice and lowers twice the SPE_DEF of all enemies hit by 1",
     "MIST_BALL": "Launches a mist bubble in a straight line that deals [25,SP] SPECIAL twice and lowers twice the AP of all enemies hit by 10%",
     "MUD_BUBBLE": "Heals the caster for [10,20,40,SP]",
@@ -1077,6 +1086,9 @@
     "CLOSE_COMBAT": "Deals [130,SP] SPECIAL and reduce the caster DEF and SPE_DEF by 2",
     "AQUA_RING": "Dives into the middle of the allied team, creating an aquatic ring that heals [20,30,50,SP] HP",
     "POISON_GAS": "A cloud of stinky gas is thrown in the face of all adjacent enemies, inflicting [15,30,60,SP] SPECIAL, POISON and PARALYSIS for 3 seconds"
+    "ASSIST": "Copy and cast an ability from an allied pokémon chosen at random",
+    "FISSURE": "Open [2,3,4] rifts. Each rift deals [25,50,75,SP] SPECIAL",
+    "ASSURANCE": "Deals [25,50,100,SP] SPECIAL. Doubles if the caster in under 50% HP"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1182,6 +1194,11 @@
     "HYDRATATION": "Hydratation",
     "COOL_BREEZE": "Cool Breeze",
     "POISON_GAS": "Poison Gas"
+    "GAS": "Gas",
+    "SHINING_RAY": "Shining Ray",
+    "LIGHT_PULSE": "Light Pulse",
+    "ETERNAL_LIGHT": "Eternal Light",
+    "MAX_ILLUMINATION": "Max Illumination"
   },
   "effect_description": {
     "STAMINA": "Gain 10 SHIELD",
@@ -1286,7 +1303,11 @@
     "WINDY": "+10% dodge chance (+20% if FLYING)",
     "NIGHT": "+20% CRIT_CHANCE\n+30% SLEEP duration",
     "HYDRATATION": "GRASS synergy is healing 5 additional HP per second under the RAIN",
-    "POISON_GAS": "Inflicts POISON every second"
+    "POISON_GAS": "Inflicts POISON every second",
+    "SHINING_RAY": "Give RUNE_PROTECT for 6s",
+    "LIGHT_PULSE": "Doubles PP generation",
+    "ETERNAL_LIGHT": "Increase AP and ATK by 30%",
+    "MAX_ILLUMINATION": "Give RESURECTION"
   },
   "item": {
     "FOSSIL_STONE": "Fossil Stone",
@@ -1453,7 +1474,11 @@
     "SPOT_PANDA": "The pokémon is immune to CONFUSION",
     "CUBONE": "Marowak is looking for a FIRE_STONE",
     "GUTS": "The pokémon gains 5 ATK as long as it is BURN or POISON",
-    "STENCH": "Leaves behind a stinking cloud that POISON any unit that breathes it"
+    "STENCH": "Leaves behind a stinking cloud that POISON any unit that breathes it",
+    "AQUA_VEIL": "Give RUNE_PROTECT under RAIN",
+    "PORYGON": "Porygon2 is looking for an UPGRADE",
+    "SLOWBRO": "Slowbro is looking for a ROCKY_HELMET",
+    "MOXIE": "Every time an enemy pokémon dies, it gains ATK equal to its stars"
   },
   "stat": {
     "ATK": "Attack",
@@ -1550,7 +1575,8 @@
     "FOSSIL": "Fossil",
     "SOUND": "Sound",
     "ARTIFICIAL": "Artificial",
-    "BABY": "Baby"
+    "BABY": "Baby",
+    "LIGHT": "Light"
   },
   "synergy_description": {
     "NORMAL": "Normal pokemons and their adjacent allies gain SHIELD when combat starts",
@@ -1579,7 +1605,8 @@
     "FOSSIL": "On their first KO, fossil pokemons come back to life with increased ATK",
     "SOUND": "Sound pokemons emit a cry when they use their abilities, waking up allies asleep and giving them bonus stats",
     "ARTIFICIAL": "Artificial pokemons gains ATK and SHIELD depending on the number of items held",
-    "BABY": "Babies can bring you Pokemon Eggs to comfort you after a defeat"
+    "BABY": "Babies can bring you Pokemon Eggs to comfort you after a defeat",
+    "LIGHT": "Light reveal a spotlight on the battlefield. The unit standing in the spotlight at the start of combat gains unique bonuses."
   },
   "title": {
     "NOVICE": "Novice",
@@ -1639,7 +1666,8 @@
     "ARCHEOLOGIST": "Archeologist",
     "ALCHEMIST": "Alchemist",
     "DENTIST": "Dentist",
-    "FISHERMAN": "Fisherman"
+    "FISHERMAN": "Fisherman",
+    "CHOSEN_ONE": "Chosen One"
   },
   "title_description": {
     "NOVICE": "Play your first game",
@@ -1699,7 +1727,8 @@
     "SHINY_SEEKER": "Have over 30 shiny pokemon avatars",
     "ARCHEOLOGIST": "Decipher the secret message of the Unowns",
     "DENTIST": "Own the angry Arbok",
-    "FISHERMAN": "Get a Gyarados"
+    "FISHERMAN": "Get a Gyarados",
+    "CHOSEN_ONE": "Max Synergy With Light type in a game"
   },
   "weather": {
     "NEUTRAL": "Calm weather",
@@ -1958,7 +1987,7 @@
   "bots": "Bots",
   "profile": "Profile",
   "search": "Search",
-  "average_place": "Average Place",
+  "average_place": "Top",
   "count": "Count",
   "meta_report": "Meta Report",
   "item_report": "Item Report",

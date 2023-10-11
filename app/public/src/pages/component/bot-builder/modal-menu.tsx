@@ -14,13 +14,15 @@ export default function ModalMenu(props: {
   pasteBinUrl: string
   createBot: () => void
   visible: boolean
+  updateBot: (newValue: string) => void
 }) {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const botData: IBot = useAppSelector((state) => state.lobby.botData)
   useEffect(() => {
     if (botData?.avatar) {
-      handleTextAreaChange(JSON.stringify(botData))
+      setJsonError("")
+      setTextArea(JSON.stringify(botData))
     }
   }, [botData])
 
@@ -36,10 +38,26 @@ export default function ModalMenu(props: {
         {t("url_created")}:<a href={props.pasteBinUrl}>{props.pasteBinUrl}</a>
       </h5>
     )
-  const [textArea, handleTextAreaChange] = useState<string>("")
+  const [textArea, setTextArea] = useState<string>("")
+  const [jsonError, setJsonError] = useState<string>("")
+
+  function handleTextAreaChange(newValue) {
+    setJsonError("")
+    try {
+      setTextArea(JSON.stringify(JSON.parse(newValue), null, 2))
+    } catch (e) {
+      setJsonError(e.message)
+    }
+  }
+
   if (props.modalMode == ModalMode.EXPORT) {
     return (
-      <Modal show={props.visible} onHide={props.hideModal} size="lg">
+      <Modal
+        show={props.visible}
+        onHide={props.hideModal}
+        size="lg"
+        id="bot-export-modal"
+      >
         <Modal.Header>
           <Modal.Title>Export</Modal.Title>
         </Modal.Header>
@@ -49,7 +67,9 @@ export default function ModalMenu(props: {
             rows={10}
             className="nes-textarea"
             defaultValue={JSON.stringify(props.bot, null, 2)}
+            onChange={(e) => handleTextAreaChange(e.target.value)}
           ></textarea>
+          {jsonError && <p className="error">{jsonError}</p>}
           <p>{t("bot_ready_submission")}</p>
           {url}
         </Modal.Body>
@@ -70,7 +90,12 @@ export default function ModalMenu(props: {
     )
   } else if (props.modalMode == ModalMode.IMPORT) {
     return (
-      <Modal show={props.visible} onHide={props.hideModal} size="lg">
+      <Modal
+        show={props.visible}
+        onHide={props.hideModal}
+        size="lg"
+        id="bot-import-modal"
+      >
         <Modal.Header>
           <Modal.Title>{t("import")}</Modal.Title>
         </Modal.Header>
@@ -101,11 +126,10 @@ export default function ModalMenu(props: {
           <textarea
             rows={10}
             value={textArea}
-            onChange={(e) => {
-              handleTextAreaChange(e.target.value)
-            }}
+            onChange={(e) => handleTextAreaChange(e.target.value)}
             className="nes-textarea"
           ></textarea>
+          {jsonError && <p className="error">{jsonError}</p>}
         </Modal.Body>
         <Modal.Footer>
           <button className="bubbly red" onClick={props.hideModal}>
