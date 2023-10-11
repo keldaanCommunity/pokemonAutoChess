@@ -238,7 +238,8 @@
     "ASSIST": "Assist",
     "FISSURE": "Fissure",
     "ASSURANCE": "Assurance",
-    "BRAVE_BIRD": "Brave Bird"
+    "BRAVE_BIRD": "Brave Bird",
+    "MAGICAL_LEAF": "Magical Leaf"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1090,7 +1091,8 @@
     "ASSIST": "Copy and cast an ability from an allied pokémon chosen at random",
     "FISSURE": "Open [2,3,4] rifts. Each rift deals [25,50,75,SP] SPECIAL",
     "ASSURANCE": "Deals [25,50,100,SP] SPECIAL. Doubles if the caster in under 50% HP",
-    "BRAVE_BIRD": "Flies away with its target dealing [30,60,90,SP] SPECIAL"
+    "BRAVE_BIRD": "Flies away with its target dealing [30,60,90,SP] SPECIAL",
+    "MAGICAL_LEAF": "The user scatters curious leaves that chase the furthest target, inflicting [10,20,40,SP] and ARMOR_REDUCTION for 3 seconds on anything in its path"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1480,7 +1482,8 @@
     "AQUA_VEIL": "Give RUNE_PROTECT under RAIN",
     "PORYGON": "Porygon2 is looking for an UPGRADE",
     "SLOWBRO": "Slowbro is looking for a ROCKY_HELMET",
-    "MOXIE": "Every time an enemy pokémon dies, it gains ATK equal to its stars"
+    "MOXIE": "Every time an enemy pokémon dies, it gains ATK equal to its stars",
+    "BELLSPROUT": "Weepinbell is looking for a LEAF_STONE"
   },
   "stat": {
     "ATK": "Attack",

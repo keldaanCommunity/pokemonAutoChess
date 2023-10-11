@@ -3560,8 +3560,8 @@ export class Bulbasaur extends Pokemon {
       2,
       AttackSprite.GRASS_RANGE,
       1,
-      100,
-      Ability.ROOT,
+      65,
+      Ability.MAGICAL_LEAF,
       shiny,
       emotion,
       false
@@ -3583,8 +3583,8 @@ export class Ivysaur extends Pokemon {
       2,
       AttackSprite.GRASS_RANGE,
       2,
-      100,
-      Ability.ROOT,
+      65,
+      Ability.MAGICAL_LEAF,
       shiny,
       emotion,
       false
@@ -3606,8 +3606,8 @@ export class Venusaur extends Pokemon {
       2,
       AttackSprite.GRASS_RANGE,
       3,
-      100,
-      Ability.ROOT,
+      65,
+      Ability.MAGICAL_LEAF,
       shiny,
       emotion,
       true
@@ -5023,7 +5023,9 @@ export class Bellsprout extends Pokemon {
       Ability.ROOT,
       shiny,
       emotion,
-      false
+      false,
+      true,
+      Passive.BELLSPROUT
     )
   }
 }
@@ -5046,7 +5048,9 @@ export class Weepinbell extends Pokemon {
       Ability.ROOT,
       shiny,
       emotion,
-      false
+      false,
+      true,
+      Passive.BELLSPROUT
     )
   }
 }
@@ -5069,6 +5073,7 @@ export class Victreebel extends Pokemon {
       Ability.ROOT,
       shiny,
       emotion,
+      true,
       true
     )
   }
@@ -8808,7 +8813,7 @@ export class Gliscor extends Pokemon {
       Ability.POISON_JAB,
       shiny,
       emotion,
-      true,
+      false,
       true,
       Passive.POISON_HEAL
     )
@@ -11843,8 +11848,8 @@ export class Snivy extends Pokemon {
       3,
       AttackSprite.GRASS_RANGE,
       1,
-      80,
-      Ability.VENOSHOCK,
+      70,
+      Ability.MAGICAL_LEAF,
       shiny,
       emotion,
       false,
@@ -11868,8 +11873,8 @@ export class Servine extends Pokemon {
       3,
       AttackSprite.GRASS_RANGE,
       2,
-      80,
-      Ability.VENOSHOCK,
+      70,
+      Ability.MAGICAL_LEAF,
       shiny,
       emotion,
       false,
@@ -11893,8 +11898,8 @@ export class Serperior extends Pokemon {
       3,
       AttackSprite.GRASS_RANGE,
       3,
-      80,
-      Ability.VENOSHOCK,
+      70,
+      Ability.MAGICAL_LEAF,
       shiny,
       emotion,
       true
