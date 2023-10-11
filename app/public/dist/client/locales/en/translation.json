@@ -233,10 +233,11 @@
     "SUPER_FANG": "Super Fang",
     "TEETER_DANCE": "Teeter Dance",
     "CLOSE_COMBAT": "Close Combat",
+    "AQUA_RING": "Aqua Ring",
+    "POISON_GAS": "Poison Gas",
     "ASSIST": "Assist",
     "FISSURE": "Fissure",
-    "ASSURANCE": "Assurance",
-    "AQUA_RING": "Aqua Ring"
+    "ASSURANCE": "Assurance"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -862,7 +863,9 @@
     "SCRAGGY": "Scraggy",
     "SCRAFTY": "Scrafty",
     "FINNEON": "Finneon",
-    "LUMINEON": "Lumineon"
+    "LUMINEON": "Lumineon",
+    "STUNKY": "Stunky",
+    "SKUNTANK": "Skuntank"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1081,10 +1084,11 @@
     "SUPER_FANG": "Deals [30,60,90,SP] SPECIAL. Double damage on GRASS pokémon",
     "TEETER_DANCE": "All other Pokémon are CONFUSION for 3 seconds, allies and enemies alike",
     "CLOSE_COMBAT": "Deals [130,SP] SPECIAL and reduce the caster DEF and SPE_DEF by 2",
+    "AQUA_RING": "Dives into the middle of the allied team, creating an aquatic ring that heals [20,30,50,SP] HP",
+    "POISON_GAS": "A cloud of stinky gas is thrown in the face of all adjacent enemies, inflicting [15,30,60,SP] SPECIAL, POISON and PARALYSIS for 3 seconds",
     "ASSIST": "Copy and cast an ability from an allied pokémon chosen at random",
     "FISSURE": "Open [2,3,4] rifts. Each rift deals [25,50,75,SP] SPECIAL",
-    "ASSURANCE": "Deals [25,50,100,SP] SPECIAL. Doubles if the caster in under 50% HP",
-    "AQUA_RING": "Dives into the middle of the allied team, creating an aquatic ring that heals [20,30,50,SP] HP"
+    "ASSURANCE": "Deals [25,50,100,SP] SPECIAL. Doubles if the caster in under 50% HP"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1189,6 +1193,7 @@
     "NIGHT": "Night",
     "HYDRATATION": "Hydratation",
     "COOL_BREEZE": "Cool Breeze",
+    "POISON_GAS": "Poison Gas",
     "GAS": "Gas",
     "SHINING_RAY": "Shining Ray",
     "LIGHT_PULSE": "Light Pulse",
@@ -1298,6 +1303,7 @@
     "WINDY": "+10% dodge chance (+20% if FLYING)",
     "NIGHT": "+20% CRIT_CHANCE\n+30% SLEEP duration",
     "HYDRATATION": "GRASS synergy is healing 5 additional HP per second under the RAIN",
+    "POISON_GAS": "Inflicts POISON every second",
     "SHINING_RAY": "Give RUNE_PROTECT for 6s",
     "LIGHT_PULSE": "Doubles PP generation",
     "ETERNAL_LIGHT": "Increase AP and ATK by 30%",
@@ -1468,6 +1474,7 @@
     "SPOT_PANDA": "The pokémon is immune to CONFUSION",
     "CUBONE": "Marowak is looking for a FIRE_STONE",
     "GUTS": "The pokémon gains 5 ATK as long as it is BURN or POISON",
+    "STENCH": "Leaves behind a stinking cloud that POISON any unit that breathes it",
     "AQUA_VEIL": "Give RUNE_PROTECT under RAIN",
     "PORYGON": "Porygon2 is looking for an UPGRADE",
     "SLOWBRO": "Slowbro is looking for a ROCKY_HELMET",

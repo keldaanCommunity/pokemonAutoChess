@@ -29,6 +29,7 @@ import Simulation from "../../../../core/simulation"
 import Player from "../../../../models/colyseus-models/player"
 import { Effect } from "../../../../types/enum/Effect"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../types/Config"
+import { delay } from "@reduxjs/toolkit/dist/utils"
 
 export default class BattleManager {
   group: GameObjects.Group
@@ -4604,9 +4605,9 @@ export default class BattleManager {
         "000"
       )
       sprite.setDepth(7)
+      sprite.anims.play(Effect.GAS)
       sprite.setScale(3, 3)
       sprite.setAlpha(0)
-      sprite.anims.play(Effect.GAS)
       this.boardEventSprites[index] = sprite
       this.group.add(sprite)
 
@@ -4614,6 +4615,30 @@ export default class BattleManager {
         targets: sprite,
         alpha: 1,
         duration: 500
+      })
+    }
+
+    if (event.type === BoardEvent.POISON_GAS) {
+      const sprite = this.scene.add.sprite(
+        coordinates[0],
+        coordinates[1],
+        Effect.GAS,
+        "000"
+      )
+      sprite.setDepth(7)
+      sprite.setScale(3, 3)
+      sprite.anims.play(Effect.GAS)
+      sprite.setTint(0xa0ff20)
+      sprite.setFlipX(true)
+      sprite.setAlpha(0)
+      this.boardEventSprites[index] = sprite
+      this.group.add(sprite)
+
+      this.scene.tweens.add({
+        targets: sprite,
+        alpha: 0.5,
+        duration: 500,
+        delay: (8 - coordinates[1]) * 100
       })
     }
   }

@@ -219,7 +219,8 @@ export enum Ability {
   ASSIST = "ASSIST",
   FISSURE = "FISSURE",
   ASSURANCE = "ASSURANCE",
-  AQUA_RING = "AQUA_RING"
+  AQUA_RING = "AQUA_RING",
+  POISON_GAS = "POISON_GAS"
 }
 
 export const CopyableAbility: { [key in Ability]: boolean } = {
@@ -443,5 +444,6 @@ export const CopyableAbility: { [key in Ability]: boolean } = {
   [Ability.ASSIST]: false,
   [Ability.FISSURE]: true,
   [Ability.ASSURANCE]: true,
-  [Ability.AQUA_RING]: true
+  [Ability.AQUA_RING]: true,
+  [Ability.POISON_GAS]: true
 }
