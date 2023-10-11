@@ -193,7 +193,8 @@ import {
   FissureStrategy,
   AssuranceStrategy,
   AquaRingStrategy,
-  PoisonGasStrategy
+  PoisonGasStrategy,
+  BraveBirdStrategy
 } from "../attack-strategy"
 import {
   HiddenPowerAStrategy,
@@ -450,5 +451,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.FISSURE]: new FissureStrategy(),
   [Ability.ASSURANCE]: new AssuranceStrategy(),
   [Ability.AQUA_RING]: new AquaRingStrategy(),
-  [Ability.POISON_GAS]: new PoisonGasStrategy()
+  [Ability.POISON_GAS]: new PoisonGasStrategy(),
+  [Ability.BRAVE_BIRD]: new BraveBirdStrategy()
 }

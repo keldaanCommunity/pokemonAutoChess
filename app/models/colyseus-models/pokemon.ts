@@ -5902,75 +5902,6 @@ export class Shiftry extends Pokemon {
   }
 }
 
-export class Starly extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      Pkm.STARLY,
-      [Synergy.NORMAL, Synergy.FLYING],
-      Rarity.COMMON,
-      Pkm.STARAVIA,
-      60,
-      5,
-      2,
-      2,
-      1,
-      AttackSprite.FLYING_MELEE,
-      1,
-      100,
-      Ability.HURRICANE,
-      shiny,
-      emotion,
-      false
-    )
-  }
-}
-
-export class Staravia extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      Pkm.STARAVIA,
-      [Synergy.NORMAL, Synergy.FLYING],
-      Rarity.COMMON,
-      Pkm.STARAPTOR,
-      120,
-      10,
-      2,
-      2,
-      1,
-      AttackSprite.FLYING_MELEE,
-      2,
-      100,
-      Ability.HURRICANE,
-      shiny,
-      emotion,
-      false
-    )
-  }
-}
-
-export class Staraptor extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      Pkm.STARAPTOR,
-      [Synergy.NORMAL, Synergy.FLYING],
-      Rarity.COMMON,
-      Pkm.DEFAULT,
-      240,
-      20,
-      2,
-      2,
-      1,
-      AttackSprite.FLYING_MELEE,
-      3,
-      100,
-      Ability.HURRICANE,
-      shiny,
-      emotion,
-      true
-    )
-  }
-}
-
 export class Charmander extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
@@ -11964,6 +11895,79 @@ export class Serperior extends Pokemon {
       3,
       80,
       Ability.VENOSHOCK,
+      shiny,
+      emotion,
+      true
+    )
+  }
+}
+
+export class Starly extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.STARLY,
+      [Synergy.NORMAL, Synergy.FLYING],
+      Rarity.HATCH,
+      Pkm.STARAVIA,
+      75,
+      6,
+      3,
+      3,
+      1,
+      AttackSprite.FLYING_MELEE,
+      1,
+      100,
+      Ability.BRAVE_BIRD,
+      shiny,
+      emotion,
+      false,
+      false,
+      Passive.HATCH
+    )
+  }
+}
+
+export class Staravia extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.STARAVIA,
+      [Synergy.NORMAL, Synergy.FLYING],
+      Rarity.HATCH,
+      Pkm.STARAPTOR,
+      130,
+      12,
+      5,
+      5,
+      1,
+      AttackSprite.FLYING_MELEE,
+      2,
+      100,
+      Ability.BRAVE_BIRD,
+      shiny,
+      emotion,
+      false,
+      false,
+      Passive.HATCH
+    )
+  }
+}
+
+export class Staraptor extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.STARAPTOR,
+      [Synergy.NORMAL, Synergy.FLYING],
+      Rarity.HATCH,
+      Pkm.DEFAULT,
+      180,
+      20,
+      7,
+      7,
+      1,
+      AttackSprite.FLYING_MELEE,
+      3,
+      100,
+      Ability.BRAVE_BIRD,
       shiny,
       emotion,
       true

@@ -39,6 +39,7 @@
 - Buff Tinkatink line: Attack ~~7/14/30~~ → 11/22/44
 - Move Slowpoke/Slowbro to additional pool
 - Give a rocky helmet to Slowbro to get a Slowking
+- Starly line is now Hatch
 
 # Changes to Synergies
 

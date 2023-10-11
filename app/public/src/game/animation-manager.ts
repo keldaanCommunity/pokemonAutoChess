@@ -840,6 +840,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.BRAVE_BIRD,
+      frames: this.game.anims.generateFrameNames(Ability.BRAVE_BIRD, {
+        start: 0,
+        end: 6,
+        zeroPad: 3
+      }),
+      duration: 600,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.AQUA_RING,
       frames: this.game.anims.generateFrameNames(Ability.AQUA_RING, {
         start: 0,
