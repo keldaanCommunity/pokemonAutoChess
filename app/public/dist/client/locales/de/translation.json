@@ -1475,7 +1475,8 @@
     "FOSSIL": "Fossil",
     "SOUND": "Klang",
     "ARTIFICIAL": "Künstlich",
-    "BABY": "Baby"
+    "BABY": "Baby",
+    "LIGHT": "Licht"
   },
   "synergy_description": {
     "NORMAL": "Normale Pokémon und ihre benachbarten Verbündeten erhalten SHIELD, wenn der Kampf beginnt",
@@ -1504,7 +1505,8 @@
     "FOSSIL": "Bei ihrem ersten KO erwachen fossile Pokémon mit erhöhter ATK wieder zum Leben",
     "SOUND": "Sound-Pokémons stoßen einen Schrei aus, wenn sie ihre Fähigkeiten einsetzen, wecken damit schlafende Verbündete und verleihen ihnen Bonuswerte",
     "ARTIFICIAL": "Künstliche Pokémon erhalten ATK und SHIELD abhängig von der Anzahl der gehaltenen Gegenstände",
-    "BABY": "Babys können dir Pokémon-Eier bringen, um dich nach einer Niederlage zu trösten"
+    "BABY": "Babys können dir Pokémon-Eier bringen, um dich nach einer Niederlage zu trösten",
+    "LIGHT": "Licht bringt einen Scheinwerfer auf das Schlachtfeld. Die Einheit, die zu Beginn des Kampfes im Rampenlicht steht, erhält einzigartige Boni."
   },
   "title": {
     "NOVICE": "Anfänger",
