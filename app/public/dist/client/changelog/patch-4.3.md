@@ -18,6 +18,8 @@
 - Scrafty
 - Finneon
 - Lumineon
+- Stinky
+- Skuntank
 
 # Changes to Pokemon & Abilities
 
@@ -40,7 +42,8 @@
 
 # Changes to Synergies
 
-New Light Synergy
+- New Light Synergy
+- Reduce Unown pool before stage 10 to favorize econ-oriented Unowns in early game
 
 # Changes to Items
 

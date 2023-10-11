@@ -54,5 +54,6 @@ export enum Passive {
   AQUA_VEIL = "AQUA_VEIL",
   PORYGON = "PORYGON",
   SLOWBRO = "SLOWBRO",
-  MOXIE = "MOXIE"
+  MOXIE = "MOXIE",
+  STENCH = "STENCH"
 }

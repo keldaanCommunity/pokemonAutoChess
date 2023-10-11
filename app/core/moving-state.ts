@@ -1,10 +1,13 @@
 import Board from "./board"
 import PokemonEntity from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
-import { PokemonActionState } from "../types/enum/Game"
+import { BoardEvent, PokemonActionState } from "../types/enum/Game"
 import { Synergy } from "../types/enum/Synergy"
 import { distanceC } from "../utils/distance"
 import { Weather } from "../types/enum/Weather"
+import { Passive } from "../types/enum/Passive"
+import { Effect } from "../types/enum/Effect"
+import { Transfer } from "../types"
 
 export default class MovingState extends PokemonState {
   update(pokemon: PokemonEntity, dt: number, board: Board, weather: string) {
@@ -48,6 +51,23 @@ export default class MovingState extends PokemonState {
       if (farthestCoordinate) {
         x = farthestCoordinate.x
         y = farthestCoordinate.y
+
+        if (pokemon.passive === Passive.STENCH) {
+          board
+            .getCellsBetween(x, y, pokemon.positionX, pokemon.positionY)
+            .forEach((cell) => {
+              if (cell.x !== x || cell.y !== y) {
+                pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
+                  simulationId: pokemon.simulation.id,
+                  type: BoardEvent.POISON_GAS,
+                  x: cell.x,
+                  y: cell.y
+                })
+                board.effects[board.columns * cell.y + cell.x] =
+                  Effect.POISON_GAS
+              }
+            })
+        }
       }
     } else {
       const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)

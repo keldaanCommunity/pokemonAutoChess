@@ -994,7 +994,7 @@ export class LeechSeedStrategy extends AttackStrategy {
       heal = 80
     }
     pokemon.handleHeal(heal, pokemon, 1)
-    target.status.triggerPoison(duration, target, pokemon, board)
+    target.status.triggerPoison(duration, target, pokemon)
   }
 }
 
@@ -1207,8 +1207,8 @@ export class PoisonJabStrategy extends AttackStrategy {
 
       if (tg) {
         tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-        tg.status.triggerPoison(4000, tg, pokemon, board)
-        pokemon.status.triggerPoison(4000, pokemon, pokemon, board)
+        tg.status.triggerPoison(4000, tg, pokemon)
+        pokemon.status.triggerPoison(4000, pokemon, pokemon)
         pokemon.moveTo(x, y, board)
       }
     }
@@ -2061,7 +2061,7 @@ export class NightmareStrategy extends AttackStrategy {
 
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value && pokemon.team != value.team) {
-        value.status.triggerPoison(duration, value, pokemon, board)
+        value.status.triggerPoison(duration, value, pokemon)
       }
     })
   }
@@ -2178,7 +2178,7 @@ export class PoisonStrategy extends AttackStrategy {
     for (let i = 0; i < count; i++) {
       const enemy = closestEnemies[i]
       if (enemy) {
-        enemy.status.triggerPoison(duration, enemy, pokemon, board)
+        enemy.status.triggerPoison(duration, enemy, pokemon)
       }
     }
   }
@@ -2836,7 +2836,7 @@ export class SludgeStrategy extends AttackStrategy {
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
         for (let i = 0; i < nbStacks; i++) {
-          cell.value.status.triggerPoison(3000, cell.value, pokemon, board)
+          cell.value.status.triggerPoison(3000, cell.value, pokemon)
         }
       }
     })
@@ -4627,7 +4627,7 @@ export class PoisonPowderStrategy extends AttackStrategy {
       )
       cells.forEach((cell) => {
         if (cell.value && cell.value.team != pokemon.team) {
-          cell.value.status.triggerPoison(5000, target, pokemon, board)
+          cell.value.status.triggerPoison(5000, target, pokemon)
           cell.value.handleSpecialDamage(
             damage,
             board,
@@ -5749,5 +5749,44 @@ export class AquaRingStrategy extends AttackStrategy {
         }
       })
     }
+  }
+}
+
+export class PoisonGasStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
+
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+    cells.forEach((cell) => {
+      const index = cell.y * board.columns + cell.x
+      board.effects[index] = Effect.POISON_GAS
+      pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
+        simulationId: pokemon.simulation.id,
+        type: BoardEvent.POISON_GAS,
+        x: cell.x,
+        y: cell.y
+      })
+
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.effects.push(Effect.POISON_GAS)
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit,
+          true
+        )
+        cell.value.status.triggerParalysis(3000, cell.value)
+        cell.value.status.triggerPoison(3000, cell.value, pokemon)
+      }
+    })
   }
 }

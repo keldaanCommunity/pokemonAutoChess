@@ -598,7 +598,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     }
     if (poisonChance > 0) {
       if (Math.random() < poisonChance) {
-        target.status.triggerPoison(4000, target, this, board)
+        target.status.triggerPoison(4000, target, this)
       }
     }
 
