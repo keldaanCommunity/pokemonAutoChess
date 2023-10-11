@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import { GameObjects } from "phaser"
 import Pokemon from "./pokemon"
 import { transformAttackCoordinate } from "../../pages/utils/utils"
@@ -2712,6 +2713,53 @@ export default class BattleManager {
                 specialProjectile.destroy()
               }
             )
+            break
+
+          case Ability.MAGICAL_LEAF:
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              "MAGICAL_LEAF_CHARGE",
+              "0"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play("MAGICAL_LEAF_CHARGE")
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            const targetCoordinates = transformAttackCoordinate(
+              targetX,
+              targetY,
+              this.flip
+            )
+            const charge = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.MAGICAL_LEAF,
+              "0"
+            )
+            charge.setDepth(7)
+            charge.setScale(2, 2)
+            charge.anims.play(Ability.MAGICAL_LEAF)
+            this.scene.tweens.add({
+              targets: charge,
+              x: targetCoordinates[0],
+              y: targetCoordinates[1],
+              ease: "linear",
+              duration: 500,
+              onComplete: () => {
+                charge.destroy()
+              }
+            })
             break
 
           case Ability.BRAVE_BIRD:

@@ -109,6 +109,16 @@ export default class LoadingManager {
       "/assets/attacks"
     )
     scene.load.multiatlas(
+      "MAGICAL_LEAF",
+      "/assets/attacks/MAGICAL_LEAF.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
+      "MAGICAL_LEAF_CHARGE",
+      "/assets/attacks/MAGICAL_LEAF_CHARGE.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
       "BRAVE_BIRD",
       "/assets/attacks/BRAVE_BIRD.json",
       "/assets/attacks"

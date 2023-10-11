@@ -40,6 +40,7 @@
 - Move Slowpoke/Slowbro to additional pool
 - Give a rocky helmet to Slowbro to get a Slowking
 - Starly line is now Hatch
+- New ability Magical Leaf for Bulbasaur & Snivy
 
 # Changes to Synergies
 

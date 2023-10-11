@@ -73,7 +73,8 @@ export class AttackStrategy {
         Ability.MAGNET_RISE,
         Ability.ATTRACT,
         Ability.ASSIST,
-        Ability.FISSURE
+        Ability.FISSURE,
+        Ability.MAGICAL_LEAF
       ].includes(pokemon.skill)
     ) {
       pokemon.simulation.room.broadcast(Transfer.ABILITY, {
@@ -5820,6 +5821,51 @@ export class BraveBirdStrategy extends AttackStrategy {
           crit
         )
       }
+    }
+  }
+}
+
+export class MagicalLeafStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10
+
+    const farthestCoordinate = state.getFarthestTargetCoordinate(pokemon, board)
+    if (farthestCoordinate) {
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: Ability.MAGICAL_LEAF,
+        positionX: pokemon.positionX,
+        positionY: pokemon.positionY,
+        targetX: farthestCoordinate.x,
+        targetY: farthestCoordinate.y,
+        orientation: pokemon.orientation
+      })
+
+      const cells = board.getCellsBetween(
+        pokemon.positionX,
+        pokemon.positionY,
+        farthestCoordinate.x,
+        farthestCoordinate.y
+      )
+      cells.forEach((cell) => {
+        if (cell.value && cell.value.team != pokemon.team) {
+          cell.value.status.triggerArmorReduction(3000)
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      })
     }
   }
 }
