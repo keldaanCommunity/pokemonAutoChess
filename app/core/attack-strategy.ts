@@ -6,7 +6,7 @@ import Board from "./board"
 import PokemonEntity from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
 import { Synergy } from "../types/enum/Synergy"
-import { Ability, CopyableAbility } from "../types/enum/Ability"
+import { Ability } from "../types/enum/Ability"
 import PokemonFactory from "../models/pokemon-factory"
 import { Pkm } from "../types/enum/Pokemon"
 import {
@@ -26,6 +26,7 @@ import { Passive } from "../types/enum/Passive"
 import { AbilityStrategy } from "./abilities"
 
 export class AttackStrategy {
+  copyable = true // if true, can be copied by mimic, metronome...
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -414,7 +415,7 @@ export class KnowledgeThiefStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    if (CopyableAbility[target.skill]) {
+    if (AbilityStrategy[target.skill].copyable) {
       AbilityStrategy[target.skill].process(pokemon, state, board, target, crit)
     }
   }
@@ -3983,7 +3984,9 @@ export class MetronomeStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target, crit)
 
     const skill = pickRandomIn(
-      (Object.keys(Ability) as Ability[]).filter((a) => CopyableAbility[a])
+      (Object.keys(Ability) as Ability[]).filter(
+        (a) => AbilityStrategy[a].copyable
+      )
     )
 
     pokemon.simulation.room.broadcast(Transfer.ABILITY, {
@@ -4332,7 +4335,7 @@ export class MimicStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    if (CopyableAbility[target.skill]) {
+    if (AbilityStrategy[target.skill].copyable) {
       AbilityStrategy[target.skill].process(pokemon, state, board, target, crit)
     }
   }
@@ -5630,7 +5633,10 @@ export class AssistStrategy extends AttackStrategy {
       board.cells
         .filter(
           (v) =>
-            v && v.team === pokemon.team && v.skill && CopyableAbility[v.skill]
+            v &&
+            v.team === pokemon.team &&
+            v.skill &&
+            AbilityStrategy[v.skill].copyable
         )
         .map((v) => v?.skill)
     )
