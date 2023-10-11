@@ -129,6 +129,16 @@ export default function BotBuilder() {
     }
   }
 
+  function updateBot(newValue: string) {
+    try {
+      const b: IBot = JSON.parse(newValue)
+      setBot(rewriteBotRoundsRequiredto1(b))
+      setQueryParams({ bot: b.id })
+    } catch (e) {
+      alert(e)
+    }
+  }
+
   function changeAvatar(pkm: PkmWithConfig) {
     bot.name = pkm.name.toUpperCase()
     bot.avatar = getAvatarString(PkmIndex[pkm.name], pkm.shiny, pkm.emotion)
@@ -251,16 +261,13 @@ export default function BotBuilder() {
 
       <ModalMenu
         visible={modalVisible}
-        showModal={(mode: ModalMode) => {
-          setModalMode(mode)
-          setModalVisible(true)
-        }}
         bot={bot}
         hideModal={() => {
           setModalVisible(false)
         }}
         modalMode={modalMode}
         importBot={importBot}
+        updateBot={updateBot}
         pasteBinUrl={pastebinUrl}
         createBot={create}
       />
