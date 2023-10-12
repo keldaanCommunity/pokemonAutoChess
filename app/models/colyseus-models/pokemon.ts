@@ -5511,7 +5511,9 @@ export class Cleffa extends Pokemon {
       Ability.METRONOME,
       shiny,
       emotion,
-      false
+      false,
+      true,
+      Passive.CLEFAIRY
     )
   }
 }
@@ -5534,7 +5536,9 @@ export class Clefairy extends Pokemon {
       Ability.METRONOME,
       shiny,
       emotion,
-      false
+      true,
+      true,
+      Passive.CLEFAIRY
     )
   }
 }
@@ -5557,7 +5561,9 @@ export class Clefable extends Pokemon {
       Ability.METRONOME,
       shiny,
       emotion,
-      true
+      true,
+      true,
+      Passive.CLEFAIRY
     )
   }
 }
