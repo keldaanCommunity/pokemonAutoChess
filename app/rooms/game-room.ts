@@ -1139,6 +1139,15 @@ export default class GameRoom extends Room<GameState> {
             )
           }
           break
+        case Pkm.CLEFAIRY:
+          if (item === Item.MOON_STONE) {
+            newPokemon = PokemonFactory.transformPokemon(
+              pokemon,
+              Pkm.CLEFABLE,
+              player
+            )
+          }
+          break
       }
 
       if (newPokemon) {

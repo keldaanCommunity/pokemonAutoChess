@@ -184,7 +184,6 @@ export const CommonShop = new Array<Pkm>(
   Pkm.AZURILL,
   Pkm.ZUBAT,
   Pkm.MAREEP,
-  Pkm.CLEFFA,
   Pkm.CATERPIE,
   Pkm.WEEDLE,
   Pkm.PIDGEY,

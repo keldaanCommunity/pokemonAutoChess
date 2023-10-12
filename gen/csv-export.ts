@@ -71,7 +71,9 @@ Object.values(Pkm)
       const familyTypes = [
         ...new Set(
           family.flatMap((p) => [
-            ...PokemonFactory.createPokemonFromName(p as Pkm).types
+            ...Array.from(
+              PokemonFactory.createPokemonFromName(p as Pkm).types.values()
+            )
           ])
         )
       ]
