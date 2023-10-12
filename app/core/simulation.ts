@@ -952,6 +952,7 @@ export default class Simulation extends Schema implements ISimulation {
         case Effect.AROMATIC_MIST:
         case Effect.FAIRY_WIND:
         case Effect.STRANGE_STEAM:
+        case Effect.MOON_FORCE:
           if (types.includes(Synergy.FAIRY)) {
             pokemon.effects.push(effect)
           }
