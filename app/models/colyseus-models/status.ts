@@ -88,9 +88,9 @@ export default class Status extends Schema implements IStatus {
     }
 
     if (
-      pokemon.effects.includes(Effect.STEALTH_ROCKS) &&
-      !pokemon.types.includes(Synergy.ROCK) &&
-      !pokemon.types.includes(Synergy.FLYING) &&
+      pokemon.effects.has(Effect.STEALTH_ROCKS) &&
+      !pokemon.types.has(Synergy.ROCK) &&
+      !pokemon.types.has(Synergy.FLYING) &&
       !this.wound
     ) {
       pokemon.handleDamage({
