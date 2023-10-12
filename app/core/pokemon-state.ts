@@ -177,13 +177,13 @@ export default class PokemonState {
 
       if (
         attackType !== AttackType.TRUE &&
-        (pokemon.effects.includes(Effect.GUTS) ||
-          pokemon.effects.includes(Effect.DEFIANT) ||
-          pokemon.effects.includes(Effect.JUSTIFIED))
+        (pokemon.effects.has(Effect.GUTS) ||
+          pokemon.effects.has(Effect.DEFIANT) ||
+          pokemon.effects.has(Effect.JUSTIFIED))
       ) {
-        const damageBlocked = pokemon.effects.includes(Effect.JUSTIFIED)
+        const damageBlocked = pokemon.effects.has(Effect.JUSTIFIED)
           ? 10
-          : pokemon.effects.includes(Effect.DEFIANT)
+          : pokemon.effects.has(Effect.DEFIANT)
           ? 7
           : 4
         reducedDamage = reducedDamage - damageBlocked
@@ -291,15 +291,15 @@ export default class PokemonState {
         if (pokemon.flyingProtection > 0 && pokemon.life > 0) {
           const pcLife = pokemon.life / pokemon.hp
 
-          if (pokemon.effects.includes(Effect.TAILWIND) && pcLife < 0.2) {
+          if (pokemon.effects.has(Effect.TAILWIND) && pcLife < 0.2) {
             pokemon.flyAway(board)
           } else if (
-            pokemon.effects.includes(Effect.FEATHER_DANCE) &&
+            pokemon.effects.has(Effect.FEATHER_DANCE) &&
             pcLife < 0.2
           ) {
             pokemon.status.triggerProtect(1500)
             pokemon.flyAway(board)
-          } else if (pokemon.effects.includes(Effect.MAX_AIRSTREAM)) {
+          } else if (pokemon.effects.has(Effect.MAX_AIRSTREAM)) {
             if (
               (pokemon.flyingProtection === 2 && pcLife < 0.5) ||
               (pokemon.flyingProtection === 1 && pcLife < 0.2)
@@ -307,7 +307,7 @@ export default class PokemonState {
               pokemon.status.triggerProtect(2000)
               pokemon.flyAway(board)
             }
-          } else if (pokemon.effects.includes(Effect.MAX_GUARD)) {
+          } else if (pokemon.effects.has(Effect.MAX_GUARD)) {
             if (
               (pokemon.flyingProtection === 2 && pcLife < 0.5) ||
               (pokemon.flyingProtection === 1 && pcLife < 0.2)
@@ -330,23 +330,20 @@ export default class PokemonState {
 
       if (!pokemon.life || pokemon.life <= 0) {
         if (pokemon.hasSynergyEffect(Synergy.FOSSIL)) {
-          const healBonus = pokemon.effects.includes(Effect.FORGOTTEN_POWER)
+          const healBonus = pokemon.effects.has(Effect.FORGOTTEN_POWER)
             ? 1
-            : pokemon.effects.includes(Effect.ELDER_POWER)
+            : pokemon.effects.has(Effect.ELDER_POWER)
             ? 0.8
             : 0.4
-          const attackBonus = pokemon.effects.includes(Effect.FORGOTTEN_POWER)
+          const attackBonus = pokemon.effects.has(Effect.FORGOTTEN_POWER)
             ? 1
-            : pokemon.effects.includes(Effect.ELDER_POWER)
+            : pokemon.effects.has(Effect.ELDER_POWER)
             ? 0.6
             : 0.3
           pokemon.life = pokemon.hp * healBonus
           pokemon.addAttack(pokemon.baseAtk * attackBonus)
-          pokemon.effects.splice(
-            pokemon.effects.findIndex((e) =>
-              SynergyEffects[Synergy.FOSSIL].includes(e)
-            ),
-            1
+          SynergyEffects[Synergy.FOSSIL].forEach((e) =>
+            pokemon.effects.delete(e)
           )
         } else if (pokemon.status.resurection) {
           pokemon.status.triggerResurection(pokemon)
@@ -362,9 +359,9 @@ export default class PokemonState {
             }
           })
         } else {
-          const isWorkUp = pokemon.effects.includes(Effect.BULK_UP)
-          const isRage = pokemon.effects.includes(Effect.RAGE)
-          const isAngerPoint = pokemon.effects.includes(Effect.ANGER_POINT)
+          const isWorkUp = pokemon.effects.has(Effect.BULK_UP)
+          const isRage = pokemon.effects.has(Effect.RAGE)
+          const isAngerPoint = pokemon.effects.has(Effect.ANGER_POINT)
 
           if (isWorkUp || isRage || isAngerPoint) {
             const heal = 30
@@ -380,7 +377,7 @@ export default class PokemonState {
               if (
                 value !== undefined &&
                 value.team == pokemon.team &&
-                value.types.includes(Synergy.FIELD)
+                value.types.has(Synergy.FIELD)
               ) {
                 const _pokemon = pokemon // beware of closure vars
                 pokemon.simulation.room.clock.setTimeout(() => {
@@ -435,13 +432,12 @@ export default class PokemonState {
         }
 
         if (pokemon.team == Team.BLUE_TEAM) {
-          pokemon.simulation.blueEffects =
-            pokemon.simulation.blueEffects.filter(
-              (x) => !effectsRemovedList.includes(x)
-            )
+          effectsRemovedList.forEach((x) =>
+            pokemon.simulation.blueEffects.delete(x)
+          )
         } else {
-          pokemon.simulation.redEffects = pokemon.simulation.redEffects.filter(
-            (x) => !effectsRemovedList.includes(x)
+          effectsRemovedList.forEach((x) =>
+            pokemon.simulation.redEffects.delete(x)
           )
         }
       }
@@ -468,9 +464,9 @@ export default class PokemonState {
     }
 
     if (
-      pokemon.effects.includes(Effect.TILLER) ||
-      pokemon.effects.includes(Effect.DIGGER) ||
-      pokemon.effects.includes(Effect.DRILLER)
+      pokemon.effects.has(Effect.TILLER) ||
+      pokemon.effects.has(Effect.DIGGER) ||
+      pokemon.effects.has(Effect.DRILLER)
     ) {
       const MAX_GROUND_STACKS = 5
       if (pokemon.count.growGroundCount < MAX_GROUND_STACKS) {
@@ -478,15 +474,15 @@ export default class PokemonState {
         if (pokemon.growGroundTimer <= 0) {
           pokemon.growGroundTimer = 3000
           pokemon.count.growGroundCount += 1
-          if (pokemon.effects.includes(Effect.TILLER)) {
+          if (pokemon.effects.has(Effect.TILLER)) {
             pokemon.addDefense(1)
             pokemon.addSpecialDefense(1)
             pokemon.addAttack(1)
-          } else if (pokemon.effects.includes(Effect.DIGGER)) {
+          } else if (pokemon.effects.has(Effect.DIGGER)) {
             pokemon.addDefense(2)
             pokemon.addSpecialDefense(2)
             pokemon.addAttack(2)
-          } else if (pokemon.effects.includes(Effect.DRILLER)) {
+          } else if (pokemon.effects.has(Effect.DRILLER)) {
             pokemon.addDefense(3)
             pokemon.addSpecialDefense(3)
             pokemon.addAttack(3)
@@ -496,18 +492,18 @@ export default class PokemonState {
     }
 
     if (
-      pokemon.effects.includes(Effect.INGRAIN) ||
-      pokemon.effects.includes(Effect.GROWTH) ||
-      pokemon.effects.includes(Effect.SPORE)
+      pokemon.effects.has(Effect.INGRAIN) ||
+      pokemon.effects.has(Effect.GROWTH) ||
+      pokemon.effects.has(Effect.SPORE)
     ) {
       if (pokemon.grassHealCooldown - dt <= 0) {
-        let heal = pokemon.effects.includes(Effect.SPORE)
+        let heal = pokemon.effects.has(Effect.SPORE)
           ? 30
-          : pokemon.effects.includes(Effect.GROWTH)
+          : pokemon.effects.has(Effect.GROWTH)
           ? 15
           : 8
         if (
-          pokemon.effects.includes(Effect.HYDRATATION) &&
+          pokemon.effects.has(Effect.HYDRATATION) &&
           pokemon.simulation.weather === Weather.RAIN
         ) {
           heal += 5
@@ -527,7 +523,7 @@ export default class PokemonState {
 
     if (
       pokemon.simulation.weather === Weather.SANDSTORM &&
-      pokemon.types.includes(Synergy.GROUND) === false
+      pokemon.types.has(Synergy.GROUND) === false
     ) {
       pokemon.sandstormDamageTimer -= dt
       if (pokemon.sandstormDamageTimer <= 0) {

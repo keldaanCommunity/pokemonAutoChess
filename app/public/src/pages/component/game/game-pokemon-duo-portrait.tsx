@@ -67,7 +67,7 @@ export default function GamePokemonDuoPortrait(props: {
         </React.Fragment>
       ))}
       <ul className="game-pokemon-portrait-types">
-        {duo[0].types.map((type) => {
+        {Array.from(duo[0].types.values()).map((type) => {
           return (
             <li key={type}>
               <SynergyIcon type={type} size="1.4vw" />

@@ -11,7 +11,7 @@ const dataAll = {}
 
   Object.values(Pkm).forEach((pkm) => {
     const pokemon = PokemonFactory.createPokemonFromName(pkm)
-    if (pokemon.types.includes(type) && pokemon.skill != Ability.DEFAULT) {
+    if (pokemon.types.has(type) && pokemon.skill != Ability.DEFAULT) {
       pokemons.push(pokemon)
     }
   })

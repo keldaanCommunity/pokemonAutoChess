@@ -80,7 +80,7 @@ export class OnShopCommand extends Command<
     const cost = PokemonFactory.getBuyPrice(name)
     const benchSize = this.room.getBenchSize(player.board)
 
-    let canBuy =
+    const canBuy =
       player.money >= cost &&
       (benchSize < 8 ||
         (this.room.getPossibleEvolution(player.board, pokemon.name) &&
@@ -108,7 +108,7 @@ export class OnShopCommand extends Command<
 
     if (
       pokemon.passive === Passive.UNOWN &&
-      player.effects.list.includes(Effect.EERIE_SPELL)
+      player.effects.has(Effect.EERIE_SPELL)
     ) {
       this.state.shop.assignShop(player, true, this.state.stageLevel)
     } else {
@@ -776,7 +776,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             break
         }
       })
-      if (effects.length >= 5) {
+      if (effects.size >= 5) {
         player.titles.add(Title.HARLEQUIN)
       }
       let shield = 0
@@ -1046,13 +1046,13 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       if (
         this.room.getBenchSize(player.board) < 8 &&
         !isAfterPVE &&
-        (player.effects.list.includes(Effect.RAIN_DANCE) ||
-          player.effects.list.includes(Effect.DRIZZLE) ||
-          player.effects.list.includes(Effect.PRIMORDIAL_SEA))
+        (player.effects.has(Effect.RAIN_DANCE) ||
+          player.effects.has(Effect.DRIZZLE) ||
+          player.effects.has(Effect.PRIMORDIAL_SEA))
       ) {
-        const fishingLevel = player.effects.list.includes(Effect.PRIMORDIAL_SEA)
+        const fishingLevel = player.effects.has(Effect.PRIMORDIAL_SEA)
           ? 3
-          : player.effects.list.includes(Effect.DRIZZLE)
+          : player.effects.has(Effect.DRIZZLE)
           ? 2
           : 1
         const pkm = this.state.shop.fishPokemon(player, fishingLevel)
@@ -1199,10 +1199,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         if (
           this.room.getBenchSize(player.board) < 8 &&
           player.getLastBattleResult() == BattleResult.DEFEAT &&
-          (player.effects.list.includes(Effect.HATCHER) ||
-            player.effects.list.includes(Effect.BREEDER))
+          (player.effects.has(Effect.HATCHER) ||
+            player.effects.has(Effect.BREEDER))
         ) {
-          const eggChance = player.effects.list.includes(Effect.BREEDER)
+          const eggChance = player.effects.has(Effect.BREEDER)
             ? 1
             : 0.2 * player.streak
           if (chance(eggChance)) {

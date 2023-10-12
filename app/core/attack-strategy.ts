@@ -46,19 +46,19 @@ export class AttackStrategy {
         if (ally && pokemon.team === ally.team) {
           ally.status.sleep = false
           if (
-            pokemon.effects.includes(Effect.LARGO) ||
-            pokemon.effects.includes(Effect.ALLEGRO) ||
-            pokemon.effects.includes(Effect.PRESTO)
+            pokemon.effects.has(Effect.LARGO) ||
+            pokemon.effects.has(Effect.ALLEGRO) ||
+            pokemon.effects.has(Effect.PRESTO)
           ) {
             ally.addAttack(chimechoBoost ? 2 : 1, false)
           }
           if (
-            pokemon.effects.includes(Effect.ALLEGRO) ||
-            pokemon.effects.includes(Effect.PRESTO)
+            pokemon.effects.has(Effect.ALLEGRO) ||
+            pokemon.effects.has(Effect.PRESTO)
           ) {
             ally.addAttackSpeed(chimechoBoost ? 10 : 5, false)
           }
-          if (pokemon.effects.includes(Effect.PRESTO)) {
+          if (pokemon.effects.has(Effect.PRESTO)) {
             const manaBoost = chimechoBoost ? 6 : 3
             ally.setPP(ally.pp + manaBoost)
           }
@@ -89,7 +89,7 @@ export class AttackStrategy {
       })
     }
 
-    if (pokemon.types.includes(Synergy.SOUND)) {
+    if (pokemon.types.has(Synergy.SOUND)) {
       soundBoost()
       if (pokemon.passive === Passive.MEGA_LAUNCHER) {
         soundBoost()
@@ -152,13 +152,13 @@ export class BlueFlareStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target, crit)
     let damage = 50
     let multiplier = 0
-    if (pokemon.effects.includes(Effect.BLAZE)) {
+    if (pokemon.effects.has(Effect.BLAZE)) {
       multiplier = 1
-    } else if (pokemon.effects.includes(Effect.VICTORY_STAR)) {
+    } else if (pokemon.effects.has(Effect.VICTORY_STAR)) {
       multiplier = 2
-    } else if (pokemon.effects.includes(Effect.DROUGHT)) {
+    } else if (pokemon.effects.has(Effect.DROUGHT)) {
       multiplier = 3
-    } else if (pokemon.effects.includes(Effect.DESOLATE_LAND)) {
+    } else if (pokemon.effects.has(Effect.DESOLATE_LAND)) {
       multiplier = 4
     }
     damage += multiplier * 20
@@ -192,9 +192,9 @@ export class FusionBoltStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target, crit)
     let damage = 50
     let multiplier = 0
-    if (pokemon.effects.includes(Effect.RISING_VOLTAGE)) {
+    if (pokemon.effects.has(Effect.RISING_VOLTAGE)) {
       multiplier = 1
-    } else if (pokemon.effects.includes(Effect.OVERDRIVE)) {
+    } else if (pokemon.effects.has(Effect.OVERDRIVE)) {
       multiplier = 2
     }
     damage += multiplier * 40
@@ -510,7 +510,7 @@ export class ElectricSurgeStrategy extends AttackStrategy {
       if (
         ally &&
         pokemon.team == ally.team &&
-        ally.types.includes(Synergy.ELECTRIC)
+        ally.types.has(Synergy.ELECTRIC)
       ) {
         ally.addAttackSpeed(buff, true)
       }
@@ -533,7 +533,7 @@ export class PsychicSurgeStrategy extends AttackStrategy {
         ally &&
         ally !== pokemon &&
         pokemon.team == ally.team &&
-        ally.types.includes(Synergy.PSYCHIC)
+        ally.types.has(Synergy.PSYCHIC)
       ) {
         ally.addAbilityPower(buff, true)
       }
@@ -552,11 +552,7 @@ export class MistySurgeStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target, crit)
     const ppGain = Math.round(30 * (1 + pokemon.ap / 100))
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
-      if (
-        ally &&
-        pokemon.team == ally.team &&
-        ally.types.includes(Synergy.FAIRY)
-      ) {
+      if (ally && pokemon.team == ally.team && ally.types.has(Synergy.FAIRY)) {
         ally.setPP(ally.pp + ppGain)
       }
     })
@@ -574,11 +570,7 @@ export class GrassySurgeStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target, crit)
     const buff = 5
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
-      if (
-        ally &&
-        pokemon.team == ally.team &&
-        ally.types.includes(Synergy.GRASS)
-      ) {
+      if (ally && pokemon.team == ally.team && ally.types.has(Synergy.GRASS)) {
         ally.addAttack(buff, true)
       }
     })
@@ -797,11 +789,7 @@ export class ElectroBoostStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     board.forEach((x, y, tg) => {
-      if (
-        tg &&
-        pokemon.team == tg.team &&
-        tg.types.includes(Synergy.ELECTRIC)
-      ) {
+      if (tg && pokemon.team == tg.team && tg.types.has(Synergy.ELECTRIC)) {
         tg.status.triggerRuneProtect(5000)
       }
     })
@@ -1408,13 +1396,13 @@ export class AuroraBeamStrategy extends AttackStrategy {
           crit
         )
         let freezeChance = 0
-        if (pokemon.effects.includes(Effect.CHILLY)) {
+        if (pokemon.effects.has(Effect.CHILLY)) {
           freezeChance = 0.1
-        } else if (pokemon.effects.includes(Effect.FROSTY)) {
+        } else if (pokemon.effects.has(Effect.FROSTY)) {
           freezeChance = 0.2
-        } else if (pokemon.effects.includes(Effect.FREEZING)) {
+        } else if (pokemon.effects.has(Effect.FREEZING)) {
           freezeChance = 0.3
-        } else if (pokemon.effects.includes(Effect.SHEER_COLD)) {
+        } else if (pokemon.effects.has(Effect.SHEER_COLD)) {
           freezeChance = 0.4
         }
         if (chance(freezeChance)) {
@@ -2394,7 +2382,7 @@ export class RockSlideStrategy extends AttackStrategy {
       damage = 120
     }
 
-    if (target.types.includes(Synergy.FLYING)) {
+    if (target.types.has(Synergy.FLYING)) {
       damage = damage * 2
     }
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
@@ -2814,7 +2802,7 @@ export class ChargeStrategy extends AttackStrategy {
       if (
         ally &&
         pokemon.team == ally.team &&
-        ally.types.includes(Synergy.ELECTRIC)
+        ally.types.has(Synergy.ELECTRIC)
       ) {
         ally.addAttack(pokemon.baseAtk * buff, true)
         ally.addAttackSpeed(buff * 100, true)
@@ -3629,7 +3617,7 @@ export class TeleportStrategy extends AttackStrategy {
       const entity = board.getValue(potentialCells[i][0], potentialCells[i][1])
       if (entity === undefined) {
         pokemon.moveTo(potentialCells[i][0], potentialCells[i][1], board)
-        pokemon.effects.push(Effect.TELEPORT_NEXT_ATTACK)
+        pokemon.effects.add(Effect.TELEPORT_NEXT_ATTACK)
         break
       }
     }
@@ -3722,17 +3710,17 @@ export class ThiefStrategy extends AttackStrategy {
     })
 
     // update artificial synergy bonuses
-    if (pokemon.effects.includes(Effect.DUBIOUS_DISC)) {
+    if (pokemon.effects.has(Effect.DUBIOUS_DISC)) {
       pokemon.addAttack(4 * l, true)
       pokemon.addShield(20 * l, pokemon)
     }
 
-    if (pokemon.effects.includes(Effect.LINK_CABLE)) {
+    if (pokemon.effects.has(Effect.LINK_CABLE)) {
       pokemon.addAttack(7 * l, true)
       pokemon.addShield(30 * l, pokemon)
     }
 
-    if (pokemon.effects.includes(Effect.GOOGLE_SPECS)) {
+    if (pokemon.effects.has(Effect.GOOGLE_SPECS)) {
       pokemon.addAttack(10 * l, true)
       pokemon.addShield(50 * l, pokemon)
     }
@@ -5399,7 +5387,7 @@ export class SmogStrategy extends AttackStrategy {
       board.effects[index] = Effect.GAS
       if (cell.value) {
         if (!effectAlreadyExisting) {
-          cell.value.effects.push(Effect.GAS)
+          cell.value.effects.add(Effect.GAS)
         }
         cell.value.handleSpecialDamage(
           damage,
@@ -5581,7 +5569,7 @@ export class SuperFangStrategy extends AttackStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     let damage = pokemon.stars === 3 ? 90 : pokemon.stars === 2 ? 60 : 30
-    if (target.types.includes(Synergy.GRASS)) {
+    if (target.types.has(Synergy.GRASS)) {
       damage *= 2
     }
     target.handleSpecialDamage(
@@ -5787,7 +5775,7 @@ export class PoisonGasStrategy extends AttackStrategy {
       })
 
       if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.effects.push(Effect.POISON_GAS)
+        cell.value.effects.add(Effect.POISON_GAS)
         cell.value.handleSpecialDamage(
           damage,
           board,
@@ -5895,7 +5883,8 @@ export class StealthRocksStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       const index = cell.y * board.columns + cell.x
-      const effectAlreadyExisting = board.effects[index] === Effect.STEALTH_ROCKS
+      const effectAlreadyExisting =
+        board.effects[index] === Effect.STEALTH_ROCKS
       if (board.effects[index] === Effect.STEALTH_ROCKS) return // already on this cell
       board.effects[index] = Effect.STEALTH_ROCKS
 
@@ -5908,7 +5897,7 @@ export class StealthRocksStrategy extends AttackStrategy {
 
       if (cell.value) {
         if (!effectAlreadyExisting) {
-          cell.value.effects.push(Effect.STEALTH_ROCKS)
+          cell.value.effects.add(Effect.STEALTH_ROCKS)
         }
         cell.value.handleSpecialDamage(
           damage,
