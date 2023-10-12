@@ -26,7 +26,7 @@ import {
 } from "../../types/Config"
 import { Synergy } from "../../types/enum/Synergy"
 import GameState from "../../rooms/states/game-state"
-import { entries } from "../../utils/schemas"
+import { entries, keys, values } from "../../utils/schemas"
 
 const PLAYER_VELOCITY = 2
 const ITEM_ROTATION_SPEED = 0.0004
@@ -331,7 +331,7 @@ export class MiniGame {
         portal.x = body.position.x
         portal.y = body.position.y
         const t = this.engine.timing.timestamp * SYMBOL_ROTATION_SPEED
-        const symbols = [...this.symbols!.values()].filter(
+        const symbols = values(this.symbols!).filter(
           (symbol) => symbol.portalId === portal.id
         )
         symbols.forEach((symbol) => {
@@ -416,8 +416,8 @@ export class MiniGame {
     })
 
     // randomly distribute symbols accross portals
-    const portalIds = shuffleArray([...this.portals!.keys()])
-    const symbols = shuffleArray([...this.symbols!.values()])
+    const portalIds = shuffleArray(keys(this.portals!))
+    const symbols = shuffleArray(values(this.symbols!))
     symbols.forEach((symbol, i) => {
       setTimeout(() => {
         symbol.index = Math.floor(i / portalIds.length)
@@ -500,9 +500,9 @@ export class MiniGame {
 
       if (avatar.portalId && player) {
         const symbols = [...(this.symbols?.values() ?? [])].filter(
-          (symbol) => symbol.portalId === avatar.portalId
-        )
-        if (state.stageLevel === PortalCarouselStages[0]) {
+              (symbol) => symbol.portalId === avatar.portalId
+            )
+                  if (state.stageLevel === PortalCarouselStages[0]) {
           state.shop.assignUniquePropositions(
             player,
             UniqueShop,

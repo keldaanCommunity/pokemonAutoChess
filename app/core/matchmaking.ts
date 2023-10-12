@@ -4,12 +4,13 @@ import GameState from "../rooms/states/game-state"
 import { Emotion } from "../types"
 import { PkmIndex, Pkm } from "../types/enum/Pokemon"
 import { logger } from "../utils/logger"
+import { values } from "../utils/schemas"
 
 export type Matchup = { a: Player; b: Player; count: number; ghost?: boolean }
 
 export function selectMatchups(state: GameState): Matchup[] {
   const matchups: Matchup[] = []
-  let players = [...state.players.values()].filter((p) => p.alive)
+  let players = values(state.players).filter((p) => p.alive)
   for (let i = 0; i < players.length; i++) {
     for (let j = i + 1; j < players.length; j++) {
       const a = players[i],

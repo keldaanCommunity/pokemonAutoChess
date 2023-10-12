@@ -15,6 +15,7 @@ import { AbilityStrategy } from "."
 import { Transfer } from "../../types"
 
 export class HiddenPowerStrategy extends AttackStrategy {
+  copyable = false
   process(
     unown: PokemonEntity,
     state: PokemonState,

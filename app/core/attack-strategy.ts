@@ -6,7 +6,7 @@ import Board from "./board"
 import PokemonEntity from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
 import { Synergy } from "../types/enum/Synergy"
-import { Ability, CopyableAbility } from "../types/enum/Ability"
+import { Ability } from "../types/enum/Ability"
 import PokemonFactory from "../models/pokemon-factory"
 import { Pkm } from "../types/enum/Pokemon"
 import {
@@ -26,6 +26,7 @@ import { Passive } from "../types/enum/Passive"
 import { AbilityStrategy } from "./abilities"
 
 export class AttackStrategy {
+  copyable = true // if true, can be copied by mimic, metronome...
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -414,7 +415,7 @@ export class KnowledgeThiefStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    if (CopyableAbility[target.skill]) {
+    if (AbilityStrategy[target.skill].copyable) {
       AbilityStrategy[target.skill].process(pokemon, state, board, target, crit)
     }
   }
@@ -3971,7 +3972,9 @@ export class MetronomeStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target, crit)
 
     const skill = pickRandomIn(
-      (Object.keys(Ability) as Ability[]).filter((a) => CopyableAbility[a])
+      (Object.keys(Ability) as Ability[]).filter(
+        (a) => AbilityStrategy[a].copyable
+      )
     )
 
     pokemon.simulation.room.broadcast(Transfer.ABILITY, {
@@ -4320,7 +4323,7 @@ export class MimicStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    if (CopyableAbility[target.skill]) {
+    if (AbilityStrategy[target.skill].copyable) {
       AbilityStrategy[target.skill].process(pokemon, state, board, target, crit)
     }
   }
@@ -5379,10 +5382,13 @@ export class SmogStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       const index = cell.y * board.columns + cell.x
+      const effectAlreadyExisting = board.effects[index] === Effect.GAS
       if (board.effects[index] === Effect.GAS) return // already gas on this cell
       board.effects[index] = Effect.GAS
       if (cell.value) {
-        cell.value.effects.add(Effect.GAS)
+        if (!effectAlreadyExisting) {
+          cell.value.effects.add(Effect.GAS)
+        }
         cell.value.handleSpecialDamage(
           damage,
           board,
@@ -5391,12 +5397,14 @@ export class SmogStrategy extends AttackStrategy {
           crit
         )
       }
-      pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
-        simulationId: pokemon.simulation.id,
-        type: BoardEvent.GAS,
-        x: cell.x,
-        y: cell.y
-      })
+      if (!effectAlreadyExisting) {
+        pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
+          simulationId: pokemon.simulation.id,
+          type: BoardEvent.GAS,
+          x: cell.x,
+          y: cell.y
+        })
+      }
     })
   }
 }
@@ -5618,7 +5626,10 @@ export class AssistStrategy extends AttackStrategy {
       board.cells
         .filter(
           (v) =>
-            v && v.team === pokemon.team && v.skill && CopyableAbility[v.skill]
+            v &&
+            v.team === pokemon.team &&
+            v.skill &&
+            AbilityStrategy[v.skill].copyable
         )
         .map((v) => v?.skill)
     )
@@ -5855,5 +5866,55 @@ export class MagicalLeafStrategy extends AttackStrategy {
         }
       })
     }
+  }
+}
+
+export class StealthRocksStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const cells = board.getCellsInFront(pokemon, target)
+    const damage = 50
+
+    cells.forEach((cell) => {
+      const index = cell.y * board.columns + cell.x
+      const effectAlreadyExisting =
+        board.effects[index] === Effect.STEALTH_ROCKS
+      if (board.effects[index] === Effect.STEALTH_ROCKS) return // already on this cell
+      board.effects[index] = Effect.STEALTH_ROCKS
+
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: Ability.STEALTH_ROCKS,
+        positionX: cell.x,
+        positionY: cell.y
+      })
+
+      if (cell.value) {
+        if (!effectAlreadyExisting) {
+          cell.value.effects.add(Effect.STEALTH_ROCKS)
+        }
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
+      if (!effectAlreadyExisting) {
+        pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
+          simulationId: pokemon.simulation.id,
+          type: BoardEvent.STEALTH_ROCKS,
+          x: cell.x,
+          y: cell.y
+        })
+      }
+    })
   }
 }

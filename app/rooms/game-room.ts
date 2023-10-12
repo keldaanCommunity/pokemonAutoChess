@@ -472,10 +472,9 @@ export default class GameRoom extends Room<GameState> {
   }
 
   async onDispose() {
-    const numberOfPlayersAlive = this.getNumberOfPlayersAlive(
-      this.state.players
-    )
-
+    const numberOfPlayersAlive = values(this.state.players).filter(
+      (p) => p.alive
+    ).length
     if (numberOfPlayersAlive > 1) {
       logger.warn(
         `Game room has been disposed while they were still ${numberOfPlayersAlive} players alive.`
@@ -793,7 +792,7 @@ export default class GameRoom extends Room<GameState> {
     if (!player) return false
 
     player.board.forEach((pokemon, key) => {
-      const count = [...player.board.values()].filter(
+      const count = values(player.board).filter(
         (pkm) => pkm.index === pokemon.index
       ).length
 
@@ -810,7 +809,7 @@ export default class GameRoom extends Room<GameState> {
         if (pokemon.name === Pkm.POLIWHIRL) {
           if (
             Math.max(
-              ...[...player.board.values()]
+              ...values(player.board)
                 .filter((pkm) => pkm.index === pokemon.index)
                 .map((v) => v.positionY)
             ) === 3
@@ -824,7 +823,7 @@ export default class GameRoom extends Room<GameState> {
         if (pokemon.name === Pkm.CLAMPERL) {
           if (
             Math.max(
-              ...[...player.board.values()]
+              ...values(player.board)
                 .filter((pkm) => pkm.index === pokemon.index)
                 .map((v) => v.positionY)
             ) === 3
