@@ -38,7 +38,7 @@ export default class Board {
     if (y >= 0 && y < this.rows && x >= 0 && x < this.columns) {
       const index = this.columns * y + x
       this.cells[index] = value
-      if (value) {
+      if (value && !(value.positionX === x && value.positionY === y)) {
         const effectOnPreviousCell =
           this.effects[value.positionY * this.columns + value.positionX]
         if (effectOnPreviousCell != null) {
@@ -46,8 +46,9 @@ export default class Board {
           removeInArray(value.effects, effectOnPreviousCell)
         }
 
-        if(value.passive === Passive.STENCH){
-          this.effects[value.positionY * this.columns + value.positionX] = Effect.POISON_GAS
+        if (value.passive === Passive.STENCH) {
+          this.effects[value.positionY * this.columns + value.positionX] =
+            Effect.POISON_GAS
         }
 
         value.positionX = x
@@ -57,7 +58,7 @@ export default class Board {
         if (effectOnNewCell != null) {
           //logger.debug(`${value.name} gained effect ${effectOnNewCell} by moving into board effect`)
           value.effects.push(effectOnNewCell)
-        }        
+        }
       }
     }
   }

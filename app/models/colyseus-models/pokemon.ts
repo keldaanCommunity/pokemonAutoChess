@@ -14337,7 +14337,7 @@ export class Dhelmise extends Pokemon {
       1,
       AttackSprite.GRASS_MELEE,
       3,
-      110,
+      80,
       Ability.ANCHOR_SHOT,
       shiny,
       emotion,
