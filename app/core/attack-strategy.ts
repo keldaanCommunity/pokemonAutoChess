@@ -5382,28 +5382,27 @@ export class SmogStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       const index = cell.y * board.columns + cell.x
-      const effectAlreadyExisting = board.effects[index] === Effect.GAS
-      if (board.effects[index] === Effect.GAS) return // already gas on this cell
-      board.effects[index] = Effect.GAS
-      if (cell.value) {
-        if (!effectAlreadyExisting) {
-          cell.value.effects.add(Effect.GAS)
-        }
-        cell.value.handleSpecialDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
-        )
-      }
-      if (!effectAlreadyExisting) {
+      if (board.effects[index] !== Effect.GAS) {
+        board.effects[index] = Effect.GAS
         pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
           simulationId: pokemon.simulation.id,
           type: BoardEvent.GAS,
           x: cell.x,
           y: cell.y
         })
+      }
+
+      if (cell.value) {
+        cell.value.effects.add(Effect.GAS)
+        if (cell.value.team !== pokemon.team) {
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
       }
     })
   }
@@ -5766,26 +5765,30 @@ export class PoisonGasStrategy extends AttackStrategy {
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
     cells.forEach((cell) => {
       const index = cell.y * board.columns + cell.x
-      board.effects[index] = Effect.POISON_GAS
-      pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
-        simulationId: pokemon.simulation.id,
-        type: BoardEvent.POISON_GAS,
-        x: cell.x,
-        y: cell.y
-      })
+      if (board.effects[index] !== Effect.POISON_GAS) {
+        board.effects[index] = Effect.POISON_GAS
+        pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
+          simulationId: pokemon.simulation.id,
+          type: BoardEvent.POISON_GAS,
+          x: cell.x,
+          y: cell.y
+        })
+      }
 
-      if (cell.value && cell.value.team !== pokemon.team) {
+      if (cell.value) {
         cell.value.effects.add(Effect.POISON_GAS)
-        cell.value.handleSpecialDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit,
-          true
-        )
-        cell.value.status.triggerParalysis(3000, cell.value)
-        cell.value.status.triggerPoison(3000, cell.value, pokemon)
+        if (cell.value.team !== pokemon.team) {
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit,
+            true
+          )
+          cell.value.status.triggerParalysis(3000, cell.value)
+          cell.value.status.triggerPoison(3000, cell.value, pokemon)
+        }
       }
     })
   }
@@ -5883,10 +5886,15 @@ export class StealthRocksStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       const index = cell.y * board.columns + cell.x
-      const effectAlreadyExisting =
-        board.effects[index] === Effect.STEALTH_ROCKS
-      if (board.effects[index] === Effect.STEALTH_ROCKS) return // already on this cell
-      board.effects[index] = Effect.STEALTH_ROCKS
+      if (board.effects[index] !== Effect.STEALTH_ROCKS) {
+        board.effects[index] = Effect.STEALTH_ROCKS
+        pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
+          simulationId: pokemon.simulation.id,
+          type: BoardEvent.STEALTH_ROCKS,
+          x: cell.x,
+          y: cell.y
+        })
+      }
 
       pokemon.simulation.room.broadcast(Transfer.ABILITY, {
         id: pokemon.simulation.id,
@@ -5895,10 +5903,8 @@ export class StealthRocksStrategy extends AttackStrategy {
         positionY: cell.y
       })
 
-      if (cell.value) {
-        if (!effectAlreadyExisting) {
-          cell.value.effects.add(Effect.STEALTH_ROCKS)
-        }
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.effects.add(Effect.STEALTH_ROCKS)
         cell.value.handleSpecialDamage(
           damage,
           board,
@@ -5906,14 +5912,6 @@ export class StealthRocksStrategy extends AttackStrategy {
           pokemon,
           crit
         )
-      }
-      if (!effectAlreadyExisting) {
-        pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
-          simulationId: pokemon.simulation.id,
-          type: BoardEvent.STEALTH_ROCKS,
-          x: cell.x,
-          y: cell.y
-        })
       }
     })
   }
