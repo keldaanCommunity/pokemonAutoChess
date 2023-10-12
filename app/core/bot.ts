@@ -1,7 +1,6 @@
 import PokemonFactory from "../models/pokemon-factory"
 import { BotV2, IBot } from "../models/mongo-models/bot-v2"
 import Player from "../models/colyseus-models/player"
-import { BattleResult } from "../types/enum/Game"
 import { Emotion } from "../types"
 import { logger } from "../utils/logger"
 

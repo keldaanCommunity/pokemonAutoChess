@@ -75,7 +75,7 @@ export default class Pokemon extends DraggableObject {
   action: PokemonActionState
   moveManager: MoveTo
   rangeType: string
-  types: Synergy[]
+  types = new Set<Synergy>()
   lifebar: Lifebar | undefined
   detail: PokemonDetail | undefined
   pp: number | undefined
@@ -141,7 +141,7 @@ export default class Pokemon extends DraggableObject {
     this.def = pokemon.def
     this.speDef = pokemon.speDef
     this.attackType = pokemon.attackType
-    this.types = pokemon.types
+    pokemon.types.forEach((t) => this.types.add(t))
     this.maxPP = pokemon.maxPP
     this.atkSpeed = pokemon.atkSpeed
     this.targetX = null
@@ -231,12 +231,11 @@ export default class Pokemon extends DraggableObject {
     if (instanceofPokemonEntity(pokemon)) {
       if (
         p.effects &&
-        (p.effects.includes(Effect.IRON_DEFENSE) ||
-          p.effects.includes(Effect.AUTOMATE))
+        (p.effects.has(Effect.IRON_DEFENSE) || p.effects.has(Effect.AUTOMATE))
       ) {
         this.sprite.setScale(3, 3)
       }
-      if (p.effects && p.effects.includes(Effect.STEEL_SURGE)) {
+      if (p.effects && p.effects.has(Effect.STEEL_SURGE)) {
         this.sprite.setScale(4, 4)
       }
 

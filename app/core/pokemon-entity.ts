@@ -6,7 +6,7 @@ import { nanoid } from "nanoid"
 import Status from "../models/colyseus-models/status"
 import Count from "../models/colyseus-models/count"
 import Simulation from "./simulation"
-import { Schema, type, ArraySchema, SetSchema } from "@colyseus/schema"
+import { Schema, type, SetSchema, ArraySchema } from "@colyseus/schema"
 import { AttackStrategy } from "./attack-strategy"
 import { AbilityStrategy } from "./abilities"
 import Board from "./board"
@@ -35,7 +35,6 @@ import {
   ON_ATTACK_MANA,
   SCOPE_LENS_MANA
 } from "../types/Config"
-import { removeInArray } from "../utils/array"
 import { chance } from "../utils/random"
 import { distanceC } from "../utils/distance"
 
@@ -64,9 +63,9 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   @type("string") attackSprite: AttackSprite
   @type("string") rarity: Rarity
   @type("string") name: Pkm
-  @type(["string"]) effects = new ArraySchema<Effect>()
+  @type({ set: "string" }) effects = new SetSchema<Effect>()
   @type({ set: "string" }) items = new SetSchema<Item>()
-  @type(["string"]) types = new ArraySchema<Synergy>()
+  @type({ set: "string" }) types = new SetSchema<Synergy>()
   @type("uint8") stars: number
   @type("string") skill: Ability
   @type("string") passive: Passive
@@ -107,9 +106,8 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     simulation: Simulation
   ) {
     super()
-
     this.state = new MovingState()
-    this.effects = new ArraySchema()
+    this.effects = new SetSchema()
     this.items = new SetSchema()
     pokemon.items.forEach((it) => {
       this.items.add(it)
@@ -156,7 +154,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     this.shieldDone = 0
 
     pokemon.types.forEach((type) => {
-      this.types.push(type)
+      this.types.add(type)
     })
 
     if (
@@ -191,9 +189,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   hasSynergyEffect(synergy: Synergy): boolean {
-    return this.effects.some((effect) =>
-      SynergyEffects[synergy].includes(effect)
-    )
+    return SynergyEffects[synergy].some((effect) => this.effects.has(effect))
   }
 
   handleDamage(params: {
@@ -286,14 +282,9 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     ) {
       if (
         bonusManaLight &&
-        this.effects.every(
-          (e) =>
-            !(
-              e !== Effect.LIGHT_PULSE &&
-              e !== Effect.ETERNAL_LIGHT &&
-              e !== Effect.MAX_ILLUMINATION
-            )
-        )
+        (this.effects.has(Effect.LIGHT_PULSE) ||
+          this.effects.has(Effect.ETERNAL_LIGHT) ||
+          this.effects.has(Effect.MAX_ILLUMINATION))
       ) {
         const manaToAdd = Math.max(0, pp - this.pp) * 2
         this.pp = clamp(this.pp + manaToAdd, 0, this.maxPP)
@@ -474,7 +465,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       this.setPP(this.pp + DELTA_ORB_MANA, true)
     }
 
-    if (this.effects.includes(Effect.TELEPORT_NEXT_ATTACK)) {
+    if (this.effects.has(Effect.TELEPORT_NEXT_ATTACK)) {
       const crit =
         this.items.has(Item.REAPER_CLOTH) && chance(this.critChance / 100)
       if (crit) {
@@ -487,7 +478,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
         this,
         crit
       )
-      removeInArray(this.effects, Effect.TELEPORT_NEXT_ATTACK)
+      this.effects.delete(Effect.TELEPORT_NEXT_ATTACK)
     }
 
     if (this.passive === Passive.SHARED_VISION) {
@@ -529,13 +520,13 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.hasSynergyEffect(Synergy.ICE)) {
       let freezeChance = 0
-      if (this.effects.includes(Effect.CHILLY)) {
+      if (this.effects.has(Effect.CHILLY)) {
         freezeChance = 0.1
-      } else if (this.effects.includes(Effect.FROSTY)) {
+      } else if (this.effects.has(Effect.FROSTY)) {
         freezeChance = 0.2
-      } else if (this.effects.includes(Effect.FREEZING)) {
+      } else if (this.effects.has(Effect.FREEZING)) {
         freezeChance = 0.3
-      } else if (this.effects.includes(Effect.SHEER_COLD)) {
+      } else if (this.effects.has(Effect.SHEER_COLD)) {
         freezeChance = 0.4
       }
       if (chance(freezeChance)) {
@@ -545,15 +536,15 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.hasSynergyEffect(Synergy.FIRE)) {
       let burnChance = 0
-      if (this.effects.includes(Effect.BLAZE)) {
+      if (this.effects.has(Effect.BLAZE)) {
         burnChance = 0.3
-      } else if (this.effects.includes(Effect.VICTORY_STAR)) {
+      } else if (this.effects.has(Effect.VICTORY_STAR)) {
         burnChance = 0.4
         this.addAttack(1)
-      } else if (this.effects.includes(Effect.DROUGHT)) {
+      } else if (this.effects.has(Effect.DROUGHT)) {
         burnChance = 0.5
         this.addAttack(2)
-      } else if (this.effects.includes(Effect.DESOLATE_LAND)) {
+      } else if (this.effects.has(Effect.DESOLATE_LAND)) {
         burnChance = 1
         this.addAttack(3)
       }
@@ -563,14 +554,14 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.hasSynergyEffect(Synergy.AQUATIC)) {
-      const burnManaChance = this.effects.includes(Effect.SWIFT_SWIM)
+      const burnManaChance = this.effects.has(Effect.SWIFT_SWIM)
         ? 0.35
-        : this.effects.includes(Effect.HYDRATION)
+        : this.effects.has(Effect.HYDRATION)
         ? 0.45
         : 0.55
-      const manaGain = this.effects.includes(Effect.SWIFT_SWIM)
+      const manaGain = this.effects.has(Effect.SWIFT_SWIM)
         ? 15
-        : this.effects.includes(Effect.HYDRATION)
+        : this.effects.has(Effect.HYDRATION)
         ? 30
         : 45
       if (chance(burnManaChance)) {
@@ -587,13 +578,13 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     let poisonChance = 0
-    if (this.effects.includes(Effect.POISONOUS)) {
+    if (this.effects.has(Effect.POISONOUS)) {
       poisonChance = 0.3
     }
-    if (this.effects.includes(Effect.VENOMOUS)) {
+    if (this.effects.has(Effect.VENOMOUS)) {
       poisonChance = 0.5
     }
-    if (this.effects.includes(Effect.TOXIC)) {
+    if (this.effects.has(Effect.TOXIC)) {
       poisonChance = 0.7
     }
     if (poisonChance > 0) {
@@ -619,11 +610,11 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   onDamageDealt({ target, damage }: { target: PokemonEntity; damage: number }) {
     if (this.hasSynergyEffect(Synergy.HUMAN)) {
       let lifesteal = 0
-      if (this.effects.includes(Effect.MEDITATE)) {
+      if (this.effects.has(Effect.MEDITATE)) {
         lifesteal = 0.1
-      } else if (this.effects.includes(Effect.FOCUS_ENERGY)) {
+      } else if (this.effects.has(Effect.FOCUS_ENERGY)) {
         lifesteal = 0.25
-      } else if (this.effects.includes(Effect.CALM_MIND)) {
+      } else if (this.effects.has(Effect.CALM_MIND)) {
         lifesteal = 0.5
       }
       this.handleHeal(Math.ceil(lifesteal * damage), this, 0)
@@ -641,19 +632,19 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     ;[this, target].forEach((pokemon) => {
       if (
         pokemon.fairySplashCooldown === 0 &&
-        (pokemon.effects.includes(Effect.FAIRY_WIND) ||
-          pokemon.effects.includes(Effect.STRANGE_STEAM) ||
-          pokemon.effects.includes(Effect.AROMATIC_MIST) ||
-          pokemon.effects.includes(Effect.MOON_FORCE))
+        (pokemon.effects.has(Effect.FAIRY_WIND) ||
+          pokemon.effects.has(Effect.STRANGE_STEAM) ||
+          pokemon.effects.has(Effect.AROMATIC_MIST) ||
+          pokemon.effects.has(Effect.MOON_FORCE))
       ) {
         let damage = 0
-        if (pokemon.effects.includes(Effect.AROMATIC_MIST)) {
+        if (pokemon.effects.has(Effect.AROMATIC_MIST)) {
           damage = 15
-        } else if (pokemon.effects.includes(Effect.FAIRY_WIND)) {
+        } else if (pokemon.effects.has(Effect.FAIRY_WIND)) {
           damage = 30
-        } else if (pokemon.effects.includes(Effect.STRANGE_STEAM)) {
+        } else if (pokemon.effects.has(Effect.STRANGE_STEAM)) {
           damage = 60
-        } else if (pokemon.effects.includes(Effect.MOON_FORCE)) {
+        } else if (pokemon.effects.has(Effect.MOON_FORCE)) {
           damage = 80
         }
 
@@ -702,13 +693,13 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       this.count.moneyCount++
     }
     if (
-      this.effects.includes(Effect.PURSUIT) ||
-      this.effects.includes(Effect.BRUTAL_SWING) ||
-      this.effects.includes(Effect.POWER_TRIP)
+      this.effects.has(Effect.PURSUIT) ||
+      this.effects.has(Effect.BRUTAL_SWING) ||
+      this.effects.has(Effect.POWER_TRIP)
     ) {
-      const isPursuit = this.effects.includes(Effect.PURSUIT)
-      const isBrutalSwing = this.effects.includes(Effect.BRUTAL_SWING)
-      const isPowerTrip = this.effects.includes(Effect.POWER_TRIP)
+      const isPursuit = this.effects.has(Effect.PURSUIT)
+      const isBrutalSwing = this.effects.has(Effect.BRUTAL_SWING)
+      const isPowerTrip = this.effects.has(Effect.POWER_TRIP)
 
       if (isPursuit || isBrutalSwing || isPowerTrip) {
         let lifeBoost = 0
@@ -743,17 +734,17 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     )
 
     if (
-      target.effects.includes(Effect.ODD_FLOWER) ||
-      target.effects.includes(Effect.GLOOM_FLOWER) ||
-      target.effects.includes(Effect.VILE_FLOWER) ||
-      target.effects.includes(Effect.SUN_FLOWER)
+      target.effects.has(Effect.ODD_FLOWER) ||
+      target.effects.has(Effect.GLOOM_FLOWER) ||
+      target.effects.has(Effect.VILE_FLOWER) ||
+      target.effects.has(Effect.SUN_FLOWER)
     ) {
       if (!target.simulation.flowerSpawn[target.team]) {
         target.simulation.flowerSpawn[target.team] = true
         const nearestAvailableCoordinate =
           this.state.getFarthestTargetCoordinateAvailablePlace(target, board)
         if (nearestAvailableCoordinate) {
-          if (target.effects.includes(Effect.ODD_FLOWER)) {
+          if (target.effects.has(Effect.ODD_FLOWER)) {
             target.simulation.addPokemon(
               PokemonFactory.createPokemonFromName(Pkm.ODDISH, target.player),
               nearestAvailableCoordinate.x,
@@ -761,7 +752,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
               target.team,
               true
             )
-          } else if (target.effects.includes(Effect.GLOOM_FLOWER)) {
+          } else if (target.effects.has(Effect.GLOOM_FLOWER)) {
             target.simulation.addPokemon(
               PokemonFactory.createPokemonFromName(Pkm.GLOOM, target.player),
               nearestAvailableCoordinate.x,
@@ -769,7 +760,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
               target.team,
               true
             )
-          } else if (target.effects.includes(Effect.VILE_FLOWER)) {
+          } else if (target.effects.has(Effect.VILE_FLOWER)) {
             target.simulation.addPokemon(
               PokemonFactory.createPokemonFromName(
                 Pkm.VILEPLUME,
@@ -780,7 +771,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
               target.team,
               true
             )
-          } else if (target.effects.includes(Effect.SUN_FLOWER)) {
+          } else if (target.effects.has(Effect.SUN_FLOWER)) {
             target.simulation.addPokemon(
               PokemonFactory.createPokemonFromName(
                 Pkm.BELLOSSOM,
@@ -832,7 +823,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     this.status.resurection = false // prevent reapplying max revive again
     this.shield = 0 // prevent reapplying shield again
     SynergyEffects[Synergy.FOSSIL].forEach((fossilResurectEffect) =>
-      removeInArray(this.effects, fossilResurectEffect)
+      this.effects.delete(fossilResurectEffect)
     ) // prevent resurecting fossils twice
 
     // does not trigger postEffects (iron defense, normal shield, rune protect, focus band, delta orb, flame orb...)

@@ -11,6 +11,7 @@ import { Pkm, PkmIndex } from "../../../../types/enum/Pokemon"
 import { Passive } from "../../../../types/enum/Passive"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
 import { t } from "i18next"
+import { Synergy } from "../../../../types/enum/Synergy"
 
 export default class PokemonDetail extends GameObjects.DOMElement {
   dom: HTMLDivElement
@@ -45,7 +46,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     critDamage: number,
     ap: number,
     pp: number,
-    types: string[],
+    types: Set<Synergy>,
     skill: Ability,
     passive: Passive,
     emotion: Emotion,

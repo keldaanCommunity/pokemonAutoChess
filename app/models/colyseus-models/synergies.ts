@@ -40,7 +40,7 @@ export function computeSynergies(board: IPokemon[]): Map<Synergy, number> {
       if (!typesPerFamily.has(family)) typesPerFamily.set(family, new Set())
       const types: Set<Synergy> = typesPerFamily.get(family)!
       pkm.types.forEach((type) => types.add(type))
-      if (pkm.types.includes(Synergy.DRAGON)) {
+      if (pkm.types.has(Synergy.DRAGON)) {
         if (!dragonDoubleTypes.has(family))
           dragonDoubleTypes.set(family, new Set())
         dragonDoubleTypes.get(family)!.add(pkm.types[1])
@@ -68,34 +68,31 @@ export function computeSynergies(board: IPokemon[]): Map<Synergy, number> {
 }
 
 export function addSynergiesFromStones(pkm: IPokemon) {
-  if (pkm.items.has(Item.FIRE_STONE) && !pkm.types.includes(Synergy.FIRE)) {
-    pkm.types.push(Synergy.FIRE)
+  if (pkm.items.has(Item.FIRE_STONE) && !pkm.types.has(Synergy.FIRE)) {
+    pkm.types.add(Synergy.FIRE)
   }
-  if (pkm.items.has(Item.WATER_STONE) && !pkm.types.includes(Synergy.WATER)) {
-    pkm.types.push(Synergy.WATER)
+  if (pkm.items.has(Item.WATER_STONE) && !pkm.types.has(Synergy.WATER)) {
+    pkm.types.add(Synergy.WATER)
   }
-  if (
-    pkm.items.has(Item.THUNDER_STONE) &&
-    !pkm.types.includes(Synergy.ELECTRIC)
-  ) {
-    pkm.types.push(Synergy.ELECTRIC)
+  if (pkm.items.has(Item.THUNDER_STONE) && !pkm.types.has(Synergy.ELECTRIC)) {
+    pkm.types.add(Synergy.ELECTRIC)
   }
-  if (pkm.items.has(Item.DUSK_STONE) && !pkm.types.includes(Synergy.DARK)) {
-    pkm.types.push(Synergy.DARK)
+  if (pkm.items.has(Item.DUSK_STONE) && !pkm.types.has(Synergy.DARK)) {
+    pkm.types.add(Synergy.DARK)
   }
-  if (pkm.items.has(Item.MOON_STONE) && !pkm.types.includes(Synergy.FAIRY)) {
-    pkm.types.push(Synergy.FAIRY)
+  if (pkm.items.has(Item.MOON_STONE) && !pkm.types.has(Synergy.FAIRY)) {
+    pkm.types.add(Synergy.FAIRY)
   }
-  if (pkm.items.has(Item.LEAF_STONE) && !pkm.types.includes(Synergy.GRASS)) {
-    pkm.types.push(Synergy.GRASS)
+  if (pkm.items.has(Item.LEAF_STONE) && !pkm.types.has(Synergy.GRASS)) {
+    pkm.types.add(Synergy.GRASS)
   }
-  if (pkm.items.has(Item.DAWN_STONE) && !pkm.types.includes(Synergy.PSYCHIC)) {
-    pkm.types.push(Synergy.PSYCHIC)
+  if (pkm.items.has(Item.DAWN_STONE) && !pkm.types.has(Synergy.PSYCHIC)) {
+    pkm.types.add(Synergy.PSYCHIC)
   }
-  if (pkm.items.has(Item.ICE_STONE) && !pkm.types.includes(Synergy.ICE)) {
-    pkm.types.push(Synergy.ICE)
+  if (pkm.items.has(Item.ICE_STONE) && !pkm.types.has(Synergy.ICE)) {
+    pkm.types.add(Synergy.ICE)
   }
-  if (pkm.items.has(Item.OLD_AMBER) && !pkm.types.includes(Synergy.FOSSIL)) {
-    pkm.types.push(Synergy.FOSSIL)
+  if (pkm.items.has(Item.OLD_AMBER) && !pkm.types.has(Synergy.FOSSIL)) {
+    pkm.types.add(Synergy.FOSSIL)
   }
 }

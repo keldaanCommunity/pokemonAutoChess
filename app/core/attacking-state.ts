@@ -73,13 +73,13 @@ export default class AttackingState extends PokemonState {
         pokemon.count.attackCount++
         this.attack(pokemon, board, targetCoordinate)
         if (
-          pokemon.effects.includes(Effect.RISING_VOLTAGE) ||
-          pokemon.effects.includes(Effect.OVERDRIVE)
+          pokemon.effects.has(Effect.RISING_VOLTAGE) ||
+          pokemon.effects.has(Effect.OVERDRIVE)
         ) {
           let isTripleAttack = false
-          if (pokemon.effects.includes(Effect.RISING_VOLTAGE)) {
+          if (pokemon.effects.has(Effect.RISING_VOLTAGE)) {
             isTripleAttack = pokemon.count.attackCount % 4 === 0
-          } else if (pokemon.effects.includes(Effect.OVERDRIVE)) {
+          } else if (pokemon.effects.has(Effect.OVERDRIVE)) {
             isTripleAttack = pokemon.count.attackCount % 3 === 0
           }
           if (isTripleAttack) {
@@ -124,7 +124,7 @@ export default class AttackingState extends PokemonState {
 
       let isAttackSuccessful = true
       let dodgeChance = target.dodge
-      if (pokemon.effects.includes(Effect.GAS)) {
+      if (pokemon.effects.has(Effect.GAS)) {
         dodgeChance += 0.5
       }
       dodgeChance = max(0.9)(dodgeChance)
@@ -149,11 +149,11 @@ export default class AttackingState extends PokemonState {
         pokemon.onCritical(target, board)
         if (target.items.has(Item.ROCKY_HELMET) === false) {
           let opponentCritDamage = pokemon.critDamage
-          if (target.effects.includes(Effect.BATTLE_ARMOR)) {
+          if (target.effects.has(Effect.BATTLE_ARMOR)) {
             opponentCritDamage -= 0.3
-          } else if (target.effects.includes(Effect.MOUTAIN_RESISTANCE)) {
+          } else if (target.effects.has(Effect.MOUTAIN_RESISTANCE)) {
             opponentCritDamage -= 0.5
-          } else if (target.effects.includes(Effect.DIAMOND_STORM)) {
+          } else if (target.effects.has(Effect.DIAMOND_STORM)) {
             opponentCritDamage -= 0.7
           }
           physicalDamage = Math.round(pokemon.atk * opponentCritDamage)
@@ -162,13 +162,13 @@ export default class AttackingState extends PokemonState {
 
       let trueDamagePart = 0
       if (pokemon.hasSynergyEffect(Synergy.GHOST)) {
-        if (pokemon.effects.includes(Effect.PHANTOM_FORCE)) {
+        if (pokemon.effects.has(Effect.PHANTOM_FORCE)) {
           trueDamagePart += 0.2
-        } else if (pokemon.effects.includes(Effect.CURSE)) {
+        } else if (pokemon.effects.has(Effect.CURSE)) {
           trueDamagePart += 0.4
-        } else if (pokemon.effects.includes(Effect.SHADOW_TAG)) {
+        } else if (pokemon.effects.has(Effect.SHADOW_TAG)) {
           trueDamagePart += 0.7
-        } else if (pokemon.effects.includes(Effect.WANDERING_SPIRIT)) {
+        } else if (pokemon.effects.has(Effect.WANDERING_SPIRIT)) {
           trueDamagePart += 1.0
         }
       }
