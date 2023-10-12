@@ -1483,7 +1483,8 @@
     "PORYGON": "Porygon2 is looking for an UPGRADE",
     "SLOWBRO": "Slowbro is looking for a ROCKY_HELMET",
     "MOXIE": "Every time an enemy pokémon dies, it gains ATK equal to its stars",
-    "BELLSPROUT": "Weepinbell is looking for a LEAF_STONE"
+    "BELLSPROUT": "Weepinbell is looking for a LEAF_STONE",
+    "CLEFAIRY":"Clefairy is looking for a MOON_STONE"
   },
   "stat": {
     "ATK": "Attack",
