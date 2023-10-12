@@ -9,6 +9,7 @@ import { Weather } from "../../types/enum/Weather"
 import { max } from "../../utils/number"
 import { Ability } from "../../types/enum/Ability"
 import { Passive } from "../../types/enum/Passive"
+import { Synergy } from "../../types/enum/Synergy"
 
 export default class Status extends Schema implements IStatus {
   @type("boolean") burn = false
@@ -84,6 +85,22 @@ export default class Status extends Schema implements IStatus {
   updateAllStatus(dt: number, pokemon: PokemonEntity, board: Board) {
     if (pokemon.effects.has(Effect.POISON_GAS) && this.poisonStacks === 0) {
       this.triggerPoison(1500, pokemon, undefined)
+    }
+
+    if (
+      pokemon.effects.includes(Effect.STEALTH_ROCKS) &&
+      !pokemon.types.includes(Synergy.ROCK) &&
+      !pokemon.types.includes(Synergy.FLYING) &&
+      !this.wound
+    ) {
+      pokemon.handleDamage({
+        damage: 10,
+        board,
+        attackType: AttackType.PHYSICAL,
+        attacker: null,
+        shouldTargetGainMana: true
+      })
+      this.triggerWound(1000, pokemon, undefined, board)
     }
 
     if (pokemon.status.runeProtect) {

@@ -114,5 +114,6 @@ export enum Team {
 export enum BoardEvent {
   LIGHTNING = "LIGHTNING",
   GAS = "GAS",
-  POISON_GAS = "POISON_GAS"
+  POISON_GAS = "POISON_GAS",
+  STEALTH_ROCKS = "STEALTH_ROCKS"
 }

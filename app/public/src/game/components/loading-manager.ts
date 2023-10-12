@@ -621,6 +621,11 @@ export default class LoadingManager {
       "/assets/attacks"
     )
     scene.load.multiatlas("GAS", "/assets/attacks/GAS.json", "/assets/attacks")
+    scene.load.multiatlas(
+      "STEALTH_ROCKS",
+      "/assets/attacks/STEALTH_ROCKS.json",
+      "/assets/attacks"
+    )
   }
 }
 

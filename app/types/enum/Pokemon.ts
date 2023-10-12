@@ -2926,7 +2926,7 @@ export const AnimationConfig: {
   [Pkm.REGIROCK]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Shoot
+    emote: AnimationType.RearUp
   },
   [Pkm.REGISTEEL]: {
     attack: AnimationType.Shoot,

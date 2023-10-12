@@ -41,6 +41,7 @@
 - Give a rocky helmet to Slowbro to get a Slowking
 - Starly line is now Hatch
 - New ability Magical Leaf for Bulbasaur & Snivy
+- New ability for Regirock: Stealth Rocks
 - Buff Dhelmise: PP ~~110~~ → 80
 - Move Cleffa/Clefable to additional pool
 - Give a moon stone to Clefable to get Clefairy
