@@ -803,9 +803,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
   checkEndGame() {
     const commands = []
-    const numberOfPlayersAlive = this.room.getNumberOfPlayersAlive(
-      this.state.players
-    )
+    const numberOfPlayersAlive = values(this.state.players).filter(
+      (p) => p.alive
+    ).length
 
     if (numberOfPlayersAlive <= 1) {
       this.state.gameFinished = true
@@ -1275,8 +1275,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
   initializeMinigamePhase() {
     this.state.phase = GamePhaseState.MINIGAME
-    const nbPlayersAlive = [...this.state.players.values()].filter(
-      (p: Player) => p.life > 0
+    const nbPlayersAlive = values(this.state.players).filter(
+      (p) => p.alive
     ).length
 
     let minigamePhaseDuration = ITEM_CAROUSEL_BASE_DURATION

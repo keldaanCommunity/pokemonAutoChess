@@ -41,6 +41,7 @@
 - Give a rocky helmet to Slowbro to get a Slowking
 - Starly line is now Hatch
 - New ability Magical Leaf for Bulbasaur & Snivy
+- New ability for Regirock: Stealth Rocks
 
 # Changes to Synergies
 

@@ -239,7 +239,8 @@
     "FISSURE": "Fissure",
     "ASSURANCE": "Assurance",
     "BRAVE_BIRD": "Brave Bird",
-    "MAGICAL_LEAF": "Magical Leaf"
+    "MAGICAL_LEAF": "Magical Leaf",
+    "STEALTH_ROCKS": "Stealth Rocks"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1092,7 +1093,8 @@
     "FISSURE": "Open [2,3,4] rifts. Each rift deals [25,50,75,SP] SPECIAL",
     "ASSURANCE": "Deals [25,50,100,SP] SPECIAL. Doubles if the caster in under 50% HP",
     "BRAVE_BIRD": "Flies away with its target dealing [30,60,90,SP] SPECIAL",
-    "MAGICAL_LEAF": "The user scatters curious leaves that chase the furthest target, inflicting [10,20,40,SP] and ARMOR_REDUCTION for 3 seconds on anything in its path"
+    "MAGICAL_LEAF": "The user scatters curious leaves that chase the furthest target, inflicting [10,20,40,SP] and ARMOR_REDUCTION for 3 seconds on anything in its path",
+    "STEALTH_ROCKS": "Lays sharp stones around, dealing [50,SP] SPECIAL. The stones stay on field, dealing 10 PHYSICAL per second and WOUND opponents that walk on it, if not ROCK or FLYING."
   },
   "effect": {
     "INGRAIN": "Ingrain",

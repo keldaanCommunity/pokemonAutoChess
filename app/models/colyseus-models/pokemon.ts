@@ -6711,7 +6711,7 @@ export class Regirock extends Pokemon {
       AttackSprite.ROCK_MELEE,
       3,
       100,
-      Ability.ROCK_SLIDE,
+      Ability.STEALTH_ROCKS,
       shiny,
       emotion,
       true

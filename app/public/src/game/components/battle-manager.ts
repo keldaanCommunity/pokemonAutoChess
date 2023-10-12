@@ -4488,6 +4488,29 @@ export default class BattleManager {
             })
             break
 
+          case Ability.STEALTH_ROCKS:
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.STEALTH_ROCKS,
+              `000`
+            )
+            specialProjectile.setDepth(1)
+            specialProjectile.setScale(1, 1)
+            specialProjectile.anims.play(Ability.STEALTH_ROCKS)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
+
           case "LINK_CABLE_link": {
             coordinates = transformAttackCoordinate(
               positionX,
@@ -4706,6 +4729,26 @@ export default class BattleManager {
         alpha: 0.5,
         duration: 500,
         delay: (8 - coordinates[1]) * 100
+      })
+    }
+
+    if (event.type === BoardEvent.STEALTH_ROCKS) {
+      const sprite = this.scene.add.sprite(
+        coordinates[0],
+        coordinates[1],
+        Effect.STEALTH_ROCKS,
+        "013"
+      )
+      sprite.setDepth(1)
+      sprite.setScale(1, 1)
+      this.boardEventSprites[index] = sprite
+      this.group.add(sprite)
+
+      this.scene.tweens.add({
+        targets: sprite,
+        alpha: 1,
+        duration: 200,
+        delay: 1000
       })
     }
   }

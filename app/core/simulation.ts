@@ -26,6 +26,7 @@ import GameRoom from "../rooms/game-room"
 import { pickRandomIn, randomBetween } from "../utils/random"
 import { Passive } from "../types/enum/Passive"
 import Player from "../models/colyseus-models/player"
+import { values } from "../utils/schemas"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") weather: Weather = Weather.NEUTRAL
@@ -475,7 +476,7 @@ export default class Simulation extends Schema implements ISimulation {
 
   applyPostEffects() {
     ;[this.blueTeam, this.redTeam].forEach((team) => {
-      const ironDefenseCandidates = Array.from(team.values()).filter((p) =>
+      const ironDefenseCandidates = values(team).filter((p) =>
         p.effects.includes(Effect.IRON_DEFENSE)
       )
       if (ironDefenseCandidates.length > 0) {
@@ -490,7 +491,7 @@ export default class Simulation extends Schema implements ISimulation {
         ironDefensePkm.effects.push(Effect.IRON_DEFENSE)
       }
 
-      const steelSurgeCandidates = Array.from(team.values()).filter((p) =>
+      const steelSurgeCandidates = values(team).filter((p) =>
         p.effects.includes(Effect.STEEL_SURGE)
       )
 

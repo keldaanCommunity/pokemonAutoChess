@@ -5394,10 +5394,13 @@ export class SmogStrategy extends AttackStrategy {
 
     cells.forEach((cell) => {
       const index = cell.y * board.columns + cell.x
+      const effectAlreadyExisting = board.effects[index] === Effect.GAS
       if (board.effects[index] === Effect.GAS) return // already gas on this cell
       board.effects[index] = Effect.GAS
       if (cell.value) {
-        cell.value.effects.push(Effect.GAS)
+        if (!effectAlreadyExisting) {
+          cell.value.effects.push(Effect.GAS)
+        }
         cell.value.handleSpecialDamage(
           damage,
           board,
@@ -5406,12 +5409,14 @@ export class SmogStrategy extends AttackStrategy {
           crit
         )
       }
-      pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
-        simulationId: pokemon.simulation.id,
-        type: BoardEvent.GAS,
-        x: cell.x,
-        y: cell.y
-      })
+      if (!effectAlreadyExisting) {
+        pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
+          simulationId: pokemon.simulation.id,
+          type: BoardEvent.GAS,
+          x: cell.x,
+          y: cell.y
+        })
+      }
     })
   }
 }
@@ -5873,5 +5878,54 @@ export class MagicalLeafStrategy extends AttackStrategy {
         }
       })
     }
+  }
+}
+
+export class StealthRocksStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const cells = board.getCellsInFront(pokemon, target)
+    const damage = 50
+
+    cells.forEach((cell) => {
+      const index = cell.y * board.columns + cell.x
+      const effectAlreadyExisting = board.effects[index] === Effect.STEALTH_ROCKS
+      if (board.effects[index] === Effect.STEALTH_ROCKS) return // already on this cell
+      board.effects[index] = Effect.STEALTH_ROCKS
+
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: Ability.STEALTH_ROCKS,
+        positionX: cell.x,
+        positionY: cell.y
+      })
+
+      if (cell.value) {
+        if (!effectAlreadyExisting) {
+          cell.value.effects.push(Effect.STEALTH_ROCKS)
+        }
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
+      if (!effectAlreadyExisting) {
+        pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
+          simulationId: pokemon.simulation.id,
+          type: BoardEvent.STEALTH_ROCKS,
+          x: cell.x,
+          y: cell.y
+        })
+      }
+    })
   }
 }

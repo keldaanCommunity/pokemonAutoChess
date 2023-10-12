@@ -4,6 +4,7 @@ import { SynergyTriggers } from "../../types/Config"
 import { Item } from "../../types/enum/Item"
 import { Pkm, PkmFamily } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
+import { values } from "../../utils/schemas"
 import { Pokemon } from "./pokemon"
 
 export default class Synergies
@@ -18,7 +19,7 @@ export default class Synergies
   }
 
   update(board: MapSchema<Pokemon>) {
-    const pokemons: Pokemon[] = [...board.values()]
+    const pokemons: Pokemon[] = values(board)
     const updatedSynergies = computeSynergies(pokemons)
     updatedSynergies.forEach((value, synergy) => this.set(synergy, value))
   }
