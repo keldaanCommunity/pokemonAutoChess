@@ -2129,7 +2129,7 @@ export default class PokemonFactory {
   static getRandomFossil(board: MapSchema<Pokemon>) {
     const currentFossils = new Array<Pkm>()
     board.forEach((p) => {
-      if (p.types.includes(Synergy.FOSSIL)) {
+      if (p.types.has(Synergy.FOSSIL)) {
         currentFossils.push(PkmFamily[p.name])
       }
     })

@@ -66,7 +66,7 @@ export function GamePokemonDetail(props: {
       </div>
 
       <div className="game-pokemon-detail-types">
-        {props.pokemon.types.map((type) => (
+        {Array.from(props.pokemon.types.values()).map((type) => (
           <SynergyIcon type={type} key={type} />
         ))}
       </div>

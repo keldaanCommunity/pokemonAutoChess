@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
 
-import { Schema, type, ArraySchema, SetSchema } from "@colyseus/schema"
+import { Schema, type, SetSchema } from "@colyseus/schema"
 import { nanoid } from "nanoid"
 import { Emotion, IPokemon, AttackSprite } from "../../types"
 import { DEFAULT_ATK_SPEED, EvolutionTime } from "../../types/Config"
@@ -16,7 +16,7 @@ import Player from "./player"
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string
   @type("string") name: Pkm
-  @type(["string"]) types = new ArraySchema<Synergy>()
+  @type({ set: "string" }) types = new SetSchema<Synergy>()
   @type("string") rarity: Rarity
   @type("string") index: string
   @type("string") evolution: Pkm
@@ -84,7 +84,7 @@ export class Pokemon extends Schema implements IPokemon {
     this.final = final
     this.additional = !!additional
     types.forEach((type) => {
-      this.types.push(type)
+      this.types.add(type)
     })
 
     if (this.rarity === Rarity.HATCH && this.evolution != Pkm.DEFAULT) {

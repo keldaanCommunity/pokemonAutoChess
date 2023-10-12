@@ -6,22 +6,17 @@ import { MapSchema } from "@colyseus/schema"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { Ability } from "../types/enum/Ability"
 import { Passive } from "../types/enum/Passive"
+import { SetSchema } from "@colyseus/schema"
 
-export class Effects {
-  list: Effect[]
-
-  constructor() {
-    this.list = []
-  }
-
+export class Effects extends SetSchema<Effect> {
   update(synergies: Synergies, board: MapSchema<Pokemon>) {
-    this.list = []
+    this.clear()
     ;(Object.values(Synergy) as Synergy[]).forEach((synergy) => {
       for (let i = SynergyTriggers[synergy].length; i >= 0; i--) {
         const v = SynergyTriggers[synergy][i]
         const s = synergies.get(synergy)
         if (s && s >= v) {
-          this.list.push(SynergyEffects[synergy][i])
+          this.add(SynergyEffects[synergy][i])
           break
         }
       }
@@ -29,19 +24,19 @@ export class Effects {
 
     board.forEach((p) => {
       if (p.skill === Ability.GRASSY_SURGE) {
-        this.list.push(Effect.GRASSY_TERRAIN)
+        this.add(Effect.GRASSY_TERRAIN)
       }
       if (p.skill === Ability.MISTY_SURGE) {
-        this.list.push(Effect.MISTY_TERRAIN)
+        this.add(Effect.MISTY_TERRAIN)
       }
       if (p.skill === Ability.ELECTRIC_SURGE) {
-        this.list.push(Effect.ELECTRIC_TERRAIN)
+        this.add(Effect.ELECTRIC_TERRAIN)
       }
       if (p.skill === Ability.PSYCHIC_SURGE) {
-        this.list.push(Effect.PSYCHIC_TERRAIN)
+        this.add(Effect.PSYCHIC_TERRAIN)
       }
-      if(p.passive === Passive.HYDRATATION) {
-        this.list.push(Effect.HYDRATATION)
+      if (p.passive === Passive.HYDRATATION) {
+        this.add(Effect.HYDRATATION)
       }
     })
   }

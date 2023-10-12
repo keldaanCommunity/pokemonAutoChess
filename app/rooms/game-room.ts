@@ -774,13 +774,11 @@ export default class GameRoom extends Room<GameState> {
     rankArray.sort((a, b) => {
       return b.v - a.v
     })
-    while (pokemon.types.length > 0) {
-      pokemon.types.pop()
-    }
+    pokemon.types.clear()
     for (let i = 0; i < n; i++) {
       const kv = rankArray.shift()
       if (kv) {
-        pokemon.types.push(kv.s)
+        pokemon.types.add(kv.s)
       }
     }
     player.synergies.update(player.board)

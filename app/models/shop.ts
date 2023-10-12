@@ -133,7 +133,7 @@ export default class Shop {
   assignShop(player: Player, manualRefresh: boolean, stageLevel: number) {
     player.shop.forEach((pkm) => this.releasePokemon(pkm))
 
-    if (player.effects.list.includes(Effect.EERIE_SPELL) && !manualRefresh) {
+    if (player.effects.has(Effect.EERIE_SPELL) && !manualRefresh) {
       const unowns = getUnownsPoolPerStage(stageLevel)
       for (let i = 0; i < SHOP_SIZE; i++) {
         player.shop[i] = pickRandomIn(unowns)
@@ -165,7 +165,7 @@ export default class Shop {
       const synergy = synergies[i]
       const candidates = mythicals.filter((m) => {
         const pkm: Pkm = m in PkmDuos ? PkmDuos[m][0] : m
-        return PokemonFactory.createPokemonFromName(pkm).types.includes(synergy)
+        return PokemonFactory.createPokemonFromName(pkm).types.has(synergy)
       })
       const selectedProposition = pickRandomIn(
         candidates.length > 0 ? candidates : mythicals
@@ -185,7 +185,7 @@ export default class Shop {
     pool.forEach((value, pkm) => {
       const pokemon = PokemonFactory.createPokemonFromName(pkm)
       const isOfTypeWanted =
-        !specificTypeWanted || pokemon.types.includes(specificTypeWanted)
+        !specificTypeWanted || pokemon.types.has(specificTypeWanted)
 
       if (isOfTypeWanted && !finals.includes(pkm)) {
         for (let i = 0; i < value; i++) {
@@ -217,10 +217,7 @@ export default class Shop {
     }
 
     const UNOWN_RATE = 0.05
-    if (
-      player.effects.list.includes(Effect.LIGHT_SCREEN) &&
-      chance(UNOWN_RATE)
-    ) {
+    if (player.effects.has(Effect.LIGHT_SCREEN) && chance(UNOWN_RATE)) {
       const unowns = getUnownsPoolPerStage(stageLevel)
       return pickRandomIn(unowns)
     }
