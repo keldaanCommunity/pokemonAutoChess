@@ -82,10 +82,7 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateAllStatus(dt: number, pokemon: PokemonEntity, board: Board) {
-    if (
-      pokemon.effects.includes(Effect.POISON_GAS) &&
-      this.poisonStacks === 0
-    ) {
+    if (pokemon.effects.has(Effect.POISON_GAS) && this.poisonStacks === 0) {
       this.triggerPoison(1500, pokemon, undefined)
     }
 
@@ -413,10 +410,10 @@ export default class Status extends Schema implements IStatus {
       let maxStacks = 3
       if (origin) {
         this.poisonOrigin = origin
-        if (origin.effects.includes(Effect.VENOMOUS)) {
+        if (origin.effects.has(Effect.VENOMOUS)) {
           maxStacks = 4
         }
-        if (origin.effects.includes(Effect.TOXIC)) {
+        if (origin.effects.has(Effect.TOXIC)) {
           maxStacks = 5
         }
       }
@@ -455,7 +452,7 @@ export default class Status extends Schema implements IStatus {
         })
       }
 
-      if (pkm.effects.includes(Effect.POISON_GAS)) {
+      if (pkm.effects.has(Effect.POISON_GAS)) {
         // reapply poison stack on every poison tick if in poison gas
         this.triggerPoison(1500, pkm, undefined)
       }

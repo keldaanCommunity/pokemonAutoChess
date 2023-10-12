@@ -84,7 +84,7 @@ export default function WikiPokemonDetail(props: {
         </dd>
         <dt>{t("synergies")}</dt>
         <dd>
-          {pokemon.types.map((type) => (
+          {Array.from(pokemon.types.values()).map((type) => (
             <SynergyIcon key={"img" + type} type={type} />
           ))}
         </dd>

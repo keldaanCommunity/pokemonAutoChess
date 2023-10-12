@@ -363,7 +363,7 @@ export interface IPlayer {
 export interface IPokemon {
   id: string
   name: Pkm
-  types: ArraySchema<Synergy>
+  types: SetSchema<Synergy>
   rarity: Rarity
   index: string
   evolution: Pkm
@@ -402,8 +402,8 @@ export interface ISimulation {
   room: GameRoom
   id: string
   weather: Weather
-  blueEffects: Effect[]
-  redEffects: Effect[]
+  blueEffects: Set<Effect>
+  redEffects: Set<Effect>
   blueTeam: MapSchema<IPokemonEntity>
   redTeam: MapSchema<IPokemonEntity>
   blueDpsMeter: MapSchema<Dps>
@@ -477,9 +477,9 @@ export interface IPokemonEntity {
   attackSprite: AttackSprite
   rarity: Rarity
   name: Pkm
-  effects: ArraySchema<Effect>
+  effects: SetSchema<Effect>
   items: SetSchema<Item>
-  types: ArraySchema<Synergy>
+  types: SetSchema<Synergy>
   stars: number
   skill: Ability
   passive: Passive
