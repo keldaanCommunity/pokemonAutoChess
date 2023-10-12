@@ -41,6 +41,8 @@
 - Give a rocky helmet to Slowbro to get a Slowking
 - Starly line is now Hatch
 - New ability Magical Leaf for Bulbasaur & Snivy
+- Buff Dhelmise: PP ~~110~~ → 80
+
 
 # Changes to Synergies
 
