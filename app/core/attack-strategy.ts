@@ -402,7 +402,7 @@ export class ConfusingMindStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target, crit)
     const duration = 6000 * (1 + pokemon.ap / 100)
 
-    target.status.triggerCharm(duration, target)
+    target.status.triggerConfusion(duration, target)
   }
 }
 
