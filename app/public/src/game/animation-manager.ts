@@ -5,7 +5,8 @@ import {
   SpriteType,
   PokemonTint,
   PokemonActionState,
-  OrientationFlip
+  OrientationFlip,
+  Stat
 } from "../../../types/enum/Game"
 import { AnimationType, AnimationComplete } from "../../../types/Animation"
 import { Ability } from "../../../types/enum/Ability"
@@ -2256,6 +2257,26 @@ export default class AnimationManager {
       repeat: -1,
       yoyo: true
     })
+
+    const statBoost = [
+      Stat.AP,
+      Stat.ATK_SPEED,
+      Stat.DEF,
+      Stat.HP,
+      Stat.SHIELD,
+      Stat.SPE_DEF,
+      Stat.ATK
+    ]
+    statBoost.forEach((stat) =>
+      this.game.anims.create({
+        key: `BOOST_${stat}`,
+        frames: this.game.anims.generateFrameNames(`BOOST_${stat}`, {
+          start: 0,
+          end: 12
+        }),
+        duration: 800
+      })
+    )
   }
 
   createMinigameAnimations() {

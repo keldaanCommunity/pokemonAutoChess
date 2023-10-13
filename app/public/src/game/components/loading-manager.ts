@@ -3,6 +3,7 @@ import { getPortraitSrc } from "../../utils"
 import GameScene from "../scenes/game-scene"
 import indexList from "../../../dist/client/assets/pokemons/indexList.json"
 import { t } from "i18next"
+import { Stat } from "../../../../types/enum/Game"
 
 export default class LoadingManager {
   scene: Phaser.Scene
@@ -625,6 +626,22 @@ export default class LoadingManager {
       "STEALTH_ROCKS",
       "/assets/attacks/STEALTH_ROCKS.json",
       "/assets/attacks"
+    )
+    const statBoost = [
+      Stat.AP,
+      Stat.ATK_SPEED,
+      Stat.DEF,
+      Stat.HP,
+      Stat.SHIELD,
+      Stat.SPE_DEF,
+      Stat.ATK
+    ]
+    statBoost.forEach((stat) =>
+      scene.load.multiatlas(
+        `BOOST_${stat}`,
+        `/assets/attacks/BOOST_${stat}.json`,
+        "/assets/attacks"
+      )
     )
   }
 }
