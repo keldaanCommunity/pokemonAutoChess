@@ -90,7 +90,9 @@ export default class GameRoom extends Room<GameState> {
     logger.trace("create game room")
     this.setMetadata(<IGameMetadata>{
       name: options.name,
-      playerIds: Object.keys(options.users),
+      playerIds: Object.keys(options.users).filter(
+        (id) => !options.users[id].isBot
+      ),
       stageLevel: 0,
       type: "game"
     })
