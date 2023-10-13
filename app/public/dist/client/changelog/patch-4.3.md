@@ -45,6 +45,7 @@
 - Buff Dhelmise: PP ~~110~~ → 80
 - Move Cleffa/Clefable to additional pool
 - Give a moon stone to Clefable to get Clefairy
+- Snorlax now has Monster synergy ; adjusted stats: HP ~~350~~ → 300
 
 # Changes to Synergies
 
