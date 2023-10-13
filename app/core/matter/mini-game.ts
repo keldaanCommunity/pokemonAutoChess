@@ -500,9 +500,9 @@ export class MiniGame {
 
       if (avatar.portalId && player) {
         const symbols = [...(this.symbols?.values() ?? [])].filter(
-              (symbol) => symbol.portalId === avatar.portalId
-            )
-                  if (state.stageLevel === PortalCarouselStages[0]) {
+          (symbol) => symbol.portalId === avatar.portalId
+        )
+        if (state.stageLevel === PortalCarouselStages[0]) {
           state.shop.assignUniquePropositions(
             player,
             UniqueShop,

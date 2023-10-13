@@ -14,7 +14,8 @@ import {
   PokemonActionState,
   HealType,
   Orientation,
-  BoardEvent
+  BoardEvent,
+  Stat
 } from "../../../../types/enum/Game"
 import { Ability } from "../../../../types/enum/Ability"
 import { Item } from "../../../../types/enum/Item"
@@ -490,12 +491,16 @@ export default class BattleManager {
               pkm.detail.critDamage.textContent = pokemon.critDamage.toFixed(2)
             }
           } else if (field == "ap") {
+            value > previousValue &&
+              this.displayBoost(Stat.AP, pkm.positionX, pkm.positionY)
             pkm.ap = pokemon.ap
             if (pkm.detail) {
               pkm.detail.ap.textContent = pokemon.ap.toString()
               pkm.detail.updateAbilityDescription(pkm.skill, pkm.stars, pkm.ap)
             }
           } else if (field == "atkSpeed") {
+            value > previousValue &&
+              this.displayBoost(Stat.ATK_SPEED, pkm.positionX, pkm.positionY)
             pkm.atkSpeed = pokemon.atkSpeed
             if (pkm.detail) {
               pkm.detail.atkSpeed.textContent = pokemon.atkSpeed.toFixed(2)
@@ -508,6 +513,8 @@ export default class BattleManager {
             }
           } else if (field == "shield") {
             if (value >= 0) {
+              value > previousValue &&
+                this.displayBoost(Stat.SHIELD, pkm.positionX, pkm.positionY)
               pkm.shield = pokemon.shield
               pkm.lifebar?.setShieldAmount(pkm.shield)
             }
@@ -518,16 +525,22 @@ export default class BattleManager {
               pkm.detail.updateValue(pkm.detail.pp, previousValue, value)
             }
           } else if (field == "atk") {
+            value > previousValue &&
+              this.displayBoost(Stat.ATK, pkm.positionX, pkm.positionY)
             pkm.atk = pokemon.atk
             if (pkm.detail) {
               pkm.detail.updateValue(pkm.detail.atk, previousValue, value)
             }
           } else if (field == "def") {
+            value > previousValue &&
+              this.displayBoost(Stat.DEF, pkm.positionX, pkm.positionY)
             pkm.def = pokemon.def
             if (pkm.detail) {
               pkm.detail.updateValue(pkm.detail.def, previousValue, value)
             }
           } else if (field == "speDef") {
+            value > previousValue &&
+              this.displayBoost(Stat.SPE_DEF, pkm.positionX, pkm.positionY)
             pkm.speDef = pokemon.speDef
             if (pkm.detail) {
               pkm.detail.updateValue(pkm.detail.speDef, previousValue, value)
@@ -596,6 +609,26 @@ export default class BattleManager {
       onComplete: () => {
         crit.destroy(true)
       }
+    })
+  }
+
+  displayBoost(stat: Stat, positionX: number, positionY: number) {
+    const coordinates = transformAttackCoordinate(
+      positionX,
+      positionY,
+      this.flip
+    )
+    const boost = this.scene.add.sprite(
+      coordinates[0],
+      coordinates[1] - 10,
+      `BOOST_${stat}`,
+      "0"
+    )
+    boost.setDepth(7)
+    boost.setScale(2, 2)
+    boost.anims.play(`BOOST_${stat}`)
+    boost.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+      boost.destroy()
     })
   }
 
