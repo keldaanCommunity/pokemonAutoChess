@@ -121,7 +121,6 @@ export const PVEStages: { [turn: number]: PVEStage } = {
   24: {
     name: "legendary_birds",
     avatar: Pkm.ZAPDOS,
-    emotion: Emotion.DETERMINED,
     board: [
       [Pkm.ZAPDOS, 2, 2],
       [Pkm.MOLTRES, 4, 2],
@@ -180,12 +179,12 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     avatar: Pkm.REGICE,
     emotion: Emotion.DETERMINED,
     board: [
-      [Pkm.REGIELEKI, 3, 2],
-      [Pkm.REGICE, 3, 3],
-      [Pkm.REGIGIGAS, 4, 3],
-      [Pkm.REGIROCK, 5, 3],
-      [Pkm.REGISTEEL, 6, 3],
-      [Pkm.REGIDRAGO, 6, 2]
+      [Pkm.REGIELEKI, 2, 2],
+      [Pkm.REGICE, 2, 3],
+      [Pkm.REGIGIGAS, 3, 3],
+      [Pkm.REGIROCK, 4, 3],
+      [Pkm.REGISTEEL, 5, 3],
+      [Pkm.REGIDRAGO, 5, 2]
     ],
     chooseOnlyOne: true,
     getRewards() {

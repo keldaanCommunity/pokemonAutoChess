@@ -1313,9 +1313,7 @@ export default class GameRoom extends Room<GameState> {
     const freeSpace = this.getFreeSpaceOnBench(playerId)
     if (freeSpace < pokemonsObtained.length && !bypassLackOfSpace) return // prevent picking if not enough space on bench
 
-    // at this point, the player should be allowed to pick proposition
-    console.log("pick pokemon at stage", this.state.stageLevel)
-
+    // at this point, the player is allowed to pick a proposition
     if (AdditionalPicksStages.includes(this.state.stageLevel)) {
       this.state.additionalPokemons.push(pkm)
       this.state.shop.addAdditionalPokemon(pkm)

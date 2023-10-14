@@ -27,7 +27,8 @@ export default function GameItemsProposition() {
             display: "flex",
             gap: "1vw",
             justifyContent: "center",
-            visibility: visible ? "visible" : "hidden"
+            visibility: visible ? "visible" : "hidden",
+            color: "white"
           }}
         >
           {itemsProposition.map((item, i) => {

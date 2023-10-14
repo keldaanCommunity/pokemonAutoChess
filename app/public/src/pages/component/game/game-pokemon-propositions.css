@@ -25,8 +25,6 @@
 }
 
 .game-pokemons-proposition-list > .nes-container {
-  text-align: center;
-  width: 320px;
   background-color: #54596b;
 }
 
@@ -41,6 +39,7 @@
 
 .game-pokemons-proposition .additional-pick-item {
   color: white;
+  text-align: center;
 }
 
 .game-pokemons-proposition .additional-pick-item p {
