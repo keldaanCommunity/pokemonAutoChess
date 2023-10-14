@@ -14,7 +14,7 @@ import {
 import Player from "../../models/colyseus-models/player"
 import { getOrientation } from "../../public/src/pages/utils/utils"
 import { PokemonActionState } from "../../types/enum/Game"
-import { BasicItems, Item } from "../../types/enum/Item"
+import { BasicItems, CompletedItems, Item } from "../../types/enum/Item"
 import { pickNRandomIn, pickRandomIn, shuffleArray } from "../../utils/random"
 import { clamp, min } from "../../utils/number"
 import {
@@ -272,17 +272,16 @@ export class MiniGame {
     if (PortalCarouselStages.includes(stageLevel)) {
       this.initializePortalCarousel()
     } else if (ItemCarouselStages.includes(stageLevel)) {
-      this.initializeItemsCarousel()
+      this.initializeItemsCarousel(stageLevel)
     }
   }
 
-  initializeItemsCarousel() {
-    const nbItemsToPick = clamp(this.alivePlayers.length + 3, 5, 9)
-    const items = this.pickRandomItems(nbItemsToPick)
+  initializeItemsCarousel(stageLevel: number) {
+    const items = this.pickRandomItems(stageLevel)
 
-    for (let j = 0; j < nbItemsToPick; j++) {
-      const x = this.centerX + Math.cos((Math.PI * 2 * j) / nbItemsToPick) * 100
-      const y = this.centerY + Math.sin((Math.PI * 2 * j) / nbItemsToPick) * 90
+    for (let j = 0; j < items.length; j++) {
+      const x = this.centerX + Math.cos((Math.PI * 2 * j) / items.length) * 100
+      const y = this.centerY + Math.sin((Math.PI * 2 * j) / items.length) * 90
       const name = items[j]
       const floatingItem = new FloatingItem(name, x, y, j)
       this.items?.set(floatingItem.id, floatingItem)
@@ -346,14 +345,26 @@ export class MiniGame {
     })
   }
 
-  pickRandomItems(nbItemsToPick: number): Item[] {
+  pickRandomItems(stageLevel: number): Item[] {
     const items: Item[] = []
+
+    let nbItemsToPick = clamp(this.alivePlayers.length + 3, 5, 9)
+    let maxCopiesPerItem = 2
+    let itemsSet = BasicItems
+
+    if (stageLevel >= 20) {
+      // Carousels after stage 20 propose full items and no longer components, and have one more proposition
+      nbItemsToPick += 1
+      maxCopiesPerItem = 1
+      itemsSet = CompletedItems
+    }
+
     for (let j = 0; j < nbItemsToPick; j++) {
       let item, count
       do {
-        item = pickRandomIn(BasicItems)
+        item = pickRandomIn(itemsSet)
         count = items.filter((i) => i === item).length
-      } while (count >= 2) // maximum 2 copies of each item
+      } while (count >= maxCopiesPerItem)
       items.push(item)
     }
     return items
