@@ -206,7 +206,7 @@ export function StagePath() {
       path.push({
         level,
         icon: getPortraitSrc(PkmIndex[pveStage.avatar], false, Emotion.NORMAL),
-        title: record?.name ?? t(pveStage.name),
+        title: t(record?.name ?? pveStage.name),
         result: record?.result
       })
       if (level === stageLevel && currentLevelPathIndex === undefined) {

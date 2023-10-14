@@ -1,7 +1,7 @@
 import PokemonFactory from "../../models/pokemon-factory"
 import { Ability } from "../../types/enum/Ability"
 import { AttackType, PokemonActionState, Rarity } from "../../types/enum/Game"
-import { Item } from "../../types/enum/Item"
+import { BasicItems, Item } from "../../types/enum/Item"
 import { getUnownsPoolPerStage, Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { pickRandomIn } from "../../utils/random"
@@ -10,7 +10,6 @@ import Board from "../board"
 import PokemonEntity from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
 import PRECOMPUTED_TYPE_POKEMONS from "../../models/precomputed/type-pokemons.json"
-import ItemFactory from "../../models/item-factory"
 import { AbilityStrategy } from "."
 import { Transfer } from "../../types"
 
@@ -229,7 +228,7 @@ export class HiddenPowerIStrategy extends HiddenPowerStrategy {
   ) {
     super.process(unown, state, board, target, crit)
     if (unown.player) {
-      unown.player.items.add(ItemFactory.createBasicRandomItem())
+      unown.player.items.add(pickRandomIn(BasicItems))
     }
   }
 }

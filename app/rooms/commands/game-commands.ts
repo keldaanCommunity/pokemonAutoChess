@@ -46,7 +46,7 @@ import {
   PkmProposition
 } from "../../types/enum/Pokemon"
 import { Pokemon } from "../../models/colyseus-models/pokemon"
-import { chance, pickRandomIn } from "../../utils/random"
+import { chance, pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { logger } from "../../utils/logger"
 import { Passive } from "../../types/enum/Passive"
 import { getAvatarString } from "../../public/src/utils"
@@ -991,10 +991,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     // Item propositions stages
     if (ItemProposalStages.includes(this.state.stageLevel)) {
       this.state.players.forEach((player: Player) => {
-        const items = ItemFactory.createRandomItems()
-        items.forEach((item) => {
-          player.itemsProposition.push(item)
-        })
+        resetArraySchema(player.itemsProposition, pickNRandomIn(BasicItems, 3))
       })
     }
 
