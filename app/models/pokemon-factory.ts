@@ -641,6 +641,7 @@ import {
   Skuntank
 } from "./colyseus-models/pokemon"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
+import { PVEStages } from "./pve-stages"
 
 export default class PokemonFactory {
   static getNeutralPokemonsByLevelStage(
@@ -648,165 +649,16 @@ export default class PokemonFactory {
     shinyEncounter: boolean
   ): MapSchema<Pokemon> {
     const pokemons = new MapSchema<Pokemon>()
-    switch (level) {
-      case 1: {
-        const magikarp1 = PokemonFactory.createPokemonFromName(Pkm.MAGIKARP)
-        magikarp1.positionX = 3
-        magikarp1.positionY = 1
-        const magikarp2 = PokemonFactory.createPokemonFromName(Pkm.MAGIKARP)
-        magikarp2.positionX = 5
-        magikarp2.positionY = 1
-        pokemons.set(magikarp1.id, magikarp1)
-        pokemons.set(magikarp2.id, magikarp2)
-        break
-      }
-
-      case 2: {
-        const rattata1 = PokemonFactory.createPokemonFromName(Pkm.RATTATA)
-        rattata1.positionX = 3
-        rattata1.positionY = 1
-        const rattata2 = PokemonFactory.createPokemonFromName(Pkm.RATTATA)
-        rattata2.positionX = 5
-        rattata2.positionY = 1
-        const raticate = PokemonFactory.createPokemonFromName(Pkm.RATICATE)
-        raticate.positionX = 4
-        raticate.positionY = 2
-        pokemons.set(rattata1.id, rattata1)
-        pokemons.set(rattata2.id, rattata2)
-        pokemons.set(raticate.id, raticate)
-        break
-      }
-
-      case 3: {
-        const spearow1 = PokemonFactory.createPokemonFromName(Pkm.SPEAROW)
-        spearow1.positionX = 3
-        spearow1.positionY = 1
-        const spearow2 = PokemonFactory.createPokemonFromName(Pkm.SPEAROW)
-        spearow2.positionX = 5
-        spearow2.positionY = 1
-        const spearow3 = PokemonFactory.createPokemonFromName(Pkm.SPEAROW)
-        spearow3.positionX = 4
-        spearow3.positionY = 1
-        const fearow = PokemonFactory.createPokemonFromName(Pkm.FEAROW)
-        fearow.positionX = 4
-        fearow.positionY = 2
-        pokemons.set(spearow1.id, spearow1)
-        pokemons.set(spearow2.id, spearow2)
-        pokemons.set(spearow3.id, spearow3)
-        pokemons.set(fearow.id, fearow)
-        break
-      }
-
-      case 9: {
-        const config = shinyEncounter
-          ? { selectedShiny: true, selectedEmotion: Emotion.ANGRY }
-          : undefined
-        const gyarados = PokemonFactory.createPokemonFromName(
-          Pkm.GYARADOS,
-          config
-        )
-        gyarados.positionX = 4
-        gyarados.positionY = 2
-        pokemons.set(gyarados.id, gyarados)
-        break
-      }
-
-      case 14: {
-        const lugia = PokemonFactory.createPokemonFromName(Pkm.LUGIA)
-        lugia.positionX = 4
-        lugia.positionY = 2
-        pokemons.set(lugia.id, lugia)
-        break
-      }
-
-      case 19: {
-        const giratina = PokemonFactory.createPokemonFromName(Pkm.GIRATINA)
-        giratina.positionX = 4
-        giratina.positionY = 2
-        pokemons.set(giratina.id, giratina)
-        break
-      }
-
-      case 24: {
-        const zapdos = PokemonFactory.createPokemonFromName(Pkm.ZAPDOS)
-        zapdos.positionX = 2
-        zapdos.positionY = 2
-        pokemons.set(zapdos.id, zapdos)
-        const moltres = PokemonFactory.createPokemonFromName(Pkm.MOLTRES)
-        moltres.positionX = 4
-        moltres.positionY = 2
-        pokemons.set(moltres.id, moltres)
-        const articuno = PokemonFactory.createPokemonFromName(Pkm.ARTICUNO)
-        articuno.positionX = 6
-        articuno.positionY = 2
-        pokemons.set(articuno.id, articuno)
-        break
-      }
-
-      case 29: {
-        const dialga = PokemonFactory.createPokemonFromName(Pkm.DIALGA)
-        dialga.positionX = 2
-        dialga.positionY = 2
-        pokemons.set(dialga.id, dialga)
-        const palkia = PokemonFactory.createPokemonFromName(Pkm.PALKIA)
-        palkia.positionX = 6
-        palkia.positionY = 2
-        pokemons.set(palkia.id, palkia)
-        break
-      }
-
-      case 34: {
-        const suicune = PokemonFactory.createPokemonFromName(Pkm.SUICUNE)
-        suicune.positionX = 2
-        suicune.positionY = 2
-        pokemons.set(suicune.id, suicune)
-        const raikou = PokemonFactory.createPokemonFromName(Pkm.RAIKOU)
-        raikou.positionX = 4
-        raikou.positionY = 2
-        pokemons.set(raikou.id, raikou)
-        const entei = PokemonFactory.createPokemonFromName(Pkm.ENTEI)
-        entei.positionX = 6
-        entei.positionY = 2
-        pokemons.set(entei.id, entei)
-        break
-      }
-
-      case 39: {
-        const regice = PokemonFactory.createPokemonFromName(Pkm.REGICE)
-        regice.positionX = 2
-        regice.positionY = 3
-        pokemons.set(regice.id, regice)
-        const regirock = PokemonFactory.createPokemonFromName(Pkm.REGIROCK)
-        regirock.positionX = 4
-        regirock.positionY = 3
-        pokemons.set(regirock.id, regirock)
-        const registeel = PokemonFactory.createPokemonFromName(Pkm.REGISTEEL)
-        registeel.positionX = 6
-        registeel.positionY = 3
-        pokemons.set(registeel.id, registeel)
-        const regigigas = PokemonFactory.createPokemonFromName(Pkm.REGIGIGAS)
-        regigigas.positionX = 4
-        regigigas.positionY = 1
-        pokemons.set(regigigas.id, regigigas)
-        break
-      }
-
-      default: {
-        const kyogre = PokemonFactory.createPokemonFromName(Pkm.KYOGRE)
-        kyogre.positionX = 2
-        kyogre.positionY = 2
-        pokemons.set(kyogre.id, kyogre)
-        const groudon = PokemonFactory.createPokemonFromName(Pkm.GROUDON)
-        groudon.positionX = 4
-        groudon.positionY = 2
-        pokemons.set(groudon.id, groudon)
-        const rayquaza = PokemonFactory.createPokemonFromName(Pkm.RAYQUAZA)
-        rayquaza.positionX = 6
-        rayquaza.positionY = 2
-        pokemons.set(rayquaza.id, rayquaza)
-        break
-      }
-    }
+    const pveStage = PVEStages[level]
+    pveStage.board.forEach(([pkm, x, y]) => {
+      const pokemon = PokemonFactory.createPokemonFromName(pkm, {
+        selectedEmotion: pveStage.emotion ?? Emotion.NORMAL,
+        selectedShiny: shinyEncounter
+      })
+      pokemon.positionX = x
+      pokemon.positionY = y
+      pokemons.set(pokemon.id, pokemon)
+    })
     return pokemons
   }
 

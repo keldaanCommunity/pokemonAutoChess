@@ -6,7 +6,6 @@ import { nanoid } from "nanoid"
 import {
   ItemProposalStages,
   ItemRecipe,
-  NeutralStage,
   ItemCarouselStages,
   StageDuration,
   AdditionalPicksStages,
@@ -23,10 +22,10 @@ import { BattleResult } from "../../types/enum/Game"
 import Player from "../../models/colyseus-models/player"
 import PokemonFactory from "../../models/pokemon-factory"
 import ItemFactory from "../../models/item-factory"
-import UserMetadata from "../../models/mongo-models/user-metadata"
+import { PVEStages } from "../../models/pve-stages"
 import GameRoom from "../game-room"
 import { Effect } from "../../types/enum/Effect"
-import { Title, Emotion } from "../../types"
+import { Title } from "../../types"
 import {
   GamePhaseState,
   Rarity,
@@ -1039,7 +1038,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       })
     }
 
-    const isAfterPVE = this.getPVEIndex(this.state.stageLevel - 1) >= 0
+    const isAfterPVE = this.state.stageLevel - 1 in PVEStages
     const commands = new Array<Command>()
 
     this.state.players.forEach((player: Player) => {
@@ -1111,18 +1110,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     return commands
   }
 
-  getPVEIndex(stageLevel: number) {
-    const result = NeutralStage.findIndex((stage) => {
-      return stage.turn == stageLevel
-    })
-
-    return result
-  }
-
-  checkForPVE() {
-    return this.getPVEIndex(this.state.stageLevel) >= 0
-  }
-
   stopPickingPhase() {
     this.state.players.forEach((player) => {
       if (player.itemsProposition.length > 0) {
@@ -1155,7 +1142,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
   }
 
   stopFightingPhase() {
-    const isPVE = this.checkForPVE()
+    const isPVE = this.state.stageLevel in PVEStages
 
     this.computeAchievements()
     this.computeStreak(isPVE)
@@ -1297,18 +1284,20 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     updateLobby(this.room)
     this.state.botManager.updateBots()
 
-    const stageIndex = this.getPVEIndex(this.state.stageLevel)
-    this.state.shinyEncounter = this.state.stageLevel === 9 && chance(1 / 10)
+    const pveStage = PVEStages[this.state.stageLevel]
+    this.state.shinyEncounter = pveStage.shinyChance
+      ? chance(pveStage.shinyChance)
+      : false
 
-    if (stageIndex !== -1) {
+    if (pveStage) {
       this.state.players.forEach((player: Player) => {
         if (player.alive) {
           player.opponentId = "pve"
-          player.opponentName = NeutralStage[stageIndex].name
+          player.opponentName = pveStage.name
           player.opponentAvatar = getAvatarString(
-            PkmIndex[NeutralStage[stageIndex].avatar],
+            PkmIndex[pveStage.avatar],
             this.state.shinyEncounter,
-            Emotion.NORMAL
+            pveStage.emotion
           )
           player.opponentTitle = "Wild"
           player.pveRewards.push(ItemFactory.createBasicRandomItem())
