@@ -119,7 +119,8 @@ export default class GameRoom extends Room<GameState> {
       PRECOMPUTED_TYPE_POKEMONS[type].additionalPokemons.forEach((p) => {
         const pokemon = PokemonFactory.createPokemonFromName(p)
         if (
-          pokemon.rarity === Rarity.UNCOMMON &&
+          (pokemon.rarity === Rarity.UNCOMMON ||
+            pokemon.rarity === Rarity.COMMON) && // TEMP: we should move all common add picks to uncommon rarity
           !this.additionalUncommonPool.includes(p) &&
           pokemon.stars === 1
         ) {
