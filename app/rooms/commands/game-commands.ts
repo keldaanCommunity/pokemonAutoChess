@@ -998,38 +998,21 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       })
     }
 
-    // First additional pick stage
-    if (this.state.stageLevel === AdditionalPicksStages[0]) {
+    // Additional pick stages
+    if (AdditionalPicksStages.includes(this.state.stageLevel)) {
+      const pool = this.state.stageLevel === AdditionalPicksStages[0] ? this.room.additionalUncommonPool
+      : this.state.stageLevel === AdditionalPicksStages[1] ? this.room.additionalRarePool
+      : this.room.additionalEpicPool
       this.state.players.forEach((player: Player) => {
         if (player.isBot) {
-          const p = this.room.additionalPokemonsPool1.pop()
+          const p = pool.pop()
           if (p) {
             this.state.additionalPokemons.push(p)
             this.state.shop.addAdditionalPokemon(p)
           }
         } else {
           for (let i = 0; i < 3; i++) {
-            const p = this.room.additionalPokemonsPool1.pop()
-            if (p) {
-              player.pokemonsProposition.push(p)
-            }
-          }
-        }
-      })
-    }
-
-    // Second additional pick stage
-    if (this.state.stageLevel === AdditionalPicksStages[1]) {
-      this.state.players.forEach((player: Player) => {
-        if (player.isBot) {
-          const p = this.room.additionalPokemonsPool2.pop()
-          if (p) {
-            this.state.additionalPokemons.push(p)
-            this.state.shop.addAdditionalPokemon(p)
-          }
-        } else {
-          for (let i = 0; i < 3; i++) {
-            const p = this.room.additionalPokemonsPool2.pop()
+            const p = pool.pop()
             if (p) {
               player.pokemonsProposition.push(p)
             }

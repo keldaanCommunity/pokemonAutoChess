@@ -237,13 +237,14 @@ export function validateBoard(board: IDetailledPokemon[], stage: number) {
     .filter(removeDuoPartner)
 
   const additionalCommon = team.filter(
-    (p) =>
-      p.additional &&
-      (p.rarity === Rarity.COMMON || p.rarity === Rarity.UNCOMMON)
+    (p) => p.additional && p.rarity === Rarity.UNCOMMON
   )
   const additionalRare = team.filter(
-    (p) =>
-      p.additional && (p.rarity === Rarity.RARE || p.rarity === Rarity.EPIC)
+    (p) => p.additional && p.rarity === Rarity.RARE
+  )
+
+  const additionalEpic = team.filter(
+    (p) => p.additional && p.rarity === Rarity.EPIC
   )
 
   if (stage < PortalCarouselStages[0] && uniques.length > 0) {
@@ -262,12 +263,17 @@ export function validateBoard(board: IDetailledPokemon[], stage: number) {
 
   if (stage < AdditionalPicksStages[0] && additionalCommon.length > 0) {
     throw new Error(
-      `Common/Uncommon additional picks can't be played before stage ${AdditionalPicksStages[0]}`
+      `Uncommon additional picks can't be played before stage ${AdditionalPicksStages[0]}`
     )
   }
   if (stage < AdditionalPicksStages[1] && additionalRare.length > 0) {
     throw new Error(
-      `Rare/Epic additional picks can't be played before stage ${AdditionalPicksStages[1]}`
+      `Rare additional picks can't be played before stage ${AdditionalPicksStages[1]}`
+    )
+  }
+  if (stage < AdditionalPicksStages[2] && additionalEpic.length > 0) {
+    throw new Error(
+      `Epic additional picks can't be played before stage ${AdditionalPicksStages[2]}`
     )
   }
   if (uniques.length > 1) {
