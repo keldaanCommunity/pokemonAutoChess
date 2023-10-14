@@ -1157,12 +1157,16 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             }
           }
         }
-        if (isPVE) {
+        
+        if (isPVE && player.getLastBattleResult() === BattleResult.WIN) {
+          const pveStage = PVEStages[this.state.stageLevel]
           while (player.pveRewards.length > 0) {
             const reward = player.pveRewards.pop()!
-            if (player.getLastBattleResult() === BattleResult.WIN) {
+            if(pveStage.chooseOnlyOne){
+              player.itemsProposition.push(reward)
+            } else {
               player.items.add(reward)
-            }
+            }            
           }
         }
 
@@ -1283,16 +1287,14 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             pveStage.emotion
           )
           player.opponentTitle = "Wild"
-          player.pveRewards.push(ItemFactory.createBasicRandomItem())
-          if (this.state.shinyEncounter) {
-            // give a second item if shiny PVE round
-            player.pveRewards.push(ItemFactory.createBasicRandomItem())
+          const rewards = pveStage.getRewards(this.state.shinyEncounter)
+          player.pveRewards.splice(0, player.itemsProposition.length, ...rewards)
+
+          if(pveStage.chooseOnlyOne){
+            player.itemsProposition.splice(0, player.itemsProposition.length, ...rewards)
           }
 
-          const pveBoard = PokemonFactory.getNeutralPokemonsByLevelStage(
-            this.state.stageLevel,
-            this.state.shinyEncounter
-          )
+          const pveBoard = PokemonFactory.makePveBoard(pveStage, this.state.shinyEncounter)
           const weather = getWeather(player.board, pveBoard)
           const simulation = new Simulation(
             nanoid(),

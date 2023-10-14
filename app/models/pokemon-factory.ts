@@ -641,15 +641,11 @@ import {
   Skuntank
 } from "./colyseus-models/pokemon"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
-import { PVEStages } from "./pve-stages"
+import { PVEStage } from "./pve-stages"
 
 export default class PokemonFactory {
-  static getNeutralPokemonsByLevelStage(
-    level: number,
-    shinyEncounter: boolean
-  ): MapSchema<Pokemon> {
+  static makePveBoard(pveStage: PVEStage, shinyEncounter: boolean): MapSchema<Pokemon> {
     const pokemons = new MapSchema<Pokemon>()
-    const pveStage = PVEStages[level]
     pveStage.board.forEach(([pkm, x, y]) => {
       const pokemon = PokemonFactory.createPokemonFromName(pkm, {
         selectedEmotion: pveStage.emotion ?? Emotion.NORMAL,

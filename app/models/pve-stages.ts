@@ -14,7 +14,7 @@ export type PVEStage = {
   avatar: Pkm
   emotion?: Emotion
   shinyChance?: number
-  pveRewards: (shiny: boolean) => Item[]
+  getRewards: (shiny: boolean) => Item[]
   chooseOnlyOne?: boolean
   board: [pkm: Pkm, x: number, y: number][]
 }
@@ -27,7 +27,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.MAGIKARP, 3, 1],
       [Pkm.MAGIKARP, 5, 1]
     ],
-    pveRewards() {
+    getRewards() {
       return [pickRandomIn(BasicItems)]
     }
   },
@@ -41,7 +41,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.RATTATA, 5, 1],
       [Pkm.RATICATE, 4, 2]
     ],
-    pveRewards() {
+    getRewards() {
       return [pickRandomIn(BasicItems)]
     }
   },
@@ -56,7 +56,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.SPEAROW, 4, 1],
       [Pkm.FEAROW, 4, 2]
     ],
-    pveRewards() {
+    getRewards() {
       return [pickRandomIn(BasicItems)]
     }
   },
@@ -67,7 +67,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     emotion: Emotion.ANGRY,
     shinyChance: 1 / 20,
     board: [[Pkm.GYARADOS, 4, 2]],
-    pveRewards(shiny) {
+    getRewards(shiny) {
       if (shiny) {
         return [
           pickRandomIn(BasicItems),
@@ -89,7 +89,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.LUGIA, 3, 1],
       [Pkm.HO_OH, 5, 1]
     ],
-    pveRewards(shiny) {
+    getRewards(shiny) {
       if (shiny) {
         return [
           pickRandomIn(NonSpecialItemComponents),
@@ -108,7 +108,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     emotion: Emotion.DETERMINED,
     shinyChance: 1 / 50,
     board: [[Pkm.GIRATINA, 4, 2]],
-    pveRewards(shiny) {
+    getRewards(shiny) {
       if (shiny) {
         return [
           pickRandomIn(NonSpecialItemComponents),
@@ -131,7 +131,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.ARTICUNO, 6, 2]
     ],
     chooseOnlyOne: true,
-    pveRewards() {
+    getRewards() {
       return [
         pickRandomIn(CompletedItems),
         pickRandomIn(CompletedItems),
@@ -150,7 +150,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.SUICUNE, 6, 2]
     ],
     chooseOnlyOne: true,
-    pveRewards() {
+    getRewards() {
       return [
         pickRandomIn(CompletedItems),
         pickRandomIn(CompletedItems),
@@ -169,7 +169,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.PRIMAL_GROUDON, 6, 2]
     ],
     chooseOnlyOne: true,
-    pveRewards() {
+    getRewards() {
       return [
         pickRandomIn(CompletedItems),
         pickRandomIn(CompletedItems),
@@ -191,7 +191,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.REGIDRAGO, 6, 2]
     ],
     chooseOnlyOne: true,
-    pveRewards() {
+    getRewards() {
       return [
         pickRandomIn(CompletedItems),
         pickRandomIn(CompletedItems),
@@ -209,7 +209,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.PALKIA, 6, 2],
       [Pkm.ARCEUS, 4, 2]
     ],
-    pveRewards() {
+    getRewards() {
       return [
         pickRandomIn(SynergyStones),
         pickRandomIn(SynergyStones),
