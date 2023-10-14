@@ -59,6 +59,20 @@
 - Snow weather effect change: ~~-25% attack speed~~ → -25% movement speed
 - Round damage change: 1 damage per opponent pokemon alive, no matter their tier
 
+# Stages
+
+PVE rounds and rewards have been reworked with these goals in mind: difficult and emblematic PVE fights, more frequent in endgame and with better, various rewards; the average total number of components per game has increased, and there's no more random components after stage 20.
+
+- Added item components with additional picks
+- Removed component pick at stage 2
+- Removed Carousel at stage 7
+- Added Epic additional pick at stage 11.
+- Added Ho-Oh with Lugia at stage 14 PVE
+- Added a component pick at stage 15
+- New PVE rounds at stages: 24, 28, 32, 36, 40
+- Added an item pick at stage 29, 33, 37
+- Carousels after stage 20 propose full items instead of components, and have one more proposition
+
 # UI
 
 - Better pokemon report, grouped by families
