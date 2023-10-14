@@ -10599,10 +10599,10 @@ export class Snorlax extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.SNORLAX,
-      [Synergy.NORMAL, Synergy.HUMAN],
+      [Synergy.NORMAL, Synergy.HUMAN, Synergy.MONSTER],
       Rarity.EPIC,
       Pkm.DEFAULT,
-      350,
+      300,
       19,
       3,
       3,
