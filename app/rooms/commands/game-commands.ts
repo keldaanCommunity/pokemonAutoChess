@@ -10,8 +10,6 @@ import {
   StageDuration,
   AdditionalPicksStages,
   PortalCarouselStages,
-  UniqueShop,
-  LegendaryShop,
   MAX_PLAYERS_PER_LOBBY,
   ITEM_CAROUSEL_BASE_DURATION,
   PORTAL_CAROUSEL_BASE_DURATION,
@@ -21,7 +19,6 @@ import { Item, BasicItems } from "../../types/enum/Item"
 import { BattleResult } from "../../types/enum/Game"
 import Player from "../../models/colyseus-models/player"
 import PokemonFactory from "../../models/pokemon-factory"
-import ItemFactory from "../../models/item-factory"
 import { PVEStages } from "../../models/pve-stages"
 import GameRoom from "../game-room"
 import { Effect } from "../../types/enum/Effect"
@@ -39,13 +36,7 @@ import {
   IPokemonEntity,
   Transfer
 } from "../../types"
-import {
-  Pkm,
-  PkmDuos,
-  PkmIndex,
-  PkmProposition
-} from "../../types/enum/Pokemon"
-import { Pokemon } from "../../models/colyseus-models/pokemon"
+import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { chance, pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { logger } from "../../utils/logger"
 import { Passive } from "../../types/enum/Passive"
@@ -115,100 +106,6 @@ export class OnShopCommand extends Command<
     }
 
     this.room.updateEvolution(playerId)
-  }
-}
-
-export class OnItemCommand extends Command<
-  GameRoom,
-  {
-    playerId: string
-    id: string
-  }
-> {
-  execute({ playerId, id }) {
-    const player = this.state.players.get(playerId)
-    if (player) {
-      if (player.itemsProposition.includes(id)) {
-        player.items.add(id)
-      }
-      while (player.itemsProposition.length > 0) {
-        player.itemsProposition.pop()
-      }
-    }
-  }
-}
-
-export class OnPokemonPropositionCommand extends Command<
-  GameRoom,
-  {
-    playerId: string
-    pkm: PkmProposition
-  }
-> {
-  execute({ playerId, pkm }: { playerId: string; pkm: PkmProposition }) {
-    const player = this.state.players.get(playerId)
-    if (
-      player &&
-      player.pokemonsProposition.length > 0 &&
-      !this.state.additionalPokemons.includes(pkm) &&
-      this.room.getBenchSize(player.board) < 8
-    ) {
-      if (AdditionalPicksStages.includes(this.state.stageLevel)) {
-        this.state.additionalPokemons.push(pkm)
-        this.state.shop.addAdditionalPokemon(pkm)
-      }
-
-      let allowBuy = true
-      if (
-        UniqueShop.includes(pkm) &&
-        this.state.stageLevel !== PortalCarouselStages[0]
-      ) {
-        allowBuy = false // wrong stage
-      }
-      if (
-        LegendaryShop.includes(pkm) &&
-        this.state.stageLevel !== PortalCarouselStages[1]
-      ) {
-        allowBuy = false // wrong stage
-      }
-
-      player.board.forEach((p) => {
-        if (UniqueShop.includes(pkm) && UniqueShop.includes(p.name)) {
-          allowBuy = false // already picked a T10 mythical
-        }
-        if (LegendaryShop.includes(pkm) && LegendaryShop.includes(p.name)) {
-          allowBuy = false // already picked a T20 mythical
-        }
-      })
-
-      const freeCellsOnBench: number[] = []
-      for (let i = 0; i < 8; i++) {
-        if (this.room.isPositionEmpty(playerId, i, 0)) {
-          freeCellsOnBench.push(i)
-        }
-      }
-
-      const pokemonsObtained: Pokemon[] = (
-        pkm in PkmDuos ? PkmDuos[pkm] : [pkm]
-      ).map((p) => PokemonFactory.createPokemonFromName(p, player))
-      const hasSpaceOnBench = freeCellsOnBench.length >= pokemonsObtained.length
-
-      if (allowBuy && hasSpaceOnBench) {
-        pokemonsObtained.forEach((pokemon) => {
-          const freeCellX = this.room.getFirstAvailablePositionInBench(
-            player.id
-          )
-          if (freeCellX === undefined) return
-          pokemon.positionX = freeCellX
-          pokemon.positionY = 0
-          player.board.set(pokemon.id, pokemon)
-        })
-
-        while (player.pokemonsProposition.length > 0) {
-          player.pokemonsProposition.pop()
-        }
-      }
-    }
   }
 }
 
@@ -651,17 +548,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       this.initializePickingPhase()
     } else if (this.state.phase == GamePhaseState.PICK) {
       this.stopPickingPhase()
-      const commands = this.checkForLazyTeam()
-      if (commands.length != 0) {
-        return commands
-      }
+      this.checkForLazyTeam()
       this.initializeFightingPhase()
     } else if (this.state.phase == GamePhaseState.FIGHT) {
-      const kickCommands = this.stopFightingPhase()
-      if (kickCommands.length != 0) {
-        return kickCommands
-      }
-
+      this.stopFightingPhase()
       if (
         ItemCarouselStages.includes(this.state.stageLevel) ||
         PortalCarouselStages.includes(this.state.stageLevel)
@@ -801,7 +691,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
   }
 
   checkEndGame() {
-    const commands = []
     const numberOfPlayersAlive = values(this.state.players).filter(
       (p) => p.alive
     ).length
@@ -818,7 +707,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         this.room.disconnect()
       }, 30 * 1000)
     }
-    return commands
   }
 
   computePlayerDamage(
@@ -1015,6 +903,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             const p = pool.pop()
             if (p) {
               player.pokemonsProposition.push(p)
+              player.itemsProposition.push(pickRandomIn(BasicItems))
             }
           }
         }
@@ -1055,8 +944,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
   }
 
   checkForLazyTeam() {
-    const commands = new Array<Command>()
-
+    // force move on board some units if room available
     this.state.players.forEach((player, key) => {
       const teamSize = this.room.getTeamSize(player.board)
       if (teamSize < player.experienceManager.level) {
@@ -1067,59 +955,35 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             const coordinate = this.room.getFirstAvailablePositionInTeam(
               player.id
             )
-            const p = this.room.getFirstPlaceablePokemonOnBench(player.board)
-            if (coordinate && p) {
-              const detail: { id: string; x: number; y: number } = {
-                id: p.id,
-                x: coordinate[0],
-                y: coordinate[1]
-              }
-              const client: IClient = {
-                auth: {
-                  uid: key
-                }
-              }
-              commands.push(
-                new OnDragDropCommand().setPayload({
-                  client: client,
-                  detail: detail
-                })
-              )
+            const pokemon = this.room.getFirstPlaceablePokemonOnBench(
+              player.board
+            )
+            if (coordinate && pokemon) {
+              this.room.swap(player.id, pokemon, coordinate[0], coordinate[1])
             }
           }
         }
       }
     })
-    return commands
   }
 
   stopPickingPhase() {
     this.state.players.forEach((player) => {
-      if (player.itemsProposition.length > 0) {
-        if (player.itemsProposition.length === 3) {
-          // auto pick if not chosen
-          const i = pickRandomIn([...player.itemsProposition])
-          if (i) {
-            player.items.add(i)
-          }
-        }
-        while (player.itemsProposition.length > 0) {
-          player.itemsProposition.pop()
-        }
-      }
-
       if (player.pokemonsProposition.length > 0) {
-        if (player.pokemonsProposition.length === 3) {
-          // auto pick if not chosen
-          const pkm = pickRandomIn([...player.pokemonsProposition])
-          if (pkm) {
-            this.state.additionalPokemons.push(pkm)
-            this.state.shop.addAdditionalPokemon(pkm)
-          }
-        }
-        while (player.pokemonsProposition.length > 0) {
-          player.pokemonsProposition.pop()
-        }
+        // auto pick if not chosen
+        this.room.pickPokemonProposition(
+          player.id,
+          pickRandomIn([...player.pokemonsProposition]),
+          true
+        )
+        player.pokemonsProposition.clear()
+      } else if (player.itemsProposition.length > 0) {
+        // auto pick if not chosen
+        this.room.pickItemProposition(
+          player.id,
+          pickRandomIn([...player.itemsProposition])
+        )
+        player.itemsProposition.clear()
       }
     })
   }
@@ -1244,7 +1108,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     })
 
     this.state.stageLevel += 1
-    return this.checkEndGame()
+    this.checkEndGame()
   }
 
   initializeMinigamePhase() {

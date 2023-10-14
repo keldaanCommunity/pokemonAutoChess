@@ -30,8 +30,8 @@ export default function GameItemsProposition() {
             visibility: visible ? "visible" : "hidden"
           }}
         >
-          {itemsProposition.map((e, i) => {
-            return <GameItem key={i} item={e} />
+          {itemsProposition.map((item, i) => {
+            return <GameItem key={i} item={item} />
           })}
         </div>
 
