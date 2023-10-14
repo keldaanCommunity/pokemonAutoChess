@@ -30,6 +30,7 @@ export default function GameStageInfo() {
   const weather = useAppSelector((state) => state.game.weather)
 
   const stageLevel = useAppSelector((state) => state.game.stageLevel)
+  const isPVE = stageLevel in PVEStages
   const currentPlayerOpponentName = useAppSelector(
     (state) => state.game.currentPlayerOpponentName
   )
@@ -104,7 +105,9 @@ export default function GameStageInfo() {
                 {opponentTitle && (
                   <p className="player-title">{opponentTitle}</p>
                 )}
-                <p className="player-name">{opponentName}</p>
+                <p className="player-name">
+                  {isPVE ? t(opponentName) : opponentName}
+                </p>
               </div>
             </>
           )}
@@ -202,12 +205,8 @@ export function StagePath() {
     if (pveStage) {
       path.push({
         level,
-        icon: getPortraitSrc(
-          PkmIndex[pveStage.avatar],
-          false,
-          Emotion.NORMAL
-        ),
-        title: record?.name ?? pveStage.name,
+        icon: getPortraitSrc(PkmIndex[pveStage.avatar], false, Emotion.NORMAL),
+        title: record?.name ?? t(pveStage.name),
         result: record?.result
       })
       if (level === stageLevel && currentLevelPathIndex === undefined) {

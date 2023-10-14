@@ -35,7 +35,6 @@ export const PVEStages: { [turn: number]: PVEStage } = {
   2: {
     name: "pkm.RATICATE",
     avatar: Pkm.RATICATE,
-    emotion: Emotion.ANGRY,
     board: [
       [Pkm.RATTATA, 3, 1],
       [Pkm.RATTATA, 5, 1],
@@ -49,7 +48,6 @@ export const PVEStages: { [turn: number]: PVEStage } = {
   3: {
     name: "pkm.FEAROW",
     avatar: Pkm.FEAROW,
-    emotion: Emotion.ANGRY,
     board: [
       [Pkm.SPEAROW, 3, 1],
       [Pkm.SPEAROW, 5, 1],
@@ -64,7 +62,6 @@ export const PVEStages: { [turn: number]: PVEStage } = {
   9: {
     name: "pkm.GYARADOS",
     avatar: Pkm.GYARADOS,
-    emotion: Emotion.ANGRY,
     shinyChance: 1 / 20,
     board: [[Pkm.GYARADOS, 4, 2]],
     getRewards(shiny) {

@@ -54,7 +54,7 @@ import { max } from "../../utils/number"
 import { getWeather } from "../../utils/weather"
 import Simulation from "../../core/simulation"
 import { selectMatchups } from "../../core/matchmaking"
-import { values } from "../../utils/schemas"
+import { resetArraySchema, values } from "../../utils/schemas"
 
 export class OnShopCommand extends Command<
   GameRoom,
@@ -1000,9 +1000,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
     // Additional pick stages
     if (AdditionalPicksStages.includes(this.state.stageLevel)) {
-      const pool = this.state.stageLevel === AdditionalPicksStages[0] ? this.room.additionalUncommonPool
-      : this.state.stageLevel === AdditionalPicksStages[1] ? this.room.additionalRarePool
-      : this.room.additionalEpicPool
+      const pool =
+        this.state.stageLevel === AdditionalPicksStages[0]
+          ? this.room.additionalUncommonPool
+          : this.state.stageLevel === AdditionalPicksStages[1]
+          ? this.room.additionalRarePool
+          : this.room.additionalEpicPool
       this.state.players.forEach((player: Player) => {
         if (player.isBot) {
           const p = pool.pop()
@@ -1157,16 +1160,16 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             }
           }
         }
-        
+
         if (isPVE && player.getLastBattleResult() === BattleResult.WIN) {
           const pveStage = PVEStages[this.state.stageLevel]
           while (player.pveRewards.length > 0) {
             const reward = player.pveRewards.pop()!
-            if(pveStage.chooseOnlyOne){
+            if (pveStage.chooseOnlyOne) {
               player.itemsProposition.push(reward)
             } else {
               player.items.add(reward)
-            }            
+            }
           }
         }
 
@@ -1272,11 +1275,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     this.state.botManager.updateBots()
 
     const pveStage = PVEStages[this.state.stageLevel]
-    this.state.shinyEncounter = pveStage.shinyChance
-      ? chance(pveStage.shinyChance)
-      : false
 
     if (pveStage) {
+      this.state.shinyEncounter = chance(pveStage.shinyChance ?? 0)
       this.state.players.forEach((player: Player) => {
         if (player.alive) {
           player.opponentId = "pve"
@@ -1288,13 +1289,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           )
           player.opponentTitle = "Wild"
           const rewards = pveStage.getRewards(this.state.shinyEncounter)
-          player.pveRewards.splice(0, player.itemsProposition.length, ...rewards)
+          resetArraySchema(player.pveRewards, rewards)
 
-          if(pveStage.chooseOnlyOne){
-            player.itemsProposition.splice(0, player.itemsProposition.length, ...rewards)
-          }
-
-          const pveBoard = PokemonFactory.makePveBoard(pveStage, this.state.shinyEncounter)
+          const pveBoard = PokemonFactory.makePveBoard(
+            pveStage,
+            this.state.shinyEncounter
+          )
           const weather = getWeather(player.board, pveBoard)
           const simulation = new Simulation(
             nanoid(),
