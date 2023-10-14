@@ -57,6 +57,7 @@
 # Gameplay
 
 - Snow weather effect change: ~~-25% attack speed~~ → -25% movement speed
+- Round damage change: 1 damage per opponent pokemon alive, no matter their tier
 
 # UI
 

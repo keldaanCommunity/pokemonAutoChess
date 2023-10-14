@@ -709,7 +709,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     }
   }
 
-  computePlayerDamage(
+  computeRoundDamage(
     opponentTeam: MapSchema<IPokemonEntity>,
     stageLevel: number
   ) {
@@ -717,7 +717,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     if (opponentTeam.size > 0) {
       opponentTeam.forEach((pokemon) => {
         if (!pokemon.isClone) {
-          damage += pokemon.stars
+          damage += 1
         }
       })
     }
@@ -774,7 +774,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           (currentResult === BattleResult.DEFEAT ||
             currentResult === BattleResult.DRAW)
         ) {
-          const playerDamage = this.computePlayerDamage(
+          const playerDamage = this.computeRoundDamage(
             opponentTeam,
             this.state.stageLevel
           )
