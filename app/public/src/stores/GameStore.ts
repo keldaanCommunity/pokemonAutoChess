@@ -33,7 +33,7 @@ interface GameStateStore {
   shopLocked: boolean
   experienceManager: ExperienceManager
   shop: Pkm[]
-  itemsProposition: string[]
+  itemsProposition: Item[]
   pokemonsProposition: PkmProposition[]
   currentPlayerSynergies: [string, number][]
   currentPlayerOpponentId: string

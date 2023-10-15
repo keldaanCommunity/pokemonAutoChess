@@ -6,13 +6,10 @@ import { nanoid } from "nanoid"
 import {
   ItemProposalStages,
   ItemRecipe,
-  NeutralStage,
   ItemCarouselStages,
   StageDuration,
   AdditionalPicksStages,
   PortalCarouselStages,
-  UniqueShop,
-  LegendaryShop,
   MAX_PLAYERS_PER_LOBBY,
   ITEM_CAROUSEL_BASE_DURATION,
   PORTAL_CAROUSEL_BASE_DURATION,
@@ -22,11 +19,10 @@ import { Item, BasicItems } from "../../types/enum/Item"
 import { BattleResult } from "../../types/enum/Game"
 import Player from "../../models/colyseus-models/player"
 import PokemonFactory from "../../models/pokemon-factory"
-import ItemFactory from "../../models/item-factory"
-import UserMetadata from "../../models/mongo-models/user-metadata"
+import { PVEStages } from "../../models/pve-stages"
 import GameRoom from "../game-room"
 import { Effect } from "../../types/enum/Effect"
-import { Title, Emotion } from "../../types"
+import { Title } from "../../types"
 import {
   GamePhaseState,
   Rarity,
@@ -40,14 +36,8 @@ import {
   IPokemonEntity,
   Transfer
 } from "../../types"
-import {
-  Pkm,
-  PkmDuos,
-  PkmIndex,
-  PkmProposition
-} from "../../types/enum/Pokemon"
-import { Pokemon } from "../../models/colyseus-models/pokemon"
-import { chance, pickRandomIn } from "../../utils/random"
+import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
+import { chance, pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { logger } from "../../utils/logger"
 import { Passive } from "../../types/enum/Passive"
 import { getAvatarString } from "../../public/src/utils"
@@ -55,7 +45,7 @@ import { max } from "../../utils/number"
 import { getWeather } from "../../utils/weather"
 import Simulation from "../../core/simulation"
 import { selectMatchups } from "../../core/matchmaking"
-import { values } from "../../utils/schemas"
+import { resetArraySchema, values } from "../../utils/schemas"
 
 export class OnShopCommand extends Command<
   GameRoom,
@@ -116,100 +106,6 @@ export class OnShopCommand extends Command<
     }
 
     this.room.updateEvolution(playerId)
-  }
-}
-
-export class OnItemCommand extends Command<
-  GameRoom,
-  {
-    playerId: string
-    id: string
-  }
-> {
-  execute({ playerId, id }) {
-    const player = this.state.players.get(playerId)
-    if (player) {
-      if (player.itemsProposition.includes(id)) {
-        player.items.add(id)
-      }
-      while (player.itemsProposition.length > 0) {
-        player.itemsProposition.pop()
-      }
-    }
-  }
-}
-
-export class OnPokemonPropositionCommand extends Command<
-  GameRoom,
-  {
-    playerId: string
-    pkm: PkmProposition
-  }
-> {
-  execute({ playerId, pkm }: { playerId: string; pkm: PkmProposition }) {
-    const player = this.state.players.get(playerId)
-    if (
-      player &&
-      player.pokemonsProposition.length > 0 &&
-      !this.state.additionalPokemons.includes(pkm) &&
-      this.room.getBenchSize(player.board) < 8
-    ) {
-      if (AdditionalPicksStages.includes(this.state.stageLevel)) {
-        this.state.additionalPokemons.push(pkm)
-        this.state.shop.addAdditionalPokemon(pkm)
-      }
-
-      let allowBuy = true
-      if (
-        UniqueShop.includes(pkm) &&
-        this.state.stageLevel !== PortalCarouselStages[0]
-      ) {
-        allowBuy = false // wrong stage
-      }
-      if (
-        LegendaryShop.includes(pkm) &&
-        this.state.stageLevel !== PortalCarouselStages[1]
-      ) {
-        allowBuy = false // wrong stage
-      }
-
-      player.board.forEach((p) => {
-        if (UniqueShop.includes(pkm) && UniqueShop.includes(p.name)) {
-          allowBuy = false // already picked a T10 mythical
-        }
-        if (LegendaryShop.includes(pkm) && LegendaryShop.includes(p.name)) {
-          allowBuy = false // already picked a T20 mythical
-        }
-      })
-
-      const freeCellsOnBench: number[] = []
-      for (let i = 0; i < 8; i++) {
-        if (this.room.isPositionEmpty(playerId, i, 0)) {
-          freeCellsOnBench.push(i)
-        }
-      }
-
-      const pokemonsObtained: Pokemon[] = (
-        pkm in PkmDuos ? PkmDuos[pkm] : [pkm]
-      ).map((p) => PokemonFactory.createPokemonFromName(p, player))
-      const hasSpaceOnBench = freeCellsOnBench.length >= pokemonsObtained.length
-
-      if (allowBuy && hasSpaceOnBench) {
-        pokemonsObtained.forEach((pokemon) => {
-          const freeCellX = this.room.getFirstAvailablePositionInBench(
-            player.id
-          )
-          if (freeCellX === undefined) return
-          pokemon.positionX = freeCellX
-          pokemon.positionY = 0
-          player.board.set(pokemon.id, pokemon)
-        })
-
-        while (player.pokemonsProposition.length > 0) {
-          player.pokemonsProposition.pop()
-        }
-      }
-    }
   }
 }
 
@@ -652,17 +548,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       this.initializePickingPhase()
     } else if (this.state.phase == GamePhaseState.PICK) {
       this.stopPickingPhase()
-      const commands = this.checkForLazyTeam()
-      if (commands.length != 0) {
-        return commands
-      }
+      this.checkForLazyTeam()
       this.initializeFightingPhase()
     } else if (this.state.phase == GamePhaseState.FIGHT) {
-      const kickCommands = this.stopFightingPhase()
-      if (kickCommands.length != 0) {
-        return kickCommands
-      }
-
+      this.stopFightingPhase()
       if (
         ItemCarouselStages.includes(this.state.stageLevel) ||
         PortalCarouselStages.includes(this.state.stageLevel)
@@ -802,7 +691,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
   }
 
   checkEndGame() {
-    const commands = []
     const numberOfPlayersAlive = values(this.state.players).filter(
       (p) => p.alive
     ).length
@@ -819,10 +707,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         this.room.disconnect()
       }, 30 * 1000)
     }
-    return commands
   }
 
-  computePlayerDamage(
+  computeRoundDamage(
     opponentTeam: MapSchema<IPokemonEntity>,
     stageLevel: number
   ) {
@@ -830,7 +717,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     if (opponentTeam.size > 0) {
       opponentTeam.forEach((pokemon) => {
         if (!pokemon.isClone) {
-          damage += pokemon.stars
+          damage += 1
         }
       })
     }
@@ -887,7 +774,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           (currentResult === BattleResult.DEFEAT ||
             currentResult === BattleResult.DRAW)
         ) {
-          const playerDamage = this.computePlayerDamage(
+          const playerDamage = this.computeRoundDamage(
             opponentTeam,
             this.state.stageLevel
           )
@@ -992,54 +879,38 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     // Item propositions stages
     if (ItemProposalStages.includes(this.state.stageLevel)) {
       this.state.players.forEach((player: Player) => {
-        const items = ItemFactory.createRandomItems()
-        items.forEach((item) => {
-          player.itemsProposition.push(item)
-        })
+        resetArraySchema(player.itemsProposition, pickNRandomIn(BasicItems, 3))
       })
     }
 
-    // First additional pick stage
-    if (this.state.stageLevel === AdditionalPicksStages[0]) {
+    // Additional pick stages
+    if (AdditionalPicksStages.includes(this.state.stageLevel)) {
+      const pool =
+        this.state.stageLevel === AdditionalPicksStages[0]
+          ? this.room.additionalUncommonPool
+          : this.state.stageLevel === AdditionalPicksStages[1]
+          ? this.room.additionalRarePool
+          : this.room.additionalEpicPool
       this.state.players.forEach((player: Player) => {
         if (player.isBot) {
-          const p = this.room.additionalPokemonsPool1.pop()
+          const p = pool.pop()
           if (p) {
             this.state.additionalPokemons.push(p)
             this.state.shop.addAdditionalPokemon(p)
           }
         } else {
           for (let i = 0; i < 3; i++) {
-            const p = this.room.additionalPokemonsPool1.pop()
+            const p = pool.pop()
             if (p) {
               player.pokemonsProposition.push(p)
+              player.itemsProposition.push(pickRandomIn(BasicItems))
             }
           }
         }
       })
     }
 
-    // Second additional pick stage
-    if (this.state.stageLevel === AdditionalPicksStages[1]) {
-      this.state.players.forEach((player: Player) => {
-        if (player.isBot) {
-          const p = this.room.additionalPokemonsPool2.pop()
-          if (p) {
-            this.state.additionalPokemons.push(p)
-            this.state.shop.addAdditionalPokemon(p)
-          }
-        } else {
-          for (let i = 0; i < 3; i++) {
-            const p = this.room.additionalPokemonsPool2.pop()
-            if (p) {
-              player.pokemonsProposition.push(p)
-            }
-          }
-        }
-      })
-    }
-
-    const isAfterPVE = this.getPVEIndex(this.state.stageLevel - 1) >= 0
+    const isAfterPVE = this.state.stageLevel - 1 in PVEStages
     const commands = new Array<Command>()
 
     this.state.players.forEach((player: Player) => {
@@ -1073,8 +944,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
   }
 
   checkForLazyTeam() {
-    const commands = new Array<Command>()
-
+    // force move on board some units if room available
     this.state.players.forEach((player, key) => {
       const teamSize = this.room.getTeamSize(player.board)
       if (teamSize < player.experienceManager.level) {
@@ -1085,77 +955,41 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             const coordinate = this.room.getFirstAvailablePositionInTeam(
               player.id
             )
-            const p = this.room.getFirstPlaceablePokemonOnBench(player.board)
-            if (coordinate && p) {
-              const detail: { id: string; x: number; y: number } = {
-                id: p.id,
-                x: coordinate[0],
-                y: coordinate[1]
-              }
-              const client: IClient = {
-                auth: {
-                  uid: key
-                }
-              }
-              commands.push(
-                new OnDragDropCommand().setPayload({
-                  client: client,
-                  detail: detail
-                })
-              )
+            const pokemon = this.room.getFirstPlaceablePokemonOnBench(
+              player.board
+            )
+            if (coordinate && pokemon) {
+              this.room.swap(player.id, pokemon, coordinate[0], coordinate[1])
             }
           }
         }
       }
     })
-    return commands
-  }
-
-  getPVEIndex(stageLevel: number) {
-    const result = NeutralStage.findIndex((stage) => {
-      return stage.turn == stageLevel
-    })
-
-    return result
-  }
-
-  checkForPVE() {
-    return this.getPVEIndex(this.state.stageLevel) >= 0
   }
 
   stopPickingPhase() {
     this.state.players.forEach((player) => {
-      if (player.itemsProposition.length > 0) {
-        if (player.itemsProposition.length === 3) {
-          // auto pick if not chosen
-          const i = pickRandomIn([...player.itemsProposition])
-          if (i) {
-            player.items.add(i)
-          }
-        }
-        while (player.itemsProposition.length > 0) {
-          player.itemsProposition.pop()
-        }
-      }
-
       if (player.pokemonsProposition.length > 0) {
-        if (player.pokemonsProposition.length === 3) {
-          // auto pick if not chosen
-          const pkm = pickRandomIn([...player.pokemonsProposition])
-          if (pkm) {
-            this.state.additionalPokemons.push(pkm)
-            this.state.shop.addAdditionalPokemon(pkm)
-          }
-        }
-        while (player.pokemonsProposition.length > 0) {
-          player.pokemonsProposition.pop()
-        }
+        // auto pick if not chosen
+        this.room.pickPokemonProposition(
+          player.id,
+          pickRandomIn([...player.pokemonsProposition]),
+          true
+        )
+        player.pokemonsProposition.clear()
+      } else if (player.itemsProposition.length > 0) {
+        // auto pick if not chosen
+        this.room.pickItemProposition(
+          player.id,
+          pickRandomIn([...player.itemsProposition])
+        )
+        player.itemsProposition.clear()
       }
     })
   }
 
   stopFightingPhase() {
-    const isPVE = this.checkForPVE()
+    const isPVE = this.state.stageLevel in PVEStages
 
     this.computeAchievements()
     this.computeStreak(isPVE)
@@ -1187,10 +1021,14 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             }
           }
         }
-        if (isPVE) {
+
+        if (isPVE && player.getLastBattleResult() === BattleResult.WIN) {
+          const pveStage = PVEStages[this.state.stageLevel]
           while (player.pveRewards.length > 0) {
             const reward = player.pveRewards.pop()!
-            if (player.getLastBattleResult() === BattleResult.WIN) {
+            if (pveStage.chooseOnlyOne) {
+              player.itemsProposition.push(reward)
+            } else {
               player.items.add(reward)
             }
           }
@@ -1270,7 +1108,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     })
 
     this.state.stageLevel += 1
-    return this.checkEndGame()
+    this.checkEndGame()
   }
 
   initializeMinigamePhase() {
@@ -1297,28 +1135,25 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     updateLobby(this.room)
     this.state.botManager.updateBots()
 
-    const stageIndex = this.getPVEIndex(this.state.stageLevel)
-    this.state.shinyEncounter = this.state.stageLevel === 9 && chance(1 / 10)
+    const pveStage = PVEStages[this.state.stageLevel]
 
-    if (stageIndex !== -1) {
+    if (pveStage) {
+      this.state.shinyEncounter = chance(pveStage.shinyChance ?? 0)
       this.state.players.forEach((player: Player) => {
         if (player.alive) {
           player.opponentId = "pve"
-          player.opponentName = NeutralStage[stageIndex].name
+          player.opponentName = pveStage.name
           player.opponentAvatar = getAvatarString(
-            PkmIndex[NeutralStage[stageIndex].avatar],
+            PkmIndex[pveStage.avatar],
             this.state.shinyEncounter,
-            Emotion.NORMAL
+            pveStage.emotion
           )
           player.opponentTitle = "Wild"
-          player.pveRewards.push(ItemFactory.createBasicRandomItem())
-          if (this.state.shinyEncounter) {
-            // give a second item if shiny PVE round
-            player.pveRewards.push(ItemFactory.createBasicRandomItem())
-          }
+          const rewards = pveStage.getRewards(this.state.shinyEncounter)
+          resetArraySchema(player.pveRewards, rewards)
 
-          const pveBoard = PokemonFactory.getNeutralPokemonsByLevelStage(
-            this.state.stageLevel,
+          const pveBoard = PokemonFactory.makePveBoard(
+            pveStage,
             this.state.shinyEncounter
           )
           const weather = getWeather(player.board, pveBoard)

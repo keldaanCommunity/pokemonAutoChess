@@ -67,6 +67,8 @@ export const BasicItems: Item[] = [
   Item.MYSTIC_WATER
 ]
 
+export const CompletedItems: Item[] = Object.values(Item).filter(item => BasicItems.includes(item) === false)
+
 export const SynergyStones: Item[] = [
   Item.OLD_AMBER,
   Item.DAWN_STONE,
@@ -77,4 +79,15 @@ export const SynergyStones: Item[] = [
   Item.DUSK_STONE,
   Item.LEAF_STONE,
   Item.ICE_STONE
+]
+
+export const NonSpecialItemComponents: Item[] = [
+  Item.TWISTED_SPOON,
+  Item.MAGNET,
+  Item.BLACK_GLASSES,
+  Item.MIRACLE_SEED,
+  Item.CHARCOAL,
+  Item.NEVER_MELT_ICE,
+  Item.HEART_SCALE,
+  Item.MYSTIC_WATER
 ]

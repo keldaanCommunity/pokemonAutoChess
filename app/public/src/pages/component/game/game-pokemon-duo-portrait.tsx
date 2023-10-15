@@ -15,7 +15,7 @@ export default function GamePokemonDuoPortrait(props: {
   index: number
   origin: string
   duo: PkmDuo
-  click: React.MouseEventHandler<HTMLDivElement>
+  click?: React.MouseEventHandler<HTMLDivElement>
 }) {
   const duo = PkmDuos[props.duo].map((p) =>
     PokemonFactory.createPokemonFromName(p)

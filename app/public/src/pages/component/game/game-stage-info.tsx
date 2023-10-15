@@ -7,8 +7,7 @@ import { Tooltip } from "react-tooltip"
 import {
   AdditionalPicksStages,
   ItemCarouselStages,
-  PortalCarouselStages,
-  NeutralStage
+  PortalCarouselStages
 } from "../../../../../types/Config"
 import "./game-stage-info.css"
 import { min } from "../../../../../utils/number"
@@ -20,6 +19,7 @@ import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Emotion } from "../../../../../types"
 import { useTranslation } from "react-i18next"
 import ReactDOM from "react-dom"
+import { PVEStages } from "../../../../../models/pve-stages"
 
 export default function GameStageInfo() {
   const { t } = useTranslation()
@@ -30,6 +30,7 @@ export default function GameStageInfo() {
   const weather = useAppSelector((state) => state.game.weather)
 
   const stageLevel = useAppSelector((state) => state.game.stageLevel)
+  const isPVE = stageLevel in PVEStages
   const currentPlayerOpponentName = useAppSelector(
     (state) => state.game.currentPlayerOpponentName
   )
@@ -59,7 +60,7 @@ export default function GameStageInfo() {
             >
               <p>
                 <span className="help">{t("pve_stages")}:</span>{" "}
-                {NeutralStage.map((s) => s.turn).join(", ")}
+                {Object.keys(PVEStages).join(", ")}
               </p>
               <p>
                 <span className="help">{t("carousel_stages")}:</span>{" "}
@@ -104,7 +105,9 @@ export default function GameStageInfo() {
                 {opponentTitle && (
                   <p className="player-title">{opponentTitle}</p>
                 )}
-                <p className="player-name">{opponentName}</p>
+                <p className="player-name">
+                  {isPVE ? t(opponentName) : opponentName}
+                </p>
               </div>
             </>
           )}
@@ -198,16 +201,12 @@ export function StagePath() {
       }
     }
 
-    const neutralStage = NeutralStage.find((s) => s.turn === level)
-    if (neutralStage) {
+    const pveStage = PVEStages[level]
+    if (pveStage) {
       path.push({
         level,
-        icon: getPortraitSrc(
-          PkmIndex[neutralStage.avatar],
-          false,
-          Emotion.NORMAL
-        ),
-        title: record?.name ?? neutralStage.name,
+        icon: getPortraitSrc(PkmIndex[pveStage.avatar], false, Emotion.NORMAL),
+        title: t(record?.name ?? pveStage.name),
         result: record?.result
       })
       if (level === stageLevel && currentLevelPathIndex === undefined) {

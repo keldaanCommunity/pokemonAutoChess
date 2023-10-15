@@ -6,6 +6,7 @@ import { getPreferences, savePreferences } from "../../../preferences"
 import { useTranslation } from "react-i18next"
 import GamePlayerDpsMeter from "./game-player-dps-meter"
 import GamePlayerHpsMeter from "./game-player-hps-meter"
+import { PVEStages } from "../../../../../models/pve-stages"
 import "./game-dps-meter.css"
 
 export default function GameDpsMeter() {
@@ -33,6 +34,8 @@ export default function GameDpsMeter() {
   const avatar = useAppSelector((state) => state.game.currentPlayerAvatar)
   const name = useAppSelector((state) => state.game.currentPlayerName)
   const [isOpen, setOpen] = useState(getPreferences().showDpsMeter)
+
+  const isPVE = useAppSelector((state) => state.game.stageLevel in PVEStages)
 
   function toggleOpen() {
     setOpen(!isOpen)
@@ -68,7 +71,7 @@ export default function GameDpsMeter() {
               src={getAvatarSrc(opponentAvatar)}
               className="pokemon-portrait"
             ></img>
-            <p>{opponentName}</p>
+            <p>{isPVE ? t(opponentName) : opponentName}</p>
           </div>
         </header>
         <Tabs>
