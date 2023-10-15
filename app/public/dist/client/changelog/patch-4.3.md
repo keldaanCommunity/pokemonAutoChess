@@ -33,7 +33,7 @@
 - Give a fire stone to Marowak to get an alolan Marowak
 - Move Porygon/Porygon2 to additional pool
 - Give an upgrade to Porygon2 to get PorygonZ
-- Nerf Jolteon and Vaporeon: PP ~~80~~ → 100
+- Nerf Jolteon and Vaporeon: PP ~~80~~ → 100, attack range ~~2~~ → 1
 - Nerf Cinderace: HP ~~200~~ 180
 - Nerf Eruption: damage per projectile ~~30/60/120~~ → 30/50/100
 - Buff Tinkatink line: Attack ~~7/14/30~~ → 11/22/44
@@ -45,11 +45,10 @@
 - Buff Dhelmise: PP ~~110~~ → 80
 - Move Cleffa/Clefable to additional pool
 - Give a moon stone to Clefable to get Clefairy
-
 - Nerf Gligar: Mana 75→90
 - Nerf Gliscor: Mana 75→90
-
 - Snorlax now has Monster synergy ; adjusted stats: HP ~~350~~ → 300
+
 
 
 # Changes to Synergies
