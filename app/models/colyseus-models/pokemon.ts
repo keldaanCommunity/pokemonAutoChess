@@ -5562,8 +5562,7 @@ export class Clefable extends Pokemon {
       shiny,
       emotion,
       true,
-      true,
-      Passive.CLEFAIRY
+      true
     )
   }
 }
