@@ -3535,7 +3535,7 @@ export class AlolanRaichu extends Pokemon {
       1,
       AttackSprite.ELECTRIC_MELEE,
       4,
-      140,
+      100,
       Ability.VOLT_SWITCH,
       shiny,
       emotion,
