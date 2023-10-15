@@ -12,7 +12,7 @@ import PokemonEntity from "./pokemon-entity"
 import { IPokemonEntity, Transfer } from "../types"
 import { Synergy, SynergyEffects } from "../types/enum/Synergy"
 import { Ability } from "../types/enum/Ability"
-import { chance, pickRandomIn } from "../utils/random"
+import { pickRandomIn } from "../utils/random"
 import { logger } from "../utils/logger"
 import { Passive } from "../types/enum/Passive"
 import { Weather } from "../types/enum/Weather"
@@ -543,6 +543,11 @@ export default class PokemonState {
       pokemon.setPP(pokemon.pp + 10)
       if (pokemon.simulation.weather === Weather.RAIN) {
         pokemon.setPP(pokemon.pp + 3)
+      }
+      if(pokemon.effects.has(Effect.LIGHT_PULSE) ||
+      pokemon.effects.has(Effect.ETERNAL_LIGHT) ||
+      pokemon.effects.has(Effect.MAX_ILLUMINATION)){
+        pokemon.setPP(pokemon.pp + 10)
       }
       pokemon.manaCooldown = 1000
     } else {

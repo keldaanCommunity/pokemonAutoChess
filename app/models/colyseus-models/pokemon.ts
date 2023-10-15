@@ -3535,7 +3535,7 @@ export class AlolanRaichu extends Pokemon {
       1,
       AttackSprite.ELECTRIC_MELEE,
       4,
-      140,
+      100,
       Ability.VOLT_SWITCH,
       shiny,
       emotion,
@@ -5562,8 +5562,7 @@ export class Clefable extends Pokemon {
       shiny,
       emotion,
       true,
-      true,
-      Passive.CLEFAIRY
+      true
     )
   }
 }
@@ -6930,8 +6929,8 @@ export class Vaporeon extends Pokemon {
       12,
       1,
       1,
-      2,
-      AttackSprite.WATER_RANGE,
+      1,
+      AttackSprite.WATER_MELEE,
       2,
       100,
       Ability.HAPPY_HOUR,
@@ -6953,8 +6952,8 @@ export class Jolteon extends Pokemon {
       12,
       1,
       1,
-      2,
-      AttackSprite.ELECTRIC_RANGE,
+      1,
+      AttackSprite.ELECTRIC_MELEE,
       2,
       100,
       Ability.HAPPY_HOUR,

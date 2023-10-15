@@ -274,23 +274,13 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     this.changeState(new IdleState())
   }
 
-  setPP(pp: number, bonusManaLight?: boolean) {
+  setPP(pp: number) {
     if (
       !this.status.silence &&
       !this.status.protect &&
       !this.status.resurecting
-    ) {
-      if (
-        bonusManaLight &&
-        (this.effects.has(Effect.LIGHT_PULSE) ||
-          this.effects.has(Effect.ETERNAL_LIGHT) ||
-          this.effects.has(Effect.MAX_ILLUMINATION))
-      ) {
-        const manaToAdd = Math.max(0, pp - this.pp) * 2
-        this.pp = clamp(this.pp + manaToAdd, 0, this.maxPP)
-      } else {
-        this.pp = clamp(pp, 0, this.maxPP)
-      }
+    ) {      
+      this.pp = clamp(pp, 0, this.maxPP)
     }
   }
 
@@ -400,7 +390,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     trueDamage: number
     totalDamage: number
   }) {
-    this.setPP(this.pp + ON_ATTACK_MANA, true)
+    this.setPP(this.pp + ON_ATTACK_MANA)
 
     if (this.items.has(Item.BLUE_ORB)) {
       this.count.staticHolderCount++
@@ -459,10 +449,10 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.items.has(Item.MANA_SCARF)) {
-      this.setPP(this.pp + MANA_SCARF_MANA, true)
+      this.setPP(this.pp + MANA_SCARF_MANA)
     }
     if (this.status.deltaOrb) {
-      this.setPP(this.pp + DELTA_ORB_MANA, true)
+      this.setPP(this.pp + DELTA_ORB_MANA)
     }
 
     if (this.effects.has(Effect.TELEPORT_NEXT_ATTACK)) {
@@ -567,7 +557,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       if (chance(burnManaChance)) {
         target.setPP(target.pp - 20)
         target.count.manaBurnCount++
-        this.setPP(this.pp + manaGain, true)
+        this.setPP(this.pp + manaGain)
       }
     }
 
@@ -677,7 +667,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     })
 
     if (this.items.has(Item.SCOPE_LENS)) {
-      this.setPP(this.pp + SCOPE_LENS_MANA, true)
+      this.setPP(this.pp + SCOPE_LENS_MANA)
       target.setPP(target.pp - SCOPE_LENS_MANA)
       target.count.manaBurnCount++
     }
