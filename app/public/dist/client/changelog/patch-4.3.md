@@ -72,11 +72,13 @@ PVE rounds and rewards have been reworked with these goals in mind: difficult an
 - New PVE rounds at stages: 24, 28, 32, 36, 40
 - Added an item pick at stage 29, 33, 37
 - Carousels after stage 20 propose full items instead of components, and have one more proposition
+- PVE stages 9, 14 and 19 have a chance to be shiny Pokémon which give 3 rewards instead of one
 
 # UI
 
 - Better pokemon report, grouped by families
 - Hit animation particles
+- Translated PVE round names
 
 # Bugfix
 
