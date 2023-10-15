@@ -23,3 +23,25 @@
   justify-content: center;
   margin: 1em;
 }
+
+.game-pokemons-proposition-list > .nes-container {
+  background-color: #54596b;
+}
+
+.game-pokemons-proposition-list > .nes-container:hover {
+  cursor: var(--cursor-hover);
+  background-color: #1195ec;
+}
+
+.game-pokemons-proposition-list .game-pokemon-portrait {
+  margin: 0 auto;
+}
+
+.game-pokemons-proposition .additional-pick-item {
+  color: white;
+  text-align: center;
+}
+
+.game-pokemons-proposition .additional-pick-item p {
+  font-size: 80%;
+}

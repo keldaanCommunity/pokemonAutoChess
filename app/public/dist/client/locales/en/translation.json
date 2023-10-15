@@ -1486,7 +1486,7 @@
     "SLOWBRO": "Slowbro is looking for a ROCKY_HELMET",
     "MOXIE": "Every time an enemy pokémon dies, it gains ATK equal to its stars",
     "BELLSPROUT": "Weepinbell is looking for a LEAF_STONE",
-    "CLEFAIRY":"Clefairy is looking for a MOON_STONE"
+    "CLEFAIRY": "Clefairy is looking for a MOON_STONE"
   },
   "stat": {
     "ATK": "Attack",
@@ -2073,7 +2073,13 @@
   "carousel": "Carousel",
   "unique_pick": "Unique pick",
   "additional_pick": "Additional pick",
-  "fight": "fight",
+  "fight": "Fight",
+  "tower_duo": "Tower duo",
+  "legendary_birds": "Legendary Birds",
+  "legendary_beasts": "Legendary Beasts",
+  "super_ancients": "Super Ancients",
+  "legendary_giants": "Legendary Giants",
+  "pokemons_of_myth": "Pokémon of Myth",
   "community_translations": "Translations are managed by the community. If you want to add or\r\n              help improve a translation, head over to ",
   "no_emotions_available": "No Emotions available",
   "finished_preloading": "Finished preloading",

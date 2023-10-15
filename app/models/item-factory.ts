@@ -1,6 +1,6 @@
 import { Item, BasicItems, SynergyStones } from "../types/enum/Item"
 import { SetSchema } from "@colyseus/schema"
-import { pickRandomIn, pickNRandomIn } from "../utils/random"
+import { pickRandomIn } from "../utils/random"
 
 export default class ItemFactory {
   static createWonderboxItems(existingItems: SetSchema<Item>): Item[] {
@@ -17,17 +17,5 @@ export default class ItemFactory {
       wonderboxItems.push(pickRandomIn(elligibleItems))
     }
     return wonderboxItems
-  }
-
-  static createBasicRandomItem() {
-    return pickRandomIn(BasicItems)
-  }
-
-  static createRandomItems() {
-    return pickNRandomIn(BasicItems, 3)
-  }
-
-  static createSpecificItems(array: Item[]) {
-    return pickRandomIn(array)
   }
 }

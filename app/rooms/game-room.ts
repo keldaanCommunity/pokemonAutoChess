@@ -9,7 +9,6 @@ import UserMetadata, {
 import { BotV2 } from "../models/mongo-models/bot-v2"
 import {
   OnShopCommand,
-  OnItemCommand,
   OnSellDropCommand,
   OnRefreshCommand,
   OnLockCommand,
@@ -18,15 +17,18 @@ import {
   OnDragDropCommand,
   OnJoinCommand,
   OnDragDropItemCommand,
-  OnDragDropCombineCommand,
-  OnPokemonPropositionCommand
+  OnDragDropCombineCommand
 } from "./commands/game-commands"
 import {
+  AdditionalPicksStages,
   Dungeon,
   ExpPlace,
   getEvolutionCountNeeded,
   ItemRecipe,
-  RequiredStageLevelForXpElligibility
+  LegendaryShop,
+  PortalCarouselStages,
+  RequiredStageLevelForXpElligibility,
+  UniqueShop
 } from "../types/Config"
 import { Item, BasicItems } from "../types/enum/Item"
 import PokemonFactory from "../models/pokemon-factory"
@@ -44,7 +46,7 @@ import {
   IPokemon,
   Transfer
 } from "../types"
-import { Pkm, PkmFamily } from "../types/enum/Pokemon"
+import { Pkm, PkmDuos, PkmFamily, PkmProposition } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { IGameUser } from "../models/colyseus-models/game-user"
@@ -66,15 +68,17 @@ import { values } from "../utils/schemas"
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>
   eloEngine: EloRank
-  additionalPokemonsPool1: Array<Pkm>
-  additionalPokemonsPool2: Array<Pkm>
+  additionalUncommonPool: Array<Pkm>
+  additionalRarePool: Array<Pkm>
+  additionalEpicPool: Array<Pkm>
   miniGame: MiniGame
   constructor() {
     super()
     this.dispatcher = new Dispatcher(this)
     this.eloEngine = new EloRank()
-    this.additionalPokemonsPool1 = new Array<Pkm>()
-    this.additionalPokemonsPool2 = new Array<Pkm>()
+    this.additionalUncommonPool = new Array<Pkm>()
+    this.additionalRarePool = new Array<Pkm>()
+    this.additionalEpicPool = new Array<Pkm>()
     this.miniGame = new MiniGame()
   }
 
@@ -115,20 +119,30 @@ export default class GameRoom extends Room<GameState> {
       PRECOMPUTED_TYPE_POKEMONS[type].additionalPokemons.forEach((p) => {
         const pokemon = PokemonFactory.createPokemonFromName(p)
         if (
-          !this.additionalPokemonsPool1.includes(p) &&
-          !this.additionalPokemonsPool2.includes(p) &&
+          (pokemon.rarity === Rarity.UNCOMMON ||
+            pokemon.rarity === Rarity.COMMON) && // TEMP: we should move all common add picks to uncommon rarity
+          !this.additionalUncommonPool.includes(p) &&
           pokemon.stars === 1
         ) {
-          if ([Rarity.COMMON, Rarity.UNCOMMON].includes(pokemon.rarity)) {
-            this.additionalPokemonsPool1.push(p)
-          } else {
-            this.additionalPokemonsPool2.push(p)
-          }
+          this.additionalUncommonPool.push(p)
+        } else if (
+          pokemon.rarity === Rarity.RARE &&
+          !this.additionalRarePool.includes(p) &&
+          pokemon.stars === 1
+        ) {
+          this.additionalRarePool.push(p)
+        } else if (
+          pokemon.rarity === Rarity.EPIC &&
+          !this.additionalEpicPool.includes(p) &&
+          pokemon.stars === 1
+        ) {
+          this.additionalEpicPool.push(p)
         }
       })
     })
-    shuffleArray(this.additionalPokemonsPool1)
-    shuffleArray(this.additionalPokemonsPool2)
+    shuffleArray(this.additionalUncommonPool)
+    shuffleArray(this.additionalRarePool)
+    shuffleArray(this.additionalEpicPool)
 
     for (const id in options.users) {
       const user = options.users[id]
@@ -175,13 +189,10 @@ export default class GameRoom extends Room<GameState> {
       this.startGame()
     }, 5 * 60 * 1000) // maximum 5 minutes of loading game, game will start no matter what after that
 
-    this.onMessage(Transfer.ITEM, (client, message) => {
+    this.onMessage(Transfer.ITEM, (client, item: Item) => {
       if (!this.state.gameFinished && client.auth) {
         try {
-          this.dispatcher.dispatch(new OnItemCommand(), {
-            playerId: client.auth.uid,
-            id: message.id
-          })
+          this.pickItemProposition(client.auth.uid, item)
         } catch (error) {
           logger.error(error)
         }
@@ -201,13 +212,10 @@ export default class GameRoom extends Room<GameState> {
       }
     })
 
-    this.onMessage(Transfer.POKEMON_PROPOSITION, (client, message) => {
+    this.onMessage(Transfer.POKEMON_PROPOSITION, (client, pkm: Pkm) => {
       if (!this.state.gameFinished && client.auth) {
         try {
-          this.dispatcher.dispatch(new OnPokemonPropositionCommand(), {
-            playerId: client.auth.uid,
-            pkm: message
-          })
+          this.pickPokemonProposition(client.auth.uid, pkm)
         } catch (error) {
           logger.error(error)
         }
@@ -728,7 +736,7 @@ export default class GameRoom extends Room<GameState> {
     }
   }
 
-  isPositionEmpty(playerId: string, x: number, y: number) {
+  isPositionEmpty(playerId: string, x: number, y: number): boolean {
     let empty = true
     const player = this.state.players.get(playerId)
     if (player) {
@@ -739,6 +747,16 @@ export default class GameRoom extends Room<GameState> {
       })
     }
     return empty
+  }
+
+  getFreeSpaceOnBench(playerId: string): number {
+    let numberOfFreeSpace = 0
+    for (let i = 0; i < 8; i++) {
+      if (this.isPositionEmpty(playerId, i, 0)) {
+        numberOfFreeSpace++
+      }
+    }
+    return numberOfFreeSpace
   }
 
   getFirstAvailablePositionInBench(playerId: string) {
@@ -1269,5 +1287,64 @@ export default class GameRoom extends Room<GameState> {
         }
       })
     })
+  }
+
+  pickPokemonProposition(
+    playerId: string,
+    pkm: PkmProposition,
+    bypassLackOfSpace = false
+  ) {
+    const player = this.state.players.get(playerId)
+    if (!player || player.pokemonsProposition.length === 0) return
+    if (this.state.additionalPokemons.includes(pkm)) return // already picked, probably a double click
+    if (UniqueShop.includes(pkm)) {
+      if (this.state.stageLevel !== PortalCarouselStages[0]) return // should not be pickable at this stage
+      if (values(player.board).some((p) => UniqueShop.includes(p.name))) return // already picked a T10 mythical
+    }
+    if (LegendaryShop.includes(pkm)) {
+      if (this.state.stageLevel !== PortalCarouselStages[1]) return // should not be pickable at this stage
+      if (values(player.board).some((p) => LegendaryShop.includes(p.name)))
+        return // already picked a T10 mythical
+    }
+
+    const pokemonsObtained: Pokemon[] = (
+      pkm in PkmDuos ? PkmDuos[pkm] : [pkm]
+    ).map((p) => PokemonFactory.createPokemonFromName(p, player))
+
+    const freeSpace = this.getFreeSpaceOnBench(playerId)
+    if (freeSpace < pokemonsObtained.length && !bypassLackOfSpace) return // prevent picking if not enough space on bench
+
+    // at this point, the player is allowed to pick a proposition
+    if (AdditionalPicksStages.includes(this.state.stageLevel)) {
+      this.state.additionalPokemons.push(pkm)
+      this.state.shop.addAdditionalPokemon(pkm)
+      const selectedIndex = player.pokemonsProposition.indexOf(pkm)
+      if (
+        player.itemsProposition.length > 0 &&
+        player.itemsProposition[selectedIndex] != null
+      ) {
+        player.items.add(player.itemsProposition[selectedIndex])
+        player.itemsProposition.clear()
+      }
+    }
+
+    pokemonsObtained.forEach((pokemon) => {
+      const freeCellX = this.getFirstAvailablePositionInBench(player.id)
+      if (freeCellX !== undefined) {
+        pokemon.positionX = freeCellX
+        pokemon.positionY = 0
+        player.board.set(pokemon.id, pokemon)
+      }
+    })
+
+    player.pokemonsProposition.clear()
+  }
+
+  pickItemProposition(playerId: string, item: Item) {
+    const player = this.state.players.get(playerId)
+    if (player && player.itemsProposition.includes(item)) {
+      player.items.add(item)
+      player.itemsProposition.clear()
+    }
   }
 }

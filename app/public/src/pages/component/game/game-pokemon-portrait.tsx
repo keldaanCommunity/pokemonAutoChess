@@ -17,7 +17,7 @@ export default function GamePokemonPortrait(props: {
   index: number
   origin: string
   pokemon: Pokemon | undefined
-  click: React.MouseEventHandler<HTMLDivElement>
+  click?: React.MouseEventHandler<HTMLDivElement>
 }) {
   if (!props.pokemon) {
     return <div className="game-pokemon-portrait nes-container empty" />
@@ -93,7 +93,7 @@ export default function GamePokemonPortrait(props: {
         <Tooltip
           id={`tooltip-${props.origin}-${props.index}`}
           className="custom-theme-tooltip game-pokemon-detail-tooltip"
-          place="bottom"
+          place="top"
         >
           <GamePokemonDetail
             pokemon={pokemonInPortrait}
