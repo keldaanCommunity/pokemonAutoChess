@@ -4,6 +4,8 @@ import PokemonFactory from "../app/models/pokemon-factory"
 import { Ability } from "../app/types/enum/Ability"
 import { Rarity } from "../app/types/enum/Game"
 import { logger } from "../app/utils/logger"
+import { values } from "../app/utils/schemas"
+import { Synergy } from "../app/types/enum/Synergy"
 
 const csvWriter = createObjectCsvWriter({
   path: "../app/models/precomputed/pokemons-data.csv",
@@ -68,6 +70,7 @@ Object.values(Pkm)
       const family = Object.keys(PkmFamily).filter(
         (p) => PkmFamily[p] === PkmFamily[pkm]
       )
+      const types: Synergy[] = values(pokemon.types)
       const familyTypes = [
         ...new Set(
           family.flatMap((p) => [
@@ -84,10 +87,10 @@ Object.values(Pkm)
         tier: pokemon.stars,
         additional: pokemon.additional,
         duo: Object.values(PkmDuos).some((duo) => duo.includes(pkm)),
-        type1: pokemon.types[0] ?? "",
-        type2: pokemon.types[1] ?? "",
-        type3: pokemon.types[2] ?? "",
-        type4: pokemon.types[3] ?? "",
+        type1: types[0] ?? "",
+        type2: types[1] ?? "",
+        type3: types[2] ?? "",
+        type4: types[3] ?? "",
         hp: pokemon.hp,
         attack: pokemon.atk,
         def: pokemon.def,
