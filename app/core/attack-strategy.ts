@@ -5909,3 +5909,59 @@ export class StealthRocksStrategy extends AttackStrategy {
     })
   }
 }
+
+export class StruggleBugStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+
+    cells.forEach((cell) => {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.addAbilityPower(-50, false)
+        cell.value.handleSpecialDamage(
+          30,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit,
+          true
+        )
+      }
+    })
+  }
+}
+
+export class TailGlowStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+
+    pokemon.addAbilityPower(50, false)
+    cells.forEach((cell) => {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.handleSpecialDamage(
+          30,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit,
+          true
+        )
+      }
+    })
+  }
+}

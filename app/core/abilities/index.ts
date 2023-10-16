@@ -196,7 +196,9 @@ import {
   PoisonGasStrategy,
   BraveBirdStrategy,
   MagicalLeafStrategy,
-  StealthRocksStrategy
+  StealthRocksStrategy,
+  TailGlowStrategy,
+  StruggleBugStrategy
 } from "../attack-strategy"
 import {
   HiddenPowerAStrategy,
@@ -456,5 +458,7 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.POISON_GAS]: new PoisonGasStrategy(),
   [Ability.BRAVE_BIRD]: new BraveBirdStrategy(),
   [Ability.MAGICAL_LEAF]: new MagicalLeafStrategy(),
-  [Ability.STEALTH_ROCKS]: new StealthRocksStrategy()
+  [Ability.STEALTH_ROCKS]: new StealthRocksStrategy(),
+  [Ability.TAIL_GLOW]: new TailGlowStrategy(),
+  [Ability.STRUGGLE_BUG]: new StruggleBugStrategy()
 }
