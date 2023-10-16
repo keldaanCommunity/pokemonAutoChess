@@ -5957,7 +5957,7 @@ export class TailGlowStrategy extends AttackStrategy {
 
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
 
-    target.addAbilityPower(50, false)
+    pokemon.addAbilityPower(50, false)
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
         cell.value.handleSpecialDamage(
