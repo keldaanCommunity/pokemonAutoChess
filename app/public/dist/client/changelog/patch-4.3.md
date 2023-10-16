@@ -22,6 +22,7 @@
 - Skuntank
 - Illumise
 - Volbeat
+- Necrozma
 
 # Changes to Pokemon & Abilities
 
@@ -51,7 +52,6 @@
 - Nerf Gliscor: Mana 75→90
 - Snorlax now has Monster synergy ; adjusted stats: HP ~~350~~ → 300
 - Changed Alolan Raichu: no more tier 4 ability damage, but PP ~~140~~ → 100
-
 
 # Changes to Synergies
 

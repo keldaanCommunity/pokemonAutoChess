@@ -628,7 +628,9 @@ export enum Pkm {
   STUNKY = "STUNKY",
   SKUNTANK = "SKUNTANK",
   ILLUMISE = "ILLUMISE",
-  VOLBEAT = "VOLBEAT"
+  VOLBEAT = "VOLBEAT",
+  NECROZMA = "NECROZMA",
+  ULTRA_NECROZMA = "ULTRA_NECROZMA"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1259,7 +1261,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.STUNKY]: "0434",
   [Pkm.SKUNTANK]: "0435",
   [Pkm.ILLUMISE]: "0314",
-  [Pkm.VOLBEAT]: "0313"
+  [Pkm.VOLBEAT]: "0313",
+  [Pkm.NECROZMA]: "0800",
+  [Pkm.ULTRA_NECROZMA]: "0800-0001"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1890,7 +1894,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.STUNKY]: Pkm.STUNKY,
   [Pkm.SKUNTANK]: Pkm.STUNKY,
   [Pkm.ILLUMISE]: Pkm.ILLUMISE,
-  [Pkm.VOLBEAT]: Pkm.VOLBEAT
+  [Pkm.VOLBEAT]: Pkm.VOLBEAT,
+  [Pkm.NECROZMA]: Pkm.NECROZMA,
+  [Pkm.ULTRA_NECROZMA]: Pkm.ULTRA_NECROZMA
 }
 
 export enum PkmDuo {
@@ -5156,4 +5162,14 @@ export const AnimationConfig: {
     ability: AnimationType.Appeal,
     emote: AnimationType.Appeal
   },
+  [Pkm.NECROZMA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Idle,
+    emote: AnimationType.Charge
+  },
+  [Pkm.ULTRA_NECROZMA]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Charge
+  }
 }

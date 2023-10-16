@@ -115,7 +115,13 @@ export class Pokemon extends Schema implements IPokemon {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onChangePosition(x: number, y: number, player: Player) {}
+  onChangePosition(
+    x: number,
+    y: number,
+    player: Player,
+    lightX: number,
+    lightY: number
+  ) {}
 }
 
 export class Ditto extends Pokemon {
@@ -6262,7 +6268,13 @@ export class Giratina extends Pokemon {
     )
   }
 
-  onChangePosition(x: number, y: number, player: Player) {
+  onChangePosition(
+    x: number,
+    y: number,
+    player: Player,
+    lightX: number,
+    lightY: number
+  ) {
     if (y !== 3) {
       player.transformPokemon(this, Pkm.ORIGIN_GIRATINA)
     }
@@ -6293,7 +6305,13 @@ export class OriginGiratina extends Pokemon {
     )
   }
 
-  onChangePosition(x: number, y: number, player: Player) {
+  onChangePosition(
+    x: number,
+    y: number,
+    player: Player,
+    lightX: number,
+    lightY: number
+  ) {
     if (y === 3) {
       player.transformPokemon(this, Pkm.GIRATINA)
     }
@@ -14963,5 +14981,79 @@ export class Volbeat extends Pokemon {
       false,
       Passive.ILLUMISE_VOLBEAT
     )
+  }
+}
+
+export class Necrozma extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.NECROZMA,
+      [Synergy.LIGHT, Synergy.PSYCHIC],
+      Rarity.LEGENDARY,
+      Pkm.DEFAULT,
+      300,
+      30,
+      5,
+      5,
+      1,
+      AttackSprite.DRAGON_MELEE,
+      3,
+      100,
+      Ability.PRISMATIC_LASER,
+      shiny,
+      emotion,
+      true,
+      false,
+      Passive.PRISM
+    )
+  }
+
+  onChangePosition(
+    x: number,
+    y: number,
+    player: Player,
+    lightX: number,
+    lightY: number
+  ) {
+    if (x === lightX && y === lightY) {
+      player.transformPokemon(this, Pkm.ULTRA_NECROZMA)
+    }
+  }
+}
+
+export class UltraNecrozma extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ULTRA_NECROZMA,
+      [Synergy.DRAGON, Synergy.LIGHT, Synergy.PSYCHIC],
+      Rarity.LEGENDARY,
+      Pkm.DEFAULT,
+      250,
+      30,
+      2,
+      2,
+      3,
+      AttackSprite.GHOST_RANGE,
+      3,
+      150,
+      Ability.PRISMATIC_LASER,
+      shiny,
+      emotion,
+      true,
+      false,
+      Passive.PRISM
+    )
+  }
+
+  onChangePosition(
+    x: number,
+    y: number,
+    player: Player,
+    lightX: number,
+    lightY: number
+  ) {
+    if (x !== lightX || y !== lightY) {
+      player.transformPokemon(this, Pkm.NECROZMA)
+    }
   }
 }

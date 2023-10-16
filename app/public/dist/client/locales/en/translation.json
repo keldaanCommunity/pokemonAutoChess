@@ -242,7 +242,8 @@
     "MAGICAL_LEAF": "Magical Leaf",
     "STEALTH_ROCKS": "Stealth Rocks",
     "TAIL_GLOW": "Tail Glow",
-    "STRUGGLE_BUG": "Struggle Bug"
+    "STRUGGLE_BUG": "Struggle Bug",
+    "PRISMATIC_LASER": "Prismatic Laser"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -872,7 +873,9 @@
     "STUNKY": "Stunky",
     "SKUNTANK": "Skuntank",
     "VOLBEAT": "Volbeat",
-    "ILLUMISE": "Illumise"
+    "ILLUMISE": "Illumise",
+    "NECROZMA": "Necrozma",
+    "ULTRA_NECROZMA": "Ultra Necrozma"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1100,7 +1103,8 @@
     "MAGICAL_LEAF": "The user scatters curious leaves that chase the furthest target, inflicting [10,20,40,SP] and ARMOR_REDUCTION for 3 seconds on anything in its path",
     "STEALTH_ROCKS": "Lays sharp stones around, dealing [50,SP] SPECIAL. The stones stay on field, dealing 10 PHYSICAL per second and WOUND opponents that walk on it, if not ROCK or FLYING.",
     "TAIL_GLOW": "Deals [30,SP] SPECIAL to adjacent enemies and increase AP by 50%",
-    "STRUGGLE_BUG": "Deals [30,SP] SPECIAL to adjacent enemies and reduce their AP by 50%"
+    "STRUGGLE_BUG": "Deals [30,SP] SPECIAL to adjacent enemies and reduce their AP by 50%",
+    "PRISMATIC_LASER": "The user shoots a prismatic laser in a large straight line, dealing [80,SP] and displacing any enemies it hits."
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1493,7 +1497,8 @@
     "MOXIE": "Every time an enemy pokémon dies, it gains ATK equal to its stars",
     "BELLSPROUT": "Weepinbell is looking for a LEAF_STONE",
     "CLEFAIRY": "Clefairy is looking for a MOON_STONE",
-    "ILLUMISE_VOLBEAT": "Illumise and Volbeat gain 5 PP per second for each other member of their species alive on the board"
+    "ILLUMISE_VOLBEAT": "Illumise and Volbeat gain 5 PP per second for each other member of their species alive on the board",
+    "PRISM":"Necrozma switches between its Ultra Forme and Normal forme depending on its exposure to LIGHT"
   },
   "stat": {
     "ATK": "Attack",
