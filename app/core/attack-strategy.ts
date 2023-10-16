@@ -1790,7 +1790,7 @@ export class VoltSwitchStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [30,60,120][pokemon.stars - 1] ?? 120
+    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
     const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(
       pokemon,
       board
@@ -5962,6 +5962,32 @@ export class TailGlowStrategy extends AttackStrategy {
           true
         )
       }
+    })
+  }
+}
+
+export class PrismaticLaserStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    board.forEach((x,y,tg)=>{
+        if(tg && tg.team !== pokemon.team && (x === pokemon.positionX || x === pokemon.positionX -1 || x === pokemon.positionX + 1)){
+            tg.handleSpecialDamage(80,board, AttackType.SPECIAL, pokemon, crit, true)
+            const teleportationCell = board.getTeleportationCell(
+                tg.positionX,
+                tg.positionY
+              )
+              if (teleportationCell) {
+                tg.moveTo(teleportationCell.x, teleportationCell.y, board)
+              } else {
+                logger.error("unable to teleport pokemon", tg)
+              }
+        }
     })
   }
 }

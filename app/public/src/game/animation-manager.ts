@@ -841,6 +841,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+        key: Ability.PRISMATIC_LASER,
+        frames: this.game.anims.generateFrameNames(Ability.PRISMATIC_LASER, {
+          start: 0,
+          end: 8,
+          zeroPad: 3
+        }),
+        duration: 500,
+        repeat: 0
+      })
+
+    this.game.anims.create({
       key: Ability.MAGICAL_LEAF,
       frames: this.game.anims.generateFrameNames(Ability.MAGICAL_LEAF, {
         start: 0,
