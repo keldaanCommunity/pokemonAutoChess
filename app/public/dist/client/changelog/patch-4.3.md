@@ -20,6 +20,8 @@
 - Lumineon
 - Stinky
 - Skuntank
+- Illumise
+- Volbeat
 
 # Changes to Pokemon & Abilities
 
@@ -45,10 +47,8 @@
 - Buff Dhelmise: PP ~~110~~ → 80
 - Move Cleffa/Clefable to additional pool
 - Give a moon stone to Clefable to get Clefairy
-
 - Nerf Gligar: Mana 75→90
 - Nerf Gliscor: Mana 75→90
-
 - Snorlax now has Monster synergy ; adjusted stats: HP ~~350~~ → 300
 
 
