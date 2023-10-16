@@ -20,6 +20,8 @@
 - Lumineon
 - Stinky
 - Skuntank
+- Illumise
+- Volbeat
 
 # Changes to Pokemon & Abilities
 
