@@ -19,6 +19,7 @@ import { Weather } from "../types/enum/Weather"
 import { max, min } from "../utils/number"
 import { distanceC, distanceM } from "../utils/distance"
 import { FIGHTING_PHASE_DURATION } from "../types/Config"
+import { values } from "../utils/schemas"
 
 export default class PokemonState {
   handleHeal(
@@ -543,6 +544,13 @@ export default class PokemonState {
       pokemon.setPP(pokemon.pp + 10)
       if (pokemon.simulation.weather === Weather.RAIN) {
         pokemon.setPP(pokemon.pp + 3)
+      }
+      if (pokemon.passive === Passive.ILLUMISE_VOLBEAT) {
+        board.forEach((x, y, p) => {
+          if (p && p.passive === Passive.ILLUMISE_VOLBEAT && p !== pokemon) {
+            pokemon.setPP(pokemon.pp + 5)
+          }
+        })
       }
       pokemon.manaCooldown = 1000
     } else {

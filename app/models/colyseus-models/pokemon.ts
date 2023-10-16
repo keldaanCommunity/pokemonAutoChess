@@ -14916,3 +14916,53 @@ export class Skuntank extends Pokemon {
     )
   }
 }
+
+export class Illumise extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.ILLUMISE,
+      [Synergy.FLYING, Synergy.BUG, Synergy.LIGHT],
+      Rarity.UNIQUE,
+      Pkm.DEFAULT,
+      200,
+      20,
+      3,
+      3,
+      1,
+      AttackSprite.BUG_MELEE,
+      3,
+      90,
+      Ability.STRUGGLE_BUG,
+      shiny,
+      emotion,
+      true,
+      false,
+      Passive.ILLUMISE_VOLBEAT
+    )
+  }
+}
+
+export class Volbeat extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.VOLBEAT,
+      [Synergy.FLYING, Synergy.BUG, Synergy.LIGHT],
+      Rarity.UNIQUE,
+      Pkm.DEFAULT,
+      200,
+      20,
+      3,
+      3,
+      1,
+      AttackSprite.BUG_MELEE,
+      3,
+      90,
+      Ability.TAIL_GLOW,
+      shiny,
+      emotion,
+      true,
+      false,
+      Passive.ILLUMISE_VOLBEAT
+    )
+  }
+}

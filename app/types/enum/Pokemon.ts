@@ -626,7 +626,9 @@ export enum Pkm {
   FINNEON = "FINNEON",
   LUMINEON = "LUMINEON",
   STUNKY = "STUNKY",
-  SKUNTANK = "SKUNTANK"
+  SKUNTANK = "SKUNTANK",
+  ILLUMISE = "ILLUMISE",
+  VOLBEAT = "VOLBEAT"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1255,7 +1257,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.FINNEON]: "0456",
   [Pkm.LUMINEON]: "0457",
   [Pkm.STUNKY]: "0434",
-  [Pkm.SKUNTANK]: "0435"
+  [Pkm.SKUNTANK]: "0435",
+  [Pkm.ILLUMISE]: "0314",
+  [Pkm.VOLBEAT]: "0313"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1884,19 +1888,23 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.FINNEON]: Pkm.FINNEON,
   [Pkm.LUMINEON]: Pkm.FINNEON,
   [Pkm.STUNKY]: Pkm.STUNKY,
-  [Pkm.SKUNTANK]: Pkm.STUNKY
+  [Pkm.SKUNTANK]: Pkm.STUNKY,
+  [Pkm.ILLUMISE]: Pkm.ILLUMISE,
+  [Pkm.VOLBEAT]: Pkm.VOLBEAT
 }
 
 export enum PkmDuo {
-  LATIOS_LATIAS = "latios_latias",
-  PLUSLE_MINUN = "plusle_minun"
+  LATIOS_LATIAS = "LATIOS_LATIAS",
+  PLUSLE_MINUN = "PLUSLE_MINUN",
+  ILLUMISE_VOLBEAT = "ILLUMISE_VOLBEAT"
 }
 
 export type PkmProposition = Pkm | PkmDuo
 
 export const PkmDuos = {
   [PkmDuo.LATIOS_LATIAS]: [Pkm.LATIOS, Pkm.LATIAS],
-  [PkmDuo.PLUSLE_MINUN]: [Pkm.PLUSLE, Pkm.MINUN]
+  [PkmDuo.PLUSLE_MINUN]: [Pkm.PLUSLE, Pkm.MINUN],
+  [PkmDuo.ILLUMISE_VOLBEAT]: [Pkm.ILLUMISE, Pkm.VOLBEAT]
 }
 
 export const Unowns: Pkm[] = [
@@ -5137,5 +5145,15 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.DeepBreath,
     emote: AnimationType.Shoot
-  }
+  },
+  [Pkm.ILLUMISE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.VOLBEAT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Appeal,
+    emote: AnimationType.Appeal
+  },
 }

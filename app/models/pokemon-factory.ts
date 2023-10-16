@@ -638,7 +638,9 @@ import {
   Finneon,
   Lumineon,
   Stunky,
-  Skuntank
+  Skuntank,
+  Illumise,
+  Volbeat
 } from "./colyseus-models/pokemon"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
 
@@ -2105,6 +2107,10 @@ export default class PokemonFactory {
         return new Stunky(s, e)
       case Pkm.SKUNTANK:
         return new Skuntank(s, e)
+      case Pkm.ILLUMISE:
+        return new Illumise(s, e)
+      case Pkm.VOLBEAT:
+        return new Volbeat(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:
