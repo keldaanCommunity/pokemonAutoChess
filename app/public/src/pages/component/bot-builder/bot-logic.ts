@@ -138,16 +138,12 @@ export function getPowerEvaluation(powerScore: number, stage: number) {
 }
 
 export function getMaxItemComponents(stage: number): number {
-  if (stage === 0) return 0
-  /*
-  Stage 4 = 3 full items 
-  Stage 11 = 4 full items 
-  Stage 16 = 5 full items 
-  Stage 21 = 6 full items 
-  Stage 26 = 7 full items 
-  Stage 31 = 8 full items 
-  */
-  return (stage >= 4 ? 3 : stage) * 2 + Math.floor(min(0)(stage - 6) / 5) * 2
+  const nbComponentsPerStage = [
+    0, 0, 1, 2, 4, 5, 6, 6, 6, 7, 8, 8, 9, 10, 10, 11, 12, 12, 13, 13, 14, 14,
+    14, 16, 16, 16, 18, 18, 20, 20, 22, 22, 22, 22, 24, 26, 26, 28, 28, 28, 28,
+    30
+  ]
+  return nbComponentsPerStage[stage] ?? 30
 }
 
 export function getNbComponentsOnBoard(board: IDetailledPokemon[]): number {
@@ -239,14 +235,17 @@ export function validateBoard(board: IDetailledPokemon[], stage: number) {
     .filter((p) => p.rarity === Rarity.MYTHICAL)
     .filter(removeDuoPartner)
 
-  const additionalCommon = team.filter(
+  const additionalUncommon = team.filter(
     (p) =>
       p.additional &&
-      (p.rarity === Rarity.COMMON || p.rarity === Rarity.UNCOMMON)
+      (p.rarity === Rarity.UNCOMMON || p.rarity === Rarity.COMMON) // TEMP: common add picks should be moved to uncommon
   )
   const additionalRare = team.filter(
-    (p) =>
-      p.additional && (p.rarity === Rarity.RARE || p.rarity === Rarity.EPIC)
+    (p) => p.additional && p.rarity === Rarity.RARE
+  )
+
+  const additionalEpic = team.filter(
+    (p) => p.additional && p.rarity === Rarity.EPIC
   )
 
   if (stage < PortalCarouselStages[0] && uniques.length > 0) {
@@ -263,14 +262,19 @@ export function validateBoard(board: IDetailledPokemon[], stage: number) {
     )
   }
 
-  if (stage < AdditionalPicksStages[0] && additionalCommon.length > 0) {
+  if (stage < AdditionalPicksStages[0] && additionalUncommon.length > 0) {
     throw new Error(
-      `Common/Uncommon additional picks can't be played before stage ${AdditionalPicksStages[0]}`
+      `Uncommon additional picks can't be played before stage ${AdditionalPicksStages[0]}`
     )
   }
   if (stage < AdditionalPicksStages[1] && additionalRare.length > 0) {
     throw new Error(
-      `Rare/Epic additional picks can't be played before stage ${AdditionalPicksStages[1]}`
+      `Rare additional picks can't be played before stage ${AdditionalPicksStages[1]}`
+    )
+  }
+  if (stage < AdditionalPicksStages[2] && additionalEpic.length > 0) {
+    throw new Error(
+      `Epic additional picks can't be played before stage ${AdditionalPicksStages[2]}`
     )
   }
   if (uniques.length > 1) {

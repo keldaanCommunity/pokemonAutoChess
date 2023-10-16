@@ -4,6 +4,7 @@ import { useAppDispatch } from "../../../hooks"
 import { itemClick } from "../../../stores/NetworkStore"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { useTranslation } from "react-i18next"
+import { Item } from "../../../../../types/enum/Item"
 
 const style: CSS.Properties = {
   width: "320px",
@@ -14,7 +15,7 @@ const style: CSS.Properties = {
   textAlign: "center"
 }
 
-export default function GameItem(props: { item: string }) {
+export default function GameItem(props: { item: Item }) {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   return (

@@ -432,68 +432,10 @@ export const FIGHTING_PHASE_DURATION = 40000
 export const ITEM_CAROUSEL_BASE_DURATION = 15000
 export const PORTAL_CAROUSEL_BASE_DURATION = 20000
 
-export const ItemCarouselStages = [4, 7, 12, 17, 22, 27, 32, 37, 42]
-export const ItemProposalStages = [2, 3]
-export const AdditionalPicksStages = [5, 8]
+export const ItemCarouselStages = [4, 12, 17, 22, 27, 34]
+export const ItemProposalStages = [3, 15]
+export const AdditionalPicksStages = [5, 8, 11]
 export const PortalCarouselStages = [10, 20]
-
-export const NeutralStage: { turn: number; name: string; avatar: Pkm }[] = [
-  {
-    turn: 1,
-    name: "Magikarp",
-    avatar: Pkm.MAGIKARP
-  },
-  {
-    turn: 2,
-    name: "Raticate",
-    avatar: Pkm.RATICATE
-  },
-  {
-    turn: 3,
-    name: "Fearow",
-    avatar: Pkm.FEAROW
-  },
-  {
-    turn: 9,
-    name: "Gyarados",
-    avatar: Pkm.GYARADOS
-  },
-  {
-    turn: 14,
-    name: "Lugia",
-    avatar: Pkm.LUGIA
-  },
-  {
-    turn: 19,
-    name: "Giratina",
-    avatar: Pkm.GIRATINA
-  },
-  {
-    turn: 24,
-    name: "Zapdos",
-    avatar: Pkm.ZAPDOS
-  },
-  {
-    turn: 29,
-    name: "Dialga",
-    avatar: Pkm.DIALGA
-  },
-  {
-    turn: 34,
-    name: "Suicune",
-    avatar: Pkm.SUICUNE
-  },
-  {
-    turn: 39,
-    name: "Regice",
-    avatar: Pkm.REGICE
-  },
-  {
-    turn: 44,
-    name: "Rayquaza",
-    avatar: Pkm.RAYQUAZA
-  }
-]
 
 export enum EloRank {
   DIAMOND = "DIAMOND",

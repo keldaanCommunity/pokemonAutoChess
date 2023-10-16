@@ -16,6 +16,7 @@ import { BotDifficulty } from "../../../types/enum/Game"
 import { PkmProposition } from "../../../types/enum/Pokemon"
 import { Language } from "../../../types/enum/Language"
 import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
+import { Item } from "../../../types/enum/Item"
 
 export interface INetwork {
   client: Client
@@ -187,8 +188,8 @@ export const networkSlice = createSlice({
     pokemonPropositionClick: (state, action: PayloadAction<PkmProposition>) => {
       state.game?.send(Transfer.POKEMON_PROPOSITION, action.payload)
     },
-    itemClick: (state, action: PayloadAction<string>) => {
-      state.game?.send(Transfer.ITEM, { id: action.payload })
+    itemClick: (state, action: PayloadAction<Item>) => {
+      state.game?.send(Transfer.ITEM, action.payload)
     },
     gameStartRequest: (state, action: PayloadAction<string>) => {
       state.preparation?.send(Transfer.GAME_START_REQUEST, {

@@ -835,7 +835,7 @@
     "PETAL_DANCE": "Distribuisci [20,30,50,SP] SPECIAL a [3,4,5] Pokémon nemici",
     "HYPER_VOICE": "Infligge [50.100.200.SP] SPECIAL di fila e fa sì che tutti i bersagli colpiscano CONFUSION per [1,2,3] secondi",
     "SHADOW_CLONE": "Il pokemon crea un clone identico di se stesso accanto al suo bersaglio. Questo clone eredita dai pokemon oggetti e statistiche, l'80% dei suoi HP massimi e [30,SP] SHIELD",
-    "VOLT_SWITCH": "Scatta nelle retrovie nemiche, infliggendo [30,60,120,180,SP] SPECIAL",
+    "VOLT_SWITCH": "Scatta nelle retrovie nemiche, infliggendo [30,60,120,SP] SPECIAL",
     "LIQUIDATION": "Infligge [20,40,80,SP] SPECIAL e rimuove [1,2,4] DEF dal bersaglio",
     "BURN": "BURN l'intera squadra nemica per [5,10,20] secondi",
     "POISON": "Applica POISON a [1,2,3] avversari più vicini per [3,6,9,SP=0.5] secondi",

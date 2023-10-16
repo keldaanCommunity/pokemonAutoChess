@@ -72,7 +72,7 @@
 
 .game-additional-pokemons {
   display: grid;
-  grid-template: repeat(4, 1fr) / repeat(4, 1fr);
+  grid-template: repeat(6, 1fr) / repeat(4, 1fr);
   padding: 0 !important;
   color: white;
   background-color: rgb(97, 115, 138);

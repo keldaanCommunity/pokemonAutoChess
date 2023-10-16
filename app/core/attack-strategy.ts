@@ -1790,14 +1790,7 @@ export class VoltSwitchStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage =
-      pokemon.stars === 4
-        ? 180
-        : pokemon.stars === 3
-        ? 120
-        : pokemon.stars === 2
-        ? 120
-        : 60
+    const damage = [30,60,120][pokemon.stars - 1] ?? 120
     const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(
       pokemon,
       board
