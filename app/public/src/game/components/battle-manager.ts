@@ -3852,6 +3852,29 @@ export default class BattleManager {
             })
             break
 
+          case Ability.PRISMATIC_LASER:
+            coordinatesTarget = transformAttackCoordinate(targetX, 6, this.flip)
+            coordinates = transformAttackCoordinate(targetX, 0, this.flip)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.PRISMATIC_LASER,
+              "000"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(5, 5)
+            specialProjectile.anims.play(Ability.PRISMATIC_LASER)
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              x: coordinatesTarget[0],
+              y: coordinatesTarget[1],
+              duration: 500,
+              onComplete: () => {
+                specialProjectile.destroy()
+              }
+            })
+            break
+
           case Ability.AURORA_BEAM: {
             const [dx, dy] = OrientationVector[orientation]
             coordinates = transformAttackCoordinate(

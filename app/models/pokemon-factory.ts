@@ -640,13 +640,18 @@ import {
   Stunky,
   Skuntank,
   Illumise,
-  Volbeat
+  Volbeat,
+  Necrozma,
+  UltraNecrozma
 } from "./colyseus-models/pokemon"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
 import { PVEStage } from "./pve-stages"
 
 export default class PokemonFactory {
-  static makePveBoard(pveStage: PVEStage, shinyEncounter: boolean): MapSchema<Pokemon> {
+  static makePveBoard(
+    pveStage: PVEStage,
+    shinyEncounter: boolean
+  ): MapSchema<Pokemon> {
     const pokemons = new MapSchema<Pokemon>()
     pveStage.board.forEach(([pkm, x, y]) => {
       const pokemon = PokemonFactory.createPokemonFromName(pkm, {
@@ -1959,6 +1964,10 @@ export default class PokemonFactory {
         return new Illumise(s, e)
       case Pkm.VOLBEAT:
         return new Volbeat(s, e)
+      case Pkm.NECROZMA:
+        return new Necrozma(s, e)
+      case Pkm.ULTRA_NECROZMA:
+        return new UltraNecrozma(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:
