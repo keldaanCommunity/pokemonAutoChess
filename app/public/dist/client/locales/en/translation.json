@@ -1009,7 +1009,7 @@
     "X_SCISSOR": "Deals [20,40,80,SP] TRUE twice",
     "PLASMA_FIST": "Deals [120,SP] SPECIAL with 25% lifesteal",
     "SPECTRAL_THIEF": "Disappears and reappears dealing [50,SP] SPECIAL, stealing all the statistic boost of the target",
-    "GEOMANCY": "Gain [15,SP] ATK, [5,SP] SPE_DEF and 30% ATK_SPEED",
+    "GEOMANCY": "Gain [15,SP] ATK, [5,SP] SPE_DEF and 20% ATK_SPEED",
     "DEATH_WING": "Deals [150,SP] SPECIAL and heals for 75% of the damage taken by the target",
     "SLACK_OFF": "Clear all negative status, heal [30,40,50,SP=0.5] % of max HP and put the caster SLEEP for 5 seconds",
     "DARK_VOID": "Deals [30,SP] SPECIAL to all enemies. If any affected target was SILENCE, they are put SLEEP for 2 seconds",

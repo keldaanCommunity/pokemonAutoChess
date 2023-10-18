@@ -944,7 +944,7 @@
     "X_SCISSOR": "Deals [20,40,80,SP] tweemaal TRUE",
     "PLASMA_FIST": "Deals [120,SP] SPECIAL met 25% lifesteal",
     "SPECTRAL_THIEF": "Verdwijnt en verschijnt weer bij het delen van [50,SP] SPECIAL, waarbij alle statistische boost van het doelwit wordt gestolen",
-    "GEOMANCY": "Krijg [15,SP] ATK, [5,SP] SPE_DEF en 30% ATK_SPEED",
+    "GEOMANCY": "Krijg [15,SP] ATK, [5,SP] SPE_DEF en 20% ATK_SPEED",
     "DEATH_WING": "Doet SPECIAL [150,SP] en geneest 75% van de schade die het doelwit heeft opgelopen",
     "SLACK_OFF": "Wis alle negatieve status, genees [30,40,50,SP=0.5] % van max HP en zet de caster SLEEP gedurende 5 seconden",
     "DARK_VOID": "Biedt [30,SP] SPECIAL aan alle vijanden. Als een van de getroffen doelen SILENCE was, worden ze 2 seconden in SLEEP gezet",

@@ -944,7 +944,7 @@
     "X_SCISSOR": "Ofertas [20,40,80,SP] TRUE dos veces",
     "PLASMA_FIST": "Ofertas [120,SP] SPECIAL con 25% de robo de vida",
     "SPECTRAL_THIEF": "Desaparece y reaparece dando [50,SP] SPECIAL, robando todo el impulso de estadísticas del objetivo",
-    "GEOMANCY": "Gana [15,SP] ATK, [5,SP] SPE_DEF y 30% ATK_SPEED",
+    "GEOMANCY": "Gana [15,SP] ATK, [5,SP] SPE_DEF y 20% ATK_SPEED",
     "DEATH_WING": "Inflige [150,SP] SPECIAL y cura el 75 % del daño recibido por el objetivo",
     "SLACK_OFF": "Borra todos los estados negativos, cura [30,40,50,SP=0.5] % de HP máximo y pon al taumaturgo a SLEEP durante 5 segundos",
     "DARK_VOID": "Otorga [30,SP] SPECIAL a todos los enemigos. Si algún objetivo afectado estaba en SILENCE, se pone en SLEEP durante 2 segundos",
