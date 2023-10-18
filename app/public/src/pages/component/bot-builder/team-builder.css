@@ -13,6 +13,8 @@
 .basic-modal-body > #team-builder {
   margin-top: -4px;
   border-radius: 0 0 12px 12px;
+  width: 2000px;
+  max-width: 98vw;
 }
 
 #team-builder .synergies-container {

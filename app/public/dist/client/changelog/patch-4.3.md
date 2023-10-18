@@ -46,12 +46,24 @@
 - New ability Magical Leaf for Bulbasaur & Snivy
 - New ability for Regirock: Stealth Rocks
 - Buff Dhelmise: PP ~~110~~ → 80
-- Move Cleffa/Clefable to additional pool
-- Give a moon stone to Clefable to get Clefairy
+- Move Cleffa/Clefable to Uncommon additional pool. Give a moon stone to Clefable to get Clefairy
 - Nerf Gligar: Mana 75→90
 - Nerf Gliscor: Mana 75→90
 - Snorlax now has Monster synergy ; adjusted stats: HP ~~350~~ → 300
 - Changed Alolan Raichu: no more tier 4 ability damage, but PP ~~140~~ → 100
+- Moved Seel to Uncommon category
+- Moved Bidoof to Uncommon category
+- Moved Tentacool to Uncommon category
+- Moved Omanyte to Uncommon category
+- Moved Voltorb to Uncommon category
+- Moved Scraggy to Uncommon category
+- Moved Grimer to Uncommon category
+- Moved Alolan Grimer to Uncommon category
+- Moved Anorith to Uncommon category
+- Moved Poochyena to Rare category
+- Moved Wynaut to Rare category
+- Moved Noibat to Rare category
+- Moved Pumpkaboo to Epic category
 
 # Changes to Synergies
 
@@ -72,6 +84,8 @@ PVE rounds and rewards have been reworked with these goals in mind: difficult an
 - Added item components with additional picks
 - Removed component pick at stage 2
 - Removed Carousel at stage 7
+- Additional pick at round 5 now only proposes Uncommon pokemons
+- Additional pick at round 8 now only proposes Rare pokemons
 - Added Epic additional pick at stage 11.
 - Added Ho-Oh with Lugia at stage 14 PVE
 - Added a component pick at stage 15
