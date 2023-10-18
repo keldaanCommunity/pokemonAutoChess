@@ -15057,3 +15057,99 @@ export class UltraNecrozma extends Pokemon {
     }
   }
 }
+
+export class Cherrubi extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.CHERRUBI,
+      [Synergy.FLORA, Synergy.LIGHT, Synergy.GRASS],
+      Rarity.EPIC,
+      Pkm.CHERRIM,
+      90,
+      5,
+      1,
+      1,
+      3,
+      AttackSprite.GRASS_RANGE,
+      1,
+      125,
+      Ability.POISON_GAS,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Cherrim extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.CHERRIM,
+      [Synergy.FLORA, Synergy.LIGHT, Synergy.GRASS],
+      Rarity.EPIC,
+      Pkm.DEFAULT,
+      130,
+      16,
+      1,
+      1,
+      3,
+      AttackSprite.GRASS_RANGE,
+      2,
+      125,
+      Ability.POISON_GAS,
+      shiny,
+      emotion,
+      true,
+      true,
+      Passive.BLOSSOM
+    )
+  }
+  onChangePosition(
+    x: number,
+    y: number,
+    player: Player,
+    lightX: number,
+    lightY: number
+  ) {
+    if (x !== lightX || y !== lightY) {
+      player.transformPokemon(this, Pkm.CHERRIM_SUNLIGHT)
+    }
+  }
+}
+
+export class CherrimSunlight extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.CHERRIM_SUNLIGHT,
+      [Synergy.FLORA, Synergy.LIGHT, Synergy.GRASS],
+      Rarity.EPIC,
+      Pkm.DEFAULT,
+      210,
+      16,
+      1,
+      1,
+      3,
+      AttackSprite.GRASS_RANGE,
+      2,
+      125,
+      Ability.POISON_GAS,
+      shiny,
+      emotion,
+      true,
+      true,
+      Passive.BLOSSOM
+    )
+  }
+  onChangePosition(
+    x: number,
+    y: number,
+    player: Player,
+    lightX: number,
+    lightY: number
+  ) {
+    if (x !== lightX || y !== lightY) {
+      player.transformPokemon(this, Pkm.CHERRIM)
+    }
+  }
+}
