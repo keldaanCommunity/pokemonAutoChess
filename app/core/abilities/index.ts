@@ -199,7 +199,8 @@ import {
   StealthRocksStrategy,
   TailGlowStrategy,
   StruggleBugStrategy,
-  PrismaticLaserStrategy
+  PrismaticLaserStrategy,
+  DefenseCurlStrategy
 } from "../attack-strategy"
 import {
   HiddenPowerAStrategy,
@@ -270,6 +271,7 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.WISH]: new WishStrategy(),
   [Ability.CALM_MIND]: new CalmMindStrategy(),
   [Ability.IRON_DEFENSE]: new IronDefenseStrategy(),
+  [Ability.DEFENSE_CURL]: new DefenseCurlStrategy(),
   [Ability.METRONOME]: new MetronomeStrategy(),
   [Ability.SOAK]: new SoakStrategy(),
   [Ability.IRON_TAIL]: new IronTailStrategy(),
