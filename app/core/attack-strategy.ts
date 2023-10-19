@@ -2661,7 +2661,7 @@ export class CosmicPowerStrategy extends AttackStrategy {
   }
 }
 
-export class IronDefenseStrategy extends AttackStrategy {
+export class DefenseCurlStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2679,6 +2679,24 @@ export class IronDefenseStrategy extends AttackStrategy {
     }
     pokemon.addDefense(buff, true)
     pokemon.addSpecialDefense(buff, true)
+  }
+}
+
+export class IronDefenseStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const shield = [10,20,50][pokemon.stars - 1] ?? 50
+    board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
+      if (ally && pokemon.team == ally.team && y === pokemon.positionY) {
+        ally.addShield(shield, pokemon, true)
+      }
+    })
   }
 }
 
@@ -4280,7 +4298,7 @@ export class GeomancyStrategy extends AttackStrategy {
     super.process(pokemon, state, board, target, crit)
     pokemon.addAttack(15, true)
     pokemon.addSpecialDefense(5, true)
-    pokemon.addAttackSpeed(30, false)
+    pokemon.addAttackSpeed(20, false)
   }
 }
 
@@ -5975,19 +5993,32 @@ export class PrismaticLaserStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    board.forEach((x,y,tg)=>{
-        if(tg && tg.team !== pokemon.team && (x === pokemon.positionX || x === pokemon.positionX -1 || x === pokemon.positionX + 1)){
-            tg.handleSpecialDamage(80,board, AttackType.SPECIAL, pokemon, crit, true)
-            const teleportationCell = board.getTeleportationCell(
-                tg.positionX,
-                tg.positionY
-              )
-              if (teleportationCell) {
-                tg.moveTo(teleportationCell.x, teleportationCell.y, board)
-              } else {
-                logger.error("unable to teleport pokemon", tg)
-              }
+    board.forEach((x, y, tg) => {
+      if (
+        tg &&
+        tg.team !== pokemon.team &&
+        (x === pokemon.positionX ||
+          x === pokemon.positionX - 1 ||
+          x === pokemon.positionX + 1)
+      ) {
+        tg.handleSpecialDamage(
+          80,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit,
+          true
+        )
+        const teleportationCell = board.getTeleportationCell(
+          tg.positionX,
+          tg.positionY
+        )
+        if (teleportationCell) {
+          tg.moveTo(teleportationCell.x, teleportationCell.y, board)
+        } else {
+          logger.error("unable to teleport pokemon", tg)
         }
+      }
     })
   }
 }

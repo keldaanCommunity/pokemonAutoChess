@@ -29,6 +29,7 @@
 - Buff Giratina Altered form: Attack ~~30~~ → 35
 - Nerf Giratina Origin form: Attack ~~40~~ → 35
 - Nerf Cressalia: Attack ~~30~~ 15
+- Nerf Heatran: Attack ~~30~~ 20, HP ~~300~~ 280
 - Nerf Woobat: HP ~~80~~ → 60 Def/SpeDef ~~3~~ → 1
 - Nerf Swoobat: HP ~~160~~ → 130 Def/SpeDef ~~5~~ → 2
 - Buff Staryu: Attack ~~6~~ → 7
@@ -45,7 +46,9 @@
 - Give a rocky helmet to Slowbro to get a Slowking
 - Starly line is now Hatch
 - New ability Magical Leaf for Bulbasaur & Snivy
-- New ability for Regirock: Stealth Rocks
+- New ability for Regirock: Stealth Rocks: lays sharp stones around, dealing Ability Power50 special damage. The stones stay on field, dealing 10 physical damage per second and Wound opponents that walk on it, if not Rock or Flying
+- New ability for Shieldon, Bastiodon and Stakataka: Iron Defense: give 10/20/50 shield to all allies in the same row
+- Give Sound synergy to Bronzong
 - Buff Dhelmise: PP ~~110~~ → 80
 - Move Cleffa/Clefable to Uncommon additional pool. Give a moon stone to Clefable to get Clefairy
 - Nerf Gligar: Mana 75→90
@@ -65,6 +68,7 @@
 - Moved Wynaut to Rare category
 - Moved Noibat to Rare category
 - Moved Pumpkaboo to Epic category
+- Nerf Geomancy (Xerneas): attack speed buff ~~30%~~ 20%
 
 # Changes to Synergies
 

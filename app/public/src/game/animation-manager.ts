@@ -453,12 +453,12 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
-      key: Ability.IRON_DEFENSE,
+      key: Ability.DEFENSE_CURL,
       frames: this.game.anims.generateFrameNames("specials", {
         start: 0,
         end: 17,
         zeroPad: 3,
-        prefix: `${Ability.IRON_DEFENSE}/`
+        prefix: `${Ability.DEFENSE_CURL}/`
       }),
       duration: 1000,
       repeat: 0
