@@ -15072,8 +15072,8 @@ export class Cherrubi extends Pokemon {
       3,
       AttackSprite.GRASS_RANGE,
       1,
-      125,
-      Ability.POISON_GAS,
+      65,
+      Ability.NATURAL_GIFT,
       shiny,
       emotion,
       false,
@@ -15096,8 +15096,8 @@ export class Cherrim extends Pokemon {
       3,
       AttackSprite.GRASS_RANGE,
       2,
-      125,
-      Ability.POISON_GAS,
+      60,
+      Ability.NATURAL_GIFT,
       shiny,
       emotion,
       true,
@@ -15112,7 +15112,7 @@ export class Cherrim extends Pokemon {
     lightX: number,
     lightY: number
   ) {
-    if (x !== lightX || y !== lightY) {
+    if (x === lightX || y === lightY) {
       player.transformPokemon(this, Pkm.CHERRIM_SUNLIGHT)
     }
   }
@@ -15126,14 +15126,14 @@ export class CherrimSunlight extends Pokemon {
       Rarity.EPIC,
       Pkm.DEFAULT,
       210,
-      16,
+      18,
       1,
       1,
       3,
       AttackSprite.GRASS_RANGE,
       2,
-      125,
-      Ability.POISON_GAS,
+      60,
+      Ability.NATURAL_GIFT,
       shiny,
       emotion,
       true,
