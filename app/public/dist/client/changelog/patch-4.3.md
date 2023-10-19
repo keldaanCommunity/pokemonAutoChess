@@ -23,6 +23,10 @@
 - Illumise
 - Volbeat
 - Necrozma
+- Necrozma Ultra
+- Cherrubi
+- Cherrim
+- Cherrim Sunlight
 
 # Changes to Pokemon & Abilities
 

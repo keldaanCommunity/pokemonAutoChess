@@ -841,15 +841,25 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
-        key: Ability.PRISMATIC_LASER,
-        frames: this.game.anims.generateFrameNames(Ability.PRISMATIC_LASER, {
-          start: 0,
-          end: 8,
-          zeroPad: 3
-        }),
-        duration: 500,
-        repeat: 0
-      })
+      key: Ability.NATURAL_GIFT,
+      frames: this.game.anims.generateFrameNames(Ability.NATURAL_GIFT, {
+        start: 0,
+        end: 44
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
+      key: Ability.PRISMATIC_LASER,
+      frames: this.game.anims.generateFrameNames(Ability.PRISMATIC_LASER, {
+        start: 0,
+        end: 8,
+        zeroPad: 3
+      }),
+      duration: 500,
+      repeat: 0
+    })
 
     this.game.anims.create({
       key: Ability.MAGICAL_LEAF,

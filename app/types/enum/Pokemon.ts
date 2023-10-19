@@ -630,7 +630,10 @@ export enum Pkm {
   ILLUMISE = "ILLUMISE",
   VOLBEAT = "VOLBEAT",
   NECROZMA = "NECROZMA",
-  ULTRA_NECROZMA = "ULTRA_NECROZMA"
+  ULTRA_NECROZMA = "ULTRA_NECROZMA",
+  CHERRUBI = "CHERRUBI",
+  CHERRIM = "CHERRIM",
+  CHERRIM_SUNLIGHT = "CHERRIM_SUNLIGHT"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1263,7 +1266,10 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.ILLUMISE]: "0314",
   [Pkm.VOLBEAT]: "0313",
   [Pkm.NECROZMA]: "0800",
-  [Pkm.ULTRA_NECROZMA]: "0800-0001"
+  [Pkm.ULTRA_NECROZMA]: "0800-0001",
+  [Pkm.CHERRUBI]: "0420",
+  [Pkm.CHERRIM]: "0421",
+  [Pkm.CHERRIM_SUNLIGHT]: "0421-0001"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1896,7 +1902,10 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.ILLUMISE]: Pkm.ILLUMISE,
   [Pkm.VOLBEAT]: Pkm.VOLBEAT,
   [Pkm.NECROZMA]: Pkm.NECROZMA,
-  [Pkm.ULTRA_NECROZMA]: Pkm.ULTRA_NECROZMA
+  [Pkm.ULTRA_NECROZMA]: Pkm.ULTRA_NECROZMA,
+  [Pkm.CHERRUBI]: Pkm.CHERRUBI,
+  [Pkm.CHERRIM]: Pkm.CHERRUBI,
+  [Pkm.CHERRIM_SUNLIGHT]: Pkm.CHERRUBI
 }
 
 export enum PkmDuo {
@@ -5171,5 +5180,20 @@ export const AnimationConfig: {
     attack: AnimationType.Shoot,
     ability: AnimationType.RearUp,
     emote: AnimationType.Charge
+  },
+  [Pkm.CHERRUBI]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shake
+  },
+  [Pkm.CHERRIM]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shake
+  },
+  [Pkm.CHERRIM_SUNLIGHT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Dance
   }
 }

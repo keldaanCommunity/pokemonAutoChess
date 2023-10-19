@@ -2837,6 +2837,37 @@ export default class BattleManager {
             )
             break
 
+          case Ability.NATURAL_GIFT:
+            coordinatesTarget = transformAttackCoordinate(
+              targetX,
+              targetY,
+              false
+            )
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.NATURAL_GIFT,
+              `000`
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.NATURAL_GIFT)
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              x: coordinatesTarget[0],
+              y: coordinatesTarget[1],
+              duration: 1000,
+              onComplete: () => {
+                specialProjectile.destroy()
+              }
+            })
+            break
+
           case Ability.ASSURANCE:
             coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(

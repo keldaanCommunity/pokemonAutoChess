@@ -244,7 +244,8 @@
     "STEALTH_ROCKS": "Stealth Rocks",
     "TAIL_GLOW": "Tail Glow",
     "STRUGGLE_BUG": "Struggle Bug",
-    "PRISMATIC_LASER": "Prismatic Laser"
+    "PRISMATIC_LASER": "Prismatic Laser",
+    "NATURAL_GIFT": "Natural Gift"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -876,7 +877,10 @@
     "VOLBEAT": "Volbeat",
     "ILLUMISE": "Illumise",
     "NECROZMA": "Necrozma",
-    "ULTRA_NECROZMA": "Ultra Necrozma"
+    "ULTRA_NECROZMA": "Ultra Necrozma",
+    "CHERRUBI": "Cherrubi",
+    "CHERRIM": "Cherrim",
+    "CHERRIM_SUNLIGHT": "Cherrim Sunlight"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1106,7 +1110,8 @@
     "STEALTH_ROCKS": "Lays sharp stones around, dealing [50,SP] SPECIAL. The stones stay on field, dealing 10 PHYSICAL per second and WOUND opponents that walk on it, if not ROCK or FLYING.",
     "TAIL_GLOW": "Deals [30,SP] SPECIAL to adjacent enemies and increase AP by 50%",
     "STRUGGLE_BUG": "Deals [30,SP] SPECIAL to adjacent enemies and reduce their AP by 50%",
-    "PRISMATIC_LASER": "The user shoots a prismatic laser in a large straight line, dealing [80,SP] and displacing any enemies it hits."
+    "PRISMATIC_LASER": "The user shoots a prismatic laser in a large straight line, dealing [80,SP] and displacing any enemies it hits.",
+    "NATURAL_GIFT": "Heals [30,60,120,SP] HP to the most injured ally and RUNE_PROTECT for [1,2,3] s"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1500,7 +1505,8 @@
     "BELLSPROUT": "Weepinbell is looking for a LEAF_STONE",
     "CLEFAIRY": "Clefairy is looking for a MOON_STONE",
     "ILLUMISE_VOLBEAT": "Illumise and Volbeat gain 5 PP per second for each other member of their species alive on the board",
-    "PRISM":"Necrozma switches between its Ultra Forme and Normal forme depending on its exposure to LIGHT"
+    "PRISM":"Necrozma switches between its Ultra forme and Normal forme depending on its exposure to LIGHT",
+    "BLOSSOM":"Cherrim switches between its Sunlight forme and Normal forme depending on its exposure to LIGHT"
   },
   "stat": {
     "ATK": "Attack",

@@ -200,7 +200,8 @@ import {
   TailGlowStrategy,
   StruggleBugStrategy,
   PrismaticLaserStrategy,
-  DefenseCurlStrategy
+  DefenseCurlStrategy,
+  NaturalGiftStrategy
 } from "../attack-strategy"
 import {
   HiddenPowerAStrategy,
@@ -464,5 +465,6 @@ export const AbilityStrategy: { [key in Ability]: AttackStrategy } = {
   [Ability.STEALTH_ROCKS]: new StealthRocksStrategy(),
   [Ability.TAIL_GLOW]: new TailGlowStrategy(),
   [Ability.STRUGGLE_BUG]: new StruggleBugStrategy(),
-  [Ability.PRISMATIC_LASER]: new PrismaticLaserStrategy()
+  [Ability.PRISMATIC_LASER]: new PrismaticLaserStrategy(),
+  [Ability.NATURAL_GIFT]: new NaturalGiftStrategy()
 }
