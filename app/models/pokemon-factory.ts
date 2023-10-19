@@ -645,7 +645,9 @@ import {
   UltraNecrozma,
   Cherrubi,
   Cherrim,
-  CherrimSunlight
+  CherrimSunlight,
+  Misdreavus,
+  Mismagius
 } from "./colyseus-models/pokemon"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
 import { PVEStage } from "./pve-stages"
@@ -1977,6 +1979,10 @@ export default class PokemonFactory {
         return new Cherrim(s, e)
       case Pkm.CHERRIM_SUNLIGHT:
         return new CherrimSunlight(s, e)
+      case Pkm.MISDREAVUS:
+        return new Misdreavus(s, e)
+      case Pkm.MISMAGIUS:
+        return new Mismagius(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:
