@@ -882,8 +882,10 @@
     "CHERRUBI": "Cherrubi",
     "CHERRIM": "Cherrim",
     "CHERRIM_SUNLIGHT": "Cherrim Sunlight",
-    "MISDREAVUS":"Misdreavus",
-    "MISMAGIUS":"Mismagius"
+    "MISDREAVUS": "Misdreavus",
+    "MISMAGIUS": "Mismagius",
+    "DODUO": "Doduo",
+    "DODRIO": "Dodrio"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1509,8 +1511,8 @@
     "BELLSPROUT": "Weepinbell is looking for a LEAF_STONE",
     "CLEFAIRY": "Clefairy is looking for a MOON_STONE",
     "ILLUMISE_VOLBEAT": "Illumise and Volbeat gain 5 PP per second for each other member of their species alive on the board",
-    "PRISM":"Necrozma switches between its Ultra forme and Normal forme depending on its exposure to LIGHT",
-    "BLOSSOM":"Cherrim switches between its Sunlight forme and Normal forme depending on its exposure to LIGHT"
+    "PRISM": "Necrozma switches between its Ultra forme and Normal forme depending on its exposure to LIGHT",
+    "BLOSSOM": "Cherrim switches between its Sunlight forme and Normal forme depending on its exposure to LIGHT"
   },
   "stat": {
     "ATK": "Attack",
