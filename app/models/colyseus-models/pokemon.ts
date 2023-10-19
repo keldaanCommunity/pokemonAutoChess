@@ -15091,8 +15091,8 @@ export class Cherrim extends Pokemon {
       Pkm.DEFAULT,
       130,
       16,
-      1,
-      1,
+      2,
+      2,
       3,
       AttackSprite.GRASS_RANGE,
       2,
@@ -15127,8 +15127,8 @@ export class CherrimSunlight extends Pokemon {
       Pkm.DEFAULT,
       210,
       18,
-      1,
-      1,
+      3,
+      3,
       3,
       AttackSprite.GRASS_RANGE,
       2,
@@ -15151,5 +15151,53 @@ export class CherrimSunlight extends Pokemon {
     if (x !== lightX || y !== lightY) {
       player.transformPokemon(this, Pkm.CHERRIM)
     }
+  }
+}
+
+export class Misdreavus extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.MISDREAVUS,
+      [Synergy.GHOST, Synergy.FAIRY],
+      Rarity.EPIC,
+      Pkm.MISMAGIUS,
+      90,
+      9,
+      2,
+      3,
+      3,
+      AttackSprite.GHOST_RANGE,
+      1,
+      95,
+      Ability.NIGHT_SHADE,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Mismagius extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.MISMAGIUS,
+      [Synergy.GHOST, Synergy.FAIRY],
+      Rarity.EPIC,
+      Pkm.DEFAULT,
+      180,
+      18,
+      2,
+      4,
+      3,
+      AttackSprite.GHOST_RANGE,
+      2,
+      95,
+      Ability.NIGHT_SHADE,
+      shiny,
+      emotion,
+      true,
+      true
+    )
   }
 }

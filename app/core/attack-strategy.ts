@@ -6058,3 +6058,27 @@ export class PrismaticLaserStrategy extends AttackStrategy {
     })
   }
 }
+
+export class NightShadeStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    target.handleSpecialDamage(
+      pokemon.stars === 3
+        ? Math.ceil(0.5 * target.hp)
+        : pokemon.stars === 2
+        ? Math.ceil(0.33 * target.hp)
+        : Math.ceil(0.25 * target.hp),
+      board,
+      AttackType.TRUE,
+      pokemon,
+      crit,
+      false
+    )
+  }
+}
