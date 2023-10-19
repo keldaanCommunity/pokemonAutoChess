@@ -245,7 +245,8 @@
     "TAIL_GLOW": "Tail Glow",
     "STRUGGLE_BUG": "Struggle Bug",
     "PRISMATIC_LASER": "Prismatic Laser",
-    "NATURAL_GIFT": "Natural Gift"
+    "NATURAL_GIFT": "Natural Gift",
+    "NIGHT_SHADE": "Night Shade"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -880,7 +881,9 @@
     "ULTRA_NECROZMA": "Ultra Necrozma",
     "CHERRUBI": "Cherrubi",
     "CHERRIM": "Cherrim",
-    "CHERRIM_SUNLIGHT": "Cherrim Sunlight"
+    "CHERRIM_SUNLIGHT": "Cherrim Sunlight",
+    "MISDREAVUS":"Misdreavus",
+    "MISMAGIUS":"Mismagius"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1111,7 +1114,8 @@
     "TAIL_GLOW": "Deals [30,SP] SPECIAL to adjacent enemies and increase AP by 50%",
     "STRUGGLE_BUG": "Deals [30,SP] SPECIAL to adjacent enemies and reduce their AP by 50%",
     "PRISMATIC_LASER": "The user shoots a prismatic laser in a large straight line, dealing [80,SP] and displacing any enemies it hits.",
-    "NATURAL_GIFT": "Heals [30,60,120,SP] HP to the most injured ally and RUNE_PROTECT for [1,2,3] s"
+    "NATURAL_GIFT": "Heals [30,60,120,SP] HP to the most injured ally and RUNE_PROTECT for [1,2,3] s",
+    "NIGHT_SHADE": "Deals [25,33,50]% of target max HP as TRUE"
   },
   "effect": {
     "INGRAIN": "Ingrain",

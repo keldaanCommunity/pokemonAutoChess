@@ -27,6 +27,8 @@
 - Cherrubi
 - Cherrim
 - Cherrim Sunlight
+- Misdreavus
+- Mismagius
 
 # Changes to Pokemon & Abilities
 
