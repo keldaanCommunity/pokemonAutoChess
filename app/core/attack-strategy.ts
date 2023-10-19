@@ -75,7 +75,8 @@ export class AttackStrategy {
         Ability.ATTRACT,
         Ability.ASSIST,
         Ability.FISSURE,
-        Ability.MAGICAL_LEAF
+        Ability.MAGICAL_LEAF,
+        Ability.NATURAL_GIFT
       ].includes(pokemon.skill)
     ) {
       pokemon.simulation.room.broadcast(Transfer.ABILITY, {
@@ -2629,6 +2630,41 @@ export class WishStrategy extends AttackStrategy {
   }
 }
 
+export class NaturalGiftStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+
+    const candidate = (
+      board.cells.filter(
+        (cell) => cell && cell.team === pokemon.team
+      ) as PokemonEntity[]
+    ).sort((a, b) => a.life / a.hp - b.life / b.hp)[0]
+
+    if (candidate) {
+      candidate.handleHeal(
+        pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30,
+        pokemon,
+        1
+      )
+      candidate.status.triggerRuneProtect(pokemon.stars * 1000)
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: Ability.NATURAL_GIFT,
+        positionX: pokemon.positionX,
+        positionY: pokemon.positionY,
+        targetX: candidate.positionX,
+        targetY: candidate.positionY
+      })
+    }
+  }
+}
+
 export class CalmMindStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
@@ -2691,7 +2727,7 @@ export class IronDefenseStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const shield = [10,20,50][pokemon.stars - 1] ?? 50
+    const shield = [10, 20, 50][pokemon.stars - 1] ?? 50
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (ally && pokemon.team == ally.team && y === pokemon.positionY) {
         ally.addShield(shield, pokemon, true)

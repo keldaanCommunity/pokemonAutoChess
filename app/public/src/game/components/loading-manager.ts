@@ -110,6 +110,11 @@ export default class LoadingManager {
       "/assets/attacks"
     )
     scene.load.multiatlas(
+      "NATURAL_GIFT",
+      "/assets/attacks/NATURAL_GIFT.json",
+      "/assets/attacks"
+    )
+    scene.load.multiatlas(
       "PRISMATIC_LASER",
       "/assets/attacks/PRISMATIC_LASER.json",
       "/assets/attacks"
