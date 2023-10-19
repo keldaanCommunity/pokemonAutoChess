@@ -944,7 +944,7 @@
     "X_SCISSOR": "Distribuisce [20,40,80,SP] TRUE due volte",
     "PLASMA_FIST": "Offerte [120,SP] SPECIAL con il 25% di rubavita",
     "SPECTRAL_THIEF": "Scompare e riappare infliggendo [50,SP] SPECIAL, rubando tutto il potenziamento statistico del bersaglio",
-    "GEOMANCY": "Ottieni [15,SP] ATT, [5,SP] SPE_DEF e il 30% di ATK_SPEED",
+    "GEOMANCY": "Ottieni [15,SP] ATT, [5,SP] SPE_DEF e il 20% di ATK_SPEED",
     "DEATH_WING": "Infligge [150 SP] SPECIAL e cura il 75% dei danni subiti dal bersaglio",
     "SLACK_OFF": "Cancella tutti gli stati negativi, guarisci il [30,40,50,SP=0.5]% dei HP massimi e metti l'incantatore in SLEEP per 5 secondi",
     "DARK_VOID": "Infligge [30 SP] SPECIAL a tutti i nemici. Se uno dei bersagli interessati era SILENCE, viene messo SLEEP per 2 secondi",

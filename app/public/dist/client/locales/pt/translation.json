@@ -944,7 +944,7 @@
     "X_SCISSOR": "Negócios [20,40,80,SP] TRUE duas vezes",
     "PLASMA_FIST": "Ofertas [120,SP] SPECIAL com 25% de roubo de vida",
     "SPECTRAL_THIEF": "Desaparece e reaparece distribuindo [50,SP] SPECIAL, roubando todo o boost estatístico do alvo",
-    "GEOMANCY": "Ganhe [15,SP] ATK, [5,SP] SPE_DEF e 30% ATK_SPEED",
+    "GEOMANCY": "Ganhe [15,SP] ATK, [5,SP] SPE_DEF e 20% ATK_SPEED",
     "DEATH_WING": "Causa [150,SP] SPECIAL e cura 75% do dano sofrido pelo alvo",
     "SLACK_OFF": "Limpe todos os status negativos, cure [30,40,50,SP=0,5]% do HP máximo e coloque o lançador SLEEP por 5 segundos",
     "DARK_VOID": "Oferece [30,SP] SPECIAL a todos os inimigos. Se algum alvo afetado foi SILENCE, ele é colocado em SLEEP por 2 segundos",

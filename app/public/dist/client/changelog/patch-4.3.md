@@ -64,6 +64,7 @@
 - Moved Wynaut to Rare category
 - Moved Noibat to Rare category
 - Moved Pumpkaboo to Epic category
+- Nerf Geomancy (Xerneas): attack speed buff ~~30%~~ 20%
 
 # Changes to Synergies
 
