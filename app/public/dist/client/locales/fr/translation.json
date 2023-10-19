@@ -980,7 +980,7 @@
     "X_SCISSOR": "Inflige [20,40,80,SP] TRUE deux fois",
     "PLASMA_FIST": "Inflige [120,SP] SPECIAL avec 25 % de vol de vie",
     "SPECTRAL_THIEF": "Disparaît et réapparaît en infligeant [50,SP] SPECIAL, en volant tout le boost statistique de la cible",
-    "GEOMANCY": "Gagne [15,SP] ATK, [5,SP] SPE_DEF et 30% ATK_SPEED",
+    "GEOMANCY": "Gagne [15,SP] ATK, [5,SP] SPE_DEF et 20% ATK_SPEED",
     "DEATH_WING": "Inflige [150,SP] SPECIAL et se soigne à hauteur de 75% des dégâts subis par la cible",
     "SLACK_OFF": "Retire tous les statuts négatifs, soigne [30,40,50,SP=0.5] % des HP max et rend le lanceur SLEEP pendant 5 secondes",
     "DARK_VOID": "Inflige [30,SP] SPECIAL à tous les ennemis. Si une cible affectée était SILENCE, elle subit SLEEP pendant 2 secondes",
