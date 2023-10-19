@@ -1717,7 +1717,7 @@ export default class BattleManager {
             )
             break
 
-          case Ability.IRON_DEFENSE:
+          case Ability.DEFENSE_CURL:
             coordinates = transformAttackCoordinate(
               positionX,
               positionY,
@@ -1727,11 +1727,11 @@ export default class BattleManager {
               coordinates[0],
               coordinates[1],
               "specials",
-              `${Ability.IRON_DEFENSE}/000`
+              `${Ability.DEFENSE_CURL}/000`
             )
             specialProjectile.setDepth(7)
             specialProjectile.setScale(2, 2)
-            specialProjectile.anims.play(Ability.IRON_DEFENSE)
+            specialProjectile.anims.play(Ability.DEFENSE_CURL)
             specialProjectile.once(
               Phaser.Animations.Events.ANIMATION_COMPLETE,
               () => {
