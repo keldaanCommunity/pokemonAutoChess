@@ -28,6 +28,7 @@
 
 - Buff Giratina Altered form: Attack ~~30~~ → 35
 - Nerf Giratina Origin form: Attack ~~40~~ → 35
+- Nerf Cressalia: Attack ~~30~~ 15
 - Nerf Heatran: Attack ~~30~~ 20, HP ~~300~~ 280
 - Nerf Woobat: HP ~~80~~ → 60 Def/SpeDef ~~3~~ → 1
 - Nerf Swoobat: HP ~~160~~ → 130 Def/SpeDef ~~5~~ → 2
@@ -100,8 +101,8 @@ PVE rounds and rewards have been reworked with these goals in mind: difficult an
 
 # UI
 
-- Better pokemon report, grouped by families
-- Hit animation particles
+- Better pokemon meta report, grouped by families
+- Added Hit animation particles
 - Translated PVE round names
 
 # Bugfix

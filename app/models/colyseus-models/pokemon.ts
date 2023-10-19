@@ -8198,7 +8198,7 @@ export class Cresselia extends Pokemon {
       Rarity.LEGENDARY,
       Pkm.DEFAULT,
       300,
-      30,
+      15,
       5,
       5,
       3,
