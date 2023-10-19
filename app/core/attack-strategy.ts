@@ -2661,7 +2661,7 @@ export class CosmicPowerStrategy extends AttackStrategy {
   }
 }
 
-export class IronDefenseStrategy extends AttackStrategy {
+export class DefenseCurlStrategy extends AttackStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2679,6 +2679,24 @@ export class IronDefenseStrategy extends AttackStrategy {
     }
     pokemon.addDefense(buff, true)
     pokemon.addSpecialDefense(buff, true)
+  }
+}
+
+export class IronDefenseStrategy extends AttackStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const shield = [10,20,50][pokemon.stars - 1] ?? 50
+    board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
+      if (ally && pokemon.team == ally.team && y === pokemon.positionY) {
+        ally.addShield(shield, pokemon, true)
+      }
+    })
   }
 }
 

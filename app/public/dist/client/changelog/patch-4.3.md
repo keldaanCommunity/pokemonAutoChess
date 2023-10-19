@@ -45,7 +45,9 @@
 - Give a rocky helmet to Slowbro to get a Slowking
 - Starly line is now Hatch
 - New ability Magical Leaf for Bulbasaur & Snivy
-- New ability for Regirock: Stealth Rocks
+- New ability for Regirock: Stealth Rocks: lays sharp stones around, dealing Ability Power50 special damage. The stones stay on field, dealing 10 physical damage per second and Wound opponents that walk on it, if not Rock or Flying
+- New ability for Shieldon, Bastiodon and Stakataka: Iron Defense: give 10/20/50 shield to all allies in the same row
+- Give Sound synergy to Bronzong
 - Buff Dhelmise: PP ~~110~~ → 80
 - Move Cleffa/Clefable to Uncommon additional pool. Give a moon stone to Clefable to get Clefairy
 - Nerf Gligar: Mana 75→90
