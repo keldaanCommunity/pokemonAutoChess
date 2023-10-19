@@ -15220,7 +15220,7 @@ export class Doduo extends Pokemon {
       Ability.AGILITY,
       shiny,
       emotion,
-      true,
+      false,
       true
     )
   }
