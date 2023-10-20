@@ -39,6 +39,11 @@ export default class AnimationManager {
         )
 
         if (conf && AnimationConfig[conf]) {
+          if (
+            AnimationConfig[conf].shinyUnavailable &&
+            shiny === PokemonTint.SHINY
+          )
+            return
           if (!actions.includes(AnimationConfig[conf as Pkm].attack)) {
             actions.push(AnimationConfig[conf as Pkm].attack)
           }
@@ -950,7 +955,7 @@ export default class AnimationManager {
       key: Ability.TEETER_DANCE,
       frames: this.game.anims.generateFrameNames(Ability.TEETER_DANCE, {
         start: 0,
-        end: 46,
+        end: 41,
         zeroPad: 3
       }),
       duration: 1000,
@@ -2394,7 +2399,10 @@ export default class AnimationManager {
       entity.scene && entity.scene.textures.exists(entity.index)
         ? entity.index
         : "0000"
-    const tint = entity.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL
+    let tint =
+      entity.shiny && !AnimationConfig[entity.name].shinyUnavailable
+        ? PokemonTint.SHINY
+        : PokemonTint.NORMAL
     const animKey = `${textureIndex}/${tint}/${animation}/${SpriteType.ANIM}/${orientationCorrected}`
     const shadowKey = `${textureIndex}/${tint}/${animation}/${SpriteType.SHADOW}/${orientationCorrected}`
     if (loop) {
