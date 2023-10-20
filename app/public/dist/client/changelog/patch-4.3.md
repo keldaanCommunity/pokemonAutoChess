@@ -77,6 +77,7 @@
 - Moved Pumpkaboo to Epic category
 - Nerf Geomancy (Xerneas): attack speed buff ~~30%~~ 20%
 - Buff Mimikyu: Def ~~4~~ 5, SpeDef ~~3~~ 6
+- Nerf Mew Attack ~~18~~ 16
 
 # Changes to Synergies
 
