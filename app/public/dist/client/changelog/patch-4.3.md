@@ -80,6 +80,7 @@
 - Nerf Mew Attack ~~18~~ 16
 - Venonat/Venomoth: replace Psychic type by Poison
 - Nerf Chingling HP ~~180~~ 150
+- Buff Goodra Attack ~~22~~ 26
 
 # Changes to Synergies
 
