@@ -14721,7 +14721,7 @@ export class Liepard extends Pokemon {
       Rarity.RARE,
       Pkm.DEFAULT,
       175,
-      22,
+      25,
       2,
       2,
       1,
