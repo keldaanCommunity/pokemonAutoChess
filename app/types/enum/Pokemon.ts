@@ -2041,6 +2041,7 @@ export const AnimationConfig: {
     attack: AnimationType
     ability: AnimationType
     emote: AnimationType
+    shinyUnavailable?: boolean
   }
 } = {
   [Pkm.DEFAULT]: {
@@ -2051,7 +2052,8 @@ export const AnimationConfig: {
   [Pkm.EGG]: {
     attack: AnimationType.Attack,
     ability: AnimationType.LostBalance,
-    emote: AnimationType.Twirl
+    emote: AnimationType.Twirl,
+    shinyUnavailable: true
   },
   [Pkm.DITTO]: {
     attack: AnimationType.Attack,
@@ -3341,7 +3343,8 @@ export const AnimationConfig: {
   [Pkm.PRIMAL_KYOGRE]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Swell,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
   },
   [Pkm.PRIMAL_GROUDON]: {
     attack: AnimationType.Attack,
@@ -3691,7 +3694,8 @@ export const AnimationConfig: {
   [Pkm.PALPITOAD]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
   },
   [Pkm.SEISMITOAD]: {
     attack: AnimationType.Attack,
@@ -4281,7 +4285,8 @@ export const AnimationConfig: {
   [Pkm.FROSMOTH]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Hop,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
   },
   [Pkm.WAILMER]: {
     attack: AnimationType.Attack,
