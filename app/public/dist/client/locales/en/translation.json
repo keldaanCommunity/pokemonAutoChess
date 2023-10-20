@@ -1117,7 +1117,7 @@
     "STRUGGLE_BUG": "Deals [30,SP] SPECIAL to adjacent enemies and reduce their AP by 50%",
     "PRISMATIC_LASER": "The user shoots a prismatic laser in a large straight line, dealing [80,SP] and displacing any enemies it hits.",
     "NATURAL_GIFT": "Heals [30,60,120,SP] HP to the most injured ally and RUNE_PROTECT for [1,2,3] s",
-    "NIGHT_SHADE": "Deals [25,33,50]% of target max HP as TRUE"
+    "NIGHT_SHADE": "Deals [25,33,50,SP=0.5]% of target max HP as TRUE"
   },
   "effect": {
     "INGRAIN": "Ingrain",
