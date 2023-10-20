@@ -2555,6 +2555,7 @@ export class AlolanMarowak extends Pokemon {
       Ability.BONEMERANG,
       shiny,
       emotion,
+      true,
       true
     )
   }
