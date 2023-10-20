@@ -18,7 +18,7 @@
 - Scrafty
 - Finneon
 - Lumineon
-- Stinky
+- Stunky
 - Skuntank
 - Illumise
 - Volbeat
