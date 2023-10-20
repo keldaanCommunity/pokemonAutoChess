@@ -10831,7 +10831,7 @@ export class Venonat extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.VENONAT,
-      [Synergy.BUG, Synergy.FLYING, Synergy.PSYCHIC],
+      [Synergy.BUG, Synergy.FLYING, Synergy.POISON],
       Rarity.UNCOMMON,
       Pkm.VENOMOTH,
       50,
@@ -10855,7 +10855,7 @@ export class Venomoth extends Pokemon {
   constructor(shiny: boolean, emotion: Emotion) {
     super(
       Pkm.VENOMOTH,
-      [Synergy.BUG, Synergy.FLYING, Synergy.PSYCHIC],
+      [Synergy.BUG, Synergy.FLYING, Synergy.POISON],
       Rarity.UNCOMMON,
       Pkm.DEFAULT,
       130,
