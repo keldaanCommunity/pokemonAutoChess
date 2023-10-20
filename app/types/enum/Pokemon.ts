@@ -635,7 +635,9 @@ export enum Pkm {
   CHERRIM = "CHERRIM",
   CHERRIM_SUNLIGHT = "CHERRIM_SUNLIGHT",
   MISDREAVUS = "MISDREAVUS",
-  MISMAGIUS = "MISMAGIUS"
+  MISMAGIUS = "MISMAGIUS",
+  DODUO = "DODUO",
+  DODRIO = "DODRIO"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1273,7 +1275,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.CHERRIM]: "0421",
   [Pkm.CHERRIM_SUNLIGHT]: "0421-0001",
   [Pkm.MISDREAVUS]: "0200",
-  [Pkm.MISMAGIUS]: "0429"
+  [Pkm.MISMAGIUS]: "0429",
+  [Pkm.DODUO]: "0084",
+  [Pkm.DODRIO]: "0085"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1911,7 +1915,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.CHERRIM]: Pkm.CHERRUBI,
   [Pkm.CHERRIM_SUNLIGHT]: Pkm.CHERRUBI,
   [Pkm.MISDREAVUS]: Pkm.MISDREAVUS,
-  [Pkm.MISMAGIUS]: Pkm.MISDREAVUS
+  [Pkm.MISMAGIUS]: Pkm.MISDREAVUS,
+  [Pkm.DODUO]: Pkm.DODUO,
+  [Pkm.DODRIO]: Pkm.DODRIO
 }
 
 export enum PkmDuo {
@@ -5211,5 +5217,15 @@ export const AnimationConfig: {
     attack: AnimationType.Shoot,
     ability: AnimationType.RearUp,
     emote: AnimationType.Charge
+  },
+  [Pkm.DODUO]: {
+    attack: AnimationType.Jab,
+    ability: AnimationType.Charge,
+    emote: AnimationType.MultiStrike
+  },
+  [Pkm.DODRIO]: {
+    attack: AnimationType.Jab,
+    ability: AnimationType.Charge,
+    emote: AnimationType.MultiStrike
   }
 }
