@@ -572,9 +572,9 @@ export enum Mask {
 }
 
 export enum TerrainType {
-  GROUND,
   WALL,
-  WATER
+  WATER,
+  GROUND
 }
 
 export const IdTable: { [key: number]: Mask } = {
