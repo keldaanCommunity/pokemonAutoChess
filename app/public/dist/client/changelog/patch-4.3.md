@@ -18,7 +18,7 @@
 - Scrafty
 - Finneon
 - Lumineon
-- Stinky
+- Stunky
 - Skuntank
 - Illumise
 - Volbeat
@@ -36,6 +36,7 @@
 
 - Buff Giratina Altered form: Attack ~~30~~ → 35
 - Nerf Giratina Origin form: Attack ~~40~~ → 35
+- Nerf Shadow Sneak damage: ~~60~~ 50
 - Nerf Cressalia: Attack ~~30~~ 15
 - Nerf Heatran: Attack ~~30~~ 20, HP ~~300~~ 280
 - Nerf Woobat: HP ~~80~~ → 60 Def/SpeDef ~~3~~ → 1
@@ -77,6 +78,11 @@
 - Moved Noibat to Rare category
 - Moved Pumpkaboo to Epic category
 - Nerf Geomancy (Xerneas): attack speed buff ~~30%~~ 20%
+- Buff Mimikyu: Def ~~4~~ 5, SpeDef ~~3~~ 6
+- Nerf Mew Attack ~~18~~ 16
+- Venonat/Venomoth: replace Psychic type by Poison
+- Nerf Chingling HP ~~180~~ 150
+- Buff Goodra Attack ~~22~~ 26
 
 # Changes to Synergies
 
