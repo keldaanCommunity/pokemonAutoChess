@@ -15202,3 +15202,51 @@ export class Mismagius extends Pokemon {
     )
   }
 }
+
+export class Doduo extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.DODUO,
+      [Synergy.FLYING, Synergy.NORMAL],
+      Rarity.EPIC,
+      Pkm.DODRIO,
+      90,
+      10,
+      3,
+      2,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      1,
+      40,
+      Ability.AGILITY,
+      shiny,
+      emotion,
+      false,
+      true
+    )
+  }
+}
+
+export class Dodrio extends Pokemon {
+  constructor(shiny: boolean, emotion: Emotion) {
+    super(
+      Pkm.DODRIO,
+      [Synergy.FLYING, Synergy.NORMAL],
+      Rarity.EPIC,
+      Pkm.DEFAULT,
+      185,
+      24,
+      5,
+      3,
+      1,
+      AttackSprite.NORMAL_MELEE,
+      2,
+      40,
+      Ability.AGILITY,
+      shiny,
+      emotion,
+      true,
+      true
+    )
+  }
+}

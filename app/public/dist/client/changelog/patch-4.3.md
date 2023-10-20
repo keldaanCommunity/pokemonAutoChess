@@ -29,6 +29,8 @@
 - Cherrim Sunlight
 - Misdreavus
 - Mismagius
+- Doduo
+- Dodrio
 
 # Changes to Pokemon & Abilities
 
