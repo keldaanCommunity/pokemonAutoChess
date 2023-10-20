@@ -18,7 +18,7 @@
 - Scrafty
 - Finneon
 - Lumineon
-- Stinky
+- Stunky
 - Skuntank
 - Illumise
 - Volbeat
@@ -75,6 +75,7 @@
 - Moved Noibat to Rare category
 - Moved Pumpkaboo to Epic category
 - Nerf Geomancy (Xerneas): attack speed buff ~~30%~~ 20%
+- Buff Mimikyu: Def ~~4~~ 5, SpeDef ~~3~~ 6
 
 # Changes to Synergies
 
