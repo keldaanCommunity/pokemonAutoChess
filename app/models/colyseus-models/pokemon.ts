@@ -13676,7 +13676,7 @@ export class Chingling extends Pokemon {
       [Synergy.SOUND, Synergy.PSYCHIC, Synergy.BABY],
       Rarity.UNIQUE,
       Pkm.CHIMECHO,
-      180,
+      150,
       8,
       2,
       4,

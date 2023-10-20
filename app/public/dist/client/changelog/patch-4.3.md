@@ -79,6 +79,7 @@
 - Buff Mimikyu: Def ~~4~~ 5, SpeDef ~~3~~ 6
 - Nerf Mew Attack ~~18~~ 16
 - Venonat/Venomoth: replace Psychic type by Poison
+- Nerf Chingling HP ~~180~~ 150
 
 # Changes to Synergies
 
