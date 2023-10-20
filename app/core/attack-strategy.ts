@@ -6068,12 +6068,13 @@ export class NightShadeStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    const damage = Math.ceil(
+      ([0.25, 0.33, 0.5][pokemon.stars - 1] ?? 0.5) *
+        target.hp *
+        (1 + (0.5 * pokemon.ap) / 100)
+    )
     target.handleSpecialDamage(
-      pokemon.stars === 3
-        ? Math.ceil(0.5 * target.hp)
-        : pokemon.stars === 2
-        ? Math.ceil(0.33 * target.hp)
-        : Math.ceil(0.25 * target.hp),
+      damage,
       board,
       AttackType.TRUE,
       pokemon,
