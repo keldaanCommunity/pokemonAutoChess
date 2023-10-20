@@ -901,7 +901,7 @@
     "FIRE_TRICK": "Infligge [20,40,80,SP] SPECIAL e teletrasporta il bersaglio in un angolo della mappa",
     "FLAME_CHARGE": "Scatta nelle retrovie nemiche, infliggendo [30,60,120,SP] SPECIAL",
     "LEECH_SEED": "POISON il bersaglio per [3,6,12] secondi, curando [20,40,80,SP] HP",
-    "LOCK_ON": "Aggancia il bersaglio e assegnagli ARMOR_REDUCTION per [3,SP] secondi. Genesect ora gli infligge TRUE",
+    "LOCK_ON": "Aggancia il bersaglio e assegnagli ARMOR_REDUCTION per [3,SP] secondi",
     "PSYCH_UP": "Infliggi [10,20,40,SP] SPECIAL e SILENCE il bersaglio e i suoi nemici adiacenti",
     "RAZOR_WIND": "Infligge [20,40,80,SP] SPECIAL al bersaglio e crea una PARALYSIS dei nemici circostanti",
     "TWISTING_NETHER": "Infligge [80,SP] SPECIAL ai nemici adiacenti. Ogni pokemon colpito viene teletrasportato da qualche parte.",

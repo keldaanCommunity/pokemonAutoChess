@@ -975,7 +975,7 @@
     "FIRE_TRICK": "Deal [20,40,80,SP] SPECIAL to the target and teleport them to a corner of the battlefield",
     "FLAME_CHARGE": "Dash into the enemy team's backline, dealing [30,60,120,SP] SPECIAL to all enemy Pokémon hit",
     "LEECH_SEED": "POISON the target for [3,6,12] seconds and heal the user's HP by [20,40,80,SP]",
-    "LOCK_ON": "Lock on the target, applying ARMOR_REDUCTION to them for [3,SP] seconds. Genesect will deal TRUE to the target",
+    "LOCK_ON": "Lock on the target, applying ARMOR_REDUCTION to them for [3,SP] seconds",
     "PSYCH_UP": "Deal [10,20,40,SP] SPECIAL to the target, then SILENCE them and all adjacent enemy Pokémon for [2,4,8]",
     "RAZOR_WIND": "Deal [20,40,80,SP] SPECIAL to the target, then make them and all adjacent enemy Pokémon PARALYSIS for 7s",
     "TWISTING_NETHER": "Deals [80,SP] SPECIAL to all adjacent enemy Pokémon, then teleport them randomly across the battlefield",
@@ -1512,7 +1512,8 @@
     "CLEFAIRY": "Clefairy is looking for a MOON_STONE",
     "ILLUMISE_VOLBEAT": "Illumise and Volbeat gain 5 PP per second for each other member of their species alive on the board",
     "PRISM": "Necrozma switches between its Ultra forme and Normal forme depending on its exposure to LIGHT",
-    "BLOSSOM": "Cherrim switches between its Sunlight forme and Normal forme depending on its exposure to LIGHT"
+    "BLOSSOM": "Cherrim switches between its Sunlight forme and Normal forme depending on its exposure to LIGHT",
+    "GENESECT":"Genesect is dealing TRUE to targets affected by ARMOR_REDUCTION"
   },
   "stat": {
     "ATK": "Attack",

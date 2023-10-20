@@ -900,7 +900,7 @@
     "FIRE_TRICK": "Verursacht [20,40,80,SP] SPECIAL und teleportiert das Ziel in eine Ecke der Karte",
     "FLAME_CHARGE": "Stürme in die gegnerische Hinterlinie und verursache [30,60,120,SP] SPECIAL",
     "LEECH_SEED": "Vergiftet das Ziel für [3,6,12] Sekunden und heilt es um [20,40,80,SP] HP",
-    "LOCK_ON": "Sperren Sie das Ziel und geben Sie ihm [3,SP] Sekunden lang ARMOR_REDUCTION. Genesect behandelt es jetzt TRUE",
+    "LOCK_ON": "Sperren Sie das Ziel und geben Sie ihm [3,SP] Sekunden lang ARMOR_REDUCTION",
     "PSYCH_UP": "Verteile [10,20,40,SP] SPECIAL und bringe das Ziel und seine angrenzenden Feinde zum Schweigen",
     "RAZOR_WIND": "Fügt dem Ziel [20,40,80,SP] SPECIAL zu und lässt umliegende Feinde paralysieren",
     "TWISTING_NETHER": "Fügt benachbarten Feinden [80,SP] SPECIAL zu. Jeder Pokémon-Treffer wird irgendwohin teleportiert.",
