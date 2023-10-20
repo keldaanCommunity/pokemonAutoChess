@@ -153,7 +153,7 @@ export default class PokemonState {
 
       if (
         attacker &&
-        attacker.skill == Ability.LOCK_ON &&
+        attacker.passive == Passive.GENESECT &&
         pokemon.status.armorReduction
       ) {
         attackType = AttackType.TRUE
