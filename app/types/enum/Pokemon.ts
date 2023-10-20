@@ -5075,7 +5075,7 @@ export const AnimationConfig: {
   },
   [Pkm.YANMA]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.QuickStrike,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
   [Pkm.YANMEGA]: {
