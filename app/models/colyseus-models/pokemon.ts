@@ -9316,7 +9316,9 @@ export class Genesect extends Pokemon {
       Ability.LOCK_ON,
       shiny,
       emotion,
-      true
+      true,
+      false,
+      Passive.GENESECT
     )
   }
 }
