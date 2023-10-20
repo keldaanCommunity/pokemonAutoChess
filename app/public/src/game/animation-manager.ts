@@ -950,7 +950,7 @@ export default class AnimationManager {
       key: Ability.TEETER_DANCE,
       frames: this.game.anims.generateFrameNames(Ability.TEETER_DANCE, {
         start: 0,
-        end: 46,
+        end: 41,
         zeroPad: 3
       }),
       duration: 1000,
