@@ -647,7 +647,9 @@ import {
   Cherrim,
   CherrimSunlight,
   Misdreavus,
-  Mismagius
+  Mismagius,
+  Doduo,
+  Dodrio
 } from "./colyseus-models/pokemon"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
 import { PVEStage } from "./pve-stages"
@@ -1983,6 +1985,10 @@ export default class PokemonFactory {
         return new Misdreavus(s, e)
       case Pkm.MISMAGIUS:
         return new Mismagius(s, e)
+      case Pkm.DODUO:
+        return new Doduo(s, e)
+      case Pkm.DODRIO:
+        return new Dodrio(s, e)
       case Pkm.DEFAULT:
         return new Magikarp(s, e)
       default:
