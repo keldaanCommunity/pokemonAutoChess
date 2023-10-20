@@ -1009,7 +1009,7 @@
     "AGILITY": "Increase ATK_SPEED by [10,20,30,SP] % (stacks)",
     "SPIRIT_SHACKLE": "Shoots a Piercing Arrow that deals [30,60,90,SP] SPECIAL in a line behind the target and applies WOUND for 4 seconds to everyone hit",
     "WATER_SHURIKEN": "Throws 3 shuriken in 3 directions that pass through enemies and inflict [20,40,60,SP] SPECIAL",
-    "SHADOW_SNEAK": "Deals [60,SP] SPECIAL. If the target is SILENCE, deals TRUE",
+    "SHADOW_SNEAK": "Deals [50,SP] SPECIAL. If the target is SILENCE, deals TRUE",
     "MACH_PUNCH": "Deals [50,SP] SPECIAL and attacks immediately after",
     "UPPERCUT": "Deals [60,SP] SPECIAL. Double damage if attacker has a better DEF than target",
     "TRIPLE_KICK": "Deals [50,SP] SPECIAL to up to 3 adjacent enemies",

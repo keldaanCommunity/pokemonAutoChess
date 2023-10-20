@@ -935,7 +935,7 @@
     "AGILITY": "ATK_SPEEDを[10,20,30,SP]%増加(重複)",
     "SPIRIT_SHACKLE": "[30,60,90,SP]SPECIALを与える貫通矢をターゲットの後ろ一列に発射し、命中した全員に4秒間WOUNDを適用する",
     "WATER_SHURIKEN": "3つの手裏剣を3方向に投げ、敵を貫通して[20,40,60,SP]SPECIALを与える",
-    "SHADOW_SNEAK": "お得 [60,SP] SPECIAL。ターゲットがSILENCEの場合、TRUEとなります。",
+    "SHADOW_SNEAK": "お得 [50,SP] SPECIAL。ターゲットがSILENCEの場合、TRUEとなります。",
     "MACH_PUNCH": "[50,SP]SPECIALを与え、直後に攻撃",
     "UPPERCUT": "お得 [60,SP] SPECIAL。攻撃者のDEFがターゲットよりも優れている場合、ダメージが2倍になります",
     "TRIPLE_KICK": "隣接する敵最大3体に[50,SP]SPECIALを与える",

@@ -4198,7 +4198,7 @@ export class ShadowSneakStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = 60
+    const damage = 50
     const damageType = target.status.silence
       ? AttackType.TRUE
       : AttackType.SPECIAL

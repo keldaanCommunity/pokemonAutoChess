@@ -934,7 +934,7 @@
     "AGILITY": "Erhöht ATK_SPEED um [10,20,30,SP] % (Stapel)",
     "SPIRIT_SHACKLE": "Schießt einen durchdringenden Pfeil ab, der [30,60,90,SP] SPECIAL in einer Linie hinter dem Ziel verursacht und jedem Treffer 4 Sekunden lang WOUND zufügt",
     "WATER_SHURIKEN": "Wirft 3 Shuriken in 3 Richtungen, die durch Feinde hindurchgehen und [20,40,60,SP] SPECIAL verursachen",
-    "SHADOW_SNEAK": "Angebote [60,SP] SPECIAL. Wenn das Ziel SILENCE ist, wird TRUE ausgeteilt",
+    "SHADOW_SNEAK": "Angebote [50,SP] SPECIAL. Wenn das Ziel SILENCE ist, wird TRUE ausgeteilt",
     "MACH_PUNCH": "Verursacht [50,SP] SPECIAL und greift unmittelbar danach an",
     "UPPERCUT": "Angebote [60,SP] SPECIAL. Doppelter Schaden, wenn der Angreifer eine bessere DEF als das Ziel hat",
     "TRIPLE_KICK": "Fügt bis zu 3 benachbarten Feinden [50,SP] SPECIAL zu",
