@@ -3,16 +3,18 @@ import { readdir } from "fs/promises"
 import Jimp from "jimp"
 import { Mask, MaskCoordinate, TerrainType } from "../app/types/Config"
 import dungeons from "./dungeons.json"
-import { TilesetTiled } from "../app/core/tileset"
+import { AnimationTiled, FrameTiled, TilesetTiled } from "../app/core/tileset"
 
 const PMDO_EXPORT_DIRECTORY = "C:/Users/arnau/Desktop/RawAsset/TileDtef"
 export const DTEF_WIDTH = 144
 export const DTEF_HEIGHT = 192
+export const DTEF_TILESET_WIDTH = 6
+export const DTEF_TILESET_HEIGHT = 8
 export const DTEF_TILESET_TILE_WIDTH = 24
 
 type TilesetExchangeFile = {
   tileset_0: DtefTileset | undefined
-  tiletset_1: DtefTileset | undefined
+  tileset_1: DtefTileset | undefined
   tileset_2: DtefTileset | undefined
 }
 
@@ -74,48 +76,134 @@ async function main() {
 async function createTilesheets(dungeon: string) {
   console.log(`Creating mega tileset ${dungeon} ...`)
   const src = `${PMDO_EXPORT_DIRECTORY}/${dungeon}`
+  const newSrc = `tilesets/${dungeon}`
 
-  await mkdir(`tilesets/${dungeon}`, { recursive: true })
+  await mkdir(newSrc, { recursive: true })
 
   const tilesetExchangeFile: TilesetExchangeFile = {
     tileset_0: undefined,
-    tiletset_1: undefined,
+    tileset_1: undefined,
     tileset_2: undefined
   }
 
   // for each tileset, detect the number of frames
   for (let i = 0; i < 3; i++) {
     const staticTileset = await Jimp.read(`${src}/tileset_${i}.png`)
-    await staticTileset.writeAsync(`tilesets/${dungeon}/tileset_${i}.png`)
+    await staticTileset.writeAsync(`${newSrc}/tileset_${i}.png`)
 
     tilesetExchangeFile[`tileset_${i}`] = {
       static: {
-        name: `tileset_${i}.png`,
+        name: `tileset_${i}`,
         maskDefinition: getMaskDefinition(staticTileset)
       },
       animation: await getAnimatedFrames(dungeon, src, `tileset_${i}`)
     } as DtefTileset
   }
   await writeFile(
-    `tilesets/${dungeon}/metadata.json`,
+    `${newSrc}/metadata.json`,
     JSON.stringify(tilesetExchangeFile, null, 2)
   )
+  await createTilesetsTiled(newSrc, tilesetExchangeFile.tileset_0!)
+  await createTilesetsTiled(newSrc, tilesetExchangeFile.tileset_1!)
+  await createTilesetsTiled(newSrc, tilesetExchangeFile.tileset_2!)
 }
 
-function createTilesetTiled(tilesetExchangeFile: TilesetExchangeFile) {
-  return {
-    columns: 18,
+async function createTilesetsTiled(src: string, dtefTileset: DtefTileset) {
+  await createTilesetTiled(
+    src,
+    dtefTileset.static.name,
+    await Jimp.read(`${src}/${dtefTileset.static.name}.png`),
+    dtefTileset.static.maskDefinition
+  )
+  for (let i = 0; i < dtefTileset.animation.length; i++) {
+    const anim = dtefTileset.animation[i]
+    await createTilesetTiled(
+      src,
+      anim.name,
+      await Jimp.read(`${src}/${anim.name}.png`),
+      anim.maskDefinition,
+      anim.frameDuration,
+      anim.numberOfFrames
+    )
+  }
+}
+
+async function createTilesetTiled(
+  src: string,
+  name: string,
+  picture: Jimp,
+  maskDefinition: MaskDefinition,
+  frameDuration?: number,
+  numberOfFrames?: number
+) {
+  const tilesetTiled: TilesetTiled = {
+    columns: picture.getWidth() / DTEF_TILESET_TILE_WIDTH,
     firstgid: 1,
-    image: `assets/tilesets/${this.id}.png`,
-    imageheight: DTEF_HEIGHT,
-    imagewidth: 3 * DTEF_WIDTH,
+    image: `${name}.png`,
+    imageheight: picture.getHeight(),
+    imagewidth: picture.getWidth(),
     margin: 0,
-    name: this.id,
+    name: name,
     spacing: 0,
-    tilecount: 3 * this.headers.length * 24,
-    tileheight: 24,
-    tilewidth: 24
-  } as TilesetTiled
+    tilecount:
+      (picture.getWidth() / DTEF_TILESET_TILE_WIDTH) *
+      (picture.getHeight() / DTEF_TILESET_TILE_WIDTH),
+    tileheight: DTEF_TILESET_TILE_WIDTH,
+    tilewidth: DTEF_TILESET_TILE_WIDTH
+  }
+
+  if (frameDuration && numberOfFrames) {
+    tilesetTiled["tiles"] = getAnimationsTiled(
+      maskDefinition,
+      frameDuration,
+      numberOfFrames
+    )
+  }
+
+  await writeFile(`${src}/${name}.json`, JSON.stringify(tilesetTiled, null, 2))
+}
+
+function getAnimationsTiled(
+  maskDefinition: MaskDefinition,
+  frameDuration: number,
+  numberOfFrames: number
+) {
+  const animations = new Array<AnimationTiled>()
+  for (let i = 0; i < 3; i++) {
+    const terrain = i as TerrainType
+    maskDefinition[terrain].forEach((mask) => {
+      animations.push(
+        getAnimationTiled(mask, terrain, frameDuration, numberOfFrames)
+      )
+    })
+  }
+  return animations
+}
+
+function getAnimationTiled(
+  mask: Mask,
+  terrain: TerrainType,
+  frameDuration: number,
+  numberOfFrames: number
+) {
+  const frames = new Array<FrameTiled>()
+  for (let i = 0; i < numberOfFrames; i++) {
+    frames.push({
+      tileid: getTileId(terrain, mask, i),
+      duration: (frameDuration * 1000) / 60
+    })
+  }
+  return {
+    animation: frames,
+    id: getTileId(terrain, mask, 0)
+  }
+}
+
+function getTileId(terrain: TerrainType, mask: Mask, frameNumber: number) {
+  const maskCoordinate = MaskCoordinate[mask]
+  const pixelX = maskCoordinate.x + terrain * DTEF_TILESET_WIDTH
+  const pixelY = maskCoordinate.y + frameNumber * DTEF_TILESET_HEIGHT
+  return pixelY * DTEF_TILESET_WIDTH * 3 + pixelX
 }
 
 function getMaskDefinition(picture: Jimp) {
@@ -126,7 +214,7 @@ function getMaskDefinition(picture: Jimp) {
   }
   for (let i = 0; i < 3; i++) {
     const terrain = i as TerrainType
-    console.log("terrain", terrain)
+    // console.log("terrain", terrain)
     Object.values(Mask).forEach((mask) => {
       if (isPixelValue(picture, mask, terrain)) {
         definition[terrain].push(mask)
@@ -161,7 +249,7 @@ async function getAnimatedFrames(
       animatedFrames.push({
         frameDuration: parseInt(frameDuration),
         numberOfFrames: frames.length,
-        name: `${tilesetName}_frame${j}.png`,
+        name: `${tilesetName}_frame${j}`,
         maskDefinition: getMaskDefinition(megaTileset)
       })
       j++
@@ -172,9 +260,9 @@ async function getAnimatedFrames(
 
 function isPixelValue(picutre: Jimp, maskId: Mask, terrain: TerrainType) {
   const maskCoordinate = MaskCoordinate[maskId]
-  const pixelX = maskCoordinate.x + terrain * 6
+  const pixelX = maskCoordinate.x + terrain * DTEF_TILESET_WIDTH
   const pixelY = maskCoordinate.y
-  console.log("scanning ", maskId, pixelX, pixelY, terrain)
+  // console.log("scanning ", maskId, pixelX, pixelY, terrain)
   let exist = false
   for (let i = 0; i < DTEF_TILESET_TILE_WIDTH; i++) {
     for (let j = 0; j < DTEF_TILESET_TILE_WIDTH; j++) {

@@ -21,6 +21,17 @@ export type TilesetTiled = {
   tilecount: number
   tileheight: number
   tilewidth: number
+  tiles?: AnimationTiled[]
+}
+
+export type AnimationTiled = {
+  animation: FrameTiled[]
+  id: number
+}
+
+export type FrameTiled = {
+  duration: number
+  tileid: number
 }
 
 export default class Tileset {
