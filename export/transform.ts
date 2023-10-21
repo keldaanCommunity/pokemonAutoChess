@@ -3,8 +3,9 @@ import { readdir } from "fs/promises"
 import Jimp from "jimp"
 import { Mask, MaskCoordinate, TerrainType } from "../app/types/Config"
 import dungeons from "./dungeons.json"
+import { TilesetTiled } from "../app/core/tileset"
 
-const PMDO_EXPORT_DIRECTORY = "./dbg_output_pmdo_full_ani"
+const PMDO_EXPORT_DIRECTORY = "C:/Users/arnau/Desktop/RawAsset/TileDtef"
 export const DTEF_WIDTH = 144
 export const DTEF_HEIGHT = 192
 export const DTEF_TILESET_TILE_WIDTH = 24
@@ -67,7 +68,7 @@ async function main() {
   //     const dungeon = Object.values(dungeons)[i]
   //     await createTilesheets(dungeon)
   //   }
-  await createTilesheets("ChasmCave1")
+  await createTilesheets("AmpPlains")
 }
 
 async function createTilesheets(dungeon: string) {
@@ -89,7 +90,7 @@ async function createTilesheets(dungeon: string) {
 
     tilesetExchangeFile[`tileset_${i}`] = {
       static: {
-        name: `tileset_${i}`,
+        name: `tileset_${i}.png`,
         maskDefinition: getMaskDefinition(staticTileset)
       },
       animation: await getAnimatedFrames(dungeon, src, `tileset_${i}`)
@@ -101,21 +102,37 @@ async function createTilesheets(dungeon: string) {
   )
 }
 
+function createTilesetTiled(tilesetExchangeFile: TilesetExchangeFile) {
+  return {
+    columns: 18,
+    firstgid: 1,
+    image: `assets/tilesets/${this.id}.png`,
+    imageheight: DTEF_HEIGHT,
+    imagewidth: 3 * DTEF_WIDTH,
+    margin: 0,
+    name: this.id,
+    spacing: 0,
+    tilecount: 3 * this.headers.length * 24,
+    tileheight: 24,
+    tilewidth: 24
+  } as TilesetTiled
+}
+
 function getMaskDefinition(picture: Jimp) {
   const definition = {
     [TerrainType.WALL]: new Array<Mask>(),
     [TerrainType.WATER]: new Array<Mask>(),
     [TerrainType.GROUND]: new Array<Mask>()
   }
-  ;[(TerrainType.WALL, TerrainType.WATER, TerrainType.GROUND)].forEach(
-    (terrain) => {
-      Object.values(Mask).forEach((mask) => {
-        if (isPixelValue(picture, mask, terrain)) {
-          definition[terrain].push(mask)
-        }
-      })
-    }
-  )
+  for (let i = 0; i < 3; i++) {
+    const terrain = i as TerrainType
+    console.log("terrain", terrain)
+    Object.values(Mask).forEach((mask) => {
+      if (isPixelValue(picture, mask, terrain)) {
+        definition[terrain].push(mask)
+      }
+    })
+  }
   return definition
 }
 
@@ -157,7 +174,8 @@ function isPixelValue(picutre: Jimp, maskId: Mask, terrain: TerrainType) {
   const maskCoordinate = MaskCoordinate[maskId]
   const pixelX = maskCoordinate.x + terrain * 6
   const pixelY = maskCoordinate.y
-  let exist = true
+  console.log("scanning ", maskId, pixelX, pixelY, terrain)
+  let exist = false
   for (let i = 0; i < DTEF_TILESET_TILE_WIDTH; i++) {
     for (let j = 0; j < DTEF_TILESET_TILE_WIDTH; j++) {
       if (
