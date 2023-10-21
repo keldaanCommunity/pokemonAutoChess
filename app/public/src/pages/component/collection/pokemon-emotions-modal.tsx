@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react"
+import React, { useCallback, useMemo } from "react"
 import Modal from "react-bootstrap/esm/Modal"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import {
@@ -11,11 +11,10 @@ import { getPortraitSrc } from "../../../utils"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { Emotion } from "../../../../../types"
-import { ITracker } from "../../../../../types/ITracker"
-import tracker from "../../../../dist/client/assets/pokemons/tracker.json"
 import { cc } from "../../utils/jsx"
-import "./pokemon-emotions-modal.css"
 import { useTranslation } from "react-i18next"
+import precomputedEmotions from "../../../../../models/precomputed/emotions.json"
+import "./pokemon-emotions-modal.css"
 
 export default function PokemonEmotionsModal(props: {
   pokemon: Pkm
@@ -27,35 +26,13 @@ export default function PokemonEmotionsModal(props: {
     (state) => state.lobby.pokemonCollection
   )
 
-  const metadata = tracker as unknown as { [key: string]: ITracker }
-
   const p = useMemo(
     () => PokemonFactory.createPokemonFromName(props.pokemon),
     [props.pokemon]
   )
 
-  const pMetadata: ITracker | undefined = useMemo(() => {
-    const pathIndex = p.index.split("-")
-    if (pathIndex.length == 1) {
-      return metadata[p.index]
-    } else if (pathIndex.length == 2) {
-      return metadata[pathIndex[0]].subgroups[pathIndex[1]]
-    } else {
-      return undefined
-    }
-  }, [metadata, p.index])
-
-  const availableEmotions: Emotion[] = useMemo(
-    () =>
-      Object.keys(pMetadata?.portrait_files ?? {})
-        .map((k) => {
-          const possibleEmotion = k as Emotion
-          if (Object.values(Emotion).includes(possibleEmotion)) {
-            return possibleEmotion
-          }
-        })
-        .filter((emo): emo is Emotion => !!emo),
-    [pMetadata]
+  const availableEmotions: Emotion[] = Object.values(Emotion).filter(
+    (e, i) => precomputedEmotions[p.index]?.[i] === 1
   )
 
   const pConfig = useMemo(() => {

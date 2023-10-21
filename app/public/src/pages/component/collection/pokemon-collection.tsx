@@ -1,9 +1,7 @@
 import React, { useState } from "react"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
 import PokemonCarousel from "./pokemon-carousel"
-import tracker from "../../../../dist/client/assets/pokemons/tracker.json"
 import { Synergy } from "../../../../../types/enum/Synergy"
-import { ITracker } from "../../../../../types/ITracker"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import SynergyIcon from "../icons/synergy-icon"
 import PokemonEmotionsModal from "./pokemon-emotions-modal"
@@ -13,8 +11,7 @@ import { useTranslation } from "react-i18next"
 import { Checkbox } from "../checkbox/checkbox"
 
 export default function PokemonCollection() {
-  const { t } = useTranslation()
-  const metadata = tracker as unknown as { [key: string]: ITracker }
+  const { t } = useTranslation()  
   const [selectedPokemon, setSelectedPokemon] = useState<Pkm | undefined>(
     undefined
   )
@@ -110,7 +107,6 @@ export default function PokemonCollection() {
                   <PokemonCarousel
                     type={type}
                     setPokemon={setSelectedPokemon}
-                    metadata={metadata}
                     filter={filter}
                     shinyOnly={shinyOnly}
                   />
@@ -121,7 +117,6 @@ export default function PokemonCollection() {
           <TabPanel>
             <UnownPanel
               setPokemon={setSelectedPokemon}
-              metadata={metadata}
               filter={filter}
             />
           </TabPanel>

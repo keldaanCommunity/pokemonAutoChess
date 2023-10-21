@@ -3,8 +3,7 @@ import { Item } from "../../../../../types/enum/Item"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { PkmWithConfig, Emotion } from "../../../../../types"
-import tracker from "../../../../dist/client/assets/pokemons/tracker.json"
-import { ITracker } from "../../../../../types/ITracker"
+import precomputedEmotions from "../../../../../../app/models/precomputed/emotions.json"
 import { useTranslation } from "react-i18next"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
@@ -29,24 +28,10 @@ export default function SelectedEntity(props: {
       selectedEmotion: detailledPkm.emotion,
       selectedShiny: detailledPkm.shiny
     })
-    let pMetadata: ITracker | undefined = undefined
+    const availableEmotions: Emotion[] = Object.values(Emotion).filter(
+      (e, i) => precomputedEmotions[pokemon.index]?.[i] === 1
+    )
 
-    const availableEmotions: Emotion[] = []
-    const pathIndex = pokemon.index.split("-")
-    if (pathIndex.length == 1) {
-      pMetadata = tracker[pokemon.index]
-    } else if (pathIndex.length == 2) {
-      pMetadata = tracker[pathIndex[0]].subgroups[pathIndex[1]]
-    }
-
-    if (pMetadata) {
-      Object.keys(pMetadata.portrait_files).forEach((k) => {
-        const possibleEmotion = k as Emotion
-        if (Object.values(Emotion).includes(possibleEmotion)) {
-          availableEmotions.push(possibleEmotion)
-        }
-      })
-    }
     return (
       <div id="selected-entity" className="nes-container">
         <fieldset>

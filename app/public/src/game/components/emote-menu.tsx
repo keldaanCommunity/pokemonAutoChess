@@ -3,16 +3,15 @@ import ReactDOM from "react-dom/client"
 import { GameObjects } from "phaser"
 import { Emotion } from "../../../../types/enum/Emotion"
 import { getAvatarString, getPortraitSrc } from "../../utils"
-import "./emote-menu.css"
 import { throttle } from "../../../../utils/function"
 import { toggleAnimation } from "../../stores/NetworkStore"
 import store from "../../stores"
-import tracker from "../../../dist/client/assets/pokemons/tracker.json"
-import { ITracker } from "../../../../types/ITracker"
+import precomputedEmotions from "../../../../models/precomputed/emotions.json"
 import { cc } from "../../pages/utils/jsx"
 import { IPlayer } from "../../../../types"
 import { logger } from "../../../../utils/logger"
 import { useTranslation } from "react-i18next"
+import "./emote-menu.css"
 
 const sendEmote = throttle(function (
   index: string,
@@ -39,22 +38,12 @@ export function EmoteMenuComponent(props: {
     Emotion.SURPRISED,
     Emotion.STUNNED,
     Emotion.DIZZY
-  ]
+  ].filter((emotion) => {
+    const indexEmotion = Object.keys(Emotion).indexOf(emotion)
+    return precomputedEmotions[props.index]?.[indexEmotion] === 1
+  })
 
   const pokemonCollection = props.player.pokemonCollection
-  const metadata = tracker as unknown as { [key: string]: ITracker }
-  let pMetadata: ITracker | undefined = undefined
-  const pathIndex = props.index.split("-")
-  if (pathIndex.length == 1) {
-    pMetadata = metadata[props.index]
-  } else if (pathIndex.length == 2) {
-    pMetadata = metadata[pathIndex[0]].subgroups[pathIndex[1]]
-  }
-  if (pMetadata) {
-    emotions = emotions.filter(
-      (emotion) => emotion in pMetadata!.portrait_files
-    )
-  }
   const pConfig = pokemonCollection[props.index]
 
   return emotions.length === 0 ? (
