@@ -244,7 +244,6 @@ export const EpicShop = new Array<Pkm>(
   Pkm.ELEKID,
   Pkm.SNORUNT,
   Pkm.BUDEW,
-  Pkm.CUBONE,
   Pkm.HOUNDOUR,
   Pkm.GOOMY,
   Pkm.BOUNSWEET,
