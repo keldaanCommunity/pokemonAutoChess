@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from "fs-extra"
+import { mkdir, writeFile } from "fs-extra"
 import { readdir } from "fs/promises"
 import Jimp from "jimp"
 import { Mask, MaskCoordinate, TerrainType } from "../app/types/Config"
@@ -60,17 +60,25 @@ async function getTilesets(source, filter?: string) {
 async function createDungeonsEnum() {
   const directories = await getDirectories(PMDO_EXPORT_DIRECTORY)
   const dungeons = {}
-  directories.forEach((v) => (dungeons[v] = v))
+  directories.forEach((v) => {
+    if (
+      !v.includes("Secondary") &&
+      !v.includes("Wall") &&
+      !v.includes("Floor")
+    ) {
+      dungeons[v] = v
+    }
+  })
   await writeFile("dungeons.json", JSON.stringify(dungeons, null, 2))
 }
 
 async function main() {
   await createDungeonsEnum()
-  //   for (let i = 0; i < Object.values(dungeons).length; i++) {
-  //     const dungeon = Object.values(dungeons)[i]
-  //     await createTilesheets(dungeon)
-  //   }
-  await createTilesheets("AmpPlains")
+  for (let i = 0; i < Object.values(dungeons).length; i++) {
+    const dungeon = Object.values(dungeons)[i]
+    await createTilesheets(dungeon)
+  }
+  // await createTilesheets("AmpPlains")
 }
 
 async function createTilesheets(dungeon: string) {
