@@ -1,18 +1,30 @@
-import { useTranslation } from "react-i18next"
-import { ICreditName } from "../../../../../types"
 import React from "react"
+import { useTranslation } from "react-i18next"
+import { useCredits } from "../../../../../core/credits"
 
 export default function Credits(props: {
-  credits: ICreditName[]
-  primary: string
-  secondary: string[]
+  for: "sprite" | "portrait"
+  index: string
 }) {
   const { t } = useTranslation()
+  const { spriteCredits, creditsNames } = useCredits()
+
+  if (!spriteCredits || !spriteCredits.hasOwnProperty(props.index)) return null
+
+  let credits
+  if (props.for === "portrait") {
+    credits = spriteCredits[props.index]?.portrait_credit
+  } else {
+    credits = spriteCredits[props.index]?.sprite_credit
+  }
+
+  if (!credits) return null
+
   function findCredits(id: string) {
     let contact = ""
     let name = ""
-    if (props.credits) {
-      const user = props.credits.find((user) => user.Discord === id)
+    if (creditsNames) {
+      const user = creditsNames.find((user) => user.Discord === id)
       if (user != null) {
         contact = user.Contact
         name = user.Name
@@ -32,13 +44,13 @@ export default function Credits(props: {
 
   return (
     <>
-      <dd>{props.primary.length > 0 && findCredits(props.primary)}</dd>
-      {props.secondary.length > 0 && (
+      <dd>{credits.primary.length > 0 && findCredits(credits.primary)}</dd>
+      {credits.secondary.length > 0 && (
         <>
           <dt>{t("others")}</dt>
           <dd>
             <ul style={{ paddingLeft: "12ch" }}>
-              {props.secondary.map((s) => (
+              {credits.secondary.map((s) => (
                 <li key={s}>{findCredits(s)}</li>
               ))}
             </ul>
