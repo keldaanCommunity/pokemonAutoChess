@@ -1,53 +1,33 @@
 import { mkdir, writeFile } from "fs-extra"
 import { readdir } from "fs/promises"
 import Jimp from "jimp"
-import { Mask, MaskCoordinate, TerrainType } from "../app/types/Config"
+import {
+  AnimatedFrame,
+  DTEF_HEIGHT,
+  DTEF_TILESET_HEIGHT,
+  DTEF_TILESET_TILE_WIDTH,
+  DTEF_TILESET_WIDTH,
+  DTEF_WIDTH,
+  DtefTileset,
+  Mask,
+  MaskCoordinate,
+  MaskDefinition,
+  TerrainType,
+  TilesetExchangeFile
+} from "../app/types/Config"
 import dungeons from "./dungeons.json"
 import { AnimationTiled, FrameTiled, TilesetTiled } from "../app/core/tileset"
 
 const PMDO_EXPORT_DIRECTORY = "C:/Users/arnau/Desktop/RawAsset/TileDtef"
-export const DTEF_WIDTH = 144
-export const DTEF_HEIGHT = 192
-export const DTEF_TILESET_WIDTH = 6
-export const DTEF_TILESET_HEIGHT = 8
-export const DTEF_TILESET_TILE_WIDTH = 24
+let gid = 1
 
-type TilesetExchangeFile = {
-  tileset_0: DtefTileset | undefined
-  tileset_1: DtefTileset | undefined
-  tileset_2: DtefTileset | undefined
-}
-
-type DtefTileset = {
-  static: StaticFrame
-  animation: AnimatedFrame[]
-}
-
-type StaticFrame = {
-  name: string
-  maskDefinition: MaskDefinition
-}
-
-type MaskDefinition = {
-  [TerrainType.GROUND]: Mask[]
-  [TerrainType.WALL]: Mask[]
-  [TerrainType.WATER]: Mask[]
-}
-
-type AnimatedFrame = {
-  frameDuration: number
-  numberOfFrames: number
-  name: string
-  maskDefinition: MaskDefinition
-}
-
-async function getDirectories(source) {
+async function getDirectories(source: string) {
   return (await readdir(source, { withFileTypes: true }))
     .filter((dirent) => dirent.isDirectory())
     .map((dirent) => dirent.name)
 }
 
-async function getTilesets(source, filter?: string) {
+async function getTilesets(source: string, filter?: string) {
   return (await readdir(source, { withFileTypes: true }))
     .filter((file) => file.isFile() && file.name.includes("frame"))
     .filter((file) => (filter ? file.name.includes(filter) : true))
@@ -102,7 +82,8 @@ async function createTilesheets(dungeon: string) {
     tilesetExchangeFile[`tileset_${i}`] = {
       static: {
         name: `tileset_${i}`,
-        maskDefinition: getMaskDefinition(staticTileset)
+        maskDefinition: getMaskDefinition(staticTileset),
+        firstgid: computeGid(staticTileset)
       },
       animation: await getAnimatedFrames(dungeon, src, `tileset_${i}`)
     } as DtefTileset
@@ -146,7 +127,7 @@ async function createTilesetTiled(
 ) {
   const tilesetTiled: TilesetTiled = {
     columns: picture.getWidth() / DTEF_TILESET_TILE_WIDTH,
-    firstgid: 1,
+    firstgid: gid,
     image: `${name}.png`,
     imageheight: picture.getHeight(),
     imagewidth: picture.getWidth(),
@@ -203,14 +184,19 @@ function getAnimationTiled(
   }
   return {
     animation: frames,
-    id: getTileId(terrain, mask, 0)
+    id: getTileId(terrain, mask)
   }
 }
 
-function getTileId(terrain: TerrainType, mask: Mask, frameNumber: number) {
+export function getTileId(
+  terrain: TerrainType,
+  mask: Mask,
+  frameNumber?: number
+) {
   const maskCoordinate = MaskCoordinate[mask]
+  const frameshift = frameNumber ? frameNumber : 0
   const pixelX = maskCoordinate.x + terrain * DTEF_TILESET_WIDTH
-  const pixelY = maskCoordinate.y + frameNumber * DTEF_TILESET_HEIGHT
+  const pixelY = maskCoordinate.y + frameshift * DTEF_TILESET_HEIGHT
   return pixelY * DTEF_TILESET_WIDTH * 3 + pixelX
 }
 
@@ -258,7 +244,8 @@ async function getAnimatedFrames(
         frameDuration: parseInt(frameDuration),
         numberOfFrames: frames.length,
         name: `${tilesetName}_frame${j}`,
-        maskDefinition: getMaskDefinition(megaTileset)
+        maskDefinition: getMaskDefinition(megaTileset),
+        firstgid: computeGid(megaTileset)
       })
       j++
     }
@@ -288,6 +275,14 @@ function isPixelValue(picutre: Jimp, maskId: Mask, terrain: TerrainType) {
     }
   }
   return exist
+}
+
+function computeGid(picture: Jimp) {
+  const firstGid = gid
+  gid +=
+    (picture.getWidth() / DTEF_TILESET_TILE_WIDTH) *
+    (picture.getHeight() / DTEF_TILESET_TILE_WIDTH)
+  return firstGid
 }
 
 main()

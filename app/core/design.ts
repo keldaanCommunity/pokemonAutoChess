@@ -1,4 +1,4 @@
-import { Dungeon, TerrainType, Mask } from "../types/Config"
+import { Dungeon, TerrainType, Mask, DungeonPMDO } from "../types/Config"
 import Tileset, { TilesetTiled } from "./tileset"
 import Terrain from "./terrain"
 import Masker from "./masker"
@@ -35,11 +35,16 @@ export type DesignTiled = {
   width: number
 }
 
+export type TileMapping = {
+  id: number
+  layerId: string
+}
+
 export default class Design {
-  id: Dungeon
+  id: DungeonPMDO
   terrain: TerrainType[][] = []
   bitmask: Mask[][] = []
-  tilemap: number[] = []
+  layers: TileMapping[][] = []
   width = 42
   height = 22
   frequency: number
@@ -49,7 +54,7 @@ export default class Design {
   wallRect: [x1: number, y1: number, x2: number, y2: number] = [14, 15, 28, 15]
 
   constructor(
-    id: Dungeon,
+    id: DungeonPMDO,
     frequency: number,
     persistance: number,
     width?: number,
@@ -67,15 +72,10 @@ export default class Design {
     this.tileset = new Tileset(this.id)
   }
 
-  async create() {
-    return new Promise<void>((resolve, reject) => {
-      this.tileset.initialize().then(() => {
-        this.generateTerrain()
-        this.generateMask()
-        this.generateTilemap()
-        resolve()
-      })
-    })
+  create() {
+    this.generateTerrain()
+    this.generateMask()
+    this.generateLayers()
   }
 
   generateTerrain() {
@@ -165,16 +165,36 @@ export default class Design {
     }
   }
 
-  generateTilemap() {
+  // generateLayers() {
+  //   this.meta
+  //   this.layers.push({
+  //     data: this.tilemap,
+  //     height: this.height,
+  //     id: 1,
+  //     name: "World",
+  //     opacity: 1,
+  //     type: "tilelayer",
+  //     visible: true,
+  //     width: this.width,
+  //     x: 0,
+  //     y: 0
+  //   })
+  // }
+
+  generateLayers() {
     for (let i = 0; i < this.height; i++) {
       for (let j = 0; j < this.width; j++) {
         const tileID = this.tileset.getTilemapId(
           this.terrain[i][j],
           this.bitmask[i][j]
         )
-        this.tilemap.push(tileID)
+        this.layers.push(tileID)
       }
     }
+  }
+
+  exportLayerToTiled() {
+    return []
   }
 
   exportToTiled() {
@@ -182,20 +202,7 @@ export default class Design {
       compressionlevel: -1,
       height: this.height,
       infinite: false,
-      layers: [
-        {
-          data: this.tilemap,
-          height: this.height,
-          id: 1,
-          name: "World",
-          opacity: 1,
-          type: "tilelayer",
-          visible: true,
-          width: this.width,
-          x: 0,
-          y: 0
-        }
-      ],
+      layers: this.exportLayerToTiled(),
       nextlayerid: 6,
       nextobjectid: 1,
       orientation: "orthogonal",
