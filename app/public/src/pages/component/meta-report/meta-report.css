@@ -1,0 +1,34 @@
+#meta-report {
+  margin: 1em;
+  height: 90vh;
+  color: white;
+  width: 1920px;
+  max-width: 95vw;
+}
+
+#meta-report h2 {
+  margin: 0;
+}
+
+#meta-report .team-comp {
+  background-color: rgb(84, 89, 107);
+  margin-bottom: 0.5em;
+  color: white;
+  display: grid;
+  grid-template-columns: 2ch 360px 8ch 6ch 8ch 8ch 6ch 1fr;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1em;
+  overflow-x: auto;
+}
+
+#meta-report .rank {
+  min-width: 2ch;
+  text-align: center;
+  font-size: 150%;
+}
+
+#meta-report .team-comp label {
+  color: #ccc;
+  display: block;
+}
