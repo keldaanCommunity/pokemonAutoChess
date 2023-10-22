@@ -4,7 +4,6 @@ import PreparationState from "./states/preparation-state"
 import admin from "firebase-admin"
 import { nanoid } from "nanoid"
 import {
-  OnGameStartCommand,
   OnGameStartRequestCommand,
   OnJoinCommand,
   OnLeaveCommand,
@@ -13,7 +12,6 @@ import {
   OnAddBotCommand,
   OnRemoveBotCommand,
   OnListBotsCommand,
-  InitializeBotsCommand,
   OnRoomNameCommand,
   OnRoomPasswordCommand,
   OnToggleEloCommand,
