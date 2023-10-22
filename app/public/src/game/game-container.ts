@@ -539,16 +539,14 @@ class GameContainer {
       }
     })
 
-    player.synergies.onChange((item) => {
-      const lightCount = player.synergies.get(Synergy.LIGHT)
-      if (
-        player.id === this.spectatedPlayerId &&
-        lightCount &&
-        lightCount > 0
-      ) {
-        this.gameScene?.board?.showLightCell()
-      } else {
-        this.gameScene?.board?.hideLightCell()
+    player.synergies.onChange(() => {
+      if (player.id === this.spectatedPlayerId) {
+        const lightCount = player.synergies.get(Synergy.LIGHT)
+        if (lightCount && lightCount > 0) {
+          this.gameScene?.board?.showLightCell()
+        } else {
+          this.gameScene?.board?.hideLightCell()
+        }
       }
     })
   }
