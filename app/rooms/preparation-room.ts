@@ -147,14 +147,6 @@ export default class PreparationRoom extends Room<PreparationState> {
       }
     })
 
-    this.onMessage(Transfer.GAME_START, (client, message) => {
-      try {
-        this.dispatcher.dispatch(new OnGameStartCommand(), { client, message })
-      } catch (error) {
-        logger.error(error)
-      }
-    })
-
     this.onMessage(Transfer.TOGGLE_READY, (client) => {
       try {
         this.dispatcher.dispatch(new OnToggleReadyCommand(), { client })

@@ -12,7 +12,6 @@ import {
   IDragDropMessage,
   IPlayer,
   IPokemon,
-  IPokemonEntity,
   Transfer,
   NonFunctionPropNames,
   ISimplePlayer
@@ -41,7 +40,6 @@ import Count from "../../../models/colyseus-models/count"
 import { Ability } from "../../../types/enum/Ability"
 import { Portal, SynergySymbol } from "../../../models/colyseus-models/portal"
 import Simulation from "../../../core/simulation"
-import { Effect } from "../../../types/enum/Effect"
 
 class GameContainer {
   room: Room<GameState>
@@ -456,7 +454,7 @@ class GameContainer {
   }
 
   initializePlayer(player: Player) {
-    // logger.debug(player);
+    //logger.debug("initializePlayer", player, this.uid)
     if (this.uid == player.id) {
       this.player = player
       if (this.tilemap) {
