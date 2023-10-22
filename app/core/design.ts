@@ -70,6 +70,7 @@ export default class Design {
     this.arenaRect = arenaRect ?? this.arenaRect
     this.wallRect = wallRect ?? this.wallRect
     this.tileset = new Tileset(this.id)
+    this.create()
   }
 
   create() {
@@ -167,18 +168,7 @@ export default class Design {
 
   // generateLayers() {
   //   this.meta
-  //   this.layers.push({
-  //     data: this.tilemap,
-  //     height: this.height,
-  //     id: 1,
-  //     name: "World",
-  //     opacity: 1,
-  //     type: "tilelayer",
-  //     visible: true,
-  //     width: this.width,
-  //     x: 0,
-  //     y: 0
-  //   })
+  //   this.layers.push()
   // }
 
   generateLayers() {
@@ -194,7 +184,39 @@ export default class Design {
   }
 
   exportLayerToTiled() {
-    return []
+    const layerNames = this.getLayerNames()
+    return layerNames.map((name, index) => ({
+      data: this.getDataLayer(name),
+      height: this.height,
+      id: index,
+      name: name,
+      opacity: 1,
+      type: "tilelayer",
+      visible: true,
+      width: this.width,
+      x: 0,
+      y: 0
+    }))
+  }
+
+  getDataLayer(layerId: string) {
+    return this.layers.map((tileMapping) =>
+      tileMapping.find((v) => v.layerId === layerId)
+        ? tileMapping.find((v) => v.layerId === layerId)!.id
+        : 0
+    )
+  }
+
+  getLayerNames() {
+    const names = new Array<string>()
+    this.layers.forEach((layer) =>
+      layer.forEach((tileMapping) => {
+        if (!names.includes(tileMapping.layerId)) {
+          names.push(tileMapping.layerId)
+        }
+      })
+    )
+    return names
   }
 
   exportToTiled() {
@@ -209,10 +231,10 @@ export default class Design {
       renderorder: "right-down",
       tiledversion: "1.7.2",
       tileheight: 24,
-      tilesets: [this.tileset.exportToTiled()],
+      tilesets: this.tileset.exportToTiled(),
       tilewidth: 24,
       type: "map",
-      version: "1.6",
+      version: "1.10",
       width: this.width
     }
   }

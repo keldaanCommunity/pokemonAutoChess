@@ -52,21 +52,82 @@ export default class Tileset {
     this.metadata = readJSONSync(`${src}/${this.id}/metadata.json`)
   }
 
-  getTilemapId(terrain: TerrainType, maskId: Mask): TileMapping[] {
+  getTilemapId(terrain: TerrainType, mask: Mask): TileMapping[] {
     const mappedTile = new Array<TileMapping>()
-    const variations = this.variations.get(terrain)?.get(maskId)
-    if (variations) {
-      if (Math.random() > 0.8) {
-        const chosen = variations[0]
-        mappedTile.push(chosen.static)
-        chosen.animated.forEach((t) => mappedTile.push(t))
-      } else {
-        const chosen = pickRandomIn(variations)
-        mappedTile.push(chosen.static)
-        chosen.animated.forEach((t) => mappedTile.push(t))
-      }
-    }
+    const possibleStaticVariations = this.getPossibleStaticVariations(
+      terrain,
+      mask
+    )
+    console.log(possibleStaticVariations)
+    const chosenStaticVariation =
+      Math.random() > 0.8
+        ? pickRandomIn(possibleStaticVariations)
+        : possibleStaticVariations[0]
+
+    mappedTile.push(chosenStaticVariation)
+    const animatedVariations = this.getAnimatedVariation(
+      chosenStaticVariation.layerId,
+      terrain,
+      mask
+    )
+    animatedVariations.forEach((anim) => mappedTile.push(anim))
     return mappedTile
+  }
+
+  getAnimatedVariation(
+    layerId: string,
+    terrain: TerrainType,
+    mask: Mask
+  ): TileMapping[] {
+    const mappedAnimations = new Array<TileMapping>()
+    if (Object.keys(this.metadata).includes(layerId)) {
+      ;(this.metadata[layerId] as DtefTileset).animation.forEach(
+        (animatedFrame) => {
+          if (animatedFrame.maskDefinition[terrain].includes(mask)) {
+            mappedAnimations.push({
+              id: getTileId(terrain, mask, animatedFrame.firstgid),
+              layerId: animatedFrame.name
+            })
+          }
+        }
+      )
+    } else {
+      console.log("error with layer id", layerId)
+    }
+
+    return mappedAnimations
+  }
+
+  getPossibleStaticVariations(terrain: TerrainType, mask: Mask) {
+    const possibleStaticVariations = new Array<TileMapping>()
+    ;[
+      this.metadata.tileset_0,
+      this.metadata.tileset_1,
+      this.metadata.tileset_2
+    ].forEach((metadata) => {
+      if (metadata) {
+        const possibleVariation = this.getPossibleStaticVariation(
+          terrain,
+          mask,
+          metadata
+        )
+        possibleVariation && possibleStaticVariations.push(possibleVariation)
+      }
+    })
+    return possibleStaticVariations
+  }
+
+  getPossibleStaticVariation(
+    terrain: TerrainType,
+    mask: Mask,
+    dtef: DtefTileset
+  ): TileMapping | undefined {
+    return dtef.static.maskDefinition[terrain].includes(mask)
+      ? ({
+          id: getTileId(terrain, mask, dtef.static.firstgid),
+          layerId: dtef.static.name
+        } as TileMapping)
+      : undefined
   }
 
   exportToTiled() {
@@ -75,12 +136,12 @@ export default class Tileset {
       const t = this.metadata[`tileset_${i}`] as DtefTileset
       tilesets.push({
         firstgid: t.static.firstgid,
-        source: `${t.static.name}.json`
+        source: `tilesets/${this.id}/${t.static.name}.json`
       })
       t.animation.forEach((animatedFrame) => {
         tilesets.push({
           firstgid: animatedFrame.firstgid,
-          source: `${animatedFrame.name}.json`
+          source: `tilesets/${this.id}/${animatedFrame.name}.json`
         })
       })
     }
@@ -88,14 +149,9 @@ export default class Tileset {
   }
 }
 
-export function getTileId(
-  terrain: TerrainType,
-  mask: Mask,
-  frameNumber?: number
-) {
+export function getTileId(terrain: TerrainType, mask: Mask, firstGid: number) {
   const maskCoordinate = MaskCoordinate[mask]
-  const frameshift = frameNumber ? frameNumber : 0
   const pixelX = maskCoordinate.x + terrain * DTEF_TILESET_WIDTH
-  const pixelY = maskCoordinate.y + frameshift * DTEF_TILESET_HEIGHT
-  return pixelY * DTEF_TILESET_WIDTH * 3 + pixelX
+  const pixelY = maskCoordinate.y * DTEF_TILESET_HEIGHT
+  return pixelY * DTEF_TILESET_WIDTH * 3 + pixelX + firstGid
 }
