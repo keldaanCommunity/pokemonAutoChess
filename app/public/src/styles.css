@@ -258,6 +258,7 @@ p:last-child {
 .Toastify__toast-container {
   width: auto !important;
   --toastify-z-index: 1040;
+  pointer-events: none; /* allow to click through to select a player */
 }
 
 .Toastify__toast {
