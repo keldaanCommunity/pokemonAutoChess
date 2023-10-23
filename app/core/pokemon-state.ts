@@ -530,13 +530,13 @@ export default class PokemonState {
       if (pokemon.sandstormDamageTimer <= 0) {
         pokemon.sandstormDamageTimer = 1000
         const sandstormDamage = 5
-        pokemon.handleSpecialDamage(
-          sandstormDamage,
+        pokemon.handleDamage({
+          damage: sandstormDamage,
           board,
-          AttackType.SPECIAL,
-          null,
-          false
-        )
+          attackType: AttackType.SPECIAL,
+          attacker: null,
+          shouldTargetGainMana: false
+        })
       }
     }
 
@@ -552,9 +552,11 @@ export default class PokemonState {
           }
         })
       }
-      if(pokemon.effects.has(Effect.LIGHT_PULSE) ||
-         pokemon.effects.has(Effect.ETERNAL_LIGHT) ||
-         pokemon.effects.has(Effect.MAX_ILLUMINATION)){
+      if (
+        pokemon.effects.has(Effect.LIGHT_PULSE) ||
+        pokemon.effects.has(Effect.ETERNAL_LIGHT) ||
+        pokemon.effects.has(Effect.MAX_ILLUMINATION)
+      ) {
         pokemon.setPP(pokemon.pp + 10)
       }
       pokemon.manaCooldown = 1000

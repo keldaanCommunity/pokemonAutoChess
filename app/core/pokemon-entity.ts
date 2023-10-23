@@ -279,7 +279,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       !this.status.silence &&
       !this.status.protect &&
       !this.status.resurecting
-    ) {      
+    ) {
       this.pp = clamp(pp, 0, this.maxPP)
     }
   }
@@ -650,13 +650,13 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
         ) {
           // melee range
           pokemon.count.fairyCritCount++
-          splashTarget.handleSpecialDamage(
+          splashTarget.handleDamage({
             damage,
             board,
-            AttackType.SPECIAL,
-            pokemon,
-            false
-          )
+            attackType: AttackType.SPECIAL,
+            attacker: pokemon,
+            shouldTargetGainMana: false
+          })
         } else {
           // not at range, charm it instead
           splashTarget.status.triggerCharm(2000, splashTarget)
