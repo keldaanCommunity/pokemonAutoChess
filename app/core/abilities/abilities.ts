@@ -3712,13 +3712,21 @@ export class StunSporeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [5,10,20,40][pokemon.stars-1] ?? 40
-    board.getAdjacentCells(pokemon.positionX, pokemon.positionY).forEach(cell => {
-      if(cell.value && cell.value.team !== pokemon.team){
-        cell.value.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit, true)
-        cell.value.status.triggerParalysis(5000, cell.value)
-      }
-    })
+    const damage = [5, 10, 20, 40][pokemon.stars - 1] ?? 40
+    board
+      .getAdjacentCells(pokemon.positionX, pokemon.positionY)
+      .forEach((cell) => {
+        if (cell.value && cell.value.team !== pokemon.team) {
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+          cell.value.status.triggerParalysis(5000, cell.value)
+        }
+      })
   }
 }
 
@@ -6018,8 +6026,7 @@ export class ChargeBeamStrategy extends AbilityStrategy {
         board,
         AttackType.SPECIAL,
         pokemon,
-        crit,
-        true
+        crit
       )
       const previous = i === 0 ? pokemon : chain[i - 1]
       pokemon.simulation.room.broadcast(Transfer.ABILITY, {

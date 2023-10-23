@@ -207,16 +207,13 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     board: Board,
     attackType: AttackType,
     attacker: PokemonEntity | null,
-    crit: boolean,
-    apBoost?: boolean
+    crit: boolean
   ): { death: boolean; takenDamage: number } {
     if (this.status.protect) {
       this.count.spellBlockedCount++
       return { death: false, takenDamage: 0 }
     } else {
-      let specialDamage = apBoost
-        ? damage + (damage * (attacker ? attacker.ap : 0)) / 100
-        : damage
+      let specialDamage = damage + (damage * (attacker ? attacker.ap : 0)) / 100
       if (attacker && attacker.status.doubleDamage) {
         specialDamage *= 2
         attacker.status.doubleDamage = false
