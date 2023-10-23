@@ -34,7 +34,7 @@ function rankPokemon(a: Pkm, b: Pkm, pokemons: { [key in Pkm]?: number }) {
   return vb - va
 }
 
-export default function TeamComp(props: { team: IMeta }) {
+export default function TeamComp(props: { team: IMeta; rank: number }) {
   const { t } = useTranslation()
   const sortedTypes = props.team.types
     ? (Object.keys(props.team.types) as Synergy[]).sort((a, b) => {
@@ -48,83 +48,66 @@ export default function TeamComp(props: { team: IMeta }) {
     : new Array<Pkm>()
 
   return (
-    <div
-      style={{
-        backgroundColor: "rgb(84, 89, 107)",
-        margin: "10px",
-        color: "white"
-      }}
-      className="nes-container"
-    >
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center"
-        }}
-      >
-        <div style={{ display: "flex" }}>
-          {sortedTypes.map((type) => {
-            return (
-              <div
-                style={{
-                  display: "flex",
-                  flexFlow: "column",
-                  alignItems: "center"
-                }}
-                key={type}
-              >
-                <SynergyIcon type={type.toUpperCase() as Synergy} size="51px" />
-                <p>{props.team.types[type]}</p>
-              </div>
-            )
-          })}
-        </div>
-        <h3 style={{ position: "absolute", left: "32.5%", top: "20px" }}>
-          {capitalizeFirstLetter(sortedTypes[0])}{" "}
-          {props.team.types[sortedTypes[0]]} /{" "}
-          {capitalizeFirstLetter(sortedTypes[1])}{" "}
-          {props.team.types[sortedTypes[1]]}
-        </h3>
-        <div style={{ display: "flex" }}>
-          {sortedPokemons.map((pokemon) => {
-            return (
-              <div
-                style={{
-                  display: "flex",
-                  flexFlow: "column",
-                  alignItems: "center"
-                }}
-                key={pokemon}
-              >
-                <img
-                  style={{
-                    width: "60px",
-                    height: "60px",
-                    imageRendering: "pixelated"
-                  }}
-                  src={getPortraitSrc(PkmIndex[pokemon])}
-                />
-                <p>{props.team.pokemons[pokemon]?.toFixed(1)}</p>
-              </div>
-            )
-          })}
-        </div>
+    <div className="team-comp nes-container">
+      <span className="rank">{props.rank}</span>
+      <div style={{ display: "flex" }}>
+        {sortedTypes.map((type) => (
+          <div
+            style={{
+              display: "flex",
+              flexFlow: "column",
+              alignItems: "center"
+            }}
+            key={type}
+          >
+            <SynergyIcon type={type.toUpperCase() as Synergy} size="48px" />
+            <span>{props.team.types[type]}</span>
+          </div>
+        ))}
       </div>
-
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <p>
-          {t("average_place")}: {props.team.mean_rank.toFixed(2)}
-        </p>
-        <p>
-          {t("winrate")}: {props.team.winrate.toFixed(2)} %
-        </p>
-        <p>
-          {t("popularity")}: {props.team.ratio.toFixed(2)} %
-        </p>
-        <p>
-          {t("count")}: {props.team.count}
-        </p>
+      <span>
+        {capitalizeFirstLetter(sortedTypes[0])}{" "}
+        {props.team.types[sortedTypes[0]]} /{" "}
+        {capitalizeFirstLetter(sortedTypes[1])}{" "}
+        {props.team.types[sortedTypes[1]]}
+      </span>
+      <span>
+        <label>{t("average_place")}:</label>
+        {props.team.mean_rank.toFixed(2)}
+      </span>
+      <span>
+        <label>{t("winrate")}:</label>
+        {props.team.winrate.toFixed(2)} %
+      </span>
+      <span>
+        <label>{t("popularity")}:</label>
+        {props.team.ratio.toFixed(2)} %
+      </span>
+      <span>
+        <label>{t("count")}:</label>
+        {props.team.count}
+      </span>
+      <div style={{ display: "flex", gap: "1em" }}>
+        {sortedPokemons.map((pokemon) => {
+          return (
+            <div
+              style={{
+                display: "flex",
+                flexFlow: "column",
+                alignItems: "center"
+              }}
+              key={pokemon}
+            >
+              <img
+                className="pokemon-portrait"
+                src={getPortraitSrc(PkmIndex[pokemon])}
+              />
+              <span>
+                {((props.team.pokemons[pokemon] ?? 0) * 100).toFixed(0) + "%"}
+              </span>
+            </div>
+          )
+        })}
       </div>
     </div>
   )

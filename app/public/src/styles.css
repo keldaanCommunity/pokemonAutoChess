@@ -579,6 +579,9 @@ p:last-child {
   border: 4px solid black;
   font-size: 140%;
   padding: 8px 36px 8px 16px;
+  background: none;
+  background-color: rgb(84, 89, 107);
+  color: white;
 }
 
 .nes-progress {
