@@ -30,3 +30,6 @@ edit/durations.json
 tests/samples/*
 lib
 /logs/*.log
+export/dbg_output_pmdo_full_ani
+export/*.json
+export/tilesets

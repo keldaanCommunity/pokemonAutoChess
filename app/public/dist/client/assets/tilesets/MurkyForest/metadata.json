@@ -151,7 +151,7 @@
           "A1B2C3D4"
         ]
       },
-      "firstgid": 331345
+      "firstgid": 1
     },
     "animation": [
       {
@@ -211,7 +211,7 @@
           ],
           "2": []
         },
-        "firstgid": 331489
+        "firstgid": 145
       }
     ]
   },
@@ -230,7 +230,7 @@
           "A1B2C3D4"
         ]
       },
-      "firstgid": 332929
+      "firstgid": 1585
     },
     "animation": []
   },
@@ -249,7 +249,7 @@
           "A1B2C3D4"
         ]
       },
-      "firstgid": 333073
+      "firstgid": 1729
     },
     "animation": []
   }

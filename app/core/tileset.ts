@@ -58,7 +58,6 @@ export default class Tileset {
       terrain,
       mask
     )
-    console.log(possibleStaticVariations)
     const chosenStaticVariation =
       Math.random() > 0.8
         ? pickRandomIn(possibleStaticVariations)
@@ -152,6 +151,6 @@ export default class Tileset {
 export function getTileId(terrain: TerrainType, mask: Mask, firstGid: number) {
   const maskCoordinate = MaskCoordinate[mask]
   const pixelX = maskCoordinate.x + terrain * DTEF_TILESET_WIDTH
-  const pixelY = maskCoordinate.y * DTEF_TILESET_HEIGHT
+  const pixelY = maskCoordinate.y
   return pixelY * DTEF_TILESET_WIDTH * 3 + pixelX + firstGid
 }

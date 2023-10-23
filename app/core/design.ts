@@ -174,11 +174,11 @@ export default class Design {
   generateLayers() {
     for (let i = 0; i < this.height; i++) {
       for (let j = 0; j < this.width; j++) {
-        const tileID = this.tileset.getTilemapId(
+        const tileMapping = this.tileset.getTilemapId(
           this.terrain[i][j],
           this.bitmask[i][j]
         )
-        this.layers.push(tileID)
+        this.layers.push(tileMapping)
       }
     }
   }

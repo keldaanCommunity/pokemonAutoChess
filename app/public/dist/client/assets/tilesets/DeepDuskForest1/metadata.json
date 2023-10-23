@@ -151,7 +151,7 @@
           "A1B2C3D4"
         ]
       },
-      "firstgid": 107425
+      "firstgid": 1
     },
     "animation": [
       {
@@ -210,7 +210,7 @@
           ],
           "2": []
         },
-        "firstgid": 107569
+        "firstgid": 145
       },
       {
         "frameDuration": 20,
@@ -269,7 +269,7 @@
           ],
           "2": []
         },
-        "firstgid": 109729
+        "firstgid": 2305
       }
     ]
   },
@@ -290,7 +290,7 @@
           "A1B2C3D4"
         ]
       },
-      "firstgid": 111889
+      "firstgid": 4465
     },
     "animation": []
   },
@@ -309,7 +309,7 @@
           "A1B2C3D4"
         ]
       },
-      "firstgid": 112033
+      "firstgid": 4609
     },
     "animation": []
   }

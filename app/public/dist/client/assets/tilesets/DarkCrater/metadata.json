@@ -151,7 +151,7 @@
           "A1B2C3D4"
         ]
       },
-      "firstgid": 46945
+      "firstgid": 1
     },
     "animation": [
       {
@@ -259,7 +259,7 @@
             "A1B2C3D4"
           ]
         },
-        "firstgid": 47089
+        "firstgid": 145
       },
       {
         "frameDuration": 10,
@@ -318,7 +318,7 @@
           "1": [],
           "2": []
         },
-        "firstgid": 50401
+        "firstgid": 3457
       }
     ]
   },
@@ -337,7 +337,7 @@
           "A1B2C3D4"
         ]
       },
-      "firstgid": 53281
+      "firstgid": 6337
     },
     "animation": [
       {
@@ -351,7 +351,7 @@
             "A1B2C3D4"
           ]
         },
-        "firstgid": 53425
+        "firstgid": 6481
       },
       {
         "frameDuration": 10,
@@ -367,7 +367,7 @@
           "1": [],
           "2": []
         },
-        "firstgid": 56737
+        "firstgid": 9793
       },
       {
         "frameDuration": 4,
@@ -383,7 +383,7 @@
           "1": [],
           "2": []
         },
-        "firstgid": 59617
+        "firstgid": 12673
       }
     ]
   },
@@ -403,7 +403,7 @@
           "A1B2C3D4"
         ]
       },
-      "firstgid": 62497
+      "firstgid": 15553
     },
     "animation": [
       {
@@ -417,7 +417,7 @@
             "A1B2C3D4"
           ]
         },
-        "firstgid": 62641
+        "firstgid": 15697
       },
       {
         "frameDuration": 10,
@@ -434,7 +434,7 @@
           "1": [],
           "2": []
         },
-        "firstgid": 65953
+        "firstgid": 19009
       },
       {
         "frameDuration": 4,
@@ -451,7 +451,7 @@
           "1": [],
           "2": []
         },
-        "firstgid": 68833
+        "firstgid": 21889
       }
     ]
   }

@@ -151,7 +151,7 @@
           "A1B2C3D4"
         ]
       },
-      "firstgid": 479233
+      "firstgid": 1
     },
     "animation": [
       {
@@ -211,7 +211,7 @@
           "1": [],
           "2": []
         },
-        "firstgid": 479377
+        "firstgid": 145
       }
     ]
   },
@@ -231,7 +231,7 @@
           "A1B2C3D4"
         ]
       },
-      "firstgid": 481105
+      "firstgid": 1873
     },
     "animation": [
       {
@@ -249,7 +249,7 @@
           "1": [],
           "2": []
         },
-        "firstgid": 481249
+        "firstgid": 2017
       }
     ]
   },
@@ -268,7 +268,7 @@
           "A1B2C3D4"
         ]
       },
-      "firstgid": 482977
+      "firstgid": 3745
     },
     "animation": [
       {
@@ -285,7 +285,7 @@
           "1": [],
           "2": []
         },
-        "firstgid": 483121
+        "firstgid": 3889
       }
     ]
   }

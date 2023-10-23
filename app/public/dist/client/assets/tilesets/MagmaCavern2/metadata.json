@@ -151,7 +151,7 @@
           "A1B2C3D4"
         ]
       },
-      "firstgid": 237457
+      "firstgid": 1
     },
     "animation": [
       {
@@ -211,7 +211,7 @@
           ],
           "2": []
         },
-        "firstgid": 237601
+        "firstgid": 145
       },
       {
         "frameDuration": 14,
@@ -269,7 +269,7 @@
           "1": [],
           "2": []
         },
-        "firstgid": 238753
+        "firstgid": 1297
       }
     ]
   },
@@ -287,7 +287,7 @@
           "A1B2C3D4"
         ]
       },
-      "firstgid": 239329
+      "firstgid": 1873
     },
     "animation": [
       {
@@ -303,7 +303,7 @@
           "1": [],
           "2": []
         },
-        "firstgid": 239473
+        "firstgid": 2017
       }
     ]
   },
@@ -322,7 +322,7 @@
         "1": [],
         "2": []
       },
-      "firstgid": 240049
+      "firstgid": 2593
     },
     "animation": [
       {
@@ -341,7 +341,7 @@
           "1": [],
           "2": []
         },
-        "firstgid": 240193
+        "firstgid": 2737
       }
     ]
   }

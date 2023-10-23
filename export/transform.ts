@@ -55,6 +55,7 @@ async function createDungeonsEnum() {
 async function main() {
   await createDungeonsEnum()
   for (let i = 0; i < Object.values(dungeons).length; i++) {
+    gid = 1
     const dungeon = Object.values(dungeons)[i]
     await createTilesheets(dungeon)
   }
@@ -182,6 +183,10 @@ function getAnimationTiled(
       duration: (frameDuration * 1000) / 60
     })
   }
+  frames
+    .slice()
+    .reverse()
+    .forEach((f) => frames.push(f))
   return {
     animation: frames,
     id: getTileId(terrain, mask)
@@ -193,10 +198,10 @@ export function getTileId(
   mask: Mask,
   frameNumber?: number
 ) {
-  const maskCoordinate = MaskCoordinate[mask]
+  const maskCoordinate = MaskCoordinate[mask] // x:0 y:0
   const frameshift = frameNumber ? frameNumber : 0
-  const pixelX = maskCoordinate.x + terrain * DTEF_TILESET_WIDTH
-  const pixelY = maskCoordinate.y + frameshift * DTEF_TILESET_HEIGHT
+  const pixelX = maskCoordinate.x + terrain * DTEF_TILESET_WIDTH // 0 + 1 * 6
+  const pixelY = maskCoordinate.y + frameshift * DTEF_TILESET_HEIGHT // 0
   return pixelY * DTEF_TILESET_WIDTH * 3 + pixelX
 }
 

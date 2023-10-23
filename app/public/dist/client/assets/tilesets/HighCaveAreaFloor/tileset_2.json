@@ -1,0 +1,13 @@
+{
+  "columns": 6,
+  "firstgid": 1,
+  "image": "tileset_2.png",
+  "imageheight": 192,
+  "imagewidth": 144,
+  "margin": 0,
+  "name": "tileset_2",
+  "spacing": 0,
+  "tilecount": 48,
+  "tileheight": 24,
+  "tilewidth": 24
+}
