@@ -1513,7 +1513,7 @@
     "ILLUMISE_VOLBEAT": "Illumise and Volbeat gain 5 PP per second for each other member of their species alive on the board",
     "PRISM": "Necrozma switches between its Ultra forme and Normal forme depending on its exposure to LIGHT",
     "BLOSSOM": "Cherrim switches between its Sunlight forme and Normal forme depending on its exposure to LIGHT",
-    "GENESECT":"Genesect is dealing TRUE to targets affected by ARMOR_REDUCTION"
+    "GENESECT": "Genesect is dealing TRUE to targets affected by ARMOR_REDUCTION"
   },
   "stat": {
     "ATK": "Attack",
@@ -2036,6 +2036,8 @@
   "best_pokemons": "Best Pokemons",
   "winrate": "Winrate",
   "popularity": "Popularity",
+  "popular_holders": "Most popular holders",
+  "popular_items": "Most popular items",
   "news": "News",
   "patch_notes": "Patch Notes",
   "remove_bot": "Remove Bot",

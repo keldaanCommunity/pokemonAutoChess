@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next"
 import { Checkbox } from "../checkbox/checkbox"
 
 export default function PokemonCollection() {
-  const { t } = useTranslation()  
+  const { t } = useTranslation()
   const [selectedPokemon, setSelectedPokemon] = useState<Pkm | undefined>(
     undefined
   )
@@ -115,10 +115,7 @@ export default function PokemonCollection() {
             }
           )}
           <TabPanel>
-            <UnownPanel
-              setPokemon={setSelectedPokemon}
-              filter={filter}
-            />
+            <UnownPanel setPokemon={setSelectedPokemon} filter={filter} />
           </TabPanel>
         </Tabs>
       </div>

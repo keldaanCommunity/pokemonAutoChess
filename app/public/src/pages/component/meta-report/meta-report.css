@@ -1,5 +1,4 @@
 #meta-report {
-  margin: 1em;
   height: 90vh;
   color: white;
   width: 1920px;
@@ -10,7 +9,20 @@
   margin: 0;
 }
 
-#meta-report .team-comp {
+#meta-report .react-tabs__tab-panel {
+  padding: 0 0.5em;
+}
+
+#meta-report header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.25em;
+}
+
+#meta-report .team-comp,
+#meta-report .item-stat,
+#meta-report .pokemon-family-stat {
   background-color: rgb(84, 89, 107);
   margin-bottom: 0.5em;
   color: white;
@@ -22,6 +34,10 @@
   overflow-x: auto;
 }
 
+#meta-report .team-comp {
+  grid-template-columns: 2ch 360px 8ch 6ch 8ch 8ch 6ch 1fr;
+}
+
 #meta-report .rank {
   min-width: 2ch;
   text-align: center;
@@ -31,4 +47,24 @@
 #meta-report .team-comp label {
   color: #ccc;
   display: block;
+}
+
+#meta-report .item-stat {
+  grid-template-columns: 2ch 60px 16ch 8ch 10ch 1fr;
+}
+
+#meta-report .pokemon-family-stat {
+  grid-template-columns: 2ch 16ch 10ch 14ch 1fr;
+}
+
+#meta-report .pokemon-family-stat ul {
+  padding: 0;
+  margin: 0;
+}
+
+#meta-report .pokemon-family-stat li {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
 }

@@ -21,20 +21,11 @@ export function CompositionReport() {
 
   return (
     <div id="meta-report-compo">
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          padding: "0.5em"
-        }}
-      >
+      <header>
         <h2>{t("best_team_compositions")}</h2>
         <select
           value={rankingBy}
-          onChange={(e) => {
-            setRanking(e.target.value)
-          }}
+          onChange={(e) => setRanking(e.target.value)}
           className="my-select"
         >
           <option value="count">
@@ -47,9 +38,9 @@ export function CompositionReport() {
             {t("rank")} {t("by_winrate")}
           </option>
         </select>
-      </div>
+      </header>
 
-      <div style={{ height: "calc(90vh - 9em)", overflowY: "scroll" }}>
+      <div style={{ height: "calc(90vh - 8em)", overflowY: "scroll" }}>
         {sortedMeta.length === 0 && <p>No data available</p>}
         {sortedMeta.map((team, i) => {
           return <TeamComp team={team} rank={i + 1} key={team.cluster_id} />

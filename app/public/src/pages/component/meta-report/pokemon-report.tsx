@@ -27,93 +27,51 @@ export function PokemonReport() {
 
   return (
     <div id="pokemon-report">
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          paddingRight: "27px",
-          paddingLeft: "15px"
-        }}
-      >
-        <h3>{t("best_pokemons")}</h3>
-        <div
-          style={{
-            display: "flex",
-            width: "23%",
-            alignItems: "center",
-            justifyContent: "space-around",
-            backgroundColor: "rgb(84, 89, 107)"
+      <header>
+        <h2>{t("best_pokemons")}</h2>
+        <select
+          value={pokemonRankingBy}
+          onChange={(e) => setPokemonRanking(e.target.value)}
+          className="my-select"
+        >
+          <option value="count">
+            {t("rank")} {t("by_popularity")}
+          </option>
+          <option value="rank">
+            {t("rank")} {t("by_average_place")}
+          </option>
+        </select>
+        <select
+          value={synergy}
+          onChange={(e) => {
+            setSynergy(e.target.value as any)
           }}
           className="my-select"
         >
-          <p style={{ margin: "0px" }}>{t("rank")}</p>
-          <select
-            value={pokemonRankingBy}
-            onChange={(e) => {
-              setPokemonRanking(e.target.value)
-            }}
-            style={{ background: "none", border: "none", color: "white" }}
-          >
-            <option value="count">{t("by_popularity")}</option>
-            <option value="rank">{t("by_average_place")}</option>
-          </select>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-around",
-            backgroundColor: "rgb(84, 89, 107)"
-          }}
+          <option value={"all"}>
+            {t("ALL")} {t("synergies")}
+          </option>
+          {Object.keys(Synergy).map((s) => (
+            <option value={s} key={s}>
+              {t(`synergy.${s}`)}
+            </option>
+          ))}
+        </select>
+        <select
+          value={rarity}
+          onChange={(e) => setRarity(e.target.value as any)}
           className="my-select"
         >
-          <p style={{ margin: "0px" }}>{t("synergies")}</p>
-          <select
-            value={synergy}
-            onChange={(e) => {
-              setSynergy(e.target.value as any)
-            }}
-            style={{
-              background: "none",
-              border: "none",
-              color: "white"
-            }}
-          >
-            <option value={"all"}>All</option>
-            {Object.keys(Synergy).map((s) => (
-              <option value={s}>{t(`synergy.${s}`)}</option>
-            ))}
-          </select>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-around",
-            backgroundColor: "rgb(84, 89, 107)"
-          }}
-          className="my-select"
-        >
-          <p style={{ margin: "0px" }}>{t("rarity_label")}</p>
-          <select
-            value={rarity}
-            onChange={(e) => {
-              setRarity(e.target.value as any)
-            }}
-            style={{
-              background: "none",
-              border: "none",
-              color: "white"
-            }}
-          >
-            <option value={"all"}>All</option>
-            {Object.keys(Rarity).map((s) => (
-              <option value={s}>{t(`rarity.${s}`)}</option>
-            ))}
-          </select>
-        </div>
-      </div>
+          <option value={"all"}>
+            {t("rarity_label")}: {t("ALL")}
+          </option>
+          {Object.keys(Rarity).map((r) => (
+            <option value={r} key={r}>
+              {t(`rarity.${r}`)}
+            </option>
+          ))}
+        </select>
+      </header>
       {
         <PokemonStatistic
           pokemons={sortedMetaPokemons}

@@ -21,43 +21,27 @@ export function ItemReport() {
 
   return (
     <div id="item-report">
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          paddingRight: "27px",
-          paddingLeft: "15px"
-        }}
-      >
-        <h3>{t("best_items")}</h3>
-        <div
-          style={{
-            display: "flex",
-            width: "23%",
-            alignItems: "center",
-            justifyContent: "space-around",
-            backgroundColor: "rgb(84, 89, 107)"
+      <header>
+        <h2>{t("best_items")}</h2>
+        <select
+          value={itemRankingBy}
+          onChange={(e) => {
+            setItemRanking(e.target.value)
           }}
           className="my-select"
         >
-          <p style={{ margin: 0 }}>{t("rank")}</p>
-          <select
-            value={itemRankingBy}
-            onChange={(e) => {
-              setItemRanking(e.target.value)
-            }}
-            style={{ background: "none", border: "none", color: "white" }}
-          >
-            <option value="count">{t("by_popularity")}</option>
-            <option value="rank">{t("by_average_place")}</option>
-          </select>
-        </div>
-      </div>
-      <div style={{ height: "70vh", overflowY: "scroll" }}>
+          <option value="count">
+            {t("rank")} {t("by_popularity")}
+          </option>
+          <option value="rank">
+            {t("rank")} {t("by_average_place")}
+          </option>
+        </select>
+      </header>
+      <div style={{ height: "calc(90vh - 8em)", overflowY: "scroll" }}>
         {sortedMetaItems.length === 0 && <p>No data available</p>}
-        {sortedMetaItems.map((item) => {
-          return <ItemStatistic item={item} key={item.name} />
+        {sortedMetaItems.map((item, i) => {
+          return <ItemStatistic item={item} key={item.name} rank={i + 1} />
         })}
       </div>
     </div>
