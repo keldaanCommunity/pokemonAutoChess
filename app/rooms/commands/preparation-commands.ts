@@ -5,7 +5,7 @@ import UserMetadata, {
   IUserMetadata
 } from "../../models/mongo-models/user-metadata"
 import { BotV2, IBot } from "../../models/mongo-models/bot-v2"
-import { Client } from "colyseus"
+import { Client, matchMaker } from "colyseus"
 import PreparationRoom from "../preparation-room"
 import { Emotion, IChatV2, Role, Transfer } from "../../types"
 import { BotDifficulty } from "../../types/enum/Game"
@@ -182,27 +182,22 @@ export class OnGameStartRequestCommand extends Command<
             time: Date.now()
           })
         } else {
-          client.send(Transfer.GAME_START_REQUEST, "ok")
+          this.state.gameStarted = true
+          matchMaker.createRoom("game", {
+            users: this.state.users,
+            idToken: client.auth.uid,
+            name: this.state.name,
+            preparationId: this.room.roomId,
+            noElo: this.state.noElo,
+            selectedMap: this.state.selectedMap,
+            whenReady: (game) => {
+              this.room.setGameStarted(true)
+              logger.debug("game start", game.roomId)
+              this.room.broadcast(Transfer.GAME_START, game.roomId)
+            }
+          })
         }
       }
-    } catch (error) {
-      logger.error(error)
-    }
-  }
-}
-
-export class OnGameStartCommand extends Command<
-  PreparationRoom,
-  {
-    client: Client
-    message: any
-  }
-> {
-  execute({ client, message }) {
-    try {
-      this.state.gameStarted = true
-      this.room.setGameStarted(true)
-      this.room.broadcast(Transfer.GAME_START, message, { except: client })
     } catch (error) {
       logger.error(error)
     }

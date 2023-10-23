@@ -489,17 +489,25 @@ export class OnJoinCommand extends Command<
 > {
   async execute({ client, options, auth }) {
     try {
+      //logger.debug("onJoin", client.auth.uid)
       const players = values(this.state.players)
       if (options.spectate === true) {
         this.state.spectators.add(client.auth.uid)
       } else if (players.some((p) => p.id === auth.uid)) {
-        logger.info(`${client.auth.displayName} ${client.id} joined game room`)
+        /*logger.info(
+          `${client.auth.displayName} (${client.id}) joined game room ${this.room.roomId}`
+        )*/
         if (this.state.players.size >= MAX_PLAYERS_PER_LOBBY) {
           const humanPlayers = players.filter((p) => !p.isBot)
           if (humanPlayers.length === 1) {
             humanPlayers[0].titles.add(Title.LONE_WOLF)
           }
         }
+      } else {
+        logger.warn(`player not in game room whitelist tried to join game`, {
+          userId: client.auth.uid,
+          roomId: this.room.roomId
+        })
       }
     } catch (error) {
       logger.error(error)

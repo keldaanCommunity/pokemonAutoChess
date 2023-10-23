@@ -63,7 +63,7 @@ import { logger } from "../utils/logger"
 import { computeElo } from "../core/elo"
 import { Passive } from "../types/enum/Passive"
 import { getAvatarString } from "../public/src/utils"
-import { values } from "../utils/schemas"
+import { keys, values } from "../utils/schemas"
 
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>
@@ -84,12 +84,13 @@ export default class GameRoom extends Room<GameState> {
 
   // When room is initialized
   async onCreate(options: {
-    users: { [key: string]: IGameUser }
+    users: MapSchema<IGameUser>
     preparationId: string
     name: string
     idToken: string
     noElo: boolean
     selectedMap: Dungeon | "random"
+    whenReady: (room: GameRoom) => void
   }) {
     logger.trace("create game room")
     this.setMetadata(<IGameMetadata>{
@@ -144,45 +145,47 @@ export default class GameRoom extends Room<GameState> {
     shuffleArray(this.additionalRarePool)
     shuffleArray(this.additionalEpicPool)
 
-    for (const id in options.users) {
-      const user = options.users[id]
-      // logger.debug(user);
-      if (user.isBot) {
-        const player = new Player(
-          user.id,
-          user.name,
-          user.elo,
-          user.avatar,
-          true,
-          this.state.players.size + 1,
-          new Map<string, IPokemonConfig>(),
-          "",
-          Role.BOT
-        )
-        this.state.players.set(user.id, player)
-        this.state.botManager.addBot(player)
-        //this.state.shop.assignShop(player)
-      } else {
-        const user = await UserMetadata.findOne({ uid: id })
-        if (user) {
-          // init player
+    await Promise.all(
+      keys(options.users).map(async (id) => {
+        const user = options.users[id]
+        //logger.debug(`init player`, user)
+        if (user.isBot) {
           const player = new Player(
-            user.uid,
-            user.displayName,
+            user.id,
+            user.name,
             user.elo,
             user.avatar,
-            false,
+            true,
             this.state.players.size + 1,
-            user.pokemonCollection,
-            user.title,
-            user.role
+            new Map<string, IPokemonConfig>(),
+            "",
+            Role.BOT
           )
+          this.state.players.set(user.id, player)
+          this.state.botManager.addBot(player)
+          //this.state.shop.assignShop(player)
+        } else {
+          const user = await UserMetadata.findOne({ uid: id })
+          if (user) {
+            // init player
+            const player = new Player(
+              user.uid,
+              user.displayName,
+              user.elo,
+              user.avatar,
+              false,
+              this.state.players.size + 1,
+              user.pokemonCollection,
+              user.title,
+              user.role
+            )
 
-          this.state.players.set(user.uid, player)
-          this.state.shop.assignShop(player, false, 1)
+            this.state.players.set(user.uid, player)
+            this.state.shop.assignShop(player, false, 1)
+          }
         }
-      }
-    }
+      })
+    )
 
     setTimeout(() => {
       this.broadcast(Transfer.LOADING_COMPLETE)
@@ -410,6 +413,9 @@ export default class GameRoom extends Room<GameState> {
         }
       }
     })
+
+    // room ready
+    options.whenReady(this)
   }
 
   startGame() {
