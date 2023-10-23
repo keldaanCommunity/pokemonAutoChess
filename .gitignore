@@ -33,3 +33,4 @@ lib
 export/dbg_output_pmdo_full_ani
 export/*.json
 export/tilesets
+export/samples

@@ -15,18 +15,26 @@ import { TileMapping } from "./design"
 import { get } from "mongoose"
 
 export type TilesetTiled = {
-  columns: number
-  firstgid: number
-  image: string
-  imageheight: number
-  imagewidth: number
-  margin: number
-  name: string
-  spacing: number
-  tilecount: number
+  compressionlevel: number
+  height: number
+  infinite: boolean
   tileheight: number
   tilewidth: number
   tiles?: AnimationTiled[]
+  layers: LayerTiled[]
+}
+
+export type LayerTiled = {
+  data: number[]
+  height: number
+  id: number
+  name: string
+  opacity: number
+  type: string
+  visible: boolean
+  width: number
+  x: number
+  y: number
 }
 
 export type AnimationTiled = {

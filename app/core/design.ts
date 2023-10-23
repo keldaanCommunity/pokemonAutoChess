@@ -1,4 +1,4 @@
-import { Dungeon, TerrainType, Mask, DungeonPMDO } from "../types/Config"
+import { TerrainType, Mask, DungeonPMDO } from "../types/Config"
 import Tileset, { TilesetTiled } from "./tileset"
 import Terrain from "./terrain"
 import Masker from "./masker"
@@ -28,7 +28,7 @@ export type DesignTiled = {
   renderorder: string
   tiledversion: string
   tileheight: number
-  tilesets: TilesetTiled[]
+  tilesets: { firstgid: number; source: string }[]
   tilewidth: number
   type: string
   version: string
@@ -236,6 +236,6 @@ export default class Design {
       type: "map",
       version: "1.10",
       width: this.width
-    }
+    } as DesignTiled
   }
 }

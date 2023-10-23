@@ -5,11 +5,11 @@ import Shop from "../../models/shop"
 import Design, { DesignTiled } from "../../core/design"
 import BotManager from "../../core/bot-manager"
 import {
-  DungeonData,
   Dungeon,
   StageDuration,
   BOARD_WIDTH,
-  BOARD_HEIGHT
+  BOARD_HEIGHT,
+  DungeonPMDO
 } from "../../types/Config"
 import { GamePhaseState } from "../../types/enum/Game"
 import { Weather } from "../../types/enum/Weather"
@@ -50,7 +50,7 @@ export default class GameState extends Schema {
   updatePhaseNeeded = false
   botManager: BotManager = new BotManager()
   shop: Shop = new Shop()
-  id: Dungeon
+  id: DungeonPMDO
   design: Design
   tilemap: DesignTiled | undefined
   gameFinished = false
@@ -66,19 +66,18 @@ export default class GameState extends Schema {
     preparationId: string,
     name: string,
     noElo: boolean,
-    selectedMap: Dungeon | "random"
+    selectedMap: DungeonPMDO | "random"
   ) {
     super()
     this.preparationId = preparationId
     this.startTime = Date.now()
     this.name = name
-    this.id = selectedMap === "random" ? pickRandomIn(Dungeon) : selectedMap
+    this.id = selectedMap === "random" ? pickRandomIn(DungeonPMDO) : selectedMap
     this.noElo = noElo
-    this.mapName = DungeonData[this.id].name
+    this.mapName = this.id
     this.weather = Weather.NEUTRAL
     this.design = new Design(this.id, 5, 0.1)
-    this.design.create().then(() => {
-      this.tilemap = this.design.exportToTiled()
-    })
+    this.design.create()
+    this.tilemap = this.design.exportToTiled()
   }
 }
