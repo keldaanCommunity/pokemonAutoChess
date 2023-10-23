@@ -6,9 +6,9 @@ import { Pkm } from "../../../../../types/enum/Pokemon"
 import SynergyIcon from "../icons/synergy-icon"
 import PokemonEmotionsModal from "./pokemon-emotions-modal"
 import UnownPanel from "./unown-panel"
-import "./pokemon-collection.css"
 import { useTranslation } from "react-i18next"
 import { Checkbox } from "../checkbox/checkbox"
+import "./pokemon-collection.css"
 
 export default function PokemonCollection() {
   const { t } = useTranslation()
