@@ -196,9 +196,6 @@ export const networkSlice = createSlice({
         token: action.payload
       })
     },
-    gameStart: (state, action: PayloadAction<string>) => {
-      state.preparation?.send(Transfer.GAME_START, { id: action.payload })
-    },
     changeRoomName: (state, action: PayloadAction<string>) => {
       state.preparation?.send(Transfer.CHANGE_ROOM_NAME, action.payload)
     },
@@ -308,7 +305,6 @@ export const {
   buyBooster,
   changeRoomName,
   changeRoomPassword,
-  gameStart,
   gameStartRequest,
   logIn,
   logOut,

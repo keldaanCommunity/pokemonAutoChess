@@ -7,12 +7,7 @@ import { FIREBASE_CONFIG } from "./utils/utils"
 import PreparationState from "../../../rooms/states/preparation-state"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import { Client, Room } from "colyseus.js"
-import {
-  gameStart,
-  joinPreparation,
-  logIn,
-  setProfile
-} from "../stores/NetworkStore"
+import { joinPreparation, logIn, setProfile } from "../stores/NetworkStore"
 import {
   addUser,
   changeUser,
@@ -185,38 +180,12 @@ export default function Preparation() {
         dispatch(setBotsList(bots))
       })
 
-      r.onMessage(Transfer.GAME_START_REQUEST, async (message) => {
-        const token = await firebase.auth().currentUser?.getIdToken()
-        if (message === "ok" && token && !connectingToGame.current) {
-          const game: Room<GameState> = await client.create("game", {
-            users: r.state.users,
-            idToken: token,
-            name: r.state.name,
-            preparationId: r.id,
-            noElo: r.state.noElo,
-            selectedMap: r.state.selectedMap
-          })
-
-          dispatch(gameStart(game.id))
-          playSound(SOUNDS.START_GAME)
-          localStore.set(
-            LocalStoreKeys.RECONNECTION_TOKEN,
-            game.reconnectionToken,
-            5 * 60 // 5 minutes to start game
-          )
-          await r.leave()
-          game.connection.close()
-          dispatch(leavePreparation())
-          setToGame(true)
-        }
-      })
-
-      r.onMessage(Transfer.GAME_START, async (message) => {
+      r.onMessage(Transfer.GAME_START, async (roomId) => {
         const token = await firebase.auth().currentUser?.getIdToken()
         if (token && !connectingToGame.current) {
           playSound(SOUNDS.START_GAME)
           connectingToGame.current = true
-          const game: Room<GameState> = await client.joinById(message.id, {
+          const game: Room<GameState> = await client.joinById(roomId, {
             idToken: token
           })
           localStore.set(

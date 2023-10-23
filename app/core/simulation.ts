@@ -957,6 +957,7 @@ export default class Simulation extends Schema implements ISimulation {
         case Effect.AROMATIC_MIST:
         case Effect.FAIRY_WIND:
         case Effect.STRANGE_STEAM:
+        case Effect.MOON_FORCE:
           if (types.has(Synergy.FAIRY)) {
             pokemon.effects.add(effect)
           }
@@ -1124,7 +1125,7 @@ export default class Simulation extends Schema implements ISimulation {
             pokemon.status.triggerRuneProtect(6000)
             pokemon.addAttack(Math.ceil(pokemon.atk * 0.3), false)
             pokemon.addAbilityPower(30, false)
-            pokemon.status.triggerResurection(pokemon)
+            pokemon.status.resurection = true
           }
           break
 
