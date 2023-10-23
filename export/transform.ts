@@ -9,13 +9,13 @@ import {
   DTEF_TILESET_WIDTH,
   DTEF_WIDTH,
   DtefTileset,
+  DungeonPMDO,
   Mask,
   MaskCoordinate,
   MaskDefinition,
   TerrainType,
   TilesetExchangeFile
 } from "../app/types/Config"
-import dungeons from "./dungeons.json"
 import { AnimationTiled, FrameTiled, TilesetTiled } from "../app/core/tileset"
 
 const PMDO_EXPORT_DIRECTORY = "C:/Users/arnau/Desktop/RawAsset/TileDtef"
@@ -54,9 +54,9 @@ async function createDungeonsEnum() {
 
 async function main() {
   await createDungeonsEnum()
-  for (let i = 0; i < Object.values(dungeons).length; i++) {
+  for (let i = 0; i < Object.values(DungeonPMDO).length; i++) {
     gid = 1
-    const dungeon = Object.values(dungeons)[i]
+    const dungeon = Object.values(DungeonPMDO)[i]
     await createTilesheets(dungeon)
   }
   // await createTilesheets("AmpPlains")
