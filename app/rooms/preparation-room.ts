@@ -4,7 +4,6 @@ import PreparationState from "./states/preparation-state"
 import admin from "firebase-admin"
 import { nanoid } from "nanoid"
 import {
-  OnGameStartCommand,
   OnGameStartRequestCommand,
   OnJoinCommand,
   OnLeaveCommand,
@@ -13,7 +12,6 @@ import {
   OnAddBotCommand,
   OnRemoveBotCommand,
   OnListBotsCommand,
-  InitializeBotsCommand,
   OnRoomNameCommand,
   OnRoomPasswordCommand,
   OnToggleEloCommand,
@@ -142,14 +140,6 @@ export default class PreparationRoom extends Room<PreparationState> {
     this.onMessage(Transfer.GAME_START_REQUEST, (client) => {
       try {
         this.dispatcher.dispatch(new OnGameStartRequestCommand(), { client })
-      } catch (error) {
-        logger.error(error)
-      }
-    })
-
-    this.onMessage(Transfer.GAME_START, (client, message) => {
-      try {
-        this.dispatcher.dispatch(new OnGameStartCommand(), { client, message })
       } catch (error) {
         logger.error(error)
       }
