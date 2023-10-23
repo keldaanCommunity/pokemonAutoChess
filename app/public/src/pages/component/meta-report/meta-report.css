@@ -20,6 +20,16 @@
   padding-bottom: 0.25em;
 }
 
+#meta-report .rank {
+  min-width: 2ch;
+  text-align: center;
+  font-size: 150%;
+}
+
+#meta-report label {
+  color: #ccc;
+}
+
 #meta-report .team-comp,
 #meta-report .item-stat,
 #meta-report .pokemon-family-stat {
@@ -38,14 +48,7 @@
   grid-template-columns: 2ch 360px 8ch 6ch 8ch 8ch 6ch 1fr;
 }
 
-#meta-report .rank {
-  min-width: 2ch;
-  text-align: center;
-  font-size: 150%;
-}
-
 #meta-report .team-comp label {
-  color: #ccc;
   display: block;
 }
 

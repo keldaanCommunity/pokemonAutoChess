@@ -22,13 +22,13 @@ export default function ItemStatistic(props: {
       ></img>
       <span>{t(`item.${props.item.name}`)}</span>
       <span>
-        {t("average_place")}: {props.item.rank}
+        <label>{t("average_place")}:</label> {props.item.rank}
       </span>
       <span>
-        {t("count")}: {props.item.count}
+        <label>{t("count")}:</label> {props.item.count}
       </span>
       <div style={{ display: "flex", gap: "0.5em" }}>
-        <span>{t("popular_holders")}:</span>
+        <label>{t("popular_holders")}:</label>
         {props.item.pokemons.map((pokemon) => (
           <img
             key={pokemon}

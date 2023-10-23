@@ -91,7 +91,7 @@ export default function PokemonStatistic(props: {
           </span>
 
           <span style={{ fontSize: "150%" }}>
-            {t("count")}:{" "}
+            <label>{t("count")}:</label>{" "}
             {pokemons.reduce((prev, curr) => prev + curr.count, 0)}
           </span>
 
@@ -115,10 +115,10 @@ export default function PokemonStatistic(props: {
                 />
                 <span>{pokemon.rank.toFixed(1)}</span>
                 <span>
-                  {t("count")}: {pokemon.count}
+                  <label>{t("count")}:</label> {pokemon.count}
                 </span>
                 <div>
-                  <span>{t("popular_items")}: </span>
+                  <label>{t("popular_items")}:</label>
                   {pokemon.items.map((item) => (
                     <img
                       key={item}
@@ -126,7 +126,8 @@ export default function PokemonStatistic(props: {
                       style={{
                         height: "32px",
                         width: "32px",
-                        imageRendering: "pixelated"
+                        imageRendering: "pixelated",
+                        marginLeft: "4px"
                       }}
                     />
                   ))}
