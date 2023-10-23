@@ -1219,13 +1219,13 @@ export default class Simulation extends Schema implements ISimulation {
           pokemonOnCell &&
           pokemonOnCell.types.has(Synergy.ELECTRIC) === false
         ) {
-          pokemonOnCell.handleSpecialDamage(
-            100,
-            this.board,
-            AttackType.SPECIAL,
-            null,
-            false
-          )
+          pokemonOnCell.handleDamage({
+            damage: 100,
+            board: this.board,
+            attackType: AttackType.SPECIAL,
+            attacker: null,
+            shouldTargetGainMana: false
+          })
         }
         this.room.broadcast(Transfer.BOARD_EVENT, {
           simulationId: this.id,

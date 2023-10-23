@@ -5623,8 +5623,7 @@ export class SuperFangStrategy extends AttackStrategy {
       board,
       AttackType.SPECIAL,
       pokemon,
-      crit,
-      false
+      crit
     )
   }
 }
@@ -5830,8 +5829,7 @@ export class PoisonGasStrategy extends AttackStrategy {
             board,
             AttackType.SPECIAL,
             pokemon,
-            crit,
-            true
+            crit
           )
           cell.value.status.triggerParalysis(3000, cell.value)
           cell.value.status.triggerPoison(3000, cell.value, pokemon)
@@ -5984,8 +5982,7 @@ export class StruggleBugStrategy extends AttackStrategy {
           board,
           AttackType.SPECIAL,
           pokemon,
-          crit,
-          true
+          crit
         )
       }
     })
@@ -6012,8 +6009,7 @@ export class TailGlowStrategy extends AttackStrategy {
           board,
           AttackType.SPECIAL,
           pokemon,
-          crit,
-          true
+          crit
         )
       }
     })
@@ -6042,8 +6038,7 @@ export class PrismaticLaserStrategy extends AttackStrategy {
           board,
           AttackType.SPECIAL,
           pokemon,
-          crit,
-          true
+          crit
         )
         const teleportationCell = board.getTeleportationCell(
           tg.positionX,
@@ -6078,8 +6073,7 @@ export class NightShadeStrategy extends AttackStrategy {
       board,
       AttackType.TRUE,
       pokemon,
-      crit,
-      false
+      crit
     )
   }
 }
