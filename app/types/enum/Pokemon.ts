@@ -1910,14 +1910,14 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.ILLUMISE]: Pkm.ILLUMISE,
   [Pkm.VOLBEAT]: Pkm.VOLBEAT,
   [Pkm.NECROZMA]: Pkm.NECROZMA,
-  [Pkm.ULTRA_NECROZMA]: Pkm.ULTRA_NECROZMA,
+  [Pkm.ULTRA_NECROZMA]: Pkm.NECROZMA,
   [Pkm.CHERRUBI]: Pkm.CHERRUBI,
   [Pkm.CHERRIM]: Pkm.CHERRUBI,
   [Pkm.CHERRIM_SUNLIGHT]: Pkm.CHERRUBI,
   [Pkm.MISDREAVUS]: Pkm.MISDREAVUS,
   [Pkm.MISMAGIUS]: Pkm.MISDREAVUS,
   [Pkm.DODUO]: Pkm.DODUO,
-  [Pkm.DODRIO]: Pkm.DODRIO
+  [Pkm.DODRIO]: Pkm.DODUO
 }
 
 export enum PkmDuo {
