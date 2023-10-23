@@ -4,6 +4,7 @@ import GameScene from "../scenes/game-scene"
 import indexList from "../../../dist/client/assets/pokemons/indexList.json"
 import { t } from "i18next"
 import { Stat } from "../../../../types/enum/Game"
+import { TilesetTiled } from "../../../../core/tileset"
 
 export default class LoadingManager {
   scene: Phaser.Scene
@@ -39,13 +40,16 @@ export default class LoadingManager {
     })
 
     if (scene instanceof GameScene && scene.tilemap) {
-      scene.load.audio("music_" + scene.tilemap.tilesets[0].name, [
-        `https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChessMusic/main/music/${scene.tilemap.tilesets[0].name}.mp3`
+      scene.load.audio("music_" + scene.dungeon, [
+        `https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChessMusic/main/music/FAR_AMP_PLAINS.mp3`
       ])
-      scene.load.image(
-        "tiles",
-        `/assets/tilesets/${scene.tilemap.tilesets[0].name}.png`
-      )
+      scene.tilemap.tilesets.forEach((t) => {
+        scene.load.image(
+          t.name,
+          "/assets/tilesets/" + scene.dungeon + "/" + t.image
+        )
+      })
+
       scene.load.tilemapTiledJSON("map", scene.tilemap)
     }
     scene.load.image("rain", "/assets/ui/rain.png")

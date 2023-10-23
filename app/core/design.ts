@@ -28,7 +28,7 @@ export type DesignTiled = {
   renderorder: string
   tiledversion: string
   tileheight: number
-  tilesets: { firstgid: number; source: string }[]
+  tilesets: TilesetTiled[]
   tilewidth: number
   type: string
   version: string

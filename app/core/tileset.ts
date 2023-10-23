@@ -10,18 +10,23 @@ import {
   DTEF_TILESET_WIDTH
 } from "../types/Config"
 import { pickRandomIn } from "../utils/random"
-import { readFile, readJSONSync } from "fs-extra"
+import { readFile, readJSONSync, readJsonSync } from "fs-extra"
 import { TileMapping } from "./design"
 import { get } from "mongoose"
 
 export type TilesetTiled = {
-  compressionlevel: number
-  height: number
-  infinite: boolean
+  image: string
+  firstgid: number
+  columns: number
   tileheight: number
   tilewidth: number
   tiles?: AnimationTiled[]
-  layers: LayerTiled[]
+  imageheight: number
+  imagewidth: number
+  margin: number
+  spacing: number
+  name: string
+  tilecount: number
 }
 
 export type LayerTiled = {
@@ -138,18 +143,14 @@ export default class Tileset {
   }
 
   exportToTiled() {
-    const tilesets = new Array<{ firstgid: number; source: string }>()
+    const tilesets = new Array<TilesetTiled>()
     for (let i = 0; i < 3; i++) {
       const t = this.metadata[`tileset_${i}`] as DtefTileset
-      tilesets.push({
-        firstgid: t.static.firstgid,
-        source: `tilesets/${this.id}/${t.static.name}.json`
-      })
+      tilesets.push(readJsonSync(`${src}/${this.id}/${t.static.name}.json`))
       t.animation.forEach((animatedFrame) => {
-        tilesets.push({
-          firstgid: animatedFrame.firstgid,
-          source: `tilesets/${this.id}/${animatedFrame.name}.json`
-        })
+        tilesets.push(
+          readJSONSync(`${src}/${this.id}/${animatedFrame.name}.json`)
+        )
       })
     }
     return tilesets
