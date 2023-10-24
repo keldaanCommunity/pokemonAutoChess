@@ -283,6 +283,7 @@
           "ACD",
           "A1BC",
           "AC3D",
+          "ACD4",
           "A1BD",
           "ABD4",
           "A1BD4",
@@ -350,7 +351,7 @@
         "0": [
           "AB",
           "AD",
-          "BCD",
+          "ABD",
           "AB2C",
           "A1BD",
           "ABD4",

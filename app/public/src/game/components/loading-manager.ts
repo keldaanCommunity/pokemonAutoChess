@@ -4,7 +4,7 @@ import GameScene from "../scenes/game-scene"
 import indexList from "../../../dist/client/assets/pokemons/indexList.json"
 import { t } from "i18next"
 import { Stat } from "../../../../types/enum/Game"
-import { TilesetTiled } from "../../../../core/tileset"
+import AnimatedTiles from "phaser-animated-tiles-phaser3.5/dist/AnimatedTiles.min.js"
 
 export default class LoadingManager {
   scene: Phaser.Scene
@@ -30,6 +30,12 @@ export default class LoadingManager {
 
   preload() {
     const scene = this.scene
+    scene.load.scenePlugin(
+      "animatedTiles",
+      AnimatedTiles,
+      "animatedTiles",
+      "animatedTiles"
+    )
     indexList.forEach((id) => {
       scene.load.image(`portrait-${id}`, getPortraitSrc(id))
       scene.load.multiatlas(
@@ -40,8 +46,9 @@ export default class LoadingManager {
     })
 
     if (scene instanceof GameScene && scene.tilemap) {
-      scene.load.audio("music_" + scene.dungeon, [
-        `https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChessMusic/main/music/FAR_AMP_PLAINS.mp3`
+      console.log("music_" + scene.dungeonMusic)
+      scene.load.audio("music_" + scene.dungeonMusic, [
+        `https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChessMusic/main/music/${scene.dungeonMusic}.mp3`
       ])
       scene.tilemap.tilesets.forEach((t) => {
         scene.load.image(

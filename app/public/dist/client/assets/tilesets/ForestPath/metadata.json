@@ -248,6 +248,7 @@
             "ACD4",
             "A1BD",
             "ABD4",
+            "A1B2C",
             "B2C3D",
             "AC3D4",
             "A1BD4",
@@ -272,6 +273,7 @@
         "0": [
           "C3D",
           "AC3D",
+          "A1B2C",
           "B2C3D",
           "AC3D4",
           "A1BD4",
@@ -292,13 +294,15 @@
       "maskDefinition": {
         "0": [
           "ABC",
+          "ABD",
           "ACD",
-          "BCD",
           "A1BC",
           "AB2C",
           "AC3D",
+          "ACD4",
           "A1BD",
           "ABD4",
+          "A1B2C",
           "B2C3D",
           "AC3D4",
           "A1BD4",

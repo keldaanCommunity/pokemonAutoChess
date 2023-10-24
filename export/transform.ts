@@ -103,7 +103,8 @@ async function createTilesetsTiled(src: string, dtefTileset: DtefTileset) {
     src,
     dtefTileset.static.name,
     await Jimp.read(`${src}/${dtefTileset.static.name}.png`),
-    dtefTileset.static.maskDefinition
+    dtefTileset.static.maskDefinition,
+    dtefTileset.static.firstgid
   )
   for (let i = 0; i < dtefTileset.animation.length; i++) {
     const anim = dtefTileset.animation[i]
@@ -112,6 +113,7 @@ async function createTilesetsTiled(src: string, dtefTileset: DtefTileset) {
       anim.name,
       await Jimp.read(`${src}/${anim.name}.png`),
       anim.maskDefinition,
+      anim.firstgid,
       anim.frameDuration,
       anim.numberOfFrames
     )
@@ -123,12 +125,13 @@ async function createTilesetTiled(
   name: string,
   picture: Jimp,
   maskDefinition: MaskDefinition,
+  firstgid: number,
   frameDuration?: number,
   numberOfFrames?: number
 ) {
   const tilesetTiled: TilesetTiled = {
     columns: picture.getWidth() / DTEF_TILESET_TILE_WIDTH,
-    firstgid: gid,
+    firstgid: firstgid,
     image: `${name}.png`,
     imageheight: picture.getHeight(),
     imagewidth: picture.getWidth(),

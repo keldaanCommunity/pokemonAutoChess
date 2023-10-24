@@ -188,7 +188,7 @@ export default class Design {
     return layerNames.map((name, index) => ({
       data: this.getDataLayer(name),
       height: this.height,
-      id: index,
+      id: index + 1,
       name: name,
       opacity: 1,
       type: "tilelayer",
@@ -225,7 +225,7 @@ export default class Design {
       height: this.height,
       infinite: false,
       layers: this.exportLayerToTiled(),
-      nextlayerid: 6,
+      nextlayerid: 2,
       nextobjectid: 1,
       orientation: "orthogonal",
       renderorder: "right-down",

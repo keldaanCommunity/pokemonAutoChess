@@ -6,7 +6,7 @@ import UnownManager from "../components/unown-manager"
 import WeatherManager from "../components/weather-manager"
 import ItemsContainer from "../components/items-container"
 import Pokemon from "../components/pokemon"
-import { DungeonPMDO, ItemRecipe } from "../../../../types/Config"
+import { Dungeon, DungeonPMDO, ItemRecipe } from "../../../../types/Config"
 import firebase from "firebase/compat/app"
 import { transformCoordinate } from "../../pages/utils/utils"
 import { Room } from "colyseus.js"
@@ -56,6 +56,7 @@ export default class GameScene extends Scene {
   started: boolean
   spectate: boolean
   dungeon: DungeonPMDO | undefined
+  dungeonMusic: Dungeon | undefined
 
   constructor() {
     super({
@@ -75,6 +76,7 @@ export default class GameScene extends Scene {
     this.uid = firebase.auth().currentUser?.uid
     this.started = false
     this.dungeon = data.room.state.mapName as DungeonPMDO
+    this.dungeonMusic = data.room.state.mapMusic as Dungeon
   }
 
   preload() {
@@ -106,6 +108,7 @@ export default class GameScene extends Scene {
         const tileset = this.map!.addTilesetImage(layer.name, layer.name)!
         this.map?.createLayer(layer.name, tileset, 0, 0)!.setScale(2, 2)
       })
+      ;(this.sys as any).animatedTiles.init(this.map)
 
       this.initializeDragAndDrop()
       this.battleGroup = this.add.group()
@@ -155,7 +158,10 @@ export default class GameScene extends Scene {
         this.animationManager,
         this.uid
       )
-      playMusic(this, "FAR_AMP_PLAINS.mp3")
+      playMusic(
+        this,
+        this.dungeonMusic ? this.dungeonMusic : Dungeon.AMP_PLAINS
+      )
       ;(this.sys as any).animatedTiles.init(this.map)
     }
   }

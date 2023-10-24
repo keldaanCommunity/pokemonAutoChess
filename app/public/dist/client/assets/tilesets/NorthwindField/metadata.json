@@ -236,8 +236,9 @@
       "maskDefinition": {
         "0": [
           "ABC",
+          "ABD",
           "ACD",
-          "BCD",
+          "A1B2C",
           "B2C3D",
           "AC3D4",
           "A1BD4",

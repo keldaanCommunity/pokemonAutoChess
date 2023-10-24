@@ -1,6 +1,6 @@
 {
   "columns": 18,
-  "firstgid": 5617,
+  "firstgid": 3889,
   "image": "tileset_2_frame0.png",
   "imageheight": 2304,
   "imagewidth": 432,
@@ -11,6 +11,107 @@
   "tileheight": 24,
   "tilewidth": 24,
   "tiles": [
+    {
+      "animation": [
+        {
+          "tileid": 18,
+          "duration": 133.33333333333334
+        },
+        {
+          "tileid": 162,
+          "duration": 133.33333333333334
+        },
+        {
+          "tileid": 306,
+          "duration": 133.33333333333334
+        },
+        {
+          "tileid": 450,
+          "duration": 133.33333333333334
+        },
+        {
+          "tileid": 594,
+          "duration": 133.33333333333334
+        },
+        {
+          "tileid": 738,
+          "duration": 133.33333333333334
+        },
+        {
+          "tileid": 882,
+          "duration": 133.33333333333334
+        },
+        {
+          "tileid": 1026,
+          "duration": 133.33333333333334
+        },
+        {
+          "tileid": 1170,
+          "duration": 133.33333333333334
+        },
+        {
+          "tileid": 1314,
+          "duration": 133.33333333333334
+        },
+        {
+          "tileid": 1458,
+          "duration": 133.33333333333334
+        },
+        {
+          "tileid": 1602,
+          "duration": 133.33333333333334
+        },
+        {
+          "tileid": 1602,
+          "duration": 133.33333333333334
+        },
+        {
+          "tileid": 1458,
+          "duration": 133.33333333333334
+        },
+        {
+          "tileid": 1314,
+          "duration": 133.33333333333334
+        },
+        {
+          "tileid": 1170,
+          "duration": 133.33333333333334
+        },
+        {
+          "tileid": 1026,
+          "duration": 133.33333333333334
+        },
+        {
+          "tileid": 882,
+          "duration": 133.33333333333334
+        },
+        {
+          "tileid": 738,
+          "duration": 133.33333333333334
+        },
+        {
+          "tileid": 594,
+          "duration": 133.33333333333334
+        },
+        {
+          "tileid": 450,
+          "duration": 133.33333333333334
+        },
+        {
+          "tileid": 306,
+          "duration": 133.33333333333334
+        },
+        {
+          "tileid": 162,
+          "duration": 133.33333333333334
+        },
+        {
+          "tileid": 18,
+          "duration": 133.33333333333334
+        }
+      ],
+      "id": 18
+    },
     {
       "animation": [
         {

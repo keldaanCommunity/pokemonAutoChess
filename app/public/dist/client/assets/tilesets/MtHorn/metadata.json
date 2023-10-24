@@ -247,6 +247,7 @@
             "ACD4",
             "A1BD",
             "ABD4",
+            "A1B2C",
             "B2C3D",
             "AC3D4",
             "A1BD4"
@@ -265,6 +266,7 @@
           "A1B",
           "C3D",
           "AD4",
+          "A1B2C",
           "B2C3D",
           "AC3D4",
           "A1BD4",
@@ -284,6 +286,7 @@
       "name": "tileset_2",
       "maskDefinition": {
         "0": [
+          "A1B2C",
           "B2C3D",
           "AC3D4",
           "A1BD4",

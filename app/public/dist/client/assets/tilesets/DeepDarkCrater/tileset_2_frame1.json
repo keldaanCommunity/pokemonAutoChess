@@ -1,6 +1,6 @@
 {
   "columns": 18,
-  "firstgid": 27649,
+  "firstgid": 21889,
   "image": "tileset_2_frame1.png",
   "imageheight": 3840,
   "imagewidth": 432,
@@ -11,6 +11,171 @@
   "tileheight": 24,
   "tilewidth": 24,
   "tiles": [
+    {
+      "animation": [
+        {
+          "tileid": 18,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 162,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 306,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 450,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 594,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 738,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 882,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 1026,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 1170,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 1314,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 1458,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 1602,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 1746,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 1890,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 2034,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 2178,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 2322,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 2466,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 2610,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 2754,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 2754,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 2610,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 2466,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 2322,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 2178,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 2034,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 1890,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 1746,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 1602,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 1458,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 1314,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 1170,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 1026,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 882,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 738,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 594,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 450,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 306,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 162,
+          "duration": 166.66666666666666
+        },
+        {
+          "tileid": 18,
+          "duration": 166.66666666666666
+        }
+      ],
+      "id": 18
+    },
     {
       "animation": [
         {

@@ -336,6 +336,7 @@
       "maskDefinition": {
         "0": [
           "A1BD",
+          "A1B2C",
           "B2C3D",
           "AC3D4",
           "A1BD4",
@@ -356,6 +357,7 @@
       "name": "tileset_2",
       "maskDefinition": {
         "0": [
+          "A1B2C",
           "B2C3D",
           "AC3D4",
           "A1BD4",

@@ -221,6 +221,7 @@
       "maskDefinition": {
         "0": [
           "C",
+          "A1B2C",
           "B2C3D",
           "AC3D4",
           "A1BD4",
@@ -241,6 +242,7 @@
       "maskDefinition": {
         "0": [
           "B",
+          "A1B2C",
           "B2C3D",
           "AC3D4",
           "A1BD4",

@@ -238,6 +238,7 @@
       "name": "tileset_2",
       "maskDefinition": {
         "0": [
+          "A1B2C",
           "A1BD4",
           "A1B2C3D",
           "A1B2C3D4"

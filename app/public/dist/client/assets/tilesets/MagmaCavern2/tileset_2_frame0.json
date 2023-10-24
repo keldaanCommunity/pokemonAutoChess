@@ -1,6 +1,6 @@
 {
   "columns": 18,
-  "firstgid": 3313,
+  "firstgid": 2737,
   "image": "tileset_2_frame0.png",
   "imageheight": 768,
   "imagewidth": 432,
@@ -84,6 +84,43 @@
         }
       ],
       "id": 4
+    },
+    {
+      "animation": [
+        {
+          "tileid": 18,
+          "duration": 233.33333333333334
+        },
+        {
+          "tileid": 162,
+          "duration": 233.33333333333334
+        },
+        {
+          "tileid": 306,
+          "duration": 233.33333333333334
+        },
+        {
+          "tileid": 450,
+          "duration": 233.33333333333334
+        },
+        {
+          "tileid": 450,
+          "duration": 233.33333333333334
+        },
+        {
+          "tileid": 306,
+          "duration": 233.33333333333334
+        },
+        {
+          "tileid": 162,
+          "duration": 233.33333333333334
+        },
+        {
+          "tileid": 18,
+          "duration": 233.33333333333334
+        }
+      ],
+      "id": 18
     },
     {
       "animation": [
