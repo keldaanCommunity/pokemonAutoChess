@@ -14829,7 +14829,6 @@ export const PokemonClasses: Record<
   [Pkm.NUMEL]: Numel,
   [Pkm.CAMERUPT]: Camerupt,
   [Pkm.MEGA_CAMERUPT]: MegaCamerupt,
-  [Pkm.DITTO]: Ditto,
   [Pkm.DARKRAI]: Darkrai,
   [Pkm.LITWICK]: Litwick,
   [Pkm.LAMPENT]: Lampent,

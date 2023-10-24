@@ -5,11 +5,11 @@ import Shop from "../../models/shop"
 import Design, { DesignTiled } from "../../core/design"
 import BotManager from "../../core/bot-manager"
 import {
-  DungeonData,
   Dungeon,
   StageDuration,
   BOARD_WIDTH,
-  BOARD_HEIGHT
+  BOARD_HEIGHT,
+  DungeonPMDO
 } from "../../types/Config"
 import { GamePhaseState } from "../../types/enum/Game"
 import { Weather } from "../../types/enum/Weather"
@@ -25,6 +25,7 @@ import { pickRandomIn, randomBetween } from "../../utils/random"
 import { Portal, SynergySymbol } from "../../models/colyseus-models/portal"
 import Simulation from "../../core/simulation"
 import { Item } from "../../types/enum/Item"
+import { writeFile, writeFileSync } from "fs-extra"
 
 export default class GameState extends Schema {
   @type("string") afterGameId = ""
@@ -45,12 +46,13 @@ export default class GameState extends Schema {
   @type({ map: Simulation }) simulations = new MapSchema<Simulation>()
   @type("uint8") lightX = randomBetween(0, BOARD_WIDTH - 1)
   @type("uint8") lightY = randomBetween(1, BOARD_HEIGHT / 2 - 1)
+  @type("string") mapMusic: Dungeon
 
   time = StageDuration[1] * 1000
   updatePhaseNeeded = false
   botManager: BotManager = new BotManager()
   shop: Shop = new Shop()
-  id: Dungeon
+  id: DungeonPMDO
   design: Design
   tilemap: DesignTiled | undefined
   gameFinished = false
@@ -66,19 +68,23 @@ export default class GameState extends Schema {
     preparationId: string,
     name: string,
     noElo: boolean,
-    selectedMap: Dungeon | "random"
+    selectedMap: DungeonPMDO | "random"
   ) {
     super()
     this.preparationId = preparationId
     this.startTime = Date.now()
     this.name = name
-    this.id = selectedMap === "random" ? pickRandomIn(Dungeon) : selectedMap
+    this.id = selectedMap === "random" ? pickRandomIn(DungeonPMDO) : selectedMap
     this.noElo = noElo
-    this.mapName = DungeonData[this.id].name
+    this.mapName = this.id
+    this.mapMusic = pickRandomIn(Object.keys(Dungeon) as Dungeon[])
     this.weather = Weather.NEUTRAL
     this.design = new Design(this.id, 5, 0.1)
-    this.design.create().then(() => {
-      this.tilemap = this.design.exportToTiled()
-    })
+    this.design.create()
+    this.tilemap = this.design.exportToTiled()
+    writeFile(
+      "C:/Users/arnau/Desktop/pokemonAutoChess/export/generated-map.json",
+      JSON.stringify(this.tilemap, null, 2)
+    )
   }
 }

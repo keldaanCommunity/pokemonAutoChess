@@ -6,7 +6,7 @@ import UnownManager from "../components/unown-manager"
 import WeatherManager from "../components/weather-manager"
 import ItemsContainer from "../components/items-container"
 import Pokemon from "../components/pokemon"
-import { ItemRecipe } from "../../../../types/Config"
+import { Dungeon, DungeonPMDO, ItemRecipe } from "../../../../types/Config"
 import firebase from "firebase/compat/app"
 import { transformCoordinate } from "../../pages/utils/utils"
 import { Room } from "colyseus.js"
@@ -55,6 +55,8 @@ export default class GameScene extends Scene {
   loadingManager: LoadingManager
   started: boolean
   spectate: boolean
+  dungeon: DungeonPMDO | undefined
+  dungeonMusic: Dungeon | undefined
 
   constructor() {
     super({
@@ -73,6 +75,8 @@ export default class GameScene extends Scene {
     this.spectate = data.spectate
     this.uid = firebase.auth().currentUser?.uid
     this.started = false
+    this.dungeon = data.room.state.mapName as DungeonPMDO
+    this.dungeonMusic = data.room.state.mapMusic as Dungeon
   }
 
   preload() {
@@ -100,15 +104,12 @@ export default class GameScene extends Scene {
 
       this.input.dragDistanceThreshold = 1
       this.map = this.make.tilemap({ key: "map" })
-      const tileset = this.map.addTilesetImage(
-        this.tilemap.tilesets[0].name,
-        "tiles",
-        24,
-        24,
-        1,
-        1
-      )!
-      this.map.createLayer("World", tileset, 0, 0)!.setScale(2, 2)
+      this.tilemap.layers.forEach((layer) => {
+        const tileset = this.map!.addTilesetImage(layer.name, layer.name)!
+        this.map?.createLayer(layer.name, tileset, 0, 0)!.setScale(2, 2)
+      })
+      ;(this.sys as any).animatedTiles.init(this.map)
+
       this.initializeDragAndDrop()
       this.battleGroup = this.add.group()
       this.animationManager = new AnimationManager(this)
@@ -157,7 +158,11 @@ export default class GameScene extends Scene {
         this.animationManager,
         this.uid
       )
-      playMusic(this, this.tilemap.tilesets[0].name)
+      playMusic(
+        this,
+        this.dungeonMusic ? this.dungeonMusic : Dungeon.AMP_PLAINS
+      )
+      ;(this.sys as any).animatedTiles.init(this.map)
     }
   }
 

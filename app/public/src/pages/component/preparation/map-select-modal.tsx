@@ -1,6 +1,6 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import { Dungeon } from "../../../../../types/Config"
+import { DungeonPMDO } from "../../../../../types/Config"
 import { useAppDispatch } from "../../../hooks"
 import { selectTilemap } from "../../../stores/NetworkStore"
 import { BasicModal } from "../modal/modal"
@@ -12,7 +12,7 @@ export function MapSelectModal(props: {
 }) {
   const dispatch = useAppDispatch()
   const { t } = useTranslation()
-  const maps = Object.keys(Dungeon).sort((a, b) =>
+  const maps = Object.keys(DungeonPMDO).sort((a, b) =>
     (t("map." + a) as string).localeCompare(t("map." + b))
   )
 
@@ -34,7 +34,7 @@ export function MapSelectModal(props: {
           </li>
           {maps.map((m) => (
             <li key={m} onClick={() => selectMap(m)}>
-              <img src={`/assets/maps/${m}.png`} alt={m} />
+              <img src={`/assets/maps/${m}-preview.png`} alt={m} />
               <span>{t("map." + m)}</span>
             </li>
           ))}

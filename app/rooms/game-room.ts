@@ -22,6 +22,7 @@ import {
 import {
   AdditionalPicksStages,
   Dungeon,
+  DungeonPMDO,
   ExpPlace,
   getEvolutionCountNeeded,
   ItemRecipe,
@@ -89,7 +90,7 @@ export default class GameRoom extends Room<GameState> {
     name: string
     idToken: string
     noElo: boolean
-    selectedMap: Dungeon | "random"
+    selectedMap: DungeonPMDO | "random"
     whenReady: (room: GameRoom) => void
   }) {
     logger.trace("create game room")

@@ -4,6 +4,7 @@ import GameScene from "../scenes/game-scene"
 import indexList from "../../../dist/client/assets/pokemons/indexList.json"
 import { t } from "i18next"
 import { Stat } from "../../../../types/enum/Game"
+import AnimatedTiles from "phaser-animated-tiles-phaser3.5/dist/AnimatedTiles.min.js"
 
 export default class LoadingManager {
   scene: Phaser.Scene
@@ -29,6 +30,12 @@ export default class LoadingManager {
 
   preload() {
     const scene = this.scene
+    scene.load.scenePlugin(
+      "animatedTiles",
+      AnimatedTiles,
+      "animatedTiles",
+      "animatedTiles"
+    )
     indexList.forEach((id) => {
       scene.load.image(`portrait-${id}`, getPortraitSrc(id))
       scene.load.multiatlas(
@@ -39,13 +46,17 @@ export default class LoadingManager {
     })
 
     if (scene instanceof GameScene && scene.tilemap) {
-      scene.load.audio("music_" + scene.tilemap.tilesets[0].name, [
-        `https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChessMusic/main/music/${scene.tilemap.tilesets[0].name}.mp3`
+      console.log("music_" + scene.dungeonMusic)
+      scene.load.audio("music_" + scene.dungeonMusic, [
+        `https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChessMusic/main/music/${scene.dungeonMusic}.mp3`
       ])
-      scene.load.image(
-        "tiles",
-        `/assets/tilesets/${scene.tilemap.tilesets[0].name}.png`
-      )
+      scene.tilemap.tilesets.forEach((t) => {
+        scene.load.image(
+          t.name,
+          "/assets/tilesets/" + scene.dungeon + "/" + t.image
+        )
+      })
+
       scene.load.tilemapTiledJSON("map", scene.tilemap)
     }
     scene.load.image("rain", "/assets/ui/rain.png")
