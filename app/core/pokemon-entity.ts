@@ -451,8 +451,8 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.items.has(Item.MANA_SCARF)) {
       this.setPP(this.pp + MANA_SCARF_MANA)
     }
-    if (this.status.deltaOrb) {
-      this.setPP(this.pp + DELTA_ORB_MANA)
+    if (this.status.deltaOrbStacks > 0) {
+      this.setPP(this.pp + DELTA_ORB_MANA * this.status.deltaOrbStacks)
     }
 
     if (this.effects.has(Effect.TELEPORT_NEXT_ATTACK)) {
