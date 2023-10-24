@@ -378,7 +378,8 @@ export const HatchList = new Array<Pkm>(
   Pkm.ALOLAN_GEODUDE,
   Pkm.ROWLET,
   Pkm.FROAKIE,
-  Pkm.TEPIG
+  Pkm.TEPIG,
+  Pkm.STARLY
 )
 
 export const NB_MYTHICAL_PROPOSITIONS = 6
