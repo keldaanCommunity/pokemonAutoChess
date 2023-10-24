@@ -17,77 +17,41 @@ export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string
   @type("string") name: Pkm
   @type({ set: "string" }) types = new SetSchema<Synergy>()
-  @type("string") rarity: Rarity
+  @type("string") rarity: Rarity = Rarity.SPECIAL
   @type("string") index: string
-  @type("string") evolution: Pkm
+  @type("string") evolution: Pkm = Pkm.DEFAULT
   @type("int8") positionX = -1
   @type("int8") positionY = -1
-  @type("string") attackSprite: AttackSprite
+  @type("string") attackSprite: AttackSprite = AttackSprite.NORMAL_MELEE
   @type("float32") atkSpeed = DEFAULT_ATK_SPEED
-  @type("uint8") def: number
-  @type("uint8") speDef: number
-  @type("uint8") attackType: AttackType
-  @type("uint16") atk: number
-  @type("uint16") hp: number
-  @type("uint8") range: number
-  @type("uint8") stars: number
-  @type("uint8") maxPP: number
-  @type("string") skill: Ability
+  @type("uint8") def: number = 1
+  @type("uint8") speDef: number = 1
+  @type("uint8") attackType: AttackType = AttackType.PHYSICAL
+  @type("uint16") atk: number = 1
+  @type("uint16") hp: number = 10
+  @type("uint8") range: number = 1
+  @type("uint8") stars: number = 1
+  @type("uint8") maxPP: number = 100
+  @type("string") skill: Ability = Ability.DEFAULT
   @type("string") passive: Passive = Passive.NONE
   @type({ set: "string" }) items = new SetSchema<Item>()
   @type("boolean") shiny: boolean
   @type("string") emotion: Emotion
   @type("string") action: PokemonActionState = PokemonActionState.IDLE
   evolutionTimer: number | undefined
-  final: boolean
+  final = false
   additional = false
 
-  constructor(
-    types: Synergy[],
-    rarity: Rarity,
-    evolution: Pkm,
-    hp: number,
-    atk: number,
-    def: number,
-    speDef: number,
-    range: number,
-    attackSprite: AttackSprite,
-    stars: number,
-    maxPP: number,
-    skill: Ability,
-    shiny: boolean,
-    emotion: Emotion,
-    final: boolean,
-    additional?: boolean,
-    passive?: Passive
-  ) {
+  constructor(shiny: boolean, emotion: Emotion) {
     super()
     const name = Object.entries(PokemonClasses).find(
       ([name, pokemonClass]) => pokemonClass === this.constructor
     )?.[0] as Pkm
     this.id = nanoid()
     this.name = name
-    this.rarity = rarity
     this.index = PkmIndex[name]
-    this.evolution = evolution
-    this.hp = hp
-    this.atk = atk
-    this.def = def
-    this.speDef = speDef
-    this.range = range
-    this.attackSprite = attackSprite
-    this.attackType = AttackType.PHYSICAL
-    this.stars = stars
-    this.maxPP = maxPP
-    this.skill = skill
-    this.passive = passive ?? Passive.NONE
     this.shiny = shiny
     this.emotion = emotion
-    this.final = final
-    this.additional = !!additional
-    types.forEach((type) => {
-      this.types.add(type)
-    })
 
     if (this.rarity === Rarity.HATCH && this.evolution != Pkm.DEFAULT) {
       this.evolutionTimer = EvolutionTime.EVOLVE_HATCH
@@ -127,5884 +91,4616 @@ export class Pokemon extends Schema implements IPokemon {
 }
 
 export class Ditto extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      30,
-      1,
-      1,
-      1,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      1,
-      100,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.DITTO
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.DEFAULT
+  hp = 30
+  atk = 1
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 1
+  skill = Ability.DEFAULT
+  passive = Passive.DITTO
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Egg extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      30,
-      1,
-      1,
-      1,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      1,
-      100,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.EGG
-    )
-  }
+  types = new SetSchema<Synergy>([])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.DEFAULT
+  hp = 30
+  atk = 1
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 1
+  skill = Ability.DEFAULT
+  passive = Passive.EGG
+  additional = true
+  final = false
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Electrike extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.FIELD],
-      Rarity.ULTRA,
-      Pkm.MANECTRIC,
-      120,
-      15,
-      5,
-      5,
-      1,
-      AttackSprite.ELECTRIC_MELEE,
-      1,
-      60,
-      Ability.VOLT_SWITCH,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
+  rarity = Rarity.ULTRA
+  stars = 1
+  evolution = Pkm.MANECTRIC
+  hp = 120
+  atk = 15
+  def = 5
+  speDef = 5
+  maxPP = 60
+  range = 1
+  skill = Ability.VOLT_SWITCH
+  additional = false
+  attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
 export class Manectric extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.FIELD],
-      Rarity.ULTRA,
-      Pkm.MEGA_MANECTRIC,
-      210,
-      30,
-      6,
-      6,
-      1,
-      AttackSprite.ELECTRIC_MELEE,
-      2,
-      60,
-      Ability.VOLT_SWITCH,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
+  rarity = Rarity.ULTRA
+  stars = 2
+  evolution = Pkm.MEGA_MANECTRIC
+  hp = 210
+  atk = 30
+  def = 6
+  speDef = 6
+  maxPP = 60
+  range = 1
+  skill = Ability.VOLT_SWITCH
+  additional = false
+  attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
 export class MegaManectric extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.FIELD],
-      Rarity.ULTRA,
-      Pkm.DEFAULT,
-      300,
-      48,
-      7,
-      7,
-      1,
-      AttackSprite.ELECTRIC_MELEE,
-      3,
-      60,
-      Ability.VOLT_SWITCH,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
+  rarity = Rarity.ULTRA
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 48
+  def = 7
+  speDef = 7
+  maxPP = 60
+  range = 1
+  skill = Ability.VOLT_SWITCH
+  additional = true
+  attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
 export class Shuppet extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DARK, Synergy.GHOST],
-      Rarity.ULTRA,
-      Pkm.BANETTE,
-      120,
-      7,
-      3,
-      4,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      1,
-      125,
-      Ability.SHADOW_CLONE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.GHOST])
+  rarity = Rarity.ULTRA
+  stars = 1
+  evolution = Pkm.BANETTE
+  hp = 120
+  atk = 7
+  def = 3
+  speDef = 4
+  maxPP = 125
+  range = 1
+  skill = Ability.SHADOW_CLONE
+  additional = false
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Banette extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DARK, Synergy.GHOST],
-      Rarity.ULTRA,
-      Pkm.MEGA_BANETTE,
-      200,
-      15,
-      4,
-      5,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      2,
-      125,
-      Ability.SHADOW_CLONE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.GHOST])
+  rarity = Rarity.ULTRA
+  stars = 2
+  evolution = Pkm.MEGA_BANETTE
+  hp = 200
+  atk = 15
+  def = 4
+  speDef = 5
+  maxPP = 125
+  range = 1
+  skill = Ability.SHADOW_CLONE
+  additional = false
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class MegaBanette extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DARK, Synergy.GHOST],
-      Rarity.ULTRA,
-      Pkm.DEFAULT,
-      300,
-      30,
-      5,
-      6,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      3,
-      100,
-      Ability.SHADOW_CLONE,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.GHOST])
+  rarity = Rarity.ULTRA
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 30
+  def = 5
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.SHADOW_CLONE
+  additional = true
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Riolu extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIGHTING, Synergy.STEEL, Synergy.BABY],
-      Rarity.ULTRA,
-      Pkm.LUCARIO,
-      120,
-      10,
-      3,
-      3,
-      2,
-      AttackSprite.FIGHTING_RANGE,
-      1,
-      100,
-      Ability.SILENCE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.FIGHTING,
+    Synergy.STEEL,
+    Synergy.BABY
+  ])
+  rarity = Rarity.ULTRA
+  stars = 1
+  evolution = Pkm.LUCARIO
+  hp = 120
+  atk = 10
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 2
+  skill = Ability.SILENCE
+  additional = false
+  attackSprite = AttackSprite.FIGHTING_RANGE
 }
 
 export class Lucario extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIGHTING, Synergy.STEEL],
-      Rarity.ULTRA,
-      Pkm.MEGA_LUCARIO,
-      240,
-      20,
-      5,
-      5,
-      2,
-      AttackSprite.FIGHTING_RANGE,
-      2,
-      100,
-      Ability.SILENCE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.STEEL])
+  rarity = Rarity.ULTRA
+  stars = 2
+  evolution = Pkm.MEGA_LUCARIO
+  hp = 240
+  atk = 20
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 2
+  skill = Ability.SILENCE
+  additional = false
+  attackSprite = AttackSprite.FIGHTING_RANGE
 }
 
 export class MegaLucario extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIGHTING, Synergy.STEEL],
-      Rarity.ULTRA,
-      Pkm.DEFAULT,
-      360,
-      42,
-      7,
-      7,
-      2,
-      AttackSprite.FIGHTING_RANGE,
-      3,
-      100,
-      Ability.SILENCE,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.STEEL])
+  rarity = Rarity.ULTRA
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 360
+  atk = 42
+  def = 7
+  speDef = 7
+  maxPP = 100
+  range = 2
+  skill = Ability.SILENCE
+  additional = true
+  attackSprite = AttackSprite.FIGHTING_RANGE
 }
 
 export class Swablu extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FAIRY, Synergy.SOUND],
-      Rarity.ULTRA,
-      Pkm.ALTARIA,
-      120,
-      12,
-      3,
-      3,
-      2,
-      AttackSprite.DRAGON_RANGE,
-      1,
-      100,
-      Ability.HYPER_VOICE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.SOUND])
+  rarity = Rarity.ULTRA
+  stars = 1
+  evolution = Pkm.ALTARIA
+  hp = 120
+  atk = 12
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 2
+  skill = Ability.HYPER_VOICE
+  additional = false
+  attackSprite = AttackSprite.DRAGON_RANGE
 }
 
 export class Altaria extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.FAIRY, Synergy.SOUND],
-      Rarity.ULTRA,
-      Pkm.MEGA_ALTARIA,
-      200,
-      25,
-      4,
-      4,
-      2,
-      AttackSprite.DRAGON_RANGE,
-      2,
-      100,
-      Ability.HYPER_VOICE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.FAIRY, Synergy.SOUND])
+  rarity = Rarity.ULTRA
+  stars = 2
+  evolution = Pkm.MEGA_ALTARIA
+  hp = 200
+  atk = 25
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 2
+  skill = Ability.HYPER_VOICE
+  additional = false
+  attackSprite = AttackSprite.DRAGON_RANGE
 }
 
 export class MegaAltaria extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.FAIRY, Synergy.SOUND],
-      Rarity.ULTRA,
-      Pkm.DEFAULT,
-      300,
-      42,
-      5,
-      5,
-      2,
-      AttackSprite.DRAGON_RANGE,
-      3,
-      100,
-      Ability.HYPER_VOICE,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.FAIRY, Synergy.SOUND])
+  rarity = Rarity.ULTRA
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 42
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 2
+  skill = Ability.HYPER_VOICE
+  additional = true
+  attackSprite = AttackSprite.DRAGON_RANGE
 }
 
 export class Scyther extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG, Synergy.FLYING],
-      Rarity.ULTRA,
-      Pkm.SCIZOR,
-      130,
-      18,
-      5,
-      5,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      1,
-      80,
-      Ability.X_SCISSOR,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING])
+  rarity = Rarity.ULTRA
+  stars = 1
+  evolution = Pkm.SCIZOR
+  hp = 130
+  atk = 18
+  def = 5
+  speDef = 5
+  maxPP = 80
+  range = 1
+  skill = Ability.X_SCISSOR
+  additional = false
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Scizor extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG, Synergy.FLYING, Synergy.STEEL],
-      Rarity.ULTRA,
-      Pkm.MEGA_SCIZOR,
-      180,
-      28,
-      6,
-      6,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      2,
-      80,
-      Ability.X_SCISSOR,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING, Synergy.STEEL])
+  rarity = Rarity.ULTRA
+  stars = 2
+  evolution = Pkm.MEGA_SCIZOR
+  hp = 180
+  atk = 28
+  def = 6
+  speDef = 6
+  maxPP = 80
+  range = 1
+  skill = Ability.X_SCISSOR
+  additional = false
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class MegaScizor extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG, Synergy.FLYING, Synergy.STEEL],
-      Rarity.ULTRA,
-      Pkm.DEFAULT,
-      250,
-      48,
-      7,
-      7,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      3,
-      80,
-      Ability.X_SCISSOR,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING, Synergy.STEEL])
+  rarity = Rarity.ULTRA
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 250
+  atk = 48
+  def = 7
+  speDef = 7
+  maxPP = 80
+  range = 1
+  skill = Ability.X_SCISSOR
+  additional = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Bounsweet extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.FIGHTING],
-      Rarity.EPIC,
-      Pkm.STEENEE,
-      100,
-      8,
-      4,
-      4,
-      1,
-      AttackSprite.FIGHTING_MELEE,
-      1,
-      100,
-      Ability.HIGH_JUMP_KICK,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIGHTING])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.STEENEE
+  hp = 100
+  atk = 8
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.HIGH_JUMP_KICK
+  additional = false
+  attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
 export class Steenee extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.FIGHTING],
-      Rarity.EPIC,
-      Pkm.TSAREENA,
-      180,
-      16,
-      5,
-      5,
-      1,
-      AttackSprite.FIGHTING_MELEE,
-      2,
-      100,
-      Ability.HIGH_JUMP_KICK,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIGHTING])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.TSAREENA
+  hp = 180
+  atk = 16
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.HIGH_JUMP_KICK
+  additional = false
+  attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
 export class Tsareena extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.FIGHTING],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      360,
-      34,
-      6,
-      6,
-      1,
-      AttackSprite.FIGHTING_MELEE,
-      3,
-      90,
-      Ability.HIGH_JUMP_KICK,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIGHTING])
+  rarity = Rarity.EPIC
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 360
+  atk = 34
+  def = 6
+  speDef = 6
+  maxPP = 90
+  range = 1
+  skill = Ability.HIGH_JUMP_KICK
+  additional = true
+  attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
 export class Buneary extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.FIGHTING],
-      Rarity.ULTRA,
-      Pkm.LOPUNNY,
-      130,
-      15,
-      5,
-      5,
-      1,
-      AttackSprite.FIGHTING_MELEE,
-      1,
-      80,
-      Ability.HIGH_JUMP_KICK,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIGHTING])
+  rarity = Rarity.ULTRA
+  stars = 1
+  evolution = Pkm.LOPUNNY
+  hp = 130
+  atk = 15
+  def = 5
+  speDef = 5
+  maxPP = 80
+  range = 1
+  skill = Ability.HIGH_JUMP_KICK
+  additional = false
+  attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
 export class Lopunny extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.FIGHTING],
-      Rarity.ULTRA,
-      Pkm.MEGA_LOPUNNY,
-      250,
-      28,
-      6,
-      6,
-      1,
-      AttackSprite.FIGHTING_MELEE,
-      2,
-      80,
-      Ability.HIGH_JUMP_KICK,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIGHTING])
+  rarity = Rarity.ULTRA
+  stars = 2
+  evolution = Pkm.MEGA_LOPUNNY
+  hp = 250
+  atk = 28
+  def = 6
+  speDef = 6
+  maxPP = 80
+  range = 1
+  skill = Ability.HIGH_JUMP_KICK
+  additional = false
+  attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
 export class MegaLopunny extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.FIGHTING],
-      Rarity.ULTRA,
-      Pkm.DEFAULT,
-      350,
-      50,
-      8,
-      8,
-      1,
-      AttackSprite.FIGHTING_MELEE,
-      3,
-      80,
-      Ability.HIGH_JUMP_KICK,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIGHTING])
+  rarity = Rarity.ULTRA
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 350
+  atk = 50
+  def = 8
+  speDef = 8
+  maxPP = 80
+  range = 1
+  skill = Ability.HIGH_JUMP_KICK
+  additional = true
+  attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
 export class Onix extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ROCK, Synergy.GROUND, Synergy.STEEL],
-      Rarity.ULTRA,
-      Pkm.STEELIX,
-      150,
-      9,
-      10,
-      5,
-      1,
-      AttackSprite.ROCK_MELEE,
-      1,
-      70,
-      Ability.SPIKE_ARMOR,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.GROUND, Synergy.STEEL])
+  rarity = Rarity.ULTRA
+  stars = 1
+  evolution = Pkm.STEELIX
+  hp = 150
+  atk = 9
+  def = 10
+  speDef = 5
+  maxPP = 70
+  range = 1
+  skill = Ability.SPIKE_ARMOR
+  additional = false
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Steelix extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ROCK, Synergy.GROUND, Synergy.STEEL],
-      Rarity.ULTRA,
-      Pkm.MEGA_STEELIX,
-      250,
-      14,
-      20,
-      5,
-      1,
-      AttackSprite.ROCK_MELEE,
-      2,
-      70,
-      Ability.SPIKE_ARMOR,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.GROUND, Synergy.STEEL])
+  rarity = Rarity.ULTRA
+  stars = 2
+  evolution = Pkm.MEGA_STEELIX
+  hp = 250
+  atk = 14
+  def = 20
+  speDef = 5
+  maxPP = 70
+  range = 1
+  skill = Ability.SPIKE_ARMOR
+  additional = false
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class MegaSteelix extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ROCK, Synergy.GROUND, Synergy.STEEL],
-      Rarity.ULTRA,
-      Pkm.DEFAULT,
-      350,
-      20,
-      30,
-      15,
-      1,
-      AttackSprite.ROCK_MELEE,
-      3,
-      70,
-      Ability.SPIKE_ARMOR,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.GROUND, Synergy.STEEL])
+  rarity = Rarity.ULTRA
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 350
+  atk = 20
+  def = 30
+  speDef = 15
+  maxPP = 70
+  range = 1
+  skill = Ability.SPIKE_ARMOR
+  additional = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Numel extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.FIELD, Synergy.GROUND],
-      Rarity.ULTRA,
-      Pkm.CAMERUPT,
-      130,
-      9,
-      5,
-      5,
-      1,
-      AttackSprite.FIRE_MELEE,
-      1,
-      100,
-      Ability.ERUPTION,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD, Synergy.GROUND])
+  rarity = Rarity.ULTRA
+  stars = 1
+  evolution = Pkm.CAMERUPT
+  hp = 130
+  atk = 9
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.ERUPTION
+  additional = false
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export class Camerupt extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.FIELD, Synergy.GROUND],
-      Rarity.ULTRA,
-      Pkm.MEGA_CAMERUPT,
-      220,
-      14,
-      10,
-      10,
-      1,
-      AttackSprite.FIRE_MELEE,
-      2,
-      100,
-      Ability.ERUPTION,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD, Synergy.GROUND])
+  rarity = Rarity.ULTRA
+  stars = 2
+  evolution = Pkm.MEGA_CAMERUPT
+  hp = 220
+  atk = 14
+  def = 10
+  speDef = 10
+  maxPP = 100
+  range = 1
+  skill = Ability.ERUPTION
+  additional = false
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export class MegaCamerupt extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.FIELD, Synergy.GROUND],
-      Rarity.ULTRA,
-      Pkm.DEFAULT,
-      330,
-      22,
-      15,
-      15,
-      1,
-      AttackSprite.FIRE_MELEE,
-      3,
-      100,
-      Ability.ERUPTION,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD, Synergy.GROUND])
+  rarity = Rarity.ULTRA
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 330
+  atk = 22
+  def = 15
+  speDef = 15
+  maxPP = 100
+  range = 1
+  skill = Ability.ERUPTION
+  additional = true
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export class Meditite extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC, Synergy.HUMAN, Synergy.FIGHTING],
-      Rarity.ULTRA,
-      Pkm.MEDICHAM,
-      120,
-      10,
-      5,
-      5,
-      2,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      60,
-      Ability.CONFUSION,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.PSYCHIC,
+    Synergy.HUMAN,
+    Synergy.FIGHTING
+  ])
+  rarity = Rarity.ULTRA
+  stars = 1
+  evolution = Pkm.MEDICHAM
+  hp = 120
+  atk = 10
+  def = 5
+  speDef = 5
+  maxPP = 60
+  range = 2
+  skill = Ability.CONFUSION
+  additional = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Medicham extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC, Synergy.HUMAN, Synergy.FIGHTING],
-      Rarity.ULTRA,
-      Pkm.MEGA_MEDICHAM,
-      200,
-      20,
-      6,
-      6,
-      2,
-      AttackSprite.PSYCHIC_RANGE,
-      2,
-      60,
-      Ability.CONFUSION,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.PSYCHIC,
+    Synergy.HUMAN,
+    Synergy.FIGHTING
+  ])
+  rarity = Rarity.ULTRA
+  stars = 2
+  evolution = Pkm.MEGA_MEDICHAM
+  hp = 200
+  atk = 20
+  def = 6
+  speDef = 6
+  maxPP = 60
+  range = 2
+  skill = Ability.CONFUSION
+  additional = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class MegaMedicham extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC, Synergy.HUMAN, Synergy.FIGHTING],
-      Rarity.ULTRA,
-      Pkm.DEFAULT,
-      300,
-      35,
-      7,
-      7,
-      2,
-      AttackSprite.PSYCHIC_RANGE,
-      3,
-      60,
-      Ability.CONFUSION,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.PSYCHIC,
+    Synergy.HUMAN,
+    Synergy.FIGHTING
+  ])
+  rarity = Rarity.ULTRA
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 35
+  def = 7
+  speDef = 7
+  maxPP = 60
+  range = 2
+  skill = Ability.CONFUSION
+  additional = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Elekid extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.ARTIFICIAL, Synergy.BABY],
-      Rarity.EPIC,
-      Pkm.ELECTABUZZ,
-      110,
-      5,
-      4,
-      4,
-      1,
-      AttackSprite.ELECTRIC_MELEE,
-      1,
-      90,
-      Ability.DISCHARGE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.ARTIFICIAL,
+    Synergy.BABY
+  ])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.ELECTABUZZ
+  hp = 110
+  atk = 5
+  def = 4
+  speDef = 4
+  maxPP = 90
+  range = 1
+  skill = Ability.DISCHARGE
+  additional = false
+  attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
 export class Electabuzz extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.ARTIFICIAL, Synergy.LIGHT],
-      Rarity.EPIC,
-      Pkm.ELECTIVIRE,
-      180,
-      16,
-      5,
-      5,
-      1,
-      AttackSprite.ELECTRIC_MELEE,
-      2,
-      90,
-      Ability.DISCHARGE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.ARTIFICIAL,
+    Synergy.LIGHT
+  ])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.ELECTIVIRE
+  hp = 180
+  atk = 16
+  def = 5
+  speDef = 5
+  maxPP = 90
+  range = 1
+  skill = Ability.DISCHARGE
+  additional = false
+  attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
 export class Electivire extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.ARTIFICIAL, Synergy.LIGHT],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      380,
-      28,
-      6,
-      6,
-      1,
-      AttackSprite.ELECTRIC_MELEE,
-      3,
-      90,
-      Ability.DISCHARGE,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.ARTIFICIAL,
+    Synergy.LIGHT
+  ])
+  rarity = Rarity.EPIC
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 380
+  atk = 28
+  def = 6
+  speDef = 6
+  maxPP = 90
+  range = 1
+  skill = Ability.DISCHARGE
+  additional = true
+  attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
 export class Gible extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.GROUND, Synergy.MONSTER],
-      Rarity.EPIC,
-      Pkm.GABITE,
-      100,
-      6,
-      4,
-      4,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      1,
-      100,
-      Ability.DRAGON_BREATH,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.GROUND,
+    Synergy.MONSTER
+  ])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.GABITE
+  hp = 100
+  atk = 6
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.DRAGON_BREATH
+  additional = false
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Gabite extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.GROUND, Synergy.MONSTER],
-      Rarity.EPIC,
-      Pkm.GARCHOMP,
-      160,
-      14,
-      5,
-      5,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      2,
-      100,
-      Ability.DRAGON_BREATH,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.GROUND,
+    Synergy.MONSTER
+  ])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.GARCHOMP
+  hp = 160
+  atk = 14
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.DRAGON_BREATH
+  additional = false
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Garchomp extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.GROUND, Synergy.MONSTER],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      240,
-      32,
-      6,
-      6,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      3,
-      100,
-      Ability.DRAGON_BREATH,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.GROUND,
+    Synergy.MONSTER
+  ])
+  rarity = Rarity.EPIC
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 240
+  atk = 32
+  def = 6
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.DRAGON_BREATH
+  additional = true
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Beldum extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC, Synergy.STEEL, Synergy.ARTIFICIAL],
-      Rarity.EPIC,
-      Pkm.METANG,
-      110,
-      5,
-      4,
-      4,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      1,
-      100,
-      Ability.METEOR_MASH,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.PSYCHIC,
+    Synergy.STEEL,
+    Synergy.ARTIFICIAL
+  ])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.METANG
+  hp = 110
+  atk = 5
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.METEOR_MASH
+  additional = false
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Metang extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC, Synergy.STEEL, Synergy.ARTIFICIAL],
-      Rarity.EPIC,
-      Pkm.METAGROSS,
-      190,
-      9,
-      6,
-      6,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      2,
-      100,
-      Ability.METEOR_MASH,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.PSYCHIC,
+    Synergy.STEEL,
+    Synergy.ARTIFICIAL
+  ])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.METAGROSS
+  hp = 190
+  atk = 9
+  def = 6
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.METEOR_MASH
+  additional = false
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Metagross extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC, Synergy.STEEL, Synergy.ARTIFICIAL],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      320,
-      20,
-      8,
-      8,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      3,
-      100,
-      Ability.METEOR_MASH,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.PSYCHIC,
+    Synergy.STEEL,
+    Synergy.ARTIFICIAL
+  ])
+  rarity = Rarity.EPIC
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 320
+  atk = 20
+  def = 8
+  speDef = 8
+  maxPP = 100
+  range = 1
+  skill = Ability.METEOR_MASH
+  additional = true
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Tympole extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.GROUND, Synergy.SOUND],
-      Rarity.EPIC,
-      Pkm.PALPITOAD,
-      90,
-      5,
-      4,
-      4,
-      1,
-      AttackSprite.WATER_MELEE,
-      1,
-      90,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.GROUND, Synergy.SOUND])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.PALPITOAD
+  hp = 90
+  atk = 5
+  def = 4
+  speDef = 4
+  maxPP = 90
+  range = 1
+  skill = Ability.DEFAULT
+  additional = false
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Palpitoad extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.GROUND, Synergy.SOUND],
-      Rarity.EPIC,
-      Pkm.SEISMITOAD,
-      130,
-      9,
-      5,
-      5,
-      1,
-      AttackSprite.WATER_MELEE,
-      2,
-      90,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.GROUND, Synergy.SOUND])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.SEISMITOAD
+  hp = 130
+  atk = 9
+  def = 5
+  speDef = 5
+  maxPP = 90
+  range = 1
+  skill = Ability.DEFAULT
+  additional = false
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Seismitoad extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.GROUND, Synergy.SOUND],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      230,
-      20,
-      6,
-      6,
-      1,
-      AttackSprite.WATER_MELEE,
-      3,
-      90,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.GROUND, Synergy.SOUND])
+  rarity = Rarity.EPIC
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 230
+  atk = 20
+  def = 6
+  speDef = 6
+  maxPP = 90
+  range = 1
+  skill = Ability.DEFAULT
+  additional = true
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Bagon extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.MONSTER],
-      Rarity.RARE,
-      Pkm.SHELGON,
-      90,
-      6,
-      3,
-      3,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      1,
-      100,
-      Ability.HEAD_SMASH,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.MONSTER])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.SHELGON
+  hp = 90
+  atk = 6
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.HEAD_SMASH
+  additional = false
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Shelgon extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.MONSTER],
-      Rarity.RARE,
-      Pkm.SALAMENCE,
-      150,
-      15,
-      3,
-      3,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      2,
-      100,
-      Ability.HEAD_SMASH,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.MONSTER])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.SALAMENCE
+  hp = 150
+  atk = 15
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.HEAD_SMASH
+  additional = false
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Salamence extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.MONSTER, Synergy.FLYING],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      240,
-      24,
-      3,
-      3,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      3,
-      100,
-      Ability.DRAGON_DARTS,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.MONSTER,
+    Synergy.FLYING
+  ])
+  rarity = Rarity.RARE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 240
+  atk = 24
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.DRAGON_DARTS
+  additional = true
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Ralts extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC, Synergy.FAIRY, Synergy.HUMAN],
-      Rarity.EPIC,
-      Pkm.KIRLIA,
-      90,
-      5,
-      2,
-      4,
-      3,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      110,
-      Ability.FUTURE_SIGHT,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.PSYCHIC,
+    Synergy.FAIRY,
+    Synergy.HUMAN
+  ])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.KIRLIA
+  hp = 90
+  atk = 5
+  def = 2
+  speDef = 4
+  maxPP = 110
+  range = 3
+  skill = Ability.FUTURE_SIGHT
+  additional = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Kirlia extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC, Synergy.FAIRY, Synergy.HUMAN],
-      Rarity.EPIC,
-      Pkm.GARDEVOIR,
-      130,
-      13,
-      3,
-      5,
-      3,
-      AttackSprite.PSYCHIC_RANGE,
-      2,
-      110,
-      Ability.FUTURE_SIGHT,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.PSYCHIC,
+    Synergy.FAIRY,
+    Synergy.HUMAN
+  ])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.GARDEVOIR
+  hp = 130
+  atk = 13
+  def = 3
+  speDef = 5
+  maxPP = 110
+  range = 3
+  skill = Ability.FUTURE_SIGHT
+  additional = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Gardevoir extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC, Synergy.FAIRY, Synergy.HUMAN],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      230,
-      28,
-      4,
-      8,
-      3,
-      AttackSprite.PSYCHIC_RANGE,
-      3,
-      110,
-      Ability.FUTURE_SIGHT,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.PSYCHIC,
+    Synergy.FAIRY,
+    Synergy.HUMAN
+  ])
+  rarity = Rarity.EPIC
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 230
+  atk = 28
+  def = 4
+  speDef = 8
+  maxPP = 110
+  range = 3
+  skill = Ability.FUTURE_SIGHT
+  additional = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Budew extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.POISON, Synergy.BABY],
-      Rarity.EPIC,
-      Pkm.ROSELIA,
-      90,
-      5,
-      1,
-      1,
-      3,
-      AttackSprite.GRASS_RANGE,
-      1,
-      100,
-      Ability.PETAL_DANCE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.BABY])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.ROSELIA
+  hp = 90
+  atk = 5
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 3
+  skill = Ability.PETAL_DANCE
+  additional = false
+  attackSprite = AttackSprite.GRASS_RANGE
 }
 
 export class Roselia extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.POISON, Synergy.FLORA],
-      Rarity.EPIC,
-      Pkm.ROSERADE,
-      130,
-      16,
-      1,
-      1,
-      3,
-      AttackSprite.GRASS_RANGE,
-      2,
-      100,
-      Ability.PETAL_DANCE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.FLORA])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.ROSERADE
+  hp = 130
+  atk = 16
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 3
+  skill = Ability.PETAL_DANCE
+  additional = false
+  attackSprite = AttackSprite.GRASS_RANGE
 }
 
 export class Roserade extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.POISON, Synergy.FLORA],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      230,
-      18,
-      1,
-      1,
-      3,
-      AttackSprite.GRASS_RANGE,
-      3,
-      100,
-      Ability.PETAL_DANCE,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.FLORA])
+  rarity = Rarity.EPIC
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 230
+  atk = 18
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 3
+  skill = Ability.PETAL_DANCE
+  additional = true
+  attackSprite = AttackSprite.GRASS_RANGE
 }
 
 export class Slakoth extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.FIELD],
-      Rarity.EPIC,
-      Pkm.VIGOROTH,
-      130,
-      6,
-      5,
-      4,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      1,
-      120,
-      Ability.SLACK_OFF,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIELD])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.VIGOROTH
+  hp = 130
+  atk = 6
+  def = 5
+  speDef = 4
+  maxPP = 120
+  range = 1
+  skill = Ability.SLACK_OFF
+  additional = false
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Vigoroth extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.FIELD],
-      Rarity.EPIC,
-      Pkm.SLAKING,
-      220,
-      18,
-      5,
-      4,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      2,
-      120,
-      Ability.SLACK_OFF,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIELD])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.SLAKING
+  hp = 220
+  atk = 18
+  def = 5
+  speDef = 4
+  maxPP = 120
+  range = 1
+  skill = Ability.SLACK_OFF
+  additional = false
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Slaking extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.FIELD],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      380,
-      34,
-      7,
-      5,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      3,
-      120,
-      Ability.SLACK_OFF,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIELD])
+  rarity = Rarity.EPIC
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 380
+  atk = 34
+  def = 7
+  speDef = 5
+  maxPP = 120
+  range = 1
+  skill = Ability.SLACK_OFF
+  additional = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Honedge extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GHOST, Synergy.STEEL, Synergy.ARTIFICIAL],
-      Rarity.RARE,
-      Pkm.DOUBLADE,
-      85,
-      6,
-      3,
-      3,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      1,
-      100,
-      Ability.KING_SHIELD,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.GHOST,
+    Synergy.STEEL,
+    Synergy.ARTIFICIAL
+  ])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.DOUBLADE
+  hp = 85
+  atk = 6
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.KING_SHIELD
+  additional = false
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Doublade extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GHOST, Synergy.STEEL, Synergy.ARTIFICIAL],
-      Rarity.RARE,
-      Pkm.AEGISLASH,
-      130,
-      13,
-      5,
-      5,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      2,
-      100,
-      Ability.KING_SHIELD,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.GHOST,
+    Synergy.STEEL,
+    Synergy.ARTIFICIAL
+  ])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.AEGISLASH
+  hp = 130
+  atk = 13
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.KING_SHIELD
+  additional = false
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Aegislash extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GHOST, Synergy.STEEL, Synergy.ARTIFICIAL],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      230,
-      23,
-      7,
-      7,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      3,
-      100,
-      Ability.KING_SHIELD,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.GHOST,
+    Synergy.STEEL,
+    Synergy.ARTIFICIAL
+  ])
+  rarity = Rarity.RARE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 230
+  atk = 23
+  def = 7
+  speDef = 7
+  maxPP = 100
+  range = 1
+  skill = Ability.KING_SHIELD
+  additional = true
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Oshawott extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.FIELD, Synergy.FIGHTING],
-      Rarity.EPIC,
-      Pkm.DEWOTT,
-      90,
-      8,
-      4,
-      4,
-      1,
-      AttackSprite.WATER_MELEE,
-      1,
-      120,
-      Ability.CRABHAMMER,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.WATER,
+    Synergy.FIELD,
+    Synergy.FIGHTING
+  ])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.DEWOTT
+  hp = 90
+  atk = 8
+  def = 4
+  speDef = 4
+  maxPP = 120
+  range = 1
+  skill = Ability.CRABHAMMER
+  additional = false
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Dewott extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.FIELD, Synergy.FIGHTING],
-      Rarity.EPIC,
-      Pkm.SAMUROTT,
-      150,
-      15,
-      6,
-      6,
-      1,
-      AttackSprite.WATER_MELEE,
-      2,
-      120,
-      Ability.CRABHAMMER,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.WATER,
+    Synergy.FIELD,
+    Synergy.FIGHTING
+  ])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.SAMUROTT
+  hp = 150
+  atk = 15
+  def = 6
+  speDef = 6
+  maxPP = 120
+  range = 1
+  skill = Ability.CRABHAMMER
+  additional = false
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Samurott extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.FIELD, Synergy.FIGHTING],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      260,
-      32,
-      8,
-      8,
-      1,
-      AttackSprite.WATER_MELEE,
-      3,
-      120,
-      Ability.CRABHAMMER,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.WATER,
+    Synergy.FIELD,
+    Synergy.FIGHTING
+  ])
+  rarity = Rarity.EPIC
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 260
+  atk = 32
+  def = 8
+  speDef = 8
+  maxPP = 120
+  range = 1
+  skill = Ability.CRABHAMMER
+  additional = true
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Larvitar extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DARK, Synergy.MONSTER, Synergy.ROCK],
-      Rarity.RARE,
-      Pkm.PUPITAR,
-      75,
-      7,
-      4,
-      2,
-      1,
-      AttackSprite.ROCK_MELEE,
-      1,
-      90,
-      Ability.BITE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.MONSTER, Synergy.ROCK])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.PUPITAR
+  hp = 75
+  atk = 7
+  def = 4
+  speDef = 2
+  maxPP = 90
+  range = 1
+  skill = Ability.BITE
+  additional = false
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Pupitar extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DARK, Synergy.MONSTER, Synergy.ROCK],
-      Rarity.RARE,
-      Pkm.TYRANITAR,
-      130,
-      14,
-      6,
-      4,
-      1,
-      AttackSprite.ROCK_MELEE,
-      2,
-      90,
-      Ability.BITE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.MONSTER, Synergy.ROCK])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.TYRANITAR
+  hp = 130
+  atk = 14
+  def = 6
+  speDef = 4
+  maxPP = 90
+  range = 1
+  skill = Ability.BITE
+  additional = false
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Tyranitar extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DARK, Synergy.MONSTER, Synergy.ROCK],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      210,
-      28,
-      8,
-      5,
-      1,
-      AttackSprite.ROCK_MELEE,
-      3,
-      90,
-      Ability.BITE,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.MONSTER, Synergy.ROCK])
+  rarity = Rarity.RARE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 210
+  atk = 28
+  def = 8
+  speDef = 5
+  maxPP = 90
+  range = 1
+  skill = Ability.BITE
+  additional = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class JangmoO extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.FIGHTING, Synergy.SOUND],
-      Rarity.EPIC,
-      Pkm.HAKAMO_O,
-      100,
-      6,
-      4,
-      4,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      1,
-      110,
-      Ability.CLANGOROUS_SOUL,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.FIGHTING,
+    Synergy.SOUND
+  ])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.HAKAMO_O
+  hp = 100
+  atk = 6
+  def = 4
+  speDef = 4
+  maxPP = 110
+  range = 1
+  skill = Ability.CLANGOROUS_SOUL
+  additional = false
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class HakamoO extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.FIGHTING, Synergy.SOUND],
-      Rarity.EPIC,
-      Pkm.KOMMO_O,
-      160,
-      13,
-      5,
-      5,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      2,
-      110,
-      Ability.CLANGOROUS_SOUL,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.FIGHTING,
+    Synergy.SOUND
+  ])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.KOMMO_O
+  hp = 160
+  atk = 13
+  def = 5
+  speDef = 5
+  maxPP = 110
+  range = 1
+  skill = Ability.CLANGOROUS_SOUL
+  additional = false
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class KommoO extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.FIGHTING, Synergy.SOUND],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      280,
-      25,
-      8,
-      8,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      3,
-      110,
-      Ability.CLANGOROUS_SOUL,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.FIGHTING,
+    Synergy.SOUND
+  ])
+  rarity = Rarity.EPIC
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 280
+  atk = 25
+  def = 8
+  speDef = 8
+  maxPP = 110
+  range = 1
+  skill = Ability.CLANGOROUS_SOUL
+  additional = true
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Gastly extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.MONSTER, Synergy.POISON, Synergy.GHOST],
-      Rarity.ULTRA,
-      Pkm.HAUNTER,
-      90,
-      14,
-      3,
-      3,
-      2,
-      AttackSprite.GHOST_RANGE,
-      1,
-      100,
-      Ability.NIGHTMARE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.MONSTER,
+    Synergy.POISON,
+    Synergy.GHOST
+  ])
+  rarity = Rarity.ULTRA
+  stars = 1
+  evolution = Pkm.HAUNTER
+  hp = 90
+  atk = 14
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 2
+  skill = Ability.NIGHTMARE
+  additional = false
+  attackSprite = AttackSprite.GHOST_RANGE
 }
 
 export class Haunter extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.MONSTER, Synergy.POISON, Synergy.GHOST],
-      Rarity.ULTRA,
-      Pkm.GENGAR,
-      180,
-      25,
-      4,
-      3,
-      2,
-      AttackSprite.GHOST_RANGE,
-      2,
-      100,
-      Ability.NIGHTMARE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.MONSTER,
+    Synergy.POISON,
+    Synergy.GHOST
+  ])
+  rarity = Rarity.ULTRA
+  stars = 2
+  evolution = Pkm.GENGAR
+  hp = 180
+  atk = 25
+  def = 4
+  speDef = 3
+  maxPP = 100
+  range = 2
+  skill = Ability.NIGHTMARE
+  additional = false
+  attackSprite = AttackSprite.GHOST_RANGE
 }
 
 export class Gengar extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.MONSTER, Synergy.POISON, Synergy.GHOST],
-      Rarity.ULTRA,
-      Pkm.DEFAULT,
-      350,
-      40,
-      5,
-      3,
-      2,
-      AttackSprite.GHOST_RANGE,
-      3,
-      100,
-      Ability.NIGHTMARE,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.MONSTER,
+    Synergy.POISON,
+    Synergy.GHOST
+  ])
+  rarity = Rarity.ULTRA
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 350
+  atk = 40
+  def = 5
+  speDef = 3
+  maxPP = 100
+  range = 2
+  skill = Ability.NIGHTMARE
+  additional = true
+  attackSprite = AttackSprite.GHOST_RANGE
 }
 
 export class Abra extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC, Synergy.HUMAN],
-      Rarity.RARE,
-      Pkm.KADABRA,
-      90,
-      5,
-      2,
-      4,
-      4,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      50,
-      Ability.TELEPORT,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.HUMAN])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.KADABRA
+  hp = 90
+  atk = 5
+  def = 2
+  speDef = 4
+  maxPP = 50
+  range = 4
+  skill = Ability.TELEPORT
+  additional = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Kadabra extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC, Synergy.HUMAN],
-      Rarity.RARE,
-      Pkm.ALAKAZAM,
-      130,
-      10,
-      3,
-      5,
-      4,
-      AttackSprite.PSYCHIC_RANGE,
-      2,
-      50,
-      Ability.TELEPORT,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.HUMAN])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.ALAKAZAM
+  hp = 130
+  atk = 10
+  def = 3
+  speDef = 5
+  maxPP = 50
+  range = 4
+  skill = Ability.TELEPORT
+  additional = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Alakazam extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC, Synergy.HUMAN],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      230,
-      22,
-      4,
-      8,
-      4,
-      AttackSprite.PSYCHIC_RANGE,
-      3,
-      50,
-      Ability.TELEPORT,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.HUMAN])
+  rarity = Rarity.RARE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 230
+  atk = 22
+  def = 4
+  speDef = 8
+  maxPP = 50
+  range = 4
+  skill = Ability.TELEPORT
+  additional = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Litwick extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GHOST, Synergy.FIRE, Synergy.LIGHT],
-      Rarity.COMMON,
-      Pkm.LAMPENT,
-      50,
-      5,
-      1,
-      1,
-      3,
-      AttackSprite.GHOST_RANGE,
-      1,
-      100,
-      Ability.HEX,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.FIRE, Synergy.LIGHT])
+  rarity = Rarity.COMMON
+  stars = 1
+  evolution = Pkm.LAMPENT
+  hp = 50
+  atk = 5
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 3
+  skill = Ability.HEX
+  additional = false
+  attackSprite = AttackSprite.GHOST_RANGE
 }
 
 export class Lampent extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GHOST, Synergy.FIRE, Synergy.LIGHT],
-      Rarity.COMMON,
-      Pkm.CHANDELURE,
-      90,
-      9,
-      1,
-      1,
-      3,
-      AttackSprite.GHOST_RANGE,
-      2,
-      100,
-      Ability.HEX,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.FIRE, Synergy.LIGHT])
+  rarity = Rarity.COMMON
+  stars = 2
+  evolution = Pkm.CHANDELURE
+  hp = 90
+  atk = 9
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 3
+  skill = Ability.HEX
+  additional = false
+  attackSprite = AttackSprite.GHOST_RANGE
 }
 
 export class Chandelure extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GHOST, Synergy.FIRE, Synergy.LIGHT],
-      Rarity.COMMON,
-      Pkm.DEFAULT,
-      160,
-      15,
-      1,
-      1,
-      3,
-      AttackSprite.GHOST_RANGE,
-      3,
-      100,
-      Ability.HEX,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.FIRE, Synergy.LIGHT])
+  rarity = Rarity.COMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 160
+  atk = 15
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 3
+  skill = Ability.HEX
+  additional = true
+  attackSprite = AttackSprite.GHOST_RANGE
 }
 
 export class Porygon extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.PSYCHIC, Synergy.ARTIFICIAL],
-      Rarity.EPIC,
-      Pkm.PORYGON_2,
-      120,
-      6,
-      1,
-      1,
-      2,
-      AttackSprite.FIGHTING_RANGE,
-      1,
-      90,
-      Ability.TRI_ATTACK,
-      shiny,
-      emotion,
-      false,
-      true,
-      Passive.PORYGON
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.PSYCHIC,
+    Synergy.ARTIFICIAL
+  ])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.PORYGON_2
+  hp = 120
+  atk = 6
+  def = 1
+  speDef = 1
+  maxPP = 90
+  range = 2
+  skill = Ability.TRI_ATTACK
+  passive = Passive.PORYGON
+  additional = false
+  final = true
+  attackSprite = AttackSprite.FIGHTING_RANGE
 }
 
 export class Porygon2 extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.PSYCHIC, Synergy.ARTIFICIAL],
-      Rarity.EPIC,
-      Pkm.PORYGON_Z,
-      180,
-      14,
-      1,
-      3,
-      2,
-      AttackSprite.FIGHTING_RANGE,
-      2,
-      90,
-      Ability.TRI_ATTACK,
-      shiny,
-      emotion,
-      true,
-      true,
-      Passive.PORYGON
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.PSYCHIC,
+    Synergy.ARTIFICIAL
+  ])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.PORYGON_Z
+  hp = 180
+  atk = 14
+  def = 1
+  speDef = 3
+  maxPP = 90
+  range = 2
+  skill = Ability.TRI_ATTACK
+  passive = Passive.PORYGON
+  additional = true
+  final = true
+  attackSprite = AttackSprite.FIGHTING_RANGE
 }
 
 export class PorygonZ extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.PSYCHIC, Synergy.ARTIFICIAL],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      333,
-      33,
-      1,
-      5,
-      2,
-      AttackSprite.FIGHTING_RANGE,
-      3,
-      90,
-      Ability.TRI_ATTACK,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.PSYCHIC,
+    Synergy.ARTIFICIAL
+  ])
+  rarity = Rarity.EPIC
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 333
+  atk = 33
+  def = 1
+  speDef = 5
+  maxPP = 90
+  range = 2
+  skill = Ability.TRI_ATTACK
+  additional = true
+  final = true
+  attackSprite = AttackSprite.FIGHTING_RANGE
 }
 
 export class Sewaddle extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.BUG, Synergy.SOUND],
-      Rarity.EPIC,
-      Pkm.SWADLOON,
-      80,
-      5,
-      3,
-      3,
-      1,
-      AttackSprite.GRASS_MELEE,
-      1,
-      80,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.BUG, Synergy.SOUND])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.SWADLOON
+  hp = 80
+  atk = 5
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 1
+  skill = Ability.DEFAULT
+  additional = false
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Swadloon extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.BUG, Synergy.SOUND],
-      Rarity.EPIC,
-      Pkm.LEAVANNY,
-      120,
-      9,
-      4,
-      4,
-      1,
-      AttackSprite.GRASS_MELEE,
-      2,
-      80,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.BUG, Synergy.SOUND])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.LEAVANNY
+  hp = 120
+  atk = 9
+  def = 4
+  speDef = 4
+  maxPP = 80
+  range = 1
+  skill = Ability.DEFAULT
+  additional = false
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Leavanny extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.BUG, Synergy.SOUND],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      220,
-      20,
-      4,
-      4,
-      1,
-      AttackSprite.GRASS_MELEE,
-      3,
-      80,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.BUG, Synergy.SOUND])
+  rarity = Rarity.EPIC
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 220
+  atk = 20
+  def = 4
+  speDef = 4
+  maxPP = 80
+  range = 1
+  skill = Ability.DEFAULT
+  additional = true
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Turtwig extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.GROUND, Synergy.FLORA],
-      Rarity.RARE,
-      Pkm.GROTLE,
-      80,
-      5,
-      3,
-      3,
-      1,
-      AttackSprite.GRASS_MELEE,
-      1,
-      100,
-      Ability.GROWTH,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.GROUND, Synergy.FLORA])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.GROTLE
+  hp = 80
+  atk = 5
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.GROWTH
+  additional = false
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Grotle extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.GROUND, Synergy.FLORA],
-      Rarity.RARE,
-      Pkm.TORTERRA,
-      150,
-      9,
-      4,
-      4,
-      1,
-      AttackSprite.GRASS_MELEE,
-      2,
-      100,
-      Ability.GROWTH,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.GROUND, Synergy.FLORA])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.TORTERRA
+  hp = 150
+  atk = 9
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.GROWTH
+  additional = false
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Torterra extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.GROUND, Synergy.FLORA],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      280,
-      20,
-      5,
-      5,
-      1,
-      AttackSprite.GRASS_MELEE,
-      3,
-      100,
-      Ability.GROWTH,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.GROUND, Synergy.FLORA])
+  rarity = Rarity.RARE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 280
+  atk = 20
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.GROWTH
+  additional = true
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Deino extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DARK, Synergy.DRAGON],
-      Rarity.RARE,
-      Pkm.ZWEILOUS,
-      80,
-      5,
-      1,
-      1,
-      2,
-      AttackSprite.FIRE_RANGE,
-      1,
-      100,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.DRAGON])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.ZWEILOUS
+  hp = 80
+  atk = 5
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 2
+  skill = Ability.DEFAULT
+  additional = false
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class Zweilous extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DARK, Synergy.DRAGON],
-      Rarity.RARE,
-      Pkm.HYDREIGON,
-      120,
-      9,
-      1,
-      1,
-      2,
-      AttackSprite.FIRE_RANGE,
-      2,
-      100,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.DRAGON])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.HYDREIGON
+  hp = 120
+  atk = 9
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 2
+  skill = Ability.DEFAULT
+  additional = false
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class Hydreigon extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DARK, Synergy.DRAGON],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      220,
-      18,
-      1,
-      1,
-      2,
-      AttackSprite.FIRE_RANGE,
-      3,
-      100,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.DRAGON])
+  rarity = Rarity.RARE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 220
+  atk = 18
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 2
+  skill = Ability.DEFAULT
+  additional = true
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class Poliwag extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.AQUATIC, Synergy.FIGHTING],
-      Rarity.COMMON,
-      Pkm.POLIWHIRL,
-      65,
-      5,
-      1,
-      1,
-      2,
-      AttackSprite.WATER_RANGE,
-      1,
-      100,
-      Ability.SOAK,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.TADPOLE
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.WATER,
+    Synergy.AQUATIC,
+    Synergy.FIGHTING
+  ])
+  rarity = Rarity.COMMON
+  stars = 1
+  evolution = Pkm.POLIWHIRL
+  hp = 65
+  atk = 5
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 2
+  skill = Ability.SOAK
+  passive = Passive.TADPOLE
+  additional = false
+  final = false
+  attackSprite = AttackSprite.WATER_RANGE
 }
 
 export class Poliwhirl extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.AQUATIC, Synergy.FIGHTING],
-      Rarity.COMMON,
-      Pkm.POLITOED,
-      120,
-      9,
-      1,
-      1,
-      2,
-      AttackSprite.WATER_RANGE,
-      2,
-      100,
-      Ability.SOAK,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.TADPOLE
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.WATER,
+    Synergy.AQUATIC,
+    Synergy.FIGHTING
+  ])
+  rarity = Rarity.COMMON
+  stars = 2
+  evolution = Pkm.POLITOED
+  hp = 120
+  atk = 9
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 2
+  skill = Ability.SOAK
+  passive = Passive.TADPOLE
+  additional = false
+  final = false
+  attackSprite = AttackSprite.WATER_RANGE
 }
 
 export class Politoed extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.AQUATIC, Synergy.FIGHTING],
-      Rarity.COMMON,
-      Pkm.DEFAULT,
-      220,
-      18,
-      1,
-      1,
-      2,
-      AttackSprite.WATER_RANGE,
-      3,
-      100,
-      Ability.SOAK,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.TADPOLE
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.WATER,
+    Synergy.AQUATIC,
+    Synergy.FIGHTING
+  ])
+  rarity = Rarity.COMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 220
+  atk = 18
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 2
+  skill = Ability.SOAK
+  passive = Passive.TADPOLE
+  additional = true
+  final = false
+  attackSprite = AttackSprite.WATER_RANGE
 }
 
 export class Poliwrath extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.AQUATIC, Synergy.FIGHTING],
-      Rarity.COMMON,
-      Pkm.DEFAULT,
-      220,
-      18,
-      3,
-      3,
-      1,
-      AttackSprite.WATER_MELEE,
-      3,
-      100,
-      Ability.CRABHAMMER,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.TADPOLE
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.WATER,
+    Synergy.AQUATIC,
+    Synergy.FIGHTING
+  ])
+  rarity = Rarity.COMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 220
+  atk = 18
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.CRABHAMMER
+  passive = Passive.TADPOLE
+  additional = true
+  final = false
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Magby extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.HUMAN, Synergy.BABY],
-      Rarity.RARE,
-      Pkm.MAGMAR,
-      80,
-      5,
-      1,
-      1,
-      2,
-      AttackSprite.FIRE_RANGE,
-      1,
-      80,
-      Ability.HEAT_WAVE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.HUMAN, Synergy.BABY])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.MAGMAR
+  hp = 80
+  atk = 5
+  def = 1
+  speDef = 1
+  maxPP = 80
+  range = 2
+  skill = Ability.HEAT_WAVE
+  additional = false
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class Magmar extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.HUMAN],
-      Rarity.RARE,
-      Pkm.MAGMORTAR,
-      140,
-      14,
-      2,
-      2,
-      2,
-      AttackSprite.FIRE_RANGE,
-      2,
-      80,
-      Ability.HEAT_WAVE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.HUMAN])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.MAGMORTAR
+  hp = 140
+  atk = 14
+  def = 2
+  speDef = 2
+  maxPP = 80
+  range = 2
+  skill = Ability.HEAT_WAVE
+  additional = false
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class Magmortar extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.HUMAN],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      280,
-      26,
-      3,
-      3,
-      2,
-      AttackSprite.FIRE_RANGE,
-      3,
-      80,
-      Ability.HEAT_WAVE,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.HUMAN])
+  rarity = Rarity.RARE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 280
+  atk = 26
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 2
+  skill = Ability.HEAT_WAVE
+  additional = true
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class Solosis extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC],
-      Rarity.ULTRA,
-      Pkm.DUOSION,
-      100,
-      5,
-      1,
-      1,
-      2,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      90,
-      Ability.SHADOW_BALL,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC])
+  rarity = Rarity.ULTRA
+  stars = 1
+  evolution = Pkm.DUOSION
+  hp = 100
+  atk = 5
+  def = 1
+  speDef = 1
+  maxPP = 90
+  range = 2
+  skill = Ability.SHADOW_BALL
+  additional = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Duosion extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC],
-      Rarity.ULTRA,
-      Pkm.REUNICLUS,
-      200,
-      9,
-      1,
-      1,
-      2,
-      AttackSprite.PSYCHIC_RANGE,
-      2,
-      90,
-      Ability.SHADOW_BALL,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC])
+  rarity = Rarity.ULTRA
+  stars = 2
+  evolution = Pkm.REUNICLUS
+  hp = 200
+  atk = 9
+  def = 1
+  speDef = 1
+  maxPP = 90
+  range = 2
+  skill = Ability.SHADOW_BALL
+  additional = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Reuniclus extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC],
-      Rarity.ULTRA,
-      Pkm.DEFAULT,
-      300,
-      18,
-      1,
-      1,
-      2,
-      AttackSprite.PSYCHIC_RANGE,
-      3,
-      90,
-      Ability.SHADOW_BALL,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC])
+  rarity = Rarity.ULTRA
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 18
+  def = 1
+  speDef = 1
+  maxPP = 90
+  range = 2
+  skill = Ability.SHADOW_BALL
+  additional = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Shinx extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.FIELD],
-      Rarity.RARE,
-      Pkm.LUXIO,
-      80,
-      6,
-      4,
-      4,
-      1,
-      AttackSprite.ELECTRIC_MELEE,
-      1,
-      100,
-      Ability.DISCHARGE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.LUXIO
+  hp = 80
+  atk = 6
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.DISCHARGE
+  additional = false
+  attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
 export class Luxio extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.FIELD],
-      Rarity.RARE,
-      Pkm.LUXRAY,
-      130,
-      14,
-      5,
-      5,
-      1,
-      AttackSprite.ELECTRIC_MELEE,
-      2,
-      100,
-      Ability.DISCHARGE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.LUXRAY
+  hp = 130
+  atk = 14
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.DISCHARGE
+  additional = false
+  attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
 export class Luxray extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.FIELD],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      220,
-      32,
-      6,
-      6,
-      1,
-      AttackSprite.ELECTRIC_MELEE,
-      3,
-      100,
-      Ability.DISCHARGE,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
+  rarity = Rarity.RARE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 220
+  atk = 32
+  def = 6
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.DISCHARGE
+  additional = true
+  attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
 export class Cubone extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GROUND, Synergy.GHOST],
-      Rarity.EPIC,
-      Pkm.MAROWAK,
-      110,
-      10,
-      4,
-      4,
-      1,
-      AttackSprite.ROCK_MELEE,
-      1,
-      80,
-      Ability.BONEMERANG,
-      shiny,
-      emotion,
-      false,
-      true,
-      Passive.CUBONE
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.GHOST])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.MAROWAK
+  hp = 110
+  atk = 10
+  def = 4
+  speDef = 4
+  maxPP = 80
+  range = 1
+  skill = Ability.BONEMERANG
+  passive = Passive.CUBONE
+  additional = false
+  final = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Marowak extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GROUND, Synergy.GHOST],
-      Rarity.EPIC,
-      Pkm.ALOLAN_MAROWAK,
-      220,
-      20,
-      6,
-      5,
-      1,
-      AttackSprite.ROCK_MELEE,
-      2,
-      80,
-      Ability.BONEMERANG,
-      shiny,
-      emotion,
-      true,
-      true,
-      Passive.CUBONE
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.GHOST])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.ALOLAN_MAROWAK
+  hp = 220
+  atk = 20
+  def = 6
+  speDef = 5
+  maxPP = 80
+  range = 1
+  skill = Ability.BONEMERANG
+  passive = Passive.CUBONE
+  additional = true
+  final = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class AlolanMarowak extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GROUND, Synergy.FIRE, Synergy.GHOST],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      250,
-      26,
-      8,
-      6,
-      1,
-      AttackSprite.FIRE_MELEE,
-      3,
-      80,
-      Ability.BONEMERANG,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.FIRE, Synergy.GHOST])
+  rarity = Rarity.EPIC
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 250
+  atk = 26
+  def = 8
+  speDef = 6
+  maxPP = 80
+  range = 1
+  skill = Ability.BONEMERANG
+  additional = true
+  final = true
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export class Axew extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.MONSTER],
-      Rarity.RARE,
-      Pkm.FRAXURE,
-      80,
-      5,
-      4,
-      4,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      1,
-      100,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.MONSTER])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.FRAXURE
+  hp = 80
+  atk = 5
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.DEFAULT
+  additional = false
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Fraxure extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.MONSTER],
-      Rarity.RARE,
-      Pkm.HAXORUS,
-      120,
-      9,
-      5,
-      5,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      2,
-      100,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.MONSTER])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.HAXORUS
+  hp = 120
+  atk = 9
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.DEFAULT
+  additional = false
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Haxorus extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.MONSTER],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      220,
-      20,
-      6,
-      6,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      3,
-      100,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.MONSTER])
+  rarity = Rarity.RARE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 220
+  atk = 20
+  def = 6
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.DEFAULT
+  additional = true
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Dratini extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.AQUATIC, Synergy.FLYING],
-      Rarity.RARE,
-      Pkm.DRAGONAIR,
-      80,
-      5,
-      4,
-      4,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      1,
-      110,
-      Ability.DRAGON_BREATH,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.AQUATIC,
+    Synergy.FLYING
+  ])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.DRAGONAIR
+  hp = 80
+  atk = 5
+  def = 4
+  speDef = 4
+  maxPP = 110
+  range = 1
+  skill = Ability.DRAGON_BREATH
+  additional = false
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Dragonair extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.AQUATIC, Synergy.FLYING],
-      Rarity.RARE,
-      Pkm.DRAGONITE,
-      120,
-      13,
-      5,
-      5,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      2,
-      110,
-      Ability.DRAGON_BREATH,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.AQUATIC,
+    Synergy.FLYING
+  ])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.DRAGONITE
+  hp = 120
+  atk = 13
+  def = 5
+  speDef = 5
+  maxPP = 110
+  range = 1
+  skill = Ability.DRAGON_BREATH
+  additional = false
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Dragonite extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.AQUATIC, Synergy.FLYING],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      250,
-      23,
-      6,
-      6,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      3,
-      110,
-      Ability.DRAGON_BREATH,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.AQUATIC,
+    Synergy.FLYING
+  ])
+  rarity = Rarity.RARE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 250
+  atk = 23
+  def = 6
+  speDef = 6
+  maxPP = 110
+  range = 1
+  skill = Ability.DRAGON_BREATH
+  additional = true
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Goomy extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.AQUATIC, Synergy.MONSTER],
-      Rarity.EPIC,
-      Pkm.SLIGOO,
-      90,
-      6,
-      4,
-      6,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      1,
-      80,
-      Ability.LIQUIDATION,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.AQUATIC,
+    Synergy.MONSTER
+  ])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.SLIGOO
+  hp = 90
+  atk = 6
+  def = 4
+  speDef = 6
+  maxPP = 80
+  range = 1
+  skill = Ability.LIQUIDATION
+  additional = false
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Sligoo extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.AQUATIC, Synergy.MONSTER],
-      Rarity.EPIC,
-      Pkm.GOODRA,
-      160,
-      12,
-      5,
-      7,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      2,
-      80,
-      Ability.LIQUIDATION,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.AQUATIC,
+    Synergy.MONSTER
+  ])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.GOODRA
+  hp = 160
+  atk = 12
+  def = 5
+  speDef = 7
+  maxPP = 80
+  range = 1
+  skill = Ability.LIQUIDATION
+  additional = false
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Goodra extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.AQUATIC, Synergy.MONSTER],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      300,
-      26,
-      6,
-      10,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      3,
-      80,
-      Ability.LIQUIDATION,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.AQUATIC,
+    Synergy.MONSTER
+  ])
+  rarity = Rarity.EPIC
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 26
+  def = 6
+  speDef = 10
+  maxPP = 80
+  range = 1
+  skill = Ability.LIQUIDATION
+  additional = true
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Lotad extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.WATER, Synergy.AQUATIC],
-      Rarity.RARE,
-      Pkm.LOMBRE,
-      80,
-      6,
-      2,
-      2,
-      3,
-      AttackSprite.GRASS_RANGE,
-      1,
-      120,
-      Ability.TORMENT,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.GRASS,
+    Synergy.WATER,
+    Synergy.AQUATIC
+  ])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.LOMBRE
+  hp = 80
+  atk = 6
+  def = 2
+  speDef = 2
+  maxPP = 120
+  range = 3
+  skill = Ability.TORMENT
+  additional = false
+  attackSprite = AttackSprite.GRASS_RANGE
 }
 
 export class Lombre extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.WATER, Synergy.AQUATIC],
-      Rarity.RARE,
-      Pkm.LUDICOLO,
-      150,
-      12,
-      3,
-      3,
-      3,
-      AttackSprite.GRASS_RANGE,
-      2,
-      120,
-      Ability.TORMENT,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.GRASS,
+    Synergy.WATER,
+    Synergy.AQUATIC
+  ])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.LUDICOLO
+  hp = 150
+  atk = 12
+  def = 3
+  speDef = 3
+  maxPP = 120
+  range = 3
+  skill = Ability.TORMENT
+  additional = false
+  attackSprite = AttackSprite.GRASS_RANGE
 }
 
 export class Ludicolo extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.WATER, Synergy.AQUATIC],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      260,
-      22,
-      4,
-      4,
-      3,
-      AttackSprite.GRASS_RANGE,
-      3,
-      120,
-      Ability.TORMENT,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.GRASS,
+    Synergy.WATER,
+    Synergy.AQUATIC
+  ])
+  rarity = Rarity.RARE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 260
+  atk = 22
+  def = 4
+  speDef = 4
+  maxPP = 120
+  range = 3
+  skill = Ability.TORMENT
+  additional = true
+  attackSprite = AttackSprite.GRASS_RANGE
 }
 
 export class Togepi extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FAIRY, Synergy.NORMAL, Synergy.BABY],
-      Rarity.RARE,
-      Pkm.TOGETIC,
-      80,
-      5,
-      1,
-      1,
-      2,
-      AttackSprite.FLYING_RANGE,
-      1,
-      70,
-      Ability.WISH,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.NORMAL, Synergy.BABY])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.TOGETIC
+  hp = 80
+  atk = 5
+  def = 1
+  speDef = 1
+  maxPP = 70
+  range = 2
+  skill = Ability.WISH
+  additional = false
+  attackSprite = AttackSprite.FLYING_RANGE
 }
 
 export class Togetic extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FAIRY, Synergy.NORMAL, Synergy.FLYING],
-      Rarity.RARE,
-      Pkm.TOGEKISS,
-      150,
-      11,
-      1,
-      1,
-      2,
-      AttackSprite.FLYING_RANGE,
-      2,
-      70,
-      Ability.WISH,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.FAIRY,
+    Synergy.NORMAL,
+    Synergy.FLYING
+  ])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.TOGEKISS
+  hp = 150
+  atk = 11
+  def = 1
+  speDef = 1
+  maxPP = 70
+  range = 2
+  skill = Ability.WISH
+  additional = false
+  attackSprite = AttackSprite.FLYING_RANGE
 }
 
 export class Togekiss extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FAIRY, Synergy.NORMAL, Synergy.FLYING],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      260,
-      25,
-      1,
-      1,
-      2,
-      AttackSprite.FLYING_RANGE,
-      3,
-      70,
-      Ability.WISH,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.FAIRY,
+    Synergy.NORMAL,
+    Synergy.FLYING
+  ])
+  rarity = Rarity.RARE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 260
+  atk = 25
+  def = 1
+  speDef = 1
+  maxPP = 70
+  range = 2
+  skill = Ability.WISH
+  additional = true
+  attackSprite = AttackSprite.FLYING_RANGE
 }
 
 export class Rhyhorn extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GROUND, Synergy.MONSTER, Synergy.ROCK],
-      Rarity.RARE,
-      Pkm.RHYDON,
-      80,
-      5,
-      4,
-      4,
-      1,
-      AttackSprite.ROCK_MELEE,
-      1,
-      100,
-      Ability.STOMP,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.GROUND,
+    Synergy.MONSTER,
+    Synergy.ROCK
+  ])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.RHYDON
+  hp = 80
+  atk = 5
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.STOMP
+  additional = false
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Rhydon extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GROUND, Synergy.MONSTER, Synergy.ROCK],
-      Rarity.RARE,
-      Pkm.RHYPERIOR,
-      130,
-      9,
-      6,
-      6,
-      1,
-      AttackSprite.ROCK_MELEE,
-      2,
-      100,
-      Ability.STOMP,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.GROUND,
+    Synergy.MONSTER,
+    Synergy.ROCK
+  ])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.RHYPERIOR
+  hp = 130
+  atk = 9
+  def = 6
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.STOMP
+  additional = false
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Rhyperior extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GROUND, Synergy.MONSTER, Synergy.ROCK],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      220,
-      20,
-      8,
-      8,
-      1,
-      AttackSprite.ROCK_MELEE,
-      3,
-      100,
-      Ability.STOMP,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.GROUND,
+    Synergy.MONSTER,
+    Synergy.ROCK
+  ])
+  rarity = Rarity.RARE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 220
+  atk = 20
+  def = 8
+  speDef = 8
+  maxPP = 100
+  range = 1
+  skill = Ability.STOMP
+  additional = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Aron extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.STEEL, Synergy.MONSTER, Synergy.ROCK],
-      Rarity.COMMON,
-      Pkm.LAIRON,
-      60,
-      4,
-      2,
-      2,
-      1,
-      AttackSprite.ROCK_MELEE,
-      1,
-      100,
-      Ability.STOMP,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.MONSTER, Synergy.ROCK])
+  rarity = Rarity.COMMON
+  stars = 1
+  evolution = Pkm.LAIRON
+  hp = 60
+  atk = 4
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.STOMP
+  additional = false
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Lairon extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.STEEL, Synergy.MONSTER, Synergy.ROCK],
-      Rarity.COMMON,
-      Pkm.AGGRON,
-      100,
-      8,
-      4,
-      4,
-      1,
-      AttackSprite.ROCK_MELEE,
-      2,
-      100,
-      Ability.STOMP,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.MONSTER, Synergy.ROCK])
+  rarity = Rarity.COMMON
+  stars = 2
+  evolution = Pkm.AGGRON
+  hp = 100
+  atk = 8
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.STOMP
+  additional = false
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Aggron extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.STEEL, Synergy.MONSTER, Synergy.ROCK],
-      Rarity.COMMON,
-      Pkm.DEFAULT,
-      170,
-      16,
-      6,
-      6,
-      1,
-      AttackSprite.ROCK_MELEE,
-      3,
-      100,
-      Ability.STOMP,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.MONSTER, Synergy.ROCK])
+  rarity = Rarity.COMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 170
+  atk = 16
+  def = 6
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.STOMP
+  additional = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Whismur extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.SOUND],
-      Rarity.RARE,
-      Pkm.LOUDRED,
-      90,
-      6,
-      1,
-      1,
-      2,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      90,
-      Ability.ECHO,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.SOUND])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.LOUDRED
+  hp = 90
+  atk = 6
+  def = 1
+  speDef = 1
+  maxPP = 90
+  range = 2
+  skill = Ability.ECHO
+  additional = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 export class Loudred extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.SOUND],
-      Rarity.RARE,
-      Pkm.EXPLOUD,
-      150,
-      14,
-      2,
-      2,
-      2,
-      AttackSprite.PSYCHIC_RANGE,
-      2,
-      90,
-      Ability.ECHO,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.SOUND])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.EXPLOUD
+  hp = 150
+  atk = 14
+  def = 2
+  speDef = 2
+  maxPP = 90
+  range = 2
+  skill = Ability.ECHO
+  additional = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Exploud extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.SOUND],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      300,
-      24,
-      3,
-      3,
-      2,
-      AttackSprite.PSYCHIC_RANGE,
-      3,
-      90,
-      Ability.ECHO,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.SOUND])
+  rarity = Rarity.RARE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 24
+  def = 3
+  speDef = 3
+  maxPP = 90
+  range = 2
+  skill = Ability.ECHO
+  additional = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Swinub extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GROUND, Synergy.ICE, Synergy.FIELD],
-      Rarity.COMMON,
-      Pkm.PILOSWINE,
-      60,
-      4,
-      2,
-      2,
-      1,
-      AttackSprite.ICE_MELEE,
-      1,
-      100,
-      Ability.ICICLE_CRASH,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.ICE, Synergy.FIELD])
+  rarity = Rarity.COMMON
+  stars = 1
+  evolution = Pkm.PILOSWINE
+  hp = 60
+  atk = 4
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.ICICLE_CRASH
+  additional = false
+  attackSprite = AttackSprite.ICE_MELEE
 }
 
 export class Piloswine extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GROUND, Synergy.ICE, Synergy.FIELD],
-      Rarity.COMMON,
-      Pkm.MAMOSWINE,
-      110,
-      8,
-      4,
-      4,
-      1,
-      AttackSprite.ICE_MELEE,
-      2,
-      100,
-      Ability.ICICLE_CRASH,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.ICE, Synergy.FIELD])
+  rarity = Rarity.COMMON
+  stars = 2
+  evolution = Pkm.MAMOSWINE
+  hp = 110
+  atk = 8
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.ICICLE_CRASH
+  additional = false
+  attackSprite = AttackSprite.ICE_MELEE
 }
 
 export class Mamoswine extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GROUND, Synergy.ICE, Synergy.FIELD],
-      Rarity.COMMON,
-      Pkm.DEFAULT,
-      180,
-      14,
-      6,
-      6,
-      1,
-      AttackSprite.ICE_MELEE,
-      3,
-      100,
-      Ability.ICICLE_CRASH,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.ICE, Synergy.FIELD])
+  rarity = Rarity.COMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 180
+  atk = 14
+  def = 6
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.ICICLE_CRASH
+  additional = true
+  attackSprite = AttackSprite.ICE_MELEE
 }
 
 export class Snover extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.ICE],
-      Rarity.ULTRA,
-      Pkm.ABOMASNOW,
-      130,
-      12,
-      6,
-      6,
-      1,
-      AttackSprite.ICE_MELEE,
-      1,
-      100,
-      Ability.BLIZZARD,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.ICE])
+  rarity = Rarity.ULTRA
+  stars = 1
+  evolution = Pkm.ABOMASNOW
+  hp = 130
+  atk = 12
+  def = 6
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.BLIZZARD
+  additional = false
+  attackSprite = AttackSprite.ICE_MELEE
 }
 
 export class Abomasnow extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.ICE, Synergy.MONSTER],
-      Rarity.ULTRA,
-      Pkm.MEGA_ABOMASNOW,
-      260,
-      24,
-      8,
-      8,
-      1,
-      AttackSprite.ICE_MELEE,
-      2,
-      100,
-      Ability.BLIZZARD,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.ICE, Synergy.MONSTER])
+  rarity = Rarity.ULTRA
+  stars = 2
+  evolution = Pkm.MEGA_ABOMASNOW
+  hp = 260
+  atk = 24
+  def = 8
+  speDef = 8
+  maxPP = 100
+  range = 1
+  skill = Ability.BLIZZARD
+  additional = false
+  attackSprite = AttackSprite.ICE_MELEE
 }
 
 export class MegaAbomasnow extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.ICE, Synergy.MONSTER],
-      Rarity.ULTRA,
-      Pkm.DEFAULT,
-      400,
-      35,
-      10,
-      10,
-      1,
-      AttackSprite.ICE_MELEE,
-      3,
-      100,
-      Ability.BLIZZARD,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.ICE, Synergy.MONSTER])
+  rarity = Rarity.ULTRA
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 400
+  atk = 35
+  def = 10
+  speDef = 10
+  maxPP = 100
+  range = 1
+  skill = Ability.BLIZZARD
+  additional = true
+  attackSprite = AttackSprite.ICE_MELEE
 }
 
 export class Snorunt extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GHOST, Synergy.ICE],
-      Rarity.EPIC,
-      Pkm.GLALIE,
-      90,
-      8,
-      2,
-      2,
-      3,
-      AttackSprite.GHOST_RANGE,
-      1,
-      100,
-      Ability.ICY_WIND,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.ICE])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.GLALIE
+  hp = 90
+  atk = 8
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 3
+  skill = Ability.ICY_WIND
+  additional = false
+  attackSprite = AttackSprite.GHOST_RANGE
 }
 
 export class Glalie extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GHOST, Synergy.ICE],
-      Rarity.EPIC,
-      Pkm.FROSLASS,
-      170,
-      17,
-      2,
-      2,
-      3,
-      AttackSprite.GHOST_RANGE,
-      2,
-      100,
-      Ability.ICY_WIND,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.ICE])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.FROSLASS
+  hp = 170
+  atk = 17
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 3
+  skill = Ability.ICY_WIND
+  additional = false
+  attackSprite = AttackSprite.GHOST_RANGE
 }
 
 export class Froslass extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GHOST, Synergy.ICE],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      350,
-      28,
-      2,
-      2,
-      3,
-      AttackSprite.GHOST_RANGE,
-      3,
-      100,
-      Ability.ICY_WIND,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.ICE])
+  rarity = Rarity.EPIC
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 350
+  atk = 28
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 3
+  skill = Ability.ICY_WIND
+  additional = true
+  attackSprite = AttackSprite.GHOST_RANGE
 }
 
 export class Vanillite extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FAIRY, Synergy.ICE, Synergy.ARTIFICIAL],
-      Rarity.RARE,
-      Pkm.VANILLISH,
-      70,
-      5,
-      2,
-      2,
-      3,
-      AttackSprite.FAIRY_RANGE,
-      1,
-      100,
-      Ability.SLEEP,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.FAIRY,
+    Synergy.ICE,
+    Synergy.ARTIFICIAL
+  ])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.VANILLISH
+  hp = 70
+  atk = 5
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 3
+  skill = Ability.SLEEP
+  additional = false
+  attackSprite = AttackSprite.FAIRY_RANGE
 }
 
 export class Vanillish extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FAIRY, Synergy.ICE, Synergy.ARTIFICIAL],
-      Rarity.RARE,
-      Pkm.VANILLUXE,
-      130,
-      9,
-      2,
-      2,
-      3,
-      AttackSprite.FAIRY_RANGE,
-      2,
-      100,
-      Ability.SLEEP,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.FAIRY,
+    Synergy.ICE,
+    Synergy.ARTIFICIAL
+  ])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.VANILLUXE
+  hp = 130
+  atk = 9
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 3
+  skill = Ability.SLEEP
+  additional = false
+  attackSprite = AttackSprite.FAIRY_RANGE
 }
 
 export class Vanilluxe extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FAIRY, Synergy.ICE, Synergy.ARTIFICIAL],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      230,
-      21,
-      2,
-      2,
-      3,
-      AttackSprite.FAIRY_RANGE,
-      3,
-      100,
-      Ability.SLEEP,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.FAIRY,
+    Synergy.ICE,
+    Synergy.ARTIFICIAL
+  ])
+  rarity = Rarity.RARE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 230
+  atk = 21
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 3
+  skill = Ability.SLEEP
+  additional = true
+  attackSprite = AttackSprite.FAIRY_RANGE
 }
 
 export class Trapinch extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG, Synergy.GROUND],
-      Rarity.RARE,
-      Pkm.VIBRAVA,
-      80,
-      8,
-      4,
-      4,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      1,
-      100,
-      Ability.DRAGON_TAIL,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.GROUND])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.VIBRAVA
+  hp = 80
+  atk = 8
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.DRAGON_TAIL
+  additional = false
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Vibrava extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.BUG, Synergy.GROUND],
-      Rarity.RARE,
-      Pkm.FLYGON,
-      120,
-      13,
-      4,
-      4,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      2,
-      100,
-      Ability.DRAGON_TAIL,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.BUG, Synergy.GROUND])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.FLYGON
+  hp = 120
+  atk = 13
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.DRAGON_TAIL
+  additional = false
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Flygon extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.BUG, Synergy.GROUND],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      220,
-      26,
-      4,
-      4,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      3,
-      100,
-      Ability.DRAGON_TAIL,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.BUG, Synergy.GROUND])
+  rarity = Rarity.RARE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 220
+  atk = 26
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.DRAGON_TAIL
+  additional = true
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Pichu extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.FAIRY, Synergy.BABY],
-      Rarity.COMMON,
-      Pkm.PIKACHU,
-      60,
-      5,
-      1,
-      1,
-      1,
-      AttackSprite.ELECTRIC_MELEE,
-      1,
-      140,
-      Ability.VOLT_SWITCH,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.FAIRY,
+    Synergy.BABY
+  ])
+  rarity = Rarity.COMMON
+  stars = 1
+  evolution = Pkm.PIKACHU
+  hp = 60
+  atk = 5
+  def = 1
+  speDef = 1
+  maxPP = 140
+  range = 1
+  skill = Ability.VOLT_SWITCH
+  additional = false
+  attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
 export class Pikachu extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.FAIRY],
-      Rarity.COMMON,
-      Pkm.RAICHU,
-      120,
-      9,
-      3,
-      3,
-      1,
-      AttackSprite.ELECTRIC_MELEE,
-      2,
-      140,
-      Ability.VOLT_SWITCH,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FAIRY])
+  rarity = Rarity.COMMON
+  stars = 2
+  evolution = Pkm.RAICHU
+  hp = 120
+  atk = 9
+  def = 3
+  speDef = 3
+  maxPP = 140
+  range = 1
+  skill = Ability.VOLT_SWITCH
+  additional = false
+  attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
 export class Raichu extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.FAIRY],
-      Rarity.COMMON,
-      Pkm.ALOLAN_RAICHU,
-      220,
-      18,
-      5,
-      5,
-      1,
-      AttackSprite.ELECTRIC_MELEE,
-      3,
-      140,
-      Ability.VOLT_SWITCH,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.RAICHU
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FAIRY])
+  rarity = Rarity.COMMON
+  stars = 3
+  evolution = Pkm.ALOLAN_RAICHU
+  hp = 220
+  atk = 18
+  def = 5
+  speDef = 5
+  maxPP = 140
+  range = 1
+  skill = Ability.VOLT_SWITCH
+  passive = Passive.RAICHU
+  additional = false
+  final = false
+  attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
 export class AlolanRaichu extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.FAIRY, Synergy.PSYCHIC],
-      Rarity.COMMON,
-      Pkm.DEFAULT,
-      230,
-      20,
-      6,
-      6,
-      1,
-      AttackSprite.ELECTRIC_MELEE,
-      4,
-      100,
-      Ability.VOLT_SWITCH,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.SURGE_SURFER
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.FAIRY,
+    Synergy.PSYCHIC
+  ])
+  rarity = Rarity.COMMON
+  stars = 4
+  evolution = Pkm.DEFAULT
+  hp = 230
+  atk = 20
+  def = 6
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.VOLT_SWITCH
+  passive = Passive.SURGE_SURFER
+  additional = true
+  final = false
+  attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
 export class Bulbasaur extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.POISON, Synergy.FLORA],
-      Rarity.RARE,
-      Pkm.IVYSAUR,
-      80,
-      5,
-      2,
-      2,
-      2,
-      AttackSprite.GRASS_RANGE,
-      1,
-      65,
-      Ability.MAGICAL_LEAF,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.FLORA])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.IVYSAUR
+  hp = 80
+  atk = 5
+  def = 2
+  speDef = 2
+  maxPP = 65
+  range = 2
+  skill = Ability.MAGICAL_LEAF
+  additional = false
+  attackSprite = AttackSprite.GRASS_RANGE
 }
 
 export class Ivysaur extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.POISON, Synergy.FLORA],
-      Rarity.RARE,
-      Pkm.VENUSAUR,
-      130,
-      10,
-      4,
-      4,
-      2,
-      AttackSprite.GRASS_RANGE,
-      2,
-      65,
-      Ability.MAGICAL_LEAF,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.FLORA])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.VENUSAUR
+  hp = 130
+  atk = 10
+  def = 4
+  speDef = 4
+  maxPP = 65
+  range = 2
+  skill = Ability.MAGICAL_LEAF
+  additional = false
+  attackSprite = AttackSprite.GRASS_RANGE
 }
 
 export class Venusaur extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.POISON, Synergy.FLORA],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      240,
-      18,
-      6,
-      6,
-      2,
-      AttackSprite.GRASS_RANGE,
-      3,
-      65,
-      Ability.MAGICAL_LEAF,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.FLORA])
+  rarity = Rarity.RARE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 240
+  atk = 18
+  def = 6
+  speDef = 6
+  maxPP = 65
+  range = 2
+  skill = Ability.MAGICAL_LEAF
+  additional = true
+  attackSprite = AttackSprite.GRASS_RANGE
 }
 
 export class Igglybuff extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BABY, Synergy.SOUND, Synergy.NORMAL],
-      Rarity.UNCOMMON,
-      Pkm.JIGGLYPUFF,
-      65,
-      5,
-      1,
-      1,
-      2,
-      AttackSprite.FAIRY_RANGE,
-      1,
-      90,
-      Ability.SLEEP,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BABY, Synergy.SOUND, Synergy.NORMAL])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.JIGGLYPUFF
+  hp = 65
+  atk = 5
+  def = 1
+  speDef = 1
+  maxPP = 90
+  range = 2
+  skill = Ability.SLEEP
+  additional = false
+  attackSprite = AttackSprite.FAIRY_RANGE
 }
 
 export class Jigglypuff extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FAIRY, Synergy.SOUND, Synergy.NORMAL],
-      Rarity.UNCOMMON,
-      Pkm.WIGGLYTUFF,
-      120,
-      9,
-      1,
-      1,
-      2,
-      AttackSprite.FAIRY_RANGE,
-      2,
-      90,
-      Ability.SLEEP,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.SOUND, Synergy.NORMAL])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.WIGGLYTUFF
+  hp = 120
+  atk = 9
+  def = 1
+  speDef = 1
+  maxPP = 90
+  range = 2
+  skill = Ability.SLEEP
+  additional = false
+  attackSprite = AttackSprite.FAIRY_RANGE
 }
 
 export class Wigglytuff extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FAIRY, Synergy.SOUND, Synergy.NORMAL],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      210,
-      18,
-      2,
-      2,
-      2,
-      AttackSprite.FAIRY_RANGE,
-      3,
-      90,
-      Ability.SLEEP,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.SOUND, Synergy.NORMAL])
+  rarity = Rarity.UNCOMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 210
+  atk = 18
+  def = 2
+  speDef = 2
+  maxPP = 90
+  range = 2
+  skill = Ability.SLEEP
+  additional = true
+  attackSprite = AttackSprite.FAIRY_RANGE
 }
 
 export class Duskull extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DARK, Synergy.GHOST],
-      Rarity.UNCOMMON,
-      Pkm.DUSCLOPS,
-      70,
-      6,
-      1,
-      1,
-      2,
-      AttackSprite.GHOST_RANGE,
-      1,
-      100,
-      Ability.NIGHT_SLASH,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.GHOST])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.DUSCLOPS
+  hp = 70
+  atk = 6
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 2
+  skill = Ability.NIGHT_SLASH
+  additional = false
+  attackSprite = AttackSprite.GHOST_RANGE
 }
 
 export class Dusclops extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DARK, Synergy.GHOST],
-      Rarity.UNCOMMON,
-      Pkm.DUSKNOIR,
-      150,
-      11,
-      1,
-      1,
-      2,
-      AttackSprite.GHOST_RANGE,
-      2,
-      100,
-      Ability.NIGHT_SLASH,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.GHOST])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DUSKNOIR
+  hp = 150
+  atk = 11
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 2
+  skill = Ability.NIGHT_SLASH
+  additional = false
+  attackSprite = AttackSprite.GHOST_RANGE
 }
 
 export class Dusknoir extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DARK, Synergy.GHOST],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      240,
-      24,
-      1,
-      1,
-      2,
-      AttackSprite.GHOST_RANGE,
-      3,
-      100,
-      Ability.NIGHT_SLASH,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.GHOST])
+  rarity = Rarity.UNCOMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 240
+  atk = 24
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 2
+  skill = Ability.NIGHT_SLASH
+  additional = true
+  attackSprite = AttackSprite.GHOST_RANGE
 }
 
 export class Magnemite extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.STEEL],
-      Rarity.UNCOMMON,
-      Pkm.MAGNETON,
-      80,
-      5,
-      1,
-      1,
-      2,
-      AttackSprite.ELECTRIC_RANGE,
-      1,
-      100,
-      Ability.TORMENT,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.STEEL])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.MAGNETON
+  hp = 80
+  atk = 5
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 2
+  skill = Ability.TORMENT
+  additional = false
+  attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
 export class Magneton extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.STEEL],
-      Rarity.UNCOMMON,
-      Pkm.MAGNEZONE,
-      150,
-      9,
-      1,
-      1,
-      2,
-      AttackSprite.ELECTRIC_RANGE,
-      2,
-      100,
-      Ability.TORMENT,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.STEEL])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.MAGNEZONE
+  hp = 150
+  atk = 9
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 2
+  skill = Ability.TORMENT
+  additional = false
+  attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
 export class Magnezone extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.STEEL],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      250,
-      20,
-      2,
-      2,
-      2,
-      AttackSprite.ELECTRIC_RANGE,
-      3,
-      100,
-      Ability.TORMENT,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.STEEL])
+  rarity = Rarity.UNCOMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 250
+  atk = 20
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 2
+  skill = Ability.TORMENT
+  additional = true
+  attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
 export class Horsea extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.WATER],
-      Rarity.UNCOMMON,
-      Pkm.SEADRA,
-      70,
-      6,
-      1,
-      1,
-      2,
-      AttackSprite.WATER_RANGE,
-      1,
-      100,
-      Ability.WHIRLPOOL,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.WATER])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.SEADRA
+  hp = 70
+  atk = 6
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 2
+  skill = Ability.WHIRLPOOL
+  additional = false
+  attackSprite = AttackSprite.WATER_RANGE
 }
 
 export class Seadra extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.WATER],
-      Rarity.UNCOMMON,
-      Pkm.KINGDRA,
-      140,
-      12,
-      1,
-      1,
-      2,
-      AttackSprite.WATER_RANGE,
-      2,
-      100,
-      Ability.WHIRLPOOL,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.WATER])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.KINGDRA
+  hp = 140
+  atk = 12
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 2
+  skill = Ability.WHIRLPOOL
+  additional = false
+  attackSprite = AttackSprite.WATER_RANGE
 }
 
 export class Kingdra extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.WATER],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      250,
-      22,
-      2,
-      2,
-      2,
-      AttackSprite.WATER_RANGE,
-      3,
-      100,
-      Ability.WHIRLPOOL,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.WATER])
+  rarity = Rarity.UNCOMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 250
+  atk = 22
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 2
+  skill = Ability.WHIRLPOOL
+  additional = true
+  attackSprite = AttackSprite.WATER_RANGE
 }
 
 export class Flabebe extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.SOUND, Synergy.FAIRY, Synergy.FLORA],
-      Rarity.UNCOMMON,
-      Pkm.FLOETTE,
-      60,
-      5,
-      1,
-      1,
-      3,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      90,
-      Ability.DISARMING_VOICE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.SOUND, Synergy.FAIRY, Synergy.FLORA])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.FLOETTE
+  hp = 60
+  atk = 5
+  def = 1
+  speDef = 1
+  maxPP = 90
+  range = 3
+  skill = Ability.DISARMING_VOICE
+  additional = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Floette extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.SOUND, Synergy.FAIRY, Synergy.FLORA],
-      Rarity.UNCOMMON,
-      Pkm.FLORGES,
-      120,
-      9,
-      1,
-      1,
-      3,
-      AttackSprite.PSYCHIC_RANGE,
-      2,
-      90,
-      Ability.DISARMING_VOICE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.SOUND, Synergy.FAIRY, Synergy.FLORA])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.FLORGES
+  hp = 120
+  atk = 9
+  def = 1
+  speDef = 1
+  maxPP = 90
+  range = 3
+  skill = Ability.DISARMING_VOICE
+  additional = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 export class Florges extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.SOUND, Synergy.FAIRY, Synergy.FLORA],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      210,
-      20,
-      2,
-      2,
-      3,
-      AttackSprite.PSYCHIC_RANGE,
-      3,
-      90,
-      Ability.DISARMING_VOICE,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.SOUND, Synergy.FAIRY, Synergy.FLORA])
+  rarity = Rarity.UNCOMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 210
+  atk = 20
+  def = 2
+  speDef = 2
+  maxPP = 90
+  range = 3
+  skill = Ability.DISARMING_VOICE
+  additional = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Chikorita extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.FLORA],
-      Rarity.UNCOMMON,
-      Pkm.BAYLEEF,
-      70,
-      6,
-      1,
-      1,
-      2,
-      AttackSprite.GRASS_RANGE,
-      1,
-      90,
-      Ability.STUN_SPORE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.BAYLEEF
+  hp = 70
+  atk = 6
+  def = 1
+  speDef = 1
+  maxPP = 90
+  range = 2
+  skill = Ability.STUN_SPORE
+  additional = false
+  attackSprite = AttackSprite.GRASS_RANGE
 }
 
 export class Bayleef extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.FLORA],
-      Rarity.UNCOMMON,
-      Pkm.MEGANIUM,
-      140,
-      12,
-      1,
-      1,
-      2,
-      AttackSprite.GRASS_RANGE,
-      2,
-      90,
-      Ability.STUN_SPORE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.MEGANIUM
+  hp = 140
+  atk = 12
+  def = 1
+  speDef = 1
+  maxPP = 90
+  range = 2
+  skill = Ability.STUN_SPORE
+  additional = false
+  attackSprite = AttackSprite.GRASS_RANGE
 }
 
 export class Meganium extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.FLORA],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      250,
-      27,
-      1,
-      1,
-      2,
-      AttackSprite.GRASS_RANGE,
-      3,
-      90,
-      Ability.STUN_SPORE,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA])
+  rarity = Rarity.UNCOMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 250
+  atk = 27
+  def = 1
+  speDef = 1
+  maxPP = 90
+  range = 2
+  skill = Ability.STUN_SPORE
+  additional = true
+  attackSprite = AttackSprite.GRASS_RANGE
 }
 
 export class Sandile extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GROUND, Synergy.DARK, Synergy.FIELD],
-      Rarity.UNCOMMON,
-      Pkm.KROKOROK,
-      70,
-      5,
-      3,
-      2,
-      1,
-      AttackSprite.ROCK_MELEE,
-      1,
-      100,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.DARK, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.KROKOROK
+  hp = 70
+  atk = 5
+  def = 3
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.DEFAULT
+  additional = false
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Krookorok extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GROUND, Synergy.DARK, Synergy.FIELD],
-      Rarity.UNCOMMON,
-      Pkm.KROOKODILE,
-      120,
-      9,
-      3,
-      2,
-      1,
-      AttackSprite.ROCK_MELEE,
-      2,
-      100,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.DARK, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.KROOKODILE
+  hp = 120
+  atk = 9
+  def = 3
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.DEFAULT
+  additional = false
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Krookodile extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GROUND, Synergy.DARK, Synergy.FIELD],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      210,
-      20,
-      3,
-      3,
-      1,
-      AttackSprite.ROCK_MELEE,
-      3,
-      100,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.DARK, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 210
+  atk = 20
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.DEFAULT
+  additional = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Venipede extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG, Synergy.POISON],
-      Rarity.UNCOMMON,
-      Pkm.WHIRLIPEDE,
-      70,
-      5,
-      3,
-      2,
-      1,
-      AttackSprite.GRASS_MELEE,
-      1,
-      100,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.WHIRLIPEDE
+  hp = 70
+  atk = 5
+  def = 3
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.DEFAULT
+  additional = false
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Whirlipede extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG, Synergy.POISON],
-      Rarity.UNCOMMON,
-      Pkm.SCOLIPEDE,
-      120,
-      9,
-      3,
-      2,
-      1,
-      AttackSprite.GRASS_MELEE,
-      2,
-      100,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.SCOLIPEDE
+  hp = 120
+  atk = 9
+  def = 3
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.DEFAULT
+  additional = false
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Scolipede extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG, Synergy.POISON],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      210,
-      20,
-      3,
-      3,
-      1,
-      AttackSprite.GRASS_MELEE,
-      3,
-      100,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON])
+  rarity = Rarity.UNCOMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 210
+  atk = 20
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.DEFAULT
+  additional = true
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Spheal extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.AQUATIC, Synergy.ICE],
-      Rarity.UNCOMMON,
-      Pkm.SEALEO,
-      70,
-      6,
-      3,
-      2,
-      1,
-      AttackSprite.ICE_MELEE,
-      1,
-      100,
-      Ability.ICICLE_CRASH,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.AQUATIC, Synergy.ICE])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.SEALEO
+  hp = 70
+  atk = 6
+  def = 3
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.ICICLE_CRASH
+  additional = false
+  attackSprite = AttackSprite.ICE_MELEE
 }
 
 export class Sealeo extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.AQUATIC, Synergy.ICE],
-      Rarity.UNCOMMON,
-      Pkm.WALREIN,
-      140,
-      12,
-      3,
-      2,
-      1,
-      AttackSprite.ICE_MELEE,
-      2,
-      100,
-      Ability.ICICLE_CRASH,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.AQUATIC, Synergy.ICE])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.WALREIN
+  hp = 140
+  atk = 12
+  def = 3
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.ICICLE_CRASH
+  additional = false
+  attackSprite = AttackSprite.ICE_MELEE
 }
 
 export class Walrein extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.AQUATIC, Synergy.ICE],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      260,
-      24,
-      3,
-      3,
-      1,
-      AttackSprite.ICE_MELEE,
-      3,
-      100,
-      Ability.ICICLE_CRASH,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.AQUATIC, Synergy.ICE])
+  rarity = Rarity.UNCOMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 260
+  atk = 24
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.ICICLE_CRASH
+  additional = true
+  attackSprite = AttackSprite.ICE_MELEE
 }
 
 export class NidoranF extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.POISON, Synergy.FIELD, Synergy.GROUND],
-      Rarity.UNCOMMON,
-      Pkm.NIDORINA,
-      70,
-      5,
-      2,
-      2,
-      1,
-      AttackSprite.POISON_MELEE,
-      1,
-      90,
-      Ability.VENOSHOCK,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.POISON,
+    Synergy.FIELD,
+    Synergy.GROUND
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.NIDORINA
+  hp = 70
+  atk = 5
+  def = 2
+  speDef = 2
+  maxPP = 90
+  range = 1
+  skill = Ability.VENOSHOCK
+  additional = false
+  attackSprite = AttackSprite.POISON_MELEE
 }
 
 export class Nidorina extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.POISON, Synergy.FIELD, Synergy.GROUND],
-      Rarity.UNCOMMON,
-      Pkm.NIDOQUEEN,
-      130,
-      10,
-      3,
-      3,
-      1,
-      AttackSprite.POISON_MELEE,
-      2,
-      90,
-      Ability.VENOSHOCK,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.POISON,
+    Synergy.FIELD,
+    Synergy.GROUND
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.NIDOQUEEN
+  hp = 130
+  atk = 10
+  def = 3
+  speDef = 3
+  maxPP = 90
+  range = 1
+  skill = Ability.VENOSHOCK
+  additional = false
+  attackSprite = AttackSprite.POISON_MELEE
 }
 
 export class Nidoqueen extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.POISON, Synergy.FIELD, Synergy.GROUND],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      230,
-      21,
-      4,
-      4,
-      1,
-      AttackSprite.POISON_MELEE,
-      3,
-      90,
-      Ability.VENOSHOCK,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.POISON,
+    Synergy.FIELD,
+    Synergy.GROUND
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 230
+  atk = 21
+  def = 4
+  speDef = 4
+  maxPP = 90
+  range = 1
+  skill = Ability.VENOSHOCK
+  additional = true
+  attackSprite = AttackSprite.POISON_MELEE
 }
 
 export class NidoranM extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.POISON, Synergy.FIELD, Synergy.GROUND],
-      Rarity.UNCOMMON,
-      Pkm.NIDORINO,
-      70,
-      5,
-      2,
-      2,
-      1,
-      AttackSprite.POISON_MELEE,
-      1,
-      90,
-      Ability.POISON,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.POISON,
+    Synergy.FIELD,
+    Synergy.GROUND
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.NIDORINO
+  hp = 70
+  atk = 5
+  def = 2
+  speDef = 2
+  maxPP = 90
+  range = 1
+  skill = Ability.POISON
+  additional = false
+  attackSprite = AttackSprite.POISON_MELEE
 }
 
 export class Nidorino extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.POISON, Synergy.FIELD, Synergy.GROUND],
-      Rarity.UNCOMMON,
-      Pkm.NIDOKING,
-      140,
-      10,
-      2,
-      2,
-      1,
-      AttackSprite.POISON_MELEE,
-      2,
-      90,
-      Ability.POISON,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.POISON,
+    Synergy.FIELD,
+    Synergy.GROUND
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.NIDOKING
+  hp = 140
+  atk = 10
+  def = 2
+  speDef = 2
+  maxPP = 90
+  range = 1
+  skill = Ability.POISON
+  additional = false
+  attackSprite = AttackSprite.POISON_MELEE
 }
 
 export class Nidoking extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.POISON, Synergy.FIELD, Synergy.GROUND],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      250,
-      21,
-      3,
-      3,
-      1,
-      AttackSprite.POISON_MELEE,
-      3,
-      90,
-      Ability.POISON,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.POISON,
+    Synergy.FIELD,
+    Synergy.GROUND
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 250
+  atk = 21
+  def = 3
+  speDef = 3
+  maxPP = 90
+  range = 1
+  skill = Ability.POISON
+  additional = true
+  attackSprite = AttackSprite.POISON_MELEE
 }
 
 export class Machop extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIGHTING, Synergy.HUMAN],
-      Rarity.UNCOMMON,
-      Pkm.MACHOKE,
-      70,
-      6,
-      3,
-      3,
-      1,
-      AttackSprite.FIGHTING_MELEE,
-      1,
-      100,
-      Ability.GUILLOTINE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.MACHOKE
+  hp = 70
+  atk = 6
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.GUILLOTINE
+  additional = false
+  attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
 export class Machoke extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIGHTING, Synergy.HUMAN],
-      Rarity.UNCOMMON,
-      Pkm.MACHAMP,
-      130,
-      12,
-      4,
-      4,
-      1,
-      AttackSprite.FIGHTING_MELEE,
-      2,
-      100,
-      Ability.GUILLOTINE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.MACHAMP
+  hp = 130
+  atk = 12
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.GUILLOTINE
+  additional = false
+  attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
 export class Machamp extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIGHTING, Synergy.HUMAN],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      220,
-      22,
-      5,
-      5,
-      1,
-      AttackSprite.FIGHTING_MELEE,
-      3,
-      100,
-      Ability.GUILLOTINE,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
+  rarity = Rarity.UNCOMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 220
+  atk = 22
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.GUILLOTINE
+  additional = true
+  attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
 export class Piplup extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.FLYING, Synergy.STEEL],
-      Rarity.UNCOMMON,
-      Pkm.PRINPLUP,
-      60,
-      5,
-      3,
-      3,
-      1,
-      AttackSprite.WATER_MELEE,
-      1,
-      100,
-      Ability.IRON_TAIL,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FLYING, Synergy.STEEL])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.PRINPLUP
+  hp = 60
+  atk = 5
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.IRON_TAIL
+  additional = false
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Prinplup extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.FLYING, Synergy.STEEL],
-      Rarity.UNCOMMON,
-      Pkm.EMPOLEON,
-      130,
-      9,
-      3,
-      3,
-      1,
-      AttackSprite.WATER_MELEE,
-      2,
-      100,
-      Ability.IRON_TAIL,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FLYING, Synergy.STEEL])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.EMPOLEON
+  hp = 130
+  atk = 9
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.IRON_TAIL
+  additional = false
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Empoleon extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.FLYING, Synergy.STEEL],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      240,
-      20,
-      3,
-      3,
-      1,
-      AttackSprite.WATER_MELEE,
-      3,
-      100,
-      Ability.IRON_TAIL,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FLYING, Synergy.STEEL])
+  rarity = Rarity.UNCOMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 240
+  atk = 20
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.IRON_TAIL
+  additional = true
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Chimchar extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.FIGHTING, Synergy.HUMAN],
-      Rarity.COMMON,
-      Pkm.MONFERNO,
-      60,
-      5,
-      2,
-      2,
-      1,
-      AttackSprite.FIRE_MELEE,
-      1,
-      100,
-      Ability.TORMENT,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.FIRE,
+    Synergy.FIGHTING,
+    Synergy.HUMAN
+  ])
+  rarity = Rarity.COMMON
+  stars = 1
+  evolution = Pkm.MONFERNO
+  hp = 60
+  atk = 5
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.TORMENT
+  additional = false
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export class Monferno extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.FIGHTING, Synergy.HUMAN],
-      Rarity.COMMON,
-      Pkm.INFERNAPE,
-      100,
-      11,
-      2,
-      2,
-      1,
-      AttackSprite.FIRE_MELEE,
-      2,
-      100,
-      Ability.TORMENT,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.FIRE,
+    Synergy.FIGHTING,
+    Synergy.HUMAN
+  ])
+  rarity = Rarity.COMMON
+  stars = 2
+  evolution = Pkm.INFERNAPE
+  hp = 100
+  atk = 11
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.TORMENT
+  additional = false
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export class Infernape extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.FIGHTING, Synergy.HUMAN],
-      Rarity.COMMON,
-      Pkm.DEFAULT,
-      180,
-      22,
-      2,
-      2,
-      1,
-      AttackSprite.FIRE_MELEE,
-      3,
-      100,
-      Ability.TORMENT,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.FIRE,
+    Synergy.FIGHTING,
+    Synergy.HUMAN
+  ])
+  rarity = Rarity.COMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 180
+  atk = 22
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.TORMENT
+  additional = true
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export class Mudkip extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.GROUND],
-      Rarity.COMMON,
-      Pkm.MARSHTOMP,
-      65,
-      4,
-      2,
-      2,
-      1,
-      AttackSprite.WATER_MELEE,
-      1,
-      50,
-      Ability.MUD_BUBBLE,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.WATER_SPRING
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.GROUND])
+  rarity = Rarity.COMMON
+  stars = 1
+  evolution = Pkm.MARSHTOMP
+  hp = 65
+  atk = 4
+  def = 2
+  speDef = 2
+  maxPP = 50
+  range = 1
+  skill = Ability.MUD_BUBBLE
+  passive = Passive.WATER_SPRING
+  additional = false
+  final = false
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Marshtomp extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.GROUND],
-      Rarity.COMMON,
-      Pkm.SWAMPERT,
-      130,
-      8,
-      3,
-      3,
-      1,
-      AttackSprite.WATER_MELEE,
-      2,
-      50,
-      Ability.MUD_BUBBLE,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.WATER_SPRING
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.GROUND])
+  rarity = Rarity.COMMON
+  stars = 2
+  evolution = Pkm.SWAMPERT
+  hp = 130
+  atk = 8
+  def = 3
+  speDef = 3
+  maxPP = 50
+  range = 1
+  skill = Ability.MUD_BUBBLE
+  passive = Passive.WATER_SPRING
+  additional = false
+  final = false
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Swampert extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.GROUND],
-      Rarity.COMMON,
-      Pkm.DEFAULT,
-      200,
-      18,
-      5,
-      5,
-      1,
-      AttackSprite.WATER_MELEE,
-      3,
-      50,
-      Ability.MUD_BUBBLE,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.WATER_SPRING
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.GROUND])
+  rarity = Rarity.COMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 18
+  def = 5
+  speDef = 5
+  maxPP = 50
+  range = 1
+  skill = Ability.MUD_BUBBLE
+  passive = Passive.WATER_SPRING
+  additional = true
+  final = false
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Torchic extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.FIGHTING, Synergy.FLYING],
-      Rarity.UNCOMMON,
-      Pkm.COMBUSKEN,
-      60,
-      5,
-      3,
-      3,
-      1,
-      AttackSprite.FIRE_MELEE,
-      1,
-      100,
-      Ability.BLAZE_KICK,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.FIRE,
+    Synergy.FIGHTING,
+    Synergy.FLYING
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.COMBUSKEN
+  hp = 60
+  atk = 5
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.BLAZE_KICK
+  additional = false
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export class Combusken extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.FIGHTING, Synergy.FLYING],
-      Rarity.UNCOMMON,
-      Pkm.BLAZIKEN,
-      120,
-      9,
-      3,
-      3,
-      1,
-      AttackSprite.FIRE_MELEE,
-      2,
-      100,
-      Ability.BLAZE_KICK,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.FIRE,
+    Synergy.FIGHTING,
+    Synergy.FLYING
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.BLAZIKEN
+  hp = 120
+  atk = 9
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.BLAZE_KICK
+  additional = false
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export class Blaziken extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.FIGHTING, Synergy.FLYING],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      210,
-      20,
-      3,
-      3,
-      1,
-      AttackSprite.FIRE_MELEE,
-      3,
-      100,
-      Ability.BLAZE_KICK,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.FIRE,
+    Synergy.FIGHTING,
+    Synergy.FLYING
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 210
+  atk = 20
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.BLAZE_KICK
+  additional = true
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export class Treecko extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.MONSTER],
-      Rarity.UNCOMMON,
-      Pkm.GROVYLE,
-      70,
-      5,
-      3,
-      3,
-      1,
-      AttackSprite.GRASS_MELEE,
-      1,
-      100,
-      Ability.THIEF,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.MONSTER])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.GROVYLE
+  hp = 70
+  atk = 5
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.THIEF
+  additional = false
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Grovyle extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.MONSTER],
-      Rarity.UNCOMMON,
-      Pkm.SCEPTILE,
-      120,
-      14,
-      3,
-      3,
-      1,
-      AttackSprite.GRASS_MELEE,
-      2,
-      100,
-      Ability.THIEF,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.MONSTER])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.SCEPTILE
+  hp = 120
+  atk = 14
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.THIEF
+  additional = false
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Sceptile extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.MONSTER],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      210,
-      27,
-      5,
-      5,
-      1,
-      AttackSprite.GRASS_MELEE,
-      3,
-      100,
-      Ability.THIEF,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.MONSTER])
+  rarity = Rarity.UNCOMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 210
+  atk = 27
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.THIEF
+  additional = true
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Cyndaquil extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.FIELD],
-      Rarity.UNCOMMON,
-      Pkm.QUILAVA,
-      70,
-      7,
-      1,
-      1,
-      2,
-      AttackSprite.FIRE_RANGE,
-      1,
-      80,
-      Ability.WHEEL_OF_FIRE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.QUILAVA
+  hp = 70
+  atk = 7
+  def = 1
+  speDef = 1
+  maxPP = 80
+  range = 2
+  skill = Ability.WHEEL_OF_FIRE
+  additional = false
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class Quilava extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.FIELD],
-      Rarity.UNCOMMON,
-      Pkm.TYPHLOSION,
-      130,
-      13,
-      2,
-      2,
-      2,
-      AttackSprite.FIRE_RANGE,
-      2,
-      80,
-      Ability.WHEEL_OF_FIRE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.TYPHLOSION
+  hp = 130
+  atk = 13
+  def = 2
+  speDef = 2
+  maxPP = 80
+  range = 2
+  skill = Ability.WHEEL_OF_FIRE
+  additional = false
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class Typhlosion extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.FIELD],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      250,
-      25,
-      3,
-      3,
-      2,
-      AttackSprite.FIRE_RANGE,
-      3,
-      80,
-      Ability.WHEEL_OF_FIRE,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 250
+  atk = 25
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 2
+  skill = Ability.WHEEL_OF_FIRE
+  additional = true
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class Slowpoke extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.AQUATIC, Synergy.PSYCHIC],
-      Rarity.UNCOMMON,
-      Pkm.SLOWBRO,
-      75,
-      6,
-      2,
-      2,
-      1,
-      AttackSprite.WATER_MELEE,
-      1,
-      100,
-      Ability.SOAK,
-      shiny,
-      emotion,
-      false,
-      true,
-      Passive.SLOWBRO
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.AQUATIC, Synergy.PSYCHIC])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.SLOWBRO
+  hp = 75
+  atk = 6
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.SOAK
+  passive = Passive.SLOWBRO
+  additional = false
+  final = true
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Slowbro extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.AQUATIC, Synergy.PSYCHIC],
-      Rarity.UNCOMMON,
-      Pkm.SLOWKING,
-      130,
-      13,
-      3,
-      3,
-      1,
-      AttackSprite.WATER_MELEE,
-      2,
-      100,
-      Ability.SOAK,
-      shiny,
-      emotion,
-      true,
-      true,
-      Passive.SLOWBRO
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.AQUATIC, Synergy.PSYCHIC])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.SLOWKING
+  hp = 130
+  atk = 13
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.SOAK
+  passive = Passive.SLOWBRO
+  additional = true
+  final = true
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Slowking extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.AQUATIC, Synergy.PSYCHIC],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      260,
-      24,
-      4,
-      4,
-      1,
-      AttackSprite.WATER_MELEE,
-      3,
-      100,
-      Ability.SOAK,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.AQUATIC, Synergy.PSYCHIC])
+  rarity = Rarity.UNCOMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 260
+  atk = 24
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.SOAK
+  additional = true
+  final = true
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Squirtle extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.FIELD],
-      Rarity.COMMON,
-      Pkm.WARTORTLE,
-      60,
-      5,
-      1,
-      1,
-      2,
-      AttackSprite.WATER_RANGE,
-      1,
-      100,
-      Ability.HYDRO_PUMP,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FIELD])
+  rarity = Rarity.COMMON
+  stars = 1
+  evolution = Pkm.WARTORTLE
+  hp = 60
+  atk = 5
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 2
+  skill = Ability.HYDRO_PUMP
+  additional = false
+  attackSprite = AttackSprite.WATER_RANGE
 }
 
 export class Wartortle extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.FIELD],
-      Rarity.COMMON,
-      Pkm.BLASTOISE,
-      120,
-      9,
-      1,
-      1,
-      2,
-      AttackSprite.WATER_RANGE,
-      2,
-      100,
-      Ability.HYDRO_PUMP,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FIELD])
+  rarity = Rarity.COMMON
+  stars = 2
+  evolution = Pkm.BLASTOISE
+  hp = 120
+  atk = 9
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 2
+  skill = Ability.HYDRO_PUMP
+  additional = false
+  attackSprite = AttackSprite.WATER_RANGE
 }
 
 export class Blastoise extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.FIELD],
-      Rarity.COMMON,
-      Pkm.DEFAULT,
-      210,
-      20,
-      1,
-      1,
-      2,
-      AttackSprite.WATER_RANGE,
-      3,
-      100,
-      Ability.HYDRO_PUMP,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FIELD])
+  rarity = Rarity.COMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 210
+  atk = 20
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 2
+  skill = Ability.HYDRO_PUMP
+  additional = true
+  attackSprite = AttackSprite.WATER_RANGE
 }
 
 export class Bellsprout extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.POISON, Synergy.FLORA],
-      Rarity.UNCOMMON,
-      Pkm.WEEPINBELL,
-      70,
-      5,
-      2,
-      2,
-      1,
-      AttackSprite.GRASS_MELEE,
-      1,
-      100,
-      Ability.ROOT,
-      shiny,
-      emotion,
-      false,
-      true,
-      Passive.BELLSPROUT
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.FLORA])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.WEEPINBELL
+  hp = 70
+  atk = 5
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.ROOT
+  passive = Passive.BELLSPROUT
+  additional = false
+  final = true
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Weepinbell extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.POISON, Synergy.FLORA],
-      Rarity.UNCOMMON,
-      Pkm.VICTREEBEL,
-      140,
-      9,
-      2,
-      2,
-      1,
-      AttackSprite.GRASS_MELEE,
-      2,
-      100,
-      Ability.ROOT,
-      shiny,
-      emotion,
-      false,
-      true,
-      Passive.BELLSPROUT
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.FLORA])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.VICTREEBEL
+  hp = 140
+  atk = 9
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.ROOT
+  passive = Passive.BELLSPROUT
+  additional = false
+  final = true
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Victreebel extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.POISON, Synergy.FLORA],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      240,
-      20,
-      4,
-      2,
-      1,
-      AttackSprite.GRASS_MELEE,
-      3,
-      100,
-      Ability.ROOT,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.FLORA])
+  rarity = Rarity.UNCOMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 240
+  atk = 20
+  def = 4
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.ROOT
+  additional = true
+  final = true
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Pikipek extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.FLYING, Synergy.SOUND],
-      Rarity.UNCOMMON,
-      Pkm.TRUMBEAK,
-      70,
-      5,
-      2,
-      2,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      1,
-      70,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.FLYING,
+    Synergy.SOUND
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.TRUMBEAK
+  hp = 70
+  atk = 5
+  def = 2
+  speDef = 2
+  maxPP = 70
+  range = 1
+  skill = Ability.DEFAULT
+  additional = false
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Trumbeak extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.FLYING, Synergy.SOUND],
-      Rarity.UNCOMMON,
-      Pkm.TOUCANNON,
-      120,
-      9,
-      3,
-      3,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      2,
-      70,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.FLYING,
+    Synergy.SOUND
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.TOUCANNON
+  hp = 120
+  atk = 9
+  def = 3
+  speDef = 3
+  maxPP = 70
+  range = 1
+  skill = Ability.DEFAULT
+  additional = false
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Toucannon extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.FLYING, Synergy.SOUND],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      210,
-      20,
-      4,
-      4,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      3,
-      70,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.FLYING,
+    Synergy.SOUND
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 210
+  atk = 20
+  def = 4
+  speDef = 4
+  maxPP = 70
+  range = 1
+  skill = Ability.DEFAULT
+  additional = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Geodude extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GROUND, Synergy.ROCK],
-      Rarity.COMMON,
-      Pkm.GRAVELER,
-      70,
-      4,
-      2,
-      2,
-      1,
-      AttackSprite.ROCK_MELEE,
-      1,
-      100,
-      Ability.ROCK_SLIDE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.ROCK])
+  rarity = Rarity.COMMON
+  stars = 1
+  evolution = Pkm.GRAVELER
+  hp = 70
+  atk = 4
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.ROCK_SLIDE
+  additional = false
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Graveler extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GROUND, Synergy.ROCK],
-      Rarity.COMMON,
-      Pkm.GOLEM,
-      120,
-      9,
-      4,
-      4,
-      1,
-      AttackSprite.ROCK_MELEE,
-      2,
-      100,
-      Ability.ROCK_SLIDE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.ROCK])
+  rarity = Rarity.COMMON
+  stars = 2
+  evolution = Pkm.GOLEM
+  hp = 120
+  atk = 9
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.ROCK_SLIDE
+  additional = false
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Golem extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GROUND, Synergy.ROCK],
-      Rarity.COMMON,
-      Pkm.DEFAULT,
-      200,
-      16,
-      6,
-      6,
-      1,
-      AttackSprite.ROCK_MELEE,
-      3,
-      100,
-      Ability.ROCK_SLIDE,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.ROCK])
+  rarity = Rarity.COMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 16
+  def = 6
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.ROCK_SLIDE
+  additional = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Totodile extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.MONSTER, Synergy.AQUATIC],
-      Rarity.RARE,
-      Pkm.CROCONAW,
-      75,
-      7,
-      2,
-      2,
-      1,
-      AttackSprite.WATER_MELEE,
-      1,
-      90,
-      Ability.WATERFALL,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.WATER,
+    Synergy.MONSTER,
+    Synergy.AQUATIC
+  ])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.CROCONAW
+  hp = 75
+  atk = 7
+  def = 2
+  speDef = 2
+  maxPP = 90
+  range = 1
+  skill = Ability.WATERFALL
+  additional = false
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Croconaw extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.MONSTER, Synergy.AQUATIC],
-      Rarity.RARE,
-      Pkm.FERALIGATR,
-      130,
-      15,
-      3,
-      3,
-      1,
-      AttackSprite.WATER_MELEE,
-      2,
-      90,
-      Ability.WATERFALL,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.WATER,
+    Synergy.MONSTER,
+    Synergy.AQUATIC
+  ])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.FERALIGATR
+  hp = 130
+  atk = 15
+  def = 3
+  speDef = 3
+  maxPP = 90
+  range = 1
+  skill = Ability.WATERFALL
+  additional = false
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Feraligatr extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.MONSTER, Synergy.AQUATIC],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      240,
-      28,
-      5,
-      5,
-      1,
-      AttackSprite.WATER_MELEE,
-      3,
-      90,
-      Ability.WATERFALL,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.WATER,
+    Synergy.MONSTER,
+    Synergy.AQUATIC
+  ])
+  rarity = Rarity.RARE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 240
+  atk = 28
+  def = 5
+  speDef = 5
+  maxPP = 90
+  range = 1
+  skill = Ability.WATERFALL
+  additional = true
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Azurill extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.FAIRY, Synergy.BABY],
-      Rarity.COMMON,
-      Pkm.MARILL,
-      50,
-      5,
-      1,
-      1,
-      2,
-      AttackSprite.WATER_RANGE,
-      1,
-      100,
-      Ability.PLAY_ROUGH,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FAIRY, Synergy.BABY])
+  rarity = Rarity.COMMON
+  stars = 1
+  evolution = Pkm.MARILL
+  hp = 50
+  atk = 5
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 2
+  skill = Ability.PLAY_ROUGH
+  additional = false
+  attackSprite = AttackSprite.WATER_RANGE
 }
 
 export class Marill extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.FAIRY],
-      Rarity.COMMON,
-      Pkm.AZUMARILL,
-      110,
-      9,
-      1,
-      1,
-      2,
-      AttackSprite.WATER_RANGE,
-      2,
-      100,
-      Ability.PLAY_ROUGH,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FAIRY])
+  rarity = Rarity.COMMON
+  stars = 2
+  evolution = Pkm.AZUMARILL
+  hp = 110
+  atk = 9
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 2
+  skill = Ability.PLAY_ROUGH
+  additional = false
+  attackSprite = AttackSprite.WATER_RANGE
 }
 
 export class Azumarill extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.FAIRY],
-      Rarity.COMMON,
-      Pkm.DEFAULT,
-      200,
-      20,
-      1,
-      1,
-      2,
-      AttackSprite.WATER_RANGE,
-      3,
-      100,
-      Ability.PLAY_ROUGH,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FAIRY])
+  rarity = Rarity.COMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 20
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 2
+  skill = Ability.PLAY_ROUGH
+  additional = true
+  attackSprite = AttackSprite.WATER_RANGE
 }
 
 export class Zubat extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.POISON, Synergy.FLYING, Synergy.SOUND],
-      Rarity.COMMON,
-      Pkm.GOLBAT,
-      50,
-      5,
-      1,
-      1,
-      2,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      90,
-      Ability.LEECH_LIFE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.POISON,
+    Synergy.FLYING,
+    Synergy.SOUND
+  ])
+  rarity = Rarity.COMMON
+  stars = 1
+  evolution = Pkm.GOLBAT
+  hp = 50
+  atk = 5
+  def = 1
+  speDef = 1
+  maxPP = 90
+  range = 2
+  skill = Ability.LEECH_LIFE
+  additional = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Golbat extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.POISON, Synergy.FLYING, Synergy.SOUND],
-      Rarity.COMMON,
-      Pkm.CROBAT,
-      100,
-      9,
-      1,
-      1,
-      2,
-      AttackSprite.PSYCHIC_RANGE,
-      2,
-      90,
-      Ability.LEECH_LIFE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.POISON,
+    Synergy.FLYING,
+    Synergy.SOUND
+  ])
+  rarity = Rarity.COMMON
+  stars = 2
+  evolution = Pkm.CROBAT
+  hp = 100
+  atk = 9
+  def = 1
+  speDef = 1
+  maxPP = 90
+  range = 2
+  skill = Ability.LEECH_LIFE
+  additional = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Crobat extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.POISON, Synergy.FLYING, Synergy.SOUND],
-      Rarity.COMMON,
-      Pkm.DEFAULT,
-      200,
-      18,
-      1,
-      1,
-      2,
-      AttackSprite.PSYCHIC_RANGE,
-      3,
-      90,
-      Ability.LEECH_LIFE,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.POISON,
+    Synergy.FLYING,
+    Synergy.SOUND
+  ])
+  rarity = Rarity.COMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 18
+  def = 1
+  speDef = 1
+  maxPP = 90
+  range = 2
+  skill = Ability.LEECH_LIFE
+  additional = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Mareep extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.FIELD, Synergy.LIGHT],
-      Rarity.COMMON,
-      Pkm.FLAFFY,
-      60,
-      5,
-      1,
-      1,
-      2,
-      AttackSprite.ELECTRIC_RANGE,
-      1,
-      110,
-      Ability.THUNDER,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.FIELD,
+    Synergy.LIGHT
+  ])
+  rarity = Rarity.COMMON
+  stars = 1
+  evolution = Pkm.FLAFFY
+  hp = 60
+  atk = 5
+  def = 1
+  speDef = 1
+  maxPP = 110
+  range = 2
+  skill = Ability.THUNDER
+  additional = false
+  attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
 export class Flaffy extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.FIELD, Synergy.LIGHT],
-      Rarity.COMMON,
-      Pkm.AMPHAROS,
-      110,
-      9,
-      1,
-      1,
-      2,
-      AttackSprite.ELECTRIC_RANGE,
-      2,
-      110,
-      Ability.THUNDER,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.FIELD,
+    Synergy.LIGHT
+  ])
+  rarity = Rarity.COMMON
+  stars = 2
+  evolution = Pkm.AMPHAROS
+  hp = 110
+  atk = 9
+  def = 1
+  speDef = 1
+  maxPP = 110
+  range = 2
+  skill = Ability.THUNDER
+  additional = false
+  attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
 export class Ampharos extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.FIELD, Synergy.LIGHT],
-      Rarity.COMMON,
-      Pkm.DEFAULT,
-      220,
-      18,
-      1,
-      1,
-      2,
-      AttackSprite.ELECTRIC_RANGE,
-      3,
-      110,
-      Ability.THUNDER,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.FIELD,
+    Synergy.LIGHT
+  ])
+  rarity = Rarity.COMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 220
+  atk = 18
+  def = 1
+  speDef = 1
+  maxPP = 110
+  range = 2
+  skill = Ability.THUNDER
+  additional = true
+  attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
 export class Cleffa extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FAIRY, Synergy.NORMAL, Synergy.BABY],
-      Rarity.UNCOMMON,
-      Pkm.CLEFAIRY,
-      70,
-      5,
-      1,
-      1,
-      1,
-      AttackSprite.FAIRY_MELEE,
-      1,
-      100,
-      Ability.METRONOME,
-      shiny,
-      emotion,
-      false,
-      true,
-      Passive.CLEFAIRY
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.NORMAL, Synergy.BABY])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.CLEFAIRY
+  hp = 70
+  atk = 5
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 1
+  skill = Ability.METRONOME
+  passive = Passive.CLEFAIRY
+  additional = false
+  final = true
+  attackSprite = AttackSprite.FAIRY_MELEE
 }
 
 export class Clefairy extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FAIRY, Synergy.NORMAL, Synergy.LIGHT],
-      Rarity.UNCOMMON,
-      Pkm.CLEFABLE,
-      150,
-      11,
-      3,
-      3,
-      1,
-      AttackSprite.FAIRY_MELEE,
-      2,
-      100,
-      Ability.METRONOME,
-      shiny,
-      emotion,
-      true,
-      true,
-      Passive.CLEFAIRY
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.NORMAL, Synergy.LIGHT])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.CLEFABLE
+  hp = 150
+  atk = 11
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.METRONOME
+  passive = Passive.CLEFAIRY
+  additional = true
+  final = true
+  attackSprite = AttackSprite.FAIRY_MELEE
 }
 
 export class Clefable extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FAIRY, Synergy.NORMAL, Synergy.LIGHT],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      220,
-      18,
-      4,
-      4,
-      1,
-      AttackSprite.FAIRY_MELEE,
-      3,
-      100,
-      Ability.METRONOME,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.NORMAL, Synergy.LIGHT])
+  rarity = Rarity.UNCOMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 220
+  atk = 18
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.METRONOME
+  additional = true
+  final = true
+  attackSprite = AttackSprite.FAIRY_MELEE
 }
 
 export class Caterpie extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.BUG],
-      Rarity.COMMON,
-      Pkm.METAPOD,
-      60,
-      5,
-      1,
-      1,
-      2,
-      AttackSprite.POISON_RANGE,
-      1,
-      100,
-      Ability.STRING_SHOT,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.BUG])
+  rarity = Rarity.COMMON
+  stars = 1
+  evolution = Pkm.METAPOD
+  hp = 60
+  atk = 5
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 2
+  skill = Ability.STRING_SHOT
+  additional = false
+  attackSprite = AttackSprite.POISON_RANGE
 }
 
 export class Metapod extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.BUG],
-      Rarity.COMMON,
-      Pkm.BUTTERFREE,
-      110,
-      9,
-      1,
-      1,
-      2,
-      AttackSprite.POISON_RANGE,
-      2,
-      100,
-      Ability.STRING_SHOT,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.BUG])
+  rarity = Rarity.COMMON
+  stars = 2
+  evolution = Pkm.BUTTERFREE
+  hp = 110
+  atk = 9
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 2
+  skill = Ability.STRING_SHOT
+  additional = false
+  attackSprite = AttackSprite.POISON_RANGE
 }
 
 export class Butterfree extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.BUG, Synergy.FLYING],
-      Rarity.COMMON,
-      Pkm.DEFAULT,
-      200,
-      16,
-      1,
-      1,
-      2,
-      AttackSprite.POISON_RANGE,
-      3,
-      100,
-      Ability.STRING_SHOT,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.BUG, Synergy.FLYING])
+  rarity = Rarity.COMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 16
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 2
+  skill = Ability.STRING_SHOT
+  additional = true
+  attackSprite = AttackSprite.POISON_RANGE
 }
 
 export class Weedle extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.POISON, Synergy.BUG],
-      Rarity.COMMON,
-      Pkm.KAKUNA,
-      60,
-      5,
-      2,
-      2,
-      1,
-      AttackSprite.BUG_MELEE,
-      1,
-      100,
-      Ability.BUG_BUZZ,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.BUG])
+  rarity = Rarity.COMMON
+  stars = 1
+  evolution = Pkm.KAKUNA
+  hp = 60
+  atk = 5
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.BUG_BUZZ
+  additional = false
+  attackSprite = AttackSprite.BUG_MELEE
 }
 
 export class Kakuna extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.POISON, Synergy.BUG],
-      Rarity.COMMON,
-      Pkm.BEEDRILL,
-      110,
-      10,
-      2,
-      2,
-      1,
-      AttackSprite.BUG_MELEE,
-      2,
-      100,
-      Ability.BUG_BUZZ,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.BUG])
+  rarity = Rarity.COMMON
+  stars = 2
+  evolution = Pkm.BEEDRILL
+  hp = 110
+  atk = 10
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.BUG_BUZZ
+  additional = false
+  attackSprite = AttackSprite.BUG_MELEE
 }
 
 export class Beedrill extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.POISON, Synergy.BUG, Synergy.FLYING],
-      Rarity.COMMON,
-      Pkm.DEFAULT,
-      200,
-      18,
-      2,
-      2,
-      1,
-      AttackSprite.BUG_MELEE,
-      3,
-      100,
-      Ability.BUG_BUZZ,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.BUG, Synergy.FLYING])
+  rarity = Rarity.COMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 18
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.BUG_BUZZ
+  additional = true
+  attackSprite = AttackSprite.BUG_MELEE
 }
 
 export class Pidgey extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.FLYING],
-      Rarity.COMMON,
-      Pkm.PIDGEOTTO,
-      60,
-      5,
-      1,
-      1,
-      2,
-      AttackSprite.FLYING_RANGE,
-      1,
-      100,
-      Ability.HURRICANE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FLYING])
+  rarity = Rarity.COMMON
+  stars = 1
+  evolution = Pkm.PIDGEOTTO
+  hp = 60
+  atk = 5
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 2
+  skill = Ability.HURRICANE
+  additional = false
+  attackSprite = AttackSprite.FLYING_RANGE
 }
 
 export class Pidgeotto extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.FLYING],
-      Rarity.COMMON,
-      Pkm.PIDGEOT,
-      110,
-      9,
-      2,
-      2,
-      2,
-      AttackSprite.FLYING_RANGE,
-      2,
-      100,
-      Ability.HURRICANE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FLYING])
+  rarity = Rarity.COMMON
+  stars = 2
+  evolution = Pkm.PIDGEOT
+  hp = 110
+  atk = 9
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 2
+  skill = Ability.HURRICANE
+  additional = false
+  attackSprite = AttackSprite.FLYING_RANGE
 }
 
 export class Pidgeot extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.FLYING],
-      Rarity.COMMON,
-      Pkm.DEFAULT,
-      200,
-      18,
-      3,
-      3,
-      2,
-      AttackSprite.FLYING_RANGE,
-      3,
-      100,
-      Ability.HURRICANE,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FLYING])
+  rarity = Rarity.COMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 18
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 2
+  skill = Ability.HURRICANE
+  additional = true
+  attackSprite = AttackSprite.FLYING_RANGE
 }
 
 export class Hoppip extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FLYING, Synergy.FLORA, Synergy.GRASS],
-      Rarity.COMMON,
-      Pkm.SKIPLOOM,
-      50,
-      5,
-      1,
-      1,
-      2,
-      AttackSprite.FLYING_RANGE,
-      1,
-      100,
-      Ability.ACROBATICS,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.FLORA, Synergy.GRASS])
+  rarity = Rarity.COMMON
+  stars = 1
+  evolution = Pkm.SKIPLOOM
+  hp = 50
+  atk = 5
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 2
+  skill = Ability.ACROBATICS
+  additional = false
+  attackSprite = AttackSprite.FLYING_RANGE
 }
 
 export class Skiploom extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FLYING, Synergy.FLORA, Synergy.GRASS],
-      Rarity.COMMON,
-      Pkm.JUMPLUFF,
-      110,
-      9,
-      1,
-      1,
-      2,
-      AttackSprite.FLYING_RANGE,
-      2,
-      100,
-      Ability.ACROBATICS,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.FLORA, Synergy.GRASS])
+  rarity = Rarity.COMMON
+  stars = 2
+  evolution = Pkm.JUMPLUFF
+  hp = 110
+  atk = 9
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 2
+  skill = Ability.ACROBATICS
+  additional = false
+  attackSprite = AttackSprite.FLYING_RANGE
 }
 
 export class Jumpluff extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FLYING, Synergy.FLORA, Synergy.GRASS],
-      Rarity.COMMON,
-      Pkm.DEFAULT,
-      220,
-      18,
-      1,
-      1,
-      2,
-      AttackSprite.FLYING_RANGE,
-      3,
-      100,
-      Ability.ACROBATICS,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.FLORA, Synergy.GRASS])
+  rarity = Rarity.COMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 220
+  atk = 18
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 2
+  skill = Ability.ACROBATICS
+  additional = true
+  attackSprite = AttackSprite.FLYING_RANGE
 }
 
 export class Seedot extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.DARK],
-      Rarity.COMMON,
-      Pkm.NUZLEAF,
-      60,
-      5,
-      2,
-      2,
-      1,
-      AttackSprite.GRASS_MELEE,
-      1,
-      100,
-      Ability.PAYBACK,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.DARK])
+  rarity = Rarity.COMMON
+  stars = 1
+  evolution = Pkm.NUZLEAF
+  hp = 60
+  atk = 5
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.PAYBACK
+  additional = false
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Nuzleaf extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.DARK],
-      Rarity.COMMON,
-      Pkm.SHIFTRY,
-      120,
-      9,
-      2,
-      2,
-      1,
-      AttackSprite.GRASS_MELEE,
-      2,
-      100,
-      Ability.PAYBACK,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.DARK])
+  rarity = Rarity.COMMON
+  stars = 2
+  evolution = Pkm.SHIFTRY
+  hp = 120
+  atk = 9
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.PAYBACK
+  additional = false
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Shiftry extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.DARK],
-      Rarity.COMMON,
-      Pkm.DEFAULT,
-      200,
-      20,
-      2,
-      2,
-      1,
-      AttackSprite.GRASS_MELEE,
-      3,
-      100,
-      Ability.PAYBACK,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.DARK])
+  rarity = Rarity.COMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 20
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.PAYBACK
+  additional = true
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Charmander extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.FIRE],
-      Rarity.COMMON,
-      Pkm.CHARMELEON,
-      60,
-      5,
-      2,
-      2,
-      1,
-      AttackSprite.FIRE_MELEE,
-      1,
-      100,
-      Ability.BLAST_BURN,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.FIRE])
+  rarity = Rarity.COMMON
+  stars = 1
+  evolution = Pkm.CHARMELEON
+  hp = 60
+  atk = 5
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.BLAST_BURN
+  additional = false
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export class Charmeleon extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.FIRE],
-      Rarity.COMMON,
-      Pkm.CHARIZARD,
-      120,
-      9,
-      2,
-      2,
-      1,
-      AttackSprite.FIRE_MELEE,
-      2,
-      100,
-      Ability.BLAST_BURN,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.FIRE])
+  rarity = Rarity.COMMON
+  stars = 2
+  evolution = Pkm.CHARIZARD
+  hp = 120
+  atk = 9
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.BLAST_BURN
+  additional = false
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export class Charizard extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.FIRE, Synergy.FLYING],
-      Rarity.COMMON,
-      Pkm.DEFAULT,
-      220,
-      20,
-      2,
-      2,
-      1,
-      AttackSprite.FIRE_MELEE,
-      3,
-      100,
-      Ability.BLAST_BURN,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.FIRE, Synergy.FLYING])
+  rarity = Rarity.COMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 220
+  atk = 20
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.BLAST_BURN
+  additional = true
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export class Magikarp extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER],
-      Rarity.SPECIAL,
-      Pkm.GYARADOS,
-      30,
-      1,
-      1,
-      1,
-      1,
-      AttackSprite.WATER_MELEE,
-      1,
-      50,
-      Ability.SPLASH,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.MAGIKARP
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.GYARADOS
+  hp = 30
+  atk = 1
+  def = 1
+  speDef = 1
+  maxPP = 50
+  range = 1
+  skill = Ability.SPLASH
+  passive = Passive.MAGIKARP
+  additional = false
+  final = false
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Gyarados extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.WATER, Synergy.FLYING],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      300,
-      30,
-      5,
-      1,
-      1,
-      AttackSprite.WATER_MELEE,
-      3,
-      100,
-      Ability.HYDRO_PUMP,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.WATER,
+    Synergy.FLYING
+  ])
+  rarity = Rarity.SPECIAL
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 30
+  def = 5
+  speDef = 1
+  maxPP = 100
+  range = 1
+  skill = Ability.HYDRO_PUMP
+  additional = true
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Rattata extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL],
-      Rarity.SPECIAL,
-      Pkm.RATICATE,
-      30,
-      4,
-      1,
-      1,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      1,
-      100,
-      Ability.AGILITY,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.RATICATE
+  hp = 30
+  atk = 4
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 1
+  skill = Ability.AGILITY
+  additional = false
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Raticate extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      60,
-      6,
-      1,
-      1,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      2,
-      100,
-      Ability.AGILITY,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL])
+  rarity = Rarity.SPECIAL
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 60
+  atk = 6
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 1
+  skill = Ability.AGILITY
+  additional = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Spearow extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FLYING, Synergy.NORMAL],
-      Rarity.SPECIAL,
-      Pkm.FEAROW,
-      30,
-      4,
-      1,
-      1,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      1,
-      100,
-      Ability.PECK,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.NORMAL])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.FEAROW
+  hp = 30
+  atk = 4
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 1
+  skill = Ability.PECK
+  additional = false
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Fearow extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FLYING, Synergy.NORMAL],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      60,
-      6,
-      1,
-      1,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      2,
-      100,
-      Ability.PECK,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.NORMAL])
+  rarity = Rarity.SPECIAL
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 60
+  atk = 6
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 1
+  skill = Ability.PECK
+  additional = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Meloetta extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.SOUND],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      250,
-      25,
-      5,
-      5,
-      4,
-      AttackSprite.PSYCHIC_RANGE,
-      3,
-      60,
-      Ability.RELIC_SONG,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.SOUND])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 250
+  atk = 25
+  def = 5
+  speDef = 5
+  maxPP = 60
+  range = 4
+  skill = Ability.RELIC_SONG
+  additional = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class PirouetteMeloetta extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.SOUND],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      300,
-      30,
-      5,
-      5,
-      4,
-      AttackSprite.PSYCHIC_RANGE,
-      3,
-      120,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.SOUND])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 30
+  def = 5
+  speDef = 5
+  maxPP = 120
+  range = 4
+  skill = Ability.DEFAULT
+  additional = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Lugia extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.AQUATIC, Synergy.FLYING, Synergy.PSYCHIC],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      300,
-      30,
-      6,
-      6,
-      1,
-      AttackSprite.FLYING_MELEE,
-      3,
-      60,
-      Ability.SKY_ATTACK,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.WINDY
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.AQUATIC,
+    Synergy.FLYING,
+    Synergy.PSYCHIC
+  ])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 30
+  def = 6
+  speDef = 6
+  maxPP = 60
+  range = 1
+  skill = Ability.SKY_ATTACK
+  passive = Passive.WINDY
+  additional = true
+  final = false
+  attackSprite = AttackSprite.FLYING_MELEE
 }
 
 export class Hoopa extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.GHOST],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      300,
-      30,
-      5,
-      5,
-      2,
-      AttackSprite.GHOST_RANGE,
-      3,
-      100,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GHOST])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 30
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 2
+  skill = Ability.DEFAULT
+  additional = true
+  attackSprite = AttackSprite.GHOST_RANGE
 }
 
 export class HoopaUnbound extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.GHOST],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      300,
-      30,
-      5,
-      5,
-      2,
-      AttackSprite.GHOST_RANGE,
-      3,
-      100,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GHOST])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 30
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 2
+  skill = Ability.DEFAULT
+  additional = true
+  attackSprite = AttackSprite.GHOST_RANGE
 }
 
 export class Giratina extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.GHOST],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      250,
-      35,
-      6,
-      6,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      3,
-      40,
-      Ability.SHADOW_SNEAK,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.GIRATINA
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GHOST])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 250
+  atk = 35
+  def = 6
+  speDef = 6
+  maxPP = 40
+  range = 1
+  skill = Ability.SHADOW_SNEAK
+  passive = Passive.GIRATINA
+  additional = true
+  final = false
+  attackSprite = AttackSprite.DRAGON_MELEE
 
   onChangePosition(
     x: number,
@@ -6020,27 +4716,25 @@ export class Giratina extends Pokemon {
 }
 
 export class OriginGiratina extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.GHOST, Synergy.FLYING],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      200,
-      35,
-      2,
-      2,
-      2,
-      AttackSprite.GHOST_RANGE,
-      3,
-      40,
-      Ability.SHADOW_SNEAK,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.GIRATINA
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.GHOST,
+    Synergy.FLYING
+  ])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 35
+  def = 2
+  speDef = 2
+  maxPP = 40
+  range = 2
+  skill = Ability.SHADOW_SNEAK
+  passive = Passive.GIRATINA
+  additional = true
+  final = false
+  attackSprite = AttackSprite.GHOST_RANGE
 
   onChangePosition(
     x: number,
@@ -6056,8334 +4750,6362 @@ export class OriginGiratina extends Pokemon {
 }
 
 export class Zapdos extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.FLYING],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      300,
-      30,
-      3,
-      3,
-      2,
-      AttackSprite.ELECTRIC_RANGE,
-      3,
-      80,
-      Ability.CHARGE,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.STORM
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FLYING])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 30
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 2
+  skill = Ability.CHARGE
+  passive = Passive.STORM
+  additional = true
+  final = false
+  attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
 export class Zeraora extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.FIGHTING],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      20,
-      5,
-      5,
-      1,
-      AttackSprite.ELECTRIC_MELEE,
-      3,
-      90,
-      Ability.PLASMA_FIST,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIGHTING])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 20
+  def = 5
+  speDef = 5
+  maxPP = 90
+  range = 1
+  skill = Ability.PLASMA_FIST
+  additional = true
+  attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
 export class Miltank extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.FIELD],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      250,
-      15,
-      5,
-      5,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      3,
-      100,
-      Ability.ROLLOUT,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIELD])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 250
+  atk = 15
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.ROLLOUT
+  additional = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Yveltal extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DARK, Synergy.FLYING],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      300,
-      25,
-      6,
-      6,
-      1,
-      AttackSprite.FLYING_MELEE,
-      3,
-      100,
-      Ability.DEATH_WING,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FLYING])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 25
+  def = 6
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.DEATH_WING
+  additional = true
+  attackSprite = AttackSprite.FLYING_MELEE
 }
 
 export class Moltres extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.FLYING],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      300,
-      30,
-      3,
-      3,
-      2,
-      AttackSprite.FIRE_RANGE,
-      3,
-      100,
-      Ability.OVERHEAT,
-      shiny,
-      emotion,
-      true,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FLYING])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 30
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 2
+  skill = Ability.OVERHEAT
+  additional = true
+  final = false
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class Pinsir extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG, Synergy.HUMAN],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      190,
-      25,
-      3,
-      3,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      3,
-      85,
-      Ability.GUILLOTINE,
-      shiny,
-      emotion,
-      true,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.HUMAN])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 190
+  atk = 25
+  def = 3
+  speDef = 3
+  maxPP = 85
+  range = 1
+  skill = Ability.GUILLOTINE
+  additional = true
+  final = false
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Articuno extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ICE, Synergy.FLYING],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      300,
-      30,
-      3,
-      3,
-      2,
-      AttackSprite.FLYING_RANGE,
-      3,
-      120,
-      Ability.BLIZZARD,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.SNOW
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.FLYING])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 30
+  def = 3
+  speDef = 3
+  maxPP = 120
+  range = 2
+  skill = Ability.BLIZZARD
+  passive = Passive.SNOW
+  additional = true
+  final = false
+  attackSprite = AttackSprite.FLYING_RANGE
 }
 
 export class Dialga extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.STEEL],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      300,
-      25,
-      5,
-      5,
-      1,
-      AttackSprite.FIRE_RANGE,
-      3,
-      150,
-      Ability.ROAR_OF_TIME,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.STEEL])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 25
+  def = 5
+  speDef = 5
+  maxPP = 150
+  range = 1
+  skill = Ability.ROAR_OF_TIME
+  additional = true
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class Palkia extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.WATER],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      300,
-      25,
-      5,
-      5,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      3,
-      150,
-      Ability.ROAR_OF_TIME,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.WATER])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 25
+  def = 5
+  speDef = 5
+  maxPP = 150
+  range = 1
+  skill = Ability.ROAR_OF_TIME
+  additional = true
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Melmetal extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.STEEL],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      300,
-      30,
-      5,
-      5,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      3,
-      150,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.STEEL])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 30
+  def = 5
+  speDef = 5
+  maxPP = 150
+  range = 1
+  skill = Ability.DEFAULT
+  additional = true
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Suicune extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.ICE, Synergy.FIELD],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      300,
-      30,
-      5,
-      5,
-      1,
-      AttackSprite.WATER_MELEE,
-      3,
-      100,
-      Ability.AQUA_JET,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ICE, Synergy.FIELD])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 30
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.AQUA_JET
+  additional = true
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Raikou extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.FIELD],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      300,
-      30,
-      5,
-      5,
-      1,
-      AttackSprite.ELECTRIC_MELEE,
-      3,
-      130,
-      Ability.VOLT_SWITCH,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 30
+  def = 5
+  speDef = 5
+  maxPP = 130
+  range = 1
+  skill = Ability.VOLT_SWITCH
+  additional = true
+  attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
 export class Entei extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.FIELD],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      300,
-      30,
-      5,
-      5,
-      1,
-      AttackSprite.FIRE_MELEE,
-      3,
-      130,
-      Ability.FLAME_CHARGE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 30
+  def = 5
+  speDef = 5
+  maxPP = 130
+  range = 1
+  skill = Ability.FLAME_CHARGE
+  additional = false
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export class Regice extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ICE, Synergy.HUMAN],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      20,
-      6,
-      10,
-      1,
-      AttackSprite.ICE_MELEE,
-      3,
-      100,
-      Ability.ICICLE_CRASH,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.HUMAN])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 20
+  def = 6
+  speDef = 10
+  maxPP = 100
+  range = 1
+  skill = Ability.ICICLE_CRASH
+  additional = true
+  attackSprite = AttackSprite.ICE_MELEE
 }
 
 export class Seviper extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.POISON, Synergy.MONSTER],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      180,
-      22,
-      4,
-      2,
-      1,
-      AttackSprite.POISON_MELEE,
-      3,
-      75,
-      Ability.VENOSHOCK,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.MONSTER])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 180
+  atk = 22
+  def = 4
+  speDef = 2
+  maxPP = 75
+  range = 1
+  skill = Ability.VENOSHOCK
+  additional = true
+  attackSprite = AttackSprite.POISON_MELEE
 }
 
 export class Lunatone extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ROCK, Synergy.PSYCHIC, Synergy.DARK],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      20,
-      2,
-      2,
-      2,
-      AttackSprite.PSYCHIC_RANGE,
-      3,
-      90,
-      Ability.COSMIC_POWER,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.NIGHT
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.PSYCHIC, Synergy.DARK])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 20
+  def = 2
+  speDef = 2
+  maxPP = 90
+  range = 2
+  skill = Ability.COSMIC_POWER
+  passive = Passive.NIGHT
+  additional = true
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Solrock extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ROCK, Synergy.FIRE, Synergy.LIGHT],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      20,
-      2,
-      2,
-      2,
-      AttackSprite.PSYCHIC_RANGE,
-      3,
-      90,
-      Ability.COSMIC_POWER,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.SUN
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.FIRE, Synergy.LIGHT])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 20
+  def = 2
+  speDef = 2
+  maxPP = 90
+  range = 2
+  skill = Ability.COSMIC_POWER
+  passive = Passive.SUN
+  additional = true
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Regirock extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ROCK, Synergy.HUMAN],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      20,
-      10,
-      6,
-      1,
-      AttackSprite.ROCK_MELEE,
-      3,
-      100,
-      Ability.STEALTH_ROCKS,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.HUMAN])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 20
+  def = 10
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.STEALTH_ROCKS
+  additional = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Tauros extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.FIELD],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      20,
-      7,
-      2,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      3,
-      100,
-      Ability.HEAD_SMASH,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIELD])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 20
+  def = 7
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.HEAD_SMASH
+  additional = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Heracross extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG, Synergy.FIGHTING],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      190,
-      22,
-      3,
-      3,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      3,
-      100,
-      Ability.CLOSE_COMBAT,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.GUTS
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FIGHTING])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 190
+  atk = 22
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.CLOSE_COMBAT
+  passive = Passive.GUTS
+  additional = true
+  final = false
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Registeel extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.STEEL, Synergy.HUMAN],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      25,
-      6,
-      6,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      3,
-      100,
-      Ability.DEFENSE_CURL,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.HUMAN])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 25
+  def = 6
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.DEFENSE_CURL
+  additional = true
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Regigigas extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.MONSTER, Synergy.HUMAN],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      300,
-      30,
-      5,
-      5,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      3,
-      100,
-      Ability.IRON_TAIL,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.MONSTER,
+    Synergy.HUMAN
+  ])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 30
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.IRON_TAIL
+  additional = true
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Kyogre extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.MONSTER],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      300,
-      20,
-      3,
-      3,
-      3,
-      AttackSprite.WATER_RANGE,
-      3,
-      100,
-      Ability.ORIGIN_PULSE,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.PRIMAL
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.MONSTER])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 20
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 3
+  skill = Ability.ORIGIN_PULSE
+  passive = Passive.PRIMAL
+  additional = true
+  final = false
+  attackSprite = AttackSprite.WATER_RANGE
 }
 
 export class Groudon extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GROUND, Synergy.FIRE],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      300,
-      30,
-      5,
-      5,
-      1,
-      AttackSprite.FIRE_MELEE,
-      3,
-      100,
-      Ability.EARTHQUAKE,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.PRIMAL
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.FIRE])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 30
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.EARTHQUAKE
+  passive = Passive.PRIMAL
+  additional = true
+  final = false
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export class Rayquaza extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.FLYING],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      300,
-      30,
-      5,
-      5,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      3,
-      100,
-      Ability.DRACO_METEOR,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.PRIMAL
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.FLYING])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 30
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.DRACO_METEOR
+  passive = Passive.PRIMAL
+  additional = true
+  final = false
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Eevee extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.FIELD],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      90,
-      5,
-      2,
-      2,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      1,
-      100,
-      Ability.HAPPY_HOUR,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.EEVEE
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.DEFAULT
+  hp = 90
+  atk = 5
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.HAPPY_HOUR
+  passive = Passive.EEVEE
+  additional = false
+  final = false
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Vaporeon extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.FIELD, Synergy.AQUATIC],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      180,
-      12,
-      1,
-      1,
-      1,
-      AttackSprite.WATER_MELEE,
-      2,
-      100,
-      Ability.HAPPY_HOUR,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.WATER,
+    Synergy.FIELD,
+    Synergy.AQUATIC
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 180
+  atk = 12
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 1
+  skill = Ability.HAPPY_HOUR
+  additional = true
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Jolteon extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.FIELD],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      180,
-      12,
-      1,
-      1,
-      1,
-      AttackSprite.ELECTRIC_MELEE,
-      2,
-      100,
-      Ability.HAPPY_HOUR,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 180
+  atk = 12
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 1
+  skill = Ability.HAPPY_HOUR
+  additional = true
+  attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
 export class Flareon extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.FIELD, Synergy.LIGHT],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      180,
-      12,
-      3,
-      2,
-      1,
-      AttackSprite.FIRE_MELEE,
-      2,
-      80,
-      Ability.HAPPY_HOUR,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD, Synergy.LIGHT])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 180
+  atk = 12
+  def = 3
+  speDef = 2
+  maxPP = 80
+  range = 1
+  skill = Ability.HAPPY_HOUR
+  additional = true
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export class Espeon extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC, Synergy.FIELD],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      180,
-      12,
-      1,
-      1,
-      2,
-      AttackSprite.PSYCHIC_RANGE,
-      2,
-      80,
-      Ability.HAPPY_HOUR,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 180
+  atk = 12
+  def = 1
+  speDef = 1
+  maxPP = 80
+  range = 2
+  skill = Ability.HAPPY_HOUR
+  additional = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Umbreon extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DARK, Synergy.FIELD],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      180,
-      12,
-      3,
-      2,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      2,
-      80,
-      Ability.HAPPY_HOUR,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 180
+  atk = 12
+  def = 3
+  speDef = 2
+  maxPP = 80
+  range = 1
+  skill = Ability.HAPPY_HOUR
+  additional = true
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Leafeon extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.FLORA, Synergy.FIELD],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      180,
-      12,
-      3,
-      2,
-      1,
-      AttackSprite.GRASS_MELEE,
-      2,
-      80,
-      Ability.HAPPY_HOUR,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 180
+  atk = 12
+  def = 3
+  speDef = 2
+  maxPP = 80
+  range = 1
+  skill = Ability.HAPPY_HOUR
+  additional = true
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Sylveon extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FAIRY, Synergy.FIELD, Synergy.SOUND],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      180,
-      12,
-      1,
-      1,
-      2,
-      AttackSprite.FAIRY_RANGE,
-      2,
-      80,
-      Ability.HAPPY_HOUR,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.FIELD, Synergy.SOUND])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 180
+  atk = 12
+  def = 1
+  speDef = 1
+  maxPP = 80
+  range = 2
+  skill = Ability.HAPPY_HOUR
+  additional = true
+  attackSprite = AttackSprite.FAIRY_RANGE
 }
 
 export class Glaceon extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ICE, Synergy.FIELD],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      180,
-      12,
-      1,
-      1,
-      2,
-      AttackSprite.ICE_RANGE,
-      2,
-      80,
-      Ability.HAPPY_HOUR,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 180
+  atk = 12
+  def = 1
+  speDef = 1
+  maxPP = 80
+  range = 2
+  skill = Ability.HAPPY_HOUR
+  additional = true
+  attackSprite = AttackSprite.ICE_RANGE
 }
 
 export class Volcanion extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.WATER, Synergy.AQUATIC],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      300,
-      20,
-      2,
-      2,
-      2,
-      AttackSprite.FIRE_RANGE,
-      3,
-      90,
-      Ability.STEAM_ERUPTION,
-      shiny,
-      emotion,
-      true,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.WATER, Synergy.AQUATIC])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 20
+  def = 2
+  speDef = 2
+  maxPP = 90
+  range = 2
+  skill = Ability.STEAM_ERUPTION
+  additional = true
+  final = false
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class Darkrai extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DARK, Synergy.GHOST],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      300,
-      30,
-      2,
-      2,
-      2,
-      AttackSprite.GHOST_RANGE,
-      3,
-      120,
-      Ability.DARK_VOID,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.GHOST])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 30
+  def = 2
+  speDef = 2
+  maxPP = 120
+  range = 2
+  skill = Ability.DARK_VOID
+  additional = true
+  attackSprite = AttackSprite.GHOST_RANGE
 }
 
 export class Larvesta extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.BUG],
-      Rarity.EPIC,
-      Pkm.VOLCARONA,
-      100,
-      10,
-      2,
-      2,
-      3,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      100,
-      Ability.FIRE_BLAST,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.BUG])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.VOLCARONA
+  hp = 100
+  atk = 10
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 3
+  skill = Ability.FIRE_BLAST
+  additional = false
+  final = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Volcarona extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.BUG],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      200,
-      20,
-      2,
-      2,
-      3,
-      AttackSprite.PSYCHIC_RANGE,
-      2,
-      100,
-      Ability.FIRE_BLAST,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.BUG])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 20
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 3
+  skill = Ability.FIRE_BLAST
+  additional = true
+  final = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Chatot extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FLYING, Synergy.SOUND],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      20,
-      2,
-      2,
-      3,
-      AttackSprite.PSYCHIC_RANGE,
-      3,
-      100,
-      Ability.CHATTER,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.SOUND])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 20
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 3
+  skill = Ability.CHATTER
+  additional = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Farfetchd extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FLYING, Synergy.NORMAL],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      20,
-      4,
-      4,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      3,
-      60,
-      Ability.RAZOR_WIND,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.NORMAL])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 20
+  def = 4
+  speDef = 4
+  maxPP = 60
+  range = 1
+  skill = Ability.RAZOR_WIND
+  additional = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Kecleon extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      20,
-      3,
-      3,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      3,
-      80,
-      Ability.ILLUSION,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.PROTEAN2
-    )
-  }
+  types = new SetSchema<Synergy>([])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 20
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 1
+  skill = Ability.ILLUSION
+  passive = Passive.PROTEAN2
+  additional = false
+  final = false
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Castform extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.ARTIFICIAL],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      180,
-      18,
-      3,
-      3,
-      2,
-      AttackSprite.PSYCHIC_RANGE,
-      3,
-      80,
-      Ability.FORECAST,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.CASTFORM
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.ARTIFICIAL])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 180
+  atk = 18
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 2
+  skill = Ability.FORECAST
+  passive = Passive.CASTFORM
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class CastformSun extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.ARTIFICIAL, Synergy.FIRE],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      180,
-      18,
-      3,
-      3,
-      2,
-      AttackSprite.DRAGON_RANGE,
-      3,
-      80,
-      Ability.FORECAST,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.CASTFORM
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.ARTIFICIAL,
+    Synergy.FIRE
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 180
+  atk = 18
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 2
+  skill = Ability.FORECAST
+  passive = Passive.CASTFORM
+  additional = true
+  final = false
+  attackSprite = AttackSprite.DRAGON_RANGE
 }
 
 export class CastformRain extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.ARTIFICIAL, Synergy.WATER],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      180,
-      18,
-      3,
-      3,
-      2,
-      AttackSprite.WATER_RANGE,
-      3,
-      80,
-      Ability.FORECAST,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.CASTFORM
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.ARTIFICIAL,
+    Synergy.WATER
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 180
+  atk = 18
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 2
+  skill = Ability.FORECAST
+  passive = Passive.CASTFORM
+  additional = true
+  final = false
+  attackSprite = AttackSprite.WATER_RANGE
 }
 
 export class CastformHail extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.ARTIFICIAL, Synergy.ICE],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      180,
-      18,
-      3,
-      3,
-      2,
-      AttackSprite.ICE_RANGE,
-      3,
-      80,
-      Ability.FORECAST,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.CASTFORM
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.ARTIFICIAL,
+    Synergy.ICE
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 180
+  atk = 18
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 2
+  skill = Ability.FORECAST
+  passive = Passive.CASTFORM
+  additional = true
+  final = false
+  attackSprite = AttackSprite.ICE_RANGE
 }
 
 export class Landorus extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GROUND, Synergy.FLYING],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      20,
-      3,
-      3,
-      2,
-      AttackSprite.FLYING_RANGE,
-      3,
-      100,
-      Ability.DEFAULT, //Ability.ROCK_SLIDE,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.NONE //Passive.SANDSTORM
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.FLYING])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 20
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 2
+  skill = Ability.DEFAULT //Ability.ROCK_SLIDE
+  passive = Passive.NONE //Passive.SANDSTORM
+  additional = true
+  final = false
+  attackSprite = AttackSprite.FLYING_RANGE
 }
 
 export class Thundurus extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.FLYING],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      20,
-      3,
-      3,
-      3,
-      AttackSprite.ELECTRIC_RANGE,
-      3,
-      80,
-      Ability.DEFAULT, //Ability.THUNDER,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.NONE //Passive.STORM
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FLYING])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 20
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 3
+  skill = Ability.DEFAULT //Ability.THUNDER
+  passive = Passive.NONE //Passive.STORM
+  additional = true
+  final = false
+  attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
 export class Tornadus extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FLYING, Synergy.HUMAN, Synergy.MONSTER],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      15,
-      2,
-      2,
-      3,
-      AttackSprite.FLYING_RANGE,
-      3,
-      100,
-      Ability.TRI_ATTACK,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.WINDY
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.FLYING,
+    Synergy.HUMAN,
+    Synergy.MONSTER
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 15
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 3
+  skill = Ability.TRI_ATTACK
+  passive = Passive.WINDY
+  additional = true
+  final = false
+  attackSprite = AttackSprite.FLYING_RANGE
 }
 
 export class Keldeo extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.FIGHTING],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      20,
-      3,
-      3,
-      2,
-      AttackSprite.WATER_RANGE,
-      3,
-      100,
-      Ability.AQUA_JET,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FIGHTING])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 20
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 2
+  skill = Ability.AQUA_JET
+  additional = true
+  attackSprite = AttackSprite.WATER_RANGE
 }
 
 export class Terrakion extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ROCK, Synergy.FIGHTING],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      20,
-      6,
-      6,
-      1,
-      AttackSprite.ROCK_MELEE,
-      3,
-      100,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.FIGHTING])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 20
+  def = 6
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.DEFAULT
+  additional = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Virizion extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.FIGHTING],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      20,
-      6,
-      6,
-      1,
-      AttackSprite.GRASS_MELEE,
-      3,
-      150,
-      Ability.SACRED_SWORD,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIGHTING])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 20
+  def = 6
+  speDef = 6
+  maxPP = 150
+  range = 1
+  skill = Ability.SACRED_SWORD
+  additional = true
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Cobalion extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.STEEL, Synergy.FIGHTING],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      20,
-      6,
-      6,
-      1,
-      AttackSprite.FIGHTING_MELEE,
-      3,
-      100,
-      Ability.SEISMIC_TOSS,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.FIGHTING])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 20
+  def = 6
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.SEISMIC_TOSS
+  additional = true
+  attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
 export class Mawile extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.STEEL, Synergy.FAIRY, Synergy.MONSTER],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      180,
-      15,
-      6,
-      6,
-      1,
-      AttackSprite.FIGHTING_MELEE,
-      3,
-      80,
-      Ability.IRON_TAIL,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.STEEL,
+    Synergy.FAIRY,
+    Synergy.MONSTER
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 180
+  atk = 15
+  def = 6
+  speDef = 6
+  maxPP = 80
+  range = 1
+  skill = Ability.IRON_TAIL
+  additional = true
+  attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
 export class Phione extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.BUG, Synergy.AQUATIC],
-      Rarity.UNIQUE,
-      Pkm.MANAPHY,
-      160,
-      14,
-      2,
-      2,
-      3,
-      AttackSprite.PSYCHIC_RANGE,
-      3,
-      100,
-      Ability.NASTY_PLOT,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.PHIONE
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.BUG, Synergy.AQUATIC])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.MANAPHY
+  hp = 160
+  atk = 14
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 3
+  skill = Ability.NASTY_PLOT
+  passive = Passive.PHIONE
+  additional = true
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Manaphy extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.BUG, Synergy.AQUATIC],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      240,
-      16,
-      4,
-      4,
-      3,
-      AttackSprite.PSYCHIC_RANGE,
-      4,
-      100,
-      Ability.NASTY_PLOT,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.BUG, Synergy.AQUATIC])
+  rarity = Rarity.UNIQUE
+  stars = 4
+  evolution = Pkm.DEFAULT
+  hp = 240
+  atk = 16
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 3
+  skill = Ability.NASTY_PLOT
+  additional = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Rotom extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.GHOST],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      12,
-      3,
-      3,
-      3,
-      AttackSprite.ELECTRIC_RANGE,
-      3,
-      100,
-      Ability.CALM_MIND,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.GHOST])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 12
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 3
+  skill = Ability.CALM_MIND
+  additional = true
+  attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
 export class Spiritomb extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DARK, Synergy.GHOST],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      20,
-      2,
-      2,
-      2,
-      AttackSprite.GHOST_RANGE,
-      3,
-      80,
-      Ability.NIGHT_SLASH,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.GHOST])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 20
+  def = 2
+  speDef = 2
+  maxPP = 80
+  range = 2
+  skill = Ability.NIGHT_SLASH
+  additional = true
+  attackSprite = AttackSprite.GHOST_RANGE
 }
 
 export class Absol extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DARK, Synergy.FIELD],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      20,
-      5,
-      5,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      3,
-      100,
-      Ability.THIEF,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FIELD])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 20
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.THIEF
+  additional = true
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Delibird extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ICE, Synergy.FLYING, Synergy.FIELD],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      20,
-      5,
-      5,
-      1,
-      AttackSprite.ICE_MELEE,
-      3,
-      100,
-      Ability.PRESENT,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.FLYING, Synergy.FIELD])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 20
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.PRESENT
+  additional = true
+  attackSprite = AttackSprite.ICE_MELEE
 }
 
 export class IronBundle extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ICE, Synergy.FLYING, Synergy.ARTIFICIAL],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      16,
-      4,
-      4,
-      1,
-      AttackSprite.ICE_MELEE,
-      3,
-      100,
-      Ability.AURORA_BEAM,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.ICE,
+    Synergy.FLYING,
+    Synergy.ARTIFICIAL
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 16
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.AURORA_BEAM
+  additional = true
+  attackSprite = AttackSprite.ICE_MELEE
 }
 
 export class Lapras extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.ICE],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      250,
-      12,
-      6,
-      6,
-      1,
-      AttackSprite.WATER_MELEE,
-      3,
-      100,
-      Ability.DIVE,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ICE])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 250
+  atk = 12
+  def = 6
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.DIVE
+  additional = true
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Latias extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.PSYCHIC],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      120,
-      10,
-      2,
-      2,
-      3,
-      AttackSprite.FIRE_RANGE,
-      3,
-      90,
-      Ability.MIST_BALL,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.SHARED_VISION
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.PSYCHIC])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 120
+  atk = 10
+  def = 2
+  speDef = 2
+  maxPP = 90
+  range = 3
+  skill = Ability.MIST_BALL
+  passive = Passive.SHARED_VISION
+  additional = true
+  final = false
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class Latios extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.PSYCHIC],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      120,
-      10,
-      2,
-      2,
-      3,
-      AttackSprite.FIRE_RANGE,
-      3,
-      90,
-      Ability.LUSTER_PURGE,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.SHARED_VISION
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.PSYCHIC])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 120
+  atk = 10
+  def = 2
+  speDef = 2
+  maxPP = 90
+  range = 3
+  skill = Ability.LUSTER_PURGE
+  passive = Passive.SHARED_VISION
+  additional = true
+  final = false
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class Uxie extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC, Synergy.FAIRY],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      12,
-      3,
-      3,
-      3,
-      AttackSprite.PSYCHIC_RANGE,
-      3,
-      65,
-      Ability.KNOWLEDGE_THIEF,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.FAIRY])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 12
+  def = 3
+  speDef = 3
+  maxPP = 65
+  range = 3
+  skill = Ability.KNOWLEDGE_THIEF
+  additional = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Mesprit extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC, Synergy.FAIRY],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      12,
-      3,
-      3,
-      3,
-      AttackSprite.PSYCHIC_RANGE,
-      3,
-      90,
-      Ability.SONG_OF_DESIRE,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.FAIRY])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 12
+  def = 3
+  speDef = 3
+  maxPP = 90
+  range = 3
+  skill = Ability.SONG_OF_DESIRE
+  additional = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Azelf extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC, Synergy.FAIRY],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      12,
-      3,
-      3,
-      3,
-      AttackSprite.PSYCHIC_RANGE,
-      3,
-      90,
-      Ability.CONFUSING_MIND,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.FAIRY])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 12
+  def = 3
+  speDef = 3
+  maxPP = 90
+  range = 3
+  skill = Ability.CONFUSING_MIND
+  additional = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Mew extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC, Synergy.FIELD],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      16,
-      2,
-      2,
-      4,
-      AttackSprite.PSYCHIC_RANGE,
-      3,
-      80,
-      Ability.TELEPORT,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.SYNCHRO
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.FIELD])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 16
+  def = 2
+  speDef = 2
+  maxPP = 80
+  range = 4
+  skill = Ability.TELEPORT
+  passive = Passive.SYNCHRO
+  additional = true
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Mewtwo extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC, Synergy.MONSTER, Synergy.ARTIFICIAL],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      200,
-      30,
-      2,
-      5,
-      3,
-      AttackSprite.PSYCHIC_RANGE,
-      3,
-      110,
-      Ability.DYNAMAX_CANNON,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.PSYCHIC,
+    Synergy.MONSTER,
+    Synergy.ARTIFICIAL
+  ])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 30
+  def = 2
+  speDef = 5
+  maxPP = 110
+  range = 3
+  skill = Ability.DYNAMAX_CANNON
+  additional = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Marshadow extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GHOST, Synergy.FIGHTING],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      250,
-      28,
-      5,
-      5,
-      1,
-      AttackSprite.FIGHTING_MELEE,
-      3,
-      120,
-      Ability.SPECTRAL_THIEF,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.FIGHTING])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 250
+  atk = 28
+  def = 5
+  speDef = 5
+  maxPP = 120
+  range = 1
+  skill = Ability.SPECTRAL_THIEF
+  additional = true
+  attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
 export class Kyurem extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.ICE],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      300,
-      30,
-      5,
-      5,
-      3,
-      AttackSprite.FIRE_RANGE,
-      3,
-      100,
-      Ability.DEFAULT, //Ability.BLIZZARD,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.NONE // Passive.SNOW
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.ICE])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 30
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 3
+  skill = Ability.DEFAULT //Ability.BLIZZARD
+  passive = Passive.NONE // Passive.SNOW
+  additional = true
+  final = false
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class Reshiram extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.FIRE],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      200,
-      30,
-      3,
-      6,
-      3,
-      AttackSprite.FIRE_RANGE,
-      3,
-      100,
-      Ability.BLUE_FLARE,
-      shiny,
-      emotion,
-      true,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.FIRE])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 30
+  def = 3
+  speDef = 6
+  maxPP = 100
+  range = 3
+  skill = Ability.BLUE_FLARE
+  additional = true
+  final = false
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class Zekrom extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.ELECTRIC],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      200,
-      30,
-      3,
-      6,
-      3,
-      AttackSprite.ELECTRIC_RANGE,
-      3,
-      100,
-      Ability.FUSION_BOLT,
-      shiny,
-      emotion,
-      true,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.ELECTRIC])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 30
+  def = 3
+  speDef = 6
+  maxPP = 100
+  range = 3
+  skill = Ability.FUSION_BOLT
+  additional = true
+  final = false
+  attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
 export class Celebi extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.PSYCHIC],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      300,
-      30,
-      5,
-      5,
-      3,
-      AttackSprite.GRASS_RANGE,
-      3,
-      100,
-      Ability.AURORA_VEIL,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.PSYCHIC])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 30
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 3
+  skill = Ability.AURORA_VEIL
+  additional = true
+  attackSprite = AttackSprite.GRASS_RANGE
 }
 
 export class Victini extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.PSYCHIC],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      300,
-      30,
-      5,
-      5,
-      1,
-      AttackSprite.FIRE_MELEE,
-      3,
-      100,
-      Ability.SEARING_SHOT,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.PSYCHIC])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 30
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.SEARING_SHOT
+  additional = true
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export class Jirachi extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.STEEL, Synergy.PSYCHIC],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      220,
-      30,
-      5,
-      5,
-      3,
-      AttackSprite.PSYCHIC_RANGE,
-      3,
-      60,
-      Ability.WISH,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.PSYCHIC])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 220
+  atk = 30
+  def = 5
+  speDef = 5
+  maxPP = 60
+  range = 3
+  skill = Ability.WISH
+  additional = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Arceus extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      300,
-      25,
-      5,
-      5,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      3,
-      100,
-      Ability.JUDGEMENT,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.PROTEAN3
-    )
-  }
+  types = new SetSchema<Synergy>([])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 25
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.JUDGEMENT
+  passive = Passive.PROTEAN3
+  additional = true
+  final = false
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Deoxys extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC, Synergy.HUMAN, Synergy.ARTIFICIAL],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      220,
-      30,
-      5,
-      5,
-      1,
-      AttackSprite.PSYCHIC_RANGE,
-      3,
-      100,
-      Ability.PROTECT,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.PSYCHIC,
+    Synergy.HUMAN,
+    Synergy.ARTIFICIAL
+  ])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 220
+  atk = 30
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.PROTECT
+  additional = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Shaymin extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.FLORA],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      200,
-      30,
-      5,
-      5,
-      3,
-      AttackSprite.GRASS_RANGE,
-      3,
-      100,
-      Ability.SEED_FLARE,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.SHAYMIN
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 30
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 3
+  skill = Ability.SEED_FLARE
+  passive = Passive.SHAYMIN
+  additional = true
+  final = false
+  attackSprite = AttackSprite.GRASS_RANGE
 }
 
 export class ShayminSky extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.FLORA, Synergy.FLYING],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      300,
-      30,
-      5,
-      5,
-      3,
-      AttackSprite.GRASS_RANGE,
-      4,
-      100,
-      Ability.SEED_FLARE,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA, Synergy.FLYING])
+  rarity = Rarity.LEGENDARY
+  stars = 4
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 30
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 3
+  skill = Ability.SEED_FLARE
+  additional = true
+  attackSprite = AttackSprite.GRASS_RANGE
 }
 
 export class Cresselia extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC, Synergy.FAIRY, Synergy.LIGHT],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      300,
-      15,
-      5,
-      5,
-      3,
-      AttackSprite.PSYCHIC_RANGE,
-      3,
-      60,
-      Ability.WISH,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.MISTY
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.PSYCHIC,
+    Synergy.FAIRY,
+    Synergy.LIGHT
+  ])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 15
+  def = 5
+  speDef = 5
+  maxPP = 60
+  range = 3
+  skill = Ability.WISH
+  passive = Passive.MISTY
+  additional = true
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Heatran extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.STEEL],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      280,
-      20,
-      5,
-      5,
-      3,
-      AttackSprite.FIRE_RANGE,
-      3,
-      100,
-      Ability.MAGMA_STORM,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.STEEL])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 280
+  atk = 20
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 3
+  skill = Ability.MAGMA_STORM
+  additional = true
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class HooH extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.FLYING, Synergy.LIGHT],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      300,
-      30,
-      5,
-      5,
-      3,
-      AttackSprite.FIRE_RANGE,
-      3,
-      100,
-      Ability.FIRE_SPIN,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.SUN
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FLYING, Synergy.LIGHT])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 30
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 3
+  skill = Ability.FIRE_SPIN
+  passive = Passive.SUN
+  additional = true
+  final = false
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class Torkoal extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.GROUND],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      240,
-      10,
-      10,
-      2,
-      1,
-      AttackSprite.FIRE_MELEE,
-      3,
-      105,
-      Ability.SMOKE_SCREEN,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.SUN
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.GROUND])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 240
+  atk = 10
+  def = 10
+  speDef = 2
+  maxPP = 105
+  range = 1
+  skill = Ability.SMOKE_SCREEN
+  passive = Passive.SUN
+  additional = true
+  final = false
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export class PrimalGroudon extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GROUND, Synergy.FIRE],
-      Rarity.MYTHICAL,
-      Pkm.DEFAULT,
-      400,
-      30,
-      10,
-      10,
-      1,
-      AttackSprite.FIRE_MELEE,
-      4,
-      100,
-      Ability.EARTHQUAKE,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.SANDSTORM
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.FIRE])
+  rarity = Rarity.MYTHICAL
+  stars = 4
+  evolution = Pkm.DEFAULT
+  hp = 400
+  atk = 30
+  def = 10
+  speDef = 10
+  maxPP = 100
+  range = 1
+  skill = Ability.EARTHQUAKE
+  passive = Passive.SANDSTORM
+  additional = true
+  final = false
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export class PrimalKyogre extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.ELECTRIC, Synergy.MONSTER],
-      Rarity.MYTHICAL,
-      Pkm.DEFAULT,
-      400,
-      20,
-      3,
-      3,
-      3,
-      AttackSprite.WATER_RANGE,
-      4,
-      100,
-      Ability.ORIGIN_PULSE,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.RAIN
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.WATER,
+    Synergy.ELECTRIC,
+    Synergy.MONSTER
+  ])
+  rarity = Rarity.MYTHICAL
+  stars = 4
+  evolution = Pkm.DEFAULT
+  hp = 400
+  atk = 20
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 3
+  skill = Ability.ORIGIN_PULSE
+  passive = Passive.RAIN
+  additional = true
+  final = false
+  attackSprite = AttackSprite.WATER_RANGE
 }
 
 export class MegaRayquaza extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.FLYING],
-      Rarity.MYTHICAL,
-      Pkm.DEFAULT,
-      400,
-      30,
-      5,
-      5,
-      3,
-      AttackSprite.FIRE_RANGE,
-      4,
-      100,
-      Ability.DRACO_METEOR,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.AIRLOCK
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.FLYING])
+  rarity = Rarity.MYTHICAL
+  stars = 4
+  evolution = Pkm.DEFAULT
+  hp = 400
+  atk = 30
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 3
+  skill = Ability.DRACO_METEOR
+  passive = Passive.AIRLOCK
+  additional = true
+  final = false
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class Oddish extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.POISON, Synergy.GRASS],
-      Rarity.SPECIAL,
-      Pkm.GLOOM,
-      90,
-      9,
-      2,
-      2,
-      1,
-      AttackSprite.GRASS_MELEE,
-      1,
-      100,
-      Ability.STUN_SPORE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.GRASS])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.GLOOM
+  hp = 90
+  atk = 9
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.STUN_SPORE
+  additional = false
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Gloom extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.POISON, Synergy.GRASS],
-      Rarity.SPECIAL,
-      Pkm.VILEPLUME,
-      160,
-      18,
-      3,
-      3,
-      1,
-      AttackSprite.GRASS_MELEE,
-      2,
-      100,
-      Ability.STUN_SPORE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.GRASS])
+  rarity = Rarity.SPECIAL
+  stars = 2
+  evolution = Pkm.VILEPLUME
+  hp = 160
+  atk = 18
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.STUN_SPORE
+  additional = false
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Vileplume extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.POISON, Synergy.GRASS],
-      Rarity.SPECIAL,
-      Pkm.BELLOSSOM,
-      260,
-      20,
-      4,
-      4,
-      1,
-      AttackSprite.GRASS_MELEE,
-      3,
-      100,
-      Ability.STUN_SPORE,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.GRASS])
+  rarity = Rarity.SPECIAL
+  stars = 3
+  evolution = Pkm.BELLOSSOM
+  hp = 260
+  atk = 20
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.STUN_SPORE
+  additional = false
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Bellossom extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.POISON, Synergy.GRASS],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      360,
-      27,
-      5,
-      5,
-      1,
-      AttackSprite.GRASS_MELEE,
-      3,
-      100,
-      Ability.STUN_SPORE,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.GRASS])
+  rarity = Rarity.SPECIAL
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 360
+  atk = 27
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.STUN_SPORE
+  additional = true
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Amaura extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FOSSIL, Synergy.ICE],
-      Rarity.EPIC,
-      Pkm.AURORUS,
-      130,
-      7,
-      3,
-      3,
-      1,
-      AttackSprite.ROCK_MELEE,
-      1,
-      100,
-      Ability.ICICLE_CRASH,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.ICE])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.AURORUS
+  hp = 130
+  atk = 7
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.ICICLE_CRASH
+  additional = false
+  final = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Aurorus extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FOSSIL, Synergy.ICE],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      280,
-      18,
-      5,
-      5,
-      1,
-      AttackSprite.ROCK_MELEE,
-      2,
-      100,
-      Ability.ICICLE_CRASH,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.ICE])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 280
+  atk = 18
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.ICICLE_CRASH
+  additional = true
+  final = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Carbink extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FOSSIL, Synergy.ROCK, Synergy.FAIRY],
-      Rarity.EPIC,
-      Pkm.DIANCIE,
-      125,
-      7,
-      4,
-      2,
-      1,
-      AttackSprite.FAIRY_MELEE,
-      1,
-      100,
-      Ability.DIAMOND_STORM,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.ROCK, Synergy.FAIRY])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.DIANCIE
+  hp = 125
+  atk = 7
+  def = 4
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.DIAMOND_STORM
+  additional = false
+  final = true
+  attackSprite = AttackSprite.FAIRY_MELEE
 }
 
 export class Diancie extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FOSSIL, Synergy.ROCK, Synergy.FAIRY],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      300,
-      10,
-      8,
-      4,
-      1,
-      AttackSprite.FAIRY_MELEE,
-      2,
-      100,
-      Ability.DIAMOND_STORM,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.ROCK, Synergy.FAIRY])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 10
+  def = 8
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.DIAMOND_STORM
+  additional = true
+  final = true
+  attackSprite = AttackSprite.FAIRY_MELEE
 }
 
 export class Sunkern extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.FIRE, Synergy.FLORA],
-      Rarity.EPIC,
-      Pkm.SUNFLORA,
-      80,
-      8,
-      3,
-      3,
-      2,
-      AttackSprite.FIRE_RANGE,
-      1,
-      100,
-      Ability.SOLAR_BEAM,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIRE, Synergy.FLORA])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.SUNFLORA
+  hp = 80
+  atk = 8
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 2
+  skill = Ability.SOLAR_BEAM
+  additional = false
+  final = true
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class Sunflora extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.FIRE, Synergy.FLORA],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      160,
-      18,
-      5,
-      5,
-      2,
-      AttackSprite.FIRE_RANGE,
-      2,
-      80,
-      Ability.SOLAR_BEAM,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIRE, Synergy.FLORA])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 160
+  atk = 18
+  def = 5
+  speDef = 5
+  maxPP = 80
+  range = 2
+  skill = Ability.SOLAR_BEAM
+  additional = true
+  final = true
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class Mankey extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIGHTING, Synergy.FIELD],
-      Rarity.EPIC,
-      Pkm.PRIMEAPE,
-      120,
-      8,
-      3,
-      2,
-      1,
-      AttackSprite.FIGHTING_MELEE,
-      1,
-      90,
-      Ability.THRASH,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.FIELD])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.PRIMEAPE
+  hp = 120
+  atk = 8
+  def = 3
+  speDef = 2
+  maxPP = 90
+  range = 1
+  skill = Ability.THRASH
+  additional = false
+  final = true
+  attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
 export class Primeape extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIGHTING, Synergy.FIELD],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      240,
-      21,
-      6,
-      2,
-      1,
-      AttackSprite.FIGHTING_MELEE,
-      2,
-      90,
-      Ability.THRASH,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.FIELD])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 240
+  atk = 21
+  def = 6
+  speDef = 2
+  maxPP = 90
+  range = 1
+  skill = Ability.THRASH
+  additional = true
+  final = true
+  attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
 export class Anorith extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FOSSIL, Synergy.BUG, Synergy.AQUATIC],
-      Rarity.UNCOMMON,
-      Pkm.ARMALDO,
-      60,
-      6,
-      2,
-      1,
-      1,
-      AttackSprite.ROCK_MELEE,
-      1,
-      100,
-      Ability.ROCK_SMASH,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.BUG, Synergy.AQUATIC])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.ARMALDO
+  hp = 60
+  atk = 6
+  def = 2
+  speDef = 1
+  maxPP = 100
+  range = 1
+  skill = Ability.ROCK_SMASH
+  additional = false
+  final = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Armaldo extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FOSSIL, Synergy.BUG, Synergy.AQUATIC],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      130,
-      15,
-      3,
-      2,
-      1,
-      AttackSprite.ROCK_MELEE,
-      2,
-      100,
-      Ability.ROCK_SMASH,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.BUG, Synergy.AQUATIC])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 130
+  atk = 15
+  def = 3
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.ROCK_SMASH
+  additional = true
+  final = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Wynaut extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC, Synergy.BABY],
-      Rarity.RARE,
-      Pkm.WOBBUFFET,
-      110,
-      7,
-      1,
-      1,
-      1,
-      AttackSprite.FIGHTING_MELEE,
-      1,
-      100,
-      Ability.COUNTER,
-      shiny,
-      emotion,
-      false,
-      true,
-      Passive.WOBBUFFET
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.BABY])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.WOBBUFFET
+  hp = 110
+  atk = 7
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 1
+  skill = Ability.COUNTER
+  passive = Passive.WOBBUFFET
+  additional = false
+  final = true
+  attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
 export class Wobbuffet extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      280,
-      18,
-      2,
-      2,
-      1,
-      AttackSprite.ROCK_MELEE,
-      2,
-      100,
-      Ability.COUNTER,
-      shiny,
-      emotion,
-      true,
-      true,
-      Passive.WOBBUFFET
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 280
+  atk = 18
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.COUNTER
+  passive = Passive.WOBBUFFET
+  additional = true
+  final = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Archen extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FOSSIL, Synergy.ROCK, Synergy.FLYING],
-      Rarity.RARE,
-      Pkm.ARCHEOPS,
-      80,
-      6,
-      3,
-      3,
-      1,
-      AttackSprite.ROCK_MELEE,
-      1,
-      90,
-      Ability.ROCK_SMASH,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.ROCK, Synergy.FLYING])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.ARCHEOPS
+  hp = 80
+  atk = 6
+  def = 3
+  speDef = 3
+  maxPP = 90
+  range = 1
+  skill = Ability.ROCK_SMASH
+  additional = false
+  final = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Archeops extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FOSSIL, Synergy.ROCK, Synergy.FLYING],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      180,
-      14,
-      5,
-      5,
-      2,
-      AttackSprite.ROCK_MELEE,
-      2,
-      90,
-      Ability.ROCK_SMASH,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.ROCK, Synergy.FLYING])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 180
+  atk = 14
+  def = 5
+  speDef = 5
+  maxPP = 90
+  range = 2
+  skill = Ability.ROCK_SMASH
+  additional = true
+  final = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Gligar extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GROUND, Synergy.POISON, Synergy.FLYING],
-      Rarity.UNIQUE,
-      Pkm.GLISCOR,
-      160,
-      16,
-      3,
-      3,
-      1,
-      AttackSprite.ROCK_MELEE,
-      3,
-      90,
-      Ability.POISON_JAB,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.GLIGAR
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.GROUND,
+    Synergy.POISON,
+    Synergy.FLYING
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.GLISCOR
+  hp = 160
+  atk = 16
+  def = 3
+  speDef = 3
+  maxPP = 90
+  range = 1
+  skill = Ability.POISON_JAB
+  passive = Passive.GLIGAR
+  additional = false
+  final = false
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Gliscor extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GROUND, Synergy.POISON, Synergy.FLYING],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      20,
-      4,
-      4,
-      1,
-      AttackSprite.ROCK_MELEE,
-      4,
-      90,
-      Ability.POISON_JAB,
-      shiny,
-      emotion,
-      false,
-      true,
-      Passive.POISON_HEAL
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.GROUND,
+    Synergy.POISON,
+    Synergy.FLYING
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 4
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 20
+  def = 4
+  speDef = 4
+  maxPP = 90
+  range = 1
+  skill = Ability.POISON_JAB
+  passive = Passive.POISON_HEAL
+  additional = false
+  final = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Shieldon extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FOSSIL, Synergy.STEEL],
-      Rarity.RARE,
-      Pkm.BASTIODON,
-      90,
-      6,
-      5,
-      3,
-      1,
-      AttackSprite.ROCK_MELEE,
-      1,
-      100,
-      Ability.IRON_DEFENSE,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.STEEL])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.BASTIODON
+  hp = 90
+  atk = 6
+  def = 5
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.IRON_DEFENSE
+  additional = false
+  final = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Bastiodon extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FOSSIL, Synergy.STEEL],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      250,
-      10,
-      8,
-      4,
-      1,
-      AttackSprite.ROCK_MELEE,
-      2,
-      100,
-      Ability.IRON_DEFENSE,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.STEEL])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 250
+  atk = 10
+  def = 8
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.IRON_DEFENSE
+  additional = true
+  final = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Tirtouga extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FOSSIL, Synergy.WATER],
-      Rarity.UNCOMMON,
-      Pkm.CARRACOSTA,
-      120,
-      7,
-      4,
-      2,
-      1,
-      AttackSprite.ROCK_MELEE,
-      1,
-      100,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.WATER])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.CARRACOSTA
+  hp = 120
+  atk = 7
+  def = 4
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.DEFAULT
+  additional = false
+  final = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Carracosta extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FOSSIL, Synergy.WATER],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      240,
-      14,
-      7,
-      4,
-      1,
-      AttackSprite.ROCK_MELEE,
-      2,
-      100,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.WATER])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 240
+  atk = 14
+  def = 7
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.DEFAULT
+  additional = true
+  final = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Lileep extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FOSSIL, Synergy.GRASS, Synergy.FLORA],
-      Rarity.RARE,
-      Pkm.CRADILY,
-      70,
-      7,
-      2,
-      2,
-      2,
-      AttackSprite.ROCK_MELEE,
-      1,
-      100,
-      Ability.LEECH_SEED,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.GRASS, Synergy.FLORA])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.CRADILY
+  hp = 70
+  atk = 7
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 2
+  skill = Ability.LEECH_SEED
+  additional = false
+  final = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Cradily extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FOSSIL, Synergy.GRASS, Synergy.FLORA],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      150,
-      21,
-      3,
-      3,
-      2,
-      AttackSprite.ROCK_MELEE,
-      2,
-      100,
-      Ability.LEECH_SEED,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.GRASS, Synergy.FLORA])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 150
+  atk = 21
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 2
+  skill = Ability.LEECH_SEED
+  additional = true
+  final = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Cranidos extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FOSSIL, Synergy.MONSTER],
-      Rarity.UNCOMMON,
-      Pkm.RAMPARDOS,
-      60,
-      7,
-      2,
-      1,
-      1,
-      AttackSprite.ROCK_MELEE,
-      1,
-      100,
-      Ability.HEAD_SMASH,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.MONSTER])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.RAMPARDOS
+  hp = 60
+  atk = 7
+  def = 2
+  speDef = 1
+  maxPP = 100
+  range = 1
+  skill = Ability.HEAD_SMASH
+  additional = false
+  final = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Rampardos extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FOSSIL, Synergy.MONSTER],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      160,
-      15,
-      3,
-      1,
-      1,
-      AttackSprite.ROCK_MELEE,
-      2,
-      100,
-      Ability.HEAD_SMASH,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.MONSTER])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 160
+  atk = 15
+  def = 3
+  speDef = 1
+  maxPP = 100
+  range = 1
+  skill = Ability.HEAD_SMASH
+  additional = true
+  final = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Kabuto extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FOSSIL, Synergy.WATER],
-      Rarity.RARE,
-      Pkm.KABUTOPS,
-      80,
-      8,
-      3,
-      3,
-      1,
-      AttackSprite.ROCK_MELEE,
-      1,
-      90,
-      Ability.HEAL_BLOCK,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.WATER])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.KABUTOPS
+  hp = 80
+  atk = 8
+  def = 3
+  speDef = 3
+  maxPP = 90
+  range = 1
+  skill = Ability.HEAL_BLOCK
+  additional = false
+  final = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Kabutops extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FOSSIL, Synergy.WATER],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      190,
-      22,
-      4,
-      4,
-      1,
-      AttackSprite.ROCK_MELEE,
-      2,
-      90,
-      Ability.HEAL_BLOCK,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.WATER])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 190
+  atk = 22
+  def = 4
+  speDef = 4
+  maxPP = 90
+  range = 1
+  skill = Ability.HEAL_BLOCK
+  additional = true
+  final = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Omanyte extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FOSSIL, Synergy.WATER],
-      Rarity.UNCOMMON,
-      Pkm.OMASTAR,
-      70,
-      6,
-      2,
-      3,
-      2,
-      AttackSprite.ROCK_MELEE,
-      1,
-      90,
-      Ability.ROCK_TOMB,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.WATER])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.OMASTAR
+  hp = 70
+  atk = 6
+  def = 2
+  speDef = 3
+  maxPP = 90
+  range = 2
+  skill = Ability.ROCK_TOMB
+  additional = false
+  final = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Omastar extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FOSSIL, Synergy.WATER],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      150,
-      14,
-      3,
-      4,
-      2,
-      AttackSprite.ROCK_MELEE,
-      2,
-      90,
-      Ability.ROCK_TOMB,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.WATER])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 150
+  atk = 14
+  def = 3
+  speDef = 4
+  maxPP = 90
+  range = 2
+  skill = Ability.ROCK_TOMB
+  additional = true
+  final = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 export class Clamperl extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FOSSIL, Synergy.WATER, Synergy.AQUATIC],
-      Rarity.EPIC,
-      Pkm.HUNTAIL,
-      100,
-      7,
-      4,
-      2,
-      1,
-      AttackSprite.WATER_MELEE,
-      1,
-      80,
-      Ability.ROCK_TOMB,
-      shiny,
-      emotion,
-      false,
-      true,
-      Passive.BIVALVE
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.FOSSIL,
+    Synergy.WATER,
+    Synergy.AQUATIC
+  ])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.HUNTAIL
+  hp = 100
+  atk = 7
+  def = 4
+  speDef = 2
+  maxPP = 80
+  range = 1
+  skill = Ability.ROCK_TOMB
+  passive = Passive.BIVALVE
+  additional = false
+  final = true
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Gorebyss extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FOSSIL, Synergy.WATER, Synergy.PSYCHIC],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      200,
-      16,
-      2,
-      2,
-      2,
-      AttackSprite.WATER_RANGE,
-      2,
-      80,
-      Ability.HYDRO_PUMP,
-      shiny,
-      emotion,
-      true,
-      true,
-      Passive.BIVALVE
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.FOSSIL,
+    Synergy.WATER,
+    Synergy.PSYCHIC
+  ])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 16
+  def = 2
+  speDef = 2
+  maxPP = 80
+  range = 2
+  skill = Ability.HYDRO_PUMP
+  passive = Passive.BIVALVE
+  additional = true
+  final = true
+  attackSprite = AttackSprite.WATER_RANGE
 }
 export class Huntail extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FOSSIL, Synergy.WATER, Synergy.AQUATIC],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      140,
-      27,
-      5,
-      3,
-      1,
-      AttackSprite.WATER_MELEE,
-      2,
-      80,
-      Ability.ROCK_TOMB,
-      shiny,
-      emotion,
-      true,
-      true,
-      Passive.BIVALVE
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.FOSSIL,
+    Synergy.WATER,
+    Synergy.AQUATIC
+  ])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 140
+  atk = 27
+  def = 5
+  speDef = 3
+  maxPP = 80
+  range = 1
+  skill = Ability.ROCK_TOMB
+  passive = Passive.BIVALVE
+  additional = true
+  final = true
+  attackSprite = AttackSprite.WATER_MELEE
 }
 export class Relicanth extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ROCK, Synergy.WATER, Synergy.FOSSIL],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      220,
-      13,
-      6,
-      3,
-      1,
-      AttackSprite.WATER_MELEE,
-      3,
-      70,
-      Ability.ROCK_TOMB,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.WATER, Synergy.FOSSIL])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 220
+  atk = 13
+  def = 6
+  speDef = 3
+  maxPP = 70
+  range = 1
+  skill = Ability.ROCK_TOMB
+  additional = true
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Tyrunt extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FOSSIL, Synergy.DRAGON],
-      Rarity.UNCOMMON,
-      Pkm.TYRANTRUM,
-      135,
-      10,
-      4,
-      2,
-      1,
-      AttackSprite.ROCK_MELEE,
-      1,
-      100,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.DRAGON])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.TYRANTRUM
+  hp = 135
+  atk = 10
+  def = 4
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.DEFAULT
+  additional = false
+  final = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Tyrantrum extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FOSSIL, Synergy.DRAGON],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      290,
-      22,
-      7,
-      4,
-      1,
-      AttackSprite.ROCK_MELEE,
-      2,
-      100,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.DRAGON])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 290
+  atk = 22
+  def = 7
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.DEFAULT
+  additional = true
+  final = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Aerodactyl extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ROCK, Synergy.FLYING, Synergy.FOSSIL],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      17,
-      3,
-      3,
-      1,
-      AttackSprite.ROCK_MELEE,
-      3,
-      80,
-      Ability.ROCK_SLIDE,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.FLYING, Synergy.FOSSIL])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 17
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 1
+  skill = Ability.ROCK_SLIDE
+  additional = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Genesect extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG, Synergy.STEEL, Synergy.ARTIFICIAL],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      200,
-      22,
-      6,
-      3,
-      4,
-      AttackSprite.FIRE_RANGE,
-      3,
-      80,
-      Ability.LOCK_ON,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.GENESECT
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.BUG,
+    Synergy.STEEL,
+    Synergy.ARTIFICIAL
+  ])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 22
+  def = 6
+  speDef = 3
+  maxPP = 80
+  range = 4
+  skill = Ability.LOCK_ON
+  passive = Passive.GENESECT
+  additional = true
+  final = false
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class Hatenna extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FAIRY, Synergy.PSYCHIC],
-      Rarity.UNCOMMON,
-      Pkm.HATTREM,
-      75,
-      6,
-      2,
-      2,
-      1,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      100,
-      Ability.PSYCH_UP,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.PSYCHIC])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.HATTREM
+  hp = 75
+  atk = 6
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.PSYCH_UP
+  additional = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Hattrem extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FAIRY, Synergy.PSYCHIC],
-      Rarity.UNCOMMON,
-      Pkm.HATTERENE,
-      130,
-      11,
-      4,
-      6,
-      1,
-      AttackSprite.PSYCHIC_RANGE,
-      2,
-      100,
-      Ability.PSYCH_UP,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.PSYCHIC])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.HATTERENE
+  hp = 130
+  atk = 11
+  def = 4
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.PSYCH_UP
+  additional = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Hatterene extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FAIRY, Synergy.PSYCHIC],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      240,
-      22,
-      5,
-      8,
-      1,
-      AttackSprite.PSYCHIC_RANGE,
-      3,
-      100,
-      Ability.PSYCH_UP,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.PSYCHIC])
+  rarity = Rarity.UNCOMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 240
+  atk = 22
+  def = 5
+  speDef = 8
+  maxPP = 100
+  range = 1
+  skill = Ability.PSYCH_UP
+  additional = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 export class Fennekin extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.PSYCHIC, Synergy.HUMAN],
-      Rarity.COMMON,
-      Pkm.BRAIXEN,
-      50,
-      5,
-      1,
-      1,
-      2,
-      AttackSprite.FIRE_RANGE,
-      1,
-      100,
-      Ability.FIRE_TRICK,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.PSYCHIC, Synergy.HUMAN])
+  rarity = Rarity.COMMON
+  stars = 1
+  evolution = Pkm.BRAIXEN
+  hp = 50
+  atk = 5
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 2
+  skill = Ability.FIRE_TRICK
+  additional = false
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 export class Braixen extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.PSYCHIC, Synergy.HUMAN],
-      Rarity.COMMON,
-      Pkm.DELPHOX,
-      100,
-      9,
-      1,
-      1,
-      2,
-      AttackSprite.FIRE_RANGE,
-      2,
-      100,
-      Ability.FIRE_TRICK,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.PSYCHIC, Synergy.HUMAN])
+  rarity = Rarity.COMMON
+  stars = 2
+  evolution = Pkm.DELPHOX
+  hp = 100
+  atk = 9
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 2
+  skill = Ability.FIRE_TRICK
+  additional = false
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 export class Delphox extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.PSYCHIC, Synergy.HUMAN],
-      Rarity.COMMON,
-      Pkm.DEFAULT,
-      200,
-      18,
-      1,
-      1,
-      2,
-      AttackSprite.FIRE_RANGE,
-      3,
-      100,
-      Ability.FIRE_TRICK,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.PSYCHIC, Synergy.HUMAN])
+  rarity = Rarity.COMMON
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 18
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 2
+  skill = Ability.FIRE_TRICK
+  additional = true
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class Regieleki extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.HUMAN],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      20,
-      3,
-      3,
-      2,
-      AttackSprite.ELECTRIC_RANGE,
-      3,
-      80,
-      Ability.VOLT_SWITCH,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.HUMAN])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 20
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 2
+  skill = Ability.VOLT_SWITCH
+  additional = true
+  attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 export class Regidrago extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.HUMAN],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      20,
-      3,
-      3,
-      2,
-      AttackSprite.FIRE_RANGE,
-      3,
-      100,
-      Ability.DRACO_ENERGY,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.HUMAN])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 20
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 2
+  skill = Ability.DRACO_ENERGY
+  additional = true
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 export class Guzzlord extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.DARK],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      250,
-      22,
-      3,
-      3,
-      3,
-      AttackSprite.FIRE_RANGE,
-      3,
-      120,
-      Ability.TWISTING_NETHER,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.DARK])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 250
+  atk = 22
+  def = 3
+  speDef = 3
+  maxPP = 120
+  range = 3
+  skill = Ability.TWISTING_NETHER
+  additional = true
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 export class Eternatus extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.POISON, Synergy.FOSSIL],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      300,
-      22,
-      8,
-      8,
-      1,
-      AttackSprite.POISON_MELEE,
-      3,
-      120,
-      Ability.DYNAMAX_CANNON,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.POISON,
+    Synergy.FOSSIL
+  ])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 22
+  def = 8
+  speDef = 8
+  maxPP = 120
+  range = 1
+  skill = Ability.DYNAMAX_CANNON
+  additional = true
+  attackSprite = AttackSprite.POISON_MELEE
 }
 
 export class Nincada extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG, Synergy.FLYING],
-      Rarity.ULTRA,
-      Pkm.NINJASK,
-      10,
-      7,
-      0,
-      0,
-      1,
-      AttackSprite.BUG_MELEE,
-      1,
-      100,
-      Ability.WONDER_GUARD,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.WONDER_GUARD
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING])
+  rarity = Rarity.ULTRA
+  stars = 1
+  evolution = Pkm.NINJASK
+  hp = 10
+  atk = 7
+  def = 0
+  speDef = 0
+  maxPP = 100
+  range = 1
+  skill = Ability.WONDER_GUARD
+  passive = Passive.WONDER_GUARD
+  additional = false
+  final = false
+  attackSprite = AttackSprite.BUG_MELEE
 }
 export class Ninjask extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG, Synergy.FLYING],
-      Rarity.ULTRA,
-      Pkm.SHEDNINJA,
-      20,
-      14,
-      0,
-      0,
-      1,
-      AttackSprite.BUG_MELEE,
-      2,
-      100,
-      Ability.WONDER_GUARD,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.WONDER_GUARD
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING])
+  rarity = Rarity.ULTRA
+  stars = 2
+  evolution = Pkm.SHEDNINJA
+  hp = 20
+  atk = 14
+  def = 0
+  speDef = 0
+  maxPP = 100
+  range = 1
+  skill = Ability.WONDER_GUARD
+  passive = Passive.WONDER_GUARD
+  additional = false
+  final = false
+  attackSprite = AttackSprite.BUG_MELEE
 }
 export class Shedninja extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG, Synergy.GHOST, Synergy.FLYING],
-      Rarity.ULTRA,
-      Pkm.DEFAULT,
-      50,
-      21,
-      0,
-      0,
-      1,
-      AttackSprite.BUG_MELEE,
-      3,
-      100,
-      Ability.WONDER_GUARD,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.WONDER_GUARD
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.GHOST, Synergy.FLYING])
+  rarity = Rarity.ULTRA
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 50
+  atk = 21
+  def = 0
+  speDef = 0
+  maxPP = 100
+  range = 1
+  skill = Ability.WONDER_GUARD
+  passive = Passive.WONDER_GUARD
+  additional = true
+  final = false
+  attackSprite = AttackSprite.BUG_MELEE
 }
 
 export class Happiny extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.HUMAN, Synergy.BABY],
-      Rarity.ULTRA,
-      Pkm.CHANSEY,
-      150,
-      8,
-      5,
-      5,
-      1,
-      AttackSprite.FAIRY_MELEE,
-      1,
-      130,
-      Ability.SOFT_BOILED,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.HUMAN, Synergy.BABY])
+  rarity = Rarity.ULTRA
+  stars = 1
+  evolution = Pkm.CHANSEY
+  hp = 150
+  atk = 8
+  def = 5
+  speDef = 5
+  maxPP = 130
+  range = 1
+  skill = Ability.SOFT_BOILED
+  additional = false
+  attackSprite = AttackSprite.FAIRY_MELEE
 }
 
 export class Chansey extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.HUMAN],
-      Rarity.ULTRA,
-      Pkm.BLISSEY,
-      300,
-      20,
-      6,
-      4,
-      1,
-      AttackSprite.FAIRY_MELEE,
-      2,
-      130,
-      Ability.SOFT_BOILED,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.HUMAN])
+  rarity = Rarity.ULTRA
+  stars = 2
+  evolution = Pkm.BLISSEY
+  hp = 300
+  atk = 20
+  def = 6
+  speDef = 4
+  maxPP = 130
+  range = 1
+  skill = Ability.SOFT_BOILED
+  additional = false
+  attackSprite = AttackSprite.FAIRY_MELEE
 }
 
 export class Blissey extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.HUMAN],
-      Rarity.ULTRA,
-      Pkm.DEFAULT,
-      480,
-      25,
-      10,
-      8,
-      1,
-      AttackSprite.FAIRY_MELEE,
-      3,
-      130,
-      Ability.SOFT_BOILED,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.HUMAN])
+  rarity = Rarity.ULTRA
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 480
+  atk = 25
+  def = 10
+  speDef = 8
+  maxPP = 130
+  range = 1
+  skill = Ability.SOFT_BOILED
+  additional = true
+  attackSprite = AttackSprite.FAIRY_MELEE
 }
 
 export class TapuKoko extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.FAIRY],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      17,
-      3,
-      3,
-      3,
-      AttackSprite.ELECTRIC_RANGE,
-      3,
-      100,
-      Ability.ELECTRIC_SURGE,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.ELECTRIC_SURGE
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FAIRY])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 17
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 3
+  skill = Ability.ELECTRIC_SURGE
+  passive = Passive.ELECTRIC_SURGE
+  additional = true
+  final = false
+  attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
 export class TapuLele extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC, Synergy.FAIRY],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      17,
-      3,
-      3,
-      3,
-      AttackSprite.PSYCHIC_RANGE,
-      3,
-      100,
-      Ability.PSYCHIC_SURGE,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.PSYCHIC_SURGE
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.FAIRY])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 17
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 3
+  skill = Ability.PSYCHIC_SURGE
+  passive = Passive.PSYCHIC_SURGE
+  additional = true
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Xerneas extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FAIRY, Synergy.LIGHT],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      300,
-      25,
-      3,
-      3,
-      3,
-      AttackSprite.PSYCHIC_RANGE,
-      3,
-      100,
-      Ability.GEOMANCY,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.MISTY
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.LIGHT])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 25
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 3
+  skill = Ability.GEOMANCY
+  passive = Passive.MISTY
+  additional = true
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class TapuFini extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.FAIRY],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      17,
-      3,
-      3,
-      3,
-      AttackSprite.WATER_RANGE,
-      3,
-      100,
-      Ability.MISTY_SURGE,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.MISTY_SURGE
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FAIRY])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 17
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 3
+  skill = Ability.MISTY_SURGE
+  passive = Passive.MISTY_SURGE
+  additional = true
+  final = false
+  attackSprite = AttackSprite.WATER_RANGE
 }
 
 export class TapuBulu extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.FAIRY],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      17,
-      5,
-      5,
-      1,
-      AttackSprite.GRASS_MELEE,
-      3,
-      100,
-      Ability.GRASSY_SURGE,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.GRASSY_SURGE
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FAIRY])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 17
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.GRASSY_SURGE
+  passive = Passive.GRASSY_SURGE
+  additional = true
+  final = false
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Stakataka extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ROCK, Synergy.STEEL],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      300,
-      5,
-      15,
-      15,
-      1,
-      AttackSprite.ROCK_MELEE,
-      3,
-      100,
-      Ability.IRON_DEFENSE,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.STEEL])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 5
+  def = 15
+  speDef = 15
+  maxPP = 100
+  range = 1
+  skill = Ability.IRON_DEFENSE
+  additional = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Blacephalon extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.GHOST],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      15,
-      3,
-      3,
-      3,
-      AttackSprite.GHOST_RANGE,
-      3,
-      80,
-      Ability.MIND_BLOWN,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.GHOST])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 15
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 3
+  skill = Ability.MIND_BLOWN
+  additional = true
+  attackSprite = AttackSprite.GHOST_RANGE
 }
 
 export class Houndour extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.DARK],
-      Rarity.EPIC,
-      Pkm.HOUNDOOM,
-      85,
-      8,
-      4,
-      4,
-      1,
-      AttackSprite.FIRE_MELEE,
-      1,
-      125,
-      Ability.BEAT_UP,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.DARK])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.HOUNDOOM
+  hp = 85
+  atk = 8
+  def = 4
+  speDef = 4
+  maxPP = 125
+  range = 1
+  skill = Ability.BEAT_UP
+  additional = false
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export class Houndoom extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.DARK],
-      Rarity.EPIC,
-      Pkm.MEGA_HOUNDOOM,
-      150,
-      20,
-      6,
-      6,
-      1,
-      AttackSprite.FIRE_MELEE,
-      2,
-      125,
-      Ability.BEAT_UP,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.DARK])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.MEGA_HOUNDOOM
+  hp = 150
+  atk = 20
+  def = 6
+  speDef = 6
+  maxPP = 125
+  range = 1
+  skill = Ability.BEAT_UP
+  additional = false
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export class MegaHoundoom extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.DARK],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      280,
-      38,
-      8,
-      8,
-      1,
-      AttackSprite.FIRE_MELEE,
-      3,
-      125,
-      Ability.BEAT_UP,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.DARK])
+  rarity = Rarity.EPIC
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 280
+  atk = 38
+  def = 8
+  speDef = 8
+  maxPP = 125
+  range = 1
+  skill = Ability.BEAT_UP
+  additional = true
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export class Cacnea extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.DARK, Synergy.HUMAN],
-      Rarity.RARE,
-      Pkm.CACTURNE,
-      85,
-      7,
-      3,
-      1,
-      1,
-      AttackSprite.GRASS_MELEE,
-      1,
-      70,
-      Ability.HEAL_BLOCK,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.DARK, Synergy.HUMAN])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.CACTURNE
+  hp = 85
+  atk = 7
+  def = 3
+  speDef = 1
+  maxPP = 70
+  range = 1
+  skill = Ability.HEAL_BLOCK
+  additional = false
+  final = true
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Cacturne extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.DARK, Synergy.HUMAN],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      180,
-      20,
-      6,
-      2,
-      1,
-      AttackSprite.GRASS_MELEE,
-      2,
-      70,
-      Ability.HEAL_BLOCK,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.DARK, Synergy.HUMAN])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 180
+  atk = 20
+  def = 6
+  speDef = 2
+  maxPP = 70
+  range = 1
+  skill = Ability.HEAL_BLOCK
+  additional = true
+  final = true
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Pumpkaboo extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GHOST, Synergy.GRASS],
-      Rarity.EPIC,
-      Pkm.GOURGEIST,
-      90,
-      14,
-      6,
-      3,
-      1,
-      AttackSprite.GRASS_MELEE,
-      1,
-      80,
-      Ability.CORRUPTED_NATURE,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.GRASS])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.GOURGEIST
+  hp = 90
+  atk = 14
+  def = 6
+  speDef = 3
+  maxPP = 80
+  range = 1
+  skill = Ability.CORRUPTED_NATURE
+  additional = false
+  final = true
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 export class Gourgeist extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GHOST, Synergy.GRASS],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      190,
-      28,
-      10,
-      5,
-      1,
-      AttackSprite.GRASS_MELEE,
-      2,
-      80,
-      Ability.CORRUPTED_NATURE,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.GRASS])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 190
+  atk = 28
+  def = 10
+  speDef = 5
+  maxPP = 80
+  range = 1
+  skill = Ability.CORRUPTED_NATURE
+  additional = true
+  final = true
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Natu extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC, Synergy.FLYING],
-      Rarity.UNCOMMON,
-      Pkm.XATU,
-      90,
-      5,
-      2,
-      2,
-      2,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      70,
-      Ability.MAGIC_BOUNCE,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.FLYING])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.XATU
+  hp = 90
+  atk = 5
+  def = 2
+  speDef = 2
+  maxPP = 70
+  range = 2
+  skill = Ability.MAGIC_BOUNCE
+  additional = false
+  final = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 export class Xatu extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC, Synergy.FLYING],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      180,
-      12,
-      3,
-      3,
-      2,
-      AttackSprite.PSYCHIC_RANGE,
-      2,
-      70,
-      Ability.MAGIC_BOUNCE,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.FLYING])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 180
+  atk = 12
+  def = 3
+  speDef = 3
+  maxPP = 70
+  range = 2
+  skill = Ability.MAGIC_BOUNCE
+  additional = true
+  final = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Noibat extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.SOUND, Synergy.FLYING],
-      Rarity.RARE,
-      Pkm.NOIVERN,
-      65,
-      7,
-      1,
-      1,
-      2,
-      AttackSprite.FLYING_RANGE,
-      1,
-      90,
-      Ability.RAZOR_WIND,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.SOUND,
+    Synergy.FLYING
+  ])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.NOIVERN
+  hp = 65
+  atk = 7
+  def = 1
+  speDef = 1
+  maxPP = 90
+  range = 2
+  skill = Ability.RAZOR_WIND
+  additional = false
+  final = true
+  attackSprite = AttackSprite.FLYING_RANGE
 }
 export class Noivern extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.SOUND, Synergy.FLYING],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      150,
-      17,
-      3,
-      3,
-      2,
-      AttackSprite.FLYING_RANGE,
-      2,
-      90,
-      Ability.RAZOR_WIND,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.SOUND,
+    Synergy.FLYING
+  ])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 150
+  atk = 17
+  def = 3
+  speDef = 3
+  maxPP = 90
+  range = 2
+  skill = Ability.RAZOR_WIND
+  additional = true
+  final = true
+  attackSprite = AttackSprite.FLYING_RANGE
 }
 
 export class Shellder extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.ICE, Synergy.ROCK],
-      Rarity.UNCOMMON,
-      Pkm.CLOYSTER,
-      70,
-      5,
-      5,
-      2,
-      1,
-      AttackSprite.WATER_MELEE,
-      1,
-      110,
-      Ability.SHELL_SMASH,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ICE, Synergy.ROCK])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.CLOYSTER
+  hp = 70
+  atk = 5
+  def = 5
+  speDef = 2
+  maxPP = 110
+  range = 1
+  skill = Ability.SHELL_SMASH
+  additional = false
+  final = true
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Cloyster extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.ICE, Synergy.ROCK],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      150,
-      11,
-      8,
-      2,
-      1,
-      AttackSprite.WATER_MELEE,
-      2,
-      110,
-      Ability.SHELL_SMASH,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ICE, Synergy.ROCK])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 150
+  atk = 11
+  def = 8
+  speDef = 2
+  maxPP = 110
+  range = 1
+  skill = Ability.SHELL_SMASH
+  additional = true
+  final = true
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Buizel extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.AQUATIC, Synergy.FIELD],
-      Rarity.EPIC,
-      Pkm.FLOATZEL,
-      90,
-      9,
-      3,
-      3,
-      1,
-      AttackSprite.WATER_MELEE,
-      1,
-      55,
-      Ability.AQUA_JET,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.WATER,
+    Synergy.AQUATIC,
+    Synergy.FIELD
+  ])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.FLOATZEL
+  hp = 90
+  atk = 9
+  def = 3
+  speDef = 3
+  maxPP = 55
+  range = 1
+  skill = Ability.AQUA_JET
+  additional = false
+  final = true
+  attackSprite = AttackSprite.WATER_MELEE
 }
 export class Floatzel extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.AQUATIC, Synergy.FIELD],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      180,
-      22,
-      5,
-      5,
-      1,
-      AttackSprite.WATER_MELEE,
-      2,
-      55,
-      Ability.AQUA_JET,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.WATER,
+    Synergy.AQUATIC,
+    Synergy.FIELD
+  ])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 180
+  atk = 22
+  def = 5
+  speDef = 5
+  maxPP = 55
+  range = 1
+  skill = Ability.AQUA_JET
+  additional = true
+  final = true
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Ponyta extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.FIELD],
-      Rarity.EPIC,
-      Pkm.RAPIDASH,
-      90,
-      12,
-      3,
-      3,
-      1,
-      AttackSprite.FIRE_MELEE,
-      1,
-      55,
-      Ability.FLAME_CHARGE,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.RAPIDASH
+  hp = 90
+  atk = 12
+  def = 3
+  speDef = 3
+  maxPP = 55
+  range = 1
+  skill = Ability.FLAME_CHARGE
+  additional = false
+  final = true
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 export class Rapidash extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.FIELD],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      220,
-      24,
-      5,
-      5,
-      1,
-      AttackSprite.FIRE_MELEE,
-      2,
-      55,
-      Ability.FLAME_CHARGE,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 220
+  atk = 24
+  def = 5
+  speDef = 5
+  maxPP = 55
+  range = 1
+  skill = Ability.FLAME_CHARGE
+  additional = true
+  final = true
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 export class Makuhita extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIGHTING, Synergy.MONSTER],
-      Rarity.RARE,
-      Pkm.HARIYAMA,
-      80,
-      8,
-      3,
-      3,
-      1,
-      AttackSprite.FIGHTING_MELEE,
-      1,
-      100,
-      Ability.DYNAMIC_PUNCH,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.MONSTER])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.HARIYAMA
+  hp = 80
+  atk = 8
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.DYNAMIC_PUNCH
+  additional = false
+  final = true
+  attackSprite = AttackSprite.FIGHTING_MELEE
 }
 export class Hariyama extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIGHTING, Synergy.MONSTER],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      170,
-      22,
-      5,
-      5,
-      1,
-      AttackSprite.FIGHTING_MELEE,
-      2,
-      80,
-      Ability.DYNAMIC_PUNCH,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.MONSTER])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 170
+  atk = 22
+  def = 5
+  speDef = 5
+  maxPP = 80
+  range = 1
+  skill = Ability.DYNAMIC_PUNCH
+  additional = true
+  final = true
+  attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
 export class Sentret extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GROUND, Synergy.NORMAL, Synergy.FIELD],
-      Rarity.RARE,
-      Pkm.FURRET,
-      80,
-      7,
-      3,
-      3,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      1,
-      100,
-      Ability.HELPING_HAND,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.GROUND,
+    Synergy.NORMAL,
+    Synergy.FIELD
+  ])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.FURRET
+  hp = 80
+  atk = 7
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.HELPING_HAND
+  additional = false
+  final = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 export class Furret extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GROUND, Synergy.NORMAL, Synergy.FIELD],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      200,
-      16,
-      4,
-      4,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      2,
-      80,
-      Ability.HELPING_HAND,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.GROUND,
+    Synergy.NORMAL,
+    Synergy.FIELD
+  ])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 16
+  def = 4
+  speDef = 4
+  maxPP = 80
+  range = 1
+  skill = Ability.HELPING_HAND
+  additional = true
+  final = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Joltik extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG, Synergy.ELECTRIC],
-      Rarity.RARE,
-      Pkm.GALVANTULA,
-      80,
-      8,
-      3,
-      2,
-      1,
-      AttackSprite.ELECTRIC_MELEE,
-      1,
-      100,
-      Ability.ELECTRO_WEB,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.ELECTRIC])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.GALVANTULA
+  hp = 80
+  atk = 8
+  def = 3
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.ELECTRO_WEB
+  additional = false
+  final = true
+  attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 export class Galvantula extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG, Synergy.ELECTRIC],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      180,
-      20,
-      5,
-      3,
-      1,
-      AttackSprite.ELECTRIC_MELEE,
-      2,
-      100,
-      Ability.ELECTRO_WEB,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.ELECTRIC])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 180
+  atk = 20
+  def = 5
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.ELECTRO_WEB
+  additional = true
+  final = true
+  attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
 export class Paras extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG, Synergy.POISON, Synergy.GRASS],
-      Rarity.RARE,
-      Pkm.PARASECT,
-      90,
-      6,
-      2,
-      2,
-      1,
-      AttackSprite.BUG_MELEE,
-      1,
-      110,
-      Ability.ABSORB,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON, Synergy.GRASS])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.PARASECT
+  hp = 90
+  atk = 6
+  def = 2
+  speDef = 2
+  maxPP = 110
+  range = 1
+  skill = Ability.ABSORB
+  additional = false
+  final = true
+  attackSprite = AttackSprite.BUG_MELEE
 }
 
 export class Parasect extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG, Synergy.POISON, Synergy.GRASS],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      180,
-      16,
-      3,
-      3,
-      1,
-      AttackSprite.BUG_MELEE,
-      2,
-      110,
-      Ability.ABSORB,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON, Synergy.GRASS])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 180
+  atk = 16
+  def = 3
+  speDef = 3
+  maxPP = 110
+  range = 1
+  skill = Ability.ABSORB
+  additional = true
+  final = true
+  attackSprite = AttackSprite.BUG_MELEE
 }
 
 export class Corphish extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.DARK],
-      Rarity.UNCOMMON,
-      Pkm.CRAWDAUNT,
-      85,
-      6,
-      3,
-      2,
-      1,
-      AttackSprite.WATER_MELEE,
-      1,
-      100,
-      Ability.CRABHAMMER,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.DARK])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.CRAWDAUNT
+  hp = 85
+  atk = 6
+  def = 3
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.CRABHAMMER
+  additional = false
+  final = true
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Crawdaunt extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.DARK],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      160,
-      16,
-      5,
-      3,
-      1,
-      AttackSprite.WATER_MELEE,
-      2,
-      100,
-      Ability.CRABHAMMER,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.DARK])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 160
+  atk = 16
+  def = 5
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.CRABHAMMER
+  additional = true
+  final = true
+  attackSprite = AttackSprite.WATER_MELEE
 }
 export class Meowth extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.FIELD],
-      Rarity.RARE,
-      Pkm.PERSIAN,
-      80,
-      8,
-      3,
-      3,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      1,
-      90,
-      Ability.PAYDAY,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIELD])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.PERSIAN
+  hp = 80
+  atk = 8
+  def = 3
+  speDef = 3
+  maxPP = 90
+  range = 1
+  skill = Ability.PAYDAY
+  additional = false
+  final = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Persian extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.FIELD],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      200,
-      20,
-      3,
-      3,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      2,
-      90,
-      Ability.PAYDAY,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIELD])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 20
+  def = 3
+  speDef = 3
+  maxPP = 90
+  range = 1
+  skill = Ability.PAYDAY
+  additional = true
+  final = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Hoothoot extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.FLYING, Synergy.PSYCHIC],
-      Rarity.UNCOMMON,
-      Pkm.NOCTOWL,
-      75,
-      5,
-      2,
-      3,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      1,
-      100,
-      Ability.HYPNOSIS,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.FLYING,
+    Synergy.PSYCHIC
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.NOCTOWL
+  hp = 75
+  atk = 5
+  def = 2
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.HYPNOSIS
+  additional = false
+  final = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Noctowl extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.FLYING, Synergy.PSYCHIC],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      170,
-      10,
-      3,
-      5,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      2,
-      100,
-      Ability.HYPNOSIS,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.FLYING,
+    Synergy.PSYCHIC
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 170
+  atk = 10
+  def = 3
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.HYPNOSIS
+  additional = true
+  final = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Munchlax extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.HUMAN, Synergy.BABY],
-      Rarity.EPIC,
-      Pkm.SNORLAX,
-      120,
-      8,
-      2,
-      2,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      1,
-      120,
-      Ability.SLACK_OFF,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.HUMAN, Synergy.BABY])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.SNORLAX
+  hp = 120
+  atk = 8
+  def = 2
+  speDef = 2
+  maxPP = 120
+  range = 1
+  skill = Ability.SLACK_OFF
+  additional = false
+  final = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Snorlax extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.HUMAN, Synergy.MONSTER],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      300,
-      19,
-      3,
-      3,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      2,
-      120,
-      Ability.SLACK_OFF,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.HUMAN,
+    Synergy.MONSTER
+  ])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 19
+  def = 3
+  speDef = 3
+  maxPP = 120
+  range = 1
+  skill = Ability.SLACK_OFF
+  additional = true
+  final = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 export class Growlithe extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.FIELD],
-      Rarity.UNCOMMON,
-      Pkm.ARCANINE,
-      70,
-      6,
-      2,
-      2,
-      1,
-      AttackSprite.FIRE_MELEE,
-      1,
-      80,
-      Ability.GROWL,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.ARCANINE
+  hp = 70
+  atk = 6
+  def = 2
+  speDef = 2
+  maxPP = 80
+  range = 1
+  skill = Ability.GROWL
+  additional = false
+  final = true
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export class Arcanine extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.FIELD],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      130,
-      14,
-      5,
-      5,
-      1,
-      AttackSprite.FIRE_MELEE,
-      2,
-      80,
-      Ability.GROWL,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 130
+  atk = 14
+  def = 5
+  speDef = 5
+  maxPP = 80
+  range = 1
+  skill = Ability.GROWL
+  additional = true
+  final = true
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export class Smoochum extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ICE, Synergy.PSYCHIC, Synergy.BABY],
-      Rarity.UNCOMMON,
-      Pkm.JYNX,
-      60,
-      6,
-      1,
-      1,
-      2,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      80,
-      Ability.CONFUSION,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.PSYCHIC, Synergy.BABY])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.JYNX
+  hp = 60
+  atk = 6
+  def = 1
+  speDef = 1
+  maxPP = 80
+  range = 2
+  skill = Ability.CONFUSION
+  additional = false
+  final = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Jynx extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ICE, Synergy.PSYCHIC, Synergy.HUMAN],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      130,
-      12,
-      3,
-      3,
-      2,
-      AttackSprite.PSYCHIC_RANGE,
-      2,
-      80,
-      Ability.CONFUSION,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.PSYCHIC, Synergy.HUMAN])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 130
+  atk = 12
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 2
+  skill = Ability.CONFUSION
+  additional = true
+  final = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class MimeJr extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FAIRY, Synergy.PSYCHIC, Synergy.BABY],
-      Rarity.RARE,
-      Pkm.MR_MIME,
-      70,
-      6,
-      2,
-      2,
-      2,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      85,
-      Ability.MIMIC,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.PSYCHIC, Synergy.BABY])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.MR_MIME
+  hp = 70
+  atk = 6
+  def = 2
+  speDef = 2
+  maxPP = 85
+  range = 2
+  skill = Ability.MIMIC
+  additional = false
+  final = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class MrMime extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FAIRY, Synergy.PSYCHIC, Synergy.HUMAN],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      200,
-      15,
-      2,
-      4,
-      2,
-      AttackSprite.PSYCHIC_RANGE,
-      2,
-      85,
-      Ability.MIMIC,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.FAIRY,
+    Synergy.PSYCHIC,
+    Synergy.HUMAN
+  ])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 15
+  def = 2
+  speDef = 4
+  maxPP = 85
+  range = 2
+  skill = Ability.MIMIC
+  additional = true
+  final = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Salandit extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.POISON],
-      Rarity.RARE,
-      Pkm.SALAZZLE,
-      70,
-      7,
-      2,
-      2,
-      2,
-      AttackSprite.FIRE_RANGE,
-      1,
-      60,
-      Ability.POISON,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.POISON])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.SALAZZLE
+  hp = 70
+  atk = 7
+  def = 2
+  speDef = 2
+  maxPP = 60
+  range = 2
+  skill = Ability.POISON
+  additional = false
+  final = true
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class Salazzle extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.POISON],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      170,
-      17,
-      4,
-      4,
-      2,
-      AttackSprite.FIRE_RANGE,
-      2,
-      60,
-      Ability.POISON,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.POISON])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 170
+  atk = 17
+  def = 4
+  speDef = 4
+  maxPP = 60
+  range = 2
+  skill = Ability.POISON
+  additional = true
+  final = true
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class Venonat extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG, Synergy.FLYING, Synergy.POISON],
-      Rarity.UNCOMMON,
-      Pkm.VENOMOTH,
-      50,
-      6,
-      2,
-      2,
-      1,
-      AttackSprite.BUG_MELEE,
-      1,
-      80,
-      Ability.BUG_BUZZ,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING, Synergy.POISON])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.VENOMOTH
+  hp = 50
+  atk = 6
+  def = 2
+  speDef = 2
+  maxPP = 80
+  range = 1
+  skill = Ability.BUG_BUZZ
+  additional = false
+  final = true
+  attackSprite = AttackSprite.BUG_MELEE
 }
 
 export class Venomoth extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG, Synergy.FLYING, Synergy.POISON],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      130,
-      11,
-      3,
-      3,
-      2,
-      AttackSprite.PSYCHIC_RANGE,
-      2,
-      80,
-      Ability.BUG_BUZZ,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING, Synergy.POISON])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 130
+  atk = 11
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 2
+  skill = Ability.BUG_BUZZ
+  additional = true
+  final = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Voltorb extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.ARTIFICIAL],
-      Rarity.UNCOMMON,
-      Pkm.ELECTRODE,
-      60,
-      9,
-      1,
-      1,
-      1,
-      AttackSprite.ELECTRIC_MELEE,
-      1,
-      80,
-      Ability.EXPLOSION,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.ARTIFICIAL])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.ELECTRODE
+  hp = 60
+  atk = 9
+  def = 1
+  speDef = 1
+  maxPP = 80
+  range = 1
+  skill = Ability.EXPLOSION
+  additional = false
+  final = true
+  attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
 export class Electrode extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.ARTIFICIAL],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      150,
-      18,
-      3,
-      3,
-      1,
-      AttackSprite.ELECTRIC_MELEE,
-      2,
-      80,
-      Ability.EXPLOSION,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.ARTIFICIAL])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 150
+  atk = 18
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 1
+  skill = Ability.EXPLOSION
+  additional = true
+  final = true
+  attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
 export class Slugma extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.ROCK],
-      Rarity.RARE,
-      Pkm.MAGCARGO,
-      70,
-      7,
-      3,
-      1,
-      2,
-      AttackSprite.FIRE_RANGE,
-      1,
-      90,
-      Ability.FIRE_BLAST,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.ROCK])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.MAGCARGO
+  hp = 70
+  atk = 7
+  def = 3
+  speDef = 1
+  maxPP = 90
+  range = 2
+  skill = Ability.FIRE_BLAST
+  additional = false
+  final = true
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class Magcargo extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.ROCK],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      180,
-      16,
-      6,
-      2,
-      2,
-      AttackSprite.FIRE_RANGE,
-      2,
-      90,
-      Ability.FIRE_BLAST,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.ROCK])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 180
+  atk = 16
+  def = 6
+  speDef = 2
+  maxPP = 90
+  range = 2
+  skill = Ability.FIRE_BLAST
+  additional = true
+  final = true
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class Sneasel extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ICE, Synergy.DARK, Synergy.MONSTER],
-      Rarity.EPIC,
-      Pkm.WEAVILE,
-      85,
-      9,
-      1,
-      3,
-      1,
-      AttackSprite.ICE_MELEE,
-      1,
-      40,
-      Ability.SLASHING_CLAW,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.DARK, Synergy.MONSTER])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.WEAVILE
+  hp = 85
+  atk = 9
+  def = 1
+  speDef = 3
+  maxPP = 40
+  range = 1
+  skill = Ability.SLASHING_CLAW
+  additional = false
+  final = true
+  attackSprite = AttackSprite.ICE_MELEE
 }
 
 export class Weavile extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ICE, Synergy.DARK, Synergy.MONSTER],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      200,
-      22,
-      2,
-      3,
-      1,
-      AttackSprite.ICE_MELEE,
-      2,
-      40,
-      Ability.SLASHING_CLAW,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.DARK, Synergy.MONSTER])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 22
+  def = 2
+  speDef = 3
+  maxPP = 40
+  range = 1
+  skill = Ability.SLASHING_CLAW
+  additional = true
+  final = true
+  attackSprite = AttackSprite.ICE_MELEE
 }
 
 export class Seel extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ICE, Synergy.AQUATIC],
-      Rarity.UNCOMMON,
-      Pkm.DEWGONG,
-      80,
-      7,
-      4,
-      4,
-      1,
-      AttackSprite.ICE_MELEE,
-      1,
-      90,
-      Ability.AURORA_BEAM,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.AQUATIC])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.DEWGONG
+  hp = 80
+  atk = 7
+  def = 4
+  speDef = 4
+  maxPP = 90
+  range = 1
+  skill = Ability.AURORA_BEAM
+  additional = false
+  final = true
+  attackSprite = AttackSprite.ICE_MELEE
 }
 
 export class Dewgong extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ICE, Synergy.AQUATIC],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      170,
-      16,
-      4,
-      4,
-      1,
-      AttackSprite.ICE_MELEE,
-      2,
-      90,
-      Ability.AURORA_BEAM,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.AQUATIC])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 170
+  atk = 16
+  def = 4
+  speDef = 4
+  maxPP = 90
+  range = 1
+  skill = Ability.AURORA_BEAM
+  additional = true
+  final = true
+  attackSprite = AttackSprite.ICE_MELEE
 }
 
 export class Croagunk extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.POISON, Synergy.FIGHTING, Synergy.AQUATIC],
-      Rarity.RARE,
-      Pkm.TOXICROAK,
-      75,
-      6,
-      2,
-      2,
-      1,
-      AttackSprite.POISON_MELEE,
-      1,
-      85,
-      Ability.GUILLOTINE,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.POISON,
+    Synergy.FIGHTING,
+    Synergy.AQUATIC
+  ])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.TOXICROAK
+  hp = 75
+  atk = 6
+  def = 2
+  speDef = 2
+  maxPP = 85
+  range = 1
+  skill = Ability.GUILLOTINE
+  additional = false
+  final = true
+  attackSprite = AttackSprite.POISON_MELEE
 }
 
 export class Toxicroak extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.POISON, Synergy.FIGHTING, Synergy.AQUATIC],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      190,
-      14,
-      4,
-      4,
-      1,
-      AttackSprite.POISON_MELEE,
-      2,
-      85,
-      Ability.GUILLOTINE,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.POISON,
+    Synergy.FIGHTING,
+    Synergy.AQUATIC
+  ])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 190
+  atk = 14
+  def = 4
+  speDef = 4
+  maxPP = 85
+  range = 1
+  skill = Ability.GUILLOTINE
+  additional = true
+  final = true
+  attackSprite = AttackSprite.POISON_MELEE
 }
 export class Chinchou extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.ELECTRIC, Synergy.LIGHT],
-      Rarity.UNCOMMON,
-      Pkm.LANTURN,
-      60,
-      7,
-      2,
-      3,
-      2,
-      AttackSprite.ELECTRIC_RANGE,
-      1,
-      90,
-      Ability.THUNDER,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.WATER,
+    Synergy.ELECTRIC,
+    Synergy.LIGHT
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.LANTURN
+  hp = 60
+  atk = 7
+  def = 2
+  speDef = 3
+  maxPP = 90
+  range = 2
+  skill = Ability.THUNDER
+  additional = false
+  final = true
+  attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
 export class Lanturn extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.ELECTRIC, Synergy.LIGHT],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      130,
-      16,
-      3,
-      5,
-      2,
-      AttackSprite.ELECTRIC_RANGE,
-      2,
-      90,
-      Ability.THUNDER,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.WATER,
+    Synergy.ELECTRIC,
+    Synergy.LIGHT
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 130
+  atk = 16
+  def = 3
+  speDef = 5
+  maxPP = 90
+  range = 2
+  skill = Ability.THUNDER
+  additional = true
+  final = true
+  attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 export class Poochyena extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.DARK, Synergy.FIELD],
-      Rarity.RARE,
-      Pkm.MIGHTYENA,
-      70,
-      9,
-      2,
-      2,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      1,
-      75,
-      Ability.GROWL,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.DARK, Synergy.FIELD])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.MIGHTYENA
+  hp = 70
+  atk = 9
+  def = 2
+  speDef = 2
+  maxPP = 75
+  range = 1
+  skill = Ability.GROWL
+  additional = false
+  final = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Mightyena extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.DARK, Synergy.FIELD],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      160,
-      19,
-      4,
-      4,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      2,
-      75,
-      Ability.GROWL,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.DARK, Synergy.FIELD])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 160
+  atk = 19
+  def = 4
+  speDef = 4
+  maxPP = 75
+  range = 1
+  skill = Ability.GROWL
+  additional = true
+  final = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Bronzor extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.STEEL, Synergy.PSYCHIC],
-      Rarity.RARE,
-      Pkm.BRONZONG,
-      90,
-      5,
-      5,
-      3,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      1,
-      95,
-      Ability.DEFENSE_CURL,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.PSYCHIC])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.BRONZONG
+  hp = 90
+  atk = 5
+  def = 5
+  speDef = 3
+  maxPP = 95
+  range = 1
+  skill = Ability.DEFENSE_CURL
+  additional = false
+  final = true
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Bronzong extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.STEEL, Synergy.PSYCHIC, Synergy.SOUND],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      200,
-      11,
-      9,
-      7,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      2,
-      95,
-      Ability.DEFENSE_CURL,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.STEEL,
+    Synergy.PSYCHIC,
+    Synergy.SOUND
+  ])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 11
+  def = 9
+  speDef = 7
+  maxPP = 95
+  range = 1
+  skill = Ability.DEFENSE_CURL
+  additional = true
+  final = true
+  attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Drifloon extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GHOST, Synergy.FLYING],
-      Rarity.RARE,
-      Pkm.DRIFBLIM,
-      120,
-      5,
-      2,
-      2,
-      2,
-      AttackSprite.GHOST_RANGE,
-      1,
-      85,
-      Ability.CALM_MIND,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.FLYING])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.DRIFBLIM
+  hp = 120
+  atk = 5
+  def = 2
+  speDef = 2
+  maxPP = 85
+  range = 2
+  skill = Ability.CALM_MIND
+  additional = false
+  final = true
+  attackSprite = AttackSprite.GHOST_RANGE
 }
 
 export class Drifblim extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GHOST, Synergy.FLYING],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      250,
-      10,
-      3,
-      3,
-      2,
-      AttackSprite.GHOST_RANGE,
-      2,
-      85,
-      Ability.CALM_MIND,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.FLYING])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 250
+  atk = 10
+  def = 3
+  speDef = 3
+  maxPP = 85
+  range = 2
+  skill = Ability.CALM_MIND
+  additional = true
+  final = true
+  attackSprite = AttackSprite.GHOST_RANGE
 }
 
 export class Shroomish extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.FIGHTING],
-      Rarity.UNCOMMON,
-      Pkm.BRELOOM,
-      60,
-      7,
-      2,
-      2,
-      1,
-      AttackSprite.FIGHTING_MELEE,
-      1,
-      85,
-      Ability.LEECH_SEED,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIGHTING])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.BRELOOM
+  hp = 60
+  atk = 7
+  def = 2
+  speDef = 2
+  maxPP = 85
+  range = 1
+  skill = Ability.LEECH_SEED
+  additional = false
+  final = true
+  attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
 export class Breloom extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.FIGHTING],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      150,
-      15,
-      3,
-      3,
-      1,
-      AttackSprite.FIGHTING_MELEE,
-      2,
-      85,
-      Ability.LEECH_SEED,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIGHTING])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 150
+  atk = 15
+  def = 3
+  speDef = 3
+  maxPP = 85
+  range = 1
+  skill = Ability.LEECH_SEED
+  additional = true
+  final = true
+  attackSprite = AttackSprite.FIGHTING_MELEE
 }
 export class Tentacool extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.AQUATIC, Synergy.POISON],
-      Rarity.UNCOMMON,
-      Pkm.TENTACRUEL,
-      65,
-      5,
-      2,
-      4,
-      1,
-      AttackSprite.WATER_MELEE,
-      1,
-      85,
-      Ability.POISON,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.WATER,
+    Synergy.AQUATIC,
+    Synergy.POISON
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.TENTACRUEL
+  hp = 65
+  atk = 5
+  def = 2
+  speDef = 4
+  maxPP = 85
+  range = 1
+  skill = Ability.POISON
+  additional = false
+  final = true
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Tentacruel extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.AQUATIC, Synergy.POISON],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      150,
-      10,
-      3,
-      7,
-      1,
-      AttackSprite.WATER_MELEE,
-      2,
-      85,
-      Ability.POISON,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.WATER,
+    Synergy.AQUATIC,
+    Synergy.POISON
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 150
+  atk = 10
+  def = 3
+  speDef = 7
+  maxPP = 85
+  range = 1
+  skill = Ability.POISON
+  additional = true
+  final = true
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Snubull extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FAIRY, Synergy.FIELD],
-      Rarity.EPIC,
-      Pkm.GRANBULL,
-      115,
-      10,
-      3,
-      2,
-      1,
-      AttackSprite.FAIRY_MELEE,
-      1,
-      70,
-      Ability.BITE,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.FIELD])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.GRANBULL
+  hp = 115
+  atk = 10
+  def = 3
+  speDef = 2
+  maxPP = 70
+  range = 1
+  skill = Ability.BITE
+  additional = false
+  final = true
+  attackSprite = AttackSprite.FAIRY_MELEE
 }
 
 export class Granbull extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FAIRY, Synergy.FIELD],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      265,
-      24,
-      6,
-      3,
-      1,
-      AttackSprite.FAIRY_MELEE,
-      2,
-      70,
-      Ability.BITE,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.FIELD])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 265
+  atk = 24
+  def = 6
+  speDef = 3
+  maxPP = 70
+  range = 1
+  skill = Ability.BITE
+  additional = true
+  final = true
+  attackSprite = AttackSprite.FAIRY_MELEE
 }
 
 export class TypeNull extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL],
-      Rarity.EPIC,
-      Pkm.GRANBULL,
-      65,
-      6,
-      3,
-      2,
-      1,
-      AttackSprite.FAIRY_MELEE,
-      1,
-      70,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.GRANBULL
+  hp = 65
+  atk = 6
+  def = 3
+  speDef = 2
+  maxPP = 70
+  range = 1
+  skill = Ability.DEFAULT
+  additional = false
+  final = true
+  attackSprite = AttackSprite.FAIRY_MELEE
 }
 
 export class Sylvally extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      130,
-      11,
-      6,
-      3,
-      1,
-      AttackSprite.FAIRY_MELEE,
-      2,
-      70,
-      Ability.DEFAULT,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 130
+  atk = 11
+  def = 6
+  speDef = 3
+  maxPP = 70
+  range = 1
+  skill = Ability.DEFAULT
+  additional = true
+  final = true
+  attackSprite = AttackSprite.FAIRY_MELEE
 }
 
 export class Applin extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.GRASS],
-      Rarity.EPIC,
-      Pkm.APPLETUN,
-      130,
-      6,
-      5,
-      2,
-      1,
-      AttackSprite.GRASS_MELEE,
-      1,
-      85,
-      Ability.APPLE_ACID,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GRASS])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.APPLETUN
+  hp = 130
+  atk = 6
+  def = 5
+  speDef = 2
+  maxPP = 85
+  range = 1
+  skill = Ability.APPLE_ACID
+  additional = false
+  final = true
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Appletun extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.GRASS],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      250,
-      16,
-      8,
-      6,
-      1,
-      AttackSprite.GRASS_MELEE,
-      2,
-      85,
-      Ability.APPLE_ACID,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GRASS])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 250
+  atk = 16
+  def = 8
+  speDef = 6
+  maxPP = 85
+  range = 1
+  skill = Ability.APPLE_ACID
+  additional = true
+  final = true
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Staryu extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.PSYCHIC],
-      Rarity.RARE,
-      Pkm.STARMIE,
-      80,
-      7,
-      2,
-      3,
-      2,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      100,
-      Ability.PSYCHIC,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.PSYCHIC])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.STARMIE
+  hp = 80
+  atk = 7
+  def = 2
+  speDef = 3
+  maxPP = 100
+  range = 2
+  skill = Ability.PSYCHIC
+  additional = false
+  final = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Starmie extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.PSYCHIC],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      180,
-      20,
-      2,
-      6,
-      2,
-      AttackSprite.PSYCHIC_RANGE,
-      2,
-      100,
-      Ability.PSYCHIC,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.PSYCHIC])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 180
+  atk = 20
+  def = 2
+  speDef = 6
+  maxPP = 100
+  range = 2
+  skill = Ability.PSYCHIC
+  additional = true
+  final = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Vulpix extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.PSYCHIC],
-      Rarity.RARE,
-      Pkm.NINETALES,
-      75,
-      7,
-      2,
-      2,
-      2,
-      AttackSprite.FIRE_RANGE,
-      1,
-      100,
-      Ability.FIRE_SPIN,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.PSYCHIC])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.NINETALES
+  hp = 75
+  atk = 7
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 2
+  skill = Ability.FIRE_SPIN
+  additional = false
+  final = true
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class Ninetales extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.PSYCHIC],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      170,
-      20,
-      3,
-      5,
-      2,
-      AttackSprite.FIRE_RANGE,
-      2,
-      100,
-      Ability.FIRE_SPIN,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.PSYCHIC])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 170
+  atk = 20
+  def = 3
+  speDef = 5
+  maxPP = 100
+  range = 2
+  skill = Ability.FIRE_SPIN
+  additional = true
+  final = true
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class AlolanVulpix extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ICE, Synergy.FAIRY],
-      Rarity.RARE,
-      Pkm.ALOLAN_NINETALES,
-      75,
-      7,
-      2,
-      2,
-      2,
-      AttackSprite.ICE_RANGE,
-      1,
-      85,
-      Ability.AURORA_VEIL,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.FAIRY])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.ALOLAN_NINETALES
+  hp = 75
+  atk = 7
+  def = 2
+  speDef = 2
+  maxPP = 85
+  range = 2
+  skill = Ability.AURORA_VEIL
+  additional = false
+  final = true
+  attackSprite = AttackSprite.ICE_RANGE
 }
 
 export class AlolanNinetales extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ICE, Synergy.FAIRY],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      170,
-      20,
-      5,
-      5,
-      2,
-      AttackSprite.ICE_RANGE,
-      2,
-      85,
-      Ability.AURORA_VEIL,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.FAIRY])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 170
+  atk = 20
+  def = 5
+  speDef = 5
+  maxPP = 85
+  range = 2
+  skill = Ability.AURORA_VEIL
+  additional = true
+  final = true
+  attackSprite = AttackSprite.ICE_RANGE
 }
 
 export class Snom extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG, Synergy.ICE],
-      Rarity.RARE,
-      Pkm.FROSMOTH,
-      70,
-      8,
-      2,
-      2,
-      2,
-      AttackSprite.ICE_RANGE,
-      1,
-      80,
-      Ability.BUG_BUZZ,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.ICE])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.FROSMOTH
+  hp = 70
+  atk = 8
+  def = 2
+  speDef = 2
+  maxPP = 80
+  range = 2
+  skill = Ability.BUG_BUZZ
+  additional = false
+  final = true
+  attackSprite = AttackSprite.ICE_RANGE
 }
 
 export class Frosmoth extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG, Synergy.ICE],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      180,
-      20,
-      3,
-      3,
-      2,
-      AttackSprite.ICE_RANGE,
-      2,
-      80,
-      Ability.BUG_BUZZ,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.ICE])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 180
+  atk = 20
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 2
+  skill = Ability.BUG_BUZZ
+  additional = true
+  final = true
+  attackSprite = AttackSprite.ICE_RANGE
 }
 
 export class Wailmer extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.SOUND],
-      Rarity.EPIC,
-      Pkm.WAILORD,
-      180,
-      6,
-      2,
-      2,
-      1,
-      AttackSprite.WATER_MELEE,
-      1,
-      110,
-      Ability.DIVE,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.SOUND])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.WAILORD
+  hp = 180
+  atk = 6
+  def = 2
+  speDef = 2
+  maxPP = 110
+  range = 1
+  skill = Ability.DIVE
+  additional = false
+  final = true
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Wailord extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.SOUND],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      400,
-      11,
-      3,
-      3,
-      1,
-      AttackSprite.WATER_MELEE,
-      2,
-      110,
-      Ability.DIVE,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.SOUND])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 400
+  atk = 11
+  def = 3
+  speDef = 3
+  maxPP = 110
+  range = 1
+  skill = Ability.DIVE
+  additional = true
+  final = true
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Dreepy extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.GHOST],
-      Rarity.HATCH,
-      Pkm.DRAKLOAK,
-      90,
-      5,
-      3,
-      3,
-      2,
-      AttackSprite.FIRE_RANGE,
-      1,
-      80,
-      Ability.DRAGON_DARTS,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.HATCH
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GHOST])
+  rarity = Rarity.HATCH
+  stars = 1
+  evolution = Pkm.DRAKLOAK
+  hp = 90
+  atk = 5
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 2
+  skill = Ability.DRAGON_DARTS
+  passive = Passive.HATCH
+  additional = false
+  final = false
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class Drakloak extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.GHOST],
-      Rarity.HATCH,
-      Pkm.DRAGAPULT,
-      140,
-      12,
-      3,
-      3,
-      2,
-      AttackSprite.FIRE_RANGE,
-      2,
-      80,
-      Ability.DRAGON_DARTS,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.HATCH
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GHOST])
+  rarity = Rarity.HATCH
+  stars = 2
+  evolution = Pkm.DRAGAPULT
+  hp = 140
+  atk = 12
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 2
+  skill = Ability.DRAGON_DARTS
+  passive = Passive.HATCH
+  additional = false
+  final = false
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class Dragapult extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.GHOST],
-      Rarity.HATCH,
-      Pkm.DEFAULT,
-      190,
-      22,
-      3,
-      3,
-      2,
-      AttackSprite.FIRE_RANGE,
-      3,
-      80,
-      Ability.DRAGON_DARTS,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GHOST])
+  rarity = Rarity.HATCH
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 190
+  atk = 22
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 2
+  skill = Ability.DRAGON_DARTS
+  additional = true
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class Snivy extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.FIELD],
-      Rarity.HATCH,
-      Pkm.SERVINE,
-      90,
-      5,
-      1,
-      1,
-      3,
-      AttackSprite.GRASS_RANGE,
-      1,
-      70,
-      Ability.MAGICAL_LEAF,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.HATCH
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIELD])
+  rarity = Rarity.HATCH
+  stars = 1
+  evolution = Pkm.SERVINE
+  hp = 90
+  atk = 5
+  def = 1
+  speDef = 1
+  maxPP = 70
+  range = 3
+  skill = Ability.MAGICAL_LEAF
+  passive = Passive.HATCH
+  additional = false
+  final = false
+  attackSprite = AttackSprite.GRASS_RANGE
 }
 
 export class Servine extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.FIELD],
-      Rarity.HATCH,
-      Pkm.SERPERIOR,
-      160,
-      11,
-      1,
-      1,
-      3,
-      AttackSprite.GRASS_RANGE,
-      2,
-      70,
-      Ability.MAGICAL_LEAF,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.HATCH
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIELD])
+  rarity = Rarity.HATCH
+  stars = 2
+  evolution = Pkm.SERPERIOR
+  hp = 160
+  atk = 11
+  def = 1
+  speDef = 1
+  maxPP = 70
+  range = 3
+  skill = Ability.MAGICAL_LEAF
+  passive = Passive.HATCH
+  additional = false
+  final = false
+  attackSprite = AttackSprite.GRASS_RANGE
 }
 
 export class Serperior extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.FIELD],
-      Rarity.HATCH,
-      Pkm.DEFAULT,
-      240,
-      24,
-      1,
-      1,
-      3,
-      AttackSprite.GRASS_RANGE,
-      3,
-      70,
-      Ability.MAGICAL_LEAF,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIELD])
+  rarity = Rarity.HATCH
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 240
+  atk = 24
+  def = 1
+  speDef = 1
+  maxPP = 70
+  range = 3
+  skill = Ability.MAGICAL_LEAF
+  additional = true
+  attackSprite = AttackSprite.GRASS_RANGE
 }
 
 export class Starly extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.FLYING],
-      Rarity.HATCH,
-      Pkm.STARAVIA,
-      75,
-      8,
-      3,
-      3,
-      1,
-      AttackSprite.FLYING_MELEE,
-      1,
-      100,
-      Ability.BRAVE_BIRD,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.HATCH
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FLYING])
+  rarity = Rarity.HATCH
+  stars = 1
+  evolution = Pkm.STARAVIA
+  hp = 75
+  atk = 8
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.BRAVE_BIRD
+  passive = Passive.HATCH
+  additional = false
+  final = false
+  attackSprite = AttackSprite.FLYING_MELEE
 }
 
 export class Staravia extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.FLYING],
-      Rarity.HATCH,
-      Pkm.STARAPTOR,
-      130,
-      16,
-      5,
-      5,
-      1,
-      AttackSprite.FLYING_MELEE,
-      2,
-      100,
-      Ability.BRAVE_BIRD,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.HATCH
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FLYING])
+  rarity = Rarity.HATCH
+  stars = 2
+  evolution = Pkm.STARAPTOR
+  hp = 130
+  atk = 16
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.BRAVE_BIRD
+  passive = Passive.HATCH
+  additional = false
+  final = false
+  attackSprite = AttackSprite.FLYING_MELEE
 }
 
 export class Staraptor extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.FLYING],
-      Rarity.HATCH,
-      Pkm.DEFAULT,
-      200,
-      24,
-      7,
-      7,
-      1,
-      AttackSprite.FLYING_MELEE,
-      3,
-      100,
-      Ability.BRAVE_BIRD,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FLYING])
+  rarity = Rarity.HATCH
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 24
+  def = 7
+  speDef = 7
+  maxPP = 100
+  range = 1
+  skill = Ability.BRAVE_BIRD
+  additional = true
+  attackSprite = AttackSprite.FLYING_MELEE
 }
 
 export class Scorbunny extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.FIGHTING, Synergy.HUMAN],
-      Rarity.HATCH,
-      Pkm.RABOOT,
-      75,
-      6,
-      3,
-      3,
-      1,
-      AttackSprite.FIRE_MELEE,
-      1,
-      35,
-      Ability.PYRO_BALL,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.HATCH
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.FIRE,
+    Synergy.FIGHTING,
+    Synergy.HUMAN
+  ])
+  rarity = Rarity.HATCH
+  stars = 1
+  evolution = Pkm.RABOOT
+  hp = 75
+  atk = 6
+  def = 3
+  speDef = 3
+  maxPP = 35
+  range = 1
+  skill = Ability.PYRO_BALL
+  passive = Passive.HATCH
+  additional = false
+  final = false
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export class Raboot extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.FIGHTING, Synergy.HUMAN],
-      Rarity.HATCH,
-      Pkm.CINDERACE,
-      130,
-      12,
-      5,
-      5,
-      1,
-      AttackSprite.FIRE_MELEE,
-      2,
-      35,
-      Ability.PYRO_BALL,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.HATCH
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.FIRE,
+    Synergy.FIGHTING,
+    Synergy.HUMAN
+  ])
+  rarity = Rarity.HATCH
+  stars = 2
+  evolution = Pkm.CINDERACE
+  hp = 130
+  atk = 12
+  def = 5
+  speDef = 5
+  maxPP = 35
+  range = 1
+  skill = Ability.PYRO_BALL
+  passive = Passive.HATCH
+  additional = false
+  final = false
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export class Cinderace extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.FIGHTING, Synergy.HUMAN],
-      Rarity.HATCH,
-      Pkm.DEFAULT,
-      180,
-      20,
-      7,
-      7,
-      1,
-      AttackSprite.FIRE_MELEE,
-      3,
-      50,
-      Ability.PYRO_BALL,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.FIRE,
+    Synergy.FIGHTING,
+    Synergy.HUMAN
+  ])
+  rarity = Rarity.HATCH
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 180
+  atk = 20
+  def = 7
+  speDef = 7
+  maxPP = 50
+  range = 1
+  skill = Ability.PYRO_BALL
+  additional = true
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export class AlolanGeodude extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.ROCK],
-      Rarity.HATCH,
-      Pkm.ALOLAN_GRAVELER,
-      100,
-      5,
-      3,
-      3,
-      1,
-      AttackSprite.ROCK_MELEE,
-      1,
-      100,
-      Ability.DISCHARGE,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.HATCH
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.ROCK])
+  rarity = Rarity.HATCH
+  stars = 1
+  evolution = Pkm.ALOLAN_GRAVELER
+  hp = 100
+  atk = 5
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.DISCHARGE
+  passive = Passive.HATCH
+  additional = false
+  final = false
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class AlolanGraveler extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.ROCK],
-      Rarity.HATCH,
-      Pkm.ALOLAN_GOLEM,
-      180,
-      10,
-      5,
-      5,
-      1,
-      AttackSprite.ROCK_MELEE,
-      2,
-      100,
-      Ability.DISCHARGE,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.HATCH
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.ROCK])
+  rarity = Rarity.HATCH
+  stars = 2
+  evolution = Pkm.ALOLAN_GOLEM
+  hp = 180
+  atk = 10
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.DISCHARGE
+  passive = Passive.HATCH
+  additional = false
+  final = false
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class AlolanGolem extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.ROCK],
-      Rarity.HATCH,
-      Pkm.DEFAULT,
-      250,
-      20,
-      7,
-      7,
-      1,
-      AttackSprite.ROCK_MELEE,
-      3,
-      100,
-      Ability.DISCHARGE,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.ROCK])
+  rarity = Rarity.HATCH
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 250
+  atk = 20
+  def = 7
+  speDef = 7
+  maxPP = 100
+  range = 1
+  skill = Ability.DISCHARGE
+  additional = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Popplio extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.FAIRY, Synergy.SOUND],
-      Rarity.HATCH,
-      Pkm.BRIONNE,
-      65,
-      5,
-      2,
-      2,
-      3,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      100,
-      Ability.SPARKLING_ARIA,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.HATCH
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FAIRY, Synergy.SOUND])
+  rarity = Rarity.HATCH
+  stars = 1
+  evolution = Pkm.BRIONNE
+  hp = 65
+  atk = 5
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 3
+  skill = Ability.SPARKLING_ARIA
+  passive = Passive.HATCH
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Brionne extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.FAIRY, Synergy.SOUND],
-      Rarity.HATCH,
-      Pkm.PRIMARINA,
-      130,
-      9,
-      2,
-      3,
-      3,
-      AttackSprite.PSYCHIC_RANGE,
-      2,
-      100,
-      Ability.SPARKLING_ARIA,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.HATCH
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FAIRY, Synergy.SOUND])
+  rarity = Rarity.HATCH
+  stars = 2
+  evolution = Pkm.PRIMARINA
+  hp = 130
+  atk = 9
+  def = 2
+  speDef = 3
+  maxPP = 100
+  range = 3
+  skill = Ability.SPARKLING_ARIA
+  passive = Passive.HATCH
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Primarina extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.FAIRY, Synergy.SOUND],
-      Rarity.HATCH,
-      Pkm.DEFAULT,
-      190,
-      20,
-      2,
-      4,
-      3,
-      AttackSprite.PSYCHIC_RANGE,
-      3,
-      100,
-      Ability.SPARKLING_ARIA,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FAIRY, Synergy.SOUND])
+  rarity = Rarity.HATCH
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 190
+  atk = 20
+  def = 2
+  speDef = 4
+  maxPP = 100
+  range = 3
+  skill = Ability.SPARKLING_ARIA
+  additional = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Gothita extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC, Synergy.DARK, Synergy.HUMAN],
-      Rarity.HATCH,
-      Pkm.GOTHORITA,
-      70,
-      5,
-      1,
-      2,
-      3,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      80,
-      Ability.FAKE_TEARS,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.HATCH
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.DARK, Synergy.HUMAN])
+  rarity = Rarity.HATCH
+  stars = 1
+  evolution = Pkm.GOTHORITA
+  hp = 70
+  atk = 5
+  def = 1
+  speDef = 2
+  maxPP = 80
+  range = 3
+  skill = Ability.FAKE_TEARS
+  passive = Passive.HATCH
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Gothorita extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC, Synergy.DARK, Synergy.HUMAN],
-      Rarity.HATCH,
-      Pkm.GOTHITELLE,
-      120,
-      12,
-      1,
-      3,
-      3,
-      AttackSprite.PSYCHIC_RANGE,
-      2,
-      80,
-      Ability.FAKE_TEARS,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.HATCH
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.DARK, Synergy.HUMAN])
+  rarity = Rarity.HATCH
+  stars = 2
+  evolution = Pkm.GOTHITELLE
+  hp = 120
+  atk = 12
+  def = 1
+  speDef = 3
+  maxPP = 80
+  range = 3
+  skill = Ability.FAKE_TEARS
+  passive = Passive.HATCH
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Gothitelle extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC, Synergy.DARK, Synergy.HUMAN],
-      Rarity.HATCH,
-      Pkm.DEFAULT,
-      190,
-      20,
-      1,
-      4,
-      3,
-      AttackSprite.PSYCHIC_RANGE,
-      3,
-      80,
-      Ability.FAKE_TEARS,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.DARK, Synergy.HUMAN])
+  rarity = Rarity.HATCH
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 190
+  atk = 20
+  def = 1
+  speDef = 4
+  maxPP = 80
+  range = 3
+  skill = Ability.FAKE_TEARS
+  additional = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Sandshrew extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GROUND, Synergy.NORMAL],
-      Rarity.UNCOMMON,
-      Pkm.SANDSLASH,
-      90,
-      4,
-      3,
-      3,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      1,
-      80,
-      Ability.SPIKE_ARMOR,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.NORMAL])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.SANDSLASH
+  hp = 90
+  atk = 4
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 1
+  skill = Ability.SPIKE_ARMOR
+  additional = false
+  final = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Sandslash extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GROUND, Synergy.NORMAL],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      180,
-      10,
-      5,
-      5,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      2,
-      80,
-      Ability.SPIKE_ARMOR,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.NORMAL])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 180
+  atk = 10
+  def = 5
+  speDef = 5
+  maxPP = 80
+  range = 1
+  skill = Ability.SPIKE_ARMOR
+  additional = true
+  final = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Nosepass extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ROCK, Synergy.ARTIFICIAL],
-      Rarity.UNCOMMON,
-      Pkm.PROBOPASS,
-      60,
-      5,
-      3,
-      3,
-      2,
-      AttackSprite.ROCK_MELEE,
-      1,
-      100,
-      Ability.MAGNET_RISE,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.ARTIFICIAL])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.PROBOPASS
+  hp = 60
+  atk = 5
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 2
+  skill = Ability.MAGNET_RISE
+  additional = false
+  final = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Probopass extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ROCK, Synergy.ARTIFICIAL],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      120,
-      10,
-      8,
-      8,
-      2,
-      AttackSprite.ROCK_MELEE,
-      2,
-      100,
-      Ability.MAGNET_RISE,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.ARTIFICIAL])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 120
+  atk = 10
+  def = 8
+  speDef = 8
+  maxPP = 100
+  range = 2
+  skill = Ability.MAGNET_RISE
+  additional = true
+  final = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Woobat extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FLYING, Synergy.SOUND, Synergy.PSYCHIC],
-      Rarity.UNCOMMON,
-      Pkm.SWOOBAT,
-      60,
-      6,
-      1,
-      1,
-      3,
-      AttackSprite.FAIRY_RANGE,
-      1,
-      90,
-      Ability.ATTRACT,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.FLYING,
+    Synergy.SOUND,
+    Synergy.PSYCHIC
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.SWOOBAT
+  hp = 60
+  atk = 6
+  def = 1
+  speDef = 1
+  maxPP = 90
+  range = 3
+  skill = Ability.ATTRACT
+  additional = false
+  final = true
+  attackSprite = AttackSprite.FAIRY_RANGE
 }
 
 export class Swoobat extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FLYING, Synergy.SOUND, Synergy.PSYCHIC],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      130,
-      15,
-      2,
-      2,
-      3,
-      AttackSprite.FAIRY_RANGE,
-      2,
-      90,
-      Ability.ATTRACT,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.FLYING,
+    Synergy.SOUND,
+    Synergy.PSYCHIC
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 130
+  atk = 15
+  def = 2
+  speDef = 2
+  maxPP = 90
+  range = 3
+  skill = Ability.ATTRACT
+  additional = true
+  final = true
+  attackSprite = AttackSprite.FAIRY_RANGE
 }
 
 export class Pineco extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG, Synergy.STEEL],
-      Rarity.UNCOMMON,
-      Pkm.FORRETRESS,
-      75,
-      5,
-      3,
-      3,
-      1,
-      AttackSprite.BUG_MELEE,
-      1,
-      120,
-      Ability.EXPLOSION,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.STEEL])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.FORRETRESS
+  hp = 75
+  atk = 5
+  def = 3
+  speDef = 3
+  maxPP = 120
+  range = 1
+  skill = Ability.EXPLOSION
+  additional = false
+  final = true
+  attackSprite = AttackSprite.BUG_MELEE
 }
 
 export class Forretress extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG, Synergy.STEEL],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      200,
-      5,
-      5,
-      3,
-      1,
-      AttackSprite.BUG_MELEE,
-      2,
-      120,
-      Ability.EXPLOSION,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.STEEL])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 5
+  def = 5
+  speDef = 3
+  maxPP = 120
+  range = 1
+  skill = Ability.EXPLOSION
+  additional = true
+  final = true
+  attackSprite = AttackSprite.BUG_MELEE
 }
 
 export class UnownA extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      100,
-      1,
-      1,
-      1,
-      9,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      100,
-      Ability.HIDDEN_POWER_A,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.UNOWN
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.DEFAULT
+  hp = 100
+  atk = 1
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 9
+  skill = Ability.HIDDEN_POWER_A
+  passive = Passive.UNOWN
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 export class UnownB extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      100,
-      1,
-      1,
-      1,
-      9,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      30,
-      Ability.HIDDEN_POWER_B,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.UNOWN
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.DEFAULT
+  hp = 100
+  atk = 1
+  def = 1
+  speDef = 1
+  maxPP = 30
+  range = 9
+  skill = Ability.HIDDEN_POWER_B
+  passive = Passive.UNOWN
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class UnownC extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      100,
-      1,
-      1,
-      1,
-      9,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      60,
-      Ability.HIDDEN_POWER_C,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.UNOWN
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.DEFAULT
+  hp = 100
+  atk = 1
+  def = 1
+  speDef = 1
+  maxPP = 60
+  range = 9
+  skill = Ability.HIDDEN_POWER_C
+  passive = Passive.UNOWN
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class UnownD extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      100,
-      1,
-      1,
-      1,
-      9,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      150,
-      Ability.HIDDEN_POWER_D,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.UNOWN
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.DEFAULT
+  hp = 100
+  atk = 1
+  def = 1
+  speDef = 1
+  maxPP = 150
+  range = 9
+  skill = Ability.HIDDEN_POWER_D
+  passive = Passive.UNOWN
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class UnownE extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      100,
-      1,
-      1,
-      1,
-      9,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      100,
-      Ability.HIDDEN_POWER_E,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.UNOWN
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.DEFAULT
+  hp = 100
+  atk = 1
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 9
+  skill = Ability.HIDDEN_POWER_E
+  passive = Passive.UNOWN
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class UnownF extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      100,
-      1,
-      1,
-      1,
-      9,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      100,
-      Ability.HIDDEN_POWER_F,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.UNOWN
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.DEFAULT
+  hp = 100
+  atk = 1
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 9
+  skill = Ability.HIDDEN_POWER_F
+  passive = Passive.UNOWN
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class UnownG extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      100,
-      1,
-      1,
-      1,
-      9,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      100,
-      Ability.HIDDEN_POWER_G,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.UNOWN
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.DEFAULT
+  hp = 100
+  atk = 1
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 9
+  skill = Ability.HIDDEN_POWER_G
+  passive = Passive.UNOWN
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class UnownH extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      100,
-      1,
-      1,
-      1,
-      9,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      80,
-      Ability.HIDDEN_POWER_H,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.UNOWN
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.DEFAULT
+  hp = 100
+  atk = 1
+  def = 1
+  speDef = 1
+  maxPP = 80
+  range = 9
+  skill = Ability.HIDDEN_POWER_H
+  passive = Passive.UNOWN
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class UnownI extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      100,
-      1,
-      1,
-      1,
-      9,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      100,
-      Ability.HIDDEN_POWER_I,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.UNOWN
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.DEFAULT
+  hp = 100
+  atk = 1
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 9
+  skill = Ability.HIDDEN_POWER_I
+  passive = Passive.UNOWN
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class UnownJ extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      100,
-      1,
-      1,
-      1,
-      9,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      100,
-      Ability.HIDDEN_POWER_J,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.UNOWN
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.DEFAULT
+  hp = 100
+  atk = 1
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 9
+  skill = Ability.HIDDEN_POWER_J
+  passive = Passive.UNOWN
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class UnownK extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      100,
-      1,
-      1,
-      1,
-      9,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      100,
-      Ability.HIDDEN_POWER_K,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.UNOWN
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.DEFAULT
+  hp = 100
+  atk = 1
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 9
+  skill = Ability.HIDDEN_POWER_K
+  passive = Passive.UNOWN
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class UnownL extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      100,
-      1,
-      1,
-      1,
-      9,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      100,
-      Ability.HIDDEN_POWER_L,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.UNOWN
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.DEFAULT
+  hp = 100
+  atk = 1
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 9
+  skill = Ability.HIDDEN_POWER_L
+  passive = Passive.UNOWN
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class UnownM extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      100,
-      1,
-      1,
-      1,
-      9,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      50,
-      Ability.HIDDEN_POWER_M,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.UNOWN
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.DEFAULT
+  hp = 100
+  atk = 1
+  def = 1
+  speDef = 1
+  maxPP = 50
+  range = 9
+  skill = Ability.HIDDEN_POWER_M
+  passive = Passive.UNOWN
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class UnownN extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      100,
-      1,
-      1,
-      1,
-      9,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      100,
-      Ability.HIDDEN_POWER_N,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.UNOWN
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.DEFAULT
+  hp = 100
+  atk = 1
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 9
+  skill = Ability.HIDDEN_POWER_N
+  passive = Passive.UNOWN
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class UnownO extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      100,
-      1,
-      1,
-      1,
-      9,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      100,
-      Ability.HIDDEN_POWER_O,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.UNOWN
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.DEFAULT
+  hp = 100
+  atk = 1
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 9
+  skill = Ability.HIDDEN_POWER_O
+  passive = Passive.UNOWN
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class UnownP extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      100,
-      1,
-      1,
-      1,
-      9,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      100,
-      Ability.HIDDEN_POWER_P,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.UNOWN
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.DEFAULT
+  hp = 100
+  atk = 1
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 9
+  skill = Ability.HIDDEN_POWER_P
+  passive = Passive.UNOWN
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class UnownQ extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      100,
-      1,
-      1,
-      1,
-      9,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      200,
-      Ability.HIDDEN_POWER_Q,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.UNOWN
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.DEFAULT
+  hp = 100
+  atk = 1
+  def = 1
+  speDef = 1
+  maxPP = 200
+  range = 9
+  skill = Ability.HIDDEN_POWER_Q
+  passive = Passive.UNOWN
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class UnownR extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      100,
-      1,
-      1,
-      1,
-      9,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      100,
-      Ability.HIDDEN_POWER_R,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.UNOWN
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.DEFAULT
+  hp = 100
+  atk = 1
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 9
+  skill = Ability.HIDDEN_POWER_R
+  passive = Passive.UNOWN
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class UnownS extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      100,
-      1,
-      1,
-      1,
-      9,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      100,
-      Ability.HIDDEN_POWER_S,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.UNOWN
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.DEFAULT
+  hp = 100
+  atk = 1
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 9
+  skill = Ability.HIDDEN_POWER_S
+  passive = Passive.UNOWN
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class UnownT extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      100,
-      1,
-      1,
-      1,
-      9,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      80,
-      Ability.HIDDEN_POWER_T,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.UNOWN
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.DEFAULT
+  hp = 100
+  atk = 1
+  def = 1
+  speDef = 1
+  maxPP = 80
+  range = 9
+  skill = Ability.HIDDEN_POWER_T
+  passive = Passive.UNOWN
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class UnownU extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      100,
-      1,
-      1,
-      1,
-      9,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      80,
-      Ability.HIDDEN_POWER_U,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.UNOWN
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.DEFAULT
+  hp = 100
+  atk = 1
+  def = 1
+  speDef = 1
+  maxPP = 80
+  range = 9
+  skill = Ability.HIDDEN_POWER_U
+  passive = Passive.UNOWN
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class UnownV extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      100,
-      1,
-      1,
-      1,
-      9,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      100,
-      Ability.HIDDEN_POWER_V,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.UNOWN
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.DEFAULT
+  hp = 100
+  atk = 1
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 9
+  skill = Ability.HIDDEN_POWER_V
+  passive = Passive.UNOWN
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class UnownW extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      100,
-      1,
-      1,
-      1,
-      9,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      100,
-      Ability.HIDDEN_POWER_W,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.UNOWN
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.DEFAULT
+  hp = 100
+  atk = 1
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 9
+  skill = Ability.HIDDEN_POWER_W
+  passive = Passive.UNOWN
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class UnownX extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      100,
-      1,
-      1,
-      1,
-      9,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      100,
-      Ability.HIDDEN_POWER_X,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.UNOWN
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.DEFAULT
+  hp = 100
+  atk = 1
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 9
+  skill = Ability.HIDDEN_POWER_X
+  passive = Passive.UNOWN
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class UnownY extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      100,
-      1,
-      1,
-      1,
-      9,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      50,
-      Ability.HIDDEN_POWER_Y,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.UNOWN
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.DEFAULT
+  hp = 100
+  atk = 1
+  def = 1
+  speDef = 1
+  maxPP = 50
+  range = 9
+  skill = Ability.HIDDEN_POWER_Y
+  passive = Passive.UNOWN
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class UnownZ extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      100,
-      1,
-      1,
-      1,
-      9,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      100,
-      Ability.HIDDEN_POWER_Z,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.UNOWN
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.DEFAULT
+  hp = 100
+  atk = 1
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 9
+  skill = Ability.HIDDEN_POWER_Z
+  passive = Passive.UNOWN
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class UnownQuestion extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      100,
-      1,
-      1,
-      1,
-      9,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      100,
-      Ability.HIDDEN_POWER_QM,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.UNOWN
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.DEFAULT
+  hp = 100
+  atk = 1
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 9
+  skill = Ability.HIDDEN_POWER_QM
+  passive = Passive.UNOWN
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class UnownExclamation extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.PSYCHIC],
-      Rarity.SPECIAL,
-      Pkm.DEFAULT,
-      100,
-      1,
-      1,
-      1,
-      9,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      100,
-      Ability.HIDDEN_POWER_EM,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.UNOWN
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.DEFAULT
+  hp = 100
+  atk = 1
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 9
+  skill = Ability.HIDDEN_POWER_EM
+  passive = Passive.UNOWN
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Diglett extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GROUND, Synergy.NORMAL],
-      Rarity.UNCOMMON,
-      Pkm.DUGTRIO,
-      75,
-      6,
-      2,
-      2,
-      1,
-      AttackSprite.ROCK_MELEE,
-      1,
-      50,
-      Ability.DIG,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.NORMAL])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.DUGTRIO
+  hp = 75
+  atk = 6
+  def = 2
+  speDef = 2
+  maxPP = 50
+  range = 1
+  skill = Ability.DIG
+  additional = false
+  final = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Dugtrio extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GROUND, Synergy.NORMAL],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      160,
-      14,
-      4,
-      4,
-      1,
-      AttackSprite.ROCK_MELEE,
-      2,
-      50,
-      Ability.DIG,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.NORMAL])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 160
+  atk = 14
+  def = 4
+  speDef = 4
+  maxPP = 50
+  range = 1
+  skill = Ability.DIG
+  additional = true
+  final = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Rowlet extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.FLYING, Synergy.GHOST],
-      Rarity.HATCH,
-      Pkm.DARTIX,
-      70,
-      5,
-      2,
-      2,
-      3,
-      AttackSprite.GRASS_MELEE,
-      1,
-      80,
-      Ability.SPIRIT_SHACKLE,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.HATCH
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLYING, Synergy.GHOST])
+  rarity = Rarity.HATCH
+  stars = 1
+  evolution = Pkm.DARTIX
+  hp = 70
+  atk = 5
+  def = 2
+  speDef = 2
+  maxPP = 80
+  range = 3
+  skill = Ability.SPIRIT_SHACKLE
+  passive = Passive.HATCH
+  additional = false
+  final = false
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Dartix extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.FLYING, Synergy.GHOST],
-      Rarity.HATCH,
-      Pkm.DECIDUEYE,
-      130,
-      9,
-      2,
-      3,
-      3,
-      AttackSprite.GRASS_MELEE,
-      2,
-      80,
-      Ability.SPIRIT_SHACKLE,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.HATCH
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLYING, Synergy.GHOST])
+  rarity = Rarity.HATCH
+  stars = 2
+  evolution = Pkm.DECIDUEYE
+  hp = 130
+  atk = 9
+  def = 2
+  speDef = 3
+  maxPP = 80
+  range = 3
+  skill = Ability.SPIRIT_SHACKLE
+  passive = Passive.HATCH
+  additional = false
+  final = false
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Decidueye extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.FLYING, Synergy.GHOST],
-      Rarity.HATCH,
-      Pkm.DEFAULT,
-      190,
-      18,
-      2,
-      4,
-      3,
-      AttackSprite.GRASS_MELEE,
-      3,
-      80,
-      Ability.SPIRIT_SHACKLE,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLYING, Synergy.GHOST])
+  rarity = Rarity.HATCH
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 190
+  atk = 18
+  def = 2
+  speDef = 4
+  maxPP = 80
+  range = 3
+  skill = Ability.SPIRIT_SHACKLE
+  additional = true
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Zorua extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DARK, Synergy.FIELD],
-      Rarity.UNCOMMON,
-      Pkm.ZOROARK,
-      70,
-      6,
-      2,
-      2,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      1,
-      100,
-      Ability.ILLUSION,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.ZOROARK
+  hp = 70
+  atk = 6
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.ILLUSION
+  additional = false
+  final = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Zoroark extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DARK, Synergy.FIELD],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      140,
-      15,
-      4,
-      4,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      2,
-      100,
-      Ability.ILLUSION,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 140
+  atk = 15
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.ILLUSION
+  additional = true
+  final = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class HisuiZorua extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.GHOST],
-      Rarity.UNCOMMON,
-      Pkm.HISUI_ZOROARK,
-      70,
-      6,
-      2,
-      2,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      1,
-      100,
-      Ability.ILLUSION,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GHOST])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.HISUI_ZOROARK
+  hp = 70
+  atk = 6
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.ILLUSION
+  additional = false
+  final = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class HisuiZoroark extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.GHOST],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      140,
-      15,
-      4,
-      4,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      2,
-      100,
-      Ability.ILLUSION,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GHOST])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 140
+  atk = 15
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.ILLUSION
+  additional = true
+  final = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Grimer extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.POISON, Synergy.MONSTER],
-      Rarity.UNCOMMON,
-      Pkm.MUK,
-      90,
-      5,
-      3,
-      2,
-      1,
-      AttackSprite.POISON_MELEE,
-      1,
-      100,
-      Ability.SLUDGE,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.MONSTER])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.MUK
+  hp = 90
+  atk = 5
+  def = 3
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.SLUDGE
+  additional = false
+  final = true
+  attackSprite = AttackSprite.POISON_MELEE
 }
 
 export class Muk extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.POISON, Synergy.MONSTER],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      190,
-      10,
-      6,
-      4,
-      1,
-      AttackSprite.POISON_MELEE,
-      2,
-      100,
-      Ability.SLUDGE,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.MONSTER])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 190
+  atk = 10
+  def = 6
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.SLUDGE
+  additional = true
+  final = true
+  attackSprite = AttackSprite.POISON_MELEE
 }
 
 export class AlolanGrimer extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.POISON, Synergy.DARK],
-      Rarity.UNCOMMON,
-      Pkm.ALOLAN_MUK,
-      80,
-      7,
-      2,
-      2,
-      1,
-      AttackSprite.POISON_MELEE,
-      1,
-      100,
-      Ability.SLUDGE,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.DARK])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.ALOLAN_MUK
+  hp = 80
+  atk = 7
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.SLUDGE
+  additional = false
+  final = true
+  attackSprite = AttackSprite.POISON_MELEE
 }
 
 export class AlolanMuk extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.POISON, Synergy.DARK],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      160,
-      15,
-      6,
-      4,
-      1,
-      AttackSprite.POISON_MELEE,
-      2,
-      100,
-      Ability.SLUDGE,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.DARK])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 160
+  atk = 15
+  def = 6
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.SLUDGE
+  additional = true
+  final = true
+  attackSprite = AttackSprite.POISON_MELEE
 }
 
 export class Ekans extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.POISON, Synergy.DARK],
-      Rarity.UNCOMMON,
-      Pkm.ARBOK,
-      60,
-      8,
-      2,
-      2,
-      1,
-      AttackSprite.POISON_MELEE,
-      1,
-      90,
-      Ability.VENOSHOCK,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.DARK])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.ARBOK
+  hp = 60
+  atk = 8
+  def = 2
+  speDef = 2
+  maxPP = 90
+  range = 1
+  skill = Ability.VENOSHOCK
+  additional = false
+  final = true
+  attackSprite = AttackSprite.POISON_MELEE
 }
 
 export class Arbok extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.POISON, Synergy.DARK],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      130,
-      18,
-      4,
-      4,
-      1,
-      AttackSprite.POISON_MELEE,
-      2,
-      90,
-      Ability.VENOSHOCK,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.DARK])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 130
+  atk = 18
+  def = 4
+  speDef = 4
+  maxPP = 90
+  range = 1
+  skill = Ability.VENOSHOCK
+  additional = true
+  final = true
+  attackSprite = AttackSprite.POISON_MELEE
 }
 
 export class Carvanha extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.DARK],
-      Rarity.UNCOMMON,
-      Pkm.SHARPEDO,
-      75,
-      10,
-      1,
-      2,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      1,
-      40,
-      Ability.AGILITY,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.DARK])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.SHARPEDO
+  hp = 75
+  atk = 10
+  def = 1
+  speDef = 2
+  maxPP = 40
+  range = 1
+  skill = Ability.AGILITY
+  additional = false
+  final = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Sharpedo extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.DARK],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      130,
-      21,
-      2,
-      3,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      2,
-      40,
-      Ability.AGILITY,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.DARK])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 130
+  atk = 21
+  def = 2
+  speDef = 3
+  maxPP = 40
+  range = 1
+  skill = Ability.AGILITY
+  additional = true
+  final = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Froakie extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.AQUATIC, Synergy.DARK],
-      Rarity.HATCH,
-      Pkm.FROGADIER,
-      80,
-      7,
-      2,
-      2,
-      1,
-      AttackSprite.WATER_MELEE,
-      1,
-      80,
-      Ability.WATER_SHURIKEN,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.HATCH
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.AQUATIC, Synergy.DARK])
+  rarity = Rarity.HATCH
+  stars = 1
+  evolution = Pkm.FROGADIER
+  hp = 80
+  atk = 7
+  def = 2
+  speDef = 2
+  maxPP = 80
+  range = 1
+  skill = Ability.WATER_SHURIKEN
+  passive = Passive.HATCH
+  additional = false
+  final = false
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Frogadier extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.AQUATIC, Synergy.DARK],
-      Rarity.HATCH,
-      Pkm.GRENINJA,
-      140,
-      14,
-      3,
-      4,
-      1,
-      AttackSprite.WATER_RANGE,
-      2,
-      80,
-      Ability.WATER_SHURIKEN,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.HATCH
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.AQUATIC, Synergy.DARK])
+  rarity = Rarity.HATCH
+  stars = 2
+  evolution = Pkm.GRENINJA
+  hp = 140
+  atk = 14
+  def = 3
+  speDef = 4
+  maxPP = 80
+  range = 1
+  skill = Ability.WATER_SHURIKEN
+  passive = Passive.HATCH
+  additional = false
+  final = false
+  attackSprite = AttackSprite.WATER_RANGE
 }
 
 export class Greninja extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.AQUATIC, Synergy.DARK],
-      Rarity.HATCH,
-      Pkm.DEFAULT,
-      200,
-      23,
-      4,
-      6,
-      1,
-      AttackSprite.WATER_RANGE,
-      3,
-      80,
-      Ability.WATER_SHURIKEN,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.AQUATIC, Synergy.DARK])
+  rarity = Rarity.HATCH
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 23
+  def = 4
+  speDef = 6
+  maxPP = 80
+  range = 1
+  skill = Ability.WATER_SHURIKEN
+  additional = true
+  attackSprite = AttackSprite.WATER_RANGE
 }
 
 export class Chingling extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.SOUND, Synergy.PSYCHIC, Synergy.BABY],
-      Rarity.UNIQUE,
-      Pkm.CHIMECHO,
-      150,
-      8,
-      2,
-      4,
-      3,
-      AttackSprite.PSYCHIC_RANGE,
-      2,
-      80,
-      Ability.ECHO,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.CHINGLING
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.SOUND, Synergy.PSYCHIC, Synergy.BABY])
+  rarity = Rarity.UNIQUE
+  stars = 2
+  evolution = Pkm.CHIMECHO
+  hp = 150
+  atk = 8
+  def = 2
+  speDef = 4
+  maxPP = 80
+  range = 3
+  skill = Ability.ECHO
+  passive = Passive.CHINGLING
+  additional = false
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Chimecho extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.SOUND, Synergy.PSYCHIC],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      15,
-      3,
-      6,
-      3,
-      AttackSprite.PSYCHIC_RANGE,
-      3,
-      80,
-      Ability.ECHO,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.CHIMECHO
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.SOUND, Synergy.PSYCHIC])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 15
+  def = 3
+  speDef = 6
+  maxPP = 80
+  range = 3
+  skill = Ability.ECHO
+  passive = Passive.CHIMECHO
+  additional = true
+  final = false
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Tyrogue extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIGHTING, Synergy.BABY],
-      Rarity.UNIQUE,
-      Pkm.HITMONTOP,
-      150,
-      10,
-      3,
-      3,
-      1,
-      AttackSprite.FIGHTING_MELEE,
-      2,
-      100,
-      Ability.MACH_PUNCH,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.TYROGUE
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.BABY])
+  rarity = Rarity.UNIQUE
+  stars = 2
+  evolution = Pkm.HITMONTOP
+  hp = 150
+  atk = 10
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.MACH_PUNCH
+  passive = Passive.TYROGUE
+  additional = false
+  final = false
+  attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
 export class Hitmontop extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIGHTING, Synergy.HUMAN],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      22,
-      5,
-      5,
-      1,
-      AttackSprite.FIGHTING_MELEE,
-      3,
-      75,
-      Ability.TRIPLE_KICK,
-      shiny,
-      emotion,
-      true,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 22
+  def = 5
+  speDef = 5
+  maxPP = 75
+  range = 1
+  skill = Ability.TRIPLE_KICK
+  additional = true
+  final = false
+  attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
 export class Hitmonlee extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIGHTING, Synergy.HUMAN],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      180,
-      25,
-      3,
-      3,
-      1,
-      AttackSprite.FIGHTING_MELEE,
-      3,
-      100,
-      Ability.MAWASHI_GERI,
-      shiny,
-      emotion,
-      true,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 180
+  atk = 25
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.MAWASHI_GERI
+  additional = true
+  final = false
+  attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
 export class Hitmonchan extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIGHTING, Synergy.HUMAN],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      180,
-      20,
-      7,
-      7,
-      1,
-      AttackSprite.FIGHTING_MELEE,
-      3,
-      100,
-      Ability.UPPERCUT,
-      shiny,
-      emotion,
-      true,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 180
+  atk = 20
+  def = 7
+  speDef = 7
+  maxPP = 100
+  range = 1
+  skill = Ability.UPPERCUT
+  additional = true
+  final = false
+  attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
 export class Mimikyu extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GHOST, Synergy.FAIRY],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      20,
-      5,
-      6,
-      1,
-      AttackSprite.FAIRY_MELEE,
-      3,
-      40,
-      Ability.SHADOW_SNEAK,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.FAIRY])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 20
+  def = 5
+  speDef = 6
+  maxPP = 40
+  range = 1
+  skill = Ability.SHADOW_SNEAK
+  additional = true
+  attackSprite = AttackSprite.FAIRY_MELEE
 }
 
 export class Bonsley extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ROCK, Synergy.FLORA, Synergy.BABY],
-      Rarity.EPIC,
-      Pkm.SUDOWOODO,
-      125,
-      8,
-      5,
-      2,
-      1,
-      AttackSprite.ROCK_MELEE,
-      1,
-      100,
-      Ability.MIMIC,
-      shiny,
-      emotion,
-      false,
-      true,
-      Passive.SUDOWOODO
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.FLORA, Synergy.BABY])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.SUDOWOODO
+  hp = 125
+  atk = 8
+  def = 5
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.MIMIC
+  passive = Passive.SUDOWOODO
+  additional = false
+  final = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Sudowoodo extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ROCK, Synergy.FLORA, Synergy.MONSTER],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      250,
-      16,
-      6,
-      3,
-      1,
-      AttackSprite.ROCK_MELEE,
-      2,
-      100,
-      Ability.MIMIC,
-      shiny,
-      emotion,
-      true,
-      true,
-      Passive.SUDOWOODO
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.FLORA, Synergy.MONSTER])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 250
+  atk = 16
+  def = 6
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.MIMIC
+  passive = Passive.SUDOWOODO
+  additional = true
+  final = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Combee extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG, Synergy.FLORA],
-      Rarity.EPIC,
-      Pkm.VESPIQUEEN,
-      120,
-      8,
-      3,
-      3,
-      1,
-      AttackSprite.BUG_MELEE,
-      1,
-      90,
-      Ability.HEAL_ORDER,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLORA])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.VESPIQUEEN
+  hp = 120
+  atk = 8
+  def = 3
+  speDef = 3
+  maxPP = 90
+  range = 1
+  skill = Ability.HEAL_ORDER
+  additional = false
+  final = true
+  attackSprite = AttackSprite.BUG_MELEE
 }
 
 export class Vespiqueen extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG, Synergy.FLORA],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      210,
-      20,
-      4,
-      4,
-      1,
-      AttackSprite.BUG_MELEE,
-      2,
-      90,
-      Ability.HEAL_ORDER,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLORA])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 210
+  atk = 20
+  def = 4
+  speDef = 4
+  maxPP = 90
+  range = 1
+  skill = Ability.HEAL_ORDER
+  additional = true
+  final = true
+  attackSprite = AttackSprite.BUG_MELEE
 }
 
 export class Shuckle extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG, Synergy.ROCK],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      150,
-      4,
-      15,
-      15,
-      1,
-      AttackSprite.ROCK_MELEE,
-      3,
-      70,
-      Ability.SHELL_TRAP,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.ROCK])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 150
+  atk = 4
+  def = 15
+  speDef = 15
+  maxPP = 70
+  range = 1
+  skill = Ability.SHELL_TRAP
+  additional = true
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Tepig extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.FIGHTING, Synergy.FIELD],
-      Rarity.HATCH,
-      Pkm.PIGNITE,
-      80,
-      5,
-      4,
-      2,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      1,
-      100,
-      Ability.IRON_TAIL,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.HATCH
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.FIRE,
+    Synergy.FIGHTING,
+    Synergy.FIELD
+  ])
+  rarity = Rarity.HATCH
+  stars = 1
+  evolution = Pkm.PIGNITE
+  hp = 80
+  atk = 5
+  def = 4
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.IRON_TAIL
+  passive = Passive.HATCH
+  additional = false
+  final = false
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Pignite extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.FIGHTING, Synergy.FIELD],
-      Rarity.HATCH,
-      Pkm.EMBOAR,
-      140,
-      12,
-      5,
-      2,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      2,
-      100,
-      Ability.IRON_TAIL,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.HATCH
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.FIRE,
+    Synergy.FIGHTING,
+    Synergy.FIELD
+  ])
+  rarity = Rarity.HATCH
+  stars = 2
+  evolution = Pkm.EMBOAR
+  hp = 140
+  atk = 12
+  def = 5
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.IRON_TAIL
+  passive = Passive.HATCH
+  additional = false
+  final = false
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Emboar extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FIRE, Synergy.FIGHTING, Synergy.FIELD],
-      Rarity.HATCH,
-      Pkm.DEFAULT,
-      220,
-      18,
-      6,
-      2,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      3,
-      100,
-      Ability.IRON_TAIL,
-      shiny,
-      emotion,
-      true,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.FIRE,
+    Synergy.FIGHTING,
+    Synergy.FIELD
+  ])
+  rarity = Rarity.HATCH
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 220
+  atk = 18
+  def = 6
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.IRON_TAIL
+  additional = true
+  final = false
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Wurmple extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG],
-      Rarity.EPIC,
-      Pkm.SILCOON,
-      110,
-      10,
-      3,
-      3,
-      1,
-      AttackSprite.BUG_MELEE,
-      1,
-      100,
-      Ability.STICKY_WEB,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.WURMPLE
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BUG])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.SILCOON
+  hp = 110
+  atk = 10
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.STICKY_WEB
+  passive = Passive.WURMPLE
+  additional = false
+  final = false
+  attackSprite = AttackSprite.BUG_MELEE
 }
 
 export class Silcoon extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG, Synergy.NORMAL],
-      Rarity.EPIC,
-      Pkm.BEAUTIFLY,
-      180,
-      20,
-      6,
-      6,
-      1,
-      AttackSprite.BUG_MELEE,
-      2,
-      100,
-      Ability.SPIKE_ARMOR,
-      shiny,
-      emotion,
-      false,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.NORMAL])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.BEAUTIFLY
+  hp = 180
+  atk = 20
+  def = 6
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.SPIKE_ARMOR
+  additional = false
+  final = false
+  attackSprite = AttackSprite.BUG_MELEE
 }
 
 export class Beautifly extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG, Synergy.NORMAL, Synergy.FLYING],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      250,
-      30,
-      6,
-      6,
-      1,
-      AttackSprite.BUG_MELEE,
-      3,
-      60,
-      Ability.SILVER_WIND,
-      shiny,
-      emotion,
-      true,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.NORMAL, Synergy.FLYING])
+  rarity = Rarity.EPIC
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 250
+  atk = 30
+  def = 6
+  speDef = 6
+  maxPP = 60
+  range = 1
+  skill = Ability.SILVER_WIND
+  additional = true
+  final = false
+  attackSprite = AttackSprite.BUG_MELEE
 }
 
 export class Cascoon extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG, Synergy.POISON],
-      Rarity.EPIC,
-      Pkm.DUSTOX,
-      180,
-      20,
-      6,
-      6,
-      1,
-      AttackSprite.BUG_MELEE,
-      2,
-      100,
-      Ability.SPIKE_ARMOR,
-      shiny,
-      emotion,
-      false,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.DUSTOX
+  hp = 180
+  atk = 20
+  def = 6
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.SPIKE_ARMOR
+  additional = false
+  final = false
+  attackSprite = AttackSprite.BUG_MELEE
 }
 
 export class Dustox extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG, Synergy.POISON, Synergy.FLYING],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      250,
-      30,
-      6,
-      6,
-      1,
-      AttackSprite.BUG_MELEE,
-      3,
-      60,
-      Ability.POISON_POWDER,
-      shiny,
-      emotion,
-      false,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON, Synergy.FLYING])
+  rarity = Rarity.EPIC
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 250
+  atk = 30
+  def = 6
+  speDef = 6
+  maxPP = 60
+  range = 1
+  skill = Ability.POISON_POWDER
+  additional = false
+  final = false
+  attackSprite = AttackSprite.BUG_MELEE
 }
 
 export class Tinkatink extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.STEEL, Synergy.FAIRY],
-      Rarity.EPIC,
-      Pkm.TINKATUFF,
-      100,
-      11,
-      3,
-      3,
-      1,
-      AttackSprite.FAIRY_MELEE,
-      1,
-      150,
-      Ability.GIGATON_HAMMER,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.FAIRY])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.TINKATUFF
+  hp = 100
+  atk = 11
+  def = 3
+  speDef = 3
+  maxPP = 150
+  range = 1
+  skill = Ability.GIGATON_HAMMER
+  additional = false
+  attackSprite = AttackSprite.FAIRY_MELEE
 }
 
 export class Tinkatuff extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.STEEL, Synergy.FAIRY],
-      Rarity.EPIC,
-      Pkm.TINKATON,
-      200,
-      22,
-      4,
-      4,
-      1,
-      AttackSprite.FAIRY_MELEE,
-      2,
-      150,
-      Ability.GIGATON_HAMMER,
-      shiny,
-      emotion,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.FAIRY])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.TINKATON
+  hp = 200
+  atk = 22
+  def = 4
+  speDef = 4
+  maxPP = 150
+  range = 1
+  skill = Ability.GIGATON_HAMMER
+  additional = false
+  attackSprite = AttackSprite.FAIRY_MELEE
 }
 
 export class Tinkaton extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.STEEL, Synergy.FAIRY],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      300,
-      44,
-      8,
-      8,
-      1,
-      AttackSprite.FAIRY_MELEE,
-      3,
-      150,
-      Ability.GIGATON_HAMMER,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.FAIRY])
+  rarity = Rarity.EPIC
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 44
+  def = 8
+  speDef = 8
+  maxPP = 150
+  range = 1
+  skill = Ability.GIGATON_HAMMER
+  additional = true
+  attackSprite = AttackSprite.FAIRY_MELEE
 }
 
 export class Maractus extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.GROUND, Synergy.FLORA],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      12,
-      6,
-      3,
-      1,
-      AttackSprite.GRASS_MELEE,
-      3,
-      100,
-      Ability.SPIKE_ARMOR,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.HYDRATATION
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.GROUND, Synergy.FLORA])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 12
+  def = 6
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.SPIKE_ARMOR
+  passive = Passive.HYDRATATION
+  additional = false
+  final = false
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Plusle extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.FAIRY],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      140,
-      13,
-      3,
-      3,
-      1,
-      AttackSprite.ELECTRIC_MELEE,
-      3,
-      60,
-      Ability.LINK_CABLE,
-      shiny,
-      emotion,
-      false,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FAIRY])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 140
+  atk = 13
+  def = 3
+  speDef = 3
+  maxPP = 60
+  range = 1
+  skill = Ability.LINK_CABLE
+  additional = false
+  final = false
+  attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
 export class Minun extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.ELECTRIC, Synergy.FAIRY],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      140,
-      13,
-      3,
-      3,
-      1,
-      AttackSprite.ELECTRIC_MELEE,
-      3,
-      60,
-      Ability.LINK_CABLE,
-      shiny,
-      emotion,
-      false,
-      false
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FAIRY])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 140
+  atk = 13
+  def = 3
+  speDef = 3
+  maxPP = 60
+  range = 1
+  skill = Ability.LINK_CABLE
+  additional = false
+  final = false
+  attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
 export class Spectrier extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GHOST, Synergy.FIELD],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      280,
-      25,
-      5,
-      10,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      3,
-      100,
-      Ability.ASTRAL_BARRAGE,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.GRIM_NEIGH
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.FIELD])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 280
+  atk = 25
+  def = 5
+  speDef = 10
+  maxPP = 100
+  range = 1
+  skill = Ability.ASTRAL_BARRAGE
+  passive = Passive.GRIM_NEIGH
+  additional = false
+  final = false
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Kartana extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.STEEL],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      200,
-      40,
-      10,
-      1,
-      1,
-      AttackSprite.GRASS_MELEE,
-      3,
-      95,
-      Ability.LEAF_BLADE,
-      shiny,
-      emotion,
-      false,
-      false,
-      Passive.BEAST_BOOST
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.STEEL])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 40
+  def = 10
+  speDef = 1
+  maxPP = 95
+  range = 1
+  skill = Ability.LEAF_BLADE
+  passive = Passive.BEAST_BOOST
+  additional = false
+  final = false
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Dhelmise extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GRASS, Synergy.GHOST, Synergy.STEEL],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      18,
-      5,
-      5,
-      1,
-      AttackSprite.GRASS_MELEE,
-      3,
-      80,
-      Ability.ANCHOR_SHOT,
-      shiny,
-      emotion,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.GHOST, Synergy.STEEL])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 18
+  def = 5
+  speDef = 5
+  maxPP = 80
+  range = 1
+  skill = Ability.ANCHOR_SHOT
+  additional = true
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Koffing extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.POISON, Synergy.ARTIFICIAL],
-      Rarity.UNCOMMON,
-      Pkm.WEEZING,
-      85,
-      5,
-      3,
-      3,
-      1,
-      AttackSprite.POISON_MELEE,
-      1,
-      40,
-      Ability.SMOG,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.ARTIFICIAL])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.WEEZING
+  hp = 85
+  atk = 5
+  def = 3
+  speDef = 3
+  maxPP = 40
+  range = 1
+  skill = Ability.SMOG
+  additional = false
+  final = true
+  attackSprite = AttackSprite.POISON_MELEE
 }
 
 export class Weezing extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.POISON, Synergy.ARTIFICIAL],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      190,
-      10,
-      5,
-      5,
-      1,
-      AttackSprite.POISON_MELEE,
-      2,
-      40,
-      Ability.SMOG,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.ARTIFICIAL])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 190
+  atk = 10
+  def = 5
+  speDef = 5
+  maxPP = 40
+  range = 1
+  skill = Ability.SMOG
+  additional = true
+  final = true
+  attackSprite = AttackSprite.POISON_MELEE
 }
 
 export class Clauncher extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.SOUND],
-      Rarity.RARE,
-      Pkm.CLAWITZER,
-      80,
-      7,
-      1,
-      1,
-      4,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      200,
-      Ability.WATER_PULSE,
-      shiny,
-      emotion,
-      false,
-      true,
-      Passive.MEGA_LAUNCHER
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.SOUND])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.CLAWITZER
+  hp = 80
+  atk = 7
+  def = 1
+  speDef = 1
+  maxPP = 200
+  range = 4
+  skill = Ability.WATER_PULSE
+  passive = Passive.MEGA_LAUNCHER
+  additional = false
+  final = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Clawitzer extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.SOUND],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      140,
-      15,
-      3,
-      2,
-      4,
-      AttackSprite.PSYCHIC_RANGE,
-      2,
-      200,
-      Ability.WATER_PULSE,
-      shiny,
-      emotion,
-      true,
-      true,
-      Passive.MEGA_LAUNCHER
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.SOUND])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 140
+  atk = 15
+  def = 3
+  speDef = 2
+  maxPP = 200
+  range = 4
+  skill = Ability.WATER_PULSE
+  passive = Passive.MEGA_LAUNCHER
+  additional = true
+  final = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Yanma extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG, Synergy.FOSSIL, Synergy.FLYING],
-      Rarity.RARE,
-      Pkm.YANMEGA,
-      70,
-      9,
-      1,
-      1,
-      2,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      100,
-      Ability.AERIAL_ACE,
-      shiny,
-      emotion,
-      false,
-      true,
-      Passive.CLEAR_WING
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FOSSIL, Synergy.FLYING])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.YANMEGA
+  hp = 70
+  atk = 9
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 2
+  skill = Ability.AERIAL_ACE
+  passive = Passive.CLEAR_WING
+  additional = false
+  final = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Yanmega extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.BUG, Synergy.FOSSIL, Synergy.FLYING],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      160,
-      16,
-      2,
-      2,
-      2,
-      AttackSprite.PSYCHIC_RANGE,
-      2,
-      100,
-      Ability.AERIAL_ACE,
-      shiny,
-      emotion,
-      true,
-      true,
-      Passive.CLEAR_WING
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FOSSIL, Synergy.FLYING])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 160
+  atk = 16
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 2
+  skill = Ability.AERIAL_ACE
+  passive = Passive.CLEAR_WING
+  additional = true
+  final = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Helioptile extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.ELECTRIC, Synergy.LIGHT],
-      Rarity.EPIC,
-      Pkm.HELIOLISK,
-      90,
-      9,
-      3,
-      3,
-      3,
-      AttackSprite.ELECTRIC_RANGE,
-      1,
-      80,
-      Ability.PARABOLIC_CHARGE,
-      shiny,
-      emotion,
-      false,
-      true,
-      Passive.DRY_SKIN
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.ELECTRIC,
+    Synergy.LIGHT
+  ])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.HELIOLISK
+  hp = 90
+  atk = 9
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 3
+  skill = Ability.PARABOLIC_CHARGE
+  passive = Passive.DRY_SKIN
+  additional = false
+  final = true
+  attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
 export class Heliolisk extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.ELECTRIC, Synergy.LIGHT],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      220,
-      22,
-      4,
-      4,
-      3,
-      AttackSprite.ELECTRIC_RANGE,
-      2,
-      80,
-      Ability.PARABOLIC_CHARGE,
-      shiny,
-      emotion,
-      true,
-      true,
-      Passive.DRY_SKIN
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.ELECTRIC,
+    Synergy.LIGHT
+  ])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 220
+  atk = 22
+  def = 4
+  speDef = 4
+  maxPP = 80
+  range = 3
+  skill = Ability.PARABOLIC_CHARGE
+  passive = Passive.DRY_SKIN
+  additional = true
+  final = true
+  attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
 export class Bidoof extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.FIELD, Synergy.AQUATIC],
-      Rarity.UNCOMMON,
-      Pkm.BIBAREL,
-      60,
-      6,
-      2,
-      2,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      1,
-      90,
-      Ability.SUPER_FANG,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.FIELD,
+    Synergy.AQUATIC
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.BIBAREL
+  hp = 60
+  atk = 6
+  def = 2
+  speDef = 2
+  maxPP = 90
+  range = 1
+  skill = Ability.SUPER_FANG
+  additional = false
+  final = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Bibarel extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.FIELD, Synergy.AQUATIC],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      135,
-      15,
-      2,
-      2,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      2,
-      80,
-      Ability.SUPER_FANG,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.FIELD,
+    Synergy.AQUATIC
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 135
+  atk = 15
+  def = 2
+  speDef = 2
+  maxPP = 80
+  range = 1
+  skill = Ability.SUPER_FANG
+  additional = true
+  final = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Spinda extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.NORMAL, Synergy.HUMAN, Synergy.SOUND],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      200,
-      20,
-      5,
-      5,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      3,
-      100,
-      Ability.TEETER_DANCE,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.SPOT_PANDA
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.HUMAN, Synergy.SOUND])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 20
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.TEETER_DANCE
+  passive = Passive.SPOT_PANDA
+  additional = true
+  final = false
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Baltoy extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GROUND, Synergy.PSYCHIC, Synergy.ARTIFICIAL],
-      Rarity.EPIC,
-      Pkm.CLAYDOL,
-      80,
-      8,
-      4,
-      4,
-      2,
-      AttackSprite.PSYCHIC_RANGE,
-      1,
-      70,
-      Ability.CONFUSION,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.GROUND,
+    Synergy.PSYCHIC,
+    Synergy.ARTIFICIAL
+  ])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.CLAYDOL
+  hp = 80
+  atk = 8
+  def = 4
+  speDef = 4
+  maxPP = 70
+  range = 2
+  skill = Ability.CONFUSION
+  additional = false
+  final = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Claydol extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GROUND, Synergy.PSYCHIC, Synergy.ARTIFICIAL],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      150,
-      16,
-      6,
-      6,
-      2,
-      AttackSprite.PSYCHIC_RANGE,
-      2,
-      70,
-      Ability.CONFUSION,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.GROUND,
+    Synergy.PSYCHIC,
+    Synergy.ARTIFICIAL
+  ])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 150
+  atk = 16
+  def = 6
+  speDef = 6
+  maxPP = 70
+  range = 2
+  skill = Ability.CONFUSION
+  additional = true
+  final = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Purrloin extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DARK, Synergy.FIELD],
-      Rarity.RARE,
-      Pkm.LIEPARD,
-      80,
-      9,
-      1,
-      1,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      1,
-      90,
-      Ability.ASSIST,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FIELD])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.LIEPARD
+  hp = 80
+  atk = 9
+  def = 1
+  speDef = 1
+  maxPP = 90
+  range = 1
+  skill = Ability.ASSIST
+  additional = false
+  final = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Liepard extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DARK, Synergy.FIELD],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      175,
-      25,
-      2,
-      2,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      2,
-      90,
-      Ability.ASSIST,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FIELD])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 175
+  atk = 25
+  def = 2
+  speDef = 2
+  maxPP = 90
+  range = 1
+  skill = Ability.ASSIST
+  additional = true
+  final = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Barboach extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.GROUND],
-      Rarity.EPIC,
-      Pkm.WHISCASH,
-      120,
-      9,
-      3,
-      4,
-      1,
-      AttackSprite.WATER_MELEE,
-      1,
-      90,
-      Ability.FISSURE,
-      shiny,
-      emotion,
-      false,
-      true,
-      Passive.AQUA_VEIL
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.GROUND])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.WHISCASH
+  hp = 120
+  atk = 9
+  def = 3
+  speDef = 4
+  maxPP = 90
+  range = 1
+  skill = Ability.FISSURE
+  passive = Passive.AQUA_VEIL
+  additional = false
+  final = true
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Whiscash extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.GROUND],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      250,
-      22,
-      4,
-      5,
-      1,
-      AttackSprite.WATER_MELEE,
-      2,
-      90,
-      Ability.FISSURE,
-      shiny,
-      emotion,
-      true,
-      true,
-      Passive.AQUA_VEIL
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.GROUND])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 250
+  atk = 22
+  def = 4
+  speDef = 5
+  maxPP = 90
+  range = 1
+  skill = Ability.FISSURE
+  passive = Passive.AQUA_VEIL
+  additional = true
+  final = true
+  attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Scraggy extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DARK, Synergy.FIGHTING],
-      Rarity.UNCOMMON,
-      Pkm.SCRAFTY,
-      70,
-      8,
-      2,
-      2,
-      1,
-      AttackSprite.FIGHTING_MELEE,
-      1,
-      85,
-      Ability.ASSURANCE,
-      shiny,
-      emotion,
-      false,
-      true,
-      Passive.MOXIE
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FIGHTING])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.SCRAFTY
+  hp = 70
+  atk = 8
+  def = 2
+  speDef = 2
+  maxPP = 85
+  range = 1
+  skill = Ability.ASSURANCE
+  passive = Passive.MOXIE
+  additional = false
+  final = true
+  attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
 export class Scrafty extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DARK, Synergy.FIGHTING],
-      Rarity.UNCOMMON,
-      Pkm.DEFAULT,
-      140,
-      18,
-      4,
-      4,
-      1,
-      AttackSprite.FIGHTING_MELEE,
-      2,
-      85,
-      Ability.ASSURANCE,
-      shiny,
-      emotion,
-      true,
-      true,
-      Passive.MOXIE
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FIGHTING])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 140
+  atk = 18
+  def = 4
+  speDef = 4
+  maxPP = 85
+  range = 1
+  skill = Ability.ASSURANCE
+  passive = Passive.MOXIE
+  additional = true
+  final = true
+  attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
 export class Finneon extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.LIGHT],
-      Rarity.RARE,
-      Pkm.LUMINEON,
-      75,
-      7,
-      2,
-      2,
-      2,
-      AttackSprite.WATER_RANGE,
-      1,
-      90,
-      Ability.AQUA_RING,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.LIGHT])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.LUMINEON
+  hp = 75
+  atk = 7
+  def = 2
+  speDef = 2
+  maxPP = 90
+  range = 2
+  skill = Ability.AQUA_RING
+  additional = false
+  final = true
+  attackSprite = AttackSprite.WATER_RANGE
 }
 
 export class Lumineon extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.WATER, Synergy.LIGHT],
-      Rarity.RARE,
-      Pkm.DEFAULT,
-      180,
-      16,
-      4,
-      4,
-      2,
-      AttackSprite.WATER_RANGE,
-      2,
-      85,
-      Ability.AQUA_RING,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.LIGHT])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 180
+  atk = 16
+  def = 4
+  speDef = 4
+  maxPP = 85
+  range = 2
+  skill = Ability.AQUA_RING
+  additional = true
+  final = true
+  attackSprite = AttackSprite.WATER_RANGE
 }
 
 export class Stunky extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DARK, Synergy.POISON],
-      Rarity.EPIC,
-      Pkm.SKUNTANK,
-      125,
-      10,
-      2,
-      2,
-      1,
-      AttackSprite.POISON_MELEE,
-      1,
-      80,
-      Ability.POISON_GAS,
-      shiny,
-      emotion,
-      false,
-      true,
-      Passive.STENCH
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.POISON])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.SKUNTANK
+  hp = 125
+  atk = 10
+  def = 2
+  speDef = 2
+  maxPP = 80
+  range = 1
+  skill = Ability.POISON_GAS
+  passive = Passive.STENCH
+  additional = false
+  final = true
+  attackSprite = AttackSprite.POISON_MELEE
 }
 
 export class Skuntank extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DARK, Synergy.POISON],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      280,
-      22,
-      4,
-      4,
-      1,
-      AttackSprite.POISON_MELEE,
-      2,
-      80,
-      Ability.POISON_GAS,
-      shiny,
-      emotion,
-      true,
-      true,
-      Passive.STENCH
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.POISON])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 280
+  atk = 22
+  def = 4
+  speDef = 4
+  maxPP = 80
+  range = 1
+  skill = Ability.POISON_GAS
+  passive = Passive.STENCH
+  additional = true
+  final = true
+  attackSprite = AttackSprite.POISON_MELEE
 }
 
 export class Illumise extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FLYING, Synergy.BUG, Synergy.LIGHT],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      150,
-      13,
-      3,
-      3,
-      1,
-      AttackSprite.BUG_MELEE,
-      3,
-      90,
-      Ability.STRUGGLE_BUG,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.ILLUMISE_VOLBEAT
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.BUG, Synergy.LIGHT])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 150
+  atk = 13
+  def = 3
+  speDef = 3
+  maxPP = 90
+  range = 1
+  skill = Ability.STRUGGLE_BUG
+  passive = Passive.ILLUMISE_VOLBEAT
+  additional = true
+  final = false
+  attackSprite = AttackSprite.BUG_MELEE
 }
 
 export class Volbeat extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FLYING, Synergy.BUG, Synergy.LIGHT],
-      Rarity.UNIQUE,
-      Pkm.DEFAULT,
-      150,
-      13,
-      3,
-      3,
-      1,
-      AttackSprite.BUG_MELEE,
-      3,
-      90,
-      Ability.TAIL_GLOW,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.ILLUMISE_VOLBEAT
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.BUG, Synergy.LIGHT])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 150
+  atk = 13
+  def = 3
+  speDef = 3
+  maxPP = 90
+  range = 1
+  skill = Ability.TAIL_GLOW
+  passive = Passive.ILLUMISE_VOLBEAT
+  additional = true
+  final = false
+  attackSprite = AttackSprite.BUG_MELEE
 }
 
 export class Necrozma extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.LIGHT, Synergy.PSYCHIC],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      300,
-      30,
-      5,
-      5,
-      1,
-      AttackSprite.DRAGON_MELEE,
-      3,
-      100,
-      Ability.PRISMATIC_LASER,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.PRISM
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.LIGHT, Synergy.PSYCHIC])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 300
+  atk = 30
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.PRISMATIC_LASER
+  passive = Passive.PRISM
+  additional = true
+  final = false
+  attackSprite = AttackSprite.DRAGON_MELEE
 
   onChangePosition(
     x: number,
@@ -14399,27 +11121,25 @@ export class Necrozma extends Pokemon {
 }
 
 export class UltraNecrozma extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.DRAGON, Synergy.LIGHT, Synergy.PSYCHIC],
-      Rarity.LEGENDARY,
-      Pkm.DEFAULT,
-      250,
-      30,
-      2,
-      2,
-      3,
-      AttackSprite.GHOST_RANGE,
-      3,
-      150,
-      Ability.PRISMATIC_LASER,
-      shiny,
-      emotion,
-      true,
-      false,
-      Passive.PRISM
-    )
-  }
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.LIGHT,
+    Synergy.PSYCHIC
+  ])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 250
+  atk = 30
+  def = 2
+  speDef = 2
+  maxPP = 150
+  range = 3
+  skill = Ability.PRISMATIC_LASER
+  passive = Passive.PRISM
+  additional = true
+  final = false
+  attackSprite = AttackSprite.GHOST_RANGE
 
   onChangePosition(
     x: number,
@@ -14435,50 +11155,38 @@ export class UltraNecrozma extends Pokemon {
 }
 
 export class Cherrubi extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FLORA, Synergy.LIGHT, Synergy.GRASS],
-      Rarity.EPIC,
-      Pkm.CHERRIM,
-      90,
-      6,
-      1,
-      1,
-      3,
-      AttackSprite.GRASS_RANGE,
-      1,
-      65,
-      Ability.NATURAL_GIFT,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.LIGHT, Synergy.GRASS])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.CHERRIM
+  hp = 90
+  atk = 6
+  def = 1
+  speDef = 1
+  maxPP = 65
+  range = 3
+  skill = Ability.NATURAL_GIFT
+  additional = false
+  final = true
+  attackSprite = AttackSprite.GRASS_RANGE
 }
 
 export class Cherrim extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FLORA, Synergy.LIGHT, Synergy.GRASS],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      180,
-      16,
-      2,
-      2,
-      3,
-      AttackSprite.GRASS_RANGE,
-      2,
-      65,
-      Ability.NATURAL_GIFT,
-      shiny,
-      emotion,
-      true,
-      true,
-      Passive.BLOSSOM
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.LIGHT, Synergy.GRASS])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 180
+  atk = 16
+  def = 2
+  speDef = 2
+  maxPP = 65
+  range = 3
+  skill = Ability.NATURAL_GIFT
+  passive = Passive.BLOSSOM
+  additional = true
+  final = true
+  attackSprite = AttackSprite.GRASS_RANGE
   onChangePosition(
     x: number,
     y: number,
@@ -14493,27 +11201,21 @@ export class Cherrim extends Pokemon {
 }
 
 export class CherrimSunlight extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FLORA, Synergy.LIGHT, Synergy.GRASS],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      210,
-      18,
-      3,
-      3,
-      3,
-      AttackSprite.GRASS_RANGE,
-      2,
-      60,
-      Ability.NATURAL_GIFT,
-      shiny,
-      emotion,
-      true,
-      true,
-      Passive.BLOSSOM
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.LIGHT, Synergy.GRASS])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 210
+  atk = 18
+  def = 3
+  speDef = 3
+  maxPP = 60
+  range = 3
+  skill = Ability.NATURAL_GIFT
+  passive = Passive.BLOSSOM
+  additional = true
+  final = true
+  attackSprite = AttackSprite.GRASS_RANGE
   onChangePosition(
     x: number,
     y: number,
@@ -14528,95 +11230,71 @@ export class CherrimSunlight extends Pokemon {
 }
 
 export class Misdreavus extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GHOST, Synergy.FAIRY],
-      Rarity.EPIC,
-      Pkm.MISMAGIUS,
-      90,
-      9,
-      2,
-      3,
-      3,
-      AttackSprite.GHOST_RANGE,
-      1,
-      95,
-      Ability.NIGHT_SHADE,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.FAIRY])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.MISMAGIUS
+  hp = 90
+  atk = 9
+  def = 2
+  speDef = 3
+  maxPP = 95
+  range = 3
+  skill = Ability.NIGHT_SHADE
+  additional = false
+  final = true
+  attackSprite = AttackSprite.GHOST_RANGE
 }
 
 export class Mismagius extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.GHOST, Synergy.FAIRY],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      180,
-      18,
-      2,
-      4,
-      3,
-      AttackSprite.GHOST_RANGE,
-      2,
-      95,
-      Ability.NIGHT_SHADE,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.FAIRY])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 180
+  atk = 18
+  def = 2
+  speDef = 4
+  maxPP = 95
+  range = 3
+  skill = Ability.NIGHT_SHADE
+  additional = true
+  final = true
+  attackSprite = AttackSprite.GHOST_RANGE
 }
 
 export class Doduo extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FLYING, Synergy.NORMAL],
-      Rarity.EPIC,
-      Pkm.DODRIO,
-      90,
-      10,
-      3,
-      2,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      1,
-      40,
-      Ability.AGILITY,
-      shiny,
-      emotion,
-      false,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.NORMAL])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.DODRIO
+  hp = 90
+  atk = 10
+  def = 3
+  speDef = 2
+  maxPP = 40
+  range = 1
+  skill = Ability.AGILITY
+  additional = false
+  final = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Dodrio extends Pokemon {
-  constructor(shiny: boolean, emotion: Emotion) {
-    super(
-      [Synergy.FLYING, Synergy.NORMAL],
-      Rarity.EPIC,
-      Pkm.DEFAULT,
-      185,
-      24,
-      5,
-      3,
-      1,
-      AttackSprite.NORMAL_MELEE,
-      2,
-      40,
-      Ability.AGILITY,
-      shiny,
-      emotion,
-      true,
-      true
-    )
-  }
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.NORMAL])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.DEFAULT
+  hp = 185
+  atk = 24
+  def = 5
+  speDef = 3
+  maxPP = 40
+  range = 1
+  skill = Ability.AGILITY
+  additional = true
+  final = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export const PokemonClasses: Record<
@@ -14829,7 +11507,6 @@ export const PokemonClasses: Record<
   [Pkm.NUMEL]: Numel,
   [Pkm.CAMERUPT]: Camerupt,
   [Pkm.MEGA_CAMERUPT]: MegaCamerupt,
-  [Pkm.DITTO]: Ditto,
   [Pkm.DARKRAI]: Darkrai,
   [Pkm.LITWICK]: Litwick,
   [Pkm.LAMPENT]: Lampent,
@@ -15260,5 +11937,5 @@ export const PokemonClasses: Record<
   [Pkm.MISMAGIUS]: Mismagius,
   [Pkm.DODUO]: Doduo,
   [Pkm.DODRIO]: Dodrio,
-  [Pkm.DEFAULT]: Magikarp
+  [Pkm.DEFAULT]: Pokemon
 }
