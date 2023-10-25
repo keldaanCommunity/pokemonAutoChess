@@ -582,7 +582,7 @@ export default class Simulation extends Schema implements ISimulation {
               pokemon.positionY
             )
             if (value) {
-              value.status.deltaOrb = true
+              value.status.deltaOrbStacks += 1
             }
           })
         }

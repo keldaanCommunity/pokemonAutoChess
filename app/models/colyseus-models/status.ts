@@ -35,7 +35,7 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") light = false
   magmaStorm = false
   soulDew = false
-  deltaOrb = false
+  deltaOrbStacks = 0
   clearWing = false
   guts = false
   burnOrigin: PokemonEntity | undefined = undefined
