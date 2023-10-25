@@ -1,4 +1,4 @@
-> September 30th, 2023
+> October 21, 2023
 
 # Patch 4.3: Spotlight
 
