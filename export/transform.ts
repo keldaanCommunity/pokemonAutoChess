@@ -18,7 +18,7 @@ import {
 } from "../app/types/Config"
 import { AnimationTiled, FrameTiled, TilesetTiled } from "../app/core/tileset"
 
-const PMDO_EXPORT_DIRECTORY = ""
+const PMDO_EXPORT_DIRECTORY = "C:/Users/arnau/Desktop/RawAsset/TileDtef"
 let gid = 1
 
 async function getDirectories(source: string) {
@@ -186,10 +186,6 @@ function getAnimationTiled(
       duration: (frameDuration * 1000) / 60
     })
   }
-  frames
-    .slice()
-    .reverse()
-    .forEach((f) => frames.push(f))
   return {
     animation: frames,
     id: getTileId(terrain, mask)
