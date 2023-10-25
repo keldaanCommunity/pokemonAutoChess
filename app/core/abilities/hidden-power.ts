@@ -5,15 +5,14 @@ import { BasicItems, Item } from "../../types/enum/Item"
 import { getUnownsPoolPerStage, Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { pickRandomIn } from "../../utils/random"
-import { AttackStrategy } from "../attack-strategy"
 import Board from "../board"
 import PokemonEntity from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
 import PRECOMPUTED_TYPE_POKEMONS from "../../models/precomputed/type-pokemons.json"
-import { AbilityStrategy } from "."
+import { AbilityStrategies, AbilityStrategy } from "./abilities"
 import { Transfer } from "../../types"
 
-export class HiddenPowerStrategy extends AttackStrategy {
+export class HiddenPowerStrategy extends AbilityStrategy {
   copyable = false
   process(
     unown: PokemonEntity,
@@ -342,7 +341,7 @@ export class HiddenPowerNStrategy extends HiddenPowerStrategy {
         if (pokemon && unown.team === pokemon.team) {
           const target = board.getValue(pokemon.targetX, pokemon.targetY)
           if (target) {
-            AbilityStrategy[Ability.EXPLOSION].process(
+            AbilityStrategies[Ability.EXPLOSION].process(
               pokemon,
               pokemon.state,
               board,
@@ -563,7 +562,7 @@ export class HiddenPowerVStrategy extends HiddenPowerStrategy {
     super.process(unown, state, board, target, crit)
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
       if (enemy && unown.team !== enemy.team) {
-        AbilityStrategy[Ability.THUNDER].process(
+        AbilityStrategies[Ability.THUNDER].process(
           unown,
           unown.state,
           board,

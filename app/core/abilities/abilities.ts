@@ -1,31 +1,68 @@
-import { Item } from "../types/enum/Item"
-import { Effect } from "../types/enum/Effect"
-import { AttackType, BoardEvent, Team } from "../types/enum/Game"
-import { Weather } from "../types/enum/Weather"
-import Board from "./board"
-import PokemonEntity from "./pokemon-entity"
-import PokemonState from "./pokemon-state"
-import { Synergy } from "../types/enum/Synergy"
-import { Ability } from "../types/enum/Ability"
-import PokemonFactory from "../models/pokemon-factory"
-import { Pkm } from "../types/enum/Pokemon"
+import { Ability } from "../../types/enum/Ability"
+import {
+  HiddenPowerAStrategy,
+  HiddenPowerBStrategy,
+  HiddenPowerCStrategy,
+  HiddenPowerDStrategy,
+  HiddenPowerEStrategy,
+  HiddenPowerFStrategy,
+  HiddenPowerGStrategy,
+  HiddenPowerHStrategy,
+  HiddenPowerIStrategy,
+  HiddenPowerJStrategy,
+  HiddenPowerKStrategy,
+  HiddenPowerLStrategy,
+  HiddenPowerMStrategy,
+  HiddenPowerNStrategy,
+  HiddenPowerOStrategy,
+  HiddenPowerPStrategy,
+  HiddenPowerQStrategy,
+  HiddenPowerRStrategy,
+  HiddenPowerSStrategy,
+  HiddenPowerTStrategy,
+  HiddenPowerUStrategy,
+  HiddenPowerVStrategy,
+  HiddenPowerWStrategy,
+  HiddenPowerXStrategy,
+  HiddenPowerYStrategy,
+  HiddenPowerZStrategy,
+  HiddenPowerQMStrategy,
+  HiddenPowerEMStrategy
+} from "./hidden-power"
+
+import { Item } from "../../types/enum/Item"
+import { Effect } from "../../types/enum/Effect"
+import { AttackType, BoardEvent, Team } from "../../types/enum/Game"
+import { Weather } from "../../types/enum/Weather"
+import { Synergy } from "../../types/enum/Synergy"
+import { Pkm } from "../../types/enum/Pokemon"
+import { Transfer } from "../../types"
+import { Passive } from "../../types/enum/Passive"
+import {
+  BOARD_HEIGHT,
+  BOARD_WIDTH,
+  DEFAULT_ATK_SPEED
+} from "../../types/Config"
+
+import Board from "../board"
+import PokemonEntity from "../pokemon-entity"
+import PokemonState from "../pokemon-state"
+import PokemonFactory from "../../models/pokemon-factory"
+
 import {
   chance,
   pickNRandomIn,
   pickRandomIn,
   randomBetween,
   shuffleArray
-} from "../utils/random"
-import { effectInLine, OrientationArray } from "../utils/orientation"
-import { logger } from "../utils/logger"
-import { BOARD_HEIGHT, BOARD_WIDTH, DEFAULT_ATK_SPEED } from "../types/Config"
-import { max, min } from "../utils/number"
-import { distanceC, distanceM } from "../utils/distance"
-import { Transfer } from "../types"
-import { Passive } from "../types/enum/Passive"
-import { AbilityStrategy } from "./abilities"
+} from "../../utils/random"
+import { effectInLine, OrientationArray } from "../../utils/orientation"
+import { logger } from "../../utils/logger"
 
-export class AttackStrategy {
+import { max, min } from "../../utils/number"
+import { distanceC, distanceM } from "../../utils/distance"
+
+export class AbilityStrategy {
   copyable = true // if true, can be copied by mimic, metronome...
   process(
     pokemon: PokemonEntity,
@@ -37,7 +74,7 @@ export class AttackStrategy {
   ) {
     pokemon.pp = 0
     pokemon.count.ult += 1
-    
+
     if (!preventDefaultAnim) {
       pokemon.simulation.room.broadcast(Transfer.ABILITY, {
         id: pokemon.simulation.id,
@@ -131,7 +168,7 @@ export function soundBoost(pokemon: PokemonEntity, board: Board) {
   })
 }
 
-export class BlueFlareStrategy extends AttackStrategy {
+export class BlueFlareStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -171,7 +208,7 @@ export class BlueFlareStrategy extends AttackStrategy {
   }
 }
 
-export class FusionBoltStrategy extends AttackStrategy {
+export class FusionBoltStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -207,7 +244,7 @@ export class FusionBoltStrategy extends AttackStrategy {
   }
 }
 
-export class BeatUpStrategy extends AttackStrategy {
+export class BeatUpStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -236,7 +273,7 @@ export class BeatUpStrategy extends AttackStrategy {
   }
 }
 
-export class PaydayStrategy extends AttackStrategy {
+export class PaydayStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -261,7 +298,7 @@ export class PaydayStrategy extends AttackStrategy {
   }
 }
 
-export class MindBlownStrategy extends AttackStrategy {
+export class MindBlownStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -281,7 +318,7 @@ export class MindBlownStrategy extends AttackStrategy {
   }
 }
 
-export class SoftBoiledStrategy extends AttackStrategy {
+export class SoftBoiledStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -312,7 +349,7 @@ export class SoftBoiledStrategy extends AttackStrategy {
   }
 }
 
-export class EarthquakeStrategy extends AttackStrategy {
+export class EarthquakeStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -334,7 +371,7 @@ export class EarthquakeStrategy extends AttackStrategy {
   }
 }
 
-export class SongOfDesireStrategy extends AttackStrategy {
+export class SongOfDesireStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -364,7 +401,7 @@ export class SongOfDesireStrategy extends AttackStrategy {
   }
 }
 
-export class SlackOffStrategy extends AttackStrategy {
+export class SlackOffStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -381,7 +418,7 @@ export class SlackOffStrategy extends AttackStrategy {
   }
 }
 
-export class ConfusingMindStrategy extends AttackStrategy {
+export class ConfusingMindStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -396,7 +433,7 @@ export class ConfusingMindStrategy extends AttackStrategy {
   }
 }
 
-export class KnowledgeThiefStrategy extends AttackStrategy {
+export class KnowledgeThiefStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -405,13 +442,19 @@ export class KnowledgeThiefStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    if (AbilityStrategy[target.skill].copyable) {
-      AbilityStrategy[target.skill].process(pokemon, state, board, target, crit)
+    if (AbilityStrategies[target.skill].copyable) {
+      AbilityStrategies[target.skill].process(
+        pokemon,
+        state,
+        board,
+        target,
+        crit
+      )
     }
   }
 }
 
-export class WonderGuardStrategy extends AttackStrategy {
+export class WonderGuardStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -444,7 +487,7 @@ export class WonderGuardStrategy extends AttackStrategy {
   }
 }
 
-export class IllusionStrategy extends AttackStrategy {
+export class IllusionStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -465,7 +508,7 @@ export class IllusionStrategy extends AttackStrategy {
   }
 }
 
-export class JudgementStrategy extends AttackStrategy {
+export class JudgementStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -486,7 +529,7 @@ export class JudgementStrategy extends AttackStrategy {
   }
 }
 
-export class ElectricSurgeStrategy extends AttackStrategy {
+export class ElectricSurgeStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -508,7 +551,7 @@ export class ElectricSurgeStrategy extends AttackStrategy {
   }
 }
 
-export class PsychicSurgeStrategy extends AttackStrategy {
+export class PsychicSurgeStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -531,7 +574,7 @@ export class PsychicSurgeStrategy extends AttackStrategy {
   }
 }
 
-export class MistySurgeStrategy extends AttackStrategy {
+export class MistySurgeStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -549,7 +592,7 @@ export class MistySurgeStrategy extends AttackStrategy {
   }
 }
 
-export class GrassySurgeStrategy extends AttackStrategy {
+export class GrassySurgeStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -567,7 +610,7 @@ export class GrassySurgeStrategy extends AttackStrategy {
   }
 }
 
-export class ShadowBallStrategy extends AttackStrategy {
+export class ShadowBallStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -598,7 +641,7 @@ export class ShadowBallStrategy extends AttackStrategy {
   }
 }
 
-export class ChatterStrategy extends AttackStrategy {
+export class ChatterStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -620,7 +663,7 @@ export class ChatterStrategy extends AttackStrategy {
   }
 }
 
-export class CorruptedNatureStrategy extends AttackStrategy {
+export class CorruptedNatureStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -651,7 +694,7 @@ export class CorruptedNatureStrategy extends AttackStrategy {
   }
 }
 
-export class CrabHammerStrategy extends AttackStrategy {
+export class CrabHammerStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -678,7 +721,7 @@ export class CrabHammerStrategy extends AttackStrategy {
   }
 }
 
-export class DiamondStormStrategy extends AttackStrategy {
+export class DiamondStormStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -703,7 +746,7 @@ export class DiamondStormStrategy extends AttackStrategy {
   }
 }
 
-export class DracoEnergyStrategy extends AttackStrategy {
+export class DracoEnergyStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -722,7 +765,7 @@ export class DracoEnergyStrategy extends AttackStrategy {
   }
 }
 
-export class DynamaxCannonStrategy extends AttackStrategy {
+export class DynamaxCannonStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -746,7 +789,7 @@ export class DynamaxCannonStrategy extends AttackStrategy {
   }
 }
 
-export class DynamicPunchStrategy extends AttackStrategy {
+export class DynamicPunchStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -769,7 +812,7 @@ export class DynamicPunchStrategy extends AttackStrategy {
   }
 }
 
-export class ElectroBoostStrategy extends AttackStrategy {
+export class ElectroBoostStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -786,7 +829,7 @@ export class ElectroBoostStrategy extends AttackStrategy {
   }
 }
 
-export class AuroraVeilStrategy extends AttackStrategy {
+export class AuroraVeilStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -814,7 +857,7 @@ export class AuroraVeilStrategy extends AttackStrategy {
   }
 }
 
-export class AquaJetStrategy extends AttackStrategy {
+export class AquaJetStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -858,7 +901,7 @@ export class AquaJetStrategy extends AttackStrategy {
   }
 }
 
-export class ElectroWebStrategy extends AttackStrategy {
+export class ElectroWebStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -885,7 +928,7 @@ export class ElectroWebStrategy extends AttackStrategy {
   }
 }
 
-export class FireTrickStrategy extends AttackStrategy {
+export class FireTrickStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -911,7 +954,7 @@ export class FireTrickStrategy extends AttackStrategy {
   }
 }
 
-export class FlameChargeStrategy extends AttackStrategy {
+export class FlameChargeStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -955,7 +998,7 @@ export class FlameChargeStrategy extends AttackStrategy {
   }
 }
 
-export class LeechSeedStrategy extends AttackStrategy {
+export class LeechSeedStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -978,7 +1021,7 @@ export class LeechSeedStrategy extends AttackStrategy {
   }
 }
 
-export class LockOnStrategy extends AttackStrategy {
+export class LockOnStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -992,7 +1035,7 @@ export class LockOnStrategy extends AttackStrategy {
   }
 }
 
-export class PsychUpStrategy extends AttackStrategy {
+export class PsychUpStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1021,7 +1064,7 @@ export class PsychUpStrategy extends AttackStrategy {
   }
 }
 
-export class RazorWindStrategy extends AttackStrategy {
+export class RazorWindStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1042,7 +1085,7 @@ export class RazorWindStrategy extends AttackStrategy {
   }
 }
 
-export class TwistingNetherStrategy extends AttackStrategy {
+export class TwistingNetherStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1075,7 +1118,7 @@ export class TwistingNetherStrategy extends AttackStrategy {
   }
 }
 
-export class DarkVoidStrategy extends AttackStrategy {
+export class DarkVoidStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1096,7 +1139,7 @@ export class DarkVoidStrategy extends AttackStrategy {
   }
 }
 
-export class OverheatStrategy extends AttackStrategy {
+export class OverheatStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1117,7 +1160,7 @@ export class OverheatStrategy extends AttackStrategy {
   }
 }
 
-export class HypnosisStrategy extends AttackStrategy {
+export class HypnosisStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1141,7 +1184,7 @@ export class HypnosisStrategy extends AttackStrategy {
   }
 }
 
-export class KingShieldStrategy extends AttackStrategy {
+export class KingShieldStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1168,7 +1211,7 @@ export class KingShieldStrategy extends AttackStrategy {
   }
 }
 
-export class PoisonJabStrategy extends AttackStrategy {
+export class PoisonJabStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1195,7 +1238,7 @@ export class PoisonJabStrategy extends AttackStrategy {
   }
 }
 
-export class ExplosionStrategy extends AttackStrategy {
+export class ExplosionStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1243,7 +1286,7 @@ export class ExplosionStrategy extends AttackStrategy {
   }
 }
 
-export class ClangorousSoulStrategy extends AttackStrategy {
+export class ClangorousSoulStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1287,7 +1330,7 @@ export class ClangorousSoulStrategy extends AttackStrategy {
   }
 }
 
-export class LiquidationStrategy extends AttackStrategy {
+export class LiquidationStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1320,7 +1363,7 @@ export class LiquidationStrategy extends AttackStrategy {
   }
 }
 
-export class BonemerangStrategy extends AttackStrategy {
+export class BonemerangStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1352,7 +1395,7 @@ export class BonemerangStrategy extends AttackStrategy {
   }
 }
 
-export class AuroraBeamStrategy extends AttackStrategy {
+export class AuroraBeamStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1403,7 +1446,7 @@ export class AuroraBeamStrategy extends AttackStrategy {
   }
 }
 
-export class GrowlStrategy extends AttackStrategy {
+export class GrowlStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1422,7 +1465,7 @@ export class GrowlStrategy extends AttackStrategy {
   }
 }
 
-export class RelicSongStrategy extends AttackStrategy {
+export class RelicSongStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1449,7 +1492,7 @@ export class RelicSongStrategy extends AttackStrategy {
   }
 }
 
-export class DisarmingVoiceStrategy extends AttackStrategy {
+export class DisarmingVoiceStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1487,7 +1530,7 @@ export class DisarmingVoiceStrategy extends AttackStrategy {
     })
   }
 }
-export class HighJumpKickStrategy extends AttackStrategy {
+export class HighJumpKickStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1517,7 +1560,7 @@ export class HighJumpKickStrategy extends AttackStrategy {
   }
 }
 
-export class GrassWhistleStrategy extends AttackStrategy {
+export class GrassWhistleStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1549,7 +1592,7 @@ export class GrassWhistleStrategy extends AttackStrategy {
   }
 }
 
-export class TriAttackStrategy extends AttackStrategy {
+export class TriAttackStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1575,7 +1618,7 @@ export class TriAttackStrategy extends AttackStrategy {
   }
 }
 
-export class EchoStrategy extends AttackStrategy {
+export class EchoStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1621,7 +1664,7 @@ export class EchoStrategy extends AttackStrategy {
   }
 }
 
-export class FutureSightStrategy extends AttackStrategy {
+export class FutureSightStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1661,7 +1704,7 @@ export class FutureSightStrategy extends AttackStrategy {
   }
 }
 
-export class PetalDanceStrategy extends AttackStrategy {
+export class PetalDanceStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1701,7 +1744,7 @@ export class PetalDanceStrategy extends AttackStrategy {
   }
 }
 
-export class HyperVoiceStrategy extends AttackStrategy {
+export class HyperVoiceStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1739,7 +1782,7 @@ export class HyperVoiceStrategy extends AttackStrategy {
     })
   }
 }
-export class ShadowCloneStrategy extends AttackStrategy {
+export class ShadowCloneStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1772,7 +1815,7 @@ export class ShadowCloneStrategy extends AttackStrategy {
   }
 }
 
-export class VoltSwitchStrategy extends AttackStrategy {
+export class VoltSwitchStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1811,7 +1854,7 @@ export class VoltSwitchStrategy extends AttackStrategy {
   }
 }
 
-export class HeadSmashStrategy extends AttackStrategy {
+export class HeadSmashStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1854,7 +1897,7 @@ export class HeadSmashStrategy extends AttackStrategy {
   }
 }
 
-export class RockSmashStrategy extends AttackStrategy {
+export class RockSmashStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1888,7 +1931,7 @@ export class RockSmashStrategy extends AttackStrategy {
   }
 }
 
-export class RockTombStrategy extends AttackStrategy {
+export class RockTombStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1914,7 +1957,7 @@ export class RockTombStrategy extends AttackStrategy {
   }
 }
 
-export class RoarOfTimeStrategy extends AttackStrategy {
+export class RoarOfTimeStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1933,7 +1976,7 @@ export class RoarOfTimeStrategy extends AttackStrategy {
   }
 }
 
-export class HealBlockStrategy extends AttackStrategy {
+export class HealBlockStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1967,7 +2010,7 @@ export class HealBlockStrategy extends AttackStrategy {
   }
 }
 
-export class SpikeArmorStrategy extends AttackStrategy {
+export class SpikeArmorStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1982,7 +2025,7 @@ export class SpikeArmorStrategy extends AttackStrategy {
   }
 }
 
-export class OriginPulseStrategy extends AttackStrategy {
+export class OriginPulseStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2000,7 +2043,7 @@ export class OriginPulseStrategy extends AttackStrategy {
   }
 }
 
-export class SeedFlareStrategy extends AttackStrategy {
+export class SeedFlareStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2020,7 +2063,7 @@ export class SeedFlareStrategy extends AttackStrategy {
   }
 }
 
-export class NightmareStrategy extends AttackStrategy {
+export class NightmareStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2041,7 +2084,7 @@ export class NightmareStrategy extends AttackStrategy {
   }
 }
 
-export class BurnStrategy extends AttackStrategy {
+export class BurnStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2065,7 +2108,7 @@ export class BurnStrategy extends AttackStrategy {
   }
 }
 
-export class SilenceStrategy extends AttackStrategy {
+export class SilenceStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2096,7 +2139,7 @@ export class SilenceStrategy extends AttackStrategy {
   }
 }
 
-export class PoisonStrategy extends AttackStrategy {
+export class PoisonStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2158,7 +2201,7 @@ export class PoisonStrategy extends AttackStrategy {
   }
 }
 
-export class BlizzardStrategy extends AttackStrategy {
+export class BlizzardStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2184,7 +2227,7 @@ export class BlizzardStrategy extends AttackStrategy {
   }
 }
 
-export class ProtectStrategy extends AttackStrategy {
+export class ProtectStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2198,7 +2241,7 @@ export class ProtectStrategy extends AttackStrategy {
   }
 }
 
-export class SleepStrategy extends AttackStrategy {
+export class SleepStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2231,7 +2274,7 @@ export class SleepStrategy extends AttackStrategy {
   }
 }
 
-export class ConfusionStrategy extends AttackStrategy {
+export class ConfusionStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2273,7 +2316,7 @@ export class ConfusionStrategy extends AttackStrategy {
   }
 }
 
-export class FireBlastStrategy extends AttackStrategy {
+export class FireBlastStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2293,7 +2336,7 @@ export class FireBlastStrategy extends AttackStrategy {
   }
 }
 
-export class SeismicTossStrategy extends AttackStrategy {
+export class SeismicTossStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2326,7 +2369,7 @@ export class SeismicTossStrategy extends AttackStrategy {
   }
 }
 
-export class GuillotineStrategy extends AttackStrategy {
+export class GuillotineStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2349,7 +2392,7 @@ export class GuillotineStrategy extends AttackStrategy {
   }
 }
 
-export class RockSlideStrategy extends AttackStrategy {
+export class RockSlideStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2373,7 +2416,7 @@ export class RockSlideStrategy extends AttackStrategy {
   }
 }
 
-export class WheelOfFireStrategy extends AttackStrategy {
+export class WheelOfFireStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2414,7 +2457,7 @@ export class WheelOfFireStrategy extends AttackStrategy {
   }
 }
 
-export class HeatWaveStrategy extends AttackStrategy {
+export class HeatWaveStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2452,7 +2495,7 @@ export class HeatWaveStrategy extends AttackStrategy {
   }
 }
 
-export class HydroPumpStrategy extends AttackStrategy {
+export class HydroPumpStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2490,7 +2533,7 @@ export class HydroPumpStrategy extends AttackStrategy {
   }
 }
 
-export class SolarBeamStrategy extends AttackStrategy {
+export class SolarBeamStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2522,7 +2565,7 @@ export class SolarBeamStrategy extends AttackStrategy {
   }
 }
 
-export class ThunderStrategy extends AttackStrategy {
+export class ThunderStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2549,7 +2592,7 @@ export class ThunderStrategy extends AttackStrategy {
   }
 }
 
-export class DracoMeteorStrategy extends AttackStrategy {
+export class DracoMeteorStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2567,7 +2610,7 @@ export class DracoMeteorStrategy extends AttackStrategy {
   }
 }
 
-export class BlazeKickStrategy extends AttackStrategy {
+export class BlazeKickStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2594,7 +2637,7 @@ export class BlazeKickStrategy extends AttackStrategy {
   }
 }
 
-export class WishStrategy extends AttackStrategy {
+export class WishStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2620,7 +2663,7 @@ export class WishStrategy extends AttackStrategy {
   }
 }
 
-export class NaturalGiftStrategy extends AttackStrategy {
+export class NaturalGiftStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2655,7 +2698,7 @@ export class NaturalGiftStrategy extends AttackStrategy {
   }
 }
 
-export class CalmMindStrategy extends AttackStrategy {
+export class CalmMindStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2669,7 +2712,7 @@ export class CalmMindStrategy extends AttackStrategy {
   }
 }
 
-export class CosmicPowerStrategy extends AttackStrategy {
+export class CosmicPowerStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2687,7 +2730,7 @@ export class CosmicPowerStrategy extends AttackStrategy {
   }
 }
 
-export class DefenseCurlStrategy extends AttackStrategy {
+export class DefenseCurlStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2708,7 +2751,7 @@ export class DefenseCurlStrategy extends AttackStrategy {
   }
 }
 
-export class IronDefenseStrategy extends AttackStrategy {
+export class IronDefenseStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2726,7 +2769,7 @@ export class IronDefenseStrategy extends AttackStrategy {
   }
 }
 
-export class SoakStrategy extends AttackStrategy {
+export class SoakStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2760,7 +2803,7 @@ export class SoakStrategy extends AttackStrategy {
   }
 }
 
-export class IronTailStrategy extends AttackStrategy {
+export class IronTailStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2784,7 +2827,7 @@ export class IronTailStrategy extends AttackStrategy {
   }
 }
 
-export class BlastBurnStrategy extends AttackStrategy {
+export class BlastBurnStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2825,7 +2868,7 @@ export class BlastBurnStrategy extends AttackStrategy {
   }
 }
 
-export class ChargeStrategy extends AttackStrategy {
+export class ChargeStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2848,7 +2891,7 @@ export class ChargeStrategy extends AttackStrategy {
   }
 }
 
-export class SludgeStrategy extends AttackStrategy {
+export class SludgeStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2870,7 +2913,7 @@ export class SludgeStrategy extends AttackStrategy {
   }
 }
 
-export class DischargeStrategy extends AttackStrategy {
+export class DischargeStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2912,7 +2955,7 @@ export class DischargeStrategy extends AttackStrategy {
   }
 }
 
-export class DiveStrategy extends AttackStrategy {
+export class DiveStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2951,7 +2994,7 @@ export class DiveStrategy extends AttackStrategy {
   }
 }
 
-export class SmokeScreenStrategy extends AttackStrategy {
+export class SmokeScreenStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3010,7 +3053,7 @@ export class SmokeScreenStrategy extends AttackStrategy {
   }
 }
 
-export class BiteStrategy extends AttackStrategy {
+export class BiteStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3038,7 +3081,7 @@ export class BiteStrategy extends AttackStrategy {
   }
 }
 
-export class AppleAcidStrategy extends AttackStrategy {
+export class AppleAcidStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3067,7 +3110,7 @@ export class AppleAcidStrategy extends AttackStrategy {
   }
 }
 
-export class PsychicStrategy extends AttackStrategy {
+export class PsychicStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3082,7 +3125,7 @@ export class PsychicStrategy extends AttackStrategy {
   }
 }
 
-export class PresentStrategy extends AttackStrategy {
+export class PresentStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3109,7 +3152,7 @@ export class PresentStrategy extends AttackStrategy {
   }
 }
 
-export class SacredSwordStrategy extends AttackStrategy {
+export class SacredSwordStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3123,7 +3166,7 @@ export class SacredSwordStrategy extends AttackStrategy {
   }
 }
 
-export class LeafBladeStrategy extends AttackStrategy {
+export class LeafBladeStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3137,7 +3180,7 @@ export class LeafBladeStrategy extends AttackStrategy {
   }
 }
 
-export class WaterfallStrategy extends AttackStrategy {
+export class WaterfallStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3151,7 +3194,7 @@ export class WaterfallStrategy extends AttackStrategy {
   }
 }
 
-export class XScissorStrategy extends AttackStrategy {
+export class XScissorStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3166,7 +3209,7 @@ export class XScissorStrategy extends AttackStrategy {
   }
 }
 
-export class DragonTailStrategy extends AttackStrategy {
+export class DragonTailStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3195,7 +3238,7 @@ export class DragonTailStrategy extends AttackStrategy {
   }
 }
 
-export class DragonBreathStrategy extends AttackStrategy {
+export class DragonBreathStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3219,7 +3262,7 @@ export class DragonBreathStrategy extends AttackStrategy {
   }
 }
 
-export class IcicleCrashStrategy extends AttackStrategy {
+export class IcicleCrashStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3253,7 +3296,7 @@ export class IcicleCrashStrategy extends AttackStrategy {
   }
 }
 
-export class SteamEruptionStrategy extends AttackStrategy {
+export class SteamEruptionStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3284,7 +3327,7 @@ export class SteamEruptionStrategy extends AttackStrategy {
   }
 }
 
-export class RootStrategy extends AttackStrategy {
+export class RootStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3320,7 +3363,7 @@ export class RootStrategy extends AttackStrategy {
   }
 }
 
-export class TormentStrategy extends AttackStrategy {
+export class TormentStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3349,7 +3392,7 @@ export class TormentStrategy extends AttackStrategy {
   }
 }
 
-export class StompStrategy extends AttackStrategy {
+export class StompStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3369,7 +3412,7 @@ export class StompStrategy extends AttackStrategy {
   }
 }
 
-export class PaybackStrategy extends AttackStrategy {
+export class PaybackStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3397,7 +3440,7 @@ export class PaybackStrategy extends AttackStrategy {
   }
 }
 
-export class NightSlashStrategy extends AttackStrategy {
+export class NightSlashStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3424,7 +3467,7 @@ export class NightSlashStrategy extends AttackStrategy {
   }
 }
 
-export class BugBuzzStrategy extends AttackStrategy {
+export class BugBuzzStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3457,7 +3500,7 @@ export class BugBuzzStrategy extends AttackStrategy {
   }
 }
 
-export class StringShotStrategy extends AttackStrategy {
+export class StringShotStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3487,7 +3530,7 @@ export class StringShotStrategy extends AttackStrategy {
   }
 }
 
-export class StickyWebStrategy extends AttackStrategy {
+export class StickyWebStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3530,7 +3573,7 @@ export class StickyWebStrategy extends AttackStrategy {
   }
 }
 
-export class PoisonStingStrategy extends AttackStrategy {
+export class PoisonStingStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3555,7 +3598,7 @@ export class PoisonStingStrategy extends AttackStrategy {
   }
 }
 
-export class LeechLifeStrategy extends AttackStrategy {
+export class LeechLifeStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3600,7 +3643,7 @@ export class LeechLifeStrategy extends AttackStrategy {
   }
 }
 
-export class HappyHourStrategy extends AttackStrategy {
+export class HappyHourStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3632,7 +3675,7 @@ export class HappyHourStrategy extends AttackStrategy {
   }
 }
 
-export class TeleportStrategy extends AttackStrategy {
+export class TeleportStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3661,7 +3704,7 @@ export class TeleportStrategy extends AttackStrategy {
   }
 }
 
-export class NastyPlotStrategy extends AttackStrategy {
+export class NastyPlotStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3675,7 +3718,7 @@ export class NastyPlotStrategy extends AttackStrategy {
   }
 }
 
-export class SpectralThiefStrategy extends AttackStrategy {
+export class SpectralThiefStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3717,7 +3760,7 @@ export class SpectralThiefStrategy extends AttackStrategy {
   }
 }
 
-export class ThiefStrategy extends AttackStrategy {
+export class ThiefStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3766,7 +3809,7 @@ export class ThiefStrategy extends AttackStrategy {
   }
 }
 
-export class StunSporeStrategy extends AttackStrategy {
+export class StunSporeStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3798,7 +3841,7 @@ export class StunSporeStrategy extends AttackStrategy {
   }
 }
 
-export class MeteorMashStrategy extends AttackStrategy {
+export class MeteorMashStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3840,7 +3883,7 @@ export class MeteorMashStrategy extends AttackStrategy {
   }
 }
 
-export class HurricaneStrategy extends AttackStrategy {
+export class HurricaneStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3879,7 +3922,7 @@ export class HurricaneStrategy extends AttackStrategy {
   }
 }
 
-export class FakeTearsStrategy extends AttackStrategy {
+export class FakeTearsStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3925,7 +3968,7 @@ export class FakeTearsStrategy extends AttackStrategy {
   }
 }
 
-export class SparklingAriaStrategy extends AttackStrategy {
+export class SparklingAriaStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3958,7 +4001,7 @@ export class SparklingAriaStrategy extends AttackStrategy {
   }
 }
 
-export class DragonDartsStrategy extends AttackStrategy {
+export class DragonDartsStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3998,7 +4041,7 @@ export class DragonDartsStrategy extends AttackStrategy {
   }
 }
 
-export class MetronomeStrategy extends AttackStrategy {
+export class MetronomeStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4010,7 +4053,7 @@ export class MetronomeStrategy extends AttackStrategy {
 
     const skill = pickRandomIn(
       (Object.keys(Ability) as Ability[]).filter(
-        (a) => AbilityStrategy[a].copyable
+        (a) => AbilityStrategies[a].copyable
       )
     )
 
@@ -4024,11 +4067,11 @@ export class MetronomeStrategy extends AttackStrategy {
       orientation: pokemon.orientation
     })
 
-    AbilityStrategy[skill].process(pokemon, state, board, target, crit)
+    AbilityStrategies[skill].process(pokemon, state, board, target, crit)
   }
 }
 
-export class SkyAttackStrategy extends AttackStrategy {
+export class SkyAttackStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4057,7 +4100,7 @@ export class SkyAttackStrategy extends AttackStrategy {
   }
 }
 
-export class AgilityStrategy extends AttackStrategy {
+export class AgilityStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4085,7 +4128,7 @@ export class AgilityStrategy extends AttackStrategy {
   }
 }
 
-export class SpiritShackleStrategy extends AttackStrategy {
+export class SpiritShackleStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4124,7 +4167,7 @@ export class SpiritShackleStrategy extends AttackStrategy {
   }
 }
 
-export class WaterShurikenStrategy extends AttackStrategy {
+export class WaterShurikenStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4179,7 +4222,7 @@ export class WaterShurikenStrategy extends AttackStrategy {
   }
 }
 
-export class ShadowSneakStrategy extends AttackStrategy {
+export class ShadowSneakStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4196,7 +4239,7 @@ export class ShadowSneakStrategy extends AttackStrategy {
   }
 }
 
-export class PlasmaFistStrategy extends AttackStrategy {
+export class PlasmaFistStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4211,7 +4254,7 @@ export class PlasmaFistStrategy extends AttackStrategy {
   }
 }
 
-export class ForecastStrategy extends AttackStrategy {
+export class ForecastStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4238,7 +4281,7 @@ export class ForecastStrategy extends AttackStrategy {
   }
 }
 
-export class MachPunchStrategy extends AttackStrategy {
+export class MachPunchStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4253,7 +4296,7 @@ export class MachPunchStrategy extends AttackStrategy {
   }
 }
 
-export class UppercutStrategy extends AttackStrategy {
+export class UppercutStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4268,7 +4311,7 @@ export class UppercutStrategy extends AttackStrategy {
   }
 }
 
-export class MawashiGeriStrategy extends AttackStrategy {
+export class MawashiGeriStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4283,7 +4326,7 @@ export class MawashiGeriStrategy extends AttackStrategy {
   }
 }
 
-export class TripleKickStrategy extends AttackStrategy {
+export class TripleKickStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4313,7 +4356,7 @@ export class TripleKickStrategy extends AttackStrategy {
   }
 }
 
-export class GeomancyStrategy extends AttackStrategy {
+export class GeomancyStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4328,7 +4371,7 @@ export class GeomancyStrategy extends AttackStrategy {
   }
 }
 
-export class DeathWingStrategy extends AttackStrategy {
+export class DeathWingStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4351,7 +4394,7 @@ export class DeathWingStrategy extends AttackStrategy {
   }
 }
 
-export class MimicStrategy extends AttackStrategy {
+export class MimicStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4360,13 +4403,19 @@ export class MimicStrategy extends AttackStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    if (AbilityStrategy[target.skill].copyable) {
-      AbilityStrategy[target.skill].process(pokemon, state, board, target, crit)
+    if (AbilityStrategies[target.skill].copyable) {
+      AbilityStrategies[target.skill].process(
+        pokemon,
+        state,
+        board,
+        target,
+        crit
+      )
     }
   }
 }
 
-export class HexStrategy extends AttackStrategy {
+export class HexStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4392,7 +4441,7 @@ export class HexStrategy extends AttackStrategy {
   }
 }
 
-export class GrowthStrategy extends AttackStrategy {
+export class GrowthStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4411,7 +4460,7 @@ export class GrowthStrategy extends AttackStrategy {
   }
 }
 
-export class HealOrderStrategy extends AttackStrategy {
+export class HealOrderStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4443,7 +4492,7 @@ export class HealOrderStrategy extends AttackStrategy {
   }
 }
 
-export class ShellTrapStrategy extends AttackStrategy {
+export class ShellTrapStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4466,7 +4515,7 @@ export class ShellTrapStrategy extends AttackStrategy {
   }
 }
 
-export class DigStrategy extends AttackStrategy {
+export class DigStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4506,7 +4555,7 @@ export class DigStrategy extends AttackStrategy {
   }
 }
 
-export class FireSpinStrategy extends AttackStrategy {
+export class FireSpinStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4542,7 +4591,7 @@ export class FireSpinStrategy extends AttackStrategy {
   }
 }
 
-export class SearingShotStrategy extends AttackStrategy {
+export class SearingShotStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4572,7 +4621,7 @@ export class SearingShotStrategy extends AttackStrategy {
   }
 }
 
-export class PeckStrategy extends AttackStrategy {
+export class PeckStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4586,7 +4635,7 @@ export class PeckStrategy extends AttackStrategy {
   }
 }
 
-export class SplashStrategy extends AttackStrategy {
+export class SplashStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4599,7 +4648,7 @@ export class SplashStrategy extends AttackStrategy {
   }
 }
 
-export class CounterStrategy extends AttackStrategy {
+export class CounterStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4625,7 +4674,7 @@ export class CounterStrategy extends AttackStrategy {
   }
 }
 
-export class PoisonPowderStrategy extends AttackStrategy {
+export class PoisonPowderStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4672,7 +4721,7 @@ export class PoisonPowderStrategy extends AttackStrategy {
   }
 }
 
-export class SilverWindStrategy extends AttackStrategy {
+export class SilverWindStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4725,7 +4774,7 @@ export class SilverWindStrategy extends AttackStrategy {
   }
 }
 
-export class IcyWindStrategy extends AttackStrategy {
+export class IcyWindStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4741,7 +4790,7 @@ export class IcyWindStrategy extends AttackStrategy {
   }
 }
 
-export class GigatonHammerStrategy extends AttackStrategy {
+export class GigatonHammerStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4762,7 +4811,7 @@ export class GigatonHammerStrategy extends AttackStrategy {
   }
 }
 
-export class AcrobaticsStrategy extends AttackStrategy {
+export class AcrobaticsStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4785,7 +4834,7 @@ export class AcrobaticsStrategy extends AttackStrategy {
   }
 }
 
-export class AbsorbStrategy extends AttackStrategy {
+export class AbsorbStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4813,7 +4862,7 @@ export class AbsorbStrategy extends AttackStrategy {
   }
 }
 
-export class RolloutStrategy extends AttackStrategy {
+export class RolloutStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4836,7 +4885,7 @@ export class RolloutStrategy extends AttackStrategy {
   }
 }
 
-export class ThrashStrategy extends AttackStrategy {
+export class ThrashStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4850,7 +4899,7 @@ export class ThrashStrategy extends AttackStrategy {
   }
 }
 
-export class MagmaStormStrategy extends AttackStrategy {
+export class MagmaStormStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4863,7 +4912,7 @@ export class MagmaStormStrategy extends AttackStrategy {
   }
 }
 
-export class SlashingClawStrategy extends AttackStrategy {
+export class SlashingClawStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4881,7 +4930,7 @@ export class SlashingClawStrategy extends AttackStrategy {
   }
 }
 
-export class EruptionStrategy extends AttackStrategy {
+export class EruptionStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4922,7 +4971,7 @@ export class EruptionStrategy extends AttackStrategy {
   }
 }
 
-export class MistBallStrategy extends AttackStrategy {
+export class MistBallStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4963,7 +5012,7 @@ export class MistBallStrategy extends AttackStrategy {
   }
 }
 
-export class LusterPurgeStrategy extends AttackStrategy {
+export class LusterPurgeStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5004,7 +5053,7 @@ export class LusterPurgeStrategy extends AttackStrategy {
   }
 }
 
-export class MudBubbleStrategy extends AttackStrategy {
+export class MudBubbleStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5018,7 +5067,7 @@ export class MudBubbleStrategy extends AttackStrategy {
   }
 }
 
-export class LinkCableStrategy extends AttackStrategy {
+export class LinkCableStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5136,7 +5185,7 @@ export class LinkCableStrategy extends AttackStrategy {
   }
 }
 
-export class MagicBounceStrategy extends AttackStrategy {
+export class MagicBounceStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5151,7 +5200,7 @@ export class MagicBounceStrategy extends AttackStrategy {
   }
 }
 
-export class ShellSmashStrategy extends AttackStrategy {
+export class ShellSmashStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5181,7 +5230,7 @@ export class ShellSmashStrategy extends AttackStrategy {
   }
 }
 
-export class HelpingHandStrategy extends AttackStrategy {
+export class HelpingHandStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5221,7 +5270,7 @@ export class HelpingHandStrategy extends AttackStrategy {
   }
 }
 
-export class AstralBarrageStrategy extends AttackStrategy {
+export class AstralBarrageStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5266,7 +5315,7 @@ export class AstralBarrageStrategy extends AttackStrategy {
   }
 }
 
-export class PyroBallStrategy extends AttackStrategy {
+export class PyroBallStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5311,7 +5360,7 @@ export class PyroBallStrategy extends AttackStrategy {
   }
 }
 
-export class WhirlpoolStrategy extends AttackStrategy {
+export class WhirlpoolStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5357,7 +5406,7 @@ export class WhirlpoolStrategy extends AttackStrategy {
   }
 }
 
-export class AnchorShotStrategy extends AttackStrategy {
+export class AnchorShotStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5405,7 +5454,7 @@ export class AnchorShotStrategy extends AttackStrategy {
   }
 }
 
-export class SmogStrategy extends AttackStrategy {
+export class SmogStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5445,7 +5494,7 @@ export class SmogStrategy extends AttackStrategy {
   }
 }
 
-export class MagnetRiseStrategy extends AttackStrategy {
+export class MagnetRiseStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5478,7 +5527,7 @@ export class MagnetRiseStrategy extends AttackStrategy {
   }
 }
 
-export class AttractStrategy extends AttackStrategy {
+export class AttractStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5505,7 +5554,7 @@ export class AttractStrategy extends AttackStrategy {
   }
 }
 
-export class WaterPulseStrategy extends AttackStrategy {
+export class WaterPulseStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5534,7 +5583,7 @@ export class WaterPulseStrategy extends AttackStrategy {
   }
 }
 
-export class PlayRoughStrategy extends AttackStrategy {
+export class PlayRoughStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5554,7 +5603,7 @@ export class PlayRoughStrategy extends AttackStrategy {
   }
 }
 
-export class AerialAceStrategy extends AttackStrategy {
+export class AerialAceStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5573,7 +5622,7 @@ export class AerialAceStrategy extends AttackStrategy {
   }
 }
 
-export class ParabolicChargeStrategy extends AttackStrategy {
+export class ParabolicChargeStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5595,7 +5644,7 @@ export class ParabolicChargeStrategy extends AttackStrategy {
   }
 }
 
-export class SuperFangStrategy extends AttackStrategy {
+export class SuperFangStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5612,7 +5661,7 @@ export class SuperFangStrategy extends AttackStrategy {
   }
 }
 
-export class TeeterDanceStrategy extends AttackStrategy {
+export class TeeterDanceStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5627,7 +5676,7 @@ export class TeeterDanceStrategy extends AttackStrategy {
   }
 }
 
-export class CloseCombatStrategy extends AttackStrategy {
+export class CloseCombatStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5642,7 +5691,7 @@ export class CloseCombatStrategy extends AttackStrategy {
   }
 }
 
-export class AssistStrategy extends AttackStrategy {
+export class AssistStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5658,7 +5707,7 @@ export class AssistStrategy extends AttackStrategy {
             v &&
             v.team === pokemon.team &&
             v.skill &&
-            AbilityStrategy[v.skill].copyable
+            AbilityStrategies[v.skill].copyable
         )
         .map((v) => v?.skill)
     )
@@ -5672,12 +5721,12 @@ export class AssistStrategy extends AttackStrategy {
         targetY: target.positionY,
         orientation: pokemon.orientation
       })
-      AbilityStrategy[skill].process(pokemon, state, board, target, crit)
+      AbilityStrategies[skill].process(pokemon, state, board, target, crit)
     }
   }
 }
 
-export class FissureStrategy extends AttackStrategy {
+export class FissureStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5716,7 +5765,7 @@ export class FissureStrategy extends AttackStrategy {
   }
 }
 
-export class AssuranceStrategy extends AttackStrategy {
+export class AssuranceStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5737,7 +5786,7 @@ export class AssuranceStrategy extends AttackStrategy {
   }
 }
 
-export class AquaRingStrategy extends AttackStrategy {
+export class AquaRingStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5781,7 +5830,7 @@ export class AquaRingStrategy extends AttackStrategy {
   }
 }
 
-export class PoisonGasStrategy extends AttackStrategy {
+export class PoisonGasStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5823,7 +5872,7 @@ export class PoisonGasStrategy extends AttackStrategy {
   }
 }
 
-export class BraveBirdStrategy extends AttackStrategy {
+export class BraveBirdStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5856,7 +5905,7 @@ export class BraveBirdStrategy extends AttackStrategy {
   }
 }
 
-export class MagicalLeafStrategy extends AttackStrategy {
+export class MagicalLeafStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5901,7 +5950,7 @@ export class MagicalLeafStrategy extends AttackStrategy {
   }
 }
 
-export class StealthRocksStrategy extends AttackStrategy {
+export class StealthRocksStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5946,7 +5995,7 @@ export class StealthRocksStrategy extends AttackStrategy {
   }
 }
 
-export class StruggleBugStrategy extends AttackStrategy {
+export class StruggleBugStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5973,7 +6022,7 @@ export class StruggleBugStrategy extends AttackStrategy {
   }
 }
 
-export class TailGlowStrategy extends AttackStrategy {
+export class TailGlowStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -6000,7 +6049,7 @@ export class TailGlowStrategy extends AttackStrategy {
   }
 }
 
-export class PrismaticLaserStrategy extends AttackStrategy {
+export class PrismaticLaserStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -6032,7 +6081,7 @@ export class PrismaticLaserStrategy extends AttackStrategy {
   }
 }
 
-export class NightShadeStrategy extends AttackStrategy {
+export class NightShadeStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -6048,4 +6097,240 @@ export class NightShadeStrategy extends AttackStrategy {
     )
     target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
   }
+}
+
+export * from "./hidden-power"
+
+export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
+  [Ability.SONG_OF_DESIRE]: new SongOfDesireStrategy(),
+  [Ability.CONFUSING_MIND]: new ConfusingMindStrategy(),
+  [Ability.KNOWLEDGE_THIEF]: new KnowledgeThiefStrategy(),
+  [Ability.WONDER_GUARD]: new WonderGuardStrategy(),
+  [Ability.CORRUPTED_NATURE]: new CorruptedNatureStrategy(),
+  [Ability.CRABHAMMER]: new CrabHammerStrategy(),
+  [Ability.KING_SHIELD]: new KingShieldStrategy(),
+  [Ability.EXPLOSION]: new ExplosionStrategy(),
+  [Ability.NIGHTMARE]: new NightmareStrategy(),
+  [Ability.CLANGOROUS_SOUL]: new ClangorousSoulStrategy(),
+  [Ability.BONEMERANG]: new BonemerangStrategy(),
+  [Ability.GROWL]: new GrowlStrategy(),
+  [Ability.RELIC_SONG]: new RelicSongStrategy(),
+  [Ability.DISARMING_VOICE]: new DisarmingVoiceStrategy(),
+  [Ability.HIGH_JUMP_KICK]: new HighJumpKickStrategy(),
+  [Ability.GRASS_WHISTLE]: new GrassWhistleStrategy(),
+  [Ability.TRI_ATTACK]: new TriAttackStrategy(),
+  [Ability.ECHO]: new EchoStrategy(),
+  [Ability.PETAL_DANCE]: new PetalDanceStrategy(),
+  [Ability.HYPER_VOICE]: new HyperVoiceStrategy(),
+  [Ability.SHADOW_CLONE]: new ShadowCloneStrategy(),
+  [Ability.VOLT_SWITCH]: new VoltSwitchStrategy(),
+  [Ability.FIRE_BLAST]: new FireBlastStrategy(),
+  [Ability.WHEEL_OF_FIRE]: new WheelOfFireStrategy(),
+  [Ability.SEISMIC_TOSS]: new SeismicTossStrategy(),
+  [Ability.GUILLOTINE]: new GuillotineStrategy(),
+  [Ability.ROCK_SLIDE]: new RockSlideStrategy(),
+  [Ability.HEAT_WAVE]: new HeatWaveStrategy(),
+  [Ability.THUNDER]: new ThunderStrategy(),
+  [Ability.HYDRO_PUMP]: new HydroPumpStrategy(),
+  [Ability.DRACO_METEOR]: new DracoMeteorStrategy(),
+  [Ability.BLAZE_KICK]: new BlazeKickStrategy(),
+  [Ability.WISH]: new WishStrategy(),
+  [Ability.CALM_MIND]: new CalmMindStrategy(),
+  [Ability.IRON_DEFENSE]: new IronDefenseStrategy(),
+  [Ability.DEFENSE_CURL]: new DefenseCurlStrategy(),
+  [Ability.METRONOME]: new MetronomeStrategy(),
+  [Ability.SOAK]: new SoakStrategy(),
+  [Ability.IRON_TAIL]: new IronTailStrategy(),
+  [Ability.BLAST_BURN]: new BlastBurnStrategy(),
+  [Ability.CHARGE]: new ChargeStrategy(),
+  [Ability.DISCHARGE]: new DischargeStrategy(),
+  [Ability.BITE]: new BiteStrategy(),
+  [Ability.DRAGON_TAIL]: new DragonTailStrategy(),
+  [Ability.DRAGON_BREATH]: new DragonBreathStrategy(),
+  [Ability.ICICLE_CRASH]: new IcicleCrashStrategy(),
+  [Ability.ROOT]: new RootStrategy(),
+  [Ability.TORMENT]: new TormentStrategy(),
+  [Ability.STOMP]: new StompStrategy(),
+  [Ability.PAYBACK]: new PaybackStrategy(),
+  [Ability.NIGHT_SLASH]: new NightSlashStrategy(),
+  [Ability.BUG_BUZZ]: new BugBuzzStrategy(),
+  [Ability.STRING_SHOT]: new StringShotStrategy(),
+  [Ability.STICKY_WEB]: new StickyWebStrategy(),
+  [Ability.VENOSHOCK]: new PoisonStingStrategy(),
+  [Ability.LEECH_LIFE]: new LeechLifeStrategy(),
+  [Ability.HAPPY_HOUR]: new HappyHourStrategy(),
+  [Ability.TELEPORT]: new TeleportStrategy(),
+  [Ability.NASTY_PLOT]: new NastyPlotStrategy(),
+  [Ability.THIEF]: new ThiefStrategy(),
+  [Ability.STUN_SPORE]: new StunSporeStrategy(),
+  [Ability.METEOR_MASH]: new MeteorMashStrategy(),
+  [Ability.HURRICANE]: new HurricaneStrategy(),
+  [Ability.BURN]: new BurnStrategy(),
+  [Ability.SLEEP]: new SleepStrategy(),
+  [Ability.SILENCE]: new SilenceStrategy(),
+  [Ability.CONFUSION]: new ConfusionStrategy(),
+  [Ability.BLIZZARD]: new BlizzardStrategy(),
+  [Ability.PROTECT]: new ProtectStrategy(),
+  [Ability.POISON]: new PoisonStrategy(),
+  [Ability.ORIGIN_PULSE]: new OriginPulseStrategy(),
+  [Ability.SEED_FLARE]: new SeedFlareStrategy(),
+  [Ability.HEAL_BLOCK]: new HealBlockStrategy(),
+  [Ability.ROAR_OF_TIME]: new RoarOfTimeStrategy(),
+  [Ability.ROCK_TOMB]: new RockTombStrategy(),
+  [Ability.ROCK_SMASH]: new RockSmashStrategy(),
+  [Ability.HEAD_SMASH]: new HeadSmashStrategy(),
+  [Ability.DEFAULT]: new AbilityStrategy(),
+  [Ability.DIAMOND_STORM]: new DiamondStormStrategy(),
+  [Ability.DRACO_ENERGY]: new DracoEnergyStrategy(),
+  [Ability.DYNAMAX_CANNON]: new DynamaxCannonStrategy(),
+  [Ability.DYNAMIC_PUNCH]: new DynamicPunchStrategy(),
+  [Ability.ELECTRO_BOOST]: new ElectroBoostStrategy(),
+  [Ability.ELECTRO_WEB]: new ElectroWebStrategy(),
+  [Ability.FIRE_TRICK]: new FireTrickStrategy(),
+  [Ability.FLAME_CHARGE]: new FlameChargeStrategy(),
+  [Ability.LEECH_SEED]: new LeechSeedStrategy(),
+  [Ability.LOCK_ON]: new LockOnStrategy(),
+  [Ability.PSYCH_UP]: new PsychUpStrategy(),
+  [Ability.RAZOR_WIND]: new RazorWindStrategy(),
+  [Ability.TWISTING_NETHER]: new TwistingNetherStrategy(),
+  [Ability.EARTHQUAKE]: new EarthquakeStrategy(),
+  [Ability.SOFT_BOILED]: new SoftBoiledStrategy(),
+  [Ability.ELECTRIC_SURGE]: new ElectricSurgeStrategy(),
+  [Ability.PSYCHIC_SURGE]: new PsychicSurgeStrategy(),
+  [Ability.MIND_BLOWN]: new MindBlownStrategy(),
+  [Ability.PAYDAY]: new PaydayStrategy(),
+  [Ability.BEAT_UP]: new BeatUpStrategy(),
+  [Ability.BLUE_FLARE]: new BlueFlareStrategy(),
+  [Ability.FUSION_BOLT]: new FusionBoltStrategy(),
+  [Ability.AURORA_VEIL]: new AuroraVeilStrategy(),
+  [Ability.AQUA_JET]: new AquaJetStrategy(),
+  [Ability.JUDGEMENT]: new JudgementStrategy(),
+  [Ability.CHATTER]: new ChatterStrategy(),
+  [Ability.LIQUIDATION]: new LiquidationStrategy(),
+  [Ability.STEAM_ERUPTION]: new SteamEruptionStrategy(),
+  [Ability.APPLE_ACID]: new AppleAcidStrategy(),
+  [Ability.SHADOW_BALL]: new ShadowBallStrategy(),
+  [Ability.DIVE]: new DiveStrategy(),
+  [Ability.SPIKE_ARMOR]: new SpikeArmorStrategy(),
+  [Ability.FUTURE_SIGHT]: new FutureSightStrategy(),
+  [Ability.FAKE_TEARS]: new FakeTearsStrategy(),
+  [Ability.SPARKLING_ARIA]: new SparklingAriaStrategy(),
+  [Ability.DRAGON_DARTS]: new DragonDartsStrategy(),
+  [Ability.GRASSY_SURGE]: new GrassySurgeStrategy(),
+  [Ability.MISTY_SURGE]: new MistySurgeStrategy(),
+  [Ability.SKY_ATTACK]: new SkyAttackStrategy(),
+  [Ability.ILLUSION]: new IllusionStrategy(),
+  [Ability.SLUDGE]: new SludgeStrategy(),
+  [Ability.AURORA_BEAM]: new AuroraBeamStrategy(),
+  [Ability.AGILITY]: new AgilityStrategy(),
+  [Ability.SPIRIT_SHACKLE]: new SpiritShackleStrategy(),
+  [Ability.WATER_SHURIKEN]: new WaterShurikenStrategy(),
+  [Ability.SHADOW_SNEAK]: new ShadowSneakStrategy(),
+  [Ability.MACH_PUNCH]: new MachPunchStrategy(),
+  [Ability.UPPERCUT]: new UppercutStrategy(),
+  [Ability.TRIPLE_KICK]: new TripleKickStrategy(),
+  [Ability.MAWASHI_GERI]: new MawashiGeriStrategy(),
+  [Ability.FORECAST]: new ForecastStrategy(),
+  [Ability.SACRED_SWORD]: new SacredSwordStrategy(),
+  [Ability.X_SCISSOR]: new XScissorStrategy(),
+  [Ability.PLASMA_FIST]: new PlasmaFistStrategy(),
+  [Ability.SPECTRAL_THIEF]: new SpectralThiefStrategy(),
+  [Ability.GEOMANCY]: new GeomancyStrategy(),
+  [Ability.DEATH_WING]: new DeathWingStrategy(),
+  [Ability.SLACK_OFF]: new SlackOffStrategy(),
+  [Ability.DARK_VOID]: new DarkVoidStrategy(),
+  [Ability.OVERHEAT]: new OverheatStrategy(),
+  [Ability.HYPNOSIS]: new HypnosisStrategy(),
+  [Ability.MIMIC]: new MimicStrategy(),
+  [Ability.HEX]: new HexStrategy(),
+  [Ability.GROWTH]: new GrowthStrategy(),
+  [Ability.HEAL_ORDER]: new HealOrderStrategy(),
+  [Ability.SHELL_TRAP]: new ShellTrapStrategy(),
+  [Ability.DIG]: new DigStrategy(),
+  [Ability.FIRE_SPIN]: new FireSpinStrategy(),
+  [Ability.SEARING_SHOT]: new SearingShotStrategy(),
+  [Ability.PECK]: new PeckStrategy(),
+  [Ability.SPLASH]: new SplashStrategy(),
+  [Ability.COUNTER]: new CounterStrategy(),
+  [Ability.COSMIC_POWER]: new CosmicPowerStrategy(),
+  [Ability.POISON_POWDER]: new PoisonPowderStrategy(),
+  [Ability.SILVER_WIND]: new SilverWindStrategy(),
+  [Ability.ICY_WIND]: new IcyWindStrategy(),
+  [Ability.GIGATON_HAMMER]: new GigatonHammerStrategy(),
+  [Ability.ACROBATICS]: new AcrobaticsStrategy(),
+  [Ability.ABSORB]: new AbsorbStrategy(),
+  [Ability.ROLLOUT]: new RolloutStrategy(),
+  [Ability.THRASH]: new ThrashStrategy(),
+  [Ability.SOLAR_BEAM]: new SolarBeamStrategy(),
+  [Ability.MAGMA_STORM]: new MagmaStormStrategy(),
+  [Ability.SLASHING_CLAW]: new SlashingClawStrategy(),
+  [Ability.ERUPTION]: new EruptionStrategy(),
+  [Ability.MIST_BALL]: new MistBallStrategy(),
+  [Ability.LUSTER_PURGE]: new LusterPurgeStrategy(),
+  [Ability.MUD_BUBBLE]: new MudBubbleStrategy(),
+  [Ability.LINK_CABLE]: new LinkCableStrategy(),
+  [Ability.MAGIC_BOUNCE]: new MagicBounceStrategy(),
+  [Ability.HIDDEN_POWER_A]: new HiddenPowerAStrategy(),
+  [Ability.HIDDEN_POWER_B]: new HiddenPowerBStrategy(),
+  [Ability.HIDDEN_POWER_C]: new HiddenPowerCStrategy(),
+  [Ability.HIDDEN_POWER_D]: new HiddenPowerDStrategy(),
+  [Ability.HIDDEN_POWER_E]: new HiddenPowerEStrategy(),
+  [Ability.HIDDEN_POWER_F]: new HiddenPowerFStrategy(),
+  [Ability.HIDDEN_POWER_G]: new HiddenPowerGStrategy(),
+  [Ability.HIDDEN_POWER_H]: new HiddenPowerHStrategy(),
+  [Ability.HIDDEN_POWER_I]: new HiddenPowerIStrategy(),
+  [Ability.HIDDEN_POWER_J]: new HiddenPowerJStrategy(),
+  [Ability.HIDDEN_POWER_K]: new HiddenPowerKStrategy(),
+  [Ability.HIDDEN_POWER_L]: new HiddenPowerLStrategy(),
+  [Ability.HIDDEN_POWER_M]: new HiddenPowerMStrategy(),
+  [Ability.HIDDEN_POWER_N]: new HiddenPowerNStrategy(),
+  [Ability.HIDDEN_POWER_O]: new HiddenPowerOStrategy(),
+  [Ability.HIDDEN_POWER_P]: new HiddenPowerPStrategy(),
+  [Ability.HIDDEN_POWER_Q]: new HiddenPowerQStrategy(),
+  [Ability.HIDDEN_POWER_R]: new HiddenPowerRStrategy(),
+  [Ability.HIDDEN_POWER_S]: new HiddenPowerSStrategy(),
+  [Ability.HIDDEN_POWER_T]: new HiddenPowerTStrategy(),
+  [Ability.HIDDEN_POWER_U]: new HiddenPowerUStrategy(),
+  [Ability.HIDDEN_POWER_V]: new HiddenPowerVStrategy(),
+  [Ability.HIDDEN_POWER_W]: new HiddenPowerWStrategy(),
+  [Ability.HIDDEN_POWER_X]: new HiddenPowerXStrategy(),
+  [Ability.HIDDEN_POWER_Y]: new HiddenPowerYStrategy(),
+  [Ability.HIDDEN_POWER_Z]: new HiddenPowerZStrategy(),
+  [Ability.HIDDEN_POWER_QM]: new HiddenPowerQMStrategy(),
+  [Ability.HIDDEN_POWER_EM]: new HiddenPowerEMStrategy(),
+  [Ability.POISON_JAB]: new PoisonJabStrategy(),
+  [Ability.SHELL_SMASH]: new ShellSmashStrategy(),
+  [Ability.HELPING_HAND]: new HelpingHandStrategy(),
+  [Ability.ASTRAL_BARRAGE]: new AstralBarrageStrategy(),
+  [Ability.WATERFALL]: new WaterfallStrategy(),
+  [Ability.PYRO_BALL]: new PyroBallStrategy(),
+  [Ability.WHIRLPOOL]: new WhirlpoolStrategy(),
+  [Ability.SMOKE_SCREEN]: new SmokeScreenStrategy(),
+  [Ability.PRESENT]: new PresentStrategy(),
+  [Ability.LEAF_BLADE]: new LeafBladeStrategy(),
+  [Ability.ANCHOR_SHOT]: new AnchorShotStrategy(),
+  [Ability.SMOG]: new SmogStrategy(),
+  [Ability.PSYCHIC]: new PsychicStrategy(),
+  [Ability.MAGNET_RISE]: new MagnetRiseStrategy(),
+  [Ability.ATTRACT]: new AttractStrategy(),
+  [Ability.WATER_PULSE]: new WaterPulseStrategy(),
+  [Ability.PLAY_ROUGH]: new PlayRoughStrategy(),
+  [Ability.AERIAL_ACE]: new AerialAceStrategy(),
+  [Ability.PARABOLIC_CHARGE]: new ParabolicChargeStrategy(),
+  [Ability.SUPER_FANG]: new SuperFangStrategy(),
+  [Ability.TEETER_DANCE]: new TeeterDanceStrategy(),
+  [Ability.CLOSE_COMBAT]: new CloseCombatStrategy(),
+  [Ability.ASSIST]: new AssistStrategy(),
+  [Ability.FISSURE]: new FissureStrategy(),
+  [Ability.ASSURANCE]: new AssuranceStrategy(),
+  [Ability.AQUA_RING]: new AquaRingStrategy(),
+  [Ability.POISON_GAS]: new PoisonGasStrategy(),
+  [Ability.BRAVE_BIRD]: new BraveBirdStrategy(),
+  [Ability.MAGICAL_LEAF]: new MagicalLeafStrategy(),
+  [Ability.STEALTH_ROCKS]: new StealthRocksStrategy(),
+  [Ability.TAIL_GLOW]: new TailGlowStrategy(),
+  [Ability.STRUGGLE_BUG]: new StruggleBugStrategy(),
+  [Ability.PRISMATIC_LASER]: new PrismaticLaserStrategy(),
+  [Ability.NATURAL_GIFT]: new NaturalGiftStrategy(),
+  [Ability.NIGHT_SHADE]: new NightShadeStrategy()
 }
