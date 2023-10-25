@@ -1,7 +1,5 @@
 # New Pokemons:
 
-
-
 # Changes to Pokemon & Abilities
 
 -
@@ -26,6 +24,4 @@
 
 # Bugfix
 
-- 
-
-# Misc
+- Shadow Clone was using current HP and not max HP. Now also reduce max HP of clones

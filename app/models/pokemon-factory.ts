@@ -12,7 +12,7 @@ import {
 import { Synergy } from "../types/enum/Synergy"
 import { logger } from "../utils/logger"
 import { pickRandomIn } from "../utils/random"
-import { Magikarp, Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
+import { Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
 import { PVEStage } from "./pve-stages"
 
@@ -75,8 +75,8 @@ export default class PokemonFactory {
       const PokemonClass = PokemonClasses[name]
       return new PokemonClass(shiny, emotion)
     } else {
-      logger.warn(`No pokemon with name "${name}" found, return magikarp`)
-      return new Magikarp(shiny, emotion)
+      logger.warn(`No pokemon with name "${name}" found, return MissingNo`)
+      return new Pokemon(shiny, emotion)
     }
   }
 

@@ -1,11 +1,11 @@
 {
   "name": "pokemon-auto-chess",
-  "version": "4.3.0",
+  "version": "4.4.0",
   "description": "",
   "keywords": [],
   "license": "BSD-3-Clause",
   "engines": {
-    "node": "18.18.0"
+    "node": "18.18.2"
   },
   "homepage": "https://github.com/keldaanCommunity/pokemonAutoChess#readme",
   "repository": {
@@ -74,6 +74,7 @@
     "nes.css": "^2.3.0",
     "pastebin-ts": "^1.3.0",
     "phaser": "^3.60.0",
+    "phaser-animated-tiles-phaser3.5": "^2.0.5",
     "phaser3-rex-plugins": "^1.60.6",
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.0",

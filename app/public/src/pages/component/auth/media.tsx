@@ -3,6 +3,7 @@ import DiscordButton from "../buttons/discord-button"
 import GithubButton from "../buttons/github-button"
 import PolicyButton from "../buttons/policy-button"
 import { useTranslation } from "react-i18next"
+import pkg from "../../../../../../package.json"
 
 export default function Media() {
   const { t } = useTranslation()
@@ -11,7 +12,7 @@ export default function Media() {
       <DiscordButton />
       <GithubButton />
       <PolicyButton />
-      <span>V4.1</span>
+      <span>V{pkg.version}</span>
       <p>
         {t("made_for_fans")}
         <br />

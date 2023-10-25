@@ -9,7 +9,7 @@ Object.values(Pkm).forEach((p) => {
   if (
     pkm.stars === 2 &&
     pkm.final &&
-    !pkm.types.includes(Synergy.FOSSIL) &&
+    !pkm.types.has(Synergy.FOSSIL) &&
     pkm.rarity !== Rarity.MYTHICAL
   ) {
     logger.debug(pkm.name)

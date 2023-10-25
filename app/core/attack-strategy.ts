@@ -1775,7 +1775,8 @@ export class ShadowCloneStrategy extends AttackStrategy {
         farthestCoordinate.y,
         pokemon.team
       )
-      clone.life = 0.8 * pokemon.life
+      clone.hp = Math.ceil(0.8 * pokemon.hp)
+      clone.life = clone.hp
       clone.addShield(30, clone, true)
       clone.isClone = true
     }
@@ -5618,13 +5619,7 @@ export class SuperFangStrategy extends AttackStrategy {
     if (target.types.has(Synergy.GRASS)) {
       damage *= 2
     }
-    target.handleSpecialDamage(
-      damage,
-      board,
-      AttackType.SPECIAL,
-      pokemon,
-      crit
-    )
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
 
@@ -6033,13 +6028,7 @@ export class PrismaticLaserStrategy extends AttackStrategy {
           x === pokemon.positionX - 1 ||
           x === pokemon.positionX + 1)
       ) {
-        tg.handleSpecialDamage(
-          80,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
-        )
+        tg.handleSpecialDamage(80, board, AttackType.SPECIAL, pokemon, crit)
         const teleportationCell = board.getTeleportationCell(
           tg.positionX,
           tg.positionY
@@ -6068,12 +6057,6 @@ export class NightShadeStrategy extends AttackStrategy {
         target.hp *
         (1 + (0.5 * pokemon.ap) / 100)
     )
-    target.handleSpecialDamage(
-      damage,
-      board,
-      AttackType.TRUE,
-      pokemon,
-      crit
-    )
+    target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
   }
 }

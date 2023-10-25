@@ -386,6 +386,7 @@ export interface IPokemon {
   shiny: boolean
   emotion: Emotion
   final: boolean
+  additional: boolean
   action: PokemonActionState
   canBePlaced: boolean
   canBeCloned: boolean
