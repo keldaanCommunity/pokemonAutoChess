@@ -32,53 +32,13 @@ export class AttackStrategy {
     state: PokemonState,
     board: Board,
     target: PokemonEntity,
-    crit: boolean
+    crit: boolean,
+    preventDefaultAnim?: boolean
   ) {
     pokemon.pp = 0
     pokemon.count.ult += 1
-
-    function soundBoost() {
-      pokemon.count.soundCount++
-      const chimechoBoost = !!board.find(
-        (x, y, e) => e.passive === Passive.CHIMECHO && e.team === pokemon.team
-      )
-      board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
-        if (ally && pokemon.team === ally.team) {
-          ally.status.sleep = false
-          if (
-            pokemon.effects.has(Effect.LARGO) ||
-            pokemon.effects.has(Effect.ALLEGRO) ||
-            pokemon.effects.has(Effect.PRESTO)
-          ) {
-            ally.addAttack(chimechoBoost ? 2 : 1, false)
-          }
-          if (
-            pokemon.effects.has(Effect.ALLEGRO) ||
-            pokemon.effects.has(Effect.PRESTO)
-          ) {
-            ally.addAttackSpeed(chimechoBoost ? 10 : 5, false)
-          }
-          if (pokemon.effects.has(Effect.PRESTO)) {
-            const manaBoost = chimechoBoost ? 6 : 3
-            ally.setPP(ally.pp + manaBoost)
-          }
-        }
-      })
-    }
-    if (
-      ![
-        Ability.PYRO_BALL,
-        Ability.WHIRLPOOL,
-        Ability.SMOKE_SCREEN,
-        Ability.ANCHOR_SHOT,
-        Ability.MAGNET_RISE,
-        Ability.ATTRACT,
-        Ability.ASSIST,
-        Ability.FISSURE,
-        Ability.MAGICAL_LEAF,
-        Ability.NATURAL_GIFT
-      ].includes(pokemon.skill)
-    ) {
+    
+    if (!preventDefaultAnim) {
       pokemon.simulation.room.broadcast(Transfer.ABILITY, {
         id: pokemon.simulation.id,
         skill: pokemon.skill,
@@ -91,10 +51,10 @@ export class AttackStrategy {
     }
 
     if (pokemon.types.has(Synergy.SOUND)) {
-      soundBoost()
+      soundBoost(pokemon, board)
       if (pokemon.passive === Passive.MEGA_LAUNCHER) {
-        soundBoost()
-        soundBoost()
+        soundBoost(pokemon, board)
+        soundBoost(pokemon, board)
       }
     }
 
@@ -140,6 +100,35 @@ export class AttackStrategy {
       )
     }
   }
+}
+
+export function soundBoost(pokemon: PokemonEntity, board: Board) {
+  pokemon.count.soundCount++
+  const chimechoBoost = !!board.find(
+    (x, y, e) => e.passive === Passive.CHIMECHO && e.team === pokemon.team
+  )
+  board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
+    if (ally && pokemon.team === ally.team) {
+      ally.status.sleep = false
+      if (
+        pokemon.effects.has(Effect.LARGO) ||
+        pokemon.effects.has(Effect.ALLEGRO) ||
+        pokemon.effects.has(Effect.PRESTO)
+      ) {
+        ally.addAttack(chimechoBoost ? 2 : 1, false)
+      }
+      if (
+        pokemon.effects.has(Effect.ALLEGRO) ||
+        pokemon.effects.has(Effect.PRESTO)
+      ) {
+        ally.addAttackSpeed(chimechoBoost ? 10 : 5, false)
+      }
+      if (pokemon.effects.has(Effect.PRESTO)) {
+        const manaBoost = chimechoBoost ? 6 : 3
+        ally.setPP(ally.pp + manaBoost)
+      }
+    }
+  })
 }
 
 export class BlueFlareStrategy extends AttackStrategy {
@@ -2639,7 +2628,7 @@ export class NaturalGiftStrategy extends AttackStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
+    super.process(pokemon, state, board, target, crit, true)
 
     const candidate = (
       board.cells.filter(
@@ -2970,7 +2959,7 @@ export class SmokeScreenStrategy extends AttackStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
+    super.process(pokemon, state, board, target, crit, true)
     const damage = pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10
     const duration = 2000
     const mostSurroundedCoordinate =
@@ -5285,7 +5274,7 @@ export class PyroBallStrategy extends AttackStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
+    super.process(pokemon, state, board, target, crit, true)
     const damage = pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10
 
     const farthestCoordinate = state.getFarthestTargetCoordinate(pokemon, board)
@@ -5330,7 +5319,7 @@ export class WhirlpoolStrategy extends AttackStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
+    super.process(pokemon, state, board, target, crit, true)
     const farthestCoordinate = state.getFarthestTargetCoordinate(pokemon, board)
 
     if (farthestCoordinate) {
@@ -5376,7 +5365,7 @@ export class AnchorShotStrategy extends AttackStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
+    super.process(pokemon, state, board, target, crit, true)
     const damage = pokemon.stars === 3 ? 80 : pokemon.stars === 2 ? 40 : 20
     const farthestCoordinate = state.getFarthestTargetCoordinate(pokemon, board)
     if (farthestCoordinate) {
@@ -5464,7 +5453,7 @@ export class MagnetRiseStrategy extends AttackStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
+    super.process(pokemon, state, board, target, crit, true)
     const cells = board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
       .filter((cell) => cell.value && cell.value.team === pokemon.team)
@@ -5497,7 +5486,7 @@ export class AttractStrategy extends AttackStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
+    super.process(pokemon, state, board, target, crit, true)
     const targets = pickNRandomIn(
       board.cells.filter((v) => v && v.team !== pokemon.team),
       pokemon.stars
@@ -5661,7 +5650,7 @@ export class AssistStrategy extends AttackStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
+    super.process(pokemon, state, board, target, crit, true)
     const skill = pickRandomIn(
       board.cells
         .filter(
@@ -5696,7 +5685,7 @@ export class FissureStrategy extends AttackStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
+    super.process(pokemon, state, board, target, crit, true)
     const numberOfRifts = pokemon.stars === 3 ? 4 : pokemon.stars === 2 ? 3 : 2
     for (let i = 0; i < numberOfRifts; i++) {
       const x_ = randomBetween(0, BOARD_WIDTH - 1)
@@ -5875,7 +5864,7 @@ export class MagicalLeafStrategy extends AttackStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
+    super.process(pokemon, state, board, target, crit, true)
     const damage = pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10
 
     const farthestCoordinate = state.getFarthestTargetCoordinate(pokemon, board)
