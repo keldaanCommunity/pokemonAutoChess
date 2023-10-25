@@ -9,8 +9,9 @@ import Board from "../board"
 import PokemonEntity from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
 import PRECOMPUTED_TYPE_POKEMONS from "../../models/precomputed/type-pokemons.json"
-import { AbilityStrategies, AbilityStrategy } from "./abilities"
+import { AbilityStrategies } from "./abilities"
 import { Transfer } from "../../types"
+import { AbilityStrategy } from "./ability-strategy"
 
 export class HiddenPowerStrategy extends AbilityStrategy {
   copyable = false

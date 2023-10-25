@@ -7,7 +7,7 @@ import Status from "../models/colyseus-models/status"
 import Count from "../models/colyseus-models/count"
 import Simulation from "./simulation"
 import { Schema, type, SetSchema } from "@colyseus/schema"
-import { AbilityStrategies, AbilityStrategy } from "./abilities/abilities"
+import { AbilityStrategies } from "./abilities/abilities"
 import Board from "./board"
 import PokemonState from "./pokemon-state"
 import {
@@ -36,6 +36,7 @@ import {
 } from "../types/Config"
 import { chance } from "../utils/random"
 import { distanceC } from "../utils/distance"
+import { AbilityStrategy } from "./abilities/ability-strategy"
 
 export default class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
