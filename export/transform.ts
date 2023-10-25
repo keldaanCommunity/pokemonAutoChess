@@ -18,7 +18,7 @@ import {
 } from "../app/types/Config"
 import { AnimationTiled, FrameTiled, TilesetTiled } from "../app/core/tileset"
 
-const PMDO_EXPORT_DIRECTORY = "C:/Users/arnau/Desktop/RawAsset/TileDtef"
+const PMDO_EXPORT_DIRECTORY = ""
 let gid = 1
 
 async function getDirectories(source: string) {
