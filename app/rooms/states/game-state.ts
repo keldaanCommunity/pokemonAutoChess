@@ -82,9 +82,5 @@ export default class GameState extends Schema {
     this.design = new Design(this.id, 5, 0.1)
     this.design.create()
     this.tilemap = this.design.exportToTiled()
-    writeFile(
-      "C:/Users/arnau/Desktop/pokemonAutoChess/export/generated-map.json",
-      JSON.stringify(this.tilemap, null, 2)
-    )
   }
 }
