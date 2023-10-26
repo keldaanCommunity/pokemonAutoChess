@@ -1096,7 +1096,7 @@
     "LEAF_BLADE": "Next attack is a guaranteed critical hit dealing [100,SP]% of ATK as SPECIAL",
     "ANCHOR_SHOT": "Grab the farthest pokémon and deals [20,40,80,SP] SPECIAL",
     "PSYCHIC": "The target is hit by a strong telekinetic force, dealing [40,80,120,SP] SPECIAL to it while also lowering their SPE_DEF by [1,2,3,SP]",
-    "MAGNET_RISE": "Grants PROTECT to [1,2,4] adjacent ally pokémon for 2 seconds",
+    "MAGNET_RISE": "Grants PROTECT to [2,4,6] adjacent ally pokémon for 2 seconds",
     "ATTRACT": "Make [1,2,3] pokémon chosen randomly CHARM for [2.5,SP] seconds",
     "WATER_PULSE": "Deals [50,100,150,SP] SPECIAL to the target and adjacent ennemis and make them CONFUSION for 2 seconds",
     "PLAY_ROUGH": "Deals [30,60,120,SP] SPECIAL to the target and make it CHARM for 2.5 seconds",
