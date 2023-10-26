@@ -301,6 +301,7 @@ export class MiniGame {
       this.portals?.set(portal.id, portal)
       const body = Bodies.circle(x, y, 30)
       body.label = portal.id
+      body.isSensor = true
       this.bodies.set(portal.id, body)
       Composite.add(this.engine.world, body)
     }
