@@ -1,6 +1,5 @@
 import React from "react"
 import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
-import CSS from "csstype"
 import { IPokemonsStatistic } from "../../../../../models/mongo-models/pokemons-statistic"
 import { useTranslation } from "react-i18next"
 import { getPortraitSrc } from "../../../utils"
@@ -9,10 +8,6 @@ import { Synergy } from "../../../../../types/enum/Synergy"
 import PRECOMPUTED_TYPE_ALL from "../../../../../models/precomputed/type-pokemons-all.json"
 import PRECOMPUTED_RARITY_ALL from "../../../../../models/precomputed/type-rarity-all.json"
 import { Rarity } from "../../../../../types/enum/Game"
-
-const pStyle = {
-  fontSize: "1.1vw"
-}
 
 export default function PokemonStatistic(props: {
   pokemons: IPokemonsStatistic[]
@@ -83,11 +78,7 @@ export default function PokemonStatistic(props: {
           </ul>
 
           <span style={{ fontSize: "150%" }}>
-            {t("average_place")}{" "}
-            {(
-              pokemons.reduce((prev, curr) => prev + curr.rank, 0) /
-              pokemons.length
-            ).toFixed(1)}
+            {t("average_place")} {computeAverageRank(pokemons)}
           </span>
 
           <span style={{ fontSize: "150%" }}>
@@ -113,7 +104,9 @@ export default function PokemonStatistic(props: {
                   className="pokemon-portrait"
                   src={getPortraitSrc(PkmIndex[pokemon.name])}
                 />
-                <span>{pokemon.rank.toFixed(1)}</span>
+                <span>
+                  {pokemon.count === 0 ? "???" : pokemon.rank.toFixed(1)}
+                </span>
                 <span>
                   <label>{t("count")}:</label> {pokemon.count}
                 </span>
@@ -139,4 +132,13 @@ export default function PokemonStatistic(props: {
       ))}
     </div>
   )
+}
+
+function computeAverageRank(pokemons: IPokemonsStatistic[]): string {
+  const pokemonsPlayedAtLeastOnce = pokemons.filter((p) => p.count > 0)
+  if (pokemonsPlayedAtLeastOnce.length === 0) return "???"
+  return (
+    pokemonsPlayedAtLeastOnce.reduce((prev, curr) => prev + curr.rank, 0) /
+    pokemonsPlayedAtLeastOnce.length
+  ).toFixed(1)
 }
