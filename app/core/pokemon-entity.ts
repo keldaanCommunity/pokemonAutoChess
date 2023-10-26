@@ -6,9 +6,8 @@ import { nanoid } from "nanoid"
 import Status from "../models/colyseus-models/status"
 import Count from "../models/colyseus-models/count"
 import Simulation from "./simulation"
-import { Schema, type, SetSchema, ArraySchema } from "@colyseus/schema"
-import { AttackStrategy } from "./attack-strategy"
-import { AbilityStrategy } from "./abilities"
+import { Schema, type, SetSchema } from "@colyseus/schema"
+import { AbilityStrategies } from "./abilities/abilities"
 import Board from "./board"
 import PokemonState from "./pokemon-state"
 import {
@@ -37,6 +36,7 @@ import {
 } from "../types/Config"
 import { chance } from "../utils/random"
 import { distanceC } from "../utils/distance"
+import { AbilityStrategy } from "./abilities/ability-strategy"
 
 export default class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
@@ -80,7 +80,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   manaCooldown = 1000
   state: MovingState
   simulation: Simulation
-  strategy: AttackStrategy
+  strategy: AbilityStrategy
   baseAtk: number
   baseDef: number
   baseSpeDef: number
@@ -115,7 +115,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     this.status = new Status()
     this.count = new Count()
     this.simulation = simulation
-    this.strategy = AbilityStrategy[pokemon.skill]
+    this.strategy = AbilityStrategies[pokemon.skill]
 
     this.id = nanoid()
     this.rarity = pokemon.rarity
