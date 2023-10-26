@@ -956,7 +956,7 @@
     "TELEPORT": "Teleport the user to a corner of the battlefield. The user's next attack deals [15,30,60,SP] extra SPECIAL",
     "NASTY_PLOT": "Buff the user's ATK by [10,SP]",
     "THIEF": "Steal as many of the target's items as the user can carry and deal [15,30,60,SP] SPECIAL",
-    "STUN_SPORE": "Decrease the target's ATK_SPEED by [10,20,40]% and deal [5,10,20,SP] SPECIAL",
+    "STUN_SPORE": "Deals [5,10,20,40,SP] SPECIAL and inflicts PARALYSIS for 5 seconds to adjacent enemies",
     "METEOR_MASH": "Deal [30,50,70,SP] SPECIAL in an area around the target. Buff the user's ATK by [5,SP]",
     "HURRICANE": "Deal [25,50,100,SP] SPECIAL to all enemy Pokémon behind the target and make them PARALYSIS for 4 seconds",
     "HEAL_BLOCK": "Apply WOUND to all adjacent enemy Pokémon for [5,10,15] seconds",

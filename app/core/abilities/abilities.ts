@@ -3712,26 +3712,13 @@ export class StunSporeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let debuff = 0
-    let damage = 0
-    switch (pokemon.stars) {
-      case 1:
-        debuff = 10
-        damage = 5
-        break
-      case 2:
-        debuff = 20
-        damage = 10
-        break
-      case 3:
-        debuff = 40
-        damage = 20
-        break
-      default:
-        break
-    }
-    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.addAttackSpeed(-debuff, false)
+    const damage = [5,10,20,40][pokemon.stars-1] ?? 40
+    board.getAdjacentCells(pokemon.positionX, pokemon.positionY).forEach(cell => {
+      if(cell.value && cell.value.team !== pokemon.team){
+        cell.value.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit, true)
+        cell.value.status.triggerParalysis(5000, cell.value)
+      }
+    })
   }
 }
 
