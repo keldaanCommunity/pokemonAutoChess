@@ -5404,7 +5404,7 @@ export class MagnetRiseStrategy extends AbilityStrategy {
 
     for (
       let i = 0;
-      i < (pokemon.stars === 3 ? 4 : pokemon.stars === 2 ? 2 : 1);
+      i < (pokemon.stars === 3 ? 6 : pokemon.stars === 2 ? 4 : 2);
       i++
     ) {
       const cell = cells.shift()
