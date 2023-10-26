@@ -128,9 +128,6 @@ export const networkSlice = createSlice({
     ) => {
       state.lobby?.send(Transfer.CHANGE_AVATAR, action.payload)
     },
-    requestMeta: (state) => {
-      state.lobby?.send(Transfer.REQUEST_META)
-    },
     requestBotList: (
       state,
       action: PayloadAction<{ withSteps: boolean } | undefined>
@@ -317,7 +314,6 @@ export const {
   joinAfter,
   changeName,
   changeAvatar,
-  requestMeta,
   requestBotList,
   createBot,
   requestBotData,

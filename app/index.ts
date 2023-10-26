@@ -19,6 +19,9 @@ import { Item } from "./types/enum/Item"
 import { SynergyTriggers } from "./types/Config"
 import { logger } from "./utils/logger"
 import { connect } from "mongoose"
+import PokemonsStatistics from "./models/mongo-models/pokemons-statistic"
+import ItemsStatistics from "./models/mongo-models/items-statistic"
+import Meta from "./models/mongo-models/meta"
 
 process.env.NODE_APP_INSTANCE
   ? dotenv.config({ path: path.join(__dirname, "../../../../../.env") })
@@ -175,6 +178,26 @@ app.get("/items", (req, res) => {
 
 app.get("/types-trigger", (req, res) => {
   res.send(SynergyTriggers)
+})
+
+app.get("/meta", async (req, res) => {
+  res.send(await Meta.find({}, [
+    "cluster_id",
+    "count",
+    "ratio",
+    "winrate",
+    "mean_rank",
+    "types",
+    "pokemons"
+  ]))
+})
+
+app.get("/meta/items", async (req, res) => {
+  res.send(await ItemsStatistics.find())
+})
+
+app.get("/meta/pokemons", async (req, res) => {
+  res.send(await PokemonsStatistics.find())
 })
 
 const basicAuthMiddleware = basicAuth({

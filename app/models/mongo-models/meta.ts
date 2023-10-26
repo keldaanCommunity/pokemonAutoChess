@@ -59,3 +59,7 @@ const metaSchema = new Schema({
 })
 
 export default model<IMeta>("Meta", metaSchema, "meta")
+
+export async function fetchMeta(): Promise<IMeta[]> {
+  return fetch("/meta").then(res => res.json())
+}

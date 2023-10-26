@@ -60,9 +60,6 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
   discordWebhook: WebhookClient | undefined
   discordBanWebhook: WebhookClient | undefined
   bots: Map<string, IBot>
-  meta: IMeta[]
-  metaItems: IItemsStatistic[]
-  metaPokemons: IPokemonsStatistic[]
   leaderboard: ILeaderboardInfo[]
   botLeaderboard: ILeaderboardBotInfo[]
   levelLeaderboard: ILeaderboardInfo[]
@@ -99,9 +96,6 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
 
     this.dispatcher = new Dispatcher(this)
     this.bots = new Map<string, IBot>()
-    this.meta = new Array<IMeta>()
-    this.metaItems = new Array<IItemsStatistic>()
-    this.metaPokemons = new Array<IPokemonsStatistic>()
     this.leaderboard = new Array<ILeaderboardInfo>()
     this.botLeaderboard = new Array<ILeaderboardBotInfo>()
     this.levelLeaderboard = new Array<ILeaderboardInfo>()
@@ -289,16 +283,6 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       }
     })
 
-    this.onMessage(Transfer.REQUEST_META, (client) => {
-      try {
-        client.send(Transfer.REQUEST_META, this.meta)
-        client.send(Transfer.REQUEST_META_ITEMS, this.metaItems)
-        client.send(Transfer.REQUEST_META_POKEMONS, this.metaPokemons)
-      } catch (error) {
-        logger.error(error)
-      }
-    })
-
     this.onMessage(Transfer.OPEN_BOOSTER, (client) => {
       this.dispatcher.dispatch(new OpenBoosterCommand(), { client })
     })
@@ -390,7 +374,6 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     )
     await this.fetchChat()
     await this.fetchLeaderboards()
-    await this.fetchMeta()
   }
 
   async onAuth(client: Client, options: any, request: any) {
@@ -456,42 +439,6 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
               message.time
             )
           )
-        })
-      }
-    } catch (error) {
-      logger.error(error)
-    }
-  }
-
-  async fetchMeta() {
-    try {
-      const docs = await Meta.find({}, [
-        "cluster_id",
-        "count",
-        "ratio",
-        "winrate",
-        "mean_rank",
-        "types",
-        "pokemons"
-      ])
-
-      if (docs) {
-        docs.forEach((doc) => {
-          this.meta.push(doc)
-        })
-      }
-
-      const items = await ItemsStatistic.find()
-      if (items) {
-        items.forEach((doc) => {
-          this.metaItems.push(doc)
-        })
-      }
-
-      const stats = await PokemonsStatistic.find()
-      if (stats) {
-        stats.forEach((doc) => {
-          this.metaPokemons.push(doc)
         })
       }
     } catch (error) {

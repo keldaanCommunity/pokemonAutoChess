@@ -51,7 +51,7 @@ export default function PokemonStatistic(props: {
   )
 
   if (filteredPokemons.length === 0) {
-    return <p>No data available</p>
+    return <p>{t("no_data_available")}</p>
   }
   return (
     <div style={{ height: "calc(90vh - 8em)", overflowY: "scroll" }}>
@@ -67,7 +67,7 @@ export default function PokemonStatistic(props: {
             }}
           >
             {pokemons.map((pokemon, i) => (
-              <li>
+              <li key={pokemon.name}>
                 <img
                   className="pokemon-portrait"
                   src={getPortraitSrc(PkmIndex[pokemon.name])}
@@ -95,6 +95,7 @@ export default function PokemonStatistic(props: {
           >
             {pokemons.map((pokemon) => (
               <li
+                key={pokemon.name}
                 style={{
                   display: "grid",
                   gridTemplateColumns: "32px 6ch 12ch 1fr"

@@ -1,23 +1,25 @@
 import { t } from "i18next"
-import React, { useState } from "react"
-import { IMeta } from "../../../../../models/mongo-models/meta"
-import { useAppSelector } from "../../../hooks"
+import React, { useEffect, useMemo, useState } from "react"
+import { fetchMeta, IMeta } from "../../../../../models/mongo-models/meta"
 import TeamComp from "./team-comp"
 
 export function CompositionReport() {
-  const meta = useAppSelector((state) => state.lobby.meta)
+  const [loading, setLoading] = useState<boolean>(true)
+  const [meta, setMeta] = useState<IMeta[]>([])
+  useEffect(() => {
+    fetchMeta().then((res) => {
+      setLoading(false)
+      setMeta(res)
+    })
+  }, [])
   const [rankingBy, setRanking] = useState<string>("count")
 
-  let sortedMeta = new Array<IMeta>()
-  if (rankingBy == "count" || rankingBy == "winrate") {
-    sortedMeta = [...meta].sort((a, b) => {
-      return b[rankingBy] - a[rankingBy]
+  const sortedMeta = useMemo(() => {
+    return [...meta].sort((a, b) => {
+      const order = rankingBy == "count" || rankingBy == "winrate" ? -1 : 1
+      return (a[rankingBy] - b[rankingBy]) * order
     })
-  } else {
-    sortedMeta = [...meta].sort((a, b) => {
-      return a[rankingBy] - b[rankingBy]
-    })
-  }
+  }, [meta, rankingBy])
 
   return (
     <div id="meta-report-compo">
@@ -41,7 +43,9 @@ export function CompositionReport() {
       </header>
 
       <div style={{ height: "calc(90vh - 8em)", overflowY: "scroll" }}>
-        {sortedMeta.length === 0 && <p>No data available</p>}
+        {sortedMeta.length === 0 && (
+          <p>{loading ? t("loading") : t("no_data_available")}</p>
+        )}
         {sortedMeta.map((team, i) => {
           return <TeamComp team={team} rank={i + 1} key={team.cluster_id} />
         })}

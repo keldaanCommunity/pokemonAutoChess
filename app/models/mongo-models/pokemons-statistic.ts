@@ -33,3 +33,7 @@ export default model<IPokemonsStatistic>(
   pokemonsStatistic,
   "pokemons-statistic"
 )
+
+export async function fetchMetaPokemons(): Promise<IPokemonsStatistic[]> {
+  return fetch("/meta/pokemons").then((res) => res.json())
+}
