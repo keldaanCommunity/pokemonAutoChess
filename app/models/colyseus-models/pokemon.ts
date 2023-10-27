@@ -6021,7 +6021,7 @@ export class MegaRayquaza extends Pokemon {
 }
 
 export class Oddish extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.GRASS])
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.POISON, Synergy.GRASS])
   rarity = Rarity.SPECIAL
   stars = 1
   evolution = Pkm.GLOOM
@@ -6036,7 +6036,7 @@ export class Oddish extends Pokemon {
 }
 
 export class Gloom extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.GRASS])
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.POISON, Synergy.GRASS])
   rarity = Rarity.SPECIAL
   stars = 2
   evolution = Pkm.VILEPLUME
@@ -6051,7 +6051,7 @@ export class Gloom extends Pokemon {
 }
 
 export class Vileplume extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.GRASS])
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.POISON, Synergy.GRASS])
   rarity = Rarity.SPECIAL
   stars = 3
   evolution = Pkm.BELLOSSOM
@@ -6066,9 +6066,9 @@ export class Vileplume extends Pokemon {
 }
 
 export class Bellossom extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.GRASS])
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.POISON, Synergy.GRASS])
   rarity = Rarity.SPECIAL
-  stars = 3
+  stars = 4
   evolution = Pkm.DEFAULT
   hp = 360
   atk = 27
