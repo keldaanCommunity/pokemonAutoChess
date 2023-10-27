@@ -246,7 +246,8 @@
     "STRUGGLE_BUG": "Struggle Bug",
     "PRISMATIC_LASER": "Prismatic Laser",
     "NATURAL_GIFT": "Natural Gift",
-    "NIGHT_SHADE": "Night Shade"
+    "NIGHT_SHADE": "Night Shade",
+    "CHARGE_BEAM": "Charge Beam"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -885,7 +886,8 @@
     "MISDREAVUS": "Misdreavus",
     "MISMAGIUS": "Mismagius",
     "DODUO": "Doduo",
-    "DODRIO": "Dodrio"
+    "DODRIO": "Dodrio",
+    "XURKITREE": "Xurkitree"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1117,7 +1119,8 @@
     "STRUGGLE_BUG": "Deals [30,SP] SPECIAL to adjacent enemies and reduce their AP by 50%",
     "PRISMATIC_LASER": "The user shoots a prismatic laser in a large straight line, dealing [80,SP] and displacing any enemies it hits.",
     "NATURAL_GIFT": "Heals [30,60,120,SP] HP to the most injured ally and RUNE_PROTECT for [1,2,3] s",
-    "NIGHT_SHADE": "Deals [25,33,50,SP=0.5]% of target max HP as TRUE"
+    "NIGHT_SHADE": "Deals [25,33,50,SP=0.5]% of target max HP as TRUE",
+    "CHARGE_BEAM": "Fires a concentrated bundle of electricity that propagate to max 3 adjacent targets, dealing [20,40,80,SP] SPECIAL to each. The remaining electricity increase AP by 20%."
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1513,7 +1516,8 @@
     "ILLUMISE_VOLBEAT": "Illumise and Volbeat gain 5 PP per second for each other member of their species alive on the board",
     "PRISM": "Necrozma switches between its Ultra forme and Normal forme depending on its exposure to LIGHT",
     "BLOSSOM": "Cherrim switches between its Sunlight forme and Normal forme depending on its exposure to LIGHT",
-    "GENESECT": "Genesect is dealing TRUE to targets affected by ARMOR_REDUCTION"
+    "GENESECT": "Genesect is dealing TRUE to targets affected by ARMOR_REDUCTION",
+    "SPECIAL_ATTACK": "Basic attacks deal SPECIAL and scale with AP"
   },
   "stat": {
     "ATK": "Attack",

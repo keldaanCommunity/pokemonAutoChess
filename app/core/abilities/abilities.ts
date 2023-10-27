@@ -5993,6 +5993,60 @@ export class NightShadeStrategy extends AbilityStrategy {
   }
 }
 
+export class ChargeBeamStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, false)
+    const chain = [target]
+    const NB_MAX_TARGETS = 3
+    for (
+      let n = 1, x = target.positionX, y = target.positionY;
+      n < NB_MAX_TARGETS;
+      n++
+    ) {
+      const nextCell = board
+        .getAdjacentCells(x, y)
+        .find(
+          (cell) =>
+            cell.value &&
+            cell.value.team === target.team &&
+            !chain.includes(cell.value)
+        )
+      if (nextCell) {
+        chain.push(nextCell.value!)
+        x = nextCell.x
+        y = nextCell.y
+      }
+    }
+
+    for (let i = 0; i < chain.length; i++) {
+      const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
+      chain[i].handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit,
+        true
+      )
+      const previous = i === 0 ? pokemon : chain[i - 1]
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: "LINK_CABLE_link", // reuse anim
+        positionX: previous.positionX,
+        positionY: previous.positionY,
+        targetX: chain[i].positionX,
+        targetY: chain[i].positionY
+      })
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -6226,5 +6280,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.STRUGGLE_BUG]: new StruggleBugStrategy(),
   [Ability.PRISMATIC_LASER]: new PrismaticLaserStrategy(),
   [Ability.NATURAL_GIFT]: new NaturalGiftStrategy(),
-  [Ability.NIGHT_SHADE]: new NightShadeStrategy()
+  [Ability.NIGHT_SHADE]: new NightShadeStrategy(),
+  [Ability.CHARGE_BEAM]: new ChargeBeamStrategy()
 }

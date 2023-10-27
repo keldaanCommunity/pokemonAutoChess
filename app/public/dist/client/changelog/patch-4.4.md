@@ -1,5 +1,7 @@
 # New Pokemons:
 
+- Xurkitree
+
 # Changes to Pokemon & Abilities
 
 - Magnet Rise Buff: ~~[1,2,4]~~ -> [2,4,6] protected allies
