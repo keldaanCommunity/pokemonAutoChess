@@ -1,29 +1,33 @@
 import { t } from "i18next"
-import React, { useState } from "react"
-import { IPokemonsStatistic } from "../../../../../models/mongo-models/pokemons-statistic"
+import React, { useEffect, useMemo, useState } from "react"
+import {
+  fetchMetaPokemons,
+  IPokemonsStatistic
+} from "../../../../../models/mongo-models/pokemons-statistic"
 import { Rarity } from "../../../../../types/enum/Game"
 import { Synergy } from "../../../../../types/enum/Synergy"
-import { useAppSelector } from "../../../hooks"
 import PokemonStatistic from "./pokemon-statistic"
 
 export function PokemonReport() {
   const [pokemonRankingBy, setPokemonRanking] = useState<string>("count")
   const [synergy, setSynergy] = useState<Synergy | "all">("all")
   const [rarity, setRarity] = useState<Rarity | "all">("all")
+  const [loading, setLoading] = useState<boolean>(true)
 
-  const metaPokemons = useAppSelector((state) => state.lobby.metaPokemons)
-
-  let sortedMetaPokemons = new Array<IPokemonsStatistic>()
-
-  if (pokemonRankingBy == "count") {
-    sortedMetaPokemons = [...metaPokemons].sort((a, b) => {
-      return b[pokemonRankingBy] - a[pokemonRankingBy]
+  const [metaPokemons, setMetaPokemons] = useState<IPokemonsStatistic[]>([])
+  useEffect(() => {
+    fetchMetaPokemons().then((res) => {
+      setMetaPokemons(res)
+      setLoading(false)
     })
-  } else {
-    sortedMetaPokemons = [...metaPokemons].sort((a, b) => {
-      return a[pokemonRankingBy] - b[pokemonRankingBy]
+  }, [])
+
+  const sortedMetaPokemons = useMemo(() => {
+    return [...metaPokemons].sort((a, b) => {
+      const order = pokemonRankingBy == "count" ? -1 : 1
+      return (a[pokemonRankingBy] - b[pokemonRankingBy]) * order
     })
-  }
+  }, [metaPokemons, pokemonRankingBy])
 
   return (
     <div id="pokemon-report">
@@ -72,6 +76,7 @@ export function PokemonReport() {
           ))}
         </select>
       </header>
+      {loading && <p>{t("loading")}</p>}
       {
         <PokemonStatistic
           pokemons={sortedMetaPokemons}

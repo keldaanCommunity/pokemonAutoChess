@@ -36,9 +36,6 @@ export interface IUserLobbyState {
   preparationRooms: RoomAvailable[]
   gameRooms: RoomAvailable[]
   botList: IBot[]
-  meta: IMeta[]
-  metaItems: IItemsStatistic[]
-  metaPokemons: IPokemonsStatistic[]
   pastebinUrl: string
   botData: IBot
   pokemonCollection: IPokemonConfig[]
@@ -64,9 +61,6 @@ const initialState: IUserLobbyState = {
   gameRooms: [],
   searchedUser: undefined,
   botList: [],
-  meta: [],
-  metaItems: [],
-  metaPokemons: [],
   pastebinUrl: "",
   botData: {
     steps: Array.from({ length: MAX_BOTS_STAGE + 1 }, () => ({
@@ -189,15 +183,6 @@ export const lobbySlice = createSlice({
     setSearchedUser: (state, action: PayloadAction<LobbyUser | undefined>) => {
       state.searchedUser = action.payload
     },
-    setMeta: (state, action: PayloadAction<IMeta[]>) => {
-      state.meta = action.payload
-    },
-    setMetaItems: (state, action: PayloadAction<IItemsStatistic[]>) => {
-      state.metaItems = action.payload
-    },
-    setMetaPokemons: (state, action: PayloadAction<IPokemonsStatistic[]>) => {
-      state.metaPokemons = action.payload
-    },
     setBotList: (state, action: PayloadAction<IBot[]>) => {
       state.botList = action.payload
     },
@@ -238,9 +223,6 @@ export const {
   addRoom,
   removeRoom,
   setSearchedUser,
-  setMeta,
-  setMetaItems,
-  setMetaPokemons,
   setBotList,
   setPastebinUrl,
   setBotData,
