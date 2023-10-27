@@ -1,23 +1,29 @@
 import { t } from "i18next"
-import React, { useState } from "react"
-import { IItemsStatistic } from "../../../../../models/mongo-models/items-statistic"
-import { useAppSelector } from "../../../hooks"
+import React, { useEffect, useMemo, useState } from "react"
+import {
+  IItemsStatistic,
+  fetchMetaItems
+} from "../../../../../models/mongo-models/items-statistic"
 import ItemStatistic from "./item-statistic"
 
 export function ItemReport() {
-  const metaItems = useAppSelector((state) => state.lobby.metaItems)
-  let sortedMetaItems = new Array<IItemsStatistic>()
+  const [loading, setLoading] = useState<boolean>(true)
+  const [metaItems, setMetaItems] = useState<IItemsStatistic[]>([])
+  useEffect(() => {
+    fetchMetaItems().then((res) => {
+      setLoading(false)
+      setMetaItems(res)
+    })
+  }, [])
+
   const [itemRankingBy, setItemRanking] = useState<string>("count")
 
-  if (itemRankingBy == "count") {
-    sortedMetaItems = [...metaItems].sort((a, b) => {
-      return b[itemRankingBy] - a[itemRankingBy]
+  const sortedMetaItems = useMemo(() => {
+    return [...metaItems].sort((a, b) => {
+      const order = itemRankingBy == "count" ? -1 : 1
+      return (a[itemRankingBy] - b[itemRankingBy]) * order
     })
-  } else {
-    sortedMetaItems = [...metaItems].sort((a, b) => {
-      return a[itemRankingBy] - b[itemRankingBy]
-    })
-  }
+  }, [metaItems, itemRankingBy])
 
   return (
     <div id="item-report">
@@ -39,7 +45,9 @@ export function ItemReport() {
         </select>
       </header>
       <div style={{ height: "calc(90vh - 8em)", overflowY: "scroll" }}>
-        {sortedMetaItems.length === 0 && <p>No data available</p>}
+        {sortedMetaItems.length === 0 && (
+          <p>{loading ? t("loading") : t("no_data_available")}</p>
+        )}
         {sortedMetaItems.map((item, i) => {
           return <ItemStatistic item={item} key={item.name} rank={i + 1} />
         })}

@@ -21,8 +21,6 @@ import {
   setBotData,
   setBotList,
   setPastebinUrl,
-  setMetaItems,
-  setMeta,
   addRoom,
   addUser,
   changeUser,
@@ -34,7 +32,6 @@ import {
   changePokemonConfig,
   addPokemonConfig,
   setBoosterContent,
-  setMetaPokemons,
   setSuggestions,
   removeMessage,
   setLevelLeaderboard,
@@ -52,10 +49,7 @@ import {
 } from "../../../types"
 import LobbyUser from "../../../models/colyseus-models/lobby-user"
 import { IBot } from "../../../models/mongo-models/bot-v2"
-import { IMeta } from "../../../models/mongo-models/meta"
-import { IItemsStatistic } from "../../../models/mongo-models/items-statistic"
 import PokemonConfig from "../../../models/colyseus-models/pokemon-config"
-import { IPokemonsStatistic } from "../../../models/mongo-models/pokemons-statistic"
 import i18n from "../i18n"
 import { MainSidebar } from "./component/main-sidebar"
 import store from "../stores"
@@ -319,24 +313,6 @@ export async function joinLobbyRoom(
 
           room.onMessage(Transfer.USER, (user: LobbyUser) =>
             dispatch(setSearchedUser(user))
-          )
-
-          room.onMessage(Transfer.REQUEST_META, (meta: IMeta[]) => {
-            dispatch(setMeta(meta))
-          })
-
-          room.onMessage(
-            Transfer.REQUEST_META_ITEMS,
-            (metaItems: IItemsStatistic[]) => {
-              dispatch(setMetaItems(metaItems))
-            }
-          )
-
-          room.onMessage(
-            Transfer.REQUEST_META_POKEMONS,
-            (metaPokemons: IPokemonsStatistic[]) => {
-              dispatch(setMetaPokemons(metaPokemons))
-            }
           )
 
           room.onMessage(Transfer.REQUEST_BOT_DATA, (data: IBot) => {

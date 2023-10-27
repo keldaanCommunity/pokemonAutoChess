@@ -33,3 +33,7 @@ export default model<IItemsStatistic>(
   itemsStatistic,
   "items-statistic"
 )
+
+export async function fetchMetaItems(): Promise<IItemsStatistic[]> {
+  return fetch("/meta/items").then(res => res.json())
+}
