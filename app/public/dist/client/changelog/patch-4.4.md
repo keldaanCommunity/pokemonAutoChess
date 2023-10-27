@@ -14,6 +14,7 @@
 
 # Changes to Items
 
+- PVE stages can no longer have duplicates in rewards, except stage 40
 - Delta Orb effect can now be stacked, if you put a mon between two units with Delta orbs for example
 
 # Gameplay

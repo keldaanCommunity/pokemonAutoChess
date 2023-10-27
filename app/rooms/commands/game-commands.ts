@@ -913,11 +913,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             this.state.shop.addAdditionalPokemon(p)
           }
         } else {
+          const items = pickNRandomIn(BasicItems, 3)
           for (let i = 0; i < 3; i++) {
             const p = pool.pop()
             if (p) {
               player.pokemonsProposition.push(p)
-              player.itemsProposition.push(pickRandomIn(BasicItems))
+              player.itemsProposition.push(items[i])
             }
           }
         }
