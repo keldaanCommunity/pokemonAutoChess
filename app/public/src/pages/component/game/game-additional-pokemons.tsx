@@ -58,6 +58,7 @@ export function GameAdditionalPokemons() {
                 )}
                 <img
                   src={getPortraitSrc(PkmIndex[p])}
+                  className={pokemon.rarity.toLowerCase()}
                   data-tooltip-id={"additional-pokemon-" + p}
                 />
               </React.Fragment>

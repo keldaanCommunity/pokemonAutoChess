@@ -92,13 +92,13 @@
   border: 2px solid #333;
 }
 
-.game-additional-pokemons > img:nth-child(n):nth-child(-n + 8) {
+.game-additional-pokemons > img.uncommon {
   border-color: rgb(59, 201, 94);
 }
-.game-additional-pokemons > img:nth-child(n + 9):nth-child(-n + 16) {
+.game-additional-pokemons > img.rare {
   border-color: rgb(65, 191, 204);
 }
-.game-additional-pokemons > img:nth-child(n + 17):nth-child(-n + 24) {
+.game-additional-pokemons > img.epic {
   border-color: rgb(202, 108, 238);
 }
 
