@@ -7,7 +7,7 @@ import {
   SynergyStones
 } from "../types/enum/Item"
 import { Pkm } from "../types/enum/Pokemon"
-import { pickRandomIn } from "../utils/random"
+import { pickNRandomIn, pickRandomIn } from "../utils/random"
 
 export type PVEStage = {
   name: string
@@ -66,11 +66,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     board: [[Pkm.GYARADOS, 4, 2]],
     getRewards(shiny) {
       if (shiny) {
-        return [
-          pickRandomIn(BasicItems),
-          pickRandomIn(BasicItems),
-          pickRandomIn(BasicItems)
-        ]
+        return pickNRandomIn(BasicItems, 3)
       } else {
         return [pickRandomIn(BasicItems)]
       }
@@ -88,11 +84,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     ],
     getRewards(shiny) {
       if (shiny) {
-        return [
-          pickRandomIn(NonSpecialItemComponents),
-          pickRandomIn(NonSpecialItemComponents),
-          pickRandomIn(NonSpecialItemComponents)
-        ]
+        return pickNRandomIn(NonSpecialItemComponents, 3)
       } else {
         return [pickRandomIn(NonSpecialItemComponents)]
       }
@@ -107,11 +99,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     board: [[Pkm.GIRATINA, 4, 2]],
     getRewards(shiny) {
       if (shiny) {
-        return [
-          pickRandomIn(NonSpecialItemComponents),
-          pickRandomIn(NonSpecialItemComponents),
-          pickRandomIn(NonSpecialItemComponents)
-        ]
+        return pickNRandomIn(NonSpecialItemComponents, 3)
       } else {
         return [pickRandomIn(NonSpecialItemComponents)]
       }
@@ -128,11 +116,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     ],
     chooseOnlyOne: true,
     getRewards() {
-      return [
-        pickRandomIn(CompletedItems),
-        pickRandomIn(CompletedItems),
-        pickRandomIn(CompletedItems)
-      ]
+      return pickNRandomIn(CompletedItems, 3)
     }
   },
 
@@ -147,11 +131,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     ],
     chooseOnlyOne: true,
     getRewards() {
-      return [
-        pickRandomIn(CompletedItems),
-        pickRandomIn(CompletedItems),
-        pickRandomIn(CompletedItems)
-      ]
+      return pickNRandomIn(CompletedItems, 3)
     }
   },
 
@@ -166,11 +146,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     ],
     chooseOnlyOne: true,
     getRewards() {
-      return [
-        pickRandomIn(CompletedItems),
-        pickRandomIn(CompletedItems),
-        pickRandomIn(CompletedItems)
-      ]
+      return pickNRandomIn(CompletedItems, 3)
     }
   },
 
@@ -188,11 +164,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     ],
     chooseOnlyOne: true,
     getRewards() {
-      return [
-        pickRandomIn(CompletedItems),
-        pickRandomIn(CompletedItems),
-        pickRandomIn(CompletedItems)
-      ]
+      return pickNRandomIn(CompletedItems, 3)
     }
   },
 
