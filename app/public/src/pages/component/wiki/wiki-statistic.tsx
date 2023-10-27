@@ -17,6 +17,9 @@ export default function WikiStatistic() {
       <li className="nes-container">
         <img style={imgStyle} src="assets/icons/HP.png"></img>
         <p>{t("stat.HEALTH_POINTS")}</p>
+        <p className="description">
+          {addIconsToDescription(t("stat_description.HP"))}
+        </p>
       </li>
       <li className="nes-container">
         <img style={imgStyle} src="assets/icons/SHIELD.png"></img>

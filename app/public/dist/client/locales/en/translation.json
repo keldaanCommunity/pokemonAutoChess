@@ -1542,7 +1542,7 @@
     "CRIT_DAMAGE": "Multiplier for critical hits additional damage",
     "DEF": "Reduces PHYSICAL received",
     "SPE_DEF": "Reduces SPECIAL received",
-    "HP": "Health Points",
+    "HP": "Pokémon is knocked out when it no longer has Health Points",
     "RANGE": "1-range pokemon are melee",
     "PP": "Power Points",
     "MAX_PP": "Amount of PP required to cast ability. Pokemons receive PP over time (10 per second), when attacking (5 per attack) and when receiving damage (10% of incoming damage)",
