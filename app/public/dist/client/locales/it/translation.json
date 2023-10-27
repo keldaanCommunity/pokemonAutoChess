@@ -882,7 +882,7 @@
     "TELEPORT": "Teletrasporta il pokemon su un bordo della mappa. Il prossimo attacco infligge [15,30,60,SP] SPECIAL",
     "NASTY_PLOT": "Potenzia l'ATK pokemon di [10,SP] punti",
     "THIEF": "Ruba tutti gli oggetti del bersaglio che il possessore può trasportare e infligge [15,30,60,SP] SPECIAL",
-    "STUN_SPORE": "Riduce l'obiettivo ATK_SPEED del [10,20,40] % e infligge [5,10,20,SP] SPECIAL",
+    "STUN_SPORE": "Causa [5,10,20,40,SP] SPECIAL e infligge PARALYSIS per 5 secondi ai nemici adiacenti",
     "METEOR_MASH": "Area di effetto attorno al bersaglio che infligge [30,50,70,SP] SPECIAL. Aumenta l'ATK dei pokemon di [5,SP].",
     "HURRICANE": "Attacco ad area che infligge [25,50,100,SP] SPECIAL in una linea dietro il bersaglio e provoca PARALYSIS per 4 secondi",
     "HEAL_BLOCK": "Applica WOUND a tutti i nemici adiacenti per [5,10,15] secondi",

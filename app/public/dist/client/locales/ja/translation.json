@@ -882,7 +882,7 @@
     "TELEPORT": "ポケモンをマップの端にテレポートさせます。次の攻撃条件[15,30,60,SP] SPECIAL",
     "NASTY_PLOT": "ポケモンの攻撃力を[10,SP]ポイント増加させる",
     "THIEF": "対象の所持アイテムを全て盗み[15,30,60,SP]SPECIALを与える",
-    "STUN_SPORE": "対象のATK_SPEEDを[10,20,40]%減少させ、[5,10,20,SP]のSPECIALを与える",
+    "STUN_SPORE": "[5,10,20,40,SP] SPECIALを与え、隣接する敵に5秒間 PARALYSIS を与える",
     "METEOR_MASH": "対象を中心に範囲に[30,50,70,SP]のSPECIALを与える。ポケモンの攻撃力を[5,SP]増加させます。",
     "HURRICANE": "対象の後方一列に[25,50,100,SP]のSPECIALを与える範囲攻撃、4秒間麻痺させる",
     "HEAL_BLOCK": "[5,10,15]秒間、隣接するすべての敵にWOUNDを適用します",

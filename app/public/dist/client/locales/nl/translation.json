@@ -882,7 +882,7 @@
     "TELEPORT": "Teleporteer de gebruiker naar een hoek van het slagveld. De gebruiker's volgende aanval richt [15,30,60,SP] extra SPECIAL aan",
     "NASTY_PLOT": "Verbeter de ATK van de gebruiker met [10,SP]",
     "THIEF": "Steel zo veel mogelijk items van het doelwit die de gebruiker in bezit kan hebben en richt [15,30,60,SP] SPECIAL aan",
-    "STUN_SPORE": "Verlaag de ATK_SPEED van het doelwit met [10,20,40]% en richt [5,10,20,SP] SPECIAL aan",
+    "STUN_SPORE": "Deelt [5,10,20,40,SP] SPECIAL uit en geeft PARALYSIS gedurende 5 seconden aan aangrenzende vijanden",
     "METEOR_MASH": "Breng [30,50,70,SP] SPECIAL toe in een gebied rond het doelwit. Verbeter de gebruiker's ATK met [5,SP]",
     "HURRICANE": "Breng [25,50,100,SP] SPECIAL toe aan alle vijandelijke Pokémon achter het doelwit en pas de PARALYSIS status op ze toe voor 4 seconden",
     "HEAL_BLOCK": "Pas de WOUND status toe op alle aangrenzende vijandelijke Pokémon gedurende [5,10,15] seconden",

@@ -5,6 +5,8 @@
 # Changes to Pokemon & Abilities
 
 - Magnet Rise Buff: ~~[1,2,4]~~ -> [2,4,6] protected allies
+- Stun Spore Buff: now inflicts Paralysis and deal damage to all surrounding enemies
+- Bellossom is now tier 4. No changes in stats, only ability damage
 
 # Changes to Synergies
 
