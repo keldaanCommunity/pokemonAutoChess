@@ -119,8 +119,7 @@ export class Egg extends Pokemon {
   range = 1
   skill = Ability.DEFAULT
   passive = Passive.EGG
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -136,7 +135,6 @@ export class Electrike extends Pokemon {
   maxPP = 60
   range = 1
   skill = Ability.VOLT_SWITCH
-  additional = false
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -152,7 +150,6 @@ export class Manectric extends Pokemon {
   maxPP = 60
   range = 1
   skill = Ability.VOLT_SWITCH
-  additional = false
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -168,7 +165,7 @@ export class MegaManectric extends Pokemon {
   maxPP = 60
   range = 1
   skill = Ability.VOLT_SWITCH
-  additional = true
+  final = true
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -184,7 +181,6 @@ export class Shuppet extends Pokemon {
   maxPP = 125
   range = 1
   skill = Ability.SHADOW_CLONE
-  additional = false
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -200,7 +196,6 @@ export class Banette extends Pokemon {
   maxPP = 125
   range = 1
   skill = Ability.SHADOW_CLONE
-  additional = false
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -216,7 +211,7 @@ export class MegaBanette extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.SHADOW_CLONE
-  additional = true
+  final = true
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -236,7 +231,6 @@ export class Riolu extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.SILENCE
-  additional = false
   attackSprite = AttackSprite.FIGHTING_RANGE
 }
 
@@ -252,7 +246,6 @@ export class Lucario extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.SILENCE
-  additional = false
   attackSprite = AttackSprite.FIGHTING_RANGE
 }
 
@@ -268,7 +261,7 @@ export class MegaLucario extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.SILENCE
-  additional = true
+  final = true
   attackSprite = AttackSprite.FIGHTING_RANGE
 }
 
@@ -284,7 +277,6 @@ export class Swablu extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.HYPER_VOICE
-  additional = false
   attackSprite = AttackSprite.DRAGON_RANGE
 }
 
@@ -300,7 +292,6 @@ export class Altaria extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.HYPER_VOICE
-  additional = false
   attackSprite = AttackSprite.DRAGON_RANGE
 }
 
@@ -316,7 +307,7 @@ export class MegaAltaria extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.HYPER_VOICE
-  additional = true
+  final = true
   attackSprite = AttackSprite.DRAGON_RANGE
 }
 
@@ -332,7 +323,6 @@ export class Scyther extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.X_SCISSOR
-  additional = false
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -348,7 +338,6 @@ export class Scizor extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.X_SCISSOR
-  additional = false
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -364,7 +353,7 @@ export class MegaScizor extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.X_SCISSOR
-  additional = true
+  final = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -380,7 +369,6 @@ export class Bounsweet extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HIGH_JUMP_KICK
-  additional = false
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
@@ -396,7 +384,6 @@ export class Steenee extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HIGH_JUMP_KICK
-  additional = false
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
@@ -412,7 +399,7 @@ export class Tsareena extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.HIGH_JUMP_KICK
-  additional = true
+  final = true
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
@@ -428,7 +415,6 @@ export class Buneary extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.HIGH_JUMP_KICK
-  additional = false
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
@@ -444,7 +430,6 @@ export class Lopunny extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.HIGH_JUMP_KICK
-  additional = false
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
@@ -460,7 +445,7 @@ export class MegaLopunny extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.HIGH_JUMP_KICK
-  additional = true
+  final = true
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
@@ -476,7 +461,6 @@ export class Onix extends Pokemon {
   maxPP = 70
   range = 1
   skill = Ability.SPIKE_ARMOR
-  additional = false
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -492,7 +476,6 @@ export class Steelix extends Pokemon {
   maxPP = 70
   range = 1
   skill = Ability.SPIKE_ARMOR
-  additional = false
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -508,7 +491,7 @@ export class MegaSteelix extends Pokemon {
   maxPP = 70
   range = 1
   skill = Ability.SPIKE_ARMOR
-  additional = true
+  final = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -524,7 +507,6 @@ export class Numel extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ERUPTION
-  additional = false
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
@@ -540,7 +522,6 @@ export class Camerupt extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ERUPTION
-  additional = false
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
@@ -556,7 +537,7 @@ export class MegaCamerupt extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ERUPTION
-  additional = true
+  final = true
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
@@ -576,7 +557,6 @@ export class Meditite extends Pokemon {
   maxPP = 60
   range = 2
   skill = Ability.CONFUSION
-  additional = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -596,7 +576,6 @@ export class Medicham extends Pokemon {
   maxPP = 60
   range = 2
   skill = Ability.CONFUSION
-  additional = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -616,7 +595,7 @@ export class MegaMedicham extends Pokemon {
   maxPP = 60
   range = 2
   skill = Ability.CONFUSION
-  additional = true
+  final = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -636,7 +615,6 @@ export class Elekid extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.DISCHARGE
-  additional = false
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -656,7 +634,6 @@ export class Electabuzz extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.DISCHARGE
-  additional = false
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -676,7 +653,7 @@ export class Electivire extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.DISCHARGE
-  additional = true
+  final = true
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -696,7 +673,6 @@ export class Gible extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DRAGON_BREATH
-  additional = false
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -716,7 +692,6 @@ export class Gabite extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DRAGON_BREATH
-  additional = false
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -736,7 +711,7 @@ export class Garchomp extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DRAGON_BREATH
-  additional = true
+  final = true
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -756,7 +731,6 @@ export class Beldum extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.METEOR_MASH
-  additional = false
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -776,7 +750,6 @@ export class Metang extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.METEOR_MASH
-  additional = false
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -796,7 +769,7 @@ export class Metagross extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.METEOR_MASH
-  additional = true
+  final = true
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -812,7 +785,6 @@ export class Tympole extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.DEFAULT
-  additional = false
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -828,7 +800,6 @@ export class Palpitoad extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.DEFAULT
-  additional = false
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -844,7 +815,7 @@ export class Seismitoad extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.DEFAULT
-  additional = true
+  final = true
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -860,7 +831,6 @@ export class Bagon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HEAD_SMASH
-  additional = false
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -876,7 +846,6 @@ export class Shelgon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HEAD_SMASH
-  additional = false
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -896,7 +865,7 @@ export class Salamence extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DRAGON_DARTS
-  additional = true
+  final = true
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -916,7 +885,6 @@ export class Ralts extends Pokemon {
   maxPP = 110
   range = 3
   skill = Ability.FUTURE_SIGHT
-  additional = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -936,7 +904,6 @@ export class Kirlia extends Pokemon {
   maxPP = 110
   range = 3
   skill = Ability.FUTURE_SIGHT
-  additional = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -956,7 +923,7 @@ export class Gardevoir extends Pokemon {
   maxPP = 110
   range = 3
   skill = Ability.FUTURE_SIGHT
-  additional = true
+  final = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -972,7 +939,6 @@ export class Budew extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.PETAL_DANCE
-  additional = false
   attackSprite = AttackSprite.GRASS_RANGE
 }
 
@@ -988,7 +954,6 @@ export class Roselia extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.PETAL_DANCE
-  additional = false
   attackSprite = AttackSprite.GRASS_RANGE
 }
 
@@ -1004,7 +969,7 @@ export class Roserade extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.PETAL_DANCE
-  additional = true
+  final = true
   attackSprite = AttackSprite.GRASS_RANGE
 }
 
@@ -1020,7 +985,6 @@ export class Slakoth extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.SLACK_OFF
-  additional = false
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -1036,7 +1000,6 @@ export class Vigoroth extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.SLACK_OFF
-  additional = false
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -1052,7 +1015,7 @@ export class Slaking extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.SLACK_OFF
-  additional = true
+  final = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -1072,7 +1035,6 @@ export class Honedge extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.KING_SHIELD
-  additional = false
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -1092,7 +1054,6 @@ export class Doublade extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.KING_SHIELD
-  additional = false
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -1112,7 +1073,7 @@ export class Aegislash extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.KING_SHIELD
-  additional = true
+  final = true
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -1132,7 +1093,6 @@ export class Oshawott extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.CRABHAMMER
-  additional = false
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -1152,7 +1112,6 @@ export class Dewott extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.CRABHAMMER
-  additional = false
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -1172,7 +1131,7 @@ export class Samurott extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.CRABHAMMER
-  additional = true
+  final = true
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -1188,7 +1147,6 @@ export class Larvitar extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.BITE
-  additional = false
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -1204,7 +1162,6 @@ export class Pupitar extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.BITE
-  additional = false
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -1220,7 +1177,7 @@ export class Tyranitar extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.BITE
-  additional = true
+  final = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -1240,7 +1197,6 @@ export class JangmoO extends Pokemon {
   maxPP = 110
   range = 1
   skill = Ability.CLANGOROUS_SOUL
-  additional = false
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -1260,7 +1216,6 @@ export class HakamoO extends Pokemon {
   maxPP = 110
   range = 1
   skill = Ability.CLANGOROUS_SOUL
-  additional = false
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -1280,7 +1235,7 @@ export class KommoO extends Pokemon {
   maxPP = 110
   range = 1
   skill = Ability.CLANGOROUS_SOUL
-  additional = true
+  final = true
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -1300,7 +1255,6 @@ export class Gastly extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.NIGHTMARE
-  additional = false
   attackSprite = AttackSprite.GHOST_RANGE
 }
 
@@ -1320,7 +1274,6 @@ export class Haunter extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.NIGHTMARE
-  additional = false
   attackSprite = AttackSprite.GHOST_RANGE
 }
 
@@ -1340,7 +1293,7 @@ export class Gengar extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.NIGHTMARE
-  additional = true
+  final = true
   attackSprite = AttackSprite.GHOST_RANGE
 }
 
@@ -1356,7 +1309,6 @@ export class Abra extends Pokemon {
   maxPP = 50
   range = 4
   skill = Ability.TELEPORT
-  additional = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -1372,7 +1324,6 @@ export class Kadabra extends Pokemon {
   maxPP = 50
   range = 4
   skill = Ability.TELEPORT
-  additional = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -1388,7 +1339,7 @@ export class Alakazam extends Pokemon {
   maxPP = 50
   range = 4
   skill = Ability.TELEPORT
-  additional = true
+  final = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -1404,7 +1355,6 @@ export class Litwick extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.HEX
-  additional = false
   attackSprite = AttackSprite.GHOST_RANGE
 }
 
@@ -1420,7 +1370,6 @@ export class Lampent extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.HEX
-  additional = false
   attackSprite = AttackSprite.GHOST_RANGE
 }
 
@@ -1436,7 +1385,7 @@ export class Chandelure extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.HEX
-  additional = true
+  final = true
   attackSprite = AttackSprite.GHOST_RANGE
 }
 
@@ -1457,8 +1406,7 @@ export class Porygon extends Pokemon {
   range = 2
   skill = Ability.TRI_ATTACK
   passive = Passive.PORYGON
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.FIGHTING_RANGE
 }
 
@@ -1479,8 +1427,8 @@ export class Porygon2 extends Pokemon {
   range = 2
   skill = Ability.TRI_ATTACK
   passive = Passive.PORYGON
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.FIGHTING_RANGE
 }
 
@@ -1500,8 +1448,8 @@ export class PorygonZ extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.TRI_ATTACK
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.FIGHTING_RANGE
 }
 
@@ -1517,7 +1465,6 @@ export class Sewaddle extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.DEFAULT
-  additional = false
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -1533,7 +1480,6 @@ export class Swadloon extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.DEFAULT
-  additional = false
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -1549,7 +1495,7 @@ export class Leavanny extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.DEFAULT
-  additional = true
+  final = true
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -1565,7 +1511,6 @@ export class Turtwig extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.GROWTH
-  additional = false
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -1581,7 +1526,6 @@ export class Grotle extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.GROWTH
-  additional = false
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -1597,7 +1541,7 @@ export class Torterra extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.GROWTH
-  additional = true
+  final = true
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -1613,7 +1557,6 @@ export class Deino extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.DEFAULT
-  additional = false
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -1629,7 +1572,6 @@ export class Zweilous extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.DEFAULT
-  additional = false
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -1645,7 +1587,7 @@ export class Hydreigon extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.DEFAULT
-  additional = true
+  final = true
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -1666,8 +1608,6 @@ export class Poliwag extends Pokemon {
   range = 2
   skill = Ability.SOAK
   passive = Passive.TADPOLE
-  additional = false
-  final = false
   attackSprite = AttackSprite.WATER_RANGE
 }
 
@@ -1688,8 +1628,6 @@ export class Poliwhirl extends Pokemon {
   range = 2
   skill = Ability.SOAK
   passive = Passive.TADPOLE
-  additional = false
-  final = false
   attackSprite = AttackSprite.WATER_RANGE
 }
 
@@ -1710,8 +1648,7 @@ export class Politoed extends Pokemon {
   range = 2
   skill = Ability.SOAK
   passive = Passive.TADPOLE
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.WATER_RANGE
 }
 
@@ -1732,8 +1669,7 @@ export class Poliwrath extends Pokemon {
   range = 1
   skill = Ability.CRABHAMMER
   passive = Passive.TADPOLE
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -1749,7 +1685,6 @@ export class Magby extends Pokemon {
   maxPP = 80
   range = 2
   skill = Ability.HEAT_WAVE
-  additional = false
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -1765,7 +1700,6 @@ export class Magmar extends Pokemon {
   maxPP = 80
   range = 2
   skill = Ability.HEAT_WAVE
-  additional = false
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -1781,7 +1715,7 @@ export class Magmortar extends Pokemon {
   maxPP = 80
   range = 2
   skill = Ability.HEAT_WAVE
-  additional = true
+  final = true
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -1797,7 +1731,6 @@ export class Solosis extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.SHADOW_BALL
-  additional = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -1813,7 +1746,6 @@ export class Duosion extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.SHADOW_BALL
-  additional = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -1829,7 +1761,7 @@ export class Reuniclus extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.SHADOW_BALL
-  additional = true
+  final = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -1845,7 +1777,6 @@ export class Shinx extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DISCHARGE
-  additional = false
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -1861,7 +1792,6 @@ export class Luxio extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DISCHARGE
-  additional = false
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -1877,7 +1807,7 @@ export class Luxray extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DISCHARGE
-  additional = true
+  final = true
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -1894,8 +1824,7 @@ export class Cubone extends Pokemon {
   range = 1
   skill = Ability.BONEMERANG
   passive = Passive.CUBONE
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -1912,8 +1841,8 @@ export class Marowak extends Pokemon {
   range = 1
   skill = Ability.BONEMERANG
   passive = Passive.CUBONE
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -1929,8 +1858,8 @@ export class AlolanMarowak extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.BONEMERANG
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
@@ -1946,7 +1875,6 @@ export class Axew extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DEFAULT
-  additional = false
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -1962,7 +1890,6 @@ export class Fraxure extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DEFAULT
-  additional = false
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -1978,7 +1905,7 @@ export class Haxorus extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DEFAULT
-  additional = true
+  final = true
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -1998,7 +1925,6 @@ export class Dratini extends Pokemon {
   maxPP = 110
   range = 1
   skill = Ability.DRAGON_BREATH
-  additional = false
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -2018,7 +1944,6 @@ export class Dragonair extends Pokemon {
   maxPP = 110
   range = 1
   skill = Ability.DRAGON_BREATH
-  additional = false
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -2038,7 +1963,7 @@ export class Dragonite extends Pokemon {
   maxPP = 110
   range = 1
   skill = Ability.DRAGON_BREATH
-  additional = true
+  final = true
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -2058,7 +1983,6 @@ export class Goomy extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.LIQUIDATION
-  additional = false
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -2078,7 +2002,6 @@ export class Sligoo extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.LIQUIDATION
-  additional = false
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -2098,7 +2021,7 @@ export class Goodra extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.LIQUIDATION
-  additional = true
+  final = true
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -2118,7 +2041,6 @@ export class Lotad extends Pokemon {
   maxPP = 120
   range = 3
   skill = Ability.TORMENT
-  additional = false
   attackSprite = AttackSprite.GRASS_RANGE
 }
 
@@ -2138,7 +2060,6 @@ export class Lombre extends Pokemon {
   maxPP = 120
   range = 3
   skill = Ability.TORMENT
-  additional = false
   attackSprite = AttackSprite.GRASS_RANGE
 }
 
@@ -2158,7 +2079,7 @@ export class Ludicolo extends Pokemon {
   maxPP = 120
   range = 3
   skill = Ability.TORMENT
-  additional = true
+  final = true
   attackSprite = AttackSprite.GRASS_RANGE
 }
 
@@ -2174,7 +2095,6 @@ export class Togepi extends Pokemon {
   maxPP = 70
   range = 2
   skill = Ability.WISH
-  additional = false
   attackSprite = AttackSprite.FLYING_RANGE
 }
 
@@ -2194,7 +2114,6 @@ export class Togetic extends Pokemon {
   maxPP = 70
   range = 2
   skill = Ability.WISH
-  additional = false
   attackSprite = AttackSprite.FLYING_RANGE
 }
 
@@ -2214,7 +2133,7 @@ export class Togekiss extends Pokemon {
   maxPP = 70
   range = 2
   skill = Ability.WISH
-  additional = true
+  final = true
   attackSprite = AttackSprite.FLYING_RANGE
 }
 
@@ -2234,7 +2153,6 @@ export class Rhyhorn extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.STOMP
-  additional = false
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -2254,7 +2172,6 @@ export class Rhydon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.STOMP
-  additional = false
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -2274,7 +2191,7 @@ export class Rhyperior extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.STOMP
-  additional = true
+  final = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -2290,7 +2207,6 @@ export class Aron extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.STOMP
-  additional = false
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -2306,7 +2222,6 @@ export class Lairon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.STOMP
-  additional = false
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -2322,7 +2237,7 @@ export class Aggron extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.STOMP
-  additional = true
+  final = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -2338,7 +2253,6 @@ export class Whismur extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.ECHO
-  additional = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 export class Loudred extends Pokemon {
@@ -2353,7 +2267,6 @@ export class Loudred extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.ECHO
-  additional = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -2369,7 +2282,7 @@ export class Exploud extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.ECHO
-  additional = true
+  final = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -2385,7 +2298,6 @@ export class Swinub extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ICICLE_CRASH
-  additional = false
   attackSprite = AttackSprite.ICE_MELEE
 }
 
@@ -2401,7 +2313,6 @@ export class Piloswine extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ICICLE_CRASH
-  additional = false
   attackSprite = AttackSprite.ICE_MELEE
 }
 
@@ -2417,7 +2328,7 @@ export class Mamoswine extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ICICLE_CRASH
-  additional = true
+  final = true
   attackSprite = AttackSprite.ICE_MELEE
 }
 
@@ -2433,7 +2344,6 @@ export class Snover extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.BLIZZARD
-  additional = false
   attackSprite = AttackSprite.ICE_MELEE
 }
 
@@ -2449,7 +2359,6 @@ export class Abomasnow extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.BLIZZARD
-  additional = false
   attackSprite = AttackSprite.ICE_MELEE
 }
 
@@ -2465,7 +2374,7 @@ export class MegaAbomasnow extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.BLIZZARD
-  additional = true
+  final = true
   attackSprite = AttackSprite.ICE_MELEE
 }
 
@@ -2481,7 +2390,6 @@ export class Snorunt extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.ICY_WIND
-  additional = false
   attackSprite = AttackSprite.GHOST_RANGE
 }
 
@@ -2497,7 +2405,6 @@ export class Glalie extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.ICY_WIND
-  additional = false
   attackSprite = AttackSprite.GHOST_RANGE
 }
 
@@ -2513,7 +2420,7 @@ export class Froslass extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.ICY_WIND
-  additional = true
+  final = true
   attackSprite = AttackSprite.GHOST_RANGE
 }
 
@@ -2533,7 +2440,6 @@ export class Vanillite extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.SLEEP
-  additional = false
   attackSprite = AttackSprite.FAIRY_RANGE
 }
 
@@ -2553,7 +2459,6 @@ export class Vanillish extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.SLEEP
-  additional = false
   attackSprite = AttackSprite.FAIRY_RANGE
 }
 
@@ -2573,7 +2478,7 @@ export class Vanilluxe extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.SLEEP
-  additional = true
+  final = true
   attackSprite = AttackSprite.FAIRY_RANGE
 }
 
@@ -2589,7 +2494,6 @@ export class Trapinch extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DRAGON_TAIL
-  additional = false
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -2605,7 +2509,6 @@ export class Vibrava extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DRAGON_TAIL
-  additional = false
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -2621,7 +2524,7 @@ export class Flygon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DRAGON_TAIL
-  additional = true
+  final = true
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -2641,7 +2544,6 @@ export class Pichu extends Pokemon {
   maxPP = 140
   range = 1
   skill = Ability.VOLT_SWITCH
-  additional = false
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -2657,7 +2559,6 @@ export class Pikachu extends Pokemon {
   maxPP = 140
   range = 1
   skill = Ability.VOLT_SWITCH
-  additional = false
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -2674,8 +2575,6 @@ export class Raichu extends Pokemon {
   range = 1
   skill = Ability.VOLT_SWITCH
   passive = Passive.RAICHU
-  additional = false
-  final = false
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -2696,8 +2595,7 @@ export class AlolanRaichu extends Pokemon {
   range = 1
   skill = Ability.VOLT_SWITCH
   passive = Passive.SURGE_SURFER
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -2713,7 +2611,6 @@ export class Bulbasaur extends Pokemon {
   maxPP = 65
   range = 2
   skill = Ability.MAGICAL_LEAF
-  additional = false
   attackSprite = AttackSprite.GRASS_RANGE
 }
 
@@ -2729,7 +2626,6 @@ export class Ivysaur extends Pokemon {
   maxPP = 65
   range = 2
   skill = Ability.MAGICAL_LEAF
-  additional = false
   attackSprite = AttackSprite.GRASS_RANGE
 }
 
@@ -2745,7 +2641,7 @@ export class Venusaur extends Pokemon {
   maxPP = 65
   range = 2
   skill = Ability.MAGICAL_LEAF
-  additional = true
+  final = true
   attackSprite = AttackSprite.GRASS_RANGE
 }
 
@@ -2761,7 +2657,6 @@ export class Igglybuff extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.SLEEP
-  additional = false
   attackSprite = AttackSprite.FAIRY_RANGE
 }
 
@@ -2777,7 +2672,6 @@ export class Jigglypuff extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.SLEEP
-  additional = false
   attackSprite = AttackSprite.FAIRY_RANGE
 }
 
@@ -2793,7 +2687,7 @@ export class Wigglytuff extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.SLEEP
-  additional = true
+  final = true
   attackSprite = AttackSprite.FAIRY_RANGE
 }
 
@@ -2809,7 +2703,6 @@ export class Duskull extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.NIGHT_SLASH
-  additional = false
   attackSprite = AttackSprite.GHOST_RANGE
 }
 
@@ -2825,7 +2718,6 @@ export class Dusclops extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.NIGHT_SLASH
-  additional = false
   attackSprite = AttackSprite.GHOST_RANGE
 }
 
@@ -2841,7 +2733,7 @@ export class Dusknoir extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.NIGHT_SLASH
-  additional = true
+  final = true
   attackSprite = AttackSprite.GHOST_RANGE
 }
 
@@ -2857,7 +2749,6 @@ export class Magnemite extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.TORMENT
-  additional = false
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
@@ -2873,7 +2764,6 @@ export class Magneton extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.TORMENT
-  additional = false
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
@@ -2889,7 +2779,7 @@ export class Magnezone extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.TORMENT
-  additional = true
+  final = true
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
@@ -2905,7 +2795,6 @@ export class Horsea extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.WHIRLPOOL
-  additional = false
   attackSprite = AttackSprite.WATER_RANGE
 }
 
@@ -2921,7 +2810,6 @@ export class Seadra extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.WHIRLPOOL
-  additional = false
   attackSprite = AttackSprite.WATER_RANGE
 }
 
@@ -2937,7 +2825,7 @@ export class Kingdra extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.WHIRLPOOL
-  additional = true
+  final = true
   attackSprite = AttackSprite.WATER_RANGE
 }
 
@@ -2953,7 +2841,6 @@ export class Flabebe extends Pokemon {
   maxPP = 90
   range = 3
   skill = Ability.DISARMING_VOICE
-  additional = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -2969,7 +2856,6 @@ export class Floette extends Pokemon {
   maxPP = 90
   range = 3
   skill = Ability.DISARMING_VOICE
-  additional = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 export class Florges extends Pokemon {
@@ -2984,7 +2870,7 @@ export class Florges extends Pokemon {
   maxPP = 90
   range = 3
   skill = Ability.DISARMING_VOICE
-  additional = true
+  final = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -3000,7 +2886,6 @@ export class Chikorita extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.STUN_SPORE
-  additional = false
   attackSprite = AttackSprite.GRASS_RANGE
 }
 
@@ -3016,7 +2901,6 @@ export class Bayleef extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.STUN_SPORE
-  additional = false
   attackSprite = AttackSprite.GRASS_RANGE
 }
 
@@ -3032,7 +2916,7 @@ export class Meganium extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.STUN_SPORE
-  additional = true
+  final = true
   attackSprite = AttackSprite.GRASS_RANGE
 }
 
@@ -3048,7 +2932,6 @@ export class Sandile extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DEFAULT
-  additional = false
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -3064,7 +2947,6 @@ export class Krookorok extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DEFAULT
-  additional = false
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -3080,7 +2962,7 @@ export class Krookodile extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DEFAULT
-  additional = true
+  final = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -3096,7 +2978,6 @@ export class Venipede extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DEFAULT
-  additional = false
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -3112,7 +2993,6 @@ export class Whirlipede extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DEFAULT
-  additional = false
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -3128,7 +3008,7 @@ export class Scolipede extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DEFAULT
-  additional = true
+  final = true
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -3144,7 +3024,6 @@ export class Spheal extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ICICLE_CRASH
-  additional = false
   attackSprite = AttackSprite.ICE_MELEE
 }
 
@@ -3160,7 +3039,6 @@ export class Sealeo extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ICICLE_CRASH
-  additional = false
   attackSprite = AttackSprite.ICE_MELEE
 }
 
@@ -3176,7 +3054,7 @@ export class Walrein extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ICICLE_CRASH
-  additional = true
+  final = true
   attackSprite = AttackSprite.ICE_MELEE
 }
 
@@ -3196,7 +3074,6 @@ export class NidoranF extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.VENOSHOCK
-  additional = false
   attackSprite = AttackSprite.POISON_MELEE
 }
 
@@ -3216,7 +3093,6 @@ export class Nidorina extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.VENOSHOCK
-  additional = false
   attackSprite = AttackSprite.POISON_MELEE
 }
 
@@ -3236,7 +3112,7 @@ export class Nidoqueen extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.VENOSHOCK
-  additional = true
+  final = true
   attackSprite = AttackSprite.POISON_MELEE
 }
 
@@ -3256,7 +3132,6 @@ export class NidoranM extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.POISON
-  additional = false
   attackSprite = AttackSprite.POISON_MELEE
 }
 
@@ -3276,7 +3151,6 @@ export class Nidorino extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.POISON
-  additional = false
   attackSprite = AttackSprite.POISON_MELEE
 }
 
@@ -3296,7 +3170,7 @@ export class Nidoking extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.POISON
-  additional = true
+  final = true
   attackSprite = AttackSprite.POISON_MELEE
 }
 
@@ -3312,7 +3186,6 @@ export class Machop extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.GUILLOTINE
-  additional = false
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
@@ -3328,7 +3201,6 @@ export class Machoke extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.GUILLOTINE
-  additional = false
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
@@ -3344,7 +3216,7 @@ export class Machamp extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.GUILLOTINE
-  additional = true
+  final = true
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
@@ -3360,7 +3232,6 @@ export class Piplup extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.IRON_TAIL
-  additional = false
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -3376,7 +3247,6 @@ export class Prinplup extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.IRON_TAIL
-  additional = false
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -3392,7 +3262,7 @@ export class Empoleon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.IRON_TAIL
-  additional = true
+  final = true
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -3412,7 +3282,6 @@ export class Chimchar extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.TORMENT
-  additional = false
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
@@ -3432,7 +3301,6 @@ export class Monferno extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.TORMENT
-  additional = false
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
@@ -3452,7 +3320,7 @@ export class Infernape extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.TORMENT
-  additional = true
+  final = true
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
@@ -3469,8 +3337,6 @@ export class Mudkip extends Pokemon {
   range = 1
   skill = Ability.MUD_BUBBLE
   passive = Passive.WATER_SPRING
-  additional = false
-  final = false
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -3487,8 +3353,6 @@ export class Marshtomp extends Pokemon {
   range = 1
   skill = Ability.MUD_BUBBLE
   passive = Passive.WATER_SPRING
-  additional = false
-  final = false
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -3505,8 +3369,7 @@ export class Swampert extends Pokemon {
   range = 1
   skill = Ability.MUD_BUBBLE
   passive = Passive.WATER_SPRING
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -3526,7 +3389,6 @@ export class Torchic extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.BLAZE_KICK
-  additional = false
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
@@ -3546,7 +3408,6 @@ export class Combusken extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.BLAZE_KICK
-  additional = false
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
@@ -3566,7 +3427,7 @@ export class Blaziken extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.BLAZE_KICK
-  additional = true
+  final = true
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
@@ -3582,7 +3443,6 @@ export class Treecko extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.THIEF
-  additional = false
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -3598,7 +3458,6 @@ export class Grovyle extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.THIEF
-  additional = false
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -3614,7 +3473,7 @@ export class Sceptile extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.THIEF
-  additional = true
+  final = true
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -3630,7 +3489,6 @@ export class Cyndaquil extends Pokemon {
   maxPP = 80
   range = 2
   skill = Ability.WHEEL_OF_FIRE
-  additional = false
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -3646,7 +3504,6 @@ export class Quilava extends Pokemon {
   maxPP = 80
   range = 2
   skill = Ability.WHEEL_OF_FIRE
-  additional = false
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -3662,7 +3519,7 @@ export class Typhlosion extends Pokemon {
   maxPP = 80
   range = 2
   skill = Ability.WHEEL_OF_FIRE
-  additional = true
+  final = true
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -3679,8 +3536,7 @@ export class Slowpoke extends Pokemon {
   range = 1
   skill = Ability.SOAK
   passive = Passive.SLOWBRO
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -3697,8 +3553,8 @@ export class Slowbro extends Pokemon {
   range = 1
   skill = Ability.SOAK
   passive = Passive.SLOWBRO
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -3714,8 +3570,8 @@ export class Slowking extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.SOAK
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -3731,7 +3587,6 @@ export class Squirtle extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.HYDRO_PUMP
-  additional = false
   attackSprite = AttackSprite.WATER_RANGE
 }
 
@@ -3747,7 +3602,6 @@ export class Wartortle extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.HYDRO_PUMP
-  additional = false
   attackSprite = AttackSprite.WATER_RANGE
 }
 
@@ -3763,7 +3617,7 @@ export class Blastoise extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.HYDRO_PUMP
-  additional = true
+  final = true
   attackSprite = AttackSprite.WATER_RANGE
 }
 
@@ -3780,8 +3634,7 @@ export class Bellsprout extends Pokemon {
   range = 1
   skill = Ability.ROOT
   passive = Passive.BELLSPROUT
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -3798,8 +3651,7 @@ export class Weepinbell extends Pokemon {
   range = 1
   skill = Ability.ROOT
   passive = Passive.BELLSPROUT
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -3815,8 +3667,8 @@ export class Victreebel extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ROOT
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -3836,7 +3688,6 @@ export class Pikipek extends Pokemon {
   maxPP = 70
   range = 1
   skill = Ability.DEFAULT
-  additional = false
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -3856,7 +3707,6 @@ export class Trumbeak extends Pokemon {
   maxPP = 70
   range = 1
   skill = Ability.DEFAULT
-  additional = false
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -3876,7 +3726,7 @@ export class Toucannon extends Pokemon {
   maxPP = 70
   range = 1
   skill = Ability.DEFAULT
-  additional = true
+  final = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -3892,7 +3742,6 @@ export class Geodude extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ROCK_SLIDE
-  additional = false
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -3908,7 +3757,6 @@ export class Graveler extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ROCK_SLIDE
-  additional = false
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -3924,7 +3772,7 @@ export class Golem extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ROCK_SLIDE
-  additional = true
+  final = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -3944,7 +3792,6 @@ export class Totodile extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.WATERFALL
-  additional = false
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -3964,7 +3811,6 @@ export class Croconaw extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.WATERFALL
-  additional = false
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -3984,7 +3830,7 @@ export class Feraligatr extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.WATERFALL
-  additional = true
+  final = true
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -4000,7 +3846,6 @@ export class Azurill extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.PLAY_ROUGH
-  additional = false
   attackSprite = AttackSprite.WATER_RANGE
 }
 
@@ -4016,7 +3861,6 @@ export class Marill extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.PLAY_ROUGH
-  additional = false
   attackSprite = AttackSprite.WATER_RANGE
 }
 
@@ -4032,7 +3876,7 @@ export class Azumarill extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.PLAY_ROUGH
-  additional = true
+  final = true
   attackSprite = AttackSprite.WATER_RANGE
 }
 
@@ -4052,7 +3896,6 @@ export class Zubat extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.LEECH_LIFE
-  additional = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -4072,7 +3915,6 @@ export class Golbat extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.LEECH_LIFE
-  additional = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -4092,7 +3934,7 @@ export class Crobat extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.LEECH_LIFE
-  additional = true
+  final = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -4112,7 +3954,6 @@ export class Mareep extends Pokemon {
   maxPP = 110
   range = 2
   skill = Ability.THUNDER
-  additional = false
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
@@ -4132,7 +3973,6 @@ export class Flaffy extends Pokemon {
   maxPP = 110
   range = 2
   skill = Ability.THUNDER
-  additional = false
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
@@ -4152,7 +3992,7 @@ export class Ampharos extends Pokemon {
   maxPP = 110
   range = 2
   skill = Ability.THUNDER
-  additional = true
+  final = true
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
@@ -4169,8 +4009,7 @@ export class Cleffa extends Pokemon {
   range = 1
   skill = Ability.METRONOME
   passive = Passive.CLEFAIRY
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.FAIRY_MELEE
 }
 
@@ -4187,8 +4026,8 @@ export class Clefairy extends Pokemon {
   range = 1
   skill = Ability.METRONOME
   passive = Passive.CLEFAIRY
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.FAIRY_MELEE
 }
 
@@ -4204,8 +4043,8 @@ export class Clefable extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.METRONOME
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.FAIRY_MELEE
 }
 
@@ -4221,7 +4060,6 @@ export class Caterpie extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.STRING_SHOT
-  additional = false
   attackSprite = AttackSprite.POISON_RANGE
 }
 
@@ -4237,7 +4075,6 @@ export class Metapod extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.STRING_SHOT
-  additional = false
   attackSprite = AttackSprite.POISON_RANGE
 }
 
@@ -4253,7 +4090,7 @@ export class Butterfree extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.STRING_SHOT
-  additional = true
+  final = true
   attackSprite = AttackSprite.POISON_RANGE
 }
 
@@ -4269,7 +4106,6 @@ export class Weedle extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.BUG_BUZZ
-  additional = false
   attackSprite = AttackSprite.BUG_MELEE
 }
 
@@ -4285,7 +4121,6 @@ export class Kakuna extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.BUG_BUZZ
-  additional = false
   attackSprite = AttackSprite.BUG_MELEE
 }
 
@@ -4301,7 +4136,7 @@ export class Beedrill extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.BUG_BUZZ
-  additional = true
+  final = true
   attackSprite = AttackSprite.BUG_MELEE
 }
 
@@ -4317,7 +4152,6 @@ export class Pidgey extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.HURRICANE
-  additional = false
   attackSprite = AttackSprite.FLYING_RANGE
 }
 
@@ -4333,7 +4167,6 @@ export class Pidgeotto extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.HURRICANE
-  additional = false
   attackSprite = AttackSprite.FLYING_RANGE
 }
 
@@ -4349,7 +4182,7 @@ export class Pidgeot extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.HURRICANE
-  additional = true
+  final = true
   attackSprite = AttackSprite.FLYING_RANGE
 }
 
@@ -4365,7 +4198,6 @@ export class Hoppip extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.ACROBATICS
-  additional = false
   attackSprite = AttackSprite.FLYING_RANGE
 }
 
@@ -4381,7 +4213,6 @@ export class Skiploom extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.ACROBATICS
-  additional = false
   attackSprite = AttackSprite.FLYING_RANGE
 }
 
@@ -4397,7 +4228,7 @@ export class Jumpluff extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.ACROBATICS
-  additional = true
+  final = true
   attackSprite = AttackSprite.FLYING_RANGE
 }
 
@@ -4413,7 +4244,6 @@ export class Seedot extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.PAYBACK
-  additional = false
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -4429,7 +4259,6 @@ export class Nuzleaf extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.PAYBACK
-  additional = false
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -4445,7 +4274,7 @@ export class Shiftry extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.PAYBACK
-  additional = true
+  final = true
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -4461,7 +4290,6 @@ export class Charmander extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.BLAST_BURN
-  additional = false
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
@@ -4477,7 +4305,6 @@ export class Charmeleon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.BLAST_BURN
-  additional = false
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
@@ -4493,7 +4320,7 @@ export class Charizard extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.BLAST_BURN
-  additional = true
+  final = true
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
@@ -4510,8 +4337,6 @@ export class Magikarp extends Pokemon {
   range = 1
   skill = Ability.SPLASH
   passive = Passive.MAGIKARP
-  additional = false
-  final = false
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -4531,7 +4356,7 @@ export class Gyarados extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HYDRO_PUMP
-  additional = true
+  final = true
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -4547,7 +4372,6 @@ export class Rattata extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.AGILITY
-  additional = false
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -4563,7 +4387,7 @@ export class Raticate extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.AGILITY
-  additional = true
+  final = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -4579,7 +4403,6 @@ export class Spearow extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.PECK
-  additional = false
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -4595,7 +4418,7 @@ export class Fearow extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.PECK
-  additional = true
+  final = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -4611,7 +4434,7 @@ export class Meloetta extends Pokemon {
   maxPP = 60
   range = 4
   skill = Ability.RELIC_SONG
-  additional = true
+  final = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -4627,7 +4450,7 @@ export class PirouetteMeloetta extends Pokemon {
   maxPP = 120
   range = 4
   skill = Ability.DEFAULT
-  additional = true
+  final = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -4648,8 +4471,7 @@ export class Lugia extends Pokemon {
   range = 1
   skill = Ability.SKY_ATTACK
   passive = Passive.WINDY
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.FLYING_MELEE
 }
 
@@ -4665,7 +4487,7 @@ export class Hoopa extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.DEFAULT
-  additional = true
+  final = true
   attackSprite = AttackSprite.GHOST_RANGE
 }
 
@@ -4681,7 +4503,7 @@ export class HoopaUnbound extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.DEFAULT
-  additional = true
+  final = true
   attackSprite = AttackSprite.GHOST_RANGE
 }
 
@@ -4698,8 +4520,7 @@ export class Giratina extends Pokemon {
   range = 1
   skill = Ability.SHADOW_SNEAK
   passive = Passive.GIRATINA
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.DRAGON_MELEE
 
   onChangePosition(
@@ -4732,8 +4553,7 @@ export class OriginGiratina extends Pokemon {
   range = 2
   skill = Ability.SHADOW_SNEAK
   passive = Passive.GIRATINA
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.GHOST_RANGE
 
   onChangePosition(
@@ -4762,8 +4582,7 @@ export class Zapdos extends Pokemon {
   range = 2
   skill = Ability.CHARGE
   passive = Passive.STORM
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
@@ -4779,7 +4598,7 @@ export class Zeraora extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.PLASMA_FIST
-  additional = true
+  final = true
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -4795,7 +4614,7 @@ export class Miltank extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ROLLOUT
-  additional = true
+  final = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -4811,7 +4630,7 @@ export class Yveltal extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DEATH_WING
-  additional = true
+  final = true
   attackSprite = AttackSprite.FLYING_MELEE
 }
 
@@ -4827,8 +4646,7 @@ export class Moltres extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.OVERHEAT
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -4844,8 +4662,7 @@ export class Pinsir extends Pokemon {
   maxPP = 85
   range = 1
   skill = Ability.GUILLOTINE
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -4862,8 +4679,7 @@ export class Articuno extends Pokemon {
   range = 2
   skill = Ability.BLIZZARD
   passive = Passive.SNOW
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.FLYING_RANGE
 }
 
@@ -4879,7 +4695,7 @@ export class Dialga extends Pokemon {
   maxPP = 150
   range = 1
   skill = Ability.ROAR_OF_TIME
-  additional = true
+  final = true
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -4895,7 +4711,7 @@ export class Palkia extends Pokemon {
   maxPP = 150
   range = 1
   skill = Ability.ROAR_OF_TIME
-  additional = true
+  final = true
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -4911,7 +4727,7 @@ export class Melmetal extends Pokemon {
   maxPP = 150
   range = 1
   skill = Ability.DEFAULT
-  additional = true
+  final = true
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -4927,7 +4743,7 @@ export class Suicune extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.AQUA_JET
-  additional = true
+  final = true
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -4943,7 +4759,7 @@ export class Raikou extends Pokemon {
   maxPP = 130
   range = 1
   skill = Ability.VOLT_SWITCH
-  additional = true
+  final = true
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -4959,7 +4775,6 @@ export class Entei extends Pokemon {
   maxPP = 130
   range = 1
   skill = Ability.FLAME_CHARGE
-  additional = false
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
@@ -4975,7 +4790,7 @@ export class Regice extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ICICLE_CRASH
-  additional = true
+  final = true
   attackSprite = AttackSprite.ICE_MELEE
 }
 
@@ -4991,7 +4806,7 @@ export class Seviper extends Pokemon {
   maxPP = 75
   range = 1
   skill = Ability.VENOSHOCK
-  additional = true
+  final = true
   attackSprite = AttackSprite.POISON_MELEE
 }
 
@@ -5008,8 +4823,7 @@ export class Lunatone extends Pokemon {
   range = 2
   skill = Ability.COSMIC_POWER
   passive = Passive.NIGHT
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -5026,8 +4840,7 @@ export class Solrock extends Pokemon {
   range = 2
   skill = Ability.COSMIC_POWER
   passive = Passive.SUN
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -5043,7 +4856,7 @@ export class Regirock extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.STEALTH_ROCKS
-  additional = true
+  final = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -5059,7 +4872,7 @@ export class Tauros extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HEAD_SMASH
-  additional = true
+  final = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -5076,8 +4889,7 @@ export class Heracross extends Pokemon {
   range = 1
   skill = Ability.CLOSE_COMBAT
   passive = Passive.GUTS
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -5093,7 +4905,7 @@ export class Registeel extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DEFENSE_CURL
-  additional = true
+  final = true
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -5113,7 +4925,7 @@ export class Regigigas extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.IRON_TAIL
-  additional = true
+  final = true
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -5130,8 +4942,7 @@ export class Kyogre extends Pokemon {
   range = 3
   skill = Ability.ORIGIN_PULSE
   passive = Passive.PRIMAL
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.WATER_RANGE
 }
 
@@ -5148,8 +4959,7 @@ export class Groudon extends Pokemon {
   range = 1
   skill = Ability.EARTHQUAKE
   passive = Passive.PRIMAL
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
@@ -5166,8 +4976,7 @@ export class Rayquaza extends Pokemon {
   range = 1
   skill = Ability.DRACO_METEOR
   passive = Passive.PRIMAL
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -5184,8 +4993,6 @@ export class Eevee extends Pokemon {
   range = 1
   skill = Ability.HAPPY_HOUR
   passive = Passive.EEVEE
-  additional = false
-  final = false
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -5205,7 +5012,7 @@ export class Vaporeon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HAPPY_HOUR
-  additional = true
+  final = true
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -5221,7 +5028,7 @@ export class Jolteon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HAPPY_HOUR
-  additional = true
+  final = true
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -5237,7 +5044,7 @@ export class Flareon extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.HAPPY_HOUR
-  additional = true
+  final = true
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
@@ -5253,7 +5060,7 @@ export class Espeon extends Pokemon {
   maxPP = 80
   range = 2
   skill = Ability.HAPPY_HOUR
-  additional = true
+  final = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -5269,7 +5076,7 @@ export class Umbreon extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.HAPPY_HOUR
-  additional = true
+  final = true
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -5285,7 +5092,7 @@ export class Leafeon extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.HAPPY_HOUR
-  additional = true
+  final = true
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -5301,7 +5108,7 @@ export class Sylveon extends Pokemon {
   maxPP = 80
   range = 2
   skill = Ability.HAPPY_HOUR
-  additional = true
+  final = true
   attackSprite = AttackSprite.FAIRY_RANGE
 }
 
@@ -5317,7 +5124,7 @@ export class Glaceon extends Pokemon {
   maxPP = 80
   range = 2
   skill = Ability.HAPPY_HOUR
-  additional = true
+  final = true
   attackSprite = AttackSprite.ICE_RANGE
 }
 
@@ -5333,8 +5140,7 @@ export class Volcanion extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.STEAM_ERUPTION
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -5350,7 +5156,7 @@ export class Darkrai extends Pokemon {
   maxPP = 120
   range = 2
   skill = Ability.DARK_VOID
-  additional = true
+  final = true
   attackSprite = AttackSprite.GHOST_RANGE
 }
 
@@ -5366,8 +5172,7 @@ export class Larvesta extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.FIRE_BLAST
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -5383,8 +5188,8 @@ export class Volcarona extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.FIRE_BLAST
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -5400,7 +5205,7 @@ export class Chatot extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.CHATTER
-  additional = true
+  final = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -5416,7 +5221,7 @@ export class Farfetchd extends Pokemon {
   maxPP = 60
   range = 1
   skill = Ability.RAZOR_WIND
-  additional = true
+  final = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -5433,8 +5238,6 @@ export class Kecleon extends Pokemon {
   range = 1
   skill = Ability.ILLUSION
   passive = Passive.PROTEAN2
-  additional = false
-  final = false
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -5451,8 +5254,6 @@ export class Castform extends Pokemon {
   range = 2
   skill = Ability.FORECAST
   passive = Passive.CASTFORM
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -5473,8 +5274,7 @@ export class CastformSun extends Pokemon {
   range = 2
   skill = Ability.FORECAST
   passive = Passive.CASTFORM
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.DRAGON_RANGE
 }
 
@@ -5495,8 +5295,7 @@ export class CastformRain extends Pokemon {
   range = 2
   skill = Ability.FORECAST
   passive = Passive.CASTFORM
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.WATER_RANGE
 }
 
@@ -5517,8 +5316,7 @@ export class CastformHail extends Pokemon {
   range = 2
   skill = Ability.FORECAST
   passive = Passive.CASTFORM
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.ICE_RANGE
 }
 
@@ -5535,8 +5333,7 @@ export class Landorus extends Pokemon {
   range = 2
   skill = Ability.DEFAULT //Ability.ROCK_SLIDE
   passive = Passive.NONE //Passive.SANDSTORM
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.FLYING_RANGE
 }
 
@@ -5553,8 +5350,7 @@ export class Thundurus extends Pokemon {
   range = 3
   skill = Ability.DEFAULT //Ability.THUNDER
   passive = Passive.NONE //Passive.STORM
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
@@ -5575,8 +5371,7 @@ export class Tornadus extends Pokemon {
   range = 3
   skill = Ability.TRI_ATTACK
   passive = Passive.WINDY
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.FLYING_RANGE
 }
 
@@ -5592,7 +5387,7 @@ export class Keldeo extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.AQUA_JET
-  additional = true
+  final = true
   attackSprite = AttackSprite.WATER_RANGE
 }
 
@@ -5608,7 +5403,7 @@ export class Terrakion extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DEFAULT
-  additional = true
+  final = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -5624,7 +5419,7 @@ export class Virizion extends Pokemon {
   maxPP = 150
   range = 1
   skill = Ability.SACRED_SWORD
-  additional = true
+  final = true
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -5640,7 +5435,7 @@ export class Cobalion extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.SEISMIC_TOSS
-  additional = true
+  final = true
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
@@ -5660,7 +5455,7 @@ export class Mawile extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.IRON_TAIL
-  additional = true
+  final = true
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
@@ -5677,8 +5472,7 @@ export class Phione extends Pokemon {
   range = 3
   skill = Ability.NASTY_PLOT
   passive = Passive.PHIONE
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -5694,7 +5488,7 @@ export class Manaphy extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.NASTY_PLOT
-  additional = true
+  final = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -5710,7 +5504,7 @@ export class Rotom extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.CALM_MIND
-  additional = true
+  final = true
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
@@ -5726,7 +5520,7 @@ export class Spiritomb extends Pokemon {
   maxPP = 80
   range = 2
   skill = Ability.NIGHT_SLASH
-  additional = true
+  final = true
   attackSprite = AttackSprite.GHOST_RANGE
 }
 
@@ -5742,7 +5536,7 @@ export class Absol extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.THIEF
-  additional = true
+  final = true
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -5758,7 +5552,7 @@ export class Delibird extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.PRESENT
-  additional = true
+  final = true
   attackSprite = AttackSprite.ICE_MELEE
 }
 
@@ -5778,7 +5572,7 @@ export class IronBundle extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.AURORA_BEAM
-  additional = true
+  final = true
   attackSprite = AttackSprite.ICE_MELEE
 }
 
@@ -5794,7 +5588,7 @@ export class Lapras extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DIVE
-  additional = true
+  final = true
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -5811,8 +5605,7 @@ export class Latias extends Pokemon {
   range = 3
   skill = Ability.MIST_BALL
   passive = Passive.SHARED_VISION
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -5829,8 +5622,7 @@ export class Latios extends Pokemon {
   range = 3
   skill = Ability.LUSTER_PURGE
   passive = Passive.SHARED_VISION
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -5846,7 +5638,7 @@ export class Uxie extends Pokemon {
   maxPP = 65
   range = 3
   skill = Ability.KNOWLEDGE_THIEF
-  additional = true
+  final = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -5862,7 +5654,7 @@ export class Mesprit extends Pokemon {
   maxPP = 90
   range = 3
   skill = Ability.SONG_OF_DESIRE
-  additional = true
+  final = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -5878,7 +5670,7 @@ export class Azelf extends Pokemon {
   maxPP = 90
   range = 3
   skill = Ability.CONFUSING_MIND
-  additional = true
+  final = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -5895,8 +5687,7 @@ export class Mew extends Pokemon {
   range = 4
   skill = Ability.TELEPORT
   passive = Passive.SYNCHRO
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -5916,7 +5707,7 @@ export class Mewtwo extends Pokemon {
   maxPP = 110
   range = 3
   skill = Ability.DYNAMAX_CANNON
-  additional = true
+  final = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -5932,7 +5723,7 @@ export class Marshadow extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.SPECTRAL_THIEF
-  additional = true
+  final = true
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
@@ -5949,8 +5740,7 @@ export class Kyurem extends Pokemon {
   range = 3
   skill = Ability.DEFAULT //Ability.BLIZZARD
   passive = Passive.NONE // Passive.SNOW
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -5966,8 +5756,7 @@ export class Reshiram extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.BLUE_FLARE
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -5983,8 +5772,7 @@ export class Zekrom extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.FUSION_BOLT
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
@@ -6000,7 +5788,7 @@ export class Celebi extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.AURORA_VEIL
-  additional = true
+  final = true
   attackSprite = AttackSprite.GRASS_RANGE
 }
 
@@ -6016,7 +5804,7 @@ export class Victini extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.SEARING_SHOT
-  additional = true
+  final = true
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
@@ -6032,7 +5820,7 @@ export class Jirachi extends Pokemon {
   maxPP = 60
   range = 3
   skill = Ability.WISH
-  additional = true
+  final = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -6049,8 +5837,7 @@ export class Arceus extends Pokemon {
   range = 1
   skill = Ability.JUDGEMENT
   passive = Passive.PROTEAN3
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -6070,7 +5857,7 @@ export class Deoxys extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.PROTECT
-  additional = true
+  final = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -6087,8 +5874,7 @@ export class Shaymin extends Pokemon {
   range = 3
   skill = Ability.SEED_FLARE
   passive = Passive.SHAYMIN
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.GRASS_RANGE
 }
 
@@ -6104,7 +5890,7 @@ export class ShayminSky extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.SEED_FLARE
-  additional = true
+  final = true
   attackSprite = AttackSprite.GRASS_RANGE
 }
 
@@ -6125,8 +5911,7 @@ export class Cresselia extends Pokemon {
   range = 3
   skill = Ability.WISH
   passive = Passive.MISTY
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -6142,7 +5927,7 @@ export class Heatran extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.MAGMA_STORM
-  additional = true
+  final = true
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -6159,8 +5944,7 @@ export class HooH extends Pokemon {
   range = 3
   skill = Ability.FIRE_SPIN
   passive = Passive.SUN
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -6177,8 +5961,7 @@ export class Torkoal extends Pokemon {
   range = 1
   skill = Ability.SMOKE_SCREEN
   passive = Passive.SUN
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
@@ -6195,8 +5978,7 @@ export class PrimalGroudon extends Pokemon {
   range = 1
   skill = Ability.EARTHQUAKE
   passive = Passive.SANDSTORM
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
@@ -6217,8 +5999,7 @@ export class PrimalKyogre extends Pokemon {
   range = 3
   skill = Ability.ORIGIN_PULSE
   passive = Passive.RAIN
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.WATER_RANGE
 }
 
@@ -6235,8 +6016,7 @@ export class MegaRayquaza extends Pokemon {
   range = 3
   skill = Ability.DRACO_METEOR
   passive = Passive.AIRLOCK
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -6252,7 +6032,6 @@ export class Oddish extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.STUN_SPORE
-  additional = false
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -6268,7 +6047,6 @@ export class Gloom extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.STUN_SPORE
-  additional = false
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -6284,7 +6062,6 @@ export class Vileplume extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.STUN_SPORE
-  additional = false
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -6300,7 +6077,7 @@ export class Bellossom extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.STUN_SPORE
-  additional = true
+  final = true
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -6316,8 +6093,7 @@ export class Amaura extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ICICLE_CRASH
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -6333,8 +6109,8 @@ export class Aurorus extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ICICLE_CRASH
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -6350,8 +6126,7 @@ export class Carbink extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DIAMOND_STORM
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.FAIRY_MELEE
 }
 
@@ -6367,8 +6142,8 @@ export class Diancie extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DIAMOND_STORM
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.FAIRY_MELEE
 }
 
@@ -6384,8 +6159,7 @@ export class Sunkern extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.SOLAR_BEAM
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -6401,8 +6175,8 @@ export class Sunflora extends Pokemon {
   maxPP = 80
   range = 2
   skill = Ability.SOLAR_BEAM
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -6418,8 +6192,7 @@ export class Mankey extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.THRASH
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
@@ -6435,8 +6208,8 @@ export class Primeape extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.THRASH
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
@@ -6452,8 +6225,7 @@ export class Anorith extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ROCK_SMASH
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -6469,8 +6241,8 @@ export class Armaldo extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ROCK_SMASH
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -6487,8 +6259,7 @@ export class Wynaut extends Pokemon {
   range = 1
   skill = Ability.COUNTER
   passive = Passive.WOBBUFFET
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
@@ -6505,8 +6276,8 @@ export class Wobbuffet extends Pokemon {
   range = 1
   skill = Ability.COUNTER
   passive = Passive.WOBBUFFET
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -6522,8 +6293,7 @@ export class Archen extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.ROCK_SMASH
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -6539,8 +6309,8 @@ export class Archeops extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.ROCK_SMASH
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -6561,8 +6331,6 @@ export class Gligar extends Pokemon {
   range = 1
   skill = Ability.POISON_JAB
   passive = Passive.GLIGAR
-  additional = false
-  final = false
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -6583,8 +6351,7 @@ export class Gliscor extends Pokemon {
   range = 1
   skill = Ability.POISON_JAB
   passive = Passive.POISON_HEAL
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -6600,8 +6367,7 @@ export class Shieldon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.IRON_DEFENSE
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -6617,8 +6383,8 @@ export class Bastiodon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.IRON_DEFENSE
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -6634,8 +6400,7 @@ export class Tirtouga extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DEFAULT
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -6651,8 +6416,8 @@ export class Carracosta extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DEFAULT
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -6668,8 +6433,7 @@ export class Lileep extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.LEECH_SEED
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -6685,8 +6449,8 @@ export class Cradily extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.LEECH_SEED
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -6702,8 +6466,7 @@ export class Cranidos extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HEAD_SMASH
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -6719,8 +6482,8 @@ export class Rampardos extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HEAD_SMASH
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -6736,8 +6499,7 @@ export class Kabuto extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.HEAL_BLOCK
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -6753,8 +6515,8 @@ export class Kabutops extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.HEAL_BLOCK
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -6770,8 +6532,7 @@ export class Omanyte extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.ROCK_TOMB
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -6787,8 +6548,8 @@ export class Omastar extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.ROCK_TOMB
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 export class Clamperl extends Pokemon {
@@ -6808,8 +6569,7 @@ export class Clamperl extends Pokemon {
   range = 1
   skill = Ability.ROCK_TOMB
   passive = Passive.BIVALVE
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -6830,8 +6590,8 @@ export class Gorebyss extends Pokemon {
   range = 2
   skill = Ability.HYDRO_PUMP
   passive = Passive.BIVALVE
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.WATER_RANGE
 }
 export class Huntail extends Pokemon {
@@ -6851,8 +6611,8 @@ export class Huntail extends Pokemon {
   range = 1
   skill = Ability.ROCK_TOMB
   passive = Passive.BIVALVE
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.WATER_MELEE
 }
 export class Relicanth extends Pokemon {
@@ -6867,7 +6627,7 @@ export class Relicanth extends Pokemon {
   maxPP = 70
   range = 1
   skill = Ability.ROCK_TOMB
-  additional = true
+  final = true
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -6883,8 +6643,7 @@ export class Tyrunt extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DEFAULT
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -6900,8 +6659,8 @@ export class Tyrantrum extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DEFAULT
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -6917,7 +6676,7 @@ export class Aerodactyl extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.ROCK_SLIDE
-  additional = true
+  final = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -6938,8 +6697,7 @@ export class Genesect extends Pokemon {
   range = 4
   skill = Ability.LOCK_ON
   passive = Passive.GENESECT
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -6955,7 +6713,6 @@ export class Hatenna extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.PSYCH_UP
-  additional = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -6971,7 +6728,6 @@ export class Hattrem extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.PSYCH_UP
-  additional = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -6987,7 +6743,7 @@ export class Hatterene extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.PSYCH_UP
-  additional = true
+  final = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 export class Fennekin extends Pokemon {
@@ -7002,7 +6758,6 @@ export class Fennekin extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.FIRE_TRICK
-  additional = false
   attackSprite = AttackSprite.FIRE_RANGE
 }
 export class Braixen extends Pokemon {
@@ -7017,7 +6772,6 @@ export class Braixen extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.FIRE_TRICK
-  additional = false
   attackSprite = AttackSprite.FIRE_RANGE
 }
 export class Delphox extends Pokemon {
@@ -7032,7 +6786,7 @@ export class Delphox extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.FIRE_TRICK
-  additional = true
+  final = true
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -7048,7 +6802,7 @@ export class Regieleki extends Pokemon {
   maxPP = 80
   range = 2
   skill = Ability.VOLT_SWITCH
-  additional = true
+  final = true
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 export class Regidrago extends Pokemon {
@@ -7063,7 +6817,7 @@ export class Regidrago extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.DRACO_ENERGY
-  additional = true
+  final = true
   attackSprite = AttackSprite.FIRE_RANGE
 }
 export class Guzzlord extends Pokemon {
@@ -7078,7 +6832,7 @@ export class Guzzlord extends Pokemon {
   maxPP = 120
   range = 3
   skill = Ability.TWISTING_NETHER
-  additional = true
+  final = true
   attackSprite = AttackSprite.FIRE_RANGE
 }
 export class Eternatus extends Pokemon {
@@ -7097,7 +6851,7 @@ export class Eternatus extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.DYNAMAX_CANNON
-  additional = true
+  final = true
   attackSprite = AttackSprite.POISON_MELEE
 }
 
@@ -7114,8 +6868,6 @@ export class Nincada extends Pokemon {
   range = 1
   skill = Ability.WONDER_GUARD
   passive = Passive.WONDER_GUARD
-  additional = false
-  final = false
   attackSprite = AttackSprite.BUG_MELEE
 }
 export class Ninjask extends Pokemon {
@@ -7131,8 +6883,6 @@ export class Ninjask extends Pokemon {
   range = 1
   skill = Ability.WONDER_GUARD
   passive = Passive.WONDER_GUARD
-  additional = false
-  final = false
   attackSprite = AttackSprite.BUG_MELEE
 }
 export class Shedninja extends Pokemon {
@@ -7148,8 +6898,7 @@ export class Shedninja extends Pokemon {
   range = 1
   skill = Ability.WONDER_GUARD
   passive = Passive.WONDER_GUARD
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.BUG_MELEE
 }
 
@@ -7165,7 +6914,6 @@ export class Happiny extends Pokemon {
   maxPP = 130
   range = 1
   skill = Ability.SOFT_BOILED
-  additional = false
   attackSprite = AttackSprite.FAIRY_MELEE
 }
 
@@ -7181,7 +6929,6 @@ export class Chansey extends Pokemon {
   maxPP = 130
   range = 1
   skill = Ability.SOFT_BOILED
-  additional = false
   attackSprite = AttackSprite.FAIRY_MELEE
 }
 
@@ -7197,7 +6944,7 @@ export class Blissey extends Pokemon {
   maxPP = 130
   range = 1
   skill = Ability.SOFT_BOILED
-  additional = true
+  final = true
   attackSprite = AttackSprite.FAIRY_MELEE
 }
 
@@ -7214,8 +6961,7 @@ export class TapuKoko extends Pokemon {
   range = 3
   skill = Ability.ELECTRIC_SURGE
   passive = Passive.ELECTRIC_SURGE
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
@@ -7232,8 +6978,7 @@ export class TapuLele extends Pokemon {
   range = 3
   skill = Ability.PSYCHIC_SURGE
   passive = Passive.PSYCHIC_SURGE
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -7250,8 +6995,7 @@ export class Xerneas extends Pokemon {
   range = 3
   skill = Ability.GEOMANCY
   passive = Passive.MISTY
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -7268,8 +7012,7 @@ export class TapuFini extends Pokemon {
   range = 3
   skill = Ability.MISTY_SURGE
   passive = Passive.MISTY_SURGE
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.WATER_RANGE
 }
 
@@ -7286,8 +7029,7 @@ export class TapuBulu extends Pokemon {
   range = 1
   skill = Ability.GRASSY_SURGE
   passive = Passive.GRASSY_SURGE
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -7303,7 +7045,7 @@ export class Stakataka extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.IRON_DEFENSE
-  additional = true
+  final = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -7319,7 +7061,7 @@ export class Blacephalon extends Pokemon {
   maxPP = 80
   range = 3
   skill = Ability.MIND_BLOWN
-  additional = true
+  final = true
   attackSprite = AttackSprite.GHOST_RANGE
 }
 
@@ -7335,7 +7077,6 @@ export class Houndour extends Pokemon {
   maxPP = 125
   range = 1
   skill = Ability.BEAT_UP
-  additional = false
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
@@ -7351,7 +7092,6 @@ export class Houndoom extends Pokemon {
   maxPP = 125
   range = 1
   skill = Ability.BEAT_UP
-  additional = false
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
@@ -7367,7 +7107,7 @@ export class MegaHoundoom extends Pokemon {
   maxPP = 125
   range = 1
   skill = Ability.BEAT_UP
-  additional = true
+  final = true
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
@@ -7383,8 +7123,7 @@ export class Cacnea extends Pokemon {
   maxPP = 70
   range = 1
   skill = Ability.HEAL_BLOCK
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -7400,8 +7139,8 @@ export class Cacturne extends Pokemon {
   maxPP = 70
   range = 1
   skill = Ability.HEAL_BLOCK
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -7417,8 +7156,7 @@ export class Pumpkaboo extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.CORRUPTED_NATURE
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.GRASS_MELEE
 }
 export class Gourgeist extends Pokemon {
@@ -7433,8 +7171,8 @@ export class Gourgeist extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.CORRUPTED_NATURE
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -7450,8 +7188,7 @@ export class Natu extends Pokemon {
   maxPP = 70
   range = 2
   skill = Ability.MAGIC_BOUNCE
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 export class Xatu extends Pokemon {
@@ -7466,8 +7203,8 @@ export class Xatu extends Pokemon {
   maxPP = 70
   range = 2
   skill = Ability.MAGIC_BOUNCE
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -7487,8 +7224,7 @@ export class Noibat extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.RAZOR_WIND
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.FLYING_RANGE
 }
 export class Noivern extends Pokemon {
@@ -7507,8 +7243,8 @@ export class Noivern extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.RAZOR_WIND
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.FLYING_RANGE
 }
 
@@ -7524,8 +7260,7 @@ export class Shellder extends Pokemon {
   maxPP = 110
   range = 1
   skill = Ability.SHELL_SMASH
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -7541,8 +7276,8 @@ export class Cloyster extends Pokemon {
   maxPP = 110
   range = 1
   skill = Ability.SHELL_SMASH
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -7562,8 +7297,7 @@ export class Buizel extends Pokemon {
   maxPP = 55
   range = 1
   skill = Ability.AQUA_JET
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.WATER_MELEE
 }
 export class Floatzel extends Pokemon {
@@ -7582,8 +7316,8 @@ export class Floatzel extends Pokemon {
   maxPP = 55
   range = 1
   skill = Ability.AQUA_JET
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -7599,8 +7333,7 @@ export class Ponyta extends Pokemon {
   maxPP = 55
   range = 1
   skill = Ability.FLAME_CHARGE
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.FIRE_MELEE
 }
 export class Rapidash extends Pokemon {
@@ -7615,8 +7348,8 @@ export class Rapidash extends Pokemon {
   maxPP = 55
   range = 1
   skill = Ability.FLAME_CHARGE
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.FIRE_MELEE
 }
 export class Makuhita extends Pokemon {
@@ -7631,8 +7364,7 @@ export class Makuhita extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DYNAMIC_PUNCH
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 export class Hariyama extends Pokemon {
@@ -7647,8 +7379,8 @@ export class Hariyama extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.DYNAMIC_PUNCH
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
@@ -7668,8 +7400,7 @@ export class Sentret extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HELPING_HAND
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 export class Furret extends Pokemon {
@@ -7688,8 +7419,8 @@ export class Furret extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.HELPING_HAND
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -7705,8 +7436,7 @@ export class Joltik extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ELECTRO_WEB
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 export class Galvantula extends Pokemon {
@@ -7721,8 +7451,8 @@ export class Galvantula extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ELECTRO_WEB
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -7738,8 +7468,7 @@ export class Paras extends Pokemon {
   maxPP = 110
   range = 1
   skill = Ability.ABSORB
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.BUG_MELEE
 }
 
@@ -7755,8 +7484,8 @@ export class Parasect extends Pokemon {
   maxPP = 110
   range = 1
   skill = Ability.ABSORB
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.BUG_MELEE
 }
 
@@ -7772,8 +7501,7 @@ export class Corphish extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.CRABHAMMER
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -7789,8 +7517,8 @@ export class Crawdaunt extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.CRABHAMMER
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.WATER_MELEE
 }
 export class Meowth extends Pokemon {
@@ -7805,8 +7533,7 @@ export class Meowth extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.PAYDAY
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -7822,8 +7549,8 @@ export class Persian extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.PAYDAY
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -7843,8 +7570,7 @@ export class Hoothoot extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HYPNOSIS
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -7864,8 +7590,8 @@ export class Noctowl extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HYPNOSIS
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -7881,8 +7607,7 @@ export class Munchlax extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.SLACK_OFF
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -7902,8 +7627,8 @@ export class Snorlax extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.SLACK_OFF
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 export class Growlithe extends Pokemon {
@@ -7918,8 +7643,7 @@ export class Growlithe extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.GROWL
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
@@ -7935,8 +7659,8 @@ export class Arcanine extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.GROWL
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
@@ -7952,8 +7676,7 @@ export class Smoochum extends Pokemon {
   maxPP = 80
   range = 2
   skill = Ability.CONFUSION
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -7969,8 +7692,8 @@ export class Jynx extends Pokemon {
   maxPP = 80
   range = 2
   skill = Ability.CONFUSION
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -7986,8 +7709,7 @@ export class MimeJr extends Pokemon {
   maxPP = 85
   range = 2
   skill = Ability.MIMIC
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -8007,8 +7729,8 @@ export class MrMime extends Pokemon {
   maxPP = 85
   range = 2
   skill = Ability.MIMIC
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -8024,8 +7746,7 @@ export class Salandit extends Pokemon {
   maxPP = 60
   range = 2
   skill = Ability.POISON
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -8041,8 +7762,8 @@ export class Salazzle extends Pokemon {
   maxPP = 60
   range = 2
   skill = Ability.POISON
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -8058,8 +7779,7 @@ export class Venonat extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.BUG_BUZZ
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.BUG_MELEE
 }
 
@@ -8075,8 +7795,8 @@ export class Venomoth extends Pokemon {
   maxPP = 80
   range = 2
   skill = Ability.BUG_BUZZ
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -8092,8 +7812,7 @@ export class Voltorb extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.EXPLOSION
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -8109,8 +7828,8 @@ export class Electrode extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.EXPLOSION
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -8126,8 +7845,7 @@ export class Slugma extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.FIRE_BLAST
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -8143,8 +7861,8 @@ export class Magcargo extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.FIRE_BLAST
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -8160,8 +7878,7 @@ export class Sneasel extends Pokemon {
   maxPP = 40
   range = 1
   skill = Ability.SLASHING_CLAW
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.ICE_MELEE
 }
 
@@ -8177,8 +7894,8 @@ export class Weavile extends Pokemon {
   maxPP = 40
   range = 1
   skill = Ability.SLASHING_CLAW
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.ICE_MELEE
 }
 
@@ -8194,8 +7911,7 @@ export class Seel extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.AURORA_BEAM
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.ICE_MELEE
 }
 
@@ -8211,8 +7927,8 @@ export class Dewgong extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.AURORA_BEAM
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.ICE_MELEE
 }
 
@@ -8232,8 +7948,7 @@ export class Croagunk extends Pokemon {
   maxPP = 85
   range = 1
   skill = Ability.GUILLOTINE
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.POISON_MELEE
 }
 
@@ -8253,8 +7968,8 @@ export class Toxicroak extends Pokemon {
   maxPP = 85
   range = 1
   skill = Ability.GUILLOTINE
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.POISON_MELEE
 }
 export class Chinchou extends Pokemon {
@@ -8273,8 +7988,7 @@ export class Chinchou extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.THUNDER
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
@@ -8294,8 +8008,8 @@ export class Lanturn extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.THUNDER
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 export class Poochyena extends Pokemon {
@@ -8310,8 +8024,7 @@ export class Poochyena extends Pokemon {
   maxPP = 75
   range = 1
   skill = Ability.GROWL
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -8327,8 +8040,8 @@ export class Mightyena extends Pokemon {
   maxPP = 75
   range = 1
   skill = Ability.GROWL
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -8344,8 +8057,7 @@ export class Bronzor extends Pokemon {
   maxPP = 95
   range = 1
   skill = Ability.DEFENSE_CURL
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -8365,8 +8077,8 @@ export class Bronzong extends Pokemon {
   maxPP = 95
   range = 1
   skill = Ability.DEFENSE_CURL
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -8382,8 +8094,7 @@ export class Drifloon extends Pokemon {
   maxPP = 85
   range = 2
   skill = Ability.CALM_MIND
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.GHOST_RANGE
 }
 
@@ -8399,8 +8110,8 @@ export class Drifblim extends Pokemon {
   maxPP = 85
   range = 2
   skill = Ability.CALM_MIND
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.GHOST_RANGE
 }
 
@@ -8416,8 +8127,7 @@ export class Shroomish extends Pokemon {
   maxPP = 85
   range = 1
   skill = Ability.LEECH_SEED
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
@@ -8433,8 +8143,8 @@ export class Breloom extends Pokemon {
   maxPP = 85
   range = 1
   skill = Ability.LEECH_SEED
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 export class Tentacool extends Pokemon {
@@ -8453,8 +8163,7 @@ export class Tentacool extends Pokemon {
   maxPP = 85
   range = 1
   skill = Ability.POISON
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -8474,8 +8183,8 @@ export class Tentacruel extends Pokemon {
   maxPP = 85
   range = 1
   skill = Ability.POISON
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -8491,8 +8200,7 @@ export class Snubull extends Pokemon {
   maxPP = 70
   range = 1
   skill = Ability.BITE
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.FAIRY_MELEE
 }
 
@@ -8508,8 +8216,8 @@ export class Granbull extends Pokemon {
   maxPP = 70
   range = 1
   skill = Ability.BITE
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.FAIRY_MELEE
 }
 
@@ -8525,8 +8233,7 @@ export class TypeNull extends Pokemon {
   maxPP = 70
   range = 1
   skill = Ability.DEFAULT
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.FAIRY_MELEE
 }
 
@@ -8542,8 +8249,8 @@ export class Sylvally extends Pokemon {
   maxPP = 70
   range = 1
   skill = Ability.DEFAULT
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.FAIRY_MELEE
 }
 
@@ -8559,8 +8266,7 @@ export class Applin extends Pokemon {
   maxPP = 85
   range = 1
   skill = Ability.APPLE_ACID
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -8576,8 +8282,8 @@ export class Appletun extends Pokemon {
   maxPP = 85
   range = 1
   skill = Ability.APPLE_ACID
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -8593,8 +8299,7 @@ export class Staryu extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.PSYCHIC
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -8610,8 +8315,8 @@ export class Starmie extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.PSYCHIC
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -8627,8 +8332,7 @@ export class Vulpix extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.FIRE_SPIN
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -8644,8 +8348,8 @@ export class Ninetales extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.FIRE_SPIN
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -8661,8 +8365,7 @@ export class AlolanVulpix extends Pokemon {
   maxPP = 85
   range = 2
   skill = Ability.AURORA_VEIL
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.ICE_RANGE
 }
 
@@ -8678,8 +8381,8 @@ export class AlolanNinetales extends Pokemon {
   maxPP = 85
   range = 2
   skill = Ability.AURORA_VEIL
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.ICE_RANGE
 }
 
@@ -8695,8 +8398,7 @@ export class Snom extends Pokemon {
   maxPP = 80
   range = 2
   skill = Ability.BUG_BUZZ
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.ICE_RANGE
 }
 
@@ -8712,8 +8414,8 @@ export class Frosmoth extends Pokemon {
   maxPP = 80
   range = 2
   skill = Ability.BUG_BUZZ
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.ICE_RANGE
 }
 
@@ -8729,8 +8431,7 @@ export class Wailmer extends Pokemon {
   maxPP = 110
   range = 1
   skill = Ability.DIVE
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -8746,8 +8447,8 @@ export class Wailord extends Pokemon {
   maxPP = 110
   range = 1
   skill = Ability.DIVE
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -8764,8 +8465,6 @@ export class Dreepy extends Pokemon {
   range = 2
   skill = Ability.DRAGON_DARTS
   passive = Passive.HATCH
-  additional = false
-  final = false
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -8782,8 +8481,6 @@ export class Drakloak extends Pokemon {
   range = 2
   skill = Ability.DRAGON_DARTS
   passive = Passive.HATCH
-  additional = false
-  final = false
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -8799,7 +8496,7 @@ export class Dragapult extends Pokemon {
   maxPP = 80
   range = 2
   skill = Ability.DRAGON_DARTS
-  additional = true
+  final = true
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -8816,8 +8513,6 @@ export class Snivy extends Pokemon {
   range = 3
   skill = Ability.MAGICAL_LEAF
   passive = Passive.HATCH
-  additional = false
-  final = false
   attackSprite = AttackSprite.GRASS_RANGE
 }
 
@@ -8834,8 +8529,6 @@ export class Servine extends Pokemon {
   range = 3
   skill = Ability.MAGICAL_LEAF
   passive = Passive.HATCH
-  additional = false
-  final = false
   attackSprite = AttackSprite.GRASS_RANGE
 }
 
@@ -8851,7 +8544,7 @@ export class Serperior extends Pokemon {
   maxPP = 70
   range = 3
   skill = Ability.MAGICAL_LEAF
-  additional = true
+  final = true
   attackSprite = AttackSprite.GRASS_RANGE
 }
 
@@ -8868,8 +8561,6 @@ export class Starly extends Pokemon {
   range = 1
   skill = Ability.BRAVE_BIRD
   passive = Passive.HATCH
-  additional = false
-  final = false
   attackSprite = AttackSprite.FLYING_MELEE
 }
 
@@ -8886,8 +8577,6 @@ export class Staravia extends Pokemon {
   range = 1
   skill = Ability.BRAVE_BIRD
   passive = Passive.HATCH
-  additional = false
-  final = false
   attackSprite = AttackSprite.FLYING_MELEE
 }
 
@@ -8903,7 +8592,7 @@ export class Staraptor extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.BRAVE_BIRD
-  additional = true
+  final = true
   attackSprite = AttackSprite.FLYING_MELEE
 }
 
@@ -8924,8 +8613,6 @@ export class Scorbunny extends Pokemon {
   range = 1
   skill = Ability.PYRO_BALL
   passive = Passive.HATCH
-  additional = false
-  final = false
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
@@ -8946,8 +8633,6 @@ export class Raboot extends Pokemon {
   range = 1
   skill = Ability.PYRO_BALL
   passive = Passive.HATCH
-  additional = false
-  final = false
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
@@ -8967,7 +8652,7 @@ export class Cinderace extends Pokemon {
   maxPP = 50
   range = 1
   skill = Ability.PYRO_BALL
-  additional = true
+  final = true
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
@@ -8984,8 +8669,6 @@ export class AlolanGeodude extends Pokemon {
   range = 1
   skill = Ability.DISCHARGE
   passive = Passive.HATCH
-  additional = false
-  final = false
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -9002,8 +8685,6 @@ export class AlolanGraveler extends Pokemon {
   range = 1
   skill = Ability.DISCHARGE
   passive = Passive.HATCH
-  additional = false
-  final = false
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -9019,7 +8700,7 @@ export class AlolanGolem extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DISCHARGE
-  additional = true
+  final = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -9036,8 +8717,6 @@ export class Popplio extends Pokemon {
   range = 3
   skill = Ability.SPARKLING_ARIA
   passive = Passive.HATCH
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9054,8 +8733,6 @@ export class Brionne extends Pokemon {
   range = 3
   skill = Ability.SPARKLING_ARIA
   passive = Passive.HATCH
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9071,7 +8748,7 @@ export class Primarina extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.SPARKLING_ARIA
-  additional = true
+  final = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9088,8 +8765,6 @@ export class Gothita extends Pokemon {
   range = 3
   skill = Ability.FAKE_TEARS
   passive = Passive.HATCH
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9106,8 +8781,6 @@ export class Gothorita extends Pokemon {
   range = 3
   skill = Ability.FAKE_TEARS
   passive = Passive.HATCH
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9123,7 +8796,7 @@ export class Gothitelle extends Pokemon {
   maxPP = 80
   range = 3
   skill = Ability.FAKE_TEARS
-  additional = true
+  final = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9139,8 +8812,7 @@ export class Sandshrew extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.SPIKE_ARMOR
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -9156,8 +8828,8 @@ export class Sandslash extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.SPIKE_ARMOR
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -9173,8 +8845,7 @@ export class Nosepass extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.MAGNET_RISE
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -9190,8 +8861,8 @@ export class Probopass extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.MAGNET_RISE
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -9211,8 +8882,7 @@ export class Woobat extends Pokemon {
   maxPP = 90
   range = 3
   skill = Ability.ATTRACT
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.FAIRY_RANGE
 }
 
@@ -9232,8 +8902,8 @@ export class Swoobat extends Pokemon {
   maxPP = 90
   range = 3
   skill = Ability.ATTRACT
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.FAIRY_RANGE
 }
 
@@ -9249,8 +8919,7 @@ export class Pineco extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.EXPLOSION
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.BUG_MELEE
 }
 
@@ -9266,8 +8935,8 @@ export class Forretress extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.EXPLOSION
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.BUG_MELEE
 }
 
@@ -9284,8 +8953,6 @@ export class UnownA extends Pokemon {
   range = 9
   skill = Ability.HIDDEN_POWER_A
   passive = Passive.UNOWN
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 export class UnownB extends Pokemon {
@@ -9301,8 +8968,6 @@ export class UnownB extends Pokemon {
   range = 9
   skill = Ability.HIDDEN_POWER_B
   passive = Passive.UNOWN
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9319,8 +8984,6 @@ export class UnownC extends Pokemon {
   range = 9
   skill = Ability.HIDDEN_POWER_C
   passive = Passive.UNOWN
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9337,8 +9000,6 @@ export class UnownD extends Pokemon {
   range = 9
   skill = Ability.HIDDEN_POWER_D
   passive = Passive.UNOWN
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9355,8 +9016,6 @@ export class UnownE extends Pokemon {
   range = 9
   skill = Ability.HIDDEN_POWER_E
   passive = Passive.UNOWN
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9373,8 +9032,6 @@ export class UnownF extends Pokemon {
   range = 9
   skill = Ability.HIDDEN_POWER_F
   passive = Passive.UNOWN
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9391,8 +9048,6 @@ export class UnownG extends Pokemon {
   range = 9
   skill = Ability.HIDDEN_POWER_G
   passive = Passive.UNOWN
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9409,8 +9064,6 @@ export class UnownH extends Pokemon {
   range = 9
   skill = Ability.HIDDEN_POWER_H
   passive = Passive.UNOWN
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9427,8 +9080,6 @@ export class UnownI extends Pokemon {
   range = 9
   skill = Ability.HIDDEN_POWER_I
   passive = Passive.UNOWN
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9445,8 +9096,6 @@ export class UnownJ extends Pokemon {
   range = 9
   skill = Ability.HIDDEN_POWER_J
   passive = Passive.UNOWN
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9463,8 +9112,6 @@ export class UnownK extends Pokemon {
   range = 9
   skill = Ability.HIDDEN_POWER_K
   passive = Passive.UNOWN
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9481,8 +9128,6 @@ export class UnownL extends Pokemon {
   range = 9
   skill = Ability.HIDDEN_POWER_L
   passive = Passive.UNOWN
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9499,8 +9144,6 @@ export class UnownM extends Pokemon {
   range = 9
   skill = Ability.HIDDEN_POWER_M
   passive = Passive.UNOWN
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9517,8 +9160,6 @@ export class UnownN extends Pokemon {
   range = 9
   skill = Ability.HIDDEN_POWER_N
   passive = Passive.UNOWN
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9535,8 +9176,6 @@ export class UnownO extends Pokemon {
   range = 9
   skill = Ability.HIDDEN_POWER_O
   passive = Passive.UNOWN
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9553,8 +9192,6 @@ export class UnownP extends Pokemon {
   range = 9
   skill = Ability.HIDDEN_POWER_P
   passive = Passive.UNOWN
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9571,8 +9208,6 @@ export class UnownQ extends Pokemon {
   range = 9
   skill = Ability.HIDDEN_POWER_Q
   passive = Passive.UNOWN
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9589,8 +9224,6 @@ export class UnownR extends Pokemon {
   range = 9
   skill = Ability.HIDDEN_POWER_R
   passive = Passive.UNOWN
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9607,8 +9240,6 @@ export class UnownS extends Pokemon {
   range = 9
   skill = Ability.HIDDEN_POWER_S
   passive = Passive.UNOWN
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9625,8 +9256,6 @@ export class UnownT extends Pokemon {
   range = 9
   skill = Ability.HIDDEN_POWER_T
   passive = Passive.UNOWN
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9643,8 +9272,6 @@ export class UnownU extends Pokemon {
   range = 9
   skill = Ability.HIDDEN_POWER_U
   passive = Passive.UNOWN
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9661,8 +9288,6 @@ export class UnownV extends Pokemon {
   range = 9
   skill = Ability.HIDDEN_POWER_V
   passive = Passive.UNOWN
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9679,8 +9304,6 @@ export class UnownW extends Pokemon {
   range = 9
   skill = Ability.HIDDEN_POWER_W
   passive = Passive.UNOWN
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9697,8 +9320,6 @@ export class UnownX extends Pokemon {
   range = 9
   skill = Ability.HIDDEN_POWER_X
   passive = Passive.UNOWN
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9715,8 +9336,6 @@ export class UnownY extends Pokemon {
   range = 9
   skill = Ability.HIDDEN_POWER_Y
   passive = Passive.UNOWN
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9733,8 +9352,6 @@ export class UnownZ extends Pokemon {
   range = 9
   skill = Ability.HIDDEN_POWER_Z
   passive = Passive.UNOWN
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9751,8 +9368,6 @@ export class UnownQuestion extends Pokemon {
   range = 9
   skill = Ability.HIDDEN_POWER_QM
   passive = Passive.UNOWN
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9769,8 +9384,6 @@ export class UnownExclamation extends Pokemon {
   range = 9
   skill = Ability.HIDDEN_POWER_EM
   passive = Passive.UNOWN
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -9786,8 +9399,7 @@ export class Diglett extends Pokemon {
   maxPP = 50
   range = 1
   skill = Ability.DIG
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -9803,8 +9415,8 @@ export class Dugtrio extends Pokemon {
   maxPP = 50
   range = 1
   skill = Ability.DIG
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -9821,8 +9433,6 @@ export class Rowlet extends Pokemon {
   range = 3
   skill = Ability.SPIRIT_SHACKLE
   passive = Passive.HATCH
-  additional = false
-  final = false
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -9839,8 +9449,6 @@ export class Dartix extends Pokemon {
   range = 3
   skill = Ability.SPIRIT_SHACKLE
   passive = Passive.HATCH
-  additional = false
-  final = false
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -9856,7 +9464,7 @@ export class Decidueye extends Pokemon {
   maxPP = 80
   range = 3
   skill = Ability.SPIRIT_SHACKLE
-  additional = true
+  final = true
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -9872,8 +9480,7 @@ export class Zorua extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ILLUSION
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -9889,8 +9496,8 @@ export class Zoroark extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ILLUSION
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -9906,8 +9513,7 @@ export class HisuiZorua extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ILLUSION
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -9923,8 +9529,8 @@ export class HisuiZoroark extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ILLUSION
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -9940,8 +9546,7 @@ export class Grimer extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.SLUDGE
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.POISON_MELEE
 }
 
@@ -9957,8 +9562,8 @@ export class Muk extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.SLUDGE
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.POISON_MELEE
 }
 
@@ -9974,8 +9579,7 @@ export class AlolanGrimer extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.SLUDGE
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.POISON_MELEE
 }
 
@@ -9991,8 +9595,8 @@ export class AlolanMuk extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.SLUDGE
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.POISON_MELEE
 }
 
@@ -10008,8 +9612,7 @@ export class Ekans extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.VENOSHOCK
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.POISON_MELEE
 }
 
@@ -10025,8 +9628,8 @@ export class Arbok extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.VENOSHOCK
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.POISON_MELEE
 }
 
@@ -10042,8 +9645,7 @@ export class Carvanha extends Pokemon {
   maxPP = 40
   range = 1
   skill = Ability.AGILITY
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -10059,8 +9661,8 @@ export class Sharpedo extends Pokemon {
   maxPP = 40
   range = 1
   skill = Ability.AGILITY
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -10077,8 +9679,6 @@ export class Froakie extends Pokemon {
   range = 1
   skill = Ability.WATER_SHURIKEN
   passive = Passive.HATCH
-  additional = false
-  final = false
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -10095,8 +9695,6 @@ export class Frogadier extends Pokemon {
   range = 1
   skill = Ability.WATER_SHURIKEN
   passive = Passive.HATCH
-  additional = false
-  final = false
   attackSprite = AttackSprite.WATER_RANGE
 }
 
@@ -10112,7 +9710,7 @@ export class Greninja extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.WATER_SHURIKEN
-  additional = true
+  final = true
   attackSprite = AttackSprite.WATER_RANGE
 }
 
@@ -10129,8 +9727,6 @@ export class Chingling extends Pokemon {
   range = 3
   skill = Ability.ECHO
   passive = Passive.CHINGLING
-  additional = false
-  final = false
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -10147,8 +9743,7 @@ export class Chimecho extends Pokemon {
   range = 3
   skill = Ability.ECHO
   passive = Passive.CHIMECHO
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -10165,8 +9760,6 @@ export class Tyrogue extends Pokemon {
   range = 1
   skill = Ability.MACH_PUNCH
   passive = Passive.TYROGUE
-  additional = false
-  final = false
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
@@ -10182,8 +9775,7 @@ export class Hitmontop extends Pokemon {
   maxPP = 75
   range = 1
   skill = Ability.TRIPLE_KICK
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
@@ -10199,8 +9791,7 @@ export class Hitmonlee extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.MAWASHI_GERI
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
@@ -10216,8 +9807,7 @@ export class Hitmonchan extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.UPPERCUT
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
@@ -10233,7 +9823,7 @@ export class Mimikyu extends Pokemon {
   maxPP = 40
   range = 1
   skill = Ability.SHADOW_SNEAK
-  additional = true
+  final = true
   attackSprite = AttackSprite.FAIRY_MELEE
 }
 
@@ -10250,8 +9840,7 @@ export class Bonsley extends Pokemon {
   range = 1
   skill = Ability.MIMIC
   passive = Passive.SUDOWOODO
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -10268,8 +9857,8 @@ export class Sudowoodo extends Pokemon {
   range = 1
   skill = Ability.MIMIC
   passive = Passive.SUDOWOODO
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -10285,8 +9874,7 @@ export class Combee extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.HEAL_ORDER
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.BUG_MELEE
 }
 
@@ -10302,8 +9890,8 @@ export class Vespiqueen extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.HEAL_ORDER
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.BUG_MELEE
 }
 
@@ -10319,7 +9907,7 @@ export class Shuckle extends Pokemon {
   maxPP = 70
   range = 1
   skill = Ability.SHELL_TRAP
-  additional = true
+  final = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -10340,8 +9928,6 @@ export class Tepig extends Pokemon {
   range = 1
   skill = Ability.IRON_TAIL
   passive = Passive.HATCH
-  additional = false
-  final = false
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -10362,8 +9948,6 @@ export class Pignite extends Pokemon {
   range = 1
   skill = Ability.IRON_TAIL
   passive = Passive.HATCH
-  additional = false
-  final = false
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -10383,8 +9967,7 @@ export class Emboar extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.IRON_TAIL
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -10401,8 +9984,6 @@ export class Wurmple extends Pokemon {
   range = 1
   skill = Ability.STICKY_WEB
   passive = Passive.WURMPLE
-  additional = false
-  final = false
   attackSprite = AttackSprite.BUG_MELEE
 }
 
@@ -10418,8 +9999,6 @@ export class Silcoon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.SPIKE_ARMOR
-  additional = false
-  final = false
   attackSprite = AttackSprite.BUG_MELEE
 }
 
@@ -10435,8 +10014,7 @@ export class Beautifly extends Pokemon {
   maxPP = 60
   range = 1
   skill = Ability.SILVER_WIND
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.BUG_MELEE
 }
 
@@ -10452,8 +10030,6 @@ export class Cascoon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.SPIKE_ARMOR
-  additional = false
-  final = false
   attackSprite = AttackSprite.BUG_MELEE
 }
 
@@ -10469,8 +10045,6 @@ export class Dustox extends Pokemon {
   maxPP = 60
   range = 1
   skill = Ability.POISON_POWDER
-  additional = false
-  final = false
   attackSprite = AttackSprite.BUG_MELEE
 }
 
@@ -10486,7 +10060,6 @@ export class Tinkatink extends Pokemon {
   maxPP = 150
   range = 1
   skill = Ability.GIGATON_HAMMER
-  additional = false
   attackSprite = AttackSprite.FAIRY_MELEE
 }
 
@@ -10502,7 +10075,6 @@ export class Tinkatuff extends Pokemon {
   maxPP = 150
   range = 1
   skill = Ability.GIGATON_HAMMER
-  additional = false
   attackSprite = AttackSprite.FAIRY_MELEE
 }
 
@@ -10518,7 +10090,7 @@ export class Tinkaton extends Pokemon {
   maxPP = 150
   range = 1
   skill = Ability.GIGATON_HAMMER
-  additional = true
+  final = true
   attackSprite = AttackSprite.FAIRY_MELEE
 }
 
@@ -10535,8 +10107,6 @@ export class Maractus extends Pokemon {
   range = 1
   skill = Ability.SPIKE_ARMOR
   passive = Passive.HYDRATATION
-  additional = false
-  final = false
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -10552,8 +10122,6 @@ export class Plusle extends Pokemon {
   maxPP = 60
   range = 1
   skill = Ability.LINK_CABLE
-  additional = false
-  final = false
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -10569,8 +10137,6 @@ export class Minun extends Pokemon {
   maxPP = 60
   range = 1
   skill = Ability.LINK_CABLE
-  additional = false
-  final = false
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -10587,8 +10153,6 @@ export class Spectrier extends Pokemon {
   range = 1
   skill = Ability.ASTRAL_BARRAGE
   passive = Passive.GRIM_NEIGH
-  additional = false
-  final = false
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -10605,8 +10169,6 @@ export class Kartana extends Pokemon {
   range = 1
   skill = Ability.LEAF_BLADE
   passive = Passive.BEAST_BOOST
-  additional = false
-  final = false
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -10622,7 +10184,7 @@ export class Dhelmise extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.ANCHOR_SHOT
-  additional = true
+  final = true
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -10638,8 +10200,7 @@ export class Koffing extends Pokemon {
   maxPP = 40
   range = 1
   skill = Ability.SMOG
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.POISON_MELEE
 }
 
@@ -10655,8 +10216,8 @@ export class Weezing extends Pokemon {
   maxPP = 40
   range = 1
   skill = Ability.SMOG
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.POISON_MELEE
 }
 
@@ -10673,8 +10234,7 @@ export class Clauncher extends Pokemon {
   range = 4
   skill = Ability.WATER_PULSE
   passive = Passive.MEGA_LAUNCHER
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -10691,8 +10251,8 @@ export class Clawitzer extends Pokemon {
   range = 4
   skill = Ability.WATER_PULSE
   passive = Passive.MEGA_LAUNCHER
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -10709,8 +10269,7 @@ export class Yanma extends Pokemon {
   range = 2
   skill = Ability.AERIAL_ACE
   passive = Passive.CLEAR_WING
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -10727,8 +10286,8 @@ export class Yanmega extends Pokemon {
   range = 2
   skill = Ability.AERIAL_ACE
   passive = Passive.CLEAR_WING
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -10749,8 +10308,7 @@ export class Helioptile extends Pokemon {
   range = 3
   skill = Ability.PARABOLIC_CHARGE
   passive = Passive.DRY_SKIN
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
@@ -10771,8 +10329,8 @@ export class Heliolisk extends Pokemon {
   range = 3
   skill = Ability.PARABOLIC_CHARGE
   passive = Passive.DRY_SKIN
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
@@ -10792,8 +10350,7 @@ export class Bidoof extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.SUPER_FANG
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -10813,8 +10370,8 @@ export class Bibarel extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.SUPER_FANG
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -10831,8 +10388,7 @@ export class Spinda extends Pokemon {
   range = 1
   skill = Ability.TEETER_DANCE
   passive = Passive.SPOT_PANDA
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -10852,8 +10408,7 @@ export class Baltoy extends Pokemon {
   maxPP = 70
   range = 2
   skill = Ability.CONFUSION
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -10873,8 +10428,8 @@ export class Claydol extends Pokemon {
   maxPP = 70
   range = 2
   skill = Ability.CONFUSION
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -10890,8 +10445,7 @@ export class Purrloin extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.ASSIST
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -10907,8 +10461,8 @@ export class Liepard extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.ASSIST
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -10925,8 +10479,7 @@ export class Barboach extends Pokemon {
   range = 1
   skill = Ability.FISSURE
   passive = Passive.AQUA_VEIL
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -10943,8 +10496,8 @@ export class Whiscash extends Pokemon {
   range = 1
   skill = Ability.FISSURE
   passive = Passive.AQUA_VEIL
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -10961,8 +10514,7 @@ export class Scraggy extends Pokemon {
   range = 1
   skill = Ability.ASSURANCE
   passive = Passive.MOXIE
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
@@ -10979,8 +10531,8 @@ export class Scrafty extends Pokemon {
   range = 1
   skill = Ability.ASSURANCE
   passive = Passive.MOXIE
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
@@ -10996,8 +10548,7 @@ export class Finneon extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.AQUA_RING
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.WATER_RANGE
 }
 
@@ -11013,8 +10564,8 @@ export class Lumineon extends Pokemon {
   maxPP = 85
   range = 2
   skill = Ability.AQUA_RING
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.WATER_RANGE
 }
 
@@ -11031,8 +10582,7 @@ export class Stunky extends Pokemon {
   range = 1
   skill = Ability.POISON_GAS
   passive = Passive.STENCH
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.POISON_MELEE
 }
 
@@ -11049,8 +10599,8 @@ export class Skuntank extends Pokemon {
   range = 1
   skill = Ability.POISON_GAS
   passive = Passive.STENCH
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.POISON_MELEE
 }
 
@@ -11067,8 +10617,7 @@ export class Illumise extends Pokemon {
   range = 1
   skill = Ability.STRUGGLE_BUG
   passive = Passive.ILLUMISE_VOLBEAT
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.BUG_MELEE
 }
 
@@ -11085,8 +10634,7 @@ export class Volbeat extends Pokemon {
   range = 1
   skill = Ability.TAIL_GLOW
   passive = Passive.ILLUMISE_VOLBEAT
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.BUG_MELEE
 }
 
@@ -11103,8 +10651,7 @@ export class Necrozma extends Pokemon {
   range = 1
   skill = Ability.PRISMATIC_LASER
   passive = Passive.PRISM
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.DRAGON_MELEE
 
   onChangePosition(
@@ -11137,8 +10684,7 @@ export class UltraNecrozma extends Pokemon {
   range = 3
   skill = Ability.PRISMATIC_LASER
   passive = Passive.PRISM
-  additional = true
-  final = false
+  final = true
   attackSprite = AttackSprite.GHOST_RANGE
 
   onChangePosition(
@@ -11166,8 +10712,7 @@ export class Cherrubi extends Pokemon {
   maxPP = 65
   range = 3
   skill = Ability.NATURAL_GIFT
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.GRASS_RANGE
 }
 
@@ -11184,8 +10729,8 @@ export class Cherrim extends Pokemon {
   range = 3
   skill = Ability.NATURAL_GIFT
   passive = Passive.BLOSSOM
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.GRASS_RANGE
   onChangePosition(
     x: number,
@@ -11213,8 +10758,8 @@ export class CherrimSunlight extends Pokemon {
   range = 3
   skill = Ability.NATURAL_GIFT
   passive = Passive.BLOSSOM
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.GRASS_RANGE
   onChangePosition(
     x: number,
@@ -11241,8 +10786,7 @@ export class Misdreavus extends Pokemon {
   maxPP = 95
   range = 3
   skill = Ability.NIGHT_SHADE
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.GHOST_RANGE
 }
 
@@ -11258,8 +10802,8 @@ export class Mismagius extends Pokemon {
   maxPP = 95
   range = 3
   skill = Ability.NIGHT_SHADE
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.GHOST_RANGE
 }
 
@@ -11275,8 +10819,7 @@ export class Doduo extends Pokemon {
   maxPP = 40
   range = 1
   skill = Ability.AGILITY
-  additional = false
-  final = true
+  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -11292,15 +10835,38 @@ export class Dodrio extends Pokemon {
   maxPP = 40
   range = 1
   skill = Ability.AGILITY
-  additional = true
   final = true
+  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class Xurkitree extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.ARTIFICIAL,
+    Synergy.HUMAN
+  ])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  evolution = Pkm.DEFAULT
+  hp = 200
+  atk = 20
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 3
+  skill = Ability.CHARGE_BEAM
+  passive = Passive.SPECIAL_ATTACK
+  final = true
+  attackSprite = AttackSprite.ELECTRIC_RANGE
+  attackType = AttackType.SPECIAL
 }
 
 export const PokemonClasses: Record<
   Pkm,
   new (shiny: boolean, emotion: Emotion) => Pokemon
 > = {
+  [Pkm.DEFAULT]: Pokemon,
   [Pkm.DITTO]: Ditto,
   [Pkm.BULBASAUR]: Bulbasaur,
   [Pkm.IVYSAUR]: Ivysaur,
@@ -11937,5 +11503,5 @@ export const PokemonClasses: Record<
   [Pkm.MISMAGIUS]: Mismagius,
   [Pkm.DODUO]: Doduo,
   [Pkm.DODRIO]: Dodrio,
-  [Pkm.DEFAULT]: Pokemon
+  [Pkm.XURKITREE]: Xurkitree
 }

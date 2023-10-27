@@ -1,12 +1,10 @@
-import { Pkm, PkmIndex } from "../app/types/enum/Pokemon"
+import { Pkm } from "../app/types/enum/Pokemon"
 import fs from "fs"
 import PokemonFactory from "../app/models/pokemon-factory"
 import { logger } from "../app/utils/logger"
 
 const args = process.argv.slice(2)
 const specificIndexToMinify = args[0]
-
-const indexes = ["0000"]
 
 function minifySheet(id) {
   try {
