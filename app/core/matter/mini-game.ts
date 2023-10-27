@@ -287,6 +287,7 @@ export class MiniGame {
       this.items?.set(floatingItem.id, floatingItem)
       const body = Bodies.circle(x, y, 15)
       body.label = floatingItem.id
+      body.isSensor = true
       this.bodies.set(floatingItem.id, body)
       Composite.add(this.engine.world, body)
     }
