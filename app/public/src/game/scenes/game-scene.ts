@@ -263,8 +263,8 @@ export default class GameScene extends Scene {
     } else if (this.itemDragged) {
       this.itemDragged.closeDetail()
       if (this.itemDragged.input) {
-        this.itemDragged.x = this.itemDragged.input!.dragStartX
-        this.itemDragged.y = this.itemDragged.input!.dragStartY
+        this.itemDragged.x = this.itemDragged.input.dragStartX
+        this.itemDragged.y = this.itemDragged.input.dragStartY
       }
       this.input.emit("dragend", this.input.pointer1, this.itemDragged, false)
       this.itemDragged = null
