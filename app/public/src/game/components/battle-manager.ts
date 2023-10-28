@@ -497,6 +497,13 @@ export default class BattleManager {
             if (pkm.detail) {
               pkm.detail.ap.textContent = pokemon.ap.toString()
               pkm.detail.updateAbilityDescription(pkm.skill, pkm.stars, pkm.ap)
+              if (pokemon.passive) {
+                pkm.detail.updatePassiveDescription(
+                  pokemon.passive,
+                  pkm.stars,
+                  pkm.ap
+                )
+              }
             }
           } else if (field == "atkSpeed") {
             value > previousValue &&
