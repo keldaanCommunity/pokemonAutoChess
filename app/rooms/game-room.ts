@@ -65,6 +65,7 @@ import { computeElo } from "../core/elo"
 import { Passive } from "../types/enum/Passive"
 import { getAvatarString } from "../public/src/utils"
 import { keys, values } from "../utils/schemas"
+import { removeInArray } from "../utils/array"
 
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>
@@ -475,7 +476,12 @@ export default class GameRoom extends Room<GameState> {
         const player = this.state.players.get(client.auth.uid)
         if (player && this.state.stageLevel < 4) {
           // if player left game during the loading screen or before stage 4, remove it from the players
+          player.life = 0
+          player.alive = false
           this.state.players.delete(client.auth.uid)
+          this.setMetadata({
+            playerIds: removeInArray(this.metadata.playerIds, client.auth.uid)
+          })
           logger.info(
             `${client.auth.displayName} has been removed from players list`
           )

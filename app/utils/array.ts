@@ -14,10 +14,10 @@ export function deduplicateArray<T>(arr: T[]): T[] {
   return arr.filter((item, index, array) => array.indexOf(item) === index)
 }
 
-export function removeInArray<T>(arr: T[], el: T) {
+export function removeInArray<T>(arr: T[], el: T): T[] {
   const index = arr.indexOf(el)
   if (index > -1) {
     arr.splice(index, 1)
   }
+  return arr
 }
-
