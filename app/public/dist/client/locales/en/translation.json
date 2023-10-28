@@ -1503,7 +1503,7 @@
     "MEGA_LAUNCHER": "This pokémon ability emits 3 SOUND cries instead of one",
     "CLEAR_WING": "Gains 2% bonus ATK_SPEED each second",
     "DRY_SKIN": "Heals 8 HP per second under RAIN. Gains 25% dodge chance under SANDSTORM. Gains 50% AP under SUN",
-    "SPOT_PANDA": "The pokémon is immune to CONFUSION",
+    "SPOT_PANDA": "The pokémon is immune to CONFUSION and deals [100,SP]% additional SPECIAL to pokemons with CONFUSION",
     "CUBONE": "Marowak is looking for a FIRE_STONE",
     "GUTS": "The pokémon gains 5 ATK as long as it is BURN or POISON",
     "STENCH": "Leaves behind a stinking cloud that POISON any unit that breathes it",
