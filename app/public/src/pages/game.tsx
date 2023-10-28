@@ -116,7 +116,10 @@ export default function Game() {
   const currentPlayerId: string = useAppSelector(
     (state) => state.game.currentPlayerId
   )
-  const spectate = currentPlayerId !== uid
+  const currentPlayer = useAppSelector((state) =>
+    state.game.players.find((p) => p.id === state.game.currentPlayerId)
+  )
+  const spectate = currentPlayerId !== uid || !currentPlayer?.alive
 
   const initialized = useRef<boolean>(false)
   const connecting = useRef<boolean>(false)
