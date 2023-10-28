@@ -1160,7 +1160,11 @@
     "WINDY": "Venteux",
     "NIGHT": "Nuit",
     "HYDRATATION": "Hydratation",
-    "COOL_BREEZE": "Brise fraîche"
+    "COOL_BREEZE": "Brise fraîche",
+    "SHINING_RAY": "Rayon brillant",
+    "LIGHT_PULSE": "Impulsion lumineuse",
+    "ETERNAL_LIGHT": "Lumière éternelle",
+    "MAX_ILLUMINATION": "Illumination"
   },
   "effect_description": {
     "STAMINA": "Gagne 10 SHIELD",
@@ -1264,7 +1268,11 @@
     "MISTY": "+20% SPECIAL\n+30 % de durée de CHARM",
     "WINDY": "+10% de chances d'esquiver (+20% si FLYING)",
     "NIGHT": "+20% CRIT_CHANCE\n+30 % de durée de SLEEP",
-    "HYDRATATION": "La synergie GRASS soigne 5 HP supplémentaires par seconde sous la RAIN"
+    "HYDRATATION": "La synergie GRASS soigne 5 HP supplémentaires par seconde sous la RAIN",
+    "SHINING_RAY": "Donne RUNE_PROTECT pendant 6 secondes",
+    "LIGHT_PULSE": "Donne également +10 PP par seconde",
+    "ETERNAL_LIGHT": "Augmente également la AP et l'ATK de 30%",
+    "MAX_ILLUMINATION": "Donne également RESURECTION"
   },
   "item": {
     "FOSSIL_STONE": "Fossile Dome",
@@ -2007,7 +2015,7 @@
   "legendary_giants": "Colosses légendaires",
   "pokemons_of_myth": "Pokémon des Mythes",
   "community_translations": "Les traductions sont gérées par la communauté. Si vous souhaitez ajouter une langue ou aider à améliorer une traduction, rendez-vous sur",
-  "no_emotions_available": "Aucune émotion disponible",
+  "no_emotions_available": "Aucune emote disponible",
   "finished_preloading": "Préchargement terminé",
   "preloading_start": "Préchargement du jeu...",
   "loading_asset": "Chargement:",

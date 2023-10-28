@@ -5,7 +5,7 @@ import PokemonFactory, {
 import { PrecomputedTypePokemon } from "../../../../../types"
 import { Synergy, SynergyEffects } from "../../../../../types/enum/Synergy"
 import PRECOMPUTED_TYPE_POKEMONS from "../../../../../models/precomputed/type-pokemons.json"
-import { Pkm } from "../../../../../types/enum/Pokemon"
+import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { SynergyTriggers, RarityColor } from "../../../../../types/Config"
 import { useAppSelector } from "../../../hooks"
 import { getPortraitSrc } from "../../../utils"
@@ -30,6 +30,13 @@ export default function SynergyDetailComponent(props: {
   const levelReached = SynergyTriggers[props.type]
     .filter((n) => n <= props.value)
     .at(-1)
+
+  const additionals = precomputed[props.type].additionalPokemons
+    .filter((p) => additionalPokemons.includes(PkmFamily[p]))
+    .filter(
+      // remove duplicates of same family
+      (p, i, arr) => arr.findIndex((x) => PkmFamily[x] === PkmFamily[p]) === i
+    )
 
   return (
     <div style={{ maxWidth: "480px" }}>
@@ -74,13 +81,9 @@ export default function SynergyDetailComponent(props: {
         })}
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
-        {precomputed[props.type].additionalPokemons.map((p) => {
-          if (additionalPokemons.includes(p)) {
-            const pokemon = PokemonFactory.createPokemonFromName(p as Pkm)
-            return <PokemonPortrait p={pokemon} key={p} />
-          } else {
-            return null
-          }
+        {additionals.map((p) => {
+          const pokemon = PokemonFactory.createPokemonFromName(p as Pkm)
+          return <PokemonPortrait p={pokemon} key={p} />
         })}
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>

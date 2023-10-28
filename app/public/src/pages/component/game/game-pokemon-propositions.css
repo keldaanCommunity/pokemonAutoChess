@@ -26,6 +26,7 @@
 
 .game-pokemons-proposition-list > .nes-container {
   background-color: #54596b;
+  max-width: 210px;
 }
 
 .game-pokemons-proposition-list > .nes-container:hover {
