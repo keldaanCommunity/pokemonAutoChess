@@ -7,6 +7,7 @@ import {
   setPokemonCollection,
   setSynergies,
   addPlayer,
+  removePlayer,
   changePlayer,
   setExperienceManager,
   setInterest,
@@ -116,7 +117,10 @@ export default function Game() {
   const currentPlayerId: string = useAppSelector(
     (state) => state.game.currentPlayerId
   )
-  const spectate = currentPlayerId !== uid
+  const currentPlayer = useAppSelector((state) =>
+    state.game.players.find((p) => p.id === state.game.currentPlayerId)
+  )
+  const spectate = currentPlayerId !== uid || !currentPlayer?.alive
 
   const initialized = useRef<boolean>(false)
   const connecting = useRef<boolean>(false)
@@ -652,6 +656,10 @@ export default function Game() {
             dispatch(setPokemonProposition(player.pokemonsProposition))
           }
         })
+      })
+
+      room.state.players.onRemove((player) => {
+        dispatch(removePlayer(player))
       })
 
       room.state.spectators.onAdd((uid) => {
