@@ -10376,11 +10376,11 @@ export class Bibarel extends Pokemon {
 }
 
 export class Spinda extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.HUMAN, Synergy.SOUND])
+  types = new SetSchema<Synergy>([Synergy.NORMAL])
   rarity = Rarity.UNIQUE
   stars = 3
   evolution = Pkm.DEFAULT
-  hp = 200
+  hp = 250
   atk = 20
   def = 5
   speDef = 5

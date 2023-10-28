@@ -9,6 +9,7 @@ import { chance } from "../utils/random"
 import { distanceC } from "../utils/distance"
 import { Synergy } from "../types/enum/Synergy"
 import { max, min } from "../utils/number"
+import { Passive } from "../types/enum/Passive"
 
 export default class AttackingState extends PokemonState {
   update(pokemon: PokemonEntity, dt: number, board: Board, weather: string) {
@@ -114,16 +115,21 @@ export default class AttackingState extends PokemonState {
       )
 
       let physicalDamage = pokemon.atk
+      let specialDamage = 0
       let trueDamage = 0
       let totalTakenDamage = 0
-      const attackType = pokemon.attackType
-
-      if(pokemon.attackType === AttackType.SPECIAL){
-        physicalDamage = Math.ceil(physicalDamage * (1 + pokemon.ap / 100))
-      }
 
       if (pokemon.items.has(Item.FIRE_GEM)) {
         physicalDamage = Math.round(physicalDamage + target.hp * 0.08)
+      }
+
+      if (pokemon.attackType === AttackType.SPECIAL) {
+        specialDamage = Math.ceil(physicalDamage * (1 + pokemon.ap / 100))
+        physicalDamage = 0
+      }
+
+      if (pokemon.passive === Passive.SPOT_PANDA && target.status.confusion) {
+        specialDamage = Math.ceil(physicalDamage * (1 + pokemon.ap / 100))
       }
 
       let isAttackSuccessful = true
@@ -142,11 +148,13 @@ export default class AttackingState extends PokemonState {
       ) {
         isAttackSuccessful = false
         physicalDamage = 0
+        specialDamage = 0
         target.count.dodgeCount += 1
       }
       if (target.status.protect) {
         isAttackSuccessful = false
         physicalDamage = 0
+        specialDamage = 0
       }
 
       if (Math.random() * 100 < pokemon.critChance) {
@@ -200,14 +208,26 @@ export default class AttackingState extends PokemonState {
         const { takenDamage } = target.handleDamage({
           damage: physicalDamage,
           board,
-          attackType,
+          attackType: AttackType.PHYSICAL,
           attacker: pokemon,
           shouldTargetGainMana: true
         })
         totalTakenDamage += takenDamage
       }
 
-      const totalDamage = physicalDamage + trueDamage
+      if (specialDamage > 0) {
+        // Apply special damage
+        const { takenDamage } = target.handleDamage({
+          damage: specialDamage,
+          board,
+          attackType: AttackType.SPECIAL,
+          attacker: pokemon,
+          shouldTargetGainMana: true
+        })
+        totalTakenDamage += takenDamage
+      }
+
+      const totalDamage = physicalDamage + specialDamage + trueDamage
       pokemon.onAttack({
         target,
         board,

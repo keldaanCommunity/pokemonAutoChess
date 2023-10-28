@@ -7,6 +7,7 @@
 - Magnet Rise Buff: ~~[1,2,4]~~ -> [2,4,6] protected allies
 - Stun Spore Buff: now inflicts Paralysis and deal damage to all surrounding enemies
 - Bellossom is now tier 4. No changes in stats, only ability damage
+- Spinda: lost Sound & Human synergy, HP ~~200~~ 250, added AP scaling to its passive
 
 # Changes to Synergies
 

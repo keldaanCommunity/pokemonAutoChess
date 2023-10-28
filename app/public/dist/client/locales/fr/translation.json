@@ -221,7 +221,8 @@
     "PYRO_BALL": "Ballon Brûlant",
     "WHIRLPOOL": "Tourbillon",
     "SMOKE_SCREEN": "Écran de fumée",
-    "PRESENT": "Cadeau"
+    "PRESENT": "Cadeau",
+    "TEETER_DANCE": "Danse Folle"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1054,7 +1055,8 @@
     "PYRO_BALL": "L'utilisateur attaque en allumant une petite pierre et en la lançant comme une boule de feu sur la cible la plus éloignée, infligeant [10,20,40,SP] SPECIAL et BURN pendant 2 secondes tout ce qui se trouve sur son passage.",
     "WHIRLPOOL": "Verrouillez l'ennemi le plus éloigné et déchaînez une grêle de 4 tourbillons vers lui. Chacun inflige [125,SP]% d'ATK PHYSIQUE au premier ennemi touché.",
     "SMOKE_SCREEN": "Canalisation souterraine et réapparition au milieu de l'équipe ennemie, infligeant [10,20,40,SP] SPECIAL, BURN et ARMOR_REDUCTION à toutes les unités adjacentes pendant 2 secondes.",
-    "PRESENT": "Peut soit infliger [80,SP], [150,SP], [300,SP] SPECIAL à la cible, soit la soigner de 80 HP"
+    "PRESENT": "Peut soit infliger [80,SP], [150,SP], [300,SP] SPECIAL à la cible, soit la soigner de 80 HP",
+    "TEETER_DANCE": "Tous les autres pokémons sur le terrain sont CONFUSION pendant 3 secondes, alliés comme ennemis"
   },
   "effect": {
     "INGRAIN": "Enraciné",
@@ -1339,7 +1341,7 @@
     "DUSK_STONE": "Le porteur gagne le type DARK",
     "LEAF_STONE": "Le porteur gagne le type GRASS",
     "ICE_STONE": "Le porteur gagne le type ICE",
-    "CHOICE_SPECS": "Le porteur gagne 100 % d'AP bonus",
+    "CHOICE_SPECS": "Le porteur gagne 100 % de AP bonus",
     "SOUL_DEW": "Pendant le combat, le porteur gagne 8% AP chaque seconde",
     "UPGRADE": "Les attaques réussies confèrent +4 % de bonus ATK_SPEED pour le reste du combat",
     "REAPER_CLOTH": "Les capacités du détenteur peuvent infliger des coups critiques",
@@ -1417,7 +1419,8 @@
     "GLIGAR": "Gligar recherche un RAZOR_FANG. Si le Pokémon est POISON, il gagnera des HP au lieu de subir des dégâts.",
     "POISON_HEAL": "Si le Pokémon est POISON, il gagnera des HP au lieu de subir des dégâts",
     "GRIM_NEIGH": "Quand le Pokémon met un ennemi K.O., il émet un hennissement terrifiant qui augmente son AP de 30.",
-    "SHAYMIN": "Shaymin recherche une GRACIDEA_FLOWER"
+    "SHAYMIN": "Shaymin recherche une GRACIDEA_FLOWER",
+    "SPOT_PANDA": "Ce Pokémon ne peut pas être CONFUSION et inflige [100,SP]% de SPECIAL supplémentaires aux pokémons CONFUSION"
   },
   "stat": {
     "ATK": "Attaque",
