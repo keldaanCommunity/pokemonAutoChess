@@ -7,6 +7,7 @@ import {
   setPokemonCollection,
   setSynergies,
   addPlayer,
+  removePlayer,
   changePlayer,
   setExperienceManager,
   setInterest,
@@ -655,6 +656,10 @@ export default function Game() {
             dispatch(setPokemonProposition(player.pokemonsProposition))
           }
         })
+      })
+
+      room.state.players.onRemove((player) => {
+        dispatch(removePlayer(player))
       })
 
       room.state.spectators.onAdd((uid) => {

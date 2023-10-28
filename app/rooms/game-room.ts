@@ -475,9 +475,7 @@ export default class GameRoom extends Room<GameState> {
         logger.info(`${client.auth.displayName} left game`)
         const player = this.state.players.get(client.auth.uid)
         if (player && this.state.stageLevel <= 5) {
-          // if player left game during the loading screen or before stage 4, remove it from the players
-          player.life = 0
-          player.alive = false
+          // if player left game during the loading screen or before stage 6, remove it from the players
           this.state.players.delete(client.auth.uid)
           this.setMetadata({
             playerIds: removeInArray(this.metadata.playerIds, client.auth.uid)
