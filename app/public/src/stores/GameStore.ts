@@ -124,6 +124,9 @@ export const gameSlice = createSlice({
     addPlayer: (state, action: PayloadAction<IPlayer>) => {
       state.players.push(JSON.parse(JSON.stringify(action.payload)))
     },
+    removePlayer: (state, action: PayloadAction<IPlayer>) => {
+      state.players = state.players.filter((p) => p.id !== action.payload.id)
+    },
     setMoney: (state, action: PayloadAction<number>) => {
       state.money = action.payload
     },
@@ -532,6 +535,7 @@ export const {
   setWeather,
   setNoELO,
   addPlayer,
+  removePlayer,
   setExperienceManager,
   setStreak,
   setInterest,
