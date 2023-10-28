@@ -129,7 +129,7 @@ export default class AttackingState extends PokemonState {
       }
 
       if (pokemon.passive === Passive.SPOT_PANDA && target.status.confusion) {
-        specialDamage = Math.ceil(physicalDamage * 12 + pokemon.ap / 100)
+        specialDamage = Math.ceil(physicalDamage * (1 + pokemon.ap / 100))
       }
 
       let isAttackSuccessful = true
