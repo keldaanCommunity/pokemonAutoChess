@@ -1,14 +1,12 @@
 import React, {
-  ChangeEvent,
   Dispatch,
   SetStateAction,
-  useCallback,
   useState
 } from "react"
 import Modal from "react-bootstrap/Modal"
 import {
   IPreferencesState,
-  getPreferences,
+  preferences as initialPreferences,
   savePreferences
 } from "../../../preferences"
 import { getGameScene } from "../../game"
@@ -27,52 +25,25 @@ export default function GameOptionsModal(props: {
   hideModal: Dispatch<SetStateAction<void>>
   page: Page
 }) {
-  const initialPreferences = getPreferences()
-  const [unsavedPreferences, setUnsavedPreferences] =
-    useState(initialPreferences)
-
+  const [preferences, setPreferences] = useState(initialPreferences)
   const { t, i18n } = useTranslation()
   const dispatch = useAppDispatch()
   const language = i18n.language
 
-  const getValue = useCallback(
-    (
-      target: HTMLInputElement,
-      key: keyof IPreferencesState
-    ): number | boolean => {
-      switch (key) {
-        case "showDetailsOnHover":
-        case "showDpsMeter":
-          return target.checked
-        default:
-          return Number.parseFloat(target.value)
-      }
-    },
-    []
-  )
+  function changePreference(key: keyof IPreferencesState, value: any) {
+    setPreferences({ ...preferences, [key]: value })
+    savePreferences({ [key]: value })
 
-  const changePreferences = useCallback(
-    (e: ChangeEvent<HTMLInputElement>, key: keyof IPreferencesState) => {
-      const newValue = getValue(e.target, key)
-      setUnsavedPreferences((prevPrefs) => {
-        return {
-          ...prevPrefs,
-          [key]: newValue
-        }
-      })
-
-      if (key === "musicVolume" && typeof newValue === "number") {
-        const gameScene = getGameScene()
-        if (gameScene && gameScene.music) {
-          gameScene.music.setVolume(newValue / 100)
-        }
+    if (key === "musicVolume" && typeof value === "number") {
+      const gameScene = getGameScene()
+      if (gameScene && gameScene.music) {
+        gameScene.music.setVolume(value / 100)
       }
-    },
-    [getValue]
-  )
+    }
+  }
 
   return (
-    <Modal show={props.show}>
+    <Modal show={props.show} onHide={props.hideModal}>
       <Modal.Header>
         <Modal.Title>{t("options")}</Modal.Title>
       </Modal.Header>
@@ -109,63 +80,48 @@ export default function GameOptionsModal(props: {
         )}
         <p>
           <label className="full-width">
-            {t("music_volume")}: {unsavedPreferences.musicVolume} %
+            {t("music_volume")}: {preferences.musicVolume} %
             <input
               type="range"
               min="0"
               max="100"
-              value={unsavedPreferences.musicVolume}
-              onInput={useCallback(
-                (e) => changePreferences(e, "musicVolume"),
-                [changePreferences]
-              )}
+              value={preferences.musicVolume}
+              onInput={(e) =>
+                changePreference(
+                  "musicVolume",
+                  Number.parseFloat((e.target as HTMLInputElement).value)
+                )
+              }
             ></input>
           </label>
         </p>
         <p>
           <label className="full-width">
-            {t("sfx_volume")}: {unsavedPreferences.sfxVolume} %
+            {t("sfx_volume")}: {preferences.sfxVolume} %
             <input
               type="range"
               min="0"
               max="100"
-              value={unsavedPreferences.sfxVolume}
-              onInput={useCallback(
-                (e) => changePreferences(e, "sfxVolume"),
-                [changePreferences]
-              )}
+              value={preferences.sfxVolume}
+              onInput={(e) =>
+                changePreference(
+                  "sfxVolume",
+                  Number.parseFloat((e.target as HTMLInputElement).value)
+                )
+              }
             ></input>
           </label>
         </p>
         <p>
           <Checkbox
-            checked={unsavedPreferences.showDetailsOnHover}
+            checked={preferences.showDetailsOnHover}
             onToggle={(checked) =>
-              setUnsavedPreferences((prevPrefs) => {
-                return {
-                  ...prevPrefs,
-                  showDetailsOnHover: checked
-                }
-              })
+              changePreference("showDetailsOnHover", checked)
             }
             label={t("show_details_on_hover")}
           />
         </p>
       </Modal.Body>
-      <Modal.Footer style={{ justifyContent: "space-between" }}>
-        <button className="bubbly red" onClick={() => props.hideModal()}>
-          {t("cancel")}
-        </button>
-        <button
-          className="bubbly green"
-          onClick={useCallback(() => {
-            savePreferences(unsavedPreferences)
-            props.hideModal()
-          }, [props, unsavedPreferences])}
-        >
-          {t("save")}
-        </button>
-      </Modal.Footer>
     </Modal>
   )
 }

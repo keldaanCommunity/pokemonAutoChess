@@ -4,7 +4,7 @@ import ItemDetail from "./item-detail"
 import { Item } from "../../../../types/enum/Item"
 import ItemsContainer from "./items-container"
 import { getGameScene } from "../../pages/game"
-import { getPreferences } from "../../preferences"
+import { preferences } from "../../preferences"
 
 export default class ItemContainer extends DraggableObject {
   detail: ItemDetail
@@ -66,7 +66,7 @@ export default class ItemContainer extends DraggableObject {
       clearTimeout(this.mouseoutTimeout)
     })
     this.detail.dom.addEventListener("mouseleave", () => {
-      if (getPreferences().showDetailsOnHover) {
+      if (preferences.showDetailsOnHover) {
         this.mouseoutTimeout = setTimeout(
           () => {
             if (this.detail.visible) {
@@ -94,7 +94,7 @@ export default class ItemContainer extends DraggableObject {
 
   onPointerOver(pointer) {
     super.onPointerOver(pointer)
-    if (getPreferences().showDetailsOnHover && !this.detail.visible) {
+    if (preferences.showDetailsOnHover && !this.detail.visible) {
       clearTimeout(this.mouseoutTimeout)
       this.openDetail()
     }
@@ -112,7 +112,7 @@ export default class ItemContainer extends DraggableObject {
     if (this.draggable) {
       this.circle?.setFillStyle(0x61738a)
     }
-    if (getPreferences().showDetailsOnHover) {
+    if (preferences.showDetailsOnHover) {
       this.mouseoutTimeout = setTimeout(
         () => {
           if (this.detail.visible) {
@@ -127,7 +127,7 @@ export default class ItemContainer extends DraggableObject {
   onPointerDown(pointer: Phaser.Input.Pointer) {
     super.onPointerDown(pointer)
     this.parentContainer.bringToTop(this)
-    if (pointer.rightButtonDown() && !getPreferences().showDetailsOnHover) {
+    if (pointer.rightButtonDown() && !preferences.showDetailsOnHover) {
       if (!this.detail.visible) {
         this.openDetail()
         this.updateDropZone(false)
