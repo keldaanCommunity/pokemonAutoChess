@@ -46,7 +46,7 @@ import { getWeather } from "../../utils/weather"
 import Simulation from "../../core/simulation"
 import { selectMatchups } from "../../core/matchmaking"
 import { resetArraySchema, values } from "../../utils/schemas"
-import { CountEvolutionRule } from "../../core/evolution-rules"
+import { CountEvolutionRule, HatchEvolutionRule } from "../../core/evolution-rules"
 
 export class OnShopCommand extends Command<
   GameRoom,
@@ -1068,33 +1068,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         }
 
         player.board.forEach((pokemon, key) => {
-          if (pokemon.evolutionTimer !== undefined) {
-            pokemon.evolutionTimer -= 1
-
-            if (pokemon.evolutionTimer === 0) {
-              const pokemonEvolved = PokemonFactory.createPokemonFromName(
-                pokemon.evolution,
-                player
-              )
-
-              pokemon.items.forEach((i) => {
-                pokemonEvolved.items.add(i)
-              })
-              pokemonEvolved.positionX = pokemon.positionX
-              pokemonEvolved.positionY = pokemon.positionY
-              player.board.delete(key)
-              player.board.set(pokemonEvolved.id, pokemonEvolved)
-              player.synergies.update(player.board)
-              player.effects.update(player.synergies, player.board)
-            } else {
-              if (pokemon.name === Pkm.EGG) {
-                if (pokemon.evolutionTimer >= 2) {
-                  pokemon.action = PokemonActionState.IDLE
-                } else if (pokemon.evolutionTimer === 1) {
-                  pokemon.action = PokemonActionState.HOP
-                }
-              }
-            }
+          if (pokemon.evolutionRule && pokemon.evolutionRule instanceof HatchEvolutionRule) {            
+            pokemon.evolutionRule.updateRound(pokemon, player)
           }
           if (pokemon.passive === Passive.UNOWN && !pokemon.isOnBench) {
             // remove after one fight

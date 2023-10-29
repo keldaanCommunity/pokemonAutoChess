@@ -5,6 +5,8 @@ import { values } from "../utils/schemas"
 import { logger } from "colyseus"
 import PokemonFactory from "../models/pokemon-factory"
 import { BasicItems, Item } from "../types/enum/Item"
+import { EvolutionTime } from "../types/Config"
+import { PokemonActionState } from "../types/enum/Game"
 
 type DivergentEvolution = (
   pokemon: Pokemon,
@@ -167,6 +169,44 @@ export class ItemEvolutionRule extends EvolutionRule {
       )
     }
 
+    const pokemonEvolved = player.transformPokemon(
+      pokemon,
+      pokemonEvolutionName
+    )
+    return pokemonEvolved
+  }
+}
+
+export class HatchEvolutionRule extends EvolutionRule {
+  evolutionTimer: number
+  constructor(
+    roundsRequired = EvolutionTime.EVOLVE_HATCH,
+    divergentEvolution?: DivergentEvolution
+  ) {
+    super(divergentEvolution)
+    this.evolutionTimer = roundsRequired
+  }
+
+  updateRound(pokemon: Pokemon, player: Player) {
+    this.evolutionTimer -= 1
+    pokemon.evolutionRule.tryEvolve(pokemon, player)
+    if (pokemon.name === Pkm.EGG && this.evolutionTimer >= 1) {
+      pokemon.action =
+        this.evolutionTimer >= 2
+          ? PokemonActionState.IDLE
+          : PokemonActionState.HOP
+    }
+  }
+
+  canEvolve(pokemon: Pokemon, player: Player): boolean {
+    return this.evolutionTimer === 0
+  }
+
+  evolve(pokemon: Pokemon, player: Player): Pokemon {
+    let pokemonEvolutionName = pokemon.evolution
+    if (this.divergentEvolution) {
+      pokemonEvolutionName = this.divergentEvolution(pokemon, player)
+    }
     const pokemonEvolved = player.transformPokemon(
       pokemon,
       pokemonEvolutionName

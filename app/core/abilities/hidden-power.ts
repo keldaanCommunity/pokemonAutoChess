@@ -137,7 +137,7 @@ export class HiddenPowerEStrategy extends HiddenPowerStrategy {
       if (x !== undefined) {
         egg.positionX = x
         egg.positionY = 0
-        egg.evolutionTimer = 1
+        egg.evolutionRule.evolutionTimer = 1
         player.board.set(egg.id, egg)
       }
     }
