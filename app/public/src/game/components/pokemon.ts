@@ -40,7 +40,7 @@ import {
   DEFAULT_CRIT_DAMAGE
 } from "../../../../types/Config"
 import { DebugScene } from "../scenes/debug-scene"
-import { getPreferences } from "../../preferences"
+import { preferences } from "../../preferences"
 
 export default class Pokemon extends DraggableObject {
   evolution: Pkm
@@ -275,7 +275,7 @@ export default class Pokemon extends DraggableObject {
 
   updateTooltipPosition() {
     if (this.detail) {
-      if (this.input && getPreferences().showDetailsOnHover) {
+      if (this.input && preferences.showDetailsOnHover) {
         this.detail.setPosition(
           this.input.localX + 200,
           this.input.localY - 175
@@ -356,7 +356,7 @@ export default class Pokemon extends DraggableObject {
     super.onPointerDown(pointer)
     if (
       this.shouldShowTooltip &&
-      !getPreferences().showDetailsOnHover &&
+      !preferences.showDetailsOnHover &&
       pointer.rightButtonDown() &&
       this.scene &&
       !this.detail
@@ -371,7 +371,7 @@ export default class Pokemon extends DraggableObject {
     super.onPointerUp()
     if (
       this.shouldShowTooltip &&
-      getPreferences().showDetailsOnHover &&
+      preferences.showDetailsOnHover &&
       !this.detail
     ) {
       this.openDetail()
@@ -380,7 +380,7 @@ export default class Pokemon extends DraggableObject {
 
   onPointerOut(): void {
     super.onPointerOut()
-    if (this.shouldShowTooltip && getPreferences().showDetailsOnHover) {
+    if (this.shouldShowTooltip && preferences.showDetailsOnHover) {
       this.closeDetail()
     }
   }
@@ -389,7 +389,7 @@ export default class Pokemon extends DraggableObject {
     super.onPointerOver(pointer)
 
     if (
-      getPreferences().showDetailsOnHover &&
+      preferences.showDetailsOnHover &&
       this.shouldShowTooltip &&
       this.detail == null &&
       !pointer.leftButtonDown() // we're dragging another pokemon

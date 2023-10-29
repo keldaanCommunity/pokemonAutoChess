@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction, useState } from "react"
 import { Modal } from "react-bootstrap"
 import { useTranslation } from "react-i18next"
 import { Dungeon } from "../../../../../types/Config"
-import { getPreferences, savePreferences } from "../../../preferences"
+import { preferences, savePreferences } from "../../../preferences"
 import { getGameScene } from "../../game"
 import { playMusic } from "../../utils/audio"
 import { cc } from "../../utils/jsx"
@@ -21,7 +21,7 @@ export default function Jukebox(props: {
     getGameScene()?.music?.key?.replace("music_", "") ?? ""
   )
   const [loading, setLoading] = useState<boolean>(false)
-  const [volume, setVolume] = useState<number>(getPreferences().musicVolume)
+  const [volume, setVolume] = useState<number>(preferences.musicVolume)
 
   function changeMusic(name: string) {
     setMusic(name)
