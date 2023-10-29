@@ -1419,8 +1419,8 @@ export class Porygon2 extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   evolution = Pkm.PORYGON_Z
-  hp = 180
-  atk = 14
+  hp = 222
+  atk = 22
   def = 1
   speDef = 3
   maxPP = 90
@@ -1441,7 +1441,7 @@ export class PorygonZ extends Pokemon {
   rarity = Rarity.EPIC
   stars = 3
   evolution = Pkm.DEFAULT
-  hp = 333
+  hp = 222
   atk = 33
   def = 1
   speDef = 5
@@ -8876,7 +8876,7 @@ export class Woobat extends Pokemon {
   stars = 1
   evolution = Pkm.SWOOBAT
   hp = 60
-  atk = 6
+  atk = 5
   def = 1
   speDef = 1
   maxPP = 90
@@ -8896,7 +8896,7 @@ export class Swoobat extends Pokemon {
   stars = 2
   evolution = Pkm.DEFAULT
   hp = 130
-  atk = 15
+  atk = 12
   def = 2
   speDef = 2
   maxPP = 90
