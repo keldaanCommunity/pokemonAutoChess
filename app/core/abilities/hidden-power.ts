@@ -624,6 +624,7 @@ export class HiddenPowerWStrategy extends HiddenPowerStrategy {
         pokemon.positionX = x
         pokemon.positionY = 0
         player.board.set(pokemon.id, pokemon)
+        unown.simulation.room.updateEvolution(player.id)
       }
     }
   }
