@@ -14,10 +14,7 @@ const defaultPreferences: IPreferencesState = {
   showDetailsOnHover: false
 }
 
-let preferences: IPreferencesState = loadPreferences()
-export function getPreferences() {
-  return preferences
-}
+export const preferences: IPreferencesState = loadPreferences()
 
 export function loadPreferences(): IPreferencesState {
   if (localStore.has(LocalStoreKeys.PREFERENCES)) {
@@ -32,4 +29,5 @@ export function loadPreferences(): IPreferencesState {
 
 export async function savePreferences(modified: Partial<IPreferencesState>) {
   localStore.put(LocalStoreKeys.PREFERENCES, modified)
+  Object.assign(preferences, modified)
 }

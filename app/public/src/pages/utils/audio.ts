@@ -1,6 +1,5 @@
 import GameScene from "../../game/scenes/game-scene"
-import { getPreferences } from "../../preferences"
-import { getGameScene } from "../game"
+import { preferences } from "../../preferences"
 
 export const SOUNDS = {
   BUTTON_CLICK: "buttonclick.mp3",
@@ -49,7 +48,8 @@ setupSounds()
 
 export function playSound(key: Soundkey) {
   if (AUDIO_ELEMENTS[key]) {
-    AUDIO_ELEMENTS[key]!.volume = getPreferences().sfxVolume / 100
+    console.log("volume", preferences.sfxVolume / 100)
+    AUDIO_ELEMENTS[key]!.volume = preferences.sfxVolume / 100
     AUDIO_ELEMENTS[key]!.play()
   }
 }
@@ -60,6 +60,6 @@ export function playMusic(scene: GameScene, name: string) {
   scene.music = scene.sound.add("music_" + name, {
     loop: true
   }) as Phaser.Sound.WebAudioSound
-  const musicVolume = getPreferences().musicVolume / 100
+  const musicVolume = preferences.musicVolume / 100
   scene.music.play({ volume: musicVolume, loop: true })
 }

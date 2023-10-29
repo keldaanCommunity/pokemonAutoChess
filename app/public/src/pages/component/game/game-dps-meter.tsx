@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
 import { useAppSelector } from "../../../hooks"
 import { getAvatarSrc } from "../../../utils"
-import { getPreferences, savePreferences } from "../../../preferences"
+import { preferences, savePreferences } from "../../../preferences"
 import { useTranslation } from "react-i18next"
 import GamePlayerDpsMeter from "./game-player-dps-meter"
 import GamePlayerHpsMeter from "./game-player-hps-meter"
@@ -33,7 +33,7 @@ export default function GameDpsMeter() {
 
   const avatar = useAppSelector((state) => state.game.currentPlayerAvatar)
   const name = useAppSelector((state) => state.game.currentPlayerName)
-  const [isOpen, setOpen] = useState(getPreferences().showDpsMeter)
+  const [isOpen, setOpen] = useState(preferences.showDpsMeter)
 
   const isPVE = useAppSelector((state) => state.game.stageLevel in PVEStages)
 
