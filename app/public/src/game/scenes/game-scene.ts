@@ -262,8 +262,10 @@ export default class GameScene extends Scene {
       this.pokemonDragged = null
     } else if (this.itemDragged) {
       this.itemDragged.closeDetail()
-      this.itemDragged.x = this.itemDragged.input!.dragStartX
-      this.itemDragged.y = this.itemDragged.input!.dragStartY
+      if (this.itemDragged.input) {
+        this.itemDragged.x = this.itemDragged.input.dragStartX
+        this.itemDragged.y = this.itemDragged.input.dragStartY
+      }
       this.input.emit("dragend", this.input.pointer1, this.itemDragged, false)
       this.itemDragged = null
     }
