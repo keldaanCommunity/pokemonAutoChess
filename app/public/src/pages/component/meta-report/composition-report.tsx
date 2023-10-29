@@ -2,10 +2,14 @@ import { t } from "i18next"
 import React, { useEffect, useMemo, useState } from "react"
 import { fetchMeta, IMeta } from "../../../../../models/mongo-models/meta"
 import TeamComp from "./team-comp"
+import { MetaChart } from "./meta-chart"
 
 export function CompositionReport() {
   const [loading, setLoading] = useState<boolean>(true)
   const [meta, setMeta] = useState<IMeta[]>([])
+  const [selectedComposition, setSelectedComposition] = useState<
+    string | undefined
+  >()
   useEffect(() => {
     fetchMeta().then((res) => {
       setLoading(false)
@@ -20,6 +24,15 @@ export function CompositionReport() {
       return (a[rankingBy] - b[rankingBy]) * order
     })
   }, [meta, rankingBy])
+
+  useEffect(() => {
+    if (selectedComposition) {
+      const element = document.getElementById(selectedComposition)
+      if (element) {
+        element.scrollIntoView()
+      }
+    }
+  }, [selectedComposition])
 
   return (
     <div id="meta-report-compo">
@@ -42,13 +55,28 @@ export function CompositionReport() {
         </select>
       </header>
 
-      <div style={{ height: "calc(90vh - 8em)", overflowY: "scroll" }}>
+      <div
+        style={{
+          height: "calc(90vh - 8em)",
+          display: "flex",
+          justifyContent: "space-between",
+          gap: "1em"
+        }}
+      >
         {sortedMeta.length === 0 && (
           <p>{loading ? t("loading") : t("no_data_available")}</p>
         )}
-        {sortedMeta.map((team, i) => {
-          return <TeamComp team={team} rank={i + 1} key={team.cluster_id} />
-        })}
+        {meta.length > 0 && (
+          <MetaChart
+            meta={meta}
+            setSelectedComposition={setSelectedComposition}
+          />
+        )}
+        <div style={{ width: "50%", overflowY: "scroll" }}>
+          {sortedMeta.map((team, i) => {
+            return <TeamComp team={team} rank={i + 1} key={team.cluster_id} />
+          })}
+        </div>
       </div>
     </div>
   )

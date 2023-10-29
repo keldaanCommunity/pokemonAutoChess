@@ -18,13 +18,6 @@ import {
 import admin from "firebase-admin"
 import { WebhookClient } from "discord.js"
 import { BotV2, IBot } from "../models/mongo-models/bot-v2"
-import Meta, { IMeta } from "../models/mongo-models/meta"
-import ItemsStatistic, {
-  IItemsStatistic
-} from "../models/mongo-models/items-statistic"
-import PokemonsStatistic, {
-  IPokemonsStatistic
-} from "../models/mongo-models/pokemons-statistic"
 import { PastebinAPI } from "pastebin-ts/dist/api"
 import { Emotion, Transfer, Title, Role } from "../types"
 import { nanoid } from "nanoid"

@@ -37,7 +37,7 @@
   margin-bottom: 0.5em;
   color: white;
   display: grid;
-  grid-template-columns: 2ch 360px 8ch 6ch 8ch 8ch 6ch 1fr;
+  grid-template-columns: 1ch 12ch 5ch 6ch 8ch 5ch 1ch 1fr;
   justify-content: space-between;
   align-items: center;
   gap: 1em;
@@ -45,7 +45,7 @@
 }
 
 #meta-report .team-comp {
-  grid-template-columns: 2ch 360px 8ch 6ch 8ch 8ch 6ch 1fr;
+  grid-template-columns: 1ch 12ch 5ch 6ch 8ch 5ch 1ch 1fr;
 }
 
 #meta-report .team-comp label {
