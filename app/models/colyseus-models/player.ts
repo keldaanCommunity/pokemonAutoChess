@@ -20,6 +20,7 @@ import { Pkm, PkmProposition } from "../../types/enum/Pokemon"
 import { Weather } from "../../types/enum/Weather"
 import PokemonFactory from "../pokemon-factory"
 import { Effects } from "../effects"
+import { values } from "../../utils/schemas"
 
 export default class Player extends Schema implements IPlayer {
   @type("string") id: string
@@ -139,7 +140,7 @@ export default class Player extends Schema implements IPlayer {
     return p
   }
 
-  transformPokemon(pokemon: Pokemon, newEntry: Pkm) {
+  transformPokemon(pokemon: Pokemon, newEntry: Pkm): Pokemon {
     const newPokemon = PokemonFactory.createPokemonFromName(newEntry, this)
     pokemon.items.forEach((item) => {
       newPokemon.items.add(item)
@@ -150,5 +151,38 @@ export default class Player extends Schema implements IPlayer {
     this.board.set(newPokemon.id, newPokemon)
     this.synergies.update(this.board)
     this.effects.update(this.synergies, this.board)
+    return newPokemon
+  }
+
+  getFirstAvailablePositionOnBoard() {
+    for (let x = 0; x < 8; x++) {
+      for (let y = 1; y < 4; y++) {
+        if (this.isPositionEmpty(x, y)) {
+          return [x, y]
+        }
+      }
+    }
+  }
+
+  isPositionEmpty(x: number, y: number): boolean {
+    return values(this.board).some(p => p.positionX === x && p.positionY === 0) === false
+  }
+
+  getFreeSpaceOnBench(): number {
+    let numberOfFreeSpace = 0
+    for (let i = 0; i < 8; i++) {
+      if (this.isPositionEmpty(i, 0)) {
+        numberOfFreeSpace++
+      }
+    }
+    return numberOfFreeSpace
+  }
+
+  getFirstAvailablePositionInBench() {
+    for (let i = 0; i < 8; i++) {
+      if (this.isPositionEmpty(i, 0)) {
+        return i
+      }
+    }
   }
 }

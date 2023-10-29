@@ -267,7 +267,6 @@ export const UltraShop = new Array<Pkm>(
   Pkm.BUNEARY,
   Pkm.ELECTRIKE,
   Pkm.SHUPPET,
-  Pkm.NINCADA,
   Pkm.HAPPINY,
   Pkm.SOLOSIS
 )
@@ -383,13 +382,6 @@ export const HatchList = new Array<Pkm>(
 
 export const NB_MYTHICAL_PROPOSITIONS = 6
 export const SHOP_SIZE = 6
-
-export function getEvolutionCountNeeded(pkm: Pkm): number {
-  if (pkm === Pkm.MAGIKARP) {
-    return 8
-  }
-  return 3
-}
 
 export const FishRarityProbability: {
   [waterLevel: number]: { [key in Rarity]?: number }

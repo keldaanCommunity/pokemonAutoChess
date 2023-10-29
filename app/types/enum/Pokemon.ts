@@ -374,7 +374,7 @@ export enum Pkm {
   RAPIDASH = "RAPIDASH",
   NINCADA = "NINCADA",
   NINJASK = "NINJASK",
-  SHEDNINJA = "SHEDNINJA",
+  SHEDINJA = "SHEDINJA",
   NOIBAT = "NOIBAT",
   NOIVERN = "NOIVERN",
   PUMPKABOO = "PUMPKABOO",
@@ -1022,7 +1022,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.GOURGEIST]: "0711",
   [Pkm.NINCADA]: "0290",
   [Pkm.NINJASK]: "0291",
-  [Pkm.SHEDNINJA]: "0292",
+  [Pkm.SHEDINJA]: "0292",
   [Pkm.PONYTA]: "0077",
   [Pkm.RAPIDASH]: "0078",
   [Pkm.CACNEA]: "0331",
@@ -1640,7 +1640,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.DEFAULT]: Pkm.DEFAULT,
   [Pkm.NINCADA]: Pkm.NINCADA,
   [Pkm.NINJASK]: Pkm.NINCADA,
-  [Pkm.SHEDNINJA]: Pkm.NINCADA,
+  [Pkm.SHEDINJA]: Pkm.NINCADA,
   [Pkm.PONYTA]: Pkm.PONYTA,
   [Pkm.RAPIDASH]: Pkm.PONYTA,
   [Pkm.GENESECT]: Pkm.GENESECT,
@@ -3910,7 +3910,7 @@ export const AnimationConfig: {
     ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
-  [Pkm.SHEDNINJA]: {
+  [Pkm.SHEDINJA]: {
     attack: AnimationType.Scratch,
     ability: AnimationType.Charge,
     emote: AnimationType.Shoot

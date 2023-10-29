@@ -110,9 +110,7 @@ export class HiddenPowerDStrategy extends HiddenPowerStrategy {
     super.process(unown, state, board, target, crit)
     const player = unown.player
     if (player) {
-      const x = unown.simulation.room.getFirstAvailablePositionInBench(
-        player.id
-      )
+      const x = player.getFirstAvailablePositionInBench()
       if (x !== undefined) {
         const ditto = PokemonFactory.createPokemonFromName(Pkm.DITTO, player)
         ditto.positionX = x
@@ -135,9 +133,7 @@ export class HiddenPowerEStrategy extends HiddenPowerStrategy {
     const egg = PokemonFactory.createRandomEgg()
     const player = unown.player
     if (player) {
-      const x = unown.simulation.room.getFirstAvailablePositionInBench(
-        player.id
-      )
+      const x = player.getFirstAvailablePositionInBench()
       if (x !== undefined) {
         egg.positionX = x
         egg.positionY = 0
@@ -168,17 +164,17 @@ export class HiddenPowerFStrategy extends HiddenPowerStrategy {
           fishingLevel
         )
         const fish = PokemonFactory.createPokemonFromName(pkm, player)
-        const x = unown.simulation.room.getFirstAvailablePositionInBench(
-          player.id
-        )
-        fish.positionX = x !== undefined ? x : -1
-        fish.positionY = 0
-        fish.action = PokemonActionState.FISH
-        player.board.set(fish.id, fish)
-        unown.simulation.room.updateEvolution(player.id)
-        unown.simulation.room.clock.setTimeout(() => {
-          fish.action = PokemonActionState.IDLE
-        }, 1000)
+        const x = player.getFirstAvailablePositionInBench()
+        if(x !== undefined){
+          fish.positionX = x
+          fish.positionY = 0
+          fish.action = PokemonActionState.FISH
+          player.board.set(fish.id, fish)
+          unown.simulation.room.checkEvolutionsAfterPokemonAcquired(player.id)
+          unown.simulation.room.clock.setTimeout(() => {
+            fish.action = PokemonActionState.IDLE
+          }, 1000)
+        }
       }
     }
   }
@@ -595,9 +591,7 @@ export class HiddenPowerWStrategy extends HiddenPowerStrategy {
     super.process(unown, state, board, target, crit)
     const player = unown.player
     if (player) {
-      const x = unown.simulation.room.getFirstAvailablePositionInBench(
-        player.id
-      )
+      const x = player.getFirstAvailablePositionInBench()
       if (x !== undefined) {
         const synergiesSortedByLevel = Array.from(player.synergies).sort(
           ([s1, v1], [s2, v2]) => v2 - v1
@@ -624,7 +618,7 @@ export class HiddenPowerWStrategy extends HiddenPowerStrategy {
         pokemon.positionX = x
         pokemon.positionY = 0
         player.board.set(pokemon.id, pokemon)
-        unown.simulation.room.updateEvolution(player.id)
+        unown.simulation.room.checkEvolutionsAfterPokemonAcquired(player.id)
       }
     }
   }
@@ -715,9 +709,7 @@ export class HiddenPowerQMStrategy extends HiddenPowerStrategy {
       const nbUnownsObtained = 4
       for (let i = 0; i < nbUnownsObtained; i++) {
         const pkm = pickRandomIn(candidates)
-        const x = unown.simulation.room.getFirstAvailablePositionInBench(
-          player.id
-        )
+        const x = player.getFirstAvailablePositionInBench()
         if (x !== undefined) {
           const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
           pokemon.positionX = x
