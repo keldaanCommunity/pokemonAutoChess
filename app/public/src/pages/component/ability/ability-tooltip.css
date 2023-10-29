@@ -43,6 +43,7 @@
 
 .stat-label {
   color: rgb(171, 171, 171);
+  white-space: normal;
 }
 
 .status-label {

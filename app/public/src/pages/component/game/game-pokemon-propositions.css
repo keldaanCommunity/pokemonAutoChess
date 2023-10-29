@@ -3,6 +3,12 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.game-pokemons-proposition .active {
+  cursor: var(--cursor-hover);
+  pointer-events: initial;
 }
 
 .game-pokemons-proposition > .nes-container > h2,
