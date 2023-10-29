@@ -181,15 +181,19 @@ app.get("/types-trigger", (req, res) => {
 })
 
 app.get("/meta", async (req, res) => {
-  res.send(await Meta.find({}, [
-    "cluster_id",
-    "count",
-    "ratio",
-    "winrate",
-    "mean_rank",
-    "types",
-    "pokemons"
-  ]))
+  res.send(
+    await Meta.find({}, [
+      "cluster_id",
+      "count",
+      "ratio",
+      "winrate",
+      "mean_rank",
+      "types",
+      "pokemons",
+      "x",
+      "y"
+    ])
+  )
 })
 
 app.get("/meta/items", async (req, res) => {
