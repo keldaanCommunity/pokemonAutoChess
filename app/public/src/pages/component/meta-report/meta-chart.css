@@ -1,0 +1,4 @@
+.meta-svg-icon:hover {
+  filter: invert(0.7);
+  cursor: var(--cursor-hover);
+}

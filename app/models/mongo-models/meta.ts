@@ -19,6 +19,8 @@ export interface IMeta {
   types: { [key in Synergy]?: number }
   pokemons: { [key in Pkm]?: number }
   teams: ITeam[]
+  x: number
+  y: number
 }
 
 const teamSchema = new Schema({
@@ -61,5 +63,5 @@ const metaSchema = new Schema({
 export default model<IMeta>("Meta", metaSchema, "meta")
 
 export async function fetchMeta(): Promise<IMeta[]> {
-  return fetch("/meta").then(res => res.json())
+  return fetch("/meta").then((res) => res.json())
 }

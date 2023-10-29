@@ -14,7 +14,7 @@ function capitalizeFirstLetter(string: string) {
   }
 }
 
-function rankType(
+export function rankType(
   a: Synergy,
   b: Synergy,
   types: { [key in Synergy]?: number }
@@ -48,10 +48,10 @@ export default function TeamComp(props: { team: IMeta; rank: number }) {
     : new Array<Pkm>()
 
   return (
-    <div className="team-comp nes-container">
+    <div className="team-comp nes-container" id={props.team.cluster_id}>
       <span className="rank">{props.rank}</span>
-      <div style={{ display: "flex" }}>
-        {sortedTypes.map((type) => (
+      <div style={{ display: "flex", width: "fit-content" }}>
+        {sortedTypes.slice(0, 3).map((type) => (
           <div
             style={{
               display: "flex",
@@ -65,12 +65,6 @@ export default function TeamComp(props: { team: IMeta; rank: number }) {
           </div>
         ))}
       </div>
-      <span>
-        {capitalizeFirstLetter(sortedTypes[0])}{" "}
-        {props.team.types[sortedTypes[0]]} /{" "}
-        {capitalizeFirstLetter(sortedTypes[1])}{" "}
-        {props.team.types[sortedTypes[1]]}
-      </span>
       <span>
         <label>{t("average_place")}:</label>
         {props.team.mean_rank.toFixed(2)}

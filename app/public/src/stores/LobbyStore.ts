@@ -14,11 +14,8 @@ import {
   IPreparationMetadata,
   ISuggestionUser
 } from "../../../types"
-import { IMeta } from "../../../models/mongo-models/meta"
 import { IBot, IStep } from "../../../models/mongo-models/bot-v2"
-import { IItemsStatistic } from "../../../models/mongo-models/items-statistic"
 import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
-import { IPokemonsStatistic } from "../../../models/mongo-models/pokemons-statistic"
 import { playSound, SOUNDS } from "../pages/utils/audio"
 import { Language } from "../../../types/enum/Language"
 import { MAX_BOTS_STAGE } from "../pages/component/bot-builder/bot-logic"
