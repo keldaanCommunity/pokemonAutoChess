@@ -8609,7 +8609,7 @@ export class Scorbunny extends Pokemon {
   atk = 6
   def = 3
   speDef = 3
-  maxPP = 35
+  maxPP = 50
   range = 1
   skill = Ability.PYRO_BALL
   passive = Passive.HATCH
@@ -8629,7 +8629,7 @@ export class Raboot extends Pokemon {
   atk = 12
   def = 5
   speDef = 5
-  maxPP = 35
+  maxPP = 50
   range = 1
   skill = Ability.PYRO_BALL
   passive = Passive.HATCH
