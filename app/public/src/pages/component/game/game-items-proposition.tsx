@@ -1,14 +1,7 @@
 import React, { useState } from "react"
 import GameItem from "./game-item"
-import CSS from "csstype"
 import { useAppSelector } from "../../../hooks"
-
-const style: CSS.Properties = {
-  position: "absolute",
-  top: "30%",
-  left: "50%",
-  transform: "translateX(-50%)"
-}
+import "./game-items-proposition.css"
 
 export default function GameItemsProposition() {
   const itemsProposition = useAppSelector(
@@ -21,26 +14,19 @@ export default function GameItemsProposition() {
   const [visible, setVisible] = useState(true)
   if (itemsProposition.length > 0 && pokemonsProposition.length === 0) {
     return (
-      <div style={style}>
+      <div className="game-items-proposition">
         <div
-          style={{
-            display: "flex",
-            gap: "1vw",
-            justifyContent: "center",
-            visibility: visible ? "visible" : "hidden",
-            color: "white"
-          }}
+          className="game-items-proposition-list"
+          style={{ visibility: visible ? "visible" : "hidden" }}
         >
           {itemsProposition.map((item, i) => {
             return <GameItem key={i} item={item} />
           })}
         </div>
 
-        <div
-          style={{ display: "flex", justifyContent: "center", margin: "1em" }}
-        >
+        <div className="show-hide-action">
           <button
-            className="bubbly orange"
+            className="bubbly orange active"
             onClick={() => {
               setVisible(!visible)
             }}

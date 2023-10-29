@@ -1,0 +1,25 @@
+.game-items-proposition {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.game-items-proposition .active {
+  cursor: var(--cursor-hover);
+  pointer-events: initial;
+}
+
+.game-items-proposition-list {
+  display: flex;
+  gap: 1vw;
+  justify-content: center;
+  color: white;
+}
+
+.game-items-proposition .show-hide-action {
+  display: flex;
+  justify-content: center;
+  margin: 1em;
+}
