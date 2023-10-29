@@ -45,7 +45,7 @@ export default function GamePokemonsPropositions() {
               const item = itemsProposition[index]
               return (
                 <div
-                  className="nes-container"
+                  className="nes-container active"
                   onClick={() => dispatch(pokemonPropositionClick(proposition))}
                 >
                   {proposition in PkmDuos ? (
@@ -98,7 +98,7 @@ export default function GamePokemonsPropositions() {
 
         <div className="show-hide-action">
           <button
-            className="bubbly orange"
+            className="bubbly orange active"
             onClick={() => {
               setVisible(!visible)
             }}

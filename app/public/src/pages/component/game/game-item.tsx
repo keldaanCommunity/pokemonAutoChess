@@ -31,7 +31,7 @@ export default function GameItem(props: { item: Item }) {
           dispatch(itemClick(props.item))
         }}
         type="button"
-        className="bubbly blue"
+        className="bubbly blue active"
       >
         Pick
       </button>
