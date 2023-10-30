@@ -247,7 +247,8 @@
     "PRISMATIC_LASER": "Prismatic Laser",
     "NATURAL_GIFT": "Natural Gift",
     "NIGHT_SHADE": "Night Shade",
-    "CHARGE_BEAM": "Charge Beam"
+    "CHARGE_BEAM": "Charge Beam",
+    "POPULATION_BOMB": "Population Bomb"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -887,7 +888,10 @@
     "MISMAGIUS": "Mismagius",
     "DODUO": "Doduo",
     "DODRIO": "Dodrio",
-    "XURKITREE": "Xurkitree"
+    "XURKITREE": "Xurkitree",
+    "TANDEMAUS": "Tandemaus",
+    "MAUSHOLD_THREE": "Maushold (3)",
+    "MAUSHOLD_FOUR": "Maushold (4)"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1120,7 +1124,8 @@
     "PRISMATIC_LASER": "The user shoots a prismatic laser in a large straight line, dealing [80,SP] and displacing any enemies it hits.",
     "NATURAL_GIFT": "Heals [30,60,120,SP] HP to the most injured ally and RUNE_PROTECT for [1,2,3] s",
     "NIGHT_SHADE": "Deals [25,33,50,SP=0.5]% of target max HP as TRUE",
-    "CHARGE_BEAM": "Fires a concentrated bundle of electricity that propagate to max 3 adjacent targets, dealing [20,40,80,SP] SPECIAL to each. The remaining electricity increase AP by 20%."
+    "CHARGE_BEAM": "Fires a concentrated bundle of electricity that propagate to max 3 adjacent targets, dealing [20,40,80,SP] SPECIAL to each. The remaining electricity increase AP by 20%.",
+    "POPULATION_BOMB": "Deals [10,SP] times 10 SPECIAL to the target"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1518,7 +1523,8 @@
     "BLOSSOM": "Cherrim switches between its Sunlight forme and Normal forme depending on its exposure to LIGHT",
     "GENESECT": "Genesect is dealing TRUE to targets affected by ARMOR_REDUCTION",
     "SPECIAL_ATTACK": "Basic attacks deal SPECIAL and scale with AP",
-    "NINCADA": "After evolving, get Sheninja as well if you have a free space on your bench"
+    "NINCADA": "After evolving, get Sheninja as well if you have a free space on your bench",
+    "FAMILY": "The pokémon grows with time (turn 15 and turn 20)"
   },
   "stat": {
     "ATK": "Attack",

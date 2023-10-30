@@ -2755,6 +2755,25 @@ export default class BattleManager {
             )
             break
 
+          case Ability.POPULATION_BOMB:
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.POPULATION_BOMB,
+              "0"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.POPULATION_BOMB)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
+
           case Ability.MAGICAL_LEAF:
             coordinates = transformAttackCoordinate(
               positionX,
@@ -4759,7 +4778,7 @@ export default class BattleManager {
             break
 
           case Ability.TEETER_DANCE:
-            ;(this.group.getChildren() as Pokemon[]).forEach((pkmUI) => {
+            (this.group.getChildren() as Pokemon[]).forEach((pkmUI) => {
               coordinates = transformAttackCoordinate(
                 pkmUI.positionX,
                 pkmUI.positionY,

@@ -846,6 +846,16 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.POPULATION_BOMB,
+      frames: this.game.anims.generateFrameNames(Ability.POPULATION_BOMB, {
+        start: 0,
+        end: 10
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.NIGHT_SHADE,
       frames: this.game.anims.generateFrameNames(Ability.NIGHT_SHADE, {
         start: 0,
@@ -2399,7 +2409,7 @@ export default class AnimationManager {
       entity.scene && entity.scene.textures.exists(entity.index)
         ? entity.index
         : "0000"
-    let tint =
+    const tint =
       entity.shiny && !AnimationConfig[entity.name].shinyUnavailable
         ? PokemonTint.SHINY
         : PokemonTint.NORMAL
