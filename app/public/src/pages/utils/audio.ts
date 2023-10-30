@@ -48,7 +48,6 @@ setupSounds()
 
 export function playSound(key: Soundkey) {
   if (AUDIO_ELEMENTS[key]) {
-    console.log("volume", preferences.sfxVolume / 100)
     AUDIO_ELEMENTS[key]!.volume = preferences.sfxVolume / 100
     AUDIO_ELEMENTS[key]!.play()
   }
