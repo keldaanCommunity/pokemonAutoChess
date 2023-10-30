@@ -1,3 +1,7 @@
+# DB MIGRATION ACTIONS REQUIRED
+
+- db-commands/update-pkm: Rename SHEDNINJA to SHENINJA
+
 # New Pokemons:
 
 - Xurkitree
@@ -8,6 +12,7 @@
 - Stun Spore Buff: now inflicts Paralysis and deal damage to all surrounding enemies
 - Bellossom is now tier 4. No changes in stats, only ability damage
 - Spinda: lost Sound & Human synergy, HP ~~200~~ 250, added AP scaling to its passive
+- Nincada is now an additional Epic. Evolve in both Sheninja and Ninjask
 
 # Changes to Synergies
 

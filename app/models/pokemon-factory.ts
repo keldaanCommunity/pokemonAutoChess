@@ -12,7 +12,7 @@ import {
 import { Synergy } from "../types/enum/Synergy"
 import { logger } from "../utils/logger"
 import { pickRandomIn } from "../utils/random"
-import { Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
+import { Egg, Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
 import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
 import { PVEStage } from "./pve-stages"
 
@@ -85,12 +85,11 @@ export default class PokemonFactory {
     return pokemon.rarity
   }
 
-  static createRandomEgg(): Pokemon {
+  static createRandomEgg(): Egg {
     const egg = PokemonFactory.createPokemonFromName(Pkm.EGG)
     egg.action = PokemonActionState.SLEEP
     egg.evolution = pickRandomIn(HatchList)
-    egg.evolutionTimer = EvolutionTime.EGG_HATCH
-    return egg
+    return egg as Egg
   }
 
   static getRandomFossil(board: MapSchema<Pokemon>) {

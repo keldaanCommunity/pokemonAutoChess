@@ -21,17 +21,14 @@ import {
 } from "./commands/game-commands"
 import {
   AdditionalPicksStages,
-  Dungeon,
   DungeonPMDO,
   ExpPlace,
-  getEvolutionCountNeeded,
-  ItemRecipe,
   LegendaryShop,
   PortalCarouselStages,
   RequiredStageLevelForXpElligibility,
   UniqueShop
 } from "../types/Config"
-import { Item, BasicItems } from "../types/enum/Item"
+import { Item } from "../types/enum/Item"
 import PokemonFactory from "../models/pokemon-factory"
 import EloRank from "elo-rank"
 import admin from "firebase-admin"
@@ -56,7 +53,7 @@ import { components } from "../api-v1/openapi"
 import { Title, Role } from "../types"
 import PRECOMPUTED_TYPE_POKEMONS from "../models/precomputed/type-pokemons.json"
 import BannedUser from "../models/mongo-models/banned-user"
-import { coinflip, shuffleArray } from "../utils/random"
+import { shuffleArray } from "../utils/random"
 import { Rarity } from "../types/enum/Game"
 import { Weather } from "../types/enum/Weather"
 import { MiniGame } from "../core/matter/mini-game"
@@ -66,6 +63,7 @@ import { Passive } from "../types/enum/Passive"
 import { getAvatarString } from "../public/src/utils"
 import { keys, values } from "../utils/schemas"
 import { removeInArray } from "../utils/array"
+import { CountEvolutionRule, ItemEvolutionRule } from "../core/evolution-rules"
 
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>
@@ -747,47 +745,6 @@ export default class GameRoom extends Room<GameState> {
     }
   }
 
-  isPositionEmpty(playerId: string, x: number, y: number): boolean {
-    let empty = true
-    const player = this.state.players.get(playerId)
-    if (player) {
-      player.board.forEach((pokemon, key) => {
-        if (pokemon.positionX == x && pokemon.positionY == y) {
-          empty = false
-        }
-      })
-    }
-    return empty
-  }
-
-  getFreeSpaceOnBench(playerId: string): number {
-    let numberOfFreeSpace = 0
-    for (let i = 0; i < 8; i++) {
-      if (this.isPositionEmpty(playerId, i, 0)) {
-        numberOfFreeSpace++
-      }
-    }
-    return numberOfFreeSpace
-  }
-
-  getFirstAvailablePositionInBench(playerId: string) {
-    for (let i = 0; i < 8; i++) {
-      if (this.isPositionEmpty(playerId, i, 0)) {
-        return i
-      }
-    }
-  }
-
-  getFirstAvailablePositionInTeam(playerId: string) {
-    for (let x = 0; x < 8; x++) {
-      for (let y = 1; y < 4; y++) {
-        if (this.isPositionEmpty(playerId, x, y)) {
-          return [x, y]
-        }
-      }
-    }
-  }
-
   checkDynamicSynergies(player: Player, pokemon: Pokemon) {
     const n =
       pokemon.passive === Passive.PROTEAN3
@@ -815,384 +772,40 @@ export default class GameRoom extends Room<GameState> {
     player.effects.update(player.synergies, player.board)
   }
 
-  updateEvolution(playerId: string) {
-    let evolve = false
-    const itemsToAdd = new Array<Item>()
-    const basicItemsToAdd = new Array<Item>()
+  checkEvolutionsAfterPokemonAcquired(playerId: string) {
     const player = this.state.players.get(playerId)
     if (!player) return false
 
-    player.board.forEach((pokemon, key) => {
-      const count = values(player.board).filter(
-        (pkm) => pkm.index === pokemon.index
-      ).length
-
-      let pokemonEvolutionName = pokemon.evolution
-
+    player.board.forEach((pokemon) => {
       if (
-        pokemonEvolutionName !== Pkm.DEFAULT &&
-        pokemon.name !== Pkm.EGG &&
-        pokemon.rarity !== Rarity.HATCH &&
-        count >= getEvolutionCountNeeded(pokemon.name)
+        pokemon.evolution !== Pkm.DEFAULT &&
+        pokemon.evolutionRule instanceof CountEvolutionRule
       ) {
-        let coord: { x: number; y: number } | undefined
-
-        if (pokemon.name === Pkm.POLIWHIRL) {
-          if (
-            Math.max(
-              ...values(player.board)
-                .filter((pkm) => pkm.index === pokemon.index)
-                .map((v) => v.positionY)
-            ) === 3
-          ) {
-            pokemonEvolutionName = Pkm.POLIWRATH
-          } else {
-            pokemonEvolutionName = Pkm.POLITOED
-          }
-        }
-
-        if (pokemon.name === Pkm.CLAMPERL) {
-          if (
-            Math.max(
-              ...values(player.board)
-                .filter((pkm) => pkm.index === pokemon.index)
-                .map((v) => v.positionY)
-            ) === 3
-          ) {
-            pokemonEvolutionName = Pkm.HUNTAIL
-          } else {
-            pokemonEvolutionName = Pkm.GOREBYSS
-          }
-        }
-
-        if (pokemon.name === Pkm.WURMPLE) {
-          const lastWeather = player.getLastBattle()?.weather ?? Weather.NEUTRAL
-          let existingSecondTier: Pkm | null = null
-          player.board.forEach((pkm) => {
-            if (pkm.name === Pkm.CASCOON) existingSecondTier = Pkm.CASCOON
-            else if (pkm.name === Pkm.SILCOON) existingSecondTier = Pkm.SILCOON
-          })
-          if (existingSecondTier !== null) {
-            pokemonEvolutionName = existingSecondTier
-          } else if (
-            [
-              Weather.NIGHT,
-              Weather.STORM,
-              Weather.SANDSTORM,
-              Weather.SNOW
-            ].includes(lastWeather)
-          ) {
-            pokemonEvolutionName = Pkm.CASCOON
-          } else if (
-            [Weather.SUN, Weather.RAIN, Weather.MISTY, Weather.WINDY].includes(
-              lastWeather
-            )
-          ) {
-            pokemonEvolutionName = Pkm.SILCOON
-          } else {
-            pokemonEvolutionName = coinflip() ? Pkm.CASCOON : Pkm.SILCOON
-          }
-        }
-
-        if (pokemon.name === Pkm.MAGIKARP) {
-          player.titles.add(Title.FISHERMAN)
-        }
-
-        player.board.forEach((pkm, id) => {
-          if (pkm.index == pokemon.index) {
-            // logger.debug(pkm.name, pokemon.name)
-            if (coord) {
-              if (pkm.positionY > coord.y) {
-                coord.x = pkm.positionX
-                coord.y = pkm.positionY
-                // logger.debug('better coord', coord)
-              }
-            } else {
-              if (pkm.positionX !== -1) {
-                coord = { x: pkm.positionX, y: pkm.positionY }
-              }
-
-              // logger.debug('first coord', coord)
-            }
-
-            pkm.items.forEach((el) => {
-              if (BasicItems.includes(el)) {
-                basicItemsToAdd.push(el)
-              } else {
-                itemsToAdd.push(el)
-              }
-            })
-            player.board.delete(id)
-          }
-        })
-        const pokemonEvolved = PokemonFactory.createPokemonFromName(
-          pokemonEvolutionName,
-          player
-        )
-        for (let i = 0; i < 3; i++) {
-          const itemToAdd = itemsToAdd.pop()
-          if (itemToAdd) {
-            if (pokemonEvolved.items.has(itemToAdd)) {
-              player.items.add(itemToAdd)
-            } else {
-              pokemonEvolved.items.add(itemToAdd)
-            }
-          }
-        }
-        itemsToAdd.forEach((item) => {
-          player.items.add(item)
-        })
-        basicItemsToAdd.forEach((item) => {
-          player.items.add(item)
-        })
-        if (coord) {
-          // logger.debug(coord, pokemonEvolved.name)
-          pokemonEvolved.positionX = coord.x
-          pokemonEvolved.positionY = coord.y
-          player.board.set(pokemonEvolved.id, pokemonEvolved)
-          evolve = true
-          this.updateItemEvolution(playerId, pokemonEvolved)
-        } else {
-          logger.error("no coordinate found for new evolution")
+        const pokemonEvolved = pokemon.evolutionRule.tryEvolve(pokemon, player)
+        if (pokemonEvolved) {
+          // check item evolution rule after count evolution (example: Clefairy)
+          this.checkEvolutionsAfterItemAcquired(playerId, pokemonEvolved)
         }
       }
     })
 
-    if (evolve) {
-      player.synergies.update(player.board)
-      player.effects.update(player.synergies, player.board)
-    }
     player.boardSize = this.getTeamSize(player.board)
-
-    return evolve
   }
 
-  updateItemEvolution(playerId: string, pokemon: Pokemon) {
+  checkEvolutionsAfterItemAcquired(playerId: string, pokemon: Pokemon) {
     const player = this.state.players.get(playerId)
     if (!player) return false
 
-    pokemon.items.forEach((item) => {
-      let newPokemon: Pokemon | undefined = undefined
-      const equipAfterTransform = true
-
-      switch (pokemon.name) {
-        case Pkm.EEVEE:
-          switch (item) {
-            case Item.WATER_STONE:
-              newPokemon = PokemonFactory.transformPokemon(
-                pokemon,
-                Pkm.VAPOREON,
-                player
-              )
-              break
-            case Item.FIRE_STONE:
-              newPokemon = PokemonFactory.transformPokemon(
-                pokemon,
-                Pkm.FLAREON,
-                player
-              )
-              break
-            case Item.THUNDER_STONE:
-              newPokemon = PokemonFactory.transformPokemon(
-                pokemon,
-                Pkm.JOLTEON,
-                player
-              )
-              break
-            case Item.DUSK_STONE:
-              newPokemon = PokemonFactory.transformPokemon(
-                pokemon,
-                Pkm.UMBREON,
-                player
-              )
-              break
-            case Item.MOON_STONE:
-              newPokemon = PokemonFactory.transformPokemon(
-                pokemon,
-                Pkm.SYLVEON,
-                player
-              )
-              break
-            case Item.LEAF_STONE:
-              newPokemon = PokemonFactory.transformPokemon(
-                pokemon,
-                Pkm.LEAFEON,
-                player
-              )
-              break
-            case Item.DAWN_STONE:
-              newPokemon = PokemonFactory.transformPokemon(
-                pokemon,
-                Pkm.ESPEON,
-                player
-              )
-              break
-            case Item.ICE_STONE:
-              newPokemon = PokemonFactory.transformPokemon(
-                pokemon,
-                Pkm.GLACEON,
-                player
-              )
-              break
-          }
-          break
-
-        case Pkm.PHIONE:
-          if (item === Item.AQUA_EGG) {
-            newPokemon = PokemonFactory.transformPokemon(
-              pokemon,
-              Pkm.MANAPHY,
-              player
-            )
-          }
-          break
-
-        case Pkm.GROUDON:
-          if (item === Item.RED_ORB) {
-            newPokemon = PokemonFactory.transformPokemon(
-              pokemon,
-              Pkm.PRIMAL_GROUDON,
-              player
-            )
-          }
-          break
-        case Pkm.KYOGRE:
-          if (item === Item.BLUE_ORB) {
-            newPokemon = PokemonFactory.transformPokemon(
-              pokemon,
-              Pkm.PRIMAL_KYOGRE,
-              player
-            )
-          }
-          break
-        case Pkm.RAYQUAZA:
-          if (item === Item.DELTA_ORB) {
-            newPokemon = PokemonFactory.transformPokemon(
-              pokemon,
-              Pkm.MEGA_RAYQUAZA,
-              player
-            )
-          }
-          break
-        case Pkm.SHAYMIN:
-          if (item === Item.GRACIDEA_FLOWER) {
-            newPokemon = PokemonFactory.transformPokemon(
-              pokemon,
-              Pkm.SHAYMIN_SKY,
-              player
-            )
-          }
-          break
-        case Pkm.TYROGUE: {
-          let evol = Pkm.HITMONTOP
-          if (
-            item === Item.CHARCOAL ||
-            item === Item.MAGNET ||
-            (item in ItemRecipe && ItemRecipe[item]!.includes(Item.CHARCOAL)) ||
-            (item in ItemRecipe && ItemRecipe[item]!.includes(Item.MAGNET))
-          ) {
-            evol = Pkm.HITMONLEE
-          }
-          if (
-            item === Item.HEART_SCALE ||
-            item === Item.NEVER_MELT_ICE ||
-            (item in ItemRecipe &&
-              ItemRecipe[item]!.includes(Item.HEART_SCALE)) ||
-            (item in ItemRecipe &&
-              ItemRecipe[item]!.includes(Item.NEVER_MELT_ICE))
-          ) {
-            evol = Pkm.HITMONCHAN
-          }
-          newPokemon = PokemonFactory.transformPokemon(pokemon, evol, player)
-          break
-        }
-        case Pkm.GLIGAR:
-          if (item === Item.RAZOR_FANG) {
-            newPokemon = PokemonFactory.transformPokemon(
-              pokemon,
-              Pkm.GLISCOR,
-              player
-            )
-          }
-          break
-        case Pkm.CHINGLING:
-          if (item === Item.STAR_DUST) {
-            newPokemon = PokemonFactory.transformPokemon(
-              pokemon,
-              Pkm.CHIMECHO,
-              player
-            )
-          }
-          break
-        case Pkm.RAICHU:
-          if (item === Item.DAWN_STONE) {
-            newPokemon = PokemonFactory.transformPokemon(
-              pokemon,
-              Pkm.ALOLAN_RAICHU,
-              player
-            )
-          }
-          break
-        case Pkm.MAROWAK:
-          if (item === Item.FIRE_STONE) {
-            newPokemon = PokemonFactory.transformPokemon(
-              pokemon,
-              Pkm.ALOLAN_MAROWAK,
-              player
-            )
-          }
-          break
-        case Pkm.PORYGON_2:
-          if (item === Item.UPGRADE) {
-            newPokemon = PokemonFactory.transformPokemon(
-              pokemon,
-              Pkm.PORYGON_Z,
-              player
-            )
-          }
-          break
-        case Pkm.SLOWBRO:
-          if (item === Item.ROCKY_HELMET) {
-            newPokemon = PokemonFactory.transformPokemon(
-              pokemon,
-              Pkm.SLOWKING,
-              player
-            )
-          }
-          break
-        case Pkm.WEEPINBELL:
-          if (item === Item.LEAF_STONE) {
-            newPokemon = PokemonFactory.transformPokemon(
-              pokemon,
-              Pkm.VICTREEBEL,
-              player
-            )
-          }
-          break
-        case Pkm.CLEFAIRY:
-          if (item === Item.MOON_STONE) {
-            newPokemon = PokemonFactory.transformPokemon(
-              pokemon,
-              Pkm.CLEFABLE,
-              player
-            )
-          }
-          break
+    if (
+      pokemon.evolutionRule &&
+      pokemon.evolutionRule instanceof ItemEvolutionRule
+    ) {
+      const pokemonEvolved = pokemon.evolutionRule.tryEvolve(pokemon, player)
+      if (pokemonEvolved) {
+        // check additional item evolution rules. Not used yet in the game but we never know
+        this.checkEvolutionsAfterItemAcquired(playerId, pokemonEvolved)
       }
-
-      if (newPokemon) {
-        // delete the extra pokemons
-        player.board.delete(pokemon.id)
-        player.board.set(newPokemon.id, newPokemon)
-        player.synergies.update(player.board)
-        player.effects.update(player.synergies, player.board)
-        player.boardSize = this.getTeamSize(player.board)
-        if (equipAfterTransform) {
-          newPokemon.items.add(item)
-        }
-        player.items.delete(item)
-      }
-    })
+    }
   }
 
   getNumberOfPlayersAlive(players: MapSchema<Player>) {
@@ -1203,55 +816,6 @@ export default class GameRoom extends Room<GameState> {
       }
     })
     return numberOfPlayersAlive
-  }
-
-  getBenchSize(board: MapSchema<Pokemon>) {
-    let benchSize = 0
-
-    board.forEach((pokemon, key) => {
-      if (pokemon.isOnBench) {
-        benchSize++
-      }
-    })
-
-    return benchSize
-  }
-
-  getBenchSizeWithoutNeutral(board: MapSchema<Pokemon>) {
-    let benchSize = 0
-
-    board.forEach((pokemon, key) => {
-      if (pokemon.isOnBench && pokemon.canBePlaced) {
-        benchSize++
-      }
-    })
-
-    return benchSize
-  }
-
-  getPossibleEvolution(board: MapSchema<Pokemon>, name: Pkm) {
-    let count = 0
-
-    board.forEach((pokemon, key) => {
-      if (pokemon.name == name && pokemon.evolution != Pkm.DEFAULT) {
-        count++
-      }
-    })
-    return count >= getEvolutionCountNeeded(name) - 1
-  }
-
-  getFirstPlaceablePokemonOnBench(
-    board: MapSchema<Pokemon>
-  ): Pokemon | undefined {
-    let pkm: Pokemon | undefined = undefined
-    let found = false
-    board.forEach((pokemon, key) => {
-      if (pokemon.isOnBench && pokemon.canBePlaced && !found) {
-        found = true
-        pkm = pokemon
-      }
-    })
-    return pkm
   }
 
   getTeamSize(board: MapSchema<Pokemon>) {
@@ -1322,7 +886,7 @@ export default class GameRoom extends Room<GameState> {
       pkm in PkmDuos ? PkmDuos[pkm] : [pkm]
     ).map((p) => PokemonFactory.createPokemonFromName(p, player))
 
-    const freeSpace = this.getFreeSpaceOnBench(playerId)
+    const freeSpace = player.getFreeSpaceOnBench()
     if (freeSpace < pokemonsObtained.length && !bypassLackOfSpace) return // prevent picking if not enough space on bench
 
     // at this point, the player is allowed to pick a proposition
@@ -1340,7 +904,7 @@ export default class GameRoom extends Room<GameState> {
     }
 
     pokemonsObtained.forEach((pokemon) => {
-      const freeCellX = this.getFirstAvailablePositionInBench(player.id)
+      const freeCellX = player.getFirstAvailablePositionInBench()
       if (freeCellX !== undefined) {
         pokemon.positionX = freeCellX
         pokemon.positionY = 0

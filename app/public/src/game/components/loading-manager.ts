@@ -46,7 +46,6 @@ export default class LoadingManager {
     })
 
     if (scene instanceof GameScene && scene.tilemap) {
-      console.log("music_" + scene.dungeonMusic)
       scene.load.audio("music_" + scene.dungeonMusic, [
         `https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChessMusic/main/music/${scene.dungeonMusic}.mp3`
       ])

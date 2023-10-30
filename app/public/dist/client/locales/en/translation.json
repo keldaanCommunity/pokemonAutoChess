@@ -229,7 +229,7 @@
     "ATTRACT": "Attract",
     "WATER_PULSE": "Water Pulse",
     "PLAY_ROUGH": "Play Rough",
-    "AERIAL_ACE": "Aerical Ace",
+    "AERIAL_ACE": "Aerial Ace",
     "PARABOLIC_CHARGE": "Parabolic Charge",
     "SUPER_FANG": "Super Fang",
     "TEETER_DANCE": "Teeter Dance",
@@ -623,7 +623,7 @@
     "RAPIDASH": "Rapidash",
     "NINCADA": "Nincada",
     "NINJASK": "Ninjask",
-    "SHEDNINJA": "Shedinja",
+    "SHEDINJA": "Shedinja",
     "NOIBAT": "Noibat",
     "NOIVERN": "Noivern",
     "PUMPKABOO": "Pumpkaboo",
@@ -1517,7 +1517,8 @@
     "PRISM": "Necrozma switches between its Ultra forme and Normal forme depending on its exposure to LIGHT",
     "BLOSSOM": "Cherrim switches between its Sunlight forme and Normal forme depending on its exposure to LIGHT",
     "GENESECT": "Genesect is dealing TRUE to targets affected by ARMOR_REDUCTION",
-    "SPECIAL_ATTACK": "Basic attacks deal SPECIAL and scale with AP"
+    "SPECIAL_ATTACK": "Basic attacks deal SPECIAL and scale with AP",
+    "NINCADA": "After evolving, get Sheninja as well if you have a free space on your bench"
   },
   "stat": {
     "ATK": "Attack",

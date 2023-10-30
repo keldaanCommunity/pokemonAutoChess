@@ -37,6 +37,7 @@ import {
 import { chance } from "../utils/random"
 import { distanceC } from "../utils/distance"
 import { AbilityStrategy } from "./abilities/ability-strategy"
+import Player from "../models/colyseus-models/player"
 
 export default class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
@@ -182,7 +183,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     return !this.status.resurecting
   }
 
-  get player(): IPlayer | undefined {
+  get player(): Player | undefined {
     return this.team === Team.BLUE_TEAM
       ? this.simulation.bluePlayer
       : this.simulation.redPlayer
