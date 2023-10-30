@@ -15,17 +15,25 @@ type DivergentEvolution = (
 ) => Pkm
 
 export abstract class EvolutionRule {
-  abstract canEvolve(pokemon: Pokemon, player: Player): boolean
-  abstract evolve(pokemon: Pokemon, player: Player): Pokemon
+  abstract canEvolve(
+    pokemon: Pokemon,
+    player: Player,
+    stageLevel: number
+  ): boolean
+  abstract evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon
   divergentEvolution?: DivergentEvolution
 
   constructor(divergentEvolution?: DivergentEvolution) {
     if (divergentEvolution) this.divergentEvolution = divergentEvolution
   }
 
-  tryEvolve(pokemon: Pokemon, player: Player): void | Pokemon {
-    if (this.canEvolve(pokemon, player)) {
-      const pokemonEvolved = this.evolve(pokemon, player)
+  tryEvolve(
+    pokemon: Pokemon,
+    player: Player,
+    stageLevel: number
+  ): void | Pokemon {
+    if (this.canEvolve(pokemon, player, stageLevel)) {
+      const pokemonEvolved = this.evolve(pokemon, player, stageLevel)
       this.afterEvolve(pokemonEvolved, player)
       return pokemonEvolved
     }
@@ -49,7 +57,7 @@ export class CountEvolutionRule extends EvolutionRule {
     this.numberRequired = numberRequired
   }
 
-  canEvolve(pokemon: Pokemon, player: Player): boolean {
+  canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
     if (pokemon.evolution === Pkm.DEFAULT) return false
     const count = values(player.board).filter(
       (pkm) => pkm.index === pokemon.index
@@ -65,7 +73,7 @@ export class CountEvolutionRule extends EvolutionRule {
     return count >= this.numberRequired - 1
   }
 
-  evolve(pokemon: Pokemon, player: Player): Pokemon {
+  evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
     let pokemonEvolutionName = pokemon.evolution
     if (this.divergentEvolution) {
       pokemonEvolutionName = this.divergentEvolution(pokemon, player)
@@ -150,13 +158,13 @@ export class ItemEvolutionRule extends EvolutionRule {
     this.itemsTriggeringEvolution = itemsTriggeringEvolution
   }
 
-  canEvolve(pokemon: Pokemon, player: Player): boolean {
+  canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
     return values(pokemon.items).some((item) =>
       this.itemsTriggeringEvolution.includes(item)
     )
   }
 
-  evolve(pokemon: Pokemon, player: Player): Pokemon {
+  evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
     let pokemonEvolutionName = pokemon.evolution
     if (this.divergentEvolution) {
       const itemEvolution = values(pokemon.items).find((item) =>
@@ -187,9 +195,9 @@ export class HatchEvolutionRule extends EvolutionRule {
     this.evolutionTimer = roundsRequired
   }
 
-  updateRound(pokemon: Pokemon, player: Player) {
+  updateRound(pokemon: Pokemon, player: Player, stageLevel: number) {
     this.evolutionTimer -= 1
-    pokemon.evolutionRule.tryEvolve(pokemon, player)
+    pokemon.evolutionRule.tryEvolve(pokemon, player, stageLevel)
     if (pokemon.name === Pkm.EGG && this.evolutionTimer >= 1) {
       pokemon.action =
         this.evolutionTimer >= 2
@@ -198,11 +206,35 @@ export class HatchEvolutionRule extends EvolutionRule {
     }
   }
 
-  canEvolve(pokemon: Pokemon, player: Player): boolean {
+  canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
     return this.evolutionTimer === 0
   }
 
-  evolve(pokemon: Pokemon, player: Player): Pokemon {
+  evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
+    let pokemonEvolutionName = pokemon.evolution
+    if (this.divergentEvolution) {
+      pokemonEvolutionName = this.divergentEvolution(pokemon, player)
+    }
+    const pokemonEvolved = player.transformPokemon(
+      pokemon,
+      pokemonEvolutionName
+    )
+    return pokemonEvolved
+  }
+}
+
+export class TurnEvolutionRule extends EvolutionRule {
+  stageLevel: number
+  constructor(stageLevel: number, divergentEvolution?: DivergentEvolution) {
+    super(divergentEvolution)
+    this.stageLevel = stageLevel
+  }
+
+  canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
+    return stageLevel >= this.stageLevel
+  }
+
+  evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
     let pokemonEvolutionName = pokemon.evolution
     if (this.divergentEvolution) {
       pokemonEvolutionName = this.divergentEvolution(pokemon, player)

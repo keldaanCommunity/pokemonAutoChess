@@ -7,7 +7,9 @@ import { Emotion, IPokemon, AttackSprite, Title } from "../../types"
 import {
   DEFAULT_ATK_SPEED,
   EvolutionTime,
-  ItemRecipe
+  ItemRecipe,
+  MausholdEvolutionTurn,
+  TandemausEvolutionTurn
 } from "../../types/Config"
 import { AllItems, Item, SynergyStones } from "../../types/enum/Item"
 import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
@@ -23,7 +25,8 @@ import {
   CountEvolutionRule,
   EvolutionRule,
   HatchEvolutionRule,
-  ItemEvolutionRule
+  ItemEvolutionRule,
+  TurnEvolutionRule
 } from "../../core/evolution-rules"
 import PokemonFactory from "../pokemon-factory"
 
@@ -10699,6 +10702,55 @@ export class Xurkitree extends Pokemon {
   attackType = AttackType.SPECIAL
 }
 
+export class Tandemaus extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FAIRY])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 160
+  atk = 16
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.POPULATION_BOMB
+  attackSprite = AttackSprite.NORMAL_MELEE
+  evolution = Pkm.MAUSHOLD_THREE
+  evolutionRule = new TurnEvolutionRule(TandemausEvolutionTurn)
+  passive = Passive.FAMILY
+}
+
+export class MausholdThree extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FAIRY])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 190
+  atk = 19
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.POPULATION_BOMB
+  attackSprite = AttackSprite.NORMAL_MELEE
+  evolution = Pkm.MAUSHOLD_FOUR
+  evolutionRule = new TurnEvolutionRule(MausholdEvolutionTurn)
+  passive = Passive.FAMILY
+}
+
+export class MausholdFour extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FAIRY])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 230
+  atk = 23
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.POPULATION_BOMB
+  final = true
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (shiny: boolean, emotion: Emotion) => Pokemon
@@ -11340,5 +11392,8 @@ export const PokemonClasses: Record<
   [Pkm.MISMAGIUS]: Mismagius,
   [Pkm.DODUO]: Doduo,
   [Pkm.DODRIO]: Dodrio,
-  [Pkm.XURKITREE]: Xurkitree
+  [Pkm.XURKITREE]: Xurkitree,
+  [Pkm.TANDEMAUS]: Tandemaus,
+  [Pkm.MAUSHOLD_THREE]: MausholdThree,
+  [Pkm.MAUSHOLD_FOUR]: MausholdFour
 }
