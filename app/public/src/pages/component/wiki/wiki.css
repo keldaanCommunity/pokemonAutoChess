@@ -182,8 +182,7 @@
 #wiki-items img.tree {
   image-rendering: pixelated;
   width: 50px;
-  margin-top: -8px;
-  margin-bottom: 30px;
+  margin: -8px 8px 30px 8px;
 }
 
 #wiki-items th,

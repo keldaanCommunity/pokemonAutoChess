@@ -138,8 +138,12 @@ export default class Design {
       }
     }
 
+    // player avatars slots
     this.drawGroundRect(9, 13, 3, 3)
     this.drawGroundRect(30, 1, 3, 3)
+
+    // berry tree slots
+    this.terrain[14][8] = TerrainType.GROUND
   }
 
   drawGroundRect(x: number, y: number, width: number, height: number) {

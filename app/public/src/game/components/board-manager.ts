@@ -1,10 +1,10 @@
 import Pokemon from "./pokemon"
 import { transformCoordinate } from "../../pages/utils/utils"
-import { IPokemon } from "../../../../types"
+import { IPokemon, Transfer } from "../../../../types"
 import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
 import { Item } from "../../../../types/enum/Item"
-import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
+import { AnimationConfig } from "../../../../types/enum/Pokemon"
 import {
   GamePhaseState,
   Orientation,
@@ -14,6 +14,8 @@ import { PokemonAvatarModel } from "../../../../models/colyseus-models/pokemon-a
 import Player from "../../../../models/colyseus-models/player"
 import PokemonAvatar from "./pokemon-avatar"
 import { Synergy } from "../../../../types/enum/Synergy"
+import { SynergyTriggers } from "../../../../types/Config"
+import { GameObjects } from "phaser"
 
 export enum BoardMode {
   PICK = "pick",
@@ -35,6 +37,7 @@ export default class BoardManager {
   lightX: number
   lightY: number
   lightCell: Phaser.GameObjects.Sprite | null
+  berryTree: Phaser.GameObjects.Sprite | null
 
   constructor(
     scene: GameScene,
@@ -157,6 +160,7 @@ export default class BoardManager {
 
   buildPokemons() {
     this.showLightCell()
+    this.showBerryTree()
     this.player.board.forEach((pokemon) => {
       this.addPokemon(pokemon)
     })
@@ -164,10 +168,8 @@ export default class BoardManager {
 
   showLightCell() {
     this.hideLightCell()
-    if (
-      this.player.synergies.get(Synergy.LIGHT) &&
-      this.player.synergies.get(Synergy.LIGHT)! >= 2
-    ) {
+    const lightCount = this.player.synergies.get(Synergy.LIGHT)
+    if (lightCount && lightCount >= SynergyTriggers[Synergy.LIGHT][0]) {
       const coordinates = transformCoordinate(this.lightX, this.lightY)
       this.lightCell = this.scene.add.sprite(
         coordinates[0],
@@ -178,13 +180,80 @@ export default class BoardManager {
       this.lightCell.setDepth(1)
       this.lightCell.setScale(2, 2)
       this.lightCell.anims.play("LIGHT_CELL")
-    } else {
-      this.hideLightCell()
     }
   }
 
   hideLightCell() {
     this.lightCell?.destroy()
+  }
+
+  showBerryTree() {
+    this.hideBerryTree()
+    const grassCount = this.player.synergies.get(Synergy.GRASS)
+    if (grassCount && grassCount >= SynergyTriggers[Synergy.GRASS][0]) {
+      this.berryTree = this.scene.add.sprite(
+        408,
+        710,
+        "berry_trees",
+        this.player.berry + "_1"
+      )
+      this.berryTree.setDepth(1)
+      this.berryTree.setScale(2, 2)
+      this.berryTree.setOrigin(0.5, 1)
+      console.log(
+        "show berry tree",
+        `${this.player.berry}_TREE_STEP_${this.player.berryTreeStage}`
+      )
+      this.berryTree.anims.play(
+        `${this.player.berry}_TREE_STEP_${this.player.berryTreeStage}`
+      )
+      this.berryTree.setInteractive()
+      this.berryTree.on("pointerdown", (pointer) => {
+        if (this.scene.room && this.player.berryTreeStage >= 3) {
+          this.scene.room.send(Transfer.PICK_BERRY)
+          this.displayText(pointer.x, pointer.y, "+1 BERRY")
+          this.berryTree?.play("CROP")
+        }
+      })
+    }
+  }
+
+  hideBerryTree() {
+    this.berryTree?.destroy()
+  }
+
+  displayText(x: number, y: number, label: string) {
+    const textStyle = {
+      fontSize: "25px",
+      fontFamily: "Verdana",
+      color: "#fff",
+      align: "center",
+      strokeThickness: 2,
+      stroke: "#000"
+    }
+
+    const text = this.scene.add.existing(
+      new GameObjects.Text(this.scene, x, y, label, textStyle)
+    )
+    text.setDepth(10)
+
+    this.scene.add.tween({
+      targets: [text],
+      ease: "linear",
+      duration: 1500,
+      delay: 0,
+      alpha: {
+        getStart: () => 1,
+        getEnd: () => 0
+      },
+      y: {
+        getStart: () => y - 50,
+        getEnd: () => y - 110
+      },
+      onComplete: () => {
+        text.destroy(true)
+      }
+    })
   }
 
   updatePlayerAvatar() {
@@ -287,6 +356,7 @@ export default class BoardManager {
     // logger.debug('pickMode');
     this.mode = BoardMode.PICK
     this.showLightCell()
+    this.showBerryTree()
     this.pokemons.forEach((pokemon) => {
       pokemon.setVisible(true)
     })

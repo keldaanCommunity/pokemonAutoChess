@@ -17,7 +17,8 @@ import {
   OnDragDropCommand,
   OnJoinCommand,
   OnDragDropItemCommand,
-  OnDragDropCombineCommand
+  OnDragDropCombineCommand,
+  OnPickBerryCommand
 } from "./commands/game-commands"
 import {
   AdditionalPicksStages,
@@ -384,6 +385,16 @@ export default class GameRoom extends Room<GameState> {
         }
       } catch (error) {
         logger.error(error)
+      }
+    })
+
+    this.onMessage(Transfer.PICK_BERRY, async (client) => {
+      if (!this.state.gameFinished && client.auth) {
+        try {
+          this.dispatcher.dispatch(new OnPickBerryCommand(), client.auth.uid)
+        } catch (error) {
+          logger.error("error picking berry", error)
+        }
       }
     })
 

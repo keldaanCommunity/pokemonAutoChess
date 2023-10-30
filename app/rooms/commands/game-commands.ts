@@ -15,7 +15,7 @@ import {
   PORTAL_CAROUSEL_BASE_DURATION,
   FIGHTING_PHASE_DURATION
 } from "../../types/Config"
-import { Item, BasicItems } from "../../types/enum/Item"
+import { Item, BasicItems, Berries } from "../../types/enum/Item"
 import { BattleResult } from "../../types/enum/Game"
 import Player from "../../models/colyseus-models/player"
 import PokemonFactory from "../../models/pokemon-factory"
@@ -46,7 +46,10 @@ import { getWeather } from "../../utils/weather"
 import Simulation from "../../core/simulation"
 import { selectMatchups } from "../../core/matchmaking"
 import { resetArraySchema, values } from "../../utils/schemas"
-import { CountEvolutionRule, HatchEvolutionRule } from "../../core/evolution-rules"
+import {
+  CountEvolutionRule,
+  HatchEvolutionRule
+} from "../../core/evolution-rules"
 
 export class OnShopCommand extends Command<
   GameRoom,
@@ -471,6 +474,22 @@ export class OnLevelUpCommand extends Command<
         player.experienceManager.addExperience(4)
         player.money -= 4
       }
+    }
+  }
+}
+
+export class OnPickBerryCommand extends Command<
+  GameRoom,
+  {
+    id: string
+  }
+> {
+  execute(id) {
+    const player = this.state.players.get(id)
+    if (player && player.berryTreeStage >= 3) {
+      player.berryTreeStage = 0
+      player.items.add(player.berry)
+      player.berry = pickRandomIn(Berries)
     }
   }
 }
@@ -949,6 +968,16 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           fish.action = PokemonActionState.IDLE
         }, 1000)
       }
+
+      if (player.effects.has(Effect.INGRAIN)) {
+        player.berryTreeStage = max(3)(player.berryTreeStage + 1)
+      }
+      if (player.effects.has(Effect.GROWTH)) {
+        player.berryTreeStage = max(3)(player.berryTreeStage + 2)
+      }
+      if (player.effects.has(Effect.SPORE)) {
+        player.berryTreeStage = max(3)(player.berryTreeStage + 3)
+      }
     })
 
     return commands
@@ -1068,7 +1097,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         }
 
         player.board.forEach((pokemon, key) => {
-          if (pokemon.evolutionRule && pokemon.evolutionRule instanceof HatchEvolutionRule) {            
+          if (
+            pokemon.evolutionRule &&
+            pokemon.evolutionRule instanceof HatchEvolutionRule
+          ) {
             pokemon.evolutionRule.updateRound(pokemon, player)
           }
           if (pokemon.passive === Passive.UNOWN && !pokemon.isOnBench) {

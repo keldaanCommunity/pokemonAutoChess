@@ -2355,17 +2355,29 @@ export default class AnimationManager {
   createEnvironmentAnimations() {
     Berries.forEach((berryName) => {
       for (let step = 1; step <= 3; step++) {
+        console.log(`${berryName}_TREE_STEP_${step}`)
         this.game.anims.create({
           key: `${berryName}_TREE_STEP_${step}`,
           frames: this.game.anims.generateFrameNames("berry_trees", {
-            start: 1,
-            end: 2,
+            start: step * 2 - 1,
+            end: step * 2,
             prefix: berryName + "_"
           }),
           duration: 600,
           repeat: -1
         })
       }
+    })
+
+    this.game.anims.create({
+      key: `CROP`,
+      frames: this.game.anims.generateFrameNames("berry_trees", {
+        start: 1,
+        end: 2,
+        prefix: "CROP_"
+      }),
+      duration: 600,
+      repeat: -1
     })
   }
 
