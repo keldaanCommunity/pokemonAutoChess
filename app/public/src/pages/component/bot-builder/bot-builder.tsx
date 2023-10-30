@@ -2,17 +2,13 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router"
 import { Navigate, useSearchParams } from "react-router-dom"
-import ModalMenu from "./modal-menu"
+import ImportExportBotModal from "./import-export-bot-modal"
 import {
   IBot,
   IDetailledPokemon
 } from "../../../../../models/mongo-models/bot-v2"
 import { useAppSelector, useAppDispatch } from "../../../hooks"
-import {
-  createBot,
-  requestBotData,
-  requestBotList
-} from "../../../stores/NetworkStore"
+import { requestBotData, requestBotList } from "../../../stores/NetworkStore"
 import { ModalMode, PkmWithConfig } from "../../../../../types"
 import {
   DEFAULT_BOT_STATE,
@@ -129,16 +125,6 @@ export default function BotBuilder() {
     }
   }
 
-  function updateBot(newValue: string) {
-    try {
-      const b: IBot = JSON.parse(newValue)
-      setBot(rewriteBotRoundsRequiredto1(b))
-      setQueryParams({ bot: b.id })
-    } catch (e) {
-      alert(e)
-    }
-  }
-
   function changeAvatar(pkm: PkmWithConfig) {
     bot.name = pkm.name.toUpperCase()
     bot.avatar = getAvatarString(PkmIndex[pkm.name], pkm.shiny, pkm.emotion)
@@ -156,10 +142,6 @@ export default function BotBuilder() {
       author: displayName ?? "Anonymous",
       elo: estimateElo(bot)
     })
-  }
-
-  function create() {
-    dispatch(createBot(bot))
   }
 
   function updateStep(board: IDetailledPokemon[]) {
@@ -259,7 +241,7 @@ export default function BotBuilder() {
         error={violation}
       />
 
-      <ModalMenu
+      <ImportExportBotModal
         visible={modalVisible}
         bot={bot}
         hideModal={() => {
@@ -267,9 +249,7 @@ export default function BotBuilder() {
         }}
         modalMode={modalMode}
         importBot={importBot}
-        updateBot={updateBot}
         pasteBinUrl={pastebinUrl}
-        createBot={create}
       />
     </div>
   )

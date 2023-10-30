@@ -3,18 +3,16 @@ import Modal from "react-bootstrap/Modal"
 import { IBot } from "../../../../../models/mongo-models/bot-v2"
 import { ModalMode } from "../../../../../types"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { requestBotData } from "../../../stores/NetworkStore"
+import { createBot, requestBotData } from "../../../stores/NetworkStore"
 import { useTranslation } from "react-i18next"
 
-export default function ModalMenu(props: {
+export default function ImportExportBotModal(props: {
   bot: IBot
   hideModal: () => void
   modalMode: ModalMode
   importBot: (text: string) => void
   pasteBinUrl: string
-  createBot: () => void
   visible: boolean
-  updateBot: (newValue: string) => void
 }) {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
@@ -50,6 +48,15 @@ export default function ModalMenu(props: {
     }
   }
 
+  function exportBot() {
+    try {
+      const bot = JSON.parse(textArea)
+      dispatch(createBot(bot))
+    } catch (e) {
+      setJsonError(e.message)
+    }
+  }
+
   if (props.modalMode == ModalMode.EXPORT) {
     return (
       <Modal
@@ -77,12 +84,7 @@ export default function ModalMenu(props: {
           <button className="bubbly red" onClick={props.hideModal}>
             {t("cancel")}
           </button>
-          <button
-            className="bubbly green"
-            onClick={() => {
-              props.createBot()
-            }}
-          >
+          <button className="bubbly green" onClick={exportBot}>
             {t("submit_your_bot")}
           </button>
         </Modal.Footer>
