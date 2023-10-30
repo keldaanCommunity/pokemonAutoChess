@@ -5,6 +5,7 @@
 # New Pokemons:
 
 - Xurkitree
+- Tandemaus/Maushold
 
 # Changes to Pokemon & Abilities
 
