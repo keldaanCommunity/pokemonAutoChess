@@ -379,7 +379,6 @@ export interface IPokemon {
   skill: Ability
   passive: Passive
   items: SetSchema<Item>
-  evolutionTimer: number | undefined
   shiny: boolean
   emotion: Emotion
   final: boolean

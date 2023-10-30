@@ -37,6 +37,7 @@ import {
 import { chance } from "../utils/random"
 import { distanceC } from "../utils/distance"
 import { AbilityStrategy } from "./abilities/ability-strategy"
+import Player from "../models/colyseus-models/player"
 
 export default class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
@@ -182,7 +183,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     return !this.status.resurecting
   }
 
-  get player(): IPlayer | undefined {
+  get player(): Player | undefined {
     return this.team === Team.BLUE_TEAM
       ? this.simulation.bluePlayer
       : this.simulation.redPlayer
@@ -207,16 +208,13 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     board: Board,
     attackType: AttackType,
     attacker: PokemonEntity | null,
-    crit: boolean,
-    apBoost?: boolean
+    crit: boolean
   ): { death: boolean; takenDamage: number } {
     if (this.status.protect) {
       this.count.spellBlockedCount++
       return { death: false, takenDamage: 0 }
     } else {
-      let specialDamage = apBoost
-        ? damage + (damage * (attacker ? attacker.ap : 0)) / 100
-        : damage
+      let specialDamage = damage + (damage * (attacker ? attacker.ap : 0)) / 100
       if (attacker && attacker.status.doubleDamage) {
         specialDamage *= 2
         attacker.status.doubleDamage = false

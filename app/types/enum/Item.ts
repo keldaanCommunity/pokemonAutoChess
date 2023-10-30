@@ -55,6 +55,8 @@ export enum Item {
   ROCKY_HELMET = "ROCKY_HELMET"
 }
 
+export const AllItems: Item[] = Object.values(Item)
+
 export const BasicItems: Item[] = [
   Item.FOSSIL_STONE,
   Item.TWISTED_SPOON,

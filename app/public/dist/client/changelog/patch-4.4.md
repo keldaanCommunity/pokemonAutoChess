@@ -1,3 +1,7 @@
+# DB MIGRATION ACTIONS REQUIRED
+
+- db-commands/update-pkm: Rename SHEDNINJA to SHENINJA
+
 # New Pokemons:
 
 - Xurkitree
@@ -11,6 +15,7 @@
 - Nerf Woobat Attack ~~6~~ 5, Swoobat Attack ~~15~~ 12
 - Buff Porygon2: HP ~~180~~ 222, Attack ~~14~~ 22
 - Nerf PorygonZ: HP ~~333~~ 222
+- Nincada is now an additional Epic. Evolve in both Sheninja and Ninjask
 
 # Changes to Synergies
 
