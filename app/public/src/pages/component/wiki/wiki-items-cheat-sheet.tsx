@@ -32,7 +32,10 @@ export default function WikiItemsCheatSheet() {
                     data-tooltip-id="detail-item"
                     onMouseOver={() => setItemHovered(i)}
                   >
-                    <img src={"assets/item/" + i + ".png"}></img>
+                    <img
+                      src={"assets/item/" + i + ".png"}
+                      className="item"
+                    ></img>
                   </th>
                 )
               })}
@@ -44,7 +47,10 @@ export default function WikiItemsCheatSheet() {
                     data-tooltip-id="detail-item"
                     onMouseOver={() => setItemHovered(i)}
                   >
-                    <img src={"assets/item/" + i + ".png"}></img>
+                    <img
+                      src={"assets/item/" + i + ".png"}
+                      className="item"
+                    ></img>
                   </td>
                   {BasicItems.map((j) => {
                     let tier2Item
@@ -64,7 +70,10 @@ export default function WikiItemsCheatSheet() {
                         data-tooltip-id="detail-item"
                         onMouseOver={() => setItemHovered(tier2Item)}
                       >
-                        <img src={"assets/item/" + tier2Item + ".png"}></img>
+                        <img
+                          src={"assets/item/" + tier2Item + ".png"}
+                          className="item"
+                        ></img>
                       </td>
                     )
                   })}
@@ -83,7 +92,12 @@ export default function WikiItemsCheatSheet() {
               data-tooltip-id="detail-item"
               onMouseOver={() => setItemHovered(i)}
             >
-              <img src={"assets/item/" + i + ".png"}></img>
+              <img src={"assets/item/" + i + ".png"} className="item"></img>
+              <br />
+              <img
+                src={"assets/environment/berry_trees/" + i + "_6.png"}
+                className="tree"
+              ></img>
             </li>
           ))}
         </ul>

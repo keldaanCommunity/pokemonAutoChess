@@ -168,15 +168,22 @@
   flex-wrap: wrap;
   gap: 0.5em;
   padding: 0;
-  max-width: 320px;
+  max-width: 400px;
 }
 
-#wiki-items img {
+#wiki-items img.item {
   image-rendering: pixelated;
   width: 50px;
   height: 50px;
   cursor: var(--cursor-hover);
   margin: 8px;
+}
+
+#wiki-items img.tree {
+  image-rendering: pixelated;
+  width: 50px;
+  margin-top: -8px;
+  margin-bottom: 30px;
 }
 
 #wiki-items th,

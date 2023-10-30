@@ -16,6 +16,7 @@ import indexList from "../../dist/client/assets/pokemons/indexList.json"
 import { logger } from "../../../utils/logger"
 import { AnimationConfig, Pkm, PkmIndex } from "../../../types/enum/Pokemon"
 import { Effect } from "../../../types/enum/Effect"
+import { Berries } from "../../../types/enum/Item"
 
 export default class AnimationManager {
   game: Phaser.Scene
@@ -107,6 +108,7 @@ export default class AnimationManager {
     this.createSpecialAttacksAnimations()
     this.createZoneEffectsAnimations()
     this.createMinigameAnimations()
+    this.createEnvironmentAnimations()
     createStatusAnimations(this.game)
   }
 
@@ -2347,6 +2349,23 @@ export default class AnimationManager {
       }),
       duration: 1000,
       repeat: -1
+    })
+  }
+
+  createEnvironmentAnimations() {
+    Berries.forEach((berryName) => {
+      for (let step = 1; step <= 3; step++) {
+        this.game.anims.create({
+          key: `${berryName}_TREE_STEP_${step}`,
+          frames: this.game.anims.generateFrameNames("berry_trees", {
+            start: 1,
+            end: 2,
+            prefix: berryName + "_"
+          }),
+          duration: 600,
+          repeat: -1
+        })
+      }
     })
   }
 
