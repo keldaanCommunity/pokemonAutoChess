@@ -48,7 +48,8 @@ import { selectMatchups } from "../../core/matchmaking"
 import { resetArraySchema, values } from "../../utils/schemas"
 import {
   CountEvolutionRule,
-  HatchEvolutionRule
+  HatchEvolutionRule,
+  TurnEvolutionRule
 } from "../../core/evolution-rules"
 
 export class OnShopCommand extends Command<
@@ -1071,15 +1072,21 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         }
 
         player.board.forEach((pokemon, key) => {
-          if (
-            pokemon.evolutionRule &&
-            pokemon.evolutionRule instanceof HatchEvolutionRule
-          ) {
-            pokemon.evolutionRule.updateRound(
-              pokemon,
-              player,
-              this.state.stageLevel
-            )
+          if (pokemon.evolutionRule) {
+            if (pokemon.evolutionRule instanceof HatchEvolutionRule) {
+              pokemon.evolutionRule.updateRound(
+                pokemon,
+                player,
+                this.state.stageLevel
+              )
+            }
+            if (pokemon.evolutionRule instanceof TurnEvolutionRule) {
+              pokemon.evolutionRule.tryEvolve(
+                pokemon,
+                player,
+                this.state.stageLevel
+              )
+            }
           }
           if (pokemon.passive === Passive.UNOWN && !pokemon.isOnBench) {
             // remove after one fight

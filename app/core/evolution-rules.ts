@@ -2,11 +2,11 @@ import { Pkm } from "../types/enum/Pokemon"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import Player from "../models/colyseus-models/player"
 import { values } from "../utils/schemas"
-import { logger } from "colyseus"
 import PokemonFactory from "../models/pokemon-factory"
 import { BasicItems, Item } from "../types/enum/Item"
 import { EvolutionTime } from "../types/Config"
 import { PokemonActionState } from "../types/enum/Game"
+import { logger } from "../utils/logger"
 
 type DivergentEvolution = (
   pokemon: Pokemon,

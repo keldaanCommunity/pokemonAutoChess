@@ -164,7 +164,7 @@ export const EvolutionTime = {
   EVOLVE_HATCH: 4
 }
 
-export const TandemausEvolutionTurn = 15
+export const TandemausEvolutionTurn = 14
 export const MausholdEvolutionTurn = 20
 
 export const PoolSize: { [key in Rarity]: [number, number, number] } = {
@@ -199,8 +199,7 @@ export const CommonShop = new Array<Pkm>(
   Pkm.ARON,
   Pkm.MUDKIP,
   Pkm.CHIMCHAR,
-  Pkm.LITWICK,
-  Pkm.TANDEMAUS
+  Pkm.LITWICK
 )
 
 export const UncommonShop = new Array<Pkm>(
