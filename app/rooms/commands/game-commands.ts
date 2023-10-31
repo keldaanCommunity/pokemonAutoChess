@@ -15,7 +15,7 @@ import {
   PORTAL_CAROUSEL_BASE_DURATION,
   FIGHTING_PHASE_DURATION
 } from "../../types/Config"
-import { Item, BasicItems } from "../../types/enum/Item"
+import { Item, BasicItems, Berries } from "../../types/enum/Item"
 import { BattleResult } from "../../types/enum/Game"
 import Player from "../../models/colyseus-models/player"
 import PokemonFactory from "../../models/pokemon-factory"
@@ -23,11 +23,7 @@ import { PVEStages } from "../../models/pve-stages"
 import GameRoom from "../game-room"
 import { Effect } from "../../types/enum/Effect"
 import { Title } from "../../types"
-import {
-  GamePhaseState,
-  Rarity,
-  PokemonActionState
-} from "../../types/enum/Game"
+import { GamePhaseState, PokemonActionState } from "../../types/enum/Game"
 import {
   IDragDropMessage,
   IDragDropItemMessage,
@@ -475,6 +471,22 @@ export class OnLevelUpCommand extends Command<
         player.experienceManager.addExperience(4)
         player.money -= 4
       }
+    }
+  }
+}
+
+export class OnPickBerryCommand extends Command<
+  GameRoom,
+  {
+    id: string
+  }
+> {
+  execute(id) {
+    const player = this.state.players.get(id)
+    if (player && player.berryTreeStage >= 3) {
+      player.berryTreeStage = 0
+      player.items.add(player.berry)
+      player.berry = pickRandomIn(Berries)
     }
   }
 }
@@ -952,6 +964,16 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         this.clock.setTimeout(() => {
           fish.action = PokemonActionState.IDLE
         }, 1000)
+      }
+
+      if (player.effects.has(Effect.INGRAIN)) {
+        player.berryTreeStage = max(3)(player.berryTreeStage + 1)
+      }
+      if (player.effects.has(Effect.GROWTH)) {
+        player.berryTreeStage = max(3)(player.berryTreeStage + 2)
+      }
+      if (player.effects.has(Effect.SPORE)) {
+        player.berryTreeStage = max(3)(player.berryTreeStage + 3)
       }
     })
 

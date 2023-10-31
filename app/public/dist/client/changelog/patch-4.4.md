@@ -1,6 +1,7 @@
 # DB MIGRATION ACTIONS REQUIRED
 
 - db-commands/update-pkm: Rename SHEDNINJA to SHENINJA
+- Update Bots items: Replace ORAN_BERRY by KINGS_ROCK
 
 # New Pokemons:
 
@@ -17,13 +18,17 @@
 - Buff Porygon2: HP ~~180~~ 222, Attack ~~14~~ 22
 - Nerf PorygonZ: HP ~~333~~ 222
 - Nincada is now an additional Epic. Evolve in both Sheninja and Ninjask
+- Unown-T is now TREE: gives 3 random berries
+- Slowbro now needs a King's Rock to evolve to Slowking
 
 # Changes to Synergies
 
--
+- Grass now produces berries over time
 
 # Changes to Items
 
+- Added Berries: 20 berries with unique effects
+- Oran Berry is replaced by King's Rock
 - PVE stages can no longer have duplicates in rewards, except stage 40
 - Delta Orb effect can now be stacked, if you put a mon between two units with Delta orbs for example
 

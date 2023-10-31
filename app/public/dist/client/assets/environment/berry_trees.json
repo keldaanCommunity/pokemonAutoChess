@@ -1,0 +1,2582 @@
+{
+  "textures": [
+    {
+      "image": "berry_trees.png",
+      "format": "RGBA8888",
+      "size": {
+        "w": 58,
+        "h": 1137
+      },
+      "scale": 1,
+      "frames": [
+        {
+          "filename": "LUM_BERRY_6",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 2,
+            "w": 17,
+            "h": 33
+          },
+          "frame": {
+            "x": 1,
+            "y": 1,
+            "w": 17,
+            "h": 33
+          }
+        },
+        {
+          "filename": "ASPEAR_BERRY_4",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 4,
+            "w": 18,
+            "h": 31
+          },
+          "frame": {
+            "x": 20,
+            "y": 1,
+            "w": 18,
+            "h": 31
+          }
+        },
+        {
+          "filename": "BABIRI_BERRY_3",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 3,
+            "w": 17,
+            "h": 32
+          },
+          "frame": {
+            "x": 40,
+            "y": 1,
+            "w": 17,
+            "h": 32
+          }
+        },
+        {
+          "filename": "ASPEAR_BERRY_6",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 4,
+            "w": 18,
+            "h": 31
+          },
+          "frame": {
+            "x": 20,
+            "y": 34,
+            "w": 18,
+            "h": 31
+          }
+        },
+        {
+          "filename": "BABIRI_BERRY_4",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 3,
+            "w": 17,
+            "h": 32
+          },
+          "frame": {
+            "x": 1,
+            "y": 36,
+            "w": 17,
+            "h": 32
+          }
+        },
+        {
+          "filename": "BABIRI_BERRY_5",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 3,
+            "w": 17,
+            "h": 32
+          },
+          "frame": {
+            "x": 40,
+            "y": 35,
+            "w": 17,
+            "h": 32
+          }
+        },
+        {
+          "filename": "LIECHI_BERRY_3",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 2,
+            "y": 4,
+            "w": 18,
+            "h": 31
+          },
+          "frame": {
+            "x": 20,
+            "y": 67,
+            "w": 18,
+            "h": 31
+          }
+        },
+        {
+          "filename": "BABIRI_BERRY_6",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 3,
+            "w": 17,
+            "h": 32
+          },
+          "frame": {
+            "x": 1,
+            "y": 70,
+            "w": 17,
+            "h": 32
+          }
+        },
+        {
+          "filename": "LUM_BERRY_3",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 3,
+            "w": 17,
+            "h": 32
+          },
+          "frame": {
+            "x": 40,
+            "y": 69,
+            "w": 17,
+            "h": 32
+          }
+        },
+        {
+          "filename": "LIECHI_BERRY_5",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 2,
+            "y": 4,
+            "w": 18,
+            "h": 31
+          },
+          "frame": {
+            "x": 20,
+            "y": 100,
+            "w": 18,
+            "h": 31
+          }
+        },
+        {
+          "filename": "LUM_BERRY_5",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 3,
+            "w": 17,
+            "h": 32
+          },
+          "frame": {
+            "x": 1,
+            "y": 104,
+            "w": 17,
+            "h": 32
+          }
+        },
+        {
+          "filename": "LUM_BERRY_4",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 2,
+            "w": 16,
+            "h": 33
+          },
+          "frame": {
+            "x": 40,
+            "y": 103,
+            "w": 16,
+            "h": 33
+          }
+        },
+        {
+          "filename": "ORAN_BERRY_3",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 4,
+            "w": 18,
+            "h": 31
+          },
+          "frame": {
+            "x": 20,
+            "y": 133,
+            "w": 18,
+            "h": 31
+          }
+        },
+        {
+          "filename": "LIECHI_BERRY_4",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 4,
+            "w": 17,
+            "h": 31
+          },
+          "frame": {
+            "x": 1,
+            "y": 138,
+            "w": 17,
+            "h": 31
+          }
+        },
+        {
+          "filename": "LIECHI_BERRY_6",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 4,
+            "w": 17,
+            "h": 31
+          },
+          "frame": {
+            "x": 40,
+            "y": 138,
+            "w": 17,
+            "h": 31
+          }
+        },
+        {
+          "filename": "ORAN_BERRY_4",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 4,
+            "w": 18,
+            "h": 31
+          },
+          "frame": {
+            "x": 20,
+            "y": 166,
+            "w": 18,
+            "h": 31
+          }
+        },
+        {
+          "filename": "CHERI_BERRY_4",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 5,
+            "w": 17,
+            "h": 30
+          },
+          "frame": {
+            "x": 1,
+            "y": 171,
+            "w": 17,
+            "h": 30
+          }
+        },
+        {
+          "filename": "CHERI_BERRY_6",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 5,
+            "w": 17,
+            "h": 30
+          },
+          "frame": {
+            "x": 40,
+            "y": 171,
+            "w": 17,
+            "h": 30
+          }
+        },
+        {
+          "filename": "ORAN_BERRY_5",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 2,
+            "y": 4,
+            "w": 18,
+            "h": 31
+          },
+          "frame": {
+            "x": 20,
+            "y": 199,
+            "w": 18,
+            "h": 31
+          }
+        },
+        {
+          "filename": "CHERI_BERRY_3",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 5,
+            "w": 16,
+            "h": 30
+          },
+          "frame": {
+            "x": 1,
+            "y": 203,
+            "w": 16,
+            "h": 30
+          }
+        },
+        {
+          "filename": "CHERI_BERRY_5",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 5,
+            "w": 16,
+            "h": 30
+          },
+          "frame": {
+            "x": 40,
+            "y": 203,
+            "w": 16,
+            "h": 30
+          }
+        },
+        {
+          "filename": "ORAN_BERRY_6",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 4,
+            "w": 18,
+            "h": 31
+          },
+          "frame": {
+            "x": 19,
+            "y": 232,
+            "w": 18,
+            "h": 31
+          }
+        },
+        {
+          "filename": "GANLON_BERRY_3",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 5,
+            "w": 16,
+            "h": 30
+          },
+          "frame": {
+            "x": 1,
+            "y": 235,
+            "w": 16,
+            "h": 30
+          }
+        },
+        {
+          "filename": "SITRUS_BERRY_3",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 4,
+            "w": 18,
+            "h": 31
+          },
+          "frame": {
+            "x": 39,
+            "y": 235,
+            "w": 18,
+            "h": 31
+          }
+        },
+        {
+          "filename": "SITRUS_BERRY_5",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 4,
+            "w": 18,
+            "h": 31
+          },
+          "frame": {
+            "x": 19,
+            "y": 265,
+            "w": 18,
+            "h": 31
+          }
+        },
+        {
+          "filename": "GANLON_BERRY_4",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 5,
+            "w": 16,
+            "h": 30
+          },
+          "frame": {
+            "x": 1,
+            "y": 267,
+            "w": 16,
+            "h": 30
+          }
+        },
+        {
+          "filename": "ASPEAR_BERRY_3",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 5,
+            "w": 18,
+            "h": 30
+          },
+          "frame": {
+            "x": 39,
+            "y": 268,
+            "w": 18,
+            "h": 30
+          }
+        },
+        {
+          "filename": "ASPEAR_BERRY_5",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 5,
+            "w": 18,
+            "h": 30
+          },
+          "frame": {
+            "x": 19,
+            "y": 298,
+            "w": 18,
+            "h": 30
+          }
+        },
+        {
+          "filename": "GANLON_BERRY_6",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 5,
+            "w": 16,
+            "h": 30
+          },
+          "frame": {
+            "x": 1,
+            "y": 299,
+            "w": 16,
+            "h": 30
+          }
+        },
+        {
+          "filename": "SITRUS_BERRY_4",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 5,
+            "w": 18,
+            "h": 30
+          },
+          "frame": {
+            "x": 39,
+            "y": 300,
+            "w": 18,
+            "h": 30
+          }
+        },
+        {
+          "filename": "SITRUS_BERRY_6",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 5,
+            "w": 18,
+            "h": 30
+          },
+          "frame": {
+            "x": 19,
+            "y": 330,
+            "w": 18,
+            "h": 30
+          }
+        },
+        {
+          "filename": "AGUAV_BERRY_6",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 6,
+            "w": 16,
+            "h": 29
+          },
+          "frame": {
+            "x": 1,
+            "y": 331,
+            "w": 16,
+            "h": 29
+          }
+        },
+        {
+          "filename": "CHESTO_BERRY_3",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 6,
+            "w": 18,
+            "h": 29
+          },
+          "frame": {
+            "x": 39,
+            "y": 332,
+            "w": 18,
+            "h": 29
+          }
+        },
+        {
+          "filename": "CHESTO_BERRY_4",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 6,
+            "w": 18,
+            "h": 29
+          },
+          "frame": {
+            "x": 1,
+            "y": 362,
+            "w": 18,
+            "h": 29
+          }
+        },
+        {
+          "filename": "GANLON_BERRY_5",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 6,
+            "w": 16,
+            "h": 29
+          },
+          "frame": {
+            "x": 21,
+            "y": 362,
+            "w": 16,
+            "h": 29
+          }
+        },
+        {
+          "filename": "CHESTO_BERRY_5",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 6,
+            "w": 18,
+            "h": 29
+          },
+          "frame": {
+            "x": 39,
+            "y": 363,
+            "w": 18,
+            "h": 29
+          }
+        },
+        {
+          "filename": "CHESTO_BERRY_6",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 6,
+            "w": 18,
+            "h": 29
+          },
+          "frame": {
+            "x": 1,
+            "y": 393,
+            "w": 18,
+            "h": 29
+          }
+        },
+        {
+          "filename": "AGUAV_BERRY_5",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 7,
+            "w": 16,
+            "h": 28
+          },
+          "frame": {
+            "x": 21,
+            "y": 393,
+            "w": 16,
+            "h": 28
+          }
+        },
+        {
+          "filename": "PECHA_BERRY_3",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 6,
+            "w": 18,
+            "h": 29
+          },
+          "frame": {
+            "x": 39,
+            "y": 394,
+            "w": 18,
+            "h": 29
+          }
+        },
+        {
+          "filename": "SALAC_BERRY_6",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 7,
+            "w": 16,
+            "h": 28
+          },
+          "frame": {
+            "x": 21,
+            "y": 423,
+            "w": 16,
+            "h": 28
+          }
+        },
+        {
+          "filename": "PECHA_BERRY_4",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 6,
+            "w": 18,
+            "h": 29
+          },
+          "frame": {
+            "x": 39,
+            "y": 425,
+            "w": 18,
+            "h": 29
+          }
+        },
+        {
+          "filename": "PECHA_BERRY_5",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 6,
+            "w": 18,
+            "h": 29
+          },
+          "frame": {
+            "x": 1,
+            "y": 424,
+            "w": 18,
+            "h": 29
+          }
+        },
+        {
+          "filename": "BABIRI_BERRY_1",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 8,
+            "w": 16,
+            "h": 27
+          },
+          "frame": {
+            "x": 21,
+            "y": 453,
+            "w": 16,
+            "h": 27
+          }
+        },
+        {
+          "filename": "PECHA_BERRY_6",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 6,
+            "w": 18,
+            "h": 29
+          },
+          "frame": {
+            "x": 39,
+            "y": 456,
+            "w": 18,
+            "h": 29
+          }
+        },
+        {
+          "filename": "SITRUS_BERRY_1",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 6,
+            "w": 18,
+            "h": 29
+          },
+          "frame": {
+            "x": 1,
+            "y": 455,
+            "w": 18,
+            "h": 29
+          }
+        },
+        {
+          "filename": "BABIRI_BERRY_2",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 8,
+            "w": 16,
+            "h": 27
+          },
+          "frame": {
+            "x": 21,
+            "y": 482,
+            "w": 16,
+            "h": 27
+          }
+        },
+        {
+          "filename": "SITRUS_BERRY_2",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 7,
+            "w": 18,
+            "h": 28
+          },
+          "frame": {
+            "x": 39,
+            "y": 487,
+            "w": 18,
+            "h": 28
+          }
+        },
+        {
+          "filename": "APICOT_BERRY_5",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 2,
+            "y": 8,
+            "w": 18,
+            "h": 27
+          },
+          "frame": {
+            "x": 1,
+            "y": 486,
+            "w": 18,
+            "h": 27
+          }
+        },
+        {
+          "filename": "CHESTO_BERRY_1",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 8,
+            "w": 16,
+            "h": 27
+          },
+          "frame": {
+            "x": 21,
+            "y": 511,
+            "w": 16,
+            "h": 27
+          }
+        },
+        {
+          "filename": "ASPEAR_BERRY_2",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 8,
+            "w": 18,
+            "h": 27
+          },
+          "frame": {
+            "x": 39,
+            "y": 517,
+            "w": 18,
+            "h": 27
+          }
+        },
+        {
+          "filename": "ORAN_BERRY_1",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 7,
+            "w": 17,
+            "h": 28
+          },
+          "frame": {
+            "x": 1,
+            "y": 515,
+            "w": 17,
+            "h": 28
+          }
+        },
+        {
+          "filename": "ORAN_BERRY_2",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 7,
+            "w": 17,
+            "h": 28
+          },
+          "frame": {
+            "x": 20,
+            "y": 540,
+            "w": 17,
+            "h": 28
+          }
+        },
+        {
+          "filename": "APICOT_BERRY_4",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 8,
+            "w": 17,
+            "h": 27
+          },
+          "frame": {
+            "x": 1,
+            "y": 545,
+            "w": 17,
+            "h": 27
+          }
+        },
+        {
+          "filename": "JABOCA_BERRY_3",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 2,
+            "y": 9,
+            "w": 18,
+            "h": 26
+          },
+          "frame": {
+            "x": 39,
+            "y": 546,
+            "w": 18,
+            "h": 26
+          }
+        },
+        {
+          "filename": "LIECHI_BERRY_2",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 9,
+            "w": 17,
+            "h": 26
+          },
+          "frame": {
+            "x": 20,
+            "y": 570,
+            "w": 17,
+            "h": 26
+          }
+        },
+        {
+          "filename": "CHESTO_BERRY_2",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 8,
+            "w": 16,
+            "h": 27
+          },
+          "frame": {
+            "x": 1,
+            "y": 574,
+            "w": 16,
+            "h": 27
+          }
+        },
+        {
+          "filename": "JABOCA_BERRY_4",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 2,
+            "y": 9,
+            "w": 18,
+            "h": 26
+          },
+          "frame": {
+            "x": 39,
+            "y": 574,
+            "w": 18,
+            "h": 26
+          }
+        },
+        {
+          "filename": "JABOCA_BERRY_5",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 2,
+            "y": 9,
+            "w": 18,
+            "h": 26
+          },
+          "frame": {
+            "x": 19,
+            "y": 598,
+            "w": 18,
+            "h": 26
+          }
+        },
+        {
+          "filename": "LUM_BERRY_2",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 8,
+            "w": 16,
+            "h": 27
+          },
+          "frame": {
+            "x": 1,
+            "y": 603,
+            "w": 16,
+            "h": 27
+          }
+        },
+        {
+          "filename": "JABOCA_BERRY_6",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 2,
+            "y": 9,
+            "w": 18,
+            "h": 26
+          },
+          "frame": {
+            "x": 39,
+            "y": 602,
+            "w": 18,
+            "h": 26
+          }
+        },
+        {
+          "filename": "PERSIM_BERRY_3",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 9,
+            "w": 18,
+            "h": 26
+          },
+          "frame": {
+            "x": 19,
+            "y": 626,
+            "w": 18,
+            "h": 26
+          }
+        },
+        {
+          "filename": "SALAC_BERRY_5",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 8,
+            "w": 16,
+            "h": 27
+          },
+          "frame": {
+            "x": 1,
+            "y": 632,
+            "w": 16,
+            "h": 27
+          }
+        },
+        {
+          "filename": "PERSIM_BERRY_4",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 9,
+            "w": 18,
+            "h": 26
+          },
+          "frame": {
+            "x": 39,
+            "y": 630,
+            "w": 18,
+            "h": 26
+          }
+        },
+        {
+          "filename": "PERSIM_BERRY_5",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 9,
+            "w": 18,
+            "h": 26
+          },
+          "frame": {
+            "x": 19,
+            "y": 654,
+            "w": 18,
+            "h": 26
+          }
+        },
+        {
+          "filename": "AGUAV_BERRY_4",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 9,
+            "w": 16,
+            "h": 26
+          },
+          "frame": {
+            "x": 1,
+            "y": 661,
+            "w": 16,
+            "h": 26
+          }
+        },
+        {
+          "filename": "PERSIM_BERRY_6",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 9,
+            "w": 18,
+            "h": 26
+          },
+          "frame": {
+            "x": 39,
+            "y": 658,
+            "w": 18,
+            "h": 26
+          }
+        },
+        {
+          "filename": "LEPPA_BERRY_3",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 10,
+            "w": 18,
+            "h": 25
+          },
+          "frame": {
+            "x": 19,
+            "y": 682,
+            "w": 18,
+            "h": 25
+          }
+        },
+        {
+          "filename": "APICOT_BERRY_3",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 9,
+            "w": 16,
+            "h": 26
+          },
+          "frame": {
+            "x": 1,
+            "y": 689,
+            "w": 16,
+            "h": 26
+          }
+        },
+        {
+          "filename": "LEPPA_BERRY_5",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 10,
+            "w": 18,
+            "h": 25
+          },
+          "frame": {
+            "x": 39,
+            "y": 686,
+            "w": 18,
+            "h": 25
+          }
+        },
+        {
+          "filename": "PETAYA_BERRY_4",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 2,
+            "y": 10,
+            "w": 18,
+            "h": 25
+          },
+          "frame": {
+            "x": 19,
+            "y": 709,
+            "w": 18,
+            "h": 25
+          }
+        },
+        {
+          "filename": "APICOT_BERRY_6",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 9,
+            "w": 16,
+            "h": 26
+          },
+          "frame": {
+            "x": 1,
+            "y": 717,
+            "w": 16,
+            "h": 26
+          }
+        },
+        {
+          "filename": "ROWAP_BERRY_3",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 2,
+            "y": 11,
+            "w": 18,
+            "h": 24
+          },
+          "frame": {
+            "x": 39,
+            "y": 713,
+            "w": 18,
+            "h": 24
+          }
+        },
+        {
+          "filename": "ROWAP_BERRY_5",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 2,
+            "y": 10,
+            "w": 18,
+            "h": 24
+          },
+          "frame": {
+            "x": 19,
+            "y": 736,
+            "w": 18,
+            "h": 24
+          }
+        },
+        {
+          "filename": "ASPEAR_BERRY_1",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 9,
+            "w": 16,
+            "h": 26
+          },
+          "frame": {
+            "x": 1,
+            "y": 745,
+            "w": 16,
+            "h": 26
+          }
+        },
+        {
+          "filename": "CHERI_BERRY_2",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 10,
+            "w": 17,
+            "h": 25
+          },
+          "frame": {
+            "x": 39,
+            "y": 739,
+            "w": 17,
+            "h": 25
+          }
+        },
+        {
+          "filename": "LEPPA_BERRY_4",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 10,
+            "w": 17,
+            "h": 25
+          },
+          "frame": {
+            "x": 19,
+            "y": 762,
+            "w": 17,
+            "h": 25
+          }
+        },
+        {
+          "filename": "GANLON_BERRY_2",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 9,
+            "w": 16,
+            "h": 26
+          },
+          "frame": {
+            "x": 1,
+            "y": 773,
+            "w": 16,
+            "h": 26
+          }
+        },
+        {
+          "filename": "LEPPA_BERRY_6",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 10,
+            "w": 17,
+            "h": 25
+          },
+          "frame": {
+            "x": 38,
+            "y": 766,
+            "w": 17,
+            "h": 25
+          }
+        },
+        {
+          "filename": "PETAYA_BERRY_3",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 10,
+            "w": 17,
+            "h": 25
+          },
+          "frame": {
+            "x": 19,
+            "y": 789,
+            "w": 17,
+            "h": 25
+          }
+        },
+        {
+          "filename": "LIECHI_BERRY_1",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 9,
+            "w": 16,
+            "h": 26
+          },
+          "frame": {
+            "x": 1,
+            "y": 801,
+            "w": 16,
+            "h": 26
+          }
+        },
+        {
+          "filename": "LUM_BERRY_1",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 9,
+            "w": 16,
+            "h": 26
+          },
+          "frame": {
+            "x": 38,
+            "y": 793,
+            "w": 16,
+            "h": 26
+          }
+        },
+        {
+          "filename": "ROWAP_BERRY_4",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 11,
+            "w": 17,
+            "h": 24
+          },
+          "frame": {
+            "x": 19,
+            "y": 816,
+            "w": 17,
+            "h": 24
+          }
+        },
+        {
+          "filename": "AGUAV_BERRY_3",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 10,
+            "w": 16,
+            "h": 25
+          },
+          "frame": {
+            "x": 1,
+            "y": 829,
+            "w": 16,
+            "h": 25
+          }
+        },
+        {
+          "filename": "LANSAT_BERRY_4",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 2,
+            "y": 12,
+            "w": 18,
+            "h": 23
+          },
+          "frame": {
+            "x": 38,
+            "y": 821,
+            "w": 18,
+            "h": 23
+          }
+        },
+        {
+          "filename": "ROWAP_BERRY_6",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 11,
+            "w": 17,
+            "h": 24
+          },
+          "frame": {
+            "x": 19,
+            "y": 842,
+            "w": 17,
+            "h": 24
+          }
+        },
+        {
+          "filename": "CHERI_BERRY_1",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 10,
+            "w": 16,
+            "h": 25
+          },
+          "frame": {
+            "x": 1,
+            "y": 856,
+            "w": 16,
+            "h": 25
+          }
+        },
+        {
+          "filename": "LANSAT_BERRY_6",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 2,
+            "y": 12,
+            "w": 18,
+            "h": 23
+          },
+          "frame": {
+            "x": 38,
+            "y": 846,
+            "w": 18,
+            "h": 23
+          }
+        },
+        {
+          "filename": "GANLON_BERRY_1",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 9,
+            "w": 16,
+            "h": 25
+          },
+          "frame": {
+            "x": 19,
+            "y": 868,
+            "w": 16,
+            "h": 25
+          }
+        },
+        {
+          "filename": "SALAC_BERRY_4",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 10,
+            "w": 16,
+            "h": 25
+          },
+          "frame": {
+            "x": 1,
+            "y": 883,
+            "w": 16,
+            "h": 25
+          }
+        },
+        {
+          "filename": "PETAYA_BERRY_6",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 2,
+            "y": 12,
+            "w": 18,
+            "h": 23
+          },
+          "frame": {
+            "x": 37,
+            "y": 871,
+            "w": 18,
+            "h": 23
+          }
+        },
+        {
+          "filename": "APICOT_BERRY_1",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 11,
+            "w": 16,
+            "h": 24
+          },
+          "frame": {
+            "x": 19,
+            "y": 895,
+            "w": 16,
+            "h": 24
+          }
+        },
+        {
+          "filename": "SALAC_BERRY_3",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 11,
+            "w": 16,
+            "h": 24
+          },
+          "frame": {
+            "x": 1,
+            "y": 910,
+            "w": 16,
+            "h": 24
+          }
+        },
+        {
+          "filename": "LANSAT_BERRY_3",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 12,
+            "w": 17,
+            "h": 23
+          },
+          "frame": {
+            "x": 37,
+            "y": 896,
+            "w": 17,
+            "h": 23
+          }
+        },
+        {
+          "filename": "LANSAT_BERRY_5",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 12,
+            "w": 17,
+            "h": 23
+          },
+          "frame": {
+            "x": 19,
+            "y": 921,
+            "w": 17,
+            "h": 23
+          }
+        },
+        {
+          "filename": "APICOT_BERRY_2",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 12,
+            "w": 16,
+            "h": 23
+          },
+          "frame": {
+            "x": 1,
+            "y": 936,
+            "w": 16,
+            "h": 23
+          }
+        },
+        {
+          "filename": "PERSIM_BERRY_1",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 12,
+            "w": 17,
+            "h": 23
+          },
+          "frame": {
+            "x": 38,
+            "y": 921,
+            "w": 17,
+            "h": 23
+          }
+        },
+        {
+          "filename": "PERSIM_BERRY_2",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 12,
+            "w": 17,
+            "h": 23
+          },
+          "frame": {
+            "x": 19,
+            "y": 946,
+            "w": 17,
+            "h": 23
+          }
+        },
+        {
+          "filename": "LANSAT_BERRY_1",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 12,
+            "w": 16,
+            "h": 23
+          },
+          "frame": {
+            "x": 1,
+            "y": 961,
+            "w": 16,
+            "h": 23
+          }
+        },
+        {
+          "filename": "PETAYA_BERRY_5",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 12,
+            "w": 17,
+            "h": 23
+          },
+          "frame": {
+            "x": 38,
+            "y": 946,
+            "w": 17,
+            "h": 23
+          }
+        },
+        {
+          "filename": "JABOCA_BERRY_1",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 2,
+            "y": 14,
+            "w": 18,
+            "h": 21
+          },
+          "frame": {
+            "x": 19,
+            "y": 971,
+            "w": 18,
+            "h": 21
+          }
+        },
+        {
+          "filename": "LANSAT_BERRY_2",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 12,
+            "w": 16,
+            "h": 23
+          },
+          "frame": {
+            "x": 1,
+            "y": 986,
+            "w": 16,
+            "h": 23
+          }
+        },
+        {
+          "filename": "JABOCA_BERRY_2",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 2,
+            "y": 14,
+            "w": 18,
+            "h": 21
+          },
+          "frame": {
+            "x": 39,
+            "y": 971,
+            "w": 18,
+            "h": 21
+          }
+        },
+        {
+          "filename": "RAWST_BERRY_3",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 15,
+            "w": 18,
+            "h": 20
+          },
+          "frame": {
+            "x": 19,
+            "y": 994,
+            "w": 18,
+            "h": 20
+          }
+        },
+        {
+          "filename": "AGUAV_BERRY_2",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 15,
+            "w": 16,
+            "h": 20
+          },
+          "frame": {
+            "x": 1,
+            "y": 1011,
+            "w": 16,
+            "h": 20
+          }
+        },
+        {
+          "filename": "PECHA_BERRY_2",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 16,
+            "w": 18,
+            "h": 19
+          },
+          "frame": {
+            "x": 39,
+            "y": 994,
+            "w": 18,
+            "h": 19
+          }
+        },
+        {
+          "filename": "RAWST_BERRY_4",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 16,
+            "w": 18,
+            "h": 19
+          },
+          "frame": {
+            "x": 39,
+            "y": 1015,
+            "w": 18,
+            "h": 19
+          }
+        },
+        {
+          "filename": "RAWST_BERRY_6",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 16,
+            "w": 18,
+            "h": 19
+          },
+          "frame": {
+            "x": 19,
+            "y": 1016,
+            "w": 18,
+            "h": 19
+          }
+        },
+        {
+          "filename": "AGUAV_BERRY_1",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 16,
+            "w": 16,
+            "h": 19
+          },
+          "frame": {
+            "x": 1,
+            "y": 1033,
+            "w": 16,
+            "h": 19
+          }
+        },
+        {
+          "filename": "PECHA_BERRY_1",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 15,
+            "w": 17,
+            "h": 20
+          },
+          "frame": {
+            "x": 39,
+            "y": 1036,
+            "w": 17,
+            "h": 20
+          }
+        },
+        {
+          "filename": "RAWST_BERRY_5",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 15,
+            "w": 17,
+            "h": 20
+          },
+          "frame": {
+            "x": 19,
+            "y": 1037,
+            "w": 17,
+            "h": 20
+          }
+        },
+        {
+          "filename": "PETAYA_BERRY_1",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 16,
+            "w": 16,
+            "h": 19
+          },
+          "frame": {
+            "x": 1,
+            "y": 1054,
+            "w": 16,
+            "h": 19
+          }
+        },
+        {
+          "filename": "PETAYA_BERRY_2",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 16,
+            "w": 17,
+            "h": 19
+          },
+          "frame": {
+            "x": 38,
+            "y": 1058,
+            "w": 17,
+            "h": 19
+          }
+        },
+        {
+          "filename": "SALAC_BERRY_2",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 16,
+            "w": 16,
+            "h": 19
+          },
+          "frame": {
+            "x": 19,
+            "y": 1059,
+            "w": 16,
+            "h": 19
+          }
+        },
+        {
+          "filename": "LEPPA_BERRY_1",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 17,
+            "w": 16,
+            "h": 18
+          },
+          "frame": {
+            "x": 1,
+            "y": 1075,
+            "w": 16,
+            "h": 18
+          }
+        },
+        {
+          "filename": "ROWAP_BERRY_2",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 3,
+            "y": 18,
+            "w": 17,
+            "h": 17
+          },
+          "frame": {
+            "x": 37,
+            "y": 1079,
+            "w": 17,
+            "h": 17
+          }
+        },
+        {
+          "filename": "LEPPA_BERRY_2",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 17,
+            "w": 16,
+            "h": 18
+          },
+          "frame": {
+            "x": 19,
+            "y": 1080,
+            "w": 16,
+            "h": 18
+          }
+        },
+        {
+          "filename": "RAWST_BERRY_1",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 17,
+            "w": 16,
+            "h": 18
+          },
+          "frame": {
+            "x": 1,
+            "y": 1095,
+            "w": 16,
+            "h": 18
+          }
+        },
+        {
+          "filename": "SALAC_BERRY_1",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 17,
+            "w": 16,
+            "h": 18
+          },
+          "frame": {
+            "x": 37,
+            "y": 1098,
+            "w": 16,
+            "h": 18
+          }
+        },
+        {
+          "filename": "CROP_1",
+          "rotated": false,
+          "trimmed": false,
+          "sourceSize": {
+            "w": 16,
+            "h": 17
+          },
+          "spriteSourceSize": {
+            "x": 0,
+            "y": 0,
+            "w": 16,
+            "h": 17
+          },
+          "frame": {
+            "x": 19,
+            "y": 1100,
+            "w": 16,
+            "h": 17
+          }
+        },
+        {
+          "filename": "CROP_2",
+          "rotated": false,
+          "trimmed": false,
+          "sourceSize": {
+            "w": 16,
+            "h": 17
+          },
+          "spriteSourceSize": {
+            "x": 0,
+            "y": 0,
+            "w": 16,
+            "h": 17
+          },
+          "frame": {
+            "x": 1,
+            "y": 1115,
+            "w": 16,
+            "h": 17
+          }
+        },
+        {
+          "filename": "RAWST_BERRY_2",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 18,
+            "w": 16,
+            "h": 17
+          },
+          "frame": {
+            "x": 37,
+            "y": 1118,
+            "w": 16,
+            "h": 17
+          }
+        },
+        {
+          "filename": "ROWAP_BERRY_1",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 23,
+            "h": 35
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 18,
+            "w": 16,
+            "h": 17
+          },
+          "frame": {
+            "x": 19,
+            "y": 1119,
+            "w": 16,
+            "h": 17
+          }
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "app": "https://www.codeandweb.com/texturepacker",
+    "version": "3.0",
+    "smartupdate": "$TexturePacker:SmartUpdate:4eb3cf30b8370dbbd9b526cedeefb826:3fb3fbf61c8b3adbf218a8dbfeee09a3:b99492de8b36c23e52bf76141e4e8dc1$"
+  }
+}
