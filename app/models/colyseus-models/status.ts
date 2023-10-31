@@ -408,7 +408,7 @@ export default class Status extends Schema implements IStatus {
     origin: PokemonEntity | undefined,
     board: Board
   ) {
-    if (!this.silence && !this.runeProtect) {
+    if (!this.silence && !this.runeProtect && !this.tree) {
       this.silence = true
       this.silenceCooldown = timer
       if (origin) {

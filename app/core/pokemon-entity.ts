@@ -10,12 +10,7 @@ import { Schema, type, SetSchema } from "@colyseus/schema"
 import { AbilityStrategies } from "./abilities/abilities"
 import Board from "./board"
 import PokemonState from "./pokemon-state"
-import {
-  IPokemonEntity,
-  IPokemon,
-  Emotion,
-  AttackSprite
-} from "../types"
+import { IPokemonEntity, IPokemon, Emotion, AttackSprite } from "../types"
 import { AttackType, Rarity } from "../types/enum/Game"
 import { Effect } from "../types/enum/Effect"
 import { Ability } from "../types/enum/Ability"
@@ -276,13 +271,14 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     this.changeState(new IdleState())
   }
 
-  setPP(pp: number) {
+  addPP(pp: number) {
     if (
       !this.status.silence &&
       !this.status.protect &&
-      !this.status.resurecting
+      !this.status.resurecting &&
+      !(pp < 0 && this.status.tree) // cannot lose PP if tree
     ) {
-      this.pp = clamp(pp, 0, this.maxPP)
+      this.pp = clamp(this.pp + pp, 0, this.maxPP)
     }
   }
 
@@ -392,7 +388,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     trueDamage: number
     totalDamage: number
   }) {
-    this.setPP(this.pp + ON_ATTACK_MANA)
+    this.addPP(ON_ATTACK_MANA)
 
     if (this.items.has(Item.BLUE_ORB)) {
       this.count.staticHolderCount++
@@ -403,7 +399,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
         board.forEach((x, y, tg) => {
           if (tg && this.team != tg.team && c > 0) {
             tg.count.staticCount++
-            tg.setPP(tg.pp - 20)
+            tg.addPP(-20)
             tg.count.manaBurnCount++
             c--
           }
@@ -451,10 +447,10 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.items.has(Item.MANA_SCARF)) {
-      this.setPP(this.pp + MANA_SCARF_MANA)
+      this.addPP(MANA_SCARF_MANA)
     }
     if (this.status.deltaOrbStacks > 0) {
-      this.setPP(this.pp + DELTA_ORB_MANA * this.status.deltaOrbStacks)
+      this.addPP(DELTA_ORB_MANA * this.status.deltaOrbStacks)
     }
 
     if (this.effects.has(Effect.TELEPORT_NEXT_ATTACK)) {
@@ -557,9 +553,9 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
         ? 30
         : 45
       if (chance(burnManaChance)) {
-        target.setPP(target.pp - 20)
+        target.addPP(-20)
         target.count.manaBurnCount++
-        this.setPP(this.pp + manaGain)
+        this.addPP(manaGain)
       }
     }
 
@@ -597,63 +593,63 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       })
     }
 
-    const berry = values(this.items).find(item => Berries.includes(item))
-    if(this.life < 0.5 * this.hp && berry){
+    const berry = values(this.items).find((item) => Berries.includes(item))
+    if (this.life < 0.5 * this.hp && berry) {
       let berryEaten = false
-      switch(berry){
+      switch (berry) {
         case Item.AGUAV_BERRY:
           berryEaten = true
           this.handleHeal(this.hp - this.life, this, 0)
           this.status.triggerConfusion(3000, this)
-          break;
+          break
         case Item.APICOT_BERRY:
           berryEaten = true
           this.addSpecialDefense(20)
-          break;
+          break
         case Item.GANLON_BERRY:
           berryEaten = true
           this.addDefense(20)
-          break;
+          break
         case Item.JABOCA_BERRY:
           berryEaten = true
           this.status.triggerSpikeArmor(10000)
-          break;
+          break
         case Item.LANSAT_BERRY:
           berryEaten = true
           this.addCritChance(50)
-          break;
+          break
         case Item.LIECHI_BERRY:
           berryEaten = true
           this.addAttack(15)
-          break;
+          break
         case Item.LUM_BERRY:
           berryEaten = true
           this.status.clearNegativeStatus()
           this.status.triggerRuneProtect(10000)
-          break;
+          break
         case Item.ORAN_BERRY:
           berryEaten = true
           this.addShield(100, this)
-          break;
+          break
         case Item.PETAYA_BERRY:
           berryEaten = true
           this.addAbilityPower(100)
-          break;
+          break
         case Item.ROWAP_BERRY:
           berryEaten = true
           this.status.triggerMagicBounce(10000)
-          break;
+          break
         case Item.SALAC_BERRY:
           berryEaten = true
           this.addAttackSpeed(50)
-          break;
+          break
         case Item.SITRUS_BERRY:
           berryEaten = true
           this.effects.add(Effect.BUFF_HEAL_RECEIVED)
           this.handleHeal(20, this, 0)
-          break;
+          break
       }
-      if(berryEaten){
+      if (berryEaten) {
         this.items.delete(berry)
         this.refToBoardPokemon.items.delete(berry)
       }
@@ -731,8 +727,8 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     })
 
     if (this.items.has(Item.SCOPE_LENS)) {
-      this.setPP(this.pp + SCOPE_LENS_MANA)
-      target.setPP(target.pp - SCOPE_LENS_MANA)
+      this.addPP(SCOPE_LENS_MANA)
+      target.addPP(-SCOPE_LENS_MANA)
       target.count.manaBurnCount++
     }
 
@@ -740,7 +736,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       target.status.triggerArmorReduction(4000)
     }
 
-    if(target.items.has(Item.BABIRI_BERRY)){
+    if (target.items.has(Item.BABIRI_BERRY)) {
       target.status.triggerProtect(2000)
       target.handleHeal(20, target, 0)
       target.items.delete(Item.BABIRI_BERRY)
@@ -854,11 +850,11 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   // called after every ability cast
-  onCast(){
-    if(this.items.has(Item.LEPPA_BERRY)){
+  onCast() {
+    if (this.items.has(Item.LEPPA_BERRY)) {
       this.items.delete(Item.LEPPA_BERRY)
       this.refToBoardPokemon.items.delete(Item.LEPPA_BERRY)
-      this.setPP(this.pp + 50)
+      this.addPP(50)
     }
   }
 

@@ -480,7 +480,7 @@ export class MistySurgeStrategy extends AbilityStrategy {
     const ppGain = Math.round(30 * (1 + pokemon.ap / 100))
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (ally && pokemon.team == ally.team && ally.types.has(Synergy.FAIRY)) {
-        ally.setPP(ally.pp + ppGain)
+        ally.addPP(ppGain)
       }
     })
   }
@@ -517,7 +517,7 @@ export class ShadowBallStrategy extends AbilityStrategy {
 
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.setPP(target.pp - 15)
+    target.addPP(-15)
     target.count.manaBurnCount++
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
@@ -528,7 +528,7 @@ export class ShadowBallStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        cell.value.setPP(cell.value.pp - 15)
+        cell.value.addPP(-15)
         cell.value.count.manaBurnCount++
       }
     })
@@ -1395,24 +1395,11 @@ export class DisarmingVoiceStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let heal = 0
-    switch (pokemon.stars) {
-      case 1:
-        heal = 10
-        break
-      case 2:
-        heal = 20
-        break
-      case 3:
-        heal = 40
-        break
-      default:
-        break
-    }
-    heal = Math.round(heal * (1 + pokemon.ap / 200))
+    let ppGain = [10,20,40][pokemon.stars - 1] ?? 0
+    ppGain = Math.round(ppGain * (1 + pokemon.ap / 200))
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team === tg.team && tg.id !== pokemon.id) {
-        tg.setPP(tg.pp + heal)
+        tg.addPP(ppGain)
         pokemon.simulation.room.broadcast(Transfer.ABILITY, {
           id: pokemon.simulation.id,
           skill: pokemon.skill,
@@ -1447,8 +1434,8 @@ export class HighJumpKickStrategy extends AbilityStrategy {
       default:
         break
     }
-    pokemon.setPP(target.pp)
-    target.setPP(0)
+    pokemon.addPP(target.pp)
+    target.addPP(-target.pp)
     target.count.manaBurnCount++
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
@@ -2281,7 +2268,7 @@ export class GuillotineStrategy extends AbilityStrategy {
       crit
     )
     if (death) {
-      pokemon.setPP(pokemon.maxPP)
+      pokemon.addPP(pokemon.maxPP)
     }
   }
 }
@@ -2439,7 +2426,7 @@ export class SolarBeamStrategy extends AbilityStrategy {
     let damage = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30
     if (pokemon.simulation.weather === Weather.SUN) {
       damage = damage * 2
-      pokemon.setPP(pokemon.pp + 40)
+      pokemon.addPP(40)
     }
     effectInLine(board, pokemon, target, (targetInLine) => {
       if (targetInLine != null && targetInLine.team !== pokemon.team) {
@@ -2689,7 +2676,7 @@ export class SoakStrategy extends AbilityStrategy {
 
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (ally && pokemon.team == ally.team) {
-        ally.setPP(ally.pp + 10)
+        ally.addPP(10)
       }
     })
 
@@ -3925,7 +3912,7 @@ export class DragonDartsStrategy extends AbilityStrategy {
       )
     }
     if (target.life <= 0) {
-      pokemon.setPP(pokemon.pp + 40)
+      pokemon.addPP(40)
     }
   }
 }
@@ -4159,7 +4146,7 @@ export class ForecastStrategy extends AbilityStrategy {
           p.addAttack(3, true)
         }
         if (pokemon.name === Pkm.CASTFORM_RAIN) {
-          p.setPP(p.pp + Math.round(20 * (1 + pokemon.ap / 100)))
+          p.addPP(Math.round(20 * (1 + pokemon.ap / 100)))
         }
         if (pokemon.name === Pkm.CASTFORM_HAIL) {
           p.addDefense(2, true)
@@ -4392,13 +4379,13 @@ export class ShellTrapStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     target.status.triggerSilence(3000, target, pokemon, board)
     const ppBurn = Math.round(40 * (1 + pokemon.ap / 100))
-    target.setPP(target.pp - ppBurn)
+    target.addPP(-ppBurn)
 
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
 
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.setPP(cell.value.pp - ppBurn)
+        cell.value.addPP(-ppBurn)
       }
     })
   }

@@ -383,7 +383,7 @@ export default class Simulation extends Schema implements ISimulation {
         pokemon.addAbilityPower(value)
         break
       case Stat.PP:
-        pokemon.setPP(pokemon.pp + value)
+        pokemon.addPP(value)
         break
       case Stat.ATK_SPEED:
         pokemon.addAttackSpeed(value)

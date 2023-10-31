@@ -272,7 +272,7 @@ export default class PokemonState {
 
       if (pokemon) {
         if (shouldTargetGainMana) {
-          pokemon.setPP(pokemon.pp + Math.ceil(damage / 10))
+          pokemon.addPP(Math.ceil(damage / 10))
         }
 
         if (
@@ -540,14 +540,14 @@ export default class PokemonState {
     }
 
     if (pokemon.manaCooldown <= 0) {
-      pokemon.setPP(pokemon.pp + 10)
+      pokemon.addPP(10)
       if (pokemon.simulation.weather === Weather.RAIN) {
-        pokemon.setPP(pokemon.pp + 3)
+        pokemon.addPP(3)
       }
       if (pokemon.passive === Passive.ILLUMISE_VOLBEAT) {
         board.forEach((x, y, p) => {
           if (p && p.passive === Passive.ILLUMISE_VOLBEAT && p !== pokemon) {
-            pokemon.setPP(pokemon.pp + 5)
+            pokemon.addPP(5)
           }
         })
       }
@@ -556,7 +556,7 @@ export default class PokemonState {
         pokemon.effects.has(Effect.ETERNAL_LIGHT) ||
         pokemon.effects.has(Effect.MAX_ILLUMINATION)
       ) {
-        pokemon.setPP(pokemon.pp + 10)
+        pokemon.addPP(10)
       }
       pokemon.manaCooldown = 1000
     } else {
