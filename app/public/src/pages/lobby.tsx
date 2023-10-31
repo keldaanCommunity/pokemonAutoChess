@@ -92,6 +92,7 @@ export default function Lobby() {
     await firebase.auth().signOut()
     dispatch(leaveLobby())
     dispatch(logOut())
+    setToAuth(true)
   }, [dispatch, lobby])
 
   if (toAuth) {
