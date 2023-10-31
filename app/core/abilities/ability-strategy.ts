@@ -48,7 +48,7 @@ export class AbilityStrategy {
         pkm.team !== pokemon.team &&
         pkm.id !== pokemon.id
       ) {
-        pkm.setPP(pkm.pp + 5)
+        pkm.addPP(5)
         pkm.simulation.room.broadcast(Transfer.ABILITY, {
           id: pokemon.simulation.id,
           skill: pkm.skill,
@@ -59,7 +59,7 @@ export class AbilityStrategy {
     })
 
     if (pokemon.items.has(Item.AQUA_EGG)) {
-      pokemon.setPP(pokemon.pp + 20)
+      pokemon.addPP(20)
     }
 
     if (pokemon.items.has(Item.STAR_DUST)) {
@@ -108,7 +108,7 @@ export function soundBoost(pokemon: PokemonEntity, board: Board) {
       }
       if (pokemon.effects.has(Effect.PRESTO)) {
         const manaBoost = chimechoBoost ? 6 : 3
-        ally.setPP(ally.pp + manaBoost)
+        ally.addPP(manaBoost)
       }
     }
   })
