@@ -33,6 +33,13 @@
 - PVE stages can no longer have duplicates in rewards, except stage 40
 - Delta Orb effect can now be stacked, if you put a mon between two units with Delta orbs for example
 
+# Changes to stages
+
+- Nerf PVE stages round 2, 3 and 14, buffed stage 19 and 40
+- PVE Stage 14 is now against Mewtwo
+- Tower duo PVE Stage is moved to stage 19
+- Giratina is added to PVE Stage 40 board
+
 # Gameplay
 
 -
