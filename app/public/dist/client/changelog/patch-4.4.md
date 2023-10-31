@@ -20,6 +20,7 @@
 - Nincada is now an additional Epic. Evolve in both Sheninja and Ninjask
 - Unown-T is now TREE: gives 3 random berries
 - Slowbro now needs a King's Rock to evolve to Slowking
+- Nerf Attack of Ratata and Spearow lines
 
 # Changes to Synergies
 
