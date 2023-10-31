@@ -168,7 +168,7 @@ export function rewriteBotRoundsRequiredto1(bot: IBot) {
     }
   })
   bot = structuredClone(bot)
-  bot.steps = oneSteps.slice(0, MAX_BOTS_STAGE)
+  bot.steps = oneSteps.slice(0, MAX_BOTS_STAGE + 1)
   return bot
 }
 
