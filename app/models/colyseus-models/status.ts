@@ -225,9 +225,11 @@ export default class Status extends Schema implements IStatus {
   }
 
   triggerArmorReduction(timer: number) {
-    if (!this.armorReduction && !this.runeProtect) {
+    if (!this.runeProtect) {
       this.armorReduction = true
-      this.armorReductionCooldown = timer
+      if (timer > this.armorReductionCooldown) {
+        this.armorReductionCooldown = timer
+      }
     }
   }
 
@@ -274,10 +276,8 @@ export default class Status extends Schema implements IStatus {
   }
 
   triggerSynchro() {
-    if (!this.synchro) {
-      this.synchro = true
-      this.synchroCooldown = 3000
-    }
+    this.synchro = true
+    this.synchroCooldown = 3000
   }
 
   updateSynchro(dt: number, board: Board, pkm: PokemonEntity) {
@@ -307,10 +307,8 @@ export default class Status extends Schema implements IStatus {
   }
 
   triggerSoulDew(timer: number) {
-    if (!this.soulDew) {
-      this.soulDew = true
-      this.soulDewCooldown = timer
-    }
+    this.soulDew = true
+    this.soulDewCooldown = timer
   }
 
   updateSoulDew(dt: number, pkm: PokemonEntity) {
@@ -334,16 +332,18 @@ export default class Status extends Schema implements IStatus {
   ) {
     // fluffy tail prevents burn but not rune protect
     if (
-      !this.burn &&
       !pkm.effects.has(Effect.IMMUNITY_BURN) &&
       (!this.runeProtect ||
         (pkm.items.has(Item.FLAME_ORB) && !pkm.items.has(Item.FLUFFY_TAIL))) // can escape flame orb burn only with fluffy tail
     ) {
       this.burn = true
-      this.burnCooldown = timer
-      if (origin) {
-        this.burnOrigin = origin
+      if (timer > this.burnCooldown) {
+        this.burnCooldown = timer
+        if (origin) {
+          this.burnOrigin = origin
+        }
       }
+
       if (pkm.passive === Passive.GUTS && !this.guts) {
         this.guts = true
         pkm.addAttack(5, false)
@@ -395,7 +395,7 @@ export default class Status extends Schema implements IStatus {
   healBurn(pkm: PokemonEntity) {
     this.burn = false
     this.burnOrigin = undefined
-    this.burnDamageCooldown = 1000
+    this.burnDamageCooldown = 0
     if (pkm.passive === Passive.GUTS && this.poisonStacks === 0) {
       this.guts = false
       pkm.addAttack(-5, false)
@@ -408,11 +408,13 @@ export default class Status extends Schema implements IStatus {
     origin: PokemonEntity | undefined,
     board: Board
   ) {
-    if (!this.silence && !this.runeProtect && !this.tree) {
+    if (!this.runeProtect && !this.tree) {
       this.silence = true
-      this.silenceCooldown = timer
-      if (origin) {
-        this.silenceOrigin = origin
+      if (timer > this.silenceCooldown) {
+        this.silenceCooldown = timer
+        if (origin) {
+          this.silenceOrigin = origin
+        }
       }
     }
   }
@@ -443,7 +445,9 @@ export default class Status extends Schema implements IStatus {
         }
       }
       this.poisonStacks = max(maxStacks)(this.poisonStacks + 1)
-      this.poisonCooldown = Math.max(timer, this.poisonCooldown)
+      if (timer > this.poisonCooldown) {
+        this.poisonCooldown = timer
+      }
       if (pkm.passive === Passive.GUTS && !this.guts) {
         this.guts = true
         pkm.addAttack(5, false)
@@ -452,7 +456,7 @@ export default class Status extends Schema implements IStatus {
       if (pkm.items.has(Item.PECHA_BERRY)) {
         this.poisonOrigin = undefined
         this.poisonStacks = 0
-        this.poisonDamageCooldown = 1000
+        this.poisonDamageCooldown = 0
         pkm.items.delete(Item.PECHA_BERRY)
         pkm.refToBoardPokemon.items.delete(Item.PECHA_BERRY)
         pkm.effects.add(Effect.IMMUNITY_POISON)
@@ -499,7 +503,6 @@ export default class Status extends Schema implements IStatus {
     if (this.poisonCooldown - dt <= 0) {
       this.poisonStacks = 0
       this.poisonOrigin = undefined
-      this.poisonDamageCooldown = 1000
       if (pkm.passive === Passive.GUTS && !this.burn) {
         this.guts = false
         pkm.addAttack(-5, false)
@@ -511,7 +514,7 @@ export default class Status extends Schema implements IStatus {
 
   triggerFreeze(timer: number, pkm: PokemonEntity) {
     if (
-      !this.freeze &&
+      !this.freeze && // freeze cannot be stacked
       !this.runeProtect &&
       !pkm.effects.has(Effect.IMMUNITY_FREEZE)
     ) {
@@ -525,7 +528,7 @@ export default class Status extends Schema implements IStatus {
 
       if (pkm.items.has(Item.ASPEAR_BERRY)) {
         this.freeze = false
-        this.freezeCooldown = 1000
+        this.freezeCooldown = 0
         pkm.items.delete(Item.ASPEAR_BERRY)
         pkm.refToBoardPokemon.items.delete(Item.ASPEAR_BERRY)
         pkm.effects.add(Effect.IMMUNITY_FREEZE)
@@ -543,6 +546,7 @@ export default class Status extends Schema implements IStatus {
 
   triggerProtect(timer: number) {
     if (!this.protect) {
+      // protect cannot be stacked
       this.protect = true
       this.protectCooldown = timer
     }
@@ -647,11 +651,13 @@ export default class Status extends Schema implements IStatus {
     origin: PokemonEntity | undefined,
     board: Board
   ) {
-    if (!this.wound && !this.runeProtect) {
+    if (!this.runeProtect) {
       this.wound = true
-      this.woundCooldown = timer
-      if (origin) {
-        this.woundOrigin = origin
+      if (timer > this.woundCooldown) {
+        this.woundCooldown = timer
+        if (origin) {
+          this.woundOrigin = origin
+        }
       }
     }
   }
@@ -666,20 +672,20 @@ export default class Status extends Schema implements IStatus {
   }
 
   triggerParalysis(timer: number, pkm: PokemonEntity) {
-    if (
-      !this.paralysis &&
-      !this.runeProtect &&
-      !pkm.effects.has(Effect.IMMUNITY_PARALYSIS)
-    ) {
-      this.paralysis = true
-      pkm.addAttackSpeed(-40)
+    if (!this.runeProtect && !pkm.effects.has(Effect.IMMUNITY_PARALYSIS)) {
+      if (!this.paralysis) {
+        this.paralysis = true
+        pkm.addAttackSpeed(-40)
+      }
       if (pkm.simulation.weather === Weather.STORM) {
         timer = Math.round(timer * 1.3)
       }
-      this.paralysisCooldown = timer
+      if (timer > this.paralysisCooldown) {
+        this.paralysisCooldown = timer
+      }
+
       if (pkm.items.has(Item.CHERI_BERRY)) {
-        this.paralysis = false
-        this.paralysisCooldown = 1000
+        this.healParalysis(pkm)
         pkm.items.delete(Item.CHERI_BERRY)
         pkm.refToBoardPokemon.items.delete(Item.CHERI_BERRY)
         pkm.effects.add(Effect.IMMUNITY_PARALYSIS)
@@ -689,17 +695,24 @@ export default class Status extends Schema implements IStatus {
 
   updateParalysis(dt: number, pkm: PokemonEntity) {
     if (this.paralysisCooldown - dt <= 0) {
-      this.paralysis = false
-      pkm.addAttackSpeed(40)
+      this.healParalysis(pkm)
     } else {
       this.paralysisCooldown = this.paralysisCooldown - dt
     }
   }
 
+  healParalysis(pkm: PokemonEntity) {
+    if (this.paralysis) {
+      this.paralysis = false
+      this.paralysisCooldown = 0
+      pkm.addAttackSpeed(40)
+    }
+  }
+
   triggerRuneProtect(timer: number) {
-    if (!this.runeProtect) {
-      this.runeProtect = true
-      this.clearNegativeStatus()
+    this.runeProtect = true
+    this.clearNegativeStatus()
+    if (timer > this.runeProtectCooldown) {
       this.runeProtectCooldown = timer
     }
   }
@@ -714,7 +727,9 @@ export default class Status extends Schema implements IStatus {
 
   triggerSpikeArmor(timer: number) {
     this.spikeArmor = true
-    this.spikeArmorCooldown = timer
+    if(timer > this.spikeArmorCooldown){
+      this.spikeArmorCooldown = timer
+    }    
   }
 
   updateSpikeArmor(dt: number) {
@@ -727,7 +742,9 @@ export default class Status extends Schema implements IStatus {
 
   triggerMagicBounce(timer: number) {
     this.magicBounce = true
-    this.magicBounceCooldown = timer
+    if(timer > this.magicBounceCooldown){
+      this.magicBounceCooldown = timer
+    }
   }
 
   updateMagicBounce(dt: number) {
