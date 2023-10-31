@@ -15,12 +15,13 @@ import PokemonConfig from "./pokemon-config"
 import { IPokemonConfig } from "../mongo-models/user-metadata"
 import PokemonCollection from "./pokemon-collection"
 import HistoryItem from "./history-item"
-import { Item } from "../../types/enum/Item"
+import { Berries, Item } from "../../types/enum/Item"
 import { Pkm, PkmProposition } from "../../types/enum/Pokemon"
 import { Weather } from "../../types/enum/Weather"
 import PokemonFactory from "../pokemon-factory"
 import { Effects } from "../effects"
 import { values } from "../../utils/schemas"
+import { pickRandomIn } from "../../utils/random"
 
 export default class Player extends Schema implements IPlayer {
   @type("string") id: string
@@ -54,6 +55,8 @@ export default class Player extends Schema implements IPlayer {
   @type(["string"]) pokemonsProposition = new ArraySchema<PkmProposition>()
   @type(["string"]) pveRewards = new ArraySchema<Item>()
   @type("float32") loadingProgress: number = 0
+  @type("string") berry: Item = pickRandomIn(Berries)
+  @type("uint8") berryTreeStage: number = 1
   effects: Effects = new Effects()
   isBot: boolean
   opponents: Map<string, number> = new Map<string, number>()
@@ -165,7 +168,10 @@ export default class Player extends Schema implements IPlayer {
   }
 
   isPositionEmpty(x: number, y: number): boolean {
-    return values(this.board).some(p => p.positionX === x && p.positionY === 0) === false
+    return (
+      values(this.board).some((p) => p.positionX === x && p.positionY === 0) ===
+      false
+    )
   }
 
   getFreeSpaceOnBench(): number {

@@ -1,10 +1,10 @@
 import PokemonFactory from "../../models/pokemon-factory"
 import { Ability } from "../../types/enum/Ability"
 import { AttackType, PokemonActionState, Rarity } from "../../types/enum/Game"
-import { BasicItems, Item } from "../../types/enum/Item"
+import { BasicItems, Berries, Item } from "../../types/enum/Item"
 import { getUnownsPoolPerStage, Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
-import { pickRandomIn } from "../../utils/random"
+import { pickNRandomIn, pickRandomIn } from "../../utils/random"
 import Board from "../board"
 import PokemonEntity from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
@@ -505,20 +505,9 @@ export class HiddenPowerTStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, state, board, target, crit)
-    const coord = unown.simulation.getClosestAvailablePlaceOnBoardToPokemon(
-      unown,
-      unown.team
-    )
-    const tapu = unown.simulation.addPokemon(
-      PokemonFactory.createPokemonFromName(Pkm.TAPU_LELE, unown.player),
-      coord.x,
-      coord.y,
-      unown.team,
-      false
-    )
-    tapu.items.add(Item.CHOICE_SPECS)
-    tapu.simulation.applyItemsEffects(tapu)
-    tapu.pp = tapu.maxPP
+    pickNRandomIn(Berries, 3).forEach(item => {
+      unown.player && unown.player.items.add(item)
+    })
   }
 }
 

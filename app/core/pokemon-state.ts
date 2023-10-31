@@ -11,7 +11,6 @@ import Board from "./board"
 import PokemonEntity from "./pokemon-entity"
 import { IPokemonEntity, Transfer } from "../types"
 import { Synergy, SynergyEffects } from "../types/enum/Synergy"
-import { Ability } from "../types/enum/Ability"
 import { pickRandomIn } from "../utils/random"
 import { logger } from "../utils/logger"
 import { Passive } from "../types/enum/Passive"
@@ -19,7 +18,6 @@ import { Weather } from "../types/enum/Weather"
 import { max, min } from "../utils/number"
 import { distanceC, distanceM } from "../utils/distance"
 import { FIGHTING_PHASE_DURATION } from "../types/Config"
-import { values } from "../utils/schemas"
 
 export default class PokemonState {
   handleHeal(
@@ -34,22 +32,23 @@ export default class PokemonState {
       !pokemon.status.wound &&
       !pokemon.status.protect
     ) {
-      const boost = apBoost ? (heal * apBoost * pokemon.ap) / 100 : 0
-      let healBoosted = Math.round(heal + boost)
-
+      if (apBoost > 0) {
+        heal = Math.round(heal * (1 + (apBoost * pokemon.ap) / 100))
+      }
+      if (pokemon.effects.has(Effect.BUFF_HEAL_RECEIVED)) {
+        heal = Math.round(heal * 1.5)
+      }
       if (pokemon.status.poisonStacks > 0) {
-        healBoosted = Math.round(
-          healBoosted * (1 - pokemon.status.poisonStacks * 0.2)
-        )
+        heal = Math.round(heal * (1 - pokemon.status.poisonStacks * 0.2))
       }
 
       if (pokemon.passive === Passive.WONDER_GUARD) {
-        healBoosted = 1
+        heal = 1
       }
 
-      const healTaken = Math.min(pokemon.hp - pokemon.life, healBoosted)
+      const healTaken = Math.min(pokemon.hp - pokemon.life, heal)
 
-      pokemon.life = Math.min(pokemon.hp, pokemon.life + healBoosted)
+      pokemon.life = Math.min(pokemon.hp, pokemon.life + heal)
 
       if (caster && healTaken > 0) {
         if (pokemon.simulation.room.state.time < FIGHTING_PHASE_DURATION) {

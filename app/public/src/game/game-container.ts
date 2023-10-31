@@ -539,12 +539,8 @@ class GameContainer {
 
     player.synergies.onChange(() => {
       if (player.id === this.spectatedPlayerId) {
-        const lightCount = player.synergies.get(Synergy.LIGHT)
-        if (lightCount && lightCount > 0) {
-          this.gameScene?.board?.showLightCell()
-        } else {
-          this.gameScene?.board?.hideLightCell()
-        }
+        this.gameScene?.board?.showLightCell()
+        this.gameScene?.board?.showBerryTree()
       }
     })
   }

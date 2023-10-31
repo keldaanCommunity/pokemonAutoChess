@@ -157,3 +157,40 @@
   gap: 0.5em;
   padding: 0;
 }
+
+#wiki-items {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#wiki-items ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  padding: 0;
+  max-width: 400px;
+}
+
+#wiki-items img.item {
+  image-rendering: pixelated;
+  width: 50px;
+  height: 50px;
+  cursor: var(--cursor-hover);
+  margin: 8px;
+}
+
+#wiki-items img.tree {
+  image-rendering: pixelated;
+  width: 50px;
+  margin: -8px 8px 30px 8px;
+}
+
+#wiki-items th,
+#wiki-items td:first-child {
+  background-color: #61738a;
+}
+
+#wiki-items tr:nth-child(odd),
+#wiki-items td:nth-child(n + 2) {
+  background-color: #54596b;
+}

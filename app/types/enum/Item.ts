@@ -43,7 +43,7 @@ export enum Item {
   WIDE_LENS = "WIDE_LENS",
   RAZOR_CLAW = "RAZOR_CLAW",
   FLUFFY_TAIL = "FLUFFY_TAIL",
-  ORAN_BERRY = "ORAN_BERRY",
+  KINGS_ROCK = "KINGS_ROCK",
   SHINY_CHARM = "SHINY_CHARM",
   GRACIDEA_FLOWER = "GRACIDEA_FLOWER",
   FLAME_ORB = "FLAME_ORB",
@@ -52,7 +52,27 @@ export enum Item {
   POKE_DOLL = "POKE_DOLL",
   RED_ORB = "RED_ORB",
   MAX_REVIVE = "MAX_REVIVE",
-  ROCKY_HELMET = "ROCKY_HELMET"
+  ROCKY_HELMET = "ROCKY_HELMET",
+  AGUAV_BERRY = "AGUAV_BERRY",
+  APICOT_BERRY = "APICOT_BERRY",
+  ASPEAR_BERRY = "ASPEAR_BERRY",
+  BABIRI_BERRY = "BABIRI_BERRY",
+  CHERI_BERRY = "CHERI_BERRY",
+  CHESTO_BERRY = "CHESTO_BERRY",
+  GANLON_BERRY = "GANLON_BERRY",
+  JABOCA_BERRY = "JABOCA_BERRY",
+  LANSAT_BERRY = "LANSAT_BERRY",
+  LEPPA_BERRY = "LEPPA_BERRY",
+  LIECHI_BERRY = "LIECHI_BERRY",
+  LUM_BERRY = "LUM_BERRY",
+  ORAN_BERRY = "ORAN_BERRY",
+  PECHA_BERRY = "PECHA_BERRY",
+  PERSIM_BERRY = "PERSIM_BERRY",
+  PETAYA_BERRY = "PETAYA_BERRY",
+  RAWST_BERRY = "RAWST_BERRY",
+  ROWAP_BERRY = "ROWAP_BERRY",
+  SALAC_BERRY = "SALAC_BERRY",
+  SITRUS_BERRY = "SITRUS_BERRY"
 }
 
 export const AllItems: Item[] = Object.values(Item)
@@ -69,7 +89,33 @@ export const BasicItems: Item[] = [
   Item.MYSTIC_WATER
 ]
 
-export const CompletedItems: Item[] = Object.values(Item).filter(item => BasicItems.includes(item) === false)
+export const Berries: Item[] = [
+  Item.AGUAV_BERRY,
+  Item.APICOT_BERRY,
+  Item.ASPEAR_BERRY,
+  Item.BABIRI_BERRY,
+  Item.CHERI_BERRY,
+  Item.CHESTO_BERRY,
+  Item.GANLON_BERRY,
+  Item.JABOCA_BERRY,
+  Item.LANSAT_BERRY,
+  Item.LEPPA_BERRY,
+  Item.LIECHI_BERRY,
+  Item.LUM_BERRY,
+  Item.ORAN_BERRY,
+  Item.PECHA_BERRY,
+  Item.PERSIM_BERRY,
+  Item.PETAYA_BERRY,
+  Item.RAWST_BERRY,
+  Item.ROWAP_BERRY,
+  Item.SALAC_BERRY,
+  Item.SITRUS_BERRY
+]
+
+export const CompletedItems: Item[] = Object.values(Item).filter(
+  (item) =>
+    BasicItems.includes(item) === false && Berries.includes(item) === false
+)
 
 export const SynergyStones: Item[] = [
   Item.OLD_AMBER,

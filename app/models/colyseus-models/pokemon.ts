@@ -3509,7 +3509,7 @@ export class Slowbro extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   evolution = Pkm.SLOWKING
-  evolutionRule = new ItemEvolutionRule([Item.ROCKY_HELMET])
+  evolutionRule = new ItemEvolutionRule([Item.KINGS_ROCK])
   hp = 130
   atk = 13
   def = 3

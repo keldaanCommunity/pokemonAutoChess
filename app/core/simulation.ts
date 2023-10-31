@@ -600,6 +600,10 @@ export default class Simulation extends Schema implements ISimulation {
         if (pokemon.items.has(Item.FLUFFY_TAIL)) {
           pokemon.status.triggerRuneProtect(60000)
         }
+
+        if(pokemon.passive === Passive.SPOT_PANDA){
+          pokemon.effects.add(Effect.IMMUNITY_CONFUSION)
+        }
       })
     })
 
