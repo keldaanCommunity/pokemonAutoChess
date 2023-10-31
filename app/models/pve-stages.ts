@@ -74,14 +74,11 @@ export const PVEStages: { [turn: number]: PVEStage } = {
   },
 
   14: {
-    name: "tower_duo",
-    avatar: Pkm.LUGIA,
+    name: "pkm.MEWTWO",
+    avatar: Pkm.MEWTWO,
     emotion: Emotion.DETERMINED,
     shinyChance: 1 / 50,
-    board: [
-      [Pkm.LUGIA, 3, 1],
-      [Pkm.HO_OH, 5, 1]
-    ],
+    board: [[Pkm.MEWTWO, 4, 2]],
     getRewards(shiny) {
       if (shiny) {
         return pickNRandomIn(NonSpecialItemComponents, 3)
@@ -92,11 +89,14 @@ export const PVEStages: { [turn: number]: PVEStage } = {
   },
 
   19: {
-    name: "pkm.GIRATINA",
-    avatar: Pkm.GIRATINA,
+    name: "tower_duo",
+    avatar: Pkm.LUGIA,
     emotion: Emotion.DETERMINED,
     shinyChance: 1 / 50,
-    board: [[Pkm.GIRATINA, 4, 2]],
+    board: [
+      [Pkm.LUGIA, 3, 1],
+      [Pkm.HO_OH, 5, 1]
+    ],
     getRewards(shiny) {
       if (shiny) {
         return pickNRandomIn(NonSpecialItemComponents, 3)
@@ -173,9 +173,10 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     avatar: Pkm.ARCEUS,
     emotion: Emotion.INSPIRED,
     board: [
-      [Pkm.DIALGA, 2, 2],
-      [Pkm.PALKIA, 6, 2],
-      [Pkm.ARCEUS, 4, 2]
+      [Pkm.DIALGA, 2, 3],
+      [Pkm.GIRATINA, 4, 3],
+      [Pkm.PALKIA, 6, 3],
+      [Pkm.ARCEUS, 4, 1]
     ],
     getRewards() {
       return [

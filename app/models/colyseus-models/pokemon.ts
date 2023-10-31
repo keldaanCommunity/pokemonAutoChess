@@ -4321,7 +4321,7 @@ export class Rattata extends Pokemon {
   stars = 1
   evolution = Pkm.RATICATE
   hp = 30
-  atk = 4
+  atk = 3
   def = 1
   speDef = 1
   maxPP = 100
@@ -4335,7 +4335,7 @@ export class Raticate extends Pokemon {
   rarity = Rarity.SPECIAL
   stars = 2
   hp = 60
-  atk = 6
+  atk = 5
   def = 1
   speDef = 1
   maxPP = 100
@@ -4351,7 +4351,7 @@ export class Spearow extends Pokemon {
   stars = 1
   evolution = Pkm.FEAROW
   hp = 30
-  atk = 4
+  atk = 3
   def = 1
   speDef = 1
   maxPP = 100
@@ -4365,7 +4365,7 @@ export class Fearow extends Pokemon {
   rarity = Rarity.SPECIAL
   stars = 2
   hp = 60
-  atk = 6
+  atk = 5
   def = 1
   speDef = 1
   maxPP = 100
