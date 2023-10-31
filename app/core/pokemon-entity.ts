@@ -648,6 +648,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
           this.addAttackSpeed(50)
           break;
         case Item.SITRUS_BERRY:
+          berryEaten = true
           this.effects.add(Effect.BUFF_HEAL_RECEIVED)
           this.handleHeal(20, this, 0)
           break;
