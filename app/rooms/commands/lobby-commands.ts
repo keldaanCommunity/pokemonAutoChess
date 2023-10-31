@@ -694,25 +694,23 @@ export class OnSearchCommand extends Command<
 > {
   async execute({ client, name }: { client: Client; name: string }) {
     try {
-      if (USERNAME_REGEXP.test(name)) {
-        const regExp = new RegExp(name)
-        const users = await UserMetadata.find(
-          { displayName: { $regex: regExp, $options: "i" } },
-          ["uid", "elo", "displayName", "level", "avatar"],
-          { limit: 100, sort: { level: -1 } }
-        )
-        if (users) {
-          const suggestions: Array<ISuggestionUser> = users.map((u) => {
-            return {
-              id: u.uid,
-              elo: u.elo,
-              name: u.displayName,
-              level: u.level,
-              avatar: u.avatar
-            }
-          })
-          client.send(Transfer.SUGGESTIONS, suggestions)
-        }
+      const regExp = new RegExp("^" + name)
+      const users = await UserMetadata.find(
+        { displayName: { $regex: regExp, $options: "i" } },
+        ["uid", "elo", "displayName", "level", "avatar"],
+        { limit: 100, sort: { level: -1 } }
+      )
+      if (users) {
+        const suggestions: Array<ISuggestionUser> = users.map((u) => {
+          return {
+            id: u.uid,
+            elo: u.elo,
+            name: u.displayName,
+            level: u.level,
+            avatar: u.avatar
+          }
+        })
+        client.send(Transfer.SUGGESTIONS, suggestions)
       }
     } catch (error) {
       logger.error(error)
