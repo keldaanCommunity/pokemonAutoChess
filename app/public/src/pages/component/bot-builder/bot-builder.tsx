@@ -102,7 +102,11 @@ export default function BotBuilder() {
   )
 
   useEffect(() => {
-    if (currentStage >= 1 && bot.steps[currentStage].board.length === 0) {
+    if (
+      currentStage >= 1 &&
+      currentStage in bot.steps &&
+      bot.steps[currentStage].board.length === 0
+    ) {
       // automatically copy from last step
       updateStep(structuredClone(bot.steps[currentStage - 1].board))
     }
