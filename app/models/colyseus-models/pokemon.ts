@@ -7,7 +7,9 @@ import { Emotion, IPokemon, AttackSprite, Title } from "../../types"
 import {
   DEFAULT_ATK_SPEED,
   EvolutionTime,
-  ItemRecipe
+  ItemRecipe,
+  MausholdEvolutionTurn,
+  TandemausEvolutionTurn
 } from "../../types/Config"
 import { AllItems, Item, SynergyStones } from "../../types/enum/Item"
 import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
@@ -23,7 +25,8 @@ import {
   CountEvolutionRule,
   EvolutionRule,
   HatchEvolutionRule,
-  ItemEvolutionRule
+  ItemEvolutionRule,
+  TurnEvolutionRule
 } from "../../core/evolution-rules"
 import PokemonFactory from "../pokemon-factory"
 
@@ -1406,9 +1409,9 @@ export class Porygon2 extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   evolution = Pkm.PORYGON_Z
+  hp = 222
+  atk = 22
   evolutionRule = new ItemEvolutionRule([Item.UPGRADE])
-  hp = 180
-  atk = 14
   def = 1
   speDef = 3
   maxPP = 90
@@ -1428,7 +1431,7 @@ export class PorygonZ extends Pokemon {
   ])
   rarity = Rarity.EPIC
   stars = 3
-  hp = 333
+  hp = 222
   atk = 33
   def = 1
   speDef = 5
@@ -8736,7 +8739,7 @@ export class Woobat extends Pokemon {
   stars = 1
   evolution = Pkm.SWOOBAT
   hp = 60
-  atk = 6
+  atk = 5
   def = 1
   speDef = 1
   maxPP = 90
@@ -8755,7 +8758,7 @@ export class Swoobat extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 130
-  atk = 15
+  atk = 12
   def = 2
   speDef = 2
   maxPP = 90
@@ -10699,6 +10702,55 @@ export class Xurkitree extends Pokemon {
   attackType = AttackType.SPECIAL
 }
 
+export class Tandemaus extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FAIRY])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 160
+  atk = 16
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.POPULATION_BOMB
+  attackSprite = AttackSprite.NORMAL_MELEE
+  evolution = Pkm.MAUSHOLD_THREE
+  evolutionRule = new TurnEvolutionRule(TandemausEvolutionTurn)
+  passive = Passive.FAMILY
+}
+
+export class MausholdThree extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FAIRY])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 190
+  atk = 19
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.POPULATION_BOMB
+  attackSprite = AttackSprite.NORMAL_MELEE
+  evolution = Pkm.MAUSHOLD_FOUR
+  evolutionRule = new TurnEvolutionRule(MausholdEvolutionTurn)
+  passive = Passive.FAMILY
+}
+
+export class MausholdFour extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FAIRY])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 230
+  atk = 23
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.POPULATION_BOMB
+  final = true
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (shiny: boolean, emotion: Emotion) => Pokemon
@@ -11340,5 +11392,8 @@ export const PokemonClasses: Record<
   [Pkm.MISMAGIUS]: Mismagius,
   [Pkm.DODUO]: Doduo,
   [Pkm.DODRIO]: Dodrio,
-  [Pkm.XURKITREE]: Xurkitree
+  [Pkm.XURKITREE]: Xurkitree,
+  [Pkm.TANDEMAUS]: Tandemaus,
+  [Pkm.MAUSHOLD_THREE]: MausholdThree,
+  [Pkm.MAUSHOLD_FOUR]: MausholdFour
 }

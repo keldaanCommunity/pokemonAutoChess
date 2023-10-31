@@ -164,6 +164,9 @@ export const EvolutionTime = {
   EVOLVE_HATCH: 4
 }
 
+export const TandemausEvolutionTurn = 14
+export const MausholdEvolutionTurn = 20
+
 export const PoolSize: { [key in Rarity]: [number, number, number] } = {
   [Rarity.COMMON]: [1, 18, 29],
   [Rarity.UNCOMMON]: [1, 13, 22],
@@ -323,7 +326,8 @@ export const UniqueShop = new Array<PkmProposition>(
   Pkm.DHELMISE,
   Pkm.SPINDA,
   Pkm.HERACROSS,
-  PkmDuo.ILLUMISE_VOLBEAT
+  PkmDuo.ILLUMISE_VOLBEAT,
+  Pkm.TANDEMAUS
 )
 
 export const LegendaryShop = new Array<PkmProposition>(
@@ -365,7 +369,8 @@ export const LegendaryShop = new Array<PkmProposition>(
   Pkm.ARTICUNO,
   Pkm.SPECTRIER,
   Pkm.KARTANA,
-  Pkm.NECROZMA
+  Pkm.NECROZMA,
+  Pkm.XURKITREE
 )
 
 export const HatchList = new Array<Pkm>(

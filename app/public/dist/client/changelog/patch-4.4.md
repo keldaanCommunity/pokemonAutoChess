@@ -5,6 +5,7 @@
 # New Pokemons:
 
 - Xurkitree
+- Tandemaus/Maushold
 
 # Changes to Pokemon & Abilities
 
@@ -12,6 +13,9 @@
 - Stun Spore Buff: now inflicts Paralysis and deal damage to all surrounding enemies
 - Bellossom is now tier 4. No changes in stats, only ability damage
 - Spinda: lost Sound & Human synergy, HP ~~200~~ 250, added AP scaling to its passive
+- Nerf Woobat Attack ~~6~~ 5, Swoobat Attack ~~15~~ 12
+- Buff Porygon2: HP ~~180~~ 222, Attack ~~14~~ 22
+- Nerf PorygonZ: HP ~~333~~ 222
 - Nincada is now an additional Epic. Evolve in both Sheninja and Ninjask
 - Unown-T is now TREE: gives 3 random berries
 

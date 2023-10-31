@@ -6041,6 +6041,30 @@ export class ChargeBeamStrategy extends AbilityStrategy {
   }
 }
 
+export class PopulationBombStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = 10
+    const numberOfAttacks = Math.round(10 + (10 * pokemon.ap) / 100)
+    for (let i = 0; i < numberOfAttacks; i++) {
+      target.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit,
+        false
+      )
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -6275,5 +6299,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.PRISMATIC_LASER]: new PrismaticLaserStrategy(),
   [Ability.NATURAL_GIFT]: new NaturalGiftStrategy(),
   [Ability.NIGHT_SHADE]: new NightShadeStrategy(),
-  [Ability.CHARGE_BEAM]: new ChargeBeamStrategy()
+  [Ability.CHARGE_BEAM]: new ChargeBeamStrategy(),
+  [Ability.POPULATION_BOMB]: new PopulationBombStrategy()
 }

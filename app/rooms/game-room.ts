@@ -792,7 +792,11 @@ export default class GameRoom extends Room<GameState> {
         pokemon.evolution !== Pkm.DEFAULT &&
         pokemon.evolutionRule instanceof CountEvolutionRule
       ) {
-        const pokemonEvolved = pokemon.evolutionRule.tryEvolve(pokemon, player)
+        const pokemonEvolved = pokemon.evolutionRule.tryEvolve(
+          pokemon,
+          player,
+          this.state.stageLevel
+        )
         if (pokemonEvolved) {
           // check item evolution rule after count evolution (example: Clefairy)
           this.checkEvolutionsAfterItemAcquired(playerId, pokemonEvolved)
@@ -811,7 +815,11 @@ export default class GameRoom extends Room<GameState> {
       pokemon.evolutionRule &&
       pokemon.evolutionRule instanceof ItemEvolutionRule
     ) {
-      const pokemonEvolved = pokemon.evolutionRule.tryEvolve(pokemon, player)
+      const pokemonEvolved = pokemon.evolutionRule.tryEvolve(
+        pokemon,
+        player,
+        this.state.stageLevel
+      )
       if (pokemonEvolved) {
         // check additional item evolution rules. Not used yet in the game but we never know
         this.checkEvolutionsAfterItemAcquired(playerId, pokemonEvolved)
