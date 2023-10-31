@@ -13,13 +13,15 @@
 - Bellossom is now tier 4. No changes in stats, only ability damage
 - Spinda: lost Sound & Human synergy, HP ~~200~~ 250, added AP scaling to its passive
 - Nincada is now an additional Epic. Evolve in both Sheninja and Ninjask
+- Unown-T is now TREE: gives 3 random berries
 
 # Changes to Synergies
 
--
+- Grass now produces berries over time
 
 # Changes to Items
 
+- Added Berries: 20 berries with unique effects
 - PVE stages can no longer have duplicates in rewards, except stage 40
 - Delta Orb effect can now be stacked, if you put a mon between two units with Delta orbs for example
 
