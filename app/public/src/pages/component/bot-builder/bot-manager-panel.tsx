@@ -75,12 +75,14 @@ function BotsList() {
       ) : (
         <table>
           <thead style={{ borderBottom: "4px solid white" }}>
-            <th>Avatar</th>
-            <th>Name</th>
-            <th>Author</th>
-            <th>UID</th>
-            <th>Validity</th>
-            <th>Actions</th>
+            <tr>
+              <th>Avatar</th>
+              <th>Name</th>
+              <th>Author</th>
+              <th>UID</th>
+              <th>Validity</th>
+              <th>Actions</th>
+            </tr>
           </thead>
           <tbody>
             {bots.map((b) => (
