@@ -335,8 +335,9 @@ export default class Status extends Schema implements IStatus {
     // fluffy tail prevents burn but not rune protect
     if (
       !this.burn &&
-      !pkm.items.has(Item.FLUFFY_TAIL) &&
-      (!this.runeProtect || pkm.items.has(Item.FLAME_ORB))
+      !pkm.effects.has(Effect.IMMUNITY_BURN) &&
+      (!this.runeProtect ||
+        (pkm.items.has(Item.FLAME_ORB) && !pkm.items.has(Item.FLUFFY_TAIL))) // can escape flame orb burn only with fluffy tail
     ) {
       this.burn = true
       this.burnCooldown = timer
@@ -346,6 +347,13 @@ export default class Status extends Schema implements IStatus {
       if (pkm.passive === Passive.GUTS && !this.guts) {
         this.guts = true
         pkm.addAttack(5, false)
+      }
+
+      if (pkm.items.has(Item.RAWST_BERRY)) {
+        this.healBurn(pkm)
+        pkm.items.delete(Item.RAWST_BERRY)
+        pkm.refToBoardPokemon.items.delete(Item.RAWST_BERRY)
+        pkm.effects.add(Effect.IMMUNITY_BURN)
       }
     }
   }
@@ -423,7 +431,7 @@ export default class Status extends Schema implements IStatus {
     pkm: PokemonEntity,
     origin: PokemonEntity | undefined
   ) {
-    if (!this.runeProtect) {
+    if (!this.runeProtect && !pkm.effects.has(Effect.IMMUNITY_POISON)) {
       let maxStacks = 3
       if (origin) {
         this.poisonOrigin = origin
@@ -439,6 +447,15 @@ export default class Status extends Schema implements IStatus {
       if (pkm.passive === Passive.GUTS && !this.guts) {
         this.guts = true
         pkm.addAttack(5, false)
+      }
+
+      if (pkm.items.has(Item.PECHA_BERRY)) {
+        this.poisonOrigin = undefined
+        this.poisonStacks = 0
+        this.poisonDamageCooldown = 1000
+        pkm.items.delete(Item.PECHA_BERRY)
+        pkm.refToBoardPokemon.items.delete(Item.PECHA_BERRY)
+        pkm.effects.add(Effect.IMMUNITY_POISON)
       }
     }
   }
@@ -493,7 +510,11 @@ export default class Status extends Schema implements IStatus {
   }
 
   triggerFreeze(timer: number, pkm: PokemonEntity) {
-    if (!this.freeze && !this.runeProtect) {
+    if (
+      !this.freeze &&
+      !this.runeProtect &&
+      !pkm.effects.has(Effect.IMMUNITY_FREEZE)
+    ) {
       if (pkm.simulation.weather === Weather.SNOW) {
         timer = Math.round(timer * 1.3)
       } else if (pkm.simulation.weather === Weather.SUN) {
@@ -501,6 +522,14 @@ export default class Status extends Schema implements IStatus {
       }
       this.freeze = true
       this.freezeCooldown = timer
+
+      if (pkm.items.has(Item.ASPEAR_BERRY)) {
+        this.freeze = false
+        this.freezeCooldown = 1000
+        pkm.items.delete(Item.ASPEAR_BERRY)
+        pkm.refToBoardPokemon.items.delete(Item.ASPEAR_BERRY)
+        pkm.effects.add(Effect.IMMUNITY_FREEZE)
+      }
     }
   }
 
@@ -528,12 +557,24 @@ export default class Status extends Schema implements IStatus {
   }
 
   triggerSleep(timer: number, pkm: PokemonEntity) {
-    if (!this.sleep && !this.runeProtect) {
+    if (
+      !this.sleep &&
+      !this.runeProtect &&
+      !pkm.effects.has(Effect.IMMUNITY_SLEEP)
+    ) {
       if (pkm.simulation.weather === Weather.NIGHT) {
         timer = Math.round(timer * 1.3)
       }
       this.sleep = true
       this.sleepCooldown = timer
+
+      if (pkm.items.has(Item.CHESTO_BERRY)) {
+        this.sleep = false
+        this.sleepCooldown = 1000
+        pkm.items.delete(Item.CHESTO_BERRY)
+        pkm.refToBoardPokemon.items.delete(Item.CHESTO_BERRY)
+        pkm.effects.add(Effect.IMMUNITY_SLEEP)
+      }
     }
   }
 
@@ -549,13 +590,21 @@ export default class Status extends Schema implements IStatus {
     if (
       !this.confusion &&
       !this.runeProtect &&
-      pkm.passive !== Passive.SPOT_PANDA
+      !pkm.effects.has(Effect.IMMUNITY_CONFUSION)
     ) {
       if (pkm.simulation.weather === Weather.SANDSTORM) {
         timer = Math.round(timer * 1.3)
       }
       this.confusion = true
       this.confusionCooldown = timer
+
+      if (pkm.items.has(Item.PERSIM_BERRY)) {
+        this.confusion = false
+        this.confusionCooldown = 1000
+        pkm.items.delete(Item.PERSIM_BERRY)
+        pkm.refToBoardPokemon.items.delete(Item.PERSIM_BERRY)
+        pkm.effects.add(Effect.IMMUNITY_CONFUSION)
+      }
     }
   }
 
@@ -617,13 +666,24 @@ export default class Status extends Schema implements IStatus {
   }
 
   triggerParalysis(timer: number, pkm: PokemonEntity) {
-    if (!this.paralysis && !this.runeProtect) {
+    if (
+      !this.paralysis &&
+      !this.runeProtect &&
+      !pkm.effects.has(Effect.IMMUNITY_PARALYSIS)
+    ) {
       this.paralysis = true
       pkm.addAttackSpeed(-40)
       if (pkm.simulation.weather === Weather.STORM) {
         timer = Math.round(timer * 1.3)
       }
       this.paralysisCooldown = timer
+      if (pkm.items.has(Item.CHERI_BERRY)) {
+        this.paralysis = false
+        this.paralysisCooldown = 1000
+        pkm.items.delete(Item.CHERI_BERRY)
+        pkm.refToBoardPokemon.items.delete(Item.CHERI_BERRY)
+        pkm.effects.add(Effect.IMMUNITY_PARALYSIS)
+      }
     }
   }
 

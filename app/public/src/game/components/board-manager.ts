@@ -16,6 +16,7 @@ import PokemonAvatar from "./pokemon-avatar"
 import { Synergy } from "../../../../types/enum/Synergy"
 import { SynergyTriggers } from "../../../../types/Config"
 import { GameObjects } from "phaser"
+import { t } from "i18next"
 
 export enum BoardMode {
   PICK = "pick",
@@ -200,19 +201,22 @@ export default class BoardManager {
       this.berryTree.setDepth(1)
       this.berryTree.setScale(2, 2)
       this.berryTree.setOrigin(0.5, 1)
-      console.log(
-        "show berry tree",
-        `${this.player.berry}_TREE_STEP_${this.player.berryTreeStage}`
-      )
-      this.berryTree.anims.play(
-        `${this.player.berry}_TREE_STEP_${this.player.berryTreeStage}`
-      )
+      if (this.player.berryTreeStage === 0) {
+        this.berryTree.anims.play("CROP")
+      } else {
+        this.berryTree.anims.play(
+          `${this.player.berry}_TREE_STEP_${this.player.berryTreeStage}`
+        )
+      }
+
       this.berryTree.setInteractive()
       this.berryTree.on("pointerdown", (pointer) => {
         if (this.scene.room && this.player.berryTreeStage >= 3) {
           this.scene.room.send(Transfer.PICK_BERRY)
-          this.displayText(pointer.x, pointer.y, "+1 BERRY")
+          this.displayText(pointer.x, pointer.y, t("berry_gained"))
           this.berryTree?.play("CROP")
+        } else {
+          this.displayText(pointer.x, pointer.y, t("berry_unripe"))
         }
       })
     }

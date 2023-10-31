@@ -1,4 +1,4 @@
-import { Item } from "../types/enum/Item"
+import { Berries, Item } from "../types/enum/Item"
 import { Orientation, PokemonActionState, Team } from "../types/enum/Game"
 import MovingState from "./moving-state"
 import AttackingState from "./attacking-state"
@@ -14,8 +14,7 @@ import {
   IPokemonEntity,
   IPokemon,
   Emotion,
-  AttackSprite,
-  IPlayer
+  AttackSprite
 } from "../types"
 import { AttackType, Rarity } from "../types/enum/Game"
 import { Effect } from "../types/enum/Effect"
@@ -38,6 +37,7 @@ import { chance } from "../utils/random"
 import { distanceC } from "../utils/distance"
 import { AbilityStrategy } from "./abilities/ability-strategy"
 import Player from "../models/colyseus-models/player"
+import { values } from "../utils/schemas"
 
 export default class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
@@ -98,6 +98,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   fairySplashCooldown = 0
   echo = 0
   isClone = false
+  refToBoardPokemon: IPokemon
 
   constructor(
     pokemon: IPokemon,
@@ -110,6 +111,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     this.state = new MovingState()
     this.effects = new SetSchema()
     this.items = new SetSchema()
+    this.refToBoardPokemon = pokemon
     pokemon.items.forEach((it) => {
       this.items.add(it)
     })
@@ -592,6 +594,67 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
         shouldTargetGainMana: true
       })
     }
+
+    const berry = values(this.items).find(item => Berries.includes(item))
+    if(this.life < 0.5 * this.hp && berry){
+      let berryEaten = false
+      switch(berry){
+        case Item.AGUAV_BERRY:
+          berryEaten = true
+          this.handleHeal(this.hp - this.life, this, 0)
+          this.status.triggerConfusion(3000, this)
+          break;
+        case Item.APICOT_BERRY:
+          berryEaten = true
+          this.addSpecialDefense(20)
+          break;
+        case Item.GANLON_BERRY:
+          berryEaten = true
+          this.addDefense(20)
+          break;
+        case Item.JABOCA_BERRY:
+          berryEaten = true
+          this.status.triggerSpikeArmor(10000)
+          break;
+        case Item.LANSAT_BERRY:
+          berryEaten = true
+          this.addCritChance(50)
+          break;
+        case Item.LIECHI_BERRY:
+          berryEaten = true
+          this.addAttack(15)
+          break;
+        case Item.LUM_BERRY:
+          berryEaten = true
+          this.status.clearNegativeStatus()
+          this.status.triggerRuneProtect(10000)
+          break;
+        case Item.ORAN_BERRY:
+          berryEaten = true
+          this.addShield(100, this)
+          break;
+        case Item.PETAYA_BERRY:
+          berryEaten = true
+          this.addAbilityPower(100)
+          break;
+        case Item.ROWAP_BERRY:
+          berryEaten = true
+          this.status.triggerMagicBounce(10000)
+          break;
+        case Item.SALAC_BERRY:
+          berryEaten = true
+          this.addAttackSpeed(50)
+          break;
+        case Item.SITRUS_BERRY:
+          this.effects.add(Effect.BUFF_HEAL_RECEIVED)
+          this.handleHeal(20, this, 0)
+          break;
+      }
+      if(berryEaten){
+        this.items.delete(berry)
+        this.refToBoardPokemon.items.delete(berry)
+      }
+    }
   }
 
   // called whenever the unit deals damage, by basic attack or ability
@@ -672,6 +735,13 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.items.has(Item.RAZOR_FANG)) {
       target.status.triggerArmorReduction(4000)
+    }
+
+    if(target.items.has(Item.BABIRI_BERRY)){
+      target.status.triggerProtect(2000)
+      target.handleHeal(20, target, 0)
+      target.items.delete(Item.BABIRI_BERRY)
+      target.refToBoardPokemon.items.delete(Item.BABIRI_BERRY)
     }
   }
 
@@ -777,6 +847,15 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.passive === Passive.GRIM_NEIGH) {
       this.addAbilityPower(30)
+    }
+  }
+
+  // called after every ability cast
+  onCast(){
+    if(this.items.has(Item.LEPPA_BERRY)){
+      this.items.delete(Item.LEPPA_BERRY)
+      this.refToBoardPokemon.items.delete(Item.LEPPA_BERRY)
+      this.setPP(this.pp + 50)
     }
   }
 

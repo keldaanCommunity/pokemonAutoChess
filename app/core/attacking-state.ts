@@ -69,6 +69,7 @@ export default class AttackingState extends PokemonState {
           crit = chance(pokemon.critChance / 100)
         }
         pokemon.strategy.process(pokemon, this, board, target, crit)
+        pokemon.onCast()
       } else {
         // BASIC ATTACK
         pokemon.count.attackCount++

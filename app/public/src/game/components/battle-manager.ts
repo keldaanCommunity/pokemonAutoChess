@@ -4708,7 +4708,7 @@ export default class BattleManager {
               coordinates[0],
               coordinates[1],
               "GRASS_HEAL",
-              "GRASS_HEAL/000"
+              "000"
             )
             specialProjectile.setDepth(1)
             specialProjectile.setScale(2, 2)
