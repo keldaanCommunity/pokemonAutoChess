@@ -919,7 +919,7 @@ export class AddBotCommand extends Command<
           this.room.bots.set(resultCreate.id, resultCreate)
           this.room.broadcast(
             Transfer.REQUEST_BOT_LIST,
-            createBotList(this.room.bots, { withSteps: false })
+            createBotList(this.room.bots, { withSteps: true })
           )
         } else {
           client.send(
