@@ -6,6 +6,7 @@
   grid-auto-rows: min-content;
   padding: 0;
   max-height: 85vh;
+  width: 90vw;
   gap: 8px;
   padding: 16px;
   justify-content: space-evenly;
