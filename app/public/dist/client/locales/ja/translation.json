@@ -1327,7 +1327,7 @@
     "RAZOR_CLAW": "所有者は +55% CRIT_CHANCE を獲得",
     "FLUFFY_TAIL": "保持者はあらゆるステータス変化の影響を受けない",
     "KINGS_ROCK": "戦闘開始時に+150 SHIELD",
-    "SHINY_CHARM": "ダメージを防ぎ、初めてホルダーのHPが30%を下回ったときに3秒間のPROTECTを提供します",
+    "SHINY_CHARM": "ダメージを防ぎ、初めてホルダーのHPが30%を下回ったときに2秒間のPROTECTを提供します",
     "GRACIDEA_FLOWER": "戦闘が始まると、所有者と同じ列の隣接する味方のATK_SPEEDが+25%増加します",
     "FLAME_ORB": "ホルダーは火傷しますが、攻撃力が100％増加します",
     "ASSAULT_VEST": "+20 SPE_DEF。 BURNとPOISONのダメージを50%軽減",

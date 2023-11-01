@@ -1395,7 +1395,7 @@
     "RAZOR_CLAW": "Le détenteur gagne +55% CRIT_CHANCE",
     "FLUFFY_TAIL": "Le porteur est immunisé contre toutes les altérations de statut",
     "KINGS_ROCK": "+150 SHIELD au début du combat",
-    "SHINY_CHARM": "Annule les dégats et déclenche PROTECT pendant 3 secondes la première fois que le porteur tombe sous les 30% de HP",
+    "SHINY_CHARM": "Annule les dégats et déclenche PROTECT pendant 2 secondes la première fois que le porteur tombe sous les 30% de HP",
     "GRACIDEA_FLOWER": "Lorsque le combat commence, le porteur et les alliés adjacents dans la même ligne gagnent 25% ATK_SPEED",
     "FLAME_ORB": "Le porteur est BURN pendant le combat mais augmente son ATK de 100%",
     "ASSAULT_VEST": "+20 SPE_DEF. Réduit les dégâts de BURN et POISON de 50 %",

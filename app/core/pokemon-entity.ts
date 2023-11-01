@@ -500,7 +500,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.items.has(Item.UPGRADE)) {
-      this.addAttackSpeed(4)
+      this.addAttackSpeed(5)
       this.count.upgradeCount++
     }
 
