@@ -49,6 +49,7 @@
 
 - Added Animated map tiles
 - Redesigned meta reports
+- Change item sprites to higher definition versions
 
 # Bugfix
 
