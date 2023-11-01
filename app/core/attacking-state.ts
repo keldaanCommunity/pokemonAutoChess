@@ -233,6 +233,7 @@ export default class AttackingState extends PokemonState {
         target,
         board,
         physicalDamage,
+        specialDamage,
         trueDamage,
         totalDamage
       })

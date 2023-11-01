@@ -379,12 +379,14 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     target,
     board,
     physicalDamage,
+    specialDamage,
     trueDamage,
     totalDamage
   }: {
     target: PokemonEntity
     board: Board
     physicalDamage: number
+    specialDamage: number
     trueDamage: number
     totalDamage: number
   }) {
@@ -409,11 +411,14 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.items.has(Item.CHOICE_SCARF) && totalDamage > 0) {
       const cells = board.getAdjacentCells(target.positionX, target.positionY)
-      let targetCount = 1
-      cells.forEach((cell) => {
-        if (cell.value && this.team != cell.value.team && targetCount > 0) {
+      const candidateTargets = cells.filter(cell => cell.value && this.team != cell.value.team).map(cell => cell.value!)
+      candidateTargets.sort((a,b) => a.life - b.life) // target lowest life first
+
+      let targetCount = 1      
+      candidateTargets.forEach((target) => {
+        if (targetCount > 0) {
           if (physicalDamage > 0) {
-            cell.value.handleDamage({
+            target.handleDamage({
               damage: Math.ceil(0.5 * physicalDamage),
               board,
               attackType: AttackType.PHYSICAL,
@@ -421,8 +426,17 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
               shouldTargetGainMana: true
             })
           }
+          if (specialDamage > 0) {
+            target.handleDamage({
+              damage: Math.ceil(0.5 * specialDamage),
+              board,
+              attackType: AttackType.SPECIAL,
+              attacker: this,
+              shouldTargetGainMana: true
+            })
+          }
           if (trueDamage > 0) {
-            cell.value.handleDamage({
+            target.handleDamage({
               damage: Math.ceil(0.5 * trueDamage),
               board,
               attackType: AttackType.TRUE,
