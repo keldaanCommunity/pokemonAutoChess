@@ -34,6 +34,7 @@
 - PVE stages can no longer have duplicates in rewards, except stage 40
 - Delta Orb effect can now be stacked, if you put a mon between two units with Delta orbs for example
 - Nerf Shiny Charm: protect duration ~~3~~ 2 seconds
+- Buff Shell Bell: ~~30~~ 33% heal
 
 
 # Changes to stages

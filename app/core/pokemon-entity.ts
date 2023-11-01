@@ -671,7 +671,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.items.has(Item.SHELL_BELL)) {
-      this.handleHeal(Math.ceil(0.3 * damage), this, 0)
+      this.handleHeal(Math.ceil(0.33 * damage), this, 0)
     }
   }
 
