@@ -601,7 +601,7 @@ export default class Simulation extends Schema implements ISimulation {
           pokemon.status.triggerRuneProtect(60000)
         }
 
-        if(pokemon.passive === Passive.SPOT_PANDA){
+        if (pokemon.passive === Passive.SPOT_PANDA) {
           pokemon.effects.add(Effect.IMMUNITY_CONFUSION)
         }
       })
@@ -1166,11 +1166,13 @@ export default class Simulation extends Schema implements ISimulation {
       if (this.blueTeam.size === 0 && this.redTeam.size > 0) {
         this.winnerId = this.redPlayer ? this.redPlayer.id : "pve"
         this.redTeam.forEach((p) => {
+          p.status.clearNegativeStatus()
           p.action = PokemonActionState.HOP
         })
       } else if (this.redTeam.size === 0 && this.blueTeam.size > 0) {
         this.winnerId = this.bluePlayer?.id ?? ""
         this.blueTeam.forEach((p) => {
+          p.status.clearNegativeStatus()
           p.action = PokemonActionState.HOP
         })
       }
