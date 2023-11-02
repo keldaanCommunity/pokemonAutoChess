@@ -858,6 +858,16 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.SCREECH,
+      frames: this.game.anims.generateFrameNames(Ability.SCREECH, {
+        start: 0,
+        end: 6
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.NIGHT_SHADE,
       frames: this.game.anims.generateFrameNames(Ability.NIGHT_SHADE, {
         start: 0,
