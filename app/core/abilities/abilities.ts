@@ -1395,7 +1395,7 @@ export class DisarmingVoiceStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let ppGain = [10,20,40][pokemon.stars - 1] ?? 0
+    let ppGain = [10, 20, 40][pokemon.stars - 1] ?? 0
     ppGain = Math.round(ppGain * (1 + pokemon.ap / 200))
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team === tg.team && tg.id !== pokemon.id) {
@@ -1482,20 +1482,20 @@ export class TriAttackStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let duration = 2000,
-      damage = 25
-    if (pokemon.stars === 2) {
-      duration = 3000
-      damage = 50
-    }
-    if (pokemon.stars === 3) {
-      duration = 5000
-      damage = 100
-    }
-    target.status.triggerFreeze(duration, target)
-    target.status.triggerWound(duration, target, pokemon, board)
-    target.status.triggerBurn(duration, target, pokemon, board)
+    const damage = [30, 50, 70][pokemon.stars - 1] ?? 70
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    const effect = randomBetween(1, 3)
+    switch (effect) {
+      case 1:
+        target.status.triggerFreeze(2000, target)
+        break
+      case 2:
+        target.status.triggerBurn(5000, target, pokemon, board)
+        break
+      case 3:
+        target.status.triggerParalysis(5000, target)
+        break
+    }
   }
 }
 
@@ -4506,7 +4506,7 @@ export class PeckStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [10,20,30][pokemon.stars - 1] ?? 30
+    const damage = [10, 20, 30][pokemon.stars - 1] ?? 30
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }

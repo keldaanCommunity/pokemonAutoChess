@@ -1409,7 +1409,7 @@ export class Porygon2 extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   evolution = Pkm.PORYGON_Z
-  hp = 222
+  hp = 200
   atk = 22
   evolutionRule = new ItemEvolutionRule([Item.UPGRADE])
   def = 1
@@ -1431,7 +1431,7 @@ export class PorygonZ extends Pokemon {
   ])
   rarity = Rarity.EPIC
   stars = 3
-  hp = 222
+  hp = 200
   atk = 33
   def = 1
   speDef = 5
@@ -5303,10 +5303,10 @@ export class Tornadus extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 15
+  atk = 20
   def = 2
   speDef = 2
-  maxPP = 100
+  maxPP = 70
   range = 3
   skill = Ability.TRI_ATTACK
   passive = Passive.WINDY

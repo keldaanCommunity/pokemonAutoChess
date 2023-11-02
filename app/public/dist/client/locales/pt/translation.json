@@ -830,7 +830,7 @@
     "DISARMING_VOICE": "Concede [10,20,40,SP=0,5] PP a todos os aliados, exceto ao lançador",
     "HIGH_JUMP_KICK": "Oferece [50,100,200,SP] SPECIAL e rouba todo o PP de seu alvo",
     "GRASS_WHISTLE": "Coloque os inimigos SLEEP [1,2,4] por 2 segundos",
-    "TRI_ATTACK": "Causa [25,50,100,SP] SPECIAL. BURN, FREEZE e WOUND o alvo por [2,3,5] segundos",
+    "TRI_ATTACK": "Causa [30,50,70,SP] SPECIAL. Pode BURN, FREEZE ou PARALYSIS o alvo",
     "ECHO": "Oferece [3,6,9,SP] SPECIAL para o time inimigo, aumentando em [3,6,9,SP] toda vez que o pokémon usa sua habilidade",
     "PETAL_DANCE": "Distribua [20,30,50,SP] SPECIAL a [3,4,5] Pokémon inimigos",
     "HYPER_VOICE": "Distribui [50,100,200,SP] SPECIAL em uma linha e faz com que todos os alvos atinjam CONFUSION por [1,2,3] segundos",
