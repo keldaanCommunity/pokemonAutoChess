@@ -15,8 +15,10 @@
 - Bellossom is now tier 4. No changes in stats, only ability damage
 - Spinda: lost Sound & Human synergy, HP ~~200~~ 250, added AP scaling to its passive
 - Nerf Woobat Attack ~~6~~ 5, Swoobat Attack ~~15~~ 12
-- Buff Porygon2: HP ~~180~~ 222, Attack ~~14~~ 22
-- Nerf PorygonZ: HP ~~333~~ 222
+- Buff Porygon2: HP ~~180~~ 200, Attack ~~14~~ 22
+- Nerf PorygonZ: HP ~~333~~ 200
+- Adjusted Tri Attack: can now apply either Freeze for 2 seconds, Burn for 5 seconds or Paralysis for 5 seconds. Ability damage changed: ~~25/50/100~~ 30/50/70
+- Buff Tornadus: Attack ~~15~~ 20 ; PP ~~100~~ 70
 - Nincada is now an additional Epic. Evolve in both Sheninja and Ninjask
 - Unown-T is now TREE: gives 3 random berries
 - Slowbro now needs a King's Rock to evolve to Slowking
