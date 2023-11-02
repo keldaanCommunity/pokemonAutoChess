@@ -285,7 +285,7 @@ export class MiniGame {
       const name = items[j]
       const floatingItem = new FloatingItem(name, x, y, j)
       this.items?.set(floatingItem.id, floatingItem)
-      const body = Bodies.circle(x, y, 15)
+      const body = Bodies.circle(x, y, 20)
       body.label = floatingItem.id
       body.isSensor = true
       this.bodies.set(floatingItem.id, body)
