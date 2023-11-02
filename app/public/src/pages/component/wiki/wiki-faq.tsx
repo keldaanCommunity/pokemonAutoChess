@@ -9,8 +9,6 @@ export default function WikiFaq() {
       <p>{t("faq.official_game_answer")}</p>
       <h4 className="nes-text is-success">{t("faq.how_pokemon_evolve")}</h4>
       <p>{t("faq.how_pokemon_evolve_answer")}</p>
-      <h4 className="nes-text is-success">{t("faq.additional_synergies")}</h4>
-      <p>{t("faq.additional_synergies_answer")}</p>
       <h4 className="nes-text is-success">{t("faq.income")}</h4>
       <p>{t("faq.income_answer")}</p>
       <h4 className="nes-text is-success">{t("faq.collection")}</h4>
@@ -29,8 +27,6 @@ export default function WikiFaq() {
         </a>
         . {t("faq.sprite_answer2")}
       </p>
-      <h4 className="nes-text is-success">{t("faq.pve")}</h4>
-      <p>{t("faq.pve_answer")}</p>
       <h4 className="nes-text is-success">{t("faq.mythical")}</h4>
       <p>{t("faq.mythical_answer")}</p>
       <h4 className="nes-text is-success">{t("faq.ditto")}</h4>
