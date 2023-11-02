@@ -262,7 +262,7 @@ export default class PokemonState {
         death = false
         takenDamage = 0
         residualDamage = 0
-        pokemon.status.triggerProtect(3000)
+        pokemon.status.triggerProtect(2000)
         pokemon.items.delete(Item.SHINY_CHARM)
       }
 
