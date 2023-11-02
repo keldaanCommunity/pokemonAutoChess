@@ -7,6 +7,7 @@
 
 - Xurkitree
 - Tandemaus/Maushold
+- Kricketot/Kricketune
 
 # Changes to Pokemon & Abilities
 

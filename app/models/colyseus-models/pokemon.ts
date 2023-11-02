@@ -10681,6 +10681,38 @@ export class Dodrio extends Pokemon {
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
+export class Kricketot extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.SOUND])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.KRICKETUNE
+  hp = 80
+  atk = 7
+  def = 2
+  speDef = 2
+  maxPP = 70
+  range = 1
+  skill = Ability.SCREECH
+  additional = true
+  attackSprite = AttackSprite.BUG_MELEE
+}
+
+export class Kricketune extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.SOUND])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 190
+  atk = 18
+  def = 4
+  speDef = 4
+  maxPP = 70
+  range = 1
+  skill = Ability.SCREECH
+  final = true
+  additional = true
+  attackSprite = AttackSprite.BUG_MELEE
+}
+
 export class Xurkitree extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.ELECTRIC,
@@ -11395,5 +11427,7 @@ export const PokemonClasses: Record<
   [Pkm.XURKITREE]: Xurkitree,
   [Pkm.TANDEMAUS]: Tandemaus,
   [Pkm.MAUSHOLD_THREE]: MausholdThree,
-  [Pkm.MAUSHOLD_FOUR]: MausholdFour
+  [Pkm.MAUSHOLD_FOUR]: MausholdFour,
+  [Pkm.KRICKETOT]: Kricketot,
+  [Pkm.KRICKETUNE]: Kricketune
 }
