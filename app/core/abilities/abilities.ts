@@ -6052,6 +6052,33 @@ export class PopulationBombStrategy extends AbilityStrategy {
   }
 }
 
+export class ScreechStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const debuff = pokemon.stars === 3 ? -4 : pokemon.stars === 2 ? -2 : -1
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+
+    target.addDefense(debuff, true)
+    cells.forEach((cell) => {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.addDefense(debuff, true)
+        cell.value.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: Ability.SCREECH,
+          targetX: cell.value.positionX,
+          targetY: cell.value.positionY
+        })
+      }
+    })
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -6287,5 +6314,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.NATURAL_GIFT]: new NaturalGiftStrategy(),
   [Ability.NIGHT_SHADE]: new NightShadeStrategy(),
   [Ability.CHARGE_BEAM]: new ChargeBeamStrategy(),
-  [Ability.POPULATION_BOMB]: new PopulationBombStrategy()
+  [Ability.POPULATION_BOMB]: new PopulationBombStrategy(),
+  [Ability.SCREECH]: new ScreechStrategy()
 }

@@ -641,7 +641,9 @@ export enum Pkm {
   XURKITREE = "XURKITREE",
   TANDEMAUS = "TANDEMAUS",
   MAUSHOLD_THREE = "MAUSHOLD_THREE",
-  MAUSHOLD_FOUR = "MAUSHOLD_FOUR"
+  MAUSHOLD_FOUR = "MAUSHOLD_FOUR",
+  KRICKETOT = "KRICKETOT",
+  KRICKETUNE = "KRICKETUNE"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1285,7 +1287,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.XURKITREE]: "0796",
   [Pkm.TANDEMAUS]: "0924",
   [Pkm.MAUSHOLD_THREE]: "0925",
-  [Pkm.MAUSHOLD_FOUR]: "0925-0001"
+  [Pkm.MAUSHOLD_FOUR]: "0925-0001",
+  [Pkm.KRICKETOT]: "0401",
+  [Pkm.KRICKETUNE]: "0402"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1929,7 +1933,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.XURKITREE]: Pkm.XURKITREE,
   [Pkm.TANDEMAUS]: Pkm.TANDEMAUS,
   [Pkm.MAUSHOLD_THREE]: Pkm.TANDEMAUS,
-  [Pkm.MAUSHOLD_FOUR]: Pkm.TANDEMAUS
+  [Pkm.MAUSHOLD_FOUR]: Pkm.TANDEMAUS,
+  [Pkm.KRICKETOT]: Pkm.KRICKETOT,
+  [Pkm.KRICKETUNE]: Pkm.KRICKETOT
 }
 
 export enum PkmDuo {
@@ -5264,5 +5270,15 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge
+  },
+  [Pkm.KRICKETOT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Emit,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.KRICKETUNE]: {
+    attack: AnimationType.MultiStrike,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   }
 }
