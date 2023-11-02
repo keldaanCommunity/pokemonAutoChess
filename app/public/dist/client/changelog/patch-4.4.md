@@ -50,6 +50,7 @@
 # Gameplay
 
 - Like poison, the following status can now have their duration extended if applied again before the end of their initial duration: Armor Reduction, Burn, Silence, Wound, Paralysis, Rune Protect, Spike Armor, Magic Bounce.
+- Negative status are cleared when the opposite team is eliminated
 
 # UI
 
