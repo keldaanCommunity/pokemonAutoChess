@@ -117,18 +117,14 @@ export function addIconsToDescription(description: string, tier = 0, ap = 0) {
               const separator = j < array.length - 1 ? "/" : ""
               const value =
                 ap > 0 ? Math.round(Number(v) * (1 + (scale * ap) / 100)) : v
+              const active =
+                tier === undefined ||
+                array.length === 1 ||
+                j === tier - 1 ||
+                (tier > array.length && j === array.length - 1)
               return (
                 <span key={j} className="ability-value">
-                  <span
-                    className={cc({
-                      active:
-                        tier === undefined ||
-                        array.length === 1 ||
-                        j === tier - 1
-                    })}
-                  >
-                    {value}
-                  </span>
+                  <span className={cc({ active })}>{value}</span>
                   {separator}
                 </span>
               )
