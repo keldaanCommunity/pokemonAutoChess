@@ -45,6 +45,7 @@ export default function GamePokemonsPropositions() {
               const item = itemsProposition[index]
               return (
                 <div
+                  key={index}
                   className="nes-container active"
                   onClick={() => dispatch(pokemonPropositionClick(proposition))}
                 >

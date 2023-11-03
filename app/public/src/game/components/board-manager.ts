@@ -510,8 +510,7 @@ export default class BoardManager {
     if (player) {
       this.animationManager.play(
         player,
-        AnimationConfig[player.name].emote,
-        false
+        AnimationConfig[player.name].emote
       )
 
       if (emote) {

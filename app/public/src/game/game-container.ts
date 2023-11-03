@@ -119,7 +119,7 @@ class GameContainer {
         })
       })
 
-      pokemon.onChange((changes) => {
+      pokemon.onChange(() => {
         const fields: NonFunctionPropNames<PokemonEntity>[] = [
           "positionX",
           "positionY",
@@ -238,7 +238,7 @@ class GameContainer {
         })
       })
 
-      pokemon.onChange((changes) => {
+      pokemon.onChange(() => {
         const fields: NonFunctionPropNames<PokemonEntity>[] = [
           "positionX",
           "positionY",

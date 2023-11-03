@@ -60,6 +60,7 @@
 - Added Animated map tiles
 - Redesigned meta reports
 - Change item sprites to higher definition versions
+- Prevent pokemon ability animations to cancel before the end
 
 # Bugfix
 

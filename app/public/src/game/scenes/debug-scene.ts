@@ -66,7 +66,7 @@ export class DebugScene extends Phaser.Scene {
     this.pokemon.orientation = orientation
     if (animationType in AnimationType) {
       try {
-        this.animationManager.play(this.pokemon, animationType, false, true)
+        this.animationManager.play(this.pokemon, animationType, { loop: true })
       } catch (err) {
         logger.error(
           `Error playing animation ${this.pokemon.name} ${animationType}`,
