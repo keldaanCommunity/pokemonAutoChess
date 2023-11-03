@@ -209,6 +209,11 @@ export function loadAttacksMultiAtlas(scene: Phaser.Scene) {
     "/assets/attacks"
   )
   scene.load.multiatlas(
+    "SAND_TOMB",
+    "/assets/attacks/SAND_TOMB.json",
+    "/assets/attacks"
+  )
+  scene.load.multiatlas(
     "NIGHT_SHADE",
     "/assets/attacks/NIGHT_SHADE.json",
     "/assets/attacks"

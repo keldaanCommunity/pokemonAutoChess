@@ -10713,6 +10713,40 @@ export class Kricketune extends Pokemon {
   attackSprite = AttackSprite.BUG_MELEE
 }
 
+export class Hippopotas extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GROUND])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.HIPPODOWN
+  hp = 120
+  atk = 10
+  def = 4
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.SAND_TOMB
+  additional = true
+  attackSprite = AttackSprite.ROCK_MELEE
+  passive = Passive.SAND_STREAM
+}
+
+export class Hippodown extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GROUND])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 270
+  atk = 19
+  def = 7
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.SAND_TOMB
+  final = true
+  additional = true
+  attackSprite = AttackSprite.ROCK_MELEE
+  passive = Passive.SAND_STREAM
+}
+
 export class Xurkitree extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.ELECTRIC,
@@ -11429,5 +11463,7 @@ export const PokemonClasses: Record<
   [Pkm.MAUSHOLD_THREE]: MausholdThree,
   [Pkm.MAUSHOLD_FOUR]: MausholdFour,
   [Pkm.KRICKETOT]: Kricketot,
-  [Pkm.KRICKETUNE]: Kricketune
+  [Pkm.KRICKETUNE]: Kricketune,
+  [Pkm.HIPPOPOTAS]: Hippopotas,
+  [Pkm.HIPPODOWN]: Hippodown
 }
