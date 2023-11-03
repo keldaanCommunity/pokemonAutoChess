@@ -3607,8 +3607,8 @@ export class Weepinbell extends Pokemon {
   stars = 2
   evolution = Pkm.VICTREEBEL
   evolutionRule = new ItemEvolutionRule([Item.LEAF_STONE])
-  hp = 140
-  atk = 9
+  hp = 160
+  atk = 12
   def = 2
   speDef = 2
   maxPP = 100

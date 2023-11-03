@@ -32,6 +32,7 @@
 - Buff Mesprit: Song of Desire now charms 2 enemies in the backline. Duration reduced ~~6~~ 3 seconds
 - Buff Azelf: Confusing Mind now confuse 2 enemies in the backline. Duration reduced ~~6~~ 3 seconds
 - Buff Slowbro: HP ~~130~~ 180, Def ~~5~~ 3
+- Buff Weepinbell: HP ~~140~~ 160, Attack ~~9~~ 12
 
 # Changes to Synergies
 
