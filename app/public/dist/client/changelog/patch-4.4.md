@@ -19,7 +19,7 @@
 - Nerf Woobat Attack ~~6~~ 5, Swoobat Attack ~~15~~ 12
 - Buff Porygon2: HP ~~180~~ 200, Attack ~~14~~ 22
 - Nerf PorygonZ: HP ~~333~~ 200
-- Adjusted Tri Attack: can now apply either Freeze for 2 seconds, Burn for 5 seconds or Paralysis for 5 seconds. Ability damage changed: ~~25/50/100~~ 30/50/70
+- Adjust Tri Attack: can now apply either Freeze for 2 seconds, Burn for 5 seconds or Paralysis for 5 seconds. Ability damage changed: ~~25/50/100~~ 30/50/70
 - Buff Tornadus: Attack ~~15~~ 20 ; PP ~~100~~ 70
 - Nincada is now an additional Epic. Evolve in both Sheninja and Ninjask
 - Unown-T is now TREE: gives 3 random berries
@@ -36,6 +36,7 @@
 - Buff Duduo Attack ~~10~~12 and Dodrio Attack ~~24~~28
 - Buff Marowak HP ~~220~~ 250
 - Adjust Bounsweet Attack ~~8~~ 10, Steenie Attack ~~16~~ 20, PP ~~100~~ 120
+- Buff Gorebyss Def ~~2~~ 5, SpeDef ~~2~~ 3
 
 # Changes to Synergies
 

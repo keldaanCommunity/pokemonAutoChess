@@ -6488,8 +6488,8 @@ export class Gorebyss extends Pokemon {
   stars = 2
   hp = 200
   atk = 16
-  def = 2
-  speDef = 2
+  def = 5
+  speDef = 3
   maxPP = 80
   range = 2
   skill = Ability.HYDRO_PUMP
