@@ -817,8 +817,8 @@
   "ability_description": {
     "SOFT_BOILED": "Geneest alle status effecten en geeft [20,40,80,SP] SHIELD aan elke vriendelijke Pokémon",
     "EARTHQUAKE": "Breng [120,SP] SPECIAL toe aan alle vijandelijke Pokémon in dezelfde kolom als de gebruiker",
-    "SONG_OF_DESIRE": "Het doelwit is CONFUSION gedurende [6,SP] seconden",
-    "CONFUSING_MIND": "Brengt [40,SP] SPECIAL toe aan het doelwit en de Pokémon ernaast, waardoor ze 3 seconden lang CONFUSION zijn",
+    "SONG_OF_DESIRE": "CHARM 2 tegenstanders in de achterlijn gedurende [3,SP] seconden",
+    "CONFUSING_MIND": "CONFUSION 2 tegenstanders in de achterlijn gedurende [3,SP] seconden",
     "KNOWLEDGE_THIEF": "Gebruik de vaardigheid van het doelwit",
     "KING_SHIELD": "PROTECT de gebruiker gedurende 1.5 seconden, geeft [10,20,30,SP] SHIELD en wissel van positie met de verste vijandelijke Pokémon",
     "EXPLOSION": "Breng [50,100,200,SP] SPECIAL toe aan alle aangrenzende vijandelijke Pokémon. Beschadigt ook de gebruiker",

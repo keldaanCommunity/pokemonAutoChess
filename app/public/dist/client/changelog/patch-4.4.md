@@ -28,6 +28,9 @@
 - Nerf Attack of Ratata and Spearow lines
 - Buff Sharpedo: HP ~~130~~ 150
 - Buff Ultra-Necrozma: change tier to tier 4, get the same stats than Necrozma but with range 3 and Dragon synergy
+- Nerf Uxie: PP ~~65~~ 80
+- Buff Mesprit: Song of Desire now charms 2 enemies in the backline. Duration reduced ~~6~~ 3 seconds
+- Buff Azelf: Confusing Mind now confuse 2 enemies in the backline. Duration reduced ~~6~~ 3 seconds
 
 # Changes to Synergies
 

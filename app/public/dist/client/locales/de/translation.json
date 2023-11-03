@@ -816,8 +816,8 @@
   "ability_description": {
     "SOFT_BOILED": "Heilt alle Statuseffekte und gewährt jedem Verbündeten [20,40,80,SP] SHIELD",
     "EARTHQUAKE": "Fügt allen feindlichen Einheiten in derselben Spalte/Reihe des Angreifers Schaden [120,SP] SPECIAL zu",
-    "SONG_OF_DESIRE": "Das Ziel ist [6,SP] Sekunden lang CONFUSION",
-    "CONFUSING_MIND": "Fügt dem Ziel und seinen benachbarten Pokémon [40,SP] SPECIAL zu, was sie 3 Sekunden lang CONFUSION",
+    "SONG_OF_DESIRE": "CHARM 2 Gegner in der Backline für [3,SP] Sekunden",
+    "CONFUSING_MIND": "CONFUSION 2 Gegner in der Backline für [3,SP] Sekunden",
     "KNOWLEDGE_THIEF": "Starten Sie das ultimative Ziel",
     "KING_SHIELD": "PROTECT Sie den Benutzer für 1.5 Sekunden, gewährt [10,20,30,SP] SHIELD und tauschen Sie seine Position mit dem am weitesten entfernten Feind",
     "EXPLOSION": "Fügt allen benachbarten Feinden [50.100.200,SP] SPECIAL zu. Schädigen Sie auch den Benutzer.",

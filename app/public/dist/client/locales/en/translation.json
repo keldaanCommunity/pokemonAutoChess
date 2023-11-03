@@ -902,8 +902,8 @@
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
     "EARTHQUAKE": "Deal [120,SP] SPECIAL to all enemy Pokémon in the same column as the user",
-    "SONG_OF_DESIRE": "The target is CHARM for [6,SP] seconds",
-    "CONFUSING_MIND": "The target is CONFUSION for [6,SP] seconds",
+    "SONG_OF_DESIRE": "Make 2 opponents in the backline CHARM for [3,SP] seconds",
+    "CONFUSING_MIND": "Make 2 opponents in the backline CONFUSION for [3,SP] seconds",
     "KNOWLEDGE_THIEF": "Use the target's ability",
     "KING_SHIELD": "PROTECT the user for 1.5 seconds, gain [10,20,30,SP] SHIELD and swap positions with the farthest enemy Pokémon",
     "EXPLOSION": "Deal [50,100,200,SP] SPECIAL to all adjacent enemies. Damages the user",
@@ -1132,8 +1132,8 @@
     "NIGHT_SHADE": "Deals [25,33,50,SP=0.5]% of target max HP as TRUE",
     "CHARGE_BEAM": "Fires a concentrated bundle of electricity that propagate to max 3 adjacent targets, dealing [20,40,80,SP] SPECIAL to each. The remaining electricity increase AP by 20%.",
     "POPULATION_BOMB": "Deals [10,SP] times 10 SPECIAL to the target",
-    "SCREECH":"Reduce DEF of all adjacent ennemies by [1,2,4,SP]",
-    "SAND_TOMB":"Deals [10,20,40,SP] SPECIAL, inflicting SILENCE and PARALYSIS for 3/5/8 seconds"
+    "SCREECH": "Reduce DEF of all adjacent ennemies by [1,2,4,SP]",
+    "SAND_TOMB": "Deals [10,20,40,SP] SPECIAL, inflicting SILENCE and PARALYSIS for 3/5/8 seconds"
   },
   "effect": {
     "INGRAIN": "Ingrain",

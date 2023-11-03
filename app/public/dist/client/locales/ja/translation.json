@@ -817,8 +817,8 @@
   "ability_description": {
     "SOFT_BOILED": "すべての状態異常を治し、味方全員に[20,40,80,SP]のSHIELDを与える",
     "EARTHQUAKE": "攻撃側と同じ列/列の敵ユニット全員に[120,SP]SPECIALダメージを与える",
-    "SONG_OF_DESIRE": "目標は[6,SP]秒間の混乱です",
-    "CONFUSING_MIND": "ターゲットとその隣接するポケモンに[40,SP]のSPECIALを与え、3秒間混乱状態にする",
+    "SONG_OF_DESIRE": "CHARM [3,SP] 秒間、後衛の対戦相手 2 人に",
+    "CONFUSING_MIND": "CONFUSION [3,SP] 秒間、後衛の対戦相手 2 人に",
     "KNOWLEDGE_THIEF": "究極のターゲットを発射する",
     "KING_SHIELD": "ユーザーを1.5秒間 PROTECT し、[10,20,30,SP] SHIELD を獲得し、最も遠い敵ポケモンと位置を交換します",
     "EXPLOSION": "隣接する敵全員に[50,100,200,SP]SPECIALを与える。使用者にも損害を与えます。",

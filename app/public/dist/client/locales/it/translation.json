@@ -817,8 +817,8 @@
   "ability_description": {
     "SOFT_BOILED": "Cura tutti gli effetti di stato e garantisce [20,40,80,SP] SHIELD per ogni alleato",
     "EARTHQUAKE": "Infligge danno [120,SP] SPECIAL a tutte le unità nemiche nella stessa colonna/linea dell'attaccante",
-    "SONG_OF_DESIRE": "L'obiettivo è CONFUSION per [6,SP] secondi",
-    "CONFUSING_MIND": "Infligge [40,SP] SPECIAL al bersaglio e ai suoi pokemon adiacenti, facendoli CONFUSION per 3 secondi",
+    "SONG_OF_DESIRE": "CHARM 2 avversari nelle retrovie per [3,SP] secondi",
+    "CONFUSING_MIND": "CONFUSION 2 avversari nelle retrovie per [3,SP] secondi",
     "KNOWLEDGE_THIEF": "Lancia il massimo del bersaglio",
     "KING_SHIELD": "PROTECT l'utilizzatore per 1.5 secondi, garantisce [10,20,30,SP] SHIELD e scambia la sua posizione con il nemico più lontano",
     "EXPLOSION": "Infligge [50.100.200 SP] SPECIAL a tutti i nemici adiacenti. Danneggia anche l'utente.",
