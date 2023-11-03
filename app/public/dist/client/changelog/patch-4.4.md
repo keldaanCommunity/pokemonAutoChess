@@ -26,6 +26,7 @@
 - Slowbro now needs a King's Rock to evolve to Slowking
 - Pokemons with "tree" status (Sudowoodo, Wobbuffet) cannot be silenced or lose PP until their bar is full
 - Nerf Attack of Ratata and Spearow lines
+- New ability for Pichu line: Nuzzle: Dash to the farthest enemy target, dealing 30/60/120 special damage and paralyzing it for 3/4/5 seconds; - Adjusted max PP for Pichu line: ~~140~~ 100 ; Alolan Raichu ~~100~~ 80 PP
 
 # Changes to Synergies
 
