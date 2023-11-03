@@ -1830,7 +1830,7 @@ export class Marowak extends Pokemon {
   stars = 2
   evolution = Pkm.ALOLAN_MAROWAK
   evolutionRule = new ItemEvolutionRule([Item.FIRE_STONE])
-  hp = 220
+  hp = 250
   atk = 20
   def = 6
   speDef = 5
