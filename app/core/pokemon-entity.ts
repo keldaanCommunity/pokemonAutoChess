@@ -707,9 +707,9 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
         } else if (pokemon.effects.has(Effect.FAIRY_WIND)) {
           damage = 30
         } else if (pokemon.effects.has(Effect.STRANGE_STEAM)) {
-          damage = 60
+          damage = 45
         } else if (pokemon.effects.has(Effect.MOON_FORCE)) {
-          damage = 80
+          damage = 60
         }
 
         const splashTarget = pokemon === this ? target : this

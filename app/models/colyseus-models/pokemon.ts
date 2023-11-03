@@ -2524,9 +2524,9 @@ export class Pichu extends Pokemon {
   atk = 5
   def = 1
   speDef = 1
-  maxPP = 140
+  maxPP = 100
   range = 1
-  skill = Ability.VOLT_SWITCH
+  skill = Ability.NUZZLE
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -2539,9 +2539,9 @@ export class Pikachu extends Pokemon {
   atk = 9
   def = 3
   speDef = 3
-  maxPP = 140
+  maxPP = 100
   range = 1
-  skill = Ability.VOLT_SWITCH
+  skill = Ability.NUZZLE
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -2555,9 +2555,9 @@ export class Raichu extends Pokemon {
   atk = 18
   def = 5
   speDef = 5
-  maxPP = 140
+  maxPP = 100
   range = 1
-  skill = Ability.VOLT_SWITCH
+  skill = Ability.NUZZLE
   passive = Passive.RAICHU
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
@@ -2574,9 +2574,9 @@ export class AlolanRaichu extends Pokemon {
   atk = 20
   def = 6
   speDef = 6
-  maxPP = 100
+  maxPP = 80
   range = 1
-  skill = Ability.VOLT_SWITCH
+  skill = Ability.NUZZLE
   passive = Passive.SURGE_SURFER
   final = true
   attackSprite = AttackSprite.ELECTRIC_MELEE
