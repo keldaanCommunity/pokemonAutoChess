@@ -2793,6 +2793,25 @@ export default class BattleManager {
             )
             break
 
+          case Ability.SAND_TOMB:
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.SAND_TOMB,
+              "0"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.SAND_TOMB)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
+
           case Ability.MAGICAL_LEAF:
             coordinates = transformAttackCoordinate(
               positionX,

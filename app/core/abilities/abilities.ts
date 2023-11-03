@@ -6079,6 +6079,36 @@ export class ScreechStrategy extends AbilityStrategy {
   }
 }
 
+export class SandTombStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    target.status.triggerParalysis(
+      pokemon.stars === 3 ? 8000 : pokemon.stars === 2 ? 5000 : 3000,
+      target
+    )
+    target.status.triggerSilence(
+      pokemon.stars === 3 ? 8000 : pokemon.stars === 2 ? 5000 : 3000,
+      target,
+      pokemon,
+      board
+    )
+    target.handleSpecialDamage(
+      pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit,
+      false
+    )
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -6315,5 +6345,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.NIGHT_SHADE]: new NightShadeStrategy(),
   [Ability.CHARGE_BEAM]: new ChargeBeamStrategy(),
   [Ability.POPULATION_BOMB]: new PopulationBombStrategy(),
-  [Ability.SCREECH]: new ScreechStrategy()
+  [Ability.SCREECH]: new ScreechStrategy(),
+  [Ability.SAND_TOMB]: new SandTombStrategy()
 }

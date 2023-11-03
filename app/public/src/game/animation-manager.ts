@@ -861,6 +861,16 @@ export default class AnimationManager {
       key: Ability.SCREECH,
       frames: this.game.anims.generateFrameNames(Ability.SCREECH, {
         start: 0,
+        end: 13
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
+      key: Ability.SAND_TOMB,
+      frames: this.game.anims.generateFrameNames(Ability.SAND_TOMB, {
+        start: 0,
         end: 6
       }),
       duration: 1000,

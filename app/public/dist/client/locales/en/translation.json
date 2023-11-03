@@ -249,7 +249,8 @@
     "NIGHT_SHADE": "Night Shade",
     "CHARGE_BEAM": "Charge Beam",
     "POPULATION_BOMB": "Population Bomb",
-    "SCREECH": "Screech"
+    "SCREECH": "Screech",
+    "SAND_TOMB": "Sand Tomb"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -894,7 +895,9 @@
     "MAUSHOLD_THREE": "Maushold (3)",
     "MAUSHOLD_FOUR": "Maushold (4)",
     "KRICKETOT": "Kricketot",
-    "KRICKETUNE": "Kricketune"
+    "KRICKETUNE": "Kricketune",
+    "HIPPOPOTAS": "Hippopotas",
+    "HIPPODOWN": "Hippodown"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1129,7 +1132,8 @@
     "NIGHT_SHADE": "Deals [25,33,50,SP=0.5]% of target max HP as TRUE",
     "CHARGE_BEAM": "Fires a concentrated bundle of electricity that propagate to max 3 adjacent targets, dealing [20,40,80,SP] SPECIAL to each. The remaining electricity increase AP by 20%.",
     "POPULATION_BOMB": "Deals [10,SP] times 10 SPECIAL to the target",
-    "SCREECH":"Reduce DEF of all adjacent ennemies by [1,2,4,SP]"
+    "SCREECH":"Reduce DEF of all adjacent ennemies by [1,2,4,SP]",
+    "SAND_TOMB":"Deals [10,20,40,SP] SPECIAL, inflicting SILENCE and PARALYSIS for 3/5/8 seconds"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1568,7 +1572,8 @@
     "GENESECT": "Genesect is dealing TRUE to targets affected by ARMOR_REDUCTION",
     "SPECIAL_ATTACK": "Basic attacks deal SPECIAL and scale with AP",
     "NINCADA": "After evolving, get Sheninja as well if you have a free space on your bench",
-    "FAMILY": "The pokémon grows with time (turn 15 and turn 20)"
+    "FAMILY": "The pokémon grows with time (turn 15 and turn 20)",
+    "SAND_STREAM": "The pokémon count as 3 for SANDSTORM"
   },
   "stat": {
     "ATK": "Attack",

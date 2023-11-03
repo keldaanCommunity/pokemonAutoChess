@@ -8,6 +8,7 @@
 - Xurkitree
 - Tandemaus/Maushold
 - Kricketot/Kricketune
+- Hippopotas/Hippodown
 
 # Changes to Pokemon & Abilities
 

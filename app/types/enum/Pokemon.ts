@@ -643,7 +643,9 @@ export enum Pkm {
   MAUSHOLD_THREE = "MAUSHOLD_THREE",
   MAUSHOLD_FOUR = "MAUSHOLD_FOUR",
   KRICKETOT = "KRICKETOT",
-  KRICKETUNE = "KRICKETUNE"
+  KRICKETUNE = "KRICKETUNE",
+  HIPPOPOTAS = "HIPPOPOTAS",
+  HIPPODOWN = "HIPPODOWN"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1289,7 +1291,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.MAUSHOLD_THREE]: "0925",
   [Pkm.MAUSHOLD_FOUR]: "0925-0001",
   [Pkm.KRICKETOT]: "0401",
-  [Pkm.KRICKETUNE]: "0402"
+  [Pkm.KRICKETUNE]: "0402",
+  [Pkm.HIPPOPOTAS]: "0449",
+  [Pkm.HIPPODOWN]: "0450"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1935,7 +1939,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.MAUSHOLD_THREE]: Pkm.TANDEMAUS,
   [Pkm.MAUSHOLD_FOUR]: Pkm.TANDEMAUS,
   [Pkm.KRICKETOT]: Pkm.KRICKETOT,
-  [Pkm.KRICKETUNE]: Pkm.KRICKETOT
+  [Pkm.KRICKETUNE]: Pkm.KRICKETOT,
+  [Pkm.HIPPOPOTAS]: Pkm.HIPPOPOTAS,
+  [Pkm.HIPPODOWN]: Pkm.HIPPOPOTAS
 }
 
 export enum PkmDuo {
@@ -5280,5 +5286,15 @@ export const AnimationConfig: {
     attack: AnimationType.MultiStrike,
     ability: AnimationType.Charge,
     emote: AnimationType.Shoot
+  },
+  [Pkm.HIPPOPOTAS]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.RearUp
+  },
+  [Pkm.HIPPODOWN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.RearUp
   }
 }
