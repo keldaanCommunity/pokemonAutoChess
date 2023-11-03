@@ -2441,14 +2441,18 @@ export default class AnimationManager {
     )
 
     try {
-      this.play(entity, animation, flip)
+      this.play(entity, animation, { flip })
     } catch (err) {
       logger.warn(`Can't play animation ${animation} for ${entity.name}`, err)
     }
   }
 
-  play(entity: Pokemon, animation: AnimationType, flip: boolean, loop = false) {
-    const orientation = flip
+  play(
+    entity: Pokemon,
+    animation: AnimationType,
+    animationConfig: { flip?: boolean, loop?: boolean, lock?: boolean } = {}
+  ) {
+    const orientation = animationConfig.flip
       ? OrientationFlip[entity.orientation]
       : entity.orientation
 
@@ -2465,12 +2469,18 @@ export default class AnimationManager {
         : PokemonTint.NORMAL
     const animKey = `${textureIndex}/${tint}/${animation}/${SpriteType.ANIM}/${orientationCorrected}`
     const shadowKey = `${textureIndex}/${tint}/${animation}/${SpriteType.SHADOW}/${orientationCorrected}`
-    if (loop) {
-      entity.sprite.anims.play({ key: animKey, repeat: -1 })
-      entity.shadow.anims.play({ key: shadowKey, repeat: -1 })
-    } else {
-      entity.sprite.anims.play(animKey)
-      entity.shadow.anims.play(shadowKey)
+
+    if (!entity.animationLocked) {
+      if (animationConfig.loop) {
+        entity.sprite.anims.play({ key: animKey, repeat: -1 })
+        entity.shadow.anims.play({ key: shadowKey, repeat: -1 })
+      } else {
+        entity.sprite.anims.play(animKey)
+        entity.shadow.anims.play(shadowKey)
+      }
+    }
+    if (animationConfig.lock) {
+      entity.animationLocked = true
     }
   }
 }

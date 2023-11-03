@@ -2480,12 +2480,12 @@ export const AnimationConfig: {
     emote: AnimationType.Pose
   },
   [Pkm.PIKACHU]: {
-    attack: AnimationType.Shoot,
+    attack: AnimationType.Attack,
     ability: AnimationType.Shock,
     emote: AnimationType.Pose
   },
   [Pkm.RAICHU]: {
-    attack: AnimationType.Shoot,
+    attack: AnimationType.Attack,
     ability: AnimationType.Shock,
     emote: AnimationType.Shoot
   },
