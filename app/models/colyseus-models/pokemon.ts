@@ -10655,7 +10655,7 @@ export class Doduo extends Pokemon {
   stars = 1
   evolution = Pkm.DODRIO
   hp = 90
-  atk = 10
+  atk = 12
   def = 3
   speDef = 2
   maxPP = 40
@@ -10670,7 +10670,7 @@ export class Dodrio extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   hp = 185
-  atk = 24
+  atk = 28
   def = 5
   speDef = 3
   maxPP = 40
