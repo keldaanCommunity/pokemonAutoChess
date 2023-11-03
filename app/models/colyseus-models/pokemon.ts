@@ -9481,7 +9481,7 @@ export class Sharpedo extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.DARK])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 130
+  hp = 150
   atk = 21
   def = 2
   speDef = 3
@@ -10520,12 +10520,12 @@ export class UltraNecrozma extends Pokemon {
     Synergy.PSYCHIC
   ])
   rarity = Rarity.LEGENDARY
-  stars = 3
-  hp = 250
+  stars = 4
+  hp = 300
   atk = 30
-  def = 2
-  speDef = 2
-  maxPP = 150
+  def = 5
+  speDef = 5
+  maxPP = 100
   range = 3
   skill = Ability.PRISMATIC_LASER
   passive = Passive.PRISM

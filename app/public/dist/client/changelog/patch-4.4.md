@@ -26,6 +26,8 @@
 - Slowbro now needs a King's Rock to evolve to Slowking
 - Pokemons with "tree" status (Sudowoodo, Wobbuffet) cannot be silenced or lose PP until their bar is full
 - Nerf Attack of Ratata and Spearow lines
+- Buff Sharpedo: HP ~~130~~ 150
+- Buff Ultra-Necrozma: change tier to tier 4, get the same stats than Necrozma but with range 3 and Dragon synergy
 
 # Changes to Synergies
 
