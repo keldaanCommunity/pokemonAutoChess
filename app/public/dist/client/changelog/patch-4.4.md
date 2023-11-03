@@ -38,6 +38,7 @@
 - Adjust Bounsweet Attack ~~8~~ 10, Steenie Attack ~~16~~ 20, PP ~~100~~ 120
 - Buff Gorebyss Def ~~2~~ 5, SpeDef ~~2~~ 3
 - Buff Waterfall (Totodile): now also clear negative status and board cell effect on cast
+- Buff Dialga and Palkia PP: ~~150~~ 120
 
 # Changes to Synergies
 

@@ -4630,7 +4630,7 @@ export class Dialga extends Pokemon {
   atk = 25
   def = 5
   speDef = 5
-  maxPP = 150
+  maxPP = 120
   range = 1
   skill = Ability.ROAR_OF_TIME
   final = true
@@ -4645,7 +4645,7 @@ export class Palkia extends Pokemon {
   atk = 25
   def = 5
   speDef = 5
-  maxPP = 150
+  maxPP = 120
   range = 1
   skill = Ability.ROAR_OF_TIME
   final = true
