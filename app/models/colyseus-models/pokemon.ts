@@ -376,7 +376,7 @@ export class Bounsweet extends Pokemon {
   atk = 10
   def = 4
   speDef = 4
-  maxPP = 100
+  maxPP = 120
   range = 1
   skill = Ability.HIGH_JUMP_KICK
   attackSprite = AttackSprite.FIGHTING_MELEE
@@ -391,7 +391,7 @@ export class Steenee extends Pokemon {
   atk = 20
   def = 5
   speDef = 5
-  maxPP = 100
+  maxPP = 120
   range = 1
   skill = Ability.HIGH_JUMP_KICK
   attackSprite = AttackSprite.FIGHTING_MELEE
