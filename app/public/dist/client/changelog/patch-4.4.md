@@ -37,6 +37,7 @@
 - Buff Marowak HP ~~220~~ 250
 - Adjust Bounsweet Attack ~~8~~ 10, Steenie Attack ~~16~~ 20, PP ~~100~~ 120
 - Buff Gorebyss Def ~~2~~ 5, SpeDef ~~2~~ 3
+- Buff Waterfall (Totodile): now also clear negative status and board cell effect on cast
 
 # Changes to Synergies
 

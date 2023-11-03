@@ -3097,6 +3097,8 @@ export class WaterfallStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const shield = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30
     pokemon.addShield(shield, pokemon, true)
+    pokemon.status.clearNegativeStatus()
+    board.effects[pokemon.positionY * board.columns + pokemon.positionX] = undefined
   }
 }
 

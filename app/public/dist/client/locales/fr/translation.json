@@ -1051,7 +1051,7 @@
     "SHELL_SMASH": "Inflige [15,30,SP] SPECIAL aux ennemis adjacents ; gagne 2 ATK, 20% AP et 20% ATK_SPEED, et perd 1 DEF, 1 SPE_DEF",
     "HELPING_HAND": "Double les dégâts de la prochaine capacité lancée par les [2,4,6] alliés les plus proches",
     "ASTRAL_BARRAGE": "Attaque des ennemis aléatoires avec [3,SP=2] petits spectres, chacun infligeant 20 SPECIAL",
-    "WATERFALL": "SHIELD lui-même pour [30,60,120,SP]",
+    "WATERFALL": "Gagne [30,60,120,SP] SHIELD, se débarasse de tout statut négatif et nettoie la case du plateau",
     "PYRO_BALL": "L'utilisateur attaque en allumant une petite pierre et en la lançant comme une boule de feu sur la cible la plus éloignée, infligeant [10,20,40,SP] SPECIAL et BURN pendant 2 secondes tout ce qui se trouve sur son passage.",
     "WHIRLPOOL": "Verrouillez l'ennemi le plus éloigné et déchaînez une grêle de 4 tourbillons vers lui. Chacun inflige [125,SP]% d'ATK PHYSIQUE au premier ennemi touché.",
     "SMOKE_SCREEN": "Canalisation souterraine et réapparition au milieu de l'équipe ennemie, infligeant [10,20,40,SP] SPECIAL, BURN et ARMOR_REDUCTION à toutes les unités adjacentes pendant 2 secondes.",
