@@ -7,6 +7,7 @@ import {
 
 import { MapSchema } from "@colyseus/schema"
 import { Pokemon } from "../models/colyseus-models/pokemon"
+import { WeatherThreshold } from "../types/Config"
 
 export function getWeather(
   playerBoard: MapSchema<Pokemon, string>,
@@ -18,6 +19,7 @@ export function getWeather(
   ): Weather | null {
     const sortedCount = weathers
       .map((w) => [w, count.get(w) ?? 0] as [Weather, number])
+      .filter(([w, count]) => count >= WeatherThreshold[w])
       .sort((a, b) => b[1] - a[1])
 
     if (sortedCount.length === 0) return null
@@ -95,11 +97,10 @@ export function getWeather(
   })
 
   //logger.debug("boardWeatherScore", boardWeatherScore)
-  const MIN_THRESHOLD = 8
   const dominantWeather = getDominantWeather(boardWeatherScore)
   if (
     dominantWeather &&
-    boardWeatherScore.get(dominantWeather)! >= MIN_THRESHOLD
+    boardWeatherScore.get(dominantWeather)! >= WeatherThreshold[dominantWeather]
   ) {
     return dominantWeather
   }
