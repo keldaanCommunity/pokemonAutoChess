@@ -609,32 +609,28 @@ export default class PokemonState {
     }
   }
 
-  getFarthestTargetCoordinate(
+  getFarthestTarget(
     pokemon: PokemonEntity,
     board: Board
-  ): { x: number; y: number } | undefined {
-    const pokemons = new Array<{ distance: number; x: number; y: number }>()
+  ): PokemonEntity | undefined {
+    let farthestTarget: PokemonEntity| undefined = undefined
+    let maxDistance = 0
 
-    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
+    board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
       if (
-        value !== undefined &&
-        value.team !== pokemon.team &&
-        value.isTargettable
+        enemy &&
+        enemy.team !== pokemon.team &&
+        enemy.isTargettable
       ) {
         const distance = distanceM(pokemon.positionX, pokemon.positionY, x, y)
-        pokemons.push({ distance, x, y })
+        if(distance > maxDistance){
+          farthestTarget = enemy
+          maxDistance = distance
+        }
       }
     })
 
-    pokemons.sort((a, b) => {
-      return b.distance - a.distance
-    })
-
-    if (pokemons.length > 0) {
-      return { x: pokemons[0].x, y: pokemons[0].y }
-    } else {
-      return undefined
-    }
+    return farthestTarget
   }
 
   getMostSurroundedCoordinateAvailablePlace(

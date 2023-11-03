@@ -38,6 +38,7 @@
     "HYPER_VOICE": "Hyper Voice",
     "SHADOW_CLONE": "Shadow Clone",
     "VOLT_SWITCH": "Volt Switch",
+    "NUZZLE": "Nuzzle",
     "LIQUIDATION": "Liquidation",
     "BURN": "Burn",
     "POISON": "Poison",
@@ -921,6 +922,7 @@
     "HYPER_VOICE": "Deal [50,100,200,SP] SPECIAL to all enemy Pokémon in the same column as the user and make them CONFUSION for [1,2,3] seconds",
     "SHADOW_CLONE": "The user creates an identical clone of themselves next to their target. The clone has the same items and stats as the user, has 80% of its max HP and [30,SP] SHIELD",
     "VOLT_SWITCH": "Dash into the enemy team's backline, dealing [30,60,120,SP] SPECIAL to all enemy Pokémon hit",
+    "NUZZLE": "Dash to the farthest opponent, dealing [30,60,120,SP] SPECIAL and making it PARALYSIS for [3,4,5] seconds",
     "LIQUIDATION": "Deal [20,40,80,SP] SPECIAL and lower the target's DEF by [1,2,4]",
     "BURN": "BURN all enemy Pokémon for [5,10,20] seconds",
     "POISON": "Apply POISON to the [1,2,3] closest enemy Pokémon for [3,6,9,SP=0.5] seconds",
@@ -1132,8 +1134,8 @@
     "NIGHT_SHADE": "Deals [25,33,50,SP=0.5]% of target max HP as TRUE",
     "CHARGE_BEAM": "Fires a concentrated bundle of electricity that propagate to max 3 adjacent targets, dealing [20,40,80,SP] SPECIAL to each. The remaining electricity increase AP by 20%.",
     "POPULATION_BOMB": "Deals [10,SP] times 10 SPECIAL to the target",
-    "SCREECH":"Reduce DEF of all adjacent ennemies by [1,2,4,SP]",
-    "SAND_TOMB":"Deals [10,20,40,SP] SPECIAL, inflicting SILENCE and PARALYSIS for 3/5/8 seconds"
+    "SCREECH": "Reduce DEF of all adjacent ennemies by [1,2,4,SP]",
+    "SAND_TOMB": "Deals [10,20,40,SP] SPECIAL, inflicting SILENCE and PARALYSIS for 3/5/8 seconds"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1316,8 +1318,8 @@
     "WANDERING_SPIRIT": "Deal 100% of ATK as TRUE",
     "AROMATIC_MIST": "Shocks deal 15 SPECIAL",
     "FAIRY_WIND": "Shocks deal 30 SPECIAL",
-    "STRANGE_STEAM": "Shocks deal 60 SPECIAL",
-    "MOON_FORCE": "Shocks deal 80 SPECIAL. All the opponent team is CHARM for 2 seconds at the start of the fight.",
+    "STRANGE_STEAM": "Shocks deal 45 SPECIAL",
+    "MOON_FORCE": "Shocks deal 60 SPECIAL. All the opponent team is CHARM for 2 seconds at the start of the fight.",
     "COOL_BREEZE": "+2 SPE_DEF",
     "CHILLY": "+4 SPE_DEF, 10% chance to FREEZE",
     "FROSTY": "+8 SPE_DEF, 20% chance to FREEZE",
