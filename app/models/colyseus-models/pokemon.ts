@@ -3510,9 +3510,9 @@ export class Slowbro extends Pokemon {
   stars = 2
   evolution = Pkm.SLOWKING
   evolutionRule = new ItemEvolutionRule([Item.KINGS_ROCK])
-  hp = 130
+  hp = 180
   atk = 13
-  def = 3
+  def = 5
   speDef = 3
   maxPP = 100
   range = 1
