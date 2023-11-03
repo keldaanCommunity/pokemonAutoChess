@@ -29,7 +29,8 @@
 
 # Changes to Synergies
 
-- Grass now produces berries over time
+- Buff Grass: You get a berry tree that produces berries over time
+- Nerf Fairy: (6) Shock damage ~~60~~ 45 ; (8) Shock damage ~~80~~ 60
 
 # Changes to Items
 
