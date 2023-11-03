@@ -373,7 +373,7 @@ export class Bounsweet extends Pokemon {
   stars = 1
   evolution = Pkm.STEENEE
   hp = 100
-  atk = 8
+  atk = 10
   def = 4
   speDef = 4
   maxPP = 100
@@ -388,7 +388,7 @@ export class Steenee extends Pokemon {
   stars = 2
   evolution = Pkm.TSAREENA
   hp = 180
-  atk = 16
+  atk = 20
   def = 5
   speDef = 5
   maxPP = 100

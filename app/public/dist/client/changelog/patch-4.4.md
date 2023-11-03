@@ -35,6 +35,7 @@
 - Buff Weepinbell: HP ~~140~~ 160, Attack ~~9~~ 12
 - Buff Duduo Attack ~~10~~12 and Dodrio Attack ~~24~~28
 - Buff Marowak HP ~~220~~ 250
+- Buff Bounsweet Attack ~~8~~ 10, Steenie Attack ~~16~~ 20
 
 # Changes to Synergies
 
