@@ -1493,7 +1493,7 @@
     "POISON": "Gifpokemons hebben een kans om hun doelwit 4 seconden te POISON met hun basisaanvallen. Gif veroorzaakt TRUE in de loop van de tijd en vermindert de genezingsefficiëntie.",
     "DRAGON": "Dragon versterkt synergieën en krijgt meer statistieken wanneer hij volledig is geëvolueerd.",
     "FIELD": "Wanneer een veld-pokemon sterft, worden alle andere veld-pokemons genezen en krijgen ze ATK_SPEED",
-    "MONSTER": "Monster-pokemons krijgen Attack, genezen en vergroten hun maximale HP, en worden groter elke keer dat ze een tegenstander neerhalen",
+    "MONSTER": "MONSTER Pokémon kunnen hun tegenstanders FLINCH. Elke keer dat ze een KO krijgen, krijgen ze ATK, genezen ze en verhogen ze hun maximale HP, en worden ze groter.",
     "HUMAN": "Je hele team geneest voor een percentage van de schade die ze aanrichten met aanvallen en vaardigheden",
     "AQUATIC": "Aquatische pokemons hebben bij elke basisaanval de kans om PP van hun doelwit te stelen",
     "BUG": "Aan het begin van het gevecht worden de bug-pokemons met de meeste HP gedupliceerd",

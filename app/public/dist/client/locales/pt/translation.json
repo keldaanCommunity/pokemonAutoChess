@@ -1491,7 +1491,7 @@
     "POISON": "Pokémon venenosos têm chance de POISON seu alvo por 4 segundos com seus ataques básicos. Veneno inflige TRUE ao longo do tempo e reduz a eficiência de cura.",
     "DRAGON": "Dragão amplifica sinergias e ganha mais estatísticas quando totalmente evoluído.",
     "FIELD": "Quando um pokémon de campo morre, todos os outros pokémons de campo são curados e ganham ATK_SPEED",
-    "MONSTER": "Os pokémons monstruosos ganham ataque, curam e aumentam seu HP máximo e aumentam de tamanho toda vez que derrubam um oponente",
+    "MONSTER": "Pokémon MONSTER podem FLINCH seus oponentes. Cada vez que são nocauteados, eles ganham ATK, curam e aumentam seu HP máximo e aumentam de tamanho.",
     "HUMAN": "Toda a sua equipe cura uma porcentagem do dano causado com ataques e habilidades",
     "AQUATIC": "Pokémon aquáticos têm chance de roubar PP de seu alvo a cada ataque básico",
     "BUG": "No início do combate, os pokémons bug com mais HP são duplicados",

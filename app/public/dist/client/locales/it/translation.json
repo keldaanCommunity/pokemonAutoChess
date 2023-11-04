@@ -1512,7 +1512,7 @@
     "POISON": "I pokemon veleno hanno la possibilità di POISON il bersaglio per 4 secondi con i loro attacchi base. Il veleno infligge TRUE nel tempo e riduce l'efficienza della guarigione.",
     "DRAGON": "Il drago amplifica le sinergie e guadagna più statistiche quando è completamente evoluto.",
     "FIELD": "Quando un pokemon di campo muore, tutti gli altri pokemon di campo vengono curati e guadagnano ATK_SPEED",
-    "MONSTER": "I pokemon mostruosi guadagnano Attacco, guariscono e aumentano i loro HP massimi e crescono di dimensioni ogni volta che abbattono un avversario",
+    "MONSTER": "I Pokemon MONSTER possono FLINCH i loro avversari. Ogni volta che ottengono un KO, guadagnano ATK, guariscono e aumentano i loro HP massimi e crescono di dimensioni.",
     "HUMAN": "Tutta la tua squadra guarisce per una percentuale del danno che infligge con attacchi e abilità",
     "AQUATIC": "I pokemon acquatici hanno la possibilità di rubare PP al loro bersaglio ad ogni attacco base",
     "BUG": "All'inizio del combattimento, i Pokémon coleottero con più HP vengono duplicati",

@@ -1511,7 +1511,7 @@
     "POISON": "Gift-Pokémons haben die Chance, ihr Ziel mit ihren Grundangriffen 4 Sekunden lang zu VERGIFTEN. Gift verursacht mit der Zeit TRUE und verringert die Heilungseffizienz.",
     "DRAGON": "Drache verstärkt Synergien und erhält mehr Werte, wenn er vollständig entwickelt ist.",
     "FIELD": "Wenn ein Feldpokemon stirbt, werden alle anderen Feldpokemon geheilt und erhalten ATK_SPEED",
-    "MONSTER": "Monster-Pokémon erhalten Angriff, heilen und erhöhen ihre maximalen HP und werden jedes Mal größer, wenn sie einen Gegner niederschlagen",
+    "MONSTER": "MONSTER Pokémons können ihre Gegner FLINCH. Jedes Mal, wenn sie einen KO erleiden, erhalten sie ATK, heilen sich, erhöhen ihre maximalen HP und werden größer.",
     "HUMAN": "Ihr gesamtes Team heilt sich um einen Prozentsatz des Schadens, den es durch Angriffe und Fähigkeiten verursacht",
     "AQUATIC": "Wasserpokémons haben bei jedem Basisangriff die Chance, ihrem Ziel PP zu stehlen",
     "BUG": "Zu Beginn des Kampfes werden die Käfer-Pokémon mit den meisten HP dupliziert",

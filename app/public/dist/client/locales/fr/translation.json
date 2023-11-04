@@ -1563,7 +1563,7 @@
     "POISON": "Les pokémons POISON ont une chance d' POISON leur cible pendant 4 secondes avec leurs attaques de base. Le poison inflige TRUE au fil du temps et réduit l'efficacité de la guérison.",
     "DRAGON": "Les pokémons DRAGON amplifient leurs synergies et gagnent plus de statistiques lorsqu'ils sont complètement évolués.",
     "FIELD": "Lorsqu'un pokémon FIELD meurt, tous les autres pokémons FIELD sont soignés et gagnent en ATK_SPEED",
-    "MONSTER": "Les pokémons MONSTER gagnent en attaque, se soignent et augmentent leurs HP max, et grossissent à chaque fois qu'ils mettent KO une unité adverse",
+    "MONSTER": "Les pokémons MONSTER ont une chance de causer FLINCH sur leur cible. Chaque fois qu'ils mettent KO une unité adverse, ils gagnent en ATK, se soignent et augmentent leurs HP max, et grossissent en taille.",
     "HUMAN": "Toute votre équipe guérit d'un pourcentage des dégâts qu'elle inflige avec les attaques et capacités",
     "AQUATIC": "Les pokémons AQUATIC ont une chance de voler des PP à leur cible à chaque attaque de base",
     "BUG": "Au début du combat, les pokemons BUG avec le plus de HP sont dupliqués",
