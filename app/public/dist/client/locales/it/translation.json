@@ -1943,7 +1943,7 @@
   "tutorial_work": "per il suo lavoro sui video tutorial!",
   "ALL": "TUTTO",
   "weather_dominant_hint": "Il tipo dominante di pokemon sul tabellone durante una battaglia può influenzare il tempo. Il tempo ha vari effetti su tutti i pokemon della tua squadra e dell'avversario.",
-  "weather_dominant_hint2": "Richiederà almeno 8 pokemon di questo tipo sul tabellone per cambiare il tempo. Alcuni potenti pokemon hanno anche la capacità di cambiare il tempo da soli.",
+  "weather_dominant_hint2": "Richiederà pokemon di questo tipo sul tabellone per cambiare il tempo. Alcuni potenti pokemon hanno anche la capacità di cambiare il tempo da soli.",
   "how_to_play": "COME GIOCARE ?",
   "abilities_label": "ABILITÀ",
   "weather_label": "TEMPO ATMOSFERICO",

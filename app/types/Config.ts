@@ -3,6 +3,7 @@ import { Pkm, PkmDuo, PkmProposition } from "./enum/Pokemon"
 import { Item } from "./enum/Item"
 import { AttackType, Rarity, Stat } from "./enum/Game"
 import { Emotion } from "."
+import { Weather } from "./enum/Weather"
 
 export const ON_ATTACK_MANA = 5
 export const MANA_SCARF_MANA = 8
@@ -450,6 +451,18 @@ export const EloRankThreshold: { [key in EloRank]: number } = {
   [EloRank.GOLD]: 1100,
   [EloRank.PLATINUM]: 1250,
   [EloRank.DIAMOND]: 1400
+}
+
+export const WeatherThreshold: { [weather in Weather]: number } = {
+  [Weather.MISTY]: 8,
+  [Weather.NEUTRAL]: 8,
+  [Weather.NIGHT]: 8,
+  [Weather.RAIN]: 8,
+  [Weather.SANDSTORM]: 6,
+  [Weather.SNOW]: 6,
+  [Weather.STORM]: 6,
+  [Weather.SUN]: 8,
+  [Weather.WINDY]: 8
 }
 
 // 4  A  1
