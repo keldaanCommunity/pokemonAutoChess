@@ -39,10 +39,12 @@
 - Buff Gorebyss Def ~~2~~ 5, SpeDef ~~2~~ 3
 - Buff Waterfall (Totodile): now also clear negative status and board cell effect on cast
 - Buff Dialga and Palkia PP: ~~150~~ 120
+- New ability for Pichu line: Nuzzle: Dash to the farthest enemy target, dealing 30/60/120 special damage and paralyzing it for 3/4/5 seconds; - Adjusted max PP for Pichu line: ~~140~~ 100 ; Alolan Raichu ~~100~~ 80 PP
 
 # Changes to Synergies
 
-- Grass now produces berries over time
+- Buff Grass: You get a berry tree that produces berries over time
+- Nerf Fairy: (6) Shock damage ~~60~~ 45 ; (8) Shock damage ~~80~~ 60
 
 # Changes to Items
 
@@ -71,6 +73,7 @@
 - Added Animated map tiles
 - Redesigned meta reports
 - Change item sprites to higher definition versions
+- Prevent pokemon ability animations to cancel before the end
 
 # Bugfix
 

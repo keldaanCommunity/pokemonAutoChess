@@ -108,6 +108,7 @@ export default class Pokemon extends DraggableObject {
   playerId: string
   shouldShowTooltip: boolean
   flip: boolean
+  animationLocked: boolean /* will prevent another anim to play before current one is completed */
 
   constructor(
     scene: GameScene | DebugScene,
@@ -183,15 +184,14 @@ export default class Pokemon extends DraggableObject {
     //this.sprite.setOrigin(0,0);
     this.sprite.setScale(2, 2)
     this.sprite.on(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+      this.animationLocked = false
       const g = <GameScene>scene
       // go back to idle anim if no more animation in queue
-      if (pokemon.action !== PokemonActionState.HURT) {
-        g.animationManager?.animatePokemon(
-          this,
-          PokemonActionState.IDLE,
-          this.flip
-        )
-      }
+      g.animationManager?.animatePokemon(
+        this,
+        pokemon.action,
+        this.flip
+      )
     })
     this.height = this.sprite.height
     this.width = this.sprite.width
