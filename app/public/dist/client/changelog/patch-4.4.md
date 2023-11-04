@@ -44,6 +44,7 @@
 # Changes to Synergies
 
 - Buff Grass: You get a berry tree that produces berries over time
+- Buff Monster: Monster now have a chance to apply Flinch status for 2 seconds on attack
 - Nerf Fairy: (6) Shock damage ~~60~~ 45 ; (8) Shock damage ~~80~~ 60
 
 # Changes to Items
@@ -65,6 +66,7 @@
 
 # Gameplay
 
+- New status: Flinch: all incoming damage bypass Shield
 - Like poison, the following status can now have their duration extended if applied again before the end of their initial duration: Armor Reduction, Burn, Silence, Wound, Paralysis, Rune Protect, Spike Armor, Magic Bounce.
 - Negative status are cleared when the opposite team is eliminated
 - The number of pokemons required to change these weathers has been reduced to 6: Snow, Storm, Sandstorm

@@ -825,7 +825,7 @@
     "NIGHTMARE": "POISON alle vijandelijke Pokémon voor [2,4,8,SP=0,5] seconden",
     "CLANGOROUS_SOUL": "Buff aangrenzende vriendelijke Pokémon's ATK met [2,4,8] en DEF / SPE_DEF met [1,2,4]",
     "BONEMERANG": "Gooi een bot als een boemerang door het vijandelijke team. Elke geraakte vijandelijke Pokémon neemt [30,60,120,SP] SPECIAL",
-    "GROWL": "Pas de WOUND status toe op alle vijandelijke Pokémon voor [3,6,9,SP] seconden",
+    "GROWL": "Pas de FLINCH status toe op alle vijandelijke Pokémon voor [3,6,9,SP] seconden",
     "RELIC_SONG": "Zendt een noot uit. SLAAP na de derde noot het hele vijandelijke team [2,SP=0.5] seconden",
     "DISARMING_VOICE": "Geef [10,20,40,SP=0.5] PP aan alle vriendelijke Pokémon, behalve de gebruiker",
     "HIGH_JUMP_KICK": "Breng [50,100,200,SP] SPECIAL toe en steel al het PP van het doelwit",

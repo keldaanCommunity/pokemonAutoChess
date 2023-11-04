@@ -1365,7 +1365,7 @@ export class GrowlStrategy extends AbilityStrategy {
     duration = Math.round(duration * (1 + pokemon.ap / 100))
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
-        tg.status.triggerWound(duration, tg, pokemon, board)
+        tg.status.triggerFlinch(duration)
       }
     })
   }

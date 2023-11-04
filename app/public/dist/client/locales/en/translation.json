@@ -911,7 +911,7 @@
     "NIGHTMARE": "POISON all enemy Pokémon for [2,4,8,SP=0.5] seconds",
     "CLANGOROUS_SOUL": "Buff adjacent allied Pokémon's ATK by [2,4,8] and DEF / SPE_DEF by [1,2,4]",
     "BONEMERANG": "Throw a bone like a boomerang through the enemy team, dealing [30,60,90,SP] SPECIAL to every enemy Pokémon it hits",
-    "GROWL": "Apply the WOUND status to all enemy Pokémon for [3,6,9,SP] seconds",
+    "GROWL": "FLINCH all enemy Pokémon for [3,6,9,SP] seconds",
     "RELIC_SONG": "Emits a note. After the third note, SLEEP the whole enemy team for [2,SP=0.5] seconds",
     "DISARMING_VOICE": "Give [10,20,40,SP=0.5] PP to all allied Pokémon, except the user",
     "HIGH_JUMP_KICK": "Deal [50,100,200,SP] SPECIAL and steal all PP from the target",
