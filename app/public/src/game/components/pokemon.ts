@@ -92,6 +92,7 @@ export default class Pokemon extends DraggableObject {
   paralysis: GameObjects.Sprite | undefined
   armorReduction: GameObjects.Sprite | undefined
   charm: GameObjects.Sprite | undefined
+  flinch: GameObjects.Sprite | undefined
   magmaStorm: GameObjects.Sprite | undefined
   poison: GameObjects.Sprite | undefined
   protect: GameObjects.Sprite | undefined
@@ -1019,6 +1020,23 @@ export default class Pokemon extends DraggableObject {
     if (this.charm) {
       this.remove(this.charm, true)
       this.charm = undefined
+    }
+  }
+
+  addFlinch() {
+    if (!this.flinch) {
+      this.flinch = new GameObjects.Sprite(this.scene, 0, -40, "flinch", "000")
+      this.flinch.setScale(2, 2)
+      this.scene.add.existing(this.flinch)
+      this.flinch.anims.play("flinch")
+      this.add(this.flinch)
+    }
+  }
+
+  removeFlinch() {
+    if (this.flinch) {
+      this.remove(this.flinch, true)
+      this.flinch = undefined
     }
   }
 

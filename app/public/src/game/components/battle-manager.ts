@@ -250,6 +250,12 @@ export default class BattleManager {
             } else {
               pkm.removeCharm()
             }
+          }  else if (field == "flinch") {
+            if (pokemon.status.flinch) {
+              pkm.addFlinch()
+            } else {
+              pkm.removeFlinch()
+            }
           } else if (field == "runeProtect") {
             if (pokemon.status.runeProtect) {
               pkm.addRuneProtect()

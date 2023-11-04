@@ -26,6 +26,7 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") armorReduction = false
   @type("boolean") runeProtect = false
   @type("boolean") charm = false
+  @type("boolean") flinch = false
   @type("boolean") electricField = false
   @type("boolean") psychicField = false
   @type("boolean") grassField = false
@@ -59,6 +60,7 @@ export default class Status extends Schema implements IStatus {
   armorReductionCooldown = 0
   runeProtectCooldown = 0
   charmCooldown = 0
+  flinchCooldown = 0
   spikeArmorCooldown = 0
   magicBounceCooldown = 0
   synchroCooldown = 3000
@@ -80,6 +82,8 @@ export default class Status extends Schema implements IStatus {
     this.woundCooldown = 0
     this.paralysisCooldown = 0
     this.charmCooldown = 0
+    this.flinchCooldown = 0
+    this.armorReductionCooldown = 0
   }
 
   updateAllStatus(dt: number, pokemon: PokemonEntity, board: Board) {
@@ -153,6 +157,10 @@ export default class Status extends Schema implements IStatus {
 
     if (this.charm) {
       this.updateCharm(dt)
+    }
+
+    if (this.flinch) {
+      this.updateFlinch(dt)
     }
 
     if (this.spikeArmor) {
@@ -729,6 +737,21 @@ export default class Status extends Schema implements IStatus {
       this.runeProtect = false
     } else {
       this.runeProtectCooldown = this.runeProtectCooldown - dt
+    }
+  }
+
+  triggerFlinch(timer: number) {
+    this.flinch = true
+    if (timer > this.flinchCooldown) {
+      this.flinchCooldown = timer
+    }
+  }
+
+  updateFlinch(dt: number) {
+    if (this.flinchCooldown - dt <= 0) {
+      this.flinch = false
+    } else {
+      this.flinchCooldown -= dt
     }
   }
 
