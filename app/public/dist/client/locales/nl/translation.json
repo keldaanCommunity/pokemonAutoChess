@@ -865,7 +865,7 @@
     "BLAST_BURN": "Brengt [30,60,120,SP] SPECIAL toe in een gebied rond de gebruiker",
     "CHARGE": "Verbeter de ATK van alle vriendelijke Elektrische Pokémon met [20,SP]%",
     "DISCHARGE": "Breng [25,50,75,SP] SPECIAL toe aan dichtbijzijnde vijandelijke Pokémon en pas de PARALYSYS status op ze toe voor 5 seconden",
-    "BITE": "Brengt [40,80,120,SP] SPECIAL toe aan het doelwit en herstelt de gebruiker's HP voor 50% van de schade. FLINCH doel gedurende 5 seconden",
+    "BITE": "Brengt [40,80,120,SP] SPECIAL toe aan het doelwit en herstelt de gebruiker's HP voor 30% van de schade. FLINCH doel gedurende 5 seconden",
     "DRAGON_TAIL": "Breng [30,60,120,SP] SPECIAL toe aan het doelwit en verbeter de gebruiker's DEF en SPE_DEF met [1,2,3,SP]",
     "DRAGON_BREATH": "Breng [25,50,100,SP] TRUE toe aan alle vijandelijke Pokémon achter het doelwit",
     "ICICLE_CRASH": "Brengt [20,40,80,SP] SPECIAL toe in een gebied rond het doelwit",

@@ -3000,7 +3000,7 @@ export class BiteStrategy extends AbilityStrategy {
       pokemon,
       crit
     )
-    pokemon.handleHeal(Math.floor(0.5 * takenDamage), pokemon, 1)
+    pokemon.handleHeal(Math.ceil(0.3 * takenDamage), pokemon, 1)
     if (takenDamage > 0) pokemon.status.triggerFlinch(5000)
   }
 }

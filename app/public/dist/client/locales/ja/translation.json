@@ -865,7 +865,7 @@
     "BLAST_BURN": "[30,60,120,SP]のSPECIALを与える範囲攻撃",
     "CHARGE": "電気で味方のポケモン全員の攻撃力を[20,SP]%アップ",
     "DISCHARGE": "近くの敵に[25,50,75,SP]SPECIALの衝撃を与え、5秒間麻痺させる",
-    "BITE": "ターゲットに[40,80,120,SP]のSPECIALダメージを与え、ダメージの50%を回復、5秒間FLINCHターゲット",
+    "BITE": "ターゲットに[40,80,120,SP]のSPECIALダメージを与え、ダメージの30%を回復、5秒間FLINCHターゲット",
     "DRAGON_TAIL": "[30,60,120,SP]のSPECIALを与え、DEFとSPE_DEFを[1,2,3,SP]バフする単一ターゲット攻撃",
     "DRAGON_BREATH": "対象の後方一列に[25,50,100,SP]TRUEの範囲攻撃",
     "ICICLE_CRASH": "対象を中心に[20,40,80,SP]のSPECIALを与える範囲攻撃",

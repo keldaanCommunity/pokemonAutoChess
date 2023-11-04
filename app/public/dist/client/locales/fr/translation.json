@@ -904,7 +904,7 @@
     "BLAST_BURN": "Inflige [30,60,120,SP] SPECIAL dans une zone autour du lanceur",
     "CHARGE": "Augmente l'ATK et la ATK_SPEED de tous les pokémons alliés ELECTRIC de [20,SP] %",
     "DISCHARGE": "Décharge électrique infligeant [25,50,75,SP] SPECIAL aux ennemis proches ainsi que PARALYSIS pendant 5 secondes",
-    "BITE": "Inflige [40,80,120,SP] dégâts SPECIAL à la cible et soigne 50 % des dégâts. La cible a FLINCH pendant 5 secondes",
+    "BITE": "Inflige [40,80,120,SP] dégâts SPECIAL à la cible et soigne 30 % des dégâts. La cible a FLINCH pendant 5 secondes",
     "DRAGON_TAIL": "Attaque à cible unique qui inflige [30,60,120,SP] SPECIAL et améliore la DEF et SPE_DEF de [1,2,3,SP]",
     "DRAGON_BREATH": "Attaque à zone d'effet qui inflige [25,50,100,SP] TRUE en ligne derrière la cible",
     "ICICLE_CRASH": "Attaque à zone d'effet qui inflige [20,40,80,SP] SPECIAL autour de la cible",
