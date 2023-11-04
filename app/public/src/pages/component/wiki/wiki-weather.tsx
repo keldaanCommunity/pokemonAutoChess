@@ -17,6 +17,7 @@ import { cc } from "../../utils/jsx"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
 import SynergyIcon from "../icons/synergy-icon"
 import { useTranslation } from "react-i18next"
+import { WeatherThreshold } from "../../../../../types/Config"
 
 const pokemonsByWeather: Map<Weather, Pokemon[]> = new Map()
 Object.values(Weather).forEach((weather) => {
@@ -40,7 +41,10 @@ export default function WikiWeather() {
                 src={`/assets/icons/weather/${weather.toLowerCase()}.svg`}
               />
               <h2>{t(`weather.${weather}`)}</h2>
-              <SynergyIcon type={SynergyAssociatedToWeather.get(weather)!} />
+              <span>
+                {WeatherThreshold[weather]}
+                <SynergyIcon type={SynergyAssociatedToWeather.get(weather)!} />
+              </span>
             </header>
             <p className="description">
               {addIconsToDescription(t(`weather_description.${weather}`))}
