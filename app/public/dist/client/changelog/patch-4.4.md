@@ -40,6 +40,8 @@
 - Buff Waterfall (Totodile): now also clear negative status and board cell effect on cast
 - Buff Dialga and Palkia PP: ~~150~~ 120
 - New ability for Pichu line: Nuzzle: Dash to the farthest enemy target, dealing 30/60/120 special damage and paralyzing it for 3/4/5 seconds; - Adjusted max PP for Pichu line: ~~140~~ 100 ; Alolan Raichu ~~100~~ 80 PP
+- Change Growl: now inflicts Flinch status intead of Wound
+- Change Bite: now heals for 50% of real damage taken instead of 30% of ability damage. Now also inflicts Flinch for 5 seconds
 
 # Changes to Synergies
 

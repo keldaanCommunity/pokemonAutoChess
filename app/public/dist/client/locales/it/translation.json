@@ -865,7 +865,7 @@
     "BLAST_BURN": "Attacco ad area che infligge [30,60,120,SP] SPECIAL",
     "CHARGE": "Aumenta l'ATK di tutti i Pokémon alleati elettrici del [20,SP]%",
     "DISCHARGE": "Colpisci i nemici vicini per [25,50,75,SP] SPECIAL e falli PARALYSIS per 5 secondi",
-    "BITE": "Infligge [40,80,120,SP] danni SPECIAL al bersaglio e guarisce per il 30% del danno",
+    "BITE": "Infligge [40,80,120,SP] danni SPECIAL al bersaglio e guarisce per il 50% del danno. FLINCH bersaglio per 5 secondi",
     "DRAGON_TAIL": "Attacco a bersaglio singolo che infligge [30,60,120,SP] SPECIAL e potenzia DEF e SPE_DEF di [1,2,3,SP]",
     "DRAGON_BREATH": "Attacco ad area che infligge [25,50,100,SP] TRUE in una linea dietro il bersaglio",
     "ICICLE_CRASH": "Attacco ad area che infligge [20,40,80,SP] SPECIAL intorno al bersaglio",

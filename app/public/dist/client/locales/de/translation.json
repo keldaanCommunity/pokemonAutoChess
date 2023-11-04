@@ -864,7 +864,7 @@
     "BLAST_BURN": "Flächenangriff, der [30,60,120,SP] SPECIAL verursacht",
     "CHARGE": "Verbessere den ATK aller elektrischen Verbündeten-Pokémons um [20,SP] %",
     "DISCHARGE": "Schocken Sie Gegner in der Nähe mit [25,50,75,SP] SPECIAL und paralysieren Sie sie für 5 Sekunden",
-    "BITE": "Fügt dem Ziel [40,80,120,SP] SPECIAL Schaden zu und heilt ihn um 30 % des Schadens",
+    "BITE": "Fügt dem Ziel [40,80,120,SP] SPECIAL Schaden zu und heilt ihn um 30 % des Schadens. FLINCH das Ziel 5 Sekunden lang",
     "DRAGON_TAIL": "Mono-Zielangriff, der [30,60,120,SP] SPECIAL verursacht und DEF und SPE_DEF um [1,2,3,SP] stärkt.",
     "DRAGON_BREATH": "Flächenangriff, der [25,50,100,SP] TRUE in einer Linie hinter dem Ziel verursacht",
     "ICICLE_CRASH": "Flächenangriff, der [20,40,80,SP] SPECIAL um das Ziel herum verursacht",

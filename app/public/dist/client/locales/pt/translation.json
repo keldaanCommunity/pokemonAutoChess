@@ -865,7 +865,7 @@
     "BLAST_BURN": "Área de ataque de efeito que causa [30,60,120,SP] SPECIAL",
     "CHARGE": "Buff todos os pokémons elétricos aliados ATK ATK_SPEED por [20,SP] %",
     "DISCHARGE": "Eletriza os inimigos próximos por [25,50,75,SP] SPECIAL e os deixa PARALYSIS por 5 segundos",
-    "BITE": "Causa [40,80,120,SP] de dano SPECIAL ao alvo e cura 30% do dano",
+    "BITE": "Causa [40,80,120,SP] de dano SPECIAL ao alvo e cura 50% do dano. FLINCH alvo por 5 segundos",
     "DRAGON_TAIL": "Ataque de alvo mono que causa [30,60,120,SP] SPECIAL e buff DEF e SPE_DEF em [1,2,3,SP]",
     "DRAGON_BREATH": "Área de ataque de efeito que causa [25,50,100,SP] TRUE em uma linha atrás do alvo",
     "ICICLE_CRASH": "Ataque de área de efeito que causa [20,40,80,SP] SPECIAL ao redor do alvo",

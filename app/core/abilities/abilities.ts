@@ -274,7 +274,7 @@ export class SongOfDesireStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    
+
     const rank = new Array<PokemonEntity>()
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
@@ -294,7 +294,12 @@ export class SongOfDesireStrategy extends AbilityStrategy {
     for (let i = 0; i < count; i++) {
       const targetCharmed = rank[i]
       if (targetCharmed) {
-        targetCharmed.status.triggerCharm(duration, targetCharmed, pokemon, true)
+        targetCharmed.status.triggerCharm(
+          duration,
+          targetCharmed,
+          pokemon,
+          true
+        )
       }
     }
   }
@@ -326,7 +331,7 @@ export class ConfusingMindStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    
+
     const rank = new Array<PokemonEntity>()
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
@@ -2987,22 +2992,16 @@ export class BiteStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 0
-    switch (pokemon.stars) {
-      case 1:
-        damage = 40
-        break
-      case 2:
-        damage = 80
-        break
-      case 3:
-        damage = 120
-        break
-      default:
-        break
-    }
-    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    pokemon.handleHeal(Math.floor(0.3 * damage), pokemon, 1)
+    const damage = [40, 80, 120][pokemon.stars - 1] ?? 120
+    const { takenDamage } = target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit
+    )
+    pokemon.handleHeal(Math.floor(0.5 * takenDamage), pokemon, 1)
+    if (takenDamage > 0) pokemon.status.triggerFlinch(5000)
   }
 }
 
@@ -3117,7 +3116,8 @@ export class WaterfallStrategy extends AbilityStrategy {
     const shield = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30
     pokemon.addShield(shield, pokemon, true)
     pokemon.status.clearNegativeStatus()
-    board.effects[pokemon.positionY * board.columns + pokemon.positionX] = undefined
+    board.effects[pokemon.positionY * board.columns + pokemon.positionX] =
+      undefined
   }
 }
 
