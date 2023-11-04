@@ -19,13 +19,26 @@
 - Nerf Woobat Attack ~~6~~ 5, Swoobat Attack ~~15~~ 12
 - Buff Porygon2: HP ~~180~~ 200, Attack ~~14~~ 22
 - Nerf PorygonZ: HP ~~333~~ 200
-- Adjusted Tri Attack: can now apply either Freeze for 2 seconds, Burn for 5 seconds or Paralysis for 5 seconds. Ability damage changed: ~~25/50/100~~ 30/50/70
+- Adjust Tri Attack: can now apply either Freeze for 2 seconds, Burn for 5 seconds or Paralysis for 5 seconds. Ability damage changed: ~~25/50/100~~ 30/50/70
 - Buff Tornadus: Attack ~~15~~ 20 ; PP ~~100~~ 70
 - Nincada is now an additional Epic. Evolve in both Sheninja and Ninjask
 - Unown-T is now TREE: gives 3 random berries
 - Slowbro now needs a King's Rock to evolve to Slowking
 - Pokemons with "tree" status (Sudowoodo, Wobbuffet) cannot be silenced or lose PP until their bar is full
 - Nerf Attack of Ratata and Spearow lines
+- Buff Sharpedo: HP ~~130~~ 150
+- Buff Ultra-Necrozma: change tier to tier 4, get the same stats than Necrozma but with range 3 and Dragon synergy
+- Nerf Uxie: PP ~~65~~ 80
+- Buff Mesprit: Song of Desire now charms 2 enemies in the backline. Duration reduced ~~6~~ 3 seconds
+- Buff Azelf: Confusing Mind now confuse 2 enemies in the backline. Duration reduced ~~6~~ 3 seconds
+- Buff Slowbro: HP ~~130~~ 180, Def ~~5~~ 3
+- Buff Weepinbell: HP ~~140~~ 160, Attack ~~9~~ 12
+- Buff Duduo Attack ~~10~~12 and Dodrio Attack ~~24~~28
+- Buff Marowak HP ~~220~~ 250
+- Adjust Bounsweet Attack ~~8~~ 10, Steenie Attack ~~16~~ 20, PP ~~100~~ 120
+- Buff Gorebyss Def ~~2~~ 5, SpeDef ~~2~~ 3
+- Buff Waterfall (Totodile): now also clear negative status and board cell effect on cast
+- Buff Dialga and Palkia PP: ~~150~~ 120
 - New ability for Pichu line: Nuzzle: Dash to the farthest enemy target, dealing 30/60/120 special damage and paralyzing it for 3/4/5 seconds; - Adjusted max PP for Pichu line: ~~140~~ 100 ; Alolan Raichu ~~100~~ 80 PP
 
 # Changes to Synergies

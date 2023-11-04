@@ -590,12 +590,19 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerConfusion(timer: number, pkm: PokemonEntity) {
+  triggerConfusion(
+    timer: number,
+    pkm: PokemonEntity,
+    origin: IPokemonEntity | undefined = undefined,
+    apBoost = false
+  ) {
     if (
       !this.confusion &&
       !this.runeProtect &&
       !pkm.effects.has(Effect.IMMUNITY_CONFUSION)
     ) {
+      const boost = apBoost && origin ? (timer * origin.ap) / 100 : 0
+      timer = timer + boost
       if (pkm.simulation.weather === Weather.SANDSTORM) {
         timer = Math.round(timer * 1.3)
       }
@@ -626,13 +633,13 @@ export default class Status extends Schema implements IStatus {
     origin: IPokemonEntity | undefined = undefined,
     apBoost = false
   ) {
-    const boost = apBoost && origin ? (timer * origin.ap) / 100 : 0
-    timer = timer + boost
     if (!this.charm && !this.runeProtect) {
-      this.charm = true
+      const boost = apBoost && origin ? (timer * origin.ap) / 100 : 0
+      timer = timer + boost
       if (pkm.simulation.weather === Weather.MISTY) {
         timer = Math.round(timer * 1.3)
       }
+      this.charm = true
       this.charmCooldown = timer
     }
   }
@@ -727,9 +734,9 @@ export default class Status extends Schema implements IStatus {
 
   triggerSpikeArmor(timer: number) {
     this.spikeArmor = true
-    if(timer > this.spikeArmorCooldown){
+    if (timer > this.spikeArmorCooldown) {
       this.spikeArmorCooldown = timer
-    }    
+    }
   }
 
   updateSpikeArmor(dt: number) {
@@ -742,7 +749,7 @@ export default class Status extends Schema implements IStatus {
 
   triggerMagicBounce(timer: number) {
     this.magicBounce = true
-    if(timer > this.magicBounceCooldown){
+    if (timer > this.magicBounceCooldown) {
       this.magicBounceCooldown = timer
     }
   }
