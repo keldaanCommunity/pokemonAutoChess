@@ -274,6 +274,7 @@ export class SongOfDesireStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    
     const rank = new Array<PokemonEntity>()
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
@@ -288,10 +289,14 @@ export class SongOfDesireStrategy extends AbilityStrategy {
       }
     })
 
-    const targetCharmed = rank[0]
-    const duration = 6000 * (1 + pokemon.ap / 100)
-
-    targetCharmed.status.triggerCharm(duration, target)
+    const duration = 3000
+    const count = 2
+    for (let i = 0; i < count; i++) {
+      const targetCharmed = rank[i]
+      if (targetCharmed) {
+        targetCharmed.status.triggerCharm(duration, targetCharmed, pokemon, true)
+      }
+    }
   }
 }
 
@@ -321,9 +326,29 @@ export class ConfusingMindStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const duration = 6000 * (1 + pokemon.ap / 100)
+    
+    const rank = new Array<PokemonEntity>()
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
+      if (tg && pokemon.team != tg.team) {
+        rank.push(tg)
+      }
+    })
+    rank.sort((a, b) => {
+      if (a.team === Team.BLUE_TEAM) {
+        return a.positionY - b.positionY
+      } else {
+        return b.positionY - a.positionY
+      }
+    })
 
-    target.status.triggerConfusion(duration, target)
+    const duration = 3000
+    const count = 2
+    for (let i = 0; i < count; i++) {
+      const targetConfused = rank[i]
+      if (targetConfused) {
+        targetConfused.status.triggerConfusion(duration, targetConfused)
+      }
+    }
   }
 }
 
@@ -3091,6 +3116,8 @@ export class WaterfallStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const shield = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30
     pokemon.addShield(shield, pokemon, true)
+    pokemon.status.clearNegativeStatus()
+    board.effects[pokemon.positionY * board.columns + pokemon.positionX] = undefined
   }
 }
 
@@ -5478,7 +5505,7 @@ export class PlayRoughStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    target.status.triggerCharm(2500, target)
+    target.status.triggerCharm(2500, target, pokemon, false)
     target.handleSpecialDamage(
       pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30,
       board,

@@ -373,10 +373,10 @@ export class Bounsweet extends Pokemon {
   stars = 1
   evolution = Pkm.STEENEE
   hp = 100
-  atk = 8
+  atk = 10
   def = 4
   speDef = 4
-  maxPP = 100
+  maxPP = 120
   range = 1
   skill = Ability.HIGH_JUMP_KICK
   attackSprite = AttackSprite.FIGHTING_MELEE
@@ -388,10 +388,10 @@ export class Steenee extends Pokemon {
   stars = 2
   evolution = Pkm.TSAREENA
   hp = 180
-  atk = 16
+  atk = 20
   def = 5
   speDef = 5
-  maxPP = 100
+  maxPP = 120
   range = 1
   skill = Ability.HIGH_JUMP_KICK
   attackSprite = AttackSprite.FIGHTING_MELEE
@@ -1830,7 +1830,7 @@ export class Marowak extends Pokemon {
   stars = 2
   evolution = Pkm.ALOLAN_MAROWAK
   evolutionRule = new ItemEvolutionRule([Item.FIRE_STONE])
-  hp = 220
+  hp = 250
   atk = 20
   def = 6
   speDef = 5
@@ -3510,9 +3510,9 @@ export class Slowbro extends Pokemon {
   stars = 2
   evolution = Pkm.SLOWKING
   evolutionRule = new ItemEvolutionRule([Item.KINGS_ROCK])
-  hp = 130
+  hp = 180
   atk = 13
-  def = 3
+  def = 5
   speDef = 3
   maxPP = 100
   range = 1
@@ -3607,8 +3607,8 @@ export class Weepinbell extends Pokemon {
   stars = 2
   evolution = Pkm.VICTREEBEL
   evolutionRule = new ItemEvolutionRule([Item.LEAF_STONE])
-  hp = 140
-  atk = 9
+  hp = 160
+  atk = 12
   def = 2
   speDef = 2
   maxPP = 100
@@ -4630,7 +4630,7 @@ export class Dialga extends Pokemon {
   atk = 25
   def = 5
   speDef = 5
-  maxPP = 150
+  maxPP = 120
   range = 1
   skill = Ability.ROAR_OF_TIME
   final = true
@@ -4645,7 +4645,7 @@ export class Palkia extends Pokemon {
   atk = 25
   def = 5
   speDef = 5
-  maxPP = 150
+  maxPP = 120
   range = 1
   skill = Ability.ROAR_OF_TIME
   final = true
@@ -5560,7 +5560,7 @@ export class Uxie extends Pokemon {
   atk = 12
   def = 3
   speDef = 3
-  maxPP = 65
+  maxPP = 80
   range = 3
   skill = Ability.KNOWLEDGE_THIEF
   final = true
@@ -6488,8 +6488,8 @@ export class Gorebyss extends Pokemon {
   stars = 2
   hp = 200
   atk = 16
-  def = 2
-  speDef = 2
+  def = 5
+  speDef = 3
   maxPP = 80
   range = 2
   skill = Ability.HYDRO_PUMP
@@ -9481,7 +9481,7 @@ export class Sharpedo extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.DARK])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 130
+  hp = 150
   atk = 21
   def = 2
   speDef = 3
@@ -10520,12 +10520,12 @@ export class UltraNecrozma extends Pokemon {
     Synergy.PSYCHIC
   ])
   rarity = Rarity.LEGENDARY
-  stars = 3
-  hp = 250
+  stars = 4
+  hp = 300
   atk = 30
-  def = 2
-  speDef = 2
-  maxPP = 150
+  def = 5
+  speDef = 5
+  maxPP = 100
   range = 3
   skill = Ability.PRISMATIC_LASER
   passive = Passive.PRISM
@@ -10655,7 +10655,7 @@ export class Doduo extends Pokemon {
   stars = 1
   evolution = Pkm.DODRIO
   hp = 90
-  atk = 10
+  atk = 12
   def = 3
   speDef = 2
   maxPP = 40
@@ -10670,7 +10670,7 @@ export class Dodrio extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   hp = 185
-  atk = 24
+  atk = 28
   def = 5
   speDef = 3
   maxPP = 40
