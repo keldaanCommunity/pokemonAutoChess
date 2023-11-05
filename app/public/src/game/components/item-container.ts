@@ -7,7 +7,7 @@ import { getGameScene } from "../../pages/game"
 import { preferences } from "../../preferences"
 
 export default class ItemContainer extends DraggableObject {
-  detail: ItemDetail
+  detail: ItemDetail | undefined
   sprite: GameObjects.Image
   tempDetail: ItemDetail | undefined
   tempSprite: GameObjects.Image | undefined
@@ -55,32 +55,9 @@ export default class ItemContainer extends DraggableObject {
     this.sprite = new GameObjects.Image(scene, 0, 0, "item", item).setScale(
       pokemonId === null ? 0.5 : 0.25
     )
-    this.detail = new ItemDetail(scene, 0, 0, item)
-    this.detail.setDepth(100)
-    this.detail.setPosition(
-      this.detail.width * 0.5 + 40,
-      this.detail.height * 0.5
-    )
-    this.detail.setVisible(false)
-    this.detail.dom.addEventListener("mouseenter", () => {
-      clearTimeout(this.mouseoutTimeout)
-    })
-    this.detail.dom.addEventListener("mouseleave", () => {
-      if (preferences.showDetailsOnHover) {
-        this.mouseoutTimeout = setTimeout(
-          () => {
-            if (this.detail.visible) {
-              this.closeDetail()
-            }
-          },
-          this.pokemonId === null ? 100 : 0
-        )
-      }
-    })
+
     this.name = item
     this.add(this.sprite)
-    this.add(this.detail)
-
     this.setInteractive()
     this.updateDropZone(true)
     this.draggable = this.pokemonId === null && playerId === currentPlayerUid
@@ -94,7 +71,7 @@ export default class ItemContainer extends DraggableObject {
 
   onPointerOver(pointer) {
     super.onPointerOver(pointer)
-    if (preferences.showDetailsOnHover && !this.detail.visible) {
+    if (preferences.showDetailsOnHover && !this.detail?.visible) {
       clearTimeout(this.mouseoutTimeout)
       this.openDetail()
     }
@@ -115,7 +92,7 @@ export default class ItemContainer extends DraggableObject {
     if (preferences.showDetailsOnHover) {
       this.mouseoutTimeout = setTimeout(
         () => {
-          if (this.detail.visible) {
+          if (this.detail?.visible) {
             this.closeDetail()
           }
         },
@@ -128,7 +105,7 @@ export default class ItemContainer extends DraggableObject {
     super.onPointerDown(pointer)
     this.parentContainer.bringToTop(this)
     if (pointer.rightButtonDown() && !preferences.showDetailsOnHover) {
-      if (!this.detail.visible) {
+      if (!this.detail?.visible) {
         this.openDetail()
         this.updateDropZone(false)
       } else {
@@ -146,6 +123,34 @@ export default class ItemContainer extends DraggableObject {
   openDetail() {
     if (this.parentContainer.visible) {
       this.parentContainer.closeDetails() // close other open item tooltips
+
+      if (this.detail === undefined) {
+        this.detail = new ItemDetail(this.scene, 0, 0, this.name)
+        this.detail.setDepth(100)
+        this.detail.setPosition(
+          this.detail.width * 0.5 + 40,
+          this.detail.height * 0.5
+        )
+        this.detail.setVisible(false)
+        this.detail.dom.addEventListener("mouseenter", () => {
+          clearTimeout(this.mouseoutTimeout)
+        })
+        this.detail.dom.addEventListener("mouseleave", () => {
+          if (preferences.showDetailsOnHover) {
+            this.mouseoutTimeout = setTimeout(
+              () => {
+                if (this.detail?.visible) {
+                  this.closeDetail()
+                }
+              },
+              this.pokemonId === null ? 100 : 0
+            )
+          }
+        })
+
+        this.add(this.detail)
+      }
+
       this.detail.setVisible(true)
     }
   }
@@ -160,11 +165,11 @@ export default class ItemContainer extends DraggableObject {
         this.tempSprite.destroy()
       }
     }
-    this.detail.setVisible(false)
+    this.detail?.setVisible(false)
   }
 
   showTempDetail(item: Item) {
-    this.detail.setVisible(false)
+    this.detail?.setVisible(false)
     this.sprite.setVisible(false)
     this.tempSprite = new GameObjects.Image(
       this.scene,
@@ -195,13 +200,7 @@ export default class ItemContainer extends DraggableObject {
         stroke: "#000000"
       }
       this.countText = this.scene.add.existing(
-        new GameObjects.Text(
-          this.scene,
-          this.detail.width * 0.5 + 10,
-          this.detail.height * 0.5 - 15,
-          value.toString(),
-          textStyle
-        )
+        new GameObjects.Text(this.scene, 15, -12, value.toString(), textStyle)
       )
       this.add(this.countText)
       this.countText.setAlign("left")
