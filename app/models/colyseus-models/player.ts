@@ -169,7 +169,7 @@ export default class Player extends Schema implements IPlayer {
 
   isPositionEmpty(x: number, y: number): boolean {
     return (
-      values(this.board).some((p) => p.positionX === x && p.positionY === 0) ===
+      values(this.board).some((p) => p.positionX === x && p.positionY === y) ===
       false
     )
   }
