@@ -645,7 +645,9 @@ export enum Pkm {
   KRICKETOT = "KRICKETOT",
   KRICKETUNE = "KRICKETUNE",
   HIPPOPOTAS = "HIPPOPOTAS",
-  HIPPODOWN = "HIPPODOWN"
+  HIPPODOWN = "HIPPODOWN",
+  WINGULL = "WINGULL",
+  PELIPPER = "PELIPPER"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1293,7 +1295,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.KRICKETOT]: "0401",
   [Pkm.KRICKETUNE]: "0402",
   [Pkm.HIPPOPOTAS]: "0449",
-  [Pkm.HIPPODOWN]: "0450"
+  [Pkm.HIPPODOWN]: "0450",
+  [Pkm.WINGULL]: "0278",
+  [Pkm.PELIPPER]: "0279"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1941,7 +1945,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.KRICKETOT]: Pkm.KRICKETOT,
   [Pkm.KRICKETUNE]: Pkm.KRICKETOT,
   [Pkm.HIPPOPOTAS]: Pkm.HIPPOPOTAS,
-  [Pkm.HIPPODOWN]: Pkm.HIPPOPOTAS
+  [Pkm.HIPPODOWN]: Pkm.HIPPOPOTAS,
+  [Pkm.WINGULL]: Pkm.WINGULL,
+  [Pkm.PELIPPER]: Pkm.WINGULL
 }
 
 export enum PkmDuo {
@@ -5296,5 +5302,15 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.RearUp
+  },
+  [Pkm.WINGULL]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.PELIPPER]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.SpAttack
   }
 }
