@@ -1,4 +1,9 @@
-import { MapSchema, SetSchema, ArraySchema } from "@colyseus/schema"
+import {
+  MapSchema,
+  SetSchema,
+  ArraySchema,
+  CollectionSchema
+} from "@colyseus/schema"
 
 export function keys(schema: MapSchema): string[] {
   const keys: string[] = []
@@ -6,7 +11,9 @@ export function keys(schema: MapSchema): string[] {
   return keys
 }
 
-export function values<T>(schema: MapSchema<T, any> | SetSchema<T>): T[] {
+export function values<T>(
+  schema: MapSchema<T, any> | SetSchema<T> | CollectionSchema<T>
+): T[] {
   const values: T[] = []
   schema.forEach((value: T) => values.push(value))
   return values

@@ -3,7 +3,7 @@ import { GameObjects } from "phaser"
 import ItemContainer from "./item-container"
 import { Item } from "../../../../types/enum/Item"
 import Player from "../../../../models/colyseus-models/player"
-import { logger } from "../../../../utils/logger"
+import { values } from "../../../../utils/schemas"
 
 export default class ItemsContainer extends GameObjects.Container {
   pokemonId: string | null
@@ -22,42 +22,23 @@ export default class ItemsContainer extends GameObjects.Container {
     this.pokemonId = pokemonId
     this.playerId = playerId
     scene.add.existing(this)
-
-    inventory.forEach((item) => {
-      this.addItem(item)
-    })
+    this.render(inventory)
   }
 
-  addItem(value: Item) {
-    this.add(
-      new ItemContainer(this.scene, 0, 0, value, this.pokemonId, this.playerId)
-    )
-    this.updateItems()
-  }
+  render(inventory: SetSchema<Item> | CollectionSchema<Item>) {
+    this.removeAll(true)
 
-  removeItem(item: string) {
-    const target = this.findItem(item)
-    if (target) {
-      this.remove(target, true)
-      this.updateItems()
-    } else {
-      logger.warn("no item found looking for", item)
-    }
-  }
-
-  updateItems() {
     const itemSize = this.pokemonId === null ? 70 : 25
     const ITEMS_PER_COLUMN = 6
-    for (let i = 0; i < this.list.length; i++) {
-      const it = <ItemContainer>this.list[i]
-      it.closeDetail()
-      it.x = -1 * itemSize * Math.floor(i / ITEMS_PER_COLUMN)
-      it.y = (i % ITEMS_PER_COLUMN) * itemSize
-    }
-  }
+    const items = values(inventory)
 
-  findItem(item: string) {
-    return this.getFirst("name", item)
+    items.forEach((item, i) => {
+      const x = -1 * itemSize * Math.floor(i / ITEMS_PER_COLUMN)
+      const y = (i % ITEMS_PER_COLUMN) * itemSize
+      this.add(
+        new ItemContainer(this.scene, x, y, item, this.pokemonId, this.playerId)
+      )
+    })
   }
 
   closeDetails() {
@@ -69,10 +50,7 @@ export default class ItemsContainer extends GameObjects.Container {
 
   setPlayer(player: Player) {
     this.playerId = player.id
-    this.removeAll(true)
-    player.items.forEach((item) => {
-      this.addItem(item)
-    })
+    this.render(player.items)
   }
 
   updateCount(item: Item, count: number) {

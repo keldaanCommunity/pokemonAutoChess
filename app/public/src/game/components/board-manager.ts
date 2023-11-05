@@ -415,23 +415,12 @@ export default class BoardManager {
     }
   }
 
-  addPokemonItem(playerId: string, value: Item, pokemon: IPokemon) {
+  updatePokemonItems(playerId: string, pokemon: IPokemon) {
     // logger.debug(change);
     if (this.player.id === playerId) {
       const pkm = this.pokemons.get(pokemon.id)
-      if (pkm && !pkm.itemsContainer.findItem(value)) {
-        pkm.itemsContainer.addItem(value)
-      }
-    }
-  }
-
-  removePokemonItem(playerId: string, value: Item, pokemon: IPokemon) {
-    if (this.player.id == playerId) {
-      if (this.player.id == playerId) {
-        const pkm = this.pokemons.get(pokemon.id)
-        if (pkm) {
-          pkm.itemsContainer.removeItem(value)
-        }
+      if (pkm) {
+        pkm.itemsContainer.render(pokemon.items)
       }
     }
   }
@@ -508,10 +497,7 @@ export default class BoardManager {
         ? this.opponentAvatar
         : undefined
     if (player) {
-      this.animationManager.play(
-        player,
-        AnimationConfig[player.name].emote
-      )
+      this.animationManager.play(player, AnimationConfig[player.name].emote)
 
       if (emote) {
         player.drawSpeechBubble(emote, false)

@@ -28,6 +28,7 @@ import MinigameManager from "../components/minigame-manager"
 import LoadingManager from "../components/loading-manager"
 import Simulation from "../../../../core/simulation"
 import { playMusic } from "../../pages/utils/audio"
+import { getGameContainer } from "../../pages/game"
 
 export default class GameScene extends Scene {
   tilemap: DesignTiled | undefined
@@ -502,9 +503,8 @@ export default class GameScene extends Scene {
           }
           // RETURN TO ORIGINAL SPOT
           else {
-            this.itemsContainer?.updateItems()
-            // gameObject.x = gameObject.input.dragStartX
-            // gameObject.y = gameObject.input.dragStartY
+            const player = getGameContainer().player
+            if (player) this.itemsContainer?.render(player.items)
           }
           this.itemDragged = null
         }
