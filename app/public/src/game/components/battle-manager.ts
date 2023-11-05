@@ -250,6 +250,12 @@ export default class BattleManager {
             } else {
               pkm.removeCharm()
             }
+          } else if (field == "flinch") {
+            if (pokemon.status.flinch) {
+              pkm.addFlinch()
+            } else {
+              pkm.removeFlinch()
+            }
           } else if (field == "runeProtect") {
             if (pokemon.status.runeProtect) {
               pkm.addRuneProtect()
@@ -2596,6 +2602,38 @@ export default class BattleManager {
             specialProjectile.setDepth(7)
             specialProjectile.setScale(2, 2)
             specialProjectile.anims.play(Ability.PRESENT)
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              x: coordinatesTarget[0],
+              y: coordinatesTarget[1],
+              ease: "linear",
+              duration: 1000,
+              onComplete: () => {
+                specialProjectile.destroy()
+              }
+            })
+            break
+
+          case Ability.WHIRLWIND:
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
+            coordinatesTarget = transformAttackCoordinate(
+              targetX,
+              targetY,
+              this.flip
+            )
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.WHIRLWIND,
+              "0"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.WHIRLWIND)
             this.scene.tweens.add({
               targets: specialProjectile,
               x: coordinatesTarget[0],

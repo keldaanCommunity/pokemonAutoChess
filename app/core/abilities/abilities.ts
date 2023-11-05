@@ -274,7 +274,7 @@ export class SongOfDesireStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    
+
     const rank = new Array<PokemonEntity>()
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
@@ -294,7 +294,12 @@ export class SongOfDesireStrategy extends AbilityStrategy {
     for (let i = 0; i < count; i++) {
       const targetCharmed = rank[i]
       if (targetCharmed) {
-        targetCharmed.status.triggerCharm(duration, targetCharmed, pokemon, true)
+        targetCharmed.status.triggerCharm(
+          duration,
+          targetCharmed,
+          pokemon,
+          true
+        )
       }
     }
   }
@@ -326,7 +331,7 @@ export class ConfusingMindStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    
+
     const rank = new Array<PokemonEntity>()
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
@@ -1090,7 +1095,7 @@ export class HypnosisStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const farthestTarget = state.getFarthestTarget(pokemon, board)
     if (farthestTarget) {
-      let duration = Math.round(
+      const duration = Math.round(
         ([2000, 4000, 6000][pokemon.stars - 1] ?? 2000) * (1 + pokemon.ap / 200)
       )
       farthestTarget.status.triggerSleep(duration, farthestTarget)
@@ -1365,7 +1370,7 @@ export class GrowlStrategy extends AbilityStrategy {
     duration = Math.round(duration * (1 + pokemon.ap / 100))
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
-        tg.status.triggerWound(duration, tg, pokemon, board)
+        tg.status.triggerFlinch(duration)
       }
     })
   }
@@ -2987,22 +2992,16 @@ export class BiteStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 0
-    switch (pokemon.stars) {
-      case 1:
-        damage = 40
-        break
-      case 2:
-        damage = 80
-        break
-      case 3:
-        damage = 120
-        break
-      default:
-        break
-    }
-    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    pokemon.handleHeal(Math.floor(0.3 * damage), pokemon, 1)
+    const damage = [40, 80, 120][pokemon.stars - 1] ?? 120
+    const { takenDamage } = target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit
+    )
+    pokemon.handleHeal(Math.ceil(0.3 * takenDamage), pokemon, 1)
+    if (takenDamage > 0) pokemon.status.triggerFlinch(5000)
   }
 }
 
@@ -3117,7 +3116,8 @@ export class WaterfallStrategy extends AbilityStrategy {
     const shield = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30
     pokemon.addShield(shield, pokemon, true)
     pokemon.status.clearNegativeStatus()
-    board.effects[pokemon.positionY * board.columns + pokemon.positionX] = undefined
+    board.effects[pokemon.positionY * board.columns + pokemon.positionX] =
+      undefined
   }
 }
 
@@ -6146,6 +6146,37 @@ export class SandTombStrategy extends AbilityStrategy {
   }
 }
 
+export class WhirlwindStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const x = target.positionX
+    const y = target.positionY
+    target.flyAway(board)
+    pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+      id: pokemon.simulation.id,
+      skill: Ability.WHIRLWIND,
+      positionX: x,
+      positionY: y,
+      targetX: target.positionX,
+      targetY: target.positionY
+    })
+    target.handleSpecialDamage(
+      pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 80 : 40,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit,
+      false
+    )
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -6384,5 +6415,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.CHARGE_BEAM]: new ChargeBeamStrategy(),
   [Ability.POPULATION_BOMB]: new PopulationBombStrategy(),
   [Ability.SCREECH]: new ScreechStrategy(),
-  [Ability.SAND_TOMB]: new SandTombStrategy()
+  [Ability.SAND_TOMB]: new SandTombStrategy(),
+  [Ability.WHIRLWIND]: new WhirlwindStrategy()
 }

@@ -848,6 +848,16 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.WHIRLWIND,
+      frames: this.game.anims.generateFrameNames(Ability.WHIRLWIND, {
+        start: 0,
+        end: 51
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.POPULATION_BOMB,
       frames: this.game.anims.generateFrameNames(Ability.POPULATION_BOMB, {
         start: 0,
@@ -2450,7 +2460,7 @@ export default class AnimationManager {
   play(
     entity: Pokemon,
     animation: AnimationType,
-    animationConfig: { flip?: boolean, loop?: boolean, lock?: boolean } = {}
+    animationConfig: { flip?: boolean; loop?: boolean; lock?: boolean } = {}
   ) {
     const orientation = animationConfig.flip
       ? OrientationFlip[entity.orientation]
@@ -2642,6 +2652,17 @@ export function createStatusAnimations(game: Phaser.Scene) {
     frames: game.anims.generateFrameNames("charm", {
       start: 0,
       end: 3,
+      zeroPad: 3
+    }),
+    frameRate: 8,
+    repeat: -1
+  })
+
+  game.anims.create({
+    key: "flinch",
+    frames: game.anims.generateFrameNames("flinch", {
+      start: 0,
+      end: 8,
       zeroPad: 3
     }),
     frameRate: 8,

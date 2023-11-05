@@ -131,6 +131,11 @@ export function loadStatusMultiAtlas(scene: Phaser.Scene) {
   )
   scene.load.multiatlas("charm", "/assets/status/CHARM.json", "/assets/status")
   scene.load.multiatlas(
+    "flinch",
+    "/assets/status/FLINCH.json",
+    "/assets/status"
+  )
+  scene.load.multiatlas(
     "ELECTRIC_SURGE",
     "/assets/status/ELECTRIC_SURGE.json",
     "/assets/status"
@@ -196,6 +201,11 @@ export function loadAttacksMultiAtlas(scene: Phaser.Scene) {
   scene.load.multiatlas(
     "APPLE_ACID",
     "/assets/attacks/APPLE_ACID.json",
+    "/assets/attacks"
+  )
+  scene.load.multiatlas(
+    "WHIRLWIND",
+    "/assets/attacks/WHIRLWIND.json",
     "/assets/attacks"
   )
   scene.load.multiatlas(

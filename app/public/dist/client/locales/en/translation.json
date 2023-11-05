@@ -251,7 +251,8 @@
     "CHARGE_BEAM": "Charge Beam",
     "POPULATION_BOMB": "Population Bomb",
     "SCREECH": "Screech",
-    "SAND_TOMB": "Sand Tomb"
+    "SAND_TOMB": "Sand Tomb",
+    "WHIRLWIND": "Whirlwind"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -898,7 +899,9 @@
     "KRICKETOT": "Kricketot",
     "KRICKETUNE": "Kricketune",
     "HIPPOPOTAS": "Hippopotas",
-    "HIPPODOWN": "Hippodown"
+    "HIPPODOWN": "Hippodown",
+    "WINGULL": "Wingull",
+    "PELIPPER": "Pelipper"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -911,7 +914,7 @@
     "NIGHTMARE": "POISON all enemy Pokémon for [2,4,8,SP=0.5] seconds",
     "CLANGOROUS_SOUL": "Buff adjacent allied Pokémon's ATK by [2,4,8] and DEF / SPE_DEF by [1,2,4]",
     "BONEMERANG": "Throw a bone like a boomerang through the enemy team, dealing [30,60,90,SP] SPECIAL to every enemy Pokémon it hits",
-    "GROWL": "Apply the WOUND status to all enemy Pokémon for [3,6,9,SP] seconds",
+    "GROWL": "FLINCH all enemy Pokémon for [3,6,9,SP] seconds",
     "RELIC_SONG": "Emits a note. After the third note, SLEEP the whole enemy team for [2,SP=0.5] seconds",
     "DISARMING_VOICE": "Give [10,20,40,SP=0.5] PP to all allied Pokémon, except the user",
     "HIGH_JUMP_KICK": "Deal [50,100,200,SP] SPECIAL and steal all PP from the target",
@@ -953,7 +956,7 @@
     "BLAST_BURN": "Deal [30,60,120,SP] SPECIAL in an area around the user",
     "CHARGE": "Buff all allied ELECTRIC Pokémon's ATK and ATK_SPEED by [20,SP]%",
     "DISCHARGE": "Deal [25,50,75,SP] SPECIAL to nearby enemy Pokémon and make them PARALYSIS for 5 seconds",
-    "BITE": "Deal [40,80,120,SP] SPECIAL to the target and heal the user for 30% of the damage dealt",
+    "BITE": "Deal [40,80,120,SP] SPECIAL to the target and heal the user for 30% of the damage dealt. FLINCH target for 5 seconds",
     "DRAGON_TAIL": "Deal [30,60,120,SP] SPECIAL to the target and buff the user's DEF and SPE_DEF by [1,2,3,SP]",
     "DRAGON_BREATH": "Deal [25,50,100,SP] TRUE to all enemy Pokémon behind the target",
     "ICICLE_CRASH": "Deal [20,40,80,SP] SPECIAL in an area around the target",
@@ -1135,7 +1138,8 @@
     "CHARGE_BEAM": "Fires a concentrated bundle of electricity that propagate to max 3 adjacent targets, dealing [20,40,80,SP] SPECIAL to each. The remaining electricity increase AP by 20%.",
     "POPULATION_BOMB": "Deals [10,SP] times 10 SPECIAL to the target",
     "SCREECH": "Reduce DEF of all adjacent ennemies by [1,2,4,SP]",
-    "SAND_TOMB": "Deals [10,20,40,SP] SPECIAL, inflicting SILENCE and PARALYSIS for 3/5/8 seconds"
+    "SAND_TOMB": "Deals [10,20,40,SP] SPECIAL, inflicting SILENCE and PARALYSIS for 3/5/8 seconds",
+    "WHIRLWIND":"Deals [40,80,120,SP] and make the target fly away"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1288,9 +1292,9 @@
     "BULK_UP": "Heal 30 HP and gain 20% ATK_SPEED",
     "RAGE": "Heal 30 HP and gain 25% ATK_SPEED",
     "ANGER_POINT": "Heal 30 HP and gain 30% ATK_SPEED",
-    "PURSUIT": "When knocking down its target, gain 3 ATK and 30 max HP",
-    "BRUTAL_SWING": "When knocking down its target, gain 6 ATK and 60 max HP",
-    "POWER_TRIP": "When knocking down its target, gain 9 ATK and 90 max HP",
+    "PURSUIT": "30% chance to FLINCH. When knocking down its target, gain 3 ATK and 30 max HP",
+    "BRUTAL_SWING": "40% chance to FLINCH. When knocking down its target, gain 6 ATK and 60 max HP",
+    "POWER_TRIP": "50% chance to FLINCH. When knocking down its target, gain 9 ATK and 90 max HP",
     "MEDITATE": "Heal for 10% HP of the damage",
     "FOCUS_ENERGY": "Heal for 25% HP of the damage",
     "CALM_MIND": "Heal for 50% HP of the damage",
@@ -1575,7 +1579,8 @@
     "SPECIAL_ATTACK": "Basic attacks deal SPECIAL and scale with AP",
     "NINCADA": "After evolving, get Sheninja as well if you have a free space on your bench",
     "FAMILY": "The pokémon grows with time (turn 15 and turn 20)",
-    "SAND_STREAM": "The pokémon count as 3 for SANDSTORM"
+    "SAND_STREAM": "The pokémon count as 3 for SANDSTORM",
+    "DRIZZLE": "The pokémon count as 3 for RAIN"
   },
   "stat": {
     "ATK": "Attack",
@@ -1620,6 +1625,7 @@
     "PARALYSIS": "Paralyzed",
     "ARMOR_REDUCTION": "Armor Reduction",
     "CHARM": "Charmed",
+    "FLINCH": "Flinch",
     "RUNE_PROTECT": "Rune Protect",
     "ELECTRIC_FIELD": "Electric Field",
     "PSYCHIC_FIELD": "Psychic Field",
@@ -1639,6 +1645,7 @@
     "PARALYSIS": "Reduce ATK_SPEED by 40% and prevents dodging attacks",
     "ARMOR_REDUCTION": "Reduce DEF & SPE_DEF by 50%",
     "CHARM": "Prevents attacking the target and forces to get closer to it",
+    "FLINCH": "All incoming damage bypass SHIELD",
     "RUNE_PROTECT": "Protects from status alterations",
     "ELECTRIC_FIELD": "Increase damage dealt by 20% (ELECTRIC only)",
     "PSYCHIC_FIELD": "Increase damage dealt by 20% (PSYCHIC only)",
@@ -1689,7 +1696,7 @@
     "POISON": "POISON pokemons have a chance to POISON their target for 4 seconds with their basic attacks. Poison inflicts TRUE over time and reduce healing efficiency.",
     "DRAGON": "DRAGON amplify synergies and gains more stats when fully evolved.",
     "FIELD": "When a FIELD pokemon dies, all the other FIELD pokemons are healed and gain ATK_SPEED",
-    "MONSTER": "MONSTER pokemons gain Attack, heal and increase their max HP, and grow in size every time they knock down an opponent",
+    "MONSTER": "MONSTER pokemons can FLINCH their opponents. Every time they get a KO, they gain ATK, heal and increase their max HP, and grow in size.",
     "HUMAN": "All your team heals for a percentage of the damage they deal with attacks and abilities",
     "AQUATIC": "AQUATIC pokemons have a chance to steal PP from their target at every basic attack",
     "BUG": "At the start of the combat, the BUG pokemons with the most HP are duplicated",
