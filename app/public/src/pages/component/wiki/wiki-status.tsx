@@ -10,6 +10,7 @@ export default function WikiStatus() {
     Status.BURN,
     Status.CHARM,
     Status.CONFUSION,
+    Status.FLINCH,
     Status.FREEZE,
     Status.PARALYSIS,
     Status.POISON,

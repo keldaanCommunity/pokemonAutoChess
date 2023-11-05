@@ -40,10 +40,13 @@
 - Buff Waterfall (Totodile): now also clear negative status and board cell effect on cast
 - Buff Dialga and Palkia PP: ~~150~~ 120
 - New ability for Pichu line: Nuzzle: Dash to the farthest enemy target, dealing 30/60/120 special damage and paralyzing it for 3/4/5 seconds; - Adjusted max PP for Pichu line: ~~140~~ 100 ; Alolan Raichu ~~100~~ 80 PP
+- Change Growl: now inflicts Flinch status intead of Wound
+- Change Bite: now heals for 30% of real damage taken instead of 30% of ability damage. Now also inflicts Flinch for 5 seconds
 
 # Changes to Synergies
 
 - Buff Grass: You get a berry tree that produces berries over time
+- Buff Monster: Monster now have a chance to apply Flinch status for 2 seconds on attack
 - Nerf Fairy: (6) Shock damage ~~60~~ 45 ; (8) Shock damage ~~80~~ 60
 
 # Changes to Items
@@ -65,6 +68,7 @@
 
 # Gameplay
 
+- New status: Flinch: all incoming damage bypass Shield
 - Like poison, the following status can now have their duration extended if applied again before the end of their initial duration: Armor Reduction, Burn, Silence, Wound, Paralysis, Rune Protect, Spike Armor, Magic Bounce.
 - Negative status are cleared when the opposite team is eliminated
 - The number of pokemons required to change these weathers has been reduced to 6: Snow, Storm, Sandstorm

@@ -2649,6 +2649,17 @@ export function createStatusAnimations(game: Phaser.Scene) {
   })
 
   game.anims.create({
+    key: "flinch",
+    frames: game.anims.generateFrameNames("flinch", {
+      start: 0,
+      end: 8,
+      zeroPad: 3
+    }),
+    frameRate: 8,
+    repeat: -1
+  })
+
+  game.anims.create({
     key: "VOID_BOOST",
     frames: game.anims.generateFrameNames("VOID_BOOST", {
       start: 0,
