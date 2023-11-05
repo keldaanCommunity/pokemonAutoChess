@@ -251,7 +251,8 @@
     "CHARGE_BEAM": "Charge Beam",
     "POPULATION_BOMB": "Population Bomb",
     "SCREECH": "Screech",
-    "SAND_TOMB": "Sand Tomb"
+    "SAND_TOMB": "Sand Tomb",
+    "WHIRLWIND": "Whirlwind"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -898,7 +899,9 @@
     "KRICKETOT": "Kricketot",
     "KRICKETUNE": "Kricketune",
     "HIPPOPOTAS": "Hippopotas",
-    "HIPPODOWN": "Hippodown"
+    "HIPPODOWN": "Hippodown",
+    "WINGULL": "Wingull",
+    "PELIPPER": "Pelipper"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1135,7 +1138,8 @@
     "CHARGE_BEAM": "Fires a concentrated bundle of electricity that propagate to max 3 adjacent targets, dealing [20,40,80,SP] SPECIAL to each. The remaining electricity increase AP by 20%.",
     "POPULATION_BOMB": "Deals [10,SP] times 10 SPECIAL to the target",
     "SCREECH": "Reduce DEF of all adjacent ennemies by [1,2,4,SP]",
-    "SAND_TOMB": "Deals [10,20,40,SP] SPECIAL, inflicting SILENCE and PARALYSIS for 3/5/8 seconds"
+    "SAND_TOMB": "Deals [10,20,40,SP] SPECIAL, inflicting SILENCE and PARALYSIS for 3/5/8 seconds",
+    "WHIRLWIND":"Deals [40,80,120,SP] and make the target fly away"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1575,7 +1579,8 @@
     "SPECIAL_ATTACK": "Basic attacks deal SPECIAL and scale with AP",
     "NINCADA": "After evolving, get Sheninja as well if you have a free space on your bench",
     "FAMILY": "The pokémon grows with time (turn 15 and turn 20)",
-    "SAND_STREAM": "The pokémon count as 3 for SANDSTORM"
+    "SAND_STREAM": "The pokémon count as 3 for SANDSTORM",
+    "DRIZZLE": "The pokémon count as 3 for RAIN"
   },
   "stat": {
     "ATK": "Attack",

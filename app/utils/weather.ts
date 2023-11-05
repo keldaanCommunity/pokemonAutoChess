@@ -65,6 +65,16 @@ export function getWeather(
                 (playerWeatherScore.get(Weather.SANDSTORM) ?? 0) + 2
               )
             }
+            if (pkm.passive === Passive.DRIZZLE && weather === Weather.RAIN) {
+              boardWeatherScore.set(
+                Weather.RAIN,
+                (boardWeatherScore.get(Weather.RAIN) ?? 0) + 2
+              )
+              playerWeatherScore.set(
+                Weather.RAIN,
+                (playerWeatherScore.get(Weather.RAIN) ?? 0) + 2
+              )
+            }
             if (pkm.passive !== Passive.CASTFORM) {
               playerWeatherScore.set(
                 weather,

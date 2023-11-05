@@ -9,6 +9,7 @@
 - Tandemaus/Maushold
 - Kricketot/Kricketune
 - Hippopotas/Hippodown
+- Wingull/Pelipper
 
 # Changes to Pokemon & Abilities
 

@@ -204,6 +204,11 @@ export function loadAttacksMultiAtlas(scene: Phaser.Scene) {
     "/assets/attacks"
   )
   scene.load.multiatlas(
+    "WHIRLWIND",
+    "/assets/attacks/WHIRLWIND.json",
+    "/assets/attacks"
+  )
+  scene.load.multiatlas(
     "POPULATION_BOMB",
     "/assets/attacks/POPULATION_BOMB.json",
     "/assets/attacks"
