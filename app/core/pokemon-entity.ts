@@ -411,10 +411,12 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.items.has(Item.CHOICE_SCARF) && totalDamage > 0) {
       const cells = board.getAdjacentCells(target.positionX, target.positionY)
-      const candidateTargets = cells.filter(cell => cell.value && this.team != cell.value.team).map(cell => cell.value!)
-      candidateTargets.sort((a,b) => a.life - b.life) // target lowest life first
+      const candidateTargets = cells
+        .filter((cell) => cell.value && this.team != cell.value.team)
+        .map((cell) => cell.value!)
+      candidateTargets.sort((a, b) => a.life - b.life) // target lowest life first
 
-      let targetCount = 1      
+      let targetCount = 1
       candidateTargets.forEach((target) => {
         if (targetCount > 0) {
           if (physicalDamage > 0) {
@@ -552,6 +554,20 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       }
       if (chance(burnChance)) {
         target.status.triggerBurn(2000, target, this, board)
+      }
+    }
+
+    if (this.hasSynergyEffect(Synergy.MONSTER)) {
+      let flinchChance = 0
+      if (this.effects.has(Effect.PURSUIT)) {
+        flinchChance = 0.3
+      } else if (this.effects.has(Effect.BRUTAL_SWING)) {
+        flinchChance = 0.4
+      } else if (this.effects.has(Effect.POWER_TRIP)) {
+        flinchChance = 0.5
+      }
+      if (chance(flinchChance)) {
+        target.status.triggerFlinch(2000)
       }
     }
 

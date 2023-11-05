@@ -12,6 +12,7 @@ import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import { Tooltip } from "react-tooltip"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
 import { useTranslation } from "react-i18next"
+import ReactDOM from "react-dom"
 
 const precomputed = PRECOMPUTED_ABILITY as PrecomputedAbility
 
@@ -59,15 +60,17 @@ export default function WikiAbility() {
             )
           })}
       </ul>
-      {hoveredPokemon && (
-        <Tooltip
-          id="pokemon-detail"
-          className="custom-theme-tooltip game-pokemon-detail-tooltip"
-          float
-        >
-          <GamePokemonDetail pokemon={hoveredPokemon} />
-        </Tooltip>
-      )}
+      {hoveredPokemon &&
+        ReactDOM.createPortal(
+          <Tooltip
+            id="pokemon-detail"
+            className="custom-theme-tooltip game-pokemon-detail-tooltip"
+            float
+          >
+            <GamePokemonDetail pokemon={hoveredPokemon} />
+          </Tooltip>,
+          document.body
+        )}
     </div>
   )
 }

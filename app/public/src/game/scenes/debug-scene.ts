@@ -138,6 +138,9 @@ export class DebugScene extends Phaser.Scene {
       if (status == Status.CHARM) {
         this.pokemon.addCharm()
       }
+      if(status === Status.FLINCH){
+        this.pokemon.addFlinch()
+      }
       if (status == Status.RUNE_PROTECT) {
         this.pokemon.addRuneProtect()
       }
