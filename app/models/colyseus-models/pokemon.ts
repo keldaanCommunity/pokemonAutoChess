@@ -10747,6 +10747,40 @@ export class Hippodown extends Pokemon {
   passive = Passive.SAND_STREAM
 }
 
+export class Wingull extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FLYING])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.PELIPPER
+  hp = 80
+  atk = 8
+  def = 3
+  speDef = 3
+  maxPP = 85
+  range = 2
+  skill = Ability.WHIRLWIND
+  additional = true
+  attackSprite = AttackSprite.FLYING_RANGE
+  passive = Passive.DRIZZLE
+}
+
+export class Pelipper extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FLYING])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 180
+  atk = 20
+  def = 4
+  speDef = 4
+  maxPP = 85
+  range = 2
+  skill = Ability.WHIRLWIND
+  final = true
+  additional = true
+  attackSprite = AttackSprite.FLYING_RANGE
+  passive = Passive.DRIZZLE
+}
+
 export class Xurkitree extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.ELECTRIC,
@@ -11465,5 +11499,7 @@ export const PokemonClasses: Record<
   [Pkm.KRICKETOT]: Kricketot,
   [Pkm.KRICKETUNE]: Kricketune,
   [Pkm.HIPPOPOTAS]: Hippopotas,
-  [Pkm.HIPPODOWN]: Hippodown
+  [Pkm.HIPPODOWN]: Hippodown,
+  [Pkm.WINGULL]: Wingull,
+  [Pkm.PELIPPER]: Pelipper
 }

@@ -1095,7 +1095,7 @@ export class HypnosisStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const farthestTarget = state.getFarthestTarget(pokemon, board)
     if (farthestTarget) {
-      let duration = Math.round(
+      const duration = Math.round(
         ([2000, 4000, 6000][pokemon.stars - 1] ?? 2000) * (1 + pokemon.ap / 200)
       )
       farthestTarget.status.triggerSleep(duration, farthestTarget)
@@ -6146,6 +6146,37 @@ export class SandTombStrategy extends AbilityStrategy {
   }
 }
 
+export class WhirlwindStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const x = target.positionX
+    const y = target.positionY
+    target.flyAway(board)
+    pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+      id: pokemon.simulation.id,
+      skill: Ability.WHIRLWIND,
+      positionX: x,
+      positionY: y,
+      targetX: target.positionX,
+      targetY: target.positionY
+    })
+    target.handleSpecialDamage(
+      pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 80 : 40,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit,
+      false
+    )
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -6384,5 +6415,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.CHARGE_BEAM]: new ChargeBeamStrategy(),
   [Ability.POPULATION_BOMB]: new PopulationBombStrategy(),
   [Ability.SCREECH]: new ScreechStrategy(),
-  [Ability.SAND_TOMB]: new SandTombStrategy()
+  [Ability.SAND_TOMB]: new SandTombStrategy(),
+  [Ability.WHIRLWIND]: new WhirlwindStrategy()
 }
