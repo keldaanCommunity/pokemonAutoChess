@@ -165,11 +165,8 @@ class GameContainer {
       })
     })
 
-    pokemon.items.onAdd((value, key) => {
-      this.gameScene?.battle?.addPokemonItem(simulation.id, value, pokemon)
-    })
-    pokemon.items.onRemove((value, key) => {
-      this.gameScene?.battle?.removePokemonItem(simulation.id, value, pokemon)
+    pokemon.items.onChange((value, key) => {
+      this.gameScene?.battle?.updatePokemonItems(simulation.id, pokemon)
     })
 
     const fieldsCount: NonFunctionPropNames<Count>[] = [
@@ -382,16 +379,9 @@ class GameContainer {
         })
       })
 
-      p.items.onAdd((value, key) => {
-        // logger.debug('added', value, key)
+      p.items.onChange((value, key) => {
         if (player.id === this.spectatedPlayerId) {
-          this.gameScene?.board?.addPokemonItem(player.id, value, p)
-        }
-      })
-      p.items.onRemove((value, key) => {
-        // logger.debug('removed', value, key)
-        if (player.id === this.spectatedPlayerId) {
-          this.gameScene?.board?.removePokemonItem(player.id, value, p)
+          this.gameScene?.board?.updatePokemonItems(player.id, p)
         }
       })
 
@@ -404,17 +394,10 @@ class GameContainer {
       }
     })
 
-    player.items.onAdd((value, key) => {
-      // logger.debug('added', value, key);
+    player.items.onChange((value, key) => {
       if (player.id === this.spectatedPlayerId) {
-        this.gameScene?.itemsContainer?.addItem(value)
-      }
-    })
-
-    player.items.onRemove((value, key) => {
-      // logger.debug('removed', value, key);
-      if (player.id === this.spectatedPlayerId) {
-        this.gameScene?.itemsContainer?.removeItem(value)
+        //logger.debug("changed", value, key, player.items)
+        this.gameScene?.itemsContainer?.render(player.items)
       }
     })
 
@@ -548,8 +531,8 @@ class GameContainer {
       tg.y = coordinates[1]
     }
 
-    if (gameScene && message.updateItems) {
-      gameScene.itemsContainer?.updateItems()
+    if (message.updateItems && gameScene && this.player) {
+      gameScene.itemsContainer?.render(this.player.items)
     }
   }
 

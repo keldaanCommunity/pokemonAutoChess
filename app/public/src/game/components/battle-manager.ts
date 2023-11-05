@@ -127,32 +127,15 @@ export default class BattleManager {
     }
   }
 
-  addPokemonItem(simulationId: string, value: Item, pokemon: IPokemonEntity) {
+  updatePokemonItems(simulationId: string, pokemon: IPokemonEntity) {
     // logger.debug(change);
     if (this.simulation?.id === simulationId) {
       const children = this.group.getChildren()
       for (let i = 0; i < children.length; i++) {
         const pkm = <Pokemon>children[i]
-        if (pkm.id == pokemon.id && !pkm.itemsContainer.findItem(value)) {
-          pkm.itemsContainer.addItem(value)
-          break
-        }
-      }
-    }
-  }
-
-  removePokemonItem(
-    simulationId: string,
-    value: Item,
-    pokemon: IPokemonEntity
-  ) {
-    if (this.simulation?.id == simulationId && this.group) {
-      const children = this.group.getChildren()
-      for (let i = 0; i < children.length; i++) {
-        const pkm = <Pokemon>children[i]
         if (pkm.id == pokemon.id) {
-          pkm.itemsContainer.removeItem(value)
-          break
+          pkm.itemsContainer.render(pokemon.items)
+          return
         }
       }
     }
