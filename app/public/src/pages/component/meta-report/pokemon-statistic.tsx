@@ -120,7 +120,6 @@ export default function PokemonStatistic(props: {
                       style={{
                         height: "32px",
                         width: "32px",
-                        imageRendering: "pixelated",
                         marginLeft: "4px"
                       }}
                     />
