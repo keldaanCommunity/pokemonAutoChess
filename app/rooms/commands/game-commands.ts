@@ -177,21 +177,20 @@ export class OnDragDropCommand extends Command<
               // From board to bench is always allowed (bench to bench is already handled)
               this.room.swap(playerId, pokemon, x, y)
               success = true
-            } else {
-              if (pokemon.canBePlaced) {
-                // Prevents a pokemon to go on the board only if it's adding a pokemon from the bench on a full board
-                if (!isBoardFull || !dropToEmptyPlace || !dropFromBench) {
-                  this.room.swap(playerId, pokemon, x, y)
-                  pokemon.onChangePosition(
-                    x,
-                    y,
-                    player,
-                    this.room.state.lightX,
-                    this.room.state.lightY
-                  )
-                  success = true
-                }
-              }
+            } else if (
+              pokemon.canBePlaced &&
+              !(dropFromBench && dropToEmptyPlace && isBoardFull)
+            ) {
+              // Prevents a pokemon to go on the board only if it's adding a pokemon from the bench on a full board
+              this.room.swap(playerId, pokemon, x, y)
+              pokemon.onChangePosition(
+                x,
+                y,
+                player,
+                this.room.state.lightX,
+                this.room.state.lightY
+              )
+              success = true
             }
           }
         }
