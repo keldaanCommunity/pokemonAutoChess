@@ -6,7 +6,6 @@ import Player from "../../../../models/colyseus-models/player"
 import { values } from "../../../../utils/schemas"
 
 export default class ItemsContainer extends GameObjects.Container {
-  inventory: SetSchema<Item> | CollectionSchema<Item>
   pokemonId: string | null
   playerId: string
 
