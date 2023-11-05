@@ -31,7 +31,7 @@ import Simulation from "../../../../core/simulation"
 import Player from "../../../../models/colyseus-models/player"
 import { Effect } from "../../../../types/enum/Effect"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../types/Config"
-import { delay } from "@reduxjs/toolkit/dist/utils"
+import { Passive } from "../../../../types/enum/Passive"
 
 export default class BattleManager {
   group: GameObjects.Group
@@ -486,7 +486,7 @@ export default class BattleManager {
             if (pkm.detail) {
               pkm.detail.ap.textContent = pokemon.ap.toString()
               pkm.detail.updateAbilityDescription(pkm.skill, pkm.stars, pkm.ap)
-              if (pokemon.passive) {
+              if (pokemon.passive != Passive.NONE) {
                 pkm.detail.updatePassiveDescription(
                   pokemon.passive,
                   pkm.stars,
