@@ -44,6 +44,7 @@
 - Change Growl: now inflicts Flinch status intead of Wound
 - Change Bite: now heals for 30% of real damage taken instead of 30% of ability damage. Now also inflicts Flinch for 5 seconds
 - Buff Mudkip line: Attack ~~4/8/18~~ 5/9/20
+- Buff Sandshrew/Sandslash: Attack ~~4/10~~ 5/13
 
 # Changes to Synergies
 

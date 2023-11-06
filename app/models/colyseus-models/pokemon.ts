@@ -8671,7 +8671,7 @@ export class Sandshrew extends Pokemon {
   stars = 1
   evolution = Pkm.SANDSLASH
   hp = 90
-  atk = 4
+  atk = 5
   def = 3
   speDef = 3
   maxPP = 80
@@ -8686,7 +8686,7 @@ export class Sandslash extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 180
-  atk = 10
+  atk = 13
   def = 5
   speDef = 5
   maxPP = 80
