@@ -32,7 +32,7 @@
 - Nerf Uxie: PP ~~65~~ 80
 - Buff Mesprit: Song of Desire now charms 2 enemies in the backline. Duration reduced ~~6~~ 3 seconds
 - Buff Azelf: Confusing Mind now confuse 2 enemies in the backline. Duration reduced ~~6~~ 3 seconds
-- Buff Slowbro: HP ~~130~~ 180, Def ~~5~~ 3
+- Buff SlowPoke line: HP ~~75/130/260 ~~ 80/180/260, Def ~~2/3/4~~ 3/5/6
 - Buff Weepinbell: HP ~~140~~ 160, Attack ~~9~~ 12
 - Buff Duduo Attack ~~10~~12 and Dodrio Attack ~~24~~28
 - Buff Marowak HP ~~220~~ 250

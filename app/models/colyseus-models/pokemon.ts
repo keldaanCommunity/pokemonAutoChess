@@ -3492,7 +3492,7 @@ export class Slowpoke extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.SLOWBRO
-  hp = 75
+  hp = 85
   atk = 6
   def = 2
   speDef = 2
@@ -3529,7 +3529,7 @@ export class Slowking extends Pokemon {
   stars = 3
   hp = 260
   atk = 24
-  def = 4
+  def = 6
   speDef = 4
   maxPP = 100
   range = 1
