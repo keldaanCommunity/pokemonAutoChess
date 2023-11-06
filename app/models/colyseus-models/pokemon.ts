@@ -9966,7 +9966,7 @@ export class Maractus extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 12
+  atk = 15
   def = 6
   speDef = 3
   maxPP = 100
