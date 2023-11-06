@@ -3298,7 +3298,7 @@ export class Mudkip extends Pokemon {
   stars = 1
   evolution = Pkm.MARSHTOMP
   hp = 65
-  atk = 4
+  atk = 5
   def = 2
   speDef = 2
   maxPP = 50
@@ -3314,7 +3314,7 @@ export class Marshtomp extends Pokemon {
   stars = 2
   evolution = Pkm.SWAMPERT
   hp = 130
-  atk = 8
+  atk = 9
   def = 3
   speDef = 3
   maxPP = 50
@@ -3329,7 +3329,7 @@ export class Swampert extends Pokemon {
   rarity = Rarity.COMMON
   stars = 3
   hp = 200
-  atk = 18
+  atk = 20
   def = 5
   speDef = 5
   maxPP = 50
