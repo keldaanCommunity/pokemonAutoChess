@@ -7988,7 +7988,7 @@ export class Shroomish extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.BRELOOM
-  hp = 60
+  hp = 70
   atk = 7
   def = 2
   speDef = 2
@@ -8003,7 +8003,7 @@ export class Breloom extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIGHTING])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 150
+  hp = 170
   atk = 15
   def = 3
   speDef = 3

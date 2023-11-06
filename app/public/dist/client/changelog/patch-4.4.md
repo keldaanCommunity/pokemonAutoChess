@@ -46,6 +46,7 @@
 - Buff Mudkip line: Attack ~~4/8/18~~ 5/9/20
 - Buff Sandshrew/Sandslash: Attack ~~4/10~~ 5/13
 - Buff Nosepass/Probopass: HP ~~60/120~~ 70/140
+- Buff Shroomish/Breloom: HP ~~60/150~~ 70/170
 
 # Changes to Synergies
 
