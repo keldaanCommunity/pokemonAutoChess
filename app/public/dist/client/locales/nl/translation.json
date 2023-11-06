@@ -979,7 +979,7 @@
     "MIST_BALL": "Lanceert een mistbel in een rechte lijn die twee keer [25,SP] SPECIAL uitdeelt en het AP van alle geraakte vijanden tweemaal met 10% verlaagt",
     "MUD_BUBBLE": "Geneest de caster voor [10,20,40,SP]",
     "LINK_CABLE": "Storm naar een nieuwe plek en veroorzaakt een elektrische boog tussen Plusle en Minun die [50,SP] SPECIAL uitdeelt. Als Plusle of Minun alleen zijn, brengt hij deze schade in plaats daarvan toe aan aangrenzende vijanden.",
-    "MAGIC_BOUNCE": "Gedurende [3,6,12] seconden, wanneer deze pokemon wordt geraakt door een vaardigheid, is de caster gedurende 4 seconden SILENCE en neemt SPECIAL gelijk aan [100,SP]% deze pokemon huidige SPE_DEF",
+    "MAGIC_BOUNCE": "Gedurende [3,6,12] seconden, telkens wanneer deze Pokémon wordt geraakt door een vaardigheid, blokkeert hij de schade en reflecteert hij [40,SP] SPECIAL voor de caster",
     "HIDDEN_POWER_A": "Spawn 4 Abra op elke hoek van het bord",
     "HIDDEN_POWER_B": "Verbrand het team van de tegenstander gedurende 30 seconden",
     "HIDDEN_POWER_C": "Geef Amulet Coin aan je hele team. Het item wordt aan het einde van het gevecht verwijderd.",

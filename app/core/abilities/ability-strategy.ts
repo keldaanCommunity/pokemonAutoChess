@@ -72,14 +72,14 @@ export class AbilityStrategy {
     }
 
     if (target.status.magicBounce) {
-      pokemon.status.triggerSilence(4000, pokemon, target, board)
-      const damage = Math.round(target.speDef * (1 + target.ap / 100))
+      const damage = 40
       pokemon.handleSpecialDamage(
         damage,
         board,
         AttackType.SPECIAL,
         target,
-        false
+        false,
+        true
       )
     }
   }

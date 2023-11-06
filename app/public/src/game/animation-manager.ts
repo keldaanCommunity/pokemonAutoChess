@@ -871,7 +871,7 @@ export default class AnimationManager {
       key: Ability.SCREECH,
       frames: this.game.anims.generateFrameNames(Ability.SCREECH, {
         start: 0,
-        end: 13
+        end: 6
       }),
       duration: 1000,
       repeat: 0

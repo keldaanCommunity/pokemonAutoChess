@@ -3492,7 +3492,7 @@ export class Slowpoke extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.SLOWBRO
-  hp = 75
+  hp = 85
   atk = 6
   def = 2
   speDef = 2
@@ -3529,7 +3529,7 @@ export class Slowking extends Pokemon {
   stars = 3
   hp = 260
   atk = 24
-  def = 4
+  def = 6
   speDef = 4
   maxPP = 100
   range = 1
@@ -7988,7 +7988,7 @@ export class Shroomish extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.BRELOOM
-  hp = 60
+  hp = 70
   atk = 7
   def = 2
   speDef = 2
@@ -8003,7 +8003,7 @@ export class Breloom extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIGHTING])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 150
+  hp = 170
   atk = 15
   def = 3
   speDef = 3
@@ -9227,7 +9227,7 @@ export class Diglett extends Pokemon {
   evolution = Pkm.DUGTRIO
   hp = 75
   atk = 6
-  def = 2
+  def = 3
   speDef = 2
   maxPP = 50
   range = 1
@@ -9242,7 +9242,7 @@ export class Dugtrio extends Pokemon {
   stars = 2
   hp = 160
   atk = 14
-  def = 4
+  def = 5
   speDef = 4
   maxPP = 50
   range = 1
@@ -9966,7 +9966,7 @@ export class Maractus extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 12
+  atk = 15
   def = 6
   speDef = 3
   maxPP = 100
