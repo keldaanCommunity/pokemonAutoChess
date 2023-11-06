@@ -8702,7 +8702,7 @@ export class Nosepass extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.PROBOPASS
-  hp = 60
+  hp = 70
   atk = 5
   def = 3
   speDef = 3
@@ -8717,7 +8717,7 @@ export class Probopass extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.ARTIFICIAL])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 120
+  hp = 140
   atk = 10
   def = 8
   speDef = 8
