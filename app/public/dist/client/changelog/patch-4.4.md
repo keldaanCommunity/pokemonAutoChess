@@ -87,3 +87,4 @@
 # Bugfix
 
 - Shadow Clone was using current HP and not max HP. Now also reduce max HP of clones
+- Light spot was never on the front line
