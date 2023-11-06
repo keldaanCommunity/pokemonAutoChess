@@ -979,7 +979,7 @@
     "MIST_BALL": "Lança uma bolha de névoa em linha reta que causa [25,SP] SPECIAL duas vezes e reduz em 10% o AP de todos os inimigos atingidos",
     "MUD_BUBBLE": "Cura o lançador em [10,20,40,SP]",
     "LINK_CABLE": "Corra para um novo local e acione um arco elétrico entre Plusle e Minun que causa [50,SP] SPECIAL. Se Plusle ou Minun estiverem sozinhos, causa esse dano aos inimigos adjacentes.",
-    "MAGIC_BOUNCE": "Por [3,6,12] segundos, sempre que este pokémon for atingido por uma habilidade, o lançador fica em SILENCE por 4 segundos e toma SPECIAL igual ao [100,SP]% atual SPE_DEF deste pokémon",
+    "MAGIC_BOUNCE": "Por [3,6,12] segundos, sempre que este Pokémon for atingido por uma habilidade, ele bloqueia o dano e reflete [40,SP] SPECIAL para o lançador",
     "HIDDEN_POWER_A": "Gere 4 Abra em cada canto do tabuleiro",
     "HIDDEN_POWER_B": "Queime o time adversário por 30 segundos",
     "HIDDEN_POWER_C": "Dê Amulet Coin para toda a sua equipe. O item é removido no final da luta.",

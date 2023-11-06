@@ -979,7 +979,7 @@
     "MIST_BALL": "Lancia una bolla di nebbia in linea retta che infligge [25,SP] SPECIAL due volte e riduce del 10% i AP di tutti i nemici colpiti del doppio",
     "MUD_BUBBLE": "Cura l'incantatore per [10,20,40,SP]",
     "LINK_CABLE": "Scatta in un nuovo punto, quindi innesca un arco elettrico tra Plusle e Minun che infligge [50,SP] SPECIAL. Se Plusle o Minun sono soli, infligge invece questo danno ai nemici adiacenti.",
-    "MAGIC_BOUNCE": "Per [3,6,12] secondi, ogni volta che questo pokemon viene colpito da un'abilità, l'incantatore è SILENCE per 4 secondi e riceve SPECIAL pari a questo [100,SP]% pokemon attuale SPE_DEF",
+    "MAGIC_BOUNCE": "Per [3,6,12] secondi, ogni volta che questo Pokémon viene colpito da un'abilità, blocca i danni e riflette [40,SP] SPECIAL sul lanciatore",
     "HIDDEN_POWER_A": "Genera 4 Abra in ogni angolo del tabellone",
     "HIDDEN_POWER_B": "Brucia la squadra avversaria per 30 secondi",
     "HIDDEN_POWER_C": "Dai Moneta Amuleto a tutta la tua squadra. L'oggetto viene rimosso alla fine del combattimento.",
