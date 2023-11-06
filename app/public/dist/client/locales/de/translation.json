@@ -978,7 +978,7 @@
     "MIST_BALL": "Startet eine Nebelblase in einer geraden Linie, die zweimal [25,SP] SPECIAL verursacht und die AP aller getroffenen Feinde um das Doppelte um 10 % senkt.",
     "MUD_BUBBLE": "Heilt den Zaubernden um [10,20,40,SP]",
     "LINK_CABLE": "Springt an einen neuen Ort und löst dann einen elektrischen Lichtbogen zwischen Plusle und Minun aus, der [50,SP] SPECIAL verursacht. Wenn Plusle oder Minun allein sind, fügt er diesen Schaden stattdessen benachbarten Feinden zu.",
-    "MAGIC_BOUNCE": "Immer wenn dieses Pokémon von einer Fähigkeit getroffen wird, ist der Zaubernde für [3,6,12] Sekunden 4 Sekunden lang SILENCE und erhält SPECIAL in Höhe [100,SP]% der aktuellen SPE_DEF dieses Pokémon",
+    "MAGIC_BOUNCE": "Immer wenn dieses Pokémon von einer Fähigkeit getroffen wird, blockt es [3,6,12] Sekunden lang Schaden und reflektiert [40,SP] SPECIAL an den Zauberer",
     "HIDDEN_POWER_A": "Generiere 4 Abra an jeder Ecke des Spielbretts",
     "HIDDEN_POWER_B": "Brennen Sie das gegnerische Team 30 Sekunden lang",
     "HIDDEN_POWER_C": "Geben Sie Ihrem gesamten Team eine Amulettmünze. Der Gegenstand wird am Ende des Kampfes entfernt.",

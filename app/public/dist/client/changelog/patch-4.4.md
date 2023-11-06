@@ -32,7 +32,7 @@
 - Nerf Uxie: PP ~~65~~ 80
 - Buff Mesprit: Song of Desire now charms 2 enemies in the backline. Duration reduced ~~6~~ 3 seconds
 - Buff Azelf: Confusing Mind now confuse 2 enemies in the backline. Duration reduced ~~6~~ 3 seconds
-- Buff Slowbro: HP ~~130~~ 180, Def ~~5~~ 3
+- Buff SlowPoke line: HP ~~75/130/260 ~~ 80/180/260, Def ~~2/3/4~~ 3/5/6
 - Buff Weepinbell: HP ~~140~~ 160, Attack ~~9~~ 12
 - Buff Duduo Attack ~~10~~12 and Dodrio Attack ~~24~~28
 - Buff Marowak HP ~~220~~ 250
@@ -43,6 +43,13 @@
 - New ability for Pichu line: Nuzzle: Dash to the farthest enemy target, dealing 30/60/120 special damage and paralyzing it for 3/4/5 seconds; - Adjusted max PP for Pichu line: ~~140~~ 100 ; Alolan Raichu ~~100~~ 80 PP
 - Change Growl: now inflicts Flinch status intead of Wound
 - Change Bite: now heals for 30% of real damage taken instead of 30% of ability damage. Now also inflicts Flinch for 5 seconds
+- Buff Mudkip line: Attack ~~4/8/18~~ 5/9/20
+- Buff Sandshrew/Sandslash: Attack ~~4/10~~ 5/13
+- Buff Nosepass/Probopass: HP ~~60/120~~ 70/140
+- Buff Shroomish/Breloom: HP ~~60/150~~ 70/170
+- Buff Diglett/Dugtrio: Def ~~2/4~~ 3/5
+- Rework Magic Bounce: now prevents damage and reflect 40 special damage. No longer silence the attacker
+- Buff Maractus: Attack ~~12~~ 15
 
 # Changes to Synergies
 

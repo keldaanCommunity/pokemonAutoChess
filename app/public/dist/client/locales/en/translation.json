@@ -1072,7 +1072,7 @@
     "MIST_BALL": "Launches a mist bubble in a straight line that deals [25,SP] SPECIAL twice and lowers twice the AP of all enemies hit by 10%",
     "MUD_BUBBLE": "Heals the caster for [10,20,40,SP]",
     "LINK_CABLE": "Dash into a new spot, then triggers an electric arc between Plusle and Minun that deals [50,SP] SPECIAL. If Plusle or Minun are alone, deals this damage to adjacent enemies instead.",
-    "MAGIC_BOUNCE": "For [3,6,12] seconds, whenever this pokemon is hit by an ability, the caster is SILENCE for 4 seconds and take SPECIAL equal to [100,SP]% of this pokemon current SPE_DEF",
+    "MAGIC_BOUNCE": "For [3,6,12] seconds, whenever this pokemon is hit by an ability, blocks damage and reflect [40,SP] SPECIAL to the caster",
     "HIDDEN_POWER_A": "Spawn 4 Abra at every corner of the board",
     "HIDDEN_POWER_B": "BURN the opponent team for 30 seconds",
     "HIDDEN_POWER_C": "Give AMULET_COIN to your whole team. The item is removed at the end of the fight.",

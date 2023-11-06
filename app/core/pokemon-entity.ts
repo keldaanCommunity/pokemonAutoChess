@@ -208,7 +208,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     crit: boolean,
     apBoost = true
   ): { death: boolean; takenDamage: number } {
-    if (this.status.protect) {
+    if (this.status.protect || this.status.magicBounce) {
       this.count.spellBlockedCount++
       return { death: false, takenDamage: 0 }
     } else {
