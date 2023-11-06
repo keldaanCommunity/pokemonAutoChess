@@ -9227,7 +9227,7 @@ export class Diglett extends Pokemon {
   evolution = Pkm.DUGTRIO
   hp = 75
   atk = 6
-  def = 2
+  def = 3
   speDef = 2
   maxPP = 50
   range = 1
@@ -9242,7 +9242,7 @@ export class Dugtrio extends Pokemon {
   stars = 2
   hp = 160
   atk = 14
-  def = 4
+  def = 5
   speDef = 4
   maxPP = 50
   range = 1

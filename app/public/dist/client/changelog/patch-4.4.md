@@ -47,6 +47,7 @@
 - Buff Sandshrew/Sandslash: Attack ~~4/10~~ 5/13
 - Buff Nosepass/Probopass: HP ~~60/120~~ 70/140
 - Buff Shroomish/Breloom: HP ~~60/150~~ 70/170
+- Buff Diglett/Dugtrio: Def ~~2/4~~ 3/5
 
 # Changes to Synergies
 
