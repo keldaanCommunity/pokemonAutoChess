@@ -51,6 +51,7 @@
 - Rework Magic Bounce: now prevents damage and reflect 40 special damage. No longer silence the attacker
 - Buff Maractus: Attack ~~12~~ 15
 
+
 # Changes to Synergies
 
 - Buff Grass: You get a berry tree that produces berries over time
@@ -91,3 +92,4 @@
 # Bugfix
 
 - Shadow Clone was using current HP and not max HP. Now also reduce max HP of clones
+- Light spot was never on the front line

@@ -45,7 +45,7 @@ export default class GameState extends Schema {
   @type({ set: "string" }) spectators = new SetSchema<string>()
   @type({ map: Simulation }) simulations = new MapSchema<Simulation>()
   @type("uint8") lightX = randomBetween(0, BOARD_WIDTH - 1)
-  @type("uint8") lightY = randomBetween(1, BOARD_HEIGHT / 2 - 1)
+  @type("uint8") lightY = randomBetween(1, BOARD_HEIGHT / 2)
   @type("string") mapMusic: Dungeon
 
   time = StageDuration[1] * 1000
