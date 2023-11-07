@@ -6177,6 +6177,41 @@ export class WhirlwindStrategy extends AbilityStrategy {
   }
 }
 
+export class EmptyLightStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    let tg: PokemonEntity | undefined = target
+    const affectedTargetsIds = new Array<string>()
+    for (let i = 0; i < 5; i++) {
+      if (tg) {
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: Ability.EMPTY_LIGHT,
+          positionX: pokemon.positionX,
+          positionY: pokemon.positionY,
+          targetX: tg.positionX,
+          targetY: tg.positionY
+        })
+        tg.addSpecialDefense(-3, false)
+        tg.handleSpecialDamage(60, board, AttackType.SPECIAL, pokemon, crit)
+        affectedTargetsIds.push(tg.id)
+        const cells = board.getAdjacentCells(tg.positionX, tg.positionY)
+        tg = cells
+          .filter((v) => v.value && v.value.team !== pokemon.team && !affectedTargetsIds.includes(v.value.id))
+          .map((v) => v.value)[0]
+      } else {
+        break
+      }
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -6416,5 +6451,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.POPULATION_BOMB]: new PopulationBombStrategy(),
   [Ability.SCREECH]: new ScreechStrategy(),
   [Ability.SAND_TOMB]: new SandTombStrategy(),
-  [Ability.WHIRLWIND]: new WhirlwindStrategy()
+  [Ability.WHIRLWIND]: new WhirlwindStrategy(),
+  [Ability.EMPTY_LIGHT]: new EmptyLightStrategy()
 }

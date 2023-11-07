@@ -252,7 +252,8 @@
     "POPULATION_BOMB": "Population Bomb",
     "SCREECH": "Screech",
     "SAND_TOMB": "Sand Tomb",
-    "WHIRLWIND": "Whirlwind"
+    "WHIRLWIND": "Whirlwind",
+    "EMPTY_LIGHT": "Empty Light"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -901,7 +902,8 @@
     "HIPPOPOTAS": "Hippopotas",
     "HIPPODOWN": "Hippodown",
     "WINGULL": "Wingull",
-    "PELIPPER": "Pelipper"
+    "PELIPPER": "Pelipper",
+    "NIHILEGO": "Nihilego"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1139,7 +1141,8 @@
     "POPULATION_BOMB": "Deals [10,SP] times 10 SPECIAL to the target",
     "SCREECH": "Reduce DEF of all adjacent ennemies by [1,2,4,SP]",
     "SAND_TOMB": "Deals [10,20,40,SP] SPECIAL, inflicting SILENCE and PARALYSIS for 3/5/8 seconds",
-    "WHIRLWIND":"Deals [40,80,120,SP] and make the target fly away"
+    "WHIRLWIND":"Deals [40,80,120,SP] and make the target fly away",
+    "EMPTY_LIGHT": "Spits poison directly at an enemy, inflicting [60,SP] points of damage and reducing its SPE_DEF by 3. The ability then rebounds on another Pokemon with a lower SPE_DEF. (5 bounces maximum)"
   },
   "effect": {
     "INGRAIN": "Ingrain",
