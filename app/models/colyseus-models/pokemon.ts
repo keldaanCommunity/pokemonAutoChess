@@ -10802,6 +10802,22 @@ export class Xurkitree extends Pokemon {
   attackType = AttackType.SPECIAL
 }
 
+export class Nihilego extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.ROCK])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 200
+  atk = 30
+  def = 1
+  speDef = 5
+  maxPP = 80
+  range = 3
+  skill = Ability.EMPTY_LIGHT
+  passive = Passive.BEAST_BOOST
+  final = true
+  attackSprite = AttackSprite.POISON_RANGE
+}
+
 export class Tandemaus extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FAIRY])
   rarity = Rarity.UNIQUE
@@ -11501,5 +11517,6 @@ export const PokemonClasses: Record<
   [Pkm.HIPPOPOTAS]: Hippopotas,
   [Pkm.HIPPODOWN]: Hippodown,
   [Pkm.WINGULL]: Wingull,
-  [Pkm.PELIPPER]: Pelipper
+  [Pkm.PELIPPER]: Pelipper,
+  [Pkm.NIHILEGO]: Nihilego
 }

@@ -858,6 +858,16 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.EMPTY_LIGHT,
+      frames: this.game.anims.generateFrameNames(Ability.EMPTY_LIGHT, {
+        start: 0,
+        end: 31
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.POPULATION_BOMB,
       frames: this.game.anims.generateFrameNames(Ability.POPULATION_BOMB, {
         start: 0,
