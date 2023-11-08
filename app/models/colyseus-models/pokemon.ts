@@ -8123,7 +8123,7 @@ export class Applin extends Pokemon {
   stars = 1
   evolution = Pkm.APPLETUN
   hp = 130
-  atk = 6
+  atk = 8
   def = 5
   speDef = 2
   maxPP = 85
@@ -8138,7 +8138,7 @@ export class Appletun extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   hp = 250
-  atk = 16
+  atk = 22
   def = 8
   speDef = 6
   maxPP = 85

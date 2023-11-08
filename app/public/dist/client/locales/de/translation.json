@@ -917,7 +917,7 @@
     "JUDGEMENT": "Fügt dem Ziel [10,SP] Spezialschaden zu, multipliziert mit der Summe der Arceus-Synergiestufen",
     "CHATTER": "Füge allen Feinden [10,SP] SPECIAL zu. Jeder Feind hat eine Chance von [30,SP] %, 1 Sekunde lang CONFUSION zu erleiden",
     "STEAM_ERUPTION": "Fügt dem Ziel und allen angrenzenden Feinden [80,SP] SPECIAL zu und BURN sie 3 Sekunden lang",
-    "APPLE_ACID": "Fügt dem Ziel [30,60,120,SP] SPECIAL zu und senkt seine DEF und SPE_DEF um 3 Punkte",
+    "APPLE_ACID": "Fügt dem Ziel [30,60,120,SP] SPECIAL zu und senkt seine DEF und SPE_DEF um [5,SP] Punkte",
     "SACRED_SWORD": "Fügt dem Ziel [90,SP] TRUE zu",
     "SHADOW_BALL": "Verursacht [45,90,180,SP] SPECIAL und verbrennt dem Ziel und angrenzenden Feinden 15 PP",
     "DIVE": "Taucht unter Wasser und taucht in der Mitte des gegnerischen Teams wieder auf, was allen angrenzenden Einheiten 1,5 Sekunden lang [15,30,60,SP] SPECIAL zufügt und sie einfriert",

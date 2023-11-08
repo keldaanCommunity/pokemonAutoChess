@@ -1011,7 +1011,7 @@
     "JUDGEMENT": "Inflicts [10,SP] special damage to the target, multiplied by the sum of Arceus synergy levels",
     "CHATTER": "Deal [10,SP] SPECIAL to all enemies. Every enemy has [30,SP]% chance to be CONFUSION for 1 second",
     "STEAM_ERUPTION": "Deals [80,SP] SPECIAL to the target and all enemies adjacent, and BURN them for 3 seconds",
-    "APPLE_ACID": "Deals [30,60,120,SP] SPECIAL to the target, and lower its DEF and SPE_DEF by 3 points",
+    "APPLE_ACID": "Deals [30,60,120,SP] SPECIAL to the target, and lower its DEF and SPE_DEF by [5,SP] points",
     "SACRED_SWORD": "Deals [90,SP] TRUE to the target",
     "SHADOW_BALL": "Deals [45,90,180,SP] SPECIAL and burn 15 PP to the target and adjacent enemies",
     "DIVE": "Dives underwater and reappears in the middle of the enemy team, dealing [15,30,60,SP] SPECIAL and FREEZE all adjacent units for 1.5 second",
