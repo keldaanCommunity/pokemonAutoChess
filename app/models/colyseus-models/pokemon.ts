@@ -6221,7 +6221,7 @@ export class Gligar extends Pokemon {
   stars = 3
   evolution = Pkm.GLISCOR
   evolutionRule = new ItemEvolutionRule([Item.RAZOR_FANG])
-  hp = 160
+  hp = 150
   atk = 16
   def = 3
   speDef = 3
@@ -6240,7 +6240,7 @@ export class Gliscor extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 4
-  hp = 200
+  hp = 180
   atk = 20
   def = 4
   speDef = 4
