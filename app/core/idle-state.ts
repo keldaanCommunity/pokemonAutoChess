@@ -10,9 +10,6 @@ export class IdleState extends PokemonState {
 
     if (pokemon.status.tree) {
       if (pokemon.pp >= pokemon.maxPP) {
-        if (pokemon.passive === Passive.SUDOWOODO) {
-          pokemon.pp = 0 // sudowoodo should not cast immediately the first time
-        }
         pokemon.status.tree = false
         pokemon.toMovingState()
       }
