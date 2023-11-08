@@ -143,6 +143,7 @@ export default class AttackingState extends PokemonState {
       if (
         chance(dodgeChance) &&
         !pokemon.items.has(Item.XRAY_VISION) &&
+        !pokemon.effects.has(Effect.LOCK_ON) &&
         !target.status.paralysis &&
         !target.status.sleep &&
         !target.status.freeze
@@ -187,6 +188,11 @@ export default class AttackingState extends PokemonState {
       }
       if (pokemon.items.has(Item.RED_ORB) && target) {
         trueDamagePart += 0.25
+      }
+      if(pokemon.effects.has(Effect.LOCK_ON) && target) {
+        trueDamagePart += 1.0 + (pokemon.ap / 100)
+        target.status.triggerArmorReduction(3000)
+        pokemon.effects.delete(Effect.LOCK_ON)
       }
 
       if (trueDamagePart > 0) {

@@ -994,7 +994,7 @@
     "FIRE_TRICK": "Deal [20,40,80,SP] SPECIAL to the target and teleport them to a corner of the battlefield",
     "FLAME_CHARGE": "Dash into the enemy team's backline, dealing [30,60,120,SP] SPECIAL to all enemy Pokémon hit",
     "LEECH_SEED": "POISON the target for [3,6,12] seconds and heal the user's HP by [20,40,80,SP]",
-    "LOCK_ON": "Lock on the target, applying ARMOR_REDUCTION to them for [3,SP] seconds",
+    "LOCK_ON": "Lock on the target. The next attack cannot miss, deal [100,SP]% TRUE and apply ARMOR_REDUCTION for 3 seconds",
     "PSYCH_UP": "Deal [10,20,40,SP] SPECIAL to the target, then SILENCE them and all adjacent enemy Pokémon for [2,4,8]",
     "RAZOR_WIND": "Deal [20,40,80,SP] SPECIAL to the target, then make them and all adjacent enemy Pokémon PARALYSIS for 7s",
     "TWISTING_NETHER": "Deals [80,SP] SPECIAL to all adjacent enemy Pokémon, then teleport them randomly across the battlefield",
@@ -1141,7 +1141,7 @@
     "POPULATION_BOMB": "Deals [10,SP] times 10 SPECIAL to the target",
     "SCREECH": "Reduce DEF of all adjacent ennemies by [1,2,4,SP]",
     "SAND_TOMB": "Deals [10,20,40,SP] SPECIAL, inflicting SILENCE and PARALYSIS for 3/5/8 seconds",
-    "WHIRLWIND":"Deals [40,80,120,SP] and make the target fly away",
+    "WHIRLWIND": "Deals [40,80,120,SP] and make the target fly away",
     "EMPTY_LIGHT": "Spits poison directly at an enemy, inflicting [60,SP] points of damage and reducing its SPE_DEF by 3. The ability then rebounds on another Pokemon with a lower SPE_DEF. (5 bounces maximum)"
   },
   "effect": {
@@ -1578,7 +1578,6 @@
     "ILLUMISE_VOLBEAT": "Illumise and Volbeat gain 5 PP per second for each other member of their species alive on the board",
     "PRISM": "Necrozma switches between its Ultra forme and Normal forme depending on its exposure to LIGHT",
     "BLOSSOM": "Cherrim switches between its Sunlight forme and Normal forme depending on its exposure to LIGHT",
-    "GENESECT": "Genesect is dealing TRUE to targets affected by ARMOR_REDUCTION",
     "SPECIAL_ATTACK": "Basic attacks deal SPECIAL and scale with AP",
     "NINCADA": "After evolving, get Sheninja as well if you have a free space on your bench",
     "FAMILY": "The pokémon grows with time (turn 15 and turn 20)",
