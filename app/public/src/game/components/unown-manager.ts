@@ -261,7 +261,7 @@ const UNOWNS_PER_ABILITY = new Map([
   ],
   [
     Ability.HIDDEN_POWER_T,
-    [Pkm.UNOWN_T, Pkm.UNOWN_A, Pkm.UNOWN_N, Pkm.UNOWN_K]
+    [Pkm.UNOWN_T, Pkm.UNOWN_R, Pkm.UNOWN_E, Pkm.UNOWN_E]
   ],
   [
     Ability.HIDDEN_POWER_U,

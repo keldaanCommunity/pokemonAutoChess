@@ -6595,7 +6595,6 @@ export class Genesect extends Pokemon {
   maxPP = 80
   range = 4
   skill = Ability.LOCK_ON
-  passive = Passive.GENESECT
   final = true
   attackSprite = AttackSprite.FIRE_RANGE
 }

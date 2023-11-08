@@ -901,7 +901,7 @@
     "FIRE_TRICK": "Breng [20,40,80,SP] SPECIAL toe aan het doelwit en teleporteer hen naar een hoek van het slagveld",
     "FLAME_CHARGE": "Ren naar de achterkant van het vijandelijke team en breng [30,60,120,SP] SPECIAL toe aan alle geraakte vijandelijke Pokémon",
     "LEECH_SEED": "Pas de POISON status toe op het doelwit voor [3,6,12] seconden, en herstel de gebruiker's HP met [20,40,80,SP]",
-    "LOCK_ON": "Genesect neemt het doelwit in het vizier en de volgende [3,SP] seconden heeft het doelwit het ARMOR_REDUCTION status",
+    "LOCK_ON": "Vergrendel het doel. De volgende aanval mag niet missen, deel [100,SP]% TRUE en pas ARMOR_REDUCTION gedurende 3 seconden toe",
     "PSYCH_UP": "Breng [10,20,40,SP] SPECIAL toe aan het doelwit en past de SILENCE status toe aan hen en aangrenzende vijandelijke Pokémon",
     "RAZOR_WIND": "Breng [20,40,80,SP] SPECIAL toe aan het doelwit en pas de PARALYSIS status toe hen en aangrenzende vijandelijke Pokémon",
     "TWISTING_NETHER": "Breng [80,SP] SPECIAL toe aan alle aangrenzende vijandelijke Pokémon en teleporteer ze willekeurig over het slagveld",

@@ -901,7 +901,7 @@
     "FIRE_TRICK": "Oferece [20,40,80,SP] SPECIAL e teletransporta o alvo para um canto do mapa",
     "FLAME_CHARGE": "Corra para a retaguarda inimiga, causando [30,60,120,SP] SPECIAL",
     "LEECH_SEED": "POISON o alvo por [3,6,12] segundos, curando [20,40,80,SP] HP",
-    "LOCK_ON": "Bloqueie o alvo e aplique ARMOR_REDUCTION por [3,SP] segundos",
+    "LOCK_ON": "Bloqueie o alvo. O próximo ataque não pode errar, aplique [100,SP]% TRUE e aplique ARMOR_REDUCTION por 3 segundos",
     "PSYCH_UP": "Distribua [10,20,40,SP] SPECIAL e SILENCE o alvo e seus inimigos adjacentes",
     "RAZOR_WIND": "Causa [20,40,80,SP] SPECIAL ao alvo e causa PARALYSIS nos inimigos ao redor",
     "TWISTING_NETHER": "Oferece [80,SP] SPECIAL aos inimigos adjacentes. Todo pokémon atingido é teletransportado para algum lugar.",
