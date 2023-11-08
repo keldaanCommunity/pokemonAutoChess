@@ -940,7 +940,7 @@
     "FIRE_TRICK": "Inflige [20,40,80,SP] SPECIAL et téléporte la cible dans un coin de la carte",
     "FLAME_CHARGE": "Fonce dans la ligne de fond ennemie, infligeant [30,60,120,SP] SPECIAL à tous les ennemis sur le chemin",
     "LEECH_SEED": "Inflige POISON à la cible pendant [3,6,12] secondes et se soigne de [20,40,80,SP] HP",
-    "LOCK_ON": "Verrouille la cible et lui inflige ARMOR_REDUCTION pendant [3,SP] secondes",
+    "LOCK_ON": "Verrouille la cible. La prochaine attaque ne peut pas manquer, inflige [100,SP]% de TRUE et ARMOR_REDUCTION pendant 3 secondes",
     "PSYCH_UP": "Inflige [10,20,40,SP] SPECIAL et SILENCE la cible et ses ennemis adjacents",
     "RAZOR_WIND": "Inflige [20,40,80,SP] SPECIAL à la cible et rend les ennemis environnants PARALYSIS",
     "TWISTING_NETHER": "Inflige [80,SP] SPECIAL aux ennemis adjacents. Chaque pokémon touché est téléporté quelque part.",

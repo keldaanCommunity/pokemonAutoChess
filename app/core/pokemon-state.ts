@@ -150,14 +150,6 @@ export default class PokemonState {
         damage = Math.ceil(damage * 1.2)
       }
 
-      if (
-        attacker &&
-        attacker.passive == Passive.GENESECT &&
-        pokemon.status.armorReduction
-      ) {
-        attackType = AttackType.TRUE
-      }
-
       const ARMOR_FACTOR = 0.1
       const def = pokemon.status.armorReduction
         ? Math.round(pokemon.def / 2)
@@ -613,17 +605,13 @@ export default class PokemonState {
     pokemon: PokemonEntity,
     board: Board
   ): PokemonEntity | undefined {
-    let farthestTarget: PokemonEntity| undefined = undefined
+    let farthestTarget: PokemonEntity | undefined = undefined
     let maxDistance = 0
 
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
-      if (
-        enemy &&
-        enemy.team !== pokemon.team &&
-        enemy.isTargettable
-      ) {
+      if (enemy && enemy.team !== pokemon.team && enemy.isTargettable) {
         const distance = distanceM(pokemon.positionX, pokemon.positionY, x, y)
-        if(distance > maxDistance){
+        if (distance > maxDistance) {
           farthestTarget = enemy
           maxDistance = distance
         }

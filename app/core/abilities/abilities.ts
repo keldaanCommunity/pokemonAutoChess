@@ -954,8 +954,7 @@ export class LockOnStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const duration = Math.round(3000 * (1 + pokemon.ap / 100))
-    target.status.triggerArmorReduction(duration)
+    pokemon.effects.add(Effect.LOCK_ON)
   }
 }
 
