@@ -5014,10 +5014,10 @@ export class Espeon extends Pokemon {
   def = 1
   speDef = 1
   maxPP = 80
-  range = 2
+  range = 1
   skill = Ability.HAPPY_HOUR
   final = true
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Umbreon extends Pokemon {
@@ -5059,10 +5059,10 @@ export class Sylveon extends Pokemon {
   def = 1
   speDef = 1
   maxPP = 80
-  range = 2
+  range = 1
   skill = Ability.HAPPY_HOUR
   final = true
-  attackSprite = AttackSprite.FAIRY_RANGE
+  attackSprite = AttackSprite.FAIRY_MELEE
 }
 
 export class Glaceon extends Pokemon {
@@ -5074,10 +5074,10 @@ export class Glaceon extends Pokemon {
   def = 1
   speDef = 1
   maxPP = 80
-  range = 2
+  range = 1
   skill = Ability.HAPPY_HOUR
   final = true
-  attackSprite = AttackSprite.ICE_RANGE
+  attackSprite = AttackSprite.ICE_MELEE
 }
 
 export class Volcanion extends Pokemon {

@@ -53,6 +53,7 @@
 - Rework Magic Bounce: now prevents damage and reflect 40 special damage. No longer silence the attacker
 - Buff Maractus: Attack ~~12~~ 15
 - Nerf Gligar/Gliscor HP: ~~160/200~~ 150/180
+- All Eeveelutions are now 1-range
 
 # Changes to Synergies
 
