@@ -1,4 +1,3 @@
-import Jimp from "jimp"
 import {
   MaskCoordinate,
   Mask,
@@ -10,9 +9,8 @@ import {
   DTEF_TILESET_WIDTH
 } from "../types/Config"
 import { pickRandomIn } from "../utils/random"
-import { readFile, readJSONSync, readJsonSync } from "fs-extra"
+import { readJSONSync, readJsonSync } from "fs-extra"
 import { TileMapping } from "./design"
-import { get } from "mongoose"
 
 export type TilesetTiled = {
   image: string

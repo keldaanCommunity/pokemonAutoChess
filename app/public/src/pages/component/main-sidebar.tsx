@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next"
 import { Sidebar, Menu, MenuItem, MenuItemProps } from "react-pro-sidebar"
 import { useAppDispatch, useAppSelector } from "../../hooks"
 import { setSearchedUser } from "../../stores/LobbyStore"
-import { Role, Title } from "../../../../types"
+import { Role } from "../../../../types"
 import { cc } from "../utils/jsx"
 import Booster from "./booster/booster"
 import PokemonCollection from "./collection/pokemon-collection"
@@ -174,22 +174,21 @@ export function MainSidebar(props: MainSidebarProps) {
             <NavLink svg="bot" onClick={() => navigate("/bot-builder")}>
               {t("bot_builder")}
             </NavLink>
-          )}
-
-        {page !== "game" &&
-          (user?.role === Role.ADMIN ||
-            user?.role === Role.MODERATOR ||
-            user?.role === Role.BOT_MANAGER) && (
-            <NavLink svg="bot" onClick={() => navigate("/bot-admin")}>
-              {t("bot_admin")}
-            </NavLink>
-          )}
+          )}   
 
         {page !== "game" &&
           (user?.role === Role.ADMIN || user?.role === Role.MODERATOR) && (
-            <NavLink svg="tooling" onClick={() => navigate("/sprite-debug")}>
-              Debug sprite
-            </NavLink>
+            <>
+              <NavLink
+                svg="pokemon-sprite"
+                onClick={() => navigate("/sprite-viewer")}
+              >
+                Sprite Viewer
+              </NavLink>
+              <NavLink svg="map" onClick={() => navigate("/map-viewer")}>
+                Map Viewer
+              </NavLink>
+            </>
           )}
 
         {page === "game" && (

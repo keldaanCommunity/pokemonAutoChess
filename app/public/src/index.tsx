@@ -7,9 +7,10 @@ import Preparation from "./pages/preparation"
 import Game from "./pages/game"
 import AfterGame from "./pages/after-game"
 import BotBuilder from "./pages/component/bot-builder/bot-builder"
+import MapViewer from "./pages/component/debug/map-viewer"
 import { BotManagerPanel } from "./pages/component/bot-builder/bot-manager-panel"
 import { Provider } from "react-redux"
-import { SpriteDebug } from "./pages/sprite-debug"
+import { SpriteDebug } from "./pages/sprite-viewer"
 import store from "./stores/index"
 import { loadPreferences } from "./preferences"
 
@@ -34,7 +35,8 @@ root.render(
             <Route path="/after" element={<AfterGame />} />
             <Route path="/bot-builder" element={<BotBuilder />} />
             <Route path="/bot-admin" element={<BotManagerPanel />} />
-            <Route path="/sprite-debug" element={<SpriteDebug />} />
+            <Route path="/sprite-viewer" element={<SpriteDebug />} />
+            <Route path="/map-viewer" element={<MapViewer />} />
           </Routes>
         </BrowserRouter>
       </Suspense>
