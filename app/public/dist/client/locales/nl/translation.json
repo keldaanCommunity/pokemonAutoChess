@@ -918,7 +918,7 @@
     "JUDGEMENT": "Brengt [10,SP] speciale schade toe aan het doelwit, vermenigvuldigd met de som van Arceus-synergieniveaus",
     "CHATTER": "Geef [10,SP] SPECIAL aan alle vijanden. Elke vijand heeft [30,SP]% kans om 1 seconde CONFUSION te zijn",
     "STEAM_ERUPTION": "Geeft [80,SP] SPECIAL aan het doelwit en alle aangrenzende vijanden, en BURN ze gedurende 3 seconden",
-    "APPLE_ACID": "Biedt [30,60,120,SP] SPECIAL aan het doelwit en verlaagt zijn DEF en SPE_DEF met 3 punten",
+    "APPLE_ACID": "Biedt [30,60,120,SP] SPECIAL aan het doelwit en verlaagt zijn DEF en SPE_DEF met [5,SP] punten",
     "SACRED_SWORD": "Biedt [90,SP] TRUE aan het doelwit",
     "SHADOW_BALL": "Deelt [45,90,180,SP] SPECIAL uit en verbrandt 15 PP aan het doelwit en aangrenzende vijanden",
     "DIVE": "Duikt onder water en verschijnt weer in het midden van het vijandelijke team, deelt [15,30,60,SP] SPECIAL en FREEZE alle aangrenzende eenheden gedurende 1,5 seconde",

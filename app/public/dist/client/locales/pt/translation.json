@@ -918,7 +918,7 @@
     "JUDGEMENT": "Inflige [10,SP] SPECiAL ao alvo, multiplicado pela soma dos níveis de sinergia de Arceus",
     "CHATTER": "Distribua [10,SP] SPECIAL a todos os inimigos. Todo inimigo tem [30,SP]% de chance de ficar CONFUSION por 1 segundo",
     "STEAM_ERUPTION": "Causa [80,SP] SPECIAL ao alvo e a todos os inimigos adjacentes e BURN-OS por 3 segundos",
-    "APPLE_ACID": "Distribui [30,60,120,SP] SPECIAL ao alvo e reduz sua DEF e SPE_DEF em 3 pontos",
+    "APPLE_ACID": "Distribui [30,60,120,SP] SPECIAL ao alvo e reduz sua DEF e SPE_DEF em [5,SP] pontos",
     "SACRED_SWORD": "Distribui [90,SP] TRUE ao alvo",
     "SHADOW_BALL": "Oferece [45,90,180,SP] SPECIAL e queima 15 de PP para o alvo e inimigos adjacentes",
     "DIVE": "Mergulha na água e reaparece no meio do time inimigo, causando [15,30,60,SP] SPECIAL e FREEZE todas as unidades adjacentes por 1,5 segundo",

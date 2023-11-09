@@ -918,7 +918,7 @@
     "JUDGEMENT": "ターゲットにアルセウスのシナジーレベルの合計を乗じた[10,SP]の特殊ダメージを与える",
     "CHATTER": "敵全体に[10,SP]のSPECIALを与える。すべての敵は[30,SP]%の確率で1秒間混乱状態になります",
     "STEAM_ERUPTION": "ターゲットと隣接する敵全員に[80,SP]のSPECIALを与え、3秒間炎上させる",
-    "APPLE_ACID": "対象に[30,60,120,SP] SPECIAL を与え、DEF と SPE_DEF を3ポイント下げる",
+    "APPLE_ACID": "対象に[30,60,120,SP] SPECIAL を与え、DEF と SPE_DEF を[5,SP]ポイント下げる",
     "SACRED_SWORD": "対象に[90,SP]TRUEを与える",
     "SHADOW_BALL": "[45,90,180,SP] SPECIAL を与え、ターゲットと隣接する敵に 15 PP を燃焼します",
     "DIVE": "水中に潜って敵チームの中央に再出現し、[15,30,60,SP]のSPECIALを与え、隣接するすべてのユニットを1.5秒間フリーズします",

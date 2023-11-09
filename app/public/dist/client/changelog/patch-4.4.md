@@ -28,6 +28,7 @@
 - Unown-T is now TREE: gives 3 random berries
 - Slowbro now needs a King's Rock to evolve to Slowking
 - Pokemons with "tree" status (Sudowoodo, Wobbuffet) cannot be silenced or lose PP until their bar is full
+- Bonsly/Sudowoodo now cast their ability once they reach max PP for the first time
 - Nerf Attack of Ratata and Spearow lines
 - Buff Sharpedo: HP ~~130~~ 150
 - Buff Ultra-Necrozma: change tier to tier 4, get the same stats than Necrozma but with range 3 and Dragon synergy
@@ -52,6 +53,9 @@
 - Buff Diglett/Dugtrio: Def ~~2/4~~ 3/5
 - Rework Magic Bounce: now prevents damage and reflect 40 special damage. No longer silence the attacker
 - Buff Maractus: Attack ~~12~~ 15
+- Nerf Gligar/Gliscor HP: ~~160/200~~ 150/180
+- Buff Applin/Appletun Attack ~~6/16~~ 8/22 ; Apple Acid def/spedef reduction: ~~3~~ 5
+- All Eeveelutions are now 1-range
 
 # Changes to Synergies
 
