@@ -16,7 +16,7 @@ import PreparationRoom from "./rooms/preparation-room"
 import GameRoom from "./rooms/game-room"
 import { Pkm } from "./types/enum/Pokemon"
 import { Item } from "./types/enum/Item"
-import { SynergyTriggers } from "./types/Config"
+import { DungeonPMDO, SynergyTriggers } from "./types/Config"
 import { logger } from "./utils/logger"
 import { connect } from "mongoose"
 import PokemonsStatistics from "./models/mongo-models/pokemons-statistic"
@@ -117,6 +117,7 @@ app.use(express.static(clientSrc))
 
 // set up rate limiter: maximum of five requests per minute
 import rateLimit from "express-rate-limit"
+import { initTilemap } from "./core/design"
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -160,7 +161,11 @@ app.get("/bot-admin", (req, res) => {
   res.sendFile(viewsSrc)
 })
 
-app.get("/sprite-debug", (req, res) => {
+app.get("/sprite-viewer", (req, res) => {
+  res.sendFile(viewsSrc)
+})
+
+app.get("/map-viewer", (req, res) => {
   res.sendFile(viewsSrc)
 })
 
@@ -202,6 +207,11 @@ app.get("/meta/items", async (req, res) => {
 
 app.get("/meta/pokemons", async (req, res) => {
   res.send(await PokemonsStatistics.find())
+})
+
+app.get("/tilemap/:map", async (req, res) => {
+  const tilemap = initTilemap(req.params.map as DungeonPMDO)
+  res.send(tilemap)
 })
 
 const basicAuthMiddleware = basicAuth({

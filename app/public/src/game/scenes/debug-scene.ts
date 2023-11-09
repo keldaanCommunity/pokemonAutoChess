@@ -1,5 +1,7 @@
+import { DesignTiled } from "../../../../core/design"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { AnimationType } from "../../../../types/Animation"
+import { DungeonPMDO } from "../../../../types/Config"
 import { Orientation } from "../../../../types/enum/Game"
 import { Pkm } from "../../../../types/enum/Pokemon"
 import { Status } from "../../../../types/enum/Status"
@@ -17,6 +19,8 @@ export class DebugScene extends Phaser.Scene {
   onComplete: () => void
   pokemon?: Pokemon
   uid = "debug"
+  tilemap: DesignTiled | undefined
+  map: Phaser.Tilemaps.Tilemap | undefined
 
   constructor(
     height: number,
@@ -37,7 +41,7 @@ export class DebugScene extends Phaser.Scene {
     this.load.on("progress", (value: number) => {
       this.onProgress(value)
     })
-    this.load.on("complete", () => {
+    this.load.once("complete", () => {
       this.animationManager = new AnimationManager(this)
       this.onComplete()
     })
@@ -45,7 +49,7 @@ export class DebugScene extends Phaser.Scene {
 
   create() {}
 
-  updateScene(
+  updateSprite(
     pkm: Pkm,
     orientation: Orientation,
     animationType: AnimationType,
@@ -75,6 +79,45 @@ export class DebugScene extends Phaser.Scene {
       }
     }
     this.applyStatusAnimation(status)
+  }
+
+  updateMap(mapName: DungeonPMDO): Promise<void> {
+    if (this.map) this.map.destroy()
+
+    console.log("updateMap", mapName)
+    return fetch(`/tilemap/${mapName}`)
+      .then((res) => res.json())
+      .then((tilemap: DesignTiled) => {
+        console.log("tilemap loaded", tilemap)
+        this.tilemap = tilemap
+        return new Promise((resolve) => {
+          this.load.reset()
+          tilemap.tilesets.forEach((t) => {
+            console.log(`loading tileset ${t.image}`)
+            this.load.image(
+              mapName + "/" + t.name,
+              "/assets/tilesets/" + mapName + "/" + t.image
+            )
+          })
+          this.load.tilemapTiledJSON("map", tilemap)
+          this.load.once("complete", resolve)
+          this.load.start()
+        })
+      })
+      .then(() => {
+        console.log("making map")
+        const map = this.make.tilemap({ key: "map" })
+        this.map = map
+        this.tilemap!.layers.forEach((layer) => {
+          const tileset = map.addTilesetImage(
+            layer.name,
+            mapName + "/" + layer.name
+          )!
+          map.createLayer(layer.name, tileset, 0, 0)!.setScale(2, 2)
+        })
+        ;(this.sys as any).animatedTiles.init(map)
+        console.log("finished")
+      })
   }
 
   applyStatusAnimation(status: Status | "") {
@@ -138,7 +181,7 @@ export class DebugScene extends Phaser.Scene {
       if (status == Status.CHARM) {
         this.pokemon.addCharm()
       }
-      if(status === Status.FLINCH){
+      if (status === Status.FLINCH) {
         this.pokemon.addFlinch()
       }
       if (status == Status.RUNE_PROTECT) {
