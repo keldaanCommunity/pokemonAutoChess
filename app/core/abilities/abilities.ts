@@ -3027,8 +3027,8 @@ export class AppleAcidStrategy extends AbilityStrategy {
       default:
         break
     }
-    target.addDefense(-3, true)
-    target.addSpecialDefense(-3, true)
+    target.addDefense(-5, true)
+    target.addSpecialDefense(-5, true)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
@@ -6202,7 +6202,12 @@ export class EmptyLightStrategy extends AbilityStrategy {
         affectedTargetsIds.push(tg.id)
         const cells = board.getAdjacentCells(tg.positionX, tg.positionY)
         tg = cells
-          .filter((v) => v.value && v.value.team !== pokemon.team && !affectedTargetsIds.includes(v.value.id))
+          .filter(
+            (v) =>
+              v.value &&
+              v.value.team !== pokemon.team &&
+              !affectedTargetsIds.includes(v.value.id)
+          )
           .map((v) => v.value)[0]
       } else {
         break

@@ -5014,10 +5014,10 @@ export class Espeon extends Pokemon {
   def = 1
   speDef = 1
   maxPP = 80
-  range = 2
+  range = 1
   skill = Ability.HAPPY_HOUR
   final = true
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Umbreon extends Pokemon {
@@ -5059,10 +5059,10 @@ export class Sylveon extends Pokemon {
   def = 1
   speDef = 1
   maxPP = 80
-  range = 2
+  range = 1
   skill = Ability.HAPPY_HOUR
   final = true
-  attackSprite = AttackSprite.FAIRY_RANGE
+  attackSprite = AttackSprite.FAIRY_MELEE
 }
 
 export class Glaceon extends Pokemon {
@@ -5074,10 +5074,10 @@ export class Glaceon extends Pokemon {
   def = 1
   speDef = 1
   maxPP = 80
-  range = 2
+  range = 1
   skill = Ability.HAPPY_HOUR
   final = true
-  attackSprite = AttackSprite.ICE_RANGE
+  attackSprite = AttackSprite.ICE_MELEE
 }
 
 export class Volcanion extends Pokemon {
@@ -6221,7 +6221,7 @@ export class Gligar extends Pokemon {
   stars = 3
   evolution = Pkm.GLISCOR
   evolutionRule = new ItemEvolutionRule([Item.RAZOR_FANG])
-  hp = 160
+  hp = 150
   atk = 16
   def = 3
   speDef = 3
@@ -6240,7 +6240,7 @@ export class Gliscor extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 4
-  hp = 200
+  hp = 180
   atk = 20
   def = 4
   speDef = 4
@@ -8123,7 +8123,7 @@ export class Applin extends Pokemon {
   stars = 1
   evolution = Pkm.APPLETUN
   hp = 130
-  atk = 6
+  atk = 8
   def = 5
   speDef = 2
   maxPP = 85
@@ -8138,7 +8138,7 @@ export class Appletun extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   hp = 250
-  atk = 16
+  atk = 22
   def = 8
   speDef = 6
   maxPP = 85
