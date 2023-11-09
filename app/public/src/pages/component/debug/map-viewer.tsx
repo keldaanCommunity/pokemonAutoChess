@@ -3,7 +3,6 @@ import Phaser from "phaser"
 import { DebugScene } from "../../../game/scenes/debug-scene"
 import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
 import { DungeonPMDO } from "../../../../../types/Config"
-import "./map-viewer.css"
 import "./debug-scene.css"
 
 export default function MapViewerContainer() {

@@ -174,16 +174,7 @@ export function MainSidebar(props: MainSidebarProps) {
             <NavLink svg="bot" onClick={() => navigate("/bot-builder")}>
               {t("bot_builder")}
             </NavLink>
-          )}
-
-        {page !== "game" &&
-          (user?.role === Role.ADMIN ||
-            user?.role === Role.MODERATOR ||
-            user?.role === Role.BOT_MANAGER) && (
-            <NavLink svg="bot" onClick={() => navigate("/bot-admin")}>
-              {t("bot_admin")}
-            </NavLink>
-          )}
+          )}   
 
         {page !== "game" &&
           (user?.role === Role.ADMIN || user?.role === Role.MODERATOR) && (
