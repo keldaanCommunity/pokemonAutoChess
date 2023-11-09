@@ -9,3 +9,11 @@
   color: white;
   background-color: black;
 }
+
+#debug-scene-controls {
+  position: fixed;
+  top: 1em;
+  right: 1em;
+  background-color: black;
+  color: white;
+}

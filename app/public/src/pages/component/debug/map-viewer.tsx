@@ -1,43 +1,31 @@
 import React, { useCallback, useEffect, useRef, useState } from "react"
 import Phaser from "phaser"
 import { DebugScene } from "../../../game/scenes/debug-scene"
-import { Pkm } from "../../../../../types/enum/Pokemon"
 import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
-import { Orientation } from "../../../../../types/enum/Game"
-import { Status } from "../../../../../types/enum/Status"
+import { DungeonPMDO } from "../../../../../types/Config"
 import "./debug-scene.css"
-import { AnimationType } from "../../../../../types/Animation"
 
-export default function DebugSceneContainer({
-  pkm = Pkm.RATTATA,
-  orientation = Orientation.DOWNLEFT,
-  animationType = AnimationType.Idle,
-  status,
-  height = 100,
-  width = 100
-}: {
-  pkm?: Pkm
-  orientation?: Orientation
-  animationType?: AnimationType
-  status: Status | ""
-  height?: number
-  width?: number
-}) {
+export default function MapViewerContainer() {
   const gameRef = useRef<Phaser.Game>()
   const debugScene = useRef<DebugScene>()
+
+  const width = 1950
+  const height = 1000
 
   const initialized = useRef<boolean>(false)
   const [loaded, setLoaded] = useState<boolean>(false)
 
   const [statusMessage, setStatusMessage] = useState<string>("")
+  const maps = Object.values(DungeonPMDO)
+  const [map, setMap] = useState<DungeonPMDO>(maps[0])
 
   const onProgress = () =>
     setStatusMessage(debugScene?.current?.loadingManager?.statusMessage ?? "")
 
   const onComplete = useCallback(() => {
-    setLoaded(true)
-    debugScene.current?.updateSprite(pkm, orientation, animationType, status)
-  }, [animationType, orientation, pkm, status])
+    setStatusMessage("Loading map...")
+    debugScene.current?.updateMap(map).then(() => setLoaded(true))
+  }, [map])
 
   useEffect(() => {
     if (!initialized.current) {
@@ -50,6 +38,11 @@ export default function DebugSceneContainer({
         pixelArt: true,
         width,
         height,
+        scale: { mode: Phaser.Scale.FIT },
+        dom: {
+          createContainer: true
+        },
+        disableContextMenu: true,
         scene: [debugScene.current],
         backgroundColor: "#61738a",
         plugins: {
@@ -67,13 +60,24 @@ export default function DebugSceneContainer({
 
   useEffect(() => {
     if (initialized.current === true && loaded === true) {
-      debugScene.current?.updateSprite(pkm, orientation, animationType, status)
+      debugScene.current?.updateMap(map)
     }
-  }, [pkm, orientation, animationType, status, loaded])
+  }, [map])
 
   return (
     <div id="debug-scene">
       {!loaded && <p id="status-message">{statusMessage}</p>}
+      <div id="debug-scene-controls">
+        <select
+          onChange={(event) => setMap(event?.target.value as DungeonPMDO)}
+        >
+          {maps.map((m) => (
+            <option key={m} value={m}>
+              {m}
+            </option>
+          ))}
+        </select>
+      </div>
     </div>
   )
 }

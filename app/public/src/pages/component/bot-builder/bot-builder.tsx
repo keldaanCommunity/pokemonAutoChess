@@ -9,7 +9,7 @@ import {
 } from "../../../../../models/mongo-models/bot-v2"
 import { useAppSelector, useAppDispatch } from "../../../hooks"
 import { requestBotData, requestBotList } from "../../../stores/NetworkStore"
-import { ModalMode, PkmWithConfig } from "../../../../../types"
+import { ModalMode, PkmWithConfig, Role } from "../../../../../types"
 import {
   DEFAULT_BOT_STATE,
   estimateElo,
@@ -171,6 +171,8 @@ export default function BotBuilder() {
     [board, currentStage]
   )
 
+  const user = useAppSelector((state) => state.lobby.user)
+
   useEffect(() => {
     setViolation(undefined)
     try {
@@ -189,6 +191,13 @@ export default function BotBuilder() {
           {t("back_to_lobby")}
         </button>
         <div className="spacer"></div>
+        {(user?.role === Role.ADMIN ||
+          user?.role === Role.MODERATOR ||
+          user?.role === Role.BOT_MANAGER) && (
+          <button onClick={() => navigate("/bot-admin")} className="bubbly red">
+            {t("bot_admin")}
+          </button>
+        )}
         <button
           onClick={() => {
             setModalMode(ModalMode.IMPORT)

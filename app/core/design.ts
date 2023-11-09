@@ -243,3 +243,10 @@ export default class Design {
     } as DesignTiled
   }
 }
+
+export function initTilemap(mapName: DungeonPMDO): DesignTiled {
+  const design = new Design(mapName, 5, 0.1)
+  design.create()
+  const tilemap = design.exportToTiled()
+  return tilemap
+}

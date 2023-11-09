@@ -11,7 +11,7 @@ import { Orientation } from "../../../types/enum/Game"
 import { Status } from "../../../types/enum/Status"
 import { AnimationType } from "../../../types/Animation"
 
-import "./sprite-debug.css"
+import "./sprite-viewer.css"
 
 export function SpriteDebug() {
   const navigate = useNavigate()
@@ -25,14 +25,14 @@ export function SpriteDebug() {
   const [status, setStatus] = useState<Status | "">("")
 
   return (
-    <div className="sprite-debug-root">
+    <div className="sprite-viewer-root">
       <MainSidebar
         page="main_lobby"
         leave={() => navigate("/lobby")}
         leaveLabel={t("back_to_lobby")}
       />
-      <div className="sprite-debug-container">
-        <div className="sprite-debug-toolbar">
+      <div className="sprite-viewer-container">
+        <div className="sprite-viewer-toolbar">
           <div className="nes-container">
             <label htmlFor="pokemon-typeahead">Pokemon</label>
             <PokemonTypeahead
@@ -46,9 +46,9 @@ export function SpriteDebug() {
             />
           </div>
           <div className="nes-container">
-            <label htmlFor="sprite-debug-orientation">Orientation</label>
+            <label htmlFor="sprite-viewer-orientation">Orientation</label>
             <select
-              id="sprite-debug-orientation"
+              id="sprite-viewer-orientation"
               value={orientation}
               onChange={(e) =>
                 setOrientation(e.currentTarget.value as Orientation)
@@ -62,9 +62,9 @@ export function SpriteDebug() {
             </select>
           </div>
           <div className="nes-container">
-            <label htmlFor="sprite-debug-anim-type">Anim type</label>
+            <label htmlFor="sprite-viewer-anim-type">Anim type</label>
             <select
-              id="sprite-debug-anim-type"
+              id="sprite-viewer-anim-type"
               value={animationType}
               onChange={(e) =>
                 setAnimType(e.currentTarget.value as AnimationType)
@@ -81,9 +81,9 @@ export function SpriteDebug() {
             </select>
           </div>
           <div className="nes-container">
-            <label htmlFor="sprite-debug-status">Status</label>
+            <label htmlFor="sprite-viewer-status">Status</label>
             <select
-              id="sprite-debug-status"
+              id="sprite-viewer-status"
               value={status}
               onChange={(e) => setStatus(e.currentTarget.value as Status)}
             >
@@ -96,7 +96,7 @@ export function SpriteDebug() {
             </select>
           </div>
         </div>
-        <div className="sprite-debug-sprite">
+        <div className="sprite-viewer-sprite">
           <DebugScene
             pkm={pkm}
             orientation={orientation}

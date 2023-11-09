@@ -2,7 +2,7 @@ import Player from "../../models/colyseus-models/player"
 import { PokemonAvatarModel } from "../../models/colyseus-models/pokemon-avatar"
 import { FloatingItem } from "../../models/colyseus-models/floating-item"
 import Shop from "../../models/shop"
-import Design, { DesignTiled } from "../../core/design"
+import { DesignTiled, initTilemap } from "../../core/design"
 import BotManager from "../../core/bot-manager"
 import {
   Dungeon,
@@ -25,7 +25,6 @@ import { pickRandomIn, randomBetween } from "../../utils/random"
 import { Portal, SynergySymbol } from "../../models/colyseus-models/portal"
 import Simulation from "../../core/simulation"
 import { Item } from "../../types/enum/Item"
-import { writeFile, writeFileSync } from "fs-extra"
 
 export default class GameState extends Schema {
   @type("string") afterGameId = ""
@@ -53,7 +52,6 @@ export default class GameState extends Schema {
   botManager: BotManager = new BotManager()
   shop: Shop = new Shop()
   id: DungeonPMDO
-  design: Design
   tilemap: DesignTiled | undefined
   gameFinished = false
   gameLoaded = false
@@ -78,9 +76,7 @@ export default class GameState extends Schema {
     this.noElo = noElo
     this.mapName = this.id
     this.mapMusic = pickRandomIn(Object.keys(Dungeon) as Dungeon[])
-    this.weather = Weather.NEUTRAL
-    this.design = new Design(this.id, 5, 0.1)
-    this.design.create()
-    this.tilemap = this.design.exportToTiled()
+    this.weather = Weather.NEUTRAL    
+    this.tilemap = initTilemap(this.id)
   }
 }
