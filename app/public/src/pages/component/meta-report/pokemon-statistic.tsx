@@ -17,7 +17,12 @@ export default function PokemonStatistic(props: {
 }) {
   const { t } = useTranslation()
 
-  const families = new Map<Pkm, IPokemonsStatistic[]>()
+  type FamilyStats = {
+    pokemons: IPokemonsStatistic[]
+    totalCount?: number
+    averageRank?: number | null
+  }
+  const families = new Map<Pkm, FamilyStats>()
 
   const filteredPokemons = props.pokemons
     .filter((v) =>
@@ -33,21 +38,24 @@ export default function PokemonStatistic(props: {
   filteredPokemons.forEach((pokemon) => {
     const family = families.get(PkmFamily[pokemon.name])
     if (family) {
-      family.push(pokemon)
+      family.pokemons.push(pokemon)
     } else {
-      families.set(PkmFamily[pokemon.name], [pokemon])
+      families.set(PkmFamily[pokemon.name], { pokemons: [pokemon] })
     }
   })
   families.forEach((family) => {
-    family.sort((a, b) => STARS[a.name] - STARS[b.name])
+    family.pokemons.sort((a, b) => STARS[a.name] - STARS[b.name])
+    family.totalCount = family.pokemons.reduce(
+      (prev, curr) => prev + curr.count,
+      0
+    )
+    family.averageRank = computeAverageRank(family.pokemons)
   })
 
   const familiesArray = Array.from(families).sort((a, b) =>
     props.rankingBy === "count"
-      ? b[1].reduce((prev, curr) => prev + curr.count, 0) -
-        a[1].reduce((prev, curr) => prev + curr.count, 0)
-      : a[1].reduce((prev, curr) => prev + curr.rank, 0) / a[1].length -
-        b[1].reduce((prev, curr) => prev + curr.rank, 0) / b[1].length
+      ? b[1].totalCount! - a[1].totalCount!
+      : (a[1].averageRank ?? 9) - (b[1].averageRank ?? 9)
   )
 
   if (filteredPokemons.length === 0) {
@@ -55,7 +63,7 @@ export default function PokemonStatistic(props: {
   }
   return (
     <div style={{ height: "calc(90vh - 8em)", overflowY: "scroll" }}>
-      {familiesArray.map(([pkm, pokemons], i) => (
+      {familiesArray.map(([pkm, family], i) => (
         <div key={pkm} className="nes-container pokemon-family-stat">
           <span className="rank">{i + 1}</span>
 
@@ -66,7 +74,7 @@ export default function PokemonStatistic(props: {
               justifyContent: "space-between"
             }}
           >
-            {pokemons.map((pokemon, i) => (
+            {family.pokemons.map((pokemon, i) => (
               <li key={pokemon.name}>
                 <img
                   className="pokemon-portrait"
@@ -78,12 +86,12 @@ export default function PokemonStatistic(props: {
           </ul>
 
           <span style={{ fontSize: "150%" }}>
-            {t("average_place")} {computeAverageRank(pokemons)}
+            {t("average_place")}{" "}
+            {family.averageRank ? family.averageRank.toFixed(1) : "???"}
           </span>
 
           <span style={{ fontSize: "150%" }}>
-            <label>{t("count")}:</label>{" "}
-            {pokemons.reduce((prev, curr) => prev + curr.count, 0)}
+            <label>{t("count")}:</label> {family.totalCount}
           </span>
 
           <ul
@@ -93,7 +101,7 @@ export default function PokemonStatistic(props: {
               justifyContent: "space-between"
             }}
           >
-            {pokemons.map((pokemon) => (
+            {family.pokemons.map((pokemon) => (
               <li
                 key={pokemon.name}
                 style={{
@@ -134,11 +142,13 @@ export default function PokemonStatistic(props: {
   )
 }
 
-function computeAverageRank(pokemons: IPokemonsStatistic[]): string {
+function computeAverageRank(pokemons: IPokemonsStatistic[]): number | null {
   const pokemonsPlayedAtLeastOnce = pokemons.filter((p) => p.count > 0)
-  if (pokemonsPlayedAtLeastOnce.length === 0) return "???"
+  if (pokemonsPlayedAtLeastOnce.length === 0) return null
   return (
-    pokemonsPlayedAtLeastOnce.reduce((prev, curr) => prev + curr.rank, 0) /
-    pokemonsPlayedAtLeastOnce.length
-  ).toFixed(1)
+    pokemonsPlayedAtLeastOnce.reduce(
+      (prev, curr) => prev + curr.rank * curr.count,
+      0
+    ) / pokemonsPlayedAtLeastOnce.reduce((prev, curr) => prev + curr.count, 0)
+  )
 }
