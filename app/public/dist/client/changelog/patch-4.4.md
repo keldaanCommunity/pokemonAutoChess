@@ -30,6 +30,7 @@
 - Pokemons with "tree" status (Sudowoodo, Wobbuffet) cannot be silenced or lose PP until their bar is full
 - Bonsly/Sudowoodo now cast their ability once they reach max PP for the first time
 - Nerf Attack of Ratata and Spearow lines
+- Nerf Castform rain: PP gain ~~20~~ 10
 - Buff Sharpedo: HP ~~130~~ 150
 - Buff Ultra-Necrozma: change tier to tier 4, get the same stats than Necrozma but with range 3 and Dragon synergy
 - Nerf Uxie: PP ~~65~~ 80
@@ -56,6 +57,10 @@
 - Nerf Gligar/Gliscor HP: ~~160/200~~ 150/180
 - Buff Applin/Appletun Attack ~~6/16~~ 8/22 ; Apple Acid def/spedef reduction: ~~3~~ 5
 - All Eeveelutions are now 1-range
+- Rework Shell trap (Shuckle): after the next Physical damage received, the trap explodes and deal [100,SP] damage to adjacent enemies
+- Changed Shuckle PP ~~70~~ 100
+- Buff Triple kick (Hitmontop) ~~50~~ 60 special damage
+- Buff Iron Defense (Stakataka) ~~10/20/50~~ ~~20/40/80~~ shield
 
 # Changes to Synergies
 

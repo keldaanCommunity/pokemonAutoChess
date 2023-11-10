@@ -10,7 +10,13 @@ import { Schema, type, SetSchema } from "@colyseus/schema"
 import { AbilityStrategies } from "./abilities/abilities"
 import Board from "./board"
 import PokemonState from "./pokemon-state"
-import { IPokemonEntity, IPokemon, Emotion, AttackSprite } from "../types"
+import {
+  IPokemonEntity,
+  IPokemon,
+  Emotion,
+  AttackSprite,
+  Transfer
+} from "../types"
 import { AttackType, Rarity } from "../types/enum/Game"
 import { Effect } from "../types/enum/Effect"
 import { Ability } from "../types/enum/Ability"
@@ -503,11 +509,17 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   onHit({
     target,
     board,
-    totalTakenDamage
+    totalTakenDamage,
+    physicalDamage,
+    specialDamage,
+    trueDamage
   }: {
     target: PokemonEntity
     board: Board
     totalTakenDamage: number
+    physicalDamage: number
+    specialDamage: number
+    trueDamage: number
   }) {
     // Item effects on hit
 
@@ -623,6 +635,33 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       })
     }
 
+    if (target.effects.has(Effect.SHELL_TRAP) && physicalDamage > 0) {
+      const cells = board.getAdjacentCells(target.positionX, target.positionY)
+      const crit =
+        target.items.has(Item.REAPER_CLOTH) && chance(target.critChance)
+      target.effects.delete(Effect.SHELL_TRAP)
+      this.simulation.room.broadcast(Transfer.ABILITY, {
+        id: this.simulation.id,
+        skill: "SHELL_TRAP_trigger",
+        positionX: target.positionX,
+        positionY: target.positionX,
+        orientation: target.orientation
+      })
+      cells.forEach((cell) => {
+        if (cell.value && cell.value.team !== target.team) {
+          cell.value.handleSpecialDamage(
+            100,
+            board,
+            AttackType.SPECIAL,
+            target,
+            crit,
+            true
+          )
+        }
+      })
+    }
+
+    // Berries trigger
     const berry = values(this.items).find((item) => Berries.includes(item))
     if (this.life < 0.5 * this.hp && berry) {
       let berryEaten = false

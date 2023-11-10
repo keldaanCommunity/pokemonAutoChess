@@ -1747,7 +1747,7 @@ export default class AnimationManager {
         zeroPad: 3
       }),
       duration: 1000,
-      repeat: 1
+      repeat: 0
     })
 
     this.game.anims.create({
