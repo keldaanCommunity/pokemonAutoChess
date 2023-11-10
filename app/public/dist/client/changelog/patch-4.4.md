@@ -60,6 +60,7 @@
 - Rework Shell trap (Shuckle): after the next Physical damage received, the trap explodes and deal [100,SP] damage to adjacent enemies
 - Changed Shuckle PP ~~70~~ 100
 - Buff Triple kick (Hitmontop) ~~50~~ 60 special damage
+- Buff Iron Defense (Stakataka) ~~10/20/50~~ ~~20/40/80~~ shield
 
 # Changes to Synergies
 

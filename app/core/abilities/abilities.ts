@@ -2689,7 +2689,7 @@ export class IronDefenseStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const shield = [10, 20, 50][pokemon.stars - 1] ?? 50
+    const shield = [20, 40, 80][pokemon.stars - 1] ?? 80
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (ally && pokemon.team == ally.team && y === pokemon.positionY) {
         ally.addShield(shield, pokemon, true)
