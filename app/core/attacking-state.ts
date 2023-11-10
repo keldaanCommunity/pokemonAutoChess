@@ -189,8 +189,8 @@ export default class AttackingState extends PokemonState {
       if (pokemon.items.has(Item.RED_ORB) && target) {
         trueDamagePart += 0.25
       }
-      if(pokemon.effects.has(Effect.LOCK_ON) && target) {
-        trueDamagePart += 1.0 + (pokemon.ap / 100)
+      if (pokemon.effects.has(Effect.LOCK_ON) && target) {
+        trueDamagePart += 1.0 + pokemon.ap / 100
         target.status.triggerArmorReduction(3000)
         pokemon.effects.delete(Effect.LOCK_ON)
       }
@@ -244,7 +244,14 @@ export default class AttackingState extends PokemonState {
         totalDamage
       })
       if (isAttackSuccessful) {
-        pokemon.onHit({ target, board, totalTakenDamage })
+        pokemon.onHit({
+          target,
+          board,
+          totalTakenDamage,
+          physicalDamage,
+          specialDamage,
+          trueDamage
+        })
       }
     }
   }

@@ -2689,7 +2689,7 @@ export class IronDefenseStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const shield = [10, 20, 50][pokemon.stars - 1] ?? 50
+    const shield = [20, 40, 80][pokemon.stars - 1] ?? 80
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (ally && pokemon.team == ally.team && y === pokemon.positionY) {
         ally.addShield(shield, pokemon, true)
@@ -4191,7 +4191,7 @@ export class ForecastStrategy extends AbilityStrategy {
           p.addAttack(3, true)
         }
         if (pokemon.name === Pkm.CASTFORM_RAIN) {
-          p.addPP(Math.round(20 * (1 + pokemon.ap / 100)))
+          p.addPP(Math.round(10 * (1 + pokemon.ap / 100)))
         }
         if (pokemon.name === Pkm.CASTFORM_HAIL) {
           p.addDefense(2, true)
@@ -4256,7 +4256,7 @@ export class TripleKickStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = 50
+    const damage = 60
 
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
     let count = 0
@@ -4269,7 +4269,8 @@ export class TripleKickStrategy extends AbilityStrategy {
             board,
             AttackType.SPECIAL,
             pokemon,
-            crit
+            crit,
+            true
           )
         }
       }
@@ -4422,17 +4423,7 @@ export class ShellTrapStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    target.status.triggerSilence(3000, target, pokemon, board)
-    const ppBurn = Math.round(40 * (1 + pokemon.ap / 100))
-    target.addPP(-ppBurn)
-
-    const cells = board.getAdjacentCells(target.positionX, target.positionY)
-
-    cells.forEach((cell) => {
-      if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.addPP(-ppBurn)
-      }
-    })
+    pokemon.effects.add(Effect.SHELL_TRAP)
   }
 }
 

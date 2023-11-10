@@ -9746,7 +9746,7 @@ export class Shuckle extends Pokemon {
   atk = 4
   def = 15
   speDef = 15
-  maxPP = 70
+  maxPP = 100
   range = 1
   skill = Ability.SHELL_TRAP
   final = true
