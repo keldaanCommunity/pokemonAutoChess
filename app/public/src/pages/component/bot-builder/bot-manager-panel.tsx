@@ -12,6 +12,7 @@ import { joinLobbyRoom } from "../../lobby"
 import { Navigate, useNavigate } from "react-router-dom"
 import { rewriteBotRoundsRequiredto1, validateBot } from "./bot-logic"
 import { logger } from "../../../../../utils/logger"
+import "./bot-manager-panel.css"
 
 export function BotManagerPanel() {
   const dispatch = useAppDispatch()
@@ -34,16 +35,7 @@ export function BotManagerPanel() {
   }
 
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "1fr 400px",
-        height: "100vh",
-        gap: "1em",
-        padding: "1em",
-        color: "white"
-      }}
-    >
+    <div id="bot-manager-panel">
       <BotsList />
       <BotLoader />
     </div>
@@ -61,24 +53,17 @@ function BotsList() {
   }
 
   return (
-    <main
-      className="nes-container"
-      style={{
-        display: "flex",
-        flexFlow: "column",
-        alignItems: "center",
-        overflow: "scroll"
-      }}
-    >
+    <main id="bots-list" className="nes-container">
       {bots.length === 0 ? (
         <p>Loading...</p>
       ) : (
         <table>
-          <thead style={{ borderBottom: "4px solid white" }}>
+          <thead>
             <tr>
               <th>Avatar</th>
               <th>Name</th>
               <th>Author</th>
+              <th>Elo</th>
               <th>UID</th>
               <th>Validity</th>
               <th>Actions</th>
@@ -91,11 +76,11 @@ function BotsList() {
                   <img
                     src={getAvatarSrc(b.avatar)}
                     className="pokemon-portrait"
-                    style={{ margin: "0 1em" }}
                   />
                 </td>
                 <td>{t(`pkm.${b.name}`)}</td>
                 <td>{b.author}</td>
+                <td>{b.elo}</td>
                 <td style={{ color: "#999", fontSize: "80%" }}>{b.id}</td>
                 <td>
                   {(() => {

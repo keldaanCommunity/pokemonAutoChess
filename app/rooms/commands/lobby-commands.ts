@@ -999,6 +999,7 @@ export function createBotList(
     avatar: bot.avatar,
     id: bot.id,
     author: bot.author,
+    elo: bot.elo,
     ...(options.withSteps ? { steps: bot.steps } : {})
   }))
 }
