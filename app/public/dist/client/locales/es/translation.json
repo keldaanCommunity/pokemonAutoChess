@@ -954,7 +954,7 @@
     "HEX": "Otorga [20,40,80,SP] SPECIAL al objetivo. Duplica el daño si el objetivo está BURN, CONFUSION, FREEZE, PARALYSIS, POISON, SILENCE, SLEEP o WOUND",
     "GROWTH": "Aumenta el tamaño del cuerpo y el ATK en [10,SP]. Crece el doble de rápido si el clima es soleado",
     "HEAL_ORDER": "Otorga [25,45,65,SP] SPECIAL a los enemigos adyacentes y cura [25,45,65,SP] a los aliados adyacentes",
-    "SHELL_TRAP": "SILENCE al objetivo durante 3 segundos y elimina [40,SP] PP del objetivo y los enemigos a su alrededor",
+    "SHELL_TRAP": "Después del siguiente PHYSICAL recibido, la trampa explota y reparte [100,SP] SPECIAL a los enemigos adyacentes.",
     "DIG": "Excava bajo tierra y reaparece junto al enemigo más lejano, infligiendo [10,20,40,SP] SPECIAL a todos los enemigos en el camino",
     "FIRE_SPIN": "Ataque de área de efecto que inflige [20,40,100,SP] SPECIAL alrededor del objetivo y BURN a todos los enemigos golpeados durante 3 segundos",
     "SEARING_SHOT": "Un infierno de llamas escarlatas incendia todo alrededor del usuario. Otorga [40,SP] SPECIAL y QUEMA durante 3 segundos a todos los enemigos dentro de 2 mosaicos de Victini.",

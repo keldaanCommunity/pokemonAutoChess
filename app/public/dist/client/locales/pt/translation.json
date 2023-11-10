@@ -954,7 +954,7 @@
     "HEX": "Distribui [20,40,80,SP] SPECIAL ao alvo. Dobra o dano se o alvo for BURN, CONFUSION, FREEZE, PARALYSIS, POISON, SILENCE, SLEEP ou WOUND",
     "GROWTH": "Aumente o tamanho do corpo e o ATK em [10,SP]. Cresce duas vezes mais rápido se o tempo estiver ensolarado",
     "HEAL_ORDER": "Oferece [25,45,65,SP] SPECIAL a inimigos adjacentes e cura [25,45,65,SP] a aliados adjacentes",
-    "SHELL_TRAP": "SILENCE o alvo por 3 segundos e remove [40,SP] de PP do alvo e dos inimigos ao seu redor",
+    "SHELL_TRAP": "Após o próximo PHYSICAL recebido, a armadilha explode e distribui [100,SP] SPECIAL para inimigos adjacentes",
     "DIG": "Cava no subsolo e reaparece ao lado do inimigo mais distante, causando [10,20,40,SP] SPECIAL a todos os inimigos no caminho",
     "FIRE_SPIN": "Ataque de área de efeito que causa [20,40,100,SP] SPECIAL ao redor do alvo e BURN todos os inimigos atingidos por 3 segundos",
     "SEARING_SHOT": "Um inferno de chamas escarlates incendeia tudo ao redor do usuário. Causa [40,SP] SPECIAL e BURN por 3 segundos todos os inimigos a 2 quadrados de Victini.",

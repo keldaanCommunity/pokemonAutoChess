@@ -4422,17 +4422,7 @@ export class ShellTrapStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    target.status.triggerSilence(3000, target, pokemon, board)
-    const ppBurn = Math.round(40 * (1 + pokemon.ap / 100))
-    target.addPP(-ppBurn)
-
-    const cells = board.getAdjacentCells(target.positionX, target.positionY)
-
-    cells.forEach((cell) => {
-      if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.addPP(-ppBurn)
-      }
-    })
+    pokemon.effects.add(Effect.SHELL_TRAP)
   }
 }
 

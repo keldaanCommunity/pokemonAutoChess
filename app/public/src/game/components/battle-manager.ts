@@ -3837,8 +3837,12 @@ export default class BattleManager {
             )
             break
 
-          case Ability.SHELL_TRAP:
-            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
+          case "SHELL_TRAP_trigger":
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],

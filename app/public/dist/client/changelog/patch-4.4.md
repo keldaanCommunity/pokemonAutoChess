@@ -57,6 +57,8 @@
 - Nerf Gligar/Gliscor HP: ~~160/200~~ 150/180
 - Buff Applin/Appletun Attack ~~6/16~~ 8/22 ; Apple Acid def/spedef reduction: ~~3~~ 5
 - All Eeveelutions are now 1-range
+- Rework Shell trap (Shuckle): after the next Physical damage received, the trap explodes and deal [100,SP] damage to adjacent enemies
+- Changed Shuckle PP ~~70~~ 100
 
 # Changes to Synergies
 

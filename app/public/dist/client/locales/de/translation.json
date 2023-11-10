@@ -953,7 +953,7 @@
     "HEX": "Fügt dem Ziel [20,40,80,SP] SPECIAL zu. Verdoppelt den Schaden, wenn das Ziel BURN, CONFUSION, FREEZE, PARALYSIS, POISON, SILENCE, SLEEP oder WOUND ist",
     "GROWTH": "Erhöhe Körpergröße und ATK um [10,SP]. Wächst bei sonnigem Wetter doppelt so schnell",
     "HEAL_ORDER": "Fügt benachbarten Feinden [25,45,65,SP] SPECIAL zu und heilt benachbarte Verbündete um [25,45,65,SP].",
-    "SHELL_TRAP": "Bringt das Ziel 3 Sekunden lang zum Schweigen und entfernt [40,SP] PP vom Ziel und den umliegenden Feinden",
+    "SHELL_TRAP": "Nach dem nächsten empfangenen PHYSICAL explodiert die Falle und fügt benachbarten Feinden [100,SP] SPECIAL zu",
     "DIG": "Gräbt sich unter der Erde und taucht neben dem am weitesten entfernten Feind wieder auf, wobei er allen Feinden auf dem Weg [10,20,40,SP] Spezialschaden zufügt",
     "FIRE_SPIN": "Flächenangriff, der [20,40,100,SP] SPECIAL um das Ziel herum verursacht und alle getroffenen Feinde 3 Sekunden lang BURN",
     "SEARING_SHOT": "Ein Inferno aus scharlachroten Flammen verbrennt alles um den Benutzer herum. Verursacht [40,SP] SPECIAL und VERBRENNT 3 Sekunden lang alle Gegner innerhalb von 2 Feldern um Victini.",
