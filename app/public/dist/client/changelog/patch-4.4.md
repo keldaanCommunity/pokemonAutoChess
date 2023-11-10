@@ -72,6 +72,7 @@
 - Nerf Shiny Charm: protect duration ~~3~~ 2 seconds
 - Buff Shell Bell: ~~30~~ 33% heal
 - Buff Choice Scarf: now pick the lowest life adjacent enemy for secondary target
+- You can no longer put a synergy stone or combine a synergy stone on a mon that already has this synergy
 
 # Changes to stages
 

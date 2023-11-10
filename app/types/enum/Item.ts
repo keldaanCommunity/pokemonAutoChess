@@ -1,3 +1,5 @@
+import { Synergy } from "./Synergy"
+
 export enum Item {
   FOSSIL_STONE = "FOSSIL_STONE",
   TWISTED_SPOON = "TWISTED_SPOON",
@@ -117,7 +119,7 @@ export const CompletedItems: Item[] = Object.values(Item).filter(
     BasicItems.includes(item) === false && Berries.includes(item) === false
 )
 
-export const SynergyStones: Item[] = [
+export const SynergyStones = [
   Item.OLD_AMBER,
   Item.DAWN_STONE,
   Item.WATER_STONE,
@@ -128,6 +130,18 @@ export const SynergyStones: Item[] = [
   Item.LEAF_STONE,
   Item.ICE_STONE
 ]
+
+export const SynergyByStone = {
+  [Item.OLD_AMBER]: Synergy.FOSSIL,
+  [Item.DAWN_STONE]: Synergy.PSYCHIC,
+  [Item.WATER_STONE]: Synergy.WATER,
+  [Item.THUNDER_STONE]: Synergy.ELECTRIC,
+  [Item.FIRE_STONE]: Synergy.FIRE,
+  [Item.MOON_STONE]: Synergy.FAIRY,
+  [Item.DUSK_STONE]: Synergy.DARK,
+  [Item.LEAF_STONE]: Synergy.GRASS,
+  [Item.ICE_STONE]: Synergy.ICE
+}
 
 export const NonSpecialItemComponents: Item[] = [
   Item.TWISTED_SPOON,

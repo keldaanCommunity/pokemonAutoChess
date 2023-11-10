@@ -15,7 +15,7 @@ import {
   PORTAL_CAROUSEL_BASE_DURATION,
   FIGHTING_PHASE_DURATION
 } from "../../types/Config"
-import { Item, BasicItems, Berries } from "../../types/enum/Item"
+import { Item, BasicItems, Berries, SynergyStones, SynergyByStone } from "../../types/enum/Item"
 import { BattleResult } from "../../types/enum/Game"
 import Player from "../../models/colyseus-models/player"
 import PokemonFactory from "../../models/pokemon-factory"
@@ -332,40 +332,48 @@ export class OnDragDropItemCommand extends Command<
       return
     }
 
+    if(SynergyStones.includes(item) && pokemon.types.has(SynergyByStone[item])){
+      // prevent adding a synergy stone on a pokemon that already has this synergy
+      client.send(Transfer.DRAG_DROP_FAILED, message)
+      return
+    }
+
     if (BasicItems.includes(item)) {
       const itemToCombine = values(pokemon.items).find((i) =>
         BasicItems.includes(i)
       )
       if (itemToCombine) {
-        Object.keys(ItemRecipe).forEach((n) => {
-          const name = n as Item
-          const recipe = ItemRecipe[name]
-          if (
-            recipe &&
-            ((recipe[0] == itemToCombine && recipe[1] == item) ||
-              (recipe[0] == item && recipe[1] == itemToCombine))
-          ) {
-            pokemon.items.delete(itemToCombine)
-            player.items.delete(item)
+        const recipe = Object.entries(ItemRecipe).find(([result, recipe]) => (recipe[0] == itemToCombine && recipe[1] == item) || (recipe[0] == item && recipe[1] == itemToCombine))
+        if(recipe) {
+          const itemCombined = recipe[0] as Item
 
-            if (pokemon.items.has(name)) {
-              player.items.add(name)
-            } else {
-              const detail: IDragDropItemMessage = {
-                id: name,
-                x: pokemon.positionX,
-                y: pokemon.positionY,
-                bypass: true
-              }
-              commands.push(
-                new OnDragDropItemCommand().setPayload({
-                  client: client,
-                  detail: detail
-                })
-              )
-            }
+          if(itemCombined in SynergyByStone && pokemon.types.has(SynergyByStone[itemCombined])){
+            // prevent combining into a synergy stone on a pokemon that already has this synergy
+            client.send(Transfer.DRAG_DROP_FAILED, message)
+            return
           }
-        })
+
+          pokemon.items.delete(itemToCombine)
+          player.items.delete(item)
+
+          if (pokemon.items.has(itemCombined)) {
+            // pokemon already has the combined item so the second one pops off and go to player inventory
+            player.items.add(itemCombined)
+          } else {
+            const detail: IDragDropItemMessage = {
+              id: itemCombined,
+              x: pokemon.positionX,
+              y: pokemon.positionY,
+              bypass: true
+            }
+            commands.push(
+              new OnDragDropItemCommand().setPayload({
+                client: client,
+                detail: detail
+              })
+            )
+          }
+        }
       } else {
         pokemon.items.add(item)
         player.items.delete(item)
