@@ -10,7 +10,7 @@ export function Poster(props: { version: string }) {
   useEffect(() => {
     fetch(`/changelog/summary/summary-${props.version}.md`)
       .then((res) => res.text())
-      .then((md) => marked.parse(md, { mangle: false, headerIds: false }))
+      .then((md) => marked.parse(md))
       .then((parsed) => setPatchContent(parsed))
   }, [])
 

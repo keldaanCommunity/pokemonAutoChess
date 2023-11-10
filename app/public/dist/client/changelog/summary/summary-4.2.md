@@ -27,3 +27,5 @@ New gadget: Map - Choose the map before starting the game
 ## Treasure, that is what you are
 
 PVE component rewards are now shown in treasure chests after a victory
+
+Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752/1157584598918770711)
