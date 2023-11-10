@@ -1,0 +1,32 @@
+#bot-manager-panel {
+  display: grid;
+  grid-template-columns: max-content 400px;
+  height: 100vh;
+  justify-content: center;
+  gap: 1em;
+  padding: 1em;
+  color: white;
+}
+
+#bots-list {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  overflow: scroll;
+  min-width: 1400px;
+  padding: 0;
+}
+
+#bot-manager-panel table thead {
+  border-bottom: 4px solid white;
+}
+
+#bots-list td,
+#bots-list th {
+  padding: 0 0.5em;
+  text-align: center;
+}
+
+#bot-manager-panel tr:nth-child(even) {
+  background-color: #54596b;
+}
