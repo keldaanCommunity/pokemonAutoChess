@@ -43,3 +43,5 @@ New Synergy: ![Light](/assets/types/LIGHT.svg) Light gives various bonuses to on
 ## New PVE rounds and more items
 
 PVE rounds and rewards have been reworked with these goals in mind: difficult and emblematic fights, more frequent in endgame and with better, various rewards; the average total number of components per game has increased, and there's no more random components after stage 20.
+
+Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752/1165305761493176362)
