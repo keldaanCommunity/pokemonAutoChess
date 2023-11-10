@@ -1704,7 +1704,7 @@ export class ShadowCloneStrategy extends AbilityStrategy {
         farthestCoordinate.y,
         pokemon.team
       )
-      clone.hp = Math.ceil(0.8 * pokemon.hp)
+      clone.hp = min(1)(Math.ceil(0.8 * pokemon.hp))
       clone.life = clone.hp
       clone.addShield(30, clone, true)
       clone.isClone = true
