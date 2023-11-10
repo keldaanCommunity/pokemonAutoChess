@@ -1035,7 +1035,7 @@
     "UPPERCUT": "Deals [60,SP] SPECIAL. Double damage if attacker has a better DEF than target",
     "TRIPLE_KICK": "Deals [50,SP] SPECIAL to up to 3 adjacent enemies",
     "MAWASHI_GERI": "Deals [60,SP] SPECIAL. Double damage if attacker has a better ATK than target",
-    "FORECAST": "Gives [10,SP] SHIELD to your team, plus additional bonus depending on the weather: \n Sun: also gives [3,SP] ATK \n Rain: also gives [20,SP] PP \n Snow: also gives [2,SP] DEF / SPE_DEF",
+    "FORECAST": "Gives [10,SP] SHIELD to your team, plus additional bonus depending on the weather: \n Sun: also gives [3,SP] ATK \n Rain: also gives [10,SP] PP \n Snow: also gives [2,SP] DEF / SPE_DEF",
     "X_SCISSOR": "Deals [20,40,80,SP] TRUE twice",
     "PLASMA_FIST": "Deals [120,SP] SPECIAL with 25% lifesteal",
     "SPECTRAL_THIEF": "Disappears and reappears dealing [50,SP] SPECIAL, stealing all the statistic boost of the target",

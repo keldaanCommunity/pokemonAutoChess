@@ -30,6 +30,7 @@
 - Pokemons with "tree" status (Sudowoodo, Wobbuffet) cannot be silenced or lose PP until their bar is full
 - Bonsly/Sudowoodo now cast their ability once they reach max PP for the first time
 - Nerf Attack of Ratata and Spearow lines
+- Nerf Castform rain: PP gain ~~20~~ 10
 - Buff Sharpedo: HP ~~130~~ 150
 - Buff Ultra-Necrozma: change tier to tier 4, get the same stats than Necrozma but with range 3 and Dragon synergy
 - Nerf Uxie: PP ~~65~~ 80

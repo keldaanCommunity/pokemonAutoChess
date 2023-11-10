@@ -940,7 +940,7 @@
     "UPPERCUT": "Aanbiedingen [60,SP] SPECIAL. Dubbele schade als de aanvaller een betere DEF heeft dan het doelwit",
     "TRIPLE_KICK": "Geeft [50,SP] SPECIAL aan maximaal 3 aangrenzende vijanden",
     "MAWASHI_GERI": "Aanbiedingen [60,SP] SPECIAL. Dubbele schade als de aanvaller een betere ATK heeft dan het doelwit",
-    "FORECAST": "Geeft [10,SP] SHIELD aan je team, plus extra bonus afhankelijk van het weer:\n Zon: geeft ook [3,SP] ATK\n Regen: geeft ook [20,SP] PP\n Sneeuw: geeft ook [2,SP] DEF / SPE_DEF",
+    "FORECAST": "Geeft [10,SP] SHIELD aan je team, plus extra bonus afhankelijk van het weer:\n Zon: geeft ook [3,SP] ATK\n Regen: geeft ook [10,SP] PP\n Sneeuw: geeft ook [2,SP] DEF / SPE_DEF",
     "X_SCISSOR": "Deals [20,40,80,SP] tweemaal TRUE",
     "PLASMA_FIST": "Deals [120,SP] SPECIAL met 25% lifesteal",
     "SPECTRAL_THIEF": "Verdwijnt en verschijnt weer bij het delen van [50,SP] SPECIAL, waarbij alle statistische boost van het doelwit wordt gestolen",

@@ -940,7 +940,7 @@
     "UPPERCUT": "Offerte [60,SP] SPECIAL. Danno doppio se l'attaccante ha una DEF migliore del bersaglio",
     "TRIPLE_KICK": "Infligge [50 SP] SPECIAL a un massimo di 3 nemici adiacenti",
     "MAWASHI_GERI": "Offerte [60,SP] SPECIAL. Raddoppia il danno se l'attaccante ha un ATK migliore del bersaglio",
-    "FORECAST": "Dà [10,SP] SHIELD alla tua squadra, oltre a bonus aggiuntivi a seconda del tempo:\n Sole: dà anche [3,SP] ATK\n Pioggia: dà anche [20,SP] PP\n Neve: dà anche [2,SP] DEF / SPE_DEF",
+    "FORECAST": "Dà [10,SP] SHIELD alla tua squadra, oltre a bonus aggiuntivi a seconda del tempo:\n Sole: dà anche [3,SP] ATK\n Pioggia: dà anche [10,SP] PP\n Neve: dà anche [2,SP] DEF / SPE_DEF",
     "X_SCISSOR": "Distribuisce [20,40,80,SP] TRUE due volte",
     "PLASMA_FIST": "Offerte [120,SP] SPECIAL con il 25% di rubavita",
     "SPECTRAL_THIEF": "Scompare e riappare infliggendo [50,SP] SPECIAL, rubando tutto il potenziamento statistico del bersaglio",

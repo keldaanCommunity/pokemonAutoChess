@@ -4191,7 +4191,7 @@ export class ForecastStrategy extends AbilityStrategy {
           p.addAttack(3, true)
         }
         if (pokemon.name === Pkm.CASTFORM_RAIN) {
-          p.addPP(Math.round(20 * (1 + pokemon.ap / 100)))
+          p.addPP(Math.round(10 * (1 + pokemon.ap / 100)))
         }
         if (pokemon.name === Pkm.CASTFORM_HAIL) {
           p.addDefense(2, true)

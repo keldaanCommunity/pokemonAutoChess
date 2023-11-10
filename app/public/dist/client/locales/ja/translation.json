@@ -940,7 +940,7 @@
     "UPPERCUT": "お得 [60,SP] SPECIAL。攻撃者のDEFがターゲットよりも優れている場合、ダメージが2倍になります",
     "TRIPLE_KICK": "隣接する敵最大3体に[50,SP]SPECIALを与える",
     "MAWASHI_GERI": "お得 [60,SP] SPECIAL。攻撃者のATKがターゲットよりも優れている場合、ダメージが2倍になります",
-    "FORECAST": "チームに [10,SP] SHIELD を与え、さらに天候に応じて追加ボーナスを与えます。\n 太陽：[3,SP]の攻撃力も付与\n 雨: [20,SP] マナも与えます\n 雪: [2,SP] DEF / SPE_DEF も与える",
+    "FORECAST": "チームに [10,SP] SHIELD を与え、さらに天候に応じて追加ボーナスを与えます。\n 太陽：[3,SP]の攻撃力も付与\n 雨: [10,SP] マナも与えます\n 雪: [2,SP] DEF / SPE_DEF も与える",
     "X_SCISSOR": "お得 [20,40,80,SP] TRUE 2回",
     "PLASMA_FIST": "お得な情報 [120,SP] 25% ライフスティールの SPECIAL",
     "SPECTRAL_THIEF": "[50,SP] SPECIALを与えて消えて再び現れ、ターゲットの統計ブーストをすべて盗みます",
