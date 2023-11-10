@@ -938,7 +938,7 @@
     "SHADOW_SNEAK": "Aanbiedingen [50,SP] SPECIAL. Als het doel SILENCE is, is de deal TRUE",
     "MACH_PUNCH": "Biedt [50,SP] SPECIAL aan en valt direct daarna aan",
     "UPPERCUT": "Aanbiedingen [60,SP] SPECIAL. Dubbele schade als de aanvaller een betere DEF heeft dan het doelwit",
-    "TRIPLE_KICK": "Geeft [50,SP] SPECIAL aan maximaal 3 aangrenzende vijanden",
+    "TRIPLE_KICK": "Geeft [60,SP] SPECIAL aan maximaal 3 aangrenzende vijanden",
     "MAWASHI_GERI": "Aanbiedingen [60,SP] SPECIAL. Dubbele schade als de aanvaller een betere ATK heeft dan het doelwit",
     "FORECAST": "Geeft [10,SP] SHIELD aan je team, plus extra bonus afhankelijk van het weer:\n Zon: geeft ook [3,SP] ATK\n Regen: geeft ook [10,SP] PP\n Sneeuw: geeft ook [2,SP] DEF / SPE_DEF",
     "X_SCISSOR": "Deals [20,40,80,SP] tweemaal TRUE",

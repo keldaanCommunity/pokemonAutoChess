@@ -937,7 +937,7 @@
     "SHADOW_SNEAK": "Angebote [50,SP] SPECIAL. Wenn das Ziel SILENCE ist, wird TRUE ausgeteilt",
     "MACH_PUNCH": "Verursacht [50,SP] SPECIAL und greift unmittelbar danach an",
     "UPPERCUT": "Angebote [60,SP] SPECIAL. Doppelter Schaden, wenn der Angreifer eine bessere DEF als das Ziel hat",
-    "TRIPLE_KICK": "Fügt bis zu 3 benachbarten Feinden [50,SP] SPECIAL zu",
+    "TRIPLE_KICK": "Fügt bis zu 3 benachbarten Feinden [60,SP] SPECIAL zu",
     "MAWASHI_GERI": "Angebote [60,SP] SPECIAL. Doppelter Schaden, wenn der Angreifer einen besseren ATK als das Ziel hat",
     "FORECAST": "Gibt Ihrem Team [10,SP] SHIELD sowie einen zusätzlichen Bonus je nach Wetterlage:\n Sonne: gibt auch [3,SP] ATK\n Regen: Gibt auch [10,SP] PP\n Schnee: gibt auch [2,SP] DEF / SPE_DEF",
     "X_SCISSOR": "Gibt [20,40,80,SP] zweimal TRUE aus",

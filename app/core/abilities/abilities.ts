@@ -4256,7 +4256,7 @@ export class TripleKickStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = 50
+    const damage = 60
 
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
     let count = 0
@@ -4269,7 +4269,8 @@ export class TripleKickStrategy extends AbilityStrategy {
             board,
             AttackType.SPECIAL,
             pokemon,
-            crit
+            crit,
+            true
           )
         }
       }

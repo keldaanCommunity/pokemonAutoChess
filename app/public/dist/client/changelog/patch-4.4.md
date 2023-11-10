@@ -59,6 +59,7 @@
 - All Eeveelutions are now 1-range
 - Rework Shell trap (Shuckle): after the next Physical damage received, the trap explodes and deal [100,SP] damage to adjacent enemies
 - Changed Shuckle PP ~~70~~ 100
+- Buff Triple kick (Hitmontop) ~~50~~ 60 special damage
 
 # Changes to Synergies
 
