@@ -1,7 +1,7 @@
 import { MapSchema } from "@colyseus/schema"
 import { IPokemon } from "../../types"
 import { SynergyTriggers } from "../../types/Config"
-import { Item } from "../../types/enum/Item"
+import { SynergyByStone, SynergyStones } from "../../types/enum/Item"
 import { Pkm, PkmFamily } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { values } from "../../utils/schemas"
@@ -69,31 +69,9 @@ export function computeSynergies(board: IPokemon[]): Map<Synergy, number> {
 }
 
 export function addSynergiesFromStones(pkm: IPokemon) {
-  if (pkm.items.has(Item.FIRE_STONE) && !pkm.types.has(Synergy.FIRE)) {
-    pkm.types.add(Synergy.FIRE)
-  }
-  if (pkm.items.has(Item.WATER_STONE) && !pkm.types.has(Synergy.WATER)) {
-    pkm.types.add(Synergy.WATER)
-  }
-  if (pkm.items.has(Item.THUNDER_STONE) && !pkm.types.has(Synergy.ELECTRIC)) {
-    pkm.types.add(Synergy.ELECTRIC)
-  }
-  if (pkm.items.has(Item.DUSK_STONE) && !pkm.types.has(Synergy.DARK)) {
-    pkm.types.add(Synergy.DARK)
-  }
-  if (pkm.items.has(Item.MOON_STONE) && !pkm.types.has(Synergy.FAIRY)) {
-    pkm.types.add(Synergy.FAIRY)
-  }
-  if (pkm.items.has(Item.LEAF_STONE) && !pkm.types.has(Synergy.GRASS)) {
-    pkm.types.add(Synergy.GRASS)
-  }
-  if (pkm.items.has(Item.DAWN_STONE) && !pkm.types.has(Synergy.PSYCHIC)) {
-    pkm.types.add(Synergy.PSYCHIC)
-  }
-  if (pkm.items.has(Item.ICE_STONE) && !pkm.types.has(Synergy.ICE)) {
-    pkm.types.add(Synergy.ICE)
-  }
-  if (pkm.items.has(Item.OLD_AMBER) && !pkm.types.has(Synergy.FOSSIL)) {
-    pkm.types.add(Synergy.FOSSIL)
+  for (let stone of SynergyStones) {
+    if (pkm.items.has(stone)) {
+      pkm.types.add(SynergyByStone[stone])
+    }
   }
 }
