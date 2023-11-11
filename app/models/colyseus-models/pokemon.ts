@@ -3975,7 +3975,7 @@ export class Clefairy extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   evolution = Pkm.CLEFABLE
-  evolutionRule = new ItemEvolutionRule([Item.MOON_STONE])
+  evolutionRule = new ItemEvolutionRule([Item.POKE_DOLL])
   hp = 150
   atk = 11
   def = 3
