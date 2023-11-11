@@ -11,7 +11,7 @@ import {
   MausholdEvolutionTurn,
   TandemausEvolutionTurn
 } from "../../types/Config"
-import { AllItems, Item, SynergyStones } from "../../types/enum/Item"
+import { AllItems, Berries, Item, SynergyStones } from "../../types/enum/Item"
 import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
 import { Rarity, AttackType, PokemonActionState } from "../../types/enum/Game"
 import { Ability } from "../../types/enum/Ability"
@@ -3606,7 +3606,7 @@ export class Weepinbell extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   evolution = Pkm.VICTREEBEL
-  evolutionRule = new ItemEvolutionRule([Item.LEAF_STONE])
+  evolutionRule = new ItemEvolutionRule(Berries)
   hp = 160
   atk = 12
   def = 2
