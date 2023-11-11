@@ -51,7 +51,7 @@ export function MetaChart(props: {
               y={y(d.y) - margin}
               width={size}
               height={size}
-              href={`assets/types/${synergy}.svg`}
+              href={`assets/types/${synergy.toUpperCase()}.svg`}
               className="meta-svg-icon"
               onClick={(e) => {
                 props.setSelectedComposition(d.cluster_id)
