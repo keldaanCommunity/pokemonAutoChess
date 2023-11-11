@@ -19,33 +19,9 @@ async function main() {
         step.board.forEach((p) => {
           for (let j = 0; j < p.items.length; j++) {
             const item = p.items[j] as any
-            if (item === "KINGS_ROCK") {
+            if (item === "ORAN_BERRY") {
               logger.debug(p.name, item)
-              p.items[j] = Item.AMULET_COIN
-              modified = true
-            } else if (item === "WATER_INCENSE") {
-              logger.debug(p.name, item)
-              p.items[j] = Item.POWER_LENS
-              modified = true
-            } else if (item === "BRIGHT_POWDER") {
-              logger.debug(p.name, item)
-              p.items[j] = Item.STAR_DUST
-              modified = true
-            } else if (item === "ZOOM_LENS") {
-              logger.debug(p.name, bot.author, bot.name, item)
-              p.items[j] = Item.SCOPE_LENS
-              modified = true
-            } else if (item === "FOCUS_BAND") {
-              logger.debug(p.name, bot.author, bot.name, item)
-              p.items[j] = Item.GRACIDEA_FLOWER
-              modified = true
-            } else if (item === "ICY_ROCK") {
-              logger.debug(p.name, bot.author, bot.name, item)
-              p.items[j] = Item.ICE_STONE
-              modified = true
-            } else if (item === "RUNE_PROTECT") {
-              logger.debug(p.name, bot.author, bot.name, item)
-              p.items[j] = Item.CLEANSE_TAG
+              p.items[j] = Item.KINGS_ROCK
               modified = true
             }
           }
