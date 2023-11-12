@@ -32,6 +32,7 @@ import Player from "../../../../models/colyseus-models/player"
 import { Effect } from "../../../../types/enum/Effect"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../types/Config"
 import { Passive } from "../../../../types/enum/Passive"
+import { randomBetween } from "../../../../utils/random"
 
 export default class BattleManager {
   group: GameObjects.Group
@@ -569,6 +570,16 @@ export default class BattleManager {
               PokemonActionState.IDLE,
               this.flip
             )
+          } else if (field === "skill") {
+            pkm.skill = value
+            if (pkm.detail) {
+              pkm.detail.updateAbilityDescription(pkm.skill, pkm.stars, pkm.ap)
+            }
+          } else if (field === "stars") {
+            pkm.stars = value
+            if (pkm.detail) {
+              pkm.detail.updateAbilityDescription(pkm.skill, pkm.stars, pkm.ap)
+            }
           }
           break
         }
@@ -3210,6 +3221,28 @@ export default class BattleManager {
                 specialProjectile.destroy()
               }
             )
+            break
+
+          case Ability.HYPERSPACE_FURY:
+            const nbHits = Number(orientation) // orientation field is used to pass the number of hits for hyperspace fury
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
+            for (let i = 0; i < nbHits; i++) {
+              setTimeout(() => {
+                const fist = this.scene.add.sprite(
+                  coordinates[0] + randomBetween(-20, +20),
+                  coordinates[1] + randomBetween(-20, +20),
+                  Ability.ANCHOR_SHOT,
+                  "000"
+                )
+                fist.setDepth(7)
+                fist.setScale(1, 1)
+                fist.setTint(0xc080ff)
+                fist.anims.play(Ability.HYPERSPACE_FURY)
+                fist.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+                  fist.destroy()
+                })
+              }, i * 150)
+            }
             break
 
           case Ability.LEAF_BLADE:

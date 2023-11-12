@@ -149,7 +149,9 @@ class GameContainer {
         "targetX",
         "targetY",
         "team",
-        "index"
+        "index",
+        "skill",
+        "stars"
       ]
 
       fields.forEach((field) => {

@@ -1103,6 +1103,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.HYPERSPACE_FURY,
+      frames: this.game.anims.generateFrameNames(Ability.ANCHOR_SHOT, {
+        start: 15,
+        end: 34,
+        zeroPad: 3
+      }),
+      duration: 500,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.LEAF_BLADE,
       frames: this.game.anims.generateFrameNames(Ability.LEAF_BLADE, {
         start: 0,
