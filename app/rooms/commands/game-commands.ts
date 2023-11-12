@@ -137,7 +137,7 @@ export class OnDragDropCommand extends Command<
         const x = parseInt(detail.x)
         const y = parseInt(detail.y)
         if (pokemon.name === Pkm.DITTO) {
-          const pokemonToClone = this.room.getPokemonByPosition(playerId, x, y)
+          const pokemonToClone = this.room.getPokemonByPosition(player, x, y)
           if (pokemonToClone && pokemonToClone.canBeCloned) {
             dittoReplaced = true
             const replaceDitto = PokemonFactory.createPokemonFromName(
@@ -157,7 +157,7 @@ export class OnDragDropCommand extends Command<
               message.updateBoard = false
             }
           } else if (y === 0) {
-            this.room.swap(playerId, pokemon, x, y)
+            this.room.swap(player, pokemon, x, y)
             success = true
           }
         } else {
@@ -165,7 +165,7 @@ export class OnDragDropCommand extends Command<
           const dropFromBench = pokemon.isOnBench
           // Drag and drop pokemons through bench has no limitation
           if (dropOnBench && dropFromBench) {
-            this.room.swap(playerId, pokemon, x, y)
+            this.room.swap(player, pokemon, x, y)
             success = true
           } else if (this.state.phase == GamePhaseState.PICK) {
             // On pick, allow to drop on / from board
@@ -175,14 +175,14 @@ export class OnDragDropCommand extends Command<
 
             if (dropOnBench) {
               // From board to bench is always allowed (bench to bench is already handled)
-              this.room.swap(playerId, pokemon, x, y)
+              this.room.swap(player, pokemon, x, y)
               success = true
             } else if (
               pokemon.canBePlaced &&
               !(dropFromBench && dropToEmptyPlace && isBoardFull)
             ) {
               // Prevents a pokemon to go on the board only if it's adding a pokemon from the bench on a full board
-              this.room.swap(playerId, pokemon, x, y)
+              this.room.swap(player, pokemon, x, y)
               pokemon.onChangePosition(
                 x,
                 y,
@@ -999,7 +999,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           )
           const coordinate = player.getFirstAvailablePositionOnBoard()
           if (coordinate && pokemon) {
-            this.room.swap(player.id, pokemon, coordinate[0], coordinate[1])
+            this.room.swap(player, pokemon, coordinate[0], coordinate[1])
           }
         }
       }
