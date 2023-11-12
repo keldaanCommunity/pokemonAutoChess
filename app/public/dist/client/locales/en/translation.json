@@ -253,7 +253,9 @@
     "SCREECH": "Screech",
     "SAND_TOMB": "Sand Tomb",
     "WHIRLWIND": "Whirlwind",
-    "EMPTY_LIGHT": "Empty Light"
+    "EMPTY_LIGHT": "Empty Light",
+    "UNBOUND": "Unbound",
+    "HYPERSPACE_FURY": "Hyperspace Fury"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1142,7 +1144,9 @@
     "SCREECH": "Reduce DEF of all adjacent ennemies by [1,2,4,SP]",
     "SAND_TOMB": "Deals [10,20,40,SP] SPECIAL, inflicting SILENCE and PARALYSIS for 3/5/8 seconds",
     "WHIRLWIND": "Deals [40,80,120,SP] and make the target fly away",
-    "EMPTY_LIGHT": "Spits poison directly at an enemy, inflicting [60,SP] points of damage and reducing its SPE_DEF by 3. The ability then rebounds on another Pokemon with a lower SPE_DEF. (5 bounces maximum)"
+    "EMPTY_LIGHT": "Spits poison directly at an enemy, inflicting [60,SP] points of damage and reducing its SPE_DEF by 3. The ability then rebounds on another Pokemon with a lower SPE_DEF. (5 bounces maximum)",
+    "UNBOUND": "Unbinds itself to become Hoopa's true form and get a humongous amount of power",
+    "HYPERSPACE_FURY": "Using its many arms, the user unleashes a barrage of [4,SP] attacks. Each attack lowers the user's DEF by 1."
   },
   "effect": {
     "INGRAIN": "Ingrain",

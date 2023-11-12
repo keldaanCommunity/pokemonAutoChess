@@ -10,6 +10,7 @@ import { distanceC } from "../utils/distance"
 import { Synergy } from "../types/enum/Synergy"
 import { max, min } from "../utils/number"
 import { Passive } from "../types/enum/Passive"
+import { AbilityStrategies } from "./abilities/abilities"
 
 export default class AttackingState extends PokemonState {
   update(pokemon: PokemonEntity, dt: number, board: Board, weather: string) {
@@ -68,7 +69,13 @@ export default class AttackingState extends PokemonState {
         if (pokemon.items.has(Item.REAPER_CLOTH)) {
           crit = chance(pokemon.critChance / 100)
         }
-        pokemon.strategy.process(pokemon, this, board, target, crit)
+        AbilityStrategies[pokemon.skill].process(
+          pokemon,
+          this,
+          board,
+          target,
+          crit
+        )
         pokemon.onCast()
       } else {
         // BASIC ATTACK

@@ -4425,36 +4425,6 @@ export class Lugia extends Pokemon {
   attackSprite = AttackSprite.FLYING_MELEE
 }
 
-export class Hoopa extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GHOST])
-  rarity = Rarity.UNIQUE
-  stars = 3
-  hp = 300
-  atk = 30
-  def = 5
-  speDef = 5
-  maxPP = 100
-  range = 2
-  skill = Ability.DEFAULT
-  final = true
-  attackSprite = AttackSprite.GHOST_RANGE
-}
-
-export class HoopaUnbound extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GHOST])
-  rarity = Rarity.UNIQUE
-  stars = 3
-  hp = 300
-  atk = 30
-  def = 5
-  speDef = 5
-  maxPP = 100
-  range = 2
-  skill = Ability.DEFAULT
-  final = true
-  attackSprite = AttackSprite.GHOST_RANGE
-}
-
 export class Giratina extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GHOST])
   rarity = Rarity.LEGENDARY
@@ -10862,6 +10832,36 @@ export class MausholdFour extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.POPULATION_BOMB
+  final = true
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class Hoopa extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.DARK, Synergy.GHOST])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 150
+  atk = 15
+  def = 3
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.UNBOUND
+  final = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
+
+export class HoopaUnbound extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.DARK, Synergy.GHOST])
+  rarity = Rarity.UNIQUE
+  stars = 4
+  hp = 250
+  atk = 25
+  def = 3
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.HYPERSPACE_FURY
   final = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }

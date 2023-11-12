@@ -27,7 +27,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
   abilityDescription: HTMLDivElement
   passiveDescription: HTMLDivElement
   pp: HTMLDivElement
-  abilityDescriptionRoot: ReactDOM.Root
+  abilityRoot: ReactDOM.Root
   passiveDescriptionRoot: ReactDOM.Root
 
   constructor(
@@ -180,21 +180,11 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     }
 
     if (skill !== Ability.DEFAULT) {
-      const ult = document.createElement("div")
-      ult.className = "game-pokemon-detail-ult"
-
-      const ultNameWrap = document.createElement("div")
-      ultNameWrap.className = "ability-name"
-      const ultName = document.createElement("p")
-      ultName.textContent = t(`ability.${skill}`)
-
-      this.abilityDescription = document.createElement("div")
-      this.abilityDescriptionRoot = ReactDOM.createRoot(this.abilityDescription)
+      const abilityDiv = document.createElement("div")
+      abilityDiv.className = "game-pokemon-detail-ult"
+      this.abilityRoot = ReactDOM.createRoot(abilityDiv)
       this.updateAbilityDescription(skill, stars, ap)
-      ultNameWrap.appendChild(ultName)
-      ult.appendChild(ultNameWrap)
-      ult.appendChild(this.abilityDescription)
-      wrap.appendChild(ult)
+      wrap.appendChild(abilityDiv)
     }
 
     this.dom.appendChild(wrap)
@@ -206,8 +196,11 @@ export default class PokemonDetail extends GameObjects.DOMElement {
   }
 
   updateAbilityDescription(skill: Ability, abilityTier: number, ap: number) {
-    this.abilityDescriptionRoot.render(
-      <AbilityTooltip ability={skill} tier={abilityTier} ap={ap} />
+    this.abilityRoot.render(
+      <>
+        <div className="ability-name">{t(`ability.${skill}`)}</div>
+        <AbilityTooltip ability={skill} tier={abilityTier} ap={ap} />
+      </>
     )
   }
 
