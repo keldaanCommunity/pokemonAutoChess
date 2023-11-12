@@ -5,7 +5,8 @@
   "keywords": [],
   "license": "BSD-3-Clause",
   "engines": {
-    "node": "20.9.0"
+    "node": "20.9.0",
+    "npm": "10.2.3"
   },
   "homepage": "https://github.com/keldaanCommunity/pokemonAutoChess#readme",
   "repository": {
@@ -89,7 +90,8 @@
     "react-tabs": "^6.0.2",
     "react-toastify": "^9.1.1",
     "react-tooltip": "^5.21.5",
-    "unique-names-generator": "^4.7.1"
+    "unique-names-generator": "^4.7.1",
+    "fs-extra": "^11.1.1"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.22.20",
@@ -107,7 +109,6 @@
     "eslint": "^8.53.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "fs-extra": "^11.1.1",
     "npm-run-all": "^4.1.5",
     "openapi-typescript": "^6.7.0",
     "redux-devtools-extension": "^2.13.9",

@@ -9,7 +9,7 @@ import {
   DTEF_TILESET_WIDTH
 } from "../types/Config"
 import { pickRandomIn } from "../utils/random"
-import { readJSONSync, readJsonSync } from "fs-extra"
+import { readJsonSync } from "fs-extra"
 import { TileMapping } from "./design"
 
 export type TilesetTiled = {
@@ -60,7 +60,7 @@ export default class Tileset {
 
   constructor(id: DungeonPMDO) {
     this.id = id
-    this.metadata = readJSONSync(`${src}/${this.id}/metadata.json`)
+    this.metadata = readJsonSync(`${src}/${this.id}/metadata.json`)
   }
 
   getTilemapId(terrain: TerrainType, mask: Mask): TileMapping[] {
@@ -147,7 +147,7 @@ export default class Tileset {
       tilesets.push(readJsonSync(`${src}/${this.id}/${t.static.name}.json`))
       t.animation.forEach((animatedFrame) => {
         tilesets.push(
-          readJSONSync(`${src}/${this.id}/${animatedFrame.name}.json`)
+          readJsonSync(`${src}/${this.id}/${animatedFrame.name}.json`)
         )
       })
     }
