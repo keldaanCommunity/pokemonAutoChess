@@ -729,31 +729,31 @@ export default class GameRoom extends Room<GameState> {
     return simplePlayer
   }
 
-  swap(playerId: string, pokemon: IPokemon, x: number, y: number) {
-    const pokemonToSwap = this.getPokemonByPosition(playerId, x, y)
+  swap(player: Player, pokemon: IPokemon, x: number, y: number) {
+    const pokemonToSwap = this.getPokemonByPosition(player, x, y)
     if (pokemonToSwap) {
       pokemonToSwap.positionX = pokemon.positionX
       pokemonToSwap.positionY = pokemon.positionY
+      pokemonToSwap.onChangePosition(
+        pokemon.positionX,
+        pokemon.positionY,
+        player,
+        this.state.lightX,
+        this.state.lightY
+      )
     }
     pokemon.positionX = x
     pokemon.positionY = y
   }
 
   getPokemonByPosition(
-    playerId: string,
+    player: Player,
     x: number,
     y: number
   ): Pokemon | undefined {
-    let pkm: Pokemon | undefined
-    const player = this.state.players.get(playerId)
-    if (player) {
-      player.board.forEach((pokemon, key) => {
-        if (pokemon.positionX == x && pokemon.positionY == y) {
-          pkm = pokemon
-        }
-      })
-      return pkm
-    }
+    return values(player.board).find(
+      (pokemon) => pokemon.positionX == x && pokemon.positionY == y
+    )
   }
 
   checkDynamicSynergies(player: Player, pokemon: Pokemon) {
