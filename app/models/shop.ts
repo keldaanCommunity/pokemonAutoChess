@@ -29,6 +29,7 @@ import { logger } from "../utils/logger"
 import { Synergy } from "../types/enum/Synergy"
 import { IPlayer } from "../types"
 import { Effect } from "../types/enum/Effect"
+import { values } from "../utils/schemas"
 
 export function getPoolSize(rarity: Rarity, maxStars: number): number {
   return PoolSize[rarity][clamp(maxStars, 1, 3) - 1]
@@ -177,7 +178,7 @@ export default class Shop {
 
   getRandomPokemonFromPool(
     pool: Map<Pkm, number>,
-    finals: Array<Pkm>,
+    finals: Set<Pkm>,
     specificTypeWanted?: Synergy
   ): Pkm {
     let pkm = Pkm.MAGIKARP
@@ -187,7 +188,7 @@ export default class Shop {
       const isOfTypeWanted =
         !specificTypeWanted || pokemon.types.has(specificTypeWanted)
 
-      if (isOfTypeWanted && !finals.includes(pkm)) {
+      if (isOfTypeWanted && !finals.has(pkm)) {
         for (let i = 0; i < value; i++) {
           candidates.push(pkm)
         }
@@ -210,7 +211,6 @@ export default class Shop {
     const rarity_seed = Math.random()
     let pokemon = Pkm.MAGIKARP
     let threshold = 0
-    const finals = new Array<Pkm>()
 
     if (chance(DITTO_RATE)) {
       return Pkm.DITTO
@@ -222,11 +222,11 @@ export default class Shop {
       return pickRandomIn(unowns)
     }
 
-    player.board.forEach((pokemon: Pokemon) => {
-      if (pokemon.final) {
-        finals.push(PkmFamily[pokemon.name])
-      }
-    })
+    const finals = new Set(
+      values(player.board)
+        .filter((pokemon) => pokemon.final)
+        .map((pokemon) => PkmFamily[pokemon.name])
+    )
 
     for (let i = 0; i < rarityProbability.length; i++) {
       threshold += rarityProbability[i]
@@ -265,13 +265,11 @@ export default class Shop {
     const rarity_seed = Math.random()
     let fish: Pkm = Pkm.MAGIKARP
     let threshold = 0
-    const finals = new Array<Pkm>()
-
-    player.board.forEach((pokemon: Pokemon) => {
-      if (pokemon.final) {
-        finals.push(PkmFamily[pokemon.name])
-      }
-    })
+    const finals = new Set(
+      values(player.board)
+        .filter((pokemon) => pokemon.final)
+        .map((pokemon) => PkmFamily[pokemon.name])
+    )
 
     for (const rarity in rarityProbability) {
       threshold += rarityProbability[rarity]

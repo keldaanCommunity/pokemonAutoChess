@@ -382,7 +382,6 @@ export interface IPokemon {
   items: SetSchema<Item>
   shiny: boolean
   emotion: Emotion
-  final: boolean
   additional: boolean
   action: PokemonActionState
   canBePlaced: boolean
