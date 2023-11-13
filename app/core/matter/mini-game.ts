@@ -105,105 +105,64 @@ export class MiniGame {
     })
 
     Events.on(this.engine, "collisionStart", (event) => {
-      const pairs = event.pairs
-      if (
-        (this.items?.has(pairs[0].bodyA.label) ||
-          this.items?.has(pairs[0].bodyB.label)) &&
-        (this.avatars?.has(pairs[0].bodyA.label) ||
-          this.avatars?.has(pairs[0].bodyB.label))
-      ) {
-        // when avatar collides with an item
-        let avatar: PokemonAvatarModel | undefined,
-          avatarBody: Body | undefined,
-          item: FloatingItem | undefined,
-          itemBody: Body | undefined
-
-        if (this.avatars?.has(pairs[0].bodyA.label)) {
-          avatar = this.avatars.get(pairs[0].bodyA.label)
-          avatarBody = pairs[0].bodyA
-          item = this.items.get(pairs[0].bodyB.label)
-          itemBody = pairs[0].bodyB
-        } else {
-          avatar = this.avatars.get(pairs[0].bodyB.label)
-          avatarBody = pairs[0].bodyB
-          item = this.items.get(pairs[0].bodyA.label)
-          itemBody = pairs[0].bodyA
-        }
-
+      event.pairs.forEach(({ bodyA, bodyB }) => {
         if (
-          itemBody &&
-          avatarBody &&
-          avatar &&
-          item &&
-          avatar.itemId === "" &&
-          item.avatarId === ""
+          (this.items?.has(bodyA.label) && this.avatars?.has(bodyB.label)) ||
+          (this.avatars?.has(bodyA.label) && this.items?.has(bodyB.label))
         ) {
-          const constraint = Constraint.create({
-            bodyA: avatarBody,
-            bodyB: itemBody
-          })
-          Composite.add(this.engine.world, constraint)
-          avatar.itemId = item.id
-          item.avatarId = avatar.id
+          // when avatar collides with an item
+          const avatarBody = this.avatars?.has(bodyA.label) ? bodyA : bodyB
+          const itemBody = this.items?.has(bodyA.label) ? bodyA : bodyB
+          const avatar = this.avatars.get(avatarBody.label)
+          const item = this.items.get(itemBody.label)
 
-          itemBody.collisionFilter.mask = 0 // item no longer collide
-          avatarBody.collisionFilter.mask = 0 // player no longer collide after taking an item
+          if (avatar?.itemId === "" && item?.avatarId === "") {
+            const constraint = Constraint.create({
+              bodyA: avatarBody,
+              bodyB: itemBody
+            })
+            Composite.add(this.engine.world, constraint)
+            avatar.itemId = item.id
+            item.avatarId = avatar.id
 
-          const player = this.alivePlayers.find((p) => p.id === avatar!.id)
-          if (player && player.isBot) {
-            // make bots return to outer circle
-            const i = this.alivePlayers.indexOf(player)
-            avatar.targetX =
-              this.centerX +
-              Math.cos((2 * Math.PI * i) / this.alivePlayers.length) * 300
-            avatar.targetY =
-              this.centerY +
-              Math.sin((2 * Math.PI * i) / this.alivePlayers.length) * 250
+            itemBody.collisionFilter.mask = 0 // item no longer collide
+            avatarBody.collisionFilter.mask = 0 // player no longer collide after taking an item
+
+            const player = this.alivePlayers.find((p) => p.id === avatar!.id)
+            if (player && player.isBot) {
+              // make bots return to outer circle
+              const i = this.alivePlayers.indexOf(player)
+              avatar.targetX =
+                this.centerX +
+                Math.cos((2 * Math.PI * i) / this.alivePlayers.length) * 300
+              avatar.targetY =
+                this.centerY +
+                Math.sin((2 * Math.PI * i) / this.alivePlayers.length) * 250
+            }
           }
         }
-      }
-
-      if (
-        (this.portals?.has(pairs[0].bodyA.label) ||
-          this.portals?.has(pairs[0].bodyB.label)) &&
-        (this.avatars?.has(pairs[0].bodyA.label) ||
-          this.avatars?.has(pairs[0].bodyB.label))
-      ) {
-        // when avatar collides with a portal
-        let avatar: PokemonAvatarModel | undefined,
-          avatarBody: Body | undefined,
-          portal: Portal | undefined,
-          portalBody: Body | undefined
-
-        if (this.avatars?.has(pairs[0].bodyA.label)) {
-          avatar = this.avatars.get(pairs[0].bodyA.label)
-          avatarBody = pairs[0].bodyA
-          portal = this.portals.get(pairs[0].bodyB.label)
-          portalBody = pairs[0].bodyB
-        } else {
-          avatar = this.avatars.get(pairs[0].bodyB.label)
-          avatarBody = pairs[0].bodyB
-          portal = this.portals.get(pairs[0].bodyA.label)
-          portalBody = pairs[0].bodyA
-        }
 
         if (
-          avatarBody &&
-          portalBody &&
-          avatar &&
-          portal &&
-          avatar.portalId === "" &&
-          portal.avatarId === ""
+          (this.portals?.has(bodyA.label) && this.avatars?.has(bodyB.label)) ||
+          (this.avatars?.has(bodyA.label) && this.portals?.has(bodyB.label))
         ) {
-          //logger.debug(`${avatar.name} is taking portal ${portal.id}`)
-          portal.avatarId = avatar.id
-          avatar.portalId = portal.id
-          Composite.remove(this.engine.world, avatarBody)
-          Composite.remove(this.engine.world, avatarBody)
-          this.bodies.delete(avatar.id)
-          this.bodies.delete(portal.id)
+          // when avatar collides with a portal
+          const avatarBody = this.avatars?.has(bodyA.label) ? bodyA : bodyB
+          const portalBody = this.portals?.has(bodyA.label) ? bodyA : bodyB
+          const avatar = this.avatars.get(avatarBody.label)
+          const portal = this.portals.get(portalBody.label)
+
+          if (avatar?.portalId === "" && portal?.avatarId === "") {
+            //logger.debug(`${avatar.name} is taking portal ${portal.id}`)
+            portal.avatarId = avatar.id
+            avatar.portalId = portal.id
+            Composite.remove(this.engine.world, avatarBody)
+            Composite.remove(this.engine.world, portalBody)
+            this.bodies.delete(avatar.id)
+            this.bodies.delete(portal.id)
+          }
         }
-      }
+      })
     })
   }
 
