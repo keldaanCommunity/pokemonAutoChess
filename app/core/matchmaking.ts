@@ -47,6 +47,7 @@ function completeMatchupCombination(
         const ghost: Player = {
           /* dereference player so that money gain is not applied to original player when playing as ghost */
           ...playerToGhost,
+          id: "ghost-id",
           name: `Ghost of ${playerToGhost.name}`,
           avatar: getAvatarString(PkmIndex[Pkm.GASTLY], true, Emotion.HAPPY)
         } as Player
