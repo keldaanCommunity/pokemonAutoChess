@@ -4759,12 +4759,12 @@ export const AnimationConfig: {
   [Pkm.HOOPA]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Charge,
-    emote: AnimationType.Charge
+    emote: AnimationType.Hop
   },
   [Pkm.HOOPA_UNBOUND]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Charge,
-    emote: AnimationType.Charge
+    emote: AnimationType.Cringe
   },
   [Pkm.SILVALLY]: {
     attack: AnimationType.Strike,

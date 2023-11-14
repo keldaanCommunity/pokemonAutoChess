@@ -36,12 +36,13 @@ import { Effect } from "../../types/enum/Effect"
 import { AttackType, BoardEvent, Team } from "../../types/enum/Game"
 import { Weather } from "../../types/enum/Weather"
 import { Synergy } from "../../types/enum/Synergy"
-import { Pkm } from "../../types/enum/Pokemon"
+import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Transfer } from "../../types"
 import {
   BOARD_HEIGHT,
   BOARD_WIDTH,
-  DEFAULT_ATK_SPEED
+  DEFAULT_ATK_SPEED,
+  ItemStats
 } from "../../types/Config"
 
 import Board from "../board"
@@ -6207,6 +6208,57 @@ export class EmptyLightStrategy extends AbilityStrategy {
   }
 }
 
+export class UnboundStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    pokemon.index = PkmIndex[Pkm.HOOPA_UNBOUND]
+    pokemon.skill = Ability.HYPERSPACE_FURY
+    pokemon.atk += 10
+    pokemon.toMovingState()
+    pokemon.addMaxHP(100)
+    pokemon.handleHeal(100, pokemon, 0)
+  }
+}
+
+export class HyperSpaceFury extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const nbHits = 4 * (1 + pokemon.ap / 100)
+    for (let i = 0; i < nbHits; i++) {
+      target.addDefense(-1)
+      target.handleSpecialDamage(
+        15,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit,
+        true
+      )
+    }
+    pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+      id: pokemon.simulation.id,
+      skill: Ability.HYPERSPACE_FURY,
+      positionX: pokemon.positionX,
+      positionY: pokemon.positionY,
+      targetX: target.positionX,
+      targetY: target.positionY,
+      orientation: nbHits // use orientation field for the number of hits
+    })
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -6447,5 +6499,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SCREECH]: new ScreechStrategy(),
   [Ability.SAND_TOMB]: new SandTombStrategy(),
   [Ability.WHIRLWIND]: new WhirlwindStrategy(),
-  [Ability.EMPTY_LIGHT]: new EmptyLightStrategy()
+  [Ability.EMPTY_LIGHT]: new EmptyLightStrategy(),
+  [Ability.UNBOUND]: new UnboundStrategy(),
+  [Ability.HYPERSPACE_FURY]: new HyperSpaceFury()
 }

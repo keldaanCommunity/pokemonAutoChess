@@ -1,8 +1,8 @@
 import React from "react"
 import { Ability } from "../../../../../types/enum/Ability"
 import { addIconsToDescription } from "../../utils/descriptions"
-import "./ability-tooltip.css"
 import { useTranslation } from "react-i18next"
+import "./ability-tooltip.css"
 
 export function AbilityTooltip(props: {
   ability: Ability

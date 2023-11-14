@@ -293,10 +293,10 @@ export const gameSlice = createSlice({
       }
     },
     setSimulation: (state, action: PayloadAction<Simulation>) => {
-      if (
-        state.currentPlayerId === action.payload.bluePlayerId ||
-        state.currentPlayerId === action.payload.redPlayerId
-      ) {
+      const currentPlayer = state.players.find(
+        (p) => p.id === state.currentPlayerId
+      )
+      if (currentPlayer?.simulationId === action.payload.id) {
         state.currentSimulationId = action.payload.id
         state.currentSimulationTeamIndex =
           state.currentPlayerId === action.payload.bluePlayerId ? 0 : 1
