@@ -1,8 +1,4 @@
-import React, {
-  Dispatch,
-  SetStateAction,
-  useState
-} from "react"
+import React, { Dispatch, SetStateAction, useState } from "react"
 import Modal from "react-bootstrap/Modal"
 import {
   IPreferencesState,
@@ -119,6 +115,21 @@ export default function GameOptionsModal(props: {
               changePreference("showDetailsOnHover", checked)
             }
             label={t("show_details_on_hover")}
+          />
+        </p>
+        <p>
+          <Checkbox
+            checked={preferences.disableAnimatedTilemap}
+            onToggle={(checked) => {
+              changePreference("disableAnimatedTilemap", checked)
+              const gameScene = getGameScene()
+              if (checked) {
+                ;(gameScene?.sys as any).animatedTiles.pause()
+              } else {
+                ;(gameScene?.sys as any).animatedTiles.resume()
+              }
+            }}
+            label={t("disable_animated_tilemap")}
           />
         </p>
       </Modal.Body>

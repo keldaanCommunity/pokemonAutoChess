@@ -29,6 +29,7 @@ import LoadingManager from "../components/loading-manager"
 import Simulation from "../../../../core/simulation"
 import { playMusic } from "../../pages/utils/audio"
 import { getGameContainer } from "../../pages/game"
+import { preferences } from "../../preferences"
 
 export default class GameScene extends Scene {
   tilemap: DesignTiled | undefined
@@ -111,6 +112,9 @@ export default class GameScene extends Scene {
       })
       ;(this.sys as any).animatedTiles.init(this.map)
 
+      if (preferences.disableAnimatedTilemap) {
+        ;(this.sys as any).animatedTiles.pause()
+      }
       this.initializeDragAndDrop()
       this.battleGroup = this.add.group()
       this.animationManager = new AnimationManager(this)

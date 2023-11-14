@@ -2054,6 +2054,7 @@
   "music_volume": "Music Volume",
   "sfx_volume": "SFX Volume",
   "show_details_on_hover": "Show details on hover instead of right click",
+  "disable_animated_tilemap": "Disable animation for tilemap (background)",
   "save": "Save",
   "passive": "Passive",
   "pick_additional_pokemon_hint": "Pick an additional Pokemon. It will be available to everyone.",
