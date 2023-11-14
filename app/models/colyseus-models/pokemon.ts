@@ -10542,7 +10542,6 @@ export class Hoopa extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.UNBOUND
-  final = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -10557,7 +10556,6 @@ export class HoopaUnbound extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HYPERSPACE_FURY
-  final = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
