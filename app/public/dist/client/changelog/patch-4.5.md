@@ -1,5 +1,10 @@
 # New Pokemons:
 
+- Hoopa
+- Sobble
+- Drizzile
+- Inteleon
+
 # Changes to Pokemon & Abilities
 
 # Changes to Synergies

@@ -648,7 +648,10 @@ export enum Pkm {
   HIPPODOWN = "HIPPODOWN",
   WINGULL = "WINGULL",
   PELIPPER = "PELIPPER",
-  NIHILEGO = "NIHILEGO"
+  NIHILEGO = "NIHILEGO",
+  SOBBLE = "SOBBLE",
+  DRIZZILE = "DRIZZILE",
+  INTELEON = "INTELEON"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1299,7 +1302,10 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.HIPPODOWN]: "0450",
   [Pkm.WINGULL]: "0278",
   [Pkm.PELIPPER]: "0279",
-  [Pkm.NIHILEGO]: "0793"
+  [Pkm.NIHILEGO]: "0793",
+  [Pkm.SOBBLE]: "0816",
+  [Pkm.DRIZZILE]: "0817",
+  [Pkm.INTELEON]: "0818"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1950,7 +1956,10 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.HIPPODOWN]: Pkm.HIPPOPOTAS,
   [Pkm.WINGULL]: Pkm.WINGULL,
   [Pkm.PELIPPER]: Pkm.WINGULL,
-  [Pkm.NIHILEGO]: Pkm.NIHILEGO
+  [Pkm.NIHILEGO]: Pkm.NIHILEGO,
+  [Pkm.SOBBLE]: Pkm.SOBBLE,
+  [Pkm.DRIZZILE]: Pkm.SOBBLE,
+  [Pkm.INTELEON]: Pkm.SOBBLE
 }
 
 export enum PkmDuo {
@@ -5320,5 +5329,21 @@ export const AnimationConfig: {
     attack: AnimationType.Slam,
     ability: AnimationType.Attack,
     emote: AnimationType.Shoot
+  },
+  [Pkm.SOBBLE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.DRIZZILE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
+  },
+  [Pkm.INTELEON]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Strike
   }
 }

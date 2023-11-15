@@ -6259,6 +6259,40 @@ export class HyperSpaceFury extends AbilityStrategy {
   }
 }
 
+export class SnipeShotStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [50, 100, 200][pokemon.stars - 1] ?? 200
+    const farthestTarget = state.getFarthestTarget(pokemon, board)
+
+    if (farthestTarget) {
+      const cells = board.getCellsBetween(
+        pokemon.positionX,
+        pokemon.positionY,
+        farthestTarget.positionX,
+        farthestTarget.positionY
+      )
+      cells.forEach((cell) => {
+        if (cell.value && cell.value.team != pokemon.team) {
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      })
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -6501,5 +6535,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.WHIRLWIND]: new WhirlwindStrategy(),
   [Ability.EMPTY_LIGHT]: new EmptyLightStrategy(),
   [Ability.UNBOUND]: new UnboundStrategy(),
-  [Ability.HYPERSPACE_FURY]: new HyperSpaceFury()
+  [Ability.HYPERSPACE_FURY]: new HyperSpaceFury(),
+  [Ability.SNIPE_SHOT]: new SnipeShotStrategy()
 }

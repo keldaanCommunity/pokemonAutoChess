@@ -255,7 +255,8 @@
     "WHIRLWIND": "Whirlwind",
     "EMPTY_LIGHT": "Empty Light",
     "UNBOUND": "Unbound",
-    "HYPERSPACE_FURY": "Hyperspace Fury"
+    "HYPERSPACE_FURY": "Hyperspace Fury",
+    "SNIPE_SHOT": "Snipe Shot"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -905,7 +906,10 @@
     "HIPPODOWN": "Hippodown",
     "WINGULL": "Wingull",
     "PELIPPER": "Pelipper",
-    "NIHILEGO": "Nihilego"
+    "NIHILEGO": "Nihilego",
+    "SOBBLE": "Sobble",
+    "DRIZZILE": "Drizzile",
+    "INTELEON": "Inteleon"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1134,19 +1138,20 @@
     "BRAVE_BIRD": "Flies away with its target dealing [30,60,90,SP] SPECIAL",
     "MAGICAL_LEAF": "The user scatters curious leaves that chase the furthest target, inflicting [10,20,40,SP] and ARMOR_REDUCTION for 3 seconds on anything in its path",
     "STEALTH_ROCKS": "Lays sharp stones around, dealing [50,SP] SPECIAL. The stones stay on field, dealing 10 PHYSICAL per second and WOUND opponents that walk on it, if not ROCK or FLYING.",
-    "TAIL_GLOW": "Deals [30,SP] SPECIAL to adjacent enemies and increase AP by 50%",
+    "TAIL_GLOW": "Deals [30,SP] SPECIAL to adjacent enemies and increase user AP by 50%",
     "STRUGGLE_BUG": "Deals [30,SP] SPECIAL to adjacent enemies and reduce their AP by 50%",
-    "PRISMATIC_LASER": "The user shoots a prismatic laser in a large straight line, dealing [80,SP] and displacing any enemies it hits.",
+    "PRISMATIC_LASER": "The user shoots a prismatic laser in a large straight line, dealing [80,SP] SPECIAL and displacing any enemies it hits.",
     "NATURAL_GIFT": "Heals [30,60,120,SP] HP to the most injured ally and RUNE_PROTECT for [1,2,3] s",
     "NIGHT_SHADE": "Deals [25,33,50,SP=0.5]% of target max HP as TRUE",
     "CHARGE_BEAM": "Fires a concentrated bundle of electricity that propagate to max 3 adjacent targets, dealing [20,40,80,SP] SPECIAL to each. The remaining electricity increase AP by 20%.",
     "POPULATION_BOMB": "Deals [10,SP] times 10 SPECIAL to the target",
     "SCREECH": "Reduce DEF of all adjacent ennemies by [1,2,4,SP]",
     "SAND_TOMB": "Deals [10,20,40,SP] SPECIAL, inflicting SILENCE and PARALYSIS for 3/5/8 seconds",
-    "WHIRLWIND": "Deals [40,80,120,SP] and make the target fly away",
-    "EMPTY_LIGHT": "Spits poison directly at an enemy, inflicting [60,SP] points of damage and reducing its SPE_DEF by 3. The ability then rebounds on another Pokemon with a lower SPE_DEF. (5 bounces maximum)",
+    "WHIRLWIND": "Deals [40,80,120,SP] SPECIAL and make the target fly away",
+    "EMPTY_LIGHT": "Spits poison directly at an enemy, inflicting [60,SP] SPECIAL and reducing its SPE_DEF by 3. The ability then rebounds on another Pokemon with a lower SPE_DEF. (5 bounces maximum)",
     "UNBOUND": "Unbinds itself to become Hoopa's true form and get a humongous amount of power",
-    "HYPERSPACE_FURY": "Using its many arms, unleashes a barrage of [4,SP] attacks. Each attack lowers the target DEF by 1."
+    "HYPERSPACE_FURY": "Using its many arms, unleashes a barrage of [4,SP] attacks. Each attack lowers the target DEF by 1.",
+    "SNIPE_SHOT": "Fires a shot of water from its index fingertips at the farthest opponent, dealing [50,100,200,SP] SPECIAL to all opponents in the way"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1263,9 +1268,9 @@
     "STRENGTH": "Gain 25 SHIELD",
     "ROCK_SMASH": "Gain 35 SHIELD",
     "PURE_POWER": "Gain 55 SHIELD",
-    "INGRAIN": "Restore 8 HP every 2 seconds",
-    "GROWTH": "Restore 15 HP every 2 seconds",
-    "SPORE": "Restore 30 HP every 2 seconds",
+    "INGRAIN": "Restore 8 HP every 2 seconds. A berry can be picked every 3 stages.",
+    "GROWTH": "Restore 15 HP every 2 seconds. A berry can be picked every 2 stages.",
+    "SPORE": "Restore 30 HP every 2 seconds. A berry can be picked every stage.",
     "BLAZE": "30% chance to BURN",
     "VICTORY_STAR": "40% chance to BURN, +1 ATK after every hit",
     "DROUGHT": "50% chance to BURN, +2 ATK after every hit",

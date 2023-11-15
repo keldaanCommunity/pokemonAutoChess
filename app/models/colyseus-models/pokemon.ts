@@ -10559,6 +10559,50 @@ export class HoopaUnbound extends Pokemon {
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
+export class Sobble extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.AQUATIC])
+  rarity = Rarity.ULTRA
+  evolution = Pkm.DRIZZILE
+  stars = 1
+  hp = 120
+  atk = 14
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 3
+  skill = Ability.SNIPE_SHOT
+  attackSprite = AttackSprite.WATER_RANGE
+}
+
+export class Drizzile extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.AQUATIC])
+  rarity = Rarity.ULTRA
+  evolution = Pkm.INTELEON
+  stars = 2
+  hp = 240
+  atk = 26
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 3
+  skill = Ability.SNIPE_SHOT
+  attackSprite = AttackSprite.WATER_RANGE
+}
+
+export class Inteleon extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.AQUATIC])
+  rarity = Rarity.ULTRA
+  stars = 3
+  hp = 360
+  atk = 40
+  def = 6
+  speDef = 6
+  maxPP = 70
+  range = 3
+  skill = Ability.SNIPE_SHOT
+  attackSprite = AttackSprite.WATER_RANGE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (shiny: boolean, emotion: Emotion) => Pokemon
@@ -11210,5 +11254,8 @@ export const PokemonClasses: Record<
   [Pkm.HIPPODOWN]: Hippodown,
   [Pkm.WINGULL]: Wingull,
   [Pkm.PELIPPER]: Pelipper,
-  [Pkm.NIHILEGO]: Nihilego
+  [Pkm.NIHILEGO]: Nihilego,
+  [Pkm.SOBBLE]: Sobble,
+  [Pkm.DRIZZILE]: Drizzile,
+  [Pkm.INTELEON]: Inteleon
 }
