@@ -2897,7 +2897,7 @@ export default class BattleManager {
                 specialProjectile.destroy()
               }
             )
-            const targetCoordinates = transformAttackCoordinate(
+            coordinatesTarget = transformAttackCoordinate(
               targetX,
               targetY,
               this.flip
@@ -2913,8 +2913,8 @@ export default class BattleManager {
             charge.anims.play(Ability.MAGICAL_LEAF)
             this.scene.tweens.add({
               targets: charge,
-              x: targetCoordinates[0],
-              y: targetCoordinates[1],
+              x: coordinatesTarget[0],
+              y: coordinatesTarget[1],
               ease: "linear",
               duration: 500,
               onComplete: () => {
@@ -4948,6 +4948,59 @@ export default class BattleManager {
                 specialProjectile.destroy()
               }
             )
+            break
+
+          case Ability.SNIPE_SHOT:
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
+            coordinatesTarget = transformAttackCoordinate(
+              targetX,
+              targetY,
+              this.flip
+            )
+
+            let targetAngle = Math.atan2(
+              coordinatesTarget[1] - coordinates[1],
+              coordinatesTarget[0] - coordinates[0]
+            )
+
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.SNIPE_SHOT,
+              "projectile1.png"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(3, 3)
+            specialProjectile.anims.play(Ability.SNIPE_SHOT + "_projectile")
+            specialProjectile.setRotation(targetAngle - Math.PI / 2)
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              x: coordinates[0] + Math.round(Math.cos(targetAngle) * 1000),
+              y: coordinates[1] + Math.round(Math.sin(targetAngle) * 1000),
+              ease: "linear",
+              duration: 1000,
+              onComplete: () => {
+                specialProjectile.destroy()
+              }
+            })
+
+            const shot = this.scene.add.sprite(
+              coordinates[0] + Math.round(Math.cos(targetAngle) * 50),
+              coordinates[1] + Math.round(Math.sin(targetAngle) * 50),
+              Ability.SNIPE_SHOT,
+              "shot1.png"
+            )
+            shot.setDepth(7)
+            shot.setScale(1, 1)
+            shot.setRotation(targetAngle + Math.PI / 2)
+            shot.anims.play(Ability.SNIPE_SHOT + "_shot")
+            shot.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+              shot.destroy()
+            })
             break
 
           default:

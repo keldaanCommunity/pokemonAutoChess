@@ -749,6 +749,11 @@ export function loadAttacksMultiAtlas(scene: Phaser.Scene) {
     "/assets/attacks/STEALTH_ROCKS.json",
     "/assets/attacks"
   )
+  scene.load.multiatlas(
+    "SNIPE_SHOT",
+    "/assets/attacks/SNIPE_SHOT.json",
+    "/assets/attacks"
+  )
 }
 
 export function loadEnvironmentMultiAtlas(scene: Phaser.Scene) {

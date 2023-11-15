@@ -2335,6 +2335,30 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.SNIPE_SHOT + "_shot",
+      frames: this.game.anims.generateFrameNames(Ability.SNIPE_SHOT, {
+        start: 1,
+        end: 4,
+        prefix: "shot",
+        suffix: ".png"
+      }),
+      duration: 120,
+      repeat: 0
+    })
+
+    this.game.anims.create({
+      key: Ability.SNIPE_SHOT + "_projectile",
+      frames: this.game.anims.generateFrameNames(Ability.SNIPE_SHOT, {
+        start: 1,
+        end: 3,
+        prefix: "projectile",
+        suffix: ".png"
+      }),
+      duration: 150,
+      repeat: -1
+    })
+
+    this.game.anims.create({
       key: "HIT_NEUTRAL",
       frames: this.game.anims.generateFrameNames("HIT_NEUTRAL", {
         start: 0,
