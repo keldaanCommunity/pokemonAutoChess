@@ -15,3 +15,5 @@
 # Bugfix
 
 # Misc
+
+- ensure you get minimum +1 ELO if finishing first against other players
