@@ -88,7 +88,7 @@ export default class Shop {
   releasePokemon(pkm: Pkm) {
     const pokemon = PokemonFactory.createPokemonFromName(pkm)
     const family = PkmFamily[pokemon.name]
-    const entityNumber = pokemon.stars === 3 ? 9 : pokemon.stars === 2 ? 3 : 1
+    const entityNumber = pokemon.stars >= 3 ? 9 : pokemon.stars === 2 ? 3 : pokemon.stars === 1 ? 1 : 0
     if (pokemon.rarity === Rarity.COMMON) {
       const value = this.commonPool.get(family)
       if (value !== undefined) {
