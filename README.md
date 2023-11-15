@@ -22,7 +22,7 @@ Source: [https://github.com/keldaanCommunity/pokemonAutoChess](https://github.co
 
 ## Getting started
 
-Install [https://nodejs.org/en](Node LTS).
+Install [Node LTS](https://nodejs.org/en).
 
 Main libs used 
 
@@ -30,7 +30,7 @@ Pokemon Auto Chess use mongoDB to store its data and Firebase for authentication
 
 ### MongoDB
 
-You can either setup using the cloud based [https://www.mongodb.com/atlas/database](MongoDB Atlas) or using the [https://www.mongodb.com/try/download/community](local installation).
+You can either setup using the cloud based [MongoDB Atlas](https://www.mongodb.com/atlas/database) or using the [local installation](https://www.mongodb.com/try/download/community).
 
 In order to play against bots, you will need to load bots data into your newly created database.
 
