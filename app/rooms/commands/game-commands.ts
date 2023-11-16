@@ -1023,6 +1023,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             this.room.swap(player, pokemon, coordinate[0], coordinate[1])
           }
         }
+        if(numberOfPokemonsToMove > 0){
+          player.synergies.update(player.board)
+        }
       }
     })
   }
