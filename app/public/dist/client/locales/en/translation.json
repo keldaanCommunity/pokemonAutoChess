@@ -2179,6 +2179,8 @@
   "play_more_games_hint": "Play more games to earn boosters and unlock new avatars !",
   "berry_gained": "+1 BERRY !",
   "berry_unripe": "NOT YET !",
+  "drop_here_to_sell": "Drop here to sell",
+  "for_price_gold": "for {{price}} gold",
   "buy_xp": "Buy XP 4",
   "buy_xp_tooltip": "Buy 4 XP for 4 gold (shortcut: F)",
   "streak": "Streak",
