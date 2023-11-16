@@ -211,6 +211,7 @@ export default class BoardManager {
 
       this.berryTree.setInteractive()
       this.berryTree.on("pointerdown", (pointer) => {
+        if (this.player.id !== this.scene.uid) return
         if (this.scene.room && this.player.berryTreeStage >= 3) {
           this.scene.room.send(Transfer.PICK_BERRY)
           this.displayText(pointer.x, pointer.y, t("berry_gained"))
