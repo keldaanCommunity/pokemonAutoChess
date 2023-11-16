@@ -256,7 +256,8 @@
     "EMPTY_LIGHT": "Empty Light",
     "UNBOUND": "Unbound",
     "HYPERSPACE_FURY": "Hyperspace Fury",
-    "SNIPE_SHOT": "Snipe Shot"
+    "SNIPE_SHOT": "Snipe Shot",
+    "AIR_SLASH": "Air Slash"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -909,7 +910,8 @@
     "NIHILEGO": "Nihilego",
     "SOBBLE": "Sobble",
     "DRIZZILE": "Drizzile",
-    "INTELEON": "Inteleon"
+    "INTELEON": "Inteleon",
+    "TROPIUS": "Tropius"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1151,7 +1153,8 @@
     "EMPTY_LIGHT": "Spits poison directly at an enemy, inflicting [60,SP] SPECIAL and reducing its SPE_DEF by 3. The ability then rebounds on another Pokemon with a lower SPE_DEF. (5 bounces maximum)",
     "UNBOUND": "Unbinds itself to become Hoopa's true form and get a humongous amount of power",
     "HYPERSPACE_FURY": "Using its many arms, unleashes a barrage of [4,SP] attacks. Each attack lowers the target DEF by 1.",
-    "SNIPE_SHOT": "Fires a shot of water from its index fingertips at the farthest opponent, dealing [50,100,200,SP] SPECIAL to all opponents in the way"
+    "SNIPE_SHOT": "Fires a shot of water from its index fingertips at the farthest opponent, dealing [50,100,200,SP] SPECIAL to all opponents in the way",
+    "AIR_SLASH": "Deals [25,50,100,SP] SPECIAL and inflicts FLINCH for 7s"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1591,7 +1594,8 @@
     "NINCADA": "After evolving, get Sheninja as well if you have a free space on your bench",
     "FAMILY": "The pokémon grows with time (turn 15 and turn 20)",
     "SAND_STREAM": "The pokémon count as 3 for SANDSTORM",
-    "DRIZZLE": "The pokémon count as 3 for RAIN"
+    "DRIZZLE": "The pokémon count as 3 for RAIN",
+    "HARVEST": "At the start of the stage, equip itself with a random berry"
   },
   "stat": {
     "ATK": "Attack",

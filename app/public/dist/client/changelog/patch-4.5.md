@@ -4,6 +4,7 @@
 - Sobble
 - Drizzile
 - Inteleon
+- Tropius
 
 # Changes to Pokemon & Abilities
 
