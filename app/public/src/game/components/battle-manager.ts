@@ -51,10 +51,10 @@ export default class BattleManager {
   ) {
     this.group = group
     this.scene = scene
-    this.simulation = simulation
     this.animationManager = animationManager
     this.player = player
     this.boardEventSprites = new Array(BOARD_WIDTH * BOARD_HEIGHT).fill(null)
+    if (simulation) this.setSimulation(simulation)
   }
 
   get flip() {

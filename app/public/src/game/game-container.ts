@@ -53,9 +53,6 @@ class GameContainer {
   constructor(div: HTMLDivElement, uid: string, room: Room<GameState>) {
     this.room = room
     this.div = div
-    this.game = undefined
-    this.player = undefined
-    this.tilemap = undefined
     this.uid = uid
     this.spectate = false
     this.initializeEvents()
@@ -336,7 +333,7 @@ class GameContainer {
   initializePlayer(player: Player) {
     //logger.debug("initializePlayer", player, this.uid)
     if (this.uid == player.id) {
-      this.player = player
+      this.setPlayer(player)
       if (this.tilemap) {
         // logger.debug('initializePlayer', this.player, this.tilemap);
         this.initializeGame()
