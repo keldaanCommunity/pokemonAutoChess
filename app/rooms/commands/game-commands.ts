@@ -15,7 +15,13 @@ import {
   PORTAL_CAROUSEL_BASE_DURATION,
   FIGHTING_PHASE_DURATION
 } from "../../types/Config"
-import { Item, BasicItems, Berries, SynergyStones, SynergyByStone } from "../../types/enum/Item"
+import {
+  Item,
+  BasicItems,
+  Berries,
+  SynergyStones,
+  SynergyByStone
+} from "../../types/enum/Item"
 import { BattleResult } from "../../types/enum/Game"
 import Player from "../../models/colyseus-models/player"
 import PokemonFactory from "../../models/pokemon-factory"
@@ -332,7 +338,10 @@ export class OnDragDropItemCommand extends Command<
       return
     }
 
-    if(SynergyStones.includes(item) && pokemon.types.has(SynergyByStone[item])){
+    if (
+      SynergyStones.includes(item) &&
+      pokemon.types.has(SynergyByStone[item])
+    ) {
       // prevent adding a synergy stone on a pokemon that already has this synergy
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return
@@ -343,11 +352,18 @@ export class OnDragDropItemCommand extends Command<
         BasicItems.includes(i)
       )
       if (itemToCombine) {
-        const recipe = Object.entries(ItemRecipe).find(([result, recipe]) => (recipe[0] == itemToCombine && recipe[1] == item) || (recipe[0] == item && recipe[1] == itemToCombine))
-        if(recipe) {
+        const recipe = Object.entries(ItemRecipe).find(
+          ([result, recipe]) =>
+            (recipe[0] == itemToCombine && recipe[1] == item) ||
+            (recipe[0] == item && recipe[1] == itemToCombine)
+        )
+        if (recipe) {
           const itemCombined = recipe[0] as Item
 
-          if(itemCombined in SynergyByStone && pokemon.types.has(SynergyByStone[itemCombined])){
+          if (
+            itemCombined in SynergyByStone &&
+            pokemon.types.has(SynergyByStone[itemCombined])
+          ) {
             // prevent combining into a synergy stone on a pokemon that already has this synergy
             client.send(Transfer.DRAG_DROP_FAILED, message)
             return
@@ -982,6 +998,11 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       if (player.effects.has(Effect.SPORE)) {
         player.berryTreeStage = max(3)(player.berryTreeStage + 3)
       }
+      player.board.forEach((pkm) => {
+        if (pkm.passive === Passive.HARVEST && pkm.items.size < 3) {
+          pkm.items.add(pickRandomIn(Berries))
+        }
+      })
     })
 
     return commands

@@ -6293,6 +6293,21 @@ export class SnipeShotStrategy extends AbilityStrategy {
   }
 }
 
+export class AirSlashStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = pokemon.stars === 3 ? 100 : pokemon.stars === 2 ? 50 : 25
+    target.status.triggerFlinch(7000)
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -6536,5 +6551,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.EMPTY_LIGHT]: new EmptyLightStrategy(),
   [Ability.UNBOUND]: new UnboundStrategy(),
   [Ability.HYPERSPACE_FURY]: new HyperSpaceFury(),
-  [Ability.SNIPE_SHOT]: new SnipeShotStrategy()
+  [Ability.SNIPE_SHOT]: new SnipeShotStrategy(),
+  [Ability.AIR_SLASH]: new AirSlashStrategy()
 }

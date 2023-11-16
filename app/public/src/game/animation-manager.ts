@@ -868,6 +868,16 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.AIR_SLASH,
+      frames: this.game.anims.generateFrameNames(Ability.AIR_SLASH, {
+        start: 0,
+        end: 7
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.POPULATION_BOMB,
       frames: this.game.anims.generateFrameNames(Ability.POPULATION_BOMB, {
         start: 0,

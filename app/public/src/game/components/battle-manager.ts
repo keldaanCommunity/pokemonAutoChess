@@ -2723,6 +2723,25 @@ export default class BattleManager {
             )
             break
 
+          case Ability.AIR_SLASH:
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.AIR_SLASH,
+              "0"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.AIR_SLASH)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
+
           case Ability.VOLT_SWITCH:
             coordinatesTarget = transformAttackCoordinate(
               targetX,
@@ -4962,7 +4981,7 @@ export default class BattleManager {
               this.flip
             )
 
-            let targetAngle = Math.atan2(
+            const targetAngle = Math.atan2(
               coordinatesTarget[1] - coordinates[1],
               coordinatesTarget[0] - coordinates[0]
             )

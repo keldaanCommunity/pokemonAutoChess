@@ -9739,6 +9739,21 @@ export class Dhelmise extends Pokemon {
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
+export class Tropius extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA, Synergy.FLYING])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 16
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.AIR_SLASH
+  attackSprite = AttackSprite.GRASS_MELEE
+  passive = Passive.HARVEST
+}
+
 export class Koffing extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.POISON, Synergy.ARTIFICIAL])
   rarity = Rarity.UNCOMMON
@@ -11257,5 +11272,6 @@ export const PokemonClasses: Record<
   [Pkm.NIHILEGO]: Nihilego,
   [Pkm.SOBBLE]: Sobble,
   [Pkm.DRIZZILE]: Drizzile,
-  [Pkm.INTELEON]: Inteleon
+  [Pkm.INTELEON]: Inteleon,
+  [Pkm.TROPIUS]: Tropius
 }

@@ -65,5 +65,6 @@ export enum Passive {
   NINCADA = "NINCADA",
   FAMILY = "FAMILY",
   SAND_STREAM = "SAND_STREAM",
-  DRIZZLE = "DRIZZLE"
+  DRIZZLE = "DRIZZLE",
+  HARVEST = "HARVEST"
 }
