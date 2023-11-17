@@ -24,7 +24,6 @@ import { Rarity } from "../types/enum/Game"
 import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
 import { clamp } from "../utils/number"
 import { removeInArray } from "../utils/array"
-import { Pokemon } from "./colyseus-models/pokemon"
 import { logger } from "../utils/logger"
 import { Synergy } from "../types/enum/Synergy"
 import { IPlayer } from "../types"
@@ -123,7 +122,7 @@ export default class Shop {
       if (pokemon != Pkm.MAGIKARP && pokemon != Pkm.DEFAULT) {
         return pokemon
       }
-      return this.pickPokemon(player, stageLevel)
+            return this.pickPokemon(player, stageLevel)
     })
 
     for (let i = 0; i < SHOP_SIZE; i++) {

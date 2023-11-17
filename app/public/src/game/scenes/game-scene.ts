@@ -30,6 +30,8 @@ import Simulation from "../../../../core/simulation"
 import { playMusic } from "../../pages/utils/audio"
 import { getGameContainer } from "../../pages/game"
 import { preferences } from "../../preferences"
+import { SellZone } from "../components/sell-zone"
+import { t } from "i18next"
 
 export default class GameScene extends Scene {
   tilemap: DesignTiled | undefined
@@ -47,9 +49,8 @@ export default class GameScene extends Scene {
   pokemonHovered: Pokemon | undefined
   pokemonDragged: Pokemon | null = null
   itemDragged: ItemContainer | null = null
-  graphics: Phaser.GameObjects.Graphics[] = []
-  dragDropText: Phaser.GameObjects.Text | undefined
-  sellZoneGraphic: Phaser.GameObjects.Graphics | undefined
+  dropSpots: Phaser.GameObjects.Graphics[] = []
+  sellZone: SellZone | undefined
   zones: Phaser.GameObjects.Zone[] = []
   lastDragDropPokemon: Pokemon | undefined
   lastPokemonDetail: Pokemon | undefined
@@ -240,22 +241,6 @@ export default class GameScene extends Scene {
     }
   }
 
-  drawRectangles(sellZoneVisible: boolean) {
-    this.graphics.forEach((rect) => {
-      rect.setVisible(true)
-    })
-    this.dragDropText?.setVisible(sellZoneVisible)
-    this.sellZoneGraphic?.setVisible(sellZoneVisible)
-  }
-
-  removeRectangles() {
-    this.graphics.forEach((rect) => {
-      rect.setVisible(false)
-    })
-    this.dragDropText?.setVisible(false)
-    this.sellZoneGraphic?.setVisible(false)
-  }
-
   resetDragState() {
     if (this.pokemonDragged) {
       this.input.emit(
@@ -278,8 +263,8 @@ export default class GameScene extends Scene {
   }
 
   initializeDragAndDrop() {
-    this.zones = []
-    this.graphics = []
+    this.sellZone = new SellZone(this)
+    this.dropSpots = []
 
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 8; j++) {
@@ -288,7 +273,6 @@ export default class GameScene extends Scene {
         zone.setRectangleDropZone(96, 96)
         zone.setName("board-zone")
         zone.setData({ x: j, y: i })
-        this.zones.push(zone)
         const graphic = this.add
           .graphics()
           .fillStyle(0x61738a, 1)
@@ -296,53 +280,9 @@ export default class GameScene extends Scene {
           .lineStyle(2, 0x000000, 1)
           .strokeCircle(zone.x, zone.y, zone.input!.hitArea.width / 4)
         graphic.setVisible(false)
-        this.graphics.push(graphic)
+        this.dropSpots.push(graphic)
       }
     }
-    const sellZoneCoord = transformCoordinate(4, 5.5)
-    const sellZone = this.add.zone(
-      sellZoneCoord[0] - 48,
-      sellZoneCoord[1] + 24,
-      8 * 96,
-      240
-    )
-    sellZone.setRectangleDropZone(8 * 96, 240)
-    sellZone.setName("sell-zone")
-    this.zones.push(sellZone)
-
-    const graphic = this.add
-      .graphics()
-      .fillStyle(0x61738a, 1)
-      .fillRect(
-        sellZone.x - sellZone.input!.hitArea.width / 2,
-        sellZone.y - sellZone.input!.hitArea.height / 2,
-        sellZone.input!.hitArea.width,
-        sellZone.input!.hitArea.height
-      )
-      .lineStyle(2, 0x000000, 1)
-      .strokeRect(
-        sellZone.x - sellZone.input!.hitArea.width / 2,
-        sellZone.y - sellZone.input!.hitArea.height / 2,
-        sellZone.input!.hitArea.width,
-        sellZone.input!.hitArea.height
-      )
-    graphic.setVisible(false)
-
-    this.sellZoneGraphic = graphic
-
-    this.dragDropText = this.add.text(
-      sellZone.x,
-      sellZone.y,
-      "Drop here to sell",
-      {
-        fontSize: "35px",
-        fontFamily: "brandonGrotesque",
-        color: "black",
-        align: "center"
-      }
-    )
-    this.dragDropText.setVisible(false)
-    this.dragDropText.setOrigin(0.5)
 
     this.input.on("pointerdown", (pointer) => {
       if (
@@ -394,15 +334,14 @@ export default class GameScene extends Scene {
       (pointer, gameObject: Phaser.GameObjects.GameObject) => {
         if (gameObject instanceof Pokemon) {
           this.pokemonDragged = gameObject
-          this.dragDropText?.setText(
-            `Drop here to sell for ${PokemonFactory.getSellPrice(
-              gameObject.name as Pkm
-            )} gold`
+          const price = PokemonFactory.getSellPrice(gameObject.name as Pkm)
+          this.sellZone?.text.setText(
+            `${t("drop_here_to_sell")} ${t("for_price_gold", { price })}`
           )
-          this.drawRectangles(true)
+          this.sellZone?.setVisible(true)
+          this.dropSpots.forEach((spot) => spot.setVisible(true))
         } else if (gameObject instanceof ItemContainer) {
           this.itemDragged = gameObject
-          this.drawRectangles(false)
         }
         // this.children.bringToTop(gameObject);
       }
@@ -422,9 +361,10 @@ export default class GameScene extends Scene {
         if (
           g &&
           this.pokemonDragged != null &&
-          this.sellZoneGraphic?.visible === false
+          this.sellZone?.visible === false
         ) {
-          this.drawRectangles(true)
+          this.sellZone.setVisible(true)
+          this.dropSpots.forEach((spot) => spot.setVisible(true))
         }
       }
     )
@@ -436,7 +376,8 @@ export default class GameScene extends Scene {
         gameObject: Phaser.GameObjects.GameObject,
         dropZone: Phaser.GameObjects.Zone
       ) => {
-        this.removeRectangles()
+        this.dropSpots.forEach((spot) => spot.setVisible(false))
+        this.sellZone?.setVisible(false)
 
         if (gameObject instanceof Pokemon) {
           // POKEMON -> BOARD-ZONE = PLACE POKEMON
@@ -517,7 +458,8 @@ export default class GameScene extends Scene {
     )
 
     this.input.on("dragend", (pointer, gameObject, dropped) => {
-      this.removeRectangles()
+      this.sellZone?.setVisible(false)
+      this.dropSpots.forEach((spot) => spot.setVisible(false))
       if (!dropped) {
         gameObject.x = gameObject.input.dragStartX
         gameObject.y = gameObject.input.dragStartY
