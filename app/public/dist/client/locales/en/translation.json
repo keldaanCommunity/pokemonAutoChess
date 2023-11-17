@@ -257,7 +257,8 @@
     "UNBOUND": "Unbound",
     "HYPERSPACE_FURY": "Hyperspace Fury",
     "SNIPE_SHOT": "Snipe Shot",
-    "AIR_SLASH": "Air Slash"
+    "AIR_SLASH": "Air Slash",
+    "EGGSPLOSION": "Eggsplosion"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -911,7 +912,10 @@
     "SOBBLE": "Sobble",
     "DRIZZILE": "Drizzile",
     "INTELEON": "Inteleon",
-    "TROPIUS": "Tropius"
+    "TROPIUS": "Tropius",
+    "EXEGGCUTE": "Exeggcute",
+    "EXEGGUTOR": "Exeggutor",
+    "ALOLAN_EXEGGUTOR": "Alolan Exeggutor"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1154,7 +1158,8 @@
     "UNBOUND": "Unbinds itself to become Hoopa's true form and get a humongous amount of power",
     "HYPERSPACE_FURY": "Using its many arms, unleashes a barrage of [4,SP] attacks. Each attack lowers the target DEF by 1.",
     "SNIPE_SHOT": "Fires a shot of water from its index fingertips at the farthest opponent, dealing [50,100,200,SP] SPECIAL to all opponents in the way",
-    "AIR_SLASH": "Deals [25,50,100,SP] SPECIAL and inflicts FLINCH for 7s"
+    "AIR_SLASH": "Deals [25,50,100,SP] SPECIAL and inflicts FLINCH for 7s",
+    "EGGSPLOSION": "Launches an explosive egg at its target, inflicting [40,80,140,SP] SPECIAL and applying ARMOR_REDUCTION for 4 seconds to all adjacent enemies. If the target is killed, an egg is added to your bench"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1595,7 +1600,8 @@
     "FAMILY": "The pokémon grows with time (turn 15 and turn 20)",
     "SAND_STREAM": "The pokémon count as 3 for SANDSTORM",
     "DRIZZLE": "The pokémon count as 3 for RAIN",
-    "HARVEST": "At the start of the stage, equip itself with a random berry"
+    "HARVEST": "At the start of the stage, equip itself with a random berry",
+    "COCONUT": "Exeggutor is looking for a LEAF_STONE"
   },
   "stat": {
     "ATK": "Attack",

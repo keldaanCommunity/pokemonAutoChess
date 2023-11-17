@@ -5,6 +5,7 @@
 - Drizzile
 - Inteleon
 - Tropius
+- Exeggcute/Exeggcutor/Alolan-Exeggcutor
 
 # Changes to Pokemon & Abilities
 

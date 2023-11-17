@@ -42,6 +42,7 @@ import {
   BOARD_HEIGHT,
   BOARD_WIDTH,
   DEFAULT_ATK_SPEED,
+  EvolutionTime,
   ItemStats
 } from "../../types/Config"
 
@@ -6308,6 +6309,49 @@ export class AirSlashStrategy extends AbilityStrategy {
   }
 }
 
+export class EggsplosionStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = pokemon.stars === 3 ? 140 : pokemon.stars === 2 ? 80 : 40
+    const kill = target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit
+    )
+    if (kill.death) {
+      const egg = PokemonFactory.createRandomEgg()
+      const player = pokemon.player
+      if (player) {
+        const x = player.getFirstAvailablePositionInBench()
+        if (x !== undefined) {
+          egg.positionX = x
+          egg.positionY = 0
+          egg.evolutionRule.evolutionTimer = EvolutionTime.EGG_HATCH
+          player.board.set(egg.id, egg)
+        }
+      }
+    }
+    board
+      .getAdjacentCells(target.positionX, target.positionY)
+      .map((v) => v.value)
+      .filter((v) => v?.team === target.team)
+      .concat(target)
+      .forEach((v) => {
+        if (v) {
+          v.status.triggerArmorReduction(4000)
+        }
+      })
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -6552,5 +6596,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.UNBOUND]: new UnboundStrategy(),
   [Ability.HYPERSPACE_FURY]: new HyperSpaceFury(),
   [Ability.SNIPE_SHOT]: new SnipeShotStrategy(),
-  [Ability.AIR_SLASH]: new AirSlashStrategy()
+  [Ability.AIR_SLASH]: new AirSlashStrategy(),
+  [Ability.EGGSPLOSION]: new EggsplosionStrategy()
 }
