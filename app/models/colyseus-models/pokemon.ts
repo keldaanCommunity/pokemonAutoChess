@@ -9892,6 +9892,60 @@ export class Heliolisk extends Pokemon {
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
+export class Exeggcute extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.PSYCHIC])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.EXEGGUTOR
+  hp = 150
+  atk = 8
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 3
+  skill = Ability.EGGSPLOSION
+  passive = Passive.COCONUT
+  additional = true
+  attackSprite = AttackSprite.GRASS_MELEE
+}
+
+export class Exeggcutor extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.PSYCHIC])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.ALOLAN_EXEGGUTOR
+  evolutionRule = new ItemEvolutionRule([Item.LEAF_STONE])
+  hp = 250
+  atk = 14
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.EGGSPLOSION
+  passive = Passive.COCONUT
+  additional = true
+  attackSprite = AttackSprite.GRASS_MELEE
+}
+
+export class AlolanExeggutor extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.FLORA,
+    Synergy.PSYCHIC
+  ])
+  rarity = Rarity.EPIC
+  stars = 3
+  hp = 350
+  atk = 24
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.EGGSPLOSION
+  additional = true
+  attackSprite = AttackSprite.GRASS_MELEE
+}
+
 export class Bidoof extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.NORMAL,
@@ -11273,5 +11327,8 @@ export const PokemonClasses: Record<
   [Pkm.SOBBLE]: Sobble,
   [Pkm.DRIZZILE]: Drizzile,
   [Pkm.INTELEON]: Inteleon,
-  [Pkm.TROPIUS]: Tropius
+  [Pkm.TROPIUS]: Tropius,
+  [Pkm.EXEGGCUTE]: Exeggcute,
+  [Pkm.EXEGGUTOR]: Exeggcutor,
+  [Pkm.ALOLAN_EXEGGUTOR]: AlolanExeggutor
 }

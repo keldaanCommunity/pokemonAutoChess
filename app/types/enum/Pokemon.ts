@@ -652,7 +652,10 @@ export enum Pkm {
   SOBBLE = "SOBBLE",
   DRIZZILE = "DRIZZILE",
   INTELEON = "INTELEON",
-  TROPIUS = "TROPIUS"
+  TROPIUS = "TROPIUS",
+  EXEGGCUTE = "EXEGGCUTE",
+  EXEGGUTOR = "EXEGGUTOR",
+  ALOLAN_EXEGGUTOR = "ALOLAN_EXEGGUTOR"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1307,7 +1310,10 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.SOBBLE]: "0816",
   [Pkm.DRIZZILE]: "0817",
   [Pkm.INTELEON]: "0818",
-  [Pkm.TROPIUS]: "0357"
+  [Pkm.TROPIUS]: "0357",
+  [Pkm.EXEGGCUTE]: "0102",
+  [Pkm.EXEGGUTOR]: "0103",
+  [Pkm.ALOLAN_EXEGGUTOR]: "0103-0001"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1962,7 +1968,10 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.SOBBLE]: Pkm.SOBBLE,
   [Pkm.DRIZZILE]: Pkm.SOBBLE,
   [Pkm.INTELEON]: Pkm.SOBBLE,
-  [Pkm.TROPIUS]: Pkm.TROPIUS
+  [Pkm.TROPIUS]: Pkm.TROPIUS,
+  [Pkm.EXEGGCUTE]: Pkm.EXEGGCUTE,
+  [Pkm.EXEGGUTOR]: Pkm.EXEGGCUTE,
+  [Pkm.ALOLAN_EXEGGUTOR]: Pkm.EXEGGCUTE
 }
 
 export enum PkmDuo {
@@ -5353,5 +5362,20 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
+  },
+  [Pkm.EXEGGCUTE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Twirl
+  },
+  [Pkm.EXEGGUTOR]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Dance
+  },
+  [Pkm.ALOLAN_EXEGGUTOR]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Dance
   }
 }
