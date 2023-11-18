@@ -501,7 +501,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  // called after every successful attack (not dodged or protected)
+  // called after every successful basic attack (not dodged or protected)
   onHit({
     target,
     board,
@@ -656,69 +656,6 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
         }
       })
     }
-
-    // Berries trigger
-    const berry = values(this.items).find((item) => Berries.includes(item))
-    if (this.life < 0.5 * this.hp && berry) {
-      let berryEaten = false
-      switch (berry) {
-        case Item.AGUAV_BERRY:
-          berryEaten = true
-          this.handleHeal(this.hp - this.life, this, 0)
-          this.status.triggerConfusion(3000, this)
-          break
-        case Item.APICOT_BERRY:
-          berryEaten = true
-          this.addSpecialDefense(20)
-          break
-        case Item.GANLON_BERRY:
-          berryEaten = true
-          this.addDefense(20)
-          break
-        case Item.JABOCA_BERRY:
-          berryEaten = true
-          this.status.triggerSpikeArmor(10000)
-          break
-        case Item.LANSAT_BERRY:
-          berryEaten = true
-          this.addCritChance(50)
-          break
-        case Item.LIECHI_BERRY:
-          berryEaten = true
-          this.addAttack(15)
-          break
-        case Item.LUM_BERRY:
-          berryEaten = true
-          this.status.clearNegativeStatus()
-          this.status.triggerRuneProtect(10000)
-          break
-        case Item.ORAN_BERRY:
-          berryEaten = true
-          this.addShield(100, this)
-          break
-        case Item.PETAYA_BERRY:
-          berryEaten = true
-          this.addAbilityPower(100)
-          break
-        case Item.ROWAP_BERRY:
-          berryEaten = true
-          this.status.triggerMagicBounce(10000)
-          break
-        case Item.SALAC_BERRY:
-          berryEaten = true
-          this.addAttackSpeed(50)
-          break
-        case Item.SITRUS_BERRY:
-          berryEaten = true
-          this.effects.add(Effect.BUFF_HEAL_RECEIVED)
-          this.handleHeal(20, this, 0)
-          break
-      }
-      if (berryEaten) {
-        this.items.delete(berry)
-        this.refToBoardPokemon.items.delete(berry)
-      }
-    }
   }
 
   // called whenever the unit deals damage, by basic attack or ability
@@ -737,6 +674,69 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.items.has(Item.SHELL_BELL)) {
       this.handleHeal(Math.ceil(0.33 * damage), this, 0)
+    }
+
+    // Berries trigger
+    const berry = values(target.items).find((item) => Berries.includes(item))
+    if (berry && target.life > 0 && target.life < 0.5 * target.hp) {
+      let berryEaten = false
+      switch (berry) {
+        case Item.AGUAV_BERRY:
+          berryEaten = true
+          target.handleHeal(target.hp - target.life, target, 0)
+          target.status.triggerConfusion(3000, target)
+          break
+        case Item.APICOT_BERRY:
+          berryEaten = true
+          target.addSpecialDefense(20)
+          break
+        case Item.GANLON_BERRY:
+          berryEaten = true
+          target.addDefense(20)
+          break
+        case Item.JABOCA_BERRY:
+          berryEaten = true
+          target.status.triggerSpikeArmor(10000)
+          break
+        case Item.LANSAT_BERRY:
+          berryEaten = true
+          target.addCritChance(50)
+          break
+        case Item.LIECHI_BERRY:
+          berryEaten = true
+          target.addAttack(15)
+          break
+        case Item.LUM_BERRY:
+          berryEaten = true
+          target.status.clearNegativeStatus()
+          target.status.triggerRuneProtect(10000)
+          break
+        case Item.ORAN_BERRY:
+          berryEaten = true
+          target.addShield(100, target)
+          break
+        case Item.PETAYA_BERRY:
+          berryEaten = true
+          target.addAbilityPower(100)
+          break
+        case Item.ROWAP_BERRY:
+          berryEaten = true
+          target.status.triggerMagicBounce(10000)
+          break
+        case Item.SALAC_BERRY:
+          berryEaten = true
+          target.addAttackSpeed(50)
+          break
+        case Item.SITRUS_BERRY:
+          berryEaten = true
+          target.effects.add(Effect.BUFF_HEAL_RECEIVED)
+          target.handleHeal(20, target, 0)
+          break
+      }
+      if (berryEaten) {
+        target.items.delete(berry)
+        target.refToBoardPokemon.items.delete(berry)
+      }
     }
   }
 
