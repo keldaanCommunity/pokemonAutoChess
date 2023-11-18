@@ -4208,10 +4208,7 @@ export class Magikarp extends Pokemon {
   passive = Passive.MAGIKARP
   attackSprite = AttackSprite.WATER_MELEE
 
-  evolutionRule = new CountEvolutionRule(8)
-  onAcquired(player: Player) {
-    player.titles.add(Title.FISHERMAN)
-  }
+  evolutionRule = new CountEvolutionRule(8)  
 }
 
 export class Gyarados extends Pokemon {
@@ -4230,6 +4227,9 @@ export class Gyarados extends Pokemon {
   range = 1
   skill = Ability.HYDRO_PUMP
   attackSprite = AttackSprite.WATER_MELEE
+  onAcquired(player: Player) {
+    player.titles.add(Title.FISHERMAN)
+  }
 }
 
 export class Rattata extends Pokemon {
