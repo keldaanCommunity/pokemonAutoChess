@@ -22,6 +22,7 @@
 # Bugfix
 
 - Synergies are now correctly updated after automatic pushing of a pokemon from bench to board
+- Fix Castform passive
 
 # Misc
 
