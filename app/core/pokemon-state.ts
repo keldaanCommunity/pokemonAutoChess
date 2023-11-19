@@ -216,36 +216,7 @@ export default class PokemonState {
         residualDamage = max(1)(residualDamage)
       }
 
-      takenDamage += Math.min(residualDamage, pokemon.life)
-
-      if (attacker && takenDamage > 0) {
-        attacker.onDamageDealt({ target: pokemon, damage: takenDamage })
-        switch (attackType) {
-          case AttackType.PHYSICAL:
-            attacker.physicalDamage += takenDamage
-            break
-
-          case AttackType.SPECIAL:
-            attacker.specialDamage += takenDamage
-            break
-
-          case AttackType.TRUE:
-            attacker.trueDamage += takenDamage
-            break
-
-          default:
-            break
-        }
-
-        pokemon.simulation.room.broadcast(Transfer.POKEMON_DAMAGE, {
-          index: attacker.index,
-          type: attackType,
-          amount: takenDamage,
-          x: pokemon.positionX,
-          y: pokemon.positionY,
-          id: pokemon.simulation.id
-        })
-      }
+      takenDamage += Math.min(residualDamage, pokemon.life)      
 
       if (
         pokemon.items.has(Item.SHINY_CHARM) &&
@@ -384,6 +355,35 @@ export default class PokemonState {
           board.setValue(pokemon.positionX, pokemon.positionY, undefined)
           death = true
         }
+      }
+
+      if (attacker && takenDamage > 0) {
+        attacker.onDamageDealt({ target: pokemon, damage: takenDamage })
+        switch (attackType) {
+          case AttackType.PHYSICAL:
+            attacker.physicalDamage += takenDamage
+            break
+
+          case AttackType.SPECIAL:
+            attacker.specialDamage += takenDamage
+            break
+
+          case AttackType.TRUE:
+            attacker.trueDamage += takenDamage
+            break
+
+          default:
+            break
+        }
+
+        pokemon.simulation.room.broadcast(Transfer.POKEMON_DAMAGE, {
+          index: attacker.index,
+          type: attackType,
+          amount: takenDamage,
+          x: pokemon.positionX,
+          y: pokemon.positionY,
+          id: pokemon.simulation.id
+        })
       }
 
       if (death) {
