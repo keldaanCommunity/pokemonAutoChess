@@ -54,28 +54,6 @@ export type NonFunctionPropNames<T> = {
 
 export type PkmWithConfig = { name: Pkm; shiny?: boolean; emotion?: Emotion }
 
-export type PrecomputedTypePokemon = {
-  [key in Synergy]: {
-    pokemons: Pkm[]
-    uniquePokemons: Pkm[]
-    legendaryPokemons: Pkm[]
-    mythicalPokemons: Pkm[]
-    additionalPokemons: Pkm[]
-  }
-}
-
-export type PrecomputedRaritPokemonyAll = {
-  [key in Rarity]: Pkm[]
-}
-
-export type PrecomputedTypePokemonAll = {
-  [key in Synergy]: Pkm[]
-}
-
-export type PrecomputedAbility = {
-  [key in Ability]: Pkm[]
-}
-
 export enum Role {
   ADMIN = "ADMIN",
   MODERATOR = "MODERATOR",

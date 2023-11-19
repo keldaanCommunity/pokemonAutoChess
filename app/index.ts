@@ -9,7 +9,7 @@ import basicAuth from "express-basic-auth"
 import { WebSocketTransport } from "@colyseus/ws-transport"
 import * as bodyParser from "body-parser"
 import admin from "firebase-admin"
-import PRECOMPUTED_TYPE_POKEMONS_ALL from "./models/precomputed/type-pokemons-all.json"
+import { PRECOMPUTED_POKEMONS_PER_TYPE } from "./models/precomputed"
 import AfterGameRoom from "./rooms/after-game-room"
 import CustomLobbyRoom from "./rooms/custom-lobby-room"
 import PreparationRoom from "./rooms/preparation-room"
@@ -174,7 +174,7 @@ app.get("/pokemons", (req, res) => {
 })
 
 app.get("/types", (req, res) => {
-  res.send(PRECOMPUTED_TYPE_POKEMONS_ALL)
+  res.send(PRECOMPUTED_POKEMONS_PER_TYPE)
 })
 
 app.get("/items", (req, res) => {

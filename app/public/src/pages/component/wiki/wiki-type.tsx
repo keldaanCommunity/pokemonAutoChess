@@ -1,6 +1,6 @@
-import React, { useState } from "react"
+import React from "react"
 import { Tooltip } from "react-tooltip"
-import PRECOMPUTED_TYPE_POKEMONS_ALL from "../../../../../models/precomputed/type-pokemons-all.json"
+import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../../../../../models/precomputed"
 import { SynergyTriggers, RarityColor } from "../../../../../types/Config"
 import { Synergy, SynergyEffects } from "../../../../../types/enum/Synergy"
 import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
@@ -26,7 +26,7 @@ export default function WikiType(props: { type: Synergy | "all" }) {
   if (props.type === "all") {
     pokemonsNames = Object.values(Pkm).filter((p) => p !== Pkm.DEFAULT)
   } else {
-    pokemonsNames = PRECOMPUTED_TYPE_POKEMONS_ALL[props.type].filter(
+    pokemonsNames = PRECOMPUTED_POKEMONS_PER_TYPE[props.type].filter(
       (p) => p !== Pkm.DEFAULT
     ) as Pkm[]
   }

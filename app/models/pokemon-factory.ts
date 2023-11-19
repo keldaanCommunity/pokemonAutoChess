@@ -1,6 +1,6 @@
 import { MapSchema } from "@colyseus/schema"
 import { Emotion, IPlayer } from "../types"
-import { EvolutionTime, HatchList, RarityCost } from "../types/Config"
+import { HatchList, RarityCost } from "../types/Config"
 import { PokemonActionState, Rarity } from "../types/enum/Game"
 import {
   Pkm,
@@ -13,7 +13,7 @@ import { Synergy } from "../types/enum/Synergy"
 import { logger } from "../utils/logger"
 import { pickRandomIn } from "../utils/random"
 import { Egg, Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
-import PRECOMPUTED_TYPE_POKEMONS from "./precomputed/type-pokemons.json"
+import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "./precomputed"
 import { PVEStage } from "./pve-stages"
 
 export default class PokemonFactory {
@@ -100,7 +100,8 @@ export default class PokemonFactory {
       }
     })
     const possibleFossils = (
-      PRECOMPUTED_TYPE_POKEMONS[Synergy.FOSSIL].pokemons as Pkm[]
+      PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[Synergy.FOSSIL]
+        .pokemons as Pkm[]
     ).filter((p) => {
       const pokemon = PokemonFactory.createPokemonFromName(p)
       return (

@@ -52,7 +52,7 @@ import { IGameUser } from "../models/colyseus-models/game-user"
 import History from "../models/mongo-models/history"
 import { components } from "../api-v1/openapi"
 import { Title, Role } from "../types"
-import PRECOMPUTED_TYPE_POKEMONS from "../models/precomputed/type-pokemons.json"
+import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../models/precomputed"
 import BannedUser from "../models/mongo-models/banned-user"
 import { shuffleArray } from "../utils/random"
 import { Rarity } from "../types/enum/Game"
@@ -117,8 +117,10 @@ export default class GameRoom extends Room<GameState> {
       this.state.portals,
       this.state.symbols
     )
-    Object.keys(PRECOMPUTED_TYPE_POKEMONS).forEach((type) => {
-      PRECOMPUTED_TYPE_POKEMONS[type].additionalPokemons.forEach((p) => {
+    Object.keys(PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY).forEach((type) => {
+      PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
+        type
+      ].additionalPokemons.forEach((p) => {
         const pokemon = PokemonFactory.createPokemonFromName(p)
         if (
           (pokemon.rarity === Rarity.UNCOMMON ||

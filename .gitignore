@@ -25,8 +25,7 @@ edit/sheets/*
 edit/dist/*
 edit/credits.json
 edit/durations.json
-/app/public/dist/server/app/models/precomputed/type-pokemons.json
-/app/public/dist/server/models/precomputed/type-pokemons.json
+/app/public/dist/server/app/models/precomputed/*.json
 tests/samples/*
 lib
 /logs/*.log

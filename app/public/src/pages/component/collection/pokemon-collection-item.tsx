@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react"
-import precomputedEmotions from "../../../../../models/precomputed/emotions.json"
+import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../../models/precomputed"
 import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { Emotion } from "../../../../../types/enum/Emotion"
@@ -17,9 +17,8 @@ export default function PokemonCollectionItem(props: {
   setPokemon: Dispatch<SetStateAction<Pkm | undefined>>
 }) {
   if (
-    !precomputedEmotions ||
-    props.index in precomputedEmotions === false ||
-    precomputedEmotions[props.index].includes(1) === false
+    props.index in PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX === false ||
+    PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX[props.index].includes(1) === false
   ) {
     return null
   }
@@ -32,7 +31,7 @@ export default function PokemonCollectionItem(props: {
   const isUnlocked =
     (!props.shinyOnly && emotions?.length > 0) || shinyEmotions?.length > 0
   const availableEmotions = Object.values(Emotion).filter(
-    (e, i) => precomputedEmotions[props.index]?.[i] === 1
+    (e, i) => PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX[props.index]?.[i] === 1
   )
 
   const canUnlock = availableEmotions.some(

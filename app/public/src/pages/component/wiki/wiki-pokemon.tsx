@@ -1,25 +1,26 @@
-import React from "react"
+import React, { useMemo } from "react"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
-import PokemonFactory from "../../../../../models/pokemon-factory"
 import WikiPokemonDetail from "./wiki-pokemon-detail"
-import { PrecomputedRaritPokemonyAll } from "../../../../../types"
-import PRECOMPUTED_RARITY_POKEMONS_ALL from "../../../../../models/precomputed/type-rarity-all.json"
+import {
+  PRECOMPUTED_POKEMONS_PER_RARITY,
+  PRECOMPUTED_POKEMONS_STARS
+} from "../../../../../models/precomputed"
 import { Rarity } from "../../../../../types/enum/Game"
 import { Pkm, PkmIndex, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
 
-const precomputed =
-  PRECOMPUTED_RARITY_POKEMONS_ALL as PrecomputedRaritPokemonyAll
-
 export default function WikiPokemon(props: { rarity: Rarity }) {
-  const pokemons = precomputed[props.rarity].filter((p) => p !== Pkm.DEFAULT)
-  pokemons.sort((a: Pkm, b: Pkm) => {
-    const pa = PokemonFactory.createPokemonFromName(a)
-    const pb = PokemonFactory.createPokemonFromName(b)
-    return PkmFamily[a] === PkmFamily[b]
-      ? pa.stars - pb.stars
-      : PkmIndex[PkmFamily[a]].localeCompare(PkmIndex[PkmFamily[b]])
-  })
+  const pokemons = useMemo(
+    () =>
+      PRECOMPUTED_POKEMONS_PER_RARITY[props.rarity]
+        .filter((p) => p !== Pkm.DEFAULT)
+        .sort((a: Pkm, b: Pkm) => {
+          return PkmFamily[a] === PkmFamily[b]
+            ? PRECOMPUTED_POKEMONS_STARS[a] - PRECOMPUTED_POKEMONS_STARS[b]
+            : PkmIndex[PkmFamily[a]].localeCompare(PkmIndex[PkmFamily[b]])
+        }),
+    [props.rarity]
+  )
 
   return (
     <Tabs>

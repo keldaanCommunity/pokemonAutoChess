@@ -7,10 +7,11 @@ interface BasicModalProps extends ModalProps {
   title?: string
   body: JSX.Element
   confirmText?: string
+  centered?: boolean
 }
 
 export function BasicModal(props: BasicModalProps) {
-  const { show, handleClose, title, body, confirmText } = props
+  const { show, handleClose, title, body, confirmText, centered = true } = props
 
   return (
     <Modal
@@ -18,7 +19,7 @@ export function BasicModal(props: BasicModalProps) {
       dialogClassName="basic-modal"
       show={show}
       onHide={handleClose}
-      centered
+      centered={centered}
     >
       {title && (
         <Modal.Header closeButton className="basic-modal-header">

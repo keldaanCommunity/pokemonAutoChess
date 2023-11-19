@@ -4,8 +4,15 @@ import React, { Dispatch, SetStateAction, useCallback, useMemo } from "react"
 import { useAppSelector } from "../../../hooks"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Synergy } from "../../../../../types/enum/Synergy"
-import { Pkm } from "../../../../../types/enum/Pokemon"
+import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Passive } from "../../../../../types/enum/Passive"
+import { PRECOMPUTED_POKEMONS_STARS } from "../../../../../models/precomputed"
+
+const pokemonsSorted = (Object.values(Pkm) as Pkm[]).sort((a: Pkm, b: Pkm) => {
+  return PkmFamily[a] === PkmFamily[b]
+    ? PRECOMPUTED_POKEMONS_STARS[a] - PRECOMPUTED_POKEMONS_STARS[b]
+    : PkmIndex[PkmFamily[a]].localeCompare(PkmIndex[PkmFamily[b]])
+})
 
 export default function PokemonCarousel(props: {
   type: Synergy | "all"
@@ -24,7 +31,7 @@ export default function PokemonCarousel(props: {
 
   const elligiblePokemons: (React.JSX.Element | null)[] = useMemo(
     () =>
-      (Object.values(Pkm) as Pkm[]).map((v) => {
+      pokemonsSorted.map((v) => {
         const pkm = PokemonFactory.createPokemonFromName(v)
         if (
           v !== Pkm.DEFAULT &&

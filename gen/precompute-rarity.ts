@@ -40,6 +40,6 @@ Object.keys(Rarity).forEach((rarity) => {
 logger.debug(data)
 
 fs.writeFileSync(
-  "../app/models/precomputed/type-rarity-all.json",
+  "../app/models/precomputed/pokemons-per-rarity.json",
   JSON.stringify(data)
 )
