@@ -6,7 +6,7 @@ import { getAvatarString, getPortraitSrc } from "../../utils"
 import { throttle } from "../../../../utils/function"
 import { toggleAnimation } from "../../stores/NetworkStore"
 import store from "../../stores"
-import precomputedEmotions from "../../../../models/precomputed/emotions.json"
+import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../models/precomputed"
 import { cc } from "../../pages/utils/jsx"
 import { IPlayer } from "../../../../types"
 import { logger } from "../../../../utils/logger"
@@ -40,7 +40,9 @@ export function EmoteMenuComponent(props: {
     Emotion.DIZZY
   ].filter((emotion) => {
     const indexEmotion = Object.keys(Emotion).indexOf(emotion)
-    return precomputedEmotions[props.index]?.[indexEmotion] === 1
+    return (
+      PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX[props.index]?.[indexEmotion] === 1
+    )
   })
 
   const pokemonCollection = props.player.pokemonCollection

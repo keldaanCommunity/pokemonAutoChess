@@ -3,7 +3,7 @@ import { Item } from "../../../../../types/enum/Item"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { PkmWithConfig, Emotion } from "../../../../../types"
-import precomputedEmotions from "../../../../../../app/models/precomputed/emotions.json"
+import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../../../app/models/precomputed"
 import { useTranslation } from "react-i18next"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
@@ -29,7 +29,7 @@ export default function SelectedEntity(props: {
       selectedShiny: detailledPkm.shiny
     })
     const availableEmotions: Emotion[] = Object.values(Emotion).filter(
-      (e, i) => precomputedEmotions[pokemon.index]?.[i] === 1
+      (e, i) => PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX[pokemon.index]?.[i] === 1
     )
 
     return (

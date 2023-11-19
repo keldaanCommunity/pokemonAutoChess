@@ -1,4 +1,8 @@
 import React, { useState } from "react"
+import ReactDOM from "react-dom"
+import { useTranslation } from "react-i18next"
+import { Tooltip } from "react-tooltip"
+
 import { Ability } from "../../../../../types/enum/Ability"
 import { addIconsToDescription } from "../../utils/descriptions"
 import PokemonFactory, {
@@ -6,15 +10,9 @@ import PokemonFactory, {
 } from "../../../../../models/pokemon-factory"
 import { getPortraitSrc } from "../../../utils"
 import { cc } from "../../utils/jsx"
-import { PrecomputedAbility } from "../../../../../types"
-import PRECOMPUTED_ABILITY from "../../../../../models/precomputed/ability.json"
+import { PRECOMPUTED_POKEMONS_PER_ABILITY } from "../../../../../models/precomputed"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
-import { Tooltip } from "react-tooltip"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
-import { useTranslation } from "react-i18next"
-import ReactDOM from "react-dom"
-
-const precomputed = PRECOMPUTED_ABILITY as PrecomputedAbility
 
 export default function WikiAbility() {
   const { t } = useTranslation()
@@ -37,7 +35,7 @@ export default function WikiAbility() {
                 </div>
                 <div>
                   <ul>
-                    {precomputed[ability]
+                    {PRECOMPUTED_POKEMONS_PER_ABILITY[ability]
                       .map((p) => PokemonFactory.createPokemonFromName(p))
                       .map((p) => (
                         <li key={p.name}>

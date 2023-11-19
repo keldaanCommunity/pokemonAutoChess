@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
 import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
-import PRECOMPUTED_TYPE_POKEMONS_ALL from "../../../../../models/precomputed/type-pokemons-all.json"
+import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../../../../../models/precomputed"
 import { Item } from "../../../../../types/enum/Item"
 import { getPortraitSrc } from "../../../utils"
 import { PkmWithConfig, Emotion } from "../../../../../types"
@@ -23,11 +23,11 @@ import ReactDOM from "react-dom"
 export default function PokemonPicker(props: {
   selectEntity: React.Dispatch<React.SetStateAction<PkmWithConfig | Item>>
 }) {
-  const tabs = [...Object.keys(PRECOMPUTED_TYPE_POKEMONS_ALL), "none"]
+  const tabs = [...Object.keys(PRECOMPUTED_POKEMONS_PER_TYPE), "none"]
   const pokemonsPerTab = tabs.map((t) =>
     (t === "none"
       ? [Pkm.KECLEON, Pkm.ARCEUS]
-      : PRECOMPUTED_TYPE_POKEMONS_ALL[t]
+      : PRECOMPUTED_POKEMONS_PER_TYPE[t]
     ).map((p) => PokemonFactory.createPokemonFromName(p))
   )
 

@@ -2,9 +2,8 @@ import React from "react"
 import PokemonFactory, {
   isAdditionalPick
 } from "../../../../../models/pokemon-factory"
-import { PrecomputedTypePokemon } from "../../../../../types"
 import { Synergy, SynergyEffects } from "../../../../../types/enum/Synergy"
-import PRECOMPUTED_TYPE_POKEMONS from "../../../../../models/precomputed/type-pokemons.json"
+import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../../../../models/precomputed"
 import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { SynergyTriggers, RarityColor } from "../../../../../types/Config"
 import { useAppSelector } from "../../../hooks"
@@ -15,8 +14,6 @@ import { addIconsToDescription } from "../../utils/descriptions"
 import { useTranslation } from "react-i18next"
 import { cc } from "../../utils/jsx"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
-
-const precomputed = PRECOMPUTED_TYPE_POKEMONS as PrecomputedTypePokemon
 
 export default function SynergyDetailComponent(props: {
   type: Synergy
@@ -31,7 +28,9 @@ export default function SynergyDetailComponent(props: {
     .filter((n) => n <= props.value)
     .at(-1)
 
-  const additionals = precomputed[props.type].additionalPokemons
+  const additionals = PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
+    props.type
+  ].additionalPokemons
     .filter((p) => additionalPokemons.includes(PkmFamily[p]))
     .filter(
       // remove duplicates of same family
@@ -75,10 +74,12 @@ export default function SynergyDetailComponent(props: {
         )
       })}
       <div style={{ display: "flex", flexWrap: "wrap" }}>
-        {precomputed[props.type].pokemons.map((p) => {
-          const pokemon = PokemonFactory.createPokemonFromName(p as Pkm)
-          return <PokemonPortrait p={pokemon} key={p} />
-        })}
+        {PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[props.type].pokemons.map(
+          (p) => {
+            const pokemon = PokemonFactory.createPokemonFromName(p as Pkm)
+            return <PokemonPortrait p={pokemon} key={p} />
+          }
+        )}
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
         {additionals.map((p) => {
@@ -87,13 +88,17 @@ export default function SynergyDetailComponent(props: {
         })}
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
-        {precomputed[props.type].uniquePokemons.map((p) => {
+        {PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
+          props.type
+        ].uniquePokemons.map((p) => {
           const pokemon = PokemonFactory.createPokemonFromName(p as Pkm)
           return <PokemonPortrait p={pokemon} key={p} />
         })}
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
-        {precomputed[props.type].legendaryPokemons.map((p) => {
+        {PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
+          props.type
+        ].legendaryPokemons.map((p) => {
           const pokemon = PokemonFactory.createPokemonFromName(p as Pkm)
           return <PokemonPortrait p={pokemon} key={p} />
         })}

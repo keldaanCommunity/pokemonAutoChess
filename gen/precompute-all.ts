@@ -21,7 +21,7 @@ const dataAll = {}
 })
 
 fs.writeFileSync(
-  "../app/models/precomputed/type-pokemons-all.json",
+  "../app/models/precomputed/pokemons-per-type.json",
   JSON.stringify(dataAll)
 )
 

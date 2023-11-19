@@ -1,7 +1,7 @@
+import fs from "fs"
 import tracker from "../app/public/dist/client/assets/pokemons/tracker.json"
 import PokemonFactory from "../app/models/pokemon-factory"
 import { Pkm } from "../app/types/enum/Pokemon"
-import fs from "fs"
 import { Emotion } from "../app/types/enum/Emotion"
 import { mapToObj } from "../app/utils/map"
 
@@ -25,6 +25,6 @@ Object.values(Pkm).map((pkm) => {
 })
 
 fs.writeFileSync(
-  "../app/models/precomputed/emotions.json",
+  "../app/models/precomputed/emotions-per-pokemon-index.json",
   JSON.stringify(mapToObj(data))
 )

@@ -174,7 +174,7 @@ export function MainSidebar(props: MainSidebarProps) {
             <NavLink svg="bot" onClick={() => navigate("/bot-builder")}>
               {t("bot_builder")}
             </NavLink>
-          )}   
+          )}
 
         {page !== "game" &&
           (user?.role === Role.ADMIN || user?.role === Role.MODERATOR) && (
@@ -373,6 +373,7 @@ function Modals({
         handleClose={closeModal}
         show={modal === "collection"}
         body={<PokemonCollection />}
+        centered={false}
       />
       <BasicModal
         handleClose={closeModal}

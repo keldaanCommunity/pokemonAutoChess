@@ -3,10 +3,12 @@ import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { IPokemonsStatistic } from "../../../../../models/mongo-models/pokemons-statistic"
 import { useTranslation } from "react-i18next"
 import { getPortraitSrc } from "../../../utils"
-import STARS from "../../../../../models/precomputed/stars.json"
 import { Synergy } from "../../../../../types/enum/Synergy"
-import PRECOMPUTED_TYPE_ALL from "../../../../../models/precomputed/type-pokemons-all.json"
-import PRECOMPUTED_RARITY_ALL from "../../../../../models/precomputed/type-rarity-all.json"
+import {
+  PRECOMPUTED_POKEMONS_PER_TYPE,
+  PRECOMPUTED_POKEMONS_PER_RARITY,
+  PRECOMPUTED_POKEMONS_STARS
+} from "../../../../../models/precomputed"
 import { Rarity } from "../../../../../types/enum/Game"
 
 export default function PokemonStatistic(props: {
@@ -28,12 +30,12 @@ export default function PokemonStatistic(props: {
     .filter((v) =>
       props.synergy === "all"
         ? v
-        : PRECOMPUTED_TYPE_ALL[props.synergy].includes(v.name)
+        : PRECOMPUTED_POKEMONS_PER_TYPE[props.synergy].includes(v.name)
     )
     .filter((v) =>
       props.rarity === "all"
         ? v
-        : PRECOMPUTED_RARITY_ALL[props.rarity].includes(v.name)
+        : PRECOMPUTED_POKEMONS_PER_RARITY[props.rarity].includes(v.name)
     )
   filteredPokemons.forEach((pokemon) => {
     const family = families.get(PkmFamily[pokemon.name])
@@ -44,7 +46,10 @@ export default function PokemonStatistic(props: {
     }
   })
   families.forEach((family) => {
-    family.pokemons.sort((a, b) => STARS[a.name] - STARS[b.name])
+    family.pokemons.sort(
+      (a, b) =>
+        PRECOMPUTED_POKEMONS_STARS[a.name] - PRECOMPUTED_POKEMONS_STARS[b.name]
+    )
     family.totalCount = family.pokemons.reduce(
       (prev, curr) => prev + curr.count,
       0

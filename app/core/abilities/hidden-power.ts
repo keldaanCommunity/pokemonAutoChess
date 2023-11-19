@@ -8,7 +8,7 @@ import { pickNRandomIn, pickRandomIn } from "../../utils/random"
 import Board from "../board"
 import PokemonEntity from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
-import PRECOMPUTED_TYPE_POKEMONS from "../../models/precomputed/type-pokemons.json"
+import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../models/precomputed"
 import { AbilityStrategies } from "./abilities"
 import { Transfer } from "../../types"
 import { AbilityStrategy } from "./ability-strategy"
@@ -165,7 +165,7 @@ export class HiddenPowerFStrategy extends HiddenPowerStrategy {
         )
         const fish = PokemonFactory.createPokemonFromName(pkm, player)
         const x = player.getFirstAvailablePositionInBench()
-        if(x !== undefined){
+        if (x !== undefined) {
           fish.positionX = x
           fish.positionY = 0
           fish.action = PokemonActionState.FISH
@@ -392,8 +392,9 @@ export class HiddenPowerPStrategy extends HiddenPowerStrategy {
     super.process(unown, state, board, target, crit)
     const numberToSpawn = 5
     const bugs = [
-      ...PRECOMPUTED_TYPE_POKEMONS[Synergy.BUG].pokemons,
-      ...PRECOMPUTED_TYPE_POKEMONS[Synergy.BUG].additionalPokemons
+      ...PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[Synergy.BUG].pokemons,
+      ...PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[Synergy.BUG]
+        .additionalPokemons
     ] as Pkm[]
     for (let i = 0; i < numberToSpawn; i++) {
       const bug = pickRandomIn(bugs)
@@ -505,7 +506,7 @@ export class HiddenPowerTStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, state, board, target, crit)
-    pickNRandomIn(Berries, 3).forEach(item => {
+    pickNRandomIn(Berries, 3).forEach((item) => {
       unown.player && unown.player.items.add(item)
     })
   }
@@ -592,8 +593,9 @@ export class HiddenPowerWStrategy extends HiddenPowerStrategy {
         const topSynergy = pickRandomIn(topSynergies)[0]
         const candidates = (
           [
-            ...PRECOMPUTED_TYPE_POKEMONS[topSynergy].pokemons,
-            ...PRECOMPUTED_TYPE_POKEMONS[topSynergy].additionalPokemons
+            ...PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[topSynergy].pokemons,
+            ...PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[topSynergy]
+              .additionalPokemons
           ] as Pkm[]
         )
           .map((p) => PokemonFactory.createPokemonFromName(p, player))

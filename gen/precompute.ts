@@ -66,6 +66,6 @@ Object.keys(data).forEach((type) => {
 logger.debug(data)
 
 fs.writeFileSync(
-  "../app/models/precomputed/type-pokemons.json",
+  "../app/models/precomputed/pokemons-per-type-and-category.json",
   JSON.stringify(data)
 )

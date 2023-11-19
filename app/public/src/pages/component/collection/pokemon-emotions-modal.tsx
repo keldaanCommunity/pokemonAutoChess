@@ -13,7 +13,7 @@ import PokemonFactory from "../../../../../models/pokemon-factory"
 import { Emotion } from "../../../../../types"
 import { cc } from "../../utils/jsx"
 import { useTranslation } from "react-i18next"
-import precomputedEmotions from "../../../../../models/precomputed/emotions.json"
+import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../../models/precomputed"
 import "./pokemon-emotions-modal.css"
 
 export default function PokemonEmotionsModal(props: {
@@ -32,7 +32,7 @@ export default function PokemonEmotionsModal(props: {
   )
 
   const availableEmotions: Emotion[] = Object.values(Emotion).filter(
-    (e, i) => precomputedEmotions[p.index]?.[i] === 1
+    (e, i) => PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX[p.index]?.[i] === 1
   )
 
   const pConfig = useMemo(() => {

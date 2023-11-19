@@ -24,7 +24,7 @@ import CustomLobbyRoom from "../custom-lobby-room"
 import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
 import { Language } from "../../types/enum/Language"
 import PokemonConfig from "../../models/colyseus-models/pokemon-config"
-import PRECOMPUTED_RARITY_POKEMONS from "../../models/precomputed/type-rarity-all.json"
+import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../models/precomputed"
 import { BoosterRarityProbability, getEmotionCost } from "../../types/Config"
 import { Rarity } from "../../types/enum/Game"
 import { sum } from "../../utils/array"
@@ -369,10 +369,10 @@ function pickRandomPokemonBooster(): Pkm {
     threshold += rarityProbability
     if (
       seed < threshold &&
-      PRECOMPUTED_RARITY_POKEMONS[rarity] &&
-      PRECOMPUTED_RARITY_POKEMONS[rarity].length > 0
+      PRECOMPUTED_POKEMONS_PER_RARITY[rarity] &&
+      PRECOMPUTED_POKEMONS_PER_RARITY[rarity].length > 0
     ) {
-      pkm = pickRandomIn(PRECOMPUTED_RARITY_POKEMONS[rarity]) as Pkm
+      pkm = pickRandomIn(PRECOMPUTED_POKEMONS_PER_RARITY[rarity]) as Pkm
       break
     }
   }
