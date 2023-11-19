@@ -22,6 +22,7 @@
 # Bugfix
 
 - Synergies are now correctly updated after automatic pushing of a pokemon from bench to board
+- Fix Castform passive
 - Berries are now eaten after receiving ability damage that puts under 50% HP
 
 # Misc

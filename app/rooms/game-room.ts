@@ -45,7 +45,7 @@ import {
   IPokemon,
   Transfer
 } from "../types"
-import { Pkm, PkmDuos, PkmFamily, PkmProposition } from "../types/enum/Pokemon"
+import { Pkm, PkmDuos, PkmProposition } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { IGameUser } from "../models/colyseus-models/game-user"
@@ -56,7 +56,6 @@ import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../models/precompute
 import BannedUser from "../models/mongo-models/banned-user"
 import { shuffleArray } from "../utils/random"
 import { Rarity } from "../types/enum/Game"
-import { Weather } from "../types/enum/Weather"
 import { MiniGame } from "../core/matter/mini-game"
 import { logger } from "../utils/logger"
 import { computeElo } from "../core/elo"
@@ -849,40 +848,6 @@ export default class GameRoom extends Room<GameState> {
     })
 
     return size
-  }
-
-  updateCastform(weather: Weather) {
-    let newForm: Pkm = Pkm.CASTFORM
-    if (weather === Weather.SNOW) {
-      newForm = Pkm.CASTFORM_HAIL
-    } else if (weather === Weather.RAIN) {
-      newForm = Pkm.CASTFORM_RAIN
-    } else if (weather === Weather.SUN) {
-      newForm = Pkm.CASTFORM_SUN
-    }
-
-    this.state.players.forEach((player) => {
-      player.board.forEach((pokemon, id) => {
-        if (
-          PkmFamily[pokemon.name] === PkmFamily[Pkm.CASTFORM] &&
-          pokemon.name !== newForm
-        ) {
-          const newPokemon = PokemonFactory.createPokemonFromName(
-            newForm,
-            player
-          )
-          pokemon.items.forEach((item) => {
-            newPokemon.items.add(item)
-          })
-          newPokemon.positionX = pokemon.positionX
-          newPokemon.positionY = pokemon.positionY
-          player.board.delete(id)
-          player.board.set(newPokemon.id, newPokemon)
-          player.synergies.update(player.board)
-          player.effects.update(player.synergies, player.board)
-        }
-      })
-    })
   }
 
   pickPokemonProposition(

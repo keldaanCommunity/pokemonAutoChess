@@ -19,7 +19,6 @@ export function getWeather(
   ): Weather | null {
     const sortedCount = weathers
       .map((w) => [w, count.get(w) ?? 0] as [Weather, number])
-      .filter(([w, count]) => count >= WeatherThreshold[w])
       .sort((a, b) => b[1] - a[1])
 
     if (sortedCount.length === 0) return null
@@ -110,7 +109,8 @@ export function getWeather(
   const dominantWeather = getDominantWeather(boardWeatherScore)
   if (
     dominantWeather &&
-    boardWeatherScore.get(dominantWeather)! >= WeatherThreshold[dominantWeather]
+    (boardWeatherScore.get(dominantWeather) ?? 0) >=
+      WeatherThreshold[dominantWeather]
   ) {
     return dominantWeather
   }

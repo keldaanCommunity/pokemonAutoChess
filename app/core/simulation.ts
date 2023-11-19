@@ -27,6 +27,7 @@ import { pickRandomIn, randomBetween } from "../utils/random"
 import { Passive } from "../types/enum/Passive"
 import Player from "../models/colyseus-models/player"
 import { values } from "../utils/schemas"
+import { Pkm, PkmFamily } from "../types/enum/Pokemon"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") weather: Weather = Weather.NEUTRAL
@@ -74,7 +75,7 @@ export default class Simulation extends Schema implements ISimulation {
     this.board = new Board(BOARD_HEIGHT, BOARD_WIDTH)
 
     // logger.debug({ blueEffects, redEffects })
-    this.room.updateCastform(this.weather)
+    this.updateCastform(this.weather)
 
     // update effects after castform transformation
     bluePlayer.effects.forEach((e) => this.blueEffects.add(e))
@@ -465,6 +466,41 @@ export default class Simulation extends Schema implements ISimulation {
       }
       pokemon.effects.add(weatherEffect)
     }
+  }
+
+  updateCastform(weather: Weather) {
+    let newForm: Pkm = Pkm.CASTFORM
+    if (weather === Weather.SNOW) {
+      newForm = Pkm.CASTFORM_HAIL
+    } else if (weather === Weather.RAIN) {
+      newForm = Pkm.CASTFORM_RAIN
+    } else if (weather === Weather.SUN) {
+      newForm = Pkm.CASTFORM_SUN
+    }
+
+    ;[this.bluePlayer, this.redPlayer].forEach(player => {
+      if(!player) return;
+      player.board.forEach((pokemon, id) => {
+        if (
+          PkmFamily[pokemon.name] === PkmFamily[Pkm.CASTFORM] &&
+          pokemon.name !== newForm
+        ) {
+          const newPokemon = PokemonFactory.createPokemonFromName(
+            newForm,
+            player
+          )
+          pokemon.items.forEach((item) => {
+            newPokemon.items.add(item)
+          })
+          newPokemon.positionX = pokemon.positionX
+          newPokemon.positionY = pokemon.positionY
+          player.board.delete(id)
+          player.board.set(newPokemon.id, newPokemon)
+          player.synergies.update(player.board)
+          player.effects.update(player.synergies, player.board)
+        }
+      })
+    })
   }
 
   applyPostEffects() {
