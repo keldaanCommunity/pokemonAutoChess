@@ -3,7 +3,6 @@ import { transformCoordinate } from "../../pages/utils/utils"
 import { IPokemon, Transfer } from "../../../../types"
 import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
-import { Item } from "../../../../types/enum/Item"
 import { AnimationConfig } from "../../../../types/enum/Pokemon"
 import {
   GamePhaseState,
@@ -56,7 +55,7 @@ export default class BoardManager {
     this.player = player
     this.mode = BoardMode.PICK
     this.animationManager = animationManager
-    this.buildPokemons()
+    this.renderBoard()
 
     if (this.scene.room?.state.phase == GamePhaseState.FIGHT) {
       this.battleMode()
@@ -145,7 +144,7 @@ export default class BoardManager {
     this.animationManager.animatePokemon(pokemonUI, pokemon.action, false)
     this.pokemons.set(pokemonUI.id, pokemonUI)
     if (pokemon.positionY != 0 && this.mode !== BoardMode.PICK) {
-      pokemonUI.setVisible(false)
+      pokemonUI.destroy()
     }
 
     return pokemonUI
@@ -159,9 +158,10 @@ export default class BoardManager {
     this.pokemons.delete(pokemonToRemove.id)
   }
 
-  buildPokemons() {
+  renderBoard() {
     this.showLightCell()
     this.showBerryTree()
+    this.pokemons.clear()
     this.player.board.forEach((pokemon) => {
       this.addPokemon(pokemon)
     })
@@ -350,7 +350,8 @@ export default class BoardManager {
     this.hideLightCell()
     this.pokemons.forEach((pokemon) => {
       if (pokemon.positionY != 0) {
-        pokemon.setVisible(false)
+        pokemon.destroy()
+        this.pokemons.delete(pokemon.id)
       }
     })
     this.closeTooltips()
@@ -360,11 +361,7 @@ export default class BoardManager {
   pickMode() {
     // logger.debug('pickMode');
     this.mode = BoardMode.PICK
-    this.showLightCell()
-    this.showBerryTree()
-    this.pokemons.forEach((pokemon) => {
-      pokemon.setVisible(true)
-    })
+    this.renderBoard()
     this.updatePlayerAvatar()
     if (this.opponentAvatar) {
       this.opponentAvatar.destroy(true)
@@ -405,9 +402,8 @@ export default class BoardManager {
       this.pokemons.forEach((pokemon) => {
         pokemon.destroy(true)
       })
-      this.pokemons.clear()
       this.player = player
-      this.buildPokemons()
+      this.renderBoard()
       this.updatePlayerAvatar()
       this.updateOpponentAvatar(
         this.player.opponentId,
@@ -452,7 +448,8 @@ export default class BoardManager {
           pokemonUI.x = coordinates[0]
           pokemonUI.y = coordinates[1]
           if (pokemonUI.positionY != 0 && this.mode == "battle") {
-            pokemonUI.setVisible(false)
+            pokemonUI.destroy()
+            this.pokemons.delete(pokemonUI.id)
           }
           break
 
