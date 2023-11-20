@@ -20,7 +20,8 @@ import {
   BoardEvent,
   Orientation,
   PokemonActionState,
-  Rarity
+  Rarity,
+  Stat
 } from "./enum/Game"
 import { Emotion } from "./enum/Emotion"
 import { Effect } from "./enum/Effect"
@@ -418,11 +419,18 @@ export function instanceofPokemonEntity(
 
 export interface IPokemonEntity {
   simulation: ISimulation
+  refToBoardPokemon: IPokemon
+  applyStat(stat: Stat, value: number): void
   addAbilityPower(value: number): void
+  addPP(pp: number): void
   addAttack(atk: number): void
   addAttackSpeed(as: number): void
   addMaxHP(life: number): void
-  addShield(shieldBonus: number, pokemon: IPokemonEntity)
+  addShield(shieldBonus: number, pokemon: IPokemonEntity): void
+  addDefense(value: number, apBoost?: boolean): void
+  addSpecialDefense(value: number, apBoost?: boolean): void
+  addCritChance(value: number): void
+  addCritDamage(value: number, apBoost?: boolean): void
   update(dt: number, board: Board, weather: string)
   physicalDamage: number
   specialDamage: number

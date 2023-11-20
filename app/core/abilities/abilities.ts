@@ -6223,7 +6223,6 @@ export class UnboundStrategy extends AbilityStrategy {
     pokemon.atk += 10
     pokemon.toMovingState()
     pokemon.addMaxHP(100)
-    pokemon.handleHeal(100, pokemon, 0)
   }
 }
 

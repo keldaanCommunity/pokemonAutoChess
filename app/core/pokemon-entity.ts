@@ -1,5 +1,5 @@
 import { Berries, Item } from "../types/enum/Item"
-import { Orientation, PokemonActionState, Team } from "../types/enum/Game"
+import { Orientation, PokemonActionState, Stat, Team } from "../types/enum/Game"
 import MovingState from "./moving-state"
 import AttackingState from "./attacking-state"
 import { nanoid } from "nanoid"
@@ -295,8 +295,17 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
+  addCritDamage(value: number, apBoost = false) {
+    const boost = apBoost ? (value * this.ap) / 100 : 0
+    this.critDamage = Math.max(
+      0,
+      roundTo2Digits(this.critDamage + value + boost)
+    )
+  }
+
   addMaxHP(value: number) {
     this.hp = min(1)(this.hp + value)
+    this.life = max(this.hp)(this.life + value)
   }
 
   addDodgeChance(value: number) {
@@ -360,15 +369,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.passive === Passive.SURGE_SURFER) {
       this.addAttackSpeed(-30, false)
     }
-  }
-
-  addCritDamage(value: number, apBoost = false) {
-    const boost = apBoost ? (value * this.ap) / 100 : 0
-    this.critDamage = Math.max(
-      0,
-      roundTo2Digits(this.critDamage + value + boost)
-    )
-  }
+  }  
 
   moveTo(x: number, y: number, board: Board) {
     board.swapValue(this.positionX, this.positionY, x, y)
@@ -837,7 +838,6 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
           attackBoost = 9
         }
         this.addMaxHP(lifeBoost)
-        this.handleHeal(lifeBoost, this, 0)
         this.addAttack(attackBoost)
         this.count.monsterExecutionCount++
       }
@@ -923,11 +923,50 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
+  onFightStart(){
+    
+  }
+
   flyAway(board: Board) {
     const flyAwayCell = board.getFlyAwayCell(this.positionX, this.positionY)
     this.flyingProtection--
     if (flyAwayCell) {
       this.moveTo(flyAwayCell.x, flyAwayCell.y, board)
+    }
+  }
+
+  applyStat(stat: Stat, value: number) {
+    switch (stat) {
+      case Stat.ATK:
+        this.addAttack(value)
+        break
+      case Stat.DEF:
+        this.addDefense(value)
+        break
+      case Stat.SPE_DEF:
+        this.addSpecialDefense(value)
+        break
+      case Stat.AP:
+        this.addAbilityPower(value)
+        break
+      case Stat.PP:
+        this.addPP(value)
+        break
+      case Stat.ATK_SPEED:
+        this.addAttackSpeed(value)
+        break
+      case Stat.CRIT_CHANCE:
+        this.addCritChance(value)
+        break
+      case Stat.CRIT_DAMAGE:
+        this.addCritDamage(value)
+        break
+      case Stat.SHIELD:
+        this.addShield(value, this)
+        break
+      case Stat.HP:
+        this.handleHeal(value, this, 0)
+        break
     }
   }
 

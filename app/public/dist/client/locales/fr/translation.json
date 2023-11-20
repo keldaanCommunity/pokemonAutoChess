@@ -1505,7 +1505,7 @@
     "TYROGUE": "Choisira une discipline de combat en fonction du premier élément donné",
     "PROTEAN2": "Le pokémon acquiert le type des 2 synergies les plus élevées de l'équipe",
     "PROTEAN3": "Le pokémon acquiert le type des 3 synergies les plus élevées de l'équipe",
-    "CASTFORM": "Castform change sa forme et la météo en SUN, RAIN ou SNOW en fonction de votre synergie dominante entre FIRE WATER ICE",
+    "CASTFORM": "$t(pkm.CASTFORM) change sa forme et la météo en SUN, RAIN ou SNOW en fonction de votre synergie dominante entre FIRE WATER ICE",
     "PHIONE": "Phione cherche un Oeuf Océan",
     "PRIMAL": "La légende raconte qu'on pourrait libérer les pouvoirs primordiaux de ces pokémons légendaires",
     "WONDER_GUARD": "Réduit les dégâts reçus et les soins reçus à 1",

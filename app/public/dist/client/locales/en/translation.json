@@ -258,7 +258,8 @@
     "HYPERSPACE_FURY": "Hyperspace Fury",
     "SNIPE_SHOT": "Snipe Shot",
     "AIR_SLASH": "Air Slash",
-    "EGGSPLOSION": "Eggsplosion"
+    "EGGSPLOSION": "Eggsplosion",
+    "FLORAL_HEALING": "Floral Healing"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -915,7 +916,8 @@
     "TROPIUS": "Tropius",
     "EXEGGCUTE": "Exeggcute",
     "EXEGGUTOR": "Exeggutor",
-    "ALOLAN_EXEGGUTOR": "Alolan Exeggutor"
+    "ALOLAN_EXEGGUTOR": "Alolan Exeggutor",
+    "COMFEY": "Comfey"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1159,7 +1161,8 @@
     "HYPERSPACE_FURY": "Using its many arms, unleashes a barrage of [4,SP] attacks. Each attack lowers the target DEF by 1.",
     "SNIPE_SHOT": "Fires a shot of water from its index fingertips at the farthest opponent, dealing [50,100,200,SP] SPECIAL to all opponents in the way",
     "AIR_SLASH": "Deals [25,50,100,SP] SPECIAL and inflicts FLINCH for 7s",
-    "EGGSPLOSION": "Launches an explosive egg at its target, inflicting [40,80,140,SP] SPECIAL and applying ARMOR_REDUCTION for 4 seconds to all adjacent enemies. If the target is killed, you have a 30% chance of getting an egg on your bench."
+    "EGGSPLOSION": "Launches an explosive egg at its target, inflicting [40,80,140,SP] SPECIAL and applying ARMOR_REDUCTION for 4 seconds to all adjacent enemies. If the target is killed, you have a 30% chance of getting an egg on your bench.",
+    "FLORAL_HEALING": "Heals as many HP as max PP of Comfey's holder or Comfey itself if not hold. Increase healing by 30% if under GRASS_FIELD"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1454,7 +1457,8 @@
     "RAWST_BERRY": "Rawst Berry",
     "ROWAP_BERRY": "Rowap Berry",
     "SALAC_BERRY": "Salac Berry",
-    "SITRUS_BERRY": "Sitrus Berry"
+    "SITRUS_BERRY": "Sitrus Berry",
+    "COMFEY": "Comfey"
   },
   "item_description": {
     "FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -1530,7 +1534,8 @@
     "RAWST_BERRY": "Consumed when being BURN for the first time, giving immunity to BURN for the rest of the fight",
     "ROWAP_BERRY": "Once below 50% HP, cast $t(ability.MAGIC_BOUNCE) for 10 seconds",
     "SALAC_BERRY": "Once below 50% HP, gain 50% ATK_SPEED",
-    "SITRUS_BERRY": "Once below 50% HP, heal 30 HP and increase all healing received by 50%"
+    "SITRUS_BERRY": "Once below 50% HP, heal 30 HP and increase all healing received by 50%",
+    "COMFEY": "Wears Comfey and get its ability and all its stats"
   },
   "passive_description": {
     "NONE": "No passive",
@@ -1601,7 +1606,8 @@
     "SAND_STREAM": "The pokémon count as 3 for SANDSTORM",
     "DRIZZLE": "The pokémon count as 3 for RAIN",
     "HARVEST": "At the start of the stage, equip itself with a random berry",
-    "COCONUT": "Exeggutor is looking for a LEAF_STONE"
+    "COCONUT": "Exeggutor is looking for a LEAF_STONE",
+    "COMFEY": "At the start of the fight, the nearest ally with a free item slot wears Comfey and gains all its stats. Comfey casts its ability at the same time than its holder. When its holder is KO, Comfey fights on its own."
   },
   "stat": {
     "ATK": "Attack",

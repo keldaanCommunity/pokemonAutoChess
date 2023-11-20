@@ -32,14 +32,15 @@ export const PRECOMPUTED_POKEMONS_PER_RARITY =
   }
 
 export const PRECOMPUTED_POKEMONS_PER_ABILITY =
-  JSON_PRECOMPUTED_POKEMONS_PER_ABILITY as {
+  JSON_PRECOMPUTED_POKEMONS_PER_ABILITY as unknown as {
     [key in Ability]: Pkm[]
   }
 
-  export const PRECOMPUTED_POKEMONS_STARS = JSON_PRECOMPUTED_POKEMONS_STARS as {
-    [pkm in Pkm]: number
-  }
+export const PRECOMPUTED_POKEMONS_STARS = JSON_PRECOMPUTED_POKEMONS_STARS as {
+  [pkm in Pkm]: number
+}
 
-  export const PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX = JSON_PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX as {
-    [pkm: typeof PkmIndex[Pkm]]: number[]
+export const PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX =
+  JSON_PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX as {
+    [pkm: (typeof PkmIndex)[Pkm]]: number[]
   }

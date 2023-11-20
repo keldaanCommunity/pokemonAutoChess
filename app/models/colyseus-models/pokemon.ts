@@ -1,11 +1,20 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
 
-import { Schema, type, SetSchema } from "@colyseus/schema"
+import { Schema, type, SetSchema, MapSchema } from "@colyseus/schema"
 import { nanoid } from "nanoid"
-import { Emotion, IPokemon, AttackSprite, Title } from "../../types"
+import {
+  Emotion,
+  IPokemon,
+  AttackSprite,
+  Title,
+  IPlayer,
+  IPokemonEntity
+} from "../../types"
 import {
   DEFAULT_ATK_SPEED,
+  DEFAULT_CRIT_CHANCE,
+  DEFAULT_CRIT_DAMAGE,
   EvolutionTime,
   ItemRecipe,
   MausholdEvolutionTurn,
@@ -29,6 +38,8 @@ import {
   TurnEvolutionRule
 } from "../../core/evolution-rules"
 import PokemonFactory from "../pokemon-factory"
+import { distanceM } from "../../utils/distance"
+import Board from "../../core/board"
 
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string
@@ -100,6 +111,7 @@ export class Pokemon extends Schema implements IPokemon {
     return this.positionY === 0
   }
 
+  // called after manually changing position of the pokemon on board
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onChangePosition(
     x: number,
@@ -109,8 +121,33 @@ export class Pokemon extends Schema implements IPokemon {
     lightY: number
   ) {}
 
+  // called after buying or picking the mon
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onAcquired(player: Player) {}
+
+  // called at simulation start before entities are generated
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  beforeSimulationStart({
+    weather,
+    player
+  }: {
+    weather: Weather
+    player: IPlayer
+  }) {}
+
+  // called at simulation start after entities are generated
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  afterSimulationStart({
+    player,
+    board,
+    team,
+    entity
+  }: {
+    player: IPlayer
+    board: Board
+    team: MapSchema<IPokemonEntity>
+    entity: IPokemonEntity
+  }) {}
 }
 
 export class Ditto extends Pokemon {
@@ -4208,7 +4245,7 @@ export class Magikarp extends Pokemon {
   passive = Passive.MAGIKARP
   attackSprite = AttackSprite.WATER_MELEE
 
-  evolutionRule = new CountEvolutionRule(8)  
+  evolutionRule = new CountEvolutionRule(8)
 }
 
 export class Gyarados extends Pokemon {
@@ -5030,6 +5067,30 @@ export class Kecleon extends Pokemon {
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
+function updateCastform(pokemon: Pokemon, weather: Weather, player: Player) {
+  let weatherForm: Pkm = Pkm.CASTFORM
+  if (weather === Weather.SNOW) {
+    weatherForm = Pkm.CASTFORM_HAIL
+  } else if (weather === Weather.RAIN) {
+    weatherForm = Pkm.CASTFORM_RAIN
+  } else if (weather === Weather.SUN) {
+    weatherForm = Pkm.CASTFORM_SUN
+  }
+
+  if (pokemon.name === weatherForm) return
+
+  const newPokemon = PokemonFactory.createPokemonFromName(weatherForm, player)
+  pokemon.items.forEach((item) => {
+    newPokemon.items.add(item)
+  })
+  newPokemon.positionX = pokemon.positionX
+  newPokemon.positionY = pokemon.positionY
+  player.board.delete(pokemon.id)
+  player.board.set(newPokemon.id, newPokemon)
+  player.synergies.update(player.board)
+  player.effects.update(player.synergies, player.board)
+}
+
 export class Castform extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.ARTIFICIAL])
   rarity = Rarity.UNIQUE
@@ -5043,6 +5104,10 @@ export class Castform extends Pokemon {
   skill = Ability.FORECAST
   passive = Passive.CASTFORM
   attackSprite = AttackSprite.PSYCHIC_RANGE
+
+  beforeSimulationStart({ weather, player }) {
+    updateCastform(this, weather, player)
+  }
 }
 
 export class CastformSun extends Pokemon {
@@ -5062,6 +5127,10 @@ export class CastformSun extends Pokemon {
   skill = Ability.FORECAST
   passive = Passive.CASTFORM
   attackSprite = AttackSprite.DRAGON_RANGE
+
+  beforeSimulationStart({ weather, player }) {
+    updateCastform(this, weather, player)
+  }
 }
 
 export class CastformRain extends Pokemon {
@@ -5081,6 +5150,10 @@ export class CastformRain extends Pokemon {
   skill = Ability.FORECAST
   passive = Passive.CASTFORM
   attackSprite = AttackSprite.WATER_RANGE
+
+  beforeSimulationStart({ weather, player }) {
+    updateCastform(this, weather, player)
+  }
 }
 
 export class CastformHail extends Pokemon {
@@ -5100,6 +5173,10 @@ export class CastformHail extends Pokemon {
   skill = Ability.FORECAST
   passive = Passive.CASTFORM
   attackSprite = AttackSprite.ICE_RANGE
+
+  beforeSimulationStart({ weather, player }) {
+    updateCastform(this, weather, player)
+  }
 }
 
 export class Landorus extends Pokemon {
@@ -10672,6 +10749,75 @@ export class Inteleon extends Pokemon {
   attackSprite = AttackSprite.WATER_RANGE
 }
 
+export class Comfey extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.FAIRY])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 100
+  atk = 10
+  def = 4
+  speDef = 6
+  maxPP = 80
+  range = 3
+  skill = Ability.FLORAL_HEALING
+  passive = Passive.COMFEY
+  attackSprite = AttackSprite.FAIRY_RANGE
+
+  afterSimulationStart({
+    board,
+    team,
+    entity
+  }: {
+    board: Board
+    team: MapSchema<IPokemonEntity>
+    entity: IPokemonEntity
+  }) {
+    const alliesWithFreeSlots = values(team).filter(
+      (p) => p.name !== Pkm.COMFEY && p.items.size < 3
+    )
+
+    if (alliesWithFreeSlots.length > 0) {
+      alliesWithFreeSlots.sort(
+        (a, b) =>
+          distanceM(
+            a.positionX,
+            a.positionY,
+            entity.positionX,
+            entity.positionY
+          ) -
+          distanceM(
+            b.positionX,
+            b.positionY,
+            entity.positionX,
+            entity.positionY
+          )
+      )
+      const nearestAllyWithFreeItemSlot = alliesWithFreeSlots[0]
+      team.delete(entity.id)
+      board.setValue(entity.positionX, entity.positionY, undefined)
+      nearestAllyWithFreeItemSlot.items.add(Item.COMFEY)
+
+      // apply comfey stats
+      nearestAllyWithFreeItemSlot.addPP(entity.pp)
+      nearestAllyWithFreeItemSlot.addAbilityPower(entity.ap)
+      nearestAllyWithFreeItemSlot.addAttack(entity.atk)
+      nearestAllyWithFreeItemSlot.addAttackSpeed(
+        entity.atkSpeed - DEFAULT_ATK_SPEED
+      )
+      nearestAllyWithFreeItemSlot.addShield(entity.shield, entity)
+      nearestAllyWithFreeItemSlot.addMaxHP(entity.hp)
+      nearestAllyWithFreeItemSlot.addDefense(entity.def)
+      nearestAllyWithFreeItemSlot.addSpecialDefense(entity.speDef)
+      nearestAllyWithFreeItemSlot.addCritChance(
+        entity.critChance - DEFAULT_CRIT_CHANCE
+      )
+      nearestAllyWithFreeItemSlot.addCritDamage(
+        entity.critDamage - DEFAULT_CRIT_DAMAGE
+      )
+    }
+  }
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (shiny: boolean, emotion: Emotion) => Pokemon
@@ -11330,5 +11476,6 @@ export const PokemonClasses: Record<
   [Pkm.TROPIUS]: Tropius,
   [Pkm.EXEGGCUTE]: Exeggcute,
   [Pkm.EXEGGUTOR]: Exeggcutor,
-  [Pkm.ALOLAN_EXEGGUTOR]: AlolanExeggutor
+  [Pkm.ALOLAN_EXEGGUTOR]: AlolanExeggutor,
+  [Pkm.COMFEY]: Comfey
 }
