@@ -111,6 +111,9 @@ export class Pokemon extends Schema implements IPokemon {
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onAcquired(player: Player) {}
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onEvolve(pokemonEvolved: Pokemon) {}
 }
 
 export class Ditto extends Pokemon {
@@ -4208,7 +4211,7 @@ export class Magikarp extends Pokemon {
   passive = Passive.MAGIKARP
   attackSprite = AttackSprite.WATER_MELEE
 
-  evolutionRule = new CountEvolutionRule(8)  
+  evolutionRule = new CountEvolutionRule(8)
 }
 
 export class Gyarados extends Pokemon {
@@ -7240,6 +7243,11 @@ export class Munchlax extends Pokemon {
   passive = Passive.GLUTTON
   additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
+
+  onEvolve(snorlax) {
+    // carry over the hp gained with passive
+    snorlax.hp += (this.hp - 120)
+  }
 }
 
 export class Snorlax extends Pokemon {
