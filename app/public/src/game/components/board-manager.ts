@@ -153,7 +153,7 @@ export default class BoardManager {
   removePokemon(pokemonToRemove: IPokemon) {
     const pokemonUI = this.pokemons.get(pokemonToRemove.id)
     if (pokemonUI) {
-      pokemonUI.destroy(true)
+      pokemonUI.destroy()
     }
     this.pokemons.delete(pokemonToRemove.id)
   }
@@ -161,6 +161,7 @@ export default class BoardManager {
   renderBoard() {
     this.showLightCell()
     this.showBerryTree()
+    this.pokemons.forEach((p) => p.destroy())
     this.pokemons.clear()
     this.player.board.forEach((pokemon) => {
       this.addPokemon(pokemon)
@@ -256,14 +257,14 @@ export default class BoardManager {
         getEnd: () => y - 110
       },
       onComplete: () => {
-        text.destroy(true)
+        text.destroy()
       }
     })
   }
 
   updatePlayerAvatar() {
     if (this.playerAvatar) {
-      this.playerAvatar.destroy(true)
+      this.playerAvatar.destroy()
     }
     if (this.player.life <= 0) return // do not display avatar when player is dead
     const playerAvatar = new PokemonAvatarModel(
@@ -292,7 +293,7 @@ export default class BoardManager {
 
   updateOpponentAvatar(opponentId: string, opponentAvatarString: string) {
     if (this.opponentAvatar) {
-      this.opponentAvatar.destroy(true)
+      this.opponentAvatar.destroy()
     }
 
     if (opponentId === "pve") {
@@ -364,7 +365,7 @@ export default class BoardManager {
     this.renderBoard()
     this.updatePlayerAvatar()
     if (this.opponentAvatar) {
-      this.opponentAvatar.destroy(true)
+      this.opponentAvatar.destroy()
     }
     if (this.pveChestGroup) {
       this.pveChestGroup.destroy(true, true)
@@ -385,10 +386,10 @@ export default class BoardManager {
     this.scene.input.setDragState(this.scene.input.activePointer, 0)
 
     if (this.playerAvatar) {
-      this.playerAvatar.destroy(true)
+      this.playerAvatar.destroy()
     }
     if (this.opponentAvatar) {
-      this.opponentAvatar.destroy(true)
+      this.opponentAvatar.destroy()
     }
     if (this.pveChestGroup) {
       this.pveChestGroup.destroy(true, true)
@@ -400,7 +401,7 @@ export default class BoardManager {
   setPlayer(player: Player) {
     if (player.id != this.player.id) {
       this.pokemons.forEach((pokemon) => {
-        pokemon.destroy(true)
+        pokemon.destroy()
       })
       this.player = player
       this.renderBoard()

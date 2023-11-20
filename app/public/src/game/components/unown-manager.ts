@@ -121,7 +121,7 @@ export default class UnownManager {
         getEnd: () => coordinates[1] - 110
       },
       onComplete: () => {
-        container.destroy(true)
+        container.destroy()
       }
     })
   }
