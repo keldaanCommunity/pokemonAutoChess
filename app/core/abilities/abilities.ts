@@ -6352,6 +6352,29 @@ export class EggsplosionStrategy extends AbilityStrategy {
   }
 }
 
+export class VineWhipStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    board
+      .getAdjacentCells(target.positionX, target.positionY)
+      .map((v) => v.value)
+      .filter((v) => v?.team === target.team)
+      .concat(target)
+      .forEach((v) => {
+        if (v) {
+          v.status.triggerFlinch(3000)
+        }
+      })
+    target.handleSpecialDamage(100, board, AttackType.SPECIAL, pokemon, crit)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -6597,5 +6620,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.HYPERSPACE_FURY]: new HyperSpaceFury(),
   [Ability.SNIPE_SHOT]: new SnipeShotStrategy(),
   [Ability.AIR_SLASH]: new AirSlashStrategy(),
-  [Ability.EGGSPLOSION]: new EggsplosionStrategy()
+  [Ability.EGGSPLOSION]: new EggsplosionStrategy(),
+  [Ability.VINE_WHIP]: new VineWhipStrategy()
 }

@@ -328,7 +328,8 @@ export const UniqueShop = new Array<PkmProposition>(
   Pkm.HERACROSS,
   PkmDuo.ILLUMISE_VOLBEAT,
   Pkm.TANDEMAUS,
-  Pkm.TROPIUS
+  Pkm.TROPIUS,
+  Pkm.CARNIVINE
 )
 
 export const LegendaryShop = new Array<PkmProposition>(
