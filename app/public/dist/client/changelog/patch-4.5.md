@@ -7,6 +7,7 @@
 - Tropius
 - Exeggcute/Exeggcutor/Alolan-Exeggcutor
 - Carnivine
+- Comfey
 
 # Changes to Pokemon & Abilities
 

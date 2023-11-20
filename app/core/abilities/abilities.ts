@@ -42,8 +42,7 @@ import {
   BOARD_HEIGHT,
   BOARD_WIDTH,
   DEFAULT_ATK_SPEED,
-  EvolutionTime,
-  ItemStats
+  EvolutionTime
 } from "../../types/Config"
 
 import Board from "../board"
@@ -6223,7 +6222,6 @@ export class UnboundStrategy extends AbilityStrategy {
     pokemon.atk += 10
     pokemon.toMovingState()
     pokemon.addMaxHP(100)
-    pokemon.handleHeal(100, pokemon, 0)
   }
 }
 
@@ -6372,6 +6370,19 @@ export class VineWhipStrategy extends AbilityStrategy {
         }
       })
     target.handleSpecialDamage(100, board, AttackType.SPECIAL, pokemon, crit)
+  }
+}
+
+export class FloralHealingStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    pokemon.handleHeal(pokemon.maxPP, pokemon, 0)
   }
 }
 
@@ -6621,5 +6632,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SNIPE_SHOT]: new SnipeShotStrategy(),
   [Ability.AIR_SLASH]: new AirSlashStrategy(),
   [Ability.EGGSPLOSION]: new EggsplosionStrategy(),
+  [Ability.FLORAL_HEALING]: new FloralHealingStrategy(),
   [Ability.VINE_WHIP]: new VineWhipStrategy()
 }

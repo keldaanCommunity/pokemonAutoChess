@@ -1,5 +1,5 @@
 import { Berries, Item } from "../types/enum/Item"
-import { Orientation, PokemonActionState, Team } from "../types/enum/Game"
+import { Orientation, PokemonActionState, Stat, Team } from "../types/enum/Game"
 import MovingState from "./moving-state"
 import AttackingState from "./attacking-state"
 import { nanoid } from "nanoid"
@@ -37,6 +37,7 @@ import { chance } from "../utils/random"
 import { distanceC } from "../utils/distance"
 import Player from "../models/colyseus-models/player"
 import { values } from "../utils/schemas"
+import { AbilityStrategies } from "./abilities/abilities"
 
 export default class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
@@ -295,8 +296,17 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
+  addCritDamage(value: number, apBoost = false) {
+    const boost = apBoost ? (value * this.ap) / 100 : 0
+    this.critDamage = Math.max(
+      0,
+      roundTo2Digits(this.critDamage + value + boost)
+    )
+  }
+
   addMaxHP(value: number) {
     this.hp = min(1)(this.hp + value)
+    this.life = max(this.hp)(this.life + value)
   }
 
   addDodgeChance(value: number) {
@@ -360,14 +370,6 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.passive === Passive.SURGE_SURFER) {
       this.addAttackSpeed(-30, false)
     }
-  }
-
-  addCritDamage(value: number, apBoost = false) {
-    const boost = apBoost ? (value * this.ap) / 100 : 0
-    this.critDamage = Math.max(
-      0,
-      roundTo2Digits(this.critDamage + value + boost)
-    )
   }
 
   moveTo(x: number, y: number, board: Board) {
@@ -837,7 +839,6 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
           attackBoost = 9
         }
         this.addMaxHP(lifeBoost)
-        this.handleHeal(lifeBoost, this, 0)
         this.addAttack(attackBoost)
         this.count.monsterExecutionCount++
       }
@@ -863,22 +864,24 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     ) {
       if (!target.simulation.flowerSpawn[target.team]) {
         target.simulation.flowerSpawn[target.team] = true
-        const nearestAvailableCoordinate =
-          this.state.getFarthestTargetCoordinateAvailablePlace(target, board)
-        if (nearestAvailableCoordinate) {
+        const spawnSpot = this.state.getFarthestTargetCoordinateAvailablePlace(
+          target,
+          board
+        )
+        if (spawnSpot) {
           if (target.effects.has(Effect.ODD_FLOWER)) {
             target.simulation.addPokemon(
               PokemonFactory.createPokemonFromName(Pkm.ODDISH, target.player),
-              nearestAvailableCoordinate.x,
-              nearestAvailableCoordinate.y,
+              spawnSpot.x,
+              spawnSpot.y,
               target.team,
               true
             )
           } else if (target.effects.has(Effect.GLOOM_FLOWER)) {
             target.simulation.addPokemon(
               PokemonFactory.createPokemonFromName(Pkm.GLOOM, target.player),
-              nearestAvailableCoordinate.x,
-              nearestAvailableCoordinate.y,
+              spawnSpot.x,
+              spawnSpot.y,
               target.team,
               true
             )
@@ -888,8 +891,8 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
                 Pkm.VILEPLUME,
                 target.player
               ),
-              nearestAvailableCoordinate.x,
-              nearestAvailableCoordinate.y,
+              spawnSpot.x,
+              spawnSpot.y,
               target.team,
               true
             )
@@ -899,13 +902,26 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
                 Pkm.BELLOSSOM,
                 target.player
               ),
-              nearestAvailableCoordinate.x,
-              nearestAvailableCoordinate.y,
+              spawnSpot.x,
+              spawnSpot.y,
               target.team,
               true
             )
           }
         }
+      }
+    }
+
+    if (target.items.has(Item.COMFEY)) {
+      const nearestAvailableCoordinate =
+        this.state.getNearestTargetCoordinateAvailablePlace(target, board)
+      if (nearestAvailableCoordinate) {
+        target.simulation.addPokemon(
+          PokemonFactory.createPokemonFromName(Pkm.COMFEY, target.player),
+          nearestAvailableCoordinate.x,
+          nearestAvailableCoordinate.y,
+          target.team
+        )
       }
     }
 
@@ -915,11 +931,22 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   // called after every ability cast
-  onCast() {
+  onCast(board: Board, target: PokemonEntity, crit: boolean) {
     if (this.items.has(Item.LEPPA_BERRY)) {
       this.items.delete(Item.LEPPA_BERRY)
       this.refToBoardPokemon.items.delete(Item.LEPPA_BERRY)
       this.addPP(50)
+    }
+
+    if (this.items.has(Item.COMFEY)) {
+      AbilityStrategies[Ability.FLORAL_HEALING].process(
+        this,
+        this.state,
+        board,
+        target,
+        false,
+        true
+      )
     }
   }
 
@@ -928,6 +955,41 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     this.flyingProtection--
     if (flyAwayCell) {
       this.moveTo(flyAwayCell.x, flyAwayCell.y, board)
+    }
+  }
+
+  applyStat(stat: Stat, value: number) {
+    switch (stat) {
+      case Stat.ATK:
+        this.addAttack(value)
+        break
+      case Stat.DEF:
+        this.addDefense(value)
+        break
+      case Stat.SPE_DEF:
+        this.addSpecialDefense(value)
+        break
+      case Stat.AP:
+        this.addAbilityPower(value)
+        break
+      case Stat.PP:
+        this.addPP(value)
+        break
+      case Stat.ATK_SPEED:
+        this.addAttackSpeed(value)
+        break
+      case Stat.CRIT_CHANCE:
+        this.addCritChance(value)
+        break
+      case Stat.CRIT_DAMAGE:
+        this.addCritDamage(value)
+        break
+      case Stat.SHIELD:
+        this.addShield(value, this)
+        break
+      case Stat.HP:
+        this.handleHeal(value, this, 0)
+        break
     }
   }
 
