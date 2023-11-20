@@ -10797,10 +10797,15 @@ export class Comfey extends Pokemon {
       // delete comfey
       team.delete(entity.id)
       simulation.board.setValue(entity.positionX, entity.positionY, undefined)
-      simulation.blueDpsMeter.delete(entity.id)
-      simulation.redDpsMeter.delete(entity.id)
-      simulation.blueHealDpsMeter.delete(entity.id)
-      simulation.redHealDpsMeter.delete(entity.id)
+      if(simulation.blueDpsMeter.has(entity.id)){
+        simulation.blueDpsMeter.delete(entity.id)
+        simulation.blueHealDpsMeter.delete(entity.id)
+      }
+      if(simulation.redDpsMeter.has(entity.id)){
+        simulation.redDpsMeter.delete(entity.id)      
+        simulation.redHealDpsMeter.delete(entity.id)
+      }
+      
       nearestAllyWithFreeItemSlot.items.add(Item.COMFEY)
 
       // apply comfey stats
