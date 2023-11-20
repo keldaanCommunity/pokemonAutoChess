@@ -37,6 +37,7 @@ import { chance } from "../utils/random"
 import { distanceC } from "../utils/distance"
 import Player from "../models/colyseus-models/player"
 import { values } from "../utils/schemas"
+import { AbilityStrategies } from "./abilities/abilities"
 
 export default class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
@@ -930,11 +931,22 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   // called after every ability cast
-  onCast() {
+  onCast(board: Board, target: PokemonEntity, crit: boolean) {
     if (this.items.has(Item.LEPPA_BERRY)) {
       this.items.delete(Item.LEPPA_BERRY)
       this.refToBoardPokemon.items.delete(Item.LEPPA_BERRY)
       this.addPP(50)
+    }
+
+    if (this.items.has(Item.COMFEY)) {
+      AbilityStrategies[Ability.FLORAL_HEALING].process(
+        this,
+        this.state,
+        board,
+        target,
+        false,
+        true
+      )
     }
   }
 
