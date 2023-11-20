@@ -1604,7 +1604,7 @@
     "DRIZZLE": "The pokémon count as 3 for RAIN",
     "HARVEST": "At the start of the stage, equip itself with a random berry",
     "COCONUT": "Exeggutor is looking for a LEAF_STONE",
-    "GLUTTON": "Gains permanently 20 max HP every time it eats a berry"
+    "GLUTTON": "Permanently gains 20 max HP every time it eats a berry"
   },
   "stat": {
     "ATK": "Attack",
