@@ -7236,7 +7236,8 @@ export class Munchlax extends Pokemon {
   speDef = 2
   maxPP = 120
   range = 1
-  skill = Ability.SLACK_OFF
+  skill = Ability.BODY_SLAM
+  passive = Passive.GLUTTON
   additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
@@ -7249,13 +7250,14 @@ export class Snorlax extends Pokemon {
   ])
   rarity = Rarity.EPIC
   stars = 2
-  hp = 300
+  hp = 260
   atk = 19
   def = 3
   speDef = 3
   maxPP = 120
   range = 1
-  skill = Ability.SLACK_OFF
+  skill = Ability.BODY_SLAM
+  passive = Passive.GLUTTON
   additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }

@@ -42,8 +42,7 @@ import {
   BOARD_HEIGHT,
   BOARD_WIDTH,
   DEFAULT_ATK_SPEED,
-  EvolutionTime,
-  ItemStats
+  EvolutionTime
 } from "../../types/Config"
 
 import Board from "../board"
@@ -6352,6 +6351,27 @@ export class EggsplosionStrategy extends AbilityStrategy {
   }
 }
 
+export class BodySlamStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = Math.round(0.3 * pokemon.hp * (1 + pokemon.hp / 100))
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit,
+      false
+    )
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -6597,5 +6617,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.HYPERSPACE_FURY]: new HyperSpaceFury(),
   [Ability.SNIPE_SHOT]: new SnipeShotStrategy(),
   [Ability.AIR_SLASH]: new AirSlashStrategy(),
-  [Ability.EGGSPLOSION]: new EggsplosionStrategy()
+  [Ability.EGGSPLOSION]: new EggsplosionStrategy(),
+  [Ability.BODY_SLAM]: new BodySlamStrategy()
 }

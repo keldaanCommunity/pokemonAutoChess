@@ -9,6 +9,8 @@
 
 # Changes to Pokemon & Abilities
 
+- Rework Munchlax/Snorlax: new ability Body Slam, deals 30% of max HP as special damage ; new passive: gains permanently 20 HP every time it eats a berry ; nerf Snorlax HP ~~300~~ 260
+
 # Changes to Synergies
 
 # Changes to Items
