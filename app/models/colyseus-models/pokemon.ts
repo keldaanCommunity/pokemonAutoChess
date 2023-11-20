@@ -39,7 +39,7 @@ import {
 } from "../../core/evolution-rules"
 import PokemonFactory from "../pokemon-factory"
 import { distanceM } from "../../utils/distance"
-import Board from "../../core/board"
+import Simulation from "../../core/simulation"
 
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string
@@ -104,7 +104,7 @@ export class Pokemon extends Schema implements IPokemon {
   }
 
   get canHoldItems(): boolean {
-    return ![Pkm.DITTO, Pkm.EGG, ...Unowns].includes(this.name)
+    return ![Pkm.DITTO, Pkm.EGG, Pkm.COMFEY, ...Unowns].includes(this.name)
   }
 
   get isOnBench(): boolean {
@@ -139,12 +139,12 @@ export class Pokemon extends Schema implements IPokemon {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   afterSimulationStart({
     player,
-    board,
+    simulation,
     team,
     entity
   }: {
     player: IPlayer
-    board: Board
+    simulation: Simulation
     team: MapSchema<IPokemonEntity>
     entity: IPokemonEntity
   }) {}
@@ -10764,11 +10764,11 @@ export class Comfey extends Pokemon {
   attackSprite = AttackSprite.FAIRY_RANGE
 
   afterSimulationStart({
-    board,
+    simulation,
     team,
     entity
   }: {
-    board: Board
+    simulation: Simulation
     team: MapSchema<IPokemonEntity>
     entity: IPokemonEntity
   }) {
@@ -10793,8 +10793,14 @@ export class Comfey extends Pokemon {
           )
       )
       const nearestAllyWithFreeItemSlot = alliesWithFreeSlots[0]
+
+      // delete comfey
       team.delete(entity.id)
-      board.setValue(entity.positionX, entity.positionY, undefined)
+      simulation.board.setValue(entity.positionX, entity.positionY, undefined)
+      simulation.blueDpsMeter.delete(entity.id)
+      simulation.redDpsMeter.delete(entity.id)
+      simulation.blueHealDpsMeter.delete(entity.id)
+      simulation.redHealDpsMeter.delete(entity.id)
       nearestAllyWithFreeItemSlot.items.add(Item.COMFEY)
 
       // apply comfey stats

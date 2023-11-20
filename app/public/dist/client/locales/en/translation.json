@@ -1162,7 +1162,7 @@
     "SNIPE_SHOT": "Fires a shot of water from its index fingertips at the farthest opponent, dealing [50,100,200,SP] SPECIAL to all opponents in the way",
     "AIR_SLASH": "Deals [25,50,100,SP] SPECIAL and inflicts FLINCH for 7s",
     "EGGSPLOSION": "Launches an explosive egg at its target, inflicting [40,80,140,SP] SPECIAL and applying ARMOR_REDUCTION for 4 seconds to all adjacent enemies. If the target is killed, you have a 30% chance of getting an egg on your bench.",
-    "FLORAL_HEALING": "Heals as many HP as max PP of Comfey's holder or Comfey itself if not hold. Increase healing by 30% if under GRASS_FIELD"
+    "FLORAL_HEALING": "Heals as many HP as max PP of Comfey's holder or Comfey itself if not hold"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1607,7 +1607,7 @@
     "DRIZZLE": "The pokémon count as 3 for RAIN",
     "HARVEST": "At the start of the stage, equip itself with a random berry",
     "COCONUT": "Exeggutor is looking for a LEAF_STONE",
-    "COMFEY": "At the start of the fight, the nearest ally with a free item slot wears Comfey and gains all its stats. Comfey casts its ability at the same time than its holder. When its holder is KO, Comfey fights on its own."
+    "COMFEY": "Comfey cannot hold items. At the start of the fight, the nearest ally with a free item slot wears Comfey and gains all its stats. Comfey casts its ability at the same time than its holder. When its holder is KO, Comfey fights on its own."
   },
   "stat": {
     "ATK": "Attack",

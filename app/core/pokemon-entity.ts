@@ -369,7 +369,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.passive === Passive.SURGE_SURFER) {
       this.addAttackSpeed(-30, false)
     }
-  }  
+  }
 
   moveTo(x: number, y: number, board: Board) {
     board.swapValue(this.positionX, this.positionY, x, y)
@@ -863,22 +863,24 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     ) {
       if (!target.simulation.flowerSpawn[target.team]) {
         target.simulation.flowerSpawn[target.team] = true
-        const nearestAvailableCoordinate =
-          this.state.getFarthestTargetCoordinateAvailablePlace(target, board)
-        if (nearestAvailableCoordinate) {
+        const spawnSpot = this.state.getFarthestTargetCoordinateAvailablePlace(
+          target,
+          board
+        )
+        if (spawnSpot) {
           if (target.effects.has(Effect.ODD_FLOWER)) {
             target.simulation.addPokemon(
               PokemonFactory.createPokemonFromName(Pkm.ODDISH, target.player),
-              nearestAvailableCoordinate.x,
-              nearestAvailableCoordinate.y,
+              spawnSpot.x,
+              spawnSpot.y,
               target.team,
               true
             )
           } else if (target.effects.has(Effect.GLOOM_FLOWER)) {
             target.simulation.addPokemon(
               PokemonFactory.createPokemonFromName(Pkm.GLOOM, target.player),
-              nearestAvailableCoordinate.x,
-              nearestAvailableCoordinate.y,
+              spawnSpot.x,
+              spawnSpot.y,
               target.team,
               true
             )
@@ -888,8 +890,8 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
                 Pkm.VILEPLUME,
                 target.player
               ),
-              nearestAvailableCoordinate.x,
-              nearestAvailableCoordinate.y,
+              spawnSpot.x,
+              spawnSpot.y,
               target.team,
               true
             )
@@ -899,13 +901,26 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
                 Pkm.BELLOSSOM,
                 target.player
               ),
-              nearestAvailableCoordinate.x,
-              nearestAvailableCoordinate.y,
+              spawnSpot.x,
+              spawnSpot.y,
               target.team,
               true
             )
           }
         }
+      }
+    }
+
+    if (target.items.has(Item.COMFEY)) {
+      const nearestAvailableCoordinate =
+        this.state.getNearestTargetCoordinateAvailablePlace(target, board)
+      if (nearestAvailableCoordinate) {
+        target.simulation.addPokemon(
+          PokemonFactory.createPokemonFromName(Pkm.COMFEY, target.player),
+          nearestAvailableCoordinate.x,
+          nearestAvailableCoordinate.y,
+          target.team
+        )
       }
     }
 
@@ -921,10 +936,6 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       this.refToBoardPokemon.items.delete(Item.LEPPA_BERRY)
       this.addPP(50)
     }
-  }
-
-  onFightStart(){
-    
   }
 
   flyAway(board: Board) {
