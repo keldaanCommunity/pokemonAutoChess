@@ -753,7 +753,8 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.RAWST_BERRY]: {},
   [Item.ROWAP_BERRY]: {},
   [Item.SALAC_BERRY]: {},
-  [Item.SITRUS_BERRY]: {}
+  [Item.SITRUS_BERRY]: {},
+  [Item.COMFEY]: {}
 }
 
 export enum Dungeon {
