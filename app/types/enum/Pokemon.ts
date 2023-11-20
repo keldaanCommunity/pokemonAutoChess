@@ -2866,12 +2866,12 @@ export const AnimationConfig: {
   },
   [Pkm.MUNCHLAX]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.DeepBreath,
+    ability: AnimationType.Attack,
     emote: AnimationType.Shoot
   },
   [Pkm.SNORLAX]: {
-    attack: AnimationType.Stomp,
-    ability: AnimationType.Charge,
+    attack: AnimationType.Attack,
+    ability: AnimationType.Stomp,
     emote: AnimationType.Shoot
   },
   [Pkm.GROWLITHE]: {
