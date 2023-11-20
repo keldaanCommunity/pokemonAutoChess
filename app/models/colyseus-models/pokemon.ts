@@ -9817,7 +9817,7 @@ export class Dhelmise extends Pokemon {
 }
 
 export class Tropius extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA, Synergy.FLYING])
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.FLYING])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
@@ -9829,6 +9829,20 @@ export class Tropius extends Pokemon {
   skill = Ability.AIR_SLASH
   attackSprite = AttackSprite.GRASS_MELEE
   passive = Passive.HARVEST
+}
+
+export class Carnivine extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.MONSTER])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 180
+  atk = 20
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 2
+  skill = Ability.VINE_WHIP
+  attackSprite = AttackSprite.GRASS_RANGE
 }
 
 export class Koffing extends Pokemon {
@@ -11488,5 +11502,6 @@ export const PokemonClasses: Record<
   [Pkm.EXEGGCUTE]: Exeggcute,
   [Pkm.EXEGGUTOR]: Exeggcutor,
   [Pkm.ALOLAN_EXEGGUTOR]: AlolanExeggutor,
-  [Pkm.COMFEY]: Comfey
+  [Pkm.COMFEY]: Comfey,
+  [Pkm.CARNIVINE]: Carnivine
 }

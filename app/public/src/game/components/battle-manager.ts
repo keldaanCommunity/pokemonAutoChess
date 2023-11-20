@@ -2774,6 +2774,25 @@ export default class BattleManager {
             )
             break
 
+          case Ability.VINE_WHIP:
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.AIR_SLASH,
+              "0"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(3, 3)
+            specialProjectile.anims.play(Ability.VINE_WHIP)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
+
           case Ability.VOLT_SWITCH:
             coordinatesTarget = transformAttackCoordinate(
               targetX,

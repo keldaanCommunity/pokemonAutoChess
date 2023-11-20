@@ -656,7 +656,8 @@ export enum Pkm {
   EXEGGCUTE = "EXEGGCUTE",
   EXEGGUTOR = "EXEGGUTOR",
   ALOLAN_EXEGGUTOR = "ALOLAN_EXEGGUTOR",
-  COMFEY = "COMFEY"
+  COMFEY = "COMFEY",
+  CARNIVINE = "CARNIVINE"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1315,7 +1316,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.EXEGGCUTE]: "0102",
   [Pkm.EXEGGUTOR]: "0103",
   [Pkm.ALOLAN_EXEGGUTOR]: "0103-0001",
-  [Pkm.COMFEY]: "0764"
+  [Pkm.COMFEY]: "0764",
+  [Pkm.CARNIVINE]: "0455"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1974,7 +1976,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.EXEGGCUTE]: Pkm.EXEGGCUTE,
   [Pkm.EXEGGUTOR]: Pkm.EXEGGCUTE,
   [Pkm.ALOLAN_EXEGGUTOR]: Pkm.EXEGGCUTE,
-  [Pkm.COMFEY]: Pkm.COMFEY
+  [Pkm.COMFEY]: Pkm.COMFEY,
+  [Pkm.CARNIVINE]: Pkm.CARNIVINE
 }
 
 export enum PkmDuo {
@@ -5385,5 +5388,10 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Rotate,
     emote: AnimationType.Hop
+  },
+  [Pkm.CARNIVINE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.RearUp
   }
 }

@@ -259,7 +259,8 @@
     "SNIPE_SHOT": "Snipe Shot",
     "AIR_SLASH": "Air Slash",
     "EGGSPLOSION": "Eggsplosion",
-    "FLORAL_HEALING": "Floral Healing"
+    "FLORAL_HEALING": "Floral Healing",
+    "VINE_WHIP": "Vine Whip"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -917,7 +918,8 @@
     "EXEGGCUTE": "Exeggcute",
     "EXEGGUTOR": "Exeggutor",
     "ALOLAN_EXEGGUTOR": "Alolan Exeggutor",
-    "COMFEY": "Comfey"
+    "COMFEY": "Comfey",
+    "CARNIVINE": "Carnivine"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1162,7 +1164,9 @@
     "SNIPE_SHOT": "Fires a shot of water from its index fingertips at the farthest opponent, dealing [50,100,200,SP] SPECIAL to all opponents in the way",
     "AIR_SLASH": "Deals [25,50,100,SP] SPECIAL and inflicts FLINCH for 7s",
     "EGGSPLOSION": "Launches an explosive egg at its target, inflicting [40,80,140,SP] SPECIAL and applying ARMOR_REDUCTION for 4 seconds to all adjacent enemies. If the target is killed, you have a 30% chance of getting an egg on your bench.",
-    "FLORAL_HEALING": "Heals as many HP as max PP of Comfey's holder or Comfey itself if not hold"
+    "FLORAL_HEALING": "Heals as many HP as max PP of Comfey's holder or Comfey itself if not hold",
+    "VINE_WHIP": "Deals 100 SPECIAL, causing it and all adjacent enemies to FLINCH for 3 seconds"
+  
   },
   "effect": {
     "INGRAIN": "Ingrain",

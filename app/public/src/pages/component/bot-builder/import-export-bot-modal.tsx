@@ -39,6 +39,10 @@ export default function ImportExportBotModal(props: {
   const [textArea, setTextArea] = useState<string>("")
   const [jsonError, setJsonError] = useState<string>("")
 
+  useEffect(() => {
+    setTextArea(JSON.stringify(props.bot, null, 2))
+  }, [props.bot])
+
   function handleTextAreaChange(newValue) {
     setJsonError("")
     try {
@@ -73,7 +77,7 @@ export default function ImportExportBotModal(props: {
           <textarea
             rows={10}
             className="nes-textarea"
-            defaultValue={JSON.stringify(props.bot, null, 2)}
+            defaultValue={textArea}
             onChange={(e) => handleTextAreaChange(e.target.value)}
           ></textarea>
           {jsonError && <p className="error">{jsonError}</p>}

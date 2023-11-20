@@ -6,6 +6,7 @@
 - Inteleon
 - Tropius
 - Exeggcute/Exeggcutor/Alolan-Exeggcutor
+- Carnivine
 
 # Changes to Pokemon & Abilities
 
