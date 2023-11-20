@@ -878,6 +878,16 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.VINE_WHIP,
+      frames: this.game.anims.generateFrameNames(Ability.VINE_WHIP, {
+        start: 0,
+        end: 8
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.EGGSPLOSION,
       frames: this.game.anims.generateFrameNames(Ability.EGGSPLOSION, {
         start: 0,

@@ -6222,7 +6222,6 @@ export class UnboundStrategy extends AbilityStrategy {
     pokemon.atk += 10
     pokemon.toMovingState()
     pokemon.addMaxHP(100)
-    pokemon.handleHeal(100, pokemon, 0)
   }
 }
 
@@ -6369,6 +6368,42 @@ export class BodySlamStrategy extends AbilityStrategy {
       crit,
       false
     )
+  }
+}
+
+export class VineWhipStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    board
+      .getAdjacentCells(target.positionX, target.positionY)
+      .map((v) => v.value)
+      .filter((v) => v?.team === target.team)
+      .concat(target)
+      .forEach((v) => {
+        if (v) {
+          v.status.triggerFlinch(3000)
+        }
+      })
+    target.handleSpecialDamage(100, board, AttackType.SPECIAL, pokemon, crit)
+  }
+}
+
+export class FloralHealingStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    pokemon.handleHeal(pokemon.maxPP, pokemon, 0)
   }
 }
 
@@ -6618,5 +6653,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SNIPE_SHOT]: new SnipeShotStrategy(),
   [Ability.AIR_SLASH]: new AirSlashStrategy(),
   [Ability.EGGSPLOSION]: new EggsplosionStrategy(),
-  [Ability.BODY_SLAM]: new BodySlamStrategy()
+  [Ability.BODY_SLAM]: new BodySlamStrategy(),
+  [Ability.FLORAL_HEALING]: new FloralHealingStrategy(),
+  [Ability.VINE_WHIP]: new VineWhipStrategy()
 }

@@ -4,7 +4,7 @@
       "image": "item.png",
       "format": "RGBA8888",
       "size": {
-        "w": 972,
+        "w": 974,
         "h": 715
       },
       "scale": 1,
@@ -976,6 +976,27 @@
           }
         },
         {
+          "filename": "COMFEY",
+          "rotated": false,
+          "trimmed": false,
+          "sourceSize": {
+            "w": 90,
+            "h": 90
+          },
+          "spriteSourceSize": {
+            "x": 0,
+            "y": 0,
+            "w": 90,
+            "h": 90
+          },
+          "frame": {
+            "x": 265,
+            "y": 333,
+            "w": 90,
+            "h": 90
+          }
+        },
+        {
           "filename": "DAWN_STONE",
           "rotated": false,
           "trimmed": false,
@@ -990,8 +1011,8 @@
             "h": 90
           },
           "frame": {
-            "x": 265,
-            "y": 333,
+            "x": 357,
+            "y": 341,
             "w": 88,
             "h": 90
           }
@@ -1011,8 +1032,8 @@
             "h": 90
           },
           "frame": {
-            "x": 355,
-            "y": 341,
+            "x": 447,
+            "y": 342,
             "w": 90,
             "h": 90
           }
@@ -1032,8 +1053,8 @@
             "h": 90
           },
           "frame": {
-            "x": 355,
-            "y": 341,
+            "x": 447,
+            "y": 342,
             "w": 90,
             "h": 90
           }
@@ -1053,8 +1074,8 @@
             "h": 90
           },
           "frame": {
-            "x": 447,
-            "y": 342,
+            "x": 539,
+            "y": 344,
             "w": 85,
             "h": 90
           }
@@ -1074,8 +1095,8 @@
             "h": 90
           },
           "frame": {
-            "x": 534,
-            "y": 344,
+            "x": 626,
+            "y": 346,
             "w": 83,
             "h": 90
           }
@@ -1095,8 +1116,8 @@
             "h": 90
           },
           "frame": {
-            "x": 619,
-            "y": 346,
+            "x": 711,
+            "y": 347,
             "w": 88,
             "h": 90
           }
@@ -1116,8 +1137,8 @@
             "h": 90
           },
           "frame": {
-            "x": 709,
-            "y": 347,
+            "x": 801,
+            "y": 348,
             "w": 81,
             "h": 90
           }
@@ -1137,30 +1158,9 @@
             "h": 90
           },
           "frame": {
-            "x": 792,
+            "x": 884,
             "y": 348,
             "w": 89,
-            "h": 90
-          }
-        },
-        {
-          "filename": "FOSSIL_STONE",
-          "rotated": false,
-          "trimmed": false,
-          "sourceSize": {
-            "w": 87,
-            "h": 90
-          },
-          "spriteSourceSize": {
-            "x": 0,
-            "y": 0,
-            "w": 87,
-            "h": 90
-          },
-          "frame": {
-            "x": 883,
-            "y": 348,
-            "w": 87,
             "h": 90
           }
         },
@@ -1186,6 +1186,69 @@
           }
         },
         {
+          "filename": "FOSSIL_STONE",
+          "rotated": false,
+          "trimmed": false,
+          "sourceSize": {
+            "w": 87,
+            "h": 90
+          },
+          "spriteSourceSize": {
+            "x": 0,
+            "y": 0,
+            "w": 87,
+            "h": 90
+          },
+          "frame": {
+            "x": 93,
+            "y": 419,
+            "w": 87,
+            "h": 90
+          }
+        },
+        {
+          "filename": "LEAF_STONE",
+          "rotated": false,
+          "trimmed": false,
+          "sourceSize": {
+            "w": 79,
+            "h": 90
+          },
+          "spriteSourceSize": {
+            "x": 0,
+            "y": 0,
+            "w": 79,
+            "h": 90
+          },
+          "frame": {
+            "x": 182,
+            "y": 423,
+            "w": 79,
+            "h": 90
+          }
+        },
+        {
+          "filename": "GANLON_BERRY",
+          "rotated": false,
+          "trimmed": false,
+          "sourceSize": {
+            "w": 90,
+            "h": 90
+          },
+          "spriteSourceSize": {
+            "x": 0,
+            "y": 0,
+            "w": 90,
+            "h": 90
+          },
+          "frame": {
+            "x": 263,
+            "y": 425,
+            "w": 90,
+            "h": 90
+          }
+        },
+        {
           "filename": "JABOCA_BERRY",
           "rotated": false,
           "trimmed": false,
@@ -1200,8 +1263,8 @@
             "h": 90
           },
           "frame": {
-            "x": 93,
-            "y": 419,
+            "x": 355,
+            "y": 433,
             "w": 85,
             "h": 90
           }
@@ -1221,8 +1284,8 @@
             "h": 90
           },
           "frame": {
-            "x": 180,
-            "y": 423,
+            "x": 442,
+            "y": 434,
             "w": 83,
             "h": 90
           }
@@ -1242,51 +1305,9 @@
             "h": 90
           },
           "frame": {
-            "x": 265,
-            "y": 425,
+            "x": 527,
+            "y": 436,
             "w": 83,
-            "h": 90
-          }
-        },
-        {
-          "filename": "GANLON_BERRY",
-          "rotated": false,
-          "trimmed": false,
-          "sourceSize": {
-            "w": 90,
-            "h": 90
-          },
-          "spriteSourceSize": {
-            "x": 0,
-            "y": 0,
-            "w": 90,
-            "h": 90
-          },
-          "frame": {
-            "x": 350,
-            "y": 433,
-            "w": 90,
-            "h": 90
-          }
-        },
-        {
-          "filename": "LEAF_STONE",
-          "rotated": false,
-          "trimmed": false,
-          "sourceSize": {
-            "w": 79,
-            "h": 90
-          },
-          "spriteSourceSize": {
-            "x": 0,
-            "y": 0,
-            "w": 79,
-            "h": 90
-          },
-          "frame": {
-            "x": 442,
-            "y": 434,
-            "w": 79,
             "h": 90
           }
         },
@@ -1305,8 +1326,8 @@
             "h": 90
           },
           "frame": {
-            "x": 523,
-            "y": 436,
+            "x": 612,
+            "y": 438,
             "w": 59,
             "h": 90
           }
@@ -1326,8 +1347,8 @@
             "h": 90
           },
           "frame": {
-            "x": 584,
-            "y": 438,
+            "x": 673,
+            "y": 439,
             "w": 62,
             "h": 90
           }
@@ -1347,8 +1368,8 @@
             "h": 90
           },
           "frame": {
-            "x": 648,
-            "y": 439,
+            "x": 737,
+            "y": 440,
             "w": 90,
             "h": 90
           }
@@ -1368,9 +1389,30 @@
             "h": 90
           },
           "frame": {
-            "x": 740,
+            "x": 829,
             "y": 440,
             "w": 78,
+            "h": 90
+          }
+        },
+        {
+          "filename": "METRONOME",
+          "rotated": false,
+          "trimmed": false,
+          "sourceSize": {
+            "w": 64,
+            "h": 90
+          },
+          "spriteSourceSize": {
+            "x": 0,
+            "y": 0,
+            "w": 64,
+            "h": 90
+          },
+          "frame": {
+            "x": 909,
+            "y": 440,
+            "w": 64,
             "h": 90
           }
         },
@@ -1389,8 +1431,8 @@
             "h": 90
           },
           "frame": {
-            "x": 820,
-            "y": 440,
+            "x": 1,
+            "y": 508,
             "w": 89,
             "h": 90
           }
@@ -1410,30 +1452,9 @@
             "h": 90
           },
           "frame": {
-            "x": 1,
-            "y": 508,
-            "w": 83,
-            "h": 90
-          }
-        },
-        {
-          "filename": "MAGNET",
-          "rotated": false,
-          "trimmed": false,
-          "sourceSize": {
-            "w": 90,
-            "h": 90
-          },
-          "spriteSourceSize": {
-            "x": 0,
-            "y": 0,
-            "w": 90,
-            "h": 90
-          },
-          "frame": {
-            "x": 86,
+            "x": 92,
             "y": 511,
-            "w": 90,
+            "w": 83,
             "h": 90
           }
         },
@@ -1452,9 +1473,30 @@
             "h": 90
           },
           "frame": {
-            "x": 178,
+            "x": 177,
             "y": 515,
             "w": 80,
+            "h": 90
+          }
+        },
+        {
+          "filename": "MAGNET",
+          "rotated": false,
+          "trimmed": false,
+          "sourceSize": {
+            "w": 90,
+            "h": 90
+          },
+          "spriteSourceSize": {
+            "x": 0,
+            "y": 0,
+            "w": 90,
+            "h": 90
+          },
+          "frame": {
+            "x": 259,
+            "y": 517,
+            "w": 90,
             "h": 90
           }
         },
@@ -1473,30 +1515,9 @@
             "h": 90
           },
           "frame": {
-            "x": 260,
-            "y": 517,
-            "w": 88,
-            "h": 90
-          }
-        },
-        {
-          "filename": "METRONOME",
-          "rotated": false,
-          "trimmed": false,
-          "sourceSize": {
-            "w": 64,
-            "h": 90
-          },
-          "spriteSourceSize": {
-            "x": 0,
-            "y": 0,
-            "w": 64,
-            "h": 90
-          },
-          "frame": {
-            "x": 350,
+            "x": 351,
             "y": 525,
-            "w": 64,
+            "w": 88,
             "h": 90
           }
         },
@@ -1515,7 +1536,7 @@
             "h": 90
           },
           "frame": {
-            "x": 416,
+            "x": 441,
             "y": 526,
             "w": 74,
             "h": 90
@@ -1536,7 +1557,7 @@
             "h": 90
           },
           "frame": {
-            "x": 492,
+            "x": 517,
             "y": 528,
             "w": 83,
             "h": 90
@@ -1557,7 +1578,7 @@
             "h": 90
           },
           "frame": {
-            "x": 577,
+            "x": 602,
             "y": 531,
             "w": 87,
             "h": 90
@@ -1578,7 +1599,7 @@
             "h": 90
           },
           "frame": {
-            "x": 666,
+            "x": 691,
             "y": 532,
             "w": 90,
             "h": 90
@@ -1599,7 +1620,7 @@
             "h": 90
           },
           "frame": {
-            "x": 758,
+            "x": 783,
             "y": 532,
             "w": 86,
             "h": 90
@@ -1620,7 +1641,7 @@
             "h": 90
           },
           "frame": {
-            "x": 846,
+            "x": 871,
             "y": 532,
             "w": 82,
             "h": 90
@@ -1726,7 +1747,7 @@
           },
           "frame": {
             "x": 339,
-            "y": 618,
+            "y": 617,
             "w": 90,
             "h": 90
           }
@@ -1863,6 +1884,6 @@
   "meta": {
     "app": "https://www.codeandweb.com/texturepacker",
     "version": "3.0",
-    "smartupdate": "$TexturePacker:SmartUpdate:3217d6a3ac9e8264c99073c12e28c4d4:d5e5984fa6ca5e6b9d60894127d59556:87c70aa46f29753bb8d8680ed03b9979$"
+    "smartupdate": "$TexturePacker:SmartUpdate:32549b843bb8bffc9992a963d21eac8f:fae7b2d0ef1b46d63c9aac0e2844768d:87c70aa46f29753bb8d8680ed03b9979$"
   }
 }

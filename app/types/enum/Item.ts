@@ -74,7 +74,8 @@ export enum Item {
   RAWST_BERRY = "RAWST_BERRY",
   ROWAP_BERRY = "ROWAP_BERRY",
   SALAC_BERRY = "SALAC_BERRY",
-  SITRUS_BERRY = "SITRUS_BERRY"
+  SITRUS_BERRY = "SITRUS_BERRY",
+  COMFEY = "COMFEY"
 }
 
 export const AllItems: Item[] = Object.values(Item)

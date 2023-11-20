@@ -247,7 +247,11 @@
     "UNBOUND": "Déchaînement",
     "HYPERSPACE_FURY": "Furie Dimension",
     "SNIPE_SHOT": "Tir de Précision",
-    "BODY_SLAM": "Plaquage"
+    "BODY_SLAM": "Plaquage",
+    "AIR_SLASH": "Lame d'Air",
+    "EGGSPLOSION": "Bombe Œuf",
+    "FLORAL_HEALING": "Soin Floral",
+    "VINE_WHIP": "Fouet Lianes"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -900,7 +904,13 @@
     "NIHILEGO": "Zéroïd",
     "SOBBLE": "Sobble",
     "DRIZZILE": "Drizzile",
-    "INTELEON": "Inteleon"
+    "INTELEON": "Inteleon",
+    "TROPIUS": "Tropius",
+    "EXEGGCUTE": "Noeunoeuf",
+    "EXEGGUTOR": "Noadkoko",
+    "ALOLAN_EXEGGUTOR": "Noadkoko d'Alola",
+    "COMFEY": "Guérilande",
+    "CARNIVINE": "Vortente"
   },
   "ability_description": {
     "SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés",
@@ -1133,7 +1143,11 @@
     "UNBOUND": "Se libère de ses chaînes pour devenir la vraie forme de Hoopa et gagner une grande puissance",
     "HYPERSPACE_FURY": "Avec ses nombreux bras, déclenche une pluie de [4,SP] coups. Chaque coup descend la DEF de la cible de 1.",
     "SNIPE_SHOT": "Tire un jet d'eau du bout de son index sur l'adversaire le plus éloigné, infligeant [50,100,200,SP] SPECIAL à tous les adversaires sur le chemin.",
-    "BODY_SLAM": "Inflige [30,SP]% des HP max du lanceur en SPECIAL"
+    "BODY_SLAM": "Inflige [30,SP]% des HP max du lanceur en SPECIAL",
+    "AIR_SLASH": "Inflige [25,50,100,SP] SPECIAL et FLINCH pendant 7 secondes",
+    "EGGSPLOSION": "Lance un oeuf explosif sur la cible, infligeant [40,80,140,SP] SPECIAL et ARMOR_REDUCTION pendant 4 secondes à tous les adversaires adjacents. Si la cible est KO, vous avez 30% de chance d'obtenir un Oeuf Pokémon.",
+    "FLORAL_HEALING": "Soigne autant de HP que de PP max du porteur de $t(pkm.COMFEY) ou de $t(pkm.COMFEY) lui-même s'il n'est pas porté",
+    "VINE_WHIP": "Inflige 100 SPECIAL, et cause FLINCH à la cible et aux adversaires adjacents pendant 3 secondes"
   },
   "effect": {
     "INGRAIN": "Enraciné",
@@ -1500,14 +1514,15 @@
     "RAWST_BERRY": "Consommé après avoir subi BURN, donne l'immunité à BURN pour le reste du combat",
     "ROWAP_BERRY": "Une fois sous les 50% HP, lance $t(ability.MAGIC_BOUNCE) pendant 10 secondes",
     "SALAC_BERRY": "Une fois sous les 50% HP, gagne 50% ATK_SPEED",
-    "SITRUS_BERRY": "Une fois sous les 50% HP, soigne 30 HP et augmente tous les soins reçus de 50%"
+    "SITRUS_BERRY": "Une fois sous les 50% HP, soigne 30 HP et augmente tous les soins reçus de 50%",
+    "COMFEY": "Porte $t(pkm.COMFEY) et obtient sa capacité ainsi que toutes ses stats"
   },
   "passive_description": {
     "NONE": "Pas de passif",
     "TYROGUE": "Choisira une discipline de combat en fonction du premier élément donné",
     "PROTEAN2": "Le pokémon acquiert le type des 2 synergies les plus élevées de l'équipe",
     "PROTEAN3": "Le pokémon acquiert le type des 3 synergies les plus élevées de l'équipe",
-    "CASTFORM": "Castform change sa forme et la météo en SUN, RAIN ou SNOW en fonction de votre synergie dominante entre FIRE WATER ICE",
+    "CASTFORM": "$t(pkm.CASTFORM) change sa forme et la météo en SUN, RAIN ou SNOW en fonction de votre synergie dominante entre FIRE WATER ICE",
     "PHIONE": "Phione cherche un Oeuf Océan",
     "PRIMAL": "La légende raconte qu'on pourrait libérer les pouvoirs primordiaux de ces pokémons légendaires",
     "WONDER_GUARD": "Réduit les dégâts reçus et les soins reçus à 1",
@@ -1545,7 +1560,10 @@
     "GRIM_NEIGH": "Quand le Pokémon met un ennemi K.O., il émet un hennissement terrifiant qui augmente son AP de 30.",
     "SHAYMIN": "Shaymin recherche une GRACIDEA_FLOWER",
     "SPOT_PANDA": "Ce Pokémon ne peut pas être CONFUSION et inflige [100,SP]% de SPECIAL supplémentaires aux pokémons CONFUSION",
-    "GLUTTON": "Gagne de façon permanente 20 HP max chaque fois qu'il mange une baie"
+    "GLUTTON": "Gagne de façon permanente 20 HP max chaque fois qu'il mange une baie",
+    "HARVEST": "Au début du combat, s'équipe avec une baie aléatoire",
+    "COCONUT": "$t(pkm.EXEGGUTOR) cherche une LEAF_STONE",
+    "COMFEY": "$t(pkm.COMFEY) ne peut pas porter d'objets. Au début du combat, l'allié le plus proche avec un slot d'objet disponible porte $t(pkm.COMFEY) et gagne toutes ses stats. $t(pkm.COMFEY) lance sa capacité en même temps que son porteur. Quand le porteur est KO, $t(pkm.COMFEY) combat seul."
   },
   "stat": {
     "ATK": "Attaque",

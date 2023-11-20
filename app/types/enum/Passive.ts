@@ -68,5 +68,6 @@ export enum Passive {
   DRIZZLE = "DRIZZLE",
   HARVEST = "HARVEST",
   COCONUT = "COCONUT",
-  GLUTTON = "GLUTTON"
+  GLUTTON = "GLUTTON",
+  COMFEY = "COMFEY"
 }

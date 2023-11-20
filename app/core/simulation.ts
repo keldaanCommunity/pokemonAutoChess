@@ -27,7 +27,6 @@ import { pickRandomIn, randomBetween } from "../utils/random"
 import { Passive } from "../types/enum/Passive"
 import Player from "../models/colyseus-models/player"
 import { values } from "../utils/schemas"
-import { Pkm, PkmFamily } from "../types/enum/Pokemon"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") weather: Weather = Weather.NEUTRAL
@@ -75,7 +74,12 @@ export default class Simulation extends Schema implements ISimulation {
     this.board = new Board(BOARD_HEIGHT, BOARD_WIDTH)
 
     // logger.debug({ blueEffects, redEffects })
-    this.updateCastform(this.weather)
+    ;[this.bluePlayer, this.redPlayer].forEach((player) => {
+      if (!player) return
+      player.board.forEach((pokemon, id) => {
+        pokemon.beforeSimulationStart({ weather: this.weather, player })
+      })
+    })
 
     // update effects after castform transformation
     bluePlayer.effects.forEach((e) => this.blueEffects.add(e))
@@ -108,61 +112,83 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     ;[
-      { team: blueTeam, effects: this.blueEffects, player: bluePlayer },
-      { team: redTeam, effects: this.redEffects, player: redPlayer }
+      {
+        team: blueTeam,
+        entityTeam: this.blueTeam,
+        effects: this.blueEffects,
+        player: bluePlayer
+      },
+      {
+        team: redTeam,
+        entityTeam: this.redTeam,
+        effects: this.redEffects,
+        player: redPlayer
+      }
     ].forEach(
       ({
         team,
+        entityTeam,
         effects,
         player
       }: {
         team: MapSchema<Pokemon>
+        entityTeam: MapSchema<IPokemonEntity>
         effects: Set<Effect>
         player: Player | undefined
       }) => {
-        if (
-          player &&
-          [
-            Effect.COCOON,
-            Effect.INFESTATION,
-            Effect.HORDE,
-            Effect.HEART_OF_THE_SWARM
-          ].some((e) => effects.has(e))
-        ) {
-          const teamIndex = team === blueTeam ? 0 : 1
-          const bugTeam = new Array<IPokemon>()
-          team.forEach((pkm) => {
-            if (pkm.types.has(Synergy.BUG) && pkm.positionY != 0) {
-              bugTeam.push(pkm)
+        if (player) {
+          if (
+            [
+              Effect.COCOON,
+              Effect.INFESTATION,
+              Effect.HORDE,
+              Effect.HEART_OF_THE_SWARM
+            ].some((e) => effects.has(e))
+          ) {
+            const teamIndex = team === blueTeam ? 0 : 1
+            const bugTeam = new Array<IPokemon>()
+            team.forEach((pkm) => {
+              if (pkm.types.has(Synergy.BUG) && pkm.positionY != 0) {
+                bugTeam.push(pkm)
+              }
+            })
+            bugTeam.sort((a, b) => b.hp - a.hp)
+
+            let numberToSpawn = 0
+            if (effects.has(Effect.COCOON)) {
+              numberToSpawn = 1
             }
+            if (effects.has(Effect.INFESTATION)) {
+              numberToSpawn = 2
+            }
+            if (effects.has(Effect.HORDE)) {
+              numberToSpawn = 3
+            }
+            if (effects.has(Effect.HEART_OF_THE_SWARM)) {
+              numberToSpawn = 5
+            }
+
+            for (let i = 0; i < numberToSpawn; i++) {
+              const bug = PokemonFactory.createPokemonFromName(
+                bugTeam[i].name,
+                player
+              )
+              const coord = this.getClosestAvailablePlaceOnBoardToPokemon(
+                bugTeam[i],
+                teamIndex
+              )
+              this.addPokemon(bug, coord.x, coord.y, teamIndex, true)
+            }
+          }
+
+          player.board.forEach((pokemon) => {
+            pokemon.afterSimulationStart({
+              simulation: this,
+              player,
+              team: entityTeam,
+              entity: values(entityTeam).find(p => p.refToBoardPokemon === pokemon)!
+            })
           })
-          bugTeam.sort((a, b) => b.hp - a.hp)
-
-          let numberToSpawn = 0
-          if (effects.has(Effect.COCOON)) {
-            numberToSpawn = 1
-          }
-          if (effects.has(Effect.INFESTATION)) {
-            numberToSpawn = 2
-          }
-          if (effects.has(Effect.HORDE)) {
-            numberToSpawn = 3
-          }
-          if (effects.has(Effect.HEART_OF_THE_SWARM)) {
-            numberToSpawn = 5
-          }
-
-          for (let i = 0; i < numberToSpawn; i++) {
-            const bug = PokemonFactory.createPokemonFromName(
-              bugTeam[i].name,
-              player
-            )
-            const coord = this.getClosestAvailablePlaceOnBoardToPokemon(
-              bugTeam[i],
-              teamIndex
-            )
-            this.addPokemon(bug, coord.x, coord.y, teamIndex, true)
-          }
         }
       }
     )
@@ -369,41 +395,6 @@ export default class Simulation extends Schema implements ISimulation {
     )
   }
 
-  applyStat(pokemon: PokemonEntity, stat: Stat, value: number) {
-    switch (stat) {
-      case Stat.ATK:
-        pokemon.addAttack(value)
-        break
-      case Stat.DEF:
-        pokemon.addDefense(value)
-        break
-      case Stat.SPE_DEF:
-        pokemon.addSpecialDefense(value)
-        break
-      case Stat.AP:
-        pokemon.addAbilityPower(value)
-        break
-      case Stat.PP:
-        pokemon.addPP(value)
-        break
-      case Stat.ATK_SPEED:
-        pokemon.addAttackSpeed(value)
-        break
-      case Stat.CRIT_CHANCE:
-        pokemon.addCritChance(value)
-        break
-      case Stat.CRIT_DAMAGE:
-        pokemon.addCritDamage(value)
-        break
-      case Stat.SHIELD:
-        pokemon.addShield(value, pokemon)
-        break
-      case Stat.HP:
-        pokemon.handleHeal(value, pokemon, 0)
-        break
-    }
-  }
-
   applyItemsEffects(pokemon: PokemonEntity) {
     // wonderbox should be applied first so that wonderbox items effects can be applied after
     if (pokemon.items.has(Item.WONDER_BOX)) {
@@ -428,7 +419,7 @@ export default class Simulation extends Schema implements ISimulation {
   applyItemEffect(pokemon: PokemonEntity, item: Item) {
     if (ItemStats[item]) {
       Object.entries(ItemStats[item]).forEach(([stat, value]) =>
-        this.applyStat(pokemon, stat as Stat, value)
+        pokemon.applyStat(stat as Stat, value)
       )
     }
 
@@ -468,41 +459,6 @@ export default class Simulation extends Schema implements ISimulation {
     }
   }
 
-  updateCastform(weather: Weather) {
-    let newForm: Pkm = Pkm.CASTFORM
-    if (weather === Weather.SNOW) {
-      newForm = Pkm.CASTFORM_HAIL
-    } else if (weather === Weather.RAIN) {
-      newForm = Pkm.CASTFORM_RAIN
-    } else if (weather === Weather.SUN) {
-      newForm = Pkm.CASTFORM_SUN
-    }
-
-    ;[this.bluePlayer, this.redPlayer].forEach(player => {
-      if(!player) return;
-      player.board.forEach((pokemon, id) => {
-        if (
-          PkmFamily[pokemon.name] === PkmFamily[Pkm.CASTFORM] &&
-          pokemon.name !== newForm
-        ) {
-          const newPokemon = PokemonFactory.createPokemonFromName(
-            newForm,
-            player
-          )
-          pokemon.items.forEach((item) => {
-            newPokemon.items.add(item)
-          })
-          newPokemon.positionX = pokemon.positionX
-          newPokemon.positionY = pokemon.positionY
-          player.board.delete(id)
-          player.board.set(newPokemon.id, newPokemon)
-          player.synergies.update(player.board)
-          player.effects.update(player.synergies, player.board)
-        }
-      })
-    })
-  }
-
   applyPostEffects() {
     ;[this.blueTeam, this.redTeam].forEach((team) => {
       const ironDefenseCandidates = values(team).filter((p) =>
@@ -540,7 +496,6 @@ export default class Simulation extends Schema implements ISimulation {
           pokemon.effects.has(Effect.DRAGON_DANCE)
         ) {
           pokemon.addMaxHP(30 * pokemon.stars)
-          pokemon.life = pokemon.hp
         }
         if (pokemon.effects.has(Effect.DRAGON_DANCE)) {
           pokemon.addAbilityPower(10 * pokemon.stars)

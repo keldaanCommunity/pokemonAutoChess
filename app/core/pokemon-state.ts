@@ -696,6 +696,35 @@ export default class PokemonState {
     return candidateCells[0]
   }
 
+  getNearestTargetCoordinateAvailablePlace(
+    pokemon: PokemonEntity,
+    board: Board
+  ): { x: number; y: number } | undefined {
+    const candidateCells = new Array<{
+      distance: number
+      x: number
+      y: number
+    }>()
+
+    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
+      if (value === undefined){
+        candidateCells.push({
+          x,
+          y,
+          distance: distanceM(
+            pokemon.positionX,
+            pokemon.positionY,
+            x,
+            y
+          )
+        })
+      }
+    })
+
+    candidateCells.sort((a, b) => a.distance - b.distance)
+    return candidateCells[0]
+  }
+
   getTargetCoordinateWhenConfused(
     pokemon: PokemonEntity,
     board: Board

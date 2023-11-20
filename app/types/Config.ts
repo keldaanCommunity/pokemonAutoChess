@@ -328,7 +328,8 @@ export const UniqueShop = new Array<PkmProposition>(
   Pkm.HERACROSS,
   PkmDuo.ILLUMISE_VOLBEAT,
   Pkm.TANDEMAUS,
-  Pkm.TROPIUS
+  Pkm.TROPIUS,
+  Pkm.CARNIVINE
 )
 
 export const LegendaryShop = new Array<PkmProposition>(
@@ -753,7 +754,8 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.RAWST_BERRY]: {},
   [Item.ROWAP_BERRY]: {},
   [Item.SALAC_BERRY]: {},
-  [Item.SITRUS_BERRY]: {}
+  [Item.SITRUS_BERRY]: {},
+  [Item.COMFEY]: {}
 }
 
 export enum Dungeon {
