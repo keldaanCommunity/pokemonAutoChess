@@ -5708,7 +5708,6 @@ export class Cresselia extends Pokemon {
   maxPP = 60
   range = 3
   skill = Ability.WISH
-  passive = Passive.MISTY
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -5721,7 +5720,7 @@ export class Heatran extends Pokemon {
   def = 5
   speDef = 5
   maxPP = 100
-  range = 3
+  range = 2
   skill = Ability.MAGMA_STORM
   attackSprite = AttackSprite.FIRE_RANGE
 }
@@ -5752,7 +5751,6 @@ export class Torkoal extends Pokemon {
   maxPP = 105
   range = 1
   skill = Ability.SMOKE_SCREEN
-  passive = Passive.SUN
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
@@ -9806,7 +9804,7 @@ export class Kartana extends Pokemon {
   atk = 40
   def = 10
   speDef = 1
-  maxPP = 95
+  maxPP = 70
   range = 1
   skill = Ability.LEAF_BLADE
   passive = Passive.BEAST_BOOST
