@@ -15,6 +15,7 @@
 - Rework Munchlax/Snorlax: new ability Body Slam, deals 30% of max HP as special damage ; new passive: gains permanently 20 HP every time it eats a berry ; nerf Snorlax HP ~~300~~ 260
 - Removed Misty terrain passive of Cresselia
 - Removed Zenith passive of Torkoal
+- Nerf Overheat (Moltres): ~~40~~ 30 special damage
 
 # Changes to Synergies
 
