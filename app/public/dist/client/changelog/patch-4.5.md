@@ -18,6 +18,7 @@
 - Nerf Overheat (Moltres): ~~40~~ 30 special damage
 - Nerf Fire Spin (Ho-Oh): ~~20/40/100~~ 20/40/80 special damage
 - Nerf Heatran range: ~~3~~ 2
+- Buff Kartana: PP ~~95~~ 70
 
 # Changes to Synergies
 

@@ -9804,7 +9804,7 @@ export class Kartana extends Pokemon {
   atk = 40
   def = 10
   speDef = 1
-  maxPP = 95
+  maxPP = 70
   range = 1
   skill = Ability.LEAF_BLADE
   passive = Passive.BEAST_BOOST
