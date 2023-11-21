@@ -7324,7 +7324,7 @@ export class Munchlax extends Pokemon {
 
   onEvolve(snorlax) {
     // carry over the hp gained with passive
-    snorlax.hp += (this.hp - 120)
+    snorlax.hp += this.hp - 120
   }
 }
 
@@ -10619,6 +10619,45 @@ export class Pelipper extends Pokemon {
   passive = Passive.DRIZZLE
 }
 
+export class HisuianQwilfish extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.DARK,
+    Synergy.POISON,
+    Synergy.AQUATIC
+  ])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.OVERQWIL
+  hp = 95
+  atk = 8
+  def = 4
+  speDef = 2
+  maxPP = 80
+  range = 1
+  skill = Ability.BARB_BARRAGE
+  additional = true
+  attackSprite = AttackSprite.POISON_MELEE
+}
+
+export class Overqwil extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.DARK,
+    Synergy.POISON,
+    Synergy.AQUATIC
+  ])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 230
+  atk = 19
+  def = 6
+  speDef = 4
+  maxPP = 80
+  range = 1
+  skill = Ability.BARB_BARRAGE
+  additional = true
+  attackSprite = AttackSprite.POISON_MELEE
+}
+
 export class Xurkitree extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.ELECTRIC,
@@ -10822,15 +10861,15 @@ export class Comfey extends Pokemon {
       // delete comfey
       team.delete(entity.id)
       simulation.board.setValue(entity.positionX, entity.positionY, undefined)
-      if(simulation.blueDpsMeter.has(entity.id)){
+      if (simulation.blueDpsMeter.has(entity.id)) {
         simulation.blueDpsMeter.delete(entity.id)
         simulation.blueHealDpsMeter.delete(entity.id)
       }
-      if(simulation.redDpsMeter.has(entity.id)){
-        simulation.redDpsMeter.delete(entity.id)      
+      if (simulation.redDpsMeter.has(entity.id)) {
+        simulation.redDpsMeter.delete(entity.id)
         simulation.redHealDpsMeter.delete(entity.id)
       }
-      
+
       nearestAllyWithFreeItemSlot.items.add(Item.COMFEY)
 
       // apply comfey stats
@@ -11514,5 +11553,7 @@ export const PokemonClasses: Record<
   [Pkm.EXEGGUTOR]: Exeggcutor,
   [Pkm.ALOLAN_EXEGGUTOR]: AlolanExeggutor,
   [Pkm.COMFEY]: Comfey,
-  [Pkm.CARNIVINE]: Carnivine
+  [Pkm.CARNIVINE]: Carnivine,
+  [Pkm.HISUIAN_QWILFISH]: HisuianQwilfish,
+  [Pkm.OVERQWIL]: Overqwil
 }
