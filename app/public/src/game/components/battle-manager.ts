@@ -105,7 +105,7 @@ export default class BattleManager {
     this.group.getChildren().forEach((p) => {
       const pkm = p as Pokemon
       if (pkm.projectile) {
-        pkm.projectile.destroy(true)
+        pkm.projectile.destroy()
       }
     })
     this.group.clear(true, true)
@@ -614,7 +614,7 @@ export default class BattleManager {
         getEnd: () => y - 110
       },
       onComplete: () => {
-        crit.destroy(true)
+        crit.destroy()
       }
     })
   }
@@ -666,7 +666,7 @@ export default class BattleManager {
         getEnd: () => y - 110
       },
       onComplete: () => {
-        crit.destroy(true)
+        crit.destroy()
       }
     })
   }
@@ -698,7 +698,7 @@ export default class BattleManager {
         getEnd: () => y - 110
       },
       onComplete: () => {
-        crit.destroy(true)
+        crit.destroy()
       }
     })
   }
@@ -730,7 +730,7 @@ export default class BattleManager {
         getEnd: () => y - 110
       },
       onComplete: () => {
-        blockedSpell.destroy(true)
+        blockedSpell.destroy()
       }
     })
   }
@@ -762,7 +762,7 @@ export default class BattleManager {
         getEnd: () => y - 110
       },
       onComplete: () => {
-        manaBurn.destroy(true)
+        manaBurn.destroy()
       }
     })
   }
@@ -794,7 +794,7 @@ export default class BattleManager {
         getEnd: () => y - 110
       },
       onComplete: () => {
-        tripleAttack.destroy(true)
+        tripleAttack.destroy()
       }
     })
   }
@@ -5295,7 +5295,7 @@ export default class BattleManager {
         getEnd: () => 0
       },
       onComplete: () => {
-        container.destroy(true)
+        container.destroy()
       }
     })
   }

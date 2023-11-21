@@ -56,7 +56,7 @@ export class DebugScene extends Phaser.Scene {
     status: Status | ""
   ) {
     if (this.pokemon) {
-      this.pokemon.destroy(true)
+      this.pokemon.destroy()
     }
     this.pokemon = new Pokemon(
       this,

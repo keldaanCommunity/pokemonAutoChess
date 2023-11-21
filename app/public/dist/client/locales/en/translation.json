@@ -259,6 +259,7 @@
     "SNIPE_SHOT": "Snipe Shot",
     "AIR_SLASH": "Air Slash",
     "EGGSPLOSION": "Eggsplosion",
+    "BODY_SLAM": "Body Slam",
     "FLORAL_HEALING": "Floral Healing",
     "VINE_WHIP": "Vine Whip"
   },
@@ -1165,7 +1166,8 @@
     "AIR_SLASH": "Deals [25,50,100,SP] SPECIAL and inflicts FLINCH for 7 seconds",
     "EGGSPLOSION": "Launches an explosive egg at its target, inflicting [40,80,140,SP] SPECIAL and applying ARMOR_REDUCTION for 4 seconds to all adjacent enemies. If the target is KO, you have a 30% chance of getting an egg on your bench.",
     "FLORAL_HEALING": "Heals as many HP as max PP of Comfey's holder or Comfey itself if not hold",
-    "VINE_WHIP": "Deals 100 SPECIAL, causing it and all adjacent enemies to FLINCH for 3 seconds"
+    "VINE_WHIP": "Deals 100 SPECIAL, causing it and all adjacent enemies to FLINCH for 3 seconds",
+    "BODY_SLAM": "Deals [30,SP]% of user max HP as SPECIAL"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1610,6 +1612,7 @@
     "DRIZZLE": "The pokémon count as 3 for RAIN",
     "HARVEST": "At the start of the stage, equip itself with a random berry",
     "COCONUT": "Exeggutor is looking for a LEAF_STONE",
+    "GLUTTON": "Permanently gains 20 max HP every time it eats a berry",
     "COMFEY": "Comfey cannot hold items. At the start of the fight, the nearest ally with a free item slot wears Comfey and gains all its stats. Comfey casts its ability at the same time than its holder. When its holder is KO, Comfey fights on its own."
   },
   "stat": {

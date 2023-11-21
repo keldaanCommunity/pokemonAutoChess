@@ -738,6 +738,9 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       if (berryEaten) {
         target.items.delete(berry)
         target.refToBoardPokemon.items.delete(berry)
+        if (target.passive === Passive.GLUTTON) {
+          target.refToBoardPokemon.hp += 20
+        }
       }
     }
   }

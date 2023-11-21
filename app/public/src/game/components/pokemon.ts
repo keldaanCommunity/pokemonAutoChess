@@ -710,7 +710,7 @@ export default class Pokemon extends DraggableObject {
         getEnd: () => 0
       },
       onComplete: () => {
-        this.destroy(true)
+        this.destroy()
       }
     })
   }

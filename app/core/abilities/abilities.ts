@@ -6350,6 +6350,27 @@ export class EggsplosionStrategy extends AbilityStrategy {
   }
 }
 
+export class BodySlamStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = Math.round(0.3 * pokemon.hp * (1 + pokemon.hp / 100))
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit,
+      false
+    )
+  }
+}
+
 export class VineWhipStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -6632,6 +6653,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SNIPE_SHOT]: new SnipeShotStrategy(),
   [Ability.AIR_SLASH]: new AirSlashStrategy(),
   [Ability.EGGSPLOSION]: new EggsplosionStrategy(),
+  [Ability.BODY_SLAM]: new BodySlamStrategy(),
   [Ability.FLORAL_HEALING]: new FloralHealingStrategy(),
   [Ability.VINE_WHIP]: new VineWhipStrategy()
 }

@@ -115,6 +115,9 @@ export class CountEvolutionRule extends EvolutionRule {
       pokemonEvolutionName,
       player
     )
+    if(pokemon.onEvolve){
+      pokemon.onEvolve(pokemonEvolved)
+    }
 
     for (let i = 0; i < 3; i++) {
       const itemToAdd = itemsToAdd.pop()
