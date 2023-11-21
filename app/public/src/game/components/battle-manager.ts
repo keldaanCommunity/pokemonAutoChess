@@ -3737,6 +3737,25 @@ export default class BattleManager {
             )
             break
 
+          case Ability.BARB_BARRAGE:
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.BARB_BARRAGE,
+              "0"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.BARB_BARRAGE)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
+
           case Ability.HYPER_VOICE:
             coordinatesTarget = transformAttackCoordinate(8, targetY, this.flip)
             coordinates = transformAttackCoordinate(0, targetY, this.flip)

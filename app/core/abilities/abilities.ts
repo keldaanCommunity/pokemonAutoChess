@@ -6394,6 +6394,54 @@ export class VineWhipStrategy extends AbilityStrategy {
   }
 }
 
+export class BarbBarrageStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const mostSurroundedCoordinate =
+      state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
+
+    if (mostSurroundedCoordinate) {
+      pokemon.moveTo(
+        mostSurroundedCoordinate.x,
+        mostSurroundedCoordinate.y,
+        board
+      )
+      board
+        .getAdjacentCells(target.positionX, target.positionY)
+        .map((v) => v.value)
+        .filter((v) => v?.team === target.team)
+        .concat(target)
+        .forEach((v) => {
+          if (v) {
+            v.status.triggerPoison(3000, v, pokemon)
+            pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+              id: pokemon.simulation.id,
+              skill: Ability.BARB_BARRAGE,
+              positionX: pokemon.positionX,
+              positionY: pokemon.positionY,
+              targetX: v.positionX,
+              targetY: v.positionY,
+              orientation: v.orientation
+            })
+          }
+        })
+      target.handleSpecialDamage(
+        pokemon.stars === 3 ? 60 : pokemon.stars === 2 ? 30 : 15,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+    }
+  }
+}
+
 export class FloralHealingStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -6655,5 +6703,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.EGGSPLOSION]: new EggsplosionStrategy(),
   [Ability.BODY_SLAM]: new BodySlamStrategy(),
   [Ability.FLORAL_HEALING]: new FloralHealingStrategy(),
-  [Ability.VINE_WHIP]: new VineWhipStrategy()
+  [Ability.VINE_WHIP]: new VineWhipStrategy(),
+  [Ability.BARB_BARRAGE]: new BarbBarrageStrategy()
 }

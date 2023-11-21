@@ -8,6 +8,7 @@
 - Exeggcute/Exeggcutor/Alolan-Exeggcutor
 - Carnivine
 - Comfey
+- Hisuian Qwilfish/Overqwil
 
 # Changes to Pokemon & Abilities
 
