@@ -5708,7 +5708,6 @@ export class Cresselia extends Pokemon {
   maxPP = 60
   range = 3
   skill = Ability.WISH
-  passive = Passive.MISTY
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -5752,7 +5751,6 @@ export class Torkoal extends Pokemon {
   maxPP = 105
   range = 1
   skill = Ability.SMOKE_SCREEN
-  passive = Passive.SUN
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
