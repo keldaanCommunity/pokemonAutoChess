@@ -956,7 +956,7 @@
     "HEAL_ORDER": "Otorga [25,45,65,SP] SPECIAL a los enemigos adyacentes y cura [25,45,65,SP] a los aliados adyacentes",
     "SHELL_TRAP": "Después del siguiente PHYSICAL recibido, la trampa explota y reparte [100,SP] SPECIAL a los enemigos adyacentes.",
     "DIG": "Excava bajo tierra y reaparece junto al enemigo más lejano, infligiendo [10,20,40,SP] SPECIAL a todos los enemigos en el camino",
-    "FIRE_SPIN": "Ataque de área de efecto que inflige [20,40,100,SP] SPECIAL alrededor del objetivo y BURN a todos los enemigos golpeados durante 3 segundos",
+    "FIRE_SPIN": "Ataque de área de efecto que inflige [20,40,80,SP] SPECIAL alrededor del objetivo y BURN a todos los enemigos golpeados durante 3 segundos",
     "SEARING_SHOT": "Un infierno de llamas escarlatas incendia todo alrededor del usuario. Otorga [40,SP] SPECIAL y QUEMA durante 3 segundos a todos los enemigos dentro de 2 mosaicos de Victini.",
     "SPLASH": "Simplemente se cae y salpica sin ningún efecto...",
     "PECK": "Otorga [10,20,30,SP] SPECIAL al objetivo",

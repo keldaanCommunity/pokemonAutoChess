@@ -16,6 +16,7 @@
 - Removed Misty terrain passive of Cresselia
 - Removed Zenith passive of Torkoal
 - Nerf Overheat (Moltres): ~~40~~ 30 special damage
+- Nerf Fire Spin (Ho-Oh): ~~20/40/100~~ 20/40/80 special damage
 
 # Changes to Synergies
 

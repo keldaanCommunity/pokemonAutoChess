@@ -956,7 +956,7 @@
     "HEAL_ORDER": "Geeft [25,45,65,SP] SPECIAL aan aangrenzende vijanden en geneest [25,45,65,SP] aan aangrenzende bondgenoten",
     "SHELL_TRAP": "Nadat de volgende PHYSICAL ontvangen, de val ontploft en [100,SP] SPECIAL uitdeelt aan aangrenzende vijanden",
     "DIG": "Graaft ondergronds en verschijnt weer naast de verste vijand en brengt [10,20,40,SP] speciale schade toe aan alle vijanden onderweg",
-    "FIRE_SPIN": "Aanvalsgebied dat [20,40,100,SP] SPECIAL uitdeelt rond het doelwit en alle vijanden BURN gedurende 3 seconden",
+    "FIRE_SPIN": "Aanvalsgebied dat [20,40,80,SP] SPECIAL uitdeelt rond het doelwit en alle vijanden BURN gedurende 3 seconden",
     "SEARING_SHOT": "Een inferno van vuurrode vlammen zet alles rondom de gebruiker in brand. Doet [40,SP] SPECIAL en BURN gedurende 3 seconden alle vijanden binnen 2 tegels van Victini.",
     "SPLASH": "Gewoon floppen en spetteren zonder enig effect...",
     "PECK": "Biedt [10,20,30,SP] SPECIAL aan het doelwit",

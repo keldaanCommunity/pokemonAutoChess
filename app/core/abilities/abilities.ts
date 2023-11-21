@@ -4477,16 +4477,8 @@ export class FireSpinStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 20
-    if (pokemon.stars === 2) {
-      damage = 40
-    }
-    if (pokemon.stars === 3) {
-      damage = 100
-    }
-
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
-
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     target.status.triggerBurn(3000, target, pokemon, board)
     cells.forEach((cell) => {
