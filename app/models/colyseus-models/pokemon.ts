@@ -5720,7 +5720,7 @@ export class Heatran extends Pokemon {
   def = 5
   speDef = 5
   maxPP = 100
-  range = 3
+  range = 2
   skill = Ability.MAGMA_STORM
   attackSprite = AttackSprite.FIRE_RANGE
 }
