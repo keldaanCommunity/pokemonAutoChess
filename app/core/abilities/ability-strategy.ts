@@ -68,7 +68,7 @@ export class AbilityStrategy {
     }
 
     if (crit) {
-      pokemon.onCritical(target, board)
+      pokemon.onCritical({ target, board })
     }
 
     if (target.status.magicBounce) {

@@ -23,6 +23,8 @@
 
 # Changes to Synergies
 
+- Flying pokemons can no longer fly away when frozen, asleep or paralyzed
+
 # Changes to Items
 
 # Gameplay
