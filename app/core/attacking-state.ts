@@ -167,7 +167,7 @@ export default class AttackingState extends PokemonState {
       }
 
       if (Math.random() * 100 < pokemon.critChance) {
-        pokemon.onCritical(target, board)
+        pokemon.onCritical({ target, board })
         if (target.items.has(Item.ROCKY_HELMET) === false) {
           let opponentCritDamage = pokemon.critDamage
           if (target.effects.has(Effect.BATTLE_ARMOR)) {

@@ -23,6 +23,8 @@
 
 # Changes to Synergies
 
+- Flying pokemons can no longer fly away when frozen, asleep or paralyzed
+
 # Changes to Items
 
 # Gameplay
@@ -35,7 +37,7 @@
 
 - Synergies are now correctly updated after automatic pushing of a pokemon from bench to board
 - Fix Castform passive
-- Berries are now eaten after receiving ability damage that puts under 50% HP
+- Berries are now eaten after receiving ability damage or environment damage that puts under 50% HP
 
 # Misc
 
