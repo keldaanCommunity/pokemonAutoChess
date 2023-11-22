@@ -944,7 +944,7 @@
     "BLIZZARD": "Inflige [5,10,15,SP] SPECIAL et FREEZE pendant [1,2,3] secondes à tous les Pokémon ennemis. Double dégâts si l'ennemi est déjà FREEZE",
     "CONFUSION": "Rend la cible CONFUSION pendant [3,5,7] secondes. Si la cible a déjà CONFUSION, inflige [75,150,300,SP] SPECIAL à la place",
     "FIRE_BLAST": "Lance une explosion de feu infligeant [30,60,120,SP] SPECIAL",
-    "WHEEL_OF_FIRE": "Envoie une roue de feu qui fait un aller-retour en faisant [20,40,80,SP] SPECIAL",
+    "WHEEL_OF_FIRE": "Envoie une roue de feu qui fait un aller-retour en faisant [15,30,60,SP] SPECIAL",
     "SEISMIC_TOSS": "Attaque à cible unique qui inflige [7,14,28,SP] TRUE multiplié par le nombre de Pokémon dans votre équipe",
     "GUILLOTINE": "Attaque à cible unique qui inflige [1,2,3,SP] x ATK SPECIAL. Restaure la moitié du PP si la cible est KO",
     "ROCK_SLIDE": "Attaque à cible unique qui inflige [30,60,120,SP] SPECIAL. Double les dégâts si la cible est de type FLYING.",

@@ -1235,12 +1235,45 @@ export default class BattleManager {
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
-              "specials",
-              `${Ability.WHEEL_OF_FIRE}/000`
+              Ability.WHEEL_OF_FIRE,
+              "0"
             )
             specialProjectile.setDepth(7)
             specialProjectile.setScale(2, 2)
             specialProjectile.anims.play(Ability.WHEEL_OF_FIRE)
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              x: coordinatesTarget[0],
+              y: coordinatesTarget[1],
+              ease: "Power2",
+              yoyo: true,
+              duration: 500,
+              onComplete: () => {
+                specialProjectile.destroy()
+              }
+            })
+            break
+
+          case Ability.INFERNAL_PARADE:
+            coordinatesTarget = transformAttackCoordinate(
+              targetX,
+              targetY,
+              this.flip
+            )
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.INFERNAL_PARADE,
+              "0"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.INFERNAL_PARADE)
             this.scene.tweens.add({
               targets: specialProjectile,
               x: coordinatesTarget[0],
@@ -4949,6 +4982,30 @@ export default class BattleManager {
             specialProjectile.setDepth(1)
             specialProjectile.setScale(2, 2)
             specialProjectile.anims.play("GRASS_HEAL")
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
+          }
+
+          case "FLAME_HIT": {
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              "FLAME_HIT",
+              "0"
+            )
+            specialProjectile.setDepth(1)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play("FLAME_HIT")
             specialProjectile.once(
               Phaser.Animations.Events.ANIMATION_COMPLETE,
               () => {

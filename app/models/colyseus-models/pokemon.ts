@@ -3452,6 +3452,8 @@ export class Quilava extends Pokemon {
 
 export class Typhlosion extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
+  evolution = Pkm.HISUIAN_TYPHLOSION
+  evolutionRule = new ItemEvolutionRule([Item.REAPER_CLOTH])
   rarity = Rarity.UNCOMMON
   stars = 3
   hp = 250
@@ -3462,6 +3464,22 @@ export class Typhlosion extends Pokemon {
   range = 2
   skill = Ability.WHEEL_OF_FIRE
   attackSprite = AttackSprite.FIRE_RANGE
+  passive = Passive.TYPHLOSION
+}
+
+export class HisuianTyphlosion extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD, Synergy.GHOST])
+  rarity = Rarity.UNCOMMON
+  stars = 4
+  hp = 260
+  atk = 27
+  def = 4
+  speDef = 4
+  maxPP = 80
+  range = 2
+  skill = Ability.INFERNAL_PARADE
+  attackSprite = AttackSprite.FIRE_RANGE
+  passive = Passive.HISUIAN_TYPHLOSION
 }
 
 export class Slowpoke extends Pokemon {
@@ -11553,5 +11571,6 @@ export const PokemonClasses: Record<
   [Pkm.COMFEY]: Comfey,
   [Pkm.CARNIVINE]: Carnivine,
   [Pkm.HISUIAN_QWILFISH]: HisuianQwilfish,
-  [Pkm.OVERQWIL]: Overqwil
+  [Pkm.OVERQWIL]: Overqwil,
+  [Pkm.HISUIAN_TYPHLOSION]: HisuianTyphlosion
 }
