@@ -659,7 +659,8 @@ export enum Pkm {
   COMFEY = "COMFEY",
   CARNIVINE = "CARNIVINE",
   HISUIAN_QWILFISH = "HISUIAN_QWILFISH",
-  OVERQWIL = "OVERQWIL"
+  OVERQWIL = "OVERQWIL",
+  HISUIAN_TYPHLOSION = "HISUIAN_TYPHLOSION"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1321,7 +1322,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.COMFEY]: "0764",
   [Pkm.CARNIVINE]: "0455",
   [Pkm.HISUIAN_QWILFISH]: "0211-0001",
-  [Pkm.OVERQWIL]: "0904"
+  [Pkm.OVERQWIL]: "0904",
+  [Pkm.HISUIAN_TYPHLOSION]: "0157-0001"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1983,7 +1985,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.COMFEY]: Pkm.COMFEY,
   [Pkm.CARNIVINE]: Pkm.CARNIVINE,
   [Pkm.HISUIAN_QWILFISH]: Pkm.HISUIAN_QWILFISH,
-  [Pkm.OVERQWIL]: Pkm.HISUIAN_QWILFISH
+  [Pkm.OVERQWIL]: Pkm.HISUIAN_QWILFISH,
+  [Pkm.HISUIAN_TYPHLOSION]: Pkm.CYNDAQUIL
 }
 
 export enum PkmDuo {
@@ -5409,5 +5412,10 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge
+  },
+  [Pkm.HISUIAN_TYPHLOSION]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   }
 }

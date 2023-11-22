@@ -328,18 +328,6 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
-      key: Ability.WHEEL_OF_FIRE,
-      frames: this.game.anims.generateFrameNames("specials", {
-        start: 0,
-        end: 5,
-        zeroPad: 3,
-        prefix: `${Ability.WHEEL_OF_FIRE}/`
-      }),
-      duration: 1000,
-      repeat: -1
-    })
-
-    this.game.anims.create({
       key: Ability.SEISMIC_TOSS,
       frames: this.game.anims.generateFrameNames("specials", {
         start: 0,
@@ -888,10 +876,40 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.WHEEL_OF_FIRE,
+      frames: this.game.anims.generateFrameNames(Ability.WHEEL_OF_FIRE, {
+        start: 0,
+        end: 4
+      }),
+      duration: 250,
+      repeat: 1
+    })
+
+    this.game.anims.create({
+      key: Ability.INFERNAL_PARADE,
+      frames: this.game.anims.generateFrameNames(Ability.INFERNAL_PARADE, {
+        start: 0,
+        end: 4
+      }),
+      duration: 250,
+      repeat: 1
+    })
+
+    this.game.anims.create({
+      key: "FLAME_HIT",
+      frames: this.game.anims.generateFrameNames("FLAME_HIT", {
+        start: 0,
+        end: 11
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.BARB_BARRAGE,
       frames: this.game.anims.generateFrameNames(Ability.BARB_BARRAGE, {
         start: 0,
-        end: 8
+        end: 6
       }),
       duration: 1000,
       repeat: 0

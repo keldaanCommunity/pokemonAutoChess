@@ -2355,14 +2355,8 @@ export class WheelOfFireStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
-    let damage = 20
-    if (pokemon.stars === 2) {
-      damage = 40
-    }
-    if (pokemon.stars === 3) {
-      damage = 80
-    }
+    super.process(pokemon, state, board, target, crit, true)
+    const damage = pokemon.stars === 3 ? 60 : pokemon.stars === 2 ? 30 : 15
 
     const farthestTarget = state.getFarthestTarget(pokemon, board)
     if (farthestTarget) {
@@ -2372,8 +2366,90 @@ export class WheelOfFireStrategy extends AbilityStrategy {
         farthestTarget.positionX,
         farthestTarget.positionY
       )
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: Ability.WHEEL_OF_FIRE,
+        positionX: pokemon.positionX,
+        positionY: pokemon.positionY,
+        targetX: farthestTarget.positionX,
+        targetY: farthestTarget.positionY
+      })
       cells.forEach((cell) => {
         if (cell.value && cell.value.team != pokemon.team) {
+          pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+            id: pokemon.simulation.id,
+            skill: "FLAME_HIT",
+            positionX: cell.value.positionX,
+            positionY: cell.value.positionY
+          })
+
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      })
+    }
+  }
+}
+
+export class InfernalParadeStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const damage = pokemon.stars === 3 ? 60 : pokemon.stars === 2 ? 30 : 15
+
+    const farthestTarget = state.getFarthestTarget(pokemon, board)
+    if (farthestTarget) {
+      const cells = board.getCellsBetween(
+        pokemon.positionX,
+        pokemon.positionY,
+        farthestTarget.positionX,
+        farthestTarget.positionY
+      )
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: Ability.INFERNAL_PARADE,
+        positionX: pokemon.positionX,
+        positionY: pokemon.positionY,
+        targetX: farthestTarget.positionX,
+        targetY: farthestTarget.positionY
+      })
+      cells.forEach((cell) => {
+        if (cell.value && cell.value.team != pokemon.team) {
+          pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+            id: pokemon.simulation.id,
+            skill: "FLAME_HIT",
+            positionX: cell.value.positionX,
+            positionY: cell.value.positionY
+          })
+
+          if(Math.random()> .5){
+            cell.value.status.triggerBurn(3000, cell.value, pokemon, board)
+          }
+
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
           cell.value.handleSpecialDamage(
             damage,
             board,
@@ -6696,5 +6772,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.BODY_SLAM]: new BodySlamStrategy(),
   [Ability.FLORAL_HEALING]: new FloralHealingStrategy(),
   [Ability.VINE_WHIP]: new VineWhipStrategy(),
-  [Ability.BARB_BARRAGE]: new BarbBarrageStrategy()
+  [Ability.BARB_BARRAGE]: new BarbBarrageStrategy(),
+  [Ability.INFERNAL_PARADE]: new InfernalParadeStrategy()
 }

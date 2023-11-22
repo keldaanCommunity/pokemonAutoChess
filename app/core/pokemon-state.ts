@@ -144,6 +144,14 @@ export default class PokemonState {
       }
 
       if (
+        attacker &&
+        attacker.passive === Passive.HISUIAN_TYPHLOSION &&
+        (pokemon.status.burn || pokemon.status.silence)
+      ) {
+        damage = Math.ceil(damage * 1.2)
+      }
+
+      if (
         pokemon.simulation.weather === Weather.MISTY &&
         attackType === AttackType.SPECIAL
       ) {
@@ -216,7 +224,7 @@ export default class PokemonState {
         residualDamage = max(1)(residualDamage)
       }
 
-      takenDamage += Math.min(residualDamage, pokemon.life)      
+      takenDamage += Math.min(residualDamage, pokemon.life)
 
       if (
         pokemon.items.has(Item.SHINY_CHARM) &&
@@ -707,16 +715,11 @@ export default class PokemonState {
     }>()
 
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
-      if (value === undefined){
+      if (value === undefined) {
         candidateCells.push({
           x,
           y,
-          distance: distanceM(
-            pokemon.positionX,
-            pokemon.positionY,
-            x,
-            y
-          )
+          distance: distanceM(pokemon.positionX, pokemon.positionY, x, y)
         })
       }
     })

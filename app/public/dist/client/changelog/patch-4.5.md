@@ -9,6 +9,7 @@
 - Carnivine
 - Comfey
 - Hisuian Qwilfish/Overqwil
+- Hisuian Typhlosion
 
 # Changes to Pokemon & Abilities
 

@@ -229,6 +229,21 @@ export function loadAttacksMultiAtlas(scene: Phaser.Scene) {
     "/assets/attacks"
   )
   scene.load.multiatlas(
+    "INFERNAL_PARADE",
+    "/assets/attacks/INFERNAL_PARADE.json",
+    "/assets/attacks"
+  )
+  scene.load.multiatlas(
+    "WHEEL_OF_FIRE",
+    "/assets/attacks/WHEEL_OF_FIRE.json",
+    "/assets/attacks"
+  )
+  scene.load.multiatlas(
+    "FLAME_HIT",
+    "/assets/attacks/FLAME_HIT.json",
+    "/assets/attacks"
+  )
+  scene.load.multiatlas(
     "EGGSPLOSION",
     "/assets/attacks/EGGSPLOSION.json",
     "/assets/attacks"
