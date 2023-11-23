@@ -1608,10 +1608,20 @@
     "MOXIE": "Chaque fois qu'un pokémon adverse est KO, gagne autant d' ATK que son nombre d'é",
     "BELLSPROUT": "$t(pkm.WEEPINBELL} cherche des baies",
     "CLEFAIRY": "$t(pkm.CLEFAIRY) cherche une POKE_DOLL",
+    "ILLUMISE_VOLBEAT": "$t(pkm.ILLUMISE) and $t{pkm.VOLBEAT} gagnent 5 PP par seconde pour chaque autre membre de leur espèce en vie sur le plateauIllumise and Volbeat gain 5 PP per second for each other member of their species alive on the board",
+    "PRISM": "$t(pkm.NECROZMA) alterne entre sa forme normale et Ultra selon s'il est exposé à la ",
+    "BLOSSOM": "$t(pkm.CHERRIM) alterne entre sa forme normale et Ensoleillée selon s'il est exposé à la L",
+    "SPECIAL_ATTACK": "Les attaques de base infligent des SPECIAL qi augmentent avec la AP",
+    "NINCADA": "Après avoir évolué, récupérez un $t{pkm.SHENINJA} si vous avez un espace disponible sur votre banc",
+    "FAMILY": "Ce pokémon grandit avec le temps (au tour 10 et tour 20",
+    "SAND_STREAM": "Ce pokémon compte pour 3 pour déclencher  SANDSTORM",
+    "DRIZZLE": "Ce pokémon compte pour 3 pour déclencher la RAIN",
     "HARVEST": "Au début du combat, s'équipe avec une baie aléatoire",
     "COCONUT": "$t(pkm.EXEGGUTOR) cherche une LEAF_STONE",
     "GLUTTON": "Gagne de façon permanente 20 HP max chaque fois qu'il mange une baie",
-    "COMFEY": "$t(pkm.COMFEY) ne peut pas porter d'objets. Au début du combat, l'allié le plus proche avec un slot d'objet disponible porte $t(pkm.COMFEY) et gagne toutes ses stats. $t(pkm.COMFEY) lance sa capacité en même temps que son porteur. Quand le porteur est KO, $t(pkm.COMFEY) combat seul."
+    "COMFEY": "$t(pkm.COMFEY) ne peut pas porter d'objets. Au début du combat, l'allié le plus proche avec un slot d'objet disponible porte $t(pkm.COMFEY) et gagne toutes ses stats. $t(pkm.COMFEY) lance sa capacité en même temps que son porteur. Quand le porteur est KO, $t(pkm.COMFEY) combat seul.",
+    "TYPHLOSION": "Typhlosion cherche une REAPER_CLOTH",
+    "HISUIAN_TYPHLOSION": "Inflige 20% de dégâts en plus si la cible est BURN ou SILENCE"
   },
   "stat": {
     "ATK": "Attaque",
@@ -1801,7 +1811,8 @@
     "ARCHEOLOGIST": "Archéologue",
     "ALCHEMIST": "Alchimiste",
     "DENTIST": "Dentiste",
-    "FISHERMAN": "Pêcheur"
+    "FISHERMAN": "Pêcheur",
+    "CHOSEN_ONE": "ÉLU"
   },
   "title_description": {
     "NOVICE": "Jouez votre première partie",
@@ -1861,7 +1872,8 @@
     "SHINY_SEEKER": "Avoir plus de 30 avatars de pokémons shiny",
     "ARCHEOLOGIST": "Déchiffrez le message secret des Zarbi",
     "DENTIST": "Débloquer le portrait Arbok en colère",
-    "FISHERMAN": "Obtenez un Léviator"
+    "FISHERMAN": "Obtenez un Léviator",
+    "CHOSEN_ONE": "Niveau max de synergie Lumière pen"
   },
   "weather": {
     "NEUTRAL": "Temps calme",
@@ -2003,6 +2015,7 @@
   "click_on_create_room": "Cliquez sur Créer un salon pour jouer !",
   "create_room": "Créer un salon",
   "loading": "Chargement...",
+  "no_data_available": "Aucune donnée disponible",
   "leaderboard": "Classement",
   "rooms": "Salons",
   "online": "En ligne",
