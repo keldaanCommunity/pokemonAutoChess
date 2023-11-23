@@ -845,7 +845,7 @@
     "BLIZZARD": "FREEZE alle vijandelijke Pokémon gedurende [1,2,3] seconden en deel [5,10,15,SP] SPECIAL. Dubbele schade als de vijand al FREEZE is",
     "CONFUSION": "Pas de CONFUSION status toe aan het doelwit voor [3,5,7] seconden. Als de status al aanwezig is, richt in plaats daarvan [75,150,300,SP] SPECIAL aan",
     "FIRE_BLAST": "Schiet een Vuurschot en richt [30,60,120,SP] SPECIAL toe aan het doelwit",
-    "WHEEL_OF_FIRE": "Schiet een terugkerende Vlamwiel. Elke vijandelijke Pokémon die geraakt wordt neemt [15,30,60,SP] SPECIAL",
+    "WHEEL_OF_FIRE": "Schiet een terugkerende Vlamwiel. Elke vijandelijke Pokémon die geraakt wordt neemt [15,25,45,SP] SPECIAL",
     "SEISMIC_TOSS": "Breng [7,14,28,SP] TRUE toe aan het doelwit, vermenigvuldigd met het aantal Pokemon in je team",
     "GUILLOTINE": "Breng [1,2,3,SP] x ATK SPECIAL toe aan het doelwit. Herstel de helft van de gebruiker's PP als het doelwit KO'd is",
     "ROCK_SLIDE": "Breng [30,60,120,SP] SPECIAL toe aan het doelwit. De schade verdubbelt als het doelwit een Vliegende Pokémon is",

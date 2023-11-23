@@ -2356,7 +2356,7 @@ export class WheelOfFireStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    const damage = pokemon.stars === 3 ? 60 : pokemon.stars === 2 ? 30 : 15
+    const damage = pokemon.stars === 3 ? 45 : pokemon.stars === 2 ? 25 : 15
 
     const farthestTarget = state.getFarthestTarget(pokemon, board)
     if (farthestTarget) {
@@ -2412,7 +2412,6 @@ export class InfernalParadeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    const damage = pokemon.stars === 3 ? 60 : pokemon.stars === 2 ? 30 : 15
 
     const farthestTarget = state.getFarthestTarget(pokemon, board)
     if (farthestTarget) {
@@ -2444,14 +2443,14 @@ export class InfernalParadeStrategy extends AbilityStrategy {
           }
 
           cell.value.handleSpecialDamage(
-            damage,
+            60,
             board,
             AttackType.SPECIAL,
             pokemon,
             crit
           )
           cell.value.handleSpecialDamage(
-            damage,
+            60,
             board,
             AttackType.SPECIAL,
             pokemon,
