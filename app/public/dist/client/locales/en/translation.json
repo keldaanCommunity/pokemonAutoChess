@@ -992,7 +992,7 @@
     "BUG_BUZZ": "Deal [20,40,80,SP] SPECIAL to the target. If the target is PARALYSIS, the damage is doubled",
     "STRING_SHOT": "Deal [10,20,50,SP] SPECIAL to the target and make them PARALYSIS for 5 seconds",
     "VENOSHOCK": "Deal [30,60,120,SP] SPECIAL to the target. If the target is POISON, the damage is doubled",
-    "LEECH_LIFE": "Deal [15,30,60,SP] SPECIAL in an area around the user and heal the user for the amount of damage dealt",
+    "LEECH_LIFE": "Deal [20,40,80,SP] SPECIAL and heal the user for the same amount",
     "HAPPY_HOUR": "Buff all allied Pokémon's ATK by [2,5,8,SP]",
     "TELEPORT": "Teleport the user to a corner of the battlefield. The user's next attack deals [15,30,60,SP] extra SPECIAL",
     "NASTY_PLOT": "Buff the user's ATK by [10,SP]",

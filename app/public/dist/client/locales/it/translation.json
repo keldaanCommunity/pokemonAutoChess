@@ -877,7 +877,7 @@
     "BUG_BUZZ": "Attacco mono bersaglio che fa [20,40,80,SP] SPECIAL. Danno doppio se il bersaglio è PARALYSIS",
     "STRING_SHOT": "Attacco mono bersaglio che fa [10,20,50,SP] SPECIAL e crea PARALYSIS per 5 secondi",
     "VENOSHOCK": "Danno mono bersaglio che infligge [30,60,120,SP] SPECIAL. Raddoppia i danni se il bersaglio è POISON",
-    "LEECH_LIFE": "Attacco di rubavita ad area che infligge [15,30,60,SP] SPECIAL",
+    "LEECH_LIFE": "Attacco di rubavita che infligge [20,40,80,SP] SPECIAL",
     "HAPPY_HOUR": "Aumenta l'ATK di tutti gli alleati di [2,5,8,SP] punti",
     "TELEPORT": "Teletrasporta il pokemon su un bordo della mappa. Il prossimo attacco infligge [15,30,60,SP] SPECIAL",
     "NASTY_PLOT": "Potenzia l'ATK pokemon di [10,SP] punti",

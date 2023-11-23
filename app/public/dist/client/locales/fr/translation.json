@@ -992,7 +992,7 @@
     "BUG_BUZZ": "Attaque à cible unique infligeant [20,40,80,SP] SPECIAL. Dégâts doublés si la cible a PARALYSIS",
     "STRING_SHOT": "Attaque à cible unique infligeant [10,20,50,SP] SPECIAL et PARALYSIS pendant 5 secondes",
     "VENOSHOCK": "Inflige [30,60,120,SP] SPECIAL à la cible. Double les dégâts si la cible a le statut POISON",
-    "LEECH_LIFE": "Attaque de vol de vie à zone d'effet qui inflige [15,30,60,SP] SPECIAL",
+    "LEECH_LIFE": "Attaque de vol de vie qui inflige [15,30,60,SP] SPECIAL et soigne le lanceur du même montant",
     "HAPPY_HOUR": "Augmente l'ATK de tous les alliés de [2,5,8,SP] points",
     "TELEPORT": "Téléporte le pokémon sur un bord de la carte. La prochaine attaque inflige [15,30,60,SP] SPECIAL",
     "NASTY_PLOT": "Augmente l'ATK des pokémons de [10,SP] points",

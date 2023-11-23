@@ -877,7 +877,7 @@
     "BUG_BUZZ": "Ataque de alvo mono que faz [20,40,80,SP] SPECIAL. Dano dobrado se o alvo estiver PARALYSIS",
     "STRING_SHOT": "Ataque de alvo mono que faz [10,20,50,SP] SPECIAL e causa PARALYSIS por 5 segundos",
     "VENOSHOCK": "Dano de alvo mono que causa [30,60,120,SP] SPECIAL. Dobra o dano se o alvo for POISON",
-    "LEECH_LIFE": "Ataque de roubo de vida em área de efeito que causa [15,30,60,SP] SPECIAL",
+    "LEECH_LIFE": "Ataque de roubo de vida de efeito que causa [20,40,80,SP] SPECIAL",
     "HAPPY_HOUR": "Buff todos os aliados ATK por [2,5,8,SP] pontos",
     "TELEPORT": "Teletransporte o pokémon em uma borda do mapa. Próximo ataque trata [15,30,60,SP] SPECIAL",
     "NASTY_PLOT": "Buff o ATK do pokémon em [10,SP] pontos",

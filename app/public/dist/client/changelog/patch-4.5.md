@@ -20,6 +20,7 @@
 - Nerf Fire Spin (Ho-Oh): ~~20/40/100~~ 20/40/80 special damage
 - Nerf Heatran range: ~~3~~ 2
 - Buff Kartana: PP ~~95~~ 70
+- Rework Leech Life (Crobat): increase damage to 20/40/80, removed area damage
 
 # Changes to Synergies
 

@@ -3614,13 +3614,13 @@ export class LeechLifeStrategy extends AbilityStrategy {
 
     switch (pokemon.stars) {
       case 1:
-        damage = 15
+        damage = 20
         break
       case 2:
-        damage = 30
+        damage = 40
         break
       case 3:
-        damage = 60
+        damage = 80
         break
       default:
         break
@@ -3628,21 +3628,6 @@ export class LeechLifeStrategy extends AbilityStrategy {
 
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     pokemon.handleHeal(damage, pokemon, 1)
-
-    const cells = board.getAdjacentCells(target.positionX, target.positionY)
-
-    cells.forEach((cell) => {
-      if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.handleSpecialDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
-        )
-        pokemon.handleHeal(damage, pokemon, 1)
-      }
-    })
   }
 }
 
