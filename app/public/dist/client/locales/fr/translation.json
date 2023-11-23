@@ -1609,7 +1609,7 @@
     "CLEFAIRY": "$t(pkm.CLEFAIRY) cherche une POKE_DOLL",
     "ILLUMISE_VOLBEAT": "$t(pkm.ILLUMISE) and $t{pkm.VOLBEAT} gagnent 5 PP par seconde pour chaque autre membre de leur espèce en vie sur le plateau",
     "PRISM": "$t(pkm.NECROZMA) alterne entre sa forme normale et Ultra selon s'il est exposé à la LIGHT",
-    "BLOSSOM": "$t(pkm.CHERRIM) alterne entre sa forme normale et Ensoleillée selon s'il est exposé à la L",
+    "BLOSSOM": "$t(pkm.CHERRIM) alterne entre sa forme normale et Ensoleillée selon s'il est exposé à la LIGHT",
     "SPECIAL_ATTACK": "Les attaques de base infligent des SPECIAL qui augmentent avec la AP",
     "NINCADA": "Après avoir évolué, récupérez un $t{pkm.SHENINJA} si vous avez un espace disponible sur votre banc",
     "FAMILY": "Ce pokémon grandit avec le temps (au tour 10 et tour 20)",
