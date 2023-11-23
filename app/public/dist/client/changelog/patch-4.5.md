@@ -26,6 +26,7 @@
 # Changes to Synergies
 
 - Flying pokemons can no longer fly away when frozen, asleep or paralyzed
+- Removed Fairy 8 (Moon Force) team-wide charm at the start of the fight
 
 # Changes to Items
 
