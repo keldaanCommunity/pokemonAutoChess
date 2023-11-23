@@ -22,7 +22,7 @@
 - Buff Kartana: PP ~~95~~ 70
 - Rework Leech Life (Crobat): increase damage to 20/40/80, removed area damage
 - Rework Payback (Seedot): no longer heals but deals double damage when below 50% health
-- Revert Gligar/Gliscor to their original stats: HP 130/170, Attack 14/18
+- Revert Gliscor to its original stats: HP 170, Attack 18
 - Change Hatterene line ability: Magic Powder: gain 10/20/40 shield and silence adjacent enemies for 2/4/6 seconds
 
 # Changes to Synergies
