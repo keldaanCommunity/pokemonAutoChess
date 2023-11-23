@@ -24,7 +24,10 @@ export function PokemonReport() {
 
   const sortedMetaPokemons = useMemo(() => {
     return [...metaPokemons].sort((a, b) => {
-      const order = pokemonRankingBy == "count" ? -1 : 1
+      const order =
+        pokemonRankingBy === "count" || pokemonRankingBy === "item_count"
+          ? -1
+          : 1
       return (a[pokemonRankingBy] - b[pokemonRankingBy]) * order
     })
   }, [metaPokemons, pokemonRankingBy])
@@ -43,6 +46,9 @@ export function PokemonReport() {
           </option>
           <option value="rank">
             {t("rank")} {t("by_average_place")}
+          </option>
+          <option value="item_count">
+            {t("rank")} {t("by_average_held_items")}
           </option>
         </select>
         <select

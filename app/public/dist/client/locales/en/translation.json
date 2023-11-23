@@ -2408,5 +2408,7 @@
     "ZeroIsleEast4": "Zero Isle East 4",
     "ZeroIsleSouth1": "Zero Isle South 1",
     "ZeroIsleSouth2": "Zero Isle South 2"
-  }
+  },
+  "held_items": "Held items",
+  "by_average_held_items": "by average held items"
 }

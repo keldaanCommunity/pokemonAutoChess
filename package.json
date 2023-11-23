@@ -5,8 +5,8 @@
   "keywords": [],
   "license": "BSD-3-Clause",
   "engines": {
-    "node": "20.9.0",
-    "npm": "10.2.3"
+    "node": "20.10.0",
+    "npm": "10.2.4"
   },
   "homepage": "https://github.com/keldaanCommunity/pokemonAutoChess#readme",
   "repository": {

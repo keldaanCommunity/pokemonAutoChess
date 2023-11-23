@@ -23,6 +23,7 @@ export default function PokemonStatistic(props: {
     pokemons: IPokemonsStatistic[]
     totalCount?: number
     averageRank?: number | null
+    averageItemHeld?: number | null
   }
   const families = new Map<Pkm, FamilyStats>()
 
@@ -55,11 +56,14 @@ export default function PokemonStatistic(props: {
       0
     )
     family.averageRank = computeAverageRank(family.pokemons)
+    family.averageItemHeld = computeAverageItemHeld(family.pokemons)
   })
 
   const familiesArray = Array.from(families).sort((a, b) =>
     props.rankingBy === "count"
       ? b[1].totalCount! - a[1].totalCount!
+      : props.rankingBy === "item_count"
+      ? b[1].averageItemHeld! - a[1].averageItemHeld!
       : (a[1].averageRank ?? 9) - (b[1].averageRank ?? 9)
   )
 
@@ -99,6 +103,11 @@ export default function PokemonStatistic(props: {
             <label>{t("count")}:</label> {family.totalCount}
           </span>
 
+          <span style={{ fontSize: "150%" }}>
+            {family.averageItemHeld?.toFixed(2)}
+            <label>{t("held_items")}</label>
+          </span>
+
           <ul
             style={{
               display: "flex",
@@ -111,7 +120,7 @@ export default function PokemonStatistic(props: {
                 key={pokemon.name}
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "32px 6ch 12ch 1fr"
+                  gridTemplateColumns: "32px 6ch 12ch 12ch 1fr"
                 }}
               >
                 <img
@@ -123,6 +132,9 @@ export default function PokemonStatistic(props: {
                 </span>
                 <span>
                   <label>{t("count")}:</label> {pokemon.count}
+                </span>
+                <span>
+                  <label>{t("held_items")}:</label> {pokemon.item_count}
                 </span>
                 <div>
                   <label>{t("popular_items")}:</label>
@@ -153,6 +165,17 @@ function computeAverageRank(pokemons: IPokemonsStatistic[]): number | null {
   return (
     pokemonsPlayedAtLeastOnce.reduce(
       (prev, curr) => prev + curr.rank * curr.count,
+      0
+    ) / pokemonsPlayedAtLeastOnce.reduce((prev, curr) => prev + curr.count, 0)
+  )
+}
+
+function computeAverageItemHeld(pokemons: IPokemonsStatistic[]): number | null {
+  const pokemonsPlayedAtLeastOnce = pokemons.filter((p) => p.count > 0)
+  if (pokemonsPlayedAtLeastOnce.length === 0) return null
+  return (
+    pokemonsPlayedAtLeastOnce.reduce(
+      (prev, curr) => prev + curr.item_count * curr.count,
       0
     ) / pokemonsPlayedAtLeastOnce.reduce((prev, curr) => prev + curr.count, 0)
   )
