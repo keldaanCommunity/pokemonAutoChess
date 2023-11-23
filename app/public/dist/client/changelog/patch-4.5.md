@@ -20,6 +20,8 @@
 - Nerf Fire Spin (Ho-Oh): ~~20/40/100~~ 20/40/80 special damage
 - Nerf Heatran range: ~~3~~ 2
 - Buff Kartana: PP ~~95~~ 70
+- Buff Cyndaquil ability Wheel of Fire: Shoot a returning Flame Wheel, dealing twice 15/25/45 special damage to all enemy Pokémon hit
+- Nerf Cyndaquil mana ~~80~~ 100
 
 # Changes to Synergies
 
