@@ -7,9 +7,13 @@ export interface IPokemonsStatistic {
   count: number
   name: Pkm
   items: Item[]
+  item_count: number
 }
 
 const pokemonsStatistic = new Schema({
+  item_count: {
+    type: Number
+  },
   rank: {
     type: Number
   },

@@ -32,6 +32,7 @@
 # UI
 
 - Added the possibility to disable animated tilesets
+- Add average Held item count in pokemon meta report
 
 # Bugfix
 
