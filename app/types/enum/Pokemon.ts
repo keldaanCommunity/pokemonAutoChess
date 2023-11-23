@@ -3898,17 +3898,17 @@ export const AnimationConfig: {
   },
   [Pkm.HATENNA]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Hop,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
   [Pkm.HATTREM]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Hop,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
   [Pkm.HATTERENE]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Charge,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
   [Pkm.FENNEKIN]: {

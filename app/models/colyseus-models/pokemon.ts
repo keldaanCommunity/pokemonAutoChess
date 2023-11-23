@@ -6486,7 +6486,7 @@ export class Hatenna extends Pokemon {
   speDef = 2
   maxPP = 100
   range = 1
-  skill = Ability.PSYCH_UP
+  skill = Ability.MAGIC_POWDER
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -6501,7 +6501,7 @@ export class Hattrem extends Pokemon {
   speDef = 6
   maxPP = 100
   range = 1
-  skill = Ability.PSYCH_UP
+  skill = Ability.MAGIC_POWDER
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -6515,7 +6515,7 @@ export class Hatterene extends Pokemon {
   speDef = 8
   maxPP = 100
   range = 1
-  skill = Ability.PSYCH_UP
+  skill = Ability.MAGIC_POWDER
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 export class Fennekin extends Pokemon {

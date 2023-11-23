@@ -263,7 +263,8 @@
     "FLORAL_HEALING": "Floral Healing",
     "VINE_WHIP": "Vine Whip",
     "BARB_BARRAGE": "Barb Barrage",
-    "INFERNAL_PARADE": "Infernal Parade"
+    "INFERNAL_PARADE": "Infernal Parade",
+    "MAGIC_POWDER": "Magic Powder"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1174,7 +1175,8 @@
     "VINE_WHIP": "Deals 100 SPECIAL, causing it and all adjacent enemies to FLINCH for 3 seconds",
     "BODY_SLAM": "Deals [30,SP]% of user max HP as SPECIAL",
     "BARB_BARRAGE": "Dives into the middle of the enemy team, inflicting [15,30,60,SP] SPECIAL and POISON all adjacent units for 3 seconds",
-    "INFERNAL_PARADE": "Shoot a returning Flame Wheel, 50% chance to BURN for 3s and dealing twice [70, SP] SPECIAL to all enemy Pokémon hit"
+    "INFERNAL_PARADE": "Shoot a returning Flame Wheel, 50% chance to BURN for 3s and dealing twice [70, SP] SPECIAL to all enemy Pokémon hit",
+    "MAGIC_POWDER": "Gain [10,20,40,SP] SHIELD and SILENCE adjacent enemies for [2,4,6] seconds"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1358,7 +1360,7 @@
     "AROMATIC_MIST": "Shocks deal 15 SPECIAL",
     "FAIRY_WIND": "Shocks deal 30 SPECIAL",
     "STRANGE_STEAM": "Shocks deal 45 SPECIAL",
-    "MOON_FORCE": "Shocks deal 60 SPECIAL. All the opponent team is CHARM for 2 seconds at the start of the fight.",
+    "MOON_FORCE": "Shocks deal 60 SPECIAL",
     "COOL_BREEZE": "+2 SPE_DEF",
     "CHILLY": "+4 SPE_DEF, 10% chance to FREEZE",
     "FROSTY": "+8 SPE_DEF, 20% chance to FREEZE",

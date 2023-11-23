@@ -978,11 +978,11 @@ export class PsychUpStrategy extends AbilityStrategy {
       duration = 8000
     }
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.status.triggerSilence(duration, target, pokemon, board)
+    target.status.triggerSilence(duration, pokemon)
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
     cells.forEach((cell) => {
       if (cell && cell.value && cell.value.team !== pokemon.team) {
-        cell.value.status.triggerSilence(duration, cell.value, pokemon, board)
+        cell.value.status.triggerSilence(duration, pokemon)
       }
     })
   }
@@ -1858,7 +1858,7 @@ export class RockSmashStrategy extends AbilityStrategy {
     }
 
     target.handleSpecialDamage(d, board, AttackType.SPECIAL, pokemon, crit)
-    target.status.triggerSilence(s, target, pokemon, board)
+    target.status.triggerSilence(s, pokemon)
   }
 }
 
@@ -2064,7 +2064,7 @@ export class SilenceStrategy extends AbilityStrategy {
     }
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value && pokemon.team != value.team) {
-        value.status.triggerSilence(timer, value, pokemon, board)
+        value.status.triggerSilence(timer, pokemon)
       }
     })
   }
@@ -2439,7 +2439,7 @@ export class InfernalParadeStrategy extends AbilityStrategy {
             positionY: cell.value.positionY
           })
 
-          if(Math.random()> .5){
+          if (Math.random() > 0.5) {
             cell.value.status.triggerBurn(3000, cell.value, pokemon, board)
           }
 
@@ -3438,7 +3438,7 @@ export class PaybackStrategy extends AbilityStrategy {
       default:
         break
     }
-    if(pokemon.life < 0.5 * pokemon.hp){
+    if (pokemon.life < 0.5 * pokemon.hp) {
       damage *= 2
     }
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
@@ -4774,7 +4774,7 @@ export class GigatonHammerStrategy extends AbilityStrategy {
     if (pokemon.stars === 3) {
       damage = 400
     }
-    pokemon.status.triggerSilence(6000, pokemon, pokemon, board)
+    pokemon.status.triggerSilence(6000, pokemon)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
@@ -6177,9 +6177,7 @@ export class SandTombStrategy extends AbilityStrategy {
     )
     target.status.triggerSilence(
       pokemon.stars === 3 ? 8000 : pokemon.stars === 2 ? 5000 : 3000,
-      target,
-      pokemon,
-      board
+      pokemon
     )
     target.handleSpecialDamage(
       pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10,
@@ -6510,6 +6508,28 @@ export class FloralHealingStrategy extends AbilityStrategy {
   }
 }
 
+export class MagicPowderStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const shield = [10, 20, 40][pokemon.stars - 1] ?? 40
+    const silenceDuration = [2000, 4000, 6000][pokemon.stars - 1] ?? 6000
+    pokemon.addShield(shield, pokemon, true)
+    board
+      .getAdjacentCells(pokemon.positionX, pokemon.positionY)
+      .forEach((cell) => {
+        if (cell.value && cell.value.team !== pokemon.team) {
+          cell.value.status.triggerSilence(silenceDuration, pokemon)
+        }
+      })
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -6760,5 +6780,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FLORAL_HEALING]: new FloralHealingStrategy(),
   [Ability.VINE_WHIP]: new VineWhipStrategy(),
   [Ability.BARB_BARRAGE]: new BarbBarrageStrategy(),
-  [Ability.INFERNAL_PARADE]: new InfernalParadeStrategy()
+  [Ability.INFERNAL_PARADE]: new InfernalParadeStrategy(),
+  [Ability.MAGIC_POWDER]: new MagicPowderStrategy()
 }

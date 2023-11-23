@@ -302,12 +302,7 @@ export default class Status extends Schema implements IStatus {
         this.woundOrigin.status.triggerWound(3000, this.woundOrigin, pkm, board)
       }
       if (this.silence && this.silenceOrigin) {
-        this.silenceOrigin.status.triggerSilence(
-          3000,
-          this.silenceOrigin,
-          pkm,
-          board
-        )
+        this.silenceOrigin.status.triggerSilence(3000, pkm)
       }
     } else {
       this.synchroCooldown = this.synchroCooldown - dt
@@ -410,12 +405,7 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerSilence(
-    timer: number,
-    pkm: PokemonEntity,
-    origin: PokemonEntity | undefined,
-    board: Board
-  ) {
+  triggerSilence(timer: number, origin: PokemonEntity | undefined) {
     if (!this.runeProtect && !this.tree) {
       this.silence = true
       if (timer > this.silenceCooldown) {

@@ -1358,7 +1358,7 @@
     "AROMATIC_MIST": "Chaque choc inflige 15 SPECIAL",
     "FAIRY_WIND": "Chaque choc inflige 30 SPECIAL",
     "STRANGE_STEAM": "Chaque choc inflige 45 SPECIAL",
-    "MOON_FORCE": "Chaque choc inflige 60 SPECIAL. Au début du combat, toute l'équipe ennemie est CHARM pendant 2 secondes.",
+    "MOON_FORCE": "Chaque choc inflige 60 SPECIAL",
     "COOL_BREEZE": "+2 SPE_DEF",
     "CHILLY": "+4 SPE_DEF, 10% de chance de FREEZE",
     "FROSTY": "+8 SPE_DEF, 20% de chance de FREEZE",

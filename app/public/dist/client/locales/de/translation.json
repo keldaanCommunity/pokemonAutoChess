@@ -1193,7 +1193,7 @@
     "AROMATIC_MIST": "Schocks bescheren 15 SPECIAL",
     "FAIRY_WIND": "Schocks bescheren 30 SPECIAL",
     "STRANGE_STEAM": "Schocks bieten 45 SPECIAL",
-    "MOON_FORCE": "Schocks bescheren 60 SPECIAL. Das gesamte gegnerische Team ist zu Beginn des Kampfes 2 Sekunden lang CHARM.",
+    "MOON_FORCE": "Schocks bescheren 60 SPECIAL",
     "COOL_BREEZE": "+2 SPE_DEF",
     "CHILLY": "+4 SPE_DEF, 10 % Chance auf Einfrieren",
     "FROSTY": "+8 SPE_DEF, 20 % Chance auf Einfrieren",
