@@ -1271,7 +1271,6 @@
     "WIDE_LENS": "Brede lens",
     "RAZOR_CLAW": "Scheermes klauw",
     "FLUFFY_TAIL": "Pluizige staart",
-    "ORAN_BERRY": "Oranje Bes",
     "SHINY_CHARM": "Glanzende charme",
     "GRACIDEA_FLOWER": "Gracidea-bloem",
     "FLAME_ORB": "Vlam Orb",
@@ -1280,7 +1279,8 @@
     "POKE_DOLL": "Poké Doll",
     "RED_ORB": "Rode bol",
     "MAX_REVIVE": "Max herleven",
-    "ROCKY_HELMET": "Rotsachtige helm"
+    "ROCKY_HELMET": "Rotsachtige helm",
+    "ORAN_BERRY": "Oranje Bes"
   },
   "item_description": {
     "FOSSIL_STONE": "Een fossiel van een Pokémon die in de prehistorie leefde",
