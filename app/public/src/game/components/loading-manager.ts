@@ -789,6 +789,11 @@ export function loadAttacksMultiAtlas(scene: Phaser.Scene) {
     "/assets/attacks/SNIPE_SHOT.json",
     "/assets/attacks"
   )
+  scene.load.multiatlas(
+    "MAGIC_POWDER",
+    "/assets/attacks/MAGIC_POWDER.json",
+    "/assets/attacks"
+  )
 }
 
 export function loadEnvironmentMultiAtlas(scene: Phaser.Scene) {

@@ -263,7 +263,8 @@
     "FLORAL_HEALING": "Floral Healing",
     "VINE_WHIP": "Vine Whip",
     "BARB_BARRAGE": "Barb Barrage",
-    "INFERNAL_PARADE": "Infernal Parade"
+    "INFERNAL_PARADE": "Infernal Parade",
+    "MAGIC_POWDER": "Magic Powder"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -987,12 +988,12 @@
     "ROOT": "Heal all nearby allied Pokémon by [20,40,80,SP] HP",
     "TORMENT": "Buff ATK_SPEED by [20,40,60,SP]%",
     "STOMP": "Deal SPECIAL equal to [3,4,5,SP] x ATK to the target",
-    "PAYBACK": "Deal [20,40,80,SP] SPECIAL to the target and heal the user for the same amount",
+    "PAYBACK": "Deal [15,30,60,SP] SPECIAL to the target. Double damage if the user has less than half its life.",
     "NIGHT_SLASH": "Deal [40,60,100,SP] SPECIAL to the target, and decrease the DEF of all enemy Pokémon by 1",
     "BUG_BUZZ": "Deal [20,40,80,SP] SPECIAL to the target. If the target is PARALYSIS, the damage is doubled",
     "STRING_SHOT": "Deal [10,20,50,SP] SPECIAL to the target and make them PARALYSIS for 5 seconds",
     "VENOSHOCK": "Deal [30,60,120,SP] SPECIAL to the target. If the target is POISON, the damage is doubled",
-    "LEECH_LIFE": "Deal [15,30,60,SP] SPECIAL in an area around the user and heal the user for the amount of damage dealt",
+    "LEECH_LIFE": "Deal [20,40,80,SP] SPECIAL and heal the user for the same amount",
     "HAPPY_HOUR": "Buff all allied Pokémon's ATK by [2,5,8,SP]",
     "TELEPORT": "Teleport the user to a corner of the battlefield. The user's next attack deals [15,30,60,SP] extra SPECIAL",
     "NASTY_PLOT": "Buff the user's ATK by [10,SP]",
@@ -1174,6 +1175,7 @@
     "VINE_WHIP": "Deals 100 SPECIAL, causing it and all adjacent enemies to FLINCH for 3 seconds",
     "BODY_SLAM": "Deals [30,SP]% of user max HP as SPECIAL",
     "BARB_BARRAGE": "Dives into the middle of the enemy team, inflicting [15,30,60,SP] SPECIAL and POISON all adjacent units for 3 seconds",
+    "MAGIC_POWDER": "Gain [10,20,40,SP] SHIELD and SILENCE adjacent enemies for [2,4,6] seconds",
     "INFERNAL_PARADE": "Shoot a returning Flame Wheel, 50% chance to BURN for 3s and dealing twice [60, SP] SPECIAL to all enemy Pokémon hit"
   },
   "effect": {
@@ -1358,7 +1360,7 @@
     "AROMATIC_MIST": "Shocks deal 15 SPECIAL",
     "FAIRY_WIND": "Shocks deal 30 SPECIAL",
     "STRANGE_STEAM": "Shocks deal 45 SPECIAL",
-    "MOON_FORCE": "Shocks deal 60 SPECIAL. All the opponent team is CHARM for 2 seconds at the start of the fight.",
+    "MOON_FORCE": "Shocks deal 60 SPECIAL",
     "COOL_BREEZE": "+2 SPE_DEF",
     "CHILLY": "+4 SPE_DEF, 10% chance to FREEZE",
     "FROSTY": "+8 SPE_DEF, 20% chance to FREEZE",

@@ -292,6 +292,18 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.MAGIC_POWDER,
+      frames: this.game.anims.generateFrameNames(Ability.MAGIC_POWDER, {
+        start: 0,
+        end: 7,
+        prefix: `magic-powder-`,
+        suffix: ".png"
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.RAZOR_WIND,
       frames: this.game.anims.generateFrameNames("pmd-replace", {
         start: 0,
