@@ -223,6 +223,16 @@
     "WHIRLPOOL": "Tourbillon",
     "SMOKE_SCREEN": "Écran de fumée",
     "PRESENT": "Cadeau",
+    "LEAF_BLADE": "Lame Feuille",
+    "ANCHOR_SHOT": "Ancrage",
+    "PSYCHIC": "Psyko",
+    "MAGNET_RISE": "Vol Magnétik",
+    "ATTRACT": "Atrraction",
+    "WATER_PULSE": "Vibraqua",
+    "PLAY_ROUGH": "Câlinerie",
+    "AERIAL_ACE": "Aéropique",
+    "PARABOLIC_CHARGE": "Parabocharge",
+    "SUPER_FANG": "Croc Fatal",
     "TEETER_DANCE": "Danse Folle",
     "CLOSE_COMBAT": "Close Combat",
     "AQUA_RING": "Anneau Hydro",
@@ -247,11 +257,13 @@
     "UNBOUND": "Déchaînement",
     "HYPERSPACE_FURY": "Furie Dimension",
     "SNIPE_SHOT": "Tir de Précision",
-    "BODY_SLAM": "Plaquage",
     "AIR_SLASH": "Lame d'Air",
     "EGGSPLOSION": "Bombe Œuf",
+    "BODY_SLAM": "Plaquage",
     "FLORAL_HEALING": "Soin Floral",
-    "VINE_WHIP": "Fouet Lianes"
+    "VINE_WHIP": "Fouet Lianes",
+    "BARB_BARRAGE": "Multitoxik",
+    "INFERNAL_PARADE": "Cortège Funèbre"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -910,7 +922,10 @@
     "EXEGGUTOR": "Noadkoko",
     "ALOLAN_EXEGGUTOR": "Noadkoko d'Alola",
     "COMFEY": "Guérilande",
-    "CARNIVINE": "Vortente"
+    "CARNIVINE": "Vortente",
+    "HISUIAN_QWILFISH": "Qwilfish de Hisui",
+    "OVERQWIL": "Qwilpik",
+    "HISUIAN_TYPHLOSION": "Typhlosion de Hisui"
   },
   "ability_description": {
     "SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés",
@@ -1119,6 +1134,9 @@
     "WHIRLPOOL": "Verrouillez l'ennemi le plus éloigné et déchaînez une grêle de 4 tourbillons vers lui. Chacun inflige [125,SP]% d'ATK PHYSIQUE au premier ennemi touché.",
     "SMOKE_SCREEN": "Canalisation souterraine et réapparition au milieu de l'équipe ennemie, infligeant [10,20,40,SP] SPECIAL, BURN et ARMOR_REDUCTION à toutes les unités adjacentes pendant 2 secondes.",
     "PRESENT": "Peut soit infliger [80,SP], [150,SP], [300,SP] SPECIAL à la cible, soit la soigner de 80 HP",
+    "LEAF_BLADE": "La prochaine attaque est un critique garanti infligeant [100,SP]% ATK",
+    "ANCHOR_SHOT": "Attrape le pokémon adverse le plus lointain et lui inflige [20,40,80,SP] SPECIAL",
+    "PSYCHIC": "La cible est frappée par une force télékinétique infligeant [40,80,120,SP] SPECIAL et baissant la SPE_DEF de [1,2,,",
     "TEETER_DANCE": "Tous les autres pokémons sur le terrain sont CONFUSION pendant 3 secondes, alliés comme ennemis",
     "CLOSE_COMBAT": "Inflige [130,SP] SPECIAL et réduit la DEF et SPE_DEF du lanceur de 2",
     "AQUA_RING": "Plonge au milieu de l'équipe alliée, créant un anneau aquatique qui les soigne de [20,30,50,SP] HP",
@@ -1143,11 +1161,11 @@
     "UNBOUND": "Se libère de ses chaînes pour devenir la vraie forme de Hoopa et gagner une grande puissance",
     "HYPERSPACE_FURY": "Avec ses nombreux bras, déclenche une pluie de [4,SP] coups. Chaque coup descend la DEF de la cible de 1.",
     "SNIPE_SHOT": "Tire un jet d'eau du bout de son index sur l'adversaire le plus éloigné, infligeant [50,100,200,SP] SPECIAL à tous les adversaires sur le chemin.",
-    "BODY_SLAM": "Inflige [30,SP]% des HP max du lanceur en SPECIAL",
     "AIR_SLASH": "Inflige [25,50,100,SP] SPECIAL et FLINCH pendant 7 secondes",
     "EGGSPLOSION": "Lance un oeuf explosif sur la cible, infligeant [40,80,140,SP] SPECIAL et ARMOR_REDUCTION pendant 4 secondes à tous les adversaires adjacents. Si la cible est KO, vous avez 30% de chance d'obtenir un Oeuf Pokémon.",
     "FLORAL_HEALING": "Soigne autant de HP que de PP max du porteur de $t(pkm.COMFEY) ou de $t(pkm.COMFEY) lui-même s'il n'est pas porté",
-    "VINE_WHIP": "Inflige 100 SPECIAL, et cause FLINCH à la cible et aux adversaires adjacents pendant 3 secondes"
+    "VINE_WHIP": "Inflige 100 SPECIAL, et cause FLINCH à la cible et aux adversaires adjacents pendant 3 secondes",
+    "BODY_SLAM": "Inflige [30,SP]% des HP max du lanceur en SPECIAL"
   },
   "effect": {
     "INGRAIN": "Enraciné",
@@ -1560,9 +1578,9 @@
     "GRIM_NEIGH": "Quand le Pokémon met un ennemi K.O., il émet un hennissement terrifiant qui augmente son AP de 30.",
     "SHAYMIN": "Shaymin recherche une GRACIDEA_FLOWER",
     "SPOT_PANDA": "Ce Pokémon ne peut pas être CONFUSION et inflige [100,SP]% de SPECIAL supplémentaires aux pokémons CONFUSION",
-    "GLUTTON": "Gagne de façon permanente 20 HP max chaque fois qu'il mange une baie",
     "HARVEST": "Au début du combat, s'équipe avec une baie aléatoire",
     "COCONUT": "$t(pkm.EXEGGUTOR) cherche une LEAF_STONE",
+    "GLUTTON": "Gagne de façon permanente 20 HP max chaque fois qu'il mange une baie",
     "COMFEY": "$t(pkm.COMFEY) ne peut pas porter d'objets. Au début du combat, l'allié le plus proche avec un slot d'objet disponible porte $t(pkm.COMFEY) et gagne toutes ses stats. $t(pkm.COMFEY) lance sa capacité en même temps que son porteur. Quand le porteur est KO, $t(pkm.COMFEY) combat seul."
   },
   "stat": {
