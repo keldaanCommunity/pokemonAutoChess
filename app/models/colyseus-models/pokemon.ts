@@ -3429,7 +3429,7 @@ export class Cyndaquil extends Pokemon {
   atk = 7
   def = 1
   speDef = 1
-  maxPP = 80
+  maxPP = 100
   range = 2
   skill = Ability.WHEEL_OF_FIRE
   attackSprite = AttackSprite.FIRE_RANGE
@@ -3444,7 +3444,7 @@ export class Quilava extends Pokemon {
   atk = 13
   def = 2
   speDef = 2
-  maxPP = 80
+  maxPP = 100
   range = 2
   skill = Ability.WHEEL_OF_FIRE
   attackSprite = AttackSprite.FIRE_RANGE
@@ -3460,7 +3460,7 @@ export class Typhlosion extends Pokemon {
   atk = 25
   def = 3
   speDef = 3
-  maxPP = 80
+  maxPP = 100
   range = 2
   skill = Ability.WHEEL_OF_FIRE
   attackSprite = AttackSprite.FIRE_RANGE
@@ -3475,7 +3475,7 @@ export class HisuianTyphlosion extends Pokemon {
   atk = 27
   def = 4
   speDef = 4
-  maxPP = 80
+  maxPP = 100
   range = 2
   skill = Ability.INFERNAL_PARADE
   attackSprite = AttackSprite.FIRE_RANGE
