@@ -872,7 +872,7 @@
     "ROOT": "Cura a todos los Pokémon aliados cercanos por [20,40,80,SP] HP",
     "TORMENT": "Aumentar ATK_SPEED en [20,40,60,SP] %",
     "STOMP": "Objetivo mono que reparte [3,4,5,SP] x ATK SPECIAL",
-    "PAYBACK": "Ataque de objetivo de drenaje de vida que inflige [20,40,80,SP] SPECIAL",
+    "PAYBACK": "Inflige [15,30,60,SP] SPECIAL al objetivo. Daño doble si el usuario tiene menos de la mitad de su vida.",
     "NIGHT_SLASH": "Ataque mono-objetivo que hace [40,60,100,SP] SPECIAL. Disminuye la DEF de todos los enemigos en 1 punto",
     "BUG_BUZZ": "Ataque mono objetivo que hace [20,40,80,SP] SPECIAL. Daño doble si el objetivo es PARALYSIS",
     "STRING_SHOT": "Ataque monoobjetivo que hace [10,20,50,SP] SPECIAL y PARALYSIS durante 5 segundos",

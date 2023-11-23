@@ -3427,19 +3427,21 @@ export class PaybackStrategy extends AbilityStrategy {
     let damage = 0
     switch (pokemon.stars) {
       case 1:
-        damage = 20
+        damage = 15
         break
       case 2:
-        damage = 40
+        damage = 30
         break
       case 3:
-        damage = 80
+        damage = 60
         break
       default:
         break
     }
+    if(pokemon.life < 0.5 * pokemon.hp){
+      damage *= 2
+    }
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    pokemon.handleHeal(damage, pokemon, 1)
   }
 }
 

@@ -872,7 +872,7 @@
     "ROOT": "Herstel [20,40,80,SP] HP aan alle dichtbijzijnde vriendelijke Pokémon",
     "TORMENT": "Verbeter ATK_SPEED met [20,40,60,SP]%",
     "STOMP": "Breng SPECIAL toe gelijk aan [3,4,5,SP] x ATK aan het doelwit",
-    "PAYBACK": "Breng [20,40,80,SP] SPECIAL toe aan het doelwit en herstel de gebruiker's HP met hetzelfde aantal",
+    "PAYBACK": "Breng [15,30,60,SP] SPECIAL voor het doelwit. Dubbele schade als de gebruiker minder dan de helft van zijn levensduur heeft.",
     "NIGHT_SLASH": "Breng [40,60,100,SP] SPECIAL toe aan het doelwit en verlaag de DEF van alle vijandelijke Pokémon met 1",
     "BUG_BUZZ": "Breng [20,40,80,SP] SPECIAL toe aan het doelwit. De schade verdubbelt als het doelwit de PARALYSIS status heeft",
     "STRING_SHOT": "Breng [10,20,50,SP] SPECIAL toe aan het doelwit en pas de PARALYSIS status toe voor 5 seconden",

@@ -872,7 +872,7 @@
     "ROOT": "Cura tutti i Pokémon alleati vicini di [20,40,80,SP] HP",
     "TORMENT": "Aumenta ATK_SPEED del [20,40,60,SP]%",
     "STOMP": "Mono bersaglio che infligge [3,4,5,SP] x ATK SPECIAL",
-    "PAYBACK": "Attacco bersaglio con risucchio di vita che infligge [20,40,80,SP] SPECIAL",
+    "PAYBACK": "Infligge [15,30,60,SP] SPECIAL al bersaglio. Danno doppio se l'utilizzatore ha meno della metà della sua vita.",
     "NIGHT_SLASH": "Attacco mono-bersaglio che fa [40,60,100,SP] SPECIAL. Diminuisce la DEF di tutti i nemici di 1 punto",
     "BUG_BUZZ": "Attacco mono bersaglio che fa [20,40,80,SP] SPECIAL. Danno doppio se il bersaglio è PARALYSIS",
     "STRING_SHOT": "Attacco mono bersaglio che fa [10,20,50,SP] SPECIAL e crea PARALYSIS per 5 secondi",

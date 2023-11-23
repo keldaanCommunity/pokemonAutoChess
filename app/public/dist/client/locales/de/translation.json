@@ -871,7 +871,7 @@
     "ROOT": "Heile alle verbündeten Pokémon in der Nähe um [20,40,80,SP] HP",
     "TORMENT": "Erhöhe ATK_SPEED um [20,40,60,SP] %",
     "STOMP": "Monoziel, das [3,4,5,SP] x ATK SPECIAL verursacht",
-    "PAYBACK": "Lebensentziehender Zielangriff, der [20,40,80,SP] SPECIAL verursacht",
+    "PAYBACK": "Verursacht [15,30,60,SP] SPECIAL. Doppelter Schaden, wenn der Benutzer weniger als die Hälfte seines Lebens hat.",
     "NIGHT_SLASH": "Mono-Zielangriff, der [40,60,100,SP] SPECIAL ausführt. Verringert die DEF aller Feinde um 1 Punkt",
     "BUG_BUZZ": "Mono-Zielangriff, der [20,40,80,SP] SPECIAL ausführt. Doppelter Schaden, wenn das Ziel PARALYSIS ist",
     "STRING_SHOT": "Mono-Zielangriff, der [10,20,50,SP] SPECIAL ausführt und 5 Sekunden lang PARALYSIS bewirkt",
