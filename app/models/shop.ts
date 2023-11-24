@@ -87,7 +87,12 @@ export default class Shop {
   releasePokemon(pkm: Pkm) {
     const pokemon = PokemonFactory.createPokemonFromName(pkm)
     const family = PkmFamily[pokemon.name]
-    const entityNumber = pokemon.stars === 3 ? 9 : pokemon.stars === 2 ? 3 : 1
+    let entityNumber = pokemon.stars >= 3 ? 9 : pokemon.stars === 2 ? 3 : 1
+    const duo = Object.entries(PkmDuos).find(([key, duo]) => duo.includes(pkm))
+    if (duo) {
+      entityNumber = Math.ceil(entityNumber / 2)
+    }
+
     if (pokemon.rarity === Rarity.COMMON) {
       const value = this.commonPool.get(family)
       if (value !== undefined) {
@@ -122,7 +127,7 @@ export default class Shop {
       if (pokemon != Pkm.MAGIKARP && pokemon != Pkm.DEFAULT) {
         return pokemon
       }
-            return this.pickPokemon(player, stageLevel)
+      return this.pickPokemon(player, stageLevel)
     })
 
     for (let i = 0; i < SHOP_SIZE; i++) {
