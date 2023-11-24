@@ -121,6 +121,8 @@ export default class PokemonFactory {
 
   static getSellPrice(name: Pkm): number {
     const pokemon: Pokemon = PokemonFactory.createPokemonFromName(name)
+    const duo = Object.entries(PkmDuos).find(([key, duo]) => duo.includes(name))
+
     if (name === Pkm.EGG) {
       return 2
     } else if (name == Pkm.DITTO) {
@@ -133,21 +135,14 @@ export default class PokemonFactory {
       return 1
     } else if (pokemon.rarity === Rarity.HATCH) {
       return [3, 4, 5][pokemon.stars - 1] ?? 5
-    } else if (
-      [Rarity.UNIQUE, Rarity.LEGENDARY, Rarity.MYTHICAL].includes(
-        pokemon.rarity
-      )
-    ) {
-      const duo = Object.entries(PkmDuos).find(([key, duo]) =>
-        duo.includes(pokemon.name)
-      )
-      if (pokemon.rarity === Rarity.UNIQUE) {
-        return duo ? 8 : 15
-      } else {
-        return duo ? 10 : 20
-      }
+    } else if (pokemon.rarity === Rarity.UNIQUE) {
+      return duo ? 8 : 15
+    } else if ([Rarity.LEGENDARY, Rarity.MYTHICAL].includes(pokemon.rarity)) {
+      return duo ? 10 : 20
     } else if (PokemonFactory.getPokemonBaseEvolution(name) == Pkm.EEVEE) {
       return RarityCost[pokemon.rarity]
+    } else if (duo) {
+      return Math.ceil((RarityCost[pokemon.rarity] * pokemon.stars) / 2)
     } else {
       return RarityCost[pokemon.rarity] * pokemon.stars
     }

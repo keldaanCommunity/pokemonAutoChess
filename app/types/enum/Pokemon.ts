@@ -1992,7 +1992,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
 export enum PkmDuo {
   LATIOS_LATIAS = "LATIOS_LATIAS",
   PLUSLE_MINUN = "PLUSLE_MINUN",
-  ILLUMISE_VOLBEAT = "ILLUMISE_VOLBEAT"
+  ILLUMISE_VOLBEAT = "ILLUMISE_VOLBEAT",
+  NINJASK_SHEDINJA = "NINJASK_SHEDINJA"
 }
 
 export type PkmProposition = Pkm | PkmDuo
@@ -2000,7 +2001,8 @@ export type PkmProposition = Pkm | PkmDuo
 export const PkmDuos = {
   [PkmDuo.LATIOS_LATIAS]: [Pkm.LATIOS, Pkm.LATIAS],
   [PkmDuo.PLUSLE_MINUN]: [Pkm.PLUSLE, Pkm.MINUN],
-  [PkmDuo.ILLUMISE_VOLBEAT]: [Pkm.ILLUMISE, Pkm.VOLBEAT]
+  [PkmDuo.ILLUMISE_VOLBEAT]: [Pkm.ILLUMISE, Pkm.VOLBEAT],
+  [PkmDuo.NINJASK_SHEDINJA]: [Pkm.NINJASK, Pkm.SHEDINJA]
 }
 
 export const Unowns: Pkm[] = [
