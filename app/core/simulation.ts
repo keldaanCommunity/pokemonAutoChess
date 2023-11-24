@@ -594,13 +594,6 @@ export default class Simulation extends Schema implements ISimulation {
         }
       })
     })
-
-    if (this.blueEffects.has(Effect.MOON_FORCE)) {
-      this.redTeam.forEach((pkm) => pkm.status.triggerCharm(2000, pkm))
-    }
-    if (this.redEffects.has(Effect.MOON_FORCE)) {
-      this.blueTeam.forEach((pkm) => pkm.status.triggerCharm(2000, pkm))
-    }
   }
 
   applyEffects(
