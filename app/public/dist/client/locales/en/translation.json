@@ -2129,6 +2129,7 @@
   "set_moderator": "Set Moderator",
   "set_bot_manager": "Set Bot Manager",
   "give_title": "Give Title",
+  "give_role": "Give Role",
   "back_to_my_profile": "Back to my profile",
   "bots": "Bots",
   "profile": "Profile",
@@ -2412,5 +2413,12 @@
     "ZeroIsleSouth2": "Zero Isle South 2"
   },
   "held_items": "Held items",
-  "by_average_held_items": "by average held items"
+  "by_average_held_items": "by average held items",
+  "role": {
+    "ADMIN": "Creator",
+    "MODERATOR": "Mod",
+    "BASIC": "Basic",
+    "BOT": "Bot",
+    "BOT_MANAGER": "Bot Manager"
+  }
 }

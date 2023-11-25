@@ -63,14 +63,6 @@ export enum Role {
   BOT_MANAGER = "BOT_MANAGER"
 }
 
-export const RoleName: { [key in Role]: string } = {
-  [Role.ADMIN]: "Creator",
-  [Role.MODERATOR]: "Mod",
-  [Role.BASIC]: "Basic",
-  [Role.BOT]: "Bot",
-  [Role.BOT_MANAGER]: "Bot Manager"
-}
-
 export const RoleColor: { [key in Role]: string } = {
   [Role.ADMIN]: "success",
   [Role.MODERATOR]: "primary",
