@@ -7,10 +7,9 @@ import { useAppDispatch, useAppSelector } from "../../../hooks"
 import {
   ban,
   giveBooster,
+  giveRole,
   giveTitle,
   searchName,
-  setBotManager,
-  setModerator,
   unban
 } from "../../../stores/NetworkStore"
 import { SearchBar } from "./search-bar"
@@ -100,8 +99,9 @@ function OtherProfileActions({ resetSearch }) {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const role = useAppSelector((state) => state.lobby.user?.role)
-  const [title, setTitle] = useState<Title>(Title.ACE_TRAINER)
   const user = useAppSelector((state) => state.lobby.searchedUser)
+  const [title, setTitle] = useState<Title>(user?.title || Title.ACE_TRAINER)
+  const [profileRole, setProfileRole] = useState<Role>(user?.role ?? Role.BASIC)
 
   const giveButton =
     user && role && role === Role.ADMIN ? (
@@ -147,33 +147,43 @@ function OtherProfileActions({ resetSearch }) {
       </button>
     ) : null
 
-  const modButton =
+  const roleButton =
     user && role && role === Role.ADMIN ? (
-      <button
-        className="bubbly orange"
-        onClick={() => {
-          dispatch(setModerator(user.id))
-        }}
-      >
-        <p style={{ margin: "0px" }}>{t("set_moderator")}</p>
-      </button>
-    ) : null
-
-  const botManagerButton =
-    user && role && role === Role.ADMIN ? (
-      <button
-        className="bubbly orange"
-        onClick={() => {
-          dispatch(setBotManager(user.id))
-        }}
-      >
-        <p style={{ margin: "0px" }}>{t("set_bot_manager")}</p>
-      </button>
+      <div style={{ display: "flex" }}>
+        <button
+          className="bubbly orange"
+          onClick={() => {
+            dispatch(giveRole({ uid: user.id, role: profileRole }))
+          }}
+        >
+          {t("give_role")}
+        </button>
+        <select
+          value={profileRole}
+          onChange={(e) => {
+            setProfileRole(e.target.value as Role)
+          }}
+        >
+          {Object.keys(Role).map((r) => (
+            <option key={r} value={r}>
+              {t("role." + r).toUpperCase()}
+            </option>
+          ))}
+        </select>
+      </div>
     ) : null
 
   const titleButton =
     user && role && role === Role.ADMIN ? (
       <div style={{ display: "flex" }}>
+        <button
+          className="bubbly blue"
+          onClick={() => {
+            dispatch(giveTitle({ uid: user.id, title: title }))
+          }}
+        >
+          {t("give_title")}
+        </button>
         <select
           value={title}
           onChange={(e) => {
@@ -186,22 +196,13 @@ function OtherProfileActions({ resetSearch }) {
             </option>
           ))}
         </select>
-        <button
-          className="bubbly blue"
-          onClick={() => {
-            dispatch(giveTitle({ uid: user.id, title: title }))
-          }}
-        >
-          {t("give_title")}
-        </button>
       </div>
     ) : null
 
   return role === Role.ADMIN || role === Role.MODERATOR ? (
     <div className="actions">
-      {modButton}
-      {botManagerButton}
       {giveButton}
+      {roleButton}
       {titleButton}
       {banButton}
       {unbanButton}

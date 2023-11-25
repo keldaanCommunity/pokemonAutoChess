@@ -235,17 +235,11 @@ export const networkSlice = createSlice({
     ) => {
       state.lobby?.send(Transfer.GIVE_BOOSTER, action.payload)
     },
-    setModerator: (state, action: PayloadAction<string>) => {
-      state.lobby?.send(Transfer.SET_ROLE, {
-        role: Role.MODERATOR,
-        uid: action.payload
-      })
-    },
-    setBotManager: (state, action: PayloadAction<string>) => {
-      state.lobby?.send(Transfer.SET_ROLE, {
-        role: Role.BOT_MANAGER,
-        uid: action.payload
-      })
+    giveRole: (
+      state,
+      action: PayloadAction<{ uid: string; role: Role }>
+    ) => {
+      state.lobby?.send(Transfer.SET_ROLE, action.payload)
     },
     giveTitle: (
       state,
@@ -291,10 +285,9 @@ export const {
   requestBotLeaderboard,
   requestLevelLeaderboard,
   giveTitle,
+  giveRole,
   removeMessage,
   giveBooster,
-  setModerator,
-  setBotManager,
   toggleAnimation,
   openBooster,
   changeSelectedEmotion,
