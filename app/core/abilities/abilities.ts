@@ -6530,6 +6530,34 @@ export class MagicPowderStrategy extends AbilityStrategy {
   }
 }
 
+export class RetaliateStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const nbAlliesAlive = board.cells.filter(
+      (entity) => entity && entity.team === pokemon.team
+    ).length
+    const nbFallenAllies =
+      (pokemon.player?.boardSize ?? nbAlliesAlive) - nbAlliesAlive
+    const damage =
+      ([15, 30, 60][pokemon.stars - 1] ?? 60) +
+      ([5, 10, 15][pokemon.stars - 1] ?? 15) * nbFallenAllies
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit,
+      true
+    )
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -6781,5 +6809,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.VINE_WHIP]: new VineWhipStrategy(),
   [Ability.BARB_BARRAGE]: new BarbBarrageStrategy(),
   [Ability.INFERNAL_PARADE]: new InfernalParadeStrategy(),
-  [Ability.MAGIC_POWDER]: new MagicPowderStrategy()
+  [Ability.MAGIC_POWDER]: new MagicPowderStrategy(),
+  [Ability.RETALIATE]: new RetaliateStrategy()
 }

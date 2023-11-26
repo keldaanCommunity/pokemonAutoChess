@@ -925,7 +925,10 @@
     "CARNIVINE": "Vortente",
     "HISUIAN_QWILFISH": "Qwilfish de Hisui",
     "OVERQWIL": "Qwilpik",
-    "HISUIAN_TYPHLOSION": "Typhlosion de Hisui"
+    "HISUIAN_TYPHLOSION": "Typhlosion de Hisui",
+    "LILLIPUP": "Ponchiot",
+    "HERDIER": "Ponchien",
+    "STOUTLAND": "Mastouffe"
   },
   "ability_description": {
     "SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés",
