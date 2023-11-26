@@ -1611,7 +1611,6 @@ export class Poliwag extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.SOAK
-  passive = Passive.TADPOLE
   attackSprite = AttackSprite.WATER_RANGE
 }
 
@@ -1634,19 +1633,22 @@ export class Poliwhirl extends Pokemon {
   passive = Passive.TADPOLE
   attackSprite = AttackSprite.WATER_RANGE
 
-  getEvolution(player: Player) {
-    if (
-      Math.max(
-        ...values(player.board)
-          .filter((pkm) => pkm.index === this.index)
-          .map((v) => v.positionY)
-      ) === 3
-    ) {
-      return Pkm.POLIWRATH
-    } else {
-      return Pkm.POLITOED
+  evolutionRule = new CountEvolutionRule(
+    3,
+    (pokemon: Pokemon, player: Player) => {
+      if (
+        Math.max(
+          ...values(player.board)
+            .filter((pkm) => pkm.index === this.index)
+            .map((v) => v.positionY)
+        ) === 3
+      ) {
+        return Pkm.POLIWRATH
+      } else {
+        return Pkm.POLITOED
+      }
     }
-  }
+  )
 }
 
 export class Politoed extends Pokemon {
@@ -1664,7 +1666,6 @@ export class Politoed extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.SOAK
-  passive = Passive.TADPOLE
   attackSprite = AttackSprite.WATER_RANGE
 }
 
@@ -1683,7 +1684,6 @@ export class Poliwrath extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.CRABHAMMER
-  passive = Passive.TADPOLE
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -6344,20 +6344,22 @@ export class Clamperl extends Pokemon {
   passive = Passive.BIVALVE
   additional = true
   attackSprite = AttackSprite.WATER_MELEE
-
-  getEvolution(player: Player) {
-    if (
-      Math.max(
-        ...values(player.board)
-          .filter((pkm) => pkm.index === this.index)
-          .map((v) => v.positionY)
-      ) === 3
-    ) {
-      return Pkm.HUNTAIL
-    } else {
-      return Pkm.GOREBYSS
+  evolutionRule = new CountEvolutionRule(
+    3,
+    (pokemon: Pokemon, player: Player) => {
+      if (
+        Math.max(
+          ...values(player.board)
+            .filter((pkm) => pkm.index === this.index)
+            .map((v) => v.positionY)
+        ) === 3
+      ) {
+        return Pkm.HUNTAIL
+      } else {
+        return Pkm.GOREBYSS
+      }
     }
-  }
+  )
 }
 
 export class Gorebyss extends Pokemon {
@@ -9627,31 +9629,37 @@ export class Wurmple extends Pokemon {
   passive = Passive.WURMPLE
   attackSprite = AttackSprite.BUG_MELEE
 
-  getEvolution(player: Player) {
-    const lastWeather = player.getLastBattle()?.weather ?? Weather.NEUTRAL
-    let existingSecondTier: Pkm | null = null
-    player.board.forEach((pkm) => {
-      if (pkm.name === Pkm.CASCOON) existingSecondTier = Pkm.CASCOON
-      else if (pkm.name === Pkm.SILCOON) existingSecondTier = Pkm.SILCOON
-    })
-    if (existingSecondTier !== null) {
-      return existingSecondTier
-    } else if (
-      [Weather.NIGHT, Weather.STORM, Weather.SANDSTORM, Weather.SNOW].includes(
-        lastWeather
-      )
-    ) {
-      return Pkm.CASCOON
-    } else if (
-      [Weather.SUN, Weather.RAIN, Weather.MISTY, Weather.WINDY].includes(
-        lastWeather
-      )
-    ) {
-      return Pkm.SILCOON
-    } else {
-      return coinflip() ? Pkm.CASCOON : Pkm.SILCOON
+  evolutionRule = new CountEvolutionRule(
+    3,
+    (pokemon: Pokemon, player: Player) => {
+      const lastWeather = player.getLastBattle()?.weather ?? Weather.NEUTRAL
+      let existingSecondTier: Pkm | null = null
+      player.board.forEach((pkm) => {
+        if (pkm.name === Pkm.CASCOON) existingSecondTier = Pkm.CASCOON
+        else if (pkm.name === Pkm.SILCOON) existingSecondTier = Pkm.SILCOON
+      })
+      if (existingSecondTier !== null) {
+        return existingSecondTier
+      } else if (
+        [
+          Weather.NIGHT,
+          Weather.STORM,
+          Weather.SANDSTORM,
+          Weather.SNOW
+        ].includes(lastWeather)
+      ) {
+        return Pkm.CASCOON
+      } else if (
+        [Weather.SUN, Weather.RAIN, Weather.MISTY, Weather.WINDY].includes(
+          lastWeather
+        )
+      ) {
+        return Pkm.SILCOON
+      } else {
+        return coinflip() ? Pkm.CASCOON : Pkm.SILCOON
+      }
     }
-  }
+  )
 }
 
 export class Silcoon extends Pokemon {
