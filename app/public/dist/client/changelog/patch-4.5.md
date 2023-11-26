@@ -10,6 +10,9 @@
 - Comfey
 - Hisuian Qwilfish/Overqwil
 - Hisuian Typhlosion
+- Lillipup
+- Herdier
+- Stoutland
 
 # Changes to Pokemon & Abilities
 
