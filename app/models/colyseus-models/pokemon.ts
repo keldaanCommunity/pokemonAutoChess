@@ -2277,13 +2277,13 @@ export class Exploud extends Pokemon {
 }
 
 export class Swinub extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.ICE, Synergy.FIELD])
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.ICE])
   rarity = Rarity.COMMON
   stars = 1
   evolution = Pkm.PILOSWINE
-  hp = 60
+  hp = 65
   atk = 4
-  def = 2
+  def = 3
   speDef = 2
   maxPP = 100
   range = 1
@@ -2292,13 +2292,13 @@ export class Swinub extends Pokemon {
 }
 
 export class Piloswine extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.ICE, Synergy.FIELD])
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.ICE])
   rarity = Rarity.COMMON
   stars = 2
   evolution = Pkm.MAMOSWINE
-  hp = 110
+  hp = 120
   atk = 8
-  def = 4
+  def = 5
   speDef = 4
   maxPP = 100
   range = 1
@@ -2307,12 +2307,12 @@ export class Piloswine extends Pokemon {
 }
 
 export class Mamoswine extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.ICE, Synergy.FIELD])
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.ICE])
   rarity = Rarity.COMMON
   stars = 3
-  hp = 180
+  hp = 200
   atk = 14
-  def = 6
+  def = 8
   speDef = 6
   maxPP = 100
   range = 1
@@ -10917,6 +10917,50 @@ export class Comfey extends Pokemon {
   }
 }
 
+export class Lillipup extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIELD])
+  rarity = Rarity.COMMON
+  evolution = Pkm.HERDIER
+  stars = 1
+  hp = 60
+  atk = 6
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.RETALIATE
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class Herdier extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIELD])
+  rarity = Rarity.COMMON
+  evolution = Pkm.STOUTLAND
+  stars = 2
+  hp = 120
+  atk = 12
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.RETALIATE
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class Stoutland extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIELD])
+  rarity = Rarity.COMMON
+  stars = 3
+  hp = 220
+  atk = 22
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.RETALIATE
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (shiny: boolean, emotion: Emotion) => Pokemon
@@ -11580,5 +11624,9 @@ export const PokemonClasses: Record<
   [Pkm.CARNIVINE]: Carnivine,
   [Pkm.HISUIAN_QWILFISH]: HisuianQwilfish,
   [Pkm.OVERQWIL]: Overqwil,
-  [Pkm.HISUIAN_TYPHLOSION]: HisuianTyphlosion
+  [Pkm.HISUIAN_TYPHLOSION]: HisuianTyphlosion,
+  [Pkm.LILLIPUP]: Lillipup,
+  [Pkm.HERDIER]: Herdier,
+  [Pkm.STOUTLAND]: Stoutland
+
 }

@@ -660,7 +660,10 @@ export enum Pkm {
   CARNIVINE = "CARNIVINE",
   HISUIAN_QWILFISH = "HISUIAN_QWILFISH",
   OVERQWIL = "OVERQWIL",
-  HISUIAN_TYPHLOSION = "HISUIAN_TYPHLOSION"
+  HISUIAN_TYPHLOSION = "HISUIAN_TYPHLOSION",
+  LILLIPUP = "LILLIPUP",
+  HERDIER = "HERDIER",
+  STOUTLAND = "STOUTLAND"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1323,7 +1326,10 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.CARNIVINE]: "0455",
   [Pkm.HISUIAN_QWILFISH]: "0211-0001",
   [Pkm.OVERQWIL]: "0904",
-  [Pkm.HISUIAN_TYPHLOSION]: "0157-0001"
+  [Pkm.HISUIAN_TYPHLOSION]: "0157-0001",
+  [Pkm.LILLIPUP]: "0506",
+  [Pkm.HERDIER]: "0507",
+  [Pkm.STOUTLAND]: "0508"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1986,7 +1992,10 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.CARNIVINE]: Pkm.CARNIVINE,
   [Pkm.HISUIAN_QWILFISH]: Pkm.HISUIAN_QWILFISH,
   [Pkm.OVERQWIL]: Pkm.HISUIAN_QWILFISH,
-  [Pkm.HISUIAN_TYPHLOSION]: Pkm.CYNDAQUIL
+  [Pkm.HISUIAN_TYPHLOSION]: Pkm.CYNDAQUIL,
+  [Pkm.LILLIPUP]: Pkm.LILLIPUP,
+  [Pkm.HERDIER]: Pkm.LILLIPUP,
+  [Pkm.STOUTLAND]: Pkm.LILLIPUP
 }
 
 export enum PkmDuo {
@@ -5417,6 +5426,21 @@ export const AnimationConfig: {
   },
   [Pkm.HISUIAN_TYPHLOSION]: {
     attack: AnimationType.Shoot,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.LILLIPUP]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Pose
+  },
+  [Pkm.HERDIER]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.RearUp
+  },
+  [Pkm.STOUTLAND]: {
+    attack: AnimationType.Attack,
     ability: AnimationType.Attack,
     emote: AnimationType.Shoot
   }
