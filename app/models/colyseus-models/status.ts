@@ -353,10 +353,7 @@ export default class Status extends Schema implements IStatus {
       }
 
       if (pkm.items.has(Item.RAWST_BERRY)) {
-        this.healBurn(pkm)
-        pkm.items.delete(Item.RAWST_BERRY)
-        pkm.refToBoardPokemon.items.delete(Item.RAWST_BERRY)
-        pkm.effects.add(Effect.IMMUNITY_BURN)
+        pkm.eatBerry(Item.RAWST_BERRY)
       }
     }
   }
@@ -452,12 +449,7 @@ export default class Status extends Schema implements IStatus {
       }
 
       if (pkm.items.has(Item.PECHA_BERRY)) {
-        this.poisonOrigin = undefined
-        this.poisonStacks = 0
-        this.poisonDamageCooldown = 0
-        pkm.items.delete(Item.PECHA_BERRY)
-        pkm.refToBoardPokemon.items.delete(Item.PECHA_BERRY)
-        pkm.effects.add(Effect.IMMUNITY_POISON)
+        pkm.eatBerry(Item.PECHA_BERRY)
       }
     }
   }
@@ -525,11 +517,7 @@ export default class Status extends Schema implements IStatus {
       this.freezeCooldown = timer
 
       if (pkm.items.has(Item.ASPEAR_BERRY)) {
-        this.freeze = false
-        this.freezeCooldown = 0
-        pkm.items.delete(Item.ASPEAR_BERRY)
-        pkm.refToBoardPokemon.items.delete(Item.ASPEAR_BERRY)
-        pkm.effects.add(Effect.IMMUNITY_FREEZE)
+        pkm.eatBerry(Item.ASPEAR_BERRY)
       }
     }
   }
@@ -571,11 +559,7 @@ export default class Status extends Schema implements IStatus {
       this.sleepCooldown = timer
 
       if (pkm.items.has(Item.CHESTO_BERRY)) {
-        this.sleep = false
-        this.sleepCooldown = 1000
-        pkm.items.delete(Item.CHESTO_BERRY)
-        pkm.refToBoardPokemon.items.delete(Item.CHESTO_BERRY)
-        pkm.effects.add(Effect.IMMUNITY_SLEEP)
+        pkm.eatBerry(Item.CHESTO_BERRY)
       }
     }
   }
@@ -608,11 +592,7 @@ export default class Status extends Schema implements IStatus {
       this.confusionCooldown = timer
 
       if (pkm.items.has(Item.PERSIM_BERRY)) {
-        this.confusion = false
-        this.confusionCooldown = 1000
-        pkm.items.delete(Item.PERSIM_BERRY)
-        pkm.refToBoardPokemon.items.delete(Item.PERSIM_BERRY)
-        pkm.effects.add(Effect.IMMUNITY_CONFUSION)
+        pkm.eatBerry(Item.PERSIM_BERRY)
       }
     }
   }
@@ -690,10 +670,7 @@ export default class Status extends Schema implements IStatus {
       }
 
       if (pkm.items.has(Item.CHERI_BERRY)) {
-        this.healParalysis(pkm)
-        pkm.items.delete(Item.CHERI_BERRY)
-        pkm.refToBoardPokemon.items.delete(Item.CHERI_BERRY)
-        pkm.effects.add(Effect.IMMUNITY_PARALYSIS)
+        pkm.eatBerry(Item.CHERI_BERRY)
       }
     }
   }
