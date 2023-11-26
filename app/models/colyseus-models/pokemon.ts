@@ -2277,13 +2277,13 @@ export class Exploud extends Pokemon {
 }
 
 export class Swinub extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.ICE, Synergy.FIELD])
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.ICE])
   rarity = Rarity.COMMON
   stars = 1
   evolution = Pkm.PILOSWINE
-  hp = 60
+  hp = 65
   atk = 4
-  def = 2
+  def = 3
   speDef = 2
   maxPP = 100
   range = 1
@@ -2292,13 +2292,13 @@ export class Swinub extends Pokemon {
 }
 
 export class Piloswine extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.ICE, Synergy.FIELD])
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.ICE])
   rarity = Rarity.COMMON
   stars = 2
   evolution = Pkm.MAMOSWINE
-  hp = 110
+  hp = 120
   atk = 8
-  def = 4
+  def = 5
   speDef = 4
   maxPP = 100
   range = 1
@@ -2307,12 +2307,12 @@ export class Piloswine extends Pokemon {
 }
 
 export class Mamoswine extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.ICE, Synergy.FIELD])
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.ICE])
   rarity = Rarity.COMMON
   stars = 3
-  hp = 180
+  hp = 200
   atk = 14
-  def = 6
+  def = 8
   speDef = 6
   maxPP = 100
   range = 1

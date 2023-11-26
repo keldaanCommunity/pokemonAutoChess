@@ -29,6 +29,7 @@
 - Change Hatterene line ability: Magic Powder: gain 10/20/40 shield and silence adjacent enemies for 2/4/6 seconds
 - Buff Cyndaquil ability Wheel of Fire: Shoot a returning Flame Wheel, dealing twice 15/25/45 special damage to all enemy Pokémon hit
 - Nerf Cyndaquil mana ~~80~~ 100
+- Swinub line: removed Field, increased HP and Def
 
 # Changes to Synergies
 
