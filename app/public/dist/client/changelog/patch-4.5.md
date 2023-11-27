@@ -31,8 +31,9 @@
 - Buff Cyndaquil ability Wheel of Fire: Shoot a returning Flame Wheel, dealing twice 15/25/45 special damage to all enemy Pokémon hit
 - Nerf Cyndaquil mana ~~80~~ 100
 - Nerf Aerial Ace (Yanma): ~~30/60/90~~ 25/50/100 true damage
-- Swinub line: removed Field, increased HP and Def
+- Swinub line: removed Field type, increased HP and Def
 - Shedinja and Ninjack are now considered a Pokemon Duo and no longer in the same family, which means they count for 2 bugs when both on board
+- Shedinja: removed Flying type
 
 # Changes to Synergies
 
