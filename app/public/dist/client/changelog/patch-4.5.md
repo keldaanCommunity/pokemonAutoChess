@@ -13,6 +13,7 @@
 - Lillipup
 - Herdier
 - Stoutland
+- Zigzagoon/Linoone
 
 # Changes to Pokemon & Abilities
 

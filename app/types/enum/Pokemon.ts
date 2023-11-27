@@ -663,7 +663,9 @@ export enum Pkm {
   HISUIAN_TYPHLOSION = "HISUIAN_TYPHLOSION",
   LILLIPUP = "LILLIPUP",
   HERDIER = "HERDIER",
-  STOUTLAND = "STOUTLAND"
+  STOUTLAND = "STOUTLAND",
+  ZIGZAGOON = "ZIGZAGOON",
+  LINOONE = "LINOONE"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1329,7 +1331,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.HISUIAN_TYPHLOSION]: "0157-0001",
   [Pkm.LILLIPUP]: "0506",
   [Pkm.HERDIER]: "0507",
-  [Pkm.STOUTLAND]: "0508"
+  [Pkm.STOUTLAND]: "0508",
+  [Pkm.ZIGZAGOON]: "0263",
+  [Pkm.LINOONE]: "0264"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1995,7 +1999,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.HISUIAN_TYPHLOSION]: Pkm.CYNDAQUIL,
   [Pkm.LILLIPUP]: Pkm.LILLIPUP,
   [Pkm.HERDIER]: Pkm.LILLIPUP,
-  [Pkm.STOUTLAND]: Pkm.LILLIPUP
+  [Pkm.STOUTLAND]: Pkm.LILLIPUP,
+  [Pkm.ZIGZAGOON]: Pkm.ZIGZAGOON,
+  [Pkm.LINOONE]: Pkm.ZIGZAGOON
 }
 
 export enum PkmDuo {
@@ -5443,5 +5449,15 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Attack,
     emote: AnimationType.Shoot
+  },
+  [Pkm.ZIGZAGOON]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.RearUp
+  },
+  [Pkm.LINOONE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.RearUp
   }
 }

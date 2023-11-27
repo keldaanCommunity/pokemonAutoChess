@@ -10643,6 +10643,39 @@ export class Pelipper extends Pokemon {
   passive = Passive.DRIZZLE
 }
 
+export class Zigzagoon extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIELD, Synergy.NORMAL])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.LINOONE
+  hp = 70
+  atk = 8
+  def = 1
+  speDef = 1
+  maxPP = 50
+  range = 1
+  skill = Ability.SLASH
+  additional = true
+  attackSprite = AttackSprite.NORMAL_MELEE
+  passive = Passive.PICKUP
+}
+
+export class Linoone extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIELD, Synergy.NORMAL])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 140
+  atk = 16
+  def = 1
+  speDef = 1
+  maxPP = 50
+  range = 1
+  skill = Ability.SLASH
+  additional = true
+  attackSprite = AttackSprite.NORMAL_MELEE
+  passive = Passive.PICKUP
+}
+
 export class HisuianQwilfish extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.DARK,
@@ -11627,6 +11660,7 @@ export const PokemonClasses: Record<
   [Pkm.HISUIAN_TYPHLOSION]: HisuianTyphlosion,
   [Pkm.LILLIPUP]: Lillipup,
   [Pkm.HERDIER]: Herdier,
-  [Pkm.STOUTLAND]: Stoutland
-
+  [Pkm.STOUTLAND]: Stoutland,
+  [Pkm.ZIGZAGOON]: Zigzagoon,
+  [Pkm.LINOONE]: Linoone
 }

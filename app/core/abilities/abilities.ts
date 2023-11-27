@@ -5570,14 +5570,8 @@ export class AerialAceStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [25,50,100][pokemon.stars - 1] ?? 100
-    target.handleSpecialDamage(
-      damage,
-      board,
-      AttackType.TRUE,
-      pokemon,
-      crit
-    )
+    const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
+    target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
   }
 }
 
@@ -6558,6 +6552,34 @@ export class RetaliateStrategy extends AbilityStrategy {
   }
 }
 
+export class SlashStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10
+    const increasedCrit = crit
+      ? crit
+      : pokemon.stars === 3
+      ? chance(0.9)
+      : pokemon.stars === 2
+      ? chance(0.6)
+      : chance(0.3)
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      increasedCrit,
+      false
+    )
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -6810,5 +6832,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.BARB_BARRAGE]: new BarbBarrageStrategy(),
   [Ability.INFERNAL_PARADE]: new InfernalParadeStrategy(),
   [Ability.MAGIC_POWDER]: new MagicPowderStrategy(),
-  [Ability.RETALIATE]: new RetaliateStrategy()
+  [Ability.RETALIATE]: new RetaliateStrategy(),
+  [Ability.SLASH]: new SlashStrategy()
 }

@@ -928,6 +928,16 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.SLASH,
+      frames: this.game.anims.generateFrameNames(Ability.SLASH, {
+        start: 0,
+        end: 3
+      }),
+      duration: 400,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.EGGSPLOSION,
       frames: this.game.anims.generateFrameNames(Ability.EGGSPLOSION, {
         start: 0,
