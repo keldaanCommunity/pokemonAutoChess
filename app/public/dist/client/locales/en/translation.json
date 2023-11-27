@@ -266,7 +266,8 @@
     "INFERNAL_PARADE": "Infernal Parade",
     "MAGIC_POWDER": "Magic Powder",
     "RETALIATE": "Retaliate",
-    "SLASH": "Slash"
+    "SLASH": "Slash",
+    "OUTRAGE": "Outrage"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1185,7 +1186,8 @@
     "MAGIC_POWDER": "Gain [10,20,40,SP] SHIELD and SILENCE adjacent enemies for [2,4,6] seconds",
     "INFERNAL_PARADE": "Shoot a returning Flame Wheel, 50% chance to BURN for 3s and dealing twice [60, SP] SPECIAL to all enemy Pokémon hit",
     "RETALIATE": "Deals [15,30,60,SP] SPECIAL to the target + [5,10,15,SP] additional SPECIAL per fallen ally",
-    "SLASH": "Deals [10,20,40,SP] SPECIAL with a [30,60,90]% increased CRIT_CHANCE ratio"
+    "SLASH": "Deals [10,20,40,SP] SPECIAL with a [30,60,90]% increased CRIT_CHANCE ratio",
+    "OUTRAGE": "The pokémon is CONFUSION for 2s and deals [2,3,4,SP] ATK as SPECIAL to the target and adjacent enemies"
   },
   "effect": {
     "INGRAIN": "Ingrain",

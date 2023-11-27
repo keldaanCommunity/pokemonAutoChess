@@ -41,7 +41,7 @@ export function computeSynergies(board: IPokemon[]): Map<Synergy, number> {
       if (!typesPerFamily.has(family)) typesPerFamily.set(family, new Set())
       const types: Set<Synergy> = typesPerFamily.get(family)!
       pkm.types.forEach((type) => types.add(type))
-      if (pkm.types.has(Synergy.DRAGON)) {
+      if (pkm.types.has(Synergy.DRAGON) && pkm.types.size > 1) {
         if (!dragonDoubleTypes.has(family))
           dragonDoubleTypes.set(family, new Set())
         dragonDoubleTypes.get(family)!.add(values(pkm.types)[1])
@@ -69,7 +69,7 @@ export function computeSynergies(board: IPokemon[]): Map<Synergy, number> {
 }
 
 export function addSynergiesFromStones(pkm: IPokemon) {
-  for (let stone of SynergyStones) {
+  for (const stone of SynergyStones) {
     if (pkm.items.has(stone)) {
       pkm.types.add(SynergyByStone[stone])
     }

@@ -3812,6 +3812,25 @@ export default class BattleManager {
             )
             break
 
+            case Ability.OUTRAGE:
+                coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
+                specialProjectile = this.scene.add.sprite(
+                  coordinates[0],
+                  coordinates[1],
+                  Ability.OUTRAGE,
+                  "000"
+                )
+                specialProjectile.setDepth(7)
+                specialProjectile.setScale(2, 2)
+                specialProjectile.anims.play(Ability.OUTRAGE)
+                specialProjectile.once(
+                  Phaser.Animations.Events.ANIMATION_COMPLETE,
+                  () => {
+                    specialProjectile.destroy()
+                  }
+                )
+                break
+
           case Ability.SLASH:
             coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
@@ -5094,7 +5113,7 @@ export default class BattleManager {
             break
 
           case Ability.TEETER_DANCE:
-            ;(this.group.getChildren() as Pokemon[]).forEach((pkmUI) => {
+            (this.group.getChildren() as Pokemon[]).forEach((pkmUI) => {
               coordinates = transformAttackCoordinate(
                 pkmUI.positionX,
                 pkmUI.positionY,

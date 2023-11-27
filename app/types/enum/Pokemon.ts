@@ -3653,18 +3653,18 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.AXEW]: {
-    attack: AnimationType.Bite,
-    ability: AnimationType.Emit,
+    attack: AnimationType.Attack,
+    ability: AnimationType.Swing,
     emote: AnimationType.Shoot
   },
   [Pkm.FRAXURE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack,
+    ability: AnimationType.Swing,
     emote: AnimationType.Shoot
   },
   [Pkm.HAXORUS]: {
-    attack: AnimationType.Slice,
-    ability: AnimationType.Charge,
+    attack: AnimationType.Attack,
+    ability: AnimationType.Swing,
     emote: AnimationType.Shoot
   },
   [Pkm.VENIPEDE]: {
