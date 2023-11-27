@@ -1144,7 +1144,7 @@
     "ATTRACT": "Rend CHARM [1,2,3] pokémons adverses choisis au hasard pendant [2.5,SP] secondes",
     "WATER_PULSE": "Inflige [50,100,150,SP] SPECIAL à la cible et aux ennemis adjacents et les rend CONFUSION pendant 2 secondes",
     "PLAY_ROUGH": "Inflige [30,60,120,SP] SPECIAL à la cible et la rend CHARM pendant 2.5 secondes",
-    "AERIAL_ACE": "Inflige [30,60,90,SP] TRUE",
+    "AERIAL_ACE": "Inflige [25,50,100,SP] TRUE",
     "PARABOLIC_CHARGE": "Soigne [25,50] HP et inflige [25,50,100,SP] SPECIAL à la cible. Les HP en trop sont convertis en SPECIAL",
     "SUPER_FANG": "Inflige [30,60,90,SP] SPECIAL. Double dégâts si la cible est GRASS",
     "TEETER_DANCE": "Tous les autres pokémons sur le terrain sont CONFUSION pendant 3 secondes, alliés comme ennemis",

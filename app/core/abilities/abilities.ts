@@ -5570,8 +5570,9 @@ export class AerialAceStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    const damage = [25,50,100][pokemon.stars - 1] ?? 100
     target.handleSpecialDamage(
-      pokemon.stars === 3 ? 90 : pokemon.stars === 2 ? 60 : 30,
+      damage,
       board,
       AttackType.TRUE,
       pokemon,
