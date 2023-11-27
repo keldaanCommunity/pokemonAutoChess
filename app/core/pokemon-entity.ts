@@ -744,71 +744,11 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     // Berries trigger
     const berry = values(this.items).find((item) => Berries.includes(item))
     if (berry && this.life > 0 && this.life < 0.5 * this.hp) {
-      let berryEaten = false
-      switch (berry) {
-        case Item.AGUAV_BERRY:
-          berryEaten = true
-          this.handleHeal(this.hp - this.life, this, 0)
-          this.status.triggerConfusion(3000, this)
-          break
-        case Item.APICOT_BERRY:
-          berryEaten = true
-          this.addSpecialDefense(20)
-          break
-        case Item.GANLON_BERRY:
-          berryEaten = true
-          this.addDefense(20)
-          break
-        case Item.JABOCA_BERRY:
-          berryEaten = true
-          this.status.triggerSpikeArmor(10000)
-          break
-        case Item.LANSAT_BERRY:
-          berryEaten = true
-          this.addCritChance(50)
-          break
-        case Item.LIECHI_BERRY:
-          berryEaten = true
-          this.addAttack(15)
-          break
-        case Item.LUM_BERRY:
-          berryEaten = true
-          this.status.clearNegativeStatus()
-          this.status.triggerRuneProtect(10000)
-          break
-        case Item.ORAN_BERRY:
-          berryEaten = true
-          this.addShield(100, this)
-          break
-        case Item.PETAYA_BERRY:
-          berryEaten = true
-          this.addAbilityPower(100)
-          break
-        case Item.ROWAP_BERRY:
-          berryEaten = true
-          this.status.triggerMagicBounce(10000)
-          break
-        case Item.SALAC_BERRY:
-          berryEaten = true
-          this.addAttackSpeed(50)
-          break
-        case Item.SITRUS_BERRY:
-          berryEaten = true
-          this.effects.add(Effect.BUFF_HEAL_RECEIVED)
-          this.handleHeal(20, this, 0)
-          break
-      }
-      if (berryEaten) {
-        this.items.delete(berry)
-        this.refToBoardPokemon.items.delete(berry)
-        if (this.passive === Passive.GLUTTON) {
-          this.refToBoardPokemon.hp += 20
-        }
-      }
+      this.eatBerry(berry)
     }
   }
 
-  onCritical({ target, board }: { target: PokemonEntity, board: Board }) {
+  onCritical({ target, board }: { target: PokemonEntity; board: Board }) {
     target.count.crit++
 
     // proc fairy splash damage for both the attacker and the target
@@ -878,7 +818,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   // called after killing an opponent (does not proc if resurection)
-  onKill({ target, board} : { target: PokemonEntity, board: Board }) {
+  onKill({ target, board }: { target: PokemonEntity; board: Board }) {
     if (this.items.has(Item.AMULET_COIN) && this.player) {
       this.player.money += 1
       this.count.moneyCount++
@@ -1033,9 +973,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
   // called after every ability cast
   onCast(board: Board, target: PokemonEntity, crit: boolean) {
     if (this.items.has(Item.LEPPA_BERRY)) {
-      this.items.delete(Item.LEPPA_BERRY)
-      this.refToBoardPokemon.items.delete(Item.LEPPA_BERRY)
-      this.addPP(50)
+      this.eatBerry(Item.LEPPA_BERRY)
     }
 
     if (this.items.has(Item.COMFEY)) {
@@ -1120,5 +1058,109 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     ) // prevent resurecting fossils twice
 
     // does not trigger postEffects (iron defense, normal shield, rune protect, focus band, delta orb, flame orb...)
+  }
+
+  eatBerry(berry: Item) {
+    switch (berry) {
+      case Item.AGUAV_BERRY:
+        this.handleHeal(min(20)(this.hp - this.life), this, 0)
+        this.status.triggerConfusion(3000, this)
+        break
+      case Item.APICOT_BERRY:
+        this.handleHeal(20, this, 0)
+        this.addSpecialDefense(20)
+        break
+      case Item.ASPEAR_BERRY:
+        this.status.freeze = false
+        this.status.freezeCooldown = 0
+        this.effects.add(Effect.IMMUNITY_FREEZE)
+        this.handleHeal(20, this, 0)
+        this.addAttackSpeed(15, false)
+        break
+      case Item.CHERI_BERRY:
+        this.status.healParalysis(this)
+        this.effects.add(Effect.IMMUNITY_PARALYSIS)
+        this.handleHeal(20, this, 0)
+        this.addAttack(10, false)
+        break
+      case Item.CHESTO_BERRY:
+        this.status.sleep = false
+        this.status.sleepCooldown = 0
+        this.effects.add(Effect.IMMUNITY_SLEEP)
+        this.handleHeal(20, this, 0)
+        this.addAbilityPower(15, false)
+        break
+      case Item.GANLON_BERRY:
+        this.handleHeal(20, this, 0)
+        this.addDefense(20)
+        break
+      case Item.JABOCA_BERRY:
+        this.handleHeal(20, this, 0)
+        this.status.triggerSpikeArmor(10000)
+        break
+      case Item.LANSAT_BERRY:
+        this.handleHeal(20, this, 0)
+        this.addCritChance(50)
+        break
+      case Item.LEPPA_BERRY:
+        this.handleHeal(20, this, 0)
+        this.addPP(50)
+        break
+      case Item.LIECHI_BERRY:
+        this.handleHeal(20, this, 0)
+        this.addAttack(15)
+        break
+      case Item.LUM_BERRY:
+        this.handleHeal(20, this, 0)
+        this.status.clearNegativeStatus()
+        this.status.triggerRuneProtect(5000)
+        break
+      case Item.ORAN_BERRY:
+        this.handleHeal(20, this, 0)
+        this.addShield(80, this)
+        break
+      case Item.PECHA_BERRY:
+        this.handleHeal(50, this, 0)
+        this.status.poisonOrigin = undefined
+        this.status.poisonStacks = 0
+        this.status.poisonDamageCooldown = 0
+        this.effects.add(Effect.IMMUNITY_POISON)
+        break
+      case Item.PERSIM_BERRY:
+        this.status.confusion = false
+        this.status.confusionCooldown = 0
+        this.effects.add(Effect.IMMUNITY_CONFUSION)
+        this.handleHeal(20, this, 0)
+        this.addSpecialDefense(10, false)
+        break
+      case Item.PETAYA_BERRY:
+        this.handleHeal(20, this, 0)
+        this.addAbilityPower(80)
+        break
+      case Item.ROWAP_BERRY:
+        this.handleHeal(20, this, 0)
+        this.status.triggerMagicBounce(10000)
+        break
+      case Item.RAWST_BERRY:
+        this.status.healBurn(this)
+        this.effects.add(Effect.IMMUNITY_BURN)
+        this.handleHeal(20, this, 0)
+        this.addDefense(10, false)
+        break
+      case Item.SALAC_BERRY:
+        this.handleHeal(20, this, 0)
+        this.addAttackSpeed(50)
+        break
+      case Item.SITRUS_BERRY:
+        this.effects.add(Effect.BUFF_HEAL_RECEIVED)
+        this.handleHeal(20, this, 0)
+        break
+    }
+
+    this.items.delete(berry)
+    this.refToBoardPokemon.items.delete(berry)
+    if (this.passive === Passive.GLUTTON) {
+      this.refToBoardPokemon.hp += 20
+    }
   }
 }

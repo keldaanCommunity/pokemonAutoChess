@@ -36,7 +36,27 @@
 - Flying pokemons can no longer fly away when frozen, asleep or paralyzed
 - Removed Fairy 8 (Moon Force) team-wide charm at the start of the fight
 
-# Changes to Items
+# Changes to Berries
+
+All berries are eaten when below 50% HP, and heal at least 20HP when eaten:
+
+- aspear: consumed when being freeze or under 50%, + heal 20HP and +15% attack speed
+- apicot: + heal 20HP
+- cheri: consumed when being paralyzed or under 50%, + heal 20HP and +10 attack
+- chesto: consumed when being Asleep or under 50%, + heal 20HP and +15% AP
+- ganlon: + heal 20HP
+- jaboca: + heal 20HP
+- lansat: + heal 20HP
+- leppa: consumed after casting ability or under 50%, + heal 20HP
+- liechi: + heal 20HP
+- lum berry: + heal 20HP, rune protect duration 5 seconds
+- oran berry: heal 20HP and give 80 shield
+- pecha: consumed when being poisoned or under 50%, + heal 50HP
+- persim: consumed when being confused or under 50%, + heal 20HP and +10 special defense
+- petaya: 80 AP, heal 20HP
+- rawst: consumed when being burned or under 50%, + heal 20HP and +10 defense
+- rowap: + heal 20HP
+- salac: + heal 20HP
 
 # Gameplay
 

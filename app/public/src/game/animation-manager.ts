@@ -2596,7 +2596,12 @@ export default class AnimationManager {
     const shadowKey = `${textureIndex}/${tint}/${animation}/${SpriteType.SHADOW}/${orientationCorrected}`
 
     if (!entity.animationLocked) {
-      if (animationConfig.loop) {
+      if (animationConfig.lock) {
+        // prevent repeating a locked anim
+        entity.sprite.anims.play({ key: animKey, repeat: 0 })
+        entity.shadow.anims.play({ key: shadowKey, repeat: 0 })
+      } else if (animationConfig.loop) {
+        // force loop an anim for debug scene in sprite viewer
         entity.sprite.anims.play({ key: animKey, repeat: -1 })
         entity.shadow.anims.play({ key: shadowKey, repeat: -1 })
       } else {
