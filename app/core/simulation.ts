@@ -4,7 +4,7 @@ import { Schema, MapSchema, type, SetSchema } from "@colyseus/schema"
 import PokemonEntity from "./pokemon-entity"
 import PokemonFactory from "../models/pokemon-factory"
 import { Pokemon } from "../models/colyseus-models/pokemon"
-import { Item } from "../types/enum/Item"
+import { Berries, CompletedItems, Item } from "../types/enum/Item"
 import { Effect } from "../types/enum/Effect"
 import {
   AttackType,
@@ -186,7 +186,9 @@ export default class Simulation extends Schema implements ISimulation {
               simulation: this,
               player,
               team: entityTeam,
-              entity: values(entityTeam).find(p => p.refToBoardPokemon === pokemon)!
+              entity: values(entityTeam).find(
+                (p) => p.refToBoardPokemon === pokemon
+              )!
             })
           })
         }
@@ -396,6 +398,9 @@ export default class Simulation extends Schema implements ISimulation {
   }
 
   applyItemsEffects(pokemon: PokemonEntity) {
+    if (pokemon.passive === Passive.PICKUP && pokemon.items.size === 0) {
+      pokemon.items.add(pickRandomIn(CompletedItems.concat(Berries)))
+    }
     // wonderbox should be applied first so that wonderbox items effects can be applied after
     if (pokemon.items.has(Item.WONDER_BOX)) {
       pokemon.items.delete(Item.WONDER_BOX)
