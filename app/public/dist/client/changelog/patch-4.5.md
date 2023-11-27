@@ -14,6 +14,7 @@
 - Herdier
 - Stoutland
 - Zigzagoon/Linoone
+- Axew/Fraxure/Haxorus
 
 # Changes to Pokemon & Abilities
 

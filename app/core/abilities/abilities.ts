@@ -6574,9 +6574,47 @@ export class SlashStrategy extends AbilityStrategy {
       board,
       AttackType.SPECIAL,
       pokemon,
-      increasedCrit,
-      false
+      increasedCrit
     )
+  }
+}
+
+export class OutrageStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    pokemon.status.triggerConfusion(2000, pokemon)
+    board
+      .getAdjacentCells(pokemon.positionX, pokemon.positionY)
+      .map((v) => v.value)
+      .filter((v) => v?.team === target.team)
+      .concat(target)
+      .forEach((v) => {
+        if (v) {
+          pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+            id: pokemon.simulation.id,
+            skill: Ability.OUTRAGE,
+            targetX: v.positionX,
+            targetY: v.positionY
+          })
+          v.handleSpecialDamage(
+            pokemon.stars === 3
+              ? 4 * pokemon.atk
+              : pokemon.stars === 2
+              ? 3 * pokemon.atk
+              : 2 * pokemon.atk,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      })
   }
 }
 
@@ -6833,5 +6871,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.INFERNAL_PARADE]: new InfernalParadeStrategy(),
   [Ability.MAGIC_POWDER]: new MagicPowderStrategy(),
   [Ability.RETALIATE]: new RetaliateStrategy(),
-  [Ability.SLASH]: new SlashStrategy()
+  [Ability.SLASH]: new SlashStrategy(),
+  [Ability.OUTRAGE]: new OutrageStrategy()
 }

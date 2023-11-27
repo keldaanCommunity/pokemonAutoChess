@@ -928,6 +928,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.OUTRAGE,
+      frames: this.game.anims.generateFrameNames(Ability.OUTRAGE, {
+        start: 0,
+        end: 12,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.SLASH,
       frames: this.game.anims.generateFrameNames(Ability.SLASH, {
         start: 0,

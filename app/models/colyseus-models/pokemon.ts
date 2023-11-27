@@ -1870,46 +1870,48 @@ export class AlolanMarowak extends Pokemon {
 }
 
 export class Axew extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.MONSTER])
-  rarity = Rarity.RARE
+  types = new SetSchema<Synergy>([Synergy.DRAGON])
+  rarity = Rarity.HATCH
+  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   stars = 1
   evolution = Pkm.FRAXURE
   hp = 80
-  atk = 5
-  def = 4
-  speDef = 4
+  atk = 12
+  def = 1
+  speDef = 2
   maxPP = 100
   range = 1
-  skill = Ability.DEFAULT
+  skill = Ability.OUTRAGE
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Fraxure extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.MONSTER])
-  rarity = Rarity.RARE
+  types = new SetSchema<Synergy>([Synergy.DRAGON])
+  rarity = Rarity.HATCH
+  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   stars = 2
   evolution = Pkm.HAXORUS
-  hp = 120
-  atk = 9
-  def = 5
-  speDef = 5
+  hp = 130
+  atk = 24
+  def = 2
+  speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.DEFAULT
+  skill = Ability.OUTRAGE
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Haxorus extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.MONSTER])
-  rarity = Rarity.RARE
+  types = new SetSchema<Synergy>([Synergy.DRAGON])
+  rarity = Rarity.HATCH
   stars = 3
-  hp = 220
-  atk = 20
-  def = 6
+  hp = 180
+  atk = 36
+  def = 4
   speDef = 6
   maxPP = 100
   range = 1
-  skill = Ability.DEFAULT
+  skill = Ability.OUTRAGE
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
