@@ -6662,7 +6662,7 @@ export class Ninjask extends Pokemon {
 }
 
 export class Shedinja extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.GHOST, Synergy.FLYING])
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.GHOST])
   rarity = Rarity.EPIC
   stars = 2
   hp = 10

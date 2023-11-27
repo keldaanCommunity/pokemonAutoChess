@@ -1694,7 +1694,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.DEFAULT]: Pkm.DEFAULT,
   [Pkm.NINCADA]: Pkm.NINCADA,
   [Pkm.NINJASK]: Pkm.NINCADA,
-  [Pkm.SHEDINJA]: Pkm.NINCADA,
+  [Pkm.SHEDINJA]: Pkm.SHEDINJA,
   [Pkm.PONYTA]: Pkm.PONYTA,
   [Pkm.RAPIDASH]: Pkm.PONYTA,
   [Pkm.GENESECT]: Pkm.GENESECT,
