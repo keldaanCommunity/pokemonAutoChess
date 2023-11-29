@@ -230,7 +230,7 @@ app.use("/colyseus", basicAuthMiddleware, monitor())
 
 gameServer.define("after-game", AfterGameRoom)
 gameServer.define("lobby", CustomLobbyRoom)
-gameServer.define("room", PreparationRoom).enableRealtimeListing()
+gameServer.define("preparation", PreparationRoom).enableRealtimeListing()
 gameServer.define("game", GameRoom).enableRealtimeListing()
 
 // Start

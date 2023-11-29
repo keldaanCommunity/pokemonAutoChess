@@ -58,7 +58,7 @@ export default function RoomMenu(props: {
       const token = await user?.getIdToken()
       const lobbyUser = lobbyUsers.find((u) => u.id === uid)
       if (token && lobbyUser) {
-        const room: Room<PreparationState> = await client.create("room", {
+        const room: Room<PreparationState> = await client.create("preparation", {
           idToken: token,
           ownerId: uid,
           ownerName: lobbyUser?.name ? lobbyUser.name : uid
