@@ -367,6 +367,8 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     )
     await this.fetchChat()
     await this.fetchLeaderboards()
+
+    setInterval(() => this.fetchLeaderboards(), 10 * 60 * 1000) // refresh leaderboard every 10 minutes
   }
 
   async onAuth(client: Client, options: any, request: any) {
@@ -447,16 +449,13 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     )
 
     if (users) {
-      for (let i = 0; i < users.length; i++) {
-        const user = users[i]
-        this.leaderboard.push({
-          name: user.displayName,
-          rank: i + 1,
-          avatar: user.avatar,
-          value: user.elo,
-          id: user.uid
-        })
-      }
+      this.leaderboard = users.map((user, i) => ({
+        name: user.displayName,
+        rank: i + 1,
+        avatar: user.avatar,
+        value: user.elo,
+        id: user.uid
+      }))
     }
 
     const levelUsers = await UserMetadata.find(
@@ -466,21 +465,19 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     )
 
     if (levelUsers) {
-      for (let i = 0; i < levelUsers.length; i++) {
-        const user = levelUsers[i]
-        this.levelLeaderboard.push({
-          name: user.displayName,
-          rank: i + 1,
-          avatar: user.avatar,
-          value: user.level,
-          id: user.uid
-        })
-      }
+      this.levelLeaderboard = levelUsers.map((user, i) => ({
+        name: user.displayName,
+        rank: i + 1,
+        avatar: user.avatar,
+        value: user.level,
+        id: user.uid
+      }))
     }
 
     const bots = await BotV2.find({}, {}, { sort: { elo: -1 } })
     if (bots) {
       const ids = new Array<string>()
+      this.botLeaderboard = []
       bots.forEach((bot, i) => {
         if (ids.includes(bot.id)) {
           const id = nanoid()
