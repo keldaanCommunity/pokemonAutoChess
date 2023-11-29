@@ -18,7 +18,7 @@ export default function RoomItem(props: {
         <img
           alt={t("private")}
           title={t("password_protected")}
-          className="lock-icon"
+          className="lock icon"
           src="/assets/ui/lock.svg"
         />
       )}
@@ -26,9 +26,17 @@ export default function RoomItem(props: {
         <img
           alt={t("just_for_fun")}
           title={t("just_for_fun")}
-          className="noelo-icon"
+          className="noelo icon"
           src="/assets/ui/noelo.png"
           style={{ borderRadius: "50%" }}
+        />
+      )}
+      {props.room.metadata?.minRank && (
+        <img
+          alt={t("minimum_rank")}
+          title={t("minimum_rank")+": "+t("rank."+props.room.metadata?.minRank)}
+          className="rank icon"
+          src={"/assets/ranks/" + props.room.metadata?.minRank + ".svg"}
         />
       )}
       <span>

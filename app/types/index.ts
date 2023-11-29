@@ -523,6 +523,7 @@ export interface IPreparationMetadata {
   noElo: boolean
   type: "preparation"
   gameStarted: boolean
+  minRank: string | null
 }
 
 export interface IGameMetadata {

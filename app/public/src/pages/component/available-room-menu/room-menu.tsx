@@ -22,6 +22,7 @@ import { MAX_PLAYERS_PER_LOBBY } from "../../../../../types/Config"
 import { logger } from "../../../../../utils/logger"
 import { useTranslation } from "react-i18next"
 import { localStore, LocalStoreKeys } from "../../utils/store"
+import { LobbyType } from "../../../../../types/enum/Game"
 import "./room-menu.css"
 
 export default function RoomMenu(props: {
@@ -58,11 +59,14 @@ export default function RoomMenu(props: {
       const token = await user?.getIdToken()
       const lobbyUser = lobbyUsers.find((u) => u.id === uid)
       if (token && lobbyUser) {
-        const room: Room<PreparationState> = await client.create("preparation", {
-          idToken: token,
-          ownerId: uid,
-          ownerName: lobbyUser?.name ? lobbyUser.name : uid
-        })
+        const room: Room<PreparationState> = await client.create(
+          "preparation",
+          {
+            lobbyType: LobbyType.NORMAL,
+            ownerId: uid,
+            roomName: `${lobbyUser?.name ?? user?.displayName}'s room`
+          }
+        )
         await lobby.leave()
         room.connection.close()
         localStore.set(

@@ -1,6 +1,7 @@
 import { GameUser } from "../../models/colyseus-models/game-user"
 import { Schema, MapSchema, type } from "@colyseus/schema"
-import { Dungeon } from "../../types/Config"
+import { Dungeon, EloRank } from "../../types/Config"
+import { LobbyType } from "../../types/enum/Game"
 
 export interface IPreparationState {
   users: MapSchema<GameUser>
@@ -9,6 +10,8 @@ export interface IPreparationState {
   ownerName: string
   name: string
   selectedMap: Dungeon | "random"
+  minRank: EloRank | null
+  lobbyType: LobbyType
 }
 
 export default class PreparationState
@@ -23,15 +26,24 @@ export default class PreparationState
   @type("string") password: string | null
   @type("boolean") noElo: boolean
   @type("string") selectedMap: Dungeon | "random"
+  @type("string") minRank: EloRank | null
+  @type("string") lobbyType: LobbyType = LobbyType.NORMAL
 
-  constructor(ownerId: string | undefined, name: string) {
+  constructor(params: {
+    ownerId?: string
+    roomName: string
+    minRank?: EloRank
+    lobbyType: LobbyType
+  }) {
     super()
-    this.ownerId = ownerId ? ownerId : ""
-    this.name = name
+    this.ownerId = params.ownerId ?? ""
+    this.name = params.roomName
     this.gameStarted = false
     this.ownerName = ""
     this.password = null
     this.noElo = false
     this.selectedMap = "random"
+    this.minRank = params.minRank ?? null
+    this.lobbyType = params.lobbyType
   }
 }

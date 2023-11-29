@@ -18,7 +18,7 @@ import {
   OnKickPlayerCommand,
   OnDeleteRoomCommand
 } from "./commands/preparation-commands"
-import { BotDifficulty } from "../types/enum/Game"
+import { BotDifficulty, LobbyType } from "../types/enum/Game"
 import { IPreparationMetadata, Transfer } from "../types"
 import { components } from "../api-v1/openapi"
 import { GameUser } from "../models/colyseus-models/game-user"
@@ -27,7 +27,7 @@ import { IBot } from "../models/mongo-models/bot-v2"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import { logger } from "../utils/logger"
 import { cleanProfanity } from "../utils/profanity-filter"
-import { MAX_PLAYERS_PER_LOBBY } from "../types/Config"
+import { EloRank, MAX_PLAYERS_PER_LOBBY } from "../types/Config"
 import { values } from "../utils/schemas"
 
 export default class PreparationRoom extends Room<PreparationState> {
@@ -70,19 +70,30 @@ export default class PreparationRoom extends Room<PreparationState> {
     })
   }
 
-  onCreate(options: { ownerId?: string; idToken: string; ownerName: string }) {
+  onCreate(options: {
+    ownerId?: string
+    roomName: string
+    minRank?: EloRank
+    lobbyType: LobbyType
+  }) {
     // logger.debug(options);
-    const n = `${options.ownerName}'s room`
-    logger.info(`create ${n} room`)
+    logger.info(`create ${options.roomName}`)
     // logger.debug(defaultRoomName);
-    this.setState(new PreparationState(options.ownerId, n))
+    this.setState(new PreparationState(options))
+    this.setMetadata(<IPreparationMetadata>{
+      minRank: options.minRank ?? null
+    })
     this.maxClients = 8
     // if (options.ownerId) {
     //   this.dispatcher.dispatch(new InitializeBotsCommand(), {
     //     ownerId: options.ownerId
     //   })
     // }
-    this.setName(n)
+    if (options.lobbyType === LobbyType.RANKED) {
+      this.autoDispose = false
+    }
+
+    this.setName(options.roomName)
 
     this.onMessage(Transfer.KICK, (client, message) => {
       try {
@@ -233,9 +244,9 @@ export default class PreparationRoom extends Room<PreparationState> {
         (u) => !u.isBot
       ).length
       if (numberOfHumanPlayers >= MAX_PLAYERS_PER_LOBBY) {
-        throw "room is full"
+        throw "Room is full"
       } else if (this.state.gameStarted) {
-        throw "game already started"
+        throw "Game already started"
       } else if (!user.displayName) {
         throw "No display name"
       } else if (isBanned) {

@@ -45,9 +45,12 @@ import {
   DeleteBotCommand,
   OnBotUploadCommand,
   createBotList,
-  SelectLanguageCommand
+  SelectLanguageCommand,
+  OpenRankedLobbyCommand
 } from "./commands/lobby-commands"
 import { Language } from "../types/enum/Language"
+import { CronJob } from "cron"
+import { EloRank } from "../types/Config"
 
 export default class CustomLobbyRoom extends Room<LobbyState> {
   discordWebhook: WebhookClient | undefined
@@ -365,10 +368,10 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
         })
       }
     )
-    await this.fetchChat()
-    await this.fetchLeaderboards()
 
-    setInterval(() => this.fetchLeaderboards(), 10 * 60 * 1000) // refresh leaderboard every 10 minutes
+    this.initCronJobs()
+    this.fetchChat()
+    this.fetchLeaderboards()
   }
 
   async onAuth(client: Client, options: any, request: any) {
@@ -495,5 +498,27 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
         })
       })
     }
+  }
+
+  initCronJobs() {
+    logger.debug("initCronJobs")
+    const leaderboardRefreshJob = CronJob.from({
+      cronTime: "0 0/10 * * * *", // every 10 minutes
+      timeZone: "Europe/Paris",
+      onTick: () => this.fetchLeaderboards(),
+      start: true
+    })
+
+    const rankedLobbyJob = CronJob.from({
+      //cronTime: "0 0 2-22/4 * * *", // every four hours from 2 to 22
+      cronTime: "0 0/1 * * * *", // TEMP
+      timeZone: "Europe/Paris",
+      onTick: () => {
+        this.dispatcher.dispatch(new OpenRankedLobbyCommand(), {
+          minRank: EloRank.GOLD
+        })
+      },
+      start: true
+    })
   }
 }
