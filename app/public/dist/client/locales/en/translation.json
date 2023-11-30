@@ -2022,6 +2022,7 @@
   "join": "Join",
   "reconnect": "Reconnect",
   "just_for_fun": "Just for fun",
+  "minimum_rank": "Minimum rank",
   "password_protected": "Private Lobby (password protected)",
   "private": "Private",
   "available_rooms": "Available Rooms",
@@ -2432,5 +2433,12 @@
     "BASIC": "Basic",
     "BOT": "Bot",
     "BOT_MANAGER": "Bot Manager"
+  },
+  "elorank": {
+    "BEGINNER": "Beginner Tier",
+    "POKEBALL": "Poké Ball Tier",
+    "GREATBALL": "Great Ball Tier",
+    "ULTRABALL": "Ultra Ball Tier",
+    "MASTERBALL": "Master Ball Tier"
   }
 }

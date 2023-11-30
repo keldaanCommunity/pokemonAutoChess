@@ -35,6 +35,7 @@ import { sum } from "../../utils/array"
 import { pickRandomIn } from "../../utils/random"
 import { getPortraitSrc, getAvatarSrc } from "../../public/src/utils"
 import { cleanProfanity } from "../../utils/profanity-filter"
+import translations from "../../public/dist/client/locales/en/translation.json"
 
 export class OnJoinCommand extends Command<
   CustomLobbyRoom,
@@ -1057,12 +1058,12 @@ export class OpenRankedLobbyCommand extends Command<
   { minRank: EloRank }
 > {
   execute({ minRank }: { minRank: EloRank }) {
-    logger.info("Creating Ranked Lobby "+minRank)
+    logger.info("Creating Ranked Lobby " + minRank)
     matchMaker.createRoom("preparation", {
       lobbyType: LobbyType.RANKED,
       minRank,
       ownerId: null,
-      roomName: "Great Ball Tier Match"
+      roomName: `${translations["elorank"][minRank]} Match`
     })
   }
 }

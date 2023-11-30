@@ -34,7 +34,7 @@ export default function RoomItem(props: {
       {props.room.metadata?.minRank && (
         <img
           alt={t("minimum_rank")}
-          title={t("minimum_rank")+": "+t("rank."+props.room.metadata?.minRank)}
+          title={t("minimum_rank")+": "+t("elorank."+props.room.metadata?.minRank)}
           className="rank icon"
           src={"/assets/ranks/" + props.room.metadata?.minRank + ".svg"}
         />

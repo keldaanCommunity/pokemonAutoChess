@@ -1,6 +1,7 @@
 import React from "react"
 import { EloRankThreshold, EloRank } from "../../../../types/Config"
 import CSS from "csstype"
+import { useTranslation } from "react-i18next"
 
 const style: CSS.Properties = {
   display: "flex",
@@ -16,10 +17,11 @@ const imgStyle: CSS.Properties = {
 }
 
 export default function Elo(props: { elo: number }) {
+  const { t } = useTranslation()
   const rank = getRank(props.elo)
   return (
     <div style={style} className="elo">
-      <img style={imgStyle} src={"assets/ranks/" + rank + ".svg"} />
+      <img style={imgStyle} src={"assets/ranks/" + rank + ".svg"} alt={t("elorank."+rank)} title={t("elorank."+rank)} />
       <p style={{ margin: "0px", fontSize: "1vw" }}>{props.elo}</p>
     </div>
   )
