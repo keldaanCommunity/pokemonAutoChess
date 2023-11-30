@@ -26,7 +26,7 @@ export default function Elo(props: { elo: number }) {
 }
 
 function getRank(elo: number) {
-  let rank = EloRank.BRONZE
+  let rank = EloRank.BEGINNER
   ;(Object.keys(EloRankThreshold) as EloRank[]).forEach((e) => {
     if (elo > EloRankThreshold[e]) {
       rank = e

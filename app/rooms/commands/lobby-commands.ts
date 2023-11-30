@@ -1057,12 +1057,12 @@ export class OpenRankedLobbyCommand extends Command<
   { minRank: EloRank }
 > {
   execute({ minRank }: { minRank: EloRank }) {
-    logger.info("Creating Ranked Lobby")
+    logger.info("Creating Ranked Lobby "+minRank)
     matchMaker.createRoom("preparation", {
       lobbyType: LobbyType.RANKED,
       minRank,
       ownerId: null,
-      roomName: "Golden Match"
+      roomName: "Great Ball Tier Match"
     })
   }
 }

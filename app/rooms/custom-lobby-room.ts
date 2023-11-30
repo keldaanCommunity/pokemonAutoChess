@@ -515,7 +515,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       timeZone: "Europe/Paris",
       onTick: () => {
         this.dispatcher.dispatch(new OpenRankedLobbyCommand(), {
-          minRank: EloRank.GOLD
+          minRank: EloRank.GREATBALL
         })
       },
       start: true
