@@ -1063,7 +1063,8 @@ export class OpenRankedLobbyCommand extends Command<
       lobbyType: LobbyType.RANKED,
       minRank,
       ownerId: null,
-      roomName: `${translations["elorank"][minRank]} Match`
+      roomName: `${translations["elorank"][minRank]} Match`,
+      autoStartDelayInSeconds: 15 * 60
     })
   }
 }

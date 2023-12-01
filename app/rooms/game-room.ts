@@ -87,7 +87,6 @@ export default class GameRoom extends Room<GameState> {
     users: MapSchema<IGameUser>
     preparationId: string
     name: string
-    idToken: string
     noElo: boolean
     selectedMap: DungeonPMDO | "random"
     whenReady: (room: GameRoom) => void

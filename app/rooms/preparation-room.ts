@@ -75,9 +75,14 @@ export default class PreparationRoom extends Room<PreparationState> {
     roomName: string
     minRank?: EloRank
     lobbyType: LobbyType
+    autoStartDelayInSeconds?: number
   }) {
     // logger.debug(options);
     logger.info(`create ${options.roomName}`)
+
+    // start the clock ticking
+    this.clock.start()
+
     // logger.debug(defaultRoomName);
     this.setState(new PreparationState(options))
     this.setMetadata(<IPreparationMetadata>{
@@ -91,6 +96,40 @@ export default class PreparationRoom extends Room<PreparationState> {
     // }
     if (options.lobbyType === LobbyType.RANKED) {
       this.autoDispose = false
+    }
+
+    if (options.autoStartDelayInSeconds) {
+      this.clock.setTimeout(() => {
+        this.dispatcher.dispatch(new OnGameStartRequestCommand())
+      }, options.autoStartDelayInSeconds * 1000)
+
+      this.clock.setTimeout(() => {
+        for (let t = 0; t < 10; t++) {
+          this.clock.setTimeout(() => {
+            this.broadcast(Transfer.MESSAGES, {
+              author: "Server",
+              payload: `Game is starting in ${10 - t}`,
+              avatar: "0070/Normal",
+              time: Date.now()
+            })
+          }, t * 1000)
+        }
+      }, (options.autoStartDelayInSeconds - 10) * 1000)
+
+      this.clock.setTimeout(() => {
+        for (let t = 0; t < 9; t++) {
+          this.clock.setTimeout(() => {
+            this.broadcast(Transfer.MESSAGES, {
+              author: "Server",
+              payload: `Game will start automatically in ${10 - t} minute${
+                t !== 9 ? "s" : ""
+              }`,
+              avatar: "0340/Special1",
+              time: Date.now()
+            })
+          }, t * 60 * 1000)
+        }
+      }, (options.autoStartDelayInSeconds - 10 * 60) * 1000)
     }
 
     this.setName(options.roomName)
