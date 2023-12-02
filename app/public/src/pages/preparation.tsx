@@ -16,6 +16,7 @@ import {
   removeUser,
   setBotsList,
   setGameStarted,
+  setLobbyType,
   setName,
   setOwnerId,
   setOwnerName,
@@ -125,6 +126,10 @@ export default function Preparation() {
 
       r.state.listen("selectedMap", (value, previousValue) => {
         dispatch(setSelectedMap(value))
+      })
+
+      r.state.listen("lobbyType", (value, previousValue) => {
+        dispatch(setLobbyType(value))
       })
 
       r.state.users.onAdd((u) => {

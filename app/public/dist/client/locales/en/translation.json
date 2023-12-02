@@ -2175,6 +2175,7 @@
   "GLHF": "GLHF",
   "not_elligible_elo_hint": "❌Games with bots only are not elligible for ELO gain/loss.",
   "add_bot_or_wait_hint": "Add bots or wait for more players to join your room",
+  "ranked_lobby_hint": "This game will automatically start when full or after 15 minutes.",
   "private_lobby": "Private lobby",
   "change_room_name": "Change room name",
   "add_bot": "Add Bot",
@@ -2435,10 +2436,10 @@
     "BOT_MANAGER": "Bot Manager"
   },
   "elorank": {
-    "BEGINNER": "Beginner Tier",
-    "POKEBALL": "Poké Ball Tier",
-    "GREATBALL": "Great Ball Tier",
-    "ULTRABALL": "Ultra Ball Tier",
-    "MASTERBALL": "Master Ball Tier"
+    "BEGINNER": "Beginner",
+    "POKEBALL": "Poké Ball",
+    "GREATBALL": "Great Ball",
+    "ULTRABALL": "Ultra Ball",
+    "MASTERBALL": "Master Ball"
   }
 }

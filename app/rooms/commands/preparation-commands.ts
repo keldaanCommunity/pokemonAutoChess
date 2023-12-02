@@ -65,7 +65,7 @@ export class OnJoinCommand extends Command<
               u.elo,
               u.avatar,
               false,
-              false,
+              this.state.lobbyType === LobbyType.RANKED ? true : false,
               u.title,
               u.role,
               auth.email === undefined && auth.photoURL === undefined
@@ -611,8 +611,6 @@ export class OnListBotsCommand extends Command<PreparationRoom> {
           userArray.push(key)
         }
       })
-
-      const { user } = data
 
       const bots = await BotV2.find({ id: { $nin: userArray } }, [
         "avatar",
