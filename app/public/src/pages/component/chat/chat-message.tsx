@@ -21,7 +21,8 @@ export default function ChatMessage(props: { message: IChatV2 }) {
         {props.message.author && (
           <div
             className={cc("chat-user", {
-              sameUser: props.message.authorId === user?.id
+              "same-user": props.message.authorId === user?.id,
+              "server-message": props.message.authorId === "server"
             })}
           >
             <img

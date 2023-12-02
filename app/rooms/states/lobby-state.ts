@@ -50,4 +50,8 @@ export default class LobbyState extends Schema {
     }
     chatV2.deleteMany({ authorId: authorId })
   }
+
+  addAnnouncement(message: string) {
+    this.addMessage(message, "server", "Server Announcement", "0294/Joyous")
+  }
 }

@@ -510,13 +510,22 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     })
 
     const rankedLobbyJob = CronJob.from({
-      //cronTime: "0 0 2-22/4 * * *", // every four hours from 2 to 22
-      cronTime: "0 0/1 * * * *", // TEMP
+      cronTime: "0 0 2-22/4 * * *", // every four hours from 2 to 22
       timeZone: "Europe/Paris",
       onTick: () => {
         this.dispatcher.dispatch(new OpenRankedLobbyCommand(), {
           minRank: EloRank.GREATBALL
         })
+      },
+      start: true
+    })
+
+    const rankedLobbyReminderJob = CronJob.from({
+      //cronTime: "0 0 1-21/4 * * *", // every four hours from 1 to 21
+      cronTime: "0 0/1 * * * *", // TEMP
+      timeZone: "Europe/Paris",
+      onTick: () => {
+        this.state.addAnnouncement(`Ranked match is starting in 1 hour !`)
       },
       start: true
     })
