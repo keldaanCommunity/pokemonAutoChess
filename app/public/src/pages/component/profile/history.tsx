@@ -12,6 +12,7 @@ import PokemonFactory from "../../../../../models/pokemon-factory"
 import { computeSynergies } from "../../../../../models/colyseus-models/synergies"
 import "./history.css"
 import { useTranslation } from "react-i18next"
+import {SynergyTriggers} from "../../../../../types/Config"
 
 export default function History(props: { history: IGameRecord[] }) {
   const { t } = useTranslation()
@@ -59,7 +60,7 @@ function getTopSynergies(team: IPokemonRecord[]): [Synergy, number][] {
   )
 
   const topSynergies = [...synergies.entries()]
-    .sort((a, b) => b[1] - a[1])
+    .sort((a, b) => a[1] < SynergyTriggers[a[0]][0] ? 1 : b[1] - a[1])
     .slice(0, 3)
   return topSynergies
 }
