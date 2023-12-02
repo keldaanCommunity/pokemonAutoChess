@@ -595,6 +595,7 @@ export default class GameRoom extends Room<GameState> {
               usr.wins += 1
               if (this.state.lobbyType === LobbyType.RANKED) {
                 usr.booster += 1
+                this.presence.publish("ranked-lobby-winner", player)
               }
             }
 

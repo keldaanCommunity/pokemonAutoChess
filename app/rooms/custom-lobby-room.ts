@@ -19,7 +19,7 @@ import admin from "firebase-admin"
 import { WebhookClient } from "discord.js"
 import { BotV2, IBot } from "../models/mongo-models/bot-v2"
 import { PastebinAPI } from "pastebin-ts/dist/api"
-import { Emotion, Transfer, Title, Role } from "../types"
+import { Emotion, Transfer, Title, Role, IPlayer } from "../types"
 import { nanoid } from "nanoid"
 import { logger } from "../utils/logger"
 import {
@@ -369,6 +369,10 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       }
     )
 
+    this.presence.subscribe("ranked-lobby-winner", (player: IPlayer) => {
+      this.state.addAnnouncement(`${player.name} won the ranked match !`)
+    })
+
     this.initCronJobs()
     this.fetchChat()
     this.fetchLeaderboards()
@@ -510,7 +514,8 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     })
 
     const rankedLobbyJob = CronJob.from({
-      cronTime: "0 0 2-22/4 * * *", // every four hours from 2 to 22
+      //cronTime: "0 0 2-22/4 * * *", // every four hours from 2 to 22
+      cronTime: "0 0/1 * * * *", // TEMP
       timeZone: "Europe/Paris",
       onTick: () => {
         this.dispatcher.dispatch(new OpenRankedLobbyCommand(), {

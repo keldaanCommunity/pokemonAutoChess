@@ -3,14 +3,29 @@ import React from "react"
 import { IPreparationMetadata } from "../../../../../types"
 import { cc } from "../../utils/jsx"
 import "./room-item.css"
-import { MAX_PLAYERS_PER_LOBBY } from "../../../../../types/Config"
+import { EloRankThreshold, MAX_PLAYERS_PER_LOBBY } from "../../../../../types/Config"
 import { useTranslation } from "react-i18next"
+import { useAppSelector } from "../../../hooks"
 
 export default function RoomItem(props: {
   room: RoomAvailable<IPreparationMetadata>
   click: (room: RoomAvailable<IPreparationMetadata>) => Promise<void>
 }) {
   const { t } = useTranslation()
+  const user = useAppSelector((state) => state.lobby.user)
+
+  let canJoin = true, disabledReason = null
+  if(props.room.clients >= MAX_PLAYERS_PER_LOBBY){
+    canJoin = false;
+    disabledReason = t("lobby_full")
+  } else if(props.room.metadata?.gameStarted === true){
+    canJoin = false;
+    disabledReason = t("game_already_started")
+  } else if(props.room.metadata?.minRank != null && (user?.elo ?? 0) < EloRankThreshold[props.room.metadata?.minRank]){
+    canJoin = false;
+    disabledReason = t("min_rank_not_reached")
+  }
+
   return (
     <div className="room-item">
       <span className="room-name">{props.room.metadata?.name}</span>
@@ -43,10 +58,8 @@ export default function RoomItem(props: {
         {props.room.clients}/{MAX_PLAYERS_PER_LOBBY}
       </span>
       <button
-        disabled={
-          props.room.clients >= MAX_PLAYERS_PER_LOBBY ||
-          props.room.metadata?.gameStarted === true
-        }
+        title={disabledReason}
+        disabled={!canJoin}
         className={cc(
           "bubbly",
           props.room.metadata?.password ? "orange" : "green"

@@ -12,7 +12,7 @@ import { BotDifficulty, LobbyType } from "../../types/enum/Game"
 import { pickRandomIn } from "../../utils/random"
 import { logger } from "../../utils/logger"
 import { entries, values } from "../../utils/schemas"
-import { MAX_PLAYERS_PER_LOBBY } from "../../types/Config"
+import { EloRankThreshold, MAX_PLAYERS_PER_LOBBY } from "../../types/Config"
 import { memoryUsage } from "node:process"
 import { FilterQuery } from "mongoose"
 
@@ -56,7 +56,17 @@ export class OnJoinCommand extends Command<
           client.leave()
           return
         }
+
         if (u) {
+          if (
+            this.state.minRank != null &&
+            u.elo < EloRankThreshold[this.state.minRank]
+          ) {
+            client.send(Transfer.KICK)
+            client.leave()
+            return // rank not high enough
+          }
+
           this.state.users.set(
             client.auth.uid,
             new GameUser(

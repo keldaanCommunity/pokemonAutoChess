@@ -2441,5 +2441,8 @@
     "GREATBALL": "Great Ball",
     "ULTRABALL": "Ultra Ball",
     "MASTERBALL": "Master Ball"
-  }
+  },
+  "lobby_full": "Lobby is full",
+  "game_already_started": "Game has already started",
+  "min_rank_not_reached": "Your rank is not high enough to play this ranked match"
 }
