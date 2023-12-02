@@ -1827,7 +1827,9 @@
     "ALCHEMIST": "Alchemist",
     "DENTIST": "Dentist",
     "FISHERMAN": "Fisherman",
-    "CHOSEN_ONE": "Chosen One"
+    "CHOSEN_ONE": "Chosen One",
+    "VANQUISHER": "Win a Ranked match",
+    "OUTSIDER": "Win a Ranked match with 8 players while having the lowest ELO of all"
   },
   "title_description": {
     "NOVICE": "Play your first game",
