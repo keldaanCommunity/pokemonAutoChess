@@ -3,6 +3,7 @@ import { GameUser, IGameUser } from "../../../models/colyseus-models/game-user"
 import { IBot } from "../../../models/mongo-models/bot-v2"
 import { IChatV2 } from "../../../types"
 import { Dungeon } from "../../../types/Config"
+import { LobbyType } from "../../../types/enum/Game"
 
 interface IUserPreparationState {
   users: IGameUser[]
@@ -16,6 +17,7 @@ interface IUserPreparationState {
   selectedMap: Dungeon | "random"
   user: GameUser | undefined
   botsList: IBot[] | null
+  lobbyType: LobbyType
 }
 
 const initialState: IUserPreparationState = {
@@ -29,7 +31,8 @@ const initialState: IUserPreparationState = {
   password: null,
   noElo: false,
   selectedMap: "random",
-  botsList: null
+  botsList: null,
+  lobbyType: LobbyType.NORMAL
 }
 
 export const preparationSlice = createSlice({
@@ -79,6 +82,9 @@ export const preparationSlice = createSlice({
     setNoELO: (state, action: PayloadAction<boolean>) => {
       state.noElo = action.payload
     },
+    setLobbyType: (state, action: PayloadAction<LobbyType>) => {
+      state.lobbyType = action.payload
+    },
     setSelectedMap: (state, action: PayloadAction<Dungeon | "random">) => {
       state.selectedMap = action.payload
     },
@@ -102,6 +108,7 @@ export const {
   setOwnerName,
   setPassword,
   setNoELO,
+  setLobbyType,
   setSelectedMap,
   leavePreparation
 } = preparationSlice.actions

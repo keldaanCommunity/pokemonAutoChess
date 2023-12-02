@@ -523,6 +523,7 @@ export interface IPreparationMetadata {
   noElo: boolean
   type: "preparation"
   gameStarted: boolean
+  minRank: string | null
 }
 
 export interface IGameMetadata {
@@ -599,7 +600,9 @@ export enum Title {
   ARCHEOLOGIST = "ARCHEOLOGIST",
   DENTIST = "DENTIST",
   FISHERMAN = "FISHERMAN",
-  CHOSEN_ONE = "CHOSEN_ONE"
+  CHOSEN_ONE = "CHOSEN_ONE",
+  VANQUISHER = "VANQUISHER",
+  OUTSIDER = "OUTSIDER"
 }
 
 export interface IBoardEvent {

@@ -442,19 +442,19 @@ export const AdditionalPicksStages = [5, 8, 11]
 export const PortalCarouselStages = [10, 20]
 
 export enum EloRank {
-  DIAMOND = "DIAMOND",
-  PLATINUM = "PLATINUM",
-  GOLD = "GOLD",
-  SILVER = "SILVER",
-  BRONZE = "BRONZE"
+  BEGINNER = "BEGINNER",
+  POKEBALL = "POKEBALL",
+  GREATBALL = "GREATBALL",
+  ULTRABALL = "ULTRABALL",
+  MASTERBALL = "MASTERBALL"
 }
 
 export const EloRankThreshold: { [key in EloRank]: number } = {
-  [EloRank.BRONZE]: 0,
-  [EloRank.SILVER]: 900,
-  [EloRank.GOLD]: 1100,
-  [EloRank.PLATINUM]: 1250,
-  [EloRank.DIAMOND]: 1400
+  [EloRank.BEGINNER]: 0,
+  [EloRank.POKEBALL]: 900,
+  [EloRank.GREATBALL]: 1100,
+  [EloRank.ULTRABALL]: 1250,
+  [EloRank.MASTERBALL]: 1400
 }
 
 export const WeatherThreshold: { [weather in Weather]: number } = {

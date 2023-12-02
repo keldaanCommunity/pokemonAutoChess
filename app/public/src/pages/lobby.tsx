@@ -299,7 +299,7 @@ export async function joinLobbyRoom(
           })
 
           room.onMessage(Transfer.ADD_ROOM, ([, room]) => {
-            if (room.name === "room" || room.name === "game") {
+            if (room.name === "preparation" || room.name === "game") {
               dispatch(addRoom(room))
             }
           })

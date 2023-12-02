@@ -1,5 +1,5 @@
 import { Command } from "@colyseus/command"
-import { Client, logger, RoomListingData } from "colyseus"
+import { Client, logger, matchMaker, RoomListingData } from "colyseus"
 import { ArraySchema } from "@colyseus/schema"
 import { EmbedBuilder } from "discord.js"
 import { nanoid } from "nanoid"
@@ -25,12 +25,17 @@ import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
 import { Language } from "../../types/enum/Language"
 import PokemonConfig from "../../models/colyseus-models/pokemon-config"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../models/precomputed"
-import { BoosterRarityProbability, getEmotionCost } from "../../types/Config"
-import { Rarity } from "../../types/enum/Game"
+import {
+  BoosterRarityProbability,
+  EloRank,
+  getEmotionCost
+} from "../../types/Config"
+import { LobbyType, Rarity } from "../../types/enum/Game"
 import { sum } from "../../utils/array"
 import { pickRandomIn } from "../../utils/random"
 import { getPortraitSrc, getAvatarSrc } from "../../public/src/utils"
 import { cleanProfanity } from "../../utils/profanity-filter"
+import translations from "../../public/dist/client/locales/en/translation.json"
 
 export class OnJoinCommand extends Command<
   CustomLobbyRoom,
@@ -1045,5 +1050,21 @@ export class OnBotUploadCommand extends Command<
     } catch (error) {
       logger.error(error)
     }
+  }
+}
+
+export class OpenRankedLobbyCommand extends Command<
+  CustomLobbyRoom,
+  { minRank: EloRank }
+> {
+  execute({ minRank }: { minRank: EloRank }) {
+    logger.info("Creating Ranked Lobby " + minRank)
+    matchMaker.createRoom("preparation", {
+      lobbyType: LobbyType.RANKED,
+      minRank,
+      ownerId: null,
+      roomName: `${translations["elorank"][minRank]} Ranked Match`,
+      autoStartDelayInSeconds: 15 * 60
+    })
   }
 }

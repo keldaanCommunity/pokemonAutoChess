@@ -59,7 +59,7 @@
 //   static async createGame(req: Request, res: Response) {
 //     const name = req.params.name
 //     try {
-//       const room = await matchMaker.createRoom("room", { name: name })
+//       const room = await matchMaker.createRoom("preparation", { name: name })
 //       return res.status(200).json({ id: room.roomId })
 //     } catch (error) {
 //       return res.status(400).json(error)

@@ -14,13 +14,13 @@
   text-shadow: 2px 2px 2px black;
 }
 
-.preparation-menu .elo-elligibility {
+.preparation-menu header p {
   color: white;
   margin-bottom: 0.5em;
   text-shadow: 2px 2px 2px black;
 }
 
-.preparation-menu .elo-elligibility img {
+.preparation-menu header img {
   width: 2em;
   height: 2em;
   margin-right: 0.5em;

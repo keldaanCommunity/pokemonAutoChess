@@ -25,7 +25,7 @@ export class OnJoinCommand extends Command {
         )
 
         this.room.broadcast(Transfer.MESSAGES, {
-          name: "Server",
+          author: "Server",
           payload: `${user.displayName} joined.`,
           avatar: user.avatar,
           time: Date.now()
@@ -41,9 +41,9 @@ export class OnLeaveCommand extends Command {
   execute({ client, consented }) {
     try {
       this.room.broadcast(Transfer.MESSAGES, {
-        name: "Server",
+        author: "Server",
         payload: `${client.auth.displayName} left.`,
-        avatar: `0081/${Emotion.NORMAL}`,
+        avatar: `0037/Teary-Eyed`,
         time: Date.now()
       })
       this.state.users.delete(client.auth.uid)

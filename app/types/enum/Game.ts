@@ -11,6 +11,11 @@ export enum Rarity {
   SPECIAL = "SPECIAL"
 }
 
+export enum LobbyType {
+  NORMAL = "NORMAL",
+  RANKED = "RANKED"
+}
+
 export enum GamePhaseState {
   PICK,
   FIGHT,

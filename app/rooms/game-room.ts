@@ -55,7 +55,7 @@ import { Title, Role } from "../types"
 import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../models/precomputed"
 import BannedUser from "../models/mongo-models/banned-user"
 import { shuffleArray } from "../utils/random"
-import { Rarity } from "../types/enum/Game"
+import { LobbyType, Rarity } from "../types/enum/Game"
 import { MiniGame } from "../core/matter/mini-game"
 import { logger } from "../utils/logger"
 import { computeElo } from "../core/elo"
@@ -87,9 +87,9 @@ export default class GameRoom extends Room<GameState> {
     users: MapSchema<IGameUser>
     preparationId: string
     name: string
-    idToken: string
     noElo: boolean
     selectedMap: DungeonPMDO | "random"
+    lobbyType: LobbyType
     whenReady: (room: GameRoom) => void
   }) {
     logger.trace("create game room")
@@ -107,7 +107,8 @@ export default class GameRoom extends Room<GameState> {
         options.preparationId,
         options.name,
         options.noElo,
-        options.selectedMap
+        options.selectedMap,
+        options.lobbyType
       )
     )
     this.miniGame.create(
@@ -592,6 +593,14 @@ export default class GameRoom extends Room<GameState> {
 
             if (rank === 1) {
               usr.wins += 1
+              if (this.state.lobbyType === LobbyType.RANKED) {
+                usr.booster += 1                
+                player.titles.add(Title.VANQUISHER)
+                if(usr.elo === Math.min(...values(this.state.players).map(p => p.elo)) && humans.length >= 8){
+                  player.titles.add(Title.OUTSIDER)
+                }
+                this.presence.publish("ranked-lobby-winner", player)
+              }
             }
 
             if (usr.level >= 10) {

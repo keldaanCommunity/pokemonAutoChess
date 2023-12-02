@@ -1827,7 +1827,9 @@
     "ALCHEMIST": "Alchemist",
     "DENTIST": "Dentist",
     "FISHERMAN": "Fisherman",
-    "CHOSEN_ONE": "Chosen One"
+    "CHOSEN_ONE": "Chosen One",
+    "VANQUISHER": "Vanquisher",
+    "OUTSIDER": "Outsider"
   },
   "title_description": {
     "NOVICE": "Play your first game",
@@ -1888,7 +1890,9 @@
     "ARCHEOLOGIST": "Decipher the secret message of the Unowns",
     "DENTIST": "Own the angry Arbok",
     "FISHERMAN": "Get a Gyarados",
-    "CHOSEN_ONE": "Max Synergy With Light type in a game"
+    "CHOSEN_ONE": "Max Synergy With Light type in a game",
+    "VANQUISHER": "Win a Ranked match",
+    "OUTSIDER": "Win a Ranked match with 8 players while having the lowest ELO of all"
   },
   "weather": {
     "NEUTRAL": "Calm weather",
@@ -2022,6 +2026,7 @@
   "join": "Join",
   "reconnect": "Reconnect",
   "just_for_fun": "Just for fun",
+  "minimum_rank": "Minimum rank",
   "password_protected": "Private Lobby (password protected)",
   "private": "Private",
   "available_rooms": "Available Rooms",
@@ -2174,6 +2179,7 @@
   "GLHF": "GLHF",
   "not_elligible_elo_hint": "❌Games with bots only are not elligible for ELO gain/loss.",
   "add_bot_or_wait_hint": "Add bots or wait for more players to join your room",
+  "ranked_lobby_hint": "This game will automatically start when full or after 15 minutes.",
   "private_lobby": "Private lobby",
   "change_room_name": "Change room name",
   "add_bot": "Add Bot",
@@ -2432,5 +2438,15 @@
     "BASIC": "Basic",
     "BOT": "Bot",
     "BOT_MANAGER": "Bot Manager"
-  }
+  },
+  "elorank": {
+    "BEGINNER": "Beginner",
+    "POKEBALL": "Poké Ball",
+    "GREATBALL": "Great Ball",
+    "ULTRABALL": "Ultra Ball",
+    "MASTERBALL": "Master Ball"
+  },
+  "lobby_full": "Lobby is full",
+  "game_already_started": "Game has already started",
+  "min_rank_not_reached": "Your rank is not high enough to play this ranked match"
 }
