@@ -1,3 +1,10 @@
+# Introducing Ranked Matches
+
+Ranked matches are lobbies created automatically by the server at a certain time, that require a minimum rank to participate.
+We hope ranked matches will allow the most regular players in the community to meet and get into more competitive lobbies, while also letting beginners spectate high ELO matches.
+
+To begin with, Great Ball tier (ELO > 1100) ranked matches will start every 4 hours. The winner gets an extra booster and a new title. We will collect your feedback to adjust the timing, minimum rank and rewards of these matches on future updates.
+
 # New Pokemons:
 
 - Hoopa
@@ -62,8 +69,6 @@ All berries are eaten when below 50% HP, and heal at least 20HP when eaten:
 - rawst: consumed when being burned or under 50%, + heal 20HP and +10 defense
 - rowap: + heal 20HP
 - salac: + heal 20HP
-
-# Gameplay
 
 # UI
 
