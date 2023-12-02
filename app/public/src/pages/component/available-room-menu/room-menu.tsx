@@ -63,6 +63,7 @@ export default function RoomMenu(props: {
           "preparation",
           {
             lobbyType: LobbyType.NORMAL,
+            idToken: token,
             ownerId: uid,
             roomName: `${lobbyUser?.name ?? user?.displayName}'s room`
           }

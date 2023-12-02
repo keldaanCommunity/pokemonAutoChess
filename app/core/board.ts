@@ -99,11 +99,6 @@ export default class Board {
     return null
   }
 
-  distanceC(x0: number, y0: number, x1: number, y1: number) {
-    // Manhattan distance
-    return Math.abs(x1 - x0) + Math.abs(y1 - y0)
-  }
-
   orientation(
     x0: number,
     y0: number,

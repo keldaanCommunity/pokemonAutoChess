@@ -508,7 +508,7 @@ export default class PokemonState {
         value.team !== pokemon.team &&
         value.isTargettable
       ) {
-        const candidateDistance = distanceC(
+        const candidateDistance = distanceM(
           pokemon.positionX,
           pokemon.positionY,
           x,
@@ -664,7 +664,7 @@ export default class PokemonState {
         value.id !== pokemon.id &&
         value.isTargettable
       ) {
-        const candidateDistance = distanceC(
+        const candidateDistance = distanceM(
           pokemon.positionX,
           pokemon.positionY,
           x,
