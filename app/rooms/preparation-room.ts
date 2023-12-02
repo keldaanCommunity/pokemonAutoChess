@@ -100,7 +100,12 @@ export default class PreparationRoom extends Room<PreparationState> {
 
     if (options.autoStartDelayInSeconds) {
       this.clock.setTimeout(() => {
-        this.dispatcher.dispatch(new OnGameStartRequestCommand())
+        if(this.state.users.size < 2){
+          this.broadcast(Transfer.KICK)
+          this.disconnect()
+        } else {
+          this.dispatcher.dispatch(new OnGameStartRequestCommand())
+        }
       }, options.autoStartDelayInSeconds * 1000)
 
       this.clock.setTimeout(() => {
