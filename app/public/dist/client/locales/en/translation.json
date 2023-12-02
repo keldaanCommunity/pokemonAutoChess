@@ -1828,8 +1828,8 @@
     "DENTIST": "Dentist",
     "FISHERMAN": "Fisherman",
     "CHOSEN_ONE": "Chosen One",
-    "VANQUISHER": "Win a Ranked match",
-    "OUTSIDER": "Win a Ranked match with 8 players while having the lowest ELO of all"
+    "VANQUISHER": "Vanquisher",
+    "OUTSIDER": "Outsider"
   },
   "title_description": {
     "NOVICE": "Play your first game",
@@ -1890,7 +1890,9 @@
     "ARCHEOLOGIST": "Decipher the secret message of the Unowns",
     "DENTIST": "Own the angry Arbok",
     "FISHERMAN": "Get a Gyarados",
-    "CHOSEN_ONE": "Max Synergy With Light type in a game"
+    "CHOSEN_ONE": "Max Synergy With Light type in a game",
+    "VANQUISHER": "Win a Ranked match",
+    "OUTSIDER": "Win a Ranked match with 8 players while having the lowest ELO of all"
   },
   "weather": {
     "NEUTRAL": "Calm weather",
