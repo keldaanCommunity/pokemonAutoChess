@@ -55,7 +55,7 @@ import { Title, Role } from "../types"
 import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../models/precomputed"
 import BannedUser from "../models/mongo-models/banned-user"
 import { shuffleArray } from "../utils/random"
-import { Rarity } from "../types/enum/Game"
+import { LobbyType, Rarity } from "../types/enum/Game"
 import { MiniGame } from "../core/matter/mini-game"
 import { logger } from "../utils/logger"
 import { computeElo } from "../core/elo"
@@ -89,6 +89,7 @@ export default class GameRoom extends Room<GameState> {
     name: string
     noElo: boolean
     selectedMap: DungeonPMDO | "random"
+    lobbyType: LobbyType
     whenReady: (room: GameRoom) => void
   }) {
     logger.trace("create game room")
@@ -106,7 +107,8 @@ export default class GameRoom extends Room<GameState> {
         options.preparationId,
         options.name,
         options.noElo,
-        options.selectedMap
+        options.selectedMap,
+        options.lobbyType
       )
     )
     this.miniGame.create(
@@ -591,6 +593,9 @@ export default class GameRoom extends Room<GameState> {
 
             if (rank === 1) {
               usr.wins += 1
+              if (this.state.lobbyType === LobbyType.RANKED) {
+                usr.booster += 1
+              }
             }
 
             if (usr.level >= 10) {

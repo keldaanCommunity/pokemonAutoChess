@@ -189,6 +189,7 @@ export class OnGameStartRequestCommand extends Command<
             preparationId: this.room.roomId,
             noElo: this.state.noElo,
             selectedMap: this.state.selectedMap,
+            lobbyType: this.state.lobbyType,
             whenReady: (game) => {
               this.room.setGameStarted(true)
               logger.debug("game start", game.roomId)
