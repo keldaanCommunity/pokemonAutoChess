@@ -9876,7 +9876,7 @@ export class Tropius extends Pokemon {
 }
 
 export class Carnivine extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.MONSTER])
+  types = new SetSchema<Synergy>([Synergy.MONSTER, Synergy.GRASS, Synergy.FLORA])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 180
