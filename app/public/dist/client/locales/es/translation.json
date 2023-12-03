@@ -1553,7 +1553,7 @@
     "MISTY_SURGE": "Otorga FAIRY_FIELD a tus FAIRY Pokemon, aumentando su daño en un 20%",
     "PSYCHIC_SURGE": "Otorga PSYCHIC_FIELD a tus Pokémon PSYCHIC, aumentando su daño en un 20%",
     "EEVEE": "Eevee puede evolucionar a una de las 8 Eeveelutions cuando se le da una piedra de sinergia.",
-    "SUDOWOODO": "Pretende ser un árbol y no ataca, sino que gana 2 ATK por segundo (acumulable).\nComienza a atacar cuando la barra de PP está llena. No puede ser SILENCE ni perder PP hasta entonces.",
+    "SUDOWOODO": "Pretende ser un árbol y no ataca, sino que gana [2,4] ATK por segundo (acumulable).\nComienza a atacar cuando la barra de PP está llena. No puede ser SILENCE ni perder PP hasta entonces.",
     "WOBBUFFET": "No se mueve ni ataca hasta que la barra de PP esté llena. No puede ser SILENCE ni perder PP hasta entonces.",
     "DITTO": "Ditto no puede pelear, pero puede transformarse para crear una copia de la forma básica de uno de tus pokemons sobre los que lo sueltas (excepto Único y Eclosionado)",
     "EGG": "Puedes sentir algo moviéndose dentro",

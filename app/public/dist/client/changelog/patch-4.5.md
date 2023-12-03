@@ -42,6 +42,7 @@ To begin with, Great Ball tier (ELO > 1100) ranked matches will start every 4 ho
 - Swinub line: removed Field type, increased HP and Def
 - Shedinja and Ninjack are now considered a Pokemon Duo and no longer in the same family, which means they count for 2 bugs when both on board
 - Shedinja: removed Flying type
+- Buff Sudowoodo: gains 4 attack per second when acting as a tree
 
 # Changes to Synergies
 
