@@ -47,6 +47,10 @@ To begin with, Great Ball tier (ELO > 1100) ranked matches will start every 4 ho
 
 - Flying pokemons can no longer fly away when frozen, asleep or paralyzed
 - Removed Fairy 8 (Moon Force) team-wide charm at the start of the fight
+- Buff Monster:
+    - increased Flinch duration to 3 seconds
+    - add AP scaling on kill
+    - increase Monster 6 bonuses: when knocking down its target, gain 10 Attack, 30% AP and 100 max HP
 
 # Changes to Berries
 

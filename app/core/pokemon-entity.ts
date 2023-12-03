@@ -577,7 +577,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
         flinchChance = 0.5
       }
       if (chance(flinchChance)) {
-        target.status.triggerFlinch(2000)
+        target.status.triggerFlinch(3000)
       }
     }
 
@@ -833,20 +833,23 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       const isPowerTrip = this.effects.has(Effect.POWER_TRIP)
 
       if (isPursuit || isBrutalSwing || isPowerTrip) {
-        let lifeBoost = 0
-        let attackBoost = 0
+        let lifeBoost = 0, attackBoost = 0, apBoost = 0
         if (isPursuit) {
           lifeBoost = 30
           attackBoost = 3
+          apBoost = 10
         } else if (isBrutalSwing) {
           lifeBoost = 60
           attackBoost = 6
+          apBoost = 20
         } else if (isPowerTrip) {
-          lifeBoost = 90
-          attackBoost = 9
+          lifeBoost = 100
+          attackBoost = 10
+          apBoost = 30
         }
         this.addMaxHP(lifeBoost)
         this.addAttack(attackBoost)
+        this.addAbilityPower(apBoost, false)
         this.count.monsterExecutionCount++
       }
     }
