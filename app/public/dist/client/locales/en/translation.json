@@ -1636,7 +1636,8 @@
     "COMFEY": "Comfey cannot hold items. At the start of the fight, the nearest ally with a free item slot wears Comfey and gains all its stats. Comfey casts its ability at the same time than its holder. When its holder is KO, Comfey fights on its own.",
     "TYPHLOSION": "Typhlosion is looking for a REAPER_CLOTH",
     "HISUIAN_TYPHLOSION": "The pokémon inflicts 20% extra damage on a BURN or SILENCE target",
-    "PICKUP": "The pokémon will start with a random item if it's not holding anything"
+    "PICKUP": "The pokémon will start with a random item if it's not holding anything",
+    "MAWILE": "Mawile fools the foes with its docile-looking face. Cast $t(ability.ATTRACT) at the start of the fight."
   },
   "stat": {
     "ATK": "Attack",
