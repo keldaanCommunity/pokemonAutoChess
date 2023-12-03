@@ -418,7 +418,7 @@ export interface IPokemonEntity {
   addAttack(atk: number): void
   addAttackSpeed(as: number): void
   addMaxHP(life: number): void
-  addShield(shieldBonus: number, pokemon: IPokemonEntity): void
+  addShield(shieldBonus: number, pokemon: IPokemonEntity, apBoost?: boolean): void
   addDefense(value: number, apBoost?: boolean): void
   addSpecialDefense(value: number, apBoost?: boolean): void
   addCritChance(value: number): void
