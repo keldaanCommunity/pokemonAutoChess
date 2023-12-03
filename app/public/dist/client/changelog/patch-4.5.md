@@ -43,6 +43,7 @@ To begin with, Great Ball tier (ELO > 1100) ranked matches will start every 4 ho
 - Shedinja and Ninjack are now considered a Pokemon Duo and no longer in the same family, which means they count for 2 bugs when both on board
 - Shedinja: removed Flying type
 - Buff Sudowoodo: gains 4 attack per second when acting as a tree
+- Buff Nightmare (Ghastly): Any opponent asleep or flinch takes 50 special damage
 
 # Changes to Synergies
 

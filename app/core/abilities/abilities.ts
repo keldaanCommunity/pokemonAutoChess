@@ -2007,9 +2007,12 @@ export class NightmareStrategy extends AbilityStrategy {
       pokemon.stars === 3 ? 8000 : pokemon.stars === 2 ? 4000 : 2000
     duration = Math.round(duration * (1 + pokemon.ap / 200))
 
-    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
-      if (value && pokemon.team != value.team) {
-        value.status.triggerPoison(duration, value, pokemon)
+    board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
+      if (enemy && pokemon.team != enemy.team) {
+        enemy.status.triggerPoison(duration, enemy, pokemon)
+        if(enemy.status.flinch || enemy.status.sleep){
+          enemy.handleSpecialDamage(50, board, AttackType.SPECIAL, pokemon, crit, true)
+        }
       }
     })
   }
