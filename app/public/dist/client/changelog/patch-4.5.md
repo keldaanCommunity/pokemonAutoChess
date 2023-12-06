@@ -44,6 +44,8 @@ To begin with, Great Ball tier (ELO > 1100) ranked matches will start every 4 ho
 - Shedinja: removed Flying type
 - Buff Sudowoodo: gains 4 attack per second when acting as a tree
 - Buff Nightmare (Ghastly): Any opponent asleep or flinch takes 50 special damage
+- Buff Hippopotas: add Rock synergy
+- Buff Hippodown: add Rock synergy, Attack ~~19~~ 22
 
 # Changes to Synergies
 

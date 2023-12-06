@@ -10587,7 +10587,7 @@ export class Kricketune extends Pokemon {
 }
 
 export class Hippopotas extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GROUND])
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.ROCK])
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.HIPPODOWN
@@ -10604,11 +10604,11 @@ export class Hippopotas extends Pokemon {
 }
 
 export class Hippodown extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GROUND])
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.ROCK])
   rarity = Rarity.EPIC
   stars = 2
   hp = 270
-  atk = 19
+  atk = 22
   def = 7
   speDef = 3
   maxPP = 100
