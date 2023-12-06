@@ -9941,8 +9941,8 @@ export class Clawitzer extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.SOUND])
   rarity = Rarity.RARE
   stars = 2
-  hp = 140
-  atk = 15
+  hp = 150
+  atk = 19
   def = 3
   speDef = 2
   maxPP = 200

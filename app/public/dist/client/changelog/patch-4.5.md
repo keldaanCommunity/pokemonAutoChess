@@ -44,15 +44,16 @@ To begin with, Great Ball tier (ELO > 1100) ranked matches will start every 4 ho
 - Shedinja: removed Flying type
 - Buff Sudowoodo: gains 4 attack per second when acting as a tree
 - Buff Nightmare (Ghastly): Any opponent asleep or flinch takes 50 special damage
+- Buff Clawitzer: HP ~~140~~ 150, Attack ~~15~~ 19, Water pulse damage ~~50/100/150~~ 75/150
 
 # Changes to Synergies
 
 - Flying pokemons can no longer fly away when frozen, asleep or paralyzed
 - Removed Fairy 8 (Moon Force) team-wide charm at the start of the fight
 - Buff Monster:
-    - increased Flinch duration to 3 seconds
-    - add AP scaling on kill
-    - increase Monster 6 bonuses: when knocking down its target, gain 10 Attack, 30% AP and 100 max HP
+  - increased Flinch duration to 3 seconds
+  - add AP scaling on kill
+  - increase Monster 6 bonuses: when knocking down its target, gain 10 Attack, 30% AP and 100 max HP
 
 # Changes to Berries
 
