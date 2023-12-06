@@ -5327,9 +5327,21 @@ export class Mawile extends Pokemon {
   skill = Ability.BITE
   passive = Passive.MAWILE
   attackSprite = AttackSprite.FIGHTING_MELEE
-  afterSimulationStart({ entity, simulation }: { entity: IPokemonEntity, simulation: Simulation }){
+  afterSimulationStart({
+    entity,
+    simulation
+  }: {
+    entity: IPokemonEntity
+    simulation: Simulation
+  }) {
     let mawile = entity as PokemonEntity
-    AbilityStrategies[Ability.ATTRACT].process(mawile, mawile.state, simulation.board, mawile, false)
+    AbilityStrategies[Ability.ATTRACT].process(
+      mawile,
+      mawile.state,
+      simulation.board,
+      mawile,
+      false
+    )
   }
 }
 
@@ -7769,11 +7781,11 @@ export class Bronzor extends Pokemon {
   rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.BRONZONG
-  hp = 90
+  hp = 100
   atk = 5
-  def = 5
+  def = 6
   speDef = 3
-  maxPP = 95
+  maxPP = 85
   range = 1
   skill = Ability.DEFENSE_CURL
   additional = true
@@ -7792,7 +7804,7 @@ export class Bronzong extends Pokemon {
   atk = 11
   def = 9
   speDef = 7
-  maxPP = 95
+  maxPP = 85
   range = 1
   skill = Ability.DEFENSE_CURL
   additional = true
@@ -9876,7 +9888,11 @@ export class Tropius extends Pokemon {
 }
 
 export class Carnivine extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.MONSTER, Synergy.GRASS, Synergy.FLORA])
+  types = new SetSchema<Synergy>([
+    Synergy.MONSTER,
+    Synergy.GRASS,
+    Synergy.FLORA
+  ])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 180
