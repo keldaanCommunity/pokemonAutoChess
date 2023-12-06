@@ -1,5 +1,11 @@
 import { Berries, Item } from "../types/enum/Item"
-import { Orientation, PokemonActionState, Stat, Team } from "../types/enum/Game"
+import {
+  BoardEvent,
+  Orientation,
+  PokemonActionState,
+  Stat,
+  Team
+} from "../types/enum/Game"
 import MovingState from "./moving-state"
 import AttackingState from "./attacking-state"
 import { nanoid } from "nanoid"
@@ -520,11 +526,6 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
     trueDamage: number
   }) {
     // Item effects on hit
-
-    if (target && target.items.has(Item.SMOKE_BALL)) {
-      this.status.triggerParalysis(5000, this)
-    }
-
     if (this.items.has(Item.UPGRADE)) {
       this.addAttackSpeed(5)
       this.count.upgradeCount++
@@ -702,6 +703,34 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       }
     }
 
+    if (
+      this.items.has(Item.SMOKE_BALL) &&
+      this.life > 0 &&
+      this.life < 0.33 * this.hp
+    ) {
+      const cells = board.getAdjacentCells(this.positionX, this.positionY)
+      cells.forEach((cell) => {
+        const index = cell.y * board.columns + cell.x
+        if (board.effects[index] !== Effect.GAS) {
+          board.effects[index] = Effect.GAS
+          this.simulation.room.broadcast(Transfer.BOARD_EVENT, {
+            simulationId: this.simulation.id,
+            type: BoardEvent.GAS,
+            x: cell.x,
+            y: cell.y
+          })
+        }
+        if (cell.value) {
+          cell.value.effects.add(Effect.GAS)
+          if (cell.value.team !== this.team) {
+            cell.value.status.triggerParalysis(3000, cell.value)
+          }
+        }
+      })
+      this.items.delete(Item.SMOKE_BALL)
+      this.flyAway(board)
+    }
+
     // Flying protection
     if (
       this.flyingProtection > 0 &&
@@ -713,9 +742,11 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
 
       if (this.effects.has(Effect.TAILWIND) && pcLife < 0.2) {
         this.flyAway(board)
+        this.flyingProtection--
       } else if (this.effects.has(Effect.FEATHER_DANCE) && pcLife < 0.2) {
         this.status.triggerProtect(1500)
         this.flyAway(board)
+        this.flyingProtection--
       } else if (this.effects.has(Effect.MAX_AIRSTREAM)) {
         if (
           (this.flyingProtection === 2 && pcLife < 0.5) ||
@@ -723,6 +754,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
         ) {
           this.status.triggerProtect(2000)
           this.flyAway(board)
+          this.flyingProtection--
         }
       } else if (this.effects.has(Effect.MAX_GUARD)) {
         if (
@@ -737,6 +769,7 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
             }
           })
           this.flyAway(board)
+          this.flyingProtection--
         }
       }
     }
@@ -833,7 +866,9 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       const isPowerTrip = this.effects.has(Effect.POWER_TRIP)
 
       if (isPursuit || isBrutalSwing || isPowerTrip) {
-        let lifeBoost = 0, attackBoost = 0, apBoost = 0
+        let lifeBoost = 0,
+          attackBoost = 0,
+          apBoost = 0
         if (isPursuit) {
           lifeBoost = 30
           attackBoost = 3
@@ -993,7 +1028,6 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
 
   flyAway(board: Board) {
     const flyAwayCell = board.getFlyAwayCell(this.positionX, this.positionY)
-    this.flyingProtection--
     if (flyAwayCell) {
       this.moveTo(flyAwayCell.x, flyAwayCell.y, board)
     }

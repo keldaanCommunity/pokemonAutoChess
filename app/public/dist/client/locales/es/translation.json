@@ -1516,7 +1516,7 @@
     "STAR_DUST": "Después de lanzar la habilidad, gana el 60 % del PP máximo como SHIELD",
     "DELTA_ORB": "El poseedor y los aliados adyacentes en la misma fila obtienen 4 PP adicionales por golpe",
     "MANA_SCARF": "Los ataques del titular restauran 8 PP adicionales",
-    "SMOKE_BALL": "Los enemigos que atacan al portador quedan PARALYSIS durante 5 segundos, lo que reduce su ATK_SPEED en un 40 %.",
+    "SMOKE_BALL": "Una vez que esté por debajo del 33% de HP máximo, suelta la bola de humo y salta a una celda de distancia. Cada enemigo adyacente está PARALYSIS durante 3 segundos, y el humo reduce la precisión de todos los Pokémon dentro en un 50%.",
     "XRAY_VISION": "+50% ATK_SPEED. Los ataques del poseedor ya no pueden fallar.",
     "RAZOR_FANG": "+100% CRIT_DAMAGE. Los golpes críticos aplican ARMOR_REDUCTION durante 4 segundos.",
     "LEFTOVERS": "Durante el combate, el ataque del poseedor cura a los aliados adyacentes en la misma fila por un 5% de su HP máximo.",

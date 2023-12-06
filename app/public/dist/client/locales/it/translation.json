@@ -1334,7 +1334,7 @@
     "STAR_DUST": "Dopo aver lanciato l'abilità, ottieni il 60% del PP massimo come SHIELD",
     "DELTA_ORB": "Il possessore e gli alleati adiacenti nella stessa fila ottengono 4 PP bonus per colpo",
     "MANA_SCARF": "Gli attacchi del possessore ripristinano 8 PP aggiuntivi",
-    "SMOKE_BALL": "I nemici che attaccano il possessore sono PARALYSIS per 5 secondi, riducendo la loro ATK_SPEED del 40%",
+    "SMOKE_BALL": "Una volta sotto il 33% degli HP massimi, lascia cadere la palla di fumo e salta in una cella di distanza. Ogni nemico adiacente viene PARALYSIS per 3 secondi e il fumo riduce la precisione di tutti i Pokemon all'interno del 50%.",
     "XRAY_VISION": "+50% ATK_SPEED. Gli attacchi del titolare non possono più fallire.",
     "RAZOR_FANG": "+100% CRIT_DAMAGE. I colpi critici applicano ARMOR_REDUCTION per 4 secondi.",
     "LEFTOVERS": "Durante il combattimento, l'attacco del possessore cura gli alleati adiacenti sulla stessa fila per il 5% dei loro HP massimi",
