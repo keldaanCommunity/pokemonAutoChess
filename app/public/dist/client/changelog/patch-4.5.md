@@ -94,3 +94,4 @@ All berries are eaten when below 50% HP, and heal at least 20HP when eaten:
 - New title: Vanquisher: Win a Ranked match
 - New title: Outsider: Win a Ranked match with 8 players while having the lowest ELO of all
 - Leaderboards are now recalculated server-side every 10 minutes
+- Berries are now longer counted as item components in Bot Builder
