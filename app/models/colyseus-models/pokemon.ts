@@ -10292,7 +10292,7 @@ export class Finneon extends Pokemon {
   rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.LUMINEON
-  hp = 75
+  hp = 80
   atk = 7
   def = 2
   speDef = 2
@@ -10308,7 +10308,7 @@ export class Lumineon extends Pokemon {
   rarity = Rarity.RARE
   stars = 2
   hp = 180
-  atk = 16
+  atk = 19
   def = 4
   speDef = 4
   maxPP = 85
