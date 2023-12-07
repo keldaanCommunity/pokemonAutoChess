@@ -932,7 +932,9 @@
     "HISUIAN_TYPHLOSION": "Typhlosion de Hisui",
     "LILLIPUP": "Ponchiot",
     "HERDIER": "Ponchien",
-    "STOUTLAND": "Mastouffe"
+    "STOUTLAND": "Mastouffe",
+    "ZIGZAGOON": "Zigzaton",
+    "LINOONE": "Linéon"
   },
   "ability_description": {
     "SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés",
@@ -1181,7 +1183,11 @@
     "VINE_WHIP": "Inflige 100 SPECIAL, et cause FLINCH à la cible et aux adversaires adjacents pendant 3 secondes",
     "BODY_SLAM": "Inflige [30,SP]% des HP max du lanceur en SPECIAL",
     "BARB_BARRAGE": "Plonge au milieu de l'équipe adverse, infligeant [15,30,60,SP] SPECIAL et POISON à tous les ennemis adjacents pendant 3 secondes",
-    "INFERNAL_PARADE": "Envoie une Roue de Feu en boomerang, ayant 50% de chance de BURN pendant 3 secondes et infligeant 2 fois [60,SP] SPECIAL à tous les pokémons adverses touchés."
+    "MAGIC_POWDER": "Gagne [10,20,40,SP] SHIELD et SILENCE les ennemis adjacents pendant [2,4,6] secondes",
+    "INFERNAL_PARADE": "Envoie une Roue de Feu en boomerang, ayant 50% de chance de BURN pendant 3 secondes et infligeant 2 fois [60,SP] SPECIAL à tous les pokémons adverses touchés.",
+    "RETALIATE": "Inflige [15,30,60,SP] SPECIAL à la cible + [5,10,15,SP] SPECIAL additionels par allié KO",
+    "SLASH": "Inflige [10,20,40,SP] SPECIAL avec [30,60,90]% de CRIT_CHANCE augmentée",
+    "OUTRAGE": "Le pokémon est CONFUSION pendant 2 secondes et inflige [2,3,4,SP]x ATK en SPECIAL à la cible et aux ennemis adjacents"
   },
   "effect": {
     "INGRAIN": "Enraciné",
@@ -1396,6 +1402,7 @@
     "WINDY": "+10% de chances d'esquiver (+20% si FLYING)",
     "NIGHT": "+20% CRIT_CHANCE\n+30 % de durée de SLEEP",
     "HYDRATATION": "La synergie GRASS soigne 5 HP supplémentaires par seconde sous la RAIN",
+    "POISON_GAS": "Inflige POISON chaque seconde",
     "SHINING_RAY": "Donne RUNE_PROTECT pendant 6 secondes",
     "LIGHT_PULSE": "Donne également +10 PP par seconde",
     "ETERNAL_LIGHT": "Augmente également la AP et l'ATK de 30%",
