@@ -121,50 +121,12 @@ export default class AttackingState extends PokemonState {
         pokemon,
         target
       )
-
-      let physicalDamage = pokemon.atk
+      
+      let damage = pokemon.atk
+      let physicalDamage = 0
       let specialDamage = 0
       let trueDamage = 0
       let totalTakenDamage = 0
-
-      if (pokemon.items.has(Item.FIRE_GEM)) {
-        physicalDamage = Math.round(physicalDamage + target.hp * 0.08)
-      }
-
-      if (pokemon.attackType === AttackType.SPECIAL) {
-        specialDamage = Math.ceil(physicalDamage * (1 + pokemon.ap / 100))
-        physicalDamage = 0
-      }
-
-      if (pokemon.passive === Passive.SPOT_PANDA && target.status.confusion) {
-        specialDamage = Math.ceil(physicalDamage * (1 + pokemon.ap / 100))
-      }
-
-      let isAttackSuccessful = true
-      let dodgeChance = target.dodge
-      if (pokemon.effects.has(Effect.GAS)) {
-        dodgeChance += 0.5
-      }
-      dodgeChance = max(0.9)(dodgeChance)
-
-      if (
-        chance(dodgeChance) &&
-        !pokemon.items.has(Item.XRAY_VISION) &&
-        !pokemon.effects.has(Effect.LOCK_ON) &&
-        !target.status.paralysis &&
-        !target.status.sleep &&
-        !target.status.freeze
-      ) {
-        isAttackSuccessful = false
-        physicalDamage = 0
-        specialDamage = 0
-        target.count.dodgeCount += 1
-      }
-      if (target.status.protect) {
-        isAttackSuccessful = false
-        physicalDamage = 0
-        specialDamage = 0
-      }
 
       if (Math.random() * 100 < pokemon.critChance) {
         pokemon.onCritical({ target, board })
@@ -177,8 +139,20 @@ export default class AttackingState extends PokemonState {
           } else if (target.effects.has(Effect.DIAMOND_STORM)) {
             opponentCritDamage -= 0.7
           }
-          physicalDamage = Math.round(pokemon.atk * opponentCritDamage)
+          damage = Math.round(damage * opponentCritDamage)
         }
+      }
+
+      if (pokemon.items.has(Item.FIRE_GEM)) {
+        damage = Math.round(damage + target.hp * 0.08)
+      }
+
+      if (pokemon.attackType === AttackType.SPECIAL) {
+        damage = Math.ceil(damage * (1 + pokemon.ap / 100))
+      }
+
+      if (pokemon.passive === Passive.SPOT_PANDA && target.status.confusion) {
+        damage = Math.ceil(damage * (1 + pokemon.ap / 100))
       }
 
       let trueDamagePart = 0
@@ -202,10 +176,34 @@ export default class AttackingState extends PokemonState {
         pokemon.effects.delete(Effect.LOCK_ON)
       }
 
+      let isAttackSuccessful = true
+      let dodgeChance = target.dodge
+      if (pokemon.effects.has(Effect.GAS)) {
+        dodgeChance += 0.5
+      }
+      dodgeChance = max(0.9)(dodgeChance)
+
+      if (
+        chance(dodgeChance) &&
+        !pokemon.items.has(Item.XRAY_VISION) &&
+        !pokemon.effects.has(Effect.LOCK_ON) &&
+        !target.status.paralysis &&
+        !target.status.sleep &&
+        !target.status.freeze
+      ) {
+        isAttackSuccessful = false
+        damage = 0
+        target.count.dodgeCount += 1
+      }
+      if (target.status.protect) {
+        isAttackSuccessful = false
+        damage = 0
+      }
+
       if (trueDamagePart > 0) {
         // Apply true damage part
-        trueDamage = Math.ceil(physicalDamage * trueDamagePart)
-        physicalDamage = min(0)(physicalDamage * (1 - trueDamagePart))
+        trueDamage = Math.ceil(damage * trueDamagePart)
+        damage = min(0)(damage * (1 - trueDamagePart))
 
         const { takenDamage } = target.handleDamage({
           damage: trueDamage,
@@ -215,6 +213,12 @@ export default class AttackingState extends PokemonState {
           shouldTargetGainMana: true
         })
         totalTakenDamage += takenDamage
+      }
+
+      if (pokemon.attackType === AttackType.SPECIAL || (pokemon.passive === Passive.SPOT_PANDA && target.status.confusion)) {
+        specialDamage = damage
+      } else {
+        physicalDamage = damage
       }
 
       if (physicalDamage > 0) {
