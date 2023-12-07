@@ -37,22 +37,27 @@ To begin with, Great Ball tier (ELO > 1100) ranked matches will start every 4 ho
 - Revert Gliscor to its original stats: HP 170, Attack 18
 - Change Hatterene line ability: Magic Powder: gain 10/20/40 shield and silence adjacent enemies for 2/4/6 seconds
 - Buff Cyndaquil ability Wheel of Fire: Shoot a returning Flame Wheel, dealing twice 15/25/45 special damage to all enemy Pokémon hit
-- Nerf Cyndaquil mana ~~80~~ 100
+- Nerf Cyndaquil PP ~~80~~ 100
 - Nerf Aerial Ace (Yanma): ~~30/60/90~~ 25/50/100 true damage
 - Swinub line: removed Field type, increased HP and Def
 - Shedinja and Ninjack are now considered a Pokemon Duo and no longer in the same family, which means they count for 2 bugs when both on board
 - Shedinja: removed Flying type
 - Buff Sudowoodo: gains 4 attack per second when acting as a tree
 - Buff Nightmare (Ghastly): Any opponent asleep or flinch takes 50 special damage
+- Buff Clawitzer: HP ~~140~~ 150, Attack ~~15~~ 19, Water pulse damage ~~50/100/150~~ 75/150
+- Buff Bronzor: HP ~~90~~ 100, Def ~~5~~ 6, PP ~~95~~ 85
+- Buff Fineon: HP ~~75~~ 80
+- Buff Lumineon: Attack ~~16~~ 19
+- Buff Aqua Ring: now clears negative status
 
 # Changes to Synergies
 
 - Flying pokemons can no longer fly away when frozen, asleep or paralyzed
 - Removed Fairy 8 (Moon Force) team-wide charm at the start of the fight
 - Buff Monster:
-    - increased Flinch duration to 3 seconds
-    - add AP scaling on kill
-    - increase Monster 6 bonuses: when knocking down its target, gain 10 Attack, 30% AP and 100 max HP
+  - increased Flinch duration to 3 seconds
+  - add AP scaling on kill
+  - increase Monster 6 bonuses: when knocking down its target, gain 10 Attack, 30% AP and 100 max HP
 
 # Changes to Berries
 
