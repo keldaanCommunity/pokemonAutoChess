@@ -2285,5 +2285,24 @@
   "select_map": "Choisir l'arène de combat pour cette partie",
   "map": {
     "random": "Zone aléatoire"
-  }
+  },
+  "held_items": "Objets portés",
+  "by_average_held_items": "par nb d'objets portés",
+  "role": {
+    "ADMIN": "Créateur",
+    "MODERATOR": "Modo",
+    "BASIC": "Basique",
+    "BOT": "Bot",
+    "BOT_MANAGER": "Gérant des Bots"
+  },
+  "elorank": {
+    "BEGINNER": "Débutant",
+    "POKEBALL": "Pokéball",
+    "GREATBALL": "Superball",
+    "ULTRABALL": "Hyperball",
+    "MASTERBALL": "Masterball"
+  },
+  "lobby_full": "Le lobby est complet",
+  "game_already_started": "La partie a déjà commencé",
+  "min_rank_not_reached": "Votre rang n'est pas assez élevé pour jouer ce match classé"
 }
