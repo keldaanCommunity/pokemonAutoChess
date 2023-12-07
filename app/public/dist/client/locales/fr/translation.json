@@ -1506,7 +1506,7 @@
     "STAR_DUST": "Après avoir lancé la capacité, gagne 60% des PP max en tant que SHIELD",
     "DELTA_ORB": "Le porteur et les alliés adjacents dans la même ligne gagnent 4 PP bonus par coup",
     "MANA_SCARF": "Les attaques du porteur restaurent 8 PP supplémentaires",
-    "SMOKE_BALL": "Les ennemis attaquant le porteur sont PARALYSIS pendant 5 secondes, réduisant leur ATK_SPEED de 40 %",
+    "SMOKE_BALL": "Une fois sous les 33% HP max, lâche la boule de fumée et saute dans une cellule plus loin. Chaque ennemi adjacent est PARALYSIS pendant 3 secondes, et la fumée réduit la précision de tous les pokémons à l'intérieur de 50 %.",
     "XRAY_VISION": "+50 % ATK_SPEED. Les attaques du porteur ne peuvent plus manquer.",
     "RAZOR_FANG": "+100% CRIT_DAMAGE. Les coups critiques appliquent ARMOR_REDUCTION pendant 4 secondes.",
     "LEFTOVERS": "Pendant le combat, l'attaque du porteur soigne les alliés adjacents sur la même ligne pour 5% de leurs HP max",

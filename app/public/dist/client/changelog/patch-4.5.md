@@ -59,7 +59,9 @@ To begin with, Great Ball tier (ELO > 1100) ranked matches will start every 4 ho
   - add AP scaling on kill
   - increase Monster 6 bonuses: when knocking down its target, gain 10 Attack, 30% AP and 100 max HP
 
-# Changes to Berries
+# Changes to Items
+
+Smoke ball has been reworked to actually act like a smoke ball: Once below 33% max HP, drop the smoke ball and jump to a cell away. Every adjacent enemy is paralysed for 3 seconds, and the smoke reduce precision of all pokemons inside by 50%.
 
 All berries are eaten when below 50% HP, and heal at least 20HP when eaten:
 

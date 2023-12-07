@@ -1518,7 +1518,7 @@
     "STAR_DUST": "After casting ability, gain 60% of max PP as SHIELD",
     "DELTA_ORB": "Holder and adjacent allies in the same row gain 4 bonus PP per hit",
     "MANA_SCARF": "The holder attacks restore 8 additional PP",
-    "SMOKE_BALL": "Enemies attacking the holder are PARALYSIS for 5 seconds, reducing their ATK_SPEED by 40%",
+    "SMOKE_BALL": "Once below 33% max HP, drop the smoke ball and jump to a cell away. Every adjacent enemy is PARALYSIS for 3 seconds, and the smoke reduce the precision of all pokemons inside by 50%.",
     "XRAY_VISION": "+50% ATK_SPEED. The holder attacks can no longer miss.",
     "RAZOR_FANG": "+100% CRIT_DAMAGE. Critical hits apply ARMOR_REDUCTION for 4 seconds.",
     "LEFTOVERS": "During the combat, the holder attack heals adjacent allies on the same row for 5% of their max HP",
