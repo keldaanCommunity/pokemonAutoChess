@@ -708,9 +708,11 @@ export default class Status extends Schema implements IStatus {
   }
 
   triggerFlinch(timer: number) {
-    this.flinch = true
-    if (timer > this.flinchCooldown) {
-      this.flinchCooldown = timer
+    if (!this.runeProtect) {
+      this.flinch = true
+      if (timer > this.flinchCooldown) {
+        this.flinchCooldown = timer
+      }
     }
   }
 
