@@ -121,7 +121,7 @@ export default class AttackingState extends PokemonState {
         pokemon,
         target
       )
-      
+
       let damage = pokemon.atk
       let physicalDamage = 0
       let specialDamage = 0
@@ -215,10 +215,14 @@ export default class AttackingState extends PokemonState {
         totalTakenDamage += takenDamage
       }
 
-      if (pokemon.attackType === AttackType.SPECIAL || (pokemon.passive === Passive.SPOT_PANDA && target.status.confusion)) {
+      if (pokemon.attackType === AttackType.SPECIAL) {
         specialDamage = damage
       } else {
         physicalDamage = damage
+      }
+
+      if (pokemon.passive === Passive.SPOT_PANDA && target.status.confusion) {
+        specialDamage += 1 * damage * (1 + pokemon.ap / 100)
       }
 
       if (physicalDamage > 0) {
