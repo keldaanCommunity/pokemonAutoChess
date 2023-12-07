@@ -263,7 +263,11 @@
     "FLORAL_HEALING": "Soin Floral",
     "VINE_WHIP": "Fouet Lianes",
     "BARB_BARRAGE": "Multitoxik",
-    "INFERNAL_PARADE": "Cortège Funèbre"
+    "INFERNAL_PARADE": "Cortège Funèbre",
+    "MAGIC_POWDER": "Poudre Magique",
+    "RETALIATE": "Vengeance",
+    "SLASH": "Tranche",
+    "OUTRAGE": "Colère"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
