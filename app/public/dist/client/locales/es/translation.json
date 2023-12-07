@@ -1143,7 +1143,7 @@
     "WHIRLPOOL": "Fija al enemigo más lejano y desata una lluvia de 4 remolinos hacia él. Cada uno inflige [125,SP] % de ATK PHYSICAL al primer enemigo golpeado.",
     "SMOKE_SCREEN": "Se esconde bajo tierera y reaparece en medio del equipo enemigo, causando [10,20,40,SP] de SPECIAL, dejandolo BURN y ARMOR_REDUCTION a todas las unidades adyacentes durante 2 segundos.",
     "PRESENT": "Puede infligir [80,SP], [150,SP], [300,SP] SPECIAL o curar 80 HP al objetivo",
-"LEAF_BLADE": "El siguiente ataque es un ataque crítico asegurado que inflige [100,SP]% de ATK como SPECIAL",
+    "LEAF_BLADE": "El siguiente ataque es un ataque crítico asegurado que inflige [100,SP]% de ATK como SPECIAL",
     "ANCHOR_SHOT": "Agarra al pokemon mas lejano para infligirle [20,40,80,SP] de SPECIAL",
     "PSYCHIC": "El objetivo es golpeado por n fuerte golpe telequinético, causandole [40,80,120,SP] de SPECIAL mientras reduce su SPE_DEF en [1,2,3,SP]",
     "MAGNET_RISE": "Otorga PROTECT a [2,4,6] aliados adyacentes por 2 segundos",
@@ -1645,7 +1645,7 @@
     "PARALYSIS": "Reduce la ATK_SPEED en un 40%",
     "ARMOR_REDUCTION": "Reduce la DEF y la SPE_DEF en un 50%",
     "CHARM": "Impide atacar al objetivo y obliga a acercarse a él.",
-    "FLINCH": "El daño entrante atraviesa SHIELD"
+    "FLINCH": "El daño entrante atraviesa SHIELD",
     "RUNE_PROTECT": "Protege de alteraciones de estado",
     "ELECTRIC_FIELD": "Aumenta el daño infligido en un 20% (solo ELECTRIC)",
     "PSYCHIC_FIELD": "Aumenta el daño infligido en un 20% (solo PSYCHIC)",
