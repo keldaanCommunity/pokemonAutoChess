@@ -9,7 +9,7 @@ import {
   PortalCarouselStages
 } from "../../../../../types/Config"
 import { Rarity } from "../../../../../types/enum/Game"
-import { BasicItems, Item } from "../../../../../types/enum/Item"
+import { BasicItems, Berries, Item } from "../../../../../types/enum/Item"
 import { PkmIndex, Pkm, PkmDuos } from "../../../../../types/enum/Pokemon"
 import { logger } from "../../../../../utils/logger"
 import { clamp, min } from "../../../../../utils/number"
@@ -151,7 +151,8 @@ export function getNbComponentsOnBoard(board: IDetailledPokemon[]): number {
     .flatMap((pkm) => pkm.items)
     .reduce(
       (nbComponents: number, item: Item) =>
-        nbComponents + (BasicItems.includes(item) ? 1 : 2),
+        nbComponents +
+        (Berries.includes(item) ? 0 : BasicItems.includes(item) ? 1 : 2),
       0
     )
 }

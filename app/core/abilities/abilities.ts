@@ -2010,8 +2010,15 @@ export class NightmareStrategy extends AbilityStrategy {
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
       if (enemy && pokemon.team != enemy.team) {
         enemy.status.triggerPoison(duration, enemy, pokemon)
-        if(enemy.status.flinch || enemy.status.sleep){
-          enemy.handleSpecialDamage(50, board, AttackType.SPECIAL, pokemon, crit, true)
+        if (enemy.status.flinch || enemy.status.sleep) {
+          enemy.handleSpecialDamage(
+            50,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit,
+            true
+          )
         }
       }
     })
@@ -5524,6 +5531,7 @@ export class WaterPulseStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    const damage = [75, 150][pokemon.stars - 1] ?? 75
     board
       .getAdjacentCells(target.positionX, target.positionY)
       .map((v) => v.value)
@@ -5533,7 +5541,7 @@ export class WaterPulseStrategy extends AbilityStrategy {
         if (v) {
           v.status.triggerConfusion(2000, v)
           v.handleSpecialDamage(
-            pokemon.stars === 3 ? 150 : pokemon.stars === 2 ? 100 : 50,
+            damage,
             board,
             AttackType.SPECIAL,
             pokemon,
@@ -5775,6 +5783,7 @@ export class AquaRingStrategy extends AbilityStrategy {
 
       cells.forEach((cell) => {
         if (cell.value && cell.value.team === pokemon.team) {
+          cell.value.status.clearNegativeStatus()
           cell.value.handleHeal(
             pokemon.stars === 3 ? 50 : pokemon.stars === 2 ? 30 : 20,
             pokemon,
