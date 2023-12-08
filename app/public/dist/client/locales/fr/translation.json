@@ -263,7 +263,11 @@
     "FLORAL_HEALING": "Soin Floral",
     "VINE_WHIP": "Fouet Lianes",
     "BARB_BARRAGE": "Multitoxik",
-    "INFERNAL_PARADE": "Cortège Funèbre"
+    "INFERNAL_PARADE": "Cortège Funèbre",
+    "MAGIC_POWDER": "Poudre Magique",
+    "RETALIATE": "Vengeance",
+    "SLASH": "Tranche",
+    "OUTRAGE": "Colère"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -928,7 +932,9 @@
     "HISUIAN_TYPHLOSION": "Typhlosion de Hisui",
     "LILLIPUP": "Ponchiot",
     "HERDIER": "Ponchien",
-    "STOUTLAND": "Mastouffe"
+    "STOUTLAND": "Mastouffe",
+    "ZIGZAGOON": "Zigzaton",
+    "LINOONE": "Linéon"
   },
   "ability_description": {
     "SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés",
@@ -1177,7 +1183,11 @@
     "VINE_WHIP": "Inflige 100 SPECIAL, et cause FLINCH à la cible et aux adversaires adjacents pendant 3 secondes",
     "BODY_SLAM": "Inflige [30,SP]% des HP max du lanceur en SPECIAL",
     "BARB_BARRAGE": "Plonge au milieu de l'équipe adverse, infligeant [15,30,60,SP] SPECIAL et POISON à tous les ennemis adjacents pendant 3 secondes",
-    "INFERNAL_PARADE": "Envoie une Roue de Feu en boomerang, ayant 50% de chance de BURN pendant 3 secondes et infligeant 2 fois [60,SP] SPECIAL à tous les pokémons adverses touchés."
+    "MAGIC_POWDER": "Gagne [10,20,40,SP] SHIELD et SILENCE les ennemis adjacents pendant [2,4,6] secondes",
+    "INFERNAL_PARADE": "Envoie une Roue de Feu en boomerang, ayant 50% de chance de BURN pendant 3 secondes et infligeant 2 fois [60,SP] SPECIAL à tous les pokémons adverses touchés.",
+    "RETALIATE": "Inflige [15,30,60,SP] SPECIAL à la cible + [5,10,15,SP] SPECIAL additionels par allié KO",
+    "SLASH": "Inflige [10,20,40,SP] SPECIAL avec [30,60,90]% de CRIT_CHANCE augmentée",
+    "OUTRAGE": "Le pokémon est CONFUSION pendant 2 secondes et inflige [2,3,4,SP]x ATK en SPECIAL à la cible et aux ennemis adjacents"
   },
   "effect": {
     "INGRAIN": "Enraciné",
@@ -1392,6 +1402,7 @@
     "WINDY": "+10% de chances d'esquiver (+20% si FLYING)",
     "NIGHT": "+20% CRIT_CHANCE\n+30 % de durée de SLEEP",
     "HYDRATATION": "La synergie GRASS soigne 5 HP supplémentaires par seconde sous la RAIN",
+    "POISON_GAS": "Inflige POISON chaque seconde",
     "SHINING_RAY": "Donne RUNE_PROTECT pendant 6 secondes",
     "LIGHT_PULSE": "Donne également +10 PP par seconde",
     "ETERNAL_LIGHT": "Augmente également la AP et l'ATK de 30%",
@@ -1471,7 +1482,8 @@
     "RAWST_BERRY": "Baie Rawst",
     "ROWAP_BERRY": "Baie Rowap",
     "SALAC_BERRY": "Baie Salac",
-    "SITRUS_BERRY": "Baie Sitrus"
+    "SITRUS_BERRY": "Baie Sitrus",
+    "COMFEY": "Guérilande"
   },
   "item_description": {
     "FOSSIL_STONE": "Un fossile d'un Pokémon ayant vécu à l'époque préhistorique",
@@ -1623,7 +1635,9 @@
     "GLUTTON": "Gagne de façon permanente 20 HP max chaque fois qu'il mange une baie",
     "COMFEY": "$t(pkm.COMFEY) ne peut pas porter d'objets. Au début du combat, l'allié le plus proche avec un slot d'objet disponible porte $t(pkm.COMFEY) et gagne toutes ses stats. $t(pkm.COMFEY) lance sa capacité en même temps que son porteur. Quand le porteur est KO, $t(pkm.COMFEY) combat seul.",
     "TYPHLOSION": "Typhlosion cherche une REAPER_CLOTH",
-    "HISUIAN_TYPHLOSION": "Inflige 20% de dégâts en plus si la cible est BURN ou SILENCE"
+    "HISUIAN_TYPHLOSION": "Inflige 20% de dégâts en plus si la cible est BURN ou SILENCE",
+    "PICKUP": "Le pokémon commence le combat avec un objet aléatoire s'il ne tient aucun objet",
+    "MAWILE": "$t(pkm.MAWILE) trompe ses ennemis avec son visage à l'apparence docile. Lance $t(ability.ATTRACT) au début du combat."
   },
   "stat": {
     "ATK": "Attaque",
@@ -1814,7 +1828,9 @@
     "ALCHEMIST": "Alchimiste",
     "DENTIST": "Dentiste",
     "FISHERMAN": "Pêcheur",
-    "CHOSEN_ONE": "Élu"
+    "CHOSEN_ONE": "Élu",
+    "VANQUISHER": "Vainqueur",
+    "OUTSIDER": "Outsider"
   },
   "title_description": {
     "NOVICE": "Jouez votre première partie",
@@ -1875,7 +1891,9 @@
     "ARCHEOLOGIST": "Déchiffrez le message secret des Zarbi",
     "DENTIST": "Débloquer le portrait Arbok en colère",
     "FISHERMAN": "Obtenez un Léviator",
-    "CHOSEN_ONE": "Niveau max de synergie Lumière atteint lors d'une partie"
+    "CHOSEN_ONE": "Niveau max de synergie Lumière atteint lors d'une partie",
+    "VANQUISHER": "Remporter un match classé",
+    "OUTSIDER": "Remporter un match classé à 8 joueurs en étant le joueur au plus bas ELO"
   },
   "weather": {
     "NEUTRAL": "Temps calme",
@@ -2009,6 +2027,7 @@
   "join": "Rejoindre",
   "reconnect": "Reconnexion",
   "just_for_fun": "Juste pour le fun",
+  "minimum_rank": "Rang minimum",
   "password_protected": "Lobby privé (protégé par mot de passe)",
   "private": "Privé",
   "available_rooms": "Salons disponibles",
@@ -2044,6 +2063,7 @@
   "emotion_label": "Emote",
   "export": "Exporter",
   "help_create_bot": "Pour créer un bot, vous devez remplir un certain nombre d'étapes. Chaque étape représente l'état de votre bot à un moment du jeu. Le bot démarrera avec l'équipe définie à l'étape 1. Ensuite, il ira à l'étape 2 et ainsi de suite L'équipe de l'étape 2 devrait toujours être plus forte que l'étape 1 équipe Comme le joueur ne peut pas obtenir plus de 10 pokémons/étape, votre bot n'est pas autorisé non plus.",
+  "item_components": "Composants d'objets",
   "board_power": "Puissance d'équipe",
   "avatar": "Avatar",
   "author": "Auteur",
@@ -2127,6 +2147,7 @@
   "set_moderator": "Nommer modérateur",
   "set_bot_manager": "Nommer Bot Manager",
   "give_title": "Donner un titre",
+  "give_role": "Donner Rôle",
   "back_to_my_profile": "Retour à mon profil",
   "bots": "Bots",
   "profile": "Profil",
@@ -2159,6 +2180,7 @@
   "GLHF": "GL HF",
   "not_elligible_elo_hint": "❌Les jeux avec des bots uniquement ne sont pas éligibles pour le gain/la perte d'ELO.",
   "add_bot_or_wait_hint": "Ajoutez des bots ou attendez que plus de joueurs rejoignent votre salon",
+  "ranked_lobby_hint": "Cette partie démarrera automatiquement quand le lobby est complet ou après 15 minutes",
   "private_lobby": "Salon privé",
   "change_room_name": "Changer le nom du salon",
   "add_bot": "Ajouter un bot",
@@ -2177,6 +2199,7 @@
   "add": "Ajouter",
   "bot": "bot",
   "valid": "Valide",
+  "invalid": "Invalide",
   "others": "Autres",
   "thanks_to": "Merci à",
   "tutorial_work": "pour son travail sur les vidéos tutoriels !",
@@ -2247,11 +2270,13 @@
   "gadget": {
     "trainer_card": "Carte de Dresseur",
     "trainer_card_desc": "Vous permet de changer votre nom, avatar et titre",
+    "bag": "Sac",
     "bag_desc": "Utilisé pour stocker votre collection et vos cartes",
     "team_planner": "Planificateu",
     "team_planner_desc": "Préparez votre composition d'équipe à l'avance",
     "bot_builder": "Constructeur de Bot",
     "bot_builder_desc": "Créez vos propres bots et publiez-les pour avoir une chance d'être inclus dans le jeu",
+    "jukebox": "Jukebox",
     "jukebox_desc": "Choisissez votre musique en jeu",
     "map": "Carte",
     "map_desc": "Choisissez l'arène de combat en tant que chef de salle"
@@ -2260,5 +2285,24 @@
   "select_map": "Choisir l'arène de combat pour cette partie",
   "map": {
     "random": "Zone aléatoire"
-  }
+  },
+  "held_items": "Objets portés",
+  "by_average_held_items": "par nb d'objets portés",
+  "role": {
+    "ADMIN": "Créateur",
+    "MODERATOR": "Modo",
+    "BASIC": "Basique",
+    "BOT": "Bot",
+    "BOT_MANAGER": "Gérant des Bots"
+  },
+  "elorank": {
+    "BEGINNER": "Débutant",
+    "POKEBALL": "Pokéball",
+    "GREATBALL": "Superball",
+    "ULTRABALL": "Hyperball",
+    "MASTERBALL": "Masterball"
+  },
+  "lobby_full": "Le lobby est complet",
+  "game_already_started": "La partie a déjà commencé",
+  "min_rank_not_reached": "Votre rang n'est pas assez élevé pour jouer ce match classé"
 }
