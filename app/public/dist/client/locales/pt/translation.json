@@ -1278,8 +1278,7 @@
     "POKE_DOLL": "Boneca Poké",
     "RED_ORB": "Red Orb",
     "MAX_REVIVE": "Max Reviver",
-    "ROCKY_HELMET": "capacete rochoso",
-    "RUNE_PROTECT": "Rune Protect"
+    "ROCKY_HELMET": "capacete rochoso"
   },
   "item_description": {
     "FOSSIL_STONE": "Um fóssil de um Pokémon que viveu em tempos pré-históricos",
@@ -1334,8 +1333,7 @@
     "POKE_DOLL": "Reduza todo o dano recebido em 30%",
     "RED_ORB": "+10 ATK. 25% do dano de ataque é tratado como TRUE",
     "MAX_REVIVE": "Dê RESURECTION, impedindo o primeiro KO do titular e restaurando o HP máximo",
-    "ROCKY_HELMET": "+12 DEF. Nega dano bônus crítico de acertos críticos recebidos.",
-    "RUNE_PROTECT": "Quando o combate começa, o titular e todos os aliados adjacentes recebem RUNE_PROTECT por 6 segundos"
+    "ROCKY_HELMET": "+12 DEF. Nega dano bônus crítico de acertos críticos recebidos."
   },
   "passive_description": {
     "NONE": "sem passivo",
