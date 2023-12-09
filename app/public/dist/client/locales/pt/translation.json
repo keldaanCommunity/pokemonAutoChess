@@ -1492,7 +1492,7 @@
     "MONSTER": "Pokémon MONSTER podem FLINCH seus oponentes. Cada vez que são nocauteados, eles ganham ATK, curam e aumentam seu HP máximo e aumentam de tamanho.",
     "HUMAN": "Toda a sua equipe cura uma porcentagem do dano causado com ataques e habilidades",
     "AQUATIC": "Pokémon aquáticos têm chance de roubar PP de seu alvo a cada ataque básico",
-    "BUG": "No início do combate, os pokémons bug com mais HP são duplicados",
+    "BUG": "No início do combate, seus pokémons BUG mais fortes são duplicados",
     "FLYING": "Os pokémons voadores voam para longe quando caem abaixo de uma certa quantidade de HP",
     "FLORA": "Quando o primeiro pokémon da flora estiver morto, uma flor surgirá de seu túmulo...",
     "ROCK": "Pokémons de pedra ganham DEF e resistem melhor a danos críticos",

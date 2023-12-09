@@ -1699,7 +1699,7 @@
     "MONSTER": "Los pokemon MONSTER pueden dejar FLINCH a sus oponentes durante 2s. Cada vez que obtienen un KO, ganan ATK, se curan y aumentan su HP máximo, y crecen en tamaño.",
     "HUMAN": "Todo tu equipo se cura por un porcentaje del daño que infligen con ataques y habilidades",
     "AQUATIC": "Los Pokémon acuáticos tienen la posibilidad de robar PP de su objetivo en cada ataque básico.",
-    "BUG": "Al inicio del combate se duplican los pokemon bicho con más HP",
+    "BUG": "Al comienzo del combate, se clonan tus Pokémon BUG más fuertes.",
     "FLYING": "Los Pokémon voladores se van volando cuando caen por debajo de una cierta cantidad de HP.",
     "FLORA": "Cuando el primer pokemon flora muera, una flor se levantará de su tumba...",
     "ROCK": "Los Pokémon Roca ganan DEF y resisten mejor el daño crítico.",

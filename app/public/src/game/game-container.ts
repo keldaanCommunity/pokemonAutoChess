@@ -16,7 +16,7 @@ import {
   NonFunctionPropNames,
   ISimplePlayer
 } from "../../../types"
-import PokemonEntity from "../../../core/pokemon-entity"
+import { PokemonEntity } from "../../../core/pokemon-entity"
 import { DesignTiled } from "../../../core/design"
 import { toast } from "react-toastify"
 import React from "react"

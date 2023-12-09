@@ -1496,7 +1496,7 @@
     "MONSTER": "MONSTER Pokémon kunnen hun tegenstanders FLINCH. Elke keer dat ze een KO krijgen, krijgen ze ATK, genezen ze en verhogen ze hun maximale HP, en worden ze groter.",
     "HUMAN": "Je hele team geneest voor een percentage van de schade die ze aanrichten met aanvallen en vaardigheden",
     "AQUATIC": "Aquatische pokemons hebben bij elke basisaanval de kans om PP van hun doelwit te stelen",
-    "BUG": "Aan het begin van het gevecht worden de bug-pokemons met de meeste HP gedupliceerd",
+    "BUG": "Aan het begin van het gevecht worden je sterkste BUG Pokémon gekloond",
     "FLYING": "Vliegende pokemons vliegen weg als ze onder een bepaalde hoeveelheid HP vallen",
     "FLORA": "Als de eerste flora-pokemon dood is, zal er een bloem uit zijn graf opstaan...",
     "ROCK": "Rock-pokemons krijgen DEF en zijn beter bestand tegen kritieke schade",

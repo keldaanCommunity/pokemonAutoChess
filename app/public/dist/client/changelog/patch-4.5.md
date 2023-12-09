@@ -60,6 +60,7 @@ To begin with, Great Ball tier (ELO > 1100) ranked matches will start every 4 ho
   - increased Flinch duration to 3 seconds
   - add AP scaling on kill
   - increase Monster 6 bonuses: when knocking down its target, gain 10 Attack, 30% AP and 100 max HP
+- Bug: Your ~~most HP~~ strongest units are cloned. Strongest is defined by 1) number of items 2) unit tier 3) unit rarity
 
 # Changes to Items
 

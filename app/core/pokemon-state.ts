@@ -8,7 +8,7 @@ import {
   Team
 } from "../types/enum/Game"
 import Board from "./board"
-import PokemonEntity from "./pokemon-entity"
+import { PokemonEntity } from "./pokemon-entity"
 import { IPokemonEntity, Transfer } from "../types"
 import { Synergy, SynergyEffects } from "../types/enum/Synergy"
 import { pickRandomIn } from "../utils/random"
@@ -16,7 +16,7 @@ import { logger } from "../utils/logger"
 import { Passive } from "../types/enum/Passive"
 import { Weather } from "../types/enum/Weather"
 import { max, min } from "../utils/number"
-import { distanceC, distanceM } from "../utils/distance"
+import { distanceM } from "../utils/distance"
 import { FIGHTING_PHASE_DURATION } from "../types/Config"
 
 export default class PokemonState {

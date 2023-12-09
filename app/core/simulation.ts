@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-extra-semi */
 import Board from "./board"
 import { Schema, MapSchema, type, SetSchema } from "@colyseus/schema"
-import PokemonEntity from "./pokemon-entity"
+import { getUnitScore, PokemonEntity } from "./pokemon-entity"
 import PokemonFactory from "../models/pokemon-factory"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { Berries, CompletedItems, Item } from "../types/enum/Item"
@@ -152,7 +152,7 @@ export default class Simulation extends Schema implements ISimulation {
                 bugTeam.push(pkm)
               }
             })
-            bugTeam.sort((a, b) => b.hp - a.hp)
+            bugTeam.sort((a, b) => getUnitScore(b) - getUnitScore(a))
 
             let numberToSpawn = 0
             if (effects.has(Effect.COCOON)) {

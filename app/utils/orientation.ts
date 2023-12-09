@@ -1,5 +1,5 @@
 import { Orientation } from "../types/enum/Game"
-import PokemonEntity from "../core/pokemon-entity"
+import { PokemonEntity } from "../core/pokemon-entity"
 import Board from "../core/board"
 
 export const OrientationVector: Record<Orientation, [number, number]> = {

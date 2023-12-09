@@ -1514,7 +1514,7 @@
     "MONSTER": "MONSTER Pokémons können ihre Gegner FLINCH. Jedes Mal, wenn sie einen KO erleiden, erhalten sie ATK, heilen sich, erhöhen ihre maximalen HP und werden größer.",
     "HUMAN": "Ihr gesamtes Team heilt sich um einen Prozentsatz des Schadens, den es durch Angriffe und Fähigkeiten verursacht",
     "AQUATIC": "Wasserpokémons haben bei jedem Basisangriff die Chance, ihrem Ziel PP zu stehlen",
-    "BUG": "Zu Beginn des Kampfes werden die Käfer-Pokémon mit den meisten HP dupliziert",
+    "BUG": "Zu Beginn des Kampfes werden Ihre stärksten BUG Pokémon geklont",
     "FLYING": "Flugpokémons fliegen weg, wenn sie unter eine bestimmte Menge an HP fallen",
     "FLORA": "Wenn das erste Flora-Pokémon tot ist, erhebt sich eine Blume aus seinem Grab ...",
     "ROCK": "Felspokémons erhalten DEF und widerstehen kritischem Schaden besser",

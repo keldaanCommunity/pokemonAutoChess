@@ -46,7 +46,7 @@ import {
 } from "../../types/Config"
 
 import Board from "../board"
-import PokemonEntity from "../pokemon-entity"
+import { PokemonEntity } from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
 import PokemonFactory from "../../models/pokemon-factory"
 
