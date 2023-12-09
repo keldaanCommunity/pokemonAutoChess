@@ -1756,7 +1756,7 @@
     "MONSTER": "MONSTER pokemons can FLINCH their opponents. Every time they get a KO, they gain ATK, heal and increase their max HP, and grow in size.",
     "HUMAN": "All your team heals for a percentage of the damage they deal with attacks and abilities",
     "AQUATIC": "AQUATIC pokemons have a chance to steal PP from their target at every basic attack",
-    "BUG": "At the start of the combat, the BUG pokemons with the most HP are duplicated",
+    "BUG": "At the start of the combat, your strongest BUG pokemons are cloned",
     "FLYING": "FLYING pokemons fly away when they fell under a certain amount of HP",
     "FLORA": "When the first FLORA pokemon is dead, a flower will rise from its grave...",
     "ROCK": "ROCK pokemons gain DEF and better resist to critical damage",

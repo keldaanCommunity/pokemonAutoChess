@@ -1,5 +1,5 @@
 import Board from "./board"
-import PokemonEntity from "./pokemon-entity"
+import { PokemonEntity } from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
 import { BoardEvent, PokemonActionState } from "../types/enum/Game"
 import { Synergy } from "../types/enum/Synergy"

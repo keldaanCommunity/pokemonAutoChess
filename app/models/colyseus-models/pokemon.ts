@@ -41,7 +41,7 @@ import PokemonFactory from "../pokemon-factory"
 import { distanceM } from "../../utils/distance"
 import Simulation from "../../core/simulation"
 import { AbilityStrategies } from "../../core/abilities/abilities"
-import PokemonEntity from "../../core/pokemon-entity"
+import { PokemonEntity } from "../../core/pokemon-entity"
 
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string

@@ -1756,7 +1756,7 @@
     "MONSTER": "Les pokémons MONSTER ont une chance de causer FLINCH sur leur cible. Chaque fois qu'ils mettent KO une unité adverse, ils gagnent en ATK, se soignent et augmentent leurs HP max, et grossissent en taille.",
     "HUMAN": "Toute votre équipe guérit d'un pourcentage des dégâts qu'elle inflige avec les attaques et capacités",
     "AQUATIC": "Les pokémons AQUATIC ont une chance de voler des PP à leur cible à chaque attaque de base",
-    "BUG": "Au début du combat, les pokemons BUG avec le plus de HP sont dupliqués",
+    "BUG": "Au début du combat, vos pokemons BUG les plus forts sont clonés",
     "FLYING": "Les pokémons FLYING s'envolent lorsqu'ils tombent sous une certaine quantité de HP",
     "FLORA": "Quand le premier pokémon FLORA est mort, une fleur sort de sa tombe...",
     "ROCK": "Les pokémons ROCK gagnent en DEF et résistent mieux aux dégâts critiques",

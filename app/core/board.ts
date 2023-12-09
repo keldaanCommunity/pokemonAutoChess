@@ -7,7 +7,7 @@ import { distanceC } from "../utils/distance"
 import { logger } from "../utils/logger"
 import { OrientationArray, OrientationVector } from "../utils/orientation"
 import { pickRandomIn } from "../utils/random"
-import PokemonEntity from "./pokemon-entity"
+import { PokemonEntity, getStrongestUnit } from "./pokemon-entity"
 
 export type Cell = {
   x: number
@@ -326,27 +326,9 @@ export default class Board {
   }
 
   getStrongestUnitOnBoard(team?: number): PokemonEntity | undefined {
-    /*
-    strongest is defined as:
-    1) number of items
-    2) stars level
-    3) rarity cost
-    */
-    let strongest,
-      bestScore = 0
-    this.forEach((x, y, pokemon) => {
-      if (pokemon && (pokemon.team === team || team === undefined)) {
-        let score = 0
-        score += 100 * pokemon.items.size
-        score += 10 * pokemon.stars
-        score += PokemonFactory.getSellPrice(pokemon.name)
-
-        if (score > bestScore) {
-          bestScore = score
-          strongest = pokemon
-        }
-      }
-    })
-    return strongest
+    const candidates = this.cells.filter(
+      (cell) => cell && (cell.team === team || team === undefined)
+    ) as PokemonEntity[]
+    return getStrongestUnit(candidates)
   }
 }

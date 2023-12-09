@@ -5,7 +5,7 @@ import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Synergy } from "../../types/enum/Synergy"
 import Board from "../board"
-import PokemonEntity from "../pokemon-entity"
+import { PokemonEntity } from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
 
 export class AbilityStrategy {

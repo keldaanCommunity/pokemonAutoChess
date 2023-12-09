@@ -45,7 +45,7 @@ import Player from "../models/colyseus-models/player"
 import { values } from "../utils/schemas"
 import { AbilityStrategies } from "./abilities/abilities"
 
-export default class PokemonEntity extends Schema implements IPokemonEntity {
+export class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
   @type("uint8") positionX: number
   @type("uint8") positionY: number
@@ -1200,4 +1200,31 @@ export default class PokemonEntity extends Schema implements IPokemonEntity {
       this.refToBoardPokemon.hp += 20
     }
   }
+}
+
+export function getStrongestUnit(pokemons: PokemonEntity[]): PokemonEntity {
+  /*
+    strongest is defined as:
+    1) number of items
+    2) stars level
+    3) rarity cost
+    */
+  let strongest,
+    bestScore = 0
+  pokemons.forEach((pokemon) => {
+    const score = getUnitScore(pokemon)
+    if (score > bestScore) {
+      bestScore = score
+      strongest = pokemon
+    }
+  })
+  return strongest
+}
+
+export function getUnitScore(pokemon: PokemonEntity | IPokemon) {
+  let score = 0
+  score += 100 * pokemon.items.size
+  score += 10 * pokemon.stars
+  score += PokemonFactory.getSellPrice(pokemon.name)
+  return score
 }

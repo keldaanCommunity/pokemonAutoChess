@@ -1,6 +1,6 @@
 import { Schema, type } from "@colyseus/schema"
 import Board from "../../core/board"
-import PokemonEntity from "../../core/pokemon-entity"
+import { PokemonEntity } from "../../core/pokemon-entity"
 import { IPokemonEntity, IStatus, Transfer } from "../../types"
 import { Effect } from "../../types/enum/Effect"
 import { AttackType } from "../../types/enum/Game"
