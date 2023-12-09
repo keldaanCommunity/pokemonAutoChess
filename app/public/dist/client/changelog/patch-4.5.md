@@ -53,7 +53,11 @@ To begin with, Great Ball tier (ELO > 1100) ranked matches will start every 4 ho
 - Buff Lumineon: Attack ~~16~~ 19
 - Buff Aqua Ring: now clears negative status
 - Buff Wobbuffet line, Def/SpeDef: ~~1/2~~ 2/4
-
+- Buff Claydol HP ~~150~~ 180
+- Buff Combee:  Attack ~~8~~ 9
+- Buff Vespiqueen: HP ~~210~~ 280
+- Buff Mismagius: Attack ~~18~~ 26
+-
 
 # Changes to Synergies
 

@@ -9536,7 +9536,7 @@ export class Combee extends Pokemon {
   stars = 1
   evolution = Pkm.VESPIQUEEN
   hp = 120
-  atk = 8
+  atk = 9
   def = 3
   speDef = 3
   maxPP = 90
@@ -9550,7 +9550,7 @@ export class Vespiqueen extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLORA])
   rarity = Rarity.EPIC
   stars = 2
-  hp = 210
+  hp = 280
   atk = 20
   def = 4
   speDef = 4
@@ -10179,7 +10179,7 @@ export class Claydol extends Pokemon {
   ])
   rarity = Rarity.EPIC
   stars = 2
-  hp = 150
+  hp = 180
   atk = 16
   def = 6
   speDef = 6
@@ -10530,7 +10530,7 @@ export class Mismagius extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   hp = 180
-  atk = 18
+  atk = 26
   def = 2
   speDef = 4
   maxPP = 95
