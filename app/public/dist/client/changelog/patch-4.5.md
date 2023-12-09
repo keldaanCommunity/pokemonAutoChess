@@ -30,6 +30,7 @@ To begin with, Great Ball tier (ELO > 1100) ranked matches will start every 4 ho
 - Removed Zenith passive of Torkoal
 - Nerf Overheat (Moltres): ~~40~~ 30 special damage
 - Nerf Fire Spin (Ho-Oh): ~~20/40/100~~ 20/40/80 special damage
+- Nerf Ho-Oh: Def/Spedef: ~~5~~ 3
 - Nerf Heatran range: ~~3~~ 2
 - Buff Kartana: PP ~~95~~ 70
 - Rework Leech Life (Crobat): increase damage to 20/40/80, removed area damage
@@ -51,6 +52,12 @@ To begin with, Great Ball tier (ELO > 1100) ranked matches will start every 4 ho
 - Buff Fineon: HP ~~75~~ 80
 - Buff Lumineon: Attack ~~16~~ 19
 - Buff Aqua Ring: now clears negative status
+- Buff Wobbuffet line, Def/SpeDef: ~~1/2~~ 2/4
+- Buff Claydol HP ~~150~~ 180
+- Buff Combee:  Attack ~~8~~ 9
+- Buff Vespiqueen: HP ~~210~~ 280
+- Buff Mismagius: Attack ~~18~~ 26
+-
 
 # Changes to Synergies
 

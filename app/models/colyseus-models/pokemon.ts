@@ -5770,8 +5770,8 @@ export class HooH extends Pokemon {
   stars = 3
   hp = 300
   atk = 30
-  def = 5
-  speDef = 5
+  def = 3
+  speDef = 3
   maxPP = 100
   range = 3
   skill = Ability.FIRE_SPIN
@@ -6063,8 +6063,8 @@ export class Wynaut extends Pokemon {
   evolution = Pkm.WOBBUFFET
   hp = 110
   atk = 7
-  def = 1
-  speDef = 1
+  def = 2
+  speDef = 2
   maxPP = 100
   range = 1
   skill = Ability.COUNTER
@@ -6079,8 +6079,8 @@ export class Wobbuffet extends Pokemon {
   stars = 2
   hp = 280
   atk = 18
-  def = 2
-  speDef = 2
+  def = 4
+  speDef = 4
   maxPP = 100
   range = 1
   skill = Ability.COUNTER
@@ -9536,7 +9536,7 @@ export class Combee extends Pokemon {
   stars = 1
   evolution = Pkm.VESPIQUEEN
   hp = 120
-  atk = 8
+  atk = 9
   def = 3
   speDef = 3
   maxPP = 90
@@ -9550,7 +9550,7 @@ export class Vespiqueen extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLORA])
   rarity = Rarity.EPIC
   stars = 2
-  hp = 210
+  hp = 280
   atk = 20
   def = 4
   speDef = 4
@@ -10048,7 +10048,7 @@ export class Exeggcute extends Pokemon {
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.EXEGGUTOR
-  hp = 150
+  hp = 110
   atk = 8
   def = 3
   speDef = 3
@@ -10060,14 +10060,14 @@ export class Exeggcute extends Pokemon {
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
-export class Exeggcutor extends Pokemon {
+export class Exeggutor extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.PSYCHIC])
   rarity = Rarity.EPIC
   stars = 2
   evolution = Pkm.ALOLAN_EXEGGUTOR
   evolutionRule = new ItemEvolutionRule([Item.LEAF_STONE])
-  hp = 250
-  atk = 14
+  hp = 300
+  atk = 20
   def = 4
   speDef = 4
   maxPP = 100
@@ -10179,7 +10179,7 @@ export class Claydol extends Pokemon {
   ])
   rarity = Rarity.EPIC
   stars = 2
-  hp = 150
+  hp = 180
   atk = 16
   def = 6
   speDef = 6
@@ -10530,7 +10530,7 @@ export class Mismagius extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   hp = 180
-  atk = 18
+  atk = 26
   def = 2
   speDef = 4
   maxPP = 95
@@ -10673,10 +10673,10 @@ export class Zigzagoon extends Pokemon {
   rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.LINOONE
-  hp = 70
+  hp = 80
   atk = 8
-  def = 1
-  speDef = 1
+  def = 4
+  speDef = 2
   maxPP = 50
   range = 1
   skill = Ability.SLASH
@@ -10689,10 +10689,10 @@ export class Linoone extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIELD, Synergy.NORMAL])
   rarity = Rarity.RARE
   stars = 2
-  hp = 140
-  atk = 16
-  def = 1
-  speDef = 1
+  hp = 180
+  atk = 21
+  def = 6
+  speDef = 4
   maxPP = 50
   range = 1
   skill = Ability.SLASH
@@ -11676,7 +11676,7 @@ export const PokemonClasses: Record<
   [Pkm.INTELEON]: Inteleon,
   [Pkm.TROPIUS]: Tropius,
   [Pkm.EXEGGCUTE]: Exeggcute,
-  [Pkm.EXEGGUTOR]: Exeggcutor,
+  [Pkm.EXEGGUTOR]: Exeggutor,
   [Pkm.ALOLAN_EXEGGUTOR]: AlolanExeggutor,
   [Pkm.COMFEY]: Comfey,
   [Pkm.CARNIVINE]: Carnivine,
