@@ -188,11 +188,7 @@ export default class Pokemon extends DraggableObject {
       this.animationLocked = false
       const g = <GameScene>scene
       // go back to idle anim if no more animation in queue
-      g.animationManager?.animatePokemon(
-        this,
-        pokemon.action,
-        this.flip
-      )
+      g.animationManager?.animatePokemon(this, pokemon.action, this.flip)
     })
     this.height = this.sprite.height
     this.width = this.sprite.width
