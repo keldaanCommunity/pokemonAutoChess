@@ -80,6 +80,9 @@ export enum Item {
 
 export const AllItems: Item[] = Object.values(Item)
 
+// should be excluded from carousels
+export const SpecialItems: Item[] = [Item.COMFEY]
+
 export const BasicItems: Item[] = [
   Item.FOSSIL_STONE,
   Item.TWISTED_SPOON,
@@ -117,7 +120,9 @@ export const Berries: Item[] = [
 
 export const CompletedItems: Item[] = Object.values(Item).filter(
   (item) =>
-    BasicItems.includes(item) === false && Berries.includes(item) === false
+    BasicItems.includes(item) === false &&
+    Berries.includes(item) === false &&
+    SpecialItems.includes(item) === false
 )
 
 export const SynergyStones = [
