@@ -103,7 +103,7 @@ export default function GameStageInfo() {
                   className="pokemon-portrait"
                 />
                 {opponentTitle && (
-                  <p className="player-title">{opponentTitle}</p>
+                  <p className="player-title">{t(`title.${opponentTitle}`)}</p>
                 )}
                 <p className="player-name">
                   {isPVE ? t(opponentName) : opponentName}

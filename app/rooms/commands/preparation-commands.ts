@@ -204,6 +204,7 @@ export class OnGameStartRequestCommand extends Command<
               this.room.setGameStarted(true)
               logger.debug("game start", game.roomId)
               this.room.broadcast(Transfer.GAME_START, game.roomId)
+              setTimeout(() => this.room.disconnect(), 30000) // TRYFIX: ranked lobbies prep rooms not being removed
             }
           })
         }
