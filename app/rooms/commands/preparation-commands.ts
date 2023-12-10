@@ -34,7 +34,7 @@ export class OnJoinCommand extends Command<
         client.leave()
         return // lobby already full
       }
-      if (this.state.ownerId == "") {
+      if (this.state.ownerId == "" && this.state.lobbyType !== LobbyType.RANKED) {
         this.state.ownerId = auth.uid
       }
       if (this.state.users.has(auth.uid)) {
