@@ -272,7 +272,8 @@ export const UltraShop = new Array<Pkm>(
   Pkm.ELECTRIKE,
   Pkm.SHUPPET,
   Pkm.HAPPINY,
-  Pkm.SOLOSIS
+  Pkm.SOLOSIS,
+  Pkm.SOBBLE
 )
 
 export const UniqueShop = new Array<PkmProposition>(
