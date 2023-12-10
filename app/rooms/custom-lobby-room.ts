@@ -112,8 +112,6 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
         if (!data) {
           // remove room listing data
           if (roomIndex !== -1) {
-            const previousData = this.rooms[roomIndex]
-
             this.rooms.splice(roomIndex, 1)
 
             this.clients.forEach((client) => {
