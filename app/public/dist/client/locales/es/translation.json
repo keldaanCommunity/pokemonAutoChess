@@ -1180,7 +1180,7 @@
     "AIR_SLASH": "Causa [25,50,100,SP] de SPECIAL y deja al enemigo FLINCH por 7 segundos",
     "EGGSPLOSION": "Lanza un huevo explosivo al objetivo, infligiendo [40,80,140,SP] de SPECIAL y aplicando ARMOR_REDUCTION por 4 seconds a todos los enemigos adyacentes. Si el objetivo queda KO, tienes un 30% de recibir un huevo.",
     "FLORAL_HEALING": "Cura tantos HP como máximos PP tenga el portador de comfey o del propio comfey si no es llevado por ningun otro pokemon.",
-    "VINE_WHIP": "Causa 100 de SPECIAL, causando FLINCH a todos los pokemon adyacentes por 3 segundos",
+    "VINE_WHIP": "Causa [100,SP] de SPECIAL, causando FLINCH a todos los pokemon adyacentes por 3 segundos",
     "BODY_SLAM": "Inflige [30,SP]% del HP máximo del usuaio como SPECIAL",
     "BARB_BARRAGE": "Bucea en medio del equipo enemigo, causando [15,30,60,SP] de SPECIAL y dejando POISONa todos los pokemon adyacentes por 3 segundos",
     "MAGIC_POWDER": "Gana [10,20,40,SP] SHIELD y deja SILENCE a los enemigos adyacentes por [2,4,6] segundos",

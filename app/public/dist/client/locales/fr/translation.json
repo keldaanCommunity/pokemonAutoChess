@@ -1180,7 +1180,7 @@
     "AIR_SLASH": "Inflige [25,50,100,SP] SPECIAL et FLINCH pendant 7 secondes",
     "EGGSPLOSION": "Lance un oeuf explosif sur la cible, infligeant [40,80,140,SP] SPECIAL et ARMOR_REDUCTION pendant 4 secondes à tous les adversaires adjacents. Si la cible est KO, vous avez 30% de chance d'obtenir un Oeuf Pokémon.",
     "FLORAL_HEALING": "Soigne autant de HP que de PP max du porteur de $t(pkm.COMFEY) ou de $t(pkm.COMFEY) lui-même s'il n'est pas porté",
-    "VINE_WHIP": "Inflige 100 SPECIAL, et cause FLINCH à la cible et aux adversaires adjacents pendant 3 secondes",
+    "VINE_WHIP": "Inflige [100,SP] SPECIAL, et cause FLINCH à la cible et aux adversaires adjacents pendant 3 secondes",
     "BODY_SLAM": "Inflige [30,SP]% des HP max du lanceur en SPECIAL",
     "BARB_BARRAGE": "Plonge au milieu de l'équipe adverse, infligeant [15,30,60,SP] SPECIAL et POISON à tous les ennemis adjacents pendant 3 secondes",
     "MAGIC_POWDER": "Gagne [10,20,40,SP] SHIELD et SILENCE les ennemis adjacents pendant [2,4,6] secondes",
