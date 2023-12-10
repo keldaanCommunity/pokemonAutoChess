@@ -7,7 +7,7 @@ import UserMetadata, {
 import { BotV2, IBot } from "../../models/mongo-models/bot-v2"
 import { Client, matchMaker } from "colyseus"
 import PreparationRoom from "../preparation-room"
-import { Emotion, IChatV2, Role, Transfer } from "../../types"
+import { IChatV2, Role, Transfer } from "../../types"
 import { BotDifficulty, LobbyType } from "../../types/enum/Game"
 import { pickRandomIn } from "../../utils/random"
 import { logger } from "../../utils/logger"
@@ -34,7 +34,10 @@ export class OnJoinCommand extends Command<
         client.leave()
         return // lobby already full
       }
-      if (this.state.ownerId == "") {
+      if (
+        this.state.ownerId == "" &&
+        this.state.lobbyType !== LobbyType.RANKED
+      ) {
         this.state.ownerId = auth.uid
       }
       if (this.state.users.has(auth.uid)) {
@@ -110,6 +113,14 @@ export class OnJoinCommand extends Command<
             `There is more than 8 players in the lobby which was not supposed to happen`
           )
         }
+      }
+
+      if (
+        this.state.lobbyType === LobbyType.RANKED &&
+        this.state.users.size === MAX_PLAYERS_PER_LOBBY
+      ) {
+        // auto start when ranked lobby is full and all ready
+        return [new OnGameStartRequestCommand()]
       }
     } catch (error) {
       logger.error(error)
