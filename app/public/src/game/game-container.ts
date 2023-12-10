@@ -40,6 +40,7 @@ import Count from "../../../models/colyseus-models/count"
 import { Ability } from "../../../types/enum/Ability"
 import { Portal, SynergySymbol } from "../../../models/colyseus-models/portal"
 import Simulation from "../../../core/simulation"
+import { BoardMode } from "./components/board-manager"
 
 class GameContainer {
   room: Room<GameState>
@@ -513,7 +514,12 @@ class GameContainer {
   /* Board pokemons */
 
   handleBoardPokemonAdd(player: IPlayer, pokemon: IPokemon) {
-    if (player.id === this.spectatedPlayerId) {
+    const board = this.gameScene?.board
+    if (
+      board &&
+      player.id === this.spectatedPlayerId &&
+      (board.mode === BoardMode.PICK || pokemon.positionY === 0)
+    ) {
       const pokemonUI = this.gameScene?.board?.addPokemon(pokemon)
       if (pokemonUI && pokemon.action === PokemonActionState.FISH) {
         pokemonUI.fishingAnimation()

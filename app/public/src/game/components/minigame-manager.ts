@@ -177,9 +177,6 @@ export default class MinigameManager {
         case "avatarId":
           if (value != "" && typeof value === "string") {
             const avatar = this.pokemons.get(value)
-            logger.debug(
-              `Player ${value} (${avatar?.playerId}) has taken portal ${portal.id}`
-            )
             this.symbols.forEach((symbol) => {
               if (symbol.getData("portalId") === portal.id) {
                 this.removeSymbol(symbol)

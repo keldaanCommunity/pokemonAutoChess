@@ -127,6 +127,9 @@ export default class BoardManager {
   }
 
   addPokemon(pokemon: IPokemon): Pokemon {
+    if (this.pokemons.has(pokemon.id)) {
+      return this.pokemons.get(pokemon.id)!
+    }
     const coordinates = transformCoordinate(
       pokemon.positionX,
       pokemon.positionY
@@ -143,9 +146,6 @@ export default class BoardManager {
 
     this.animationManager.animatePokemon(pokemonUI, pokemon.action, false)
     this.pokemons.set(pokemonUI.id, pokemonUI)
-    if (pokemon.positionY != 0 && this.mode !== BoardMode.PICK) {
-      pokemonUI.destroy()
-    }
 
     return pokemonUI
   }
