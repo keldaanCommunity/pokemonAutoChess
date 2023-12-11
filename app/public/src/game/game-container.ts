@@ -93,7 +93,7 @@ class GameContainer {
   }
 
   initializePokemon(pokemon: PokemonEntity, simulation: Simulation) {
-    this.gameScene?.battle?.addPokemon(simulation.id, pokemon)
+    this.gameScene?.battle?.addPokemonEntitySprite(simulation.id, pokemon)
     const fields: NonFunctionPropNames<Status>[] = [
       "armorReduction",
       "burn",
@@ -520,7 +520,7 @@ class GameContainer {
       player.id === this.spectatedPlayerId &&
       (board.mode === BoardMode.PICK || pokemon.positionY === 0)
     ) {
-      const pokemonUI = this.gameScene?.board?.addPokemon(pokemon)
+      const pokemonUI = this.gameScene?.board?.addPokemonSprite(pokemon)
       if (pokemonUI && pokemon.action === PokemonActionState.FISH) {
         pokemonUI.fishingAnimation()
       }
