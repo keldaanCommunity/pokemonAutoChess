@@ -1199,7 +1199,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             this.state.shinyEncounter,
             pveStage.emotion
           )
-          player.opponentTitle = "Wild"
+          player.opponentTitle = "WILD"
           const rewards = pveStage.getRewards(this.state.shinyEncounter)
           resetArraySchema(player.pveRewards, rewards)
 

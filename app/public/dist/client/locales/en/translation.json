@@ -1830,7 +1830,8 @@
     "FISHERMAN": "Fisherman",
     "CHOSEN_ONE": "Chosen One",
     "VANQUISHER": "Vanquisher",
-    "OUTSIDER": "Outsider"
+    "OUTSIDER": "Outsider",
+    "WILD": "Wild"
   },
   "title_description": {
     "NOVICE": "Play your first game",
