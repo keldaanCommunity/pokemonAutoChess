@@ -968,7 +968,7 @@
     "BLIZZARD": "Deja FREEZE a todos los Pokémon enemigos durante [1,2,3] segundos e inflige [5,10,15,SP] SPECIAL. Daño doble si el enemigo ya está FREEZE",
     "CONFUSION": "Confunde al objetivo durante [3,5,7] segundos. Si el objetivo ya esta CONFUSION, inflige [75,150,300,SP] SPECIAL en su lugar",
     "FIRE_BLAST": "Lanza una ráfaga de fuego para hacer [30,60,120,SP] de SPECIAL",
-    "WHEEL_OF_FIRE": "Envía una rueda de fuego que hace un viaje de ida y vuelta haciendo [15,25,45,SP] de SPECIAL",
+    "WHEEL_OF_FIRE": "Envía una rueda de fuego que hace un viaje de ida y vuelta haciendo [10,20,30,SP] de SPECIAL",
     "SEISMIC_TOSS": "Ataque de objetivo único que inflige [7,14,28,SP] de TRUE multiplicado por la cantidad de Pokémon en tu equipo",
     "GUILLOTINE": "Ataque de un solo objetivo que inflige [1,2,3,SP] x ATK SPECIAL. Restaura la mitad de PP si el objetivo es KO",
     "ROCK_SLIDE": "Ataque de un solo objetivo que inflige [30,60,120,SP] de SPECIAL. Duplica el daño si el objetivo es de tipo volador.",
@@ -1184,7 +1184,7 @@
     "BODY_SLAM": "Inflige [30,SP]% del HP máximo del usuaio como SPECIAL",
     "BARB_BARRAGE": "Bucea en medio del equipo enemigo, causando [15,30,60,SP] de SPECIAL y dejando POISONa todos los pokemon adyacentes por 3 segundos",
     "MAGIC_POWDER": "Gana [10,20,40,SP] SHIELD y deja SILENCE a los enemigos adyacentes por [2,4,6] segundos",
-    "INFERNAL_PARADE": "Lanza una rueda flamígera de ida y vuelta con 50% chance de dejar BURN por 3s y golpeando [60, SP] de SPECIAL 2 veces a los pokemon con los que choca",
+    "INFERNAL_PARADE": "Lanza una rueda flamígera de ida y vuelta con 50% chance de dejar BURN por 3s y golpeando [30, SP] de SPECIAL 2 veces a los pokemon con los que choca",
     "RETALIATE": "Inflige [15,30,60,SP] de SPECIAL al objetivo + [5,10,15,SP] de SPECIAL adicional por aliado caido",
     "SLASH": "Inflige [10,20,40,SP] de SPECIAL con un [30,60,90]% aumentado de CRIT_CHANCE",
     "OUTRAGE": "El pokemon queda CONFUSION por 2s e inflige [2,3,4,SP] ATK como SPECIAL al objetivo y enemigos adyacentes"
