@@ -968,7 +968,7 @@
     "BLIZZARD": "FREEZE all enemy Pokémon for [1,2,3] seconds and deal [5,10,15,SP] SPECIAL. Double damage if enemy is already FREEZE",
     "CONFUSION": "CONFUSION the target for [3,5,7] seconds. If the target is already CONFUSION, deal [75,150,300,SP] SPECIAL instead",
     "FIRE_BLAST": "Shoot a Fire Blast, dealing [30,60,120,SP] SPECIAL to the target",
-    "WHEEL_OF_FIRE": "Shoot a returning Flame Wheel, dealing twice [15,25,45,SP] SPECIAL to all enemy Pokémon hit",
+    "WHEEL_OF_FIRE": "Shoot a returning Flame Wheel, dealing twice [10,20,30,SP] SPECIAL to all enemy Pokémon hit",
     "SEISMIC_TOSS": "Deal [7,14,28,SP] TRUE to the target, multiplied by the number of Pokémon in your team",
     "GUILLOTINE": "Deal [1,2,3,SP] x ATK SPECIAL to the target. Restore half the user's PP if the target is KO'd",
     "ROCK_SLIDE": "Deal [30,60,120,SP] SPECIAL to the target. If the target is a Flying Pokémon, the damage is doubled",
@@ -1184,7 +1184,7 @@
     "BODY_SLAM": "Deals [30,SP]% of user max HP as SPECIAL",
     "BARB_BARRAGE": "Dives into the middle of the enemy team, inflicting [15,30,60,SP] SPECIAL and POISON all adjacent units for 3 seconds",
     "MAGIC_POWDER": "Gain [10,20,40,SP] SHIELD and SILENCE adjacent enemies for [2,4,6] seconds",
-    "INFERNAL_PARADE": "Shoot a returning Flame Wheel, 50% chance to BURN for 3s and dealing twice [60, SP] SPECIAL to all enemy Pokémon hit",
+    "INFERNAL_PARADE": "Shoot a returning Flame Wheel, 50% chance to BURN for 3s and dealing twice [30, SP] SPECIAL to all enemy Pokémon hit",
     "RETALIATE": "Deals [15,30,60,SP] SPECIAL to the target + [5,10,15,SP] additional SPECIAL per fallen ally",
     "SLASH": "Deals [10,20,40,SP] SPECIAL with a [30,60,90]% increased CRIT_CHANCE ratio",
     "OUTRAGE": "The pokémon is CONFUSION for 2s and deals [2,3,4,SP] ATK as SPECIAL to the target and adjacent enemies"

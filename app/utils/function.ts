@@ -39,3 +39,10 @@ export function throttle<T extends (...args: any) => any>(
     return lastResult
   }
 }
+
+// repeat fn several times
+export const repeat = (n: number) => (cb: Function) => {
+  for (let i = 0; i < n; i++) {
+    cb(i)
+  }
+}
