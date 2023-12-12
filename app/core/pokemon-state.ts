@@ -315,7 +315,7 @@ export default class PokemonState {
       if (death) {
         pokemon.onDeath({ board })
         board.setValue(pokemon.positionX, pokemon.positionY, undefined)
-        if (attacker) {
+        if (attacker && pokemon !== attacker) {
           attacker.onKill({ target: pokemon, board })
         }
         const effectsRemovedList: Effect[] = []
