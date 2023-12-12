@@ -3242,19 +3242,19 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.VANILLITE]: {
-    attack: AnimationType.DeepBreath,
-    ability: AnimationType.HitGround,
-    emote: AnimationType.Shoot
+    attack: AnimationType.Shoot,
+    ability: AnimationType.DeepBreath,
+    emote: AnimationType.Pose
   },
   [Pkm.VANILLISH]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot
+    ability: AnimationType.Charge,
+    emote: AnimationType.Rotate
   },
   [Pkm.VANILLUXE]: {
-    attack: AnimationType.Attack,
-    ability: AnimationType.Attack,
-    emote: AnimationType.Shoot
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Rotate
   },
   [Pkm.GLACEON]: {
     attack: AnimationType.Shoot,
