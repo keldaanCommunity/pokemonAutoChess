@@ -59,7 +59,7 @@ import {
 } from "../../utils/random"
 import { effectInLine, OrientationArray } from "../../utils/orientation"
 import { logger } from "../../utils/logger"
-
+import { repeat } from "../../utils/function"
 import { max, min } from "../../utils/number"
 import { distanceC, distanceM } from "../../utils/distance"
 
@@ -2366,7 +2366,7 @@ export class WheelOfFireStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    const damage = pokemon.stars === 3 ? 45 : pokemon.stars === 2 ? 25 : 15
+    const damage = [10, 20, 30][pokemon.stars - 1] ?? 30
 
     const farthestTarget = state.getFarthestTarget(pokemon, board)
     if (farthestTarget) {
@@ -2386,26 +2386,22 @@ export class WheelOfFireStrategy extends AbilityStrategy {
       })
       cells.forEach((cell) => {
         if (cell.value && cell.value.team != pokemon.team) {
+          const enemy = cell.value
           pokemon.simulation.room.broadcast(Transfer.ABILITY, {
             id: pokemon.simulation.id,
             skill: "FLAME_HIT",
-            positionX: cell.value.positionX,
-            positionY: cell.value.positionY
+            positionX: enemy.positionX,
+            positionY: enemy.positionY
           })
 
-          cell.value.handleSpecialDamage(
-            damage,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit
-          )
-          cell.value.handleSpecialDamage(
-            damage,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit
+          repeat(2)(() =>
+            enemy.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
           )
         }
       })
@@ -2441,30 +2437,26 @@ export class InfernalParadeStrategy extends AbilityStrategy {
       })
       cells.forEach((cell) => {
         if (cell.value && cell.value.team != pokemon.team) {
+          const enemy = cell.value
           pokemon.simulation.room.broadcast(Transfer.ABILITY, {
             id: pokemon.simulation.id,
             skill: "FLAME_HIT",
-            positionX: cell.value.positionX,
-            positionY: cell.value.positionY
+            positionX: enemy.positionX,
+            positionY: enemy.positionY
           })
 
           if (Math.random() > 0.5) {
-            cell.value.status.triggerBurn(3000, cell.value, pokemon, board)
+            enemy.status.triggerBurn(3000, enemy, pokemon, board)
           }
 
-          cell.value.handleSpecialDamage(
-            60,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit
-          )
-          cell.value.handleSpecialDamage(
-            60,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit
+          repeat(2)(() =>
+            enemy.handleSpecialDamage(
+              30,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
           )
         }
       })
