@@ -176,13 +176,12 @@ export function rewriteBotRoundsRequiredto1(bot: IBot) {
 }
 
 export function estimateElo(bot: IBot): number {
-  const stepsToEvaluate = bot.steps.slice(3)
+  const scores = bot.steps
+    .map((step, stage) => getPowerEvaluation(getPowerScore(step.board), stage))
+    .slice(3)
+
   const averageScore =
-    stepsToEvaluate
-      .map((step, stage) =>
-        getPowerEvaluation(getPowerScore(step.board), stage + 3)
-      )
-      .reduce((total, score) => total + score, 0) / stepsToEvaluate.length
+    scores.reduce((total, score) => total + score, 0) / scores.length
 
   if (averageScore < 10) return 500
   if (averageScore < 20) return 600
