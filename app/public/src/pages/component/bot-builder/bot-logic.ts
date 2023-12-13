@@ -180,7 +180,7 @@ export function estimateElo(bot: IBot): number {
   const averageScore =
     stepsToEvaluate
       .map((step, stage) =>
-        getPowerEvaluation(getPowerScore(step.board), stage)
+        getPowerEvaluation(getPowerScore(step.board), stage + 3)
       )
       .reduce((total, score) => total + score, 0) / stepsToEvaluate.length
 
