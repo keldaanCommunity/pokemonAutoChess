@@ -33,11 +33,11 @@ export const RarityCost: { [key in Rarity]: number } = Object.freeze({
   [Rarity.UNCOMMON]: 2,
   [Rarity.RARE]: 3,
   [Rarity.EPIC]: 4,
-  [Rarity.HATCH]: 4,
   [Rarity.ULTRA]: 5,
   [Rarity.UNIQUE]: 6,
   [Rarity.LEGENDARY]: 7,
-  [Rarity.MYTHICAL]: 10
+  [Rarity.MYTHICAL]: 10,
+  [Rarity.HATCH]: 11
 })
 
 export const EmotionCost: { [key in Emotion]: number } = {
