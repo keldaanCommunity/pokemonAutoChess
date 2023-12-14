@@ -5,7 +5,11 @@ import PokemonFactory, {
 import { Synergy, SynergyEffects } from "../../../../../types/enum/Synergy"
 import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../../../../models/precomputed"
 import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
-import { SynergyTriggers, RarityColor } from "../../../../../types/Config"
+import {
+  SynergyTriggers,
+  RarityColor,
+  RarityCost
+} from "../../../../../types/Config"
 import { useAppSelector } from "../../../hooks"
 import { getPortraitSrc } from "../../../utils"
 import SynergyIcon from "../icons/synergy-icon"
@@ -74,12 +78,12 @@ export default function SynergyDetailComponent(props: {
         )
       })}
       <div style={{ display: "flex", flexWrap: "wrap" }}>
-        {PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[props.type].pokemons.map(
-          (p) => {
-            const pokemon = PokemonFactory.createPokemonFromName(p as Pkm)
-            return <PokemonPortrait p={pokemon} key={p} />
-          }
-        )}
+        {PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[props.type].pokemons
+          .map((p) => PokemonFactory.createPokemonFromName(p as Pkm))
+          .sort((a, b) => RarityCost[a.rarity] - RarityCost[b.rarity])
+          .map((p) => (
+            <PokemonPortrait p={p} key={p.name} />
+          ))}
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
         {additionals.map((p) => {
