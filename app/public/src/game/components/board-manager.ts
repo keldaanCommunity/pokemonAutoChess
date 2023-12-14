@@ -126,7 +126,7 @@ export default class BoardManager {
     }
   }
 
-  addPokemon(pokemon: IPokemon): Pokemon {
+  addPokemonSprite(pokemon: IPokemon): Pokemon {
     if (this.pokemons.has(pokemon.id)) {
       return this.pokemons.get(pokemon.id)!
     }
@@ -159,13 +159,15 @@ export default class BoardManager {
   }
 
   renderBoard() {
-    this.showLightCell()
     this.showBerryTree()
     this.pokemons.forEach((p) => p.destroy())
     this.pokemons.clear()
-    this.player.board.forEach((pokemon) => {
-      this.addPokemon(pokemon)
-    })
+    if (this.mode === BoardMode.PICK) {
+      this.showLightCell()
+      this.player.board.forEach((pokemon) => {
+        this.addPokemonSprite(pokemon)
+      })
+    }
   }
 
   showLightCell() {

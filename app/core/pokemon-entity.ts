@@ -882,10 +882,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           attackBoost = 10
           apBoost = 30
         }
-        this.addMaxHP(lifeBoost)
-        this.addAttack(attackBoost)
-        this.addAbilityPower(apBoost, false)
-        this.count.monsterExecutionCount++
+        if (this.life > 0) {
+          this.addMaxHP(lifeBoost)
+          this.addAttack(attackBoost)
+          this.addAbilityPower(apBoost, false)
+          this.count.monsterExecutionCount++
+        }
       }
     }
 
