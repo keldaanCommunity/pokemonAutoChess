@@ -182,14 +182,17 @@ export default class Simulation extends Schema implements ISimulation {
           }
 
           player.board.forEach((pokemon) => {
-            pokemon.afterSimulationStart({
-              simulation: this,
-              player,
-              team: entityTeam,
-              entity: values(entityTeam).find(
-                (p) => p.refToBoardPokemon === pokemon
-              )!
-            })
+            const entity = values(entityTeam).find(
+              (p) => p.refToBoardPokemon === pokemon
+            )
+            if (entity) {
+              pokemon.afterSimulationStart({
+                simulation: this,
+                player,
+                team: entityTeam,
+                entity
+              })
+            }
           })
         }
       }
