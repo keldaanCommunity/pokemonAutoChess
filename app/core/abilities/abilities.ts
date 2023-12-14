@@ -5508,7 +5508,7 @@ export class AttractStrategy extends AbilityStrategy {
           positionX: t.positionX,
           positionY: t.positionY
         })
-        t?.status.triggerCharm(2500, t, pokemon, true)
+        t?.status.triggerCharm(1000, t, pokemon, true)
       }
     })
   }
