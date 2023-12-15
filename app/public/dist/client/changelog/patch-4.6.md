@@ -16,3 +16,4 @@
 # Misc
 
 - Self damage is no longer counted in DPS report (example: Flame orb)
+- Another ranked lobby opens when the previous one is full
