@@ -12,9 +12,14 @@ import { BotDifficulty, LobbyType } from "../../types/enum/Game"
 import { pickRandomIn } from "../../utils/random"
 import { logger } from "../../utils/logger"
 import { entries, values } from "../../utils/schemas"
-import { EloRankThreshold, MAX_PLAYERS_PER_LOBBY } from "../../types/Config"
+import {
+  EloRank,
+  EloRankThreshold,
+  MAX_PLAYERS_PER_LOBBY
+} from "../../types/Config"
 import { memoryUsage } from "node:process"
 import { FilterQuery } from "mongoose"
+import { OpenRankedLobbyCommand } from "./lobby-commands"
 
 export class OnJoinCommand extends Command<
   PreparationRoom,
