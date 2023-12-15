@@ -4,6 +4,7 @@
 
 
 # Changes to Synergies
+- Nerf aquatic: 35/45/55% chance to drain PP from target
 
 # Changes to Items
 
