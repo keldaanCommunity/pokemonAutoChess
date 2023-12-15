@@ -2586,8 +2586,15 @@ export default class AnimationManager {
       entity
     )
 
+    let lock = false,
+      loop = false
+    if (action === PokemonActionState.HOP) {
+      lock = true
+      loop = true
+    }
+
     try {
-      this.play(entity, animation, { flip })
+      this.play(entity, animation, { flip, lock, loop })
     } catch (err) {
       logger.warn(`Can't play animation ${animation} for ${entity.name}`, err)
     }
