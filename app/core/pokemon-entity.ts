@@ -588,15 +588,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         : this.effects.has(Effect.HYDRATION)
         ? 0.45
         : 0.55
-      const manaGain = this.effects.has(Effect.SWIFT_SWIM)
-        ? 15
-        : this.effects.has(Effect.HYDRATION)
-        ? 30
-        : 45
+      const manaDrain = 20
       if (chance(burnManaChance)) {
-        target.addPP(-20)
+        target.addPP(-manaDrain)
         target.count.manaBurnCount++
-        this.addPP(manaGain)
+        this.addPP(manaDrain)
       }
     }
 

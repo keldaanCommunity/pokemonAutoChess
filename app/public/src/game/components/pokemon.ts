@@ -34,7 +34,7 @@ import { Passive } from "../../../../types/enum/Passive"
 import PowerBar from "./power-bar"
 import { Synergy } from "../../../../types/enum/Synergy"
 import { Pkm } from "../../../../types/enum/Pokemon"
-import { clamp } from "../../../../utils/number"
+import { clamp, min } from "../../../../utils/number"
 import {
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_DAMAGE
@@ -275,7 +275,7 @@ export default class Pokemon extends DraggableObject {
       if (this.input && preferences.showDetailsOnHover) {
         this.detail.setPosition(
           this.input.localX + 200,
-          this.input.localY - 175
+          min(0)(this.input.localY - 175)
         )
         return
       }
@@ -341,7 +341,7 @@ export default class Pokemon extends DraggableObject {
     )
     this.detail.setPosition(
       this.detail.width / 2 + 40,
-      -this.detail.height / 2 - 40
+      min(0)(-this.detail.height / 2 - 40)
     )
 
     this.detail.removeInteractive()
