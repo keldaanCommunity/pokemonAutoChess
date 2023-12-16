@@ -1658,7 +1658,7 @@
   "stat_description": {
     "ATK": "Dégâts infligés par chaque attaque de base",
     "ATK_SPEED": "Nombre d'attaques par seconde. Maximum 2,5.",
-    "CRIT_CHANCE": "Les coups critiques infligent 2 fois plus de dégâts. Les capacités ne peuvent pas faire de dégats critiques par défaut.",
+    "CRIT_CHANCE": "Les coups critiques infligent 2 fois plus de dégâts. Les capacités ne peuvent pas faire de dégats critiques par défaut. La chance de critique au delà de 100% est convertie en dégâts critiques additionnels.",
     "CRIT_DAMAGE": "Multiplicateur pour les dégâts supplémentaires des coups critiques",
     "DEF": "Réduit les PHYSICAL reçus",
     "SPE_DEF": "Réduit les SPECIAL reçus",

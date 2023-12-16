@@ -1658,7 +1658,7 @@
   "stat_description": {
     "ATK": "Damage inflicted on each basic attack",
     "ATK_SPEED": "Number of attacks per second. Maximum 2.5.",
-    "CRIT_CHANCE": "Critical hits deal 2x more damage. Abilities cannot crit by default.",
+    "CRIT_CHANCE": "Critical hits deal 2x more damage. Abilities cannot crit by default. Crit chance over 100% is converted to Crit damage.",
     "CRIT_DAMAGE": "Multiplier for critical hits additional damage",
     "DEF": "Reduces PHYSICAL received",
     "SPE_DEF": "Reduces SPECIAL received",
