@@ -267,7 +267,8 @@
     "MAGIC_POWDER": "Magic Powder",
     "RETALIATE": "Retaliate",
     "SLASH": "Slash",
-    "OUTRAGE": "Outrage"
+    "OUTRAGE": "Outrage",
+    "KNOCK_OFF": "Knock Off"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -934,7 +935,8 @@
     "HERDIER": "Herdier",
     "STOUTLAND": "Stoutland",
     "ZIGZAGOON": "Zigzagoon",
-    "LINOONE": "Linoone"
+    "LINOONE": "Linoone",
+    "SABLEYE": "Sableye"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1187,7 +1189,8 @@
     "INFERNAL_PARADE": "Shoot a returning Flame Wheel, 50% chance to BURN for 3s and dealing twice [30, SP] SPECIAL to all enemy Pokémon hit",
     "RETALIATE": "Deals [15,30,60,SP] SPECIAL to the target + [5,10,15,SP] additional SPECIAL per fallen ally",
     "SLASH": "Deals [10,20,40,SP] SPECIAL with a [30,60,90]% increased CRIT_CHANCE ratio",
-    "OUTRAGE": "The pokémon is CONFUSION for 2s and deals [2,3,4,SP] ATK as SPECIAL to the target and adjacent enemies"
+    "OUTRAGE": "The pokémon is CONFUSION for 2s and deals [2,3,4,SP] ATK as SPECIAL to the target and adjacent enemies",
+    "KNOCK_OFF": "Deals [90,SP] SPECIAL. If target is holding items, they are removed and an additional [30,SP] SPECIAL is dealt per item"
   },
   "effect": {
     "INGRAIN": "Ingrain",

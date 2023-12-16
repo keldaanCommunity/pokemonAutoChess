@@ -5334,7 +5334,7 @@ export class Mawile extends Pokemon {
     entity: IPokemonEntity
     simulation: Simulation
   }) {
-    let mawile = entity as PokemonEntity
+    const mawile = entity as PokemonEntity
     AbilityStrategies[Ability.ATTRACT].process(
       mawile,
       mawile.state,
@@ -9905,6 +9905,20 @@ export class Carnivine extends Pokemon {
   attackSprite = AttackSprite.GRASS_RANGE
 }
 
+export class Sableye extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.ROCK, Synergy.GHOST])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 220
+  atk = 12
+  def = 5
+  speDef = 5
+  maxPP = 80
+  range = 1
+  skill = Ability.KNOCK_OFF
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
 export class Koffing extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.POISON, Synergy.ARTIFICIAL])
   rarity = Rarity.UNCOMMON
@@ -11687,5 +11701,6 @@ export const PokemonClasses: Record<
   [Pkm.HERDIER]: Herdier,
   [Pkm.STOUTLAND]: Stoutland,
   [Pkm.ZIGZAGOON]: Zigzagoon,
-  [Pkm.LINOONE]: Linoone
+  [Pkm.LINOONE]: Linoone,
+  [Pkm.SABLEYE]: Sableye
 }
