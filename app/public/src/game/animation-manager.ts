@@ -939,6 +939,16 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.KNOCK_OFF,
+      frames: this.game.anims.generateFrameNames(Ability.KNOCK_OFF, {
+        start: 0,
+        end: 10
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.SLASH,
       frames: this.game.anims.generateFrameNames(Ability.SLASH, {
         start: 0,

@@ -665,7 +665,8 @@ export enum Pkm {
   HERDIER = "HERDIER",
   STOUTLAND = "STOUTLAND",
   ZIGZAGOON = "ZIGZAGOON",
-  LINOONE = "LINOONE"
+  LINOONE = "LINOONE",
+  SABLEYE = "SABLEYE"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1333,7 +1334,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.HERDIER]: "0507",
   [Pkm.STOUTLAND]: "0508",
   [Pkm.ZIGZAGOON]: "0263",
-  [Pkm.LINOONE]: "0264"
+  [Pkm.LINOONE]: "0264",
+  [Pkm.SABLEYE]: "0302"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2001,7 +2003,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.HERDIER]: Pkm.LILLIPUP,
   [Pkm.STOUTLAND]: Pkm.LILLIPUP,
   [Pkm.ZIGZAGOON]: Pkm.ZIGZAGOON,
-  [Pkm.LINOONE]: Pkm.ZIGZAGOON
+  [Pkm.LINOONE]: Pkm.ZIGZAGOON,
+  [Pkm.SABLEYE]: Pkm.SABLEYE
 }
 
 export enum PkmDuo {
@@ -5459,5 +5462,10 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.RearUp
+  },
+  [Pkm.SABLEYE]: {
+    attack: AnimationType.MultiStrike,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Charge
   }
 }

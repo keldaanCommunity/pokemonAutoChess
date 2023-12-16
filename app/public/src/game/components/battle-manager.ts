@@ -3833,6 +3833,25 @@ export default class BattleManager {
             )
             break
 
+          case Ability.KNOCK_OFF:
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.KNOCK_OFF,
+              "0"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.KNOCK_OFF)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
+
           case Ability.SLASH:
             coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(

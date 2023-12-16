@@ -3786,6 +3786,45 @@ export class ThiefStrategy extends AbilityStrategy {
   }
 }
 
+export class KnockOffStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = 90 + target.items.size * 30
+
+    const l = target.items.size
+    target.items.forEach((item) => {
+      target.items.delete(item)
+      if (item === Item.MAX_REVIVE && target.status.resurection) {
+        target.status.resurection = false
+      }
+    })
+
+    // update artificial synergy bonuses
+    if (pokemon.effects.has(Effect.DUBIOUS_DISC)) {
+      pokemon.addAttack(4 * l, true)
+      pokemon.addShield(20 * l, pokemon)
+    }
+
+    if (pokemon.effects.has(Effect.LINK_CABLE)) {
+      pokemon.addAttack(7 * l, true)
+      pokemon.addShield(30 * l, pokemon)
+    }
+
+    if (pokemon.effects.has(Effect.GOOGLE_SPECS)) {
+      pokemon.addAttack(10 * l, true)
+      pokemon.addShield(50 * l, pokemon)
+    }
+
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+  }
+}
+
 export class StunSporeStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -6844,5 +6883,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.MAGIC_POWDER]: new MagicPowderStrategy(),
   [Ability.RETALIATE]: new RetaliateStrategy(),
   [Ability.SLASH]: new SlashStrategy(),
-  [Ability.OUTRAGE]: new OutrageStrategy()
+  [Ability.OUTRAGE]: new OutrageStrategy(),
+  [Ability.KNOCK_OFF]: new KnockOffStrategy()
 }

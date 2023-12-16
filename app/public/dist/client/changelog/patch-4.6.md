@@ -1,16 +1,19 @@
 # New Pokemons:
 
+- Sableye
+
 # Changes to Pokemon & Abilities
+
 - Added sprites for Vanilluxe and Dragapult
 - Nerf Attract: duration ~~2.5~~ 1 second
 
 # Changes to Synergies
+
 - Nerf aquatic: 35/45/55% chance to drain 20 PP from target
 
 # Changes to Items
 
 # UI
-
 
 # Bugfix
 
