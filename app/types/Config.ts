@@ -332,6 +332,8 @@ export const UniqueShop = new Array<PkmProposition>(
   Pkm.TANDEMAUS,
   Pkm.TROPIUS,
   Pkm.CARNIVINE,
+  Pkm.HOOPA,
+  Pkm.COMFEY,
   Pkm.SABLEYE
 )
 
