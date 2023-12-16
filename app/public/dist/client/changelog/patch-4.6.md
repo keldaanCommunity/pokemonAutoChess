@@ -1,7 +1,7 @@
 # New Pokemons:
 
 # Changes to Pokemon & Abilities
-
+- Added sprites for Vanilluxe and Dragapult
 - Nerf Attract: duration ~~2.5~~ 1 second
 
 # Changes to Synergies
@@ -10,6 +10,7 @@
 # Changes to Items
 
 # UI
+
 
 # Bugfix
 

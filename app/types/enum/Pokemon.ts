@@ -4385,18 +4385,18 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.DREEPY]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Charge,
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
   [Pkm.DRAKLOAK]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Charge,
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
   [Pkm.DRAGAPULT]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
   [Pkm.SNIVY]: {
