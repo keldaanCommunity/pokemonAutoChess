@@ -293,9 +293,17 @@ export default class BoardManager {
     )
   }
 
-  updateOpponentAvatar(opponentId: string, opponentAvatarString: string) {
+  updateOpponentAvatar(
+    opponentId: string | null,
+    opponentAvatarString: string | null
+  ) {
     if (this.opponentAvatar) {
       this.opponentAvatar.destroy()
+    }
+    if (this.pveChestGroup) {
+      this.pveChestGroup.destroy(true, true)
+      this.pveChest = null
+      this.pveChestGroup = null
     }
 
     if (opponentId === "pve") {
@@ -309,7 +317,8 @@ export default class BoardManager {
         if (p.id === opponentId) opponentLife = p.life
       })
 
-      if (opponentLife <= 0) return // do not display avatar when player is dead
+      // do not display avatar when player is dead
+      if (opponentLife <= 0 || !opponentAvatarString || !opponentId) return
 
       const opponentAvatar = new PokemonAvatarModel(
         this.player.id,
@@ -366,14 +375,7 @@ export default class BoardManager {
     this.mode = BoardMode.PICK
     this.renderBoard()
     this.updatePlayerAvatar()
-    if (this.opponentAvatar) {
-      this.opponentAvatar.destroy()
-    }
-    if (this.pveChestGroup) {
-      this.pveChestGroup.destroy(true, true)
-      this.pveChest = null
-      this.pveChestGroup = null
-    }
+    this.updateOpponentAvatar(null, null)
   }
 
   minigameMode() {
@@ -390,14 +392,7 @@ export default class BoardManager {
     if (this.playerAvatar) {
       this.playerAvatar.destroy()
     }
-    if (this.opponentAvatar) {
-      this.opponentAvatar.destroy()
-    }
-    if (this.pveChestGroup) {
-      this.pveChestGroup.destroy(true, true)
-      this.pveChest = null
-      this.pveChestGroup = null
-    }
+    this.updateOpponentAvatar(null, null)
   }
 
   setPlayer(player: Player) {

@@ -33,11 +33,11 @@ export const RarityCost: { [key in Rarity]: number } = Object.freeze({
   [Rarity.UNCOMMON]: 2,
   [Rarity.RARE]: 3,
   [Rarity.EPIC]: 4,
-  [Rarity.HATCH]: 4,
   [Rarity.ULTRA]: 5,
   [Rarity.UNIQUE]: 6,
   [Rarity.LEGENDARY]: 7,
-  [Rarity.MYTHICAL]: 10
+  [Rarity.MYTHICAL]: 10,
+  [Rarity.HATCH]: 11
 })
 
 export const EmotionCost: { [key in Emotion]: number } = {
@@ -153,11 +153,11 @@ export const RarityProbabilityPerLevel: { [key: number]: number[] } = {
   2: [1, 0, 0, 0, 0],
   3: [0.7, 0.3, 0, 0, 0],
   4: [0.55, 0.35, 0.1, 0, 0],
-  5: [0.4, 0.3, 0.25, 0.05, 0],
-  6: [0.29, 0.31, 0.295, 0.1, 0.005],
-  7: [0.22, 0.28, 0.33, 0.15, 0.02],
-  8: [0.16, 0.24, 0.33, 0.22, 0.05],
-  9: [0.1, 0.19, 0.31, 0.3, 0.1]
+  5: [0.4, 0.38, 0.2, 0.02, 0],
+  6: [0.25, 0.4, 0.3, 0.05, 0],
+  7: [0.16, 0.33, 0.35, 0.15, 0.01],
+  8: [0.11, 0.27, 0.35, 0.22, 0.05],
+  9: [0.05, 0.2, 0.35, 0.3, 0.1]
 }
 
 export const EvolutionTime = {
@@ -333,7 +333,8 @@ export const UniqueShop = new Array<PkmProposition>(
   Pkm.TROPIUS,
   Pkm.CARNIVINE,
   Pkm.HOOPA,
-  Pkm.COMFEY
+  Pkm.COMFEY,
+  Pkm.SABLEYE
 )
 
 export const LegendaryShop = new Array<PkmProposition>(
@@ -431,8 +432,8 @@ export const DEFAULT_CRIT_DAMAGE = 2
 
 export const StageDuration: Record<number | "DEFAULT", number> = {
   1: 20,
-  10: 40,
-  20: 40,
+  10: 45,
+  20: 45,
   DEFAULT: 30
 }
 export const FIGHTING_PHASE_DURATION = 40000

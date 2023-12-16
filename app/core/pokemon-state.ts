@@ -249,21 +249,23 @@ export default class PokemonState {
         pokemon.onDamageReceived({ attacker, damage: takenDamage, board })
         if (attacker) {
           attacker.onDamageDealt({ target: pokemon, damage: takenDamage })
-          switch (attackType) {
-            case AttackType.PHYSICAL:
-              attacker.physicalDamage += takenDamage
-              break
-
-            case AttackType.SPECIAL:
-              attacker.specialDamage += takenDamage
-              break
-
-            case AttackType.TRUE:
-              attacker.trueDamage += takenDamage
-              break
-
-            default:
-              break
+          if(pokemon !== attacker){ // do not count self damage
+            switch (attackType) {
+              case AttackType.PHYSICAL:
+                attacker.physicalDamage += takenDamage
+                break
+  
+              case AttackType.SPECIAL:
+                attacker.specialDamage += takenDamage
+                break
+  
+              case AttackType.TRUE:
+                attacker.trueDamage += takenDamage
+                break
+  
+              default:
+                break
+            }
           }
 
           pokemon.simulation.room.broadcast(Transfer.POKEMON_DAMAGE, {

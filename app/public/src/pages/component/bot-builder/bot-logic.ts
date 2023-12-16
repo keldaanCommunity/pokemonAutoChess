@@ -40,6 +40,7 @@ export const POWER_SCORE_BY_CATEGORY = {
   "UNCOMMON 2S T3": 4,
   "UNCOMMON 3S T2": 2.5,
   "UNCOMMON 3S T3": 5,
+  "UNCOMMON 3S T4": 7,
   "RARE T1": 1.5,
   "RARE 2S T2": 4,
   "RARE 3S T2": 3,
@@ -52,6 +53,7 @@ export const POWER_SCORE_BY_CATEGORY = {
   "EPIC 2S T3": 7,
   "EPIC 3S T2": 4,
   "EPIC 3S T3": 8,
+  "EPIC 2S T2 DUO": 4,
   "ULTRA T1": 3,
   "ULTRA 3S T2": 6,
   "ULTRA 3S T3": 10,
@@ -62,9 +64,9 @@ export const POWER_SCORE_BY_CATEGORY = {
   "LEGENDARY T3": 6,
   "LEGENDARY T4": 8,
   "LEGENDARY DUO": 4,
-  "MYTHICAL T3": 6,
+  "MYTHICAL T3": 8,
   "MYTHICAL T3 DUO": 6,
-  "MYTHICAL T4": 8,
+  "MYTHICAL T4": 10,
   "SPECIAL T1": 1.5,
   "SPECIAL T2": 3,
   "SPECIAL T3": 4.5,
@@ -72,9 +74,9 @@ export const POWER_SCORE_BY_CATEGORY = {
 }
 
 export const POWER_AVERAGES = [
-  2, 3, 3.5, 4, 4.5, 5, 6, 7, 8, 9, 11, 11.5, 12, 13, 14, 15, 16, 17, 18, 19,
-  24, 25, 25.5, 26, 27, 27.5, 28, 28.5, 29, 29.5, 30, 30.5, 31, 31.5, 32, 32.5,
-  33, 33.5, 34, 34.5, 35, 35.5, 36, 36.5, 37, 37.5, 38, 38.5, 39, 39.5, 40
+  2, 2, 3, 4, 4.5, 5, 6, 7, 8, 9, 11, 11.5, 12, 13, 14, 15, 16, 17, 18, 19, 24,
+  25, 25.5, 26, 27, 27.5, 28, 28.5, 29, 29.5, 30, 30.5, 31, 31.5, 32, 32.5, 33,
+  33.5, 34, 34.5, 35, 35.5, 36, 36.5, 37, 37.5, 38, 38.5, 39, 39.5, 40
 ]
 
 export const BOT_SCORES = {
@@ -174,12 +176,12 @@ export function rewriteBotRoundsRequiredto1(bot: IBot) {
 }
 
 export function estimateElo(bot: IBot): number {
+  const scores = bot.steps
+    .map((step, stage) => getPowerEvaluation(getPowerScore(step.board), stage))
+    .slice(3)
+
   const averageScore =
-    bot.steps
-      .map((step, stage) =>
-        getPowerEvaluation(getPowerScore(step.board), stage)
-      )
-      .reduce((total, score) => total + score, 0) / bot.steps.length
+    scores.reduce((total, score) => total + score, 0) / scores.length
 
   if (averageScore < 10) return 500
   if (averageScore < 20) return 600
