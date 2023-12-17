@@ -3797,29 +3797,12 @@ export class KnockOffStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const damage = 90 + target.items.size * 30
 
-    const l = target.items.size
     target.items.forEach((item) => {
       target.items.delete(item)
       if (item === Item.MAX_REVIVE && target.status.resurection) {
         target.status.resurection = false
       }
     })
-
-    // update artificial synergy bonuses
-    if (pokemon.effects.has(Effect.DUBIOUS_DISC)) {
-      pokemon.addAttack(4 * l, true)
-      pokemon.addShield(20 * l, pokemon)
-    }
-
-    if (pokemon.effects.has(Effect.LINK_CABLE)) {
-      pokemon.addAttack(7 * l, true)
-      pokemon.addShield(30 * l, pokemon)
-    }
-
-    if (pokemon.effects.has(Effect.GOOGLE_SPECS)) {
-      pokemon.addAttack(10 * l, true)
-      pokemon.addShield(50 * l, pokemon)
-    }
 
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
