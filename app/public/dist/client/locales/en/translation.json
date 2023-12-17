@@ -268,7 +268,8 @@
     "RETALIATE": "Retaliate",
     "SLASH": "Slash",
     "OUTRAGE": "Outrage",
-    "KNOCK_OFF": "Knock Off"
+    "KNOCK_OFF": "Knock Off",
+    "FISHIOUS_REND": "Fishious Rend"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -936,7 +937,8 @@
     "STOUTLAND": "Stoutland",
     "ZIGZAGOON": "Zigzagoon",
     "LINOONE": "Linoone",
-    "SABLEYE": "Sableye"
+    "SABLEYE": "Sableye",
+    "DRACOVISH": "Dracovish"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1190,7 +1192,8 @@
     "RETALIATE": "Deals [15,30,60,SP] SPECIAL to the target + [5,10,15,SP] additional SPECIAL per fallen ally",
     "SLASH": "Deals [10,20,40,SP] SPECIAL with a [30,60,90]% increased CRIT_CHANCE ratio",
     "OUTRAGE": "The pokémon is CONFUSION for 2s and deals [2,3,4,SP] ATK as SPECIAL to the target and adjacent enemies",
-    "KNOCK_OFF": "Deals [90,SP] SPECIAL. If target is holding items, they are removed and an additional [30,SP] SPECIAL is dealt per item"
+    "KNOCK_OFF": "Deals [90,SP] SPECIAL. If target is holding items, they are removed and an additional [30,SP] SPECIAL is dealt per item",
+    "FISHIOUS_REND": "Deals [80,SP] SPECIAL damage. Double damage if attacker has more ATK_SPEED than target."
   },
   "effect": {
     "INGRAIN": "Ingrain",

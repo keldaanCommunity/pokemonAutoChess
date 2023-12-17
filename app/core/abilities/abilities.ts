@@ -6629,6 +6629,21 @@ export class OutrageStrategy extends AbilityStrategy {
   }
 }
 
+export class FishiousRendStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    // deals 80 special damage. Double damage if attacker got more atk speed than target.
+    const damage = 80 * (pokemon.atkSpeed > target.atkSpeed ? 2 : 1)
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit, true)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -6884,5 +6899,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.RETALIATE]: new RetaliateStrategy(),
   [Ability.SLASH]: new SlashStrategy(),
   [Ability.OUTRAGE]: new OutrageStrategy(),
-  [Ability.KNOCK_OFF]: new KnockOffStrategy()
+  [Ability.KNOCK_OFF]: new KnockOffStrategy(),
+  [Ability.FISHIOUS_REND]: new FishiousRendStrategy()
 }
