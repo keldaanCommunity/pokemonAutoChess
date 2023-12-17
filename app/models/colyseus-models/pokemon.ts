@@ -11033,6 +11033,20 @@ export class Stoutland extends Pokemon {
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
+export class Pheromosa extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FIGHTING])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 180
+  atk = 35
+  def = 2
+  speDef = 2
+  maxPP = 80
+  range = 1
+  skill = Ability.LUNGE
+  attackSprite = AttackSprite.BUG_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (shiny: boolean, emotion: Emotion) => Pokemon
@@ -11702,5 +11716,6 @@ export const PokemonClasses: Record<
   [Pkm.STOUTLAND]: Stoutland,
   [Pkm.ZIGZAGOON]: Zigzagoon,
   [Pkm.LINOONE]: Linoone,
+  [Pkm.PHEROMOSA]: Pheromosa,
   [Pkm.SABLEYE]: Sableye
 }

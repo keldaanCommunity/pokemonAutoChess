@@ -268,6 +268,7 @@
     "RETALIATE": "Retaliate",
     "SLASH": "Slash",
     "OUTRAGE": "Outrage",
+    "LUNGE": "Lunge",
     "KNOCK_OFF": "Knock Off"
   },
   "pkm": {
@@ -936,6 +937,7 @@
     "STOUTLAND": "Stoutland",
     "ZIGZAGOON": "Zigzagoon",
     "LINOONE": "Linoone",
+    "PHEROMOSA": "Pheromosa",
     "SABLEYE": "Sableye"
   },
   "ability_description": {
@@ -1190,6 +1192,7 @@
     "RETALIATE": "Deals [15,30,60,SP] SPECIAL to the target + [5,10,15,SP] additional SPECIAL per fallen ally",
     "SLASH": "Deals [10,20,40,SP] SPECIAL with a [30,60,90]% increased CRIT_CHANCE ratio",
     "OUTRAGE": "The pokémon is CONFUSION for 2s and deals [2,3,4,SP] ATK as SPECIAL to the target and adjacent enemies",
+    "LUNGE": "Jumps to the opponent with the highest ATK, deals [50,SP] SPECIAL and reduce its ATK by [5,SP]",
     "KNOCK_OFF": "Deals [90,SP] SPECIAL. If target is holding items, they are removed and an additional [30,SP] SPECIAL is dealt per item"
   },
   "effect": {

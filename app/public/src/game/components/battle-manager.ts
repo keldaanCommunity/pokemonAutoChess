@@ -4056,6 +4056,7 @@ export default class BattleManager {
             break
 
           case Ability.HIGH_JUMP_KICK:
+          case Ability.LUNGE:
             coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],

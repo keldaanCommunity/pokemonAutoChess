@@ -378,7 +378,8 @@ export const LegendaryShop = new Array<PkmProposition>(
   Pkm.KARTANA,
   Pkm.NECROZMA,
   Pkm.XURKITREE,
-  Pkm.NIHILEGO
+  Pkm.NIHILEGO,
+  Pkm.PHEROMOSA
 )
 
 export const HatchList = new Array<Pkm>(

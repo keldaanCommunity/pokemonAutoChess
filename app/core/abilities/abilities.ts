@@ -45,7 +45,7 @@ import {
   EvolutionTime
 } from "../../types/Config"
 
-import Board from "../board"
+import Board, { Cell } from "../board"
 import { PokemonEntity } from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
 import PokemonFactory from "../../models/pokemon-factory"
@@ -5789,6 +5789,47 @@ export class AquaRingStrategy extends AbilityStrategy {
   }
 }
 
+export class LungeStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const enemiesSortedByAttack = board.cells
+      .filter((enemy) => enemy && enemy.team !== pokemon.team)
+      .sort((a, b) => b!.atk - a!.atk) as PokemonEntity[]
+
+    let cellToGo: Cell | undefined
+    let enemy: PokemonEntity | undefined
+    while (cellToGo == null && enemiesSortedByAttack.length > 0) {
+      enemy = enemiesSortedByAttack.shift()
+      if (enemy) {
+        cellToGo = board
+          .getAdjacentCells(enemy.positionX, enemy.positionY)
+          .find((cell) => cell.value == null)
+      }
+    }
+
+    if (cellToGo) {
+      pokemon.moveTo(cellToGo.x, cellToGo.y, board)
+      if (enemy) {
+        enemy.addAttack(-5, true)
+        enemy.handleSpecialDamage(
+          50,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit,
+          true
+        )
+      }
+    }
+  }
+}
+
 export class PoisonGasStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -6867,5 +6908,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.RETALIATE]: new RetaliateStrategy(),
   [Ability.SLASH]: new SlashStrategy(),
   [Ability.OUTRAGE]: new OutrageStrategy(),
+  [Ability.LUNGE]: new LungeStrategy(),
   [Ability.KNOCK_OFF]: new KnockOffStrategy()
 }
