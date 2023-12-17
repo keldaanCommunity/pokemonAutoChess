@@ -1,6 +1,7 @@
 # New Pokemons:
 
 - Sableye
+- Dracovish
 
 # Changes to Pokemon & Abilities
 
