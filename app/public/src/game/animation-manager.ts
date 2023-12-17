@@ -942,7 +942,7 @@ export default class AnimationManager {
       key: Ability.KNOCK_OFF,
       frames: this.game.anims.generateFrameNames(Ability.KNOCK_OFF, {
         start: 0,
-        end: 10
+        end: 9
       }),
       duration: 1000,
       repeat: 0
@@ -1508,6 +1508,17 @@ export default class AnimationManager {
         zeroPad: 3
       }),
       duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
+      key: Ability.FISHIOUS_REND,
+      frames: this.game.anims.generateFrameNames(Ability.LIQUIDATION, {
+        start: 0,
+        end: 4,
+        zeroPad: 3
+      }),
+      duration: 200,
       repeat: 0
     })
 
