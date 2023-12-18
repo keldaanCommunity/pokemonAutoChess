@@ -336,7 +336,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   addAttack(value: number, apBoost = false) {
     const boost = apBoost ? (value * this.ap) / 100 : 0
-    this.atk = min(0)(this.atk + Math.round(value + boost))
+    this.atk = min(1)(this.atk + Math.round(value + boost))
   }
 
   addAttackSpeed(value: number, apBoost = false) {
