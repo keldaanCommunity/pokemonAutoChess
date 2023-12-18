@@ -347,7 +347,7 @@ export default function Game() {
         toast(
           <div className="toast-player-income">
             <span style={{ verticalAlign: "middle" }}>+{value}</span>
-            <img className="icon-money" src="/assets/ui/money.svg" alt="$" />
+            <img className="icon-money" src="/assets/icons/money.svg" alt="$" />
           </div>,
           { containerId: "toast-money" }
         )

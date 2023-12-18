@@ -1,6 +1,7 @@
 import { MapSchema } from "@colyseus/schema"
 import { Emotion, IPlayer } from "../types"
 import { HatchList, RarityCost } from "../types/Config"
+import { Effect } from "../types/enum/Effect"
 import { PokemonActionState, Rarity } from "../types/enum/Game"
 import {
   Pkm,
@@ -12,6 +13,7 @@ import {
 import { Synergy } from "../types/enum/Synergy"
 import { logger } from "../utils/logger"
 import { pickRandomIn } from "../utils/random"
+import Player from "./colyseus-models/player"
 import { Egg, Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
 import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "./precomputed"
 import { PVEStage } from "./pve-stages"
@@ -119,12 +121,12 @@ export default class PokemonFactory {
     }
   }
 
-  static getSellPrice(name: Pkm): number {
+  static getSellPrice(name: Pkm, player?: Player): number {
     const pokemon: Pokemon = PokemonFactory.createPokemonFromName(name)
     const duo = Object.entries(PkmDuos).find(([key, duo]) => duo.includes(name))
 
     if (name === Pkm.EGG) {
-      return 2
+      return player && player.effects.has(Effect.GOLDEN_EGGS) ? 10 : 2
     } else if (name == Pkm.DITTO) {
       return 5
     } else if (name === Pkm.MAGIKARP) {

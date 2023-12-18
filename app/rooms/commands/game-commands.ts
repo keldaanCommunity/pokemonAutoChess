@@ -53,6 +53,7 @@ import {
   HatchEvolutionRule,
   TurnEvolutionRule
 } from "../../core/evolution-rules"
+import { Synergy, SynergyEffects } from "../../types/enum/Synergy"
 
 export class OnShopCommand extends Command<
   GameRoom,
@@ -436,7 +437,7 @@ export class OnSellDropCommand extends Command<
 
       if (pokemon) {
         this.state.shop.releasePokemon(pokemon.name)
-        player.money += PokemonFactory.getSellPrice(pokemon.name)
+        player.money += PokemonFactory.getSellPrice(pokemon.name, player)
         pokemon.items.forEach((it) => {
           player.items.add(it)
         })
@@ -704,7 +705,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           case Effect.PRESTO:
             player.titles.add(Title.MUSICIAN)
             break
-          case Effect.BREEDER:
+          case Effect.GOLDEN_EGGS:
             player.titles.add(Title.BABYSITTER)
             break
           case Effect.MAX_ILLUMINATION:
@@ -1023,7 +1024,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             this.room.swap(player, pokemon, coordinate[0], coordinate[1])
           }
         }
-        if(numberOfPokemonsToMove > 0){
+        if (numberOfPokemonsToMove > 0) {
           player.synergies.update(player.board)
         }
       }
@@ -1100,12 +1101,15 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         if (
           player.getFreeSpaceOnBench() > 0 &&
           player.getLastBattleResult() == BattleResult.DEFEAT &&
-          (player.effects.has(Effect.HATCHER) ||
-            player.effects.has(Effect.BREEDER))
+          SynergyEffects[Synergy.BABY].some((effect) =>
+            player.effects.has(effect)
+          )
         ) {
-          const eggChance = player.effects.has(Effect.BREEDER)
-            ? 1
-            : 0.2 * player.streak
+          const eggChance =
+            player.effects.has(Effect.BREEDER) ||
+            player.effects.has(Effect.GOLDEN_EGGS)
+              ? 1
+              : 0.2 * player.streak
           if (chance(eggChance)) {
             const egg = PokemonFactory.createRandomEgg()
             const x = player.getFirstAvailablePositionInBench()

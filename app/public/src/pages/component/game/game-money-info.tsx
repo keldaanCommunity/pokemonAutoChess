@@ -4,6 +4,7 @@ import { BattleResult } from "../../../../../types/enum/Game"
 import { useAppSelector } from "../../../hooks"
 import { Money } from "../icons/money"
 import { useTranslation } from "react-i18next"
+import { addIconsToDescription } from "../../utils/descriptions"
 
 export function GameMoneyInfo() {
   const money = useAppSelector((state) => state.game.currentPlayerMoney)
@@ -40,16 +41,18 @@ export function GameMoneyDetail() {
 
   return (
     <div className="game-money-detail">
-      <p className="help">{t("passive_income_hint")}</p>
+      <p className="help">{addIconsToDescription(t("passive_income_hint"))}</p>
       <p>
         <Money value={`${t("streak")}: ${streak === 0 ? 0 : "+" + streak}`} />{" "}
         {lastBattleResult !== null && `(${streakLabel})`}
       </p>
-      <p className="help">{t("victory_income_hint")}</p>
+      <p className="help">{addIconsToDescription(t("victory_income_hint"))}</p>
       <p>
         <Money value={`${t("interest")}: +${interest}`} />
       </p>
-      <p className="help">{t("additional_income_hint")}</p>
+      <p className="help">
+        {addIconsToDescription(t("additional_income_hint"))}
+      </p>
     </div>
   )
 }

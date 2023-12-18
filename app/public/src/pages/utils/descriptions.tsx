@@ -22,7 +22,8 @@ export const iconRegExp = new RegExp(
     ...Statuses,
     ...Weathers,
     ...Synergies,
-    ...Items
+    ...Items,
+    "GOLD"
   ].join("|")}|\\[[^\\]]+\\])(?=\\W|$)`,
   "g"
 )
@@ -35,7 +36,15 @@ export function addIconsToDescription(description: string, tier = 0, ap = 0) {
     const token = matchIcon![i - 1]
     let d: ReactElement | null = null
     if (token) {
-      if (DamageTypes.includes(token)) {
+      if (token === "GOLD") {
+        d = (
+          <img
+            className="description-icon icon-money"
+            src="/assets/icons/money.svg"
+            alt="$"
+          />
+        )
+      } else if (DamageTypes.includes(token)) {
         d = (
           <span
             key={i}

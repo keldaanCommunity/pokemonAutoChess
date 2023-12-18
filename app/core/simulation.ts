@@ -1050,13 +1050,6 @@ export default class Simulation extends Schema implements ISimulation {
           }
           break
 
-        case Effect.HATCHER:
-        case Effect.BREEDER:
-          if (types.has(Synergy.BABY)) {
-            pokemon.effects.add(effect)
-          }
-          break
-
         case Effect.GRASSY_TERRAIN:
           if (types.has(Synergy.GRASS)) {
             pokemon.status.grassField = true
