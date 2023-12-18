@@ -69,7 +69,7 @@ export default class LoadingManager {
       "/assets/ui/"
     )
 
-    scene.load.image("money", "/assets/ui/money.svg")
+    scene.load.image("money", "/assets/icons/money.svg")
     scene.load.image("arrowDown", "/assets/ui/arrowDown.png")
 
     scene.load.multiatlas("item", "/assets/item/item.json", "/assets/item/")

@@ -334,7 +334,10 @@ export default class GameScene extends Scene {
       (pointer, gameObject: Phaser.GameObjects.GameObject) => {
         if (gameObject instanceof Pokemon) {
           this.pokemonDragged = gameObject
-          const price = PokemonFactory.getSellPrice(gameObject.name as Pkm)
+          const price = PokemonFactory.getSellPrice(
+            gameObject.name as Pkm,
+            getGameContainer().player
+          )
           this.sellZone?.text.setText(
             `${t("drop_here_to_sell")} ${t("for_price_gold", { price })}`
           )

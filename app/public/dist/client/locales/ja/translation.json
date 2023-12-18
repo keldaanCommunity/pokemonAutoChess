@@ -1211,6 +1211,7 @@
     "GOOGLE_SPECS": "保持しているアイテムごとに SHIELD として基本 ATK、AP、最大 HP が 30% 増加します",
     "HATCHER": "連続敗北ごとに 20% の確率でエッグを獲得",
     "BREEDER": "プレイヤーに敗北するたびにエッグを入手",
+    "GOLDEN_EGGS": "卵は 10 GOLD で販売できます",
     "TELEPORT_NEXT_ATTACK": "次の攻撃は追加のSPECIALを与えます",
     "GRASSY_TERRAIN": "与ダメージ20%アップ(草のみ)",
     "PSYCHIC_TERRAIN": "与ダメージ20%アップ(サイキックのみ)",

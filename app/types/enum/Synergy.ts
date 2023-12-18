@@ -115,7 +115,7 @@ export const SynergyEffects: { [key in Synergy]: Effect[] } = Object.freeze({
     Effect.LINK_CABLE,
     Effect.GOOGLE_SPECS
   ],
-  [Synergy.BABY]: [Effect.HATCHER, Effect.BREEDER],
+  [Synergy.BABY]: [Effect.HATCHER, Effect.BREEDER, Effect.GOLDEN_EGGS],
   [Synergy.LIGHT]: [
     Effect.SHINING_RAY,
     Effect.LIGHT_PULSE,

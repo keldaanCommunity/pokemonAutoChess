@@ -637,18 +637,22 @@ p:last-child {
 
 /* react-tooltip */
 
-#root .__react_component_tooltip {
+#root .react-tooltip {
   font-size: 1vw;
 }
 
-.__react_component_tooltip output {
+.react-tooltip output {
   color: white;
 }
 
-.__react_component_tooltip .help {
+.react-tooltip .help {
   font-size: 80%;
   font-style: italic;
   color: #d0d0d0;
+}
+
+.react-tooltip p:last-of-type {
+  margin-bottom: 0;
 }
 
 .spacer {
