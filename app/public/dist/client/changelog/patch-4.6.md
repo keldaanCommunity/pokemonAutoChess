@@ -12,6 +12,7 @@
 # Changes to Synergies
 
 - Nerf aquatic: 35/45/55% chance to drain 20 PP from target
+- Add Baby 7: Golden Eggs: Eggs can be sold for 10 gold
 
 # Changes to Items
 
