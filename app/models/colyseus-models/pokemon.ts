@@ -11047,6 +11047,20 @@ export class Pheromosa extends Pokemon {
   attackSprite = AttackSprite.BUG_MELEE
 }
 
+export class Dracovish extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.FOSSIL, Synergy.AQUATIC])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 180
+  atk = 21
+  def = 3
+  speDef = 3
+  maxPP = 110
+  range = 1
+  skill = Ability.FISHIOUS_REND
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (shiny: boolean, emotion: Emotion) => Pokemon
@@ -11717,5 +11731,6 @@ export const PokemonClasses: Record<
   [Pkm.ZIGZAGOON]: Zigzagoon,
   [Pkm.LINOONE]: Linoone,
   [Pkm.PHEROMOSA]: Pheromosa,
-  [Pkm.SABLEYE]: Sableye
+  [Pkm.SABLEYE]: Sableye,
+  [Pkm.DRACOVISH]: Dracovish
 }

@@ -252,5 +252,6 @@ export enum Ability {
   SLASH = "SLASH",
   OUTRAGE = "OUTRAGE",
   LUNGE = "LUNGE",
-  KNOCK_OFF = "KNOCK_OFF"
+  KNOCK_OFF = "KNOCK_OFF",
+  FISHIOUS_REND = "FISHIOUS_REND"
 }

@@ -667,7 +667,8 @@ export enum Pkm {
   ZIGZAGOON = "ZIGZAGOON",
   LINOONE = "LINOONE",
   PHEROMOSA = "PHEROMOSA",
-  SABLEYE = "SABLEYE"
+  SABLEYE = "SABLEYE",
+  DRACOVISH = "DRACOVISH"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1337,7 +1338,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.ZIGZAGOON]: "0263",
   [Pkm.LINOONE]: "0264",
   [Pkm.PHEROMOSA]: "0795",
-  [Pkm.SABLEYE]: "0302"
+  [Pkm.SABLEYE]: "0302",
+  [Pkm.DRACOVISH]: "0882"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2007,7 +2009,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.ZIGZAGOON]: Pkm.ZIGZAGOON,
   [Pkm.LINOONE]: Pkm.ZIGZAGOON,
   [Pkm.PHEROMOSA]: Pkm.PHEROMOSA,
-  [Pkm.SABLEYE]: Pkm.SABLEYE
+  [Pkm.SABLEYE]: Pkm.SABLEYE,
+  [Pkm.DRACOVISH]: Pkm.DRACOVISH
 }
 
 export enum PkmDuo {
@@ -5475,5 +5478,10 @@ export const AnimationConfig: {
     attack: AnimationType.MultiStrike,
     ability: AnimationType.SpAttack,
     emote: AnimationType.Charge
+  },
+  [Pkm.DRACOVISH]: {
+    attack: AnimationType.Idle, // TEMP while waiting for anims to be drawn
+    ability: AnimationType.Idle, // TEMP while waiting for anims to be drawn
+    emote: AnimationType.Idle // TEMP while waiting for anims to be drawn
   }
 }

@@ -2,6 +2,7 @@
 
 - Sableye
 - Pheromosa
+- Dracovish
 
 # Changes to Pokemon & Abilities
 
