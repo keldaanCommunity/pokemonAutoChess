@@ -86,7 +86,7 @@
   height: 20px;
 }
 
-.__react_component_tooltip.item-detail-tooltip {
+.react-tooltip.item-detail-tooltip {
   padding: 5px;
   font-size: 1vw;
 }
