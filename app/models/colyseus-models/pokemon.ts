@@ -10792,7 +10792,7 @@ export class Nihilego extends Pokemon {
 export class Tandemaus extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FAIRY])
   rarity = Rarity.UNIQUE
-  stars = 3
+  stars = 2
   hp = 160
   atk = 16
   def = 5
@@ -10826,7 +10826,7 @@ export class MausholdThree extends Pokemon {
 export class MausholdFour extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FAIRY])
   rarity = Rarity.UNIQUE
-  stars = 3
+  stars = 4
   hp = 230
   atk = 23
   def = 5
