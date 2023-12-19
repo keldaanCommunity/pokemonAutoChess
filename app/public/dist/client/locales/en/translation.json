@@ -1174,7 +1174,7 @@
     "PRISMATIC_LASER": "The user shoots a prismatic laser in a large straight line, dealing [80,SP] SPECIAL and displacing any enemies it hits.",
     "NATURAL_GIFT": "Heals [30,60,120,SP] HP to the most injured ally and RUNE_PROTECT for [1,2,3] s",
     "NIGHT_SHADE": "Deals [25,33,50,SP=0.5]% of target max HP as TRUE",
-    "CHARGE_BEAM": "Fires a concentrated bundle of electricity that propagate to max 3 adjacent targets, dealing [20,40,80,SP] SPECIAL to each. The remaining electricity increase AP by 20%.",
+    "CHARGE_BEAM": "Fires a concentrated bundle of electricity that propagate to max 3 adjacent targets, dealing [15,30,60,SP] SPECIAL to each.",
     "POPULATION_BOMB": "Deals [4,8,12,16,SP] times 10 SPECIAL to the target",
     "SCREECH": "Reduce DEF of all adjacent ennemies by [1,2,4,SP]",
     "SAND_TOMB": "Deals [10,20,40,SP] SPECIAL, inflicting SILENCE and PARALYSIS for 3/5/8 seconds",

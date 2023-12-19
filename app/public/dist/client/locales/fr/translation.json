@@ -1168,7 +1168,7 @@
     "PRISMATIC_LASER": "Envoie un laser prismatique dans une large ligne droite, infligeant [80,SP] SPECIAL et déplaçant tous les ennemis touchés.",
     "NATURAL_GIFT": "Soigne [30,60,120,SP] HP de l'allié le plus blessé et lui donne RUNE_PROTECT pendant [1,2,3] secondes",
     "NIGHT_SHADE": "Inflige [25,33,50,SP=0.5]% des HP max de la cible en TRUE",
-    "CHARGE_BEAM": "Libère un arc électrique qui se propage jusqu'à max 3 cibles adjacentes, infligeant [20,40,80,SP] SPECIAL à chacune. L'électricité résiduelle augmente la AP du lanceur de 20%.",
+    "CHARGE_BEAM": "Libère un arc électrique qui se propage jusqu'à max 3 cibles adjacentes, infligeant [15,30,60,SP] SPECIAL à chacune.",
     "POPULATION_BOMB": "Inflige [4,8,12,16,SP] fois 10 SPECIAL à la cible",
     "SCREECH": "Réduit la DEF de tous les ennemis adjacents de [1,2,4,SP]",
     "SAND_TOMB": "Inflige [10,20,40,SP] SPECIAL ainsi que SILENCE and PARALYSIS pendant 3/5/8 secondes",

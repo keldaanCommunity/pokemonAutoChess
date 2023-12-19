@@ -10779,7 +10779,7 @@ export class Xurkitree extends Pokemon {
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 200
-  atk = 20
+  atk = 16
   def = 3
   speDef = 3
   maxPP = 80
