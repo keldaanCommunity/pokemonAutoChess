@@ -149,7 +149,8 @@ class GameContainer {
         "team",
         "index",
         "skill",
-        "stars"
+        "stars",
+        "types"
       ]
 
       fields.forEach((field) => {
@@ -332,7 +333,7 @@ class GameContainer {
   }
 
   initializePlayer(player: Player) {
-    //logger.debug("initializePlayer", player, this.uid)
+    //logger.debug("initializePlayer", player, player.id)
     if (this.uid == player.id) {
       this.setPlayer(player)
       if (this.tilemap) {
@@ -343,9 +344,26 @@ class GameContainer {
       this.initializeGame()
     }
 
+    const listenForPokemonChanges = (pokemon: Pokemon) => {
+      pokemon.onChange(() => {
+        const fields: NonFunctionPropNames<Pokemon>[] = [
+          "positionX",
+          "positionY",
+          "action",
+          "types"
+        ]
+        fields.forEach((field) => {
+          pokemon.listen(field, (value, previousValue) => {
+            if (player.id === this.spectatedPlayerId) {
+              this.gameScene?.board?.changePokemon(pokemon, field, value)
+            }
+          })
+        })
+      })
+    }
+
     player.board.onAdd((pokemon, key) => {
-      const p = <Pokemon>pokemon
-      if (p.stars > 1) {
+      if (pokemon.stars > 1) {
         const config: IPokemonConfig | undefined = player.pokemonCollection.get(
           pokemon.index
         )
@@ -366,31 +384,19 @@ class GameContainer {
         })
       }
 
-      const fields: NonFunctionPropNames<Pokemon>[] = [
-        "positionX",
-        "positionY",
-        "action"
-      ]
-      fields.forEach((field) => {
-        p.listen(field, (value, previousValue) => {
-          if (player.id === this.spectatedPlayerId) {
-            this.gameScene?.board?.changePokemon(pokemon, field, value)
-          }
-        })
-      })
-
-      p.items.onChange((value, key) => {
-        if (player.id === this.spectatedPlayerId) {
-          this.gameScene?.board?.updatePokemonItems(player.id, p)
-        }
-      })
-
-      this.handleBoardPokemonAdd(player, p)
-    })
+      listenForPokemonChanges(pokemon)
+      this.handleBoardPokemonAdd(player, pokemon)
+    }, false)
 
     player.board.onRemove((pokemon, key) => {
       if (player.id === this.spectatedPlayerId) {
         this.gameScene?.board?.removePokemon(pokemon)
+      }
+    })
+
+    player.board.onChange((pokemon, key) => {
+      if (pokemon) {
+        listenForPokemonChanges(pokemon)
       }
     })
 
