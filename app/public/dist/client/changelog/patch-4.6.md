@@ -13,7 +13,8 @@
 - Tandemaus is now tier-2, Maushold (4) is now tier-4; added several tiers of damage for Population Bomb
 - Buff Maushold HP: ~~190/230~~ 200/240 Attack: ~~19/23~~ 20/24
 - Nerf Hitmontop: Attack ~~22~~ 20, PP ~~75~~ 80
-- Bugg Hitmonlee: Attack ~~25~~ 30
+- Buff Hitmonlee: Attack ~~25~~ 30
+- Buff Hoopa HP ~~150~~ 180
 
 # Changes to Synergies
 

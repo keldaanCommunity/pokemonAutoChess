@@ -10841,7 +10841,7 @@ export class Hoopa extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.DARK, Synergy.GHOST])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 150
+  hp = 180
   atk = 15
   def = 3
   speDef = 6
