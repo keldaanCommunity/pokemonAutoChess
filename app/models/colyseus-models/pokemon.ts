@@ -10810,8 +10810,8 @@ export class MausholdThree extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FAIRY])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 190
-  atk = 19
+  hp = 200
+  atk = 20
   def = 5
   speDef = 5
   maxPP = 100
@@ -10827,8 +10827,8 @@ export class MausholdFour extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FAIRY])
   rarity = Rarity.UNIQUE
   stars = 4
-  hp = 230
-  atk = 23
+  hp = 240
+  atk = 24
   def = 5
   speDef = 5
   maxPP = 100
