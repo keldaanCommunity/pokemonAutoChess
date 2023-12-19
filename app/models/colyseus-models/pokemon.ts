@@ -10913,8 +10913,8 @@ export class Comfey extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.FAIRY])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 100
-  atk = 10
+  hp = 150
+  atk = 15
   def = 4
   speDef = 6
   maxPP = 80
