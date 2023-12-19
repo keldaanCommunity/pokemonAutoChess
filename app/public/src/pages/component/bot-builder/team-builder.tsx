@@ -13,9 +13,9 @@ import {
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { PkmWithConfig, Emotion } from "../../../../../types"
 import Synergies from "../synergy/synergies"
-import "./team-builder.css"
 import { computeSynergies } from "../../../../../models/colyseus-models/synergies"
 import BotAvatar from "./bot-avatar"
+import "./team-builder.css"
 
 export default function TeamBuilder(props: {
   bot?: IBot

@@ -2,6 +2,7 @@ import { MapSchema } from "@colyseus/schema"
 import { IPokemon } from "../../types"
 import { SynergyTriggers } from "../../types/Config"
 import { SynergyByStone, SynergyStones } from "../../types/enum/Item"
+import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmFamily } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { values } from "../../utils/schemas"
@@ -35,6 +36,12 @@ export function computeSynergies(board: IPokemon[]): Map<Synergy, number> {
   const dragonDoubleTypes = new Map<Pkm, Set<Synergy>>()
 
   board.forEach((pkm: IPokemon) => {
+    // reset dynamic synergies
+    if (pkm.passive === Passive.PROTEAN2 || pkm.passive === Passive.PROTEAN3) {
+      //pkm.types.clear()
+      pkm.types.forEach((type) => pkm.types.delete(type))
+    }
+
     addSynergiesFromStones(pkm)
     if (pkm.positionY != 0) {
       const family = PkmFamily[pkm.name]
@@ -55,6 +62,7 @@ export function computeSynergies(board: IPokemon[]): Map<Synergy, number> {
     })
   })
 
+  // apply dragon double synergies
   if (
     (synergies.get(Synergy.DRAGON) ?? 0) >= SynergyTriggers[Synergy.DRAGON][0]
   ) {
@@ -64,6 +72,27 @@ export function computeSynergies(board: IPokemon[]): Map<Synergy, number> {
       })
     })
   }
+
+  // add dynamic synergies (Arceus & Kecleon)
+  board.forEach((pkm: IPokemon) => {
+    if (
+      pkm.positionY !== 0 &&
+      (pkm.passive === Passive.PROTEAN2 || pkm.passive === Passive.PROTEAN3)
+    ) {
+      const n = pkm.passive === Passive.PROTEAN3 ? 3 : 2
+      const synergiesSorted = [...synergies.keys()].sort(
+        (a, b) => +synergies.get(b)! - synergies.get(a)!
+      )
+
+      for (let i = 0; i < n; i++) {
+        const type = synergiesSorted.shift()
+        if (type) {
+          pkm.types.add(type)
+          synergies.set(type, (synergies.get(type) ?? 0) + 1)
+        }
+      }
+    }
+  })
 
   return synergies
 }

@@ -1879,7 +1879,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.PIROUETTE_MELOETTA]: Pkm.PIROUETTE_MELOETTA,
   [Pkm.MELMETAL]: Pkm.MELMETAL,
   [Pkm.HOOPA]: Pkm.HOOPA,
-  [Pkm.HOOPA_UNBOUND]: Pkm.HOOPA_UNBOUND,
+  [Pkm.HOOPA_UNBOUND]: Pkm.HOOPA,
   [Pkm.SILVALLY]: Pkm.TYPE_NULL,
   [Pkm.ZERAORA]: Pkm.ZERAORA,
   [Pkm.XERNEAS]: Pkm.XERNEAS,

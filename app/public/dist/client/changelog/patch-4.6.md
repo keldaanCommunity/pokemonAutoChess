@@ -31,7 +31,7 @@
 
 # Bugfix
 
--
+- Arceus/Kecleon dynamic synergies should now also work in bot builder / team planner
 
 # Misc
 
