@@ -21,6 +21,7 @@
 
 - Nerf aquatic: 35/45/55% chance to drain 20 PP from target
 - Add Baby 7: Golden Eggs: Eggs can be sold for 10 gold
+- Add Ground 8, removed ground effect cap, changed Sandstorm threshold to 8 units
 
 # Changes to Items
 
