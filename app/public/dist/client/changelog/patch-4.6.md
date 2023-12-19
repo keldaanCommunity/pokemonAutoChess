@@ -16,6 +16,8 @@
 - Buff Hitmonlee: Attack ~~25~~ 30
 - Buff Hoopa HP ~~150~~ 180
 - Tropius: added Grass synergy ; adjusted passive: At the start of each fight, add a random berry to pokemon items. **If full, berry is added to player items instead.**
+- Buff Mankey Attack ~~8~~ 10
+- Buff Primeape Attack ~~21~~ 26, spe def ~~2~~ 4
 
 # Changes to Synergies
 
