@@ -11037,10 +11037,10 @@ export class Pheromosa extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FIGHTING])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 180
+  hp = 200
   atk = 35
-  def = 2
-  speDef = 2
+  def = 5
+  speDef = 5
   maxPP = 80
   range = 1
   skill = Ability.LUNGE
