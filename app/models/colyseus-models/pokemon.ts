@@ -2038,10 +2038,10 @@ export class Lotad extends Pokemon {
   rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.LOMBRE
-  hp = 80
+  hp = 60
   atk = 6
-  def = 2
-  speDef = 2
+  def = 1
+  speDef = 1
   maxPP = 120
   range = 3
   skill = Ability.TORMENT
@@ -2057,10 +2057,10 @@ export class Lombre extends Pokemon {
   rarity = Rarity.RARE
   stars = 2
   evolution = Pkm.LUDICOLO
-  hp = 150
+  hp = 110
   atk = 12
-  def = 3
-  speDef = 3
+  def = 2
+  speDef = 2
   maxPP = 120
   range = 3
   skill = Ability.TORMENT
@@ -2075,10 +2075,10 @@ export class Ludicolo extends Pokemon {
   ])
   rarity = Rarity.RARE
   stars = 3
-  hp = 260
+  hp = 220
   atk = 22
-  def = 4
-  speDef = 4
+  def = 3
+  speDef = 3
   maxPP = 120
   range = 3
   skill = Ability.TORMENT
@@ -11048,7 +11048,11 @@ export class Pheromosa extends Pokemon {
 }
 
 export class Dracovish extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.FOSSIL, Synergy.AQUATIC])
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.FOSSIL,
+    Synergy.AQUATIC
+  ])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 180

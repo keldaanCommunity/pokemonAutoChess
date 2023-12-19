@@ -8,6 +8,7 @@
 
 - Added sprites for Vanilluxe and Dragapult
 - Nerf Attract: duration ~~2.5~~ 1 second
+- Nerf Lotad line HP: ~~80/150/260~~ 60/115/220, def/spedef: ~~2/3/4~~ 1/2/3
 
 # Changes to Synergies
 
