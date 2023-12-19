@@ -998,12 +998,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       }
       if (player.effects.has(Effect.SPORE)) {
         player.berryTreeStage = max(3)(player.berryTreeStage + 3)
-      }
-      player.board.forEach((pkm) => {
-        if (pkm.passive === Passive.HARVEST && pkm.items.size < 3) {
-          pkm.items.add(pickRandomIn(Berries))
-        }
-      })
+      }      
     })
 
     return commands

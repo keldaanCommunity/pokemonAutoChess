@@ -29,7 +29,7 @@ import { Passive } from "../../types/enum/Passive"
 import Player from "./player"
 import { values } from "../../utils/schemas"
 import { Weather } from "../../types/enum/Weather"
-import { coinflip } from "../../utils/random"
+import { coinflip, pickRandomIn } from "../../utils/random"
 import {
   CountEvolutionRule,
   EvolutionRule,
@@ -2038,10 +2038,10 @@ export class Lotad extends Pokemon {
   rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.LOMBRE
-  hp = 80
+  hp = 60
   atk = 6
-  def = 2
-  speDef = 2
+  def = 1
+  speDef = 1
   maxPP = 120
   range = 3
   skill = Ability.TORMENT
@@ -2057,10 +2057,10 @@ export class Lombre extends Pokemon {
   rarity = Rarity.RARE
   stars = 2
   evolution = Pkm.LUDICOLO
-  hp = 150
+  hp = 110
   atk = 12
-  def = 3
-  speDef = 3
+  def = 2
+  speDef = 2
   maxPP = 120
   range = 3
   skill = Ability.TORMENT
@@ -2075,10 +2075,10 @@ export class Ludicolo extends Pokemon {
   ])
   rarity = Rarity.RARE
   stars = 3
-  hp = 260
+  hp = 220
   atk = 22
-  def = 4
-  speDef = 4
+  def = 3
+  speDef = 3
   maxPP = 120
   range = 3
   skill = Ability.TORMENT
@@ -9446,10 +9446,10 @@ export class Hitmontop extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 22
+  atk = 20
   def = 5
   speDef = 5
-  maxPP = 75
+  maxPP = 80
   range = 1
   skill = Ability.TRIPLE_KICK
   attackSprite = AttackSprite.FIGHTING_MELEE
@@ -9460,7 +9460,7 @@ export class Hitmonlee extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 180
-  atk = 25
+  atk = 30
   def = 3
   speDef = 3
   maxPP = 100
@@ -9873,7 +9873,7 @@ export class Dhelmise extends Pokemon {
 }
 
 export class Tropius extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.FLYING])
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA, Synergy.FLYING])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
@@ -9885,6 +9885,22 @@ export class Tropius extends Pokemon {
   skill = Ability.AIR_SLASH
   attackSprite = AttackSprite.GRASS_MELEE
   passive = Passive.HARVEST
+
+  afterSimulationStart({
+    player,
+    entity
+  }: {
+    player: IPlayer,
+    entity: IPokemonEntity
+  }) {
+    const berry = pickRandomIn(Berries)
+    if(entity.items.size < 3){
+      entity.items.add(berry)
+      entity.refToBoardPokemon.items.add(berry)
+    } else {
+      player.items.add(berry)
+    }
+  }
 }
 
 export class Carnivine extends Pokemon {
@@ -10792,7 +10808,7 @@ export class Nihilego extends Pokemon {
 export class Tandemaus extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FAIRY])
   rarity = Rarity.UNIQUE
-  stars = 3
+  stars = 2
   hp = 160
   atk = 16
   def = 5
@@ -10810,8 +10826,8 @@ export class MausholdThree extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FAIRY])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 190
-  atk = 19
+  hp = 200
+  atk = 20
   def = 5
   speDef = 5
   maxPP = 100
@@ -10826,9 +10842,9 @@ export class MausholdThree extends Pokemon {
 export class MausholdFour extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FAIRY])
   rarity = Rarity.UNIQUE
-  stars = 3
-  hp = 230
-  atk = 23
+  stars = 4
+  hp = 240
+  atk = 24
   def = 5
   speDef = 5
   maxPP = 100
@@ -10841,7 +10857,7 @@ export class Hoopa extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.DARK, Synergy.GHOST])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 150
+  hp = 180
   atk = 15
   def = 3
   speDef = 6
@@ -10913,8 +10929,8 @@ export class Comfey extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.FAIRY])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 100
-  atk = 10
+  hp = 150
+  atk = 15
   def = 4
   speDef = 6
   maxPP = 80
@@ -11037,10 +11053,10 @@ export class Pheromosa extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FIGHTING])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 180
+  hp = 200
   atk = 35
-  def = 2
-  speDef = 2
+  def = 5
+  speDef = 5
   maxPP = 80
   range = 1
   skill = Ability.LUNGE
@@ -11048,7 +11064,11 @@ export class Pheromosa extends Pokemon {
 }
 
 export class Dracovish extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.FOSSIL, Synergy.AQUATIC])
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.FOSSIL,
+    Synergy.AQUATIC
+  ])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 180
