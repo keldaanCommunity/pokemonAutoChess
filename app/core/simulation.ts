@@ -1017,6 +1017,7 @@ export default class Simulation extends Schema implements ISimulation {
         case Effect.TILLER:
         case Effect.DIGGER:
         case Effect.DRILLER:
+        case Effect.DEEP_MINER:
           if (types.has(Synergy.GROUND)) {
             pokemon.effects.add(effect)
           }
