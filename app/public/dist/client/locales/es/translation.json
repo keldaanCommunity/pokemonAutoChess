@@ -1168,7 +1168,7 @@
     "PRISMATIC_LASER": "El usuario lanza un láser en una larga linea recta, causando [80,SP] de SPECIAL y desplazando a los enemigos que golpea.",
     "NATURAL_GIFT": "Sana [30,60,120,SP] de HP al aliado mas perjudicado y le otorga RUNE_PROTECT por [1,2,3] s",
     "NIGHT_SHADE": "Causa [25,33,50,SP=0.5]% del HP máximo del objetivo como TRUE",
-    "CHARGE_BEAM": "Dispara abundante electricidad la cual se propaga hasta 3 objetivos adyacentes, causando [20,40,80,SP] de SPECIAL a cada uno. La electricidad restante aumenta el AP por 20%.",
+    "CHARGE_BEAM": "Dispara abundante electricidad la cual se propaga hasta 3 objetivos adyacentes, causando [15,30,60,SP] de SPECIAL a cada uno.",
     "POPULATION_BOMB": "Inflige [4,8,12,16,SP] de SPECIAL 10 veces al objetivo",
     "SCREECH": "Reduce la DEF de todos los enemigos adyacentes en [1,2,4,SP]",
     "SAND_TOMB": "Inflige [10,20,40,SP] de SPECIAL, causa SILENCE y PARALYSIS por 3/5/8 segndos",

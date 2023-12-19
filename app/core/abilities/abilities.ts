@@ -6119,7 +6119,7 @@ export class ChargeBeamStrategy extends AbilityStrategy {
     }
 
     for (let i = 0; i < chain.length; i++) {
-      const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
+      const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
       chain[i].handleSpecialDamage(
         damage,
         board,
@@ -6149,8 +6149,10 @@ export class PopulationBombStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = 10    
-    const numberOfAttacks = Math.round(([4,8,12,16][pokemon.stars - 1] ?? 8) * (1+ pokemon.ap / 100))
+    const damage = 10
+    const numberOfAttacks = Math.round(
+      ([4, 8, 12, 16][pokemon.stars - 1] ?? 8) * (1 + pokemon.ap / 100)
+    )
     for (let i = 0; i < numberOfAttacks; i++) {
       target.handleSpecialDamage(
         damage,
@@ -6664,7 +6666,14 @@ export class FishiousRendStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit, true)
     // deals 80 special damage. Double damage if attacker got more atk speed than target.
     const damage = 80 * (pokemon.atkSpeed > target.atkSpeed ? 2 : 1)
-    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit, true)
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit,
+      true
+    )
   }
 }
 

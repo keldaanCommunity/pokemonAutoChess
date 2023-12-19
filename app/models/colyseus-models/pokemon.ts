@@ -6000,7 +6000,7 @@ export class Mankey extends Pokemon {
   stars = 1
   evolution = Pkm.PRIMEAPE
   hp = 120
-  atk = 8
+  atk = 10
   def = 3
   speDef = 2
   maxPP = 90
@@ -6015,9 +6015,9 @@ export class Primeape extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   hp = 240
-  atk = 21
+  atk = 26
   def = 6
-  speDef = 2
+  speDef = 4
   maxPP = 90
   range = 1
   skill = Ability.THRASH
@@ -10779,7 +10779,7 @@ export class Xurkitree extends Pokemon {
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 200
-  atk = 20
+  atk = 16
   def = 3
   speDef = 3
   maxPP = 80
