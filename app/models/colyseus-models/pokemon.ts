@@ -9446,10 +9446,10 @@ export class Hitmontop extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 22
+  atk = 20
   def = 5
   speDef = 5
-  maxPP = 75
+  maxPP = 80
   range = 1
   skill = Ability.TRIPLE_KICK
   attackSprite = AttackSprite.FIGHTING_MELEE
@@ -9460,7 +9460,7 @@ export class Hitmonlee extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 180
-  atk = 25
+  atk = 30
   def = 3
   speDef = 3
   maxPP = 100
