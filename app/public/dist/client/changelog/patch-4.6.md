@@ -15,6 +15,7 @@
 - Nerf Hitmontop: Attack ~~22~~ 20, PP ~~75~~ 80
 - Buff Hitmonlee: Attack ~~25~~ 30
 - Buff Hoopa HP ~~150~~ 180
+- Tropius: added Grass synergy ; adjusted passive: At the start of each fight, add a random berry to pokemon items. **If full, berry is added to player items instead.**
 
 # Changes to Synergies
 

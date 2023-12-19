@@ -1641,7 +1641,7 @@
     "FAMILY": "The pokémon grows with time (turn 15 and turn 20)",
     "SAND_STREAM": "The pokémon count as 3 for SANDSTORM",
     "DRIZZLE": "The pokémon count as 3 for RAIN",
-    "HARVEST": "At the start of the stage, equip itself with a random berry",
+    "HARVEST": "At the start of each fight, add a random berry to pokemon items. If full, berry is added to player items instead.",
     "COCONUT": "Exeggutor is looking for a LEAF_STONE",
     "GLUTTON": "Permanently gains 20 max HP every time it eats a berry",
     "COMFEY": "Comfey cannot hold items. At the start of the fight, the nearest ally with a free item slot wears Comfey and gains all its stats. Comfey casts its ability at the same time than its holder. When its holder is KO, Comfey fights on its own.",

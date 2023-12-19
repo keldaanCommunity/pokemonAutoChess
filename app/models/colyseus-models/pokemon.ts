@@ -29,7 +29,7 @@ import { Passive } from "../../types/enum/Passive"
 import Player from "./player"
 import { values } from "../../utils/schemas"
 import { Weather } from "../../types/enum/Weather"
-import { coinflip } from "../../utils/random"
+import { coinflip, pickRandomIn } from "../../utils/random"
 import {
   CountEvolutionRule,
   EvolutionRule,
@@ -9873,7 +9873,7 @@ export class Dhelmise extends Pokemon {
 }
 
 export class Tropius extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.FLYING])
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA, Synergy.FLYING])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
@@ -9885,6 +9885,22 @@ export class Tropius extends Pokemon {
   skill = Ability.AIR_SLASH
   attackSprite = AttackSprite.GRASS_MELEE
   passive = Passive.HARVEST
+
+  afterSimulationStart({
+    player,
+    entity
+  }: {
+    player: IPlayer,
+    entity: IPokemonEntity
+  }) {
+    const berry = pickRandomIn(Berries)
+    if(entity.items.size < 3){
+      entity.items.add(berry)
+      entity.refToBoardPokemon.items.add(berry)
+    } else {
+      player.items.add(berry)
+    }
+  }
 }
 
 export class Carnivine extends Pokemon {
