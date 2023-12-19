@@ -1082,7 +1082,8 @@ export default class Simulation extends Schema implements ISimulation {
           if (this.inLight(pokemon)) {
             pokemon.status.light = true
             pokemon.effects.add(Effect.SHINING_RAY)
-            pokemon.status.triggerRuneProtect(6000)
+            pokemon.addAttack(Math.ceil(pokemon.atk * 0.3), false)
+            pokemon.addAbilityPower(30, false)
           }
           break
 
@@ -1090,7 +1091,8 @@ export default class Simulation extends Schema implements ISimulation {
           if (this.inLight(pokemon)) {
             pokemon.status.light = true
             pokemon.effects.add(Effect.LIGHT_PULSE)
-            pokemon.status.triggerRuneProtect(6000)
+            pokemon.addAttack(Math.ceil(pokemon.atk * 0.3), false)
+            pokemon.addAbilityPower(30, false)
           }
           break
 
@@ -1098,9 +1100,10 @@ export default class Simulation extends Schema implements ISimulation {
           if (this.inLight(pokemon)) {
             pokemon.status.light = true
             pokemon.effects.add(Effect.ETERNAL_LIGHT)
-            pokemon.status.triggerRuneProtect(6000)
             pokemon.addAttack(Math.ceil(pokemon.atk * 0.3), false)
             pokemon.addAbilityPower(30, false)
+            pokemon.status.triggerRuneProtect(10000)
+            pokemon.addAttackSpeed(30, false)
           }
           break
 
@@ -1108,9 +1111,11 @@ export default class Simulation extends Schema implements ISimulation {
           if (this.inLight(pokemon)) {
             pokemon.status.light = true
             pokemon.effects.add(Effect.MAX_ILLUMINATION)
-            pokemon.status.triggerRuneProtect(6000)
             pokemon.addAttack(Math.ceil(pokemon.atk * 0.3), false)
             pokemon.addAbilityPower(30, false)
+            pokemon.status.triggerRuneProtect(10000)
+            pokemon.addAttackSpeed(30, false)
+            pokemon.addShield(100, pokemon)
             pokemon.status.resurection = true
           }
           break

@@ -1404,10 +1404,10 @@
     "NIGHT": "+20% CRIT_CHANCE\n+30 % de durée de SLEEP",
     "HYDRATATION": "La synergie GRASS soigne 5 HP supplémentaires par seconde sous la RAIN",
     "POISON_GAS": "Inflige POISON chaque seconde",
-    "SHINING_RAY": "Donne RUNE_PROTECT pendant 6 secondes",
+    "SHINING_RAY": "Augmente la AP et l'ATK de 30%",
     "LIGHT_PULSE": "Donne également +10 PP par seconde",
-    "ETERNAL_LIGHT": "Augmente également la AP et l'ATK de 30%",
-    "MAX_ILLUMINATION": "Donne également RESURECTION"
+    "ETERNAL_LIGHT": "Donne également 30% ATK_SPEED et RUNE_PROTECT pendant 10 secondes",
+    "MAX_ILLUMINATION": "Donne également 100 SHIELD et RESURECTION"
   },
   "item": {
     "FOSSIL_STONE": "Fossile Dome",
