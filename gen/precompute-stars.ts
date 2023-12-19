@@ -1,15 +1,19 @@
 import fs from "fs"
-import PokemonFactory from "../app/models/pokemon-factory"
 import { Pkm } from "../app/types/enum/Pokemon"
 import { mapToObj } from "../app/utils/map"
+import { precomputedPokemons } from "./precomputed-pokemons"
+
+console.time("precompute-stars")
 
 const data = new Map<Pkm, number>()
 
-Object.values(Pkm).map((v) => {
-  data.set(v, PokemonFactory.createPokemonFromName(v).stars)
+precomputedPokemons.forEach((pokemon) => {
+  data.set(pokemon.name, pokemon.stars)
 })
 
 fs.writeFileSync(
   "../app/models/precomputed/pokemons-stars.json",
   JSON.stringify(mapToObj(data))
 )
+
+console.timeEnd("precompute-stars")
