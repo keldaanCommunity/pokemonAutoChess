@@ -41,6 +41,7 @@ import {
 } from "../../../../types/Config"
 import { DebugScene } from "../scenes/debug-scene"
 import { preferences } from "../../preferences"
+import { values } from "../../../../utils/schemas"
 
 export default class Pokemon extends DraggableObject {
   evolution: Pkm
@@ -143,7 +144,7 @@ export default class Pokemon extends DraggableObject {
     this.def = pokemon.def
     this.speDef = pokemon.speDef
     this.attackType = pokemon.attackType
-    pokemon.types.forEach((t) => this.types.add(t))
+    this.types = new Set(values(pokemon.types))
     this.maxPP = pokemon.maxPP
     this.atkSpeed = pokemon.atkSpeed
     this.targetX = null

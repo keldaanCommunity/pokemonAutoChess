@@ -86,12 +86,6 @@ export class OnShopCommand extends Command<
     if (!canBuy) return
 
     player.money -= cost
-    if (
-      pokemon.passive === Passive.PROTEAN2 ||
-      pokemon.passive === Passive.PROTEAN3
-    ) {
-      this.room.checkDynamicSynergies(player, pokemon)
-    }
 
     const x = player.getFirstAvailablePositionInBench()
     pokemon.positionX = x !== undefined ? x : -1
@@ -134,12 +128,6 @@ export class OnDragDropCommand extends Command<
       message.updateItems = false
       const pokemon = player.board.get(detail.id)
       if (pokemon) {
-        if (
-          pokemon.passive === Passive.PROTEAN2 ||
-          pokemon.passive === Passive.PROTEAN3
-        ) {
-          this.room.checkDynamicSynergies(player, pokemon)
-        }
         const x = parseInt(detail.x)
         const y = parseInt(detail.y)
         if (pokemon.name === Pkm.DITTO) {
@@ -200,9 +188,6 @@ export class OnDragDropCommand extends Command<
             }
           }
         }
-        player.synergies.update(player.board)
-        player.effects.update(player.synergies, player.board)
-        player.boardSize = this.room.getTeamSize(player.board)
       }
 
       if (!success && client.send) {
@@ -214,6 +199,7 @@ export class OnDragDropCommand extends Command<
 
       player.synergies.update(player.board)
       player.effects.update(player.synergies, player.board)
+      player.boardSize = this.room.getTeamSize(player.board)
     }
     if (commands.length > 0) {
       return commands
@@ -1023,7 +1009,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             this.room.swap(player, pokemon, coordinate[0], coordinate[1])
           }
         }
-        if(numberOfPokemonsToMove > 0){
+        if (numberOfPokemonsToMove > 0) {
           player.synergies.update(player.board)
         }
       }

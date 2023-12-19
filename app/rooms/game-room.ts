@@ -594,9 +594,12 @@ export default class GameRoom extends Room<GameState> {
             if (rank === 1) {
               usr.wins += 1
               if (this.state.lobbyType === LobbyType.RANKED) {
-                usr.booster += 1                
+                usr.booster += 1
                 player.titles.add(Title.VANQUISHER)
-                if(usr.elo === Math.min(...values(this.state.players).map(p => p.elo)) && humans.length >= 8){
+                const minElo = Math.min(
+                  ...values(this.state.players).map((p) => p.elo)
+                )
+                if (usr.elo === minElo && humans.length >= 8) {
                   player.titles.add(Title.OUTSIDER)
                 }
                 this.presence.publish("ranked-lobby-winner", player)
@@ -764,33 +767,6 @@ export default class GameRoom extends Room<GameState> {
     return values(player.board).find(
       (pokemon) => pokemon.positionX == x && pokemon.positionY == y
     )
-  }
-
-  checkDynamicSynergies(player: Player, pokemon: Pokemon) {
-    const n =
-      pokemon.passive === Passive.PROTEAN3
-        ? 3
-        : pokemon.passive === Passive.PROTEAN2
-        ? 2
-        : 1
-    const rankArray = new Array<{ s: Synergy; v: number }>()
-    player.synergies.forEach((value, key) => {
-      if (value > 0) {
-        rankArray.push({ s: key as Synergy, v: value })
-      }
-    })
-    rankArray.sort((a, b) => {
-      return b.v - a.v
-    })
-    pokemon.types.clear()
-    for (let i = 0; i < n; i++) {
-      const kv = rankArray.shift()
-      if (kv) {
-        pokemon.types.add(kv.s)
-      }
-    }
-    player.synergies.update(player.board)
-    player.effects.update(player.synergies, player.board)
   }
 
   checkEvolutionsAfterPokemonAcquired(playerId: string) {
