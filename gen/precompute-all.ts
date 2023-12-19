@@ -1,32 +1,7 @@
-import { Pkm } from "../app/types/enum/Pokemon"
-import PokemonFactory from "../app/models/pokemon-factory"
-import fs from "fs"
-import { Ability } from "../app/types/enum/Ability"
-import { Synergy } from "../app/types/enum/Synergy"
-import { Pokemon } from "../app/models/colyseus-models/pokemon"
-
-const dataAll = {}
-;(Object.keys(Synergy) as Synergy[]).forEach((type) => {
-  const pokemons = new Array<Pokemon>()
-
-  Object.values(Pkm).forEach((pkm) => {
-    const pokemon = PokemonFactory.createPokemonFromName(pkm)
-    if (pokemon.types.has(type) && pokemon.skill != Ability.DEFAULT) {
-      pokemons.push(pokemon)
-    }
-  })
-
-  pokemons.sort(indexSort)
-  dataAll[type] = pokemons.map((p) => p.name)
-})
-
-fs.writeFileSync(
-  "../app/models/precomputed/pokemons-per-type.json",
-  JSON.stringify(dataAll)
-)
-
-export function indexSort(a: Pokemon, b: Pokemon) {
-  const aIndex = parseFloat(a.index.replace("-", "."))
-  const bIndex = parseFloat(b.index.replace("-", "."))
-  return aIndex - bIndex
-}
+import "./precompute-rarity"
+import "./precompute-ability"
+import "./precompute-credits"
+import "./precompute-stars"
+import "./precompute-types-and-categories"
+import "./precompute-emotions"
+import "./csv-export"

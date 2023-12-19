@@ -1,15 +1,15 @@
 import fs from "fs"
 import tracker from "../app/public/dist/client/assets/pokemons/tracker.json"
-import PokemonFactory from "../app/models/pokemon-factory"
-import { Pkm } from "../app/types/enum/Pokemon"
 import { Emotion } from "../app/types/enum/Emotion"
 import { mapToObj } from "../app/utils/map"
+import { precomputedPokemons } from "./precomputed-pokemons"
+
+console.time("precompute-emotions")
 
 const data = new Map<string, number[]>()
 const emotions = Object.values(Emotion)
 
-Object.values(Pkm).map((pkm) => {
-  const pokemon = PokemonFactory.createPokemonFromName(pkm)
+precomputedPokemons.forEach((pokemon) => {
   const pathIndex = pokemon.index.split("-")
   const metadata =
     pathIndex.length == 1
@@ -28,3 +28,5 @@ fs.writeFileSync(
   "../app/models/precomputed/emotions-per-pokemon-index.json",
   JSON.stringify(mapToObj(data))
 )
+
+console.timeEnd("precompute-emotions")

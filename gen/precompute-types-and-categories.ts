@@ -1,10 +1,11 @@
-import { Ability } from "../app/types/enum/Ability"
+import fs from "fs"
 import { Rarity } from "../app/types/enum/Game"
 import { Pkm, PkmFamily } from "../app/types/enum/Pokemon"
-import PokemonFactory from "../app/models/pokemon-factory"
-import fs from "fs"
 import { Synergy } from "../app/types/enum/Synergy"
-import { logger } from "../app/utils/logger"
+import { precomputedPokemons } from "./precomputed-pokemons"
+import { RarityCost } from "../app/types/Config"
+
+console.time("precompute-types-and-categories")
 
 const data: Partial<
   Record<
@@ -19,12 +20,9 @@ const data: Partial<
   >
 > = {}
 
-Object.values(Pkm).forEach((pkm) => {
-  const pokemon = PokemonFactory.createPokemonFromName(pkm)
-
-  // ignore specials and pokemons not implemented yet
-  if (pokemon.rarity === Rarity.SPECIAL || pokemon.skill === Ability.DEFAULT)
-    return
+precomputedPokemons.forEach((pokemon) => {
+  // ignore specials
+  if (pokemon.rarity === Rarity.SPECIAL) return
 
   pokemon.types.forEach((type: Synergy) => {
     if (type in data === false) {
@@ -44,28 +42,27 @@ Object.values(Pkm).forEach((pkm) => {
     } else if (pokemon.rarity === Rarity.MYTHICAL) {
       data[type]!.mythicalPokemons.push(pokemon.name)
     } else if (pokemon.additional) {
-      if (!data[type]!.additionalPokemons.includes(PkmFamily[pkm])) {
+      if (!data[type]!.additionalPokemons.includes(PkmFamily[pokemon.name])) {
         data[type]!.additionalPokemons.push(pokemon.name)
       }
-    } else if (!data[type]!.pokemons.includes(PkmFamily[pkm])) {
+    } else if (!data[type]!.pokemons.includes(PkmFamily[pokemon.name])) {
       data[type]!.pokemons.push(pokemon.name)
     }
   })
 })
 
+const sortByRarity = (a, b) => RarityCost[a.rarity] - RarityCost[b.rarity]
+
 Object.keys(data).forEach((type) => {
-  const sortByRarity = (a, b) => {
-    const aIndex = PokemonFactory.getBuyPrice(a)
-    const bIndex = PokemonFactory.getBuyPrice(b)
-    return aIndex - bIndex
-  }
   data[type].pokemons.sort(sortByRarity)
   data[type].additionalPokemons.sort(sortByRarity)
 })
 
-logger.debug(data)
+//logger.debug(data)
 
 fs.writeFileSync(
   "../app/models/precomputed/pokemons-per-type-and-category.json",
   JSON.stringify(data)
 )
+
+console.timeEnd("precompute-types-and-categories")

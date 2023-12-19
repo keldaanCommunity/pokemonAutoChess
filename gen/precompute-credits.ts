@@ -1,14 +1,14 @@
 import tracker from "../app/public/dist/client/assets/pokemons/tracker.json"
-import PokemonFactory from "../app/models/pokemon-factory"
-import { Pkm } from "../app/types/enum/Pokemon"
 import fs from "fs"
 import { mapToObj } from "../app/utils/map"
 import { PokemonCredits } from "../app/core/credits"
+import { precomputedPokemons } from "./precomputed-pokemons"
+
+console.time("precompute-credits")
 
 const data = new Map<string, PokemonCredits>()
 
-Object.values(Pkm).map((pkm) => {
-  const pokemon = PokemonFactory.createPokemonFromName(pkm)
+precomputedPokemons.forEach((pokemon) => {
   const pathIndex = pokemon.index.split("-")
   const metadata =
     pathIndex.length == 1
@@ -24,3 +24,5 @@ fs.writeFileSync(
   "../app/models/precomputed/credits.json",
   JSON.stringify(mapToObj(data))
 )
+
+console.timeEnd("precompute-credits")
