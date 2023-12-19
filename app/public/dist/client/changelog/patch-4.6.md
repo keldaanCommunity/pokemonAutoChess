@@ -29,6 +29,7 @@
     - (3) Light Pulse: Also give +10 PP per second
     - (4) Eternal Light: Also give 30% Attack Speed and Rune Protect for 10 seconds
     - (5) Max Illumination: Also give 100 Shield and Resurection
+- Add Ground 8, removed ground effect cap, changed Sandstorm threshold to 8 units
 
 # Changes to Items
 

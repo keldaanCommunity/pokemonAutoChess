@@ -249,20 +249,21 @@ export default class PokemonState {
         pokemon.onDamageReceived({ attacker, damage: takenDamage, board })
         if (attacker) {
           attacker.onDamageDealt({ target: pokemon, damage: takenDamage })
-          if(pokemon !== attacker){ // do not count self damage
+          if (pokemon !== attacker) {
+            // do not count self damage
             switch (attackType) {
               case AttackType.PHYSICAL:
                 attacker.physicalDamage += takenDamage
                 break
-  
+
               case AttackType.SPECIAL:
                 attacker.specialDamage += takenDamage
                 break
-  
+
               case AttackType.TRUE:
                 attacker.trueDamage += takenDamage
                 break
-  
+
               default:
                 break
             }
@@ -388,27 +389,29 @@ export default class PokemonState {
     if (
       pokemon.effects.has(Effect.TILLER) ||
       pokemon.effects.has(Effect.DIGGER) ||
-      pokemon.effects.has(Effect.DRILLER)
+      pokemon.effects.has(Effect.DRILLER) ||
+      pokemon.effects.has(Effect.DEEP_MINER)
     ) {
-      const MAX_GROUND_STACKS = 5
-      if (pokemon.count.growGroundCount < MAX_GROUND_STACKS) {
-        pokemon.growGroundTimer -= dt
-        if (pokemon.growGroundTimer <= 0) {
-          pokemon.growGroundTimer = 3000
-          pokemon.count.growGroundCount += 1
-          if (pokemon.effects.has(Effect.TILLER)) {
-            pokemon.addDefense(1)
-            pokemon.addSpecialDefense(1)
-            pokemon.addAttack(1)
-          } else if (pokemon.effects.has(Effect.DIGGER)) {
-            pokemon.addDefense(2)
-            pokemon.addSpecialDefense(2)
-            pokemon.addAttack(2)
-          } else if (pokemon.effects.has(Effect.DRILLER)) {
-            pokemon.addDefense(3)
-            pokemon.addSpecialDefense(3)
-            pokemon.addAttack(3)
-          }
+      pokemon.growGroundTimer -= dt
+      if (pokemon.growGroundTimer <= 0) {
+        pokemon.growGroundTimer = 3000
+        pokemon.count.growGroundCount += 1
+        if (pokemon.effects.has(Effect.TILLER)) {
+          pokemon.addDefense(1)
+          pokemon.addSpecialDefense(1)
+          pokemon.addAttack(1)
+        } else if (pokemon.effects.has(Effect.DIGGER)) {
+          pokemon.addDefense(2)
+          pokemon.addSpecialDefense(2)
+          pokemon.addAttack(2)
+        } else if (pokemon.effects.has(Effect.DRILLER)) {
+          pokemon.addDefense(3)
+          pokemon.addSpecialDefense(3)
+          pokemon.addAttack(3)
+        } else if (pokemon.effects.has(Effect.DEEP_MINER)) {
+          pokemon.addDefense(4)
+          pokemon.addSpecialDefense(4)
+          pokemon.addAttack(4)
         }
       }
     }
