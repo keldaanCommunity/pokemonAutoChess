@@ -800,6 +800,13 @@ export default class Status extends Schema implements IStatus {
         attackType: AttackType.TRUE,
         shouldTargetGainMana: false
       })
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: "CURSE_EFFECT",
+        positionX: pokemon.positionX,
+        positionY: pokemon.positionY,
+        orientation: pokemon.orientation
+      })
     } else {
       this.curseCooldown = this.curseCooldown - dt
     }

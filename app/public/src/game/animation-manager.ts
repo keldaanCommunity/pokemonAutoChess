@@ -2842,10 +2842,19 @@ export function createStatusAnimations(game: Phaser.Scene) {
     key: "curse",
     frames: game.anims.generateFrameNames("curse", {
       start: 0,
-      end: 5,
+      end: 5
     }),
     frameRate: 8,
     repeat: -1
+  })
+  game.anims.create({
+    key: "CURSE_EFFECT",
+    frames: game.anims.generateFrameNames("CURSE_EFFECT", {
+      start: 0,
+      end: 6
+    }),
+    frameRate: 8,
+    repeat: 0
   })
 
   game.anims.create({

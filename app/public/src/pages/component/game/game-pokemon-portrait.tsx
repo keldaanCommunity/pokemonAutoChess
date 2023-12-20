@@ -12,6 +12,7 @@ import { Money } from "../icons/money"
 import { useAppSelector } from "../../../hooks"
 import "./game-pokemon-portrait.css"
 import PokemonFactory from "../../../../../models/pokemon-factory"
+import { CountEvolutionRule } from "../../../../../core/evolution-rules"
 
 export default function GamePokemonPortrait(props: {
   index: number
@@ -58,11 +59,21 @@ export default function GamePokemonPortrait(props: {
       })
     }
 
-    const willEvolve = count === 2
+    const willEvolve =
+      props.pokemon.evolutionRule instanceof CountEvolutionRule &&
+      count === props.pokemon.evolutionRule.numberRequired - 1
+
     const shouldShimmer =
-      (count > 0 && pokemonEvolution !== Pkm.DEFAULT) ||
-      (countEvol > 0 && pokemonEvolution2 !== Pkm.DEFAULT)
-    if (count === 2 && countEvol === 2 && pokemonEvolution2 != null)
+      props.pokemon.evolutionRule instanceof CountEvolutionRule &&
+      ((count > 0 && pokemonEvolution !== Pkm.DEFAULT) ||
+        (countEvol > 0 && pokemonEvolution2 !== Pkm.DEFAULT))
+
+    if (
+      props.pokemon.evolutionRule instanceof CountEvolutionRule &&
+      count === props.pokemon.evolutionRule.numberRequired - 1 &&
+      countEvol === props.pokemon.evolutionRule.numberRequired - 1 &&
+      pokemonEvolution2 != null
+    )
       pokemonEvolution = pokemonEvolution2
 
     const pokemonInPortrait =

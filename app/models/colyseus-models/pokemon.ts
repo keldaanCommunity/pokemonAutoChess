@@ -87,7 +87,7 @@ export class Pokemon extends Schema implements IPokemon {
     /* true if should be excluded from shops when obtained */
     return (
       this.evolution === Pkm.DEFAULT ||
-      this.evolutionRule instanceof CountEvolutionRule === false
+      (this.evolutionRule instanceof CountEvolutionRule === false && this.passive !== Passive.CORSOLA)
     )
   }
 
