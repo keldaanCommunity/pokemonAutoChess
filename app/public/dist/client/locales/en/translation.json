@@ -1201,8 +1201,8 @@
     "LUNGE": "Jumps to the opponent with the highest ATK, deals [50,SP] SPECIAL and reduce its ATK by [5,SP]",
     "KNOCK_OFF": "Deals [90,SP] SPECIAL. If target is holding items, they are removed and an additional [30,SP] SPECIAL is dealt per item",
     "FISHIOUS_REND": "Deals [80,SP] SPECIAL damage. Double damage if attacker has more ATK_SPEED than target.",
-    "GOLD_RUSH": "Deals  [20, SP] + your amount of golds as SPECIAL, then earn 2 golds",
-    "MAKE_IT_RAIN": "Deals [100, SP] + your amount of golds as SPECIAL"
+    "GOLD_RUSH": "Deals  [20, SP] + your amount of GOLD as SPECIAL, then earn 2 golds",
+    "MAKE_IT_RAIN": "Deals [100, SP] + your amount of GOLD as SPECIAL"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1657,8 +1657,8 @@
     "HISUIAN_TYPHLOSION": "The pokémon inflicts 20% extra damage on a BURN or SILENCE target",
     "PICKUP": "The pokémon will start with a random item if it's not holding anything",
     "MAWILE": "Mawile fools the foes with its docile-looking face. Cast $t(ability.ATTRACT) at the start of the fight.",
-    "GIMMIGHOUL": "$t(pkm.GIMMIGHOUL) is looking for 99 golds",
-    "GHOLDENGO": "At the start of each fight, if the player has more than 50 golds, $t(pkm.GHOLDENGO) gains RUNE_PROTECT for the entire fight"
+    "GIMMIGHOUL": "$t(pkm.GIMMIGHOUL) is looking for 99 GOLD",
+    "GHOLDENGO": "At the start of each fight, if the player has more than 50 GOLD, $t(pkm.GHOLDENGO) gains RUNE_PROTECT for the entire fight"
   },
   "stat": {
     "ATK": "Attack",
