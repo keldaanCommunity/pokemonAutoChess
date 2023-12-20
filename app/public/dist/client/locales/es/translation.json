@@ -1406,10 +1406,10 @@
     "NIGHT": "+20% CRIT_CHANCE\n+30% de duración de pokemon SLEEP",
     "HYDRATATION": "La sinergia GRASS está curando 5 HP adicionales por segundo bajo la RAIN",
     "POISON_GAS": "Causa POISON cada segundo",
-    "SHINING_RAY": "Otorga RUNE_PROTECT por 6s",
+    "SHINING_RAY": "Aumenta AP y ATK en 30%",
     "LIGHT_PULSE": "También otorga +10 PP cada segundo",
-    "ETERNAL_LIGHT": "También aumenta AP y ATK en 30%",
-    "MAX_ILLUMINATION": "También otorga RESURECTION"
+    "ETERNAL_LIGHT": "También otorga 30% ATK_SPEED y RUNE_PROTECT por 10s",
+    "MAX_ILLUMINATION": "También otorga RESURECTION y 100 SHIELD"
   },
   "item": {
     "FOSSIL_STONE": "Piedra Fósil",

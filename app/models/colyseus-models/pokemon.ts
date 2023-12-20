@@ -35,6 +35,7 @@ import {
   EvolutionRule,
   HatchEvolutionRule,
   ItemEvolutionRule,
+  MoneyEvolutionRule,
   TurnEvolutionRule
 } from "../../core/evolution-rules"
 import PokemonFactory from "../pokemon-factory"
@@ -87,7 +88,8 @@ export class Pokemon extends Schema implements IPokemon {
     /* true if should be excluded from shops when obtained */
     return (
       this.evolution === Pkm.DEFAULT ||
-      (this.evolutionRule instanceof CountEvolutionRule === false && this.passive !== Passive.CORSOLA)
+      (this.evolutionRule instanceof CountEvolutionRule === false &&
+        this.passive !== Passive.CORSOLA)
     )
   }
 
@@ -10881,8 +10883,40 @@ export class HoopaUnbound extends Pokemon {
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
+export class Gimmighoul extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.STEEL])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 10
+  def = 4
+  speDef = 4
+  maxPP = 90
+  range = 1
+  skill = Ability.GOLD_RUSH
+  attackSprite = AttackSprite.DRAGON_MELEE
+  evolution = Pkm.GHOLDENGO
+  evolutionRule = new MoneyEvolutionRule(99)
+  passive = Passive.GIMMIGHOUL
+}
+
+export class Gholdengo extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.STEEL])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 230
+  atk = 21
+  def = 6
+  speDef = 6
+  maxPP = 90
+  range = 1
+  skill = Ability.MAKE_IT_RAIN
+  attackSprite = AttackSprite.DRAGON_MELEE
+  passive = Passive.GHOLDENGO
+}
+
 export class Sobble extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.AQUATIC])
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.STEEL])
   rarity = Rarity.ULTRA
   evolution = Pkm.DRIZZILE
   stars = 1
@@ -11801,5 +11835,7 @@ export const PokemonClasses: Record<
   [Pkm.DRACOVISH]: Dracovish,
   [Pkm.CORSOLA]: Corsola,
   [Pkm.GALAR_CORSOLA]: GalarCorsola,
-  [Pkm.CURSOLA]: Cursola
+  [Pkm.CURSOLA]: Cursola,
+  [Pkm.GIMMIGHOUL]: Gimmighoul,
+  [Pkm.GHOLDENGO]: Gholdengo
 }

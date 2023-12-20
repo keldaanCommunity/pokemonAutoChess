@@ -1523,6 +1523,16 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.GOLD_RUSH,
+      frames: this.game.anims.generateFrameNames(Ability.GOLD_RUSH, {
+        start: 0,
+        end: 11
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.PAYDAY,
       frames: this.game.anims.generateFrameNames(Ability.PAYDAY, {
         start: 0,
