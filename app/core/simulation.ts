@@ -1125,6 +1125,10 @@ export default class Simulation extends Schema implements ISimulation {
           break
       }
     })
+    if (pokemon.passive === Passive.GHOLDENGO) {
+      pokemon.status.triggerRuneProtect(60000)
+    }
+
     if (pokemon.passive === Passive.CLEAR_WING) {
       pokemon.status.triggerClearWing(1000)
     }

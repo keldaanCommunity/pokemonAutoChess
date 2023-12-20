@@ -115,7 +115,7 @@ export class CountEvolutionRule extends EvolutionRule {
       pokemonEvolutionName,
       player
     )
-    if(pokemon.onEvolve){
+    if (pokemon.onEvolve) {
       pokemon.onEvolve(pokemonEvolved)
     }
 
@@ -235,6 +235,30 @@ export class TurnEvolutionRule extends EvolutionRule {
 
   canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
     return stageLevel >= this.stageLevel
+  }
+
+  evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
+    let pokemonEvolutionName = pokemon.evolution
+    if (this.divergentEvolution) {
+      pokemonEvolutionName = this.divergentEvolution(pokemon, player)
+    }
+    const pokemonEvolved = player.transformPokemon(
+      pokemon,
+      pokemonEvolutionName
+    )
+    return pokemonEvolved
+  }
+}
+
+export class MoneyEvolutionRule extends EvolutionRule {
+  money: number
+  constructor(money: number, divergentEvolution?: DivergentEvolution) {
+    super(divergentEvolution)
+    this.money = money
+  }
+
+  canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
+    return player.money >= this.money
   }
 
   evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
