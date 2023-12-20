@@ -1416,10 +1416,10 @@
     "NIGHT": "+20% CRIT_CHANCE\n+30% SLEEP duration",
     "HYDRATATION": "GRASS synergy is healing 5 additional HP per second under the RAIN",
     "POISON_GAS": "Inflicts POISON every second",
-    "SHINING_RAY": "Give RUNE_PROTECT for 6s",
+    "SHINING_RAY": "Increase AP and ATK by 30%",
     "LIGHT_PULSE": "Also give +10 PP per second",
-    "ETERNAL_LIGHT": "Also increase AP and ATK by 30%",
-    "MAX_ILLUMINATION": "Also give RESURECTION"
+    "ETERNAL_LIGHT": "Also give 30% ATK_SPEED and RUNE_PROTECT for 10 seconds",
+    "MAX_ILLUMINATION": "Also give 100 SHIELD and RESURECTION"
   },
   "item": {
     "FOSSIL_STONE": "Fossil Stone",

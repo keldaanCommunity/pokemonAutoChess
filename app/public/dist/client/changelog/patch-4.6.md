@@ -24,6 +24,11 @@
 
 - Nerf aquatic: 35/45/55% chance to drain 20 PP from target
 - Add Baby 7: Golden Eggs: Eggs can be sold for 10 gold
+- Light adjustments:
+    - (2) Shining Ray: Increase AP and Atttack by 30%
+    - (3) Light Pulse: Also give +10 PP per second
+    - (4) Eternal Light: Also give 30% Attack Speed and Rune Protect for 10 seconds
+    - (5) Max Illumination: Also give 100 Shield and Resurection
 - Add Ground 8, removed ground effect cap, changed Sandstorm threshold to 8 units
 
 # Changes to Items
