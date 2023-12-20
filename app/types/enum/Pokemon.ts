@@ -668,7 +668,10 @@ export enum Pkm {
   LINOONE = "LINOONE",
   PHEROMOSA = "PHEROMOSA",
   SABLEYE = "SABLEYE",
-  DRACOVISH = "DRACOVISH"
+  DRACOVISH = "DRACOVISH",
+  CORSOLA = "CORSOLA",
+  GALAR_CORSOLA = "GALAR_CORSOLA",
+  CURSOLA = "CURSOLA"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1339,7 +1342,10 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.LINOONE]: "0264",
   [Pkm.PHEROMOSA]: "0795",
   [Pkm.SABLEYE]: "0302",
-  [Pkm.DRACOVISH]: "0882"
+  [Pkm.DRACOVISH]: "0882",
+  [Pkm.CORSOLA]: "0222",
+  [Pkm.GALAR_CORSOLA]: "0222-0001",
+  [Pkm.CURSOLA]: "0864"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2010,7 +2016,10 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.LINOONE]: Pkm.ZIGZAGOON,
   [Pkm.PHEROMOSA]: Pkm.PHEROMOSA,
   [Pkm.SABLEYE]: Pkm.SABLEYE,
-  [Pkm.DRACOVISH]: Pkm.DRACOVISH
+  [Pkm.DRACOVISH]: Pkm.DRACOVISH,
+  [Pkm.CORSOLA]: Pkm.CORSOLA,
+  [Pkm.GALAR_CORSOLA]: Pkm.CORSOLA,
+  [Pkm.CURSOLA]: Pkm.CORSOLA
 }
 
 export enum PkmDuo {
@@ -5483,5 +5492,20 @@ export const AnimationConfig: {
     attack: AnimationType.Idle, // TEMP while waiting for anims to be drawn
     ability: AnimationType.Idle, // TEMP while waiting for anims to be drawn
     emote: AnimationType.Idle // TEMP while waiting for anims to be drawn
+  },
+  [Pkm.CORSOLA]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Shake,
+    emote: AnimationType.Shake
+  },
+  [Pkm.GALAR_CORSOLA]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shake
+  },
+  [Pkm.CURSOLA]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Charge,
+    emote: AnimationType.SpAttack
   }
 }

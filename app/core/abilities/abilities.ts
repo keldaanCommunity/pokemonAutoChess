@@ -6677,6 +6677,32 @@ export class FishiousRendStrategy extends AbilityStrategy {
   }
 }
 
+export class RecoverStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    pokemon.handleHeal(0.25 * pokemon.hp, pokemon, 1)
+  }
+}
+
+export class CurseStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    // TODO: apply curse
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -6934,5 +6960,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.OUTRAGE]: new OutrageStrategy(),
   [Ability.LUNGE]: new LungeStrategy(),
   [Ability.KNOCK_OFF]: new KnockOffStrategy(),
-  [Ability.FISHIOUS_REND]: new FishiousRendStrategy()
+  [Ability.FISHIOUS_REND]: new FishiousRendStrategy(),
+  [Ability.RECOVER]: new RecoverStrategy(),
+  [Ability.CURSE]: new CurseStrategy()
 }

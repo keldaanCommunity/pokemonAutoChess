@@ -9890,11 +9890,11 @@ export class Tropius extends Pokemon {
     player,
     entity
   }: {
-    player: IPlayer,
+    player: IPlayer
     entity: IPokemonEntity
   }) {
     const berry = pickRandomIn(Berries)
-    if(entity.items.size < 3){
+    if (entity.items.size < 3) {
       entity.items.add(berry)
       entity.refToBoardPokemon.items.add(berry)
     } else {
@@ -11081,6 +11081,49 @@ export class Dracovish extends Pokemon {
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
+export class Corsola extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ROCK])
+  rarity = Rarity.EPIC
+  stars = 1
+  hp = 180
+  atk = 21
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 1
+  skill = Ability.RECOVER
+  attackSprite = AttackSprite.WATER_MELEE
+}
+
+export class GalarCorsola extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ROCK, Synergy.GHOST])
+  evolution = Pkm.CURSOLA
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 180
+  atk = 21
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.CURSE
+  attackSprite = AttackSprite.WATER_MELEE
+}
+
+export class Cursola extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ROCK, Synergy.GHOST])
+  rarity = Rarity.EPIC
+  stars = 3
+  hp = 180
+  atk = 21
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.CURSE
+  attackSprite = AttackSprite.WATER_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (shiny: boolean, emotion: Emotion) => Pokemon
@@ -11752,5 +11795,8 @@ export const PokemonClasses: Record<
   [Pkm.LINOONE]: Linoone,
   [Pkm.PHEROMOSA]: Pheromosa,
   [Pkm.SABLEYE]: Sableye,
-  [Pkm.DRACOVISH]: Dracovish
+  [Pkm.DRACOVISH]: Dracovish,
+  [Pkm.CORSOLA]: Corsola,
+  [Pkm.GALAR_CORSOLA]: GalarCorsola,
+  [Pkm.CURSOLA]: Cursola
 }

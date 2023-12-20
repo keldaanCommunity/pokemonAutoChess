@@ -940,7 +940,10 @@
     "LINOONE": "Linoone",
     "PHEROMOSA": "Pheromosa",
     "SABLEYE": "Sableye",
-    "DRACOVISH": "Dracovish"
+    "DRACOVISH": "Dracovish",
+    "CORSOLA": "Corsola",
+    "GALAR_CORSOLA": "Galar Corsola",
+    "CURSOLA": "Cursola"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
