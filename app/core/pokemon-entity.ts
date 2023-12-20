@@ -1007,13 +1007,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.passive === Passive.CORSOLA) {
-      const galanCorsola = this.refToBoardPokemon.evolutionRule.evolve(
+      const galarCorsola = this.refToBoardPokemon.evolutionRule.evolve(
         this.refToBoardPokemon as Pokemon,
         this.player!,
         this.simulation.stageLevel
       )
-      galanCorsola.evolutionRule.tryEvolve(
-        galanCorsola,
+      galarCorsola.evolutionRule.tryEvolve(
+        galarCorsola,
         this.player!,
         this.simulation.stageLevel
       )

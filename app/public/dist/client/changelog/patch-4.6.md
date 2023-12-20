@@ -3,6 +3,9 @@
 - Sableye
 - Pheromosa
 - Dracovish
+- Corsola
+- Galar Gorsola
+- Cursola
 
 # Changes to Pokemon & Abilities
 
