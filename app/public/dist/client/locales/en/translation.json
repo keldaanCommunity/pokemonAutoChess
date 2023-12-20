@@ -270,7 +270,9 @@
     "OUTRAGE": "Outrage",
     "LUNGE": "Lunge",
     "KNOCK_OFF": "Knock Off",
-    "FISHIOUS_REND": "Fishious Rend"
+    "FISHIOUS_REND": "Fishious Rend",
+    "RECOVER": "Recover",
+    "CURSE": "Curse"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1199,7 +1201,9 @@
     "OUTRAGE": "The pokémon is CONFUSION for 2s and deals [2,3,4,SP] ATK as SPECIAL to the target and adjacent enemies",
     "LUNGE": "Jumps to the opponent with the highest ATK, deals [50,SP] SPECIAL and reduce its ATK by [5,SP]",
     "KNOCK_OFF": "Deals [90,SP] SPECIAL. If target is holding items, they are removed and an additional [30,SP] SPECIAL is dealt per item",
-    "FISHIOUS_REND": "Deals [80,SP] SPECIAL damage. Double damage if attacker has more ATK_SPEED than target."
+    "FISHIOUS_REND": "Deals [80,SP] SPECIAL damage. Double damage if attacker has more ATK_SPEED than target.",
+    "RECOVER": "Heal for [25,SP]% of max HP",
+    "CURSE": "Inflicts CURSE that will KO the opponent after [12,10,5,SP=-0.2] seconds"
   },
   "effect": {
     "INGRAIN": "Ingrain",

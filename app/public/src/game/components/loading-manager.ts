@@ -135,6 +135,7 @@ export function loadStatusMultiAtlas(scene: Phaser.Scene) {
     "/assets/status/FLINCH.json",
     "/assets/status"
   )
+  scene.load.multiatlas("curse", "/assets/status/CURSE.json", "/assets/status")
   scene.load.multiatlas(
     "ELECTRIC_SURGE",
     "/assets/status/ELECTRIC_SURGE.json",

@@ -137,6 +137,8 @@ export class DebugScene extends Phaser.Scene {
       this.pokemon.removeRuneProtect()
       this.pokemon.removeSpikeArmor()
       this.pokemon.removeMagicBounce()
+      this.pokemon.removeFlinch()
+      this.pokemon.removeCurse()
       this.pokemon.removeElectricField()
       this.pokemon.removePsychicField()
       this.pokemon.removeGrassField()
@@ -183,6 +185,9 @@ export class DebugScene extends Phaser.Scene {
       }
       if (status === Status.FLINCH) {
         this.pokemon.addFlinch()
+      }
+      if (status === Status.CURSE) {
+        this.pokemon.addCurse()
       }
       if (status == Status.RUNE_PROTECT) {
         this.pokemon.addRuneProtect()

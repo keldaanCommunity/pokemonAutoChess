@@ -248,6 +248,12 @@ export default class BattleManager {
             } else {
               pkm.removeRuneProtect()
             }
+          } else if (field == "curse") {
+            if (pokemon.status.curse) {
+              pkm.addCurse()
+            } else {
+              pkm.removeCurse()
+            }
           } else if (field == "spikeArmor") {
             if (pokemon.status.spikeArmor) {
               pkm.addSpikeArmor()

@@ -2839,6 +2839,16 @@ export function createStatusAnimations(game: Phaser.Scene) {
   })
 
   game.anims.create({
+    key: "curse",
+    frames: game.anims.generateFrameNames("curse", {
+      start: 0,
+      end: 5,
+    }),
+    frameRate: 8,
+    repeat: -1
+  })
+
+  game.anims.create({
     key: "VOID_BOOST",
     frames: game.anims.generateFrameNames("VOID_BOOST", {
       start: 0,

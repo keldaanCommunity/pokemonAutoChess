@@ -34,6 +34,7 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") spikeArmor = false
   @type("boolean") magicBounce = false
   @type("boolean") light = false
+  @type("boolean") curse = false
   magmaStorm = false
   soulDew = false
   deltaOrbStacks = 0
@@ -71,6 +72,7 @@ export default class Status extends Schema implements IStatus {
   doubleDamage = false
   drySkin = false
   drySkinCooldown = 1000
+  curseCooldown = 0
 
   clearNegativeStatus() {
     this.burnCooldown = 0
@@ -84,6 +86,8 @@ export default class Status extends Schema implements IStatus {
     this.charmCooldown = 0
     this.flinchCooldown = 0
     this.armorReductionCooldown = 0
+    this.curseCooldown = 0
+    this.curse = false
   }
 
   updateAllStatus(dt: number, pokemon: PokemonEntity, board: Board) {
@@ -186,8 +190,13 @@ export default class Status extends Schema implements IStatus {
     if (this.clearWing) {
       this.updateClearWing(dt, pokemon)
     }
+
     if (this.drySkin) {
       this.updateDrySkin(dt, pokemon)
+    }
+
+    if (this.curse) {
+      this.updateCurse(dt, board, pokemon)
     }
   }
 
@@ -769,6 +778,30 @@ export default class Status extends Schema implements IStatus {
       pokemon.cooldown = 0
     } else {
       this.resurectingCooldown -= dt
+    }
+  }
+
+  triggerCurse(timer: number) {
+    if (this.curse) {
+      this.curseCooldown = 0 // apply curse immediately if already cursed
+    } else {
+      this.curse = true
+      this.curseCooldown = timer
+    }
+  }
+
+  updateCurse(dt: number, board: Board, pokemon: PokemonEntity) {
+    if (this.curseCooldown - dt <= 0) {
+      this.curse = false
+      pokemon.handleDamage({
+        damage: 9999,
+        board,
+        attacker: null,
+        attackType: AttackType.TRUE,
+        shouldTargetGainMana: false
+      })
+    } else {
+      this.protectCooldown = this.protectCooldown - dt
     }
   }
 }
