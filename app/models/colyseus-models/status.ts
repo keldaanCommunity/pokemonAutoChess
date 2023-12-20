@@ -782,11 +782,13 @@ export default class Status extends Schema implements IStatus {
   }
 
   triggerCurse(timer: number) {
-    if (this.curse) {
-      this.curseCooldown = 0 // apply curse immediately if already cursed
-    } else {
-      this.curse = true
-      this.curseCooldown = timer
+    if (!this.runeProtect) {
+      if (this.curse) {
+        this.curseCooldown = 0 // apply curse immediately if already cursed
+      } else {
+        this.curse = true
+        this.curseCooldown = timer
+      }
     }
   }
 
