@@ -2851,7 +2851,7 @@ export function createStatusAnimations(game: Phaser.Scene) {
     key: "CURSE_EFFECT",
     frames: game.anims.generateFrameNames("CURSE_EFFECT", {
       start: 0,
-      end: 6
+      end: 11
     }),
     frameRate: 8,
     repeat: 0

@@ -5270,14 +5270,16 @@ export default class BattleManager {
               "0"
             )
             specialProjectile.setDepth(7)
-            specialProjectile.setScale(2, 2)
             specialProjectile.anims.play("CURSE_EFFECT")
-            specialProjectile.once(
-              Phaser.Animations.Events.ANIMATION_COMPLETE,
-              () => {
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              y: coordinates[1] - 80,
+              ease: "linear",
+              duration: 1500,
+              onComplete: () => {
                 specialProjectile.destroy()
               }
-            )
+            })
             break
 
           default:
