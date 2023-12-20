@@ -6699,7 +6699,7 @@ export class CurseStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    const curseDelay = ([12000,10000,5000][pokemon.stars-1] ?? 5000) * (1 - 0.2*pokemon.ap/100)
+    const curseDelay = ([12000,8000,4000][pokemon.stars-1] ?? 5000) * (1 - 0.2*pokemon.ap/100)
     target.status.triggerCurse(curseDelay)
   }
 }

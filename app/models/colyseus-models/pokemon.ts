@@ -11085,14 +11085,17 @@ export class Corsola extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ROCK])
   rarity = Rarity.EPIC
   stars = 1
-  hp = 180
-  atk = 21
-  def = 3
-  speDef = 3
-  maxPP = 80
+  hp = 125
+  atk = 8
+  def = 1
+  speDef = 4
+  maxPP = 100
   range = 1
   skill = Ability.RECOVER
   attackSprite = AttackSprite.WATER_MELEE
+  passive = Passive.CORSOLA
+  evolution = Pkm.GALAR_CORSOLA
+  evolutionRule = new TurnEvolutionRule(99) // natural death
 }
 
 export class GalarCorsola extends Pokemon {
@@ -11100,10 +11103,10 @@ export class GalarCorsola extends Pokemon {
   evolution = Pkm.CURSOLA
   rarity = Rarity.EPIC
   stars = 2
-  hp = 180
-  atk = 21
-  def = 3
-  speDef = 3
+  hp = 150
+  atk = 15
+  def = 2
+  speDef = 6
   maxPP = 100
   range = 1
   skill = Ability.CURSE
@@ -11114,10 +11117,10 @@ export class Cursola extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ROCK, Synergy.GHOST])
   rarity = Rarity.EPIC
   stars = 3
-  hp = 180
-  atk = 21
+  hp = 300
+  atk = 25
   def = 3
-  speDef = 3
+  speDef = 8
   maxPP = 100
   range = 1
   skill = Ability.CURSE

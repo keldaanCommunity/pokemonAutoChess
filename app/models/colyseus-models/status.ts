@@ -801,7 +801,7 @@ export default class Status extends Schema implements IStatus {
         shouldTargetGainMana: false
       })
     } else {
-      this.protectCooldown = this.protectCooldown - dt
+      this.curseCooldown = this.curseCooldown - dt
     }
   }
 }
