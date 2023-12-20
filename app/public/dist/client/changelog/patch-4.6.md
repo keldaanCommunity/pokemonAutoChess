@@ -3,6 +3,8 @@
 - Sableye
 - Pheromosa
 - Dracovish
+- Gimmighoul
+- Gholdengo
 
 # Changes to Pokemon & Abilities
 

@@ -6677,6 +6677,54 @@ export class FishiousRendStrategy extends AbilityStrategy {
   }
 }
 
+export class GoldRushStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const goldDamage = pokemon.player?.money ? pokemon.player?.money : 0
+    const damage = 20 + goldDamage
+    if (pokemon.player) {
+      pokemon.player.money += 2
+    }
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit,
+      true
+    )
+  }
+}
+
+export class MakeItRainStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const goldDamage = pokemon.player?.money ? pokemon.player?.money : 0
+    const damage = 100 + goldDamage
+
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit,
+      true
+    )
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -6934,5 +6982,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.OUTRAGE]: new OutrageStrategy(),
   [Ability.LUNGE]: new LungeStrategy(),
   [Ability.KNOCK_OFF]: new KnockOffStrategy(),
-  [Ability.FISHIOUS_REND]: new FishiousRendStrategy()
+  [Ability.FISHIOUS_REND]: new FishiousRendStrategy(),
+  [Ability.GOLD_RUSH]: new GoldRushStrategy(),
+  [Ability.MAKE_IT_RAIN]: new MakeItRainStrategy()
 }

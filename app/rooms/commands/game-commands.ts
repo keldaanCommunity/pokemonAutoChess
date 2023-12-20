@@ -51,6 +51,7 @@ import { resetArraySchema, values } from "../../utils/schemas"
 import {
   CountEvolutionRule,
   HatchEvolutionRule,
+  MoneyEvolutionRule,
   TurnEvolutionRule
 } from "../../core/evolution-rules"
 import { Synergy, SynergyEffects } from "../../types/enum/Synergy"
@@ -1119,6 +1120,13 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
               )
             }
             if (pokemon.evolutionRule instanceof TurnEvolutionRule) {
+              pokemon.evolutionRule.tryEvolve(
+                pokemon,
+                player,
+                this.state.stageLevel
+              )
+            }
+            if (pokemon.evolutionRule instanceof MoneyEvolutionRule) {
               pokemon.evolutionRule.tryEvolve(
                 pokemon,
                 player,

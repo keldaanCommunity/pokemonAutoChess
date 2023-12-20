@@ -668,7 +668,9 @@ export enum Pkm {
   LINOONE = "LINOONE",
   PHEROMOSA = "PHEROMOSA",
   SABLEYE = "SABLEYE",
-  DRACOVISH = "DRACOVISH"
+  DRACOVISH = "DRACOVISH",
+  GIMMIGHOUL = "GIMMIGHOUL",
+  GHOLDENGO = "GHOLDENGO"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1339,7 +1341,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.LINOONE]: "0264",
   [Pkm.PHEROMOSA]: "0795",
   [Pkm.SABLEYE]: "0302",
-  [Pkm.DRACOVISH]: "0882"
+  [Pkm.DRACOVISH]: "0882",
+  [Pkm.GIMMIGHOUL]: "0999-0001",
+  [Pkm.GHOLDENGO]: "1000"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2010,7 +2014,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.LINOONE]: Pkm.ZIGZAGOON,
   [Pkm.PHEROMOSA]: Pkm.PHEROMOSA,
   [Pkm.SABLEYE]: Pkm.SABLEYE,
-  [Pkm.DRACOVISH]: Pkm.DRACOVISH
+  [Pkm.DRACOVISH]: Pkm.DRACOVISH,
+  [Pkm.GIMMIGHOUL]: Pkm.GIMMIGHOUL,
+  [Pkm.GHOLDENGO]: Pkm.GIMMIGHOUL
 }
 
 export enum PkmDuo {
@@ -5483,5 +5489,15 @@ export const AnimationConfig: {
     attack: AnimationType.Idle, // TEMP while waiting for anims to be drawn
     ability: AnimationType.Idle, // TEMP while waiting for anims to be drawn
     emote: AnimationType.Idle // TEMP while waiting for anims to be drawn
+  },
+  [Pkm.GIMMIGHOUL]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Swing,
+    emote: AnimationType.RearUp
+  },
+  [Pkm.GHOLDENGO]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Charge
   }
 }

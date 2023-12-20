@@ -270,7 +270,9 @@
     "OUTRAGE": "Outrage",
     "LUNGE": "Lunge",
     "KNOCK_OFF": "Knock Off",
-    "FISHIOUS_REND": "Fishious Rend"
+    "FISHIOUS_REND": "Fishious Rend",
+    "GOLD_RUSH": "Gold Rush",
+    "MAKE_IT_RAIN": "Make it Rain"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -940,7 +942,9 @@
     "LINOONE": "Linoone",
     "PHEROMOSA": "Pheromosa",
     "SABLEYE": "Sableye",
-    "DRACOVISH": "Dracovish"
+    "DRACOVISH": "Dracovish",
+    "GIMMIGHOUL": "Gimmighoul",
+    "GHOLDENGO": "Gholdengo"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1196,7 +1200,9 @@
     "OUTRAGE": "The pokémon is CONFUSION for 2s and deals [2,3,4,SP] ATK as SPECIAL to the target and adjacent enemies",
     "LUNGE": "Jumps to the opponent with the highest ATK, deals [50,SP] SPECIAL and reduce its ATK by [5,SP]",
     "KNOCK_OFF": "Deals [90,SP] SPECIAL. If target is holding items, they are removed and an additional [30,SP] SPECIAL is dealt per item",
-    "FISHIOUS_REND": "Deals [80,SP] SPECIAL damage. Double damage if attacker has more ATK_SPEED than target."
+    "FISHIOUS_REND": "Deals [80,SP] SPECIAL damage. Double damage if attacker has more ATK_SPEED than target.",
+    "GOLD_RUSH": "Deals  [20, SP] + your amount of golds as SPECIAL, then earn 2 golds",
+    "MAKE_IT_RAIN": "Deals [100, SP] + your amount of golds as SPECIAL"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1650,7 +1656,9 @@
     "TYPHLOSION": "Typhlosion is looking for a REAPER_CLOTH",
     "HISUIAN_TYPHLOSION": "The pokémon inflicts 20% extra damage on a BURN or SILENCE target",
     "PICKUP": "The pokémon will start with a random item if it's not holding anything",
-    "MAWILE": "Mawile fools the foes with its docile-looking face. Cast $t(ability.ATTRACT) at the start of the fight."
+    "MAWILE": "Mawile fools the foes with its docile-looking face. Cast $t(ability.ATTRACT) at the start of the fight.",
+    "GIMMIGHOUL": "$t(pkm.GIMMIGHOUL) is looking for 99 golds",
+    "GHOLDENGO": "At the start of each fight, if the player has more than 50 golds, $t(pkm.GHOLDENGO) gains RUNE_PROTECT for the entire fight"
   },
   "stat": {
     "ATK": "Attack",
