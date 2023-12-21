@@ -2619,7 +2619,10 @@ export default class AnimationManager {
 
     let lock = false,
       loop = false
-    if (action === PokemonActionState.HOP) {
+    if (
+      action === PokemonActionState.HOP ||
+      action === PokemonActionState.HURT
+    ) {
       lock = true
       loop = true
     }
@@ -2636,6 +2639,8 @@ export default class AnimationManager {
     animation: AnimationType,
     animationConfig: { flip?: boolean; loop?: boolean; lock?: boolean } = {}
   ) {
+    if (entity.animationLocked) return
+
     const orientation = animationConfig.flip
       ? OrientationFlip[entity.orientation]
       : entity.orientation
@@ -2654,19 +2659,13 @@ export default class AnimationManager {
     const animKey = `${textureIndex}/${tint}/${animation}/${SpriteType.ANIM}/${orientationCorrected}`
     const shadowKey = `${textureIndex}/${tint}/${animation}/${SpriteType.SHADOW}/${orientationCorrected}`
 
-    if (!entity.animationLocked) {
-      if (animationConfig.lock) {
-        // prevent repeating a locked anim
-        entity.sprite.anims.play({ key: animKey, repeat: 0 })
-        entity.shadow.anims.play({ key: shadowKey, repeat: 0 })
-      } else if (animationConfig.loop) {
-        // force loop an anim for debug scene in sprite viewer
-        entity.sprite.anims.play({ key: animKey, repeat: -1 })
-        entity.shadow.anims.play({ key: shadowKey, repeat: -1 })
-      } else {
-        entity.sprite.anims.play(animKey)
-        entity.shadow.anims.play(shadowKey)
-      }
+    if (animationConfig.loop) {
+      // force loop an anim for debug scene in sprite viewer
+      entity.sprite.anims.play({ key: animKey, repeat: -1 })
+      entity.shadow.anims.play({ key: shadowKey, repeat: -1 })
+    } else {
+      entity.sprite.anims.play(animKey)
+      entity.shadow.anims.play(shadowKey)
     }
     if (animationConfig.lock) {
       entity.animationLocked = true
