@@ -669,6 +669,9 @@ export enum Pkm {
   PHEROMOSA = "PHEROMOSA",
   SABLEYE = "SABLEYE",
   DRACOVISH = "DRACOVISH",
+  CORSOLA = "CORSOLA",
+  GALAR_CORSOLA = "GALAR_CORSOLA",
+  CURSOLA = "CURSOLA",
   GIMMIGHOUL = "GIMMIGHOUL",
   GHOLDENGO = "GHOLDENGO"
 }
@@ -1342,6 +1345,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.PHEROMOSA]: "0795",
   [Pkm.SABLEYE]: "0302",
   [Pkm.DRACOVISH]: "0882",
+  [Pkm.CORSOLA]: "0222",
+  [Pkm.GALAR_CORSOLA]: "0222-0001",
+  [Pkm.CURSOLA]: "0864",
   [Pkm.GIMMIGHOUL]: "0999-0001",
   [Pkm.GHOLDENGO]: "1000"
 }
@@ -2015,6 +2021,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.PHEROMOSA]: Pkm.PHEROMOSA,
   [Pkm.SABLEYE]: Pkm.SABLEYE,
   [Pkm.DRACOVISH]: Pkm.DRACOVISH,
+  [Pkm.CORSOLA]: Pkm.CORSOLA,
+  [Pkm.GALAR_CORSOLA]: Pkm.CORSOLA,
+  [Pkm.CURSOLA]: Pkm.CORSOLA,
   [Pkm.GIMMIGHOUL]: Pkm.GIMMIGHOUL,
   [Pkm.GHOLDENGO]: Pkm.GIMMIGHOUL
 }
@@ -3269,7 +3278,8 @@ export const AnimationConfig: {
   [Pkm.VANILLUXE]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Charge,
-    emote: AnimationType.Rotate
+    emote: AnimationType.Rotate,
+    shinyUnavailable: true
   },
   [Pkm.GLACEON]: {
     attack: AnimationType.Shoot,
@@ -5488,7 +5498,23 @@ export const AnimationConfig: {
   [Pkm.DRACOVISH]: {
     attack: AnimationType.Idle, // TEMP while waiting for anims to be drawn
     ability: AnimationType.Idle, // TEMP while waiting for anims to be drawn
-    emote: AnimationType.Idle // TEMP while waiting for anims to be drawn
+    emote: AnimationType.Idle, // TEMP while waiting for anims to be drawn,
+    shinyUnavailable: true
+  },
+  [Pkm.CORSOLA]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Shake,
+    emote: AnimationType.Shake
+  },
+  [Pkm.GALAR_CORSOLA]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shake
+  },
+  [Pkm.CURSOLA]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Charge,
+    emote: AnimationType.SpAttack
   },
   [Pkm.GIMMIGHOUL]: {
     attack: AnimationType.Attack,

@@ -10,6 +10,7 @@ export default function WikiStatus() {
     Status.BURN,
     Status.CHARM,
     Status.CONFUSION,
+    Status.CURSE,
     Status.FLINCH,
     Status.FREEZE,
     Status.PARALYSIS,
@@ -24,7 +25,6 @@ export default function WikiStatus() {
     Status.FAIRY_FIELD,
     Status.GRASS_FIELD,
     Status.PSYCHIC_FIELD
-    
   ]
   return (
     <ul className="wiki-status">

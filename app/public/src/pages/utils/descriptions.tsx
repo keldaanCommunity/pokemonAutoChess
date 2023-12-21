@@ -114,7 +114,7 @@ export function addIconsToDescription(description: string, tier = 0, ap = 0) {
         }
 
         d = (
-          <span className={cc("description-icon", { "scales-ap": scale > 0 })}>
+          <span className={cc("description-icon", { "scales-ap": scale !== 0 })}>
             {scale > 0 && (
               <img
                 src="assets/icons/AP.png"

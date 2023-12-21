@@ -248,6 +248,12 @@ export default class BattleManager {
             } else {
               pkm.removeRuneProtect()
             }
+          } else if (field == "curse") {
+            if (pokemon.status.curse) {
+              pkm.addCurse()
+            } else {
+              pkm.removeCurse()
+            }
           } else if (field == "spikeArmor") {
             if (pokemon.status.spikeArmor) {
               pkm.addSpikeArmor()
@@ -5314,6 +5320,31 @@ export default class BattleManager {
             shot.anims.play(Ability.SNIPE_SHOT + "_shot")
             shot.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
               shot.destroy()
+            })
+            break
+
+          case "CURSE_EFFECT":
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              "CURSE_EFFECT",
+              "0"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.anims.play("CURSE_EFFECT")
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              y: coordinates[1] - 80,
+              ease: "linear",
+              duration: 1500,
+              onComplete: () => {
+                specialProjectile.destroy()
+              }
             })
             break
 

@@ -88,7 +88,8 @@ export class Pokemon extends Schema implements IPokemon {
     /* true if should be excluded from shops when obtained */
     return (
       this.evolution === Pkm.DEFAULT ||
-      this.evolutionRule instanceof CountEvolutionRule === false
+      (this.evolutionRule instanceof CountEvolutionRule === false &&
+        this.passive !== Passive.CORSOLA)
     )
   }
 
@@ -11114,6 +11115,52 @@ export class Dracovish extends Pokemon {
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
+export class Corsola extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ROCK])
+  rarity = Rarity.EPIC
+  stars = 1
+  hp = 125
+  atk = 8
+  def = 1
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.RECOVER
+  attackSprite = AttackSprite.WATER_MELEE
+  passive = Passive.CORSOLA
+  evolution = Pkm.GALAR_CORSOLA
+  evolutionRule = new TurnEvolutionRule(99) // natural death
+}
+
+export class GalarCorsola extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ROCK, Synergy.GHOST])
+  evolution = Pkm.CURSOLA
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 150
+  atk = 15
+  def = 2
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.CURSE
+  attackSprite = AttackSprite.WATER_MELEE
+}
+
+export class Cursola extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ROCK, Synergy.GHOST])
+  rarity = Rarity.EPIC
+  stars = 3
+  hp = 300
+  atk = 25
+  def = 3
+  speDef = 8
+  maxPP = 100
+  range = 1
+  skill = Ability.CURSE
+  attackSprite = AttackSprite.WATER_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (shiny: boolean, emotion: Emotion) => Pokemon
@@ -11786,6 +11833,9 @@ export const PokemonClasses: Record<
   [Pkm.PHEROMOSA]: Pheromosa,
   [Pkm.SABLEYE]: Sableye,
   [Pkm.DRACOVISH]: Dracovish,
+  [Pkm.CORSOLA]: Corsola,
+  [Pkm.GALAR_CORSOLA]: GalarCorsola,
+  [Pkm.CURSOLA]: Cursola,
   [Pkm.GIMMIGHOUL]: Gimmighoul,
   [Pkm.GHOLDENGO]: Gholdengo
 }

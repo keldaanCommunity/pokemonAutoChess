@@ -94,6 +94,7 @@ export default class Pokemon extends DraggableObject {
   armorReduction: GameObjects.Sprite | undefined
   charm: GameObjects.Sprite | undefined
   flinch: GameObjects.Sprite | undefined
+  curse: GameObjects.Sprite | undefined
   magmaStorm: GameObjects.Sprite | undefined
   poison: GameObjects.Sprite | undefined
   protect: GameObjects.Sprite | undefined
@@ -1034,6 +1035,22 @@ export default class Pokemon extends DraggableObject {
     if (this.flinch) {
       this.remove(this.flinch, true)
       this.flinch = undefined
+    }
+  }
+
+  addCurse() {
+    if (!this.curse) {
+      this.curse = new GameObjects.Sprite(this.scene, 0, -40, "curse", "0")
+      this.scene.add.existing(this.curse)
+      this.curse.anims.play("curse")
+      this.add(this.curse)
+    }
+  }
+
+  removeCurse() {
+    if (this.curse) {
+      this.remove(this.curse, true)
+      this.curse = undefined
     }
   }
 

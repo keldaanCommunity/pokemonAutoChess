@@ -36,6 +36,7 @@ import GameRoom from "../rooms/game-room"
 import { Passive } from "./enum/Passive"
 import { Weather } from "./enum/Weather"
 import { Effects } from "../models/effects"
+import { EvolutionRule } from "../core/evolution-rules"
 
 export * from "./enum/Emotion"
 
@@ -336,6 +337,7 @@ export interface IPokemon {
   rarity: Rarity
   index: string
   evolution: Pkm
+  evolutionRule: EvolutionRule
   positionX: number
   positionY: number
   attackSprite: AttackSprite

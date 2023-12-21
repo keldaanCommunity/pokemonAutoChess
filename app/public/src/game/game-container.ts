@@ -99,6 +99,7 @@ class GameContainer {
       "burn",
       "charm",
       "confusion",
+      "curse",
       "deltaOrbStacks",
       "electricField",
       "fairyField",

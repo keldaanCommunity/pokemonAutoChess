@@ -6725,6 +6725,36 @@ export class MakeItRainStrategy extends AbilityStrategy {
   }
 }
 
+export class RecoverStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    pokemon.handleHeal(0.25 * pokemon.hp, pokemon, 1)
+  }
+}
+
+export class CurseStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const enemies = board.cells.filter(p => p && p.team !== pokemon.team) as PokemonEntity[]
+    enemies.sort((a,b) => a.status.curse ? +1 : b.hp - a.hp)
+    const enemyWithHighestHP = enemies[0]
+    const curseDelay = ([12000,8000,4000][pokemon.stars-1] ?? 5000) * (1 - 0.2*pokemon.ap/100)
+    enemyWithHighestHP.status.triggerCurse(curseDelay)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -6983,6 +7013,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.LUNGE]: new LungeStrategy(),
   [Ability.KNOCK_OFF]: new KnockOffStrategy(),
   [Ability.FISHIOUS_REND]: new FishiousRendStrategy(),
+  [Ability.RECOVER]: new RecoverStrategy(),
+  [Ability.CURSE]: new CurseStrategy(),
   [Ability.GOLD_RUSH]: new GoldRushStrategy(),
   [Ability.MAKE_IT_RAIN]: new MakeItRainStrategy()
 }
