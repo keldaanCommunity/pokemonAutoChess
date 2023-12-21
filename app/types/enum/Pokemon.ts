@@ -3278,7 +3278,8 @@ export const AnimationConfig: {
   [Pkm.VANILLUXE]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Charge,
-    emote: AnimationType.Rotate
+    emote: AnimationType.Rotate,
+    shinyUnavailable: true
   },
   [Pkm.GLACEON]: {
     attack: AnimationType.Shoot,
@@ -5497,7 +5498,8 @@ export const AnimationConfig: {
   [Pkm.DRACOVISH]: {
     attack: AnimationType.Idle, // TEMP while waiting for anims to be drawn
     ability: AnimationType.Idle, // TEMP while waiting for anims to be drawn
-    emote: AnimationType.Idle // TEMP while waiting for anims to be drawn
+    emote: AnimationType.Idle, // TEMP while waiting for anims to be drawn,
+    shinyUnavailable: true
   },
   [Pkm.CORSOLA]: {
     attack: AnimationType.Shoot,

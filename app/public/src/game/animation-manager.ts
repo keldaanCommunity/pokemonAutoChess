@@ -95,7 +95,7 @@ export default class AnimationManager {
                 })
               } else {
                 logger.warn(
-                  "duration array missing for ",
+                  "duration array missing for",
                   `${index}/${shiny}/${action}/${mode}`
                 )
               }
@@ -2861,7 +2861,7 @@ export function createStatusAnimations(game: Phaser.Scene) {
     key: "CURSE_EFFECT",
     frames: game.anims.generateFrameNames("CURSE_EFFECT", {
       start: 0,
-      end: 11
+      end: 10
     }),
     frameRate: 8,
     repeat: 0
