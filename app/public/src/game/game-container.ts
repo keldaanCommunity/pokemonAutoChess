@@ -386,6 +386,13 @@ class GameContainer {
       }
 
       listenForPokemonChanges(pokemon)
+
+      pokemon.items.onChange((value, key) => {
+        if (player.id === this.spectatedPlayerId) {
+          this.gameScene?.board?.updatePokemonItems(player.id, pokemon)
+        }
+      })
+
       this.handleBoardPokemonAdd(player, pokemon)
     }, false)
 
