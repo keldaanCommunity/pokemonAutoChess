@@ -90,7 +90,7 @@ export default class Shop {
     let entityNumber = pokemon.stars >= 3 ? 9 : pokemon.stars === 2 ? 3 : 1
     const duo = Object.entries(PkmDuos).find(([key, duo]) => duo.includes(pkm))
     if (duo) {
-      // duos increase the number in pool by one if selling both 
+      // duos increase the number in pool by one if selling both
       // but it is negligible and cannot be abused
       entityNumber = Math.ceil(entityNumber / 2)
     }
@@ -223,7 +223,11 @@ export default class Shop {
     }
 
     const UNOWN_RATE = 0.05
-    if (player.effects.has(Effect.LIGHT_SCREEN) && chance(UNOWN_RATE)) {
+    if (
+      (player.effects.has(Effect.LIGHT_SCREEN) ||
+        player.effects.has(Effect.EERIE_SPELL)) &&
+      chance(UNOWN_RATE)
+    ) {
       const unowns = getUnownsPoolPerStage(stageLevel)
       return pickRandomIn(unowns)
     }
