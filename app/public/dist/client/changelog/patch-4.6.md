@@ -45,12 +45,17 @@
 
 - Arceus/Kecleon dynamic synergies should now also work in bot builder / team planner
 - Fix Munchlax sometimes not carrying over its HP stacked to Snorlax
+- Units now retarget correctly to the charmer after being charmed
+- Prevent some ability animations to loop
 
 # Misc
 
 - New status Curse: KOs the unit at the end of the time limit
+- Improve targeting by addding a second targeting algorithm for targets at range, more performant and precise than the previous one
+- Reduce lag when switching between moving state and attacking state
 - Minimum attack stat value is now 1 instead of 0
 - Self damage is no longer counted in DPS report (example: Flame orb)
 - Increased duration of stage 10 and 20 pick phase from 40 to 45 seconds
 - Changed shop rarities percentages per level ; uncommon are more common at levels 5-6, commons are less common at levels 6-9. Full details [here](https://discord.com/channels/737230355039387749/1184447560845377719)
 - Another ranked lobby opens when the previous one is full
+- Further compress animations to improve loading times

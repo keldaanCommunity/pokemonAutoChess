@@ -2,6 +2,7 @@ import dotenv from "dotenv"
 import path from "path"
 import http from "http"
 import express, { ErrorRequestHandler } from "express"
+import compression from "compression"
 import cors from "cors"
 import { RedisDriver, RedisPresence, Server, ServerOptions } from "colyseus"
 import { monitor } from "@colyseus/monitor"
@@ -22,6 +23,8 @@ import { connect } from "mongoose"
 import PokemonsStatistics from "./models/mongo-models/pokemons-statistic"
 import ItemsStatistics from "./models/mongo-models/items-statistic"
 import Meta from "./models/mongo-models/meta"
+import rateLimit from "express-rate-limit"
+import { initTilemap } from "./core/design"
 
 process.env.NODE_APP_INSTANCE
   ? dotenv.config({ path: path.join(__dirname, "../../../../../.env") })
@@ -47,6 +50,9 @@ admin.initializeApp({
 
 const app = express()
 const httpServer = http.createServer(app)
+
+// compress all responses
+app.use(compression())
 
 const properties: ServerOptions = {
   transport: new WebSocketTransport({
@@ -116,9 +122,6 @@ app.use(express.json())
 app.use(express.static(clientSrc))
 
 // set up rate limiter: maximum of five requests per minute
-import rateLimit from "express-rate-limit"
-import { initTilemap } from "./core/design"
-
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 500, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
