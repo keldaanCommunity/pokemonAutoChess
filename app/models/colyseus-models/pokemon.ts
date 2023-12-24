@@ -43,6 +43,7 @@ import { distanceM } from "../../utils/distance"
 import Simulation from "../../core/simulation"
 import { AbilityStrategies } from "../../core/abilities/abilities"
 import { PokemonEntity } from "../../core/pokemon-entity"
+import { sum } from "../../utils/array"
 
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string
@@ -131,7 +132,15 @@ export class Pokemon extends Schema implements IPokemon {
 
   // called after evolving
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onEvolve(pokemonEvolved: Pokemon) {}
+  onEvolve({
+    pokemonEvolved,
+    pokemonsBeforeEvolution,
+    player
+  }: {
+    pokemonEvolved: Pokemon
+    pokemonsBeforeEvolution: Pokemon[]
+    player: Player
+  }) {}
 
   // called at simulation start before entities are generated
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -7363,9 +7372,16 @@ export class Munchlax extends Pokemon {
   additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 
-  onEvolve(snorlax) {
+  onEvolve({
+    pokemonEvolved: snorlax,
+    pokemonsBeforeEvolution: munchlaxs
+  }: {
+    pokemonEvolved: Pokemon
+    pokemonsBeforeEvolution: Pokemon[]
+  }) {
     // carry over the hp gained with passive
-    snorlax.hp += this.hp - 120
+    const hpStacked = sum(munchlaxs.map((m) => m.hp - 120))
+    snorlax.hp += hpStacked
   }
 }
 
@@ -7388,6 +7404,7 @@ export class Snorlax extends Pokemon {
   additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
+
 export class Growlithe extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
   rarity = Rarity.UNCOMMON

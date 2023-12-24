@@ -44,6 +44,7 @@
 # Bugfix
 
 - Arceus/Kecleon dynamic synergies should now also work in bot builder / team planner
+- Fix Munchlax sometimes not carrying over its HP stacked to Snorlax
 
 # Misc
 

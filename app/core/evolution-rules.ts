@@ -83,6 +83,8 @@ export class CountEvolutionRule extends EvolutionRule {
     const itemsToAdd = new Array<Item>()
     const basicItemsToAdd = new Array<Item>()
 
+    const pokemonsBeforeEvolution: Pokemon[] = []
+
     player.board.forEach((pkm, id) => {
       if (pkm.index == pokemon.index) {
         // logger.debug(pkm.name, pokemon.name)
@@ -108,6 +110,7 @@ export class CountEvolutionRule extends EvolutionRule {
           }
         })
         player.board.delete(id)
+        pokemonsBeforeEvolution.push(pkm)
       }
     })
 
@@ -116,7 +119,7 @@ export class CountEvolutionRule extends EvolutionRule {
       player
     )
     if (pokemon.onEvolve) {
-      pokemon.onEvolve(pokemonEvolved)
+      pokemon.onEvolve({ pokemonEvolved, pokemonsBeforeEvolution, player })
     }
 
     for (let i = 0; i < 3; i++) {
