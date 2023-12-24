@@ -2617,18 +2617,18 @@ export default class AnimationManager {
       entity
     )
 
-    let lock = false,
-      loop = false
+    let lock = false
+    let repeat: number | undefined
     if (
       action === PokemonActionState.HOP ||
       action === PokemonActionState.HURT
     ) {
       lock = true
-      loop = true
+      repeat = -1
     }
 
     try {
-      this.play(entity, animation, { flip, lock, loop })
+      this.play(entity, animation, { flip, lock, repeat })
     } catch (err) {
       logger.warn(`Can't play animation ${animation} for ${entity.name}`, err)
     }
@@ -2637,11 +2637,11 @@ export default class AnimationManager {
   play(
     entity: Pokemon,
     animation: AnimationType,
-    animationConfig: { flip?: boolean; loop?: boolean; lock?: boolean } = {}
+    config: { flip?: boolean; repeat?: number; lock?: boolean } = {}
   ) {
     if (entity.animationLocked) return
 
-    const orientation = animationConfig.flip
+    const orientation = config.flip
       ? OrientationFlip[entity.orientation]
       : entity.orientation
 
@@ -2659,15 +2659,9 @@ export default class AnimationManager {
     const animKey = `${textureIndex}/${tint}/${animation}/${SpriteType.ANIM}/${orientationCorrected}`
     const shadowKey = `${textureIndex}/${tint}/${animation}/${SpriteType.SHADOW}/${orientationCorrected}`
 
-    if (animationConfig.loop) {
-      // force loop an anim for debug scene in sprite viewer
-      entity.sprite.anims.play({ key: animKey, repeat: -1 })
-      entity.shadow.anims.play({ key: shadowKey, repeat: -1 })
-    } else {
-      entity.sprite.anims.play(animKey)
-      entity.shadow.anims.play(shadowKey)
-    }
-    if (animationConfig.lock) {
+    entity.sprite.anims.play({ key: animKey, repeat: config.repeat })
+    entity.shadow.anims.play({ key: shadowKey, repeat: config.repeat })
+    if (config.lock) {
       entity.animationLocked = true
     }
   }
