@@ -86,7 +86,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   @type("string") emotion: Emotion
   cooldown = 500
   manaCooldown = 1000
-  state: MovingState
+  state: PokemonState
   simulation: Simulation
   baseAtk: number
   baseDef: number

@@ -18,6 +18,8 @@ export default class AttackingState extends PokemonState {
 
     if (pokemon.cooldown <= 0) {
       pokemon.cooldown = pokemon.getAttackDelay()
+
+      // first, try to hit the same target than previous attack
       let target = board.getValue(pokemon.targetX, pokemon.targetY)
       let targetCoordinate: { x: number; y: number } | undefined = {
         x: pokemon.targetX,
@@ -39,26 +41,25 @@ export default class AttackingState extends PokemonState {
           ) <= pokemon.range
         )
       ) {
-        targetCoordinate = this.getNearestTargetCoordinate(pokemon, board)
+        // if target is no longer alive or at range, retargeting
+        targetCoordinate = this.getNearestTargetAtRangeCoordinates(
+          pokemon,
+          board
+        )
         if (targetCoordinate) {
           target = board.getValue(targetCoordinate.x, targetCoordinate.y)
         }
       }
 
-      // no target case
-      if (!targetCoordinate) {
-        pokemon.toMovingState()
-      } else if (pokemon.status.charm) {
-        pokemon.toMovingState()
-      } else if (
-        distanceC(
-          pokemon.positionX,
-          pokemon.positionY,
-          targetCoordinate.x,
-          targetCoordinate.y
-        ) > pokemon.range
-      ) {
-        pokemon.toMovingState()
+      // no target at range, changing to moving state
+      if (!target || !targetCoordinate || pokemon.status.charm) {
+        const targetAtSight = this.getNearestTargetAtSightCoordinates(
+          pokemon,
+          board
+        )
+        if (targetAtSight) {
+          pokemon.toMovingState()
+        }
       } else if (
         target &&
         pokemon.pp >= pokemon.maxPP &&

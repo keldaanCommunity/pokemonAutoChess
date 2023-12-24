@@ -626,8 +626,12 @@ export default class Status extends Schema implements IStatus {
       if (pkm.simulation.weather === Weather.MISTY) {
         timer = Math.round(timer * 1.3)
       }
-      this.charm = true
+      this.charm = true        
       this.charmCooldown = timer
+      if(origin){
+        pkm.targetX = origin?.positionX
+        pkm.targetY = origin?.positionY
+      }   
     }
   }
 
