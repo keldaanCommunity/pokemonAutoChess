@@ -14,18 +14,21 @@ export default class MovingState extends PokemonState {
     super.update(pokemon, dt, board, weather)
     if (pokemon.cooldown <= 0) {
       pokemon.cooldown = weather === Weather.SNOW ? 666 : 500
-      const targetCoordinate = this.getNearestTargetCoordinate(pokemon, board)
-      if (targetCoordinate) {
-        const distance = distanceC(
-          pokemon.positionX,
-          pokemon.positionY,
-          targetCoordinate.x,
-          targetCoordinate.y
-        )
-        if (distance <= pokemon.range && !pokemon.status.charm) {
+      const targetAtRange = this.getNearestTargetAtRangeCoordinates(
+        pokemon,
+        board
+      )
+      if (targetAtRange) {
+        if (!pokemon.status.charm) {
           pokemon.toAttackingState()
-        } else if (distance > 1) {
-          this.move(pokemon, board, targetCoordinate)
+        }
+      } else {
+        const targetAtSight = this.getNearestTargetAtSightCoordinates(
+          pokemon,
+          board
+        )
+        if (targetAtSight) {
+          this.move(pokemon, board, targetAtSight)
         }
       }
     } else {
@@ -107,6 +110,7 @@ export default class MovingState extends PokemonState {
   onEnter(pokemon: PokemonEntity) {
     super.onEnter(pokemon)
     pokemon.action = PokemonActionState.WALK
+    pokemon.cooldown = 0
   }
 
   onExit(pokemon: PokemonEntity) {

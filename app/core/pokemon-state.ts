@@ -16,7 +16,7 @@ import { logger } from "../utils/logger"
 import { Passive } from "../types/enum/Passive"
 import { Weather } from "../types/enum/Weather"
 import { max, min } from "../utils/number"
-import { distanceM } from "../utils/distance"
+import { distanceC, distanceM } from "../utils/distance"
 import { FIGHTING_PHASE_DURATION } from "../types/Config"
 
 export default class PokemonState {
@@ -497,7 +497,54 @@ export default class PokemonState {
 
   onExit(pokemon: PokemonEntity) {}
 
-  getNearestTargetCoordinate(
+  /* NOTE: getNearestTargetAtRangeCoordinates require another algorithm that getNearestTargetCoordinate
+  because it used Chebyshev distance instead of Manhattan distance
+  more info here: https://discord.com/channels/737230355039387749/1183398539456413706 */
+  getNearestTargetAtRangeCoordinates(
+    pokemon: PokemonEntity,
+    board: Board
+  ): { x: number; y: number } | undefined {
+    let distance = 999
+    let candidatesCoordinates: { x: number; y: number }[] = []
+    for (
+      let x = min(0)(pokemon.positionX - pokemon.range);
+      x <= max(board.columns - 1)(pokemon.positionX + pokemon.range);
+      x++
+    ) {
+      for (
+        let y = min(0)(pokemon.positionY - pokemon.range);
+        y <= max(board.rows - 1)(pokemon.positionY + pokemon.range);
+        y++
+      ) {
+        const value = board.getValue(x, y)
+        if (
+          value !== undefined &&
+          value.team !== pokemon.team &&
+          value.isTargettable
+        ) {
+          const candidateDistance = distanceC(
+            pokemon.positionX,
+            pokemon.positionY,
+            x,
+            y
+          )
+          if (candidateDistance < distance) {
+            distance = candidateDistance
+            candidatesCoordinates = [{ x, y }]
+          } else if (candidateDistance == distance) {
+            candidatesCoordinates.push({ x, y })
+          }
+        }
+      }
+    }
+    if (candidatesCoordinates.length > 0) {
+      return pickRandomIn(candidatesCoordinates)
+    } else {
+      return undefined
+    }
+  }
+
+  getNearestTargetAtSightCoordinates(
     pokemon: PokemonEntity,
     board: Board
   ): { x: number; y: number } | undefined {
@@ -692,10 +739,4 @@ export default class PokemonState {
       return undefined
     }
   }
-
-  move(
-    pokemon: PokemonEntity,
-    board: Board,
-    coordinates: { x: number; y: number }
-  ) {}
 }
