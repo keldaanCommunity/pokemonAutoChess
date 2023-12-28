@@ -4366,7 +4366,7 @@ export default class BattleManager {
 
           case Ability.PRISMATIC_LASER:
             coordinatesTarget = transformAttackCoordinate(positionX, 6, this.flip)
-            coordinates = transformAttackCoordinate(positionY, 0, this.flip)
+            coordinates = transformAttackCoordinate(positionX, 0, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
