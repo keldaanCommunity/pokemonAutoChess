@@ -47,6 +47,7 @@
 - Fix Munchlax sometimes not carrying over its HP stacked to Snorlax
 - Units now retarget correctly to the charmer after being charmed
 - Prevent some ability animations to loop
+- Fix Prismatic Laser animation position
 
 # Misc
 

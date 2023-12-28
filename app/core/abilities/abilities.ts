@@ -6046,14 +6046,12 @@ export class PrismaticLaserStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    board.forEach((x, y, tg) => {
-      if (
-        tg &&
-        tg.team !== pokemon.team &&
-        (x === pokemon.positionX ||
-          x === pokemon.positionX - 1 ||
-          x === pokemon.positionX + 1)
-      ) {
+    const affectedCells = board.cells.filter(v=>v && v.team !== pokemon.team && (v.positionX === pokemon.positionX ||
+      v.positionX === pokemon.positionX - 1 ||
+      v.positionX === pokemon.positionX + 1))
+
+    affectedCells.forEach(tg=>{
+      if(tg){
         tg.handleSpecialDamage(80, board, AttackType.SPECIAL, pokemon, crit)
         const teleportationCell = board.getTeleportationCell(
           tg.positionX,
