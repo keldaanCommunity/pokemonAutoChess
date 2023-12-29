@@ -6602,7 +6602,7 @@ export class Regieleki extends Pokemon {
   atk = 20
   def = 3
   speDef = 3
-  maxPP = 80
+  maxPP = 90
   range = 2
   skill = Ability.VOLT_SWITCH
   attackSprite = AttackSprite.ELECTRIC_RANGE
@@ -9415,7 +9415,7 @@ export class Chimecho extends Pokemon {
   atk = 15
   def = 3
   speDef = 6
-  maxPP = 80
+  maxPP = 90
   range = 3
   skill = Ability.ECHO
   passive = Passive.CHIMECHO
@@ -9866,11 +9866,11 @@ export class Kartana extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.STEEL])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 200
+  hp = 230
   atk = 40
   def = 10
-  speDef = 1
-  maxPP = 70
+  speDef = 2
+  maxPP = 65
   range = 1
   skill = Ability.LEAF_BLADE
   passive = Passive.BEAST_BOOST
@@ -10952,8 +10952,8 @@ export class Drizzile extends Pokemon {
   rarity = Rarity.ULTRA
   evolution = Pkm.INTELEON
   stars = 2
-  hp = 240
-  atk = 26
+  hp = 200
+  atk = 23
   def = 4
   speDef = 4
   maxPP = 100

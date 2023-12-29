@@ -971,22 +971,22 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.CHILLY:
           pokemon.effects.add(Effect.FROSTY)
-          pokemon.addSpecialDefense(4)
+          pokemon.addSpecialDefense(3)
           break
 
         case Effect.FROSTY:
           pokemon.effects.add(Effect.FROSTY)
-          pokemon.addSpecialDefense(8)
+          pokemon.addSpecialDefense(6)
           break
 
         case Effect.FREEZING:
           pokemon.effects.add(Effect.FROSTY)
-          pokemon.addSpecialDefense(15)
+          pokemon.addSpecialDefense(12)
           break
 
         case Effect.SHEER_COLD:
           pokemon.effects.add(Effect.SHEER_COLD)
-          pokemon.addSpecialDefense(30)
+          pokemon.addSpecialDefense(24)
           break
 
         case Effect.POISONOUS:
