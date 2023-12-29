@@ -24,10 +24,17 @@
 - Buff Mankey Attack ~~8~~ 10
 - Buff Primeape Attack ~~21~~ 26, spe def ~~2~~ 4
 - Nerf Xurkitree: Attack ~~20~~ 16 ; nerf Charge beam: ~~80~~ 60 special damage, no longer increase AP per missed target
+- Buff Kartana HP: ~~200~~ 230, Spe def: ~~1~~ 2 Pp: ~~70~~ 65
+- Nerf Altaria Hyper voice ~~50/100/200~~ 45/90/200 
+- Nerf Disarming Voice ~~10/20/40~~ 10/20/30 pp
+- Nerf Chimecho pp ~~80~~ 90
+- Nerf Regieleki pp ~~80~~ 90
+- Nerf Drizzile Atk ~~26~~ 23 HP ~~240~~ 200 
 
 # Changes to Synergies
 
 - Nerf aquatic: 35/45/55% chance to drain 20 PP from target
+- Nerf ice: ~~2/4/8/15/30~~ 2/3/6/12/24 Spe def
 - Add Baby 7: Golden Eggs: Eggs can be sold for 10 gold
 - Light adjustments:
   - (2) Shining Ray: Increase AP and Atttack by 30%

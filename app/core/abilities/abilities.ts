@@ -1412,7 +1412,7 @@ export class DisarmingVoiceStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let ppGain = [10, 20, 40][pokemon.stars - 1] ?? 0
+    let ppGain = [10, 20, 30][pokemon.stars - 1] ?? 0
     ppGain = Math.round(ppGain * (1 + pokemon.ap / 200))
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team === tg.team && tg.id !== pokemon.id) {
@@ -1657,11 +1657,11 @@ export class HyperVoiceStrategy extends AbilityStrategy {
 
     switch (pokemon.stars) {
       case 1:
-        damage = 50
+        damage = 45
         confusion = 1
         break
       case 2:
-        damage = 100
+        damage = 90
         confusion = 2
         break
       case 3:
