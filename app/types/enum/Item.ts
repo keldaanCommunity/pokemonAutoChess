@@ -78,7 +78,8 @@ export enum Item {
   COMFEY = "COMFEY",
   ELECTIRIZER = "ELECTIRIZER",
   MAGMARIZER = "MAGMARIZER",
-  MACHO_BRACE = "MACHO_BRACE"
+  MACHO_BRACE = "MACHO_BRACE",
+  LIGHT_BALL = "LIGHT_BALL"
 }
 
 export const AllItems: Item[] = Object.values(Item)
@@ -172,7 +173,8 @@ export const Berries: Item[] = [
 export const ArtificialItems: Item[] = [
   Item.ELECTIRIZER,
   Item.MAGMARIZER,
-  Item.MACHO_BRACE
+  Item.MACHO_BRACE,
+  Item.LIGHT_BALL
 ]
 
 export const CompletedItems: Item[] = Object.keys(ItemRecipe) as Item[]
@@ -199,7 +201,8 @@ export const SynergyItems = [
   Item.DUSK_STONE,
   Item.LEAF_STONE,
   Item.ICE_STONE,
-  Item.MACHO_BRACE
+  Item.MACHO_BRACE,
+  Item.LIGHT_BALL
 ] as const
 
 export const SynergyGivenByItem: Record<
@@ -215,7 +218,8 @@ export const SynergyGivenByItem: Record<
   [Item.DUSK_STONE]: Synergy.DARK,
   [Item.LEAF_STONE]: Synergy.GRASS,
   [Item.ICE_STONE]: Synergy.ICE,
-  [Item.MACHO_BRACE]: Synergy.FIGHTING
+  [Item.MACHO_BRACE]: Synergy.FIGHTING,
+  [Item.LIGHT_BALL]: Synergy.LIGHT
 }
 
 export const NonSpecialItemComponents: Item[] = [

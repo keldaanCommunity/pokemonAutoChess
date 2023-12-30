@@ -1506,7 +1506,8 @@
     "COMFEY": "$t(pkm.COMFEY)",
     "ELECTIRIZER": "Electirizer",
     "MAGMARIZER": "Magmarizer",
-    "MACHO_BRACE": "Macho Brace"
+    "MACHO_BRACE": "Macho Brace",
+    "LIGHT_BALL": "Light Ball"
   },
   "item_description": {
     "FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -1586,7 +1587,8 @@
     "COMFEY": "Wears $t(pkm.COMFEY) and get its ability and all its stats",
     "ELECTIRIZER": "Every attack received inflicts PARALYSIS for 4 seconds to both the attacker and the holder.",
     "MAGMARIZER": "Every successful attack increase ATK by 1 and inflicts BURN for 4 seconds",
-    "MACHO_BRACE": "Gives FIGHTING synergy"
+    "MACHO_BRACE": "Gives FIGHTING synergy",
+    "LIGHT_BALL": "Gives LIGHT synergy"
   },
   "passive_description": {
     "NONE": "No passive",
