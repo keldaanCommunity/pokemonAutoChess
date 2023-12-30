@@ -1510,7 +1510,8 @@
     "LIGHT_BALL": "Light Ball",
     "TOXIC_ORB": "Toxic Orb",
     "METRONOME": "Metronome",
-    "METAL_COAT": "Metal Coat"
+    "METAL_COAT": "Metal Coat",
+    "SWIFT_WING": "Swift Wing"
   },
   "item_description": {
     "FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -1594,7 +1595,8 @@
     "LIGHT_BALL": "Gives LIGHT synergy",
     "TOXIC_ORB": "Gives POISON synergy. Holder is POISONNED but increase its ATK by 100%",
     "METRONOME": "Gives SOUND synergy. Every second, the holder gains 5 PP",
-    "METAL_COAT": "Gives STEEL synergy. Reduce incoming damage by 20%"
+    "METAL_COAT": "Gives STEEL synergy. Reduce incoming damage by 20%",
+    "SWIFT_WING": "Gives FLYING synergy. Gain 10% chance to dodge attacks."
   },
   "passive_description": {
     "NONE": "No passive",

@@ -442,6 +442,10 @@ export default class Simulation extends Schema implements ISimulation {
     if (item === Item.MAX_REVIVE) {
       pokemon.status.resurection = true
     }
+
+    if (item === Item.SWIFT_WING) {
+      pokemon.addDodgeChance(0.1)
+    }
   }
 
   applySynergyEffects(pokemon: PokemonEntity) {

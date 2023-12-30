@@ -82,7 +82,8 @@ export enum Item {
   LIGHT_BALL = "LIGHT_BALL",
   TOXIC_ORB = "TOXIC_ORB",
   METRONOME = "METRONOME",
-  METAL_COAT = "METAL_COAT"
+  METAL_COAT = "METAL_COAT",
+  SWIFT_WING = "SWIFT_WING"
 }
 
 export const AllItems: Item[] = Object.values(Item)
@@ -180,7 +181,8 @@ export const ArtificialItems: Item[] = [
   Item.LIGHT_BALL,
   Item.TOXIC_ORB,
   Item.METRONOME,
-  Item.METAL_COAT
+  Item.METAL_COAT,
+  Item.SWIFT_WING
 ]
 
 export const CompletedItems: Item[] = Object.keys(ItemRecipe) as Item[]
@@ -211,7 +213,8 @@ export const SynergyItems = [
   Item.LIGHT_BALL,
   Item.TOXIC_ORB,
   Item.METRONOME,
-  Item.METAL_COAT
+  Item.METAL_COAT,
+  Item.SWIFT_WING
 ] as const
 
 export const SynergyGivenByItem: Record<
@@ -231,7 +234,8 @@ export const SynergyGivenByItem: Record<
   [Item.LIGHT_BALL]: Synergy.LIGHT,
   [Item.TOXIC_ORB]: Synergy.POISON,
   [Item.METRONOME]: Synergy.SOUND,
-  [Item.METAL_COAT]: Synergy.STEEL
+  [Item.METAL_COAT]: Synergy.STEEL,
+  [Item.SWIFT_WING]: Synergy.FLYING
 }
 
 export const NonSpecialItemComponents: Item[] = [
