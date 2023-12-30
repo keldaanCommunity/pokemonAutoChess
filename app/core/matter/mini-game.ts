@@ -15,7 +15,12 @@ import Player from "../../models/colyseus-models/player"
 import { getOrientation } from "../../public/src/pages/utils/utils"
 import { PokemonActionState } from "../../types/enum/Game"
 import { BasicItems, CompletedItems, Item } from "../../types/enum/Item"
-import { pickNRandomIn, pickRandomIn, shuffleArray } from "../../utils/random"
+import {
+  pickNRandomIn,
+  pickRandomIn,
+  randomBetween,
+  shuffleArray
+} from "../../utils/random"
 import { clamp, min } from "../../utils/number"
 import {
   ItemCarouselStages,
@@ -199,6 +204,9 @@ export class MiniGame {
       }
       if (PortalCarouselStages.includes(stageLevel)) {
         retentionDelay = 8000
+      }
+      if (player.isBot) {
+        retentionDelay += randomBetween(1000, 6000)
       }
 
       const avatar = new PokemonAvatarModel(
