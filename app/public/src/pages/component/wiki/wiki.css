@@ -60,7 +60,7 @@
 #wiki-page .wiki-status li {
   list-style: none;
   display: grid;
-  grid-template: auto 1fr / 150px 1fr;
+  grid-template: auto 1fr / 30% 1fr;
   padding: 0.5em;
 }
 
@@ -73,6 +73,11 @@
 #wiki-page .wiki-status li > img,
 #wiki-page .wiki-stat li > img {
   grid-row: 1/3;
+  width: 100%;
+}
+
+#wiki-page .wiki-status li .status-label {
+  white-space: initial;
 }
 
 #wiki-page .wiki-stat p:first-of-type {

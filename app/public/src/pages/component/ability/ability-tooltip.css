@@ -22,6 +22,12 @@
   margin-right: 3px;
 }
 
+h2 .description-icon > img {
+  vertical-align: -0.15em;
+  width: 1em;
+  height: 1em;
+}
+
 .ability-description {
   white-space: pre-wrap;
 }

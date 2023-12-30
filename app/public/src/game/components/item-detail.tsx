@@ -5,9 +5,9 @@ import { Tooltip } from "react-tooltip"
 import { ItemStats } from "../../../../types/Config"
 import { Item, ItemRecipe } from "../../../../types/enum/Item"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
-import "./item-detail.css"
 import { useTranslation } from "react-i18next"
 import { Stat } from "../../../../types/enum/Game"
+import "./item-detail.css"
 
 export function ItemDetailTooltip({
   item,
