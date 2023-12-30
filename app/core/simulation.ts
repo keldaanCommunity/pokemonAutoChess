@@ -593,6 +593,15 @@ export default class Simulation extends Schema implements ISimulation {
           )
         }
 
+        if (pokemon.items.has(Item.TOXIC_ORB)) {
+          pokemon.addAttack(pokemon.baseAtk)
+          pokemon.status.triggerPoison(
+            60000,
+            pokemon as PokemonEntity,
+            pokemon as PokemonEntity
+          )
+        }
+
         if (pokemon.items.has(Item.FLUFFY_TAIL)) {
           pokemon.status.triggerRuneProtect(60000)
         }

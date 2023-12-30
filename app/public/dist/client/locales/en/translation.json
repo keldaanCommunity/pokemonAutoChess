@@ -1507,7 +1507,8 @@
     "ELECTIRIZER": "Electirizer",
     "MAGMARIZER": "Magmarizer",
     "MACHO_BRACE": "Macho Brace",
-    "LIGHT_BALL": "Light Ball"
+    "LIGHT_BALL": "Light Ball",
+    "TOXIC_ORB": "Toxic Orb",
   },
   "item_description": {
     "FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
