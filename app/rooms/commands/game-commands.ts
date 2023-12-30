@@ -19,8 +19,8 @@ import {
   ItemRecipe,
   BasicItems,
   Berries,
-  SynergyStones,
-  SynergyByStone
+  SynergyGivenByItem,
+  SynergyItems
 } from "../../types/enum/Item"
 import { BattleResult } from "../../types/enum/Game"
 import Player from "../../models/colyseus-models/player"
@@ -327,8 +327,8 @@ export class OnDragDropItemCommand extends Command<
     }
 
     if (
-      SynergyStones.includes(item) &&
-      pokemon.types.has(SynergyByStone[item])
+      SynergyItems.includes(item) &&
+      pokemon.types.has(SynergyGivenByItem[item])
     ) {
       // prevent adding a synergy stone on a pokemon that already has this synergy
       client.send(Transfer.DRAG_DROP_FAILED, message)
@@ -349,8 +349,8 @@ export class OnDragDropItemCommand extends Command<
           const itemCombined = recipe[0] as Item
 
           if (
-            itemCombined in SynergyByStone &&
-            pokemon.types.has(SynergyByStone[itemCombined])
+            itemCombined in SynergyGivenByItem &&
+            pokemon.types.has(SynergyGivenByItem[itemCombined])
           ) {
             // prevent combining into a synergy stone on a pokemon that already has this synergy
             client.send(Transfer.DRAG_DROP_FAILED, message)

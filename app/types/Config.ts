@@ -719,6 +719,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.COMFEY]: {},
   [Item.ELECTIRIZER]: { [Stat.ATK_SPEED]: 66 },
   [Item.MAGMARIZER]: { [Stat.ATK]: 5 },
+  [Item.MACHO_BRACE]: { [Stat.ATK]: 15, [Stat.ATK_SPEED]: -25 }
 }
 
 export enum Dungeon {

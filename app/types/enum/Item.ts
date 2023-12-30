@@ -77,7 +77,8 @@ export enum Item {
   SITRUS_BERRY = "SITRUS_BERRY",
   COMFEY = "COMFEY",
   ELECTIRIZER = "ELECTIRIZER",
-  MAGMARIZER = "MAGMARIZER"
+  MAGMARIZER = "MAGMARIZER",
+  MACHO_BRACE = "MACHO_BRACE"
 }
 
 export const AllItems: Item[] = Object.values(Item)
@@ -168,7 +169,11 @@ export const Berries: Item[] = [
   Item.SITRUS_BERRY
 ]
 
-export const ArtificialItems: Item[] = [Item.ELECTIRIZER, Item.MAGMARIZER]
+export const ArtificialItems: Item[] = [
+  Item.ELECTIRIZER,
+  Item.MAGMARIZER,
+  Item.MACHO_BRACE
+]
 
 export const CompletedItems: Item[] = Object.keys(ItemRecipe) as Item[]
 
@@ -184,7 +189,23 @@ export const SynergyStones = [
   Item.ICE_STONE
 ]
 
-export const SynergyByStone = {
+export const SynergyItems = [
+  Item.OLD_AMBER,
+  Item.DAWN_STONE,
+  Item.WATER_STONE,
+  Item.THUNDER_STONE,
+  Item.FIRE_STONE,
+  Item.MOON_STONE,
+  Item.DUSK_STONE,
+  Item.LEAF_STONE,
+  Item.ICE_STONE,
+  Item.MACHO_BRACE
+] as const
+
+export const SynergyGivenByItem: Record<
+  (typeof SynergyItems)[number],
+  Synergy
+> = {
   [Item.OLD_AMBER]: Synergy.FOSSIL,
   [Item.DAWN_STONE]: Synergy.PSYCHIC,
   [Item.WATER_STONE]: Synergy.WATER,
@@ -193,7 +214,8 @@ export const SynergyByStone = {
   [Item.MOON_STONE]: Synergy.FAIRY,
   [Item.DUSK_STONE]: Synergy.DARK,
   [Item.LEAF_STONE]: Synergy.GRASS,
-  [Item.ICE_STONE]: Synergy.ICE
+  [Item.ICE_STONE]: Synergy.ICE,
+  [Item.MACHO_BRACE]: Synergy.FIGHTING
 }
 
 export const NonSpecialItemComponents: Item[] = [
