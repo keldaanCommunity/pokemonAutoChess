@@ -75,7 +75,9 @@ export enum Item {
   ROWAP_BERRY = "ROWAP_BERRY",
   SALAC_BERRY = "SALAC_BERRY",
   SITRUS_BERRY = "SITRUS_BERRY",
-  COMFEY = "COMFEY"
+  COMFEY = "COMFEY",
+  ELECTIRIZER = "ELECTIRIZER",
+  MAGMARIZER = "MAGMARIZER"
 }
 
 export const AllItems: Item[] = Object.values(Item)
@@ -94,6 +96,54 @@ export const BasicItems: Item[] = [
   Item.HEART_SCALE,
   Item.MYSTIC_WATER
 ]
+
+export const ItemRecipe: { [key in Item]?: Item[] } = {
+  [Item.OLD_AMBER]: [Item.FOSSIL_STONE, Item.FOSSIL_STONE],
+  [Item.DAWN_STONE]: [Item.FOSSIL_STONE, Item.TWISTED_SPOON],
+  [Item.WATER_STONE]: [Item.FOSSIL_STONE, Item.MYSTIC_WATER],
+  [Item.THUNDER_STONE]: [Item.FOSSIL_STONE, Item.MAGNET],
+  [Item.FIRE_STONE]: [Item.FOSSIL_STONE, Item.CHARCOAL],
+  [Item.MOON_STONE]: [Item.FOSSIL_STONE, Item.HEART_SCALE],
+  [Item.DUSK_STONE]: [Item.FOSSIL_STONE, Item.BLACK_GLASSES],
+  [Item.LEAF_STONE]: [Item.FOSSIL_STONE, Item.MIRACLE_SEED],
+  [Item.ICE_STONE]: [Item.FOSSIL_STONE, Item.NEVER_MELT_ICE],
+  [Item.CHOICE_SPECS]: [Item.TWISTED_SPOON, Item.TWISTED_SPOON],
+  [Item.SOUL_DEW]: [Item.TWISTED_SPOON, Item.MYSTIC_WATER],
+  [Item.UPGRADE]: [Item.TWISTED_SPOON, Item.MAGNET],
+  [Item.REAPER_CLOTH]: [Item.TWISTED_SPOON, Item.BLACK_GLASSES],
+  [Item.POKEMONOMICON]: [Item.TWISTED_SPOON, Item.MIRACLE_SEED],
+  [Item.POWER_LENS]: [Item.TWISTED_SPOON, Item.NEVER_MELT_ICE],
+  [Item.SHELL_BELL]: [Item.TWISTED_SPOON, Item.CHARCOAL],
+  [Item.LUCKY_EGG]: [Item.TWISTED_SPOON, Item.HEART_SCALE],
+  [Item.AQUA_EGG]: [Item.MYSTIC_WATER, Item.MYSTIC_WATER],
+  [Item.BLUE_ORB]: [Item.MYSTIC_WATER, Item.MAGNET],
+  [Item.SCOPE_LENS]: [Item.MYSTIC_WATER, Item.BLACK_GLASSES],
+  [Item.STAR_DUST]: [Item.MYSTIC_WATER, Item.MIRACLE_SEED],
+  [Item.DELTA_ORB]: [Item.MYSTIC_WATER, Item.NEVER_MELT_ICE],
+  [Item.MANA_SCARF]: [Item.MYSTIC_WATER, Item.CHARCOAL],
+  [Item.SMOKE_BALL]: [Item.MYSTIC_WATER, Item.HEART_SCALE],
+  [Item.XRAY_VISION]: [Item.MAGNET, Item.MAGNET],
+  [Item.RAZOR_FANG]: [Item.MAGNET, Item.BLACK_GLASSES],
+  [Item.LEFTOVERS]: [Item.MAGNET, Item.MIRACLE_SEED],
+  [Item.CHOICE_SCARF]: [Item.MAGNET, Item.NEVER_MELT_ICE],
+  [Item.FIRE_GEM]: [Item.MAGNET, Item.CHARCOAL],
+  [Item.DEFENSIVE_RIBBON]: [Item.MAGNET, Item.HEART_SCALE],
+  [Item.WONDER_BOX]: [Item.BLACK_GLASSES, Item.BLACK_GLASSES],
+  [Item.CLEANSE_TAG]: [Item.BLACK_GLASSES, Item.MIRACLE_SEED],
+  [Item.WIDE_LENS]: [Item.BLACK_GLASSES, Item.NEVER_MELT_ICE],
+  [Item.RAZOR_CLAW]: [Item.BLACK_GLASSES, Item.CHARCOAL],
+  [Item.FLUFFY_TAIL]: [Item.BLACK_GLASSES, Item.HEART_SCALE],
+  [Item.KINGS_ROCK]: [Item.MIRACLE_SEED, Item.MIRACLE_SEED],
+  [Item.SHINY_CHARM]: [Item.MIRACLE_SEED, Item.NEVER_MELT_ICE],
+  [Item.GRACIDEA_FLOWER]: [Item.MIRACLE_SEED, Item.CHARCOAL],
+  [Item.FLAME_ORB]: [Item.MIRACLE_SEED, Item.HEART_SCALE],
+  [Item.ASSAULT_VEST]: [Item.NEVER_MELT_ICE, Item.NEVER_MELT_ICE],
+  [Item.AMULET_COIN]: [Item.NEVER_MELT_ICE, Item.CHARCOAL],
+  [Item.POKE_DOLL]: [Item.NEVER_MELT_ICE, Item.HEART_SCALE],
+  [Item.RED_ORB]: [Item.CHARCOAL, Item.CHARCOAL],
+  [Item.MAX_REVIVE]: [Item.CHARCOAL, Item.HEART_SCALE],
+  [Item.ROCKY_HELMET]: [Item.HEART_SCALE, Item.HEART_SCALE]
+}
 
 export const Berries: Item[] = [
   Item.AGUAV_BERRY,
@@ -118,12 +168,9 @@ export const Berries: Item[] = [
   Item.SITRUS_BERRY
 ]
 
-export const CompletedItems: Item[] = Object.values(Item).filter(
-  (item) =>
-    BasicItems.includes(item) === false &&
-    Berries.includes(item) === false &&
-    SpecialItems.includes(item) === false
-)
+export const ArtificialItems: Item[] = [Item.ELECTIRIZER, Item.MAGMARIZER]
+
+export const CompletedItems: Item[] = Object.keys(ItemRecipe) as Item[]
 
 export const SynergyStones = [
   Item.OLD_AMBER,

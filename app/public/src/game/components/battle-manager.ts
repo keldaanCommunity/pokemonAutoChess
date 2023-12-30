@@ -421,6 +421,8 @@ export default class BattleManager {
             pkm.itemsContainer.updateCount(Item.SOUL_DEW, value)
           } else if (field == "defensiveRibbonCount") {
             pkm.itemsContainer.updateCount(Item.DEFENSIVE_RIBBON, value)
+          } else if (field == "magmarizerCount") {
+            pkm.itemsContainer.updateCount(Item.MAGMARIZER, value)
           }
         }
       }
@@ -4365,7 +4367,11 @@ export default class BattleManager {
             break
 
           case Ability.PRISMATIC_LASER:
-            coordinatesTarget = transformAttackCoordinate(positionX, 6, this.flip)
+            coordinatesTarget = transformAttackCoordinate(
+              positionX,
+              6,
+              this.flip
+            )
             coordinates = transformAttackCoordinate(positionX, 0, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],

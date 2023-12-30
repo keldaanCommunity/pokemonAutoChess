@@ -1,10 +1,9 @@
 import React, { useState } from "react"
-import { ItemRecipe } from "../../../../../types/Config"
-import { BasicItems, Berries, Item } from "../../../../../types/enum/Item"
-import { Tooltip } from "react-tooltip"
-import CSS from "csstype"
-import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import ReactDOM from "react-dom"
+import { Tooltip } from "react-tooltip"
+import { ArtificialItems, BasicItems, Berries, Item, ItemRecipe } from "../../../../../types/enum/Item"
+import { ItemDetailTooltip } from "../../../game/components/item-detail"
+
 
 export default function WikiItemsCheatSheet() {
   const [itemHovered, setItemHovered] = useState<Item>()
@@ -98,6 +97,20 @@ export default function WikiItemsCheatSheet() {
                 src={"assets/environment/berry_trees/" + i + "_6.png"}
                 className="tree"
               ></img>
+            </li>
+          ))}
+        </ul>
+      </article>
+      <article>
+        <h2>Artificial items</h2>
+        <ul className="artificial">
+          {ArtificialItems.map((i) => (
+            <li
+              key={i}
+              data-tooltip-id="detail-item"
+              onMouseOver={() => setItemHovered(i)}
+            >
+              <img src={"assets/item/" + i + ".png"} className="item"></img>
             </li>
           ))}
         </ul>

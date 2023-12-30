@@ -1503,7 +1503,9 @@
     "ROWAP_BERRY": "Rowap Berry",
     "SALAC_BERRY": "Salac Berry",
     "SITRUS_BERRY": "Sitrus Berry",
-    "COMFEY": "$t(pkm.COMFEY)"
+    "COMFEY": "$t(pkm.COMFEY)",
+    "ELECTIRIZER": "Electirizer",
+    "MAGMARIZER": "Magmarizer"
   },
   "item_description": {
     "FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -1580,7 +1582,9 @@
     "ROWAP_BERRY": "Consumed once below 50% HP, heal 20 HP and cast $t(ability.MAGIC_BOUNCE) for 10 seconds",
     "SALAC_BERRY": "Consumed once below 50% HP, heal 20 HP and gain 50% ATK_SPEED",
     "SITRUS_BERRY": "Consumed once below 50% HP, heal 30 HP and increase all healing received by 50%",
-    "COMFEY": "Wears $t(pkm.COMFEY) and get its ability and all its stats"
+    "COMFEY": "Wears $t(pkm.COMFEY) and get its ability and all its stats",
+    "ELECTIRIZER": "+66% ATK_SPEED. Every attack received inflicts PARALYSIS for 4 seconds to both the attacker and the holder.",
+    "MAGMARIZER": "+5 ATK. Every successful attack increase ATK by 1 and inflicts BURN for 4 seconds"
   },
   "passive_description": {
     "NONE": "No passive",

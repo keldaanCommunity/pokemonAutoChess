@@ -16,11 +16,10 @@ import {
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_DAMAGE,
   EvolutionTime,
-  ItemRecipe,
   MausholdEvolutionTurn,
   TandemausEvolutionTurn
 } from "../../types/Config"
-import { AllItems, Berries, Item } from "../../types/enum/Item"
+import { AllItems, Berries, Item, ItemRecipe } from "../../types/enum/Item"
 import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
 import { Rarity, AttackType, PokemonActionState } from "../../types/enum/Game"
 import { Ability } from "../../types/enum/Ability"

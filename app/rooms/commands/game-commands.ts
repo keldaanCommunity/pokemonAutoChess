@@ -5,7 +5,6 @@ import { nanoid } from "nanoid"
 
 import {
   ItemProposalStages,
-  ItemRecipe,
   ItemCarouselStages,
   StageDuration,
   AdditionalPicksStages,
@@ -17,6 +16,7 @@ import {
 } from "../../types/Config"
 import {
   Item,
+  ItemRecipe,
   BasicItems,
   Berries,
   SynergyStones,
@@ -985,7 +985,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       }
       if (player.effects.has(Effect.SPORE)) {
         player.berryTreeStage = max(3)(player.berryTreeStage + 3)
-      }      
+      }
     })
 
     return commands
