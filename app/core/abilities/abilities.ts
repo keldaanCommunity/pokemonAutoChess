@@ -6575,7 +6575,7 @@ export class RetaliateStrategy extends AbilityStrategy {
       (pokemon.player?.boardSize ?? nbAlliesAlive) - nbAlliesAlive
     const damage =
       ([15, 30, 60][pokemon.stars - 1] ?? 60) +
-      ([5, 10, 15][pokemon.stars - 1] ?? 15) * nbFallenAllies
+      ([10, 15, 25][pokemon.stars - 1] ?? 15) * nbFallenAllies
     target.handleSpecialDamage(
       damage,
       board,

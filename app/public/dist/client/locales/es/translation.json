@@ -1185,7 +1185,7 @@
     "BARB_BARRAGE": "Bucea en medio del equipo enemigo, causando [15,30,60,SP] de SPECIAL y dejando POISONa todos los pokemon adyacentes por 3 segundos",
     "MAGIC_POWDER": "Gana [10,20,40,SP] SHIELD y deja SILENCE a los enemigos adyacentes por [2,4,6] segundos",
     "INFERNAL_PARADE": "Lanza una rueda flamígera de ida y vuelta con 50% chance de dejar BURN por 3s y golpeando [30, SP] de SPECIAL 2 veces a los pokemon con los que choca",
-    "RETALIATE": "Inflige [15,30,60,SP] de SPECIAL al objetivo + [5,10,15,SP] de SPECIAL adicional por aliado caido",
+    "RETALIATE": "Inflige [15,30,60,SP] de SPECIAL al objetivo + [10,15,25,SP] de SPECIAL adicional por aliado caido",
     "SLASH": "Inflige [10,20,40,SP] de SPECIAL con un [30,60,90]% aumentado de CRIT_CHANCE",
     "OUTRAGE": "El pokemon queda CONFUSION por 2s e inflige [2,3,4,SP] ATK como SPECIAL al objetivo y enemigos adyacentes"
   },
