@@ -1509,6 +1509,7 @@
     "MACHO_BRACE": "Macho Brace",
     "LIGHT_BALL": "Light Ball",
     "TOXIC_ORB": "Toxic Orb",
+    "METRONOME": "Metronome"
   },
   "item_description": {
     "FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -1590,7 +1591,8 @@
     "MAGMARIZER": "Every successful attack increase ATK by 1 and inflicts BURN for 4 seconds",
     "MACHO_BRACE": "Gives FIGHTING synergy",
     "LIGHT_BALL": "Gives LIGHT synergy",
-    "TOXIC_ORB": "Holder is POISONNED but increase its ATK by 100%"
+    "TOXIC_ORB": "Gives POISON synergy. Holder is POISONNED but increase its ATK by 100%",
+    "METRONOME": "Gives SOUND synergy. Every second, the holder gains 5 PP"
   },
   "passive_description": {
     "NONE": "No passive",

@@ -483,6 +483,9 @@ export default class PokemonState {
       ) {
         pokemon.addPP(10)
       }
+      if (pokemon.items.has(Item.METRONOME)) {
+        pokemon.addPP(5)
+      }
       pokemon.manaCooldown = 1000
     } else {
       pokemon.manaCooldown = min(0)(pokemon.manaCooldown - dt)
