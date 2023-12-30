@@ -5301,7 +5301,7 @@ export class Virizion extends Pokemon {
   atk = 20
   def = 6
   speDef = 6
-  maxPP = 150
+  maxPP = 130
   range = 1
   skill = Ability.SACRED_SWORD
   attackSprite = AttackSprite.GRASS_MELEE
@@ -7882,7 +7882,7 @@ export class Breloom extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 170
-  atk = 15
+  atk = 18
   def = 3
   speDef = 3
   maxPP = 85
@@ -9809,10 +9809,10 @@ export class Maractus extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 15
+  atk = 16
   def = 6
-  speDef = 3
-  maxPP = 100
+  speDef = 4
+  maxPP = 85
   range = 1
   skill = Ability.SPIKE_ARMOR
   passive = Passive.HYDRATATION
