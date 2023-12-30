@@ -126,6 +126,9 @@ export default class PokemonState {
       if (pokemon.items.has(Item.POKE_DOLL)) {
         damage = Math.ceil(damage * 0.7)
       }
+      if (pokemon.items.has(Item.METAL_COAT)) {
+        damage = Math.ceil(damage * 0.8)
+      }
 
       if (attacker && attacker.status.electricField) {
         damage = Math.ceil(damage * 1.2)
