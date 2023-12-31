@@ -86,7 +86,8 @@ export enum Item {
   SWIFT_WING = "SWIFT_WING",
   HARD_STONE = "HARD_STONE",
   BIG_NUGGET = "BIG_NUGGET",
-  INCENSE = "INCENSE"
+  INCENSE = "INCENSE",
+  EXP_SHARE = "EXP_SHARE"
 }
 
 export const AllItems: Item[] = Object.values(Item)
@@ -180,15 +181,16 @@ export const Berries: Item[] = [
 export const ArtificialItems: Item[] = [
   Item.ELECTIRIZER,
   Item.MAGMARIZER,
-  Item.MACHO_BRACE,
+  Item.EXP_SHARE,
   Item.LIGHT_BALL,
   Item.TOXIC_ORB,
-  Item.METRONOME,
+  Item.HARD_STONE,
   Item.METAL_COAT,
   Item.SWIFT_WING,
-  Item.HARD_STONE,
-  Item.BIG_NUGGET,
-  Item.INCENSE
+  Item.MACHO_BRACE,
+  Item.INCENSE,
+  Item.METRONOME,
+  Item.BIG_NUGGET
 ]
 
 export const CompletedItems: Item[] = Object.keys(ItemRecipe) as Item[]

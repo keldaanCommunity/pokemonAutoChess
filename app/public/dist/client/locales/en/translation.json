@@ -1514,7 +1514,8 @@
     "SWIFT_WING": "Swift Wing",
     "HARD_STONE": "Hard Stone",
     "BIG_NUGGET": "Big Nugget",
-    "INCENSE": "Incense"
+    "INCENSE": "Incense",
+    "EXP_SHARE": "Exp. Share"
   },
   "item_description": {
     "FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -1602,7 +1603,8 @@
     "SWIFT_WING": "Gives FLYING synergy. Gain 10% chance to dodge attacks.",
     "HARD_STONE": "Gives ROCK synergy",
     "BIG_NUGGET": "Gives GROUND synergy. If the holder is alive after 15 seconds and gets 5 stacks of GROUND, gain 3 GOLD.",
-    "INCENSE": "Gives FLOWER synergy. Every attack received has a 10% chance to CHARM the attacker for 2 seconds."
+    "INCENSE": "Gives FLORA synergy. Every attack received has a 10% chance to CHARM the attacker for 2 seconds.",
+    "EXP_SHARE": "Get the best ATK, DEF and SPE_DEF values of adjacent allies in the same row"
   },
   "passive_description": {
     "NONE": "No passive",

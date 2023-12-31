@@ -610,6 +610,20 @@ export default class Simulation extends Schema implements ISimulation {
           pokemon.status.triggerRuneProtect(60000)
         }
 
+        if (pokemon.items.has(Item.EXP_SHARE)) {
+          ;[-1, 0, 1].forEach((offset) => {
+            const value = this.board.getValue(
+              pokemon.positionX + offset,
+              pokemon.positionY
+            )
+            if (value) {
+              if (value.atk > pokemon.atk) pokemon.atk = value.atk
+              if (value.def > pokemon.def) pokemon.def = value.def
+              if (value.speDef > pokemon.speDef) pokemon.speDef = value.speDef
+            }
+          })
+        }
+
         if (pokemon.passive === Passive.SPOT_PANDA) {
           pokemon.effects.add(Effect.IMMUNITY_CONFUSION)
         }
