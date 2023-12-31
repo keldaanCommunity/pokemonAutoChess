@@ -724,7 +724,8 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.TOXIC_ORB]: {},
   [Item.METRONOME]: {},
   [Item.METAL_COAT]: {},
-  [Item.SWIFT_WING]: { [Stat.ATK_SPEED]: 25 }
+  [Item.SWIFT_WING]: { [Stat.ATK_SPEED]: 25 },
+  [Item.HARD_STONE]: { [Stat.SHIELD]: 100 }
 }
 
 export enum Dungeon {
