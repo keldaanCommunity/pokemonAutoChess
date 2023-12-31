@@ -15,7 +15,12 @@ import PokemonConfig from "./pokemon-config"
 import { IPokemonConfig } from "../mongo-models/user-metadata"
 import PokemonCollection from "./pokemon-collection"
 import HistoryItem from "./history-item"
-import { ArtificialItems, Berries, Item } from "../../types/enum/Item"
+import {
+  ArtificialItems,
+  Berries,
+  Item,
+  SynergyGivenByItem
+} from "../../types/enum/Item"
 import { Pkm, PkmProposition } from "../../types/enum/Pokemon"
 import { Weather } from "../../types/enum/Weather"
 import PokemonFactory from "../pokemon-factory"
@@ -35,7 +40,7 @@ export default class Player extends Schema implements IPlayer {
   @type(["string"]) shop = new ArraySchema<Pkm>()
   @type(ExperienceManager) experienceManager = new ExperienceManager()
   @type({ map: "uint8" }) synergies = new Synergies()
-  @type("uint16") money = process.env.MODE == "dev" ? 80 : 6
+  @type("uint16") money = process.env.MODE == "dev" ? 999 : 6
   @type("uint8") life = 100
   @type("boolean") shopLocked: boolean = false
   @type("uint8") streak: number = 0
@@ -221,6 +226,10 @@ export default class Player extends Schema implements IPlayer {
         this.board.forEach((pokemon) => {
           lostArtificialItems.forEach((item) => {
             pokemon.items.delete(item)
+            if (SynergyGivenByItem.hasOwnProperty(item)) {
+              const type = SynergyGivenByItem[item]
+              pokemon.types.delete(type)
+            }
           })
         })
       } else if (newNbItems > previousNbItems) {
