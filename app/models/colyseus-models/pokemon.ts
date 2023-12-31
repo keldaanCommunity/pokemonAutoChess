@@ -5123,7 +5123,7 @@ function updateCastform(pokemon: Pokemon, weather: Weather, player: Player) {
   newPokemon.positionY = pokemon.positionY
   player.board.delete(pokemon.id)
   player.board.set(newPokemon.id, newPokemon)
-  player.synergies.update(player.board)
+  player.updateSynergies()
   player.effects.update(player.synergies, player.board)
 }
 

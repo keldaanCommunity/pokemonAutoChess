@@ -18,12 +18,6 @@ export default class Synergies
       this.set(key as Synergy, 0)
     })
   }
-
-  update(board: MapSchema<Pokemon>) {
-    const pokemons: Pokemon[] = values(board)
-    const updatedSynergies = computeSynergies(pokemons)
-    updatedSynergies.forEach((value, synergy) => this.set(synergy, value))
-  }
 }
 
 export function computeSynergies(board: IPokemon[]): Map<Synergy, number> {
