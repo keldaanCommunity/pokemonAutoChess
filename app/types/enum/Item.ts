@@ -85,7 +85,8 @@ export enum Item {
   METAL_COAT = "METAL_COAT",
   SWIFT_WING = "SWIFT_WING",
   HARD_STONE = "HARD_STONE",
-  BIG_NUGGET = "BIG_NUGGET"
+  BIG_NUGGET = "BIG_NUGGET",
+  INCENSE = "INCENSE"
 }
 
 export const AllItems: Item[] = Object.values(Item)
@@ -186,7 +187,8 @@ export const ArtificialItems: Item[] = [
   Item.METAL_COAT,
   Item.SWIFT_WING,
   Item.HARD_STONE,
-  Item.BIG_NUGGET
+  Item.BIG_NUGGET,
+  Item.INCENSE
 ]
 
 export const CompletedItems: Item[] = Object.keys(ItemRecipe) as Item[]
@@ -220,7 +222,8 @@ export const SynergyItems = [
   Item.METAL_COAT,
   Item.SWIFT_WING,
   Item.HARD_STONE,
-  Item.BIG_NUGGET
+  Item.BIG_NUGGET,
+  Item.INCENSE
 ] as const
 
 export const SynergyGivenByItem: Record<
@@ -243,7 +246,8 @@ export const SynergyGivenByItem: Record<
   [Item.METAL_COAT]: Synergy.STEEL,
   [Item.SWIFT_WING]: Synergy.FLYING,
   [Item.HARD_STONE]: Synergy.ROCK,
-  [Item.BIG_NUGGET]: Synergy.GROUND
+  [Item.BIG_NUGGET]: Synergy.GROUND,
+  [Item.INCENSE]: Synergy.FLORA
 }
 
 export const NonSpecialItemComponents: Item[] = [

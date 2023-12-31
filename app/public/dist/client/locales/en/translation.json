@@ -1513,7 +1513,8 @@
     "METAL_COAT": "Metal Coat",
     "SWIFT_WING": "Swift Wing",
     "HARD_STONE": "Hard Stone",
-    "BIG_NUGGET": "Big Nugget"
+    "BIG_NUGGET": "Big Nugget",
+    "INCENSE": "Incense"
   },
   "item_description": {
     "FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -1600,7 +1601,8 @@
     "METAL_COAT": "Gives STEEL synergy. Reduce incoming damage by 20%",
     "SWIFT_WING": "Gives FLYING synergy. Gain 10% chance to dodge attacks.",
     "HARD_STONE": "Gives ROCK synergy",
-    "BIG_NUGGET": "Gives GROUND synergy. If the holder is alive after 15 seconds and gets 5 stacks of GROUND, gain 3 GOLD."
+    "BIG_NUGGET": "Gives GROUND synergy. If the holder is alive after 15 seconds and gets 5 stacks of GROUND, gain 3 GOLD.",
+    "INCENSE": "Gives FLOWER synergy. Every attack received has a 10% chance to CHARM the attacker for 2 seconds."
   },
   "passive_description": {
     "NONE": "No passive",

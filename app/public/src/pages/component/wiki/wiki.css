@@ -173,7 +173,14 @@
   flex-wrap: wrap;
   gap: 0.5em;
   padding: 0;
+}
+
+#wiki-items .berries {
   max-width: 400px;
+}
+
+#wiki-items .artificial {
+  max-width: 290px;
 }
 
 #wiki-items img.item {

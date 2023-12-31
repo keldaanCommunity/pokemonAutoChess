@@ -730,7 +730,8 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
     [Stat.DEF]: 3,
     [Stat.SPE_DEF]: 3,
     [Stat.CRIT_CHANCE]: 10
-  }
+  },
+  [Item.INCENSE]: { [Stat.PP]: 25 }
 }
 
 export enum Dungeon {
