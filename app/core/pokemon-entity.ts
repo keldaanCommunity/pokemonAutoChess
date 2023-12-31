@@ -174,8 +174,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  update(dt: number, board: Board, weather: string) {
-    this.state.update(this, dt, board, weather)
+  update(dt: number, board: Board, weather: string, player: Player) {
+    this.state.update(this, dt, board, weather, player)
   }
 
   getAttackDelay() {
@@ -861,7 +861,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   onKill({ target, board }: { target: PokemonEntity; board: Board }) {
     if (this.items.has(Item.AMULET_COIN) && this.player) {
       this.player.money += 1
-      this.count.moneyCount++
+      this.count.moneyCount += 1
+      this.count.amuletCoinCount += 1
     }
     if (
       this.effects.has(Effect.PURSUIT) ||

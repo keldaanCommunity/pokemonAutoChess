@@ -1196,7 +1196,7 @@ export default class Simulation extends Schema implements ISimulation {
       ) {
         this.blueTeam.delete(key)
       } else {
-        pkm.update(dt, this.board, this.weather)
+        pkm.update(dt, this.board, this.weather, this.bluePlayer)
       }
     })
 
@@ -1213,7 +1213,7 @@ export default class Simulation extends Schema implements ISimulation {
       ) {
         this.redTeam.delete(key)
       } else {
-        pkm.update(dt, this.board, this.weather)
+        pkm.update(dt, this.board, this.weather, this.redPlayer)
       }
     })
 

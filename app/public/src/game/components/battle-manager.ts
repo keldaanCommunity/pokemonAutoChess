@@ -300,7 +300,8 @@ export default class BattleManager {
     simulationId: string,
     pokemon: IPokemonEntity,
     field: NonFunctionPropNames<Count>,
-    value: any
+    value: any,
+    previousValue: any
   ) {
     // logger.debug(field, value);
     if (this.simulation?.id == simulationId && this.group) {
@@ -387,8 +388,11 @@ export default class BattleManager {
               pkm.attackOrderAnimation()
             }
           } else if (field == "moneyCount") {
-            if (value != 0) {
-              this.moneyAnimation(pkm.x, pkm.y)
+            if (value > 0) {
+              this.moneyAnimation(pkm.x, pkm.y, value - previousValue)
+            }
+          } else if (field == "amuletCoinCount") {
+            if (value > 0) {
               pkm.itemsContainer.updateCount(Item.AMULET_COIN, value)
             }
           } else if (field == "attackCount") {
@@ -597,7 +601,7 @@ export default class BattleManager {
     }
   }
 
-  moneyAnimation(x: number, y: number) {
+  moneyAnimation(x: number, y: number, gain: number) {
     const textStyle = {
       fontSize: "25px",
       fontFamily: "Verdana",
@@ -607,7 +611,13 @@ export default class BattleManager {
       stroke: "#000"
     }
     const crit = this.scene.add.existing(
-      new GameObjects.Text(this.scene, x - 40, y - 50, "+ 1 GOLD", textStyle)
+      new GameObjects.Text(
+        this.scene,
+        x - 40,
+        y - 50,
+        `${gain > 0 ? '+ ':''}${gain} GOLD`,
+        textStyle
+      )
     )
     crit.setDepth(9)
     this.scene.add.tween({

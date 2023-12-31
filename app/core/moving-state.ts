@@ -8,10 +8,11 @@ import { Weather } from "../types/enum/Weather"
 import { Passive } from "../types/enum/Passive"
 import { Effect } from "../types/enum/Effect"
 import { Transfer } from "../types"
+import Player from "../models/colyseus-models/player"
 
 export default class MovingState extends PokemonState {
-  update(pokemon: PokemonEntity, dt: number, board: Board, weather: string) {
-    super.update(pokemon, dt, board, weather)
+  update(pokemon: PokemonEntity, dt: number, board: Board, weather: string, player: Player) {
+    super.update(pokemon, dt, board, weather, player)
     if (pokemon.cooldown <= 0) {
       pokemon.cooldown = weather === Weather.SNOW ? 666 : 500
       const targetAtRange = this.getNearestTargetAtRangeCoordinates(

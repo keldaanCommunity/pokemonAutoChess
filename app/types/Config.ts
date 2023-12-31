@@ -721,11 +721,16 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.MAGMARIZER]: { [Stat.ATK]: 5 },
   [Item.MACHO_BRACE]: { [Stat.ATK]: 15, [Stat.ATK_SPEED]: -25 },
   [Item.LIGHT_BALL]: { [Stat.AP]: 80 },
-  [Item.TOXIC_ORB]: {},
-  [Item.METRONOME]: {},
-  [Item.METAL_COAT]: {},
+  [Item.TOXIC_ORB]: { [Stat.SHIELD]: 15 },
+  [Item.METRONOME]: { [Stat.PP]: 5 },
+  [Item.METAL_COAT]: { [Stat.DEF]: 3 },
   [Item.SWIFT_WING]: { [Stat.ATK_SPEED]: 25 },
-  [Item.HARD_STONE]: { [Stat.SHIELD]: 100 }
+  [Item.HARD_STONE]: { [Stat.SHIELD]: 100 },
+  [Item.BIG_NUGGET]: {
+    [Stat.DEF]: 3,
+    [Stat.SPE_DEF]: 3,
+    [Stat.CRIT_CHANCE]: 10
+  }
 }
 
 export enum Dungeon {

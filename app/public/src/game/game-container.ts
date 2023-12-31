@@ -189,6 +189,7 @@ class GameContainer {
       "manaBurnCount",
       "staticCount",
       "moneyCount",
+      "amuletCoinCount",
       "attackCount",
       "tripleAttackCount",
       "monsterExecutionCount",
@@ -206,7 +207,8 @@ class GameContainer {
           simulation.id,
           pokemon,
           field,
-          value
+          value,
+          previousValue
         )
       })
     })
