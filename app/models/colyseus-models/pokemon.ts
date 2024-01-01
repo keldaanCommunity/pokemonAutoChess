@@ -5453,7 +5453,7 @@ export class IronBundle extends Pokemon {
   hp = 200
   atk = 16
   def = 4
-  speDef = 4
+  speDef = 2
   maxPP = 100
   range = 1
   skill = Ability.AURORA_BEAM

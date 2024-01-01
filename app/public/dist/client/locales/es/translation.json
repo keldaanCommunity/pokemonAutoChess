@@ -1057,7 +1057,7 @@
     "ILLUSION": "El usuario recupera [30,50,70,SP=0.5] puntos de HP y copia tanto la forma como el ATK, DEF, SPE_DEF y RANGE del Pokémon objetivo",
     "SLUDGE": "Lanza residuos a 3 espacios al frente, los cuales infligen [2,3,4] acumulaciones de POISONNED durante [3,SP] segundos",
     "SMOG": "Expulsa una nube de gas fétido en 3 espacios al frente, causando [10,20,40,SP] de SPECIAL. El gas persiste hasta el fin del combate y reduce la precisión de los pokemon dentro de ella en 50%.",
-    "AURORA_BEAM": "Dispara un rayo en línea. Todos los objetivos golpeados reciben [30,60,120,SP] de SPECIAL y se pueden quedar FREEZE (la probabilidad se basa en la sinergia de hielo actual)",
+    "AURORA_BEAM": "Dispara un rayo en línea. Todos los objetivos golpeados reciben [25,50,100,SP] de SPECIAL y se pueden quedar FREEZE (la probabilidad se basa en la sinergia de hielo actual)",
     "AGILITY": "Aumenta la ATK_SPEED en [10,20,30,SP] % (acumulativo)",
     "SPIRIT_SHACKLE": "Dispara una flecha perforante que inflige [30,60,90,SP] de SPECIAL en una línea detrás del objetivo y los deja WOUND durante 4 segundos a todos los pokemon golpeados",
     "WATER_SHURIKEN": "Lanza 3 shuriken en 3 direcciones que atraviesan a los enemigos e infligen [20,40,60,SP] de SPECIAL",

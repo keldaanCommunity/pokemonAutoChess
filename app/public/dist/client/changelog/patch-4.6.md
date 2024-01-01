@@ -24,12 +24,14 @@
 - Buff Mankey Attack ~~8~~ 10
 - Buff Primeape Attack ~~21~~ 26, spe def ~~2~~ 4
 - Nerf Xurkitree: Attack ~~20~~ 16 ; nerf Charge beam: ~~80~~ 60 special damage, no longer increase AP per missed target
+- Nerf Iron Bundle Spe def ~~4~~ 2
+- Nerf Aurora Beam damage: ~~30/60/120~~ 25/50/100
 - Buff Kartana HP: ~~200~~ 230, Spe def: ~~1~~ 2 Pp: ~~70~~ 65
-- Nerf Altaria Hyper voice ~~50/100/200~~ 45/90/200 
+- Nerf Altaria Hyper voice ~~50/100/200~~ 45/90/200
 - Nerf Disarming Voice ~~10/20/40~~ 10/20/30 pp
 - Nerf Chimecho pp ~~80~~ 90
 - Nerf Regieleki pp ~~80~~ 90
-- Nerf Drizzile Atk ~~26~~ 23 HP ~~240~~ 200 
+- Nerf Drizzile Atk ~~26~~ 23 HP ~~240~~ 200
 - Buff Breloom ~~15~~ 18
 - Buff Maractus Spe def ~~3~~ 4 Atk ~~15~~ 16 Pp ~~100~~ 85
 - Buff Stoutland retaliate ability ~~5/10/20~~ 10/15/25 additional damage

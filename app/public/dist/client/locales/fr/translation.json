@@ -1057,7 +1057,7 @@
     "ILLUSION": "L'utilisateur récupère [30,50,70,SP = 0,5] points HP et copie le formulaire ainsi que l'ATK, la DEF, la SPE_DEF et la RANGE du Pokémon ciblé",
     "SLUDGE": "Jette des détritus sur 3 cases devant, ce qui inflige [2,3,4] cumuls de POISONNED pendant [3,SP] secondes",
     "SMOG": "Projette un nuage de gaz puant sur 3 cases devant, infligeant [10,20,40,SP] SPECIAL. Le gaz reste sur le plateau jusqu'à la fin du combat et réduit la précision des unités à l'intérieur de 50%.",
-    "AURORA_BEAM": "Tire un faisceau en ligne. Toutes les cibles touchées prennent [30,60,120,SP] SPECIAL et peuvent subir FREEZE (chance basée sur la synergie ICE actuelle)",
+    "AURORA_BEAM": "Tire un faisceau en ligne. Toutes les cibles touchées prennent [25,50,100,SP] SPECIAL et peuvent subir FREEZE (chance basée sur la synergie ICE actuelle)",
     "AGILITY": "Augmente ATK_SPEED de [10,20,30,SP] % (cumulable)",
     "SPIRIT_SHACKLE": "Tire une flèche perçante qui inflige [30,60,90,SP] SPECIAL en ligne derrière la cible et applique WOUND pendant 4 secondes à tous ceux qui sont touchés",
     "WATER_SHURIKEN": "Lance 3 shuriken dans 3 directions qui traversent les ennemis et infligent [20,40,60,SP] SPECIAL",

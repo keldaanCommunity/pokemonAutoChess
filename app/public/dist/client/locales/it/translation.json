@@ -931,7 +931,7 @@
     "MISTY_SURGE": "Dai [30,SP] PP agli alleati FAIRY",
     "SKY_ATTACK": "Si alza in aria e cade sul bersaglio più lontano, PROTECT l'attaccante per 0,5 secondi e infligge [120 SP] SPECIAL",
     "ILLUSION": "L'utente recupera [30,50,70,SP=0.5] punti HP e copia la forma, ATK, DEF, SPE_DEF e RANGE del Pokemon preso di mira",
-    "AURORA_BEAM": "Spara un raggio in linea. Tutti i bersagli colpiti prendono [30,60,120,SP] SPECIAL e possono essere FREEZE (probabilità basata sull'attuale sinergia di ghiaccio)",
+    "AURORA_BEAM": "Spara un raggio in linea. Tutti i bersagli colpiti prendono [25,50,100,SP] SPECIAL e possono essere FREEZE (probabilità basata sull'attuale sinergia di ghiaccio)",
     "AGILITY": "Aumenta ATK_SPEED del [10,20,30,SP]% (stack)",
     "SPIRIT_SHACKLE": "Scaglia una Freccia perforante che infligge [30,60,90,SP] SPECIAL in una linea dietro il bersaglio e infligge WOUND per 4 secondi a tutti quelli colpiti",
     "WATER_SHURIKEN": "Lancia 3 shuriken in 3 direzioni che attraversano i nemici e infliggono [20,40,60,SP] SPECIAL",

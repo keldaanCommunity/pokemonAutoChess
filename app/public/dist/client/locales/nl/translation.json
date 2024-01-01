@@ -931,7 +931,7 @@
     "MISTY_SURGE": "Geef [30,SP] PP aan FAIRY bondgenoten",
     "SKY_ATTACK": "Stijgt in de lucht en valt op het verste doelwit, PROTECT de aanvaller gedurende 0,5 seconde en deelt [120,SP] SPECIAL uit",
     "ILLUSION": "Gebruiker herstelt [30,50,70,SP=0,5] HP-punten en kopieert het formulier evenals de ATK,DEF, SPE_DEF en RANGE van de gerichte Pokemon",
-    "AURORA_BEAM": "Vuurt een straal af in een lijn. Alle doelwitten raken [30,60,120,SP] SPECIAL en kunnen worden FREEZE (kans gebaseerd op huidige ijssynergie)",
+    "AURORA_BEAM": "Vuurt een straal af in een lijn. Alle doelwitten raken [25,50,100,SP] SPECIAL en kunnen worden FREEZE (kans gebaseerd op huidige ijssynergie)",
     "AGILITY": "Verhoog ATK_SPEED met [10,20,30,SP] % (stacks)",
     "SPIRIT_SHACKLE": "Schiet een doordringende pijl die [30,60,90,SP] SPECIAL uitdeelt in een lijn achter het doelwit en verwondt gedurende 4 seconden op iedereen die wordt geraakt",
     "WATER_SHURIKEN": "Werpt 3 shuriken in 3 richtingen die door vijanden gaan en [20,40,60,SP] SPECIAL toebrengen",
