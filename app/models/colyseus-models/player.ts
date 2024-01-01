@@ -204,44 +204,41 @@ export default class Player extends Schema implements IPlayer {
     const pokemons: Pokemon[] = values(this.board)
     const updatedSynergies = computeSynergies(pokemons)
 
-    if (this.synergies.get(Synergy.ARTIFICIAL) > 0) {
-      const previousNbItems = SynergyTriggers[Synergy.ARTIFICIAL].filter(
-        (n) => this.synergies.get(Synergy.ARTIFICIAL) >= n
-      ).length
-      const newNbItems = SynergyTriggers[Synergy.ARTIFICIAL].filter(
-        (n) => updatedSynergies.get(Synergy.ARTIFICIAL) >= n
-      ).length
+    const previousNbArtifItems = SynergyTriggers[Synergy.ARTIFICIAL].filter(
+      (n) => this.synergies.get(Synergy.ARTIFICIAL) >= n
+    ).length
 
-      console.log({ previousNbItems, newNbItems })
+    const newNbArtifItems = SynergyTriggers[Synergy.ARTIFICIAL].filter(
+      (n) => updatedSynergies.get(Synergy.ARTIFICIAL) >= n
+    ).length
 
-      if (newNbItems < previousNbItems) {
-        // some artificial items are lost
-        const lostArtificialItems = this.artificialItems.slice(
-          newNbItems,
-          previousNbItems
-        )
+    if (newNbArtifItems > previousNbArtifItems) {
+      // some artificial items are gained
+      const gainedArtificialItems = this.artificialItems.slice(
+        previousNbArtifItems,
+        newNbArtifItems
+      )
+      gainedArtificialItems.forEach((item) => {
+        this.items.add(item)
+      })
+    } else if (newNbArtifItems < previousNbArtifItems) {
+      // some artificial items are lost
+      const lostArtificialItems = this.artificialItems.slice(
+        newNbArtifItems,
+        previousNbArtifItems
+      )
+      lostArtificialItems.forEach((item) => {
+        this.items.delete(item)
+      })
+      this.board.forEach((pokemon) => {
         lostArtificialItems.forEach((item) => {
-          this.items.delete(item)
+          pokemon.items.delete(item)
+          if (SynergyGivenByItem.hasOwnProperty(item)) {
+            const type = SynergyGivenByItem[item]
+            pokemon.types.delete(type)
+          }
         })
-        this.board.forEach((pokemon) => {
-          lostArtificialItems.forEach((item) => {
-            pokemon.items.delete(item)
-            if (SynergyGivenByItem.hasOwnProperty(item)) {
-              const type = SynergyGivenByItem[item]
-              pokemon.types.delete(type)
-            }
-          })
-        })
-      } else if (newNbItems > previousNbItems) {
-        // some artificial items are gained
-        const gainedArtificialItems = this.artificialItems.slice(
-          previousNbItems,
-          newNbItems
-        )
-        gainedArtificialItems.forEach((item) => {
-          this.items.add(item)
-        })
-      }
+      })
     }
 
     updatedSynergies.forEach((value, synergy) =>
