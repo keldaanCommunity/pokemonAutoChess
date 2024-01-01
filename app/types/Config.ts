@@ -717,21 +717,20 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.SALAC_BERRY]: {},
   [Item.SITRUS_BERRY]: {},
   [Item.COMFEY]: {},
-  [Item.ELECTIRIZER]: { [Stat.ATK_SPEED]: 66 },
-  [Item.MAGMARIZER]: { [Stat.ATK]: 5 },
+  [Item.ELECTIRIZER]: { [Stat.ATK_SPEED]: 40 },
+  [Item.MAGMARIZER]: { [Stat.ATK]: 8 },
   [Item.MACHO_BRACE]: { [Stat.ATK]: 15, [Stat.ATK_SPEED]: -25 },
-  [Item.LIGHT_BALL]: { [Stat.AP]: 80 },
-  [Item.TOXIC_ORB]: { [Stat.SHIELD]: 15 },
+  [Item.LIGHT_BALL]: { [Stat.AP]: 75 },
+  [Item.TOXIC_ORB]: { [Stat.SHIELD]: 15, [Stat.SPE_DEF]: 1 },
   [Item.METRONOME]: { [Stat.PP]: 5 },
-  [Item.METAL_COAT]: { [Stat.DEF]: 3 },
+  [Item.METAL_COAT]: { [Stat.DEF]: 5 },
   [Item.SWIFT_WING]: { [Stat.ATK_SPEED]: 25 },
   [Item.HARD_STONE]: { [Stat.SHIELD]: 100 },
   [Item.BIG_NUGGET]: {
     [Stat.DEF]: 3,
-    [Stat.SPE_DEF]: 3,
-    [Stat.CRIT_CHANCE]: 10
+    [Stat.SPE_DEF]: 3
   },
-  [Item.INCENSE]: { [Stat.PP]: 25 },
+  [Item.INCENSE]: { [Stat.SPE_DEF]: 5 },
   [Item.EXP_SHARE]: {}
 }
 
