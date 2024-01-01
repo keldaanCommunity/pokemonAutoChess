@@ -16,9 +16,16 @@
 
 .description-icon > img {
   display: inline-block;
-  vertical-align: -2px;
-  height: 20px;
-  margin-right: 4px;
+  vertical-align: -0.5em;
+  width: 1.5em;
+  height: 1.5em;
+  margin-right: 3px;
+}
+
+h2 .description-icon > img {
+  vertical-align: -0.15em;
+  width: 1em;
+  height: 1em;
 }
 
 .ability-description {

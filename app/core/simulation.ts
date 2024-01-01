@@ -442,6 +442,10 @@ export default class Simulation extends Schema implements ISimulation {
     if (item === Item.MAX_REVIVE) {
       pokemon.status.resurection = true
     }
+
+    if (item === Item.SWIFT_WING) {
+      pokemon.addDodgeChance(0.1)
+    }
   }
 
   applySynergyEffects(pokemon: PokemonEntity) {
@@ -593,8 +597,31 @@ export default class Simulation extends Schema implements ISimulation {
           )
         }
 
+        if (pokemon.items.has(Item.TOXIC_ORB)) {
+          pokemon.addAttack(pokemon.baseAtk)
+          pokemon.status.triggerPoison(
+            60000,
+            pokemon as PokemonEntity,
+            pokemon as PokemonEntity
+          )
+        }
+
         if (pokemon.items.has(Item.FLUFFY_TAIL)) {
           pokemon.status.triggerRuneProtect(60000)
+        }
+
+        if (pokemon.items.has(Item.EXP_SHARE)) {
+          ;[-1, 1].forEach((offset) => {
+            const value = this.board.getValue(
+              pokemon.positionX + offset,
+              pokemon.positionY
+            )
+            if (value) {
+              if (value.atk > pokemon.atk) pokemon.atk = value.atk
+              if (value.def > pokemon.def) pokemon.def = value.def
+              if (value.speDef > pokemon.speDef) pokemon.speDef = value.speDef
+            }
+          })
         }
 
         if (pokemon.passive === Passive.SPOT_PANDA) {
@@ -1030,19 +1057,19 @@ export default class Simulation extends Schema implements ISimulation {
             const nbItems =
               pokemon.items.size + (pokemon.items.has(Item.WONDER_BOX) ? 1 : 0)
             const attackBoost = {
-              [Effect.DUBIOUS_DISC]: 0.1,
-              [Effect.LINK_CABLE]: 0.2,
-              [Effect.GOOGLE_SPECS]: 0.3
+              [Effect.DUBIOUS_DISC]: 0,
+              [Effect.LINK_CABLE]: 0.1,
+              [Effect.GOOGLE_SPECS]: 0.2
             }[effect]
             const apBoost = {
-              [Effect.DUBIOUS_DISC]: 10,
-              [Effect.LINK_CABLE]: 20,
-              [Effect.GOOGLE_SPECS]: 30
+              [Effect.DUBIOUS_DISC]: 0,
+              [Effect.LINK_CABLE]: 10,
+              [Effect.GOOGLE_SPECS]: 20
             }[effect]
             const shieldBoost = {
-              [Effect.DUBIOUS_DISC]: 0.1,
-              [Effect.LINK_CABLE]: 0.2,
-              [Effect.GOOGLE_SPECS]: 0.3
+              [Effect.DUBIOUS_DISC]: 0,
+              [Effect.LINK_CABLE]: 0.1,
+              [Effect.GOOGLE_SPECS]: 0.2
             }[effect]
             pokemon.addAttack(attackBoost * pokemon.baseAtk * nbItems)
             pokemon.addAbilityPower(apBoost * nbItems)
@@ -1183,7 +1210,7 @@ export default class Simulation extends Schema implements ISimulation {
       ) {
         this.blueTeam.delete(key)
       } else {
-        pkm.update(dt, this.board, this.weather)
+        pkm.update(dt, this.board, this.weather, this.bluePlayer)
       }
     })
 
@@ -1200,7 +1227,7 @@ export default class Simulation extends Schema implements ISimulation {
       ) {
         this.redTeam.delete(key)
       } else {
-        pkm.update(dt, this.board, this.weather)
+        pkm.update(dt, this.board, this.weather, this.redPlayer)
       }
     })
 

@@ -120,7 +120,7 @@ export default function PokemonStatistic(props: {
                 key={pokemon.name}
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "32px 6ch 12ch 12ch 1fr"
+                  gridTemplateColumns: "40px 6ch 12ch 12ch 1fr"
                 }}
               >
                 <img

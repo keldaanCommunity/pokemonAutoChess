@@ -18,6 +18,7 @@ import { Weather } from "../types/enum/Weather"
 import { max, min } from "../utils/number"
 import { distanceC, distanceM } from "../utils/distance"
 import { FIGHTING_PHASE_DURATION } from "../types/Config"
+import Player from "../models/colyseus-models/player"
 
 export default class PokemonState {
   handleHeal(
@@ -125,6 +126,9 @@ export default class PokemonState {
     } else {
       if (pokemon.items.has(Item.POKE_DOLL)) {
         damage = Math.ceil(damage * 0.7)
+      }
+      if (pokemon.items.has(Item.METAL_COAT)) {
+        damage = Math.ceil(damage * 0.8)
       }
 
       if (attacker && attacker.status.electricField) {
@@ -370,7 +374,7 @@ export default class PokemonState {
     return { death, takenDamage }
   }
 
-  update(pokemon: PokemonEntity, dt: number, board: Board, weather: string) {
+  update(pokemon: PokemonEntity, dt: number, board: Board, weather: string, player: Player) {
     pokemon.status.updateAllStatus(dt, pokemon, board)
 
     if (
@@ -412,6 +416,11 @@ export default class PokemonState {
           pokemon.addDefense(4)
           pokemon.addSpecialDefense(4)
           pokemon.addAttack(4)
+        }
+
+        if(pokemon.items.has(Item.BIG_NUGGET) && pokemon.count.growGroundCount === 5){
+          player.money += 3
+          pokemon.count.moneyCount += 3
         }
       }
     }
@@ -482,6 +491,9 @@ export default class PokemonState {
         pokemon.effects.has(Effect.MAX_ILLUMINATION)
       ) {
         pokemon.addPP(10)
+      }
+      if (pokemon.items.has(Item.METRONOME)) {
+        pokemon.addPP(5)
       }
       pokemon.manaCooldown = 1000
     } else {

@@ -2,11 +2,12 @@ import { GameObjects } from "phaser"
 import React, { useMemo } from "react"
 import ReactDOM from "react-dom/client"
 import { Tooltip } from "react-tooltip"
-import { ItemRecipe, ItemStats } from "../../../../types/Config"
-import { Item } from "../../../../types/enum/Item"
+import { ItemStats } from "../../../../types/Config"
+import { Item, ItemRecipe } from "../../../../types/enum/Item"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
-import "./item-detail.css"
 import { useTranslation } from "react-i18next"
+import { Stat } from "../../../../types/enum/Game"
+import "./item-detail.css"
 
 export function ItemDetailTooltip({
   item,
@@ -22,6 +23,20 @@ export function ItemDetailTooltip({
     [item]
   )
 
+  const formatStat = (stat: Stat, value: number) => {
+    if([Stat.CRIT_DAMAGE].includes(stat)){
+      value = Math.round(value * 100)
+    }
+    let output = value.toString();
+    if ([Stat.ATK_SPEED, Stat.CRIT_CHANCE, Stat.CRIT_DAMAGE].includes(stat)) {
+      output += '%'
+    }
+    if(value >=0){
+      output = "+" + output
+    }
+    return output
+  }
+
   return (
     <div className="game-item-detail">
       <img className="game-item-detail-icon" src={`assets/item/${item}.png`} />
@@ -34,7 +49,7 @@ export function ItemDetailTooltip({
               alt={stat}
               title={t(`stat.${stat}`)}
             />
-            <span>+{value}</span>
+            <span>{formatStat(stat as Stat, value)}</span>
           </div>
         ))}
       </div>

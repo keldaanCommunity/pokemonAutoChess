@@ -5,7 +5,6 @@ import { nanoid } from "nanoid"
 
 import {
   ItemProposalStages,
-  ItemRecipe,
   ItemCarouselStages,
   StageDuration,
   AdditionalPicksStages,
@@ -17,10 +16,11 @@ import {
 } from "../../types/Config"
 import {
   Item,
+  ItemRecipe,
   BasicItems,
   Berries,
-  SynergyStones,
-  SynergyByStone
+  SynergyGivenByItem,
+  SynergyItems
 } from "../../types/enum/Item"
 import { BattleResult } from "../../types/enum/Game"
 import Player from "../../models/colyseus-models/player"
@@ -199,7 +199,7 @@ export class OnDragDropCommand extends Command<
         this.room.checkEvolutionsAfterPokemonAcquired(playerId)
       }
 
-      player.synergies.update(player.board)
+      player.updateSynergies()
       player.effects.update(player.synergies, player.board)
       player.boardSize = this.room.getTeamSize(player.board)
     }
@@ -275,7 +275,7 @@ export class OnDragDropCombineCommand extends Command<
         player.items.delete(itemB)
       }
 
-      player.synergies.update(player.board)
+      player.updateSynergies()
       player.effects.update(player.synergies, player.board)
     }
   }
@@ -327,8 +327,8 @@ export class OnDragDropItemCommand extends Command<
     }
 
     if (
-      SynergyStones.includes(item) &&
-      pokemon.types.has(SynergyByStone[item])
+      SynergyItems.includes(item) &&
+      pokemon.types.has(SynergyGivenByItem[item])
     ) {
       // prevent adding a synergy stone on a pokemon that already has this synergy
       client.send(Transfer.DRAG_DROP_FAILED, message)
@@ -349,8 +349,8 @@ export class OnDragDropItemCommand extends Command<
           const itemCombined = recipe[0] as Item
 
           if (
-            itemCombined in SynergyByStone &&
-            pokemon.types.has(SynergyByStone[itemCombined])
+            itemCombined in SynergyGivenByItem &&
+            pokemon.types.has(SynergyGivenByItem[itemCombined])
           ) {
             // prevent combining into a synergy stone on a pokemon that already has this synergy
             client.send(Transfer.DRAG_DROP_FAILED, message)
@@ -394,7 +394,7 @@ export class OnDragDropItemCommand extends Command<
 
     this.room.checkEvolutionsAfterItemAcquired(playerId, pokemon)
 
-    player.synergies.update(player.board)
+    player.updateSynergies()
     player.effects.update(player.synergies, player.board)
     if (commands.length > 0) {
       return commands
@@ -431,7 +431,7 @@ export class OnSellDropCommand extends Command<
 
         player.board.delete(detail.pokemonId)
 
-        player.synergies.update(player.board)
+        player.updateSynergies()
         player.effects.update(player.synergies, player.board)
         player.boardSize = this.room.getTeamSize(player.board)
       }
@@ -985,7 +985,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       }
       if (player.effects.has(Effect.SPORE)) {
         player.berryTreeStage = max(3)(player.berryTreeStage + 3)
-      }      
+      }
     })
 
     return commands
@@ -1007,7 +1007,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           }
         }
         if (numberOfPokemonsToMove > 0) {
-          player.synergies.update(player.board)
+          player.updateSynergies()
         }
       }
     })
@@ -1138,7 +1138,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             // remove after one fight
             player.board.delete(key)
             player.board.delete(pokemon.id)
-            player.synergies.update(player.board)
+            player.updateSynergies()
             player.effects.update(player.synergies, player.board)
             if (!player.shopLocked) {
               this.state.shop.assignShop(player, false, this.state.stageLevel) // refresh unown shop in case player lost psychic 6
@@ -1146,7 +1146,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           }
         })
         // Refreshes effects (like tapu Terrains)
-        player.synergies.update(player.board)
+        player.updateSynergies()
         player.effects.update(player.synergies, player.board)
       }
     })

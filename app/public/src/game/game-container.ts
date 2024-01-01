@@ -189,6 +189,7 @@ class GameContainer {
       "manaBurnCount",
       "staticCount",
       "moneyCount",
+      "amuletCoinCount",
       "attackCount",
       "tripleAttackCount",
       "monsterExecutionCount",
@@ -196,7 +197,8 @@ class GameContainer {
       "soulDewCount",
       "defensiveRibbonCount",
       "attackOrderCount",
-      "healOrderCount"
+      "healOrderCount",
+      "magmarizerCount"
     ]
 
     fieldsCount.forEach((field) => {
@@ -205,7 +207,8 @@ class GameContainer {
           simulation.id,
           pokemon,
           field,
-          value
+          value,
+          previousValue
         )
       })
     })

@@ -16,11 +16,10 @@ import {
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_DAMAGE,
   EvolutionTime,
-  ItemRecipe,
   MausholdEvolutionTurn,
   TandemausEvolutionTurn
 } from "../../types/Config"
-import { AllItems, Berries, Item } from "../../types/enum/Item"
+import { AllItems, Berries, Item, ItemRecipe } from "../../types/enum/Item"
 import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
 import { Rarity, AttackType, PokemonActionState } from "../../types/enum/Game"
 import { Ability } from "../../types/enum/Ability"
@@ -5124,7 +5123,7 @@ function updateCastform(pokemon: Pokemon, weather: Weather, player: Player) {
   newPokemon.positionY = pokemon.positionY
   player.board.delete(pokemon.id)
   player.board.set(newPokemon.id, newPokemon)
-  player.synergies.update(player.board)
+  player.updateSynergies()
   player.effects.update(player.synergies, player.board)
 }
 
@@ -5454,7 +5453,7 @@ export class IronBundle extends Pokemon {
   hp = 200
   atk = 16
   def = 4
-  speDef = 4
+  speDef = 2
   maxPP = 100
   range = 1
   skill = Ability.AURORA_BEAM

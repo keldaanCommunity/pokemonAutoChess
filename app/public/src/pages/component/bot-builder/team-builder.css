@@ -88,13 +88,20 @@
   display: flex;
   flex-wrap: wrap;
   align-content: start;
+  overflow: auto;
 }
 
-#item-picker > img {
+#item-picker .react-tabs__tab {
+  font-size: 80%;
+  padding: 4px 8px;
+}
+
+#item-picker img.item {
   width: 40px;
   height: 40px;
   image-rendering: pixelated;
   cursor: var(--cursor-hover);
+  margin: 2px;
 }
 
 #pokemon-picker {

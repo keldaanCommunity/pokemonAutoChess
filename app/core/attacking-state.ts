@@ -11,10 +11,17 @@ import { Synergy } from "../types/enum/Synergy"
 import { max, min } from "../utils/number"
 import { Passive } from "../types/enum/Passive"
 import { AbilityStrategies } from "./abilities/abilities"
+import Player from "../models/colyseus-models/player"
 
 export default class AttackingState extends PokemonState {
-  update(pokemon: PokemonEntity, dt: number, board: Board, weather: string) {
-    super.update(pokemon, dt, board, weather)
+  update(
+    pokemon: PokemonEntity,
+    dt: number,
+    board: Board,
+    weather: string,
+    player: Player
+  ) {
+    super.update(pokemon, dt, board, weather, player)
 
     if (pokemon.cooldown <= 0) {
       pokemon.cooldown = pokemon.getAttackDelay()

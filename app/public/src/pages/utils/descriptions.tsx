@@ -102,7 +102,7 @@ export function addIconsToDescription(description: string, tier = 0, ap = 0) {
       } else if (Synergies.includes(token as Synergy)) {
         d = (
           <span key={i} className="description-icon synergy">
-            <SynergyIcon key={i} type={token as Synergy} size="20px" />
+            <SynergyIcon key={i} type={token as Synergy} size="1.5em" />
             <span className="synergy-label">{t(`synergy.${token}`)}</span>
           </span>
         )

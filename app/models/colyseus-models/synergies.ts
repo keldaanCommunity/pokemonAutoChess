@@ -1,7 +1,7 @@
 import { MapSchema } from "@colyseus/schema"
 import { IPokemon } from "../../types"
 import { SynergyTriggers } from "../../types/Config"
-import { SynergyByStone, SynergyStones } from "../../types/enum/Item"
+import { SynergyGivenByItem, SynergyItems } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmFamily } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
@@ -17,12 +17,6 @@ export default class Synergies
     Object.keys(Synergy).forEach((key) => {
       this.set(key as Synergy, 0)
     })
-  }
-
-  update(board: MapSchema<Pokemon>) {
-    const pokemons: Pokemon[] = values(board)
-    const updatedSynergies = computeSynergies(pokemons)
-    updatedSynergies.forEach((value, synergy) => this.set(synergy, value))
   }
 }
 
@@ -42,7 +36,7 @@ export function computeSynergies(board: IPokemon[]): Map<Synergy, number> {
       pkm.types.forEach((type) => pkm.types.delete(type))
     }
 
-    addSynergiesFromStones(pkm)
+    addSynergiesGivenByItems(pkm)
     if (pkm.positionY != 0) {
       const family = PkmFamily[pkm.name]
       if (!typesPerFamily.has(family)) typesPerFamily.set(family, new Set())
@@ -97,10 +91,10 @@ export function computeSynergies(board: IPokemon[]): Map<Synergy, number> {
   return synergies
 }
 
-export function addSynergiesFromStones(pkm: IPokemon) {
-  for (const stone of SynergyStones) {
-    if (pkm.items.has(stone)) {
-      pkm.types.add(SynergyByStone[stone])
+export function addSynergiesGivenByItems(pkm: IPokemon) {
+  for (const item of SynergyItems) {
+    if (pkm.items.has(item)) {
+      pkm.types.add(SynergyGivenByItem[item])
     }
   }
 }

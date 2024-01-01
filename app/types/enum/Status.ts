@@ -1,7 +1,7 @@
 export enum Status {
   BURN = "BURN",
   SILENCE = "SILENCE",
-  POISON = "POISON",
+  POISONNED = "POISONNED",
   FREEZE = "FREEZE",
   PROTECT = "PROTECT",
   SLEEP = "SLEEP",

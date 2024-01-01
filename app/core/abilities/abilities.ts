@@ -1318,13 +1318,13 @@ export class AuroraBeamStrategy extends AbilityStrategy {
     let damage = 0
     switch (pokemon.stars) {
       case 1:
-        damage = 30
+        damage = 25
         break
       case 2:
-        damage = 60
+        damage = 50
         break
       case 3:
-        damage = 120
+        damage = 100
         break
       default:
         break
@@ -6046,12 +6046,17 @@ export class PrismaticLaserStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const affectedCells = board.cells.filter(v=>v && v.team !== pokemon.team && (v.positionX === pokemon.positionX ||
-      v.positionX === pokemon.positionX - 1 ||
-      v.positionX === pokemon.positionX + 1))
+    const affectedCells = board.cells.filter(
+      (v) =>
+        v &&
+        v.team !== pokemon.team &&
+        (v.positionX === pokemon.positionX ||
+          v.positionX === pokemon.positionX - 1 ||
+          v.positionX === pokemon.positionX + 1)
+    )
 
-    affectedCells.forEach(tg=>{
-      if(tg){
+    affectedCells.forEach((tg) => {
+      if (tg) {
         tg.handleSpecialDamage(80, board, AttackType.SPECIAL, pokemon, crit)
         const teleportationCell = board.getTeleportationCell(
           tg.positionX,
@@ -6745,10 +6750,14 @@ export class CurseStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    const enemies = board.cells.filter(p => p && p.team !== pokemon.team) as PokemonEntity[]
-    enemies.sort((a,b) => a.status.curse ? +1 : b.hp - a.hp)
+    const enemies = board.cells.filter(
+      (p) => p && p.team !== pokemon.team
+    ) as PokemonEntity[]
+    enemies.sort((a, b) => (a.status.curse ? +1 : b.hp - a.hp))
     const enemyWithHighestHP = enemies[0]
-    const curseDelay = ([12000,8000,4000][pokemon.stars-1] ?? 5000) * (1 - 0.2*pokemon.ap/100)
+    const curseDelay =
+      ([12000, 8000, 4000][pokemon.stars - 1] ?? 5000) *
+      (1 - (0.2 * pokemon.ap) / 100)
     enemyWithHighestHP.status.triggerCurse(curseDelay)
   }
 }

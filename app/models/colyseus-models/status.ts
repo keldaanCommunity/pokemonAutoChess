@@ -437,7 +437,11 @@ export default class Status extends Schema implements IStatus {
     pkm: PokemonEntity,
     origin: PokemonEntity | undefined
   ) {
-    if (!this.runeProtect && !pkm.effects.has(Effect.IMMUNITY_POISON)) {
+    if (
+      !pkm.effects.has(Effect.IMMUNITY_POISON) &&
+      (!this.runeProtect ||
+        (pkm.items.has(Item.TOXIC_ORB) && !pkm.items.has(Item.FLUFFY_TAIL))) // can escape toxic orb poison only with fluffy tail
+    ) {
       let maxStacks = 3
       if (origin) {
         this.poisonOrigin = origin

@@ -40,7 +40,7 @@ export abstract class EvolutionRule {
   }
 
   afterEvolve(pokemonEvolved: Pokemon, player: Player) {
-    player.synergies.update(player.board)
+    player.updateSynergies()
     player.effects.update(player.synergies, player.board)
     pokemonEvolved.onAcquired(player)
   }

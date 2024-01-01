@@ -56,8 +56,10 @@
   z-index: 2;
 }
 
-.game-item-detail-description:last-child {
+.game-item-detail-description:last-child,
+.react-tooltip .game-item-detail-description:last-child {
   margin-bottom: -5px;
+  border-radius: 0 0 8px 8px;
 }
 
 .game-item-detail-combinations {

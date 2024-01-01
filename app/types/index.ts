@@ -37,6 +37,7 @@ import { Passive } from "./enum/Passive"
 import { Weather } from "./enum/Weather"
 import { Effects } from "../models/effects"
 import { EvolutionRule } from "../core/evolution-rules"
+import Player from "../models/colyseus-models/player"
 
 export * from "./enum/Emotion"
 
@@ -420,12 +421,16 @@ export interface IPokemonEntity {
   addAttack(atk: number): void
   addAttackSpeed(as: number): void
   addMaxHP(life: number): void
-  addShield(shieldBonus: number, pokemon: IPokemonEntity, apBoost?: boolean): void
+  addShield(
+    shieldBonus: number,
+    pokemon: IPokemonEntity,
+    apBoost?: boolean
+  ): void
   addDefense(value: number, apBoost?: boolean): void
   addSpecialDefense(value: number, apBoost?: boolean): void
   addCritChance(value: number): void
   addCritDamage(value: number, apBoost?: boolean): void
-  update(dt: number, board: Board, weather: string)
+  update(dt: number, board: Board, weather: string, player: Player): void
   physicalDamage: number
   specialDamage: number
   trueDamage: number
@@ -517,6 +522,7 @@ export interface ICount {
   healOrderCount: number
   attackOrderCount: number
   monsterExecutionCount: number
+  magmarizerCount: number
 }
 
 export interface IPreparationMetadata {

@@ -72,7 +72,7 @@ export default class Bot {
         this.player.board.set(pkm.id, pkm)
       }
 
-      this.player.synergies.update(this.player.board)
+      this.player.updateSynergies()
       this.player.effects.update(this.player.synergies, this.player.board)
     }
   }

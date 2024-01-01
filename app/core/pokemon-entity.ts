@@ -174,8 +174,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  update(dt: number, board: Board, weather: string) {
-    this.state.update(this, dt, board, weather)
+  update(dt: number, board: Board, weather: string, player: Player) {
+    this.state.update(this, dt, board, weather, player)
   }
 
   getAttackDelay() {
@@ -532,6 +532,20 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.count.upgradeCount++
     }
 
+    if (this.items.has(Item.MAGMARIZER)) {
+      this.addAttack(1)
+      this.count.magmarizerCount++
+    }
+
+    if (this.items.has(Item.ELECTIRIZER)) {
+      this.status.triggerParalysis(4000, this)
+      target.status.triggerParalysis(4000, target)
+    }
+
+    if (this.items.has(Item.INCENSE) && chance(1 / 10)) {
+      this.status.triggerCharm(2000, target)
+    }
+
     // Synergy effects on hit
 
     if (this.hasSynergyEffect(Synergy.ICE)) {
@@ -851,7 +865,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   onKill({ target, board }: { target: PokemonEntity; board: Board }) {
     if (this.items.has(Item.AMULET_COIN) && this.player) {
       this.player.money += 1
-      this.count.moneyCount++
+      this.count.moneyCount += 1
+      this.count.amuletCoinCount += 1
     }
     if (
       this.effects.has(Effect.PURSUIT) ||

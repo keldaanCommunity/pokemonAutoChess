@@ -7,7 +7,7 @@ import {
   CollectionSchema
 } from "@colyseus/schema"
 import { Pokemon } from "./pokemon"
-import Synergies from "./synergies"
+import Synergies, { computeSynergies } from "./synergies"
 import ExperienceManager from "./experience-manager"
 import { BattleResult } from "../../types/enum/Game"
 import { IPlayer, Role, Title } from "../../types"
@@ -15,14 +15,20 @@ import PokemonConfig from "./pokemon-config"
 import { IPokemonConfig } from "../mongo-models/user-metadata"
 import PokemonCollection from "./pokemon-collection"
 import HistoryItem from "./history-item"
-import { Berries, Item } from "../../types/enum/Item"
+import {
+  ArtificialItems,
+  Berries,
+  Item,
+  SynergyGivenByItem
+} from "../../types/enum/Item"
 import { Pkm, PkmProposition } from "../../types/enum/Pokemon"
 import { Weather } from "../../types/enum/Weather"
 import PokemonFactory from "../pokemon-factory"
 import { Effects } from "../effects"
 import { values } from "../../utils/schemas"
-import { pickRandomIn } from "../../utils/random"
-import { Effect } from "../../types/enum/Effect"
+import { pickNRandomIn, pickRandomIn } from "../../utils/random"
+import { Synergy } from "../../types/enum/Synergy"
+import { SynergyTriggers } from "../../types/Config"
 
 export default class Player extends Schema implements IPlayer {
   @type("string") id: string
@@ -34,7 +40,7 @@ export default class Player extends Schema implements IPlayer {
   @type(["string"]) shop = new ArraySchema<Pkm>()
   @type(ExperienceManager) experienceManager = new ExperienceManager()
   @type({ map: "uint8" }) synergies = new Synergies()
-  @type("uint16") money = process.env.MODE == "dev" ? 80 : 6
+  @type("uint16") money = process.env.MODE == "dev" ? 999 : 6
   @type("uint8") life = 100
   @type("boolean") shopLocked: boolean = false
   @type("uint8") streak: number = 0
@@ -63,6 +69,7 @@ export default class Player extends Schema implements IPlayer {
   opponents: Map<string, number> = new Map<string, number>()
   titles: Set<Title> = new Set<Title>()
   rerollCount: number = 0
+  artificialItems: Item[] = pickNRandomIn(ArtificialItems, 3)
 
   constructor(
     id: string,
@@ -153,7 +160,7 @@ export default class Player extends Schema implements IPlayer {
     newPokemon.positionY = pokemon.positionY
     this.board.delete(pokemon.id)
     this.board.set(newPokemon.id, newPokemon)
-    this.synergies.update(this.board)
+    this.updateSynergies()
     this.effects.update(this.synergies, this.board)
     return newPokemon
   }
@@ -191,5 +198,51 @@ export default class Player extends Schema implements IPlayer {
         return i
       }
     }
+  }
+
+  updateSynergies() {
+    const pokemons: Pokemon[] = values(this.board)
+    const updatedSynergies = computeSynergies(pokemons)
+
+    const previousNbArtifItems = SynergyTriggers[Synergy.ARTIFICIAL].filter(
+      (n) => this.synergies.get(Synergy.ARTIFICIAL) >= n
+    ).length
+
+    const newNbArtifItems = SynergyTriggers[Synergy.ARTIFICIAL].filter(
+      (n) => updatedSynergies.get(Synergy.ARTIFICIAL) >= n
+    ).length
+
+    if (newNbArtifItems > previousNbArtifItems) {
+      // some artificial items are gained
+      const gainedArtificialItems = this.artificialItems.slice(
+        previousNbArtifItems,
+        newNbArtifItems
+      )
+      gainedArtificialItems.forEach((item) => {
+        this.items.add(item)
+      })
+    } else if (newNbArtifItems < previousNbArtifItems) {
+      // some artificial items are lost
+      const lostArtificialItems = this.artificialItems.slice(
+        newNbArtifItems,
+        previousNbArtifItems
+      )
+      lostArtificialItems.forEach((item) => {
+        this.items.delete(item)
+      })
+      this.board.forEach((pokemon) => {
+        lostArtificialItems.forEach((item) => {
+          pokemon.items.delete(item)
+          if (SynergyGivenByItem.hasOwnProperty(item)) {
+            const type = SynergyGivenByItem[item]
+            pokemon.types.delete(type)
+          }
+        })
+      })
+    }
+
+    updatedSynergies.forEach((value, synergy) =>
+      this.synergies.set(synergy, value)
+    )
   }
 }
