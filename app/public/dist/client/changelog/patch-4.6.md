@@ -38,8 +38,9 @@
 
 # Changes to Synergies
 
-- Nerf aquatic: 35/45/55% chance to drain 20 PP from target
-- Nerf ice: ~~2/4/8/15/30~~ 2/3/6/12/24 Spe def
+- Artificial rework: now give unique artificial items randomized at every game (see Items section)
+- Nerf Aquatic: 35/45/55% chance to drain 20 PP from target
+- Nerf Ice: ~~2/4/8/15/30~~ 2/3/6/12/24 Spe def
 - Add Baby 7: Golden Eggs: Eggs can be sold for 10 gold
 - Light adjustments:
   - (2) Shining Ray: Increase AP and Atttack by 30%
@@ -50,6 +51,21 @@
 - Psy 6 Eerie Spell also give a chance to find Unown in shop just like Psy 4 Light Screen
 
 # Changes to Items
+
+Added artificial items, obtained through Artificial synergy:
+
+- Electirizer: +40% Attack Speed ; Every attack received inflicts PARALYSIS for 4 seconds to both the attacker and the holder
+- Magmarizer: +8 Attack ; Every successful attack increase ATK by 1 and inflicts BURN for 4 seconds
+- Exp Share: Get the best values of Attack, Defense and Special Defense from adjacent allies in the same row
+- Macho Brace: +15 Attack, -25% attack speed; gives Fighting synergy
+- Light Ball: +75% AP, gives Light synergy
+- Toxic Orb: +100% Attack, gives Poison synergy, holder is poisonned for the whole fight
+- Metronome: Gives SOUND synergy. Every second, the holder gains 5 PP
+- Metal Coat: Gives STEEL synergy. Reduce incoming damage by 20%
+- Swift Wing: Gives FLYING synergy. Gain 10% chance to dodge attacks
+- Hard Stone: +100 Shield ; Gives ROCK synergy
+- Big Nugget: Gives GROUND synergy. If the holder is alive after 15 seconds and gets 5 stacks of Ground synergy effect, gain 3 GOLD
+- Incense: Gives FLORA synergy. Every attack received has a 10% chance to make the attacker charmed for 2 seconds
 
 # UI
 
