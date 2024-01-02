@@ -5646,7 +5646,8 @@ export class Celebi extends Pokemon {
   speDef = 5
   maxPP = 100
   range = 3
-  skill = Ability.AURORA_VEIL
+  skill = Ability.TIME_TRAVEL
+  passive = Passive.CELEBI
   attackSprite = AttackSprite.GRASS_RANGE
 }
 

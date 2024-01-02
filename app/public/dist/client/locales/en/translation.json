@@ -272,7 +272,8 @@
     "KNOCK_OFF": "Knock Off",
     "FISHIOUS_REND": "Fishious Rend",
     "RECOVER": "Recover",
-    "CURSE": "Curse"
+    "CURSE": "Curse",
+    "TIME_TRAVEL": "Time Travel"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1048,7 +1049,7 @@
     "BEAT_UP": "Summon [1,2,3] Houndour (no items)",
     "BLUE_FLARE": "Inflicts [50,SP] SPECIAL + 20 per stage of FIRE synergy",
     "FUSION_BOLT": "Inflicts [50,SP] SPECIAL + 40 per stage of ELECTRIC synergy",
-    "AURORA_VEIL": "All allies receive [5,10,15,SP] SHIELD and RUNE_PROTECT for 3 seconds",
+    "AURORA_VEIL": "All allies receive [5,10,15,SP] SHIELD and RUNE_PROTECT for 0.5 seconds",
     "AQUA_JET": "Dash into the enemy backline, dealing [30,60,120,SP] SPECIAL",
     "JUDGEMENT": "Inflicts [10,SP] special damage to the target, multiplied by the sum of Arceus synergy levels",
     "CHATTER": "Deal [10,SP] SPECIAL to all enemies. Every enemy has [30,SP]% chance to be CONFUSION for 1 second",
@@ -1203,7 +1204,8 @@
     "KNOCK_OFF": "Deals [90,SP] SPECIAL. If target is holding items, they are removed and an additional [30,SP] SPECIAL is dealt per item",
     "FISHIOUS_REND": "Deals [80,SP] SPECIAL damage. Double damage if attacker has more ATK_SPEED than target.",
     "RECOVER": "Heal for [25,SP]% of max HP",
-    "CURSE": "Inflicts CURSE to the enemy with highest HP that will KO after [12,8,4,SP=-0.2] seconds"
+    "CURSE": "Inflicts CURSE to the enemy with highest HP that will KO after [12,8,4,SP=-0.2] seconds",
+    "TIME_TRAVEL": "Go back in time to retrieve the lost health. All allies have their negative status cleared and are healed by [20,SP] HP."
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1682,7 +1684,8 @@
     "HISUIAN_TYPHLOSION": "The pokémon inflicts 20% extra damage on a BURN or SILENCE target",
     "PICKUP": "The pokémon will start with a random item if it's not holding anything",
     "MAWILE": "Mawile fools the foes with its docile-looking face. Cast $t(ability.ATTRACT) at the start of the fight.",
-    "CORSOLA": "$t(pkm.CORSOLA) evolves into $t(pkm.GALAR_CORSOLA) after being KO once"
+    "CORSOLA": "$t(pkm.CORSOLA) evolves into $t(pkm.GALAR_CORSOLA) after being KO once",
+    "CELEBI": "The player regains 1 HP every time $t(pkm.CELEBI) casts $t(ability.TIME_TRAVEL)."
   },
   "stat": {
     "ATK": "Attack",

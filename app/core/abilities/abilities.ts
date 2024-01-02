@@ -763,7 +763,7 @@ export class AuroraVeilStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const runeProtectDuration = 3000
+    const runeProtectDuration = 500
     let shield = 5
     if (pokemon.stars === 2) {
       shield = 10
@@ -777,6 +777,24 @@ export class AuroraVeilStrategy extends AbilityStrategy {
       if (tg && pokemon.team == tg.team) {
         tg.addShield(shield, pokemon, false)
         tg.status.triggerRuneProtect(runeProtectDuration)
+      }
+    })
+  }
+}
+
+export class TimeTravelStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    board.forEach((x, y, ally) => {
+      if (ally && pokemon.team == ally.team) {
+        ally.handleHeal(20, pokemon, 1)
+        ally.status.clearNegativeStatus()
       }
     })
   }
@@ -7023,5 +7041,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.RECOVER]: new RecoverStrategy(),
   [Ability.CURSE]: new CurseStrategy(),
   [Ability.GOLD_RUSH]: new GoldRushStrategy(),
-  [Ability.MAKE_IT_RAIN]: new MakeItRainStrategy()
+  [Ability.MAKE_IT_RAIN]: new MakeItRainStrategy(),
+  [Ability.TIME_TRAVEL]: new TimeTravelStrategy()
 }
