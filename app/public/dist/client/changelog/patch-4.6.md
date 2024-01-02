@@ -26,16 +26,17 @@
 - Nerf Xurkitree: Attack ~~20~~ 16 ; nerf Charge beam: ~~80~~ 60 special damage, no longer increase AP per missed target
 - Nerf Iron Bundle Spe def ~~4~~ 2
 - Nerf Aurora Beam damage: ~~30/60/120~~ 25/50/100
-- Buff Kartana HP: ~~200~~ 230, Spe def: ~~1~~ 2 Pp: ~~70~~ 65
+- Buff Kartana HP: ~~200~~ 230, Spe def: ~~1~~ 2 PP: ~~70~~ 65
 - Nerf Altaria Hyper voice ~~50/100/200~~ 45/90/200
-- Nerf Disarming Voice ~~10/20/40~~ 10/20/30 pp
+- Nerf Disarming Voice ~~10/20/40~~ 10/20/30 PP
 - Nerf Chimecho pp ~~80~~ 90
 - Nerf Regieleki pp ~~80~~ 90
-- Nerf Drizzile Atk ~~26~~ 23 HP ~~240~~ 200
-- Buff Breloom ~~15~~ 18
-- Buff Maractus Spe def ~~3~~ 4 Atk ~~15~~ 16 Pp ~~100~~ 85
-- Buff Stoutland retaliate ability ~~5/10/20~~ 10/15/25 additional damage
+- Nerf Drizzile Attack ~~26~~ 23 HP ~~240~~ 200
+- Buff Breloom Attack ~~15~~ 18
+- Buff Maractus Spe def ~~3~~ 4 Attackk ~~15~~ 16 PP ~~100~~ 85
+- Buff  Retaliate ability (Stoutland) ~~5/10/20~~ 10/15/25 additional damage
 - Buff Seedot line, Attack ~~5/9/20~~ 6/10/22, Def/Spedef ~~2/2/2~~ 2/3/4
+- Buff Virizion: PP ~~150~~ 140, Sacred sword damage ~~90~~ 100
 
 # Changes to Synergies
 

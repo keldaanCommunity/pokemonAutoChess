@@ -1043,7 +1043,7 @@
     "CHATTER": "Causa [10,SP] de SPECIAL a todos los enemigos. Cada enemigo tiene un [30,SP]% de probabilidad de acabar CONFUSION durante 1 segundo",
     "STEAM_ERUPTION": "Inflige [80,SP] de SPECIAL al objetivo y a todos los enemigos adyacentes, y los deja BURN durante 3 segundos",
     "APPLE_ACID": "Inflige [30,60,120,SP] de SPECIAL al objetivo y reduce su DEF y SPE_DEF en [5,SP] puntos",
-    "SACRED_SWORD": "Hace [90,SP] de TRUE al objetivo",
+    "SACRED_SWORD": "Hace [100,SP] de TRUE al objetivo",
     "SHADOW_BALL": "Inflige [45,90,180,SP] de SPECIAL y consume 15 PP al objetivo y enemigos adyacentes",
     "DIVE": "Se sumerge bajo el agua y reaparece en medio del equipo enemigo, infligiendo [15,30,60,SP] de SPECIAL y dejando FREEZE a todas las unidades adyacentes durante 1,5 segundos.",
     "SPIKE_ARMOR": "Durante [3,5,10] segundos, los objetivos que atacan cuerpo a cuerpo a este Pokémon quedan WOUND y reciben SPECIAL equivalente al [100,SP]% de la DEF actual",

@@ -5300,7 +5300,7 @@ export class Virizion extends Pokemon {
   atk = 20
   def = 6
   speDef = 6
-  maxPP = 130
+  maxPP = 140
   range = 1
   skill = Ability.SACRED_SWORD
   attackSprite = AttackSprite.GRASS_MELEE
