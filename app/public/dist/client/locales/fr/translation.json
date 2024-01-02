@@ -1301,9 +1301,9 @@
     "MAX_ILLUMINATION": "Illumination"
   },
   "effect_description": {
-    "STAMINA": "Gagne 10 SHIELD",
+    "STAMINA": "Gagne 15 SHIELD",
     "STRENGTH": "Gagne 25 SHIELD",
-    "ROCK_SMASH": "Gagne 35 SHIELD",
+    "ROCK_SMASH": "Gagne 40 SHIELD",
     "PURE_POWER": "Gagne 55 SHIELD",
     "INGRAIN": "Restaure 8 HP toutes les 2 secondes. Une baie peut être cueillie tous les 3 tours.",
     "GROWTH": "Restaure 15 HP toutes les 2 secondes. Une baie peut être cueillie tous les 2 tours.",

@@ -1123,9 +1123,9 @@
     "COOL_BREEZE": "Kühle Brise"
   },
   "effect_description": {
-    "STAMINA": "Erhalte 10 SHIELD",
+    "STAMINA": "Erhalte 15 SHIELD",
     "STRENGTH": "Erhalte 25 SHIELD",
-    "ROCK_SMASH": "Erhalte 35 SHIELD",
+    "ROCK_SMASH": "Erhalte 40 SHIELD",
     "PURE_POWER": "Erhalte 55 SHIELD",
     "INGRAIN": "Stellt alle 2 Sekunden 8 HP wieder her. Erhalte alle 3 Kämpfe eine zufällige Beere",
     "GROWTH": "Stellt alle 2 Sekunden 15 HP wieder her. Erhalte alle 2 Kämpfe eine zufällige Beere",

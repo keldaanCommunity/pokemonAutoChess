@@ -51,7 +51,7 @@
   - (5) Max Illumination: Also give 100 Shield and Resurection
 - Add Ground 8, removed ground effect cap, changed Sandstorm threshold to 8 units
 - Psy 6 Eerie Spell also give a chance to find Unown in shop just like Psy 4 Light Screen
-
+- Buff Normal: ~~10/25/35/55~~ 15/25/40/55 shield
 # Changes to Items
 
 Added artificial items, obtained through Artificial synergy:

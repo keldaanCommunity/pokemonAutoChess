@@ -1301,9 +1301,9 @@
     "MAX_ILLUMINATION": "Iluminación Máxima"
   },
   "effect_description": {
-    "STAMINA": "Gana 10 SHIELD",
+    "STAMINA": "Gana 15 SHIELD",
     "STRENGTH": "Gana 25 SHIELD",
-    "ROCK_SMASH": "Gana 35 SHIELD",
+    "ROCK_SMASH": "Gana 40 SHIELD",
     "PURE_POWER": "Gana 55 SHIELD",
     "INGRAIN": "Restaura 8 HP cada 2 segundos. Consigue una baya aleatoria cada 3 peleas.",
     "GROWTH": "Restaura 15 HP cada 2 segundos. Consigue una baya aleatoria cada 3 peleas.",

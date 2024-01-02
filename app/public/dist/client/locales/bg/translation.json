@@ -1124,9 +1124,9 @@
     "COOL_BREEZE": "Прохладен бриз"
   },
   "effect_description": {
-    "STAMINA": "Печелете 10 SHIELD",
+    "STAMINA": "Печелете 15 SHIELD",
     "STRENGTH": "Спечелете 25 SHIELD",
-    "ROCK_SMASH": "Печелете 35 SHIELD",
+    "ROCK_SMASH": "Печелете 40 SHIELD",
     "PURE_POWER": "Печелете 55 SHIELD",
     "INGRAIN": "Възстановете 4 HP в секунда. Вземете произволно зрънце на всеки 3 битки.",
     "GROWTH": "Възстановете 8 HP в секунда. Вземете произволно зрънце на всеки 2 битки.",
