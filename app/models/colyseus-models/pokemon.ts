@@ -7145,7 +7145,7 @@ export class Hariyama extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.MONSTER])
   rarity = Rarity.RARE
   stars = 2
-  hp = 170
+  hp = 200
   atk = 22
   def = 5
   speDef = 5
