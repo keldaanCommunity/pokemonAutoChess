@@ -1036,7 +1036,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   // called after every ability cast
-  onCast(board: Board, target: PokemonEntity, crit: boolean) {
+  onCast(board: Board, target: PokemonEntity, crit: boolean, player: Player) {
     if (this.items.has(Item.LEPPA_BERRY)) {
       this.eatBerry(Item.LEPPA_BERRY)
     }
@@ -1050,6 +1050,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         false,
         true
       )
+    }
+
+    if(this.passive === Passive.CELEBI){
+      player.life = max(100)(player.life + 1)
     }
   }
 

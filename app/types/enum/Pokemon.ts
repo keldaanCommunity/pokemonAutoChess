@@ -3402,9 +3402,9 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.CELEBI]: {
-    attack: AnimationType.DeepBreath,
-    ability: AnimationType.Special0,
-    emote: AnimationType.Shoot
+    attack: AnimationType.Shoot,
+    ability: AnimationType.DeepBreath,
+    emote: AnimationType.Special0
   },
   [Pkm.VICTINI]: {
     attack: AnimationType.Shoot,

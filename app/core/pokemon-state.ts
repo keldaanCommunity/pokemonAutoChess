@@ -34,7 +34,7 @@ export default class PokemonState {
       !pokemon.status.protect
     ) {
       if (apBoost > 0) {
-        heal = Math.round(heal * (1 + (apBoost * pokemon.ap) / 100))
+        heal = Math.round(heal * (1 + (apBoost * caster.ap) / 100))
       }
       if (pokemon.effects.has(Effect.BUFF_HEAL_RECEIVED)) {
         heal = Math.round(heal * 1.5)
@@ -374,7 +374,13 @@ export default class PokemonState {
     return { death, takenDamage }
   }
 
-  update(pokemon: PokemonEntity, dt: number, board: Board, weather: string, player: Player) {
+  update(
+    pokemon: PokemonEntity,
+    dt: number,
+    board: Board,
+    weather: string,
+    player: Player
+  ) {
     pokemon.status.updateAllStatus(dt, pokemon, board)
 
     if (
@@ -418,7 +424,10 @@ export default class PokemonState {
           pokemon.addAttack(4)
         }
 
-        if(pokemon.items.has(Item.BIG_NUGGET) && pokemon.count.growGroundCount === 5){
+        if (
+          pokemon.items.has(Item.BIG_NUGGET) &&
+          pokemon.count.growGroundCount === 5
+        ) {
           player.money += 3
           pokemon.count.moneyCount += 3
         }

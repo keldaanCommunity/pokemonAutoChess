@@ -36,6 +36,7 @@
 - Buff Maractus Spe def ~~3~~ 4 Atk ~~15~~ 16 Pp ~~100~~ 85
 - Buff Stoutland retaliate ability ~~5/10/20~~ 10/15/25 additional damage
 - Nerf Aurora Veil (Alolan Vulpix): rune protect duration ~~3~~ 0.5 seconds
+- New ability for Celebi: Time travel: Go back in time to retrieve the lost health. All allies have their negative status cleared and are healed by 20 HP (scales with AP). The player also heals 1 HP.
 
 # Changes to Synergies
 
