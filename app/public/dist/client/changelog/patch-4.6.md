@@ -26,17 +26,22 @@
 - Nerf Xurkitree: Attack ~~20~~ 16 ; nerf Charge beam: ~~80~~ 60 special damage, no longer increase AP per missed target
 - Nerf Iron Bundle Spe def ~~4~~ 2
 - Nerf Aurora Beam damage: ~~30/60/120~~ 25/50/100
-- Buff Kartana HP: ~~200~~ 230, Spe def: ~~1~~ 2 Pp: ~~70~~ 65
+- Buff Kartana HP: ~~200~~ 230, Spe def: ~~1~~ 2 PP: ~~70~~ 65
 - Nerf Altaria Hyper voice ~~50/100/200~~ 45/90/200
-- Nerf Disarming Voice ~~10/20/40~~ 10/20/30 pp
+- Nerf Disarming Voice ~~10/20/40~~ 10/20/30 PP
 - Nerf Chimecho pp ~~80~~ 90
 - Nerf Regieleki pp ~~80~~ 90
-- Nerf Drizzile Atk ~~26~~ 23 HP ~~240~~ 200
-- Buff Breloom ~~15~~ 18
-- Buff Maractus Spe def ~~3~~ 4 Atk ~~15~~ 16 Pp ~~100~~ 85
 - Buff Stoutland retaliate ability ~~5/10/20~~ 10/15/25 additional damage
 - Nerf Aurora Veil (Alolan Vulpix): rune protect duration ~~3~~ 0.5 seconds
 - New ability for Celebi: Time travel: Go back in time to retrieve the lost health. All allies have their negative status cleared and are healed by 20 HP (scales with AP). The player also heals 1 HP.
+- Nerf Drizzile Attack ~~26~~ 23 HP ~~240~~ 200
+- Buff Breloom Attack ~~15~~ 18
+- Buff Maractus Spe def ~~3~~ 4 Attackk ~~15~~ 16 PP ~~100~~ 85
+- Buff Retaliate ability (Stoutland) ~~5/10/20~~ 10/15/25 additional damage
+- Buff Seedot line, Attack ~~5/9/20~~ 6/10/22, Def/Spedef ~~2/2/2~~ 2/3/4
+- Buff Virizion: PP ~~150~~ 140, Sacred sword damage ~~90~~ 100
+- Buff Hariyama HP ~~170~~ 200
+- Buff Spinda Attack ~~20~~ 25
 
 # Changes to Synergies
 
@@ -50,7 +55,8 @@
   - (4) Eternal Light: Also give 30% Attack Speed and Rune Protect for 10 seconds
   - (5) Max Illumination: Also give 100 Shield and Resurection
 - Add Ground 8, removed ground effect cap, changed Sandstorm threshold to 8 units
-- Psy 6 Eerie Spell also give a chance to find Unown in shop just like Psy 4 Light Screen
+- Psy 6 Eerie Spell also give the same chance to find Unown in shop as Psy 4 Light Screen
+- Buff Normal: ~~10/25/35/55~~ 15/25/40/55 shield
 
 # Changes to Items
 

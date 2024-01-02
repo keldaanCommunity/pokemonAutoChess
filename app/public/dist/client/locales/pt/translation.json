@@ -919,7 +919,7 @@
     "CHATTER": "Distribua [10,SP] SPECIAL a todos os inimigos. Todo inimigo tem [30,SP]% de chance de ficar CONFUSION por 1 segundo",
     "STEAM_ERUPTION": "Inflige [80,SP] SPECIAL ao alvo e a todos os inimigos adjacentes e BURN-OS por 3 segundos",
     "APPLE_ACID": "Distribui [30,60,120,SP] SPECIAL ao alvo e reduz sua DEF e SPE_DEF em [5,SP] pontos",
-    "SACRED_SWORD": "Distribui [90,SP] TRUE ao alvo",
+    "SACRED_SWORD": "Distribui [100,SP] TRUE ao alvo",
     "SHADOW_BALL": "Oferece [45,90,180,SP] SPECIAL e queima 15 de PP para o alvo e inimigos adjacentes",
     "DIVE": "Mergulha na água e reaparece no meio do time inimigo, causando [15,30,60,SP] SPECIAL e FREEZE todas as unidades adjacentes por 1,5 segundo",
     "SPIKE_ARMOR": "Por [3,5,10] segundos, alvos que atacam corpo a corpo este Pokémon recebem WOUND e recebem SPECIAL igual a [100,SP]% da DEF atual",
@@ -1126,7 +1126,7 @@
   "effect_description": {
     "STAMINA": "Ganhe 15 SHIELD",
     "STRENGTH": "Ganhe 25 SHIELD",
-    "ROCK_SMASH": "Ganhe 35 SHIELD",
+    "ROCK_SMASH": "Ganhe 40 SHIELD",
     "PURE_POWER": "Ganhe 55 SHIELD",
     "INGRAIN": "Restaure 8 HP a cada 2 segundos. Obtenha uma fruta aleatória a cada 3 lutas.",
     "GROWTH": "Restaure 15 HP a cada 2 segundos. Obtenha uma fruta aleatória a cada 2 lutas.",

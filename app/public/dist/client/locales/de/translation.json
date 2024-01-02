@@ -918,7 +918,7 @@
     "CHATTER": "Füge allen Feinden [10,SP] SPECIAL zu. Jeder Feind hat eine Chance von [30,SP] %, 1 Sekunde lang CONFUSION zu erleiden",
     "STEAM_ERUPTION": "Fügt dem Ziel und allen angrenzenden Feinden [80,SP] SPECIAL zu und BURN sie 3 Sekunden lang",
     "APPLE_ACID": "Fügt dem Ziel [30,60,120,SP] SPECIAL zu und senkt seine DEF und SPE_DEF um [5,SP] Punkte",
-    "SACRED_SWORD": "Fügt dem Ziel [90,SP] TRUE zu",
+    "SACRED_SWORD": "Fügt dem Ziel [100,SP] TRUE zu",
     "SHADOW_BALL": "Verursacht [45,90,180,SP] SPECIAL und verbrennt dem Ziel und angrenzenden Feinden 15 PP",
     "DIVE": "Taucht unter Wasser und taucht in der Mitte des gegnerischen Teams wieder auf, was allen angrenzenden Einheiten 1,5 Sekunden lang [15,30,60,SP] SPECIAL zufügt und sie einfriert",
     "SPIKE_ARMOR": "Für [3,5,10] Sekunden erhalten Ziele, die dieses Pokémon im Nahkampf angreifen, eine WOUND und erhalten ein SPECIAL in Höhe von [100,SP] % der aktuellen DEF",
@@ -1123,9 +1123,9 @@
     "COOL_BREEZE": "Kühle Brise"
   },
   "effect_description": {
-    "STAMINA": "Erhalte 10 SHIELD",
+    "STAMINA": "Erhalte 15 SHIELD",
     "STRENGTH": "Erhalte 25 SHIELD",
-    "ROCK_SMASH": "Erhalte 35 SHIELD",
+    "ROCK_SMASH": "Erhalte 40 SHIELD",
     "PURE_POWER": "Erhalte 55 SHIELD",
     "INGRAIN": "Stellt alle 2 Sekunden 8 HP wieder her. Erhalte alle 3 Kämpfe eine zufällige Beere",
     "GROWTH": "Stellt alle 2 Sekunden 15 HP wieder her. Erhalte alle 2 Kämpfe eine zufällige Beere",

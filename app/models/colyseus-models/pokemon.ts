@@ -4184,7 +4184,7 @@ export class Seedot extends Pokemon {
   stars = 1
   evolution = Pkm.NUZLEAF
   hp = 60
-  atk = 5
+  atk = 6
   def = 2
   speDef = 2
   maxPP = 100
@@ -4199,9 +4199,9 @@ export class Nuzleaf extends Pokemon {
   stars = 2
   evolution = Pkm.SHIFTRY
   hp = 120
-  atk = 9
-  def = 2
-  speDef = 2
+  atk = 10
+  def = 3
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.PAYBACK
@@ -4213,9 +4213,9 @@ export class Shiftry extends Pokemon {
   rarity = Rarity.COMMON
   stars = 3
   hp = 200
-  atk = 20
-  def = 2
-  speDef = 2
+  atk = 22
+  def = 4
+  speDef = 4
   maxPP = 100
   range = 1
   skill = Ability.PAYBACK
@@ -5300,7 +5300,7 @@ export class Virizion extends Pokemon {
   atk = 20
   def = 6
   speDef = 6
-  maxPP = 130
+  maxPP = 140
   range = 1
   skill = Ability.SACRED_SWORD
   attackSprite = AttackSprite.GRASS_MELEE
@@ -7146,7 +7146,7 @@ export class Hariyama extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.MONSTER])
   rarity = Rarity.RARE
   stars = 2
-  hp = 170
+  hp = 200
   atk = 22
   def = 5
   speDef = 5
@@ -10190,7 +10190,7 @@ export class Spinda extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 250
-  atk = 20
+  atk = 25
   def = 5
   speDef = 5
   maxPP = 100

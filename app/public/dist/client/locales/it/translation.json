@@ -919,7 +919,7 @@
     "CHATTER": "Infliggi [10,SP] SPECIAL a tutti i nemici. Ogni nemico ha il [30,SP]% di possibilità di essere CONFUSION per 1 secondo",
     "STEAM_ERUPTION": "Infligge [80,SP] SPECIAL al bersaglio e a tutti i nemici adiacenti, bruciandoli per 3 secondi",
     "APPLE_ACID": "Infligge [30,60,120,SP] SPECIAL al bersaglio e abbassa la sua DEF e SPE_DEF di [5,SP] punti",
-    "SACRED_SWORD": "Distribuisce [90,SP] TRUE al bersaglio",
+    "SACRED_SWORD": "Distribuisce [100,SP] TRUE al bersaglio",
     "SHADOW_BALL": "Infligge [45,90,180,SP] SPECIAL e fa bruciare 15 PP al bersaglio e ai nemici adiacenti",
     "DIVE": "Si tuffa sott'acqua e riappare nel mezzo della squadra nemica, infliggendo [15,30,60,SP] SPECIAL e FREEZE tutte le unità adiacenti per 1,5 secondi",
     "SPIKE_ARMOR": "Per [3,5,10] secondi, i bersagli che attaccano in mischia questo Pokémon ricevono WOUND e ricevono SPECIAL pari al [100,SP]% della DEF attuale",
@@ -1124,9 +1124,9 @@
     "COOL_BREEZE": "Brezza fresca"
   },
   "effect_description": {
-    "STAMINA": "Ottieni 10 SHIELD",
+    "STAMINA": "Ottieni 15 SHIELD",
     "STRENGTH": "Ottieni 25 SHIELD",
-    "ROCK_SMASH": "Ottieni 35 SHIELD",
+    "ROCK_SMASH": "Ottieni 40 SHIELD",
     "PURE_POWER": "Ottieni 55 SHIELD",
     "INGRAIN": "Ripristina 8 HP ogni 2 secondi. Ottieni una bacca casuale ogni 3 combattimenti",
     "GROWTH": "Ripristina 15 HP ogni 2 secondi. Ottieni una bacca casuale ogni 2 combattimenti",
