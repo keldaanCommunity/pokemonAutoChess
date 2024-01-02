@@ -763,7 +763,7 @@ export class AuroraVeilStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const runeProtectDuration = 3000
+    const runeProtectDuration = 500
     let shield = 5
     if (pokemon.stars === 2) {
       shield = 10

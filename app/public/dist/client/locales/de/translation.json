@@ -912,7 +912,7 @@
     "BEAT_UP": "[1,2,3] Hundour beschwören (keine Gegenstände)",
     "BLUE_FLARE": "Verursacht [50,SP] SPECIAL + 20 pro Stufe der Feuersynergie",
     "FUSION_BOLT": "Verursacht [50,SP] SPECIAL + 40 pro Stufe elektrischer Synergie",
-    "AURORA_VEIL": "Alle Verbündeten erhalten [5,10,15,SP] SHIELD und RUNE_PROTECT für 3 Sekunden",
+    "AURORA_VEIL": "Alle Verbündeten erhalten [5,10,15,SP] SHIELD und RUNE_PROTECT für 0.5 Sekunden",
     "AQUA_JET": "Stürme in die gegnerische Hinterlinie und verursache [30,60,120,SP] SPECIAL",
     "JUDGEMENT": "Fügt dem Ziel [10,SP] Spezialschaden zu, multipliziert mit der Summe der Arceus-Synergiestufen",
     "CHATTER": "Füge allen Feinden [10,SP] SPECIAL zu. Jeder Feind hat eine Chance von [30,SP] %, 1 Sekunde lang CONFUSION zu erleiden",

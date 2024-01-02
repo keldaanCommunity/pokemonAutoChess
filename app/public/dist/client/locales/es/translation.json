@@ -1037,7 +1037,7 @@
     "BEAT_UP": "Invoca [1,2,3] Houndour (sin elementos)",
     "BLUE_FLARE": "Inflige [50,SP] de SPECIAL + 20 por nivel de sinergia de fuego",
     "FUSION_BOLT": "Inflige [50,SP] de SPECIAL + 40 por nivel de sinergia eléctrica",
-    "AURORA_VEIL": "Todos los aliados reciben [5,10,15,SP] SHIELD y RUNE_PROTECT durante 3 segundos",
+    "AURORA_VEIL": "Todos los aliados reciben [5,10,15,SP] SHIELD y RUNE_PROTECT durante 0.5 segundos",
     "AQUA_JET": "Corre hacia la retaguardia enemiga y ocasiona [30,60,120,SP] de SPECIAL",
     "JUDGEMENT": "Inflige [10,SP] de SPECIAL al objetivo, multiplicado por la suma de los niveles de sinergia de Arceus",
     "CHATTER": "Causa [10,SP] de SPECIAL a todos los enemigos. Cada enemigo tiene un [30,SP]% de probabilidad de acabar CONFUSION durante 1 segundo",
