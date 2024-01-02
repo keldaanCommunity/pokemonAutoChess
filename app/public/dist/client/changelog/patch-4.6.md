@@ -35,6 +35,7 @@
 - Buff Breloom ~~15~~ 18
 - Buff Maractus Spe def ~~3~~ 4 Atk ~~15~~ 16 Pp ~~100~~ 85
 - Buff Stoutland retaliate ability ~~5/10/20~~ 10/15/25 additional damage
+- Buff Seedot line, Attack ~~5/9/20~~ 6/10/22, Def/Spedef ~~2/2/2~~ 2/3/4
 
 # Changes to Synergies
 
