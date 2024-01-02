@@ -96,21 +96,18 @@ export default class Player extends Schema implements IPlayer {
   }
 
   addBattleResult(
+    id: string,
     name: string,
     result: BattleResult,
     avatar: string,
-    isPVE: boolean,
     weather: Weather | undefined
   ) {
-    if (this.history.length >= 5) {
-      this.history.shift()
-    }
     this.history.push(
       new HistoryItem(
+        id,
         name,
         result,
         avatar,
-        isPVE,
         weather ? weather : Weather.NEUTRAL
       )
     )

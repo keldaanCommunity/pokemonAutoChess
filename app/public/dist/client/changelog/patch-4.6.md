@@ -88,6 +88,7 @@ Added artificial items, obtained through Artificial synergy:
 # Misc
 
 - New status Curse: KOs the unit at the end of the time limit
+- Matchmaking now also takes into account how long ago you fighted an opponent in addition to how many times you fighted him. That means there are less chances to fight the same opponent twice in a row, but the matchmaking is more predictable than before.
 - Improve targeting by addding a second targeting algorithm for targets at range, more performant and precise than the previous one
 - Reduce lag when switching between moving state and attacking state
 - Minimum attack stat value is now 1 instead of 0

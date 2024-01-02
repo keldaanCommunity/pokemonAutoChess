@@ -872,7 +872,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     })
   }
 
-  registerBattleResults(isPVE: boolean) {
+  registerBattleResults() {
     this.state.players.forEach((player) => {
       if (player.alive) {
         const currentResult = this.state.simulations
@@ -880,10 +880,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           ?.getCurrentBattleResult(player.id)
         if (currentResult) {
           player.addBattleResult(
+            player.opponentId,
             player.opponentName,
             currentResult,
             player.opponentAvatar,
-            isPVE,
             this.state.simulations.get(player.simulationId)?.weather
           )
         }
@@ -1040,7 +1040,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     this.computeAchievements()
     this.computeStreak(isPVE)
     this.computeLife()
-    this.registerBattleResults(isPVE)
+    this.registerBattleResults()
     this.rankPlayers()
     this.checkDeath()
     this.computeIncome()

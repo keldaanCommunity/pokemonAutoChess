@@ -3,24 +3,28 @@ import { BattleResult } from "../../types/enum/Game"
 import { Weather } from "../../types/enum/Weather"
 
 export default class HistoryItem extends Schema {
+  @type("string") id: string
   @type("string") name: string
   @type("string") result: BattleResult
   @type("string") avatar: string
-  @type("boolean") isPVE: boolean
   @type("string") weather: Weather
 
   constructor(
+    id: string,
     name: string,
     result: BattleResult,
     avatar: string,
-    isPVE: boolean,
     weather: Weather
   ) {
     super()
+    this.id = id
     this.name = name
     this.result = result
     this.avatar = avatar
-    this.isPVE = isPVE
     this.weather = weather
+  }
+
+  get isPVE(): boolean {
+    return this.id === "pve"
   }
 }
