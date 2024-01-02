@@ -3148,7 +3148,7 @@ export class SacredSwordStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = 90
+    const damage = 100
     target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
   }
 }
