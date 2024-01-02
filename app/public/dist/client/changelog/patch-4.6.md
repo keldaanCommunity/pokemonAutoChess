@@ -34,10 +34,11 @@
 - Nerf Drizzile Attack ~~26~~ 23 HP ~~240~~ 200
 - Buff Breloom Attack ~~15~~ 18
 - Buff Maractus Spe def ~~3~~ 4 Attackk ~~15~~ 16 PP ~~100~~ 85
-- Buff  Retaliate ability (Stoutland) ~~5/10/20~~ 10/15/25 additional damage
+- Buff Retaliate ability (Stoutland) ~~5/10/20~~ 10/15/25 additional damage
 - Buff Seedot line, Attack ~~5/9/20~~ 6/10/22, Def/Spedef ~~2/2/2~~ 2/3/4
 - Buff Virizion: PP ~~150~~ 140, Sacred sword damage ~~90~~ 100
 - Buff Hariyama HP ~~170~~ 200
+- Buff Spinda Attack ~~20~~ 25
 
 # Changes to Synergies
 

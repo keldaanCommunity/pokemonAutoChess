@@ -57,7 +57,7 @@
 }
 
 #meta-report .pokemon-family-stat {
-  grid-template-columns: 2ch 16ch 10ch 10ch 14ch 1fr;
+  grid-template-columns: 3ch 16ch 10ch 10ch 14ch 1fr;
 }
 
 #meta-report .pokemon-family-stat ul {

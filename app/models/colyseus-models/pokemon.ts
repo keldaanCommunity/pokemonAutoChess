@@ -10189,7 +10189,7 @@ export class Spinda extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 250
-  atk = 20
+  atk = 25
   def = 5
   speDef = 5
   maxPP = 100
