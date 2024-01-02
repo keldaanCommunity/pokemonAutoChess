@@ -115,7 +115,7 @@ export function selectMatchups(state: GameState): Matchup[] {
 
   /* step 5) pick a random matchup combination among the most distant and the lowest count */
   const selectedMatchups = pickRandomIn(mostDistantMatchups)
-
+  /*
   logger.debug("Matchmaking round " + state.stageLevel)
   logger.debug(
     "Eliminated: " +
@@ -152,7 +152,7 @@ export function selectMatchups(state: GameState): Matchup[] {
       }, distance: ${matchup.distance}) (${matchup.ghost ? "ghost" : "pvp"})`
     )
   })
-
+*/
   return selectedMatchups
 }
 
