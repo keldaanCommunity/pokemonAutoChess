@@ -47,7 +47,7 @@ export default function GamePlayerDetail(props: {
         </div>
       </div>
       <div style={{ display: "flex", justifyContent: "start" }}>
-        {props.history.map((record, i) => {
+        {props.history.slice(-5).map((record, i) => {
           return (
             <div
               key={`${record.name}${i}_game-player-detail`}
@@ -71,7 +71,7 @@ export default function GamePlayerDetail(props: {
                 }}
                 src={getAvatarSrc(record.avatar)}
               />
-              <p>{record.name.slice(0, 4)}</p>
+              <p>{t(record.name).slice(0, 4)}</p>
             </div>
           )
         })}

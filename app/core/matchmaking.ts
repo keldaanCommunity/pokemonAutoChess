@@ -1,14 +1,17 @@
 import Player from "../models/colyseus-models/player"
-import { getAvatarString } from "../public/src/utils"
 import GameState from "../rooms/states/game-state"
-import { Emotion } from "../types"
-import { PkmIndex, Pkm } from "../types/enum/Pokemon"
 import { sum } from "../utils/array"
 import { logger } from "../utils/logger"
 import { pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
 
-export type Matchup = { a: Player; b: Player; count: number; ghost?: boolean }
+export type Matchup = {
+  a: Player
+  b: Player
+  count: number
+  distance: number
+  ghost?: boolean
+}
 
 function getAllPossibleMatchups(remainingPlayers: Player[]): Matchup[] {
   const matchups: Matchup[] = []
@@ -19,7 +22,8 @@ function getAllPossibleMatchups(remainingPlayers: Player[]): Matchup[] {
       matchups.push({
         a,
         b,
-        count: (a.opponents.get(b.id) ?? 0) + (b.opponents.get(a.id) ?? 0)
+        count: getCount(a, b, false),
+        distance: getDistance(a, b, false)
       })
     }
   }
@@ -47,15 +51,16 @@ function completeMatchupCombination(
         const ghost: Player = {
           /* dereference player so that money gain is not applied to original player when playing as ghost */
           ...playerToGhost,
-          id: "ghost-id",
+          id: "ghost-" + playerToGhost.id,
           name: `Ghost of ${playerToGhost.name}`,
-          avatar: getAvatarString(PkmIndex[Pkm.GASTLY], true, Emotion.HAPPY)
+          avatar: playerToGhost.avatar
         } as Player
         const ghostMatchup: Matchup = {
           ghost: true,
           a: remainingPlayer, // ensure remaining player is player A and ghost is playerB in ghost round
           b: ghost,
-          count: matchup.count
+          count: getCount(remainingPlayer, playerToGhost, true),
+          distance: getDistance(remainingPlayer, playerToGhost, true)
         }
         return ghostMatchup
       })
@@ -84,7 +89,7 @@ export function selectMatchups(state: GameState): Matchup[] {
     players
   )
 
-  /* step 3) pick a random matchup combination amongst those who have the lowest total count */
+  /* step 3) get matchup combinations that have the lowest total count */
   matchupCombinations.sort((a, b) => {
     return sum(a.map((m) => m.count)) - sum(b.map((m) => m.count))
   })
@@ -95,7 +100,21 @@ export function selectMatchups(state: GameState): Matchup[] {
     }
   )
 
-  const selectedMatchups = pickRandomIn(lowestTotalCountMatchupCombinations)
+  /* step 4) get matchup combinations that have the largest total distance */
+  lowestTotalCountMatchupCombinations.sort((a, b) => {
+    return sum(b.map((m) => m.distance)) - sum(a.map((m) => m.distance))
+  })
+  const maxDistance = sum(
+    lowestTotalCountMatchupCombinations[0].map((m) => m.distance)
+  )
+  const mostDistantMatchups = lowestTotalCountMatchupCombinations.filter(
+    (matchups) => {
+      return sum(matchups.map((m) => m.distance)) === maxDistance
+    }
+  )
+
+  /* step 5) pick a random matchup combination among the most distant and the lowest count */
+  const selectedMatchups = pickRandomIn(mostDistantMatchups)
   /*
   logger.debug("Matchmaking round " + state.stageLevel)
   logger.debug(
@@ -107,7 +126,10 @@ export function selectMatchups(state: GameState): Matchup[] {
   logger.debug(
     `${matchups.length} matchups:`,
     matchups
-      .map((m) => `${m.a.name} - ${m.b.name} (count: ${m.count})`)
+      .map(
+        (m) =>
+          `${m.a.name} - ${m.b.name} (count: ${m.count}, distance: ${m.distance})`
+      )
       .join("\n")
   )
   logger.debug(
@@ -116,18 +138,43 @@ export function selectMatchups(state: GameState): Matchup[] {
       .map(
         (c) =>
           c.map((m) => `${m.a.name} - ${m.b.name}`).join(" ; ") +
-          ` (total count: ${sum(c.map((m) => m.count))})`
+          ` (total count: ${sum(c.map((m) => m.count))}, total distance: ${sum(
+            c.map((m) => m.distance)
+          )})`
       )
       .join("\n")
   )
   logger.debug("Selected matchups:")
   selectedMatchups.forEach((matchup) => {
     logger.debug(
-      `${matchup.a.name} - ${matchup.b.name} (count: ${matchup.count}) (${
-        matchup.ghost ? "ghost" : "pvp"
-      })`
+      `${matchup.a.name} - ${matchup.b.name} (count: ${
+        matchup.count
+      }, distance: ${matchup.distance}) (${matchup.ghost ? "ghost" : "pvp"})`
     )
   })
 */
   return selectedMatchups
+}
+
+export function getCount(a: Player, b: Player, bIsGhost: boolean): number {
+  // count(A,B) = (number of times A fought B or his ghost) + (number of times B fought A or his ghost)
+  const countA =
+    (a.opponents.get(b.id) ?? 0) + (a.opponents.get("ghost-" + b.id) ?? 0)
+  const countB =
+    (b.opponents.get(a.id) ?? 0) + (b.opponents.get("ghost-" + a.id) ?? 0)
+
+  if (bIsGhost) return countA
+  else return countA + countB
+}
+
+export function getDistance(a: Player, b: Player, bIsGhost: boolean): number {
+  // distance(A,B) = (number of stages ago A fought B or his ghost) + (number of stages ago B fought A or his ghost)
+  const distanceA =
+    a.history.length -
+    a.history.findLastIndex((h) => h.id === b.id || h.id === "ghost-" + b.id)
+  const distanceB =
+    b.history.length -
+    b.history.findLastIndex((h) => h.id === a.id || h.id === "ghost-" + a.id)
+  if (bIsGhost) return distanceA
+  else return distanceA + distanceB
 }

@@ -54,6 +54,7 @@
   width: 1.5em;
   height: 1.5em;
   margin: auto;
+  align-self: center;
 }
 
 #game-stage-info .player-information .player-title {
