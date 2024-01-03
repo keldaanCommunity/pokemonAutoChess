@@ -274,7 +274,9 @@
     "RECOVER": "Recover",
     "CURSE": "Curse",
     "TIME_TRAVEL": "Time Travel",
-    "POLTERGEIST": "Poltergeist"
+    "POLTERGEIST": "Poltergeist",
+    "GOLD_RUSH": "Gold Rush",
+    "MAKE_IT_RAIN": "Make it Rain"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -949,7 +951,9 @@
     "GALAR_CORSOLA": "Galar Corsola",
     "CURSOLA": "Cursola",
     "PHANTUMP": "Phantump",
-    "TREVENANT": "Trevenant"
+    "TREVENANT": "Trevenant",
+    "GIMMIGHOUL": "Gimmighoul",
+    "GHOLDENGO": "Gholdengo"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1209,7 +1213,9 @@
     "RECOVER": "Heal for [25,SP]% of max HP",
     "CURSE": "Inflicts CURSE to the enemy with highest HP that will KO after [12,8,4,SP=-0.2] seconds",
     "TIME_TRAVEL": "Go back in time to retrieve the lost health. All allies have their negative status cleared and are healed by [20,SP] HP.",
-    "POLTERGEIST": "Deals [30,60,120,SP] SPECIAL + [20,SP] SPECIAL for each items holded by the target"
+    "POLTERGEIST": "Deals [30,60,120,SP] SPECIAL + [20,SP] SPECIAL for each items holded by the target",
+    "GOLD_RUSH": "Deals  [20,SP] + your amount of golds as SPECIAL, then earn 2 golds",
+    "MAKE_IT_RAIN": "Deals [100,SP] + your amount of golds as SPECIAL"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1689,7 +1695,9 @@
     "PICKUP": "The pokémon will start with a random item if it's not holding anything",
     "MAWILE": "Mawile fools the foes with its docile-looking face. Cast $t(ability.ATTRACT) at the start of the fight.",
     "CORSOLA": "$t(pkm.CORSOLA) evolves into $t(pkm.GALAR_CORSOLA) after being KO once",
-    "CELEBI": "The player regains 1 HP every time $t(pkm.CELEBI) casts $t(ability.TIME_TRAVEL)."
+    "CELEBI": "The player regains 1 HP every time $t(pkm.CELEBI) casts $t(ability.TIME_TRAVEL).",
+    "GIMMIGHOUL": "$t(pkm.GIMMIGHOUL) is looking for 99 golds",
+    "GHOLDENGO": "At the start of each fight, if the player has more than 50 golds, $t(pkm.GHOLDENGO) gains RUNE_PROTECT for the entire fight"
   },
   "stat": {
     "ATK": "Attack",
