@@ -10731,6 +10731,7 @@ export class Zigzagoon extends Pokemon {
   skill = Ability.SLASH
   additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
+  passive = Passive.PICKUP
 }
 
 export class Linoone extends Pokemon {
@@ -10746,6 +10747,7 @@ export class Linoone extends Pokemon {
   skill = Ability.SLASH
   additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
+  passive = Passive.PICKUP
 }
 
 export class Phantump extends Pokemon {
