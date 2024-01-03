@@ -673,7 +673,9 @@ export enum Pkm {
   GALAR_CORSOLA = "GALAR_CORSOLA",
   CURSOLA = "CURSOLA",
   GIMMIGHOUL = "GIMMIGHOUL",
-  GHOLDENGO = "GHOLDENGO"
+  GHOLDENGO = "GHOLDENGO",
+  PHANTUMP = "PHANTUMP",
+  TREVENANT = "TREVENANT"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1349,7 +1351,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.GALAR_CORSOLA]: "0222-0001",
   [Pkm.CURSOLA]: "0864",
   [Pkm.GIMMIGHOUL]: "0999-0001",
-  [Pkm.GHOLDENGO]: "1000"
+  [Pkm.GHOLDENGO]: "1000",
+  [Pkm.PHANTUMP]: "0708",
+  [Pkm.TREVENANT]: "0709"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2025,7 +2029,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.GALAR_CORSOLA]: Pkm.CORSOLA,
   [Pkm.CURSOLA]: Pkm.CORSOLA,
   [Pkm.GIMMIGHOUL]: Pkm.GIMMIGHOUL,
-  [Pkm.GHOLDENGO]: Pkm.GIMMIGHOUL
+  [Pkm.GHOLDENGO]: Pkm.GIMMIGHOUL,
+  [Pkm.PHANTUMP]: Pkm.PHANTUMP,
+  [Pkm.TREVENANT]: Pkm.PHANTUMP
 }
 
 export enum PkmDuo {
@@ -5524,6 +5530,16 @@ export const AnimationConfig: {
   [Pkm.GHOLDENGO]: {
     attack: AnimationType.Attack,
     ability: AnimationType.SpAttack,
+    emote: AnimationType.Charge
+  },
+  [Pkm.PHANTUMP]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Charge
+  },
+  [Pkm.TREVENANT]: {
+    attack: AnimationType.Punch,
+    ability: AnimationType.Swing,
     emote: AnimationType.Charge
   }
 }

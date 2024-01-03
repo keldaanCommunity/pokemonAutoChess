@@ -6780,6 +6780,20 @@ export class CurseStrategy extends AbilityStrategy {
   }
 }
 
+export class PoltergeistStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    let damage = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30
+    damage += target.items.size * 20
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+  }
+}
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -7042,5 +7056,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.CURSE]: new CurseStrategy(),
   [Ability.GOLD_RUSH]: new GoldRushStrategy(),
   [Ability.MAKE_IT_RAIN]: new MakeItRainStrategy(),
-  [Ability.TIME_TRAVEL]: new TimeTravelStrategy()
+  [Ability.TIME_TRAVEL]: new TimeTravelStrategy(),
+  [Ability.POLTERGEIST]: new PoltergeistStrategy()
 }

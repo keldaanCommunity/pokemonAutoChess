@@ -2612,6 +2612,39 @@ export default class BattleManager {
             })
             break
 
+          case Ability.POLTERGEIST:
+            coordinatesTarget = transformAttackCoordinate(
+              targetX,
+              targetY,
+              this.flip
+            )
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.POLTERGEIST,
+              "0"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(3, 3)
+            specialProjectile.anims.play(Ability.POLTERGEIST)
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              x: coordinatesTarget[0],
+              y: coordinatesTarget[1],
+              ease: "linear",
+              yoyo: false,
+              duration: 1000,
+              onComplete: () => {
+                specialProjectile.destroy()
+              }
+            })
+            break
+
           case Ability.SPARKLING_ARIA:
             coordinatesTarget = transformAttackCoordinate(
               targetX,
