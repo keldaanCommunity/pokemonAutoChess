@@ -10731,7 +10731,6 @@ export class Zigzagoon extends Pokemon {
   skill = Ability.SLASH
   additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
-  passive = Passive.PICKUP
 }
 
 export class Linoone extends Pokemon {
@@ -10747,7 +10746,45 @@ export class Linoone extends Pokemon {
   skill = Ability.SLASH
   additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
-  passive = Passive.PICKUP
+}
+
+export class Phantump extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.GHOST,
+    Synergy.GRASS,
+    Synergy.MONSTER
+  ])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.TREVENANT
+  hp = 90
+  atk = 8
+  def = 3
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.POLTERGEIST
+  additional = true
+  attackSprite = AttackSprite.GRASS_MELEE
+}
+
+export class Trevenant extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.GHOST,
+    Synergy.GRASS,
+    Synergy.MONSTER
+  ])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 200
+  atk = 18
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.POLTERGEIST
+  additional = true
+  attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class HisuianQwilfish extends Pokemon {
@@ -11854,5 +11891,7 @@ export const PokemonClasses: Record<
   [Pkm.GALAR_CORSOLA]: GalarCorsola,
   [Pkm.CURSOLA]: Cursola,
   [Pkm.GIMMIGHOUL]: Gimmighoul,
-  [Pkm.GHOLDENGO]: Gholdengo
+  [Pkm.GHOLDENGO]: Gholdengo,
+  [Pkm.PHANTUMP]: Phantump,
+  [Pkm.TREVENANT]: Trevenant
 }

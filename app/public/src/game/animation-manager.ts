@@ -1533,6 +1533,16 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.POLTERGEIST,
+      frames: this.game.anims.generateFrameNames(Ability.POLTERGEIST, {
+        start: 0,
+        end: 7
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.PAYDAY,
       frames: this.game.anims.generateFrameNames(Ability.PAYDAY, {
         start: 0,

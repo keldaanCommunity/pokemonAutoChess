@@ -8,6 +8,8 @@
 - Cursola
 - Gimmighoul
 - Gholdengo
+- Phantump
+- Trevenant
 
 # Changes to Pokemon & Abilities
 

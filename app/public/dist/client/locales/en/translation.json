@@ -273,7 +273,8 @@
     "FISHIOUS_REND": "Fishious Rend",
     "RECOVER": "Recover",
     "CURSE": "Curse",
-    "TIME_TRAVEL": "Time Travel"
+    "TIME_TRAVEL": "Time Travel",
+    "POLTERGEIST": "Poltergeist"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -946,7 +947,9 @@
     "DRACOVISH": "Dracovish",
     "CORSOLA": "Corsola",
     "GALAR_CORSOLA": "Galar Corsola",
-    "CURSOLA": "Cursola"
+    "CURSOLA": "Cursola",
+    "PHANTUMP": "Phantump",
+    "TREVENANT": "Trevenant"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1205,7 +1208,8 @@
     "FISHIOUS_REND": "Deals [80,SP] SPECIAL damage. Double damage if attacker has more ATK_SPEED than target.",
     "RECOVER": "Heal for [25,SP]% of max HP",
     "CURSE": "Inflicts CURSE to the enemy with highest HP that will KO after [12,8,4,SP=-0.2] seconds",
-    "TIME_TRAVEL": "Go back in time to retrieve the lost health. All allies have their negative status cleared and are healed by [20,SP] HP."
+    "TIME_TRAVEL": "Go back in time to retrieve the lost health. All allies have their negative status cleared and are healed by [20,SP] HP.",
+    "POLTERGEIST": "Deals [30,60,120,SP] SPECIAL + [20,SP] SPECIAL for each items holded by the target"
   },
   "effect": {
     "INGRAIN": "Ingrain",
