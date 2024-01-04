@@ -31,7 +31,7 @@ import {
   HiddenPowerEMStrategy
 } from "./hidden-power"
 
-import { Item } from "../../types/enum/Item"
+import { ArtificialItems, Item } from "../../types/enum/Item"
 import { Effect } from "../../types/enum/Effect"
 import { AttackType, BoardEvent, Team } from "../../types/enum/Game"
 import { Weather } from "../../types/enum/Weather"
@@ -6790,7 +6790,7 @@ export class PoltergeistStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     let damage = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30
-    damage += target.items.size * 20
+    target.items.forEach(item=> damage += ArtificialItems.includes(item) ? 40: 20)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
