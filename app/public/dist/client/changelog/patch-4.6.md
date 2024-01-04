@@ -101,3 +101,4 @@ Added artificial items, obtained through Artificial synergy:
 - Another ranked lobby opens when the previous one is full
 - Further compress animations to improve loading times
 - Add a random additional retention delay for bots on carousels, between 1 and 6 seconds
+- Light cell is now on a fixed position for bots, indicated in bot builder

@@ -62,6 +62,14 @@
   transform: translateX(-50%);
 }
 
+#bot-builder #team-editor tr:nth-child(2) td:nth-child(4) {
+  background-image: url("assets/ui/lightcell.png?raw");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-opacity: 0.5;
+}
+
 #bot-export-modal .error,
 #bot-import-modal .error {
   background-color: red;
