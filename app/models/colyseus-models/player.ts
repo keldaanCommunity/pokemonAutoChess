@@ -238,6 +238,20 @@ export default class Player extends Schema implements IPlayer {
       })
     }
 
+    const lightLost =
+      this.synergies.get(Synergy.LIGHT) >= SynergyTriggers[Synergy.LIGHT][0] &&
+      updatedSynergies.get(Synergy.LIGHT) < SynergyTriggers[Synergy.LIGHT][0]
+    if (lightLost) {
+      this.board.forEach((pokemon) => {
+        if (pokemon.name === Pkm.ULTRA_NECROZMA) {
+          this.transformPokemon(pokemon, Pkm.NECROZMA)
+        }
+        if (pokemon.name === Pkm.CHERRIM_SUNLIGHT) {
+          this.transformPokemon(pokemon, Pkm.CHERRIM)
+        }
+      })
+    }
+
     updatedSynergies.forEach((value, synergy) =>
       this.synergies.set(synergy, value)
     )
