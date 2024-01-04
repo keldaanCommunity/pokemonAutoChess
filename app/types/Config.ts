@@ -201,7 +201,8 @@ export const CommonShop = new Array<Pkm>(
   Pkm.MUDKIP,
   Pkm.CHIMCHAR,
   Pkm.LITWICK,
-  Pkm.LILLIPUP
+  Pkm.LILLIPUP,
+  Pkm.TREVENANT
 )
 
 export const UncommonShop = new Array<Pkm>(
