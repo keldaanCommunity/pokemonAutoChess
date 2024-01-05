@@ -174,7 +174,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  update(dt: number, board: Board, weather: string, player: Player) {
+  update(
+    dt: number,
+    board: Board,
+    weather: string,
+    player: Player | undefined
+  ) {
     this.state.update(this, dt, board, weather, player)
   }
 

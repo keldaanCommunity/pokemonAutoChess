@@ -32,4 +32,4 @@ Newcomers in 4.5:
 ![Fraxure](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0611/Normal.png)
 ![Haxorus](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0612/Normal.png)
 
-Check out the full changelog on Discord !
+Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752/1183353532724809860) !
