@@ -825,6 +825,11 @@ export function loadAttacksMultiAtlas(scene: Phaser.Scene) {
     "/assets/attacks/MAGIC_POWDER.json",
     "/assets/attacks"
   )
+  scene.load.multiatlas(
+    "CRUSH_GRIP",
+    "/assets/attacks/CRUSH_GRIP.json",
+    "/assets/attacks"
+  )
 }
 
 export function loadEnvironmentMultiAtlas(scene: Phaser.Scene) {

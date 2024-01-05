@@ -231,11 +231,20 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       if (crit && attacker && this.items.has(Item.ROCKY_HELMET) === false) {
         specialDamage = Math.round(specialDamage * attacker.critDamage)
       }
-      if (attacker && attacker.items.has(Item.POKEMONOMICON)) {
+      if (
+        attacker &&
+        attacker.items.has(Item.POKEMONOMICON) &&
+        attackType === AttackType.SPECIAL
+      ) {
         this.status.triggerBurn(3000, this, attacker, board)
         this.status.triggerWound(3000, this, attacker, board)
       }
-      if (this.items.has(Item.POWER_LENS) && specialDamage >= 1 && attacker) {
+      if (
+        this.items.has(Item.POWER_LENS) &&
+        specialDamage >= 1 &&
+        attacker &&
+        attackType === AttackType.SPECIAL
+      ) {
         attacker.handleDamage({
           damage: Math.round(0.5 * specialDamage),
           board,
@@ -1052,7 +1061,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       )
     }
 
-    if(this.passive === Passive.CELEBI){
+    if (this.passive === Passive.CELEBI) {
       player.life = max(100)(player.life + 1)
     }
   }

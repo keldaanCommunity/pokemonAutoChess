@@ -44,6 +44,7 @@
 - Buff Virizion: PP ~~150~~ 140, Sacred sword damage ~~90~~ 100
 - Buff Hariyama HP ~~170~~ 200
 - Buff Spinda Attack ~~20~~ 25
+- New ability for Regigigas: Crush Grip: The target is crushed with great force. The more HP the target has left, the greater the damage: between 20 and 200 physical damage
 
 # Changes to Synergies
 

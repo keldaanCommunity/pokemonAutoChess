@@ -615,7 +615,7 @@ export default class BattleManager {
         this.scene,
         x - 40,
         y - 50,
-        `${gain > 0 ? '+ ':''}${gain} GOLD`,
+        `${gain > 0 ? "+ " : ""}${gain} GOLD`,
         textStyle
       )
     )
@@ -3302,6 +3302,25 @@ export default class BattleManager {
             specialProjectile.setDepth(7)
             specialProjectile.setScale(2, 2)
             specialProjectile.anims.play(Ability.ASSURANCE)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
+
+          case Ability.CRUSH_GRIP:
+            coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.CRUSH_GRIP,
+              "000"
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.anims.play(Ability.CRUSH_GRIP)
             specialProjectile.once(
               Phaser.Animations.Events.ANIMATION_COMPLETE,
               () => {
