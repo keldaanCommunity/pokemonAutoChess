@@ -6790,10 +6790,34 @@ export class PoltergeistStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     let damage = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30
-    target.items.forEach(item=> damage += ArtificialItems.includes(item) ? 40: 20)
+    target.items.forEach(
+      (item) => (damage += ArtificialItems.includes(item) ? 40 : 20)
+    )
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
+
+export class CrushGripStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, false)
+    const damage = Math.round(20 + (pokemon.life / pokemon.hp) * 180)
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.PHYSICAL,
+      pokemon,
+      crit,
+      true
+    )
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -7057,5 +7081,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.GOLD_RUSH]: new GoldRushStrategy(),
   [Ability.MAKE_IT_RAIN]: new MakeItRainStrategy(),
   [Ability.TIME_TRAVEL]: new TimeTravelStrategy(),
-  [Ability.POLTERGEIST]: new PoltergeistStrategy()
+  [Ability.POLTERGEIST]: new PoltergeistStrategy(),
+  [Ability.CRUSH_GRIP]: new CrushGripStrategy()
 }

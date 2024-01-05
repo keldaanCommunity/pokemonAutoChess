@@ -2456,6 +2456,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.CRUSH_GRIP,
+      frames: this.game.anims.generateFrameNames(Ability.CRUSH_GRIP, {
+        start: 0,
+        end: 7,
+        zeroPad: 3
+      }),
+      duration: 800,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.LINK_CABLE,
       frames: this.game.anims.generateFrameNames(Ability.LINK_CABLE, {
         start: 0,
