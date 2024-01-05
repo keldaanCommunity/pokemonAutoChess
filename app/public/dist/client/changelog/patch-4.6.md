@@ -46,6 +46,8 @@
 - Buff Spinda Attack ~~20~~ 25
 - Nerf Axew line Attack ~~12/24/36~~ 10/20/30
 - Buff Charge (Zapdos): ~~20~~ 30% Attack and Attack Speed
+- Buff Stealth rocks (Regirock): increase range to 2
+
 
 # Changes to Synergies
 
@@ -79,8 +81,6 @@ Added artificial items, obtained through Artificial synergy:
 - Big Nugget: Gives GROUND synergy. If the holder is alive after 15 seconds and gets 5 stacks of Ground synergy effect, gain 3 GOLD
 - Incense: Gives FLORA synergy. Every attack received has a 10% chance to make the attacker charmed for 2 seconds
 
-# UI
-
 # Bugfix
 
 - Arceus/Kecleon dynamic synergies should now also work in bot builder / team planner
@@ -88,6 +88,7 @@ Added artificial items, obtained through Artificial synergy:
 - Units now retarget correctly to the charmer after being charmed
 - Prevent some ability animations to loop
 - Fix Prismatic Laser animation position
+- Ultra Necrozma and Cherrim Sunlight now correctly transforms back when light synergy is lost
 
 # Misc
 
@@ -102,3 +103,7 @@ Added artificial items, obtained through Artificial synergy:
 - Another ranked lobby opens when the previous one is full
 - Further compress animations to improve loading times
 - Add a random additional retention delay for bots on carousels, between 1 and 6 seconds
+- New title: Glutton: Get a Snorlax with more than 750 base HP
+- Shiny Mewtwo at round 15 will give an artificial item
+- Increase chances to get shiny wild pokemons on PVE stages (1/20 chance)
+- Light cell is now on a fixed position for bots, indicated in bot builder

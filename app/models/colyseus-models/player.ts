@@ -29,6 +29,7 @@ import { values } from "../../utils/schemas"
 import { pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { Synergy } from "../../types/enum/Synergy"
 import { SynergyTriggers } from "../../types/Config"
+import GameState from "../../rooms/states/game-state"
 
 export default class Player extends Schema implements IPlayer {
   @type("string") id: string
@@ -70,6 +71,8 @@ export default class Player extends Schema implements IPlayer {
   titles: Set<Title> = new Set<Title>()
   rerollCount: number = 0
   artificialItems: Item[] = pickNRandomIn(ArtificialItems, 3)
+  lightX: number
+  lightY: number
 
   constructor(
     id: string,
@@ -80,7 +83,8 @@ export default class Player extends Schema implements IPlayer {
     rank: number,
     pokemonCollection: Map<string, IPokemonConfig>,
     title: Title | "",
-    role: Role
+    role: Role,
+    state: GameState
   ) {
     super()
     this.id = id
@@ -92,7 +96,13 @@ export default class Player extends Schema implements IPlayer {
     this.title = title
     this.role = role
     this.pokemonCollection = new PokemonCollection(pokemonCollection)
-    if (isBot) this.loadingProgress = 100
+    this.lightX = state.lightX
+    this.lightY = state.lightY
+    if (isBot) {
+      this.loadingProgress = 100
+      this.lightX = 3
+      this.lightY = 2
+    }
   }
 
   addBattleResult(
@@ -201,12 +211,29 @@ export default class Player extends Schema implements IPlayer {
     const pokemons: Pokemon[] = values(this.board)
     const updatedSynergies = computeSynergies(pokemons)
 
+    this.updateArtificialItems(updatedSynergies)
+
+    const previousLight = this.synergies.get(Synergy.LIGHT) ?? 0
+    const newLight = updatedSynergies.get(Synergy.LIGHT) ?? 0
+    const minimumToGetLight = SynergyTriggers[Synergy.LIGHT][0]
+    const lightChanged =
+      (previousLight >= minimumToGetLight && newLight < minimumToGetLight) || // light lost
+      (previousLight < minimumToGetLight && newLight >= minimumToGetLight) // light gained
+
+    updatedSynergies.forEach((value, synergy) =>
+      this.synergies.set(synergy, value)
+    )
+
+    if (lightChanged) this.onLightChange()
+  }
+
+  updateArtificialItems(updatedSynergies: Map<Synergy, number>) {
     const previousNbArtifItems = SynergyTriggers[Synergy.ARTIFICIAL].filter(
-      (n) => this.synergies.get(Synergy.ARTIFICIAL) >= n
+      (n) => (this.synergies.get(Synergy.ARTIFICIAL) ?? 0) >= n
     ).length
 
     const newNbArtifItems = SynergyTriggers[Synergy.ARTIFICIAL].filter(
-      (n) => updatedSynergies.get(Synergy.ARTIFICIAL) >= n
+      (n) => (updatedSynergies.get(Synergy.ARTIFICIAL) ?? 0) >= n
     ).length
 
     if (newNbArtifItems > previousNbArtifItems) {
@@ -237,9 +264,19 @@ export default class Player extends Schema implements IPlayer {
         })
       })
     }
+  }
 
-    updatedSynergies.forEach((value, synergy) =>
-      this.synergies.set(synergy, value)
-    )
+  onLightChange() {
+    const pokemonsReactingToLight = [
+      Pkm.NECROZMA,
+      Pkm.ULTRA_NECROZMA,
+      Pkm.CHERRIM_SUNLIGHT,
+      Pkm.CHERRIM
+    ]
+    this.board.forEach((pokemon) => {
+      if (pokemonsReactingToLight.includes(pokemon.name)) {
+        pokemon.onChangePosition(pokemon.positionX, pokemon.positionY, this)
+      }
+    })
   }
 }

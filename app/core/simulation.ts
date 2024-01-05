@@ -201,20 +201,6 @@ export default class Simulation extends Schema implements ISimulation {
     this.applyPostEffects()
   }
 
-  inLight(pokemon: PokemonEntity) {
-    if (pokemon.team === Team.BLUE_TEAM) {
-      return (
-        pokemon.positionX === this.room.state.lightX &&
-        pokemon.positionY === this.room.state.lightY - 1
-      )
-    } else {
-      return (
-        pokemon.positionX === this.room.state.lightX &&
-        pokemon.positionY === 5 - (this.room.state.lightY - 1)
-      )
-    }
-  }
-
   getCurrentBattleResult(playerId: string) {
     if (this.blueTeam.size === 0 && this.redTeam.size > 0) {
       return playerId === this.bluePlayer?.id
@@ -1107,7 +1093,7 @@ export default class Simulation extends Schema implements ISimulation {
           break
 
         case Effect.SHINING_RAY:
-          if (this.inLight(pokemon)) {
+          if (pokemon.inLightCell) {
             pokemon.status.light = true
             pokemon.effects.add(Effect.SHINING_RAY)
             pokemon.addAttack(Math.ceil(pokemon.atk * 0.3), false)
@@ -1116,7 +1102,7 @@ export default class Simulation extends Schema implements ISimulation {
           break
 
         case Effect.LIGHT_PULSE:
-          if (this.inLight(pokemon)) {
+          if (pokemon.inLightCell) {
             pokemon.status.light = true
             pokemon.effects.add(Effect.LIGHT_PULSE)
             pokemon.addAttack(Math.ceil(pokemon.atk * 0.3), false)
@@ -1125,7 +1111,7 @@ export default class Simulation extends Schema implements ISimulation {
           break
 
         case Effect.ETERNAL_LIGHT:
-          if (this.inLight(pokemon)) {
+          if (pokemon.inLightCell) {
             pokemon.status.light = true
             pokemon.effects.add(Effect.ETERNAL_LIGHT)
             pokemon.addAttack(Math.ceil(pokemon.atk * 0.3), false)
@@ -1136,7 +1122,7 @@ export default class Simulation extends Schema implements ISimulation {
           break
 
         case Effect.MAX_ILLUMINATION:
-          if (this.inLight(pokemon)) {
+          if (pokemon.inLightCell) {
             pokemon.status.light = true
             pokemon.effects.add(Effect.MAX_ILLUMINATION)
             pokemon.addAttack(Math.ceil(pokemon.atk * 0.3), false)

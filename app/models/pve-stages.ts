@@ -4,17 +4,19 @@ import {
   BasicItems,
   NonSpecialItemComponents,
   CompletedItems,
-  SynergyStones
+  SynergyStones,
+  ArtificialItems
 } from "../types/enum/Item"
 import { Pkm } from "../types/enum/Pokemon"
 import { pickNRandomIn, pickRandomIn } from "../utils/random"
+import Player from "./colyseus-models/player"
 
 export type PVEStage = {
   name: string
   avatar: Pkm
   emotion?: Emotion
   shinyChance?: number
-  getRewards: (shiny: boolean) => Item[]
+  getRewards: (shiny: boolean, player: Player) => Item[]
   chooseOnlyOne?: boolean
   board: [pkm: Pkm, x: number, y: number][]
 }
@@ -77,11 +79,17 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     name: "pkm.MEWTWO",
     avatar: Pkm.MEWTWO,
     emotion: Emotion.DETERMINED,
-    shinyChance: 1 / 50,
+    shinyChance: 1 / 20,
     board: [[Pkm.MEWTWO, 4, 2]],
-    getRewards(shiny) {
+    getRewards(shiny: boolean, player: Player) {
       if (shiny) {
-        return pickNRandomIn(NonSpecialItemComponents, 3)
+        return [
+          pickRandomIn(
+            ArtificialItems.filter(
+              (item) => player.artificialItems.includes(item) === false
+            )
+          )
+        ]
       } else {
         return [pickRandomIn(NonSpecialItemComponents)]
       }
@@ -92,7 +100,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     name: "tower_duo",
     avatar: Pkm.LUGIA,
     emotion: Emotion.DETERMINED,
-    shinyChance: 1 / 50,
+    shinyChance: 1 / 20,
     board: [
       [Pkm.LUGIA, 3, 1],
       [Pkm.HO_OH, 5, 1]

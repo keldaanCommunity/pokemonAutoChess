@@ -165,7 +165,11 @@ export default class Board {
     return cells
   }
 
-  getCellsInFront(pokemon: PokemonEntity, target: PokemonEntity) {
+  getCellsInFront(
+    pokemon: PokemonEntity,
+    target: PokemonEntity,
+    range: number = 1
+  ) {
     const cells = new Array<Cell>()
 
     pokemon.orientation = this.orientation(
@@ -183,11 +187,15 @@ export default class Board {
       OrientationArray[(OrientationArray.indexOf(pokemon.orientation) + 7) % 8]
     ]
 
-    orientations.forEach((orientation) => {
-      const x = pokemon.positionX + OrientationVector[orientation][0]
-      const y = pokemon.positionY + OrientationVector[orientation][1]
-      cells.push({ x, y, value: this.cells[this.columns * y + x] })
-    })
+    for (let r = 1; r <= range; r++) {
+      orientations.forEach((orientation) => {
+        const x = pokemon.positionX + OrientationVector[orientation][0] * r
+        const y = pokemon.positionY + OrientationVector[orientation][1] * r
+        if (y >= 0 && y < this.rows && x >= 0 && x < this.columns) {
+          cells.push({ x, y, value: this.cells[this.columns * y + x] })
+        }
+      })
+    }
 
     return cells
   }
