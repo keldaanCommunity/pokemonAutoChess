@@ -2888,7 +2888,7 @@ export class ChargeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const buff = 0.2
+    const buff = 0.3
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (
         ally &&
