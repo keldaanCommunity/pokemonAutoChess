@@ -3,14 +3,16 @@ import ReactDOM from "react-dom"
 import { Tooltip } from "react-tooltip"
 import { ArtificialItems, BasicItems, Berries, Item, ItemRecipe } from "../../../../../types/enum/Item"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
+import { useTranslation } from "react-i18next"
 
 
 export default function WikiItemsCheatSheet() {
   const [itemHovered, setItemHovered] = useState<Item>()
+  const { t } = useTranslation()
   return (
     <div id="wiki-items">
       <article>
-        <h2>Item Recipes</h2>
+        <h2>{t("item_recipes")}</h2>
         <table>
           <tbody>
             <tr>
@@ -83,7 +85,7 @@ export default function WikiItemsCheatSheet() {
         </table>
       </article>
       <article>
-        <h2>Berries</h2>
+        <h2>{t("berries")}</h2>
         <ul className="berries">
           {Berries.map((i) => (
             <li
@@ -102,7 +104,7 @@ export default function WikiItemsCheatSheet() {
         </ul>
       </article>
       <article>
-        <h2>Artificial items</h2>
+        <h2>{t("artificial_items")}</h2>
         <ul className="artificial">
           {ArtificialItems.map((i) => (
             <li
