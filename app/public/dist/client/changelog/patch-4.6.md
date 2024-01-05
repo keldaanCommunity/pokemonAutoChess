@@ -44,6 +44,7 @@
 - Buff Virizion: PP ~~150~~ 140, Sacred sword damage ~~90~~ 100
 - Buff Hariyama HP ~~170~~ 200
 - Buff Spinda Attack ~~20~~ 25
+- Buff Stealth rocks (Regirock): increase range to 2
 
 # Changes to Synergies
 
@@ -84,6 +85,7 @@ Added artificial items, obtained through Artificial synergy:
 - Units now retarget correctly to the charmer after being charmed
 - Prevent some ability animations to loop
 - Fix Prismatic Laser animation position
+- Ultra Necrozma and Cherrim Sunlight now correctly transforms back when light synergy is lost
 
 # Misc
 
@@ -100,3 +102,4 @@ Added artificial items, obtained through Artificial synergy:
 - Add a random additional retention delay for bots on carousels, between 1 and 6 seconds
 - Shiny Mewtwo at round 15 will give an artificial item
 - Increase chances to get shiny wild pokemons on PVE stages (1/20 chance)
+- Light cell is now on a fixed position for bots, indicated in bot builder
