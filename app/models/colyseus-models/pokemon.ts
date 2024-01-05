@@ -1888,7 +1888,7 @@ export class Axew extends Pokemon {
   stars = 1
   evolution = Pkm.FRAXURE
   hp = 80
-  atk = 12
+  atk = 10
   def = 1
   speDef = 2
   maxPP = 100
@@ -1904,7 +1904,7 @@ export class Fraxure extends Pokemon {
   stars = 2
   evolution = Pkm.HAXORUS
   hp = 130
-  atk = 24
+  atk = 20
   def = 2
   speDef = 4
   maxPP = 100
@@ -1918,7 +1918,7 @@ export class Haxorus extends Pokemon {
   rarity = Rarity.HATCH
   stars = 3
   hp = 180
-  atk = 36
+  atk = 30
   def = 4
   speDef = 6
   maxPP = 100

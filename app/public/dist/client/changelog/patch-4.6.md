@@ -44,6 +44,7 @@
 - Buff Virizion: PP ~~150~~ 140, Sacred sword damage ~~90~~ 100
 - Buff Hariyama HP ~~170~~ 200
 - Buff Spinda Attack ~~20~~ 25
+- Nerf Axew line Attack ~~12/24/36~~ 10/20/30
 
 # Changes to Synergies
 
