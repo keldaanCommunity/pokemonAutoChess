@@ -174,7 +174,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  update(dt: number, board: Board, weather: string, player: Player) {
+  update(
+    dt: number,
+    board: Board,
+    weather: string,
+    player: Player | undefined
+  ) {
     this.state.update(this, dt, board, weather, player)
   }
 
@@ -1052,7 +1057,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       )
     }
 
-    if(this.passive === Passive.CELEBI){
+    if (this.passive === Passive.CELEBI) {
       player.life = max(100)(player.life + 1)
     }
   }

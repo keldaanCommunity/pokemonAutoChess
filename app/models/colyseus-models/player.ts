@@ -202,11 +202,11 @@ export default class Player extends Schema implements IPlayer {
     const updatedSynergies = computeSynergies(pokemons)
 
     const previousNbArtifItems = SynergyTriggers[Synergy.ARTIFICIAL].filter(
-      (n) => this.synergies.get(Synergy.ARTIFICIAL) >= n
+      (n) => (this.synergies.get(Synergy.ARTIFICIAL) ?? 0) >= n
     ).length
 
     const newNbArtifItems = SynergyTriggers[Synergy.ARTIFICIAL].filter(
-      (n) => updatedSynergies.get(Synergy.ARTIFICIAL) >= n
+      (n) => (updatedSynergies.get(Synergy.ARTIFICIAL) ?? 0) >= n
     ).length
 
     if (newNbArtifItems > previousNbArtifItems) {
