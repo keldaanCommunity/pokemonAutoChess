@@ -45,6 +45,7 @@
 - Buff Hariyama HP ~~170~~ 200
 - Buff Spinda Attack ~~20~~ 25
 - Nerf Axew line Attack ~~12/24/36~~ 10/20/30
+- Buff Charge (Zapdos): ~~20~~ 30% Attack and Attack Speed
 
 # Changes to Synergies
 

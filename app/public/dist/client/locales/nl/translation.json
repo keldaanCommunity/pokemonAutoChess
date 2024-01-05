@@ -863,7 +863,7 @@
     "SEED_FLARE": "Shaymin zendt een schokgolf uit, brengt [30,SP] SPECIAL toe aan alle vijandelijke Pokémon en verlaagt hun SPE_DEF met 2",
     "IRON_TAIL": "Brengt [20,40,80,SP] SPECIAL toe aan het doelwit en verbeterd de gebruiker's DEF met [1,3,5]",
     "BLAST_BURN": "Brengt [30,60,120,SP] SPECIAL toe in een gebied rond de gebruiker",
-    "CHARGE": "Verbeter de ATK van alle vriendelijke Elektrische Pokémon met [20,SP]%",
+    "CHARGE": "Verbeter de ATK van alle vriendelijke ELECTRIC Pokémon met [30,SP]%",
     "DISCHARGE": "Breng [25,50,75,SP] SPECIAL toe aan dichtbijzijnde vijandelijke Pokémon en pas de PARALYSYS status op ze toe voor 5 seconden",
     "BITE": "Brengt [40,80,120,SP] SPECIAL toe aan het doelwit en herstelt de gebruiker's HP voor 30% van de schade. FLINCH doel gedurende 5 seconden",
     "DRAGON_TAIL": "Breng [30,60,120,SP] SPECIAL toe aan het doelwit en verbeter de gebruiker's DEF en SPE_DEF met [1,2,3,SP]",
