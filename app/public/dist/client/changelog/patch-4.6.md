@@ -77,8 +77,6 @@ Added artificial items, obtained through Artificial synergy:
 - Big Nugget: Gives GROUND synergy. If the holder is alive after 15 seconds and gets 5 stacks of Ground synergy effect, gain 3 GOLD
 - Incense: Gives FLORA synergy. Every attack received has a 10% chance to make the attacker charmed for 2 seconds
 
-# UI
-
 # Bugfix
 
 - Arceus/Kecleon dynamic synergies should now also work in bot builder / team planner
@@ -100,3 +98,5 @@ Added artificial items, obtained through Artificial synergy:
 - Another ranked lobby opens when the previous one is full
 - Further compress animations to improve loading times
 - Add a random additional retention delay for bots on carousels, between 1 and 6 seconds
+- Shiny Mewtwo at round 15 will give an artificial item
+- Increase chances to get shiny wild pokemons on PVE stages (1/20 chance)
