@@ -27,4 +27,4 @@ Map tiles are now animated, item sprites have been entirely remade in higher def
 
 Finally, this patch brings tons of game balance adjustments, as you requested.
 
-Check out the full changelog on Discord !
+Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752/1172881934611910756)

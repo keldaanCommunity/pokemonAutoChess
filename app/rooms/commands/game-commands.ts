@@ -179,13 +179,7 @@ export class OnDragDropCommand extends Command<
             ) {
               // Prevents a pokemon to go on the board only if it's adding a pokemon from the bench on a full board
               this.room.swap(player, pokemon, x, y)
-              pokemon.onChangePosition(
-                x,
-                y,
-                player,
-                this.room.state.lightX,
-                this.room.state.lightY
-              )
+              pokemon.onChangePosition(x, y, player)
               success = true
             }
           }
@@ -1193,7 +1187,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             pveStage.emotion
           )
           player.opponentTitle = "WILD"
-          const rewards = pveStage.getRewards(this.state.shinyEncounter)
+          const rewards = pveStage.getRewards(this.state.shinyEncounter, player)
           resetArraySchema(player.pveRewards, rewards)
 
           const pveBoard = PokemonFactory.makePveBoard(

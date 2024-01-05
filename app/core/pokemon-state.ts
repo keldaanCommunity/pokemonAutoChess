@@ -379,7 +379,7 @@ export default class PokemonState {
     dt: number,
     board: Board,
     weather: string,
-    player: Player
+    player: Player | undefined
   ) {
     pokemon.status.updateAllStatus(dt, pokemon, board)
 
@@ -426,7 +426,8 @@ export default class PokemonState {
 
         if (
           pokemon.items.has(Item.BIG_NUGGET) &&
-          pokemon.count.growGroundCount === 5
+          pokemon.count.growGroundCount === 5 &&
+          player
         ) {
           player.money += 3
           pokemon.count.moneyCount += 3

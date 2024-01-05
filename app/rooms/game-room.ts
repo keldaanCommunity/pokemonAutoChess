@@ -162,7 +162,8 @@ export default class GameRoom extends Room<GameState> {
             this.state.players.size + 1,
             new Map<string, IPokemonConfig>(),
             "",
-            Role.BOT
+            Role.BOT,
+            this.state
           )
           this.state.players.set(user.id, player)
           this.state.botManager.addBot(player)
@@ -180,7 +181,8 @@ export default class GameRoom extends Room<GameState> {
               this.state.players.size + 1,
               user.pokemonCollection,
               user.title,
-              user.role
+              user.role,
+              this.state
             )
 
             this.state.players.set(user.uid, player)
@@ -750,9 +752,7 @@ export default class GameRoom extends Room<GameState> {
       pokemonToSwap.onChangePosition(
         pokemon.positionX,
         pokemon.positionY,
-        player,
-        this.state.lightX,
-        this.state.lightY
+        player
       )
     }
     pokemon.positionX = x

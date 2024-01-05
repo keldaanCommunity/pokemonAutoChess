@@ -430,7 +430,12 @@ export interface IPokemonEntity {
   addSpecialDefense(value: number, apBoost?: boolean): void
   addCritChance(value: number): void
   addCritDamage(value: number, apBoost?: boolean): void
-  update(dt: number, board: Board, weather: string, player: Player): void
+  update(
+    dt: number,
+    board: Board,
+    weather: string,
+    player: Player | undefined
+  ): void
   physicalDamage: number
   specialDamage: number
   trueDamage: number
@@ -610,7 +615,8 @@ export enum Title {
   FISHERMAN = "FISHERMAN",
   CHOSEN_ONE = "CHOSEN_ONE",
   VANQUISHER = "VANQUISHER",
-  OUTSIDER = "OUTSIDER"
+  OUTSIDER = "OUTSIDER",
+  GLUTTON = "GLUTTON"
 }
 
 export interface IBoardEvent {

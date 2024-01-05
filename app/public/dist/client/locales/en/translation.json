@@ -1007,7 +1007,7 @@
     "SEED_FLARE": "Shaymin's body emits a shockwave, dealing [30,SP] SPECIAL to all enemy Pokémon, and decreasing their SPE_DEF by 2",
     "IRON_TAIL": "Deal [20,40,80,SP] SPECIAL to the target and buff the user's DEF by [1,3,5]",
     "BLAST_BURN": "Deal [30,60,120,SP] SPECIAL in an area around the user",
-    "CHARGE": "Buff all allied ELECTRIC Pokémon's ATK and ATK_SPEED by [20,SP]%",
+    "CHARGE": "Buff all allied ELECTRIC Pokémon's ATK and ATK_SPEED by [30,SP]%",
     "DISCHARGE": "Deal [25,50,75,SP] SPECIAL to nearby enemy Pokémon and make them PARALYSIS for 5 seconds",
     "BITE": "Deal [40,80,120,SP] SPECIAL to the target and heal the user for 30% of the damage dealt. FLINCH target for 5 seconds",
     "DRAGON_TAIL": "Deal [30,60,120,SP] SPECIAL to the target and buff the user's DEF and SPE_DEF by [1,2,3,SP]",
@@ -1182,7 +1182,7 @@
     "ASSURANCE": "Deals [25,50,100,SP] SPECIAL. Doubles if the caster in under 50% HP",
     "BRAVE_BIRD": "Flies away with its target dealing [30,60,90,SP] SPECIAL",
     "MAGICAL_LEAF": "The user scatters curious leaves that chase the furthest target, inflicting [10,20,40,SP] and ARMOR_REDUCTION for 3 seconds on anything in its path",
-    "STEALTH_ROCKS": "Lays sharp stones around, dealing [50,SP] SPECIAL. The stones stay on field, dealing 10 PHYSICAL per second and WOUND opponents that walk on it, if not ROCK or FLYING.",
+    "STEALTH_ROCKS": "Lays sharp stones within a 2 squares radius in front, dealing [50,SP] SPECIAL. The stones stay on field, dealing 10 PHYSICAL per second and WOUND opponents that walk on it, if not ROCK or FLYING.",
     "TAIL_GLOW": "Deals [30,SP] SPECIAL to adjacent enemies and increase user AP by 50%",
     "STRUGGLE_BUG": "Deals [30,SP] SPECIAL to adjacent enemies and reduce their AP by 50%",
     "PRISMATIC_LASER": "The user shoots a prismatic laser in a large straight line, dealing [80,SP] SPECIAL and displacing any enemies it hits.",
@@ -1895,7 +1895,8 @@
     "CHOSEN_ONE": "Chosen One",
     "VANQUISHER": "Vanquisher",
     "OUTSIDER": "Outsider",
-    "WILD": "Wild"
+    "WILD": "Wild",
+    "GLUTTON": "Glutton"
   },
   "title_description": {
     "NOVICE": "Play your first game",
@@ -1958,7 +1959,8 @@
     "FISHERMAN": "Get a Gyarados",
     "CHOSEN_ONE": "Max Synergy With Light type in a game",
     "VANQUISHER": "Win a Ranked match",
-    "OUTSIDER": "Win a Ranked match with 8 players while having the lowest ELO of all"
+    "OUTSIDER": "Win a Ranked match with 8 players while having the lowest ELO of all",
+    "GLUTTON": "Get a Snorlax with more than 750 base HP"
   },
   "weather": {
     "NEUTRAL": "Calm weather",
@@ -2233,6 +2235,11 @@
   "popularity": "Popularity",
   "popular_holders": "Most popular holders",
   "popular_items": "Most popular items",
+  "components": "Components",
+  "completed_items": "Items",
+  "berries": "Berries",
+  "artificial_items": "Artificial",
+  "item_recipes": "Item Recipes",
   "news": "News",
   "patch_notes": "Patch Notes",
   "remove_bot": "Remove Bot",
@@ -2324,10 +2331,6 @@
   "toggle_locked": "Show locked",
   "key": "Key",
   "action": "Action",
-  "components": "Components",
-  "completed_items": "Items",
-  "berries": "Berries",
-  "artificial_items": "Artificial",
   "key_desc_sell": "Sell hovered pokemon",
   "key_desc_buy_xp": "Buy experience",
   "key_desc_refresh": "Refresh shop",

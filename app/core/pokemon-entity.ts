@@ -20,7 +20,8 @@ import {
   IPokemon,
   Emotion,
   AttackSprite,
-  Transfer
+  Transfer,
+  Title
 } from "../types"
 import { AttackType, Rarity } from "../types/enum/Game"
 import { Effect } from "../types/enum/Effect"
@@ -174,7 +175,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  update(dt: number, board: Board, weather: string, player: Player) {
+  update(
+    dt: number,
+    board: Board,
+    weather: string,
+    player: Player | undefined
+  ) {
     this.state.update(this, dt, board, weather, player)
   }
 
@@ -194,6 +200,16 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     return this.team === Team.BLUE_TEAM
       ? this.simulation.bluePlayer
       : this.simulation.redPlayer
+  }
+
+  get inLightCell(): boolean {
+    if (!this.player) return false
+    const { lightX, lightY } = this.player
+    if (this.team === Team.BLUE_TEAM) {
+      return this.positionX === lightX && this.positionY === lightY - 1
+    } else {
+      return this.positionX === lightX && this.positionY === 5 - (lightY - 1)
+    }
   }
 
   hasSynergyEffect(synergy: Synergy): boolean {
@@ -1238,6 +1254,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.refToBoardPokemon.items.delete(berry)
     if (this.passive === Passive.GLUTTON) {
       this.refToBoardPokemon.hp += 20
+      if (this.refToBoardPokemon.hp > 750) {
+        this.player.titles.add(Title.GLUTTON)
+      }
     }
   }
 }

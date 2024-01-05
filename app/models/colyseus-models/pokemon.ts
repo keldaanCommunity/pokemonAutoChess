@@ -17,6 +17,7 @@ import {
   DEFAULT_CRIT_DAMAGE,
   EvolutionTime,
   MausholdEvolutionTurn,
+  SynergyTriggers,
   TandemausEvolutionTurn
 } from "../../types/Config"
 import { AllItems, Berries, Item, ItemRecipe } from "../../types/enum/Item"
@@ -117,13 +118,7 @@ export class Pokemon extends Schema implements IPokemon {
 
   // called after manually changing position of the pokemon on board
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onChangePosition(
-    x: number,
-    y: number,
-    player: Player,
-    lightX: number,
-    lightY: number
-  ) {}
+  onChangePosition(x: number, y: number, player: Player) {}
 
   // called after buying or picking the mon
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -1888,7 +1883,7 @@ export class Axew extends Pokemon {
   stars = 1
   evolution = Pkm.FRAXURE
   hp = 80
-  atk = 12
+  atk = 10
   def = 1
   speDef = 2
   maxPP = 100
@@ -1904,7 +1899,7 @@ export class Fraxure extends Pokemon {
   stars = 2
   evolution = Pkm.HAXORUS
   hp = 130
-  atk = 24
+  atk = 20
   def = 2
   speDef = 4
   maxPP = 100
@@ -1918,7 +1913,7 @@ export class Haxorus extends Pokemon {
   rarity = Rarity.HATCH
   stars = 3
   hp = 180
-  atk = 36
+  atk = 30
   def = 4
   speDef = 6
   maxPP = 100
@@ -4424,13 +4419,7 @@ export class Giratina extends Pokemon {
   passive = Passive.GIRATINA
   attackSprite = AttackSprite.DRAGON_MELEE
 
-  onChangePosition(
-    x: number,
-    y: number,
-    player: Player,
-    lightX: number,
-    lightY: number
-  ) {
+  onChangePosition(x: number, y: number, player: Player) {
     if (y !== 3) {
       player.transformPokemon(this, Pkm.ORIGIN_GIRATINA)
     }
@@ -4455,13 +4444,7 @@ export class OriginGiratina extends Pokemon {
   passive = Passive.GIRATINA
   attackSprite = AttackSprite.GHOST_RANGE
 
-  onChangePosition(
-    x: number,
-    y: number,
-    player: Player,
-    lightX: number,
-    lightY: number
-  ) {
+  onChangePosition(x: number, y: number, player: Player) {
     if (y === 3) {
       player.transformPokemon(this, Pkm.GIRATINA)
     }
@@ -10444,14 +10427,11 @@ export class Necrozma extends Pokemon {
   passive = Passive.PRISM
   attackSprite = AttackSprite.DRAGON_MELEE
 
-  onChangePosition(
-    x: number,
-    y: number,
-    player: Player,
-    lightX: number,
-    lightY: number
-  ) {
-    if (x === lightX && y === lightY) {
+  onChangePosition(x: number, y: number, player: Player) {
+    const hasLight =
+      (player.synergies.get(Synergy.LIGHT) ?? 0) >=
+      SynergyTriggers[Synergy.LIGHT][0]
+    if (x === player.lightX && y === player.lightY && hasLight) {
       player.transformPokemon(this, Pkm.ULTRA_NECROZMA)
     }
   }
@@ -10475,14 +10455,11 @@ export class UltraNecrozma extends Pokemon {
   passive = Passive.PRISM
   attackSprite = AttackSprite.GHOST_RANGE
 
-  onChangePosition(
-    x: number,
-    y: number,
-    player: Player,
-    lightX: number,
-    lightY: number
-  ) {
-    if (x !== lightX || y !== lightY) {
+  onChangePosition(x: number, y: number, player: Player) {
+    const hasLight =
+      (player.synergies.get(Synergy.LIGHT) ?? 0) >=
+      SynergyTriggers[Synergy.LIGHT][0]
+    if (x !== player.lightX || y !== player.lightY || !hasLight) {
       player.transformPokemon(this, Pkm.NECROZMA)
     }
   }
@@ -10518,14 +10495,11 @@ export class Cherrim extends Pokemon {
   passive = Passive.BLOSSOM
   additional = true
   attackSprite = AttackSprite.GRASS_RANGE
-  onChangePosition(
-    x: number,
-    y: number,
-    player: Player,
-    lightX: number,
-    lightY: number
-  ) {
-    if (x === lightX || y === lightY) {
+  onChangePosition(x: number, y: number, player: Player) {
+    const hasLight =
+      (player.synergies.get(Synergy.LIGHT) ?? 0) >=
+      SynergyTriggers[Synergy.LIGHT][0]
+    if (x === player.lightX && y === player.lightY && hasLight) {
       player.transformPokemon(this, Pkm.CHERRIM_SUNLIGHT)
     }
   }
@@ -10545,14 +10519,11 @@ export class CherrimSunlight extends Pokemon {
   passive = Passive.BLOSSOM
   additional = true
   attackSprite = AttackSprite.GRASS_RANGE
-  onChangePosition(
-    x: number,
-    y: number,
-    player: Player,
-    lightX: number,
-    lightY: number
-  ) {
-    if (x !== lightX || y !== lightY) {
+  onChangePosition(x: number, y: number, player: Player) {
+    const hasLight =
+      (player.synergies.get(Synergy.LIGHT) ?? 0) >=
+      SynergyTriggers[Synergy.LIGHT][0]
+    if (x !== player.lightX || y !== player.lightY || !hasLight) {
       player.transformPokemon(this, Pkm.CHERRIM)
     }
   }
