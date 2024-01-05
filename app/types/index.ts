@@ -615,7 +615,8 @@ export enum Title {
   FISHERMAN = "FISHERMAN",
   CHOSEN_ONE = "CHOSEN_ONE",
   VANQUISHER = "VANQUISHER",
-  OUTSIDER = "OUTSIDER"
+  OUTSIDER = "OUTSIDER",
+  GLUTTON = "GLUTTON"
 }
 
 export interface IBoardEvent {
