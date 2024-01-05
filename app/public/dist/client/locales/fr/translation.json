@@ -1833,7 +1833,8 @@
     "FISHERMAN": "Pêcheur",
     "CHOSEN_ONE": "Élu",
     "VANQUISHER": "Vainqueur",
-    "OUTSIDER": "Outsider"
+    "OUTSIDER": "Outsider",
+    "GLUTTON": "Goinfre"
   },
   "title_description": {
     "NOVICE": "Jouez votre première partie",
@@ -1896,7 +1897,8 @@
     "FISHERMAN": "Obtenez un Léviator",
     "CHOSEN_ONE": "Niveau max de synergie Lumière atteint lors d'une partie",
     "VANQUISHER": "Remporter un match classé",
-    "OUTSIDER": "Remporter un match classé à 8 joueurs en étant le joueur au plus bas ELO"
+    "OUTSIDER": "Remporter un match classé à 8 joueurs en étant le joueur au plus bas ELO",
+    "GLUTTON": "Monter un Ronflex à plus de 750 PV de base"
   },
   "weather": {
     "NEUTRAL": "Temps calme",

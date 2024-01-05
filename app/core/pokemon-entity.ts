@@ -20,7 +20,8 @@ import {
   IPokemon,
   Emotion,
   AttackSprite,
-  Transfer
+  Transfer,
+  Title
 } from "../types"
 import { AttackType, Rarity } from "../types/enum/Game"
 import { Effect } from "../types/enum/Effect"
@@ -1052,7 +1053,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       )
     }
 
-    if(this.passive === Passive.CELEBI){
+    if (this.passive === Passive.CELEBI) {
       player.life = max(100)(player.life + 1)
     }
   }
@@ -1229,6 +1230,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.refToBoardPokemon.items.delete(berry)
     if (this.passive === Passive.GLUTTON) {
       this.refToBoardPokemon.hp += 20
+      if (this.refToBoardPokemon.hp > 750) {
+        this.player.titles.add(Title.GLUTTON)
+      }
     }
   }
 }

@@ -1893,7 +1893,8 @@
     "CHOSEN_ONE": "Chosen One",
     "VANQUISHER": "Vanquisher",
     "OUTSIDER": "Outsider",
-    "WILD": "Wild"
+    "WILD": "Wild",
+    "GLUTTON": "Glutton"
   },
   "title_description": {
     "NOVICE": "Play your first game",
@@ -1956,7 +1957,8 @@
     "FISHERMAN": "Get a Gyarados",
     "CHOSEN_ONE": "Max Synergy With Light type in a game",
     "VANQUISHER": "Win a Ranked match",
-    "OUTSIDER": "Win a Ranked match with 8 players while having the lowest ELO of all"
+    "OUTSIDER": "Win a Ranked match with 8 players while having the lowest ELO of all",
+    "GLUTTON": "Get a Snorlax with more than 750 base HP"
   },
   "weather": {
     "NEUTRAL": "Calm weather",

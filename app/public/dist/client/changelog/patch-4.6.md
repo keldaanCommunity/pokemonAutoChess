@@ -100,3 +100,4 @@ Added artificial items, obtained through Artificial synergy:
 - Another ranked lobby opens when the previous one is full
 - Further compress animations to improve loading times
 - Add a random additional retention delay for bots on carousels, between 1 and 6 seconds
+- New title: Glutton: Get a Snorlax with more than 750 base HP
