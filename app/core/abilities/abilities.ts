@@ -6555,7 +6555,7 @@ export class FloralHealingStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
+    // we explicitely not trigger super.process() so that the pokemon doesn't get twice the oncast effects
     pokemon.handleHeal(pokemon.maxPP, pokemon, 0)
   }
 }
