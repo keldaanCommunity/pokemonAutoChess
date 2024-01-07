@@ -11157,6 +11157,7 @@ export class Corsola extends Pokemon {
   passive = Passive.CORSOLA
   evolution = Pkm.GALAR_CORSOLA
   evolutionRule = new TurnEvolutionRule(99) // natural death
+  additional = true
 }
 
 export class GalarCorsola extends Pokemon {
@@ -11172,6 +11173,7 @@ export class GalarCorsola extends Pokemon {
   range = 1
   skill = Ability.CURSE
   attackSprite = AttackSprite.WATER_MELEE
+  additional = true
 }
 
 export class Cursola extends Pokemon {
@@ -11186,6 +11188,7 @@ export class Cursola extends Pokemon {
   range = 1
   skill = Ability.CURSE
   attackSprite = AttackSprite.WATER_MELEE
+  additional = true
 }
 
 export const PokemonClasses: Record<
