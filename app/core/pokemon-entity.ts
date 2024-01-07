@@ -236,6 +236,21 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   ): { death: boolean; takenDamage: number } {
     if (this.status.protect || this.status.magicBounce) {
       this.count.spellBlockedCount++
+      if (
+        this.status.magicBounce &&
+        attackType === AttackType.SPECIAL &&
+        damage > 0
+      ) {
+        const damage = 40
+        // not handleSpecialDamage to not trigger infinite loop between two magic bounces
+        attacker.handleDamage({
+          damage,
+          board,
+          attackType: AttackType.SPECIAL,
+          attacker: this,
+          shouldTargetGainMana: true
+        })
+      }
       return { death: false, takenDamage: 0 }
     } else {
       let specialDamage =
