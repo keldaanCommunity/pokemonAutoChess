@@ -107,5 +107,7 @@ Added artificial items, obtained through Artificial synergy:
 - Shiny Mewtwo at round 15 will give an artificial item
 - Increase chances to get shiny wild pokemons on PVE stages (1/20 chance)
 - Light cell is now on a fixed position for bots, indicated in bot builder
+- Fix Shop evolutions not being highlighted during fights and carousels rounds
 - Fix Comfey applying twice the on-cast effects and the skill animation for its holder
 - Fix magic bounce procing even when the opponent ability deals no damage
+
