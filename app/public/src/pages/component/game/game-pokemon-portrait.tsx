@@ -44,7 +44,7 @@ export default function GamePokemonPortrait(props: {
     let pokemonEvolution = props.pokemon.evolution
     let pokemonEvolution2 = Pkm.DEFAULT
 
-    if (player && !isOnAnotherBoard) {
+    if (player && player.board && !isOnAnotherBoard) {
       player.board.forEach((p) => {
         if (p.index === props.pokemon!.index && p.evolution !== Pkm.DEFAULT) {
           count++
