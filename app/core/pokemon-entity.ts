@@ -243,7 +243,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       ) {
         const damage = 40
         // not handleSpecialDamage to not trigger infinite loop between two magic bounces
-        attacker.handleDamage({
+        attacker?.handleDamage({
           damage,
           board,
           attackType: AttackType.SPECIAL,
@@ -1045,6 +1045,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       } else if (isAngerPoint) {
         speedBoost = 30
       }
+      // eslint-disable-next-line @typescript-eslint/no-this-alias
       const _pokemon = this // beware of closure vars
       this.simulation.room.clock.setTimeout(() => {
         board.forEach((x, y, value) => {
@@ -1270,7 +1271,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.passive === Passive.GLUTTON) {
       this.refToBoardPokemon.hp += 20
       if (this.refToBoardPokemon.hp > 750) {
-        this.player.titles.add(Title.GLUTTON)
+        this.player?.titles.add(Title.GLUTTON)
       }
     }
   }
