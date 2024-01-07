@@ -47,6 +47,7 @@ export default class MovingState extends PokemonState {
     let x: number | undefined = undefined
     let y: number | undefined = undefined
     if (pokemon.types.has(Synergy.DARK) && pokemon.baseRange === 1) {
+      // dark jump
       const farthestCoordinate = this.getFarthestTargetCoordinateAvailablePlace(
         pokemon,
         board
@@ -72,6 +73,17 @@ export default class MovingState extends PokemonState {
               }
             })
         }
+
+        // logger.debug(`pokemon ${pokemon.name} jumped from (${pokemon.positionX},${pokemon.positionY}) to (${x},${y}), (desired direction (${coordinates.x}, ${coordinates.y})), orientation: ${pokemon.orientation}`);
+        board.swapValue(pokemon.positionX, pokemon.positionY, x, y)
+        pokemon.orientation = board.orientation(
+          x,
+          y,
+          pokemon.targetX,
+          pokemon.targetY,
+          pokemon,
+          undefined
+        )
       }
     } else {
       const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
@@ -93,18 +105,19 @@ export default class MovingState extends PokemonState {
           }
         }
       })
-    }
-    if (x !== undefined && y !== undefined) {
-      pokemon.orientation = board.orientation(
-        pokemon.positionX,
-        pokemon.positionY,
-        x,
-        y,
-        pokemon,
-        undefined
-      )
-      // logger.debug(`pokemon ${pokemon.name} moved from (${pokemon.positionX},${pokemon.positionY}) to (${x},${y}), (desired direction (${coordinates.x}, ${coordinates.y})), orientation: ${pokemon.orientation}`);
-      board.swapValue(pokemon.positionX, pokemon.positionY, x, y)
+
+      if (x !== undefined && y !== undefined) {
+        pokemon.orientation = board.orientation(
+          pokemon.positionX,
+          pokemon.positionY,
+          x,
+          y,
+          pokemon,
+          undefined
+        )
+        // logger.debug(`pokemon ${pokemon.name} moved from (${pokemon.positionX},${pokemon.positionY}) to (${x},${y}), (desired direction (${coordinates.x}, ${coordinates.y})), orientation: ${pokemon.orientation}`);
+        board.swapValue(pokemon.positionX, pokemon.positionY, x, y)
+      }
     }
   }
 
