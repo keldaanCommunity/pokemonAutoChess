@@ -8,5 +8,5 @@ export const precomputedPokemons = Object.values(Pkm)
   .map((pkm) => PokemonFactory.createPokemonFromName(pkm))
   .filter(
     (pokemon) =>
-      pokemon.skill != Ability.DEFAULT || pokemon.passive !== Passive.NONE
+      pokemon.skill !== Ability.DEFAULT || pokemon.passive !== Passive.NONE
   )

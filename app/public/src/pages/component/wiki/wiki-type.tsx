@@ -35,7 +35,7 @@ export default function WikiType(props: { type: Synergy | "all" }) {
     .map((p) => PokemonFactory.createPokemonFromName(p))
     .sort((a, b) => a.stars - b.stars) // put first stage first
     .filter((a, index, list) => {
-      if (a.skill === Ability.DEFAULT) return false // pokemons with no ability are no ready for the show
+      if (a.skill === Ability.DEFAULT) return false // pokemons with no ability are not ready for the show
       if (a.rarity === Rarity.SPECIAL) return true // show all summons & specials, even in the same family
 
       // remove if already one member of family in the list
