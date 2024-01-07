@@ -6,13 +6,13 @@ import { RarityColor } from "../../../../../types/Config"
 import { getPortraitSrc } from "../../../utils"
 import { GamePokemonDetail } from "./game-pokemon-detail"
 import SynergyIcon from "../icons/synergy-icon"
+import { getGameScene } from "../../game"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Money } from "../icons/money"
 import { useAppSelector } from "../../../hooks"
 import "./game-pokemon-portrait.css"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { CountEvolutionRule } from "../../../../../core/evolution-rules"
-import store from "../../../stores"
 
 export default function GamePokemonPortrait(props: {
   index: number
@@ -24,6 +24,7 @@ export default function GamePokemonPortrait(props: {
     return <div className="game-pokemon-portrait nes-container empty" />
   } else {
     const rarityColor = RarityColor[props.pokemon.rarity]
+    const boardManager = getGameScene()?.board
     const pokemonCollection = useAppSelector(
       (state) => state.game.pokemonCollection
     )
@@ -36,16 +37,14 @@ export default function GamePokemonPortrait(props: {
       (state) => state.game.currentPlayerId
     )
     const isOnAnotherBoard = currentPlayerId !== uid
-    const state = store.getState()
-    const player = state.game.players.find((p) => p.id === uid)
 
     let count = 0
     let countEvol = 0
     let pokemonEvolution = props.pokemon.evolution
     let pokemonEvolution2 = Pkm.DEFAULT
 
-    if (player && !isOnAnotherBoard) {
-      player.board.forEach((p) => {
+    if (boardManager && !isOnAnotherBoard) {
+      boardManager.pokemons.forEach((p) => {
         if (p.index === props.pokemon!.index && p.evolution !== Pkm.DEFAULT) {
           count++
         }
