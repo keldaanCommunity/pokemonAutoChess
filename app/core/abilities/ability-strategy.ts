@@ -70,18 +70,6 @@ export class AbilityStrategy {
     if (crit) {
       pokemon.onCritical({ target, board })
     }
-
-    if (target.status.magicBounce) {
-      const damage = 40
-      pokemon.handleSpecialDamage(
-        damage,
-        board,
-        AttackType.SPECIAL,
-        target,
-        false,
-        true
-      )
-    }
   }
 }
 
