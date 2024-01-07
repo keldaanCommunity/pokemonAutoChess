@@ -10943,7 +10943,7 @@ export class Gholdengo extends Pokemon {
 }
 
 export class Sobble extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.STEEL])
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.AQUATIC])
   rarity = Rarity.ULTRA
   evolution = Pkm.DRIZZILE
   stars = 1
