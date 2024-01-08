@@ -209,9 +209,11 @@ export default class Player extends Schema implements IPlayer {
 
   updateSynergies() {
     const pokemons: Pokemon[] = values(this.board)
-    const updatedSynergies = computeSynergies(pokemons)
+    var updatedSynergies = computeSynergies(pokemons)
 
     this.updateArtificialItems(updatedSynergies)
+
+    updatedSynergies = computeSynergies(pokemons)
 
     const previousLight = this.synergies.get(Synergy.LIGHT) ?? 0
     const newLight = updatedSynergies.get(Synergy.LIGHT) ?? 0
@@ -256,10 +258,12 @@ export default class Player extends Schema implements IPlayer {
       })
       this.board.forEach((pokemon) => {
         lostArtificialItems.forEach((item) => {
-          pokemon.items.delete(item)
-          if (SynergyGivenByItem.hasOwnProperty(item)) {
-            const type = SynergyGivenByItem[item]
-            pokemon.types.delete(type)
+          if (pokemon.items.has(item)) {
+            pokemon.items.delete(item)
+            if (SynergyGivenByItem.hasOwnProperty(item)) {
+              const type = SynergyGivenByItem[item]
+              pokemon.types.delete(type)
+            }
           }
         })
       })
