@@ -1699,7 +1699,7 @@
     "CORSOLA": "$t(pkm.CORSOLA) evolves into $t(pkm.GALAR_CORSOLA) after being KO once",
     "CELEBI": "The player regains 1 HP every time $t(pkm.CELEBI) casts $t(ability.TIME_TRAVEL).",
     "GIMMIGHOUL": "$t(pkm.GIMMIGHOUL) is looking for 99 golds",
-    "GHOLDENGO": "At the start of each fight, if the player has more than 50 golds, $t(pkm.GHOLDENGO) gains RUNE_PROTECT for the entire fight"
+    "GHOLDENGO": "At the start of each fight, if the player has 50 GOLD or more, $t(pkm.GHOLDENGO) gains RUNE_PROTECT for the entire fight"
   },
   "stat": {
     "ATK": "Attack",
