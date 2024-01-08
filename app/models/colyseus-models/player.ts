@@ -209,11 +209,17 @@ export default class Player extends Schema implements IPlayer {
 
   updateSynergies() {
     const pokemons: Pokemon[] = values(this.board)
-    var updatedSynergies = computeSynergies(pokemons)
+    let updatedSynergies = computeSynergies(pokemons)
 
-    this.updateArtificialItems(updatedSynergies)
-
-    updatedSynergies = computeSynergies(pokemons)
+    const needsRecomputing = this.updateArtificialItems(updatedSynergies)
+    if (needsRecomputing) {
+      /* NOTE: computing twice is costly in performance but the safest way to get the synergies
+      right after losing an artificial item, since many edgecases may need to be adressed when 
+      losing a type (Axew double dragon + artif item for example) ; it's not as easy as just 
+      decrementing by 1 in updatedSynergies map count
+      */
+      updatedSynergies = computeSynergies(pokemons)
+    }
 
     const previousLight = this.synergies.get(Synergy.LIGHT) ?? 0
     const newLight = updatedSynergies.get(Synergy.LIGHT) ?? 0
@@ -229,7 +235,8 @@ export default class Player extends Schema implements IPlayer {
     if (lightChanged) this.onLightChange()
   }
 
-  updateArtificialItems(updatedSynergies: Map<Synergy, number>) {
+  updateArtificialItems(updatedSynergies: Map<Synergy, number>): boolean {
+    let needsRecomputingSynergiesAgain = false
     const previousNbArtifItems = SynergyTriggers[Synergy.ARTIFICIAL].filter(
       (n) => (this.synergies.get(Synergy.ARTIFICIAL) ?? 0) >= n
     ).length
@@ -263,11 +270,16 @@ export default class Player extends Schema implements IPlayer {
             if (SynergyGivenByItem.hasOwnProperty(item)) {
               const type = SynergyGivenByItem[item]
               pokemon.types.delete(type)
+              if (!pokemon.isOnBench) {
+                needsRecomputingSynergiesAgain = true
+              }
             }
           }
         })
       })
     }
+
+    return needsRecomputingSynergiesAgain
   }
 
   onLightChange() {
