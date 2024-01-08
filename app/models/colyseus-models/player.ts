@@ -256,10 +256,12 @@ export default class Player extends Schema implements IPlayer {
       })
       this.board.forEach((pokemon) => {
         lostArtificialItems.forEach((item) => {
+          if (pokemon.items.has(item)) {
           pokemon.items.delete(item)
-          if (SynergyGivenByItem.hasOwnProperty(item)) {
+            if (SynergyGivenByItem.hasOwnProperty(item)) {
             const type = SynergyGivenByItem[item]
             pokemon.types.delete(type)
+            }
           }
         })
       })
