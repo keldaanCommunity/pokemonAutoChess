@@ -217,6 +217,8 @@ export default class BattleManager {
           } else if (field == "resurecting") {
             if (pokemon.status.resurecting) {
               pkm.resurectAnimation()
+            } else {
+              pkm.animationLocked = false
             }
           } else if (field == "paralysis") {
             if (pokemon.status.paralysis) {
