@@ -1138,7 +1138,7 @@ export default class Simulation extends Schema implements ISimulation {
           break
       }
     })
-    if (pokemon.passive === Passive.GHOLDENGO) {
+    if (pokemon.passive === Passive.GHOLDENGO && pokemon.player && pokemon.player.money >= 50) {
       pokemon.status.triggerRuneProtect(60000)
     }
 
