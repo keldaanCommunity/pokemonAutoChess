@@ -8,6 +8,7 @@ import "./unown-panel.css"
 export default function UnownPanel(props: {
   setPokemon: Dispatch<SetStateAction<Pkm | undefined>>
   filter: string
+  shinyOnly: boolean
 }) {
   const pokemonCollection = useAppSelector(
     (state) => state.lobby.pokemonCollection
@@ -49,7 +50,7 @@ export default function UnownPanel(props: {
               config={unown.config}
               setPokemon={props.setPokemon}
               filter={props.filter}
-              shinyOnly={false}
+              shinyOnly={props.shinyOnly}
             />
           )
         })}

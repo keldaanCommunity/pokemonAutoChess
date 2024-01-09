@@ -115,7 +115,11 @@ export default function PokemonCollection() {
             }
           )}
           <TabPanel>
-            <UnownPanel setPokemon={setSelectedPokemon} filter={filter} />
+            <UnownPanel
+              setPokemon={setSelectedPokemon}
+              filter={filter}
+              shinyOnly={shinyOnly}
+            />
           </TabPanel>
         </Tabs>
       </div>
