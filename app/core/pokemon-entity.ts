@@ -1076,28 +1076,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  // called after every ability cast
-  onCast(board: Board, target: PokemonEntity, crit: boolean, player: Player) {
-    if (this.items.has(Item.LEPPA_BERRY)) {
-      this.eatBerry(Item.LEPPA_BERRY)
-    }
-
-    if (this.items.has(Item.COMFEY)) {
-      AbilityStrategies[Ability.FLORAL_HEALING].process(
-        this,
-        this.state,
-        board,
-        target,
-        false,
-        true
-      )
-    }
-
-    if (this.passive === Passive.CELEBI) {
-      player.life = max(100)(player.life + 1)
-    }
-  }
-
   flyAway(board: Board) {
     const flyAwayCell = board.getFlyAwayCell(this.positionX, this.positionY)
     if (flyAwayCell) {
