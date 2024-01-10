@@ -1,12 +1,14 @@
 import { Transfer } from "../../types"
+import { Ability } from "../../types/enum/Ability"
 import { Effect } from "../../types/enum/Effect"
-import { AttackType } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Synergy } from "../../types/enum/Synergy"
+import { max } from "../../utils/number"
 import Board from "../board"
 import { PokemonEntity } from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
+import { AbilityStrategies } from "./abilities"
 
 export class AbilityStrategy {
   copyable = true // if true, can be copied by mimic, metronome...
@@ -69,6 +71,25 @@ export class AbilityStrategy {
 
     if (crit) {
       pokemon.onCritical({ target, board })
+    }
+
+    if (pokemon.items.has(Item.LEPPA_BERRY)) {
+      pokemon.eatBerry(Item.LEPPA_BERRY)
+    }
+
+    if (pokemon.items.has(Item.COMFEY)) {
+      AbilityStrategies[Ability.FLORAL_HEALING].process(
+        pokemon,
+        state,
+        board,
+        target,
+        crit,
+        true
+      )
+    }
+
+    if (pokemon.passive === Passive.CELEBI && pokemon.player) {
+      pokemon.player.life = max(100)(pokemon.player.life + 1)
     }
   }
 }

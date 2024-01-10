@@ -84,7 +84,6 @@ export default class AttackingState extends PokemonState {
           target,
           crit
         )
-        pokemon.onCast(board, target, crit, player)
       } else {
         // BASIC ATTACK
         pokemon.count.attackCount++
