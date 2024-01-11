@@ -12,6 +12,8 @@
 
 # UI
 
+- Play a sound when game starts for players who tabbed out during loading
+
 # Bugfix
 
 # Misc
