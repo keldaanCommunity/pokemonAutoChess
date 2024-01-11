@@ -32,6 +32,7 @@ import { getGameContainer } from "../../pages/game"
 import { preferences } from "../../preferences"
 import { SellZone } from "../components/sell-zone"
 import { t } from "i18next"
+import { clearTitleNotificationIcon } from "../../../../utils/window"
 
 export default class GameScene extends Scene {
   tilemap: DesignTiled | undefined
@@ -170,6 +171,7 @@ export default class GameScene extends Scene {
         this.dungeonMusic ? this.dungeonMusic : Dungeon.AMP_PLAINS
       )
       ;(this.sys as any).animatedTiles.init(this.map)
+      clearTitleNotificationIcon()
     }
   }
 

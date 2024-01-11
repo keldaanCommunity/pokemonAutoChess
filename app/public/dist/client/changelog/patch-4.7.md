@@ -12,6 +12,7 @@
 
 # UI
 
+- Add color indicators from red to green for players ready state in browser tab title
 - Play a sound when game starts for players who tabbed out during loading
 
 # Bugfix
