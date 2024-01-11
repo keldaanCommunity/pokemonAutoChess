@@ -23,6 +23,7 @@ import {
 import {
   AdditionalPicksStages,
   DungeonPMDO,
+  EloRank,
   ExpPlace,
   LegendaryShop,
   PortalCarouselStages,
@@ -31,7 +32,7 @@ import {
 } from "../types/Config"
 import { Item } from "../types/enum/Item"
 import PokemonFactory from "../models/pokemon-factory"
-import EloRank from "elo-rank"
+import EloEngine from "elo-rank"
 import admin from "firebase-admin"
 import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
 import {
@@ -59,7 +60,6 @@ import { LobbyType, Rarity } from "../types/enum/Game"
 import { MiniGame } from "../core/matter/mini-game"
 import { logger } from "../utils/logger"
 import { computeElo } from "../core/elo"
-import { Passive } from "../types/enum/Passive"
 import { getAvatarString } from "../public/src/utils"
 import { keys, values } from "../utils/schemas"
 import { removeInArray } from "../utils/array"
@@ -67,7 +67,7 @@ import { CountEvolutionRule, ItemEvolutionRule } from "../core/evolution-rules"
 
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>
-  eloEngine: EloRank
+  eloEngine: EloEngine
   additionalUncommonPool: Array<Pkm>
   additionalRarePool: Array<Pkm>
   additionalEpicPool: Array<Pkm>
@@ -75,7 +75,7 @@ export default class GameRoom extends Room<GameState> {
   constructor() {
     super()
     this.dispatcher = new Dispatcher(this)
-    this.eloEngine = new EloRank()
+    this.eloEngine = new EloEngine()
     this.additionalUncommonPool = new Array<Pkm>()
     this.additionalRarePool = new Array<Pkm>()
     this.additionalEpicPool = new Array<Pkm>()
@@ -90,6 +90,7 @@ export default class GameRoom extends Room<GameState> {
     noElo: boolean
     selectedMap: DungeonPMDO | "random"
     lobbyType: LobbyType
+    minRank: EloRank | null
     whenReady: (room: GameRoom) => void
   }) {
     logger.trace("create game room")
@@ -108,7 +109,8 @@ export default class GameRoom extends Room<GameState> {
         options.name,
         options.noElo,
         options.selectedMap,
-        options.lobbyType
+        options.lobbyType,
+        options.minRank
       )
     )
     this.miniGame.create(
@@ -596,7 +598,12 @@ export default class GameRoom extends Room<GameState> {
             if (rank === 1) {
               usr.wins += 1
               if (this.state.lobbyType === LobbyType.RANKED) {
-                usr.booster += 1
+                if(this.state.minRank === EloRank.GREATBALL){
+                  usr.booster += 1
+                }
+                if(this.state.minRank === EloRank.ULTRABALL){
+                  usr.booster += 5
+                }
                 player.titles.add(Title.VANQUISHER)
                 const minElo = Math.min(
                   ...values(this.state.players).map((p) => p.elo)

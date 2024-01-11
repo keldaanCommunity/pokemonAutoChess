@@ -1045,3 +1045,6 @@ export const DTEF_HEIGHT = 192
 export const DTEF_TILESET_WIDTH = 6
 export const DTEF_TILESET_HEIGHT = 8
 export const DTEF_TILESET_TILE_WIDTH = 24
+
+export const GREATBALL_RANKED_LOBBY_CRON = "0 0 2-22/4 * * *" // every four hours from 2h to 22h
+export const ULTRABALL_RANKED_LOBBY_CRON = "0 0 21 * * 7" // on Sunday at 21h

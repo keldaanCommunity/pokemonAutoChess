@@ -15,3 +15,5 @@
 # Bugfix
 
 # Misc
+
+- Added Ultraball Ranked lobby on a weekly basis, on Sunday at 9pm UTC. 5 boosters for the winner
