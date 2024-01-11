@@ -27,11 +27,12 @@ import Player from "../../../../models/colyseus-models/player"
 import MinigameManager from "../components/minigame-manager"
 import LoadingManager from "../components/loading-manager"
 import Simulation from "../../../../core/simulation"
-import { playMusic } from "../../pages/utils/audio"
+import { SOUNDS, playMusic, playSound } from "../../pages/utils/audio"
 import { getGameContainer } from "../../pages/game"
 import { preferences } from "../../preferences"
 import { SellZone } from "../components/sell-zone"
 import { t } from "i18next"
+import { clearTitleNotificationIcon } from "../../../../utils/window"
 
 export default class GameScene extends Scene {
   tilemap: DesignTiled | undefined
@@ -164,11 +165,13 @@ export default class GameScene extends Scene {
         this.animationManager,
         this.uid
       )
+      playSound(SOUNDS.CAROUSEL_UNLOCK) // playing a preloaded sound for players who tabbed out during loading
       playMusic(
         this,
         this.dungeonMusic ? this.dungeonMusic : Dungeon.AMP_PLAINS
       )
       ;(this.sys as any).animatedTiles.init(this.map)
+      clearTitleNotificationIcon()
     }
   }
 
