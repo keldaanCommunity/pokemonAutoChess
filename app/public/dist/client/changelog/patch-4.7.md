@@ -2,6 +2,8 @@
 
 # Changes to Pokemon & Abilities
 
+- Riolu is now rare additional pick. New ability: Aura sphere: Exudes an aura and projects energy in a line, dealing 15/30 special damage and Silence every enemy hit for 3 seconds
+
 # Changes to Synergies
 
 # Changes to Items
