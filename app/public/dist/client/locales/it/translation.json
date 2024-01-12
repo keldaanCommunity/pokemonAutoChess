@@ -821,7 +821,7 @@
     "KNOWLEDGE_THIEF": "Lancia il massimo del bersaglio",
     "KING_SHIELD": "PROTECT l'utilizzatore per 1.5 secondi, garantisce [10,20,30,SP] SHIELD e scambia la sua posizione con il nemico più lontano",
     "EXPLOSION": "Infligge [50.100.200 SP] SPECIAL a tutti i nemici adiacenti. Danneggia anche l'utente.",
-    "NIGHTMARE": "POISONNED l'intera squadra nemica per [2,4,8,SP=0.5] secondi. Qualsiasi avversario SLEEP o FLINCH prende [50,SP] SPECIAL.",
+    "NIGHTMARE": "SILENCE l'intera squadra nemica per [1.5,3,8,SP=0.5] secondi. Qualsiasi avversario SLEEP o FLINCH o SILENCE prende [50,SP] SPECIAL.",
     "CLANGOROUS_SOUL": "Buffa gli alleati adiacenti con [2,4,8] ATK e [1,2,4] DEF / SPE_DEF",
     "BONEMERANG": "Lancia un osso boomerang attraverso la squadra nemica, infliggendo [30,60,120,SP] SPECIAL lungo la strada",
     "GROWL": "Applica lo stato FLINCH all'intera squadra nemica per [3,6,9,SP] secondi",

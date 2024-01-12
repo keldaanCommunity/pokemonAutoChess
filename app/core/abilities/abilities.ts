@@ -2022,13 +2022,12 @@ export class NightmareStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     let duration =
-      pokemon.stars === 3 ? 8000 : pokemon.stars === 2 ? 4000 : 2000
+      pokemon.stars === 3 ? 8000 : pokemon.stars === 2 ? 3000 : 1500
     duration = Math.round(duration * (1 + pokemon.ap / 200))
 
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
       if (enemy && pokemon.team != enemy.team) {
-        enemy.status.triggerPoison(duration, enemy, pokemon)
-        if (enemy.status.flinch || enemy.status.sleep) {
+        if (enemy.status.flinch || enemy.status.sleep || enemy.status.silence) {
           enemy.handleSpecialDamage(
             50,
             board,
@@ -2038,6 +2037,7 @@ export class NightmareStrategy extends AbilityStrategy {
             true
           )
         }
+        enemy.status.triggerSilence(duration, pokemon)
       }
     })
   }
