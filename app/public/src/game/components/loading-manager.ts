@@ -830,6 +830,11 @@ export function loadAttacksMultiAtlas(scene: Phaser.Scene) {
     "/assets/attacks/CRUSH_GRIP.json",
     "/assets/attacks"
   )
+  scene.load.multiatlas(
+    "AURASPHERE",
+    "/assets/attacks/AURASPHERE.json",
+    "/assets/attacks"
+  )
 }
 
 export function loadEnvironmentMultiAtlas(scene: Phaser.Scene) {

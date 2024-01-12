@@ -42,7 +42,6 @@
     "BURN": "Bruciare",
     "POISON": "Veleno",
     "SLEEP": "Sonno",
-    "SILENCE": "Silenzio",
     "PROTECT": "Proteggere",
     "BLIZZARD": "Blizzard",
     "CONFUSION": "Confusione",
@@ -219,7 +218,8 @@
     "PYRO_BALL": "Palla pirotecnica",
     "WHIRLPOOL": "Idromassaggio",
     "SMOKE_SCREEN": "Cortina fumogena",
-    "PRESENT": "Presente"
+    "PRESENT": "Presente",
+    "AURASPHERE": "Sferapulsar"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -839,7 +839,6 @@
     "BURN": "BURN l'intera squadra nemica per [5,10,20] secondi",
     "POISON": "Applica POISONNED a [1,2,3] avversari più vicini per [3,6,9,SP=0.5] secondi",
     "SLEEP": "Addormenta [1,2,3] Pokémon nemici nelle retrovie per [2,SP] secondi",
-    "SILENCE": "SILENCE l'intera squadra nemica per [2,4,8] secondi",
     "PROTECT": "PROTECT l'utente, diventando invulnerabile per [5,SP=0.5] secondi.",
     "BLIZZARD": "FREEZE tutti i Pokémon nemici per [1,2,3] secondi e infliggi [5,10,15,SP] SPECIAL. Doppio danno se il nemico è già FREEZE",
     "CONFUSION": "Crea CONFUSION del bersaglio per [3,5,7] secondi. Se il bersaglio è già CONFUSION, infligge invece [75.150.300 SP] SPECIAL",
@@ -1015,7 +1014,8 @@
     "PYRO_BALL": "L'utilizzatore attacca accendendo una piccola pietra e lanciandola come una palla infuocata contro il bersaglio più lontano, infliggendo [10,20,40,SP] SPECIAL e BRUCIA per 2 secondi tutto ciò che incontra sulla sua strada",
     "WHIRLPOOL": "Punta sul nemico più lontano e scatena una grandinata di 4 vortici verso di lui. Ciascuno infligge il [125,SP]% ATK FISICO al primo nemico colpito",
     "SMOKE_SCREEN": "Canalizza sottoterra e riappare al centro della squadra nemica, infliggendo [10,20,40,SP] SPECIAL, BURN e ARMOR_REDUCTION a tutte le unità adiacenti per 2 secondi",
-    "PRESENT": "Infligge [80,SP], [150,SP], [300,SP] SPECIAL o cura 80 HP del bersaglio"
+    "PRESENT": "Infligge [80,SP], [150,SP], [300,SP] SPECIAL o cura 80 HP del bersaglio",
+    "AURASPHERE": "Emana un'aura e proietta energia in linea, infliggendo [25,50,SP] SPECIAL e SILENCE a ogni avversario colpito per 3 secondi."
   },
   "effect": {
     "INGRAIN": "Ingranato",

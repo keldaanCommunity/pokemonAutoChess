@@ -43,7 +43,6 @@
     "BURN": "Burn",
     "POISON": "Poison",
     "SLEEP": "Sleep",
-    "SILENCE": "Silence",
     "PROTECT": "Protect",
     "BLIZZARD": "Blizzard",
     "CONFUSION": "Confusion",
@@ -277,7 +276,8 @@
     "POLTERGEIST": "Poltergeist",
     "GOLD_RUSH": "Gold Rush",
     "MAKE_IT_RAIN": "Make it Rain",
-    "CRUSH_GRIP": "Crush Grip"
+    "CRUSH_GRIP": "Crush Grip",
+    "AURASPHERE": "Aura Sphere"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -982,7 +982,6 @@
     "BURN": "BURN all enemy Pokémon for [5,10,20] seconds",
     "POISON": "Apply POISONNED to the [1,2,3] closest enemy Pokémon for [3,6,9,SP=0.5] seconds",
     "SLEEP": "Make [1,2,3] enemy Pokémon in the backline SLEEP for [2,SP] seconds",
-    "SILENCE": "SILENCE all enemy Pokémon for [2,4,8] seconds",
     "PROTECT": "PROTECT the user, becoming invulnerable for [5,SP=0.5] seconds",
     "BLIZZARD": "FREEZE all enemy Pokémon for [1,2,3] seconds and deal [5,10,15,SP] SPECIAL. Double damage if enemy is already FREEZE",
     "CONFUSION": "CONFUSION the target for [3,5,7] seconds. If the target is already CONFUSION, deal [75,150,300,SP] SPECIAL instead",
@@ -1216,7 +1215,8 @@
     "POLTERGEIST": "Deals [30,60,120,SP] SPECIAL + [20,SP] SPECIAL ([40,SP] if item is ARTIFICIAL) for each item held by the target.",
     "GOLD_RUSH": "Deals  [20,SP] + your amount of golds as SPECIAL, then earn 2 golds",
     "MAKE_IT_RAIN": "Deals [100,SP] + your amount of golds as SPECIAL",
-    "CRUSH_GRIP": "The target is crushed with great force. The more HP the target has left, the greater the damage: between [20,SP] and [200,SP] PHYSICAL."
+    "CRUSH_GRIP": "The target is crushed with great force. The more HP the target has left, the greater the damage: between [20,SP] and [200,SP] PHYSICAL.",
+    "AURASPHERE": "Exudes an aura and projects energy in a line, dealing [25,50,SP] SPECIAL and SILENCE every opponent hit for 3 seconds"
   },
   "effect": {
     "INGRAIN": "Ingrain",

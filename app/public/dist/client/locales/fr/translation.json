@@ -43,7 +43,6 @@
     "BURN": "Brûlure",
     "POISON": "Empoisonnement",
     "SLEEP": "Sommeil",
-    "SILENCE": "Silence",
     "PROTECT": "Abri",
     "BLIZZARD": "Blizzard",
     "CONFUSION": "Confusion",
@@ -267,7 +266,8 @@
     "MAGIC_POWDER": "Poudre Magique",
     "RETALIATE": "Vengeance",
     "SLASH": "Tranche",
-    "OUTRAGE": "Colère"
+    "OUTRAGE": "Colère",
+    "AURASPHERE": "Aurasphère"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -962,7 +962,6 @@
     "BURN": "Inflige BURN à toute l'équipe ennemie pendant [5,10,20] secondes",
     "POISON": "Inflige POISONNED aux [1,2,3] adversaires les plus proches pendant [3,6,9,SP=0.5] secondes",
     "SLEEP": "Faites dormir [1,2,3] Pokémon ennemis dans la ligne de fond pendant [2,SP] secondes",
-    "SILENCE": "SILENCE toute l'équipe ennemie pendant [2,4,8] secondes",
     "PROTECT": "PROTECT l'utilisateur, devenant invulnérable pendant [5,SP=0.5] secondes.",
     "BLIZZARD": "Inflige [5,10,15,SP] SPECIAL et FREEZE pendant [1,2,3] secondes à tous les Pokémon ennemis. Double dégâts si l'ennemi est déjà FREEZE",
     "CONFUSION": "Rend la cible CONFUSION pendant [3,5,7] secondes. Si la cible a déjà CONFUSION, inflige [75,150,300,SP] SPECIAL à la place",
@@ -1186,7 +1185,8 @@
     "INFERNAL_PARADE": "Envoie une Roue de Feu en boomerang, ayant 50% de chance de BURN pendant 3 secondes et infligeant 2 fois [30,SP] SPECIAL à tous les pokémons adverses touchés.",
     "RETALIATE": "Inflige [15,30,60,SP] SPECIAL à la cible + [10,15,25,SP] SPECIAL additionels par allié KO",
     "SLASH": "Inflige [10,20,40,SP] SPECIAL avec [30,60,90]% de CRIT_CHANCE augmentée",
-    "OUTRAGE": "Le pokémon est CONFUSION pendant 2 secondes et inflige [2,3,4,SP]x ATK en SPECIAL à la cible et aux ennemis adjacents"
+    "OUTRAGE": "Le pokémon est CONFUSION pendant 2 secondes et inflige [2,3,4,SP]x ATK en SPECIAL à la cible et aux ennemis adjacents",
+    "AURASPHERE": "Dégage une aura et projette de l'énergie en ligne droite, infligeant [25,50,SP] SPECIAL et SILENCE pendant 3 secondes aux adversaires touchés"
   },
   "effect": {
     "INGRAIN": "Enraciné",

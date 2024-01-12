@@ -42,7 +42,6 @@
     "BURN": "Brennen",
     "POISON": "Gift",
     "SLEEP": "Schlafen",
-    "SILENCE": "Schweigen",
     "PROTECT": "Schützen",
     "BLIZZARD": "Blizzard",
     "CONFUSION": "Verwirrtheit",
@@ -218,7 +217,8 @@
     "PYRO_BALL": "Pyroball",
     "WHIRLPOOL": "Whirlpool",
     "SMOKE_SCREEN": "Nebelwand",
-    "PRESENT": "Gegenwärtig"
+    "PRESENT": "Gegenwärtig",
+    "AURASPHERE": "Aurasphäre"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -838,7 +838,6 @@
     "BURN": "BURN Sie das gesamte gegnerische Team für [5,10,20] Sekunden",
     "POISON": "Wende Gift auf [1,2,3] nächste Gegner für [3,6,9,SP=0,5] Sekunden an",
     "SLEEP": "Lass [1,2,3] gegnerische Pokémon in der Backline [2,SP] Sekunden lang SLEEP",
-    "SILENCE": "Bringen Sie das gesamte gegnerische Team für [2,4,8] Sekunden zum Schweigen",
     "PROTECT": "PROTECT Sie den Benutzer und machen Sie ihn für [5,SP=0,5] Sekunden unverwundbar.",
     "BLIZZARD": "FREEZE alle gegnerischen Pokémon [1,2,3] Sekunden lang ein und verursache [5,10,15,SP] SPECIAL. Doppelter Schaden, wenn der Feind bereits eingefroren ist",
     "CONFUSION": "Verwirrt das Ziel für [3,5,7] Sekunden. Wenn das Ziel bereits CONFUSION ist, wird stattdessen [75.150.300,SP] SPECIAL zugewiesen",
@@ -1014,7 +1013,8 @@
     "PYRO_BALL": "Der Benutzer greift an, indem er einen kleinen Stein entzündet und ihn als feurige Kugel auf das am weitesten entfernte Ziel schleudert, wodurch er alles, was ihm in den Weg kommt, [10,20,40,SP] SPECIAL und BURN für 2 Sekunden zufügt",
     "WHIRLPOOL": "Erfassen Sie den am weitesten entfernten Feind und entfesseln Sie einen Hagel von 4 Strudeln auf ihn. Jeder Angriff fügt dem ersten getroffenen Gegner [125,SP]% ATK PHYSICAL zu",
     "SMOKE_SCREEN": "Kanalisiert den Untergrund und erscheint wieder in der Mitte des gegnerischen Teams, was allen benachbarten Einheiten 2 Sekunden lang [10,20,40,SP] SPECIAL, BURN und ARMOR_REDUCTION zufügt",
-    "PRESENT": "Verursacht entweder [80,SP], [150,SP], [300,SP] SPECIAL oder heilt 80 HP des Ziels"
+    "PRESENT": "Verursacht entweder [80,SP], [150,SP], [300,SP] SPECIAL oder heilt 80 HP des Ziels",
+    "AURASPHERE": "Verströmt eine Aura und projiziert Energie in einer Linie, die jedem getroffenen Gegner 3 Sekunden lang [25,50,SP] SPECIAL und SILENCE zufügt"
   },
   "effect": {
     "INGRAIN": "Ingrain",

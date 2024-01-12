@@ -295,7 +295,7 @@ export class Riolu extends Pokemon {
   speDef = 2
   maxPP = 80
   range = 2
-  skill = Ability.SILENCE
+  skill = Ability.AURASPHERE
   attackSprite = AttackSprite.FIGHTING_RANGE
   additional = true
 }
@@ -310,7 +310,7 @@ export class Lucario extends Pokemon {
   speDef = 4
   maxPP = 80
   range = 2
-  skill = Ability.SILENCE
+  skill = Ability.AURASPHERE
   attackSprite = AttackSprite.FIGHTING_RANGE
   additional = true
 }

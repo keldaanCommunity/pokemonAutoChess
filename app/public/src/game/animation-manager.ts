@@ -1993,6 +1993,17 @@ export default class AnimationManager {
       duration: 1000,
       repeat: 0
     })
+
+    this.game.anims.create({
+      key: "AURASPHERE",
+      frames: this.game.anims.generateFrameNames("AURASPHERE", {
+        start: 0,
+        end: 11,
+        zeroPad: 3
+      }),
+      duration: 600,
+      repeat: -1
+    })
   }
 
   createZoneEffectsAnimations() {

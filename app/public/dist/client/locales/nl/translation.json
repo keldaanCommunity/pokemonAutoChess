@@ -42,7 +42,6 @@
     "BURN": "Burn",
     "POISON": "Poison",
     "SLEEP": "Sleep",
-    "SILENCE": "Silence",
     "PROTECT": "Protect",
     "BLIZZARD": "Blizzard",
     "CONFUSION": "Confusion",
@@ -839,7 +838,6 @@
     "BURN": "Pas de BURN status toe op alle vijandelijke Pokémon voor [5,10,20] seconden",
     "POISON": "Pas de POISONNED status toe op de [1,2,3] dichtstbijzijnde vijandelijke Pokémon voor [3,6,9,SP=0,5] seconden",
     "SLEEP": "Maak [1,2,3] vijandige Pokémon in de backline SLAAP gedurende [2,SP] seconden",
-    "SILENCE": "Pas de SILENCE status toe op alle vijandelijke Pokémon voor [2,4,8] seconden",
     "PROTECT": "PROTECT de gebruiker en word [5,SP=0,5] seconden onkwetsbaar",
     "BLIZZARD": "FREEZE alle vijandelijke Pokémon gedurende [1,2,3] seconden en deel [5,10,15,SP] SPECIAL. Dubbele schade als de vijand al FREEZE is",
     "CONFUSION": "Pas de CONFUSION status toe aan het doelwit voor [3,5,7] seconden. Als de status al aanwezig is, richt in plaats daarvan [75,150,300,SP] SPECIAL aan",
@@ -1015,7 +1013,8 @@
     "PYRO_BALL": "De gebruiker valt aan door een kleine steen aan te steken en deze als een vurige bal naar het verste doelwit te lanceren, waarbij hij [10,20,40,SP] SPECIAL uitdeelt en 2 seconden lang alles onderweg verbrandt",
     "WHIRLPOOL": "Richt je op de verste vijand en laat een hagel van 4 draaikolken op hen los. Elk deelt [125,SP]% ATK PHYSICAL uit aan de eerste vijandelijke treffer",
     "SMOKE_SCREEN": "Kanaal ondergronds en verschijnt opnieuw in het midden van het vijandelijke team, waarbij [10,20,40,SP] SPECIAL, BURN en ARMOR_REDUCTION alle aangrenzende eenheden gedurende 2 seconden worden uitgedeeld",
-    "PRESENT": "Deelt [80,SP], [150,SP], [300,SP] SPECIAL uit, of geneest 80 HP van het doelwit"
+    "PRESENT": "Deelt [80,SP], [150,SP], [300,SP] SPECIAL uit, of geneest 80 HP van het doelwit",
+    "AURASPHERE": "Straalt een aura uit en projecteert energie in een lijn die [25,50,SP] SPECIAL en SILENCE uitdeelt aan elke getroffen tegenstander gedurende 3 seconden."
   },
   "effect": {
     "INGRAIN": "ingeburgerd",
