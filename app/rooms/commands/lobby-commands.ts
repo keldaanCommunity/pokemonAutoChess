@@ -1073,5 +1073,7 @@ export class OpenRankedLobbyCommand extends Command<
       roomName,
       autoStartDelayInSeconds: 15 * 60
     })
+
+    this.state.getNextSpecialLobbyDate()
   }
 }

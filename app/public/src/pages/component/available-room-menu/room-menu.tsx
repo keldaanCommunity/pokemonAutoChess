@@ -24,6 +24,7 @@ import { useTranslation } from "react-i18next"
 import { localStore, LocalStoreKeys } from "../../utils/store"
 import { LobbyType } from "../../../../../types/enum/Game"
 import "./room-menu.css"
+import { SpecialLobbyCountdown } from "./special-lobby-countdown"
 
 export default function RoomMenu(props: {
   toPreparation: boolean
@@ -169,6 +170,7 @@ export default function RoomMenu(props: {
       <TabPanel>
         {user ? (
           <>
+            <SpecialLobbyCountdown />
             {preparationRooms.length === 0 && (
               <p className="subtitle">
                 {isFreshNewUser ? t("join_a_lobby") : t("click_on_create_room")}

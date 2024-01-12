@@ -12,6 +12,8 @@
 
 # UI
 
+- Next ranked lobby is now shown with a countdown in lobby room menu. Removed ranked lobbies chat announcements.
+
 # Bugfix
 
 # Misc

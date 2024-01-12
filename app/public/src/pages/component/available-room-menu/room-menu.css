@@ -27,6 +27,26 @@
   margin: 0 auto;
 }
 
+.room-menu .rank.icon {
+  width: 50px;
+}
+
+.special-lobby-announcement {
+  background: #40404080;
+  padding: 0.4em 0.5em;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5em;
+  margin: 0;
+  width: 100%;
+}
+
+.special-lobby-announcement span:last-child {
+  flex: 0 0 6ch;
+}
+
 @media (max-width: 640px) {
   .room-menu .subtitle {
     font-size: 3vw;

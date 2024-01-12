@@ -39,7 +39,9 @@ import {
   setLeaderboard,
   pushBotLog,
   setLanguage,
-  leaveLobby
+  leaveLobby,
+  setNextSpecialLobbyDate,
+  setNextSpecialLobbyType
 } from "../stores/LobbyStore"
 import {
   ICustomLobbyState,
@@ -259,6 +261,14 @@ export async function joinLobbyRoom(
               })
             })
           })
+
+          room.state.listen("nextSpecialLobbyDate", (date) => {
+            dispatch(setNextSpecialLobbyDate(date))
+          });
+
+          room.state.listen("nextSpecialLobbyType", (type) => {
+            dispatch(setNextSpecialLobbyType(type))
+          });
 
           room.state.users.onRemove((u) => {
             dispatch(removeUser(u.id))

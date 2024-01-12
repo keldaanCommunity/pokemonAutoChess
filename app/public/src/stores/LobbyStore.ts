@@ -19,6 +19,7 @@ import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
 import { playSound, SOUNDS } from "../pages/utils/audio"
 import { Language } from "../../../types/enum/Language"
 import { MAX_BOTS_STAGE } from "../pages/component/bot-builder/bot-logic"
+import { SpecialLobbyType } from "../../../types/enum/Game"
 
 export interface IUserLobbyState {
   botLogDatabase: string[]
@@ -39,6 +40,8 @@ export interface IUserLobbyState {
   boosterContent: string[]
   suggestions: ISuggestionUser[]
   language: Language
+  nextSpecialLobbyDate: number
+  nextSpecialLobbyType: SpecialLobbyType | ""
 }
 
 const initialState: IUserLobbyState = {
@@ -69,7 +72,9 @@ const initialState: IUserLobbyState = {
     elo: 1200,
     name: "ditto",
     id: ""
-  }
+  },
+  nextSpecialLobbyDate: 0,
+  nextSpecialLobbyType: ""
 }
 
 export const lobbySlice = createSlice({
@@ -198,7 +203,13 @@ export const lobbySlice = createSlice({
     setLanguage: (state, action: PayloadAction<Language>) => {
       state.language = action.payload
     },
-    leaveLobby: () => initialState
+    leaveLobby: () => initialState,
+    setNextSpecialLobbyDate: (state, action: PayloadAction<number>) => {
+      state.nextSpecialLobbyDate = action.payload
+    },
+    setNextSpecialLobbyType: (state, action: PayloadAction<string>) => {
+      state.nextSpecialLobbyType = action.payload as SpecialLobbyType
+    }
   }
 })
 
@@ -225,7 +236,9 @@ export const {
   setBotData,
   leaveLobby,
   setSuggestions,
-  pushBotLog
+  pushBotLog,
+  setNextSpecialLobbyDate,
+  setNextSpecialLobbyType
 } = lobbySlice.actions
 
 export default lobbySlice.reducer
