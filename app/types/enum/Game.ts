@@ -16,6 +16,8 @@ export enum LobbyType {
   RANKED = "RANKED"
 }
 
+export type SpecialLobbyType = "GREATBALL_RANKED" | "ULTRABALL_RANKED"
+
 export enum GamePhaseState {
   PICK,
   FIGHT,

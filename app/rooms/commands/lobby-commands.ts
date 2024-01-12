@@ -1059,10 +1059,13 @@ export class OpenRankedLobbyCommand extends Command<
   execute({ minRank }: { minRank: EloRank }) {
     logger.info("Creating Ranked Lobby " + minRank)
     let roomName = "Ranked Match"
-    if(minRank === EloRank.GREATBALL){
+    if (minRank === EloRank.GREATBALL) {
       roomName = "Great Ball Ranked Match"
     }
-    
+    if (minRank === EloRank.ULTRABALL) {
+      roomName = "Ultra Ball Ranked Match"
+    }
+
     matchMaker.createRoom("preparation", {
       lobbyType: LobbyType.RANKED,
       minRank,
@@ -1070,5 +1073,7 @@ export class OpenRankedLobbyCommand extends Command<
       roomName,
       autoStartDelayInSeconds: 15 * 60
     })
+
+    this.state.getNextSpecialLobbyDate()
   }
 }

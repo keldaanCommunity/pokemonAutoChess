@@ -50,7 +50,7 @@ import {
 } from "./commands/lobby-commands"
 import { Language } from "../types/enum/Language"
 import { CronJob } from "cron"
-import { EloRank } from "../types/Config"
+import { EloRank, GREATBALL_RANKED_LOBBY_CRON, ULTRABALL_RANKED_LOBBY_CRON } from "../types/Config"
 
 export default class CustomLobbyRoom extends Room<LobbyState> {
   discordWebhook: WebhookClient | undefined
@@ -100,6 +100,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
   async onCreate(): Promise<void> {
     logger.info("create lobby", this.roomId)
     this.setState(new LobbyState())
+    this.state.getNextSpecialLobbyDate()
     this.autoDispose = false
     this.listing.unlisted = true
 
@@ -511,8 +512,8 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       start: true
     })
 
-    const rankedLobbyJob = CronJob.from({
-      cronTime: "0 0 2-22/4 * * *", // every four hours from 2 to 22
+    const greatBallRankedLobbyJob = CronJob.from({
+      cronTime: GREATBALL_RANKED_LOBBY_CRON,
       //cronTime: "0 0/1 * * * *", // DEBUG: trigger every minute
       timeZone: "Europe/Paris",
       onTick: () => {
@@ -523,12 +524,14 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       start: true
     })
 
-    const rankedLobbyReminderJob = CronJob.from({
-      cronTime: "0 0 1-21/4 * * *", // every four hours from 1 to 21
+    const ultratBallRankedLobbyJob = CronJob.from({
+      cronTime: ULTRABALL_RANKED_LOBBY_CRON,
       //cronTime: "0 0/1 * * * *", // DEBUG: trigger every minute
       timeZone: "Europe/Paris",
       onTick: () => {
-        this.state.addAnnouncement(`Ranked match is starting in 1 hour !`)
+        this.dispatcher.dispatch(new OpenRankedLobbyCommand(), {
+          minRank: EloRank.ULTRABALL
+        })
       },
       start: true
     })

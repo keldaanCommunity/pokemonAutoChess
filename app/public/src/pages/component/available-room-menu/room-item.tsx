@@ -3,7 +3,10 @@ import React from "react"
 import { IPreparationMetadata } from "../../../../../types"
 import { cc } from "../../utils/jsx"
 import "./room-item.css"
-import { EloRankThreshold, MAX_PLAYERS_PER_LOBBY } from "../../../../../types/Config"
+import {
+  EloRankThreshold,
+  MAX_PLAYERS_PER_LOBBY
+} from "../../../../../types/Config"
 import { useTranslation } from "react-i18next"
 import { useAppSelector } from "../../../hooks"
 
@@ -14,15 +17,19 @@ export default function RoomItem(props: {
   const { t } = useTranslation()
   const user = useAppSelector((state) => state.lobby.user)
 
-  let canJoin = true, disabledReason = null
-  if(props.room.clients >= MAX_PLAYERS_PER_LOBBY){
-    canJoin = false;
+  let canJoin = true,
+    disabledReason: string | null = null
+  if (props.room.clients >= MAX_PLAYERS_PER_LOBBY) {
+    canJoin = false
     disabledReason = t("lobby_full")
-  } else if(props.room.metadata?.gameStarted === true){
-    canJoin = false;
+  } else if (props.room.metadata?.gameStarted === true) {
+    canJoin = false
     disabledReason = t("game_already_started")
-  } else if(props.room.metadata?.minRank != null && (user?.elo ?? 0) < EloRankThreshold[props.room.metadata?.minRank]){
-    canJoin = false;
+  } else if (
+    props.room.metadata?.minRank != null &&
+    (user?.elo ?? 0) < EloRankThreshold[props.room.metadata?.minRank]
+  ) {
+    canJoin = false
     disabledReason = t("min_rank_not_reached")
   }
 
@@ -49,7 +56,11 @@ export default function RoomItem(props: {
       {props.room.metadata?.minRank && (
         <img
           alt={t("minimum_rank")}
-          title={t("minimum_rank")+": "+t("elorank."+props.room.metadata?.minRank)}
+          title={
+            t("minimum_rank") +
+            ": " +
+            t("elorank." + props.room.metadata?.minRank)
+          }
           className="rank icon"
           src={"/assets/ranks/" + props.room.metadata?.minRank + ".svg"}
         />
@@ -58,7 +69,7 @@ export default function RoomItem(props: {
         {props.room.clients}/{MAX_PLAYERS_PER_LOBBY}
       </span>
       <button
-        title={disabledReason}
+        title={disabledReason ?? t("join")}
         disabled={!canJoin}
         className={cc(
           "bubbly",

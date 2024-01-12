@@ -2,7 +2,8 @@ import {
   ArraySchema,
   MapSchema,
   SetSchema,
-  CollectionSchema
+  CollectionSchema,
+  Schema
 } from "@colyseus/schema"
 import Board from "../core/board"
 import Dps from "../core/dps"
@@ -21,6 +22,7 @@ import {
   Orientation,
   PokemonActionState,
   Rarity,
+  SpecialLobbyType,
   Stat
 } from "./enum/Game"
 import { Emotion } from "./enum/Emotion"
@@ -229,15 +231,17 @@ export interface IDragDropCombineMessage {
   itemB: Item
 }
 
-export interface ICustomLobbyState {
+export interface ICustomLobbyState extends Schema {
   messages: ArraySchema<Message>
   users: MapSchema<LobbyUser>
   leaderboard: ILeaderboardInfo[]
   botLeaderboard: ILeaderboardInfo[]
   levelLeaderboard: ILeaderboardInfo[]
+  nextSpecialLobbyDate: number
+  nextSpecialLobbyType: SpecialLobbyType | ""
 }
 
-export interface IGameState {
+export interface IGameState extends Schema {
   afterGameId: string
   roundTime: number
   phase: string
