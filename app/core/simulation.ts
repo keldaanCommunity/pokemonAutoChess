@@ -273,15 +273,31 @@ export default class Simulation extends Schema implements ISimulation {
     )
 
     if (team == Team.BLUE_TEAM) {
-      const dps = new Dps(pokemonEntity.id, getPath(pokemonEntity))
-      const dpsHeal = new DpsHeal(pokemonEntity.id, getPath(pokemonEntity))
+      const dps = new Dps(
+        pokemonEntity.id,
+        getPath(pokemonEntity),
+        pokemonEntity.name
+      )
+      const dpsHeal = new DpsHeal(
+        pokemonEntity.id,
+        getPath(pokemonEntity),
+        pokemonEntity.name
+      )
       this.blueTeam.set(pokemonEntity.id, pokemonEntity)
       this.blueDpsMeter.set(pokemonEntity.id, dps)
       this.blueHealDpsMeter.set(pokemonEntity.id, dpsHeal)
     }
     if (team == Team.RED_TEAM) {
-      const dps = new Dps(pokemonEntity.id, getPath(pokemonEntity))
-      const dpsHeal = new DpsHeal(pokemonEntity.id, getPath(pokemonEntity))
+      const dps = new Dps(
+        pokemonEntity.id,
+        getPath(pokemonEntity),
+        pokemonEntity.name
+      )
+      const dpsHeal = new DpsHeal(
+        pokemonEntity.id,
+        getPath(pokemonEntity),
+        pokemonEntity.name
+      )
       this.redTeam.set(pokemonEntity.id, pokemonEntity)
       this.redDpsMeter.set(pokemonEntity.id, dps)
       this.redHealDpsMeter.set(pokemonEntity.id, dpsHeal)
@@ -1138,7 +1154,11 @@ export default class Simulation extends Schema implements ISimulation {
           break
       }
     })
-    if (pokemon.passive === Passive.GHOLDENGO && pokemon.player && pokemon.player.money >= 50) {
+    if (
+      pokemon.passive === Passive.GHOLDENGO &&
+      pokemon.player &&
+      pokemon.player.money >= 50
+    ) {
       pokemon.status.triggerRuneProtect(60000)
     }
 

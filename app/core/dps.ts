@@ -1,5 +1,6 @@
 import { Schema, type } from "@colyseus/schema"
 import { IDps } from "../types"
+import { Pkm } from "../types/enum/Pokemon"
 
 export default class Dps extends Schema implements IDps {
   @type("string") id: string
@@ -7,11 +8,13 @@ export default class Dps extends Schema implements IDps {
   @type("uint16") physicalDamage = 0
   @type("uint16") specialDamage = 0
   @type("uint16") trueDamage = 0
+  pkm: Pkm
 
-  constructor(id: string, name: string) {
+  constructor(id: string, name: string, pkm: Pkm) {
     super()
     this.id = id
     this.name = name
+    this.pkm = pkm
   }
 
   changeDamage(

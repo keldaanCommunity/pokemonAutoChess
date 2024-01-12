@@ -1039,6 +1039,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     this.checkDeath()
     this.computeIncome()
     this.state.simulations.forEach((simulation) => {
+      this.room.collector.collect(simulation)
       simulation.stop()
     })
 

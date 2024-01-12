@@ -59,11 +59,11 @@ import { LobbyType, Rarity } from "../types/enum/Game"
 import { MiniGame } from "../core/matter/mini-game"
 import { logger } from "../utils/logger"
 import { computeElo } from "../core/elo"
-import { Passive } from "../types/enum/Passive"
 import { getAvatarString } from "../public/src/utils"
 import { keys, values } from "../utils/schemas"
 import { removeInArray } from "../utils/array"
 import { CountEvolutionRule, ItemEvolutionRule } from "../core/evolution-rules"
+import { Collector } from "../core/collector"
 
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>
@@ -72,6 +72,8 @@ export default class GameRoom extends Room<GameState> {
   additionalRarePool: Array<Pkm>
   additionalEpicPool: Array<Pkm>
   miniGame: MiniGame
+  collector: Collector
+
   constructor() {
     super()
     this.dispatcher = new Dispatcher(this)
@@ -80,6 +82,7 @@ export default class GameRoom extends Room<GameState> {
     this.additionalRarePool = new Array<Pkm>()
     this.additionalEpicPool = new Array<Pkm>()
     this.miniGame = new MiniGame()
+    this.collector = new Collector()
   }
 
   // When room is initialized
@@ -513,6 +516,11 @@ export default class GameRoom extends Room<GameState> {
       logger.warn(
         `Game room has been disposed while they were still ${numberOfPlayersAlive} players alive.`
       )
+      try {
+        await this.collector.save()
+      } catch (error) {
+        logger.error(error)
+      }
       return // we skip elo compute/game history in case of technical issue such as a crash of node
     }
 
