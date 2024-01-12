@@ -492,11 +492,11 @@ export class MegaLopunny extends Pokemon {
 }
 
 export class Onix extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.GROUND, Synergy.STEEL])
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.GROUND])
   rarity = Rarity.ULTRA
   stars = 1
   evolution = Pkm.STEELIX
-  hp = 150
+  hp = 200
   atk = 9
   def = 10
   speDef = 5
