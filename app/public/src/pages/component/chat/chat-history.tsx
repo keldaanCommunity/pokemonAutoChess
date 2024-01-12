@@ -2,8 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react"
 import { useAppSelector } from "../../../hooks"
 import ChatMessage from "./chat-message"
 import { IChatV2 } from "../../../../../types"
-
-const docTitle = document.title
+import { clearTitleNotificationIcon, setTitleNotificationIcon } from "../../../../../utils/window"
 
 export default function ChatHistory(props: { source: string }) {
   const messages: IChatV2[] = useAppSelector(
@@ -23,7 +22,7 @@ export default function ChatHistory(props: { source: string }) {
       setReadMessages(messages)
 
       if (!document.hasFocus()) {
-        updateDocTitle("🔴")
+        setTitleNotificationIcon("💬")
       }
     }
   }, [messages, readMessages.length])
@@ -31,7 +30,7 @@ export default function ChatHistory(props: { source: string }) {
   useEffect(() => {
     const clearTitle = () => {
       if (messages.length === readMessages.length) {
-        document.title = docTitle
+        clearTitleNotificationIcon()
       }
     }
 
@@ -70,8 +69,3 @@ export default function ChatHistory(props: { source: string }) {
   )
 }
 
-function updateDocTitle(message: string) {
-  if (!document.title.includes(message)) {
-    document.title = `${message} ${docTitle}`
-  }
-}

@@ -13,6 +13,8 @@
 # UI
 
 - Next ranked lobby is now shown with a countdown in lobby room menu. Removed ranked lobbies chat announcements.
+- Add color indicators from red to green for players ready state in browser tab title
+- Play a sound when game starts for players who tabbed out during loading
 
 # Bugfix
 

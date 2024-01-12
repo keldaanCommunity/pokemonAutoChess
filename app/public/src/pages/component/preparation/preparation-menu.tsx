@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import React, { useEffect, useState } from "react"
 import PreparationMenuUser from "./preparation-menu-user"
 import { IGameUser } from "../../../../../models/colyseus-models/game-user"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
@@ -26,6 +26,7 @@ import { GADGETS } from "../../../../../core/gadgets"
 import { BotSelectModal } from "./bot-select-modal"
 import { IBot } from "../../../../../models/mongo-models/bot-v2"
 import { MapSelectModal } from "./map-select-modal"
+import { setTitleNotificationIcon } from "../../../../../utils/window"
 
 export default function PreparationMenu() {
   const { t } = useTranslation()
@@ -68,13 +69,26 @@ export default function PreparationMenu() {
   )
 
   const isReady = users.find((user) => user.id === uid)?.ready
+  const nbUsersReady = users.filter(user => user.ready).length
   const allUsersReady = users.every((user) => user.ready)
+
+  useEffect(() => {    
+    if(allUsersReady) {
+      setTitleNotificationIcon("🟢")
+    } else if(nbUsersReady === 0){
+      setTitleNotificationIcon("🔴")
+    } else if(nbUsersReady === users.length - 1){
+      setTitleNotificationIcon("🟡")
+    } else {
+      setTitleNotificationIcon("🟠")
+    }
+  }, [nbUsersReady, users.length])
 
   const humans = users.filter((u) => !u.isBot)
   const isElligibleForELO = users.filter((u) => !u.isBot).length >= 2
   const averageElo = Math.round(
     humans.reduce((acc, u) => acc + u.elo, 0) / humans.length
-  )
+  )  
 
   function makePrivate() {
     if (password === null) {
