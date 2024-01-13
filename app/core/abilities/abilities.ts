@@ -2022,13 +2022,12 @@ export class NightmareStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     let duration =
-      pokemon.stars === 3 ? 8000 : pokemon.stars === 2 ? 4000 : 2000
+      pokemon.stars === 3 ? 8000 : pokemon.stars === 2 ? 3000 : 1500
     duration = Math.round(duration * (1 + pokemon.ap / 200))
 
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
       if (enemy && pokemon.team != enemy.team) {
-        enemy.status.triggerPoison(duration, enemy, pokemon)
-        if (enemy.status.flinch || enemy.status.sleep) {
+        if (enemy.status.flinch || enemy.status.sleep || enemy.status.silence) {
           enemy.handleSpecialDamage(
             50,
             board,
@@ -2038,6 +2037,7 @@ export class NightmareStrategy extends AbilityStrategy {
             true
           )
         }
+        enemy.status.triggerSilence(duration, pokemon)
       }
     })
   }
@@ -2062,37 +2062,6 @@ export class BurnStrategy extends AbilityStrategy {
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value && pokemon.team != value.team) {
         value.status.triggerBurn(duration, value, pokemon, board)
-      }
-    })
-  }
-}
-
-export class SilenceStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    state: PokemonState,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
-    super.process(pokemon, state, board, target, crit)
-    let timer = 0
-    switch (pokemon.stars) {
-      case 1:
-        timer = 2000
-        break
-      case 2:
-        timer = 4000
-        break
-      case 3:
-        timer = 8000
-        break
-      default:
-        break
-    }
-    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
-      if (value && pokemon.team != value.team) {
-        value.status.triggerSilence(timer, pokemon)
       }
     })
   }
@@ -6805,7 +6774,7 @@ export class CrushGripStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, false)
+    super.process(pokemon, state, board, target, crit)
     const damage = Math.round(20 + (pokemon.life / pokemon.hp) * 180)
     target.handleSpecialDamage(
       damage,
@@ -6815,6 +6784,31 @@ export class CrushGripStrategy extends AbilityStrategy {
       crit,
       true
     )
+  }
+}
+
+export class AuraSphereStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [25, 50, 100][pokemon.stars - 1] ?? 25
+    effectInLine(board, pokemon, target, (targetInLine) => {
+      if (targetInLine != null && targetInLine.team !== pokemon.team) {
+        targetInLine.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        targetInLine.status.triggerSilence(3000, pokemon)
+      }
+    })
   }
 }
 
@@ -6887,7 +6881,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.HURRICANE]: new HurricaneStrategy(),
   [Ability.BURN]: new BurnStrategy(),
   [Ability.SLEEP]: new SleepStrategy(),
-  [Ability.SILENCE]: new SilenceStrategy(),
   [Ability.CONFUSION]: new ConfusionStrategy(),
   [Ability.BLIZZARD]: new BlizzardStrategy(),
   [Ability.PROTECT]: new ProtectStrategy(),
@@ -7082,5 +7075,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.MAKE_IT_RAIN]: new MakeItRainStrategy(),
   [Ability.TIME_TRAVEL]: new TimeTravelStrategy(),
   [Ability.POLTERGEIST]: new PoltergeistStrategy(),
-  [Ability.CRUSH_GRIP]: new CrushGripStrategy()
+  [Ability.CRUSH_GRIP]: new CrushGripStrategy(),
+  [Ability.AURASPHERE]: new AuraSphereStrategy()
 }

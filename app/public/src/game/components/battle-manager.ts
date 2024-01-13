@@ -5418,6 +5418,46 @@ export default class BattleManager {
             })
             break
 
+          case Ability.AURASPHERE:
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
+            const [dx, dy] = OrientationVector[orientation]
+            const finalCoordinates = transformAttackCoordinate(
+              positionX + dx * 8,
+              positionY + dy * 8,
+              this.flip
+            )
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              Ability.AURASPHERE,
+              `000`
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.setRotation(
+              Math.atan2(
+                finalCoordinates[1] - coordinates[1],
+                finalCoordinates[0] - coordinates[0]
+              )
+            )
+            specialProjectile.anims.play(Ability.AURASPHERE)
+            this.scene.tweens.add({
+              targets: specialProjectile,
+              x: finalCoordinates[0],
+              y: finalCoordinates[1],
+              ease: "linear",
+              yoyo: false,
+              duration: 2000,
+              onComplete: () => {
+                specialProjectile.destroy()
+              }
+            })
+            break
+
           default:
             break
         }

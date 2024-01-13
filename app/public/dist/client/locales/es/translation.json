@@ -43,7 +43,6 @@
     "BURN": "Quemar",
     "POISON": "Veneno",
     "SLEEP": "Dormir",
-    "SILENCE": "Silencio",
     "PROTECT": "Protección",
     "BLIZZARD": "Ventisca",
     "CONFUSION": "Confusión",
@@ -267,7 +266,8 @@
     "MAGIC_POWDER": "Polvo Mágico",
     "RETALIATE": "Represalia",
     "SLASH": "Cuchillada",
-    "OUTRAGE": "Enfado"
+    "OUTRAGE": "Enfado",
+    "AURASPHERE": "Esfera aural"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -436,7 +436,6 @@
     "MEGA_SCIZOR": "Mega Scizor",
     "RIOLU": "Riolu",
     "LUCARIO": "Lucario",
-    "MEGA_LUCARIO": "Mega Lucario",
     "MAGIKARP": "Magikarp",
     "RATTATA": "Rattata",
     "RATICATE": "Raticate",
@@ -944,7 +943,7 @@
     "KNOWLEDGE_THIEF": "Lanza la habilidad del objetivo.",
     "KING_SHIELD": "Otorga PROTECT al usuario durante 1.5 segundos, otorga [10,20,30,SP] SHIELD e intercambia su posición con la del enemigo más lejano",
     "EXPLOSION": "Otorga [50,100,200,SP] de SPECIAL a todos los enemigos adyacentes. También daña al usuario.",
-    "NIGHTMARE": "Deja POISONNED a todo el equipo enemigo durante [2,4,8,SP=0.5] segundos. Cualquier oponente SLEEP o FLINCH toma [50,SP] SPECIAL.",
+    "NIGHTMARE": "Deja SILENCE a todo el equipo enemigo durante [1.5,3,8,SP=0.5] segundos. Cualquier oponente SLEEP o FLINCH o SILENCE toma [50,SP] SPECIAL.",
     "CLANGOROUS_SOUL": "Mejora a los aliados adyacentes con [2,4,8] ATK y [1,2,4] DEF / SPE_DEF",
     "BONEMERANG": "Lanza un hueso de boomerang a través del equipo enemigo, infligiendo [30,60,120,SP] SPECIAL en su camino",
     "GROWL": "Deja FLINCH a todo el equipo enemigo durante [3,6,9,SP] segundos",
@@ -963,7 +962,6 @@
     "BURN": "Deja BURN a todo el equipo enemigo durante [5,10,20] segundos",
     "POISON": "Deja POISONNED a [1,2,3] oponentes más cercanos durante [3,6,9,SP=0.5] segundos",
     "SLEEP": "Haz que [1,2,3] Pokémon enemigos en la linea trasera queden SLEEP durante [2,SP] segundos",
-    "SILENCE": "Deja SILENCE a todo el equipo enemigo durante [2,4,8] segundos",
     "PROTECT": "Otorga PROTECT al usuario, haciéndolo invulnerable durante [5,SP=0.5] segundos.",
     "BLIZZARD": "Deja FREEZE a todos los Pokémon enemigos durante [1,2,3] segundos e inflige [5,10,15,SP] SPECIAL. Daño doble si el enemigo ya está FREEZE",
     "CONFUSION": "Confunde al objetivo durante [3,5,7] segundos. Si el objetivo ya esta CONFUSION, inflige [75,150,300,SP] SPECIAL en su lugar",
@@ -1187,7 +1185,8 @@
     "INFERNAL_PARADE": "Lanza una rueda flamígera de ida y vuelta con 50% chance de dejar BURN por 3s y golpeando [30, SP] de SPECIAL 2 veces a los pokemon con los que choca",
     "RETALIATE": "Inflige [15,30,60,SP] de SPECIAL al objetivo + [10,15,25,SP] de SPECIAL adicional por aliado caido",
     "SLASH": "Inflige [10,20,40,SP] de SPECIAL con un [30,60,90]% aumentado de CRIT_CHANCE",
-    "OUTRAGE": "El pokemon queda CONFUSION por 2s e inflige [2,3,4,SP] ATK como SPECIAL al objetivo y enemigos adyacentes"
+    "OUTRAGE": "El pokemon queda CONFUSION por 2s e inflige [2,3,4,SP] ATK como SPECIAL al objetivo y enemigos adyacentes",
+    "AURASPHERE": "Exuda un aura y proyecta energía en una línea, infligiendo [25,50,SP] SPECIAL y SILENCE a cada rival golpeado durante 3 segundos."
   },
   "effect": {
     "INGRAIN": "Arraigo",

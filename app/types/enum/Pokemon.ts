@@ -167,7 +167,6 @@ export enum Pkm {
   MEGA_SCIZOR = "MEGA_SCIZOR",
   RIOLU = "RIOLU",
   LUCARIO = "LUCARIO",
-  MEGA_LUCARIO = "MEGA_LUCARIO",
   MAGIKARP = "MAGIKARP",
   RATTATA = "RATTATA",
   RATICATE = "RATICATE",
@@ -848,7 +847,6 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.MEGA_SCIZOR]: "0212-0001",
   [Pkm.RIOLU]: "0447",
   [Pkm.LUCARIO]: "0448",
-  [Pkm.MEGA_LUCARIO]: "0448-0001",
   [Pkm.MAGIKARP]: "0129",
   [Pkm.RATTATA]: "0019",
   [Pkm.RATICATE]: "0020",
@@ -1523,7 +1521,6 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.MEGA_SCIZOR]: Pkm.SCYTHER,
   [Pkm.RIOLU]: Pkm.RIOLU,
   [Pkm.LUCARIO]: Pkm.RIOLU,
-  [Pkm.MEGA_LUCARIO]: Pkm.RIOLU,
   [Pkm.EEVEE]: Pkm.EEVEE,
   [Pkm.VAPOREON]: Pkm.VAPOREON,
   [Pkm.JOLTEON]: Pkm.JOLTEON,
@@ -2985,11 +2982,6 @@ export const AnimationConfig: {
     attack: AnimationType.RearUp,
     ability: AnimationType.Pose,
     emote: AnimationType.RearUp
-  },
-  [Pkm.MEGA_LUCARIO]: {
-    attack: AnimationType.Attack,
-    ability: AnimationType.Attack,
-    emote: AnimationType.Attack
   },
   [Pkm.MAGIKARP]: {
     attack: AnimationType.Attack,

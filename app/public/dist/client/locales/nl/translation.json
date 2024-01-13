@@ -42,7 +42,6 @@
     "BURN": "Burn",
     "POISON": "Poison",
     "SLEEP": "Sleep",
-    "SILENCE": "Silence",
     "PROTECT": "Protect",
     "BLIZZARD": "Blizzard",
     "CONFUSION": "Confusion",
@@ -388,7 +387,6 @@
     "MEGA_SCIZOR": "Mega Scizor",
     "RIOLU": "Riolu",
     "LUCARIO": "Lucario",
-    "MEGA_LUCARIO": "Mega Lucario",
     "MAGIKARP": "Magikarp",
     "RATTATA": "Rattata",
     "RATICATE": "Raticate",
@@ -822,7 +820,7 @@
     "KNOWLEDGE_THIEF": "Gebruik de vaardigheid van het doelwit",
     "KING_SHIELD": "PROTECT de gebruiker gedurende 1.5 seconden, geeft [10,20,30,SP] SHIELD en wissel van positie met de verste vijandelijke Pokémon",
     "EXPLOSION": "Breng [50,100,200,SP] SPECIAL toe aan alle aangrenzende vijandelijke Pokémon. Beschadigt ook de gebruiker",
-    "NIGHTMARE": "POISONNED alle vijandelijke Pokémon voor [2,4,8,SP=0,5] seconden. Elke SLEEP of FLINCH tegenstander neemt [50,SP] SPECIAL.",
+    "NIGHTMARE": "SILENCE alle vijandelijke Pokémon voor [1.5,3,8,SP=0,5] seconden. Elke SLEEP of FLINCH of SILENCE tegenstander neemt [50,SP] SPECIAL.",
     "CLANGOROUS_SOUL": "Buff aangrenzende vriendelijke Pokémon's ATK met [2,4,8] en DEF / SPE_DEF met [1,2,4]",
     "BONEMERANG": "Gooi een bot als een boemerang door het vijandelijke team. Elke geraakte vijandelijke Pokémon neemt [30,60,120,SP] SPECIAL",
     "GROWL": "Pas de FLINCH status toe op alle vijandelijke Pokémon voor [3,6,9,SP] seconden",
@@ -840,7 +838,6 @@
     "BURN": "Pas de BURN status toe op alle vijandelijke Pokémon voor [5,10,20] seconden",
     "POISON": "Pas de POISONNED status toe op de [1,2,3] dichtstbijzijnde vijandelijke Pokémon voor [3,6,9,SP=0,5] seconden",
     "SLEEP": "Maak [1,2,3] vijandige Pokémon in de backline SLAAP gedurende [2,SP] seconden",
-    "SILENCE": "Pas de SILENCE status toe op alle vijandelijke Pokémon voor [2,4,8] seconden",
     "PROTECT": "PROTECT de gebruiker en word [5,SP=0,5] seconden onkwetsbaar",
     "BLIZZARD": "FREEZE alle vijandelijke Pokémon gedurende [1,2,3] seconden en deel [5,10,15,SP] SPECIAL. Dubbele schade als de vijand al FREEZE is",
     "CONFUSION": "Pas de CONFUSION status toe aan het doelwit voor [3,5,7] seconden. Als de status al aanwezig is, richt in plaats daarvan [75,150,300,SP] SPECIAL aan",
@@ -1016,7 +1013,8 @@
     "PYRO_BALL": "De gebruiker valt aan door een kleine steen aan te steken en deze als een vurige bal naar het verste doelwit te lanceren, waarbij hij [10,20,40,SP] SPECIAL uitdeelt en 2 seconden lang alles onderweg verbrandt",
     "WHIRLPOOL": "Richt je op de verste vijand en laat een hagel van 4 draaikolken op hen los. Elk deelt [125,SP]% ATK PHYSICAL uit aan de eerste vijandelijke treffer",
     "SMOKE_SCREEN": "Kanaal ondergronds en verschijnt opnieuw in het midden van het vijandelijke team, waarbij [10,20,40,SP] SPECIAL, BURN en ARMOR_REDUCTION alle aangrenzende eenheden gedurende 2 seconden worden uitgedeeld",
-    "PRESENT": "Deelt [80,SP], [150,SP], [300,SP] SPECIAL uit, of geneest 80 HP van het doelwit"
+    "PRESENT": "Deelt [80,SP], [150,SP], [300,SP] SPECIAL uit, of geneest 80 HP van het doelwit",
+    "AURASPHERE": "Straalt een aura uit en projecteert energie in een lijn die [25,50,SP] SPECIAL en SILENCE uitdeelt aan elke getroffen tegenstander gedurende 3 seconden."
   },
   "effect": {
     "INGRAIN": "ingeburgerd",
