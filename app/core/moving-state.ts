@@ -11,7 +11,13 @@ import { Transfer } from "../types"
 import Player from "../models/colyseus-models/player"
 
 export default class MovingState extends PokemonState {
-  update(pokemon: PokemonEntity, dt: number, board: Board, weather: string, player: Player) {
+  update(
+    pokemon: PokemonEntity,
+    dt: number,
+    board: Board,
+    weather: string,
+    player: Player
+  ) {
     super.update(pokemon, dt, board, weather, player)
     if (pokemon.cooldown <= 0) {
       pokemon.cooldown = weather === Weather.SNOW ? 666 : 500
@@ -19,16 +25,14 @@ export default class MovingState extends PokemonState {
         pokemon,
         board
       )
-      if (targetAtRange) {
-        if (!pokemon.status.charm) {
-          pokemon.toAttackingState()
-        }
+      if (targetAtRange && !pokemon.status.charm) {
+        pokemon.toAttackingState()
       } else {
         const targetAtSight = this.getNearestTargetAtSightCoordinates(
           pokemon,
           board
         )
-        if (targetAtSight) {
+        if (targetAtSight && targetAtSight.distance > 1) {
           this.move(pokemon, board, targetAtSight)
         }
       }

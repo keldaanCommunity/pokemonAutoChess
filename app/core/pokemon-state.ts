@@ -525,7 +525,7 @@ export default class PokemonState {
   getNearestTargetAtRangeCoordinates(
     pokemon: PokemonEntity,
     board: Board
-  ): { x: number; y: number } | undefined {
+  ): { x: number; y: number; distance: number } | undefined {
     let distance = 999
     let candidatesCoordinates: { x: number; y: number }[] = []
     for (
@@ -560,7 +560,7 @@ export default class PokemonState {
       }
     }
     if (candidatesCoordinates.length > 0) {
-      return pickRandomIn(candidatesCoordinates)
+      return { distance, ...pickRandomIn(candidatesCoordinates) }
     } else {
       return undefined
     }
@@ -569,7 +569,7 @@ export default class PokemonState {
   getNearestTargetAtSightCoordinates(
     pokemon: PokemonEntity,
     board: Board
-  ): { x: number; y: number } | undefined {
+  ): { x: number; y: number; distance: number } | undefined {
     let distance = 999
     let candidatesCoordinates: { x: number; y: number }[] = new Array<{
       x: number
@@ -597,7 +597,7 @@ export default class PokemonState {
       }
     })
     if (candidatesCoordinates.length > 0) {
-      return pickRandomIn(candidatesCoordinates)
+      return { distance, ...pickRandomIn(candidatesCoordinates) }
     } else {
       return undefined
     }
