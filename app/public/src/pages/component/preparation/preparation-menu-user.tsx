@@ -4,10 +4,10 @@ import { Role } from "../../../../../types"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { kick, removeBot } from "../../../stores/NetworkStore"
 import { RemoveButton } from "../buttons/remove-button"
-import Elo from "../elo"
-import InlineAvatar from "../inline-avatar"
-import "./preparation-menu-user.css"
+import { EloBadge } from "../profile/elo-badge"
+import { InlineAvatar } from "../profile/inline-avatar"
 import { useTranslation } from "react-i18next"
+import "./preparation-menu-user.css"
 
 export default function PreparationMenuUser(props: {
   key: string
@@ -43,7 +43,7 @@ export default function PreparationMenuUser(props: {
         props.user.ready ? "ready" : "not-ready"
       }`}
     >
-      <Elo elo={props.user?.elo} />
+      <EloBadge elo={props.user?.elo} />
       <InlineAvatar
         avatar={props.user?.avatar}
         name={props.user?.name}

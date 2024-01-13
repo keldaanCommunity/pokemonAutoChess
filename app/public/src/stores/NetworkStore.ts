@@ -270,7 +270,13 @@ export const networkSlice = createSlice({
     },
     selectLanguage: (state, action: PayloadAction<Language>) => {
       state.lobby?.send(Transfer.SELECT_LANGUAGE, action.payload)
-    }
+    },
+    makeServerAnnouncement: (
+      state,
+      action: PayloadAction<{ message: string }>
+    ) => {
+      state.lobby?.send(Transfer.SERVER_ANNOUNCEMENT, action.payload)
+    },
   }
 })
 
@@ -325,7 +331,8 @@ export const {
   searchById,
   setTitle,
   kick,
-  deleteRoom
+  deleteRoom,
+  makeServerAnnouncement
 } = networkSlice.actions
 
 export default networkSlice.reducer

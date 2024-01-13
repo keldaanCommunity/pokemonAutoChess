@@ -1,7 +1,7 @@
 import { Command } from "@colyseus/command"
 import { Client, logger, matchMaker, RoomListingData } from "colyseus"
 import { ArraySchema } from "@colyseus/schema"
-import { EmbedBuilder } from "discord.js"
+import { EmbedBuilder, messageLink } from "discord.js"
 import { nanoid } from "nanoid"
 import { GameRecord } from "../../models/colyseus-models/game-record"
 import LobbyUser from "../../models/colyseus-models/lobby-user"
@@ -1075,5 +1075,21 @@ export class OpenRankedLobbyCommand extends Command<
     })
 
     this.state.getNextSpecialLobbyDate()
+  }
+}
+
+export class MakeServerAnnouncementCommand extends Command<
+  CustomLobbyRoom,
+  { client: Client; message: string }
+> {
+  async execute({ client, message }: { client: Client; message: string }) {
+    try {
+      const u = this.state.users.get(client.auth.uid)
+      if (u && u.role && u.role === Role.ADMIN) {
+        this.state.addAnnouncement(message)
+      }
+    } catch (error) {
+      logger.error(error)
+    }
   }
 }

@@ -1,13 +1,13 @@
 import React from "react"
-import Elo from "./elo"
-import { Role } from "../../../../types"
-import { RoleBadge } from "./RoleBadge"
-import { getAvatarSrc } from "../../utils"
+import { EloBadge } from "./elo-badge"
+import { Role } from "../../../../../types"
+import { RoleBadge } from "./role-badge"
+import { getAvatarSrc } from "../../../utils"
 import { useTranslation } from "react-i18next"
 
 import "./avatar.css"
 
-export default function Avatar(props: {
+export function Avatar(props: {
   name: string
   avatar: string
   elo?: number
@@ -28,7 +28,7 @@ export default function Avatar(props: {
         </span>
         <span className="player-name">{props.name}</span>
       </div>
-      {props.elo && <Elo elo={props.elo} />}
+      {props.elo && <EloBadge elo={props.elo} />}
     </div>
   )
 }
