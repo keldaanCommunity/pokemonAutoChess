@@ -1597,7 +1597,7 @@
     "CASTFORM": "$t(pkm.CASTFORM) change sa forme et la météo en SUN, RAIN ou SNOW en fonction de votre synergie dominante entre FIRE WATER ICE",
     "PHIONE": "Phione cherche un Oeuf Océan",
     "PRIMAL": "La légende raconte qu'on pourrait libérer les pouvoirs primordiaux de ces pokémons légendaires",
-    "WONDER_GUARD": "Réduit les dégâts reçus et les soins reçus à 1",
+    "WONDER_GUARD": "Réduit les dégâts reçus et les soins reçus à 1. Ne peut pas gagner de HP max.",
     "ELECTRIC_SURGE": "Donne ELECTRIC_FIELD à vos Pokémons ELECTRIC, augmentant leurs dégâts de 20%",
     "GRASSY_SURGE": "Donne GRASS_FIELD à vos Pokémons GRASS, augmentant leurs dégâts de 20%",
     "MISTY_SURGE": "Donne FAIRY_FIELD à vos Pokémons FAIRY, augmentant leurs dégâts de 20%",

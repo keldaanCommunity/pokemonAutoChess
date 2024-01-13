@@ -1628,7 +1628,7 @@
     "CASTFORM": "Castform changes its form and the weather to SUN, RAIN or SNOW depending on your dominant synergy between FIRE WATER ICE",
     "PHIONE": "Phione is looking for an AQUA_EGG",
     "PRIMAL": "Legend has it that you could unleash the ancient powers of these pokemons",
-    "WONDER_GUARD": "Reduce received damage and received healing to 1",
+    "WONDER_GUARD": "Reduce received damage and received healing to 1. Cannot gain max HP.",
     "ELECTRIC_SURGE": "Give ELECTRIC_FIELD to your ELECTRIC Pokemon, boosting their damage by 20%",
     "GRASSY_SURGE": "Give GRASS_FIELD to your GRASS Pokemon, boosting their damage by 20%",
     "MISTY_SURGE": "Give FAIRY_FIELD to your FAIRY Pokemon, boosting their damage by 20%",

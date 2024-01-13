@@ -352,6 +352,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   addMaxHP(value: number) {
+    if(this.passive === Passive.WONDER_GUARD) return;
     this.hp = min(1)(this.hp + value)
     this.life = max(this.hp)(this.life + value)
   }

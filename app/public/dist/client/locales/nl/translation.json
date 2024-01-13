@@ -1349,7 +1349,7 @@
     "CASTFORM": "Castform verandert van vorm en het weer in SUN, RAIN of SNOW, afhankelijk van je dominante synergie tussen FIRE WATER ICE",
     "PHIONE": "Phione is op zoek naar een Aqua Egg",
     "PRIMAL": "Volgens de legende zou je de oude krachten van deze pokemons kunnen ontketenen",
-    "WONDER_GUARD": "Verminder ontvangen schade en ontvangen genezing tot 1",
+    "WONDER_GUARD": "Verminder ontvangen schade en ontvangen genezing tot 1. Kan geen maximale HP krijgen.",
     "ELECTRIC_SURGE": "Geef ELECTRIC_FIELD aan je ELECTRIC Pokemon en verhoog hun schade met 20%",
     "GRASSY_SURGE": "Geef GRASS_FIELD aan je GRASS Pokemon en verhoog hun schade met 20%",
     "MISTY_SURGE": "Geef FAIRY_FIELD aan je FAIRY Pokemon en verhoog hun schade met 20%",

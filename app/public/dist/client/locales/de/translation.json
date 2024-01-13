@@ -1367,7 +1367,7 @@
     "CASTFORM": "Castform ändert seine Form und das Wetter in SUN, RAIN oder SCHNEE, abhängig von Ihrer vorherrschenden Synergie zwischen FIRE, WATER, ICE",
     "PHIONE": "Phione sucht nach einem Aqua-Ei",
     "PRIMAL": "Der Legende nach konnte man die uralten Kräfte dieser Pokémon entfesseln",
-    "WONDER_GUARD": "Reduzieren Sie den erlittenen Schaden und die erhaltene Heilung auf 1",
+    "WONDER_GUARD": "Reduzieren Sie den erlittenen Schaden und die erhaltene Heilung auf 1. Kann keine maximalen HP erreichen.",
     "ELECTRIC_SURGE": "Gib deinem ELECTRIC Pokémon ELECTRIC_FIELD und erhöhe seinen Schaden um 20 %",
     "GRASSY_SURGE": "Gib deinem GRASS Pokémon GRASS_FIELD und erhöhe seinen Schaden um 20 %",
     "MISTY_SURGE": "Gib deinem FAIRY Pokémon FAIRY_FIELD und erhöhe seinen Schaden um 20 %",
