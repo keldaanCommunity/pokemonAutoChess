@@ -80,7 +80,10 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     avatar: Pkm.MEWTWO,
     emotion: Emotion.DETERMINED,
     shinyChance: 1 / 20,
-    board: [[Pkm.MEWTWO, 4, 2]],
+    board: [
+      [Pkm.MEWTWO, 4, 2],
+      [Pkm.MEW, 7, 1]
+    ],
     getRewards(shiny: boolean, player: Player) {
       if (shiny) {
         return [
