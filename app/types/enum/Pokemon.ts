@@ -674,7 +674,8 @@ export enum Pkm {
   GIMMIGHOUL = "GIMMIGHOUL",
   GHOLDENGO = "GHOLDENGO",
   PHANTUMP = "PHANTUMP",
-  TREVENANT = "TREVENANT"
+  TREVENANT = "TREVENANT",
+  SMEARGLE = "SMEARGLE"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1351,7 +1352,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.GIMMIGHOUL]: "0999-0001",
   [Pkm.GHOLDENGO]: "1000",
   [Pkm.PHANTUMP]: "0708",
-  [Pkm.TREVENANT]: "0709"
+  [Pkm.TREVENANT]: "0709",
+  [Pkm.SMEARGLE]: "0235"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2028,7 +2030,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.GIMMIGHOUL]: Pkm.GIMMIGHOUL,
   [Pkm.GHOLDENGO]: Pkm.GIMMIGHOUL,
   [Pkm.PHANTUMP]: Pkm.PHANTUMP,
-  [Pkm.TREVENANT]: Pkm.PHANTUMP
+  [Pkm.TREVENANT]: Pkm.PHANTUMP,
+  [Pkm.SMEARGLE]: Pkm.SMEARGLE
 }
 
 export enum PkmDuo {
@@ -5533,5 +5536,10 @@ export const AnimationConfig: {
     attack: AnimationType.Punch,
     ability: AnimationType.Swing,
     emote: AnimationType.Charge
+  },
+  [Pkm.SMEARGLE]: {
+    attack: AnimationType.SpAttack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Pose
   }
 }

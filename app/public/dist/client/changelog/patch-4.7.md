@@ -1,4 +1,5 @@
 # New Pokemons:
+- Smeargle
 
 # Changes to Pokemon & Abilities
 

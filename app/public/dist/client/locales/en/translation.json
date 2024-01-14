@@ -277,7 +277,8 @@
     "GOLD_RUSH": "Gold Rush",
     "MAKE_IT_RAIN": "Make it Rain",
     "CRUSH_GRIP": "Crush Grip",
-    "AURASPHERE": "Aura Sphere"
+    "AURASPHERE": "Aura Sphere",
+    "SKETCH": "Sketch"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -953,7 +954,8 @@
     "PHANTUMP": "Phantump",
     "TREVENANT": "Trevenant",
     "GIMMIGHOUL": "Gimmighoul",
-    "GHOLDENGO": "Gholdengo"
+    "GHOLDENGO": "Gholdengo",
+    "SMEARGLE": "Smeargle"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1216,7 +1218,8 @@
     "GOLD_RUSH": "Deals  [20,SP] + your amount of golds as SPECIAL, then earn 2 golds",
     "MAKE_IT_RAIN": "Deals [100,SP] + your amount of golds as SPECIAL",
     "CRUSH_GRIP": "The target is crushed with great force. The more HP the target has left, the greater the damage: between [20,SP] and [200,SP] PHYSICAL.",
-    "AURASPHERE": "Exudes an aura and projects energy in a line, dealing [25,50,SP] SPECIAL and SILENCE every opponent hit for 3 seconds"
+    "AURASPHERE": "Exudes an aura and projects energy in a line, dealing [25,50,SP] SPECIAL and SILENCE every opponent hit for 3 seconds",
+    "SKETCH": "Copies the ability of the ally on his left at the start of the fight"
   },
   "effect": {
     "INGRAIN": "Ingrain",

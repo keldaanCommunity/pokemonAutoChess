@@ -6812,6 +6812,18 @@ export class AuraSphereStrategy extends AbilityStrategy {
   }
 }
 
+export class SketchStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -7076,5 +7088,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.TIME_TRAVEL]: new TimeTravelStrategy(),
   [Ability.POLTERGEIST]: new PoltergeistStrategy(),
   [Ability.CRUSH_GRIP]: new CrushGripStrategy(),
-  [Ability.AURASPHERE]: new AuraSphereStrategy()
+  [Ability.AURASPHERE]: new AuraSphereStrategy(),
+  [Ability.SKETCH]: new SketchStrategy()
 }
