@@ -10,6 +10,8 @@
 
 # Changes to Synergies
 
+- Changed Light 4 Eternal light: increase ~~Attack Speed~~ Def & SpeDef by 30%
+
 # Changes to Items
 
 # Gameplay
