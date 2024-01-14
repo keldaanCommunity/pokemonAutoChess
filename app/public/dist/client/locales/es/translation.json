@@ -964,7 +964,7 @@
     "SLEEP": "Haz que [1,2,3] Pokémon enemigos en la linea trasera queden SLEEP durante [2,SP] segundos",
     "PROTECT": "Otorga PROTECT al usuario, haciéndolo invulnerable durante [5,SP=0.5] segundos.",
     "BLIZZARD": "Deja FREEZE a todos los Pokémon enemigos durante [1,2,3] segundos e inflige [5,10,15,SP] SPECIAL. Daño doble si el enemigo ya está FREEZE",
-    "CONFUSION": "Confunde al objetivo durante [3,5,7] segundos. Si el objetivo ya esta CONFUSION, inflige [75,150,300,SP] SPECIAL en su lugar",
+    "CONFUSION": "CONFUSION y SILENCE al objetivo durante [3,5,7] segundos. Si el objetivo ya esta CONFUSION, inflige [75,150,300,SP] SPECIAL en su lugar",
     "FIRE_BLAST": "Lanza una ráfaga de fuego para hacer [30,60,120,SP] de SPECIAL",
     "WHEEL_OF_FIRE": "Envía una rueda de fuego que hace un viaje de ida y vuelta haciendo [10,20,30,SP] de SPECIAL",
     "SEISMIC_TOSS": "Ataque de objetivo único que inflige [7,14,28,SP] de TRUE multiplicado por la cantidad de Pokémon en tu equipo",

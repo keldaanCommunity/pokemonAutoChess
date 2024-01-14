@@ -2239,7 +2239,8 @@ export class ConfusionStrategy extends AbilityStrategy {
         crit
       )
     } else {
-      target.status.triggerConfusion(timer, target)
+      target.status.triggerSilence(timer, target)
+      target.status.triggerConfusion(timer, target)      
     }
   }
 }

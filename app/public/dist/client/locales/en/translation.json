@@ -984,7 +984,7 @@
     "SLEEP": "Make [1,2,3] enemy Pokémon in the backline SLEEP for [2,SP] seconds",
     "PROTECT": "PROTECT the user, becoming invulnerable for [5,SP=0.5] seconds",
     "BLIZZARD": "FREEZE all enemy Pokémon for [1,2,3] seconds and deal [5,10,15,SP] SPECIAL. Double damage if enemy is already FREEZE",
-    "CONFUSION": "CONFUSION the target for [3,5,7] seconds. If the target is already CONFUSION, deal [75,150,300,SP] SPECIAL instead",
+    "CONFUSION": "The target is CONFUSION and SILENCE for [3,5,7] seconds. If already CONFUSION, deal [75,150,300,SP] SPECIAL instead",
     "FIRE_BLAST": "Shoot a Fire Blast, dealing [30,60,120,SP] SPECIAL to the target",
     "WHEEL_OF_FIRE": "Shoot a returning Flame Wheel, dealing twice [10,20,30,SP] SPECIAL to all enemy Pokémon hit",
     "SEISMIC_TOSS": "Deal [7,14,28,SP] TRUE to the target, multiplied by the number of Pokémon in your team",

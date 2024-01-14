@@ -6,6 +6,7 @@
 - Rework Nightmare (Ghastly): Silence all enemy Pokémon for 1.5/3/8 seconds. Any opponent asleep, flinched or already silenced take 50 special damage.
 - Onix: removed Steel, buffed HP ~~150~~ 200 ; Steelix still has Steel style
 - Buff Happiny PP ~~130~~ 120
+- Confusion (Meditite) now also cause Silence in addition to Confusion
 
 # Changes to Synergies
 
