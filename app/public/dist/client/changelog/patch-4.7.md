@@ -25,3 +25,4 @@
 # Misc
 
 - Added Ultraball Ranked lobby on a weekly basis, on Sunday at 9pm UTC. 5 boosters for the winner
+- Removed mythical category. Primal Groudon, Primal Kyogre and Mega Rayquaza are now Legendary tier 4

@@ -68,9 +68,6 @@ export const POWER_SCORE_BY_CATEGORY = {
   "LEGENDARY T3": 6,
   "LEGENDARY T4": 8,
   "LEGENDARY DUO": 4,
-  "MYTHICAL T3": 8,
-  "MYTHICAL T3 DUO": 6,
-  "MYTHICAL T4": 10,
   "SPECIAL T1": 1.5,
   "SPECIAL T2": 3,
   "SPECIAL T3": 4.5,
@@ -110,7 +107,7 @@ export function getCategory(pkm: Pkm): string {
   //= & " T"&'Raw Data'!D2 & IF('Raw Data'!V2=TRUE, " DUO", "")
   let category = p.rarity.toUpperCase()
   if (
-    [Rarity.UNIQUE, Rarity.LEGENDARY, Rarity.MYTHICAL, Rarity.SPECIAL].includes(
+    [Rarity.UNIQUE, Rarity.LEGENDARY, Rarity.SPECIAL].includes(
       p.rarity
     ) === false &&
     p.stars > 1
@@ -238,10 +235,6 @@ export function validateBoard(board: IDetailledPokemon[], stage: number) {
     .filter((p) => p.rarity === Rarity.LEGENDARY)
     .filter(removeDuoPartner)
 
-  const mythicals = team
-    .filter((p) => p.rarity === Rarity.MYTHICAL)
-    .filter(removeDuoPartner)
-
   const additionalUncommon = team.filter(
     (p) =>
       p.additional &&
@@ -262,10 +255,10 @@ export function validateBoard(board: IDetailledPokemon[], stage: number) {
   }
   if (
     stage < PortalCarouselStages[1] &&
-    legendaries.length + mythicals.length > 0
+    legendaries.length > 0
   ) {
     throw new Error(
-      `Legendary/Mythical Pokemons can't be played before stage ${PortalCarouselStages[1]}`
+      `Legendary Pokemons can't be played before stage ${PortalCarouselStages[1]}`
     )
   }
 
@@ -289,9 +282,6 @@ export function validateBoard(board: IDetailledPokemon[], stage: number) {
   }
   if (legendaries.length > 1) {
     throw new Error(`Only one Legendary Pokemon can be played`)
-  }
-  if (mythicals.length > 1) {
-    throw new Error(`Only one Mythical Pokemon can be played`)
   }
   if (team.length > 9) {
     throw new Error(`Maximum 9 Pokemon can be played in a team`)
