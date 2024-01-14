@@ -2240,7 +2240,7 @@ export class ConfusionStrategy extends AbilityStrategy {
       )
     } else {
       target.status.triggerSilence(timer, target)
-      target.status.triggerConfusion(timer, target)      
+      target.status.triggerConfusion(timer, target)
     }
   }
 }
@@ -3151,7 +3151,14 @@ export class LeafBladeStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, true)
     const damage = Math.round(pokemon.atk * (1 + pokemon.ap / 100))
-    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, true)
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.TRUE,
+      pokemon,
+      true,
+      false
+    )
   }
 }
 

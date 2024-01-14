@@ -9833,7 +9833,7 @@ export class Spectrier extends Pokemon {
 }
 
 export class Kartana extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.STEEL])
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.GRASS])
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 230

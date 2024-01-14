@@ -8,6 +8,7 @@
 - Buff Happiny PP ~~130~~ 120
 - Confusion (Meditite) now also cause Silence in addition to Confusion
 - Nerf Charge (Zapdos): increase attack & attack speed by ~~30~~ 25%
+- Leaf Stone (Kartana) now deals true damage
 
 # Changes to Synergies
 
