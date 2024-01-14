@@ -9,6 +9,7 @@
 - Confusion (Meditite) now also cause Silence in addition to Confusion
 - Nerf Charge (Zapdos): increase attack & attack speed by ~~30~~ 25%
 - Leaf Stone (Kartana) now deals true damage
+- Buff Rotom: Attack ~~12~~ 15
 
 # Changes to Synergies
 
