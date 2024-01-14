@@ -11,7 +11,7 @@ import {
 import { Rarity } from "../../../../../types/enum/Game"
 import {
   BasicItems,
-  CompletedItems,
+  CraftableItems,
   Item
 } from "../../../../../types/enum/Item"
 import { PkmIndex, Pkm, PkmDuos } from "../../../../../types/enum/Pokemon"
@@ -158,7 +158,7 @@ export function getNbComponentsOnBoard(board: IDetailledPokemon[]): number {
     .reduce(
       (nbComponents: number, item: Item) =>
         nbComponents +
-        (CompletedItems.includes(item) ? 2 : BasicItems.includes(item) ? 1 : 0),
+        (CraftableItems.includes(item) ? 2 : BasicItems.includes(item) ? 1 : 0),
       0
     )
 }
