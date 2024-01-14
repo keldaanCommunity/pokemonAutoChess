@@ -25,3 +25,4 @@
 # Misc
 
 - Added Ultraball Ranked lobby on a weekly basis, on Sunday at 9pm UTC. 5 boosters for the winner
+- Added back the sleep duration reduction when taking damage: -0.5 seconds per hit received
