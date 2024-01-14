@@ -7417,7 +7417,7 @@ export class Smoochum extends Pokemon {
   speDef = 1
   maxPP = 80
   range = 2
-  skill = Ability.CONFUSION
+  skill = Ability.LOVELY_KISS
   additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
@@ -7432,7 +7432,7 @@ export class Jynx extends Pokemon {
   speDef = 3
   maxPP = 80
   range = 2
-  skill = Ability.CONFUSION
+  skill = Ability.LOVELY_KISS
   additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
