@@ -10030,10 +10030,10 @@ export class Helioptile extends Pokemon {
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.HELIOLISK
-  hp = 90
+  hp = 75
   atk = 9
-  def = 3
-  speDef = 3
+  def = 2
+  speDef = 2
   maxPP = 80
   range = 3
   skill = Ability.PARABOLIC_CHARGE
@@ -10050,10 +10050,10 @@ export class Heliolisk extends Pokemon {
   ])
   rarity = Rarity.EPIC
   stars = 2
-  hp = 220
+  hp = 170
   atk = 22
-  def = 4
-  speDef = 4
+  def = 3
+  speDef = 3
   maxPP = 80
   range = 3
   skill = Ability.PARABOLIC_CHARGE

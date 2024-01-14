@@ -10,6 +10,7 @@
 - Nerf Charge (Zapdos): increase attack & attack speed by ~~30~~ 25%
 - Leaf Stone (Kartana) now deals true damage
 - Buff Rotom: Attack ~~12~~ 15
+- Nerf Helioptile and Heliodisk: HP ~~90/220~~ 75/170 Def/Spedef ~~3/4~~ 2/3
 
 # Changes to Synergies
 

@@ -1149,7 +1149,7 @@
     "WATER_PULSE": "Realiza [75,150,SP] de SPECIAL al objetivo y los enemigos adyacentes los deja deja CONFUSION por 2 segundos",
     "PLAY_ROUGH": "Inflige [30,60,120,SP] de SPECIAL al objetivo y lo mantiene CHARM por 2.5 segundos",
     "AERIAL_ACE": "Inflige [25,50,100,SP] de TRUE",
-    "PARABOLIC_CHARGE": "Recupera [25,50] y causa [25,50,100,SP] de SPECIAL al objetivo. El exceso de HP es convertido en SPECIAL",
+    "PARABOLIC_CHARGE": "Recupera [25,50] HP y causa [25,50,100,SP] de SPECIAL al objetivo. El exceso de HP es convertido en SPECIAL",
     "SUPER_FANG": "Inflige [30,60,90,SP] de SPECIAL. El daño se duplica sobre pokemon GRASS",
     "TEETER_DANCE": "El resto de pokemon quedan CONFUSION por 3 segundoss, tanto aliados como enemigos",
     "CLOSE_COMBAT": "Inflige [130,SP] de SPECIAL y reduce la DEF y SPE_DEF del atacante en 2",
