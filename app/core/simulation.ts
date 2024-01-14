@@ -1117,11 +1117,8 @@ export default class Simulation extends Schema implements ISimulation {
             pokemon.addAttack(Math.ceil(pokemon.atk * 0.3), false)
             pokemon.addAbilityPower(30, false)
             pokemon.status.triggerRuneProtect(10000)
-            pokemon.addDefense(Math.round(0.3 * pokemon.baseDef), false)
-            pokemon.addSpecialDefense(
-              Math.round(0.3 * pokemon.baseSpeDef),
-              false
-            )
+            pokemon.addDefense(0.3 * pokemon.baseDef)
+            pokemon.addSpecialDefense(0.3 * pokemon.baseSpeDef)
           }
           break
 

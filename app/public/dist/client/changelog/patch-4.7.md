@@ -7,6 +7,7 @@
 - Onix: removed Steel, buffed HP ~~150~~ 200 ; Steelix still has Steel style
 - Buff Happiny PP ~~130~~ 120
 - Confusion (Meditite) now also cause Silence in addition to Confusion
+- Nerf Charge (Zapdos): increase attack & attack speed by ~~30~~ 25%
 
 # Changes to Synergies
 

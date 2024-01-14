@@ -860,7 +860,7 @@
     "SEED_FLARE": "O corpo de Shaymin emite uma onda de choque, causando [30,SP] SPECIAL a todos os inimigos e diminuindo sua SPE_DEF em 2",
     "IRON_TAIL": "Ataque de dano de alvo único que causa [20,40,80,SP] SPECIAL. Bônus DEF em [1,3,5] pontos",
     "BLAST_BURN": "Área de ataque de efeito que causa [30,60,120,SP] SPECIAL",
-    "CHARGE": "Buff todos os pokémons ELECTRIC aliados ATK ATK_SPEED por [30,SP] %",
+    "CHARGE": "Buff todos os pokémons ELECTRIC aliados ATK ATK_SPEED por [25,SP] %",
     "DISCHARGE": "Eletriza os inimigos próximos por [25,50,75,SP] SPECIAL e os deixa PARALYSIS por 5 segundos",
     "BITE": "Inflige [40,80,120,SP] de SPECIAL ao alvo e cura 30% do dano. FLINCH alvo por 5 segundos",
     "DRAGON_TAIL": "Ataque de alvo mono que causa [30,60,120,SP] SPECIAL e buff DEF e SPE_DEF em [1,2,3,SP]",
