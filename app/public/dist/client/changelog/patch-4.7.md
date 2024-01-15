@@ -12,6 +12,7 @@
 
 # Gameplay
 
+- Removed on-crit effects for abilities: scope lens PP gain, fairy splash and razor fang armor reduction no longer apply for abilities crit
 - Comfey floral heal and Leppa berry consumption are now done before casting the ability
 
 # UI
