@@ -597,8 +597,8 @@ export default class Simulation extends Schema implements ISimulation {
 
       if (
         teamEffects.has(Effect.BAD_DREAMS) ||
-        teamEffects.has(Effect.SHADOW_TAG) ||
         teamEffects.has(Effect.PHANTOM_FORCE) ||
+        teamEffects.has(Effect.SHADOW_TAG) ||
         teamEffects.has(Effect.CURSE)
       ) {
         let enemyWithHighestHP: PokemonEntity | undefined = undefined
@@ -620,36 +620,13 @@ export default class Simulation extends Schema implements ISimulation {
             enemyWithHighestHP,
             false
           )
-          console.log(
-            `${enemyWithHighestHP.name} lost 30% life and shield and is flinch`
-          )
           enemyWithHighestHP.status.triggerFlinch(8000)
         }
       }
 
       if (
+        teamEffects.has(Effect.PHANTOM_FORCE) ||
         teamEffects.has(Effect.SHADOW_TAG) ||
-        teamEffects.has(Effect.PHANTOM_FORCE) ||
-        teamEffects.has(Effect.CURSE)
-      ) {
-        let enemyWithHighestAP: PokemonEntity | undefined = undefined
-        let highestAP = 0
-        opponentsCursable.forEach((enemy) => {
-          if (enemy.ap >= highestAP && !enemy.status.runeProtect) {
-            highestAP = enemy.ap
-            enemyWithHighestAP = enemy as PokemonEntity
-          }
-        })
-        if (enemyWithHighestAP) {
-          enemyWithHighestAP = enemyWithHighestAP as PokemonEntity // see https://github.com/microsoft/TypeScript/issues/11498
-          console.log(`${enemyWithHighestAP.name} lost 30 AP and is silence`)
-          enemyWithHighestAP.addAbilityPower(-30)
-          enemyWithHighestAP.status.triggerSilence(8000, undefined)
-        }
-      }
-
-      if (
-        teamEffects.has(Effect.PHANTOM_FORCE) ||
         teamEffects.has(Effect.CURSE)
       ) {
         let enemyWithHighestATK: PokemonEntity | undefined = undefined
@@ -666,9 +643,25 @@ export default class Simulation extends Schema implements ISimulation {
             Math.round(-0.3 * enemyWithHighestATK.atk)
           )
           enemyWithHighestATK.status.triggerParalysis(8000, enemyWithHighestATK)
-          console.log(
-            `${enemyWithHighestATK.name} lost 30% attack and is paralyzed`
-          )
+        }
+      }
+
+      if (        
+        teamEffects.has(Effect.SHADOW_TAG) ||
+        teamEffects.has(Effect.CURSE)
+      ) {
+        let enemyWithHighestAP: PokemonEntity | undefined = undefined
+        let highestAP = 0
+        opponentsCursable.forEach((enemy) => {
+          if (enemy.ap >= highestAP && !enemy.status.runeProtect) {
+            highestAP = enemy.ap
+            enemyWithHighestAP = enemy as PokemonEntity
+          }
+        })
+        if (enemyWithHighestAP) {
+          enemyWithHighestAP = enemyWithHighestAP as PokemonEntity // see https://github.com/microsoft/TypeScript/issues/11498
+          enemyWithHighestAP.addAbilityPower(-30)
+          enemyWithHighestAP.status.triggerSilence(8000, undefined)
         }
       }
 
