@@ -96,8 +96,8 @@ export const SynergyEffects: { [key in Synergy]: Effect[] } = Object.freeze({
     Effect.DIAMOND_STORM
   ],
   [Synergy.GHOST]: [
-    Effect.SHADOW_TAG,
     Effect.BAD_DREAMS,
+    Effect.SHADOW_TAG,
     Effect.PHANTOM_FORCE,
     Effect.CURSE
   ],

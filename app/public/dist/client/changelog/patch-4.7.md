@@ -8,6 +8,18 @@
 
 # Changes to Synergies
 
+- Ghost has been reworked, they now apply various curses on the opponent team at the start of the fight:
+(2) Bad Dreams: Also, the opponent unit with the highest HP + shield lose 30% of it and is flinch for 8 seconds
+(4) Shadow tag: The opponent unit with the highest AP lose 30% of it and is silenced for 5 seconds
+(6) Phantom force: Also, the opponent unit with the highest attack lose 30% of it and is paralyzed for 8 seconds
+(8) Curse: Also, the strongest opponent unit is cursed and will be KO after 10 seconds
+
+- Steel gets the previous effects of Ghost synergy, to deal a percentage of their damage as true damage:
+(2) Steel Surge: Deal 33% of Attack as true damage
+(4) Steel Spike: Deal 66% of Attack as true damage
+(6) Corkscrew Crash: Deal 100% of Attack as true damage
+(8) Max Meltdown: Deal 150% of Attack as true damage
+
 # Changes to Items
 
 # Gameplay

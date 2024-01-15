@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-extra-semi */
 import Board from "./board"
 import { Schema, MapSchema, type, SetSchema } from "@colyseus/schema"
-import { getUnitScore, PokemonEntity } from "./pokemon-entity"
+import { getStrongestUnit, getUnitScore, PokemonEntity } from "./pokemon-entity"
 import PokemonFactory from "../models/pokemon-factory"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { Berries, CompletedItems, Item } from "../types/enum/Item"
@@ -23,7 +23,7 @@ import { Synergy } from "../types/enum/Synergy"
 import { BOARD_HEIGHT, BOARD_WIDTH, ItemStats } from "../types/Config"
 import { getPath } from "../public/src/pages/utils/utils"
 import GameRoom from "../rooms/game-room"
-import { pickRandomIn, randomBetween } from "../utils/random"
+import { pickRandomIn, randomBetween, shuffleArray } from "../utils/random"
 import { Passive } from "../types/enum/Passive"
 import Player from "../models/colyseus-models/player"
 import { values } from "../utils/schemas"
@@ -585,6 +585,100 @@ export default class Simulation extends Schema implements ISimulation {
           pokemon.effects.add(Effect.IMMUNITY_CONFUSION)
         }
       })
+
+      const teamEffects =
+        team === this.blueTeam ? this.blueEffects : this.redEffects
+      const opponentTeam = team === this.blueTeam ? this.redTeam : this.blueTeam
+      const opponentsCursable = shuffleArray(
+        [...opponentTeam.values()].filter(
+          (enemy) => !enemy.status.runeProtect
+        ) as PokemonEntity[]
+      )
+
+      if (
+        teamEffects.has(Effect.BAD_DREAMS) ||
+        teamEffects.has(Effect.SHADOW_TAG) ||
+        teamEffects.has(Effect.PHANTOM_FORCE) ||
+        teamEffects.has(Effect.CURSE)
+      ) {
+        let enemyWithHighestHP: PokemonEntity | undefined = undefined
+        let highestHP = 0
+        opponentsCursable.forEach((enemy) => {
+          if (
+            enemy.hp + enemy.shield > highestHP &&
+            !enemy.status.runeProtect
+          ) {
+            highestHP = enemy.hp + enemy.shield
+            enemyWithHighestHP = enemy as PokemonEntity
+          }
+        })
+        if (enemyWithHighestHP) {
+          enemyWithHighestHP = enemyWithHighestHP as PokemonEntity // see https://github.com/microsoft/TypeScript/issues/11498
+          enemyWithHighestHP.addMaxHP(Math.round(-0.3 * enemyWithHighestHP.hp))
+          enemyWithHighestHP.addShield(
+            Math.round(-0.3 * enemyWithHighestHP.shield),
+            enemyWithHighestHP,
+            false
+          )
+          console.log(
+            `${enemyWithHighestHP.name} lost 30% life and shield and is flinch`
+          )
+          enemyWithHighestHP.status.triggerFlinch(8000)
+        }
+      }
+
+      if (
+        teamEffects.has(Effect.SHADOW_TAG) ||
+        teamEffects.has(Effect.PHANTOM_FORCE) ||
+        teamEffects.has(Effect.CURSE)
+      ) {
+        let enemyWithHighestAP: PokemonEntity | undefined = undefined
+        let highestAP = 0
+        opponentsCursable.forEach((enemy) => {
+          if (enemy.ap >= highestAP && !enemy.status.runeProtect) {
+            highestAP = enemy.ap
+            enemyWithHighestAP = enemy as PokemonEntity
+          }
+        })
+        if (enemyWithHighestAP) {
+          enemyWithHighestAP = enemyWithHighestAP as PokemonEntity // see https://github.com/microsoft/TypeScript/issues/11498
+          console.log(`${enemyWithHighestAP.name} lost 30 AP and is silence`)
+          enemyWithHighestAP.addAbilityPower(-30)
+          enemyWithHighestAP.status.triggerSilence(8000, undefined)
+        }
+      }
+
+      if (
+        teamEffects.has(Effect.PHANTOM_FORCE) ||
+        teamEffects.has(Effect.CURSE)
+      ) {
+        let enemyWithHighestATK: PokemonEntity | undefined = undefined
+        let highestATK = 0
+        opponentsCursable.forEach((enemy) => {
+          if (enemy.atk > highestATK && !enemy.status.runeProtect) {
+            highestATK = enemy.atk
+            enemyWithHighestATK = enemy as PokemonEntity
+          }
+        })
+        if (enemyWithHighestATK) {
+          enemyWithHighestATK = enemyWithHighestATK as PokemonEntity // see https://github.com/microsoft/TypeScript/issues/11498
+          enemyWithHighestATK.addAttack(
+            Math.round(-0.3 * enemyWithHighestATK.atk)
+          )
+          enemyWithHighestATK.status.triggerParalysis(8000, enemyWithHighestATK)
+          console.log(
+            `${enemyWithHighestATK.name} lost 30% attack and is paralyzed`
+          )
+        }
+      }
+
+      if (teamEffects.has(Effect.CURSE)) {
+        const strongestEnemy = getStrongestUnit(opponentsCursable)
+        if (strongestEnemy) {
+          strongestEnemy.status.triggerCurse(8000)
+          console.log(`${strongestEnemy.name} is cursed`)
+        }
+      }
     })
   }
 
@@ -915,7 +1009,7 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.SHADOW_TAG:
         case Effect.BAD_DREAMS:
-        case Effect.PHANTOM_FORCE:        
+        case Effect.PHANTOM_FORCE:
         case Effect.CURSE:
           if (types.has(Synergy.GHOST)) {
             pokemon.effects.add(effect)
