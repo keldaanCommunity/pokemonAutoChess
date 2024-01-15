@@ -459,36 +459,7 @@ export default class Simulation extends Schema implements ISimulation {
 
   applyPostEffects() {
     ;[this.blueTeam, this.redTeam].forEach((team) => {
-      const ironDefenseCandidates = values(team).filter((p) =>
-        p.effects.has(Effect.IRON_DEFENSE)
-      )
-      if (ironDefenseCandidates.length > 0) {
-        ironDefenseCandidates.forEach((pokemon) =>
-          pokemon.effects.delete(Effect.IRON_DEFENSE)
-        )
-        const ironDefensePkm = pickRandomIn(ironDefenseCandidates)
-        ironDefensePkm.addAttack(ironDefensePkm.baseAtk)
-        ironDefensePkm.effects.add(Effect.IRON_DEFENSE)
-      }
-
-      const steelSurgeCandidates = values(team).filter((p) =>
-        p.effects.has(Effect.STEEL_SURGE)
-      )
-
-      if (steelSurgeCandidates.length > 0) {
-        steelSurgeCandidates.forEach((pokemon) => {
-          pokemon.effects.delete(Effect.STEEL_SURGE)
-          pokemon.effects.add(Effect.AUTOMATE)
-        })
-        const steelSurgePkm = pickRandomIn(steelSurgeCandidates)
-        steelSurgePkm.addAttack(steelSurgePkm.baseAtk)
-        steelSurgePkm.effects.add(Effect.STEEL_SURGE)
-      }
-
       team.forEach((pokemon) => {
-        if (pokemon.effects.has(Effect.AUTOMATE)) {
-          pokemon.addAttack(pokemon.baseAtk)
-        }
         if (
           pokemon.effects.has(Effect.DRAGON_SCALES) ||
           pokemon.effects.has(Effect.DRAGON_DANCE)
@@ -773,21 +744,12 @@ export default class Simulation extends Schema implements ISimulation {
           }
           break
 
-        case Effect.IRON_DEFENSE:
-          if (types.has(Synergy.STEEL)) {
-            pokemon.effects.add(Effect.IRON_DEFENSE)
-          }
-          break
-
-        case Effect.AUTOMATE:
-          if (types.has(Synergy.STEEL)) {
-            pokemon.effects.add(Effect.AUTOMATE)
-          }
-          break
-
         case Effect.STEEL_SURGE:
+        case Effect.STEEL_SPIKE:
+        case Effect.CORKSCREW_CRASH:
+        case Effect.MAX_MELTDOWN:
           if (types.has(Synergy.STEEL)) {
-            pokemon.effects.add(Effect.STEEL_SURGE)
+            pokemon.effects.add(effect)
           }
           break
 
@@ -951,10 +913,10 @@ export default class Simulation extends Schema implements ISimulation {
           }
           break
 
-        case Effect.PHANTOM_FORCE:
-        case Effect.CURSE:
         case Effect.SHADOW_TAG:
-        case Effect.WANDERING_SPIRIT:
+        case Effect.BAD_DREAMS:
+        case Effect.PHANTOM_FORCE:        
+        case Effect.CURSE:
           if (types.has(Synergy.GHOST)) {
             pokemon.effects.add(effect)
           }
@@ -1138,7 +1100,11 @@ export default class Simulation extends Schema implements ISimulation {
           break
       }
     })
-    if (pokemon.passive === Passive.GHOLDENGO && pokemon.player && pokemon.player.money >= 50) {
+    if (
+      pokemon.passive === Passive.GHOLDENGO &&
+      pokemon.player &&
+      pokemon.player.money >= 50
+    ) {
       pokemon.status.triggerRuneProtect(60000)
     }
 
