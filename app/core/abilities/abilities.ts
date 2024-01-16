@@ -6836,6 +6836,38 @@ export class LovelyKissStrategy extends AbilityStrategy {
   }
 }
 
+export class OverdriveStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const cells = board.getCellsInRadius(target.positionX, target.positionY, 3)
+    cells.forEach((cell) => {
+      if (cell && cell.value && cell.value.team !== pokemon.team) {
+        const distance = distanceC(
+          cell.x,
+          cell.y,
+          pokemon.positionX,
+          pokemon.positionY
+        )
+        const damage = pokemon.atk * (1.2 - 0.2 * (distance - 1))
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit,
+          true
+        )
+      }
+    })
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -7101,5 +7133,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.POLTERGEIST]: new PoltergeistStrategy(),
   [Ability.CRUSH_GRIP]: new CrushGripStrategy(),
   [Ability.AURASPHERE]: new AuraSphereStrategy(),
+  [Ability.OVERDRIVE]: new OverdriveStrategy(),
   [Ability.LOVELY_KISS]: new LovelyKissStrategy()
 }

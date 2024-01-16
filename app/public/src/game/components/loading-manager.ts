@@ -835,6 +835,11 @@ export function loadAttacksMultiAtlas(scene: Phaser.Scene) {
     "/assets/attacks/AURASPHERE.json",
     "/assets/attacks"
   )
+  scene.load.multiatlas(
+    "OVERDRIVE",
+    "/assets/attacks/OVERDRIVE.json",
+    "/assets/attacks"
+  )
 }
 
 export function loadEnvironmentMultiAtlas(scene: Phaser.Scene) {

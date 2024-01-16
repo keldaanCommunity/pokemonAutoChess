@@ -1,5 +1,8 @@
 # New Pokemons:
 
+- Toxel
+- Toxtricity
+
 # Changes to Pokemon & Abilities
 
 - Riolu is now rare additional pick. New ability: Aura sphere: Exudes an aura and projects energy in a line, dealing 25/50 special damage and Silence every enemy hit for 3 seconds
@@ -47,7 +50,7 @@ Base components stats have been reviewed to be closer to each other:
 # Gameplay
 
 - Removed on-crit effects for abilities: scope lens PP gain, fairy splash and razor fang armor reduction no longer apply for abilities crit
-- Comfey floral heal and Leppa berry consumption are now done before casting the ability
+- Comfey floral heal and Leppa berry consumption are now done before casting the ability, so that they can be used with abilitives giving Protect.
 - Stage 15: Mew joins the battle !
 
 # UI
