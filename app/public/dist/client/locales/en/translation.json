@@ -1058,7 +1058,7 @@
     "AURORA_VEIL": "All allies receive [5,10,15,SP] SHIELD and RUNE_PROTECT for 0.5 seconds",
     "AQUA_JET": "Dash into the enemy backline, dealing [30,60,120,SP] SPECIAL",
     "JUDGEMENT": "Inflicts [10,SP] special damage to the target, multiplied by the sum of Arceus synergy levels",
-    "CHATTER": "Deal [10,SP] SPECIAL to all enemies. Every enemy has [30,SP]% chance to be CONFUSION for 1 second",
+    "CHATTER": "Deal [20,SP] SPECIAL to all enemies. Every enemy has 50% chance to be CONFUSION for 1 second",
     "STEAM_ERUPTION": "Deals [80,SP] SPECIAL to the target and all enemies adjacent, and BURN them for 3 seconds",
     "APPLE_ACID": "Deals [30,60,120,SP] SPECIAL to the target, and lower its DEF and SPE_DEF by [5,SP] points",
     "SACRED_SWORD": "Deals [100,SP] TRUE to the target",

@@ -914,7 +914,7 @@
     "AURORA_VEIL": "Tutti gli alleati ricevono [5,10,15,SP] SHIELD e RUNE_PROTECT per 0.5 secondi",
     "AQUA_JET": "Scatta nelle retrovie nemiche, infliggendo [30,60,120,SP] SPECIAL",
     "JUDGEMENT": "Infligge [10,SP] danni speciali al bersaglio, moltiplicati per la somma dei livelli di sinergia di Arceus",
-    "CHATTER": "Infliggi [10,SP] SPECIAL a tutti i nemici. Ogni nemico ha il [30,SP]% di possibilità di essere CONFUSION per 1 secondo",
+    "CHATTER": "Infliggi [20,SP] SPECIAL a tutti i nemici. Ogni nemico ha il 50% di possibilità di essere CONFUSION per 1 secondo",
     "STEAM_ERUPTION": "Infligge [80,SP] SPECIAL al bersaglio e a tutti i nemici adiacenti, bruciandoli per 3 secondi",
     "APPLE_ACID": "Infligge [30,60,120,SP] SPECIAL al bersaglio e abbassa la sua DEF e SPE_DEF di [5,SP] punti",
     "SACRED_SWORD": "Distribuisce [100,SP] TRUE al bersaglio",

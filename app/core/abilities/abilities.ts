@@ -575,8 +575,8 @@ export class ChatterStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = 10
-    const confusionChance = max(1)(0.3 * (1 + pokemon.ap / 100))
+    const damage = 20
+    const confusionChance = 0.5
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
         tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)

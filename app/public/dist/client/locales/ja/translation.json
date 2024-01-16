@@ -914,7 +914,7 @@
     "AURORA_VEIL": "0.5秒間、味方全体に[5,10,15,SP]シールドとRUNE_PROTECTを与える。",
     "AQUA_JET": "敵後衛に突進し[30,60,120,SP]SPECIALを与える",
     "JUDGEMENT": "ターゲットにアルセウスのシナジーレベルの合計を乗じた[10,SP]の特殊ダメージを与える",
-    "CHATTER": "敵全体に[10,SP]のSPECIALを与える。すべての敵は[30,SP]%の確率で1秒間混乱状態になります",
+    "CHATTER": "敵全体に[20,SP]のSPECIALを与える。すべての敵は50%の確率で1秒間混乱状態になります",
     "STEAM_ERUPTION": "ターゲットと隣接する敵全員に[80,SP]のSPECIALを与え、3秒間炎上させる",
     "APPLE_ACID": "対象に[30,60,120,SP] SPECIAL を与え、DEF と SPE_DEF を[5,SP]ポイント下げる",
     "SACRED_SWORD": "対象に[100,SP]TRUEを与える",
