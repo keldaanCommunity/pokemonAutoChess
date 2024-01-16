@@ -5,8 +5,18 @@
 - Riolu is now rare additional pick. New ability: Aura sphere: Exudes an aura and projects energy in a line, dealing 25/50 special damage and Silence every enemy hit for 3 seconds
 - Rework Nightmare (Ghastly): Silence all enemy Pokémon for 1.5/3/8 seconds. Any opponent asleep, flinched or already silenced take 50 special damage.
 - Onix: removed Steel, buffed HP ~~150~~ 200 ; Steelix still has Steel style
+- Buff Happiny PP ~~130~~ 120
+- Confusion (Meditite) now also cause Silence in addition to Confusion
+- Nerf Charge (Zapdos): increase attack & attack speed by ~~30~~ 25%
+- Leaf Stone (Kartana) now deals true damage
+- Buff Rotom: Attack ~~12~~ 15
+- Nerf Helioptile and Heliodisk: HP ~~90/220~~ 75/170 Def/Spedef ~~3/4~~ 2/3
+- Nerf Regieleki: PP ~~90~~ 100
+- Buff Chatot; Chatter: ~~10~~ 20 special damage, chance of confusion ~~30%~~ 50%, no longer scales with AP
 
 # Changes to Synergies
+
+- Changed Light 4 Eternal light: increase ~~Attack Speed~~ Def & SpeDef by 30%
 
 # Changes to Items
 

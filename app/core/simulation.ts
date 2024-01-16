@@ -1117,7 +1117,8 @@ export default class Simulation extends Schema implements ISimulation {
             pokemon.addAttack(Math.ceil(pokemon.atk * 0.3), false)
             pokemon.addAbilityPower(30, false)
             pokemon.status.triggerRuneProtect(10000)
-            pokemon.addAttackSpeed(30, false)
+            pokemon.addDefense(0.3 * pokemon.baseDef)
+            pokemon.addSpecialDefense(0.3 * pokemon.baseSpeDef)
           }
           break
 
@@ -1138,7 +1139,11 @@ export default class Simulation extends Schema implements ISimulation {
           break
       }
     })
-    if (pokemon.passive === Passive.GHOLDENGO && pokemon.player && pokemon.player.money >= 50) {
+    if (
+      pokemon.passive === Passive.GHOLDENGO &&
+      pokemon.player &&
+      pokemon.player.money >= 50
+    ) {
       pokemon.status.triggerRuneProtect(60000)
     }
 
