@@ -674,7 +674,9 @@ export enum Pkm {
   GIMMIGHOUL = "GIMMIGHOUL",
   GHOLDENGO = "GHOLDENGO",
   PHANTUMP = "PHANTUMP",
-  TREVENANT = "TREVENANT"
+  TREVENANT = "TREVENANT",
+  TOXEL = "TOXEL",
+  TOXTRICITY = "TOXTRICITY"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1351,7 +1353,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.GIMMIGHOUL]: "0999-0001",
   [Pkm.GHOLDENGO]: "1000",
   [Pkm.PHANTUMP]: "0708",
-  [Pkm.TREVENANT]: "0709"
+  [Pkm.TREVENANT]: "0709",
+  [Pkm.TOXEL]: "0848",
+  [Pkm.TOXTRICITY]: "0849"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2028,7 +2032,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.GIMMIGHOUL]: Pkm.GIMMIGHOUL,
   [Pkm.GHOLDENGO]: Pkm.GIMMIGHOUL,
   [Pkm.PHANTUMP]: Pkm.PHANTUMP,
-  [Pkm.TREVENANT]: Pkm.PHANTUMP
+  [Pkm.TREVENANT]: Pkm.PHANTUMP,
+  [Pkm.TOXEL]: Pkm.TOXEL,
+  [Pkm.TOXTRICITY]: Pkm.TOXTRICITY
 }
 
 export enum PkmDuo {
@@ -5533,5 +5539,15 @@ export const AnimationConfig: {
     attack: AnimationType.Punch,
     ability: AnimationType.Swing,
     emote: AnimationType.Charge
+  },
+  [Pkm.TOXEL]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.TOXTRICITY]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shock,
+    emote: AnimationType.Shoot
   }
 }

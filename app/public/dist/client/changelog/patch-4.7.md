@@ -1,5 +1,8 @@
 # New Pokemons:
 
+- Toxel
+- Toxtricity
+
 # Changes to Pokemon & Abilities
 
 - Riolu is now rare additional pick. New ability: Aura sphere: Exudes an aura and projects energy in a line, dealing 25/50 special damage and Silence every enemy hit for 3 seconds
@@ -12,7 +15,7 @@
 
 # Gameplay
 
-- Comfey floral heal and Leppa berry consumption are now done before casting the ability
+- Comfey floral heal and Leppa berry consumption are now done before casting the ability, so that they can be used with abilitives giving Protect.
 
 # UI
 

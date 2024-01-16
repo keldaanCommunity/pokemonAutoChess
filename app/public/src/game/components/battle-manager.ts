@@ -1955,6 +1955,30 @@ export default class BattleManager {
             )
             break
 
+          case Ability.OVERDRIVE:
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
+            specialProjectile = this.scene.add.sprite(
+              coordinates[0],
+              coordinates[1],
+              "specials",
+              `${Ability.OVERDRIVE}/000`
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setOrigin(0.5, 0.5)
+            specialProjectile.setScale(4, 4)
+            specialProjectile.anims.play(Ability.OVERDRIVE)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
+
           case Ability.SMOG:
             coordinates = transformAttackCoordinate(
               positionX,

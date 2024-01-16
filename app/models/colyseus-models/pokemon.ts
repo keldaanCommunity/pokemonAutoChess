@@ -11178,6 +11178,45 @@ export class Cursola extends Pokemon {
   additional = true
 }
 
+export class Toxel extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.POISON,
+    Synergy.BABY
+  ])
+  rarity = Rarity.RARE
+  evolution = Pkm.TOXTRICITY
+  stars = 1
+  hp = 90
+  atk = 10
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.OVERDRIVE
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+  additional = true
+}
+
+export class Toxtricity extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.POISON,
+    Synergy.SOUND
+  ])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 200
+  atk = 23
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.OVERDRIVE
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+  additional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (shiny: boolean, emotion: Emotion) => Pokemon
@@ -11855,5 +11894,7 @@ export const PokemonClasses: Record<
   [Pkm.GIMMIGHOUL]: Gimmighoul,
   [Pkm.GHOLDENGO]: Gholdengo,
   [Pkm.PHANTUMP]: Phantump,
-  [Pkm.TREVENANT]: Trevenant
+  [Pkm.TREVENANT]: Trevenant,
+  [Pkm.TOXEL]: Toxel,
+  [Pkm.TOXTRICITY]: Toxtricity
 }
