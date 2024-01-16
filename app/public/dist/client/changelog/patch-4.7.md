@@ -9,9 +9,9 @@
 # Changes to Synergies
 
 - Ghost has been reworked, they now apply various curses on the opponent team at the start of the fight:
-  (2) Bad Dreams: Also, the opponent unit with the highest HP + shield lose 30% of it and is flinch for 8 seconds
+  (2) Bad Dreams: The opponent unit with the highest HP + shield lose 30% of it and is flinch for 8 seconds
   (4) Phantom force: Also, the opponent unit with the highest attack lose 30% of it and is paralyzed for 8 seconds
-  (6) Shadow tag: The opponent unit with the highest AP lose 30% of it and is silenced for 8 seconds
+  (6) Shadow tag: Also, the opponent unit with the highest AP lose 30% of it and is silenced for 8 seconds
   (8) Curse: Also, the strongest opponent unit is cursed and will be KO after 8 seconds
 
 - Steel gets the previous effects of Ghost synergy, to deal a percentage of their damage as true damage:
