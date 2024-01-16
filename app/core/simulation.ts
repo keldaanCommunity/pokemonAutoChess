@@ -4,7 +4,7 @@ import { Schema, MapSchema, type, SetSchema } from "@colyseus/schema"
 import { getUnitScore, PokemonEntity } from "./pokemon-entity"
 import PokemonFactory from "../models/pokemon-factory"
 import { Pokemon } from "../models/colyseus-models/pokemon"
-import { Berries, CompletedItems, Item } from "../types/enum/Item"
+import { Berries, CraftableItems, Item } from "../types/enum/Item"
 import { Effect } from "../types/enum/Effect"
 import {
   AttackType,
@@ -388,7 +388,7 @@ export default class Simulation extends Schema implements ISimulation {
 
   applyItemsEffects(pokemon: PokemonEntity) {
     if (pokemon.passive === Passive.PICKUP && pokemon.items.size === 0) {
-      pokemon.items.add(pickRandomIn(CompletedItems.concat(Berries)))
+      pokemon.items.add(pickRandomIn(CraftableItems.concat(Berries)))
     }
     // wonderbox should be applied first so that wonderbox items effects can be applied after
     if (pokemon.items.has(Item.WONDER_BOX)) {

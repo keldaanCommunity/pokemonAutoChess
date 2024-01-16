@@ -193,7 +193,7 @@ export const ArtificialItems: Item[] = [
   Item.BIG_NUGGET
 ]
 
-export const CompletedItems: Item[] = Object.keys(ItemRecipe) as Item[]
+export const CraftableItems: Item[] = Object.keys(ItemRecipe) as Item[]
 
 export const SynergyStones = [
   Item.OLD_AMBER,

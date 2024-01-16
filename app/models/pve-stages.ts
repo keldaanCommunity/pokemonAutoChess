@@ -3,7 +3,7 @@ import {
   Item,
   BasicItems,
   NonSpecialItemComponents,
-  CompletedItems,
+  CraftableItems,
   SynergyStones,
   ArtificialItems
 } from "../types/enum/Item"
@@ -127,7 +127,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     ],
     chooseOnlyOne: true,
     getRewards() {
-      return pickNRandomIn(CompletedItems, 3)
+      return pickNRandomIn(CraftableItems, 3)
     }
   },
 
@@ -142,7 +142,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     ],
     chooseOnlyOne: true,
     getRewards() {
-      return pickNRandomIn(CompletedItems, 3)
+      return pickNRandomIn(CraftableItems, 3)
     }
   },
 
@@ -157,7 +157,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     ],
     chooseOnlyOne: true,
     getRewards() {
-      return pickNRandomIn(CompletedItems, 3)
+      return pickNRandomIn(CraftableItems, 3)
     }
   },
 
@@ -175,7 +175,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     ],
     chooseOnlyOne: true,
     getRewards() {
-      return pickNRandomIn(CompletedItems, 3)
+      return pickNRandomIn(CraftableItems, 3)
     }
   },
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { ArtificialItems, BasicItems, Berries, CompletedItems, Item } from "../../../../../types/enum/Item"
+import { ArtificialItems, BasicItems, Berries, CraftableItems, Item } from "../../../../../types/enum/Item"
 import { PkmWithConfig } from "../../../../../types"
 import { Tooltip } from "react-tooltip"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
@@ -18,7 +18,7 @@ export default function ItemPicker(props: {
 
   const tabs = [
     { label: t("components"), key: "components", items: BasicItems},
-    { label: t("completed_items"), key: "completed", items: CompletedItems},
+    { label: t("craftable_items"), key: "craftable", items: CraftableItems},
     { label: t("berries"), key: "berries", items: Berries},
     { label: t("artificial_items"), key: "artificial_items", items: ArtificialItems },
   ]
