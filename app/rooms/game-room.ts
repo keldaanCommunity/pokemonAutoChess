@@ -598,10 +598,10 @@ export default class GameRoom extends Room<GameState> {
             if (rank === 1) {
               usr.wins += 1
               if (this.state.lobbyType === LobbyType.RANKED) {
-                if(this.state.minRank === EloRank.GREATBALL){
+                if (this.state.minRank === EloRank.GREATBALL) {
                   usr.booster += 1
                 }
-                if(this.state.minRank === EloRank.ULTRABALL){
+                if (this.state.minRank === EloRank.ULTRABALL) {
                   usr.booster += 5
                 }
                 player.titles.add(Title.VANQUISHER)
@@ -852,12 +852,12 @@ export default class GameRoom extends Room<GameState> {
     if (this.state.additionalPokemons.includes(pkm)) return // already picked, probably a double click
     if (UniqueShop.includes(pkm)) {
       if (this.state.stageLevel !== PortalCarouselStages[0]) return // should not be pickable at this stage
-      if (values(player.board).some((p) => UniqueShop.includes(p.name))) return // already picked a T10 mythical
+      if (values(player.board).some((p) => UniqueShop.includes(p.name))) return // already picked a unique
     }
     if (LegendaryShop.includes(pkm)) {
       if (this.state.stageLevel !== PortalCarouselStages[1]) return // should not be pickable at this stage
       if (values(player.board).some((p) => LegendaryShop.includes(p.name)))
-        return // already picked a T10 mythical
+        return // already picked a legendary
     }
 
     const pokemonsObtained: Pokemon[] = (

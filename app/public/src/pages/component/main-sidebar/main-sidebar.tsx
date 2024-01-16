@@ -2,24 +2,25 @@ import React, { useCallback, useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router"
 import { useTranslation } from "react-i18next"
 import { Sidebar, Menu, MenuItem, MenuItemProps } from "react-pro-sidebar"
-import { useAppDispatch, useAppSelector } from "../../hooks"
-import { setSearchedUser } from "../../stores/LobbyStore"
-import { Role } from "../../../../types"
-import { cc } from "../utils/jsx"
-import Booster from "./booster/booster"
-import PokemonCollection from "./collection/pokemon-collection"
-import Profile from "./profile/profile"
-import GameOptionsModal from "./game/game-options-modal"
-import MetaReport from "./meta-report/meta-report"
-import KeybindInfo from "./keybind-info/keybind-info"
-import { BasicModal } from "./modal/modal"
-import Patchnotes from "./patchnotes/patchnotes"
-import { usePatchVersion } from "./patchnotes/usePatchVersion"
-import Wiki from "./wiki/wiki"
-import TeamBuilderModal from "./bot-builder/team-builder-modal"
-import Jukebox from "./jukebox/jukebox"
-import { GADGETS } from "../../../../core/gadgets"
-import pkg from "../../../../../package.json"
+import { useAppDispatch, useAppSelector } from "../../../hooks"
+import { setSearchedUser } from "../../../stores/LobbyStore"
+import { Role } from "../../../../../types"
+import { cc } from "../../utils/jsx"
+import Booster from "../booster/booster"
+import PokemonCollection from "../collection/pokemon-collection"
+import Profile from "../profile/profile"
+import GameOptionsModal from "../game/game-options-modal"
+import MetaReport from "../meta-report/meta-report"
+import KeybindInfo from "../keybind-info/keybind-info"
+import { BasicModal } from "../modal/modal"
+import Patchnotes from "../patchnotes/patchnotes"
+import { usePatchVersion } from "../patchnotes/usePatchVersion"
+import Wiki from "../wiki/wiki"
+import TeamBuilderModal from "../bot-builder/team-builder-modal"
+import Jukebox from "../jukebox/jukebox"
+import { ServerAnnouncementForm } from "../server-announcement/server-announcement-form"
+import { GADGETS } from "../../../../../core/gadgets"
+import pkg from "../../../../../../package.json"
 
 import "./main-sidebar.css"
 
@@ -176,20 +177,28 @@ export function MainSidebar(props: MainSidebarProps) {
             </NavLink>
           )}
 
-        {page !== "game" &&
-          (user?.role === Role.ADMIN || user?.role === Role.MODERATOR) && (
+        {page !== "game" && user?.role === Role.ADMIN && (
+          <>
+            <NavLink
+              svg="pokemon-sprite"
+              onClick={() => navigate("/sprite-viewer")}
+            >
+              Sprite Viewer
+            </NavLink>
+            <NavLink svg="map" onClick={() => navigate("/map-viewer")}>
+              Map Viewer
+            </NavLink>
             <>
               <NavLink
-                svg="pokemon-sprite"
-                onClick={() => navigate("/sprite-viewer")}
+                svg="megaphone"
+                location="announcement"
+                handleClick={changeModal}
               >
-                Sprite Viewer
-              </NavLink>
-              <NavLink svg="map" onClick={() => navigate("/map-viewer")}>
-                Map Viewer
+                Announcement
               </NavLink>
             </>
-          )}
+          </>
+        )}
 
         {page === "game" && (
           <NavLink svg="keyboard" location="keybinds" handleClick={changeModal}>
@@ -331,6 +340,7 @@ export type Modals =
   | "options"
   | "keybinds"
   | "jukebox"
+  | "announcement"
 
 function Modals({
   modal,
@@ -403,6 +413,11 @@ function Modals({
         show={modal === "options"}
         page={page}
         hideModal={closeModal}
+      />
+      <BasicModal
+        handleClose={closeModal}
+        show={modal === "announcement"}
+        body={<ServerAnnouncementForm />}
       />
       <Jukebox show={modal === "jukebox"} handleClose={closeModal} />
     </>

@@ -522,10 +522,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.effects.has(Effect.TELEPORT_NEXT_ATTACK)) {
       const crit =
-        this.items.has(Item.REAPER_CLOTH) && chance(this.critChance / 100)
-      if (crit) {
-        this.onCritical({ target, board })
-      }
+        this.items.has(Item.REAPER_CLOTH) && chance(this.critChance / 100)      
       target.handleSpecialDamage(
         [15, 30, 60][this.stars - 1],
         board,
@@ -648,12 +645,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         target.addPP(-manaDrain)
         target.count.manaBurnCount++
         this.addPP(manaDrain)
-      }
-    }
-
-    if (this.hasSynergyEffect(Synergy.GHOST)) {
-      if (chance(1 / 2)) {
-        target.status.triggerSilence(3000, this)
       }
     }
 
@@ -830,9 +821,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (berry && this.life > 0 && this.life < 0.5 * this.hp) {
       this.eatBerry(berry)
     }
+
+    // Reduce sleep duration
+    if (this.status.sleepCooldown > 0) {
+      this.status.sleepCooldown -= 500
+    }
   }
 
-  onCritical({ target, board }: { target: PokemonEntity; board: Board }) {
+  onCriticalAttack({ target, board }: { target: PokemonEntity; board: Board }) {
     target.count.crit++
 
     // proc fairy splash damage for both the attacker and the target

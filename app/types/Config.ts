@@ -21,7 +21,6 @@ export const RarityHpCost: { [key in Rarity]: number } = Object.freeze({
   [Rarity.ULTRA]: 3,
   [Rarity.UNIQUE]: 3,
   [Rarity.LEGENDARY]: 3,
-  [Rarity.MYTHICAL]: 3,
   [Rarity.SPECIAL]: 1,
   [Rarity.HATCH]: 4
 })
@@ -36,7 +35,6 @@ export const RarityCost: { [key in Rarity]: number } = Object.freeze({
   [Rarity.ULTRA]: 5,
   [Rarity.UNIQUE]: 6,
   [Rarity.LEGENDARY]: 7,
-  [Rarity.MYTHICAL]: 10,
   [Rarity.HATCH]: 11
 })
 
@@ -88,7 +86,7 @@ export const SynergyTriggers: { [key in Synergy]: number[] } = {
   [Synergy.FIGHTING]: [2, 4, 6],
   [Synergy.PSYCHIC]: [2, 4, 6],
   [Synergy.DARK]: [3, 5, 7],
-  [Synergy.STEEL]: [2, 4, 6],
+  [Synergy.STEEL]: [2, 4, 6, 8],
   [Synergy.GROUND]: [2, 4, 6, 8],
   [Synergy.POISON]: [3, 5, 7],
   [Synergy.DRAGON]: [3, 5, 7],
@@ -122,7 +120,6 @@ export const RarityColor: { [key in Rarity]: string } = {
   [Rarity.ULTRA]: "#E53B3B",
   [Rarity.UNIQUE]: "#ffffff",
   [Rarity.LEGENDARY]: "#e6cb49",
-  [Rarity.MYTHICAL]: "#ffc0cb",
   [Rarity.SPECIAL]: "#967FFF",
   [Rarity.HATCH]: "#b9915a"
 }
@@ -135,7 +132,6 @@ export const BoosterRarityProbability: { [key in Rarity]: number } = {
   [Rarity.ULTRA]: 0.06,
   [Rarity.UNIQUE]: 0.08,
   [Rarity.LEGENDARY]: 0.05,
-  [Rarity.MYTHICAL]: 0.01,
   [Rarity.HATCH]: 0.1,
   [Rarity.SPECIAL]: 0
 }
@@ -176,7 +172,6 @@ export const PoolSize: { [key in Rarity]: [number, number, number] } = {
   [Rarity.ULTRA]: [1, 5, 10],
   [Rarity.UNIQUE]: [1, 1, 1],
   [Rarity.LEGENDARY]: [1, 1, 1],
-  [Rarity.MYTHICAL]: [1, 1, 1],
   [Rarity.SPECIAL]: [0, 0, 0],
   [Rarity.HATCH]: [0, 0, 0]
 }
@@ -398,7 +393,7 @@ export const HatchList = new Array<Pkm>(
   Pkm.AXEW
 )
 
-export const NB_MYTHICAL_PROPOSITIONS = 6
+export const NB_UNIQUE_PROPOSITIONS = 6
 export const SHOP_SIZE = 6
 
 export const FishRarityProbability: {
@@ -641,60 +636,60 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.FOSSIL_STONE]: {},
   [Item.TWISTED_SPOON]: { [Stat.AP]: 10 },
   [Item.MAGNET]: { [Stat.ATK_SPEED]: 10 },
-  [Item.BLACK_GLASSES]: { [Stat.CRIT_CHANCE]: 5 },
+  [Item.BLACK_GLASSES]: { [Stat.CRIT_CHANCE]: 10 },
   [Item.MIRACLE_SEED]: { [Stat.SHIELD]: 15 },
-  [Item.CHARCOAL]: { [Stat.ATK]: 1 },
-  [Item.NEVER_MELT_ICE]: { [Stat.SPE_DEF]: 1 },
-  [Item.HEART_SCALE]: { [Stat.DEF]: 1 },
+  [Item.CHARCOAL]: { [Stat.ATK]: 3 },
+  [Item.NEVER_MELT_ICE]: { [Stat.SPE_DEF]: 2 },
+  [Item.HEART_SCALE]: { [Stat.DEF]: 2 },
   [Item.MYSTIC_WATER]: { [Stat.PP]: 15 },
   [Item.OLD_AMBER]: {},
   [Item.DAWN_STONE]: { [Stat.AP]: 10 },
   [Item.WATER_STONE]: { [Stat.PP]: 15 },
   [Item.THUNDER_STONE]: { [Stat.ATK_SPEED]: 10 },
-  [Item.FIRE_STONE]: { [Stat.ATK]: 1 },
-  [Item.MOON_STONE]: { [Stat.DEF]: 1 },
-  [Item.DUSK_STONE]: { [Stat.CRIT_CHANCE]: 5 },
+  [Item.FIRE_STONE]: { [Stat.ATK]: 3 },
+  [Item.MOON_STONE]: { [Stat.DEF]: 2 },
+  [Item.DUSK_STONE]: { [Stat.CRIT_CHANCE]: 10 },
   [Item.LEAF_STONE]: { [Stat.SHIELD]: 15 },
-  [Item.ICE_STONE]: { [Stat.SPE_DEF]: 1 },
+  [Item.ICE_STONE]: { [Stat.SPE_DEF]: 2 },
   [Item.CHOICE_SPECS]: { [Stat.AP]: 100 },
   [Item.SOUL_DEW]: { [Stat.AP]: 10, [Stat.PP]: 15 },
   [Item.UPGRADE]: { [Stat.AP]: 10, [Stat.ATK_SPEED]: 10 },
   [Item.REAPER_CLOTH]: { [Stat.AP]: 20, [Stat.CRIT_CHANCE]: 20 },
   [Item.POKEMONOMICON]: { [Stat.AP]: 10, [Stat.SHIELD]: 15 },
   [Item.POWER_LENS]: { [Stat.AP]: 10, [Stat.SPE_DEF]: 5 },
-  [Item.SHELL_BELL]: { [Stat.AP]: 10, [Stat.ATK]: 1 },
-  [Item.LUCKY_EGG]: { [Stat.AP]: 10, [Stat.DEF]: 1 },
+  [Item.SHELL_BELL]: { [Stat.AP]: 10, [Stat.ATK]: 3 },
+  [Item.LUCKY_EGG]: { [Stat.AP]: 10, [Stat.DEF]: 2 },
   [Item.AQUA_EGG]: { [Stat.PP]: 50 },
   [Item.BLUE_ORB]: { [Stat.PP]: 15, [Stat.ATK_SPEED]: 10 },
   [Item.SCOPE_LENS]: { [Stat.PP]: 15, [Stat.CRIT_CHANCE]: 25 },
   [Item.STAR_DUST]: { [Stat.PP]: 15, [Stat.SHIELD]: 15 },
-  [Item.DELTA_ORB]: { [Stat.PP]: 15, [Stat.SPE_DEF]: 1 },
-  [Item.MANA_SCARF]: { [Stat.PP]: 15, [Stat.ATK]: 1 },
-  [Item.SMOKE_BALL]: { [Stat.PP]: 15, [Stat.DEF]: 1 },
+  [Item.DELTA_ORB]: { [Stat.PP]: 15, [Stat.SPE_DEF]: 2 },
+  [Item.MANA_SCARF]: { [Stat.PP]: 15, [Stat.ATK]: 3 },
+  [Item.SMOKE_BALL]: { [Stat.PP]: 15, [Stat.DEF]: 2 },
   [Item.XRAY_VISION]: { [Stat.ATK_SPEED]: 50 },
   [Item.RAZOR_FANG]: {
     [Stat.ATK_SPEED]: 10,
-    [Stat.CRIT_CHANCE]: 5,
+    [Stat.CRIT_CHANCE]: 10,
     [Stat.CRIT_DAMAGE]: 1
   },
   [Item.LEFTOVERS]: { [Stat.ATK_SPEED]: 10, [Stat.SHIELD]: 15 },
-  [Item.CHOICE_SCARF]: { [Stat.ATK_SPEED]: 10, [Stat.SPE_DEF]: 1 },
-  [Item.FIRE_GEM]: { [Stat.ATK_SPEED]: 10, [Stat.ATK]: 1 },
-  [Item.DEFENSIVE_RIBBON]: { [Stat.ATK_SPEED]: 10, [Stat.DEF]: 1 },
+  [Item.CHOICE_SCARF]: { [Stat.ATK_SPEED]: 10, [Stat.SPE_DEF]: 2 },
+  [Item.FIRE_GEM]: { [Stat.ATK_SPEED]: 10, [Stat.ATK]: 3 },
+  [Item.DEFENSIVE_RIBBON]: { [Stat.ATK_SPEED]: 10, [Stat.DEF]: 2 },
   [Item.WONDER_BOX]: { [Stat.CRIT_CHANCE]: 10 },
-  [Item.CLEANSE_TAG]: { [Stat.CRIT_CHANCE]: 5, [Stat.SHIELD]: 15 },
-  [Item.WIDE_LENS]: { [Stat.CRIT_CHANCE]: 5, [Stat.SPE_DEF]: 1 },
-  [Item.RAZOR_CLAW]: { [Stat.CRIT_CHANCE]: 55, [Stat.ATK]: 1 },
-  [Item.FLUFFY_TAIL]: { [Stat.CRIT_CHANCE]: 5, [Stat.DEF]: 5 },
+  [Item.CLEANSE_TAG]: { [Stat.CRIT_CHANCE]: 10, [Stat.SHIELD]: 15 },
+  [Item.WIDE_LENS]: { [Stat.CRIT_CHANCE]: 10, [Stat.SPE_DEF]: 2 },
+  [Item.RAZOR_CLAW]: { [Stat.CRIT_CHANCE]: 50, [Stat.ATK]: 3 },
+  [Item.FLUFFY_TAIL]: { [Stat.CRIT_CHANCE]: 10, [Stat.DEF]: 2 },
   [Item.KINGS_ROCK]: { [Stat.SHIELD]: 150 },
-  [Item.SHINY_CHARM]: { [Stat.SHIELD]: 15, [Stat.SPE_DEF]: 1 },
-  [Item.GRACIDEA_FLOWER]: { [Stat.SHIELD]: 15, [Stat.ATK]: 1 },
-  [Item.FLAME_ORB]: { [Stat.SHIELD]: 15, [Stat.DEF]: 1 },
+  [Item.SHINY_CHARM]: { [Stat.SHIELD]: 15, [Stat.SPE_DEF]: 2 },
+  [Item.GRACIDEA_FLOWER]: { [Stat.SHIELD]: 15, [Stat.ATK]: 3 },
+  [Item.FLAME_ORB]: { [Stat.SHIELD]: 15, [Stat.DEF]: 2 },
   [Item.ASSAULT_VEST]: { [Stat.SPE_DEF]: 20 },
-  [Item.AMULET_COIN]: { [Stat.SPE_DEF]: 1, [Stat.ATK]: 1 },
-  [Item.POKE_DOLL]: { [Stat.SPE_DEF]: 1, [Stat.DEF]: 1 },
+  [Item.AMULET_COIN]: { [Stat.SPE_DEF]: 2, [Stat.ATK]: 3 },
+  [Item.POKE_DOLL]: { [Stat.SPE_DEF]: 2, [Stat.DEF]: 2 },
   [Item.RED_ORB]: { [Stat.ATK]: 10 },
-  [Item.MAX_REVIVE]: { [Stat.ATK]: 1, [Stat.DEF]: 1 },
+  [Item.MAX_REVIVE]: { [Stat.ATK]: 3, [Stat.DEF]: 2 },
   [Item.ROCKY_HELMET]: { [Stat.DEF]: 12 },
   [Item.AGUAV_BERRY]: {},
   [Item.APICOT_BERRY]: {},
@@ -721,14 +716,14 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.MAGMARIZER]: { [Stat.ATK]: 8 },
   [Item.MACHO_BRACE]: { [Stat.ATK]: 15, [Stat.ATK_SPEED]: -25 },
   [Item.LIGHT_BALL]: { [Stat.AP]: 75 },
-  [Item.TOXIC_ORB]: { [Stat.SHIELD]: 15, [Stat.SPE_DEF]: 1 },
+  [Item.TOXIC_ORB]: { [Stat.SHIELD]: 15, [Stat.SPE_DEF]: 2 },
   [Item.METRONOME]: { [Stat.PP]: 5 },
   [Item.METAL_COAT]: { [Stat.DEF]: 5 },
   [Item.SWIFT_WING]: { [Stat.ATK_SPEED]: 25 },
   [Item.HARD_STONE]: { [Stat.SHIELD]: 100 },
   [Item.BIG_NUGGET]: {
-    [Stat.DEF]: 3,
-    [Stat.SPE_DEF]: 3
+    [Stat.DEF]: 5,
+    [Stat.SPE_DEF]: 5
   },
   [Item.INCENSE]: { [Stat.SPE_DEF]: 5 },
   [Item.EXP_SHARE]: {}

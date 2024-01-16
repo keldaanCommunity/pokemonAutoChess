@@ -107,12 +107,6 @@ export default function SynergyDetailComponent(props: {
           return <PokemonPortrait p={pokemon} key={p} />
         })}
       </div>
-      {/*<div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
-        {precomputed[props.type].mythicalPokemons.map((p) => {
-          const pokemon = PokemonFactory.createPokemonFromName(p as Pkm)
-          return <PokemonPortrait p={pokemon} />
-        })}
-      </div>*/}
     </div>
   )
 }

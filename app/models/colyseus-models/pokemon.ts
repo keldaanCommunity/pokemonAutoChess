@@ -102,7 +102,6 @@ export class Pokemon extends Schema implements IPokemon {
     return (
       this.rarity !== Rarity.UNIQUE &&
       this.rarity !== Rarity.LEGENDARY &&
-      this.rarity !== Rarity.MYTHICAL &&
       this.rarity !== Rarity.HATCH &&
       ![Pkm.DITTO, Pkm.EGG].includes(this.name)
     )
@@ -5361,7 +5360,7 @@ export class Rotom extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 12
+  atk = 15
   def = 3
   speDef = 3
   maxPP = 100
@@ -5776,7 +5775,7 @@ export class Torkoal extends Pokemon {
 
 export class PrimalGroudon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.FIRE])
-  rarity = Rarity.MYTHICAL
+  rarity = Rarity.LEGENDARY
   stars = 4
   hp = 400
   atk = 30
@@ -5795,7 +5794,7 @@ export class PrimalKyogre extends Pokemon {
     Synergy.ELECTRIC,
     Synergy.MONSTER
   ])
-  rarity = Rarity.MYTHICAL
+  rarity = Rarity.LEGENDARY
   stars = 4
   hp = 400
   atk = 20
@@ -5810,7 +5809,7 @@ export class PrimalKyogre extends Pokemon {
 
 export class MegaRayquaza extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.FLYING])
-  rarity = Rarity.MYTHICAL
+  rarity = Rarity.LEGENDARY
   stars = 4
   hp = 400
   atk = 30
@@ -6572,7 +6571,7 @@ export class Regieleki extends Pokemon {
   atk = 20
   def = 3
   speDef = 3
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.VOLT_SWITCH
   attackSprite = AttackSprite.ELECTRIC_RANGE
@@ -6688,7 +6687,7 @@ export class Happiny extends Pokemon {
   atk = 8
   def = 5
   speDef = 5
-  maxPP = 130
+  maxPP = 120
   range = 1
   skill = Ability.SOFT_BOILED
   attackSprite = AttackSprite.FAIRY_MELEE
@@ -6703,7 +6702,7 @@ export class Chansey extends Pokemon {
   atk = 20
   def = 6
   speDef = 4
-  maxPP = 130
+  maxPP = 120
   range = 1
   skill = Ability.SOFT_BOILED
   attackSprite = AttackSprite.FAIRY_MELEE
@@ -6717,7 +6716,7 @@ export class Blissey extends Pokemon {
   atk = 25
   def = 10
   speDef = 8
-  maxPP = 130
+  maxPP = 120
   range = 1
   skill = Ability.SOFT_BOILED
   attackSprite = AttackSprite.FAIRY_MELEE
@@ -7417,7 +7416,7 @@ export class Smoochum extends Pokemon {
   speDef = 1
   maxPP = 80
   range = 2
-  skill = Ability.CONFUSION
+  skill = Ability.LOVELY_KISS
   additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
@@ -7432,7 +7431,7 @@ export class Jynx extends Pokemon {
   speDef = 3
   maxPP = 80
   range = 2
-  skill = Ability.CONFUSION
+  skill = Ability.LOVELY_KISS
   additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
@@ -9833,7 +9832,7 @@ export class Spectrier extends Pokemon {
 }
 
 export class Kartana extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.STEEL])
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.GRASS])
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 230
@@ -10030,10 +10029,10 @@ export class Helioptile extends Pokemon {
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.HELIOLISK
-  hp = 90
+  hp = 75
   atk = 9
-  def = 3
-  speDef = 3
+  def = 2
+  speDef = 2
   maxPP = 80
   range = 3
   skill = Ability.PARABOLIC_CHARGE
@@ -10050,10 +10049,10 @@ export class Heliolisk extends Pokemon {
   ])
   rarity = Rarity.EPIC
   stars = 2
-  hp = 220
+  hp = 170
   atk = 22
-  def = 4
-  speDef = 4
+  def = 3
+  speDef = 3
   maxPP = 80
   range = 3
   skill = Ability.PARABOLIC_CHARGE
@@ -11203,6 +11202,45 @@ export class Smeargle extends Pokemon {
   }
 }
 
+export class Toxel extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.POISON,
+    Synergy.BABY
+  ])
+  rarity = Rarity.RARE
+  evolution = Pkm.TOXTRICITY
+  stars = 1
+  hp = 90
+  atk = 10
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.OVERDRIVE
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+  additional = true
+}
+
+export class Toxtricity extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.POISON,
+    Synergy.SOUND
+  ])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 200
+  atk = 23
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.OVERDRIVE
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+  additional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (shiny: boolean, emotion: Emotion) => Pokemon
@@ -11881,5 +11919,7 @@ export const PokemonClasses: Record<
   [Pkm.GHOLDENGO]: Gholdengo,
   [Pkm.PHANTUMP]: Phantump,
   [Pkm.TREVENANT]: Trevenant,
-  [Pkm.SMEARGLE]: Smeargle
+  [Pkm.SMEARGLE]: Smeargle,
+  [Pkm.TOXEL]: Toxel,
+  [Pkm.TOXTRICITY]: Toxtricity
 }

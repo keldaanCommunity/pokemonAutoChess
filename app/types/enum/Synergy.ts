@@ -50,8 +50,18 @@ export const SynergyEffects: { [key in Synergy]: Effect[] } = Object.freeze({
   [Synergy.FIGHTING]: [Effect.GUTS, Effect.DEFIANT, Effect.JUSTIFIED],
   [Synergy.PSYCHIC]: [Effect.AMNESIA, Effect.LIGHT_SCREEN, Effect.EERIE_SPELL],
   [Synergy.DARK]: [Effect.HONE_CLAWS, Effect.ASSURANCE, Effect.BEAT_UP],
-  [Synergy.STEEL]: [Effect.IRON_DEFENSE, Effect.AUTOMATE, Effect.STEEL_SURGE],
-  [Synergy.GROUND]: [Effect.TILLER, Effect.DIGGER, Effect.DRILLER, Effect.DEEP_MINER],
+  [Synergy.STEEL]: [
+    Effect.STEEL_SURGE,
+    Effect.STEEL_SPIKE,
+    Effect.CORKSCREW_CRASH,
+    Effect.MAX_MELTDOWN
+  ],
+  [Synergy.GROUND]: [
+    Effect.TILLER,
+    Effect.DIGGER,
+    Effect.DRILLER,
+    Effect.DEEP_MINER
+  ],
   [Synergy.POISON]: [Effect.POISONOUS, Effect.VENOMOUS, Effect.TOXIC],
   [Synergy.DRAGON]: [
     Effect.DRAGON_ENERGY,
@@ -86,10 +96,10 @@ export const SynergyEffects: { [key in Synergy]: Effect[] } = Object.freeze({
     Effect.DIAMOND_STORM
   ],
   [Synergy.GHOST]: [
+    Effect.BAD_DREAMS,
     Effect.PHANTOM_FORCE,
-    Effect.CURSE,
     Effect.SHADOW_TAG,
-    Effect.WANDERING_SPIRIT
+    Effect.CURSE
   ],
   [Synergy.FAIRY]: [
     Effect.AROMATIC_MIST,

@@ -108,7 +108,7 @@ export default class PokemonFactory {
       const pokemon = PokemonFactory.createPokemonFromName(p)
       return (
         currentFossils.includes(p) === false &&
-        [Rarity.UNIQUE, Rarity.LEGENDARY, Rarity.MYTHICAL].includes(
+        [Rarity.UNIQUE, Rarity.LEGENDARY].includes(
           pokemon.rarity
         ) === false
       )
@@ -139,7 +139,7 @@ export default class PokemonFactory {
       return [3, 4, 5][pokemon.stars - 1] ?? 5
     } else if (pokemon.rarity === Rarity.UNIQUE) {
       return duo ? 8 : 15
-    } else if ([Rarity.LEGENDARY, Rarity.MYTHICAL].includes(pokemon.rarity)) {
+    } else if (pokemon.rarity === Rarity.LEGENDARY) {
       return duo ? 10 : 20
     } else if (PokemonFactory.getPokemonBaseEvolution(name) == Pkm.EEVEE) {
       return RarityCost[pokemon.rarity]

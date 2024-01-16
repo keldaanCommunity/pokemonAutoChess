@@ -14,7 +14,6 @@ const data: Partial<
       pokemons: Pkm[]
       uniquePokemons: Pkm[]
       legendaryPokemons: Pkm[]
-      mythicalPokemons: Pkm[]
       additionalPokemons: Pkm[]
     }
   >
@@ -30,7 +29,6 @@ precomputedPokemons.forEach((pokemon) => {
         pokemons: [],
         uniquePokemons: [],
         legendaryPokemons: [],
-        mythicalPokemons: [],
         additionalPokemons: []
       }
     }
@@ -39,8 +37,6 @@ precomputedPokemons.forEach((pokemon) => {
       data[type]!.uniquePokemons.push(pokemon.name)
     } else if (pokemon.rarity === Rarity.LEGENDARY) {
       data[type]!.legendaryPokemons.push(pokemon.name)
-    } else if (pokemon.rarity === Rarity.MYTHICAL) {
-      data[type]!.mythicalPokemons.push(pokemon.name)
     } else if (pokemon.additional) {
       if (!data[type]!.additionalPokemons.includes(PkmFamily[pokemon.name])) {
         data[type]!.additionalPokemons.push(pokemon.name)

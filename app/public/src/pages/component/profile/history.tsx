@@ -3,16 +3,16 @@ import {
   IGameRecord,
   IPokemonRecord
 } from "../../../../../models/colyseus-models/game-record"
-import Elo from "../elo"
+import { EloBadge } from "./elo-badge"
 import Team from "../after/team"
 import SynergyIcon from "../icons/synergy-icon"
 import { formatDate } from "../../utils/date"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { computeSynergies } from "../../../../../models/colyseus-models/synergies"
-import "./history.css"
 import { useTranslation } from "react-i18next"
-import {SynergyTriggers} from "../../../../../types/Config"
+import { SynergyTriggers } from "../../../../../types/Config"
+import "./history.css"
 
 export default function History(props: { history: IGameRecord[] }) {
   const { t } = useTranslation()
@@ -29,7 +29,7 @@ export default function History(props: { history: IGameRecord[] }) {
               <span className="top">
                 {t("top")} {r.rank}
               </span>
-              <Elo elo={r.elo} />
+              <EloBadge elo={r.elo} />
               <ul className="synergies">
                 {getTopSynergies(r.pokemons).map(([type, value]) => (
                   <li key={r.time + type}>
@@ -60,7 +60,7 @@ function getTopSynergies(team: IPokemonRecord[]): [Synergy, number][] {
   )
 
   const topSynergies = [...synergies.entries()]
-    .sort((a, b) => a[1] < SynergyTriggers[a[0]][0] ? 1 : b[1] - a[1])
+    .sort((a, b) => (a[1] < SynergyTriggers[a[0]][0] ? 1 : b[1] - a[1]))
     .slice(0, 3)
   return topSynergies
 }

@@ -675,7 +675,9 @@ export enum Pkm {
   GHOLDENGO = "GHOLDENGO",
   PHANTUMP = "PHANTUMP",
   TREVENANT = "TREVENANT",
-  SMEARGLE = "SMEARGLE"
+  SMEARGLE = "SMEARGLE",
+  TOXEL = "TOXEL",
+  TOXTRICITY = "TOXTRICITY"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1353,7 +1355,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.GHOLDENGO]: "1000",
   [Pkm.PHANTUMP]: "0708",
   [Pkm.TREVENANT]: "0709",
-  [Pkm.SMEARGLE]: "0235"
+  [Pkm.SMEARGLE]: "0235",
+  [Pkm.TOXEL]: "0848",
+  [Pkm.TOXTRICITY]: "0849"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2031,7 +2035,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.GHOLDENGO]: Pkm.GIMMIGHOUL,
   [Pkm.PHANTUMP]: Pkm.PHANTUMP,
   [Pkm.TREVENANT]: Pkm.PHANTUMP,
-  [Pkm.SMEARGLE]: Pkm.SMEARGLE
+  [Pkm.SMEARGLE]: Pkm.SMEARGLE,
+  [Pkm.TOXEL]: Pkm.TOXEL,
+  [Pkm.TOXTRICITY]: Pkm.TOXTRICITY
 }
 
 export enum PkmDuo {
@@ -4125,13 +4131,13 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.SMOOCHUM]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Twirl,
-    emote: AnimationType.Shoot
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Twirl
   },
   [Pkm.JYNX]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Slap,
+    attack: AnimationType.Slap,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
   [Pkm.SALANDIT]: {
@@ -5117,7 +5123,7 @@ export const AnimationConfig: {
   },
   [Pkm.KARTANA]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge,
+    ability: AnimationType.Attack,
     emote: AnimationType.Shoot
   },
   [Pkm.CHINGLING]: {
@@ -5541,5 +5547,15 @@ export const AnimationConfig: {
     attack: AnimationType.SpAttack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Pose
+  },
+  [Pkm.TOXEL]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.TOXTRICITY]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shock,
+    emote: AnimationType.Shoot
   }
 }

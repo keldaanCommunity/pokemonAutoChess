@@ -2478,6 +2478,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.OVERDRIVE,
+      frames: this.game.anims.generateFrameNames(Ability.OVERDRIVE, {
+        start: 0,
+        end: 20,
+        zeroPad: 3
+      }),
+      duration: 800,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.LINK_CABLE,
       frames: this.game.anims.generateFrameNames(Ability.LINK_CABLE, {
         start: 0,
