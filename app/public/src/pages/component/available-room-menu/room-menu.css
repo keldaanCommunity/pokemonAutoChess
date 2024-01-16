@@ -7,6 +7,7 @@
   text-align: center;
   color: white;
   font-size: 1.5vw;
+  margin-top: 1em;
 }
 
 .room-menu .react-tabs__tab-panel--selected {

@@ -3,7 +3,7 @@ import { t } from "i18next"
 import { useNavigate } from "react-router-dom"
 
 import DebugScene from "./component/debug/debug-scene"
-import { MainSidebar } from "./component/main-sidebar"
+import { MainSidebar } from "./component/main-sidebar/main-sidebar"
 import { PokemonTypeahead } from "./component/typeahead/pokemon-typeahead"
 
 import { AnimationConfig, Pkm } from "../../../types/enum/Pokemon"

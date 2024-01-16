@@ -1,15 +1,16 @@
 import React, { useEffect } from "react"
-import StyledFirebaseAuth from "../StyledFirebaseAuth"
+import { StyledFirebaseAuth } from "./styled-firebase-auth"
 import firebase from "firebase/compat/app"
 import "firebase/compat/auth"
 import { Link } from "react-router-dom"
-import "firebaseui/dist/firebaseui.css"
 import { useAppSelector, useAppDispatch } from "../../../hooks"
 import { logIn, logOut } from "../../../stores/NetworkStore"
 import { FIREBASE_CONFIG } from "../../utils/utils"
 import AnonymousButton from "./anonymous-button"
-import "./login.css"
 import { useTranslation } from "react-i18next"
+
+import "firebaseui/dist/firebaseui.css"
+import "./login.css"
 
 export default function Login() {
   const { t } = useTranslation()

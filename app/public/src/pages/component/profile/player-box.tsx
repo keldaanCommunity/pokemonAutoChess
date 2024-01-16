@@ -1,8 +1,8 @@
 import React from "react"
 import { ILobbyUser } from "../../../../../models/colyseus-models/lobby-user"
 import { getAvatarSrc } from "../../../utils"
-import Elo from "../elo"
-import { RoleBadge } from "../RoleBadge"
+import { EloBadge } from "./elo-badge"
+import { RoleBadge } from "./role-badge"
 import { useTranslation } from "react-i18next"
 
 export default function PlayerBox(props: { user: ILobbyUser }) {
@@ -44,7 +44,7 @@ export default function PlayerBox(props: { user: ILobbyUser }) {
         }}
       >
         <div style={{ display: "flex", alignItems: "center" }}>
-          <Elo elo={props.user.elo} />
+          <EloBadge elo={props.user.elo} />
         </div>
         <p>
           {t("level")} {props.user.level} ({props.user.exp} / 1000)

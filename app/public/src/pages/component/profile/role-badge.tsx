@@ -1,5 +1,5 @@
 import React from "react"
-import { Role, RoleColor } from "../../../../types"
+import { Role, RoleColor } from "../../../../../types"
 import Badge from "react-bootstrap/Badge"
 import { useTranslation } from "react-i18next"
 
