@@ -4122,13 +4122,13 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.SMOOCHUM]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Twirl,
-    emote: AnimationType.Shoot
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Twirl
   },
   [Pkm.JYNX]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Slap,
+    attack: AnimationType.Slap,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
   [Pkm.SALANDIT]: {

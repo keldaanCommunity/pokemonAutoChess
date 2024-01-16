@@ -5,6 +5,7 @@
 - Riolu is now rare additional pick. New ability: Aura sphere: Exudes an aura and projects energy in a line, dealing 25/50 special damage and Silence every enemy hit for 3 seconds
 - Rework Nightmare (Ghastly): Silence all enemy Pokémon for 1.5/3/8 seconds. Any opponent asleep, flinched or already silenced take 50 special damage.
 - Onix: removed Steel, buffed HP ~~150~~ 200 ; Steelix still has Steel style
+- New ability for Smoochum and Jynx: Lovely kiss: make the target sleep for 2/4 seconds (scales with AP)
 - Buff Happiny PP ~~130~~ 120
 - Confusion (Meditite) now also cause Silence in addition to Confusion
 - Nerf Charge (Zapdos): increase attack & attack speed by ~~30~~ 25%

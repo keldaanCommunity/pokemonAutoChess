@@ -6820,6 +6820,22 @@ export class AuraSphereStrategy extends AbilityStrategy {
   }
 }
 
+export class LovelyKissStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const duration = Math.round(
+      ([2000, 4000][pokemon.stars - 1] ?? 2000) * (1 + pokemon.ap / 100)
+    )
+    target.status.triggerSleep(duration, target)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -7084,5 +7100,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.TIME_TRAVEL]: new TimeTravelStrategy(),
   [Ability.POLTERGEIST]: new PoltergeistStrategy(),
   [Ability.CRUSH_GRIP]: new CrushGripStrategy(),
-  [Ability.AURASPHERE]: new AuraSphereStrategy()
+  [Ability.AURASPHERE]: new AuraSphereStrategy(),
+  [Ability.LOVELY_KISS]: new LovelyKissStrategy()
 }
