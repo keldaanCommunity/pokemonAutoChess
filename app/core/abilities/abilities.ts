@@ -6820,6 +6820,17 @@ export class AuraSphereStrategy extends AbilityStrategy {
   }
 }
 
+export class SketchStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+  }
+}
 export class LovelyKissStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -7133,6 +7144,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.POLTERGEIST]: new PoltergeistStrategy(),
   [Ability.CRUSH_GRIP]: new CrushGripStrategy(),
   [Ability.AURASPHERE]: new AuraSphereStrategy(),
+  [Ability.SKETCH]: new SketchStrategy(),
   [Ability.OVERDRIVE]: new OverdriveStrategy(),
   [Ability.LOVELY_KISS]: new LovelyKissStrategy()
 }

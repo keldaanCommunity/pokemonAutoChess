@@ -1,4 +1,5 @@
 # New Pokemons:
+- Smeargle
 
 - Toxel
 - Toxtricity

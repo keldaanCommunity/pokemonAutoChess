@@ -142,7 +142,7 @@ export class Pokemon extends Schema implements IPokemon {
     player
   }: {
     weather: Weather
-    player: IPlayer
+    player: Player
   }) {}
 
   // called at simulation start after entities are generated
@@ -11177,6 +11177,31 @@ export class Cursola extends Pokemon {
   additional = true
 }
 
+export class Smeargle extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.HUMAN])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 220
+  atk = 20
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 1
+  skill = Ability.SKETCH
+  attackSprite = AttackSprite.NORMAL_MELEE
+
+  afterSimulationStart({ player, entity }) {
+    const allyOnTheLeft = player.getPokemonAt(
+      this.positionX - 1,
+      this.positionY
+    )
+    if (allyOnTheLeft) {
+      console.log("sketch " + allyOnTheLeft.skill)
+      entity.skill = allyOnTheLeft.skill
+    }
+  }
+}
+
 export class Toxel extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.ELECTRIC,
@@ -11894,6 +11919,7 @@ export const PokemonClasses: Record<
   [Pkm.GHOLDENGO]: Gholdengo,
   [Pkm.PHANTUMP]: Phantump,
   [Pkm.TREVENANT]: Trevenant,
+  [Pkm.SMEARGLE]: Smeargle,
   [Pkm.TOXEL]: Toxel,
   [Pkm.TOXTRICITY]: Toxtricity
 }
