@@ -830,6 +830,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (berry && this.life > 0 && this.life < 0.5 * this.hp) {
       this.eatBerry(berry)
     }
+
+    // Reduce sleep duration
+    if (this.status.sleepCooldown > 0) {
+      this.status.sleepCooldown -= 500
+    }
   }
 
   onCritical({ target, board }: { target: PokemonEntity; board: Board }) {
