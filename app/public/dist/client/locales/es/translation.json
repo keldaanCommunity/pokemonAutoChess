@@ -1369,8 +1369,8 @@
     "MAX_MELTDOWN": "Reparte el 150 % del ATK como TRUE",
     "BAD_DREAMS": "La unidad del oponente con el HP + SHIELD más alto pierde el 30% del mismo y es FLINCH durante 8 segundos",
     "PHANTOM_FORCE": "Además, la unidad oponente con el mayor ATK pierde el 30% del mismo y es PARALYSIS durante 8 segundos",
+    "SHADOW_TAG": "Además, la unidad rival con el AP más alto pierde un 30% del mismo y es SILENCE durante 8 segundos.",
     "CURSE": "Además, la unidad oponente más fuerte es CURSE y será KO después de 8 segundos",
-    "SHADOW_TAG": "Además, la unidad rival con el AP más alto pierde un 30% del mismo y es SILENCE durante 8 segundos.",    
     "AROMATIC_MIST": "Los golpes causan 15 de SPECIAL",
     "FAIRY_WIND": "Los golpes causan 30 de SPECIAL",
     "STRANGE_STEAM": "Los golpes causan 45 de SPECIAL",
@@ -1687,7 +1687,7 @@
     "LIGHT": "Luz"
   },
   "synergy_description": {
-    "NORMAL": "Los Pokémon normales y sus aliados adyacentes obtienen SHIELD cuando comienza el combate.",
+    "NORMAL": "Los Pokémon NORMAL y sus aliados adyacentes obtienen SHIELD cuando comienza el combate.",
     "GRASS": "Los Pokémon GRASS curan y producen bayas con el tiempo.",
     "FIRE": "Los Pokémon FIRE ganan ATK después de cada golpe y tienen la posibilidad de provocar BURN a sus enemigos durante 2 segundos.",
     "WATER": "Los Pokémon WATER tienen la posibilidad de esquivar los ataques básicos. Se pesca un nuevo Pokémon de agua después de cada turno de PvP y se coloca en tu banco.",
@@ -1713,8 +1713,8 @@
     "FOSSIL": "En su primer KO, los Pokémon FOSSIL vuelven a la vida con un mayor ATK",
     "SOUND": "Los Pokémon SOUND emiten un grito cuando usan sus habilidades, lo que despierta a los aliados dormidos y les otorga estadísticas adicionales.",
     "ARTIFICIAL": "Los pokemons ARTIFICIAL dan objetos únicos y ganan ATK, AP y SHIELD cuando tienen objetos.",
-    "BABY": "Los bebés pueden traerte huevos de Pokémon para consolarte después de una derrota",
-    "LIGHT": "La luz revela un foco en el campo de batalla. La unidad que se encuentra en el centro de atención al comienzo del combate obtiene bonificaciones únicas."
+    "BABY": "Los BABY pueden traerte huevos de Pokémon para consolarte después de una derrota",
+    "LIGHT": "La LIGHT revela un foco en el campo de batalla. La unidad que se encuentra en el centro de atención al comienzo del combate obtiene bonificaciones únicas."
   },
   "title": {
     "NOVICE": "Principiante",
