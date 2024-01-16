@@ -6572,7 +6572,7 @@ export class Regieleki extends Pokemon {
   atk = 20
   def = 3
   speDef = 3
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.VOLT_SWITCH
   attackSprite = AttackSprite.ELECTRIC_RANGE

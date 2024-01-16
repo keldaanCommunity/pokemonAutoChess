@@ -11,6 +11,7 @@
 - Leaf Stone (Kartana) now deals true damage
 - Buff Rotom: Attack ~~12~~ 15
 - Nerf Helioptile and Heliodisk: HP ~~90/220~~ 75/170 Def/Spedef ~~3/4~~ 2/3
+- Nerf Regieleki: PP ~~90~~ 100
 
 # Changes to Synergies
 
