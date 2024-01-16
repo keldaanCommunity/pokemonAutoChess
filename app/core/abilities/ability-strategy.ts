@@ -69,10 +69,6 @@ export class AbilityStrategy {
       pokemon.count.starDustCount++
     }
 
-    if (crit) {
-      pokemon.onCritical({ target, board })
-    }
-
     if (pokemon.items.has(Item.LEPPA_BERRY)) {
       pokemon.eatBerry(Item.LEPPA_BERRY)
     }

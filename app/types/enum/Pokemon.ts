@@ -5120,7 +5120,7 @@ export const AnimationConfig: {
   },
   [Pkm.KARTANA]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge,
+    ability: AnimationType.Attack,
     emote: AnimationType.Shoot
   },
   [Pkm.CHINGLING]: {

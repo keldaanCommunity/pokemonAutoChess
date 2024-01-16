@@ -1,9 +1,16 @@
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
 import { t } from "i18next"
 import React, { useEffect, useMemo, useState } from "react"
 import {
   IItemsStatistic,
   fetchMetaItems
 } from "../../../../../models/mongo-models/items-statistic"
+import {
+  BasicItems,
+  CraftableItems,
+  Berries,
+  ArtificialItems
+} from "../../../../../types/enum/Item"
 import ItemStatistic from "./item-statistic"
 
 export function ItemReport() {
@@ -25,6 +32,17 @@ export function ItemReport() {
     })
   }, [metaItems, itemRankingBy])
 
+  const tabs = [
+    { label: t("craftable_items"), key: "craftable", items: CraftableItems },
+    {
+      label: t("artificial_items"),
+      key: "artificial_items",
+      items: ArtificialItems
+    },
+    { label: t("components"), key: "components", items: BasicItems },
+    { label: t("berries"), key: "berries", items: Berries }
+  ]
+
   return (
     <div id="item-report">
       <header>
@@ -44,14 +62,31 @@ export function ItemReport() {
           </option>
         </select>
       </header>
-      <div style={{ height: "calc(90vh - 8em)", overflowY: "scroll" }}>
-        {sortedMetaItems.length === 0 && (
-          <p>{loading ? t("loading") : t("no_data_available")}</p>
-        )}
-        {sortedMetaItems.map((item, i) => {
-          return <ItemStatistic item={item} key={item.name} rank={i + 1} />
-        })}
-      </div>
+
+      <Tabs>
+        <TabList>
+          {tabs.map((tab) => (
+            <Tab key={tab.key}>{tab.label}</Tab>
+          ))}
+        </TabList>
+        {tabs.map((tab) => (
+          <TabPanel
+            key={tab.key}
+            style={{ height: "calc(90vh - 12em)", overflowY: "scroll" }}
+          >
+            {sortedMetaItems.length === 0 && (
+              <p>{loading ? t("loading") : t("no_data_available")}</p>
+            )}
+            {sortedMetaItems
+              .filter((item) => tab.items.includes(item.name))
+              .map((item, i) => {
+                return (
+                  <ItemStatistic item={item} key={item.name} rank={i + 1} />
+                )
+              })}
+          </TabPanel>
+        ))}
+      </Tabs>
     </div>
   )
 }

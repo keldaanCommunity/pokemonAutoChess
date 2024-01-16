@@ -575,8 +575,8 @@ export class ChatterStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = 10
-    const confusionChance = max(1)(0.3 * (1 + pokemon.ap / 100))
+    const damage = 20
+    const confusionChance = 0.5
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
         tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
@@ -2239,6 +2239,7 @@ export class ConfusionStrategy extends AbilityStrategy {
         crit
       )
     } else {
+      target.status.triggerSilence(timer, target)
       target.status.triggerConfusion(timer, target)
     }
   }
@@ -2857,7 +2858,7 @@ export class ChargeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const buff = 0.3
+    const buff = 0.25
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (
         ally &&
@@ -3150,7 +3151,14 @@ export class LeafBladeStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, true)
     const damage = Math.round(pokemon.atk * (1 + pokemon.ap / 100))
-    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, true)
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.TRUE,
+      pokemon,
+      true,
+      false
+    )
   }
 }
 
