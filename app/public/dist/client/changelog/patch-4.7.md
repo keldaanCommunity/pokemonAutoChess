@@ -49,4 +49,5 @@ Base components stats have been reviewed to be closer to each other:
 # Misc
 
 - Added Ultraball Ranked lobby on a weekly basis, on Sunday at 9pm UTC. 5 boosters for the winner
+- Removed mythical category. Primal Groudon, Primal Kyogre and Mega Rayquaza are now Legendary tier 4
 - Added back the sleep duration reduction when taking damage: -0.5 seconds per hit received

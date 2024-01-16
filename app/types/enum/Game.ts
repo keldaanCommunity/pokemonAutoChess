@@ -6,7 +6,6 @@ export enum Rarity {
   ULTRA = "ULTRA",
   UNIQUE = "UNIQUE",
   LEGENDARY = "LEGENDARY",
-  MYTHICAL = "MYTHICAL",
   HATCH = "HATCH",
   SPECIAL = "SPECIAL"
 }
