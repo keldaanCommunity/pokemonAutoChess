@@ -228,16 +228,6 @@ export default class Pokemon extends DraggableObject {
     this.add(this.itemsContainer)
 
     if (instanceofPokemonEntity(pokemon)) {
-      if (
-        p.effects &&
-        (p.effects.has(Effect.IRON_DEFENSE) || p.effects.has(Effect.AUTOMATE))
-      ) {
-        this.sprite.setScale(3, 3)
-      }
-      if (p.effects && p.effects.has(Effect.STEEL_SURGE)) {
-        this.sprite.setScale(4, 4)
-      }
-
       this.setLifeBar(p, scene)
       this.setPowerBar(p, scene)
       //this.setEffects(p, scene);

@@ -21,7 +21,6 @@ export const RarityHpCost: { [key in Rarity]: number } = Object.freeze({
   [Rarity.ULTRA]: 3,
   [Rarity.UNIQUE]: 3,
   [Rarity.LEGENDARY]: 3,
-  [Rarity.MYTHICAL]: 3,
   [Rarity.SPECIAL]: 1,
   [Rarity.HATCH]: 4
 })
@@ -36,7 +35,6 @@ export const RarityCost: { [key in Rarity]: number } = Object.freeze({
   [Rarity.ULTRA]: 5,
   [Rarity.UNIQUE]: 6,
   [Rarity.LEGENDARY]: 7,
-  [Rarity.MYTHICAL]: 10,
   [Rarity.HATCH]: 11
 })
 
@@ -88,7 +86,7 @@ export const SynergyTriggers: { [key in Synergy]: number[] } = {
   [Synergy.FIGHTING]: [2, 4, 6],
   [Synergy.PSYCHIC]: [2, 4, 6],
   [Synergy.DARK]: [3, 5, 7],
-  [Synergy.STEEL]: [2, 4, 6],
+  [Synergy.STEEL]: [2, 4, 6, 8],
   [Synergy.GROUND]: [2, 4, 6, 8],
   [Synergy.POISON]: [3, 5, 7],
   [Synergy.DRAGON]: [3, 5, 7],
@@ -122,7 +120,6 @@ export const RarityColor: { [key in Rarity]: string } = {
   [Rarity.ULTRA]: "#E53B3B",
   [Rarity.UNIQUE]: "#ffffff",
   [Rarity.LEGENDARY]: "#e6cb49",
-  [Rarity.MYTHICAL]: "#ffc0cb",
   [Rarity.SPECIAL]: "#967FFF",
   [Rarity.HATCH]: "#b9915a"
 }
@@ -135,7 +132,6 @@ export const BoosterRarityProbability: { [key in Rarity]: number } = {
   [Rarity.ULTRA]: 0.06,
   [Rarity.UNIQUE]: 0.08,
   [Rarity.LEGENDARY]: 0.05,
-  [Rarity.MYTHICAL]: 0.01,
   [Rarity.HATCH]: 0.1,
   [Rarity.SPECIAL]: 0
 }
@@ -176,7 +172,6 @@ export const PoolSize: { [key in Rarity]: [number, number, number] } = {
   [Rarity.ULTRA]: [1, 5, 10],
   [Rarity.UNIQUE]: [1, 1, 1],
   [Rarity.LEGENDARY]: [1, 1, 1],
-  [Rarity.MYTHICAL]: [1, 1, 1],
   [Rarity.SPECIAL]: [0, 0, 0],
   [Rarity.HATCH]: [0, 0, 0]
 }
@@ -398,7 +393,7 @@ export const HatchList = new Array<Pkm>(
   Pkm.AXEW
 )
 
-export const NB_MYTHICAL_PROPOSITIONS = 6
+export const NB_UNIQUE_PROPOSITIONS = 6
 export const SHOP_SIZE = 6
 
 export const FishRarityProbability: {

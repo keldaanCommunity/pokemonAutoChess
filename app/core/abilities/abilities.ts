@@ -6820,6 +6820,22 @@ export class AuraSphereStrategy extends AbilityStrategy {
   }
 }
 
+export class LovelyKissStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const duration = Math.round(
+      ([2000, 4000][pokemon.stars - 1] ?? 2000) * (1 + pokemon.ap / 100)
+    )
+    target.status.triggerSleep(duration, target)
+  }
+}
+
 export class OverdriveStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -7117,5 +7133,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.POLTERGEIST]: new PoltergeistStrategy(),
   [Ability.CRUSH_GRIP]: new CrushGripStrategy(),
   [Ability.AURASPHERE]: new AuraSphereStrategy(),
-  [Ability.OVERDRIVE]: new OverdriveStrategy()
+  [Ability.OVERDRIVE]: new OverdriveStrategy(),
+  [Ability.LOVELY_KISS]: new LovelyKissStrategy()
 }

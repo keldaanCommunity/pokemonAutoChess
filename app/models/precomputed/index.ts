@@ -16,7 +16,6 @@ export const PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY =
       pokemons: Pkm[]
       uniquePokemons: Pkm[]
       legendaryPokemons: Pkm[]
-      mythicalPokemons: Pkm[]
       additionalPokemons: Pkm[]
     }
   }

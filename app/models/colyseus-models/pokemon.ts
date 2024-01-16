@@ -102,7 +102,6 @@ export class Pokemon extends Schema implements IPokemon {
     return (
       this.rarity !== Rarity.UNIQUE &&
       this.rarity !== Rarity.LEGENDARY &&
-      this.rarity !== Rarity.MYTHICAL &&
       this.rarity !== Rarity.HATCH &&
       ![Pkm.DITTO, Pkm.EGG].includes(this.name)
     )
@@ -5776,7 +5775,7 @@ export class Torkoal extends Pokemon {
 
 export class PrimalGroudon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.FIRE])
-  rarity = Rarity.MYTHICAL
+  rarity = Rarity.LEGENDARY
   stars = 4
   hp = 400
   atk = 30
@@ -5795,7 +5794,7 @@ export class PrimalKyogre extends Pokemon {
     Synergy.ELECTRIC,
     Synergy.MONSTER
   ])
-  rarity = Rarity.MYTHICAL
+  rarity = Rarity.LEGENDARY
   stars = 4
   hp = 400
   atk = 20
@@ -5810,7 +5809,7 @@ export class PrimalKyogre extends Pokemon {
 
 export class MegaRayquaza extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.FLYING])
-  rarity = Rarity.MYTHICAL
+  rarity = Rarity.LEGENDARY
   stars = 4
   hp = 400
   atk = 30
@@ -7417,7 +7416,7 @@ export class Smoochum extends Pokemon {
   speDef = 1
   maxPP = 80
   range = 2
-  skill = Ability.CONFUSION
+  skill = Ability.LOVELY_KISS
   additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
@@ -7432,7 +7431,7 @@ export class Jynx extends Pokemon {
   speDef = 3
   maxPP = 80
   range = 2
-  skill = Ability.CONFUSION
+  skill = Ability.LOVELY_KISS
   additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }

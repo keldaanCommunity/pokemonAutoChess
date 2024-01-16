@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-extra-semi */
 import Board from "./board"
 import { Schema, MapSchema, type, SetSchema } from "@colyseus/schema"
-import { getUnitScore, PokemonEntity } from "./pokemon-entity"
+import { getStrongestUnit, getUnitScore, PokemonEntity } from "./pokemon-entity"
 import PokemonFactory from "../models/pokemon-factory"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { Berries, CraftableItems, Item } from "../types/enum/Item"
@@ -23,7 +23,7 @@ import { Synergy } from "../types/enum/Synergy"
 import { BOARD_HEIGHT, BOARD_WIDTH, ItemStats } from "../types/Config"
 import { getPath } from "../public/src/pages/utils/utils"
 import GameRoom from "../rooms/game-room"
-import { pickRandomIn, randomBetween } from "../utils/random"
+import { pickRandomIn, randomBetween, shuffleArray } from "../utils/random"
 import { Passive } from "../types/enum/Passive"
 import Player from "../models/colyseus-models/player"
 import { values } from "../utils/schemas"
@@ -459,36 +459,7 @@ export default class Simulation extends Schema implements ISimulation {
 
   applyPostEffects() {
     ;[this.blueTeam, this.redTeam].forEach((team) => {
-      const ironDefenseCandidates = values(team).filter((p) =>
-        p.effects.has(Effect.IRON_DEFENSE)
-      )
-      if (ironDefenseCandidates.length > 0) {
-        ironDefenseCandidates.forEach((pokemon) =>
-          pokemon.effects.delete(Effect.IRON_DEFENSE)
-        )
-        const ironDefensePkm = pickRandomIn(ironDefenseCandidates)
-        ironDefensePkm.addAttack(ironDefensePkm.baseAtk)
-        ironDefensePkm.effects.add(Effect.IRON_DEFENSE)
-      }
-
-      const steelSurgeCandidates = values(team).filter((p) =>
-        p.effects.has(Effect.STEEL_SURGE)
-      )
-
-      if (steelSurgeCandidates.length > 0) {
-        steelSurgeCandidates.forEach((pokemon) => {
-          pokemon.effects.delete(Effect.STEEL_SURGE)
-          pokemon.effects.add(Effect.AUTOMATE)
-        })
-        const steelSurgePkm = pickRandomIn(steelSurgeCandidates)
-        steelSurgePkm.addAttack(steelSurgePkm.baseAtk)
-        steelSurgePkm.effects.add(Effect.STEEL_SURGE)
-      }
-
       team.forEach((pokemon) => {
-        if (pokemon.effects.has(Effect.AUTOMATE)) {
-          pokemon.addAttack(pokemon.baseAtk)
-        }
         if (
           pokemon.effects.has(Effect.DRAGON_SCALES) ||
           pokemon.effects.has(Effect.DRAGON_DANCE)
@@ -614,6 +585,93 @@ export default class Simulation extends Schema implements ISimulation {
           pokemon.effects.add(Effect.IMMUNITY_CONFUSION)
         }
       })
+
+      const teamEffects =
+        team === this.blueTeam ? this.blueEffects : this.redEffects
+      const opponentTeam = team === this.blueTeam ? this.redTeam : this.blueTeam
+      const opponentsCursable = shuffleArray(
+        [...opponentTeam.values()].filter(
+          (enemy) => !enemy.status.runeProtect
+        ) as PokemonEntity[]
+      )
+
+      if (
+        teamEffects.has(Effect.BAD_DREAMS) ||
+        teamEffects.has(Effect.PHANTOM_FORCE) ||
+        teamEffects.has(Effect.SHADOW_TAG) ||
+        teamEffects.has(Effect.CURSE)
+      ) {
+        let enemyWithHighestHP: PokemonEntity | undefined = undefined
+        let highestHP = 0
+        opponentsCursable.forEach((enemy) => {
+          if (
+            enemy.hp + enemy.shield > highestHP &&
+            !enemy.status.runeProtect
+          ) {
+            highestHP = enemy.hp + enemy.shield
+            enemyWithHighestHP = enemy as PokemonEntity
+          }
+        })
+        if (enemyWithHighestHP) {
+          enemyWithHighestHP = enemyWithHighestHP as PokemonEntity // see https://github.com/microsoft/TypeScript/issues/11498
+          enemyWithHighestHP.addMaxHP(Math.round(-0.3 * enemyWithHighestHP.hp))
+          enemyWithHighestHP.addShield(
+            Math.round(-0.3 * enemyWithHighestHP.shield),
+            enemyWithHighestHP,
+            false
+          )
+          enemyWithHighestHP.status.triggerFlinch(8000)
+        }
+      }
+
+      if (
+        teamEffects.has(Effect.PHANTOM_FORCE) ||
+        teamEffects.has(Effect.SHADOW_TAG) ||
+        teamEffects.has(Effect.CURSE)
+      ) {
+        let enemyWithHighestATK: PokemonEntity | undefined = undefined
+        let highestATK = 0
+        opponentsCursable.forEach((enemy) => {
+          if (enemy.atk > highestATK && !enemy.status.runeProtect) {
+            highestATK = enemy.atk
+            enemyWithHighestATK = enemy as PokemonEntity
+          }
+        })
+        if (enemyWithHighestATK) {
+          enemyWithHighestATK = enemyWithHighestATK as PokemonEntity // see https://github.com/microsoft/TypeScript/issues/11498
+          enemyWithHighestATK.addAttack(
+            Math.round(-0.3 * enemyWithHighestATK.atk)
+          )
+          enemyWithHighestATK.status.triggerParalysis(8000, enemyWithHighestATK)
+        }
+      }
+
+      if (        
+        teamEffects.has(Effect.SHADOW_TAG) ||
+        teamEffects.has(Effect.CURSE)
+      ) {
+        let enemyWithHighestAP: PokemonEntity | undefined = undefined
+        let highestAP = 0
+        opponentsCursable.forEach((enemy) => {
+          if (enemy.ap >= highestAP && !enemy.status.runeProtect) {
+            highestAP = enemy.ap
+            enemyWithHighestAP = enemy as PokemonEntity
+          }
+        })
+        if (enemyWithHighestAP) {
+          enemyWithHighestAP = enemyWithHighestAP as PokemonEntity // see https://github.com/microsoft/TypeScript/issues/11498
+          enemyWithHighestAP.addAbilityPower(-30)
+          enemyWithHighestAP.status.triggerSilence(8000, undefined)
+        }
+      }
+
+      if (teamEffects.has(Effect.CURSE)) {
+        const strongestEnemy = getStrongestUnit(opponentsCursable)
+        if (strongestEnemy) {
+          strongestEnemy.status.triggerCurse(8000)
+          console.log(`${strongestEnemy.name} is cursed`)
+        }
+      }
     })
   }
 
@@ -773,21 +831,12 @@ export default class Simulation extends Schema implements ISimulation {
           }
           break
 
-        case Effect.IRON_DEFENSE:
-          if (types.has(Synergy.STEEL)) {
-            pokemon.effects.add(Effect.IRON_DEFENSE)
-          }
-          break
-
-        case Effect.AUTOMATE:
-          if (types.has(Synergy.STEEL)) {
-            pokemon.effects.add(Effect.AUTOMATE)
-          }
-          break
-
         case Effect.STEEL_SURGE:
+        case Effect.STEEL_SPIKE:
+        case Effect.CORKSCREW_CRASH:
+        case Effect.MAX_MELTDOWN:
           if (types.has(Synergy.STEEL)) {
-            pokemon.effects.add(Effect.STEEL_SURGE)
+            pokemon.effects.add(effect)
           }
           break
 
@@ -951,10 +1000,10 @@ export default class Simulation extends Schema implements ISimulation {
           }
           break
 
+        case Effect.SHADOW_TAG:
+        case Effect.BAD_DREAMS:
         case Effect.PHANTOM_FORCE:
         case Effect.CURSE:
-        case Effect.SHADOW_TAG:
-        case Effect.WANDERING_SPIRIT:
           if (types.has(Synergy.GHOST)) {
             pokemon.effects.add(effect)
           }

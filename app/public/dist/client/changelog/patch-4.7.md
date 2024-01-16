@@ -8,6 +8,7 @@
 - Riolu is now rare additional pick. New ability: Aura sphere: Exudes an aura and projects energy in a line, dealing 25/50 special damage and Silence every enemy hit for 3 seconds
 - Rework Nightmare (Ghastly): Silence all enemy Pokémon for 1.5/3/8 seconds. Any opponent asleep, flinched or already silenced take 50 special damage.
 - Onix: removed Steel, buffed HP ~~150~~ 200 ; Steelix still has Steel style
+- New ability for Smoochum and Jynx: Lovely kiss: make the target sleep for 2/4 seconds (scales with AP)
 - Buff Happiny PP ~~130~~ 120
 - Confusion (Meditite) now also cause Silence in addition to Confusion
 - Nerf Charge (Zapdos): increase attack & attack speed by ~~30~~ 25%
@@ -18,6 +19,19 @@
 - Buff Chatot; Chatter: ~~10~~ 20 special damage, chance of confusion ~~30%~~ 50%, no longer scales with AP
 
 # Changes to Synergies
+
+
+- Ghost has been reworked, they now apply various curses on the opponent team at the start of the fight:
+  (2) Bad Dreams: The opponent unit with the highest HP + shield lose 30% of it and is flinch for 8 seconds
+  (4) Phantom force: Also, the opponent unit with the highest attack lose 30% of it and is paralyzed for 8 seconds
+  (6) Shadow tag: Also, the opponent unit with the highest AP lose 30% of it and is silenced for 8 seconds
+  (8) Curse: Also, the strongest opponent unit is cursed and will be KO after 8 seconds
+
+- Steel gets the previous effects of Ghost synergy, to deal a percentage of their damage as true damage:
+  (2) Steel Surge: Deal 33% of Attack as true damage
+  (4) Steel Spike: Deal 66% of Attack as true damage
+  (6) Corkscrew Crash: Deal 100% of Attack as true damage
+  (8) Max Meltdown: Deal 150% of Attack as true damage
 
 - Changed Light 4 Eternal light: increase ~~Attack Speed~~ Def & SpeDef by 30%
 
@@ -51,4 +65,5 @@ Base components stats have been reviewed to be closer to each other:
 # Misc
 
 - Added Ultraball Ranked lobby on a weekly basis, on Sunday at 9pm UTC. 5 boosters for the winner
+- Removed mythical category. Primal Groudon, Primal Kyogre and Mega Rayquaza are now Legendary tier 4
 - Added back the sleep duration reduction when taking damage: -0.5 seconds per hit received

@@ -163,16 +163,14 @@ export default class AttackingState extends PokemonState {
       }
 
       let trueDamagePart = 0
-      if (pokemon.hasSynergyEffect(Synergy.GHOST)) {
-        if (pokemon.effects.has(Effect.PHANTOM_FORCE)) {
-          trueDamagePart += 0.2
-        } else if (pokemon.effects.has(Effect.CURSE)) {
-          trueDamagePart += 0.4
-        } else if (pokemon.effects.has(Effect.SHADOW_TAG)) {
-          trueDamagePart += 0.7
-        } else if (pokemon.effects.has(Effect.WANDERING_SPIRIT)) {
-          trueDamagePart += 1.0
-        }
+      if (pokemon.effects.has(Effect.STEEL_SURGE)) {
+        trueDamagePart += 0.33
+      } else if (pokemon.effects.has(Effect.STEEL_SPIKE)) {
+        trueDamagePart += 0.66
+      } else if (pokemon.effects.has(Effect.CORKSCREW_CRASH)) {
+        trueDamagePart += 1.0
+      } else if (pokemon.effects.has(Effect.MAX_MELTDOWN)) {
+        trueDamagePart += 1.5
       }
       if (pokemon.items.has(Item.RED_ORB) && target) {
         trueDamagePart += 0.25

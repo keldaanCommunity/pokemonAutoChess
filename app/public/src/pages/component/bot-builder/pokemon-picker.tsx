@@ -91,7 +91,6 @@ function PokemonPickerTab(props: {
             Rarity.UNCOMMON,
             Rarity.LEGENDARY,
             Rarity.RARE,
-            Rarity.MYTHICAL,
             Rarity.EPIC,
             Rarity.HATCH,
             Rarity.ULTRA,

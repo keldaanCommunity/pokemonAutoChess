@@ -18,7 +18,7 @@ import {
   UncommonShop,
   FishRarityProbability,
   SHOP_SIZE,
-  NB_MYTHICAL_PROPOSITIONS
+  NB_UNIQUE_PROPOSITIONS
 } from "../types/Config"
 import { Rarity } from "../types/enum/Game"
 import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
@@ -157,27 +157,27 @@ export default class Shop {
     list: PkmProposition[],
     synergies: Synergy[]
   ) {
-    const mythicals = [...list]
+    const propositions = [...list]
 
     // ensure we have at least one synergy per proposition
-    if (synergies.length > NB_MYTHICAL_PROPOSITIONS) {
-      synergies = pickNRandomIn(synergies, NB_MYTHICAL_PROPOSITIONS)
-    } else if (synergies.length < NB_MYTHICAL_PROPOSITIONS) {
-      while (synergies.length < NB_MYTHICAL_PROPOSITIONS) {
+    if (synergies.length > NB_UNIQUE_PROPOSITIONS) {
+      synergies = pickNRandomIn(synergies, NB_UNIQUE_PROPOSITIONS)
+    } else if (synergies.length < NB_UNIQUE_PROPOSITIONS) {
+      while (synergies.length < NB_UNIQUE_PROPOSITIONS) {
         synergies.push(pickRandomIn(Synergy))
       }
     }
 
-    for (let i = 0; i < NB_MYTHICAL_PROPOSITIONS; i++) {
+    for (let i = 0; i < NB_UNIQUE_PROPOSITIONS; i++) {
       const synergy = synergies[i]
-      const candidates = mythicals.filter((m) => {
+      const candidates = propositions.filter((m) => {
         const pkm: Pkm = m in PkmDuos ? PkmDuos[m][0] : m
         return PokemonFactory.createPokemonFromName(pkm).types.has(synergy)
       })
       const selectedProposition = pickRandomIn(
-        candidates.length > 0 ? candidates : mythicals
+        candidates.length > 0 ? candidates : propositions
       )
-      removeInArray(mythicals, selectedProposition)
+      removeInArray(propositions, selectedProposition)
       player.pokemonsProposition.push(selectedProposition)
     }
   }
