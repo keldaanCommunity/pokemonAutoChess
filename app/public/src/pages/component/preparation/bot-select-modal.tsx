@@ -1,13 +1,14 @@
 import React, { useState } from "react"
 import { IBot } from "../../../../../models/mongo-models/bot-v2"
-import Elo from "../elo"
-import InlineAvatar from "../inline-avatar"
+import { EloBadge } from "../profile/elo-badge"
+import { InlineAvatar } from "../profile/inline-avatar"
 import { setBotsList } from "../../../stores/PreparationStore"
 import { useTranslation } from "react-i18next"
 import { useAppDispatch } from "../../../hooks"
 import { addBot } from "../../../stores/NetworkStore"
 import { cc } from "../../utils/jsx"
 import "./bot-select-modal.css"
+
 
 export function BotSelectModal(props: { bots: IBot[] }) {
   const dispatch = useAppDispatch()
@@ -84,7 +85,7 @@ export function BotSelectModal(props: { bots: IBot[] }) {
             }}
             key={"proposition-bot-" + bot.id}
           >
-            <Elo elo={bot.elo} />
+            <EloBadge elo={bot.elo} />
             <InlineAvatar avatar={bot.avatar} name={bot.name} />
           </li>
         ))}

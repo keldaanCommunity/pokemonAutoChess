@@ -1,5 +1,5 @@
 import React from "react"
-import { EloRankThreshold, EloRank } from "../../../../types/Config"
+import { EloRankThreshold, EloRank } from "../../../../../types/Config"
 import CSS from "csstype"
 import { useTranslation } from "react-i18next"
 
@@ -16,12 +16,17 @@ const imgStyle: CSS.Properties = {
   height: "50px"
 }
 
-export default function Elo(props: { elo: number }) {
+export function EloBadge(props: { elo: number }) {
   const { t } = useTranslation()
   const rank = getRank(props.elo)
   return (
     <div style={style} className="elo">
-      <img style={imgStyle} src={"assets/ranks/" + rank + ".svg"} alt={t("elorank."+rank)} title={t("elorank."+rank)} />
+      <img
+        style={imgStyle}
+        src={"assets/ranks/" + rank + ".svg"}
+        alt={t("elorank." + rank)}
+        title={t("elorank." + rank)}
+      />
       <p style={{ margin: "0px", fontSize: "1vw" }}>{props.elo}</p>
     </div>
   )

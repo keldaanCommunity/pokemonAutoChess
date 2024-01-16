@@ -14,7 +14,7 @@ import {
 import Player from "../../models/colyseus-models/player"
 import { getOrientation } from "../../public/src/pages/utils/utils"
 import { PokemonActionState } from "../../types/enum/Game"
-import { BasicItems, CompletedItems, Item } from "../../types/enum/Item"
+import { BasicItems, CraftableItems, Item } from "../../types/enum/Item"
 import {
   pickNRandomIn,
   pickRandomIn,
@@ -325,7 +325,7 @@ export class MiniGame {
       // Carousels after stage 20 propose full items and no longer components, and have one more proposition
       nbItemsToPick += 1
       maxCopiesPerItem = 1
-      itemsSet = CompletedItems
+      itemsSet = CraftableItems
     }
 
     for (let j = 0; j < nbItemsToPick; j++) {
