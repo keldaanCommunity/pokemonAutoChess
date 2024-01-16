@@ -1,10 +1,10 @@
 import React from "react"
-import { Role } from "../../../../types"
-import { getAvatarSrc } from "../../utils"
-import { RoleBadge } from "./RoleBadge"
+import { Role } from "../../../../../types"
+import { getAvatarSrc } from "../../../utils"
+import { RoleBadge } from "./role-badge"
 import { useTranslation } from "react-i18next"
 
-export default function InlineAvatar(props: {
+export function InlineAvatar(props: {
   avatar: string
   name: string
   title?: string

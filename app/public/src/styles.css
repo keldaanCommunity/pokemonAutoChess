@@ -635,6 +635,16 @@ p:last-child {
   background-color: rgb(84, 89, 107);
 }
 
+.react-tabs__tab--selected:after {
+  content: "";
+  position: absolute;
+  height: 5px;
+  left: -4px;
+  right: -4px;
+  bottom: -5px;
+  background: #fff;
+}
+
 /* react-tooltip */
 
 #root .react-tooltip {

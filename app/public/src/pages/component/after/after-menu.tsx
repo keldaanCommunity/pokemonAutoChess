@@ -1,6 +1,6 @@
 import React from "react"
 import { useAppSelector } from "../../../hooks"
-import Avatar from "../avatar"
+import { Avatar } from "../profile/avatar"
 import Team from "./team"
 import { getRankLabel } from "../../../../../../app/types/strings/Strings"
 import SynergyIcon from "../icons/synergy-icon"

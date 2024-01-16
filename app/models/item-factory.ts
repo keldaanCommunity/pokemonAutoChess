@@ -1,4 +1,4 @@
-import { Item, SynergyStones, CompletedItems } from "../types/enum/Item"
+import { Item, SynergyStones, CraftableItems } from "../types/enum/Item"
 import { SetSchema } from "@colyseus/schema"
 import { pickRandomIn } from "../utils/random"
 
@@ -6,7 +6,7 @@ export default class ItemFactory {
   static createWonderboxItems(existingItems: SetSchema<Item>): Item[] {
     const wonderboxItems: Item[] = []
     for (let n = 0; n < 2; n++) {
-      const elligibleItems = CompletedItems.filter(
+      const elligibleItems = CraftableItems.filter(
         (i) =>
           !SynergyStones.includes(i) &&
           !wonderboxItems.includes(i) &&

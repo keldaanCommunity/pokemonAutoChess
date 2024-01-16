@@ -5,7 +5,7 @@ import { Pkm } from "../../types/enum/Pokemon"
 export interface IItemsStatistic {
   rank: number
   count: number
-  name: string
+  name: Item
   pokemons: string[]
 }
 
@@ -35,5 +35,5 @@ export default model<IItemsStatistic>(
 )
 
 export async function fetchMetaItems(): Promise<IItemsStatistic[]> {
-  return fetch("/meta/items").then(res => res.json())
+  return fetch("/meta/items").then((res) => res.json())
 }
