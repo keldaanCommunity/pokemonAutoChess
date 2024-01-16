@@ -46,11 +46,16 @@ import {
   OnBotUploadCommand,
   createBotList,
   SelectLanguageCommand,
-  OpenRankedLobbyCommand
+  OpenRankedLobbyCommand,
+  MakeServerAnnouncementCommand
 } from "./commands/lobby-commands"
 import { Language } from "../types/enum/Language"
 import { CronJob } from "cron"
-import { EloRank, GREATBALL_RANKED_LOBBY_CRON, ULTRABALL_RANKED_LOBBY_CRON } from "../types/Config"
+import {
+  EloRank,
+  GREATBALL_RANKED_LOBBY_CRON,
+  ULTRABALL_RANKED_LOBBY_CRON
+} from "../types/Config"
 
 export default class CustomLobbyRoom extends Room<LobbyState> {
   discordWebhook: WebhookClient | undefined
@@ -348,6 +353,16 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     this.onMessage(Transfer.SEARCH, (client, { name }: { name: string }) => {
       this.dispatcher.dispatch(new OnSearchCommand(), { client, name })
     })
+
+    this.onMessage(
+      Transfer.SERVER_ANNOUNCEMENT,
+      (client, { message }: { message: string }) => {
+        this.dispatcher.dispatch(new MakeServerAnnouncementCommand(), {
+          client,
+          message
+        })
+      }
+    )
 
     this.onMessage(
       Transfer.CHANGE_AVATAR,

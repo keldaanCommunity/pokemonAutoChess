@@ -5,9 +5,9 @@ import {
 } from "../../../../../models/colyseus-models/leaderboard-info"
 import { useAppDispatch } from "../../../hooks"
 import { searchById } from "../../../stores/NetworkStore"
-import Elo from "../elo"
 import { getAvatarSrc } from "../../../utils"
 import { useTranslation } from "react-i18next"
+import { EloBadge } from "../profile/elo-badge"
 
 export default function LeaderboardItem(props: {
   item: ILeaderboardInfo | ILeaderboardBotInfo
@@ -53,7 +53,7 @@ export default function LeaderboardItem(props: {
         </span>
       )}
       <div>
-        {props.noElo ? props.item.value : <Elo elo={props.item.value} />}
+        {props.noElo ? props.item.value : <EloBadge elo={props.item.value} />}
       </div>
     </div>
   )

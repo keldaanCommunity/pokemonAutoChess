@@ -5360,7 +5360,7 @@ export class Rotom extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 12
+  atk = 15
   def = 3
   speDef = 3
   maxPP = 100
@@ -6571,7 +6571,7 @@ export class Regieleki extends Pokemon {
   atk = 20
   def = 3
   speDef = 3
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.VOLT_SWITCH
   attackSprite = AttackSprite.ELECTRIC_RANGE
@@ -6687,7 +6687,7 @@ export class Happiny extends Pokemon {
   atk = 8
   def = 5
   speDef = 5
-  maxPP = 130
+  maxPP = 120
   range = 1
   skill = Ability.SOFT_BOILED
   attackSprite = AttackSprite.FAIRY_MELEE
@@ -6702,7 +6702,7 @@ export class Chansey extends Pokemon {
   atk = 20
   def = 6
   speDef = 4
-  maxPP = 130
+  maxPP = 120
   range = 1
   skill = Ability.SOFT_BOILED
   attackSprite = AttackSprite.FAIRY_MELEE
@@ -6716,7 +6716,7 @@ export class Blissey extends Pokemon {
   atk = 25
   def = 10
   speDef = 8
-  maxPP = 130
+  maxPP = 120
   range = 1
   skill = Ability.SOFT_BOILED
   attackSprite = AttackSprite.FAIRY_MELEE
@@ -9832,7 +9832,7 @@ export class Spectrier extends Pokemon {
 }
 
 export class Kartana extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.STEEL])
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.GRASS])
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 230
@@ -10029,10 +10029,10 @@ export class Helioptile extends Pokemon {
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.HELIOLISK
-  hp = 90
+  hp = 75
   atk = 9
-  def = 3
-  speDef = 3
+  def = 2
+  speDef = 2
   maxPP = 80
   range = 3
   skill = Ability.PARABOLIC_CHARGE
@@ -10049,10 +10049,10 @@ export class Heliolisk extends Pokemon {
   ])
   rarity = Rarity.EPIC
   stars = 2
-  hp = 220
+  hp = 170
   atk = 22
-  def = 4
-  speDef = 4
+  def = 3
+  speDef = 3
   maxPP = 80
   range = 3
   skill = Ability.PARABOLIC_CHARGE
