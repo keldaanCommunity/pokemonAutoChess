@@ -522,10 +522,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.effects.has(Effect.TELEPORT_NEXT_ATTACK)) {
       const crit =
-        this.items.has(Item.REAPER_CLOTH) && chance(this.critChance / 100)
-      if (crit) {
-        this.onCritical({ target, board })
-      }
+        this.items.has(Item.REAPER_CLOTH) && chance(this.critChance / 100)      
       target.handleSpecialDamage(
         [15, 30, 60][this.stars - 1],
         board,
@@ -837,7 +834,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  onCritical({ target, board }: { target: PokemonEntity; board: Board }) {
+  onCriticalAttack({ target, board }: { target: PokemonEntity; board: Board }) {
     target.count.crit++
 
     // proc fairy splash damage for both the attacker and the target

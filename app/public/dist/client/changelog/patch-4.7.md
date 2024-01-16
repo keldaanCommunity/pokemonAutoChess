@@ -32,6 +32,7 @@ Base components stats have been reviewed to be closer to each other:
 
 # Gameplay
 
+- Removed on-crit effects for abilities: scope lens PP gain, fairy splash and razor fang armor reduction no longer apply for abilities crit
 - Comfey floral heal and Leppa berry consumption are now done before casting the ability
 - Stage 15: Mew joins the battle !
 
