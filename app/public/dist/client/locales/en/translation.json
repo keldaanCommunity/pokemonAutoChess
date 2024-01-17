@@ -2217,6 +2217,7 @@
   "top": "Top",
   "level": "Level",
   "wins": "Wins",
+  "favorites": "Favorites",  
   "user_id": "User ID",
   "name": "Name",
   "anonymous_users_name_hint": "Anonymous users cannot change their name.",
