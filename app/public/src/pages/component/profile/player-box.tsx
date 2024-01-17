@@ -27,11 +27,11 @@ export default function PlayerBox(props: { user: ILobbyUser }) {
     })
   })
   const favoritePokemons = [...countPokemons.entries()]
-    .sort(([a, b]) => b[1] - a[1])
+    .sort((a, b) => b[1] - a[1])
     .slice(0, 5)
     .map(([k, v]) => k)
   const favoriteSynergies = [...countSynergies.entries()]
-    .sort(([a, b]) => b[1] - a[1])
+    .sort((a, b) => b[1] - a[1])
     .slice(0, 5)
     .map(([k, v]) => k)
 
