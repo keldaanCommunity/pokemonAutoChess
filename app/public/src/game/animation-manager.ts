@@ -848,6 +848,16 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: Ability.PSYCHIC_FANGS,
+      frames: this.game.anims.generateFrameNames(Ability.PSYCHIC_FANGS, {
+        start: 0,
+        end: 30
+      }),
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
       key: Ability.WHIRLWIND,
       frames: this.game.anims.generateFrameNames(Ability.WHIRLWIND, {
         start: 0,
