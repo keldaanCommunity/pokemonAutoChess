@@ -1,9 +1,9 @@
 # New Pokemons:
 
 - Smeargle
-
 - Toxel
 - Toxtricity
+- Bruxish
 
 # Changes to Pokemon & Abilities
 

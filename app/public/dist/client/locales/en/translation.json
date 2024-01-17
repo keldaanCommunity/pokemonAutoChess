@@ -281,7 +281,8 @@
     "SKETCH": "Sketch",
     "OVERDRIVE": "Overdrive",
     "LOVELY_KISS": "Lovely Kiss",
-    "TRANSFORM": "Transform"
+    "TRANSFORM": "Transform",
+    "PSYCHIC_FANGS": "Psychic Fangs"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -960,7 +961,8 @@
     "GHOLDENGO": "Gholdengo",
     "SMEARGLE": "Smeargle",
     "TOXEL": "Toxel",
-    "TOXTRICITY": "Toxtricity"
+    "TOXTRICITY": "Toxtricity",
+    "BRUXISH": "Bruxish"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1227,7 +1229,8 @@
     "SKETCH": "Copies the ability of the ally on his left at the start of the fight",
     "OVERDRIVE": "Deal [120,SP]% of ATK as SPECIAL in a 3-range radius by twanging an electric guitar, causing a huge echo and strong vibration. The damage is reduced with the distance, 20% per cell.",
     "LOVELY_KISS": "Kisses the enemy with a frightening expression. Puts the enemy SLEEP for [2,4,SP] seconds.",
-    "TRANSFORM": "Takes the appearance and the statistics of its target (except HP)"
+    "TRANSFORM": "Takes the appearance and the statistics of its target (except HP)",
+    "PSYCHIC_FANGS": "Inflicts [100,SP] PHYSICAL and removes all the target's ATK, DEF and SPE_DEF buffs"
   },
   "effect": {
     "INGRAIN": "Ingrain",
