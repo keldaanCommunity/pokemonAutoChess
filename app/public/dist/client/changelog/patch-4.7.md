@@ -60,6 +60,7 @@ Base components stats have been reviewed to be closer to each other:
 - Add color indicators from red to green for players ready state in browser tab title
 - Play a sound when game starts for players who tabbed out during loading
 - Item meta report is now organized in tabs
+- Added favorite synergies and units in player card based on game history
 
 # Bugfix
 
