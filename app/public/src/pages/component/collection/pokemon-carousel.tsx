@@ -10,7 +10,8 @@ import { PRECOMPUTED_POKEMONS_STARS } from "../../../../../models/precomputed"
 
 const pokemonsSorted = (Object.values(Pkm) as Pkm[]).sort((a: Pkm, b: Pkm) => {
   return PkmFamily[a] === PkmFamily[b]
-    ? PRECOMPUTED_POKEMONS_STARS[a] - PRECOMPUTED_POKEMONS_STARS[b]
+    ? (PRECOMPUTED_POKEMONS_STARS[a] ?? 0) -
+        (PRECOMPUTED_POKEMONS_STARS[b] ?? 0)
     : PkmIndex[PkmFamily[a]].localeCompare(PkmIndex[PkmFamily[b]])
 })
 
