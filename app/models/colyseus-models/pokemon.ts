@@ -95,7 +95,7 @@ export class Pokemon extends Schema implements IPokemon {
   }
 
   get canBePlaced(): boolean {
-    return ![Pkm.DITTO, Pkm.EGG].includes(this.name)
+    return ![Pkm.EGG].includes(this.name)
   }
 
   get canBeCloned(): boolean {
@@ -164,13 +164,13 @@ export class Ditto extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL])
   rarity = Rarity.SPECIAL
   stars = 1
-  hp = 30
-  atk = 1
+  hp = 50
+  atk = 5
   def = 1
   speDef = 1
-  maxPP = 100
+  maxPP = 50
   range = 1
-  skill = Ability.DEFAULT
+  skill = Ability.TRANSFORM
   passive = Passive.DITTO
   attackSprite = AttackSprite.NORMAL_MELEE
 }

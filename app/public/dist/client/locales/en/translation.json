@@ -280,7 +280,8 @@
     "AURASPHERE": "Aura Sphere",
     "SKETCH": "Sketch",
     "OVERDRIVE": "Overdrive",
-    "LOVELY_KISS": "Lovely Kiss"
+    "LOVELY_KISS": "Lovely Kiss",
+    "TRANSFORM": "Transform"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1225,7 +1226,8 @@
     "AURASPHERE": "Exudes an aura and projects energy in a line, dealing [25,50,SP] SPECIAL and SILENCE every opponent hit for 3 seconds",
     "SKETCH": "Copies the ability of the ally on his left at the start of the fight",
     "OVERDRIVE": "Deal [120,SP]% of ATK as SPECIAL in a 3-range radius by twanging an electric guitar, causing a huge echo and strong vibration. The damage is reduced with the distance, 20% per cell.",
-    "LOVELY_KISS": "Kisses the enemy with a frightening expression. Puts the enemy SLEEP for [2,4,SP] seconds."
+    "LOVELY_KISS": "Kisses the enemy with a frightening expression. Puts the enemy SLEEP for [2,4,SP] seconds.",
+    "TRANSFORM": "Takes the appearance and the statistics of its target (except HP)"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1646,7 +1648,7 @@
     "EEVEE": "Eevee can evolve into one of the 8 Eeveelutions when given a synergy stone",
     "SUDOWOODO": "Pretends to be a tree and does not attack but gain [2,4] ATK per second instead (stackable).\nStarts attacking when PP bar is full, cannot be SILENCE or lose PP until then.",
     "WOBBUFFET": "Does not move or attack until PP bar is full, cannot be SILENCE or lose PP until then.",
-    "DITTO": "Ditto can't fight, but it can transform to create a copy of the basic form of one of your pokemons you drop it over (except Uniques and Hatch)",
+    "DITTO": "Ditto can transform to create a copy of the basic form of one of your pokemons you drop it over (not Unique, Legendary or Hatch)",
     "EGG": "You can feel something moving inside",
     "HATCH": "Hatched pokemons evolve automatically after 4 stages",
     "SYNCHRO": "If the pokemon is affected by POISONNED, BURN, WOUND or SILENCE, the enemy caster will suffer the same negative status",

@@ -6879,6 +6879,45 @@ export class OverdriveStrategy extends AbilityStrategy {
   }
 }
 
+export class TransformStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    if (target) {
+      pokemon.index = target.index
+      pokemon.rarity = target.rarity
+      pokemon.stars = target.stars
+      pokemon.skill = target.skill
+      pokemon.passive = target.passive
+      pokemon.baseAtk = target.atk
+      pokemon.baseDef = target.def
+      pokemon.baseSpeDef = target.speDef
+      pokemon.baseRange = target.baseRange
+      pokemon.atk = target.atk
+      pokemon.atkSpeed = target.atkSpeed
+      pokemon.def = target.def
+      pokemon.speDef = target.speDef
+      pokemon.attackType = target.attackType
+      pokemon.ap = target.ap
+      pokemon.hp = target.hp
+      pokemon.maxPP = target.maxPP
+      pokemon.atkSpeed = target.atkSpeed
+      pokemon.critChance = target.critChance
+      pokemon.critDamage = target.critDamage
+      pokemon.range = target.range
+      pokemon.attackSprite = target.attackSprite
+      pokemon.shiny = target.shiny
+      pokemon.emotion = target.emotion
+      pokemon.dodge = target.dodge
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -7146,5 +7185,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.AURASPHERE]: new AuraSphereStrategy(),
   [Ability.SKETCH]: new SketchStrategy(),
   [Ability.OVERDRIVE]: new OverdriveStrategy(),
-  [Ability.LOVELY_KISS]: new LovelyKissStrategy()
+  [Ability.LOVELY_KISS]: new LovelyKissStrategy(),
+  [Ability.TRANSFORM]: new TransformStrategy()
 }

@@ -132,7 +132,7 @@ export class OnDragDropCommand extends Command<
       if (pokemon) {
         const x = parseInt(detail.x)
         const y = parseInt(detail.y)
-        if (pokemon.name === Pkm.DITTO) {
+        if (pokemon.name === Pkm.DITTO && !player.isPositionEmpty(x, y)) {
           const pokemonToClone = this.room.getPokemonByPosition(player, x, y)
           if (pokemonToClone && pokemonToClone.canBeCloned) {
             dittoReplaced = true

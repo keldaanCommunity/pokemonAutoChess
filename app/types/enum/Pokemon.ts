@@ -2179,7 +2179,7 @@ export const AnimationConfig: {
   },
   [Pkm.DITTO]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack,
+    ability: AnimationType.Charge,
     emote: AnimationType.Hop
   },
   [Pkm.BULBASAUR]: {
