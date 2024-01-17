@@ -16,7 +16,7 @@ function minifySheet(id) {
     const indexList = JSON.parse(
       fs
         .readFileSync(
-          "../app/public/dist/client/assets/pokemons/indexList.json"
+          "../app/public/src/assets/pokemons/indexList.json"
         )
         .toString()
     )
@@ -25,7 +25,7 @@ function minifySheet(id) {
     }
 
     fs.writeFileSync(
-        "../app/public/dist/client/assets/pokemons/indexList.json",
+        "../app/public/src/assets/pokemons/indexList.json",
       JSON.stringify(indexList, null, 0)
     )
   } catch (error) {

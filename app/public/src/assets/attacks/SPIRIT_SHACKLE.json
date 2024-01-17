@@ -1,0 +1,99 @@
+{
+	"textures": [
+		{
+			"image": "SPIRIT_SHACKLE.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 136,
+				"h": 160
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "000",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 136,
+						"h": 40
+					},
+					"frame": {
+						"x": 4,
+						"y": 4,
+						"w": 128,
+						"h": 32
+					}
+				},
+				{
+					"filename": "001",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 136,
+						"h": 40
+					},
+					"frame": {
+						"x": 4,
+						"y": 44,
+						"w": 128,
+						"h": 32
+					}
+				},
+				{
+					"filename": "002",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 136,
+						"h": 40
+					},
+					"frame": {
+						"x": 4,
+						"y": 84,
+						"w": 128,
+						"h": 32
+					}
+				},
+				{
+					"filename": "003",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 136,
+						"h": 40
+					},
+					"frame": {
+						"x": 4,
+						"y": 124,
+						"w": 128,
+						"h": 32
+					}
+				}
+			]
+		}
+	]
+}

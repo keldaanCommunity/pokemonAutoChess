@@ -2,22 +2,22 @@ import GameScene from "../../game/scenes/game-scene"
 import { preferences } from "../../preferences"
 
 export const SOUNDS = {
-  BUTTON_CLICK: "buttonclick.mp3",
-  BUTTON_HOVER: "buttonhover.mp3",
-  CAROUSEL_UNLOCK: "carouselunlock.mp3",
-  FINISH1: "finish1.mp3",
-  FINISH2: "finish2.mp3",
-  FINISH3: "finish3.mp3",
-  FINISH4: "finish4.mp3",
-  FINISH5: "finish5.mp3",
-  FINISH6: "finish6.mp3",
-  FINISH7: "finish7.mp3",
-  FINISH8: "finish8.mp3",
-  JOIN_ROOM: "joinroom.mp3",
-  LEAVE_ROOM: "leaveroom.mp3",
-  NEW_ROOM: "newroom.mp3",
-  SET_READY: "setready.mp3",
-  START_GAME: "startgame.mp3"
+  BUTTON_CLICK: "buttonclick.ogg",
+  BUTTON_HOVER: "buttonhover.ogg",
+  CAROUSEL_UNLOCK: "carouselunlock.ogg",
+  FINISH1: "finish1.ogg",
+  FINISH2: "finish2.ogg",
+  FINISH3: "finish3.ogg",
+  FINISH4: "finish4.ogg",
+  FINISH5: "finish5.ogg",
+  FINISH6: "finish6.ogg",
+  FINISH7: "finish7.ogg",
+  FINISH8: "finish8.ogg",
+  JOIN_ROOM: "joinroom.ogg",
+  LEAVE_ROOM: "leaveroom.ogg",
+  NEW_ROOM: "newroom.ogg",
+  SET_READY: "setready.ogg",
+  START_GAME: "startgame.ogg"
 } as const
 
 type Soundkey = (typeof SOUNDS)[keyof typeof SOUNDS]

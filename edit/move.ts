@@ -11,21 +11,21 @@ const creditsName = fs.readFileSync(`${path}/credit_names.txt`)
 fs.writeFileSync("sheets/credit_names.txt", creditsName)
 fse.copySync(
   `sheets/${pkmIndex}.json`,
-  `../app/public/dist/client/assets/pokemons/${pkmIndex}.json`,
+  `../app/public/src/assets/pokemons/${pkmIndex}.json`,
   {
     overwrite: true
   }
 )
 fse.copySync(
   `sheets/${pkmIndex}.png`,
-  `../app/public/dist/client/assets/pokemons/${pkmIndex}.png`,
+  `../app/public/src/assets/pokemons/${pkmIndex}.png`,
   {
     overwrite: true
   }
 )
 fse.copySync(
   `sheets/durations.json`,
-  `../app/public/dist/client/assets/pokemons/durations.json`,
+  `../app/public/src/assets/pokemons/durations.json`,
   {
     overwrite: true
   }

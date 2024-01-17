@@ -28,7 +28,7 @@ export default function WikiAbility() {
             return (
               <li key={ability} className="nes-container">
                 <div>
-                  <h4>{t(`ability.${ability}`)}</h4>
+                  <h2>{t(`ability.${ability}`)}</h2>
                   <p>
                     {addIconsToDescription(t(`ability_description.${ability}`))}
                   </p>

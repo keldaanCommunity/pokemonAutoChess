@@ -1,0 +1,104 @@
+{
+	"textures": [
+		{
+			"image": "HYPER_VOICE.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 393,
+				"h": 64
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "2",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 136,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 3,
+						"w": 129,
+						"h": 32
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 129,
+						"h": 32
+					}
+				},
+				{
+					"filename": "3",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 136,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 5,
+						"w": 130,
+						"h": 31
+					},
+					"frame": {
+						"x": 132,
+						"y": 1,
+						"w": 130,
+						"h": 31
+					}
+				},
+				{
+					"filename": "0",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 136,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 6,
+						"w": 129,
+						"h": 29
+					},
+					"frame": {
+						"x": 132,
+						"y": 34,
+						"w": 129,
+						"h": 29
+					}
+				},
+				{
+					"filename": "1",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 136,
+						"h": 40
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 4,
+						"w": 128,
+						"h": 31
+					},
+					"frame": {
+						"x": 264,
+						"y": 1,
+						"w": 128,
+						"h": 31
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:493da69f23dcca636145d0f0fa17cf5a:4ee2707de1949d2c98bdf9e9c81a7c1b:d8c867e7292bef3f8678d341f4e84b65$"
+	}
+}

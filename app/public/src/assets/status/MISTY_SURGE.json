@@ -1,0 +1,83 @@
+{
+	"textures": [
+		{
+			"image": "MISTY_SURGE.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 126,
+				"h": 44
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "000",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 11,
+						"y": 11,
+						"w": 42,
+						"h": 42
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 42,
+						"h": 42
+					}
+				},
+				{
+					"filename": "002",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 12,
+						"y": 12,
+						"w": 40,
+						"h": 40
+					},
+					"frame": {
+						"x": 45,
+						"y": 1,
+						"w": 40,
+						"h": 40
+					}
+				},
+				{
+					"filename": "001",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 13,
+						"y": 13,
+						"w": 38,
+						"h": 38
+					},
+					"frame": {
+						"x": 87,
+						"y": 1,
+						"w": 38,
+						"h": 38
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:4f83028133a899462cb95ae06591d528:5745da1e7a83eb6cecfffdcc93f453f9:99efe59bbda38ef776a77e960b8accc6$"
+	}
+}
