@@ -6831,6 +6831,7 @@ export class SketchStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
   }
 }
+
 export class LovelyKissStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -6915,6 +6916,29 @@ export class TransformStrategy extends AbilityStrategy {
       pokemon.emotion = target.emotion
       pokemon.dodge = target.dodge
     }
+  }
+}
+
+export class PsychicFangsStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    target.handleSpecialDamage(
+      100,
+      board,
+      AttackType.PHYSICAL,
+      pokemon,
+      crit,
+      true
+    )
+    target.atk = target.baseAtk
+    target.def = target.baseDef
+    target.speDef = target.baseSpeDef
   }
 }
 
@@ -7186,5 +7210,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SKETCH]: new SketchStrategy(),
   [Ability.OVERDRIVE]: new OverdriveStrategy(),
   [Ability.LOVELY_KISS]: new LovelyKissStrategy(),
-  [Ability.TRANSFORM]: new TransformStrategy()
+  [Ability.TRANSFORM]: new TransformStrategy(),
+  [Ability.PSYCHIC_FANGS]: new PsychicFangsStrategy()
 }
