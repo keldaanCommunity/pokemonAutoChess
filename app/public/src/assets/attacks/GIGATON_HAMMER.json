@@ -1,0 +1,104 @@
+{
+	"textures": [
+		{
+			"image": "GIGATON_HAMMER.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 126,
+				"h": 128
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "000",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 63,
+						"h": 63
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 63,
+						"h": 63
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 63,
+						"h": 63
+					}
+				},
+				{
+					"filename": "001",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 63,
+						"h": 63
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 1,
+						"w": 61,
+						"h": 61
+					},
+					"frame": {
+						"x": 1,
+						"y": 66,
+						"w": 61,
+						"h": 61
+					}
+				},
+				{
+					"filename": "003",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 63,
+						"h": 63
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 1,
+						"w": 61,
+						"h": 61
+					},
+					"frame": {
+						"x": 64,
+						"y": 66,
+						"w": 61,
+						"h": 61
+					}
+				},
+				{
+					"filename": "002",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 63,
+						"h": 63
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 4,
+						"w": 55,
+						"h": 55
+					},
+					"frame": {
+						"x": 66,
+						"y": 1,
+						"w": 55,
+						"h": 55
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:7ccd87d9347848ecf58d19faa203c336:80d2aef8365a39df8db91e916c8bc29a:fcc768d996aa1cfb102bdd93adeaa15a$"
+	}
+}

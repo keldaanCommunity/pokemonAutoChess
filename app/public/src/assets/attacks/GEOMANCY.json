@@ -1,0 +1,260 @@
+{
+	"textures": [
+		{
+			"image": "GEOMANCY.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 480,
+				"h": 88
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "000",
+					"rotated": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 88
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 88
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 88
+					}
+				},
+				{
+					"filename": "001",
+					"rotated": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 88
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 88
+					},
+					"frame": {
+						"x": 40,
+						"y": 0,
+						"w": 40,
+						"h": 88
+					}
+				},
+				{
+					"filename": "002",
+					"rotated": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 88
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 88
+					},
+					"frame": {
+						"x": 80,
+						"y": 0,
+						"w": 40,
+						"h": 88
+					}
+				},
+				{
+					"filename": "003",
+					"rotated": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 88
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 88
+					},
+					"frame": {
+						"x": 120,
+						"y": 0,
+						"w": 40,
+						"h": 88
+					}
+				},
+				{
+					"filename": "004",
+					"rotated": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 88
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 88
+					},
+					"frame": {
+						"x": 160,
+						"y": 0,
+						"w": 40,
+						"h": 88
+					}
+				},
+				{
+					"filename": "005",
+					"rotated": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 88
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 88
+					},
+					"frame": {
+						"x": 200,
+						"y": 0,
+						"w": 40,
+						"h": 88
+					}
+				},
+				{
+					"filename": "006",
+					"rotated": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 88
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 88
+					},
+					"frame": {
+						"x": 240,
+						"y": 0,
+						"w": 40,
+						"h": 88
+					}
+				},
+				{
+					"filename": "007",
+					"rotated": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 88
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 88
+					},
+					"frame": {
+						"x": 280,
+						"y": 0,
+						"w": 40,
+						"h": 88
+					}
+				},
+				{
+					"filename": "008",
+					"rotated": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 88
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 88
+					},
+					"frame": {
+						"x": 320,
+						"y": 0,
+						"w": 40,
+						"h": 88
+					}
+				},
+				{
+					"filename": "009",
+					"rotated": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 88
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 88
+					},
+					"frame": {
+						"x": 360,
+						"y": 0,
+						"w": 40,
+						"h": 88
+					}
+				},
+				{
+					"filename": "010",
+					"rotated": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 88
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 88
+					},
+					"frame": {
+						"x": 400,
+						"y": 0,
+						"w": 40,
+						"h": 88
+					}
+				},
+				{
+					"filename": "011",
+					"rotated": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 88
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 88
+					},
+					"frame": {
+						"x": 440,
+						"y": 0,
+						"w": 40,
+						"h": 88
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:5ac7de9eb39f7e5cb299731e95e214c6:4a706711224eb1678fd9eb4644f4309c:56522bd2daf1ad7dfd23593c1a9c0d9f$"
+	}
+}

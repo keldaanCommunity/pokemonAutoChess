@@ -1,0 +1,83 @@
+{
+  "textures": [
+    {
+      "image": "ASTRAL_BARRAGE.png",
+      "format": "RGBA8888",
+      "size": {
+        "w": 48,
+        "h": 60
+      },
+      "scale": 1,
+      "frames": [
+        {
+          "filename": "002",
+          "rotated": false,
+          "trimmed": false,
+          "sourceSize": {
+            "w": 46,
+            "h": 18
+          },
+          "spriteSourceSize": {
+            "x": 0,
+            "y": 0,
+            "w": 46,
+            "h": 18
+          },
+          "frame": {
+            "x": 1,
+            "y": 1,
+            "w": 46,
+            "h": 18
+          }
+        },
+        {
+          "filename": "001",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 46,
+            "h": 18
+          },
+          "spriteSourceSize": {
+            "x": 0,
+            "y": 0,
+            "w": 45,
+            "h": 18
+          },
+          "frame": {
+            "x": 1,
+            "y": 21,
+            "w": 45,
+            "h": 18
+          }
+        },
+        {
+          "filename": "000",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 46,
+            "h": 18
+          },
+          "spriteSourceSize": {
+            "x": 0,
+            "y": 0,
+            "w": 44,
+            "h": 18
+          },
+          "frame": {
+            "x": 1,
+            "y": 41,
+            "w": 44,
+            "h": 18
+          }
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "app": "https://www.codeandweb.com/texturepacker",
+    "version": "3.0",
+    "smartupdate": "$TexturePacker:SmartUpdate:1089181954580a7e20b2d1d8322159da:fa9afe89c6fb9eb136baebb79383ac73:04e4ed232a31e831355f6f683e1ce36a$"
+  }
+}

@@ -74,7 +74,7 @@ async function splitAll() {
 
 export function loadDurationsFile() {
   const rawdata = fs.readFileSync(
-    "../app/public/dist/client/assets/pokemons/durations.json",
+    "../app/public/src/assets/pokemons/durations.json",
     "utf8"
   )
   Object.assign(durations, JSON.parse(rawdata))

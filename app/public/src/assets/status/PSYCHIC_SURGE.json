@@ -1,0 +1,104 @@
+{
+	"textures": [
+		{
+			"image": "PSYCHIC_SURGE.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 116,
+				"h": 96
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "002",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 1,
+						"w": 58,
+						"h": 47
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 58,
+						"h": 47
+					}
+				},
+				{
+					"filename": "003",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 45
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 1,
+						"w": 60,
+						"h": 42
+					},
+					"frame": {
+						"x": 1,
+						"y": 50,
+						"w": 60,
+						"h": 42
+					}
+				},
+				{
+					"filename": "001",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 2,
+						"w": 54,
+						"h": 45
+					},
+					"frame": {
+						"x": 61,
+						"y": 1,
+						"w": 54,
+						"h": 45
+					}
+				},
+				{
+					"filename": "000",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 48,
+						"h": 47
+					},
+					"frame": {
+						"x": 63,
+						"y": 48,
+						"w": 48,
+						"h": 47
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:935975f2b397a66bdc16a47a15b79ea4:b3bda7cf72a0fec187ed6fdcc9d3d280:db4cd72030b15d6e485f81aa1a8d0e62$"
+	}
+}
