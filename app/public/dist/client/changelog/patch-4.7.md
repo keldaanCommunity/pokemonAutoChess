@@ -6,6 +6,7 @@
 
 # Changes to Pokemon & Abilities
 
+- Ditto can now fight ! It's not very strong though...
 - Riolu is now rare additional pick. New ability: Aura sphere: Exudes an aura and projects energy in a line, dealing 25/50 special damage and Silence every enemy hit for 3 seconds
 - Rework Nightmare (Ghastly): Silence all enemy Pokémon for 1.5/3/8 seconds. Any opponent asleep, flinched or already silenced take 50 special damage.
 - Onix: removed Steel, buffed HP ~~150~~ 200 ; Steelix still has Steel style
@@ -19,7 +20,9 @@
 - Nerf Regieleki: PP ~~90~~ 100
 - Buff Chatot; Chatter: ~~10~~ 20 special damage, chance of confusion ~~30%~~ 50%, no longer scales with AP
 - Buff Sudowoodo: Atk ~~16~~ 20
-- Ditto can now fight ! It's not very strong though...
+- Buff Alolan Geodude line: Def ~~3/5/7~~ 5/7/10
+
+
 
 # Changes to Synergies
 

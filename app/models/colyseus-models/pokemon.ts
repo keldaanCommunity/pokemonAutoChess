@@ -8359,7 +8359,7 @@ export class AlolanGeodude extends Pokemon {
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 100
   atk = 5
-  def = 3
+  def = 5
   speDef = 3
   maxPP = 100
   range = 1
@@ -8376,7 +8376,7 @@ export class AlolanGraveler extends Pokemon {
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 180
   atk = 10
-  def = 5
+  def = 7
   speDef = 5
   maxPP = 100
   range = 1
@@ -8391,7 +8391,7 @@ export class AlolanGolem extends Pokemon {
   stars = 3
   hp = 250
   atk = 20
-  def = 7
+  def = 10
   speDef = 7
   maxPP = 100
   range = 1
