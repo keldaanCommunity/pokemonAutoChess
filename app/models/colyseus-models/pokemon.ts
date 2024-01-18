@@ -3435,7 +3435,7 @@ export class Quilava extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   evolution = Pkm.TYPHLOSION
-  hp = 130
+  hp = 120
   atk = 13
   def = 2
   speDef = 2
@@ -3451,7 +3451,7 @@ export class Typhlosion extends Pokemon {
   evolutionRule = new ItemEvolutionRule([Item.REAPER_CLOTH])
   rarity = Rarity.UNCOMMON
   stars = 3
-  hp = 250
+  hp = 230
   atk = 25
   def = 3
   speDef = 3
@@ -3466,7 +3466,7 @@ export class HisuianTyphlosion extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD, Synergy.GHOST])
   rarity = Rarity.UNCOMMON
   stars = 4
-  hp = 260
+  hp = 230
   atk = 27
   def = 4
   speDef = 4
