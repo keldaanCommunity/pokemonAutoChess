@@ -1,7 +1,6 @@
 # New Pokemons:
 
 - Smeargle
-
 - Toxel
 - Toxtricity
 
@@ -36,6 +35,8 @@
   (8) Max Meltdown: Deal 150% of Attack as true damage
 
 - Changed Light 4 Eternal light: increase ~~Attack Speed~~ Def & SpeDef by 30%
+- Buff Poison: ~~30/50/70~~ 33/66/100% chance to poison on hit
+
 
 # Changes to Items
 
