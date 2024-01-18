@@ -1707,7 +1707,7 @@
     "FLYING": "Los Pokémon FLYING se van volando cuando caen por debajo de una cierta cantidad de HP.",
     "FLORA": "Cuando el primer pokemon FLORA muera, una flor se levantará de su tumba...",
     "ROCK": "Los Pokémon ROCK ganan DEF y resisten mejor el daño crítico.",
-    "GHOST": "Los pokémon GHOST aplican varias maldiciones a los oponentes al inicio del combate",
+    "GHOST": "Los pokémon GHOST tienen un 50% de probabilidad de SILENCE al golpear y aplicar varias maldiciones a los rivales al inicio del combate.",
     "FAIRY": "Los Pokémon FAIRY electrocutan a los enemigos cercanos cada vez que infligen o reciben un golpe crítico.",
     "ICE": "Todos los aliados obtienen SPE_DEF y tienen la posibilidad de dejar FREEZE al enemigo durante 2 segundos después de un golpe.",
     "FOSSIL": "En su primer KO, los Pokémon FOSSIL vuelven a la vida con un mayor ATK",
