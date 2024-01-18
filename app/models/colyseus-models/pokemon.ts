@@ -9507,7 +9507,7 @@ export class Sudowoodo extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   hp = 250
-  atk = 16
+  atk = 20
   def = 6
   speDef = 3
   maxPP = 100
