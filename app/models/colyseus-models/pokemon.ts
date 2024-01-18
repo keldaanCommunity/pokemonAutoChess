@@ -8423,7 +8423,7 @@ export class Brionne extends Pokemon {
   evolution = Pkm.PRIMARINA
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 130
-  atk = 9
+  atk = 10
   def = 2
   speDef = 3
   maxPP = 100

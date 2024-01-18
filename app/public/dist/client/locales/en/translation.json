@@ -1073,7 +1073,7 @@
     "DIVE": "Dives underwater and reappears in the middle of the enemy team, dealing [15,30,60,SP] SPECIAL and FREEZE all adjacent units for 1.5 second",
     "SPIKE_ARMOR": "For [3,5,10] seconds, targets that melee attack this Pokémon receive WOUND and take SPECIAL equal to [100,SP]% of current DEF",
     "FUTURE_SIGHT": "Deals [15,30,60,SP] SPECIAL to 5 enemies",
-    "FAKE_TEARS": "Deals [3,6,9,SP] SPECIAL to the whole enemy team and trigger ARMOR_REDUCTION for 3s",
+    "FAKE_TEARS": "Deals [3,6,9,SP] SPECIAL to the whole enemy team and trigger ARMOR_REDUCTION for 3 seconds",
     "SPARKLING_ARIA": "Deals [15,30,60,SP] SPECIAL to the target and adjacent enemies. If adjacent allies are BURN, the burn is healed.",
     "DRAGON_DARTS": "Throws 3 darts that deals [10,25,50,SP] SPECIAL each to the target. If the target dies, regain 40 PP.",
     "GRASSY_SURGE": "Increase ATK of all GRASS pokemons by [5,SP]",

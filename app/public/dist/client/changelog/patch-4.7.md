@@ -23,7 +23,6 @@
 - Buff Alolan Geodude line: Def ~~3/5/7~~ 5/7/10
 - Buff Starly line: PP ~~100~~ 80, Attack ~~8/16/24~~ 10/20/30
 
-
 # Changes to Synergies
 
 - Ghost has been reworked, they now apply various curses on the opponent team at the start of the fight:
