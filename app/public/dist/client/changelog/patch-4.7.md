@@ -21,7 +21,7 @@
 - Buff Chatot; Chatter: ~~10~~ 20 special damage, chance of confusion ~~30%~~ 50%, no longer scales with AP
 - Buff Sudowoodo: Atk ~~16~~ 20
 - Buff Alolan Geodude line: Def ~~3/5/7~~ 5/7/10
-
+- Buff Starly line: PP ~~100~~ 80, Attack ~~8/16/24~~ 10/20/30
 
 
 # Changes to Synergies

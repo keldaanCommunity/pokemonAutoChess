@@ -8253,7 +8253,7 @@ export class Starly extends Pokemon {
   atk = 8
   def = 3
   speDef = 3
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.BRAVE_BIRD
   passive = Passive.HATCH
@@ -8270,7 +8270,7 @@ export class Staravia extends Pokemon {
   atk = 16
   def = 5
   speDef = 5
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.BRAVE_BIRD
   passive = Passive.HATCH
@@ -8285,7 +8285,7 @@ export class Staraptor extends Pokemon {
   atk = 24
   def = 7
   speDef = 7
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.BRAVE_BIRD
   attackSprite = AttackSprite.FLYING_MELEE
