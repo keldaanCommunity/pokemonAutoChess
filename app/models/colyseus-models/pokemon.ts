@@ -3449,7 +3449,7 @@ export class Quilava extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   evolution = Pkm.TYPHLOSION
-  hp = 130
+  hp = 120
   atk = 13
   def = 2
   speDef = 2
@@ -3465,7 +3465,7 @@ export class Typhlosion extends Pokemon {
   evolutionRule = new ItemEvolutionRule([Item.REAPER_CLOTH])
   rarity = Rarity.UNCOMMON
   stars = 3
-  hp = 250
+  hp = 230
   atk = 25
   def = 3
   speDef = 3
@@ -3480,7 +3480,7 @@ export class HisuianTyphlosion extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD, Synergy.GHOST])
   rarity = Rarity.UNCOMMON
   stars = 4
-  hp = 260
+  hp = 230
   atk = 27
   def = 4
   speDef = 4
@@ -6715,7 +6715,7 @@ export class Chansey extends Pokemon {
   hp = 300
   atk = 20
   def = 6
-  speDef = 4
+  speDef = 10
   maxPP = 120
   range = 1
   skill = Ability.SOFT_BOILED
@@ -6729,7 +6729,7 @@ export class Blissey extends Pokemon {
   hp = 480
   atk = 25
   def = 10
-  speDef = 8
+  speDef = 15
   maxPP = 120
   range = 1
   skill = Ability.SOFT_BOILED
@@ -8015,7 +8015,7 @@ export class Staryu extends Pokemon {
   atk = 7
   def = 2
   speDef = 3
-  maxPP = 100
+  maxPP = 80
   range = 2
   skill = Ability.PSYCHIC
   additional = true
@@ -8030,7 +8030,7 @@ export class Starmie extends Pokemon {
   atk = 20
   def = 2
   speDef = 6
-  maxPP = 100
+  maxPP = 80
   range = 2
   skill = Ability.PSYCHIC
   additional = true
@@ -8267,7 +8267,7 @@ export class Starly extends Pokemon {
   atk = 8
   def = 3
   speDef = 3
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.BRAVE_BIRD
   passive = Passive.HATCH
@@ -8284,7 +8284,7 @@ export class Staravia extends Pokemon {
   atk = 16
   def = 5
   speDef = 5
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.BRAVE_BIRD
   passive = Passive.HATCH
@@ -8299,7 +8299,7 @@ export class Staraptor extends Pokemon {
   atk = 24
   def = 7
   speDef = 7
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.BRAVE_BIRD
   attackSprite = AttackSprite.FLYING_MELEE
@@ -8373,7 +8373,7 @@ export class AlolanGeodude extends Pokemon {
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 100
   atk = 5
-  def = 3
+  def = 5
   speDef = 3
   maxPP = 100
   range = 1
@@ -8390,7 +8390,7 @@ export class AlolanGraveler extends Pokemon {
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 180
   atk = 10
-  def = 5
+  def = 7
   speDef = 5
   maxPP = 100
   range = 1
@@ -8405,7 +8405,7 @@ export class AlolanGolem extends Pokemon {
   stars = 3
   hp = 250
   atk = 20
-  def = 7
+  def = 10
   speDef = 7
   maxPP = 100
   range = 1
@@ -8437,7 +8437,7 @@ export class Brionne extends Pokemon {
   evolution = Pkm.PRIMARINA
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 130
-  atk = 9
+  atk = 10
   def = 2
   speDef = 3
   maxPP = 100
@@ -9145,7 +9145,7 @@ export class Zorua extends Pokemon {
   stars = 1
   evolution = Pkm.ZOROARK
   hp = 70
-  atk = 6
+  atk = 8
   def = 2
   speDef = 2
   maxPP = 100
@@ -9160,7 +9160,7 @@ export class Zoroark extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 140
-  atk = 15
+  atk = 18
   def = 4
   speDef = 4
   maxPP = 100
@@ -9176,7 +9176,7 @@ export class HisuiZorua extends Pokemon {
   stars = 1
   evolution = Pkm.HISUI_ZOROARK
   hp = 70
-  atk = 6
+  atk = 8
   def = 2
   speDef = 2
   maxPP = 100
@@ -9191,7 +9191,7 @@ export class HisuiZoroark extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 140
-  atk = 15
+  atk = 18
   def = 4
   speDef = 4
   maxPP = 100
@@ -9521,7 +9521,7 @@ export class Sudowoodo extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   hp = 250
-  atk = 16
+  atk = 20
   def = 6
   speDef = 3
   maxPP = 100
@@ -11527,7 +11527,7 @@ export const PokemonClasses: Record<
   [Pkm.ABSOL]: Absol,
   [Pkm.LAPRAS]: Lapras,
   [Pkm.LATIAS]: Latias,
-  [Pkm.LATIOS]: Latios,
+  [Pkm.LATIOS]: Latias,
   [Pkm.MESPRIT]: Mesprit,
   [Pkm.AZELF]: Azelf,
   [Pkm.UXIE]: Uxie,

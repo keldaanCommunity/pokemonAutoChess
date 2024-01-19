@@ -241,10 +241,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         attackType === AttackType.SPECIAL &&
         damage > 0
       ) {
-        const damage = 40
+        const bounceCrit = crit || (this.items.has(Item.REAPER_CLOTH) && chance(this.critChance))
+        const bounceDamage = Math.round(([0.5,1][this.stars - 1] ?? 1) * damage * (1+ this.ap/100) * (bounceCrit ? this.critDamage : 1))
         // not handleSpecialDamage to not trigger infinite loop between two magic bounces
         attacker?.handleDamage({
-          damage,
+          damage: bounceDamage,
           board,
           attackType: AttackType.SPECIAL,
           attacker: this,
@@ -656,18 +657,16 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     let poisonChance = 0
     if (this.effects.has(Effect.POISONOUS)) {
-      poisonChance = 0.3
+      poisonChance = 0.33
     }
     if (this.effects.has(Effect.VENOMOUS)) {
-      poisonChance = 0.5
+      poisonChance = 0.66
     }
     if (this.effects.has(Effect.TOXIC)) {
-      poisonChance = 0.7
+      poisonChance = 1.0
     }
-    if (poisonChance > 0) {
-      if (Math.random() < poisonChance) {
-        target.status.triggerPoison(4000, target, this)
-      }
+    if (poisonChance > 0 && chance(poisonChance)) {
+      target.status.triggerPoison(4000, target, this)
     }
 
     // Ability effects on hit
