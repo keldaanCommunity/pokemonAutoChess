@@ -28,6 +28,7 @@
 - Nerf Dragon Darts (Dreepy line): ~~10/25/50~~ 10/20/40 special damage
 - Adapted Magic Bounce (Natu): fixed duration to 5 seconds, replace 40 flat damage by 50/100% of damage reflected, can now deal and reflect ability crits
 - Genesect lock-on ability now deals **additional** true damage
+- Buff Happiny line: Spe def ~~5/6/8~~ 5/10/15
 
 # Changes to Synergies
 

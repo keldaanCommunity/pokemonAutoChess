@@ -6701,7 +6701,7 @@ export class Chansey extends Pokemon {
   hp = 300
   atk = 20
   def = 6
-  speDef = 4
+  speDef = 10
   maxPP = 120
   range = 1
   skill = Ability.SOFT_BOILED
@@ -6715,7 +6715,7 @@ export class Blissey extends Pokemon {
   hp = 480
   atk = 25
   def = 10
-  speDef = 8
+  speDef = 15
   maxPP = 120
   range = 1
   skill = Ability.SOFT_BOILED
