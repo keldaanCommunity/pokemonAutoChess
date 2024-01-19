@@ -9131,7 +9131,7 @@ export class Zorua extends Pokemon {
   stars = 1
   evolution = Pkm.ZOROARK
   hp = 70
-  atk = 6
+  atk = 8
   def = 2
   speDef = 2
   maxPP = 100
@@ -9146,7 +9146,7 @@ export class Zoroark extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 140
-  atk = 15
+  atk = 18
   def = 4
   speDef = 4
   maxPP = 100
@@ -9162,7 +9162,7 @@ export class HisuiZorua extends Pokemon {
   stars = 1
   evolution = Pkm.HISUI_ZOROARK
   hp = 70
-  atk = 6
+  atk = 8
   def = 2
   speDef = 2
   maxPP = 100
@@ -9177,7 +9177,7 @@ export class HisuiZoroark extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 140
-  atk = 15
+  atk = 18
   def = 4
   speDef = 4
   maxPP = 100

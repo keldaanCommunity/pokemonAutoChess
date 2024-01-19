@@ -23,6 +23,7 @@
 - Buff Alolan Geodude line: Def ~~3/5/7~~ 5/7/10
 - Buff Starly line: PP ~~100~~ 80, Attack ~~8/16/24~~ 10/20/30
 - Nerf Cyndaquil line: HP ~~70/130/250/260~~ 60/120/230/230
+- Buff Zorua line and Hisui Zorua lines: Attack ~~6/15~~ 8/18
 
 # Changes to Synergies
 
