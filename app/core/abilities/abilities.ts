@@ -3986,21 +3986,7 @@ export class DragonDartsStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 0
-
-    switch (pokemon.stars) {
-      case 1:
-        damage = 10
-        break
-      case 2:
-        damage = 25
-        break
-      case 3:
-        damage = 50
-        break
-      default:
-        break
-    }
+    const damage = [10,20,40][pokemon.stars -1] ?? 10
 
     for (let n = 0; n < 3; n++) {
       target.handleSpecialDamage(

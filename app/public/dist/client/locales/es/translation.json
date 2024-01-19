@@ -1048,7 +1048,7 @@
     "FUTURE_SIGHT": "Causa [15,30,60,SP] de SPECIAL a 5 enemigos",
     "FAKE_TEARS": "Causa [3,6,9,SP] de SPECIAL a todo el equipo enemigo y activa ARMOR_REDUCTION durante 3 segundos",
     "SPARKLING_ARIA": "Realiza [15,30,60,SP] de SPECIAL al objetivo y a los enemigos adyacentes. Si los aliados adyacentes están BURN, la quemadura se cura.",
-    "DRAGON_DARTS": "Lanza 3 dardos que reparten [10,25,50,SP] de SPECIAL cada uno al objetivo. Si el objetivo muere, recupera 40 PP.",
+    "DRAGON_DARTS": "Lanza 3 dardos que reparten [10,20,40,SP] de SPECIAL cada uno al objetivo. Si el objetivo muere, recupera 40 PP.",
     "GRASSY_SURGE": "Incrementa el ATK de todos los pokemons GRASS en [5,SP]",
     "MISTY_SURGE": "Da [30,SP] PP a los aliados FAIRY",
     "SKY_ATTACK": "Se eleva en el aire y cae sobre el objetivo más lejano, otorga PROTECT al atacante durante 0,5 segundos e inflige [120,SP] de SPECIAL",

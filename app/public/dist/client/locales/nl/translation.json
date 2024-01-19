@@ -923,7 +923,7 @@
     "FUTURE_SIGHT": "Geeft [15,30,60,SP] SPECIAL aan 5 vijanden",
     "FAKE_TEARS": "Deelt [3,6,9,SP] SPECIAL uit voor het hele vijandelijke team en activeer ARMOR_REDUCTION voor 3s",
     "SPARKLING_ARIA": "Geeft [15,30,60,SP] SPECIAL aan het doelwit en aangrenzende vijanden. Als aangrenzende bondgenoten BURN zijn, is de brandwond genezen.",
-    "DRAGON_DARTS": "Gooit 3 darts die elk [10,25,50,SP] SPECIAL naar het doel verdelen. Als het doelwit sterft, krijg je 40 PP terug.",
+    "DRAGON_DARTS": "Gooit 3 darts die elk [10,20,40,SP] SPECIAL naar het doel verdelen. Als het doelwit sterft, krijg je 40 PP terug.",
     "GRASSY_SURGE": "Verhoog ATK van alle GRASS pokemons met [5,SP]",
     "MISTY_SURGE": "Geef [30,SP] PP aan FAIRY bondgenoten",
     "SKY_ATTACK": "Stijgt in de lucht en valt op het verste doelwit, PROTECT de aanvaller gedurende 0,5 seconde en deelt [120,SP] SPECIAL uit",

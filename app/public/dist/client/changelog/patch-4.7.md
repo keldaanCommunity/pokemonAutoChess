@@ -25,6 +25,7 @@
 - Nerf Cyndaquil line: HP ~~70/130/250/260~~ 60/120/230/230
 - Buff Zorua line and Hisui Zorua lines: Attack ~~6/15~~ 8/18
 - Buff Staryu/Starmie : PP ~~100~~ 80
+- Nerf Dragon Darts (Dreepy line): ~~10/25/50~~ 10/20/40 special damage
 - Adapted Magic Bounce (Natu): fixed duration to 5 seconds, replace 40 flat damage by 50/100% of damage reflected, can now deal and reflect ability crits
 - Genesect lock-on ability now deals **additional** true damage
 

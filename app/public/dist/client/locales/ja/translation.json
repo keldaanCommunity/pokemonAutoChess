@@ -924,7 +924,7 @@
     "FUTURE_SIGHT": "敵5体に[15,30,60,SP]SPECIALを与える",
     "FAKE_TEARS": "敵チーム全体に[3,6,9,SP] SPECIALを与え、3秒間ARMOR_REDUCTIONをトリガーします",
     "SPARKLING_ARIA": "ターゲットと隣接する敵に[15,30,60,SP]SPECIALを与える。隣接する味方が火傷している場合、火傷は回復します。",
-    "DRAGON_DARTS": "ターゲットにそれぞれ[10,25,50,SP]SPECIALを与えるダーツを3本投げます。ターゲットが死亡した場合、40 PP を回復します。",
+    "DRAGON_DARTS": "ターゲットにそれぞれ[10,20,40,SP]SPECIALを与えるダーツを3本投げます。ターゲットが死亡した場合、40 PP を回復します。",
     "GRASSY_SURGE": "すべての草ポケモンの攻撃力[5,SP]アップ",
     "MISTY_SURGE": "味方 FAIRY に [30,SP] PP を与える",
     "SKY_ATTACK": "空中に上昇し、最も遠いターゲットに落下し、攻撃者を0.5秒間保護し、[120,SP] SPECIALを与える",
