@@ -1,11 +1,11 @@
 {
   "name": "pokemon-auto-chess",
-  "version": "4.6.0",
+  "version": "4.7.0",
   "description": "",
   "keywords": [],
   "license": "BSD-3-Clause",
   "engines": {
-    "node": "20.10.0",
+    "node": "20.11.0",
     "npm": "10.2.5"
   },
   "homepage": "https://github.com/keldaanCommunity/pokemonAutoChess#readme",
@@ -30,13 +30,15 @@
     "lint": "npx eslint app/",
     "build-client": "node esbuild.js --build",
     "build-server": "tsc",
-    "build": "npm run build-client && npm run build-server",
+    "build": "npm run assetpack && npm run build-client && npm run build-server",
     "start": "node --optimize_for_size --max_old_space_size=800 ./app/public/dist/server/app/index.js",
     "add-bot": "node ./app/public/dist/server/db-commands/populate-bot.js",
     "monitor-bot": "node ./app/public/dist/server/scheduled/monitor-bot.js",
     "translate": "npx @inlang/cli machine translate -f",
     "pm2": "pm2 start ecosystem.config.js",
-    "start-pm2": "npm run build && npm run pm2"
+    "start-pm2": "npm run build && npm run pm2",
+    "postinstall": "cd edit/assetpack && npm install",
+    "assetpack": "cd edit/assetpack && npm run assetpack"
   },
   "dependencies": {
     "@colyseus/command": "^0.2.1",
