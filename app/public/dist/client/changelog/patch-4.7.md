@@ -26,6 +26,7 @@
 - Buff Zorua line and Hisui Zorua lines: Attack ~~6/15~~ 8/18
 - Buff Staryu/Starmie : PP ~~100~~ 80
 - Adapted Magic Bounce (Natu): fixed duration to 5 seconds, replace 40 flat damage by 50/100% of damage reflected, can now deal and reflect ability crits
+- Genesect lock-on ability now deals **additional** true damage
 
 # Changes to Synergies
 
