@@ -8001,7 +8001,7 @@ export class Staryu extends Pokemon {
   atk = 7
   def = 2
   speDef = 3
-  maxPP = 100
+  maxPP = 80
   range = 2
   skill = Ability.PSYCHIC
   additional = true
@@ -8016,7 +8016,7 @@ export class Starmie extends Pokemon {
   atk = 20
   def = 2
   speDef = 6
-  maxPP = 100
+  maxPP = 80
   range = 2
   skill = Ability.PSYCHIC
   additional = true
