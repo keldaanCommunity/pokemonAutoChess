@@ -241,10 +241,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         attackType === AttackType.SPECIAL &&
         damage > 0
       ) {
-        const damage = 40
+        const bounceCrit = crit || (this.items.has(Item.REAPER_CLOTH) && chance(this.critChance))
+        const bounceDamage = Math.round([0.5,1][this.stars - 1] ?? 1) * damage * (1+ this.ap/100) * (bounceCrit ? this.critDamage : 1)
         // not handleSpecialDamage to not trigger infinite loop between two magic bounces
         attacker?.handleDamage({
-          damage,
+          damage: bounceDamage,
           board,
           attackType: AttackType.SPECIAL,
           attacker: this,

@@ -1103,7 +1103,7 @@
     "MIST_BALL": "Lanza una burbuja de niebla en línea recta que inflige [25,SP] SPECIAL dos veces y reduce el AP de todos los enemigos golpeados en un 10 %",
     "MUD_BUBBLE": "Cura al lanzador por [10,20,40,SP]",
     "LINK_CABLE": "Corre hacia un nuevo lugar y luego activa un arco eléctrico entre Plusle y Minun que causa [50,SP] de SPECIAL. Si Plusle o Minun están solos, inflige este daño a los enemigos adyacentes.",
-    "MAGIC_BOUNCE": "Durante [3,6,12] segundos, cada vez que este Pokémon es golpeado por una habilidad, bloquea el daño y refleja [40,SP] de SPECIAL al lanzador.",
+    "MAGIC_BOUNCE": "Durante 5 segundos, cada vez que este Pokémon es golpeado por una habilidad, bloquea el daño y refleja [50,100,SP]% de SPECIAL al lanzador.",
     "HIDDEN_POWER_A": "Invoca 4 Abra en cada esquina del tablero",
     "HIDDEN_POWER_B": "Deja BURN al equipo oponente durante 30 segundos",
     "HIDDEN_POWER_C": "Otorga AMULET_COIN a todo tu equipo. El elemento se elimina al final de la pelea.",

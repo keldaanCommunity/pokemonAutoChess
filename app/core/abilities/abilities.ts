@@ -5149,10 +5149,8 @@ export class MagicBounceStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
-    const timer =
-      pokemon.stars === 3 ? 12000 : pokemon.stars === 2 ? 6000 : 3000
-    pokemon.status.triggerMagicBounce(timer)
+    super.process(pokemon, state, board, target, crit)    
+    pokemon.status.triggerMagicBounce(5000)
   }
 }
 
