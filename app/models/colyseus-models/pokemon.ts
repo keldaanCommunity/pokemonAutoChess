@@ -11128,6 +11128,20 @@ export class Dracovish extends Pokemon {
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
+export class Bruxish extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.PSYCHIC])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 20
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.PSYCHIC_FANGS
+  attackSprite = AttackSprite.WATER_MELEE
+}
+
 export class Corsola extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ROCK])
   rarity = Rarity.EPIC
@@ -11921,5 +11935,6 @@ export const PokemonClasses: Record<
   [Pkm.TREVENANT]: Trevenant,
   [Pkm.SMEARGLE]: Smeargle,
   [Pkm.TOXEL]: Toxel,
-  [Pkm.TOXTRICITY]: Toxtricity
+  [Pkm.TOXTRICITY]: Toxtricity,
+  [Pkm.BRUXISH]: Bruxish
 }

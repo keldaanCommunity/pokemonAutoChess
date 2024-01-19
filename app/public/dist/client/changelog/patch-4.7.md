@@ -3,6 +3,7 @@
 - Smeargle
 - Toxel
 - Toxtricity
+- Bruxish
 
 # Changes to Pokemon & Abilities
 
