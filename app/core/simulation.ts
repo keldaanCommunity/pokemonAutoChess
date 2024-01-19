@@ -1163,10 +1163,10 @@ export default class Simulation extends Schema implements ISimulation {
           if (pokemon.inLightCell) {
             pokemon.status.light = true
             pokemon.effects.add(Effect.ETERNAL_LIGHT)
-            pokemon.addAttack(Math.ceil(pokemon.atk * 0.3), false)
-            pokemon.addAbilityPower(30, false)
+            pokemon.addAttack(Math.ceil(pokemon.atk * 0.25), false)
+            pokemon.addAbilityPower(25, false)
             pokemon.status.triggerRuneProtect(10000)
-            pokemon.addDefense(0.3 * pokemon.baseDef)
+            pokemon.addDefense(0.5 * pokemon.baseDef)
             pokemon.addSpecialDefense(0.3 * pokemon.baseSpeDef)
           }
           break

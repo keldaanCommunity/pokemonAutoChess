@@ -1409,9 +1409,9 @@
     "NIGHT": "+20% CRIT_CHANCE\n+30 % de durée de SLEEP",
     "HYDRATATION": "La synergie GRASS soigne 5 HP supplémentaires par seconde sous la RAIN",
     "POISON_GAS": "Inflige POISONNED chaque seconde",
-    "SHINING_RAY": "Augmente la AP et l'ATK de 30%",
+    "SHINING_RAY": "Augmente la AP et l'ATK de 25%",
     "LIGHT_PULSE": "Donne également +10 PP par seconde",
-    "ETERNAL_LIGHT": "Augmente également la DEF et SPE_DEF de 30% et donne RUNE_PROTECT pendant 10 secondes",
+    "ETERNAL_LIGHT": "Augmente également la DEF et SPE_DEF de 50% et donne RUNE_PROTECT pendant 10 secondes",
     "MAX_ILLUMINATION": "Donne également 100 SHIELD et RESURECTION"
   },
   "item": {
