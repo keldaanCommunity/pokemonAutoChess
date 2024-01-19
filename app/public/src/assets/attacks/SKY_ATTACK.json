@@ -1,0 +1,146 @@
+{
+	"textures": [
+		{
+			"image": "SKY_ATTACK.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 136,
+				"h": 410
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "000",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 77,
+						"h": 146
+					},
+					"spriteSourceSize": {
+						"x": 10,
+						"y": 7,
+						"w": 67,
+						"h": 135
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 67,
+						"h": 135
+					}
+				},
+				{
+					"filename": "001",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 146
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 6,
+						"w": 64,
+						"h": 136
+					},
+					"frame": {
+						"x": 70,
+						"y": 1,
+						"w": 64,
+						"h": 136
+					}
+				},
+				{
+					"filename": "002",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 77,
+						"h": 146
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 7,
+						"w": 67,
+						"h": 135
+					},
+					"frame": {
+						"x": 1,
+						"y": 138,
+						"w": 67,
+						"h": 135
+					}
+				},
+				{
+					"filename": "003",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 79,
+						"h": 145
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 7,
+						"w": 66,
+						"h": 134
+					},
+					"frame": {
+						"x": 1,
+						"y": 275,
+						"w": 66,
+						"h": 134
+					}
+				},
+				{
+					"filename": "005",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 79,
+						"h": 145
+					},
+					"spriteSourceSize": {
+						"x": 13,
+						"y": 7,
+						"w": 66,
+						"h": 134
+					},
+					"frame": {
+						"x": 69,
+						"y": 275,
+						"w": 66,
+						"h": 134
+					}
+				},
+				{
+					"filename": "004",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 145
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 7,
+						"w": 64,
+						"h": 134
+					},
+					"frame": {
+						"x": 70,
+						"y": 139,
+						"w": 64,
+						"h": 134
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:6ff7c2acccbd8c4f6f84f31dabb50709:31812730035344776cafe927af1abaf5:5d6460cd0a2414d513a24bfbaf08f3f2$"
+	}
+}

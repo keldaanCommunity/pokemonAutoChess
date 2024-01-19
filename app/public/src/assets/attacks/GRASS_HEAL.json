@@ -1,0 +1,125 @@
+{
+  "textures": [
+    {
+      "image": "GRASS_HEAL.png",
+      "format": "RGBA8888",
+      "size": {
+        "w": 64,
+        "h": 100
+      },
+      "scale": 1,
+      "frames": [
+        {
+          "filename": "004",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 48,
+            "h": 48
+          },
+          "spriteSourceSize": {
+            "x": 7,
+            "y": 9,
+            "w": 33,
+            "h": 29
+          },
+          "frame": {
+            "x": 1,
+            "y": 1,
+            "w": 33,
+            "h": 29
+          }
+        },
+        {
+          "filename": "003",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 48,
+            "h": 48
+          },
+          "spriteSourceSize": {
+            "x": 8,
+            "y": 7,
+            "w": 32,
+            "h": 33
+          },
+          "frame": {
+            "x": 1,
+            "y": 32,
+            "w": 32,
+            "h": 33
+          }
+        },
+        {
+          "filename": "000",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 48,
+            "h": 48
+          },
+          "spriteSourceSize": {
+            "x": 9,
+            "y": 7,
+            "w": 28,
+            "h": 33
+          },
+          "frame": {
+            "x": 35,
+            "y": 32,
+            "w": 28,
+            "h": 33
+          }
+        },
+        {
+          "filename": "002",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 48,
+            "h": 48
+          },
+          "spriteSourceSize": {
+            "x": 9,
+            "y": 8,
+            "w": 30,
+            "h": 32
+          },
+          "frame": {
+            "x": 1,
+            "y": 67,
+            "w": 30,
+            "h": 32
+          }
+        },
+        {
+          "filename": "001",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 48,
+            "h": 48
+          },
+          "spriteSourceSize": {
+            "x": 9,
+            "y": 9,
+            "w": 29,
+            "h": 30
+          },
+          "frame": {
+            "x": 33,
+            "y": 67,
+            "w": 29,
+            "h": 30
+          }
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "app": "https://www.codeandweb.com/texturepacker",
+    "version": "3.0",
+    "smartupdate": "$TexturePacker:SmartUpdate:31e4422d4b905ca6b604c7010e0d6a5a:2fe3606a7508272045fa6d41f732ea00:9fe0782d7fc59b1f3af7b1e5c305cba7$"
+  }
+}

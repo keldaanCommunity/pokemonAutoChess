@@ -1,0 +1,251 @@
+{
+	"textures": [
+		{
+			"image": "POPULATION_BOMB.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 57,
+				"h": 479
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "9",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 63
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 1,
+						"w": 55,
+						"h": 62
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 55,
+						"h": 62
+					}
+				},
+				{
+					"filename": "8",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 63
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 2,
+						"w": 54,
+						"h": 60
+					},
+					"frame": {
+						"x": 1,
+						"y": 65,
+						"w": 54,
+						"h": 60
+					}
+				},
+				{
+					"filename": "7",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 63
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 5,
+						"w": 55,
+						"h": 56
+					},
+					"frame": {
+						"x": 1,
+						"y": 127,
+						"w": 55,
+						"h": 56
+					}
+				},
+				{
+					"filename": "10",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 63
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 3,
+						"w": 51,
+						"h": 56
+					},
+					"frame": {
+						"x": 1,
+						"y": 185,
+						"w": 51,
+						"h": 56
+					}
+				},
+				{
+					"filename": "6",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 63
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 7,
+						"w": 51,
+						"h": 52
+					},
+					"frame": {
+						"x": 1,
+						"y": 243,
+						"w": 51,
+						"h": 52
+					}
+				},
+				{
+					"filename": "5",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 63
+					},
+					"spriteSourceSize": {
+						"x": 10,
+						"y": 10,
+						"w": 47,
+						"h": 46
+					},
+					"frame": {
+						"x": 1,
+						"y": 297,
+						"w": 47,
+						"h": 46
+					}
+				},
+				{
+					"filename": "4",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 63
+					},
+					"spriteSourceSize": {
+						"x": 12,
+						"y": 12,
+						"w": 40,
+						"h": 42
+					},
+					"frame": {
+						"x": 1,
+						"y": 345,
+						"w": 40,
+						"h": 42
+					}
+				},
+				{
+					"filename": "3",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 63
+					},
+					"spriteSourceSize": {
+						"x": 14,
+						"y": 17,
+						"w": 35,
+						"h": 31
+					},
+					"frame": {
+						"x": 1,
+						"y": 389,
+						"w": 35,
+						"h": 31
+					}
+				},
+				{
+					"filename": "2",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 63
+					},
+					"spriteSourceSize": {
+						"x": 16,
+						"y": 19,
+						"w": 31,
+						"h": 31
+					},
+					"frame": {
+						"x": 1,
+						"y": 422,
+						"w": 31,
+						"h": 31
+					}
+				},
+				{
+					"filename": "1",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 63
+					},
+					"spriteSourceSize": {
+						"x": 20,
+						"y": 23,
+						"w": 23,
+						"h": 23
+					},
+					"frame": {
+						"x": 1,
+						"y": 455,
+						"w": 23,
+						"h": 23
+					}
+				},
+				{
+					"filename": "0",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 63
+					},
+					"spriteSourceSize": {
+						"x": 22,
+						"y": 25,
+						"w": 19,
+						"h": 19
+					},
+					"frame": {
+						"x": 26,
+						"y": 455,
+						"w": 19,
+						"h": 19
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:3213220989c6eb6470a3af0ea48fa39c:6acc47d0718d591fa983ee4e715744ae:66a63fb1bedc813b69e967b779f0e8aa$"
+	}
+}

@@ -175,6 +175,20 @@ export class Ditto extends Pokemon {
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
+export class Substitute extends Pokemon {
+  types = new SetSchema<Synergy>([])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  hp = 80
+  atk = 1
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 1
+  skill = Ability.DEFAULT
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
 export class Egg extends Pokemon {
   types = new SetSchema<Synergy>([])
   rarity = Rarity.SPECIAL
@@ -11255,6 +11269,20 @@ export class Toxtricity extends Pokemon {
   additional = true
 }
 
+export class Cyclizar extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.NORMAL])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 220
+  atk = 20
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.SHED_TAIL
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (shiny: boolean, emotion: Emotion) => Pokemon
@@ -11936,5 +11964,7 @@ export const PokemonClasses: Record<
   [Pkm.SMEARGLE]: Smeargle,
   [Pkm.TOXEL]: Toxel,
   [Pkm.TOXTRICITY]: Toxtricity,
-  [Pkm.BRUXISH]: Bruxish
+  [Pkm.BRUXISH]: Bruxish,
+  [Pkm.SUBSTITUTE]: Substitute,
+  [Pkm.CYCLIZAR]: Cyclizar
 }
