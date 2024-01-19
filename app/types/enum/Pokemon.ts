@@ -678,7 +678,9 @@ export enum Pkm {
   SMEARGLE = "SMEARGLE",
   TOXEL = "TOXEL",
   TOXTRICITY = "TOXTRICITY",
-  BRUXISH = "BRUXISH"
+  BRUXISH = "BRUXISH",
+  SUBSTITUTE = "SUBSTITUTE",
+  CYCLIZAR = "CYCLIZAR"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1359,7 +1361,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.SMEARGLE]: "0235",
   [Pkm.TOXEL]: "0848",
   [Pkm.TOXTRICITY]: "0849",
-  [Pkm.BRUXISH]: "0779"
+  [Pkm.BRUXISH]: "0779",
+  [Pkm.SUBSTITUTE]: "0000-0001",
+  [Pkm.CYCLIZAR]: "0967"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2040,7 +2044,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.SMEARGLE]: Pkm.SMEARGLE,
   [Pkm.TOXEL]: Pkm.TOXEL,
   [Pkm.TOXTRICITY]: Pkm.TOXTRICITY,
-  [Pkm.BRUXISH]: Pkm.BRUXISH
+  [Pkm.BRUXISH]: Pkm.BRUXISH,
+  [Pkm.SUBSTITUTE]: Pkm.SUBSTITUTE,
+  [Pkm.CYCLIZAR]: Pkm.CYCLIZAR
 }
 
 export enum PkmDuo {
@@ -5563,6 +5569,17 @@ export const AnimationConfig: {
   },
   [Pkm.BRUXISH]: {
     attack: AnimationType.Bite,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.SUBSTITUTE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Charge,
+    shinyUnavailable: true
+  },
+  [Pkm.CYCLIZAR]: {
+    attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge
   }

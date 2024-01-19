@@ -282,7 +282,8 @@
     "OVERDRIVE": "Overdrive",
     "LOVELY_KISS": "Lovely Kiss",
     "TRANSFORM": "Transform",
-    "PSYCHIC_FANGS": "Psychic Fangs"
+    "PSYCHIC_FANGS": "Psychic Fangs",
+    "SHED_TAIL": "Shed Tail"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -962,7 +963,9 @@
     "SMEARGLE": "Smeargle",
     "TOXEL": "Toxel",
     "TOXTRICITY": "Toxtricity",
-    "BRUXISH": "Bruxish"
+    "BRUXISH": "Bruxish",
+    "SUBSTITUTE": "Substitute",
+    "CYCLIZAR": "Cyclizar"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1230,7 +1233,8 @@
     "OVERDRIVE": "Deal [120,SP]% of ATK as SPECIAL in a 3-range radius by twanging an electric guitar, causing a huge echo and strong vibration. The damage is reduced with the distance, 20% per cell.",
     "LOVELY_KISS": "Kisses the enemy with a frightening expression. Puts the enemy SLEEP for [2,4,SP] seconds.",
     "TRANSFORM": "Takes the appearance and the statistics of its target (except HP)",
-    "PSYCHIC_FANGS": "Inflicts [100,SP] PHYSICAL and removes all the target's ATK, DEF and SPE_DEF buffs"
+    "PSYCHIC_FANGS": "Inflicts [100,SP] PHYSICAL and removes all the target's ATK, DEF and SPE_DEF buffs",
+    "SHED_TAIL": "Caster create a substitute and charge towards the all with the fewest HP to give it [80, SP] SHIELD"
   },
   "effect": {
     "INGRAIN": "Ingrain",

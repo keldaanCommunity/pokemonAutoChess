@@ -6942,6 +6942,39 @@ export class PsychicFangsStrategy extends AbilityStrategy {
   }
 }
 
+export class ShedTailStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const x = pokemon.positionX
+    const y = pokemon.positionY
+    const lowestHealthAlly = (
+      board.cells.filter(
+        (cell) => cell && cell.team === pokemon.team
+      ) as PokemonEntity[]
+    ).sort((a, b) => a.life / a.hp - b.life / b.hp)[0]
+
+    if (lowestHealthAlly) {
+      lowestHealthAlly.addShield(80, pokemon, true)
+      const substitute = PokemonFactory.createPokemonFromName(
+        Pkm.SUBSTITUTE,
+        pokemon.player
+      )
+      const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemon(
+        lowestHealthAlly,
+        lowestHealthAlly.team
+      )
+      pokemon.moveTo(coord.x, coord.y, board)
+      pokemon.simulation.addPokemon(substitute, x, y, pokemon.team, true)
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -7211,5 +7244,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.OVERDRIVE]: new OverdriveStrategy(),
   [Ability.LOVELY_KISS]: new LovelyKissStrategy(),
   [Ability.TRANSFORM]: new TransformStrategy(),
-  [Ability.PSYCHIC_FANGS]: new PsychicFangsStrategy()
+  [Ability.PSYCHIC_FANGS]: new PsychicFangsStrategy(),
+  [Ability.SHED_TAIL]: new ShedTailStrategy()
 }

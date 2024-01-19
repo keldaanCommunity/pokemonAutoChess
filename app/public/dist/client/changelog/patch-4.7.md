@@ -4,6 +4,7 @@
 - Toxel
 - Toxtricity
 - Bruxish
+- Cyclizar
 
 # Changes to Pokemon & Abilities
 
