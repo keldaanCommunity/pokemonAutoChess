@@ -196,10 +196,6 @@
   margin: -8px 8px 30px 8px;
 }
 
-#wiki-page td {
-  line-height: 1;
-}
-
 #wiki-items th,
 #wiki-items td:first-child {
   background-color: #61738a;

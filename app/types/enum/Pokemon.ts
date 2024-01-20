@@ -680,7 +680,10 @@ export enum Pkm {
   TOXTRICITY = "TOXTRICITY",
   BRUXISH = "BRUXISH",
   SUBSTITUTE = "SUBSTITUTE",
-  CYCLIZAR = "CYCLIZAR"
+  CYCLIZAR = "CYCLIZAR",
+  PAWNIARD = "PAWNIARD",
+  BISHARP = "BISHARP",
+  KINGAMBIT = "KINGAMBIT"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1363,7 +1366,10 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.TOXTRICITY]: "0849",
   [Pkm.BRUXISH]: "0779",
   [Pkm.SUBSTITUTE]: "0000-0001",
-  [Pkm.CYCLIZAR]: "0967"
+  [Pkm.CYCLIZAR]: "0967",
+  [Pkm.PAWNIARD]: "0624",
+  [Pkm.BISHARP]: "0625",
+  [Pkm.KINGAMBIT]: "0983"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2046,7 +2052,10 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.TOXTRICITY]: Pkm.TOXTRICITY,
   [Pkm.BRUXISH]: Pkm.BRUXISH,
   [Pkm.SUBSTITUTE]: Pkm.SUBSTITUTE,
-  [Pkm.CYCLIZAR]: Pkm.CYCLIZAR
+  [Pkm.CYCLIZAR]: Pkm.CYCLIZAR,
+  [Pkm.PAWNIARD]: Pkm.PAWNIARD,
+  [Pkm.BISHARP]: Pkm.PAWNIARD,
+  [Pkm.KINGAMBIT]: Pkm.PAWNIARD
 }
 
 export enum PkmDuo {
@@ -5582,5 +5591,20 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge
+  },
+  [Pkm.PAWNIARD]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Appeal
+  },
+  [Pkm.BISHARP]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Pose
+  },
+  [Pkm.KINGAMBIT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   }
 }

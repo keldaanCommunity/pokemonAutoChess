@@ -23,7 +23,7 @@ export default function WikiAbility() {
       <ul>
         {(Object.keys(Ability) as Ability[])
           .filter((a) => a !== Ability.DEFAULT)
-          .sort()
+          .sort((a, b) => t(`ability.${a}`).localeCompare(t(`ability.${b}`)))
           .map((ability) => {
             return (
               <li key={ability} className="nes-container">
