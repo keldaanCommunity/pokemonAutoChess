@@ -502,7 +502,7 @@ export function displayAbility(
         "000"
       )
       specialProjectile.setDepth(7)
-      specialProjectile.setScale(4, 4)
+      specialProjectile.setScale(2, 2)
       specialProjectile.anims.play(Ability.SHADOW_BALL)
       scene.tweens.add({
         targets: specialProjectile,
@@ -709,6 +709,33 @@ export function displayAbility(
         )
       )
       specialProjectile.anims.play(Ability.HEAT_WAVE)
+      specialProjectile.once(
+        Phaser.Animations.Events.ANIMATION_COMPLETE,
+        () => {
+          specialProjectile.destroy()
+        }
+      )
+      break
+
+    case Ability.PSYBEAM:
+      coordinates = transformAttackCoordinate(positionX, positionY, this.flip)
+      coordinatesTarget = transformAttackCoordinate(targetX, targetY, this.flip)
+      specialProjectile = this.scene.add.sprite(
+        coordinatesTarget[0],
+        coordinatesTarget[1],
+        Ability.PSYBEAM,
+        `${Ability.PSYBEAM}/000`
+      )
+      specialProjectile.setDepth(7)
+      specialProjectile.setScale(2, 2)
+      specialProjectile.setRotation(
+        Math.atan2(
+          coordinatesTarget[1] - coordinates[1],
+          coordinatesTarget[0] - coordinates[0]
+        ) +
+          Math.PI / 2
+      )
+      specialProjectile.anims.play(Ability.PSYBEAM)
       specialProjectile.once(
         Phaser.Animations.Events.ANIMATION_COMPLETE,
         () => {
@@ -1214,12 +1241,13 @@ export function displayAbility(
       break
 
     case Ability.NIGHT_SLASH:
+    case Ability.KOWTOW_CLEAVE:
       coordinates = transformAttackCoordinate(targetX, targetY, flip)
       specialProjectile = scene.add.sprite(
         coordinates[0],
         coordinates[1],
-        "specials",
-        `${Ability.NIGHT_SLASH}/000`
+        Ability.NIGHT_SLASH,
+        `000.png`
       )
       specialProjectile.setDepth(7)
       specialProjectile.setScale(2, 2)
@@ -3129,12 +3157,13 @@ export function displayAbility(
         "000"
       )
       specialProjectile.setDepth(7)
+      specialProjectile.setScale(3, 3)
       specialProjectile.anims.play(Ability.PSYCHIC)
       scene.tweens.add({
         targets: specialProjectile,
         x: coordinatesTarget[0],
         y: coordinatesTarget[1],
-        duration: 500,
+        duration: 1000,
         onComplete: () => {
           specialProjectile.destroy()
         }

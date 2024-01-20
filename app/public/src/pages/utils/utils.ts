@@ -58,55 +58,6 @@ export function getOrientation(x1: number, y1: number, x2: number, y2: number) {
   }
 }
 
-export function getAttackScale(attackSprite: AttackSprite) {
-  switch (attackSprite) {
-    case AttackSprite.FLYING_RANGE:
-      return [1.5, 1.5]
-
-    case AttackSprite.FLYING_MELEE:
-      return [1.5, 1.5]
-
-    case AttackSprite.BUG_MELEE:
-      return [1.5, 1.5]
-
-    case AttackSprite.FAIRY_RANGE:
-      return [1.5, 1.5]
-
-    case AttackSprite.GRASS_RANGE:
-      return [3, 3]
-
-    case AttackSprite.GRASS_MELEE:
-      return [1.5, 1.5]
-
-    case AttackSprite.POISON_RANGE:
-      return [1.5, 1.5]
-
-    case AttackSprite.POISON_MELEE:
-      return [1, 1]
-
-    case AttackSprite.WATER_RANGE:
-      return [3, 3]
-
-    case AttackSprite.FIRE_MELEE:
-      return [1, 1]
-
-    case AttackSprite.ROCK_MELEE:
-      return [1.5, 1.5]
-
-    case AttackSprite.ELECTRIC_MELEE:
-      return [1.5, 1.5]
-
-    case AttackSprite.PSYCHIC_RANGE:
-      return [2, 2]
-
-    case AttackSprite.DRAGON_MELEE:
-      return [2, 2]
-
-    default:
-      return [2, 2]
-  }
-}
-
 export function getPath(pokemon: IPokemonEntity | IPokemon) {
   let pokemonPath = ""
   const index = pokemon.index

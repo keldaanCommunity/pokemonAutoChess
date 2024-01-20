@@ -17,6 +17,7 @@ import { logger } from "../../../utils/logger"
 import { AnimationConfig, Pkm, PkmIndex } from "../../../types/enum/Pokemon"
 import { Effect } from "../../../types/enum/Effect"
 import { Berries } from "../../../types/enum/Item"
+import { fixedFps } from "../../../utils/number"
 
 export default class AnimationManager {
   game: Phaser.Scene
@@ -627,17 +628,17 @@ export default class AnimationManager {
       repeat: 0
     })
 
-    this.game.anims.create({
-      key: Ability.NIGHT_SLASH,
+    /*this.game.anims.create({
+      key: Ability.WONDER_ROOM,
       frames: this.game.anims.generateFrameNames("specials", {
         start: 0,
         end: 4,
         zeroPad: 3,
-        prefix: `${Ability.NIGHT_SLASH}/`
+        prefix: `${Ability.WONDER_ROOM}/`
       }),
       duration: 1000,
       repeat: 0
-    })
+    })*/
 
     this.game.anims.create({
       key: Ability.BUG_BUZZ,
@@ -1198,7 +1199,18 @@ export default class AnimationManager {
         end: 16,
         zeroPad: 3
       }),
-      duration: 500,
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
+      key: Ability.PSYBEAM,
+      frames: this.game.anims.generateFrameNames(Ability.PSYBEAM, {
+        start: 0,
+        end: 14,
+        zeroPad: 3
+      }),
+      duration: 600,
       repeat: 0
     })
 
@@ -2330,6 +2342,17 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
+      key: "STEEL/melee",
+      frames: this.game.anims.generateFrameNames("STEEL/melee", {
+        start: 0,
+        end: 7,
+        zeroPad: 3
+      }),
+      duration: 1000,
+      repeat: -1
+    })
+
+    this.game.anims.create({
       key: "WATER/cell",
       frames: this.game.anims.generateFrameNames("attacks", {
         start: 0,
@@ -2491,10 +2514,11 @@ export default class AnimationManager {
       key: Ability.OVERDRIVE,
       frames: this.game.anims.generateFrameNames(Ability.OVERDRIVE, {
         start: 0,
-        end: 20,
-        zeroPad: 3
+        end: 21,
+        zeroPad: 3,
+        suffix: ".png"
       }),
-      duration: 800,
+      duration: fixedFps(22),
       repeat: 0
     })
 
@@ -2531,6 +2555,18 @@ export default class AnimationManager {
       }),
       duration: 150,
       repeat: -1
+    })
+
+    this.game.anims.create({
+      key: Ability.NIGHT_SLASH,
+      frames: this.game.anims.generateFrameNames(Ability.NIGHT_SLASH, {
+        start: 0,
+        end: 14,
+        zeroPad: 3,
+        suffix: ".png"
+      }),
+      duration: fixedFps(15),
+      repeat: 0
     })
 
     this.game.anims.create({
