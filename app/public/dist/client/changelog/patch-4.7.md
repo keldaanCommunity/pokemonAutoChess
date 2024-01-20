@@ -8,6 +8,7 @@
 
 # Changes to Pokemon & Abilities
 
+- Ditto can now fight ! It's not very strong though...
 - Riolu is now rare additional pick. New ability: Aura sphere: Exudes an aura and projects energy in a line, dealing 25/50 special damage and Silence every enemy hit for 3 seconds
 - Rework Nightmare (Ghastly): Silence all enemy Pokémon for 1.5/3/8 seconds. Any opponent asleep, flinched or already silenced take 50 special damage.
 - Onix: removed Steel, buffed HP ~~150~~ 200 ; Steelix still has Steel style
@@ -20,7 +21,16 @@
 - Nerf Helioptile and Heliodisk: HP ~~90/220~~ 75/170 Def/Spedef ~~3/4~~ 2/3
 - Nerf Regieleki: PP ~~90~~ 100
 - Buff Chatot; Chatter: ~~10~~ 20 special damage, chance of confusion ~~30%~~ 50%, no longer scales with AP
-- Ditto can now fight ! It's not very strong though...
+- Buff Sudowoodo: Atk ~~16~~ 20
+- Buff Alolan Geodude line: Def ~~3/5/7~~ 5/7/10
+- Buff Starly line: PP ~~100~~ 80, Attack ~~8/16/24~~ 10/20/30
+- Nerf Cyndaquil line: HP ~~70/130/250/260~~ 60/120/230/230
+- Buff Zorua line and Hisui Zorua lines: Attack ~~6/15~~ 8/18
+- Buff Staryu/Starmie : PP ~~100~~ 80
+- Nerf Dragon Darts (Dreepy line): ~~10/25/50~~ 10/20/40 special damage
+- Adapted Magic Bounce (Natu): fixed duration to 5 seconds, replace 40 flat damage by 50/100% of damage reflected, can now deal and reflect ability crits
+- Genesect lock-on ability now deals **additional** true damage
+- Buff Happiny line: Spe def ~~5/6/8~~ 5/10/15
 
 # Changes to Synergies
 
@@ -36,7 +46,10 @@
   (6) Corkscrew Crash: Deal 100% of Attack as true damage
   (8) Max Meltdown: Deal 150% of Attack as true damage
 
-- Changed Light 4 Eternal light: increase ~~Attack Speed~~ Def & SpeDef by 30%
+- Nerf Light 2 Shining ray ~~30~~ 25% Attack and AP
+- Changed Light 4 Eternal light: increase ~~Attack Speed by 30%~~ Def & SpeDef by 50%
+- Buff Poison: ~~30/50/70~~ 33/66/100% chance to poison on hit
+
 
 # Changes to Items
 

@@ -3920,20 +3920,7 @@ export class FakeTearsStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 0
-    switch (pokemon.stars) {
-      case 1:
-        damage = 3
-        break
-      case 2:
-        damage = 6
-        break
-      case 3:
-        damage = 9
-        break
-      default:
-        break
-    }
+    const damage = [3,6,9][pokemon.stars -1 ] ?? 3
 
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value && pokemon.team != value.team) {
@@ -3999,21 +3986,7 @@ export class DragonDartsStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 0
-
-    switch (pokemon.stars) {
-      case 1:
-        damage = 10
-        break
-      case 2:
-        damage = 25
-        break
-      case 3:
-        damage = 50
-        break
-      default:
-        break
-    }
+    const damage = [10,20,40][pokemon.stars -1] ?? 10
 
     for (let n = 0; n < 3; n++) {
       target.handleSpecialDamage(
@@ -5162,10 +5135,8 @@ export class MagicBounceStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
-    const timer =
-      pokemon.stars === 3 ? 12000 : pokemon.stars === 2 ? 6000 : 3000
-    pokemon.status.triggerMagicBounce(timer)
+    super.process(pokemon, state, board, target, crit)    
+    pokemon.status.triggerMagicBounce(5000)
   }
 }
 
