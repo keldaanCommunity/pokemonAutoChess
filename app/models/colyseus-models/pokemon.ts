@@ -1266,9 +1266,9 @@ export class KommoO extends Pokemon {
 
 export class Gastly extends Pokemon {
   types = new SetSchema<Synergy>([
-    Synergy.MONSTER,
+    Synergy.GHOST,
     Synergy.POISON,
-    Synergy.GHOST
+    Synergy.MONSTER
   ])
   rarity = Rarity.ULTRA
   stars = 1
@@ -1285,9 +1285,9 @@ export class Gastly extends Pokemon {
 
 export class Haunter extends Pokemon {
   types = new SetSchema<Synergy>([
-    Synergy.MONSTER,
+    Synergy.GHOST,
     Synergy.POISON,
-    Synergy.GHOST
+    Synergy.MONSTER
   ])
   rarity = Rarity.ULTRA
   stars = 2
@@ -1304,9 +1304,9 @@ export class Haunter extends Pokemon {
 
 export class Gengar extends Pokemon {
   types = new SetSchema<Synergy>([
-    Synergy.MONSTER,
+    Synergy.GHOST,
     Synergy.POISON,
-    Synergy.GHOST
+    Synergy.MONSTER
   ])
   rarity = Rarity.ULTRA
   stars = 3
@@ -1749,7 +1749,7 @@ export class Solosis extends Pokemon {
   speDef = 1
   maxPP = 90
   range = 2
-  skill = Ability.SHADOW_BALL
+  skill = Ability.PSYCHIC
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -1764,7 +1764,7 @@ export class Duosion extends Pokemon {
   speDef = 1
   maxPP = 90
   range = 2
-  skill = Ability.SHADOW_BALL
+  skill = Ability.PSYCHIC
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -1778,7 +1778,7 @@ export class Reuniclus extends Pokemon {
   speDef = 1
   maxPP = 90
   range = 2
-  skill = Ability.SHADOW_BALL
+  skill = Ability.PSYCHIC
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -2686,7 +2686,7 @@ export class Duskull extends Pokemon {
   speDef = 1
   maxPP = 100
   range = 2
-  skill = Ability.NIGHT_SLASH
+  skill = Ability.SHADOW_BALL
   attackSprite = AttackSprite.GHOST_RANGE
 }
 
@@ -2701,7 +2701,7 @@ export class Dusclops extends Pokemon {
   speDef = 1
   maxPP = 100
   range = 2
-  skill = Ability.NIGHT_SLASH
+  skill = Ability.SHADOW_BALL
   attackSprite = AttackSprite.GHOST_RANGE
 }
 
@@ -2715,7 +2715,7 @@ export class Dusknoir extends Pokemon {
   speDef = 1
   maxPP = 100
   range = 2
-  skill = Ability.NIGHT_SLASH
+  skill = Ability.SHADOW_BALL
   attackSprite = AttackSprite.GHOST_RANGE
 }
 
@@ -5393,7 +5393,7 @@ export class Spiritomb extends Pokemon {
   speDef = 2
   maxPP = 80
   range = 2
-  skill = Ability.NIGHT_SLASH
+  skill = Ability.SHADOW_BALL
   attackSprite = AttackSprite.GHOST_RANGE
 }
 
@@ -8017,7 +8017,7 @@ export class Staryu extends Pokemon {
   speDef = 3
   maxPP = 80
   range = 2
-  skill = Ability.PSYCHIC
+  skill = Ability.PSYBEAM
   additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
@@ -8032,7 +8032,7 @@ export class Starmie extends Pokemon {
   speDef = 6
   maxPP = 80
   range = 2
-  skill = Ability.PSYCHIC
+  skill = Ability.PSYBEAM
   additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
@@ -11282,7 +11282,21 @@ export class Cyclizar extends Pokemon {
   skill = Ability.SHED_TAIL
   attackSprite = AttackSprite.DRAGON_MELEE
 }
-
+/*
+export class Pawniard extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.STEEL])
+  rarity = Rarity.ULTRA
+  stars = 1
+  hp = 100
+  atk = 21
+  def = 4
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.SHED_TAIL
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
+*/
 export const PokemonClasses: Record<
   Pkm,
   new (shiny: boolean, emotion: Emotion) => Pokemon

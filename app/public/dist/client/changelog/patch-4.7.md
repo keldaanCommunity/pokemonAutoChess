@@ -31,6 +31,11 @@
 - Adapted Magic Bounce (Natu): fixed duration to 5 seconds, replace 40 flat damage by 50/100% of damage reflected, can now deal and reflect ability crits
 - Genesect lock-on ability now deals **additional** true damage
 - Buff Happiny line: Spe def ~~5/6/8~~ 5/10/15
+- Ditto can now fight ! It's not very strong though...
+- New ability for Staryu/Starmie: Psybeam: Deal 30/60/100 special damage to all enemy Pokémon behind the target with 50% chance to make them confused for 4 seconds
+- Solosis ability is renamed Psychic and has a new visual effect
+- Duskull/Spiritomb ability is renamed Shadow ball and now lowers special defense instead of defense
+
 
 # Changes to Synergies
 

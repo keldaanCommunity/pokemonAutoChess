@@ -385,6 +385,11 @@ export function loadAttacksMultiAtlas(scene: Phaser.Scene) {
     "/assets/attacks"
   )
   scene.load.multiatlas(
+    "PSYBEAM",
+    "/assets/attacks/PSYBEAM.json",
+    "/assets/attacks"
+  )
+  scene.load.multiatlas(
     "ANCHOR_SHOT",
     "/assets/attacks/ANCHOR_SHOT.json",
     "/assets/attacks"

@@ -627,17 +627,17 @@ export default class AnimationManager {
       repeat: 0
     })
 
-    this.game.anims.create({
-      key: Ability.NIGHT_SLASH,
+    /*this.game.anims.create({
+      key: Ability.WONDER_ROOM,
       frames: this.game.anims.generateFrameNames("specials", {
         start: 0,
         end: 4,
         zeroPad: 3,
-        prefix: `${Ability.NIGHT_SLASH}/`
+        prefix: `${Ability.WONDER_ROOM}/`
       }),
       duration: 1000,
       repeat: 0
-    })
+    })*/
 
     this.game.anims.create({
       key: Ability.BUG_BUZZ,
@@ -1198,7 +1198,18 @@ export default class AnimationManager {
         end: 16,
         zeroPad: 3
       }),
-      duration: 500,
+      duration: 1000,
+      repeat: 0
+    })
+
+    this.game.anims.create({
+      key: Ability.PSYBEAM,
+      frames: this.game.anims.generateFrameNames(Ability.PSYBEAM, {
+        start: 0,
+        end: 14,
+        zeroPad: 3
+      }),
+      duration: 600,
       repeat: 0
     })
 
