@@ -1634,39 +1634,40 @@ export default class BattleManager {
             )
             break
 
-            case Ability.PSYBEAM:
-              coordinates = transformAttackCoordinate(
-                positionX,
-                positionY,
-                this.flip
-              )
-              coordinatesTarget = transformAttackCoordinate(
-                targetX,
-                targetY,
-                this.flip
-              )
-              specialProjectile = this.scene.add.sprite(
-                coordinatesTarget[0],
-                coordinatesTarget[1],
-                Ability.PSYBEAM,
-                `${Ability.PSYBEAM}/000`
-              )
-              specialProjectile.setDepth(7)
-              specialProjectile.setScale(2, 2)
-              specialProjectile.setRotation(
-                Math.atan2(
-                  coordinatesTarget[1] - coordinates[1],
-                  coordinatesTarget[0] - coordinates[0]
-                )
-              )
-              specialProjectile.anims.play(Ability.PSYBEAM)
-              specialProjectile.once(
-                Phaser.Animations.Events.ANIMATION_COMPLETE,
-                () => {
-                  specialProjectile.destroy()
-                }
-              )
-              break
+          case Ability.PSYBEAM:
+            coordinates = transformAttackCoordinate(
+              positionX,
+              positionY,
+              this.flip
+            )
+            coordinatesTarget = transformAttackCoordinate(
+              targetX,
+              targetY,
+              this.flip
+            )
+            specialProjectile = this.scene.add.sprite(
+              coordinatesTarget[0],
+              coordinatesTarget[1],
+              Ability.PSYBEAM,
+              `${Ability.PSYBEAM}/000`
+            )
+            specialProjectile.setDepth(7)
+            specialProjectile.setScale(2, 2)
+            specialProjectile.setRotation(
+              Math.atan2(
+                coordinatesTarget[1] - coordinates[1],
+                coordinatesTarget[0] - coordinates[0]
+              ) +
+                Math.PI / 2
+            )
+            specialProjectile.anims.play(Ability.PSYBEAM)
+            specialProjectile.once(
+              Phaser.Animations.Events.ANIMATION_COMPLETE,
+              () => {
+                specialProjectile.destroy()
+              }
+            )
+            break
 
           case Ability.THUNDER:
             coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
