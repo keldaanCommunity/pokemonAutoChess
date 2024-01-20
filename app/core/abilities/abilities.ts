@@ -6959,6 +6959,35 @@ export class NightSlashStrategy extends AbilityStrategy {
   }
 }
 
+export class KowtowCleaveStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    crit = chance(pokemon.critChance / 100) // can crit by default
+    super.process(pokemon, state, board, target, crit)
+    const nbAllies =
+      board.cells.filter((p) => p && p.team === pokemon.team).length - 1
+    const nbFallenAllies = min(0)(
+      (pokemon.player?.experienceManager.level ?? 0) - nbAllies
+    )
+    const damage = Math.round(
+      pokemon.atk * (1 + nbFallenAllies * 0.1 * (1 + pokemon.ap / 100))
+    )
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.TRUE,
+      pokemon,
+      crit,
+      false
+    )
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -7014,6 +7043,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.STOMP]: new StompStrategy(),
   [Ability.PAYBACK]: new PaybackStrategy(),
   [Ability.NIGHT_SLASH]: new NightSlashStrategy(),
+  [Ability.KOWTOW_CLEAVE]: new KowtowCleaveStrategy(),
   [Ability.BUG_BUZZ]: new BugBuzzStrategy(),
   [Ability.STRING_SHOT]: new StringShotStrategy(),
   [Ability.STICKY_WEB]: new StickyWebStrategy(),

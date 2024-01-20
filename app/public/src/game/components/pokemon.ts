@@ -4,10 +4,8 @@ import Lifebar from "./life-bar"
 import DraggableObject from "./draggable-object"
 import PokemonDetail from "./pokemon-detail"
 import ItemsContainer from "./items-container"
-import { Effect } from "../../../../types/enum/Effect"
 import {
   transformAttackCoordinate,
-  getAttackScale,
   transformCoordinate
 } from "../../pages/utils/utils"
 import {
@@ -15,7 +13,8 @@ import {
   IPokemonEntity,
   instanceofPokemonEntity,
   Emotion,
-  AttackSprite
+  AttackSprite,
+  AttackSpriteScale
 } from "../../../../types"
 import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
 import MoveTo from "phaser3-rex-plugins/plugins/moveto"
@@ -411,7 +410,7 @@ export default class Pokemon extends DraggableObject {
         "attacks",
         `${this.attackSprite}/000`
       )
-      const scale = getAttackScale(this.attackSprite)
+      const scale = AttackSpriteScale[this.attackSprite]
       this.projectile.setScale(scale[0], scale[1])
       this.projectile.anims.play(`${this.attackSprite}`)
       this.addTween()

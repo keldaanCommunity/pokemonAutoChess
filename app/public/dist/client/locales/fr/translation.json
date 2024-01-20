@@ -270,7 +270,8 @@
     "OUTRAGE": "Colère",
     "AURASPHERE": "Aurasphère",
     "LOVELY_KISS": "Grobisou",
-    "SKETCH": "Gribouille"
+    "SKETCH": "Gribouille",
+    "COWTOW_CLEAVE": "Génusection"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1189,9 +1190,11 @@
     "INFERNAL_PARADE": "Envoie une Roue de Feu en boomerang, ayant 50% de chance de BURN pendant 3 secondes et infligeant 2 fois [30,SP] SPECIAL à tous les pokémons adverses touchés.",
     "RETALIATE": "Inflige [15,30,60,SP] SPECIAL à la cible + [10,15,25,SP] SPECIAL additionels par allié KO",
     "SLASH": "Inflige [10,20,40,SP] SPECIAL avec [30,60,90]% de CRIT_CHANCE augmentée",
+    "NIGHT_SLASH": "Inflige [15,30,60,SP] SPECIAL avec [30,60,90]% de CRIT_CHANCE augmentée",
     "OUTRAGE": "Le pokémon est CONFUSION pendant 2 secondes et inflige [2,3,4,SP]x ATK en SPECIAL à la cible et aux ennemis adjacents",
     "AURASPHERE": "Dégage une aura et projette de l'énergie en ligne droite, infligeant [25,50,SP] SPECIAL et SILENCE pendant 3 secondes aux adversaires touchés",
-    "LOVELY_KISS": "Le lanceur fait un bisou à l'ennemi en prenant une mine effrayante, ce qui le rend SLEEP pendant [2,4,SP] secondes"
+    "LOVELY_KISS": "Le lanceur fait un bisou à l'ennemi en prenant une mine effrayante, ce qui le rend SLEEP pendant [2,4,SP] secondes",
+    "KOWTOW_CLEAVE": "Inflige 100% ATK + [10,SP]% par allié KO en TRUE. Peut infliger un coup critique par défaut."
   },
   "effect": {
     "INGRAIN": "Enraciné",

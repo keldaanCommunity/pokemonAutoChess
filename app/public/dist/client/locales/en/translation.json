@@ -284,7 +284,8 @@
     "LOVELY_KISS": "Lovely Kiss",
     "TRANSFORM": "Transform",
     "PSYCHIC_FANGS": "Psychic Fangs",
-    "SHED_TAIL": "Shed Tail"
+    "SHED_TAIL": "Shed Tail",
+    "KOWTOW_CLEAVE": "Kowtow Cleave"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -966,7 +967,10 @@
     "TOXTRICITY": "Toxtricity",
     "BRUXISH": "Bruxish",
     "SUBSTITUTE": "Substitute",
-    "CYCLIZAR": "Cyclizar"
+    "CYCLIZAR": "Cyclizar",
+    "PAWNIARD": "Pawniard",
+    "BISHARP": "Bisharp",
+    "KINGAMBIT": "Kingambit"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1235,7 +1239,9 @@
     "LOVELY_KISS": "Kisses the enemy with a frightening expression. Puts the enemy SLEEP for [2,4,SP] seconds.",
     "TRANSFORM": "Takes the appearance and the statistics of its target (except HP)",
     "PSYCHIC_FANGS": "Inflicts [100,SP] PHYSICAL and removes all the target's ATK, DEF and SPE_DEF buffs",
-    "SHED_TAIL": "Caster create a substitute and charge towards the ally with the fewest HP to give it [80, SP] SHIELD"
+    "SHED_TAIL": "Caster create a substitute and charge towards the ally with the fewest HP to give it [80, SP] SHIELD",
+    "NIGHT_SLASH": "Deal [15,30,60,SP] SPECIAL with a [30,60,90]% increased CRIT_CHANCE ratio",
+    "KOWTOW_CLEAVE": "Deal 100% ATK + [10,SP]% per fallen ally as TRUE. Can crit by default."
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -2149,7 +2155,7 @@
   "shiny": "Shiny",
   "emotion_label": "Emotion",
   "export": "Export",
-  "help_create_bot": "To create a bot, you need to fill a certain number of steps.   Each step represents the state of your bot at a moment in the game   The bot will start with the team defined on step 1. Then, it will go   to step 2 and so on   The team of the step 2 should always be stronger than the step 1   team   As the player cannot get more than 10 pokemons/step, your bot is not   allowed too.",
+  "help_create_bot": "To create a bot, you need to fill a certain number of steps. Each step represents the state of your bot at a moment in the game   The bot will start with the team defined on step 1. Then, it will go   to step 2 and so on   The team of the step 2 should always be stronger than the step 1   team   As the player cannot get more than 10 pokemons/step, your bot is not   allowed too.",
   "item_components": "Item Components",
   "board_power": "Board Power",
   "avatar": "Avatar",

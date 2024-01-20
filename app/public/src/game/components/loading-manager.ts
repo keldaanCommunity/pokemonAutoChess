@@ -180,6 +180,11 @@ export function loadAttacksMultiAtlas(scene: Phaser.Scene) {
     "/assets/attacks"
   )
   scene.load.multiatlas(
+    "STEEL/melee",
+    "/assets/attacks/STEEL_MELEE.json",
+    "/assets/attacks"
+  )
+  scene.load.multiatlas(
     "ROAR_OF_TIME",
     "/assets/attacks/ROAR_OF_TIME.json",
     "/assets/attacks"
@@ -847,8 +852,13 @@ export function loadAttacksMultiAtlas(scene: Phaser.Scene) {
   )
   scene.load.multiatlas(
     "OVERDRIVE",
-    "/assets/attacks/OVERDRIVE.json",
-    "/assets/attacks"
+    "/assets/attacks/OVERDRIVE/OVERDRIVE.json",
+    "/assets/attacks/OVERDRIVE"
+  )
+  scene.load.multiatlas(
+    "NIGHT_SLASH",
+    "/assets/attacks/NIGHT_SLASH/NIGHT_SLASH.json",
+    "/assets/attacks/NIGHT_SLASH"
   )
 }
 

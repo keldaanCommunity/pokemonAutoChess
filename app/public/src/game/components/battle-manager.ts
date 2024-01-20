@@ -2218,12 +2218,13 @@ export default class BattleManager {
             break
 
           case Ability.NIGHT_SLASH:
+          case Ability.KOWTOW_CLEAVE:
             coordinates = transformAttackCoordinate(targetX, targetY, this.flip)
             specialProjectile = this.scene.add.sprite(
               coordinates[0],
               coordinates[1],
-              "specials",
-              `${Ability.NIGHT_SLASH}/000`
+              Ability.NIGHT_SLASH,
+              `000.png`
             )
             specialProjectile.setDepth(7)
             specialProjectile.setScale(2, 2)

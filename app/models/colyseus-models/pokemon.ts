@@ -11282,21 +11282,51 @@ export class Cyclizar extends Pokemon {
   skill = Ability.SHED_TAIL
   attackSprite = AttackSprite.DRAGON_MELEE
 }
-/*
+
 export class Pawniard extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.STEEL])
   rarity = Rarity.ULTRA
   stars = 1
-  hp = 100
-  atk = 21
-  def = 4
-  speDef = 2
-  maxPP = 100
+  evolution = Pkm.BISHARP
+  hp = 130
+  atk = 14
+  def = 5
+  speDef = 3
+  maxPP = 60
   range = 1
-  skill = Ability.SHED_TAIL
-  attackSprite = AttackSprite.DRAGON_MELEE
+  skill = Ability.KOWTOW_CLEAVE
+  attackSprite = AttackSprite.STEEL_MELEE
 }
-*/
+
+export class Bisharp extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.STEEL])
+  rarity = Rarity.ULTRA
+  stars = 2
+  evolution = Pkm.KINGAMBIT
+  hp = 250
+  atk = 26
+  def = 8
+  speDef = 4
+  maxPP = 60
+  range = 1
+  skill = Ability.KOWTOW_CLEAVE
+  attackSprite = AttackSprite.STEEL_MELEE
+}
+
+export class Kingambit extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.STEEL])
+  rarity = Rarity.ULTRA
+  stars = 3
+  hp = 400
+  atk = 42
+  def = 12
+  speDef = 6
+  maxPP = 60
+  range = 1
+  skill = Ability.KOWTOW_CLEAVE
+  attackSprite = AttackSprite.STEEL_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (shiny: boolean, emotion: Emotion) => Pokemon
@@ -11980,5 +12010,8 @@ export const PokemonClasses: Record<
   [Pkm.TOXTRICITY]: Toxtricity,
   [Pkm.BRUXISH]: Bruxish,
   [Pkm.SUBSTITUTE]: Substitute,
-  [Pkm.CYCLIZAR]: Cyclizar
+  [Pkm.CYCLIZAR]: Cyclizar,
+  [Pkm.PAWNIARD]: Pawniard,
+  [Pkm.BISHARP]: Bisharp,
+  [Pkm.KINGAMBIT]: Kingambit
 }
