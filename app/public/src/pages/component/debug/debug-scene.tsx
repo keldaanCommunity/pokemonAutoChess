@@ -6,19 +6,18 @@ import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
 import { Orientation } from "../../../../../types/enum/Game"
 import { Status } from "../../../../../types/enum/Status"
 import "./debug-scene.css"
-import { AnimationType } from "../../../../../types/Animation"
 
 export default function DebugSceneContainer({
   pkm = Pkm.RATTATA,
   orientation = Orientation.DOWNLEFT,
-  animationType = AnimationType.Idle,
+  animationType = "Idle",
   status,
   height = 100,
   width = 100
 }: {
   pkm?: Pkm
   orientation?: Orientation
-  animationType?: AnimationType
+  animationType?: string
   status: Status | ""
   height?: number
   width?: number

@@ -6,10 +6,9 @@ import DebugScene from "./component/debug/debug-scene"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"
 import { PokemonTypeahead } from "./component/typeahead/pokemon-typeahead"
 
-import { AnimationConfig, Pkm } from "../../../types/enum/Pokemon"
+import { Pkm } from "../../../types/enum/Pokemon"
 import { Orientation } from "../../../types/enum/Game"
 import { Status } from "../../../types/enum/Status"
-import { AnimationType } from "../../../types/Animation"
 
 import "./sprite-viewer.css"
 
@@ -19,9 +18,7 @@ export function SpriteDebug() {
   const [orientation, setOrientation] = useState<Orientation>(
     Orientation.DOWNLEFT
   )
-  const [animationType, setAnimType] = useState<AnimationType>(
-    AnimationType.Idle
-  )
+  const [animationType, setAnimType] = useState<string>("Idle")
   const [status, setStatus] = useState<Status | "">("")
 
   return (
@@ -40,7 +37,7 @@ export function SpriteDebug() {
               onChange={(pkm) => {
                 if (pkm) {
                   setPkm(pkm)
-                  setAnimType(AnimationType.Idle)
+                  setAnimType("Idle")
                 }
               }}
             />
@@ -66,18 +63,16 @@ export function SpriteDebug() {
             <select
               id="sprite-viewer-anim-type"
               value={animationType}
-              onChange={(e) =>
-                setAnimType(e.currentTarget.value as AnimationType)
-              }
+              onChange={(e) => setAnimType(e.currentTarget.value)}
             >
-              <option value={AnimationType.Idle}>Idle</option>
-              <option value={AnimationType.Walk}>Walk</option>
-              <option value={AnimationType.Sleep}>Sleep</option>
-              <option value={AnimationType.Hurt}>Hurt</option>
-              <option value={AnimationType.Hop}>Hop</option>
-              <option value={AnimationConfig[pkm].attack}>Attack</option>
-              <option value={AnimationConfig[pkm].ability}>Ability</option>
-              <option value={AnimationConfig[pkm].emote}>Emote</option>
+              <option value="Idle">Idle</option>
+              <option value="Walk">Walk</option>
+              <option value="Sleep">Sleep</option>
+              <option value="Hurt">Hurt</option>
+              <option value="Hop">Hop</option>
+              <option value="Attack">Attack</option>
+              <option value="Ability">Ability</option>
+              <option value="Emote">Emote</option>
             </select>
           </div>
           <div className="nes-container">
@@ -102,8 +97,8 @@ export function SpriteDebug() {
             orientation={orientation}
             animationType={animationType}
             status={status}
-            width={800}
-            height={800}
+            width={1950}
+            height={1000}
           />
         </div>
       </div>
