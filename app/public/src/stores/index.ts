@@ -4,7 +4,6 @@ import networkReducer from "./NetworkStore"
 import preparationReducer from "./PreparationStore"
 import gameReducer from "./GameStore"
 import afterReducer from "./AfterGameStore"
-import { composeWithDevTools } from "redux-devtools-extension"
 import { enableMapSet } from "immer"
 
 enableMapSet()
@@ -21,7 +20,7 @@ const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: false
     }),
-  enhancers: composeWithDevTools({})
+  devTools: true
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
