@@ -125,64 +125,9 @@ export default class UnownManager {
       }
     })
   }
-
-  hiddenPowerAnimation(
-    skill: Ability,
-    originX: number,
-    originY: number,
-    flip: boolean
-  ) {
-    const [x, y] = transformAttackCoordinate(originX, originY, flip)
-    const unownsGroup = this.scene.add.group()
-    const letters = UNOWNS_PER_ABILITY.get(skill)
-    for (let n = 0; n < 8; n++) {
-      letters?.forEach((letter, i) => {
-        const unown = new Pokemon(
-          this.scene,
-          x,
-          y,
-          PokemonFactory.createPokemonFromName(letter),
-          "unown",
-          false,
-          flip
-        )
-        unown.draggable = false
-        unownsGroup.add(unown)
-        this.animationManager.animatePokemon(
-          unown,
-          PokemonActionState.IDLE,
-          flip
-        )
-      })
-    }
-
-    const circle = new Phaser.Geom.Circle(x, y, 10)
-    Phaser.Actions.PlaceOnCircle(unownsGroup.getChildren(), circle)
-
-    this.scene.tweens.add({
-      targets: circle,
-      radius: 500,
-      ease: Phaser.Math.Easing.Quartic.Out,
-      duration: 2500,
-      onUpdate: function (tween) {
-        Phaser.Actions.RotateAroundDistance(
-          unownsGroup.getChildren(),
-          { x, y },
-          -0.02 * (1 - tween.progress),
-          circle.radius
-        )
-        if (tween.progress > 0.8) {
-          unownsGroup.setAlpha((1 - tween.progress) * 5)
-        }
-      },
-      onComplete() {
-        unownsGroup.destroy(true, true)
-      }
-    })
-  }
 }
 
-const UNOWNS_PER_ABILITY = new Map([
+export const UNOWNS_PER_ABILITY = new Map([
   [
     Ability.HIDDEN_POWER_A,
     [Pkm.UNOWN_A, Pkm.UNOWN_B, Pkm.UNOWN_R, Pkm.UNOWN_A]

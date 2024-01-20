@@ -41,8 +41,3 @@
   justify-content: center;
   width: 100%;
 }
-
-.sprite-viewer-sprite canvas {
-  border: 2px solid black;
-  border-radius: 4px;
-}
