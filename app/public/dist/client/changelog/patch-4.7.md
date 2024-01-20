@@ -5,6 +5,9 @@
 - Toxtricity
 - Bruxish
 - Cyclizar
+- Pawniard
+- Bisharp
+- Kingambit
 
 # Changes to Pokemon & Abilities
 
