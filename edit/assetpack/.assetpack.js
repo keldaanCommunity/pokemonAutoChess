@@ -54,8 +54,6 @@ function texturePackAtlas() {
     folder: true,
     name: "texture-pack-indexer",
     finish(tree, processor) {
-      fs.writeJSONSync("tree.json", tree)
-
       const atlasPath = path.joinSafe(processor.config.entry, "atlas.json")
 
       const existingAtlas = fs.existsSync(atlasPath)

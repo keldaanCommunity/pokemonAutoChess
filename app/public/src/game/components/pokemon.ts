@@ -594,8 +594,8 @@ export default class Pokemon extends DraggableObject {
     const specialProjectile = this.scene.add.sprite(
       coordinates[0],
       coordinates[1],
-      "BRIGHT_POWDER",
-      "000"
+      "abilities",
+      "BRIGHT_POWDER/000.png"
     )
     specialProjectile.setDepth(7)
     specialProjectile.setScale(2, 2)
@@ -654,8 +654,8 @@ export default class Pokemon extends DraggableObject {
     const specialProjectile = this.scene.add.sprite(
       coordinates[0],
       coordinates[1],
-      "ATTACK_ORDER",
-      "000"
+      "abilities",
+      "ATTACK_ORDER/000.png"
     )
     specialProjectile.setDepth(7)
     specialProjectile.setScale(2, 2)

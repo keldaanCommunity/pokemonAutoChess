@@ -642,14 +642,15 @@ export default class BattleManager {
       positionY,
       this.flip
     )
-    const boost = this.scene.add.sprite(
-      coordinates[0],
-      coordinates[1] - 10,
-      `BOOST_${stat}`,
-      "0"
-    )
-    boost.setDepth(7)
-    boost.setScale(2, 2)
+    const boost = this.scene.add
+      .sprite(
+        coordinates[0],
+        coordinates[1] - 10,
+        "boosts",
+        `BOOST_${stat}/000.png`
+      )
+      .setDepth(7)
+      .setScale(2, 2)
     boost.anims.play(`BOOST_${stat}`)
     boost.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
       boost.destroy()
