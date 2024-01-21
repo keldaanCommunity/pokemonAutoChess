@@ -299,8 +299,8 @@ export default class GameScene extends Scene {
         const clickAnimation = this.add.sprite(
           pointer.x,
           pointer.y,
-          "basicattacks",
-          `WATER/cell/000`
+          "attacks",
+          `WATER/cell/000.png`
         )
         clickAnimation.setDepth(7)
         clickAnimation.anims.play("WATER/cell")

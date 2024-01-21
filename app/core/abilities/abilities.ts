@@ -1588,7 +1588,7 @@ export class FutureSightStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
+    super.process(pokemon, state, board, target, crit, true)
 
     let damage = 0
     let count = 0
@@ -1628,7 +1628,7 @@ export class PetalDanceStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
+    super.process(pokemon, state, board, target, crit, true)
 
     let damage = 0
     let count = 0
@@ -6955,15 +6955,9 @@ export class NightSlashStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [15,30,60][pokemon.stars-1] ?? 60
-    crit = crit || chance([0.3,0.6,0.9][pokemon.stars-1] ?? 0.9)
-    target.handleSpecialDamage(
-      damage,
-      board,
-      AttackType.SPECIAL,
-      pokemon,
-      crit
-    )
+    const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
+    crit = crit || chance([0.3, 0.6, 0.9][pokemon.stars - 1] ?? 0.9)
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
 

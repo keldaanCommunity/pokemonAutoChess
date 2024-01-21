@@ -41,6 +41,7 @@ import {
 import { DebugScene } from "../scenes/debug-scene"
 import { preferences } from "../../preferences"
 import { values } from "../../../../utils/schemas"
+import { displayAbility } from "./abilities-animations"
 
 export default class Pokemon extends DraggableObject {
   evolution: Pkm
@@ -401,7 +402,7 @@ export default class Pokemon extends DraggableObject {
       this.projectile = this.scene.add.sprite(
         coordinates[0],
         coordinates[1],
-        "basicattacks",
+        "attacks",
         `${this.attackSprite}/000.png`
       )
       const scale = AttackSpriteScale[this.attackSprite]
@@ -445,266 +446,6 @@ export default class Pokemon extends DraggableObject {
     }
   }
 
-  petalDanceAnimation() {
-    const coordinates = transformAttackCoordinate(
-      this.positionX,
-      this.positionY,
-      this.flip
-    )
-    const specialProjectile = this.scene.add.sprite(
-      coordinates[0],
-      coordinates[1],
-      Ability.PETAL_DANCE,
-      "000"
-    )
-    specialProjectile.setDepth(7)
-    specialProjectile.setScale(2, 2)
-    specialProjectile.anims.play(Ability.PETAL_DANCE)
-    specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
-      specialProjectile.destroy()
-    })
-  }
-
-  futureSightAnimation() {
-    const coordinates = transformAttackCoordinate(
-      this.positionX,
-      this.positionY,
-      this.flip
-    )
-    const specialProjectile = this.scene.add.sprite(
-      coordinates[0],
-      coordinates[1],
-      Ability.FUTURE_SIGHT,
-      "000"
-    )
-    specialProjectile.setDepth(7)
-    specialProjectile.setScale(2, 2)
-    specialProjectile.anims.play(Ability.FUTURE_SIGHT)
-    specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
-      specialProjectile.destroy()
-    })
-  }
-
-  fieldDeathAnimation() {
-    const coordinates = transformAttackCoordinate(
-      this.positionX,
-      this.positionY,
-      this.flip
-    )
-    const specialProjectile = this.scene.add.sprite(
-      coordinates[0],
-      coordinates[1],
-      "FIELD_DEATH",
-      "000"
-    )
-    specialProjectile.setDepth(7)
-    specialProjectile.setScale(2, 2)
-    specialProjectile.anims.play("FIELD_DEATH")
-    specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
-      specialProjectile.destroy()
-    })
-  }
-
-  fairyCritAnimation() {
-    const coordinates = transformAttackCoordinate(
-      this.positionX,
-      this.positionY,
-      this.flip
-    )
-    const specialProjectile = this.scene.add.sprite(
-      coordinates[0],
-      coordinates[1],
-      "FAIRY_CRIT",
-      "000"
-    )
-    specialProjectile.setDepth(7)
-    specialProjectile.setScale(2, 2)
-    specialProjectile.anims.play("FAIRY_CRIT")
-    specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
-      specialProjectile.destroy()
-    })
-  }
-
-  soundAnimation() {
-    const coordinates = transformAttackCoordinate(
-      this.positionX,
-      this.positionY,
-      this.flip
-    )
-    const specialProjectile = this.scene.add.sprite(
-      coordinates[0],
-      coordinates[1],
-      "ECHO",
-      "000"
-    )
-    specialProjectile.setDepth(7)
-    specialProjectile.setScale(2, 2)
-    specialProjectile.anims.play("ECHO")
-    specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
-      specialProjectile.destroy()
-    })
-  }
-
-  growGroundAnimation() {
-    const coordinates = transformAttackCoordinate(
-      this.positionX,
-      this.positionY,
-      this.flip
-    )
-    const specialProjectile = this.scene.add.sprite(
-      coordinates[0],
-      coordinates[1],
-      "basicattacks",
-      "GROUND/cell/000"
-    )
-    specialProjectile.setDepth(7)
-    specialProjectile.setScale(1.5, 1.5)
-    specialProjectile.anims.play("ground-grow")
-    specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
-      specialProjectile.destroy()
-    })
-  }
-
-  powerLensAnimation() {
-    const coordinates = transformAttackCoordinate(
-      this.positionX,
-      this.positionY,
-      this.flip
-    )
-    const specialProjectile = this.scene.add.sprite(
-      coordinates[0],
-      coordinates[1],
-      "INCENSE_DAMAGE",
-      "000"
-    )
-    specialProjectile.setDepth(7)
-    specialProjectile.setScale(2, 2)
-    specialProjectile.anims.play("INCENSE_DAMAGE")
-    specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
-      specialProjectile.destroy()
-    })
-  }
-
-  starDustAnimation() {
-    const coordinates = transformAttackCoordinate(
-      this.positionX,
-      this.positionY,
-      this.flip
-    )
-    const specialProjectile = this.scene.add.sprite(
-      coordinates[0],
-      coordinates[1],
-      "BRIGHT_POWDER",
-      "000"
-    )
-    specialProjectile.setDepth(7)
-    specialProjectile.setScale(2, 2)
-    specialProjectile.anims.play("BRIGHT_POWDER")
-    specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
-      specialProjectile.destroy()
-    })
-  }
-
-  staticAnimation() {
-    const coordinates = transformAttackCoordinate(
-      this.positionX,
-      this.positionY,
-      this.flip
-    )
-    const specialProjectile = this.scene.add.sprite(
-      coordinates[0],
-      coordinates[1],
-      "STATIC",
-      "000"
-    )
-    specialProjectile.setDepth(7)
-    specialProjectile.setScale(3, 3)
-    specialProjectile.anims.play("STATIC")
-    specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
-      specialProjectile.destroy()
-    })
-  }
-
-  healOrderAnimation() {
-    const coordinates = transformAttackCoordinate(
-      this.positionX,
-      this.positionY,
-      this.flip
-    )
-    const specialProjectile = this.scene.add.sprite(
-      coordinates[0],
-      coordinates[1],
-      "HEAL_ORDER",
-      "000"
-    )
-    specialProjectile.setDepth(7)
-    specialProjectile.setScale(2, 2)
-    specialProjectile.anims.play("HEAL_ORDER")
-    specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
-      specialProjectile.destroy()
-    })
-  }
-
-  attackOrderAnimation() {
-    const coordinates = transformAttackCoordinate(
-      this.positionX,
-      this.positionY,
-      this.flip
-    )
-    const specialProjectile = this.scene.add.sprite(
-      coordinates[0],
-      coordinates[1],
-      "ATTACK_ORDER",
-      "000"
-    )
-    specialProjectile.setDepth(7)
-    specialProjectile.setScale(2, 2)
-    specialProjectile.anims.play("ATTACK_ORDER")
-    specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
-      specialProjectile.destroy()
-    })
-  }
-
-  earthquakeAnimation() {
-    const coordinates = transformAttackCoordinate(
-      this.positionX,
-      this.positionY,
-      this.flip
-    )
-    const specialProjectile = this.scene.add.sprite(
-      coordinates[0],
-      coordinates[1],
-      Ability.EARTHQUAKE,
-      "000"
-    )
-    specialProjectile.setDepth(7)
-    specialProjectile.setScale(3, 3)
-    specialProjectile.anims.play(Ability.EARTHQUAKE)
-    specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
-      specialProjectile.destroy()
-    })
-  }
-
-  mindBlownAnimation() {
-    const coordinates = transformAttackCoordinate(
-      this.positionX,
-      this.positionY,
-      this.flip
-    )
-    const specialProjectile = this.scene.add.sprite(
-      coordinates[0],
-      coordinates[1],
-      Ability.MIND_BLOWN,
-      "000"
-    )
-    specialProjectile.setDepth(7)
-    specialProjectile.setScale(3, 3)
-    specialProjectile.anims.play(Ability.MIND_BLOWN)
-    specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
-      specialProjectile.destroy()
-    })
-  }
-
   deathAnimation() {
     this.life = 0
     if (this.lifebar) {
@@ -746,20 +487,22 @@ export default class Pokemon extends DraggableObject {
     this.add(resurectAnim)
   }
 
-  fishingAnimation() {
-    const coordinates = transformCoordinate(this.positionX, this.positionY)
-    const specialProjectile = this.scene.add.sprite(
-      coordinates[0],
-      coordinates[1],
-      Ability.DIVE,
-      "000"
+  displayAnimation(anim: string) {
+    return displayAbility(
+      this.scene as GameScene,
+      [],
+      anim,
+      this.orientation,
+      this.positionX,
+      this.positionY,
+      this.targetX ?? -1,
+      this.targetY ?? -1,
+      this.flip
     )
-    specialProjectile.setDepth(this.sprite.depth - 1)
-    specialProjectile.setScale(1, 1)
-    specialProjectile.anims.play(Ability.DIVE)
-    specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
-      specialProjectile.destroy()
-    })
+  }
+
+  fishingAnimation() {
+    this.displayAnimation("FISHING")
     this.sprite.once(Phaser.Animations.Events.ANIMATION_REPEAT, () => {
       const g = <GameScene>this.scene
       g.animationManager?.animatePokemon(
@@ -1091,7 +834,7 @@ export default class Pokemon extends DraggableObject {
         "resurection",
         "000"
       )
-      this.resurection.setScale(2, 2)
+      this.resurection.setScale(2)
       this.scene.add.existing(this.resurection)
       this.resurection.anims.play("resurection")
       this.add(this.resurection)
@@ -1114,7 +857,7 @@ export default class Pokemon extends DraggableObject {
         "rune_protect",
         "000"
       )
-      this.runeProtect.setScale(2, 2)
+      this.runeProtect.setScale(2)
       this.scene.add.existing(this.runeProtect)
       this.runeProtect.anims.play("rune_protect")
       this.add(this.runeProtect)
@@ -1134,8 +877,8 @@ export default class Pokemon extends DraggableObject {
         this.scene,
         0,
         0,
-        Ability.SPIKE_ARMOR,
-        "000"
+        "abilities",
+        `${Ability.SPIKE_ARMOR}/000.png`
       )
       this.spikeArmor.setScale(2, 2)
       this.scene.add.existing(this.spikeArmor)
@@ -1157,10 +900,10 @@ export default class Pokemon extends DraggableObject {
         this.scene,
         0,
         0,
-        Ability.SPIKE_ARMOR,
-        "000"
+        "abilities",
+        `${Ability.SPIKE_ARMOR}/000.png`
       )
-      this.magicBounce.setScale(2, 2)
+      this.magicBounce.setScale(2)
       this.scene.add.existing(this.magicBounce)
       this.magicBounce.anims.play(Ability.MAGIC_BOUNCE)
       this.add(this.magicBounce)
@@ -1175,7 +918,13 @@ export default class Pokemon extends DraggableObject {
   }
 
   addLight() {
-    this.light = new GameObjects.Sprite(this.scene, 0, 10, "LIGHT_CELL", "000")
+    this.light = new GameObjects.Sprite(
+      this.scene,
+      0,
+      10,
+      "abilities",
+      "LIGHT_CELL/000.png"
+    )
     this.light.setDepth(0)
     this.light.setScale(1.5, 1.5)
     this.scene.add.existing(this.light)
