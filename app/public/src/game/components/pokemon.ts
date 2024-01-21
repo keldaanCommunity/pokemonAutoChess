@@ -4,10 +4,8 @@ import Lifebar from "./life-bar"
 import DraggableObject from "./draggable-object"
 import PokemonDetail from "./pokemon-detail"
 import ItemsContainer from "./items-container"
-import { Effect } from "../../../../types/enum/Effect"
 import {
   transformAttackCoordinate,
-  getAttackScale,
   transformCoordinate
 } from "../../pages/utils/utils"
 import {
@@ -15,7 +13,8 @@ import {
   IPokemonEntity,
   instanceofPokemonEntity,
   Emotion,
-  AttackSprite
+  AttackSprite,
+  AttackSpriteScale
 } from "../../../../types"
 import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
 import MoveTo from "phaser3-rex-plugins/plugins/moveto"
@@ -388,33 +387,61 @@ export default class Pokemon extends DraggableObject {
   }
 
   attackAnimation() {
-    let x: number | null
-    let y: number | null
-    if (this.range > 1) {
-      x = this.positionX
-      y = this.positionY
-    } else {
-      x = this.targetX
-      y = this.targetY
-    }
-
     if (this.projectile) {
       this.projectile.destroy()
     }
 
-    if (x && y) {
-      const coordinates = transformAttackCoordinate(x, y, this.flip)
+    const isRange = this.range > 1
+    const startX = isRange ? this.positionX : this.targetX
+    const startY = isRange ? this.positionY : this.targetY
+
+    if (startX && startY) {
+      const coordinates = transformAttackCoordinate(startX, startY, this.flip)
 
       this.projectile = this.scene.add.sprite(
         coordinates[0],
         coordinates[1],
-        "attacks",
-        `${this.attackSprite}/000`
+        "basicattacks",
+        `${this.attackSprite}/000.png`
       )
-      const scale = getAttackScale(this.attackSprite)
+      const scale = AttackSpriteScale[this.attackSprite]
       this.projectile.setScale(scale[0], scale[1])
+      this.projectile.setDepth(6)
       this.projectile.anims.play(`${this.attackSprite}`)
-      this.addTween()
+
+      if (!isRange) {
+        this.projectile?.once(
+          Phaser.Animations.Events.ANIMATION_COMPLETE,
+          () => {
+            this.projectile?.destroy()
+          }
+        )
+      } else if (
+        this.targetX &&
+        this.targetY &&
+        this.targetX != -1 &&
+        this.targetY != -1
+      ) {
+        const coordinatesTarget = transformAttackCoordinate(
+          this.targetX,
+          this.targetY,
+          this.flip
+        )
+
+        // logger.debug(`Shooting a projectile to (${this.targetX},${this.targetY})`);
+        this.scene.tweens.add({
+          targets: this.projectile,
+          x: coordinatesTarget[0],
+          y: coordinatesTarget[1],
+          ease: "Linear",
+          duration: this.atkSpeed ? 1000 / this.atkSpeed : 1500,
+          onComplete: () => {
+            if (this.projectile) {
+              this.projectile.destroy()
+            }
+          }
+        })
+      }
     }
   }
 
@@ -527,7 +554,7 @@ export default class Pokemon extends DraggableObject {
     const specialProjectile = this.scene.add.sprite(
       coordinates[0],
       coordinates[1],
-      "attacks",
+      "basicattacks",
       "GROUND/cell/000"
     )
     specialProjectile.setDepth(7)
@@ -746,41 +773,6 @@ export default class Pokemon extends DraggableObject {
   specialAttackAnimation(group: Phaser.GameObjects.Group, ultCount: number) {
     if (this.skill && this.skill === Ability.GROWTH) {
       this.sprite.setScale(2 + 0.5 * ultCount)
-    }
-  }
-
-  addTween() {
-    if (
-      this.targetX &&
-      this.targetY &&
-      this.targetX != -1 &&
-      this.targetY != -1
-    ) {
-      const coordinates = transformAttackCoordinate(
-        this.targetX,
-        this.targetY,
-        this.flip
-      )
-
-      if (this.scene) {
-        // logger.debug(`Shooting a projectile to (${this.targetX},${this.targetY})`);
-        this.scene.tweens.add({
-          targets: this.projectile,
-          x: coordinates[0],
-          y: coordinates[1],
-          ease: "Linear",
-          duration: this.atkSpeed ? 1000 / this.atkSpeed : 1500,
-          onComplete: () => {
-            if (this.projectile) {
-              this.projectile.destroy()
-            }
-          }
-        })
-      } else {
-        if (this.projectile) {
-          this.projectile.destroy()
-        }
-      }
     }
   }
 

@@ -24,7 +24,7 @@ Source: [https://github.com/keldaanCommunity/pokemonAutoChess](https://github.co
 
 Install [Node LTS](https://nodejs.org/en).
 
-Main libs used 
+Main libs used
 
 Pokemon Auto Chess use mongoDB to store its data and Firebase for authentication. Those 2 dependencies requires credentials to use. Credentials will be stored in a `.env` at the root of the repository.
 
@@ -118,8 +118,8 @@ With VS Code, use Prettier, Eslint, Inlang.
 
 # Development
 
-- Everytime you make a change for the player, add an entry in the changelog (`changelog` folder)
-- To add a new pokemon, you'll need a TexturePacker license key
+- Assets are automatically packed from `public/src/assets` to `public/dist/client/assets` with assetpack: `npm run assetpack` ; You will need to run assetpack everytime you change the assets
+- The game use precomputed data stored in `app/models/precomputed` folder ; You will need to run `npm run precompute` everytime you change pokemon or synergy data
 
 ## Internationalisation
 

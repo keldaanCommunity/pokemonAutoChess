@@ -1266,9 +1266,9 @@ export class KommoO extends Pokemon {
 
 export class Gastly extends Pokemon {
   types = new SetSchema<Synergy>([
-    Synergy.MONSTER,
+    Synergy.GHOST,
     Synergy.POISON,
-    Synergy.GHOST
+    Synergy.MONSTER
   ])
   rarity = Rarity.ULTRA
   stars = 1
@@ -1285,9 +1285,9 @@ export class Gastly extends Pokemon {
 
 export class Haunter extends Pokemon {
   types = new SetSchema<Synergy>([
-    Synergy.MONSTER,
+    Synergy.GHOST,
     Synergy.POISON,
-    Synergy.GHOST
+    Synergy.MONSTER
   ])
   rarity = Rarity.ULTRA
   stars = 2
@@ -1304,9 +1304,9 @@ export class Haunter extends Pokemon {
 
 export class Gengar extends Pokemon {
   types = new SetSchema<Synergy>([
-    Synergy.MONSTER,
+    Synergy.GHOST,
     Synergy.POISON,
-    Synergy.GHOST
+    Synergy.MONSTER
   ])
   rarity = Rarity.ULTRA
   stars = 3
@@ -1749,7 +1749,7 @@ export class Solosis extends Pokemon {
   speDef = 1
   maxPP = 90
   range = 2
-  skill = Ability.SHADOW_BALL
+  skill = Ability.PSYCHIC
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -1764,7 +1764,7 @@ export class Duosion extends Pokemon {
   speDef = 1
   maxPP = 90
   range = 2
-  skill = Ability.SHADOW_BALL
+  skill = Ability.PSYCHIC
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -1778,7 +1778,7 @@ export class Reuniclus extends Pokemon {
   speDef = 1
   maxPP = 90
   range = 2
-  skill = Ability.SHADOW_BALL
+  skill = Ability.PSYCHIC
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -2686,7 +2686,7 @@ export class Duskull extends Pokemon {
   speDef = 1
   maxPP = 100
   range = 2
-  skill = Ability.NIGHT_SLASH
+  skill = Ability.SHADOW_BALL
   attackSprite = AttackSprite.GHOST_RANGE
 }
 
@@ -2701,7 +2701,7 @@ export class Dusclops extends Pokemon {
   speDef = 1
   maxPP = 100
   range = 2
-  skill = Ability.NIGHT_SLASH
+  skill = Ability.SHADOW_BALL
   attackSprite = AttackSprite.GHOST_RANGE
 }
 
@@ -2715,7 +2715,7 @@ export class Dusknoir extends Pokemon {
   speDef = 1
   maxPP = 100
   range = 2
-  skill = Ability.NIGHT_SLASH
+  skill = Ability.SHADOW_BALL
   attackSprite = AttackSprite.GHOST_RANGE
 }
 
@@ -5393,7 +5393,7 @@ export class Spiritomb extends Pokemon {
   speDef = 2
   maxPP = 80
   range = 2
-  skill = Ability.NIGHT_SLASH
+  skill = Ability.SHADOW_BALL
   attackSprite = AttackSprite.GHOST_RANGE
 }
 
@@ -8015,9 +8015,9 @@ export class Staryu extends Pokemon {
   atk = 7
   def = 2
   speDef = 3
-  maxPP = 80
+  maxPP = 100
   range = 2
-  skill = Ability.PSYCHIC
+  skill = Ability.PSYBEAM
   additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
@@ -8030,9 +8030,9 @@ export class Starmie extends Pokemon {
   atk = 20
   def = 2
   speDef = 6
-  maxPP = 80
+  maxPP = 100
   range = 2
-  skill = Ability.PSYCHIC
+  skill = Ability.PSYBEAM
   additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
@@ -11283,6 +11283,50 @@ export class Cyclizar extends Pokemon {
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
+export class Pawniard extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.STEEL])
+  rarity = Rarity.ULTRA
+  stars = 1
+  evolution = Pkm.BISHARP
+  hp = 130
+  atk = 14
+  def = 5
+  speDef = 3
+  maxPP = 60
+  range = 1
+  skill = Ability.KOWTOW_CLEAVE
+  attackSprite = AttackSprite.STEEL_MELEE
+}
+
+export class Bisharp extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.STEEL])
+  rarity = Rarity.ULTRA
+  stars = 2
+  evolution = Pkm.KINGAMBIT
+  hp = 250
+  atk = 26
+  def = 8
+  speDef = 4
+  maxPP = 60
+  range = 1
+  skill = Ability.KOWTOW_CLEAVE
+  attackSprite = AttackSprite.STEEL_MELEE
+}
+
+export class Kingambit extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.STEEL])
+  rarity = Rarity.ULTRA
+  stars = 3
+  hp = 400
+  atk = 42
+  def = 12
+  speDef = 6
+  maxPP = 60
+  range = 1
+  skill = Ability.KOWTOW_CLEAVE
+  attackSprite = AttackSprite.STEEL_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (shiny: boolean, emotion: Emotion) => Pokemon
@@ -11966,5 +12010,8 @@ export const PokemonClasses: Record<
   [Pkm.TOXTRICITY]: Toxtricity,
   [Pkm.BRUXISH]: Bruxish,
   [Pkm.SUBSTITUTE]: Substitute,
-  [Pkm.CYCLIZAR]: Cyclizar
+  [Pkm.CYCLIZAR]: Cyclizar,
+  [Pkm.PAWNIARD]: Pawniard,
+  [Pkm.BISHARP]: Bisharp,
+  [Pkm.KINGAMBIT]: Kingambit
 }

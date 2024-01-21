@@ -10,3 +10,5 @@ export const average = (...values: number[]): number => {
   const sum = values.reduce((a, b) => a + b, 0)
   return sum / values.length
 }
+
+export const fpsToDuration = (targetFramesPerSecond: number) => (nbFrames: number) => Math.round(nbFrames * (1000 / targetFramesPerSecond))

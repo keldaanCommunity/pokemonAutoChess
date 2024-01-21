@@ -225,6 +225,7 @@
     "LEAF_BLADE": "Leaf Blade",
     "ANCHOR_SHOT": "Anchor Shot",
     "PSYCHIC": "Psychic",
+    "PSYBEAM": "Psybeam",
     "MAGNET_RISE": "Magnet Rise",
     "ATTRACT": "Attract",
     "WATER_PULSE": "Water Pulse",
@@ -283,7 +284,8 @@
     "LOVELY_KISS": "Lovely Kiss",
     "TRANSFORM": "Transform",
     "PSYCHIC_FANGS": "Psychic Fangs",
-    "SHED_TAIL": "Shed Tail"
+    "SHED_TAIL": "Shed Tail",
+    "KOWTOW_CLEAVE": "Kowtow Cleave"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -965,7 +967,10 @@
     "TOXTRICITY": "Toxtricity",
     "BRUXISH": "Bruxish",
     "SUBSTITUTE": "Substitute",
-    "CYCLIZAR": "Cyclizar"
+    "CYCLIZAR": "Cyclizar",
+    "PAWNIARD": "Pawniard",
+    "BISHARP": "Bisharp",
+    "KINGAMBIT": "Kingambit"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1027,7 +1032,7 @@
     "TORMENT": "Buff ATK_SPEED by [20,40,60,SP]%",
     "STOMP": "Deal SPECIAL equal to [3,4,5,SP] x ATK to the target",
     "PAYBACK": "Deal [15,30,60,SP] SPECIAL to the target. Double damage if the user has less than half its life.",
-    "NIGHT_SLASH": "Deal [40,60,100,SP] SPECIAL to the target, and decrease the DEF of all enemy Pokémon by 1",
+    "SHADOW_BALL": "Deal [40,60,100,SP] SPECIAL to the target, and decrease the SPE_DEF of all enemy Pokémon by 1",
     "BUG_BUZZ": "Deal [20,40,80,SP] SPECIAL to the target. If the target is PARALYSIS, the damage is doubled",
     "STRING_SHOT": "Deal [10,20,50,SP] SPECIAL to the target and make them PARALYSIS for 5 seconds",
     "VENOSHOCK": "Deal [30,60,120,SP] SPECIAL to the target. If the target is POISONNED, the damage is doubled",
@@ -1074,7 +1079,8 @@
     "STEAM_ERUPTION": "Deals [80,SP] SPECIAL to the target and all enemies adjacent, and BURN them for 3 seconds",
     "APPLE_ACID": "Deals [30,60,120,SP] SPECIAL to the target, and lower its DEF and SPE_DEF by [5,SP] points",
     "SACRED_SWORD": "Deals [100,SP] TRUE to the target",
-    "SHADOW_BALL": "Deals [45,90,180,SP] SPECIAL and burn 15 PP to the target and adjacent enemies",
+    "PSYCHIC": "Deals [45,90,180,SP] SPECIAL and burn 15 PP to the target and adjacent enemies",
+    "PSYBEAM": "Deal [25,50,100] special damage to all enemy Pokémon behind the target with 50% chance to make them CONFUSION for 4 seconds",
     "DIVE": "Dives underwater and reappears in the middle of the enemy team, dealing [15,30,60,SP] SPECIAL and FREEZE all adjacent units for 1.5 second",
     "SPIKE_ARMOR": "For [3,5,10] seconds, targets that melee attack this Pokémon receive WOUND and take SPECIAL equal to [100,SP]% of current DEF",
     "FUTURE_SIGHT": "Deals [15,30,60,SP] SPECIAL to 5 enemies",
@@ -1175,7 +1181,6 @@
     "PRESENT": "Either deals [80,SP], [150,SP], [300,SP] SPECIAL, or heal 80 HP of the target",
     "LEAF_BLADE": "Next attack is a guaranteed critical hit dealing [100,SP]% of ATK as SPECIAL",
     "ANCHOR_SHOT": "Grab the farthest pokémon and deals [20,40,80,SP] SPECIAL",
-    "PSYCHIC": "The target is hit by a strong telekinetic force, dealing [40,80,120,SP] SPECIAL to it while also lowering their SPE_DEF by [1,2,3,SP]",
     "MAGNET_RISE": "Grants PROTECT to [2,4,6] adjacent ally pokémon for 2 seconds",
     "ATTRACT": "Make [1,2,3] pokémon chosen randomly CHARM for [1,SP] seconds",
     "WATER_PULSE": "Deals [75,150,SP] SPECIAL to the target and adjacent ennemis and make them CONFUSION for 2 seconds",
@@ -1234,7 +1239,9 @@
     "LOVELY_KISS": "Kisses the enemy with a frightening expression. Puts the enemy SLEEP for [2,4,SP] seconds.",
     "TRANSFORM": "Takes the appearance and the statistics of its target (except HP)",
     "PSYCHIC_FANGS": "Inflicts [100,SP] PHYSICAL and removes all the target's ATK, DEF and SPE_DEF buffs",
-    "SHED_TAIL": "Caster create a substitute and charge towards the ally with the fewest HP to give it [80, SP] SHIELD"
+    "SHED_TAIL": "Caster create a substitute and charge towards the ally with the fewest HP to give it [80, SP] SHIELD",
+    "NIGHT_SLASH": "Deal [15,30,60,SP] SPECIAL with a [30,60,90]% increased CRIT_CHANCE ratio",
+    "KOWTOW_CLEAVE": "Deal 100% ATK + [10,SP]% per fallen ally as TRUE. Can crit by default."
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -2148,7 +2155,7 @@
   "shiny": "Shiny",
   "emotion_label": "Emotion",
   "export": "Export",
-  "help_create_bot": "To create a bot, you need to fill a certain number of steps.   Each step represents the state of your bot at a moment in the game   The bot will start with the team defined on step 1. Then, it will go   to step 2 and so on   The team of the step 2 should always be stronger than the step 1   team   As the player cannot get more than 10 pokemons/step, your bot is not   allowed too.",
+  "help_create_bot": "To create a bot, you need to fill a certain number of steps. Each step represents the state of your bot at a moment in the game   The bot will start with the team defined on step 1. Then, it will go   to step 2 and so on   The team of the step 2 should always be stronger than the step 1   team   As the player cannot get more than 10 pokemons/step, your bot is not   allowed too.",
   "item_components": "Item Components",
   "board_power": "Board Power",
   "avatar": "Avatar",
@@ -2224,7 +2231,7 @@
   "top": "Top",
   "level": "Level",
   "wins": "Wins",
-  "favorites": "Favorites",  
+  "favorites": "Favorites",
   "user_id": "User ID",
   "name": "Name",
   "anonymous_users_name_hint": "Anonymous users cannot change their name.",

@@ -180,8 +180,39 @@ export enum AttackSprite {
   POISON_RANGE = "POISON/range",
   BUG_MELEE = "BUG/melee",
   FLYING_MELEE = "FLYING/melee",
-  ICE_RANGE = "ICE/range"
+  ICE_RANGE = "ICE/range",
+  STEEL_MELEE = "STEEL/melee"
 }
+
+export const AttackSpriteScale: { [sprite in AttackSprite]: [number, number] } =
+  {
+    "BUG/melee": [1.5, 1.5],
+    "DRAGON/melee": [2, 2],
+    "DRAGON/range": [2, 2],
+    "ELECTRIC/melee": [1.5, 1.5],
+    "ELECTRIC/range": [2, 2],
+    "FAIRY/melee": [2, 2],
+    "FAIRY/range": [1.5, 1.5],
+    "FIGHTING/melee": [2, 2],
+    "FIGHTING/range": [2, 2],
+    "FIRE/melee": [1, 1],
+    "FIRE/range": [2, 2],
+    "FLYING/melee": [1.5, 1.5],
+    "FLYING/range": [1.5, 1.5],
+    "GHOST/range": [2, 2],
+    "GRASS/melee": [1.5, 1.5],
+    "GRASS/range": [3, 3],
+    "ICE/melee": [2, 2],
+    "ICE/range": [2, 2],
+    "NORMAL/melee": [2, 2],
+    "POISON/melee": [1, 1],
+    "POISON/range": [1.5, 1.5],
+    "PSYCHIC/range": [2, 2],
+    "ROCK/melee": [1.5, 1.5],
+    "STEEL/melee": [1.5, 1.5],
+    "WATER/melee": [2, 2],
+    "WATER/range": [3, 3]
+  }
 
 export enum ModalMode {
   EXPORT = "EXPORT",

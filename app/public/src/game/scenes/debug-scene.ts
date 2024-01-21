@@ -3,10 +3,14 @@ import PokemonFactory from "../../../../models/pokemon-factory"
 import { AnimationType } from "../../../../types/Animation"
 import { DungeonPMDO } from "../../../../types/Config"
 import { Orientation } from "../../../../types/enum/Game"
-import { Pkm } from "../../../../types/enum/Pokemon"
+import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
 import { Status } from "../../../../types/enum/Status"
 import { logger } from "../../../../utils/logger"
+import { max } from "../../../../utils/number"
+import { OrientationVector } from "../../../../utils/orientation"
+import { transformAttackCoordinate } from "../../pages/utils/utils"
 import AnimationManager from "../animation-manager"
+import { displayAbility } from "../components/abilities-animations"
 import LoadingManager from "../components/loading-manager"
 import Pokemon from "../components/pokemon"
 
@@ -18,9 +22,11 @@ export class DebugScene extends Phaser.Scene {
   onProgress: (value: number) => void
   onComplete: () => void
   pokemon?: Pokemon
+  target?: Pokemon
   uid = "debug"
   tilemap: DesignTiled | undefined
   map: Phaser.Tilemaps.Tilemap | undefined
+  attackAnimInterval: ReturnType<typeof setInterval> | undefined
 
   constructor(
     height: number,
@@ -52,31 +58,51 @@ export class DebugScene extends Phaser.Scene {
   updateSprite(
     pkm: Pkm,
     orientation: Orientation,
-    animationType: AnimationType,
+    animationType: string,
     status: Status | ""
   ) {
     if (this.pokemon) {
       this.pokemon.destroy()
     }
+    if (this.target) {
+      this.target.destroy()
+      clearInterval(this.attackAnimInterval)
+    }
+    const [px, py] = transformAttackCoordinate(3, 3, false)
     this.pokemon = new Pokemon(
       this,
-      this.width / 2,
-      this.height / 2,
+      px,
+      py,
       PokemonFactory.createPokemonFromName(pkm),
       "debug",
       false,
       false
     )
     this.pokemon.orientation = orientation
-    if (animationType in AnimationType) {
-      try {
-        this.animationManager.play(this.pokemon, animationType, { repeat: -1 })
-      } catch (err) {
-        logger.error(
-          `Error playing animation ${this.pokemon.name} ${animationType}`,
-          err
-        )
-      }
+    this.pokemon.positionX = 3
+    this.pokemon.positionY = 3
+    let animationName = AnimationType[animationType]
+    if (animationType === "Attack") {
+      animationName = AnimationConfig[pkm].attack
+      this.showTarget()
+      this.addAttackAnim()
+    }
+    if (animationType === "Ability") {
+      animationName = AnimationConfig[pkm].ability
+      this.showTarget()
+      this.addAbilityAnim()
+    }
+    if (animationType === "Emote") {
+      animationName = AnimationConfig[pkm].emote
+    }
+
+    try {
+      this.animationManager.play(this.pokemon, animationName, { repeat: -1 })
+    } catch (err) {
+      logger.error(
+        `Error playing animation ${this.pokemon.name} ${animationType}: ${animationName}`,
+        err
+      )
     }
     this.applyStatusAnimation(status)
   }
@@ -215,5 +241,50 @@ export class DebugScene extends Phaser.Scene {
         this.pokemon.bringToTop(this.pokemon.sprite)
       }
     }
+  }
+
+  showTarget() {
+    const or = this.pokemon!.orientation
+    const range = max(2)(this.pokemon!.range)
+    const tx = this.pokemon!.positionX + OrientationVector[or][0] * range
+    const ty = this.pokemon!.positionY + OrientationVector[or][1] * range
+    this.pokemon!.targetX = tx
+    this.pokemon!.targetY = ty
+    const [rtx, rty] = transformAttackCoordinate(tx, ty, false)
+    this.target = new Pokemon(
+      this,
+      rtx,
+      rty,
+      PokemonFactory.createPokemonFromName(Pkm.SUBSTITUTE),
+      "debug",
+      false,
+      false
+    )
+    this.animationManager.play(this.target, AnimationType.Idle, { repeat: -1 })
+  }
+
+  addAttackAnim() {
+    this.pokemon?.attackAnimation(true)
+    this.attackAnimInterval = setInterval(() => {
+      this.pokemon?.attackAnimation(true)
+    }, 2000)
+  }
+
+  addAbilityAnim() {
+    const showAbilityAnim = () => {
+      displayAbility(
+        this,
+        [this.target!],
+        this.pokemon!.skill,
+        this.pokemon!.orientation,
+        this.pokemon!.positionX,
+        this.pokemon!.positionY,
+        this.pokemon!.targetX ?? -1,
+        this.pokemon!.targetY ?? -1,
+        false
+      )
+    }
+    showAbilityAnim()
+    this.attackAnimInterval = setInterval(showAbilityAnim, 2000)
   }
 }
