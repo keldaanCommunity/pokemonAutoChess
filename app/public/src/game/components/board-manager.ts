@@ -178,8 +178,8 @@ export default class BoardManager {
       this.lightCell = this.scene.add.sprite(
         coordinates[0],
         coordinates[1],
-        "LIGHT_CELL",
-        "000"
+        "abilities",
+        "LIGHT_CELL/000.png"
       )
       this.lightCell.setDepth(1)
       this.lightCell.setScale(2, 2)

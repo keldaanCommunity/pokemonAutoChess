@@ -3001,14 +3001,14 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.RIOLU]: {
-    attack: AnimationType.RearUp,
-    ability: AnimationType.Pose,
-    emote: AnimationType.DeepBreath
+    attack: AnimationType.Strike,
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Pose
   },
   [Pkm.LUCARIO]: {
-    attack: AnimationType.RearUp,
-    ability: AnimationType.Pose,
-    emote: AnimationType.RearUp
+    attack: AnimationType.Strike,
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Pose
   },
   [Pkm.MAGIKARP]: {
     attack: AnimationType.Attack,
@@ -3077,8 +3077,8 @@ export const AnimationConfig: {
   },
   [Pkm.SUICUNE]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Roar,
-    emote: AnimationType.Shoot
+    ability: AnimationType.Attack,
+    emote: AnimationType.SpAttack
   },
   [Pkm.RAIKOU]: {
     attack: AnimationType.Shock,
@@ -5026,12 +5026,12 @@ export const AnimationConfig: {
   },
   [Pkm.PARAS]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Strike,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
   [Pkm.PARASECT]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Strike,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
   [Pkm.MILTANK]: {
