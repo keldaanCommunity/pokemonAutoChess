@@ -17,7 +17,10 @@ import { logger } from "../../../utils/logger"
 import { AnimationConfig, Pkm, PkmIndex } from "../../../types/enum/Pokemon"
 import { Effect } from "../../../types/enum/Effect"
 import { Berries } from "../../../types/enum/Item"
-import { fixedFps } from "../../../utils/number"
+import { fpsToDuration } from "../../../utils/number"
+import atlas from "../assets/atlas.json"
+
+const DEFAULT_FPS = 20
 
 export default class AnimationManager {
   game: Phaser.Scene
@@ -105,12 +108,55 @@ export default class AnimationManager {
         })
       })
     })
+
+    for (let pack in atlas) {
+      const doesContainMultipleAnims = Object.keys(atlas[pack].anims).length > 1
+      for (let anim in atlas[pack].anims) {
+        const animConfig = atlas[pack].anims[anim]
+        this.createAnimation({
+          key: anim,
+          atlas: atlas[pack].name,
+          prefix: doesContainMultipleAnims ? anim + "/" : "",
+          ...animConfig
+        })
+      }
+    }
+
     this.createAttacksAnimations()
     this.createSpecialAttacksAnimations()
     this.createZoneEffectsAnimations()
     this.createMinigameAnimations()
     this.createEnvironmentAnimations()
     createStatusAnimations(this.game)
+  }
+
+  createAnimation({
+    key,
+    atlas,
+    prefix = "",
+    frames,
+    repeat = 0,
+    fps = DEFAULT_FPS
+  }: {
+    key: string
+    atlas?: string
+    prefix?: string
+    frames: number
+    repeat?: number
+    fps?: number
+  }) {
+    this.game.anims.create({
+      key,
+      frames: this.game.anims.generateFrameNames(atlas ?? key, {
+        start: 0,
+        end: frames - 1,
+        zeroPad: 3,
+        prefix,
+        suffix: ".png"
+      }),
+      duration: fpsToDuration(fps)(frames),
+      repeat
+    })
   }
 
   createSpecialAttacksAnimations() {
@@ -1973,11 +2019,12 @@ export default class AnimationManager {
 
     this.game.anims.create({
       key: "ground-grow",
-      frames: this.game.anims.generateFrameNames("attacks", {
+      frames: this.game.anims.generateFrameNames("basicattacks", {
         start: 0,
         end: 56,
         zeroPad: 3,
-        prefix: "GROUND/cell/"
+        prefix: "GROUND/cell/",
+        suffix: ".png"
       }),
       duration: 800,
       repeat: 0
@@ -2042,328 +2089,6 @@ export default class AnimationManager {
   }
 
   createAttacksAnimations() {
-    this.game.anims.create({
-      key: "GRASS/range",
-      frames: this.game.anims.generateFrameNames("attacks", {
-        start: 0,
-        end: 10,
-        zeroPad: 3,
-        prefix: "GRASS/range/"
-      }),
-      duration: 1000,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "GRASS/melee",
-      frames: this.game.anims.generateFrameNames("attacks", {
-        start: 0,
-        end: 25,
-        zeroPad: 3,
-        prefix: "GRASS/melee/"
-      }),
-      duration: 1000,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "WATER/range",
-      frames: this.game.anims.generateFrameNames("attacks", {
-        start: 0,
-        end: 18,
-        zeroPad: 3,
-        prefix: "WATER/range/"
-      }),
-      duration: 1000,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "WATER/melee",
-      frames: this.game.anims.generateFrameNames("attacks", {
-        start: 0,
-        end: 7,
-        zeroPad: 3,
-        prefix: "WATER/melee/"
-      }),
-      duration: 1000,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "FIRE/melee",
-      frames: this.game.anims.generateFrameNames("attacks", {
-        start: 0,
-        end: 8,
-        zeroPad: 3,
-        prefix: "FIRE/melee/"
-      }),
-      duration: 1000,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "FIRE/range",
-      frames: this.game.anims.generateFrameNames("attacks", {
-        start: 0,
-        end: 30,
-        zeroPad: 3,
-        prefix: "FIRE/range/"
-      }),
-      duration: 1000,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "ROCK/melee",
-      frames: this.game.anims.generateFrameNames("attacks", {
-        start: 0,
-        end: 10,
-        zeroPad: 3,
-        prefix: "ROCK/melee/"
-      }),
-      duration: 1000,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "FIGHTING/melee",
-      frames: this.game.anims.generateFrameNames("attacks", {
-        start: 0,
-        end: 12,
-        zeroPad: 3,
-        prefix: "FIGHTING/melee/"
-      }),
-      duration: 1000,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "FIGHTING/range",
-      frames: this.game.anims.generateFrameNames("attacks", {
-        start: 9,
-        end: 37,
-        zeroPad: 3,
-        prefix: "FIGHTING/range/"
-      }),
-      duration: 1000,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "DRAGON/melee",
-      frames: this.game.anims.generateFrameNames("attacks", {
-        start: 0,
-        end: 10,
-        zeroPad: 3,
-        prefix: "DRAGON/melee/"
-      }),
-      duration: 1000,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "NORMAL/melee",
-      frames: this.game.anims.generateFrameNames("attacks", {
-        start: 0,
-        end: 7,
-        zeroPad: 3,
-        prefix: "NORMAL/melee/"
-      }),
-      duration: 1000,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "DRAGON/range",
-      frames: this.game.anims.generateFrameNames("attacks", {
-        start: 0,
-        end: 35,
-        zeroPad: 3,
-        prefix: "DRAGON/range/"
-      }),
-      duration: 1000,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "POISON/range",
-      frames: this.game.anims.generateFrameNames("attacks", {
-        start: 0,
-        end: 27,
-        zeroPad: 3,
-        prefix: "POISON/range/"
-      }),
-      duration: 1000,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "POISON/melee",
-      frames: this.game.anims.generateFrameNames("attacks", {
-        start: 0,
-        end: 12,
-        zeroPad: 3,
-        prefix: "POISON/melee/"
-      }),
-      duration: 1000,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "ELECTRIC/melee",
-      frames: this.game.anims.generateFrameNames("attacks", {
-        start: 0,
-        end: 3,
-        zeroPad: 3,
-        prefix: "ELECTRIC/melee/"
-      }),
-      duration: 1000,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "GHOST/range",
-      frames: this.game.anims.generateFrameNames("attacks", {
-        start: 0,
-        end: 23,
-        zeroPad: 3,
-        prefix: "GHOST/range/"
-      }),
-      duration: 1000,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "PSYCHIC/range",
-      frames: this.game.anims.generateFrameNames("attacks", {
-        start: 0,
-        end: 38,
-        zeroPad: 3,
-        prefix: "PSYCHIC/range/"
-      }),
-      duration: 1000,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "ELECTRIC/range",
-      frames: this.game.anims.generateFrameNames("attacks", {
-        start: 0,
-        end: 5,
-        zeroPad: 3,
-        prefix: "ELECTRIC/range/"
-      }),
-      duration: 1000,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "FAIRY/melee",
-      frames: this.game.anims.generateFrameNames("attacks", {
-        start: 0,
-        end: 25,
-        zeroPad: 3,
-        prefix: "FAIRY/melee/"
-      }),
-      duration: 1000,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "FAIRY/range",
-      frames: this.game.anims.generateFrameNames("attacks", {
-        start: 0,
-        end: 13,
-        zeroPad: 3,
-        prefix: "FAIRY/range/"
-      }),
-      duration: 1000,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "FLYING/melee",
-      frames: this.game.anims.generateFrameNames("attacks", {
-        start: 0,
-        end: 24,
-        zeroPad: 3,
-        prefix: "FLYING/melee/"
-      }),
-      duration: 1000,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "FLYING/range",
-      frames: this.game.anims.generateFrameNames("attacks", {
-        start: 0,
-        end: 7,
-        zeroPad: 3,
-        prefix: "FLYING/range/"
-      }),
-      duration: 1000,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "BUG/melee",
-      frames: this.game.anims.generateFrameNames("attacks", {
-        start: 0,
-        end: 15,
-        zeroPad: 3,
-        prefix: "BUG/melee/"
-      }),
-      duration: 1000,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "ICE/melee",
-      frames: this.game.anims.generateFrameNames("attacks", {
-        start: 0,
-        end: 8,
-        zeroPad: 3,
-        prefix: "ICE/melee/"
-      }),
-      duration: 1000,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "ICE/range",
-      frames: this.game.anims.generateFrameNames("ICE_RANGE", {
-        start: 0,
-        end: 13,
-        zeroPad: 3
-      }),
-      duration: 1000,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "STEEL/melee",
-      frames: this.game.anims.generateFrameNames("STEEL/melee", {
-        start: 0,
-        end: 7,
-        zeroPad: 3
-      }),
-      duration: 1000,
-      repeat: -1
-    })
-
-    this.game.anims.create({
-      key: "WATER/cell",
-      frames: this.game.anims.generateFrameNames("attacks", {
-        start: 0,
-        end: 6,
-        zeroPad: 3,
-        prefix: "WATER/cell/"
-      }),
-      duration: 200,
-      repeat: 0
-    })
-
     this.game.anims.create({
       key: Ability.FAKE_TEARS,
       frames: this.game.anims.generateFrameNames(Ability.FAKE_TEARS, {
@@ -2511,18 +2236,6 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
-      key: Ability.OVERDRIVE,
-      frames: this.game.anims.generateFrameNames(Ability.OVERDRIVE, {
-        start: 0,
-        end: 21,
-        zeroPad: 3,
-        suffix: ".png"
-      }),
-      duration: fixedFps(22),
-      repeat: 0
-    })
-
-    this.game.anims.create({
       key: Ability.LINK_CABLE,
       frames: this.game.anims.generateFrameNames(Ability.LINK_CABLE, {
         start: 0,
@@ -2555,18 +2268,6 @@ export default class AnimationManager {
       }),
       duration: 150,
       repeat: -1
-    })
-
-    this.game.anims.create({
-      key: Ability.NIGHT_SLASH,
-      frames: this.game.anims.generateFrameNames(Ability.NIGHT_SLASH, {
-        start: 0,
-        end: 14,
-        zeroPad: 3,
-        suffix: ".png"
-      }),
-      duration: fixedFps(15),
-      repeat: 0
     })
 
     this.game.anims.create({

@@ -144,16 +144,6 @@ function pixiTexturePacker(options) {
   })
 }
 
-function phaserTexturePacker(options) {
-  return texturePacker({
-    ...options,
-    texturePacker: {
-      ...options?.texturePacker,
-      exporter: "Phaser3"
-    }
-  })
-}
-
 async function processTPSFiles(files, options) {
   const outputFilePaths = []
   for (const item of files) {

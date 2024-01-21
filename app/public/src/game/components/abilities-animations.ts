@@ -1034,12 +1034,12 @@ export function displayAbility(
       specialProjectile = scene.add.sprite(
         coordinates[0],
         coordinates[1],
-        "specials",
-        `${Ability.OVERDRIVE}/000`
+        Ability.OVERDRIVE,
+        `000.png`
       )
       specialProjectile.setDepth(7)
       specialProjectile.setOrigin(0.5, 0.5)
-      specialProjectile.setScale(4, 4)
+      specialProjectile.setScale(2, 2)
       specialProjectile.anims.play(Ability.OVERDRIVE)
       specialProjectile.once(
         Phaser.Animations.Events.ANIMATION_COMPLETE,
