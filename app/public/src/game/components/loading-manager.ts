@@ -84,7 +84,6 @@ export default class LoadingManager {
     }
 
     loadStatusMultiAtlas(this.scene)
-    loadAttacksMultiAtlas(this.scene)
     loadEnvironmentMultiAtlas(this.scene)
   }
 }
@@ -157,14 +156,6 @@ export function loadStatusMultiAtlas(scene: Phaser.Scene) {
     "MISTY_SURGE",
     "/assets/status/MISTY_SURGE.json",
     "/assets/status"
-  )
-}
-
-export function loadAttacksMultiAtlas(scene: Phaser.Scene) {
-  scene.load.multiatlas(
-    "specials",
-    "/assets/attacks/specials.json",
-    "/assets/attacks"
   )
 }
 

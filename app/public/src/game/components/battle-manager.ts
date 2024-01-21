@@ -855,8 +855,8 @@ export default class BattleManager {
       const thunderSprite = this.scene.add.sprite(
         coordinates[0],
         coordinates[1],
-        "specials",
-        `${Ability.THUNDER}/000`
+        "abilities",
+        `${Ability.THUNDER}/000.png`
       )
       thunderSprite.setDepth(7)
       thunderSprite.setScale(2, 2)

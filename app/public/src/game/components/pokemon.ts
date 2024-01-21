@@ -555,11 +555,11 @@ export default class Pokemon extends DraggableObject {
       coordinates[0],
       coordinates[1],
       "basicattacks",
-      "GROUND/cell/000"
+      "GROUND/cell/000.png"
     )
     specialProjectile.setDepth(7)
     specialProjectile.setScale(1.5, 1.5)
-    specialProjectile.anims.play("ground-grow")
+    specialProjectile.anims.play("GROUND/cell")
     specialProjectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
       specialProjectile.destroy()
     })
@@ -574,8 +574,8 @@ export default class Pokemon extends DraggableObject {
     const specialProjectile = this.scene.add.sprite(
       coordinates[0],
       coordinates[1],
-      "INCENSE_DAMAGE",
-      "000"
+      "abilities",
+      "INCENSE_DAMAGE/000.png"
     )
     specialProjectile.setDepth(7)
     specialProjectile.setScale(2, 2)
@@ -614,8 +614,8 @@ export default class Pokemon extends DraggableObject {
     const specialProjectile = this.scene.add.sprite(
       coordinates[0],
       coordinates[1],
-      "STATIC",
-      "000"
+      "abilities",
+      "STATIC/000.png"
     )
     specialProjectile.setDepth(7)
     specialProjectile.setScale(3, 3)
