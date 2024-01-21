@@ -1034,8 +1034,8 @@ export function displayAbility(
       specialProjectile = scene.add.sprite(
         coordinates[0],
         coordinates[1],
-        "specials",
-        `${Ability.OVERDRIVE}/000`
+        Ability.OVERDRIVE,
+        `000.png`
       )
       specialProjectile.setDepth(7)
       specialProjectile.setOrigin(0.5, 0.5)

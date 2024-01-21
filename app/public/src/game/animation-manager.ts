@@ -18,8 +18,9 @@ import { AnimationConfig, Pkm, PkmIndex } from "../../../types/enum/Pokemon"
 import { Effect } from "../../../types/enum/Effect"
 import { Berries } from "../../../types/enum/Item"
 import { fpsToDuration } from "../../../utils/number"
+import atlas from "../assets/atlas.json"
 
-const DEFAULT_FPS = 30
+const DEFAULT_FPS = 20
 
 export default class AnimationManager {
   game: Phaser.Scene
@@ -107,6 +108,20 @@ export default class AnimationManager {
         })
       })
     })
+
+    for (let pack in atlas) {
+      const doesContainMultipleAnims = Object.keys(atlas[pack].anims).length > 1
+      for (let anim in atlas[pack].anims) {
+        const animConfig = atlas[pack].anims[anim]
+        this.createAnimation({
+          key: anim,
+          atlas: atlas[pack].name,
+          prefix: doesContainMultipleAnims ? anim + "/" : "",
+          ...animConfig
+        })
+      }
+    }
+
     this.createAttacksAnimations()
     this.createSpecialAttacksAnimations()
     this.createZoneEffectsAnimations()
@@ -118,17 +133,18 @@ export default class AnimationManager {
   createAnimation({
     key,
     atlas,
+    prefix = "",
     frames,
     repeat = 0,
     fps = DEFAULT_FPS
   }: {
     key: string
     atlas?: string
+    prefix?: string
     frames: number
     repeat?: number
     fps?: number
   }) {
-    const prefix = atlas ? key + "/" : ""
     this.game.anims.create({
       key,
       frames: this.game.anims.generateFrameNames(atlas ?? key, {
@@ -2073,50 +2089,6 @@ export default class AnimationManager {
   }
 
   createAttacksAnimations() {
-    ;[
-      { key: "GRASS/range", frames: 11 },
-      { key: "GRASS/melee", frames: 26 },
-      { key: "WATER/range", frames: 19 },
-      { key: "WATER/melee", frames: 8 },
-      { key: "FIRE/melee", frames: 9 },
-      { key: "FIRE/range", frames: 31 },
-      { key: "ROCK/melee", frames: 11 },
-      { key: "FIGHTING/melee", frames: 13 },
-      { key: "FIGHTING/range", frames: 29 },
-      { key: "DRAGON/melee", frames: 11 },
-      { key: "DRAGON/range", frames: 36 },
-      { key: "NORMAL/melee", frames: 8 },
-      { key: "POISON/range", frames: 28 },
-      { key: "POISON/melee", frames: 13 },
-      { key: "ELECTRIC/melee", frames: 4 },
-      { key: "ELECTRIC/range", frames: 6 },
-      { key: "GHOST/range", frames: 24 },
-      { key: "PSYCHIC/range", frames: 39 },
-      { key: "FAIRY/melee", frames: 26 },
-      { key: "FAIRY/range", frames: 14 },
-      { key: "FLYING/melee", frames: 25 },
-      { key: "FLYING/range", frames: 8 },
-      { key: "BUG/melee", frames: 16 },
-      { key: "ICE/melee", frames: 9 },
-      { key: "ICE/range", frames: 14 },
-      { key: "STEEL/melee", frames: 8 }
-    ].forEach((config) =>
-      this.createAnimation({ atlas: "basicattacks", ...config })
-    )
-
-    this.game.anims.create({
-      key: "WATER/cell",
-      frames: this.game.anims.generateFrameNames("basicattacks", {
-        start: 0,
-        end: 6,
-        zeroPad: 3,
-        prefix: "WATER/cell/",
-        suffix: ".png"
-      }),
-      duration: 200,
-      repeat: 0
-    })
-
     this.game.anims.create({
       key: Ability.FAKE_TEARS,
       frames: this.game.anims.generateFrameNames(Ability.FAKE_TEARS, {
@@ -2264,18 +2236,6 @@ export default class AnimationManager {
     })
 
     this.game.anims.create({
-      key: Ability.OVERDRIVE,
-      frames: this.game.anims.generateFrameNames(Ability.OVERDRIVE, {
-        start: 0,
-        end: 21,
-        zeroPad: 3,
-        suffix: ".png"
-      }),
-      duration: fpsToDuration(30)(22),
-      repeat: 0
-    })
-
-    this.game.anims.create({
       key: Ability.LINK_CABLE,
       frames: this.game.anims.generateFrameNames(Ability.LINK_CABLE, {
         start: 0,
@@ -2308,18 +2268,6 @@ export default class AnimationManager {
       }),
       duration: 150,
       repeat: -1
-    })
-
-    this.game.anims.create({
-      key: Ability.NIGHT_SLASH,
-      frames: this.game.anims.generateFrameNames(Ability.NIGHT_SLASH, {
-        start: 0,
-        end: 14,
-        zeroPad: 3,
-        suffix: ".png"
-      }),
-      duration: fpsToDuration(30)(15),
-      repeat: 0
     })
 
     this.game.anims.create({

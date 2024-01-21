@@ -5,6 +5,7 @@ import indexList from "../../../dist/client/assets/pokemons/indexList.json"
 import { t } from "i18next"
 import { Stat } from "../../../../types/enum/Game"
 import AnimatedTiles from "phaser-animated-tiles-phaser3.5/dist/AnimatedTiles.min.js"
+import atlas from "../../assets/atlas.json"
 
 export default class LoadingManager {
   scene: Phaser.Scene
@@ -73,6 +74,14 @@ export default class LoadingManager {
     scene.load.image("arrowDown", "/assets/ui/arrowDown.png")
 
     scene.load.multiatlas("item", "/assets/item/item.json", "/assets/item/")
+
+    for (let pack in atlas) {
+      scene.load.multiatlas(
+        atlas[pack].name,
+        `/assets/${pack}/${atlas[pack].name}.json`,
+        `/assets/${pack}/`
+      )
+    }
 
     loadStatusMultiAtlas(this.scene)
     loadAttacksMultiAtlas(this.scene)
@@ -169,11 +178,11 @@ export function loadStatusMultiAtlas(scene: Phaser.Scene) {
 }
 
 export function loadAttacksMultiAtlas(scene: Phaser.Scene) {
-  scene.load.multiatlas(
+  /*scene.load.multiatlas(
     "basicattacks",
     "/assets/attacks/basicattacks/basicattacks.json",
     "/assets/attacks/basicattacks"
-  )
+  )*/
   scene.load.multiatlas(
     "specials",
     "/assets/attacks/specials.json",
