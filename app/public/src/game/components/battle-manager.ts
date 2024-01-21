@@ -326,43 +326,143 @@ export default class BattleManager {
             }
           } else if (field == "petalDanceCount") {
             if (value != 0) {
-              pkm.petalDanceAnimation()
+              displayAbility(
+                this.scene,
+                [],
+                Ability.PETAL_DANCE,
+                pkm.orientation,
+                pkm.positionX,
+                pkm.positionY,
+                pkm.targetX ?? -1,
+                pkm.targetY ?? -1,
+                this.flip
+              )
             }
           } else if (field == "futureSightCount") {
             if (value != 0) {
-              pkm.futureSightAnimation()
+              displayAbility(
+                this.scene,
+                [],
+                Ability.FUTURE_SIGHT,
+                pkm.orientation,
+                pkm.positionX,
+                pkm.positionY,
+                pkm.targetX ?? -1,
+                pkm.targetY ?? -1,
+                this.flip
+              )
             }
           } else if (field == "earthquakeCount") {
             if (value != 0) {
-              pkm.earthquakeAnimation()
+              displayAbility(
+                this.scene,
+                [],
+                Ability.EARTHQUAKE,
+                pkm.orientation,
+                pkm.positionX,
+                pkm.positionY,
+                pkm.targetX ?? -1,
+                pkm.targetY ?? -1,
+                this.flip
+              )
             }
           } else if (field == "fieldCount") {
             if (value != 0) {
-              pkm.fieldDeathAnimation()
+              displayAbility(
+                this.scene,
+                [],
+                "FIELD_DEATH",
+                pkm.orientation,
+                pkm.positionX,
+                pkm.positionY,
+                pkm.targetX ?? -1,
+                pkm.targetY ?? -1,
+                this.flip
+              )
             }
           } else if (field == "soundCount") {
             if (value != 0) {
-              pkm.soundAnimation()
+              displayAbility(
+                this.scene,
+                [],
+                Ability.ECHO,
+                pkm.orientation,
+                pkm.positionX,
+                pkm.positionY,
+                pkm.targetX ?? -1,
+                pkm.targetY ?? -1,
+                this.flip
+              )
             }
           } else if (field == "growGroundCount") {
             if (value != 0) {
-              pkm.growGroundAnimation()
+              displayAbility(
+                this.scene,
+                [],
+                "GROUND_GROW",
+                pkm.orientation,
+                pkm.positionX,
+                pkm.positionY,
+                pkm.targetX ?? -1,
+                pkm.targetY ?? -1,
+                this.flip
+              )
             }
           } else if (field == "fairyCritCount") {
             if (value != 0) {
-              pkm.fairyCritAnimation()
+              displayAbility(
+                this.scene,
+                [],
+                "FAIRY_CRIT",
+                pkm.orientation,
+                pkm.positionX,
+                pkm.positionY,
+                pkm.targetX ?? -1,
+                pkm.targetY ?? -1,
+                this.flip
+              )
             }
           } else if (field == "powerLensCount") {
             if (value != 0) {
-              pkm.powerLensAnimation()
+              displayAbility(
+                this.scene,
+                [],
+                "POWER_LENS",
+                pkm.orientation,
+                pkm.positionX,
+                pkm.positionY,
+                pkm.targetX ?? -1,
+                pkm.targetY ?? -1,
+                this.flip
+              )
             }
           } else if (field == "starDustCount") {
             if (value != 0) {
-              pkm.starDustAnimation()
+              displayAbility(
+                this.scene,
+                [],
+                "STAR_DUST",
+                pkm.orientation,
+                pkm.positionX,
+                pkm.positionY,
+                pkm.targetX ?? -1,
+                pkm.targetY ?? -1,
+                this.flip
+              )
             }
           } else if (field == "mindBlownCount") {
             if (value != 0) {
-              pkm.mindBlownAnimation()
+              displayAbility(
+                this.scene,
+                [],
+                "MIND_BLOWN/hit",
+                pkm.orientation,
+                pkm.positionX,
+                pkm.positionY,
+                pkm.targetX ?? -1,
+                pkm.targetY ?? -1,
+                this.flip
+              )
             }
           } else if (field == "spellBlockedCount") {
             if (value != 0) {
@@ -374,15 +474,45 @@ export default class BattleManager {
             }
           } else if (field == "staticCount") {
             if (value != 0) {
-              pkm.staticAnimation()
+              displayAbility(
+                this.scene,
+                [],
+                "STATIC",
+                pkm.orientation,
+                pkm.positionX,
+                pkm.positionY,
+                pkm.targetX ?? -1,
+                pkm.targetY ?? -1,
+                this.flip
+              )
             }
           } else if (field === "healOrderCount") {
             if (value != 0) {
-              pkm.healOrderAnimation()
+              displayAbility(
+                this.scene,
+                [],
+                "HEAL_ORDER",
+                pkm.orientation,
+                pkm.positionX,
+                pkm.positionY,
+                pkm.targetX ?? -1,
+                pkm.targetY ?? -1,
+                this.flip
+              )
             }
           } else if (field === "attackOrderCount") {
             if (value != 0) {
-              pkm.attackOrderAnimation()
+              displayAbility(
+                this.scene,
+                [],
+                "ATTACK_ORDER",
+                pkm.orientation,
+                pkm.positionX,
+                pkm.positionY,
+                pkm.targetX ?? -1,
+                pkm.targetY ?? -1,
+                this.flip
+              )
             }
           } else if (field == "moneyCount") {
             if (value > 0) {
@@ -870,8 +1000,8 @@ export default class BattleManager {
       const sprite = this.scene.add.sprite(
         coordinates[0],
         coordinates[1],
-        Effect.GAS,
-        "000"
+        "abilities",
+        "GAS/000.png"
       )
       sprite.setDepth(7)
       sprite.anims.play(Effect.GAS)
@@ -891,8 +1021,8 @@ export default class BattleManager {
       const sprite = this.scene.add.sprite(
         coordinates[0],
         coordinates[1],
-        Effect.GAS,
-        "000"
+        "abilities",
+        `${Effect.GAS}/000.png`
       )
       sprite.setDepth(7)
       sprite.setScale(3, 3)
@@ -936,12 +1066,12 @@ export default class BattleManager {
     const hitSprite = this.scene.add.sprite(
       x + (Math.random() - 0.5) * 30,
       y + (Math.random() - 0.5) * 30,
-      "HIT_NEUTRAL",
-      "000"
+      "attacks",
+      "NORMAL/hit/000.png"
     )
     hitSprite.setDepth(7)
     hitSprite.setScale(2, 2)
-    hitSprite.anims.play("HIT_NEUTRAL")
+    hitSprite.anims.play("NORMAL/hit")
     hitSprite.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
       hitSprite.destroy()
     })

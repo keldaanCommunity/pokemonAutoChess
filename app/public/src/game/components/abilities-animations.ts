@@ -1195,7 +1195,11 @@ export function displayAbility(
       break
 
     case Ability.MIND_BLOWN:
-      addAbilitySprite("MIND_BLOWN_SELF", coordinates, true).setScale(2)
+      addAbilitySprite(skill, coordinates, true).setScale(2)
+      break
+
+    case "MIND_BLOWN/hit":
+      addAbilitySprite("MIND_BLOWN/hit", coordinates, true).setScale(3)
       break
 
     case Ability.SOFT_BOILED:
@@ -1640,6 +1644,51 @@ export function displayAbility(
       })
       break
     }
+
+    case Ability.FUTURE_SIGHT:
+      addAbilitySprite(skill, coordinates, true).setScale(2)
+      break
+
+    case Ability.PETAL_DANCE:
+      addAbilitySprite(skill, coordinates, true).setScale(2)
+      break
+
+    case "FIELD_DEATH":
+      addAbilitySprite("FIELD_DEATH", coordinates, true).setScale(2)
+      break
+
+    case Ability.EARTHQUAKE:
+      addAbilitySprite(skill, coordinates, true).setScale(3)
+      break
+
+    case "GROUND_GROW":
+      addAbilitySprite(skill, coordinates, true).setScale(1.5)
+      break
+
+    case "FAIRY_CRIT":
+      addAbilitySprite(skill, coordinates, true).setScale(2)
+      break
+
+    case "POWER_LENS":
+      addAbilitySprite(skill, coordinates, true).setScale(2)
+      break
+
+    case "STAR_DUST":
+      addAbilitySprite(skill, coordinates, true).setScale(2)
+      break
+
+    case "STATIC":
+      addAbilitySprite(skill, coordinates, true).setScale(3)
+      break
+
+    case "HEAL_ORDER":
+    case "ATTACK_ORDER":
+      addAbilitySprite(skill, coordinates, true).setScale(2)
+      break
+
+    case "FISHING":
+      addAbilitySprite(Ability.DIVE, coordinates, true).setDepth(0).setScale(1)
+      break
 
     default:
       break
