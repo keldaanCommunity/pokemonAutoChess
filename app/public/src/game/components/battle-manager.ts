@@ -1183,6 +1183,10 @@ export default class BattleManager {
       },
       scale: {
         getStart: () => 1,
+        getEnd: () => 0.5
+      },
+      alpha: {
+        getStart: () => 1,
         getEnd: () => 0
       },
       onComplete: () => {

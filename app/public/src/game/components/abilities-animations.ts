@@ -294,7 +294,9 @@ export function displayAbility(
       break
 
     case Ability.ROCK_SLIDE:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      addAbilitySprite(skill, coordinatesTarget, true)
+        .setScale(2)
+        .setOrigin(0.5, 0.9)
       break
 
     case Ability.HEAT_WAVE:
@@ -321,7 +323,9 @@ export function displayAbility(
       break
 
     case Ability.THUNDER:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      addAbilitySprite(skill, coordinatesTarget, true)
+        .setScale(2)
+        .setOrigin(0.5, 1)
       break
 
     case Ability.HYDRO_PUMP:

@@ -300,7 +300,7 @@ export default class GameScene extends Scene {
           pointer.x,
           pointer.y,
           "attacks",
-          `WATER/cell/000`
+          `WATER/cell/000.png`
         )
         clickAnimation.setDepth(7)
         clickAnimation.anims.play("WATER/cell")
