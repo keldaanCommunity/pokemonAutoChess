@@ -299,7 +299,7 @@ export default class GameScene extends Scene {
         const clickAnimation = this.add.sprite(
           pointer.x,
           pointer.y,
-          "attacks",
+          "basicattacks",
           `WATER/cell/000`
         )
         clickAnimation.setDepth(7)

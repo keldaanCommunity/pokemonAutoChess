@@ -170,18 +170,13 @@ export function loadStatusMultiAtlas(scene: Phaser.Scene) {
 
 export function loadAttacksMultiAtlas(scene: Phaser.Scene) {
   scene.load.multiatlas(
-    "attacks",
-    "/assets/attacks/attacks.json",
-    "/assets/attacks"
+    "basicattacks",
+    "/assets/attacks/basicattacks/basicattacks.json",
+    "/assets/attacks/basicattacks"
   )
   scene.load.multiatlas(
     "specials",
     "/assets/attacks/specials.json",
-    "/assets/attacks"
-  )
-  scene.load.multiatlas(
-    "STEEL/melee",
-    "/assets/attacks/STEEL_MELEE.json",
     "/assets/attacks"
   )
   scene.load.multiatlas(
