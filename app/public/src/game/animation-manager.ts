@@ -5,8 +5,7 @@ import {
   SpriteType,
   PokemonTint,
   PokemonActionState,
-  OrientationFlip,
-  Stat
+  OrientationFlip
 } from "../../../types/enum/Game"
 import { AnimationType, AnimationComplete } from "../../../types/Animation"
 import { Ability } from "../../../types/enum/Ability"
@@ -15,7 +14,6 @@ import durations from "../../dist/client/assets/pokemons/durations.json"
 import indexList from "../../dist/client/assets/pokemons/indexList.json"
 import { logger } from "../../../utils/logger"
 import { AnimationConfig, Pkm, PkmIndex } from "../../../types/enum/Pokemon"
-import { Effect } from "../../../types/enum/Effect"
 import { Berries } from "../../../types/enum/Item"
 import { fpsToDuration } from "../../../utils/number"
 import atlas from "../assets/atlas.json"
@@ -110,15 +108,18 @@ export default class AnimationManager {
     })
 
     for (let pack in atlas) {
-      const doesContainMultipleAnims = Object.keys(atlas[pack].anims).length > 1
-      for (let anim in atlas[pack].anims) {
-        const animConfig = atlas[pack].anims[anim]
-        this.createAnimation({
-          key: anim,
-          atlas: atlas[pack].name,
-          prefix: doesContainMultipleAnims ? anim + "/" : "",
-          ...animConfig
-        })
+      if (atlas[pack].anims) {
+        const doesContainMultipleAnims =
+          Object.keys(atlas[pack].anims).length > 1
+        for (let anim in atlas[pack].anims) {
+          const animConfig = atlas[pack].anims[anim]
+          this.createAnimation({
+            key: anim,
+            atlas: atlas[pack].name,
+            prefix: doesContainMultipleAnims ? anim + "/" : "",
+            ...animConfig
+          })
+        }
       }
     }
 

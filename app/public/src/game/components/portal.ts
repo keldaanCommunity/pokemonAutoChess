@@ -31,7 +31,7 @@ export class SynergySymbol
     y: number,
     synergy: Synergy
   ) {
-    super(scene, x, y, "types", synergy)
+    super(scene, x, y, "types", synergy + ".png")
     this.id = id
     this.scene.add.existing(this)
   }

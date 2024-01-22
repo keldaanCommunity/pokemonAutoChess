@@ -1,9 +1,8 @@
 import { GameObjects } from "phaser"
 import { getPortraitSrc } from "../../utils"
 import GameScene from "../scenes/game-scene"
-import indexList from "../../../dist/client/assets/pokemons/indexList.json"
+import indexList from "../../../src/assets/pokemons/indexList.json"
 import { t } from "i18next"
-import { Stat } from "../../../../types/enum/Game"
 import AnimatedTiles from "phaser-animated-tiles-phaser3.5/dist/AnimatedTiles.min.js"
 import atlas from "../../assets/atlas.json"
 
@@ -175,7 +174,6 @@ export function loadEnvironmentMultiAtlas(scene: Phaser.Scene) {
     "/assets/environment/shine.json",
     "/assets/environment/"
   )
-  scene.load.multiatlas("types", "/assets/types/sheet.json", "/assets/types/")
 
   scene.load.multiatlas(
     "berry_trees",
