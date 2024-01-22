@@ -507,7 +507,7 @@ export class MistySurgeStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
+    super.process(pokemon, state, board, target, crit, true)
     const ppGain = Math.round(30 * (1 + pokemon.ap / 100))
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (ally && pokemon.team == ally.team && ally.types.has(Synergy.FAIRY)) {

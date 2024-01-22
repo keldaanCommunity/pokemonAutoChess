@@ -59,7 +59,16 @@ function texturePackAtlas() {
       const existingAtlas = fs.existsSync(atlasPath)
         ? fs.readJSONSync(atlasPath)
         : null
-      const atlas = {}
+
+      const pkg = fs.readJSONSync("../../package.json")
+      const previousVersion = existingAtlas?.version
+        ? Number(existingAtlas.version.split(".").pop())
+        : 0
+      const newVersion = pkg.version + "." + (previousVersion + 1)
+      const atlas = {
+        version: newVersion,
+        packs: {}
+      }
 
       function walk(node) {
         if (node.isFolder && node.files) {
@@ -72,14 +81,14 @@ function texturePackAtlas() {
           packPath = packPath.replace(tree.path + "/", "")
           let packName = packPath.split("/").pop()
 
-          if (packPath in atlas === false) {
-            atlas[packPath] = { name: packName }
+          if (packPath in atlas.packs === false) {
+            atlas.packs[packPath] = { name: packName }
           }
 
           // declare automatically anims if it matches 000.png, 001.png etc.
           if (/\d\d\d\.png$/.test(node.path)) {
-            if ("anims" in atlas[packPath] === false) {
-              atlas[packPath].anims = {}
+            if ("anims" in atlas.packs[packPath] === false) {
+              atlas.packs[packPath].anims = {}
             }
 
             if (animName === "") {
@@ -90,13 +99,13 @@ function texturePackAtlas() {
               animName = animName.replace(/^\//, "")
             }
 
-            if (animName in atlas[packPath].anims === false) {
-              atlas[packPath].anims[animName] = {
-                ...(existingAtlas?.[packPath]?.anims?.[animName] ?? {}), // preserve previous config
+            if (animName in atlas.packs[packPath].anims === false) {
+              atlas.packs[packPath].anims[animName] = {
+                ...(existingAtlas?.packs?.[packPath]?.anims?.[animName] ?? {}), // preserve previous config
                 frames: 0
               }
             }
-            atlas[packPath].anims[animName].frames += 1
+            atlas.packs[packPath].anims[animName].frames += 1
           }
         }
       }
@@ -104,6 +113,12 @@ function texturePackAtlas() {
 
       //fs.writeJSONSync("tree.json", tree)
       fs.writeJSONSync(atlasPath, atlas)
+
+      const sw = fs.readFileSync("../../app/public/dist/client/sw.js", "utf8")
+      fs.writeFileSync(
+        "../../app/public/dist/client/sw.js",
+        sw.replace(/CACHE v[\d\.]+/, `CACHE v${newVersion}`)
+      )
     }
   }
 }

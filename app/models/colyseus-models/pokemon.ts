@@ -6747,7 +6747,7 @@ export class TapuKoko extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.ELECTRIC_SURGE
-  passive = Passive.ELECTRIC_SURGE
+  passive = Passive.ELECTRIC_TERRAIN
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
@@ -6762,7 +6762,7 @@ export class TapuLele extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.PSYCHIC_SURGE
-  passive = Passive.PSYCHIC_SURGE
+  passive = Passive.PSYCHIC_TERRAIN
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -6792,7 +6792,7 @@ export class TapuFini extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.MISTY_SURGE
-  passive = Passive.MISTY_SURGE
+  passive = Passive.MISTY_TERRAIN
   attackSprite = AttackSprite.WATER_RANGE
 }
 
@@ -6807,7 +6807,7 @@ export class TapuBulu extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.GRASSY_SURGE
-  passive = Passive.GRASSY_SURGE
+  passive = Passive.GRASSY_TERRAIN
   attackSprite = AttackSprite.GRASS_MELEE
 }
 

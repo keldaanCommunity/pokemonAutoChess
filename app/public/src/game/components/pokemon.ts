@@ -4,10 +4,7 @@ import Lifebar from "./life-bar"
 import DraggableObject from "./draggable-object"
 import PokemonDetail from "./pokemon-detail"
 import ItemsContainer from "./items-container"
-import {
-  transformAttackCoordinate,
-  transformCoordinate
-} from "../../pages/utils/utils"
+import { transformAttackCoordinate } from "../../pages/utils/utils"
 import {
   IPokemon,
   IPokemonEntity,
@@ -553,10 +550,10 @@ export default class Pokemon extends DraggableObject {
 
   addWound() {
     if (!this.wound) {
-      this.wound = new GameObjects.Sprite(this.scene, 0, -30, "wound", "000")
-      this.wound.setScale(2, 2)
-      this.scene.add.existing(this.wound)
-      this.wound.anims.play("wound")
+      this.wound = this.scene.add
+        .sprite(0, -30, "status", "WOUND/000.png")
+        .setScale(2)
+      this.wound.anims.play("WOUND")
       this.add(this.wound)
     }
   }
@@ -570,16 +567,10 @@ export default class Pokemon extends DraggableObject {
 
   addBurn() {
     if (!this.burn) {
-      this.burn = new GameObjects.Sprite(
-        this.scene,
-        0,
-        -30,
-        "status",
-        "status/burn/000"
-      )
-      this.burn.setScale(2, 2)
-      this.scene.add.existing(this.burn)
-      this.burn.anims.play("burn")
+      this.burn = this.scene.add
+        .sprite(0, -30, "status", "BURN/000.png")
+        .setScale(2)
+      this.burn.anims.play("BURN")
       this.add(this.burn)
     }
   }
@@ -593,16 +584,10 @@ export default class Pokemon extends DraggableObject {
 
   addSleep() {
     if (!this.sleep) {
-      this.sleep = new GameObjects.Sprite(
-        this.scene,
-        0,
-        -30,
-        "status",
-        "status/sleep/000"
-      )
-      this.sleep.setScale(2, 2)
-      this.scene.add.existing(this.sleep)
-      this.sleep.anims.play("sleep")
+      this.sleep = this.scene.add
+        .sprite(0, -30, "status", "SLEEP/000.png")
+        .setScale(2)
+      this.sleep.anims.play("SLEEP")
       this.add(this.sleep)
     }
   }
@@ -616,16 +601,10 @@ export default class Pokemon extends DraggableObject {
 
   addSilence() {
     if (!this.silence) {
-      this.silence = new GameObjects.Sprite(
-        this.scene,
-        0,
-        -30,
-        "status",
-        "status/silence/000"
-      )
-      this.silence.setScale(2, 2)
-      this.scene.add.existing(this.silence)
-      this.silence.anims.play("silence")
+      this.silence = this.scene.add
+        .sprite(0, -30, "status", "SILENCE/000.png")
+        .setScale(2)
+      this.silence.anims.play("SILENCE")
       this.add(this.silence)
     }
   }
@@ -639,16 +618,10 @@ export default class Pokemon extends DraggableObject {
 
   addFreeze() {
     if (!this.freeze) {
-      this.freeze = new GameObjects.Sprite(
-        this.scene,
-        0,
-        0,
-        "status",
-        "status/freeze/000"
-      )
-      this.freeze.setScale(2, 2)
-      this.scene.add.existing(this.freeze)
-      this.freeze.anims.play("freeze")
+      this.freeze = this.scene.add
+        .sprite(0, 0, "status", "FREEZE/000.png")
+        .setScale(2)
+      this.freeze.anims.play("FREEZE")
       this.add(this.freeze)
     }
   }
@@ -662,16 +635,10 @@ export default class Pokemon extends DraggableObject {
 
   addConfusion() {
     if (!this.confusion) {
-      this.confusion = new GameObjects.Sprite(
-        this.scene,
-        0,
-        -30,
-        "status",
-        "status/confusion/000"
-      )
-      this.confusion.setScale(2, 2)
-      this.scene.add.existing(this.confusion)
-      this.confusion.anims.play("confusion")
+      this.confusion = this.scene.add
+        .sprite(0, -30, "status", "CONFUSION/000.png")
+        .setScale(2)
+      this.confusion.anims.play("CONFUSION")
       this.add(this.confusion)
     }
   }
@@ -685,16 +652,10 @@ export default class Pokemon extends DraggableObject {
 
   addParalysis() {
     if (!this.paralysis) {
-      this.paralysis = new GameObjects.Sprite(
-        this.scene,
-        0,
-        -30,
-        "paralysis",
-        "000"
-      )
-      this.paralysis.setScale(2, 2)
-      this.scene.add.existing(this.paralysis)
-      this.paralysis.anims.play("paralysis")
+      this.paralysis = this.scene.add
+        .sprite(0, -30, "status", "PARALYSIS/000.png")
+        .setScale(2)
+      this.paralysis.anims.play("PARALYSIS")
       this.add(this.paralysis)
     }
   }
@@ -708,16 +669,10 @@ export default class Pokemon extends DraggableObject {
 
   addArmorReduction() {
     if (!this.armorReduction) {
-      this.armorReduction = new GameObjects.Sprite(
-        this.scene,
-        0,
-        -40,
-        "armorReduction",
-        "000"
-      )
-      this.armorReduction.setScale(2, 2)
-      this.scene.add.existing(this.armorReduction)
-      this.armorReduction.anims.play("armorReduction")
+      this.armorReduction = this.scene.add
+        .sprite(0, -40, "status", "ARMOR_REDUCTION/000.png")
+        .setScale(2)
+      this.armorReduction.anims.play("ARMOR_REDUCTION")
       this.add(this.armorReduction)
     }
   }
@@ -731,10 +686,10 @@ export default class Pokemon extends DraggableObject {
 
   addCharm() {
     if (!this.charm) {
-      this.charm = new GameObjects.Sprite(this.scene, 0, -40, "charm", "000")
-      this.charm.setScale(2, 2)
-      this.scene.add.existing(this.charm)
-      this.charm.anims.play("charm")
+      this.charm = this.scene.add
+        .sprite(0, -40, "status", "CHARM/000.png")
+        .setScale(2)
+      this.charm.anims.play("CHARM")
       this.add(this.charm)
     }
   }
@@ -748,10 +703,10 @@ export default class Pokemon extends DraggableObject {
 
   addFlinch() {
     if (!this.flinch) {
-      this.flinch = new GameObjects.Sprite(this.scene, 0, -40, "flinch", "000")
-      this.flinch.setScale(2, 2)
-      this.scene.add.existing(this.flinch)
-      this.flinch.anims.play("flinch")
+      this.flinch = this.scene.add
+        .sprite(0, -40, "status", "FLINCH/000.png")
+        .setScale(2)
+      this.flinch.anims.play("FLINCH")
       this.add(this.flinch)
     }
   }
@@ -765,9 +720,10 @@ export default class Pokemon extends DraggableObject {
 
   addCurse() {
     if (!this.curse) {
-      this.curse = new GameObjects.Sprite(this.scene, 0, -40, "curse", "0")
-      this.scene.add.existing(this.curse)
-      this.curse.anims.play("curse")
+      this.curse = this.scene.add
+        .sprite(0, -65, "status", "CURSE/000.png")
+        .setScale(1.5)
+      this.curse.anims.play("CURSE")
       this.add(this.curse)
     }
   }
@@ -781,16 +737,10 @@ export default class Pokemon extends DraggableObject {
 
   addPoison() {
     if (!this.poison) {
-      this.poison = new GameObjects.Sprite(
-        this.scene,
-        0,
-        -30,
-        "status",
-        "status/poison/000"
-      )
-      this.poison.setScale(2, 2)
-      this.scene.add.existing(this.poison)
-      this.poison.anims.play("poison")
+      this.poison = this.scene.add
+        .sprite(0, -30, "status", "POISON/000.png")
+        .setScale(2)
+      this.poison.anims.play("POISON")
       this.add(this.poison)
     }
   }
@@ -804,16 +754,10 @@ export default class Pokemon extends DraggableObject {
 
   addProtect() {
     if (!this.protect) {
-      this.protect = new GameObjects.Sprite(
-        this.scene,
-        0,
-        -30,
-        "status",
-        "status/protect/000"
-      )
-      this.protect.setScale(2, 2)
-      this.scene.add.existing(this.protect)
-      this.protect.anims.play("protect")
+      this.protect = this.scene.add
+        .sprite(0, -30, "status", "PROTECT/000.png")
+        .setScale(2)
+      this.protect.anims.play("PROTECT")
       this.add(this.protect)
     }
   }
@@ -827,16 +771,10 @@ export default class Pokemon extends DraggableObject {
 
   addResurection() {
     if (!this.resurection) {
-      this.resurection = new GameObjects.Sprite(
-        this.scene,
-        0,
-        -45,
-        "resurection",
-        "000"
-      )
-      this.resurection.setScale(2)
-      this.scene.add.existing(this.resurection)
-      this.resurection.anims.play("resurection")
+      this.resurection = this.scene.add
+        .sprite(0, -45, "status", "RESURECTION/000.png")
+        .setScale(2)
+      this.resurection.anims.play("RESURECTION")
       this.add(this.resurection)
     }
   }
@@ -850,16 +788,10 @@ export default class Pokemon extends DraggableObject {
 
   addRuneProtect() {
     if (!this.runeProtect) {
-      this.runeProtect = new GameObjects.Sprite(
-        this.scene,
-        0,
-        -45,
-        "rune_protect",
-        "000"
-      )
-      this.runeProtect.setScale(2)
-      this.scene.add.existing(this.runeProtect)
-      this.runeProtect.anims.play("rune_protect")
+      this.runeProtect = this.scene.add
+        .sprite(0, -40, "status", "RUNE_PROTECT/000.png")
+        .setScale(2)
+      this.runeProtect.anims.play("RUNE_PROTECT")
       this.add(this.runeProtect)
     }
   }
@@ -873,15 +805,9 @@ export default class Pokemon extends DraggableObject {
 
   addSpikeArmor() {
     if (!this.spikeArmor) {
-      this.spikeArmor = new GameObjects.Sprite(
-        this.scene,
-        0,
-        0,
-        "abilities",
-        `${Ability.SPIKE_ARMOR}/000.png`
-      )
-      this.spikeArmor.setScale(2, 2)
-      this.scene.add.existing(this.spikeArmor)
+      this.spikeArmor = this.scene.add
+        .sprite(0, -5, "abilities", `${Ability.SPIKE_ARMOR}/000.png`)
+        .setScale(2)
       this.spikeArmor.anims.play(Ability.SPIKE_ARMOR)
       this.add(this.spikeArmor)
     }
@@ -896,15 +822,10 @@ export default class Pokemon extends DraggableObject {
 
   addMagicBounce() {
     if (!this.magicBounce) {
-      this.magicBounce = new GameObjects.Sprite(
-        this.scene,
-        0,
-        0,
-        "abilities",
-        `${Ability.SPIKE_ARMOR}/000.png`
-      )
-      this.magicBounce.setScale(2)
-      this.scene.add.existing(this.magicBounce)
+      this.magicBounce = this.scene.add
+        .sprite(0, -5, "abilities", `${Ability.SPIKE_ARMOR}/000.png`)
+        .setScale(2)
+        .setTint(0xffa0ff)
       this.magicBounce.anims.play(Ability.MAGIC_BOUNCE)
       this.add(this.magicBounce)
     }
@@ -918,33 +839,21 @@ export default class Pokemon extends DraggableObject {
   }
 
   addLight() {
-    this.light = new GameObjects.Sprite(
-      this.scene,
-      0,
-      10,
-      "abilities",
-      "LIGHT_CELL/000.png"
-    )
-    this.light.setDepth(0)
-    this.light.setScale(1.5, 1.5)
-    this.scene.add.existing(this.light)
+    this.light = this.scene.add
+      .sprite(0, 0, "abilities", "LIGHT_CELL/000.png")
+      .setDepth(0)
+      .setScale(1.5, 1.5)
     this.light.anims.play("LIGHT_CELL")
     this.add(this.light)
   }
 
   addElectricField() {
     if (!this.electricField) {
-      this.electricField = new GameObjects.Sprite(
-        this.scene,
-        0,
-        10,
-        "ELECTRIC_SURGE",
-        "000"
-      )
-      this.electricField.setDepth(0)
-      this.electricField.setScale(1.5, 1.5)
-      this.scene.add.existing(this.electricField)
-      this.electricField.anims.play("ELECTRIC_SURGE")
+      this.electricField = this.scene.add
+        .sprite(0, 10, "status", `ELECTRIC_FIELD/000.png`)
+        .setDepth(0)
+        .setScale(1.5)
+      this.electricField.anims.play("ELECTRIC_FIELD")
       this.add(this.electricField)
     }
   }
@@ -958,17 +867,12 @@ export default class Pokemon extends DraggableObject {
 
   addGrassField() {
     if (!this.grassField) {
-      this.grassField = new GameObjects.Sprite(
-        this.scene,
-        0,
-        10,
-        Ability.GRASSY_SURGE,
-        "000"
-      )
-      this.grassField.setDepth(0)
-      this.grassField.setScale(2, 2)
+      this.grassField = this.scene.add
+        .sprite(0, 10, "abilities", `GRASSY_FIELD/000.png`)
+        .setDepth(0)
+        .setScale(2)
       this.scene.add.existing(this.grassField)
-      this.grassField.anims.play(Ability.GRASSY_SURGE)
+      this.grassField.anims.play("GRASSY_FIELD")
       this.add(this.grassField)
     }
   }
@@ -982,17 +886,11 @@ export default class Pokemon extends DraggableObject {
 
   addFairyField() {
     if (!this.fairyField) {
-      this.fairyField = new GameObjects.Sprite(
-        this.scene,
-        0,
-        10,
-        Ability.MISTY_SURGE,
-        "000"
-      )
-      this.fairyField.setDepth(0)
-      this.fairyField.setScale(1, 1)
-      this.scene.add.existing(this.fairyField)
-      this.fairyField.anims.play(Ability.MISTY_SURGE)
+      this.fairyField = this.scene.add
+        .sprite(0, 10, "status", `FAIRY_FIELD/000.png`)
+        .setDepth(0)
+        .setScale(1)
+      this.fairyField.anims.play("FAIRY_FIELD")
       this.add(this.fairyField)
     }
   }
@@ -1006,16 +904,11 @@ export default class Pokemon extends DraggableObject {
 
   addPsychicField() {
     if (!this.psychicField) {
-      this.psychicField = new GameObjects.Sprite(
-        this.scene,
-        0,
-        10,
-        "PSYCHIC_SURGE",
-        "000"
-      )
-      this.psychicField.setDepth(0)
-      this.scene.add.existing(this.psychicField)
-      this.psychicField.anims.play("PSYCHIC_SURGE")
+      this.psychicField = this.scene.add
+        .sprite(0, 10, "status", `PSYCHIC_FIELD/000.png`)
+        .setDepth(0)
+        .setScale(1)
+      this.psychicField.anims.play("PSYCHIC_FIELD")
       this.add(this.psychicField)
     }
   }
