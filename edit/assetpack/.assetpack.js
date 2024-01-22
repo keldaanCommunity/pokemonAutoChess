@@ -73,29 +73,36 @@ function texturePackAtlas() {
           let packName = packPath.split("/").pop()
 
           if (packPath in atlas === false) {
-            atlas[packPath] = { name: packName, anims: {} }
+            atlas[packPath] = { name: packName }
           }
 
-          if (animName === "") {
-            // case where the pack contains a single anim (no sub folder)
-            animName = node.parent.split("/").pop().replace("{tps}", "")
-          } else {
-            // case where the pack contains several anims, we remove trailing slash
-            animName = animName.replace(/^\//, "")
-          }
-
-          if (animName in atlas[packPath].anims === false) {
-            atlas[packPath].anims[animName] = {
-              ...(existingAtlas?.[packPath]?.anims[animName] ?? {}), // preserve previous config
-              frames: 0
+          // declare automatically anims if it matches 000.png, 001.png etc.
+          if (/\d\d\d\.png$/.test(node.path)) {
+            if ("anims" in atlas[packPath] === false) {
+              atlas[packPath].anims = {}
             }
+
+            if (animName === "") {
+              // case where the pack contains a single anim (no sub folder)
+              animName = node.parent.split("/").pop().replace("{tps}", "")
+            } else {
+              // case where the pack contains several anims, we remove trailing slash
+              animName = animName.replace(/^\//, "")
+            }
+
+            if (animName in atlas[packPath].anims === false) {
+              atlas[packPath].anims[animName] = {
+                ...(existingAtlas?.[packPath]?.anims?.[animName] ?? {}), // preserve previous config
+                frames: 0
+              }
+            }
+            atlas[packPath].anims[animName].frames += 1
           }
-          atlas[packPath].anims[animName].frames += 1
         }
       }
       walk(tree)
 
-      // fs.writeJSONSync("tree.json", tree)
+      //fs.writeJSONSync("tree.json", tree)
       fs.writeJSONSync(atlasPath, atlas)
     }
   }
