@@ -41,6 +41,7 @@ import { Ability } from "../../../types/enum/Ability"
 import { Portal, SynergySymbol } from "../../../models/colyseus-models/portal"
 import Simulation from "../../../core/simulation"
 import { BoardMode } from "./components/board-manager"
+import { changePlayer } from "../stores/GameStore"
 
 class GameContainer {
   room: Room<GameState>
@@ -406,6 +407,9 @@ class GameContainer {
     })
 
     player.board.onChange((pokemon, key) => {
+      store.dispatch(
+        changePlayer({ id: player.id, field: "board", value: player.board })
+      )
       if (pokemon) {
         listenForPokemonChanges(pokemon)
       }
