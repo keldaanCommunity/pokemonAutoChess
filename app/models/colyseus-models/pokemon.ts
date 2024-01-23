@@ -11046,7 +11046,6 @@ export class Comfey extends Pokemon {
       nearestAllyWithFreeItemSlot.items.add(Item.COMFEY)
 
       // apply comfey stats
-      nearestAllyWithFreeItemSlot.addPP(entity.pp)
       nearestAllyWithFreeItemSlot.addAbilityPower(entity.ap)
       nearestAllyWithFreeItemSlot.addAttack(entity.atk)
       nearestAllyWithFreeItemSlot.addAttackSpeed(
