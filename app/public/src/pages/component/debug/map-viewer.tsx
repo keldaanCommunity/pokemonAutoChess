@@ -65,7 +65,7 @@ export default function MapViewerContainer() {
   }, [map])
 
   return (
-    <div id="debug-scene">
+    <div id="debug-scene" className="map-viewer">
       {!loaded && <p id="status-message">{statusMessage}</p>}
       <div id="debug-scene-controls">
         <select

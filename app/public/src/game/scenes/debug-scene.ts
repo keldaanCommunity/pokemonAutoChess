@@ -260,13 +260,15 @@ export class DebugScene extends Phaser.Scene {
       false,
       false
     )
+    this.target.positionX = tx
+    this.target.positionY = ty
     this.animationManager.play(this.target, AnimationType.Idle, { repeat: -1 })
   }
 
   addAttackAnim() {
-    this.pokemon?.attackAnimation(true)
+    this.pokemon?.attackAnimation()
     this.attackAnimInterval = setInterval(() => {
-      this.pokemon?.attackAnimation(true)
+      this.pokemon?.attackAnimation()
     }, 2000)
   }
 
