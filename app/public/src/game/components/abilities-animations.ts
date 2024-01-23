@@ -534,7 +534,15 @@ export function displayAbility(
       break
 
     case Ability.FISHIOUS_REND:
-      addAbilitySprite(Ability.FISHIOUS_REND, coordinatesTarget, true)
+      addAbilitySprite(skill, coordinates, true)
+        .setScale(2)
+        .setRotation(
+          Math.atan2(
+            coordinatesTarget[1] - coordinates[1],
+            coordinatesTarget[0] - coordinates[0]
+          ) -
+            Math.PI / 2
+        )
       break
 
     case Ability.GOLD_RUSH:
@@ -542,7 +550,7 @@ export function displayAbility(
       const specialProjectile = addAbilitySprite(
         Ability.GOLD_RUSH,
         coordinates
-      ).setScale(3)
+      ).setScale(skill === Ability.MAKE_IT_RAIN ? 3 : 2)
       scene.tweens.add({
         targets: specialProjectile,
         x: coordinatesTarget[0],
@@ -732,6 +740,7 @@ export function displayAbility(
     case Ability.VOLT_SWITCH:
       addAbilitySprite(skill, coordinates, true)
         .setScale(2)
+        .setOrigin(0.5, 0)
         .setRotation(
           Math.atan2(
             coordinatesTarget[1] - coordinates[1],
@@ -894,19 +903,24 @@ export function displayAbility(
       for (let i = 0; i < nbHits; i++) {
         setTimeout(() => {
           addAbilitySprite(
-            skill,
+            Ability.HYPERSPACE_FURY,
             [
-              coordinatesTarget[0] + randomBetween(-20, +20),
-              coordinatesTarget[1] + randomBetween(-20, +20)
+              coordinatesTarget[0] + randomBetween(-30, +30),
+              coordinatesTarget[1] + randomBetween(-30, +30)
             ],
             true
           )
             .setScale(1)
+            .setRotation(-Math.PI / 2)
             .setTint(0xc080ff)
         }, i * 150)
       }
       break
     }
+
+    case Ability.FLORAL_HEALING:
+      addAbilitySprite(skill, coordinates, true).setScale(2)
+      break
 
     case Ability.LEAF_BLADE:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
@@ -982,7 +996,10 @@ export function displayAbility(
       break
 
     case Ability.SACRED_SWORD:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      addAbilitySprite(skill, coordinatesTarget, true)
+        .setScale(2)
+        .setOrigin(0.5, 0.2)
+        .setRotation(Math.PI)
       break
 
     case Ability.JUDGEMENT:
@@ -1040,7 +1057,7 @@ export function displayAbility(
       break
 
     case Ability.ECHO:
-      addAbilitySprite(skill, coordinates, true).setScale(2)
+      addAbilitySprite(skill, coordinates, true).setOrigin(0.5, 0.7).setScale(2)
       break
 
     case Ability.EXPLOSION:
@@ -1217,7 +1234,7 @@ export function displayAbility(
       break
 
     case Ability.MIND_BLOWN:
-      addAbilitySprite(skill, coordinates, true).setScale(2)
+      addAbilitySprite(skill, coordinates, true).setOrigin(0.5, 0.8).setScale(2)
       break
 
     case "MIND_BLOWN/hit":
