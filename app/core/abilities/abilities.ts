@@ -5,6 +5,7 @@ import {
   HiddenPowerBStrategy,
   HiddenPowerCStrategy,
   HiddenPowerDStrategy,
+  HiddenPowerEMStrategy,
   HiddenPowerEStrategy,
   HiddenPowerFStrategy,
   HiddenPowerGStrategy,
@@ -17,6 +18,7 @@ import {
   HiddenPowerNStrategy,
   HiddenPowerOStrategy,
   HiddenPowerPStrategy,
+  HiddenPowerQMStrategy,
   HiddenPowerQStrategy,
   HiddenPowerRStrategy,
   HiddenPowerSStrategy,
@@ -26,17 +28,9 @@ import {
   HiddenPowerWStrategy,
   HiddenPowerXStrategy,
   HiddenPowerYStrategy,
-  HiddenPowerZStrategy,
-  HiddenPowerQMStrategy,
-  HiddenPowerEMStrategy
+  HiddenPowerZStrategy
 } from "./hidden-power"
 
-import { ArtificialItems, Item } from "../../types/enum/Item"
-import { Effect } from "../../types/enum/Effect"
-import { AttackType, BoardEvent, Team } from "../../types/enum/Game"
-import { Weather } from "../../types/enum/Weather"
-import { Synergy } from "../../types/enum/Synergy"
-import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Transfer } from "../../types"
 import {
   BOARD_HEIGHT,
@@ -44,12 +38,23 @@ import {
   DEFAULT_ATK_SPEED,
   EvolutionTime
 } from "../../types/Config"
+import { Effect } from "../../types/enum/Effect"
+import { AttackType, BoardEvent, Team } from "../../types/enum/Game"
+import { ArtificialItems, Item } from "../../types/enum/Item"
+import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
+import { Synergy } from "../../types/enum/Synergy"
+import { Weather } from "../../types/enum/Weather"
 
+import PokemonFactory from "../../models/pokemon-factory"
 import Board, { Cell } from "../board"
 import { PokemonEntity } from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
-import PokemonFactory from "../../models/pokemon-factory"
 
+import { distanceC, distanceM } from "../../utils/distance"
+import { repeat } from "../../utils/function"
+import { logger } from "../../utils/logger"
+import { min } from "../../utils/number"
+import { OrientationArray, effectInLine } from "../../utils/orientation"
 import {
   chance,
   pickNRandomIn,
@@ -57,11 +62,6 @@ import {
   randomBetween,
   shuffleArray
 } from "../../utils/random"
-import { effectInLine, OrientationArray } from "../../utils/orientation"
-import { logger } from "../../utils/logger"
-import { repeat } from "../../utils/function"
-import { max, min } from "../../utils/number"
-import { distanceC, distanceM } from "../../utils/distance"
 
 export class BlueFlareStrategy extends AbilityStrategy {
   process(
@@ -6990,6 +6990,54 @@ export class KowtowCleaveStrategy extends AbilityStrategy {
   }
 }
 
+export class ShieldsDownStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+      id: pokemon.simulation.id,
+      skill: Ability.SHIELDS_UP,
+      positionX: pokemon.positionX,
+      positionY: pokemon.positionY
+    })
+    const pkm = pickRandomIn([
+      Pkm.MINIOR_KERNEL_BLUE,
+      Pkm.MINIOR_KERNEL_GREEN,
+      Pkm.MINIOR_KERNEL_ORANGE,
+      Pkm.MINIOR_KERNEL_RED
+    ])
+    pokemon.index = PkmIndex[pkm]
+    pokemon.name = pkm
+    pokemon.skill = Ability.SHIELDS_UP
+  }
+}
+
+export class ShieldsUpStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+      id: pokemon.simulation.id,
+      skill: Ability.SHIELDS_UP,
+      positionX: pokemon.positionX,
+      positionY: pokemon.positionX
+    })
+    pokemon.index = PkmIndex[Pkm.MINIOR]
+    pokemon.name = Pkm.MINIOR
+    pokemon.skill = Ability.SHIELDS_DOWN
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -7262,5 +7310,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.LOVELY_KISS]: new LovelyKissStrategy(),
   [Ability.TRANSFORM]: new TransformStrategy(),
   [Ability.PSYCHIC_FANGS]: new PsychicFangsStrategy(),
-  [Ability.SHED_TAIL]: new ShedTailStrategy()
+  [Ability.SHED_TAIL]: new ShedTailStrategy(),
+  [Ability.SHIELDS_DOWN]: new ShieldsDownStrategy(),
+  [Ability.SHIELDS_UP]: new ShieldsUpStrategy()
 }

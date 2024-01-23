@@ -1,37 +1,18 @@
-import { Berries, Item } from "../types/enum/Item"
-import {
-  BoardEvent,
-  Orientation,
-  PokemonActionState,
-  Stat,
-  Team
-} from "../types/enum/Game"
-import MovingState from "./moving-state"
-import AttackingState from "./attacking-state"
+import { Schema, SetSchema, type } from "@colyseus/schema"
 import { nanoid } from "nanoid"
-import Status from "../models/colyseus-models/status"
 import Count from "../models/colyseus-models/count"
-import Simulation from "./simulation"
-import { Schema, type, SetSchema } from "@colyseus/schema"
-import Board from "./board"
-import PokemonState from "./pokemon-state"
-import {
-  IPokemonEntity,
-  IPokemon,
-  Emotion,
-  AttackSprite,
-  Transfer,
-  Title
-} from "../types"
-import { AttackType, Rarity } from "../types/enum/Game"
-import { Effect } from "../types/enum/Effect"
-import { Ability } from "../types/enum/Ability"
-import { Synergy, SynergyEffects } from "../types/enum/Synergy"
-import { Pkm } from "../types/enum/Pokemon"
-import { IdleState } from "./idle-state"
+import Player from "../models/colyseus-models/player"
+import { Pokemon } from "../models/colyseus-models/pokemon"
+import Status from "../models/colyseus-models/status"
 import PokemonFactory from "../models/pokemon-factory"
-import { clamp, max, min, roundTo2Digits } from "../utils/number"
-import { Passive } from "../types/enum/Passive"
+import {
+  AttackSprite,
+  Emotion,
+  IPokemon,
+  IPokemonEntity,
+  Title,
+  Transfer
+} from "../types"
 import {
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_DAMAGE,
@@ -40,12 +21,31 @@ import {
   ON_ATTACK_MANA,
   SCOPE_LENS_MANA
 } from "../types/Config"
-import { chance } from "../utils/random"
+import { Ability } from "../types/enum/Ability"
+import { Effect } from "../types/enum/Effect"
+import {
+  AttackType,
+  BoardEvent,
+  Orientation,
+  PokemonActionState,
+  Rarity,
+  Stat,
+  Team
+} from "../types/enum/Game"
+import { Berries, Item } from "../types/enum/Item"
+import { Passive } from "../types/enum/Passive"
+import { Pkm } from "../types/enum/Pokemon"
+import { Synergy, SynergyEffects } from "../types/enum/Synergy"
 import { distanceC } from "../utils/distance"
-import Player from "../models/colyseus-models/player"
+import { clamp, max, min, roundTo2Digits } from "../utils/number"
+import { chance } from "../utils/random"
 import { values } from "../utils/schemas"
-import { AbilityStrategies } from "./abilities/abilities"
-import { Pokemon } from "../models/colyseus-models/pokemon"
+import AttackingState from "./attacking-state"
+import Board from "./board"
+import { IdleState } from "./idle-state"
+import MovingState from "./moving-state"
+import PokemonState from "./pokemon-state"
+import Simulation from "./simulation"
 
 export class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
@@ -241,8 +241,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         attackType === AttackType.SPECIAL &&
         damage > 0
       ) {
-        const bounceCrit = crit || (this.items.has(Item.REAPER_CLOTH) && chance(this.critChance))
-        const bounceDamage = Math.round(([0.5,1][this.stars - 1] ?? 1) * damage * (1+ this.ap/100) * (bounceCrit ? this.critDamage : 1))
+        const bounceCrit =
+          crit || (this.items.has(Item.REAPER_CLOTH) && chance(this.critChance))
+        const bounceDamage = Math.round(
+          ([0.5, 1][this.stars - 1] ?? 1) *
+            damage *
+            (1 + this.ap / 100) *
+            (bounceCrit ? this.critDamage : 1)
+        )
         // not handleSpecialDamage to not trigger infinite loop between two magic bounces
         attacker?.handleDamage({
           damage: bounceDamage,
@@ -461,6 +467,70 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
     }
 
+    if (
+      this.name === Pkm.MINIOR_KERNEL_BLUE ||
+      this.name === Pkm.MINIOR_KERNEL_GREEN ||
+      this.name === Pkm.MINIOR_KERNEL_RED ||
+      this.name === Pkm.MINIOR_KERNEL_ORANGE
+    ) {
+      const cells = board.getAdjacentCells(target.positionX, target.positionY)
+      const targets = cells
+        .filter((cell) => cell.value && this.team != cell.value.team)
+        .map((cell) => cell.value!)
+        .concat(target)
+      targets.forEach((t) => {
+        this.simulation.room.broadcast(Transfer.ABILITY, {
+          id: this.simulation.id,
+          skill: Ability.SHIELDS_DOWN,
+          targetX: t.positionX,
+          targetY: t.positionY
+        })
+        if (t.id !== target.id) {
+          t.handleDamage({
+            damage: physicalDamage,
+            board,
+            attackType: AttackType.PHYSICAL,
+            attacker: this,
+            shouldTargetGainMana: false
+          })
+        }
+        if (this.name === Pkm.MINIOR_KERNEL_BLUE) {
+          t.handleDamage({
+            damage: 10,
+            board,
+            attackType: AttackType.SPECIAL,
+            attacker: this,
+            shouldTargetGainMana: false
+          })
+        }
+        if (this.name === Pkm.MINIOR_KERNEL_RED) {
+          t.handleDamage({
+            damage: Math.ceil(physicalDamage * 0.15),
+            board,
+            attackType: AttackType.PHYSICAL,
+            attacker: this,
+            shouldTargetGainMana: false
+          })
+        }
+        if (this.name === Pkm.MINIOR_KERNEL_ORANGE) {
+          t.handleDamage({
+            damage: Math.ceil(physicalDamage * 0.05),
+            board,
+            attackType: AttackType.TRUE,
+            attacker: this,
+            shouldTargetGainMana: false
+          })
+        }
+      })
+      if (this.name === Pkm.MINIOR_KERNEL_GREEN) {
+        cells.forEach((v) => {
+          if (v && v.value && v.value.team === this.team) {
+            v.value.handleHeal(5, this, 1)
+          }
+        })
+      }
+    }
+
     if (this.items.has(Item.CHOICE_SCARF) && totalDamage > 0) {
       const cells = board.getAdjacentCells(target.positionX, target.positionY)
       const candidateTargets = cells
@@ -523,7 +593,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.effects.has(Effect.TELEPORT_NEXT_ATTACK)) {
       const crit =
-        this.items.has(Item.REAPER_CLOTH) && chance(this.critChance / 100)      
+        this.items.has(Item.REAPER_CLOTH) && chance(this.critChance / 100)
       target.handleSpecialDamage(
         [15, 30, 60][this.stars - 1],
         board,
@@ -565,6 +635,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     trueDamage: number
   }) {
     // Item effects on hit
+    if (this.name === Pkm.MINIOR) {
+      this.addAttackSpeed(4, true)
+    }
     if (this.items.has(Item.UPGRADE)) {
       this.addAttackSpeed(5)
       this.count.upgradeCount++

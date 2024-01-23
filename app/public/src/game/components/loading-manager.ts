@@ -1,10 +1,10 @@
+import { t } from "i18next"
 import { GameObjects } from "phaser"
+import AnimatedTiles from "phaser-animated-tiles-phaser3.5/dist/AnimatedTiles.min.js"
+import indexList from "../../../src/assets/pokemons/indexList.json"
+import atlas from "../../assets/atlas.json"
 import { getPortraitSrc } from "../../utils"
 import GameScene from "../scenes/game-scene"
-import indexList from "../../../src/assets/pokemons/indexList.json"
-import { t } from "i18next"
-import AnimatedTiles from "phaser-animated-tiles-phaser3.5/dist/AnimatedTiles.min.js"
-import atlas from "../../assets/atlas.json"
 
 export default class LoadingManager {
   scene: Phaser.Scene
@@ -74,7 +74,7 @@ export default class LoadingManager {
 
     scene.load.multiatlas("item", "/assets/item/item.json", "/assets/item/")
 
-    for (let pack in atlas.packs) {
+    for (const pack in atlas.packs) {
       scene.load.multiatlas(
         atlas.packs[pack].name,
         `/assets/${pack}/${atlas.packs[pack].name}.json`,
