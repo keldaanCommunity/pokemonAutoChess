@@ -10882,6 +10882,76 @@ export class MausholdFour extends Pokemon {
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
+export class Minior extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.ROCK])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 12
+  def = 5
+  speDef = 5
+  maxPP = 50
+  range = 2
+  skill = Ability.POLTERGEIST
+  attackSprite = AttackSprite.ROCK_RANGE
+}
+
+export class MiniorKernelBlue extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.ROCK])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 12
+  def = 5
+  speDef = 5
+  maxPP = 50
+  range = 2
+  skill = Ability.POLTERGEIST
+  attackSprite = AttackSprite.ROCK_RANGE
+}
+
+export class MiniorKernelRed extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.ROCK])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 12
+  def = 5
+  speDef = 5
+  maxPP = 50
+  range = 2
+  skill = Ability.POLTERGEIST
+  attackSprite = AttackSprite.ROCK_RANGE
+}
+
+export class MiniorKernelOrange extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.ROCK])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 12
+  def = 5
+  speDef = 5
+  maxPP = 50
+  range = 2
+  skill = Ability.POLTERGEIST
+  attackSprite = AttackSprite.ROCK_RANGE
+}
+
+export class MiniorKernelGreen extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.ROCK])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 12
+  def = 5
+  speDef = 5
+  maxPP = 50
+  range = 2
+  skill = Ability.POLTERGEIST
+  attackSprite = AttackSprite.ROCK_RANGE
+}
+
 export class Hoopa extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.DARK, Synergy.GHOST])
   rarity = Rarity.UNIQUE
@@ -12012,5 +12082,10 @@ export const PokemonClasses: Record<
   [Pkm.CYCLIZAR]: Cyclizar,
   [Pkm.PAWNIARD]: Pawniard,
   [Pkm.BISHARP]: Bisharp,
-  [Pkm.KINGAMBIT]: Kingambit
+  [Pkm.KINGAMBIT]: Kingambit,
+  [Pkm.MINIOR]: Minior,
+  [Pkm.MINIOR_KERNEL_RED]: MiniorKernelRed,
+  [Pkm.MINIOR_KERNEL_BLUE]: MiniorKernelBlue,
+  [Pkm.MINIOR_KERNEL_ORANGE]: MiniorKernelOrange,
+  [Pkm.MINIOR_KERNEL_GREEN]: MiniorKernelGreen
 }

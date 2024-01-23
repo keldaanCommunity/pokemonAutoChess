@@ -181,7 +181,8 @@ export enum AttackSprite {
   BUG_MELEE = "BUG/melee",
   FLYING_MELEE = "FLYING/melee",
   ICE_RANGE = "ICE/range",
-  STEEL_MELEE = "STEEL/melee"
+  STEEL_MELEE = "STEEL/melee",
+  ROCK_RANGE = "ROCK/range"
 }
 
 export const AttackSpriteScale: { [sprite in AttackSprite]: [number, number] } =
@@ -211,7 +212,8 @@ export const AttackSpriteScale: { [sprite in AttackSprite]: [number, number] } =
     "ROCK/melee": [1.5, 1.5],
     "STEEL/melee": [1.5, 1.5],
     "WATER/melee": [2, 2],
-    "WATER/range": [3, 3]
+    "WATER/range": [3, 3],
+    [AttackSprite.ROCK_RANGE]: [3,3]
   }
 
 export enum ModalMode {
