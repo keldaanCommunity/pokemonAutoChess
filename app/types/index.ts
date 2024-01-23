@@ -1,21 +1,31 @@
 import {
   ArraySchema,
-  MapSchema,
-  SetSchema,
   CollectionSchema,
-  Schema
+  MapSchema,
+  Schema,
+  SetSchema
 } from "@colyseus/schema"
 import Board from "../core/board"
 import Dps from "../core/dps"
 import DpsHeal from "../core/dps-heal"
+import { EvolutionRule } from "../core/evolution-rules"
 import Count from "../models/colyseus-models/count"
-import Status from "../models/colyseus-models/status"
 import ExperienceManager from "../models/colyseus-models/experience-manager"
+import { IPokemonRecord } from "../models/colyseus-models/game-record"
+import HistoryItem from "../models/colyseus-models/history-item"
 import { ILeaderboardInfo } from "../models/colyseus-models/leaderboard-info"
 import LobbyUser from "../models/colyseus-models/lobby-user"
 import Message from "../models/colyseus-models/message"
-import Synergies from "../models/colyseus-models/synergies"
+import Player from "../models/colyseus-models/player"
+import { Pokemon } from "../models/colyseus-models/pokemon"
 import PokemonCollection from "../models/colyseus-models/pokemon-collection"
+import Status from "../models/colyseus-models/status"
+import Synergies from "../models/colyseus-models/synergies"
+import { Effects } from "../models/effects"
+import GameRoom from "../rooms/game-room"
+import { Ability } from "./enum/Ability"
+import { Effect } from "./enum/Effect"
+import { Emotion } from "./enum/Emotion"
 import {
   AttackType,
   BoardEvent,
@@ -25,21 +35,11 @@ import {
   SpecialLobbyType,
   Stat
 } from "./enum/Game"
-import { Emotion } from "./enum/Emotion"
-import { Effect } from "./enum/Effect"
-import { Ability } from "./enum/Ability"
-import { Synergy } from "./enum/Synergy"
-import HistoryItem from "../models/colyseus-models/history-item"
 import { Item } from "./enum/Item"
-import { Pkm, PkmProposition } from "./enum/Pokemon"
-import { Pokemon } from "../models/colyseus-models/pokemon"
-import { IPokemonRecord } from "../models/colyseus-models/game-record"
-import GameRoom from "../rooms/game-room"
 import { Passive } from "./enum/Passive"
+import { Pkm, PkmProposition } from "./enum/Pokemon"
+import { Synergy } from "./enum/Synergy"
 import { Weather } from "./enum/Weather"
-import { Effects } from "../models/effects"
-import { EvolutionRule } from "../core/evolution-rules"
-import Player from "../models/colyseus-models/player"
 
 export * from "./enum/Emotion"
 
@@ -181,7 +181,8 @@ export enum AttackSprite {
   BUG_MELEE = "BUG/melee",
   FLYING_MELEE = "FLYING/melee",
   ICE_RANGE = "ICE/range",
-  STEEL_MELEE = "STEEL/melee"
+  STEEL_MELEE = "STEEL/melee",
+  ROCK_RANGE = "ROCK/range"
 }
 
 export const AttackSpriteScale: { [sprite in AttackSprite]: [number, number] } =
@@ -211,7 +212,8 @@ export const AttackSpriteScale: { [sprite in AttackSprite]: [number, number] } =
     "ROCK/melee": [1.5, 1.5],
     "STEEL/melee": [1.5, 1.5],
     "WATER/melee": [2, 2],
-    "WATER/range": [3, 3]
+    "WATER/range": [3, 3],
+    [AttackSprite.ROCK_RANGE]: [3, 3]
   }
 
 export enum ModalMode {

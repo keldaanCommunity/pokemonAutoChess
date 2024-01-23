@@ -1,44 +1,44 @@
-import Phaser, { GameObjects } from "phaser"
 import { SetSchema } from "@colyseus/schema"
-import Lifebar from "./life-bar"
-import DraggableObject from "./draggable-object"
-import PokemonDetail from "./pokemon-detail"
-import ItemsContainer from "./items-container"
-import { transformAttackCoordinate } from "../../pages/utils/utils"
+import Phaser, { GameObjects } from "phaser"
+import MoveTo from "phaser3-rex-plugins/plugins/moveto"
+import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
 import {
+  AttackSprite,
+  AttackSpriteScale,
+  Emotion,
   IPokemon,
   IPokemonEntity,
-  instanceofPokemonEntity,
-  Emotion,
-  AttackSprite,
-  AttackSpriteScale
+  instanceofPokemonEntity
 } from "../../../../types"
-import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
-import MoveTo from "phaser3-rex-plugins/plugins/moveto"
-import GameScene from "../scenes/game-scene"
-import {
-  AttackType,
-  Orientation,
-  PokemonActionState,
-  SpriteType,
-  PokemonTint,
-  Rarity,
-  Team
-} from "../../../../types/enum/Game"
-import { Ability } from "../../../../types/enum/Ability"
-import { Passive } from "../../../../types/enum/Passive"
-import PowerBar from "./power-bar"
-import { Synergy } from "../../../../types/enum/Synergy"
-import { Pkm } from "../../../../types/enum/Pokemon"
-import { clamp, min } from "../../../../utils/number"
 import {
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_DAMAGE
 } from "../../../../types/Config"
-import { DebugScene } from "../scenes/debug-scene"
-import { preferences } from "../../preferences"
+import { Ability } from "../../../../types/enum/Ability"
+import {
+  AttackType,
+  Orientation,
+  PokemonActionState,
+  PokemonTint,
+  Rarity,
+  SpriteType,
+  Team
+} from "../../../../types/enum/Game"
+import { Passive } from "../../../../types/enum/Passive"
+import { Pkm } from "../../../../types/enum/Pokemon"
+import { Synergy } from "../../../../types/enum/Synergy"
+import { clamp, min } from "../../../../utils/number"
 import { values } from "../../../../utils/schemas"
+import { transformAttackCoordinate } from "../../pages/utils/utils"
+import { preferences } from "../../preferences"
+import { DebugScene } from "../scenes/debug-scene"
+import GameScene from "../scenes/game-scene"
 import { displayAbility } from "./abilities-animations"
+import DraggableObject from "./draggable-object"
+import ItemsContainer from "./items-container"
+import Lifebar from "./life-bar"
+import PokemonDetail from "./pokemon-detail"
+import PowerBar from "./power-bar"
 
 export default class Pokemon extends DraggableObject {
   evolution: Pkm

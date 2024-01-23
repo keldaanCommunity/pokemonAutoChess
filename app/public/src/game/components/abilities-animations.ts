@@ -3,8 +3,8 @@ import { Ability } from "../../../../types/enum/Ability"
 import { Orientation, PokemonActionState } from "../../../../types/enum/Game"
 import { distanceE } from "../../../../utils/distance"
 import {
-  OrientationVector,
-  OrientationArray
+  OrientationArray,
+  OrientationVector
 } from "../../../../utils/orientation"
 import { randomBetween } from "../../../../utils/random"
 import { transformAttackCoordinate } from "../../pages/utils/utils"
@@ -24,8 +24,8 @@ export function displayAbility(
   targetY: number,
   flip: boolean
 ) {
-  let coordinates = transformAttackCoordinate(positionX, positionY, flip)
-  let coordinatesTarget = transformAttackCoordinate(targetX, targetY, flip)
+  const coordinates = transformAttackCoordinate(positionX, positionY, flip)
+  const coordinatesTarget = transformAttackCoordinate(targetX, targetY, flip)
 
   function addAbilitySprite(
     skill: Ability | string,
@@ -271,8 +271,8 @@ export function displayAbility(
     }
 
     case Ability.ORIGIN_PULSE: {
-      let startCoords = transformAttackCoordinate(0, targetY, flip)
-      let finalCoords = transformAttackCoordinate(8, targetY, flip)
+      const startCoords = transformAttackCoordinate(0, targetY, flip)
+      const finalCoords = transformAttackCoordinate(8, targetY, flip)
       const specialProjectile = addAbilitySprite(skill, startCoords).setScale(4)
       scene.tweens.add({
         targets: specialProjectile,
@@ -598,7 +598,7 @@ export function displayAbility(
     }
 
     case Ability.SKY_ATTACK: {
-      let startCoords = transformAttackCoordinate(targetX, 9, false)
+      const startCoords = transformAttackCoordinate(targetX, 9, false)
       const specialProjectile = addAbilitySprite(skill, startCoords).setScale(
         1.5
       )
@@ -616,7 +616,7 @@ export function displayAbility(
     }
 
     case Ability.ACROBATICS: {
-      let startCoords = transformAttackCoordinate(
+      const startCoords = transformAttackCoordinate(
         targetX + 1,
         targetY + 1,
         flip
@@ -796,6 +796,14 @@ export function displayAbility(
       break
     }
 
+    case Ability.SHIELDS_DOWN:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
+    case Ability.SHIELDS_UP:
+      addAbilitySprite(skill, coordinates, true).setScale(2)
+      break
+
     case Ability.BRAVE_BIRD:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
@@ -939,7 +947,7 @@ export function displayAbility(
       break
 
     case Ability.ERUPTION: {
-      let startCoords = transformAttackCoordinate(
+      const startCoords = transformAttackCoordinate(
         targetX + 3,
         targetY + 3,
         flip

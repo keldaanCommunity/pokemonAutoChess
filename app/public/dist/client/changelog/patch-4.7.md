@@ -8,6 +8,7 @@
 - Pawniard
 - Bisharp
 - Kingambit
+- Minior
 
 # Changes to Pokemon & Abilities
 
