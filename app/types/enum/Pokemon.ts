@@ -1598,7 +1598,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.SPIRITOMB]: Pkm.SPIRITOMB,
   [Pkm.ABSOL]: Pkm.ABSOL,
   [Pkm.LAPRAS]: Pkm.LAPRAS,
-  [Pkm.LATIAS]: Pkm.LATIAS,
+  [Pkm.LATIAS]: Pkm.LATIOS,
   [Pkm.LATIOS]: Pkm.LATIOS,
   [Pkm.MESPRIT]: Pkm.MESPRIT,
   [Pkm.AZELF]: Pkm.AZELF,
@@ -5091,8 +5091,8 @@ export const AnimationConfig: {
   },
   [Pkm.PINSIR]: {
     attack: AnimationType.Slice,
-    ability: AnimationType.Double,
-    emote: AnimationType.Charge
+    ability: AnimationType.Attack,
+    emote: AnimationType.Slice
   },
   [Pkm.NATU]: {
     attack: AnimationType.Jab,

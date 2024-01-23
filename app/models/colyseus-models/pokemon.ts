@@ -11645,7 +11645,7 @@ export const PokemonClasses: Record<
   [Pkm.ABSOL]: Absol,
   [Pkm.LAPRAS]: Lapras,
   [Pkm.LATIAS]: Latias,
-  [Pkm.LATIOS]: Latias,
+  [Pkm.LATIOS]: Latios,
   [Pkm.MESPRIT]: Mesprit,
   [Pkm.AZELF]: Azelf,
   [Pkm.UXIE]: Uxie,

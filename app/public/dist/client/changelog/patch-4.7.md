@@ -38,6 +38,7 @@
 - New ability for Staryu/Starmie: Psybeam: Deal 30/60/100 special damage to all enemy Pokémon behind the target with 50% chance to make them confused for 4 seconds
 - Solosis ability is renamed Psychic and has a new visual effect
 - Duskull/Spiritomb ability is renamed Shadow ball and now lowers special defense instead of defense
+- Mist Ball & Luster Purge (Latios, Latias) now have a maximum range of 5 cells
 
 # Changes to Synergies
 

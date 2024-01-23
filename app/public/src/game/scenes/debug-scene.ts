@@ -260,6 +260,8 @@ export class DebugScene extends Phaser.Scene {
       false,
       false
     )
+    this.target.positionX = tx
+    this.target.positionY = ty
     this.animationManager.play(this.target, AnimationType.Idle, { repeat: -1 })
   }
 
