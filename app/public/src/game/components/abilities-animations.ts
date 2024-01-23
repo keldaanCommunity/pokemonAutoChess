@@ -75,11 +75,12 @@ export function displayAbility(
     case Ability.DYNAMAX_CANNON:
       addAbilitySprite(skill, coordinates, true)
         .setScale(2)
+        .setOrigin(0.5, 0)
         .setRotation(
           Math.atan2(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
-          ) +
+          ) -
             Math.PI / 2
         )
       break
@@ -147,7 +148,11 @@ export function displayAbility(
       break
 
     case Ability.DARK_VOID:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(4)
+      addAbilitySprite(
+        Ability.TWISTING_NETHER,
+        coordinatesTarget,
+        true
+      ).setScale(4)
       break
 
     case Ability.WHEEL_OF_FIRE: {
@@ -333,7 +338,9 @@ export function displayAbility(
       break
 
     case Ability.DRACO_METEOR:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      addAbilitySprite(skill, coordinatesTarget, true)
+        .setOrigin(0.5, 0.9)
+        .setScale(2)
       break
 
     case Ability.BLAZE_KICK:
@@ -377,7 +384,10 @@ export function displayAbility(
       break
 
     case Ability.CHARGE:
-      addAbilitySprite(skill, coordinates, true).setScale(2)
+      addAbilitySprite(skill, coordinates, true)
+        .setDepth(0)
+        .setOrigin(0.5, 0.8)
+        .setScale(4)
       break
 
     case Ability.DISCHARGE:
@@ -726,7 +736,7 @@ export function displayAbility(
       break
 
     case Ability.STEAM_ERUPTION:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(22)
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
     case Ability.SEARING_SHOT:
@@ -970,7 +980,9 @@ export function displayAbility(
       break
 
     case Ability.JUDGEMENT:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      addAbilitySprite(skill, coordinatesTarget, true)
+        .setOrigin(0.5, 1)
+        .setScale(2)
       break
 
     case Ability.SHADOW_SNEAK:
@@ -1425,6 +1437,12 @@ export function displayAbility(
     case Ability.GEOMANCY:
       addAbilitySprite(skill, [coordinates[0], coordinates[1] - 50], true)
         .setDepth(1)
+        .setScale(2)
+      break
+
+    case Ability.BLIZZARD:
+      addAbilitySprite(Ability.BLIZZARD, coordinates, true)
+        .setDepth(0)
         .setScale(2)
       break
 
