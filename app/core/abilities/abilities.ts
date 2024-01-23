@@ -4928,7 +4928,16 @@ export class MistBallStrategy extends AbilityStrategy {
     const damage = 30
 
     effectInLine(board, pokemon, target, (targetInLine) => {
-      if (targetInLine != null && targetInLine.team !== pokemon.team) {
+      if (
+        targetInLine != null &&
+        targetInLine.team !== pokemon.team &&
+        distanceC(
+          pokemon.positionX,
+          pokemon.positionY,
+          targetInLine.positionX,
+          targetInLine.positionY
+        ) <= 5
+      ) {
         targetInLine.handleSpecialDamage(
           damage,
           board,
@@ -4969,7 +4978,16 @@ export class LusterPurgeStrategy extends AbilityStrategy {
     const damage = 30
 
     effectInLine(board, pokemon, target, (targetInLine) => {
-      if (targetInLine != null && targetInLine.team !== pokemon.team) {
+      if (
+        targetInLine != null &&
+        targetInLine.team !== pokemon.team &&
+        distanceC(
+          pokemon.positionX,
+          pokemon.positionY,
+          targetInLine.positionX,
+          targetInLine.positionY
+        ) <= 5
+      ) {
         targetInLine.handleSpecialDamage(
           damage,
           board,
