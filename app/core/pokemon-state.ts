@@ -328,28 +328,28 @@ export default class PokemonState {
         const effectsRemovedList: Effect[] = []
 
         // Remove field effects on death
-        if (pokemon.passive === Passive.ELECTRIC_SURGE) {
+        if (pokemon.passive === Passive.ELECTRIC_TERRAIN) {
           board.forEach((x, y, pkm) => {
             if (pkm && pkm.team == pokemon.team && pkm.status.electricField) {
               pkm.removeElectricField()
             }
           })
           effectsRemovedList.push(Effect.ELECTRIC_TERRAIN)
-        } else if (pokemon.passive === Passive.PSYCHIC_SURGE) {
+        } else if (pokemon.passive === Passive.PSYCHIC_TERRAIN) {
           board.forEach((x, y, pkm) => {
             if (pkm && pkm.team == pokemon.team && pkm.status.psychicField) {
               pkm.removePsychicField()
             }
           })
           effectsRemovedList.push(Effect.PSYCHIC_TERRAIN)
-        } else if (pokemon.passive === Passive.GRASSY_SURGE) {
+        } else if (pokemon.passive === Passive.GRASSY_TERRAIN) {
           board.forEach((x, y, pkm) => {
             if (pkm && pkm.team == pokemon.team && pkm.status.grassField) {
               pkm.status.grassField = false
             }
           })
           effectsRemovedList.push(Effect.GRASSY_TERRAIN)
-        } else if (pokemon.passive === Passive.MISTY_SURGE) {
+        } else if (pokemon.passive === Passive.MISTY_TERRAIN) {
           board.forEach((x, y, pkm) => {
             if (pkm && pkm.team == pokemon.team && pkm.status.fairyField) {
               pkm.status.fairyField = false
