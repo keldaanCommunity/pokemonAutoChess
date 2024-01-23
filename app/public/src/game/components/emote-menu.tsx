@@ -39,7 +39,7 @@ export function EmoteMenuComponent(props: {
     Emotion.STUNNED,
     Emotion.DIZZY
   ].filter((emotion) => {
-    const indexEmotion = Object.keys(Emotion).indexOf(emotion)
+    const indexEmotion = Object.values(Emotion).indexOf(emotion)
     return (
       PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX[props.index]?.[indexEmotion] === 1
     )

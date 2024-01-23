@@ -87,6 +87,8 @@ Base components stats have been reviewed to be closer to each other:
 
 # Bugfix
 
+- Fix avatar emotes menu. Right click on your avatar to use the emotions you unlocked
+
 # Misc
 
 - Added Ultraball Ranked lobby on a weekly basis, on Sunday at 9pm UTC. 5 boosters for the winner
