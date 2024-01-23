@@ -1,21 +1,21 @@
 /* eslint-disable @typescript-eslint/no-extra-semi */
 /* eslint-disable max-len */
+import { AnimationComplete, AnimationType } from "../../../types/Animation"
 import {
   Orientation,
-  SpriteType,
-  PokemonTint,
+  OrientationFlip,
   PokemonActionState,
-  OrientationFlip
+  PokemonTint,
+  SpriteType
 } from "../../../types/enum/Game"
-import { AnimationType, AnimationComplete } from "../../../types/Animation"
-import Pokemon from "./components/pokemon"
+import { Berries } from "../../../types/enum/Item"
+import { AnimationConfig, Pkm, PkmIndex } from "../../../types/enum/Pokemon"
+import { logger } from "../../../utils/logger"
+import { fpsToDuration } from "../../../utils/number"
 import durations from "../../dist/client/assets/pokemons/durations.json"
 import indexList from "../../dist/client/assets/pokemons/indexList.json"
-import { logger } from "../../../utils/logger"
-import { AnimationConfig, Pkm, PkmIndex } from "../../../types/enum/Pokemon"
-import { Berries } from "../../../types/enum/Item"
-import { fpsToDuration } from "../../../utils/number"
 import atlas from "../assets/atlas.json"
+import Pokemon from "./components/pokemon"
 
 const DEFAULT_FPS = 20
 
@@ -106,11 +106,11 @@ export default class AnimationManager {
       })
     })
 
-    for (let pack in atlas.packs) {
+    for (const pack in atlas.packs) {
       if (atlas.packs[pack].anims) {
         const doesContainMultipleAnims =
           Object.keys(atlas.packs[pack].anims).length > 1
-        for (let anim in atlas.packs[pack].anims) {
+        for (const anim in atlas.packs[pack].anims) {
           const animConfig = atlas.packs[pack].anims[anim]
           this.createAnimation({
             key: anim,

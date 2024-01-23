@@ -1,8 +1,8 @@
-import { Synergy } from "./enum/Synergy"
-import { Pkm, PkmDuo, PkmProposition } from "./enum/Pokemon"
-import { Item } from "./enum/Item"
-import { AttackType, Rarity, Stat } from "./enum/Game"
 import { Emotion } from "."
+import { AttackType, Rarity, Stat } from "./enum/Game"
+import { Item } from "./enum/Item"
+import { Pkm, PkmDuo, PkmProposition } from "./enum/Pokemon"
+import { Synergy } from "./enum/Synergy"
 import { Weather } from "./enum/Weather"
 
 export const ON_ATTACK_MANA = 5
@@ -333,7 +333,8 @@ export const UniqueShop = new Array<PkmProposition>(
   Pkm.DRACOVISH,
   Pkm.GIMMIGHOUL,
   Pkm.BRUXISH,
-  Pkm.CYCLIZAR
+  Pkm.CYCLIZAR,
+  Pkm.MINIOR
 )
 
 export const LegendaryShop = new Array<PkmProposition>(

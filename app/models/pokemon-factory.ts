@@ -108,9 +108,7 @@ export default class PokemonFactory {
       const pokemon = PokemonFactory.createPokemonFromName(p)
       return (
         currentFossils.includes(p) === false &&
-        [Rarity.UNIQUE, Rarity.LEGENDARY].includes(
-          pokemon.rarity
-        ) === false
+        [Rarity.UNIQUE, Rarity.LEGENDARY].includes(pokemon.rarity) === false
       )
     })
 
