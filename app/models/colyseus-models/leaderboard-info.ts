@@ -1,5 +1,5 @@
 export interface ILeaderboardInfo {
-  id: string;
+  id: string
   name: string
   avatar: string
   rank: number

@@ -1,12 +1,12 @@
 import { getAuth, signInAnonymously, updateProfile } from "firebase/auth"
-import { useTranslation } from "react-i18next"
 import React from "react"
+import { useTranslation } from "react-i18next"
 import {
-  uniqueNamesGenerator,
+  Config,
   adjectives,
-  colors,
   animals,
-  Config
+  colors,
+  uniqueNamesGenerator
 } from "unique-names-generator"
 
 const customConfig: Config = {

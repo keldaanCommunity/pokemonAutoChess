@@ -1,11 +1,11 @@
 import React from "react"
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 
 import { useTranslation } from "react-i18next"
 import { CompositionReport } from "./composition-report"
 import { ItemReport } from "./item-report"
-import { PokemonReport } from "./pokemon-report"
 import "./meta-report.css"
+import { PokemonReport } from "./pokemon-report"
 
 export default function MetaReport() {
   const { t } = useTranslation()

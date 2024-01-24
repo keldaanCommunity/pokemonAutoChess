@@ -1,14 +1,14 @@
 import React, { useState } from "react"
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
-import PokemonCarousel from "./pokemon-carousel"
-import { Synergy } from "../../../../../types/enum/Synergy"
+import { useTranslation } from "react-i18next"
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { Pkm } from "../../../../../types/enum/Pokemon"
+import { Synergy } from "../../../../../types/enum/Synergy"
+import { Checkbox } from "../checkbox/checkbox"
 import SynergyIcon from "../icons/synergy-icon"
+import PokemonCarousel from "./pokemon-carousel"
+import "./pokemon-collection.css"
 import PokemonEmotionsModal from "./pokemon-emotions-modal"
 import UnownPanel from "./unown-panel"
-import { useTranslation } from "react-i18next"
-import { Checkbox } from "../checkbox/checkbox"
-import "./pokemon-collection.css"
 
 export default function PokemonCollection() {
   const { t } = useTranslation()

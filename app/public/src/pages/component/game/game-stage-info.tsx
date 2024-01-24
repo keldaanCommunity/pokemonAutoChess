@@ -1,25 +1,25 @@
 import React from "react"
-import { useAppSelector } from "../../../hooks"
-import { getAvatarSrc, getPortraitSrc } from "../../../utils"
-import { cc } from "../../utils/jsx"
-import TimerBar from "./game-timer-bar"
+import ReactDOM from "react-dom"
+import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
+import { PVEStages } from "../../../../../models/pve-stages"
+import { Emotion } from "../../../../../types"
 import {
   AdditionalPicksStages,
   ItemCarouselStages,
   PortalCarouselStages
 } from "../../../../../types/Config"
-import "./game-stage-info.css"
-import { min } from "../../../../../utils/number"
 import { BattleResult, GamePhaseState } from "../../../../../types/enum/Game"
-import { SynergyAssociatedToWeather } from "../../../../../types/enum/Weather"
-import SynergyIcon from "../icons/synergy-icon"
-import { addIconsToDescription } from "../../utils/descriptions"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
-import { Emotion } from "../../../../../types"
-import { useTranslation } from "react-i18next"
-import ReactDOM from "react-dom"
-import { PVEStages } from "../../../../../models/pve-stages"
+import { SynergyAssociatedToWeather } from "../../../../../types/enum/Weather"
+import { min } from "../../../../../utils/number"
+import { useAppSelector } from "../../../hooks"
+import { getAvatarSrc, getPortraitSrc } from "../../../utils"
+import { addIconsToDescription } from "../../utils/descriptions"
+import { cc } from "../../utils/jsx"
+import SynergyIcon from "../icons/synergy-icon"
+import "./game-stage-info.css"
+import TimerBar from "./game-timer-bar"
 
 export default function GameStageInfo() {
   const { t } = useTranslation()

@@ -1,7 +1,7 @@
 import React from "react"
+import { IChatV2, Role } from "../../../../../types"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { removeMessage, searchById } from "../../../stores/NetworkStore"
-import { IChatV2, Role } from "../../../../../types"
 import { getAvatarSrc } from "../../../utils"
 import { cc } from "../../utils/jsx"
 

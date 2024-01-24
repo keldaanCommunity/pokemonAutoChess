@@ -1,11 +1,11 @@
 import React, { useEffect } from "react"
+import { useTranslation } from "react-i18next"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { setBoosterContent } from "../../../stores/LobbyStore"
 import { openBooster } from "../../../stores/NetworkStore"
 import { cc } from "../../utils/jsx"
 import { BoosterCard } from "./booster-card"
 import "./booster.css"
-import { useTranslation } from "react-i18next"
 
 export default function Booster() {
   const { t } = useTranslation()

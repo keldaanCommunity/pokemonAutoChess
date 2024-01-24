@@ -1,21 +1,21 @@
-import Pokemon from "./pokemon"
-import { FloatingItem } from "./floating-item"
 import {
   IFloatingItem,
   IPokemonAvatar,
   IPortal,
   ISynergySymbol
 } from "../../../../types"
-import AnimationManager from "../animation-manager"
-import GameScene from "../scenes/game-scene"
+import { logger } from "../../../../utils/logger"
+import { clamp } from "../../../../utils/number"
 import {
   transformMiniGameXCoordinate,
   transformMiniGameYCoordinate
 } from "../../pages/utils/utils"
+import AnimationManager from "../animation-manager"
+import GameScene from "../scenes/game-scene"
+import { FloatingItem } from "./floating-item"
+import Pokemon from "./pokemon"
 import PokemonAvatar from "./pokemon-avatar"
 import { Portal, SynergySymbol } from "./portal"
-import { clamp } from "../../../../utils/number"
-import { logger } from "../../../../utils/logger"
 
 export default class MinigameManager {
   pokemons: Map<string, Pokemon>

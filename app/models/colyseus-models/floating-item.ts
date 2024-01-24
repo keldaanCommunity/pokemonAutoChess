@@ -1,6 +1,6 @@
 import { Schema, type } from "@colyseus/schema"
-import { IFloatingItem } from "../../types"
 import { nanoid } from "nanoid"
+import { IFloatingItem } from "../../types"
 import { Item } from "../../types/enum/Item"
 
 export class FloatingItem extends Schema implements IFloatingItem {

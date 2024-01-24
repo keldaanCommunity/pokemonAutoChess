@@ -1,9 +1,9 @@
 import React from "react"
-import { EloBadge } from "./elo-badge"
-import { Role } from "../../../../../types"
-import { RoleBadge } from "./role-badge"
-import { getAvatarSrc } from "../../../utils"
 import { useTranslation } from "react-i18next"
+import { Role } from "../../../../../types"
+import { getAvatarSrc } from "../../../utils"
+import { EloBadge } from "./elo-badge"
+import { RoleBadge } from "./role-badge"
 
 import "./avatar.css"
 

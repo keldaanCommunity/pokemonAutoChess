@@ -1,9 +1,9 @@
 import React from "react"
-import LeaderboardItem from "./leaderboard-item"
 import {
-  ILeaderboardInfo,
-  ILeaderboardBotInfo
+  ILeaderboardBotInfo,
+  ILeaderboardInfo
 } from "../../../../../models/colyseus-models/leaderboard-info"
+import LeaderboardItem from "./leaderboard-item"
 
 export default function Leaderboard(props: {
   isBot: boolean

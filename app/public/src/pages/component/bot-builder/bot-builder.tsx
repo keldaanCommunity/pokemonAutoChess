@@ -2,35 +2,35 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router"
 import { Navigate, useSearchParams } from "react-router-dom"
-import ImportExportBotModal from "./import-export-bot-modal"
 import {
   IBot,
   IDetailledPokemon
 } from "../../../../../models/mongo-models/bot-v2"
-import { useAppSelector, useAppDispatch } from "../../../hooks"
-import { requestBotData, requestBotList } from "../../../stores/NetworkStore"
 import { ModalMode, PkmWithConfig, Role } from "../../../../../types"
+import { PkmIndex } from "../../../../../types/enum/Pokemon"
+import { logger } from "../../../../../utils/logger"
+import { max, min } from "../../../../../utils/number"
+import { useAppDispatch, useAppSelector } from "../../../hooks"
+import store from "../../../stores"
+import { requestBotData, requestBotList } from "../../../stores/NetworkStore"
+import { getAvatarString } from "../../../utils"
+import { joinLobbyRoom } from "../../lobby"
+import DiscordButton from "../buttons/discord-button"
+import "./bot-builder.css"
 import {
   DEFAULT_BOT_STATE,
+  MAX_BOTS_STAGE,
   estimateElo,
   getMaxItemComponents,
   getNbComponentsOnBoard,
   getPowerEvaluation,
   getPowerScore,
-  MAX_BOTS_STAGE,
   rewriteBotRoundsRequiredto1,
   validateBoard
 } from "./bot-logic"
-import TeamBuilder from "./team-builder"
-import "./bot-builder.css"
+import ImportExportBotModal from "./import-export-bot-modal"
 import ScoreIndicator from "./score-indicator"
-import { max, min } from "../../../../../utils/number"
-import store from "../../../stores"
-import { joinLobbyRoom } from "../../lobby"
-import DiscordButton from "../buttons/discord-button"
-import { getAvatarString } from "../../../utils"
-import { PkmIndex } from "../../../../../types/enum/Pokemon"
-import { logger } from "../../../../../utils/logger"
+import TeamBuilder from "./team-builder"
 
 export default function BotBuilder() {
   const { t } = useTranslation()

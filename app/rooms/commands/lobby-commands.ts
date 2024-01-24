@@ -1,40 +1,40 @@
 import { Command } from "@colyseus/command"
-import { Client, logger, matchMaker, RoomListingData } from "colyseus"
 import { ArraySchema } from "@colyseus/schema"
-import { EmbedBuilder, messageLink } from "discord.js"
+import { Client, logger, matchMaker, RoomListingData } from "colyseus"
+import { EmbedBuilder } from "discord.js"
 import { nanoid } from "nanoid"
 import { GameRecord } from "../../models/colyseus-models/game-record"
 import LobbyUser from "../../models/colyseus-models/lobby-user"
+import PokemonConfig from "../../models/colyseus-models/pokemon-config"
 import BannedUser from "../../models/mongo-models/banned-user"
 import { BotV2, IBot } from "../../models/mongo-models/bot-v2"
+import DetailledStatistic from "../../models/mongo-models/detailled-statistic-v2"
 import UserMetadata, {
   IPokemonConfig
 } from "../../models/mongo-models/user-metadata"
-import DetailledStatistic from "../../models/mongo-models/detailled-statistic-v2"
+import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../models/precomputed"
+import { getAvatarSrc, getPortraitSrc } from "../../public/src/utils"
 import {
-  Transfer,
+  CDN_PORTRAIT_URL,
+  Emotion,
+  ISuggestionUser,
   Role,
   Title,
-  Emotion,
-  USERNAME_REGEXP,
-  ISuggestionUser,
-  CDN_PORTRAIT_URL
+  Transfer,
+  USERNAME_REGEXP
 } from "../../types"
-import CustomLobbyRoom from "../custom-lobby-room"
-import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
-import { Language } from "../../types/enum/Language"
-import PokemonConfig from "../../models/colyseus-models/pokemon-config"
-import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../models/precomputed"
 import {
   BoosterRarityProbability,
   EloRank,
   getEmotionCost
 } from "../../types/Config"
 import { LobbyType, Rarity } from "../../types/enum/Game"
+import { Language } from "../../types/enum/Language"
+import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
 import { sum } from "../../utils/array"
-import { pickRandomIn } from "../../utils/random"
-import { getPortraitSrc, getAvatarSrc } from "../../public/src/utils"
 import { cleanProfanity } from "../../utils/profanity-filter"
+import { pickRandomIn } from "../../utils/random"
+import CustomLobbyRoom from "../custom-lobby-room"
 
 export class OnJoinCommand extends Command<
   CustomLobbyRoom,

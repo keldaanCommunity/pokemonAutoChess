@@ -1,6 +1,6 @@
 import fs from "fs"
-import { Synergy } from "../app/types/enum/Synergy"
 import { Pokemon } from "../app/models/colyseus-models/pokemon"
+import { Synergy } from "../app/types/enum/Synergy"
 import { precomputedPokemons } from "./precomputed-pokemons"
 
 console.time("precompute-types")
@@ -16,7 +16,7 @@ precomputedPokemons.forEach((pokemon) => {
   })
 })
 
-for (let s in dataAll) {
+for (const s in dataAll) {
   dataAll[s] = dataAll[s].sort(indexSort).map((p) => p.name)
 }
 

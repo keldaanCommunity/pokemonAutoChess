@@ -1,17 +1,17 @@
 import React from "react"
+import { useTranslation } from "react-i18next"
 import {
   IGameRecord,
   IPokemonRecord
 } from "../../../../../models/colyseus-models/game-record"
-import { EloBadge } from "./elo-badge"
+import { computeSynergies } from "../../../../../models/colyseus-models/synergies"
+import PokemonFactory from "../../../../../models/pokemon-factory"
+import { SynergyTriggers } from "../../../../../types/Config"
+import { Synergy } from "../../../../../types/enum/Synergy"
+import { formatDate } from "../../utils/date"
 import Team from "../after/team"
 import SynergyIcon from "../icons/synergy-icon"
-import { formatDate } from "../../utils/date"
-import { Synergy } from "../../../../../types/enum/Synergy"
-import PokemonFactory from "../../../../../models/pokemon-factory"
-import { computeSynergies } from "../../../../../models/colyseus-models/synergies"
-import { useTranslation } from "react-i18next"
-import { SynergyTriggers } from "../../../../../types/Config"
+import { EloBadge } from "./elo-badge"
 import "./history.css"
 
 export default function History(props: { history: IGameRecord[] }) {

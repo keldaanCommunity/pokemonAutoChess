@@ -1,6 +1,6 @@
-import { Pkm } from "../app/types/enum/Pokemon"
 import fs from "fs"
 import PokemonFactory from "../app/models/pokemon-factory"
+import { Pkm } from "../app/types/enum/Pokemon"
 import { logger } from "../app/utils/logger"
 
 const args = process.argv.slice(2)
@@ -15,9 +15,7 @@ function minifySheet(id) {
     fs.writeFileSync(`sheets/${id}.json`, JSON.stringify(json, null, 0))
     const indexList = JSON.parse(
       fs
-        .readFileSync(
-          "../app/public/src/assets/pokemons/indexList.json"
-        )
+        .readFileSync("../app/public/src/assets/pokemons/indexList.json")
         .toString()
     )
     if (!indexList.includes(id)) {
@@ -25,7 +23,7 @@ function minifySheet(id) {
     }
 
     fs.writeFileSync(
-        "../app/public/src/assets/pokemons/indexList.json",
+      "../app/public/src/assets/pokemons/indexList.json",
       JSON.stringify(indexList, null, 0)
     )
   } catch (error) {

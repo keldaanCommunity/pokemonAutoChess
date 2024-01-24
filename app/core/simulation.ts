@@ -1,10 +1,13 @@
 /* eslint-disable @typescript-eslint/no-extra-semi */
-import Board from "./board"
-import { Schema, MapSchema, type, SetSchema } from "@colyseus/schema"
-import { getStrongestUnit, getUnitScore, PokemonEntity } from "./pokemon-entity"
-import PokemonFactory from "../models/pokemon-factory"
+import { MapSchema, Schema, SetSchema, type } from "@colyseus/schema"
+import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
-import { Berries, CraftableItems, Item } from "../types/enum/Item"
+import ItemFactory from "../models/item-factory"
+import PokemonFactory from "../models/pokemon-factory"
+import { getPath } from "../public/src/pages/utils/utils"
+import GameRoom from "../rooms/game-room"
+import { IPokemon, IPokemonEntity, ISimulation, Transfer } from "../types"
+import { BOARD_HEIGHT, BOARD_WIDTH, ItemStats } from "../types/Config"
 import { Effect } from "../types/enum/Effect"
 import {
   AttackType,
@@ -14,19 +17,16 @@ import {
   Stat,
   Team
 } from "../types/enum/Game"
+import { Berries, CraftableItems, Item } from "../types/enum/Item"
+import { Passive } from "../types/enum/Passive"
+import { Synergy } from "../types/enum/Synergy"
 import { Weather, WeatherEffects } from "../types/enum/Weather"
+import { pickRandomIn, randomBetween, shuffleArray } from "../utils/random"
+import { values } from "../utils/schemas"
+import Board from "./board"
 import Dps from "./dps"
 import DpsHeal from "./dps-heal"
-import ItemFactory from "../models/item-factory"
-import { ISimulation, IPokemonEntity, IPokemon, Transfer } from "../types"
-import { Synergy } from "../types/enum/Synergy"
-import { BOARD_HEIGHT, BOARD_WIDTH, ItemStats } from "../types/Config"
-import { getPath } from "../public/src/pages/utils/utils"
-import GameRoom from "../rooms/game-room"
-import { pickRandomIn, randomBetween, shuffleArray } from "../utils/random"
-import { Passive } from "../types/enum/Passive"
-import Player from "../models/colyseus-models/player"
-import { values } from "../utils/schemas"
+import { PokemonEntity, getStrongestUnit, getUnitScore } from "./pokemon-entity"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") weather: Weather = Weather.NEUTRAL
@@ -646,10 +646,7 @@ export default class Simulation extends Schema implements ISimulation {
         }
       }
 
-      if (        
-        teamEffects.has(Effect.SHADOW_TAG) ||
-        teamEffects.has(Effect.CURSE)
-      ) {
+      if (teamEffects.has(Effect.SHADOW_TAG) || teamEffects.has(Effect.CURSE)) {
         let enemyWithHighestAP: PokemonEntity | undefined = undefined
         let highestAP = 0
         opponentsCursable.forEach((enemy) => {

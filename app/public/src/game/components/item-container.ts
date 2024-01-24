@@ -1,10 +1,10 @@
-import DraggableObject from "./draggable-object"
 import { GameObjects } from "phaser"
-import ItemDetail from "./item-detail"
 import { Item } from "../../../../types/enum/Item"
-import ItemsContainer from "./items-container"
 import { getGameScene } from "../../pages/game"
 import { preferences } from "../../preferences"
+import DraggableObject from "./draggable-object"
+import ItemDetail from "./item-detail"
+import ItemsContainer from "./items-container"
 
 export default class ItemContainer extends DraggableObject {
   detail: ItemDetail | undefined

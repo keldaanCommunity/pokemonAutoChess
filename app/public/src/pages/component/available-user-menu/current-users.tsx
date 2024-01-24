@@ -1,9 +1,9 @@
 import React from "react"
+import { useTranslation } from "react-i18next"
 import { ILobbyUser } from "../../../../../models/colyseus-models/lobby-user"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { searchById } from "../../../stores/NetworkStore"
 import { Avatar } from "../profile/avatar"
-import { useTranslation } from "react-i18next"
 import "./current-users.css"
 
 export default function CurrentUsers() {

@@ -1,4 +1,5 @@
 import React from "react"
+import { useTranslation } from "react-i18next"
 import { IGameUser } from "../../../../../models/colyseus-models/game-user"
 import { Role } from "../../../../../types"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
@@ -6,7 +7,6 @@ import { kick, removeBot } from "../../../stores/NetworkStore"
 import { RemoveButton } from "../buttons/remove-button"
 import { EloBadge } from "../profile/elo-badge"
 import { InlineAvatar } from "../profile/inline-avatar"
-import { useTranslation } from "react-i18next"
 import "./preparation-menu-user.css"
 
 export default function PreparationMenuUser(props: {

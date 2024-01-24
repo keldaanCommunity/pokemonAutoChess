@@ -1,6 +1,6 @@
 import fs from "fs"
-import { Rarity } from "../app/types/enum/Game"
 import { Pokemon } from "../app/models/colyseus-models/pokemon"
+import { Rarity } from "../app/types/enum/Game"
 import { precomputedPokemons } from "./precomputed-pokemons"
 
 console.time("precompute-rarity")
@@ -14,7 +14,7 @@ precomputedPokemons.forEach((pokemon) => {
   data[pokemon.rarity].push(pokemon)
 })
 
-for (let r in data) {
+for (const r in data) {
   data[r] = data[r].sort(indexSort).map((p) => p.name)
 }
 

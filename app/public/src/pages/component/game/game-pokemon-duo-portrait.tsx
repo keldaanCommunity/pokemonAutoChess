@@ -1,15 +1,15 @@
 import React from "react"
 import { Tooltip } from "react-tooltip"
 import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
+import PokemonFactory from "../../../../../models/pokemon-factory"
 import { RarityColor } from "../../../../../types/Config"
-import { getPortraitSrc } from "../../../utils"
-import { GamePokemonDetail } from "./game-pokemon-detail"
-import SynergyIcon from "../icons/synergy-icon"
 import { PkmDuo, PkmDuos } from "../../../../../types/enum/Pokemon"
 import { useAppSelector } from "../../../hooks"
-import PokemonFactory from "../../../../../models/pokemon-factory"
-import "./game-pokemon-portrait.css"
+import { getPortraitSrc } from "../../../utils"
 import { cc } from "../../utils/jsx"
+import SynergyIcon from "../icons/synergy-icon"
+import { GamePokemonDetail } from "./game-pokemon-detail"
+import "./game-pokemon-portrait.css"
 
 export default function GamePokemonDuoPortrait(props: {
   index: number

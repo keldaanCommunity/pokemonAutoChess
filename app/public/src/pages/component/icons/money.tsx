@@ -5,7 +5,9 @@ export function Money(props: { value?: number | string }) {
   return (
     <>
       {props.value && (
-        <span style={{ verticalAlign: "middle", flex: "1" }}>{props.value}</span>
+        <span style={{ verticalAlign: "middle", flex: "1" }}>
+          {props.value}
+        </span>
       )}
       <img className="icon-money" src="/assets/icons/money.svg" alt="$" />
     </>

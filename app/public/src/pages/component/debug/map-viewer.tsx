@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useRef, useState } from "react"
 import Phaser from "phaser"
-import { DebugScene } from "../../../game/scenes/debug-scene"
 import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
+import React, { useCallback, useEffect, useRef, useState } from "react"
 import { DungeonPMDO } from "../../../../../types/Config"
+import { DebugScene } from "../../../game/scenes/debug-scene"
 import "./debug-scene.css"
 
 export default function MapViewerContainer() {

@@ -3,8 +3,8 @@ import { Typeahead } from "react-bootstrap-typeahead"
 
 import { TypeaheadProps } from "./types"
 
-import { Pkm } from "../../../../../types/enum/Pokemon"
 import { useTranslation } from "react-i18next"
+import { Pkm } from "../../../../../types/enum/Pokemon"
 
 export function PokemonTypeahead({ onChange, value }: TypeaheadProps<Pkm>) {
   const pokemonOptions = Object.values(Pkm)

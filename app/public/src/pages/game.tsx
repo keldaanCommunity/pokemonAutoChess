@@ -1,100 +1,100 @@
 import { Client, Room } from "colyseus.js"
 import firebase from "firebase/compat/app"
 import React, { useCallback, useEffect, useRef, useState } from "react"
-import GameState from "../../../rooms/states/game-state"
-import { useAppDispatch, useAppSelector } from "../hooks"
-import {
-  setPokemonCollection,
-  setSynergies,
-  addPlayer,
-  removePlayer,
-  changePlayer,
-  setExperienceManager,
-  setInterest,
-  setItemsProposition,
-  setMapName,
-  setWeather,
-  setMoney,
-  setNoELO,
-  setPhase,
-  setRoundTime,
-  setShop,
-  setShopLocked,
-  setStageLevel,
-  setStreak,
-  setOpponentId,
-  setOpponentName,
-  setOpponentAvatar,
-  setOpponentTitle,
-  setLife,
-  setPlayer,
-  setBoardSize,
-  setCurrentPlayerMoney,
-  setPlayerExperienceManager,
-  setCurrentPlayerAvatar,
-  setCurrentPlayerName,
-  setLoadingProgress,
-  addBlueDpsMeter,
-  changeBlueDpsMeter,
-  addRedDpsMeter,
-  changeRedDpsMeter,
-  addBlueHealDpsMeter,
-  changeBlueHealDpsMeter,
-  addRedHealDpsMeter,
-  changeRedHealDpsMeter,
-  removeRedDpsMeter,
-  removeBlueDpsMeter,
-  removeRedHealDpsMeter,
-  removeBlueHealDpsMeter,
-  leaveGame,
-  setCurrentPlayerTitle,
-  setPokemonProposition,
-  setAdditionalPokemons,
-  setSimulation
-} from "../stores/GameStore"
-import {
-  logIn,
-  joinGame,
-  requestTilemap,
-  setProfile
-} from "../stores/NetworkStore"
-import { FIREBASE_CONFIG } from "./utils/utils"
-import GameContainer from "../game/game-container"
+import { useTranslation } from "react-i18next"
 import { Navigate } from "react-router-dom"
-import GameDpsMeter from "./component/game/game-dps-meter"
-import GameItemsProposition from "./component/game/game-items-proposition"
-import GameStageInfo from "./component/game/game-stage-info"
-import GamePlayers from "./component/game/game-players"
-import GameShop from "./component/game/game-shop"
-import GameSynergies from "./component/game/game-synergies"
-import GameModal from "./component/game/game-modal"
-import GameLoadingScreen from "./component/game/game-loading-screen"
+import { toast } from "react-toastify"
+import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 import AfterGameState from "../../../rooms/states/after-game-state"
+import GameState from "../../../rooms/states/game-state"
 import {
+  IBoardEvent,
+  IDps,
+  IDpsHeal,
   IDragDropCombineMessage,
   IDragDropItemMessage,
   IDragDropMessage,
-  Transfer,
+  IPlayer,
   ISimplePlayer,
   NonFunctionPropNames,
-  IDps,
-  IDpsHeal,
-  IPlayer,
   Role,
-  IBoardEvent
+  Transfer
 } from "../../../types"
-import GameToasts from "./component/game/game-toasts"
-import GamePokemonsProposition from "./component/game/game-pokemons-proposition"
-import { getRankLabel } from "../../../types/strings/Strings"
-import GameScene from "../game/scenes/game-scene"
-import { toast } from "react-toastify"
-import { logger } from "../../../utils/logger"
 import { RequiredStageLevelForXpElligibility } from "../../../types/Config"
-import { useTranslation } from "react-i18next"
-import { MainSidebar } from "./component/main-sidebar/main-sidebar"
-import { localStore, LocalStoreKeys } from "./utils/store"
-import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 import { PokemonActionState } from "../../../types/enum/Game"
+import { getRankLabel } from "../../../types/strings/Strings"
+import { logger } from "../../../utils/logger"
+import GameContainer from "../game/game-container"
+import GameScene from "../game/scenes/game-scene"
+import { useAppDispatch, useAppSelector } from "../hooks"
+import {
+  addBlueDpsMeter,
+  addBlueHealDpsMeter,
+  addPlayer,
+  addRedDpsMeter,
+  addRedHealDpsMeter,
+  changeBlueDpsMeter,
+  changeBlueHealDpsMeter,
+  changePlayer,
+  changeRedDpsMeter,
+  changeRedHealDpsMeter,
+  leaveGame,
+  removeBlueDpsMeter,
+  removeBlueHealDpsMeter,
+  removePlayer,
+  removeRedDpsMeter,
+  removeRedHealDpsMeter,
+  setAdditionalPokemons,
+  setBoardSize,
+  setCurrentPlayerAvatar,
+  setCurrentPlayerMoney,
+  setCurrentPlayerName,
+  setCurrentPlayerTitle,
+  setExperienceManager,
+  setInterest,
+  setItemsProposition,
+  setLife,
+  setLoadingProgress,
+  setMapName,
+  setMoney,
+  setNoELO,
+  setOpponentAvatar,
+  setOpponentId,
+  setOpponentName,
+  setOpponentTitle,
+  setPhase,
+  setPlayer,
+  setPlayerExperienceManager,
+  setPokemonCollection,
+  setPokemonProposition,
+  setRoundTime,
+  setShop,
+  setShopLocked,
+  setSimulation,
+  setStageLevel,
+  setStreak,
+  setSynergies,
+  setWeather
+} from "../stores/GameStore"
+import {
+  joinGame,
+  logIn,
+  requestTilemap,
+  setProfile
+} from "../stores/NetworkStore"
+import GameDpsMeter from "./component/game/game-dps-meter"
+import GameItemsProposition from "./component/game/game-items-proposition"
+import GameLoadingScreen from "./component/game/game-loading-screen"
+import GameModal from "./component/game/game-modal"
+import GamePlayers from "./component/game/game-players"
+import GamePokemonsProposition from "./component/game/game-pokemons-proposition"
+import GameShop from "./component/game/game-shop"
+import GameStageInfo from "./component/game/game-stage-info"
+import GameSynergies from "./component/game/game-synergies"
+import GameToasts from "./component/game/game-toasts"
+import { MainSidebar } from "./component/main-sidebar/main-sidebar"
+import { LocalStoreKeys, localStore } from "./utils/store"
+import { FIREBASE_CONFIG } from "./utils/utils"
 
 let gameContainer: GameContainer
 

@@ -1,8 +1,8 @@
 import React from "react"
-import { PkmIndex } from "../../../../../types/enum/Pokemon"
-import { IItemsStatistic } from "../../../../../models/mongo-models/items-statistic"
-import { getPortraitSrc } from "../../../utils"
 import { useTranslation } from "react-i18next"
+import { IItemsStatistic } from "../../../../../models/mongo-models/items-statistic"
+import { PkmIndex } from "../../../../../types/enum/Pokemon"
+import { getPortraitSrc } from "../../../utils"
 
 export default function ItemStatistic(props: {
   item: IItemsStatistic

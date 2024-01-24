@@ -1,17 +1,17 @@
 import React, { useEffect, useRef, useState } from "react"
+import { useTranslation } from "react-i18next"
+import { Navigate, useNavigate } from "react-router-dom"
+import { logger } from "../../../../../utils/logger"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { getAvatarSrc } from "../../../utils"
+import store from "../../../stores"
 import {
   addBotDatabase,
   deleteBotDatabase,
   requestBotList
 } from "../../../stores/NetworkStore"
-import { useTranslation } from "react-i18next"
-import store from "../../../stores"
+import { getAvatarSrc } from "../../../utils"
 import { joinLobbyRoom } from "../../lobby"
-import { Navigate, useNavigate } from "react-router-dom"
 import { rewriteBotRoundsRequiredto1, validateBot } from "./bot-logic"
-import { logger } from "../../../../../utils/logger"
 import "./bot-manager-panel.css"
 
 export function BotManagerPanel() {
@@ -84,7 +84,7 @@ function BotsList() {
                 <td style={{ color: "#999", fontSize: "80%" }}>{b.id}</td>
                 <td>
                   {(() => {
-                    let errors = validateBot(rewriteBotRoundsRequiredto1(b))
+                    const errors = validateBot(rewriteBotRoundsRequiredto1(b))
                     if (!errors || errors.length === 0)
                       return <span style={{ color: "lime" }}>{t("valid")}</span>
                     else

@@ -1,12 +1,12 @@
-import { Rarity } from "../../../../../types/enum/Game"
 import React from "react"
-import { Tooltip } from "react-tooltip"
-import { useAppSelector } from "../../../hooks"
-import {
-  RarityProbabilityPerLevel,
-  RarityColor
-} from "../../../../../types/Config"
 import { useTranslation } from "react-i18next"
+import { Tooltip } from "react-tooltip"
+import {
+  RarityColor,
+  RarityProbabilityPerLevel
+} from "../../../../../types/Config"
+import { Rarity } from "../../../../../types/enum/Game"
+import { useAppSelector } from "../../../hooks"
 
 export default function GameRarityPercentage() {
   const { t } = useTranslation()

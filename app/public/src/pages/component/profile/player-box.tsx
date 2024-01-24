@@ -1,14 +1,14 @@
 import React from "react"
+import { useTranslation } from "react-i18next"
 import { ILobbyUser } from "../../../../../models/colyseus-models/lobby-user"
+import PokemonFactory from "../../../../../models/pokemon-factory"
+import { Role } from "../../../../../types"
+import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
+import { useAppSelector } from "../../../hooks"
 import { getAvatarSrc } from "../../../utils"
+import SynergyIcon from "../icons/synergy-icon"
 import { EloBadge } from "./elo-badge"
 import { RoleBadge } from "./role-badge"
-import { useTranslation } from "react-i18next"
-import { useAppSelector } from "../../../hooks"
-import { Role } from "../../../../../types"
-import SynergyIcon from "../icons/synergy-icon"
-import PokemonFactory from "../../../../../models/pokemon-factory"
-import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 
 export default function PlayerBox(props: { user: ILobbyUser }) {
   const { t } = useTranslation()

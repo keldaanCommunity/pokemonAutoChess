@@ -1,7 +1,7 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import { Poster } from "./poster"
 import "./patchnotes.css"
+import { Poster } from "./poster"
 
 export default function PatchNotes() {
   const { t } = useTranslation()

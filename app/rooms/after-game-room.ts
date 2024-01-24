@@ -1,12 +1,12 @@
-import { Client, Room } from "colyseus"
-import SimplePlayer from "../models/colyseus-models/simple-player"
 import { Dispatcher } from "@colyseus/command"
-import AfterGameState from "./states/after-game-state"
+import { Client, Room } from "colyseus"
 import admin from "firebase-admin"
+import SimplePlayer from "../models/colyseus-models/simple-player"
 import BannedUser from "../models/mongo-models/banned-user"
-import { logger } from "../utils/logger"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import { Transfer } from "../types"
+import { logger } from "../utils/logger"
+import AfterGameState from "./states/after-game-state"
 
 export default class AfterGameRoom extends Room<AfterGameState> {
   dispatcher: Dispatcher<this>

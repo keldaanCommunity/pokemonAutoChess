@@ -1,16 +1,16 @@
 import React from "react"
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
+import { useTranslation } from "react-i18next"
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
+import WikiAbility from "./wiki-ability"
 import WikiContent from "./wiki-content"
-import WikiStatistic from "./wiki-statistic"
-import WikiTypes from "./wiki-types"
 import WikiFaq from "./wiki-faq"
-import WikiTutorials from "./wiki-tutorials"
 import WikiItemsCheatSheet from "./wiki-items-cheat-sheet"
+import WikiStatistic from "./wiki-statistic"
 import WikiStatus from "./wiki-status"
+import WikiTutorials from "./wiki-tutorials"
+import WikiTypes from "./wiki-types"
 import WikiWeather from "./wiki-weather"
 import "./wiki.css"
-import WikiAbility from "./wiki-ability"
-import { useTranslation } from "react-i18next"
 
 export default function Wiki({ inGame = false }: { inGame: boolean }) {
   const { t } = useTranslation()

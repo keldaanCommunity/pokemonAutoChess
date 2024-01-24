@@ -1,6 +1,6 @@
-import { IPokemonConfig } from "../mongo-models/user-metadata"
-import { Schema, type, ArraySchema } from "@colyseus/schema"
+import { ArraySchema, Schema, type } from "@colyseus/schema"
 import { Emotion } from "../../types"
+import { IPokemonConfig } from "../mongo-models/user-metadata"
 
 export default class PokemonConfig extends Schema implements IPokemonConfig {
   @type("uint16") dust: number

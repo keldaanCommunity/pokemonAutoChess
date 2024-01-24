@@ -1,23 +1,23 @@
 import React from "react"
+import { useTranslation } from "react-i18next"
+import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import PokemonFactory, {
   isAdditionalPick
 } from "../../../../../models/pokemon-factory"
-import { Synergy, SynergyEffects } from "../../../../../types/enum/Synergy"
 import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../../../../models/precomputed"
-import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
 import {
-  SynergyTriggers,
   RarityColor,
-  RarityCost
+  RarityCost,
+  SynergyTriggers
 } from "../../../../../types/Config"
+import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
+import { Synergy, SynergyEffects } from "../../../../../types/enum/Synergy"
 import { useAppSelector } from "../../../hooks"
 import { getPortraitSrc } from "../../../utils"
+import { addIconsToDescription } from "../../utils/descriptions"
+import { cc } from "../../utils/jsx"
 import SynergyIcon from "../icons/synergy-icon"
 import { EffectDescriptionComponent } from "./effect-description"
-import { addIconsToDescription } from "../../utils/descriptions"
-import { useTranslation } from "react-i18next"
-import { cc } from "../../utils/jsx"
-import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 
 export default function SynergyDetailComponent(props: {
   type: Synergy

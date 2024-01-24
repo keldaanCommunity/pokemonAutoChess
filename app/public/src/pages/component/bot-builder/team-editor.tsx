@@ -1,11 +1,16 @@
 import React from "react"
+import { IDetailledPokemon } from "../../../../../models/mongo-models/bot-v2"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
-import { IDetailledPokemon } from "../../../../../models/mongo-models/bot-v2"
 
 export default function TeamEditor(props: {
   board: IDetailledPokemon[]
-  handleEditorClick: (x: number, y: number, rightClick: boolean, itemIndex?: number) => void
+  handleEditorClick: (
+    x: number,
+    y: number,
+    rightClick: boolean,
+    itemIndex?: number
+  ) => void
   handleDrop: (x: number, y: number, e: React.DragEvent) => void
 }) {
   function handleOnDragStart(e: React.DragEvent, p: IDetailledPokemon) {
@@ -63,11 +68,15 @@ export default function TeamEditor(props: {
                         <div className="pokemon-items">
                           {p.items.map((it, j) => {
                             return (
-                              <img key={j} src={"assets/item/" + it + ".png"} onContextMenu={(e) => {
-                                e.preventDefault()
-                                e.stopPropagation()
-                                props.handleEditorClick(x, y, true, j)
-                              }} />
+                              <img
+                                key={j}
+                                src={"assets/item/" + it + ".png"}
+                                onContextMenu={(e) => {
+                                  e.preventDefault()
+                                  e.stopPropagation()
+                                  props.handleEditorClick(x, y, true, j)
+                                }}
+                              />
                             )
                           })}
                         </div>
@@ -79,7 +88,7 @@ export default function TeamEditor(props: {
             )
           })}
         </tbody>
-      </table>      
+      </table>
     </div>
   )
 }

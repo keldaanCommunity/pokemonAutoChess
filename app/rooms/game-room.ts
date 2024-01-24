@@ -1,25 +1,38 @@
-import { Client, Room } from "colyseus"
 import { Dispatcher } from "@colyseus/command"
-import GameState from "./states/game-state"
-import Player from "../models/colyseus-models/player"
 import { MapSchema } from "@colyseus/schema"
+import { Client, Room } from "colyseus"
+import EloEngine from "elo-rank"
+import admin from "firebase-admin"
+import { components } from "../api-v1/openapi"
+import { computeElo } from "../core/elo"
+import { CountEvolutionRule, ItemEvolutionRule } from "../core/evolution-rules"
+import { MiniGame } from "../core/matter/mini-game"
+import { IGameUser } from "../models/colyseus-models/game-user"
+import Player from "../models/colyseus-models/player"
+import { Pokemon } from "../models/colyseus-models/pokemon"
+import BannedUser from "../models/mongo-models/banned-user"
+import { BotV2 } from "../models/mongo-models/bot-v2"
+import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
+import History from "../models/mongo-models/history"
 import UserMetadata, {
   IPokemonConfig
 } from "../models/mongo-models/user-metadata"
-import { BotV2 } from "../models/mongo-models/bot-v2"
+import PokemonFactory from "../models/pokemon-factory"
+import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../models/precomputed"
+import { getAvatarString } from "../public/src/utils"
 import {
-  OnShopCommand,
-  OnSellDropCommand,
-  OnRefreshCommand,
-  OnLockCommand,
-  OnLevelUpCommand,
-  OnUpdateCommand,
-  OnDragDropCommand,
-  OnJoinCommand,
-  OnDragDropItemCommand,
-  OnDragDropCombineCommand,
-  OnPickBerryCommand
-} from "./commands/game-commands"
+  Emotion,
+  IDragDropCombineMessage,
+  IDragDropItemMessage,
+  IDragDropMessage,
+  IGameHistoryPokemonRecord,
+  IGameHistorySimplePlayer,
+  IGameMetadata,
+  IPokemon,
+  Role,
+  Title,
+  Transfer
+} from "../types"
 import {
   AdditionalPicksStages,
   DungeonPMDO,
@@ -30,40 +43,28 @@ import {
   RequiredStageLevelForXpElligibility,
   UniqueShop
 } from "../types/Config"
+import { LobbyType, Rarity } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
-import PokemonFactory from "../models/pokemon-factory"
-import EloEngine from "elo-rank"
-import admin from "firebase-admin"
-import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
-import {
-  Emotion,
-  IDragDropCombineMessage,
-  IDragDropItemMessage,
-  IDragDropMessage,
-  IGameHistoryPokemonRecord,
-  IGameHistorySimplePlayer,
-  IGameMetadata,
-  IPokemon,
-  Transfer
-} from "../types"
 import { Pkm, PkmDuos, PkmProposition } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
-import { Pokemon } from "../models/colyseus-models/pokemon"
-import { IGameUser } from "../models/colyseus-models/game-user"
-import History from "../models/mongo-models/history"
-import { components } from "../api-v1/openapi"
-import { Title, Role } from "../types"
-import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../models/precomputed"
-import BannedUser from "../models/mongo-models/banned-user"
-import { shuffleArray } from "../utils/random"
-import { LobbyType, Rarity } from "../types/enum/Game"
-import { MiniGame } from "../core/matter/mini-game"
-import { logger } from "../utils/logger"
-import { computeElo } from "../core/elo"
-import { getAvatarString } from "../public/src/utils"
-import { keys, values } from "../utils/schemas"
 import { removeInArray } from "../utils/array"
-import { CountEvolutionRule, ItemEvolutionRule } from "../core/evolution-rules"
+import { logger } from "../utils/logger"
+import { shuffleArray } from "../utils/random"
+import { keys, values } from "../utils/schemas"
+import {
+  OnDragDropCombineCommand,
+  OnDragDropCommand,
+  OnDragDropItemCommand,
+  OnJoinCommand,
+  OnLevelUpCommand,
+  OnLockCommand,
+  OnPickBerryCommand,
+  OnRefreshCommand,
+  OnSellDropCommand,
+  OnShopCommand,
+  OnUpdateCommand
+} from "./commands/game-commands"
+import GameState from "./states/game-state"
 
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>

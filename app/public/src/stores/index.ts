@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit"
+import { enableMapSet } from "immer"
+import afterReducer from "./AfterGameStore"
+import gameReducer from "./GameStore"
 import lobbyReducer from "./LobbyStore"
 import networkReducer from "./NetworkStore"
 import preparationReducer from "./PreparationStore"
-import gameReducer from "./GameStore"
-import afterReducer from "./AfterGameStore"
-import { enableMapSet } from "immer"
 
 enableMapSet()
 

@@ -1,12 +1,12 @@
 import React from "react"
+import ReactDOM from "react-dom"
+import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
+import PokemonFactory from "../../../../../models/pokemon-factory"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { useAppSelector } from "../../../hooks"
 import { getPortraitSrc } from "../../../utils"
-import PokemonFactory from "../../../../../models/pokemon-factory"
 import { GamePokemonDetail } from "./game-pokemon-detail"
-import { useTranslation } from "react-i18next"
-import ReactDOM from "react-dom"
 
 export function GameAdditionalPokemons() {
   const { t } = useTranslation()

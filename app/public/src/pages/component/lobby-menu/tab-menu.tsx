@@ -1,12 +1,12 @@
 import React from "react"
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
+import { useTranslation } from "react-i18next"
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
+import "react-tabs/style/react-tabs.css"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { setTabIndex } from "../../../stores/LobbyStore"
 import BotLeaderboard from "./bot-leaderboard"
-import PlayerLeaderboard from "./player-leaderboard"
 import LevelLeaderboard from "./level-leaderboard"
-import { useTranslation } from "react-i18next"
-import "react-tabs/style/react-tabs.css"
+import PlayerLeaderboard from "./player-leaderboard"
 import "./tab-menu.css"
 
 export default function TabMenu() {

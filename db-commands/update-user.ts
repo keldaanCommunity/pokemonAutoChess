@@ -1,7 +1,7 @@
 import dotenv from "dotenv"
 import { connect } from "mongoose"
-import { logger } from "../app/utils/logger"
 import userMetadata from "../app/models/mongo-models/user-metadata"
+import { logger } from "../app/utils/logger"
 
 async function main() {
   dotenv.config()

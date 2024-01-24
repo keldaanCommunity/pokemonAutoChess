@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from "react"
 import Phaser from "phaser"
-import { DebugScene } from "../../../game/scenes/debug-scene"
-import { Pkm } from "../../../../../types/enum/Pokemon"
 import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
+import React, { useCallback, useEffect, useRef, useState } from "react"
 import { Orientation } from "../../../../../types/enum/Game"
+import { Pkm } from "../../../../../types/enum/Pokemon"
 import { Status } from "../../../../../types/enum/Status"
+import { DebugScene } from "../../../game/scenes/debug-scene"
 import "./debug-scene.css"
 
 export default function DebugSceneContainer({

@@ -1,6 +1,6 @@
+import { t } from "i18next"
 import { GameObjects } from "phaser"
 import { transformCoordinate } from "../../pages/utils/utils"
-import { t } from "i18next"
 
 export class SellZone extends GameObjects.Container {
   graphic: Phaser.GameObjects.Graphics

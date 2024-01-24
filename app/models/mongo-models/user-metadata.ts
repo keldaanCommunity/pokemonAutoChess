@@ -1,8 +1,8 @@
 import { Schema, model } from "mongoose"
 import { Emotion, Role, Title } from "../../types"
+import { Language } from "../../types/enum/Language"
 import MapTileset from "../colyseus-models/map-tileset"
 import WinTileset from "../colyseus-models/win-tileset"
-import { Language } from "../../types/enum/Language"
 
 export interface IUserMetadata {
   uid: string

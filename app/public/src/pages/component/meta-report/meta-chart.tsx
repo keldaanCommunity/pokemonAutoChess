@@ -1,10 +1,10 @@
+import * as d3 from "d3"
 import React, { Dispatch, SetStateAction } from "react"
 import { IMeta } from "../../../../../models/mongo-models/meta"
-import * as d3 from "d3"
-import { rankType } from "./team-comp"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { clamp } from "../../../../../utils/number"
 import "./meta-chart.css"
+import { rankType } from "./team-comp"
 
 export function MetaChart(props: {
   meta: IMeta[]

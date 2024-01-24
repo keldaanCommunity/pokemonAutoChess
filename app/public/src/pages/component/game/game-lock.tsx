@@ -1,7 +1,7 @@
 import React from "react"
+import { useTranslation } from "react-i18next"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { lockClick } from "../../../stores/NetworkStore"
-import { useTranslation } from "react-i18next"
 
 export default function GameLock() {
   const { t } = useTranslation()

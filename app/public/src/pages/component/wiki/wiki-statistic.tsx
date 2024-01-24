@@ -1,7 +1,7 @@
-import React from "react"
 import CSS from "csstype"
-import { addIconsToDescription } from "../../utils/descriptions"
+import React from "react"
 import { useTranslation } from "react-i18next"
+import { addIconsToDescription } from "../../utils/descriptions"
 
 const imgStyle: CSS.Properties = {
   width: "64px",

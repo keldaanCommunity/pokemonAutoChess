@@ -1,6 +1,6 @@
+import { marked } from "marked"
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { marked } from "marked"
 import "./poster.css"
 
 export function Poster(props: { version: string }) {

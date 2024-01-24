@@ -1,9 +1,6 @@
 import dotenv from "dotenv"
 import { connect } from "mongoose"
-import UserMetadata, {
-  IPokemonConfig,
-  IUserMetadata
-} from "../app/models/mongo-models/user-metadata"
+import UserMetadata from "../app/models/mongo-models/user-metadata"
 import { logger } from "../app/utils/logger"
 
 const tournamentNames = [

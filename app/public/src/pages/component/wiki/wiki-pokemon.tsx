@@ -1,13 +1,13 @@
 import React, { useMemo } from "react"
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
-import WikiPokemonDetail from "./wiki-pokemon-detail"
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import {
   PRECOMPUTED_POKEMONS_PER_RARITY,
   PRECOMPUTED_POKEMONS_STARS
 } from "../../../../../models/precomputed"
 import { Rarity } from "../../../../../types/enum/Game"
-import { Pkm, PkmIndex, PkmFamily } from "../../../../../types/enum/Pokemon"
+import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
+import WikiPokemonDetail from "./wiki-pokemon-detail"
 
 export default function WikiPokemon(props: { rarity: Rarity }) {
   const pokemons = useMemo(

@@ -1,11 +1,11 @@
 import React from "react"
+import { useTranslation } from "react-i18next"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { RarityColor } from "../../../../../types/Config"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
 import { cc } from "../../utils/jsx"
 import "./booster-card.css"
-import { useTranslation } from "react-i18next"
 
 export function BoosterCard(props: { pkm: string; shards: number }) {
   const { t } = useTranslation()

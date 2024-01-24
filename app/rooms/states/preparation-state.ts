@@ -1,5 +1,5 @@
+import { MapSchema, Schema, type } from "@colyseus/schema"
 import { GameUser } from "../../models/colyseus-models/game-user"
-import { Schema, MapSchema, type } from "@colyseus/schema"
 import { Dungeon, EloRank } from "../../types/Config"
 import { LobbyType } from "../../types/enum/Game"
 

@@ -3,15 +3,15 @@ import ReactDOM from "react-dom"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 
-import { Ability } from "../../../../../types/enum/Ability"
-import { addIconsToDescription } from "../../utils/descriptions"
+import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import PokemonFactory, {
   isAdditionalPick
 } from "../../../../../models/pokemon-factory"
-import { getPortraitSrc } from "../../../utils"
-import { cc } from "../../utils/jsx"
 import { PRECOMPUTED_POKEMONS_PER_ABILITY } from "../../../../../models/precomputed"
-import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
+import { Ability } from "../../../../../types/enum/Ability"
+import { getPortraitSrc } from "../../../utils"
+import { addIconsToDescription } from "../../utils/descriptions"
+import { cc } from "../../utils/jsx"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
 
 export default function WikiAbility() {

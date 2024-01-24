@@ -1,21 +1,21 @@
 import React, { useEffect, useMemo, useState } from "react"
-import { Item } from "../../../../../types/enum/Item"
-import { Pkm } from "../../../../../types/enum/Pokemon"
-import PokemonFactory from "../../../../../models/pokemon-factory"
-import SelectedEntity from "./selected-entity"
-import ItemPicker from "./item-picker"
-import PokemonPicker from "./pokemon-picker"
-import TeamEditor from "./team-editor"
+import { computeSynergies } from "../../../../../models/colyseus-models/synergies"
 import {
   IBot,
   IDetailledPokemon
 } from "../../../../../models/mongo-models/bot-v2"
+import PokemonFactory from "../../../../../models/pokemon-factory"
+import { Emotion, PkmWithConfig } from "../../../../../types"
+import { Item } from "../../../../../types/enum/Item"
+import { Pkm } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
-import { PkmWithConfig, Emotion } from "../../../../../types"
 import Synergies from "../synergy/synergies"
-import { computeSynergies } from "../../../../../models/colyseus-models/synergies"
 import BotAvatar from "./bot-avatar"
+import ItemPicker from "./item-picker"
+import PokemonPicker from "./pokemon-picker"
+import SelectedEntity from "./selected-entity"
 import "./team-builder.css"
+import TeamEditor from "./team-editor"
 
 export default function TeamBuilder(props: {
   bot?: IBot

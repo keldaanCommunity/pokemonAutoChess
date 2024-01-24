@@ -1,13 +1,13 @@
 /* eslint-disable no-unsafe-optional-chaining */
-import Jimp from "jimp"
 import { XMLParser } from "fast-xml-parser"
 import fs from "fs"
 import gracefulFs from "graceful-fs"
-import { AnimationConfig, Pkm } from "../app/types/enum/Pokemon"
+import Jimp from "jimp"
 import PokemonFactory from "../app/models/pokemon-factory"
-import { PokemonTint, SpriteType } from "../app/types/enum/Game"
-import { logger } from "../app/utils/logger"
 import { AnimationType } from "../app/types/Animation"
+import { PokemonTint, SpriteType } from "../app/types/enum/Game"
+import { AnimationConfig, Pkm } from "../app/types/enum/Pokemon"
+import { logger } from "../app/utils/logger"
 
 gracefulFs.gracefulify(fs)
 const args = process.argv.slice(2)

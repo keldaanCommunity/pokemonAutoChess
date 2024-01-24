@@ -1,7 +1,7 @@
-import tracker from "../app/public/dist/client/assets/pokemons/tracker.json"
 import fs from "fs"
-import { mapToObj } from "../app/utils/map"
 import { PokemonCredits } from "../app/core/credits"
+import tracker from "../app/public/dist/client/assets/pokemons/tracker.json"
+import { mapToObj } from "../app/utils/map"
 import { precomputedPokemons } from "./precomputed-pokemons"
 
 console.time("precompute-credits")

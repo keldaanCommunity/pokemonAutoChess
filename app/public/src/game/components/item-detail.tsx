@@ -1,12 +1,12 @@
 import { GameObjects } from "phaser"
 import React, { useMemo } from "react"
 import ReactDOM from "react-dom/client"
+import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import { ItemStats } from "../../../../types/Config"
+import { Stat } from "../../../../types/enum/Game"
 import { Item, ItemRecipe } from "../../../../types/enum/Item"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
-import { useTranslation } from "react-i18next"
-import { Stat } from "../../../../types/enum/Game"
 import "./item-detail.css"
 
 export function ItemDetailTooltip({
@@ -24,14 +24,14 @@ export function ItemDetailTooltip({
   )
 
   const formatStat = (stat: Stat, value: number) => {
-    if([Stat.CRIT_DAMAGE].includes(stat)){
+    if ([Stat.CRIT_DAMAGE].includes(stat)) {
       value = Math.round(value * 100)
     }
-    let output = value.toString();
+    let output = value.toString()
     if ([Stat.ATK_SPEED, Stat.CRIT_CHANCE, Stat.CRIT_DAMAGE].includes(stat)) {
-      output += '%'
+      output += "%"
     }
-    if(value >=0){
+    if (value >= 0) {
       output = "+" + output
     }
     return output

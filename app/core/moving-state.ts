@@ -1,17 +1,23 @@
+import Player from "../models/colyseus-models/player"
+import { Transfer } from "../types"
+import { Effect } from "../types/enum/Effect"
+import { BoardEvent, PokemonActionState } from "../types/enum/Game"
+import { Passive } from "../types/enum/Passive"
+import { Synergy } from "../types/enum/Synergy"
+import { Weather } from "../types/enum/Weather"
+import { distanceC } from "../utils/distance"
 import Board from "./board"
 import { PokemonEntity } from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
-import { BoardEvent, PokemonActionState } from "../types/enum/Game"
-import { Synergy } from "../types/enum/Synergy"
-import { distanceC } from "../utils/distance"
-import { Weather } from "../types/enum/Weather"
-import { Passive } from "../types/enum/Passive"
-import { Effect } from "../types/enum/Effect"
-import { Transfer } from "../types"
-import Player from "../models/colyseus-models/player"
 
 export default class MovingState extends PokemonState {
-  update(pokemon: PokemonEntity, dt: number, board: Board, weather: string, player: Player) {
+  update(
+    pokemon: PokemonEntity,
+    dt: number,
+    board: Board,
+    weather: string,
+    player: Player
+  ) {
     super.update(pokemon, dt, board, weather, player)
     if (pokemon.cooldown <= 0) {
       pokemon.cooldown = weather === Weather.SNOW ? 666 : 500

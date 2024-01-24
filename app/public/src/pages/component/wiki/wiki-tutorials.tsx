@@ -1,5 +1,5 @@
+import React from "react"
 import { useTranslation } from "react-i18next"
-import React, { Component } from "react"
 
 export default function WikiTutorials() {
   const { t } = useTranslation()

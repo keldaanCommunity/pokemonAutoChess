@@ -1,10 +1,15 @@
 import React, { useState } from "react"
 import ReactDOM from "react-dom"
-import { Tooltip } from "react-tooltip"
-import { ArtificialItems, BasicItems, Berries, Item, ItemRecipe } from "../../../../../types/enum/Item"
-import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { useTranslation } from "react-i18next"
-
+import { Tooltip } from "react-tooltip"
+import {
+  ArtificialItems,
+  BasicItems,
+  Berries,
+  Item,
+  ItemRecipe
+} from "../../../../../types/enum/Item"
+import { ItemDetailTooltip } from "../../../game/components/item-detail"
 
 export default function WikiItemsCheatSheet() {
   const [itemHovered, setItemHovered] = useState<Item>()

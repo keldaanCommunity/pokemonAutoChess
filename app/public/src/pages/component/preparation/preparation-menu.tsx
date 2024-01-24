@@ -1,32 +1,32 @@
+import { Room } from "colyseus.js"
+import firebase from "firebase/compat/app"
 import React, { useEffect, useState } from "react"
-import PreparationMenuUser from "./preparation-menu-user"
+import { useTranslation } from "react-i18next"
+import { GADGETS } from "../../../../../core/gadgets"
 import { IGameUser } from "../../../../../models/colyseus-models/game-user"
+import { IBot } from "../../../../../models/mongo-models/bot-v2"
+import PreparationState from "../../../../../rooms/states/preparation-state"
+import { Role } from "../../../../../types"
+import { BotDifficulty, LobbyType } from "../../../../../types/enum/Game"
+import { throttle } from "../../../../../utils/function"
+import { setTitleNotificationIcon } from "../../../../../utils/window"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import {
   addBot,
-  listBots,
   changeRoomName,
   changeRoomPassword,
+  deleteRoom,
   gameStartRequest,
-  toggleReady,
+  listBots,
   toggleEloRoom,
-  deleteRoom
+  toggleReady
 } from "../../../stores/NetworkStore"
-import firebase from "firebase/compat/app"
-import { Room } from "colyseus.js"
-import { BotDifficulty, LobbyType } from "../../../../../types/enum/Game"
-import PreparationState from "../../../../../rooms/states/preparation-state"
-import "./preparation-menu.css"
 import { cc } from "../../utils/jsx"
-import { throttle } from "../../../../../utils/function"
-import { Role } from "../../../../../types"
-import { useTranslation } from "react-i18next"
 import { Checkbox } from "../checkbox/checkbox"
-import { GADGETS } from "../../../../../core/gadgets"
 import { BotSelectModal } from "./bot-select-modal"
-import { IBot } from "../../../../../models/mongo-models/bot-v2"
 import { MapSelectModal } from "./map-select-modal"
-import { setTitleNotificationIcon } from "../../../../../utils/window"
+import PreparationMenuUser from "./preparation-menu-user"
+import "./preparation-menu.css"
 
 export default function PreparationMenu() {
   const { t } = useTranslation()
@@ -69,15 +69,15 @@ export default function PreparationMenu() {
   )
 
   const isReady = users.find((user) => user.id === uid)?.ready
-  const nbUsersReady = users.filter(user => user.ready).length
+  const nbUsersReady = users.filter((user) => user.ready).length
   const allUsersReady = users.every((user) => user.ready)
 
-  useEffect(() => {    
-    if(allUsersReady) {
+  useEffect(() => {
+    if (allUsersReady) {
       setTitleNotificationIcon("🟢")
-    } else if(nbUsersReady === 0){
+    } else if (nbUsersReady === 0) {
       setTitleNotificationIcon("🔴")
-    } else if(nbUsersReady === users.length - 1){
+    } else if (nbUsersReady === users.length - 1) {
       setTitleNotificationIcon("🟡")
     } else {
       setTitleNotificationIcon("🟠")
@@ -88,7 +88,7 @@ export default function PreparationMenu() {
   const isElligibleForELO = users.filter((u) => !u.isBot).length >= 2
   const averageElo = Math.round(
     humans.reduce((acc, u) => acc + u.elo, 0) / humans.length
-  )  
+  )
 
   function makePrivate() {
     if (password === null) {
@@ -140,7 +140,8 @@ export default function PreparationMenu() {
       </p>
     ) : isElligibleForELO ? (
       <p>
-        {t("elligible_elo_hint")} {t("average_elo")}: {averageElo} ; {t("GLHF")}{" !"}
+        {t("elligible_elo_hint")} {t("average_elo")}: {averageElo} ; {t("GLHF")}
+        {" !"}
       </p>
     ) : users.length > 1 ? (
       <p>{t("not_elligible_elo_hint")}</p>

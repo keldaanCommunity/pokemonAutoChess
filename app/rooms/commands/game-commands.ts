@@ -1,60 +1,63 @@
-import { Client, updateLobby } from "colyseus"
 import { Command } from "@colyseus/command"
 import { MapSchema } from "@colyseus/schema"
+import { Client, updateLobby } from "colyseus"
 import { nanoid } from "nanoid"
 
-import {
-  ItemProposalStages,
-  ItemCarouselStages,
-  StageDuration,
-  AdditionalPicksStages,
-  PortalCarouselStages,
-  MAX_PLAYERS_PER_LOBBY,
-  ITEM_CAROUSEL_BASE_DURATION,
-  PORTAL_CAROUSEL_BASE_DURATION,
-  FIGHTING_PHASE_DURATION
-} from "../../types/Config"
-import {
-  Item,
-  ItemRecipe,
-  BasicItems,
-  Berries,
-  SynergyGivenByItem,
-  SynergyItems
-} from "../../types/enum/Item"
-import { BattleResult } from "../../types/enum/Game"
-import Player from "../../models/colyseus-models/player"
-import PokemonFactory from "../../models/pokemon-factory"
-import { PVEStages } from "../../models/pve-stages"
-import GameRoom from "../game-room"
-import { Effect } from "../../types/enum/Effect"
-import { Title } from "../../types"
-import { GamePhaseState, PokemonActionState } from "../../types/enum/Game"
-import {
-  IDragDropMessage,
-  IDragDropItemMessage,
-  IDragDropCombineMessage,
-  IClient,
-  IPokemonEntity,
-  Transfer
-} from "../../types"
-import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
-import { chance, pickNRandomIn, pickRandomIn } from "../../utils/random"
-import { logger } from "../../utils/logger"
-import { Passive } from "../../types/enum/Passive"
-import { getAvatarString } from "../../public/src/utils"
-import { max } from "../../utils/number"
-import { getWeather } from "../../utils/weather"
-import Simulation from "../../core/simulation"
-import { selectMatchups } from "../../core/matchmaking"
-import { resetArraySchema, values } from "../../utils/schemas"
 import {
   CountEvolutionRule,
   HatchEvolutionRule,
   MoneyEvolutionRule,
   TurnEvolutionRule
 } from "../../core/evolution-rules"
+import { selectMatchups } from "../../core/matchmaking"
+import Simulation from "../../core/simulation"
+import Player from "../../models/colyseus-models/player"
+import PokemonFactory from "../../models/pokemon-factory"
+import { PVEStages } from "../../models/pve-stages"
+import { getAvatarString } from "../../public/src/utils"
+import {
+  IClient,
+  IDragDropCombineMessage,
+  IDragDropItemMessage,
+  IDragDropMessage,
+  IPokemonEntity,
+  Title,
+  Transfer
+} from "../../types"
+import {
+  AdditionalPicksStages,
+  FIGHTING_PHASE_DURATION,
+  ITEM_CAROUSEL_BASE_DURATION,
+  ItemCarouselStages,
+  ItemProposalStages,
+  MAX_PLAYERS_PER_LOBBY,
+  PORTAL_CAROUSEL_BASE_DURATION,
+  PortalCarouselStages,
+  StageDuration
+} from "../../types/Config"
+import { Effect } from "../../types/enum/Effect"
+import {
+  BattleResult,
+  GamePhaseState,
+  PokemonActionState
+} from "../../types/enum/Game"
+import {
+  BasicItems,
+  Berries,
+  Item,
+  ItemRecipe,
+  SynergyGivenByItem,
+  SynergyItems
+} from "../../types/enum/Item"
+import { Passive } from "../../types/enum/Passive"
+import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Synergy, SynergyEffects } from "../../types/enum/Synergy"
+import { logger } from "../../utils/logger"
+import { max } from "../../utils/number"
+import { chance, pickNRandomIn, pickRandomIn } from "../../utils/random"
+import { resetArraySchema, values } from "../../utils/schemas"
+import { getWeather } from "../../utils/weather"
+import GameRoom from "../game-room"
 
 export class OnShopCommand extends Command<
   GameRoom,

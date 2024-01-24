@@ -1,8 +1,11 @@
 import React, { useEffect, useMemo, useRef, useState } from "react"
+import { IChatV2 } from "../../../../../types"
+import {
+  clearTitleNotificationIcon,
+  setTitleNotificationIcon
+} from "../../../../../utils/window"
 import { useAppSelector } from "../../../hooks"
 import ChatMessage from "./chat-message"
-import { IChatV2 } from "../../../../../types"
-import { clearTitleNotificationIcon, setTitleNotificationIcon } from "../../../../../utils/window"
 
 export default function ChatHistory(props: { source: string }) {
   const messages: IChatV2[] = useAppSelector(
@@ -68,4 +71,3 @@ export default function ChatHistory(props: { source: string }) {
     </div>
   )
 }
-

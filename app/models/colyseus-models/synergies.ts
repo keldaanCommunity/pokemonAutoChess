@@ -6,7 +6,6 @@ import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmFamily } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { values } from "../../utils/schemas"
-import { Pokemon } from "./pokemon"
 
 export default class Synergies
   extends MapSchema<number, Synergy>

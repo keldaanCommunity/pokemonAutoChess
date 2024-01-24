@@ -1,7 +1,7 @@
 import React from "react"
+import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import { useAppSelector } from "../../../hooks"
-import { useTranslation } from "react-i18next"
 
 export function GameTeamInfo() {
   const { t } = useTranslation()

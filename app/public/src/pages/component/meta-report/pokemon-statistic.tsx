@@ -1,15 +1,15 @@
 import React from "react"
-import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
-import { IPokemonsStatistic } from "../../../../../models/mongo-models/pokemons-statistic"
 import { useTranslation } from "react-i18next"
-import { getPortraitSrc } from "../../../utils"
-import { Synergy } from "../../../../../types/enum/Synergy"
+import { IPokemonsStatistic } from "../../../../../models/mongo-models/pokemons-statistic"
 import {
-  PRECOMPUTED_POKEMONS_PER_TYPE,
   PRECOMPUTED_POKEMONS_PER_RARITY,
+  PRECOMPUTED_POKEMONS_PER_TYPE,
   PRECOMPUTED_POKEMONS_STARS
 } from "../../../../../models/precomputed"
 import { Rarity } from "../../../../../types/enum/Game"
+import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
+import { Synergy } from "../../../../../types/enum/Synergy"
+import { getPortraitSrc } from "../../../utils"
 
 export default function PokemonStatistic(props: {
   pokemons: IPokemonsStatistic[]

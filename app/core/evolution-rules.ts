@@ -1,12 +1,12 @@
-import { Pkm } from "../types/enum/Pokemon"
-import { Pokemon } from "../models/colyseus-models/pokemon"
 import Player from "../models/colyseus-models/player"
-import { values } from "../utils/schemas"
+import { Pokemon } from "../models/colyseus-models/pokemon"
 import PokemonFactory from "../models/pokemon-factory"
-import { BasicItems, Item } from "../types/enum/Item"
 import { EvolutionTime } from "../types/Config"
 import { PokemonActionState } from "../types/enum/Game"
+import { BasicItems, Item } from "../types/enum/Item"
+import { Pkm } from "../types/enum/Pokemon"
 import { logger } from "../utils/logger"
+import { values } from "../utils/schemas"
 
 type DivergentEvolution = (
   pokemon: Pokemon,

@@ -1,7 +1,7 @@
 import { RoomAvailable } from "colyseus.js"
 import React from "react"
-import { IGameMetadata } from "../../../../../types"
 import { useTranslation } from "react-i18next"
+import { IGameMetadata } from "../../../../../types"
 import { useAppSelector } from "../../../hooks"
 import { cc } from "../../utils/jsx"
 import "./room-item.css"
