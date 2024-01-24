@@ -527,7 +527,7 @@ export default class Simulation extends Schema implements ISimulation {
               pokemon.positionY
             )
             if (value) {
-              value.addAttackSpeed(25)
+              value.addAttackSpeed(20)
             }
           })
         }
@@ -985,14 +985,14 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.MOUTAIN_RESISTANCE:
           if (types.has(Synergy.ROCK)) {
-            pokemon.addDefense(10)
+            pokemon.addDefense(15)
             pokemon.effects.add(Effect.MOUTAIN_RESISTANCE)
           }
           break
 
         case Effect.DIAMOND_STORM:
           if (types.has(Synergy.ROCK)) {
-            pokemon.addDefense(20)
+            pokemon.addDefense(30)
             pokemon.effects.add(Effect.DIAMOND_STORM)
           }
           break
@@ -1030,7 +1030,7 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.CHILLY:
           pokemon.effects.add(Effect.FROSTY)
-          pokemon.addSpecialDefense(3)
+          pokemon.addSpecialDefense(2)
           break
 
         case Effect.FROSTY:
@@ -1040,12 +1040,12 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.FREEZING:
           pokemon.effects.add(Effect.FROSTY)
-          pokemon.addSpecialDefense(12)
+          pokemon.addSpecialDefense(20)
           break
 
         case Effect.SHEER_COLD:
           pokemon.effects.add(Effect.SHEER_COLD)
-          pokemon.addSpecialDefense(24)
+          pokemon.addSpecialDefense(30)
           break
 
         case Effect.POISONOUS:
