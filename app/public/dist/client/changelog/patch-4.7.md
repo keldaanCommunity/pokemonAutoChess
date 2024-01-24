@@ -17,7 +17,7 @@
 - Rework Nightmare (Ghastly): Silence all enemy Pokémon for 1.5/3/8 seconds. Any opponent asleep, flinched or already silenced take 50 special damage.
 - Onix: removed Steel, buffed HP ~~150~~ 200 ; Steelix still has Steel style
 - New ability for Smoochum and Jynx: Lovely kiss: make the target sleep for 2/4 seconds (scales with AP)
-- Buff Happiny PP ~~130~~ 120
+- Buff Happiny line PP ~~130~~ 120 Spe def ~~5/6/8~~ 5/10/15
 - Confusion (Meditite) now also cause Silence in addition to Confusion
 - Nerf Charge (Zapdos): increase attack & attack speed by ~~30~~ 25%
 - Leaf Stone (Kartana) now deals true damage
@@ -33,8 +33,6 @@
 - Nerf Dragon Darts (Dreepy line): ~~10/25/50~~ 10/20/40 special damage
 - Adapted Magic Bounce (Natu): fixed duration to 5 seconds, replace 40 flat damage by 50/100% of damage reflected, can now deal and reflect ability crits
 - Genesect lock-on ability now deals **additional** true damage
-- Buff Happiny line: Spe def ~~5/6/8~~ 5/10/15
-- Ditto can now fight ! It's not very strong though...
 - New ability for Staryu/Starmie: Psybeam: Deal 30/60/100 special damage to all enemy Pokémon behind the target with 50% chance to make them confused for 4 seconds
 - Solosis ability is renamed Psychic and has a new visual effect
 - Duskull/Spiritomb ability is renamed Shadow ball and now lowers special defense instead of defense
@@ -56,7 +54,14 @@
 
 - Nerf Light 2 Shining ray ~~30~~ 25% Attack and AP
 - Changed Light 4 Eternal light: increase ~~Attack Speed by 30%~~ Def & SpeDef by 50%
+- Buff Rock: ~~5/10/20~~ 5/15/30 Defense
 - Buff Poison: ~~30/50/70~~ 33/66/100% chance to poison on hit
+
+- Changes to Ice: only Ice pokemons have a chance to freeze for 2 seconds after a hit, and give Special Defense to all your team
+  (2) Chilly: +2 Special Defense, 20% chance to freeze
+  (4) Frosty: +5 Special Defense, 30% chance to Freeze
+  (6) Freezing: +15 Special Defense, 40% chance to freeze
+  (8) Sheer Cold: +30 Special Defense, 50% chance to Freeze
 
 # Changes to Items
 
@@ -84,6 +89,7 @@ Base components stats have been reviewed to be closer to each other:
 - Play a sound when game starts for players who tabbed out during loading
 - Item meta report is now organized in tabs
 - Added favorite synergies and units in player card based on game history
+- Many ability animations have been reworked
 
 # Bugfix
 
