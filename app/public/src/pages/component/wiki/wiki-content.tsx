@@ -1,6 +1,6 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { RarityColor } from "../../../../../types/Config"
 import { Rarity } from "../../../../../types/enum/Game"
 import WikiPokemon from "./wiki-pokemon"

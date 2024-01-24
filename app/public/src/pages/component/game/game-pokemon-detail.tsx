@@ -1,5 +1,7 @@
 import React, { useMemo } from "react"
+import { useTranslation } from "react-i18next"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
+import { Emotion } from "../../../../../types"
 import { RarityColor } from "../../../../../types/Config"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Stat } from "../../../../../types/enum/Game"
@@ -8,8 +10,6 @@ import { getPortraitSrc } from "../../../utils"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { AbilityTooltip } from "../ability/ability-tooltip"
 import SynergyIcon from "../icons/synergy-icon"
-import { useTranslation } from "react-i18next"
-import { Emotion } from "../../../../../types"
 import "./game-pokemon-detail.css"
 
 export function GamePokemonDetail(props: {

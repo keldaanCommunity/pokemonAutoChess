@@ -1,22 +1,20 @@
 import React from "react"
+import { useTranslation } from "react-i18next"
 import PokemonFactory from "../../../../../models/pokemon-factory"
-import Credits from "./Credits"
 import { RarityColor } from "../../../../../types/Config"
+import { Ability } from "../../../../../types/enum/Ability"
+import { Stat } from "../../../../../types/enum/Game"
+import { Passive } from "../../../../../types/enum/Passive"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
-import SynergyIcon from "../icons/synergy-icon"
-import { AbilityTooltip } from "../ability/ability-tooltip"
-import { Stat } from "../../../../../types/enum/Game"
-import { GamePokemonDetail } from "../game/game-pokemon-detail"
-import { Ability } from "../../../../../types/enum/Ability"
-import { Passive } from "../../../../../types/enum/Passive"
 import { addIconsToDescription } from "../../utils/descriptions"
-import { useTranslation } from "react-i18next"
+import { AbilityTooltip } from "../ability/ability-tooltip"
+import { GamePokemonDetail } from "../game/game-pokemon-detail"
+import SynergyIcon from "../icons/synergy-icon"
+import Credits from "./Credits"
 import "./wiki-pokemon-detail.css"
 
-export default function WikiPokemonDetail(props: {
-  pokemon: Pkm
-}) {
+export default function WikiPokemonDetail(props: { pokemon: Pkm }) {
   const { t } = useTranslation()
   const pokemon = PokemonFactory.createPokemonFromName(props.pokemon)
 
@@ -83,9 +81,9 @@ export default function WikiPokemonDetail(props: {
 
         <dt>{t("portrait_credit")}</dt>
         <Credits for="portrait" index={pokemon.index} />
-        
+
         <dt>{t("sprite_credit")}</dt>
-        <Credits for="sprite"  index={pokemon.index} />
+        <Credits for="sprite" index={pokemon.index} />
       </dl>
       <dl>
         {[Stat.HP, Stat.PP, Stat.RANGE, Stat.ATK, Stat.DEF, Stat.SPE_DEF].map(

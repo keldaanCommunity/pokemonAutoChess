@@ -1,18 +1,18 @@
 import React, { Dispatch, SetStateAction, useState } from "react"
 import Modal from "react-bootstrap/Modal"
+import { useTranslation } from "react-i18next"
+import { Language } from "../../../../../types/enum/Language"
+import { LanguageNames } from "../../../../dist/client/locales"
+import { useAppDispatch } from "../../../hooks"
 import {
   IPreferencesState,
   preferences as initialPreferences,
   savePreferences
 } from "../../../preferences"
-import { getGameScene } from "../../game"
-import { useTranslation } from "react-i18next"
-import { useAppDispatch } from "../../../hooks"
-import { Language } from "../../../../../types/enum/Language"
-import { LanguageNames } from "../../../../dist/client/locales"
 import { selectLanguage } from "../../../stores/NetworkStore"
-import { Page } from "../main-sidebar"
+import { getGameScene } from "../../game"
 import { Checkbox } from "../checkbox/checkbox"
+import { Page } from "../main-sidebar/main-sidebar"
 
 import "./game-options-modal.css"
 

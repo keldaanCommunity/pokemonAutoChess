@@ -1,8 +1,8 @@
 import React from "react"
+import { useTranslation } from "react-i18next"
 import { useAppDispatch } from "../../../hooks"
 import { refreshClick } from "../../../stores/NetworkStore"
 import { Money } from "../icons/money"
-import { useTranslation } from "react-i18next"
 
 export default function GameRefresh() {
   const { t } = useTranslation()

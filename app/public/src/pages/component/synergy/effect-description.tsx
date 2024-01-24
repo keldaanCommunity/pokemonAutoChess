@@ -1,7 +1,7 @@
 import React from "react"
+import { useTranslation } from "react-i18next"
 import { Effect } from "../../../../../types/enum/Effect"
 import { addIconsToDescription } from "../../utils/descriptions"
-import { useTranslation } from "react-i18next"
 
 export function EffectDescriptionComponent(props: { effect: Effect }) {
   const { t } = useTranslation()

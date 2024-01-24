@@ -1,20 +1,15 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 import {
-  Schema,
-  type,
-  MapSchema,
   ArraySchema,
-  CollectionSchema
+  CollectionSchema,
+  MapSchema,
+  Schema,
+  type
 } from "@colyseus/schema"
-import { Pokemon } from "./pokemon"
-import Synergies, { computeSynergies } from "./synergies"
-import ExperienceManager from "./experience-manager"
-import { BattleResult } from "../../types/enum/Game"
+import GameState from "../../rooms/states/game-state"
 import { IPlayer, Role, Title } from "../../types"
-import PokemonConfig from "./pokemon-config"
-import { IPokemonConfig } from "../mongo-models/user-metadata"
-import PokemonCollection from "./pokemon-collection"
-import HistoryItem from "./history-item"
+import { SynergyTriggers } from "../../types/Config"
+import { BattleResult } from "../../types/enum/Game"
 import {
   ArtificialItems,
   Berries,
@@ -22,14 +17,19 @@ import {
   SynergyGivenByItem
 } from "../../types/enum/Item"
 import { Pkm, PkmProposition } from "../../types/enum/Pokemon"
-import { Weather } from "../../types/enum/Weather"
-import PokemonFactory from "../pokemon-factory"
-import { Effects } from "../effects"
-import { values } from "../../utils/schemas"
-import { pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { Synergy } from "../../types/enum/Synergy"
-import { SynergyTriggers } from "../../types/Config"
-import GameState from "../../rooms/states/game-state"
+import { Weather } from "../../types/enum/Weather"
+import { pickNRandomIn, pickRandomIn } from "../../utils/random"
+import { values } from "../../utils/schemas"
+import { Effects } from "../effects"
+import { IPokemonConfig } from "../mongo-models/user-metadata"
+import PokemonFactory from "../pokemon-factory"
+import ExperienceManager from "./experience-manager"
+import HistoryItem from "./history-item"
+import { Pokemon } from "./pokemon"
+import PokemonCollection from "./pokemon-collection"
+import PokemonConfig from "./pokemon-config"
+import Synergies, { computeSynergies } from "./synergies"
 
 export default class Player extends Schema implements IPlayer {
   @type("string") id: string

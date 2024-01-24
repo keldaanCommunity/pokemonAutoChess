@@ -1,7 +1,7 @@
 import React from "react"
+import { useTranslation } from "react-i18next"
 import { Status } from "../../../../../types/enum/Status"
 import { addIconsToDescription } from "../../utils/descriptions"
-import { useTranslation } from "react-i18next"
 
 export default function WikiStatus() {
   const { t } = useTranslation()

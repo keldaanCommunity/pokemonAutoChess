@@ -1,7 +1,7 @@
 import { Command } from "@colyseus/command"
 import { GameUser } from "../../models/colyseus-models/game-user"
 import UserMetadata from "../../models/mongo-models/user-metadata"
-import { Emotion, Transfer } from "../../types"
+import { Transfer } from "../../types"
 import { logger } from "../../utils/logger"
 
 export class OnJoinCommand extends Command {

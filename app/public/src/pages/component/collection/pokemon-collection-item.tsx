@@ -1,11 +1,11 @@
 import React, { Dispatch, SetStateAction } from "react"
-import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../../models/precomputed"
 import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
-import { Pkm } from "../../../../../types/enum/Pokemon"
+import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../../models/precomputed"
+import { getEmotionCost } from "../../../../../types/Config"
 import { Emotion } from "../../../../../types/enum/Emotion"
+import { Pkm } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
 import { cc } from "../../utils/jsx"
-import { getEmotionCost } from "../../../../../types/Config"
 import "./pokemon-collection-item.css"
 
 export default function PokemonCollectionItem(props: {

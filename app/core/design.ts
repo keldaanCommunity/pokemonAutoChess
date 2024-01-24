@@ -1,8 +1,8 @@
-import { TerrainType, Mask, DungeonPMDO } from "../types/Config"
-import Tileset, { TilesetTiled } from "./tileset"
-import Terrain from "./terrain"
-import Masker from "./masker"
+import { DungeonPMDO, Mask, TerrainType } from "../types/Config"
 import { logger } from "../utils/logger"
+import Masker from "./masker"
+import Terrain from "./terrain"
+import Tileset, { TilesetTiled } from "./tileset"
 
 export type LayerTiled = {
   data: number[]

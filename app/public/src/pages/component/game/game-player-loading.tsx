@@ -1,12 +1,12 @@
 import React from "react"
-import { IPlayer } from "../../../../../types"
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar"
 import "react-circular-progressbar/dist/styles.css"
-import { getAvatarSrc } from "../../../utils"
-import "./game-player-loading.css"
-import { cc } from "../../utils/jsx"
-import { getGameScene } from "../../game"
 import { useTranslation } from "react-i18next"
+import { IPlayer } from "../../../../../types"
+import { getAvatarSrc } from "../../../utils"
+import { getGameScene } from "../../game"
+import { cc } from "../../utils/jsx"
+import "./game-player-loading.css"
 
 export default function GamePlayerLoadingBar(props: { player: IPlayer }) {
   const { t } = useTranslation()

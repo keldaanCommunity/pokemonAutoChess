@@ -1,7 +1,7 @@
-import translation from "../../app/public/dist/client/locales/en/translation.json";
+import translation from "../../app/public/dist/client/locales/en/translation.json"
 
 const resources = {
   translation
-} as const;
+} as const
 
-export default resources;
+export default resources

@@ -1,8 +1,8 @@
 import { t } from "i18next"
 import React, { useEffect, useMemo, useState } from "react"
-import { fetchMeta, IMeta } from "../../../../../models/mongo-models/meta"
-import TeamComp from "./team-comp"
+import { IMeta, fetchMeta } from "../../../../../models/mongo-models/meta"
 import { MetaChart } from "./meta-chart"
+import TeamComp from "./team-comp"
 
 export function CompositionReport() {
   const [loading, setLoading] = useState<boolean>(true)

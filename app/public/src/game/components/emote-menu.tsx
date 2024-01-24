@@ -1,16 +1,16 @@
+import { GameObjects } from "phaser"
 import React from "react"
 import ReactDOM from "react-dom/client"
-import { GameObjects } from "phaser"
-import { Emotion } from "../../../../types/enum/Emotion"
-import { getAvatarString, getPortraitSrc } from "../../utils"
-import { throttle } from "../../../../utils/function"
-import { toggleAnimation } from "../../stores/NetworkStore"
-import store from "../../stores"
-import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../models/precomputed"
-import { cc } from "../../pages/utils/jsx"
-import { IPlayer } from "../../../../types"
-import { logger } from "../../../../utils/logger"
 import { useTranslation } from "react-i18next"
+import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../models/precomputed"
+import { IPlayer } from "../../../../types"
+import { Emotion } from "../../../../types/enum/Emotion"
+import { throttle } from "../../../../utils/function"
+import { logger } from "../../../../utils/logger"
+import { cc } from "../../pages/utils/jsx"
+import store from "../../stores"
+import { toggleAnimation } from "../../stores/NetworkStore"
+import { getAvatarString, getPortraitSrc } from "../../utils"
 import "./emote-menu.css"
 
 const sendEmote = throttle(function (
@@ -28,7 +28,7 @@ export function EmoteMenuComponent(props: {
   shiny: boolean
 }) {
   const { t } = useTranslation()
-  let emotions: Emotion[] = [
+  const emotions: Emotion[] = [
     Emotion.HAPPY,
     Emotion.JOYOUS,
     Emotion.DETERMINED,

@@ -1,6 +1,6 @@
 import React, { useMemo } from "react"
-import GameDps from "./game-dps"
 import { IDps } from "../../../../../types"
+import GameDps from "./game-dps"
 
 type GamePlayerDpsMeterInput = {
   dpsMeter: IDps[]

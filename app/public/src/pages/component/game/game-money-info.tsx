@@ -1,10 +1,10 @@
 import React from "react"
+import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import { BattleResult } from "../../../../../types/enum/Game"
 import { useAppSelector } from "../../../hooks"
-import { Money } from "../icons/money"
-import { useTranslation } from "react-i18next"
 import { addIconsToDescription } from "../../utils/descriptions"
+import { Money } from "../icons/money"
 
 export function GameMoneyInfo() {
   const money = useAppSelector((state) => state.game.currentPlayerMoney)

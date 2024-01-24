@@ -1,13 +1,13 @@
+import { ArraySchema } from "@colyseus/schema"
 import React, { useMemo } from "react"
+import { useTranslation } from "react-i18next"
 import HistoryItem from "../../../../../models/colyseus-models/history-item"
-import { BattleResult } from "../../../../../types/enum/Game"
 import Synergies from "../../../../../models/colyseus-models/synergies"
 import { SynergyTriggers } from "../../../../../types/Config"
-import { ArraySchema } from "@colyseus/schema"
+import { BattleResult } from "../../../../../types/enum/Game"
+import { getAvatarSrc } from "../../../utils"
 import { Life } from "../icons/life"
 import { Money } from "../icons/money"
-import { getAvatarSrc } from "../../../utils"
-import { useTranslation } from "react-i18next"
 
 export default function GamePlayerDetail(props: {
   name: string

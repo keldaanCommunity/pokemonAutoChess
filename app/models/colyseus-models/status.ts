@@ -2,14 +2,14 @@ import { Schema, type } from "@colyseus/schema"
 import Board from "../../core/board"
 import { PokemonEntity } from "../../core/pokemon-entity"
 import { IPokemonEntity, IStatus, Transfer } from "../../types"
+import { Ability } from "../../types/enum/Ability"
 import { Effect } from "../../types/enum/Effect"
 import { AttackType } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
-import { Weather } from "../../types/enum/Weather"
-import { max } from "../../utils/number"
-import { Ability } from "../../types/enum/Ability"
 import { Passive } from "../../types/enum/Passive"
 import { Synergy } from "../../types/enum/Synergy"
+import { Weather } from "../../types/enum/Weather"
+import { max } from "../../utils/number"
 
 export default class Status extends Schema implements IStatus {
   @type("boolean") burn = false
@@ -585,10 +585,7 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerConfusion(
-    timer: number,
-    pkm: PokemonEntity
-  ) {
+  triggerConfusion(timer: number, pkm: PokemonEntity) {
     if (
       !this.confusion &&
       !this.runeProtect &&
@@ -626,12 +623,12 @@ export default class Status extends Schema implements IStatus {
       if (pkm.simulation.weather === Weather.MISTY) {
         timer = Math.round(timer * 1.3)
       }
-      this.charm = true        
+      this.charm = true
       this.charmCooldown = timer
-      if(origin){
+      if (origin) {
         pkm.targetX = origin?.positionX
         pkm.targetY = origin?.positionY
-      }   
+      }
     }
   }
 

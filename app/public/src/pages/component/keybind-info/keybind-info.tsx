@@ -27,7 +27,9 @@ export default function KeybindInfo() {
           {Object.entries(ALL_KEYBINDS).map(([key, description]) => {
             return (
               <tr key={key}>
-                <td><kbd>{key}</kbd></td>
+                <td>
+                  <kbd>{key}</kbd>
+                </td>
                 <td>{description}</td>
               </tr>
             )

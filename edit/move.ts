@@ -1,5 +1,5 @@
-import fse from "fs-extra"
 import fs from "fs"
+import fse from "fs-extra"
 
 const args = process.argv.slice(2)
 const path = args[0]

@@ -1,33 +1,33 @@
 /* eslint-disable no-case-declarations */
 import { GameObjects } from "phaser"
-import Pokemon from "./pokemon"
-import { transformAttackCoordinate } from "../../pages/utils/utils"
-import GameScene from "../scenes/game-scene"
+import Simulation from "../../../../core/simulation"
+import Count from "../../../../models/colyseus-models/count"
+import Player from "../../../../models/colyseus-models/player"
+import Status from "../../../../models/colyseus-models/status"
 import {
   IBoardEvent,
   IPokemonEntity,
   NonFunctionPropNames
 } from "../../../../types"
-import AnimationManager from "../animation-manager"
+import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../types/Config"
+import { Ability } from "../../../../types/enum/Ability"
+import { Effect } from "../../../../types/enum/Effect"
 import {
   AttackType,
-  PokemonActionState,
+  BoardEvent,
   HealType,
   Orientation,
-  BoardEvent,
+  PokemonActionState,
   Stat
 } from "../../../../types/enum/Game"
-import { Ability } from "../../../../types/enum/Ability"
 import { Item } from "../../../../types/enum/Item"
-import Count from "../../../../models/colyseus-models/count"
-import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
-import Status from "../../../../models/colyseus-models/status"
-import Simulation from "../../../../core/simulation"
-import Player from "../../../../models/colyseus-models/player"
-import { Effect } from "../../../../types/enum/Effect"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../types/Config"
 import { Passive } from "../../../../types/enum/Passive"
+import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
+import { transformAttackCoordinate } from "../../pages/utils/utils"
+import AnimationManager from "../animation-manager"
+import GameScene from "../scenes/game-scene"
 import { displayAbility } from "./abilities-animations"
+import Pokemon from "./pokemon"
 
 export default class BattleManager {
   group: GameObjects.Group

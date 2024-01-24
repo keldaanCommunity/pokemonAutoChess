@@ -1,21 +1,21 @@
-import Pokemon from "./pokemon"
-import { transformCoordinate } from "../../pages/utils/utils"
+import { t } from "i18next"
+import { GameObjects } from "phaser"
+import Player from "../../../../models/colyseus-models/player"
+import { PokemonAvatarModel } from "../../../../models/colyseus-models/pokemon-avatar"
 import { IPokemon, Transfer } from "../../../../types"
-import AnimationManager from "../animation-manager"
-import GameScene from "../scenes/game-scene"
-import { AnimationConfig } from "../../../../types/enum/Pokemon"
+import { SynergyTriggers } from "../../../../types/Config"
 import {
   GamePhaseState,
   Orientation,
   PokemonActionState
 } from "../../../../types/enum/Game"
-import { PokemonAvatarModel } from "../../../../models/colyseus-models/pokemon-avatar"
-import Player from "../../../../models/colyseus-models/player"
-import PokemonAvatar from "./pokemon-avatar"
+import { AnimationConfig } from "../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../types/enum/Synergy"
-import { SynergyTriggers } from "../../../../types/Config"
-import { GameObjects } from "phaser"
-import { t } from "i18next"
+import { transformCoordinate } from "../../pages/utils/utils"
+import AnimationManager from "../animation-manager"
+import GameScene from "../scenes/game-scene"
+import Pokemon from "./pokemon"
+import PokemonAvatar from "./pokemon-avatar"
 
 export enum BoardMode {
   PICK = "pick",

@@ -1,19 +1,19 @@
 import React, { useCallback, useMemo } from "react"
 import Modal from "react-bootstrap/esm/Modal"
+import { useTranslation } from "react-i18next"
+import PokemonFactory from "../../../../../models/pokemon-factory"
+import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../../models/precomputed"
+import { Emotion } from "../../../../../types"
+import { Pkm } from "../../../../../types/enum/Pokemon"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import {
   buyBooster,
   buyEmotion,
   changeSelectedEmotion
 } from "../../../stores/NetworkStore"
-import PokemonEmotion from "./pokemon-emotion"
 import { getPortraitSrc } from "../../../utils"
-import { Pkm } from "../../../../../types/enum/Pokemon"
-import PokemonFactory from "../../../../../models/pokemon-factory"
-import { Emotion } from "../../../../../types"
 import { cc } from "../../utils/jsx"
-import { useTranslation } from "react-i18next"
-import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../../models/precomputed"
+import PokemonEmotion from "./pokemon-emotion"
 import "./pokemon-emotions-modal.css"
 
 export default function PokemonEmotionsModal(props: {

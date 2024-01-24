@@ -1,9 +1,9 @@
 import React from "react"
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
-import WikiType from "./wiki-type"
+import { useTranslation } from "react-i18next"
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import SynergyIcon from "../icons/synergy-icon"
-import { useTranslation } from "react-i18next"
+import WikiType from "./wiki-type"
 
 export default function WikiTypes() {
   const { t } = useTranslation()

@@ -1,12 +1,17 @@
-import React, { useEffect, useRef, useState } from "react"
-import Chat from "./component/chat/chat"
-import PreparationMenu from "./component/preparation/preparation-menu"
-import { Navigate } from "react-router-dom"
-import firebase from "firebase/compat/app"
-import { FIREBASE_CONFIG } from "./utils/utils"
-import PreparationState from "../../../rooms/states/preparation-state"
-import { useAppDispatch, useAppSelector } from "../hooks"
 import { Client, Room } from "colyseus.js"
+import firebase from "firebase/compat/app"
+import React, { useEffect, useRef, useState } from "react"
+import { useTranslation } from "react-i18next"
+import { Navigate } from "react-router-dom"
+import { GameUser } from "../../../models/colyseus-models/game-user"
+import { IBot } from "../../../models/mongo-models/bot-v2"
+import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
+import GameState from "../../../rooms/states/game-state"
+import PreparationState from "../../../rooms/states/preparation-state"
+import { NonFunctionPropNames, Transfer } from "../../../types"
+import { logger } from "../../../utils/logger"
+import { PreloadingScene } from "../game/scenes/preloading-scene"
+import { useAppDispatch, useAppSelector } from "../hooks"
 import { joinPreparation, logIn, setProfile } from "../stores/NetworkStore"
 import {
   addUser,
@@ -18,25 +23,20 @@ import {
   setGameStarted,
   setLobbyType,
   setName,
+  setNoELO,
   setOwnerId,
   setOwnerName,
   setPassword,
-  setNoELO,
-  setUser,
-  setSelectedMap
+  setSelectedMap,
+  setUser
 } from "../stores/PreparationStore"
-import GameState from "../../../rooms/states/game-state"
-import { NonFunctionPropNames, Transfer } from "../../../types"
-import "./preparation.css"
-import { playSound, SOUNDS } from "./utils/audio"
-import { IBot } from "../../../models/mongo-models/bot-v2"
-import { logger } from "../../../utils/logger"
-import { GameUser } from "../../../models/colyseus-models/game-user"
+import Chat from "./component/chat/chat"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"
-import { useTranslation } from "react-i18next"
-import { PreloadingScene } from "../game/scenes/preloading-scene"
-import { localStore, LocalStoreKeys } from "./utils/store"
-import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
+import PreparationMenu from "./component/preparation/preparation-menu"
+import "./preparation.css"
+import { SOUNDS, playSound } from "./utils/audio"
+import { LocalStoreKeys, localStore } from "./utils/store"
+import { FIREBASE_CONFIG } from "./utils/utils"
 
 export default function Preparation() {
   const { t } = useTranslation()

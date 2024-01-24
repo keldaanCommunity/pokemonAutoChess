@@ -1,12 +1,12 @@
-import { Schema, type, ArraySchema } from "@colyseus/schema"
-import { GameRecord, IGameRecord } from "./game-record"
-import MapTileset from "./map-tileset"
-import WinTileset from "./win-tileset"
-import PokemonCollection from "./pokemon-collection"
-import PokemonConfig from "./pokemon-config"
-import { IPokemonConfig } from "../mongo-models/user-metadata"
+import { ArraySchema, Schema, type } from "@colyseus/schema"
 import { Role, Title } from "../../types"
 import { Language } from "../../types/enum/Language"
+import { IPokemonConfig } from "../mongo-models/user-metadata"
+import { GameRecord, IGameRecord } from "./game-record"
+import MapTileset from "./map-tileset"
+import PokemonCollection from "./pokemon-collection"
+import PokemonConfig from "./pokemon-config"
+import WinTileset from "./win-tileset"
 
 export interface ILobbyUser {
   id: string

@@ -1,16 +1,16 @@
 import React from "react"
 import { ToastContainer } from "react-toastify"
-import GameRefresh from "./game-refresh"
-import GameLock from "./game-lock"
-import GameExperience from "./game-experience"
-import GameStore from "./game-store"
 import { useAppSelector } from "../../../hooks"
-import GameRarityPercentage from "./game-rarity-percentage"
 import { GameAdditionalPokemons } from "./game-additional-pokemons"
-import { GameMoneyInfo } from "./game-money-info"
+import GameExperience from "./game-experience"
 import { GameLifeInfo } from "./game-life-info"
-import { GameTeamInfo } from "./game-team-info"
+import GameLock from "./game-lock"
+import { GameMoneyInfo } from "./game-money-info"
+import GameRarityPercentage from "./game-rarity-percentage"
+import GameRefresh from "./game-refresh"
 import "./game-shop.css"
+import GameStore from "./game-store"
+import { GameTeamInfo } from "./game-team-info"
 
 export default function GameShop() {
   useAppSelector((state) => state.game.money) // required for reactivity

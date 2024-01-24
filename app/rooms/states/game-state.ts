@@ -1,31 +1,31 @@
+import {
+  ArraySchema,
+  MapSchema,
+  Schema,
+  SetSchema,
+  type
+} from "@colyseus/schema"
+import BotManager from "../../core/bot-manager"
+import { DesignTiled, initTilemap } from "../../core/design"
+import Simulation from "../../core/simulation"
+import { FloatingItem } from "../../models/colyseus-models/floating-item"
 import Player from "../../models/colyseus-models/player"
 import { PokemonAvatarModel } from "../../models/colyseus-models/pokemon-avatar"
-import { FloatingItem } from "../../models/colyseus-models/floating-item"
+import { Portal, SynergySymbol } from "../../models/colyseus-models/portal"
 import Shop from "../../models/shop"
-import { DesignTiled, initTilemap } from "../../core/design"
-import BotManager from "../../core/bot-manager"
 import {
-  Dungeon,
-  StageDuration,
-  BOARD_WIDTH,
   BOARD_HEIGHT,
+  BOARD_WIDTH,
+  Dungeon,
   DungeonPMDO,
-  EloRank
+  EloRank,
+  StageDuration
 } from "../../types/Config"
 import { GamePhaseState, LobbyType } from "../../types/enum/Game"
-import { Weather } from "../../types/enum/Weather"
-import {
-  Schema,
-  MapSchema,
-  ArraySchema,
-  type,
-  SetSchema
-} from "@colyseus/schema"
-import { PkmProposition } from "../../types/enum/Pokemon"
-import { pickRandomIn, randomBetween } from "../../utils/random"
-import { Portal, SynergySymbol } from "../../models/colyseus-models/portal"
-import Simulation from "../../core/simulation"
 import { Item } from "../../types/enum/Item"
+import { PkmProposition } from "../../types/enum/Pokemon"
+import { Weather } from "../../types/enum/Weather"
+import { pickRandomIn, randomBetween } from "../../utils/random"
 
 export default class GameState extends Schema {
   @type("string") afterGameId = ""
@@ -83,7 +83,7 @@ export default class GameState extends Schema {
     this.minRank = minRank
     this.mapName = this.id
     this.mapMusic = pickRandomIn(Object.keys(Dungeon) as Dungeon[])
-    this.weather = Weather.NEUTRAL    
+    this.weather = Weather.NEUTRAL
     this.tilemap = initTilemap(this.id)
   }
 }

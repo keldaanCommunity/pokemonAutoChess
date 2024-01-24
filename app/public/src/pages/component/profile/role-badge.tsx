@@ -1,7 +1,7 @@
 import React from "react"
-import { Role, RoleColor } from "../../../../../types"
 import Badge from "react-bootstrap/Badge"
 import { useTranslation } from "react-i18next"
+import { Role, RoleColor } from "../../../../../types"
 
 export function RoleBadge(props: { role: Role }) {
   const { t } = useTranslation()

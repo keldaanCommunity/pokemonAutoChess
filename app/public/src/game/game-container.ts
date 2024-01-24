@@ -1,47 +1,47 @@
-import GameScene from "./scenes/game-scene"
-import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin.js"
-import { getPath, transformCoordinate } from "../pages/utils/utils"
-import Phaser from "phaser"
-import Player from "../../../models/colyseus-models/player"
 import { Room } from "colyseus.js"
-import GameState from "../../../rooms/states/game-state"
+import Phaser from "phaser"
+import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin.js"
+import React from "react"
+import { toast } from "react-toastify"
+import { DesignTiled } from "../../../core/design"
+import { PokemonEntity } from "../../../core/pokemon-entity"
+import Simulation from "../../../core/simulation"
+import Count from "../../../models/colyseus-models/count"
+import { FloatingItem } from "../../../models/colyseus-models/floating-item"
+import { IPokemonRecord } from "../../../models/colyseus-models/game-record"
+import Player from "../../../models/colyseus-models/player"
 import { Pokemon } from "../../../models/colyseus-models/pokemon"
+import { PokemonAvatarModel } from "../../../models/colyseus-models/pokemon-avatar"
+import { Portal, SynergySymbol } from "../../../models/colyseus-models/portal"
+import Status from "../../../models/colyseus-models/status"
+import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
+import GameState from "../../../rooms/states/game-state"
 import {
   IDragDropCombineMessage,
   IDragDropItemMessage,
   IDragDropMessage,
   IPlayer,
   IPokemon,
-  Transfer,
+  ISimplePlayer,
   NonFunctionPropNames,
-  ISimplePlayer
+  Transfer
 } from "../../../types"
-import { PokemonEntity } from "../../../core/pokemon-entity"
-import { DesignTiled } from "../../../core/design"
-import { toast } from "react-toastify"
-import React from "react"
-import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
-import { getPortraitSrc } from "../utils"
-import { IPokemonRecord } from "../../../models/colyseus-models/game-record"
-import { Synergy } from "../../../types/enum/Synergy"
+import { Ability } from "../../../types/enum/Ability"
 import {
   AttackType,
   HealType,
   Orientation,
   PokemonActionState
 } from "../../../types/enum/Game"
+import { Synergy } from "../../../types/enum/Synergy"
 import { Weather } from "../../../types/enum/Weather"
-import store from "../stores"
 import { logger } from "../../../utils/logger"
-import { PokemonAvatarModel } from "../../../models/colyseus-models/pokemon-avatar"
-import { FloatingItem } from "../../../models/colyseus-models/floating-item"
-import Status from "../../../models/colyseus-models/status"
-import Count from "../../../models/colyseus-models/count"
-import { Ability } from "../../../types/enum/Ability"
-import { Portal, SynergySymbol } from "../../../models/colyseus-models/portal"
-import Simulation from "../../../core/simulation"
-import { BoardMode } from "./components/board-manager"
+import { getPath, transformCoordinate } from "../pages/utils/utils"
+import store from "../stores"
 import { changePlayer } from "../stores/GameStore"
+import { getPortraitSrc } from "../utils"
+import { BoardMode } from "./components/board-manager"
+import GameScene from "./scenes/game-scene"
 
 class GameContainer {
   room: Room<GameState>

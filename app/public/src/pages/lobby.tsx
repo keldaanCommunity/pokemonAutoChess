@@ -1,67 +1,67 @@
-import React, { useCallback, useEffect, useRef, useState } from "react"
-import { Navigate } from "react-router-dom"
-import Chat from "./component/chat/chat"
-import CurrentUsers from "./component/available-user-menu/current-users"
-import RoomMenu from "./component/available-room-menu/room-menu"
-import TabMenu from "./component/lobby-menu/tab-menu"
-import firebase from "firebase/compat/app"
-import { FIREBASE_CONFIG } from "./utils/utils"
 import { Client, Room, RoomAvailable } from "colyseus.js"
-import { useAppDispatch, useAppSelector } from "../hooks"
-import {
-  joinLobby,
-  logIn,
-  requestLeaderboard,
-  requestBotLeaderboard,
-  requestLevelLeaderboard,
-  logOut,
-  setProfile
-} from "../stores/NetworkStore"
-import {
-  setBotData,
-  setBotList,
-  setPastebinUrl,
-  addRoom,
-  addUser,
-  changeUser,
-  pushMessage,
-  removeRoom,
-  removeUser,
-  setSearchedUser,
-  setUser,
-  changePokemonConfig,
-  addPokemonConfig,
-  setBoosterContent,
-  setSuggestions,
-  removeMessage,
-  setLevelLeaderboard,
-  setBotLeaderboard,
-  setLeaderboard,
-  pushBotLog,
-  setLanguage,
-  leaveLobby,
-  setNextSpecialLobbyDate,
-  setNextSpecialLobbyType
-} from "../stores/LobbyStore"
+import firebase from "firebase/compat/app"
+import React, { useCallback, useEffect, useRef, useState } from "react"
+import { useTranslation } from "react-i18next"
+import { Navigate } from "react-router-dom"
+import LobbyUser from "../../../models/colyseus-models/lobby-user"
+import PokemonConfig from "../../../models/colyseus-models/pokemon-config"
+import { IBot } from "../../../models/mongo-models/bot-v2"
 import {
   ICustomLobbyState,
   ISuggestionUser,
   NonFunctionPropNames,
   Transfer
 } from "../../../types"
-import LobbyUser from "../../../models/colyseus-models/lobby-user"
-import { IBot } from "../../../models/mongo-models/bot-v2"
-import PokemonConfig from "../../../models/colyseus-models/pokemon-config"
+import { useAppDispatch, useAppSelector } from "../hooks"
 import i18n from "../i18n"
-import { MainSidebar } from "./component/main-sidebar/main-sidebar"
 import store from "../stores"
-import { useTranslation } from "react-i18next"
+import {
+  addPokemonConfig,
+  addRoom,
+  addUser,
+  changePokemonConfig,
+  changeUser,
+  leaveLobby,
+  pushBotLog,
+  pushMessage,
+  removeMessage,
+  removeRoom,
+  removeUser,
+  setBoosterContent,
+  setBotData,
+  setBotLeaderboard,
+  setBotList,
+  setLanguage,
+  setLeaderboard,
+  setLevelLeaderboard,
+  setNextSpecialLobbyDate,
+  setNextSpecialLobbyType,
+  setPastebinUrl,
+  setSearchedUser,
+  setSuggestions,
+  setUser
+} from "../stores/LobbyStore"
+import {
+  joinLobby,
+  logIn,
+  logOut,
+  requestBotLeaderboard,
+  requestLeaderboard,
+  requestLevelLeaderboard,
+  setProfile
+} from "../stores/NetworkStore"
+import RoomMenu from "./component/available-room-menu/room-menu"
+import CurrentUsers from "./component/available-user-menu/current-users"
+import Chat from "./component/chat/chat"
+import TabMenu from "./component/lobby-menu/tab-menu"
+import { MainSidebar } from "./component/main-sidebar/main-sidebar"
+import { FIREBASE_CONFIG } from "./utils/utils"
 
-import "./lobby.css"
-import { localStore, LocalStoreKeys } from "./utils/store"
 import { Modal } from "react-bootstrap"
 import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 import { logger } from "../../../utils/logger"
+import "./lobby.css"
+import { localStore, LocalStoreKeys } from "./utils/store"
 
 export default function Lobby() {
   const dispatch = useAppDispatch()
@@ -264,11 +264,11 @@ export async function joinLobbyRoom(
 
           room.state.listen("nextSpecialLobbyDate", (date) => {
             dispatch(setNextSpecialLobbyDate(date))
-          });
+          })
 
           room.state.listen("nextSpecialLobbyType", (type) => {
             dispatch(setNextSpecialLobbyType(type))
-          });
+          })
 
           room.state.users.onRemove((u) => {
             dispatch(removeUser(u.id))

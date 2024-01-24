@@ -1,4 +1,4 @@
-import { Schema, ArraySchema, type } from "@colyseus/schema"
+import { ArraySchema, Schema, type } from "@colyseus/schema"
 import { Emotion } from "../../types"
 import { Item } from "../../types/enum/Item"
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"

@@ -1,13 +1,13 @@
 import React from "react"
+import { useTranslation } from "react-i18next"
+import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../../../app/models/precomputed"
+import PokemonFactory from "../../../../../models/pokemon-factory"
+import { Emotion, PkmWithConfig } from "../../../../../types"
 import { Item } from "../../../../../types/enum/Item"
 import { Pkm } from "../../../../../types/enum/Pokemon"
-import PokemonFactory from "../../../../../models/pokemon-factory"
-import { PkmWithConfig, Emotion } from "../../../../../types"
-import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../../../app/models/precomputed"
-import { useTranslation } from "react-i18next"
-import { GamePokemonDetail } from "../game/game-pokemon-detail"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { Checkbox } from "../checkbox/checkbox"
+import { GamePokemonDetail } from "../game/game-pokemon-detail"
 
 export default function SelectedEntity(props: {
   entity: Item | PkmWithConfig

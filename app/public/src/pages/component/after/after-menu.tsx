@@ -1,15 +1,15 @@
 import React from "react"
-import { useAppSelector } from "../../../hooks"
-import { Avatar } from "../profile/avatar"
-import Team from "./team"
+import { useTranslation } from "react-i18next"
 import { getRankLabel } from "../../../../../../app/types/strings/Strings"
-import SynergyIcon from "../icons/synergy-icon"
+import { computeElo } from "../../../../../core/elo"
+import { Role } from "../../../../../types"
 import { ExpPlace, SynergyTriggers } from "../../../../../types/Config"
 import { Synergy } from "../../../../../types/enum/Synergy"
-import { computeElo } from "../../../../../core/elo"
+import { useAppSelector } from "../../../hooks"
+import SynergyIcon from "../icons/synergy-icon"
+import { Avatar } from "../profile/avatar"
 import "./after-menu.css"
-import { Role } from "../../../../../types"
-import { useTranslation } from "react-i18next"
+import Team from "./team"
 
 export default function AfterMenu() {
   const { t } = useTranslation()

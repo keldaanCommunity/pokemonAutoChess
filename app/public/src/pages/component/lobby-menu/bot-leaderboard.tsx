@@ -1,6 +1,6 @@
 import React from "react"
-import { useAppSelector } from "../../../hooks"
 import { ILeaderboardInfo } from "../../../../../models/colyseus-models/leaderboard-info"
+import { useAppSelector } from "../../../hooks"
 import Leaderboard from "./leaderboard"
 
 export default function BotLeaderboard() {

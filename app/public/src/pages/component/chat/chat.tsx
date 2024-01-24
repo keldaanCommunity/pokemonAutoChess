@@ -1,9 +1,9 @@
 import React, { useState } from "react"
+import { useTranslation } from "react-i18next"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { sendMessage } from "../../../stores/NetworkStore"
 import ChatHistory from "./chat-history"
 import "./chat.css"
-import { useTranslation } from "react-i18next"
 
 const MAX_MESSAGE_LENGTH = 250
 

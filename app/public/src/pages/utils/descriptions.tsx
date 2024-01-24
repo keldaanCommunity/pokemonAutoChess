@@ -1,12 +1,12 @@
+import { t } from "i18next"
 import React, { ReactElement } from "react"
 import { Damage, Stat } from "../../../../types/enum/Game"
+import { Item } from "../../../../types/enum/Item"
 import { Status } from "../../../../types/enum/Status"
 import { Synergy } from "../../../../types/enum/Synergy"
 import { Weather } from "../../../../types/enum/Weather"
 import SynergyIcon from "../component/icons/synergy-icon"
 import { cc } from "./jsx"
-import { t } from "i18next"
-import { Item } from "../../../../types/enum/Item"
 
 const DamageTypes = Object.keys(Damage)
 const Stats = Object.keys(Stat)
@@ -114,7 +114,9 @@ export function addIconsToDescription(description: string, tier = 0, ap = 0) {
         }
 
         d = (
-          <span className={cc("description-icon", { "scales-ap": scale !== 0 })}>
+          <span
+            className={cc("description-icon", { "scales-ap": scale !== 0 })}
+          >
             {scale > 0 && (
               <img
                 src="assets/icons/AP.png"

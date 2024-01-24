@@ -1,14 +1,14 @@
-import { Effect } from "./Effect";
+import { reverseMap } from "../../utils/map"
+import { Effect } from "./Effect"
 import { Passive } from "./Passive"
 import { Synergy } from "./Synergy"
-import { reverseMap } from "../../utils/map"
 
 export enum Weather {
   SUN = "SUN",
   NIGHT = "NIGHT",
   WINDY = "WINDY",
   MISTY = "MISTY",
-  RAIN = "RAIN",  
+  RAIN = "RAIN",
   SNOW = "SNOW",
   STORM = "STORM",
   SANDSTORM = "SANDSTORM",
@@ -27,7 +27,7 @@ export const WeatherPassives: Map<Passive, Weather> = new Map([
   [Passive.AIRLOCK, Weather.NEUTRAL]
 ])
 
-export const PassiveAssociatedToWeather = reverseMap(WeatherPassives);
+export const PassiveAssociatedToWeather = reverseMap(WeatherPassives)
 
 export const WeatherAssociatedToSynergy: Map<Synergy, Weather> = new Map([
   [Synergy.FIRE, Weather.SUN],
@@ -41,7 +41,7 @@ export const WeatherAssociatedToSynergy: Map<Synergy, Weather> = new Map([
   [Synergy.NORMAL, Weather.NEUTRAL]
 ])
 
-export const SynergyAssociatedToWeather = reverseMap(WeatherAssociatedToSynergy);
+export const SynergyAssociatedToWeather = reverseMap(WeatherAssociatedToSynergy)
 
 export const WeatherEffects: Map<Weather, Effect> = new Map([
   [Weather.SUN, Effect.SUN],
@@ -53,4 +53,3 @@ export const WeatherEffects: Map<Weather, Effect> = new Map([
   [Weather.NIGHT, Effect.NIGHT],
   [Weather.WINDY, Effect.WINDY]
 ])
-  

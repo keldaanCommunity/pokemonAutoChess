@@ -1,7 +1,7 @@
-import React from "react"
-import { EloRankThreshold, EloRank } from "../../../../../types/Config"
 import CSS from "csstype"
+import React from "react"
 import { useTranslation } from "react-i18next"
+import { EloRank, EloRankThreshold } from "../../../../../types/Config"
 
 const style: CSS.Properties = {
   display: "flex",

@@ -1,6 +1,6 @@
 import React, { useMemo } from "react"
-import GameDpsHeal from "./game-dps-heal"
 import { IDpsHeal } from "../../../../../types"
+import GameDpsHeal from "./game-dps-heal"
 
 type GamePlayerHpsMeterInput = {
   hpsMeter: IDpsHeal[]

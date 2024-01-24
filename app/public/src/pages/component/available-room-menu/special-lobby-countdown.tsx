@@ -1,8 +1,8 @@
 import { t } from "i18next"
-import React, { useState, useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { EloRank } from "../../../../../types/Config"
-import { formatTimeout } from "../../utils/date"
 import { useAppSelector } from "../../../hooks"
+import { formatTimeout } from "../../utils/date"
 
 export function SpecialLobbyCountdown() {
   const [clock, setClock] = useState<Date>(new Date())

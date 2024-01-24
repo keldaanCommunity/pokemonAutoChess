@@ -20,7 +20,7 @@ export function TitleTab() {
       <Checkbox
         checked={showUnlocked}
         onToggle={setShowUnlocked}
-        label={t('toggle_locked')}
+        label={t("toggle_locked")}
         isDark
       />
       <ul className="titles">

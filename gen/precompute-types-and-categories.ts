@@ -1,9 +1,9 @@
 import fs from "fs"
+import { RarityCost } from "../app/types/Config"
 import { Rarity } from "../app/types/enum/Game"
 import { Pkm, PkmFamily } from "../app/types/enum/Pokemon"
 import { Synergy } from "../app/types/enum/Synergy"
 import { precomputedPokemons } from "./precomputed-pokemons"
-import { RarityCost } from "../app/types/Config"
 
 console.time("precompute-types-and-categories")
 

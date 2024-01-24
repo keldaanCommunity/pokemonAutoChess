@@ -1,20 +1,20 @@
+import { Client, Room } from "colyseus.js"
+import firebase from "firebase/compat/app"
 import React, { useEffect, useRef, useState } from "react"
 import { Navigate } from "react-router-dom"
-import AfterMenu from "./component/after/after-menu"
-import { Client, Room } from "colyseus.js"
-import { useAppDispatch, useAppSelector } from "../hooks"
 import AfterGameState from "../../../rooms/states/after-game-state"
-import firebase from "firebase/compat/app"
-import { FIREBASE_CONFIG } from "./utils/utils"
-import { joinAfter, logIn } from "../stores/NetworkStore"
+import { useAppDispatch, useAppSelector } from "../hooks"
 import {
   addPlayer,
   leaveAfter,
   setElligibilityToELO,
   setElligibilityToXP
 } from "../stores/AfterGameStore"
-import { playSound, SOUNDS } from "./utils/audio"
-import { localStore, LocalStoreKeys } from "./utils/store"
+import { joinAfter, logIn } from "../stores/NetworkStore"
+import AfterMenu from "./component/after/after-menu"
+import { SOUNDS, playSound } from "./utils/audio"
+import { LocalStoreKeys, localStore } from "./utils/store"
+import { FIREBASE_CONFIG } from "./utils/utils"
 
 export default function AfterGame() {
   const dispatch = useAppDispatch()

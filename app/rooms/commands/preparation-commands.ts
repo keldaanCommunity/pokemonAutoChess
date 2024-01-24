@@ -1,24 +1,24 @@
-import os from "node:os"
 import { Command } from "@colyseus/command"
+import { Client, matchMaker } from "colyseus"
+import { FilterQuery } from "mongoose"
+import os from "node:os"
+import { memoryUsage } from "node:process"
 import { GameUser, IGameUser } from "../../models/colyseus-models/game-user"
+import { BotV2, IBot } from "../../models/mongo-models/bot-v2"
 import UserMetadata, {
   IUserMetadata
 } from "../../models/mongo-models/user-metadata"
-import { BotV2, IBot } from "../../models/mongo-models/bot-v2"
-import { Client, matchMaker } from "colyseus"
-import PreparationRoom from "../preparation-room"
 import { IChatV2, Role, Transfer } from "../../types"
-import { BotDifficulty, LobbyType } from "../../types/enum/Game"
-import { pickRandomIn } from "../../utils/random"
-import { logger } from "../../utils/logger"
-import { entries, values } from "../../utils/schemas"
 import {
   EloRank,
   EloRankThreshold,
   MAX_PLAYERS_PER_LOBBY
 } from "../../types/Config"
-import { memoryUsage } from "node:process"
-import { FilterQuery } from "mongoose"
+import { BotDifficulty, LobbyType } from "../../types/enum/Game"
+import { logger } from "../../utils/logger"
+import { pickRandomIn } from "../../utils/random"
+import { entries, values } from "../../utils/schemas"
+import PreparationRoom from "../preparation-room"
 import { OpenRankedLobbyCommand } from "./lobby-commands"
 
 export class OnJoinCommand extends Command<
@@ -31,7 +31,7 @@ export class OnJoinCommand extends Command<
 > {
   async execute({ client, options, auth }) {
     try {
-      let numberOfHumanPlayers = values(this.state.users).filter(
+      const numberOfHumanPlayers = values(this.state.users).filter(
         (u) => !u.isBot
       ).length
       if (numberOfHumanPlayers >= MAX_PLAYERS_PER_LOBBY) {
@@ -55,7 +55,7 @@ export class OnJoinCommand extends Command<
         })
       } else {
         const u = await UserMetadata.findOne({ uid: auth.uid })
-        let numberOfHumanPlayers = values(this.state.users).filter(
+        const numberOfHumanPlayers = values(this.state.users).filter(
           (u) => !u.isBot
         ).length
         if (numberOfHumanPlayers >= MAX_PLAYERS_PER_LOBBY) {

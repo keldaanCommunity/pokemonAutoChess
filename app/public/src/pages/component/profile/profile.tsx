@@ -1,9 +1,9 @@
 import React, { useCallback, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
-import PlayerBox from "./player-box"
-import History from "./history"
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
+import { Role, Title } from "../../../../../types"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
+import { setSearchedUser, setSuggestions } from "../../../stores/LobbyStore"
 import {
   ban,
   giveBooster,
@@ -12,15 +12,15 @@ import {
   searchName,
   unban
 } from "../../../stores/NetworkStore"
-import { SearchBar } from "./search-bar"
-import { NameTab } from "./name-tab"
 import { AvatarTab } from "./avatar-tab"
-import { TitleTab } from "./title-tab"
-import { Title, Role } from "../../../../../types"
-import SearchResults from "./search-results"
-import "./profile.css"
-import { setSearchedUser, setSuggestions } from "../../../stores/LobbyStore"
 import { GadgetsTab } from "./gadgets-tab"
+import History from "./history"
+import { NameTab } from "./name-tab"
+import PlayerBox from "./player-box"
+import "./profile.css"
+import { SearchBar } from "./search-bar"
+import SearchResults from "./search-results"
+import { TitleTab } from "./title-tab"
 
 export default function Profile() {
   const { t } = useTranslation()

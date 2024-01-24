@@ -1,10 +1,10 @@
 import React, { useState } from "react"
-import GamePlayerLoading from "./game-player-loading"
+import { useTranslation } from "react-i18next"
+import { Navigate } from "react-router"
 import { useAppSelector } from "../../../hooks"
 import { getGameScene } from "../../game"
 import "./game-loading-screen.css"
-import { Navigate } from "react-router"
-import { useTranslation } from "react-i18next"
+import GamePlayerLoading from "./game-player-loading"
 
 export default function GameLoadingScreen(props: { connectError: string }) {
   const { t } = useTranslation()

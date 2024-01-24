@@ -15,7 +15,10 @@ export default class WeatherManager {
   }
 
   addRain() {
-    const offscreenSource = { x: { min: 0, max: 2000 }, y: { min: 0, max: 100 } }
+    const offscreenSource = {
+      x: { min: 0, max: 2000 },
+      y: { min: 0, max: 100 }
+    }
 
     this.colorFilter = this.scene.add.existing(
       new Phaser.GameObjects.Rectangle(
@@ -28,7 +31,7 @@ export default class WeatherManager {
         0.3
       ).setDepth(8)
     )
-    
+
     this.particlesEmitters.push(
       this.scene.add.particles(0, 0, "rain", {
         ...offscreenSource,
@@ -64,7 +67,10 @@ export default class WeatherManager {
   }
 
   addSnow() {
-    const offscreenSource = { x: { min: 0, max: 2000 }, y: { min: 0, max: 100 } }
+    const offscreenSource = {
+      x: { min: 0, max: 2000 },
+      y: { min: 0, max: 100 }
+    }
     this.colorFilter = this.scene.add.existing(
       new Phaser.GameObjects.Rectangle(
         this.scene,
@@ -130,7 +136,10 @@ export default class WeatherManager {
   }
 
   addSandstorm() {
-    const leftScreenSource = { x: { min: 0, max: 100 }, y: { min: 500, max: 1500 } }
+    const leftScreenSource = {
+      x: { min: 0, max: 100 },
+      y: { min: 500, max: 1500 }
+    }
     const deathZoneSource = new Phaser.Geom.Rectangle(0, 0, 2000, 4000)
 
     this.particlesEmitters.push(
@@ -191,8 +200,11 @@ export default class WeatherManager {
     )
   }
 
-  addWind(){
-    const leftScreenSource = { x: { min: 0, max: 100 }, y: { min: 0, max: 1000 } }
+  addWind() {
+    const leftScreenSource = {
+      x: { min: 0, max: 100 },
+      y: { min: 0, max: 1000 }
+    }
     const deathZoneSource = new Phaser.Geom.Rectangle(0, 0, 2000, 4000)
 
     this.particlesEmitters.push(
@@ -212,13 +224,16 @@ export default class WeatherManager {
         speedX: { min: 1000, max: 1400 },
         speedY: { min: -100, max: 100 },
         lifespan: 2000,
-        scale: .5
+        scale: 0.5
       })
     )
   }
 
-  addMist(){
-    const offscreenSource = { x: { min: 0, max: 2000 }, y: { min: 900, max: 1000 } }
+  addMist() {
+    const offscreenSource = {
+      x: { min: 0, max: 2000 },
+      y: { min: 900, max: 1000 }
+    }
     this.image = this.scene.add.existing(
       new Phaser.GameObjects.Image(this.scene, 1000, 500, "clouds")
         .setScale(2, 2)
@@ -233,7 +248,7 @@ export default class WeatherManager {
         500,
         2000,
         1000,
-        0x994C6E,
+        0x994c6e,
         0.15
       ).setDepth(8)
     )
@@ -245,7 +260,7 @@ export default class WeatherManager {
         speedY: { min: -60, max: -40 },
         lifespan: 5000,
         scale: 1,
-        tint: 0xFF80AE,
+        tint: 0xff80ae,
         alpha: { start: 1, end: 0 }
       }),
       this.scene.add.particles(0, 0, "snowflakes", {
@@ -255,14 +270,17 @@ export default class WeatherManager {
         speedY: { min: -60, max: -40 },
         lifespan: 5000,
         scale: 2,
-        tint: 0xFF80BE,
+        tint: 0xff80be,
         alpha: { start: 1, end: 0 }
       })
     )
   }
 
-  addStorm(){
-    const offscreenSource = { x: { min: 0, max: 2000 }, y: { min: 0, max: 100 } }
+  addStorm() {
+    const offscreenSource = {
+      x: { min: 0, max: 2000 },
+      y: { min: 0, max: 100 }
+    }
     this.colorFilter = this.scene.add.existing(
       new Phaser.GameObjects.Rectangle(
         this.scene,
@@ -270,7 +288,7 @@ export default class WeatherManager {
         500,
         2000,
         1000,
-        0x2B3838,
+        0x2b3838,
         0.4
       ).setDepth(8)
     )

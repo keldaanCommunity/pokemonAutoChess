@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import Modal from "react-bootstrap/Modal"
+import { useTranslation } from "react-i18next"
 import { IBot } from "../../../../../models/mongo-models/bot-v2"
 import { ModalMode } from "../../../../../types"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { createBot, requestBotData } from "../../../stores/NetworkStore"
-import { useTranslation } from "react-i18next"
 
 export default function ImportExportBotModal(props: {
   bot: IBot

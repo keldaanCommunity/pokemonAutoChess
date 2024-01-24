@@ -1,7 +1,7 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { IBot } from "../../../../../models/mongo-models/bot-v2"
-import { PkmWithConfig, Emotion } from "../../../../../types"
+import { Emotion, PkmWithConfig } from "../../../../../types"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { getAvatarSrc } from "../../../utils"
 import { validateBot } from "./bot-logic"

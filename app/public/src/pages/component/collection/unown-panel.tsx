@@ -1,8 +1,8 @@
-import PokemonCollectionItem from "./pokemon-collection-item"
 import React, { Dispatch, SetStateAction } from "react"
+import { Emotion } from "../../../../../types/enum/Emotion"
 import { Pkm, PkmIndex, Unowns } from "../../../../../types/enum/Pokemon"
 import { useAppSelector } from "../../../hooks"
-import { Emotion } from "../../../../../types/enum/Emotion"
+import PokemonCollectionItem from "./pokemon-collection-item"
 import "./unown-panel.css"
 
 export default function UnownPanel(props: {

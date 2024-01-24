@@ -1,12 +1,12 @@
 import React from "react"
-import { Tooltip } from "react-tooltip"
 import { CircularProgressbarWithChildren } from "react-circular-progressbar"
+import { Tooltip } from "react-tooltip"
 
-import GamePlayerDetail from "./game-player-detail"
 import { IPlayer } from "../../../../../types"
 import { useAppSelector } from "../../../hooks"
 import { getAvatarSrc } from "../../../utils"
 import { cc } from "../../utils/jsx"
+import GamePlayerDetail from "./game-player-detail"
 
 import "react-circular-progressbar/dist/styles.css"
 import "./game-player.css"

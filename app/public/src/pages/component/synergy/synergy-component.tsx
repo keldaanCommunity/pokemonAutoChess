@@ -1,11 +1,11 @@
 import React from "react"
-import { SynergyTriggers } from "../../../../../types/Config"
-import { Tooltip } from "react-tooltip"
-import SynergyDetailComponent from "./synergy-detail-component"
-import SynergyIcon from "../icons/synergy-icon"
-import { Synergy } from "../../../../../types/enum/Synergy"
-import { useTranslation } from "react-i18next"
 import ReactDOM from "react-dom"
+import { useTranslation } from "react-i18next"
+import { Tooltip } from "react-tooltip"
+import { SynergyTriggers } from "../../../../../types/Config"
+import { Synergy } from "../../../../../types/enum/Synergy"
+import SynergyIcon from "../icons/synergy-icon"
+import SynergyDetailComponent from "./synergy-detail-component"
 
 export default function SynergyComponent(props: {
   type: Synergy

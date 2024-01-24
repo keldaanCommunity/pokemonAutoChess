@@ -1,6 +1,6 @@
 import { Schema, type } from "@colyseus/schema"
-import { IPortal, ISynergySymbol } from "../../types"
 import { nanoid } from "nanoid"
+import { IPortal, ISynergySymbol } from "../../types"
 import { Synergy } from "../../types/enum/Synergy"
 
 export class Portal extends Schema implements IPortal {

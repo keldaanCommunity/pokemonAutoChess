@@ -14,7 +14,7 @@ import {
   CraftableItems,
   Item
 } from "../../../../../types/enum/Item"
-import { PkmIndex, Pkm, PkmDuos } from "../../../../../types/enum/Pokemon"
+import { Pkm, PkmDuos, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { logger } from "../../../../../utils/logger"
 import { clamp, min } from "../../../../../utils/number"
 
@@ -107,9 +107,8 @@ export function getCategory(pkm: Pkm): string {
   //= & " T"&'Raw Data'!D2 & IF('Raw Data'!V2=TRUE, " DUO", "")
   let category = p.rarity.toUpperCase()
   if (
-    [Rarity.UNIQUE, Rarity.LEGENDARY, Rarity.SPECIAL].includes(
-      p.rarity
-    ) === false &&
+    [Rarity.UNIQUE, Rarity.LEGENDARY, Rarity.SPECIAL].includes(p.rarity) ===
+      false &&
     p.stars > 1
   ) {
     category += p.additional ? " 2S" : " 3S"
@@ -253,10 +252,7 @@ export function validateBoard(board: IDetailledPokemon[], stage: number) {
       `Unique Pokemons can't be played before stage ${PortalCarouselStages[0]}`
     )
   }
-  if (
-    stage < PortalCarouselStages[1] &&
-    legendaries.length > 0
-  ) {
+  if (stage < PortalCarouselStages[1] && legendaries.length > 0) {
     throw new Error(
       `Legendary Pokemons can't be played before stage ${PortalCarouselStages[1]}`
     )

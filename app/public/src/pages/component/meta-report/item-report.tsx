@@ -1,15 +1,15 @@
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
 import { t } from "i18next"
 import React, { useEffect, useMemo, useState } from "react"
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import {
   IItemsStatistic,
   fetchMetaItems
 } from "../../../../../models/mongo-models/items-statistic"
 import {
+  ArtificialItems,
   BasicItems,
-  CraftableItems,
   Berries,
-  ArtificialItems
+  CraftableItems
 } from "../../../../../types/enum/Item"
 import ItemStatistic from "./item-statistic"
 

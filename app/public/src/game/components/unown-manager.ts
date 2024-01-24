@@ -1,15 +1,14 @@
 import { GameObjects } from "phaser"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { Transfer } from "../../../../types"
+import { Ability } from "../../../../types/enum/Ability"
 import { PokemonActionState } from "../../../../types/enum/Game"
 import { Pkm, Unowns } from "../../../../types/enum/Pokemon"
-import { pickRandomIn, coinflip } from "../../../../utils/random"
+import { coinflip, pickRandomIn } from "../../../../utils/random"
 import { getGameContainer } from "../../pages/game"
 import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
 import Pokemon from "./pokemon"
-import { Ability } from "../../../../types/enum/Ability"
-import { transformAttackCoordinate } from "../../pages/utils/utils"
 
 const SHARDS_PER_ENCOUNTER = 50
 

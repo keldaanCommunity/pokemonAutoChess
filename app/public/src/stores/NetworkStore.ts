@@ -1,6 +1,11 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { Room, Client } from "colyseus.js"
 import { User } from "@firebase/auth-types"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { Client, Room } from "colyseus.js"
+import { IBot } from "../../../models/mongo-models/bot-v2"
+import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
+import AfterGameState from "../../../rooms/states/after-game-state"
+import GameState from "../../../rooms/states/game-state"
+import PreparationState from "../../../rooms/states/preparation-state"
 import {
   Emotion,
   ICustomLobbyState,
@@ -8,15 +13,10 @@ import {
   Title,
   Transfer
 } from "../../../types"
-import { IBot } from "../../../models/mongo-models/bot-v2"
-import PreparationState from "../../../rooms/states/preparation-state"
-import GameState from "../../../rooms/states/game-state"
-import AfterGameState from "../../../rooms/states/after-game-state"
 import { BotDifficulty } from "../../../types/enum/Game"
-import { PkmProposition } from "../../../types/enum/Pokemon"
-import { Language } from "../../../types/enum/Language"
-import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 import { Item } from "../../../types/enum/Item"
+import { Language } from "../../../types/enum/Language"
+import { PkmProposition } from "../../../types/enum/Pokemon"
 
 export interface INetwork {
   client: Client
@@ -235,10 +235,7 @@ export const networkSlice = createSlice({
     ) => {
       state.lobby?.send(Transfer.GIVE_BOOSTER, action.payload)
     },
-    giveRole: (
-      state,
-      action: PayloadAction<{ uid: string; role: Role }>
-    ) => {
+    giveRole: (state, action: PayloadAction<{ uid: string; role: Role }>) => {
       state.lobby?.send(Transfer.SET_ROLE, action.payload)
     },
     giveTitle: (
@@ -276,7 +273,7 @@ export const networkSlice = createSlice({
       action: PayloadAction<{ message: string }>
     ) => {
       state.lobby?.send(Transfer.SERVER_ANNOUNCEMENT, action.payload)
-    },
+    }
   }
 })
 

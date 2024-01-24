@@ -1,6 +1,6 @@
 import React, { useState } from "react"
-import GameItem from "./game-item"
 import { useAppSelector } from "../../../hooks"
+import GameItem from "./game-item"
 import "./game-items-proposition.css"
 
 export default function GameItemsProposition() {

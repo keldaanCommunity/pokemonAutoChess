@@ -1,4 +1,5 @@
 import React from "react"
+import { useTranslation } from "react-i18next"
 import {
   ILeaderboardBotInfo,
   ILeaderboardInfo
@@ -6,7 +7,6 @@ import {
 import { useAppDispatch } from "../../../hooks"
 import { searchById } from "../../../stores/NetworkStore"
 import { getAvatarSrc } from "../../../utils"
-import { useTranslation } from "react-i18next"
 import { EloBadge } from "../profile/elo-badge"
 
 export default function LeaderboardItem(props: {

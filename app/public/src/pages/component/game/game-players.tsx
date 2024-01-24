@@ -1,7 +1,7 @@
-import React from "react"
-import GamePlayer from "./game-player"
 import CSS from "csstype"
+import React from "react"
 import { useAppSelector } from "../../../hooks"
+import GamePlayer from "./game-player"
 
 const style: CSS.Properties = {
   position: "absolute",

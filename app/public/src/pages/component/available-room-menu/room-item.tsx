@@ -1,14 +1,14 @@
 import { RoomAvailable } from "colyseus.js"
 import React from "react"
+import { useTranslation } from "react-i18next"
 import { IPreparationMetadata } from "../../../../../types"
-import { cc } from "../../utils/jsx"
-import "./room-item.css"
 import {
   EloRankThreshold,
   MAX_PLAYERS_PER_LOBBY
 } from "../../../../../types/Config"
-import { useTranslation } from "react-i18next"
 import { useAppSelector } from "../../../hooks"
+import { cc } from "../../utils/jsx"
+import "./room-item.css"
 
 export default function RoomItem(props: {
   room: RoomAvailable<IPreparationMetadata>

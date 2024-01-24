@@ -1,10 +1,10 @@
 import React from "react"
+import { useTranslation } from "react-i18next"
 import { Emotion } from "../../../../../types"
-import { getPortraitSrc } from "../../../utils"
 import { getEmotionCost } from "../../../../../types/Config"
+import { getPortraitSrc } from "../../../utils"
 import { cc } from "../../utils/jsx"
 import "./pokemon-emotion.css"
-import { useTranslation } from "react-i18next"
 
 export default function PokemonEmotion(props: {
   index: string

@@ -3,7 +3,7 @@ import { BOT_SCORES, getBotScore } from "./bot-logic"
 import "./score-indicator.css"
 
 export default function ScoreIndicator(props: { value: number }) {
-  let score = getBotScore(props.value)
+  const score = getBotScore(props.value)
 
   return (
     <div className="score-indicator">

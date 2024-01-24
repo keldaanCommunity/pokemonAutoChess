@@ -1,4 +1,4 @@
-import { Schema, type, ArraySchema } from "@colyseus/schema"
+import { ArraySchema, Schema, type } from "@colyseus/schema"
 import { ISimplePlayer, Role } from "../../types"
 import { Synergy } from "../../types/enum/Synergy"
 import { IPokemonRecord, PokemonRecord } from "./game-record"

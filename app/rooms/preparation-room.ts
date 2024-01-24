@@ -1,34 +1,34 @@
-import { Client, Room, updateLobby } from "colyseus"
 import { Dispatcher } from "@colyseus/command"
-import PreparationState from "./states/preparation-state"
+import { Client, Room, updateLobby } from "colyseus"
 import admin from "firebase-admin"
 import { nanoid } from "nanoid"
-import {
-  OnGameStartRequestCommand,
-  OnJoinCommand,
-  OnLeaveCommand,
-  OnToggleReadyCommand,
-  OnMessageCommand,
-  OnAddBotCommand,
-  OnRemoveBotCommand,
-  OnListBotsCommand,
-  OnRoomNameCommand,
-  OnRoomPasswordCommand,
-  OnToggleEloCommand,
-  OnKickPlayerCommand,
-  OnDeleteRoomCommand
-} from "./commands/preparation-commands"
-import { BotDifficulty, LobbyType } from "../types/enum/Game"
-import { IPreparationMetadata, Transfer } from "../types"
 import { components } from "../api-v1/openapi"
 import { GameUser } from "../models/colyseus-models/game-user"
 import BannedUser from "../models/mongo-models/banned-user"
 import { IBot } from "../models/mongo-models/bot-v2"
 import UserMetadata from "../models/mongo-models/user-metadata"
+import { IPreparationMetadata, Transfer } from "../types"
+import { EloRank, MAX_PLAYERS_PER_LOBBY } from "../types/Config"
+import { BotDifficulty, LobbyType } from "../types/enum/Game"
 import { logger } from "../utils/logger"
 import { cleanProfanity } from "../utils/profanity-filter"
-import { EloRank, MAX_PLAYERS_PER_LOBBY } from "../types/Config"
 import { values } from "../utils/schemas"
+import {
+  OnAddBotCommand,
+  OnDeleteRoomCommand,
+  OnGameStartRequestCommand,
+  OnJoinCommand,
+  OnKickPlayerCommand,
+  OnLeaveCommand,
+  OnListBotsCommand,
+  OnMessageCommand,
+  OnRemoveBotCommand,
+  OnRoomNameCommand,
+  OnRoomPasswordCommand,
+  OnToggleEloCommand,
+  OnToggleReadyCommand
+} from "./commands/preparation-commands"
+import PreparationState from "./states/preparation-state"
 
 export default class PreparationRoom extends Room<PreparationState> {
   dispatcher: Dispatcher<this>
@@ -100,7 +100,7 @@ export default class PreparationRoom extends Room<PreparationState> {
 
     if (options.autoStartDelayInSeconds) {
       this.clock.setTimeout(() => {
-        if(this.state.users.size < 2){
+        if (this.state.users.size < 2) {
           this.broadcast(Transfer.KICK)
           this.disconnect()
         } else {
@@ -284,7 +284,7 @@ export default class PreparationRoom extends Room<PreparationState> {
       client.send(Transfer.USER_PROFILE, userProfile)
 
       const isAlreadyInRoom = this.state.users.has(user.uid)
-      let numberOfHumanPlayers = values(this.state.users).filter(
+      const numberOfHumanPlayers = values(this.state.users).filter(
         (u) => !u.isBot
       ).length
       if (numberOfHumanPlayers >= MAX_PLAYERS_PER_LOBBY) {

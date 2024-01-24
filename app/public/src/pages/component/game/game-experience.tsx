@@ -1,9 +1,8 @@
 import React from "react"
-import { useAppSelector } from "../../../hooks"
-import { useAppDispatch } from "../../../hooks"
+import { useTranslation } from "react-i18next"
+import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { levelClick } from "../../../stores/NetworkStore"
 import { Money } from "../icons/money"
-import { useTranslation } from "react-i18next"
 
 export default function GameExperience() {
   const { t } = useTranslation()

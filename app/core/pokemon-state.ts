@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { Item } from "../types/enum/Item"
+import Player from "../models/colyseus-models/player"
+import { IPokemonEntity, Transfer } from "../types"
+import { FIGHTING_PHASE_DURATION } from "../types/Config"
 import { Effect } from "../types/enum/Effect"
 import {
   AttackType,
@@ -7,18 +9,16 @@ import {
   PokemonActionState,
   Team
 } from "../types/enum/Game"
+import { Item } from "../types/enum/Item"
+import { Passive } from "../types/enum/Passive"
+import { Synergy, SynergyEffects } from "../types/enum/Synergy"
+import { Weather } from "../types/enum/Weather"
+import { distanceC, distanceM } from "../utils/distance"
+import { logger } from "../utils/logger"
+import { max, min } from "../utils/number"
+import { pickRandomIn } from "../utils/random"
 import Board from "./board"
 import { PokemonEntity } from "./pokemon-entity"
-import { IPokemonEntity, Transfer } from "../types"
-import { Synergy, SynergyEffects } from "../types/enum/Synergy"
-import { pickRandomIn } from "../utils/random"
-import { logger } from "../utils/logger"
-import { Passive } from "../types/enum/Passive"
-import { Weather } from "../types/enum/Weather"
-import { max, min } from "../utils/number"
-import { distanceC, distanceM } from "../utils/distance"
-import { FIGHTING_PHASE_DURATION } from "../types/Config"
-import Player from "../models/colyseus-models/player"
 
 export default class PokemonState {
   handleHeal(

@@ -1,8 +1,8 @@
 import { t } from "i18next"
 import React, { useEffect, useMemo, useState } from "react"
 import {
-  fetchMetaPokemons,
-  IPokemonsStatistic
+  IPokemonsStatistic,
+  fetchMetaPokemons
 } from "../../../../../models/mongo-models/pokemons-statistic"
 import { Rarity } from "../../../../../types/enum/Game"
 import { Synergy } from "../../../../../types/enum/Synergy"

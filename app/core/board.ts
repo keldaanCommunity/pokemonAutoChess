@@ -1,4 +1,3 @@
-import PokemonFactory from "../models/pokemon-factory"
 import { IPokemonEntity } from "../types"
 import { Effect } from "../types/enum/Effect"
 import { Orientation } from "../types/enum/Game"

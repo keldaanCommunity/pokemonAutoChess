@@ -1,25 +1,25 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import LobbyUser, {
-  ILobbyUser
-} from "../../../models/colyseus-models/lobby-user"
-import Message from "../../../models/colyseus-models/message"
+import { RoomAvailable } from "colyseus.js"
 import {
   ILeaderboardBotInfo,
   ILeaderboardInfo
 } from "../../../models/colyseus-models/leaderboard-info"
-import { RoomAvailable } from "colyseus.js"
+import LobbyUser, {
+  ILobbyUser
+} from "../../../models/colyseus-models/lobby-user"
+import Message from "../../../models/colyseus-models/message"
+import { IBot, IStep } from "../../../models/mongo-models/bot-v2"
+import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
 import {
-  IGameMetadata,
   IChatV2,
+  IGameMetadata,
   IPreparationMetadata,
   ISuggestionUser
 } from "../../../types"
-import { IBot, IStep } from "../../../models/mongo-models/bot-v2"
-import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
-import { playSound, SOUNDS } from "../pages/utils/audio"
+import { SpecialLobbyType } from "../../../types/enum/Game"
 import { Language } from "../../../types/enum/Language"
 import { MAX_BOTS_STAGE } from "../pages/component/bot-builder/bot-logic"
-import { SpecialLobbyType } from "../../../types/enum/Game"
+import { playSound, SOUNDS } from "../pages/utils/audio"
 
 export interface IUserLobbyState {
   botLogDatabase: string[]

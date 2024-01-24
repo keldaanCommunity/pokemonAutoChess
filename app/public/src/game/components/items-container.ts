@@ -1,9 +1,9 @@
 import { CollectionSchema, SetSchema } from "@colyseus/schema"
 import { GameObjects } from "phaser"
-import ItemContainer from "./item-container"
-import { Item } from "../../../../types/enum/Item"
 import Player from "../../../../models/colyseus-models/player"
+import { Item } from "../../../../types/enum/Item"
 import { values } from "../../../../utils/schemas"
+import ItemContainer from "./item-container"
 
 export default class ItemsContainer extends GameObjects.Container {
   pokemonId: string | null

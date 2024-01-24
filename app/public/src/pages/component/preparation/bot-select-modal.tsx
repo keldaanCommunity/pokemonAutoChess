@@ -1,14 +1,13 @@
 import React, { useState } from "react"
-import { IBot } from "../../../../../models/mongo-models/bot-v2"
-import { EloBadge } from "../profile/elo-badge"
-import { InlineAvatar } from "../profile/inline-avatar"
-import { setBotsList } from "../../../stores/PreparationStore"
 import { useTranslation } from "react-i18next"
+import { IBot } from "../../../../../models/mongo-models/bot-v2"
 import { useAppDispatch } from "../../../hooks"
 import { addBot } from "../../../stores/NetworkStore"
+import { setBotsList } from "../../../stores/PreparationStore"
 import { cc } from "../../utils/jsx"
+import { EloBadge } from "../profile/elo-badge"
+import { InlineAvatar } from "../profile/inline-avatar"
 import "./bot-select-modal.css"
-
 
 export function BotSelectModal(props: { bots: IBot[] }) {
   const dispatch = useAppDispatch()
