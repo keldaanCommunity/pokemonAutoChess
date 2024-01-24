@@ -1,15 +1,26 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
 
-import { Schema, type, SetSchema, MapSchema } from "@colyseus/schema"
+import { MapSchema, Schema, SetSchema, type } from "@colyseus/schema"
 import { nanoid } from "nanoid"
+import { AbilityStrategies } from "../../core/abilities/abilities"
 import {
-  Emotion,
-  IPokemon,
+  CountEvolutionRule,
+  EvolutionRule,
+  HatchEvolutionRule,
+  ItemEvolutionRule,
+  MoneyEvolutionRule,
+  TurnEvolutionRule
+} from "../../core/evolution-rules"
+import { PokemonEntity } from "../../core/pokemon-entity"
+import Simulation from "../../core/simulation"
+import {
   AttackSprite,
-  Title,
+  Emotion,
   IPlayer,
-  IPokemonEntity
+  IPokemon,
+  IPokemonEntity,
+  Title
 } from "../../types"
 import {
   DEFAULT_ATK_SPEED,
@@ -20,30 +31,19 @@ import {
   SynergyTriggers,
   TandemausEvolutionTurn
 } from "../../types/Config"
-import { AllItems, Berries, Item, ItemRecipe } from "../../types/enum/Item"
-import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
-import { Rarity, AttackType, PokemonActionState } from "../../types/enum/Game"
 import { Ability } from "../../types/enum/Ability"
-import { Synergy } from "../../types/enum/Synergy"
+import { AttackType, PokemonActionState, Rarity } from "../../types/enum/Game"
+import { AllItems, Berries, Item, ItemRecipe } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
-import Player from "./player"
-import { values } from "../../utils/schemas"
+import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
+import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
-import { coinflip, pickRandomIn } from "../../utils/random"
-import {
-  CountEvolutionRule,
-  EvolutionRule,
-  HatchEvolutionRule,
-  ItemEvolutionRule,
-  MoneyEvolutionRule,
-  TurnEvolutionRule
-} from "../../core/evolution-rules"
-import PokemonFactory from "../pokemon-factory"
-import { distanceM } from "../../utils/distance"
-import Simulation from "../../core/simulation"
-import { AbilityStrategies } from "../../core/abilities/abilities"
-import { PokemonEntity } from "../../core/pokemon-entity"
 import { sum } from "../../utils/array"
+import { distanceM } from "../../utils/distance"
+import { coinflip, pickRandomIn } from "../../utils/random"
+import { values } from "../../utils/schemas"
+import PokemonFactory from "../pokemon-factory"
+import Player from "./player"
 
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string
@@ -6747,7 +6747,7 @@ export class TapuKoko extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.ELECTRIC_SURGE
-  passive = Passive.ELECTRIC_SURGE
+  passive = Passive.ELECTRIC_TERRAIN
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
@@ -6762,7 +6762,7 @@ export class TapuLele extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.PSYCHIC_SURGE
-  passive = Passive.PSYCHIC_SURGE
+  passive = Passive.PSYCHIC_TERRAIN
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -6792,7 +6792,7 @@ export class TapuFini extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.MISTY_SURGE
-  passive = Passive.MISTY_SURGE
+  passive = Passive.MISTY_TERRAIN
   attackSprite = AttackSprite.WATER_RANGE
 }
 
@@ -6807,7 +6807,7 @@ export class TapuBulu extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.GRASSY_SURGE
-  passive = Passive.GRASSY_SURGE
+  passive = Passive.GRASSY_TERRAIN
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -10882,6 +10882,81 @@ export class MausholdFour extends Pokemon {
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
+export class Minior extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.ROCK])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 12
+  def = 5
+  speDef = 5
+  maxPP = 50
+  range = 2
+  skill = Ability.SHIELDS_DOWN
+  attackSprite = AttackSprite.ROCK_RANGE
+  passive = Passive.METEOR
+}
+
+export class MiniorKernelBlue extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.ROCK])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 12
+  def = 5
+  speDef = 5
+  maxPP = 50
+  range = 2
+  skill = Ability.SHIELDS_UP
+  attackSprite = AttackSprite.ROCK_RANGE
+  passive = Passive.METEOR
+}
+
+export class MiniorKernelRed extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.ROCK])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 12
+  def = 5
+  speDef = 5
+  maxPP = 50
+  range = 2
+  skill = Ability.SHIELDS_UP
+  attackSprite = AttackSprite.ROCK_RANGE
+  passive = Passive.METEOR
+}
+
+export class MiniorKernelOrange extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.ROCK])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 12
+  def = 5
+  speDef = 5
+  maxPP = 50
+  range = 2
+  skill = Ability.SHIELDS_UP
+  attackSprite = AttackSprite.ROCK_RANGE
+  passive = Passive.METEOR
+}
+
+export class MiniorKernelGreen extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.ROCK])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 12
+  def = 5
+  speDef = 5
+  maxPP = 50
+  range = 2
+  skill = Ability.SHIELDS_UP
+  attackSprite = AttackSprite.ROCK_RANGE
+  passive = Passive.METEOR
+}
+
 export class Hoopa extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.DARK, Synergy.GHOST])
   rarity = Rarity.UNIQUE
@@ -11046,7 +11121,6 @@ export class Comfey extends Pokemon {
       nearestAllyWithFreeItemSlot.items.add(Item.COMFEY)
 
       // apply comfey stats
-      nearestAllyWithFreeItemSlot.addPP(entity.pp)
       nearestAllyWithFreeItemSlot.addAbilityPower(entity.ap)
       nearestAllyWithFreeItemSlot.addAttack(entity.atk)
       nearestAllyWithFreeItemSlot.addAttackSpeed(
@@ -11571,7 +11645,7 @@ export const PokemonClasses: Record<
   [Pkm.ABSOL]: Absol,
   [Pkm.LAPRAS]: Lapras,
   [Pkm.LATIAS]: Latias,
-  [Pkm.LATIOS]: Latias,
+  [Pkm.LATIOS]: Latios,
   [Pkm.MESPRIT]: Mesprit,
   [Pkm.AZELF]: Azelf,
   [Pkm.UXIE]: Uxie,
@@ -12013,5 +12087,10 @@ export const PokemonClasses: Record<
   [Pkm.CYCLIZAR]: Cyclizar,
   [Pkm.PAWNIARD]: Pawniard,
   [Pkm.BISHARP]: Bisharp,
-  [Pkm.KINGAMBIT]: Kingambit
+  [Pkm.KINGAMBIT]: Kingambit,
+  [Pkm.MINIOR]: Minior,
+  [Pkm.MINIOR_KERNEL_RED]: MiniorKernelRed,
+  [Pkm.MINIOR_KERNEL_BLUE]: MiniorKernelBlue,
+  [Pkm.MINIOR_KERNEL_ORANGE]: MiniorKernelOrange,
+  [Pkm.MINIOR_KERNEL_GREEN]: MiniorKernelGreen
 }

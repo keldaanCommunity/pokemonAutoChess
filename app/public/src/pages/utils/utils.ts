@@ -1,5 +1,5 @@
+import { IPokemon, IPokemonEntity } from "../../../../types"
 import { Orientation } from "../../../../types/enum/Game"
-import { AttackSprite, IPokemon, IPokemonEntity } from "../../../../types"
 
 export const FIREBASE_CONFIG = {
   apiKey: process.env.FIREBASE_API_KEY,

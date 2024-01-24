@@ -69,11 +69,13 @@ export default class BoardManager {
   victoryAnimation(winnerId: string) {
     //logger.debug({ winnerId, playerId: this.player.id, opponentId: this.opponentAvatar?.playerId })
     if (winnerId === this.player.id) {
-      this.animationManager.animatePokemon(
-        this.playerAvatar,
-        PokemonActionState.HOP,
-        false
-      )
+      if (this.playerAvatar) {
+        this.animationManager.animatePokemon(
+          this.playerAvatar,
+          PokemonActionState.HOP,
+          false
+        )
+      }
       if (this.opponentAvatar) {
         this.animationManager.animatePokemon(
           this.opponentAvatar,

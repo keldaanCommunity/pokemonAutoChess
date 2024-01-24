@@ -285,7 +285,9 @@
     "TRANSFORM": "Transform",
     "PSYCHIC_FANGS": "Psychic Fangs",
     "SHED_TAIL": "Shed Tail",
-    "KOWTOW_CLEAVE": "Kowtow Cleave"
+    "KOWTOW_CLEAVE": "Kowtow Cleave",
+    "SHIELDS_DOWN": "Shields Down",
+    "SHIELDS_UP": "Shields Up"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -970,7 +972,12 @@
     "CYCLIZAR": "Cyclizar",
     "PAWNIARD": "Pawniard",
     "BISHARP": "Bisharp",
-    "KINGAMBIT": "Kingambit"
+    "KINGAMBIT": "Kingambit",
+    "MINIOR": "Minior",
+    "MINIOR_KERNEL_RED": "Minior Red Core",
+    "MINIOR_KERNEL_BLUE": "Minior Blue Core",
+    "MINIOR_KERNEL_ORANGE": "Minior Orange Core",
+    "MINIOR_KERNEL_GREEN": "Minior Green Core"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1241,7 +1248,9 @@
     "PSYCHIC_FANGS": "Inflicts [100,SP] PHYSICAL and removes all the target's ATK, DEF and SPE_DEF buffs",
     "SHED_TAIL": "Caster create a substitute and charge towards the ally with the fewest HP to give it [80, SP] SHIELD",
     "NIGHT_SLASH": "Deal [15,30,60,SP] SPECIAL with a [30,60,90]% increased CRIT_CHANCE ratio",
-    "KOWTOW_CLEAVE": "Deal 100% ATK + [10,SP]% per fallen ally as TRUE. Can crit by default."
+    "KOWTOW_CLEAVE": "Deal 100% ATK + [10,SP]% per fallen ally as TRUE. Can crit by default",
+    "SHIELDS_DOWN": "Transform Minior to a random core form",
+    "SHIELDS_UP": "Transform Minior to its meteor form"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1655,10 +1664,10 @@
     "PHIONE": "Phione is looking for an AQUA_EGG",
     "PRIMAL": "Legend has it that you could unleash the ancient powers of these pokemons",
     "WONDER_GUARD": "Reduce received damage and received healing to 1",
-    "ELECTRIC_SURGE": "Give ELECTRIC_FIELD to your ELECTRIC Pokemon, boosting their damage by 20%",
-    "GRASSY_SURGE": "Give GRASS_FIELD to your GRASS Pokemon, boosting their damage by 20%",
-    "MISTY_SURGE": "Give FAIRY_FIELD to your FAIRY Pokemon, boosting their damage by 20%",
-    "PSYCHIC_SURGE": "Give PSYCHIC_FIELD to your Psychic Pokemon, boosting their damage by 20%",
+    "ELECTRIC_TERRAIN": "Give ELECTRIC_FIELD to your ELECTRIC Pokemon, boosting their damage by 20%",
+    "GRASSY_TERRAIN": "Give GRASS_FIELD to your GRASS Pokemon, boosting their damage by 20%",
+    "MISTY_TERRAIN": "Give FAIRY_FIELD to your FAIRY Pokemon, boosting their damage by 20%",
+    "PSYCHIC_TERRAIN": "Give PSYCHIC_FIELD to your Psychic Pokemon, boosting their damage by 20%",
     "EEVEE": "Eevee can evolve into one of the 8 Eeveelutions when given a synergy stone",
     "SUDOWOODO": "Pretends to be a tree and does not attack but gain [2,4] ATK per second instead (stackable).\nStarts attacking when PP bar is full, cannot be SILENCE or lose PP until then.",
     "WOBBUFFET": "Does not move or attack until PP bar is full, cannot be SILENCE or lose PP until then.",
@@ -1725,7 +1734,8 @@
     "CORSOLA": "$t(pkm.CORSOLA) evolves into $t(pkm.GALAR_CORSOLA) after being KO once",
     "CELEBI": "The player regains 1 HP every time $t(pkm.CELEBI) casts $t(ability.TIME_TRAVEL).",
     "GIMMIGHOUL": "$t(pkm.GIMMIGHOUL) is looking for 99 golds",
-    "GHOLDENGO": "At the start of each fight, if the player has 50 GOLD or more, $t(pkm.GHOLDENGO) gains RUNE_PROTECT for the entire fight"
+    "GHOLDENGO": "At the start of each fight, if the player has 50 GOLD or more, $t(pkm.GHOLDENGO) gains RUNE_PROTECT for the entire fight",
+    "METEOR": "$t(pkm.MINIOR) alternates between its meteor and core forms.\n The meteor form grants [4,SP]% ATK_SPEED per attack.\n Core form grants splash damage and:\n Blue: Deals additional 10% SPECIAL\n Red: Deals additional 15% PHYSICAL\n Orange: Deals additional 5% TRUE\n Green: Heals adjacent allies for [5,SP] HP"
   },
   "stat": {
     "ATK": "Attack",

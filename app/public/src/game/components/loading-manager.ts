@@ -1,11 +1,10 @@
+import { t } from "i18next"
 import { GameObjects } from "phaser"
+import AnimatedTiles from "phaser-animated-tiles-phaser3.5/dist/AnimatedTiles.min.js"
+import indexList from "../../../src/assets/pokemons/indexList.json"
+import atlas from "../../assets/atlas.json"
 import { getPortraitSrc } from "../../utils"
 import GameScene from "../scenes/game-scene"
-import indexList from "../../../dist/client/assets/pokemons/indexList.json"
-import { t } from "i18next"
-import { Stat } from "../../../../types/enum/Game"
-import AnimatedTiles from "phaser-animated-tiles-phaser3.5/dist/AnimatedTiles.min.js"
-import atlas from "../../assets/atlas.json"
 
 export default class LoadingManager {
   scene: Phaser.Scene
@@ -75,88 +74,16 @@ export default class LoadingManager {
 
     scene.load.multiatlas("item", "/assets/item/item.json", "/assets/item/")
 
-    for (let pack in atlas) {
+    for (const pack in atlas.packs) {
       scene.load.multiatlas(
-        atlas[pack].name,
-        `/assets/${pack}/${atlas[pack].name}.json`,
+        atlas.packs[pack].name,
+        `/assets/${pack}/${atlas.packs[pack].name}.json`,
         `/assets/${pack}/`
       )
     }
 
-    loadStatusMultiAtlas(this.scene)
     loadEnvironmentMultiAtlas(this.scene)
   }
-}
-
-export function loadStatusMultiAtlas(scene: Phaser.Scene) {
-  scene.load.multiatlas(
-    "status",
-    "/assets/status/status.json",
-    "/assets/status/"
-  )
-  scene.load.multiatlas("wound", "/assets/status/wound.json", "/assets/status")
-  scene.load.multiatlas(
-    "resurection",
-    "/assets/status/resurection.json",
-    "/assets/status"
-  )
-  scene.load.multiatlas(
-    "RESURECT",
-    "/assets/status/RESURECT.json",
-    "/assets/status"
-  )
-  scene.load.multiatlas(
-    "paralysis",
-    "/assets/status/PARALYSIS.json",
-    "/assets/status"
-  )
-  scene.load.multiatlas(
-    "rune_protect",
-    "/assets/status/RUNE_PROTECT.json",
-    "/assets/status"
-  )
-  scene.load.multiatlas(
-    "armorReduction",
-    "/assets/status/ARMOR_REDUCTION.json",
-    "/assets/status"
-  )
-  scene.load.multiatlas("charm", "/assets/status/CHARM.json", "/assets/status")
-  scene.load.multiatlas(
-    "flinch",
-    "/assets/status/FLINCH.json",
-    "/assets/status"
-  )
-  scene.load.multiatlas("curse", "/assets/status/CURSE.json", "/assets/status")
-  scene.load.multiatlas(
-    "CURSE_EFFECT",
-    "/assets/status/CURSE_EFFECT.json",
-    "/assets/status"
-  )
-  scene.load.multiatlas(
-    "ELECTRIC_SURGE",
-    "/assets/status/ELECTRIC_SURGE.json",
-    "/assets/status"
-  )
-  scene.load.multiatlas(
-    "VOID_BOOST",
-    "/assets/status/VOID_BOOST.json",
-    "/assets/status"
-  )
-  scene.load.multiatlas(
-    "PSYCHIC_SURGE",
-    "/assets/status/PSYCHIC_SURGE.json",
-    "/assets/status"
-  )
-  scene.load.multiatlas(
-    "GRASSY_SURGE",
-    "/assets/status/GRASSY_SURGE.json",
-    "/assets/status"
-  )
-  scene.load.multiatlas(
-    "MISTY_SURGE",
-    "/assets/status/MISTY_SURGE.json",
-    "/assets/status"
-  )
 }
 
 export function loadEnvironmentMultiAtlas(scene: Phaser.Scene) {
@@ -175,7 +102,6 @@ export function loadEnvironmentMultiAtlas(scene: Phaser.Scene) {
     "/assets/environment/shine.json",
     "/assets/environment/"
   )
-  scene.load.multiatlas("types", "/assets/types/sheet.json", "/assets/types/")
 
   scene.load.multiatlas(
     "berry_trees",

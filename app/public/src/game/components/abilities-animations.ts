@@ -3,8 +3,8 @@ import { Ability } from "../../../../types/enum/Ability"
 import { Orientation, PokemonActionState } from "../../../../types/enum/Game"
 import { distanceE } from "../../../../utils/distance"
 import {
-  OrientationVector,
-  OrientationArray
+  OrientationArray,
+  OrientationVector
 } from "../../../../utils/orientation"
 import { randomBetween } from "../../../../utils/random"
 import { transformAttackCoordinate } from "../../pages/utils/utils"
@@ -24,8 +24,8 @@ export function displayAbility(
   targetY: number,
   flip: boolean
 ) {
-  let coordinates = transformAttackCoordinate(positionX, positionY, flip)
-  let coordinatesTarget = transformAttackCoordinate(targetX, targetY, flip)
+  const coordinates = transformAttackCoordinate(positionX, positionY, flip)
+  const coordinatesTarget = transformAttackCoordinate(targetX, targetY, flip)
 
   function addAbilitySprite(
     skill: Ability | string,
@@ -75,11 +75,12 @@ export function displayAbility(
     case Ability.DYNAMAX_CANNON:
       addAbilitySprite(skill, coordinates, true)
         .setScale(2)
+        .setOrigin(0.5, 0)
         .setRotation(
           Math.atan2(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
-          ) +
+          ) -
             Math.PI / 2
         )
       break
@@ -147,7 +148,11 @@ export function displayAbility(
       break
 
     case Ability.DARK_VOID:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(4)
+      addAbilitySprite(
+        Ability.TWISTING_NETHER,
+        coordinatesTarget,
+        true
+      ).setScale(4)
       break
 
     case Ability.WHEEL_OF_FIRE: {
@@ -266,8 +271,8 @@ export function displayAbility(
     }
 
     case Ability.ORIGIN_PULSE: {
-      let startCoords = transformAttackCoordinate(0, targetY, flip)
-      let finalCoords = transformAttackCoordinate(8, targetY, flip)
+      const startCoords = transformAttackCoordinate(0, targetY, flip)
+      const finalCoords = transformAttackCoordinate(8, targetY, flip)
       const specialProjectile = addAbilitySprite(skill, startCoords).setScale(4)
       scene.tweens.add({
         targets: specialProjectile,
@@ -333,7 +338,9 @@ export function displayAbility(
       break
 
     case Ability.DRACO_METEOR:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      addAbilitySprite(skill, coordinatesTarget, true)
+        .setOrigin(0.5, 0.9)
+        .setScale(2)
       break
 
     case Ability.BLAZE_KICK:
@@ -349,7 +356,11 @@ export function displayAbility(
       break
 
     case Ability.COSMIC_POWER:
-      addAbilitySprite(skill, coordinates, true).setScale(2)
+      addAbilitySprite(skill, coordinates, true).setOrigin(0.5, 1).setScale(2)
+      break
+
+    case Ability.FORECAST:
+      addAbilitySprite(skill, coordinates, true).setDepth(0).setScale(2)
       break
 
     case Ability.CHATTER:
@@ -377,7 +388,10 @@ export function displayAbility(
       break
 
     case Ability.CHARGE:
-      addAbilitySprite(skill, coordinates, true).setScale(2)
+      addAbilitySprite(skill, coordinates, true)
+        .setDepth(0)
+        .setOrigin(0.5, 0.8)
+        .setScale(4)
       break
 
     case Ability.DISCHARGE:
@@ -498,7 +512,9 @@ export function displayAbility(
       break
 
     case Ability.ROCK_TOMB:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      addAbilitySprite(skill, coordinatesTarget, true)
+        .setOrigin(0.5, 0.9)
+        .setScale(1)
       break
 
     case Ability.ILLUSION:
@@ -518,7 +534,15 @@ export function displayAbility(
       break
 
     case Ability.FISHIOUS_REND:
-      addAbilitySprite(Ability.FISHIOUS_REND, coordinatesTarget, true)
+      addAbilitySprite(skill, coordinates, true)
+        .setScale(2)
+        .setRotation(
+          Math.atan2(
+            coordinatesTarget[1] - coordinates[1],
+            coordinatesTarget[0] - coordinates[0]
+          ) -
+            Math.PI / 2
+        )
       break
 
     case Ability.GOLD_RUSH:
@@ -526,7 +550,7 @@ export function displayAbility(
       const specialProjectile = addAbilitySprite(
         Ability.GOLD_RUSH,
         coordinates
-      ).setScale(3)
+      ).setScale(skill === Ability.MAKE_IT_RAIN ? 3 : 2)
       scene.tweens.add({
         targets: specialProjectile,
         x: coordinatesTarget[0],
@@ -574,7 +598,7 @@ export function displayAbility(
     }
 
     case Ability.SKY_ATTACK: {
-      let startCoords = transformAttackCoordinate(targetX, 9, false)
+      const startCoords = transformAttackCoordinate(targetX, 9, false)
       const specialProjectile = addAbilitySprite(skill, startCoords).setScale(
         1.5
       )
@@ -592,7 +616,7 @@ export function displayAbility(
     }
 
     case Ability.ACROBATICS: {
-      let startCoords = transformAttackCoordinate(
+      const startCoords = transformAttackCoordinate(
         targetX + 1,
         targetY + 1,
         flip
@@ -702,11 +726,11 @@ export function displayAbility(
     }
 
     case Ability.PAYDAY:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(22)
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
     case Ability.AIR_SLASH:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(22)
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
     case Ability.VINE_WHIP:
@@ -716,6 +740,7 @@ export function displayAbility(
     case Ability.VOLT_SWITCH:
       addAbilitySprite(skill, coordinates, true)
         .setScale(2)
+        .setOrigin(0.5, 0)
         .setRotation(
           Math.atan2(
             coordinatesTarget[1] - coordinates[1],
@@ -726,7 +751,7 @@ export function displayAbility(
       break
 
     case Ability.STEAM_ERUPTION:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(22)
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
     case Ability.SEARING_SHOT:
@@ -736,7 +761,7 @@ export function displayAbility(
       break
 
     case Ability.APPLE_ACID:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(22)
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
     case Ability.PSYCHIC_FANGS:
@@ -770,6 +795,14 @@ export function displayAbility(
       })
       break
     }
+
+    case Ability.SHIELDS_DOWN:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
+    case Ability.SHIELDS_UP:
+      addAbilitySprite(skill, coordinates, true).setScale(2)
+      break
 
     case Ability.BRAVE_BIRD:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
@@ -878,19 +911,24 @@ export function displayAbility(
       for (let i = 0; i < nbHits; i++) {
         setTimeout(() => {
           addAbilitySprite(
-            skill,
+            Ability.HYPERSPACE_FURY,
             [
-              coordinatesTarget[0] + randomBetween(-20, +20),
-              coordinatesTarget[1] + randomBetween(-20, +20)
+              coordinatesTarget[0] + randomBetween(-30, +30),
+              coordinatesTarget[1] + randomBetween(-30, +30)
             ],
             true
           )
             .setScale(1)
+            .setRotation(-Math.PI / 2)
             .setTint(0xc080ff)
         }, i * 150)
       }
       break
     }
+
+    case Ability.FLORAL_HEALING:
+      addAbilitySprite(skill, coordinates, true).setScale(2)
+      break
 
     case Ability.LEAF_BLADE:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
@@ -909,7 +947,7 @@ export function displayAbility(
       break
 
     case Ability.ERUPTION: {
-      let startCoords = transformAttackCoordinate(
+      const startCoords = transformAttackCoordinate(
         targetX + 3,
         targetY + 3,
         flip
@@ -966,11 +1004,16 @@ export function displayAbility(
       break
 
     case Ability.SACRED_SWORD:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      addAbilitySprite(skill, coordinatesTarget, true)
+        .setScale(2)
+        .setOrigin(0.5, 0.2)
+        .setRotation(Math.PI)
       break
 
     case Ability.JUDGEMENT:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      addAbilitySprite(skill, coordinatesTarget, true)
+        .setOrigin(0.5, 1)
+        .setScale(2)
       break
 
     case Ability.SHADOW_SNEAK:
@@ -1022,7 +1065,7 @@ export function displayAbility(
       break
 
     case Ability.ECHO:
-      addAbilitySprite(skill, coordinates, true).setScale(2)
+      addAbilitySprite(skill, coordinates, true).setOrigin(0.5, 0.7).setScale(2)
       break
 
     case Ability.EXPLOSION:
@@ -1199,7 +1242,7 @@ export function displayAbility(
       break
 
     case Ability.MIND_BLOWN:
-      addAbilitySprite(skill, coordinates, true).setScale(2)
+      addAbilitySprite(skill, coordinates, true).setOrigin(0.5, 0.8).setScale(2)
       break
 
     case "MIND_BLOWN/hit":
@@ -1328,7 +1371,7 @@ export function displayAbility(
     case Ability.UPPERCUT: {
       const specialProjectile = addAbilitySprite(
         "FIGHTING/FIST",
-        coordinates
+        coordinatesTarget
       ).setScale(0.25)
       scene.tweens.add({
         targets: specialProjectile,
@@ -1428,6 +1471,12 @@ export function displayAbility(
         .setScale(2)
       break
 
+    case Ability.BLIZZARD:
+      addAbilitySprite(Ability.BLIZZARD, coordinates, true)
+        .setDepth(0)
+        .setScale(2)
+      break
+
     case Ability.OVERHEAT:
       addAbilitySprite(Ability.FIRE_BLAST, coordinates, true)
         .setDepth(0)
@@ -1435,10 +1484,13 @@ export function displayAbility(
       break
 
     case Ability.MIST_BALL: {
-      const finalCoords = transformAttackCoordinate(targetX, 6, false)
-      const specialProjectile = addAbilitySprite(skill, coordinates).setScale(
-        1.5
+      const [dx, dy] = OrientationVector[orientation]
+      const finalCoords = transformAttackCoordinate(
+        positionX + dx * 5,
+        positionY + dy * 5,
+        flip
       )
+      const specialProjectile = addAbilitySprite(skill, coordinates).setScale(1)
       scene.tweens.add({
         targets: specialProjectile,
         x: finalCoords[0],
@@ -1454,10 +1506,13 @@ export function displayAbility(
     }
 
     case Ability.LUSTER_PURGE: {
-      const finalCoords = transformAttackCoordinate(targetX, 6, false)
-      const specialProjectile = addAbilitySprite(skill, coordinates).setScale(
-        1.5
+      const [dx, dy] = OrientationVector[orientation]
+      const finalCoords = transformAttackCoordinate(
+        positionX + dx * 5,
+        positionY + dy * 5,
+        flip
       )
+      const specialProjectile = addAbilitySprite(skill, coordinates).setScale(1)
       scene.tweens.add({
         targets: specialProjectile,
         x: finalCoords[0],
@@ -1488,7 +1543,7 @@ export function displayAbility(
     }
 
     case Ability.STEALTH_ROCKS:
-      addAbilitySprite(skill, coordinates, true).setDepth(1).setScale(1)
+      addAbilitySprite(skill, coordinates, true).setDepth(1).setScale(2)
       break
 
     case "LINK_CABLE_link": {
@@ -1655,6 +1710,10 @@ export function displayAbility(
 
     case Ability.PETAL_DANCE:
       addAbilitySprite(skill, coordinates, true).setScale(2)
+      break
+
+    case Ability.NIGHTMARE:
+      addAbilitySprite(skill, coordinates, true).setOrigin(0.5, 1).setScale(2)
       break
 
     case "FIELD_DEATH":

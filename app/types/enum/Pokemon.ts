@@ -683,7 +683,12 @@ export enum Pkm {
   CYCLIZAR = "CYCLIZAR",
   PAWNIARD = "PAWNIARD",
   BISHARP = "BISHARP",
-  KINGAMBIT = "KINGAMBIT"
+  KINGAMBIT = "KINGAMBIT",
+  MINIOR = "MINIOR",
+  MINIOR_KERNEL_RED = "MINIOR_KERNEL_RED",
+  MINIOR_KERNEL_BLUE = "MINIOR_KERNEL_BLUE",
+  MINIOR_KERNEL_ORANGE = "MINIOR_KERNEL_ORANGE",
+  MINIOR_KERNEL_GREEN = "MINIOR_KERNEL_GREEN"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1369,7 +1374,12 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.CYCLIZAR]: "0967",
   [Pkm.PAWNIARD]: "0624",
   [Pkm.BISHARP]: "0625",
-  [Pkm.KINGAMBIT]: "0983"
+  [Pkm.KINGAMBIT]: "0983",
+  [Pkm.MINIOR]: "0774",
+  [Pkm.MINIOR_KERNEL_RED]: "0774-0001",
+  [Pkm.MINIOR_KERNEL_BLUE]: "0774-0005",
+  [Pkm.MINIOR_KERNEL_ORANGE]: "0774-0002",
+  [Pkm.MINIOR_KERNEL_GREEN]: "0774-0004"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1588,7 +1598,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.SPIRITOMB]: Pkm.SPIRITOMB,
   [Pkm.ABSOL]: Pkm.ABSOL,
   [Pkm.LAPRAS]: Pkm.LAPRAS,
-  [Pkm.LATIAS]: Pkm.LATIAS,
+  [Pkm.LATIAS]: Pkm.LATIOS,
   [Pkm.LATIOS]: Pkm.LATIOS,
   [Pkm.MESPRIT]: Pkm.MESPRIT,
   [Pkm.AZELF]: Pkm.AZELF,
@@ -2055,7 +2065,12 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.CYCLIZAR]: Pkm.CYCLIZAR,
   [Pkm.PAWNIARD]: Pkm.PAWNIARD,
   [Pkm.BISHARP]: Pkm.PAWNIARD,
-  [Pkm.KINGAMBIT]: Pkm.PAWNIARD
+  [Pkm.KINGAMBIT]: Pkm.PAWNIARD,
+  [Pkm.MINIOR]: Pkm.MINIOR,
+  [Pkm.MINIOR_KERNEL_RED]: Pkm.MINIOR,
+  [Pkm.MINIOR_KERNEL_BLUE]: Pkm.MINIOR,
+  [Pkm.MINIOR_KERNEL_ORANGE]: Pkm.MINIOR,
+  [Pkm.MINIOR_KERNEL_GREEN]: Pkm.MINIOR
 }
 
 export enum PkmDuo {
@@ -5076,8 +5091,8 @@ export const AnimationConfig: {
   },
   [Pkm.PINSIR]: {
     attack: AnimationType.Slice,
-    ability: AnimationType.Double,
-    emote: AnimationType.Charge
+    ability: AnimationType.Attack,
+    emote: AnimationType.Slice
   },
   [Pkm.NATU]: {
     attack: AnimationType.Jab,
@@ -5606,5 +5621,34 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Attack,
     emote: AnimationType.Shoot
+  },
+  [Pkm.MINIOR]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+  },
+  [Pkm.MINIOR_KERNEL_RED]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    shinyUnavailable: true
+  },
+  [Pkm.MINIOR_KERNEL_BLUE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    shinyUnavailable: true
+  },
+  [Pkm.MINIOR_KERNEL_ORANGE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    shinyUnavailable: true
+  },
+  [Pkm.MINIOR_KERNEL_GREEN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    shinyUnavailable: true
   }
 }

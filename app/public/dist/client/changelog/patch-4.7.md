@@ -8,6 +8,7 @@
 - Pawniard
 - Bisharp
 - Kingambit
+- Minior
 
 # Changes to Pokemon & Abilities
 
@@ -37,7 +38,7 @@
 - New ability for Staryu/Starmie: Psybeam: Deal 30/60/100 special damage to all enemy Pokémon behind the target with 50% chance to make them confused for 4 seconds
 - Solosis ability is renamed Psychic and has a new visual effect
 - Duskull/Spiritomb ability is renamed Shadow ball and now lowers special defense instead of defense
-
+- Mist Ball & Luster Purge (Latios, Latias) now have a maximum range of 5 cells
 
 # Changes to Synergies
 
@@ -56,7 +57,6 @@
 - Nerf Light 2 Shining ray ~~30~~ 25% Attack and AP
 - Changed Light 4 Eternal light: increase ~~Attack Speed by 30%~~ Def & SpeDef by 50%
 - Buff Poison: ~~30/50/70~~ 33/66/100% chance to poison on hit
-
 
 # Changes to Items
 
@@ -86,6 +86,8 @@ Base components stats have been reviewed to be closer to each other:
 - Added favorite synergies and units in player card based on game history
 
 # Bugfix
+
+- Fix avatar emotes menu. Right click on your avatar to use the emotions you unlocked
 
 # Misc
 

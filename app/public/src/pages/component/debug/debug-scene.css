@@ -1,5 +1,8 @@
 #debug-scene {
   position: relative;
+}
+
+.sprite-viewer-sprite #debug-scene {
   width: 800px;
   height: 800px;
   overflow: hidden;
@@ -7,7 +10,7 @@
   border-radius: 4px;
 }
 
-#debug-scene canvas {
+.sprite-viewer-sprite #debug-scene canvas {
   position: relative;
   left: -580px;
   top: 0;
