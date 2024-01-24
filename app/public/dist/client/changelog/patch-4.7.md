@@ -76,6 +76,7 @@ Base components stats have been reviewed to be closer to each other:
 - Buff Heart Scale: ~~1~~ 2 def ; also reflects on moon stone, lucky egg, defensive ribbon, flame orb, max revive, poke doll, smoke ball
 - Adjusted Razor Claw: ~~55% crit chance 1 attack~~ 50% crit chance 3 attack
 - Ajusted Fluffy Tail: ~~5% crit chance 5 def~~ 10% crit chance 2 def
+- Adjusted Gracidea flower: ~~1 attack 25% attack speed~~ 3 attack 20% attack speed~~
 - Buff Big Nugget: def & special def ~~3~~ 5
 - Buff Toxic Orb: spe def ~~1~~ 2
 

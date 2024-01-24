@@ -1613,7 +1613,7 @@
     "FLUFFY_TAIL": "Holder is immune to all status alterations",
     "KINGS_ROCK": "+150 SHIELD when combat begins",
     "SHINY_CHARM": "Prevents damage and give PROTECT for 2 seconds the first time the holders gets below 30% HP",
-    "GRACIDEA_FLOWER": "When combat begins, the holder and adjacent allies in the same row gain +25 % ATK_SPEED",
+    "GRACIDEA_FLOWER": "When combat begins, the holder and adjacent allies in the same row gain +20 % ATK_SPEED",
     "FLAME_ORB": "Holder is burned but increase its ATK by 100%",
     "ASSAULT_VEST": "+20 SPE_DEF. Reduce BURN and POISONNED damage by 50%",
     "AMULET_COIN": "+1 GOLD each time the holder knocks down an opponent",

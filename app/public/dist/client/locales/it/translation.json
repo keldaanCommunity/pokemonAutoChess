@@ -1352,7 +1352,7 @@
     "FLUFFY_TAIL": "Il possessore è immune a tutte le alterazioni di stato",
     "KINGS_ROCK": "+150 SHIELD all'inizio del combattimento",
     "SHINY_CHARM": "Previene i danni e fornisce PROTECT per 2 secondi la prima volta che il titolare scende al di sotto del 30% di HP",
-    "GRACIDEA_FLOWER": "Quando inizia il combattimento, il detentore e gli alleati adiacenti nella stessa fila ottengono +25% ATK_SPEED",
+    "GRACIDEA_FLOWER": "Quando inizia il combattimento, il detentore e gli alleati adiacenti nella stessa fila ottengono +20% ATK_SPEED",
     "FLAME_ORB": "Il possessore è bruciato ma aumenta il suo ATT del 100%",
     "ASSAULT_VEST": "+20 SPE_DEF. Riduce i danni da BURN e POISONNED del 50%",
     "AMULET_COIN": "+1 oro ogni volta che il possessore abbatte un avversario",
