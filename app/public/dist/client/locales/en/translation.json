@@ -1735,7 +1735,7 @@
     "CELEBI": "The player regains 1 HP every time $t(pkm.CELEBI) casts $t(ability.TIME_TRAVEL).",
     "GIMMIGHOUL": "$t(pkm.GIMMIGHOUL) is looking for 99 golds",
     "GHOLDENGO": "At the start of each fight, if the player has 50 GOLD or more, $t(pkm.GHOLDENGO) gains RUNE_PROTECT for the entire fight",
-    "METEOR": "$t(pkm.MINIOR) alternates between its meteor and core forms.\n The meteor form grants [4,SP]% ATK_SPEED per attack.\n Core form grants splash damage and:\n Blue: Deals additional 10% SPECIAL\n Red: Deals additional 15% PHYSICAL\n Orange: Deals additional 5% TRUE\n Green: Heals adjacent allies for [5,SP] HP"
+    "METEOR": "$t(pkm.MINIOR) alternates between its meteor and core forms.\n The meteor form grants [4,SP]% ATK_SPEED per attack.\n Core form attacks hit target and adjacent ennemies and:\n Blue: Deals additional 10% SPECIAL\n Red: Deals additional 15% PHYSICAL\n Orange: Deals additional 5% TRUE\n Green: Heals adjacent allies for [5,SP] HP"
   },
   "stat": {
     "ATK": "Attack",
