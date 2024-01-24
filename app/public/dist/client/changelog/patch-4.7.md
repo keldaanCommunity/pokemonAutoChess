@@ -59,9 +59,10 @@
 
 - Changes to Ice: only Ice pokemons have a chance to freeze for 2 seconds after a hit, and give Special Defense to all your team
   (2) Chilly: +2 Special Defense, 20% chance to freeze
-  (4) Frosty: +5 Special Defense, 30% chance to Freeze
-  (6) Freezing: +15 Special Defense, 40% chance to freeze
+  (4) Frosty: +6 Special Defense, 30% chance to Freeze
+  (6) Freezing: +20 Special Defense, 40% chance to freeze
   (8) Sheer Cold: +30 Special Defense, 50% chance to Freeze
+- Weather threshold for Snow: ~~6~~ 8
 
 # Changes to Items
 

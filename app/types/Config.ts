@@ -100,7 +100,7 @@ export const SynergyTriggers: { [key in Synergy]: number[] } = {
   [Synergy.ROCK]: [2, 4, 6],
   [Synergy.GHOST]: [2, 4, 6, 8],
   [Synergy.FAIRY]: [2, 4, 6, 8],
-  [Synergy.ICE]: [2, 3, 4, 5, 6],
+  [Synergy.ICE]: [2, 4, 6, 8],
   [Synergy.FOSSIL]: [2, 4, 6],
   [Synergy.SOUND]: [2, 4, 6],
   [Synergy.ARTIFICIAL]: [2, 4, 6],
@@ -468,7 +468,7 @@ export const WeatherThreshold: { [weather in Weather]: number } = {
   [Weather.NIGHT]: 8,
   [Weather.RAIN]: 8,
   [Weather.SANDSTORM]: 8,
-  [Weather.SNOW]: 6,
+  [Weather.SNOW]: 8,
   [Weather.STORM]: 6,
   [Weather.SUN]: 8,
   [Weather.WINDY]: 8
