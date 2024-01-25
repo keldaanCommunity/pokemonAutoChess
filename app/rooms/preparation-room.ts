@@ -87,7 +87,9 @@ export default class PreparationRoom extends Room<PreparationState> {
     // logger.debug(defaultRoomName);
     this.setState(new PreparationState(options))
     this.setMetadata(<IPreparationMetadata>{
-      minRank: options.minRank ?? null
+      minRank: options.minRank ?? null,
+      noElo: options.noElo ?? false,
+      lobbyType: options.lobbyType
     })
     this.maxClients = 8
     // if (options.ownerId) {

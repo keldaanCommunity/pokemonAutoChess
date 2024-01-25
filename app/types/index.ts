@@ -29,6 +29,7 @@ import { Emotion } from "./enum/Emotion"
 import {
   AttackType,
   BoardEvent,
+  LobbyType,
   Orientation,
   PokemonActionState,
   Rarity,
@@ -575,6 +576,7 @@ export interface IPreparationMetadata {
   type: "preparation"
   gameStarted: boolean
   minRank: string | null
+  lobbyType: LobbyType
 }
 
 export interface IGameMetadata {
