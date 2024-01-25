@@ -353,8 +353,7 @@ export class MiniGame {
           ? SynergyTriggers[type].indexOf(lastTrigger) + 1
           : 0
         // removing low triggers synergies
-        if (type === Synergy.ICE) levelReached = min(0)(levelReached - 2)
-        if (type === Synergy.FLORA) levelReached = min(0)(levelReached - 1)
+        if (type === Synergy.FLORA || type === Synergy.LIGHT) levelReached = min(0)(levelReached - 1)
         return [type, levelReached]
       })
       const candidatesSymbols: Synergy[] = []
