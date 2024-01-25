@@ -9,17 +9,13 @@ import UserMetadata, {
   IUserMetadata
 } from "../../models/mongo-models/user-metadata"
 import { IChatV2, Role, Transfer } from "../../types"
-import {
-  EloRank,
-  EloRankThreshold,
-  MAX_PLAYERS_PER_LOBBY
-} from "../../types/Config"
+import { EloRankThreshold, MAX_PLAYERS_PER_LOBBY } from "../../types/Config"
 import { BotDifficulty, LobbyType } from "../../types/enum/Game"
 import { logger } from "../../utils/logger"
 import { pickRandomIn } from "../../utils/random"
 import { entries, values } from "../../utils/schemas"
 import PreparationRoom from "../preparation-room"
-import { OpenRankedLobbyCommand } from "./lobby-commands"
+import { OpenSpecialLobbyCommand } from "./lobby-commands"
 
 export class OnJoinCommand extends Command<
   PreparationRoom,
@@ -41,7 +37,7 @@ export class OnJoinCommand extends Command<
       }
       if (
         this.state.ownerId == "" &&
-        this.state.lobbyType !== LobbyType.RANKED
+        this.state.lobbyType === LobbyType.NORMAL
       ) {
         this.state.ownerId = auth.uid
       }
@@ -75,6 +71,7 @@ export class OnJoinCommand extends Command<
             return // rank not high enough
           }
 
+          const initiallyReady = this.state.lobbyType !== LobbyType.NORMAL
           this.state.users.set(
             client.auth.uid,
             new GameUser(
@@ -83,7 +80,7 @@ export class OnJoinCommand extends Command<
               u.elo,
               u.avatar,
               false,
-              this.state.lobbyType === LobbyType.RANKED ? true : false,
+              initiallyReady,
               u.title,
               u.role,
               auth.email === undefined && auth.photoURL === undefined
@@ -121,10 +118,10 @@ export class OnJoinCommand extends Command<
       }
 
       if (
-        this.state.lobbyType === LobbyType.RANKED &&
+        this.state.lobbyType !== LobbyType.NORMAL &&
         this.state.users.size === MAX_PLAYERS_PER_LOBBY
       ) {
-        // auto start when ranked lobby is full and all ready
+        // auto start when special lobby is full and all ready
         this.room.broadcast(Transfer.MESSAGES, {
           payload: `Lobby is full, starting match...`,
           time: Date.now()
@@ -133,8 +130,9 @@ export class OnJoinCommand extends Command<
           this.room.dispatcher.dispatch(new OnGameStartRequestCommand())
           // open another one
           this.room.dispatcher.dispatch(
-            new OpenRankedLobbyCommand().setPayload({
-              minRank: this.state.minRank ?? EloRank.GREATBALL
+            new OpenSpecialLobbyCommand().setPayload({
+              lobbyType: this.state.lobbyType,
+              minRank: this.state.minRank
             })
           )
         }, 2000)
@@ -461,7 +459,7 @@ export class OnToggleReadyCommand extends Command<
         user.ready = !user.ready
       }
       if (
-        this.state.lobbyType === LobbyType.RANKED &&
+        this.state.lobbyType !== LobbyType.NORMAL &&
         this.state.users.size === this.room.maxClients &&
         values(this.state.users).every((user) => user.ready === true)
       ) {

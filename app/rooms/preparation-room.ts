@@ -75,6 +75,7 @@ export default class PreparationRoom extends Room<PreparationState> {
     roomName: string
     minRank?: EloRank
     lobbyType: LobbyType
+    noElo ?: boolean
     autoStartDelayInSeconds?: number
   }) {
     // logger.debug(options);
@@ -94,7 +95,7 @@ export default class PreparationRoom extends Room<PreparationState> {
     //     ownerId: options.ownerId
     //   })
     // }
-    if (options.lobbyType === LobbyType.RANKED) {
+    if (options.lobbyType !== LobbyType.NORMAL) {
       this.autoDispose = false
     }
 

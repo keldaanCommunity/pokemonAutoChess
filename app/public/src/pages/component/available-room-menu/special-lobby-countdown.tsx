@@ -43,6 +43,17 @@ export function SpecialLobbyCountdown() {
         src={"/assets/ranks/" + EloRank.ULTRABALL + ".svg"}
       />
     )
+  } else if (nextSpecialLobbyType === "SCRIBBLE") {
+    specialLobbyName = t("smeargle_scribble")
+    specialLobbyIcon = (
+      <img
+        alt={t("smeargle_scribble")}
+        title={t("smeargle_scribble_hint")}
+        className="scribble icon"
+        src={"/assets/ui/scribble.png"}
+        style={{ borderRadius: "50%" }}
+      />
+    )
   }
 
   const timeUntilNext =
