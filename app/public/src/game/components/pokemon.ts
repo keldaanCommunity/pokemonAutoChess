@@ -510,6 +510,16 @@ export default class Pokemon extends DraggableObject {
     })
   }
 
+  evolutionAnimation() {
+    this.displayAnimation("EVOLUTION")
+    const g = <GameScene>this.scene
+    g.animationManager?.animatePokemon(
+      this,
+      PokemonActionState.EMOTE,
+      this.flip
+    )
+  }
+
   specialAttackAnimation(group: Phaser.GameObjects.Group, ultCount: number) {
     if (this.skill && this.skill === Ability.GROWTH) {
       this.sprite.setScale(2 + 0.5 * ultCount)

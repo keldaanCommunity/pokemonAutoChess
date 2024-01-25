@@ -93,6 +93,7 @@ Base components stats have been reviewed to be closer to each other:
 - Play a sound when game starts for players who tabbed out during loading
 - Item meta report is now organized in tabs
 - Added favorite synergies and units in player card based on game history
+- Add an animation when a pokemon evolves
 - Many ability animations have been reworked
 
 # Bugfix

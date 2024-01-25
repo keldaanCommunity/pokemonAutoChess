@@ -261,6 +261,11 @@ export default class AnimationManager {
       repeat = -1
     }
 
+    if (action === PokemonActionState.EMOTE) {
+      lock = true
+      repeat = 0
+    }
+
     try {
       this.play(entity, animation, { flip, lock, repeat })
     } catch (err) {

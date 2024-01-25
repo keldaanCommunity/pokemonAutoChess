@@ -5026,18 +5026,18 @@ export const AnimationConfig: {
   },
   [Pkm.TINKATINK]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Charge,
-    emote: AnimationType.Shoot
+    ability: AnimationType.Strike,
+    emote: AnimationType.Strike
   },
   [Pkm.TINKATUFF]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Charge,
-    emote: AnimationType.Shoot
+    ability: AnimationType.Strike,
+    emote: AnimationType.Strike
   },
   [Pkm.TINKATON]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Twirl,
-    emote: AnimationType.Shoot
+    ability: AnimationType.Attack,
+    emote: AnimationType.Cringe
   },
   [Pkm.PARAS]: {
     attack: AnimationType.Attack,
@@ -5625,7 +5625,7 @@ export const AnimationConfig: {
   [Pkm.MINIOR]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Charge,
+    emote: AnimationType.Charge
   },
   [Pkm.MINIOR_KERNEL_RED]: {
     attack: AnimationType.Attack,

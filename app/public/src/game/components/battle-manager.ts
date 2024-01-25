@@ -1045,8 +1045,8 @@ export default class BattleManager {
       const sprite = this.scene.add.sprite(
         coordinates[0],
         coordinates[1],
-        Effect.STEALTH_ROCKS,
-        "013"
+        "abilities",
+        "STEALTH_ROCKS/013.png"
       )
       sprite.setDepth(1)
       sprite.setScale(1, 1)

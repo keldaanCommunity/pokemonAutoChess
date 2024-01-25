@@ -545,6 +545,9 @@ class GameContainer {
       if (pokemonUI && pokemon.action === PokemonActionState.FISH) {
         pokemonUI.fishingAnimation()
       }
+      if (pokemonUI && pokemon.stars > 1) {
+        pokemonUI.evolutionAnimation()
+      }
     }
   }
 
