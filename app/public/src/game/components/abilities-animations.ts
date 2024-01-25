@@ -522,7 +522,7 @@ export function displayAbility(
       break
 
     case Ability.SLACK_OFF:
-      addAbilitySprite(skill, coordinates, true).setScale(2)
+      addAbilitySprite(Ability.ILLUSION, coordinates, true).setScale(1)
       break
 
     case Ability.ROCK_SMASH:
@@ -1751,6 +1751,13 @@ export function displayAbility(
 
     case "FISHING":
       addAbilitySprite(Ability.DIVE, coordinates, true).setDepth(0).setScale(1)
+      break
+
+    case "EVOLUTION":
+      addAbilitySprite("EVOLUTION", coordinates, true)
+        .setOrigin(0.5, -0.4)
+        .setDepth(0)
+        .setScale(2)
       break
 
     default:
