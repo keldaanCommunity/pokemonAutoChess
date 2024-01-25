@@ -3827,7 +3827,7 @@ export class StunSporeStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const damage = [5, 10, 20, 40][pokemon.stars - 1] ?? 40
     board
-      .getAdjacentCells(pokemon.positionX, pokemon.positionY)
+      .getAdjacentCells(target.positionX, target.positionY)
       .forEach((cell) => {
         if (cell.value && cell.value.team !== pokemon.team) {
           cell.value.handleSpecialDamage(

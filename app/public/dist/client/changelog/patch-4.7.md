@@ -37,6 +37,7 @@
 - Solosis ability is renamed Psychic and has a new visual effect
 - Duskull/Spiritomb ability is renamed Shadow ball and now lowers special defense instead of defense
 - Mist Ball & Luster Purge (Latios, Latias) now have a maximum range of 5 cells
+- Stun Spore now deals damage for cells adjacent to pokemon's target, and not the pokemon itself (Chikorita, Oddish)
 
 # Changes to Synergies
 
