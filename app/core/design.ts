@@ -146,7 +146,7 @@ export default class Design {
     this.terrain[14][8] = TerrainType.GROUND
 
     // smeargle slot
-    this.terrain[7][31] = TerrainType.GROUND
+    this.terrain[8][31] = TerrainType.GROUND
   }
 
   drawGroundRect(x: number, y: number, width: number, height: number) {
