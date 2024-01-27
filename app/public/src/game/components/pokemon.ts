@@ -38,6 +38,7 @@ import DraggableObject from "./draggable-object"
 import ItemsContainer from "./items-container"
 import Lifebar from "./life-bar"
 import PokemonDetail from "./pokemon-detail"
+import { PokemonSpecialDetail } from "./pokemon-special-detail"
 import PowerBar from "./power-bar"
 
 export default class Pokemon extends DraggableObject {
@@ -75,7 +76,7 @@ export default class Pokemon extends DraggableObject {
   rangeType: string
   types = new Set<Synergy>()
   lifebar: Lifebar | undefined
-  detail: PokemonDetail | undefined
+  detail: PokemonDetail | PokemonSpecialDetail | null
   pp: number | undefined
   maxPP: number
   powerbar: PowerBar | undefined
@@ -251,7 +252,7 @@ export default class Pokemon extends DraggableObject {
     const s = <GameScene>this.scene
     if (s.lastPokemonDetail) {
       s.lastPokemonDetail.closeDetail()
-      s.lastPokemonDetail = undefined
+      s.lastPokemonDetail = null
     }
   }
 
@@ -292,7 +293,7 @@ export default class Pokemon extends DraggableObject {
     if (this.detail) {
       this.detail.dom.remove()
       this.remove(this.detail, true)
-      this.detail = undefined
+      this.detail = null
     }
   }
 
@@ -300,7 +301,7 @@ export default class Pokemon extends DraggableObject {
     const s = <GameScene>this.scene
     if (s.lastPokemonDetail && s.lastPokemonDetail != this) {
       s.lastPokemonDetail.closeDetail()
-      s.lastPokemonDetail = undefined
+      s.lastPokemonDetail = null
     }
 
     this.detail = new PokemonDetail(

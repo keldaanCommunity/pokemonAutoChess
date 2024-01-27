@@ -54,7 +54,7 @@ export default class GameScene extends Scene {
   sellZone: SellZone | undefined
   zones: Phaser.GameObjects.Zone[] = []
   lastDragDropPokemon: Pokemon | undefined
-  lastPokemonDetail: Pokemon | undefined
+  lastPokemonDetail: Pokemon | null
   minigameManager: MinigameManager
   loadingManager: LoadingManager
   started: boolean
@@ -148,8 +148,7 @@ export default class GameScene extends Scene {
         player,
         this.animationManager,
         this.uid,
-        this.room.state.lightX,
-        this.room.state.lightY
+        this.room.state
       )
       this.battle = new BattleManager(
         this,

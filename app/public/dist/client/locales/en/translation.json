@@ -2561,5 +2561,29 @@
   "lobby_full": "Lobby is full",
   "game_already_started": "Game has already started",
   "min_rank_not_reached": "Your rank is not high enough to play this ranked match",
-  "ranked_match": "Ranked Match"
+  "ranked_match": "Ranked Match",
+  "scribble": {
+    "EVERYONE_IS_HERE": "Everyone is here !",
+    "UNIQUE_STARTER": "Unique Starter",
+    "OMELETTE_COOK": "Omelette Cook",
+    "SYNERGY_WHEEL": "Synergy Wheel",
+    "DITTO_PARTY": "Ditto Party",
+    "RARE_IS_EXPENSIVE": "Rare is Expensive",
+    "GOTTA_CATCH_EM_ALL": "Gotta catch'em all !",
+    "BUYER_FEVER": "Buyer fever",
+    "TECHNOLOGIC": "Technologic",
+    "SIX_PACK": "Six Pack"
+  },
+  "scribble_description": {
+    "EVERYONE_IS_HERE": "All the additional picks are available immediately",
+    "UNIQUE_STARTER": "Get a random Unique at stage 1",
+    "OMELETTE_COOK": "Get a Pokemon Egg at stage 1, 2 and 3",
+    "SYNERGY_WHEEL": "Stage 4 carousel only propose Synergy stones",
+    "DITTO_PARTY": "Start with 5 Ditto on your bench. Dittos can no longer be sold.",
+    "RARE_IS_EXPENSIVE": "Buying XP now costs 8 instead of 4",
+    "GOTTA_CATCH_EM_ALL": "To buy pokemons from the shop, you must catch them",
+    "BUYER_FEVER": "Earn 1 GOLD every time you evolve an unit by buying from the shop",
+    "TECHNOLOGIC": "Choose between 3 artifacts at stage 3 and 15",
+    "SIX_PACK": "You can put 6 units max on your board, no matter your level"
+  }
 }

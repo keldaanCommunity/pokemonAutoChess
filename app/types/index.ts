@@ -581,6 +581,7 @@ export interface IPreparationMetadata {
 
 export interface IGameMetadata {
   name: string
+  lobbyType: LobbyType
   playerIds: string[]
   stageLevel: number
   type: "game"

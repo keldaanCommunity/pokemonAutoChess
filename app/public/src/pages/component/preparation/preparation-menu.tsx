@@ -72,6 +72,8 @@ export default function PreparationMenu() {
   const nbUsersReady = users.filter((user) => user.ready).length
   const allUsersReady = users.every((user) => user.ready)
 
+  const isAdmin = user?.role === Role.ADMIN
+
   useEffect(() => {
     if (allUsersReady) {
       setTitleNotificationIcon("🟢")
@@ -188,7 +190,7 @@ export default function PreparationMenu() {
         })}
       </div>
 
-      {lobbyType === LobbyType.NORMAL && (
+      {(lobbyType === LobbyType.NORMAL || isAdmin) && (
         <>
           {isOwner && (
             <div className="actions">
@@ -253,7 +255,7 @@ export default function PreparationMenu() {
           )}
 
           <div className="actions">
-            {isOwner ? (
+            {isOwner || isAdmin ? (
               <>
                 <button
                   className="bubbly blue"
@@ -315,7 +317,7 @@ export default function PreparationMenu() {
               {t("ready")} {isReady ? "✔" : "?"}
             </button>
 
-            {isOwner && (
+            {(isOwner || isAdmin) && (
               <button
                 className={cc("bubbly", {
                   green: allUsersReady,
