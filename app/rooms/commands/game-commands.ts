@@ -12,6 +12,7 @@ import {
 import { selectMatchups } from "../../core/matchmaking"
 import { canSell } from "../../core/pokemon-entity"
 import Simulation from "../../core/simulation"
+import { getLevelUpCost } from "../../models/colyseus-models/experience-manager"
 import Player from "../../models/colyseus-models/player"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
@@ -482,11 +483,12 @@ export class OnLevelUpCommand extends Command<
 > {
   execute(id) {
     const player = this.state.players.get(id)
-    if (player) {
-      if (player.money >= 4 && player.experienceManager.canLevel()) {
-        player.experienceManager.addExperience(4)
-        player.money -= 4
-      }
+    if (!player) return
+
+    const cost = getLevelUpCost(this.state.specialLobbyRule)
+    if (player.money >= cost && player.experienceManager.canLevel()) {
+      player.experienceManager.addExperience(4)
+      player.money -= cost
     }
   }
 }
