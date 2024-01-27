@@ -46,6 +46,7 @@ import {
 import { LobbyType, Rarity } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
 import { Pkm, PkmDuos, PkmProposition } from "../types/enum/Pokemon"
+import { SpecialLobbyRule } from "../types/enum/SpecialLobbyRule"
 import { Synergy } from "../types/enum/Synergy"
 import { removeInArray } from "../utils/array"
 import { logger } from "../utils/logger"
@@ -151,6 +152,12 @@ export default class GameRoom extends Room<GameState> {
     shuffleArray(this.additionalUncommonPool)
     shuffleArray(this.additionalRarePool)
     shuffleArray(this.additionalEpicPool)
+
+    if(this.state.specialLobbyRule === SpecialLobbyRule.EVERYONE_IS_HERE){
+      this.additionalUncommonPool.forEach(p => this.state.shop.addAdditionalPokemon(p))
+      this.additionalRarePool.forEach(p => this.state.shop.addAdditionalPokemon(p))
+      this.additionalEpicPool.forEach(p => this.state.shop.addAdditionalPokemon(p))
+    }
 
     await Promise.all(
       keys(options.users).map(async (id) => {
