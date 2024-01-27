@@ -51,7 +51,7 @@ import {
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
-import { Synergy, SynergyEffects } from "../../types/enum/Synergy"
+import { SpecialLobbyRule } from "../../types/enum/SpecialLobbyRule"
 import { logger } from "../../utils/logger"
 import { max } from "../../utils/number"
 import { chance, pickNRandomIn, pickRandomIn } from "../../utils/random"
@@ -1077,25 +1077,34 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           }
         }
 
+        let eggChance = 0
         if (
-          player.getFreeSpaceOnBench() > 0 &&
           player.getLastBattleResult() == BattleResult.DEFEAT &&
-          SynergyEffects[Synergy.BABY].some((effect) =>
-            player.effects.has(effect)
-          )
+          (player.effects.has(Effect.BREEDER) ||
+            player.effects.has(Effect.GOLDEN_EGGS))
         ) {
-          const eggChance =
-            player.effects.has(Effect.BREEDER) ||
-            player.effects.has(Effect.GOLDEN_EGGS)
-              ? 1
-              : 0.2 * player.streak
-          if (chance(eggChance)) {
-            const egg = PokemonFactory.createRandomEgg()
-            const x = player.getFirstAvailablePositionInBench()
-            egg.positionX = x !== undefined ? x : -1
-            egg.positionY = 0
-            player.board.set(egg.id, egg)
-          }
+          eggChance = 1
+        }
+        if (
+          player.getLastBattleResult() == BattleResult.DEFEAT &&
+          player.effects.has(Effect.HATCHER)
+        ) {
+          eggChance = 0.2 * player.streak
+        }
+
+        if (
+          this.state.specialLobbyRule === SpecialLobbyRule.OMELETTE_COOK &&
+          [1, 2, 3].includes(this.state.stageLevel)
+        ) {
+          eggChance = 1
+        }
+
+        if (chance(eggChance) && player.getFreeSpaceOnBench() > 0) {
+          const egg = PokemonFactory.createRandomEgg()
+          const x = player.getFirstAvailablePositionInBench()
+          egg.positionX = x !== undefined ? x : -1
+          egg.positionY = 0
+          player.board.set(egg.id, egg)
         }
 
         if (!player.isBot) {
