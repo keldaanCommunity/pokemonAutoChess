@@ -8,7 +8,7 @@ import {
 } from "@colyseus/schema"
 import GameState from "../../rooms/states/game-state"
 import { IPlayer, Role, Title } from "../../types"
-import { SynergyTriggers } from "../../types/Config"
+import { SynergyTriggers, UniqueShop } from "../../types/Config"
 import { BattleResult } from "../../types/enum/Game"
 import {
   ArtificialItems,
@@ -16,7 +16,8 @@ import {
   Item,
   SynergyGivenByItem
 } from "../../types/enum/Item"
-import { Pkm, PkmProposition } from "../../types/enum/Pokemon"
+import { Pkm, PkmDuos, PkmProposition } from "../../types/enum/Pokemon"
+import { SpecialLobbyRule } from "../../types/enum/SpecialLobbyRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { pickNRandomIn, pickRandomIn } from "../../utils/random"
@@ -102,6 +103,19 @@ export default class Player extends Schema implements IPlayer {
       this.loadingProgress = 100
       this.lightX = 3
       this.lightY = 2
+    }
+
+    if (state.specialLobbyRule === SpecialLobbyRule.UNIQUE_STARTER) {
+      const randomUnique = pickRandomIn(UniqueShop)
+      const pokemonsObtained: Pokemon[] = (
+        randomUnique in PkmDuos ? PkmDuos[randomUnique] : [randomUnique]
+      ).map((p) => PokemonFactory.createPokemonFromName(p, this))
+      pokemonsObtained.forEach((pokemon) => {
+        pokemon.positionX = this.getFirstAvailablePositionInBench() ?? 0
+        pokemon.positionY = 0
+        this.board.set(pokemon.id, pokemon)
+        pokemon.onAcquired(this)
+      })
     }
   }
 
