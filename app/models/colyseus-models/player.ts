@@ -117,6 +117,16 @@ export default class Player extends Schema implements IPlayer {
         pokemon.onAcquired(this)
       })
     }
+
+    if (state.specialLobbyRule === SpecialLobbyRule.DITTO_PARTY) {
+      for(let i=0; i<5; i++){
+        const ditto = PokemonFactory.createPokemonFromName(Pkm.DITTO, this)
+        ditto.positionX = this.getFirstAvailablePositionInBench() ?? 0
+        ditto.positionY = 0
+        this.board.set(ditto.id, ditto)
+        ditto.onAcquired(this)
+      }
+    }
   }
 
   addBattleResult(

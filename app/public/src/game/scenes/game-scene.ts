@@ -3,6 +3,7 @@ import firebase from "firebase/compat/app"
 import { t } from "i18next"
 import { GameObjects, Scene } from "phaser"
 import { DesignTiled } from "../../../../core/design"
+import { canSell } from "../../../../core/pokemon-entity"
 import Simulation from "../../../../core/simulation"
 import Player from "../../../../models/colyseus-models/player"
 import PokemonFactory from "../../../../models/pokemon-factory"
@@ -336,15 +337,23 @@ export default class GameScene extends Scene {
       (pointer, gameObject: Phaser.GameObjects.GameObject) => {
         if (gameObject instanceof Pokemon) {
           this.pokemonDragged = gameObject
-          const price = PokemonFactory.getSellPrice(
-            gameObject.name as Pkm,
-            getGameContainer().player
-          )
-          this.sellZone?.text.setText(
-            `${t("drop_here_to_sell")} ${t("for_price_gold", { price })}`
-          )
-          this.sellZone?.setVisible(true)
           this.dropSpots.forEach((spot) => spot.setVisible(true))
+
+          if (
+            canSell(
+              this.pokemonDragged.name as Pkm,
+              this.room?.state.specialLobbyRule
+            )
+          ) {
+            const price = PokemonFactory.getSellPrice(
+              gameObject.name as Pkm,
+              getGameContainer().player
+            )
+            this.sellZone?.text.setText(
+              `${t("drop_here_to_sell")} ${t("for_price_gold", { price })}`
+            )
+            this.sellZone?.setVisible(true)
+          }
         } else if (gameObject instanceof ItemContainer) {
           this.itemDragged = gameObject
         }
@@ -363,13 +372,17 @@ export default class GameScene extends Scene {
         const g = <Phaser.GameObjects.Container>gameObject
         g.x = dragX
         g.y = dragY
-        if (
-          g &&
-          this.pokemonDragged != null &&
-          this.sellZone?.visible === false
-        ) {
-          this.sellZone.setVisible(true)
+        if (g && this.pokemonDragged != null) {
           this.dropSpots.forEach((spot) => spot.setVisible(true))
+          if (
+            this.sellZone?.visible === false &&
+            canSell(
+              this.pokemonDragged.name as Pkm,
+              this.room?.state.specialLobbyRule
+            )
+          ) {
+            this.sellZone.setVisible(true)
+          }
         }
       }
     )

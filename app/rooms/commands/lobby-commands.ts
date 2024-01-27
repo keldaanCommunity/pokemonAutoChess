@@ -1065,7 +1065,7 @@ export class OpenSpecialLobbyCommand extends Command<
     minRank?: EloRank | null
     noElo?: boolean
   }) {
-    logger.info("Creating Ranked Lobby " + minRank)
+    logger.info("Creating special Lobby " + lobbyType)
     let roomName = "Special Lobby"
     if (lobbyType === LobbyType.RANKED) {
       if (minRank === EloRank.GREATBALL) {

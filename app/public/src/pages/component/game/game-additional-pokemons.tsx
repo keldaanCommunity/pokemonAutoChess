@@ -12,7 +12,7 @@ import { GamePokemonDetail } from "./game-pokemon-detail"
 
 export function GameAdditionalPokemons() {
   const { t } = useTranslation()
-  const specialRule = getGameScene()?.room?.state.specialLobbyRule
+  const specialLobbyRule = getGameScene()?.room?.state.specialLobbyRule
   const additionalPokemons = useAppSelector(
     (state) => state.game.additionalPokemons
   )
@@ -20,7 +20,7 @@ export function GameAdditionalPokemons() {
     (state) => state.game.pokemonCollection
   )
 
-  if (specialRule === SpecialLobbyRule.EVERYONE_IS_HERE) {
+  if (specialLobbyRule === SpecialLobbyRule.EVERYONE_IS_HERE) {
     return (
       <div className="nes-container game-additional-pokemons">
         <p>{t("scribble.EVERYONE_IS_HERE")}</p>

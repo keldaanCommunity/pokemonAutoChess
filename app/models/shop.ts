@@ -1,3 +1,4 @@
+import GameState from "../rooms/states/game-state"
 import { IPlayer } from "../types"
 import {
   CommonShop,
@@ -21,6 +22,7 @@ import {
   PkmFamily,
   PkmProposition
 } from "../types/enum/Pokemon"
+import { SpecialLobbyRule } from "../types/enum/SpecialLobbyRule"
 import { Synergy } from "../types/enum/Synergy"
 import { removeInArray } from "../utils/array"
 import { logger } from "../utils/logger"
@@ -123,13 +125,13 @@ export default class Shop {
     }
   }
 
-  refillShop(player: Player, stageLevel: number) {
+  refillShop(player: Player, state: GameState) {
     // No need to release pokemons since they won't be changed
     const PkmList = player.shop.map((pokemon) => {
       if (pokemon != Pkm.MAGIKARP && pokemon != Pkm.DEFAULT) {
         return pokemon
       }
-      return this.pickPokemon(player, stageLevel)
+      return this.pickPokemon(player, state)
     })
 
     for (let i = 0; i < SHOP_SIZE; i++) {
@@ -137,17 +139,17 @@ export default class Shop {
     }
   }
 
-  assignShop(player: Player, manualRefresh: boolean, stageLevel: number) {
+  assignShop(player: Player, manualRefresh: boolean, state: GameState) {
     player.shop.forEach((pkm) => this.releasePokemon(pkm))
 
     if (player.effects.has(Effect.EERIE_SPELL) && !manualRefresh) {
-      const unowns = getUnownsPoolPerStage(stageLevel)
+      const unowns = getUnownsPoolPerStage(state.stageLevel)
       for (let i = 0; i < SHOP_SIZE; i++) {
         player.shop[i] = pickRandomIn(unowns)
       }
     } else {
       for (let i = 0; i < SHOP_SIZE; i++) {
-        player.shop[i] = this.pickPokemon(player, stageLevel)
+        player.shop[i] = this.pickPokemon(player, state)
       }
     }
   }
@@ -211,14 +213,17 @@ export default class Shop {
     return pkm
   }
 
-  pickPokemon(player: Player, stageLevel: number) {
+  pickPokemon(player: Player, state: GameState) {
     const rarityProbability =
       RarityProbabilityPerLevel[player.experienceManager.level]
     const rarity_seed = Math.random()
     let pokemon = Pkm.MAGIKARP
     let threshold = 0
 
-    if (chance(DITTO_RATE)) {
+    if (
+      state.specialLobbyRule !== SpecialLobbyRule.DITTO_PARTY &&
+      chance(DITTO_RATE)
+    ) {
       return Pkm.DITTO
     }
 
@@ -228,7 +233,7 @@ export default class Shop {
         player.effects.has(Effect.EERIE_SPELL)) &&
       chance(UNOWN_RATE)
     ) {
-      const unowns = getUnownsPoolPerStage(stageLevel)
+      const unowns = getUnownsPoolPerStage(state.stageLevel)
       return pickRandomIn(unowns)
     }
 

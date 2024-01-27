@@ -8,7 +8,7 @@ import { addIconsToDescription } from "../../pages/utils/descriptions"
 export class PokemonSpecialDetail extends GameObjects.DOMElement {
     dom: HTMLDivElement
   
-    constructor(scene: Phaser.Scene, specialRule: SpecialLobbyRule) {
+    constructor(scene: Phaser.Scene, specialLobbyRule: SpecialLobbyRule) {
       super(scene, 0, 0)
   
       this.dom = document.createElement("div")
@@ -18,10 +18,10 @@ export class PokemonSpecialDetail extends GameObjects.DOMElement {
       root.render(
         <>
           <div className="rule-name">
-            <p>{t(`scribble.${specialRule}`)}</p>
+            <p>{t(`scribble.${specialLobbyRule}`)}</p>
           </div>
           <div className="rule-desc">
-            {addIconsToDescription(t(`scribble_description.${specialRule}`))}
+            {addIconsToDescription(t(`scribble_description.${specialLobbyRule}`))}
           </div>
         </>
       )

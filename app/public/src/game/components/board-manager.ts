@@ -44,7 +44,7 @@ export default class BoardManager {
   berryTree: Phaser.GameObjects.Sprite | null
   lobbyType: LobbyType
   smeargle: Pokemon | null = null
-  specialRule: SpecialLobbyRule | null = null
+  specialLobbyRule: SpecialLobbyRule | null = null
 
   constructor(
     scene: GameScene,
@@ -62,7 +62,7 @@ export default class BoardManager {
     this.lightX = state.lightX
     this.lightY = state.lightY
     this.lobbyType = state.lobbyType
-    this.specialRule = state.specialLobbyRule
+    this.specialLobbyRule = state.specialLobbyRule
     this.renderBoard()
 
     if (this.scene.room?.state.phase == GamePhaseState.FIGHT) {
@@ -526,7 +526,7 @@ export default class BoardManager {
       396,
       Pkm.SMEARGLE,
       this.animationManager,
-      this.specialRule
+      this.specialLobbyRule
     )
   }
 }

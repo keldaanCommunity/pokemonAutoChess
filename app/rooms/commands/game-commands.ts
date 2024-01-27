@@ -10,6 +10,7 @@ import {
   TurnEvolutionRule
 } from "../../core/evolution-rules"
 import { selectMatchups } from "../../core/matchmaking"
+import { canSell } from "../../core/pokemon-entity"
 import Simulation from "../../core/simulation"
 import Player from "../../models/colyseus-models/player"
 import PokemonFactory from "../../models/pokemon-factory"
@@ -102,7 +103,7 @@ export class OnShopCommand extends Command<
       pokemon.passive === Passive.UNOWN &&
       player.effects.has(Effect.EERIE_SPELL)
     ) {
-      this.state.shop.assignShop(player, true, this.state.stageLevel)
+      this.state.shop.assignShop(player, true, this.state)
     } else {
       player.shop[index] = Pkm.DEFAULT
     }
@@ -419,6 +420,13 @@ export class OnSellDropCommand extends Command<
         return // can't sell a pokemon currently fighting
       }
 
+      if (
+        pokemon &&
+        canSell(pokemon.name, this.state.specialLobbyRule) === false
+      ) {
+        return
+      }
+
       if (pokemon) {
         this.state.shop.releasePokemon(pokemon.name)
         player.money += PokemonFactory.getSellPrice(pokemon.name, player)
@@ -445,7 +453,7 @@ export class OnRefreshCommand extends Command<
   execute(id) {
     const player = this.state.players.get(id)
     if (player && player.money >= 1 && player.alive) {
-      this.state.shop.assignShop(player, true, this.state.stageLevel)
+      this.state.shop.assignShop(player, true, this.state)
       player.money -= 1
       player.rerollCount++
     }
@@ -1109,9 +1117,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
         if (!player.isBot) {
           if (!player.shopLocked) {
-            this.state.shop.assignShop(player, false, this.state.stageLevel)
+            this.state.shop.assignShop(player, false, this.state)
           } else {
-            this.state.shop.refillShop(player, this.state.stageLevel)
+            this.state.shop.refillShop(player, this.state)
             player.shopLocked = false
           }
         }
@@ -1147,7 +1155,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             player.updateSynergies()
             player.effects.update(player.synergies, player.board)
             if (!player.shopLocked) {
-              this.state.shop.assignShop(player, false, this.state.stageLevel) // refresh unown shop in case player lost psychic 6
+              this.state.shop.assignShop(player, false, this.state) // refresh unown shop in case player lost psychic 6
             }
           }
         })

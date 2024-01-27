@@ -153,10 +153,16 @@ export default class GameRoom extends Room<GameState> {
     shuffleArray(this.additionalRarePool)
     shuffleArray(this.additionalEpicPool)
 
-    if(this.state.specialLobbyRule === SpecialLobbyRule.EVERYONE_IS_HERE){
-      this.additionalUncommonPool.forEach(p => this.state.shop.addAdditionalPokemon(p))
-      this.additionalRarePool.forEach(p => this.state.shop.addAdditionalPokemon(p))
-      this.additionalEpicPool.forEach(p => this.state.shop.addAdditionalPokemon(p))
+    if (this.state.specialLobbyRule === SpecialLobbyRule.EVERYONE_IS_HERE) {
+      this.additionalUncommonPool.forEach((p) =>
+        this.state.shop.addAdditionalPokemon(p)
+      )
+      this.additionalRarePool.forEach((p) =>
+        this.state.shop.addAdditionalPokemon(p)
+      )
+      this.additionalEpicPool.forEach((p) =>
+        this.state.shop.addAdditionalPokemon(p)
+      )
     }
 
     await Promise.all(
@@ -197,7 +203,7 @@ export default class GameRoom extends Room<GameState> {
             )
 
             this.state.players.set(user.uid, player)
-            this.state.shop.assignShop(player, false, 1)
+            this.state.shop.assignShop(player, false, this.state)
           }
         }
       })

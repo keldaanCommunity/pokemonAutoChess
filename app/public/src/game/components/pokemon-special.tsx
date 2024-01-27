@@ -13,7 +13,7 @@ import { PokemonSpecialDetail } from "./pokemon-special-detail"
 export default class PokemonSpecial extends Pokemon {
   detail: PokemonSpecialDetail | null
   animationManager: AnimationManager
-  specialRule: SpecialLobbyRule | null
+  specialLobbyRule: SpecialLobbyRule | null
 
   constructor(
     scene: GameScene,
@@ -21,7 +21,7 @@ export default class PokemonSpecial extends Pokemon {
     y: number,
     name: Pkm,
     animationManager: AnimationManager,
-    specialRule: SpecialLobbyRule | null
+    specialLobbyRule: SpecialLobbyRule | null
   ) {
     super(
       scene,
@@ -36,7 +36,7 @@ export default class PokemonSpecial extends Pokemon {
     this.draggable = false
     this.animationManager = animationManager
     this.animationManager.animatePokemon(this, PokemonActionState.IDLE, false)
-    this.specialRule = specialRule
+    this.specialLobbyRule = specialLobbyRule
   }
 
   onPointerDown(pointer) {
@@ -45,14 +45,14 @@ export default class PokemonSpecial extends Pokemon {
   }
 
   openDetail() {
-    if (this.specialRule) {
+    if (this.specialLobbyRule) {
       const s = this.scene as GameScene
       if (s.lastPokemonDetail && s.lastPokemonDetail != this) {
         s.lastPokemonDetail.closeDetail()
         s.lastPokemonDetail = null
       }
 
-      this.detail = new PokemonSpecialDetail(this.scene, this.specialRule)
+      this.detail = new PokemonSpecialDetail(this.scene, this.specialLobbyRule)
       this.detail.setPosition(
         this.detail.width / 2 + 40,
         min(0)(-this.detail.height / 2 - 40)
