@@ -102,6 +102,13 @@
   border-color: rgb(202, 108, 238);
 }
 
+.game-additional-pokemons > p {
+  grid-row: 1/5;
+  grid-column: 1/7;
+  display: grid;
+  place-content: center;
+}
+
 .game-pokemons-store {
   display: flex;
   flex: 1;
