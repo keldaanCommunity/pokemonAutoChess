@@ -1174,7 +1174,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       minigamePhaseDuration += nbPlayersAlive * 2000
     }
     this.state.time = minigamePhaseDuration
-    this.room.miniGame.initialize(this.state.players, this.state.stageLevel)
+    this.room.miniGame.initialize(this.state)
   }
 
   initializeFightingPhase() {
