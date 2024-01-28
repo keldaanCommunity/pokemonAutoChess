@@ -251,23 +251,22 @@ export default class AnimationManager {
       entity
     )
 
-    let lock = false
-    let repeat: number | undefined
-    if (
+    const shouldLock =
       action === PokemonActionState.HOP ||
-      action === PokemonActionState.HURT
-    ) {
-      lock = true
-      repeat = -1
-    }
+      action === PokemonActionState.HURT ||
+      action === PokemonActionState.EMOTE
 
-    if (action === PokemonActionState.EMOTE) {
-      lock = true
-      repeat = 0
-    }
+    const shouldLoop =
+      action === PokemonActionState.HOP ||
+      action === PokemonActionState.HURT ||
+      action === PokemonActionState.WALK
 
     try {
-      this.play(entity, animation, { flip, lock, repeat })
+      this.play(entity, animation, {
+        flip,
+        lock: shouldLock,
+        repeat: shouldLoop ? -1 : 0
+      })
     } catch (err) {
       logger.warn(`Can't play animation ${animation} for ${entity.name}`, err)
     }
