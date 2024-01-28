@@ -71,7 +71,7 @@ export class HiddenPowerBStrategy extends HiddenPowerStrategy {
     super.process(unown, state, board, target, crit)
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
       if (enemy && unown.team != enemy.team) {
-        enemy.status.triggerBurn(30000, enemy, unown, board)
+        enemy.status.triggerBurn(30000, enemy, unown)
       }
     })
   }

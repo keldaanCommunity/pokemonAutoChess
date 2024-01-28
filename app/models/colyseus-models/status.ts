@@ -108,7 +108,7 @@ export default class Status extends Schema implements IStatus {
         attacker: null,
         shouldTargetGainMana: true
       })
-      this.triggerWound(1000, pokemon, undefined, board)
+      this.triggerWound(1000, pokemon, undefined)
     }
 
     if (pokemon.status.runeProtect) {
@@ -302,13 +302,13 @@ export default class Status extends Schema implements IStatus {
       this.synchro = false
       this.triggerSynchro()
       if (this.burn && this.burnOrigin) {
-        this.burnOrigin.status.triggerBurn(3000, this.burnOrigin, pkm, board)
+        this.burnOrigin.status.triggerBurn(3000, this.burnOrigin, pkm)
       }
       if (this.poisonStacks && this.poisonOrigin) {
         this.poisonOrigin.status.triggerPoison(3000, this.poisonOrigin, pkm)
       }
       if (this.wound && this.woundOrigin) {
-        this.woundOrigin.status.triggerWound(3000, this.woundOrigin, pkm, board)
+        this.woundOrigin.status.triggerWound(3000, this.woundOrigin, pkm)
       }
       if (this.silence && this.silenceOrigin) {
         this.silenceOrigin.status.triggerSilence(3000, pkm)
@@ -339,8 +339,7 @@ export default class Status extends Schema implements IStatus {
   triggerBurn(
     timer: number,
     pkm: PokemonEntity,
-    origin: PokemonEntity | undefined,
-    board: Board
+    origin: PokemonEntity | undefined
   ) {
     // fluffy tail prevents burn but not rune protect
     if (
@@ -643,8 +642,7 @@ export default class Status extends Schema implements IStatus {
   triggerWound(
     timer: number,
     pkm: PokemonEntity,
-    origin: PokemonEntity | undefined,
-    board: Board
+    origin: PokemonEntity | undefined
   ) {
     if (!this.runeProtect) {
       this.wound = true
