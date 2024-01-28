@@ -2,6 +2,7 @@ import { SetSchema } from "@colyseus/schema"
 import Phaser, { GameObjects } from "phaser"
 import MoveTo from "phaser3-rex-plugins/plugins/moveto"
 import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
+import PokemonFactory from "../../../../models/pokemon-factory"
 import {
   AttackSprite,
   AttackSpriteScale,
@@ -28,6 +29,7 @@ import { Passive } from "../../../../types/enum/Passive"
 import { Pkm } from "../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../types/enum/Synergy"
 import { clamp, min } from "../../../../utils/number"
+import { coinflip } from "../../../../utils/random"
 import { values } from "../../../../utils/schemas"
 import { transformAttackCoordinate } from "../../pages/utils/utils"
 import { preferences } from "../../preferences"
@@ -930,4 +932,56 @@ export default class Pokemon extends DraggableObject {
       this.psychicField = undefined
     }
   }
+}
+
+export function addWanderingPokemon(
+  scene: GameScene,
+  pkm: Pkm,
+  onClick: (pokemon: Pokemon, pointer: any, tween: Phaser.Tweens.Tween) => void
+) {
+  const fromLeft = coinflip()
+  const [startX, endX] = fromLeft
+    ? [-100, +window.innerWidth + 100]
+    : [+window.innerWidth + 100, -100]
+  const [startY, endY] = [
+    100 + Math.round(Math.random() * 500),
+    100 + Math.round(Math.random() * 500)
+  ]
+
+  const SPEED = 0.3
+
+  const pokemon = new Pokemon(
+    scene,
+    startX,
+    startY,
+    PokemonFactory.createPokemonFromName(pkm),
+    "wanderer",
+    false,
+    false
+  )
+  pokemon.orientation = fromLeft ? Orientation.RIGHT : Orientation.LEFT
+  scene.animationManager?.animatePokemon(
+    pokemon,
+    PokemonActionState.WALK,
+    false
+  )
+
+  const tween = scene.tweens.add({
+    targets: pokemon,
+    x: endX,
+    y: endY,
+    ease: "Linear",
+    duration: window.innerWidth / SPEED,
+    onComplete: () => {
+      if (pokemon) {
+        pokemon.destroy()
+      }
+    }
+  })
+
+  pokemon.draggable = false
+  pokemon.sprite.setInteractive()
+  pokemon.sprite.on("pointerdown", (pointer) => {
+    onClick(pokemon, pointer, tween)
+  })
 }

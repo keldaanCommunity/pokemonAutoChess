@@ -62,6 +62,7 @@ import {
   randomBetween,
   shuffleArray
 } from "../../utils/random"
+import { getFirstAvailablePositionInBench } from "../../utils/board"
 
 export class BlueFlareStrategy extends AbilityStrategy {
   process(
@@ -6399,7 +6400,7 @@ export class EggsplosionStrategy extends AbilityStrategy {
       const egg = PokemonFactory.createRandomEgg()
       const player = pokemon.player
       if (player) {
-        const x = player.getFirstAvailablePositionInBench()
+        const x = getFirstAvailablePositionInBench(player.board)
         if (x !== undefined) {
           egg.positionX = x
           egg.positionY = 0

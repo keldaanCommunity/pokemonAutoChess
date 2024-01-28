@@ -2339,6 +2339,7 @@
   "play_more_games_hint": "Play more games to earn boosters and unlock new avatars !",
   "berry_gained": "+1 BERRY !",
   "berry_unripe": "NOT YET !",
+  "full": "FULL",
   "drop_here_to_sell": "Drop here to sell",
   "for_price_gold": "for {{price}} gold",
   "buy_xp": "Buy XP {{cost}}",
@@ -2581,7 +2582,7 @@
     "SYNERGY_WHEEL": "Carousels now only propose Synergy stones",
     "DITTO_PARTY": "Start with 5 Ditto on your bench. Dittos cannot be found in the shop and cannot be sold.",
     "RARE_IS_EXPENSIVE": "Buying XP now costs 8 instead of 4",
-    "GOTTA_CATCH_EM_ALL": "To buy pokemons from the shop, you must catch them",
+    "GOTTA_CATCH_EM_ALL": "Some pokemons can be catched before each PvE round",
     "BUYER_FEVER": "Earn 1 GOLD every time you evolve an unit by buying from the shop",
     "TECHNOLOGIC": "Choose between 3 artifacts at stage 3 and 15",
     "SIX_PACK": "You can put 6 units max on your board, no matter your level"

@@ -59,6 +59,12 @@ import { max } from "../../utils/number"
 import { chance, pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { resetArraySchema, values } from "../../utils/schemas"
 import { getWeather } from "../../utils/weather"
+import {
+  isPositionEmpty,
+  getFirstAvailablePositionInBench,
+  getFirstAvailablePositionOnBoard,
+  getFreeSpaceOnBench
+} from "../../utils/board"
 import GameRoom from "../game-room"
 
 export class OnShopCommand extends Command<
@@ -82,7 +88,7 @@ export class OnShopCommand extends Command<
     const name = player.shop[index]
     const pokemon = PokemonFactory.createPokemonFromName(name, player)
     const cost = PokemonFactory.getBuyPrice(name)
-    const freeSpaceOnBench = player.getFreeSpaceOnBench()
+    const freeSpaceOnBench = getFreeSpaceOnBench(player.board)
     const hasSpaceOnBench =
       freeSpaceOnBench > 0 ||
       (pokemon.evolutionRule &&
@@ -94,7 +100,7 @@ export class OnShopCommand extends Command<
 
     player.money -= cost
 
-    const x = player.getFirstAvailablePositionInBench()
+    const x = getFirstAvailablePositionInBench(player.board)
     pokemon.positionX = x !== undefined ? x : -1
     pokemon.positionY = 0
     player.board.set(pokemon.id, pokemon)
@@ -110,6 +116,42 @@ export class OnShopCommand extends Command<
     }
 
     this.room.checkEvolutionsAfterPokemonAcquired(playerId)
+  }
+}
+
+export class OnPokemonCatchCommand extends Command<
+  GameRoom,
+  {
+    playerId: string
+    pkm: Pkm
+  }
+> {
+  execute({ playerId, pkm }) {
+    if (
+      playerId === undefined ||
+      pkm === undefined ||
+      !this.state.players.has(playerId)
+    )
+      return
+    const player = this.state.players.get(playerId)
+    if (!player) return
+
+    const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
+    const freeSpaceOnBench = getFreeSpaceOnBench(player.board)
+    const hasSpaceOnBench =
+      freeSpaceOnBench > 0 ||
+      (pokemon.evolutionRule &&
+        pokemon.evolutionRule instanceof CountEvolutionRule &&
+        pokemon.evolutionRule.canEvolveIfBuyingOne(pokemon, player))
+
+    if (hasSpaceOnBench) {
+      const x = getFirstAvailablePositionInBench(player.board)
+      pokemon.positionX = x !== undefined ? x : -1
+      pokemon.positionY = 0
+      player.board.set(pokemon.id, pokemon)
+      pokemon.onAcquired(player)
+      this.room.checkEvolutionsAfterPokemonAcquired(playerId)
+    }
   }
 }
 
@@ -137,7 +179,10 @@ export class OnDragDropCommand extends Command<
       if (pokemon) {
         const x = parseInt(detail.x)
         const y = parseInt(detail.y)
-        if (pokemon.name === Pkm.DITTO && !player.isPositionEmpty(x, y)) {
+        if (
+          pokemon.name === Pkm.DITTO &&
+          !isPositionEmpty(x, y, player.board)
+        ) {
           const pokemonToClone = this.room.getPokemonByPosition(player, x, y)
           if (pokemonToClone && pokemonToClone.canBeCloned) {
             dittoReplaced = true
@@ -149,7 +194,7 @@ export class OnDragDropCommand extends Command<
               player.items.add(it)
             })
             player.board.delete(detail.id)
-            const position = player.getFirstAvailablePositionInBench()
+            const position = getFirstAvailablePositionInBench(player.board)
             if (position !== undefined) {
               replaceDitto.positionX = position
               replaceDitto.positionY = 0
@@ -172,7 +217,7 @@ export class OnDragDropCommand extends Command<
             // On pick, allow to drop on / from board
             const teamSize = this.room.getTeamSize(player.board)
             const isBoardFull = teamSize >= player.experienceManager.level
-            const dropToEmptyPlace = player.isPositionEmpty(x, y)
+            const dropToEmptyPlace = isPositionEmpty(x, y, player.board)
 
             if (dropOnBench) {
               // From board to bench is always allowed (bench to bench is already handled)
@@ -960,7 +1005,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
     this.state.players.forEach((player: Player) => {
       if (
-        player.getFreeSpaceOnBench() > 0 &&
+        getFreeSpaceOnBench(player.board) > 0 &&
         !isAfterPVE &&
         (player.effects.has(Effect.RAIN_DANCE) ||
           player.effects.has(Effect.DRIZZLE) ||
@@ -973,7 +1018,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           : 1
         const pkm = this.state.shop.fishPokemon(player, fishingLevel)
         const fish = PokemonFactory.createPokemonFromName(pkm, player)
-        const x = player.getFirstAvailablePositionInBench()
+        const x = getFirstAvailablePositionInBench(player.board)
         fish.positionX = x !== undefined ? x : -1
         fish.positionY = 0
         fish.action = PokemonActionState.FISH
@@ -995,6 +1040,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       }
     })
 
+    this.spawnWanderingPokemons()
+
     return commands
   }
 
@@ -1008,7 +1055,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           const pokemon = values(player.board).find(
             (p) => p.isOnBench && p.canBePlaced
           )
-          const coordinate = player.getFirstAvailablePositionOnBoard()
+          const coordinate = getFirstAvailablePositionOnBoard(player.board)
           if (coordinate && pokemon) {
             this.room.swap(player, pokemon, coordinate[0], coordinate[1])
           }
@@ -1062,17 +1109,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             9,
             Math.round(this.state.stageLevel / 2)
           )
-        } else {
-          if (Math.random() < 0.037) {
-            const client = this.room.clients.find(
-              (cli) => cli.auth.uid === player.id
-            )
-            if (client) {
-              setTimeout(() => {
-                client.send(Transfer.UNOWN_WANDERING)
-              }, Math.round((5 + 15 * Math.random()) * 1000))
-            }
-          }
         }
 
         if (isPVE && player.getLastBattleResult() === BattleResult.WIN) {
@@ -1109,9 +1145,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           eggChance = 1
         }
 
-        if (chance(eggChance) && player.getFreeSpaceOnBench() > 0) {
+        if (chance(eggChance) && getFreeSpaceOnBench(player.board) > 0) {
           const egg = PokemonFactory.createRandomEgg()
-          const x = player.getFirstAvailablePositionInBench()
+          const x = getFirstAvailablePositionInBench(player.board)
           egg.positionX = x !== undefined ? x : -1
           egg.positionY = 0
           player.board.set(egg.id, egg)
@@ -1277,5 +1313,40 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         this.state.simulations.set(simulation.id, simulation)
       })
     }
+  }
+
+  spawnWanderingPokemons() {
+    const isPVE = this.state.stageLevel in PVEStages
+
+    this.state.players.forEach((player: Player) => {
+      if (player.alive && !player.isBot) {
+        const client = this.room.clients.find(
+          (cli) => cli.auth.uid === player.id
+        )
+        if (!client) return
+
+        const UNOWN_ENCOUNTER_CHANCE = 0.037
+        if (chance(UNOWN_ENCOUNTER_CHANCE)) {
+          setTimeout(() => {
+            client.send(Transfer.UNOWN_WANDERING)
+          }, Math.round((5 + 15 * Math.random()) * 1000))
+        }
+
+        if (
+          isPVE &&
+          this.state.specialLobbyRule === SpecialLobbyRule.GOTTA_CATCH_EM_ALL
+        ) {
+          const nbPokemonsToSpawn = Math.ceil(this.state.stageLevel / 2)
+          for (let i = 0; i < nbPokemonsToSpawn; i++) {
+            setTimeout(() => {
+              client.send(
+                Transfer.POKEMON_WANDERING,
+                this.state.shop.pickPokemon(player, this.state)
+              )
+            }, 4000 + i * 400)
+          }
+        }
+      }
+    })
   }
 }

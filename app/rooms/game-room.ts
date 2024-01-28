@@ -53,6 +53,10 @@ import { logger } from "../utils/logger"
 import { shuffleArray } from "../utils/random"
 import { keys, values } from "../utils/schemas"
 import {
+  getFirstAvailablePositionInBench,
+  getFreeSpaceOnBench
+} from "../utils/board"
+import {
   OnDragDropCombineCommand,
   OnDragDropCommand,
   OnDragDropItemCommand,
@@ -60,6 +64,7 @@ import {
   OnLevelUpCommand,
   OnLockCommand,
   OnPickBerryCommand,
+  OnPokemonCatchCommand,
   OnRefreshCommand,
   OnSellDropCommand,
   OnShopCommand,
@@ -382,7 +387,7 @@ export default class GameRoom extends Room<GameState> {
       }
     )
 
-    this.onMessage(Transfer.UNOWN_ENCOUNTER, async (client, unownIndex) => {
+    this.onMessage(Transfer.UNOWN_WANDERING, async (client, unownIndex) => {
       try {
         if (client.auth) {
           const DUST_PER_ENCOUNTER = 50
@@ -406,6 +411,19 @@ export default class GameRoom extends Room<GameState> {
         }
       } catch (error) {
         logger.error(error)
+      }
+    })
+
+    this.onMessage(Transfer.POKEMON_WANDERING, async (client, pkm) => {
+      if (client.auth) {
+        try {
+          this.dispatcher.dispatch(new OnPokemonCatchCommand(), {
+            playerId: client.auth.uid,
+            pkm
+          })
+        } catch (e) {
+          logger.error("catch wandering error", e)
+        }
       }
     })
 
@@ -879,7 +897,7 @@ export default class GameRoom extends Room<GameState> {
       pkm in PkmDuos ? PkmDuos[pkm] : [pkm]
     ).map((p) => PokemonFactory.createPokemonFromName(p, player))
 
-    const freeSpace = player.getFreeSpaceOnBench()
+    const freeSpace = getFreeSpaceOnBench(player.board)
     if (freeSpace < pokemonsObtained.length && !bypassLackOfSpace) return // prevent picking if not enough space on bench
 
     // at this point, the player is allowed to pick a proposition
@@ -897,7 +915,7 @@ export default class GameRoom extends Room<GameState> {
     }
 
     pokemonsObtained.forEach((pokemon) => {
-      const freeCellX = player.getFirstAvailablePositionInBench()
+      const freeCellX = getFirstAvailablePositionInBench(player.board)
       if (freeCellX !== undefined) {
         pokemon.positionX = freeCellX
         pokemon.positionY = 0

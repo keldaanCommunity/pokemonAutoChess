@@ -1,72 +1,27 @@
 import { GameObjects } from "phaser"
-import PokemonFactory from "../../../../models/pokemon-factory"
 import { Transfer } from "../../../../types"
 import { Ability } from "../../../../types/enum/Ability"
-import { PokemonActionState } from "../../../../types/enum/Game"
 import { Pkm, Unowns } from "../../../../types/enum/Pokemon"
-import { coinflip, pickRandomIn } from "../../../../utils/random"
+import { pickRandomIn } from "../../../../utils/random"
 import { getGameContainer } from "../../pages/game"
-import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
-import Pokemon from "./pokemon"
+import { addWanderingPokemon } from "./pokemon"
 
 const SHARDS_PER_ENCOUNTER = 50
 
 export default class UnownManager {
-  uid: string
   scene: GameScene
-  animationManager: AnimationManager
 
-  constructor(
-    scene: GameScene,
-    animationManager: AnimationManager,
-    uid: string
-  ) {
-    this.uid = uid
+  constructor(scene: GameScene) {
     this.scene = scene
-    this.animationManager = animationManager
   }
 
   addWanderingUnown() {
-    const [startX, endX] = coinflip()
-      ? [-100, +window.innerWidth + 100]
-      : [+window.innerWidth + 100, -100]
-    const [startY, endY] = [
-      100 + Math.round(Math.random() * 400),
-      100 + Math.round(Math.random() * 400)
-    ]
-
-    const unown = new Pokemon(
-      this.scene,
-      startX,
-      startY,
-      PokemonFactory.createPokemonFromName(pickRandomIn(Unowns)),
-      "unown",
-      false,
-      false
-    )
-    this.animationManager.animatePokemon(unown, PokemonActionState.IDLE, false)
-
-    const tween = this.scene.tweens.add({
-      targets: unown,
-      x: endX,
-      y: endY,
-      ease: "Linear",
-      duration: 5000,
-      onComplete: () => {
-        if (unown) {
-          unown.destroy()
-        }
-      }
-    })
-
-    unown.draggable = false
-    unown.sprite.setInteractive()
-    unown.sprite.on("pointerdown", (pointer) => {
-      getGameContainer().room.send(Transfer.UNOWN_ENCOUNTER, unown.index)
+    addWanderingPokemon(this.scene, pickRandomIn(Unowns), (unown, pointer, tween) => {
+      getGameContainer().room.send(Transfer.UNOWN_WANDERING, unown.index)
       this.displayShardGain([pointer.x, pointer.y], unown.index)
-      tween.stop()
       unown.destroy()
+      tween.destroy()
     })
   }
 

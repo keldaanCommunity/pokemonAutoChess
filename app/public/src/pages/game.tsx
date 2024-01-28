@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Navigate } from "react-router-dom"
 import { toast } from "react-toastify"
+import { getFreeSpaceOnBench } from "../../../utils/board"
 import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 import AfterGameState from "../../../rooms/states/after-game-state"
 import GameState from "../../../rooms/states/game-state"
@@ -22,8 +23,10 @@ import {
 } from "../../../types"
 import { RequiredStageLevelForXpElligibility } from "../../../types/Config"
 import { PokemonActionState } from "../../../types/enum/Game"
+import { Pkm } from "../../../types/enum/Pokemon"
 import { getRankLabel } from "../../../types/strings/Strings"
 import { logger } from "../../../utils/logger"
+import { addWanderingPokemon } from "../game/components/pokemon"
 import GameContainer from "../game/game-container"
 import GameScene from "../game/scenes/game-scene"
 import { useAppDispatch, useAppSelector } from "../hooks"
@@ -359,6 +362,24 @@ export default function Game() {
           if (g && g.unownManager) {
             g.unownManager.addWanderingUnown()
           }
+        }
+      })
+
+      room.onMessage(Transfer.POKEMON_WANDERING, (pokemon: Pkm) => {
+        const scene = getGameScene()
+        if (scene) {
+          addWanderingPokemon(scene, pokemon, (sprite, pointer, tween) => {
+            if (
+              scene.board &&
+              getFreeSpaceOnBench(scene.board.player.board) > 0
+            ) {
+              room.send(Transfer.POKEMON_WANDERING, pokemon)
+              sprite.destroy()
+              tween.destroy()
+            } else if (scene.board) {
+              scene.board.displayText(pointer.x, pointer.y, t("full"))
+            }
+          })
         }
       })
 

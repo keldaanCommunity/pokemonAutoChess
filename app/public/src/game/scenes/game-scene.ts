@@ -160,11 +160,7 @@ export default class GameScene extends Scene {
       )
 
       this.weatherManager = new WeatherManager(this)
-      this.unownManager = new UnownManager(
-        this,
-        this.animationManager,
-        this.uid
-      )
+      this.unownManager = new UnownManager(this)
       playSound(SOUNDS.CAROUSEL_UNLOCK) // playing a preloaded sound for players who tabbed out during loading
       playMusic(
         this,
