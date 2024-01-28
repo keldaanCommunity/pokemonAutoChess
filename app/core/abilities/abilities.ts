@@ -50,6 +50,7 @@ import Board, { Cell } from "../board"
 import { PokemonEntity } from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
 
+import { getFirstAvailablePositionInBench } from "../../utils/board"
 import { distanceC, distanceM } from "../../utils/distance"
 import { repeat } from "../../utils/function"
 import { logger } from "../../utils/logger"
@@ -62,7 +63,6 @@ import {
   randomBetween,
   shuffleArray
 } from "../../utils/random"
-import { getFirstAvailablePositionInBench } from "../../utils/board"
 
 export class BlueFlareStrategy extends AbilityStrategy {
   process(
@@ -6926,9 +6926,9 @@ export class PsychicFangsStrategy extends AbilityStrategy {
       crit,
       true
     )
-    target.atk = target.baseAtk
-    target.def = target.baseDef
-    target.speDef = target.baseSpeDef
+    target.atk = Math.min(target.atk, target.baseAtk)
+    target.def = Math.min(target.def, target.baseDef)
+    target.speDef = Math.min(target.speDef, target.baseSpeDef)
   }
 }
 
