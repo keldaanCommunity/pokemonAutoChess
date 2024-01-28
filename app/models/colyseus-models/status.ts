@@ -341,12 +341,7 @@ export default class Status extends Schema implements IStatus {
     pkm: PokemonEntity,
     origin: PokemonEntity | undefined
   ) {
-    // fluffy tail prevents burn but not rune protect
-    if (
-      !pkm.effects.has(Effect.IMMUNITY_BURN) &&
-      (!this.runeProtect ||
-        (pkm.items.has(Item.FLAME_ORB) && !pkm.items.has(Item.FLUFFY_TAIL))) // can escape flame orb burn only with fluffy tail
-    ) {
+    if (!pkm.effects.has(Effect.IMMUNITY_BURN) && !this.runeProtect) {
       this.burn = true
       if (timer > this.burnCooldown) {
         this.burnCooldown = timer
@@ -436,11 +431,7 @@ export default class Status extends Schema implements IStatus {
     pkm: PokemonEntity,
     origin: PokemonEntity | undefined
   ) {
-    if (
-      !pkm.effects.has(Effect.IMMUNITY_POISON) &&
-      (!this.runeProtect ||
-        (pkm.items.has(Item.TOXIC_ORB) && !pkm.items.has(Item.FLUFFY_TAIL))) // can escape toxic orb poison only with fluffy tail
-    ) {
+    if (!pkm.effects.has(Effect.IMMUNITY_POISON) && !this.runeProtect) {
       let maxStacks = 3
       if (origin) {
         this.poisonOrigin = origin

@@ -79,6 +79,7 @@ Base components stats have been reviewed to be closer to each other:
 - Adjusted Gracidea flower: ~~1 attack 25% attack speed~~ 3 attack 20% attack speed~~
 - Buff Big Nugget: def & special def ~~3~~ 5
 - Buff Toxic Orb: spe def ~~1~~ 2
+- Burn and poison from Flame Orb and Toxic Orb can now be healed with Rune Protect, but are reapplied at the end of Rune protect effect.FLAME_OR
 
 # Gameplay
 
