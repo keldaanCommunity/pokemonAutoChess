@@ -44,6 +44,7 @@ import {
   PokemonActionState
 } from "../../types/enum/Game"
 import {
+  ArtificialItems,
   BasicItems,
   Berries,
   Item,
@@ -979,7 +980,11 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     // Item propositions stages
     if (ItemProposalStages.includes(this.state.stageLevel)) {
       this.state.players.forEach((player: Player) => {
-        resetArraySchema(player.itemsProposition, pickNRandomIn(BasicItems, 3))
+        let itemSet = BasicItems
+        if (this.state.specialLobbyRule === SpecialLobbyRule.TECHNOLOGIC) {
+          itemSet = ArtificialItems
+        }
+        resetArraySchema(player.itemsProposition, pickNRandomIn(itemSet, 3))
       })
     }
 

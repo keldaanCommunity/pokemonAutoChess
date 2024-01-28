@@ -172,7 +172,7 @@ export default class Pokemon extends DraggableObject {
       this.action = p.action
     } else {
       this.orientation = Orientation.DOWNLEFT
-      this.action = PokemonActionState.WALK
+      this.action = PokemonActionState.IDLE
     }
 
     const textureIndex = scene.textures.exists(this.index) ? this.index : "0000"
