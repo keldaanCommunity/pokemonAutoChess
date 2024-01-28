@@ -556,8 +556,8 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     })
 
     const scribbleLobbyJob = CronJob.from({
-      //cronTime: SCRIBBLE_LOBBY_CRON,
-      cronTime: "0 0/1 * * * *", // DEBUG: trigger every minute //TEMP
+      cronTime: SCRIBBLE_LOBBY_CRON,
+      //cronTime: "0 0/1 * * * *", // DEBUG: trigger every minute //TEMP
       timeZone: "Europe/Paris",
       onTick: () => {
         this.dispatcher.dispatch(new OpenSpecialLobbyCommand(), {
