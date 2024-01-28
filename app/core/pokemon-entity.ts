@@ -274,8 +274,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         attacker.items.has(Item.POKEMONOMICON) &&
         attackType === AttackType.SPECIAL
       ) {
-        this.status.triggerBurn(3000, this, attacker, board)
-        this.status.triggerWound(3000, this, attacker, board)
+        this.status.triggerBurn(3000, this, attacker)
+        this.status.triggerWound(3000, this, attacker)
       }
       if (
         this.items.has(Item.POWER_LENS) &&
@@ -690,7 +690,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         this.addAttack(3)
       }
       if (chance(burnChance)) {
-        target.status.triggerBurn(2000, target, this, board)
+        target.status.triggerBurn(2000, target, this)
       }
     }
 
@@ -744,7 +744,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     // Ability effects on hit
     if (target.status.spikeArmor && this.range === 1) {
-      this.status.triggerWound(2000, this, target, board)
+      this.status.triggerWound(2000, this, target)
       this.handleDamage({
         damage: Math.round(target.def * (1 + target.ap / 100)),
         board,

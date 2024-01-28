@@ -606,7 +606,7 @@ export class CorruptedNatureStrategy extends AbilityStrategy {
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.status.triggerWound(5000, cell.value, pokemon, board)
+        cell.value.status.triggerWound(5000, cell.value, pokemon)
         cell.value.handleSpecialDamage(
           damage,
           board,
@@ -1525,7 +1525,7 @@ export class TriAttackStrategy extends AbilityStrategy {
         target.status.triggerFreeze(2000, target)
         break
       case 2:
-        target.status.triggerBurn(5000, target, pokemon, board)
+        target.status.triggerBurn(5000, target, pokemon)
         break
       case 3:
         target.status.triggerParalysis(5000, target)
@@ -1953,7 +1953,7 @@ export class HealBlockStrategy extends AbilityStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.status.triggerWound(timer, cell.value, pokemon, board)
+        cell.value.status.triggerWound(timer, cell.value, pokemon)
       }
     })
   }
@@ -2061,7 +2061,7 @@ export class BurnStrategy extends AbilityStrategy {
     }
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value && pokemon.team != value.team) {
-        value.status.triggerBurn(duration, value, pokemon, board)
+        value.status.triggerBurn(duration, value, pokemon)
       }
     })
   }
@@ -2421,7 +2421,7 @@ export class InfernalParadeStrategy extends AbilityStrategy {
         })
 
         if (Math.random() > 0.5) {
-          enemy.status.triggerBurn(3000, cell.value, pokemon, board)
+          enemy.status.triggerBurn(3000, cell.value, pokemon)
         }
 
         repeat(2)(() =>
@@ -2531,7 +2531,7 @@ export class SolarBeamStrategy extends AbilityStrategy {
     effectInLine(board, pokemon, target, (targetInLine) => {
       if (targetInLine != null && targetInLine.team !== pokemon.team) {
         if (pokemon.simulation.weather === Weather.SUN) {
-          targetInLine.status.triggerBurn(3000, targetInLine, pokemon, board)
+          targetInLine.status.triggerBurn(3000, targetInLine, pokemon)
         }
 
         targetInLine.handleSpecialDamage(
@@ -3017,7 +3017,7 @@ export class SmokeScreenStrategy extends AbilityStrategy {
             pokemon,
             crit
           )
-          cell.value.status.triggerBurn(duration, cell.value, pokemon, board)
+          cell.value.status.triggerBurn(duration, cell.value, pokemon)
           cell.value.status.triggerArmorReduction(duration)
           pokemon.simulation.room.broadcast(Transfer.ABILITY, {
             id: pokemon.simulation.id,
@@ -3308,7 +3308,7 @@ export class SteamEruptionStrategy extends AbilityStrategy {
 
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.status.triggerBurn(burnDuration, target, pokemon, board)
+    target.status.triggerBurn(burnDuration, target, pokemon)
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
@@ -3319,7 +3319,7 @@ export class SteamEruptionStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        cell.value.status.triggerBurn(burnDuration, cell.value, pokemon, board)
+        cell.value.status.triggerBurn(burnDuration, cell.value, pokemon)
       }
     })
   }
@@ -4123,7 +4123,7 @@ export class SpiritShackleStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        targetInLine.status.triggerWound(4000, targetInLine, pokemon, board)
+        targetInLine.status.triggerWound(4000, targetInLine, pokemon)
       }
     })
   }
@@ -4520,7 +4520,7 @@ export class FireSpinStrategy extends AbilityStrategy {
     const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.status.triggerBurn(3000, target, pokemon, board)
+    target.status.triggerBurn(3000, target, pokemon)
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
         cell.value.handleSpecialDamage(
@@ -4530,7 +4530,7 @@ export class FireSpinStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        cell.value.status.triggerBurn(3000, target, pokemon, board)
+        cell.value.status.triggerBurn(3000, target, pokemon)
       }
     })
   }
@@ -4560,7 +4560,7 @@ export class SearingShotStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        cell.value.status.triggerBurn(3000, target, pokemon, board)
+        cell.value.status.triggerBurn(3000, target, pokemon)
       }
     })
   }
@@ -4871,7 +4871,7 @@ export class SlashingClawStrategy extends AbilityStrategy {
       damage = Math.ceil(damage * 1.3)
     }
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.status.triggerWound(5000, target, pokemon, board)
+    target.status.triggerWound(5000, target, pokemon)
   }
 }
 
@@ -4912,7 +4912,7 @@ export class EruptionStrategy extends AbilityStrategy {
     }
 
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.status.triggerBurn(5000, target, pokemon, board)
+    target.status.triggerBurn(5000, target, pokemon)
   }
 }
 
@@ -5303,7 +5303,7 @@ export class PyroBallStrategy extends AbilityStrategy {
     )
     cells.forEach((cell) => {
       if (cell.value && cell.value.team != pokemon.team) {
-        cell.value.status.triggerBurn(2000, cell.value, pokemon, board)
+        cell.value.status.triggerBurn(2000, cell.value, pokemon)
         cell.value.handleSpecialDamage(
           damage,
           board,

@@ -549,8 +549,7 @@ export default class Simulation extends Schema implements ISimulation {
           pokemon.status.triggerBurn(
             60000,
             pokemon as PokemonEntity,
-            pokemon as PokemonEntity,
-            this.board
+            pokemon as PokemonEntity
           )
         }
 
