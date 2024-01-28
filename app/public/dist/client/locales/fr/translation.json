@@ -1759,6 +1759,7 @@
     "ARMOR_REDUCTION": "Réduction d'armure",
     "CHARM": "Charmé",
     "FLINCH": "Peur",
+    "CURSE": "Malédiction",
     "RUNE_PROTECT": "Immunité",
     "ELECTRIC_FIELD": "Champ électrique",
     "PSYCHIC_FIELD": "Champ psychique",
@@ -1779,6 +1780,7 @@
     "ARMOR_REDUCTION": "Réduit la DEF et SPE_DEF de 50 %",
     "CHARM": "Empêche d'attaquer la cible et force à s'en rapprocher",
     "FLINCH": "Tous les dégâts reçus passent à travers le SHIELD",
+    "CURSE": "Met KO le pokémon maudit à la fin du compte à rebours",
     "RUNE_PROTECT": "Protège des altérations d'état",
     "ELECTRIC_FIELD": "Augmente les dégâts infligés de 20 % (ELECTRIC uniquement)",
     "PSYCHIC_FIELD": "Augmente les dégâts infligés de 20 % (PSYCHIC uniquement)",
@@ -1907,6 +1909,7 @@
     "CHOSEN_ONE": "Élu",
     "VANQUISHER": "Vainqueur",
     "OUTSIDER": "Outsider",
+    "WILD": "Sauvage",
     "GLUTTON": "Goinfre"
   },
   "title_description": {
@@ -2106,6 +2109,8 @@
   "reconnect": "Reconnexion",
   "just_for_fun": "Juste pour le fun",
   "minimum_rank": "Rang minimum",
+  "smeargle_scribble": "Gribouilles de Queulorior",
+  "smeargle_scribble_hint": "Queulorior gribouille une nouvelle règle aléatoire appliquée pendant toute la partie",
   "password_protected": "Lobby privé (protégé par mot de passe)",
   "private": "Privé",
   "available_rooms": "Salons disponibles",
@@ -2216,6 +2221,7 @@
   "top": "Top",
   "level": "Niveau",
   "wins": "Victoires",
+  "favorites": "Favoris",
   "user_id": "ID de l'utilisateur",
   "name": "Nom",
   "anonymous_users_name_hint": "Les utilisateurs anonymes ne peuvent pas changer leur nom.",
@@ -2311,6 +2317,7 @@
   "play_more_games_hint": "Jouez au jeu pour gagner des boosters et débloquer de nouveaux avatars !",
   "berry_gained": "+1 BAIE ",
   "berry_unripe": "PAS MÛR !",
+  "full": "PLUS DE PLACE",
   "drop_here_to_sell": "Déposez ici pour vendre",
   "for_price_gold": "pour {{price}} pièces d'or",
   "buy_xp": "Acheter XP {{cost}}",
@@ -2532,5 +2539,30 @@
   },
   "lobby_full": "Le lobby est complet",
   "game_already_started": "La partie a déjà commencé",
-  "min_rank_not_reached": "Votre rang n'est pas assez élevé pour jouer ce match classé"
+  "min_rank_not_reached": "Votre rang n'est pas assez élevé pour jouer ce match classé",
+  "ranked_match": "Match Classé",
+  "scribble": {
+    "EVERYONE_IS_HERE": "Tout le monde est là !",
+    "UNIQUE_STARTER": "Starter Unique",
+    "OMELETTE_COOK": "Omelette",
+    "SYNERGY_WHEEL": "Roue des Synergies",
+    "DITTO_PARTY": "Fête des Métamorph",
+    "RARE_IS_EXPENSIVE": "Ce qui est rare est cher",
+    "GOTTA_CATCH_EM_ALL": "Attrapez-les tous !",
+    "BUYER_FEVER": "Fièvre acheteuse",
+    "TECHNOLOGIC": "Technologie",
+    "SIX_PACK": "Pack de six"
+  },
+  "scribble_description": {
+    "EVERYONE_IS_HERE": "Tous les Pokémons additionnels sont disponibles immédiatement",
+    "UNIQUE_STARTER": "Obtenez un Pokémon Unique au tour 1",
+    "OMELETTE_COOK": "Obtenez un Œuf Pokémon après le tour 1, 2 et 3",
+    "SYNERGY_WHEEL": "Les carrousels proposent uniquement des pierres de synergies",
+    "DITTO_PARTY": "Commencez avec 5 Métamorph sur votre banc. Métamorph ne peut plus être vendu ni trouvé au magasin.",
+    "RARE_IS_EXPENSIVE": "Acheter de l'XP coûte 8 GOLD au lieu de 4",
+    "GOTTA_CATCH_EM_ALL": "Des Pokémons peuvent être attrapés avant chaque tour PvE",
+    "BUYER_FEVER": "Gagnez 1 GOLD chaque fois que vous faites évoluer un Pokémon en l'achetant au magasin",
+    "TECHNOLOGIC": "Choisissez entre 3 objets artificiels aux tours 3 et 15",
+    "SIX_PACK": "Vous pouvez mettre 6 unités maximum sur votre plateau, peu importe votre niveau"
+  }
 }
