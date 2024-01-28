@@ -72,6 +72,8 @@ export default function PreparationMenu() {
   const nbUsersReady = users.filter((user) => user.ready).length
   const allUsersReady = users.every((user) => user.ready)
 
+  const isAdmin = user?.role === Role.ADMIN
+
   useEffect(() => {
     if (allUsersReady) {
       setTitleNotificationIcon("🟢")
@@ -124,30 +126,47 @@ export default function PreparationMenu() {
       </button>
     ) : null
 
-  const headerMessage =
-    lobbyType === LobbyType.RANKED ? (
-      <p>{t("ranked_lobby_hint")}</p>
-    ) : noElo === true ? (
-      <p>
-        <img
-          alt="Just for fun"
-          title="Just for fun (no ELO gain/loss)"
-          className="noelo-icon"
-          src="/assets/ui/noelo.png"
-          style={{ borderRadius: "50%" }}
-        />
-        {t("just_for_fun_hint")}
-      </p>
-    ) : isElligibleForELO ? (
-      <p>
-        {t("elligible_elo_hint")} {t("average_elo")}: {averageElo} ; {t("GLHF")}
-        {" !"}
-      </p>
-    ) : users.length > 1 ? (
-      <p>{t("not_elligible_elo_hint")}</p>
-    ) : (
-      <p>{t("add_bot_or_wait_hint")}</p>
-    )
+  const headerMessage = (
+    <>
+      {lobbyType === LobbyType.RANKED && <p>{t("ranked_lobby_hint")}</p>}
+
+      {lobbyType === LobbyType.SCRIBBLE && (
+        <p>
+          <img
+            alt={t("smeargle_scribble")}
+            title={t("smeargle_scribble_hint")}
+            className="scribble icon"
+            src={"/assets/ui/scribble.png"}
+            style={{ borderRadius: "50%" }}
+          />
+          {t("smeargle_scribble_hint")}
+        </p>
+      )}
+
+      {noElo === true ? (
+        <p>
+          <img
+            alt={t("just_for_fun")}
+            title={t("just_for_fun_hint")}
+            className="noelo-icon"
+            src="/assets/ui/noelo.png"
+            style={{ borderRadius: "50%" }}
+          />
+          {t("just_for_fun_hint")}
+        </p>
+      ) : isElligibleForELO ? (
+        <p>
+          {t("elligible_elo_hint")} {t("average_elo")}: {averageElo} ;{" "}
+          {t("GLHF")}
+          {" !"}
+        </p>
+      ) : users.length > 1 ? (
+        <p>{t("not_elligible_elo_hint")}</p>
+      ) : (
+        <p>{t("add_bot_or_wait_hint")}</p>
+      )}
+    </>
+  )
 
   return (
     <div className="preparation-menu nes-container is-centered custom-bg">
@@ -171,7 +190,7 @@ export default function PreparationMenu() {
         })}
       </div>
 
-      {lobbyType !== LobbyType.RANKED && (
+      {(lobbyType === LobbyType.NORMAL || isAdmin) && (
         <>
           {isOwner && (
             <div className="actions">
@@ -236,7 +255,7 @@ export default function PreparationMenu() {
           )}
 
           <div className="actions">
-            {isOwner ? (
+            {isOwner || isAdmin ? (
               <>
                 <button
                   className="bubbly blue"
@@ -298,7 +317,7 @@ export default function PreparationMenu() {
               {t("ready")} {isReady ? "✔" : "?"}
             </button>
 
-            {isOwner && (
+            {(isOwner || isAdmin) && (
               <button
                 className={cc("bubbly", {
                   green: allUsersReady,

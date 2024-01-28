@@ -24,8 +24,10 @@ import { Emotion, IPlayer, Role, Title, Transfer } from "../types"
 import {
   EloRank,
   GREATBALL_RANKED_LOBBY_CRON,
+  SCRIBBLE_LOBBY_CRON,
   ULTRABALL_RANKED_LOBBY_CRON
 } from "../types/Config"
+import { LobbyType } from "../types/enum/Game"
 import { Language } from "../types/enum/Language"
 import { logger } from "../utils/logger"
 import {
@@ -49,7 +51,7 @@ import {
   OnSearchByIdCommand,
   OnSearchCommand,
   OpenBoosterCommand,
-  OpenRankedLobbyCommand,
+  OpenSpecialLobbyCommand,
   RemoveMessageCommand,
   SelectLanguageCommand,
   UnbanUserCommand,
@@ -532,7 +534,8 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       //cronTime: "0 0/1 * * * *", // DEBUG: trigger every minute
       timeZone: "Europe/Paris",
       onTick: () => {
-        this.dispatcher.dispatch(new OpenRankedLobbyCommand(), {
+        this.dispatcher.dispatch(new OpenSpecialLobbyCommand(), {
+          lobbyType: LobbyType.RANKED,
           minRank: EloRank.GREATBALL
         })
       },
@@ -544,8 +547,22 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       //cronTime: "0 0/1 * * * *", // DEBUG: trigger every minute
       timeZone: "Europe/Paris",
       onTick: () => {
-        this.dispatcher.dispatch(new OpenRankedLobbyCommand(), {
+        this.dispatcher.dispatch(new OpenSpecialLobbyCommand(), {
+          lobbyType: LobbyType.RANKED,
           minRank: EloRank.ULTRABALL
+        })
+      },
+      start: true
+    })
+
+    const scribbleLobbyJob = CronJob.from({
+      cronTime: SCRIBBLE_LOBBY_CRON,
+      //cronTime: "0 0/1 * * * *", // DEBUG: trigger every minute //TEMP
+      timeZone: "Europe/Paris",
+      onTick: () => {
+        this.dispatcher.dispatch(new OpenSpecialLobbyCommand(), {
+          lobbyType: LobbyType.SCRIBBLE,
+          noElo: true
         })
       },
       start: true

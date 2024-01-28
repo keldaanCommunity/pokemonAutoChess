@@ -3,6 +3,7 @@ import firebase from "firebase/compat/app"
 import { t } from "i18next"
 import { GameObjects, Scene } from "phaser"
 import { DesignTiled } from "../../../../core/design"
+import { canSell } from "../../../../core/pokemon-entity"
 import Simulation from "../../../../core/simulation"
 import Player from "../../../../models/colyseus-models/player"
 import PokemonFactory from "../../../../models/pokemon-factory"
@@ -54,7 +55,7 @@ export default class GameScene extends Scene {
   sellZone: SellZone | undefined
   zones: Phaser.GameObjects.Zone[] = []
   lastDragDropPokemon: Pokemon | undefined
-  lastPokemonDetail: Pokemon | undefined
+  lastPokemonDetail: Pokemon | null
   minigameManager: MinigameManager
   loadingManager: LoadingManager
   started: boolean
@@ -148,8 +149,7 @@ export default class GameScene extends Scene {
         player,
         this.animationManager,
         this.uid,
-        this.room.state.lightX,
-        this.room.state.lightY
+        this.room.state
       )
       this.battle = new BattleManager(
         this,
@@ -160,11 +160,7 @@ export default class GameScene extends Scene {
       )
 
       this.weatherManager = new WeatherManager(this)
-      this.unownManager = new UnownManager(
-        this,
-        this.animationManager,
-        this.uid
-      )
+      this.unownManager = new UnownManager(this)
       playSound(SOUNDS.CAROUSEL_UNLOCK) // playing a preloaded sound for players who tabbed out during loading
       playMusic(
         this,
@@ -337,15 +333,23 @@ export default class GameScene extends Scene {
       (pointer, gameObject: Phaser.GameObjects.GameObject) => {
         if (gameObject instanceof Pokemon) {
           this.pokemonDragged = gameObject
-          const price = PokemonFactory.getSellPrice(
-            gameObject.name as Pkm,
-            getGameContainer().player
-          )
-          this.sellZone?.text.setText(
-            `${t("drop_here_to_sell")} ${t("for_price_gold", { price })}`
-          )
-          this.sellZone?.setVisible(true)
           this.dropSpots.forEach((spot) => spot.setVisible(true))
+
+          if (
+            canSell(
+              this.pokemonDragged.name as Pkm,
+              this.room?.state.specialLobbyRule
+            )
+          ) {
+            const price = PokemonFactory.getSellPrice(
+              gameObject.name as Pkm,
+              getGameContainer().player
+            )
+            this.sellZone?.text.setText(
+              `${t("drop_here_to_sell")} ${t("for_price_gold", { price })}`
+            )
+            this.sellZone?.setVisible(true)
+          }
         } else if (gameObject instanceof ItemContainer) {
           this.itemDragged = gameObject
         }
@@ -364,13 +368,17 @@ export default class GameScene extends Scene {
         const g = <Phaser.GameObjects.Container>gameObject
         g.x = dragX
         g.y = dragY
-        if (
-          g &&
-          this.pokemonDragged != null &&
-          this.sellZone?.visible === false
-        ) {
-          this.sellZone.setVisible(true)
+        if (g && this.pokemonDragged != null) {
           this.dropSpots.forEach((spot) => spot.setVisible(true))
+          if (
+            this.sellZone?.visible === false &&
+            canSell(
+              this.pokemonDragged.name as Pkm,
+              this.room?.state.specialLobbyRule
+            )
+          ) {
+            this.sellZone.setVisible(true)
+          }
         }
       }
     )

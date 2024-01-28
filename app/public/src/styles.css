@@ -325,6 +325,22 @@ p:last-child {
   margin-top: -19px;
 }
 
+.game-special-rule {
+  color: white;
+  font-size: 1rem;
+  max-width: 300px;
+}
+
+.game-special-rule .rule-name {
+  background-color: #4f5160;
+  text-transform: capitalize;
+  font-variant: small-caps;
+  padding: 0.25em 0.5em;
+  margin: -5px -5px 4px -5px;
+  font-size: 1.2em;
+  box-shadow: 0 -1px 2px rgb(0 0 0 / 50%);
+}
+
 .toast-new-pokemon {
   right: 76px !important;
 }

@@ -1,21 +1,27 @@
 import { t } from "i18next"
 import { GameObjects } from "phaser"
+import { MapSchema } from "@colyseus/schema"
 import Player from "../../../../models/colyseus-models/player"
 import { PokemonAvatarModel } from "../../../../models/colyseus-models/pokemon-avatar"
+import GameState from "../../../../rooms/states/game-state"
 import { IPokemon, Transfer } from "../../../../types"
 import { SynergyTriggers } from "../../../../types/Config"
 import {
   GamePhaseState,
+  LobbyType,
   Orientation,
   PokemonActionState
 } from "../../../../types/enum/Game"
-import { AnimationConfig } from "../../../../types/enum/Pokemon"
+import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
+import { SpecialLobbyRule } from "../../../../types/enum/SpecialLobbyRule"
 import { Synergy } from "../../../../types/enum/Synergy"
+import { values } from "../../../../utils/schemas"
 import { transformCoordinate } from "../../pages/utils/utils"
 import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
 import Pokemon from "./pokemon"
 import PokemonAvatar from "./pokemon-avatar"
+import PokemonSpecial from "./pokemon-special"
 
 export enum BoardMode {
   PICK = "pick",
@@ -38,23 +44,27 @@ export default class BoardManager {
   lightY: number
   lightCell: Phaser.GameObjects.Sprite | null
   berryTree: Phaser.GameObjects.Sprite | null
+  lobbyType: LobbyType
+  smeargle: Pokemon | null = null
+  specialLobbyRule: SpecialLobbyRule | null = null
 
   constructor(
     scene: GameScene,
     player: Player,
     animationManager: AnimationManager,
     uid: string,
-    lightX: number,
-    lightY: number
+    state: GameState
   ) {
-    this.lightX = lightX
-    this.lightY = lightY
     this.pokemons = new Map<string, Pokemon>()
     this.uid = uid
     this.scene = scene
     this.player = player
     this.mode = BoardMode.PICK
     this.animationManager = animationManager
+    this.lightX = state.lightX
+    this.lightY = state.lightY
+    this.lobbyType = state.lobbyType
+    this.specialLobbyRule = state.specialLobbyRule
     this.renderBoard()
 
     if (this.scene.room?.state.phase == GamePhaseState.FIGHT) {
@@ -169,6 +179,14 @@ export default class BoardManager {
       this.player.board.forEach((pokemon) => {
         this.addPokemonSprite(pokemon)
       })
+    }
+
+    if (this.lobbyType === LobbyType.SCRIBBLE) {
+      if (this.smeargle) {
+        this.smeargle.destroy()
+        this.smeargle = null
+      }
+      this.addSmeargle()
     }
   }
 
@@ -501,5 +519,16 @@ export default class BoardManager {
         player.drawSpeechBubble(emote, false)
       }
     }
+  }
+
+  addSmeargle() {
+    this.smeargle = new PokemonSpecial(
+      this.scene,
+      1512,
+      396,
+      Pkm.SMEARGLE,
+      this.animationManager,
+      this.specialLobbyRule
+    )
   }
 }

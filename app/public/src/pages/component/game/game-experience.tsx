@@ -1,7 +1,9 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
+import { getLevelUpCost } from "../../../../../models/colyseus-models/experience-manager"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { levelClick } from "../../../stores/NetworkStore"
+import { getGameScene } from "../../game"
 import { Money } from "../icons/money"
 
 export default function GameExperience() {
@@ -12,6 +14,8 @@ export default function GameExperience() {
     (state) => state.game.experienceManager
   )
   const isLevelMax = experienceManager.level >= 9
+  const specialLobbyRule = getGameScene()?.room?.state.specialLobbyRule
+  const levelUpCost = getLevelUpCost(specialLobbyRule)
 
   return (
     <div className="nes-container game-experience">
@@ -20,12 +24,12 @@ export default function GameExperience() {
       </span>
       <button
         className="bubbly orange buy-xp-button"
-        title={t("buy_xp_tooltip")}
+        title={t("buy_xp_tooltip", { cost: levelUpCost })}
         onClick={() => {
           dispatch(levelClick())
         }}
       >
-        <Money value={t("buy_xp")} />
+        <Money value={t("buy_xp", { cost: levelUpCost })} />
       </button>
       <div className="progress-bar">
         <progress

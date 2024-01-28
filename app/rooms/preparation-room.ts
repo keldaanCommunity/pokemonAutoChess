@@ -75,6 +75,7 @@ export default class PreparationRoom extends Room<PreparationState> {
     roomName: string
     minRank?: EloRank
     lobbyType: LobbyType
+    noElo ?: boolean
     autoStartDelayInSeconds?: number
   }) {
     // logger.debug(options);
@@ -86,7 +87,9 @@ export default class PreparationRoom extends Room<PreparationState> {
     // logger.debug(defaultRoomName);
     this.setState(new PreparationState(options))
     this.setMetadata(<IPreparationMetadata>{
-      minRank: options.minRank ?? null
+      minRank: options.minRank ?? null,
+      noElo: options.noElo ?? false,
+      lobbyType: options.lobbyType
     })
     this.maxClients = 8
     // if (options.ownerId) {
@@ -94,7 +97,7 @@ export default class PreparationRoom extends Room<PreparationState> {
     //     ownerId: options.ownerId
     //   })
     // }
-    if (options.lobbyType === LobbyType.RANKED) {
+    if (options.lobbyType !== LobbyType.NORMAL) {
       this.autoDispose = false
     }
 

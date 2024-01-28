@@ -37,6 +37,7 @@
 - Solosis ability is renamed Psychic and has a new visual effect
 - Duskull/Spiritomb ability is renamed Shadow ball and now lowers special defense instead of defense
 - Mist Ball & Luster Purge (Latios, Latias) now have a maximum range of 5 cells
+- Stun Spore now deals damage for cells adjacent to pokemon's target, and not the pokemon itself (Chikorita, Oddish)
 
 # Changes to Synergies
 
@@ -83,6 +84,7 @@ Base components stats have been reviewed to be closer to each other:
 
 # Gameplay
 
+- Introducing Smeargle's Scribbles, a new game mode for fun open to anyone. These special lobbies have ELO disabled and would have a new random rule applied during the entire game, that significantly changes the gameplay. Scribble lobbies will happen every four hours, indicated in the home screen.
 - Removed on-crit effects for abilities: scope lens PP gain, fairy splash and razor fang armor reduction no longer apply for abilities crit
 - Comfey floral heal and Leppa berry consumption are now done before casting the ability, so that they can be used with abilitives giving Protect.
 - Stage 15: Mew joins the battle !

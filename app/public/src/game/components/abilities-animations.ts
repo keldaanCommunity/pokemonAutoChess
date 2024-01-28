@@ -1643,7 +1643,7 @@ export function displayAbility(
       })
 
       addAbilitySprite(
-        "SNIPE_SHOT/shot",
+        "SNIPE_SHOT/shoot",
         [
           coordinates[0] + Math.round(Math.cos(targetAngle) * 50),
           coordinates[1] + Math.round(Math.sin(targetAngle) * 50)

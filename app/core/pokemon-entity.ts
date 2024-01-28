@@ -35,6 +35,7 @@ import {
 import { Berries, Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm } from "../types/enum/Pokemon"
+import { SpecialLobbyRule } from "../types/enum/SpecialLobbyRule"
 import { Synergy, SynergyEffects } from "../types/enum/Synergy"
 import { distanceC } from "../utils/distance"
 import { clamp, max, min, roundTo2Digits } from "../utils/number"
@@ -1354,4 +1355,12 @@ export function getUnitScore(pokemon: PokemonEntity | IPokemon) {
   score += 10 * pokemon.stars
   score += PokemonFactory.getSellPrice(pokemon.name)
   return score
+}
+
+export function canSell(pkm: Pkm, specialLobbyRule: SpecialLobbyRule | undefined | null) {
+  if (specialLobbyRule === SpecialLobbyRule.DITTO_PARTY && pkm === Pkm.DITTO) {
+    return false
+  }
+
+  return true
 }

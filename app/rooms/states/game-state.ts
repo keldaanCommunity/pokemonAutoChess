@@ -25,6 +25,7 @@ import { GamePhaseState, LobbyType } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { PkmProposition } from "../../types/enum/Pokemon"
 import { Weather } from "../../types/enum/Weather"
+import { SpecialLobbyRule } from "../../types/enum/SpecialLobbyRule"
 import { pickRandomIn, randomBetween } from "../../utils/random"
 
 export default class GameState extends Schema {
@@ -48,6 +49,7 @@ export default class GameState extends Schema {
   @type("uint8") lightX = randomBetween(0, BOARD_WIDTH - 1)
   @type("uint8") lightY = randomBetween(1, BOARD_HEIGHT / 2)
   @type("string") mapMusic: Dungeon
+  @type("string") specialLobbyRule: SpecialLobbyRule | null = null
 
   time = StageDuration[1] * 1000
   updatePhaseNeeded = false
@@ -85,5 +87,8 @@ export default class GameState extends Schema {
     this.mapMusic = pickRandomIn(Object.keys(Dungeon) as Dungeon[])
     this.weather = Weather.NEUTRAL
     this.tilemap = initTilemap(this.id)
+    if (lobbyType === LobbyType.SCRIBBLE) {
+      this.specialLobbyRule = pickRandomIn(Object.values(SpecialLobbyRule))
+    }
   }
 }

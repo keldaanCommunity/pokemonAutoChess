@@ -14,7 +14,7 @@ import {
 import Player from "../../models/colyseus-models/player"
 import { getOrientation } from "../../public/src/pages/utils/utils"
 import { PokemonActionState } from "../../types/enum/Game"
-import { BasicItems, CraftableItems, Item } from "../../types/enum/Item"
+import { BasicItems, CraftableItems, Item, SynergyStones } from "../../types/enum/Item"
 import {
   pickNRandomIn,
   pickRandomIn,
@@ -32,6 +32,7 @@ import {
 import { Synergy } from "../../types/enum/Synergy"
 import GameState from "../../rooms/states/game-state"
 import { keys, values } from "../../utils/schemas"
+import { SpecialLobbyRule } from "../../types/enum/SpecialLobbyRule"
 
 const PLAYER_VELOCITY = 2
 const ITEM_ROTATION_SPEED = 0.0004
@@ -183,7 +184,8 @@ export class MiniGame {
     this.symbols = symbols
   }
 
-  initialize(players: MapSchema<Player>, stageLevel: number) {
+  initialize(state: GameState) {
+    const { players, stageLevel, specialLobbyRule } = state
     this.alivePlayers = new Array<Player>()
     players.forEach((p) => {
       if (p.alive) {
@@ -239,12 +241,12 @@ export class MiniGame {
     if (PortalCarouselStages.includes(stageLevel)) {
       this.initializePortalCarousel()
     } else if (ItemCarouselStages.includes(stageLevel)) {
-      this.initializeItemsCarousel(stageLevel)
+      this.initializeItemsCarousel(stageLevel, specialLobbyRule)
     }
   }
 
-  initializeItemsCarousel(stageLevel: number) {
-    const items = this.pickRandomItems(stageLevel)
+  initializeItemsCarousel(stageLevel: number, specialLobbyRule: SpecialLobbyRule | null) {
+    const items = this.pickRandomItems(stageLevel, specialLobbyRule)
 
     for (let j = 0; j < items.length; j++) {
       const x = this.centerX + Math.cos((Math.PI * 2 * j) / items.length) * 100
@@ -314,7 +316,7 @@ export class MiniGame {
     })
   }
 
-  pickRandomItems(stageLevel: number): Item[] {
+  pickRandomItems(stageLevel: number, specialLobbyRule: SpecialLobbyRule | null): Item[] {
     const items: Item[] = []
 
     let nbItemsToPick = clamp(this.alivePlayers.length + 3, 5, 9)
@@ -326,6 +328,10 @@ export class MiniGame {
       nbItemsToPick += 1
       maxCopiesPerItem = 1
       itemsSet = CraftableItems
+    }
+
+    if(specialLobbyRule === SpecialLobbyRule.SYNERGY_WHEEL){
+      itemsSet = SynergyStones
     }
 
     for (let j = 0; j < nbItemsToPick; j++) {

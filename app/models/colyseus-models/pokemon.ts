@@ -42,6 +42,7 @@ import { sum } from "../../utils/array"
 import { distanceM } from "../../utils/distance"
 import { coinflip, pickRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
+import { getFirstAvailablePositionInBench } from "../../utils/board"
 import PokemonFactory from "../pokemon-factory"
 import Player from "./player"
 
@@ -6666,7 +6667,7 @@ export class Ninjask extends Pokemon {
   additional = true
   onAcquired(player: Player) {
     // also gain sheninja if free space on bench
-    const x = player.getFirstAvailablePositionInBench()
+    const x = getFirstAvailablePositionInBench(player.board)
     if (x !== undefined) {
       const pokemon = PokemonFactory.createPokemonFromName(Pkm.SHEDINJA, player)
       pokemon.positionX = x

@@ -6,6 +6,7 @@ import Message from "../../models/colyseus-models/message"
 import chatV2 from "../../models/mongo-models/chat-v2"
 import {
   GREATBALL_RANKED_LOBBY_CRON,
+  SCRIBBLE_LOBBY_CRON,
   ULTRABALL_RANKED_LOBBY_CRON
 } from "../../types/Config"
 import { SpecialLobbyType } from "../../types/enum/Game"
@@ -70,15 +71,19 @@ export default class LobbyState extends Schema {
     const nextUltraBallRanked = sendAt(
       ULTRABALL_RANKED_LOBBY_CRON
     ).toUnixInteger()
+    const nextScribble = sendAt(SCRIBBLE_LOBBY_CRON).toUnixInteger()
     this.nextSpecialLobbyDate = Math.min(
       nextGreatBallRanked,
-      nextUltraBallRanked
+      nextUltraBallRanked,
+      nextScribble
     )
 
     if (this.nextSpecialLobbyDate === nextGreatBallRanked) {
       this.nextSpecialLobbyType = "GREATBALL_RANKED"
     } else if (this.nextSpecialLobbyDate === nextUltraBallRanked) {
       this.nextSpecialLobbyType = "ULTRABALL_RANKED"
+    } else if (this.nextSpecialLobbyDate === nextScribble) {
+      this.nextSpecialLobbyType = "SCRIBBLE"
     }
   }
 }

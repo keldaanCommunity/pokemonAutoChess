@@ -8,7 +8,7 @@ import {
 } from "@colyseus/schema"
 import GameState from "../../rooms/states/game-state"
 import { IPlayer, Role, Title } from "../../types"
-import { SynergyTriggers } from "../../types/Config"
+import { SynergyTriggers, UniqueShop } from "../../types/Config"
 import { BattleResult } from "../../types/enum/Game"
 import {
   ArtificialItems,
@@ -16,9 +16,11 @@ import {
   Item,
   SynergyGivenByItem
 } from "../../types/enum/Item"
-import { Pkm, PkmProposition } from "../../types/enum/Pokemon"
+import { Pkm, PkmDuos, PkmProposition } from "../../types/enum/Pokemon"
+import { SpecialLobbyRule } from "../../types/enum/SpecialLobbyRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
+import { getFirstAvailablePositionInBench } from "../../utils/board"
 import { pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import { Effects } from "../effects"
@@ -103,6 +105,29 @@ export default class Player extends Schema implements IPlayer {
       this.lightX = 3
       this.lightY = 2
     }
+
+    if (state.specialLobbyRule === SpecialLobbyRule.UNIQUE_STARTER) {
+      const randomUnique = pickRandomIn(UniqueShop)
+      const pokemonsObtained: Pokemon[] = (
+        randomUnique in PkmDuos ? PkmDuos[randomUnique] : [randomUnique]
+      ).map((p) => PokemonFactory.createPokemonFromName(p, this))
+      pokemonsObtained.forEach((pokemon) => {
+        pokemon.positionX = getFirstAvailablePositionInBench(this.board) ?? 0
+        pokemon.positionY = 0
+        this.board.set(pokemon.id, pokemon)
+        pokemon.onAcquired(this)
+      })
+    }
+
+    if (state.specialLobbyRule === SpecialLobbyRule.DITTO_PARTY) {
+      for (let i = 0; i < 5; i++) {
+        const ditto = PokemonFactory.createPokemonFromName(Pkm.DITTO, this)
+        ditto.positionX = getFirstAvailablePositionInBench(this.board) ?? 0
+        ditto.positionY = 0
+        this.board.set(ditto.id, ditto)
+        ditto.onAcquired(this)
+      }
+    }
   }
 
   addBattleResult(
@@ -170,41 +195,6 @@ export default class Player extends Schema implements IPlayer {
     this.updateSynergies()
     this.effects.update(this.synergies, this.board)
     return newPokemon
-  }
-
-  getFirstAvailablePositionOnBoard() {
-    for (let x = 0; x < 8; x++) {
-      for (let y = 1; y < 4; y++) {
-        if (this.isPositionEmpty(x, y)) {
-          return [x, y]
-        }
-      }
-    }
-  }
-
-  isPositionEmpty(x: number, y: number): boolean {
-    return (
-      values(this.board).some((p) => p.positionX === x && p.positionY === y) ===
-      false
-    )
-  }
-
-  getFreeSpaceOnBench(): number {
-    let numberOfFreeSpace = 0
-    for (let i = 0; i < 8; i++) {
-      if (this.isPositionEmpty(i, 0)) {
-        numberOfFreeSpace++
-      }
-    }
-    return numberOfFreeSpace
-  }
-
-  getFirstAvailablePositionInBench() {
-    for (let i = 0; i < 8; i++) {
-      if (this.isPositionEmpty(i, 0)) {
-        return i
-      }
-    }
   }
 
   updateSynergies() {

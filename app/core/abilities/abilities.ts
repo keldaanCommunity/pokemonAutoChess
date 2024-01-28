@@ -62,6 +62,7 @@ import {
   randomBetween,
   shuffleArray
 } from "../../utils/random"
+import { getFirstAvailablePositionInBench } from "../../utils/board"
 
 export class BlueFlareStrategy extends AbilityStrategy {
   process(
@@ -3827,7 +3828,7 @@ export class StunSporeStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const damage = [5, 10, 20, 40][pokemon.stars - 1] ?? 40
     board
-      .getAdjacentCells(pokemon.positionX, pokemon.positionY)
+      .getAdjacentCells(target.positionX, target.positionY)
       .forEach((cell) => {
         if (cell.value && cell.value.team !== pokemon.team) {
           cell.value.handleSpecialDamage(
@@ -6399,7 +6400,7 @@ export class EggsplosionStrategy extends AbilityStrategy {
       const egg = PokemonFactory.createRandomEgg()
       const player = pokemon.player
       if (player) {
-        const x = player.getFirstAvailablePositionInBench()
+        const x = getFirstAvailablePositionInBench(player.board)
         if (x !== undefined) {
           egg.positionX = x
           egg.positionY = 0

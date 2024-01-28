@@ -1052,23 +1052,36 @@ export class OnBotUploadCommand extends Command<
   }
 }
 
-export class OpenRankedLobbyCommand extends Command<
+export class OpenSpecialLobbyCommand extends Command<
   CustomLobbyRoom,
-  { minRank: EloRank }
+  { lobbyType: LobbyType; minRank?: EloRank | null; noElo?: boolean }
 > {
-  execute({ minRank }: { minRank: EloRank }) {
-    logger.info("Creating Ranked Lobby " + minRank)
-    let roomName = "Ranked Match"
-    if (minRank === EloRank.GREATBALL) {
-      roomName = "Great Ball Ranked Match"
-    }
-    if (minRank === EloRank.ULTRABALL) {
-      roomName = "Ultra Ball Ranked Match"
+  execute({
+    lobbyType,
+    minRank,
+    noElo
+  }: {
+    lobbyType: LobbyType
+    minRank?: EloRank | null
+    noElo?: boolean
+  }) {
+    logger.info("Creating special Lobby " + lobbyType)
+    let roomName = "Special Lobby"
+    if (lobbyType === LobbyType.RANKED) {
+      if (minRank === EloRank.GREATBALL) {
+        roomName = "Great Ball Ranked Match"
+      }
+      if (minRank === EloRank.ULTRABALL) {
+        roomName = "Ultra Ball Ranked Match"
+      }
+    } else if (lobbyType === LobbyType.SCRIBBLE) {
+      roomName = "Smeargle's Scribble"
     }
 
     matchMaker.createRoom("preparation", {
-      lobbyType: LobbyType.RANKED,
+      lobbyType,
       minRank,
+      noElo,
       ownerId: null,
       roomName,
       autoStartDelayInSeconds: 15 * 60
