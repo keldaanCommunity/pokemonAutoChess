@@ -64,7 +64,8 @@ import {
   isPositionEmpty,
   getFirstAvailablePositionInBench,
   getFirstAvailablePositionOnBoard,
-  getFreeSpaceOnBench
+  getFreeSpaceOnBench,
+  getMaxTeamSize
 } from "../../utils/board"
 import GameRoom from "../game-room"
 
@@ -228,7 +229,12 @@ export class OnDragDropCommand extends Command<
           } else if (this.state.phase == GamePhaseState.PICK) {
             // On pick, allow to drop on / from board
             const teamSize = this.room.getTeamSize(player.board)
-            const isBoardFull = teamSize >= player.experienceManager.level
+            const isBoardFull =
+              teamSize >=
+              getMaxTeamSize(
+                player.experienceManager.level,
+                this.room.state.specialLobbyRule
+              )
             const dropToEmptyPlace = isPositionEmpty(x, y, player.board)
 
             if (dropOnBench) {
@@ -1065,8 +1071,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     // force move on board some units if room available
     this.state.players.forEach((player, key) => {
       const teamSize = this.room.getTeamSize(player.board)
-      if (teamSize < player.experienceManager.level) {
-        const numberOfPokemonsToMove = player.experienceManager.level - teamSize
+      const maxTeamSize = getMaxTeamSize(
+        player.experienceManager.level,
+        this.state.specialLobbyRule
+      )
+      if (teamSize < maxTeamSize) {
+        const numberOfPokemonsToMove = maxTeamSize - teamSize
         for (let i = 0; i < numberOfPokemonsToMove; i++) {
           const pokemon = values(player.board).find(
             (p) => p.isOnBench && p.canBePlaced
@@ -1121,8 +1131,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     this.state.players.forEach((player: Player) => {
       if (player.alive) {
         if (player.isBot) {
-          player.experienceManager.level = Math.min(
-            9,
+          player.experienceManager.level = max(9)(
             Math.round(this.state.stageLevel / 2)
           )
         }

@@ -1,5 +1,7 @@
 import { MapSchema } from "@colyseus/schema"
+import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
+import { SpecialLobbyRule } from "../types/enum/SpecialLobbyRule"
 import { values } from "./schemas"
 
 export function isPositionEmpty(
@@ -42,4 +44,12 @@ export function getFreeSpaceOnBench(board: MapSchema<Pokemon, string>): number {
     }
   }
   return numberOfFreeSpace
+}
+
+export function getMaxTeamSize(
+  playerLevel: number,
+  specialLobbyRule?: SpecialLobbyRule | null
+) {
+  if (specialLobbyRule === SpecialLobbyRule.SIX_PACK) return 6
+  return playerLevel
 }
