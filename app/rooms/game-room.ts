@@ -809,9 +809,10 @@ export default class GameRoom extends Room<GameState> {
     )
   }
 
-  checkEvolutionsAfterPokemonAcquired(playerId: string) {
+  checkEvolutionsAfterPokemonAcquired(playerId: string): boolean {
     const player = this.state.players.get(playerId)
     if (!player) return false
+    let hasEvolved = false
 
     player.board.forEach((pokemon) => {
       if (
@@ -824,6 +825,7 @@ export default class GameRoom extends Room<GameState> {
           this.state.stageLevel
         )
         if (pokemonEvolved) {
+          hasEvolved = true
           // check item evolution rule after count evolution (example: Clefairy)
           this.checkEvolutionsAfterItemAcquired(playerId, pokemonEvolved)
         }
@@ -831,6 +833,7 @@ export default class GameRoom extends Room<GameState> {
     })
 
     player.boardSize = this.getTeamSize(player.board)
+    return hasEvolved
   }
 
   checkEvolutionsAfterItemAcquired(playerId: string, pokemon: Pokemon) {

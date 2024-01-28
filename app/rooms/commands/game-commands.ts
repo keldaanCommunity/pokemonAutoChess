@@ -115,7 +115,18 @@ export class OnShopCommand extends Command<
       player.shop[index] = Pkm.DEFAULT
     }
 
-    this.room.checkEvolutionsAfterPokemonAcquired(playerId)
+    const hasEvolved = this.room.checkEvolutionsAfterPokemonAcquired(playerId)
+    if (
+      hasEvolved &&
+      this.state.specialLobbyRule === SpecialLobbyRule.BUYER_FEVER
+    ) {
+      /* BUG: if money doesn't change after this command, the portrait in shop is not removed
+       setTimeout is used to artifically trigger client reactivity      
+       it also helps figure out the special rule for the player so it seems okayish for now */
+      setTimeout(() => {
+        player.money += 1
+      }, 500)
+    }
   }
 }
 
