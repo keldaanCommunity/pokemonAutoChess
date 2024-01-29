@@ -1699,7 +1699,7 @@
     "SHAYMIN": "Shaymin is looking for a GRACIDEA_FLOWER",
     "BEAST_BOOST": "Upon kill, the pokémon gains 5 ATK",
     "CHINGLING": "Chingling is looking for a STAR_DUST",
-    "CHIMECHO": "Resonates to sounds from allies, which doubles SOUND synergy bonus while Chimecho is alive",
+    "CHIMECHO": "Resonates to sounds from adjacent allies, which doubles their cry while Chimecho is alive",
     "RAICHU": "Raichu is looking for a DAWN_STONE",
     "SURGE_SURFER": "The surge surfer gets +30% ATK_SPEED in ELECTRIC_FIELD or PSYCHIC_FIELD",
     "MEGA_LAUNCHER": "This pokémon ability emits 3 SOUND cries instead of one",

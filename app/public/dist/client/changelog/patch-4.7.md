@@ -46,6 +46,7 @@
 - Change Iron Bundle: ~~ICE / FLYING / ARTIFICIAL~~ ICE / WATER / ARTIFICIAL, Def ~~4~~ 5
 - Buff Time Travel (Celebi): ~~20~~ 25 heal
 - Nerf Sableye PP ~~80~~ 100
+- Small change to Chimecho: now only doubles the cries of **adjacent** allies ; Revert PP nerf of 4.6 ~~90~~ 80
 
 # Changes to Synergies
 

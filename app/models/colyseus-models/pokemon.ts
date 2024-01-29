@@ -9399,7 +9399,7 @@ export class Chimecho extends Pokemon {
   atk = 15
   def = 3
   speDef = 6
-  maxPP = 90
+  maxPP = 80
   range = 3
   skill = Ability.ECHO
   passive = Passive.CHIMECHO

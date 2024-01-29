@@ -1699,7 +1699,7 @@
     "SHAYMIN": "Shaymin recherche une GRACIDEA_FLOWER",
     "BEAST_BOOST": "Gagne 5 ATK à chaque KO",
     "CHINGLING": "$t(pkm.CHINGLING) cherche une STAR_DUST",
-    "CHIMECHO": "Résonne aux sons des alliés, doublant le bonus de synergie SOUND tant que $t(pkm.CHIMECHO) est en vie",
+    "CHIMECHO": "Résonne aux sons des alliés adjacents, ce qui double leur cri tant que $t(pkm.CHIMECHO) est en vie",
     "RAICHU": "Raichu cherche une DAWN_STONE",
     "SURGE_SURFER": "Le surfeur gagne +30% ATK_SPEED lorsqu'il est en ELECTRIC_FIELD ou PSYCHIC_FIELD",
     "MEGA_LAUNCHER": "Emet 3 cris SOUND au lieu d'un au lancement de la capacité spéciale",

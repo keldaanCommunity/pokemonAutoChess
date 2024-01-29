@@ -4,6 +4,7 @@ import { Effect } from "../../types/enum/Effect"
 import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Synergy } from "../../types/enum/Synergy"
+import { distanceC } from "../../utils/distance"
 import { max } from "../../utils/number"
 import Board from "../board"
 import { PokemonEntity } from "../pokemon-entity"
@@ -92,9 +93,17 @@ export class AbilityStrategy {
 
 export function soundBoost(pokemon: PokemonEntity, board: Board) {
   pokemon.count.soundCount++
-  const chimechoBoost = !!board.find(
+  const chimecho = board.find(
     (x, y, e) => e.passive === Passive.CHIMECHO && e.team === pokemon.team
   )
+  const chimechoBoost =
+    chimecho &&
+    distanceC(
+      pokemon.positionX,
+      pokemon.positionY,
+      chimecho.positionX,
+      chimecho.positionY
+    ) === 1
   board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
     if (ally && pokemon.team === ally.team) {
       ally.status.sleep = false
