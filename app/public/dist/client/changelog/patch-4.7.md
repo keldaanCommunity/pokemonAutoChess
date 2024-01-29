@@ -53,8 +53,7 @@
   (6) Corkscrew Crash: Deal 100% of Attack as true damage
   (8) Max Meltdown: Deal 150% of Attack as true damage
 
-- Nerf Light 2 Shining ray ~~30~~ 25% Attack and AP
-- Changed Light 4 Eternal light: increase ~~Attack Speed by 30%~~ Def & SpeDef by 50%
+- Nerf Light 2 Shining ray ~~30~~ 25% Attack and AP ; changed Light 4 Eternal light: increase ~~Attack Speed by 30%~~ Def & SpeDef by 50%
 - Buff Rock: ~~5/10/20~~ 5/15/30 Defense
 - Buff Poison: ~~30/50/70~~ 33/66/100% chance to poison on hit
 
@@ -80,14 +79,13 @@ Base components stats have been reviewed to be closer to each other:
 - Adjusted Gracidea flower: ~~1 attack 25% attack speed~~ 3 attack 20% attack speed~~
 - Buff Big Nugget: def & special def ~~3~~ 5
 - Buff Toxic Orb: spe def ~~1~~ 2
-- Burn and poison from Flame Orb and Toxic Orb can now be healed with Rune Protect, but are reapplied at the end of Rune protect effect.FLAME_OR
+- Burn and poison from Flame Orb and Toxic Orb can now be healed with Rune Protect, but are reapplied at the end of Rune protect effect.
 
 # Gameplay
 
-- Introducing Smeargle's Scribbles, a new game mode for fun open to anyone. These special lobbies have ELO disabled and would have a new random rule applied during the entire game, that significantly changes the gameplay. Scribble lobbies will happen every four hours, indicated in the home screen.
+- Added back the sleep duration reduction when taking damage: -0.5 seconds per hit received
 - Removed on-crit effects for abilities: scope lens PP gain, fairy splash and razor fang armor reduction no longer apply for abilities crit
 - Comfey floral heal and Leppa berry consumption are now done before casting the ability, so that they can be used with abilitives giving Protect.
-- Stage 15: Mew joins the battle !
 
 # UI
 
@@ -105,7 +103,8 @@ Base components stats have been reviewed to be closer to each other:
 
 # Misc
 
+- Introducing Smeargle's Scribbles, a new game mode for fun open to anyone. These special lobbies have ELO disabled and would have a new random rule applied during the entire game, that significantly changes the gameplay. Scribble lobbies will happen every four hours, indicated in the home screen.
 - Added Ultraball Ranked lobby on a weekly basis, on Sunday at 9pm UTC. 5 boosters for the winner
 - Removed mythical category. Primal Groudon, Primal Kyogre and Mega Rayquaza are now Legendary tier 4
-- Added back the sleep duration reduction when taking damage: -0.5 seconds per hit received
 - Assets have been further optimized to try to reduce game loading times
+- Stage 15: Mew joins the battle !
