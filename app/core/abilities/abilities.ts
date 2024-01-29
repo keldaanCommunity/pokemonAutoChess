@@ -794,7 +794,7 @@ export class TimeTravelStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     board.forEach((x, y, ally) => {
       if (ally && pokemon.team == ally.team) {
-        ally.handleHeal(20, pokemon, 1)
+        ally.handleHeal(25, pokemon, 1)
         ally.status.clearNegativeStatus()
       }
     })
