@@ -3200,23 +3200,11 @@ export class DragonTailStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 0
-    switch (pokemon.stars) {
-      case 1:
-        damage = 30
-        break
-      case 2:
-        damage = 60
-        break
-      case 3:
-        damage = 120
-        break
-      default:
-        break
-    }
+    const damage = [30,60,100][pokemon.stars - 1] ?? 100
+    const buff = [1,2,3][pokemon.stars - 1] ?? 3
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    pokemon.addDefense(pokemon.stars, true)
-    pokemon.addSpecialDefense(pokemon.stars, true)
+    pokemon.addDefense(buff, true)
+    pokemon.addSpecialDefense(buff, true)
   }
 }
 

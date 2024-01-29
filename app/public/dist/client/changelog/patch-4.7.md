@@ -32,6 +32,8 @@
 - Nerf Cyndaquil line: HP ~~70/130/250/260~~ 60/120/230/230
 - Buff Zorua line and Hisui Zorua lines: Attack ~~6/15~~ 8/18
 - Nerf Dragon Darts (Dreepy line): ~~10/25/50~~ 10/20/40 special damage
+- Nerf Dragon Tail (Trapinch line) ~~30/60/120~~ 30/60/100 special damage
+- Nerf Flygon HP ~~220~~ 200
 - Adapted Magic Bounce (Natu): fixed duration to 5 seconds, replace 40 flat damage by 50/100% of damage reflected, can now deal and reflect ability crits
 - Genesect lock-on ability now deals **additional** true damage
 - New ability for Staryu/Starmie: Psybeam: Deal 30/60/100 special damage to all enemy Pokémon behind the target with 50% chance to make them confused for 4 seconds
