@@ -944,7 +944,7 @@
     "KING_SHIELD": "Otorga PROTECT al usuario durante 1.5 segundos, otorga [10,20,30,SP] SHIELD e intercambia su posición con la del enemigo más lejano",
     "EXPLOSION": "Otorga [50,100,200,SP] de SPECIAL a todos los enemigos adyacentes. También daña al usuario.",
     "NIGHTMARE": "Deja SILENCE a todo el equipo enemigo durante [1.5,3,8,SP=0.5] segundos. Cualquier oponente SLEEP o FLINCH o SILENCE toma [50,SP] SPECIAL.",
-    "CLANGOROUS_SOUL": "Mejora a los aliados adyacentes con [2,4,8] ATK y [1,2,4] DEF / SPE_DEF",
+    "CLANGOROUS_SOUL": "Se mejora a sí mismo y a los aliados adyacentes en ATK, DEF y SPE_DEF en [1,2,4,SP]",
     "BONEMERANG": "Lanza un hueso de boomerang a través del equipo enemigo, infligiendo [30,60,120,SP] SPECIAL en su camino",
     "GROWL": "Deja FLINCH a todo el equipo enemigo durante [3,6,9,SP] segundos",
     "RELIC_SONG": "Emite una nota. Después de la tercera nota, deja SLEEP a todo el equipo enemigo durante [2,SP=0.5] segundos",

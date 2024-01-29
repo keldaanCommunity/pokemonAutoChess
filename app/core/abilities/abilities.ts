@@ -1225,36 +1225,19 @@ export class ClangorousSoulStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let buffAtk = 0
-    let buffDef = 0
-    switch (pokemon.stars) {
-      case 1:
-        buffAtk = 2
-        buffDef = 1
-        break
-      case 2:
-        buffAtk = 4
-        buffDef = 2
-        break
-      case 3:
-        buffAtk = 8
-        buffDef = 4
-        break
-      default:
-        break
-    }
+    const buff = [1,2,4][pokemon.stars - 1] ?? 1
 
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
 
-    pokemon.addAttack(buffAtk, true)
-    pokemon.addDefense(buffDef, true)
-    pokemon.addSpecialDefense(buffDef, true)
+    pokemon.addAttack(buff, true)
+    pokemon.addDefense(buff, true)
+    pokemon.addSpecialDefense(buff, true)
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team == cell.value.team) {
-        cell.value.addAttack(buffAtk, true)
-        cell.value.addDefense(buffDef, true)
-        cell.value.addSpecialDefense(buffDef, true)
+        cell.value.addAttack(buff, true)
+        cell.value.addDefense(buff, true)
+        cell.value.addSpecialDefense(buff, true)
       }
     })
   }
