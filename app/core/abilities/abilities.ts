@@ -1225,7 +1225,7 @@ export class ClangorousSoulStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const buff = [1,2,4][pokemon.stars - 1] ?? 1
+    const buff = [1, 2, 4][pokemon.stars - 1] ?? 1
 
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
 
@@ -3200,8 +3200,8 @@ export class DragonTailStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [30,60,100][pokemon.stars - 1] ?? 100
-    const buff = [1,2,3][pokemon.stars - 1] ?? 3
+    const damage = [30, 60, 100][pokemon.stars - 1] ?? 100
+    const buff = [1, 2, 3][pokemon.stars - 1] ?? 3
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     pokemon.addDefense(buff, true)
     pokemon.addSpecialDefense(buff, true)
@@ -4908,7 +4908,7 @@ export class MistBallStrategy extends AbilityStrategy {
           pokemon.positionY,
           targetInLine.positionX,
           targetInLine.positionY
-        ) <= 5
+        ) <= 4
       ) {
         targetInLine.handleSpecialDamage(
           damage,
@@ -4958,7 +4958,7 @@ export class LusterPurgeStrategy extends AbilityStrategy {
           pokemon.positionY,
           targetInLine.positionX,
           targetInLine.positionY
-        ) <= 5
+        ) <= 4
       ) {
         targetInLine.handleSpecialDamage(
           damage,

@@ -1486,8 +1486,8 @@ export function displayAbility(
     case Ability.MIST_BALL: {
       const [dx, dy] = OrientationVector[orientation]
       const finalCoords = transformAttackCoordinate(
-        positionX + dx * 5,
-        positionY + dy * 5,
+        positionX + dx * 4,
+        positionY + dy * 4,
         flip
       )
       const specialProjectile = addAbilitySprite(skill, coordinates).setScale(1)
