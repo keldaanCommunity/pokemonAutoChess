@@ -1222,7 +1222,7 @@ export class JangmoO extends Pokemon {
   atk = 6
   def = 4
   speDef = 4
-  maxPP = 110
+  maxPP = 90
   range = 1
   skill = Ability.CLANGOROUS_SOUL
   attackSprite = AttackSprite.DRAGON_MELEE
@@ -1241,7 +1241,7 @@ export class HakamoO extends Pokemon {
   atk = 13
   def = 5
   speDef = 5
-  maxPP = 110
+  maxPP = 90
   range = 1
   skill = Ability.CLANGOROUS_SOUL
   attackSprite = AttackSprite.DRAGON_MELEE
@@ -1259,7 +1259,7 @@ export class KommoO extends Pokemon {
   atk = 25
   def = 8
   speDef = 8
-  maxPP = 110
+  maxPP = 90
   range = 1
   skill = Ability.CLANGOROUS_SOUL
   attackSprite = AttackSprite.DRAGON_MELEE
@@ -2508,7 +2508,7 @@ export class Flygon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.BUG, Synergy.GROUND])
   rarity = Rarity.RARE
   stars = 3
-  hp = 220
+  hp = 200
   atk = 26
   def = 4
   speDef = 4
@@ -5429,14 +5429,14 @@ export class Delibird extends Pokemon {
 export class IronBundle extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.ICE,
-    Synergy.FLYING,
+    Synergy.WATER,
     Synergy.ARTIFICIAL
   ])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
   atk = 16
-  def = 4
+  def = 5
   speDef = 2
   maxPP = 100
   range = 1
@@ -5450,7 +5450,7 @@ export class Lapras extends Pokemon {
   stars = 3
   hp = 250
   atk = 12
-  def = 6
+  def = 5
   speDef = 6
   maxPP = 100
   range = 1
@@ -5493,7 +5493,7 @@ export class Uxie extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 12
+  atk = 15
   def = 3
   speDef = 3
   maxPP = 80
@@ -5507,7 +5507,7 @@ export class Mesprit extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 12
+  atk = 15
   def = 3
   speDef = 3
   maxPP = 90
@@ -5521,7 +5521,7 @@ export class Azelf extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 12
+  atk = 15
   def = 3
   speDef = 3
   maxPP = 90
@@ -9399,7 +9399,7 @@ export class Chimecho extends Pokemon {
   atk = 15
   def = 3
   speDef = 6
-  maxPP = 90
+  maxPP = 80
   range = 3
   skill = Ability.ECHO
   passive = Passive.CHIMECHO
@@ -9932,7 +9932,7 @@ export class Sableye extends Pokemon {
   atk = 12
   def = 5
   speDef = 5
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.KNOCK_OFF
   attackSprite = AttackSprite.NORMAL_MELEE

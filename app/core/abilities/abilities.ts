@@ -794,7 +794,7 @@ export class TimeTravelStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     board.forEach((x, y, ally) => {
       if (ally && pokemon.team == ally.team) {
-        ally.handleHeal(20, pokemon, 1)
+        ally.handleHeal(25, pokemon, 1)
         ally.status.clearNegativeStatus()
       }
     })
@@ -1225,36 +1225,19 @@ export class ClangorousSoulStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let buffAtk = 0
-    let buffDef = 0
-    switch (pokemon.stars) {
-      case 1:
-        buffAtk = 2
-        buffDef = 1
-        break
-      case 2:
-        buffAtk = 4
-        buffDef = 2
-        break
-      case 3:
-        buffAtk = 8
-        buffDef = 4
-        break
-      default:
-        break
-    }
+    const buff = [1, 2, 4][pokemon.stars - 1] ?? 1
 
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
 
-    pokemon.addAttack(buffAtk, true)
-    pokemon.addDefense(buffDef, true)
-    pokemon.addSpecialDefense(buffDef, true)
+    pokemon.addAttack(buff, true)
+    pokemon.addDefense(buff, true)
+    pokemon.addSpecialDefense(buff, true)
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team == cell.value.team) {
-        cell.value.addAttack(buffAtk, true)
-        cell.value.addDefense(buffDef, true)
-        cell.value.addSpecialDefense(buffDef, true)
+        cell.value.addAttack(buff, true)
+        cell.value.addDefense(buff, true)
+        cell.value.addSpecialDefense(buff, true)
       }
     })
   }
@@ -3217,23 +3200,11 @@ export class DragonTailStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 0
-    switch (pokemon.stars) {
-      case 1:
-        damage = 30
-        break
-      case 2:
-        damage = 60
-        break
-      case 3:
-        damage = 120
-        break
-      default:
-        break
-    }
+    const damage = [30, 60, 100][pokemon.stars - 1] ?? 100
+    const buff = [1, 2, 3][pokemon.stars - 1] ?? 3
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    pokemon.addDefense(pokemon.stars, true)
-    pokemon.addSpecialDefense(pokemon.stars, true)
+    pokemon.addDefense(buff, true)
+    pokemon.addSpecialDefense(buff, true)
   }
 }
 
@@ -4937,7 +4908,7 @@ export class MistBallStrategy extends AbilityStrategy {
           pokemon.positionY,
           targetInLine.positionX,
           targetInLine.positionY
-        ) <= 5
+        ) <= 4
       ) {
         targetInLine.handleSpecialDamage(
           damage,
@@ -4987,7 +4958,7 @@ export class LusterPurgeStrategy extends AbilityStrategy {
           pokemon.positionY,
           targetInLine.positionX,
           targetInLine.positionY
-        ) <= 5
+        ) <= 4
       ) {
         targetInLine.handleSpecialDamage(
           damage,

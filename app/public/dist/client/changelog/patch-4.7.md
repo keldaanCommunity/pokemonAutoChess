@@ -24,6 +24,7 @@
 - Buff Rotom: Attack ~~12~~ 15
 - Nerf Helioptile and Heliodisk: HP ~~90/220~~ 75/170 Def/Spedef ~~3/4~~ 2/3
 - Nerf Regieleki: PP ~~90~~ 100
+- Nerf Lapras: Def ~~6~~ 5
 - Buff Chatot; Chatter: ~~10~~ 20 special damage, chance of confusion ~~30%~~ 50%, no longer scales with AP
 - Buff Sudowoodo: Atk ~~16~~ 20
 - Buff Alolan Geodude line: Def ~~3/5/7~~ 5/7/10
@@ -31,13 +32,21 @@
 - Nerf Cyndaquil line: HP ~~70/130/250/260~~ 60/120/230/230
 - Buff Zorua line and Hisui Zorua lines: Attack ~~6/15~~ 8/18
 - Nerf Dragon Darts (Dreepy line): ~~10/25/50~~ 10/20/40 special damage
-- Adapted Magic Bounce (Natu): fixed duration to 5 seconds, replace 40 flat damage by 50/100% of damage reflected, can now deal and reflect ability crits
+- Nerf Dragon Tail (Trapinch line) ~~30/60/120~~ 30/60/100 special damage
+- Nerf Flygon HP ~~220~~ 200
+- Adapted Magic Bounce (Natu): fixed duration to 5 seconds, replace 40 flat damage by 50/100% of damage reflected, can now crit and reflect ability crits
 - Genesect lock-on ability now deals **additional** true damage
 - New ability for Staryu/Starmie: Psybeam: Deal 30/60/100 special damage to all enemy Pokémon behind the target with 50% chance to make them confused for 4 seconds
 - Solosis ability is renamed Psychic and has a new visual effect
 - Duskull/Spiritomb ability is renamed Shadow ball and now lowers special defense instead of defense
-- Mist Ball & Luster Purge (Latios, Latias) now have a maximum range of 5 cells
+- Mist Ball & Luster Purge (Latios, Latias) now have a maximum range of 4 cells
 - Stun Spore now deals damage for cells adjacent to pokemon's target, and not the pokemon itself (Chikorita, Oddish)
+- Buff Uxie, Azelf, Mesprit: Attack ~~12~~ 15
+- Small change to Clangorous Soul (Jangmo-O line): buff itself and adjacent allies by 1/2/4 Attack, Defense and Special Defense, PP 110→90, fixed ability description
+- Change Iron Bundle: ~~ICE / FLYING / ARTIFICIAL~~ ICE / WATER / ARTIFICIAL, Def ~~4~~ 5
+- Buff Time Travel (Celebi): ~~20~~ 25 heal
+- Nerf Sableye PP ~~80~~ 100
+- Small change to Chimecho: now only doubles the cries of **adjacent** allies ; Revert PP nerf of 4.6 ~~90~~ 80
 
 # Changes to Synergies
 
@@ -53,16 +62,17 @@
   (6) Corkscrew Crash: Deal 100% of Attack as true damage
   (8) Max Meltdown: Deal 150% of Attack as true damage
 
-- Nerf Light 2 Shining ray ~~30~~ 25% Attack and AP ; changed Light 4 Eternal light: increase ~~Attack Speed by 30%~~ Def & SpeDef by 50%
+- Nerf Light 2 Shining ray ~~30~~ 20% Attack and AP
+- Changed Light 4 Eternal light: increase ~~Attack Speed by 30%~~ Def & SpeDef by 50%
 - Buff Rock: ~~5/10/20~~ 5/15/30 Defense
 - Buff Poison: ~~30/50/70~~ 33/66/100% chance to poison on hit
+- Buff Fairy: ~~15/30/45/60~~ 15/30/50/70
 
 - Changes to Ice: only Ice pokemons have a chance to freeze for 2 seconds after a hit, and give Special Defense to all your team
   (2) Chilly: +2 Special Defense, 20% chance to freeze
   (4) Frosty: +6 Special Defense, 30% chance to Freeze
   (6) Freezing: +20 Special Defense, 40% chance to freeze
   (8) Sheer Cold: +30 Special Defense, 50% chance to Freeze
-- Weather threshold for Snow: ~~6~~ 8
 
 - Portal symbol count per synergy trigger: Ice +2, Light -1
 
@@ -80,6 +90,7 @@ Base components stats have been reviewed to be closer to each other:
 - Buff Big Nugget: def & special def ~~3~~ 5
 - Buff Toxic Orb: spe def ~~1~~ 2
 - Burn and poison from Flame Orb and Toxic Orb can now be healed with Rune Protect, but are reapplied at the end of Rune protect effect.
+- Nerf Reaper Cloth: crit chance & AP ~~20%~~ 10%
 
 # Gameplay
 
