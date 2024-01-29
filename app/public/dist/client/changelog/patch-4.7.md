@@ -34,7 +34,7 @@
 - Nerf Dragon Darts (Dreepy line): ~~10/25/50~~ 10/20/40 special damage
 - Nerf Dragon Tail (Trapinch line) ~~30/60/120~~ 30/60/100 special damage
 - Nerf Flygon HP ~~220~~ 200
-- Adapted Magic Bounce (Natu): fixed duration to 5 seconds, replace 40 flat damage by 50/100% of damage reflected, can now deal and reflect ability crits
+- Adapted Magic Bounce (Natu): fixed duration to 5 seconds, replace 40 flat damage by 50/100% of damage reflected, can now crit and reflect ability crits
 - Genesect lock-on ability now deals **additional** true damage
 - New ability for Staryu/Starmie: Psybeam: Deal 30/60/100 special damage to all enemy Pokémon behind the target with 50% chance to make them confused for 4 seconds
 - Solosis ability is renamed Psychic and has a new visual effect
@@ -89,7 +89,8 @@ Base components stats have been reviewed to be closer to each other:
 - Adjusted Gracidea flower: ~~1 attack 25% attack speed~~ 3 attack 20% attack speed~~
 - Buff Big Nugget: def & special def ~~3~~ 5
 - Buff Toxic Orb: spe def ~~1~~ 2
-- Burn and poison from Flame Orb and Toxic Orb can now be healed with Rune Protect, but are reapplied at the end of Rune protect effect.FLAME_OR
+- Burn and poison from Flame Orb and Toxic Orb can now be healed with Rune Protect, but are reapplied at the end of Rune protect effect.
+- Nerf Reaper Cloth: crit chance & AP ~~20%~~ 10%
 
 # Gameplay
 
