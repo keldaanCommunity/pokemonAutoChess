@@ -66,7 +66,6 @@
   (4) Frosty: +6 Special Defense, 30% chance to Freeze
   (6) Freezing: +20 Special Defense, 40% chance to freeze
   (8) Sheer Cold: +30 Special Defense, 50% chance to Freeze
-- Weather threshold for Snow: ~~6~~ 8
 
 - Portal symbol count per synergy trigger: Ice +2, Light -1
 
