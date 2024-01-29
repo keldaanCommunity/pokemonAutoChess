@@ -54,7 +54,7 @@
   (6) Corkscrew Crash: Deal 100% of Attack as true damage
   (8) Max Meltdown: Deal 150% of Attack as true damage
 
-- Nerf Light 2 Shining ray ~~30~~ 25% Attack and AP
+- Nerf Light 2 Shining ray ~~30~~ 20% Attack and AP
 - Changed Light 4 Eternal light: increase ~~Attack Speed by 30%~~ Def & SpeDef by 50%
 - Buff Rock: ~~5/10/20~~ 5/15/30 Defense
 - Buff Poison: ~~30/50/70~~ 33/66/100% chance to poison on hit

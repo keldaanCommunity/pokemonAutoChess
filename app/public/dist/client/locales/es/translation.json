@@ -1406,7 +1406,7 @@
     "NIGHT": "+20% CRIT_CHANCE\n+30% de duración de pokemon SLEEP",
     "HYDRATATION": "La sinergia GRASS está curando 5 HP adicionales por segundo bajo la RAIN",
     "POISON_GAS": "Causa POISONNED cada segundo",
-    "SHINING_RAY": "Aumenta AP y ATK en 25%",
+    "SHINING_RAY": "Aumenta AP y ATK en 20%",
     "LIGHT_PULSE": "También otorga +10 PP cada segundo",
     "ETERNAL_LIGHT": "También otorga 50% DEF y SPE_DEF y RUNE_PROTECT por 10s",
     "MAX_ILLUMINATION": "También otorga RESURECTION y 100 SHIELD"
