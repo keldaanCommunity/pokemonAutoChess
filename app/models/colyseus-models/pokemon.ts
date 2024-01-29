@@ -1222,7 +1222,7 @@ export class JangmoO extends Pokemon {
   atk = 6
   def = 4
   speDef = 4
-  maxPP = 100
+  maxPP = 90
   range = 1
   skill = Ability.CLANGOROUS_SOUL
   attackSprite = AttackSprite.DRAGON_MELEE
@@ -1241,7 +1241,7 @@ export class HakamoO extends Pokemon {
   atk = 13
   def = 5
   speDef = 5
-  maxPP = 100
+  maxPP = 90
   range = 1
   skill = Ability.CLANGOROUS_SOUL
   attackSprite = AttackSprite.DRAGON_MELEE
@@ -1259,7 +1259,7 @@ export class KommoO extends Pokemon {
   atk = 25
   def = 8
   speDef = 8
-  maxPP = 100
+  maxPP = 90
   range = 1
   skill = Ability.CLANGOROUS_SOUL
   attackSprite = AttackSprite.DRAGON_MELEE
