@@ -5429,14 +5429,14 @@ export class Delibird extends Pokemon {
 export class IronBundle extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.ICE,
-    Synergy.FLYING,
+    Synergy.WATER,
     Synergy.ARTIFICIAL
   ])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
   atk = 16
-  def = 4
+  def = 5
   speDef = 2
   maxPP = 100
   range = 1
