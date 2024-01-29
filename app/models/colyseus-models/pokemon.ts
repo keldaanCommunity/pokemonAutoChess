@@ -5450,7 +5450,7 @@ export class Lapras extends Pokemon {
   stars = 3
   hp = 250
   atk = 12
-  def = 6
+  def = 5
   speDef = 6
   maxPP = 100
   range = 1

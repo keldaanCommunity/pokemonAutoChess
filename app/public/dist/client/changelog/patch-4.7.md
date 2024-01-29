@@ -24,6 +24,7 @@
 - Buff Rotom: Attack ~~12~~ 15
 - Nerf Helioptile and Heliodisk: HP ~~90/220~~ 75/170 Def/Spedef ~~3/4~~ 2/3
 - Nerf Regieleki: PP ~~90~~ 100
+- Nerf Lapras: Def ~~6~~ 5
 - Buff Chatot; Chatter: ~~10~~ 20 special damage, chance of confusion ~~30%~~ 50%, no longer scales with AP
 - Buff Sudowoodo: Atk ~~16~~ 20
 - Buff Alolan Geodude line: Def ~~3/5/7~~ 5/7/10
