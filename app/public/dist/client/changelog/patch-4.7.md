@@ -45,6 +45,7 @@
 - Small change to Clangorous Soul (Jangmo-O line): buff itself and adjacent allies by 1/2/4 Attack, Defense and Special Defense, PP 110→100, fixed ability description
 - Change Iron Bundle: ~~ICE / FLYING / ARTIFICIAL~~ ICE / WATER / ARTIFICIAL, Def ~~4~~ 5
 - Buff Time Travel (Celebi): ~~20~~ 25 heal
+- Nerf Sableye PP ~~80~~ 100
 
 # Changes to Synergies
 

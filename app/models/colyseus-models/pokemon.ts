@@ -9932,7 +9932,7 @@ export class Sableye extends Pokemon {
   atk = 12
   def = 5
   speDef = 5
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.KNOCK_OFF
   attackSprite = AttackSprite.NORMAL_MELEE
