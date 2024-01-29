@@ -58,6 +58,7 @@
 - Changed Light 4 Eternal light: increase ~~Attack Speed by 30%~~ Def & SpeDef by 50%
 - Buff Rock: ~~5/10/20~~ 5/15/30 Defense
 - Buff Poison: ~~30/50/70~~ 33/66/100% chance to poison on hit
+- Buff Fairy: ~~15/30/45/60~~ 15/30/50/70
 
 - Changes to Ice: only Ice pokemons have a chance to freeze for 2 seconds after a hit, and give Special Defense to all your team
   (2) Chilly: +2 Special Defense, 20% chance to freeze
