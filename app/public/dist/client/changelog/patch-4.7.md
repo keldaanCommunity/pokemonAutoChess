@@ -94,10 +94,9 @@ Base components stats have been reviewed to be closer to each other:
 
 # Gameplay
 
-- Introducing Smeargle's Scribbles, a new game mode for fun open to anyone. These special lobbies have ELO disabled and would have a new random rule applied during the entire game, that significantly changes the gameplay. Scribble lobbies will happen every four hours, indicated in the home screen.
+- Added back the sleep duration reduction when taking damage: -0.5 seconds per hit received
 - Removed on-crit effects for abilities: scope lens PP gain, fairy splash and razor fang armor reduction no longer apply for abilities crit
 - Comfey floral heal and Leppa berry consumption are now done before casting the ability, so that they can be used with abilitives giving Protect.
-- Stage 15: Mew joins the battle !
 
 # UI
 
@@ -115,7 +114,8 @@ Base components stats have been reviewed to be closer to each other:
 
 # Misc
 
+- Introducing Smeargle's Scribbles, a new game mode for fun open to anyone. These special lobbies have ELO disabled and would have a new random rule applied during the entire game, that significantly changes the gameplay. Scribble lobbies will happen every four hours, indicated in the home screen.
 - Added Ultraball Ranked lobby on a weekly basis, on Sunday at 9pm UTC. 5 boosters for the winner
 - Removed mythical category. Primal Groudon, Primal Kyogre and Mega Rayquaza are now Legendary tier 4
-- Added back the sleep duration reduction when taking damage: -0.5 seconds per hit received
 - Assets have been further optimized to try to reduce game loading times
+- Stage 15: Mew joins the battle !
