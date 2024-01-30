@@ -16,6 +16,7 @@ import { initTilemap } from "./core/design"
 import ItemsStatistics from "./models/mongo-models/items-statistic"
 import Meta from "./models/mongo-models/meta"
 import PokemonsStatistics from "./models/mongo-models/pokemons-statistic"
+import TitleStatistic from "./models/mongo-models/title-statistic"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "./models/precomputed"
 import AfterGameRoom from "./rooms/after-game-room"
 import CustomLobbyRoom from "./rooms/custom-lobby-room"
@@ -202,6 +203,10 @@ app.get("/meta", async (req, res) => {
       "y"
     ])
   )
+})
+
+app.get("/titles", async (req, res) => {
+  res.send(await TitleStatistic.find())
 })
 
 app.get("/meta/items", async (req, res) => {
