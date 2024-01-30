@@ -163,7 +163,7 @@ export default class Player extends Schema implements IPlayer {
   getCurrentStreakType(): BattleResult | null {
     for (let i = this.history.length - 1; i >= 0; i--) {
       if (
-        !this.history[i].isPVE &&
+        this.history[i].id !== "pve" &&
         this.history[i].result !== BattleResult.DRAW
       ) {
         return this.history[i].result

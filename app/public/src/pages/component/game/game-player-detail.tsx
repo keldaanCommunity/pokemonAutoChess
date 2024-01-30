@@ -71,7 +71,12 @@ export default function GamePlayerDetail(props: {
                 }}
                 src={getAvatarSrc(record.avatar)}
               />
-              <p>{(record.isPVE ? t(record.name) : record.name).slice(0, 4)}</p>
+              <p>
+                {(record.id === "pve" ? t(record.name) : record.name).slice(
+                  0,
+                  5
+                )}
+              </p>
             </div>
           )
         })}
