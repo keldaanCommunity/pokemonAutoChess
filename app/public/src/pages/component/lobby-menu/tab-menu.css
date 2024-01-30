@@ -26,7 +26,12 @@ ul.titles > li {
   margin: 0.1em 0;
   padding: 0.5em;
   list-style: none;
-  background-color: #54596b;
+  justify-content: space-between;
+}
+
+ul.titles > li div {
+  display: flex;
+  gap: 0.5em;
 }
 
 ul.titles > li span {

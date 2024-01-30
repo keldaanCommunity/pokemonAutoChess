@@ -1,5 +1,9 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
+import {
+  ITitleStatistic,
+  fetchTitles
+} from "../../../../../models/mongo-models/title-statistic"
 import { Title } from "../../../../../types"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { setTitle } from "../../../stores/NetworkStore"
@@ -11,7 +15,15 @@ export function TitleTab() {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const user = useAppSelector((state) => state.lobby.user)
-  return user ? (
+  const [titles, setTitles] = useState<ITitleStatistic[]>([])
+
+  useEffect(() => {
+    fetchTitles().then((res) => {
+      setTitles(res)
+    })
+  }, [])
+
+  return user && titles ? (
     <div>
       <p>
         {user.titles.length} / {Object.keys(Title).length}{" "}
@@ -24,26 +36,33 @@ export function TitleTab() {
         isDark
       />
       <ul className="titles">
-        {Object.keys(Title)
-          .filter<Title>(
-            (title): title is Title =>
-              showUnlocked || user.titles.includes(title as Title)
-          )
+        {titles
+          .filter((title) => showUnlocked || user.titles.includes(title.name))
+          .sort((a, b) => b.rarity - a.rarity)
           .map((k) => (
             <li
-              key={k}
+              key={k.name}
+              style={{
+                background: `linear-gradient(to right, #61738a 0% ${
+                  k.rarity * 100
+                }%, #54596b ${k.rarity * 100}% 100%)`
+              }}
               className={cc("clickable", {
-                unlocked: user.titles.includes(k),
-                selected: user.title === k
+                unlocked: user.titles.includes(k.name),
+                selected: user.title === k.name
               })}
               onClick={() => {
-                if (user.titles.includes(k)) {
-                  dispatch(setTitle(k))
+                if (user.titles.includes(k.name)) {
+                  dispatch(setTitle(k.name))
                 }
               }}
             >
-              <span>{t(`title.${k}`)}</span>
-              <p>{t(`title_description.${k}`)}</p>
+              <div>
+                <span>{t(`title.${k.name}`)}</span>
+                <p>{t(`title_description.${k.name}`)}</p>
+              </div>
+
+              <span>{(k.rarity * 100).toFixed(3)}%</span>
             </li>
           ))}
       </ul>

@@ -107,6 +107,7 @@ Base components stats have been reviewed to be closer to each other:
 - Added favorite synergies and units in player card based on game history
 - Add an animation when a pokemon evolves
 - Many ability animations have been reworked
+- Display title tab with rarity percentage
 
 # Bugfix
 
