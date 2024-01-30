@@ -246,8 +246,7 @@ export default class MinigameManager {
       transformMiniGameXCoordinate(pokemon.x),
       transformMiniGameYCoordinate(pokemon.y),
       pokemon,
-      pokemon.id,
-      this.animationManager
+      pokemon.id
     )
 
     if (pokemonUI.isCurrentPlayerAvatar) {

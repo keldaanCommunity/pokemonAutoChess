@@ -1,6 +1,5 @@
 import { t } from "i18next"
 import { GameObjects } from "phaser"
-import { MapSchema } from "@colyseus/schema"
 import Player from "../../../../models/colyseus-models/player"
 import { PokemonAvatarModel } from "../../../../models/colyseus-models/pokemon-avatar"
 import GameState from "../../../../rooms/states/game-state"
@@ -15,7 +14,6 @@ import {
 import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
 import { SpecialLobbyRule } from "../../../../types/enum/SpecialLobbyRule"
 import { Synergy } from "../../../../types/enum/Synergy"
-import { values } from "../../../../utils/schemas"
 import { transformCoordinate } from "../../pages/utils/utils"
 import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
@@ -59,7 +57,7 @@ export default class BoardManager {
     this.uid = uid
     this.scene = scene
     this.player = player
-    this.mode = BoardMode.PICK
+this.mode = BoardMode.PICK
     this.animationManager = animationManager
     this.lightX = state.lightX
     this.lightY = state.lightY
@@ -176,10 +174,13 @@ export default class BoardManager {
     this.pokemons.clear()
     if (this.mode === BoardMode.PICK) {
       this.showLightCell()
-      this.player.board.forEach((pokemon) => {
-        this.addPokemonSprite(pokemon)
-      })
     }
+
+    this.player.board.forEach((pokemon) => {
+      if (this.mode === BoardMode.PICK || pokemon.isOnBench) {
+        this.addPokemonSprite(pokemon)
+      }
+    })
 
     if (this.lobbyType === LobbyType.SCRIBBLE) {
       if (this.smeargle) {
@@ -301,8 +302,7 @@ export default class BoardManager {
       504,
       696,
       playerAvatar,
-      this.player.id,
-      this.animationManager
+      this.player.id
     )
     this.playerAvatar.orientation = Orientation.UPRIGHT
     this.playerAvatar.updateLife(this.player.life)
@@ -352,8 +352,7 @@ export default class BoardManager {
         1512,
         122,
         opponentAvatar,
-        opponentId,
-        this.animationManager
+        opponentId
       )
       this.opponentAvatar.disableInteractive()
       this.opponentAvatar.orientation = Orientation.DOWNLEFT
@@ -381,7 +380,7 @@ export default class BoardManager {
     this.mode = BoardMode.BATTLE
     this.hideLightCell()
     this.pokemons.forEach((pokemon) => {
-      if (pokemon.positionY != 0) {
+      if (!pokemon.isOnBench) {
         pokemon.destroy()
         this.pokemons.delete(pokemon.id)
       }
@@ -465,7 +464,7 @@ export default class BoardManager {
           )
           pokemonUI.x = coordinates[0]
           pokemonUI.y = coordinates[1]
-          if (pokemonUI.positionY != 0 && this.mode == "battle") {
+          if (this.mode === BoardMode.BATTLE && !pokemonUI.isOnBench) {
             pokemonUI.destroy()
             this.pokemons.delete(pokemonUI.id)
           }
