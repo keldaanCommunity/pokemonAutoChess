@@ -110,7 +110,7 @@ export default function WikiPokemonDetail(props: { pokemon: Pkm }) {
         )}
         {pokemon.passive !== Passive.NONE && (
           <>
-            <dt>{t("passive_label")}</dt>
+            <dt>{t("passive")}</dt>
             <dd>
               <br />
               {addIconsToDescription(

@@ -28,6 +28,7 @@
 
 #meta-report label {
   color: #ccc;
+  margin: 0;
 }
 
 #meta-report .team-comp,
@@ -53,7 +54,7 @@
 }
 
 #meta-report .item-stat {
-  grid-template-columns: 2ch 60px 16ch 8ch 10ch 1fr;
+  grid-template-columns: 2ch 60px 16ch 16ch 10ch 1fr;
 }
 
 #meta-report .pokemon-family-stat {

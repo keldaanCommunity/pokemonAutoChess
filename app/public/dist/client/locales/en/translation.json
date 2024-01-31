@@ -805,6 +805,7 @@
     "HITMONCHAN": "Hitmonchan",
     "HITMONTOP": "Hitmontop",
     "MIMIKYU": "Mimikyu",
+    "MIMIKYU_BUSTED": "Mimikyu (Busted)",
     "GRIMER": "Grimer",
     "MUK": "Muk",
     "ALOLAN_GRIMER": "Alolan Grimer",
@@ -1735,7 +1736,9 @@
     "CELEBI": "The player regains 1 HP every time $t(pkm.CELEBI) casts $t(ability.TIME_TRAVEL).",
     "GIMMIGHOUL": "$t(pkm.GIMMIGHOUL) is looking for 99 GOLD",
     "GHOLDENGO": "At the start of each fight, if the player has 50 GOLD or more, $t(pkm.GHOLDENGO) gains RUNE_PROTECT for the entire fight",
-    "METEOR": "$t(pkm.MINIOR) alternates between its meteor and core forms.\n The meteor form grants [4,SP]% ATK_SPEED per attack.\n Core form attacks hit target and adjacent ennemies and:\n Blue: Deals additional 10% SPECIAL\n Red: Deals additional 15% PHYSICAL\n Orange: Deals additional 5% TRUE\n Green: Heals adjacent allies for [5,SP] HP"
+    "METEOR": "$t(pkm.MINIOR) alternates between its meteor and core forms.\n The meteor form grants [4,SP]% ATK_SPEED per attack.\n Core form attacks hit target and adjacent ennemies and:\n Blue: Deals additional 10% SPECIAL\n Red: Deals additional 15% PHYSICAL\n Orange: Deals additional 5% TRUE\n Green: Heals adjacent allies for [5,SP] HP",
+    "MIMIKYU": "When hit under 50% HP, Mimikyu changes into its Busted Form, gaining 30% ATK_SPEED and PROTECT for 2 seconds",
+    "MIMIKYU_BUSTED": "Its neck is broken. Mimikyu will never forget the person who damaged its rag for as long as it is still alive."
   },
   "stat": {
     "ATK": "Attack",
@@ -2063,7 +2066,7 @@
     "mythical": "How do I get unique / legendary pokemons ?",
     "mythical_answer": "At turn 10 and 20, portals will appear with synergy symbols on them. Enter one of them to be proposed a set of unique, strong pokemons of the matching synergies. You'll be able to pick one of them.",
     "ditto": "How does Ditto work ?",
-    "ditto_answer": "Ditto creates a plain copy of the unit you hover and drop it over. Ditto can't fight. Each pokemon in shop has a 0.5% chance to be a Ditto at every roll. You can't copy mythical pokemons.",
+    "ditto_answer": "Ditto creates a plain copy of the unit you hover and drop it over. Each pokemon in shop has a 0.5% chance to be a Ditto at every roll. You can't copy mythical pokemons.",
     "items": "How do the items work ?",
     "items_answer": "After winning a PVE round, you will get a random basic item and you will be able to choose from 3 choices another basic item that suits you. You can combine two basic items to create a powerful tier 2 item. Every pokemon can hold up to 3 items. The crafting list of all items is available in the wiki, in the items section.",
     "bots": "How do bots work ?",
@@ -2331,7 +2334,6 @@
   "evolution": "Evolution",
   "portrait_credit": "Portrait Credit",
   "sprite_credit": "Sprite Credit",
-  "passive_label": "Passive",
   "bot_admin": "Bot Admin",
   "change_name": "Change Name",
   "change": "Change",

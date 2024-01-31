@@ -34,7 +34,7 @@ import {
 } from "../types/enum/Game"
 import { Berries, Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
-import { Pkm } from "../types/enum/Pokemon"
+import { Pkm, PkmIndex } from "../types/enum/Pokemon"
 import { SpecialLobbyRule } from "../types/enum/SpecialLobbyRule"
 import { Synergy, SynergyEffects } from "../types/enum/Synergy"
 import { distanceC } from "../utils/distance"
@@ -905,6 +905,15 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.status.sleepCooldown > 0) {
       this.status.sleepCooldown -= 500
     }
+
+    // Other passives
+    if (this.passive === Passive.MIMIKYU && this.life / this.hp < 0.5) {
+      this.index = PkmIndex[Pkm.MIMIKYU_BUSTED]
+      this.name = Pkm.MIMIKYU_BUSTED
+      this.passive = Passive.MIMIKYU_BUSTED
+      this.addAttackSpeed(30)
+      this.status.triggerProtect(2000)
+    }
   }
 
   onCriticalAttack({ target, board }: { target: PokemonEntity; board: Board }) {
@@ -1357,7 +1366,10 @@ export function getUnitScore(pokemon: PokemonEntity | IPokemon) {
   return score
 }
 
-export function canSell(pkm: Pkm, specialLobbyRule: SpecialLobbyRule | undefined | null) {
+export function canSell(
+  pkm: Pkm,
+  specialLobbyRule: SpecialLobbyRule | undefined | null
+) {
   if (specialLobbyRule === SpecialLobbyRule.DITTO_PARTY && pkm === Pkm.DITTO) {
     return false
   }

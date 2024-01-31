@@ -9497,7 +9497,23 @@ export class Mimikyu extends Pokemon {
   maxPP = 40
   range = 1
   skill = Ability.SHADOW_SNEAK
+  passive = Passive.MIMIKYU
   attackSprite = AttackSprite.FAIRY_MELEE
+}
+
+export class MimikyuBusted extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.FAIRY])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 20
+  def = 5
+  speDef = 6
+  maxPP = 40
+  range = 1
+  skill = Ability.SHADOW_SNEAK
+  passive = Passive.MIMIKYU_BUSTED
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Bonsley extends Pokemon {
@@ -11923,6 +11939,7 @@ export const PokemonClasses: Record<
   [Pkm.HITMONCHAN]: Hitmonchan,
   [Pkm.HITMONTOP]: Hitmontop,
   [Pkm.MIMIKYU]: Mimikyu,
+  [Pkm.MIMIKYU_BUSTED]: MimikyuBusted,
   [Pkm.GRIMER]: Grimer,
   [Pkm.MUK]: Muk,
   [Pkm.ALOLAN_GRIMER]: AlolanGrimer,
