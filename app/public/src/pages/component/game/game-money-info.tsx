@@ -28,7 +28,7 @@ export function GameMoneyDetail() {
   )
   const lastPlayerBattle =
     currentPlayer && currentPlayer.history && currentPlayer.history.length > 0
-      ? currentPlayer.history.filter((r) => !r.isPVE).at(-1)
+      ? currentPlayer.history.filter((r) => r.id !== "pve").at(-1)
       : null
   const lastBattleResult = lastPlayerBattle ? lastPlayerBattle.result : null
   const interest = useAppSelector((state) => state.game.interest)

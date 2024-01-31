@@ -9,9 +9,9 @@ import { getAvatarSrc } from "../../utils"
 import GameScene from "../scenes/game-scene"
 import EmoteMenu from "./emote-menu"
 import LifeBar from "./life-bar"
-import Pokemon from "./pokemon"
+import PokemonSprite from "./pokemon"
 
-export default class PokemonAvatar extends Pokemon {
+export default class PokemonAvatar extends PokemonSprite {
   circleHitbox: GameObjects.Ellipse | undefined
   circleTimer: GameObjects.Graphics
   isCurrentPlayerAvatar: boolean

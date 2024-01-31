@@ -43,7 +43,7 @@ import PokemonDetail from "./pokemon-detail"
 import { PokemonSpecialDetail } from "./pokemon-special-detail"
 import PowerBar from "./power-bar"
 
-export default class Pokemon extends DraggableObject {
+export default class PokemonSprite extends DraggableObject {
   evolution: Pkm
   rarity: Rarity
   emotion: Emotion
@@ -937,7 +937,11 @@ export default class Pokemon extends DraggableObject {
 export function addWanderingPokemon(
   scene: GameScene,
   pkm: Pkm,
-  onClick: (pokemon: Pokemon, pointer: any, tween: Phaser.Tweens.Tween) => void
+  onClick: (
+    pokemon: PokemonSprite,
+    pointer: any,
+    tween: Phaser.Tweens.Tween
+  ) => void
 ) {
   const fromLeft = coinflip()
   const [startX, endX] = fromLeft
@@ -950,7 +954,7 @@ export function addWanderingPokemon(
 
   const SPEED = 0.3
 
-  const pokemon = new Pokemon(
+  const pokemon = new PokemonSprite(
     scene,
     startX,
     startY,
