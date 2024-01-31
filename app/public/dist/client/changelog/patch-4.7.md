@@ -47,6 +47,7 @@
 - Buff Time Travel (Celebi): ~~20~~ 25 heal
 - Nerf Sableye PP ~~80~~ 100
 - Small change to Chimecho: now only doubles the cries of **adjacent** allies ; Revert PP nerf of 4.6 ~~90~~ 80
+- New passive for Mimikyu: When hit under 50% HP, Mimikyu changes into its Busted Form, gaining 30% attack speed and Protect for 2 seconds
 
 # Changes to Synergies
 
