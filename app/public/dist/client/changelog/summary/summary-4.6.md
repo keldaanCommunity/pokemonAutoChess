@@ -1,4 +1,4 @@
-> December 10, 2023
+> January 7, 2024
 
 # Patch 4.6: The Cursed Treasure
 
@@ -19,8 +19,8 @@
 ![Phantump](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0708/Normal.png)
 ![Trevenant](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0709/Normal.png)
 
-# Golden Eggs
+## Golden Eggs
 
 Baby 7 synergy now gives Golden Eggs, which can be sold for 10 gold. High risk, high reward ! Light and ground also have been slightly reworked in addition to other synergies buff/nerfs.
 
-Check out the full changelog on Discord !
+Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752/1193479355922395217) !
