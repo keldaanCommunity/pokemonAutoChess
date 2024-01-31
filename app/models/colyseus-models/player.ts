@@ -28,7 +28,7 @@ import { IPokemonConfig } from "../mongo-models/user-metadata"
 import PokemonFactory from "../pokemon-factory"
 import ExperienceManager from "./experience-manager"
 import HistoryItem from "./history-item"
-import { Pokemon } from "./pokemon"
+import { isOnBench, Pokemon } from "./pokemon"
 import PokemonCollection from "./pokemon-collection"
 import PokemonConfig from "./pokemon-config"
 import Synergies, { computeSynergies } from "./synergies"
@@ -260,7 +260,7 @@ export default class Player extends Schema implements IPlayer {
             if (SynergyGivenByItem.hasOwnProperty(item)) {
               const type = SynergyGivenByItem[item]
               pokemon.types.delete(type)
-              if (!pokemon.isOnBench) {
+              if (!isOnBench(pokemon)) {
                 needsRecomputingSynergiesAgain = true
               }
             }

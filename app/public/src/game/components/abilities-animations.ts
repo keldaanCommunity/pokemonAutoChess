@@ -10,12 +10,12 @@ import { randomBetween } from "../../../../utils/random"
 import { transformAttackCoordinate } from "../../pages/utils/utils"
 import { DebugScene } from "../scenes/debug-scene"
 import GameScene from "../scenes/game-scene"
-import Pokemon from "./pokemon"
+import PokemonSprite from "./pokemon"
 import { UNOWNS_PER_ABILITY } from "./unown-manager"
 
 export function displayAbility(
   scene: GameScene | DebugScene,
-  pokemonsOnBoard: Pokemon[],
+  pokemonsOnBoard: PokemonSprite[],
   skill: Ability | string,
   orientation: Orientation,
   positionX: number,
@@ -1777,7 +1777,7 @@ export function hiddenPowerAnimation(
   const letters = UNOWNS_PER_ABILITY.get(skill)
   for (let n = 0; n < 8; n++) {
     letters?.forEach((letter, i) => {
-      const unown = new Pokemon(
+      const unown = new PokemonSprite(
         scene,
         x,
         y,

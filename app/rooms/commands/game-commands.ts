@@ -68,6 +68,7 @@ import {
   getMaxTeamSize
 } from "../../utils/board"
 import GameRoom from "../game-room"
+import { isOnBench } from "../../models/colyseus-models/pokemon"
 
 export class OnShopCommand extends Command<
   GameRoom,
@@ -221,7 +222,7 @@ export class OnDragDropCommand extends Command<
           }
         } else {
           const dropOnBench = y == 0
-          const dropFromBench = pokemon.isOnBench
+          const dropFromBench = isOnBench(pokemon)
           // Drag and drop pokemons through bench has no limitation
           if (dropOnBench && dropFromBench) {
             this.room.swap(player, pokemon, x, y)
@@ -478,7 +479,7 @@ export class OnSellDropCommand extends Command<
       const pokemon = player.board.get(detail.pokemonId)
       if (
         pokemon &&
-        !pokemon.isOnBench &&
+        !isOnBench(pokemon) &&
         this.state.phase === GamePhaseState.FIGHT
       ) {
         return // can't sell a pokemon currently fighting
@@ -1079,7 +1080,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         const numberOfPokemonsToMove = maxTeamSize - teamSize
         for (let i = 0; i < numberOfPokemonsToMove; i++) {
           const pokemon = values(player.board).find(
-            (p) => p.isOnBench && p.canBePlaced
+            (p) => isOnBench(p) && p.canBePlaced
           )
           const coordinate = getFirstAvailablePositionOnBoard(player.board)
           if (coordinate && pokemon) {
@@ -1211,7 +1212,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
               )
             }
           }
-          if (pokemon.passive === Passive.UNOWN && !pokemon.isOnBench) {
+          if (pokemon.passive === Passive.UNOWN && !isOnBench(pokemon)) {
             // remove after one fight
             player.board.delete(key)
             player.board.delete(pokemon.id)

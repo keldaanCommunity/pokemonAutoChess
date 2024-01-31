@@ -30,7 +30,7 @@ import ItemContainer from "../components/item-container"
 import ItemsContainer from "../components/items-container"
 import LoadingManager from "../components/loading-manager"
 import MinigameManager from "../components/minigame-manager"
-import Pokemon from "../components/pokemon"
+import PokemonSprite from "../components/pokemon"
 import { SellZone } from "../components/sell-zone"
 import UnownManager from "../components/unown-manager"
 import WeatherManager from "../components/weather-manager"
@@ -48,14 +48,14 @@ export default class GameScene extends Scene {
   weatherManager: WeatherManager | undefined
   unownManager?: UnownManager
   music: Phaser.Sound.WebAudioSound | undefined
-  pokemonHovered: Pokemon | undefined
-  pokemonDragged: Pokemon | null = null
+  pokemonHovered: PokemonSprite | undefined
+  pokemonDragged: PokemonSprite | null = null
   itemDragged: ItemContainer | null = null
   dropSpots: Phaser.GameObjects.Graphics[] = []
   sellZone: SellZone | undefined
   zones: Phaser.GameObjects.Zone[] = []
-  lastDragDropPokemon: Pokemon | undefined
-  lastPokemonDetail: Pokemon | null
+  lastDragDropPokemon: PokemonSprite | undefined
+  lastPokemonDetail: PokemonSprite | null
   minigameManager: MinigameManager
   loadingManager: LoadingManager
   started: boolean
@@ -212,7 +212,7 @@ export default class GameScene extends Scene {
     this.room?.send(Transfer.LEVEL_UP)
   }
 
-  sellPokemon(pokemon: Pokemon) {
+  sellPokemon(pokemon: PokemonSprite) {
     if (!pokemon) {
       return
     }
@@ -320,7 +320,7 @@ export default class GameScene extends Scene {
     this.input.on(
       "gameobjectover",
       (pointer, gameObject: Phaser.GameObjects.GameObject) => {
-        if (gameObject instanceof Pokemon) {
+        if (gameObject instanceof PokemonSprite) {
           this.pokemonHovered = gameObject
         } else {
           this.pokemonHovered = undefined
@@ -331,7 +331,7 @@ export default class GameScene extends Scene {
     this.input.on(
       "dragstart",
       (pointer, gameObject: Phaser.GameObjects.GameObject) => {
-        if (gameObject instanceof Pokemon) {
+        if (gameObject instanceof PokemonSprite) {
           this.pokemonDragged = gameObject
           this.dropSpots.forEach((spot) => spot.setVisible(true))
 
@@ -393,7 +393,7 @@ export default class GameScene extends Scene {
         this.dropSpots.forEach((spot) => spot.setVisible(false))
         this.sellZone?.setVisible(false)
 
-        if (gameObject instanceof Pokemon) {
+        if (gameObject instanceof PokemonSprite) {
           // POKEMON -> BOARD-ZONE = PLACE POKEMON
           if (dropZone.name == "board-zone") {
             const [x, y] = [dropZone.getData("x"), dropZone.getData("y")]

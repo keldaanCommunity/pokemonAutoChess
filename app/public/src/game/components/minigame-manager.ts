@@ -13,12 +13,12 @@ import {
 import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
 import { FloatingItem } from "./floating-item"
-import Pokemon from "./pokemon"
+import PokemonSprite from "./pokemon"
 import PokemonAvatar from "./pokemon-avatar"
 import { Portal, SynergySymbol } from "./portal"
 
 export default class MinigameManager {
-  pokemons: Map<string, Pokemon>
+  pokemons: Map<string, PokemonSprite>
   items: Map<string, FloatingItem>
   portals: Map<string, Portal>
   symbols: Map<string, SynergySymbol>
@@ -34,7 +34,7 @@ export default class MinigameManager {
     avatars: Map<string, IPokemonAvatar>,
     items: Map<string, IFloatingItem>
   ) {
-    this.pokemons = new Map<string, Pokemon>()
+    this.pokemons = new Map<string, PokemonSprite>()
     this.items = new Map<string, FloatingItem>()
     this.portals = new Map<string, Portal>()
     this.symbols = new Map<string, SynergySymbol>()

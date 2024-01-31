@@ -12,7 +12,7 @@ import { transformAttackCoordinate } from "../../pages/utils/utils"
 import AnimationManager from "../animation-manager"
 import { displayAbility } from "../components/abilities-animations"
 import LoadingManager from "../components/loading-manager"
-import Pokemon from "../components/pokemon"
+import PokemonSprite from "../components/pokemon"
 
 export class DebugScene extends Phaser.Scene {
   height: number
@@ -21,8 +21,8 @@ export class DebugScene extends Phaser.Scene {
   loadingManager: LoadingManager
   onProgress: (value: number) => void
   onComplete: () => void
-  pokemon?: Pokemon
-  target?: Pokemon
+  pokemon?: PokemonSprite
+  target?: PokemonSprite
   uid = "debug"
   tilemap: DesignTiled | undefined
   map: Phaser.Tilemaps.Tilemap | undefined
@@ -69,7 +69,7 @@ export class DebugScene extends Phaser.Scene {
       clearInterval(this.attackAnimInterval)
     }
     const [px, py] = transformAttackCoordinate(3, 3, false)
-    this.pokemon = new Pokemon(
+    this.pokemon = new PokemonSprite(
       this,
       px,
       py,
@@ -251,7 +251,7 @@ export class DebugScene extends Phaser.Scene {
     this.pokemon!.targetX = tx
     this.pokemon!.targetY = ty
     const [rtx, rty] = transformAttackCoordinate(tx, ty, false)
-    this.target = new Pokemon(
+    this.target = new PokemonSprite(
       this,
       rtx,
       rty,

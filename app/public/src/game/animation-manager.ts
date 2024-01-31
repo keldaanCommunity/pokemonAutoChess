@@ -15,7 +15,7 @@ import { fpsToDuration } from "../../../utils/number"
 import durations from "../../dist/client/assets/pokemons/durations.json"
 import indexList from "../../dist/client/assets/pokemons/indexList.json"
 import atlas from "../assets/atlas.json"
-import Pokemon from "./components/pokemon"
+import PokemonSprite from "./components/pokemon"
 
 const DEFAULT_FPS = 20
 
@@ -223,7 +223,7 @@ export default class AnimationManager {
 
   convertPokemonActionStateToAnimationType(
     state: PokemonActionState,
-    entity: Pokemon
+    entity: PokemonSprite
   ): AnimationType {
     switch (state) {
       case PokemonActionState.HOP:
@@ -245,7 +245,11 @@ export default class AnimationManager {
     }
   }
 
-  animatePokemon(entity: Pokemon, action: PokemonActionState, flip: boolean) {
+  animatePokemon(
+    entity: PokemonSprite,
+    action: PokemonActionState,
+    flip: boolean
+  ) {
     const animation = this.convertPokemonActionStateToAnimationType(
       action,
       entity
@@ -273,7 +277,7 @@ export default class AnimationManager {
   }
 
   play(
-    entity: Pokemon,
+    entity: PokemonSprite,
     animation: AnimationType,
     config: { flip?: boolean; repeat?: number; lock?: boolean } = {}
   ) {

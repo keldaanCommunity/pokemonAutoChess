@@ -1,6 +1,7 @@
 import { t } from "i18next"
 import { GameObjects } from "phaser"
 import Player from "../../../../models/colyseus-models/player"
+import { isOnBench } from "../../../../models/colyseus-models/pokemon"
 import { PokemonAvatarModel } from "../../../../models/colyseus-models/pokemon-avatar"
 import GameState from "../../../../rooms/states/game-state"
 import { IPokemon, Transfer } from "../../../../types"
@@ -17,7 +18,7 @@ import { Synergy } from "../../../../types/enum/Synergy"
 import { transformCoordinate } from "../../pages/utils/utils"
 import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
-import Pokemon from "./pokemon"
+import PokemonSprite from "./pokemon"
 import PokemonAvatar from "./pokemon-avatar"
 import PokemonSpecial from "./pokemon-special"
 
@@ -28,7 +29,7 @@ export enum BoardMode {
 }
 
 export default class BoardManager {
-  pokemons: Map<string, Pokemon>
+  pokemons: Map<string, PokemonSprite>
   uid: string
   scene: GameScene
   player: Player
@@ -43,7 +44,7 @@ export default class BoardManager {
   lightCell: Phaser.GameObjects.Sprite | null
   berryTree: Phaser.GameObjects.Sprite | null
   lobbyType: LobbyType
-  smeargle: Pokemon | null = null
+  smeargle: PokemonSprite | null = null
   specialLobbyRule: SpecialLobbyRule | null = null
 
   constructor(
@@ -53,11 +54,11 @@ export default class BoardManager {
     uid: string,
     state: GameState
   ) {
-    this.pokemons = new Map<string, Pokemon>()
+    this.pokemons = new Map<string, PokemonSprite>()
     this.uid = uid
     this.scene = scene
     this.player = player
-this.mode = BoardMode.PICK
+    this.mode = BoardMode.PICK
     this.animationManager = animationManager
     this.lightX = state.lightX
     this.lightY = state.lightY
@@ -136,7 +137,7 @@ this.mode = BoardMode.PICK
     }
   }
 
-  addPokemonSprite(pokemon: IPokemon): Pokemon {
+  addPokemonSprite(pokemon: IPokemon): PokemonSprite {
     if (this.pokemons.has(pokemon.id)) {
       return this.pokemons.get(pokemon.id)!
     }
@@ -144,7 +145,7 @@ this.mode = BoardMode.PICK
       pokemon.positionX,
       pokemon.positionY
     )
-    const pokemonUI = new Pokemon(
+    const pokemonUI = new PokemonSprite(
       this.scene,
       coordinates[0],
       coordinates[1],
@@ -177,7 +178,7 @@ this.mode = BoardMode.PICK
     }
 
     this.player.board.forEach((pokemon) => {
-      if (this.mode === BoardMode.PICK || pokemon.isOnBench) {
+      if (this.mode === BoardMode.PICK || isOnBench(pokemon)) {
         this.addPokemonSprite(pokemon)
       }
     })
@@ -416,9 +417,6 @@ this.mode = BoardMode.PICK
 
   setPlayer(player: Player) {
     if (player.id != this.player.id) {
-      this.pokemons.forEach((pokemon) => {
-        pokemon.destroy()
-      })
       this.player = player
       this.renderBoard()
       this.updatePlayerAvatar()

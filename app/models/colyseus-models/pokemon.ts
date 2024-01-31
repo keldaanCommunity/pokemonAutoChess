@@ -112,10 +112,6 @@ export class Pokemon extends Schema implements IPokemon {
     return ![Pkm.DITTO, Pkm.EGG, Pkm.COMFEY, ...Unowns].includes(this.name)
   }
 
-  get isOnBench(): boolean {
-    return this.positionY === 0
-  }
-
   // called after manually changing position of the pokemon on board
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onChangePosition(x: number, y: number, player: Player) {}
@@ -159,6 +155,10 @@ export class Pokemon extends Schema implements IPokemon {
     team: MapSchema<IPokemonEntity>
     entity: IPokemonEntity
   }) {}
+}
+
+export function isOnBench(pokemon: Pokemon): boolean {
+  return pokemon.positionY === 0
 }
 
 export class Ditto extends Pokemon {

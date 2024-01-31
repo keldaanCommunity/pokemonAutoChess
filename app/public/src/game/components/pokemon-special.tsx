@@ -5,12 +5,12 @@ import { Pkm } from "../../../../types/enum/Pokemon"
 import { SpecialLobbyRule } from "../../../../types/enum/SpecialLobbyRule"
 import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
-import Pokemon from "./pokemon"
+import PokemonSprite from "./pokemon"
 import { preferences } from "../../preferences"
 import { clamp, min } from "../../../../utils/number"
 import { PokemonSpecialDetail } from "./pokemon-special-detail"
 
-export default class PokemonSpecial extends Pokemon {
+export default class PokemonSpecial extends PokemonSprite {
   detail: PokemonSpecialDetail | null
   animationManager: AnimationManager
   specialLobbyRule: SpecialLobbyRule | null
