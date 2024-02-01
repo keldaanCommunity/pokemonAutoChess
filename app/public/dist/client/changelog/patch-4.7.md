@@ -21,7 +21,7 @@
 - Confusion (Meditite) now also cause Silence in addition to Confusion
 - Nerf Charge (Zapdos): increase attack & attack speed by ~~30~~ 25%
 - Leaf Stone (Kartana) now deals true damage
-- Buff Rotom: Attack ~~12~~ 15
+- Buff Rotom: gain Light synergy
 - Nerf Helioptile and Heliodisk: HP ~~90/220~~ 75/170 Def/Spedef ~~3/4~~ 2/3
 - Nerf Regieleki: PP ~~90~~ 100
 - Nerf Lapras: Def ~~6~~ 5
