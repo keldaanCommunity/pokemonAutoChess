@@ -35,6 +35,10 @@
 - Nerf Dragon Tail (Trapinch line) ~~30/60/120~~ 30/60/100 special damage
 - Nerf Flygon HP ~~220~~ 200
 - Adapted Magic Bounce (Natu): fixed duration to 5 seconds, replace 40 flat damage by 50/100% of damage reflected, can now crit and reflect ability crits
+- Nerf Flareon PP ~~80~~ 100
+- Buff Eevee, Vaporeon, Jolteon, Espeon, Umbreon, Glaceon, Sylveon: Def 3 Spedef 2
+- Buff Mime Jr line: PP ~~85~~ 80
+- Buff Tinkatink line: PP ~~150~~ 120
 - Genesect lock-on ability now deals **additional** true damage
 - New ability for Staryu/Starmie: Psybeam: Deal 30/60/100 special damage to all enemy Pokémon behind the target with 50% chance to make them confused for 4 seconds
 - Solosis ability is renamed Psychic and has a new visual effect
