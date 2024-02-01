@@ -96,6 +96,7 @@ Base components stats have been reviewed to be closer to each other:
 - Buff Toxic Orb: spe def ~~1~~ 2
 - Burn and poison from Flame Orb and Toxic Orb can now be healed with Rune Protect, but are reapplied at the end of Rune protect effect.
 - Nerf Reaper Cloth: crit chance & AP ~~20%~~ 10%
+- New sprites for Heart scale, Miracle Seed, Big Nugget and Metal Coat
 
 # Gameplay
 
