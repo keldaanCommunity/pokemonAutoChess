@@ -21,7 +21,7 @@ body.grab.grabbing {
 
 /* scrollbar */
 * {
-  scrollbar-width: auto;
+  scrollbar-width: thin;
   scrollbar-color: #4f5160 transparent;
 }
 

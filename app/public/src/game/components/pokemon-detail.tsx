@@ -207,7 +207,6 @@ export default class PokemonDetail extends GameObjects.DOMElement {
   updatePassiveDescription(passive: Passive, abilityTier: number, ap: number) {
     this.passiveDescriptionRoot.render(
       <p>
-        Passive:{" "}
         {addIconsToDescription(
           t(`passive_description.${passive}`),
           abilityTier,

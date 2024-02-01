@@ -888,7 +888,11 @@ export default class GameRoom extends Room<GameState> {
     if (this.state.additionalPokemons.includes(pkm)) return // already picked, probably a double click
     if (UniqueShop.includes(pkm)) {
       if (this.state.stageLevel !== PortalCarouselStages[0]) return // should not be pickable at this stage
-      if (values(player.board).some((p) => UniqueShop.includes(p.name))) return // already picked a unique
+      if (
+        values(player.board).some((p) => p.rarity === Rarity.UNIQUE) &&
+        this.state.specialLobbyRule !== SpecialLobbyRule.UNIQUE_STARTER
+      )
+        return // already picked a unique
     }
     if (LegendaryShop.includes(pkm)) {
       if (this.state.stageLevel !== PortalCarouselStages[1]) return // should not be pickable at this stage
