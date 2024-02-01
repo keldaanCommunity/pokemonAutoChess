@@ -5371,11 +5371,15 @@ export class Manaphy extends Pokemon {
 }
 
 export class Rotom extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.GHOST])
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.GHOST,
+    Synergy.LIGHT
+  ])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 15
+  atk = 12
   def = 3
   speDef = 3
   maxPP = 100
