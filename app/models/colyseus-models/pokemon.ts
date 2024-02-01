@@ -4826,7 +4826,7 @@ export class Eevee extends Pokemon {
   stars = 1
   hp = 90
   atk = 5
-  def = 2
+  def = 3
   speDef = 2
   maxPP = 100
   range = 1
@@ -4879,8 +4879,8 @@ export class Vaporeon extends Pokemon {
   stars = 2
   hp = 180
   atk = 12
-  def = 1
-  speDef = 1
+  def = 3
+  speDef = 2
   maxPP = 100
   range = 1
   skill = Ability.HAPPY_HOUR
@@ -4893,8 +4893,8 @@ export class Jolteon extends Pokemon {
   stars = 2
   hp = 180
   atk = 12
-  def = 1
-  speDef = 1
+  def = 3
+  speDef = 2
   maxPP = 100
   range = 1
   skill = Ability.HAPPY_HOUR
@@ -4909,7 +4909,7 @@ export class Flareon extends Pokemon {
   atk = 12
   def = 3
   speDef = 2
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.HAPPY_HOUR
   attackSprite = AttackSprite.FIRE_MELEE
@@ -4921,8 +4921,8 @@ export class Espeon extends Pokemon {
   stars = 2
   hp = 180
   atk = 12
-  def = 1
-  speDef = 1
+  def = 3
+  speDef = 2
   maxPP = 80
   range = 1
   skill = Ability.HAPPY_HOUR
@@ -4963,8 +4963,8 @@ export class Sylveon extends Pokemon {
   stars = 2
   hp = 180
   atk = 12
-  def = 1
-  speDef = 1
+  def = 3
+  speDef = 2
   maxPP = 80
   range = 1
   skill = Ability.HAPPY_HOUR
@@ -4977,8 +4977,8 @@ export class Glaceon extends Pokemon {
   stars = 2
   hp = 180
   atk = 12
-  def = 1
-  speDef = 1
+  def = 3
+  speDef = 2
   maxPP = 80
   range = 1
   skill = Ability.HAPPY_HOUR
@@ -7464,7 +7464,7 @@ export class MimeJr extends Pokemon {
   atk = 6
   def = 2
   speDef = 2
-  maxPP = 85
+  maxPP = 80
   range = 2
   skill = Ability.MIMIC
   additional = true
@@ -7483,7 +7483,7 @@ export class MrMime extends Pokemon {
   atk = 15
   def = 2
   speDef = 4
-  maxPP = 85
+  maxPP = 80
   range = 2
   skill = Ability.MIMIC
   additional = true
@@ -9773,7 +9773,7 @@ export class Tinkatink extends Pokemon {
   atk = 11
   def = 3
   speDef = 3
-  maxPP = 150
+  maxPP = 120
   range = 1
   skill = Ability.GIGATON_HAMMER
   attackSprite = AttackSprite.FAIRY_MELEE
@@ -9788,7 +9788,7 @@ export class Tinkatuff extends Pokemon {
   atk = 22
   def = 4
   speDef = 4
-  maxPP = 150
+  maxPP = 120
   range = 1
   skill = Ability.GIGATON_HAMMER
   attackSprite = AttackSprite.FAIRY_MELEE
@@ -9802,7 +9802,7 @@ export class Tinkaton extends Pokemon {
   atk = 44
   def = 8
   speDef = 8
-  maxPP = 150
+  maxPP = 120
   range = 1
   skill = Ability.GIGATON_HAMMER
   attackSprite = AttackSprite.FAIRY_MELEE
