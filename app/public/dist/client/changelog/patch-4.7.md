@@ -102,7 +102,7 @@ Base components stats have been reviewed to be closer to each other:
 
 - Added back the sleep duration reduction when taking damage: -0.5 seconds per hit received
 - Removed on-crit effects for abilities: scope lens PP gain, fairy splash and razor fang armor reduction no longer apply for abilities crit
-- Comfey floral heal and Leppa berry consumption are now done before casting the ability, so that they can be used with abilitives giving Protect.
+- Comfey floral heal and Leppa berry consumption are now done before casting the ability, so that they can be used with abilities giving Protect.
 
 # UI
 
@@ -112,12 +112,9 @@ Base components stats have been reviewed to be closer to each other:
 - Item meta report is now organized in tabs
 - Added favorite synergies and units in player card based on game history
 - Add an animation when a pokemon evolves
-- Many ability animations have been reworked
+- Many attack and ability animations have been reworked
 - Display title tab with rarity percentage
-
-# Bugfix
-
-- Fix avatar emotes menu. Right click on your avatar to use the emotions you unlocked
+- Avatar emotes menu is fixed. Right click on your avatar to use the emotions you unlocked
 
 # Misc
 
