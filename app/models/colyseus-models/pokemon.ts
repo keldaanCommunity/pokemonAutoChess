@@ -10845,7 +10845,7 @@ export class Nihilego extends Pokemon {
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 200
-  atk = 30
+  atk = 25
   def = 1
   speDef = 5
   maxPP = 80

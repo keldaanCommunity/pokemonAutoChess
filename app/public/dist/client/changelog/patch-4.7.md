@@ -20,6 +20,7 @@
 - Buff Happiny line PP ~~130~~ 120 Spe def ~~5/6/8~~ 5/10/15
 - Confusion (Meditite) now also cause Silence in addition to Confusion
 - Nerf Charge (Zapdos): increase attack & attack speed by ~~30~~ 25%
+- Nerf Nihilego preventively after rock/poison buff: Attack ~~30~~ 25
 - Leaf Stone (Kartana) now deals true damage
 - Buff Rotom: gain Light synergy
 - Nerf Helioptile and Heliodisk: HP ~~90/220~~ 75/170 Def/Spedef ~~3/4~~ 2/3
