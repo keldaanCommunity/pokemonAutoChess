@@ -1,11 +1,11 @@
 import dotenv from "dotenv"
 import { connect } from "mongoose"
 import { BotV2 } from "../../app/models/mongo-models/bot-v2"
-import { logger } from "../../app/utils/logger"
-import { Pkm } from "../../app/types/enum/Pokemon"
 import DetailledStatistic from "../../app/models/mongo-models/detailled-statistic-v2"
-import Meta from "../../app/models/mongo-models/meta"
 import History from "../../app/models/mongo-models/history"
+import Meta from "../../app/models/mongo-models/meta"
+import { Pkm } from "../../app/types/enum/Pokemon"
+import { logger } from "../../app/utils/logger"
 
 async function main() {
   dotenv.config()
@@ -59,7 +59,7 @@ async function removePokemonFromGame(
       let modified = false
       record.pokemons.forEach((p) => {
         if (p.name === (pokemonNameToRemove as Pkm)) {
-          p.name = pokemonIndexToReplace
+          p.name = Pkm.LUCARIO
           p.avatar = p.avatar.replace(
             pokemonIndexToRemove,
             pokemonIndexToReplace
@@ -89,7 +89,7 @@ async function removePokemonFromGame(
           if (player.pokemons) {
             player.pokemons.forEach((p) => {
               if (p.name === (pokemonNameToRemove as Pkm)) {
-                p.name = pokemonIndexToReplace
+                p.name = Pkm.LUCARIO
                 if (p.avatar) {
                   p.avatar = p.avatar.replace(
                     pokemonIndexToRemove,
