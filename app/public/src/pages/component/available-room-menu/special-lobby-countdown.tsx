@@ -56,8 +56,12 @@ export function SpecialLobbyCountdown() {
     )
   }
 
-  const timeUntilNext =
-    nextSpecialLobbyDate - Math.floor(clock.getTime() / 1000)
+  let timeUntilNext = -1
+  if (nextSpecialLobbyDate) {
+    timeUntilNext = Math.floor(
+      (new Date(nextSpecialLobbyDate).getTime() - clock.getTime()) / 1000
+    )
+  }
 
   return nextSpecialLobbyDate && nextSpecialLobbyType && timeUntilNext > 0 ? (
     <p className="special-lobby-announcement">
