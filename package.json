@@ -37,7 +37,8 @@
     "translate": "npx @inlang/cli machine translate -f",
     "pm2": "pm2 start ecosystem.config.js",
     "start-pm2": "npm run build && npm run pm2",
-    "assetpack": "assetpack -c ./edit/assetpack/.assetpack.js",
+    "postinstall": "cd edit/assetpack && npm install",
+    "assetpack": "cd edit/assetpack && npm run assetpack",
     "precompute": "cd gen && ts-node precompute-all.ts"
   },
   "dependencies": {
@@ -117,12 +118,6 @@
     "openapi-typescript": "^6.7.4",
     "redux-devtools-extension": "^2.13.9",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.3.3",
-    "@assetpack/cli": "^0.8.0",
-    "@assetpack/core": "^0.8.0",
-    "@assetpack/plugin-compress": "^0.8.0",
-    "@assetpack/plugin-ffmpeg": "^0.8.0",
-    "@assetpack/plugin-json": "^0.8.0",
-    "@assetpack/plugin-texture-packer": "^0.8.0"
+    "typescript": "^5.3.3"
   }
 }
