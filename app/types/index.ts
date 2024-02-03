@@ -278,7 +278,7 @@ export interface ICustomLobbyState extends Schema {
   leaderboard: ILeaderboardInfo[]
   botLeaderboard: ILeaderboardInfo[]
   levelLeaderboard: ILeaderboardInfo[]
-  nextSpecialLobbyDate: number
+  nextSpecialLobbyDate: string
   nextSpecialLobbyType: SpecialLobbyType | ""
 }
 
