@@ -360,6 +360,7 @@ export class ConfusingMindStrategy extends AbilityStrategy {
 }
 
 export class KnowledgeThiefStrategy extends AbilityStrategy {
+  copyable = false
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3976,6 +3977,7 @@ export class DragonDartsStrategy extends AbilityStrategy {
 }
 
 export class MetronomeStrategy extends AbilityStrategy {
+  copyable = false
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -4330,6 +4332,7 @@ export class DeathWingStrategy extends AbilityStrategy {
 }
 
 export class MimicStrategy extends AbilityStrategy {
+  copyable = false
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5606,6 +5609,7 @@ export class CloseCombatStrategy extends AbilityStrategy {
 }
 
 export class AssistStrategy extends AbilityStrategy {
+  copyable = false
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
