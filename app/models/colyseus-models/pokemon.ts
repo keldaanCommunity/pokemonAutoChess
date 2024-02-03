@@ -777,7 +777,7 @@ export class Beldum extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.METEOR_MASH
-  attackSprite = AttackSprite.DRAGON_MELEE
+  attackSprite = AttackSprite.PSYCHIC_MELEE
 }
 
 export class Metang extends Pokemon {
@@ -796,7 +796,7 @@ export class Metang extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.METEOR_MASH
-  attackSprite = AttackSprite.DRAGON_MELEE
+  attackSprite = AttackSprite.PSYCHIC_MELEE
 }
 
 export class Metagross extends Pokemon {
@@ -814,7 +814,7 @@ export class Metagross extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.METEOR_MASH
-  attackSprite = AttackSprite.DRAGON_MELEE
+  attackSprite = AttackSprite.PSYCHIC_MELEE
 }
 
 export class Tympole extends Pokemon {
@@ -1177,7 +1177,7 @@ export class Larvitar extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.BITE
-  attackSprite = AttackSprite.ROCK_MELEE
+  attackSprite = AttackSprite.DARK_MELEE
 }
 
 export class Pupitar extends Pokemon {
@@ -1192,7 +1192,7 @@ export class Pupitar extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.BITE
-  attackSprite = AttackSprite.ROCK_MELEE
+  attackSprite = AttackSprite.DARK_MELEE
 }
 
 export class Tyranitar extends Pokemon {
@@ -1206,7 +1206,7 @@ export class Tyranitar extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.BITE
-  attackSprite = AttackSprite.ROCK_MELEE
+  attackSprite = AttackSprite.DARK_MELEE
 }
 
 export class JangmoO extends Pokemon {
@@ -4506,7 +4506,7 @@ export class Yveltal extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DEATH_WING
-  attackSprite = AttackSprite.FLYING_MELEE
+  attackSprite = AttackSprite.DARK_MELEE
 }
 
 export class Moltres extends Pokemon {
@@ -4676,7 +4676,7 @@ export class Lunatone extends Pokemon {
   range = 2
   skill = Ability.COSMIC_POWER
   passive = Passive.NIGHT
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.DARK_RANGE
 }
 
 export class Solrock extends Pokemon {
@@ -4926,7 +4926,7 @@ export class Espeon extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.HAPPY_HOUR
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.PSYCHIC_MELEE
 }
 
 export class Umbreon extends Pokemon {
@@ -4940,7 +4940,7 @@ export class Umbreon extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.HAPPY_HOUR
-  attackSprite = AttackSprite.DRAGON_MELEE
+  attackSprite = AttackSprite.DARK_MELEE
 }
 
 export class Leafeon extends Pokemon {
@@ -5010,7 +5010,7 @@ export class Darkrai extends Pokemon {
   maxPP = 120
   range = 2
   skill = Ability.DARK_VOID
-  attackSprite = AttackSprite.GHOST_RANGE
+  attackSprite = AttackSprite.DARK_RANGE
 }
 
 export class Larvesta extends Pokemon {
@@ -5399,7 +5399,7 @@ export class Spiritomb extends Pokemon {
   maxPP = 80
   range = 2
   skill = Ability.SHADOW_BALL
-  attackSprite = AttackSprite.GHOST_RANGE
+  attackSprite = AttackSprite.DARK_RANGE
 }
 
 export class Absol extends Pokemon {
@@ -5413,7 +5413,7 @@ export class Absol extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.THIEF
-  attackSprite = AttackSprite.DRAGON_MELEE
+  attackSprite = AttackSprite.DARK_MELEE
 }
 
 export class Delibird extends Pokemon {
@@ -5697,7 +5697,7 @@ export class Deoxys extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.PROTECT
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.PSYCHIC_MELEE
 }
 
 export class Shaymin extends Pokemon {
@@ -6509,7 +6509,7 @@ export class Hatenna extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.MAGIC_POWDER
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.PSYCHIC_MELEE
 }
 
 export class Hattrem extends Pokemon {
@@ -6524,7 +6524,7 @@ export class Hattrem extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.MAGIC_POWDER
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.PSYCHIC_MELEE
 }
 
 export class Hatterene extends Pokemon {
@@ -6538,7 +6538,7 @@ export class Hatterene extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.MAGIC_POWDER
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.PSYCHIC_MELEE
 }
 export class Fennekin extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.PSYCHIC, Synergy.HUMAN])
@@ -6619,7 +6619,7 @@ export class Guzzlord extends Pokemon {
   maxPP = 120
   range = 3
   skill = Ability.TWISTING_NETHER
-  attackSprite = AttackSprite.FIRE_RANGE
+  attackSprite = AttackSprite.DARK_RANGE
 }
 export class Eternatus extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -9157,7 +9157,7 @@ export class Zorua extends Pokemon {
   range = 1
   skill = Ability.ILLUSION
   additional = true
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.DARK_MELEE
 }
 
 export class Zoroark extends Pokemon {
@@ -9955,7 +9955,7 @@ export class Sableye extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.KNOCK_OFF
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.DARK_MELEE
 }
 
 export class Koffing extends Pokemon {
@@ -10256,7 +10256,7 @@ export class Purrloin extends Pokemon {
   range = 1
   skill = Ability.ASSIST
   additional = true
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.DARK_MELEE
 }
 
 export class Liepard extends Pokemon {
@@ -10271,7 +10271,7 @@ export class Liepard extends Pokemon {
   range = 1
   skill = Ability.ASSIST
   additional = true
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.DARK_MELEE
 }
 
 export class Barboach extends Pokemon {
@@ -11003,7 +11003,7 @@ export class HoopaUnbound extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HYPERSPACE_FURY
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.DARK_MELEE
 }
 
 export class Gimmighoul extends Pokemon {
