@@ -1,13 +1,13 @@
-import { compressPng, compressJpg } from "@assetpack/plugin-compress"
+import { path } from "@assetpack/core"
+import { compressJpg, compressPng } from "@assetpack/plugin-compress"
 import { audio } from "@assetpack/plugin-ffmpeg"
 import { json } from "@assetpack/plugin-json"
-import { texturePacker } from "./plugin-texturepacker-fork/dist/es/index.js"
-import { path } from "@assetpack/core"
 import fs from "fs-extra"
+import { texturePacker } from "./plugin-texturepacker-fork/dist/es/index.js"
 
 export default {
-  entry: "../../app/public/src/assets",
-  output: "../../app/public/dist/client/assets",
+  entry: "./app/public/src/assets",
+  output: "./app/public/dist/client/assets",
   plugins: {
     compressPng: compressPng(),
     compressJpg: compressJpg(),
@@ -60,7 +60,7 @@ function texturePackAtlas() {
         ? fs.readJSONSync(atlasPath)
         : null
 
-      const pkg = fs.readJSONSync("../../package.json")
+      const pkg = fs.readJSONSync("./package.json")
       const previousVersion = existingAtlas?.version
         ? Number(existingAtlas.version.split(".").pop())
         : 0
@@ -114,9 +114,9 @@ function texturePackAtlas() {
       //fs.writeJSONSync("tree.json", tree)
       fs.writeJSONSync(atlasPath, atlas)
 
-      const sw = fs.readFileSync("../../app/public/dist/client/sw.js", "utf8")
+      const sw = fs.readFileSync("./app/public/dist/client/sw.js", "utf8")
       fs.writeFileSync(
-        "../../app/public/dist/client/sw.js",
+        "./app/public/dist/client/sw.js",
         sw.replace(/CACHE v[\d\.]+/, `CACHE v${newVersion}`)
       )
     }
