@@ -1,5 +1,5 @@
 import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema"
-import { sendAt } from "cron"
+import { CronTime } from "cron"
 import { nanoid } from "nanoid"
 import LobbyUser from "../../models/colyseus-models/lobby-user"
 import Message from "../../models/colyseus-models/message"
@@ -65,13 +65,11 @@ export default class LobbyState extends Schema {
   }
 
   getNextSpecialLobbyDate() {
-    const nextGreatBallRanked = sendAt(
-      GREATBALL_RANKED_LOBBY_CRON
-    ).toUnixInteger()
-    const nextUltraBallRanked = sendAt(
-      ULTRABALL_RANKED_LOBBY_CRON
-    ).toUnixInteger()
-    const nextScribble = sendAt(SCRIBBLE_LOBBY_CRON).toUnixInteger()
+    const getNextDate = (t: string) =>
+      new CronTime(t, "Europe/Paris").sendAt().toUnixInteger()
+    const nextGreatBallRanked = getNextDate(GREATBALL_RANKED_LOBBY_CRON)
+    const nextUltraBallRanked = getNextDate(ULTRABALL_RANKED_LOBBY_CRON)
+    const nextScribble = getNextDate(SCRIBBLE_LOBBY_CRON)
     const nextSpecialLobbyDateInt = Math.min(
       nextGreatBallRanked,
       nextUltraBallRanked,
