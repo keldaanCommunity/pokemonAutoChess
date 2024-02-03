@@ -40,7 +40,7 @@ export interface IUserLobbyState {
   boosterContent: string[]
   suggestions: ISuggestionUser[]
   language: Language
-  nextSpecialLobbyDate: number
+  nextSpecialLobbyDate: string | ""
   nextSpecialLobbyType: SpecialLobbyType | ""
 }
 
@@ -73,7 +73,7 @@ const initialState: IUserLobbyState = {
     name: "ditto",
     id: ""
   },
-  nextSpecialLobbyDate: 0,
+  nextSpecialLobbyDate: "",
   nextSpecialLobbyType: ""
 }
 
@@ -204,7 +204,7 @@ export const lobbySlice = createSlice({
       state.language = action.payload
     },
     leaveLobby: () => initialState,
-    setNextSpecialLobbyDate: (state, action: PayloadAction<number>) => {
+    setNextSpecialLobbyDate: (state, action: PayloadAction<string>) => {
       state.nextSpecialLobbyDate = action.payload
     },
     setNextSpecialLobbyType: (state, action: PayloadAction<string>) => {

@@ -14,7 +14,7 @@ import { SpecialLobbyType } from "../../types/enum/Game"
 export default class LobbyState extends Schema {
   @type([Message]) messages = new ArraySchema<Message>()
   @type({ map: LobbyUser }) users = new MapSchema<LobbyUser>()
-  @type("number") nextSpecialLobbyDate: number = 0
+  @type("string") nextSpecialLobbyDate: string = ""
   @type("string") nextSpecialLobbyType: SpecialLobbyType | "" = ""
 
   addMessage(
@@ -72,17 +72,20 @@ export default class LobbyState extends Schema {
       ULTRABALL_RANKED_LOBBY_CRON
     ).toUnixInteger()
     const nextScribble = sendAt(SCRIBBLE_LOBBY_CRON).toUnixInteger()
-    this.nextSpecialLobbyDate = Math.min(
+    const nextSpecialLobbyDateInt = Math.min(
       nextGreatBallRanked,
       nextUltraBallRanked,
       nextScribble
     )
+    this.nextSpecialLobbyDate = new Date(
+      nextSpecialLobbyDateInt * 1000
+    ).toISOString()
 
-    if (this.nextSpecialLobbyDate === nextGreatBallRanked) {
+    if (nextSpecialLobbyDateInt === nextGreatBallRanked) {
       this.nextSpecialLobbyType = "GREATBALL_RANKED"
-    } else if (this.nextSpecialLobbyDate === nextUltraBallRanked) {
+    } else if (nextSpecialLobbyDateInt === nextUltraBallRanked) {
       this.nextSpecialLobbyType = "ULTRABALL_RANKED"
-    } else if (this.nextSpecialLobbyDate === nextScribble) {
+    } else if (nextSpecialLobbyDateInt === nextScribble) {
       this.nextSpecialLobbyType = "SCRIBBLE"
     }
   }
