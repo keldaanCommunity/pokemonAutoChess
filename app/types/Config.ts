@@ -258,7 +258,7 @@ export const UltraShop = new Array<Pkm>(
   Pkm.GASTLY,
   Pkm.ONIX,
   Pkm.SCYTHER,
-  Pkm.RIOLU,
+  Pkm.PAWNIARD,
   Pkm.MEDITITE,
   Pkm.NUMEL,
   Pkm.SNOVER,
