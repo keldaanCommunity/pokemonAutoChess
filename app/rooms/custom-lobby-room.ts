@@ -391,7 +391,11 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
 
     this.presence.subscribe(
       "special-lobby-full",
-      (params: { lobbyType: LobbyType; minRank: EloRank | null }) => {
+      (params: {
+        lobbyType: LobbyType
+        minRank: EloRank | null
+        noElo?: boolean
+      }) => {
         // open another special lobby when the previous one is full
         this.dispatcher.dispatch(new OpenSpecialLobbyCommand(), params)
       }
