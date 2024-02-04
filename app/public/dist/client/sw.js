@@ -2,7 +2,7 @@
   to invalidate their cache and download all assets again */
 
 
-const CACHE_NAME = "CACHE v4.7.0.36"
+const CACHE_NAME = "CACHE v4.7.0.37"
 
 // Cache-first strategy
 const cacheFirst = (event) => {
