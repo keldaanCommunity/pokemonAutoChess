@@ -130,7 +130,8 @@ export class OnJoinCommand extends Command<
           // open another one
           this.room.presence.publish("special-lobby-full", {
             lobbyType: this.state.lobbyType,
-            minRank: this.state.minRank
+            minRank: this.state.minRank,
+            noElo: this.state.noElo
           })
         }, 2000)
       }
