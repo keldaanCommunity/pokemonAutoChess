@@ -899,7 +899,7 @@ export function displayAbility(
       break
 
     case Ability.MAGNET_RISE:
-      addAbilitySprite(skill, coordinates, true).setScale(2)
+      addAbilitySprite(Ability.ELECTRO_BOOST, coordinates, true).setScale(2)
       break
 
     case Ability.ANCHOR_SHOT:
