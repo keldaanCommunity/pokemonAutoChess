@@ -1663,7 +1663,7 @@ export class Politoed extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.WATER,
     Synergy.AQUATIC,
-    Synergy.FIGHTING
+    Synergy.SOUND
   ])
   rarity = Rarity.COMMON
   stars = 3
