@@ -15,7 +15,6 @@ import { logger } from "../../utils/logger"
 import { pickRandomIn } from "../../utils/random"
 import { entries, values } from "../../utils/schemas"
 import PreparationRoom from "../preparation-room"
-import { OpenSpecialLobbyCommand } from "./lobby-commands"
 
 export class OnJoinCommand extends Command<
   PreparationRoom,
@@ -129,12 +128,11 @@ export class OnJoinCommand extends Command<
         this.clock.setTimeout(() => {
           this.room.dispatcher.dispatch(new OnGameStartRequestCommand())
           // open another one
-          this.room.dispatcher.dispatch(
-            new OpenSpecialLobbyCommand().setPayload({
-              lobbyType: this.state.lobbyType,
-              minRank: this.state.minRank
-            })
-          )
+          this.room.presence.publish("special-lobby-full", {
+            lobbyType: this.state.lobbyType,
+            minRank: this.state.minRank,
+            noElo: this.state.noElo
+          })
         }, 2000)
       }
     } catch (error) {

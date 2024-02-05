@@ -389,6 +389,18 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       this.state.addAnnouncement(`${player.name} won the ranked match !`)
     })
 
+    this.presence.subscribe(
+      "special-lobby-full",
+      (params: {
+        lobbyType: LobbyType
+        minRank: EloRank | null
+        noElo?: boolean
+      }) => {
+        // open another special lobby when the previous one is full
+        this.dispatcher.dispatch(new OpenSpecialLobbyCommand(), params)
+      }
+    )
+
     this.initCronJobs()
     this.fetchChat()
     this.fetchLeaderboards()

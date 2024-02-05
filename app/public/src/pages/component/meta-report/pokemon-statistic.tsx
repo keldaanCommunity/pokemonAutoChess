@@ -7,7 +7,12 @@ import {
   PRECOMPUTED_POKEMONS_STARS
 } from "../../../../../models/precomputed"
 import { Rarity } from "../../../../../types/enum/Game"
-import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
+import {
+  Pkm,
+  PkmDuos,
+  PkmFamily,
+  PkmIndex
+} from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { getPortraitSrc } from "../../../utils"
 
@@ -26,6 +31,7 @@ export default function PokemonStatistic(props: {
     averageItemHeld?: number | null
   }
   const families = new Map<Pkm, FamilyStats>()
+  const duos = Object.values(PkmDuos)
 
   const filteredPokemons = props.pokemons
     .filter((v) =>
@@ -38,18 +44,27 @@ export default function PokemonStatistic(props: {
         ? v
         : PRECOMPUTED_POKEMONS_PER_RARITY[props.rarity].includes(v.name)
     )
+
   filteredPokemons.forEach((pokemon) => {
-    const family = families.get(PkmFamily[pokemon.name])
+    let familyName = PkmFamily[pokemon.name]
+    const duo = duos.find((duo) => duo.includes(pokemon.name))
+    if (duo) {
+      familyName = duo[0]
+    }
+
+    const family = families.get(familyName)
     if (family) {
       family.pokemons.push(pokemon)
     } else {
       families.set(PkmFamily[pokemon.name], { pokemons: [pokemon] })
     }
   })
+
   families.forEach((family) => {
     family.pokemons.sort(
       (a, b) =>
-        PRECOMPUTED_POKEMONS_STARS[a.name] - PRECOMPUTED_POKEMONS_STARS[b.name]
+        (PRECOMPUTED_POKEMONS_STARS[a.name] ?? 0) -
+        (PRECOMPUTED_POKEMONS_STARS[b.name] ?? 0)
     )
     family.totalCount = family.pokemons.reduce(
       (prev, curr) => prev + curr.count,
