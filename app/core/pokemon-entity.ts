@@ -660,7 +660,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     // Synergy effects on hit
 
-    if (this.hasSynergyEffect(Synergy.ICE)) {
+    if (this.types.has(Synergy.ICE)) {
       let freezeChance = 0
       if (this.effects.has(Effect.CHILLY)) {
         freezeChance = 0.1
