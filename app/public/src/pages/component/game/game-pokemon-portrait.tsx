@@ -6,8 +6,10 @@ import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { RarityColor } from "../../../../../types/Config"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
+import { SpecialLobbyRule } from "../../../../../types/enum/SpecialLobbyRule"
 import { useAppSelector } from "../../../hooks"
 import { getPortraitSrc } from "../../../utils"
+import { getGameScene } from "../../game"
 import { Money } from "../icons/money"
 import SynergyIcon from "../icons/synergy-icon"
 import { GamePokemonDetail } from "./game-pokemon-detail"
@@ -93,6 +95,16 @@ export default function GamePokemonPortrait(props: {
       pokemonInPortrait.index
     )
 
+    let cost = PokemonFactory.getBuyPrice(props.pokemon.name)
+    const specialLobbyRule = getGameScene()?.room?.state.specialLobbyRule
+    if (
+      willEvolve &&
+      pokemonEvolution &&
+      specialLobbyRule === SpecialLobbyRule.BUYER_FEVER
+    ) {
+      cost = 0
+    }
+
     return (
       <div
         className={`nes-container game-pokemon-portrait ${
@@ -140,7 +152,7 @@ export default function GamePokemonPortrait(props: {
         )}
         {props.origin === "shop" && (
           <div className="game-pokemon-portrait-cost">
-            <Money value={PokemonFactory.getBuyPrice(props.pokemon.name)} />
+            <Money value={cost} />
           </div>
         )}
         <ul className="game-pokemon-portrait-types">

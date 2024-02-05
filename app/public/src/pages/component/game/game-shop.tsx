@@ -13,7 +13,7 @@ import GameStore from "./game-store"
 import { GameTeamInfo } from "./game-team-info"
 
 export default function GameShop() {
-  useAppSelector((state) => state.game.money) // required for reactivity
+  useAppSelector((state) => [state.game.money, state.game.shop]) // required for reactivity
   return (
     <>
       <div className="game-shop nes-container">
