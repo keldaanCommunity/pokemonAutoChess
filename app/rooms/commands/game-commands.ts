@@ -90,13 +90,21 @@ export class OnShopCommand extends Command<
 
     const name = player.shop[index]
     const pokemon = PokemonFactory.createPokemonFromName(name, player)
-    const cost = PokemonFactory.getBuyPrice(name)
+    const isEvolution =
+      pokemon.evolutionRule &&
+      pokemon.evolutionRule instanceof CountEvolutionRule &&
+      pokemon.evolutionRule.canEvolveIfBuyingOne(pokemon, player)
+
+    let cost = PokemonFactory.getBuyPrice(name)
     const freeSpaceOnBench = getFreeSpaceOnBench(player.board)
-    const hasSpaceOnBench =
-      freeSpaceOnBench > 0 ||
-      (pokemon.evolutionRule &&
-        pokemon.evolutionRule instanceof CountEvolutionRule &&
-        pokemon.evolutionRule.canEvolveIfBuyingOne(pokemon, player))
+    const hasSpaceOnBench = freeSpaceOnBench > 0 || isEvolution
+
+    if (
+      isEvolution &&
+      this.state.specialLobbyRule === SpecialLobbyRule.BUYER_FEVER
+    ) {
+      cost = 0
+    }
 
     const canBuy = player.money >= cost && hasSpaceOnBench
     if (!canBuy) return
@@ -118,18 +126,7 @@ export class OnShopCommand extends Command<
       player.shop[index] = Pkm.DEFAULT
     }
 
-    const hasEvolved = this.room.checkEvolutionsAfterPokemonAcquired(playerId)
-    if (
-      hasEvolved &&
-      this.state.specialLobbyRule === SpecialLobbyRule.BUYER_FEVER
-    ) {
-      /* BUG: if money doesn't change after this command, the portrait in shop is not removed
-       setTimeout is used to artifically trigger client reactivity      
-       it also helps figure out the special rule for the player so it seems okayish for now */
-      setTimeout(() => {
-        player.money += 1
-      }, 500)
-    }
+    this.room.checkEvolutionsAfterPokemonAcquired(playerId)
   }
 }
 

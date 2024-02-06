@@ -15,3 +15,5 @@
 # Bugfix
 
 # Misc
+
+- Changed "Buyer Fever" scribble: ~~Earn 1 gold every time you evolve an unit by buying from the shop~~ Evolutions in shop are free
