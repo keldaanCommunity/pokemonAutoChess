@@ -55,7 +55,7 @@ export class OnJoinCommand extends Command<
     rooms: RoomListingData<any>[] | undefined
   }) {
     try {
-      logger.info(`${client.auth.displayName} ${client.id} join lobby room`)
+      //logger.info(`${client.auth.displayName} ${client.id} join lobby room`)
       client.send(Transfer.ROOMS, rooms)
       const user = await UserMetadata.findOne({ uid: client.auth.uid })
 
@@ -153,7 +153,7 @@ export class OnLeaveCommand extends Command<
   execute({ client }: { client: Client }) {
     try {
       if (client && client.auth && client.auth.displayName && client.auth.uid) {
-        logger.info(`${client.auth.displayName} ${client.id} leave lobby`)
+        //logger.info(`${client.auth.displayName} ${client.id} leave lobby`)
         this.state.users.delete(client.auth.uid)
       }
     } catch (error) {
@@ -1065,7 +1065,7 @@ export class OpenSpecialLobbyCommand extends Command<
     minRank?: EloRank | null
     noElo?: boolean
   }) {
-    logger.info("Creating special Lobby " + lobbyType)
+    logger.info(`Creating special Lobby ${lobbyType} ${minRank ?? ""}`)
     let roomName = "Special Lobby"
     if (lobbyType === LobbyType.RANKED) {
       if (minRank === EloRank.GREATBALL) {
