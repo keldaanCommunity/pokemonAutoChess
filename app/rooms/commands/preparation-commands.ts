@@ -174,20 +174,20 @@ export class OnGameStartRequestCommand extends Command<
       } else {
         let freeMemory = os.freemem()
         let totalMemory = os.totalmem()
-        logger.info(
+        /*logger.info(
           `Memory freemem/totalmem: ${(
             (100 * freeMemory) /
             totalMemory
           ).toFixed(2)} % free (${totalMemory - freeMemory} / ${totalMemory})`
-        )
+        )*/
         freeMemory = memoryUsage().heapUsed
         totalMemory = memoryUsage().heapTotal
-        logger.info(
+        /*logger.info(
           `Memory heapUsed/heapTotal: ${(
             (100 * freeMemory) /
             totalMemory
           ).toFixed(2)} % free (${totalMemory - freeMemory} / ${totalMemory})`
-        )
+        )*/
         if (freeMemory < 0.1 * totalMemory) {
           // if less than 10% free memory available, prevents starting another game to avoid out of memory crash
           this.room.broadcast(Transfer.MESSAGES, {
@@ -227,7 +227,7 @@ export class OnGameStartRequestCommand extends Command<
             minRank: this.state.minRank,
             whenReady: (game) => {
               this.room.setGameStarted(true)
-              logger.debug("game start", game.roomId)
+              //logger.debug("game start", game.roomId)
               this.room.broadcast(Transfer.GAME_START, game.roomId)
               setTimeout(() => this.room.disconnect(), 30000) // TRYFIX: ranked lobbies prep rooms not being removed
             }

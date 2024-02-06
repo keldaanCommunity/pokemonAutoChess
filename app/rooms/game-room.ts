@@ -509,9 +509,9 @@ export default class GameRoom extends Room<GameState> {
 
   async onLeave(client: Client, consented: boolean) {
     try {
-      if (client && client.auth && client.auth.displayName) {
+      /*if (client && client.auth && client.auth.displayName) {
         logger.info(`${client.auth.displayName} has been disconnected`)
-      }
+      }*/
       if (consented) {
         throw new Error("consented leave")
       }
@@ -520,7 +520,7 @@ export default class GameRoom extends Room<GameState> {
       await this.allowReconnection(client, 180)
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
-        logger.info(`${client.auth.displayName} left game`)
+        //logger.info(`${client.auth.displayName} left game`)
         const player = this.state.players.get(client.auth.uid)
         if (player && this.state.stageLevel <= 5) {
           // if player left game during the loading screen or before stage 6, remove it from the players
@@ -528,9 +528,9 @@ export default class GameRoom extends Room<GameState> {
           this.setMetadata({
             playerIds: removeInArray(this.metadata.playerIds, client.auth.uid)
           })
-          logger.info(
+          /*logger.info(
             `${client.auth.displayName} has been removed from players list`
-          )
+          )*/
         }
       }
       if (values(this.state.players).every((p) => p.loadingProgress === 100)) {
@@ -723,7 +723,7 @@ export default class GameRoom extends Room<GameState> {
 
             player.titles.forEach((t) => {
               if (!usr.titles.includes(t)) {
-                logger.info("title added ", t)
+                //logger.info("title added ", t)
                 usr.titles.push(t)
               }
             })
