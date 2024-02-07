@@ -19,7 +19,7 @@ import { GamePhaseState } from "../../../../types/enum/Game"
 import { Item, ItemRecipe } from "../../../../types/enum/Item"
 import { Pkm } from "../../../../types/enum/Pokemon"
 import { clearTitleNotificationIcon } from "../../../../utils/window"
-import { getGameContainer } from "../../pages/game"
+import { getGameContainer, getGameScene } from "../../pages/game"
 import { SOUNDS, playMusic, playSound } from "../../pages/utils/audio"
 import { transformCoordinate } from "../../pages/utils/utils"
 import { preferences } from "../../preferences"
@@ -50,6 +50,7 @@ export default class GameScene extends Scene {
   music: Phaser.Sound.WebAudioSound | undefined
   pokemonHovered: PokemonSprite | undefined
   pokemonDragged: PokemonSprite | null = null
+  shopIndexHovered: number | null = null
   itemDragged: ItemContainer | null = null
   dropSpots: Phaser.GameObjects.Graphics[] = []
   sellZone: SellZone | undefined
@@ -190,6 +191,8 @@ export default class GameScene extends Scene {
     this.input.keyboard!.on("keydown-E", () => {
       if (this.pokemonHovered) {
         this.sellPokemon(this.pokemonHovered)
+      } else if (this.shopIndexHovered !== null) {
+        this.removeFromShop(this.shopIndexHovered)
       }
     })
   }
@@ -213,19 +216,12 @@ export default class GameScene extends Scene {
   }
 
   sellPokemon(pokemon: PokemonSprite) {
-    if (!pokemon) {
-      return
-    }
-    const d = document.getElementById("game")
-    if (d) {
-      d.dispatchEvent(
-        new CustomEvent(Transfer.SELL_DROP, {
-          detail: {
-            pokemonId: pokemon.id
-          }
-        })
-      )
-    }
+    if (!pokemon) return
+    this.room?.send(Transfer.SELL_POKEMON, pokemon.id)
+  }
+
+  removeFromShop(index: number) {
+    this.room?.send(Transfer.REMOVE_FROM_SHOP, index)
   }
 
   updatePhase() {

@@ -66,6 +66,7 @@ import {
   OnPickBerryCommand,
   OnPokemonCatchCommand,
   OnRefreshCommand,
+  OnRemoveFromShopCommand,
   OnSellDropCommand,
   OnShopCommand,
   OnUpdateCommand
@@ -242,6 +243,19 @@ export default class GameRoom extends Room<GameState> {
       }
     })
 
+    this.onMessage(Transfer.REMOVE_FROM_SHOP, (client, index) => {
+      if (!this.state.gameFinished && client.auth) {
+        try {
+          this.dispatcher.dispatch(new OnRemoveFromShopCommand(), {
+            playerId: client.auth.uid,
+            index
+          })
+        } catch (error) {
+          logger.error("remove from shop error", index, error)
+        }
+      }
+    })
+
     this.onMessage(Transfer.POKEMON_PROPOSITION, (client, pkm: Pkm) => {
       if (!this.state.gameFinished && client.auth) {
         try {
@@ -325,21 +339,18 @@ export default class GameRoom extends Room<GameState> {
       }
     )
 
-    this.onMessage(
-      Transfer.SELL_DROP,
-      (client, message: { pokemonId: string }) => {
-        if (!this.state.gameFinished && client.auth) {
-          try {
-            this.dispatcher.dispatch(new OnSellDropCommand(), {
-              client,
-              detail: message
-            })
-          } catch (error) {
-            logger.error("sell drop error", message)
-          }
+    this.onMessage(Transfer.SELL_POKEMON, (client, pokemonId: string) => {
+      if (!this.state.gameFinished && client.auth) {
+        try {
+          this.dispatcher.dispatch(new OnSellDropCommand(), {
+            client,
+            pokemonId
+          })
+        } catch (error) {
+          logger.error("sell drop error", pokemonId)
         }
       }
-    )
+    })
 
     this.onMessage(Transfer.REQUEST_TILEMAP, (client, message) => {
       client.send(Transfer.REQUEST_TILEMAP, this.state.tilemap)

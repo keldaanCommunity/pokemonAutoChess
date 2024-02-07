@@ -130,6 +130,32 @@ export class OnShopCommand extends Command<
   }
 }
 
+export class OnRemoveFromShopCommand extends Command<
+  GameRoom,
+  {
+    playerId: string
+    index: number
+  }
+> {
+  execute({ playerId, index }) {
+    if (
+      playerId === undefined ||
+      index === undefined ||
+      !this.state.players.has(playerId)
+    )
+      return
+    const player = this.state.players.get(playerId)
+    if (!player || !player.shop[index] || player.shop[index] === Pkm.DEFAULT)
+      return
+
+    const name = player.shop[index]
+    let cost = PokemonFactory.getBuyPrice(name)
+    if (player.money >= cost) {
+      player.shop[index] = Pkm.DEFAULT
+    }
+  }
+}
+
 export class OnPokemonCatchCommand extends Command<
   GameRoom,
   {
@@ -466,14 +492,14 @@ export class OnSellDropCommand extends Command<
   GameRoom,
   {
     client: Client
-    detail: { pokemonId: string }
+    pokemonId: string
   }
 > {
-  execute({ client, detail }) {
+  execute({ client, pokemonId }) {
     const player = this.state.players.get(client.auth.uid)
 
     if (player) {
-      const pokemon = player.board.get(detail.pokemonId)
+      const pokemon = player.board.get(pokemonId)
       if (
         pokemon &&
         !isOnBench(pokemon) &&
@@ -496,7 +522,7 @@ export class OnSellDropCommand extends Command<
           player.items.add(it)
         })
 
-        player.board.delete(detail.pokemonId)
+        player.board.delete(pokemonId)
 
         player.updateSynergies()
         player.effects.update(player.synergies, player.board)
