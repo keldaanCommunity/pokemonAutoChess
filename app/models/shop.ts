@@ -1,18 +1,14 @@
 import GameState from "../rooms/states/game-state"
 import { IPlayer } from "../types"
 import {
-  CommonShop,
   DITTO_RATE,
-  EpicShop,
   FishRarityProbability,
   NB_UNIQUE_PROPOSITIONS,
   PoolSize,
-  RareShop,
   RarityProbabilityPerLevel,
-  SHOP_SIZE,
-  UltraShop,
-  UncommonShop
+  SHOP_SIZE
 } from "../types/Config"
+import { Ability } from "../types/enum/Ability"
 import { Effect } from "../types/enum/Effect"
 import { Rarity } from "../types/enum/Game"
 import {
@@ -31,10 +27,30 @@ import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
 import Player from "./colyseus-models/player"
 import PokemonFactory from "./pokemon-factory"
+import { PRECOMPUTED_POKEMONS_PER_RARITY } from "./precomputed"
 
 export function getPoolSize(rarity: Rarity, maxStars: number): number {
   return PoolSize[rarity][clamp(maxStars, 1, 3) - 1]
 }
+
+function getRegularsTier1(pokemons: Pkm[]) {
+  return pokemons.filter((p) => {
+    const pokemon = PokemonFactory.createPokemonFromName(p)
+    return (
+      pokemon.stars === 1 &&
+      pokemon.skill !== Ability.DEFAULT &&
+      !pokemon.additional
+    )
+  })
+}
+
+const CommonShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.COMMON)
+const UncommonShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.UNCOMMON)
+const RareShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.RARE)
+const EpicShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.EPIC)
+const UltraShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.ULTRA)
+
+console.log({ CommonShop, UncommonShop, RareShop, EpicShop, UltraShop })
 
 export default class Shop {
   commonPool: Map<Pkm, number> = new Map<Pkm, number>()
