@@ -53,7 +53,7 @@ import {
   SynergyItems
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
-import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
+import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
 import { SpecialLobbyRule } from "../../types/enum/SpecialLobbyRule"
 import { logger } from "../../utils/logger"
 import { max } from "../../utils/number"
@@ -120,8 +120,10 @@ export class OnShopCommand extends Command<
 
     if (
       pokemon.passive === Passive.UNOWN &&
-      player.effects.has(Effect.EERIE_SPELL)
+      player.effects.has(Effect.EERIE_SPELL) &&
+      player.shop.every((p) => Unowns.includes(p))
     ) {
+      // reset shop after picking in a unown shop
       this.state.shop.assignShop(player, true, this.state)
     } else {
       player.shop[index] = Pkm.DEFAULT
@@ -153,6 +155,7 @@ export class OnRemoveFromShopCommand extends Command<
     let cost = PokemonFactory.getBuyPrice(name)
     if (player.money >= cost) {
       player.shop[index] = Pkm.DEFAULT
+      this.state.shop.releasePokemon(name)
     }
   }
 }
