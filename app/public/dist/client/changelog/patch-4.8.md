@@ -10,6 +10,8 @@
 
 # Gameplay
 
+- On lobbies with less than 8 players, some additional picks are picked randomly to always have 8 add picks per rarity
+
 # UI
 
 - Add a keyboard shortcut "E" when hovering a portrait in shop to quickly buy/resell the unit
