@@ -8311,11 +8311,7 @@ export class Staraptor extends Pokemon {
 }
 
 export class Scorbunny extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.FIRE,
-    Synergy.FIGHTING,
-    Synergy.HUMAN
-  ])
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD, Synergy.HUMAN])
   rarity = Rarity.HATCH
   stars = 1
   evolution = Pkm.RABOOT
@@ -8332,11 +8328,7 @@ export class Scorbunny extends Pokemon {
 }
 
 export class Raboot extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.FIRE,
-    Synergy.FIGHTING,
-    Synergy.HUMAN
-  ])
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD, Synergy.HUMAN])
   rarity = Rarity.HATCH
   stars = 2
   evolution = Pkm.CINDERACE
@@ -8353,11 +8345,7 @@ export class Raboot extends Pokemon {
 }
 
 export class Cinderace extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.FIRE,
-    Synergy.FIGHTING,
-    Synergy.HUMAN
-  ])
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD, Synergy.HUMAN])
   rarity = Rarity.HATCH
   stars = 3
   hp = 180
@@ -9599,19 +9587,15 @@ export class Shuckle extends Pokemon {
 }
 
 export class Tepig extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.FIRE,
-    Synergy.FIGHTING,
-    Synergy.FIELD
-  ])
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIGHTING])
   rarity = Rarity.HATCH
   stars = 1
   evolution = Pkm.PIGNITE
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 80
-  atk = 5
-  def = 4
-  speDef = 2
+  atk = 8
+  def = 3
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.IRON_TAIL
@@ -9620,19 +9604,15 @@ export class Tepig extends Pokemon {
 }
 
 export class Pignite extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.FIRE,
-    Synergy.FIGHTING,
-    Synergy.FIELD
-  ])
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIGHTING])
   rarity = Rarity.HATCH
   stars = 2
   evolution = Pkm.EMBOAR
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 140
-  atk = 12
+  atk = 14
   def = 5
-  speDef = 2
+  speDef = 5
   maxPP = 100
   range = 1
   skill = Ability.IRON_TAIL
@@ -9641,17 +9621,13 @@ export class Pignite extends Pokemon {
 }
 
 export class Emboar extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.FIRE,
-    Synergy.FIGHTING,
-    Synergy.FIELD
-  ])
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIGHTING])
   rarity = Rarity.HATCH
   stars = 3
   hp = 220
-  atk = 18
-  def = 6
-  speDef = 2
+  atk = 24
+  def = 7
+  speDef = 7
   maxPP = 100
   range = 1
   skill = Ability.IRON_TAIL
