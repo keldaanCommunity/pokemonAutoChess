@@ -69,6 +69,7 @@ import {
 } from "../../utils/board"
 import GameRoom from "../game-room"
 import { isOnBench } from "../../models/colyseus-models/pokemon"
+import { repeat } from "../../utils/function"
 
 export class OnShopCommand extends Command<
   GameRoom,
@@ -1026,14 +1027,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           : this.state.stageLevel === AdditionalPicksStages[1]
           ? this.room.additionalRarePool
           : this.room.additionalEpicPool
+      let remainingAddPicks = 8
       this.state.players.forEach((player: Player) => {
-        if (player.isBot) {
-          const p = pool.pop()
-          if (p) {
-            this.state.additionalPokemons.push(p)
-            this.state.shop.addAdditionalPokemon(p)
-          }
-        } else {
+        if (!player.isBot) {
           const items = pickNRandomIn(BasicItems, 3)
           for (let i = 0; i < 3; i++) {
             const p = pool.pop()
@@ -1042,6 +1038,15 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
               player.itemsProposition.push(items[i])
             }
           }
+          remainingAddPicks--
+        }
+      })
+
+      repeat(remainingAddPicks)(() => {
+        const p = pool.pop()
+        if (p) {
+          this.state.additionalPokemons.push(p)
+          this.state.shop.addAdditionalPokemon(p)
         }
       })
     }
