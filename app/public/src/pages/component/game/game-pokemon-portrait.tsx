@@ -20,6 +20,8 @@ export default function GamePokemonPortrait(props: {
   origin: string
   pokemon: Pokemon | undefined
   click?: React.MouseEventHandler<HTMLDivElement>
+  onMouseEnter?: React.MouseEventHandler<HTMLDivElement>
+  onMouseLeave?: React.MouseEventHandler<HTMLDivElement>
 }) {
   if (!props.pokemon) {
     return <div className="game-pokemon-portrait nes-container empty" />
@@ -120,6 +122,8 @@ export default function GamePokemonPortrait(props: {
           )}")`
         }}
         onClick={props.click}
+        onMouseEnter={props.onMouseEnter}
+        onMouseLeave={props.onMouseLeave}
         data-tooltip-id={`tooltip-${props.origin}-${props.index}`}
       >
         <Tooltip

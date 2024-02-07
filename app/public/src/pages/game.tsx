@@ -272,31 +272,26 @@ export default function Game() {
       logger.debug("initializing game")
       initialized.current = true
       dispatch(requestTilemap())
+
       gameContainer = new GameContainer(container.current, uid, room)
-      document.getElementById("game")?.addEventListener(Transfer.DRAG_DROP, ((
+
+      const gameElm = document.getElementById("game")
+      gameElm?.addEventListener(Transfer.DRAG_DROP, ((
         event: CustomEvent<IDragDropMessage>
       ) => {
         gameContainer.onDragDrop(event)
       }) as EventListener)
-      document
-        .getElementById("game")
-        ?.addEventListener(Transfer.DRAG_DROP_ITEM, ((
-          event: CustomEvent<IDragDropItemMessage>
-        ) => {
-          gameContainer.onDragDropItem(event)
-        }) as EventListener)
-      document
-        .getElementById("game")
-        ?.addEventListener(Transfer.DRAG_DROP_COMBINE, ((
-          event: CustomEvent<IDragDropCombineMessage>
-        ) => {
-          gameContainer.onDragDropCombine(event)
-        }) as EventListener)
-      document.getElementById("game")?.addEventListener(Transfer.SELL_DROP, ((
-        event: CustomEvent<{ pokemonId: string }>
+      gameElm?.addEventListener(Transfer.DRAG_DROP_ITEM, ((
+        event: CustomEvent<IDragDropItemMessage>
       ) => {
-        gameContainer.onSellDrop(event)
+        gameContainer.onDragDropItem(event)
       }) as EventListener)
+      gameElm?.addEventListener(Transfer.DRAG_DROP_COMBINE, ((
+        event: CustomEvent<IDragDropCombineMessage>
+      ) => {
+        gameContainer.onDragDropCombine(event)
+      }) as EventListener)
+
       room.onMessage(Transfer.LOADING_COMPLETE, () => {
         setLoaded(true)
       })
