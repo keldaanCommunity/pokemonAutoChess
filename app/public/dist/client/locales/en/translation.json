@@ -1212,7 +1212,7 @@
     "NATURAL_GIFT": "Heals [30,60,120,SP] HP to the most injured ally and RUNE_PROTECT for [1,2,3] s",
     "NIGHT_SHADE": "Deals [25,33,50,SP=0.5]% of target max HP as TRUE",
     "CHARGE_BEAM": "Fires a concentrated bundle of electricity that propagate to max 3 adjacent targets, dealing [15,30,60,SP] SPECIAL to each.",
-    "POPULATION_BOMB": "Deals [4,8,12,16,SP] times 10 SPECIAL to the target",
+    "POPULATION_BOMB": "Deals 10 SPECIAL [4,8,12,16,SP] times to the target",
     "SCREECH": "Reduce DEF of all adjacent ennemies by [1,2,4,SP]",
     "SAND_TOMB": "Deals [10,20,40,SP] SPECIAL, inflicting SILENCE and PARALYSIS for 3/5/8 seconds",
     "WHIRLWIND": "Deals [40,80,120,SP] SPECIAL and make the target fly away",
