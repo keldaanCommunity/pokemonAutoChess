@@ -3,6 +3,8 @@
 # Changes to Pokemon & Abilities
 
 - Give Politoed Sound synergy instead of Fighting
+- Give Scorbunny line Field synergy instead of Fighting
+- Remove Field synergy of Tepig line, buff attack & spe-def
 
 # Changes to Synergies
 
