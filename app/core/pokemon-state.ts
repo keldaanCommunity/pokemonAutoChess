@@ -514,13 +514,18 @@ export default class PokemonState {
       pokemon.fairySplashCooldown = min(0)(pokemon.fairySplashCooldown - dt)
     }
 
-    if (pokemon.items.has(Item.FLAME_ORB) && !pokemon.status.burn) {
+    if (
+      pokemon.items.has(Item.FLAME_ORB) &&
+      !pokemon.status.burn &&
+      pokemon.action !== PokemonActionState.HOP
+    ) {
       pokemon.status.triggerBurn(60000, pokemon, pokemon)
     }
 
     if (
       pokemon.items.has(Item.TOXIC_ORB) &&
-      pokemon.status.poisonStacks === 0
+      pokemon.status.poisonStacks === 0 &&
+      pokemon.action !== PokemonActionState.HOP
     ) {
       pokemon.status.triggerPoison(60000, pokemon, pokemon)
     }
