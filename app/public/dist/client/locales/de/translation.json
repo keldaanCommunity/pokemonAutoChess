@@ -1,9 +1,9 @@
 {
   "rarity": {
-    "COMMON": "Gemeinsam",
+    "COMMON": "Gewöhnlich",
     "UNCOMMON": "Ungewöhnlich",
     "RARE": "Selten",
-    "EPIC": "Epos",
+    "EPIC": "Episch",
     "ULTRA": "Ultra",
     "UNIQUE": "Unique",
     "LEGENDARY": "Legendär",
@@ -12,8 +12,6 @@
     "SPECIAL": "Speziell"
   },
   "damage": {
-    "SPECIAL": "Besonderer Schaden",
-    "PHYSICAL": "Körperlicher Schaden",
     "TRUE": "Wahrer Schaden"
   },
   "ability": {
@@ -281,8 +279,13 @@
     "AURASPHERE": "Aurasphäre",
     "SKETCH": "Nachahmer",
     "OVERDRIVE": "Overdrive",
+    "LOVELY_KISS": "Todeskuss",
     "TRANSFORM": "Wandler",
-    "SHED_TAIL": "Schwanzabwurf"
+    "PSYCHIC_FANGS": "Psychobeißer",
+    "SHED_TAIL": "Schwanzabwurf",
+    "KOWTOW_CLEAVE": "Kniefallspalter",
+    "SHIELDS_DOWN": "Schildbruch",
+    "SHIELDS_UP": "Schildaufbereitung"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -945,6 +948,10 @@
     "OVERQWIL": "Myriador",
     "HISUIAN_TYPHLOSION": "Hisui-Tornupto",
     "SABLEYE": "Zobiris",
+    "TREVENANT": "Trombork",
+    "GIMMIGHOUL": "Gierspenst",
+    "GHOLDENGO": "Monetigo",
+    "SMEARGLE": "Farbeagle",
     "TOXEL": "Toxel",
     "TOXTRICITY": "Riffex",
     "BRUXISH": "Knirfish",
@@ -952,7 +959,12 @@
     "CYCLIZAR": "Mopex",
     "PAWNIARD": "Gladiantri",
     "BISHARP": "Caesurio",
-    "KINGAMBIT": "Gladimperio"
+    "KINGAMBIT": "Gladimperio",
+    "MINIOR": "Meteno (Meteorform)",
+    "MINIOR_KERNEL_RED": "Meteno  (Roter Kern)",
+    "MINIOR_KERNEL_BLUE": "Meteno (Blauer Kern)",
+    "MINIOR_KERNEL_ORANGE": "Meteno (Oranger Kern)",
+    "MINIOR_KERNEL_GREEN": "Meteno (Grüner Kern)"
   },
   "ability_description": {
     "SOFT_BOILED": "Heilt alle Statuseffekte und gewährt jedem Verbündeten [20,40,80,SP] SHIELD",
@@ -976,6 +988,7 @@
     "HYPER_VOICE": "Verursacht [45,90,200,SP] SPECIAL in einer Reihe und lässt alle Ziele [1,2,3] Sekunden lang CONFUSION treffen",
     "SHADOW_CLONE": "Das Pokémon erstellt neben seinem Ziel einen identischen Klon von sich selbst. Dieser Klon erbt von den Pokémon-Gegenständen und -Statistiken 80 % seiner maximalen HP und [30,SP] SHIELD",
     "VOLT_SWITCH": "Stürme in die gegnerische Hinterlinie und verursache [30,60,120,SP] SPECIAL",
+    "NUZZLE": "springt zum entferntesten Gegner, verursacht [30,60,120,SP] SPECIAL und PARALYSIS ihn für [3,4,5] Sekunden",
     "LIQUIDATION": "Verursacht [20,40,80,SP] SPECIAL und entfernt [1,2,4] DEF vom Ziel",
     "BURN": "BURN Sie das gesamte gegnerische Team für [5,10,20] Sekunden",
     "POISON": "Wende Gift auf [1,2,3] nächste Gegner für [3,6,9,SP=0,5] Sekunden an",
@@ -996,6 +1009,7 @@
     "WISH": "Stellt [50,SP] HP bei [1,2,3] verbündeten Pokémon wieder her",
     "CALM_MIND": "Erhöht den ATK des Pokémon um [100,SP]%.",
     "DEFENSE_CURL": "Buff DEF und SPE_DEF um [3,6,12,SP] Punkte",
+    "IRON_DEFENSE": "Alle verbündeten in derselben reihe erhalten [20,40,80,SP] SHIELD",
     "METRONOME": "Schieße auf eine zufällige Kapazität",
     "SOAK": "Verursacht [20,40,80,SP] SPECIAL und stellt befreundeten Pokémon 10 PP wieder her",
     "ORIGIN_PULSE": "Eine Welle bewegt sich horizontal über das Schlachtfeld und bewirkt [120,SP] SPECIAL",
@@ -1556,7 +1570,18 @@
     "GLIGAR": "Gligar sucht nach einem RAZOR_FANG. Wenn das Pokémon POISONNED ist, erhält es HP, anstatt Schaden zu erleiden.",
     "POISON_HEAL": "Wenn das Pokémon POISONNED ist, erhält es HP, anstatt Schaden zu erleiden",
     "GRIM_NEIGH": "Wenn das Pokémon einen Feind niederschlägt, gibt es ein furchteinflößendes Wiehern von sich, das seine AP um 30 erhöht",
-    "SHAYMIN": "Shaymin ist auf der Suche nach einer GRACIDEA_FLOWER"
+    "SHAYMIN": "Shaymin ist auf der Suche nach einer GRACIDEA_FLOWER",
+    "SPECIAL_ATTACK": "Standard Angriffe verursachen SPECIAL und skalieren mit AP",
+    "NINCADA": "Erhalte, nach der Entwicklung, auch ein Ninjatom, wenn du einen Freien Platz auf der Bank hast",
+    "FAMILY": "Dieses Pokémon wächst mit der Zeit (Zug 15 & Zug 20)",
+    "SAND_STREAM": "Dieses Pokémon zählt als 3 für SANDSTORM",
+    "DRIZZLE": "Dieses Pokémon zählt als 3 für RAIN",
+    "HARVEST": "Zu Begin jedes Kampfes erhält das Pokémon eine Beere. Trägt das Pokémon bereits 3 Items, wird die Beere dem Spieler Inventar hinzugefügt",
+    "COCONUT": "Kokowei sucht nach einem LEAF_STONE",
+    "GLUTTON": "Jedes Mal, wenn es eine Beere isst, erhält es dauerhaft 20 max. HP",
+    "COMFEY": "Comfey kann keine Gegenstände tragen. Zu Beginn des Kampfes trägt der nächste Verbündete, mit einem freien Itemplatz, Curelei und erhält alle seine Statuswerte. Curelei setzt seine Fähigkeit gleichzeitig mit seinem Träger. Wenn der Träger besiegt wird, kämpft Curelei alleine weiter",
+    "TYPHLOSION": "Typhlosion sucht nach einem REAPER_CLOTH",
+    "HISUIAN_TYPHLOSION": "Dieses Pokémon beginnt den Kampf mit einem zufälligen Item, wenn es keines hält"
   },
   "stat": {
     "ATK": "Attacke",
@@ -2041,6 +2066,7 @@
   "top": "Spitze",
   "level": "Eben",
   "wins": "Gewinnt",
+  "favorites": "Favoriten",
   "user_id": "Benutzer-ID",
   "name": "Name",
   "anonymous_users_name_hint": "Anonyme Benutzer können ihren Namen nicht ändern.",
@@ -2068,6 +2094,8 @@
   "best_pokemons": "Beste Pokémon",
   "winrate": "Gewinnrate",
   "popularity": "Popularität",
+  "components": "Komponenten",
+  "berries": "Beeren",
   "news": "Nachricht",
   "remove_bot": "Bot entfernen",
   "kick_user": "Benutzer rausschmeißen",
@@ -2139,5 +2167,20 @@
   "select_pokemon": "Wähle ein Pokémon aus",
   "search_player": "Nach Spielernamen suchen...",
   "game-reconnect-modal-title": "Stellen Sie die Verbindung zum Spiel wieder her",
-  "game-reconnect-modal-body": "Sie haben ein laufendes Spiel verlassen. Möchten Sie die Verbindung zu Ihrem vorherigen Spiel wiederherstellen?"
+  "game-reconnect-modal-body": "Sie haben ein laufendes Spiel verlassen. Möchten Sie die Verbindung zu Ihrem vorherigen Spiel wiederherstellen?",
+  "held_items": "Getragene Items",
+  "by_average_held_items": "nach durchschnittlich getragenen Items",
+  "role": {
+    "ADMIN": "Creator",
+    "MODERATOR": "Mod",
+    "BOT": "Bot"
+  },
+  "elorank": {
+    "BEGINNER": "Anfänger",
+    "POKEBALL": "Pokéball",
+    "GREATBALL": "Superball",
+    "ULTRABALL": "Hyperball",
+    "MASTERBALL": "Meisterball"
+  },
+  "lobby_full": "Lobby ist voll"
 }
