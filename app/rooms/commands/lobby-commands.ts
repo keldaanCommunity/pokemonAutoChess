@@ -1099,7 +1099,7 @@ export class MakeServerAnnouncementCommand extends Command<
     try {
       const u = this.state.users.get(client.auth.uid)
       if (u && u.role && u.role === Role.ADMIN) {
-        this.state.addAnnouncement(message)
+        this.room.presence.publish("server-announcement", message)
       }
     } catch (error) {
       logger.error(error)
