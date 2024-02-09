@@ -100,7 +100,7 @@ export const SynergyTriggers: { [key in Synergy]: number[] } = {
   [Synergy.ROCK]: [2, 4, 6],
   [Synergy.GHOST]: [2, 4, 6, 8],
   [Synergy.FAIRY]: [2, 4, 6, 8],
-  [Synergy.ICE]: [2, 3, 4, 5, 6],
+  [Synergy.ICE]: [2, 4, 6, 8],
   [Synergy.FOSSIL]: [2, 4, 6],
   [Synergy.SOUND]: [2, 4, 6],
   [Synergy.ARTIFICIAL]: [2, 4, 6],
@@ -175,101 +175,6 @@ export const PoolSize: { [key in Rarity]: [number, number, number] } = {
   [Rarity.SPECIAL]: [0, 0, 0],
   [Rarity.HATCH]: [0, 0, 0]
 }
-
-export const CommonShop = new Array<Pkm>(
-  Pkm.POLIWAG,
-  Pkm.CHARMANDER,
-  Pkm.GEODUDE,
-  Pkm.AZURILL,
-  Pkm.ZUBAT,
-  Pkm.MAREEP,
-  Pkm.CATERPIE,
-  Pkm.WEEDLE,
-  Pkm.PIDGEY,
-  Pkm.HOPPIP,
-  Pkm.SEEDOT,
-  Pkm.SWINUB,
-  Pkm.FENNEKIN,
-  Pkm.PICHU,
-  Pkm.SQUIRTLE,
-  Pkm.ARON,
-  Pkm.MUDKIP,
-  Pkm.CHIMCHAR,
-  Pkm.LITWICK,
-  Pkm.LILLIPUP
-)
-
-export const UncommonShop = new Array<Pkm>(
-  Pkm.IGGLYBUFF,
-  Pkm.CHIKORITA,
-  Pkm.CYNDAQUIL,
-  Pkm.TREECKO,
-  Pkm.TORCHIC,
-  Pkm.PIPLUP,
-  Pkm.MACHOP,
-  Pkm.HORSEA,
-  Pkm.SPHEAL,
-  Pkm.MAGNEMITE,
-  Pkm.DUSKULL,
-  Pkm.EEVEE,
-  Pkm.FLABEBE,
-  Pkm.HATENNA,
-  Pkm.NIDORANF,
-  Pkm.NIDORANM
-)
-
-export const RareShop = new Array<Pkm>(
-  Pkm.BULBASAUR,
-  Pkm.TURTWIG,
-  Pkm.TRAPINCH,
-  Pkm.RHYHORN,
-  Pkm.TOGEPI,
-  Pkm.LOTAD,
-  Pkm.SHINX,
-  Pkm.DRATINI,
-  Pkm.MAGBY,
-  Pkm.WHISMUR,
-  Pkm.VANILLITE,
-  Pkm.BAGON,
-  Pkm.HONEDGE,
-  Pkm.ABRA,
-  Pkm.TOTODILE,
-  Pkm.LARVITAR
-)
-
-export const EpicShop = new Array<Pkm>(
-  Pkm.SLAKOTH,
-  Pkm.RALTS,
-  Pkm.BELDUM,
-  Pkm.ELEKID,
-  Pkm.SNORUNT,
-  Pkm.BUDEW,
-  Pkm.HOUNDOUR,
-  Pkm.GOOMY,
-  Pkm.BOUNSWEET,
-  Pkm.OSHAWOTT,
-  Pkm.JANGMO_O,
-  Pkm.WURMPLE,
-  Pkm.TINKATINK,
-  Pkm.GIBLE
-)
-
-export const UltraShop = new Array<Pkm>(
-  Pkm.GASTLY,
-  Pkm.ONIX,
-  Pkm.SCYTHER,
-  Pkm.RIOLU,
-  Pkm.MEDITITE,
-  Pkm.NUMEL,
-  Pkm.SNOVER,
-  Pkm.SWABLU,
-  Pkm.BUNEARY,
-  Pkm.ELECTRIKE,
-  Pkm.SHUPPET,
-  Pkm.HAPPINY,
-  Pkm.SOLOSIS,
-  Pkm.SOBBLE
-)
 
 export const UniqueShop = new Array<PkmProposition>(
   Pkm.AERODACTYL,
@@ -657,7 +562,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.CHOICE_SPECS]: { [Stat.AP]: 100 },
   [Item.SOUL_DEW]: { [Stat.AP]: 10, [Stat.PP]: 15 },
   [Item.UPGRADE]: { [Stat.AP]: 10, [Stat.ATK_SPEED]: 10 },
-  [Item.REAPER_CLOTH]: { [Stat.AP]: 20, [Stat.CRIT_CHANCE]: 20 },
+  [Item.REAPER_CLOTH]: { [Stat.AP]: 10, [Stat.CRIT_CHANCE]: 10 },
   [Item.POKEMONOMICON]: { [Stat.AP]: 10, [Stat.SHIELD]: 15 },
   [Item.POWER_LENS]: { [Stat.AP]: 10, [Stat.SPE_DEF]: 5 },
   [Item.SHELL_BELL]: { [Stat.AP]: 10, [Stat.ATK]: 3 },
@@ -1044,5 +949,6 @@ export const DTEF_TILESET_WIDTH = 6
 export const DTEF_TILESET_HEIGHT = 8
 export const DTEF_TILESET_TILE_WIDTH = 24
 
+export const SCRIBBLE_LOBBY_CRON = "0 0 0-20/4 * * *" // every four hours from 00h to 20h
 export const GREATBALL_RANKED_LOBBY_CRON = "0 0 2-22/4 * * *" // every four hours from 2h to 22h
 export const ULTRABALL_RANKED_LOBBY_CRON = "0 0 21 * * 7" // on Sunday at 21h

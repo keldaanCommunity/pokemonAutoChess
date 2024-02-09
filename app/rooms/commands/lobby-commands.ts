@@ -55,7 +55,7 @@ export class OnJoinCommand extends Command<
     rooms: RoomListingData<any>[] | undefined
   }) {
     try {
-      logger.info(`${client.auth.displayName} ${client.id} join lobby room`)
+      //logger.info(`${client.auth.displayName} ${client.id} join lobby room`)
       client.send(Transfer.ROOMS, rooms)
       const user = await UserMetadata.findOne({ uid: client.auth.uid })
 
@@ -153,7 +153,7 @@ export class OnLeaveCommand extends Command<
   execute({ client }: { client: Client }) {
     try {
       if (client && client.auth && client.auth.displayName && client.auth.uid) {
-        logger.info(`${client.auth.displayName} ${client.id} leave lobby`)
+        //logger.info(`${client.auth.displayName} ${client.id} leave lobby`)
         this.state.users.delete(client.auth.uid)
       }
     } catch (error) {
@@ -1052,23 +1052,36 @@ export class OnBotUploadCommand extends Command<
   }
 }
 
-export class OpenRankedLobbyCommand extends Command<
+export class OpenSpecialLobbyCommand extends Command<
   CustomLobbyRoom,
-  { minRank: EloRank }
+  { lobbyType: LobbyType; minRank?: EloRank | null; noElo?: boolean }
 > {
-  execute({ minRank }: { minRank: EloRank }) {
-    logger.info("Creating Ranked Lobby " + minRank)
-    let roomName = "Ranked Match"
-    if (minRank === EloRank.GREATBALL) {
-      roomName = "Great Ball Ranked Match"
-    }
-    if (minRank === EloRank.ULTRABALL) {
-      roomName = "Ultra Ball Ranked Match"
+  execute({
+    lobbyType,
+    minRank,
+    noElo
+  }: {
+    lobbyType: LobbyType
+    minRank?: EloRank | null
+    noElo?: boolean
+  }) {
+    logger.info(`Creating special Lobby ${lobbyType} ${minRank ?? ""}`)
+    let roomName = "Special Lobby"
+    if (lobbyType === LobbyType.RANKED) {
+      if (minRank === EloRank.GREATBALL) {
+        roomName = "Great Ball Ranked Match"
+      }
+      if (minRank === EloRank.ULTRABALL) {
+        roomName = "Ultra Ball Ranked Match"
+      }
+    } else if (lobbyType === LobbyType.SCRIBBLE) {
+      roomName = "Smeargle's Scribble"
     }
 
     matchMaker.createRoom("preparation", {
-      lobbyType: LobbyType.RANKED,
+      lobbyType,
       minRank,
+      noElo,
       ownerId: null,
       roomName,
       autoStartDelayInSeconds: 15 * 60

@@ -15,7 +15,7 @@ import { fpsToDuration } from "../../../utils/number"
 import durations from "../../dist/client/assets/pokemons/durations.json"
 import indexList from "../../dist/client/assets/pokemons/indexList.json"
 import atlas from "../assets/atlas.json"
-import Pokemon from "./components/pokemon"
+import PokemonSprite from "./components/pokemon"
 
 const DEFAULT_FPS = 20
 
@@ -223,7 +223,7 @@ export default class AnimationManager {
 
   convertPokemonActionStateToAnimationType(
     state: PokemonActionState,
-    entity: Pokemon
+    entity: PokemonSprite
   ): AnimationType {
     switch (state) {
       case PokemonActionState.HOP:
@@ -245,31 +245,39 @@ export default class AnimationManager {
     }
   }
 
-  animatePokemon(entity: Pokemon, action: PokemonActionState, flip: boolean) {
+  animatePokemon(
+    entity: PokemonSprite,
+    action: PokemonActionState,
+    flip: boolean
+  ) {
     const animation = this.convertPokemonActionStateToAnimationType(
       action,
       entity
     )
 
-    let lock = false
-    let repeat: number | undefined
-    if (
+    const shouldLock =
       action === PokemonActionState.HOP ||
-      action === PokemonActionState.HURT
-    ) {
-      lock = true
-      repeat = -1
-    }
+      action === PokemonActionState.HURT ||
+      action === PokemonActionState.EMOTE
+
+    const shouldLoop =
+      action === PokemonActionState.HOP ||
+      action === PokemonActionState.HURT ||
+      action === PokemonActionState.WALK
 
     try {
-      this.play(entity, animation, { flip, lock, repeat })
+      this.play(entity, animation, {
+        flip,
+        lock: shouldLock,
+        repeat: shouldLoop ? -1 : 0
+      })
     } catch (err) {
       logger.warn(`Can't play animation ${animation} for ${entity.name}`, err)
     }
   }
 
   play(
-    entity: Pokemon,
+    entity: PokemonSprite,
     animation: AnimationType,
     config: { flip?: boolean; repeat?: number; lock?: boolean } = {}
   ) {

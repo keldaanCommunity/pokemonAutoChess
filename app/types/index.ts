@@ -29,6 +29,7 @@ import { Emotion } from "./enum/Emotion"
 import {
   AttackType,
   BoardEvent,
+  LobbyType,
   Orientation,
   PokemonActionState,
   Rarity,
@@ -79,7 +80,8 @@ export enum Transfer {
   DRAG_DROP = "DRAG_DROP",
   DRAG_DROP_COMBINE = "DRAG_DROP_COMBINE",
   DRAG_DROP_ITEM = "DRAG_DROP_ITEM",
-  SELL_DROP = "SELL_DROP",
+  SELL_POKEMON = "SELL_POKEMON",
+  REMOVE_FROM_SHOP = "REMOVE_FROM_SHOP",
   CHANGE_SELECTED_EMOTION = "CHANGE_SELECTED_EMOTION",
   NEW_MESSAGE = "NEW_MESSAGE",
   BOT_CREATION = "BOT_CREATION",
@@ -132,7 +134,7 @@ export enum Transfer {
   BANNED = "BANNED",
   POKEMON_DAMAGE = "POKEMON_DAMAGE",
   POKEMON_HEAL = "POKEMON_HEAL",
-  UNOWN_ENCOUNTER = "UNOWN_ENCOUNTER",
+  POKEMON_WANDERING = "POKEMON_WANDERING",
   UNOWN_WANDERING = "UNOWN_WANDERING",
   VECTOR = "VECTOR",
   LOADING_PROGRESS = "LOADING_PROGRESS",
@@ -156,38 +158,43 @@ export enum Transfer {
 }
 
 export enum AttackSprite {
-  WATER_MELEE = "WATER/melee",
-  ROCK_MELEE = "ROCK/melee",
-  NORMAL_MELEE = "NORMAL/melee",
-  ELECTRIC_MELEE = "ELECTRIC/melee",
-  DRAGON_MELEE = "DRAGON/melee",
-  FIGHTING_RANGE = "FIGHTING/range",
-  DRAGON_RANGE = "DRAGON/range",
-  FIGHTING_MELEE = "FIGHTING/melee",
-  FIRE_MELEE = "FIRE/melee",
-  PSYCHIC_RANGE = "PSYCHIC/range",
-  FIRE_RANGE = "FIRE/range",
-  GRASS_RANGE = "GRASS/range",
-  WATER_RANGE = "WATER/range",
-  FLYING_RANGE = "FLYING/range",
-  ICE_MELEE = "ICE/melee",
-  GHOST_RANGE = "GHOST/range",
-  FAIRY_RANGE = "FAIRY/range",
-  ELECTRIC_RANGE = "ELECTRIC/range",
-  POISON_MELEE = "POISON/melee",
-  GRASS_MELEE = "GRASS/melee",
-  FAIRY_MELEE = "FAIRY/melee",
-  POISON_RANGE = "POISON/range",
   BUG_MELEE = "BUG/melee",
+  DARK_MELEE = "DARK/melee",
+  DARK_RANGE = "DARK/range",
+  DRAGON_MELEE = "DRAGON/melee",
+  DRAGON_RANGE = "DRAGON/range",
+  ELECTRIC_MELEE = "ELECTRIC/melee",
+  ELECTRIC_RANGE = "ELECTRIC/range",
+  FAIRY_MELEE = "FAIRY/melee",
+  FAIRY_RANGE = "FAIRY/range",
+  FIGHTING_MELEE = "FIGHTING/melee",
+  FIGHTING_RANGE = "FIGHTING/range",
+  FIRE_MELEE = "FIRE/melee",
+  FIRE_RANGE = "FIRE/range",
   FLYING_MELEE = "FLYING/melee",
+  FLYING_RANGE = "FLYING/range",
+  GHOST_RANGE = "GHOST/range",
+  GRASS_MELEE = "GRASS/melee",
+  GRASS_RANGE = "GRASS/range",
+  ICE_MELEE = "ICE/melee",
   ICE_RANGE = "ICE/range",
-  STEEL_MELEE = "STEEL/melee",
-  ROCK_RANGE = "ROCK/range"
+  NORMAL_MELEE = "NORMAL/melee",
+  POISON_MELEE = "POISON/melee",
+  POISON_RANGE = "POISON/range",
+  PSYCHIC_MELEE = "PSYCHIC/melee",
+  PSYCHIC_RANGE = "PSYCHIC/range",
+  WATER_MELEE = "WATER/melee",
+  WATER_RANGE = "WATER/range",
+  ROCK_MELEE = "ROCK/melee",
+  ROCK_RANGE = "ROCK/range",
+  STEEL_MELEE = "STEEL/melee"
 }
 
 export const AttackSpriteScale: { [sprite in AttackSprite]: [number, number] } =
   {
     "BUG/melee": [1.5, 1.5],
+    "DARK/melee": [1.5, 1.5],
+    "DARK/range": [1.5, 1.5],
     "DRAGON/melee": [2, 2],
     "DRAGON/range": [2, 2],
     "ELECTRIC/melee": [1.5, 1.5],
@@ -201,19 +208,20 @@ export const AttackSpriteScale: { [sprite in AttackSprite]: [number, number] } =
     "FLYING/melee": [1.5, 1.5],
     "FLYING/range": [1.5, 1.5],
     "GHOST/range": [2, 2],
-    "GRASS/melee": [1.5, 1.5],
+    "GRASS/melee": [1, 1],
     "GRASS/range": [3, 3],
     "ICE/melee": [2, 2],
     "ICE/range": [2, 2],
     "NORMAL/melee": [2, 2],
-    "POISON/melee": [1, 1],
+    "POISON/melee": [2, 2],
     "POISON/range": [1.5, 1.5],
+    "PSYCHIC/melee": [1.5, 1.5],
     "PSYCHIC/range": [2, 2],
     "ROCK/melee": [1.5, 1.5],
+    "ROCK/range": [3, 3],
     "STEEL/melee": [1.5, 1.5],
     "WATER/melee": [2, 2],
-    "WATER/range": [3, 3],
-    [AttackSprite.ROCK_RANGE]: [3, 3]
+    "WATER/range": [3, 3]
   }
 
 export enum ModalMode {
@@ -271,7 +279,7 @@ export interface ICustomLobbyState extends Schema {
   leaderboard: ILeaderboardInfo[]
   botLeaderboard: ILeaderboardInfo[]
   levelLeaderboard: ILeaderboardInfo[]
-  nextSpecialLobbyDate: number
+  nextSpecialLobbyDate: string
   nextSpecialLobbyType: SpecialLobbyType | ""
 }
 
@@ -575,10 +583,12 @@ export interface IPreparationMetadata {
   type: "preparation"
   gameStarted: boolean
   minRank: string | null
+  lobbyType: LobbyType
 }
 
 export interface IGameMetadata {
   name: string
+  lobbyType: LobbyType
   playerIds: string[]
   stageLevel: number
   type: "game"

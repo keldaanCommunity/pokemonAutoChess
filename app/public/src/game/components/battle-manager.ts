@@ -27,7 +27,7 @@ import { transformAttackCoordinate } from "../../pages/utils/utils"
 import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
 import { displayAbility } from "./abilities-animations"
-import Pokemon from "./pokemon"
+import PokemonSprite from "./pokemon"
 
 export default class BattleManager {
   group: GameObjects.Group
@@ -71,7 +71,7 @@ export default class BattleManager {
   addPokemonEntitySprite(simulationId: string, pokemon: IPokemonEntity) {
     if (
       this.simulation?.id === simulationId &&
-      !(this.group.getChildren() as Pokemon[]).find(
+      !(this.group.getChildren() as PokemonSprite[]).find(
         (child) => child.id === pokemon.id
       )
     ) {
@@ -80,7 +80,7 @@ export default class BattleManager {
         pokemon.positionY,
         this.flip
       )
-      const pokemonUI = new Pokemon(
+      const pokemonUI = new PokemonSprite(
         this.scene,
         coordinates[0],
         coordinates[1],
@@ -100,7 +100,7 @@ export default class BattleManager {
 
   clear() {
     this.group.getChildren().forEach((p) => {
-      const pkm = p as Pokemon
+      const pkm = p as PokemonSprite
       if (pkm.projectile) {
         pkm.projectile.destroy()
       }
@@ -112,7 +112,7 @@ export default class BattleManager {
   removePokemon(simulationId: string, pokemon: IPokemonEntity) {
     if (this.simulation?.id == simulationId) {
       this.group.getChildren().forEach((p) => {
-        const pkm = <Pokemon>p
+        const pkm = <PokemonSprite>p
         if (pkm.id == pokemon.id) {
           this.animationManager.animatePokemon(
             pkm,
@@ -130,7 +130,7 @@ export default class BattleManager {
     if (this.simulation?.id === simulationId) {
       const children = this.group.getChildren()
       for (let i = 0; i < children.length; i++) {
-        const pkm = <Pokemon>children[i]
+        const pkm = <PokemonSprite>children[i]
         if (pkm.id == pokemon.id) {
           pkm.itemsContainer.render(pokemon.items)
           return
@@ -147,7 +147,7 @@ export default class BattleManager {
     if (this.simulation?.id == simulationId && this.group) {
       const children = this.group.getChildren()
       for (let i = 0; i < children.length; i++) {
-        const pkm = <Pokemon>children[i]
+        const pkm = <PokemonSprite>children[i]
 
         if (pkm.id == pokemon.id) {
           if (field == "poisonStacks") {
@@ -304,7 +304,7 @@ export default class BattleManager {
     if (this.simulation?.id == simulationId && this.group) {
       const children = this.group.getChildren()
       for (let i = 0; i < children.length; i++) {
-        const pkm = <Pokemon>children[i]
+        const pkm = <PokemonSprite>children[i]
 
         if (pkm.id == pokemon.id) {
           if (field == "crit") {
@@ -570,7 +570,7 @@ export default class BattleManager {
     if (this.simulation?.id == simulationId && this.group) {
       const children = this.group.getChildren()
       for (let i = 0; i < children.length; i++) {
-        const pkm = <Pokemon>children[i]
+        const pkm = <PokemonSprite>children[i]
         if (pkm.id == pokemon.id) {
           if (field == "positionX" || field == "positionY") {
             // logger.debug(pokemon.positionX, pokemon.positionY);
@@ -959,7 +959,7 @@ export default class BattleManager {
     if (this.simulation?.id === id && skill) {
       displayAbility(
         this.scene,
-        this.group.getChildren() as Pokemon[],
+        this.group.getChildren() as PokemonSprite[],
         skill,
         orientation,
         positionX,
@@ -1045,8 +1045,8 @@ export default class BattleManager {
       const sprite = this.scene.add.sprite(
         coordinates[0],
         coordinates[1],
-        Effect.STEALTH_ROCKS,
-        "013"
+        "abilities",
+        "STEALTH_ROCKS/013.png"
       )
       sprite.setDepth(1)
       sprite.setScale(1, 1)

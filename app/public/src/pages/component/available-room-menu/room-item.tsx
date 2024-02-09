@@ -6,6 +6,7 @@ import {
   EloRankThreshold,
   MAX_PLAYERS_PER_LOBBY
 } from "../../../../../types/Config"
+import { LobbyType } from "../../../../../types/enum/Game"
 import { useAppSelector } from "../../../hooks"
 import { cc } from "../../utils/jsx"
 import "./room-item.css"
@@ -44,7 +45,16 @@ export default function RoomItem(props: {
           src="/assets/ui/lock.svg"
         />
       )}
-      {props.room.metadata?.noElo && (
+      {props.room.metadata?.lobbyType === LobbyType.SCRIBBLE && (
+        <img
+          alt={t("smeargle_scribble")}
+          title={t("smeargle_scribble_hint")}
+          className="scribble icon"
+          src="/assets/ui/scribble.png"
+          style={{ borderRadius: "50%" }}
+        />
+      )}
+      {props.room.metadata?.noElo && props.room.metadata?.lobbyType === LobbyType.NORMAL && (
         <img
           alt={t("just_for_fun")}
           title={t("just_for_fun")}

@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Navigate } from "react-router-dom"
 import { toast } from "react-toastify"
+import { getFreeSpaceOnBench } from "../../../utils/board"
 import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 import AfterGameState from "../../../rooms/states/after-game-state"
 import GameState from "../../../rooms/states/game-state"
@@ -22,8 +23,10 @@ import {
 } from "../../../types"
 import { RequiredStageLevelForXpElligibility } from "../../../types/Config"
 import { PokemonActionState } from "../../../types/enum/Game"
+import { Pkm } from "../../../types/enum/Pokemon"
 import { getRankLabel } from "../../../types/strings/Strings"
 import { logger } from "../../../utils/logger"
+import { addWanderingPokemon } from "../game/components/pokemon"
 import GameContainer from "../game/game-container"
 import GameScene from "../game/scenes/game-scene"
 import { useAppDispatch, useAppSelector } from "../hooks"
@@ -269,31 +272,26 @@ export default function Game() {
       logger.debug("initializing game")
       initialized.current = true
       dispatch(requestTilemap())
+
       gameContainer = new GameContainer(container.current, uid, room)
-      document.getElementById("game")?.addEventListener(Transfer.DRAG_DROP, ((
+
+      const gameElm = document.getElementById("game")
+      gameElm?.addEventListener(Transfer.DRAG_DROP, ((
         event: CustomEvent<IDragDropMessage>
       ) => {
         gameContainer.onDragDrop(event)
       }) as EventListener)
-      document
-        .getElementById("game")
-        ?.addEventListener(Transfer.DRAG_DROP_ITEM, ((
-          event: CustomEvent<IDragDropItemMessage>
-        ) => {
-          gameContainer.onDragDropItem(event)
-        }) as EventListener)
-      document
-        .getElementById("game")
-        ?.addEventListener(Transfer.DRAG_DROP_COMBINE, ((
-          event: CustomEvent<IDragDropCombineMessage>
-        ) => {
-          gameContainer.onDragDropCombine(event)
-        }) as EventListener)
-      document.getElementById("game")?.addEventListener(Transfer.SELL_DROP, ((
-        event: CustomEvent<{ pokemonId: string }>
+      gameElm?.addEventListener(Transfer.DRAG_DROP_ITEM, ((
+        event: CustomEvent<IDragDropItemMessage>
       ) => {
-        gameContainer.onSellDrop(event)
+        gameContainer.onDragDropItem(event)
       }) as EventListener)
+      gameElm?.addEventListener(Transfer.DRAG_DROP_COMBINE, ((
+        event: CustomEvent<IDragDropCombineMessage>
+      ) => {
+        gameContainer.onDragDropCombine(event)
+      }) as EventListener)
+
       room.onMessage(Transfer.LOADING_COMPLETE, () => {
         setLoaded(true)
       })
@@ -359,6 +357,24 @@ export default function Game() {
           if (g && g.unownManager) {
             g.unownManager.addWanderingUnown()
           }
+        }
+      })
+
+      room.onMessage(Transfer.POKEMON_WANDERING, (pokemon: Pkm) => {
+        const scene = getGameScene()
+        if (scene) {
+          addWanderingPokemon(scene, pokemon, (sprite, pointer, tween) => {
+            if (
+              scene.board &&
+              getFreeSpaceOnBench(scene.board.player.board) > 0
+            ) {
+              room.send(Transfer.POKEMON_WANDERING, pokemon)
+              sprite.destroy()
+              tween.destroy()
+            } else if (scene.board) {
+              scene.board.displayText(pointer.x, pointer.y, t("full"))
+            }
+          })
         }
       })
 

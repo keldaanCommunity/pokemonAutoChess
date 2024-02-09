@@ -144,6 +144,9 @@ export default class Design {
 
     // berry tree slots
     this.terrain[14][8] = TerrainType.GROUND
+
+    // smeargle slot
+    this.terrain[8][31] = TerrainType.GROUND
   }
 
   drawGroundRect(x: number, y: number, width: number, height: number) {

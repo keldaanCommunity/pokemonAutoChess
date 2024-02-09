@@ -42,6 +42,7 @@ import { sum } from "../../utils/array"
 import { distanceM } from "../../utils/distance"
 import { coinflip, pickRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
+import { getFirstAvailablePositionInBench } from "../../utils/board"
 import PokemonFactory from "../pokemon-factory"
 import Player from "./player"
 
@@ -111,10 +112,6 @@ export class Pokemon extends Schema implements IPokemon {
     return ![Pkm.DITTO, Pkm.EGG, Pkm.COMFEY, ...Unowns].includes(this.name)
   }
 
-  get isOnBench(): boolean {
-    return this.positionY === 0
-  }
-
   // called after manually changing position of the pokemon on board
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onChangePosition(x: number, y: number, player: Player) {}
@@ -158,6 +155,10 @@ export class Pokemon extends Schema implements IPokemon {
     team: MapSchema<IPokemonEntity>
     entity: IPokemonEntity
   }) {}
+}
+
+export function isOnBench(pokemon: Pokemon): boolean {
+  return pokemon.positionY === 0
 }
 
 export class Ditto extends Pokemon {
@@ -776,7 +777,7 @@ export class Beldum extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.METEOR_MASH
-  attackSprite = AttackSprite.DRAGON_MELEE
+  attackSprite = AttackSprite.PSYCHIC_MELEE
 }
 
 export class Metang extends Pokemon {
@@ -795,7 +796,7 @@ export class Metang extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.METEOR_MASH
-  attackSprite = AttackSprite.DRAGON_MELEE
+  attackSprite = AttackSprite.PSYCHIC_MELEE
 }
 
 export class Metagross extends Pokemon {
@@ -813,7 +814,7 @@ export class Metagross extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.METEOR_MASH
-  attackSprite = AttackSprite.DRAGON_MELEE
+  attackSprite = AttackSprite.PSYCHIC_MELEE
 }
 
 export class Tympole extends Pokemon {
@@ -1176,7 +1177,7 @@ export class Larvitar extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.BITE
-  attackSprite = AttackSprite.ROCK_MELEE
+  attackSprite = AttackSprite.DARK_MELEE
 }
 
 export class Pupitar extends Pokemon {
@@ -1191,7 +1192,7 @@ export class Pupitar extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.BITE
-  attackSprite = AttackSprite.ROCK_MELEE
+  attackSprite = AttackSprite.DARK_MELEE
 }
 
 export class Tyranitar extends Pokemon {
@@ -1205,7 +1206,7 @@ export class Tyranitar extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.BITE
-  attackSprite = AttackSprite.ROCK_MELEE
+  attackSprite = AttackSprite.DARK_MELEE
 }
 
 export class JangmoO extends Pokemon {
@@ -1221,7 +1222,7 @@ export class JangmoO extends Pokemon {
   atk = 6
   def = 4
   speDef = 4
-  maxPP = 110
+  maxPP = 90
   range = 1
   skill = Ability.CLANGOROUS_SOUL
   attackSprite = AttackSprite.DRAGON_MELEE
@@ -1240,7 +1241,7 @@ export class HakamoO extends Pokemon {
   atk = 13
   def = 5
   speDef = 5
-  maxPP = 110
+  maxPP = 90
   range = 1
   skill = Ability.CLANGOROUS_SOUL
   attackSprite = AttackSprite.DRAGON_MELEE
@@ -1258,7 +1259,7 @@ export class KommoO extends Pokemon {
   atk = 25
   def = 8
   speDef = 8
-  maxPP = 110
+  maxPP = 90
   range = 1
   skill = Ability.CLANGOROUS_SOUL
   attackSprite = AttackSprite.DRAGON_MELEE
@@ -1662,7 +1663,7 @@ export class Politoed extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.WATER,
     Synergy.AQUATIC,
-    Synergy.FIGHTING
+    Synergy.SOUND
   ])
   rarity = Rarity.COMMON
   stars = 3
@@ -2507,7 +2508,7 @@ export class Flygon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.BUG, Synergy.GROUND])
   rarity = Rarity.RARE
   stars = 3
-  hp = 220
+  hp = 200
   atk = 26
   def = 4
   speDef = 4
@@ -4505,7 +4506,7 @@ export class Yveltal extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DEATH_WING
-  attackSprite = AttackSprite.FLYING_MELEE
+  attackSprite = AttackSprite.DARK_MELEE
 }
 
 export class Moltres extends Pokemon {
@@ -4675,7 +4676,7 @@ export class Lunatone extends Pokemon {
   range = 2
   skill = Ability.COSMIC_POWER
   passive = Passive.NIGHT
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.DARK_RANGE
 }
 
 export class Solrock extends Pokemon {
@@ -4825,7 +4826,7 @@ export class Eevee extends Pokemon {
   stars = 1
   hp = 90
   atk = 5
-  def = 2
+  def = 3
   speDef = 2
   maxPP = 100
   range = 1
@@ -4878,8 +4879,8 @@ export class Vaporeon extends Pokemon {
   stars = 2
   hp = 180
   atk = 12
-  def = 1
-  speDef = 1
+  def = 3
+  speDef = 2
   maxPP = 100
   range = 1
   skill = Ability.HAPPY_HOUR
@@ -4892,8 +4893,8 @@ export class Jolteon extends Pokemon {
   stars = 2
   hp = 180
   atk = 12
-  def = 1
-  speDef = 1
+  def = 3
+  speDef = 2
   maxPP = 100
   range = 1
   skill = Ability.HAPPY_HOUR
@@ -4908,7 +4909,7 @@ export class Flareon extends Pokemon {
   atk = 12
   def = 3
   speDef = 2
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.HAPPY_HOUR
   attackSprite = AttackSprite.FIRE_MELEE
@@ -4920,12 +4921,12 @@ export class Espeon extends Pokemon {
   stars = 2
   hp = 180
   atk = 12
-  def = 1
-  speDef = 1
+  def = 3
+  speDef = 2
   maxPP = 80
   range = 1
   skill = Ability.HAPPY_HOUR
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.PSYCHIC_MELEE
 }
 
 export class Umbreon extends Pokemon {
@@ -4939,7 +4940,7 @@ export class Umbreon extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.HAPPY_HOUR
-  attackSprite = AttackSprite.DRAGON_MELEE
+  attackSprite = AttackSprite.DARK_MELEE
 }
 
 export class Leafeon extends Pokemon {
@@ -4962,8 +4963,8 @@ export class Sylveon extends Pokemon {
   stars = 2
   hp = 180
   atk = 12
-  def = 1
-  speDef = 1
+  def = 3
+  speDef = 2
   maxPP = 80
   range = 1
   skill = Ability.HAPPY_HOUR
@@ -4976,8 +4977,8 @@ export class Glaceon extends Pokemon {
   stars = 2
   hp = 180
   atk = 12
-  def = 1
-  speDef = 1
+  def = 3
+  speDef = 2
   maxPP = 80
   range = 1
   skill = Ability.HAPPY_HOUR
@@ -5009,7 +5010,7 @@ export class Darkrai extends Pokemon {
   maxPP = 120
   range = 2
   skill = Ability.DARK_VOID
-  attackSprite = AttackSprite.GHOST_RANGE
+  attackSprite = AttackSprite.DARK_RANGE
 }
 
 export class Larvesta extends Pokemon {
@@ -5370,11 +5371,15 @@ export class Manaphy extends Pokemon {
 }
 
 export class Rotom extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.GHOST])
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.GHOST,
+    Synergy.LIGHT
+  ])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 15
+  atk = 12
   def = 3
   speDef = 3
   maxPP = 100
@@ -5394,7 +5399,7 @@ export class Spiritomb extends Pokemon {
   maxPP = 80
   range = 2
   skill = Ability.SHADOW_BALL
-  attackSprite = AttackSprite.GHOST_RANGE
+  attackSprite = AttackSprite.DARK_RANGE
 }
 
 export class Absol extends Pokemon {
@@ -5408,7 +5413,7 @@ export class Absol extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.THIEF
-  attackSprite = AttackSprite.DRAGON_MELEE
+  attackSprite = AttackSprite.DARK_MELEE
 }
 
 export class Delibird extends Pokemon {
@@ -5428,14 +5433,14 @@ export class Delibird extends Pokemon {
 export class IronBundle extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.ICE,
-    Synergy.FLYING,
+    Synergy.WATER,
     Synergy.ARTIFICIAL
   ])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
   atk = 16
-  def = 4
+  def = 5
   speDef = 2
   maxPP = 100
   range = 1
@@ -5449,7 +5454,7 @@ export class Lapras extends Pokemon {
   stars = 3
   hp = 250
   atk = 12
-  def = 6
+  def = 5
   speDef = 6
   maxPP = 100
   range = 1
@@ -5492,7 +5497,7 @@ export class Uxie extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 12
+  atk = 15
   def = 3
   speDef = 3
   maxPP = 80
@@ -5506,7 +5511,7 @@ export class Mesprit extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 12
+  atk = 15
   def = 3
   speDef = 3
   maxPP = 90
@@ -5520,7 +5525,7 @@ export class Azelf extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 12
+  atk = 15
   def = 3
   speDef = 3
   maxPP = 90
@@ -5692,7 +5697,7 @@ export class Deoxys extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.PROTECT
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.PSYCHIC_MELEE
 }
 
 export class Shaymin extends Pokemon {
@@ -6504,7 +6509,7 @@ export class Hatenna extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.MAGIC_POWDER
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.PSYCHIC_MELEE
 }
 
 export class Hattrem extends Pokemon {
@@ -6519,7 +6524,7 @@ export class Hattrem extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.MAGIC_POWDER
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.PSYCHIC_MELEE
 }
 
 export class Hatterene extends Pokemon {
@@ -6533,7 +6538,7 @@ export class Hatterene extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.MAGIC_POWDER
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.PSYCHIC_MELEE
 }
 export class Fennekin extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.PSYCHIC, Synergy.HUMAN])
@@ -6614,7 +6619,7 @@ export class Guzzlord extends Pokemon {
   maxPP = 120
   range = 3
   skill = Ability.TWISTING_NETHER
-  attackSprite = AttackSprite.FIRE_RANGE
+  attackSprite = AttackSprite.DARK_RANGE
 }
 export class Eternatus extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -6666,7 +6671,7 @@ export class Ninjask extends Pokemon {
   additional = true
   onAcquired(player: Player) {
     // also gain sheninja if free space on bench
-    const x = player.getFirstAvailablePositionInBench()
+    const x = getFirstAvailablePositionInBench(player.board)
     if (x !== undefined) {
       const pokemon = PokemonFactory.createPokemonFromName(Pkm.SHEDINJA, player)
       pokemon.positionX = x
@@ -7459,7 +7464,7 @@ export class MimeJr extends Pokemon {
   atk = 6
   def = 2
   speDef = 2
-  maxPP = 85
+  maxPP = 80
   range = 2
   skill = Ability.MIMIC
   additional = true
@@ -7478,7 +7483,7 @@ export class MrMime extends Pokemon {
   atk = 15
   def = 2
   speDef = 4
-  maxPP = 85
+  maxPP = 80
   range = 2
   skill = Ability.MIMIC
   additional = true
@@ -8306,11 +8311,7 @@ export class Staraptor extends Pokemon {
 }
 
 export class Scorbunny extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.FIRE,
-    Synergy.FIGHTING,
-    Synergy.HUMAN
-  ])
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD, Synergy.HUMAN])
   rarity = Rarity.HATCH
   stars = 1
   evolution = Pkm.RABOOT
@@ -8327,11 +8328,7 @@ export class Scorbunny extends Pokemon {
 }
 
 export class Raboot extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.FIRE,
-    Synergy.FIGHTING,
-    Synergy.HUMAN
-  ])
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD, Synergy.HUMAN])
   rarity = Rarity.HATCH
   stars = 2
   evolution = Pkm.CINDERACE
@@ -8348,11 +8345,7 @@ export class Raboot extends Pokemon {
 }
 
 export class Cinderace extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.FIRE,
-    Synergy.FIGHTING,
-    Synergy.HUMAN
-  ])
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD, Synergy.HUMAN])
   rarity = Rarity.HATCH
   stars = 3
   hp = 180
@@ -9152,7 +9145,7 @@ export class Zorua extends Pokemon {
   range = 1
   skill = Ability.ILLUSION
   additional = true
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.DARK_MELEE
 }
 
 export class Zoroark extends Pokemon {
@@ -9398,7 +9391,7 @@ export class Chimecho extends Pokemon {
   atk = 15
   def = 3
   speDef = 6
-  maxPP = 90
+  maxPP = 80
   range = 3
   skill = Ability.ECHO
   passive = Passive.CHIMECHO
@@ -9496,7 +9489,23 @@ export class Mimikyu extends Pokemon {
   maxPP = 40
   range = 1
   skill = Ability.SHADOW_SNEAK
+  passive = Passive.MIMIKYU
   attackSprite = AttackSprite.FAIRY_MELEE
+}
+
+export class MimikyuBusted extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.FAIRY])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 20
+  def = 5
+  speDef = 6
+  maxPP = 40
+  range = 1
+  skill = Ability.SHADOW_SNEAK
+  passive = Passive.MIMIKYU_BUSTED
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Bonsley extends Pokemon {
@@ -9578,19 +9587,15 @@ export class Shuckle extends Pokemon {
 }
 
 export class Tepig extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.FIRE,
-    Synergy.FIGHTING,
-    Synergy.FIELD
-  ])
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIGHTING])
   rarity = Rarity.HATCH
   stars = 1
   evolution = Pkm.PIGNITE
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 80
-  atk = 5
-  def = 4
-  speDef = 2
+  atk = 8
+  def = 3
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.IRON_TAIL
@@ -9599,19 +9604,15 @@ export class Tepig extends Pokemon {
 }
 
 export class Pignite extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.FIRE,
-    Synergy.FIGHTING,
-    Synergy.FIELD
-  ])
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIGHTING])
   rarity = Rarity.HATCH
   stars = 2
   evolution = Pkm.EMBOAR
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 140
-  atk = 12
+  atk = 14
   def = 5
-  speDef = 2
+  speDef = 5
   maxPP = 100
   range = 1
   skill = Ability.IRON_TAIL
@@ -9620,17 +9621,13 @@ export class Pignite extends Pokemon {
 }
 
 export class Emboar extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.FIRE,
-    Synergy.FIGHTING,
-    Synergy.FIELD
-  ])
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIGHTING])
   rarity = Rarity.HATCH
   stars = 3
   hp = 220
-  atk = 18
-  def = 6
-  speDef = 2
+  atk = 24
+  def = 7
+  speDef = 7
   maxPP = 100
   range = 1
   skill = Ability.IRON_TAIL
@@ -9752,7 +9749,7 @@ export class Tinkatink extends Pokemon {
   atk = 11
   def = 3
   speDef = 3
-  maxPP = 150
+  maxPP = 120
   range = 1
   skill = Ability.GIGATON_HAMMER
   attackSprite = AttackSprite.FAIRY_MELEE
@@ -9767,7 +9764,7 @@ export class Tinkatuff extends Pokemon {
   atk = 22
   def = 4
   speDef = 4
-  maxPP = 150
+  maxPP = 120
   range = 1
   skill = Ability.GIGATON_HAMMER
   attackSprite = AttackSprite.FAIRY_MELEE
@@ -9781,7 +9778,7 @@ export class Tinkaton extends Pokemon {
   atk = 44
   def = 8
   speDef = 8
-  maxPP = 150
+  maxPP = 120
   range = 1
   skill = Ability.GIGATON_HAMMER
   attackSprite = AttackSprite.FAIRY_MELEE
@@ -9931,10 +9928,10 @@ export class Sableye extends Pokemon {
   atk = 12
   def = 5
   speDef = 5
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.KNOCK_OFF
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.DARK_MELEE
 }
 
 export class Koffing extends Pokemon {
@@ -10235,7 +10232,7 @@ export class Purrloin extends Pokemon {
   range = 1
   skill = Ability.ASSIST
   additional = true
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.DARK_MELEE
 }
 
 export class Liepard extends Pokemon {
@@ -10250,7 +10247,7 @@ export class Liepard extends Pokemon {
   range = 1
   skill = Ability.ASSIST
   additional = true
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.DARK_MELEE
 }
 
 export class Barboach extends Pokemon {
@@ -10824,7 +10821,7 @@ export class Nihilego extends Pokemon {
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 200
-  atk = 30
+  atk = 25
   def = 1
   speDef = 5
   maxPP = 80
@@ -10982,7 +10979,7 @@ export class HoopaUnbound extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HYPERSPACE_FURY
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.DARK_MELEE
 }
 
 export class Gimmighoul extends Pokemon {
@@ -11922,6 +11919,7 @@ export const PokemonClasses: Record<
   [Pkm.HITMONCHAN]: Hitmonchan,
   [Pkm.HITMONTOP]: Hitmontop,
   [Pkm.MIMIKYU]: Mimikyu,
+  [Pkm.MIMIKYU_BUSTED]: MimikyuBusted,
   [Pkm.GRIMER]: Grimer,
   [Pkm.MUK]: Muk,
   [Pkm.ALOLAN_GRIMER]: AlolanGrimer,

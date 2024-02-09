@@ -1,11 +1,12 @@
 import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema"
-import { sendAt } from "cron"
+import { CronTime } from "cron"
 import { nanoid } from "nanoid"
 import LobbyUser from "../../models/colyseus-models/lobby-user"
 import Message from "../../models/colyseus-models/message"
 import chatV2 from "../../models/mongo-models/chat-v2"
 import {
   GREATBALL_RANKED_LOBBY_CRON,
+  SCRIBBLE_LOBBY_CRON,
   ULTRABALL_RANKED_LOBBY_CRON
 } from "../../types/Config"
 import { SpecialLobbyType } from "../../types/enum/Game"
@@ -13,7 +14,7 @@ import { SpecialLobbyType } from "../../types/enum/Game"
 export default class LobbyState extends Schema {
   @type([Message]) messages = new ArraySchema<Message>()
   @type({ map: LobbyUser }) users = new MapSchema<LobbyUser>()
-  @type("number") nextSpecialLobbyDate: number = 0
+  @type("string") nextSpecialLobbyDate: string = ""
   @type("string") nextSpecialLobbyType: SpecialLobbyType | "" = ""
 
   addMessage(
@@ -64,21 +65,26 @@ export default class LobbyState extends Schema {
   }
 
   getNextSpecialLobbyDate() {
-    const nextGreatBallRanked = sendAt(
-      GREATBALL_RANKED_LOBBY_CRON
-    ).toUnixInteger()
-    const nextUltraBallRanked = sendAt(
-      ULTRABALL_RANKED_LOBBY_CRON
-    ).toUnixInteger()
-    this.nextSpecialLobbyDate = Math.min(
+    const getNextDate = (t: string) =>
+      new CronTime(t, "Europe/Paris").sendAt().toUnixInteger()
+    const nextGreatBallRanked = getNextDate(GREATBALL_RANKED_LOBBY_CRON)
+    const nextUltraBallRanked = getNextDate(ULTRABALL_RANKED_LOBBY_CRON)
+    const nextScribble = getNextDate(SCRIBBLE_LOBBY_CRON)
+    const nextSpecialLobbyDateInt = Math.min(
       nextGreatBallRanked,
-      nextUltraBallRanked
+      nextUltraBallRanked,
+      nextScribble
     )
+    this.nextSpecialLobbyDate = new Date(
+      nextSpecialLobbyDateInt * 1000
+    ).toISOString()
 
-    if (this.nextSpecialLobbyDate === nextGreatBallRanked) {
+    if (nextSpecialLobbyDateInt === nextGreatBallRanked) {
       this.nextSpecialLobbyType = "GREATBALL_RANKED"
-    } else if (this.nextSpecialLobbyDate === nextUltraBallRanked) {
+    } else if (nextSpecialLobbyDateInt === nextUltraBallRanked) {
       this.nextSpecialLobbyType = "ULTRABALL_RANKED"
+    } else if (nextSpecialLobbyDateInt === nextScribble) {
+      this.nextSpecialLobbyType = "SCRIBBLE"
     }
   }
 }

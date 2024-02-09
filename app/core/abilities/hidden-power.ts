@@ -12,6 +12,7 @@ import { PokemonEntity } from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
 import { AbilityStrategies } from "./abilities"
 import { AbilityStrategy } from "./ability-strategy"
+import { getFirstAvailablePositionInBench } from "../../utils/board"
 
 export class HiddenPowerStrategy extends AbilityStrategy {
   copyable = false
@@ -71,7 +72,7 @@ export class HiddenPowerBStrategy extends HiddenPowerStrategy {
     super.process(unown, state, board, target, crit)
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
       if (enemy && unown.team != enemy.team) {
-        enemy.status.triggerBurn(30000, enemy, unown, board)
+        enemy.status.triggerBurn(30000, enemy, unown)
       }
     })
   }
@@ -110,7 +111,7 @@ export class HiddenPowerDStrategy extends HiddenPowerStrategy {
     super.process(unown, state, board, target, crit)
     const player = unown.player
     if (player) {
-      const x = player.getFirstAvailablePositionInBench()
+      const x = getFirstAvailablePositionInBench(player.board)
       if (x !== undefined) {
         const ditto = PokemonFactory.createPokemonFromName(Pkm.DITTO, player)
         ditto.positionX = x
@@ -133,7 +134,7 @@ export class HiddenPowerEStrategy extends HiddenPowerStrategy {
     const egg = PokemonFactory.createRandomEgg()
     const player = unown.player
     if (player) {
-      const x = player.getFirstAvailablePositionInBench()
+      const x = getFirstAvailablePositionInBench(player.board)
       if (x !== undefined) {
         egg.positionX = x
         egg.positionY = 0
@@ -164,7 +165,7 @@ export class HiddenPowerFStrategy extends HiddenPowerStrategy {
           fishingLevel
         )
         const fish = PokemonFactory.createPokemonFromName(pkm, player)
-        const x = player.getFirstAvailablePositionInBench()
+        const x = getFirstAvailablePositionInBench(player.board)
         if (x !== undefined) {
           fish.positionX = x
           fish.positionY = 0
@@ -581,7 +582,7 @@ export class HiddenPowerWStrategy extends HiddenPowerStrategy {
     super.process(unown, state, board, target, crit)
     const player = unown.player
     if (player) {
-      const x = player.getFirstAvailablePositionInBench()
+      const x = getFirstAvailablePositionInBench(player.board)
       if (x !== undefined) {
         const synergiesSortedByLevel = Array.from(player.synergies).sort(
           ([s1, v1], [s2, v2]) => v2 - v1
@@ -700,7 +701,7 @@ export class HiddenPowerQMStrategy extends HiddenPowerStrategy {
       const nbUnownsObtained = 4
       for (let i = 0; i < nbUnownsObtained; i++) {
         const pkm = pickRandomIn(candidates)
-        const x = player.getFirstAvailablePositionInBench()
+        const x = getFirstAvailablePositionInBench(player.board)
         if (x !== undefined) {
           const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
           pokemon.positionX = x

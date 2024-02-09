@@ -1,21 +1,26 @@
 import { t } from "i18next"
 import { GameObjects } from "phaser"
 import Player from "../../../../models/colyseus-models/player"
+import { isOnBench } from "../../../../models/colyseus-models/pokemon"
 import { PokemonAvatarModel } from "../../../../models/colyseus-models/pokemon-avatar"
+import GameState from "../../../../rooms/states/game-state"
 import { IPokemon, Transfer } from "../../../../types"
 import { SynergyTriggers } from "../../../../types/Config"
 import {
   GamePhaseState,
+  LobbyType,
   Orientation,
   PokemonActionState
 } from "../../../../types/enum/Game"
-import { AnimationConfig } from "../../../../types/enum/Pokemon"
+import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
+import { SpecialLobbyRule } from "../../../../types/enum/SpecialLobbyRule"
 import { Synergy } from "../../../../types/enum/Synergy"
 import { transformCoordinate } from "../../pages/utils/utils"
 import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
-import Pokemon from "./pokemon"
+import PokemonSprite from "./pokemon"
 import PokemonAvatar from "./pokemon-avatar"
+import PokemonSpecial from "./pokemon-special"
 
 export enum BoardMode {
   PICK = "pick",
@@ -24,7 +29,7 @@ export enum BoardMode {
 }
 
 export default class BoardManager {
-  pokemons: Map<string, Pokemon>
+  pokemons: Map<string, PokemonSprite>
   uid: string
   scene: GameScene
   player: Player
@@ -38,23 +43,27 @@ export default class BoardManager {
   lightY: number
   lightCell: Phaser.GameObjects.Sprite | null
   berryTree: Phaser.GameObjects.Sprite | null
+  lobbyType: LobbyType
+  smeargle: PokemonSprite | null = null
+  specialLobbyRule: SpecialLobbyRule | null = null
 
   constructor(
     scene: GameScene,
     player: Player,
     animationManager: AnimationManager,
     uid: string,
-    lightX: number,
-    lightY: number
+    state: GameState
   ) {
-    this.lightX = lightX
-    this.lightY = lightY
-    this.pokemons = new Map<string, Pokemon>()
+    this.pokemons = new Map<string, PokemonSprite>()
     this.uid = uid
     this.scene = scene
     this.player = player
     this.mode = BoardMode.PICK
     this.animationManager = animationManager
+    this.lightX = state.lightX
+    this.lightY = state.lightY
+    this.lobbyType = state.lobbyType
+    this.specialLobbyRule = state.specialLobbyRule
     this.renderBoard()
 
     if (this.scene.room?.state.phase == GamePhaseState.FIGHT) {
@@ -128,7 +137,7 @@ export default class BoardManager {
     }
   }
 
-  addPokemonSprite(pokemon: IPokemon): Pokemon {
+  addPokemonSprite(pokemon: IPokemon): PokemonSprite {
     if (this.pokemons.has(pokemon.id)) {
       return this.pokemons.get(pokemon.id)!
     }
@@ -136,7 +145,7 @@ export default class BoardManager {
       pokemon.positionX,
       pokemon.positionY
     )
-    const pokemonUI = new Pokemon(
+    const pokemonUI = new PokemonSprite(
       this.scene,
       coordinates[0],
       coordinates[1],
@@ -166,9 +175,20 @@ export default class BoardManager {
     this.pokemons.clear()
     if (this.mode === BoardMode.PICK) {
       this.showLightCell()
-      this.player.board.forEach((pokemon) => {
+    }
+
+    this.player.board.forEach((pokemon) => {
+      if (this.mode === BoardMode.PICK || isOnBench(pokemon)) {
         this.addPokemonSprite(pokemon)
-      })
+      }
+    })
+
+    if (this.lobbyType === LobbyType.SCRIBBLE) {
+      if (this.smeargle) {
+        this.smeargle.destroy()
+        this.smeargle = null
+      }
+      this.addSmeargle()
     }
   }
 
@@ -283,8 +303,7 @@ export default class BoardManager {
       504,
       696,
       playerAvatar,
-      this.player.id,
-      this.animationManager
+      this.player.id
     )
     this.playerAvatar.orientation = Orientation.UPRIGHT
     this.playerAvatar.updateLife(this.player.life)
@@ -334,8 +353,7 @@ export default class BoardManager {
         1512,
         122,
         opponentAvatar,
-        opponentId,
-        this.animationManager
+        opponentId
       )
       this.opponentAvatar.disableInteractive()
       this.opponentAvatar.orientation = Orientation.DOWNLEFT
@@ -363,7 +381,7 @@ export default class BoardManager {
     this.mode = BoardMode.BATTLE
     this.hideLightCell()
     this.pokemons.forEach((pokemon) => {
-      if (pokemon.positionY != 0) {
+      if (!pokemon.isOnBench) {
         pokemon.destroy()
         this.pokemons.delete(pokemon.id)
       }
@@ -399,9 +417,6 @@ export default class BoardManager {
 
   setPlayer(player: Player) {
     if (player.id != this.player.id) {
-      this.pokemons.forEach((pokemon) => {
-        pokemon.destroy()
-      })
       this.player = player
       this.renderBoard()
       this.updatePlayerAvatar()
@@ -447,7 +462,7 @@ export default class BoardManager {
           )
           pokemonUI.x = coordinates[0]
           pokemonUI.y = coordinates[1]
-          if (pokemonUI.positionY != 0 && this.mode == "battle") {
+          if (this.mode === BoardMode.BATTLE && !pokemonUI.isOnBench) {
             pokemonUI.destroy()
             this.pokemons.delete(pokemonUI.id)
           }
@@ -501,5 +516,16 @@ export default class BoardManager {
         player.drawSpeechBubble(emote, false)
       }
     }
+  }
+
+  addSmeargle() {
+    this.smeargle = new PokemonSpecial(
+      this.scene,
+      1512,
+      396,
+      Pkm.SMEARGLE,
+      this.animationManager,
+      this.specialLobbyRule
+    )
   }
 }

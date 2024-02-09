@@ -75,10 +75,11 @@ export default class PreparationRoom extends Room<PreparationState> {
     roomName: string
     minRank?: EloRank
     lobbyType: LobbyType
+    noElo?: boolean
     autoStartDelayInSeconds?: number
   }) {
     // logger.debug(options);
-    logger.info(`create ${options.roomName}`)
+    //logger.info(`create ${options.roomName}`)
 
     // start the clock ticking
     this.clock.start()
@@ -86,7 +87,9 @@ export default class PreparationRoom extends Room<PreparationState> {
     // logger.debug(defaultRoomName);
     this.setState(new PreparationState(options))
     this.setMetadata(<IPreparationMetadata>{
-      minRank: options.minRank ?? null
+      minRank: options.minRank ?? null,
+      noElo: options.noElo ?? false,
+      lobbyType: options.lobbyType
     })
     this.maxClients = 8
     // if (options.ownerId) {
@@ -94,7 +97,7 @@ export default class PreparationRoom extends Room<PreparationState> {
     //     ownerId: options.ownerId
     //   })
     // }
-    if (options.lobbyType === LobbyType.RANKED) {
+    if (options.lobbyType !== LobbyType.NORMAL) {
       this.autoDispose = false
     }
 
@@ -307,18 +310,18 @@ export default class PreparationRoom extends Room<PreparationState> {
 
   onJoin(client: Client, options: any, auth: any) {
     if (client && client.auth && client.auth.displayName) {
-      logger.info(
+      /*logger.info(
         `${client.auth.displayName} ${client.id} join preparation room`
-      )
+      )*/
       this.dispatcher.dispatch(new OnJoinCommand(), { client, options, auth })
     }
   }
 
   async onLeave(client: Client, consented: boolean) {
     if (client && client.auth && client.auth.displayName) {
-      logger.info(
+      /*logger.info(
         `${client.auth.displayName} ${client.id} is leaving preparation room`
-      )
+      )*/
     }
     try {
       if (consented) {
@@ -328,16 +331,16 @@ export default class PreparationRoom extends Room<PreparationState> {
       await this.allowReconnection(client, 10)
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
-        logger.info(
+        /*logger.info(
           `${client.auth.displayName} ${client.id} leave preparation room`
-        )
+        )*/
       }
       this.dispatcher.dispatch(new OnLeaveCommand(), { client, consented })
     }
   }
 
   onDispose() {
-    logger.info("Dispose preparation room")
+    //logger.info("Dispose preparation room")
     this.dispatcher.stop()
   }
 

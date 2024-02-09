@@ -34,7 +34,8 @@ import {
 } from "../types/enum/Game"
 import { Berries, Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
-import { Pkm } from "../types/enum/Pokemon"
+import { Pkm, PkmIndex } from "../types/enum/Pokemon"
+import { SpecialLobbyRule } from "../types/enum/SpecialLobbyRule"
 import { Synergy, SynergyEffects } from "../types/enum/Synergy"
 import { distanceC } from "../utils/distance"
 import { clamp, max, min, roundTo2Digits } from "../utils/number"
@@ -274,8 +275,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         attacker.items.has(Item.POKEMONOMICON) &&
         attackType === AttackType.SPECIAL
       ) {
-        this.status.triggerBurn(3000, this, attacker, board)
-        this.status.triggerWound(3000, this, attacker, board)
+        this.status.triggerBurn(3000, this, attacker)
+        this.status.triggerWound(3000, this, attacker)
       }
       if (
         this.items.has(Item.POWER_LENS) &&
@@ -659,7 +660,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     // Synergy effects on hit
 
-    if (this.hasSynergyEffect(Synergy.ICE)) {
+    if (this.types.has(Synergy.ICE)) {
       let freezeChance = 0
       if (this.effects.has(Effect.CHILLY)) {
         freezeChance = 0.1
@@ -690,7 +691,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         this.addAttack(3)
       }
       if (chance(burnChance)) {
-        target.status.triggerBurn(2000, target, this, board)
+        target.status.triggerBurn(2000, target, this)
       }
     }
 
@@ -744,7 +745,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     // Ability effects on hit
     if (target.status.spikeArmor && this.range === 1) {
-      this.status.triggerWound(2000, this, target, board)
+      this.status.triggerWound(2000, this, target)
       this.handleDamage({
         damage: Math.round(target.def * (1 + target.ap / 100)),
         board,
@@ -904,6 +905,15 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.status.sleepCooldown > 0) {
       this.status.sleepCooldown -= 500
     }
+
+    // Other passives
+    if (this.passive === Passive.MIMIKYU && this.life / this.hp < 0.5) {
+      this.index = PkmIndex[Pkm.MIMIKYU_BUSTED]
+      this.name = Pkm.MIMIKYU_BUSTED
+      this.passive = Passive.MIMIKYU_BUSTED
+      this.addAttackSpeed(30)
+      this.status.triggerProtect(2000)
+    }
   }
 
   onCriticalAttack({ target, board }: { target: PokemonEntity; board: Board }) {
@@ -924,9 +934,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         } else if (pokemon.effects.has(Effect.FAIRY_WIND)) {
           damage = 30
         } else if (pokemon.effects.has(Effect.STRANGE_STEAM)) {
-          damage = 45
+          damage = 50
         } else if (pokemon.effects.has(Effect.MOON_FORCE)) {
-          damage = 60
+          damage = 70
         }
 
         const splashTarget = pokemon === this ? target : this
@@ -1354,4 +1364,15 @@ export function getUnitScore(pokemon: PokemonEntity | IPokemon) {
   score += 10 * pokemon.stars
   score += PokemonFactory.getSellPrice(pokemon.name)
   return score
+}
+
+export function canSell(
+  pkm: Pkm,
+  specialLobbyRule: SpecialLobbyRule | undefined | null
+) {
+  if (specialLobbyRule === SpecialLobbyRule.DITTO_PARTY && pkm === Pkm.DITTO) {
+    return false
+  }
+
+  return true
 }

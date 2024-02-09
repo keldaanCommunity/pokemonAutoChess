@@ -12,10 +12,14 @@ export enum Rarity {
 
 export enum LobbyType {
   NORMAL = "NORMAL",
-  RANKED = "RANKED"
+  RANKED = "RANKED",
+  SCRIBBLE = "SCRIBBLE"
 }
 
-export type SpecialLobbyType = "GREATBALL_RANKED" | "ULTRABALL_RANKED"
+export type SpecialLobbyType =
+  | "GREATBALL_RANKED"
+  | "ULTRABALL_RANKED"
+  | "SCRIBBLE"
 
 export enum GamePhaseState {
   PICK,

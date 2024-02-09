@@ -1,17 +1,14 @@
+import GameState from "../rooms/states/game-state"
 import { IPlayer } from "../types"
 import {
-  CommonShop,
   DITTO_RATE,
-  EpicShop,
   FishRarityProbability,
   NB_UNIQUE_PROPOSITIONS,
   PoolSize,
-  RareShop,
   RarityProbabilityPerLevel,
-  SHOP_SIZE,
-  UltraShop,
-  UncommonShop
+  SHOP_SIZE
 } from "../types/Config"
+import { Ability } from "../types/enum/Ability"
 import { Effect } from "../types/enum/Effect"
 import { Rarity } from "../types/enum/Game"
 import {
@@ -21,6 +18,7 @@ import {
   PkmFamily,
   PkmProposition
 } from "../types/enum/Pokemon"
+import { SpecialLobbyRule } from "../types/enum/SpecialLobbyRule"
 import { Synergy } from "../types/enum/Synergy"
 import { removeInArray } from "../utils/array"
 import { logger } from "../utils/logger"
@@ -29,10 +27,30 @@ import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
 import Player from "./colyseus-models/player"
 import PokemonFactory from "./pokemon-factory"
+import { PRECOMPUTED_POKEMONS_PER_RARITY } from "./precomputed"
 
 export function getPoolSize(rarity: Rarity, maxStars: number): number {
   return PoolSize[rarity][clamp(maxStars, 1, 3) - 1]
 }
+
+function getRegularsTier1(pokemons: Pkm[]) {
+  return pokemons.filter((p) => {
+    const pokemon = PokemonFactory.createPokemonFromName(p)
+    return (
+      pokemon.stars === 1 &&
+      pokemon.skill !== Ability.DEFAULT &&
+      !pokemon.additional
+    )
+  })
+}
+
+const CommonShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.COMMON)
+const UncommonShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.UNCOMMON)
+const RareShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.RARE)
+const EpicShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.EPIC)
+const UltraShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.ULTRA)
+
+console.log({ CommonShop, UncommonShop, RareShop, EpicShop, UltraShop })
 
 export default class Shop {
   commonPool: Map<Pkm, number> = new Map<Pkm, number>()
@@ -123,13 +141,13 @@ export default class Shop {
     }
   }
 
-  refillShop(player: Player, stageLevel: number) {
+  refillShop(player: Player, state: GameState) {
     // No need to release pokemons since they won't be changed
     const PkmList = player.shop.map((pokemon) => {
       if (pokemon != Pkm.MAGIKARP && pokemon != Pkm.DEFAULT) {
         return pokemon
       }
-      return this.pickPokemon(player, stageLevel)
+      return this.pickPokemon(player, state)
     })
 
     for (let i = 0; i < SHOP_SIZE; i++) {
@@ -137,17 +155,17 @@ export default class Shop {
     }
   }
 
-  assignShop(player: Player, manualRefresh: boolean, stageLevel: number) {
+  assignShop(player: Player, manualRefresh: boolean, state: GameState) {
     player.shop.forEach((pkm) => this.releasePokemon(pkm))
 
     if (player.effects.has(Effect.EERIE_SPELL) && !manualRefresh) {
-      const unowns = getUnownsPoolPerStage(stageLevel)
+      const unowns = getUnownsPoolPerStage(state.stageLevel)
       for (let i = 0; i < SHOP_SIZE; i++) {
         player.shop[i] = pickRandomIn(unowns)
       }
     } else {
       for (let i = 0; i < SHOP_SIZE; i++) {
-        player.shop[i] = this.pickPokemon(player, stageLevel)
+        player.shop[i] = this.pickPokemon(player, state)
       }
     }
   }
@@ -211,14 +229,17 @@ export default class Shop {
     return pkm
   }
 
-  pickPokemon(player: Player, stageLevel: number) {
+  pickPokemon(player: Player, state: GameState) {
     const rarityProbability =
       RarityProbabilityPerLevel[player.experienceManager.level]
     const rarity_seed = Math.random()
     let pokemon = Pkm.MAGIKARP
     let threshold = 0
 
-    if (chance(DITTO_RATE)) {
+    if (
+      state.specialLobbyRule !== SpecialLobbyRule.DITTO_PARTY &&
+      chance(DITTO_RATE)
+    ) {
       return Pkm.DITTO
     }
 
@@ -228,7 +249,7 @@ export default class Shop {
         player.effects.has(Effect.EERIE_SPELL)) &&
       chance(UNOWN_RATE)
     ) {
-      const unowns = getUnownsPoolPerStage(stageLevel)
+      const unowns = getUnownsPoolPerStage(state.stageLevel)
       return pickRandomIn(unowns)
     }
 

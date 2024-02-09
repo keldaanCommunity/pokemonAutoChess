@@ -43,10 +43,25 @@ export function SpecialLobbyCountdown() {
         src={"/assets/ranks/" + EloRank.ULTRABALL + ".svg"}
       />
     )
+  } else if (nextSpecialLobbyType === "SCRIBBLE") {
+    specialLobbyName = t("smeargle_scribble")
+    specialLobbyIcon = (
+      <img
+        alt={t("smeargle_scribble")}
+        title={t("smeargle_scribble_hint")}
+        className="scribble icon"
+        src={"/assets/ui/scribble.png"}
+        style={{ borderRadius: "50%" }}
+      />
+    )
   }
 
-  const timeUntilNext =
-    nextSpecialLobbyDate - Math.floor(clock.getTime() / 1000)
+  let timeUntilNext = -1
+  if (nextSpecialLobbyDate) {
+    timeUntilNext = Math.floor(
+      (new Date(nextSpecialLobbyDate).getTime() - clock.getTime()) / 1000
+    )
+  }
 
   return nextSpecialLobbyDate && nextSpecialLobbyType && timeUntilNext > 0 ? (
     <p className="special-lobby-announcement">

@@ -8,12 +8,12 @@ import GameLock from "./game-lock"
 import { GameMoneyInfo } from "./game-money-info"
 import GameRarityPercentage from "./game-rarity-percentage"
 import GameRefresh from "./game-refresh"
-import "./game-shop.css"
 import GameStore from "./game-store"
 import { GameTeamInfo } from "./game-team-info"
+import "./game-shop.css"
 
 export default function GameShop() {
-  useAppSelector((state) => state.game.money) // required for reactivity
+  useAppSelector((state) => [state.game.money, state.game.shop]) // required for reactivity
   return (
     <>
       <div className="game-shop nes-container">

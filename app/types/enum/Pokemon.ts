@@ -516,6 +516,7 @@ export enum Pkm {
   HITMONCHAN = "HITMONCHAN",
   HITMONTOP = "HITMONTOP",
   MIMIKYU = "MIMIKYU",
+  MIMIKYU_BUSTED = "MIMIKYU_BUSTED",
   GRIMER = "GRIMER",
   MUK = "MUK",
   ALOLAN_GRIMER = "ALOLAN_GRIMER",
@@ -1207,6 +1208,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.HITMONCHAN]: "0107",
   [Pkm.HITMONTOP]: "0237",
   [Pkm.MIMIKYU]: "0778",
+  [Pkm.MIMIKYU_BUSTED]: "0778-0001",
   [Pkm.GRIMER]: "0088",
   [Pkm.MUK]: "0089",
   [Pkm.SHARPEDO]: "0319",
@@ -1330,8 +1332,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.DODRIO]: "0085",
   [Pkm.XURKITREE]: "0796",
   [Pkm.TANDEMAUS]: "0924",
-  [Pkm.MAUSHOLD_THREE]: "0925",
-  [Pkm.MAUSHOLD_FOUR]: "0925-0001",
+  [Pkm.MAUSHOLD_THREE]: "0925-0001",
+  [Pkm.MAUSHOLD_FOUR]: "0925",
   [Pkm.KRICKETOT]: "0401",
   [Pkm.KRICKETUNE]: "0402",
   [Pkm.HIPPOPOTAS]: "0449",
@@ -1598,8 +1600,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.SPIRITOMB]: Pkm.SPIRITOMB,
   [Pkm.ABSOL]: Pkm.ABSOL,
   [Pkm.LAPRAS]: Pkm.LAPRAS,
-  [Pkm.LATIAS]: Pkm.LATIOS,
-  [Pkm.LATIOS]: Pkm.LATIOS,
+  [Pkm.LATIAS]: Pkm.LATIAS,
+  [Pkm.LATIOS]: Pkm.LATIOS, // not the same family than latias so they count as two for their synergies
   [Pkm.MESPRIT]: Pkm.MESPRIT,
   [Pkm.AZELF]: Pkm.AZELF,
   [Pkm.UXIE]: Pkm.UXIE,
@@ -1896,6 +1898,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.HITMONCHAN]: Pkm.TYROGUE,
   [Pkm.HITMONTOP]: Pkm.TYROGUE,
   [Pkm.MIMIKYU]: Pkm.MIMIKYU,
+  [Pkm.MIMIKYU_BUSTED]: Pkm.MIMIKYU,
   [Pkm.GRIMER]: Pkm.GRIMER,
   [Pkm.MUK]: Pkm.GRIMER,
   [Pkm.SHARPEDO]: Pkm.CARVANHA,
@@ -2059,7 +2062,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.TREVENANT]: Pkm.PHANTUMP,
   [Pkm.SMEARGLE]: Pkm.SMEARGLE,
   [Pkm.TOXEL]: Pkm.TOXEL,
-  [Pkm.TOXTRICITY]: Pkm.TOXTRICITY,
+  [Pkm.TOXTRICITY]: Pkm.TOXEL,
   [Pkm.BRUXISH]: Pkm.BRUXISH,
   [Pkm.SUBSTITUTE]: Pkm.SUBSTITUTE,
   [Pkm.CYCLIZAR]: Pkm.CYCLIZAR,
@@ -4770,8 +4773,13 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.MIMIKYU]: {
-    attack: AnimationType.Attack,
-    ability: AnimationType.Attack,
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.MIMIKYU_BUSTED]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
   [Pkm.GRIMER]: {
@@ -5026,18 +5034,18 @@ export const AnimationConfig: {
   },
   [Pkm.TINKATINK]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Charge,
-    emote: AnimationType.Shoot
+    ability: AnimationType.Strike,
+    emote: AnimationType.Strike
   },
   [Pkm.TINKATUFF]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Charge,
-    emote: AnimationType.Shoot
+    ability: AnimationType.Strike,
+    emote: AnimationType.Strike
   },
   [Pkm.TINKATON]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Twirl,
-    emote: AnimationType.Shoot
+    ability: AnimationType.Attack,
+    emote: AnimationType.Cringe
   },
   [Pkm.PARAS]: {
     attack: AnimationType.Attack,
@@ -5584,7 +5592,8 @@ export const AnimationConfig: {
   [Pkm.TOXEL]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
   },
   [Pkm.TOXTRICITY]: {
     attack: AnimationType.Attack,
@@ -5605,7 +5614,8 @@ export const AnimationConfig: {
   [Pkm.CYCLIZAR]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Charge
+    emote: AnimationType.Charge,
+    shinyUnavailable: true
   },
   [Pkm.PAWNIARD]: {
     attack: AnimationType.Strike,
@@ -5625,7 +5635,7 @@ export const AnimationConfig: {
   [Pkm.MINIOR]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Charge,
+    emote: AnimationType.Charge
   },
   [Pkm.MINIOR_KERNEL_RED]: {
     attack: AnimationType.Attack,

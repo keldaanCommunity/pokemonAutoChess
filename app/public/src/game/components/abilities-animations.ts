@@ -10,12 +10,12 @@ import { randomBetween } from "../../../../utils/random"
 import { transformAttackCoordinate } from "../../pages/utils/utils"
 import { DebugScene } from "../scenes/debug-scene"
 import GameScene from "../scenes/game-scene"
-import Pokemon from "./pokemon"
+import PokemonSprite from "./pokemon"
 import { UNOWNS_PER_ABILITY } from "./unown-manager"
 
 export function displayAbility(
   scene: GameScene | DebugScene,
-  pokemonsOnBoard: Pokemon[],
+  pokemonsOnBoard: PokemonSprite[],
   skill: Ability | string,
   orientation: Orientation,
   positionX: number,
@@ -522,7 +522,7 @@ export function displayAbility(
       break
 
     case Ability.SLACK_OFF:
-      addAbilitySprite(skill, coordinates, true).setScale(2)
+      addAbilitySprite(Ability.ILLUSION, coordinates, true).setScale(1)
       break
 
     case Ability.ROCK_SMASH:
@@ -899,7 +899,7 @@ export function displayAbility(
       break
 
     case Ability.MAGNET_RISE:
-      addAbilitySprite(skill, coordinates, true).setScale(2)
+      addAbilitySprite(Ability.ELECTRO_BOOST, coordinates, true).setScale(2)
       break
 
     case Ability.ANCHOR_SHOT:
@@ -1486,8 +1486,8 @@ export function displayAbility(
     case Ability.MIST_BALL: {
       const [dx, dy] = OrientationVector[orientation]
       const finalCoords = transformAttackCoordinate(
-        positionX + dx * 5,
-        positionY + dy * 5,
+        positionX + dx * 4,
+        positionY + dy * 4,
         flip
       )
       const specialProjectile = addAbilitySprite(skill, coordinates).setScale(1)
@@ -1643,7 +1643,7 @@ export function displayAbility(
       })
 
       addAbilitySprite(
-        "SNIPE_SHOT/shot",
+        "SNIPE_SHOT/shoot",
         [
           coordinates[0] + Math.round(Math.cos(targetAngle) * 50),
           coordinates[1] + Math.round(Math.sin(targetAngle) * 50)
@@ -1753,6 +1753,13 @@ export function displayAbility(
       addAbilitySprite(Ability.DIVE, coordinates, true).setDepth(0).setScale(1)
       break
 
+    case "EVOLUTION":
+      addAbilitySprite("EVOLUTION", coordinates, true)
+        .setOrigin(0.5, -0.4)
+        .setDepth(0)
+        .setScale(2)
+      break
+
     default:
       break
   }
@@ -1770,7 +1777,7 @@ export function hiddenPowerAnimation(
   const letters = UNOWNS_PER_ABILITY.get(skill)
   for (let n = 0; n < 8; n++) {
     letters?.forEach((letter, i) => {
-      const unown = new Pokemon(
+      const unown = new PokemonSprite(
         scene,
         x,
         y,

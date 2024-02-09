@@ -527,7 +527,7 @@ export default class Simulation extends Schema implements ISimulation {
               pokemon.positionY
             )
             if (value) {
-              value.addAttackSpeed(25)
+              value.addAttackSpeed(20)
             }
           })
         }
@@ -549,8 +549,7 @@ export default class Simulation extends Schema implements ISimulation {
           pokemon.status.triggerBurn(
             60000,
             pokemon as PokemonEntity,
-            pokemon as PokemonEntity,
-            this.board
+            pokemon as PokemonEntity
           )
         }
 
@@ -985,14 +984,14 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.MOUTAIN_RESISTANCE:
           if (types.has(Synergy.ROCK)) {
-            pokemon.addDefense(10)
+            pokemon.addDefense(15)
             pokemon.effects.add(Effect.MOUTAIN_RESISTANCE)
           }
           break
 
         case Effect.DIAMOND_STORM:
           if (types.has(Synergy.ROCK)) {
-            pokemon.addDefense(20)
+            pokemon.addDefense(30)
             pokemon.effects.add(Effect.DIAMOND_STORM)
           }
           break
@@ -1030,7 +1029,7 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.CHILLY:
           pokemon.effects.add(Effect.FROSTY)
-          pokemon.addSpecialDefense(3)
+          pokemon.addSpecialDefense(2)
           break
 
         case Effect.FROSTY:
@@ -1040,12 +1039,12 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.FREEZING:
           pokemon.effects.add(Effect.FROSTY)
-          pokemon.addSpecialDefense(12)
+          pokemon.addSpecialDefense(20)
           break
 
         case Effect.SHEER_COLD:
           pokemon.effects.add(Effect.SHEER_COLD)
-          pokemon.addSpecialDefense(24)
+          pokemon.addSpecialDefense(30)
           break
 
         case Effect.POISONOUS:
@@ -1142,8 +1141,8 @@ export default class Simulation extends Schema implements ISimulation {
           if (pokemon.inLightCell) {
             pokemon.status.light = true
             pokemon.effects.add(Effect.SHINING_RAY)
-            pokemon.addAttack(Math.ceil(pokemon.atk * 0.3), false)
-            pokemon.addAbilityPower(30, false)
+            pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), false)
+            pokemon.addAbilityPower(20, false)
           }
           break
 
@@ -1151,8 +1150,8 @@ export default class Simulation extends Schema implements ISimulation {
           if (pokemon.inLightCell) {
             pokemon.status.light = true
             pokemon.effects.add(Effect.LIGHT_PULSE)
-            pokemon.addAttack(Math.ceil(pokemon.atk * 0.3), false)
-            pokemon.addAbilityPower(30, false)
+            pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), false)
+            pokemon.addAbilityPower(20, false)
           }
           break
 
@@ -1160,11 +1159,11 @@ export default class Simulation extends Schema implements ISimulation {
           if (pokemon.inLightCell) {
             pokemon.status.light = true
             pokemon.effects.add(Effect.ETERNAL_LIGHT)
-            pokemon.addAttack(Math.ceil(pokemon.atk * 0.25), false)
-            pokemon.addAbilityPower(25, false)
+            pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), false)
+            pokemon.addAbilityPower(20, false)
             pokemon.status.triggerRuneProtect(10000)
             pokemon.addDefense(0.5 * pokemon.baseDef)
-            pokemon.addSpecialDefense(0.3 * pokemon.baseSpeDef)
+            pokemon.addSpecialDefense(0.5 * pokemon.baseSpeDef)
           }
           break
 
@@ -1172,10 +1171,11 @@ export default class Simulation extends Schema implements ISimulation {
           if (pokemon.inLightCell) {
             pokemon.status.light = true
             pokemon.effects.add(Effect.MAX_ILLUMINATION)
-            pokemon.addAttack(Math.ceil(pokemon.atk * 0.3), false)
-            pokemon.addAbilityPower(30, false)
+            pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), false)
+            pokemon.addAbilityPower(20, false)
             pokemon.status.triggerRuneProtect(10000)
-            pokemon.addAttackSpeed(30, false)
+            pokemon.addDefense(0.5 * pokemon.baseDef)
+            pokemon.addSpecialDefense(0.5 * pokemon.baseSpeDef)
             pokemon.addShield(100, pokemon)
             pokemon.status.resurection = true
           }

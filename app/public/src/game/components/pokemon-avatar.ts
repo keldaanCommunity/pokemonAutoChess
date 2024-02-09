@@ -6,27 +6,24 @@ import { playSound, SOUNDS } from "../../pages/utils/audio"
 import store from "../../stores"
 import { toggleAnimation } from "../../stores/NetworkStore"
 import { getAvatarSrc } from "../../utils"
-import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
 import EmoteMenu from "./emote-menu"
 import LifeBar from "./life-bar"
-import Pokemon from "./pokemon"
+import PokemonSprite from "./pokemon"
 
-export default class PokemonAvatar extends Pokemon {
+export default class PokemonAvatar extends PokemonSprite {
   circleHitbox: GameObjects.Ellipse | undefined
   circleTimer: GameObjects.Graphics
   isCurrentPlayerAvatar: boolean
   emoteBubble: EmoteBubble | null
   emoteMenu: EmoteMenu | null
-  animationManager: AnimationManager
 
   constructor(
     scene: GameScene,
     x: number,
     y: number,
     pokemon: IPokemonAvatar,
-    playerId: string,
-    animationManager: AnimationManager
+    playerId: string
   ) {
     super(
       scene,
@@ -49,7 +46,6 @@ export default class PokemonAvatar extends Pokemon {
     } else {
       this.drawLifebar()
     }
-    this.animationManager = animationManager
     this.registerKeys()
   }
 

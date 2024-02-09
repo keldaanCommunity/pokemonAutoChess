@@ -545,6 +545,9 @@ class GameContainer {
       if (pokemonUI && pokemon.action === PokemonActionState.FISH) {
         pokemonUI.fishingAnimation()
       }
+      if (pokemonUI && pokemon.stars > 1) {
+        pokemonUI.evolutionAnimation()
+      }
     }
   }
 
@@ -596,10 +599,6 @@ class GameContainer {
 
   onDragDropItem(event: CustomEvent<IDragDropItemMessage>) {
     this.room.send(Transfer.DRAG_DROP_ITEM, event.detail)
-  }
-
-  onSellDrop(event: CustomEvent<{ pokemonId: string }>) {
-    this.room.send(Transfer.SELL_DROP, event.detail)
   }
 
   transformToSimplePlayer(player: IPlayer): ISimplePlayer {

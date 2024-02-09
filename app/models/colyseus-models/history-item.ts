@@ -23,8 +23,4 @@ export default class HistoryItem extends Schema {
     this.avatar = avatar
     this.weather = weather
   }
-
-  get isPVE(): boolean {
-    return this.id === "pve"
-  }
 }

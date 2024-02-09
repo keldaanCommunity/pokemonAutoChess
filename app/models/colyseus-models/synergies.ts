@@ -55,17 +55,6 @@ export function computeSynergies(board: IPokemon[]): Map<Synergy, number> {
     })
   })
 
-  // apply dragon double synergies
-  if (
-    (synergies.get(Synergy.DRAGON) ?? 0) >= SynergyTriggers[Synergy.DRAGON][0]
-  ) {
-    dragonDoubleTypes.forEach((types) => {
-      types.forEach((type, i) => {
-        synergies.set(type, (synergies.get(type) ?? 0) + 1)
-      })
-    })
-  }
-
   // add dynamic synergies (Arceus & Kecleon)
   board.forEach((pkm: IPokemon) => {
     if (
@@ -79,13 +68,24 @@ export function computeSynergies(board: IPokemon[]): Map<Synergy, number> {
 
       for (let i = 0; i < n; i++) {
         const type = synergiesSorted.shift()
-        if (type) {
+        if (type && !pkm.types.has(type) && synergies.get(type)! > 0) {
           pkm.types.add(type)
           synergies.set(type, (synergies.get(type) ?? 0) + 1)
         }
       }
     }
   })
+
+  // apply dragon double synergies
+  if (
+    (synergies.get(Synergy.DRAGON) ?? 0) >= SynergyTriggers[Synergy.DRAGON][0]
+  ) {
+    dragonDoubleTypes.forEach((types) => {
+      types.forEach((type, i) => {
+        synergies.set(type, (synergies.get(type) ?? 0) + 1)
+      })
+    })
+  }
 
   return synergies
 }

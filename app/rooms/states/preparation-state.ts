@@ -33,6 +33,7 @@ export default class PreparationState
     ownerId?: string
     roomName: string
     minRank?: EloRank
+    noElo?: boolean
     lobbyType: LobbyType
   }) {
     super()
@@ -41,7 +42,7 @@ export default class PreparationState
     this.gameStarted = false
     this.ownerName = ""
     this.password = null
-    this.noElo = false
+    this.noElo = params.noElo ?? false
     this.selectedMap = "random"
     this.minRank = params.minRank ?? null
     this.lobbyType = params.lobbyType

@@ -46,11 +46,16 @@ import {
 import { LobbyType, Rarity } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
 import { Pkm, PkmDuos, PkmProposition } from "../types/enum/Pokemon"
+import { SpecialLobbyRule } from "../types/enum/SpecialLobbyRule"
 import { Synergy } from "../types/enum/Synergy"
 import { removeInArray } from "../utils/array"
 import { logger } from "../utils/logger"
 import { shuffleArray } from "../utils/random"
 import { keys, values } from "../utils/schemas"
+import {
+  getFirstAvailablePositionInBench,
+  getFreeSpaceOnBench
+} from "../utils/board"
 import {
   OnDragDropCombineCommand,
   OnDragDropCommand,
@@ -59,7 +64,9 @@ import {
   OnLevelUpCommand,
   OnLockCommand,
   OnPickBerryCommand,
+  OnPokemonCatchCommand,
   OnRefreshCommand,
+  OnRemoveFromShopCommand,
   OnSellDropCommand,
   OnShopCommand,
   OnUpdateCommand
@@ -97,6 +104,7 @@ export default class GameRoom extends Room<GameState> {
     logger.trace("create game room")
     this.setMetadata(<IGameMetadata>{
       name: options.name,
+      lobbyType: options.lobbyType,
       playerIds: keys(options.users).filter(
         (id) => options.users.get(id)!.isBot === false
       ),
@@ -151,6 +159,18 @@ export default class GameRoom extends Room<GameState> {
     shuffleArray(this.additionalRarePool)
     shuffleArray(this.additionalEpicPool)
 
+    if (this.state.specialLobbyRule === SpecialLobbyRule.EVERYONE_IS_HERE) {
+      this.additionalUncommonPool.forEach((p) =>
+        this.state.shop.addAdditionalPokemon(p)
+      )
+      this.additionalRarePool.forEach((p) =>
+        this.state.shop.addAdditionalPokemon(p)
+      )
+      this.additionalEpicPool.forEach((p) =>
+        this.state.shop.addAdditionalPokemon(p)
+      )
+    }
+
     await Promise.all(
       keys(options.users).map(async (id) => {
         const user = options.users[id]
@@ -189,7 +209,7 @@ export default class GameRoom extends Room<GameState> {
             )
 
             this.state.players.set(user.uid, player)
-            this.state.shop.assignShop(player, false, 1)
+            this.state.shop.assignShop(player, false, this.state)
           }
         }
       })
@@ -219,6 +239,19 @@ export default class GameRoom extends Room<GameState> {
           })
         } catch (error) {
           logger.error("shop error", message, error)
+        }
+      }
+    })
+
+    this.onMessage(Transfer.REMOVE_FROM_SHOP, (client, index) => {
+      if (!this.state.gameFinished && client.auth) {
+        try {
+          this.dispatcher.dispatch(new OnRemoveFromShopCommand(), {
+            playerId: client.auth.uid,
+            index
+          })
+        } catch (error) {
+          logger.error("remove from shop error", index, error)
         }
       }
     })
@@ -306,21 +339,18 @@ export default class GameRoom extends Room<GameState> {
       }
     )
 
-    this.onMessage(
-      Transfer.SELL_DROP,
-      (client, message: { pokemonId: string }) => {
-        if (!this.state.gameFinished && client.auth) {
-          try {
-            this.dispatcher.dispatch(new OnSellDropCommand(), {
-              client,
-              detail: message
-            })
-          } catch (error) {
-            logger.error("sell drop error", message)
-          }
+    this.onMessage(Transfer.SELL_POKEMON, (client, pokemonId: string) => {
+      if (!this.state.gameFinished && client.auth) {
+        try {
+          this.dispatcher.dispatch(new OnSellDropCommand(), {
+            client,
+            pokemonId
+          })
+        } catch (error) {
+          logger.error("sell drop error", pokemonId)
         }
       }
-    )
+    })
 
     this.onMessage(Transfer.REQUEST_TILEMAP, (client, message) => {
       client.send(Transfer.REQUEST_TILEMAP, this.state.tilemap)
@@ -368,7 +398,7 @@ export default class GameRoom extends Room<GameState> {
       }
     )
 
-    this.onMessage(Transfer.UNOWN_ENCOUNTER, async (client, unownIndex) => {
+    this.onMessage(Transfer.UNOWN_WANDERING, async (client, unownIndex) => {
       try {
         if (client.auth) {
           const DUST_PER_ENCOUNTER = 50
@@ -392,6 +422,19 @@ export default class GameRoom extends Room<GameState> {
         }
       } catch (error) {
         logger.error(error)
+      }
+    })
+
+    this.onMessage(Transfer.POKEMON_WANDERING, async (client, pkm) => {
+      if (client.auth) {
+        try {
+          this.dispatcher.dispatch(new OnPokemonCatchCommand(), {
+            playerId: client.auth.uid,
+            pkm
+          })
+        } catch (e) {
+          logger.error("catch wandering error", e)
+        }
       }
     })
 
@@ -477,9 +520,9 @@ export default class GameRoom extends Room<GameState> {
 
   async onLeave(client: Client, consented: boolean) {
     try {
-      if (client && client.auth && client.auth.displayName) {
+      /*if (client && client.auth && client.auth.displayName) {
         logger.info(`${client.auth.displayName} has been disconnected`)
-      }
+      }*/
       if (consented) {
         throw new Error("consented leave")
       }
@@ -488,7 +531,7 @@ export default class GameRoom extends Room<GameState> {
       await this.allowReconnection(client, 180)
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
-        logger.info(`${client.auth.displayName} left game`)
+        //logger.info(`${client.auth.displayName} left game`)
         const player = this.state.players.get(client.auth.uid)
         if (player && this.state.stageLevel <= 5) {
           // if player left game during the loading screen or before stage 6, remove it from the players
@@ -496,9 +539,9 @@ export default class GameRoom extends Room<GameState> {
           this.setMetadata({
             playerIds: removeInArray(this.metadata.playerIds, client.auth.uid)
           })
-          logger.info(
+          /*logger.info(
             `${client.auth.displayName} has been removed from players list`
-          )
+          )*/
         }
       }
       if (values(this.state.players).every((p) => p.loadingProgress === 100)) {
@@ -691,7 +734,7 @@ export default class GameRoom extends Room<GameState> {
 
             player.titles.forEach((t) => {
               if (!usr.titles.includes(t)) {
-                logger.info("title added ", t)
+                //logger.info("title added ", t)
                 usr.titles.push(t)
               }
             })
@@ -777,9 +820,10 @@ export default class GameRoom extends Room<GameState> {
     )
   }
 
-  checkEvolutionsAfterPokemonAcquired(playerId: string) {
+  checkEvolutionsAfterPokemonAcquired(playerId: string): boolean {
     const player = this.state.players.get(playerId)
     if (!player) return false
+    let hasEvolved = false
 
     player.board.forEach((pokemon) => {
       if (
@@ -792,6 +836,7 @@ export default class GameRoom extends Room<GameState> {
           this.state.stageLevel
         )
         if (pokemonEvolved) {
+          hasEvolved = true
           // check item evolution rule after count evolution (example: Clefairy)
           this.checkEvolutionsAfterItemAcquired(playerId, pokemonEvolved)
         }
@@ -799,6 +844,7 @@ export default class GameRoom extends Room<GameState> {
     })
 
     player.boardSize = this.getTeamSize(player.board)
+    return hasEvolved
   }
 
   checkEvolutionsAfterItemAcquired(playerId: string, pokemon: Pokemon) {
@@ -853,7 +899,11 @@ export default class GameRoom extends Room<GameState> {
     if (this.state.additionalPokemons.includes(pkm)) return // already picked, probably a double click
     if (UniqueShop.includes(pkm)) {
       if (this.state.stageLevel !== PortalCarouselStages[0]) return // should not be pickable at this stage
-      if (values(player.board).some((p) => UniqueShop.includes(p.name))) return // already picked a unique
+      if (
+        values(player.board).some((p) => p.rarity === Rarity.UNIQUE) &&
+        this.state.specialLobbyRule !== SpecialLobbyRule.UNIQUE_STARTER
+      )
+        return // already picked a unique
     }
     if (LegendaryShop.includes(pkm)) {
       if (this.state.stageLevel !== PortalCarouselStages[1]) return // should not be pickable at this stage
@@ -865,7 +915,7 @@ export default class GameRoom extends Room<GameState> {
       pkm in PkmDuos ? PkmDuos[pkm] : [pkm]
     ).map((p) => PokemonFactory.createPokemonFromName(p, player))
 
-    const freeSpace = player.getFreeSpaceOnBench()
+    const freeSpace = getFreeSpaceOnBench(player.board)
     if (freeSpace < pokemonsObtained.length && !bypassLackOfSpace) return // prevent picking if not enough space on bench
 
     // at this point, the player is allowed to pick a proposition
@@ -883,7 +933,7 @@ export default class GameRoom extends Room<GameState> {
     }
 
     pokemonsObtained.forEach((pokemon) => {
-      const freeCellX = player.getFirstAvailablePositionInBench()
+      const freeCellX = getFirstAvailablePositionInBench(player.board)
       if (freeCellX !== undefined) {
         pokemon.positionX = freeCellX
         pokemon.positionY = 0
