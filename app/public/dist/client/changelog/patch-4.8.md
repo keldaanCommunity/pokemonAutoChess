@@ -23,3 +23,4 @@
 # Misc
 
 - Changed "Buyer Fever" scribble: ~~Earn 1 gold every time you evolve an unit by buying from the shop~~ Evolutions in shop are free
+- Thanks to Emeri for his work on the Deutsch translation !
