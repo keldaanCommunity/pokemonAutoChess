@@ -14,7 +14,12 @@ import {
 import Player from "../../models/colyseus-models/player"
 import { getOrientation } from "../../public/src/pages/utils/utils"
 import { PokemonActionState } from "../../types/enum/Game"
-import { BasicItems, CraftableItems, Item, SynergyStones } from "../../types/enum/Item"
+import {
+  BasicItems,
+  CraftableItems,
+  Item,
+  SynergyStones
+} from "../../types/enum/Item"
 import {
   pickNRandomIn,
   pickRandomIn,
@@ -245,7 +250,10 @@ export class MiniGame {
     }
   }
 
-  initializeItemsCarousel(stageLevel: number, specialLobbyRule: SpecialLobbyRule | null) {
+  initializeItemsCarousel(
+    stageLevel: number,
+    specialLobbyRule: SpecialLobbyRule | null
+  ) {
     const items = this.pickRandomItems(stageLevel, specialLobbyRule)
 
     for (let j = 0; j < items.length; j++) {
@@ -316,7 +324,10 @@ export class MiniGame {
     })
   }
 
-  pickRandomItems(stageLevel: number, specialLobbyRule: SpecialLobbyRule | null): Item[] {
+  pickRandomItems(
+    stageLevel: number,
+    specialLobbyRule: SpecialLobbyRule | null
+  ): Item[] {
     const items: Item[] = []
 
     let nbItemsToPick = clamp(this.alivePlayers.length + 3, 5, 9)
@@ -330,16 +341,20 @@ export class MiniGame {
       itemsSet = CraftableItems
     }
 
-    if(specialLobbyRule === SpecialLobbyRule.SYNERGY_WHEEL){
+    if (specialLobbyRule === SpecialLobbyRule.SYNERGY_WHEEL) {
       itemsSet = SynergyStones
+      maxCopiesPerItem = 4
     }
 
     for (let j = 0; j < nbItemsToPick; j++) {
-      let item, count
+      let item,
+        count,
+        tries = 0
       do {
         item = pickRandomIn(itemsSet)
         count = items.filter((i) => i === item).length
-      } while (count >= maxCopiesPerItem)
+        tries++
+      } while (count >= maxCopiesPerItem && tries < 10)
       items.push(item)
     }
     return items
@@ -359,7 +374,8 @@ export class MiniGame {
           ? SynergyTriggers[type].indexOf(lastTrigger) + 1
           : 0
         // removing low triggers synergies
-        if (type === Synergy.FLORA || type === Synergy.LIGHT) levelReached = min(0)(levelReached - 1)
+        if (type === Synergy.FLORA || type === Synergy.LIGHT)
+          levelReached = min(0)(levelReached - 1)
         return [type, levelReached]
       })
       const candidatesSymbols: Synergy[] = []
