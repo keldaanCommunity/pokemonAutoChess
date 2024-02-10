@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useCallback, useMemo } from "react"
 import PokemonFactory from "../../../../../models/pokemon-factory"
-import { PRECOMPUTED_POKEMONS_STARS } from "../../../../../models/precomputed"
+import { PRECOMPUTED_POKEMONS_DATA } from "../../../../../models/precomputed"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Passive } from "../../../../../types/enum/Passive"
 import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
@@ -10,8 +10,8 @@ import PokemonCollectionItem from "./pokemon-collection-item"
 
 const pokemonsSorted = (Object.values(Pkm) as Pkm[]).sort((a: Pkm, b: Pkm) => {
   return PkmFamily[a] === PkmFamily[b]
-    ? (PRECOMPUTED_POKEMONS_STARS[a] ?? 0) -
-        (PRECOMPUTED_POKEMONS_STARS[b] ?? 0)
+    ? (PRECOMPUTED_POKEMONS_DATA[a]?.stars ?? 0) -
+        (PRECOMPUTED_POKEMONS_DATA[b]?.stars ?? 0)
     : PkmIndex[PkmFamily[a]].localeCompare(PkmIndex[PkmFamily[b]])
 })
 

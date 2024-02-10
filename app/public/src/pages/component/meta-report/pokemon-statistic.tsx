@@ -4,7 +4,7 @@ import { IPokemonsStatistic } from "../../../../../models/mongo-models/pokemons-
 import {
   PRECOMPUTED_POKEMONS_PER_RARITY,
   PRECOMPUTED_POKEMONS_PER_TYPE,
-  PRECOMPUTED_POKEMONS_STARS
+  PRECOMPUTED_POKEMONS_DATA
 } from "../../../../../models/precomputed"
 import { Rarity } from "../../../../../types/enum/Game"
 import {
@@ -63,8 +63,8 @@ export default function PokemonStatistic(props: {
   families.forEach((family) => {
     family.pokemons.sort(
       (a, b) =>
-        (PRECOMPUTED_POKEMONS_STARS[a.name] ?? 0) -
-        (PRECOMPUTED_POKEMONS_STARS[b.name] ?? 0)
+        (PRECOMPUTED_POKEMONS_DATA[a.name]?.stars ?? 0) -
+        (PRECOMPUTED_POKEMONS_DATA[b.name]?.stars ?? 0)
     )
     family.totalCount = family.pokemons.reduce(
       (prev, curr) => prev + curr.count,
