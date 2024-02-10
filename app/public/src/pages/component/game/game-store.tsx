@@ -1,5 +1,4 @@
 import React from "react"
-import PokemonFactory from "../../../../../models/pokemon-factory"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { shopClick } from "../../../stores/NetworkStore"

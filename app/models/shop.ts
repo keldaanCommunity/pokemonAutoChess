@@ -100,10 +100,9 @@ export default class Shop {
   }
 
   releasePokemon(pkm: Pkm) {
-    const pokemonData = getPokemonData(pkm)
+    const { stars, rarity } = getPokemonData(pkm)
     const family = PkmFamily[pkm]
-    let entityNumber =
-      pokemonData.stars >= 3 ? 9 : pokemonData.stars === 2 ? 3 : 1
+    let entityNumber = stars >= 3 ? 9 : stars === 2 ? 3 : 1
     const duo = Object.entries(PkmDuos).find(([key, duo]) => duo.includes(pkm))
     if (duo) {
       // duos increase the number in pool by one if selling both
@@ -111,27 +110,27 @@ export default class Shop {
       entityNumber = Math.ceil(entityNumber / 2)
     }
 
-    if (pokemonData.rarity === Rarity.COMMON) {
+    if (rarity === Rarity.COMMON) {
       const value = this.commonPool.get(family)
       if (value !== undefined) {
         this.commonPool.set(family, value + entityNumber)
       }
-    } else if (pokemonData.rarity === Rarity.UNCOMMON) {
+    } else if (rarity === Rarity.UNCOMMON) {
       const value = this.uncommonPool.get(family)
       if (value !== undefined) {
         this.uncommonPool.set(family, value + entityNumber)
       }
-    } else if (pokemonData.rarity === Rarity.RARE) {
+    } else if (rarity === Rarity.RARE) {
       const value = this.rarePool.get(family)
       if (value !== undefined) {
         this.rarePool.set(family, value + entityNumber)
       }
-    } else if (pokemonData.rarity === Rarity.EPIC) {
+    } else if (rarity === Rarity.EPIC) {
       const value = this.epicPool.get(family)
       if (value !== undefined) {
         this.epicPool.set(family, value + entityNumber)
       }
-    } else if (pokemonData.rarity === Rarity.ULTRA) {
+    } else if (rarity === Rarity.ULTRA) {
       const value = this.ultraPool.get(family)
       if (value !== undefined) {
         this.ultraPool.set(family, value + entityNumber)

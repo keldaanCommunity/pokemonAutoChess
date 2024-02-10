@@ -1,7 +1,6 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
-import PokemonFactory from "../../../../../models/pokemon-factory"
 import {
   getPokemonData,
   PRECOMPUTED_POKEMONS_PER_TYPE

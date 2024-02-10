@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
-import PokemonFactory from "../../../../../models/pokemon-factory"
 import { AdditionalPicksStages } from "../../../../../types/Config"
 import { Pkm, PkmDuo, PkmDuos } from "../../../../../types/enum/Pokemon"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
