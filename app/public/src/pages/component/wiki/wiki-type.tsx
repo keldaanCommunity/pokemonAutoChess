@@ -102,11 +102,7 @@ export default function WikiType(props: { type: Synergy | "all" }) {
                           id={`pokemon-detail-${p.index}`}
                           className="custom-theme-tooltip game-pokemon-detail-tooltip"
                         >
-                          <GamePokemonDetail
-                            pokemon={PokemonFactory.createPokemonFromName(
-                              p.name
-                            )}
-                          />
+                          <GamePokemonDetail pokemon={p.name} />
                         </Tooltip>
                       </div>
                     )

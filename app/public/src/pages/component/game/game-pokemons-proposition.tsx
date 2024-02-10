@@ -61,9 +61,7 @@ export default function GamePokemonsPropositions() {
                       key={"proposition" + index}
                       origin="proposition"
                       index={index}
-                      pokemon={PokemonFactory.createPokemonFromName(
-                        proposition as Pkm
-                      )}
+                      pokemon={proposition as Pkm}
                     />
                   )}
                   {item && (

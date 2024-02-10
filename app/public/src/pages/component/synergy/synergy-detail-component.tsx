@@ -1,9 +1,5 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
-import PokemonFactory, {
-  isAdditionalPick
-} from "../../../../../models/pokemon-factory"
 import {
   getPokemonData,
   PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY
@@ -15,6 +11,7 @@ import {
 } from "../../../../../types/Config"
 import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { Synergy, SynergyEffects } from "../../../../../types/enum/Synergy"
+import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
 import { useAppSelector } from "../../../hooks"
 import { getPortraitSrc } from "../../../utils"
 import { addIconsToDescription } from "../../utils/descriptions"
@@ -85,13 +82,12 @@ export default function SynergyDetailComponent(props: {
           .map((p) => getPokemonData(p as Pkm))
           .sort((a, b) => RarityCost[a.rarity] - RarityCost[b.rarity])
           .map((p) => {
-            const pokemon = PokemonFactory.createPokemonFromName(p.name)
-            return <PokemonPortrait p={pokemon} key={p.name} />
+            return <PokemonPortrait p={p} key={p.name} />
           })}
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
         {additionals.map((p) => {
-          const pokemon = PokemonFactory.createPokemonFromName(p)
+          const pokemon = getPokemonData(p)
           return <PokemonPortrait p={pokemon} key={p} />
         })}
       </div>
@@ -99,7 +95,7 @@ export default function SynergyDetailComponent(props: {
         {PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
           props.type
         ].uniquePokemons.map((p) => {
-          const pokemon = PokemonFactory.createPokemonFromName(p)
+          const pokemon = getPokemonData(p)
           return <PokemonPortrait p={pokemon} key={p} />
         })}
       </div>
@@ -107,18 +103,18 @@ export default function SynergyDetailComponent(props: {
         {PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
           props.type
         ].legendaryPokemons.map((p) => {
-          const pokemon = PokemonFactory.createPokemonFromName(p)
+          const pokemon = getPokemonData(p)
           return <PokemonPortrait p={pokemon} key={p} />
         })}
       </div>
     </div>
   )
 }
-function PokemonPortrait(props: { p: Pokemon }) {
+function PokemonPortrait(props: { p: IPokemonData }) {
   return (
     <div
       className={cc("pokemon-portrait", {
-        additional: isAdditionalPick(props.p.name)
+        additional: props.p.additional
       })}
       key={props.p.name}
     >

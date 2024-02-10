@@ -1,10 +1,7 @@
 import React, { useCallback, useMemo } from "react"
 import Modal from "react-bootstrap/esm/Modal"
 import { useTranslation } from "react-i18next"
-import {
-  getPokemonData,
-  PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX
-} from "../../../../../models/precomputed"
+import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../../models/precomputed"
 import { Emotion } from "../../../../../types"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
@@ -28,7 +25,6 @@ export default function PokemonEmotionsModal(props: {
     (state) => state.lobby.pokemonCollection
   )
 
-  const pokemonData = getPokemonData(props.pokemon)
   const index = PkmIndex[props.pokemon]
 
   const availableEmotions: Emotion[] = Object.values(Emotion).filter(

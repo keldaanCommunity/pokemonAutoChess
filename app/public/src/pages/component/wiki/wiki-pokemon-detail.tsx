@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useMemo } from "react"
 import { useTranslation } from "react-i18next"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../../models/precomputed"
@@ -17,9 +17,14 @@ import "./wiki-pokemon-detail.css"
 
 export default function WikiPokemonDetail(props: { pokemon: Pkm }) {
   const { t } = useTranslation()
-  const pokemon = PokemonFactory.createPokemonFromName(props.pokemon)
-  const pokemonData = getPokemonData(props.pokemon)
-  const index = PkmIndex[props.pokemon]
+  const pokemon = useMemo(
+    () => PokemonFactory.createPokemonFromName(props.pokemon),
+    [props.pokemon]
+  )
+  const pokemonData = useMemo(
+    () => getPokemonData(props.pokemon),
+    [props.pokemon]
+  )
   const statProp: Record<Stat, string> = {
     [Stat.ATK]: "atk",
     [Stat.DEF]: "def",
@@ -44,7 +49,7 @@ export default function WikiPokemonDetail(props: { pokemon: Pkm }) {
         <dt>{t("name")}</dt>
         <dd className="pokemon-name">{t(`pkm.${props.pokemon}`)}</dd>
         <dt>{t("index")}</dt>
-        <dd className="pokemon-index">{index}</dd>
+        <dd className="pokemon-index">{pokemonData.index}</dd>
         <dt>{t("rarity_label")}</dt>
         <dd style={{ color: RarityColor[pokemonData.rarity] }}>
           {t(`rarity.${pokemonData.rarity}`)}
@@ -79,10 +84,10 @@ export default function WikiPokemonDetail(props: { pokemon: Pkm }) {
         </dd>
 
         <dt>{t("portrait_credit")}</dt>
-        <Credits for="portrait" index={index} />
+        <Credits for="portrait" index={pokemonData.index} />
 
         <dt>{t("sprite_credit")}</dt>
-        <Credits for="sprite" index={index} />
+        <Credits for="sprite" index={pokemonData.index} />
       </dl>
       <dl>
         {[Stat.HP, Stat.PP, Stat.RANGE, Stat.ATK, Stat.DEF, Stat.SPE_DEF].map(

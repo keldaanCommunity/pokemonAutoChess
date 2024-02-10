@@ -1,7 +1,6 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../../../app/models/precomputed"
-import PokemonFactory from "../../../../../models/pokemon-factory"
 import { Emotion, PkmWithConfig } from "../../../../../types"
 import { Item } from "../../../../../types/enum/Item"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
@@ -64,7 +63,7 @@ export default function SelectedEntity(props: {
         </fieldset>
 
         <GamePokemonDetail
-          pokemon={PokemonFactory.createPokemonFromName(detailledPkm.name)}
+          pokemon={detailledPkm.name}
           emotion={detailledPkm.emotion}
           shiny={detailledPkm.shiny}
         />

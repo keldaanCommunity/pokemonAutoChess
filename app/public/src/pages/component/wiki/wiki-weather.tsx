@@ -1,9 +1,6 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
-import PokemonFactory, {
-  isAdditionalPick
-} from "../../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../../models/precomputed"
 import { WeatherThreshold } from "../../../../../types/Config"
 import { Ability } from "../../../../../types/enum/Ability"
@@ -56,7 +53,7 @@ export default function WikiWeather() {
                   <div
                     key={p.name}
                     className={cc("pokemon-portrait", {
-                      additional: isAdditionalPick(p.name)
+                      additional: p.additional
                     })}
                     data-tooltip-id={`pokemon-detail-${p.index}`}
                   >
@@ -65,9 +62,7 @@ export default function WikiWeather() {
                       id={`pokemon-detail-${p.index}`}
                       className="custom-theme-tooltip game-pokemon-detail-tooltip"
                     >
-                      <GamePokemonDetail
-                        pokemon={PokemonFactory.createPokemonFromName(p.name)}
-                      />
+                      <GamePokemonDetail pokemon={p.name} />
                     </Tooltip>
                   </div>
                 </li>

@@ -49,7 +49,7 @@ export const PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX =
 export function getPokemonData(name: Pkm): IPokemonData {
   if (name in PRECOMPUTED_POKEMONS_DATA)
     return { name, index: PkmIndex[name], ...PRECOMPUTED_POKEMONS_DATA[name]! }
-  console.error(`Precomputed data not found for ${name}`)
+  //console.error(`Precomputed data not found for ${name}`)
   return {
     name: Pkm.DEFAULT,
     index: PkmIndex[Pkm.DEFAULT],

@@ -15,13 +15,12 @@ export default function GameStore() {
     <ul className="game-pokemons-store">
       {shop.map((pokemon, index) => {
         if (pokemon != Pkm.DEFAULT) {
-          const p = PokemonFactory.createPokemonFromName(pokemon)
           return (
             <GamePokemonPortrait
               key={"shop" + index}
               origin="shop"
               index={index}
-              pokemon={p}
+              pokemon={pokemon}
               onMouseEnter={() => {
                 if (scene) scene.shopIndexHovered = index
               }}

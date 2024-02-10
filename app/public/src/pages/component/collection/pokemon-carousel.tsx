@@ -1,5 +1,4 @@
 import React, { Dispatch, SetStateAction, useCallback, useMemo } from "react"
-import PokemonFactory from "../../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../../models/precomputed"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Passive } from "../../../../../types/enum/Passive"
@@ -33,7 +32,6 @@ export default function PokemonCarousel(props: {
     () =>
       pokemonsSorted.map((pkm) => {
         const pokemonData = getPokemonData(pkm)
-        const index = PkmIndex[pkm]
         if (
           pkm !== Pkm.DEFAULT &&
           pokemonData.skill !== Ability.DEFAULT &&
@@ -43,10 +41,10 @@ export default function PokemonCarousel(props: {
         ) {
           return (
             <PokemonCollectionItem
-              key={`${index}-${props.type}`}
+              key={`${pokemonData.index}-${props.type}`}
               name={pkm}
-              index={index}
-              config={getConfig(index)}
+              index={pokemonData.index}
+              config={getConfig(pokemonData.index)}
               filter={props.filter}
               shinyOnly={props.shinyOnly}
               setPokemon={props.setPokemon}
