@@ -15,7 +15,10 @@ import { logger } from "../utils/logger"
 import { pickRandomIn } from "../utils/random"
 import Player from "./colyseus-models/player"
 import { Egg, Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
-import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "./precomputed"
+import {
+  getPokemonData,
+  PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY
+} from "./precomputed"
 import { PVEStage } from "./pve-stages"
 
 export default class PokemonFactory {
@@ -82,11 +85,6 @@ export default class PokemonFactory {
     }
   }
 
-  static getPokemonRarityFromName(name: Pkm) {
-    const pokemon: Pokemon = PokemonFactory.createPokemonFromName(name)
-    return pokemon.rarity
-  }
-
   static createRandomEgg(): Egg {
     const egg = PokemonFactory.createPokemonFromName(Pkm.EGG)
     egg.action = PokemonActionState.SLEEP
@@ -120,7 +118,7 @@ export default class PokemonFactory {
   }
 
   static getSellPrice(name: Pkm, player?: Player): number {
-    const pokemon: Pokemon = PokemonFactory.createPokemonFromName(name)
+    const pokemonData = getPokemonData(name)
     const duo = Object.entries(PkmDuos).find(([key, duo]) => duo.includes(name))
 
     if (name === Pkm.EGG) {
@@ -133,18 +131,18 @@ export default class PokemonFactory {
       return 10
     } else if (Unowns.includes(name)) {
       return 1
-    } else if (pokemon.rarity === Rarity.HATCH) {
-      return [3, 4, 5][pokemon.stars - 1] ?? 5
-    } else if (pokemon.rarity === Rarity.UNIQUE) {
+    } else if (pokemonData.rarity === Rarity.HATCH) {
+      return [3, 4, 5][pokemonData.stars - 1] ?? 5
+    } else if (pokemonData.rarity === Rarity.UNIQUE) {
       return duo ? 8 : 15
-    } else if (pokemon.rarity === Rarity.LEGENDARY) {
+    } else if (pokemonData.rarity === Rarity.LEGENDARY) {
       return duo ? 10 : 20
     } else if (PokemonFactory.getPokemonBaseEvolution(name) == Pkm.EEVEE) {
-      return RarityCost[pokemon.rarity]
+      return RarityCost[pokemonData.rarity]
     } else if (duo) {
-      return Math.ceil((RarityCost[pokemon.rarity] * pokemon.stars) / 2)
+      return Math.ceil((RarityCost[pokemonData.rarity] * pokemonData.stars) / 2)
     } else {
-      return RarityCost[pokemon.rarity] * pokemon.stars
+      return RarityCost[pokemonData.rarity] * pokemonData.stars
     }
   }
 
@@ -154,13 +152,11 @@ export default class PokemonFactory {
     } else if (Unowns.includes(name)) {
       return 1
     } else {
-      const pokemon: Pokemon = PokemonFactory.createPokemonFromName(name)
-      return RarityCost[pokemon.rarity]
+      return RarityCost[getPokemonData(name).rarity]
     }
   }
 }
 
 export function isAdditionalPick(pkm: Pkm): boolean {
-  const pokemon = PokemonFactory.createPokemonFromName(pkm)
-  return pokemon.additional
+  return getPokemonData(pkm).additional
 }

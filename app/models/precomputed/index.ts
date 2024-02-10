@@ -9,7 +9,7 @@ import { Synergy } from "../../types/enum/Synergy"
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Rarity } from "../../types/enum/Game"
 import { Ability } from "../../types/enum/Ability"
-import { IPokemonData } from "../../types"
+import { IPokemonData } from "../../types/interfaces/PokemonData"
 
 export const PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY =
   JSON_PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY as {
@@ -44,3 +44,16 @@ export const PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX =
   JSON_PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX as {
     [pkm: (typeof PkmIndex)[Pkm]]: number[]
   }
+
+export function getPokemonData(name: Pkm): IPokemonData {
+  if (name in PRECOMPUTED_POKEMONS_DATA) return PRECOMPUTED_POKEMONS_DATA[name]!
+  console.error(`Precomputed data not found for ${name}`)
+  return {
+    additional: false,
+    range: 1,
+    rarity: Rarity.SPECIAL,
+    stars: 1,
+    skill: Ability.DEFAULT,
+    types: []
+  }
+}

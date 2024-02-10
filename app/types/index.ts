@@ -312,13 +312,6 @@ export interface IGameHistoryPokemonRecord extends IPokemonRecord {
   inventory: Item[]
 }
 
-export interface IPokemonData {
-  stars: number
-  rarity: Rarity
-  additional: boolean
-  range: number
-}
-
 export interface IPokemonAvatar {
   id: string
   name: Pkm
