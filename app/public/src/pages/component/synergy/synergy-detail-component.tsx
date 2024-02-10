@@ -81,31 +81,28 @@ export default function SynergyDetailComponent(props: {
         {PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[props.type].pokemons
           .map((p) => getPokemonData(p as Pkm))
           .sort((a, b) => RarityCost[a.rarity] - RarityCost[b.rarity])
-          .map((p) => {
-            return <PokemonPortrait p={p} key={p.name} />
-          })}
+          .map((p) => (
+            <PokemonPortrait p={p} key={p.name} />
+          ))}
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
-        {additionals.map((p) => {
-          const pokemon = getPokemonData(p)
-          return <PokemonPortrait p={pokemon} key={p} />
-        })}
-      </div>
-      <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
-        {PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
-          props.type
-        ].uniquePokemons.map((p) => {
-          const pokemon = getPokemonData(p)
-          return <PokemonPortrait p={pokemon} key={p} />
-        })}
+        {additionals.map((p) => (
+          <PokemonPortrait p={getPokemonData(p)} key={p} />
+        ))}
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
         {PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
           props.type
-        ].legendaryPokemons.map((p) => {
-          const pokemon = getPokemonData(p)
-          return <PokemonPortrait p={pokemon} key={p} />
-        })}
+        ].uniquePokemons.map((p) => (
+          <PokemonPortrait p={getPokemonData(p)} key={p} />
+        ))}
+      </div>
+      <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
+        {PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
+          props.type
+        ].legendaryPokemons.map((p) => (
+          <PokemonPortrait p={getPokemonData(p)} key={p} />
+        ))}
       </div>
     </div>
   )
