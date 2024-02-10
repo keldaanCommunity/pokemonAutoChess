@@ -14,7 +14,8 @@
   white-space: nowrap;
 }
 
-.description-icon > img {
+.description-icon > img,
+img.description-icon {
   display: inline-block;
   vertical-align: -0.5em;
   width: 1.5em;
@@ -26,6 +27,12 @@ h2 .description-icon > img {
   vertical-align: -0.15em;
   width: 1em;
   height: 1em;
+}
+
+.description-icon.icon-star {
+  width: 1.25em;
+  height: 1.25em;
+  vertical-align: -0.25em;
 }
 
 .ability-description {
