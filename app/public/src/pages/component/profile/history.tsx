@@ -60,7 +60,15 @@ function getTopSynergies(team: IPokemonRecord[]): [Synergy, number][] {
   )
 
   const topSynergies = [...synergies.entries()]
-    .sort((a, b) => (a[1] < SynergyTriggers[a[0]][0] ? 1 : b[1] - a[1]))
+    .sort((a, b) => {
+      const aReachedTrigger = a[1] >= SynergyTriggers[a[0]][0]
+      const bReachedTrigger = b[1] >= SynergyTriggers[b[0]][0]
+      return aReachedTrigger && !bReachedTrigger
+        ? -1
+        : bReachedTrigger && !aReachedTrigger
+        ? +1
+        : b[1] - a[1]
+    })
     .slice(0, 3)
   return topSynergies
 }
