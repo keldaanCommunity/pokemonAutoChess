@@ -4,7 +4,10 @@ import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import PokemonFactory, {
   isAdditionalPick
 } from "../../../../../models/pokemon-factory"
-import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../../../../models/precomputed"
+import {
+  getPokemonData,
+  PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY
+} from "../../../../../models/precomputed"
 import {
   RarityColor,
   RarityCost,
@@ -79,15 +82,16 @@ export default function SynergyDetailComponent(props: {
       })}
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[props.type].pokemons
-          .map((p) => PokemonFactory.createPokemonFromName(p as Pkm))
+          .map((p) => getPokemonData(p as Pkm))
           .sort((a, b) => RarityCost[a.rarity] - RarityCost[b.rarity])
-          .map((p) => (
-            <PokemonPortrait p={p} key={p.name} />
-          ))}
+          .map((p) => {
+            const pokemon = PokemonFactory.createPokemonFromName(p.name)
+            return <PokemonPortrait p={pokemon} key={p.name} />
+          })}
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
         {additionals.map((p) => {
-          const pokemon = PokemonFactory.createPokemonFromName(p as Pkm)
+          const pokemon = PokemonFactory.createPokemonFromName(p)
           return <PokemonPortrait p={pokemon} key={p} />
         })}
       </div>
@@ -95,7 +99,7 @@ export default function SynergyDetailComponent(props: {
         {PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
           props.type
         ].uniquePokemons.map((p) => {
-          const pokemon = PokemonFactory.createPokemonFromName(p as Pkm)
+          const pokemon = PokemonFactory.createPokemonFromName(p)
           return <PokemonPortrait p={pokemon} key={p} />
         })}
       </div>
@@ -103,7 +107,7 @@ export default function SynergyDetailComponent(props: {
         {PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
           props.type
         ].legendaryPokemons.map((p) => {
-          const pokemon = PokemonFactory.createPokemonFromName(p as Pkm)
+          const pokemon = PokemonFactory.createPokemonFromName(p)
           return <PokemonPortrait p={pokemon} key={p} />
         })}
       </div>

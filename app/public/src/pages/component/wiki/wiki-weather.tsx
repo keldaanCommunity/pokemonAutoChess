@@ -1,10 +1,10 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
-import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import PokemonFactory, {
   isAdditionalPick
 } from "../../../../../models/pokemon-factory"
+import { getPokemonData } from "../../../../../models/precomputed"
 import { WeatherThreshold } from "../../../../../types/Config"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Pkm } from "../../../../../types/enum/Pokemon"
@@ -13,13 +13,14 @@ import {
   SynergyAssociatedToWeather,
   Weather
 } from "../../../../../types/enum/Weather"
+import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
 import { getPortraitSrc } from "../../../utils"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
 import SynergyIcon from "../icons/synergy-icon"
 
-const pokemonsByWeather: Map<Weather, Pokemon[]> = new Map()
+const pokemonsByWeather: Map<Weather, IPokemonData[]> = new Map()
 Object.values(Weather).forEach((weather) => {
   pokemonsByWeather.set(weather, getPokemonsInfluencingWeather(weather))
 })
@@ -64,7 +65,9 @@ export default function WikiWeather() {
                       id={`pokemon-detail-${p.index}`}
                       className="custom-theme-tooltip game-pokemon-detail-tooltip"
                     >
-                      <GamePokemonDetail pokemon={p} />
+                      <GamePokemonDetail
+                        pokemon={PokemonFactory.createPokemonFromName(p.name)}
+                      />
                     </Tooltip>
                   </div>
                 </li>
@@ -79,7 +82,7 @@ export default function WikiWeather() {
 
 function getPokemonsInfluencingWeather(weather: Weather) {
   return Object.values(Pkm)
-    .map((pkm) => PokemonFactory.createPokemonFromName(pkm))
+    .map((pkm) => getPokemonData(pkm))
     .filter(
       (pkm) =>
         pkm.skill != Ability.DEFAULT &&

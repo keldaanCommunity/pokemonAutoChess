@@ -1,6 +1,5 @@
 import fs from "fs"
-import PokemonFactory from "../app/models/pokemon-factory"
-import { Pkm } from "../app/types/enum/Pokemon"
+import { Pkm, PkmIndex } from "../app/types/enum/Pokemon"
 import { logger } from "../app/utils/logger"
 
 const args = process.argv.slice(2)
@@ -35,9 +34,9 @@ function minifyAll() {
   const pkmaIndexes = new Array<string>()
 
   Object.values(Pkm).forEach((pkm) => {
-    const pokemon = PokemonFactory.createPokemonFromName(pkm)
-    if (!pkmaIndexes.includes(pokemon.index)) {
-      pkmaIndexes.push(pokemon.index)
+    const index = PkmIndex[pkm]
+    if (!pkmaIndexes.includes(index)) {
+      pkmaIndexes.push(index)
     }
   })
 

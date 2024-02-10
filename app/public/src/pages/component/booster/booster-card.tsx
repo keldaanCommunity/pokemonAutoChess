@@ -1,6 +1,6 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import PokemonFactory from "../../../../../models/pokemon-factory"
+import { getPokemonData } from "../../../../../models/precomputed"
 import { RarityColor } from "../../../../../types/Config"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
@@ -12,13 +12,16 @@ export function BoosterCard(props: { pkm: string; shards: number }) {
   const pkm: Pkm = (Object.keys(PkmIndex).find(
     (p) => PkmIndex[p] === props.pkm
   ) ?? Pkm.DITTO) as Pkm
-  const pokemon = PokemonFactory.createPokemonFromName(pkm)
+  const pokemonData = getPokemonData(pkm)
   const style = {
-    "--rarity-color": RarityColor[pokemon.rarity]
+    "--rarity-color": RarityColor[pokemonData.rarity]
   } as React.CSSProperties
   return (
     <div
-      className={cc("booster-card", "rarity-" + pokemon.rarity.toLowerCase())}
+      className={cc(
+        "booster-card",
+        "rarity-" + pokemonData.rarity.toLowerCase()
+      )}
       style={style}
       onClick={(e) => e.currentTarget.classList.add("flipped")}
     >
@@ -27,7 +30,7 @@ export function BoosterCard(props: { pkm: string; shards: number }) {
       </div>
       <div className="front">
         <img src={getPortraitSrc(props.pkm)}></img>
-        <p className="name">{t(`pkm.${pokemon.name}`)}</p>
+        <p className="name">{t(`pkm.${pkm}`)}</p>
         <p>
           {props.shards} {t("shards")}
         </p>

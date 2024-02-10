@@ -1,11 +1,12 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import PokemonFactory from "../../../../../models/pokemon-factory"
+import { getPokemonData } from "../../../../../models/precomputed"
 import { RarityColor } from "../../../../../types/Config"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Stat } from "../../../../../types/enum/Game"
 import { Passive } from "../../../../../types/enum/Passive"
-import { Pkm } from "../../../../../types/enum/Pokemon"
+import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { AbilityTooltip } from "../ability/ability-tooltip"
@@ -17,12 +18,8 @@ import "./wiki-pokemon-detail.css"
 export default function WikiPokemonDetail(props: { pokemon: Pkm }) {
   const { t } = useTranslation()
   const pokemon = PokemonFactory.createPokemonFromName(props.pokemon)
-
-  const evolution =
-    pokemon.evolution === Pkm.DEFAULT
-      ? null
-      : PokemonFactory.createPokemonFromName(pokemon.evolution as Pkm)
-
+  const pokemonData = getPokemonData(props.pokemon)
+  const index = PkmIndex[props.pokemon]
   const statProp: Record<Stat, string> = {
     [Stat.ATK]: "atk",
     [Stat.DEF]: "def",
@@ -45,45 +42,47 @@ export default function WikiPokemonDetail(props: { pokemon: Pkm }) {
       </div>
       <dl>
         <dt>{t("name")}</dt>
-        <dd className="pokemon-name">{t(`pkm.${pokemon.name}`)}</dd>
+        <dd className="pokemon-name">{t(`pkm.${props.pokemon}`)}</dd>
         <dt>{t("index")}</dt>
-        <dd className="pokemon-index">{pokemon.index}</dd>
+        <dd className="pokemon-index">{index}</dd>
         <dt>{t("rarity_label")}</dt>
-        <dd style={{ color: RarityColor[pokemon.rarity] }}>
-          {t(`rarity.${pokemon.rarity}`)}
+        <dd style={{ color: RarityColor[pokemonData.rarity] }}>
+          {t(`rarity.${pokemonData.rarity}`)}
         </dd>
         <dt style={{ verticalAlign: "middle" }}>{t("tier")}</dt>
         <dd>
-          {Array.from({ length: pokemon.stars }, (_, i) => (
+          {Array.from({ length: pokemonData.stars }, (_, i) => (
             <img src="assets/ui/star.svg" height="24" key={"star" + i}></img>
           ))}
         </dd>
         <dt>{t("synergies")}</dt>
         <dd>
-          {Array.from(pokemon.types.values()).map((type) => (
+          {pokemonData.types.map((type) => (
             <SynergyIcon key={"img" + type} type={type} />
           ))}
         </dd>
         <dt>{t("evolution")}</dt>
         <dd>
-          {!evolution ? (
+          {!pokemonData.evolution ? (
             "No evolution"
           ) : (
             <>
               <img
-                src={getPortraitSrc(evolution.index)}
+                src={getPortraitSrc(PkmIndex[pokemonData.evolution])}
                 style={{ marginRight: "0.5em" }}
               />
-              <span className="pokemon-name">{t(`pkm.${evolution.name}`)}</span>
+              <span className="pokemon-name">
+                {t(`pkm.${pokemonData.evolution}`)}
+              </span>
             </>
           )}
         </dd>
 
         <dt>{t("portrait_credit")}</dt>
-        <Credits for="portrait" index={pokemon.index} />
+        <Credits for="portrait" index={index} />
 
         <dt>{t("sprite_credit")}</dt>
-        <Credits for="sprite" index={pokemon.index} />
+        <Credits for="sprite" index={index} />
       </dl>
       <dl>
         {[Stat.HP, Stat.PP, Stat.RANGE, Stat.ATK, Stat.DEF, Stat.SPE_DEF].map(
@@ -99,22 +98,25 @@ export default function WikiPokemonDetail(props: { pokemon: Pkm }) {
         )}
       </dl>
       <dl>
-        {pokemon.skill !== Ability.DEFAULT && (
+        {pokemonData.skill !== Ability.DEFAULT && (
           <>
             <dt>{t("ability_label")}</dt>
             <dd>
               {t(`ability.${pokemon.skill}`)}
-              <AbilityTooltip ability={pokemon.skill} tier={pokemon.stars} />
+              <AbilityTooltip
+                ability={pokemonData.skill}
+                tier={pokemonData.stars}
+              />
             </dd>
           </>
         )}
-        {pokemon.passive !== Passive.NONE && (
+        {pokemonData.passive !== Passive.NONE && (
           <>
             <dt>{t("passive")}</dt>
             <dd>
               <br />
               {addIconsToDescription(
-                t(`passive_description.${pokemon.passive}`)
+                t(`passive_description.${pokemonData.passive}`)
               )}
             </dd>
           </>

@@ -4,6 +4,7 @@ import { CountEvolutionRule } from "../../../../../core/evolution-rules"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
 import PokemonFactory from "../../../../../models/pokemon-factory"
+import { getPokemonData } from "../../../../../models/precomputed"
 import { RarityColor } from "../../../../../types/Config"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { SpecialLobbyRule } from "../../../../../types/enum/SpecialLobbyRule"
@@ -69,8 +70,7 @@ export default function GamePokemonPortrait(props: {
     }, [board?.size, props.pokemon]) // recount where board size or pokemon on this shop cell changes
 
     let pokemonEvolution = props.pokemon.evolution
-    const pokemonEvolution2 =
-      PokemonFactory.createPokemonFromName(pokemonEvolution).evolution
+    const pokemonEvolution2 = getPokemonData(pokemonEvolution).evolution
 
     const willEvolve =
       props.pokemon.evolutionRule instanceof CountEvolutionRule &&

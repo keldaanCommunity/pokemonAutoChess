@@ -3,10 +3,9 @@ import { XMLParser } from "fast-xml-parser"
 import fs from "fs"
 import gracefulFs from "graceful-fs"
 import Jimp from "jimp"
-import PokemonFactory from "../app/models/pokemon-factory"
 import { AnimationType } from "../app/types/Animation"
 import { PokemonTint, SpriteType } from "../app/types/enum/Game"
-import { AnimationConfig, Pkm } from "../app/types/enum/Pokemon"
+import { AnimationConfig, Pkm, PkmIndex } from "../app/types/enum/Pokemon"
 import { logger } from "../app/utils/logger"
 
 gracefulFs.gracefulify(fs)
@@ -44,10 +43,10 @@ mapName.set("0000", "missingno")
 const pkmaIndexes = ["0000"]
 
 Object.values(Pkm).forEach((pkm) => {
-  const pokemon = PokemonFactory.createPokemonFromName(pkm)
-  if (!pkmaIndexes.includes(pokemon.index)) {
-    pkmaIndexes.push(pokemon.index)
-    mapName.set(pokemon.index, pokemon.name)
+  const index = PkmIndex[pkm]
+  if (!pkmaIndexes.includes(index)) {
+    pkmaIndexes.push(index)
+    mapName.set(index, pkm)
   }
 })
 

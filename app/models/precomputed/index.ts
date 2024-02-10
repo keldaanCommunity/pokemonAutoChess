@@ -10,6 +10,7 @@ import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Rarity } from "../../types/enum/Game"
 import { Ability } from "../../types/enum/Ability"
 import { IPokemonData } from "../../types/interfaces/PokemonData"
+import { Passive } from "../../types/enum/Passive"
 
 export const PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY =
   JSON_PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY as {
@@ -37,7 +38,7 @@ export const PRECOMPUTED_POKEMONS_PER_ABILITY =
   }
 
 export const PRECOMPUTED_POKEMONS_DATA = JSON_PRECOMPUTED_POKEMONS_DATA as {
-  [pkm in Pkm]?: IPokemonData
+  [pkm in Pkm]?: Omit<IPokemonData, "name" | "index">
 }
 
 export const PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX =
@@ -46,14 +47,19 @@ export const PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX =
   }
 
 export function getPokemonData(name: Pkm): IPokemonData {
-  if (name in PRECOMPUTED_POKEMONS_DATA) return PRECOMPUTED_POKEMONS_DATA[name]!
+  if (name in PRECOMPUTED_POKEMONS_DATA)
+    return { name, index: PkmIndex[name], ...PRECOMPUTED_POKEMONS_DATA[name]! }
   console.error(`Precomputed data not found for ${name}`)
   return {
+    name: Pkm.DEFAULT,
+    index: PkmIndex[Pkm.DEFAULT],
     additional: false,
     range: 1,
     rarity: Rarity.SPECIAL,
     stars: 1,
     skill: Ability.DEFAULT,
-    types: []
+    passive: Passive.NONE,
+    types: [],
+    evolution: null
   }
 }

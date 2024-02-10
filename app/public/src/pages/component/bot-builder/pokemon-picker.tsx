@@ -4,10 +4,10 @@ import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { Tooltip } from "react-tooltip"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
-import PokemonFactory, {
-  isAdditionalPick
-} from "../../../../../models/pokemon-factory"
-import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../../../../../models/precomputed"
+import {
+  getPokemonData,
+  PRECOMPUTED_POKEMONS_PER_TYPE
+} from "../../../../../models/precomputed"
 import { Emotion, PkmWithConfig } from "../../../../../types"
 import { RarityColor } from "../../../../../types/Config"
 import { Rarity } from "../../../../../types/enum/Game"
@@ -28,7 +28,7 @@ export default function PokemonPicker(props: {
     (t === "none"
       ? [Pkm.KECLEON, Pkm.ARCEUS]
       : PRECOMPUTED_POKEMONS_PER_TYPE[t]
-    ).map((p) => PokemonFactory.createPokemonFromName(p))
+    ).map((p) => getPokemonData(p))
   )
 
   return (
@@ -72,9 +72,7 @@ function PokemonPickerTab(props: {
   const pokemonsPerRarity = groupBy(props.pokemons, (p) => p.rarity)
   for (const rarity in pokemonsPerRarity) {
     pokemonsPerRarity[rarity].sort((a: Pokemon, b: Pokemon) => {
-      const isAddA = isAdditionalPick(a.name),
-        isAddB = isAdditionalPick(b.name)
-      if (isAddA !== isAddB) return +isAddA - +isAddB
+      if (a.additional !== b.additional) return +a.additional - +b.additional
       return PkmFamily[a.name] === PkmFamily[b.name]
         ? a.stars - b.stars
         : PkmIndex[PkmFamily[a.name]].localeCompare(PkmIndex[PkmFamily[b.name]])
@@ -105,7 +103,7 @@ function PokemonPickerTab(props: {
               {(pokemonsPerRarity[rarity] ?? []).map((p) => (
                 <div
                   className={cc("pokemon-portrait", {
-                    additional: isAdditionalPick(p.name)
+                    additional: p.additional
                   })}
                   onClick={() => {
                     props.selectEntity({

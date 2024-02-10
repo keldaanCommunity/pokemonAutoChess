@@ -4,7 +4,7 @@ import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../../../app/mo
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { Emotion, PkmWithConfig } from "../../../../../types"
 import { Item } from "../../../../../types/enum/Item"
-import { Pkm } from "../../../../../types/enum/Pokemon"
+import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { Checkbox } from "../checkbox/checkbox"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
@@ -24,12 +24,9 @@ export default function SelectedEntity(props: {
     Object.values(Pkm).includes((props.entity as PkmWithConfig).name)
   ) {
     const detailledPkm = props.entity as PkmWithConfig
-    const pokemon = PokemonFactory.createPokemonFromName(detailledPkm.name, {
-      selectedEmotion: detailledPkm.emotion,
-      selectedShiny: detailledPkm.shiny
-    })
+    const index = PkmIndex[detailledPkm.name]
     const availableEmotions: Emotion[] = Object.values(Emotion).filter(
-      (e, i) => PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX[pokemon.index]?.[i] === 1
+      (e, i) => PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX[index]?.[i] === 1
     )
 
     return (

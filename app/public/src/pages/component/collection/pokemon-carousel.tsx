@@ -31,20 +31,22 @@ export default function PokemonCarousel(props: {
 
   const elligiblePokemons: (React.JSX.Element | null)[] = useMemo(
     () =>
-      pokemonsSorted.map((v) => {
-        const pkm = PokemonFactory.createPokemonFromName(v)
+      pokemonsSorted.map((pkm) => {
+        const pokemonData = getPokemonData(pkm)
+        const index = PkmIndex[pkm]
         if (
-          v !== Pkm.DEFAULT &&
-          pkm.skill !== Ability.DEFAULT &&
-          pkm.passive !== Passive.UNOWN &&
-          (props.type === "all" || pkm.types.has(Synergy[props.type]))
+          pkm !== Pkm.DEFAULT &&
+          pokemonData.skill !== Ability.DEFAULT &&
+          pokemonData.passive !== Passive.UNOWN &&
+          (props.type === "all" ||
+            pokemonData.types.includes(Synergy[props.type]))
         ) {
           return (
             <PokemonCollectionItem
-              key={`${pkm.index}-${props.type}`}
-              name={pkm.name}
-              index={pkm.index}
-              config={getConfig(pkm.index)}
+              key={`${index}-${props.type}`}
+              name={pkm}
+              index={index}
+              config={getConfig(index)}
               filter={props.filter}
               shinyOnly={props.shinyOnly}
               setPokemon={props.setPokemon}

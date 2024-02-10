@@ -1,7 +1,7 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { ILobbyUser } from "../../../../../models/colyseus-models/lobby-user"
-import PokemonFactory from "../../../../../models/pokemon-factory"
+import { getPokemonData } from "../../../../../models/precomputed"
 import { Role } from "../../../../../types"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { useAppSelector } from "../../../hooks"
@@ -22,7 +22,7 @@ export default function PlayerBox(props: { user: ILobbyUser }) {
   const countSynergies = new Map()
   pokemons.forEach((p) => {
     countPokemons.set(p, (countPokemons.get(p) ?? 0) + 1)
-    PokemonFactory.createPokemonFromName(p).types.forEach((type) => {
+    getPokemonData(p).types.forEach((type) => {
       countSynergies.set(type, (countSynergies.get(type) ?? 0) + 1)
     })
   })
