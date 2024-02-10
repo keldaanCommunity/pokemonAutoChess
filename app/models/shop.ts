@@ -55,7 +55,7 @@ export default class Shop {
   uncommonPool: Map<Pkm, number> = new Map<Pkm, number>()
   rarePool: Map<Pkm, number> = new Map<Pkm, number>()
   epicPool: Map<Pkm, number> = new Map<Pkm, number>()
-  legendaryPool: Map<Pkm, number> = new Map<Pkm, number>()
+  ultraPool: Map<Pkm, number> = new Map<Pkm, number>()
   constructor() {
     CommonShop.forEach((pkm) => {
       this.commonPool.set(pkm, getPoolSize(Rarity.COMMON, 3))
@@ -71,7 +71,7 @@ export default class Shop {
       this.epicPool.set(pkm, getPoolSize(Rarity.EPIC, 3))
     })
     UltraShop.forEach((pkm) => {
-      this.legendaryPool.set(pkm, getPoolSize(Rarity.ULTRA, 3))
+      this.ultraPool.set(pkm, getPoolSize(Rarity.ULTRA, 3))
     })
   }
 
@@ -93,7 +93,7 @@ export default class Shop {
         this.epicPool.set(pkm, getPoolSize(Rarity.EPIC, 2))
         break
       case Rarity.ULTRA:
-        this.legendaryPool.set(pkm, getPoolSize(Rarity.ULTRA, 2))
+        this.ultraPool.set(pkm, getPoolSize(Rarity.ULTRA, 2))
         break
       default:
         break
@@ -132,9 +132,9 @@ export default class Shop {
         this.epicPool.set(family, value + entityNumber)
       }
     } else if (pokemon.rarity === Rarity.ULTRA) {
-      const value = this.legendaryPool.get(family)
+      const value = this.ultraPool.get(family)
       if (value !== undefined) {
-        this.legendaryPool.set(family, value + entityNumber)
+        this.ultraPool.set(family, value + entityNumber)
       }
     }
   }
@@ -274,7 +274,7 @@ export default class Shop {
             pokemon = this.getRandomPokemonFromPool(this.epicPool, finals)
             break
           case 4:
-            pokemon = this.getRandomPokemonFromPool(this.legendaryPool, finals)
+            pokemon = this.getRandomPokemonFromPool(this.ultraPool, finals)
             break
           default:
             logger.error(
