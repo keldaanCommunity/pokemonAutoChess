@@ -23,7 +23,8 @@ export const iconRegExp = new RegExp(
     ...Weathers,
     ...Synergies,
     ...Items,
-    "GOLD"
+    "GOLD",
+    "STAR"
   ].join("|")}|\\[[^\\]]+\\])(?=\\W|$)`,
   "g"
 )
@@ -42,6 +43,14 @@ export function addIconsToDescription(description: string, tier = 0, ap = 0) {
             className="description-icon icon-money"
             src="/assets/icons/money.svg"
             alt="$"
+          />
+        )
+      } else if (token === "STAR") {
+        d = (
+          <img
+            className="description-icon icon-star"
+            src="/assets/ui/star.svg"
+            alt="⭐"
           />
         )
       } else if (DamageTypes.includes(token)) {
@@ -146,9 +155,9 @@ export function addIconsToDescription(description: string, tier = 0, ap = 0) {
     }
 
     return (
-      <span key={i}>
+      <>
         {d} {f}
-      </span>
+      </>
     )
   })
 }
