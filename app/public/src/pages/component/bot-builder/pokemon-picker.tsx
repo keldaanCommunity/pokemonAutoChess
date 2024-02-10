@@ -3,17 +3,17 @@ import ReactDOM from "react-dom"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { Tooltip } from "react-tooltip"
-import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
-import PokemonFactory, {
-  isAdditionalPick
-} from "../../../../../models/pokemon-factory"
-import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../../../../../models/precomputed"
+import {
+  getPokemonData,
+  PRECOMPUTED_POKEMONS_PER_TYPE
+} from "../../../../../models/precomputed"
 import { Emotion, PkmWithConfig } from "../../../../../types"
 import { RarityColor } from "../../../../../types/Config"
 import { Rarity } from "../../../../../types/enum/Game"
 import { Item } from "../../../../../types/enum/Item"
 import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
+import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
 import { groupBy } from "../../../../../utils/array"
 import { getPortraitSrc } from "../../../utils"
 import { cc } from "../../utils/jsx"
@@ -24,11 +24,11 @@ export default function PokemonPicker(props: {
   selectEntity: React.Dispatch<React.SetStateAction<PkmWithConfig | Item>>
 }) {
   const tabs = [...Object.keys(PRECOMPUTED_POKEMONS_PER_TYPE), "none"]
-  const pokemonsPerTab = tabs.map((t) =>
+  const pokemonsPerTab: IPokemonData[][] = tabs.map((t) =>
     (t === "none"
       ? [Pkm.KECLEON, Pkm.ARCEUS]
       : PRECOMPUTED_POKEMONS_PER_TYPE[t]
-    ).map((p) => PokemonFactory.createPokemonFromName(p))
+    ).map((p) => getPokemonData(p))
   )
 
   return (
@@ -58,11 +58,11 @@ export default function PokemonPicker(props: {
 }
 
 function PokemonPickerTab(props: {
-  pokemons: Pokemon[]
+  pokemons: IPokemonData[]
   selectEntity: React.Dispatch<React.SetStateAction<PkmWithConfig | Item>>
 }) {
   const { t } = useTranslation()
-  const [hoveredPokemon, setHoveredPokemon] = useState<Pokemon>()
+  const [hoveredPokemon, setHoveredPokemon] = useState<Pkm>()
 
   function handleOnDragStart(e: React.DragEvent, name: Pkm) {
     setHoveredPokemon(undefined)
@@ -71,10 +71,8 @@ function PokemonPickerTab(props: {
 
   const pokemonsPerRarity = groupBy(props.pokemons, (p) => p.rarity)
   for (const rarity in pokemonsPerRarity) {
-    pokemonsPerRarity[rarity].sort((a: Pokemon, b: Pokemon) => {
-      const isAddA = isAdditionalPick(a.name),
-        isAddB = isAdditionalPick(b.name)
-      if (isAddA !== isAddB) return +isAddA - +isAddB
+    pokemonsPerRarity[rarity].sort((a: IPokemonData, b: IPokemonData) => {
+      if (a.additional !== b.additional) return +a.additional - +b.additional
       return PkmFamily[a.name] === PkmFamily[b.name]
         ? a.stars - b.stars
         : PkmIndex[PkmFamily[a.name]].localeCompare(PkmIndex[PkmFamily[b.name]])
@@ -105,7 +103,7 @@ function PokemonPickerTab(props: {
               {(pokemonsPerRarity[rarity] ?? []).map((p) => (
                 <div
                   className={cc("pokemon-portrait", {
-                    additional: isAdditionalPick(p.name)
+                    additional: p.additional
                   })}
                   onClick={() => {
                     props.selectEntity({
@@ -115,7 +113,7 @@ function PokemonPickerTab(props: {
                     })
                   }}
                   onMouseOver={() => {
-                    setHoveredPokemon(p)
+                    setHoveredPokemon(p.name)
                   }}
                   key={p.name}
                   data-tooltip-id="pokemon-detail"
