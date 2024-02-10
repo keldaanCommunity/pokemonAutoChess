@@ -275,6 +275,15 @@ export default class PreparationRoom extends Room<PreparationState> {
         logger.error(error)
       }
     })
+
+    this.presence.subscribe("server-announcement", (message: string) => {
+      this.broadcast(Transfer.MESSAGES, {
+        author: "Server Announcement",
+        payload: message,
+        avatar: "0294/Joyous",
+        time: Date.now()
+      })
+    })
   }
 
   async onAuth(client: Client, options: any, request: any) {

@@ -401,6 +401,10 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       }
     )
 
+    this.presence.subscribe("server-announcement", (message: string) => {
+      this.state.addAnnouncement(message)
+    })
+
     this.initCronJobs()
     this.fetchChat()
     this.fetchLeaderboards()
