@@ -1,7 +1,6 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
-import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import {
   getPokemonData,
@@ -10,7 +9,7 @@ import {
 import { RarityColor, SynergyTriggers } from "../../../../../types/Config"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Rarity } from "../../../../../types/enum/Game"
-import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
+import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { Synergy, SynergyEffects } from "../../../../../types/enum/Synergy"
 import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
 import { groupBy } from "../../../../../utils/array"
@@ -50,7 +49,7 @@ export default function WikiType(props: { type: Synergy | "all" }) {
   for (const rarity in pokemonsPerRarity) {
     pokemonsPerRarity[rarity].sort((a: IPokemonData, b: IPokemonData) => {
       if (a.additional !== b.additional) return +a.additional - +b.additional
-      return PkmIndex[a.name] < PkmIndex[b.name] ? -1 : 1
+      return a.index < b.index ? -1 : 1
     })
   }
 
@@ -96,11 +95,11 @@ export default function WikiType(props: { type: Synergy | "all" }) {
                         })}
                       >
                         <img
-                          src={getPortraitSrc(PkmIndex[p.name])}
-                          data-tooltip-id={`pokemon-detail-${PkmIndex[p.name]}`}
+                          src={getPortraitSrc(p.index)}
+                          data-tooltip-id={`pokemon-detail-${p.index}`}
                         />
                         <Tooltip
-                          id={`pokemon-detail-${PkmIndex[p.name]}`}
+                          id={`pokemon-detail-${p.index}`}
                           className="custom-theme-tooltip game-pokemon-detail-tooltip"
                         >
                           <GamePokemonDetail
