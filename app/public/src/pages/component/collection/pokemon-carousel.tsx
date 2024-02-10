@@ -8,17 +8,11 @@ import { Synergy } from "../../../../../types/enum/Synergy"
 import { useAppSelector } from "../../../hooks"
 import PokemonCollectionItem from "./pokemon-collection-item"
 
-const pokemonsSorted = (Object.values(Pkm) as Pkm[]).sort((a: Pkm, b: Pkm) => {
-  return PkmFamily[a] === PkmFamily[b]
-    ? (PRECOMPUTED_POKEMONS_STARS[a] ?? 0) -
-        (PRECOMPUTED_POKEMONS_STARS[b] ?? 0)
-    : PkmIndex[PkmFamily[a]].localeCompare(PkmIndex[PkmFamily[b]])
-})
-
 export default function PokemonCarousel(props: {
   type: Synergy | "all"
   setPokemon: Dispatch<SetStateAction<Pkm | undefined>>
   filter: string
+  sort: string
   shinyOnly: boolean
 }) {
   const pokemonCollection = useAppSelector(
@@ -29,6 +23,24 @@ export default function PokemonCarousel(props: {
     (index) => pokemonCollection.find((p) => p.id == index),
     [pokemonCollection]
   )
+
+  const pokemonsSorted = useMemo(() => {
+    if (props.sort === "index") {
+      return (Object.values(Pkm) as Pkm[]).sort((a: Pkm, b: Pkm) => {
+        return PkmFamily[a] === PkmFamily[b]
+          ? (PRECOMPUTED_POKEMONS_STARS[a] ?? 0) -
+              (PRECOMPUTED_POKEMONS_STARS[b] ?? 0)
+          : PkmIndex[PkmFamily[a]].localeCompare(PkmIndex[PkmFamily[b]])
+      })
+    } else {
+      return (Object.values(Pkm) as Pkm[]).sort((a: Pkm, b: Pkm) => {
+        return (
+          (getConfig(PkmIndex[b])?.dust ?? 0) -
+          (getConfig(PkmIndex[a])?.dust ?? 0)
+        )
+      })
+    }
+  }, [props.sort])
 
   const elligiblePokemons: (React.JSX.Element | null)[] = useMemo(
     () =>
@@ -55,7 +67,14 @@ export default function PokemonCarousel(props: {
 
         return null
       }),
-    [getConfig, props.filter, props.setPokemon, props.shinyOnly, props.type]
+    [
+      getConfig,
+      props.filter,
+      props.sort,
+      props.setPokemon,
+      props.shinyOnly,
+      props.type
+    ]
   )
 
   return <div className="pokemon-carousel">{elligiblePokemons}</div>

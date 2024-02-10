@@ -2195,6 +2195,8 @@
   "show_locked": "Show locked",
   "show_unlockable": "Show unlockable",
   "show_unlocked": "Show unlocked",
+  "sort_by_index": "Sort by index",
+  "sort_by_shards": "Sort by shards",
   "normal_emotions": "Normal Emotions",
   "shiny_emotions": "Shiny Emotions",
   "buy_booster_500": "Buy a new booster for 500 ",

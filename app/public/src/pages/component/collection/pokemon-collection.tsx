@@ -5,6 +5,7 @@ import { Pkm } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { Checkbox } from "../checkbox/checkbox"
 import SynergyIcon from "../icons/synergy-icon"
+import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
 import PokemonCarousel from "./pokemon-carousel"
 import "./pokemon-collection.css"
 import PokemonEmotionsModal from "./pokemon-emotions-modal"
@@ -17,68 +18,47 @@ export default function PokemonCollection() {
   )
 
   const [filter, setFilter] = useState<string>("all")
+  const [sort, setSort] = useState<string>("index")
   const [shinyOnly, setShinyOnly] = useState<boolean>(false)
 
   return (
     <div id="pokemon-collection">
       <header className="nes-container">
+        <PokemonTypeahead
+          value={selectedPokemon ?? ""}
+          onChange={(pkm) => {
+            if (pkm) {
+              setSelectedPokemon(pkm)
+            }
+          }}
+        />
+
+        <select
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+          className="my-select"
+        >
+          <option value={"all"}>{t("show_all")}</option>
+          <option value={"locked"}>{t("show_locked")}</option>
+          <option value={"unlockable"}>{t("show_unlockable")}</option>
+          <option value={"unlocked"}>{t("show_unlocked")}</option>
+        </select>
+
+        <select
+          value={sort}
+          onChange={(e) => setSort(e.target.value)}
+          className="my-select"
+        >
+          <option value={"index"}>{t("sort_by_index")}</option>
+          <option value={"shards"}>{t("sort_by_shards")}</option>
+        </select>
+
         <Checkbox
           checked={shinyOnly}
           onToggle={setShinyOnly}
           label={t("shiny_hunter")}
           isDark
         />
-        <button
-          onClick={() => {
-            setFilter("all")
-          }}
-          className="bubbly pink"
-        >
-          <Checkbox
-            checked={filter === "all"}
-            label={t("show_all")}
-            isDark
-            readOnly
-          />
-        </button>
-        <button
-          onClick={() => {
-            setFilter("locked")
-          }}
-          className="bubbly red"
-        >
-          <Checkbox
-            checked={filter === "locked"}
-            label={t("show_locked")}
-            isDark
-            readOnly
-          />
-        </button>
-        <button
-          onClick={() => {
-            setFilter("unlockable")
-          }}
-          className="bubbly orange"
-        >
-          <Checkbox
-            checked={filter === "unlockable"}
-            label={t("show_unlockable")}
-            readOnly
-          />
-        </button>
-        <button
-          onClick={() => {
-            setFilter("unlocked")
-          }}
-          className="bubbly green"
-        >
-          <Checkbox
-            checked={filter === "unlocked"}
-            label={t("show_unlocked")}
-            isDark
-            readOnly
-          />
-        </button>
       </header>
       <div className="nes-container">
         <Tabs>
@@ -108,6 +88,7 @@ export default function PokemonCollection() {
                     type={type}
                     setPokemon={setSelectedPokemon}
                     filter={filter}
+                    sort={sort}
                     shinyOnly={shinyOnly}
                   />
                 </TabPanel>
@@ -118,6 +99,7 @@ export default function PokemonCollection() {
             <UnownPanel
               setPokemon={setSelectedPokemon}
               filter={filter}
+              sort={sort}
               shinyOnly={shinyOnly}
             />
           </TabPanel>
