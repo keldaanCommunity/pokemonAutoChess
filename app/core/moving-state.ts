@@ -25,10 +25,23 @@ export default class MovingState extends PokemonState {
         pokemon,
         board
       )
-      if (targetAtRange) {
-        if (!pokemon.status.charm) {
-          pokemon.toAttackingState()
+      if (pokemon.status.charm) {
+        if (
+          pokemon.status.charmOrigin &&
+          distanceC(
+            pokemon.positionX,
+            pokemon.positionY,
+            pokemon.status.charmOrigin.positionX,
+            pokemon.status.charmOrigin.positionY
+          ) > 1
+        ) {
+          this.move(pokemon, board, {
+            x: pokemon.status.charmOrigin.positionX,
+            y: pokemon.status.charmOrigin.positionY
+          })
         }
+      } else if (targetAtRange) {
+        pokemon.toAttackingState()
       } else {
         const targetAtSight = this.getNearestTargetAtSightCoordinates(
           pokemon,
