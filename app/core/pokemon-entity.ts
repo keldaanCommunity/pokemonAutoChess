@@ -655,7 +655,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.items.has(Item.INCENSE) && chance(1 / 10)) {
-      this.status.triggerCharm(2000, target)
+      this.status.triggerCharm(2000, target, this)
     }
 
     // Synergy effects on hit

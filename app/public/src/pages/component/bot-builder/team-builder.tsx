@@ -14,8 +14,8 @@ import BotAvatar from "./bot-avatar"
 import ItemPicker from "./item-picker"
 import PokemonPicker from "./pokemon-picker"
 import SelectedEntity from "./selected-entity"
-import "./team-builder.css"
 import TeamEditor from "./team-editor"
+import "./team-builder.css"
 
 export default function TeamBuilder(props: {
   bot?: IBot

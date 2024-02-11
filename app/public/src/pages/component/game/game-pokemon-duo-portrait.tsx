@@ -1,7 +1,7 @@
 import React from "react"
 import { Tooltip } from "react-tooltip"
 import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
-import PokemonFactory from "../../../../../models/pokemon-factory"
+import { getPokemonData } from "../../../../../models/precomputed"
 import { RarityColor } from "../../../../../types/Config"
 import { PkmDuo, PkmDuos } from "../../../../../types/enum/Pokemon"
 import { useAppSelector } from "../../../hooks"
@@ -17,9 +17,7 @@ export default function GamePokemonDuoPortrait(props: {
   duo: PkmDuo
   click?: React.MouseEventHandler<HTMLDivElement>
 }) {
-  const duo = PkmDuos[props.duo].map((p) =>
-    PokemonFactory.createPokemonFromName(p)
-  )
+  const duo = PkmDuos[props.duo].map((p) => getPokemonData(p))
   const rarityColor = RarityColor[duo[0].rarity]
   const pokemonCollection = useAppSelector(
     (state) => state.game.pokemonCollection
@@ -59,7 +57,7 @@ export default function GamePokemonDuoPortrait(props: {
             place="bottom"
           >
             <GamePokemonDetail
-              pokemon={p}
+              pokemon={p.name}
               emotion={duoConfig[i]?.selectedEmotion}
               shiny={duoConfig[i]?.selectedShiny}
             />

@@ -2,7 +2,7 @@ import React from "react"
 import ReactDOM from "react-dom"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
-import PokemonFactory from "../../../../../models/pokemon-factory"
+import { getPokemonData } from "../../../../../models/precomputed"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { SpecialLobbyRule } from "../../../../../types/enum/SpecialLobbyRule"
 import { useAppSelector } from "../../../hooks"
@@ -43,7 +43,7 @@ export function GameAdditionalPokemons() {
           data-tooltip-id="detail-additional-pokemons"
         >
           {additionalPokemons.map((p, index) => {
-            const pokemon = PokemonFactory.createPokemonFromName(p)
+            const pokemon = getPokemonData(p)
             return (
               <React.Fragment key={"additional-pokemon-tooltip-" + index}>
                 {ReactDOM.createPortal(
@@ -54,7 +54,7 @@ export function GameAdditionalPokemons() {
                     data-tooltip-offset={{ top: index < 4 ? 60 : 130 }}
                   >
                     <GamePokemonDetail
-                      pokemon={pokemon}
+                      pokemon={pokemon.name}
                       emotion={
                         pokemonCollection.get(pokemon.index)?.selectedEmotion
                       }

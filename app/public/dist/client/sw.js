@@ -1,7 +1,6 @@
 /* Change this cache name every time you want to force players 
   to invalidate their cache and download all assets again */
 
-
 const CACHE_NAME = "CACHE v4.7.0.39"
 
 // Cache-first strategy

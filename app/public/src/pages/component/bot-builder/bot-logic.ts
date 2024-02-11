@@ -3,7 +3,7 @@ import {
   IDetailledPokemon,
   IStep
 } from "../../../../../models/mongo-models/bot-v2"
-import PokemonFactory from "../../../../../models/pokemon-factory"
+import { getPokemonData } from "../../../../../models/precomputed"
 import {
   AdditionalPicksStages,
   PortalCarouselStages
@@ -103,8 +103,7 @@ export function getBotScore(value: number) {
 }
 
 export function getCategory(pkm: Pkm): string {
-  const p = PokemonFactory.createPokemonFromName(pkm)
-  //= & " T"&'Raw Data'!D2 & IF('Raw Data'!V2=TRUE, " DUO", "")
+  const p = getPokemonData(pkm)
   let category = p.rarity.toUpperCase()
   if (
     [Rarity.UNIQUE, Rarity.LEGENDARY, Rarity.SPECIAL].includes(p.rarity) ===
@@ -208,7 +207,7 @@ export function validateBot(bot: IBot) {
 }
 
 export function validateBoard(board: IDetailledPokemon[], stage: number) {
-  const team = board.map((p) => PokemonFactory.createPokemonFromName(p.name))
+  const team = board.map((p) => getPokemonData(p.name))
   const items = getNbComponentsOnBoard(board)
   const maxItems = getMaxItemComponents(stage)
 

@@ -422,7 +422,7 @@ export class OnLeaveCommand extends Command<
 
           if (client.auth.uid === this.state.ownerId) {
             const newOwner = values(this.state.users).find(
-              (user) => user.id !== this.state.ownerId
+              (user) => user.id !== this.state.ownerId && !user.isBot
             )
             if (newOwner) {
               this.state.ownerId = newOwner.id

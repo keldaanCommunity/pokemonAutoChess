@@ -18,10 +18,12 @@
 # Gameplay
 
 - On lobbies with less than 8 players, some additional picks are picked randomly to always have 8 add picks per rarity
+- Changed charm status: Charmed units now move to contact with the unit at the origin of the charm
 
 # UI
 
 - Add a keyboard shortcut "E" when hovering a portrait in shop to quickly buy/resell the unit
+- Add a sort filter and search bar on Collection screen
 
 # Bugfix
 

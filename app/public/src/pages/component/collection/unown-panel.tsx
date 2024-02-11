@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react"
+import React, { Dispatch, SetStateAction, useMemo } from "react"
 import { Emotion } from "../../../../../types/enum/Emotion"
 import { Pkm, PkmIndex, Unowns } from "../../../../../types/enum/Pokemon"
 import { useAppSelector } from "../../../hooks"
@@ -8,6 +8,7 @@ import "./unown-panel.css"
 export default function UnownPanel(props: {
   setPokemon: Dispatch<SetStateAction<Pkm | undefined>>
   filter: string
+  sort: string
   shinyOnly: boolean
 }) {
   const pokemonCollection = useAppSelector(
@@ -23,16 +24,26 @@ export default function UnownPanel(props: {
     .replace(/\s+$/gm, "")
     .split("")
 
-  const unowns = Unowns.flatMap((pkm: Pkm) => {
-    const config = pokemonCollection.find((p) => p.id === PkmIndex[pkm])
-    const { emotions, shinyEmotions } = config ?? {
-      dust: 0,
-      emotions: [] as Emotion[],
-      shinyEmotions: [] as Emotion[]
-    }
-    const isUnlocked = emotions?.length > 0 || shinyEmotions?.length > 0
-    return [{ pkm, config, isUnlocked }]
-  })
+  const unowns = useMemo(
+    () =>
+      Unowns.flatMap((pkm: Pkm) => {
+        const config = pokemonCollection.find((p) => p.id === PkmIndex[pkm])
+        const { emotions, shinyEmotions } = config ?? {
+          dust: 0,
+          emotions: [] as Emotion[],
+          shinyEmotions: [] as Emotion[]
+        }
+        const isUnlocked = emotions?.length > 0 || shinyEmotions?.length > 0
+        return [{ pkm, config, isUnlocked }]
+      }).sort((a, b) => {
+        if (props.sort === "index") {
+          return PkmIndex[a.pkm].localeCompare(PkmIndex[b.pkm])
+        } else {
+          return (b.config?.dust ?? 0) - (a.config?.dust ?? 0)
+        }
+      }),
+    [props.sort]
+  )
 
   return (
     <div>

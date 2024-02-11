@@ -18,7 +18,10 @@ import UserMetadata, {
   IPokemonConfig
 } from "../models/mongo-models/user-metadata"
 import PokemonFactory from "../models/pokemon-factory"
-import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../models/precomputed"
+import {
+  getPokemonData,
+  PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY
+} from "../models/precomputed"
 import { getAvatarString } from "../public/src/utils"
 import {
   Emotion,
@@ -132,24 +135,23 @@ export default class GameRoom extends Room<GameState> {
       PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
         type
       ].additionalPokemons.forEach((p) => {
-        const pokemon = PokemonFactory.createPokemonFromName(p)
+        const { stars, rarity } = getPokemonData(p)
         if (
-          (pokemon.rarity === Rarity.UNCOMMON ||
-            pokemon.rarity === Rarity.COMMON) && // TEMP: we should move all common add picks to uncommon rarity
+          (rarity === Rarity.UNCOMMON || rarity === Rarity.COMMON) && // TEMP: we should move all common add picks to uncommon rarity
           !this.additionalUncommonPool.includes(p) &&
-          pokemon.stars === 1
+          stars === 1
         ) {
           this.additionalUncommonPool.push(p)
         } else if (
-          pokemon.rarity === Rarity.RARE &&
+          rarity === Rarity.RARE &&
           !this.additionalRarePool.includes(p) &&
-          pokemon.stars === 1
+          stars === 1
         ) {
           this.additionalRarePool.push(p)
         } else if (
-          pokemon.rarity === Rarity.EPIC &&
+          rarity === Rarity.EPIC &&
           !this.additionalEpicPool.includes(p) &&
-          pokemon.stars === 1
+          stars === 1
         ) {
           this.additionalEpicPool.push(p)
         }

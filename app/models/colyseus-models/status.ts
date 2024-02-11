@@ -44,6 +44,7 @@ export default class Status extends Schema implements IStatus {
   poisonOrigin: PokemonEntity | undefined = undefined
   silenceOrigin: PokemonEntity | undefined = undefined
   woundOrigin: PokemonEntity | undefined = undefined
+  charmOrigin: PokemonEntity | undefined = undefined
   magmaStormOrigin: PokemonEntity | null = null
   clearWingCooldown = 1000
   burnCooldown = 0
@@ -604,7 +605,7 @@ export default class Status extends Schema implements IStatus {
   triggerCharm(
     timer: number,
     pkm: IPokemonEntity,
-    origin: IPokemonEntity | undefined = undefined,
+    origin: PokemonEntity,
     apBoost = false
   ) {
     if (!this.charm && !this.runeProtect) {
@@ -615,6 +616,7 @@ export default class Status extends Schema implements IStatus {
       }
       this.charm = true
       this.charmCooldown = timer
+      this.charmOrigin = origin
       if (origin) {
         pkm.targetX = origin?.positionX
         pkm.targetY = origin?.positionY
@@ -625,6 +627,7 @@ export default class Status extends Schema implements IStatus {
   updateCharm(dt: number) {
     if (this.charmCooldown - dt <= 0) {
       this.charm = false
+      this.charmOrigin = undefined
     } else {
       this.charmCooldown = this.charmCooldown - dt
     }

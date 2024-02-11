@@ -1170,7 +1170,7 @@ export function displayAbility(
     case Ability.BONEMERANG: {
       const startCoords = transformAttackCoordinate(targetX, 0, flip)
       const finalCoords = transformAttackCoordinate(targetX, 6, flip)
-      const specialProjectile = addAbilitySprite(skill, startCoords)
+      const specialProjectile = addAbilitySprite(skill, startCoords).setScale(2)
       scene.tweens.add({
         targets: specialProjectile,
         x: finalCoords[0],
