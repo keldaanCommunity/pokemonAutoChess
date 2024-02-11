@@ -334,7 +334,9 @@ export default class Shop {
             break
           case Rarity.SPECIAL:
           default:
-            fish = Pkm.MAGIKARP
+            if (fishingLevel === 1) fish = Pkm.MAGIKARP
+            if (fishingLevel === 2) fish = Pkm.FEEBAS
+            //if (fishingLevel >= 3) fish = Pkm.WISHIWASHI // when available
             break
         }
         break

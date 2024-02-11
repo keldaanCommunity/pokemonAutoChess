@@ -2819,7 +2819,7 @@ export class Flabebe extends Pokemon {
   speDef = 1
   maxPP = 90
   range = 3
-  skill = Ability.DISARMING_VOICE
+  skill = Ability.FAIRY_WIND
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -2834,7 +2834,7 @@ export class Floette extends Pokemon {
   speDef = 1
   maxPP = 90
   range = 3
-  skill = Ability.DISARMING_VOICE
+  skill = Ability.FAIRY_WIND
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 export class Florges extends Pokemon {
@@ -2847,7 +2847,7 @@ export class Florges extends Pokemon {
   speDef = 2
   maxPP = 90
   range = 3
-  skill = Ability.DISARMING_VOICE
+  skill = Ability.FAIRY_WIND
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -4276,7 +4276,6 @@ export class Magikarp extends Pokemon {
   skill = Ability.SPLASH
   passive = Passive.MAGIKARP
   attackSprite = AttackSprite.WATER_MELEE
-
   evolutionRule = new CountEvolutionRule(8)
 }
 
@@ -11398,6 +11397,37 @@ export class Kingambit extends Pokemon {
   attackSprite = AttackSprite.STEEL_MELEE
 }
 
+export class Feebas extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER])
+  rarity = Rarity.SPECIAL
+  evolution = Pkm.MILOTIC
+  stars = 1
+  hp = 60
+  atk = 5
+  def = 2
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.SPLASH
+  passive = Passive.FEEBAS
+  attackSprite = AttackSprite.WATER_MELEE
+  evolutionRule = new CountEvolutionRule(6)
+}
+
+export class Milotic extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.FAIRY, Synergy.WATER])
+  rarity = Rarity.SPECIAL
+  stars = 3
+  hp = 300
+  atk = 16
+  def = 4
+  speDef = 7
+  maxPP = 80
+  range = 2
+  skill = Ability.ATTRACT
+  attackSprite = AttackSprite.FAIRY_RANGE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (shiny: boolean, emotion: Emotion) => Pokemon
@@ -12090,5 +12120,7 @@ export const PokemonClasses: Record<
   [Pkm.MINIOR_KERNEL_RED]: MiniorKernelRed,
   [Pkm.MINIOR_KERNEL_BLUE]: MiniorKernelBlue,
   [Pkm.MINIOR_KERNEL_ORANGE]: MiniorKernelOrange,
-  [Pkm.MINIOR_KERNEL_GREEN]: MiniorKernelGreen
+  [Pkm.MINIOR_KERNEL_GREEN]: MiniorKernelGreen,
+  [Pkm.FEEBAS]: Feebas,
+  [Pkm.MILOTIC]: Milotic
 }

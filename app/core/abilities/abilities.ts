@@ -1406,7 +1406,7 @@ export class RelicSongStrategy extends AbilityStrategy {
   }
 }
 
-export class DisarmingVoiceStrategy extends AbilityStrategy {
+export class FairyWindStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1431,6 +1431,27 @@ export class DisarmingVoiceStrategy extends AbilityStrategy {
     })
   }
 }
+
+export class DisarmingVoiceStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    let ppGain = [10, 20, 30][pokemon.stars - 1] ?? 0
+    ppGain = Math.round(ppGain * (1 + pokemon.ap / 200))
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
+      if (tg && pokemon.team !== tg.team) {
+        let attackLost = min(1)(Math.round(0.1 * tg.atk))
+        tg.addAttack(-1 * attackLost, true)
+      }
+    })
+  }
+}
+
 export class HighJumpKickStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -7048,6 +7069,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.BONEMERANG]: new BonemerangStrategy(),
   [Ability.GROWL]: new GrowlStrategy(),
   [Ability.RELIC_SONG]: new RelicSongStrategy(),
+  [Ability.FAIRY_WIND]: new FairyWindStrategy(),
   [Ability.DISARMING_VOICE]: new DisarmingVoiceStrategy(),
   [Ability.HIGH_JUMP_KICK]: new HighJumpKickStrategy(),
   [Ability.GRASS_WHISTLE]: new GrassWhistleStrategy(),

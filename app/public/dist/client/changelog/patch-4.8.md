@@ -1,5 +1,8 @@
 # New Pokemons:
 
+- Feebas
+- Milotic
+
 # Changes to Pokemon & Abilities
 
 - Give Politoed Sound synergy instead of Fighting

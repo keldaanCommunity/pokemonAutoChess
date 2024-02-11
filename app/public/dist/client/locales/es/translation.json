@@ -992,7 +992,7 @@
     "BONEMERANG": "Lanza un hueso de boomerang a través del equipo enemigo, infligiendo [30,60,120,SP] SPECIAL en su camino",
     "GROWL": "Deja FLINCH a todo el equipo enemigo durante [3,6,9,SP] segundos",
     "RELIC_SONG": "Emite una nota. Después de la tercera nota, deja SLEEP a todo el equipo enemigo durante [2,SP=0.5] segundos",
-    "DISARMING_VOICE": "Otorga [10,20,30,SP=0.5] PP a todos los aliados excepto al lanzador",
+    "FAIRY_WIND": "Otorga [10,20,30,SP=0.5] PP a todos los aliados excepto al lanzador",
     "HIGH_JUMP_KICK": "Realiza [50,100,200,SP] de SPECIAL y roba todo el PP de su objetivo",
     "GRASS_WHISTLE": "Deja SLEEP a [1,2,4] enemigos durante 2 segundos",
     "TRI_ATTACK": "Inflige [30,50,70,SP] de SPECIAL. Puede provocar BURN, FREEZE o PARALYSIS al objetivo.",
