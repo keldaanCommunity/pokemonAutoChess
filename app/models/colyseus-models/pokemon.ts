@@ -5199,51 +5199,62 @@ export class CastformHail extends Pokemon {
 }
 
 export class Landorus extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.FLYING])
-  rarity = Rarity.UNIQUE
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.GROUND])
+  rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 200
-  atk = 20
-  def = 3
-  speDef = 3
-  maxPP = 100
-  range = 2
-  skill = Ability.DEFAULT //Ability.ROCK_SLIDE
-  passive = Passive.NONE //Passive.SANDSTORM
-  attackSprite = AttackSprite.FLYING_RANGE
-}
-
-export class Thundurus extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FLYING])
-  rarity = Rarity.UNIQUE
-  stars = 3
-  hp = 200
-  atk = 20
+  hp = 250
+  atk = 30
   def = 3
   speDef = 3
   maxPP = 80
   range = 3
-  skill = Ability.DEFAULT //Ability.THUNDER
-  passive = Passive.NONE //Passive.STORM
-  attackSprite = AttackSprite.ELECTRIC_RANGE
+  skill = Ability.SANDSEAR_STORM
+  passive = Passive.SANDSTORM
+  attackSprite = AttackSprite.FLYING_RANGE
+}
+
+export class Thundurus extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.ELECTRIC])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 250
+  atk = 30
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 3
+  skill = Ability.WILDBOLT_STORM
+  passive = Passive.STORM
+  attackSprite = AttackSprite.FLYING_RANGE
 }
 
 export class Tornadus extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.FLYING,
-    Synergy.HUMAN,
-    Synergy.MONSTER
-  ])
-  rarity = Rarity.UNIQUE
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.ICE])
+  rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 200
-  atk = 20
-  def = 2
-  speDef = 2
-  maxPP = 70
+  hp = 250
+  atk = 30
+  def = 3
+  speDef = 3
+  maxPP = 80
   range = 3
-  skill = Ability.TRI_ATTACK
+  skill = Ability.BLEAKWIND_STORM
   passive = Passive.WINDY
+  attackSprite = AttackSprite.FLYING_RANGE
+}
+
+export class Enamorus extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.FAIRY])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 250
+  atk = 30
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 3
+  skill = Ability.SPRINGTIDE_STORM
+  passive = Passive.MISTY
   attackSprite = AttackSprite.FLYING_RANGE
 }
 
@@ -11662,6 +11673,7 @@ export const PokemonClasses: Record<
   [Pkm.LANDORUS]: Landorus,
   [Pkm.THUNDURUS]: Thundurus,
   [Pkm.TORNADUS]: Tornadus,
+  [Pkm.ENAMORUS]: Enamorus,
   [Pkm.KELDEO]: Keldeo,
   [Pkm.TERRAKION]: Terrakion,
   [Pkm.VIRIZION]: Virizion,

@@ -507,6 +507,31 @@ export function displayAbility(
       break
     }
 
+    case Ability.SANDSEAR_STORM:
+    case Ability.WILDBOLT_STORM:
+    case Ability.BLEAKWIND_STORM:
+    case Ability.SPRINGTIDE_STORM: {
+      const [dx, dy] = OrientationVector[orientation]
+      const finalCoordinates = transformAttackCoordinate(
+        positionX + dx * 8,
+        positionY + dy * 8,
+        flip
+      )
+      const specialProjectile = addAbilitySprite(skill, coordinates).setScale(2)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: finalCoordinates[0],
+        y: finalCoordinates[1],
+        ease: "linear",
+        yoyo: false,
+        duration: 2000,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
     case Ability.ROAR_OF_TIME:
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break

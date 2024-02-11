@@ -232,6 +232,7 @@ export enum Pkm {
   LANDORUS = "LANDORUS",
   THUNDURUS = "THUNDURUS",
   TORNADUS = "TORNADUS",
+  ENAMORUS = "ENAMORUS",
   KELDEO = "KELDEO",
   TERRAKION = "TERRAKION",
   VIRIZION = "VIRIZION",
@@ -930,6 +931,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.LANDORUS]: "0645",
   [Pkm.THUNDURUS]: "0642",
   [Pkm.TORNADUS]: "0641",
+  [Pkm.ENAMORUS]: "0905",
   [Pkm.KELDEO]: "0647",
   [Pkm.TERRAKION]: "0639",
   [Pkm.VIRIZION]: "0640",
@@ -1595,6 +1597,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.LANDORUS]: Pkm.LANDORUS,
   [Pkm.TORNADUS]: Pkm.TORNADUS,
   [Pkm.THUNDURUS]: Pkm.THUNDURUS,
+  [Pkm.ENAMORUS]: Pkm.ENAMORUS,
   [Pkm.KELDEO]: Pkm.KELDEO,
   [Pkm.TERRAKION]: Pkm.TERRAKION,
   [Pkm.VIRIZION]: Pkm.VIRIZION,
@@ -3347,17 +3350,22 @@ export const AnimationConfig: {
   },
   [Pkm.LANDORUS]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
   [Pkm.THUNDURUS]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
   [Pkm.TORNADUS]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Attack,
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.ENAMORUS]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
   [Pkm.KELDEO]: {
