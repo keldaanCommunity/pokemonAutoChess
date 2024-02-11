@@ -1441,12 +1441,14 @@ export class DisarmingVoiceStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let ppGain = [10, 20, 30][pokemon.stars - 1] ?? 0
-    ppGain = Math.round(ppGain * (1 + pokemon.ap / 200))
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
-      if (tg && pokemon.team !== tg.team) {
-        let attackLost = min(1)(Math.round(0.1 * tg.atk))
-        tg.addAttack(-1 * attackLost, true)
+    const cells = board.getCellsInRadius(
+      pokemon.positionX,
+      pokemon.positionY,
+      2
+    )
+    cells.forEach((cell) => {
+      if (cell.value && pokemon.team != cell.value.team) {
+        cell.value.status.triggerCharm(1000, target, pokemon, true)
       }
     })
   }
