@@ -1,5 +1,8 @@
 # New Pokemons:
 
+- Feebas
+- Milotic
+
 # Changes to Pokemon & Abilities
 
 - Give Politoed Sound synergy instead of Fighting
@@ -7,6 +10,8 @@
 - Remove Field synergy of Tepig line, buff attack & spe-def
 
 # Changes to Synergies
+
+- Water: Magikarp can now be fished only at first synergy level, and are worth zero to sell
 
 # Changes to Items
 

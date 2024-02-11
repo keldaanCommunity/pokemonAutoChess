@@ -1080,7 +1080,7 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
-    case Ability.DISARMING_VOICE:
+    case Ability.FAIRY_WIND:
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 

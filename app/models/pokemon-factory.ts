@@ -126,7 +126,7 @@ export default class PokemonFactory {
     } else if (name == Pkm.DITTO) {
       return 5
     } else if (name === Pkm.MAGIKARP) {
-      return 1
+      return 0
     } else if (name === Pkm.GYARADOS) {
       return 10
     } else if (Unowns.includes(name)) {
