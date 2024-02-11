@@ -8,6 +8,8 @@
 
 # Changes to Synergies
 
+- Water: Magikarp can now be fished only at first synergy level, and are worth zero to sell
+
 # Changes to Items
 
 # Gameplay
