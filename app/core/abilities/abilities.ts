@@ -6374,7 +6374,7 @@ export class EmptyLightStrategy extends AbilityStrategy {
           targetY: tg.positionY
         })
         tg.addSpecialDefense(-3, false)
-        tg.handleSpecialDamage(60, board, AttackType.SPECIAL, pokemon, crit)
+        tg.handleSpecialDamage(40, board, AttackType.SPECIAL, pokemon, crit)
         affectedTargetsIds.push(tg.id)
         const cells = board.getAdjacentCells(tg.positionX, tg.positionY)
         tg = cells

@@ -23,6 +23,7 @@
 - Buff Minior Red core: ~~15% additional~~ 150% physical damage
 - Buff Minior Orange core: ~~5% additional~~ 50% true damage
 - Buff Minior Green core: ~~heals 5 HP~~ heals 100% of damage
+- Nerf Nihilego: Empty light ~~60~~ 40 special damage ; gain ~+5 Attack~ +10% AP on kill
 
 # Changes to Synergies
 

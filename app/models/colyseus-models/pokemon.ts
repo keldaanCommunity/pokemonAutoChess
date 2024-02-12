@@ -9863,7 +9863,7 @@ export class Kartana extends Pokemon {
   maxPP = 65
   range = 1
   skill = Ability.LEAF_BLADE
-  passive = Passive.BEAST_BOOST
+  passive = Passive.BEAST_BOOST_ATK
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -10837,7 +10837,7 @@ export class Nihilego extends Pokemon {
   maxPP = 80
   range = 3
   skill = Ability.EMPTY_LIGHT
-  passive = Passive.BEAST_BOOST
+  passive = Passive.BEAST_BOOST_AP
   attackSprite = AttackSprite.POISON_RANGE
 }
 
