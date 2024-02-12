@@ -13,6 +13,9 @@
 - Give Scorbunny line Field synergy instead of Fighting
 - Remove Field synergy of Tepig line, buff attack & spe-def
 - Tornadus: moved to Legendary alongside with Thundurus, Landorus and Enamorus. New synergies and ability
+- Buff Metapod: Def ~~1~~ 3
+- Buff Butterfree: Def ~~1~~2 Spe def ~~1~~ 3
+- Changed Sketch (Smeargle): copy the max PP in addition to the ability
 
 # Changes to Synergies
 

@@ -1255,7 +1255,7 @@
     "MAKE_IT_RAIN": "Deals [100,SP] + your amount of GOLD as SPECIAL",
     "CRUSH_GRIP": "The target is crushed with great force. The more HP the target has left, the greater the damage: between [20,SP] and [200,SP] PHYSICAL.",
     "AURASPHERE": "Exudes an aura and projects energy in a line, dealing [25,50,SP] SPECIAL and SILENCE every opponent hit for 3 seconds",
-    "SKETCH": "Copies the ability of the ally on his left at the start of the fight",
+    "SKETCH": "Copies the ability and max PP of the ally on his left at the start of the fight",
     "OVERDRIVE": "Deal [120,SP]% of ATK as SPECIAL in a 3-range radius by twanging an electric guitar, causing a huge echo and strong vibration. The damage is reduced with the distance, 20% per cell.",
     "LOVELY_KISS": "Kisses the enemy with a frightening expression. Puts the enemy SLEEP for [2,4,SP] seconds.",
     "TRANSFORM": "Takes the appearance and the statistics of its target (except HP)",

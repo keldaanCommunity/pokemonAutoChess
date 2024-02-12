@@ -4020,7 +4020,7 @@ export class Metapod extends Pokemon {
   evolution = Pkm.BUTTERFREE
   hp = 110
   atk = 9
-  def = 1
+  def = 3
   speDef = 1
   maxPP = 100
   range = 2
@@ -4034,8 +4034,8 @@ export class Butterfree extends Pokemon {
   stars = 3
   hp = 200
   atk = 16
-  def = 1
-  speDef = 1
+  def = 2
+  speDef = 3
   maxPP = 100
   range = 2
   skill = Ability.STRING_SHOT
@@ -11324,7 +11324,7 @@ export class Smeargle extends Pokemon {
   atk = 20
   def = 3
   speDef = 3
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.SKETCH
   attackSprite = AttackSprite.NORMAL_MELEE
@@ -11335,7 +11335,7 @@ export class Smeargle extends Pokemon {
       this.positionY
     )
     if (allyOnTheLeft) {
-      console.log("sketch " + allyOnTheLeft.skill)
+      entity.maxPP = allyOnTheLeft.maxPP
       entity.skill = allyOnTheLeft.skill
     }
   }
