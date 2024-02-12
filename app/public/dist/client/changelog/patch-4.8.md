@@ -18,6 +18,11 @@
 - Changed Sketch (Smeargle): copy the max PP in addition to the ability
 - Changed Shuppet line: lose Dark, gain Artificial, Attack ~~7/15/30~~ 10/20/30 ; changed Shadow clone: no longer copies items but give one random item to the clone; AP now scales the HP% of the clone
 - Buff Kowtow Cleave (Pawniard): ~~100+10% per fallen ally~~ 150+20% per fallen ally
+- Buff Minior: Range ~~2~~ 3
+- Buff Minior Blue core: ~~10% additional~~ 100% special damage
+- Buff Minior Red core: ~~15% additional~~ 150% physical damage
+- Buff Minior Orange core: ~~5% additional~~ 50% true damage
+- Buff Minior Green core: ~~heals 5 HP~~ heals 100% of damage
 
 # Changes to Synergies
 

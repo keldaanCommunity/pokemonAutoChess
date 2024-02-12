@@ -10928,7 +10928,7 @@ export class Minior extends Pokemon {
   def = 5
   speDef = 5
   maxPP = 50
-  range = 2
+  range = 3
   skill = Ability.SHIELDS_DOWN
   attackSprite = AttackSprite.ROCK_RANGE
   passive = Passive.METEOR
@@ -10943,7 +10943,7 @@ export class MiniorKernelBlue extends Pokemon {
   def = 5
   speDef = 5
   maxPP = 50
-  range = 2
+  range = 3
   skill = Ability.SHIELDS_UP
   attackSprite = AttackSprite.ROCK_RANGE
   passive = Passive.METEOR
@@ -10958,7 +10958,7 @@ export class MiniorKernelRed extends Pokemon {
   def = 5
   speDef = 5
   maxPP = 50
-  range = 2
+  range = 3
   skill = Ability.SHIELDS_UP
   attackSprite = AttackSprite.ROCK_RANGE
   passive = Passive.METEOR
@@ -10973,7 +10973,7 @@ export class MiniorKernelOrange extends Pokemon {
   def = 5
   speDef = 5
   maxPP = 50
-  range = 2
+  range = 3
   skill = Ability.SHIELDS_UP
   attackSprite = AttackSprite.ROCK_RANGE
   passive = Passive.METEOR
@@ -10988,7 +10988,7 @@ export class MiniorKernelGreen extends Pokemon {
   def = 5
   speDef = 5
   maxPP = 50
-  range = 2
+  range = 3
   skill = Ability.SHIELDS_UP
   attackSprite = AttackSprite.ROCK_RANGE
   passive = Passive.METEOR

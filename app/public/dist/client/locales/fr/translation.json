@@ -1735,7 +1735,7 @@
     "CELEBI": "Le joueur regagne 1 HP chaque fois que $t(pkm.CELEBI) utilise $t(ability.TIME_TRAVEL).",
     "GIMMIGHOUL": "$t(pkm.GIMMIGHOUL) a besoin de 99 GOLD",
     "GHOLDENGO": "Au début de chaque combat, si le joueur a 50 GOLD ou plus, $t(pkm.GHOLDENGO) gagne RUNE_PROTECT pendant tout le combat",
-    "METEOR": "$t(pkm.MINIOR) alterne entre sa forme Météore et ses formes Noyau.\nLa forme Météore octroie [4,SP]% ATK_SPEED par attaque.\nLes attaques en forme Noyau touchent également les ennemis adjacents à la cible et ont un bonus spécifique à chaque couleur:\nRouge: inflige 15% PHYSICAL additionels\nBleu: inflige 10% SPECIAL additionels\nOrange: inflige 5% TRUE additionels\nVert: Soigne les alliés adjacents de [5,SP] HP"
+    "METEOR": "$t(pkm.MINIOR) alterne entre sa forme Météore et ses formes Noyau. La forme Météore octroie [4,SP]% ATK_SPEED par attaque.\nLes attaques en forme Noyau infligent des effets supplémentaires à la cible et aux ennemis adjacents:\nRouge: inflige 150% PHYSICAL\nBleu: inflige 100% SPECIAL\nOrange: inflige 50% TRUE\nVert: les dégats d'attaque soignent les alliés adjacents"
   },
   "stat": {
     "ATK": "Attaque",
