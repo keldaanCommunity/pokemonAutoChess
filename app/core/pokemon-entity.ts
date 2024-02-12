@@ -1026,8 +1026,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
     }
 
-    if (this.passive === Passive.BEAST_BOOST) {
+    if (this.passive === Passive.BEAST_BOOST_ATK) {
       this.addAttack(5)
+    }
+    if (this.passive === Passive.BEAST_BOOST_AP) {
+      this.addAbilityPower(10)
     }
 
     board.forEach(
