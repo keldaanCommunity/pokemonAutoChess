@@ -39,10 +39,10 @@ import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { sum } from "../../utils/array"
+import { getFirstAvailablePositionInBench } from "../../utils/board"
 import { distanceM } from "../../utils/distance"
 import { coinflip, pickRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
-import { getFirstAvailablePositionInBench } from "../../utils/board"
 import PokemonFactory from "../pokemon-factory"
 import Player from "./player"
 
@@ -10889,6 +10889,36 @@ export class MausholdFour extends Pokemon {
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
+export class Morpeko extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.ELECTRIC])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 20
+  def = 5
+  speDef = 5
+  maxPP = 50
+  range = 1
+  skill = Ability.AURA_WHEEL
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+  passive = Passive.HUNGER_SWITCH
+}
+
+export class MorpekoHangry extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.ELECTRIC])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 20
+  def = 5
+  speDef = 5
+  maxPP = 50
+  range = 1
+  skill = Ability.AURA_WHEEL_HANGRY
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+  passive = Passive.HUNGER_SWITCH
+}
+
 export class Minior extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.ROCK])
   rarity = Rarity.UNIQUE
@@ -12134,5 +12164,7 @@ export const PokemonClasses: Record<
   [Pkm.MINIOR_KERNEL_ORANGE]: MiniorKernelOrange,
   [Pkm.MINIOR_KERNEL_GREEN]: MiniorKernelGreen,
   [Pkm.FEEBAS]: Feebas,
-  [Pkm.MILOTIC]: Milotic
+  [Pkm.MILOTIC]: Milotic,
+  [Pkm.MORPEKO]: Morpeko,
+  [Pkm.MORPEKO_ANGRY]: MorpekoHangry
 }

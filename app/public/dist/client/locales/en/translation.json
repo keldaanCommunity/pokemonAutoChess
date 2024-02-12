@@ -292,7 +292,9 @@
     "SANDSEAR_STORM": "Sandsear Storm",
     "WILDBOLT_STORM": "Wildbolt Storm",
     "BLEAKWIND_STORM": "Bleakwind Storm",
-    "SPRINGTIDE_STORM": "Springtide Storm"
+    "SPRINGTIDE_STORM": "Springtide Storm",
+    "AURA_WHEEL": "Aura Wheel",
+    "AURA_WHEEL_HANGRY": "Aura Wheel"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -986,7 +988,9 @@
     "MINIOR_KERNEL_ORANGE": "Minior Orange Core",
     "MINIOR_KERNEL_GREEN": "Minior Green Core",
     "FEEBAS": "Feebas",
-    "MILOTIC": "Milotic"
+    "MILOTIC": "Milotic",
+    "MORPEKO": "Morpeko",
+    "MORPEKO_HANGRY": "Morpeko Hangry"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1264,7 +1268,9 @@
     "SANDSEAR_STORM": "Searingly hot sand that strikes all enemies in a straight line, dealing [80,SP] SPECIAL and BURN for 4 seconds",
     "WILDBOLT_STORM": "Thunderous tempest that strikes all enemies in a straight line, dealing [80,SP] SPECIAL and PARALYSIS for 4 seconds",
     "BLEAKWIND_STORM": "Savagely cold winds that strike all enemies in a straight line, dealing [80,SP] SPECIAL and FREEZE for 2 seconds",
-    "SPRINGTIDE_STORM": "Fierce winds brimming with love and hate all enemies in a straight line, dealing [80,SP] SPECIAL and CHARMED for 2 seconds"
+    "SPRINGTIDE_STORM": "Fierce winds brimming with love and hate all enemies in a straight line, dealing [80,SP] SPECIAL and CHARMED for 2 seconds",
+    "AURA_WHEEL": "Deals [60,SP] SPECIAL and switch to Hangry form",
+    "AURA_WHEEL_HANGRY": "Deals [60,SP] SPECIAL and switch to Normal form"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1731,8 +1737,8 @@
     "BELLSPROUT": "Weepinbell is looking for berries",
     "CLEFAIRY": "Clefairy is looking for a POKE_DOLL",
     "ILLUMISE_VOLBEAT": "Illumise and Volbeat gain 5 PP per second for each other member of their species alive on the board",
-    "PRISM": "Necrozma switches between its Ultra forme and Normal forme depending on its exposure to LIGHT",
-    "BLOSSOM": "Cherrim switches between its Sunlight forme and Normal forme depending on its exposure to LIGHT",
+    "PRISM": "Necrozma switches between its Ultra form and Normal form depending on its exposure to LIGHT",
+    "BLOSSOM": "Cherrim switches between its Sunlight form and Normal form depending on its exposure to LIGHT",
     "SPECIAL_ATTACK": "Basic attacks deal SPECIAL and scale with AP",
     "NINCADA": "After evolving, get Shedninja as well if you have a free space on your bench",
     "FAMILY": "The pokémon grows with time (turn 15 and turn 20)",
@@ -1752,7 +1758,8 @@
     "GHOLDENGO": "At the start of each fight, if the player has 50 GOLD or more, $t(pkm.GHOLDENGO) gains RUNE_PROTECT for the entire fight",
     "METEOR": "$t(pkm.MINIOR) alternates between its meteor and core forms.\n The meteor form grants [4,SP]% ATK_SPEED per attack.\n Core form attacks hit target and adjacent ennemies and:\n Blue: Deals additional 10% SPECIAL\n Red: Deals additional 15% PHYSICAL\n Orange: Deals additional 5% TRUE\n Green: Heals adjacent allies for [5,SP] HP",
     "MIMIKYU": "When hit under 50% HP, Mimikyu changes into its Busted Form, gaining 30% ATK_SPEED and PROTECT for 2 seconds",
-    "MIMIKYU_BUSTED": "Its neck is broken. Mimikyu will never forget the person who damaged its rag for as long as it is still alive."
+    "MIMIKYU_BUSTED": "Its neck is broken. Mimikyu will never forget the person who damaged its rag for as long as it is still alive.",
+    "HUNGER_SWITCH": "$t(pkm.MORPEKO) alternates between its normal and hangry forms.\n Normal form attacks inflicts PARALYSIS for 2s\n Hangry form attacks inflicts WOUND for 4s"
   },
   "stat": {
     "ATK": "Attack",

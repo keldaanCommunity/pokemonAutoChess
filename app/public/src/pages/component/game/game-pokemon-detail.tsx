@@ -108,7 +108,11 @@ export function GamePokemonDetail(props: {
             <p>{t(`ability.${pokemon.skill}`)}</p>
           </div>
           <div>
-            <AbilityTooltip ability={pokemon.skill} tier={pokemon.stars} />
+            <AbilityTooltip
+              ability={pokemon.skill}
+              tier={pokemon.stars}
+              key={pokemon.id}
+            />
           </div>
         </div>
       )}
