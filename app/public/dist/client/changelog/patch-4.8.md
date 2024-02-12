@@ -2,12 +2,16 @@
 
 - Feebas
 - Milotic
+- Enamorus
+- Thundurus
+- Landorus
 
 # Changes to Pokemon & Abilities
 
 - Give Politoed Sound synergy instead of Fighting
 - Give Scorbunny line Field synergy instead of Fighting
 - Remove Field synergy of Tepig line, buff attack & spe-def
+- Tornadus: moved to Legendary alongside with Thundurus, Landorus and Enamorus. New synergies and ability
 
 # Changes to Synergies
 

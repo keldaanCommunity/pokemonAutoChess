@@ -1,7 +1,7 @@
 import PokemonFactory from "../../models/pokemon-factory"
 import {
-  PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY,
-  PRECOMPUTED_POKEMONS_STARS
+  getPokemonData,
+  PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY
 } from "../../models/precomputed"
 import { Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
@@ -399,7 +399,7 @@ export class HiddenPowerPStrategy extends HiddenPowerStrategy {
       ...PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[Synergy.BUG].pokemons,
       ...PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[Synergy.BUG]
         .additionalPokemons
-    ].filter((p) => PRECOMPUTED_POKEMONS_STARS[p] === 1) as Pkm[]
+    ].filter((p) => getPokemonData(p).stars === 1) as Pkm[]
     for (let i = 0; i < numberToSpawn; i++) {
       const bug = pickRandomIn(bugs)
       const coord = unown.simulation.getClosestAvailablePlaceOnBoardToPokemon(

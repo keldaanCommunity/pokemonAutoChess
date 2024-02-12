@@ -288,7 +288,11 @@
     "SHED_TAIL": "Shed Tail",
     "KOWTOW_CLEAVE": "Kowtow Cleave",
     "SHIELDS_DOWN": "Shields Down",
-    "SHIELDS_UP": "Shields Up"
+    "SHIELDS_UP": "Shields Up",
+    "SANDSEAR_STORM": "Sandsear Storm",
+    "WILDBOLT_STORM": "Wildbolt Storm",
+    "BLEAKWIND_STORM": "Bleakwind Storm",
+    "SPRINGTIDE_STORM": "Springtide Storm"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -522,6 +526,7 @@
     "LANDORUS": "Landorus",
     "THUNDURUS": "Thundurus",
     "TORNADUS": "Tornadus",
+    "ENAMORUS": "Enamorus",
     "KELDEO": "Keldeo",
     "TERRAKION": "Terrakion",
     "VIRIZION": "Virizion",
@@ -1255,7 +1260,11 @@
     "NIGHT_SLASH": "Deal [15,30,60,SP] SPECIAL with a [30,60,90]% increased CRIT_CHANCE ratio",
     "KOWTOW_CLEAVE": "Deal 100% ATK + [10,SP]% per fallen ally as TRUE. Can crit by default",
     "SHIELDS_DOWN": "Transform Minior to a random core form",
-    "SHIELDS_UP": "Transform Minior to its meteor form"
+    "SHIELDS_UP": "Transform Minior to its meteor form",
+    "SANDSEAR_STORM": "Searingly hot sand that strikes all enemies in a straight line, dealing [80,SP] SPECIAL and BURN for 4 seconds",
+    "WILDBOLT_STORM": "Thunderous tempest that strikes all enemies in a straight line, dealing [80,SP] SPECIAL and PARALYSIS for 4 seconds",
+    "BLEAKWIND_STORM": "Savagely cold winds that strike all enemies in a straight line, dealing [80,SP] SPECIAL and FREEZE for 2 seconds",
+    "SPRINGTIDE_STORM": "Fierce winds brimming with love and hate all enemies in a straight line, dealing [80,SP] SPECIAL and CHARMED for 2 seconds"
   },
   "effect": {
     "INGRAIN": "Ingrain",

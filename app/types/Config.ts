@@ -202,7 +202,6 @@ export const UniqueShop = new Array<PkmProposition>(
   Pkm.KECLEON,
   Pkm.MAWILE,
   Pkm.TAUROS,
-  Pkm.TORNADUS,
   Pkm.RELICANTH,
   Pkm.MEW,
   Pkm.CHATOT,
@@ -284,7 +283,11 @@ export const LegendaryShop = new Array<PkmProposition>(
   Pkm.NECROZMA,
   Pkm.XURKITREE,
   Pkm.NIHILEGO,
-  Pkm.PHEROMOSA
+  Pkm.PHEROMOSA,
+  Pkm.TORNADUS,
+  Pkm.THUNDURUS,
+  Pkm.LANDORUS,
+  Pkm.ENAMORUS
 )
 
 export const HatchList = new Array<Pkm>(

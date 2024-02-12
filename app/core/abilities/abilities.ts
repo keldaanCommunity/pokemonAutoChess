@@ -3907,6 +3907,110 @@ export class HurricaneStrategy extends AbilityStrategy {
   }
 }
 
+export class SandsearStormStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = 80
+
+    effectInLine(board, pokemon, target, (targetInLine) => {
+      if (targetInLine != null && targetInLine.team !== pokemon.team) {
+        targetInLine.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        targetInLine.status.triggerBurn(4000, targetInLine, pokemon)
+      }
+    })
+  }
+}
+
+export class WildboltStormStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = 80
+
+    effectInLine(board, pokemon, target, (targetInLine) => {
+      if (targetInLine != null && targetInLine.team !== pokemon.team) {
+        targetInLine.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        targetInLine.status.triggerParalysis(4000, targetInLine)
+      }
+    })
+  }
+}
+
+export class BleakwindStormStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = 80
+
+    effectInLine(board, pokemon, target, (targetInLine) => {
+      if (targetInLine != null && targetInLine.team !== pokemon.team) {
+        targetInLine.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        targetInLine.status.triggerFreeze(2000, targetInLine)
+      }
+    })
+  }
+}
+
+export class SpringtideStormStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = 80
+
+    effectInLine(board, pokemon, target, (targetInLine) => {
+      if (targetInLine != null && targetInLine.team !== pokemon.team) {
+        targetInLine.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        targetInLine.status.triggerCharm(4000, targetInLine, pokemon)
+      }
+    })
+  }
+}
+
 export class FakeTearsStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -7330,5 +7434,9 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.PSYCHIC_FANGS]: new PsychicFangsStrategy(),
   [Ability.SHED_TAIL]: new ShedTailStrategy(),
   [Ability.SHIELDS_DOWN]: new ShieldsDownStrategy(),
-  [Ability.SHIELDS_UP]: new ShieldsUpStrategy()
+  [Ability.SHIELDS_UP]: new ShieldsUpStrategy(),
+  [Ability.SANDSEAR_STORM]: new SandsearStormStrategy(),
+  [Ability.WILDBOLT_STORM]: new WildboltStormStrategy(),
+  [Ability.BLEAKWIND_STORM]: new BleakwindStormStrategy(),
+  [Ability.SPRINGTIDE_STORM]: new SpringtideStormStrategy()
 }
