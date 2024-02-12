@@ -848,6 +848,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     opponentTeam: MapSchema<IPokemonEntity>,
     stageLevel: number
   ) {
+    if (this.state.specialLobbyRule === SpecialLobbyRule.NINE_LIVES) return 1
+
     let damage = Math.ceil(stageLevel / 2)
     if (opponentTeam.size > 0) {
       opponentTeam.forEach((pokemon) => {
