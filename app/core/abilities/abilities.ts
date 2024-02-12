@@ -63,6 +63,7 @@ import {
   randomBetween,
   shuffleArray
 } from "../../utils/random"
+import { values } from "../../utils/schemas"
 
 export class BlueFlareStrategy extends AbilityStrategy {
   process(
@@ -1726,18 +1727,23 @@ export class ShadowCloneStrategy extends AbilityStrategy {
 
     if (farthestCoordinate) {
       const p = PokemonFactory.createPokemonFromName(pokemon.name)
-      pokemon.items.forEach((i) => {
-        p.items.add(i)
-      })
+      if (pokemon.items.size > 0) {
+        const itemGiven = pickRandomIn(values(pokemon.items))
+        p.items.add(itemGiven)
+        pokemon.items.delete(itemGiven)
+        if (itemGiven === Item.MAX_REVIVE && pokemon.status.resurection) {
+          pokemon.status.resurection = false
+        }
+      }
+
       const clone = pokemon.simulation.addPokemon(
         p,
         farthestCoordinate.x,
         farthestCoordinate.y,
         pokemon.team
       )
-      clone.hp = min(1)(Math.ceil(0.8 * pokemon.hp))
+      clone.hp = min(1)(Math.ceil(0.5 * pokemon.hp * (1 + pokemon.ap / 100)))
       clone.life = clone.hp
-      clone.addShield(30, clone, true)
       clone.isClone = true
     }
   }
@@ -7102,7 +7108,7 @@ export class KowtowCleaveStrategy extends AbilityStrategy {
       (pokemon.player?.experienceManager.level ?? 0) - nbAllies
     )
     const damage = Math.round(
-      pokemon.atk * (1 + nbFallenAllies * 0.1 * (1 + pokemon.ap / 100))
+      pokemon.atk * (1.5 + nbFallenAllies * 0.2 * (1 + pokemon.ap / 100))
     )
     target.handleSpecialDamage(
       damage,

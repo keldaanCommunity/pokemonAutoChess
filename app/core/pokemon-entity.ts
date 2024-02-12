@@ -486,18 +486,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           targetX: t.positionX,
           targetY: t.positionY
         })
-        if (t.id !== target.id) {
-          t.handleDamage({
-            damage: physicalDamage,
-            board,
-            attackType: AttackType.PHYSICAL,
-            attacker: this,
-            shouldTargetGainMana: false
-          })
-        }
         if (this.name === Pkm.MINIOR_KERNEL_BLUE) {
           t.handleDamage({
-            damage: 10,
+            damage: physicalDamage,
             board,
             attackType: AttackType.SPECIAL,
             attacker: this,
@@ -506,7 +497,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         }
         if (this.name === Pkm.MINIOR_KERNEL_RED) {
           t.handleDamage({
-            damage: Math.ceil(physicalDamage * 0.15),
+            damage: Math.ceil(physicalDamage * 1.5),
             board,
             attackType: AttackType.PHYSICAL,
             attacker: this,
@@ -515,7 +506,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         }
         if (this.name === Pkm.MINIOR_KERNEL_ORANGE) {
           t.handleDamage({
-            damage: Math.ceil(physicalDamage * 0.05),
+            damage: Math.ceil(physicalDamage * 0.5),
             board,
             attackType: AttackType.TRUE,
             attacker: this,
@@ -526,7 +517,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       if (this.name === Pkm.MINIOR_KERNEL_GREEN) {
         cells.forEach((v) => {
           if (v && v.value && v.value.team === this.team) {
-            v.value.handleHeal(5, this, 1)
+            v.value.handleHeal(physicalDamage, this, 0)
           }
         })
       }

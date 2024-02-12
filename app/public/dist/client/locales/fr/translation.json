@@ -999,7 +999,7 @@
     "ECHO": "Inflige [3,6,9,SP] SPECIAL à l'équipe ennemie, augmentant de [3,6,9,SP] chaque fois que le Pokémon utilise son talent",
     "PETAL_DANCE": "Inflige [20,30,50,SP] SPECIAL à [3,4,5] Pokémon ennemis",
     "HYPER_VOICE": "Inflige [45,90,200,SP] SPECIAL sur une ligne, laissant les Pokémon touchés CONFUSION pendant [1,2,3] secondes",
-    "SHADOW_CLONE": "Le Pokémon crée un clone de lui-même à côté de sa cible. Le clone possède les objets et statistiques du lanceur, ainsi que 80% de ses HP et [30,SP] SHIELD",
+    "SHADOW_CLONE": "Crée un clone avec [50,SP]% de HP max et lui donne un des items portés",
     "VOLT_SWITCH": "Traverse les défenses ennemis, infligeant [30,60,120,SP] SPECIAL",
     "NUZZLE": "Fonce vers l'adversaire le plus loin et lui inflige [30,60,120,SP] SPECIAL ainsi que PARALYSIS pendant [3,4,5] secondes",
     "LIQUIDATION": "Inflige [20,40,80,SP] SPECIAL et retire [1,2,4] DEF de la cible",
@@ -1241,14 +1241,14 @@
     "MAKE_IT_RAIN": "Inflige [100,SP] + votre quantité de GOLD en banque en SPECIAL",
     "CRUSH_GRIP": "La cible est écrasée avec une grande force. Plus elle a de HP restants, plus les dégâts sont élevés, entre [20,SP] et [200,SP] PHYSICAL.",
     "AURASPHERE": "Dégage une aura et projette de l'énergie en ligne droite, infligeant [25,50,SP] SPECIAL et SILENCE pendant 3 secondes aux adversaires touchés",
-    "SKETCH": "Copie la capacité de l'allié à sa gauche au début du combat",
+    "SKETCH": "Copie la capacité et les PP max de l'allié à sa gauche au début du combat",
     "OVERDRIVE": "Inflige [120,SP]% de l'ATK en SPECIAL dans un cercle de 3 cases de rayon en faisant vibrer une guitare électrique, ce qui cause une forte vibration. Les dégâts sont réduits avec la distance, de 20% par case.",
     "LOVELY_KISS": "Le lanceur fait un bisou à l'ennemi en prenant une mine effrayante, ce qui le rend SLEEP pendant [2,4,SP] secondes",
     "TRANSFORM": "Prend l'apparence et les statistiques de la cible, excepté les HP",
     "PSYCHIC_FANGS": "Inflige [100,SP] PHYSICAL et retire les bonus d'ATK, de DEF et de SPE_DEF de la cible",
     "SHED_TAIL": "Lâche un leurre et court vers l'allié avec le moins de HP, lui donnant [80,SP] SHIELD",
     "NIGHT_SLASH": "Inflige [15,30,60,SP] SPECIAL avec [30,60,90]% de CRIT_CHANCE augmentée",
-    "KOWTOW_CLEAVE": "Inflige 100% ATK + [10,SP]% par allié KO en TRUE. Peut infliger un coup critique par défaut.",
+    "KOWTOW_CLEAVE": "Inflige 150% ATK + [20,SP]% par allié KO en TRUE. Peut infliger un coup critique par défaut.",
     "SHIELDS_DOWN": "Transforme Météno en une forme Noyau aléatoire",
     "SHIELDS_UP": "Transforme Météno en forme Météore"
   },
@@ -1735,7 +1735,7 @@
     "CELEBI": "Le joueur regagne 1 HP chaque fois que $t(pkm.CELEBI) utilise $t(ability.TIME_TRAVEL).",
     "GIMMIGHOUL": "$t(pkm.GIMMIGHOUL) a besoin de 99 GOLD",
     "GHOLDENGO": "Au début de chaque combat, si le joueur a 50 GOLD ou plus, $t(pkm.GHOLDENGO) gagne RUNE_PROTECT pendant tout le combat",
-    "METEOR": "$t(pkm.MINIOR) alterne entre sa forme Météore et ses formes Noyau.\nLa forme Météore octroie [4,SP]% ATK_SPEED par attaque.\nLes attaques en forme Noyau touchent également les ennemis adjacents à la cible et ont un bonus spécifique à chaque couleur:\nRouge: inflige 15% PHYSICAL additionels\nBleu: inflige 10% SPECIAL additionels\nOrange: inflige 5% TRUE additionels\nVert: Soigne les alliés adjacents de [5,SP] HP"
+    "METEOR": "$t(pkm.MINIOR) alterne entre sa forme Météore et ses formes Noyau. La forme Météore octroie [4,SP]% ATK_SPEED par attaque.\nLes attaques en forme Noyau infligent des effets supplémentaires à la cible et aux ennemis adjacents:\nRouge: inflige 150% PHYSICAL\nBleu: inflige 100% SPECIAL\nOrange: inflige 50% TRUE\nVert: les dégats d'attaque soignent les alliés adjacents"
   },
   "stat": {
     "ATK": "Attaque",

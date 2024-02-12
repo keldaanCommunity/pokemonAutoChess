@@ -251,12 +251,12 @@ export class MegaManectric extends Pokemon {
 }
 
 export class Shuppet extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.GHOST])
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.ARTIFICIAL])
   rarity = Rarity.ULTRA
   stars = 1
   evolution = Pkm.BANETTE
   hp = 120
-  atk = 7
+  atk = 10
   def = 3
   speDef = 4
   maxPP = 125
@@ -266,12 +266,12 @@ export class Shuppet extends Pokemon {
 }
 
 export class Banette extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.GHOST])
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.ARTIFICIAL])
   rarity = Rarity.ULTRA
   stars = 2
   evolution = Pkm.MEGA_BANETTE
   hp = 200
-  atk = 15
+  atk = 20
   def = 4
   speDef = 5
   maxPP = 125
@@ -281,14 +281,14 @@ export class Banette extends Pokemon {
 }
 
 export class MegaBanette extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.GHOST])
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.ARTIFICIAL])
   rarity = Rarity.ULTRA
   stars = 3
   hp = 300
   atk = 30
   def = 5
   speDef = 6
-  maxPP = 100
+  maxPP = 125
   range = 1
   skill = Ability.SHADOW_CLONE
   attackSprite = AttackSprite.DRAGON_MELEE
@@ -4020,7 +4020,7 @@ export class Metapod extends Pokemon {
   evolution = Pkm.BUTTERFREE
   hp = 110
   atk = 9
-  def = 1
+  def = 3
   speDef = 1
   maxPP = 100
   range = 2
@@ -4034,8 +4034,8 @@ export class Butterfree extends Pokemon {
   stars = 3
   hp = 200
   atk = 16
-  def = 1
-  speDef = 1
+  def = 2
+  speDef = 3
   maxPP = 100
   range = 2
   skill = Ability.STRING_SHOT
@@ -10928,7 +10928,7 @@ export class Minior extends Pokemon {
   def = 5
   speDef = 5
   maxPP = 50
-  range = 2
+  range = 3
   skill = Ability.SHIELDS_DOWN
   attackSprite = AttackSprite.ROCK_RANGE
   passive = Passive.METEOR
@@ -10943,7 +10943,7 @@ export class MiniorKernelBlue extends Pokemon {
   def = 5
   speDef = 5
   maxPP = 50
-  range = 2
+  range = 3
   skill = Ability.SHIELDS_UP
   attackSprite = AttackSprite.ROCK_RANGE
   passive = Passive.METEOR
@@ -10958,7 +10958,7 @@ export class MiniorKernelRed extends Pokemon {
   def = 5
   speDef = 5
   maxPP = 50
-  range = 2
+  range = 3
   skill = Ability.SHIELDS_UP
   attackSprite = AttackSprite.ROCK_RANGE
   passive = Passive.METEOR
@@ -10973,7 +10973,7 @@ export class MiniorKernelOrange extends Pokemon {
   def = 5
   speDef = 5
   maxPP = 50
-  range = 2
+  range = 3
   skill = Ability.SHIELDS_UP
   attackSprite = AttackSprite.ROCK_RANGE
   passive = Passive.METEOR
@@ -10988,7 +10988,7 @@ export class MiniorKernelGreen extends Pokemon {
   def = 5
   speDef = 5
   maxPP = 50
-  range = 2
+  range = 3
   skill = Ability.SHIELDS_UP
   attackSprite = AttackSprite.ROCK_RANGE
   passive = Passive.METEOR
@@ -11324,7 +11324,7 @@ export class Smeargle extends Pokemon {
   atk = 20
   def = 3
   speDef = 3
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.SKETCH
   attackSprite = AttackSprite.NORMAL_MELEE
@@ -11335,7 +11335,7 @@ export class Smeargle extends Pokemon {
       this.positionY
     )
     if (allyOnTheLeft) {
-      console.log("sketch " + allyOnTheLeft.skill)
+      entity.maxPP = allyOnTheLeft.maxPP
       entity.skill = allyOnTheLeft.skill
     }
   }

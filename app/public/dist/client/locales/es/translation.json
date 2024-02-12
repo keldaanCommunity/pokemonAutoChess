@@ -999,7 +999,7 @@
     "ECHO": "Causa [3,6,9,SP] de SPECIAL al equipo enemigo, aumentando en [3,6,9,SP] cada vez que el pokemon usa su habilidad",
     "PETAL_DANCE": "Reparte [20,30,50,SP] de SPECIAL a [3,4,5] Pokémon enemigos",
     "HYPER_VOICE": "Causa [45,90,200,SP] de SPECIAL a todos los pokemon enemigos en la misma columna y les deja CONFUSION durante [1,2,3] segundos",
-    "SHADOW_CLONE": "El Pokémon crea un clon idéntico de sí mismo junto a su objetivo. Este clon hereda de los elementos y estadísticas de Pokémon, el 80% de su HP máximo y [30,SP] SHIELD",
+    "SHADOW_CLONE": "Crea un clon con el [50,SP]% de tus HP máximos y dale uno de tus objetos.",
     "VOLT_SWITCH": "Corre hacia la retaguardia enemiga y reparte [30,60,120,SP] de SPECIAL",
     "NUZZLE": "Avanza hacia el enemigo mas lejano, inflingiendo [30,60,120,SP] de SPECIAL y manteniéndolo PARALYSIS por [3,4,5] segundos",
     "LIQUIDATION": "Hace [20,40,80,SP] de SPECIAL y elimina [1,2,4] DEF del objetivo",
