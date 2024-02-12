@@ -16,7 +16,7 @@
 - Buff Metapod: Def ~~1~~ 3
 - Buff Butterfree: Def ~~1~~2 Spe def ~~1~~ 3
 - Changed Sketch (Smeargle): copy the max PP in addition to the ability
-- Changed Shadow clone (Shuppet): no longer copies items ; reduced PP: ~~125/125/100~~ 100/100/100
+- Changed Shuppet line: lose Dark, gain Artificial, Attack ~~7/15/30~~ 10/20/30 ; changed Shadow clone: no longer copies items but give one random item to the clone; AP now scales the HP% of the clone
 
 # Changes to Synergies
 

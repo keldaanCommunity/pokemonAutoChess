@@ -251,44 +251,44 @@ export class MegaManectric extends Pokemon {
 }
 
 export class Shuppet extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.GHOST])
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.ARTIFICIAL])
   rarity = Rarity.ULTRA
   stars = 1
   evolution = Pkm.BANETTE
   hp = 120
-  atk = 7
+  atk = 10
   def = 3
   speDef = 4
-  maxPP = 100
+  maxPP = 125
   range = 1
   skill = Ability.SHADOW_CLONE
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Banette extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.GHOST])
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.ARTIFICIAL])
   rarity = Rarity.ULTRA
   stars = 2
   evolution = Pkm.MEGA_BANETTE
   hp = 200
-  atk = 15
+  atk = 20
   def = 4
   speDef = 5
-  maxPP = 100
+  maxPP = 125
   range = 1
   skill = Ability.SHADOW_CLONE
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class MegaBanette extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.GHOST])
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.ARTIFICIAL])
   rarity = Rarity.ULTRA
   stars = 3
   hp = 300
   atk = 30
   def = 5
   speDef = 6
-  maxPP = 100
+  maxPP = 125
   range = 1
   skill = Ability.SHADOW_CLONE
   attackSprite = AttackSprite.DRAGON_MELEE
