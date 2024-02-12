@@ -139,6 +139,7 @@ export default function GamePokemonPortrait(props: {
           place="top"
         >
           <GamePokemonDetail
+            key={pokemonInPortrait.id}
             pokemon={pokemonInPortrait}
             emotion={pokemonInPortraitConfig?.selectedEmotion}
             shiny={pokemonInPortraitConfig?.selectedShiny}

@@ -5,6 +5,7 @@
 - Enamorus
 - Thundurus
 - Landorus
+- Morpeko
 
 # Changes to Pokemon & Abilities
 

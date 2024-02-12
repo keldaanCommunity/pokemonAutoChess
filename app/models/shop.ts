@@ -12,11 +12,11 @@ import { Ability } from "../types/enum/Ability"
 import { Effect } from "../types/enum/Effect"
 import { Rarity } from "../types/enum/Game"
 import {
-  getUnownsPoolPerStage,
   Pkm,
   PkmDuos,
   PkmFamily,
-  PkmProposition
+  PkmProposition,
+  getUnownsPoolPerStage
 } from "../types/enum/Pokemon"
 import { SpecialLobbyRule } from "../types/enum/SpecialLobbyRule"
 import { Synergy } from "../types/enum/Synergy"
@@ -26,7 +26,7 @@ import { clamp } from "../utils/number"
 import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
 import Player from "./colyseus-models/player"
-import { getPokemonData, PRECOMPUTED_POKEMONS_PER_RARITY } from "./precomputed"
+import { PRECOMPUTED_POKEMONS_PER_RARITY, getPokemonData } from "./precomputed"
 
 export function getPoolSize(rarity: Rarity, maxStars: number): number {
   return PoolSize[rarity][clamp(maxStars, 1, 3) - 1]

@@ -692,7 +692,9 @@ export enum Pkm {
   MINIOR_KERNEL_ORANGE = "MINIOR_KERNEL_ORANGE",
   MINIOR_KERNEL_GREEN = "MINIOR_KERNEL_GREEN",
   FEEBAS = "FEEBAS",
-  MILOTIC = "MILOTIC"
+  MILOTIC = "MILOTIC",
+  MORPEKO = "MORPEKO",
+  MORPEKO_ANGRY = "MORPEKO_ANGRY"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1387,7 +1389,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.MINIOR_KERNEL_ORANGE]: "0774-0002",
   [Pkm.MINIOR_KERNEL_GREEN]: "0774-0004",
   [Pkm.FEEBAS]: "0349",
-  [Pkm.MILOTIC]: "0350"
+  [Pkm.MILOTIC]: "0350",
+  [Pkm.MORPEKO]: "0877",
+  [Pkm.MORPEKO_ANGRY]: "0877-0001"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2082,7 +2086,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.MINIOR_KERNEL_ORANGE]: Pkm.MINIOR,
   [Pkm.MINIOR_KERNEL_GREEN]: Pkm.MINIOR,
   [Pkm.FEEBAS]: Pkm.FEEBAS,
-  [Pkm.MILOTIC]: Pkm.FEEBAS
+  [Pkm.MILOTIC]: Pkm.FEEBAS,
+  [Pkm.MORPEKO]: Pkm.MORPEKO,
+  [Pkm.MORPEKO_ANGRY]: Pkm.MORPEKO
 }
 
 export enum PkmDuo {
@@ -5684,5 +5690,15 @@ export const AnimationConfig: {
     attack: AnimationType.Shoot,
     ability: AnimationType.RearUp,
     emote: AnimationType.RearUp
+  },
+  [Pkm.MORPEKO]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shock,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.MORPEKO_ANGRY]: {
+    attack: AnimationType.Swing,
+    ability: AnimationType.Special0,
+    emote: AnimationType.Rotate
   }
 }

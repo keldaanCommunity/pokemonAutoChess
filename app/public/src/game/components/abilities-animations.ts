@@ -1733,6 +1733,37 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
+    case Ability.AURA_WHEEL: {
+      const specialProjectile = addAbilitySprite(skill, coordinates).setScale(1)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        duration: 500,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
+    case Ability.AURA_WHEEL_HANGRY: {
+      const specialProjectile = addAbilitySprite(
+        Ability.AURA_WHEEL,
+        coordinates
+      ).setScale(1)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        duration: 500,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
     case Ability.PETAL_DANCE:
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
