@@ -7104,7 +7104,7 @@ export class KowtowCleaveStrategy extends AbilityStrategy {
       (pokemon.player?.experienceManager.level ?? 0) - nbAllies
     )
     const damage = Math.round(
-      pokemon.atk * (1 + nbFallenAllies * 0.1 * (1 + pokemon.ap / 100))
+      pokemon.atk * (1.5 + nbFallenAllies * 0.2 * (1 + pokemon.ap / 100))
     )
     target.handleSpecialDamage(
       damage,
