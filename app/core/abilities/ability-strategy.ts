@@ -5,7 +5,6 @@ import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Synergy } from "../../types/enum/Synergy"
 import { distanceC } from "../../utils/distance"
-import { max } from "../../utils/number"
 import Board from "../board"
 import { PokemonEntity } from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
@@ -83,10 +82,6 @@ export class AbilityStrategy {
         crit,
         true
       )
-    }
-
-    if (pokemon.passive === Passive.CELEBI && pokemon.player) {
-      pokemon.player.life = max(100)(pokemon.player.life + 1)
     }
   }
 }

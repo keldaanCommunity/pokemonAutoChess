@@ -75,6 +75,7 @@ export default class Player extends Schema implements IPlayer {
   artificialItems: Item[] = pickNRandomIn(ArtificialItems, 3)
   lightX: number
   lightY: number
+  canRegainLife: boolean = true
 
   constructor(
     id: string,
@@ -104,6 +105,11 @@ export default class Player extends Schema implements IPlayer {
       this.loadingProgress = 100
       this.lightX = 3
       this.lightY = 2
+    }
+
+    if (state.specialLobbyRule === SpecialLobbyRule.NINE_LIVES) {
+      this.life = 9
+      this.canRegainLife = false
     }
 
     if (state.specialLobbyRule === SpecialLobbyRule.UNIQUE_STARTER) {

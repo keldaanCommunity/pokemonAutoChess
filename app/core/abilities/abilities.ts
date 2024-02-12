@@ -54,7 +54,7 @@ import { getFirstAvailablePositionInBench } from "../../utils/board"
 import { distanceC, distanceM } from "../../utils/distance"
 import { repeat } from "../../utils/function"
 import { logger } from "../../utils/logger"
-import { min } from "../../utils/number"
+import { max, min } from "../../utils/number"
 import { OrientationArray, effectInLine } from "../../utils/orientation"
 import {
   chance,
@@ -799,6 +799,10 @@ export class TimeTravelStrategy extends AbilityStrategy {
         ally.status.clearNegativeStatus()
       }
     })
+
+    if (pokemon.player && pokemon.player.canRegainLife) {
+      pokemon.player.life = max(100)(pokemon.player.life + 1)
+    }
   }
 }
 

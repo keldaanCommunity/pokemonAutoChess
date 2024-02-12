@@ -2598,7 +2598,8 @@
     "GOTTA_CATCH_EM_ALL": "Gotta catch'em all !",
     "BUYER_FEVER": "Buyer fever",
     "TECHNOLOGIC": "Technologic",
-    "SIX_PACK": "Six Pack"
+    "SIX_PACK": "Six Pack",
+    "NINE_LIVES": "Nine Lives"
   },
   "scribble_description": {
     "EVERYONE_IS_HERE": "All the additional picks are available immediately",
@@ -2610,6 +2611,7 @@
     "GOTTA_CATCH_EM_ALL": "Some pokemons can be catched before each PvE round",
     "BUYER_FEVER": "Evolutions in shop are free",
     "TECHNOLOGIC": "Choose between 3 artifacts at stage 3 and 15",
-    "SIX_PACK": "You can put 6 units max on your board, no matter your level"
+    "SIX_PACK": "You can put 6 units max on your board, no matter your level",
+    "NINE_LIVES": "You are eliminated after losing 9 rounds"
   }
 }
