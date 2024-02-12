@@ -1722,9 +1722,6 @@ export class ShadowCloneStrategy extends AbilityStrategy {
 
     if (farthestCoordinate) {
       const p = PokemonFactory.createPokemonFromName(pokemon.name)
-      pokemon.items.forEach((i) => {
-        p.items.add(i)
-      })
       const clone = pokemon.simulation.addPokemon(
         p,
         farthestCoordinate.x,
