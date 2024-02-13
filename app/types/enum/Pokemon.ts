@@ -694,7 +694,9 @@ export enum Pkm {
   FEEBAS = "FEEBAS",
   MILOTIC = "MILOTIC",
   MORPEKO = "MORPEKO",
-  MORPEKO_ANGRY = "MORPEKO_ANGRY"
+  MORPEKO_ANGRY = "MORPEKO_ANGRY",
+  LICKITUNG = "LICKITUNG",
+  LICKILICKY = "LICKILICKY"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1391,7 +1393,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.FEEBAS]: "0349",
   [Pkm.MILOTIC]: "0350",
   [Pkm.MORPEKO]: "0877",
-  [Pkm.MORPEKO_ANGRY]: "0877-0001"
+  [Pkm.MORPEKO_ANGRY]: "0877-0001",
+  [Pkm.LICKITUNG]: "0108",
+  [Pkm.LICKILICKY]: "0463"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2088,7 +2092,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.FEEBAS]: Pkm.FEEBAS,
   [Pkm.MILOTIC]: Pkm.FEEBAS,
   [Pkm.MORPEKO]: Pkm.MORPEKO,
-  [Pkm.MORPEKO_ANGRY]: Pkm.MORPEKO
+  [Pkm.MORPEKO_ANGRY]: Pkm.MORPEKO,
+  [Pkm.LICKITUNG]: Pkm.LICKITUNG,
+  [Pkm.LICKILICKY]: Pkm.LICKITUNG
 }
 
 export enum PkmDuo {
@@ -5700,5 +5706,15 @@ export const AnimationConfig: {
     attack: AnimationType.Swing,
     ability: AnimationType.Special0,
     emote: AnimationType.Rotate
+  },
+  [Pkm.LICKITUNG]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Lick,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.LICKILICKY]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Withdraw
   }
 }

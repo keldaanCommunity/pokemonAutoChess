@@ -294,7 +294,8 @@
     "BLEAKWIND_STORM": "Bleakwind Storm",
     "SPRINGTIDE_STORM": "Springtide Storm",
     "AURA_WHEEL": "Aura Wheel",
-    "AURA_WHEEL_HANGRY": "Aura Wheel"
+    "AURA_WHEEL_HANGRY": "Aura Wheel",
+    "LICK": "Lick"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -990,7 +991,9 @@
     "FEEBAS": "Feebas",
     "MILOTIC": "Milotic",
     "MORPEKO": "Morpeko",
-    "MORPEKO_HANGRY": "Morpeko Hangry"
+    "MORPEKO_HANGRY": "Morpeko Hangry",
+    "LICKITUNG": "Lickitung",
+    "LICKILICKY": "Lickilicky"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1270,7 +1273,8 @@
     "BLEAKWIND_STORM": "Savagely cold winds that strike all enemies in a straight line, dealing [80,SP] SPECIAL and FREEZE for 2 seconds",
     "SPRINGTIDE_STORM": "Fierce winds brimming with love and hate all enemies in a straight line, dealing [80,SP] SPECIAL and CHARMED for 2 seconds",
     "AURA_WHEEL": "Deals [60,SP] SPECIAL and switch to Hangry form",
-    "AURA_WHEEL_HANGRY": "Deals [60,SP] SPECIAL and switch to Normal form"
+    "AURA_WHEEL_HANGRY": "Deals [60,SP] SPECIAL and switch to Normal form",
+    "LICK": "Deals [30,60,120,SP] SPECIAL. The target is CONFUSION and PARALYSIS for 3 seconds"
   },
   "effect": {
     "INGRAIN": "Ingrain",

@@ -6,6 +6,8 @@
 - Thundurus
 - Landorus
 - Morpeko
+- Lickitung
+- Lickilicky
 
 # Changes to Pokemon & Abilities
 
