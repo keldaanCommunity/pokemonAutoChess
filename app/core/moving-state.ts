@@ -7,7 +7,7 @@ import { Synergy } from "../types/enum/Synergy"
 import { Weather } from "../types/enum/Weather"
 import { distanceC } from "../utils/distance"
 import Board from "./board"
-import { PokemonEntity } from "./pokemon-entity"
+import { getMoveSpeed, PokemonEntity } from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
 
 export default class MovingState extends PokemonState {
@@ -15,27 +15,12 @@ export default class MovingState extends PokemonState {
     pokemon: PokemonEntity,
     dt: number,
     board: Board,
-    weather: string,
+    weather: Weather,
     player: Player
   ) {
     super.update(pokemon, dt, board, weather, player)
     if (pokemon.cooldown <= 0) {
-      let movingTime = 500
-      if (weather === Weather.SNOW) {
-        movingTime = Math.round(movingTime / 0.75)
-      }
-
-      if (pokemon.effects.has(Effect.QUICK_FEET)) {
-        movingTime = Math.round(movingTime / 1.2)
-      } else if (pokemon.effects.has(Effect.RUN_AWAY)) {
-        movingTime = Math.round(movingTime / 1.5)
-      } else if (pokemon.effects.has(Effect.HUSTLE)) {
-        movingTime = Math.round(movingTime / 1.8)
-      } else if (pokemon.effects.has(Effect.BERSERK)) {
-        movingTime = Math.round(movingTime / 2.2)
-      }
-
-      pokemon.cooldown = weather === Weather.SNOW ? 666 : 500
+      pokemon.cooldown = 500 / getMoveSpeed(pokemon, weather)
       const targetAtRange = this.getNearestTargetAtRangeCoordinates(
         pokemon,
         board

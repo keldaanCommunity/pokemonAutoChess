@@ -3,6 +3,7 @@ import { Effect } from "../types/enum/Effect"
 import { AttackType, PokemonActionState } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
+import { Weather } from "../types/enum/Weather"
 import { distanceC } from "../utils/distance"
 import { max, min } from "../utils/number"
 import { chance } from "../utils/random"
@@ -16,7 +17,7 @@ export default class AttackingState extends PokemonState {
     pokemon: PokemonEntity,
     dt: number,
     board: Board,
-    weather: string,
+    weather: Weather,
     player: Player
   ) {
     super.update(pokemon, dt, board, weather, player)
