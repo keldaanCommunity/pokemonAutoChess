@@ -1907,7 +1907,7 @@
     "ARTIFICIAL": "ARTIFICIAL pokemons give unique items and gain ATK, AP and SHIELD when holding items",
     "BABY": "BABY can bring you Pokemon Eggs to comfort you after a defeat",
     "LIGHT": "LIGHT reveal a spotlight on the battlefield. The unit standing in the spotlight at the start of combat gains unique bonuses.",
-    "WILD": "WILD pokemons can be catched during PvE stages, get increased ATK and move speed, and increase your chances to find more WILD pokemons."
+    "WILD": "WILD pokemons can be caught during PvE stages, get increased ATK and move speed, and increase your chances to find more WILD pokemons."
   },
   "title": {
     "NOVICE": "Novice",
