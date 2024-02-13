@@ -9,6 +9,7 @@
     "LEGENDARY": "Legendary",
     "MYTHICAL": "Mythical",
     "HATCH": "Hatch",
+    "WILD": "Wild",
     "SPECIAL": "Special"
   },
   "damage": {
@@ -1383,7 +1384,11 @@
     "SHINING_RAY": "Shining Ray",
     "LIGHT_PULSE": "Light Pulse",
     "ETERNAL_LIGHT": "Eternal Light",
-    "MAX_ILLUMINATION": "Max Illumination"
+    "MAX_ILLUMINATION": "Max Illumination",
+    "QUICK_FEET": "Quick Feet",
+    "RUN_AWAY": "Run Away",
+    "HUSTLE": "Hustle",
+    "BERSERK": "Berserk"
   },
   "effect_description": {
     "STAMINA": "Gain 15 SHIELD",
@@ -1495,7 +1500,11 @@
     "SHINING_RAY": "Increase AP and ATK by 20%",
     "LIGHT_PULSE": "Also give +10 PP per second",
     "ETERNAL_LIGHT": "Also increase DEF and SPE_DEF by 50% and give RUNE_PROTECT for 10 seconds",
-    "MAX_ILLUMINATION": "Also give 100 SHIELD and RESURECTION"
+    "MAX_ILLUMINATION": "Also give 100 SHIELD and RESURECTION",
+    "QUICK_FEET": "+20% ATK and move speed, 10% chance to find WILD during PvE stages",
+    "RUN_AWAY": " +50% ATK and move speed, 20% chance to find WILD during PvE stages",
+    "HUSTLE": "+80% ATK and move speed, 30% chance to find WILD during PvE stages",
+    "BERSERK": "+120% ATK and move speed, 50% chance to find WILD during PvE stages"
   },
   "item": {
     "FOSSIL_STONE": "Fossil Stone",
@@ -1862,7 +1871,8 @@
     "SOUND": "Sound",
     "ARTIFICIAL": "Artificial",
     "BABY": "Baby",
-    "LIGHT": "Light"
+    "LIGHT": "Light",
+    "WILD": "Wild"
   },
   "synergy_description": {
     "NORMAL": "NORMAL pokemons and their adjacent allies gain SHIELD when combat starts",
@@ -1892,7 +1902,8 @@
     "SOUND": "SOUND pokemons emit a cry when they use their abilities, waking up allies asleep and giving them bonus stats",
     "ARTIFICIAL": "ARTIFICIAL pokemons give unique items and gain ATK, AP and SHIELD when holding items",
     "BABY": "BABY can bring you Pokemon Eggs to comfort you after a defeat",
-    "LIGHT": "LIGHT reveal a spotlight on the battlefield. The unit standing in the spotlight at the start of combat gains unique bonuses."
+    "LIGHT": "LIGHT reveal a spotlight on the battlefield. The unit standing in the spotlight at the start of combat gains unique bonuses.",
+    "WILD": "WILD pokemons can be catched during PvE stages, get increased ATK and move speed, and increase your chances to find more WILD pokemons."
   },
   "title": {
     "NOVICE": "Novice",

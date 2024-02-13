@@ -4301,7 +4301,7 @@ export class Gyarados extends Pokemon {
 }
 
 export class Rattata extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.WILD])
   rarity = Rarity.SPECIAL
   stars = 1
   evolution = Pkm.RATICATE
@@ -4316,7 +4316,7 @@ export class Rattata extends Pokemon {
 }
 
 export class Raticate extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.WILD])
   rarity = Rarity.SPECIAL
   stars = 2
   hp = 60
@@ -4330,7 +4330,7 @@ export class Raticate extends Pokemon {
 }
 
 export class Spearow extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.NORMAL])
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.WILD])
   rarity = Rarity.SPECIAL
   stars = 1
   evolution = Pkm.FEAROW
@@ -4345,7 +4345,7 @@ export class Spearow extends Pokemon {
 }
 
 export class Fearow extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.NORMAL])
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.WILD])
   rarity = Rarity.SPECIAL
   stars = 2
   hp = 60

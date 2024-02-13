@@ -1181,6 +1181,30 @@ export default class Simulation extends Schema implements ISimulation {
           }
           break
 
+        case Effect.QUICK_FEET:
+          if (types.has(Synergy.WILD)) {
+            pokemon.addAttack(Math.ceil(0.2 * pokemon.baseAtk))
+          }
+          break
+
+        case Effect.RUN_AWAY:
+          if (types.has(Synergy.WILD)) {
+            pokemon.addAttack(Math.ceil(0.5 * pokemon.baseAtk))
+          }
+          break
+
+        case Effect.HUSTLE:
+          if (types.has(Synergy.WILD)) {
+            pokemon.addAttack(Math.ceil(0.8 * pokemon.baseAtk))
+          }
+          break
+
+        case Effect.BERSERK:
+          if (types.has(Synergy.WILD)) {
+            pokemon.addAttack(Math.ceil(1.2 * pokemon.baseAtk))
+          }
+          break
+
         default:
           break
       }
