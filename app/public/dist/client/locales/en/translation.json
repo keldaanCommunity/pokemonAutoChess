@@ -1505,10 +1505,10 @@
     "LIGHT_PULSE": "Also give +10 PP per second",
     "ETERNAL_LIGHT": "Also increase DEF and SPE_DEF by 50% and give RUNE_PROTECT for 10 seconds",
     "MAX_ILLUMINATION": "Also give 100 SHIELD and RESURECTION",
-    "QUICK_FEET": "+20% ATK and move speed, WILD pokemons can be found at any stage",
-    "RUN_AWAY": " +50% ATK and move speed, 10% chance to find WILD",
-    "HUSTLE": "+80% ATK and move speed, 15% chance to find WILD",
-    "BERSERK": "+120% ATK and move speed, 20% chance to find WILD"
+    "QUICK_FEET": "+20% ATK and move speed, WILD pokemons can be found during PvP rounds",
+    "RUN_AWAY": " +50% ATK and move speed, 10% chance to find WILD pokemons",
+    "HUSTLE": "+80% ATK and move speed, 15% chance to find WILD pokemons",
+    "BERSERK": "+120% ATK and move speed, 20% chance to find WILD pokemons"
   },
   "item": {
     "FOSSIL_STONE": "Fossil Stone",
@@ -1907,7 +1907,7 @@
     "ARTIFICIAL": "ARTIFICIAL pokemons give unique items and gain ATK, AP and SHIELD when holding items",
     "BABY": "BABY can bring you Pokemon Eggs to comfort you after a defeat",
     "LIGHT": "LIGHT reveal a spotlight on the battlefield. The unit standing in the spotlight at the start of combat gains unique bonuses.",
-    "WILD": "WILD pokemons can be caught during PvE stages, get increased ATK and move speed, and increase your chances to find more WILD pokemons."
+    "WILD": "WILD pokemons get increased ATK and move speed, can WOUND their target after an attack, and attract more WILD pokemons."
   },
   "title": {
     "NOVICE": "Novice",

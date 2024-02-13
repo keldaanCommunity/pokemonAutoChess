@@ -743,6 +743,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       target.status.triggerPoison(4000, target, this)
     }
 
+    if (this.types.has(Synergy.WILD)) {
+      let woundChance = 0.25
+      if (chance(woundChance)) {
+        target.status.triggerWound(3000, target, this)
+      }
+    }
+
     // Ability effects on hit
     if (target.status.spikeArmor && this.range === 1) {
       this.status.triggerWound(2000, this, target)
