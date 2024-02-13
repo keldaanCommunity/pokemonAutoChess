@@ -11466,6 +11466,36 @@ export class Milotic extends Pokemon {
   skill = Ability.ATTRACT
   attackSprite = AttackSprite.FAIRY_RANGE
 }
+export class Lickitung extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.NORMAL])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.LICKILICKY
+  hp = 70
+  atk = 5
+  def = 2
+  speDef = 3
+  maxPP = 90
+  range = 1
+  skill = Ability.LICK
+  additional = true
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class Lickilicky extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.NORMAL])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 150
+  atk = 11
+  def = 4
+  speDef = 5
+  maxPP = 90
+  range = 1
+  skill = Ability.LICK
+  additional = true
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Kangaskhan extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.NORMAL])
@@ -12286,5 +12316,7 @@ export const PokemonClasses: Record<
   [Pkm.AIPOM]: Aipom,
   [Pkm.AMBIPOM]: Ambipom,
   [Pkm.DEERLING]: Deerling,
-  [Pkm.SAWSBUCK]: Sawsbuck
+  [Pkm.SAWSBUCK]: Sawsbuck,
+  [Pkm.LICKITUNG]: Lickitung,
+  [Pkm.LICKILICKY]: Lickilicky
 }
