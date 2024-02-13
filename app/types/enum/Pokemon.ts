@@ -694,7 +694,15 @@ export enum Pkm {
   FEEBAS = "FEEBAS",
   MILOTIC = "MILOTIC",
   MORPEKO = "MORPEKO",
-  MORPEKO_ANGRY = "MORPEKO_ANGRY"
+  MORPEKO_ANGRY = "MORPEKO_ANGRY",
+  KANGASKHAN = "KANGASKHAN",
+  TEDDIURSA = "TEDDIURSA",
+  URSARING = "URSARING",
+  URSALUNA = "URSALUNA",
+  AIPOM = "AIPOM",
+  AMBIPOM = "AMBIPOM",
+  DEERLING = "DERRLING",
+  SAWSBUCK = "SAWSBUCK"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1391,7 +1399,15 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.FEEBAS]: "0349",
   [Pkm.MILOTIC]: "0350",
   [Pkm.MORPEKO]: "0877",
-  [Pkm.MORPEKO_ANGRY]: "0877-0001"
+  [Pkm.MORPEKO_ANGRY]: "0877-0001",
+  [Pkm.KANGASKHAN]: "0115",
+  [Pkm.TEDDIURSA]: "0216",
+  [Pkm.URSARING]: "0217",
+  [Pkm.URSALUNA]: "0901",
+  [Pkm.AIPOM]: "0190",
+  [Pkm.AMBIPOM]: "0424",
+  [Pkm.DEERLING]: "0585",
+  [Pkm.SAWSBUCK]: "0586"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2088,7 +2104,15 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.FEEBAS]: Pkm.FEEBAS,
   [Pkm.MILOTIC]: Pkm.FEEBAS,
   [Pkm.MORPEKO]: Pkm.MORPEKO,
-  [Pkm.MORPEKO_ANGRY]: Pkm.MORPEKO
+  [Pkm.MORPEKO_ANGRY]: Pkm.MORPEKO,
+  [Pkm.KANGASKHAN]: Pkm.KANGASKHAN,
+  [Pkm.TEDDIURSA]: Pkm.TEDDIURSA,
+  [Pkm.URSARING]: Pkm.TEDDIURSA,
+  [Pkm.URSALUNA]: Pkm.TEDDIURSA,
+  [Pkm.AIPOM]: Pkm.AIPOM,
+  [Pkm.AMBIPOM]: Pkm.AIPOM,
+  [Pkm.DEERLING]: Pkm.DEERLING,
+  [Pkm.SAWSBUCK]: Pkm.DEERLING
 }
 
 export enum PkmDuo {
@@ -5700,5 +5724,46 @@ export const AnimationConfig: {
     attack: AnimationType.Swing,
     ability: AnimationType.Special0,
     emote: AnimationType.Rotate
+  },
+  [Pkm.KANGASKHAN]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.TEDDIURSA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.MultiScratch,
+    emote: AnimationType.Appeal
+  },
+  [Pkm.URSARING]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.MultiStrike,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.URSALUNA]: {
+    //TODO: anims not yet available
+    attack: AnimationType.Idle,
+    ability: AnimationType.Idle,
+    emote: AnimationType.Idle
+  },
+  [Pkm.AIPOM]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Dance,
+    emote: AnimationType.Dance
+  },
+  [Pkm.AMBIPOM]: {
+    attack: AnimationType.MultiStrike,
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.DEERLING]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SAWSBUCK]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
   }
 }

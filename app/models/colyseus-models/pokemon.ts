@@ -11469,6 +11469,120 @@ export class Milotic extends Pokemon {
   attackSprite = AttackSprite.FAIRY_RANGE
 }
 
+export class Kangaskhan extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.NORMAL])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 20
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.RETALIATE
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class Teddiursa extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.GROUND])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.URSARING
+  hp = 100
+  atk = 10
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.RETALIATE
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class Ursaring extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.GROUND])
+  rarity = Rarity.EPIC
+  stars = 2
+  //evolution = Pkm.URSALUNA // when ready
+  hp = 200
+  atk = 20
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.RETALIATE
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class Ursaluna extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.GROUND])
+  rarity = Rarity.EPIC
+  stars = 3
+  hp = 300
+  atk = 30
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.RETALIATE
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class Aipom extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.NORMAL])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  hp = 100
+  atk = 10
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.RETALIATE
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class Ambipom extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.NORMAL])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 200
+  atk = 20
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.RETALIATE
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class Deerling extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.GRASS])
+  rarity = Rarity.RARE
+  stars = 1
+  hp = 100
+  atk = 10
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.RETALIATE
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class Sawsbuck extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.GRASS])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 200
+  atk = 20
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.RETALIATE
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (shiny: boolean, emotion: Emotion) => Pokemon
@@ -12166,5 +12280,13 @@ export const PokemonClasses: Record<
   [Pkm.FEEBAS]: Feebas,
   [Pkm.MILOTIC]: Milotic,
   [Pkm.MORPEKO]: Morpeko,
-  [Pkm.MORPEKO_ANGRY]: MorpekoHangry
+  [Pkm.MORPEKO_ANGRY]: MorpekoHangry,
+  [Pkm.KANGASKHAN]: Kangaskhan,
+  [Pkm.TEDDIURSA]: Teddiursa,
+  [Pkm.URSARING]: Ursaring,
+  [Pkm.URSALUNA]: Ursaluna,
+  [Pkm.AIPOM]: Aipom,
+  [Pkm.AMBIPOM]: Ambipom,
+  [Pkm.DEERLING]: Deerling,
+  [Pkm.SAWSBUCK]: Sawsbuck
 }
