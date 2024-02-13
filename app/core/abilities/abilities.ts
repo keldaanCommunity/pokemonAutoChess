@@ -7218,6 +7218,29 @@ export class AuraWheelHangryStrategy extends AbilityStrategy {
   }
 }
 
+export class LickStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit,
+      true
+    )
+    target.status.triggerConfusion(3000, target)
+    target.status.triggerParalysis(3000, target)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -7499,5 +7522,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.BLEAKWIND_STORM]: new BleakwindStormStrategy(),
   [Ability.SPRINGTIDE_STORM]: new SpringtideStormStrategy(),
   [Ability.AURA_WHEEL]: new AuraWheelStrategy(),
-  [Ability.AURA_WHEEL_HANGRY]: new AuraWheelHangryStrategy()
+  [Ability.AURA_WHEEL_HANGRY]: new AuraWheelHangryStrategy(),
+  [Ability.LICK]: new LickStrategy()
 }

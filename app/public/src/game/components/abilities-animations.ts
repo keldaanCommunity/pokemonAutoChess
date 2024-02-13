@@ -1733,6 +1733,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
+    case Ability.LICK:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
     case Ability.AURA_WHEEL: {
       const specialProjectile = addAbilitySprite(skill, coordinates).setScale(1)
       scene.tweens.add({

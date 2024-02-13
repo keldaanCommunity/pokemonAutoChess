@@ -11468,6 +11468,36 @@ export class Milotic extends Pokemon {
   skill = Ability.ATTRACT
   attackSprite = AttackSprite.FAIRY_RANGE
 }
+export class Lickitung extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.LICKILICKY
+  hp = 70
+  atk = 5
+  def = 2
+  speDef = 3
+  maxPP = 90
+  range = 1
+  skill = Ability.LICK
+  additional = true
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class Lickilicky extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 150
+  atk = 11
+  def = 4
+  speDef = 5
+  maxPP = 90
+  range = 1
+  skill = Ability.LICK
+  additional = true
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export const PokemonClasses: Record<
   Pkm,
@@ -12166,5 +12196,7 @@ export const PokemonClasses: Record<
   [Pkm.FEEBAS]: Feebas,
   [Pkm.MILOTIC]: Milotic,
   [Pkm.MORPEKO]: Morpeko,
-  [Pkm.MORPEKO_ANGRY]: MorpekoHangry
+  [Pkm.MORPEKO_ANGRY]: MorpekoHangry,
+  [Pkm.LICKITUNG]: Lickitung,
+  [Pkm.LICKILICKY]: Lickilicky
 }
