@@ -11478,7 +11478,6 @@ export class Lickitung extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.LICK
-  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -11493,7 +11492,6 @@ export class Lickilicky extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.LICK
-  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -11559,6 +11557,7 @@ export class Aipom extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.NORMAL])
   rarity = Rarity.UNCOMMON
   stars = 1
+  evolution = Pkm.AMBIPOM
   hp = 100
   atk = 10
   def = 4
@@ -11587,6 +11586,7 @@ export class Deerling extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.GRASS])
   rarity = Rarity.RARE
   stars = 1
+  evolution = Pkm.SAWSBUCK
   hp = 100
   atk = 10
   def = 4
