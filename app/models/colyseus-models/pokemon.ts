@@ -4302,7 +4302,7 @@ export class Gyarados extends Pokemon {
 
 export class Rattata extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.WILD])
-  rarity = Rarity.SPECIAL
+  rarity = Rarity.COMMON
   stars = 1
   evolution = Pkm.RATICATE
   hp = 30
@@ -4317,7 +4317,7 @@ export class Rattata extends Pokemon {
 
 export class Raticate extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.WILD])
-  rarity = Rarity.SPECIAL
+  rarity = Rarity.COMMON
   stars = 2
   hp = 60
   atk = 5
@@ -4331,7 +4331,7 @@ export class Raticate extends Pokemon {
 
 export class Spearow extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.WILD])
-  rarity = Rarity.SPECIAL
+  rarity = Rarity.COMMON
   stars = 1
   evolution = Pkm.FEAROW
   hp = 30
@@ -4346,7 +4346,7 @@ export class Spearow extends Pokemon {
 
 export class Fearow extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.WILD])
-  rarity = Rarity.SPECIAL
+  rarity = Rarity.COMMON
   stars = 2
   hp = 60
   atk = 5
@@ -4594,7 +4594,7 @@ export class Melmetal extends Pokemon {
 }
 
 export class Suicune extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ICE, Synergy.FIELD])
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.WILD, Synergy.FIELD])
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 300
@@ -4608,7 +4608,11 @@ export class Suicune extends Pokemon {
 }
 
 export class Raikou extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.WILD,
+    Synergy.FIELD
+  ])
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 300
@@ -4622,7 +4626,7 @@ export class Raikou extends Pokemon {
 }
 
 export class Entei extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.WILD, Synergy.FIELD])
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 300
@@ -5413,7 +5417,7 @@ export class Spiritomb extends Pokemon {
 }
 
 export class Absol extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FIELD])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
@@ -5545,7 +5549,7 @@ export class Azelf extends Pokemon {
 }
 
 export class Mew extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.FIELD])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.PSYCHIC])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
@@ -6004,7 +6008,7 @@ export class Sunflora extends Pokemon {
 }
 
 export class Mankey extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.FIELD])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIGHTING])
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.PRIMEAPE
@@ -6015,12 +6019,11 @@ export class Mankey extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.THRASH
-  additional = true
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
 export class Primeape extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.FIELD])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIGHTING])
   rarity = Rarity.EPIC
   stars = 2
   hp = 240
@@ -6030,7 +6033,6 @@ export class Primeape extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.THRASH
-  additional = true
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
@@ -9597,7 +9599,7 @@ export class Shuckle extends Pokemon {
 }
 
 export class Tepig extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIGHTING])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIRE, Synergy.FIGHTING])
   rarity = Rarity.HATCH
   stars = 1
   evolution = Pkm.PIGNITE
@@ -9614,7 +9616,7 @@ export class Tepig extends Pokemon {
 }
 
 export class Pignite extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIGHTING])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIRE, Synergy.FIGHTING])
   rarity = Rarity.HATCH
   stars = 2
   evolution = Pkm.EMBOAR
@@ -9631,7 +9633,7 @@ export class Pignite extends Pokemon {
 }
 
 export class Emboar extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIGHTING])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIRE, Synergy.FIGHTING])
   rarity = Rarity.HATCH
   stars = 3
   hp = 220
@@ -10138,8 +10140,8 @@ export class AlolanExeggutor extends Pokemon {
 
 export class Bidoof extends Pokemon {
   types = new SetSchema<Synergy>([
+    Synergy.WILD,
     Synergy.NORMAL,
-    Synergy.FIELD,
     Synergy.AQUATIC
   ])
   rarity = Rarity.UNCOMMON
@@ -10152,14 +10154,13 @@ export class Bidoof extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.SUPER_FANG
-  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Bibarel extends Pokemon {
   types = new SetSchema<Synergy>([
+    Synergy.WILD,
     Synergy.NORMAL,
-    Synergy.FIELD,
     Synergy.AQUATIC
   ])
   rarity = Rarity.UNCOMMON
@@ -10171,7 +10172,6 @@ export class Bibarel extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.SUPER_FANG
-  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -10696,7 +10696,7 @@ export class Pelipper extends Pokemon {
 }
 
 export class Zigzagoon extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FIELD, Synergy.NORMAL])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIELD])
   rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.LINOONE
@@ -10707,13 +10707,12 @@ export class Zigzagoon extends Pokemon {
   maxPP = 50
   range = 1
   skill = Ability.SLASH
-  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
   passive = Passive.PICKUP
 }
 
 export class Linoone extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FIELD, Synergy.NORMAL])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIELD])
   rarity = Rarity.RARE
   stars = 2
   hp = 180
@@ -10723,7 +10722,6 @@ export class Linoone extends Pokemon {
   maxPP = 50
   range = 1
   skill = Ability.SLASH
-  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
   passive = Passive.PICKUP
 }
