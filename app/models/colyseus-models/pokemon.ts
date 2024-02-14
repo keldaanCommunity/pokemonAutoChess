@@ -11611,6 +11611,35 @@ export class Sawsbuck extends Pokemon {
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
+export class Patrat extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.LIGHT])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.WATCHOG
+  hp = 100
+  atk = 10
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.RETALIATE
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class Watchog extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.LIGHT])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 200
+  atk = 20
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.RETALIATE
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (shiny: boolean, emotion: Emotion) => Pokemon
@@ -12318,5 +12347,7 @@ export const PokemonClasses: Record<
   [Pkm.DEERLING]: Deerling,
   [Pkm.SAWSBUCK]: Sawsbuck,
   [Pkm.LICKITUNG]: Lickitung,
-  [Pkm.LICKILICKY]: Lickilicky
+  [Pkm.LICKILICKY]: Lickilicky,
+  [Pkm.PATRAT]: Patrat,
+  [Pkm.WATCHOG]: Watchog
 }

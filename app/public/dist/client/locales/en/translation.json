@@ -994,7 +994,17 @@
     "MORPEKO": "Morpeko",
     "MORPEKO_HANGRY": "Morpeko Hangry",
     "LICKITUNG": "Lickitung",
-    "LICKILICKY": "Lickilicky"
+    "LICKILICKY": "Lickilicky",
+    "KANGASKHAN": "Kangaskhan",
+    "TEDDIURSA": "Teddiursa",
+    "URSARING": "Ursaring",
+    "URSALUNA": "Ursaluna",
+    "AIPOM": "Aipom",
+    "AMBIPOM": "Ambipom",
+    "DEERLING": "Deerling",
+    "SAWSBUCK": "Sawsbuck",
+    "PATRAT": "Patrat",
+    "WATCHOG": "Watchog"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
