@@ -4301,7 +4301,7 @@ export class Gyarados extends Pokemon {
 }
 
 export class Rattata extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.WILD])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.NORMAL])
   rarity = Rarity.COMMON
   stars = 1
   evolution = Pkm.RATICATE
@@ -4316,7 +4316,7 @@ export class Rattata extends Pokemon {
 }
 
 export class Raticate extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.WILD])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.NORMAL])
   rarity = Rarity.COMMON
   stars = 2
   hp = 110
@@ -4330,7 +4330,7 @@ export class Raticate extends Pokemon {
 }
 
 export class Spearow extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.WILD])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FLYING])
   rarity = Rarity.COMMON
   stars = 1
   evolution = Pkm.FEAROW
@@ -4345,7 +4345,7 @@ export class Spearow extends Pokemon {
 }
 
 export class Fearow extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.WILD])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FLYING])
   rarity = Rarity.COMMON
   stars = 2
   hp = 120
@@ -4594,7 +4594,7 @@ export class Melmetal extends Pokemon {
 }
 
 export class Suicune extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.WILD, Synergy.FIELD])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.WATER, Synergy.FIELD])
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 300
@@ -4609,8 +4609,8 @@ export class Suicune extends Pokemon {
 
 export class Raikou extends Pokemon {
   types = new SetSchema<Synergy>([
-    Synergy.ELECTRIC,
     Synergy.WILD,
+    Synergy.ELECTRIC,
     Synergy.FIELD
   ])
   rarity = Rarity.LEGENDARY
@@ -4626,7 +4626,7 @@ export class Raikou extends Pokemon {
 }
 
 export class Entei extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.WILD, Synergy.FIELD])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIRE, Synergy.FIELD])
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 300

@@ -64,7 +64,6 @@ import {
   shuffleArray
 } from "../../utils/random"
 import { values } from "../../utils/schemas"
-import AttackingState from "../attacking-state"
 
 export class BlueFlareStrategy extends AbilityStrategy {
   process(
