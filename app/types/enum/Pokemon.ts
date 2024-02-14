@@ -5790,12 +5790,12 @@ export const AnimationConfig: {
   },
   [Pkm.PATRAT]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge,
+    ability: AnimationType.Rotate,
     emote: AnimationType.Shoot
   },
   [Pkm.WATCHOG]: {
     attack: AnimationType.MultiScratch,
-    ability: AnimationType.Charge,
+    ability: AnimationType.Rotate,
     emote: AnimationType.Shoot
   }
 }

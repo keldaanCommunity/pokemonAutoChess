@@ -7313,17 +7313,22 @@ export class DetectStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let nbAdjacentEnemies = 0
+    let nbAdjacentEnemies = 0,
+      adjacentAllies: PokemonEntity[] = []
     board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
       .forEach((cell) => {
         if (cell.value && cell.value.team !== pokemon.team) {
           nbAdjacentEnemies++
+        } else if (cell.value && cell.value.team === pokemon.team) {
+          adjacentAllies.push(cell.value)
         }
       })
 
-    pokemon.status.triggerProtect(
-      Math.round(500 * nbAdjacentEnemies * (1 + pokemon.ap / 100))
+    adjacentAllies.forEach((ally) =>
+      ally.status.triggerProtect(
+        Math.round(500 * nbAdjacentEnemies * (1 + pokemon.ap / 100))
+      )
     )
   }
 }

@@ -4305,8 +4305,8 @@ export class Rattata extends Pokemon {
   rarity = Rarity.COMMON
   stars = 1
   evolution = Pkm.RATICATE
-  hp = 30
-  atk = 3
+  hp = 50
+  atk = 4
   def = 1
   speDef = 1
   maxPP = 100
@@ -4319,10 +4319,10 @@ export class Raticate extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.WILD])
   rarity = Rarity.COMMON
   stars = 2
-  hp = 60
-  atk = 5
-  def = 1
-  speDef = 1
+  hp = 110
+  atk = 10
+  def = 2
+  speDef = 2
   maxPP = 100
   range = 1
   skill = Ability.AGILITY
@@ -4334,8 +4334,8 @@ export class Spearow extends Pokemon {
   rarity = Rarity.COMMON
   stars = 1
   evolution = Pkm.FEAROW
-  hp = 30
-  atk = 3
+  hp = 50
+  atk = 4
   def = 1
   speDef = 1
   maxPP = 100
@@ -4348,8 +4348,8 @@ export class Fearow extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.WILD])
   rarity = Rarity.COMMON
   stars = 2
-  hp = 60
-  atk = 5
+  hp = 120
+  atk = 9
   def = 1
   speDef = 1
   maxPP = 100
@@ -7765,7 +7765,7 @@ export class Lanturn extends Pokemon {
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 export class Poochyena extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.DARK, Synergy.FIELD])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK])
   rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.MIGHTYENA
@@ -7776,12 +7776,11 @@ export class Poochyena extends Pokemon {
   maxPP = 75
   range = 1
   skill = Ability.GROWL
-  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Mightyena extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.DARK, Synergy.FIELD])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK])
   rarity = Rarity.RARE
   stars = 2
   hp = 160
@@ -7791,7 +7790,6 @@ export class Mightyena extends Pokemon {
   maxPP = 75
   range = 1
   skill = Ability.GROWL
-  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -11472,7 +11470,7 @@ export class Lickitung extends Pokemon {
   stars = 1
   evolution = Pkm.LICKILICKY
   hp = 70
-  atk = 5
+  atk = 6
   def = 2
   speDef = 3
   maxPP = 90
@@ -11496,11 +11494,15 @@ export class Lickilicky extends Pokemon {
 }
 
 export class Kangaskhan extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.NORMAL])
+  types = new SetSchema<Synergy>([
+    Synergy.WILD,
+    Synergy.FIGHTING,
+    Synergy.NORMAL
+  ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 200
-  atk = 20
+  hp = 240
+  atk = 18
   def = 4
   speDef = 4
   maxPP = 100
@@ -11558,8 +11560,8 @@ export class Aipom extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.AMBIPOM
-  hp = 100
-  atk = 10
+  hp = 70
+  atk = 7
   def = 4
   speDef = 4
   maxPP = 80
@@ -11572,10 +11574,10 @@ export class Ambipom extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.NORMAL])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 200
-  atk = 20
-  def = 4
-  speDef = 4
+  hp = 130
+  atk = 14
+  def = 2
+  speDef = 2
   maxPP = 80
   range = 1
   skill = Ability.TICKLE
@@ -11587,10 +11589,10 @@ export class Deerling extends Pokemon {
   rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.SAWSBUCK
-  hp = 100
-  atk = 10
-  def = 4
-  speDef = 4
+  hp = 80
+  atk = 8
+  def = 2
+  speDef = 2
   maxPP = 100
   range = 1
   skill = Ability.AROMATHERAPY
@@ -11601,8 +11603,8 @@ export class Sawsbuck extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.GRASS])
   rarity = Rarity.RARE
   stars = 2
-  hp = 200
-  atk = 20
+  hp = 180
+  atk = 14
   def = 4
   speDef = 4
   maxPP = 100
@@ -11616,28 +11618,28 @@ export class Patrat extends Pokemon {
   rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.WATCHOG
-  hp = 100
-  atk = 10
-  def = 4
-  speDef = 4
+  hp = 80
+  atk = 8
+  def = 1
+  speDef = 1
   maxPP = 100
-  range = 1
+  range = 2
   skill = Ability.DETECT
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.ROCK_RANGE
 }
 
 export class Watchog extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.LIGHT])
   rarity = Rarity.RARE
   stars = 2
-  hp = 200
-  atk = 20
-  def = 4
-  speDef = 4
+  hp = 170
+  atk = 18
+  def = 2
+  speDef = 2
   maxPP = 100
-  range = 1
+  range = 2
   skill = Ability.DETECT
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.ROCK_RANGE
 }
 
 export const PokemonClasses: Record<
