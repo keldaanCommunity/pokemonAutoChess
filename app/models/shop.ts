@@ -27,6 +27,7 @@ import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
 import Player from "./colyseus-models/player"
 import { PRECOMPUTED_POKEMONS_PER_RARITY, getPokemonData } from "./precomputed"
+import { PVEStages } from "./pve-stages"
 
 export function getPoolSize(rarity: Rarity, maxStars: number): number {
   return PoolSize[rarity][clamp(maxStars, 1, 3) - 1]
@@ -207,9 +208,10 @@ export default class Shop {
     let pkm = Pkm.MAGIKARP
     const candidates = new Array<Pkm>()
     pool.forEach((value, pkm) => {
-      const isOfTypeWanted =
-        !specificTypeWanted ||
-        getPokemonData(pkm).types.includes(specificTypeWanted)
+      const types = getPokemonData(pkm).types
+      const isOfTypeWanted = specificTypeWanted
+        ? types.includes(specificTypeWanted)
+        : types.includes(Synergy.WILD) === false
 
       if (isOfTypeWanted && !finals.has(pkm)) {
         for (let i = 0; i < value; i++) {
@@ -217,9 +219,15 @@ export default class Shop {
         }
       }
     })
+
     if (candidates.length > 0) {
       pkm = pickRandomIn(candidates)
+    } else if (specificTypeWanted === Synergy.WATER) {
+      return Pkm.MAGIKARP // if no more water in pool, return magikarp
+    } else if (specificTypeWanted) {
+      return this.getRandomPokemonFromPool(pool, finals) // could not find of specific type, return another type
     }
+
     const val = pool.get(pkm)
     if (val !== undefined) {
       pool.set(pkm, Math.max(0, val - 1))
@@ -252,30 +260,68 @@ export default class Shop {
       return pickRandomIn(unowns)
     }
 
+    const isPVE = state.stageLevel in PVEStages
+    const wildChance = player.effects.has(Effect.QUICK_FEET)
+      ? 0.05
+      : player.effects.has(Effect.RUN_AWAY)
+      ? 0.1
+      : player.effects.has(Effect.HUSTLE)
+      ? 0.15
+      : player.effects.has(Effect.BERSERK)
+      ? 0.2
+      : isPVE
+      ? 0.05
+      : 0
+
     const finals = new Set(
       values(player.board)
         .filter((pokemon) => pokemon.final)
         .map((pokemon) => PkmFamily[pokemon.name])
     )
 
+    let specificTypeWanted: Synergy | undefined = undefined
+    if (wildChance > 0 && chance(wildChance)) {
+      specificTypeWanted = Synergy.WILD
+    }
+
     for (let i = 0; i < rarityProbability.length; i++) {
       threshold += rarityProbability[i]
       if (rarity_seed < threshold) {
         switch (i) {
           case 0:
-            pokemon = this.getRandomPokemonFromPool(this.commonPool, finals)
+            pokemon = this.getRandomPokemonFromPool(
+              this.commonPool,
+              finals,
+              specificTypeWanted
+            )
             break
           case 1:
-            pokemon = this.getRandomPokemonFromPool(this.uncommonPool, finals)
+            pokemon = this.getRandomPokemonFromPool(
+              this.uncommonPool,
+              finals,
+              specificTypeWanted
+            )
             break
           case 2:
-            pokemon = this.getRandomPokemonFromPool(this.rarePool, finals)
+            pokemon = this.getRandomPokemonFromPool(
+              this.rarePool,
+              finals,
+              specificTypeWanted
+            )
             break
           case 3:
-            pokemon = this.getRandomPokemonFromPool(this.epicPool, finals)
+            pokemon = this.getRandomPokemonFromPool(
+              this.epicPool,
+              finals,
+              specificTypeWanted
+            )
             break
           case 4:
-            pokemon = this.getRandomPokemonFromPool(this.ultraPool, finals)
+            pokemon = this.getRandomPokemonFromPool(
+              this.ultraPool,
+              finals,
+              specificTypeWanted
+            )
             break
           default:
             logger.error(

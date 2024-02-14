@@ -378,7 +378,7 @@ export default class PokemonState {
     pokemon: PokemonEntity,
     dt: number,
     board: Board,
-    weather: string,
+    weather: Weather,
     player: Player | undefined
   ) {
     pokemon.status.updateAllStatus(dt, pokemon, board)

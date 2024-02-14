@@ -8,9 +8,22 @@
 - Morpeko
 - Lickitung
 - Lickilicky
+- Kangashkhan
+- Teddiursa
+- Ursaring
+- Aipom
+- Ambipom
+- Deerling
+- Sawsbuck
+- Patrat
+- Watchog
+- Spinarak
+- Ariados
 
 # Changes to Pokemon & Abilities
 
+- Rattata and Spearow are now in Common category with the new Wild synergy
+- These existing pokemons get the new Wild synergy: Bidoof, Poochyena, Zigazagoon, Mankey, Doduo, Tepig, Mew, Absol, Raikou, Entei, Suicune
 - Give Politoed Sound synergy instead of Fighting
 - Give Scorbunny line Field synergy instead of Fighting
 - Remove Field synergy of Tepig line, buff attack & spe-def
@@ -29,6 +42,7 @@
 
 # Changes to Synergies
 
+- New synergy: Wild ; Wild pokemons can initially be only found during PvE stages, but they will attract more Wild mons if you play them. Wild pokemons have increased Attack and move speed, and can Wound their target with their attacks.
 - Water: Magikarp can now be fished only at first synergy level, and are worth zero to sell
 
 # Changes to Items

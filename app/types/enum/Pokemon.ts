@@ -695,8 +695,20 @@ export enum Pkm {
   MILOTIC = "MILOTIC",
   MORPEKO = "MORPEKO",
   MORPEKO_ANGRY = "MORPEKO_ANGRY",
+  KANGASKHAN = "KANGASKHAN",
+  TEDDIURSA = "TEDDIURSA",
+  URSARING = "URSARING",
+  URSALUNA = "URSALUNA",
+  AIPOM = "AIPOM",
+  AMBIPOM = "AMBIPOM",
+  DEERLING = "DEERLING",
+  SAWSBUCK = "SAWSBUCK",
   LICKITUNG = "LICKITUNG",
-  LICKILICKY = "LICKILICKY"
+  LICKILICKY = "LICKILICKY",
+  PATRAT = "PATRAT",
+  WATCHOG = "WATCHOG",
+  SPINARAK = "SPINARAK",
+  ARIADOS = "ARIADOS"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1394,8 +1406,20 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.MILOTIC]: "0350",
   [Pkm.MORPEKO]: "0877",
   [Pkm.MORPEKO_ANGRY]: "0877-0001",
+  [Pkm.KANGASKHAN]: "0115",
+  [Pkm.TEDDIURSA]: "0216",
+  [Pkm.URSARING]: "0217",
+  [Pkm.URSALUNA]: "0901",
+  [Pkm.AIPOM]: "0190",
+  [Pkm.AMBIPOM]: "0424",
+  [Pkm.DEERLING]: "0585",
+  [Pkm.SAWSBUCK]: "0586",
   [Pkm.LICKITUNG]: "0108",
-  [Pkm.LICKILICKY]: "0463"
+  [Pkm.LICKILICKY]: "0463",
+  [Pkm.PATRAT]: "0504",
+  [Pkm.WATCHOG]: "0505",
+  [Pkm.SPINARAK]: "0167",
+  [Pkm.ARIADOS]: "0168"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2093,8 +2117,20 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.MILOTIC]: Pkm.FEEBAS,
   [Pkm.MORPEKO]: Pkm.MORPEKO,
   [Pkm.MORPEKO_ANGRY]: Pkm.MORPEKO,
+  [Pkm.KANGASKHAN]: Pkm.KANGASKHAN,
+  [Pkm.TEDDIURSA]: Pkm.TEDDIURSA,
+  [Pkm.URSARING]: Pkm.TEDDIURSA,
+  [Pkm.URSALUNA]: Pkm.TEDDIURSA,
+  [Pkm.AIPOM]: Pkm.AIPOM,
+  [Pkm.AMBIPOM]: Pkm.AIPOM,
+  [Pkm.DEERLING]: Pkm.DEERLING,
+  [Pkm.SAWSBUCK]: Pkm.DEERLING,
   [Pkm.LICKITUNG]: Pkm.LICKITUNG,
-  [Pkm.LICKILICKY]: Pkm.LICKITUNG
+  [Pkm.LICKILICKY]: Pkm.LICKITUNG,
+  [Pkm.PATRAT]: Pkm.PATRAT,
+  [Pkm.WATCHOG]: Pkm.PATRAT,
+  [Pkm.SPINARAK]: Pkm.SPINARAK,
+  [Pkm.ARIADOS]: Pkm.SPINARAK
 }
 
 export enum PkmDuo {
@@ -5707,6 +5743,47 @@ export const AnimationConfig: {
     ability: AnimationType.Special0,
     emote: AnimationType.Rotate
   },
+  [Pkm.KANGASKHAN]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.TEDDIURSA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.MultiScratch,
+    emote: AnimationType.Appeal
+  },
+  [Pkm.URSARING]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.MultiStrike,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.URSALUNA]: {
+    //TODO: anims not yet available
+    attack: AnimationType.Idle,
+    ability: AnimationType.Idle,
+    emote: AnimationType.Idle
+  },
+  [Pkm.AIPOM]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Dance,
+    emote: AnimationType.Dance
+  },
+  [Pkm.AMBIPOM]: {
+    attack: AnimationType.MultiStrike,
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.DEERLING]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SAWSBUCK]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
+  },
   [Pkm.LICKITUNG]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Lick,
@@ -5716,5 +5793,25 @@ export const AnimationConfig: {
     attack: AnimationType.Strike,
     ability: AnimationType.Shoot,
     emote: AnimationType.Withdraw
+  },
+  [Pkm.PATRAT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.WATCHOG]: {
+    attack: AnimationType.MultiScratch,
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SPINARAK]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.ARIADOS]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   }
 }

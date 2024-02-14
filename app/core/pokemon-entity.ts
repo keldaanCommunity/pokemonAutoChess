@@ -37,6 +37,7 @@ import { Passive } from "../types/enum/Passive"
 import { Pkm, PkmIndex } from "../types/enum/Pokemon"
 import { SpecialLobbyRule } from "../types/enum/SpecialLobbyRule"
 import { Synergy, SynergyEffects } from "../types/enum/Synergy"
+import { Weather } from "../types/enum/Weather"
 import { distanceC } from "../utils/distance"
 import { clamp, max, min, roundTo2Digits } from "../utils/number"
 import { chance } from "../utils/random"
@@ -179,7 +180,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   update(
     dt: number,
     board: Board,
-    weather: string,
+    weather: Weather,
     player: Player | undefined
   ) {
     this.state.update(this, dt, board, weather, player)
@@ -740,6 +741,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
     if (poisonChance > 0 && chance(poisonChance)) {
       target.status.triggerPoison(4000, target, this)
+    }
+
+    if (this.types.has(Synergy.WILD)) {
+      let woundChance = 0.25
+      if (chance(woundChance)) {
+        target.status.triggerWound(3000, target, this)
+      }
     }
 
     // Ability effects on hit
@@ -1377,4 +1385,26 @@ export function canSell(
   }
 
   return true
+}
+
+export function getMoveSpeed(
+  pokemon: IPokemonEntity,
+  weather: Weather
+): number {
+  let moveSpeed = 1
+  if (weather === Weather.SNOW) {
+    moveSpeed -= 0.25
+  }
+
+  if (pokemon.effects.has(Effect.QUICK_FEET)) {
+    moveSpeed += 0.3
+  } else if (pokemon.effects.has(Effect.RUN_AWAY)) {
+    moveSpeed += 0.5
+  } else if (pokemon.effects.has(Effect.HUSTLE)) {
+    moveSpeed += 0.8
+  } else if (pokemon.effects.has(Effect.BERSERK)) {
+    moveSpeed += 1.2
+  }
+
+  return moveSpeed
 }

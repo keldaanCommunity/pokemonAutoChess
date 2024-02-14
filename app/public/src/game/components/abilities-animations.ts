@@ -1776,6 +1776,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setOrigin(0.5, 1).setScale(2)
       break
 
+    case Ability.AROMATHERAPY:
+      addAbilitySprite(skill, coordinates, true).setScale(2)
+      break
+
     case "FIELD_DEATH":
       addAbilitySprite("FIELD_DEATH", coordinates, true).setScale(2)
       break

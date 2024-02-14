@@ -15,6 +15,11 @@
   text-transform: uppercase;
 }
 
+#wiki-page li[role="tab"] > img.pokemon-portrait {
+  display: block;
+  margin: -6px -12px;
+}
+
 #wiki-page .synergies-tabs li[role="tab"] {
   padding: 4px 6px;
   line-height: 40px;

@@ -1,6 +1,7 @@
 import Player from "../models/colyseus-models/player"
 import { PokemonActionState } from "../types/enum/Game"
 import { Passive } from "../types/enum/Passive"
+import { Weather } from "../types/enum/Weather"
 import Board from "./board"
 import { PokemonEntity } from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
@@ -10,7 +11,7 @@ export class IdleState extends PokemonState {
     pokemon: PokemonEntity,
     dt: number,
     board: Board,
-    weather: string,
+    weather: Weather,
     player: Player
   ) {
     super.update(pokemon, dt, board, weather, player)

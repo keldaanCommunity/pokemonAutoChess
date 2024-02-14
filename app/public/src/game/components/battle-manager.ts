@@ -1,5 +1,6 @@
 /* eslint-disable no-case-declarations */
 import { GameObjects } from "phaser"
+import { getMoveSpeed } from "../../../../core/pokemon-entity"
 import Simulation from "../../../../core/simulation"
 import Count from "../../../../models/colyseus-models/count"
 import Player from "../../../../models/colyseus-models/player"
@@ -592,6 +593,7 @@ export default class BattleManager {
             } else {
               pkm.moveManager.setSpeed(
                 3 *
+                  getMoveSpeed(pokemon, this.simulation.weather) *
                   Math.max(
                     Math.abs(pkm.x - coordinates[0]),
                     Math.abs(pkm.y - coordinates[1])
