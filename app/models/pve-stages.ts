@@ -35,12 +35,11 @@ export const PVEStages: { [turn: number]: PVEStage } = {
   },
 
   2: {
-    name: "pkm.RATICATE",
-    avatar: Pkm.RATICATE,
+    name: "pkm.RATTATA",
+    avatar: Pkm.RATTATA,
     board: [
       [Pkm.RATTATA, 3, 1],
-      [Pkm.RATTATA, 5, 1],
-      [Pkm.RATICATE, 4, 2]
+      [Pkm.RATTATA, 5, 1]
     ],
     getRewards() {
       return [pickRandomIn(BasicItems)]
@@ -48,13 +47,12 @@ export const PVEStages: { [turn: number]: PVEStage } = {
   },
 
   3: {
-    name: "pkm.FEAROW",
-    avatar: Pkm.FEAROW,
+    name: "pkm.SPEAROW",
+    avatar: Pkm.SPEAROW,
     board: [
       [Pkm.SPEAROW, 3, 1],
       [Pkm.SPEAROW, 5, 1],
-      [Pkm.SPEAROW, 4, 1],
-      [Pkm.FEAROW, 4, 2]
+      [Pkm.SPEAROW, 4, 2]
     ],
     getRewards() {
       return [pickRandomIn(BasicItems)]
