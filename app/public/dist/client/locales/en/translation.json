@@ -1008,7 +1008,9 @@
     "DEERLING": "Deerling",
     "SAWSBUCK": "Sawsbuck",
     "PATRAT": "Patrat",
-    "WATCHOG": "Watchog"
+    "WATCHOG": "Watchog",
+    "SPINARAK": "Spinarak",
+    "ARIADOS": "Ariados"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",

@@ -40,6 +40,7 @@ export function addIconsToDescription(description: string, tier = 0, ap = 0) {
       if (token === "GOLD") {
         d = (
           <img
+            key={i}
             className="description-icon icon-money"
             src="/assets/icons/money.svg"
             alt="$"
@@ -48,6 +49,7 @@ export function addIconsToDescription(description: string, tier = 0, ap = 0) {
       } else if (token === "STAR") {
         d = (
           <img
+            key={i}
             className="description-icon icon-star"
             src="/assets/ui/star.svg"
             alt="⭐"

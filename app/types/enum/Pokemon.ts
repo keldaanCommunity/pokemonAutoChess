@@ -706,7 +706,9 @@ export enum Pkm {
   LICKITUNG = "LICKITUNG",
   LICKILICKY = "LICKILICKY",
   PATRAT = "PATRAT",
-  WATCHOG = "WATCHOG"
+  WATCHOG = "WATCHOG",
+  SPINARAK = "SPINARAK",
+  ARIADOS = "ARIADOS"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1415,7 +1417,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.LICKITUNG]: "0108",
   [Pkm.LICKILICKY]: "0463",
   [Pkm.PATRAT]: "0504",
-  [Pkm.WATCHOG]: "0505"
+  [Pkm.WATCHOG]: "0505",
+  [Pkm.SPINARAK]: "0167",
+  [Pkm.ARIADOS]: "0168"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2124,7 +2128,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.LICKITUNG]: Pkm.LICKITUNG,
   [Pkm.LICKILICKY]: Pkm.LICKITUNG,
   [Pkm.PATRAT]: Pkm.PATRAT,
-  [Pkm.WATCHOG]: Pkm.PATRAT
+  [Pkm.WATCHOG]: Pkm.PATRAT,
+  [Pkm.SPINARAK]: Pkm.SPINARAK,
+  [Pkm.ARIADOS]: Pkm.SPINARAK
 }
 
 export enum PkmDuo {
@@ -5796,6 +5802,16 @@ export const AnimationConfig: {
   [Pkm.WATCHOG]: {
     attack: AnimationType.MultiScratch,
     ability: AnimationType.Rotate,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SPINARAK]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.ARIADOS]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   }
 }

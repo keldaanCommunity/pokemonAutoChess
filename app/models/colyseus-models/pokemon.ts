@@ -11642,6 +11642,35 @@ export class Watchog extends Pokemon {
   attackSprite = AttackSprite.ROCK_RANGE
 }
 
+export class Spinarak extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.BUG, Synergy.POISON])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.ARIADOS
+  hp = 70
+  atk = 7
+  def = 1
+  speDef = 1
+  maxPP = 70
+  range = 2
+  skill = Ability.STRING_SHOT
+  attackSprite = AttackSprite.POISON_RANGE
+}
+
+export class Ariados extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.BUG, Synergy.POISON])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 160
+  atk = 17
+  def = 2
+  speDef = 2
+  maxPP = 70
+  range = 2
+  skill = Ability.STRING_SHOT
+  attackSprite = AttackSprite.POISON_RANGE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (shiny: boolean, emotion: Emotion) => Pokemon
@@ -12351,5 +12380,7 @@ export const PokemonClasses: Record<
   [Pkm.LICKITUNG]: Lickitung,
   [Pkm.LICKILICKY]: Lickilicky,
   [Pkm.PATRAT]: Patrat,
-  [Pkm.WATCHOG]: Watchog
+  [Pkm.WATCHOG]: Watchog,
+  [Pkm.SPINARAK]: Spinarak,
+  [Pkm.ARIADOS]: Ariados
 }
