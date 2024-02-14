@@ -11505,7 +11505,7 @@ export class Kangaskhan extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.RETALIATE
+  skill = Ability.UPPERCUT
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -11520,7 +11520,7 @@ export class Teddiursa extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.RETALIATE
+  skill = Ability.FURY_SWIPES
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -11535,7 +11535,7 @@ export class Ursaring extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.RETALIATE
+  skill = Ability.FURY_SWIPES
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -11549,7 +11549,7 @@ export class Ursaluna extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.RETALIATE
+  skill = Ability.FURY_SWIPES
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -11562,9 +11562,9 @@ export class Aipom extends Pokemon {
   atk = 10
   def = 4
   speDef = 4
-  maxPP = 100
+  maxPP = 80
   range = 1
-  skill = Ability.RETALIATE
+  skill = Ability.TICKLE
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -11576,9 +11576,9 @@ export class Ambipom extends Pokemon {
   atk = 20
   def = 4
   speDef = 4
-  maxPP = 100
+  maxPP = 80
   range = 1
-  skill = Ability.RETALIATE
+  skill = Ability.TICKLE
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -11593,7 +11593,7 @@ export class Deerling extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.RETALIATE
+  skill = Ability.AROMATHERAPY
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -11607,7 +11607,7 @@ export class Sawsbuck extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.RETALIATE
+  skill = Ability.AROMATHERAPY
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -11622,7 +11622,7 @@ export class Patrat extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.RETALIATE
+  skill = Ability.DETECT
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -11636,7 +11636,7 @@ export class Watchog extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.RETALIATE
+  skill = Ability.DETECT
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 

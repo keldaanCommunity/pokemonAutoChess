@@ -64,6 +64,7 @@ import {
   shuffleArray
 } from "../../utils/random"
 import { values } from "../../utils/schemas"
+import AttackingState from "../attacking-state"
 
 export class BlueFlareStrategy extends AbilityStrategy {
   process(
@@ -7241,6 +7242,92 @@ export class LickStrategy extends AbilityStrategy {
   }
 }
 
+export class FurySwipesStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const nbAttacks = randomBetween(
+      Math.round(2 * (1 + pokemon.ap / 100)),
+      Math.round(5 * (1 + pokemon.ap / 100))
+    )
+    for (let n = 0; n < nbAttacks; n++) {
+      target.handleSpecialDamage(
+        Math.ceil(pokemon.atk),
+        board,
+        AttackType.PHYSICAL,
+        pokemon,
+        crit
+      )
+    }
+  }
+}
+
+export class TickleStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const attackLost = Math.round(3 * (1 + pokemon.ap / 100))
+    const defLost = Math.round(3 * (1 + pokemon.ap / 100))
+    target.addAttack(-attackLost)
+    target.addDefense(-defLost)
+  }
+}
+
+export class AromatherapyStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const heal = [20, 40, 80][pokemon.stars - 1] ?? 20
+    board
+      .getAdjacentCells(pokemon.positionX, pokemon.positionY)
+      .forEach((cell) => {
+        if (cell.value && cell.value.team === pokemon.team) {
+          cell.value.status.clearNegativeStatus()
+          cell.value.handleHeal(heal, pokemon, 1)
+        }
+      })
+  }
+}
+
+export class DetectStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    let nbAdjacentEnemies = 0
+    board
+      .getAdjacentCells(pokemon.positionX, pokemon.positionY)
+      .forEach((cell) => {
+        if (cell.value && cell.value.team !== pokemon.team) {
+          nbAdjacentEnemies++
+        }
+      })
+
+    pokemon.status.triggerProtect(
+      Math.round(500 * nbAdjacentEnemies * (1 + pokemon.ap / 100))
+    )
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -7523,5 +7610,9 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SPRINGTIDE_STORM]: new SpringtideStormStrategy(),
   [Ability.AURA_WHEEL]: new AuraWheelStrategy(),
   [Ability.AURA_WHEEL_HANGRY]: new AuraWheelHangryStrategy(),
-  [Ability.LICK]: new LickStrategy()
+  [Ability.LICK]: new LickStrategy(),
+  [Ability.FURY_SWIPES]: new FurySwipesStrategy(),
+  [Ability.TICKLE]: new TickleStrategy(),
+  [Ability.AROMATHERAPY]: new AromatherapyStrategy(),
+  [Ability.DETECT]: new DetectStrategy()
 }

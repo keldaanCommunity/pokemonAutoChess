@@ -296,7 +296,11 @@
     "SPRINGTIDE_STORM": "Springtide Storm",
     "AURA_WHEEL": "Aura Wheel",
     "AURA_WHEEL_HANGRY": "Aura Wheel",
-    "LICK": "Lick"
+    "LICK": "Lick",
+    "FURY_SWIPES": "Fury Swipes",
+    "TICKLE": "Tickle",
+    "AROMATHERAPY": "Aromatherapy",
+    "DETECT": "Detect"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1285,7 +1289,11 @@
     "SPRINGTIDE_STORM": "Fierce winds brimming with love and hate all enemies in a straight line, dealing [80,SP] SPECIAL and CHARMED for 2 seconds",
     "AURA_WHEEL": "Deals [60,SP] SPECIAL and switch to Hangry form",
     "AURA_WHEEL_HANGRY": "Deals [60,SP] SPECIAL and switch to Normal form",
-    "LICK": "Deals [30,60,120,SP] SPECIAL. The target is CONFUSION and PARALYSIS for 3 seconds"
+    "LICK": "Deals [30,60,120,SP] SPECIAL. The target is CONFUSION and PARALYSIS for 3 seconds",
+    "FURY_SWIPES": "Deals [2,SP] to [5,SP] attacks as PHYSICAL",
+    "TICKLE": "Reduce ATK and DEF of the target by [3,SP]",
+    "AROMATHERAPY": "Clear negative status alterations and heal [20,40,80,SP] HP of adjacent allies",
+    "DETECT": "PROTECT user for [0.5,SP] seconds mutiplied by the number of adjacent enemies"
   },
   "effect": {
     "INGRAIN": "Ingrain",
