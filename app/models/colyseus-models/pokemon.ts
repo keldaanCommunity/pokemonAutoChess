@@ -10566,7 +10566,7 @@ export class Mismagius extends Pokemon {
 }
 
 export class Doduo extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.NORMAL])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FLYING, Synergy.NORMAL])
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.DODRIO
@@ -10577,12 +10577,11 @@ export class Doduo extends Pokemon {
   maxPP = 40
   range = 1
   skill = Ability.AGILITY
-  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Dodrio extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.NORMAL])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FLYING, Synergy.NORMAL])
   rarity = Rarity.EPIC
   stars = 2
   hp = 185
@@ -10592,7 +10591,6 @@ export class Dodrio extends Pokemon {
   maxPP = 40
   range = 1
   skill = Ability.AGILITY
-  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 

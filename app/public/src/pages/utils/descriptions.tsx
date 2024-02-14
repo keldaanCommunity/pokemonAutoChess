@@ -40,7 +40,6 @@ export function addIconsToDescription(description: string, tier = 0, ap = 0) {
       if (token === "GOLD") {
         d = (
           <img
-            key={i}
             className="description-icon icon-money"
             src="/assets/icons/money.svg"
             alt="$"
@@ -49,7 +48,6 @@ export function addIconsToDescription(description: string, tier = 0, ap = 0) {
       } else if (token === "STAR") {
         d = (
           <img
-            key={i}
             className="description-icon icon-star"
             src="/assets/ui/star.svg"
             alt="⭐"
@@ -58,7 +56,6 @@ export function addIconsToDescription(description: string, tier = 0, ap = 0) {
       } else if (DamageTypes.includes(token)) {
         d = (
           <span
-            key={i}
             className={
               token === Damage.PHYSICAL
                 ? "damage-physical"
@@ -72,7 +69,7 @@ export function addIconsToDescription(description: string, tier = 0, ap = 0) {
         )
       } else if (Stats.includes(token as Stat)) {
         d = (
-          <span key={i} className="description-icon stat">
+          <span className="description-icon stat">
             <img src={`assets/icons/${token}.png`} />
             <span className="stat-label">{t(`stat.${token}`)}</span>
           </span>
@@ -80,7 +77,6 @@ export function addIconsToDescription(description: string, tier = 0, ap = 0) {
       } else if (Statuses.includes(token as Status)) {
         d = (
           <span
-            key={i}
             className="description-icon status"
             title={t(`status_description.${token}`)}
           >
@@ -91,7 +87,6 @@ export function addIconsToDescription(description: string, tier = 0, ap = 0) {
       } else if (Weathers.includes(token as Weather)) {
         d = (
           <span
-            key={i}
             className="description-icon weather"
             title={t(`weather_description.${token}`)}
           >
@@ -102,7 +97,6 @@ export function addIconsToDescription(description: string, tier = 0, ap = 0) {
       } else if (Items.includes(token as Item)) {
         d = (
           <span
-            key={i}
             className="description-icon item"
             title={t(`item_description.${token}`)}
           >
@@ -112,8 +106,8 @@ export function addIconsToDescription(description: string, tier = 0, ap = 0) {
         )
       } else if (Synergies.includes(token as Synergy)) {
         d = (
-          <span key={i} className="description-icon synergy">
-            <SynergyIcon key={i} type={token as Synergy} size="1.5em" />
+          <span className="description-icon synergy">
+            <SynergyIcon type={token as Synergy} size="1.5em" />
             <span className="synergy-label">{t(`synergy.${token}`)}</span>
           </span>
         )
@@ -157,9 +151,9 @@ export function addIconsToDescription(description: string, tier = 0, ap = 0) {
     }
 
     return (
-      <>
+      <React.Fragment key={i}>
         {d} {f}
-      </>
+      </React.Fragment>
     )
   })
 }
