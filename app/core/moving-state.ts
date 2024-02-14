@@ -41,7 +41,6 @@ export default class MovingState extends PokemonState {
           })
         }
       } else if (targetAtRange) {
-        this.changeState(new AttackingState())
         pokemon.toAttackingState()
       } else {
         const targetAtSight = this.getNearestTargetAtSightCoordinates(
