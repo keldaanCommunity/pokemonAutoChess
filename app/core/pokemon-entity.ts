@@ -1397,7 +1397,7 @@ export function getMoveSpeed(
   }
 
   if (pokemon.effects.has(Effect.QUICK_FEET)) {
-    moveSpeed += 0.2
+    moveSpeed += 0.3
   } else if (pokemon.effects.has(Effect.RUN_AWAY)) {
     moveSpeed += 0.5
   } else if (pokemon.effects.has(Effect.HUSTLE)) {
