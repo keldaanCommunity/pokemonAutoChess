@@ -974,7 +974,7 @@
     "KNOWLEDGE_THIEF": "Starten Sie das ultimative Ziel",
     "KING_SHIELD": "PROTECT Sie den Benutzer für 1.5 Sekunden, gewährt [10,20,30,SP] SHIELD und tauschen Sie seine Position mit dem am weitesten entfernten Feind",
     "EXPLOSION": "Fügt allen benachbarten Feinden [50.100.200,SP] SPECIAL zu. Schädigen Sie auch den Benutzer.",
-    "NIGHTMARE": "SILENCE das gesamte gegnerische Team für [1.5,3,8,SP=0,5] Sekunden. Jeder SLEEP oder FLINCH oder SILENCE Gegner erhält [50,SP] SPECIAL.",
+    "NIGHTMARE": "SILENCE das gesamte gegnerische Team für [1.5,3,8] Sekunden. Jeder SLEEP oder FLINCH oder SILENCE Gegner erhält [25,50,100,SP] SPECIAL.",
     "CLANGOROUS_SOUL": "Verstärkt sich und benachbarte Verbündete ATK, DEF und SPE_DEF um [1,2,4,SP]",
     "BONEMERANG": "Wirf einen Bumerangknochen durch das gegnerische Team und füge ihm auf dem Weg [30,60,120,SP] SPECIAL zu",
     "GROWL": "Verleihe dem gesamten gegnerischen Team für [3,6,9,SP] Sekunden den FLINCH Status",
