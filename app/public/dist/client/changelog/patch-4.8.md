@@ -42,7 +42,7 @@
 - Buff Starmie: PP ~~100~~ 90, fixed ability description
 - Buff Popplio line: PP ~~100~~ 80
 - Nerf Rowlet line: PP ~~80~~ 100
-- Changed Nightmare (Gastly): Removed AP scaling on silence duration
+- Changed Nightmare (Gastly): Removed AP scaling on silence duration, ~~50~~ 25/50/100 special damage
 
 # Changes to Synergies
 
