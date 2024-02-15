@@ -1121,7 +1121,7 @@
     "APPLE_ACID": "Deals [30,60,120,SP] SPECIAL to the target, and lower its DEF and SPE_DEF by [5,SP] points",
     "SACRED_SWORD": "Deals [100,SP] TRUE to the target",
     "PSYCHIC": "Deals [45,90,180,SP] SPECIAL and burn 15 PP to the target and adjacent enemies",
-    "PSYBEAM": "Deal [25,50,100] special damage to all enemy Pokémon behind the target with 50% chance to make them CONFUSION for 4 seconds",
+    "PSYBEAM": "Deal [25,50,100,SP] special damage to all enemy Pokémon behind the target with 50% chance to make them CONFUSION for 4 seconds",
     "DIVE": "Dives underwater and reappears in the middle of the enemy team, dealing [15,30,60,SP] SPECIAL and FREEZE all adjacent units for 1.5 second",
     "SPIKE_ARMOR": "For [3,5,10] seconds, targets that melee attack this Pokémon receive WOUND and take SPECIAL equal to [100,SP]% of current DEF",
     "FUTURE_SIGHT": "Deals [15,30,60,SP] SPECIAL to 5 enemies",
