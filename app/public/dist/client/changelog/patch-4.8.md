@@ -43,6 +43,7 @@
 - Buff Popplio line: PP ~~100~~ 80
 - Nerf Rowlet line: PP ~~80~~ 100
 - Changed Nightmare (Gastly): Removed AP scaling on silence duration, ~~50~~ 25/50/100 special damage
+- Nerf Flygon: HP ~~200~~ 180
 
 # Changes to Synergies
 

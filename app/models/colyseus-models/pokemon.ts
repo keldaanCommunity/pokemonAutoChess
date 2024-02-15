@@ -2508,7 +2508,7 @@ export class Flygon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.BUG, Synergy.GROUND])
   rarity = Rarity.RARE
   stars = 3
-  hp = 200
+  hp = 180
   atk = 26
   def = 4
   speDef = 4
