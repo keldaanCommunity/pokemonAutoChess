@@ -8426,7 +8426,7 @@ export class Popplio extends Pokemon {
   atk = 5
   def = 2
   speDef = 2
-  maxPP = 100
+  maxPP = 80
   range = 3
   skill = Ability.SPARKLING_ARIA
   passive = Passive.HATCH
@@ -8443,7 +8443,7 @@ export class Brionne extends Pokemon {
   atk = 10
   def = 2
   speDef = 3
-  maxPP = 100
+  maxPP = 80
   range = 3
   skill = Ability.SPARKLING_ARIA
   passive = Passive.HATCH
@@ -8458,7 +8458,7 @@ export class Primarina extends Pokemon {
   atk = 20
   def = 2
   speDef = 4
-  maxPP = 100
+  maxPP = 80
   range = 3
   skill = Ability.SPARKLING_ARIA
   attackSprite = AttackSprite.PSYCHIC_RANGE
@@ -9104,7 +9104,7 @@ export class Rowlet extends Pokemon {
   atk = 5
   def = 2
   speDef = 2
-  maxPP = 80
+  maxPP = 100
   range = 3
   skill = Ability.SPIRIT_SHACKLE
   passive = Passive.HATCH
@@ -9121,7 +9121,7 @@ export class Dartix extends Pokemon {
   atk = 9
   def = 2
   speDef = 3
-  maxPP = 80
+  maxPP = 100
   range = 3
   skill = Ability.SPIRIT_SHACKLE
   passive = Passive.HATCH
@@ -9136,7 +9136,7 @@ export class Decidueye extends Pokemon {
   atk = 18
   def = 2
   speDef = 4
-  maxPP = 80
+  maxPP = 100
   range = 3
   skill = Ability.SPIRIT_SHACKLE
   attackSprite = AttackSprite.GRASS_MELEE

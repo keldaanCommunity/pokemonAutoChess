@@ -40,6 +40,8 @@
 - Buff Minior Green core: ~~heals 5 HP~~ heals 100% of damage
 - Nerf Nihilego: Empty light ~~60~~ 40 special damage ; gain ~+5 Attack~ +10% AP on kill
 - Buff Starmie: PP ~~100~~ 90, fixed ability description
+- Buff Popplio line: PP ~~100~~ 80
+- Nerf Rowlet line: PP ~~80~~ 100
 
 # Changes to Synergies
 
