@@ -30,7 +30,7 @@
 - Tornadus: moved to Legendary alongside with Thundurus, Landorus and Enamorus. New synergies and ability
 - Buff Metapod: Def ~~1~~ 3
 - Buff Butterfree: Def ~~1~~2 Spe def ~~1~~ 3
-- Changed Sketch (Smeargle): copy the max PP in addition to the ability
+- Changed Sketch (Smeargle): copy the max PP and unit tier in addition to the ability
 - Changed Shuppet line: lose Dark, gain Artificial, Attack ~~7/15/30~~ 10/20/30 ; changed Shadow clone: no longer copies items but give one random item to the clone; AP now scales the HP% of the clone
 - Buff Kowtow Cleave (Pawniard): ~~100+10% per fallen ally~~ 150+20% per fallen ally
 - Buff Minior: Range ~~2~~ 3

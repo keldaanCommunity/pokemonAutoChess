@@ -11331,6 +11331,7 @@ export class Smeargle extends Pokemon {
     if (allyOnTheLeft) {
       entity.maxPP = allyOnTheLeft.maxPP
       entity.skill = allyOnTheLeft.skill
+      entity.stars = allyOnTheLeft.stars
     }
   }
 }
