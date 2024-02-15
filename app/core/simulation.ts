@@ -688,7 +688,7 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.ASSURANCE:
           if (types.has(Synergy.DARK)) {
-            pokemon.addCritChance(60)
+            pokemon.addCritChance(55)
             pokemon.addCritDamage(0.35)
             pokemon.effects.add(Effect.ASSURANCE)
           }
@@ -696,7 +696,7 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.BEAT_UP:
           if (types.has(Synergy.DARK)) {
-            pokemon.addCritChance(80)
+            pokemon.addCritChance(70)
             pokemon.addCritDamage(0.5)
             pokemon.effects.add(Effect.BEAT_UP)
           }

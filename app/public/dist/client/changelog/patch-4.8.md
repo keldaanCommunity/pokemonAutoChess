@@ -47,6 +47,7 @@
 
 - New synergy: Wild ; Wild pokemons can initially be only found during PvE stages, but they will attract more Wild mons if you play them. Wild pokemons have increased Attack and move speed, and can Wound their target with their attacks.
 - Water: Magikarp can now be fished only at first synergy level, and are worth zero to sell
+- Nerf Dark: ~~40/60/80~~ 40/55/70 % crit chance
 
 # Changes to Items
 
