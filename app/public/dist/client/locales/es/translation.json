@@ -1032,7 +1032,7 @@
     "CHARGE": "Mejora el ATK de todos los Pokémon aliados ELECTRIC en [25,SP] %",
     "DISCHARGE": "Golpea a los enemigos cercanos [25,50,75,SP] de SPECIAL y los deja PARALYSIS durante 5 segundos",
     "BITE": "Inflige [40,80,120,SP] de SPECIAL al objetivo y cura el 30% del daño. Deja FLINCH al objetivo durante 5 segundos",
-    "DRAGON_TAIL": "Ataca a un objetivo, infligiendo [30,60,120,SP] de SPECIAL y aumentando DEF y SPE_DEF en [1,2,3,SP]",
+    "DRAGON_TAIL": "Ataca a un objetivo, infligiendo [30,60,100,SP] de SPECIAL y aumentando DEF y SPE_DEF en [1,2,3,SP]",
     "DRAGON_BREATH": "Ataque de área de efecto que inflige [25,50,100,SP] de TRUE en una línea detrás del objetivo",
     "ICICLE_CRASH": "Ataque de área de efecto que inflige [20,40,80,SP] de SPECIAL alrededor del objetivo",
     "ROOT": "Cura a todos los Pokémon aliados cercanos por [20,40,80,SP] HP",
