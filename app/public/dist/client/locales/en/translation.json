@@ -1526,7 +1526,7 @@
     "ETERNAL_LIGHT": "Also increase DEF and SPE_DEF by 50% and give RUNE_PROTECT for 10 seconds",
     "MAX_ILLUMINATION": "Also give 100 SHIELD and RESURECTION",
     "QUICK_FEET": "+30% ATK and move speed, WILD pokemons can be found during PvP rounds",
-    "RUN_AWAY": " +50% ATK and move speed, 10% chance to find WILD pokemons",
+    "RUN_AWAY": "+50% ATK and move speed, 10% chance to find WILD pokemons",
     "HUSTLE": "+80% ATK and move speed, 15% chance to find WILD pokemons",
     "BERSERK": "+120% ATK and move speed, 20% chance to find WILD pokemons"
   },

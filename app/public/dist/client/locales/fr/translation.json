@@ -1403,7 +1403,11 @@
     "SHINING_RAY": "Rayon brillant",
     "LIGHT_PULSE": "Impulsion lumineuse",
     "ETERNAL_LIGHT": "Lumière éternelle",
-    "MAX_ILLUMINATION": "Illumination"
+    "MAX_ILLUMINATION": "Illumination",
+    "QUICK_FEET": "Pied Véloce",
+    "RUN_AWAY": "Fuite",
+    "HUSTLE": "Agitation",
+    "BERSERK": "Folle Furie"
   },
   "effect_description": {
     "STAMINA": "Gagne 15 SHIELD",
@@ -1515,7 +1519,11 @@
     "SHINING_RAY": "Augmente la AP et l'ATK de 20%",
     "LIGHT_PULSE": "Donne également +10 PP par seconde",
     "ETERNAL_LIGHT": "Augmente également la DEF et SPE_DEF de 50% et donne RUNE_PROTECT pendant 10 secondes",
-    "MAX_ILLUMINATION": "Donne également 100 SHIELD et RESURECTION"
+    "MAX_ILLUMINATION": "Donne également 100 SHIELD et RESURECTION",
+    "QUICK_FEET": "+30% ATK et vitesse de déplacement, les pokémons WILD sont trouvables à tous les stages",
+    "RUN_AWAY": "+50% ATK et vitesse de déplacement, 10% de chance de trouver des pokémons WILD",
+    "HUSTLE": "+80% ATK et vitesse de déplacement, 15% de chance de trouver des pokémons WILD",
+    "BERSERK": "+120% ATK et vitesse de déplacement, 20% de chance de trouver des pokémons WILD. Vos pokémons sont RAGE 5 secondes en avance."
   },
   "item": {
     "FOSSIL_STONE": "Fossile Dome",
@@ -1878,7 +1886,8 @@
     "SOUND": "Son",
     "ARTIFICIAL": "Artificiel",
     "BABY": "Bébé",
-    "LIGHT": "Lumière"
+    "LIGHT": "Lumière",
+    "WILD": "Sauvage"
   },
   "synergy_description": {
     "NORMAL": "Les pokémons NORMAL et leurs alliés adjacents gagnent le SHIELD lorsque le combat commence",
@@ -1908,7 +1917,8 @@
     "SOUND": "Les pokémons SOUND émettent un cri lorsqu'ils utilisent leurs capacités, réveillant les alliés en SLEEP et leur donnant des statistiques bonus",
     "ARTIFICIAL": "Les pokémons ARTIFICIAL donnent des objets uniques et gagnent de l'ATK, de la AP et du SHIELD lorsqu'ils portent des objets.",
     "BABY": "Les pokémons BABY peuvent vous apporter des œufs Pokémon pour vous réconforter après une défaite",
-    "LIGHT": "La lumière révèle un projecteur sur le champ de bataille. L’unité sous les projecteurs au début du combat bénéficie de bonus uniques."
+    "LIGHT": "La lumière révèle un projecteur sur le champ de bataille. L’unité sous les projecteurs au début du combat bénéficie de bonus uniques.",
+    "WILD": "Les pokémons WILD gagnent en ATK et vitesse de déplacement, peuvent WOUND leur cible avec leurs attaques, et attirent d'autres pokémons WILD."
   },
   "title": {
     "NOVICE": "Novice",
