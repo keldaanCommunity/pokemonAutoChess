@@ -1856,7 +1856,7 @@
     "SLEEP": "Prevents moving, dodging or attacking. Receiving attacks reduces the duration of the effect.",
     "CONFUSION": "Force to change target all the time and sometimes deal damage to itself",
     "WOUND": "Prevents healing from any source",
-    "RAGE": "Double damage and speed, half shield, healing, freeze and sleep durations. All units become RAGE after 35 seconds of fight.",
+    "RAGE": "Double damage and speed, half shield, healing, freeze and sleep durations, lose PROTECT. All units become RAGE after 35 seconds of fight.",
     "RESURECTION": "Prevents KO once, restoring to max HP",
     "PARALYSIS": "Reduce ATK_SPEED by 40% and prevents dodging attacks",
     "ARMOR_REDUCTION": "Reduce DEF & SPE_DEF by 50%",

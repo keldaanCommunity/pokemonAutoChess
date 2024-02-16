@@ -268,6 +268,7 @@ export default class Status extends Schema implements IStatus {
   updateRage(dt: number, pokemon: PokemonEntity) {
     if (this.enrageDelay - dt <= 0) {
       this.enraged = true
+      this.protect = false
       pokemon.addAttackSpeed(100)
     } else {
       this.enrageDelay -= dt
@@ -554,7 +555,7 @@ export default class Status extends Schema implements IStatus {
   }
 
   triggerProtect(timer: number) {
-    if (!this.protect) {
+    if (!this.protect && !this.enraged) {
       // protect cannot be stacked
       this.protect = true
       this.protectCooldown = timer
