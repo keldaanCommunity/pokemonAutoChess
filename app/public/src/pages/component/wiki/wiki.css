@@ -67,6 +67,7 @@
   display: grid;
   grid-template: auto 1fr / 30% 1fr;
   padding: 0.5em;
+  min-height: calc(122px + 1em);
 }
 
 #wiki-page .wiki-stat li {

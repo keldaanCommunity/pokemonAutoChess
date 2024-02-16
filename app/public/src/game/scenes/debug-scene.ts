@@ -148,6 +148,7 @@ export class DebugScene extends Phaser.Scene {
 
   applyStatusAnimation(status: Status | "") {
     if (this.pokemon) {
+      this.pokemon.sprite.setTint(0xffffff)
       this.pokemon.removePoison()
       this.pokemon.removeSleep()
       this.pokemon.removeBurn()
@@ -217,6 +218,9 @@ export class DebugScene extends Phaser.Scene {
       }
       if (status == Status.RUNE_PROTECT) {
         this.pokemon.addRuneProtect()
+      }
+      if (status == Status.RAGE) {
+        this.pokemon.addRageEffect()
       }
       if (status == Status.SPIKE_ARMOR) {
         this.pokemon.addSpikeArmor()
