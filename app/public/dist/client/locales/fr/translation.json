@@ -1861,7 +1861,7 @@
     "FLYING": "Les pokémons FLYING s'envolent lorsqu'ils tombent sous une certaine quantité de HP",
     "FLORA": "Quand le premier pokémon FLORA est mort, une fleur sort de sa tombe...",
     "ROCK": "Les pokémons ROCK gagnent en DEF et résistent mieux aux dégâts critiques",
-    "GHOST": "Les pokémons GHOST appliquent diverses malédictions aux unités adverses au début du combat.",
+    "GHOST": "Les pokémons GHOST appliquent diverses malédictions aux unités adverses au début du combat, et leurs attaques ont 25% de chance de SILENCE leur cible.",
     "FAIRY": "Les pokémons FAIRY choquent leur cible chaque fois qu'ils infligent ou reçoivent un coup critique, ou les rend CHARM pendant 2 secondes s'ils sont à distance",
     "ICE": "Les pokémons ICE ont une chance de FREEZE leur cible pendant 2 secondes après un coup et font gagner de la SPE_DEF à toute l'équipe",
     "FOSSIL": "Lors de leur premier KO, les pokémons FOSSIL reviennent à la vie avec une ATK augmentée",
