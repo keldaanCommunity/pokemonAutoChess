@@ -12367,7 +12367,7 @@ export const PokemonClasses: Record<
   [Pkm.FEEBAS]: Feebas,
   [Pkm.MILOTIC]: Milotic,
   [Pkm.MORPEKO]: Morpeko,
-  [Pkm.MORPEKO_ANGRY]: MorpekoHangry,
+  [Pkm.MORPEKO_HANGRY]: MorpekoHangry,
   [Pkm.KANGASKHAN]: Kangaskhan,
   [Pkm.TEDDIURSA]: Teddiursa,
   [Pkm.URSARING]: Ursaring,

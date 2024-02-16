@@ -287,7 +287,18 @@
     "SHED_TAIL": "Queulonage",
     "KOWTOW_CLEAVE": "Génusection",
     "SHIELDS_DOWN": "Bouclier-Carcan",
-    "SHIELDS_UP": "Bouclier Levé"
+    "SHIELDS_UP": "Bouclier Levé",
+    "SANDSEAR_STORM": "Typhon Pyrosable",
+    "WILDBOLT_STORM": "Typhon Fulgurant",
+    "BLEAKWIND_STORM": "Typhon Hivernal",
+    "SPRINGTIDE_STORM": "Typhon Passionné",
+    "AURA_WHEEL": "Roue Libre",
+    "AURA_WHEEL_HANGRY": "Roue Libre",
+    "LICK": "Léchouille",
+    "FURY_SWIPES": "Combo-Griffe",
+    "TICKLE": "Chatouille",
+    "AROMATHERAPY": "Aromathérapie",
+    "DETECT": "Détection"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -977,7 +988,25 @@
     "MINIOR_KERNEL_RED": "Météno Noyau Rouge",
     "MINIOR_KERNEL_BLUE": "Météno Noyau Bleu",
     "MINIOR_KERNEL_ORANGE": "Météno Noyau Orange",
-    "MINIOR_KERNEL_GREEN": "Météno Noyau Vert"
+    "MINIOR_KERNEL_GREEN": "Météno Noyau Vert",
+    "FEEBAS": "Barpau",
+    "MILOTIC": "Milobellus",
+    "MORPEKO": "Morpeko",
+    "MORPEKO_HANGRY": "Morpeko (Affamé)",
+    "LICKITUNG": "Excelangue",
+    "LICKILICKY": "Coudlangue",
+    "KANGASKHAN": "Kangourex",
+    "TEDDIURSA": "Teddiursa",
+    "URSARING": "Ursaring",
+    "URSALUNA": "Ursaking",
+    "AIPOM": "Capumain",
+    "AMBIPOM": "Capidextre",
+    "DEERLING": "Vivaldaim",
+    "SAWSBUCK": "Haydaim",
+    "PATRAT": "Ratentif",
+    "WATCHOG": "Miradar",
+    "SPINARAK": "Mimigal",
+    "ARIADOS": "Migalos"
   },
   "ability_description": {
     "SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés",
@@ -1250,7 +1279,18 @@
     "NIGHT_SLASH": "Inflige [15,30,60,SP] SPECIAL avec [30,60,90]% de CRIT_CHANCE augmentée",
     "KOWTOW_CLEAVE": "Inflige 150% ATK + [20,SP]% par allié KO en TRUE. Peut infliger un coup critique par défaut.",
     "SHIELDS_DOWN": "Transforme Météno en une forme Noyau aléatoire",
-    "SHIELDS_UP": "Transforme Météno en forme Météore"
+    "SHIELDS_UP": "Transforme Météno en forme Météore",
+    "SANDSEAR_STORM": "Un violent typhon mêlé à du sable ardent s'abat sur les ennemis en ligne droite, infligeant [80,SP] SPECIAL et BURN pendant 4 secondes",
+    "WILDBOLT_STORM": "Un violent typhon orageux dont les rafales et la foudre s'abattent sur les ennemis en ligne droite, infligeant [80,SP] SPECIAL et PARALYSIS pendant 4 secondes",
+    "BLEAKWIND_STORM": "Un typhon froid et brutal fait trembler le cœur et le corps des ennemis en ligne droite, infligeant [80,SP] SPECIAL et FREEZE pendant 2 secondes",
+    "SPRINGTIDE_STORM": "Un violent typhon mêlé de haine et d'amour s'abat sur les ennemis en ligne droite, infligeant [80,SP] SPECIAL et CHARMED pendant 2 secondes",
+    "AURA_WHEEL": "Inflige [60,SP] SPECIAL et bascule en mode Affamé",
+    "AURA_WHEEL_HANGRY": "Inflige [60,SP] SPECIAL et bascule en mode Rassasié",
+    "LICK": "Un grand coup de langue qui inflige [30,60,120,SP] SPECIAL, CONFUSION et PARALYSIS pendant 3 secondes",
+    "FURY_SWIPES": "L'ennemi est lacéré par des faux ou des griffes, causant [2,SP] à [5,SP] attaques d'affilée en PHYSICAL",
+    "TICKLE": "Réduit l'ATK et la DEF des [1,2] ennemis les plus proches de [3,SP]",
+    "AROMATHERAPY": "Supprime les effets négatfs de statut des alliés adjacents et les soigne de [20,40,80,SP] HP",
+    "DETECT": "Donne PROTECT aux alliés adjacents pendant [0.5,SP] secondes mutiplié par le nombre d'ennemis adjacents"
   },
   "effect": {
     "INGRAIN": "Enraciné",
@@ -2573,7 +2613,8 @@
     "GOTTA_CATCH_EM_ALL": "Attrapez-les tous !",
     "BUYER_FEVER": "Fièvre acheteuse",
     "TECHNOLOGIC": "Technologie",
-    "SIX_PACK": "Pack de six"
+    "SIX_PACK": "Pack de six",
+    "NINE_LIVES": "Neuf Vies"
   },
   "scribble_description": {
     "EVERYONE_IS_HERE": "Tous les Pokémons additionnels sont disponibles immédiatement",
@@ -2585,6 +2626,7 @@
     "GOTTA_CATCH_EM_ALL": "Des Pokémons peuvent être attrapés avant chaque tour PvE",
     "BUYER_FEVER": "Les évolutions dans le magasin sont gratuites",
     "TECHNOLOGIC": "Choisissez entre 3 objets artificiels aux tours 3 et 15",
-    "SIX_PACK": "Vous pouvez mettre 6 unités maximum sur votre plateau, peu importe votre niveau"
+    "SIX_PACK": "Vous pouvez mettre 6 unités maximum sur votre plateau, peu importe votre niveau",
+    "NINE_LIVES": "Vous êtes éliminés après avoir perdu 9 matchs"
   }
 }
