@@ -2508,7 +2508,7 @@ export class Flygon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.BUG, Synergy.GROUND])
   rarity = Rarity.RARE
   stars = 3
-  hp = 200
+  hp = 180
   atk = 26
   def = 4
   speDef = 4
@@ -8030,7 +8030,7 @@ export class Staryu extends Pokemon {
   atk = 7
   def = 2
   speDef = 3
-  maxPP = 100
+  maxPP = 90
   range = 2
   skill = Ability.PSYBEAM
   additional = true
@@ -8045,7 +8045,7 @@ export class Starmie extends Pokemon {
   atk = 20
   def = 2
   speDef = 6
-  maxPP = 100
+  maxPP = 90
   range = 2
   skill = Ability.PSYBEAM
   additional = true
@@ -8426,7 +8426,7 @@ export class Popplio extends Pokemon {
   atk = 5
   def = 2
   speDef = 2
-  maxPP = 100
+  maxPP = 80
   range = 3
   skill = Ability.SPARKLING_ARIA
   passive = Passive.HATCH
@@ -8443,7 +8443,7 @@ export class Brionne extends Pokemon {
   atk = 10
   def = 2
   speDef = 3
-  maxPP = 100
+  maxPP = 80
   range = 3
   skill = Ability.SPARKLING_ARIA
   passive = Passive.HATCH
@@ -8458,7 +8458,7 @@ export class Primarina extends Pokemon {
   atk = 20
   def = 2
   speDef = 4
-  maxPP = 100
+  maxPP = 80
   range = 3
   skill = Ability.SPARKLING_ARIA
   attackSprite = AttackSprite.PSYCHIC_RANGE
@@ -9104,7 +9104,7 @@ export class Rowlet extends Pokemon {
   atk = 5
   def = 2
   speDef = 2
-  maxPP = 80
+  maxPP = 100
   range = 3
   skill = Ability.SPIRIT_SHACKLE
   passive = Passive.HATCH
@@ -9121,7 +9121,7 @@ export class Dartix extends Pokemon {
   atk = 9
   def = 2
   speDef = 3
-  maxPP = 80
+  maxPP = 100
   range = 3
   skill = Ability.SPIRIT_SHACKLE
   passive = Passive.HATCH
@@ -9136,7 +9136,7 @@ export class Decidueye extends Pokemon {
   atk = 18
   def = 2
   speDef = 4
-  maxPP = 80
+  maxPP = 100
   range = 3
   skill = Ability.SPIRIT_SHACKLE
   attackSprite = AttackSprite.GRASS_MELEE
@@ -11331,6 +11331,7 @@ export class Smeargle extends Pokemon {
     if (allyOnTheLeft) {
       entity.maxPP = allyOnTheLeft.maxPP
       entity.skill = allyOnTheLeft.skill
+      entity.stars = allyOnTheLeft.stars
     }
   }
 }

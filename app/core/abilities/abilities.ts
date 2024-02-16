@@ -2039,15 +2039,14 @@ export class NightmareStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let duration =
-      pokemon.stars === 3 ? 8000 : pokemon.stars === 2 ? 3000 : 1500
-    duration = Math.round(duration * (1 + pokemon.ap / 200))
+    const duration = [1500, 3000, 8000][pokemon.stars - 1] ?? 8000
+    const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
 
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
       if (enemy && pokemon.team != enemy.team) {
         if (enemy.status.flinch || enemy.status.sleep || enemy.status.silence) {
           enemy.handleSpecialDamage(
-            50,
+            damage,
             board,
             AttackType.SPECIAL,
             pokemon,
