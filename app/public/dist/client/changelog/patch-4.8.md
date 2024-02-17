@@ -62,6 +62,7 @@
 
 - Add a keyboard shortcut "E" when hovering a portrait in shop to quickly buy/resell the unit
 - Add a sort filter and search bar on Collection screen
+- Add a search box to Pokemons wiki
 
 # Bugfix
 
