@@ -34,19 +34,23 @@ export default class PokemonState {
       !pokemon.status.protect
     ) {
       if (apBoost > 0) {
-        heal = Math.round(heal * (1 + (apBoost * caster.ap) / 100))
+        heal *= 1 + (apBoost * caster.ap) / 100
       }
       if (pokemon.effects.has(Effect.BUFF_HEAL_RECEIVED)) {
-        heal = Math.round(heal * 1.5)
+        heal *= 1.5
       }
       if (pokemon.status.poisonStacks > 0) {
-        heal = Math.round(heal * (1 - pokemon.status.poisonStacks * 0.2))
+        heal *= 1 - pokemon.status.poisonStacks * 0.2
+      }
+      if (pokemon.status.enraged) {
+        heal *= 0.5
       }
 
       if (pokemon.passive === Passive.WONDER_GUARD) {
         heal = 1
       }
 
+      heal = Math.round(heal)
       const healTaken = Math.min(pokemon.hp - pokemon.life, heal)
 
       pokemon.life = Math.min(pokemon.hp, pokemon.life + heal)
@@ -74,21 +78,22 @@ export default class PokemonState {
     apBoost?: boolean
   ) {
     if (pokemon.life > 0) {
-      const boost = apBoost ? (shield * caster.ap) / 100 : 0
-      const shieldBoosted = Math.round(shield + boost)
-      pokemon.shield += shieldBoosted
-      if (caster && shieldBoosted > 0) {
+      if (apBoost) shield = Math.round(shield * (1 + caster.ap / 100))
+      if (pokemon.status.enraged) shield = Math.round(shield / 2)
+
+      pokemon.shield += shield
+      if (caster && shield > 0) {
         if (pokemon.simulation.room.state.time < FIGHTING_PHASE_DURATION) {
           pokemon.simulation.room.broadcast(Transfer.POKEMON_HEAL, {
             index: caster.index,
             type: HealType.SHIELD,
-            amount: shieldBoosted,
+            amount: shield,
             x: pokemon.positionX,
             y: pokemon.positionY,
             id: pokemon.simulation.id
           })
         }
-        caster.shieldDone += shieldBoosted
+        caster.shieldDone += shield
       }
     }
   }
@@ -116,6 +121,10 @@ export default class PokemonState {
         `NaN Damage from ${attacker ? attacker.name : "Environment"}`
       )
       return { death: false, takenDamage: 0 }
+    }
+
+    if (attacker && attacker.status.enraged) {
+      damage *= 2
     }
 
     if (pokemon.life == 0) {

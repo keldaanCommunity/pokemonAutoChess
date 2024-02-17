@@ -932,6 +932,10 @@ export default class PokemonSprite extends DraggableObject {
       this.psychicField = undefined
     }
   }
+
+  addRageEffect() {
+    this.sprite.setTint(0xff0000)
+  }
 }
 
 export function addWanderingPokemon(

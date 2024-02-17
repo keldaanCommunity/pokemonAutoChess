@@ -289,6 +289,10 @@ export default class BattleManager {
             } else {
               pkm.removeFairyField()
             }
+          } else if (field == "enraged") {
+            if (pokemon.status.enraged) {
+              pkm.addRageEffect()
+            }
           }
         }
       }

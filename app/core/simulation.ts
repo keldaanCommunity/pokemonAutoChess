@@ -432,6 +432,28 @@ export default class Simulation extends Schema implements ISimulation {
     if (item === Item.SWIFT_WING) {
       pokemon.addDodgeChance(0.1)
     }
+
+    if (pokemon.items.has(Item.FLAME_ORB)) {
+      pokemon.addAttack(pokemon.baseAtk)
+      pokemon.status.triggerBurn(
+        60000,
+        pokemon as PokemonEntity,
+        pokemon as PokemonEntity
+      )
+    }
+
+    if (pokemon.items.has(Item.TOXIC_ORB)) {
+      pokemon.addAttack(pokemon.baseAtk)
+      pokemon.status.triggerPoison(
+        60000,
+        pokemon as PokemonEntity,
+        pokemon as PokemonEntity
+      )
+    }
+
+    if (pokemon.items.has(Item.FLUFFY_TAIL)) {
+      pokemon.status.triggerRuneProtect(60000)
+    }
   }
 
   applySynergyEffects(pokemon: PokemonEntity) {
@@ -542,28 +564,6 @@ export default class Simulation extends Schema implements ISimulation {
               value.status.deltaOrbStacks += 1
             }
           })
-        }
-
-        if (pokemon.items.has(Item.FLAME_ORB)) {
-          pokemon.addAttack(pokemon.baseAtk)
-          pokemon.status.triggerBurn(
-            60000,
-            pokemon as PokemonEntity,
-            pokemon as PokemonEntity
-          )
-        }
-
-        if (pokemon.items.has(Item.TOXIC_ORB)) {
-          pokemon.addAttack(pokemon.baseAtk)
-          pokemon.status.triggerPoison(
-            60000,
-            pokemon as PokemonEntity,
-            pokemon as PokemonEntity
-          )
-        }
-
-        if (pokemon.items.has(Item.FLUFFY_TAIL)) {
-          pokemon.status.triggerRuneProtect(60000)
         }
 
         if (pokemon.items.has(Item.EXP_SHARE)) {
@@ -1206,6 +1206,7 @@ export default class Simulation extends Schema implements ISimulation {
           if (types.has(Synergy.WILD)) {
             pokemon.effects.add(Effect.BERSERK)
             pokemon.addAttack(Math.ceil(1.2 * pokemon.baseAtk))
+            pokemon.status.enrageDelay -= 5000
           }
           break
 
