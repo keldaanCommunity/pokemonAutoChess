@@ -1921,7 +1921,7 @@
     "FLYING": "FLYING pokemons fly away when they fell under a certain amount of HP",
     "FLORA": "When the first FLORA pokemon is dead, a flower will rise from its grave...",
     "ROCK": "ROCK pokemons gain DEF and better resist to critical damage",
-    "GHOST": "GHOST pokemons have 50% chance to SILENCE on hit and apply various curses on opponents at the start of the fight",
+    "GHOST": "GHOST pokemons have 25% chance to SILENCE on hit and apply various curses on opponents at the start of the fight",
     "FAIRY": "Whenever FAIRY pokemons deal or receive a critical hit, they receive a shock if at melee range, or are CHARM for 2 seconds if not at range",
     "ICE": "ICE pokemons have a chance to FREEZE the enemy for 2 seconds after a hit and give SPE_DEF to the whole team",
     "FOSSIL": "On their first KO, FOSSIL pokemons come back to life with increased ATK",

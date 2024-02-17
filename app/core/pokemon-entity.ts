@@ -724,8 +724,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.hasSynergyEffect(Synergy.GHOST)) {
-      if (chance(1 / 2)) {
-        target.status.triggerSilence(3000, this)
+      if (chance(0.25)) {
+        target.status.triggerSilence(2000, this)
       }
     }
 
