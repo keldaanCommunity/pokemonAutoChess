@@ -694,7 +694,7 @@ export enum Pkm {
   FEEBAS = "FEEBAS",
   MILOTIC = "MILOTIC",
   MORPEKO = "MORPEKO",
-  MORPEKO_ANGRY = "MORPEKO_ANGRY",
+  MORPEKO_HANGRY = "MORPEKO_HANGRY",
   KANGASKHAN = "KANGASKHAN",
   TEDDIURSA = "TEDDIURSA",
   URSARING = "URSARING",
@@ -1405,7 +1405,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.FEEBAS]: "0349",
   [Pkm.MILOTIC]: "0350",
   [Pkm.MORPEKO]: "0877",
-  [Pkm.MORPEKO_ANGRY]: "0877-0001",
+  [Pkm.MORPEKO_HANGRY]: "0877-0001",
   [Pkm.KANGASKHAN]: "0115",
   [Pkm.TEDDIURSA]: "0216",
   [Pkm.URSARING]: "0217",
@@ -2116,7 +2116,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.FEEBAS]: Pkm.FEEBAS,
   [Pkm.MILOTIC]: Pkm.FEEBAS,
   [Pkm.MORPEKO]: Pkm.MORPEKO,
-  [Pkm.MORPEKO_ANGRY]: Pkm.MORPEKO,
+  [Pkm.MORPEKO_HANGRY]: Pkm.MORPEKO,
   [Pkm.KANGASKHAN]: Pkm.KANGASKHAN,
   [Pkm.TEDDIURSA]: Pkm.TEDDIURSA,
   [Pkm.URSARING]: Pkm.TEDDIURSA,
@@ -5738,7 +5738,7 @@ export const AnimationConfig: {
     ability: AnimationType.Shock,
     emote: AnimationType.Shoot
   },
-  [Pkm.MORPEKO_ANGRY]: {
+  [Pkm.MORPEKO_HANGRY]: {
     attack: AnimationType.Swing,
     ability: AnimationType.Special0,
     emote: AnimationType.Rotate
