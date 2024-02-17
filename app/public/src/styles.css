@@ -231,6 +231,7 @@ p:last-child {
   position: relative;
   left: 60px;
   width: calc(100vw - var(--sidebar-width));
+  user-select: none;
 }
 
 #game-wrapper .ps-sidebar-root {

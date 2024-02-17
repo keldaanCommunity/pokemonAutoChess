@@ -5,6 +5,7 @@ import { TypeaheadProps } from "./types"
 
 import { useTranslation } from "react-i18next"
 import { Pkm } from "../../../../../types/enum/Pokemon"
+import "./pokemon-typeahead.css"
 
 export function PokemonTypeahead({ onChange, value }: TypeaheadProps<Pkm>) {
   const pokemonOptions = Object.values(Pkm)
@@ -12,7 +13,7 @@ export function PokemonTypeahead({ onChange, value }: TypeaheadProps<Pkm>) {
 
   return (
     <Typeahead
-      id="pokemon-typeahead"
+      className="pokemon-typeahead"
       defaultInputValue={value}
       options={pokemonOptions}
       placeholder={t("select_pokemon")}

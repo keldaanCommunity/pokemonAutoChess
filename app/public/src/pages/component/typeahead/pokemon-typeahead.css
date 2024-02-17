@@ -1,0 +1,12 @@
+.pokemon-typeahead .form-control {
+  color: #fff;
+  background-color: rgb(84, 89, 107);
+  font-size: 1em;
+  border-radius: 12px;
+  width: 100%;
+  border: 4px solid black;
+}
+
+.pokemon-typeahead .form-control::placeholder {
+  color: #ccc;
+}

@@ -120,6 +120,7 @@ class GameContainer {
       "spikeArmor",
       "synchro",
       "wound",
+      "enraged",
       "magicBounce"
     ]
 

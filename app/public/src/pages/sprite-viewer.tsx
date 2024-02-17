@@ -45,6 +45,7 @@ export function SpriteDebug() {
           <div className="nes-container">
             <label htmlFor="sprite-viewer-orientation">Orientation</label>
             <select
+              className="my-select"
               id="sprite-viewer-orientation"
               value={orientation}
               onChange={(e) =>
@@ -61,6 +62,7 @@ export function SpriteDebug() {
           <div className="nes-container">
             <label htmlFor="sprite-viewer-anim-type">Anim type</label>
             <select
+              className="my-select"
               id="sprite-viewer-anim-type"
               value={animationType}
               onChange={(e) => setAnimType(e.currentTarget.value)}
@@ -78,6 +80,7 @@ export function SpriteDebug() {
           <div className="nes-container">
             <label htmlFor="sprite-viewer-status">Status</label>
             <select
+              className="my-select"
               id="sprite-viewer-status"
               value={status}
               onChange={(e) => setStatus(e.currentTarget.value as Status)}

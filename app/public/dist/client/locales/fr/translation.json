@@ -287,7 +287,18 @@
     "SHED_TAIL": "Queulonage",
     "KOWTOW_CLEAVE": "Génusection",
     "SHIELDS_DOWN": "Bouclier-Carcan",
-    "SHIELDS_UP": "Bouclier Levé"
+    "SHIELDS_UP": "Bouclier Levé",
+    "SANDSEAR_STORM": "Typhon Pyrosable",
+    "WILDBOLT_STORM": "Typhon Fulgurant",
+    "BLEAKWIND_STORM": "Typhon Hivernal",
+    "SPRINGTIDE_STORM": "Typhon Passionné",
+    "AURA_WHEEL": "Roue Libre",
+    "AURA_WHEEL_HANGRY": "Roue Libre",
+    "LICK": "Léchouille",
+    "FURY_SWIPES": "Combo-Griffe",
+    "TICKLE": "Chatouille",
+    "AROMATHERAPY": "Aromathérapie",
+    "DETECT": "Détection"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -977,7 +988,25 @@
     "MINIOR_KERNEL_RED": "Météno Noyau Rouge",
     "MINIOR_KERNEL_BLUE": "Météno Noyau Bleu",
     "MINIOR_KERNEL_ORANGE": "Météno Noyau Orange",
-    "MINIOR_KERNEL_GREEN": "Météno Noyau Vert"
+    "MINIOR_KERNEL_GREEN": "Météno Noyau Vert",
+    "FEEBAS": "Barpau",
+    "MILOTIC": "Milobellus",
+    "MORPEKO": "Morpeko",
+    "MORPEKO_HANGRY": "Morpeko (Affamé)",
+    "LICKITUNG": "Excelangue",
+    "LICKILICKY": "Coudlangue",
+    "KANGASKHAN": "Kangourex",
+    "TEDDIURSA": "Teddiursa",
+    "URSARING": "Ursaring",
+    "URSALUNA": "Ursaking",
+    "AIPOM": "Capumain",
+    "AMBIPOM": "Capidextre",
+    "DEERLING": "Vivaldaim",
+    "SAWSBUCK": "Haydaim",
+    "PATRAT": "Ratentif",
+    "WATCHOG": "Miradar",
+    "SPINARAK": "Mimigal",
+    "ARIADOS": "Migalos"
   },
   "ability_description": {
     "SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés",
@@ -1250,7 +1279,18 @@
     "NIGHT_SLASH": "Inflige [15,30,60,SP] SPECIAL avec [30,60,90]% de CRIT_CHANCE augmentée",
     "KOWTOW_CLEAVE": "Inflige 150% ATK + [20,SP]% par allié KO en TRUE. Peut infliger un coup critique par défaut.",
     "SHIELDS_DOWN": "Transforme Météno en une forme Noyau aléatoire",
-    "SHIELDS_UP": "Transforme Météno en forme Météore"
+    "SHIELDS_UP": "Transforme Météno en forme Météore",
+    "SANDSEAR_STORM": "Un violent typhon mêlé à du sable ardent s'abat sur les ennemis en ligne droite, infligeant [80,SP] SPECIAL et BURN pendant 4 secondes",
+    "WILDBOLT_STORM": "Un violent typhon orageux dont les rafales et la foudre s'abattent sur les ennemis en ligne droite, infligeant [80,SP] SPECIAL et PARALYSIS pendant 4 secondes",
+    "BLEAKWIND_STORM": "Un typhon froid et brutal fait trembler le cœur et le corps des ennemis en ligne droite, infligeant [80,SP] SPECIAL et FREEZE pendant 2 secondes",
+    "SPRINGTIDE_STORM": "Un violent typhon mêlé de haine et d'amour s'abat sur les ennemis en ligne droite, infligeant [80,SP] SPECIAL et CHARMED pendant 2 secondes",
+    "AURA_WHEEL": "Inflige [60,SP] SPECIAL et bascule en mode Affamé",
+    "AURA_WHEEL_HANGRY": "Inflige [60,SP] SPECIAL et bascule en mode Rassasié",
+    "LICK": "Un grand coup de langue qui inflige [30,60,120,SP] SPECIAL, CONFUSION et PARALYSIS pendant 3 secondes",
+    "FURY_SWIPES": "L'ennemi est lacéré par des faux ou des griffes, causant [2,SP] à [5,SP] attaques d'affilée en PHYSICAL",
+    "TICKLE": "Réduit l'ATK et la DEF des [1,2] ennemis les plus proches de [3,SP]",
+    "AROMATHERAPY": "Supprime les effets négatfs de statut des alliés adjacents et les soigne de [20,40,80,SP] HP",
+    "DETECT": "Donne PROTECT aux alliés adjacents pendant [0.5,SP] secondes mutiplié par le nombre d'ennemis adjacents"
   },
   "effect": {
     "INGRAIN": "Enraciné",
@@ -1363,7 +1403,11 @@
     "SHINING_RAY": "Rayon brillant",
     "LIGHT_PULSE": "Impulsion lumineuse",
     "ETERNAL_LIGHT": "Lumière éternelle",
-    "MAX_ILLUMINATION": "Illumination"
+    "MAX_ILLUMINATION": "Illumination",
+    "QUICK_FEET": "Pied Véloce",
+    "RUN_AWAY": "Fuite",
+    "HUSTLE": "Agitation",
+    "BERSERK": "Folle Furie"
   },
   "effect_description": {
     "STAMINA": "Gagne 15 SHIELD",
@@ -1475,7 +1519,11 @@
     "SHINING_RAY": "Augmente la AP et l'ATK de 20%",
     "LIGHT_PULSE": "Donne également +10 PP par seconde",
     "ETERNAL_LIGHT": "Augmente également la DEF et SPE_DEF de 50% et donne RUNE_PROTECT pendant 10 secondes",
-    "MAX_ILLUMINATION": "Donne également 100 SHIELD et RESURECTION"
+    "MAX_ILLUMINATION": "Donne également 100 SHIELD et RESURECTION",
+    "QUICK_FEET": "+30% ATK et vitesse de déplacement, les pokémons WILD sont trouvables à tous les stages",
+    "RUN_AWAY": "+50% ATK et vitesse de déplacement, 10% de chance de trouver des pokémons WILD",
+    "HUSTLE": "+80% ATK et vitesse de déplacement, 15% de chance de trouver des pokémons WILD",
+    "BERSERK": "+120% ATK et vitesse de déplacement, 20% de chance de trouver des pokémons WILD. Vos pokémons sont RAGE 5 secondes en avance."
   },
   "item": {
     "FOSSIL_STONE": "Fossile Dome",
@@ -1838,7 +1886,8 @@
     "SOUND": "Son",
     "ARTIFICIAL": "Artificiel",
     "BABY": "Bébé",
-    "LIGHT": "Lumière"
+    "LIGHT": "Lumière",
+    "WILD": "Sauvage"
   },
   "synergy_description": {
     "NORMAL": "Les pokémons NORMAL et leurs alliés adjacents gagnent le SHIELD lorsque le combat commence",
@@ -1861,14 +1910,15 @@
     "FLYING": "Les pokémons FLYING s'envolent lorsqu'ils tombent sous une certaine quantité de HP",
     "FLORA": "Quand le premier pokémon FLORA est mort, une fleur sort de sa tombe...",
     "ROCK": "Les pokémons ROCK gagnent en DEF et résistent mieux aux dégâts critiques",
-    "GHOST": "Les pokémons GHOST appliquent diverses malédictions aux unités adverses au début du combat.",
+    "GHOST": "Les pokémons GHOST appliquent diverses malédictions aux unités adverses au début du combat, et leurs attaques ont 25% de chance de SILENCE leur cible.",
     "FAIRY": "Les pokémons FAIRY choquent leur cible chaque fois qu'ils infligent ou reçoivent un coup critique, ou les rend CHARM pendant 2 secondes s'ils sont à distance",
     "ICE": "Les pokémons ICE ont une chance de FREEZE leur cible pendant 2 secondes après un coup et font gagner de la SPE_DEF à toute l'équipe",
     "FOSSIL": "Lors de leur premier KO, les pokémons FOSSIL reviennent à la vie avec une ATK augmentée",
     "SOUND": "Les pokémons SOUND émettent un cri lorsqu'ils utilisent leurs capacités, réveillant les alliés en SLEEP et leur donnant des statistiques bonus",
     "ARTIFICIAL": "Les pokémons ARTIFICIAL donnent des objets uniques et gagnent de l'ATK, de la AP et du SHIELD lorsqu'ils portent des objets.",
     "BABY": "Les pokémons BABY peuvent vous apporter des œufs Pokémon pour vous réconforter après une défaite",
-    "LIGHT": "La lumière révèle un projecteur sur le champ de bataille. L’unité sous les projecteurs au début du combat bénéficie de bonus uniques."
+    "LIGHT": "La lumière révèle un projecteur sur le champ de bataille. L’unité sous les projecteurs au début du combat bénéficie de bonus uniques.",
+    "WILD": "Les pokémons WILD gagnent en ATK et vitesse de déplacement, peuvent WOUND leur cible avec leurs attaques, et attirent d'autres pokémons WILD."
   },
   "title": {
     "NOVICE": "Novice",
@@ -2573,7 +2623,8 @@
     "GOTTA_CATCH_EM_ALL": "Attrapez-les tous !",
     "BUYER_FEVER": "Fièvre acheteuse",
     "TECHNOLOGIC": "Technologie",
-    "SIX_PACK": "Pack de six"
+    "SIX_PACK": "Pack de six",
+    "NINE_LIVES": "Neuf Vies"
   },
   "scribble_description": {
     "EVERYONE_IS_HERE": "Tous les Pokémons additionnels sont disponibles immédiatement",
@@ -2585,6 +2636,7 @@
     "GOTTA_CATCH_EM_ALL": "Des Pokémons peuvent être attrapés avant chaque tour PvE",
     "BUYER_FEVER": "Les évolutions dans le magasin sont gratuites",
     "TECHNOLOGIC": "Choisissez entre 3 objets artificiels aux tours 3 et 15",
-    "SIX_PACK": "Vous pouvez mettre 6 unités maximum sur votre plateau, peu importe votre niveau"
+    "SIX_PACK": "Vous pouvez mettre 6 unités maximum sur votre plateau, peu importe votre niveau",
+    "NINE_LIVES": "Vous êtes éliminés après avoir perdu 9 matchs"
   }
 }

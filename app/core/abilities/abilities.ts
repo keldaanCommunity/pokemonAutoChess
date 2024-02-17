@@ -7177,8 +7177,8 @@ export class AuraWheelStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    pokemon.name = Pkm.MORPEKO_ANGRY
-    pokemon.index = PkmIndex[Pkm.MORPEKO_ANGRY]
+    pokemon.name = Pkm.MORPEKO_HANGRY
+    pokemon.index = PkmIndex[Pkm.MORPEKO_HANGRY]
     pokemon.skill = Ability.AURA_WHEEL_HANGRY
 
     target.handleSpecialDamage(
@@ -7276,8 +7276,15 @@ export class TickleStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const attackLost = Math.round(3 * (1 + pokemon.ap / 100))
     const defLost = Math.round(3 * (1 + pokemon.ap / 100))
-    target.addAttack(-attackLost)
-    target.addDefense(-defLost)
+    const nbMaxEnemiesHit = [1,2][pokemon.stars - 1] ?? 2
+    let nbEnemiesHit = 0
+    board.getAdjacentCells(pokemon.positionX, pokemon.positionY).forEach(cell => {
+      if(cell.value && cell.value.team !== pokemon.team && nbEnemiesHit < nbMaxEnemiesHit){
+        nbEnemiesHit++
+        cell.value.addAttack(-attackLost)
+        cell.value.addDefense(-defLost)
+      }
+    })
   }
 }
 

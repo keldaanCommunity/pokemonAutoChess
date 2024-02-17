@@ -631,7 +631,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       target.status.triggerParalysis(2000, this)
     }
 
-    if (this.name === Pkm.MORPEKO_ANGRY) {
+    if (this.name === Pkm.MORPEKO_HANGRY) {
       target.status.triggerWound(4000, target, this)
     }
 
@@ -724,8 +724,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.hasSynergyEffect(Synergy.GHOST)) {
-      if (chance(1 / 2)) {
-        target.status.triggerSilence(3000, this)
+      if (chance(0.25)) {
+        target.status.triggerSilence(2000, this)
       }
     }
 

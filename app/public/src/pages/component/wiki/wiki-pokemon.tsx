@@ -9,7 +9,11 @@ import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
 import WikiPokemonDetail from "./wiki-pokemon-detail"
 
-export default function WikiPokemon(props: { rarity: Rarity }) {
+export default function WikiPokemon(props: {
+  rarity: Rarity
+  selected: Pkm
+  onSelect: (pkm: Pkm) => any
+}) {
   const pokemons = useMemo(
     () =>
       PRECOMPUTED_POKEMONS_PER_RARITY[props.rarity]
@@ -23,7 +27,10 @@ export default function WikiPokemon(props: { rarity: Rarity }) {
   )
 
   return (
-    <Tabs>
+    <Tabs
+      selectedIndex={pokemons.indexOf(props.selected)}
+      onSelect={(index) => props.onSelect(pokemons[index])}
+    >
       <TabList>
         {pokemons.map((pkm) => {
           return (
