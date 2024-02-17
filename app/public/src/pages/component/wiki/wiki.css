@@ -50,6 +50,10 @@
   border-radius: 2px;
 }
 
+#wiki-page .wiki-pokemons .pokemon-typeahead {
+  float: right;
+}
+
 #wiki-page p.description {
   line-height: 1.2em;
 }
