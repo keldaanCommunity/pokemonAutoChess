@@ -53,10 +53,13 @@
 
 # Changes to Items
 
+- Prevent flame orb and toxic orb to burn & poison after the enemy team is defeated
+
 # Gameplay
 
 - On lobbies with less than 8 players, some additional picks are picked randomly to always have 8 add picks per rarity
 - Changed charm status: Charmed units now move to contact with the unit at the origin of the charm
+- Prevent sandstorm and storm weathers to deal damage after the enemy team is defeated
 
 # UI
 

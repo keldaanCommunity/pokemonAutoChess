@@ -1298,7 +1298,7 @@ export default class Simulation extends Schema implements ISimulation {
 
     if (this.weather === Weather.STORM) {
       this.stormLightningTimer -= dt
-      if (this.stormLightningTimer <= 0) {
+      if (this.stormLightningTimer <= 0 && !this.finished) {
         this.stormLightningTimer = randomBetween(4000, 8000)
         // trigger lightning
         const x = randomBetween(0, this.board.columns - 1)
