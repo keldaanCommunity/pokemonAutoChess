@@ -7338,6 +7338,18 @@ export class DetectStrategy extends AbilityStrategy {
   }
 }
 
+export class SpacialRendStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -7624,5 +7636,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FURY_SWIPES]: new FurySwipesStrategy(),
   [Ability.TICKLE]: new TickleStrategy(),
   [Ability.AROMATHERAPY]: new AromatherapyStrategy(),
-  [Ability.DETECT]: new DetectStrategy()
+  [Ability.DETECT]: new DetectStrategy(),
+  [Ability.SPACIAL_REND]: new SpacialRendStrategy()
 }

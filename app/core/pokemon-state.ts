@@ -479,7 +479,7 @@ export default class PokemonState {
       pokemon.types.has(Synergy.GROUND) === false
     ) {
       pokemon.sandstormDamageTimer -= dt
-      if (pokemon.sandstormDamageTimer <= 0) {
+      if (pokemon.sandstormDamageTimer <= 0 && !pokemon.simulation.finished) {
         pokemon.sandstormDamageTimer = 1000
         const sandstormDamage = 5
         pokemon.handleDamage({
