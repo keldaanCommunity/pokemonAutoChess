@@ -44,6 +44,7 @@
 - Nerf Rowlet line: PP ~~80~~ 100
 - Changed Nightmare (Gastly): Removed AP scaling on silence duration, ~~50~~ 25/50/100 special damage
 - Nerf Flygon: HP ~~200~~ 180
+- New ability for Palkia: Spatial Rend: Reverse the position of the enemy team, then deals 100 special damage to all ennemies in a row
 
 # Changes to Synergies
 

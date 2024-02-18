@@ -286,6 +286,12 @@ export function displayAbility(
       break
     }
 
+    case Ability.SPACIAL_REND: {
+      const coords = transformAttackCoordinate(4, targetY, flip)
+      addAbilitySprite(skill, coords, true).setScale(4)
+      break
+    }
+
     case Ability.SEED_FLARE:
       addAbilitySprite(skill, coordinates, true).setScale(3, 3)
       break

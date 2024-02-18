@@ -4575,7 +4575,7 @@ export class Palkia extends Pokemon {
   speDef = 5
   maxPP = 120
   range = 1
-  skill = Ability.ROAR_OF_TIME
+  skill = Ability.SPACIAL_REND
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
