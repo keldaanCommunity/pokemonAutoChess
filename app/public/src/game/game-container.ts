@@ -36,6 +36,7 @@ import {
 import { Synergy } from "../../../types/enum/Synergy"
 import { Weather } from "../../../types/enum/Weather"
 import { logger } from "../../../utils/logger"
+import { clamp } from "../../../utils/number"
 import { getPath, transformCoordinate } from "../pages/utils/utils"
 import store from "../stores"
 import { changePlayer } from "../stores/GameStore"
@@ -247,6 +248,21 @@ class GameContainer {
       tilemap: this.tilemap,
       spectate: this.spectate
     })
+    this.game.scale.on("resize", this.resize, this)
+  }
+
+  resize() {
+    const screenWidth = window.innerWidth - 60
+    const screenHeight = window.innerHeight
+    const screenRatio = screenWidth / screenHeight
+    const WIDTH = 42 * 48
+    const MIN_HEIGHT = 1008
+    const MAX_HEIGHT = 32 * 48
+    const height = clamp(WIDTH / screenRatio, MIN_HEIGHT, MAX_HEIGHT)
+
+    if (this.game && this.game.scale.height !== height) {
+      this.game.scale.setGameSize(WIDTH, height)
+    }
   }
 
   initializeEvents() {

@@ -46,7 +46,7 @@ export default class Design {
   bitmask: Mask[][] = []
   layers: TileMapping[][] = []
   width = 42
-  height = 22
+  height = 32
   frequency: number
   persistance: number
   tileset: Tileset
