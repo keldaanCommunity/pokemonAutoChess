@@ -861,17 +861,19 @@ export class ElectroWebStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let steal = 15
-    if (pokemon.stars == 2) {
-      steal = 30
-    } else if (pokemon.stars == 3) {
-      steal = 60
-    }
-    steal = Math.round(steal * (1 + pokemon.ap / 100))
+    const steal = [15, 30, 60][pokemon.stars - 1] ?? 60
+    const damage = [15, 30, 60][pokemon.stars - 1] ?? 80
     board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
       .forEach((cell) => {
         if (cell.value && cell.value.team !== pokemon.team) {
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
           cell.value.addAttackSpeed(-steal)
           pokemon.addAttackSpeed(steal)
         }
