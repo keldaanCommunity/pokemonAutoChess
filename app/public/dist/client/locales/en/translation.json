@@ -300,7 +300,8 @@
     "FURY_SWIPES": "Fury Swipes",
     "TICKLE": "Tickle",
     "AROMATHERAPY": "Aromatherapy",
-    "DETECT": "Detect"
+    "DETECT": "Detect",
+    "SPACIAL_REND": "Spacial Rend"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1295,7 +1296,8 @@
     "FURY_SWIPES": "Deals [2,SP] to [5,SP] attacks as PHYSICAL",
     "TICKLE": "Reduce ATK and DEF of the [1,2] closest targets by [3,SP]",
     "AROMATHERAPY": "Clear negative status alterations and heal [20,40,80,SP] HP of adjacent allies",
-    "DETECT": "PROTECT adjacent allies for [0.5,SP] seconds mutiplied by the number of adjacent enemies"
+    "DETECT": "PROTECT adjacent allies for [0.5,SP] seconds mutiplied by the number of adjacent enemies",
+    "SPACIAL_REND": "Reverse the position of the enemy team, then deals [100,SP] SPECIAL to all ennemies in a row"
   },
   "effect": {
     "INGRAIN": "Ingrain",

@@ -54,7 +54,7 @@ import { getFirstAvailablePositionInBench } from "../../utils/board"
 import { distanceC, distanceM } from "../../utils/distance"
 import { repeat } from "../../utils/function"
 import { logger } from "../../utils/logger"
-import { max, min } from "../../utils/number"
+import { clamp, max, min } from "../../utils/number"
 import { OrientationArray, effectInLine } from "../../utils/orientation"
 import {
   chance,
@@ -64,6 +64,7 @@ import {
   shuffleArray
 } from "../../utils/random"
 import { values } from "../../utils/schemas"
+import { xml } from "d3"
 
 export class BlueFlareStrategy extends AbilityStrategy {
   process(
@@ -7276,15 +7277,21 @@ export class TickleStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const attackLost = Math.round(3 * (1 + pokemon.ap / 100))
     const defLost = Math.round(3 * (1 + pokemon.ap / 100))
-    const nbMaxEnemiesHit = [1,2][pokemon.stars - 1] ?? 2
+    const nbMaxEnemiesHit = [1, 2][pokemon.stars - 1] ?? 2
     let nbEnemiesHit = 0
-    board.getAdjacentCells(pokemon.positionX, pokemon.positionY).forEach(cell => {
-      if(cell.value && cell.value.team !== pokemon.team && nbEnemiesHit < nbMaxEnemiesHit){
-        nbEnemiesHit++
-        cell.value.addAttack(-attackLost)
-        cell.value.addDefense(-defLost)
-      }
-    })
+    board
+      .getAdjacentCells(pokemon.positionX, pokemon.positionY)
+      .forEach((cell) => {
+        if (
+          cell.value &&
+          cell.value.team !== pokemon.team &&
+          nbEnemiesHit < nbMaxEnemiesHit
+        ) {
+          nbEnemiesHit++
+          cell.value.addAttack(-attackLost)
+          cell.value.addDefense(-defLost)
+        }
+      })
   }
 }
 
@@ -7347,6 +7354,32 @@ export class SpacialRendStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    const damage = 100
+    const enemies = board.cells.filter((p) => p && p.team !== pokemon.team)
+    const n = enemies.length
+    for (let i = 0; i < Math.floor(n / 2); i++) {
+      board.swapValue(
+        enemies[i]!.positionX,
+        enemies[i]!.positionY,
+        enemies[n - 1 - i]!.positionX,
+        enemies[n - 1 - i]!.positionY
+      )
+    }
+    setTimeout(() => {
+      const y = clamp(target.positionY, 2, BOARD_HEIGHT - 2)
+      for (let x = 0; x < BOARD_WIDTH; x++) {
+        const targetHit = board.getValue(x, y)
+        if (targetHit && targetHit.team !== pokemon.team) {
+          targetHit.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      }
+    }, 700)
   }
 }
 
