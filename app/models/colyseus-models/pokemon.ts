@@ -33,7 +33,13 @@ import {
 } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { AttackType, PokemonActionState, Rarity } from "../../types/enum/Game"
-import { AllItems, Berries, Item, ItemRecipe } from "../../types/enum/Item"
+import {
+  AllItems,
+  Berries,
+  Item,
+  ItemRecipe,
+  SynergyItems
+} from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
@@ -7960,34 +7966,387 @@ export class Granbull extends Pokemon {
 }
 
 export class TypeNull extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL])
-  rarity = Rarity.EPIC
-  stars = 1
-  evolution = Pkm.GRANBULL
-  hp = 65
-  atk = 6
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.ARTIFICIAL])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.SILVALLY_FIRE
+  evolutionRule: EvolutionRule = new ItemEvolutionRule(
+    SynergyItems.slice(),
+    (pokemon: Pokemon, player: Player, item?: Item) => {
+      switch (item) {
+        case Item.OLD_AMBER:
+          return Pkm.SILVALLY_FOSSIL
+        case Item.DAWN_STONE:
+          return Pkm.SILVALLY_PSYCHIC
+        case Item.WATER_STONE:
+          return Pkm.SILVALLY_WATER
+        case Item.THUNDER_STONE:
+          return Pkm.SILVALLY_ELECTRIC
+        case Item.FIRE_STONE:
+          return Pkm.SILVALLY_FIRE
+        case Item.MOON_STONE:
+          return Pkm.SILVALLY_FAIRY
+        case Item.DUSK_STONE:
+          return Pkm.SILVALLY_DARK
+        case Item.LEAF_STONE:
+          return Pkm.SILVALLY_GRASS
+        case Item.ICE_STONE:
+          return Pkm.SILVALLY_ICE
+        case Item.MACHO_BRACE:
+          return Pkm.SILVALLY_FIGHTING
+        case Item.LIGHT_BALL:
+          return Pkm.SILVALLY_LIGHT
+        case Item.TOXIC_ORB:
+          return Pkm.SILVALLY_POISON
+        case Item.METRONOME:
+          return Pkm.SILVALLY_SOUND
+        case Item.METAL_COAT:
+          return Pkm.SILVALLY_STEEL
+        case Item.SWIFT_WING:
+          return Pkm.SILVALLY_FLYING
+        case Item.HARD_STONE:
+          return Pkm.SILVALLY_ROCK
+        case Item.BIG_NUGGET:
+          return Pkm.SILVALLY_GROUND
+        case Item.INCENSE:
+          return Pkm.SILVALLY_FLORA
+        default:
+          return Pkm.SILVALLY_FIRE
+      }
+    }
+  )
+  hp = 200
+  atk = 14
   def = 3
-  speDef = 2
-  maxPP = 70
+  speDef = 3
+  maxPP = 50
   range = 1
-  skill = Ability.DEFAULT
-  additional = true
-  attackSprite = AttackSprite.FAIRY_MELEE
+  skill = Ability.RKS_SYSTEM
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
-export class Sylvally extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL])
-  rarity = Rarity.EPIC
-  stars = 2
-  hp = 130
-  atk = 11
-  def = 6
-  speDef = 3
-  maxPP = 70
+export class SilvallyFire extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.WILD,
+    Synergy.ARTIFICIAL,
+    Synergy.FIRE
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 260
+  atk = 18
+  def = 5
+  speDef = 5
+  maxPP = 50
   range = 1
-  skill = Ability.DEFAULT
-  additional = true
-  attackSprite = AttackSprite.FAIRY_MELEE
+  skill = Ability.RKS_SYSTEM
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class SilvallyFossil extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.WILD,
+    Synergy.ARTIFICIAL,
+    Synergy.FOSSIL
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 260
+  atk = 18
+  def = 5
+  speDef = 5
+  maxPP = 50
+  range = 1
+  skill = Ability.RKS_SYSTEM
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class SilvallyPsychic extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.WILD,
+    Synergy.ARTIFICIAL,
+    Synergy.PSYCHIC
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 260
+  atk = 18
+  def = 5
+  speDef = 5
+  maxPP = 50
+  range = 1
+  skill = Ability.RKS_SYSTEM
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class SilvallyWater extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.WILD,
+    Synergy.ARTIFICIAL,
+    Synergy.WATER
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 260
+  atk = 18
+  def = 5
+  speDef = 5
+  maxPP = 50
+  range = 1
+  skill = Ability.RKS_SYSTEM
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class SilvallyElectric extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.WILD,
+    Synergy.ARTIFICIAL,
+    Synergy.ELECTRIC
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 260
+  atk = 18
+  def = 5
+  speDef = 5
+  maxPP = 50
+  range = 1
+  skill = Ability.RKS_SYSTEM
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class SilvallyFairy extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.WILD,
+    Synergy.ARTIFICIAL,
+    Synergy.FAIRY
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 260
+  atk = 18
+  def = 5
+  speDef = 5
+  maxPP = 50
+  range = 1
+  skill = Ability.RKS_SYSTEM
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class SilvallyDark extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.WILD,
+    Synergy.ARTIFICIAL,
+    Synergy.DARK
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 260
+  atk = 18
+  def = 5
+  speDef = 5
+  maxPP = 50
+  range = 1
+  skill = Ability.RKS_SYSTEM
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class SilvallyGrass extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.WILD,
+    Synergy.ARTIFICIAL,
+    Synergy.GRASS
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 260
+  atk = 18
+  def = 5
+  speDef = 5
+  maxPP = 50
+  range = 1
+  skill = Ability.RKS_SYSTEM
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class SilvallyIce extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.WILD,
+    Synergy.ARTIFICIAL,
+    Synergy.ICE
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 260
+  atk = 18
+  def = 5
+  speDef = 5
+  maxPP = 50
+  range = 1
+  skill = Ability.RKS_SYSTEM
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class SilvallyFighting extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.WILD,
+    Synergy.ARTIFICIAL,
+    Synergy.FIGHTING
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 260
+  atk = 18
+  def = 5
+  speDef = 5
+  maxPP = 50
+  range = 1
+  skill = Ability.RKS_SYSTEM
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class SilvallyLight extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.WILD,
+    Synergy.ARTIFICIAL,
+    Synergy.LIGHT
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 260
+  atk = 18
+  def = 5
+  speDef = 5
+  maxPP = 50
+  range = 1
+  skill = Ability.RKS_SYSTEM
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class SilvallyPoison extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.WILD,
+    Synergy.ARTIFICIAL,
+    Synergy.POISON
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 260
+  atk = 18
+  def = 5
+  speDef = 5
+  maxPP = 50
+  range = 1
+  skill = Ability.RKS_SYSTEM
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class SilvallySound extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.WILD,
+    Synergy.ARTIFICIAL,
+    Synergy.SOUND
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 260
+  atk = 18
+  def = 5
+  speDef = 5
+  maxPP = 50
+  range = 1
+  skill = Ability.RKS_SYSTEM
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class SilvallySteel extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.WILD,
+    Synergy.ARTIFICIAL,
+    Synergy.STEEL
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 260
+  atk = 18
+  def = 5
+  speDef = 5
+  maxPP = 50
+  range = 1
+  skill = Ability.RKS_SYSTEM
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class SilvallyFlying extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.WILD,
+    Synergy.ARTIFICIAL,
+    Synergy.FLYING
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 260
+  atk = 18
+  def = 5
+  speDef = 5
+  maxPP = 50
+  range = 1
+  skill = Ability.RKS_SYSTEM
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class SilvallyRock extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.WILD,
+    Synergy.ARTIFICIAL,
+    Synergy.ROCK
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 260
+  atk = 18
+  def = 5
+  speDef = 5
+  maxPP = 50
+  range = 1
+  skill = Ability.RKS_SYSTEM
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class SilvallyGround extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.WILD,
+    Synergy.ARTIFICIAL,
+    Synergy.GROUND
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 260
+  atk = 18
+  def = 5
+  speDef = 5
+  maxPP = 50
+  range = 1
+  skill = Ability.RKS_SYSTEM
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class SilvallyFlora extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.WILD,
+    Synergy.ARTIFICIAL,
+    Synergy.FLORA
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 260
+  atk = 18
+  def = 5
+  speDef = 5
+  maxPP = 50
+  range = 1
+  skill = Ability.RKS_SYSTEM
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Applin extends Pokemon {
@@ -12214,8 +12573,6 @@ export const PokemonClasses: Record<
   [Pkm.MELMETAL]: Melmetal,
   [Pkm.HOOPA]: Hoopa,
   [Pkm.HOOPA_UNBOUND]: HoopaUnbound,
-  [Pkm.TYPE_NULL]: TypeNull,
-  [Pkm.SILVALLY]: Sylvally,
   [Pkm.ZERAORA]: Zeraora,
   [Pkm.XERNEAS]: Xerneas,
   [Pkm.YVELTAL]: Yveltal,
@@ -12381,5 +12738,24 @@ export const PokemonClasses: Record<
   [Pkm.PATRAT]: Patrat,
   [Pkm.WATCHOG]: Watchog,
   [Pkm.SPINARAK]: Spinarak,
-  [Pkm.ARIADOS]: Ariados
+  [Pkm.ARIADOS]: Ariados,
+  [Pkm.TYPE_NULL]: TypeNull,
+  [Pkm.SILVALLY_FIRE]: SilvallyFire,
+  [Pkm.SILVALLY_FOSSIL]: SilvallyFossil,
+  [Pkm.SILVALLY_PSYCHIC]: SilvallyPsychic,
+  [Pkm.SILVALLY_WATER]: SilvallyWater,
+  [Pkm.SILVALLY_ELECTRIC]: SilvallyElectric,
+  [Pkm.SILVALLY_FAIRY]: SilvallyFairy,
+  [Pkm.SILVALLY_DARK]: SilvallyDark,
+  [Pkm.SILVALLY_GRASS]: SilvallyGrass,
+  [Pkm.SILVALLY_ICE]: SilvallyIce,
+  [Pkm.SILVALLY_FIGHTING]: SilvallyFighting,
+  [Pkm.SILVALLY_LIGHT]: SilvallyLight,
+  [Pkm.SILVALLY_POISON]: SilvallyPoison,
+  [Pkm.SILVALLY_SOUND]: SilvallySound,
+  [Pkm.SILVALLY_STEEL]: SilvallySteel,
+  [Pkm.SILVALLY_FLYING]: SilvallyFlying,
+  [Pkm.SILVALLY_ROCK]: SilvallyRock,
+  [Pkm.SILVALLY_GROUND]: SilvallyGround,
+  [Pkm.SILVALLY_FLORA]: SilvallyFlora
 }

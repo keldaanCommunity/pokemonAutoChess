@@ -296,6 +296,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(3, 3)
       break
 
+    case Ability.RKS_SYSTEM:
+      addAbilitySprite(skill, coordinates, true).setScale(4)
+      break
+
     case Ability.SEISMIC_TOSS:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
