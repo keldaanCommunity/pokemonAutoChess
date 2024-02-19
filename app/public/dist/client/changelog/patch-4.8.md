@@ -50,6 +50,10 @@
 
 - New synergy: Wild ; Wild pokemons can initially be only found during PvE stages, but they will attract more Wild mons if you play them. Wild pokemons have increased Attack and move speed, and can Wound their target with their attacks.
 - Water: Magikarp can now be fished only at first synergy level, and are worth zero to sell
+- Baby: there is now a limit to the amount of eggs you can store on bench for Baby 3 and 5. Egg hatch time: ~~4~~ 3 rounds ; Hatched unit evolution time: ~~4~~ 5 rounds.
+- Baby 3: egg chance: ~~20%~~ 25% x loss streak, max 1 egg on bench
+- Baby 5: max 2 eggs on bench
+- Baby 7: Egg sell price ~~10~~ 15 gold, no limit for eggs on bench
 - Nerf Dark: ~~40/60/80~~ 40/55/70 % crit chance
 - Nerf Ghost: ~~50%~~ 25% chance to silence for ~~3~~ 2 seconds on attack
 

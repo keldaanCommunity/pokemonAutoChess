@@ -122,7 +122,7 @@ export default class PokemonFactory {
     const duo = Object.entries(PkmDuos).find(([key, duo]) => duo.includes(name))
 
     if (name === Pkm.EGG) {
-      return player && player.effects.has(Effect.GOLDEN_EGGS) ? 10 : 2
+      return player && player.effects.has(Effect.GOLDEN_EGGS) ? 15 : 2
     } else if (name == Pkm.DITTO) {
       return 5
     } else if (name === Pkm.MAGIKARP) {
