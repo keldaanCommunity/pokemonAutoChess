@@ -1182,19 +1182,22 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           }
         }
 
-        let eggChance = 0
+        let eggChance = 0,
+          nbMaxEggs = 0
         if (
           player.getLastBattleResult() == BattleResult.DEFEAT &&
           (player.effects.has(Effect.BREEDER) ||
             player.effects.has(Effect.GOLDEN_EGGS))
         ) {
           eggChance = 1
+          nbMaxEggs = player.effects.has(Effect.GOLDEN_EGGS) ? 8 : 2
         }
         if (
           player.getLastBattleResult() == BattleResult.DEFEAT &&
           player.effects.has(Effect.HATCHER)
         ) {
-          eggChance = 0.2 * player.streak
+          eggChance = 0.25 * player.streak
+          nbMaxEggs = 1
         }
 
         if (
@@ -1202,9 +1205,18 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           [1, 2, 3].includes(this.state.stageLevel)
         ) {
           eggChance = 1
+          nbMaxEggs = 8
         }
 
-        if (chance(eggChance) && getFreeSpaceOnBench(player.board) > 0) {
+        const nbOfEggs = values(player.board).filter(
+          (p) => p.name === Pkm.EGG
+        ).length
+
+        if (
+          chance(eggChance) &&
+          getFreeSpaceOnBench(player.board) > 0 &&
+          nbOfEggs < nbMaxEggs
+        ) {
           const egg = PokemonFactory.createRandomEgg()
           const x = getFirstAvailablePositionInBench(player.board)
           egg.positionX = x !== undefined ? x : -1
