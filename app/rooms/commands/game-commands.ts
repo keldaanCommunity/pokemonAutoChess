@@ -1236,7 +1236,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         player.board.forEach((pokemon, key) => {
           if (pokemon.evolutionRule) {
             if (pokemon.evolutionRule instanceof HatchEvolutionRule) {
-              pokemon.evolutionRule.updateRound(
+              pokemon.evolutionRule.updateHatch(
                 pokemon,
                 player,
                 this.state.stageLevel
