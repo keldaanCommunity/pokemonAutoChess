@@ -895,7 +895,7 @@
     "DYNAMAX_CANNON": "ダイマックスビームを直線上に放ち、ヒットしたポケモン全員にHPの[80,SP]%をSPECIALとして与える",
     "DYNAMIC_PUNCH": "[20,40,80,SP] SPECIALを与え、ターゲットを[1.5,3,6]秒間混乱させる",
     "ELECTRO_BOOST": "味方の ELECTRIC ポケモン全員が5秒間 RUNE_PROTECT を受ける",
-    "ELECTRO_WEB": "隣接する敵のATK_SPEEDを[15,30,60,SP]%盗む",
+    "ELECTRO_WEB": "隣接する全ての敵ポケモンからATK_SPEEDを[15,30,60,SP]%奪い、SPECIALを[15,30,60,SP]与える。",
     "FIRE_TRICK": "[20,40,80,SP] SPECIALを達成し、ターゲットをマップの隅にテレポートします",
     "FLAME_CHARGE": "敵後衛に突進し[30,60,120,SP]SPECIALを与える",
     "LEECH_SEED": "[3,6,12]秒間ターゲットに毒を与え、HPを[20,40,80,SP]回復します",

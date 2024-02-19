@@ -1063,7 +1063,7 @@
     "DYNAMAX_CANNON": "Dispara un rayo dinamax en línea recta, causando un [80,SP] % de su HP como SPECIAL a cada pokemon que golpea.",
     "DYNAMIC_PUNCH": "Otorga [20,40,80,SP] de SPECIAL y hace que el objetivo quede CONFUSION durante [1.5,3,6] segundos",
     "ELECTRO_BOOST": "Todos los Pokémon ELECTRIC aliados reciben RUNE_PROTECT durante 5 segundos",
-    "ELECTRO_WEB": "Roba un [15,30,60,SP] % de ATK_SPEED a los pokemon adyacentes",
+    "ELECTRO_WEB": "Roba un [15,30,60,SP] % de ATK_SPEED a los pokemon adyacentes y inflige [20,40,80,SP] SPECIAL",
     "FIRE_TRICK": "Realiza [20,40,80,SP] de SPECIAL y teletransporta al objetivo a una esquina del mapa",
     "FLAME_CHARGE": "Corre hacia la retaguardia enemiga y reparte [30,60,120,SP] de SPECIAL",
     "LEECH_SEED": "Deja POISONNED al objetivo durante [3,6,12] segundos y recupera [20,40,80,SP] HP",

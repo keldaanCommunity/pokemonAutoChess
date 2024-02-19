@@ -47,6 +47,7 @@
 - Changed Nightmare (Gastly): Removed AP scaling on silence duration, ~~50~~ 25/50/100 special damage
 - Nerf Flygon: HP ~~200~~ 180
 - New ability for Palkia: Spatial Rend: Reverse the position of the enemy team, then deals 100 special damage to all ennemies in a row
+- Buff Electro Web (Joltik): now also deals 15/30 special damage
 
 # Changes to Synergies
 
