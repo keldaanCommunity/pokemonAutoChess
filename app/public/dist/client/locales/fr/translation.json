@@ -2624,7 +2624,8 @@
     "BUYER_FEVER": "Fièvre acheteuse",
     "TECHNOLOGIC": "Technologie",
     "SIX_PACK": "Pack de six",
-    "NINE_LIVES": "Neuf Vies"
+    "NINE_LIVES": "Neuf Vies",
+    "CROWDED": "Plateau encombré"
   },
   "scribble_description": {
     "EVERYONE_IS_HERE": "Tous les Pokémons additionnels sont disponibles immédiatement",
@@ -2637,6 +2638,7 @@
     "BUYER_FEVER": "Les évolutions dans le magasin sont gratuites",
     "TECHNOLOGIC": "Choisissez entre 3 objets artificiels aux tours 3 et 15",
     "SIX_PACK": "Vous pouvez mettre 6 unités maximum sur votre plateau, peu importe votre niveau",
-    "NINE_LIVES": "Vous êtes éliminés après avoir perdu 9 matchs"
+    "NINE_LIVES": "Vous êtes éliminés après avoir perdu 9 matchs",
+    "CROWDED": "+3 unités maximum sur le plateau"
   }
 }

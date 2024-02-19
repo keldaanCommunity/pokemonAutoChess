@@ -2658,7 +2658,8 @@
     "BUYER_FEVER": "Buyer fever",
     "TECHNOLOGIC": "Technologic",
     "SIX_PACK": "Six Pack",
-    "NINE_LIVES": "Nine Lives"
+    "NINE_LIVES": "Nine Lives",
+    "CROWDED": "Crowded Board"
   },
   "scribble_description": {
     "EVERYONE_IS_HERE": "All the additional picks are available immediately",
@@ -2671,6 +2672,7 @@
     "BUYER_FEVER": "Evolutions in shop are free",
     "TECHNOLOGIC": "Choose between 3 artifacts at stage 3 and 15",
     "SIX_PACK": "You can put 6 units max on your board, no matter your level",
-    "NINE_LIVES": "You are eliminated after losing 9 rounds"
+    "NINE_LIVES": "You are eliminated after losing 9 rounds",
+    "CROWDED": "+3 units max on board"
   }
 }
