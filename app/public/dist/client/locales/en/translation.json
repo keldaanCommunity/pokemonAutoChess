@@ -301,7 +301,8 @@
     "TICKLE": "Tickle",
     "AROMATHERAPY": "Aromatherapy",
     "DETECT": "Detect",
-    "SPACIAL_REND": "Spacial Rend"
+    "SPACIAL_REND": "Spacial Rend",
+    "RKS_SYSTEM": "RKS System"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -843,7 +844,24 @@
     "MELMETAL": "Melmetal",
     "HOOPA": "Hoopa",
     "HOOPA_UNBOUND": "Hoopa (Unbound)",
-    "SILVALLY": "Silvally",
+    "SILVALLY_FIRE": "Silvally (Fire)",
+    "SILVALLY_FOSSIL": "Silvally (Fossil)",
+    "SILVALLY_PSYCHIC": "Silvally (Psychic)",
+    "SILVALLY_WATER": "Silvally (Water)",
+    "SILVALLY_ELECTRIC": "Silvally (Electric)",
+    "SILVALLY_FAIRY": "Silvally (Fairy)",
+    "SILVALLY_DARK": "Silvally (Dark)",
+    "SILVALLY_GRASS": "Silvally (Grass)",
+    "SILVALLY_ICE": "Silvally (Ice)",
+    "SILVALLY_FIGHTING": "Silvally (Fighting)",
+    "SILVALLY_LIGHT": "Silvally (Light)",
+    "SILVALLY_POISON": "Silvally (Poison)",
+    "SILVALLY_SOUND": "Silvally (Sound)",
+    "SILVALLY_STEEL": "Silvally (Steel)",
+    "SILVALLY_FLYING": "Silvally (Flying)",
+    "SILVALLY_ROCK": "Silvally (Rock)",
+    "SILVALLY_GROUND": "Silvally (Ground)",
+    "SILVALLY_FLORA": "Silvally (Flora)",
     "TYPE_NULL": "Type: Null",
     "ZERAORA": "Zeraora",
     "XERNEAS": "Xerneas",
@@ -1247,7 +1265,7 @@
     "NIGHT_SHADE": "Deals [25,33,50,SP=0.5]% of target max HP as TRUE",
     "CHARGE_BEAM": "Fires a concentrated bundle of electricity that propagate to max 3 adjacent targets, dealing [15,30,60,SP] SPECIAL to each.",
     "POPULATION_BOMB": "Deals 10 SPECIAL [4,8,12,16,SP] times to the target",
-    "SCREECH": "Reduce DEF of all adjacent ennemies by [1,2,4,SP]",
+    "SCREECH": "Reduce DEF of all adjacent enemies by [1,2,4,SP]",
     "SAND_TOMB": "Deals [10,20,40,SP] SPECIAL, inflicting SILENCE and PARALYSIS for 3/5/8 seconds",
     "WHIRLWIND": "Deals [40,80,120,SP] SPECIAL and make the target fly away",
     "EMPTY_LIGHT": "Spits poison directly at an enemy, inflicting [60,SP] SPECIAL and reducing its SPE_DEF by 3. The ability then rebounds on another Pokemon with a lower SPE_DEF. (5 bounces maximum)",
@@ -1297,7 +1315,8 @@
     "TICKLE": "Reduce ATK and DEF of the [1,2] closest targets by [3,SP]",
     "AROMATHERAPY": "Clear negative status alterations and heal [20,40,80,SP] HP of adjacent allies",
     "DETECT": "PROTECT adjacent allies for [0.5,SP] seconds mutiplied by the number of adjacent enemies",
-    "SPACIAL_REND": "Reverse the position of the enemy team, then deals [100,SP] SPECIAL to all ennemies in a row"
+    "SPACIAL_REND": "Reverse the position of the enemy team, then deals [100,SP] SPECIAL to all enemies in a row",
+    "RKS_SYSTEM": "Deals [30,SP] SPECIAL to adjacent enemies. Heal adjacent pokémons for [20,SP] if they have a type in common with the caster"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1792,7 +1811,7 @@
     "CELEBI": "The player regains 1 HP every time $t(pkm.CELEBI) casts $t(ability.TIME_TRAVEL).",
     "GIMMIGHOUL": "$t(pkm.GIMMIGHOUL) is looking for 99 GOLD",
     "GHOLDENGO": "At the start of each fight, if the player has 50 GOLD or more, $t(pkm.GHOLDENGO) gains RUNE_PROTECT for the entire fight",
-    "METEOR": "$t(pkm.MINIOR) alternates between its meteor and core forms. The meteor form grants [4,SP]% ATK_SPEED per attack.\n Core form attacks apply additional effects on target and adjacent ennemies:\n Blue: Deals 100% SPECIAL\n Red: Deals 150% PHYSICAL\n Orange: Deals 50% TRUE\n Green: Attack damage heals adjacent allies",
+    "METEOR": "$t(pkm.MINIOR) alternates between its meteor and core forms. The meteor form grants [4,SP]% ATK_SPEED per attack.\n Core form attacks apply additional effects on target and adjacent enemies:\n Blue: Deals 100% SPECIAL\n Red: Deals 150% PHYSICAL\n Orange: Deals 50% TRUE\n Green: Attack damage heals adjacent allies",
     "MIMIKYU": "When hit under 50% HP, Mimikyu changes into its Busted Form, gaining 30% ATK_SPEED and PROTECT for 2 seconds",
     "MIMIKYU_BUSTED": "Its neck is broken. Mimikyu will never forget the person who damaged its rag for as long as it is still alive.",
     "HUNGER_SWITCH": "$t(pkm.MORPEKO) alternates between its normal and hangry forms.\n Normal form attacks inflicts PARALYSIS for 2s\n Hangry form attacks inflicts WOUND for 4s"
