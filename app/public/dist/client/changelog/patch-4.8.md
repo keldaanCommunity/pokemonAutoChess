@@ -86,6 +86,6 @@
 
 - 3 new scribbles rules do discover !
 - Changed "Buyer Fever" scribble: ~~Earn 1 gold every time you evolve an unit by buying from the shop~~ Evolutions in shop are free
-- More cards in boosters ! Also you will get various emotions and a chance to find shinies for more shards, and some higher rarity emotions prices have been lowered
+- More cards in boosters ! Also you will get various emotions and a chance to find shinies for more shards, and emotions prices have been lowered
 - Thanks to Emeri for his work on the Deutsch translation !
 - Thanks to @Irnox and @SpieleArmy for managing the bot creation <3
