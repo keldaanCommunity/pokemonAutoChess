@@ -32,6 +32,7 @@ import { isOnBench, Pokemon } from "./pokemon"
 import PokemonCollection from "./pokemon-collection"
 import PokemonConfig from "./pokemon-config"
 import Synergies, { computeSynergies } from "./synergies"
+import { getPokemonData } from "../precomputed"
 
 export default class Player extends Schema implements IPlayer {
   @type("string") id: string
@@ -265,9 +266,12 @@ export default class Player extends Schema implements IPlayer {
             pokemon.items.delete(item)
             if (SynergyGivenByItem.hasOwnProperty(item)) {
               const type = SynergyGivenByItem[item]
-              pokemon.types.delete(type)
-              if (!isOnBench(pokemon)) {
-                needsRecomputingSynergiesAgain = true
+              const nativeTypes = getPokemonData(pokemon.name).types
+              if (nativeTypes.includes(type) === false) {
+                pokemon.types.delete(type)
+                if (!isOnBench(pokemon)) {
+                  needsRecomputingSynergiesAgain = true
+                }
               }
             }
           }

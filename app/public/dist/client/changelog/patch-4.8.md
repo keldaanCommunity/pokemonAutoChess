@@ -80,6 +80,7 @@
 
 # Bugfix
 
+- Fix removal of native type synergy when losing artificial item
 # Misc
 
 - Changed "Buyer Fever" scribble: ~~Earn 1 gold every time you evolve an unit by buying from the shop~~ Evolutions in shop are free
