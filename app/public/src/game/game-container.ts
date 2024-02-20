@@ -31,7 +31,8 @@ import {
   AttackType,
   HealType,
   Orientation,
-  PokemonActionState
+  PokemonActionState,
+  Rarity
 } from "../../../types/enum/Game"
 import { Synergy } from "../../../types/enum/Synergy"
 import { Weather } from "../../../types/enum/Weather"
@@ -561,9 +562,10 @@ class GameContainer {
       const pokemonUI = this.gameScene?.board?.addPokemonSprite(pokemon)
       if (pokemonUI && pokemon.action === PokemonActionState.FISH) {
         pokemonUI.fishingAnimation()
-      }
-      if (pokemonUI && pokemon.stars > 1) {
+      } else if (pokemonUI && pokemon.stars > 1) {
         pokemonUI.evolutionAnimation()
+      } else if (pokemonUI && pokemon.rarity === Rarity.HATCH) {
+        pokemonUI.hatchAnimation()
       }
     }
   }

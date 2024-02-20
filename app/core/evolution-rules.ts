@@ -201,14 +201,22 @@ export class HatchEvolutionRule extends EvolutionRule {
     this.evolutionTimer = roundsRequired
   }
 
-  updateRound(pokemon: Pokemon, player: Player, stageLevel: number) {
+  updateHatch(pokemon: Pokemon, player: Player, stageLevel: number) {
     this.evolutionTimer -= 1
-    pokemon.evolutionRule.tryEvolve(pokemon, player, stageLevel)
-    if (pokemon.name === Pkm.EGG && this.evolutionTimer >= 1) {
+    const willHatch = this.canEvolve(pokemon, player, stageLevel)
+    if (willHatch) {
+      pokemon.action = PokemonActionState.HOP
+      setTimeout(
+        () => pokemon.evolutionRule.tryEvolve(pokemon, player, stageLevel),
+        2000
+      )
+    } else if (pokemon.name === Pkm.EGG) {
       pokemon.action =
-        this.evolutionTimer >= 2
-          ? PokemonActionState.IDLE
-          : PokemonActionState.HOP
+        [
+          PokemonActionState.HOP,
+          PokemonActionState.EMOTE,
+          PokemonActionState.IDLE
+        ][this.evolutionTimer] ?? PokemonActionState.IDLE
     }
   }
 

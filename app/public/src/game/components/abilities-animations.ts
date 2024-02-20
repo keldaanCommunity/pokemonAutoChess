@@ -1834,6 +1834,13 @@ export function displayAbility(
         .setScale(2)
       break
 
+    case "HATCH":
+      addAbilitySprite("SOFT_BOILED", coordinates, true)
+        .setOrigin(0.5, -0.4)
+        .setDepth(0)
+        .setScale(2)
+      break
+
     default:
       break
   }
