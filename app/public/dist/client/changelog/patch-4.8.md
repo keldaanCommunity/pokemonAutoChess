@@ -83,6 +83,7 @@
 - Fix removal of native type synergy when losing artificial item
 # Misc
 
+- 3 new scribbles rules do discover !
 - Changed "Buyer Fever" scribble: ~~Earn 1 gold every time you evolve an unit by buying from the shop~~ Evolutions in shop are free
 - Thanks to Emeri for his work on the Deutsch translation !
 - Thanks to @Irnox and @SpieleArmy for managing the bot creation <3

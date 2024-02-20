@@ -162,8 +162,7 @@ export const EvolutionTime = {
   EVOLVE_HATCH: 5
 }
 
-export const TandemausEvolutionTurn = 14
-export const MausholdEvolutionTurn = 20
+export const KECLEON_SHOP_COST = 10
 
 export const PoolSize: { [key in Rarity]: [number, number, number] } = {
   [Rarity.COMMON]: [1, 18, 29],

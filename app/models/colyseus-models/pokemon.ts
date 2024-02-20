@@ -27,9 +27,7 @@ import {
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_DAMAGE,
   EvolutionTime,
-  MausholdEvolutionTurn,
   SynergyTriggers,
-  TandemausEvolutionTurn
 } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { AttackType, PokemonActionState, Rarity } from "../../types/enum/Game"
@@ -11207,7 +11205,7 @@ export class Tandemaus extends Pokemon {
   skill = Ability.POPULATION_BOMB
   attackSprite = AttackSprite.NORMAL_MELEE
   evolution = Pkm.MAUSHOLD_THREE
-  evolutionRule = new TurnEvolutionRule(TandemausEvolutionTurn)
+  evolutionRule = new TurnEvolutionRule(14)
   passive = Passive.FAMILY
 }
 
@@ -11224,7 +11222,7 @@ export class MausholdThree extends Pokemon {
   skill = Ability.POPULATION_BOMB
   attackSprite = AttackSprite.NORMAL_MELEE
   evolution = Pkm.MAUSHOLD_FOUR
-  evolutionRule = new TurnEvolutionRule(MausholdEvolutionTurn)
+  evolutionRule = new TurnEvolutionRule(20)
   passive = Passive.FAMILY
 }
 

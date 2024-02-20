@@ -51,5 +51,6 @@ export function getMaxTeamSize(
   specialLobbyRule?: SpecialLobbyRule | null
 ) {
   if (specialLobbyRule === SpecialLobbyRule.SIX_PACK) return 6
+  if (specialLobbyRule === SpecialLobbyRule.CROWDED) return playerLevel + 3
   return playerLevel
 }

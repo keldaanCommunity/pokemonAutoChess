@@ -525,7 +525,8 @@ export default class BoardManager {
       396,
       Pkm.SMEARGLE,
       this.animationManager,
-      this.specialLobbyRule
+      t(`scribble_description.${this.specialLobbyRule}`),
+      t(`scribble.${this.specialLobbyRule}`)
     )
   }
 }

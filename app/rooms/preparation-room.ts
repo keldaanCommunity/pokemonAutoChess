@@ -351,6 +351,7 @@ export default class PreparationRoom extends Room<PreparationState> {
   onDispose() {
     //logger.info("Dispose preparation room")
     this.dispatcher.stop()
+    this.presence.unsubscribe("server-announcement")
   }
 
   status() {

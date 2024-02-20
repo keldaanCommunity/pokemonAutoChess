@@ -2,7 +2,6 @@
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { PokemonActionState } from "../../../../types/enum/Game"
 import { Pkm } from "../../../../types/enum/Pokemon"
-import { SpecialLobbyRule } from "../../../../types/enum/SpecialLobbyRule"
 import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
@@ -13,7 +12,8 @@ import { PokemonSpecialDetail } from "./pokemon-special-detail"
 export default class PokemonSpecial extends PokemonSprite {
   detail: PokemonSpecialDetail | null
   animationManager: AnimationManager
-  specialLobbyRule: SpecialLobbyRule | null
+  dialog?: string
+  dialogTitle?: string
 
   constructor(
     scene: GameScene,
@@ -21,7 +21,8 @@ export default class PokemonSpecial extends PokemonSprite {
     y: number,
     name: Pkm,
     animationManager: AnimationManager,
-    specialLobbyRule: SpecialLobbyRule | null
+    dialog?: string,
+    dialogTitle?: string
   ) {
     super(
       scene,
@@ -36,7 +37,8 @@ export default class PokemonSpecial extends PokemonSprite {
     this.draggable = false
     this.animationManager = animationManager
     this.animationManager.animatePokemon(this, PokemonActionState.IDLE, false)
-    this.specialLobbyRule = specialLobbyRule
+    this.dialog = dialog
+    this.dialogTitle = dialogTitle
   }
 
   onPointerDown(pointer) {
@@ -45,14 +47,18 @@ export default class PokemonSpecial extends PokemonSprite {
   }
 
   openDetail() {
-    if (this.specialLobbyRule) {
+    if (this.dialog) {
       const s = this.scene as GameScene
       if (s.lastPokemonDetail && s.lastPokemonDetail != this) {
         s.lastPokemonDetail.closeDetail()
         s.lastPokemonDetail = null
       }
 
-      this.detail = new PokemonSpecialDetail(this.scene, this.specialLobbyRule)
+      this.detail = new PokemonSpecialDetail(
+        this.scene,
+        this.dialog,
+        this.dialogTitle
+      )
       this.detail.setPosition(
         this.detail.width / 2 + 40,
         min(0)(-this.detail.height / 2 - 40)

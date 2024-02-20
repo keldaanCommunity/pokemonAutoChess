@@ -326,13 +326,13 @@ p:last-child {
   margin-top: -19px;
 }
 
-.game-special-rule {
+.game-pokemon-dialog {
   color: white;
   font-size: 1rem;
   max-width: 300px;
 }
 
-.game-special-rule .rule-name {
+.game-pokemon-dialog .game-pokemon-dialog-title {
   background-color: #4f5160;
   text-transform: capitalize;
   font-variant: small-caps;

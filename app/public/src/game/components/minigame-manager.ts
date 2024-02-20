@@ -1,9 +1,12 @@
+import { t } from "i18next"
 import {
   IFloatingItem,
   IPokemonAvatar,
   IPortal,
   ISynergySymbol
 } from "../../../../types"
+import { Pkm } from "../../../../types/enum/Pokemon"
+import { SpecialLobbyRule } from "../../../../types/enum/SpecialLobbyRule"
 import { logger } from "../../../../utils/logger"
 import { clamp } from "../../../../utils/number"
 import {
@@ -15,6 +18,7 @@ import GameScene from "../scenes/game-scene"
 import { FloatingItem } from "./floating-item"
 import PokemonSprite from "./pokemon"
 import PokemonAvatar from "./pokemon-avatar"
+import PokemonSpecial from "./pokemon-special"
 import { Portal, SynergySymbol } from "./portal"
 
 export default class MinigameManager {
@@ -26,6 +30,7 @@ export default class MinigameManager {
   scene: GameScene
   display: boolean
   animationManager: AnimationManager
+  kecleon: PokemonSpecial | null
 
   constructor(
     scene: GameScene,
@@ -44,7 +49,17 @@ export default class MinigameManager {
     this.animationManager = animationManager
     this.buildPokemons(avatars)
     this.buildItems(items)
-    this.scene.events.on("update", () => this.update())
+  }
+
+  initialize() {
+    this.addKecleon()
+  }
+
+  dispose() {
+    if (this.kecleon) {
+      this.kecleon.destroy()
+      this.kecleon = null
+    }
   }
 
   update() {
@@ -137,6 +152,13 @@ export default class MinigameManager {
 
         case "avatarId":
           itemUI.onGrab(value)
+          if (this.kecleon && value) {
+            this.scene.board?.displayText(
+              960,
+              370,
+              t("kecleon_dialog.thank_you")
+            )
+          }
       }
     }
   }
@@ -317,6 +339,23 @@ export default class MinigameManager {
       }
     } else {
       logger.warn("cant find pokemon for id", pokemon.id)
+    }
+  }
+
+  addKecleon() {
+    if (
+      this.scene.room?.state?.specialLobbyRule ===
+      SpecialLobbyRule.KECLEONS_SHOP
+    ) {
+      this.kecleon = new PokemonSpecial(
+        this.scene,
+        1000,
+        408,
+        Pkm.KECLEON,
+        this.animationManager,
+        t("kecleon_dialog.text"),
+        t("kecleon_dialog.title")
+      )
     }
   }
 }

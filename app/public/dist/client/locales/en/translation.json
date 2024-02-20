@@ -2647,6 +2647,11 @@
   "game_already_started": "Game has already started",
   "min_rank_not_reached": "Your rank is not high enough to play this ranked match",
   "ranked_match": "Ranked Match",
+  "kecleon_dialog": {
+    "title": "Welcome to Kecleon's shop !",
+    "text": "10 GOLD each !",
+    "thank_you": "THANK YOU !"
+  },
   "scribble": {
     "EVERYONE_IS_HERE": "Everyone is here !",
     "UNIQUE_STARTER": "Unique Starter",
@@ -2658,7 +2663,9 @@
     "BUYER_FEVER": "Buyer fever",
     "TECHNOLOGIC": "Technologic",
     "SIX_PACK": "Six Pack",
-    "NINE_LIVES": "Nine Lives"
+    "NINE_LIVES": "Nine Lives",
+    "CROWDED": "Crowded Board",
+    "KECLEONS_SHOP": "Kecleon's Shop"
   },
   "scribble_description": {
     "EVERYONE_IS_HERE": "All the additional picks are available immediately",
@@ -2671,6 +2678,8 @@
     "BUYER_FEVER": "Evolutions in shop are free",
     "TECHNOLOGIC": "Choose between 3 artifacts at stage 3 and 15",
     "SIX_PACK": "You can put 6 units max on your board, no matter your level",
-    "NINE_LIVES": "You are eliminated after losing 9 rounds"
+    "NINE_LIVES": "You are eliminated after losing 9 rounds",
+    "CROWDED": "+3 units max on board",
+    "KECLEONS_SHOP": "Item carousels are replaced by Kecleon's shop, that propose 6 items for 10 GOLD each"
   }
 }

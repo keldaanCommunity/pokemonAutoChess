@@ -19,7 +19,7 @@ import { GamePhaseState } from "../../../../types/enum/Game"
 import { Item, ItemRecipe } from "../../../../types/enum/Item"
 import { Pkm } from "../../../../types/enum/Pokemon"
 import { clearTitleNotificationIcon } from "../../../../utils/window"
-import { getGameContainer, getGameScene } from "../../pages/game"
+import { getGameContainer } from "../../pages/game"
 import { SOUNDS, playMusic, playSound } from "../../pages/utils/audio"
 import { transformCoordinate } from "../../pages/utils/utils"
 import { preferences } from "../../preferences"
@@ -177,6 +177,9 @@ export default class GameScene extends Scene {
     if (this.lastPokemonDetail) {
       this.lastPokemonDetail.updateTooltipPosition()
     }
+    if (this.room?.state?.phase === GamePhaseState.MINIGAME) {
+      this.minigameManager.update()
+    }
   }
 
   registerKeys() {
@@ -224,13 +227,19 @@ export default class GameScene extends Scene {
     this.room?.send(Transfer.REMOVE_FROM_SHOP, index)
   }
 
-  updatePhase() {
+  updatePhase(newPhase: GamePhaseState, previousPhase: GamePhaseState) {
     this.weatherManager?.clearWeather()
     this.resetDragState()
-    if (this.room?.state.phase == GamePhaseState.FIGHT) {
+
+    if (previousPhase === GamePhaseState.MINIGAME) {
+      this.minigameManager.dispose()
+    }
+
+    if (newPhase === GamePhaseState.FIGHT) {
       this.board?.battleMode()
-    } else if (this.room?.state.phase === GamePhaseState.MINIGAME) {
+    } else if (newPhase === GamePhaseState.MINIGAME) {
       this.board?.minigameMode()
+      this.minigameManager.initialize()
     } else {
       this.board?.pickMode()
     }
