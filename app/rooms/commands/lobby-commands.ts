@@ -317,10 +317,17 @@ export class OpenBoosterCommand extends Command<
         user.booster -= 1
         const boosterIndex: string[] = []
 
-        for (let i = 0; i < NB_BOOSTERS; i++) {
+        for (let i = 0; i < NB_BOOSTERS - 1; i++) {
           const pkm = pickRandomPokemonBooster()
           boosterIndex.push(PkmIndex[pkm])
         }
+
+        // last card is guaranteed unique/legendary
+        const pkm = pickRandomIn([
+          ...PRECOMPUTED_POKEMONS_PER_RARITY[Rarity.UNIQUE],
+          ...PRECOMPUTED_POKEMONS_PER_RARITY[Rarity.LEGENDARY]
+        ]) as Pkm
+        boosterIndex.push(PkmIndex[pkm])
 
         boosterIndex.forEach((i) => {
           const c = user.pokemonCollection.get(i)
