@@ -149,3 +149,7 @@
   box-shadow: 0 0.1em 0.25em rgb(0 0 0 / 50%);
   line-height: 1;
 }
+
+.booster-card.shiny .name {
+  color: gold;
+}

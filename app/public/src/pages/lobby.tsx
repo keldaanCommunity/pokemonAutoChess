@@ -10,6 +10,7 @@ import {
   ICustomLobbyState,
   ISuggestionUser,
   NonFunctionPropNames,
+  PkmWithConfig,
   Transfer
 } from "../../../types"
 import { useAppDispatch, useAppSelector } from "../hooks"
@@ -332,7 +333,7 @@ export async function joinLobbyRoom(
 
           room.onMessage(
             Transfer.BOOSTER_CONTENT,
-            (boosterContent: string[]) => {
+            (boosterContent: PkmWithConfig[]) => {
               dispatch(setBoosterContent(boosterContent))
             }
           )

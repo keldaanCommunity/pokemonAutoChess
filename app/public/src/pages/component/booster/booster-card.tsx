@@ -1,17 +1,16 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { getPokemonData } from "../../../../../models/precomputed"
+import { PkmWithConfig } from "../../../../../types"
 import { RarityColor } from "../../../../../types/Config"
-import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
+import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
 import { cc } from "../../utils/jsx"
 import "./booster-card.css"
 
-export function BoosterCard(props: { pkm: string; shards: number }) {
+export function BoosterCard(props: { pkm: PkmWithConfig; shards: number }) {
   const { t } = useTranslation()
-  const pkm: Pkm = (Object.keys(PkmIndex).find(
-    (p) => PkmIndex[p] === props.pkm
-  ) ?? Pkm.DITTO) as Pkm
+  const pkm = props.pkm.name
   const pokemonData = getPokemonData(pkm)
   const style = {
     "--rarity-color": RarityColor[pokemonData.rarity]
@@ -20,7 +19,8 @@ export function BoosterCard(props: { pkm: string; shards: number }) {
     <div
       className={cc(
         "booster-card",
-        "rarity-" + pokemonData.rarity.toLowerCase()
+        "rarity-" + pokemonData.rarity.toLowerCase(),
+        { shiny: props.pkm.shiny }
       )}
       style={style}
       onClick={(e) => e.currentTarget.classList.add("flipped")}
@@ -28,8 +28,14 @@ export function BoosterCard(props: { pkm: string; shards: number }) {
       <div className="back">
         <img src="/assets/ui/pokecard.png" />
       </div>
-      <div className="front">
-        <img src={getPortraitSrc(props.pkm)}></img>
+      <div className={cc("front", { shimmer: !!props.pkm.shiny })}>
+        <img
+          src={getPortraitSrc(
+            PkmIndex[pkm],
+            props.pkm.shiny,
+            props.pkm.emotion
+          )}
+        ></img>
         <div className="front-text">
           <p className="name">{t(`pkm.${pkm}`)}</p>
           <p>
