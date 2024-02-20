@@ -3653,7 +3653,8 @@ export const AnimationConfig: {
   [Pkm.KROKOROK]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Attack,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
   },
   [Pkm.KROOKODILE]: {
     attack: AnimationType.Attack,
@@ -3863,7 +3864,8 @@ export const AnimationConfig: {
   [Pkm.SCOLIPEDE]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Attack,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
   },
   [Pkm.PORYGON]: {
     attack: AnimationType.RearUp,
