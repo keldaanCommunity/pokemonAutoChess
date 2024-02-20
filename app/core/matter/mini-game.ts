@@ -32,7 +32,8 @@ import {
   UniqueShop,
   LegendaryShop,
   PortalCarouselStages,
-  SynergyTriggers
+  SynergyTriggers,
+  KECLEON_SHOP_COST
 } from "../../types/Config"
 import { Synergy } from "../../types/enum/Synergy"
 import GameState from "../../rooms/states/game-state"
@@ -216,6 +217,15 @@ export class MiniGame {
         retentionDelay += randomBetween(1000, 6000)
       }
 
+      if (
+        ItemCarouselStages.includes(stageLevel) &&
+        state.specialLobbyRule === SpecialLobbyRule.KECLEONS_SHOP
+      ) {
+        if (player.money < KECLEON_SHOP_COST) {
+          retentionDelay = Infinity
+        }
+      }
+
       const avatar = new PokemonAvatarModel(
         player.id,
         player.avatar,
@@ -343,6 +353,12 @@ export class MiniGame {
 
     if (specialLobbyRule === SpecialLobbyRule.SYNERGY_WHEEL) {
       itemsSet = SynergyStones
+    }
+
+    if (specialLobbyRule === SpecialLobbyRule.KECLEONS_SHOP) {
+      itemsSet = CraftableItems
+      maxCopiesPerItem = 1
+      nbItemsToPick = 6
     }
 
     for (let j = 0; j < nbItemsToPick; j++) {
@@ -491,6 +507,9 @@ export class MiniGame {
       if (avatar.itemId) {
         const item = this.items?.get(avatar.itemId)
         if (item && player && !player.isBot) {
+          if (state.specialLobbyRule === SpecialLobbyRule.KECLEONS_SHOP) {
+            player.money -= KECLEON_SHOP_COST
+          }
           player.items.add(item.name)
         }
       }

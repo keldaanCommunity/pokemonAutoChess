@@ -2613,21 +2613,27 @@
   "game_already_started": "La partie a déjà commencé",
   "min_rank_not_reached": "Votre rang n'est pas assez élevé pour jouer ce match classé",
   "ranked_match": "Match Classé",
-  "scribble": {
-    "EVERYONE_IS_HERE": "Tout le monde est là !",
-    "UNIQUE_STARTER": "Starter Unique",
-    "OMELETTE_COOK": "Omelette",
-    "SYNERGY_WHEEL": "Roue des Synergies",
-    "DITTO_PARTY": "Fête des Métamorph",
-    "RARE_IS_EXPENSIVE": "Ce qui est rare est cher",
-    "GOTTA_CATCH_EM_ALL": "Attrapez-les tous !",
-    "BUYER_FEVER": "Fièvre acheteuse",
-    "TECHNOLOGIC": "Technologie",
-    "SIX_PACK": "Pack de six",
-    "NINE_LIVES": "Neuf Vies",
-    "CROWDED": "Plateau encombré"
+  "kecleon_dialog": {
+    "title": "Bienvenue au magasin Kecleon !",
+    "text": "C'est 10 GOLD pièce !",
+    "thank_you": "MERCI !"
   },
-  "scribble_description": {
+  "pokemon_dialog": {
+    "title": {
+      "EVERYONE_IS_HERE": "Tout le monde est là !",
+      "UNIQUE_STARTER": "Starter Unique",
+      "OMELETTE_COOK": "Omelette",
+      "SYNERGY_WHEEL": "Roue des Synergies",
+      "DITTO_PARTY": "Fête des Métamorph",
+      "RARE_IS_EXPENSIVE": "Ce qui est rare est cher",
+      "GOTTA_CATCH_EM_ALL": "Attrapez-les tous !",
+      "BUYER_FEVER": "Fièvre acheteuse",
+      "TECHNOLOGIC": "Technologie",
+      "SIX_PACK": "Pack de six",
+      "NINE_LIVES": "Neuf Vies",
+      "CROWDED": "Plateau encombré",
+      "KECLEONS_SHOP": "Magasin de Kecleon"
+    },
     "EVERYONE_IS_HERE": "Tous les Pokémons additionnels sont disponibles immédiatement",
     "UNIQUE_STARTER": "Obtenez un Pokémon Unique au tour 1",
     "OMELETTE_COOK": "Obtenez un Œuf Pokémon après le tour 1, 2 et 3",
@@ -2639,6 +2645,7 @@
     "TECHNOLOGIC": "Choisissez entre 3 objets artificiels aux tours 3 et 15",
     "SIX_PACK": "Vous pouvez mettre 6 unités maximum sur votre plateau, peu importe votre niveau",
     "NINE_LIVES": "Vous êtes éliminés après avoir perdu 9 matchs",
-    "CROWDED": "+3 unités maximum sur le plateau"
+    "CROWDED": "+3 unités maximum sur le plateau",
+    "KECLEONS_SHOP": "Les carousels d'objets sont remplacés par le magasin de Kecleon qui vous propose 6 objets pour 10 GOLD pièce"
   }
 }
