@@ -312,11 +312,12 @@ export class OpenBoosterCommand extends Command<
       if (!user) return
 
       const DUST_PER_BOOSTER = 50
+      const NB_BOOSTERS = 10
       if (user && user.booster && user.booster > 0) {
         user.booster -= 1
         const boosterIndex: string[] = []
 
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < NB_BOOSTERS; i++) {
           const pkm = pickRandomPokemonBooster()
           boosterIndex.push(PkmIndex[pkm])
         }

@@ -6,8 +6,7 @@
 
 #boosters-page > .nes-container {
   position: relative;
-  margin: 1vw 0 0 0;
-  height: 75vh;
+  height: 90vh;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -23,7 +22,8 @@
 
 #boosters-page .actions {
   text-align: center;
-  bottom: 10%;
+  position: relative;
+  bottom: 5%;
 }
 
 #boosters-page .actions button {
@@ -41,8 +41,9 @@
 }
 
 .boosters-content {
-  height: 50%;
+  flex: 1;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 40px;
 }

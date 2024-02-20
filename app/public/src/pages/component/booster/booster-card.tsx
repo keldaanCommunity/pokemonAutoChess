@@ -30,10 +30,12 @@ export function BoosterCard(props: { pkm: string; shards: number }) {
       </div>
       <div className="front">
         <img src={getPortraitSrc(props.pkm)}></img>
-        <p className="name">{t(`pkm.${pkm}`)}</p>
-        <p>
-          {props.shards} {t("shards")}
-        </p>
+        <div className="front-text">
+          <p className="name">{t(`pkm.${pkm}`)}</p>
+          <p>
+            {props.shards} {t("shards")}
+          </p>
+        </div>
       </div>
     </div>
   )
