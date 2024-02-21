@@ -14,7 +14,8 @@ import {
   IChatV2,
   IGameMetadata,
   IPreparationMetadata,
-  ISuggestionUser
+  ISuggestionUser,
+  PkmWithConfig
 } from "../../../types"
 import { SpecialLobbyType } from "../../../types/enum/Game"
 import { Language } from "../../../types/enum/Language"
@@ -37,7 +38,7 @@ export interface IUserLobbyState {
   pastebinUrl: string
   botData: IBot
   pokemonCollection: IPokemonConfig[]
-  boosterContent: string[]
+  boosterContent: PkmWithConfig[]
   suggestions: ISuggestionUser[]
   language: Language
   nextSpecialLobbyDate: string | ""
@@ -194,7 +195,7 @@ export const lobbySlice = createSlice({
     setBotData: (state, action: PayloadAction<IBot>) => {
       state.botData = action.payload
     },
-    setBoosterContent: (state, action: PayloadAction<string[]>) => {
+    setBoosterContent: (state, action: PayloadAction<PkmWithConfig[]>) => {
       state.boosterContent = action.payload
     },
     setSuggestions: (state, action: PayloadAction<ISuggestionUser[]>) => {

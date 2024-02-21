@@ -41,24 +41,24 @@ export const RarityCost: { [key in Rarity]: number } = Object.freeze({
 export const EmotionCost: { [key in Emotion]: number } = {
   [Emotion.NORMAL]: 50,
   [Emotion.HAPPY]: 100,
-  [Emotion.PAIN]: 110,
-  [Emotion.ANGRY]: 120,
-  [Emotion.WORRIED]: 130,
-  [Emotion.SAD]: 140,
-  [Emotion.CRYING]: 150,
-  [Emotion.SHOUTING]: 160,
-  [Emotion.TEARY_EYED]: 170,
-  [Emotion.DETERMINED]: 180,
-  [Emotion.JOYOUS]: 190,
-  [Emotion.INSPIRED]: 200,
-  [Emotion.SURPRISED]: 210,
-  [Emotion.DIZZY]: 220,
-  [Emotion.SPECIAL0]: 230,
-  [Emotion.SPECIAL1]: 240,
-  [Emotion.SIGH]: 250,
-  [Emotion.STUNNED]: 260,
-  [Emotion.SPECIAL2]: 270,
-  [Emotion.SPECIAL3]: 280
+  [Emotion.PAIN]: 100,
+  [Emotion.ANGRY]: 100,
+  [Emotion.WORRIED]: 100,
+  [Emotion.SAD]: 100,
+  [Emotion.CRYING]: 100,
+  [Emotion.SHOUTING]: 150,
+  [Emotion.TEARY_EYED]: 150,
+  [Emotion.DETERMINED]: 150,
+  [Emotion.JOYOUS]: 150,
+  [Emotion.INSPIRED]: 150,
+  [Emotion.SURPRISED]: 150,
+  [Emotion.DIZZY]: 150,
+  [Emotion.SPECIAL0]: 200,
+  [Emotion.SPECIAL1]: 200,
+  [Emotion.SIGH]: 200,
+  [Emotion.STUNNED]: 200,
+  [Emotion.SPECIAL2]: 200,
+  [Emotion.SPECIAL3]: 200
 }
 
 export function getEmotionCost(emotion: Emotion, isShiny: boolean): number {
@@ -957,3 +957,6 @@ export const DTEF_TILESET_TILE_WIDTH = 24
 export const SCRIBBLE_LOBBY_CRON = "0 0 0-20/4 * * *" // every four hours from 00h to 20h
 export const GREATBALL_RANKED_LOBBY_CRON = "0 0 2-22/4 * * *" // every four hours from 2h to 22h
 export const ULTRABALL_RANKED_LOBBY_CRON = "0 0 21 * * 7" // on Sunday at 21h
+
+export const DUST_PER_BOOSTER = 50
+export const DUST_PER_SHINY = 250
