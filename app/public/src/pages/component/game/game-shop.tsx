@@ -12,10 +12,6 @@ import { GameTeamInfo } from "./game-team-info"
 import "./game-shop.css"
 
 export default function GameShop() {
-  // required for reactivity
-  //useAppSelector((state) => state.game.money)
-  //useAppSelector((state) => state.game.shop)
-
   return (
     <>
       <div className="game-shop nes-container">
