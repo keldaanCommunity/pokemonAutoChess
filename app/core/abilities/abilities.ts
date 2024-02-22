@@ -5945,7 +5945,6 @@ export class PoisonGasStrategy extends AbilityStrategy {
             pokemon,
             crit
           )
-          cell.value.status.triggerParalysis(3000, cell.value)
           cell.value.status.triggerPoison(3000, cell.value, pokemon)
         }
       }

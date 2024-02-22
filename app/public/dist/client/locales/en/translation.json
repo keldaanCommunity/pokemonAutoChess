@@ -1251,7 +1251,7 @@
     "TEETER_DANCE": "All other Pokémon are CONFUSION for 3 seconds, allies and enemies alike",
     "CLOSE_COMBAT": "Deals [130,SP] SPECIAL and reduce the caster DEF and SPE_DEF by 2",
     "AQUA_RING": "Dives into the middle of the allied team, creating an aquatic ring that clears negative status and heals [20,30,50,SP] HP",
-    "POISON_GAS": "A cloud of stinky gas is thrown in the face of all adjacent enemies, inflicting [15,30,60,SP] SPECIAL, POISONNED and PARALYSIS for 3 seconds",
+    "POISON_GAS": "A cloud of stinky gas is thrown in the face of all adjacent enemies, inflicting [15,30,60,SP] SPECIAL and POISONNED for 3 seconds",
     "ASSIST": "Copy and cast an ability from an allied pokémon chosen at random",
     "FISSURE": "Open [2,3,4] rifts. Each rift deals [25,50,75,SP] SPECIAL",
     "ASSURANCE": "Deals [25,50,100,SP] SPECIAL. Doubles if the caster in under 50% HP",

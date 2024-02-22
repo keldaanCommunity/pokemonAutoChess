@@ -1198,7 +1198,7 @@
     "TEETER_DANCE": "El resto de pokemon quedan CONFUSION por 3 segundoss, tanto aliados como enemigos",
     "CLOSE_COMBAT": "Inflige [130,SP] de SPECIAL y reduce la DEF y SPE_DEF del atacante en 2",
     "AQUA_RING": "Bucea al medio del equipo aliado, creando un aro de agua que elimina el estado negativo y recupera [20,30,50,SP] HP",
-    "POISON_GAS": "Una nube de gas pestilente es arrojado en la cara de los pokemon enemigos adyacentes, infligiendo [15,30,60,SP] de SPECIAL, dejándolos POISONNED y PARALYSIS por 3 segundos",
+    "POISON_GAS": "Una nube de gas pestilente es arrojado en la cara de los pokemon enemigos adyacentes, infligiendo [15,30,60,SP] de SPECIAL, dejándolos POISONNED por 3 segundos",
     "ASSIST": "Copia y utiliza una habilidad de un pokemon aliado aleatoriamente",
     "FISSURE": "Abre [2,3,4] gretas las cuales causan [25,50,75,SP] de SPECIAL",
     "ASSURANCE": "Inflige [25,50,100,SP] SPECIAL. Doubles if the caster in under 50% HP",

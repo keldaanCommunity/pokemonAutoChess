@@ -50,6 +50,7 @@
 - Buff Electro Web (Joltik): now also deals 15/30 special damage
 - Nerf Hyper Voice (Swablu): ~~45/90/200~~ 40/80/200 special damage
 - Nerf MegaRayquaza attack range: ~~3~~ 2
+- Nerf Poison Gas (Stunky): no longer inflicts Paralysis
 
 # Changes to Synergies
 
