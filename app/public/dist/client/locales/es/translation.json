@@ -1385,7 +1385,7 @@
     "VENOMOUS": "66% de probabilidad de causar POISONNED. Máximo de acumulaciones de POISONNED +1",
     "TOXIC": "100% de probabilidad de causar POISONNED. Máximo de acumulaciones de POISONNED +2",
     "DRAGON_ENERGY": "La segunda sinergia de Dragon cuenta el doble (no la tercera)",
-    "DRAGON_SCALES": "Los dragones ganan 30 HP por STAR",
+    "DRAGON_SCALES": "Los dragones ganan 30 SHIELD por STAR",
     "DRAGON_DANCE": "Los dragones ganan 10% ATK_SPEED y 10% AP por STAR",
     "BULK_UP": "Cura 30 HP y gana 20% ATK_SPEED",
     "RAGE": "Cura 30 HP y gana 25% ATK_SPEED",

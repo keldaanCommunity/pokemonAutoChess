@@ -1157,7 +1157,7 @@
     "VENOMOUS": "66% di possibilità di POISONNED. Pile massime di POISONNED +1",
     "TOXIC": "100% di possibilità di POISONNED. Pile massime di POISONNED +2",
     "DRAGON_ENERGY": "La seconda sinergia di Dragon conta doppio (non la terza)",
-    "DRAGON_SCALES": "I draghi guadagnano 30 HP per STAR",
+    "DRAGON_SCALES": "I draghi guadagnano 30 SHIELD per STAR",
     "DRAGON_DANCE": "I draghi ottengono il 10% di ATK_SPEED e il 10% di AP per STAR",
     "BULK_UP": "Cura 30 HP e ottieni il 20% di ATK_SPEED",
     "RAGE": "Cura 30 HP e ottieni il 25% di ATK_SPEED",

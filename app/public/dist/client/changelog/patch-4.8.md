@@ -60,6 +60,7 @@
 - Baby 7: Egg sell price ~~10~~ 15 gold, no limit for eggs on bench
 - Nerf Dark: ~~40/60/80~~ 40/55/70 % crit chance
 - Nerf Ghost: ~~50%~~ 25% chance to silence for ~~3~~ 2 seconds on attack
+- Change Dragon Scales: ~~30 HP ~~ 30 SHIELD per tier
 
 # Changes to Items
 

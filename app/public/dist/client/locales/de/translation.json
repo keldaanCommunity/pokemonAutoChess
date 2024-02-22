@@ -1312,7 +1312,7 @@
     "VENOMOUS": "66 % Chance auf Vergiftung. Maximale Stapel von POISONNED +1",
     "TOXIC": "100 % Chance auf Vergiftung. Maximale Stapel von POISONNED +2",
     "DRAGON_ENERGY": "Die zweite Synergie des Drachen zählt doppelt (nicht die dritte)",
-    "DRAGON_SCALES": "Drachen erhalten 30 HP pro STAR",
+    "DRAGON_SCALES": "Drachen erhalten 30 SHIELD pro STAR",
     "DRAGON_DANCE": "Drachen erhalten 10 % ATK_SPEED und 10 % AP pro STAR",
     "BULK_UP": "Heile 30 HP und erhalte 20 % ATK_SPEED",
     "RAGE": "Heile 30 HP und erhalte 25 % ATK_SPEED",
