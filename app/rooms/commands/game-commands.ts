@@ -1,5 +1,5 @@
 import { Command } from "@colyseus/command"
-import { MapSchema } from "@colyseus/schema"
+import { MapSchema, ArraySchema } from "@colyseus/schema"
 import { Client, updateLobby } from "colyseus"
 import { nanoid } from "nanoid"
 
@@ -154,7 +154,7 @@ export class OnRemoveFromShopCommand extends Command<
     const name = player.shop[index]
     let cost = PokemonFactory.getBuyPrice(name)
     if (player.money >= cost) {
-      player.shop[index] = Pkm.DEFAULT
+      player.shop = player.shop.with(index, Pkm.DEFAULT) as ArraySchema<Pkm> // waiting for https://github.com/colyseus/schema/pull/165
       this.state.shop.releasePokemon(name)
     }
   }
