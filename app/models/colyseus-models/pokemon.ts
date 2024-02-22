@@ -5059,7 +5059,7 @@ export class Chatot extends Pokemon {
   atk = 20
   def = 2
   speDef = 2
-  maxPP = 100
+  maxPP = 80
   range = 3
   skill = Ability.CHATTER
   attackSprite = AttackSprite.PSYCHIC_RANGE
