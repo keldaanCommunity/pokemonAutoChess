@@ -49,6 +49,7 @@
 - New ability for Palkia: Spatial Rend: Reverse the position of the enemy team, then deals 100 special damage to all ennemies in a row
 - Buff Electro Web (Joltik): now also deals 15/30 special damage
 - Nerf Hyper Voice (Swablu): ~~45/90/200~~ 40/80/200 special damage
+- Nerf MegaRayquaza attack range: ~~3~~ 2
 
 # Changes to Synergies
 

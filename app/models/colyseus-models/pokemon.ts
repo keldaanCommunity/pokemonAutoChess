@@ -27,7 +27,7 @@ import {
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_DAMAGE,
   EvolutionTime,
-  SynergyTriggers,
+  SynergyTriggers
 } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { AttackType, PokemonActionState, Rarity } from "../../types/enum/Game"
@@ -5853,7 +5853,7 @@ export class MegaRayquaza extends Pokemon {
   def = 5
   speDef = 5
   maxPP = 100
-  range = 3
+  range = 2
   skill = Ability.DRACO_METEOR
   passive = Passive.AIRLOCK
   attackSprite = AttackSprite.FIRE_RANGE
