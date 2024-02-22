@@ -1,24 +1,24 @@
 {
-    "compilerOptions": {
-      "outDir": "./app/public/dist/server",
-      "module": "commonjs",
-      "lib": ["es6","DOM"],
-      "target": "es2016",
-      "declaration": true,
-      "removeComments": true,
-      "noImplicitAny": false,
-      "experimentalDecorators": true,
-      "sourceMap": true,
-      "esModuleInterop": true,
-      "strict": true,
-      "allowJs": true,
-      "strictNullChecks": true,
-      "forceConsistentCasingInFileNames": true,
-      "exactOptionalPropertyTypes": true,
-      "noFallthroughCasesInSwitch": true,
-      "resolveJsonModule": true,
-      "jsx": "react-jsx",
-      "skipLibCheck": true
-    },
-    "include": ["./app/*","./scheduled/*","./edit/*","./db-commands/*"]
-  }
+  "compilerOptions": {
+    "outDir": "./app/public/dist/server",
+    "module": "commonjs",
+    "lib": ["es2022", "DOM"],
+    "target": "es2016",
+    "declaration": true,
+    "removeComments": true,
+    "noImplicitAny": false,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "allowJs": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": true,
+    "resolveJsonModule": true,
+    "jsx": "react-jsx",
+    "skipLibCheck": true
+  },
+  "include": ["./app/*", "./scheduled/*", "./edit/*", "./db-commands/*"]
+}

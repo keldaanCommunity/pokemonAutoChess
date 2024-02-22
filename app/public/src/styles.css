@@ -1,3 +1,5 @@
+@import "./nes.css";
+
 @font-face {
   font-family: brandonGrotesque;
   src: url("assets/ui/brandon-grotesque-black.otf") format("opentype");
