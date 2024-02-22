@@ -3818,8 +3818,8 @@ export class Marill extends Pokemon {
   evolution = Pkm.AZUMARILL
   hp = 110
   atk = 9
-  def = 1
-  speDef = 1
+  def = 2
+  speDef = 2
   maxPP = 100
   range = 2
   skill = Ability.PLAY_ROUGH
@@ -3832,8 +3832,8 @@ export class Azumarill extends Pokemon {
   stars = 3
   hp = 200
   atk = 20
-  def = 1
-  speDef = 1
+  def = 3
+  speDef = 3
   maxPP = 100
   range = 2
   skill = Ability.PLAY_ROUGH

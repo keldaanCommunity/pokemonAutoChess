@@ -51,6 +51,7 @@
 - Nerf Hyper Voice (Swablu): ~~45/90/200~~ 40/80/200 special damage
 - Nerf MegaRayquaza attack range: ~~3~~ 2
 - Nerf Poison Gas (Stunky): no longer inflicts Paralysis
+- Buff Marill and Azumarill: def/spedef ~~1/1~~ 2/3
 
 # Changes to Synergies
 
