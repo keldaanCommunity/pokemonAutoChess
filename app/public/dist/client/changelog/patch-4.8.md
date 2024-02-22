@@ -64,6 +64,7 @@
 - Nerf Dark: ~~40/60/80~~ 40/55/70 % crit chance
 - Nerf Ghost: ~~50%~~ 25% chance to silence for ~~3~~ 2 seconds on attack
 - Change Dragon Scales: ~~30 HP ~~ 30 SHIELD per tier
+- Small nerf to Poison: ~~33/66/100~~ 30/60/100% chance to poison on hit
 
 # Changes to Items
 

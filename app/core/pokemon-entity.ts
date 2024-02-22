@@ -731,10 +731,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     let poisonChance = 0
     if (this.effects.has(Effect.POISONOUS)) {
-      poisonChance = 0.33
+      poisonChance = 0.3
     }
     if (this.effects.has(Effect.VENOMOUS)) {
-      poisonChance = 0.66
+      poisonChance = 0.6
     }
     if (this.effects.has(Effect.TOXIC)) {
       poisonChance = 1.0
