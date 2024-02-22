@@ -1685,30 +1685,13 @@ export class HyperVoiceStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
 
-    let damage = 0
-    let confusion = 0
-
-    switch (pokemon.stars) {
-      case 1:
-        damage = 45
-        confusion = 1
-        break
-      case 2:
-        damage = 90
-        confusion = 2
-        break
-      case 3:
-        damage = 200
-        confusion = 3
-        break
-      default:
-        break
-    }
+    const damage = [40, 80, 200][pokemon.stars - 1] ?? 200
+    const confusionDuration = [1000, 2000, 3000][pokemon.stars - 1] ?? 3
 
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team && target.positionY == y) {
         tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-        tg.status.triggerConfusion(confusion * 1000, tg)
+        tg.status.triggerConfusion(confusionDuration, tg)
       }
     })
   }
