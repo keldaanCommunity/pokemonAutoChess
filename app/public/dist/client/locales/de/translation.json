@@ -1642,7 +1642,7 @@
     "CONFUSION": "Zwingt dazu, ständig das Ziel zu wechseln und fügt sich manchmal selbst Schaden zu",
     "WOUND": "Verhindert Heilung aus jeglicher Quelle",
     "RESURECTION": "Verhindert einmal KO und stellt die maximale HP wieder her",
-    "PARALYSIS": "ATK_SPEED um 40 % reduzieren",
+    "PARALYSIS": "ATK_SPEED und Bewegungsgeschwindigkeit um 40 % reduzieren",
     "ARMOR_REDUCTION": "Reduzieren Sie DEF und SPE_DEF um 50 %",
     "CHARM": "Verhindert den Angriff auf das Ziel und zwingt dazu, sich ihm zu nähern",
     "RUNE_PROTECT": "Schützt vor Statusänderungen",

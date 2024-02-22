@@ -1395,6 +1395,9 @@ export function getMoveSpeed(
   if (weather === Weather.SNOW) {
     moveSpeed -= 0.25
   }
+  if (pokemon.status.paralysis) {
+    moveSpeed -= 0.4
+  }
 
   if (pokemon.effects.has(Effect.QUICK_FEET)) {
     moveSpeed += 0.3

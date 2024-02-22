@@ -1697,7 +1697,7 @@
     "CONFUSION": "Fuerza a cambiar de objetivo todo el tiempo y, a veces, infligirse daño a sí mismo.",
     "WOUND": "Previene la curación de cualquier fuente",
     "RESURECTION": "Previene KO una vez, restaurando al máximo HP",
-    "PARALYSIS": "Reduce la ATK_SPEED en un 40%",
+    "PARALYSIS": "Reduce el ATK_SPEED y la velocidad de movimiento un 40%, impide esquivar ataques",
     "ARMOR_REDUCTION": "Reduce la DEF y la SPE_DEF en un 50%",
     "CHARM": "Impide atacar al objetivo y obliga a acercarse a él.",
     "FLINCH": "El daño entrante atraviesa SHIELD",

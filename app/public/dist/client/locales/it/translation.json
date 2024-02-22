@@ -1463,7 +1463,7 @@
     "CONFUSION": "Costringe a cambiare bersaglio tutto il tempo e talvolta si infligge danni",
     "WOUND": "Previene la guarigione da qualsiasi fonte",
     "RESURECTION": "Previene il KO una volta, ripristinando gli HP massimi",
-    "PARALYSIS": "Riduci ATK_SPEED del 40%",
+    "PARALYSIS": "Riduce ATK_SPEED e velocità di movimento del 40%, impedisce di schivare gli attacchi.",
     "ARMOR_REDUCTION": "Riduci DEF e SPE_DEF del 50%",
     "CHARM": "Impedisce di attaccare il bersaglio e costringe ad avvicinarsi ad esso",
     "RUNE_PROTECT": "Protegge dalle alterazioni di stato",
