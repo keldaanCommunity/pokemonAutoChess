@@ -1443,7 +1443,7 @@
     "CONFUSION": "Dwing om de hele tijd van doelwit te veranderen en breng zichzelf soms schade toe",
     "WOUND": "Voorkomt genezing van welke bron dan ook",
     "RESURECTION": "Voorkomt KO eenmaal, herstelt naar max HP",
-    "PARALYSIS": "Verminder ATK_SPEED met 40%",
+    "PARALYSIS": "Vermindert ATK_SPEED en bewegingssnelheid met 40%, voorkomt ontwijken van aanvallen",
     "ARMOR_REDUCTION": "Verminder DEF & SPE_DEF met 50%",
     "CHARM": "Voorkomt het aanvallen van het doelwit en dwingt er dichter bij te komen",
     "RUNE_PROTECT": "Beschermt tegen statuswijzigingen.",

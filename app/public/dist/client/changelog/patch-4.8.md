@@ -77,6 +77,7 @@
 - Changed charm status: Charmed units now move to contact with the unit at the origin of the charm
 - Prevent sandstorm and storm weathers to deal damage after the enemy team is defeated
 - New status: Enraged: increase damage and attack speed by 100%, reduce shield, healing, freeze, sleep and protect status durations by 50%. All units become enraged after 35 seconds of fight.
+- Status paralysis now also reduces move speed by 40%
 
 # UI
 

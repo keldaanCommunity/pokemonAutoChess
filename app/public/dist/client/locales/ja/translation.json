@@ -1443,7 +1443,7 @@
     "CONFUSION": "ターゲットを常に変更し、場合によっては自分自身にダメージを与える",
     "WOUND": "あらゆる原因からの治癒を妨げる",
     "RESURECTION": "一度KOを防ぎ最大HPまで回復",
-    "PARALYSIS": "ATK_SPEEDが40%減少",
+    "PARALYSIS": "ATK_SPEEDと移動速度が40%減少し、攻撃をかわすことができなくなる。",
     "ARMOR_REDUCTION": "DEFとSPE_DEFを50%減少",
     "CHARM": "ターゲットへの攻撃を防ぎ、強制的にターゲットに近づく",
     "RUNE_PROTECT": "状態変化を防ぐ",
