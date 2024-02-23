@@ -48,6 +48,11 @@
 - Nerf Flygon: HP ~~200~~ 180
 - New ability for Palkia: Spatial Rend: Reverse the position of the enemy team, then deals 100 special damage to all ennemies in a row
 - Buff Electro Web (Joltik): now also deals 15/30 special damage
+- Nerf Hyper Voice (Swablu): ~~45/90/200~~ 40/80/200 special damage
+- Nerf MegaRayquaza attack range: ~~3~~ 2
+- Nerf Poison Gas (Stunky): no longer inflicts Paralysis
+- Buff Marill and Azumarill: def/spedef ~~1/1~~ 2/3
+- Buff Chatot: PP ~~100~~ 80
 
 # Changes to Synergies
 
@@ -59,6 +64,8 @@
 - Baby 7: Egg sell price ~~10~~ 15 gold, no limit for eggs on bench
 - Nerf Dark: ~~40/60/80~~ 40/55/70 % crit chance
 - Nerf Ghost: ~~50%~~ 25% chance to silence for ~~3~~ 2 seconds on attack
+- Change Dragon Scales: ~~30 HP ~~ 30 SHIELD per tier
+- Small nerf to Poison: ~~33/66/100~~ 30/60/100% chance to poison on hit
 
 # Changes to Items
 

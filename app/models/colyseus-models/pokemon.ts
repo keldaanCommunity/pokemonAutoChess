@@ -27,7 +27,7 @@ import {
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_DAMAGE,
   EvolutionTime,
-  SynergyTriggers,
+  SynergyTriggers
 } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { AttackType, PokemonActionState, Rarity } from "../../types/enum/Game"
@@ -3818,8 +3818,8 @@ export class Marill extends Pokemon {
   evolution = Pkm.AZUMARILL
   hp = 110
   atk = 9
-  def = 1
-  speDef = 1
+  def = 2
+  speDef = 2
   maxPP = 100
   range = 2
   skill = Ability.PLAY_ROUGH
@@ -3832,8 +3832,8 @@ export class Azumarill extends Pokemon {
   stars = 3
   hp = 200
   atk = 20
-  def = 1
-  speDef = 1
+  def = 3
+  speDef = 3
   maxPP = 100
   range = 2
   skill = Ability.PLAY_ROUGH
@@ -5059,7 +5059,7 @@ export class Chatot extends Pokemon {
   atk = 20
   def = 2
   speDef = 2
-  maxPP = 100
+  maxPP = 80
   range = 3
   skill = Ability.CHATTER
   attackSprite = AttackSprite.PSYCHIC_RANGE
@@ -5853,7 +5853,7 @@ export class MegaRayquaza extends Pokemon {
   def = 5
   speDef = 5
   maxPP = 100
-  range = 3
+  range = 2
   skill = Ability.DRACO_METEOR
   passive = Passive.AIRLOCK
   attackSprite = AttackSprite.FIRE_RANGE
