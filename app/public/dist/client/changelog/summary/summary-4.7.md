@@ -22,4 +22,4 @@ Smeargle's Scribbles are special lobbies popping every four hours that adds a ra
 
 Ghost has been reworked and now put various curses on your opponents. Steel get the previous effect of ghost, that is true damage. Light, Rock and Ice also received balance changes.
 
-Check out the full changelog on Discord !
+Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752/1203281194326954044) !
