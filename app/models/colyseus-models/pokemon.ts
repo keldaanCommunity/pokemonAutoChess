@@ -11131,7 +11131,7 @@ export class HisuianQwilfish extends Pokemon {
   atk = 8
   def = 4
   speDef = 2
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.BARB_BARRAGE
   additional = true
@@ -11150,7 +11150,7 @@ export class Overqwil extends Pokemon {
   atk = 19
   def = 6
   speDef = 4
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.BARB_BARRAGE
   additional = true

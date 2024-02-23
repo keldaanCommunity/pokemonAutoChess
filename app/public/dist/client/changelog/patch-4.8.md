@@ -53,6 +53,7 @@
 - Nerf Poison Gas (Stunky): no longer inflicts Paralysis
 - Buff Marill and Azumarill: def/spedef ~~1/1~~ 2/3
 - Buff Chatot: PP ~~100~~ 80
+- Nerf Hisuian Qwilfish line: PP ~~80~~ 100
 
 # Changes to Synergies
 
