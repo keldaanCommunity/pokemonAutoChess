@@ -1838,9 +1838,9 @@
     "FAIRY_FIELD": "Champ brumeux"
   },
   "status_description": {
-    "BURN": "Inflige 5 % des HP max comme TRUE chaque seconde",
+    "BURN": "Inflige 5 % des HP max comme TRUE chaque seconde. Réduit les soins reçus de 50 %",
     "SILENCE": "Empêche de lancer des capacités et de gagner des PP",
-    "POISONNED": "Inflige 5 % des HP max par pile comme TRUE chaque seconde. Peut s'empiler jusqu'à 3 fois par défaut. Réduit les soins de 20 % par cumul.",
+    "POISONNED": "Inflige 5 % des HP max par pile comme TRUE chaque seconde. Peut s'empiler jusqu'à 3 fois par défaut.",
     "FREEZE": "Empêche de bouger, d'esquiver ou d'attaquer",
     "PROTECT": "Protège de toute source de dégâts, mais empêche le gain de PP",
     "SLEEP": "Empêche de bouger, d'esquiver ou d'attaquer. Recevoir des attaques réduit la durée de l'effet.",
@@ -1900,7 +1900,7 @@
     "DARK": "Les coups critiques des pokémons DARK sont plus puissants et plus fréquents. Les pokémons DARK de mêlée sautent vers la cible la plus éloignée atteignable.",
     "STEEL": "Les pokémons STEEL infligent un pourcentage de leurs dégâts en TRUE",
     "GROUND": "Les pokémons GROUND gagnent un bonus d'ATK, de DEF et de SPE_DEF toutes les 3 secondes",
-    "POISON": "Les pokémons POISON ont une chance d'infliger POISONNED à leur cible pendant 4 secondes avec leurs attaques de base. Le poison inflige TRUE au fil du temps et réduit l'efficacité de la guérison.",
+    "POISON": "Les pokémons POISON ont une chance d'infliger POISONNED à leur cible pendant 4 secondes avec leurs attaques de base. Le poison inflige des TRUE sur la durée.",
     "DRAGON": "Les pokémons DRAGON amplifient leurs synergies et gagnent plus de statistiques lorsqu'ils sont complètement évolués.",
     "FIELD": "Lorsqu'un pokémon FIELD meurt, tous les autres pokémons FIELD sont soignés et gagnent en ATK_SPEED",
     "MONSTER": "Les pokémons MONSTER ont une chance de causer FLINCH sur leur cible. Chaque fois qu'ils mettent KO une unité adverse, ils gagnent en ATK, se soignent et augmentent leurs HP max, et grossissent en taille.",

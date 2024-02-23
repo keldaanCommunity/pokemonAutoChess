@@ -1454,9 +1454,9 @@
     "FAIRY_FIELD": "Campo delle Fate"
   },
   "status_description": {
-    "BURN": "Infligge il 5% degli HP massimi come TRUE ogni secondo",
+    "BURN": "Infligge il 5% degli HP massimi come TRUE ogni secondo. Riduce le cure del 50%.",
     "SILENCE": "Impedisce di lanciare abilità e guadagnare PP",
-    "POISONNED": "Infligge il 5% dei HP massimi per pila come TRUE ogni secondo. Può impilare fino a 3 volte per impostazione predefinita. Riduce le cure del 20% per carica.",
+    "POISONNED": "Infligge il 5% dei HP massimi per pila come TRUE ogni secondo. Può impilare fino a 3 volte per impostazione predefinita.",
     "FREEZE": "Impedisce di muoversi o attaccare",
     "PROTECT": "Protegge da qualsiasi fonte di danno, ma impedisce il guadagno di PP",
     "SLEEP": "Impedisce di muoversi o attaccare. Ricevere attacchi riduce la durata dell'effetto.",
@@ -1513,7 +1513,7 @@
     "DARK": "I colpi critici dei Pokémon DARK sono più potenti e più frequenti. I pokemon Melee Dark saltano verso il bersaglio più lontano raggiungibile.",
     "STEEL": "I pokemon STEEL infliggono una percentuale dei loro danni come TRUE",
     "GROUND": "I pokemon GROUND ottengono bonus ATK, DEF e SPE_DEF ogni 3 secondi.",
-    "POISON": "I pokemon POISON hanno la possibilità di POISONNED il bersaglio per 4 secondi con i loro attacchi base. Il veleno infligge TRUE nel tempo e riduce l'efficienza della guarigione.",
+    "POISON": "I pokemon POISON hanno la possibilità di POISONNED il bersaglio per 4 secondi con i loro attacchi base. Il veleno infligge TRUE nel tempo.",
     "DRAGON": "Il DRAGON amplifica le sinergie e guadagna più statistiche quando è completamente evoluto.",
     "FIELD": "Quando un pokemon di campo muore, tutti gli altri pokemon di campo vengono curati e guadagnano ATK_SPEED",
     "MONSTER": "I Pokemon MONSTER possono FLINCH i loro avversari. Ogni volta che ottengono un KO, guadagnano ATK, guariscono e aumentano i loro HP massimi e crescono di dimensioni.",

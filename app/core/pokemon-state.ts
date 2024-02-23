@@ -39,8 +39,8 @@ export default class PokemonState {
       if (pokemon.effects.has(Effect.BUFF_HEAL_RECEIVED)) {
         heal *= 1.5
       }
-      if (pokemon.status.poisonStacks > 0) {
-        heal *= 1 - pokemon.status.poisonStacks * 0.2
+      if (pokemon.status.burn) {
+        heal *= 0.5
       }
       if (pokemon.status.enraged) {
         heal *= 0.5

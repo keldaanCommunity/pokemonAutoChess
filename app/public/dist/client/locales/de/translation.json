@@ -1633,9 +1633,9 @@
     "FAIRY_FIELD": "Feenfeld"
   },
   "status_description": {
-    "BURN": "Verursacht jede Sekunde 5 % der maximalen HP als TRUE",
+    "BURN": "Verursacht jede Sekunde 5 % der maximalen HP als TRUE. Reduziert die Heilung um 50 %.",
     "SILENCE": "Verhindert das Wirken von Fähigkeiten und das Erhalten von PP",
-    "POISONNED": "Verursacht jede Sekunde 5 % der maximalen HP pro Stapel als TRUE. Standardmäßig bis zu 3-fach stapelbar. Reduziert die Heilung pro Stapel um 20 %.",
+    "POISONNED": "Verursacht jede Sekunde 5 % der maximalen HP pro Stapel als TRUE. Standardmäßig bis zu 3-fach stapelbar.",
     "FREEZE": "Verhindert Bewegungen oder Angriffe",
     "PROTECT": "Schützt vor jeder Schadensquelle, verhindert aber den PP-Gewinn",
     "SLEEP": "Verhindert Bewegungen oder Angriffe. Das Empfangen von Angriffen verringert die Dauer des Effekts.",
@@ -1692,7 +1692,7 @@
     "DARK": "Kritische Treffer dunkler Pokémon sind stärker und häufiger. Dunkle DARK Pokémon springen zum am weitesten entfernten erreichbaren Ziel.",
     "STEEL": "STEEL Pokemon verursachen einen Prozentsatz ihres Schadens als TRUE",
     "GROUND": "GROUND Pokémons erhalten alle 3 Sekunden Bonus-ATK, DEF und SPE_DEF.",
-    "POISON": "POISON Pokémons haben die Chance, ihr Ziel mit ihren Grundangriffen 4 Sekunden lang zu VERGIFTEN. Gift verursacht mit der Zeit TRUE und verringert die Heilungseffizienz.",
+    "POISON": "POISON Pokémons haben die Chance, ihr Ziel mit ihren Grundangriffen 4 Sekunden lang zu VERGIFTEN. Gift verursacht mit der Zeit TRUE.",
     "DRAGON": "DRAGON verstärkt Synergien und erhält mehr Werte, wenn er vollständig entwickelt ist.",
     "FIELD": "Wenn ein FIELD pokemon stirbt, werden alle anderen Feldpokemon geheilt und erhalten ATK_SPEED",
     "MONSTER": "MONSTER Pokémons können ihre Gegner FLINCH. Jedes Mal, wenn sie einen KO erleiden, erhalten sie ATK, heilen sich, erhöhen ihre maximalen HP und werden größer.",

@@ -1688,9 +1688,9 @@
     "FAIRY_FIELD": "Campo de hadas"
   },
   "status_description": {
-    "BURN": "Reparte el 5 % del HP máximo como TRUE cada segundo",
+    "BURN": "Reparte el 5 % del HP máximo como TRUE cada segundo. Reduce la curación en un 50%.",
     "SILENCE": "Evita lanzar habilidades y ganar PP",
-    "POISONNED": "Reparte el 5 % del HP máximo por acumulación como TRUE cada segundo. Se puede apilar hasta 3 veces por defecto. Reduce la curación en un 20% por acumulación.",
+    "POISONNED": "Reparte el 5 % del HP máximo por acumulación como TRUE cada segundo. Se puede apilar hasta 3 veces por defecto.",
     "FREEZE": "Evita moverse o atacar",
     "PROTECT": "Protege de cualquier fuente de daño, pero evita la ganancia de PP",
     "SLEEP": "Evita moverse o atacar. Recibir ataques reduce la duración del efecto.",
@@ -1748,7 +1748,7 @@
     "DARK": "Los golpes críticos de los Pokémon DARK son más poderosos y más frecuentes. Los Pokémon Melee Dark saltan al objetivo más lejano alcanzable.",
     "STEEL": "Los pokémon STEEL infligen un porcentaje de su daño como TRUE",
     "GROUND": "Los Pokémon GROUND obtienen ATK, DEF y SPE_DEF adicionales cada 3 segundos.",
-    "POISON": "Los Pokémon POISON tienen la posibilidad de POISONNED a su objetivo durante 4 segundos con sus ataques básicos. El veneno inflige TRUE con el tiempo y reduce la eficiencia de curación.",
+    "POISON": "Los Pokémon POISON tienen la posibilidad de POISONNED a su objetivo durante 4 segundos con sus ataques básicos. El veneno inflige TRUE con el tiempo.",
     "DRAGON": "DRAGON amplifica las sinergias y gana más estadísticas cuando está completamente evolucionado.",
     "FIELD": "Cuando un Pokémon FIELD muere, todos los demás Pokémon de campo se curan y ganan ATK_SPEED",
     "MONSTER": "Los pokemon MONSTER pueden dejar FLINCH a sus oponentes durante 2s. Cada vez que obtienen un KO, ganan ATK, se curan y aumentan su HP máximo, y crecen en tamaño.",

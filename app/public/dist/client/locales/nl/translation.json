@@ -1434,9 +1434,9 @@
     "FAIRY_FIELD": "Sprookjesveld"
   },
   "status_description": {
-    "BURN": "Behandelt elke seconde 5% van de maximale HP als TRUE",
+    "BURN": "Behandelt elke seconde 5% van de maximale HP als TRUE. Verminder genezing met 50%.",
     "SILENCE": "Voorkomt castingvaardigheden en het verkrijgen van PP",
-    "POISONNED": "Behandelt elke seconde 5% van het maximale aantal HP per stapel als TRUE. Kan standaard tot 3 keer stapelen. Verminder genezing met 20% per stapel.",
+    "POISONNED": "Behandelt elke seconde 5% van het maximale aantal HP per stapel als TRUE. Kan standaard tot 3 keer stapelen.",
     "FREEZE": "Voorkomt bewegen of aanvallen",
     "PROTECT": "Beschermt tegen elke vorm van schade, maar voorkomt PP-winst",
     "SLEEP": "Voorkomt bewegen of aanvallen. Het ontvangen van aanvallen vermindert de duur van het effect.",
@@ -1493,7 +1493,7 @@
     "DARK": "Critical hits van DARK Pokemons zijn krachtiger en komen vaker voor. Melee Dark Pokemons springen naar het verst bereikbare doelwit.",
     "STEEL": "STEEL pokemons delen een percentage van hun schade uit als TRUE",
     "GROUND": "GROUND pokemons krijgen bonus ATK, DEF en SPE_DEF elke 3 seconden.",
-    "POISON": "POISON pokemons hebben een kans om hun doelwit 4 seconden te POISONNED met hun basisaanvallen. Gif veroorzaakt TRUE in de loop van de tijd en vermindert de genezingsefficiëntie.",
+    "POISON": "POISON pokemons hebben een kans om hun doelwit 4 seconden te POISONNED met hun basisaanvallen. Gif veroorzaakt TRUE in de loop van de tijd.",
     "DRAGON": "DRAGON versterkt synergieën en krijgt meer statistieken wanneer hij volledig is geëvolueerd.",
     "FIELD": "Wanneer een FIELD pokemon sterft, worden alle andere veld-pokemons genezen en krijgen ze ATK_SPEED",
     "MONSTER": "MONSTER Pokémon kunnen hun tegenstanders FLINCH. Elke keer dat ze een KO krijgen, krijgen ze ATK, genezen ze en verhogen ze hun maximale HP, en worden ze groter.",
