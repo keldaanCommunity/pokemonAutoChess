@@ -11919,8 +11919,8 @@ export class Aipom extends Pokemon {
   evolution = Pkm.AMBIPOM
   hp = 70
   atk = 7
-  def = 4
-  speDef = 4
+  def = 2
+  speDef = 2
   maxPP = 80
   range = 1
   skill = Ability.TICKLE
@@ -11933,8 +11933,8 @@ export class Ambipom extends Pokemon {
   stars = 2
   hp = 130
   atk = 14
-  def = 2
-  speDef = 2
+  def = 4
+  speDef = 4
   maxPP = 80
   range = 1
   skill = Ability.TICKLE
