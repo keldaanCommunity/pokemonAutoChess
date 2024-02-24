@@ -655,9 +655,9 @@ export class OnUpdateCommand extends Command<
 
         this.state.simulations.forEach((simulation) => {
           if (!simulation.finished) {
+            simulation.update(deltaTime)
             everySimulationFinished = false
           }
-          simulation.update(deltaTime)
         })
 
         if (everySimulationFinished && !this.state.updatePhaseNeeded) {
