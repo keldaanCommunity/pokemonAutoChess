@@ -2634,22 +2634,22 @@
     "text": "C'est 10 GOLD pièce !",
     "thank_you": "MERCI !"
   },
-  "pokemon_dialog": {
-    "title": {
-      "EVERYONE_IS_HERE": "Tout le monde est là !",
-      "UNIQUE_STARTER": "Starter Unique",
-      "OMELETTE_COOK": "Omelette",
-      "SYNERGY_WHEEL": "Roue des Synergies",
-      "DITTO_PARTY": "Fête des Métamorph",
-      "RARE_IS_EXPENSIVE": "Ce qui est rare est cher",
-      "GOTTA_CATCH_EM_ALL": "Attrapez-les tous !",
-      "BUYER_FEVER": "Fièvre acheteuse",
-      "TECHNOLOGIC": "Technologie",
-      "SIX_PACK": "Pack de six",
-      "NINE_LIVES": "Neuf Vies",
-      "CROWDED": "Plateau encombré",
-      "KECLEONS_SHOP": "Magasin de Kecleon"
-    },
+  "scribble": {
+    "EVERYONE_IS_HERE": "Tout le monde est là !",
+    "UNIQUE_STARTER": "Starter Unique",
+    "OMELETTE_COOK": "Omelette",
+    "SYNERGY_WHEEL": "Roue des Synergies",
+    "DITTO_PARTY": "Fête des Métamorph",
+    "RARE_IS_EXPENSIVE": "Ce qui est rare est cher",
+    "GOTTA_CATCH_EM_ALL": "Attrapez-les tous !",
+    "BUYER_FEVER": "Fièvre acheteuse",
+    "TECHNOLOGIC": "Technologie",
+    "SIX_PACK": "Pack de six",
+    "NINE_LIVES": "Neuf Vies",
+    "CROWDED": "Plateau encombré",
+    "KECLEONS_SHOP": "Magasin de Kecleon"
+  },
+  "scribble_description": {
     "EVERYONE_IS_HERE": "Tous les Pokémons additionnels sont disponibles immédiatement",
     "UNIQUE_STARTER": "Obtenez un Pokémon Unique au tour 1",
     "OMELETTE_COOK": "Obtenez un Œuf Pokémon après le tour 1, 2 et 3",
