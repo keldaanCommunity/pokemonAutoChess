@@ -8021,6 +8021,7 @@ export class TypeNull extends Pokemon {
   range = 1
   skill = Ability.RKS_SYSTEM
   attackSprite = AttackSprite.NORMAL_MELEE
+  passive = Passive.TYPE_NULL
 }
 
 export class SilvallyFire extends Pokemon {
