@@ -266,7 +266,7 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateRage(dt: number, pokemon: PokemonEntity) {
-    if (this.enrageDelay - dt <= 0) {
+    if (this.enrageDelay - dt <= 0 && !pokemon.simulation.finished) {
       this.enraged = true
       this.protect = false
       pokemon.addAttackSpeed(100)
