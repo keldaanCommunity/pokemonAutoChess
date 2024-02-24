@@ -433,7 +433,7 @@ export default class Simulation extends Schema implements ISimulation {
       pokemon.addDodgeChance(0.1)
     }
 
-    if (pokemon.items.has(Item.FLAME_ORB)) {
+    if (item === Item.FLAME_ORB) {
       pokemon.addAttack(pokemon.baseAtk)
       pokemon.status.triggerBurn(
         60000,
@@ -442,7 +442,7 @@ export default class Simulation extends Schema implements ISimulation {
       )
     }
 
-    if (pokemon.items.has(Item.TOXIC_ORB)) {
+    if (item === Item.TOXIC_ORB) {
       pokemon.addAttack(pokemon.baseAtk)
       pokemon.status.triggerPoison(
         60000,
@@ -451,7 +451,7 @@ export default class Simulation extends Schema implements ISimulation {
       )
     }
 
-    if (pokemon.items.has(Item.FLUFFY_TAIL)) {
+    if (item === Item.FLUFFY_TAIL) {
       pokemon.status.triggerRuneProtect(60000)
     }
   }
