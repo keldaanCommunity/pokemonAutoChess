@@ -30,6 +30,7 @@
     "GROWL": "Rugissement",
     "RELIC_SONG": "Chant Antique",
     "DISARMING_VOICE": "Voix Enjôleuse",
+    "FAIRY_WIND": "Vent Féérique",
     "HIGH_JUMP_KICK": "Pied Voltige",
     "GRASS_WHISTLE": "Siffl'Herb",
     "TRI_ATTACK": "Triplattaque",
@@ -298,7 +299,9 @@
     "FURY_SWIPES": "Combo-Griffe",
     "TICKLE": "Chatouille",
     "AROMATHERAPY": "Aromathérapie",
-    "DETECT": "Détection"
+    "DETECT": "Détection",
+    "SPACIAL_REND": "Spatio-Rift",
+    "RKS_SYSTEM": "Système Alpha"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -532,6 +535,7 @@
     "LANDORUS": "Démétéros",
     "THUNDURUS": "Fulguris",
     "TORNADUS": "Boréas",
+    "ENAMORUS": "Amovénus",
     "KELDEO": "Keldeo",
     "TERRAKION": "Terrakium",
     "VIRIZION": "Viridium",
@@ -816,6 +820,7 @@
     "HITMONCHAN": "Tygnon",
     "HITMONTOP": "Kapoera",
     "MIMIKYU": "Mimiqui",
+    "MIMIKYU_BUSTED": "Mimiqui (cassé)",
     "GRIMER": "Tadmorv",
     "MUK": "Grotadmorv",
     "ALOLAN_GRIMER": "Tadmorv d'Alola",
