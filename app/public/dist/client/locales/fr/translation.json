@@ -1250,7 +1250,7 @@
     "SCREECH": "Réduit la DEF de tous les ennemis adjacents de [1,2,4,SP]",
     "SAND_TOMB": "Inflige [10,20,40,SP] SPECIAL ainsi que SILENCE and PARALYSIS pendant 3/5/8 secondes",
     "WHIRLWIND": "Inflige [40,80,120,SP] SPECIAL et envoie la cible voler au loin",
-    "EMPTY_LIGHT": "Projette du poison sur l'ennemi, infligeant [60,SP] SPECIAL et réduisant sa SPE_DEF de 3. Le poison rebondit ensuite sur un autre pokémon avec une plus faible SPE_DEF (5 rebonds maximum)",
+    "EMPTY_LIGHT": "Projette du poison sur l'ennemi, infligeant [40,SP] SPECIAL et réduisant sa SPE_DEF de 3. Le poison rebondit ensuite sur un autre pokémon avec une plus faible SPE_DEF (5 rebonds maximum)",
     "UNBOUND": "Se libère de ses chaînes pour devenir la vraie forme de Hoopa et gagner une grande puissance",
     "HYPERSPACE_FURY": "Avec ses nombreux bras, déclenche une pluie de [4,SP] coups. Chaque coup descend la DEF de la cible de 1.",
     "SNIPE_SHOT": "Tire un jet d'eau du bout de son index sur l'adversaire le plus éloigné, infligeant [50,100,200,SP] SPECIAL à tous les adversaires sur le chemin.",
