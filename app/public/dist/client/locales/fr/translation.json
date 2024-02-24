@@ -1022,6 +1022,7 @@
     "GROWL": "Inflige FLINCH à toute l'équipe ennemie pendant [3,6,9,SP] secondes",
     "RELIC_SONG": "Émet une note. Après la troisième note, SLEEP toute l'équipe ennemie pendant [2,SP=0.5] secondes",
     "FAIRY_WIND": "Donne [10,20,30,SP=0.5] PP à tous les alliés sauf l'utilisateur",
+    "DISARMING_VOICE": "Les ennemis dans un rayon de 2 cases sont CHARMED pendant [1,SP] secondes.",
     "HIGH_JUMP_KICK": "Inflige [50,100,200,SP] SPECIAL et vole tout le PP de la cible",
     "GRASS_WHISTLE": "SLEEP [1,2,4] ennemis pendant 2 secondes",
     "TRI_ATTACK": "Inflige [30,50,70,SP] SPECIAL. Inflige BURN, FREEZE ou PARALYSIS à la cible.",
@@ -1290,7 +1291,9 @@
     "FURY_SWIPES": "L'ennemi est lacéré par des faux ou des griffes, causant [2,SP] à [5,SP] attaques d'affilée en PHYSICAL",
     "TICKLE": "Réduit l'ATK et la DEF des [1,2] ennemis les plus proches de [3,SP]",
     "AROMATHERAPY": "Supprime les effets négatfs de statut des alliés adjacents et les soigne de [20,40,80,SP] HP",
-    "DETECT": "Donne PROTECT aux alliés adjacents pendant [0.5,SP] secondes mutiplié par le nombre d'ennemis adjacents"
+    "DETECT": "Donne PROTECT aux alliés adjacents pendant [0.5,SP] secondes mutiplié par le nombre d'ennemis adjacents",
+    "SPACIAL_REND": "Inverse les position des unités ennemies, puis inflige [100,SP] SPECIAL à tous les ennemis d'une rangée",
+    "RKS_SYSTEM": "Inflige [30,SP] SPECIAL aux ennemis adjacents. Soigne les pokémons adjacents pour [20,SP] HP s'ils ont un type en commun avec le lanceur"
   },
   "effect": {
     "INGRAIN": "Enraciné",
@@ -1739,6 +1742,7 @@
     "SHARED_VISION": "Vision partagée: tous les Pokémon avec vision partagée attaquent la même cible, si elle est à portée",
     "WATER_SPRING": "Chaque fois qu'un ennemi utilise sa capacité, gagne 5 PP",
     "MAGIKARP": "8 Magikarp évoluent en Léviator",
+    "FEEBAS": "6 $t(pkm.FEEBAS) évoluent en $t(pkm.MILOTIC)",
     "GIRATINA": "Giratina bascule entre sa forme altérée et sa forme d'origine en fonction de sa position sur le plateau",
     "UNOWN": "Zarbi ne peut pas tenir d'objets et disparaît après un combat ou après avoir lancé sa capacité",
     "GLIGAR": "Gligar recherche un RAZOR_FANG. Si le Pokémon souffre du POISONNED, il gagnera des HP au lieu de subir des dégâts.",
@@ -1784,7 +1788,10 @@
     "CELEBI": "Le joueur regagne 1 HP chaque fois que $t(pkm.CELEBI) utilise $t(ability.TIME_TRAVEL).",
     "GIMMIGHOUL": "$t(pkm.GIMMIGHOUL) a besoin de 99 GOLD",
     "GHOLDENGO": "Au début de chaque combat, si le joueur a 50 GOLD ou plus, $t(pkm.GHOLDENGO) gagne RUNE_PROTECT pendant tout le combat",
-    "METEOR": "$t(pkm.MINIOR) alterne entre sa forme Météore et ses formes Noyau. La forme Météore octroie [4,SP]% ATK_SPEED par attaque.\nLes attaques en forme Noyau infligent des effets supplémentaires à la cible et aux ennemis adjacents:\nRouge: inflige 150% PHYSICAL\nBleu: inflige 100% SPECIAL\nOrange: inflige 50% TRUE\nVert: les dégats d'attaque soignent les alliés adjacents"
+    "METEOR": "$t(pkm.MINIOR) alterne entre sa forme Météore et ses formes Noyau. La forme Météore octroie [4,SP]% ATK_SPEED par attaque.\nLes attaques en forme Noyau infligent des effets supplémentaires à la cible et aux ennemis adjacents:\nRouge: inflige 150% PHYSICAL\nBleu: inflige 100% SPECIAL\nOrange: inflige 50% TRUE\nVert: les dégats d'attaque soignent les alliés adjacents",
+    "MIMIKYU": "Sous les 50% de HP, Mimiqui bascule en forme cassée, gagnant 30% ATK_SPEED et PROTECT pendant 2 secondes",
+    "MIMIKYU_BUSTED": "Son cou est cassé. Mimiqui n'oubliera jamais la personne qui a endommagé son costume.",
+    "HUNGER_SWITCH": "$t(pkm.MORPEKO) alterne entre sa forme rassasiée et affamée.\nLes attaques en forme rassasiée infligent PARALYSIS pendant 2 secondes.\nLes attaques en forme affamée infligent WOUND pendant 4 secondes."
   },
   "stat": {
     "ATK": "Attaque",
