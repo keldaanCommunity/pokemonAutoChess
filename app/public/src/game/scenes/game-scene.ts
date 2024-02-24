@@ -177,7 +177,10 @@ export default class GameScene extends Scene {
     if (this.lastPokemonDetail) {
       this.lastPokemonDetail.updateTooltipPosition()
     }
-    if (this.room?.state?.phase === GamePhaseState.MINIGAME) {
+    if (
+      this.room?.state?.phase === GamePhaseState.MINIGAME &&
+      this.minigameManager
+    ) {
       this.minigameManager.update()
     }
   }
