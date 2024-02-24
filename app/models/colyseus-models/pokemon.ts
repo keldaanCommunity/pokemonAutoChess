@@ -11908,7 +11908,7 @@ export class Ursaluna extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.FURY_SWIPES
+  skill = Ability.DEFAULT //Ability.FURY_SWIPES
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
