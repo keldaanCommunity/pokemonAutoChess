@@ -1268,7 +1268,7 @@
     "SCREECH": "Reduce DEF of all adjacent enemies by [1,2,4,SP]",
     "SAND_TOMB": "Deals [10,20,40,SP] SPECIAL, inflicting SILENCE and PARALYSIS for 3/5/8 seconds",
     "WHIRLWIND": "Deals [40,80,120,SP] SPECIAL and make the target fly away",
-    "EMPTY_LIGHT": "Spits poison directly at an enemy, inflicting [60,SP] SPECIAL and reducing its SPE_DEF by 3. The ability then rebounds on another Pokemon with a lower SPE_DEF. (5 bounces maximum)",
+    "EMPTY_LIGHT": "Spits poison directly at an enemy, inflicting [40,SP] SPECIAL and reducing its SPE_DEF by 3. The ability then rebounds on another Pokemon with a lower SPE_DEF. (5 bounces maximum)",
     "UNBOUND": "Unbinds itself to become Hoopa's true form and get a humongous amount of power",
     "HYPERSPACE_FURY": "Using its many arms, unleashes a barrage of [4,SP] attacks. Each attack lowers the target DEF by 1.",
     "SNIPE_SHOT": "Fires a shot of water from its index fingertips at the farthest opponent, dealing [50,100,200,SP] SPECIAL to all opponents in the way",
