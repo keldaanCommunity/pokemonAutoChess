@@ -1,6 +1,7 @@
 import { Room } from "colyseus.js"
 import Phaser from "phaser"
 import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin.js"
+import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin.js"
 import React from "react"
 import { toast } from "react-toastify"
 import { DesignTiled } from "../../../core/design"
@@ -238,6 +239,11 @@ class GameContainer {
           {
             key: "rexMoveTo",
             plugin: MoveToPlugin,
+            start: true
+          },
+          {
+            key: "rexOutline",
+            plugin: OutlinePlugin,
             start: true
           }
         ]
