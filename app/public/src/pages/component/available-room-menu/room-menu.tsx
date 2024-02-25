@@ -13,7 +13,7 @@ import {
   IPreparationMetadata,
   Role
 } from "../../../../../types"
-import { MAX_PLAYERS_PER_LOBBY } from "../../../../../types/Config"
+import { MAX_PLAYERS_PER_GAME } from "../../../../../types/Config"
 import { GameMode } from "../../../../../types/enum/Game"
 import { throttle } from "../../../../../utils/function"
 import { logger } from "../../../../../utils/logger"
@@ -86,8 +86,10 @@ export default function RoomMenu(props: {
     selectedRoom: RoomAvailable<IPreparationMetadata>
   ) {
     if (
-      selectedRoom.clients >= MAX_PLAYERS_PER_LOBBY ||
-      selectedRoom.metadata?.gameStarted === true
+      selectedRoom.clients >= MAX_PLAYERS_PER_GAME ||
+      selectedRoom.metadata?.gameStarted === true ||
+      (selectedRoom.metadata?.whitelist &&
+        selectedRoom.metadata?.whitelist.includes(uid) === false)
     ) {
       return
     }

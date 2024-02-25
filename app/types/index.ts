@@ -583,6 +583,7 @@ export interface IPreparationMetadata {
   gameStarted: boolean
   minRank: string | null
   gameMode: GameMode
+  whitelist: string[] | null
 }
 
 export interface IGameMetadata {

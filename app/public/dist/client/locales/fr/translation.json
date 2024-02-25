@@ -2642,9 +2642,10 @@
     "ULTRABALL": "Hyperball",
     "MASTERBALL": "Masterball"
   },
-  "lobby_full": "Le lobby est complet",
+  "game_full": "Ce groupe est complet",
   "game_already_started": "La partie a déjà commencé",
   "min_rank_not_reached": "Votre rang n'est pas assez élevé pour jouer ce match classé",
+  "not_whitelisted": "Cette partie est réservée à une liste blanche de joueurs",
   "ranked_match": "Match Classé",
   "kecleon_dialog": {
     "title": "Bienvenue au magasin Kecleon !",

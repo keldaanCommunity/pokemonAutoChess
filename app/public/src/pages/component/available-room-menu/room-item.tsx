@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next"
 import { IPreparationMetadata } from "../../../../../types"
 import {
   EloRankThreshold,
-  MAX_PLAYERS_PER_LOBBY
+  MAX_PLAYERS_PER_GAME
 } from "../../../../../types/Config"
 import { GameMode } from "../../../../../types/enum/Game"
 import { useAppSelector } from "../../../hooks"
@@ -20,12 +20,19 @@ export default function RoomItem(props: {
 
   let canJoin = true,
     disabledReason: string | null = null
-  if (props.room.clients >= MAX_PLAYERS_PER_LOBBY) {
+  if (props.room.clients >= MAX_PLAYERS_PER_GAME) {
     canJoin = false
-    disabledReason = t("lobby_full")
+    disabledReason = t("game_full")
   } else if (props.room.metadata?.gameStarted === true) {
     canJoin = false
     disabledReason = t("game_already_started")
+  } else if (
+    props.room.metadata?.whitelist &&
+    user?.id &&
+    props.room.metadata?.whitelist.includes(user.id) === false
+  ) {
+    canJoin = false
+    disabledReason = t("not_whitelisted")
   } else if (
     props.room.metadata?.minRank != null &&
     (user?.elo ?? 0) < EloRankThreshold[props.room.metadata?.minRank]
@@ -77,7 +84,7 @@ export default function RoomItem(props: {
         />
       )}
       <span>
-        {props.room.clients}/{MAX_PLAYERS_PER_LOBBY}
+        {props.room.clients}/{MAX_PLAYERS_PER_GAME}
       </span>
       <button
         title={disabledReason ?? t("join")}
@@ -88,7 +95,7 @@ export default function RoomItem(props: {
         )}
         onClick={() => {
           if (
-            props.room.clients < MAX_PLAYERS_PER_LOBBY &&
+            props.room.clients < MAX_PLAYERS_PER_GAME &&
             props.room.metadata?.gameStarted !== true
           ) {
             props.click(props.room)

@@ -32,7 +32,7 @@ import {
   ITEM_CAROUSEL_BASE_DURATION,
   ItemCarouselStages,
   ItemProposalStages,
-  MAX_PLAYERS_PER_LOBBY,
+  MAX_PLAYERS_PER_GAME,
   PORTAL_CAROUSEL_BASE_DURATION,
   PortalCarouselStages,
   StageDuration
@@ -618,7 +618,7 @@ export class OnJoinCommand extends Command<
         /*logger.info(
           `${client.auth.displayName} (${client.id}) joined game room ${this.room.roomId}`
         )*/
-        if (this.state.players.size >= MAX_PLAYERS_PER_LOBBY) {
+        if (this.state.players.size >= MAX_PLAYERS_PER_GAME) {
           const humanPlayers = players.filter((p) => !p.isBot)
           if (humanPlayers.length === 1) {
             humanPlayers[0].titles.add(Title.LONE_WOLF)
