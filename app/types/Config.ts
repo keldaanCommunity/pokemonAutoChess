@@ -240,7 +240,8 @@ export const UniqueShop = new Array<PkmProposition>(
   Pkm.CYCLIZAR,
   Pkm.MINIOR,
   Pkm.MORPEKO,
-  Pkm.TYPE_NULL
+  Pkm.TYPE_NULL,
+  Pkm.KANGASKHAN
 )
 
 export const LegendaryShop = new Array<PkmProposition>(
