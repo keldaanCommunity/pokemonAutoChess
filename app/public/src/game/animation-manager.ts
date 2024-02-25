@@ -283,7 +283,7 @@ export default class AnimationManager {
     animation: AnimationType,
     config: { flip?: boolean; repeat?: number; lock?: boolean } = {}
   ) {
-    if (entity.animationLocked) return
+    if (entity.animationLocked || !entity.sprite?.anims) return
 
     const orientation = config.flip
       ? OrientationFlip[entity.orientation]
