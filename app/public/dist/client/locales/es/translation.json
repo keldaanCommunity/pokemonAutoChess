@@ -1229,7 +1229,7 @@
     "INFERNAL_PARADE": "Lanza una rueda flamígera de ida y vuelta con 50% chance de dejar BURN por 3s y golpeando [30, SP] de SPECIAL 2 veces a los pokemon con los que choca",
     "RETALIATE": "Inflige [15,30,60,SP] de SPECIAL al objetivo + [10,15,25,SP] de SPECIAL adicional por aliado caido",
     "SLASH": "Inflige [10,20,40,SP] de SPECIAL con un [30,60,90]% aumentado de CRIT_CHANCE",
-    "OUTRAGE": "El pokemon queda CONFUSION por 2s e inflige [2,3,4,SP] ATK como SPECIAL al objetivo y enemigos adyacentes",
+    "OUTRAGE": "El pokemon queda CONFUSION por 2 segundos e inflige [200,300,400,SP]% ATK como SPECIAL al objetivo y enemigos adyacentes",
     "LUNGE": "Salta al oponente con el ATK mas alto,le inflige [50,SP] de SPECIAL y le reduce su ataque en [5,SP]",
     "KNOCK_OFF": "Realiza [90,SP] de SPECIAL. Si el objetivo lleva algún objeto, estos son removidos e inflige un daño adicional de [30,SP] de SPECIAL por cada objeto eliminado",
     "FISHIOUS_REND": "Causa [80, SP] de SPECIAL. Dara el doble si el atacante tiene más ATK_ SPEED que que el objetivo",
