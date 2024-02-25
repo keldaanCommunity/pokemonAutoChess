@@ -11857,8 +11857,8 @@ export class Kangaskhan extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 240
-  atk = 18
+  hp = 200
+  atk = 16
   def = 4
   speDef = 4
   maxPP = 100
