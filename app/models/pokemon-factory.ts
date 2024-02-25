@@ -127,7 +127,9 @@ export default class PokemonFactory {
       return 5
     } else if (name === Pkm.MAGIKARP) {
       return 0
-    } else if (name === Pkm.GYARADOS) {
+    } else if (name === Pkm.FEEBAS) {
+      return 1
+    } else if (name === Pkm.GYARADOS || name === Pkm.MILOTIC) {
       return 10
     } else if (Unowns.includes(name)) {
       return 1

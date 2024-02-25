@@ -17,7 +17,8 @@ import indexList from "../../dist/client/assets/pokemons/indexList.json"
 import atlas from "../assets/atlas.json"
 import PokemonSprite from "./components/pokemon"
 
-const DEFAULT_FPS = 20
+const FPS_EFFECTS = 20
+const FPS_POKEMON_ANIMS = 36
 
 export default class AnimationManager {
   game: Phaser.Scene
@@ -80,7 +81,8 @@ export default class AnimationManager {
                 })
                 for (let i = 0; i < durationArray.length; i++) {
                   if (frameArray[i]) {
-                    frameArray[i]["duration"] = durationArray[i] * 10
+                    frameArray[i]["duration"] =
+                      durationArray[i] * (1000 / FPS_POKEMON_ANIMS)
                   }
                 }
                 const shouldLoop = [
@@ -132,7 +134,7 @@ export default class AnimationManager {
     prefix = "",
     frames,
     repeat = 0,
-    fps = DEFAULT_FPS,
+    fps = FPS_EFFECTS,
     yoyo = false
   }: {
     key: string

@@ -9,7 +9,7 @@ export default class WeatherManager {
 
   constructor(scene: Phaser.Scene) {
     this.scene = scene
-    this.screen = new Phaser.Geom.Rectangle(0, 0, 2000, 1000)
+    this.screen = new Phaser.Geom.Rectangle(0, 0, 3000, 2000)
     this.particlesEmitters = []
     this.scene.cameras.main.initPostPipeline()
   }
@@ -23,10 +23,10 @@ export default class WeatherManager {
     this.colorFilter = this.scene.add.existing(
       new Phaser.GameObjects.Rectangle(
         this.scene,
+        1500,
         1000,
-        500,
+        3000,
         2000,
-        1000,
         0x296383,
         0.3
       ).setDepth(8)
@@ -74,10 +74,10 @@ export default class WeatherManager {
     this.colorFilter = this.scene.add.existing(
       new Phaser.GameObjects.Rectangle(
         this.scene,
+        1500,
         1000,
-        500,
+        3000,
         2000,
-        1000,
         0xa7cade,
         0.3
       ).setDepth(8)
@@ -125,10 +125,10 @@ export default class WeatherManager {
     this.colorFilter = this.scene.add.existing(
       new Phaser.GameObjects.Rectangle(
         this.scene,
+        1500,
         1000,
-        500,
+        3000,
         2000,
-        1000,
         0xffe800,
         0.15
       ).setDepth(8)
@@ -176,10 +176,10 @@ export default class WeatherManager {
     this.colorFilter = this.scene.add.existing(
       new Phaser.GameObjects.Rectangle(
         this.scene,
+        1500,
         1000,
-        500,
+        3000,
         2000,
-        1000,
         0x9a791a,
         0.2
       ).setDepth(8)
@@ -190,10 +190,10 @@ export default class WeatherManager {
     this.colorFilter = this.scene.add.existing(
       new Phaser.GameObjects.Rectangle(
         this.scene,
+        1500,
         1000,
-        500,
+        3000,
         2000,
-        1000,
         0x141346,
         0.6
       ).setDepth(8)
@@ -244,10 +244,10 @@ export default class WeatherManager {
     this.colorFilter = this.scene.add.existing(
       new Phaser.GameObjects.Rectangle(
         this.scene,
+        1500,
         1000,
-        500,
+        3000,
         2000,
-        1000,
         0x994c6e,
         0.15
       ).setDepth(8)
@@ -284,10 +284,10 @@ export default class WeatherManager {
     this.colorFilter = this.scene.add.existing(
       new Phaser.GameObjects.Rectangle(
         this.scene,
+        1500,
         1000,
-        500,
+        3000,
         2000,
-        1000,
         0x2b3838,
         0.4
       ).setDepth(8)
