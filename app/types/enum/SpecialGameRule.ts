@@ -1,4 +1,4 @@
-export enum SpecialLobbyRule {
+export enum SpecialGameRule {
   EVERYONE_IS_HERE = "EVERYONE_IS_HERE",
   UNIQUE_STARTER = "UNIQUE_STARTER",
   OMELETTE_COOK = "OMELETTE_COOK",

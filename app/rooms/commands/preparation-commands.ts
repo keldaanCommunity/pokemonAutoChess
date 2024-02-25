@@ -10,7 +10,7 @@ import UserMetadata, {
 } from "../../models/mongo-models/user-metadata"
 import { IChatV2, Role, Transfer } from "../../types"
 import { EloRankThreshold, MAX_PLAYERS_PER_LOBBY } from "../../types/Config"
-import { BotDifficulty, LobbyType } from "../../types/enum/Game"
+import { BotDifficulty, GameMode } from "../../types/enum/Game"
 import { logger } from "../../utils/logger"
 import { pickRandomIn } from "../../utils/random"
 import { entries, values } from "../../utils/schemas"
@@ -34,10 +34,7 @@ export class OnJoinCommand extends Command<
         client.leave()
         return // lobby already full
       }
-      if (
-        this.state.ownerId == "" &&
-        this.state.lobbyType === LobbyType.NORMAL
-      ) {
+      if (this.state.ownerId == "" && this.state.gameMode === GameMode.NORMAL) {
         this.state.ownerId = auth.uid
       }
       if (this.state.users.has(auth.uid)) {
@@ -70,7 +67,7 @@ export class OnJoinCommand extends Command<
             return // rank not high enough
           }
 
-          const initiallyReady = this.state.lobbyType !== LobbyType.NORMAL
+          const initiallyReady = this.state.gameMode !== GameMode.NORMAL
           this.state.users.set(
             client.auth.uid,
             new GameUser(
@@ -117,7 +114,7 @@ export class OnJoinCommand extends Command<
       }
 
       if (
-        this.state.lobbyType !== LobbyType.NORMAL &&
+        this.state.gameMode !== GameMode.NORMAL &&
         this.state.users.size === MAX_PLAYERS_PER_LOBBY
       ) {
         // auto start when special lobby is full and all ready
@@ -128,8 +125,8 @@ export class OnJoinCommand extends Command<
         this.clock.setTimeout(() => {
           this.room.dispatcher.dispatch(new OnGameStartRequestCommand())
           // open another one
-          this.room.presence.publish("special-lobby-full", {
-            lobbyType: this.state.lobbyType,
+          this.room.presence.publish("special-game-full", {
+            gameMode: this.state.gameMode,
             minRank: this.state.minRank,
             noElo: this.state.noElo
           })
@@ -164,7 +161,7 @@ export class OnGameStartRequestCommand extends Command<
         }
       })
 
-      if (!allUsersReady && this.state.lobbyType === LobbyType.NORMAL) {
+      if (!allUsersReady && this.state.gameMode === GameMode.NORMAL) {
         client?.send(Transfer.MESSAGES, {
           author: "Server",
           payload: `Not all players are ready.`,
@@ -223,7 +220,7 @@ export class OnGameStartRequestCommand extends Command<
             preparationId: this.room.roomId,
             noElo: this.state.noElo,
             selectedMap: this.state.selectedMap,
-            lobbyType: this.state.lobbyType,
+            gameMode: this.state.gameMode,
             minRank: this.state.minRank,
             whenReady: (game) => {
               this.room.setGameStarted(true)
@@ -457,7 +454,7 @@ export class OnToggleReadyCommand extends Command<
         user.ready = !user.ready
       }
       if (
-        this.state.lobbyType !== LobbyType.NORMAL &&
+        this.state.gameMode !== GameMode.NORMAL &&
         this.state.users.size === this.room.maxClients &&
         values(this.state.users).every((user) => user.ready === true)
       ) {

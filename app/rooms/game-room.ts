@@ -46,10 +46,10 @@ import {
   RequiredStageLevelForXpElligibility,
   UniqueShop
 } from "../types/Config"
-import { LobbyType, Rarity } from "../types/enum/Game"
+import { GameMode, Rarity } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
 import { Pkm, PkmDuos, PkmProposition } from "../types/enum/Pokemon"
-import { SpecialLobbyRule } from "../types/enum/SpecialLobbyRule"
+import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
 import { removeInArray } from "../utils/array"
 import { logger } from "../utils/logger"
@@ -100,14 +100,14 @@ export default class GameRoom extends Room<GameState> {
     name: string
     noElo: boolean
     selectedMap: DungeonPMDO | "random"
-    lobbyType: LobbyType
+    gameMode: GameMode
     minRank: EloRank | null
     whenReady: (room: GameRoom) => void
   }) {
     logger.trace("create game room")
     this.setMetadata(<IGameMetadata>{
       name: options.name,
-      lobbyType: options.lobbyType,
+      gameMode: options.gameMode,
       playerIds: keys(options.users).filter(
         (id) => options.users.get(id)!.isBot === false
       ),
@@ -121,7 +121,7 @@ export default class GameRoom extends Room<GameState> {
         options.name,
         options.noElo,
         options.selectedMap,
-        options.lobbyType,
+        options.gameMode,
         options.minRank
       )
     )
@@ -161,7 +161,7 @@ export default class GameRoom extends Room<GameState> {
     shuffleArray(this.additionalRarePool)
     shuffleArray(this.additionalEpicPool)
 
-    if (this.state.specialLobbyRule === SpecialLobbyRule.EVERYONE_IS_HERE) {
+    if (this.state.specialGameRule === SpecialGameRule.EVERYONE_IS_HERE) {
       this.additionalUncommonPool.forEach((p) =>
         this.state.shop.addAdditionalPokemon(p)
       )
@@ -643,13 +643,8 @@ export default class GameRoom extends Room<GameState> {
 
             if (rank === 1) {
               usr.wins += 1
-              if (this.state.lobbyType === LobbyType.RANKED) {
-                if (this.state.minRank === EloRank.GREATBALL) {
-                  usr.booster += 1
-                }
-                if (this.state.minRank === EloRank.ULTRABALL) {
-                  usr.booster += 5
-                }
+              if (this.state.gameMode === GameMode.RANKED) {
+                usr.booster += 1
                 player.titles.add(Title.VANQUISHER)
                 const minElo = Math.min(
                   ...values(this.state.players).map((p) => p.elo)
@@ -903,7 +898,7 @@ export default class GameRoom extends Room<GameState> {
       if (this.state.stageLevel !== PortalCarouselStages[0]) return // should not be pickable at this stage
       if (
         values(player.board).some((p) => p.rarity === Rarity.UNIQUE) &&
-        this.state.specialLobbyRule !== SpecialLobbyRule.UNIQUE_STARTER
+        this.state.specialGameRule !== SpecialGameRule.UNIQUE_STARTER
       )
         return // already picked a unique
     }

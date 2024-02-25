@@ -17,7 +17,7 @@ import {
   SynergyGivenByItem
 } from "../../types/enum/Item"
 import { Pkm, PkmDuos, PkmProposition } from "../../types/enum/Pokemon"
-import { SpecialLobbyRule } from "../../types/enum/SpecialLobbyRule"
+import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { getFirstAvailablePositionInBench } from "../../utils/board"
@@ -108,12 +108,12 @@ export default class Player extends Schema implements IPlayer {
       this.lightY = 2
     }
 
-    if (state.specialLobbyRule === SpecialLobbyRule.NINE_LIVES) {
+    if (state.specialGameRule === SpecialGameRule.NINE_LIVES) {
       this.life = 9
       this.canRegainLife = false
     }
 
-    if (state.specialLobbyRule === SpecialLobbyRule.UNIQUE_STARTER) {
+    if (state.specialGameRule === SpecialGameRule.UNIQUE_STARTER) {
       const randomUnique = pickRandomIn(UniqueShop)
       const pokemonsObtained: Pokemon[] = (
         randomUnique in PkmDuos ? PkmDuos[randomUnique] : [randomUnique]
@@ -126,7 +126,7 @@ export default class Player extends Schema implements IPlayer {
       })
     }
 
-    if (state.specialLobbyRule === SpecialLobbyRule.DITTO_PARTY) {
+    if (state.specialGameRule === SpecialGameRule.DITTO_PARTY) {
       for (let i = 0; i < 5; i++) {
         const ditto = PokemonFactory.createPokemonFromName(Pkm.DITTO, this)
         ditto.positionX = getFirstAvailablePositionInBench(this.board) ?? 0

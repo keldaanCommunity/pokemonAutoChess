@@ -1,7 +1,7 @@
 import { Schema, type } from "@colyseus/schema"
 import { IExperienceManager } from "../../types"
 import { ExpTable } from "../../types/Config"
-import { SpecialLobbyRule } from "../../types/enum/SpecialLobbyRule"
+import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 
 export default class ExperienceManager
   extends Schema
@@ -46,9 +46,9 @@ export default class ExperienceManager
   }
 }
 
-export function getLevelUpCost(specialLobbyRule?: SpecialLobbyRule | null) {
+export function getLevelUpCost(specialGameRule?: SpecialGameRule | null) {
   let cost = 4
-  if (specialLobbyRule === SpecialLobbyRule.RARE_IS_EXPENSIVE) {
+  if (specialGameRule === SpecialGameRule.RARE_IS_EXPENSIVE) {
     cost = 8
   }
 

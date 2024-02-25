@@ -9,7 +9,7 @@ import { IBot } from "../models/mongo-models/bot-v2"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import { IPreparationMetadata, Transfer } from "../types"
 import { EloRank, MAX_PLAYERS_PER_LOBBY } from "../types/Config"
-import { BotDifficulty, LobbyType } from "../types/enum/Game"
+import { BotDifficulty, GameMode } from "../types/enum/Game"
 import { logger } from "../utils/logger"
 import { cleanProfanity } from "../utils/profanity-filter"
 import { values } from "../utils/schemas"
@@ -74,7 +74,7 @@ export default class PreparationRoom extends Room<PreparationState> {
     ownerId?: string
     roomName: string
     minRank?: EloRank
-    lobbyType: LobbyType
+    gameMode: GameMode
     noElo?: boolean
     autoStartDelayInSeconds?: number
   }) {
@@ -89,7 +89,7 @@ export default class PreparationRoom extends Room<PreparationState> {
     this.setMetadata(<IPreparationMetadata>{
       minRank: options.minRank ?? null,
       noElo: options.noElo ?? false,
-      lobbyType: options.lobbyType
+      gameMode: options.gameMode
     })
     this.maxClients = 8
     // if (options.ownerId) {
@@ -97,7 +97,7 @@ export default class PreparationRoom extends Room<PreparationState> {
     //     ownerId: options.ownerId
     //   })
     // }
-    if (options.lobbyType !== LobbyType.NORMAL) {
+    if (options.gameMode !== GameMode.NORMAL) {
       this.autoDispose = false
     }
 

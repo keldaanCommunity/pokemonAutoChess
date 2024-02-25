@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import { getPokemonData } from "../../../../../models/precomputed"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
-import { SpecialLobbyRule } from "../../../../../types/enum/SpecialLobbyRule"
+import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { useAppSelector } from "../../../hooks"
 import { getPortraitSrc } from "../../../utils"
 import { getGameScene } from "../../game"
@@ -12,7 +12,7 @@ import { GamePokemonDetail } from "./game-pokemon-detail"
 
 export function GameAdditionalPokemons() {
   const { t } = useTranslation()
-  const specialLobbyRule = getGameScene()?.room?.state.specialLobbyRule
+  const specialGameRule = getGameScene()?.room?.state.specialGameRule
   const additionalPokemons = useAppSelector(
     (state) => state.game.additionalPokemons
   )
@@ -20,7 +20,7 @@ export function GameAdditionalPokemons() {
     (state) => state.game.pokemonCollection
   )
 
-  if (specialLobbyRule === SpecialLobbyRule.EVERYONE_IS_HERE) {
+  if (specialGameRule === SpecialGameRule.EVERYONE_IS_HERE) {
     return (
       <div className="nes-container game-additional-pokemons">
         <p>{t("scribble.EVERYONE_IS_HERE")}</p>

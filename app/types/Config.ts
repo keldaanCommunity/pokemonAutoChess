@@ -955,8 +955,7 @@ export const DTEF_TILESET_HEIGHT = 8
 export const DTEF_TILESET_TILE_WIDTH = 24
 
 export const SCRIBBLE_LOBBY_CRON = "0 0 0-20/4 * * *" // every four hours from 00h to 20h
-export const GREATBALL_RANKED_LOBBY_CRON = "0 0 2-22/4 * * *" // every four hours from 2h to 22h
-export const ULTRABALL_RANKED_LOBBY_CRON = "0 0 21 * * 7" // on Sunday at 21h
+export const RANKED_LOBBY_CRON = "0 0 2-22/4 * * *" // every four hours from 2h to 22h
 
 export const DUST_PER_BOOSTER = 50
 export const DUST_PER_SHINY = 250

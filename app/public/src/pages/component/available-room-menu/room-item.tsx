@@ -6,7 +6,7 @@ import {
   EloRankThreshold,
   MAX_PLAYERS_PER_LOBBY
 } from "../../../../../types/Config"
-import { LobbyType } from "../../../../../types/enum/Game"
+import { GameMode } from "../../../../../types/enum/Game"
 import { useAppSelector } from "../../../hooks"
 import { cc } from "../../utils/jsx"
 import "./room-item.css"
@@ -45,7 +45,7 @@ export default function RoomItem(props: {
           src="/assets/ui/lock.svg"
         />
       )}
-      {props.room.metadata?.lobbyType === LobbyType.SCRIBBLE && (
+      {props.room.metadata?.gameMode === GameMode.SCRIBBLE && (
         <img
           alt={t("smeargle_scribble")}
           title={t("smeargle_scribble_hint")}
@@ -54,15 +54,16 @@ export default function RoomItem(props: {
           style={{ borderRadius: "50%" }}
         />
       )}
-      {props.room.metadata?.noElo && props.room.metadata?.lobbyType === LobbyType.NORMAL && (
-        <img
-          alt={t("just_for_fun")}
-          title={t("just_for_fun")}
-          className="noelo icon"
-          src="/assets/ui/noelo.png"
-          style={{ borderRadius: "50%" }}
-        />
-      )}
+      {props.room.metadata?.noElo &&
+        props.room.metadata?.gameMode === GameMode.NORMAL && (
+          <img
+            alt={t("just_for_fun")}
+            title={t("just_for_fun")}
+            className="noelo icon"
+            src="/assets/ui/noelo.png"
+            style={{ borderRadius: "50%" }}
+          />
+        )}
       {props.room.metadata?.minRank && (
         <img
           alt={t("minimum_rank")}

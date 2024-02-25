@@ -32,7 +32,7 @@
   width: 50px;
 }
 
-.special-lobby-announcement {
+.special-game-announcement {
   background: #40404080;
   padding: 0.4em 0.5em;
   color: white;
@@ -44,7 +44,7 @@
   width: 100%;
 }
 
-.special-lobby-announcement span:last-child {
+.special-game-announcement span:last-child {
   flex: 0 0 6ch;
 }
 

@@ -7,7 +7,7 @@ import { IGameUser } from "../../../../../models/colyseus-models/game-user"
 import { IBot } from "../../../../../models/mongo-models/bot-v2"
 import PreparationState from "../../../../../rooms/states/preparation-state"
 import { Role } from "../../../../../types"
-import { BotDifficulty, LobbyType } from "../../../../../types/enum/Game"
+import { BotDifficulty, GameMode } from "../../../../../types/enum/Game"
 import { throttle } from "../../../../../utils/function"
 import { setTitleNotificationIcon } from "../../../../../utils/window"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
@@ -57,7 +57,7 @@ export default function PreparationMenu() {
     (state) => state.preparation.selectedMap
   )
 
-  const lobbyType = useAppSelector((state) => state.preparation.lobbyType)
+  const gameMode = useAppSelector((state) => state.preparation.gameMode)
 
   const [modal, setModal] = useState<string>()
 
@@ -128,9 +128,9 @@ export default function PreparationMenu() {
 
   const headerMessage = (
     <>
-      {lobbyType === LobbyType.RANKED && <p>{t("ranked_lobby_hint")}</p>}
+      {gameMode === GameMode.RANKED && <p>{t("ranked_lobby_hint")}</p>}
 
-      {lobbyType === LobbyType.SCRIBBLE && (
+      {gameMode === GameMode.SCRIBBLE && (
         <p>
           <img
             alt={t("smeargle_scribble")}
@@ -190,7 +190,7 @@ export default function PreparationMenu() {
         })}
       </div>
 
-      {(lobbyType === LobbyType.NORMAL || isAdmin) && (
+      {(gameMode === GameMode.NORMAL || isAdmin) && (
         <>
           {isOwner && (
             <div className="actions">

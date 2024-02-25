@@ -6,7 +6,7 @@ import {
   ISynergySymbol
 } from "../../../../types"
 import { Pkm } from "../../../../types/enum/Pokemon"
-import { SpecialLobbyRule } from "../../../../types/enum/SpecialLobbyRule"
+import { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 import { logger } from "../../../../utils/logger"
 import { clamp } from "../../../../utils/number"
 import {
@@ -344,8 +344,7 @@ export default class MinigameManager {
 
   addKecleon() {
     if (
-      this.scene.room?.state?.specialLobbyRule ===
-      SpecialLobbyRule.KECLEONS_SHOP
+      this.scene.room?.state?.specialGameRule === SpecialGameRule.KECLEONS_SHOP
     ) {
       this.kecleon = new PokemonSpecial(
         this.scene,

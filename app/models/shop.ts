@@ -18,7 +18,7 @@ import {
   PkmProposition,
   getUnownsPoolPerStage
 } from "../types/enum/Pokemon"
-import { SpecialLobbyRule } from "../types/enum/SpecialLobbyRule"
+import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
 import { removeInArray } from "../utils/array"
 import { logger } from "../utils/logger"
@@ -244,7 +244,7 @@ export default class Shop {
     let threshold = 0
 
     if (
-      state.specialLobbyRule !== SpecialLobbyRule.DITTO_PARTY &&
+      state.specialGameRule !== SpecialGameRule.DITTO_PARTY &&
       chance(DITTO_RATE)
     ) {
       return Pkm.DITTO

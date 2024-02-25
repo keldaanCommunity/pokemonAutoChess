@@ -7,7 +7,7 @@ import PokemonFactory from "../../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../../models/precomputed"
 import { RarityColor } from "../../../../../types/Config"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
-import { SpecialLobbyRule } from "../../../../../types/enum/SpecialLobbyRule"
+import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { useAppSelector } from "../../../hooks"
 import { getPortraitSrc } from "../../../utils"
 import { getGameScene } from "../../game"
@@ -105,11 +105,11 @@ export default function GamePokemonPortrait(props: {
     )
 
     let cost = PokemonFactory.getBuyPrice(pokemon.name)
-    const specialLobbyRule = getGameScene()?.room?.state.specialLobbyRule
+    const specialGameRule = getGameScene()?.room?.state.specialGameRule
     if (
       willEvolve &&
       pokemonEvolution &&
-      specialLobbyRule === SpecialLobbyRule.BUYER_FEVER
+      specialGameRule === SpecialGameRule.BUYER_FEVER
     ) {
       cost = 0
     }

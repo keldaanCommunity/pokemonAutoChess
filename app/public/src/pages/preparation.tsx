@@ -21,7 +21,7 @@ import {
   removeUser,
   setBotsList,
   setGameStarted,
-  setLobbyType,
+  setGameMode,
   setName,
   setNoELO,
   setOwnerId,
@@ -128,8 +128,8 @@ export default function Preparation() {
         dispatch(setSelectedMap(value))
       })
 
-      r.state.listen("lobbyType", (value, previousValue) => {
-        dispatch(setLobbyType(value))
+      r.state.listen("gameMode", (value, previousValue) => {
+        dispatch(setGameMode(value))
       })
 
       r.state.users.onAdd((u) => {
