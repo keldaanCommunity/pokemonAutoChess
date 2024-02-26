@@ -6709,6 +6709,7 @@ export class OutrageStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit, true)
     pokemon.status.triggerConfusion(2000, pokemon)
+    const damage = ([2, 3, 4][pokemon.stars - 1] ?? 4) * pokemon.atk
     board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
       .map((v) => v.value)
@@ -6723,11 +6724,7 @@ export class OutrageStrategy extends AbilityStrategy {
             targetY: v.positionY
           })
           v.handleSpecialDamage(
-            pokemon.stars === 3
-              ? 4 * pokemon.atk
-              : pokemon.stars === 2
-              ? 3 * pokemon.atk
-              : 2 * pokemon.atk,
+            damage,
             board,
             AttackType.SPECIAL,
             pokemon,
