@@ -2,6 +2,7 @@ import { Room } from "colyseus.js"
 import firebase from "firebase/compat/app"
 import { t } from "i18next"
 import { GameObjects, Scene } from "phaser"
+import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin"
 import { DesignTiled } from "../../../../core/design"
 import { canSell } from "../../../../core/pokemon-entity"
 import Simulation from "../../../../core/simulation"
@@ -326,11 +327,31 @@ export default class GameScene extends Scene {
     })
 
     this.input.on(
-      "gameobjectover",
+      Phaser.Input.Events.GAMEOBJECT_OVER,
       (pointer, gameObject: Phaser.GameObjects.GameObject) => {
-        if (gameObject instanceof PokemonSprite) {
+        const outline = <OutlinePlugin>this.plugins.get("rexOutline")
+        if (gameObject instanceof PokemonSprite && gameObject.draggable) {
+          const previouslyHovered = this.pokemonHovered
           this.pokemonHovered = gameObject
-        } else {
+          if (previouslyHovered && previouslyHovered !== gameObject) {
+            outline.remove(previouslyHovered.sprite)
+          }
+
+          this.pokemonHovered = gameObject
+          outline.add(gameObject.sprite, {
+            thickness: 2,
+            outlineColor: 0xffffff
+          })
+        }
+      }
+    )
+
+    this.input.on(
+      Phaser.Input.Events.GAMEOBJECT_OUT,
+      (pointer, gameObject: Phaser.GameObjects.GameObject) => {
+        const outline = <OutlinePlugin>this.plugins.get("rexOutline")
+        if (this.pokemonHovered === gameObject) {
+          outline.remove(this.pokemonHovered.sprite)
           this.pokemonHovered = undefined
         }
       }
