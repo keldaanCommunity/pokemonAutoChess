@@ -8021,6 +8021,7 @@ export class TypeNull extends Pokemon {
   range = 1
   skill = Ability.RKS_SYSTEM
   attackSprite = AttackSprite.NORMAL_MELEE
+  passive = Passive.TYPE_NULL
 }
 
 export class SilvallyFire extends Pokemon {
@@ -11907,7 +11908,7 @@ export class Ursaluna extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.FURY_SWIPES
+  skill = Ability.DEFAULT //Ability.FURY_SWIPES
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -11918,8 +11919,8 @@ export class Aipom extends Pokemon {
   evolution = Pkm.AMBIPOM
   hp = 70
   atk = 7
-  def = 4
-  speDef = 4
+  def = 2
+  speDef = 2
   maxPP = 80
   range = 1
   skill = Ability.TICKLE
@@ -11932,8 +11933,8 @@ export class Ambipom extends Pokemon {
   stars = 2
   hp = 130
   atk = 14
-  def = 2
-  speDef = 2
+  def = 4
+  speDef = 4
   maxPP = 80
   range = 1
   skill = Ability.TICKLE
