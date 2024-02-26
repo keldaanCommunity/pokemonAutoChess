@@ -38,7 +38,7 @@ import {
 import { Synergy } from "../../types/enum/Synergy"
 import GameState from "../../rooms/states/game-state"
 import { keys, values } from "../../utils/schemas"
-import { SpecialLobbyRule } from "../../types/enum/SpecialLobbyRule"
+import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 
 const PLAYER_VELOCITY = 2
 const ITEM_ROTATION_SPEED = 0.0004
@@ -191,7 +191,7 @@ export class MiniGame {
   }
 
   initialize(state: GameState) {
-    const { players, stageLevel, specialLobbyRule } = state
+    const { players, stageLevel, specialGameRule } = state
     this.alivePlayers = new Array<Player>()
     players.forEach((p) => {
       if (p.alive) {
@@ -219,7 +219,7 @@ export class MiniGame {
 
       if (
         ItemCarouselStages.includes(stageLevel) &&
-        state.specialLobbyRule === SpecialLobbyRule.KECLEONS_SHOP
+        state.specialGameRule === SpecialGameRule.KECLEONS_SHOP
       ) {
         if (player.money < KECLEON_SHOP_COST) {
           retentionDelay = Infinity
@@ -256,15 +256,15 @@ export class MiniGame {
     if (PortalCarouselStages.includes(stageLevel)) {
       this.initializePortalCarousel()
     } else if (ItemCarouselStages.includes(stageLevel)) {
-      this.initializeItemsCarousel(stageLevel, specialLobbyRule)
+      this.initializeItemsCarousel(stageLevel, specialGameRule)
     }
   }
 
   initializeItemsCarousel(
     stageLevel: number,
-    specialLobbyRule: SpecialLobbyRule | null
+    specialGameRule: SpecialGameRule | null
   ) {
-    const items = this.pickRandomItems(stageLevel, specialLobbyRule)
+    const items = this.pickRandomItems(stageLevel, specialGameRule)
 
     for (let j = 0; j < items.length; j++) {
       const x = this.centerX + Math.cos((Math.PI * 2 * j) / items.length) * 100
@@ -336,7 +336,7 @@ export class MiniGame {
 
   pickRandomItems(
     stageLevel: number,
-    specialLobbyRule: SpecialLobbyRule | null
+    specialGameRule: SpecialGameRule | null
   ): Item[] {
     const items: Item[] = []
 
@@ -351,11 +351,11 @@ export class MiniGame {
       itemsSet = CraftableItems
     }
 
-    if (specialLobbyRule === SpecialLobbyRule.SYNERGY_WHEEL) {
+    if (specialGameRule === SpecialGameRule.SYNERGY_WHEEL) {
       itemsSet = SynergyStones
     }
 
-    if (specialLobbyRule === SpecialLobbyRule.KECLEONS_SHOP) {
+    if (specialGameRule === SpecialGameRule.KECLEONS_SHOP) {
       itemsSet = CraftableItems
       maxCopiesPerItem = 1
       nbItemsToPick = 6
@@ -507,7 +507,7 @@ export class MiniGame {
       if (avatar.itemId) {
         const item = this.items?.get(avatar.itemId)
         if (item && player && !player.isBot) {
-          if (state.specialLobbyRule === SpecialLobbyRule.KECLEONS_SHOP) {
+          if (state.specialGameRule === SpecialGameRule.KECLEONS_SHOP) {
             player.money -= KECLEON_SHOP_COST
           }
           player.items.add(item.name)

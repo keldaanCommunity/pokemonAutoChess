@@ -17,7 +17,7 @@ import {
   ISuggestionUser,
   PkmWithConfig
 } from "../../../types"
-import { SpecialLobbyType } from "../../../types/enum/Game"
+import { GameMode } from "../../../types/enum/Game"
 import { Language } from "../../../types/enum/Language"
 import { MAX_BOTS_STAGE } from "../pages/component/bot-builder/bot-logic"
 import { playSound, SOUNDS } from "../pages/utils/audio"
@@ -41,8 +41,8 @@ export interface IUserLobbyState {
   boosterContent: PkmWithConfig[]
   suggestions: ISuggestionUser[]
   language: Language
-  nextSpecialLobbyDate: string | ""
-  nextSpecialLobbyType: SpecialLobbyType | ""
+  nextSpecialGameDate: string | ""
+  nextSpecialGameMode: GameMode | ""
 }
 
 const initialState: IUserLobbyState = {
@@ -74,8 +74,8 @@ const initialState: IUserLobbyState = {
     name: "ditto",
     id: ""
   },
-  nextSpecialLobbyDate: "",
-  nextSpecialLobbyType: ""
+  nextSpecialGameDate: "",
+  nextSpecialGameMode: ""
 }
 
 export const lobbySlice = createSlice({
@@ -205,11 +205,11 @@ export const lobbySlice = createSlice({
       state.language = action.payload
     },
     leaveLobby: () => initialState,
-    setNextSpecialLobbyDate: (state, action: PayloadAction<string>) => {
-      state.nextSpecialLobbyDate = action.payload
+    setNextSpecialGameDate: (state, action: PayloadAction<string>) => {
+      state.nextSpecialGameDate = action.payload
     },
-    setNextSpecialLobbyType: (state, action: PayloadAction<string>) => {
-      state.nextSpecialLobbyType = action.payload as SpecialLobbyType
+    setNextSpecialGameMode: (state, action: PayloadAction<string>) => {
+      state.nextSpecialGameMode = action.payload as GameMode
     }
   }
 })
@@ -238,8 +238,8 @@ export const {
   leaveLobby,
   setSuggestions,
   pushBotLog,
-  setNextSpecialLobbyDate,
-  setNextSpecialLobbyType
+  setNextSpecialGameDate,
+  setNextSpecialGameMode
 } = lobbySlice.actions
 
 export default lobbySlice.reducer

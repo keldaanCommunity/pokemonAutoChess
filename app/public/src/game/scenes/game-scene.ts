@@ -367,7 +367,7 @@ export default class GameScene extends Scene {
           if (
             canSell(
               this.pokemonDragged.name as Pkm,
-              this.room?.state.specialLobbyRule
+              this.room?.state.specialGameRule
             )
           ) {
             const price = PokemonFactory.getSellPrice(
@@ -403,7 +403,7 @@ export default class GameScene extends Scene {
             this.sellZone?.visible === false &&
             canSell(
               this.pokemonDragged.name as Pkm,
-              this.room?.state.specialLobbyRule
+              this.room?.state.specialGameRule
             )
           ) {
             this.sellZone.setVisible(true)

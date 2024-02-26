@@ -29,11 +29,10 @@ import { Emotion } from "./enum/Emotion"
 import {
   AttackType,
   BoardEvent,
-  LobbyType,
+  GameMode,
   Orientation,
   PokemonActionState,
   Rarity,
-  SpecialLobbyType,
   Stat
 } from "./enum/Game"
 import { Item } from "./enum/Item"
@@ -279,8 +278,8 @@ export interface ICustomLobbyState extends Schema {
   leaderboard: ILeaderboardInfo[]
   botLeaderboard: ILeaderboardInfo[]
   levelLeaderboard: ILeaderboardInfo[]
-  nextSpecialLobbyDate: string
-  nextSpecialLobbyType: SpecialLobbyType | ""
+  nextSpecialGameDate: string
+  nextSpecialGameMode: GameMode | ""
 }
 
 export interface IGameState extends Schema {
@@ -583,12 +582,13 @@ export interface IPreparationMetadata {
   type: "preparation"
   gameStarted: boolean
   minRank: string | null
-  lobbyType: LobbyType
+  gameMode: GameMode
+  whitelist: string[] | null
 }
 
 export interface IGameMetadata {
   name: string
-  lobbyType: LobbyType
+  gameMode: GameMode
   playerIds: string[]
   stageLevel: number
   type: "game"

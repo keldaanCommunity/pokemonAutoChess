@@ -19,3 +19,5 @@
 # Bugfix
 
 # Misc
+
+- Removed Ultraball ranked match

@@ -13,8 +13,8 @@ import {
   IPreparationMetadata,
   Role
 } from "../../../../../types"
-import { MAX_PLAYERS_PER_LOBBY } from "../../../../../types/Config"
-import { LobbyType } from "../../../../../types/enum/Game"
+import { MAX_PLAYERS_PER_GAME } from "../../../../../types/Config"
+import { GameMode } from "../../../../../types/enum/Game"
 import { throttle } from "../../../../../utils/function"
 import { logger } from "../../../../../utils/logger"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
@@ -23,7 +23,7 @@ import { LocalStoreKeys, localStore } from "../../utils/store"
 import GameRoomItem from "./game-room-item"
 import RoomItem from "./room-item"
 import "./room-menu.css"
-import { SpecialLobbyCountdown } from "./special-lobby-countdown"
+import { SpecialGameCountdown } from "./special-game-countdown"
 
 export default function RoomMenu(props: {
   toPreparation: boolean
@@ -63,7 +63,7 @@ export default function RoomMenu(props: {
         const room: Room<PreparationState> = await client.create(
           "preparation",
           {
-            lobbyType: LobbyType.NORMAL,
+            gameMode: GameMode.NORMAL,
             idToken: token,
             ownerId: uid,
             roomName: `${name}'${name.endsWith("s") ? "" : "s"} room`
@@ -86,8 +86,10 @@ export default function RoomMenu(props: {
     selectedRoom: RoomAvailable<IPreparationMetadata>
   ) {
     if (
-      selectedRoom.clients >= MAX_PLAYERS_PER_LOBBY ||
-      selectedRoom.metadata?.gameStarted === true
+      selectedRoom.clients >= MAX_PLAYERS_PER_GAME ||
+      selectedRoom.metadata?.gameStarted === true ||
+      (selectedRoom.metadata?.whitelist &&
+        selectedRoom.metadata?.whitelist.includes(uid) === false)
     ) {
       return
     }
@@ -170,10 +172,10 @@ export default function RoomMenu(props: {
       <TabPanel>
         {user ? (
           <>
-            <SpecialLobbyCountdown />
+            <SpecialGameCountdown />
             {preparationRooms.length === 0 && (
               <p className="subtitle">
-                {isFreshNewUser ? t("join_a_lobby") : t("click_on_create_room")}
+                {isFreshNewUser ? t("join_a_game") : t("click_on_create_room")}
               </p>
             )}
             <ul className="hidden-scrollable">

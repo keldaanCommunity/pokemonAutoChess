@@ -36,8 +36,8 @@ import {
   setLanguage,
   setLeaderboard,
   setLevelLeaderboard,
-  setNextSpecialLobbyDate,
-  setNextSpecialLobbyType,
+  setNextSpecialGameDate,
+  setNextSpecialGameMode,
   setPastebinUrl,
   setSearchedUser,
   setSuggestions,
@@ -260,12 +260,12 @@ export async function joinLobbyRoom(
             })
           })
 
-          room.state.listen("nextSpecialLobbyDate", (date) => {
-            dispatch(setNextSpecialLobbyDate(date))
+          room.state.listen("nextSpecialGameDate", (date) => {
+            dispatch(setNextSpecialGameDate(date))
           })
 
-          room.state.listen("nextSpecialLobbyType", (type) => {
-            dispatch(setNextSpecialLobbyType(type))
+          room.state.listen("nextSpecialGameMode", (type) => {
+            dispatch(setNextSpecialGameMode(type))
           })
 
           room.state.users.onRemove((u) => {

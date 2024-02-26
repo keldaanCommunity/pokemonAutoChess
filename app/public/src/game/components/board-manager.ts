@@ -8,12 +8,12 @@ import { IPokemon, Transfer } from "../../../../types"
 import { SynergyTriggers } from "../../../../types/Config"
 import {
   GamePhaseState,
-  LobbyType,
+  GameMode,
   Orientation,
   PokemonActionState
 } from "../../../../types/enum/Game"
 import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
-import { SpecialLobbyRule } from "../../../../types/enum/SpecialLobbyRule"
+import { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 import { Synergy } from "../../../../types/enum/Synergy"
 import { transformCoordinate } from "../../pages/utils/utils"
 import AnimationManager from "../animation-manager"
@@ -43,9 +43,9 @@ export default class BoardManager {
   lightY: number
   lightCell: Phaser.GameObjects.Sprite | null
   berryTree: Phaser.GameObjects.Sprite | null
-  lobbyType: LobbyType
+  gameMode: GameMode
   smeargle: PokemonSprite | null = null
-  specialLobbyRule: SpecialLobbyRule | null = null
+  specialGameRule: SpecialGameRule | null = null
 
   constructor(
     scene: GameScene,
@@ -62,8 +62,8 @@ export default class BoardManager {
     this.animationManager = animationManager
     this.lightX = state.lightX
     this.lightY = state.lightY
-    this.lobbyType = state.lobbyType
-    this.specialLobbyRule = state.specialLobbyRule
+    this.gameMode = state.gameMode
+    this.specialGameRule = state.specialGameRule
     this.renderBoard()
 
     if (this.scene.room?.state.phase == GamePhaseState.FIGHT) {
@@ -183,7 +183,7 @@ export default class BoardManager {
       }
     })
 
-    if (this.lobbyType === LobbyType.SCRIBBLE) {
+    if (this.gameMode === GameMode.SCRIBBLE) {
       if (this.smeargle) {
         this.smeargle.destroy()
         this.smeargle = null
@@ -525,8 +525,8 @@ export default class BoardManager {
       396,
       Pkm.SMEARGLE,
       this.animationManager,
-      t(`scribble_description.${this.specialLobbyRule}`),
-      t(`scribble.${this.specialLobbyRule}`)
+      t(`scribble_description.${this.specialGameRule}`),
+      t(`scribble.${this.specialGameRule}`)
     )
   }
 }

@@ -32,7 +32,7 @@ import {
   ITEM_CAROUSEL_BASE_DURATION,
   ItemCarouselStages,
   ItemProposalStages,
-  MAX_PLAYERS_PER_LOBBY,
+  MAX_PLAYERS_PER_GAME,
   PORTAL_CAROUSEL_BASE_DURATION,
   PortalCarouselStages,
   StageDuration
@@ -54,7 +54,7 @@ import {
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
-import { SpecialLobbyRule } from "../../types/enum/SpecialLobbyRule"
+import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { logger } from "../../utils/logger"
 import { max } from "../../utils/number"
 import { chance, pickNRandomIn, pickRandomIn } from "../../utils/random"
@@ -102,7 +102,7 @@ export class OnShopCommand extends Command<
 
     if (
       isEvolution &&
-      this.state.specialLobbyRule === SpecialLobbyRule.BUYER_FEVER
+      this.state.specialGameRule === SpecialGameRule.BUYER_FEVER
     ) {
       cost = 0
     }
@@ -261,7 +261,7 @@ export class OnDragDropCommand extends Command<
               teamSize >=
               getMaxTeamSize(
                 player.experienceManager.level,
-                this.room.state.specialLobbyRule
+                this.room.state.specialGameRule
               )
             const dropToEmptyPlace = isPositionEmpty(x, y, player.board)
 
@@ -514,7 +514,7 @@ export class OnSellDropCommand extends Command<
 
       if (
         pokemon &&
-        canSell(pokemon.name, this.state.specialLobbyRule) === false
+        canSell(pokemon.name, this.state.specialGameRule) === false
       ) {
         return
       }
@@ -576,7 +576,7 @@ export class OnLevelUpCommand extends Command<
     const player = this.state.players.get(id)
     if (!player) return
 
-    const cost = getLevelUpCost(this.state.specialLobbyRule)
+    const cost = getLevelUpCost(this.state.specialGameRule)
     if (player.money >= cost && player.experienceManager.canLevel()) {
       player.experienceManager.addExperience(4)
       player.money -= cost
@@ -618,7 +618,7 @@ export class OnJoinCommand extends Command<
         /*logger.info(
           `${client.auth.displayName} (${client.id}) joined game room ${this.room.roomId}`
         )*/
-        if (this.state.players.size >= MAX_PLAYERS_PER_LOBBY) {
+        if (this.state.players.size >= MAX_PLAYERS_PER_GAME) {
           const humanPlayers = players.filter((p) => !p.isBot)
           if (humanPlayers.length === 1) {
             humanPlayers[0].titles.add(Title.LONE_WOLF)
@@ -848,7 +848,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     opponentTeam: MapSchema<IPokemonEntity>,
     stageLevel: number
   ) {
-    if (this.state.specialLobbyRule === SpecialLobbyRule.NINE_LIVES) return 1
+    if (this.state.specialGameRule === SpecialGameRule.NINE_LIVES) return 1
 
     let damage = Math.ceil(stageLevel / 2)
     if (opponentTeam.size > 0) {
@@ -1017,7 +1017,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     if (ItemProposalStages.includes(this.state.stageLevel)) {
       this.state.players.forEach((player: Player) => {
         let itemSet = BasicItems
-        if (this.state.specialLobbyRule === SpecialLobbyRule.TECHNOLOGIC) {
+        if (this.state.specialGameRule === SpecialGameRule.TECHNOLOGIC) {
           itemSet = ArtificialItems
         }
         resetArraySchema(player.itemsProposition, pickNRandomIn(itemSet, 3))
@@ -1107,7 +1107,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       const teamSize = this.room.getTeamSize(player.board)
       const maxTeamSize = getMaxTeamSize(
         player.experienceManager.level,
-        this.state.specialLobbyRule
+        this.state.specialGameRule
       )
       if (teamSize < maxTeamSize) {
         const numberOfPokemonsToMove = maxTeamSize - teamSize
@@ -1201,7 +1201,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         }
 
         if (
-          this.state.specialLobbyRule === SpecialLobbyRule.OMELETTE_COOK &&
+          this.state.specialGameRule === SpecialGameRule.OMELETTE_COOK &&
           [1, 2, 3].includes(this.state.stageLevel)
         ) {
           eggChance = 1
@@ -1405,7 +1405,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
         if (
           isPVE &&
-          this.state.specialLobbyRule === SpecialLobbyRule.GOTTA_CATCH_EM_ALL
+          this.state.specialGameRule === SpecialGameRule.GOTTA_CATCH_EM_ALL
         ) {
           const nbPokemonsToSpawn = Math.ceil(this.state.stageLevel / 2)
           for (let i = 0; i < nbPokemonsToSpawn; i++) {

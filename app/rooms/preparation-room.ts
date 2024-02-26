@@ -8,8 +8,8 @@ import BannedUser from "../models/mongo-models/banned-user"
 import { IBot } from "../models/mongo-models/bot-v2"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import { IPreparationMetadata, Transfer } from "../types"
-import { EloRank, MAX_PLAYERS_PER_LOBBY } from "../types/Config"
-import { BotDifficulty, LobbyType } from "../types/enum/Game"
+import { EloRank, MAX_PLAYERS_PER_GAME } from "../types/Config"
+import { BotDifficulty, GameMode } from "../types/enum/Game"
 import { logger } from "../utils/logger"
 import { cleanProfanity } from "../utils/profanity-filter"
 import { values } from "../utils/schemas"
@@ -37,7 +37,7 @@ export default class PreparationRoom extends Room<PreparationState> {
   constructor() {
     super()
     this.dispatcher = new Dispatcher(this)
-    this.maxClients = MAX_PLAYERS_PER_LOBBY
+    this.maxClients = MAX_PLAYERS_PER_GAME
     this.elos = new Map()
   }
 
@@ -74,9 +74,10 @@ export default class PreparationRoom extends Room<PreparationState> {
     ownerId?: string
     roomName: string
     minRank?: EloRank
-    lobbyType: LobbyType
+    gameMode: GameMode
     noElo?: boolean
     autoStartDelayInSeconds?: number
+    whitelist?: string[]
   }) {
     // logger.debug(options);
     //logger.info(`create ${options.roomName}`)
@@ -89,7 +90,8 @@ export default class PreparationRoom extends Room<PreparationState> {
     this.setMetadata(<IPreparationMetadata>{
       minRank: options.minRank ?? null,
       noElo: options.noElo ?? false,
-      lobbyType: options.lobbyType
+      gameMode: options.gameMode,
+      whitelist: options.whitelist ?? null
     })
     this.maxClients = 8
     // if (options.ownerId) {
@@ -97,7 +99,7 @@ export default class PreparationRoom extends Room<PreparationState> {
     //     ownerId: options.ownerId
     //   })
     // }
-    if (options.lobbyType !== LobbyType.NORMAL) {
+    if (options.gameMode !== GameMode.NORMAL) {
       this.autoDispose = false
     }
 
@@ -299,7 +301,7 @@ export default class PreparationRoom extends Room<PreparationState> {
       const numberOfHumanPlayers = values(this.state.users).filter(
         (u) => !u.isBot
       ).length
-      if (numberOfHumanPlayers >= MAX_PLAYERS_PER_LOBBY) {
+      if (numberOfHumanPlayers >= MAX_PLAYERS_PER_GAME) {
         throw "Room is full"
       } else if (this.state.gameStarted) {
         throw "Game already started"

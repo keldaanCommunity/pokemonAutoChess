@@ -34,7 +34,7 @@ import {
   EloRank,
   getEmotionCost
 } from "../../types/Config"
-import { LobbyType, Rarity } from "../../types/enum/Game"
+import { GameMode, Rarity } from "../../types/enum/Game"
 import { Language } from "../../types/enum/Language"
 import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
 import { sum } from "../../utils/array"
@@ -1084,34 +1084,29 @@ export class OnBotUploadCommand extends Command<
   }
 }
 
-export class OpenSpecialLobbyCommand extends Command<
+export class OpenSpecialGameCommand extends Command<
   CustomLobbyRoom,
-  { lobbyType: LobbyType; minRank?: EloRank | null; noElo?: boolean }
+  { gameMode: GameMode; minRank?: EloRank | null; noElo?: boolean }
 > {
   execute({
-    lobbyType,
+    gameMode,
     minRank,
     noElo
   }: {
-    lobbyType: LobbyType
+    gameMode: GameMode
     minRank?: EloRank | null
     noElo?: boolean
   }) {
-    logger.info(`Creating special Lobby ${lobbyType} ${minRank ?? ""}`)
-    let roomName = "Special Lobby"
-    if (lobbyType === LobbyType.RANKED) {
-      if (minRank === EloRank.GREATBALL) {
-        roomName = "Great Ball Ranked Match"
-      }
-      if (minRank === EloRank.ULTRABALL) {
-        roomName = "Ultra Ball Ranked Match"
-      }
-    } else if (lobbyType === LobbyType.SCRIBBLE) {
+    logger.info(`Creating special game ${gameMode} ${minRank ?? ""}`)
+    let roomName = "Special game"
+    if (gameMode === GameMode.RANKED) {
+      roomName = "Ranked Match"
+    } else if (gameMode === GameMode.SCRIBBLE) {
       roomName = "Smeargle's Scribble"
     }
 
     matchMaker.createRoom("preparation", {
-      lobbyType,
+      gameMode,
       minRank,
       noElo,
       ownerId: null,
@@ -1119,7 +1114,7 @@ export class OpenSpecialLobbyCommand extends Command<
       autoStartDelayInSeconds: 15 * 60
     })
 
-    this.state.getNextSpecialLobbyDate()
+    this.state.getNextSpecialGameDate()
   }
 }
 
