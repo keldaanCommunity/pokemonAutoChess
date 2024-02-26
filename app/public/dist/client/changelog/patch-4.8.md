@@ -8,7 +8,7 @@
 - Morpeko
 - Lickitung
 - Lickilicky
-- Kangashkhan
+- Kangaskhan
 - Teddiursa
 - Ursaring
 - Aipom

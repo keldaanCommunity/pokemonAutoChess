@@ -18,7 +18,7 @@ Wild pokemons can initially be only found during PvE stages, but they will attra
 ![Morpeko](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0877/Normal.png)
 ![Lickitung](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0108/Normal.png)
 ![Lickilicky](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0463/Normal.png)
-![Kangashkhan](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0115/Normal.png)
+![Kangaskhan](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0115/Normal.png)
 ![Teddiursa](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0216/Normal.png)
 ![Ursaring](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0217/Normal.png)
 ![Aipom](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0190/Normal.png)
@@ -36,4 +36,4 @@ Wild pokemons can initially be only found during PvE stages, but they will attra
 
 After 35 seconds of fight, units get the status Enraged, increasing a lot their damage and reducing their defense. This should prevent too many ties between two defensive compositions.
 
-Check out the full changelog on Discord !
+Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752/1210882481172127794) !

@@ -11702,11 +11702,11 @@ export class Toxel extends Pokemon {
   rarity = Rarity.RARE
   evolution = Pkm.TOXTRICITY
   stars = 1
-  hp = 90
-  atk = 10
+  hp = 80
+  atk = 8
   def = 2
   speDef = 2
-  maxPP = 100
+  maxPP = 90
   range = 1
   skill = Ability.OVERDRIVE
   attackSprite = AttackSprite.ELECTRIC_MELEE
@@ -11721,11 +11721,11 @@ export class Toxtricity extends Pokemon {
   ])
   rarity = Rarity.RARE
   stars = 2
-  hp = 200
-  atk = 23
-  def = 4
-  speDef = 4
-  maxPP = 100
+  hp = 160
+  atk = 21
+  def = 3
+  speDef = 3
+  maxPP = 90
   range = 1
   skill = Ability.OVERDRIVE
   attackSprite = AttackSprite.ELECTRIC_MELEE
@@ -11857,8 +11857,8 @@ export class Kangaskhan extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 240
-  atk = 18
+  hp = 200
+  atk = 16
   def = 4
   speDef = 4
   maxPP = 100
