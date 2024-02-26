@@ -253,7 +253,7 @@ export default class GameScene extends Scene {
     if (this.pokemonDragged) {
       this.input.emit(
         "dragend",
-        this.input.pointer1,
+        this.input.activePointer,
         this.pokemonDragged,
         false
       )
@@ -503,7 +503,7 @@ export default class GameScene extends Scene {
     this.input.on("dragend", (pointer, gameObject, dropped) => {
       this.sellZone?.setVisible(false)
       this.dropSpots.forEach((spot) => spot.setVisible(false))
-      if (!dropped) {
+      if (!dropped && gameObject?.input) {
         gameObject.x = gameObject.input.dragStartX
         gameObject.y = gameObject.input.dragStartY
       }
