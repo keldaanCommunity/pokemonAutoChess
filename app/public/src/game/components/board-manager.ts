@@ -367,7 +367,7 @@ export default class BoardManager {
   }
 
   updateAvatarLife(playerId: string, value: number) {
-    if (this.player.id === playerId) {
+    if (this.playerAvatar && this.player.id === playerId) {
       this.playerAvatar.updateLife(value)
     }
 

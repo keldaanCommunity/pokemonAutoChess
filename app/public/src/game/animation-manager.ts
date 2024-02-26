@@ -274,7 +274,7 @@ export default class AnimationManager {
         repeat: shouldLoop ? -1 : 0
       })
     } catch (err) {
-      logger.warn(`Can't play animation ${animation} for ${entity.name}`, err)
+      logger.warn(`Can't play animation ${animation} for ${entity?.name}`, err)
     }
   }
 
