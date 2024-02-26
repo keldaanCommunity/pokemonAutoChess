@@ -128,7 +128,7 @@ export default function PreparationMenu() {
 
   const headerMessage = (
     <>
-      {gameMode === GameMode.RANKED && <p>{t("ranked_lobby_hint")}</p>}
+      {gameMode === GameMode.RANKED && <p>{t("ranked_game_hint")}</p>}
 
       {gameMode === GameMode.SCRIBBLE && (
         <p>
@@ -197,7 +197,7 @@ export default function PreparationMenu() {
               <Checkbox
                 checked={password != null}
                 onToggle={makePrivate}
-                label={`${t("private_lobby")} ${
+                label={`${t("private_game")} ${
                   password ? "Password: " + password : ""
                 }`}
                 isDark

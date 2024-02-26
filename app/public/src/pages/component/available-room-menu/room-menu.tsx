@@ -175,7 +175,7 @@ export default function RoomMenu(props: {
             <SpecialGameCountdown />
             {preparationRooms.length === 0 && (
               <p className="subtitle">
-                {isFreshNewUser ? t("join_a_lobby") : t("click_on_create_room")}
+                {isFreshNewUser ? t("join_a_game") : t("click_on_create_room")}
               </p>
             )}
             <ul className="hidden-scrollable">
