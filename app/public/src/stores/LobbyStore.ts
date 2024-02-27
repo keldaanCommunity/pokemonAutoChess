@@ -9,13 +9,15 @@ import LobbyUser, {
 } from "../../../models/colyseus-models/lobby-user"
 import Message from "../../../models/colyseus-models/message"
 import { IBot, IStep } from "../../../models/mongo-models/bot-v2"
+import { ITournament } from "../../../models/mongo-models/tournament"
 import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
 import {
   IChatV2,
   IGameMetadata,
   IPreparationMetadata,
   ISuggestionUser,
-  PkmWithConfig
+  PkmWithConfig,
+  Transfer
 } from "../../../types"
 import { GameMode } from "../../../types/enum/Game"
 import { Language } from "../../../types/enum/Language"
@@ -43,6 +45,7 @@ export interface IUserLobbyState {
   language: Language
   nextSpecialGameDate: string | ""
   nextSpecialGameMode: GameMode | ""
+  tournaments: ITournament[]
 }
 
 const initialState: IUserLobbyState = {
@@ -75,7 +78,8 @@ const initialState: IUserLobbyState = {
     id: ""
   },
   nextSpecialGameDate: "",
-  nextSpecialGameMode: ""
+  nextSpecialGameMode: "",
+  tournaments: []
 }
 
 export const lobbySlice = createSlice({
@@ -210,6 +214,14 @@ export const lobbySlice = createSlice({
     },
     setNextSpecialGameMode: (state, action: PayloadAction<string>) => {
       state.nextSpecialGameMode = action.payload as GameMode
+    },
+    addTournament: (state, action: PayloadAction<ITournament>) => {
+      state.tournaments.push(action.payload)
+    },
+    removeTournament: (state, action: PayloadAction<ITournament>) => {
+      state.tournaments = state.tournaments.filter(
+        (tournament) => tournament.name !== action.payload.name
+      )
     }
   }
 })
@@ -239,7 +251,9 @@ export const {
   setSuggestions,
   pushBotLog,
   setNextSpecialGameDate,
-  setNextSpecialGameMode
+  setNextSpecialGameMode,
+  addTournament,
+  removeTournament
 } = lobbySlice.actions
 
 export default lobbySlice.reducer

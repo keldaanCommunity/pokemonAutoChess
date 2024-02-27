@@ -16,9 +16,11 @@ import {
   ILeaderboardInfo
 } from "../models/colyseus-models/leaderboard-info"
 import Message from "../models/colyseus-models/message"
+import TournamentSchema from "../models/colyseus-models/tournament"
 import BannedUser from "../models/mongo-models/banned-user"
 import { BotV2, IBot } from "../models/mongo-models/bot-v2"
 import ChatV2 from "../models/mongo-models/chat-v2"
+import Tournament from "../models/mongo-models/tournament"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import { Emotion, IPlayer, Role, Title, Transfer } from "../types"
 import {
@@ -54,7 +56,9 @@ import {
   RemoveMessageCommand,
   SelectLanguageCommand,
   UnbanUserCommand,
-  createBotList
+  createBotList,
+  RemoveTournamentCommand,
+  OnCreateTournamentCommand
 } from "./commands/lobby-commands"
 import LobbyState from "./states/lobby-state"
 
@@ -225,6 +229,27 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
         this.dispatcher.dispatch(new RemoveMessageCommand(), {
           client,
           messageId: message.id
+        })
+      }
+    )
+
+    this.onMessage(
+      Transfer.NEW_TOURNAMENT,
+      (client, message: { name: string; startDate: string }) => {
+        this.dispatcher.dispatch(new OnCreateTournamentCommand(), {
+          client,
+          name: message.name,
+          startDate: message.startDate
+        })
+      }
+    )
+
+    this.onMessage(
+      Transfer.REMOVE_TOURNAMENT,
+      (client, message: { id: string }) => {
+        this.dispatcher.dispatch(new RemoveTournamentCommand(), {
+          client,
+          tournamentId: message.id
         })
       }
     )
@@ -407,6 +432,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     this.initCronJobs()
     this.fetchChat()
     this.fetchLeaderboards()
+    this.fetchTournaments()
   }
 
   async onAuth(client: Client, options: any, request: any) {
@@ -535,12 +561,39 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     }
   }
 
+  async fetchTournaments() {
+    try {
+      const tournaments = await Tournament.find()
+      if (tournaments) {
+        this.state.tournaments.clear()
+        tournaments.forEach((tournament) => {
+          this.state.tournaments.push(
+            new TournamentSchema(
+              tournament.id,
+              tournament.name,
+              tournament.startDate
+            )
+          )
+        })
+      }
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+
   initCronJobs() {
     logger.debug("initCronJobs")
     const leaderboardRefreshJob = CronJob.from({
       cronTime: "0 0/10 * * * *", // every 10 minutes
       timeZone: "Europe/Paris",
       onTick: () => this.fetchLeaderboards(),
+      start: true
+    })
+
+    const tournamentRefreshJob = CronJob.from({
+      cronTime: "0 0 0/1 * * *", // every hour
+      timeZone: "Europe/Paris",
+      onTick: () => this.fetchTournaments(),
       start: true
     })
 
