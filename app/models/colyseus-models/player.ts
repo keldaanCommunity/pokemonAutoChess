@@ -200,7 +200,6 @@ export default class Player extends Schema implements IPlayer {
     this.board.delete(pokemon.id)
     this.board.set(newPokemon.id, newPokemon)
     this.updateSynergies()
-    this.effects.update(this.synergies, this.board)
     return newPokemon
   }
 
@@ -230,6 +229,8 @@ export default class Player extends Schema implements IPlayer {
     )
 
     if (lightChanged) this.onLightChange()
+
+    this.effects.update(this.synergies, this.board)
   }
 
   updateArtificialItems(updatedSynergies: Map<Synergy, number>): boolean {

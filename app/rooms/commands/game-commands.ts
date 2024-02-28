@@ -290,7 +290,6 @@ export class OnDragDropCommand extends Command<
       }
 
       player.updateSynergies()
-      player.effects.update(player.synergies, player.board)
       player.boardSize = this.room.getTeamSize(player.board)
     }
     if (commands.length > 0) {
@@ -366,7 +365,6 @@ export class OnDragDropCombineCommand extends Command<
       }
 
       player.updateSynergies()
-      player.effects.update(player.synergies, player.board)
     }
   }
 }
@@ -485,7 +483,7 @@ export class OnDragDropItemCommand extends Command<
     this.room.checkEvolutionsAfterItemAcquired(playerId, pokemon)
 
     player.updateSynergies()
-    player.effects.update(player.synergies, player.board)
+
     if (commands.length > 0) {
       return commands
     }
@@ -529,7 +527,6 @@ export class OnSellDropCommand extends Command<
         player.board.delete(pokemonId)
 
         player.updateSynergies()
-        player.effects.update(player.synergies, player.board)
         player.boardSize = this.room.getTeamSize(player.board)
       }
     }
@@ -1262,7 +1259,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             player.board.delete(key)
             player.board.delete(pokemon.id)
             player.updateSynergies()
-            player.effects.update(player.synergies, player.board)
             if (!player.shopLocked) {
               this.state.shop.assignShop(player, false, this.state) // refresh unown shop in case player lost psychic 6
             }
@@ -1270,7 +1266,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         })
         // Refreshes effects (like tapu Terrains)
         player.updateSynergies()
-        player.effects.update(player.synergies, player.board)
       }
     })
 
