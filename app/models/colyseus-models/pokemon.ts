@@ -5115,7 +5115,6 @@ function updateCastform(pokemon: Pokemon, weather: Weather, player: Player) {
   player.board.delete(pokemon.id)
   player.board.set(newPokemon.id, newPokemon)
   player.updateSynergies()
-  player.effects.update(player.synergies, player.board)
 }
 
 export class Castform extends Pokemon {
