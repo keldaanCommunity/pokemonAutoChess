@@ -396,13 +396,14 @@ function pickRandomPokemonBooster(guarantedUnique: boolean): PkmWithConfig {
       const rarity = rarities[i]
       const rarityProbability = BoosterRarityProbability[rarity]
       threshold += rarityProbability
-      if (
-        seed < threshold &&
-        PRECOMPUTED_POKEMONS_PER_RARITY[rarity] &&
-        PRECOMPUTED_POKEMONS_PER_RARITY[rarity].length > 0
-      ) {
-        pkm = pickRandomIn(PRECOMPUTED_POKEMONS_PER_RARITY[rarity]) as Pkm
-        break
+      if (seed < threshold) {
+        const candidates: Pkm[] = (
+          PRECOMPUTED_POKEMONS_PER_RARITY[rarity] ?? []
+        ).filter((p) => Unowns.includes(p) === false)
+        if (candidates.length > 0) {
+          pkm = pickRandomIn(candidates) as Pkm
+          break
+        }
       }
     }
   }
