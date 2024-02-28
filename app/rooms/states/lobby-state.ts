@@ -3,7 +3,9 @@ import { CronTime } from "cron"
 import { nanoid } from "nanoid"
 import LobbyUser from "../../models/colyseus-models/lobby-user"
 import Message from "../../models/colyseus-models/message"
+import TournamentSchema from "../../models/colyseus-models/tournament"
 import chatV2 from "../../models/mongo-models/chat-v2"
+import tournament from "../../models/mongo-models/tournament"
 import { RANKED_LOBBY_CRON, SCRIBBLE_LOBBY_CRON } from "../../types/Config"
 import { GameMode } from "../../types/enum/Game"
 
@@ -12,6 +14,7 @@ export default class LobbyState extends Schema {
   @type({ map: LobbyUser }) users = new MapSchema<LobbyUser>()
   @type("string") nextSpecialGameDate: string = ""
   @type("string") nextSpecialGameMode: GameMode | "" = ""
+  @type([TournamentSchema]) tournaments = new ArraySchema<TournamentSchema>()
 
   addMessage(
     payload: string,
@@ -75,5 +78,22 @@ export default class LobbyState extends Schema {
     } else if (nextSpecialGameDateInt === nextScribble) {
       this.nextSpecialGameMode = GameMode.SCRIBBLE
     }
+  }
+
+  createTournament(name: string, startDate: string) {
+    const id = nanoid()
+    tournament.create({ id, name, startDate }).then(() => {
+      this.tournaments.push(new TournamentSchema(id, name, startDate))
+    })
+  }
+
+  removeTournament(id: string) {
+    tournament.deleteMany({ id }).then((result) => {
+      //logger.debug("deleted tournament id", id, result)
+      const tournamentIndex = this.tournaments.findIndex((m) => m.id === id)
+      if (tournamentIndex !== -1) {
+        this.tournaments.splice(tournamentIndex, 1)
+      }
+    })
   }
 }

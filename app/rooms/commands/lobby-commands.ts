@@ -308,6 +308,46 @@ export class RemoveMessageCommand extends Command<
   }
 }
 
+export class OnCreateTournamentCommand extends Command<
+  CustomLobbyRoom,
+  { client: Client; name: string; startDate: string }
+> {
+  execute({
+    client,
+    name,
+    startDate
+  }: {
+    client: Client
+    name: string
+    startDate: string
+  }) {
+    try {
+      const user = this.state.users.get(client.auth.uid)
+      if (user && user.role && user.role === Role.ADMIN) {
+        this.state.createTournament(name, startDate)
+      }
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+}
+
+export class RemoveTournamentCommand extends Command<
+  CustomLobbyRoom,
+  { client: Client; tournamentId: string }
+> {
+  execute({ client, tournamentId }: { client: Client; tournamentId: string }) {
+    try {
+      const user = this.state.users.get(client.auth.uid)
+      if (user && user.role && user.role === Role.ADMIN) {
+        this.state.removeTournament(tournamentId)
+      }
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+}
+
 export class OpenBoosterCommand extends Command<
   CustomLobbyRoom,
   { client: Client }

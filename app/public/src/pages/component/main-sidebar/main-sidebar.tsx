@@ -20,6 +20,7 @@ import Patchnotes from "../patchnotes/patchnotes"
 import { usePatchVersion } from "../patchnotes/usePatchVersion"
 import Profile from "../profile/profile"
 import { ServerAnnouncementForm } from "../server-announcement/server-announcement-form"
+import { TournamentsAdmin } from "../tournaments-admin/tournaments-admin"
 import Wiki from "../wiki/wiki"
 
 import "./main-sidebar.css"
@@ -188,15 +189,20 @@ export function MainSidebar(props: MainSidebarProps) {
             <NavLink svg="map" onClick={() => navigate("/map-viewer")}>
               Map Viewer
             </NavLink>
-            <>
-              <NavLink
-                svg="megaphone"
-                location="announcement"
-                handleClick={changeModal}
-              >
-                Announcement
-              </NavLink>
-            </>
+            <NavLink
+              svg="megaphone"
+              location="announcement"
+              handleClick={changeModal}
+            >
+              Announcement
+            </NavLink>
+            <NavLink
+              svg="tournament"
+              location="tournaments"
+              handleClick={changeModal}
+            >
+              Tournaments
+            </NavLink>
           </>
         )}
 
@@ -341,6 +347,7 @@ export type Modals =
   | "keybinds"
   | "jukebox"
   | "announcement"
+  | "tournaments"
 
 function Modals({
   modal,
@@ -418,6 +425,11 @@ function Modals({
         handleClose={closeModal}
         show={modal === "announcement"}
         body={<ServerAnnouncementForm />}
+      />
+      <BasicModal
+        handleClose={closeModal}
+        show={modal === "tournaments"}
+        body={<TournamentsAdmin />}
       />
       <Jukebox show={modal === "jukebox"} handleClose={closeModal} />
     </>

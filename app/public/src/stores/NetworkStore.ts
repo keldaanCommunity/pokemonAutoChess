@@ -2,6 +2,7 @@ import { User } from "@firebase/auth-types"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { Client, Room } from "colyseus.js"
 import { IBot } from "../../../models/mongo-models/bot-v2"
+import { ITournament } from "../../../models/mongo-models/tournament"
 import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 import AfterGameState from "../../../rooms/states/after-game-state"
 import GameState from "../../../rooms/states/game-state"
@@ -273,6 +274,9 @@ export const networkSlice = createSlice({
       action: PayloadAction<{ message: string }>
     ) => {
       state.lobby?.send(Transfer.SERVER_ANNOUNCEMENT, action.payload)
+    },
+    createTournament: (state, action: PayloadAction<ITournament>) => {
+      state.lobby?.send(Transfer.NEW_TOURNAMENT, action.payload)
     }
   }
 })
@@ -329,7 +333,8 @@ export const {
   setTitle,
   kick,
   deleteRoom,
-  makeServerAnnouncement
+  makeServerAnnouncement,
+  createTournament
 } = networkSlice.actions
 
 export default networkSlice.reducer

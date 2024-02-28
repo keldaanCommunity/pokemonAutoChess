@@ -13,6 +13,7 @@
   display: flex;
   justify-content: center;
   padding: 0;
+  color: white;
 }
 
 .hide-bg {

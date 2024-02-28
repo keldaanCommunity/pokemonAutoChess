@@ -1,0 +1,15 @@
+.tournaments-admin {
+  width: 640px;
+}
+
+.tournaments-admin ul {
+  padding: 0;
+}
+
+.tournaments-admin li {
+  list-style: none;
+}
+
+.tournament-form label {
+  display: block;
+}

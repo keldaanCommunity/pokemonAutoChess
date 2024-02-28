@@ -20,6 +20,7 @@ import store from "../stores"
 import {
   addPokemonConfig,
   addRoom,
+  addTournament,
   addUser,
   changePokemonConfig,
   changeUser,
@@ -28,6 +29,7 @@ import {
   pushMessage,
   removeMessage,
   removeRoom,
+  removeTournament,
   removeUser,
   setBoosterContent,
   setBotData,
@@ -189,6 +191,13 @@ export async function joinLobbyRoom(
           })
           room.state.messages.onRemove((m) => {
             dispatch(removeMessage(m))
+          })
+
+          room.state.tournaments.onAdd((tournament) => {
+            dispatch(addTournament(tournament))
+          })
+          room.state.tournaments.onRemove((tournament) => {
+            dispatch(removeTournament(tournament))
           })
 
           room.state.users.onAdd((u) => {
