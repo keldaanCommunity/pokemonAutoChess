@@ -126,7 +126,7 @@ export const RarityColor: { [key in Rarity]: string } = {
 }
 
 export const BoosterRarityProbability: { [key in Rarity]: number } = {
-  [Rarity.COMMON]: 0.15,
+  [Rarity.COMMON]: 0.12,
   [Rarity.UNCOMMON]: 0.2,
   [Rarity.RARE]: 0.2,
   [Rarity.EPIC]: 0.15,
@@ -134,7 +134,7 @@ export const BoosterRarityProbability: { [key in Rarity]: number } = {
   [Rarity.UNIQUE]: 0.08,
   [Rarity.LEGENDARY]: 0.05,
   [Rarity.HATCH]: 0.1,
-  [Rarity.SPECIAL]: 0
+  [Rarity.SPECIAL]: 0.03
 }
 
 export const DITTO_RATE = 0.005

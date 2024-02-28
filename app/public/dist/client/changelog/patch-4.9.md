@@ -21,3 +21,4 @@
 # Misc
 
 - Removed Ultraball ranked match
+- Add a chance to find Special rarity mons in boosters (except Unowns)
