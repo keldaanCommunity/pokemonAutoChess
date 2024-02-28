@@ -2614,8 +2614,8 @@
   "min_rank_not_reached": "Votre rang n'est pas assez élevé pour jouer ce match classé",
   "ranked_match": "Match Classé",
   "kecleon_dialog": {
-    "title": "Bienvenue au magasin Kecleon !",
-    "text": "C'est 10 GOLD pièce !",
+    "welcome": "Bienvenue au magasin Kecleon !",
+    "tell_price": "C'est 10 GOLD pièce !",
     "thank_you": "MERCI !"
   },
   "pokemon_dialog": {
