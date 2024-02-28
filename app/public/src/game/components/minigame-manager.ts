@@ -3,7 +3,8 @@ import {
   IFloatingItem,
   IPokemonAvatar,
   IPortal,
-  ISynergySymbol
+  ISynergySymbol,
+  Transfer
 } from "../../../../types"
 import { Pkm } from "../../../../types/enum/Pokemon"
 import { SpecialLobbyRule } from "../../../../types/enum/SpecialLobbyRule"
@@ -49,6 +50,9 @@ export default class MinigameManager {
     this.animationManager = animationManager
     this.buildPokemons(avatars)
     this.buildItems(items)
+    this.scene.room?.onMessage(Transfer.NPC_DIALOG, (message) =>
+      this.onNpcDialog(message)
+    )
   }
 
   initialize() {
@@ -152,13 +156,6 @@ export default class MinigameManager {
 
         case "avatarId":
           itemUI.onGrab(value)
-          if (this.kecleon && value) {
-            this.scene.board?.displayText(
-              960,
-              370,
-              t("kecleon_dialog.thank_you")
-            )
-          }
       }
     }
   }
@@ -353,9 +350,15 @@ export default class MinigameManager {
         408,
         Pkm.KECLEON,
         this.animationManager,
-        t("kecleon_dialog.text"),
-        t("kecleon_dialog.title")
+        t("kecleon_dialog.tell_price"),
+        t("kecleon_dialog.welcome")
       )
+    }
+  }
+
+  onNpcDialog({ npc, dialog }: { npc: string; dialog: string }) {
+    if (npc === "kecleon" && this.kecleon) {
+      this.scene.board?.displayText(960, 370, t(`kecleon_dialog.${dialog}`))
     }
   }
 }

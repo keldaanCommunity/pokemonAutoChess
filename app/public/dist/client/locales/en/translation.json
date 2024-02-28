@@ -2649,8 +2649,8 @@
   "min_rank_not_reached": "Your rank is not high enough to play this ranked match",
   "ranked_match": "Ranked Match",
   "kecleon_dialog": {
-    "title": "Welcome to Kecleon's shop !",
-    "text": "10 GOLD each !",
+    "welcome": "Welcome to Kecleon's shop !",
+    "tell_price": "10 GOLD each !",
     "thank_you": "THANK YOU !"
   },
   "scribble": {

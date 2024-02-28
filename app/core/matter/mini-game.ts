@@ -39,6 +39,8 @@ import { Synergy } from "../../types/enum/Synergy"
 import GameState from "../../rooms/states/game-state"
 import { keys, values } from "../../utils/schemas"
 import { SpecialLobbyRule } from "../../types/enum/SpecialLobbyRule"
+import GameRoom from "../../rooms/game-room"
+import { Transfer } from "../../types"
 
 const PLAYER_VELOCITY = 2
 const ITEM_ROTATION_SPEED = 0.0004
@@ -58,7 +60,7 @@ export class MiniGame {
   centerX: number = 325
   centerY: number = 250
 
-  constructor() {
+  constructor(room: GameRoom) {
     this.engine = Engine.create({ gravity: { x: 0, y: 0 } })
     this.bodies = new Map<string, Body>()
     this.alivePlayers = []
@@ -129,6 +131,28 @@ export class MiniGame {
           const item = this.items.get(itemBody.label)
 
           if (avatar?.itemId === "" && item?.avatarId === "") {
+            if (
+              room.state.specialLobbyRule === SpecialLobbyRule.KECLEONS_SHOP
+            ) {
+              const player = room.state.players.get(avatar.id)
+              const client = room.clients.find(
+                (cli) => cli.auth.uid === avatar.id
+              )
+              if ((player?.money ?? 0) < KECLEON_SHOP_COST) {
+                // too poor to buy one item from kecleon's shop
+                client?.send(Transfer.NPC_DIALOG, {
+                  npc: "kecleon",
+                  dialog: "tell_price"
+                })
+                return
+              } else {
+                client?.send(Transfer.NPC_DIALOG, {
+                  npc: "kecleon",
+                  dialog: "thank_you"
+                })
+              }
+            }
+
             const constraint = Constraint.create({
               bodyA: avatarBody,
               bodyB: itemBody
@@ -215,15 +239,6 @@ export class MiniGame {
       }
       if (player.isBot) {
         retentionDelay += randomBetween(1000, 6000)
-      }
-
-      if (
-        ItemCarouselStages.includes(stageLevel) &&
-        state.specialLobbyRule === SpecialLobbyRule.KECLEONS_SHOP
-      ) {
-        if (player.money < KECLEON_SHOP_COST) {
-          retentionDelay = Infinity
-        }
       }
 
       const avatar = new PokemonAvatarModel(
@@ -489,7 +504,13 @@ export class MiniGame {
     })
     this.avatars!.forEach((avatar) => {
       const player = players.get(avatar.id)
-      if (avatar.itemId === "" && player && !player.isBot && this.items) {
+      if (
+        avatar.itemId === "" &&
+        player &&
+        !player.isBot &&
+        this.items &&
+        state.specialLobbyRule !== SpecialLobbyRule.KECLEONS_SHOP
+      ) {
         // give a random item if none was taken
         const remainingItems = [...this.items.entries()].filter(
           ([itemId, item]) => item.avatarId == ""
