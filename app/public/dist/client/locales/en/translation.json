@@ -2802,8 +2802,8 @@
   "not_whitelisted": "This match is restricted to a whitelist of players",
   "ranked_match": "Ranked Match",
   "kecleon_dialog": {
-    "title": "Welcome to Kecleon's shop !",
-    "text": "10 GOLD each !",
+    "welcome": "Welcome to Kecleon's shop !",
+    "tell_price": "10 GOLD each !",
     "thank_you": "THANK YOU !"
   },
   "scribble": {

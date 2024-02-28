@@ -84,7 +84,7 @@ export default class GameRoom extends Room<GameState> {
     this.additionalUncommonPool = new Array<Pkm>()
     this.additionalRarePool = new Array<Pkm>()
     this.additionalEpicPool = new Array<Pkm>()
-    this.miniGame = new MiniGame()
+    this.miniGame = new MiniGame(this)
   }
 
   // When room is initialized
