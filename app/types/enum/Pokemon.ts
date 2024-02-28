@@ -1359,7 +1359,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.ILLUMISE]: "0314",
   [Pkm.VOLBEAT]: "0313",
   [Pkm.NECROZMA]: "0800",
-  [Pkm.ULTRA_NECROZMA]: "0800-0001",
+  [Pkm.ULTRA_NECROZMA]: "0800-0003",
   [Pkm.CHERRUBI]: "0420",
   [Pkm.CHERRIM]: "0421",
   [Pkm.CHERRIM_SUNLIGHT]: "0421-0001",
