@@ -1183,6 +1183,21 @@ export function displayAbility(
       break
     }
 
+    case Ability.SLUDGE_WAVE: {
+      const specialProjectile = addAbilitySprite(skill, coordinates).setScale(1)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        duration: 800,
+        scale: 2,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
     case Ability.WHIRLPOOL: {
       for (let i = 0; i < 4; i++) {
         const whirlpool = addAbilitySprite(skill, coordinates)

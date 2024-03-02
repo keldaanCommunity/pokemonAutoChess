@@ -3960,7 +3960,7 @@ export const AnimationConfig: {
   [Pkm.TYMPOLE]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Shake
   },
   [Pkm.PALPITOAD]: {
     attack: AnimationType.Attack,
@@ -3969,9 +3969,10 @@ export const AnimationConfig: {
     shinyUnavailable: true
   },
   [Pkm.SEISMITOAD]: {
-    attack: AnimationType.Attack,
+    attack: AnimationType.Strike,
     ability: AnimationType.Attack,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
   },
   [Pkm.SEWADDLE]: {
     attack: AnimationType.Attack,
