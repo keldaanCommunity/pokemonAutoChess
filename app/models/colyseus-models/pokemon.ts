@@ -822,46 +822,58 @@ export class Metagross extends Pokemon {
 }
 
 export class Tympole extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.GROUND, Synergy.SOUND])
-  rarity = Rarity.EPIC
+  types = new SetSchema<Synergy>([
+    Synergy.AQUATIC,
+    Synergy.GROUND,
+    Synergy.SOUND
+  ])
+  rarity = Rarity.HATCH
   stars = 1
   evolution = Pkm.PALPITOAD
-  hp = 90
-  atk = 5
-  def = 4
-  speDef = 4
+  hp = 80
+  atk = 7
+  def = 3
+  speDef = 3
   maxPP = 90
   range = 1
-  skill = Ability.DEFAULT
+  skill = Ability.SLUDGE_WAVE
   attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Palpitoad extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.GROUND, Synergy.SOUND])
-  rarity = Rarity.EPIC
+  types = new SetSchema<Synergy>([
+    Synergy.AQUATIC,
+    Synergy.GROUND,
+    Synergy.SOUND
+  ])
+  rarity = Rarity.HATCH
   stars = 2
   evolution = Pkm.SEISMITOAD
   hp = 130
-  atk = 9
-  def = 5
-  speDef = 5
+  atk = 17
+  def = 4
+  speDef = 4
   maxPP = 90
   range = 1
-  skill = Ability.DEFAULT
+  skill = Ability.SLUDGE_WAVE
   attackSprite = AttackSprite.WATER_MELEE
 }
 
 export class Seismitoad extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.GROUND, Synergy.SOUND])
-  rarity = Rarity.EPIC
+  types = new SetSchema<Synergy>([
+    Synergy.AQUATIC,
+    Synergy.GROUND,
+    Synergy.SOUND
+  ])
+  rarity = Rarity.HATCH
   stars = 3
-  hp = 230
-  atk = 20
+  hp = 210
+  atk = 22
   def = 6
   speDef = 6
   maxPP = 90
   range = 1
-  skill = Ability.DEFAULT
+  skill = Ability.SLUDGE_WAVE
   attackSprite = AttackSprite.WATER_MELEE
 }
 
