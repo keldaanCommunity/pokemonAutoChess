@@ -301,7 +301,7 @@
     "AROMATHERAPY": "Aromathérapie",
     "DETECT": "Détection",
     "SPACIAL_REND": "Spatio-Rift",
-    "RKS_SYSTEM": "Système Alpha"
+    "MULTI_ATTACK": "Coup Varia-Type"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -843,7 +843,8 @@
     "MELMETAL": "Melmetal",
     "HOOPA": "Hoopa",
     "HOOPA_UNBOUND": "Hoopa Déchaîné",
-    "SILVALLY_FIRE": "Silvallié",
+    "SILVALLY": "Silvallié",
+    "SILVALLY_FIRE": "Silvallié (Feu)",
     "SILVALLY_FOSSIL": "Silvallié (Fossile)",
     "SILVALLY_PSYCHIC": "Silvallié (Psy)",
     "SILVALLY_WATER": "Silvallié (Eau)",
@@ -1315,7 +1316,7 @@
     "AROMATHERAPY": "Supprime les effets négatfs de statut des alliés adjacents et les soigne de [20,40,80,SP] HP",
     "DETECT": "Donne PROTECT aux alliés adjacents pendant [0.5,SP] secondes mutiplié par le nombre d'ennemis adjacents",
     "SPACIAL_REND": "Inverse les position des unités ennemies, puis inflige [100,SP] SPECIAL à tous les ennemis d'une rangée",
-    "RKS_SYSTEM": "Inflige [30,SP] SPECIAL aux ennemis adjacents. Soigne les pokémons adjacents pour [20,SP] HP s'ils ont un type en commun avec le lanceur"
+    "MULTI_ATTACK": "Inflige [10,SP] SPECIAL aux ennemis adjacents, multiplié par le niveau de synergie de la forme actuelle de $t(pkm.SILVALLY)"
   },
   "effect": {
     "INGRAIN": "Enraciné",
@@ -1813,7 +1814,9 @@
     "METEOR": "$t(pkm.MINIOR) alterne entre sa forme Météore et ses formes Noyau. La forme Météore octroie [4,SP]% ATK_SPEED par attaque.\nLes attaques en forme Noyau infligent des effets supplémentaires à la cible et aux ennemis adjacents:\nRouge: inflige 150% PHYSICAL\nBleu: inflige 100% SPECIAL\nOrange: inflige 50% TRUE\nVert: les dégats d'attaque soignent les alliés adjacents",
     "MIMIKYU": "Sous les 50% de HP, Mimiqui bascule en forme cassée, gagnant 30% ATK_SPEED et PROTECT pendant 2 secondes",
     "MIMIKYU_BUSTED": "Son cou est cassé. Mimiqui n'oubliera jamais la personne qui a endommagé son costume.",
-    "HUNGER_SWITCH": "$t(pkm.MORPEKO) alterne entre sa forme rassasiée et affamée.\nLes attaques en forme rassasiée infligent PARALYSIS pendant 2 secondes.\nLes attaques en forme affamée infligent WOUND pendant 4 secondes."
+    "HUNGER_SWITCH": "$t(pkm.MORPEKO) alterne entre sa forme rassasiée et affamée.\nLes attaques en forme rassasiée infligent PARALYSIS pendant 2 secondes.\nLes attaques en forme affamée infligent WOUND pendant 4 secondes.",
+    "TYPE_NULL": "$t(pkm.TYPE_NULL) peut évoluer en $t(pkm.SILVALLY) avec un objet de synergie",
+    "RKS_SYSTEM": "Système Alpha: $t(pkm.SILVALLY) peut changer ses objets de synergie à tout moment. Placez-le sur votre banc pour récupérer les objets de synergie portés."
   },
   "stat": {
     "ATK": "Attaque",

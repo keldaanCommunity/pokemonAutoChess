@@ -253,6 +253,7 @@ export class OnDragDropCommand extends Command<
           // Drag and drop pokemons through bench has no limitation
           if (dropOnBench && dropFromBench) {
             this.room.swap(player, pokemon, x, y)
+            pokemon.onChangePosition(x, y, player)
             success = true
           } else if (this.state.phase == GamePhaseState.PICK) {
             // On pick, allow to drop on / from board
@@ -268,6 +269,7 @@ export class OnDragDropCommand extends Command<
             if (dropOnBench) {
               // From board to bench is always allowed (bench to bench is already handled)
               this.room.swap(player, pokemon, x, y)
+              pokemon.onChangePosition(x, y, player)
               success = true
             } else if (
               pokemon.canBePlaced &&

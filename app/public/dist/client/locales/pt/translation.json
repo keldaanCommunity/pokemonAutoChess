@@ -272,8 +272,7 @@
     "LICK": "Lambida",
     "TICKLE": "Cóssegas",
     "AROMATHERAPY": "Aromaterapía",
-    "DETECT": "Detectar",
-    "RKS_SYSTEM": "Sistema RKS"
+    "DETECT": "Detectar"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1568,7 +1567,8 @@
     "GLIGAR": "Gligar está procurando por um RAZOR_FANG. Se o Pokémon for POISONNED, ele ganhará HP ao invés de receber dano.",
     "POISON_HEAL": "Se o Pokémon for POISONNED, ele ganhará HP ao invés de receber dano",
     "GRIM_NEIGH": "Quando o Pokémon nocauteia um inimigo, ele emite um som de relincho aterrorizante que aumenta seu PA em 30",
-    "SHAYMIN": "Shaymin está procurando uma GRACIDEA_FLOWER"
+    "SHAYMIN": "Shaymin está procurando uma GRACIDEA_FLOWER",
+    "RKS_SYSTEM": "Sistema RKS: $t(pkm.SILVALLY) pode mudar os seus itens de sinergia em qualquer altura. Coloca-o no banco para deixar cair os itens de sinergia."
   },
   "stat": {
     "ATK": "Ataque",

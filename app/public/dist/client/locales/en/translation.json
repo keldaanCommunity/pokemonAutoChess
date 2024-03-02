@@ -302,7 +302,7 @@
     "AROMATHERAPY": "Aromatherapy",
     "DETECT": "Detect",
     "SPACIAL_REND": "Spacial Rend",
-    "RKS_SYSTEM": "RKS System"
+    "MULTI_ATTACK": "Multi-Attack"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -844,6 +844,7 @@
     "MELMETAL": "Melmetal",
     "HOOPA": "Hoopa",
     "HOOPA_UNBOUND": "Hoopa (Unbound)",
+    "SILVALLY": "Silvally",
     "SILVALLY_FIRE": "Silvally (Fire)",
     "SILVALLY_FOSSIL": "Silvally (Fossil)",
     "SILVALLY_PSYCHIC": "Silvally (Psychic)",
@@ -1317,7 +1318,7 @@
     "AROMATHERAPY": "Clear negative status alterations and heal [20,40,80,SP] HP of adjacent allies",
     "DETECT": "PROTECT adjacent allies for [0.5,SP] seconds mutiplied by the number of adjacent enemies",
     "SPACIAL_REND": "Reverse the position of the enemy team, then deals [100,SP] SPECIAL to all enemies in a row",
-    "RKS_SYSTEM": "Deals [30,SP] SPECIAL to adjacent enemies. Heal adjacent pokémons for [20,SP] if they have a type in common with the caster"
+    "MULTI_ATTACK": "Inflicts [10,SP] SPECIAL to surounding enemies, multiplied by the synergy level of current $t(pkm.SILVALLY) form"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1744,7 +1745,8 @@
     "MISTY_TERRAIN": "Give FAIRY_FIELD to your FAIRY Pokemon, boosting their damage by 20%",
     "PSYCHIC_TERRAIN": "Give PSYCHIC_FIELD to your Psychic Pokemon, boosting their damage by 20%",
     "EEVEE": "Eevee can evolve into one of the 8 Eeveelutions when given a synergy stone",
-    "TYPE_NULL": "$t(pkm.TYPE_NULL) can evolve into $t(Silvally) when given a synergy stone",
+    "TYPE_NULL": "$t(pkm.TYPE_NULL) can evolve into $t(pkm.SILVALLY) when given a synergy item",
+    "RKS_SYSTEM": "RKS system: $t(pkm.SILVALLY) can change its synergy items at any time. Place it on bench to drop synergy items.",
     "SUDOWOODO": "Pretends to be a tree and does not attack but gain [2,4] ATK per second instead (stackable).\nStarts attacking when PP bar is full, cannot be SILENCE or lose PP until then.",
     "WOBBUFFET": "Does not move or attack until PP bar is full, cannot be SILENCE or lose PP until then.",
     "DITTO": "Ditto can transform to create a copy of the basic form of one of your pokemons you drop it over (not Unique, Legendary or Hatch)",
