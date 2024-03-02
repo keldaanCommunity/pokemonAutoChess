@@ -7363,7 +7363,7 @@ export class SpacialRendStrategy extends AbilityStrategy {
   }
 }
 
-export class RksSystemStrategy extends AbilityStrategy {
+export class MultiAttackStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -7372,24 +7372,27 @@ export class RksSystemStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    const silvallyType = values(pokemon.types).at(-1)
+    const synergies = pokemon.player?.synergies
+    let synergyLevelCount = 0
+
+    if (synergies && silvallyType && synergies.has(silvallyType)) {
+      synergyLevelCount = synergies.get(silvallyType)!
+    }
+    const damage = 10 * synergyLevelCount
+
     board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
       .map((v) => v.value)
-      .concat(pokemon)
       .forEach((v) => {
         if (v && v.team !== pokemon.team) {
-          v.handleSpecialDamage(30, board, AttackType.SPECIAL, pokemon, crit)
-        }
-        if (v && v.team === pokemon.team) {
-          let commonSynergy = false
-          v.types.forEach((s) => {
-            if (pokemon.types.has(s)) {
-              commonSynergy = true
-            }
-          })
-          if (commonSynergy) {
-            v.handleHeal(20, pokemon, 1)
-          }
+          v.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
         }
       })
   }
@@ -7683,5 +7686,5 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.AROMATHERAPY]: new AromatherapyStrategy(),
   [Ability.DETECT]: new DetectStrategy(),
   [Ability.SPACIAL_REND]: new SpacialRendStrategy(),
-  [Ability.RKS_SYSTEM]: new RksSystemStrategy()
+  [Ability.MULTI_ATTACK]: new MultiAttackStrategy()
 }

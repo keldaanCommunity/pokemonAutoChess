@@ -7962,13 +7962,9 @@ export class Granbull extends Pokemon {
   attackSprite = AttackSprite.FAIRY_MELEE
 }
 
-export class TypeNull extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.ARTIFICIAL])
-  rarity = Rarity.UNIQUE
-  stars = 3
-  evolution = Pkm.SILVALLY_FIRE
-  evolutionRule: EvolutionRule = new ItemEvolutionRule(
-    SynergyItems.slice(),
+const rksSystemEvolutionRule = (itemToExclude: Item | null) =>
+  new ItemEvolutionRule(
+    SynergyItems.filter((i) => i !== itemToExclude),
     (pokemon: Pokemon, player: Player, item?: Item) => {
       switch (item) {
         case Item.OLD_AMBER:
@@ -8012,15 +8008,38 @@ export class TypeNull extends Pokemon {
       }
     }
   )
+
+const rksSystemOnChangePosition = function (
+  this: Pokemon,
+  x: number,
+  y: number,
+  player: Player
+) {
+  if (y === 0) {
+    SynergyItems.forEach((synergyItem) => {
+      if (this.items.has(synergyItem)) {
+        this.items.delete(synergyItem)
+        player.items.add(synergyItem)
+      }
+    })
+  }
+}
+
+export class TypeNull extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.ARTIFICIAL])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolution = Pkm.SILVALLY_FIRE
+  evolutionRule = rksSystemEvolutionRule(null)
   hp = 200
   atk = 14
   def = 3
   speDef = 3
-  maxPP = 50
+  maxPP = 100
   range = 1
-  skill = Ability.RKS_SYSTEM
-  attackSprite = AttackSprite.NORMAL_MELEE
+  skill = Ability.HEAD_SMASH
   passive = Passive.TYPE_NULL
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class SilvallyFire extends Pokemon {
@@ -8035,10 +8054,13 @@ export class SilvallyFire extends Pokemon {
   atk = 18
   def = 5
   speDef = 5
-  maxPP = 50
+  maxPP = 100
   range = 1
-  skill = Ability.RKS_SYSTEM
+  skill = Ability.MULTI_ATTACK
+  passive = Passive.RKS_SYSTEM
+  evolutionRule = rksSystemEvolutionRule(Item.FIRE_STONE)
   attackSprite = AttackSprite.NORMAL_MELEE
+  onChangePosition = rksSystemOnChangePosition
 }
 
 export class SilvallyFossil extends Pokemon {
@@ -8053,10 +8075,13 @@ export class SilvallyFossil extends Pokemon {
   atk = 18
   def = 5
   speDef = 5
-  maxPP = 50
+  maxPP = 100
   range = 1
-  skill = Ability.RKS_SYSTEM
+  skill = Ability.MULTI_ATTACK
+  passive = Passive.RKS_SYSTEM
+  evolutionRule = rksSystemEvolutionRule(Item.OLD_AMBER)
   attackSprite = AttackSprite.NORMAL_MELEE
+  onChangePosition = rksSystemOnChangePosition
 }
 
 export class SilvallyPsychic extends Pokemon {
@@ -8071,10 +8096,13 @@ export class SilvallyPsychic extends Pokemon {
   atk = 18
   def = 5
   speDef = 5
-  maxPP = 50
+  maxPP = 100
   range = 1
-  skill = Ability.RKS_SYSTEM
+  skill = Ability.MULTI_ATTACK
+  passive = Passive.RKS_SYSTEM
+  evolutionRule = rksSystemEvolutionRule(Item.DAWN_STONE)
   attackSprite = AttackSprite.NORMAL_MELEE
+  onChangePosition = rksSystemOnChangePosition
 }
 
 export class SilvallyWater extends Pokemon {
@@ -8089,10 +8117,13 @@ export class SilvallyWater extends Pokemon {
   atk = 18
   def = 5
   speDef = 5
-  maxPP = 50
+  maxPP = 100
   range = 1
-  skill = Ability.RKS_SYSTEM
+  skill = Ability.MULTI_ATTACK
+  passive = Passive.RKS_SYSTEM
+  evolutionRule = rksSystemEvolutionRule(Item.WATER_STONE)
   attackSprite = AttackSprite.NORMAL_MELEE
+  onChangePosition = rksSystemOnChangePosition
 }
 
 export class SilvallyElectric extends Pokemon {
@@ -8107,10 +8138,13 @@ export class SilvallyElectric extends Pokemon {
   atk = 18
   def = 5
   speDef = 5
-  maxPP = 50
+  maxPP = 100
   range = 1
-  skill = Ability.RKS_SYSTEM
+  skill = Ability.MULTI_ATTACK
+  passive = Passive.RKS_SYSTEM
+  evolutionRule = rksSystemEvolutionRule(Item.THUNDER_STONE)
   attackSprite = AttackSprite.NORMAL_MELEE
+  onChangePosition = rksSystemOnChangePosition
 }
 
 export class SilvallyFairy extends Pokemon {
@@ -8125,10 +8159,13 @@ export class SilvallyFairy extends Pokemon {
   atk = 18
   def = 5
   speDef = 5
-  maxPP = 50
+  maxPP = 100
   range = 1
-  skill = Ability.RKS_SYSTEM
+  skill = Ability.MULTI_ATTACK
+  passive = Passive.RKS_SYSTEM
+  evolutionRule = rksSystemEvolutionRule(Item.MOON_STONE)
   attackSprite = AttackSprite.NORMAL_MELEE
+  onChangePosition = rksSystemOnChangePosition
 }
 
 export class SilvallyDark extends Pokemon {
@@ -8143,10 +8180,13 @@ export class SilvallyDark extends Pokemon {
   atk = 18
   def = 5
   speDef = 5
-  maxPP = 50
+  maxPP = 100
   range = 1
-  skill = Ability.RKS_SYSTEM
+  skill = Ability.MULTI_ATTACK
+  passive = Passive.RKS_SYSTEM
+  evolutionRule = rksSystemEvolutionRule(Item.DUSK_STONE)
   attackSprite = AttackSprite.NORMAL_MELEE
+  onChangePosition = rksSystemOnChangePosition
 }
 
 export class SilvallyGrass extends Pokemon {
@@ -8161,10 +8201,13 @@ export class SilvallyGrass extends Pokemon {
   atk = 18
   def = 5
   speDef = 5
-  maxPP = 50
+  maxPP = 100
   range = 1
-  skill = Ability.RKS_SYSTEM
+  skill = Ability.MULTI_ATTACK
+  passive = Passive.RKS_SYSTEM
+  evolutionRule = rksSystemEvolutionRule(Item.LEAF_STONE)
   attackSprite = AttackSprite.NORMAL_MELEE
+  onChangePosition = rksSystemOnChangePosition
 }
 
 export class SilvallyIce extends Pokemon {
@@ -8179,10 +8222,13 @@ export class SilvallyIce extends Pokemon {
   atk = 18
   def = 5
   speDef = 5
-  maxPP = 50
+  maxPP = 100
   range = 1
-  skill = Ability.RKS_SYSTEM
+  skill = Ability.MULTI_ATTACK
+  passive = Passive.RKS_SYSTEM
+  evolutionRule = rksSystemEvolutionRule(Item.ICE_STONE)
   attackSprite = AttackSprite.NORMAL_MELEE
+  onChangePosition = rksSystemOnChangePosition
 }
 
 export class SilvallyFighting extends Pokemon {
@@ -8197,10 +8243,13 @@ export class SilvallyFighting extends Pokemon {
   atk = 18
   def = 5
   speDef = 5
-  maxPP = 50
+  maxPP = 100
   range = 1
-  skill = Ability.RKS_SYSTEM
+  skill = Ability.MULTI_ATTACK
+  passive = Passive.RKS_SYSTEM
+  evolutionRule = rksSystemEvolutionRule(Item.MACHO_BRACE)
   attackSprite = AttackSprite.NORMAL_MELEE
+  onChangePosition = rksSystemOnChangePosition
 }
 
 export class SilvallyLight extends Pokemon {
@@ -8215,10 +8264,13 @@ export class SilvallyLight extends Pokemon {
   atk = 18
   def = 5
   speDef = 5
-  maxPP = 50
+  maxPP = 100
   range = 1
-  skill = Ability.RKS_SYSTEM
+  skill = Ability.MULTI_ATTACK
+  passive = Passive.RKS_SYSTEM
+  evolutionRule = rksSystemEvolutionRule(Item.LIGHT_BALL)
   attackSprite = AttackSprite.NORMAL_MELEE
+  onChangePosition = rksSystemOnChangePosition
 }
 
 export class SilvallyPoison extends Pokemon {
@@ -8233,10 +8285,13 @@ export class SilvallyPoison extends Pokemon {
   atk = 18
   def = 5
   speDef = 5
-  maxPP = 50
+  maxPP = 100
   range = 1
-  skill = Ability.RKS_SYSTEM
+  skill = Ability.MULTI_ATTACK
+  passive = Passive.RKS_SYSTEM
+  evolutionRule = rksSystemEvolutionRule(Item.TOXIC_ORB)
   attackSprite = AttackSprite.NORMAL_MELEE
+  onChangePosition = rksSystemOnChangePosition
 }
 
 export class SilvallySound extends Pokemon {
@@ -8251,10 +8306,13 @@ export class SilvallySound extends Pokemon {
   atk = 18
   def = 5
   speDef = 5
-  maxPP = 50
+  maxPP = 100
   range = 1
-  skill = Ability.RKS_SYSTEM
+  skill = Ability.MULTI_ATTACK
+  passive = Passive.RKS_SYSTEM
+  evolutionRule = rksSystemEvolutionRule(Item.METRONOME)
   attackSprite = AttackSprite.NORMAL_MELEE
+  onChangePosition = rksSystemOnChangePosition
 }
 
 export class SilvallySteel extends Pokemon {
@@ -8269,10 +8327,13 @@ export class SilvallySteel extends Pokemon {
   atk = 18
   def = 5
   speDef = 5
-  maxPP = 50
+  maxPP = 100
   range = 1
-  skill = Ability.RKS_SYSTEM
+  skill = Ability.MULTI_ATTACK
+  passive = Passive.RKS_SYSTEM
+  evolutionRule = rksSystemEvolutionRule(Item.METAL_COAT)
   attackSprite = AttackSprite.NORMAL_MELEE
+  onChangePosition = rksSystemOnChangePosition
 }
 
 export class SilvallyFlying extends Pokemon {
@@ -8287,10 +8348,13 @@ export class SilvallyFlying extends Pokemon {
   atk = 18
   def = 5
   speDef = 5
-  maxPP = 50
+  maxPP = 100
   range = 1
-  skill = Ability.RKS_SYSTEM
+  skill = Ability.MULTI_ATTACK
+  passive = Passive.RKS_SYSTEM
+  evolutionRule = rksSystemEvolutionRule(Item.SWIFT_WING)
   attackSprite = AttackSprite.NORMAL_MELEE
+  onChangePosition = rksSystemOnChangePosition
 }
 
 export class SilvallyRock extends Pokemon {
@@ -8305,10 +8369,13 @@ export class SilvallyRock extends Pokemon {
   atk = 18
   def = 5
   speDef = 5
-  maxPP = 50
+  maxPP = 100
   range = 1
-  skill = Ability.RKS_SYSTEM
+  skill = Ability.MULTI_ATTACK
+  passive = Passive.RKS_SYSTEM
+  evolutionRule = rksSystemEvolutionRule(Item.HARD_STONE)
   attackSprite = AttackSprite.NORMAL_MELEE
+  onChangePosition = rksSystemOnChangePosition
 }
 
 export class SilvallyGround extends Pokemon {
@@ -8323,10 +8390,13 @@ export class SilvallyGround extends Pokemon {
   atk = 18
   def = 5
   speDef = 5
-  maxPP = 50
+  maxPP = 100
   range = 1
-  skill = Ability.RKS_SYSTEM
+  skill = Ability.MULTI_ATTACK
+  passive = Passive.RKS_SYSTEM
+  evolutionRule = rksSystemEvolutionRule(Item.BIG_NUGGET)
   attackSprite = AttackSprite.NORMAL_MELEE
+  onChangePosition = rksSystemOnChangePosition
 }
 
 export class SilvallyFlora extends Pokemon {
@@ -8341,10 +8411,13 @@ export class SilvallyFlora extends Pokemon {
   atk = 18
   def = 5
   speDef = 5
-  maxPP = 50
+  maxPP = 100
   range = 1
-  skill = Ability.RKS_SYSTEM
+  skill = Ability.MULTI_ATTACK
+  passive = Passive.RKS_SYSTEM
+  evolutionRule = rksSystemEvolutionRule(Item.INCENSE)
   attackSprite = AttackSprite.NORMAL_MELEE
+  onChangePosition = rksSystemOnChangePosition
 }
 
 export class Applin extends Pokemon {
