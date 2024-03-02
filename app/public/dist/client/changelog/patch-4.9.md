@@ -1,5 +1,9 @@
 # New Pokemons:
 
+Tympole
+Palpitoad
+Seismitoad
+
 # Changes to Pokemon & Abilities
 
 - Nerf Kangaskhan HP ~~240~~ 200 Attack ~~18~~ 16
