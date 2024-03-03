@@ -1142,7 +1142,7 @@
     "JUDGEMENT": "Inflicts [10,SP] special damage to the target, multiplied by the sum of Arceus synergy levels",
     "CHATTER": "Deal [20,SP] SPECIAL to all enemies. Every enemy has 50% chance to be CONFUSION for 1 second",
     "STEAM_ERUPTION": "Deals [80,SP] SPECIAL to the target and all enemies adjacent, and BURN them for 3 seconds",
-    "APPLE_ACID": "Deals [30,60,120,SP] SPECIAL to the target, and lower its DEF and SPE_DEF by [5,SP] points",
+    "APPLE_ACID": "Deals [15,30,60,SP] SPECIAL to the 3 targets in front, and lower their DEF and SPE_DEF by [5,SP] points",
     "SACRED_SWORD": "Deals [100,SP] TRUE to the target",
     "PSYCHIC": "Deals [45,90,180,SP] SPECIAL and burn 15 PP to the target and adjacent enemies",
     "PSYBEAM": "Deal [25,50,100,SP] special damage to all enemy Pokémon behind the target with 50% chance to make them CONFUSION for 4 seconds",
