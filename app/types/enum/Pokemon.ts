@@ -725,7 +725,9 @@ export enum Pkm {
   PATRAT = "PATRAT",
   WATCHOG = "WATCHOG",
   SPINARAK = "SPINARAK",
-  ARIADOS = "ARIADOS"
+  ARIADOS = "ARIADOS",
+  DEWPIDER = "DEWPIDER",
+  ARAQUANID = "ARAQUANID"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1455,7 +1457,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.SILVALLY_FLYING]: "0773-0002",
   [Pkm.SILVALLY_ROCK]: "0773-0005",
   [Pkm.SILVALLY_GROUND]: "0773-0004",
-  [Pkm.SILVALLY_FLORA]: "0773-0006"
+  [Pkm.SILVALLY_FLORA]: "0773-0006",
+  [Pkm.DEWPIDER]: "0751",
+  [Pkm.ARAQUANID]: "0752"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2183,7 +2187,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.SILVALLY_FLYING]: Pkm.TYPE_NULL,
   [Pkm.SILVALLY_ROCK]: Pkm.TYPE_NULL,
   [Pkm.SILVALLY_GROUND]: Pkm.TYPE_NULL,
-  [Pkm.SILVALLY_FLORA]: Pkm.TYPE_NULL
+  [Pkm.SILVALLY_FLORA]: Pkm.TYPE_NULL,
+  [Pkm.DEWPIDER]: Pkm.DEWPIDER,
+  [Pkm.ARAQUANID]: Pkm.DEWPIDER
 }
 
 export enum PkmDuo {
@@ -3960,7 +3966,7 @@ export const AnimationConfig: {
   [Pkm.TYMPOLE]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Shake
   },
   [Pkm.PALPITOAD]: {
     attack: AnimationType.Attack,
@@ -3969,9 +3975,10 @@ export const AnimationConfig: {
     shinyUnavailable: true
   },
   [Pkm.SEISMITOAD]: {
-    attack: AnimationType.Attack,
+    attack: AnimationType.Strike,
     ability: AnimationType.Attack,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
   },
   [Pkm.SEWADDLE]: {
     attack: AnimationType.Attack,
@@ -5953,5 +5960,17 @@ export const AnimationConfig: {
     attack: AnimationType.Strike,
     ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
+  },
+  [Pkm.DEWPIDER]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
+  },
+  [Pkm.ARAQUANID]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
   }
 }

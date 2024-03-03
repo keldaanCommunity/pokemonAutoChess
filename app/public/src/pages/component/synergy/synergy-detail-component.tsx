@@ -32,14 +32,39 @@ export default function SynergyDetailComponent(props: {
     .filter((n) => n <= props.value)
     .at(-1)
 
+  const regulars = PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
+    props.type
+  ].pokemons
+    .filter(
+      (p, i, arr) => arr.findIndex((x) => PkmFamily[x] === PkmFamily[p]) === i // remove duplicates of same family
+    )
+    .map((p) => getPokemonData(p as Pkm))
+    .sort((a, b) => RarityCost[a.rarity] - RarityCost[b.rarity])
+
   const additionals = PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
     props.type
   ].additionalPokemons
     .filter((p) => additionalPokemons.includes(PkmFamily[p]))
     .filter(
-      // remove duplicates of same family
-      (p, i, arr) => arr.findIndex((x) => PkmFamily[x] === PkmFamily[p]) === i
+      (p, i, arr) => arr.findIndex((x) => PkmFamily[x] === PkmFamily[p]) === i // remove duplicates of same family
     )
+    .map((p) => getPokemonData(p as Pkm))
+
+  const uniques = PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
+    props.type
+  ].uniquePokemons
+    .filter(
+      (p, i, arr) => arr.findIndex((x) => PkmFamily[x] === PkmFamily[p]) === i // remove duplicates of same family
+    )
+    .map((p) => getPokemonData(p as Pkm))
+
+  const legendaries = PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
+    props.type
+  ].legendaryPokemons
+    .filter(
+      (p, i, arr) => arr.findIndex((x) => PkmFamily[x] === PkmFamily[p]) === i // remove duplicates of same family
+    )
+    .map((p) => getPokemonData(p as Pkm))
 
   return (
     <div style={{ maxWidth: "480px" }}>
@@ -78,30 +103,23 @@ export default function SynergyDetailComponent(props: {
         )
       })}
       <div style={{ display: "flex", flexWrap: "wrap" }}>
-        {PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[props.type].pokemons
-          .map((p) => getPokemonData(p as Pkm))
-          .sort((a, b) => RarityCost[a.rarity] - RarityCost[b.rarity])
-          .map((p) => (
-            <PokemonPortrait p={p} key={p.name} />
-          ))}
+        {regulars.map((p) => (
+          <PokemonPortrait p={p} key={p.name} />
+        ))}
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
         {additionals.map((p) => (
-          <PokemonPortrait p={getPokemonData(p)} key={p} />
+          <PokemonPortrait p={p} key={p.name} />
         ))}
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
-        {PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
-          props.type
-        ].uniquePokemons.map((p) => (
-          <PokemonPortrait p={getPokemonData(p)} key={p} />
+        {uniques.map((p) => (
+          <PokemonPortrait p={p} key={p.name} />
         ))}
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
-        {PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
-          props.type
-        ].legendaryPokemons.map((p) => (
-          <PokemonPortrait p={getPokemonData(p)} key={p} />
+        {legendaries.map((p) => (
+          <PokemonPortrait p={p} key={p.name} />
         ))}
       </div>
     </div>

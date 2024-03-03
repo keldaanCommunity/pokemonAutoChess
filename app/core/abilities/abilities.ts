@@ -2896,6 +2896,54 @@ export class SludgeStrategy extends AbilityStrategy {
   }
 }
 
+export class SludgeWaveStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const duration =
+      pokemon.stars === 3 ? 6000 : pokemon.stars === 2 ? 4000 : 2000
+    const damage = pokemon.stars === 3 ? 30 : pokemon.stars === 2 ? 20 : 10
+    const potentials = board.cells
+      .filter((p) => p && p.team !== pokemon.team)
+      .sort((a, b) => b!.life - a!.life)
+    const mostHpEnnemy = potentials[0]
+    if (mostHpEnnemy) {
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: pokemon.skill,
+        positionX: pokemon.positionX,
+        positionY: pokemon.positionY,
+        targetX: mostHpEnnemy.positionX,
+        targetY: mostHpEnnemy.positionY,
+        orientation: pokemon.orientation
+      })
+      const cells = board.getCellsBetween(
+        pokemon.positionX,
+        pokemon.positionY,
+        mostHpEnnemy.positionX,
+        mostHpEnnemy.positionY
+      )
+      cells.forEach((cell) => {
+        if (cell.value && cell.value.team != pokemon.team) {
+          cell.value.status.triggerPoison(duration, cell.value, pokemon)
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      })
+    }
+  }
+}
+
 export class DischargeStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -3518,7 +3566,7 @@ export class StringShotStrategy extends AbilityStrategy {
   }
 }
 
-export class StickyWebStrategy extends AbilityStrategy {
+export class EntanglingThreadStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3813,7 +3861,7 @@ export class StunSporeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [5, 10, 20, 40][pokemon.stars - 1] ?? 40
+    const damage = [5, 10, 20][pokemon.stars - 1] ?? 20
     board
       .getAdjacentCells(target.positionX, target.positionY)
       .forEach((cell) => {
@@ -6061,6 +6109,51 @@ export class StealthRocksStrategy extends AbilityStrategy {
   }
 }
 
+export class StickyWebStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const cells = board.getCellsInFront(pokemon, target, 2)
+    const damage = pokemon.stars === 3 ? 70 : pokemon.stars === 2 ? 35 : 20
+
+    cells.forEach((cell) => {
+      const index = cell.y * board.columns + cell.x
+      if (board.effects[index] !== Effect.STICKY_WEB) {
+        board.effects[index] = Effect.STICKY_WEB
+        pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
+          simulationId: pokemon.simulation.id,
+          type: BoardEvent.STICKY_WEB,
+          x: cell.x,
+          y: cell.y
+        })
+      }
+
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: Ability.STICKY_WEB,
+        positionX: cell.x,
+        positionY: cell.y
+      })
+
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.effects.add(Effect.STICKY_WEB)
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
+    })
+  }
+}
+
 export class StruggleBugStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -7361,7 +7454,42 @@ export class SpacialRendStrategy extends AbilityStrategy {
   }
 }
 
-export class RksSystemStrategy extends AbilityStrategy {
+export class MultiAttackStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const silvallyType = values(pokemon.types).at(-1)
+    const synergies = pokemon.player?.synergies
+    let synergyLevelCount = 0
+
+    if (synergies && silvallyType && synergies.has(silvallyType)) {
+      synergyLevelCount = synergies.get(silvallyType)!
+    }
+    const damage = 10 * synergyLevelCount
+
+    board
+      .getAdjacentCells(pokemon.positionX, pokemon.positionY)
+      .map((v) => v.value)
+      .forEach((v) => {
+        if (v && v.team !== pokemon.team) {
+          v.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      })
+  }
+}
+
+export class PetalBlizzardStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -7371,25 +7499,20 @@ export class RksSystemStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     board
-      .getAdjacentCells(pokemon.positionX, pokemon.positionY)
-      .map((v) => v.value)
-      .concat(pokemon)
-      .forEach((v) => {
-        if (v && v.team !== pokemon.team) {
-          v.handleSpecialDamage(30, board, AttackType.SPECIAL, pokemon, crit)
-        }
-        if (v && v.team === pokemon.team) {
-          let commonSynergy = false
-          v.types.forEach((s) => {
-            if (pokemon.types.has(s)) {
-              commonSynergy = true
-            }
-          })
-          if (commonSynergy) {
-            v.handleHeal(20, pokemon, 1)
-          }
+      .getCellsInRange(pokemon.positionX, pokemon.positionY, 1)
+      .forEach((cell) => {
+        if (cell.value && cell.value.team !== pokemon.team) {
+          cell.value.handleSpecialDamage(
+            30,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit,
+            true
+          )
         }
       })
+    pokemon.addAbilityPower(10)
   }
 }
 
@@ -7452,7 +7575,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.KOWTOW_CLEAVE]: new KowtowCleaveStrategy(),
   [Ability.BUG_BUZZ]: new BugBuzzStrategy(),
   [Ability.STRING_SHOT]: new StringShotStrategy(),
-  [Ability.STICKY_WEB]: new StickyWebStrategy(),
+  [Ability.ENTANGLING_THREAD]: new EntanglingThreadStrategy(),
   [Ability.VENOSHOCK]: new PoisonStingStrategy(),
   [Ability.LEECH_LIFE]: new LeechLifeStrategy(),
   [Ability.HAPPY_HOUR]: new HappyHourStrategy(),
@@ -7517,6 +7640,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SKY_ATTACK]: new SkyAttackStrategy(),
   [Ability.ILLUSION]: new IllusionStrategy(),
   [Ability.SLUDGE]: new SludgeStrategy(),
+  [Ability.SLUDGE_WAVE]: new SludgeWaveStrategy(),
   [Ability.AURORA_BEAM]: new AuroraBeamStrategy(),
   [Ability.AGILITY]: new AgilityStrategy(),
   [Ability.SPIRIT_SHACKLE]: new SpiritShackleStrategy(),
@@ -7681,5 +7805,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.AROMATHERAPY]: new AromatherapyStrategy(),
   [Ability.DETECT]: new DetectStrategy(),
   [Ability.SPACIAL_REND]: new SpacialRendStrategy(),
-  [Ability.RKS_SYSTEM]: new RksSystemStrategy()
+  [Ability.MULTI_ATTACK]: new MultiAttackStrategy(),
+  [Ability.STICKY_WEB]: new StickyWebStrategy(),
+  [Ability.PETAL_BLIZZARD]: new PetalBlizzardStrategy()
 }

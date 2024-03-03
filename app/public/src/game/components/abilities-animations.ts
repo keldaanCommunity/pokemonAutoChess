@@ -296,7 +296,7 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(3, 3)
       break
 
-    case Ability.RKS_SYSTEM:
+    case Ability.MULTI_ATTACK:
       addAbilitySprite(skill, coordinates, true).setScale(4)
       break
 
@@ -1183,6 +1183,21 @@ export function displayAbility(
       break
     }
 
+    case Ability.SLUDGE_WAVE: {
+      const specialProjectile = addAbilitySprite(skill, coordinates).setScale(1)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        duration: 800,
+        scale: 2,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
     case Ability.WHIRLPOOL: {
       for (let i = 0; i < 4; i++) {
         const whirlpool = addAbilitySprite(skill, coordinates)
@@ -1470,7 +1485,7 @@ export function displayAbility(
       break
     }
 
-    case Ability.STICKY_WEB: {
+    case Ability.ENTANGLING_THREAD: {
       const specialProjectile = addAbilitySprite("STRING_SHOT", coordinates)
         .setScale(0.25)
         .setTint(0x80a080)
@@ -1780,6 +1795,10 @@ export function displayAbility(
 
     case Ability.PETAL_DANCE:
       addAbilitySprite(skill, coordinates, true).setScale(2)
+      break
+
+    case Ability.PETAL_BLIZZARD:
+      addAbilitySprite(skill, coordinates, true).setScale(3)
       break
 
     case Ability.NIGHTMARE:

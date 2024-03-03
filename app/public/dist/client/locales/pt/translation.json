@@ -168,7 +168,7 @@
     "PECK": "bica",
     "COUNTER": "Contador",
     "COSMIC_POWER": "poder cósmico",
-    "STICKY_WEB": "Web fixa",
+    "ENTANGLING_THREAD": "Web fixa",
     "SILVER_WIND": "Vento Prateado",
     "POISON_POWDER": "Veneno em pó",
     "ICY_WIND": "Vento Gelado",
@@ -272,8 +272,7 @@
     "LICK": "Lambida",
     "TICKLE": "Cóssegas",
     "AROMATHERAPY": "Aromaterapía",
-    "DETECT": "Detectar",
-    "RKS_SYSTEM": "Sistema RKS"
+    "DETECT": "Detectar"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1068,7 +1067,7 @@
     "TELEPORT": "Teletransporte o pokémon em uma borda do mapa. Próximo ataque trata [15,30,60,SP] SPECIAL",
     "NASTY_PLOT": "Buff o ATK do pokémon em [10,SP] pontos",
     "THIEF": "Rouba todos os itens do alvo que o portador pode carregar e distribui [15,30,60,SP] SPECIAL",
-    "STUN_SPORE": "Inflige [5,10,20,40,SP] SPECIAL e inflige PARALYSIS por 5 segundos a inimigos adjacentes",
+    "STUN_SPORE": "Inflige [5,10,20,SP] SPECIAL e inflige PARALYSIS por 5 segundos a inimigos adjacentes",
     "METEOR_MASH": "Área de efeito ao redor do alvo que causa [30,50,70,SP] SPECIAL. Buff o ATK do pokémon em [5,SP].",
     "HURRICANE": "Ataque de área de efeito que causa [25,50,100,SP] SPECIAL em uma linha atrás do alvo e causa PARALYSIS por 4 segundos",
     "HEAL_BLOCK": "Aplique WOUND a todos os inimigos adjacentes por [5,10,15] segundos",
@@ -1148,7 +1147,7 @@
     "PECK": "Inflige [10,20,30,SP] SPECIAL para o alvo",
     "COUNTER": "O Pokémon ataca os inimigos adjacentes, causando SPECIAL igual ao HP perdido (escala com AP)",
     "COSMIC_POWER": "Aumente o AP da sua equipe em [20,SP]",
-    "STICKY_WEB": "Inflige [10,20,40,SP] SPECIAL e PARALYSIS o alvo e os inimigos adjacentes por 4 segundos",
+    "ENTANGLING_THREAD": "Inflige [10,20,40,SP] SPECIAL e PARALYSIS o alvo e os inimigos adjacentes por 4 segundos",
     "SILVER_WIND": "Corra para a retaguarda inimiga, causando [30,60,120,SP] SPECIAL a todos os inimigos no caminho. Em seguida, ganhe 1 ATK, 1 DEF, 1 SPE_DEF, 10% AP e 10% ATK_SPEED",
     "POISON_POWDER": "Corra para a retaguarda inimiga, causando [30,60,120,SP] e aplicando POISONNED por 5 segundos em todos os inimigos no caminho",
     "ICY_WIND": "Oferece [30,60,120,SP] SPECIAL e diminui o ATK_SPEED alvo em [10,20,40]%",
@@ -1568,7 +1567,8 @@
     "GLIGAR": "Gligar está procurando por um RAZOR_FANG. Se o Pokémon for POISONNED, ele ganhará HP ao invés de receber dano.",
     "POISON_HEAL": "Se o Pokémon for POISONNED, ele ganhará HP ao invés de receber dano",
     "GRIM_NEIGH": "Quando o Pokémon nocauteia um inimigo, ele emite um som de relincho aterrorizante que aumenta seu PA em 30",
-    "SHAYMIN": "Shaymin está procurando uma GRACIDEA_FLOWER"
+    "SHAYMIN": "Shaymin está procurando uma GRACIDEA_FLOWER",
+    "RKS_SYSTEM": "Sistema RKS: $t(pkm.SILVALLY) pode mudar os seus itens de sinergia em qualquer altura. Coloca-o no banco para deixar cair os itens de sinergia."
   },
   "stat": {
     "ATK": "Ataque",
