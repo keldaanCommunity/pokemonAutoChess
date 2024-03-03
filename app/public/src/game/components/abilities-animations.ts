@@ -1797,6 +1797,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
+    case Ability.PETAL_BLIZZARD:
+      addAbilitySprite(skill, coordinates, true).setScale(3)
+      break
+
     case Ability.NIGHTMARE:
       addAbilitySprite(skill, coordinates, true).setOrigin(0.5, 1).setScale(2)
       break
