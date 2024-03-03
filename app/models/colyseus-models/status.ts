@@ -98,6 +98,10 @@ export default class Status extends Schema implements IStatus {
       this.triggerPoison(1500, pokemon, undefined)
     }
 
+    if (pokemon.effects.has(Effect.STICKY_WEB) && !this.paralysis) {
+      this.triggerParalysis(2000, pokemon)
+    }
+
     if (
       pokemon.effects.has(Effect.STEALTH_ROCKS) &&
       !pokemon.types.has(Synergy.ROCK) &&
@@ -358,7 +362,11 @@ export default class Status extends Schema implements IStatus {
     pkm: PokemonEntity,
     origin: PokemonEntity | undefined
   ) {
-    if (!pkm.effects.has(Effect.IMMUNITY_BURN) && !this.runeProtect) {
+    if (
+      !pkm.effects.has(Effect.IMMUNITY_BURN) &&
+      !this.runeProtect &&
+      pkm.passive !== Passive.WATER_BUBBLE
+    ) {
       this.burn = true
       if (timer > this.burnCooldown) {
         this.burnCooldown = timer

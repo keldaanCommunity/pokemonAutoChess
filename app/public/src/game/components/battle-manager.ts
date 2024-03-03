@@ -1067,6 +1067,28 @@ export default class BattleManager {
         delay: 1000
       })
     }
+
+    if (event.type === BoardEvent.STICKY_WEB) {
+      const sprite = this.scene.add.sprite(
+        coordinates[0],
+        coordinates[1],
+        "abilities",
+        `${Effect.STICKY_WEB}/000.png`
+      )
+      sprite.setDepth(7)
+      sprite.setScale(3, 3)
+      sprite.anims.play(Effect.STICKY_WEB)
+      sprite.setAlpha(0)
+      this.boardEventSprites[index] = sprite
+      this.group.add(sprite)
+
+      this.scene.tweens.add({
+        targets: sprite,
+        alpha: 0.4,
+        duration: 1000,
+        delay: (8 - coordinates[1]) * 100
+      })
+    }
   }
 
   displayHit(x: number, y: number) {

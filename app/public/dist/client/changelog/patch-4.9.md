@@ -3,6 +3,8 @@
 Tympole
 Palpitoad
 Seismitoad
+Dewpider
+Araquanid
 
 # Changes to Pokemon & Abilities
 

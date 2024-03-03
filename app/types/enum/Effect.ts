@@ -123,5 +123,6 @@ export enum Effect {
   QUICK_FEET = "QUICK_FEET",
   RUN_AWAY = "RUN_AWAY",
   HUSTLE = "HUSTLE",
-  BERSERK = "BERSERK"
+  BERSERK = "BERSERK",
+  STICKY_WEB = "STICKY_WEB"
 }

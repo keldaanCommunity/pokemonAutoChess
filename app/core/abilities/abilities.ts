@@ -3568,7 +3568,7 @@ export class StringShotStrategy extends AbilityStrategy {
   }
 }
 
-export class StickyWebStrategy extends AbilityStrategy {
+export class EntanglingThreadStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -6111,6 +6111,51 @@ export class StealthRocksStrategy extends AbilityStrategy {
   }
 }
 
+export class StickyWebStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const cells = board.getCellsInFront(pokemon, target, 2)
+    const damage = pokemon.stars === 3 ? 70 : pokemon.stars === 2 ? 35 : 20
+
+    cells.forEach((cell) => {
+      const index = cell.y * board.columns + cell.x
+      if (board.effects[index] !== Effect.STICKY_WEB) {
+        board.effects[index] = Effect.STICKY_WEB
+        pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
+          simulationId: pokemon.simulation.id,
+          type: BoardEvent.STICKY_WEB,
+          x: cell.x,
+          y: cell.y
+        })
+      }
+
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: Ability.STICKY_WEB,
+        positionX: cell.x,
+        positionY: cell.y
+      })
+
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.effects.add(Effect.STICKY_WEB)
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
+    })
+  }
+}
+
 export class StruggleBugStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -7505,7 +7550,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.KOWTOW_CLEAVE]: new KowtowCleaveStrategy(),
   [Ability.BUG_BUZZ]: new BugBuzzStrategy(),
   [Ability.STRING_SHOT]: new StringShotStrategy(),
-  [Ability.STICKY_WEB]: new StickyWebStrategy(),
+  [Ability.ENTANGLING_THREAD]: new EntanglingThreadStrategy(),
   [Ability.VENOSHOCK]: new PoisonStingStrategy(),
   [Ability.LEECH_LIFE]: new LeechLifeStrategy(),
   [Ability.HAPPY_HOUR]: new HappyHourStrategy(),
@@ -7735,5 +7780,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.AROMATHERAPY]: new AromatherapyStrategy(),
   [Ability.DETECT]: new DetectStrategy(),
   [Ability.SPACIAL_REND]: new SpacialRendStrategy(),
-  [Ability.MULTI_ATTACK]: new MultiAttackStrategy()
+  [Ability.MULTI_ATTACK]: new MultiAttackStrategy(),
+  [Ability.STICKY_WEB]: new StickyWebStrategy()
 }

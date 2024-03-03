@@ -10097,7 +10097,7 @@ export class Wurmple extends Pokemon {
   speDef = 3
   maxPP = 100
   range = 1
-  skill = Ability.STICKY_WEB
+  skill = Ability.ENTANGLING_THREAD
   passive = Passive.WURMPLE
   attackSprite = AttackSprite.BUG_MELEE
 
@@ -11905,6 +11905,40 @@ export class Milotic extends Pokemon {
   skill = Ability.ATTRACT
   attackSprite = AttackSprite.FAIRY_RANGE
 }
+
+export class Dewpider extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.BUG])
+  additional = true
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.ARAQUANID
+  hp = 60
+  atk = 6
+  def = 2
+  speDef = 1
+  maxPP = 90
+  range = 1
+  skill = Ability.STICKY_WEB
+  attackSprite = AttackSprite.BUG_MELEE
+  passive = Passive.WATER_BUBBLE
+}
+
+export class Araquanid extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.BUG])
+  additional = true
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 130
+  atk = 13
+  def = 3
+  speDef = 2
+  maxPP = 90
+  range = 1
+  skill = Ability.STICKY_WEB
+  attackSprite = AttackSprite.BUG_MELEE
+  passive = Passive.WATER_BUBBLE
+}
+
 export class Lickitung extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.NORMAL])
   rarity = Rarity.UNCOMMON
@@ -12840,5 +12874,7 @@ export const PokemonClasses: Record<
   [Pkm.SILVALLY_FLYING]: SilvallyFlying,
   [Pkm.SILVALLY_ROCK]: SilvallyRock,
   [Pkm.SILVALLY_GROUND]: SilvallyGround,
-  [Pkm.SILVALLY_FLORA]: SilvallyFlora
+  [Pkm.SILVALLY_FLORA]: SilvallyFlora,
+  [Pkm.DEWPIDER]: Dewpider,
+  [Pkm.ARAQUANID]: Araquanid
 }
