@@ -6733,7 +6733,7 @@ export class Happiny extends Pokemon {
   atk = 8
   def = 5
   speDef = 5
-  maxPP = 120
+  maxPP = 130
   range = 1
   skill = Ability.SOFT_BOILED
   attackSprite = AttackSprite.FAIRY_MELEE
@@ -6748,7 +6748,7 @@ export class Chansey extends Pokemon {
   atk = 20
   def = 6
   speDef = 10
-  maxPP = 120
+  maxPP = 130
   range = 1
   skill = Ability.SOFT_BOILED
   attackSprite = AttackSprite.FAIRY_MELEE
@@ -6762,7 +6762,7 @@ export class Blissey extends Pokemon {
   atk = 25
   def = 10
   speDef = 15
-  maxPP = 120
+  maxPP = 130
   range = 1
   skill = Ability.SOFT_BOILED
   attackSprite = AttackSprite.FAIRY_MELEE

@@ -1126,8 +1126,8 @@
   "effect_description": {
     "STAMINA": "Ottieni 15 SHIELD",
     "STRENGTH": "Ottieni 25 SHIELD",
-    "ROCK_SMASH": "Ottieni 40 SHIELD",
-    "PURE_POWER": "Ottieni 55 SHIELD",
+    "ROCK_SMASH": "Ottieni 35 SHIELD",
+    "PURE_POWER": "Ottieni 50 SHIELD",
     "INGRAIN": "Ripristina 8 HP ogni 2 secondi. Ottieni una bacca casuale ogni 3 combattimenti",
     "GROWTH": "Ripristina 15 HP ogni 2 secondi. Ottieni una bacca casuale ogni 2 combattimenti",
     "SPORE": "Ripristina 30 HP ogni 2 secondi. Ottieni una bacca casuale ad ogni combattimento",
