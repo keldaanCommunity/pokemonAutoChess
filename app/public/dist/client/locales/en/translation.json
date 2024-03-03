@@ -1312,7 +1312,7 @@
     "SANDSEAR_STORM": "Searingly hot sand that strikes all enemies in a straight line, dealing [80,SP] SPECIAL and BURN for 4 seconds",
     "WILDBOLT_STORM": "Thunderous tempest that strikes all enemies in a straight line, dealing [80,SP] SPECIAL and PARALYSIS for 4 seconds",
     "BLEAKWIND_STORM": "Savagely cold winds that strike all enemies in a straight line, dealing [80,SP] SPECIAL and FREEZE for 2 seconds",
-    "SPRINGTIDE_STORM": "Fierce winds brimming with love and hate all enemies in a straight line, dealing [80,SP] SPECIAL and CHARM for 2 seconds",
+    "SPRINGTIDE_STORM": "Fierce winds brimming with love and hate strike all enemies in a straight line, dealing [80,SP] SPECIAL and CHARM for 2 seconds",
     "AURA_WHEEL": "Deals [60,SP] SPECIAL and switch to Hangry form",
     "AURA_WHEEL_HANGRY": "Deals [60,SP] SPECIAL and switch to Normal form",
     "LICK": "Deals [30,60,120,SP] SPECIAL. The target is CONFUSION and PARALYSIS for 3 seconds",
