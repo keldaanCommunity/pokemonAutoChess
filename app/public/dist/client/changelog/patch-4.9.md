@@ -14,8 +14,11 @@ Araquanid
 - New ability for Type Null: Head Smash
 - New ability for all Silvally forms: Multi-Attack: Inflicts 10 special damage to surounding enemies, multiplied by the synergy level of current Silvally form
 - New passive for all Silvally forms: RKS System: Silvally can change its synergy items at any time. Place it on bench to drop synergy items.
+- Revert Happiny PP buff from 4.7
 
 # Changes to Synergies
+
+- Nerf Normal : Shield ~~15/25/40/55~~ 15/25/35/50
 
 # Changes to Items
 

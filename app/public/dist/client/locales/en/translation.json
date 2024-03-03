@@ -1444,8 +1444,8 @@
   "effect_description": {
     "STAMINA": "Gain 15 SHIELD",
     "STRENGTH": "Gain 25 SHIELD",
-    "ROCK_SMASH": "Gain 40 SHIELD",
-    "PURE_POWER": "Gain 55 SHIELD",
+    "ROCK_SMASH": "Gain 35 SHIELD",
+    "PURE_POWER": "Gain 50 SHIELD",
     "INGRAIN": "Restore 8 HP every 2 seconds. A berry can be picked every 3 stages.",
     "GROWTH": "Restore 15 HP every 2 seconds. A berry can be picked every 2 stages.",
     "SPORE": "Restore 30 HP every 2 seconds. A berry can be picked every stage.",
