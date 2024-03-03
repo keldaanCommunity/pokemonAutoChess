@@ -14,8 +14,11 @@ Araquanid
 - New ability for Type Null: Head Smash
 - New ability for all Silvally forms: Multi-Attack: Inflicts 10 special damage to surounding enemies, multiplied by the synergy level of current Silvally form
 - New passive for all Silvally forms: RKS System: Silvally can change its synergy items at any time. Place it on bench to drop synergy items.
+- Buff Oddish line: PP ~~100~~ 80
 
 # Changes to Synergies
+
+- Buff Flower 6 ; new ability for Bellossom: Petal Blizzard ; Belossom HP ~~360~~ 300, Attack ~~27~~ 30, PP: ~~100~~ 10
 
 # Changes to Items
 
