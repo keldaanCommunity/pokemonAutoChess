@@ -296,7 +296,7 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(3, 3)
       break
 
-    case Ability.RKS_SYSTEM:
+    case Ability.MULTI_ATTACK:
       addAbilitySprite(skill, coordinates, true).setScale(4)
       break
 
@@ -1485,7 +1485,7 @@ export function displayAbility(
       break
     }
 
-    case Ability.STICKY_WEB: {
+    case Ability.ENTANGLING_THREAD: {
       const specialProjectile = addAbilitySprite("STRING_SHOT", coordinates)
         .setScale(0.25)
         .setTint(0x80a080)
