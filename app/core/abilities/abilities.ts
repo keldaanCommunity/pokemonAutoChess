@@ -3067,23 +3067,21 @@ export class AppleAcidStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 0
-    switch (pokemon.stars) {
-      case 1:
-        damage = 30
-        break
-      case 2:
-        damage = 60
-        break
-      case 3:
-        damage = 120
-        break
-      default:
-        break
-    }
-    target.addDefense(-5, true)
-    target.addSpecialDefense(-5, true)
-    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    const cells = board.getCellsInFront(pokemon, target)
+    const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
+    cells.forEach((cell) => {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.addDefense(-5, true)
+        cell.value.addSpecialDefense(-5, true)
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
+    })
   }
 }
 
