@@ -278,6 +278,7 @@
     "CURSE": "Maldición",
     "TIME_TRAVEL": "Viaje Temporal",
     "POLTERGEIST": "Poltergeist",
+    "GOLD_RUSH": "Giga Monedas",
     "MAKE_IT_RAIN": "Fiebre Dorada",
     "CRUSH_GRIP": "Agarrón",
     "AURASPHERE": "Esfera Aural",
@@ -835,6 +836,7 @@
     "MELMETAL": "Melmetal",
     "HOOPA": "Hoopa",
     "HOOPA_UNBOUND": "Hoopa Desatado",
+    "SILVALLY": "Silvally",
     "SILVALLY_FIRE": "Silvally Fire",
     "SILVALLY_FOSSIL": "Sivally (Fósil)",
     "SILVALLY_PSYCHIC": "Silvally (Psíquico)",
@@ -1020,7 +1022,9 @@
     "PATRAT": "Patrat",
     "WATCHOG": "Watchog",
     "SPINARAK": "Spinarak",
-    "ARIADOS": "Ariados"
+    "ARIADOS": "Ariados",
+    "DEWPIDER": "Dewpider",
+    "ARAQUANID": "Araquanid"
   },
   "ability_description": {
     "SOFT_BOILED": "Cura todos los efectos de estado y otorga [20,40,80,SP] SHIELD para cada aliado",
