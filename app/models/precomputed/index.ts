@@ -60,6 +60,7 @@ export function getPokemonData(name: Pkm): IPokemonData {
     skill: Ability.DEFAULT,
     passive: Passive.NONE,
     types: [],
-    evolution: null
+    evolution: null,
+    stages: 1
   }
 }

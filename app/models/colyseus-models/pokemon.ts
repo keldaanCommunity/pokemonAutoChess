@@ -8040,7 +8040,7 @@ const rksSystemOnChangePosition = function (
 export class TypeNull extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.ARTIFICIAL])
   rarity = Rarity.UNIQUE
-  stars = 3
+  stars = 2
   evolution = Pkm.SILVALLY_FIRE
   evolutionRule = rksSystemEvolutionRule(null)
   hp = 200
