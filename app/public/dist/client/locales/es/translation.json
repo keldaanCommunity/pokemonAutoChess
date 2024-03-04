@@ -137,6 +137,7 @@
     "ILLUSION": "Ilusión",
     "SMOG": "Neblina",
     "SLUDGE": "Residuos",
+    "SLUDGE_WAVE": "Onda Tóxica",
     "AURORA_BEAM": "Rayo Aurora",
     "AGILITY": "Agilidad",
     "SPIRIT_SHACKLE": "Puntada Sombría",
@@ -169,6 +170,7 @@
     "COUNTER": "Contraataque",
     "COSMIC_POWER": "Masa Cósmica",
     "ENTANGLING_THREAD": "Red Viscosa",
+    "STICKY_WEB": "STICKY_WEB",
     "SILVER_WIND": "Viento Plata",
     "POISON_POWDER": "Polvo Veneno",
     "ICY_WIND": "Viento Hielo",
@@ -259,7 +261,7 @@
     "HYPERSPACE_FURY": "Cerco Dimensión",
     "SNIPE_SHOT": "Disparo Certero",
     "AIR_SLASH": "Tajo Aéreo",
-    "EGGSPLOSION": "Eggsplosion",
+    "EGGSPLOSION": "Eggsplosión",
     "BODY_SLAM": "Golpe Cuerpo",
     "FLORAL_HEALING": "Cura Floral",
     "VINE_WHIP": "Látigo Cepa",
@@ -276,6 +278,7 @@
     "CURSE": "Maldición",
     "TIME_TRAVEL": "Viaje Temporal",
     "POLTERGEIST": "Poltergeist",
+    "GOLD_RUSH": "Giga Monedas",
     "MAKE_IT_RAIN": "Fiebre Dorada",
     "CRUSH_GRIP": "Agarrón",
     "AURASPHERE": "Esfera Aural",
@@ -833,6 +836,7 @@
     "MELMETAL": "Melmetal",
     "HOOPA": "Hoopa",
     "HOOPA_UNBOUND": "Hoopa Desatado",
+    "SILVALLY": "Silvally",
     "SILVALLY_FIRE": "Silvally Fire",
     "SILVALLY_FOSSIL": "Sivally (Fósil)",
     "SILVALLY_PSYCHIC": "Silvally (Psíquico)",
@@ -1018,7 +1022,9 @@
     "PATRAT": "Patrat",
     "WATCHOG": "Watchog",
     "SPINARAK": "Spinarak",
-    "ARIADOS": "Ariados"
+    "ARIADOS": "Ariados",
+    "DEWPIDER": "Dewpider",
+    "ARAQUANID": "Araquanid"
   },
   "ability_description": {
     "SOFT_BOILED": "Cura todos los efectos de estado y otorga [20,40,80,SP] SHIELD para cada aliado",
@@ -1649,6 +1655,7 @@
     "MISTY_TERRAIN": "Otorga FAIRY_FIELD a tus FAIRY Pokemon, aumentando su daño en un 20%",
     "PSYCHIC_TERRAIN": "Otorga PSYCHIC_FIELD a tus Pokémon PSYCHIC, aumentando su daño en un 20%",
     "EEVEE": "Eevee puede evolucionar a una de las 8 Eeveelutions cuando se le da una piedra de sinergia.",
+    "RKS_SYSTEM": "Sistema RKS: $t(pkm.SILVALLY) puede cambiar sus objetos de sinergia en cualquier momento. Colócalo en el banco para soltar los objetos sinérgicos.",
     "SUDOWOODO": "Pretende ser un árbol y no ataca, sino que gana [2,4] ATK por segundo (acumulable).\nComienza a atacar cuando la barra de PP está llena. No puede ser SILENCE ni perder PP hasta entonces.",
     "WOBBUFFET": "No se mueve ni ataca hasta que la barra de PP esté llena. No puede ser SILENCE ni perder PP hasta entonces.",
     "DITTO": "Ditto puede transformarse para crear una copia de la forma básica de uno de tus pokemons sobre los que lo sueltas (excepto Único y Eclosionado)",
@@ -1676,8 +1683,7 @@
     "GLIGAR": "Gligar está buscando un RAZOR_FANG. Si el Pokémon es POISONNED, ganará HP en lugar de recibir daño.",
     "POISON_HEAL": "Si el Pokémon es POISONNED, ganará HP en lugar de recibir daño.",
     "GRIM_NEIGH": "Cuando el Pokémon noquea a un enemigo, emite un aterrador relincho que aumenta su AP en 30",
-    "SHAYMIN": "Shaymin está buscando una GRACIDEA_FLOWER",
-    "RKS_SYSTEM": "Sistema RKS: $t(pkm.SILVALLY) puede cambiar sus objetos de sinergia en cualquier momento. Colócalo en el banco para soltar los objetos sinérgicos."
+    "SHAYMIN": "Shaymin está buscando una GRACIDEA_FLOWER"
   },
   "stat": {
     "ATK": "Ataque",
