@@ -1743,6 +1743,8 @@
     "MISTY_TERRAIN": "Donne FAIRY_FIELD à vos Pokémons FAIRY, augmentant leurs dégâts de 20%",
     "PSYCHIC_TERRAIN": "Donne PSYCHIC_FIELD à vos Pokémons PSYCHIC, augmentant leurs dégâts de 20%",
     "EEVEE": "Evoli peut évoluer vers l'une des 8 Evolitions lorsqu'on lui donne une pierre de synergie",
+    "TYPE_NULL": "$t(pkm.TYPE_NULL) peut évoluer en $t(pkm.SILVALLY) avec un objet de synergie",
+    "RKS_SYSTEM": "Système Alpha: $t(pkm.SILVALLY) peut changer ses objets de synergie à tout moment. Placez-le sur votre banc pour récupérer les objets de synergie portés.",
     "SUDOWOODO": "Se fait passer pour un arbre et n'attaque pas mais gagne [2,4] ATK par seconde à la place (cumulable).\nCommence à attaquer lorsque la barre de PP est pleine",
     "WOBBUFFET": "Ne se déplace pas et n'attaque pas jusqu'à ce que sa barre de PP soit pleine",
     "DITTO": "Métamorph peut se transformer pour créer une copie de la forme de base de l'un de vos pokémons sur lequel vous le déposez (sauf mythiques et éclos)",
@@ -1814,9 +1816,7 @@
     "METEOR": "$t(pkm.MINIOR) alterne entre sa forme Météore et ses formes Noyau. La forme Météore octroie [4,SP]% ATK_SPEED par attaque.\nLes attaques en forme Noyau infligent des effets supplémentaires à la cible et aux ennemis adjacents:\nRouge: inflige 150% PHYSICAL\nBleu: inflige 100% SPECIAL\nOrange: inflige 50% TRUE\nVert: les dégats d'attaque soignent les alliés adjacents",
     "MIMIKYU": "Sous les 50% de HP, Mimiqui bascule en forme cassée, gagnant 30% ATK_SPEED et PROTECT pendant 2 secondes",
     "MIMIKYU_BUSTED": "Son cou est cassé. Mimiqui n'oubliera jamais la personne qui a endommagé son costume.",
-    "HUNGER_SWITCH": "$t(pkm.MORPEKO) alterne entre sa forme rassasiée et affamée.\nLes attaques en forme rassasiée infligent PARALYSIS pendant 2 secondes.\nLes attaques en forme affamée infligent WOUND pendant 4 secondes.",
-    "TYPE_NULL": "$t(pkm.TYPE_NULL) peut évoluer en $t(pkm.SILVALLY) avec un objet de synergie",
-    "RKS_SYSTEM": "Système Alpha: $t(pkm.SILVALLY) peut changer ses objets de synergie à tout moment. Placez-le sur votre banc pour récupérer les objets de synergie portés."
+    "HUNGER_SWITCH": "$t(pkm.MORPEKO) alterne entre sa forme rassasiée et affamée.\nLes attaques en forme rassasiée infligent PARALYSIS pendant 2 secondes.\nLes attaques en forme affamée infligent WOUND pendant 4 secondes."
   },
   "stat": {
     "ATK": "Attaque",
