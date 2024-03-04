@@ -24,7 +24,7 @@ import GameRoom from "./rooms/game-room"
 import PreparationRoom from "./rooms/preparation-room"
 import { DungeonPMDO, SynergyTriggers } from "./types/Config"
 import { Item } from "./types/enum/Item"
-import { Pkm } from "./types/enum/Pokemon"
+import { Pkm, PkmIndex } from "./types/enum/Pokemon"
 import { logger } from "./utils/logger"
 
 process.env.NODE_APP_INSTANCE
@@ -175,6 +175,10 @@ app.get("/map-viewer", (req, res) => {
 
 app.get("/pokemons", (req, res) => {
   res.send(Pkm)
+})
+
+app.get("/pokemons-index", (req, res) => {
+  res.send(PkmIndex)
 })
 
 app.get("/types", (req, res) => {
