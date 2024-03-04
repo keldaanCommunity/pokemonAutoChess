@@ -186,6 +186,7 @@ class GameContainer {
       "fieldCount",
       "soundCount",
       "growGroundCount",
+      "fightingBlockCount",
       "fairyCritCount",
       "powerLensCount",
       "starDustCount",

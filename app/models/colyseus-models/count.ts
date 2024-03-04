@@ -10,6 +10,7 @@ export default class Count extends Schema implements ICount {
   @type("uint8") fairyCritCount = 0
   @type("uint8") attackCount = 0
   @type("uint8") growGroundCount = 0
+  @type("uint8") fightingBlockCount = 0
   @type("uint8") dodgeCount = 0
   @type("uint8") powerLensCount = 0
   @type("uint8") staticCount = 0

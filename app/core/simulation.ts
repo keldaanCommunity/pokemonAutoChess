@@ -810,20 +810,11 @@ export default class Simulation extends Schema implements ISimulation {
           break
 
         case Effect.GUTS:
-          if (types.has(Synergy.FIGHTING)) {
-            pokemon.effects.add(Effect.GUTS)
-          }
-          break
-
+        case Effect.STURDY:
         case Effect.DEFIANT:
-          if (types.has(Synergy.FIGHTING)) {
-            pokemon.effects.add(Effect.DEFIANT)
-          }
-          break
-
         case Effect.JUSTIFIED:
           if (types.has(Synergy.FIGHTING)) {
-            pokemon.effects.add(Effect.JUSTIFIED)
+            pokemon.effects.add(effect)
           }
           break
 

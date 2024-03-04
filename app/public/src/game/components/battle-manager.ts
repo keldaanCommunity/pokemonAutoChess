@@ -414,6 +414,20 @@ export default class BattleManager {
                 this.flip
               )
             }
+          } else if (field == "fightingBlockCount") {
+            if (value > 0 && value % 10 === 0) {
+              displayAbility(
+                this.scene,
+                [],
+                "FIGHTING_KNOCKBACK",
+                pkm.orientation,
+                pkm.positionX,
+                pkm.positionY,
+                pkm.targetX ?? -1,
+                pkm.targetY ?? -1,
+                this.flip
+              )
+            }
           } else if (field == "fairyCritCount") {
             if (value != 0) {
               displayAbility(
