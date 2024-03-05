@@ -556,6 +556,7 @@ export interface ICount {
   fairyCritCount: number
   attackCount: number
   growGroundCount: number
+  fightingBlockCount: number
   dodgeCount: number
   powerLensCount: number
   staticCount: number

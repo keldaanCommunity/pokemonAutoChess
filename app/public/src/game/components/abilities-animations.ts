@@ -1821,6 +1821,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(1.5)
       break
 
+    case "FIGHTING_KNOCKBACK":
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
     case "FAIRY_CRIT":
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
