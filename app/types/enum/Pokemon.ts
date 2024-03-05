@@ -727,7 +727,11 @@ export enum Pkm {
   SPINARAK = "SPINARAK",
   ARIADOS = "ARIADOS",
   DEWPIDER = "DEWPIDER",
-  ARAQUANID = "ARAQUANID"
+  ARAQUANID = "ARAQUANID",
+  ROCKRUFF = "ROCKRUFF",
+  LYCANROC_DAY = "LYCANROC_DAY",
+  LYCANROC_DUSK = "LYCANROC_DUSK",
+  LYCANROC_NIGHT = "LYCANROC_NIGHT"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1459,7 +1463,11 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.SILVALLY_GROUND]: "0773-0004",
   [Pkm.SILVALLY_FLORA]: "0773-0006",
   [Pkm.DEWPIDER]: "0751",
-  [Pkm.ARAQUANID]: "0752"
+  [Pkm.ARAQUANID]: "0752",
+  [Pkm.ROCKRUFF]: "0744",
+  [Pkm.LYCANROC_DAY]: "0745",
+  [Pkm.LYCANROC_DUSK]: "0745-0002",
+  [Pkm.LYCANROC_NIGHT]: "0745-0001"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2189,7 +2197,11 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.SILVALLY_GROUND]: Pkm.TYPE_NULL,
   [Pkm.SILVALLY_FLORA]: Pkm.TYPE_NULL,
   [Pkm.DEWPIDER]: Pkm.DEWPIDER,
-  [Pkm.ARAQUANID]: Pkm.DEWPIDER
+  [Pkm.ARAQUANID]: Pkm.DEWPIDER,
+  [Pkm.ROCKRUFF]: Pkm.ROCKRUFF,
+  [Pkm.LYCANROC_DAY]: Pkm.ROCKRUFF,
+  [Pkm.LYCANROC_DUSK]: Pkm.ROCKRUFF,
+  [Pkm.LYCANROC_NIGHT]: Pkm.ROCKRUFF
 }
 
 export enum PkmDuo {
@@ -5972,5 +5984,25 @@ export const AnimationConfig: {
     ability: AnimationType.Shoot,
     emote: AnimationType.Shoot,
     shinyUnavailable: true
+  },
+  [Pkm.ROCKRUFF]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.DeepBreath
+  },
+  [Pkm.LYCANROC_DAY]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.RearUp
+  },
+  [Pkm.LYCANROC_DUSK]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.RearUp
+  },
+  [Pkm.LYCANROC_NIGHT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.QuickStrike,
+    emote: AnimationType.Shoot
   }
 }

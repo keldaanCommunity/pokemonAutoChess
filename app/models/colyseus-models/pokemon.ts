@@ -11461,7 +11461,7 @@ export class HoopaUnbound extends Pokemon {
 export class Gimmighoul extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.STEEL])
   rarity = Rarity.UNIQUE
-  stars = 3
+  stars = 2
   hp = 200
   atk = 10
   def = 4
@@ -12144,6 +12144,99 @@ export class Ariados extends Pokemon {
   range = 2
   skill = Ability.STRING_SHOT
   attackSprite = AttackSprite.POISON_RANGE
+}
+
+export class Rockruff extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.ROCK])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.LYCANROC_DUSK
+  hp = 90
+  atk = 14
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 1
+  skill = Ability.ACCELEROCK
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+function updateLycanroc(pokemon: Pokemon, weather: Weather, player: Player) {
+  let weatherForm
+  if (weather === Weather.NIGHT) {
+    weatherForm = Pkm.LYCANROC_NIGHT
+  } else if (weather === Weather.SUN) {
+    weatherForm = Pkm.LYCANROC_DAY
+  }
+
+  if (!weatherForm || pokemon.name === weatherForm) return
+
+  const newPokemon = PokemonFactory.createPokemonFromName(weatherForm, player)
+  pokemon.items.forEach((item) => {
+    newPokemon.items.add(item)
+  })
+  newPokemon.positionX = pokemon.positionX
+  newPokemon.positionY = pokemon.positionY
+  player.board.delete(pokemon.id)
+  player.board.set(newPokemon.id, newPokemon)
+  player.updateSynergies()
+}
+
+export class LycanrocDusk extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.ROCK])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 190
+  atk = 26
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.ACCELEROCK
+  passive = Passive.LYCANROC
+  attackSprite = AttackSprite.NORMAL_MELEE
+
+  beforeSimulationStart({ weather, player }) {
+    updateLycanroc(this, weather, player)
+  }
+}
+
+export class LycanrocNight extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.ROCK, Synergy.DARK])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 190
+  atk = 26
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.ACCELEROCK
+  passive = Passive.LYCANROC
+  attackSprite = AttackSprite.NORMAL_MELEE
+
+  beforeSimulationStart({ weather, player }) {
+    updateLycanroc(this, weather, player)
+  }
+}
+
+export class LycanrocDay extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.ROCK, Synergy.LIGHT])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 190
+  atk = 26
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.ACCELEROCK
+  passive = Passive.LYCANROC
+  attackSprite = AttackSprite.NORMAL_MELEE
+
+  beforeSimulationStart({ weather, player }) {
+    updateLycanroc(this, weather, player)
+  }
 }
 
 export const PokemonClasses: Record<
@@ -12876,5 +12969,9 @@ export const PokemonClasses: Record<
   [Pkm.SILVALLY_GROUND]: SilvallyGround,
   [Pkm.SILVALLY_FLORA]: SilvallyFlora,
   [Pkm.DEWPIDER]: Dewpider,
-  [Pkm.ARAQUANID]: Araquanid
+  [Pkm.ARAQUANID]: Araquanid,
+  [Pkm.ROCKRUFF]: Rockruff,
+  [Pkm.LYCANROC_DAY]: LycanrocDay,
+  [Pkm.LYCANROC_DUSK]: LycanrocDusk,
+  [Pkm.LYCANROC_NIGHT]: LycanrocNight
 }
