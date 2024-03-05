@@ -1,10 +1,12 @@
 # New Pokemons:
 
-Tympole
-Palpitoad
-Seismitoad
-Dewpider
-Araquanid
+- Tympole
+- Palpitoad
+- Seismitoad
+- Dewpider
+- Araquanid
+- Rockruff
+- Lycanroc
 
 # Changes to Pokemon & Abilities
 

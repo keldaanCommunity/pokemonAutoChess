@@ -1773,6 +1773,50 @@ export class VoltSwitchStrategy extends AbilityStrategy {
   }
 }
 
+export class AccelerockStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(
+      pokemon,
+      board
+    )
+
+    if (farthestCoordinate) {
+      pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
+      const targetCoordinates = state.getNearestTargetAtRangeCoordinates(
+        pokemon,
+        board
+      )
+      if (targetCoordinates) {
+        pokemon.targetX = targetCoordinates.x
+        pokemon.targetY = targetCoordinates.y
+        const target = board.getValue(targetCoordinates.x, targetCoordinates.y)
+        if (target) {
+          target.handleSpecialDamage(
+            pokemon.atk,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit,
+            true
+          )
+        }
+      }
+    }
+
+    const defLost = max(pokemon.def)(Math.round(5 * (1 + pokemon.ap / 100)))
+    pokemon.addDefense(-defLost)
+    pokemon.addAttackSpeed(defLost * 5)
+    pokemon.cooldown = 0
+  }
+}
+
 export class NuzzleStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -7807,5 +7851,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SPACIAL_REND]: new SpacialRendStrategy(),
   [Ability.MULTI_ATTACK]: new MultiAttackStrategy(),
   [Ability.STICKY_WEB]: new StickyWebStrategy(),
+  [Ability.ACCELEROCK]: new AccelerockStrategy(),
   [Ability.PETAL_BLIZZARD]: new PetalBlizzardStrategy()
 }
