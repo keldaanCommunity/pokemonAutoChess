@@ -5879,7 +5879,7 @@ export class Oddish extends Pokemon {
   atk = 9
   def = 2
   speDef = 2
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.STUN_SPORE
   attackSprite = AttackSprite.GRASS_MELEE
@@ -5894,7 +5894,7 @@ export class Gloom extends Pokemon {
   atk = 18
   def = 3
   speDef = 3
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.STUN_SPORE
   attackSprite = AttackSprite.GRASS_MELEE
@@ -5909,7 +5909,7 @@ export class Vileplume extends Pokemon {
   atk = 20
   def = 4
   speDef = 4
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.STUN_SPORE
   attackSprite = AttackSprite.GRASS_MELEE
@@ -5919,13 +5919,13 @@ export class Bellossom extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.POISON, Synergy.GRASS])
   rarity = Rarity.SPECIAL
   stars = 4
-  hp = 360
-  atk = 27
+  hp = 300
+  atk = 30
   def = 5
   speDef = 5
-  maxPP = 100
+  maxPP = 10
   range = 1
-  skill = Ability.STUN_SPORE
+  skill = Ability.PETAL_BLIZZARD
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -6733,7 +6733,7 @@ export class Happiny extends Pokemon {
   atk = 8
   def = 5
   speDef = 5
-  maxPP = 120
+  maxPP = 130
   range = 1
   skill = Ability.SOFT_BOILED
   attackSprite = AttackSprite.FAIRY_MELEE
@@ -6748,7 +6748,7 @@ export class Chansey extends Pokemon {
   atk = 20
   def = 6
   speDef = 10
-  maxPP = 120
+  maxPP = 130
   range = 1
   skill = Ability.SOFT_BOILED
   attackSprite = AttackSprite.FAIRY_MELEE
@@ -6762,7 +6762,7 @@ export class Blissey extends Pokemon {
   atk = 25
   def = 10
   speDef = 15
-  maxPP = 120
+  maxPP = 130
   range = 1
   skill = Ability.SOFT_BOILED
   attackSprite = AttackSprite.FAIRY_MELEE

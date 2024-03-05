@@ -500,10 +500,10 @@ export default class Simulation extends Schema implements ISimulation {
           shieldBonus += 25
         }
         if (pokemon.effects.has(Effect.ROCK_SMASH)) {
-          shieldBonus += 40
+          shieldBonus += 35
         }
         if (pokemon.effects.has(Effect.PURE_POWER)) {
-          shieldBonus += 55
+          shieldBonus += 50
         }
         if (shieldBonus >= 0) {
           pokemon.addShield(shieldBonus, pokemon)
@@ -810,20 +810,11 @@ export default class Simulation extends Schema implements ISimulation {
           break
 
         case Effect.GUTS:
-          if (types.has(Synergy.FIGHTING)) {
-            pokemon.effects.add(Effect.GUTS)
-          }
-          break
-
+        case Effect.STURDY:
         case Effect.DEFIANT:
-          if (types.has(Synergy.FIGHTING)) {
-            pokemon.effects.add(Effect.DEFIANT)
-          }
-          break
-
         case Effect.JUSTIFIED:
           if (types.has(Synergy.FIGHTING)) {
-            pokemon.effects.add(Effect.JUSTIFIED)
+            pokemon.effects.add(effect)
           }
           break
 

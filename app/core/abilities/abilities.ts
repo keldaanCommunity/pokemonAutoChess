@@ -3115,23 +3115,21 @@ export class AppleAcidStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 0
-    switch (pokemon.stars) {
-      case 1:
-        damage = 30
-        break
-      case 2:
-        damage = 60
-        break
-      case 3:
-        damage = 120
-        break
-      default:
-        break
-    }
-    target.addDefense(-5, true)
-    target.addSpecialDefense(-5, true)
-    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    const cells = board.getCellsInFront(pokemon, target)
+    const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
+    cells.forEach((cell) => {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.addDefense(-5, true)
+        cell.value.addSpecialDefense(-5, true)
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
+    })
   }
 }
 
@@ -3863,7 +3861,7 @@ export class StunSporeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [5, 10, 20, 40][pokemon.stars - 1] ?? 40
+    const damage = [5, 10, 20][pokemon.stars - 1] ?? 20
     board
       .getAdjacentCells(target.positionX, target.positionY)
       .forEach((cell) => {
@@ -7491,6 +7489,33 @@ export class MultiAttackStrategy extends AbilityStrategy {
   }
 }
 
+export class PetalBlizzardStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    board
+      .getCellsInRange(pokemon.positionX, pokemon.positionY, 1)
+      .forEach((cell) => {
+        if (cell.value && cell.value.team !== pokemon.team) {
+          cell.value.handleSpecialDamage(
+            30,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit,
+            true
+          )
+        }
+      })
+    pokemon.addAbilityPower(10)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -7781,5 +7806,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.DETECT]: new DetectStrategy(),
   [Ability.SPACIAL_REND]: new SpacialRendStrategy(),
   [Ability.MULTI_ATTACK]: new MultiAttackStrategy(),
-  [Ability.STICKY_WEB]: new StickyWebStrategy()
+  [Ability.STICKY_WEB]: new StickyWebStrategy(),
+  [Ability.PETAL_BLIZZARD]: new PetalBlizzardStrategy()
 }

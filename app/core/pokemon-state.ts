@@ -191,15 +191,19 @@ export default class PokemonState {
       if (
         attackType !== AttackType.TRUE &&
         (pokemon.effects.has(Effect.GUTS) ||
+          pokemon.effects.has(Effect.STURDY) ||
           pokemon.effects.has(Effect.DEFIANT) ||
           pokemon.effects.has(Effect.JUSTIFIED))
       ) {
         const damageBlocked = pokemon.effects.has(Effect.JUSTIFIED)
-          ? 10
+          ? 15
           : pokemon.effects.has(Effect.DEFIANT)
+          ? 10
+          : pokemon.effects.has(Effect.STURDY)
           ? 7
           : 4
         reducedDamage = reducedDamage - damageBlocked
+        pokemon.count.fightingBlockCount++
       }
 
       reducedDamage = min(1)(reducedDamage) // should deal 1 damage at least
@@ -720,6 +724,32 @@ export default class PokemonState {
     })
 
     candidateCells.sort((a, b) => b.distance - a.distance)
+    return candidateCells[0]
+  }
+
+  getAvailablePlaceCoordinatesInRange(
+    pokemon: PokemonEntity,
+    board: Board,
+    range: number
+  ): { x: number; y: number } | undefined {
+    const candidateCells = new Array<{
+      distance: number
+      x: number
+      y: number
+    }>()
+
+    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
+      const distance = distanceM(pokemon.positionX, pokemon.positionY, x, y)
+      if (value === undefined && distance >= range) {
+        candidateCells.push({
+          x,
+          y,
+          distance
+        })
+      }
+    })
+
+    candidateCells.sort((a, b) => a.distance - b.distance)
     return candidateCells[0]
   }
 

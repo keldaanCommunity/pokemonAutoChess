@@ -902,6 +902,32 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
     }
 
+    // Fighting knockback
+    if (
+      this.count.fightingBlockCount > 0 &&
+      this.count.fightingBlockCount % 10 === 0 &&
+      distanceC(this.positionX, this.positionY, this.targetX, this.targetY) ===
+        1
+    ) {
+      const targetAtContact = board.getValue(this.targetX, this.targetY)
+      const destination = this.state.getAvailablePlaceCoordinatesInRange(
+        this,
+        board,
+        4
+      )
+      if (destination && targetAtContact) {
+        targetAtContact.shield = 0
+        targetAtContact.handleDamage({
+          damage: this.atk,
+          board,
+          attackType: AttackType.PHYSICAL,
+          attacker: this,
+          shouldTargetGainMana: true
+        })
+        targetAtContact.moveTo(destination.x, destination.y, board)
+      }
+    }
+
     // Berries trigger
     const berry = values(this.items).find((item) => Berries.includes(item))
     if (berry && this.life > 0 && this.life < 0.5 * this.hp) {

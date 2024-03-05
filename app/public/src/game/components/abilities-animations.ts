@@ -1797,6 +1797,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
+    case Ability.PETAL_BLIZZARD:
+      addAbilitySprite(skill, coordinates, true).setScale(3)
+      break
+
     case Ability.NIGHTMARE:
       addAbilitySprite(skill, coordinates, true).setOrigin(0.5, 1).setScale(2)
       break
@@ -1815,6 +1819,10 @@ export function displayAbility(
 
     case "GROUND_GROW":
       addAbilitySprite(skill, coordinates, true).setScale(1.5)
+      break
+
+    case "FIGHTING_KNOCKBACK":
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
     case "FAIRY_CRIT":

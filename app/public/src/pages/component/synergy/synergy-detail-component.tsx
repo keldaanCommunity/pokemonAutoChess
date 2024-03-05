@@ -35,11 +35,11 @@ export default function SynergyDetailComponent(props: {
   const regulars = PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
     props.type
   ].pokemons
-    .map((p) => getPokemonData(p as Pkm))
-    .sort((a, b) => RarityCost[a.rarity] - RarityCost[b.rarity])
     .filter(
       (p, i, arr) => arr.findIndex((x) => PkmFamily[x] === PkmFamily[p]) === i // remove duplicates of same family
     )
+    .map((p) => getPokemonData(p as Pkm))
+    .sort((a, b) => RarityCost[a.rarity] - RarityCost[b.rarity])
 
   const additionals = PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
     props.type
