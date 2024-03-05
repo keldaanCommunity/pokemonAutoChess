@@ -228,7 +228,7 @@ export class HiddenPowerIStrategy extends HiddenPowerStrategy {
   ) {
     super.process(unown, state, board, target, crit)
     if (unown.player) {
-      unown.player.items.add(pickRandomIn(BasicItems))
+      unown.player.items.push(pickRandomIn(BasicItems))
     }
   }
 }
@@ -511,7 +511,7 @@ export class HiddenPowerTStrategy extends HiddenPowerStrategy {
   ) {
     super.process(unown, state, board, target, crit)
     pickNRandomIn(Berries, 3).forEach((item) => {
-      unown.player && unown.player.items.add(item)
+      unown.player && unown.player.items.push(item)
     })
   }
 }

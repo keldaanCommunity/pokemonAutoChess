@@ -125,7 +125,7 @@ export class CountEvolutionRule extends EvolutionRule {
       const itemToAdd = itemsToAdd.pop()
       if (itemToAdd) {
         if (pokemonEvolved.items.has(itemToAdd)) {
-          player.items.add(itemToAdd)
+          player.items.push(itemToAdd)
         } else {
           pokemonEvolved.items.add(itemToAdd)
         }
@@ -133,10 +133,10 @@ export class CountEvolutionRule extends EvolutionRule {
     }
 
     itemsToAdd.forEach((item) => {
-      player.items.add(item)
+      player.items.push(item)
     })
     basicItemsToAdd.forEach((item) => {
-      player.items.add(item)
+      player.items.push(item)
     })
 
     if (coord) {
