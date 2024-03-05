@@ -15,4 +15,5 @@ export interface IPokemonData {
   range: number
   types: Synergy[]
   evolution: Pkm | null
+  stages: number
 }

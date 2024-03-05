@@ -33,6 +33,7 @@
 # UI
 
 - Add a visual feedback when hovering one of your pokemons to drag or sell
+- Add a visual indicator of max tier reachable for each unit
 
 # Bugfix
 

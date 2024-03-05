@@ -2,6 +2,7 @@ import React, { useMemo } from "react"
 import { useTranslation } from "react-i18next"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../../../../models/pokemon-factory"
+import { getPokemonData } from "../../../../../models/precomputed"
 import { Emotion } from "../../../../../types"
 import { RarityColor } from "../../../../../types/Config"
 import { Ability } from "../../../../../types/enum/Ability"
@@ -72,6 +73,12 @@ export function GamePokemonDetail(props: {
           {Array.from({ length: pokemon.stars }, (_, index) => (
             <img key={index} src="assets/ui/star.svg" height="16"></img>
           ))}
+          {Array.from(
+            { length: getPokemonData(pokemon.name).stages - pokemon.stars },
+            (_, index) => (
+              <img key={index} src="assets/ui/star_empty.svg" height="16"></img>
+            )
+          )}
         </p>
       </div>
 
