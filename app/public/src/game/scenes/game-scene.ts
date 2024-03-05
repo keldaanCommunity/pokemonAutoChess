@@ -274,13 +274,12 @@ export default class GameScene extends Scene {
     this.sellZone = new SellZone(this)
     this.dropSpots = []
 
-    for (let i = 0; i < 4; i++) {
-      for (let j = 0; j < 8; j++) {
-        const coord = transformCoordinate(j, i)
+    for (let y = 0; y < 4; y++) {
+      for (let x = 0; x < 8; x++) {
+        const coord = transformCoordinate(x, y)
         const zone = this.add.zone(coord[0], coord[1], 96, 96)
         zone.setRectangleDropZone(96, 96)
         zone.setName("board-zone")
-        zone.setData({ x: j, y: i })
         const graphic = this.add
           .graphics()
           .fillStyle(0x61738a, 1)
@@ -288,6 +287,8 @@ export default class GameScene extends Scene {
           .lineStyle(2, 0x000000, 1)
           .strokeCircle(zone.x, zone.y, zone.input!.hitArea.width / 4)
         graphic.setVisible(false)
+        graphic.setData({ x, y })
+        zone.setData({ x, y, dropspot: graphic })
         this.dropSpots.push(graphic)
       }
     }
@@ -362,7 +363,14 @@ export default class GameScene extends Scene {
       (pointer, gameObject: Phaser.GameObjects.GameObject) => {
         if (gameObject instanceof PokemonSprite) {
           this.pokemonDragged = gameObject
-          this.dropSpots.forEach((spot) => spot.setVisible(true))
+          this.dropSpots.forEach((spot) => {
+            if (
+              this.room?.state.phase === GamePhaseState.PICK ||
+              spot.getData("y") === 0
+            ) {
+              spot.setVisible(true)
+            }
+          })
 
           if (
             canSell(
@@ -398,7 +406,14 @@ export default class GameScene extends Scene {
         g.x = dragX
         g.y = dragY
         if (g && this.pokemonDragged != null) {
-          this.dropSpots.forEach((spot) => spot.setVisible(true))
+          this.dropSpots.forEach((spot) => {
+            if (
+              this.room?.state.phase === GamePhaseState.PICK ||
+              spot.getData("y") === 0
+            ) {
+              spot.setVisible(true)
+            }
+          })
           if (
             this.sellZone?.visible === false &&
             canSell(
