@@ -51,7 +51,7 @@ export default class GameScene extends Scene {
   pokemonDragged: PokemonSprite | null = null
   shopIndexHovered: number | null = null
   itemDragged: ItemContainer | null = null
-  dropSpots: Phaser.GameObjects.Sprite[] = []
+  dropSpots: Phaser.GameObjects.Image[] = []
   sellZone: SellZone | undefined
   zones: Phaser.GameObjects.Zone[] = []
   lastDragDropPokemon: PokemonSprite | undefined
@@ -279,7 +279,7 @@ export default class GameScene extends Scene {
         zone.setRectangleDropZone(96, 96)
         zone.setName("board-zone")
         const spotSprite = this.add
-          .sprite(zone.x, zone.y, "cell", 0)
+          .image(zone.x, zone.y, "cell", 0)
           .setVisible(false)
           .setData({ x, y })
         zone.setData({ x, y, sprite: spotSprite })
