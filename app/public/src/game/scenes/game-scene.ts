@@ -53,7 +53,7 @@ export default class GameScene extends Scene {
   pokemonDragged: PokemonSprite | null = null
   shopIndexHovered: number | null = null
   itemDragged: ItemContainer | null = null
-  dropSpots: Phaser.GameObjects.Graphics[] = []
+  dropSpots: Phaser.GameObjects.Sprite[] = []
   sellZone: SellZone | undefined
   zones: Phaser.GameObjects.Zone[] = []
   lastDragDropPokemon: PokemonSprite | undefined
@@ -280,16 +280,12 @@ export default class GameScene extends Scene {
         const zone = this.add.zone(coord[0], coord[1], 96, 96)
         zone.setRectangleDropZone(96, 96)
         zone.setName("board-zone")
-        const graphic = this.add
-          .graphics()
-          .fillStyle(0x61738a, 1)
-          .fillCircle(zone.x, zone.y, zone.input!.hitArea.width / 4)
-          .lineStyle(2, 0x000000, 1)
-          .strokeCircle(zone.x, zone.y, zone.input!.hitArea.width / 4)
-        graphic.setVisible(false)
-        graphic.setData({ x, y })
-        zone.setData({ x, y, dropspot: graphic })
-        this.dropSpots.push(graphic)
+        const spotSprite = this.add
+          .sprite(zone.x, zone.y, "cell", 0)
+          .setVisible(false)
+          .setData({ x, y })
+        zone.setData({ x, y, sprite: spotSprite })
+        this.dropSpots.push(spotSprite)
       }
     }
 
@@ -368,7 +364,7 @@ export default class GameScene extends Scene {
               this.room?.state.phase === GamePhaseState.PICK ||
               spot.getData("y") === 0
             ) {
-              spot.setVisible(true)
+              spot.setFrame(0).setVisible(true)
             }
           })
 
@@ -543,6 +539,13 @@ export default class GameScene extends Scene {
             }
           }
         }
+
+        if (
+          dropZone.name === "board-zone" &&
+          gameObject instanceof PokemonSprite
+        ) {
+          dropZone.getData("sprite")?.setFrame(1)
+        }
       },
       this
     )
@@ -555,6 +558,13 @@ export default class GameScene extends Scene {
           dropZone instanceof ItemContainer
         ) {
           gameObject.closeDetail()
+        }
+
+        if (
+          gameObject instanceof PokemonSprite &&
+          dropZone.name === "board-zone"
+        ) {
+          dropZone.getData("sprite")?.setFrame(0)
         }
       },
       this

@@ -72,6 +72,17 @@ export default class LoadingManager {
     scene.load.image("money", "/assets/icons/money.svg")
     scene.load.image("arrowDown", "/assets/ui/arrowDown.png")
 
+    scene.load.spritesheet({
+      key: "cell",
+      url: "/assets/ui/cell.png",
+      frameConfig: {
+        frameWidth: 64,
+        frameHeight: 64,
+        startFrame: 0,
+        endFrame: 1
+      }
+    })
+
     scene.load.multiatlas("item", "/assets/item/item.json", "/assets/item/")
 
     for (const pack in atlas.packs) {

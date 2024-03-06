@@ -33,6 +33,7 @@ export class SellZone extends GameObjects.Container {
         sellZone.input!.hitArea.height
       )
     this.add(this.graphic)
+    sellZone.setData({ graphic: this.graphic })
 
     this.text = scene.add.text(0, 0, t("drop_here_to_sell"), {
       fontSize: "35px",
