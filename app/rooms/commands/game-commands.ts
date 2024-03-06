@@ -70,6 +70,7 @@ import {
 import GameRoom from "../game-room"
 import { isOnBench } from "../../models/colyseus-models/pokemon"
 import { repeat } from "../../utils/function"
+import { removeInArray } from "../../utils/array"
 
 export class OnShopCommand extends Command<
   GameRoom,
@@ -231,8 +232,8 @@ export class OnDragDropCommand extends Command<
               PokemonFactory.getPokemonBaseEvolution(pokemonToClone.name),
               player
             )
-            pokemon.items.forEach((it) => {
-              player.items.add(it)
+            pokemon.items.forEach((item) => {
+              player.items.push(item)
             })
             player.board.delete(detail.id)
             const position = getFirstAvailablePositionInBench(player.board)
@@ -323,7 +324,7 @@ export class OnDragDropCombineCommand extends Command<
       const itemB = detail.itemB
 
       //verify player has both items
-      if (!player.items.has(itemA) || !player.items.has(itemB)) {
+      if (!player.items.includes(itemA) || !player.items.includes(itemB)) {
         client.send(Transfer.DRAG_DROP_FAILED, message)
         return
       }
@@ -361,9 +362,9 @@ export class OnDragDropCombineCommand extends Command<
         client.send(Transfer.DRAG_DROP_FAILED, message)
         return
       } else {
-        player.items.add(result)
-        player.items.delete(itemA)
-        player.items.delete(itemB)
+        player.items.push(result)
+        removeInArray(player.items, itemA)
+        removeInArray(player.items, itemB)
       }
 
       player.updateSynergies()
@@ -392,7 +393,7 @@ export class OnDragDropItemCommand extends Command<
 
     const item = detail.id
 
-    if (!player.items.has(item) && !detail.bypass) {
+    if (!player.items.includes(item) && !detail.bypass) {
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return
     }
@@ -448,11 +449,11 @@ export class OnDragDropItemCommand extends Command<
           }
 
           pokemon.items.delete(itemToCombine)
-          player.items.delete(item)
+          removeInArray(player.items, item)
 
           if (pokemon.items.has(itemCombined)) {
             // pokemon already has the combined item so the second one pops off and go to player inventory
-            player.items.add(itemCombined)
+            player.items.push(itemCombined)
           } else {
             const detail: IDragDropItemMessage = {
               id: itemCombined,
@@ -470,7 +471,7 @@ export class OnDragDropItemCommand extends Command<
         }
       } else {
         pokemon.items.add(item)
-        player.items.delete(item)
+        removeInArray(player.items, item)
       }
     } else {
       if (pokemon.items.has(item)) {
@@ -478,7 +479,7 @@ export class OnDragDropItemCommand extends Command<
         return
       } else {
         pokemon.items.add(item)
-        player.items.delete(item)
+        removeInArray(player.items, item)
       }
     }
 
@@ -523,7 +524,7 @@ export class OnSellDropCommand extends Command<
         this.state.shop.releasePokemon(pokemon.name)
         player.money += PokemonFactory.getSellPrice(pokemon.name, player)
         pokemon.items.forEach((it) => {
-          player.items.add(it)
+          player.items.push(it)
         })
 
         player.board.delete(pokemonId)
@@ -593,7 +594,7 @@ export class OnPickBerryCommand extends Command<
     const player = this.state.players.get(id)
     if (player && player.berryTreeStage >= 3) {
       player.berryTreeStage = 0
-      player.items.add(player.berry)
+      player.items.push(player.berry)
       player.berry = pickRandomIn(Berries)
     }
   }
@@ -1176,7 +1177,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             if (pveStage.chooseOnlyOne) {
               player.itemsProposition.push(reward)
             } else {
-              player.items.add(reward)
+              player.items.push(reward)
             }
           }
         }

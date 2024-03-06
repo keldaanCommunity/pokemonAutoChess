@@ -8031,7 +8031,7 @@ const rksSystemOnChangePosition = function (
     SynergyItems.forEach((synergyItem) => {
       if (this.items.has(synergyItem)) {
         this.items.delete(synergyItem)
-        player.items.add(synergyItem)
+        player.items.push(synergyItem)
       }
     })
   }
@@ -10349,7 +10349,7 @@ export class Tropius extends Pokemon {
       entity.items.add(berry)
       entity.refToBoardPokemon.items.add(berry)
     } else {
-      player.items.add(berry)
+      player.items.push(berry)
     }
   }
 }

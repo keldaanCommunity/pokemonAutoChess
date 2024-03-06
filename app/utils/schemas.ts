@@ -12,7 +12,11 @@ export function keys(schema: MapSchema): string[] {
 }
 
 export function values<T>(
-  schema: MapSchema<T, any> | SetSchema<T> | CollectionSchema<T>
+  schema:
+    | MapSchema<T, any>
+    | SetSchema<T>
+    | CollectionSchema<T>
+    | ArraySchema<T>
 ): T[] {
   const values: T[] = []
   schema.forEach((value: T) => values.push(value))
