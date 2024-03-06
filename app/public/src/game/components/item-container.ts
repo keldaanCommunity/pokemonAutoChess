@@ -12,7 +12,7 @@ export default class ItemContainer extends DraggableObject {
   tempDetail: ItemDetail | undefined
   tempSprite: GameObjects.Image | undefined
   countText: GameObjects.Text | undefined
-  circle?: GameObjects.Ellipse
+  circle?: GameObjects.Image
   name: Item
   parentContainer: ItemsContainer
   scene: Phaser.Scene
@@ -34,22 +34,11 @@ export default class ItemContainer extends DraggableObject {
     this.scene = scene
     this.pokemonId = pokemonId
     this.playerId = playerId
-    this.circle = new GameObjects.Ellipse(
-      scene,
-      0,
-      0,
-      itemSize,
-      itemSize,
-      0x61738a,
-      1
-    )
-    if (pokemonId === null) {
-      this.circle.setStrokeStyle(
-        2,
-        playerId === currentPlayerUid ? 0x000000 : 0x666666,
-        1
-      )
-      this.circle.setAlpha(playerId === currentPlayerUid ? 1 : 0.7)
+    this.circle = scene.add.image(0, 0, "cell", 0)
+    if (pokemonId) {
+      this.circle.setFrame(2).setScale(0.45)
+    } else {
+      this.circle.setFrame(playerId === currentPlayerUid ? 0 : 2)
     }
     this.add(this.circle)
     this.sprite = new GameObjects.Image(scene, 0, 0, "item", item).setScale(
@@ -77,7 +66,7 @@ export default class ItemContainer extends DraggableObject {
     }
     this.updateDropZone(false)
     if (this.draggable) {
-      this.circle?.setFillStyle(0x68829e)
+      this.circle?.setFrame(1)
     }
   }
 
@@ -87,7 +76,7 @@ export default class ItemContainer extends DraggableObject {
       this.updateDropZone(true)
     }
     if (this.draggable) {
-      this.circle?.setFillStyle(0x61738a)
+      this.circle?.setFrame(0)
     }
     if (preferences.showDetailsOnHover) {
       this.mouseoutTimeout = setTimeout(
