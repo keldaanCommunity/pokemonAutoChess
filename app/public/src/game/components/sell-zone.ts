@@ -1,9 +1,12 @@
 import { t } from "i18next"
 import { GameObjects } from "phaser"
+import PokemonFactory from "../../../../models/pokemon-factory"
+import { Pkm } from "../../../../types/enum/Pokemon"
+import { getGameContainer } from "../../pages/game"
 import { transformCoordinate } from "../../pages/utils/utils"
 
 export class SellZone extends GameObjects.Container {
-  graphic: Phaser.GameObjects.Graphics
+  rectangle: Phaser.GameObjects.Rectangle
   zone: Phaser.GameObjects.Zone
   text: Phaser.GameObjects.Text
 
@@ -16,24 +19,19 @@ export class SellZone extends GameObjects.Container {
     sellZone.setName("sell-zone")
     this.add(sellZone)
 
-    this.graphic = scene.add
-      .graphics()
-      .fillStyle(0x61738a, 1)
-      .fillRect(
-        sellZone.x - sellZone.input!.hitArea.width / 2,
-        sellZone.y - sellZone.input!.hitArea.height / 2,
+    this.rectangle = scene.add
+      .rectangle(
+        sellZone.x,
+        sellZone.y,
         sellZone.input!.hitArea.width,
-        sellZone.input!.hitArea.height
+        sellZone.input!.hitArea.height,
+        0x61738a,
+        1
       )
-      .lineStyle(2, 0x000000, 1)
-      .strokeRect(
-        sellZone.x - sellZone.input!.hitArea.width / 2,
-        sellZone.y - sellZone.input!.hitArea.height / 2,
-        sellZone.input!.hitArea.width,
-        sellZone.input!.hitArea.height
-      )
-    this.add(this.graphic)
-    sellZone.setData({ graphic: this.graphic })
+      .setStrokeStyle(2, 0x000000, 1)
+
+    this.add(this.rectangle)
+    sellZone.setData({ rectangle: this.rectangle })
 
     this.text = scene.add.text(0, 0, t("drop_here_to_sell"), {
       fontSize: "35px",
@@ -46,5 +44,19 @@ export class SellZone extends GameObjects.Container {
 
     this.setVisible(false)
     this.scene.add.existing(this)
+  }
+
+  showForPokemon(pkm: Pkm) {
+    const price = PokemonFactory.getSellPrice(pkm, getGameContainer().player)
+    this.text.setText(
+      `${t("drop_here_to_sell")} ${t("for_price_gold", { price })}`
+    )
+    this.rectangle.setFillStyle(0x61738a)
+    this.setVisible(true)
+  }
+
+  hide() {
+    this.rectangle.setFillStyle(0x61738a)
+    this.setVisible(false)
   }
 }
