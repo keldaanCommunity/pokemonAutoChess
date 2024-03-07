@@ -731,7 +731,8 @@ export enum Pkm {
   ROCKRUFF = "ROCKRUFF",
   LYCANROC_DAY = "LYCANROC_DAY",
   LYCANROC_DUSK = "LYCANROC_DUSK",
-  LYCANROC_NIGHT = "LYCANROC_NIGHT"
+  LYCANROC_NIGHT = "LYCANROC_NIGHT",
+  DRUDDIGON = "DRUDDIGON"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1467,7 +1468,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.ROCKRUFF]: "0744",
   [Pkm.LYCANROC_DAY]: "0745",
   [Pkm.LYCANROC_DUSK]: "0745-0002",
-  [Pkm.LYCANROC_NIGHT]: "0745-0001"
+  [Pkm.LYCANROC_NIGHT]: "0745-0001",
+  [Pkm.DRUDDIGON]: "0621"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2201,7 +2203,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.ROCKRUFF]: Pkm.ROCKRUFF,
   [Pkm.LYCANROC_DAY]: Pkm.ROCKRUFF,
   [Pkm.LYCANROC_DUSK]: Pkm.ROCKRUFF,
-  [Pkm.LYCANROC_NIGHT]: Pkm.ROCKRUFF
+  [Pkm.LYCANROC_NIGHT]: Pkm.ROCKRUFF,
+  [Pkm.DRUDDIGON]: Pkm.DRUDDIGON
 }
 
 export enum PkmDuo {
@@ -6003,6 +6006,11 @@ export const AnimationConfig: {
   [Pkm.LYCANROC_NIGHT]: {
     attack: AnimationType.Attack,
     ability: AnimationType.QuickStrike,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.DRUDDIGON]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.RearUp,
     emote: AnimationType.Shoot
   }
 }

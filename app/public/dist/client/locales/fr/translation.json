@@ -1282,7 +1282,7 @@
     "INFERNAL_PARADE": "Envoie une Roue de Feu en boomerang, ayant 50% de chance de BURN pendant 3 secondes et infligeant 2 fois [30,SP] SPECIAL à tous les pokémons adverses touchés.",
     "RETALIATE": "Inflige [15,30,60,SP] SPECIAL à la cible + [10,15,25,SP] SPECIAL additionels par allié KO",
     "SLASH": "Inflige [10,20,40,SP] SPECIAL avec [30,60,90]% de CRIT_CHANCE augmentée",
-    "OUTRAGE": "Le pokémon est CONFUSION pendant 2 secondes et inflige [200,300,400,SP]% ATK en SPECIAL à la cible et aux ennemis adjacents",
+    "OUTRAGE": "Le pokémon est CONFUSION pendant 2 secondes et inflige [100,150,200,SP]% ATK en SPECIAL à la cible et aux ennemis adjacents",
     "LUNGE": "Saute sur l'unité adverse avec la plus grosse ATK, inflige [50,SP] SPECIAL et réduit son ATK de [5,SP]",
     "KNOCK_OFF": "Inflige [90,SP] SPECIAL. Si la cible porte des objets, ils sont retirés et [30,SP] SPECIAL additionnels sont infligés par objet perdu",
     "FISHIOUS_REND": "Inflige [80,SP] SPECIAL. Double dégâts si l'attaquant a plus de ATK_SPEED que sa cible.",

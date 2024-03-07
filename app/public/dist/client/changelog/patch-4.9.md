@@ -7,6 +7,7 @@
 - Araquanid
 - Rockruff
 - Lycanroc
+- Druddigon
 
 # Changes to Pokemon & Abilities
 
@@ -18,6 +19,7 @@
 - New ability for all Silvally forms: Multi-Attack: Inflicts 10 special damage to surounding enemies, multiplied by the synergy level of current Silvally form
 - New passive for all Silvally forms: RKS System: Silvally can change its synergy items at any time. Place it on bench to drop synergy items.
 - Revert Happiny PP buff from 4.7
+- Nerf Outrage (Axew): ~~200/300/400%~~ 100/150/200% ATK of special damage
 
 # Changes to Synergies
 
