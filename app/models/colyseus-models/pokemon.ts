@@ -12239,6 +12239,24 @@ export class LycanrocDay extends Pokemon {
   }
 }
 
+export class Druddigon extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.WILD,
+    Synergy.MONSTER
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 170
+  atk = 18
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.OUTRAGE
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (shiny: boolean, emotion: Emotion) => Pokemon
@@ -12973,5 +12991,6 @@ export const PokemonClasses: Record<
   [Pkm.ROCKRUFF]: Rockruff,
   [Pkm.LYCANROC_DAY]: LycanrocDay,
   [Pkm.LYCANROC_DUSK]: LycanrocDusk,
-  [Pkm.LYCANROC_NIGHT]: LycanrocNight
+  [Pkm.LYCANROC_NIGHT]: LycanrocNight,
+  [Pkm.DRUDDIGON]: Druddigon
 }
