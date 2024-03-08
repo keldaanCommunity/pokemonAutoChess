@@ -199,6 +199,12 @@ export default class BattleManager {
             } else {
               pkm.removeProtect()
             }
+          } else if (field == "skydiving") {
+            if (pokemon.status.skydiving) {
+              pkm.skydiveUp()
+            } else {
+              pkm.skydiveDown()
+            }
           } else if (field == "wound") {
             if (pokemon.status.wound) {
               pkm.addWound()
@@ -608,7 +614,7 @@ export default class BattleManager {
               pkm.x = coordinates[0]
               pkm.y = coordinates[1]
               pkm.specialAttackAnimation(this.group, pokemon.count.ult)
-            } else {
+            } else if (!pokemon.status.skydiving) {
               pkm.moveManager.setSpeed(
                 3 *
                   getMoveSpeed(pokemon, this.simulation.weather) *

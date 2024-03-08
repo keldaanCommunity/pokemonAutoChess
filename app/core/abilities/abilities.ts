@@ -4226,23 +4226,36 @@ export class SkyAttackStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
-    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(
+    super.process(pokemon, state, board, target, crit, true)
+    const destination = state.getFarthestTargetCoordinateAvailablePlace(
       pokemon,
       board
     )
-    const damage = 120
-    if (farthestCoordinate) {
-      target.handleSpecialDamage(
-        damage,
-        board,
-        AttackType.SPECIAL,
-        pokemon,
-        crit
-      )
+    if (destination) {
+      pokemon.skydiveTo(destination.x, destination.y, board)
+      setTimeout(() => {
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: Ability.SKY_ATTACK,
+          positionX: destination.x,
+          positionY: destination.y,
+          targetX: destination.target.positionX,
+          targetY: destination.target.positionY
+        })
+      }, 500)
 
-      pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
-      pokemon.status.triggerProtect(500)
+      setTimeout(() => {
+        if (destination.target?.hp > 0) {
+          const damage = 120
+          destination.target.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      }, 1000)
     }
   }
 }
