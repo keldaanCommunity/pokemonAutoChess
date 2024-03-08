@@ -926,7 +926,7 @@
     "DRAGON_DARTS": "Gooit 3 darts die elk [10,20,40,SP] SPECIAL naar het doel verdelen. Als het doelwit sterft, krijg je 40 PP terug.",
     "GRASSY_SURGE": "Verhoog ATK van alle GRASS pokemons met [5,SP]",
     "MISTY_SURGE": "Geef [30,SP] PP aan FAIRY bondgenoten",
-    "SKY_ATTACK": "Stijgt in de lucht en valt op het verste doelwit, PROTECT de aanvaller gedurende 0,5 seconde en deelt [120,SP] SPECIAL uit",
+    "SKY_ATTACK": "Stijgt op in de lucht en valt na een seconde op het verste doelwit. Deelt [120,SP] SPECIAL",
     "ILLUSION": "Gebruiker herstelt [30,50,70,SP=0,5] HP-punten en kopieert het formulier evenals de ATK,DEF, SPE_DEF en RANGE van de gerichte Pokemon",
     "AURORA_BEAM": "Vuurt een straal af in een lijn. Alle doelwitten raken [25,50,100,SP] SPECIAL en kunnen worden FREEZE (kans gebaseerd op huidige ijssynergie)",
     "AGILITY": "Verhoog ATK_SPEED met [10,20,30,SP] % (stacks)",
