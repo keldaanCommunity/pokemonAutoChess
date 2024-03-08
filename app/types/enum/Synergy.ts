@@ -27,8 +27,9 @@ export enum Synergy {
   FOSSIL = "FOSSIL",
   SOUND = "SOUND",
   ARTIFICIAL = "ARTIFICIAL",
-  BABY = "BABY",
-  LIGHT = "LIGHT"
+  LIGHT = "LIGHT",
+  WILD = "WILD",
+  BABY = "BABY"
 }
 
 export const SynergyEffects: { [key in Synergy]: Effect[] } = Object.freeze({
@@ -47,7 +48,12 @@ export const SynergyEffects: { [key in Synergy]: Effect[] } = Object.freeze({
   ],
   [Synergy.WATER]: [Effect.RAIN_DANCE, Effect.DRIZZLE, Effect.PRIMORDIAL_SEA],
   [Synergy.ELECTRIC]: [Effect.RISING_VOLTAGE, Effect.OVERDRIVE],
-  [Synergy.FIGHTING]: [Effect.GUTS, Effect.DEFIANT, Effect.JUSTIFIED],
+  [Synergy.FIGHTING]: [
+    Effect.GUTS,
+    Effect.STURDY,
+    Effect.DEFIANT,
+    Effect.JUSTIFIED
+  ],
   [Synergy.PSYCHIC]: [Effect.AMNESIA, Effect.LIGHT_SCREEN, Effect.EERIE_SPELL],
   [Synergy.DARK]: [Effect.HONE_CLAWS, Effect.ASSURANCE, Effect.BEAT_UP],
   [Synergy.STEEL]: [
@@ -130,5 +136,11 @@ export const SynergyEffects: { [key in Synergy]: Effect[] } = Object.freeze({
     Effect.LIGHT_PULSE,
     Effect.ETERNAL_LIGHT,
     Effect.MAX_ILLUMINATION
+  ],
+  [Synergy.WILD]: [
+    Effect.QUICK_FEET,
+    Effect.RUN_AWAY,
+    Effect.HUSTLE,
+    Effect.BERSERK
   ]
 })

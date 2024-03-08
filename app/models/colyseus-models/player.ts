@@ -1,11 +1,5 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
-import {
-  ArraySchema,
-  CollectionSchema,
-  MapSchema,
-  Schema,
-  type
-} from "@colyseus/schema"
+import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema"
 import GameState from "../../rooms/states/game-state"
 import { IPlayer, Role, Title } from "../../types"
 import { SynergyTriggers, UniqueShop } from "../../types/Config"
@@ -17,7 +11,7 @@ import {
   SynergyGivenByItem
 } from "../../types/enum/Item"
 import { Pkm, PkmDuos, PkmProposition } from "../../types/enum/Pokemon"
-import { SpecialLobbyRule } from "../../types/enum/SpecialLobbyRule"
+import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { getFirstAvailablePositionInBench } from "../../utils/board"
@@ -32,6 +26,8 @@ import { isOnBench, Pokemon } from "./pokemon"
 import PokemonCollection from "./pokemon-collection"
 import PokemonConfig from "./pokemon-config"
 import Synergies, { computeSynergies } from "./synergies"
+import { getPokemonData } from "../precomputed"
+import { removeInArray } from "../../utils/array"
 
 export default class Player extends Schema implements IPlayer {
   @type("string") id: string
@@ -53,7 +49,7 @@ export default class Player extends Schema implements IPlayer {
   @type("string") opponentAvatar: string = ""
   @type("string") opponentTitle: string = ""
   @type("uint8") boardSize: number = 0
-  @type({ collection: "string" }) items = new CollectionSchema<Item>()
+  @type(["string"]) items = new ArraySchema<Item>()
   @type("uint8") rank: number
   @type("uint16") elo: number
   @type("boolean") alive = true
@@ -75,6 +71,7 @@ export default class Player extends Schema implements IPlayer {
   artificialItems: Item[] = pickNRandomIn(ArtificialItems, 3)
   lightX: number
   lightY: number
+  canRegainLife: boolean = true
 
   constructor(
     id: string,
@@ -106,7 +103,12 @@ export default class Player extends Schema implements IPlayer {
       this.lightY = 2
     }
 
-    if (state.specialLobbyRule === SpecialLobbyRule.UNIQUE_STARTER) {
+    if (state.specialGameRule === SpecialGameRule.NINE_LIVES) {
+      this.life = 9
+      this.canRegainLife = false
+    }
+
+    if (state.specialGameRule === SpecialGameRule.UNIQUE_STARTER) {
       const randomUnique = pickRandomIn(UniqueShop)
       const pokemonsObtained: Pokemon[] = (
         randomUnique in PkmDuos ? PkmDuos[randomUnique] : [randomUnique]
@@ -119,7 +121,7 @@ export default class Player extends Schema implements IPlayer {
       })
     }
 
-    if (state.specialLobbyRule === SpecialLobbyRule.DITTO_PARTY) {
+    if (state.specialGameRule === SpecialGameRule.DITTO_PARTY) {
       for (let i = 0; i < 5; i++) {
         const ditto = PokemonFactory.createPokemonFromName(Pkm.DITTO, this)
         ditto.positionX = getFirstAvailablePositionInBench(this.board) ?? 0
@@ -193,7 +195,6 @@ export default class Player extends Schema implements IPlayer {
     this.board.delete(pokemon.id)
     this.board.set(newPokemon.id, newPokemon)
     this.updateSynergies()
-    this.effects.update(this.synergies, this.board)
     return newPokemon
   }
 
@@ -223,6 +224,8 @@ export default class Player extends Schema implements IPlayer {
     )
 
     if (lightChanged) this.onLightChange()
+
+    this.effects.update(this.synergies, this.board)
   }
 
   updateArtificialItems(updatedSynergies: Map<Synergy, number>): boolean {
@@ -242,7 +245,7 @@ export default class Player extends Schema implements IPlayer {
         newNbArtifItems
       )
       gainedArtificialItems.forEach((item) => {
-        this.items.add(item)
+        this.items.push(item)
       })
     } else if (newNbArtifItems < previousNbArtifItems) {
       // some artificial items are lost
@@ -251,7 +254,7 @@ export default class Player extends Schema implements IPlayer {
         previousNbArtifItems
       )
       lostArtificialItems.forEach((item) => {
-        this.items.delete(item)
+        removeInArray(this.items, item)
       })
       this.board.forEach((pokemon) => {
         lostArtificialItems.forEach((item) => {
@@ -259,9 +262,12 @@ export default class Player extends Schema implements IPlayer {
             pokemon.items.delete(item)
             if (SynergyGivenByItem.hasOwnProperty(item)) {
               const type = SynergyGivenByItem[item]
-              pokemon.types.delete(type)
-              if (!isOnBench(pokemon)) {
-                needsRecomputingSynergiesAgain = true
+              const nativeTypes = getPokemonData(pokemon.name).types
+              if (nativeTypes.includes(type) === false) {
+                pokemon.types.delete(type)
+                if (!isOnBench(pokemon)) {
+                  needsRecomputingSynergiesAgain = true
+                }
               }
             }
           }

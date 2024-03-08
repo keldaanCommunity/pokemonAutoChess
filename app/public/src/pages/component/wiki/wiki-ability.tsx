@@ -2,13 +2,12 @@ import React, { useState } from "react"
 import ReactDOM from "react-dom"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
-
-import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
-import PokemonFactory, {
-  isAdditionalPick
-} from "../../../../../models/pokemon-factory"
-import { PRECOMPUTED_POKEMONS_PER_ABILITY } from "../../../../../models/precomputed"
+import {
+  getPokemonData,
+  PRECOMPUTED_POKEMONS_PER_ABILITY
+} from "../../../../../models/precomputed"
 import { Ability } from "../../../../../types/enum/Ability"
+import { Pkm } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
@@ -16,7 +15,7 @@ import { GamePokemonDetail } from "../game/game-pokemon-detail"
 
 export default function WikiAbility() {
   const { t } = useTranslation()
-  const [hoveredPokemon, setHoveredPokemon] = useState<Pokemon>()
+  const [hoveredPokemon, setHoveredPokemon] = useState<Pkm>()
 
   return (
     <div id="wiki-ability">
@@ -36,16 +35,16 @@ export default function WikiAbility() {
                 <div>
                   <ul>
                     {PRECOMPUTED_POKEMONS_PER_ABILITY[ability]
-                      .map((p) => PokemonFactory.createPokemonFromName(p))
+                      .map((p) => getPokemonData(p))
                       .map((p) => (
                         <li key={p.name}>
                           <div
                             className={cc("pokemon-portrait", {
-                              additional: isAdditionalPick(p.name)
+                              additional: p.additional
                             })}
                             data-tooltip-id="pokemon-detail"
                             onMouseOver={() => {
-                              setHoveredPokemon(p)
+                              setHoveredPokemon(p.name)
                             }}
                           >
                             <img src={getPortraitSrc(p.index)} />

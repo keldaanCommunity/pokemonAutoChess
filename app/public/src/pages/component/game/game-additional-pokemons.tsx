@@ -2,9 +2,9 @@ import React from "react"
 import ReactDOM from "react-dom"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
-import PokemonFactory from "../../../../../models/pokemon-factory"
+import { getPokemonData } from "../../../../../models/precomputed"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
-import { SpecialLobbyRule } from "../../../../../types/enum/SpecialLobbyRule"
+import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { useAppSelector } from "../../../hooks"
 import { getPortraitSrc } from "../../../utils"
 import { getGameScene } from "../../game"
@@ -12,7 +12,7 @@ import { GamePokemonDetail } from "./game-pokemon-detail"
 
 export function GameAdditionalPokemons() {
   const { t } = useTranslation()
-  const specialLobbyRule = getGameScene()?.room?.state.specialLobbyRule
+  const specialGameRule = getGameScene()?.room?.state.specialGameRule
   const additionalPokemons = useAppSelector(
     (state) => state.game.additionalPokemons
   )
@@ -20,7 +20,7 @@ export function GameAdditionalPokemons() {
     (state) => state.game.pokemonCollection
   )
 
-  if (specialLobbyRule === SpecialLobbyRule.EVERYONE_IS_HERE) {
+  if (specialGameRule === SpecialGameRule.EVERYONE_IS_HERE) {
     return (
       <div className="nes-container game-additional-pokemons">
         <p>{t("scribble.EVERYONE_IS_HERE")}</p>
@@ -43,7 +43,7 @@ export function GameAdditionalPokemons() {
           data-tooltip-id="detail-additional-pokemons"
         >
           {additionalPokemons.map((p, index) => {
-            const pokemon = PokemonFactory.createPokemonFromName(p)
+            const pokemon = getPokemonData(p)
             return (
               <React.Fragment key={"additional-pokemon-tooltip-" + index}>
                 {ReactDOM.createPortal(
@@ -54,7 +54,7 @@ export function GameAdditionalPokemons() {
                     data-tooltip-offset={{ top: index < 4 ? 60 : 130 }}
                   >
                     <GamePokemonDetail
-                      pokemon={pokemon}
+                      pokemon={pokemon.name}
                       emotion={
                         pokemonCollection.get(pokemon.index)?.selectedEmotion
                       }

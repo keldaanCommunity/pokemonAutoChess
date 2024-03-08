@@ -49,7 +49,7 @@ export default function Credits(props: {
         <>
           <dt>{t("others")}</dt>
           <dd>
-            <ul style={{ paddingLeft: "12ch" }}>
+            <ul style={{ display: "inline-block" }}>
               {credits.secondary.map((s) => (
                 <li key={s}>{findCredits(s)}</li>
               ))}

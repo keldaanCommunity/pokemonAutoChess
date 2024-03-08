@@ -1,16 +1,16 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
-import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
-import PokemonFactory, {
-  isAdditionalPick
-} from "../../../../../models/pokemon-factory"
-import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../../../../../models/precomputed"
+import {
+  getPokemonData,
+  PRECOMPUTED_POKEMONS_PER_TYPE
+} from "../../../../../models/precomputed"
 import { RarityColor, SynergyTriggers } from "../../../../../types/Config"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Rarity } from "../../../../../types/enum/Game"
 import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { Synergy, SynergyEffects } from "../../../../../types/enum/Synergy"
+import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
 import { groupBy } from "../../../../../utils/array"
 import { getPortraitSrc } from "../../../utils"
 import { addIconsToDescription } from "../../utils/descriptions"
@@ -32,7 +32,7 @@ export default function WikiType(props: { type: Synergy | "all" }) {
   }
 
   const pokemons = pokemonsNames
-    .map((p) => PokemonFactory.createPokemonFromName(p))
+    .map((p) => getPokemonData(p))
     .sort((a, b) => a.stars - b.stars) // put first stage first
     .filter((a, index, list) => {
       if (a.skill === Ability.DEFAULT) return false // pokemons with no ability are not ready for the show
@@ -46,10 +46,8 @@ export default function WikiType(props: { type: Synergy | "all" }) {
 
   const pokemonsPerRarity = groupBy(pokemons, (p) => p.rarity)
   for (const rarity in pokemonsPerRarity) {
-    pokemonsPerRarity[rarity].sort((a: Pokemon, b: Pokemon) => {
-      const isAddA = isAdditionalPick(a.name),
-        isAddB = isAdditionalPick(b.name)
-      if (isAddA !== isAddB) return +isAddA - +isAddB
+    pokemonsPerRarity[rarity].sort((a: IPokemonData, b: IPokemonData) => {
+      if (a.additional !== b.additional) return +a.additional - +b.additional
       return a.index < b.index ? -1 : 1
     })
   }
@@ -92,7 +90,7 @@ export default function WikiType(props: { type: Synergy | "all" }) {
                       <div
                         key={p.name}
                         className={cc("pokemon-portrait", {
-                          additional: isAdditionalPick(p.name)
+                          additional: p.additional
                         })}
                       >
                         <img
@@ -103,7 +101,7 @@ export default function WikiType(props: { type: Synergy | "all" }) {
                           id={`pokemon-detail-${p.index}`}
                           className="custom-theme-tooltip game-pokemon-detail-tooltip"
                         >
-                          <GamePokemonDetail pokemon={p} />
+                          <GamePokemonDetail pokemon={p.name} />
                         </Tooltip>
                       </div>
                     )

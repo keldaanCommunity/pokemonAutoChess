@@ -12,12 +12,16 @@ import DetailledStatistic from "../../models/mongo-models/detailled-statistic-v2
 import UserMetadata, {
   IPokemonConfig
 } from "../../models/mongo-models/user-metadata"
-import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../models/precomputed"
+import {
+  PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX,
+  PRECOMPUTED_POKEMONS_PER_RARITY
+} from "../../models/precomputed"
 import { getAvatarSrc, getPortraitSrc } from "../../public/src/utils"
 import {
   CDN_PORTRAIT_URL,
   Emotion,
   ISuggestionUser,
+  PkmWithConfig,
   Role,
   Title,
   Transfer,
@@ -25,15 +29,17 @@ import {
 } from "../../types"
 import {
   BoosterRarityProbability,
+  DUST_PER_BOOSTER,
+  DUST_PER_SHINY,
   EloRank,
   getEmotionCost
 } from "../../types/Config"
-import { LobbyType, Rarity } from "../../types/enum/Game"
+import { GameMode, Rarity } from "../../types/enum/Game"
 import { Language } from "../../types/enum/Language"
 import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
 import { sum } from "../../utils/array"
 import { cleanProfanity } from "../../utils/profanity-filter"
-import { pickRandomIn } from "../../utils/random"
+import { chance, pickRandomIn } from "../../utils/random"
 import CustomLobbyRoom from "../custom-lobby-room"
 
 export class OnJoinCommand extends Command<
@@ -311,23 +317,28 @@ export class OpenBoosterCommand extends Command<
       const user = this.state.users.get(client.auth.uid)
       if (!user) return
 
-      const DUST_PER_BOOSTER = 50
+      const NB_BOOSTERS = 10
       if (user && user.booster && user.booster > 0) {
         user.booster -= 1
-        const boosterIndex: string[] = []
+        const boosterContent: PkmWithConfig[] = []
 
-        for (let i = 0; i < 5; i++) {
-          const pkm = pickRandomPokemonBooster()
-          boosterIndex.push(PkmIndex[pkm])
+        for (let i = 0; i < NB_BOOSTERS; i++) {
+          const guaranteedUnique = i === NB_BOOSTERS - 1
+          boosterContent.push(pickRandomPokemonBooster(guaranteedUnique))
         }
 
-        boosterIndex.forEach((i) => {
+        boosterContent.forEach((pkmWithConfig) => {
+          const i = PkmIndex[pkmWithConfig.name]
           const c = user.pokemonCollection.get(i)
+          const dustGain = pkmWithConfig.shiny
+            ? DUST_PER_SHINY
+            : DUST_PER_BOOSTER
+
           if (c) {
-            c.dust += DUST_PER_BOOSTER
+            c.dust += dustGain
           } else {
             const newConfig = new PokemonConfig(i)
-            newConfig.dust += DUST_PER_BOOSTER
+            newConfig.dust += dustGain
             user.pokemonCollection.set(i, newConfig)
           }
         })
@@ -336,16 +347,21 @@ export class OpenBoosterCommand extends Command<
 
         if (u) {
           u.booster = user.booster
-          boosterIndex.forEach((i) => {
+          boosterContent.forEach((pkmWithConfig) => {
+            const i = PkmIndex[pkmWithConfig.name]
             const c = u.pokemonCollection.get(i)
+            const dustGain = pkmWithConfig.shiny
+              ? DUST_PER_SHINY
+              : DUST_PER_BOOSTER
+
             if (c) {
-              c.dust += DUST_PER_BOOSTER
+              c.dust += dustGain
             } else {
               u.pokemonCollection.set(i, {
                 id: i,
                 emotions: [],
                 shinyEmotions: [],
-                dust: DUST_PER_BOOSTER,
+                dust: dustGain,
                 selectedEmotion: Emotion.NORMAL,
                 selectedShiny: false
               })
@@ -354,7 +370,7 @@ export class OpenBoosterCommand extends Command<
           u.save()
         }
 
-        client.send(Transfer.BOOSTER_CONTENT, boosterIndex)
+        client.send(Transfer.BOOSTER_CONTENT, boosterContent)
       }
     } catch (error) {
       logger.error(error)
@@ -362,25 +378,42 @@ export class OpenBoosterCommand extends Command<
   }
 }
 
-function pickRandomPokemonBooster(): Pkm {
-  let pkm = Pkm.MAGIKARP
+function pickRandomPokemonBooster(guarantedUnique: boolean): PkmWithConfig {
+  let pkm = Pkm.MAGIKARP,
+    shiny = chance(0.03),
+    emotion = Emotion.NORMAL
   const rarities = Object.keys(Rarity) as Rarity[]
   const seed = Math.random() * sum(Object.values(BoosterRarityProbability))
   let threshold = 0
-  for (let i = 0; i < rarities.length; i++) {
-    const rarity = rarities[i]
-    const rarityProbability = BoosterRarityProbability[rarity]
-    threshold += rarityProbability
-    if (
-      seed < threshold &&
-      PRECOMPUTED_POKEMONS_PER_RARITY[rarity] &&
-      PRECOMPUTED_POKEMONS_PER_RARITY[rarity].length > 0
-    ) {
-      pkm = pickRandomIn(PRECOMPUTED_POKEMONS_PER_RARITY[rarity]) as Pkm
-      break
+
+  if (guarantedUnique) {
+    pkm = pickRandomIn([
+      ...PRECOMPUTED_POKEMONS_PER_RARITY[Rarity.UNIQUE],
+      ...PRECOMPUTED_POKEMONS_PER_RARITY[Rarity.LEGENDARY]
+    ]) as Pkm
+  } else {
+    for (let i = 0; i < rarities.length; i++) {
+      const rarity = rarities[i]
+      const rarityProbability = BoosterRarityProbability[rarity]
+      threshold += rarityProbability
+      if (seed < threshold) {
+        const candidates: Pkm[] = (
+          PRECOMPUTED_POKEMONS_PER_RARITY[rarity] ?? []
+        ).filter((p) => Unowns.includes(p) === false)
+        if (candidates.length > 0) {
+          pkm = pickRandomIn(candidates) as Pkm
+          break
+        }
+      }
     }
   }
-  return pkm
+
+  const availableEmotions = Object.values(Emotion).filter(
+    (e, i) => PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX[PkmIndex[pkm]]?.[i] === 1
+  )
+  emotion = pickRandomIn(availableEmotions)
+
+  return { name: pkm, shiny, emotion }
 }
 
 export class ChangeNameCommand extends Command<
@@ -1052,34 +1085,29 @@ export class OnBotUploadCommand extends Command<
   }
 }
 
-export class OpenSpecialLobbyCommand extends Command<
+export class OpenSpecialGameCommand extends Command<
   CustomLobbyRoom,
-  { lobbyType: LobbyType; minRank?: EloRank | null; noElo?: boolean }
+  { gameMode: GameMode; minRank?: EloRank | null; noElo?: boolean }
 > {
   execute({
-    lobbyType,
+    gameMode,
     minRank,
     noElo
   }: {
-    lobbyType: LobbyType
+    gameMode: GameMode
     minRank?: EloRank | null
     noElo?: boolean
   }) {
-    logger.info(`Creating special Lobby ${lobbyType} ${minRank ?? ""}`)
-    let roomName = "Special Lobby"
-    if (lobbyType === LobbyType.RANKED) {
-      if (minRank === EloRank.GREATBALL) {
-        roomName = "Great Ball Ranked Match"
-      }
-      if (minRank === EloRank.ULTRABALL) {
-        roomName = "Ultra Ball Ranked Match"
-      }
-    } else if (lobbyType === LobbyType.SCRIBBLE) {
+    logger.info(`Creating special game ${gameMode} ${minRank ?? ""}`)
+    let roomName = "Special game"
+    if (gameMode === GameMode.RANKED) {
+      roomName = "Ranked Match"
+    } else if (gameMode === GameMode.SCRIBBLE) {
       roomName = "Smeargle's Scribble"
     }
 
     matchMaker.createRoom("preparation", {
-      lobbyType,
+      gameMode,
       minRank,
       noElo,
       ownerId: null,
@@ -1087,7 +1115,7 @@ export class OpenSpecialLobbyCommand extends Command<
       autoStartDelayInSeconds: 15 * 60
     })
 
-    this.state.getNextSpecialLobbyDate()
+    this.state.getNextSpecialGameDate()
   }
 }
 
@@ -1099,7 +1127,7 @@ export class MakeServerAnnouncementCommand extends Command<
     try {
       const u = this.state.users.get(client.auth.uid)
       if (u && u.role && u.role === Role.ADMIN) {
-        this.state.addAnnouncement(message)
+        this.room.presence.publish("server-announcement", message)
       }
     } catch (error) {
       logger.error(error)

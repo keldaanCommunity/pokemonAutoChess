@@ -406,14 +406,14 @@ export default function Game() {
         dispatch(setRoundTime(value))
       })
 
-      room.state.listen("phase", (value) => {
+      room.state.listen("phase", (newPhase, previousPhase) => {
         if (gameContainer.game) {
           const g = getGameScene()
           if (g) {
-            g.updatePhase()
+            g.updatePhase(newPhase, previousPhase)
           }
         }
-        dispatch(setPhase(value))
+        dispatch(setPhase(newPhase))
       })
 
       room.state.listen("stageLevel", (value) => {

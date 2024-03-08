@@ -1,10 +1,9 @@
 import React, { useCallback, useMemo } from "react"
 import Modal from "react-bootstrap/esm/Modal"
 import { useTranslation } from "react-i18next"
-import PokemonFactory from "../../../../../models/pokemon-factory"
 import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../../models/precomputed"
 import { Emotion } from "../../../../../types"
-import { Pkm } from "../../../../../types/enum/Pokemon"
+import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import {
   buyBooster,
@@ -26,17 +25,14 @@ export default function PokemonEmotionsModal(props: {
     (state) => state.lobby.pokemonCollection
   )
 
-  const p = useMemo(
-    () => PokemonFactory.createPokemonFromName(props.pokemon),
-    [props.pokemon]
-  )
+  const index = PkmIndex[props.pokemon]
 
   const availableEmotions: Emotion[] = Object.values(Emotion).filter(
-    (e, i) => PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX[p.index]?.[i] === 1
+    (e, i) => PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX[index]?.[i] === 1
   )
 
   const pConfig = useMemo(() => {
-    const foundPokemon = pokemonCollection.find((c) => c.id == p.index) ?? {
+    const foundPokemon = pokemonCollection.find((c) => c.id == index) ?? {
       dust: 0,
       emotions: [],
       shinyEmotions: [],
@@ -46,7 +42,7 @@ export default function PokemonEmotionsModal(props: {
     }
 
     return foundPokemon
-  }, [p.index, pokemonCollection])
+  }, [index, pokemonCollection])
 
   const handlePokemonEmotionClick = useCallback(
     (
@@ -72,7 +68,7 @@ export default function PokemonEmotionsModal(props: {
         <Modal.Title>
           <img
             src={getPortraitSrc(
-              p.index,
+              index,
               pConfig.selectedShiny,
               pConfig.selectedEmotion
             )}
@@ -81,7 +77,7 @@ export default function PokemonEmotionsModal(props: {
           <h1>{t(`pkm.${props.pokemon}`)}</h1>
           <div className="spacer" />
           <p className="dust">
-            {pConfig.dust} <img src={getPortraitSrc(p.index)} alt="dust" />
+            {pConfig.dust} <img src={getPortraitSrc(index)} alt="dust" />
           </p>
         </Modal.Title>
       </Modal.Header>
@@ -93,16 +89,16 @@ export default function PokemonEmotionsModal(props: {
               return (
                 <PokemonEmotion
                   key={e}
-                  index={p.index}
+                  index={index}
                   shiny={false}
                   unlocked={pConfig && pConfig.emotions.includes(e)}
-                  path={p.index.replace("-", "/")}
+                  path={index.replace("-", "/")}
                   emotion={e}
                   dust={pConfig.dust}
                   onClick={() =>
                     handlePokemonEmotionClick(
                       Boolean(pConfig && pConfig.emotions.includes(e)),
-                      { index: p.index, emotion: e, shiny: false }
+                      { index: index, emotion: e, shiny: false }
                     )
                   }
                 />
@@ -117,16 +113,16 @@ export default function PokemonEmotionsModal(props: {
               return (
                 <PokemonEmotion
                   key={e}
-                  index={p.index}
+                  index={index}
                   shiny={true}
                   unlocked={pConfig && pConfig.shinyEmotions.includes(e)}
-                  path={`${p.index.replace("-", "/")}/0000/0001`}
+                  path={`${index.replace("-", "/")}/0000/0001`}
                   emotion={e}
                   dust={pConfig.dust}
                   onClick={() =>
                     handlePokemonEmotionClick(
                       Boolean(pConfig && pConfig.shinyEmotions.includes(e)),
-                      { index: p.index, emotion: e, shiny: true }
+                      { index: index, emotion: e, shiny: true }
                     )
                   }
                 />
@@ -139,10 +135,10 @@ export default function PokemonEmotionsModal(props: {
         <button
           className="bubbly blue"
           disabled={pConfig.dust < 500}
-          onClick={() => dispatch(buyBooster({ index: p.index }))}
+          onClick={() => dispatch(buyBooster({ index }))}
         >
           {t("buy_booster_500")}
-          <img src={getPortraitSrc(p.index)} alt="dust" />
+          <img src={getPortraitSrc(index)} alt="dust" />
         </button>
         <div className="spacer"></div>
         <button className="bubbly red" onClick={props.onHide}>

@@ -21,11 +21,11 @@ import {
   EloRank,
   StageDuration
 } from "../../types/Config"
-import { GamePhaseState, LobbyType } from "../../types/enum/Game"
+import { GamePhaseState, GameMode } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { PkmProposition } from "../../types/enum/Pokemon"
 import { Weather } from "../../types/enum/Weather"
-import { SpecialLobbyRule } from "../../types/enum/SpecialLobbyRule"
+import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { pickRandomIn, randomBetween } from "../../utils/random"
 
 export default class GameState extends Schema {
@@ -43,13 +43,13 @@ export default class GameState extends Schema {
   @type("string") mapName: string
   @type("string") weather: Weather
   @type("boolean") noElo = false
-  @type("string") lobbyType: LobbyType = LobbyType.NORMAL
+  @type("string") gameMode: GameMode = GameMode.NORMAL
   @type({ set: "string" }) spectators = new SetSchema<string>()
   @type({ map: Simulation }) simulations = new MapSchema<Simulation>()
   @type("uint8") lightX = randomBetween(0, BOARD_WIDTH - 1)
   @type("uint8") lightY = randomBetween(1, BOARD_HEIGHT / 2)
   @type("string") mapMusic: Dungeon
-  @type("string") specialLobbyRule: SpecialLobbyRule | null = null
+  @type("string") specialGameRule: SpecialGameRule | null = null
 
   time = StageDuration[1] * 1000
   updatePhaseNeeded = false
@@ -72,7 +72,7 @@ export default class GameState extends Schema {
     name: string,
     noElo: boolean,
     selectedMap: DungeonPMDO | "random",
-    lobbyType: LobbyType,
+    gameMode: GameMode,
     minRank: EloRank | null
   ) {
     super()
@@ -81,14 +81,14 @@ export default class GameState extends Schema {
     this.name = name
     this.id = selectedMap === "random" ? pickRandomIn(DungeonPMDO) : selectedMap
     this.noElo = noElo
-    this.lobbyType = lobbyType
+    this.gameMode = gameMode
     this.minRank = minRank
     this.mapName = this.id
     this.mapMusic = pickRandomIn(Object.keys(Dungeon) as Dungeon[])
     this.weather = Weather.NEUTRAL
     this.tilemap = initTilemap(this.id)
-    if (lobbyType === LobbyType.SCRIBBLE) {
-      this.specialLobbyRule = pickRandomIn(Object.values(SpecialLobbyRule))
+    if (gameMode === GameMode.SCRIBBLE) {
+      this.specialGameRule = pickRandomIn(Object.values(SpecialGameRule))
     }
   }
 }

@@ -41,7 +41,6 @@ export abstract class EvolutionRule {
 
   afterEvolve(pokemonEvolved: Pokemon, player: Player) {
     player.updateSynergies()
-    player.effects.update(player.synergies, player.board)
     pokemonEvolved.onAcquired(player)
   }
 }
@@ -126,7 +125,7 @@ export class CountEvolutionRule extends EvolutionRule {
       const itemToAdd = itemsToAdd.pop()
       if (itemToAdd) {
         if (pokemonEvolved.items.has(itemToAdd)) {
-          player.items.add(itemToAdd)
+          player.items.push(itemToAdd)
         } else {
           pokemonEvolved.items.add(itemToAdd)
         }
@@ -134,10 +133,10 @@ export class CountEvolutionRule extends EvolutionRule {
     }
 
     itemsToAdd.forEach((item) => {
-      player.items.add(item)
+      player.items.push(item)
     })
     basicItemsToAdd.forEach((item) => {
-      player.items.add(item)
+      player.items.push(item)
     })
 
     if (coord) {
@@ -201,14 +200,22 @@ export class HatchEvolutionRule extends EvolutionRule {
     this.evolutionTimer = roundsRequired
   }
 
-  updateRound(pokemon: Pokemon, player: Player, stageLevel: number) {
+  updateHatch(pokemon: Pokemon, player: Player, stageLevel: number) {
     this.evolutionTimer -= 1
-    pokemon.evolutionRule.tryEvolve(pokemon, player, stageLevel)
-    if (pokemon.name === Pkm.EGG && this.evolutionTimer >= 1) {
+    const willHatch = this.canEvolve(pokemon, player, stageLevel)
+    if (willHatch) {
+      pokemon.action = PokemonActionState.HOP
+      setTimeout(
+        () => pokemon.evolutionRule.tryEvolve(pokemon, player, stageLevel),
+        2000
+      )
+    } else if (pokemon.name === Pkm.EGG) {
       pokemon.action =
-        this.evolutionTimer >= 2
-          ? PokemonActionState.IDLE
-          : PokemonActionState.HOP
+        [
+          PokemonActionState.HOP,
+          PokemonActionState.EMOTE,
+          PokemonActionState.IDLE
+        ][this.evolutionTimer] ?? PokemonActionState.IDLE
     }
   }
 

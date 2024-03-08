@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 import { Tooltip } from "react-tooltip"
 import { CountEvolutionRule } from "../../../../../core/evolution-rules"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
 import PokemonFactory from "../../../../../models/pokemon-factory"
+import { getPokemonData } from "../../../../../models/precomputed"
 import { RarityColor } from "../../../../../types/Config"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
-import { SpecialLobbyRule } from "../../../../../types/enum/SpecialLobbyRule"
+import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { useAppSelector } from "../../../hooks"
 import { getPortraitSrc } from "../../../utils"
 import { getGameScene } from "../../game"
@@ -18,7 +19,7 @@ import "./game-pokemon-portrait.css"
 export default function GamePokemonPortrait(props: {
   index: number
   origin: string
-  pokemon: Pokemon | undefined
+  pokemon: Pokemon | Pkm | undefined
   click?: React.MouseEventHandler<HTMLDivElement>
   onMouseEnter?: React.MouseEventHandler<HTMLDivElement>
   onMouseLeave?: React.MouseEventHandler<HTMLDivElement>
@@ -26,12 +27,19 @@ export default function GamePokemonPortrait(props: {
   if (!props.pokemon) {
     return <div className="game-pokemon-portrait nes-container empty" />
   } else {
-    const rarityColor = RarityColor[props.pokemon.rarity]
+    const pokemon = useMemo(
+      () =>
+        typeof props.pokemon === "string"
+          ? PokemonFactory.createPokemonFromName(props.pokemon)
+          : props.pokemon!,
+      [props.pokemon]
+    )
+    const rarityColor = RarityColor[pokemon.rarity]
     const pokemonCollection = useAppSelector(
       (state) => state.game.pokemonCollection
     )
     const pokemonConfig: IPokemonConfig | undefined = pokemonCollection.get(
-      props.pokemon.index
+      pokemon.index
     )
 
     const uid: string = useAppSelector((state) => state.network.uid)
@@ -51,7 +59,7 @@ export default function GamePokemonPortrait(props: {
       let _countEvol = 0
       if (board && board.forEach && !isOnAnotherBoard && props.pokemon) {
         board.forEach((p) => {
-          if (p.index === props.pokemon!.index && p.evolution !== Pkm.DEFAULT) {
+          if (p.index === pokemon.index && p.evolution !== Pkm.DEFAULT) {
             _count++
           }
           if (
@@ -68,23 +76,22 @@ export default function GamePokemonPortrait(props: {
       setCountEvol(_countEvol)
     }, [board?.size, props.pokemon]) // recount where board size or pokemon on this shop cell changes
 
-    let pokemonEvolution = props.pokemon.evolution
-    const pokemonEvolution2 =
-      PokemonFactory.createPokemonFromName(pokemonEvolution).evolution
+    let pokemonEvolution = pokemon.evolution
+    const pokemonEvolution2 = getPokemonData(pokemonEvolution).evolution
 
     const willEvolve =
-      props.pokemon.evolutionRule instanceof CountEvolutionRule &&
-      count === props.pokemon.evolutionRule.numberRequired - 1
+      pokemon.evolutionRule instanceof CountEvolutionRule &&
+      count === pokemon.evolutionRule.numberRequired - 1
 
     const shouldShimmer =
-      props.pokemon.evolutionRule instanceof CountEvolutionRule &&
+      pokemon.evolutionRule instanceof CountEvolutionRule &&
       ((count > 0 && pokemonEvolution !== Pkm.DEFAULT) ||
         (countEvol > 0 && pokemonEvolution2 !== Pkm.DEFAULT))
 
     if (
-      props.pokemon.evolutionRule instanceof CountEvolutionRule &&
-      count === props.pokemon.evolutionRule.numberRequired - 1 &&
-      countEvol === props.pokemon.evolutionRule.numberRequired - 1 &&
+      pokemon.evolutionRule instanceof CountEvolutionRule &&
+      count === pokemon.evolutionRule.numberRequired - 1 &&
+      countEvol === pokemon.evolutionRule.numberRequired - 1 &&
       pokemonEvolution2 != null
     )
       pokemonEvolution = pokemonEvolution2
@@ -92,17 +99,17 @@ export default function GamePokemonPortrait(props: {
     const pokemonInPortrait =
       willEvolve && pokemonEvolution
         ? PokemonFactory.createPokemonFromName(pokemonEvolution)
-        : props.pokemon
+        : pokemon
     const pokemonInPortraitConfig = pokemonCollection.get(
       pokemonInPortrait.index
     )
 
-    let cost = PokemonFactory.getBuyPrice(props.pokemon.name)
-    const specialLobbyRule = getGameScene()?.room?.state.specialLobbyRule
+    let cost = PokemonFactory.getBuyPrice(pokemon.name)
+    const specialGameRule = getGameScene()?.room?.state.specialGameRule
     if (
       willEvolve &&
       pokemonEvolution &&
-      specialLobbyRule === SpecialLobbyRule.BUYER_FEVER
+      specialGameRule === SpecialGameRule.BUYER_FEVER
     ) {
       cost = 0
     }
@@ -132,6 +139,7 @@ export default function GamePokemonPortrait(props: {
           place="top"
         >
           <GamePokemonDetail
+            key={pokemonInPortrait.id}
             pokemon={pokemonInPortrait}
             emotion={pokemonInPortraitConfig?.selectedEmotion}
             shiny={pokemonInPortraitConfig?.selectedShiny}
@@ -141,7 +149,7 @@ export default function GamePokemonPortrait(props: {
           <div className="game-pokemon-portrait-evolution">
             <img
               src={getPortraitSrc(
-                props.pokemon.index,
+                pokemon.index,
                 pokemonConfig?.selectedShiny,
                 pokemonConfig?.selectedEmotion
               )}
@@ -160,7 +168,7 @@ export default function GamePokemonPortrait(props: {
           </div>
         )}
         <ul className="game-pokemon-portrait-types">
-          {Array.from(props.pokemon.types.values()).map((type) => {
+          {Array.from(pokemon.types.values()).map((type) => {
             return (
               <li key={type}>
                 <SynergyIcon type={type} size="1.4vw" />

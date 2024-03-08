@@ -1,12 +1,11 @@
 import { Room } from "colyseus.js"
 import firebase from "firebase/compat/app"
-import { t } from "i18next"
 import { GameObjects, Scene } from "phaser"
+import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin"
 import { DesignTiled } from "../../../../core/design"
 import { canSell } from "../../../../core/pokemon-entity"
 import Simulation from "../../../../core/simulation"
 import Player from "../../../../models/colyseus-models/player"
-import PokemonFactory from "../../../../models/pokemon-factory"
 import GameState from "../../../../rooms/states/game-state"
 import {
   IDragDropCombineMessage,
@@ -19,7 +18,7 @@ import { GamePhaseState } from "../../../../types/enum/Game"
 import { Item, ItemRecipe } from "../../../../types/enum/Item"
 import { Pkm } from "../../../../types/enum/Pokemon"
 import { clearTitleNotificationIcon } from "../../../../utils/window"
-import { getGameContainer, getGameScene } from "../../pages/game"
+import { getGameContainer } from "../../pages/game"
 import { SOUNDS, playMusic, playSound } from "../../pages/utils/audio"
 import { transformCoordinate } from "../../pages/utils/utils"
 import { preferences } from "../../preferences"
@@ -52,7 +51,7 @@ export default class GameScene extends Scene {
   pokemonDragged: PokemonSprite | null = null
   shopIndexHovered: number | null = null
   itemDragged: ItemContainer | null = null
-  dropSpots: Phaser.GameObjects.Graphics[] = []
+  dropSpots: Phaser.GameObjects.Image[] = []
   sellZone: SellZone | undefined
   zones: Phaser.GameObjects.Zone[] = []
   lastDragDropPokemon: PokemonSprite | undefined
@@ -177,6 +176,12 @@ export default class GameScene extends Scene {
     if (this.lastPokemonDetail) {
       this.lastPokemonDetail.updateTooltipPosition()
     }
+    if (
+      this.room?.state?.phase === GamePhaseState.MINIGAME &&
+      this.minigameManager
+    ) {
+      this.minigameManager.update()
+    }
   }
 
   registerKeys() {
@@ -224,13 +229,19 @@ export default class GameScene extends Scene {
     this.room?.send(Transfer.REMOVE_FROM_SHOP, index)
   }
 
-  updatePhase() {
+  updatePhase(newPhase: GamePhaseState, previousPhase: GamePhaseState) {
     this.weatherManager?.clearWeather()
     this.resetDragState()
-    if (this.room?.state.phase == GamePhaseState.FIGHT) {
+
+    if (previousPhase === GamePhaseState.MINIGAME) {
+      this.minigameManager.dispose()
+    }
+
+    if (newPhase === GamePhaseState.FIGHT) {
       this.board?.battleMode()
-    } else if (this.room?.state.phase === GamePhaseState.MINIGAME) {
+    } else if (newPhase === GamePhaseState.MINIGAME) {
       this.board?.minigameMode()
+      this.minigameManager.initialize()
     } else {
       this.board?.pickMode()
     }
@@ -240,7 +251,7 @@ export default class GameScene extends Scene {
     if (this.pokemonDragged) {
       this.input.emit(
         "dragend",
-        this.input.pointer1,
+        this.input.activePointer,
         this.pokemonDragged,
         false
       )
@@ -261,21 +272,18 @@ export default class GameScene extends Scene {
     this.sellZone = new SellZone(this)
     this.dropSpots = []
 
-    for (let i = 0; i < 4; i++) {
-      for (let j = 0; j < 8; j++) {
-        const coord = transformCoordinate(j, i)
+    for (let y = 0; y < 4; y++) {
+      for (let x = 0; x < 8; x++) {
+        const coord = transformCoordinate(x, y)
         const zone = this.add.zone(coord[0], coord[1], 96, 96)
         zone.setRectangleDropZone(96, 96)
         zone.setName("board-zone")
-        zone.setData({ x: j, y: i })
-        const graphic = this.add
-          .graphics()
-          .fillStyle(0x61738a, 1)
-          .fillCircle(zone.x, zone.y, zone.input!.hitArea.width / 4)
-          .lineStyle(2, 0x000000, 1)
-          .strokeCircle(zone.x, zone.y, zone.input!.hitArea.width / 4)
-        graphic.setVisible(false)
-        this.dropSpots.push(graphic)
+        const spotSprite = this.add
+          .image(zone.x, zone.y, "cell", 0)
+          .setVisible(false)
+          .setData({ x, y })
+        zone.setData({ x, y, sprite: spotSprite })
+        this.dropSpots.push(spotSprite)
       }
     }
 
@@ -314,11 +322,31 @@ export default class GameScene extends Scene {
     })
 
     this.input.on(
-      "gameobjectover",
+      Phaser.Input.Events.GAMEOBJECT_OVER,
       (pointer, gameObject: Phaser.GameObjects.GameObject) => {
-        if (gameObject instanceof PokemonSprite) {
+        const outline = <OutlinePlugin>this.plugins.get("rexOutline")
+        if (gameObject instanceof PokemonSprite && gameObject.draggable) {
+          const previouslyHovered = this.pokemonHovered
           this.pokemonHovered = gameObject
-        } else {
+          if (previouslyHovered && previouslyHovered !== gameObject) {
+            outline.remove(previouslyHovered.sprite)
+          }
+
+          this.pokemonHovered = gameObject
+          outline.add(gameObject.sprite, {
+            thickness: 2,
+            outlineColor: 0xffffff
+          })
+        }
+      }
+    )
+
+    this.input.on(
+      Phaser.Input.Events.GAMEOBJECT_OUT,
+      (pointer, gameObject: Phaser.GameObjects.GameObject) => {
+        const outline = <OutlinePlugin>this.plugins.get("rexOutline")
+        if (this.pokemonHovered === gameObject) {
+          outline.remove(this.pokemonHovered.sprite)
           this.pokemonHovered = undefined
         }
       }
@@ -329,27 +357,27 @@ export default class GameScene extends Scene {
       (pointer, gameObject: Phaser.GameObjects.GameObject) => {
         if (gameObject instanceof PokemonSprite) {
           this.pokemonDragged = gameObject
-          this.dropSpots.forEach((spot) => spot.setVisible(true))
+          this.dropSpots.forEach((spot) => {
+            if (
+              this.room?.state.phase === GamePhaseState.PICK ||
+              spot.getData("y") === 0
+            ) {
+              spot.setFrame(0).setVisible(true)
+            }
+          })
 
           if (
+            this.sellZone &&
             canSell(
               this.pokemonDragged.name as Pkm,
-              this.room?.state.specialLobbyRule
+              this.room?.state.specialGameRule
             )
           ) {
-            const price = PokemonFactory.getSellPrice(
-              gameObject.name as Pkm,
-              getGameContainer().player
-            )
-            this.sellZone?.text.setText(
-              `${t("drop_here_to_sell")} ${t("for_price_gold", { price })}`
-            )
-            this.sellZone?.setVisible(true)
+            this.sellZone.showForPokemon(gameObject.name as Pkm)
           }
         } else if (gameObject instanceof ItemContainer) {
           this.itemDragged = gameObject
         }
-        // this.children.bringToTop(gameObject);
       }
     )
 
@@ -365,12 +393,19 @@ export default class GameScene extends Scene {
         g.x = dragX
         g.y = dragY
         if (g && this.pokemonDragged != null) {
-          this.dropSpots.forEach((spot) => spot.setVisible(true))
+          this.dropSpots.forEach((spot) => {
+            if (
+              this.room?.state.phase === GamePhaseState.PICK ||
+              spot.getData("y") === 0
+            ) {
+              spot.setVisible(true)
+            }
+          })
           if (
             this.sellZone?.visible === false &&
             canSell(
               this.pokemonDragged.name as Pkm,
-              this.room?.state.specialLobbyRule
+              this.room?.state.specialGameRule
             )
           ) {
             this.sellZone.setVisible(true)
@@ -387,7 +422,7 @@ export default class GameScene extends Scene {
         dropZone: Phaser.GameObjects.Zone
       ) => {
         this.dropSpots.forEach((spot) => spot.setVisible(false))
-        this.sellZone?.setVisible(false)
+        this.sellZone?.hide()
 
         if (gameObject instanceof PokemonSprite) {
           // POKEMON -> BOARD-ZONE = PLACE POKEMON
@@ -468,9 +503,9 @@ export default class GameScene extends Scene {
     )
 
     this.input.on("dragend", (pointer, gameObject, dropped) => {
-      this.sellZone?.setVisible(false)
+      this.sellZone?.hide()
       this.dropSpots.forEach((spot) => spot.setVisible(false))
-      if (!dropped) {
+      if (!dropped && gameObject?.input) {
         gameObject.x = gameObject.input.dragStartX
         gameObject.y = gameObject.input.dragStartY
       }
@@ -495,6 +530,20 @@ export default class GameScene extends Scene {
             }
           }
         }
+
+        if (
+          dropZone.name === "board-zone" &&
+          gameObject instanceof PokemonSprite
+        ) {
+          dropZone.getData("sprite")?.setFrame(1)
+        }
+
+        if (
+          dropZone.name === "sell-zone" &&
+          gameObject instanceof PokemonSprite
+        ) {
+          dropZone.getData("rectangle")?.setFillStyle(0x6b8bb2)
+        }
       },
       this
     )
@@ -507,6 +556,20 @@ export default class GameScene extends Scene {
           dropZone instanceof ItemContainer
         ) {
           gameObject.closeDetail()
+        }
+
+        if (
+          dropZone.name === "board-zone" &&
+          gameObject instanceof PokemonSprite
+        ) {
+          dropZone.getData("sprite")?.setFrame(0)
+        }
+
+        if (
+          dropZone.name === "sell-zone" &&
+          gameObject instanceof PokemonSprite
+        ) {
+          dropZone.getData("rectangle")?.setFillStyle(0x61738a)
         }
       },
       this

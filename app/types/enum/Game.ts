@@ -10,16 +10,11 @@ export enum Rarity {
   SPECIAL = "SPECIAL"
 }
 
-export enum LobbyType {
+export enum GameMode {
   NORMAL = "NORMAL",
   RANKED = "RANKED",
   SCRIBBLE = "SCRIBBLE"
 }
-
-export type SpecialLobbyType =
-  | "GREATBALL_RANKED"
-  | "ULTRABALL_RANKED"
-  | "SCRIBBLE"
 
 export enum GamePhaseState {
   PICK,
@@ -125,5 +120,6 @@ export enum BoardEvent {
   LIGHTNING = "LIGHTNING",
   GAS = "GAS",
   POISON_GAS = "POISON_GAS",
-  STEALTH_ROCKS = "STEALTH_ROCKS"
+  STEALTH_ROCKS = "STEALTH_ROCKS",
+  STICKY_WEB = "STICKY_WEB"
 }

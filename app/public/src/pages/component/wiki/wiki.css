@@ -15,6 +15,11 @@
   text-transform: uppercase;
 }
 
+#wiki-page li[role="tab"] > img.pokemon-portrait {
+  display: block;
+  margin: -6px -12px;
+}
+
 #wiki-page .synergies-tabs li[role="tab"] {
   padding: 4px 6px;
   line-height: 40px;
@@ -45,6 +50,10 @@
   border-radius: 2px;
 }
 
+#wiki-page .wiki-pokemons .pokemon-typeahead {
+  float: right;
+}
+
 #wiki-page p.description {
   line-height: 1.2em;
 }
@@ -62,6 +71,7 @@
   display: grid;
   grid-template: auto 1fr / 30% 1fr;
   padding: 0.5em;
+  min-height: calc(122px + 1em);
 }
 
 #wiki-page .wiki-stat li {

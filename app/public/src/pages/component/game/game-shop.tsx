@@ -1,6 +1,5 @@
 import React from "react"
 import { ToastContainer } from "react-toastify"
-import { useAppSelector } from "../../../hooks"
 import { GameAdditionalPokemons } from "./game-additional-pokemons"
 import GameExperience from "./game-experience"
 import { GameLifeInfo } from "./game-life-info"
@@ -13,7 +12,6 @@ import { GameTeamInfo } from "./game-team-info"
 import "./game-shop.css"
 
 export default function GameShop() {
-  useAppSelector((state) => [state.game.money, state.game.shop]) // required for reactivity
   return (
     <>
       <div className="game-shop nes-container">
@@ -32,7 +30,6 @@ export default function GameShop() {
       <ToastContainer
         className="toast"
         containerId="toast-money"
-        enableMultiContainer
         position="bottom-center"
         autoClose={2000}
         hideProgressBar
@@ -45,7 +42,6 @@ export default function GameShop() {
       <ToastContainer
         className="toast"
         containerId="toast-life"
-        enableMultiContainer
         position="bottom-center"
         autoClose={2000}
         hideProgressBar

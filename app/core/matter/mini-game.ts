@@ -14,7 +14,12 @@ import {
 import Player from "../../models/colyseus-models/player"
 import { getOrientation } from "../../public/src/pages/utils/utils"
 import { PokemonActionState } from "../../types/enum/Game"
-import { BasicItems, CraftableItems, Item, SynergyStones } from "../../types/enum/Item"
+import {
+  BasicItems,
+  CraftableItems,
+  Item,
+  SynergyStones
+} from "../../types/enum/Item"
 import {
   pickNRandomIn,
   pickRandomIn,
@@ -27,12 +32,13 @@ import {
   UniqueShop,
   LegendaryShop,
   PortalCarouselStages,
-  SynergyTriggers
+  SynergyTriggers,
+  KECLEON_SHOP_COST
 } from "../../types/Config"
 import { Synergy } from "../../types/enum/Synergy"
 import GameState from "../../rooms/states/game-state"
 import { keys, values } from "../../utils/schemas"
-import { SpecialLobbyRule } from "../../types/enum/SpecialLobbyRule"
+import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 
 const PLAYER_VELOCITY = 2
 const ITEM_ROTATION_SPEED = 0.0004
@@ -185,7 +191,7 @@ export class MiniGame {
   }
 
   initialize(state: GameState) {
-    const { players, stageLevel, specialLobbyRule } = state
+    const { players, stageLevel, specialGameRule } = state
     this.alivePlayers = new Array<Player>()
     players.forEach((p) => {
       if (p.alive) {
@@ -209,6 +215,15 @@ export class MiniGame {
       }
       if (player.isBot) {
         retentionDelay += randomBetween(1000, 6000)
+      }
+
+      if (
+        ItemCarouselStages.includes(stageLevel) &&
+        state.specialGameRule === SpecialGameRule.KECLEONS_SHOP
+      ) {
+        if (player.money < KECLEON_SHOP_COST) {
+          retentionDelay = Infinity
+        }
       }
 
       const avatar = new PokemonAvatarModel(
@@ -241,12 +256,15 @@ export class MiniGame {
     if (PortalCarouselStages.includes(stageLevel)) {
       this.initializePortalCarousel()
     } else if (ItemCarouselStages.includes(stageLevel)) {
-      this.initializeItemsCarousel(stageLevel, specialLobbyRule)
+      this.initializeItemsCarousel(stageLevel, specialGameRule)
     }
   }
 
-  initializeItemsCarousel(stageLevel: number, specialLobbyRule: SpecialLobbyRule | null) {
-    const items = this.pickRandomItems(stageLevel, specialLobbyRule)
+  initializeItemsCarousel(
+    stageLevel: number,
+    specialGameRule: SpecialGameRule | null
+  ) {
+    const items = this.pickRandomItems(stageLevel, specialGameRule)
 
     for (let j = 0; j < items.length; j++) {
       const x = this.centerX + Math.cos((Math.PI * 2 * j) / items.length) * 100
@@ -316,7 +334,10 @@ export class MiniGame {
     })
   }
 
-  pickRandomItems(stageLevel: number, specialLobbyRule: SpecialLobbyRule | null): Item[] {
+  pickRandomItems(
+    stageLevel: number,
+    specialGameRule: SpecialGameRule | null
+  ): Item[] {
     const items: Item[] = []
 
     let nbItemsToPick = clamp(this.alivePlayers.length + 3, 5, 9)
@@ -330,8 +351,14 @@ export class MiniGame {
       itemsSet = CraftableItems
     }
 
-    if(specialLobbyRule === SpecialLobbyRule.SYNERGY_WHEEL){
+    if (specialGameRule === SpecialGameRule.SYNERGY_WHEEL) {
       itemsSet = SynergyStones
+    }
+
+    if (specialGameRule === SpecialGameRule.KECLEONS_SHOP) {
+      itemsSet = CraftableItems
+      maxCopiesPerItem = 1
+      nbItemsToPick = 6
     }
 
     for (let j = 0; j < nbItemsToPick; j++) {
@@ -359,7 +386,8 @@ export class MiniGame {
           ? SynergyTriggers[type].indexOf(lastTrigger) + 1
           : 0
         // removing low triggers synergies
-        if (type === Synergy.FLORA || type === Synergy.LIGHT) levelReached = min(0)(levelReached - 1)
+        if (type === Synergy.FLORA || type === Synergy.LIGHT)
+          levelReached = min(0)(levelReached - 1)
         return [type, levelReached]
       })
       const candidatesSymbols: Synergy[] = []
@@ -479,7 +507,10 @@ export class MiniGame {
       if (avatar.itemId) {
         const item = this.items?.get(avatar.itemId)
         if (item && player && !player.isBot) {
-          player.items.add(item.name)
+          if (state.specialGameRule === SpecialGameRule.KECLEONS_SHOP) {
+            player.money -= KECLEON_SHOP_COST
+          }
+          player.items.push(item.name)
         }
       }
 

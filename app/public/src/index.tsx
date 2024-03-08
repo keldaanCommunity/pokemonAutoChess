@@ -14,7 +14,6 @@ import { SpriteDebug } from "./pages/sprite-viewer"
 import { loadPreferences } from "./preferences"
 import store from "./stores/index"
 
-import "nes.css/css/nes.min.css"
 import "./i18n"
 import "./styles.css"
 

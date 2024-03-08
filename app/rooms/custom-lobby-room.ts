@@ -23,11 +23,10 @@ import UserMetadata from "../models/mongo-models/user-metadata"
 import { Emotion, IPlayer, Role, Title, Transfer } from "../types"
 import {
   EloRank,
-  GREATBALL_RANKED_LOBBY_CRON,
-  SCRIBBLE_LOBBY_CRON,
-  ULTRABALL_RANKED_LOBBY_CRON
+  RANKED_LOBBY_CRON,
+  SCRIBBLE_LOBBY_CRON
 } from "../types/Config"
-import { LobbyType } from "../types/enum/Game"
+import { GameMode } from "../types/enum/Game"
 import { Language } from "../types/enum/Language"
 import { logger } from "../utils/logger"
 import {
@@ -51,7 +50,7 @@ import {
   OnSearchByIdCommand,
   OnSearchCommand,
   OpenBoosterCommand,
-  OpenSpecialLobbyCommand,
+  OpenSpecialGameCommand,
   RemoveMessageCommand,
   SelectLanguageCommand,
   UnbanUserCommand,
@@ -107,7 +106,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
   async onCreate(): Promise<void> {
     logger.info("create lobby", this.roomId)
     this.setState(new LobbyState())
-    this.state.getNextSpecialLobbyDate()
+    this.state.getNextSpecialGameDate()
     this.autoDispose = false
     this.listing.unlisted = true
 
@@ -390,16 +389,20 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     })
 
     this.presence.subscribe(
-      "special-lobby-full",
+      "special-game-full",
       (params: {
-        lobbyType: LobbyType
+        gameMode: GameMode
         minRank: EloRank | null
         noElo?: boolean
       }) => {
         // open another special lobby when the previous one is full
-        this.dispatcher.dispatch(new OpenSpecialLobbyCommand(), params)
+        this.dispatcher.dispatch(new OpenSpecialGameCommand(), params)
       }
     )
+
+    this.presence.subscribe("server-announcement", (message: string) => {
+      this.state.addAnnouncement(message)
+    })
 
     this.initCronJobs()
     this.fetchChat()
@@ -541,27 +544,14 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       start: true
     })
 
-    const greatBallRankedLobbyJob = CronJob.from({
-      cronTime: GREATBALL_RANKED_LOBBY_CRON,
+    const rankedLobbyJob = CronJob.from({
+      cronTime: RANKED_LOBBY_CRON,
       //cronTime: "0 0/1 * * * *", // DEBUG: trigger every minute
       timeZone: "Europe/Paris",
       onTick: () => {
-        this.dispatcher.dispatch(new OpenSpecialLobbyCommand(), {
-          lobbyType: LobbyType.RANKED,
+        this.dispatcher.dispatch(new OpenSpecialGameCommand(), {
+          gameMode: GameMode.RANKED,
           minRank: EloRank.GREATBALL
-        })
-      },
-      start: true
-    })
-
-    const ultratBallRankedLobbyJob = CronJob.from({
-      cronTime: ULTRABALL_RANKED_LOBBY_CRON,
-      //cronTime: "0 0/1 * * * *", // DEBUG: trigger every minute
-      timeZone: "Europe/Paris",
-      onTick: () => {
-        this.dispatcher.dispatch(new OpenSpecialLobbyCommand(), {
-          lobbyType: LobbyType.RANKED,
-          minRank: EloRank.ULTRABALL
         })
       },
       start: true
@@ -572,8 +562,8 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       //cronTime: "0 0/1 * * * *", // DEBUG: trigger every minute //TEMP
       timeZone: "Europe/Paris",
       onTick: () => {
-        this.dispatcher.dispatch(new OpenSpecialLobbyCommand(), {
-          lobbyType: LobbyType.SCRIBBLE,
+        this.dispatcher.dispatch(new OpenSpecialGameCommand(), {
+          gameMode: GameMode.SCRIBBLE,
           noElo: true
         })
       },

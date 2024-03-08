@@ -3,6 +3,7 @@ import firebase from "firebase/compat/app"
 import React, { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Navigate } from "react-router-dom"
+import { Modal } from "react-bootstrap"
 import LobbyUser from "../../../models/colyseus-models/lobby-user"
 import PokemonConfig from "../../../models/colyseus-models/pokemon-config"
 import { IBot } from "../../../models/mongo-models/bot-v2"
@@ -10,6 +11,7 @@ import {
   ICustomLobbyState,
   ISuggestionUser,
   NonFunctionPropNames,
+  PkmWithConfig,
   Transfer
 } from "../../../types"
 import { useAppDispatch, useAppSelector } from "../hooks"
@@ -34,8 +36,8 @@ import {
   setLanguage,
   setLeaderboard,
   setLevelLeaderboard,
-  setNextSpecialLobbyDate,
-  setNextSpecialLobbyType,
+  setNextSpecialGameDate,
+  setNextSpecialGameMode,
   setPastebinUrl,
   setSearchedUser,
   setSuggestions,
@@ -56,12 +58,10 @@ import Chat from "./component/chat/chat"
 import TabMenu from "./component/lobby-menu/tab-menu"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"
 import { FIREBASE_CONFIG } from "./utils/utils"
-
-import { Modal } from "react-bootstrap"
 import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 import { logger } from "../../../utils/logger"
-import "./lobby.css"
 import { localStore, LocalStoreKeys } from "./utils/store"
+import "./lobby.css"
 
 export default function Lobby() {
   const dispatch = useAppDispatch()
@@ -69,7 +69,7 @@ export default function Lobby() {
 
   const lobbyJoined = useRef<boolean>(false)
   const [reconnectionToken, setReconnectionToken] = useState<string | null>(
-    null
+    localStore.get(LocalStoreKeys.RECONNECTION_TOKEN)
   )
 
   const [toPreparation, setToPreparation] = useState<boolean>(false)
@@ -85,7 +85,6 @@ export default function Lobby() {
         setToAuth(true)
       })
       lobbyJoined.current = true
-      setReconnectionToken(localStore.get(LocalStoreKeys.RECONNECTION_TOKEN))
     }
   }, [lobbyJoined, dispatch])
 
@@ -136,7 +135,6 @@ export default function Lobby() {
           <button
             className="bubbly red"
             onClick={() => {
-              localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
               setReconnectionToken(null)
             }}
           >
@@ -262,12 +260,12 @@ export async function joinLobbyRoom(
             })
           })
 
-          room.state.listen("nextSpecialLobbyDate", (date) => {
-            dispatch(setNextSpecialLobbyDate(date))
+          room.state.listen("nextSpecialGameDate", (date) => {
+            dispatch(setNextSpecialGameDate(date))
           })
 
-          room.state.listen("nextSpecialLobbyType", (type) => {
-            dispatch(setNextSpecialLobbyType(type))
+          room.state.listen("nextSpecialGameMode", (type) => {
+            dispatch(setNextSpecialGameMode(type))
           })
 
           room.state.users.onRemove((u) => {
@@ -332,7 +330,7 @@ export async function joinLobbyRoom(
 
           room.onMessage(
             Transfer.BOOSTER_CONTENT,
-            (boosterContent: string[]) => {
+            (boosterContent: PkmWithConfig[]) => {
               dispatch(setBoosterContent(boosterContent))
             }
           )

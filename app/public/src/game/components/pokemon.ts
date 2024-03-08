@@ -523,6 +523,16 @@ export default class PokemonSprite extends DraggableObject {
     )
   }
 
+  hatchAnimation() {
+    this.displayAnimation("HATCH")
+    const g = <GameScene>this.scene
+    g.animationManager?.animatePokemon(
+      this,
+      PokemonActionState.EMOTE,
+      this.flip
+    )
+  }
+
   specialAttackAnimation(group: Phaser.GameObjects.Group, ultCount: number) {
     if (this.skill && this.skill === Ability.GROWTH) {
       this.sprite.setScale(2 + 0.5 * ultCount)
@@ -931,6 +941,10 @@ export default class PokemonSprite extends DraggableObject {
       this.remove(this.psychicField, true)
       this.psychicField = undefined
     }
+  }
+
+  addRageEffect() {
+    this.sprite.setTint(0xff0000)
   }
 }
 

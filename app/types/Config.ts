@@ -41,24 +41,24 @@ export const RarityCost: { [key in Rarity]: number } = Object.freeze({
 export const EmotionCost: { [key in Emotion]: number } = {
   [Emotion.NORMAL]: 50,
   [Emotion.HAPPY]: 100,
-  [Emotion.PAIN]: 110,
-  [Emotion.ANGRY]: 120,
-  [Emotion.WORRIED]: 130,
-  [Emotion.SAD]: 140,
-  [Emotion.CRYING]: 150,
-  [Emotion.SHOUTING]: 160,
-  [Emotion.TEARY_EYED]: 170,
-  [Emotion.DETERMINED]: 180,
-  [Emotion.JOYOUS]: 190,
-  [Emotion.INSPIRED]: 200,
-  [Emotion.SURPRISED]: 210,
-  [Emotion.DIZZY]: 220,
-  [Emotion.SPECIAL0]: 230,
-  [Emotion.SPECIAL1]: 240,
-  [Emotion.SIGH]: 250,
-  [Emotion.STUNNED]: 260,
-  [Emotion.SPECIAL2]: 270,
-  [Emotion.SPECIAL3]: 280
+  [Emotion.PAIN]: 100,
+  [Emotion.ANGRY]: 100,
+  [Emotion.WORRIED]: 100,
+  [Emotion.SAD]: 100,
+  [Emotion.CRYING]: 100,
+  [Emotion.SHOUTING]: 150,
+  [Emotion.TEARY_EYED]: 150,
+  [Emotion.DETERMINED]: 150,
+  [Emotion.JOYOUS]: 150,
+  [Emotion.INSPIRED]: 150,
+  [Emotion.SURPRISED]: 150,
+  [Emotion.DIZZY]: 150,
+  [Emotion.SPECIAL0]: 200,
+  [Emotion.SPECIAL1]: 200,
+  [Emotion.SIGH]: 200,
+  [Emotion.STUNNED]: 200,
+  [Emotion.SPECIAL2]: 200,
+  [Emotion.SPECIAL3]: 200
 }
 
 export function getEmotionCost(emotion: Emotion, isShiny: boolean): number {
@@ -83,7 +83,7 @@ export const SynergyTriggers: { [key in Synergy]: number[] } = {
   [Synergy.FIRE]: [2, 4, 6, 8],
   [Synergy.WATER]: [3, 6, 9],
   [Synergy.ELECTRIC]: [3, 6],
-  [Synergy.FIGHTING]: [2, 4, 6],
+  [Synergy.FIGHTING]: [2, 4, 6, 8],
   [Synergy.PSYCHIC]: [2, 4, 6],
   [Synergy.DARK]: [3, 5, 7],
   [Synergy.STEEL]: [2, 4, 6, 8],
@@ -105,7 +105,8 @@ export const SynergyTriggers: { [key in Synergy]: number[] } = {
   [Synergy.SOUND]: [2, 4, 6],
   [Synergy.ARTIFICIAL]: [2, 4, 6],
   [Synergy.BABY]: [3, 5, 7],
-  [Synergy.LIGHT]: [2, 3, 4, 5]
+  [Synergy.LIGHT]: [2, 3, 4, 5],
+  [Synergy.WILD]: [2, 4, 6, 9]
 }
 
 export const RequiredStageLevelForXpElligibility = 10
@@ -125,7 +126,7 @@ export const RarityColor: { [key in Rarity]: string } = {
 }
 
 export const BoosterRarityProbability: { [key in Rarity]: number } = {
-  [Rarity.COMMON]: 0.15,
+  [Rarity.COMMON]: 0.12,
   [Rarity.UNCOMMON]: 0.2,
   [Rarity.RARE]: 0.2,
   [Rarity.EPIC]: 0.15,
@@ -133,7 +134,7 @@ export const BoosterRarityProbability: { [key in Rarity]: number } = {
   [Rarity.UNIQUE]: 0.08,
   [Rarity.LEGENDARY]: 0.05,
   [Rarity.HATCH]: 0.1,
-  [Rarity.SPECIAL]: 0
+  [Rarity.SPECIAL]: 0.03
 }
 
 export const DITTO_RATE = 0.005
@@ -157,12 +158,11 @@ export const RarityProbabilityPerLevel: { [key: number]: number[] } = {
 }
 
 export const EvolutionTime = {
-  EGG_HATCH: 4,
-  EVOLVE_HATCH: 4
+  EGG_HATCH: 3,
+  EVOLVE_HATCH: 5
 }
 
-export const TandemausEvolutionTurn = 14
-export const MausholdEvolutionTurn = 20
+export const KECLEON_SHOP_COST = 10
 
 export const PoolSize: { [key in Rarity]: [number, number, number] } = {
   [Rarity.COMMON]: [1, 18, 29],
@@ -202,7 +202,6 @@ export const UniqueShop = new Array<PkmProposition>(
   Pkm.KECLEON,
   Pkm.MAWILE,
   Pkm.TAUROS,
-  Pkm.TORNADUS,
   Pkm.RELICANTH,
   Pkm.MEW,
   Pkm.CHATOT,
@@ -239,7 +238,11 @@ export const UniqueShop = new Array<PkmProposition>(
   Pkm.GIMMIGHOUL,
   Pkm.BRUXISH,
   Pkm.CYCLIZAR,
-  Pkm.MINIOR
+  Pkm.MINIOR,
+  Pkm.MORPEKO,
+  Pkm.TYPE_NULL,
+  Pkm.KANGASKHAN,
+  Pkm.DRUDDIGON
 )
 
 export const LegendaryShop = new Array<PkmProposition>(
@@ -284,7 +287,11 @@ export const LegendaryShop = new Array<PkmProposition>(
   Pkm.NECROZMA,
   Pkm.XURKITREE,
   Pkm.NIHILEGO,
-  Pkm.PHEROMOSA
+  Pkm.PHEROMOSA,
+  Pkm.TORNADUS,
+  Pkm.THUNDURUS,
+  Pkm.LANDORUS,
+  Pkm.ENAMORUS
 )
 
 export const HatchList = new Array<Pkm>(
@@ -322,15 +329,15 @@ export const FishRarityProbability: {
     [Rarity.EPIC]: 0
   },
   3: {
-    [Rarity.SPECIAL]: 0.1,
-    [Rarity.COMMON]: 0.3,
+    [Rarity.SPECIAL]: 0,
+    [Rarity.COMMON]: 0.4,
     [Rarity.UNCOMMON]: 0.3,
     [Rarity.RARE]: 0.2,
     [Rarity.EPIC]: 0.1
   }
 }
 
-export const MAX_PLAYERS_PER_LOBBY = 8
+export const MAX_PLAYERS_PER_GAME = 8
 
 export const DEFAULT_ATK_SPEED = 0.75
 export const DEFAULT_CRIT_CHANCE = 10
@@ -950,5 +957,7 @@ export const DTEF_TILESET_HEIGHT = 8
 export const DTEF_TILESET_TILE_WIDTH = 24
 
 export const SCRIBBLE_LOBBY_CRON = "0 0 0-20/4 * * *" // every four hours from 00h to 20h
-export const GREATBALL_RANKED_LOBBY_CRON = "0 0 2-22/4 * * *" // every four hours from 2h to 22h
-export const ULTRABALL_RANKED_LOBBY_CRON = "0 0 21 * * 7" // on Sunday at 21h
+export const RANKED_LOBBY_CRON = "0 0 2-22/4 * * *" // every four hours from 2h to 22h
+
+export const DUST_PER_BOOSTER = 50
+export const DUST_PER_SHINY = 250

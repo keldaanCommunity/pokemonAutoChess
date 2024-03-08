@@ -21,6 +21,7 @@ export default function WikiStatus() {
     Status.SILENCE,
     Status.SLEEP,
     Status.WOUND,
+    Status.RAGE,
     Status.ELECTRIC_FIELD,
     Status.FAIRY_FIELD,
     Status.GRASS_FIELD,

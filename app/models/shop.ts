@@ -12,13 +12,13 @@ import { Ability } from "../types/enum/Ability"
 import { Effect } from "../types/enum/Effect"
 import { Rarity } from "../types/enum/Game"
 import {
-  getUnownsPoolPerStage,
   Pkm,
   PkmDuos,
   PkmFamily,
-  PkmProposition
+  PkmProposition,
+  getUnownsPoolPerStage
 } from "../types/enum/Pokemon"
-import { SpecialLobbyRule } from "../types/enum/SpecialLobbyRule"
+import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
 import { removeInArray } from "../utils/array"
 import { logger } from "../utils/logger"
@@ -26,8 +26,8 @@ import { clamp } from "../utils/number"
 import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
 import Player from "./colyseus-models/player"
-import PokemonFactory from "./pokemon-factory"
-import { PRECOMPUTED_POKEMONS_PER_RARITY } from "./precomputed"
+import { PRECOMPUTED_POKEMONS_PER_RARITY, getPokemonData } from "./precomputed"
+import { PVEStages } from "./pve-stages"
 
 export function getPoolSize(rarity: Rarity, maxStars: number): number {
   return PoolSize[rarity][clamp(maxStars, 1, 3) - 1]
@@ -35,11 +35,11 @@ export function getPoolSize(rarity: Rarity, maxStars: number): number {
 
 function getRegularsTier1(pokemons: Pkm[]) {
   return pokemons.filter((p) => {
-    const pokemon = PokemonFactory.createPokemonFromName(p)
+    const pokemonData = getPokemonData(p)
     return (
-      pokemon.stars === 1 &&
-      pokemon.skill !== Ability.DEFAULT &&
-      !pokemon.additional
+      pokemonData.stars === 1 &&
+      pokemonData.skill !== Ability.DEFAULT &&
+      !pokemonData.additional
     )
   })
 }
@@ -50,14 +50,12 @@ const RareShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.RARE)
 const EpicShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.EPIC)
 const UltraShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.ULTRA)
 
-console.log({ CommonShop, UncommonShop, RareShop, EpicShop, UltraShop })
-
 export default class Shop {
   commonPool: Map<Pkm, number> = new Map<Pkm, number>()
   uncommonPool: Map<Pkm, number> = new Map<Pkm, number>()
   rarePool: Map<Pkm, number> = new Map<Pkm, number>()
   epicPool: Map<Pkm, number> = new Map<Pkm, number>()
-  legendaryPool: Map<Pkm, number> = new Map<Pkm, number>()
+  ultraPool: Map<Pkm, number> = new Map<Pkm, number>()
   constructor() {
     CommonShop.forEach((pkm) => {
       this.commonPool.set(pkm, getPoolSize(Rarity.COMMON, 3))
@@ -73,15 +71,15 @@ export default class Shop {
       this.epicPool.set(pkm, getPoolSize(Rarity.EPIC, 3))
     })
     UltraShop.forEach((pkm) => {
-      this.legendaryPool.set(pkm, getPoolSize(Rarity.ULTRA, 3))
+      this.ultraPool.set(pkm, getPoolSize(Rarity.ULTRA, 3))
     })
   }
 
   addAdditionalPokemon(pkmProposition: PkmProposition) {
     const pkm: Pkm =
       pkmProposition in PkmDuos ? PkmDuos[pkmProposition][0] : pkmProposition
-    const p = PokemonFactory.createPokemonFromName(pkm)
-    switch (p.rarity) {
+    const rarity = getPokemonData(pkm).rarity
+    switch (rarity) {
       case Rarity.COMMON:
         this.commonPool.set(pkm, getPoolSize(Rarity.COMMON, 2))
         break
@@ -95,7 +93,7 @@ export default class Shop {
         this.epicPool.set(pkm, getPoolSize(Rarity.EPIC, 2))
         break
       case Rarity.ULTRA:
-        this.legendaryPool.set(pkm, getPoolSize(Rarity.ULTRA, 2))
+        this.ultraPool.set(pkm, getPoolSize(Rarity.ULTRA, 2))
         break
       default:
         break
@@ -103,9 +101,9 @@ export default class Shop {
   }
 
   releasePokemon(pkm: Pkm) {
-    const pokemon = PokemonFactory.createPokemonFromName(pkm)
-    const family = PkmFamily[pokemon.name]
-    let entityNumber = pokemon.stars >= 3 ? 9 : pokemon.stars === 2 ? 3 : 1
+    const { stars, rarity } = getPokemonData(pkm)
+    const family = PkmFamily[pkm]
+    let entityNumber = stars >= 3 ? 9 : stars === 2 ? 3 : 1
     const duo = Object.entries(PkmDuos).find(([key, duo]) => duo.includes(pkm))
     if (duo) {
       // duos increase the number in pool by one if selling both
@@ -113,30 +111,30 @@ export default class Shop {
       entityNumber = Math.ceil(entityNumber / 2)
     }
 
-    if (pokemon.rarity === Rarity.COMMON) {
+    if (rarity === Rarity.COMMON) {
       const value = this.commonPool.get(family)
       if (value !== undefined) {
         this.commonPool.set(family, value + entityNumber)
       }
-    } else if (pokemon.rarity === Rarity.UNCOMMON) {
+    } else if (rarity === Rarity.UNCOMMON) {
       const value = this.uncommonPool.get(family)
       if (value !== undefined) {
         this.uncommonPool.set(family, value + entityNumber)
       }
-    } else if (pokemon.rarity === Rarity.RARE) {
+    } else if (rarity === Rarity.RARE) {
       const value = this.rarePool.get(family)
       if (value !== undefined) {
         this.rarePool.set(family, value + entityNumber)
       }
-    } else if (pokemon.rarity === Rarity.EPIC) {
+    } else if (rarity === Rarity.EPIC) {
       const value = this.epicPool.get(family)
       if (value !== undefined) {
         this.epicPool.set(family, value + entityNumber)
       }
-    } else if (pokemon.rarity === Rarity.ULTRA) {
-      const value = this.legendaryPool.get(family)
+    } else if (rarity === Rarity.ULTRA) {
+      const value = this.ultraPool.get(family)
       if (value !== undefined) {
-        this.legendaryPool.set(family, value + entityNumber)
+        this.ultraPool.set(family, value + entityNumber)
       }
     }
   }
@@ -190,7 +188,7 @@ export default class Shop {
       const synergy = synergies[i]
       const candidates = propositions.filter((m) => {
         const pkm: Pkm = m in PkmDuos ? PkmDuos[m][0] : m
-        return PokemonFactory.createPokemonFromName(pkm).types.has(synergy)
+        return getPokemonData(pkm).types.includes(synergy)
       })
       const selectedProposition = pickRandomIn(
         candidates.length > 0 ? candidates : propositions
@@ -208,9 +206,10 @@ export default class Shop {
     let pkm = Pkm.MAGIKARP
     const candidates = new Array<Pkm>()
     pool.forEach((value, pkm) => {
-      const pokemon = PokemonFactory.createPokemonFromName(pkm)
-      const isOfTypeWanted =
-        !specificTypeWanted || pokemon.types.has(specificTypeWanted)
+      const types = getPokemonData(pkm).types
+      const isOfTypeWanted = specificTypeWanted
+        ? types.includes(specificTypeWanted)
+        : types.includes(Synergy.WILD) === false
 
       if (isOfTypeWanted && !finals.has(pkm)) {
         for (let i = 0; i < value; i++) {
@@ -218,9 +217,15 @@ export default class Shop {
         }
       }
     })
+
     if (candidates.length > 0) {
       pkm = pickRandomIn(candidates)
+    } else if (specificTypeWanted === Synergy.WATER) {
+      return Pkm.MAGIKARP // if no more water in pool, return magikarp
+    } else if (specificTypeWanted) {
+      return this.getRandomPokemonFromPool(pool, finals) // could not find of specific type, return another type
     }
+
     const val = pool.get(pkm)
     if (val !== undefined) {
       pool.set(pkm, Math.max(0, val - 1))
@@ -237,7 +242,7 @@ export default class Shop {
     let threshold = 0
 
     if (
-      state.specialLobbyRule !== SpecialLobbyRule.DITTO_PARTY &&
+      state.specialGameRule !== SpecialGameRule.DITTO_PARTY &&
       chance(DITTO_RATE)
     ) {
       return Pkm.DITTO
@@ -253,30 +258,68 @@ export default class Shop {
       return pickRandomIn(unowns)
     }
 
+    const isPVE = state.stageLevel in PVEStages
+    const wildChance = player.effects.has(Effect.QUICK_FEET)
+      ? 0.05
+      : player.effects.has(Effect.RUN_AWAY)
+      ? 0.1
+      : player.effects.has(Effect.HUSTLE)
+      ? 0.15
+      : player.effects.has(Effect.BERSERK)
+      ? 0.2
+      : isPVE
+      ? 0.05
+      : 0
+
     const finals = new Set(
       values(player.board)
         .filter((pokemon) => pokemon.final)
         .map((pokemon) => PkmFamily[pokemon.name])
     )
 
+    let specificTypeWanted: Synergy | undefined = undefined
+    if (wildChance > 0 && chance(wildChance)) {
+      specificTypeWanted = Synergy.WILD
+    }
+
     for (let i = 0; i < rarityProbability.length; i++) {
       threshold += rarityProbability[i]
       if (rarity_seed < threshold) {
         switch (i) {
           case 0:
-            pokemon = this.getRandomPokemonFromPool(this.commonPool, finals)
+            pokemon = this.getRandomPokemonFromPool(
+              this.commonPool,
+              finals,
+              specificTypeWanted
+            )
             break
           case 1:
-            pokemon = this.getRandomPokemonFromPool(this.uncommonPool, finals)
+            pokemon = this.getRandomPokemonFromPool(
+              this.uncommonPool,
+              finals,
+              specificTypeWanted
+            )
             break
           case 2:
-            pokemon = this.getRandomPokemonFromPool(this.rarePool, finals)
+            pokemon = this.getRandomPokemonFromPool(
+              this.rarePool,
+              finals,
+              specificTypeWanted
+            )
             break
           case 3:
-            pokemon = this.getRandomPokemonFromPool(this.epicPool, finals)
+            pokemon = this.getRandomPokemonFromPool(
+              this.epicPool,
+              finals,
+              specificTypeWanted
+            )
             break
           case 4:
-            pokemon = this.getRandomPokemonFromPool(this.legendaryPool, finals)
+            pokemon = this.getRandomPokemonFromPool(
+              this.ultraPool,
+              finals,
+              specificTypeWanted
+            )
             break
           default:
             logger.error(
@@ -336,7 +379,9 @@ export default class Shop {
             break
           case Rarity.SPECIAL:
           default:
-            fish = Pkm.MAGIKARP
+            if (fishingLevel === 1) fish = Pkm.MAGIKARP
+            if (fishingLevel === 2) fish = Pkm.FEEBAS
+            //if (fishingLevel >= 3) fish = Pkm.WISHIWASHI // when available
             break
         }
         break

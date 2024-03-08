@@ -14,8 +14,8 @@ export default function GameExperience() {
     (state) => state.game.experienceManager
   )
   const isLevelMax = experienceManager.level >= 9
-  const specialLobbyRule = getGameScene()?.room?.state.specialLobbyRule
-  const levelUpCost = getLevelUpCost(specialLobbyRule)
+  const specialGameRule = getGameScene()?.room?.state.specialGameRule
+  const levelUpCost = getLevelUpCost(specialGameRule)
 
   return (
     <div className="nes-container game-experience">

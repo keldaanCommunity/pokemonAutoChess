@@ -9,8 +9,8 @@ import UserMetadata, {
   IUserMetadata
 } from "../../models/mongo-models/user-metadata"
 import { IChatV2, Role, Transfer } from "../../types"
-import { EloRankThreshold, MAX_PLAYERS_PER_LOBBY } from "../../types/Config"
-import { BotDifficulty, LobbyType } from "../../types/enum/Game"
+import { EloRankThreshold, MAX_PLAYERS_PER_GAME } from "../../types/Config"
+import { BotDifficulty, GameMode } from "../../types/enum/Game"
 import { logger } from "../../utils/logger"
 import { pickRandomIn } from "../../utils/random"
 import { entries, values } from "../../utils/schemas"
@@ -29,15 +29,12 @@ export class OnJoinCommand extends Command<
       const numberOfHumanPlayers = values(this.state.users).filter(
         (u) => !u.isBot
       ).length
-      if (numberOfHumanPlayers >= MAX_PLAYERS_PER_LOBBY) {
+      if (numberOfHumanPlayers >= MAX_PLAYERS_PER_GAME) {
         client.send(Transfer.KICK)
         client.leave()
-        return // lobby already full
+        return // game already full
       }
-      if (
-        this.state.ownerId == "" &&
-        this.state.lobbyType === LobbyType.NORMAL
-      ) {
+      if (this.state.ownerId == "" && this.state.gameMode === GameMode.NORMAL) {
         this.state.ownerId = auth.uid
       }
       if (this.state.users.has(auth.uid)) {
@@ -53,7 +50,7 @@ export class OnJoinCommand extends Command<
         const numberOfHumanPlayers = values(this.state.users).filter(
           (u) => !u.isBot
         ).length
-        if (numberOfHumanPlayers >= MAX_PLAYERS_PER_LOBBY) {
+        if (numberOfHumanPlayers >= MAX_PLAYERS_PER_GAME) {
           // lobby has been filled with someone else while waiting for the database
           client.send(Transfer.KICK)
           client.leave()
@@ -70,7 +67,7 @@ export class OnJoinCommand extends Command<
             return // rank not high enough
           }
 
-          const initiallyReady = this.state.lobbyType !== LobbyType.NORMAL
+          const initiallyReady = this.state.gameMode !== GameMode.NORMAL
           this.state.users.set(
             client.auth.uid,
             new GameUser(
@@ -98,7 +95,7 @@ export class OnJoinCommand extends Command<
         }
       }
 
-      while (this.state.users.size > MAX_PLAYERS_PER_LOBBY) {
+      while (this.state.users.size > MAX_PLAYERS_PER_GAME) {
         // delete a random bot to make room
         const users = entries(this.state.users)
         const entryToDelete = users.find(([key, user]) => user.isBot)
@@ -117,8 +114,8 @@ export class OnJoinCommand extends Command<
       }
 
       if (
-        this.state.lobbyType !== LobbyType.NORMAL &&
-        this.state.users.size === MAX_PLAYERS_PER_LOBBY
+        this.state.gameMode !== GameMode.NORMAL &&
+        this.state.users.size === MAX_PLAYERS_PER_GAME
       ) {
         // auto start when special lobby is full and all ready
         this.room.broadcast(Transfer.MESSAGES, {
@@ -128,8 +125,8 @@ export class OnJoinCommand extends Command<
         this.clock.setTimeout(() => {
           this.room.dispatcher.dispatch(new OnGameStartRequestCommand())
           // open another one
-          this.room.presence.publish("special-lobby-full", {
-            lobbyType: this.state.lobbyType,
+          this.room.presence.publish("special-game-full", {
+            gameMode: this.state.gameMode,
             minRank: this.state.minRank,
             noElo: this.state.noElo
           })
@@ -164,7 +161,7 @@ export class OnGameStartRequestCommand extends Command<
         }
       })
 
-      if (!allUsersReady && this.state.lobbyType === LobbyType.NORMAL) {
+      if (!allUsersReady && this.state.gameMode === GameMode.NORMAL) {
         client?.send(Transfer.MESSAGES, {
           author: "Server",
           payload: `Not all players are ready.`,
@@ -198,12 +195,12 @@ export class OnGameStartRequestCommand extends Command<
           })
         } else if (
           freeMemory < 0.2 * totalMemory &&
-          nbHumanPlayers < MAX_PLAYERS_PER_LOBBY
+          nbHumanPlayers < MAX_PLAYERS_PER_GAME
         ) {
           // if less than 20% free memory available, prevents starting a game with bots
           this.room.broadcast(Transfer.MESSAGES, {
             author: "Server",
-            payload: `Too many players are currently playing and the server is running out of memory. To save resources, only lobbys with ${MAX_PLAYERS_PER_LOBBY} human players are enabled. Sorry for the inconvenience.`,
+            payload: `Too many players are currently playing and the server is running out of memory. To save resources, only lobbys with ${MAX_PLAYERS_PER_GAME} human players are enabled. Sorry for the inconvenience.`,
             avatar: "0025/Pain",
             time: Date.now()
           })
@@ -223,7 +220,7 @@ export class OnGameStartRequestCommand extends Command<
             preparationId: this.room.roomId,
             noElo: this.state.noElo,
             selectedMap: this.state.selectedMap,
-            lobbyType: this.state.lobbyType,
+            gameMode: this.state.gameMode,
             minRank: this.state.minRank,
             whenReady: (game) => {
               this.room.setGameStarted(true)
@@ -422,7 +419,7 @@ export class OnLeaveCommand extends Command<
 
           if (client.auth.uid === this.state.ownerId) {
             const newOwner = values(this.state.users).find(
-              (user) => user.id !== this.state.ownerId
+              (user) => user.id !== this.state.ownerId && !user.isBot
             )
             if (newOwner) {
               this.state.ownerId = newOwner.id
@@ -457,7 +454,7 @@ export class OnToggleReadyCommand extends Command<
         user.ready = !user.ready
       }
       if (
-        this.state.lobbyType !== LobbyType.NORMAL &&
+        this.state.gameMode !== GameMode.NORMAL &&
         this.state.users.size === this.room.maxClients &&
         values(this.state.users).every((user) => user.ready === true)
       ) {
@@ -521,7 +518,7 @@ type OnAddBotPayload = {
 
 export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
   async execute(data: OnAddBotPayload) {
-    if (this.state.users.size >= MAX_PLAYERS_PER_LOBBY) {
+    if (this.state.users.size >= MAX_PLAYERS_PER_GAME) {
       this.room.broadcast(Transfer.MESSAGES, {
         payload: "Room is full",
         time: Date.now()
@@ -581,7 +578,7 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
 
     if (bot) {
       // we checked again the lobby size because of the async request ahead
-      if (this.state.users.size >= MAX_PLAYERS_PER_LOBBY) {
+      if (this.state.users.size >= MAX_PLAYERS_PER_GAME) {
         this.room.broadcast(Transfer.MESSAGES, {
           payload: "Room is full",
           time: Date.now()
@@ -637,7 +634,7 @@ export class OnRemoveBotCommand extends Command<
 export class OnListBotsCommand extends Command<PreparationRoom> {
   async execute(data: { user: IUserMetadata }) {
     try {
-      if (this.state.users.size >= MAX_PLAYERS_PER_LOBBY) {
+      if (this.state.users.size >= MAX_PLAYERS_PER_GAME) {
         return
       }
 

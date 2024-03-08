@@ -1,5 +1,8 @@
 import PokemonFactory from "../../models/pokemon-factory"
-import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../models/precomputed"
+import {
+  getPokemonData,
+  PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY
+} from "../../models/precomputed"
 import { Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { AttackType, PokemonActionState, Rarity } from "../../types/enum/Game"
@@ -225,7 +228,7 @@ export class HiddenPowerIStrategy extends HiddenPowerStrategy {
   ) {
     super.process(unown, state, board, target, crit)
     if (unown.player) {
-      unown.player.items.add(pickRandomIn(BasicItems))
+      unown.player.items.push(pickRandomIn(BasicItems))
     }
   }
 }
@@ -396,7 +399,7 @@ export class HiddenPowerPStrategy extends HiddenPowerStrategy {
       ...PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[Synergy.BUG].pokemons,
       ...PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[Synergy.BUG]
         .additionalPokemons
-    ] as Pkm[]
+    ].filter((p) => getPokemonData(p).stars === 1) as Pkm[]
     for (let i = 0; i < numberToSpawn; i++) {
       const bug = pickRandomIn(bugs)
       const coord = unown.simulation.getClosestAvailablePlaceOnBoardToPokemon(
@@ -508,7 +511,7 @@ export class HiddenPowerTStrategy extends HiddenPowerStrategy {
   ) {
     super.process(unown, state, board, target, crit)
     pickNRandomIn(Berries, 3).forEach((item) => {
-      unown.player && unown.player.items.add(item)
+      unown.player && unown.player.items.push(item)
     })
   }
 }

@@ -38,7 +38,7 @@ New Synergy: ![Light](/assets/types/LIGHT.svg) Light gives various bonuses to on
 ![Doduo](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0084/Normal.png)
 ![Dodrio](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0085/Normal.png)
 ![Necrozma](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0800/Normal.png)
-![Necrozma Ultra](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0800/0001/Shouting.png)
+![Necrozma Ultra](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0800/0003/Normal.png)
 
 ## New PVE rounds and more items
 

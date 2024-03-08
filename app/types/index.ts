@@ -1,10 +1,4 @@
-import {
-  ArraySchema,
-  CollectionSchema,
-  MapSchema,
-  Schema,
-  SetSchema
-} from "@colyseus/schema"
+import { ArraySchema, MapSchema, Schema, SetSchema } from "@colyseus/schema"
 import Board from "../core/board"
 import Dps from "../core/dps"
 import DpsHeal from "../core/dps-heal"
@@ -29,11 +23,10 @@ import { Emotion } from "./enum/Emotion"
 import {
   AttackType,
   BoardEvent,
-  LobbyType,
+  GameMode,
   Orientation,
   PokemonActionState,
   Rarity,
-  SpecialLobbyType,
   Stat
 } from "./enum/Game"
 import { Item } from "./enum/Item"
@@ -218,7 +211,7 @@ export const AttackSpriteScale: { [sprite in AttackSprite]: [number, number] } =
     "PSYCHIC/melee": [1.5, 1.5],
     "PSYCHIC/range": [2, 2],
     "ROCK/melee": [1.5, 1.5],
-    "ROCK/range": [3, 3],
+    "ROCK/range": [2, 2],
     "STEEL/melee": [1.5, 1.5],
     "WATER/melee": [2, 2],
     "WATER/range": [3, 3]
@@ -279,8 +272,8 @@ export interface ICustomLobbyState extends Schema {
   leaderboard: ILeaderboardInfo[]
   botLeaderboard: ILeaderboardInfo[]
   levelLeaderboard: ILeaderboardInfo[]
-  nextSpecialLobbyDate: string
-  nextSpecialLobbyType: SpecialLobbyType | ""
+  nextSpecialGameDate: string
+  nextSpecialGameMode: GameMode | ""
 }
 
 export interface IGameState extends Schema {
@@ -361,7 +354,7 @@ export interface IPlayer {
   opponentAvatar: string
   opponentTitle: string
   boardSize: number
-  items: CollectionSchema<Item>
+  items: ArraySchema<Item>
   rank: number
   elo: number
   alive: boolean
@@ -557,6 +550,7 @@ export interface ICount {
   fairyCritCount: number
   attackCount: number
   growGroundCount: number
+  fightingBlockCount: number
   dodgeCount: number
   powerLensCount: number
   staticCount: number
@@ -583,12 +577,13 @@ export interface IPreparationMetadata {
   type: "preparation"
   gameStarted: boolean
   minRank: string | null
-  lobbyType: LobbyType
+  gameMode: GameMode
+  whitelist: string[] | null
 }
 
 export interface IGameMetadata {
   name: string
-  lobbyType: LobbyType
+  gameMode: GameMode
   playerIds: string[]
   stageLevel: number
   type: "game"

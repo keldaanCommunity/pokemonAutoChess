@@ -35,8 +35,9 @@ import {
 import { Berries, Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm, PkmIndex } from "../types/enum/Pokemon"
-import { SpecialLobbyRule } from "../types/enum/SpecialLobbyRule"
+import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy, SynergyEffects } from "../types/enum/Synergy"
+import { Weather } from "../types/enum/Weather"
 import { distanceC } from "../utils/distance"
 import { clamp, max, min, roundTo2Digits } from "../utils/number"
 import { chance } from "../utils/random"
@@ -179,7 +180,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   update(
     dt: number,
     board: Board,
-    weather: string,
+    weather: Weather,
     player: Player | undefined
   ) {
     this.state.update(this, dt, board, weather, player)
@@ -486,18 +487,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           targetX: t.positionX,
           targetY: t.positionY
         })
-        if (t.id !== target.id) {
-          t.handleDamage({
-            damage: physicalDamage,
-            board,
-            attackType: AttackType.PHYSICAL,
-            attacker: this,
-            shouldTargetGainMana: false
-          })
-        }
         if (this.name === Pkm.MINIOR_KERNEL_BLUE) {
           t.handleDamage({
-            damage: 10,
+            damage: physicalDamage,
             board,
             attackType: AttackType.SPECIAL,
             attacker: this,
@@ -506,7 +498,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         }
         if (this.name === Pkm.MINIOR_KERNEL_RED) {
           t.handleDamage({
-            damage: Math.ceil(physicalDamage * 0.15),
+            damage: Math.ceil(physicalDamage * 1.5),
             board,
             attackType: AttackType.PHYSICAL,
             attacker: this,
@@ -515,7 +507,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         }
         if (this.name === Pkm.MINIOR_KERNEL_ORANGE) {
           t.handleDamage({
-            damage: Math.ceil(physicalDamage * 0.05),
+            damage: Math.ceil(physicalDamage * 0.5),
             board,
             attackType: AttackType.TRUE,
             attacker: this,
@@ -526,7 +518,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       if (this.name === Pkm.MINIOR_KERNEL_GREEN) {
         cells.forEach((v) => {
           if (v && v.value && v.value.team === this.team) {
-            v.value.handleHeal(5, this, 1)
+            v.value.handleHeal(physicalDamage, this, 0)
           }
         })
       }
@@ -635,10 +627,18 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     specialDamage: number
     trueDamage: number
   }) {
-    // Item effects on hit
+    if (this.name === Pkm.MORPEKO) {
+      target.status.triggerParalysis(2000, this)
+    }
+
+    if (this.name === Pkm.MORPEKO_HANGRY) {
+      target.status.triggerWound(4000, target, this)
+    }
+
     if (this.name === Pkm.MINIOR) {
       this.addAttackSpeed(4, true)
     }
+
     if (this.items.has(Item.UPGRADE)) {
       this.addAttackSpeed(5)
       this.count.upgradeCount++
@@ -655,7 +655,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.items.has(Item.INCENSE) && chance(1 / 10)) {
-      this.status.triggerCharm(2000, target)
+      this.status.triggerCharm(2000, target, this)
     }
 
     // Synergy effects on hit
@@ -724,23 +724,30 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.hasSynergyEffect(Synergy.GHOST)) {
-      if (chance(1 / 2)) {
-        target.status.triggerSilence(3000, this)
+      if (chance(0.25)) {
+        target.status.triggerSilence(2000, this)
       }
     }
 
     let poisonChance = 0
     if (this.effects.has(Effect.POISONOUS)) {
-      poisonChance = 0.33
+      poisonChance = 0.3
     }
     if (this.effects.has(Effect.VENOMOUS)) {
-      poisonChance = 0.66
+      poisonChance = 0.6
     }
     if (this.effects.has(Effect.TOXIC)) {
       poisonChance = 1.0
     }
     if (poisonChance > 0 && chance(poisonChance)) {
       target.status.triggerPoison(4000, target, this)
+    }
+
+    if (this.types.has(Synergy.WILD)) {
+      const woundChance = 0.25
+      if (chance(woundChance)) {
+        target.status.triggerWound(3000, target, this)
+      }
     }
 
     // Ability effects on hit
@@ -895,6 +902,32 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
     }
 
+    // Fighting knockback
+    if (
+      this.count.fightingBlockCount > 0 &&
+      this.count.fightingBlockCount % 10 === 0 &&
+      distanceC(this.positionX, this.positionY, this.targetX, this.targetY) ===
+        1
+    ) {
+      const targetAtContact = board.getValue(this.targetX, this.targetY)
+      const destination = this.state.getAvailablePlaceCoordinatesInRange(
+        this,
+        board,
+        4
+      )
+      if (destination && targetAtContact) {
+        targetAtContact.shield = 0
+        targetAtContact.handleDamage({
+          damage: this.atk,
+          board,
+          attackType: AttackType.PHYSICAL,
+          attacker: this,
+          shouldTargetGainMana: true
+        })
+        targetAtContact.moveTo(destination.x, destination.y, board)
+      }
+    }
+
     // Berries trigger
     const berry = values(this.items).find((item) => Berries.includes(item))
     if (berry && this.life > 0 && this.life < 0.5 * this.hp) {
@@ -1027,8 +1060,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
     }
 
-    if (this.passive === Passive.BEAST_BOOST) {
+    if (this.passive === Passive.BEAST_BOOST_ATK) {
       this.addAttack(5)
+    }
+    if (this.passive === Passive.BEAST_BOOST_AP) {
+      this.addAbilityPower(10)
     }
 
     board.forEach(
@@ -1368,11 +1404,36 @@ export function getUnitScore(pokemon: PokemonEntity | IPokemon) {
 
 export function canSell(
   pkm: Pkm,
-  specialLobbyRule: SpecialLobbyRule | undefined | null
+  specialGameRule: SpecialGameRule | undefined | null
 ) {
-  if (specialLobbyRule === SpecialLobbyRule.DITTO_PARTY && pkm === Pkm.DITTO) {
+  if (specialGameRule === SpecialGameRule.DITTO_PARTY && pkm === Pkm.DITTO) {
     return false
   }
 
   return true
+}
+
+export function getMoveSpeed(
+  pokemon: IPokemonEntity,
+  weather: Weather
+): number {
+  let moveSpeed = 1
+  if (weather === Weather.SNOW) {
+    moveSpeed -= 0.25
+  }
+  if (pokemon.status.paralysis) {
+    moveSpeed -= 0.4
+  }
+
+  if (pokemon.effects.has(Effect.QUICK_FEET)) {
+    moveSpeed += 0.3
+  } else if (pokemon.effects.has(Effect.RUN_AWAY)) {
+    moveSpeed += 0.5
+  } else if (pokemon.effects.has(Effect.HUSTLE)) {
+    moveSpeed += 0.8
+  } else if (pokemon.effects.has(Effect.BERSERK)) {
+    moveSpeed += 1.2
+  }
+
+  return moveSpeed
 }

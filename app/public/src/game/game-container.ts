@@ -1,6 +1,7 @@
 import { Room } from "colyseus.js"
 import Phaser from "phaser"
 import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin.js"
+import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin.js"
 import React from "react"
 import { toast } from "react-toastify"
 import { DesignTiled } from "../../../core/design"
@@ -31,11 +32,13 @@ import {
   AttackType,
   HealType,
   Orientation,
-  PokemonActionState
+  PokemonActionState,
+  Rarity
 } from "../../../types/enum/Game"
 import { Synergy } from "../../../types/enum/Synergy"
 import { Weather } from "../../../types/enum/Weather"
 import { logger } from "../../../utils/logger"
+import { clamp } from "../../../utils/number"
 import { getPath, transformCoordinate } from "../pages/utils/utils"
 import store from "../stores"
 import { changePlayer } from "../stores/GameStore"
@@ -120,6 +123,7 @@ class GameContainer {
       "spikeArmor",
       "synchro",
       "wound",
+      "enraged",
       "magicBounce"
     ]
 
@@ -182,6 +186,7 @@ class GameContainer {
       "fieldCount",
       "soundCount",
       "growGroundCount",
+      "fightingBlockCount",
       "fairyCritCount",
       "powerLensCount",
       "starDustCount",
@@ -236,6 +241,11 @@ class GameContainer {
             key: "rexMoveTo",
             plugin: MoveToPlugin,
             start: true
+          },
+          {
+            key: "rexOutline",
+            plugin: OutlinePlugin,
+            start: true
           }
         ]
       }
@@ -246,6 +256,21 @@ class GameContainer {
       tilemap: this.tilemap,
       spectate: this.spectate
     })
+    this.game.scale.on("resize", this.resize, this)
+  }
+
+  resize() {
+    const screenWidth = window.innerWidth - 60
+    const screenHeight = window.innerHeight
+    const screenRatio = screenWidth / screenHeight
+    const WIDTH = 42 * 48
+    const MIN_HEIGHT = 1008
+    const MAX_HEIGHT = 32 * 48
+    const height = clamp(WIDTH / screenRatio, MIN_HEIGHT, MAX_HEIGHT)
+
+    if (this.game && this.game.scale.height !== height) {
+      this.game.scale.setGameSize(WIDTH, height)
+    }
   }
 
   initializeEvents() {
@@ -544,9 +569,10 @@ class GameContainer {
       const pokemonUI = this.gameScene?.board?.addPokemonSprite(pokemon)
       if (pokemonUI && pokemon.action === PokemonActionState.FISH) {
         pokemonUI.fishingAnimation()
-      }
-      if (pokemonUI && pokemon.stars > 1) {
+      } else if (pokemonUI && pokemon.stars > 1) {
         pokemonUI.evolutionAnimation()
+      } else if (pokemonUI && pokemon.rarity === Rarity.HATCH) {
+        pokemonUI.hatchAnimation()
       }
     }
   }

@@ -34,19 +34,23 @@ export default class PokemonState {
       !pokemon.status.protect
     ) {
       if (apBoost > 0) {
-        heal = Math.round(heal * (1 + (apBoost * caster.ap) / 100))
+        heal *= 1 + (apBoost * caster.ap) / 100
       }
       if (pokemon.effects.has(Effect.BUFF_HEAL_RECEIVED)) {
-        heal = Math.round(heal * 1.5)
+        heal *= 1.5
       }
-      if (pokemon.status.poisonStacks > 0) {
-        heal = Math.round(heal * (1 - pokemon.status.poisonStacks * 0.2))
+      if (pokemon.status.burn) {
+        heal *= 0.5
+      }
+      if (pokemon.status.enraged) {
+        heal *= 0.5
       }
 
       if (pokemon.passive === Passive.WONDER_GUARD) {
         heal = 1
       }
 
+      heal = Math.round(heal)
       const healTaken = Math.min(pokemon.hp - pokemon.life, heal)
 
       pokemon.life = Math.min(pokemon.hp, pokemon.life + heal)
@@ -74,21 +78,22 @@ export default class PokemonState {
     apBoost?: boolean
   ) {
     if (pokemon.life > 0) {
-      const boost = apBoost ? (shield * caster.ap) / 100 : 0
-      const shieldBoosted = Math.round(shield + boost)
-      pokemon.shield += shieldBoosted
-      if (caster && shieldBoosted > 0) {
+      if (apBoost) shield = Math.round(shield * (1 + caster.ap / 100))
+      if (pokemon.status.enraged) shield = Math.round(shield / 2)
+
+      pokemon.shield += shield
+      if (caster && shield > 0) {
         if (pokemon.simulation.room.state.time < FIGHTING_PHASE_DURATION) {
           pokemon.simulation.room.broadcast(Transfer.POKEMON_HEAL, {
             index: caster.index,
             type: HealType.SHIELD,
-            amount: shieldBoosted,
+            amount: shield,
             x: pokemon.positionX,
             y: pokemon.positionY,
             id: pokemon.simulation.id
           })
         }
-        caster.shieldDone += shieldBoosted
+        caster.shieldDone += shield
       }
     }
   }
@@ -116,6 +121,10 @@ export default class PokemonState {
         `NaN Damage from ${attacker ? attacker.name : "Environment"}`
       )
       return { death: false, takenDamage: 0 }
+    }
+
+    if (attacker && attacker.status.enraged) {
+      damage *= 2
     }
 
     if (pokemon.life == 0) {
@@ -182,15 +191,19 @@ export default class PokemonState {
       if (
         attackType !== AttackType.TRUE &&
         (pokemon.effects.has(Effect.GUTS) ||
+          pokemon.effects.has(Effect.STURDY) ||
           pokemon.effects.has(Effect.DEFIANT) ||
           pokemon.effects.has(Effect.JUSTIFIED))
       ) {
         const damageBlocked = pokemon.effects.has(Effect.JUSTIFIED)
-          ? 10
+          ? 15
           : pokemon.effects.has(Effect.DEFIANT)
+          ? 10
+          : pokemon.effects.has(Effect.STURDY)
           ? 7
           : 4
         reducedDamage = reducedDamage - damageBlocked
+        pokemon.count.fightingBlockCount++
       }
 
       reducedDamage = min(1)(reducedDamage) // should deal 1 damage at least
@@ -378,7 +391,7 @@ export default class PokemonState {
     pokemon: PokemonEntity,
     dt: number,
     board: Board,
-    weather: string,
+    weather: Weather,
     player: Player | undefined
   ) {
     pokemon.status.updateAllStatus(dt, pokemon, board)
@@ -470,7 +483,7 @@ export default class PokemonState {
       pokemon.types.has(Synergy.GROUND) === false
     ) {
       pokemon.sandstormDamageTimer -= dt
-      if (pokemon.sandstormDamageTimer <= 0) {
+      if (pokemon.sandstormDamageTimer <= 0 && !pokemon.simulation.finished) {
         pokemon.sandstormDamageTimer = 1000
         const sandstormDamage = 5
         pokemon.handleDamage({
@@ -711,6 +724,32 @@ export default class PokemonState {
     })
 
     candidateCells.sort((a, b) => b.distance - a.distance)
+    return candidateCells[0]
+  }
+
+  getAvailablePlaceCoordinatesInRange(
+    pokemon: PokemonEntity,
+    board: Board,
+    range: number
+  ): { x: number; y: number } | undefined {
+    const candidateCells = new Array<{
+      distance: number
+      x: number
+      y: number
+    }>()
+
+    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
+      const distance = distanceM(pokemon.positionX, pokemon.positionY, x, y)
+      if (value === undefined && distance >= range) {
+        candidateCells.push({
+          x,
+          y,
+          distance
+        })
+      }
+    })
+
+    candidateCells.sort((a, b) => a.distance - b.distance)
     return candidateCells[0]
   }
 
