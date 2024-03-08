@@ -794,14 +794,12 @@ export default class PokemonSprite extends DraggableObject {
 
   skydiveUp() {
     // animation where pokemon is flying up out of the screen for a screen dive animation. Should take <= 500 milliseconds
-    console.log("skydive up")
     this.moveManager.setSpeed(800)
     this.moveManager.moveTo(this.x, -100)
   }
 
   skydiveDown() {
     // animation after a skydiving attack where pokemon moves from its target cell to its final reserved adjacent cell
-    console.log("skydive down")
     const landingCoordinates = transformAttackCoordinate(
       this.targetX ?? this.positionX,
       this.targetY ?? this.positionY,
