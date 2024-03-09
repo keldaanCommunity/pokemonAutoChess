@@ -12293,7 +12293,7 @@ export class Cosmoem extends Pokemon {
     (pokemon, player) => {
       if (
         pokemon.positionX === player.lightX &&
-        pokemon.positionY === player.lightY - 1
+        pokemon.positionY === player.lightY
       )
         return Pkm.SOLGALEO
       else return Pkm.LUNALA
@@ -12323,7 +12323,7 @@ export class Solgaleo extends Pokemon {
   def = 8
   speDef = 8
   maxPP = 120
-  range = 4
+  range = 1
   skill = Ability.SUNSTEEL_STRIKE
   attackSprite = AttackSprite.STEEL_MELEE
 }
@@ -12340,7 +12340,7 @@ export class Lunala extends Pokemon {
   atk = 25
   def = 8
   speDef = 8
-  maxPP = 100
+  maxPP = 120
   range = 4
   skill = Ability.MOONGEIST_BEAM
   attackSprite = AttackSprite.STEEL_MELEE

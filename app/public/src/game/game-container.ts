@@ -145,6 +145,7 @@ class GameContainer {
         "ap",
         "atkSpeed",
         "life",
+        "hp",
         "shield",
         "pp",
         "atk",
@@ -199,7 +200,6 @@ class GameContainer {
       "amuletCoinCount",
       "attackCount",
       "tripleAttackCount",
-      "monsterExecutionCount",
       "upgradeCount",
       "soulDewCount",
       "defensiveRibbonCount",
@@ -381,7 +381,8 @@ class GameContainer {
           "positionX",
           "positionY",
           "action",
-          "types"
+          "types",
+          "hp"
         ]
         fields.forEach((field) => {
           pokemon.listen(field, (value, previousValue) => {

@@ -7583,7 +7583,7 @@ export class SunsteelStrikeStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
+    super.process(pokemon, state, board, target, crit, true)
     const mostSurroundedCoordinate =
       state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
 

@@ -125,7 +125,7 @@
         "MIND_BLOWN": { "frames": 12 },
         "MIND_BLOWN/hit": { "frames": 13 },
         "MIST_BALL": { "frames": 3, "repeat": -1 },
-        "MOONGEIST_BEAM": { "frames": 6 },
+        "MOONGEIST_BEAM": { "frames": 6, "repeat": 3 },
         "MUD_BUBBLE": { "frames": 6 },
         "NASTY_PLOT": { "frames": 30 },
         "NATURAL_GIFT": { "frames": 45 },

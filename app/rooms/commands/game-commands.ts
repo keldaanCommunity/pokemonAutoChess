@@ -6,8 +6,7 @@ import { nanoid } from "nanoid"
 import {
   CountEvolutionRule,
   HatchEvolutionRule,
-  MoneyEvolutionRule,
-  TurnEvolutionRule
+  ConditionBasedEvolutionRule
 } from "../../core/evolution-rules"
 import { selectMatchups } from "../../core/matchmaking"
 import { canSell } from "../../core/pokemon-entity"
@@ -1242,14 +1241,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
                 this.state.stageLevel
               )
             }
-            if (pokemon.evolutionRule instanceof TurnEvolutionRule) {
-              pokemon.evolutionRule.tryEvolve(
-                pokemon,
-                player,
-                this.state.stageLevel
-              )
-            }
-            if (pokemon.evolutionRule instanceof MoneyEvolutionRule) {
+            if (pokemon.evolutionRule instanceof ConditionBasedEvolutionRule) {
               pokemon.evolutionRule.tryEvolve(
                 pokemon,
                 player,

@@ -46,8 +46,10 @@ export abstract class EvolutionRule {
     pokemonEvolved.onAcquired(player)
     player.board.forEach((pokemon) => {
       if (
-        pokemon.passive === Passive.COSMOG ||
-        pokemon.passive === Passive.COSMOEM
+        (pokemon.passive === Passive.COSMOG ||
+          pokemon.passive === Passive.COSMOEM) &&
+        pokemonEvolved.passive !== Passive.COSMOG &&
+        pokemonEvolved.passive !== Passive.COSMOEM
       ) {
         pokemon.hp += 10
         pokemon.evolutionRule.tryEvolve(pokemon, player, stageLevel)
