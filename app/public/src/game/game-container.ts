@@ -113,6 +113,7 @@ class GameContainer {
       "paralysis",
       "poisonStacks",
       "protect",
+      "skydiving",
       "psychicField",
       "resurection",
       "resurecting",

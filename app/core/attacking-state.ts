@@ -199,7 +199,7 @@ export default class AttackingState extends PokemonState {
         damage = 0
         target.count.dodgeCount += 1
       }
-      if (target.status.protect) {
+      if (target.status.protect || target.status.skydiving) {
         isAttackSuccessful = false
         damage = 0
       }

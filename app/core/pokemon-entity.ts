@@ -236,7 +236,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     crit: boolean,
     apBoost = true
   ): { death: boolean; takenDamage: number } {
-    if (this.status.protect || this.status.magicBounce) {
+    if (
+      this.status.protect ||
+      this.status.skydiving ||
+      this.status.magicBounce
+    ) {
       this.count.spellBlockedCount++
       if (
         this.status.magicBounce &&
@@ -432,6 +436,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     board.swapValue(this.positionX, this.positionY, x, y)
     this.toMovingState()
     this.cooldown = 100 // for faster retargeting
+  }
+
+  skydiveTo(x: number, y: number, board: Board) {
+    board.swapValue(this.positionX, this.positionY, x, y)
+    this.status.skydiving = true
+    this.toMovingState()
+    this.cooldown = 1000 // 500ms for flying up and 500ms for skydive anim
   }
 
   // called after every attack, no matter if it's successful or not
