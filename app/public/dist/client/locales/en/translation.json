@@ -1338,8 +1338,8 @@
     "STICKY_WEB": "Inflicts [20,35,70,SP] SPECIAL on the target and projects a web around it. Pokémon walking on the web are PARALYSIS for 2s",
     "ACCELEROCK": "Jumps next to the farthest enemy and attack it immediately, dealing [100,SP]% of ATK as SPECIAL. In the process, lose up to [5,SP] DEF and gain 5% ATK_SPEED for each DEF point lost.",
     "PETAL_BLIZZARD": "Deals [30,SP] SPECIAL to surounding enemies and gain 10% AP",
-    "SUNSTEEL_STRIKE": "Jumps and lands in the middle of the enemy team with the power of a meteor, inflicting [90,SP] SPECIAL to adjacent enemies and BURN for 3 seconds",
-    "MOONGEIST_BEAM": "Deal [100,SP] SPECIAL to all enemy Pokémon in a straight line. Allies in its path gain 30 PP."
+    "SUNSTEEL_STRIKE": "Jumps and lands in the middle of the enemy team with the power of a meteor, inflicting [100,SP] SPECIAL to adjacent enemies and BURN for 3 seconds",
+    "MOONGEIST_BEAM": "Deal [100,SP] SPECIAL and PARALYSIS for 3 seconds to all enemy Pokémon in a straight line"
   },
   "effect": {
     "INGRAIN": "Ingrain",

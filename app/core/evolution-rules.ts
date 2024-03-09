@@ -1,9 +1,11 @@
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import PokemonFactory from "../models/pokemon-factory"
+import { transformAttackCoordinate } from "../public/src/pages/utils/utils"
 import { EvolutionTime } from "../types/Config"
 import { PokemonActionState } from "../types/enum/Game"
 import { BasicItems, Item } from "../types/enum/Item"
+import { Passive } from "../types/enum/Passive"
 import { Pkm } from "../types/enum/Pokemon"
 import { logger } from "../utils/logger"
 import { values } from "../utils/schemas"
@@ -34,14 +36,23 @@ export abstract class EvolutionRule {
   ): void | Pokemon {
     if (this.canEvolve(pokemon, player, stageLevel)) {
       const pokemonEvolved = this.evolve(pokemon, player, stageLevel)
-      this.afterEvolve(pokemonEvolved, player)
+      this.afterEvolve(pokemonEvolved, player, stageLevel)
       return pokemonEvolved
     }
   }
 
-  afterEvolve(pokemonEvolved: Pokemon, player: Player) {
+  afterEvolve(pokemonEvolved: Pokemon, player: Player, stageLevel: number) {
     player.updateSynergies()
     pokemonEvolved.onAcquired(player)
+    player.board.forEach((pokemon) => {
+      if (
+        pokemon.passive === Passive.COSMOG ||
+        pokemon.passive === Passive.COSMOEM
+      ) {
+        pokemon.hp += 10
+        pokemon.evolutionRule.tryEvolve(pokemon, player, stageLevel)
+      }
+    })
   }
 }
 

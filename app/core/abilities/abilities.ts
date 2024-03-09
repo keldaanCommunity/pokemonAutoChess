@@ -7584,6 +7584,55 @@ export class SunsteelStrikeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    const mostSurroundedCoordinate =
+      state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
+
+    if (mostSurroundedCoordinate) {
+      pokemon.skydiveTo(
+        mostSurroundedCoordinate.x,
+        mostSurroundedCoordinate.y,
+        board
+      )
+      setTimeout(() => {
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: Ability.SUNSTEEL_STRIKE,
+          positionX: mostSurroundedCoordinate.x,
+          positionY: mostSurroundedCoordinate.y,
+          targetX: mostSurroundedCoordinate.x,
+          targetY: mostSurroundedCoordinate.y
+        })
+      }, 500)
+
+      setTimeout(() => {
+        const cells = board.getAdjacentCells(
+          mostSurroundedCoordinate.x,
+          mostSurroundedCoordinate.y
+        )
+
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: Ability.SEARING_SHOT,
+          positionX: mostSurroundedCoordinate.x,
+          positionY: mostSurroundedCoordinate.y,
+          targetX: mostSurroundedCoordinate.x,
+          targetY: mostSurroundedCoordinate.y
+        })
+
+        cells.forEach((cell) => {
+          if (cell.value && cell.value.team !== pokemon.team) {
+            cell.value.handleSpecialDamage(
+              100,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
+            cell.value.status.triggerBurn(3000, cell.value, pokemon)
+          }
+        })
+      }, 1000)
+    }
   }
 }
 
@@ -7606,8 +7655,7 @@ export class MoongeistBeamStrategy extends AbilityStrategy {
             pokemon,
             crit
           )
-        } else {
-          targetInLine.addPP(30)
+          targetInLine.status.triggerParalysis(3000, targetInLine)
         }
       }
     })
