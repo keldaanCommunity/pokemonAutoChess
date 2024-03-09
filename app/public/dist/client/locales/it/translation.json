@@ -902,7 +902,7 @@
     "LOCK_ON": "Blocca il bersaglio. Il prossimo attacco non può fallire, infligge [100,SP]% TRUE e applica ARMOR_REDUCTION per 3 secondi",
     "PSYCH_UP": "Infliggi [10,20,40,SP] SPECIAL e SILENCE il bersaglio e i suoi nemici adiacenti",
     "RAZOR_WIND": "Infligge [20,40,80,SP] SPECIAL al bersaglio e crea una PARALYSIS dei nemici circostanti",
-    "TWISTING_NETHER": "Infligge [80,SP] SPECIAL ai nemici adiacenti. Ogni pokemon colpito viene teletrasportato da qualche parte.",
+    "TWISTING_NETHER": "Infligge [80,SP] SPECIAL a tutti i nemici adiacenti al bersaglio in un raggio di 2 celle, poi li teletrasporta a caso sul campo di battaglia.",
     "WONDER_GUARD": "Infligge [30,60,120,SP] SPECIAL e rende tutti i nemici adiacenti PARALYSIS per 3 secondi",
     "ELECTRIC_SURGE": "Aumenta l'ATK_SPEED di tutti i Pokémon ELECTRIC del [10,SP]%",
     "PSYCHIC_SURGE": "Aumenta i AP di tutti i Pokémon PSYCHIC del [5,SP]%, tranne il lanciatore",
