@@ -8,6 +8,10 @@
 - Rockruff
 - Lycanroc
 - Druddigon
+- Cosmog
+- Cosmoem
+- Solgaleo
+- Lunala
 
 # Changes to Pokemon & Abilities
 
