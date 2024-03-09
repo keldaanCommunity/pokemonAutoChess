@@ -36,6 +36,7 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") light = false
   @type("boolean") curse = false
   @type("boolean") enraged = false
+  @type("boolean") skydiving = false
   magmaStorm = false
   soulDew = false
   deltaOrbStacks = 0

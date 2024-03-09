@@ -1148,7 +1148,7 @@
     "DRAGON_DARTS": "Lanza 3 dardos que reparten [10,20,40,SP] de SPECIAL cada uno al objetivo. Si el objetivo muere, recupera 40 PP.",
     "GRASSY_SURGE": "Incrementa el ATK de todos los pokemons GRASS en [5,SP]",
     "MISTY_SURGE": "Da [30,SP] PP a los aliados FAIRY",
-    "SKY_ATTACK": "Se eleva en el aire y cae sobre el objetivo más lejano, otorga PROTECT al atacante durante 0,5 segundos e inflige [120,SP] de SPECIAL",
+    "SKY_ATTACK": "Se eleva en el aire y cae sobre el objetivo más lejano después de un segundo, infligiendo [120,SP] SPECIAL",
     "ILLUSION": "El usuario recupera [30,50,70,SP=0.5] puntos de HP y copia tanto la forma como el ATK, DEF, SPE_DEF y RANGE del Pokémon objetivo",
     "SLUDGE": "Lanza residuos a 3 espacios al frente, los cuales infligen [2,3,4] acumulaciones de POISONNED durante [3,SP] segundos",
     "SMOG": "Expulsa una nube de gas fétido en 3 espacios al frente, causando [10,20,40,SP] de SPECIAL. El gas persiste hasta el fin del combate y reduce la precisión de los pokemon dentro de ella en 50%.",

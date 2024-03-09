@@ -20,6 +20,7 @@
 - New passive for all Silvally forms: RKS System: Silvally can change its synergy items at any time. Place it on bench to drop synergy items.
 - Revert Happiny PP buff from 4.7
 - Nerf Outrage (Axew): ~~200/300/400%~~ 100/150/200% ATK of special damage
+- Updated Sky Attack (Lugia): Skydiving now deals damage to the destination target instead of the initial target before, and after one second instead of immediately before
 
 # Changes to Synergies
 

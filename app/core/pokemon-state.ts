@@ -129,7 +129,7 @@ export default class PokemonState {
 
     if (pokemon.life == 0) {
       death = true
-    } else if (pokemon.status.protect) {
+    } else if (pokemon.status.protect || pokemon.status.skydiving) {
       death = false
       takenDamage = 0
     } else {
@@ -692,9 +692,12 @@ export default class PokemonState {
   getFarthestTargetCoordinateAvailablePlace(
     pokemon: PokemonEntity,
     board: Board
-  ): { x: number; y: number } | undefined {
+  ):
+    | { x: number; y: number; distance: number; target: PokemonEntity }
+    | undefined {
     const candidateCells = new Array<{
       distance: number
+      target: PokemonEntity
       x: number
       y: number
     }>()
@@ -717,7 +720,8 @@ export default class PokemonState {
                 pokemon.positionY,
                 cell.x,
                 cell.y
-              )
+              ),
+              target: value
             }))
         )
       }

@@ -643,7 +643,7 @@ export function displayAbility(
         x: coordinatesTarget[0],
         y: coordinatesTarget[1],
         ease: "linear",
-        duration: 1000,
+        duration: 500,
         onComplete: () => {
           specialProjectile.destroy()
         }
