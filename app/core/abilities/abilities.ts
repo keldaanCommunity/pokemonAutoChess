@@ -7562,6 +7562,45 @@ export class PetalBlizzardStrategy extends AbilityStrategy {
   }
 }
 
+export class SunsteelStrikeStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+  }
+}
+
+export class MoongeistBeamStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    effectInLine(board, pokemon, target, (targetInLine) => {
+      if (targetInLine != null) {
+        if (targetInLine.team !== pokemon.team) {
+          targetInLine.handleSpecialDamage(
+            100,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        } else {
+          targetInLine.addPP(30)
+        }
+      }
+    })
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -7854,5 +7893,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.MULTI_ATTACK]: new MultiAttackStrategy(),
   [Ability.STICKY_WEB]: new StickyWebStrategy(),
   [Ability.ACCELEROCK]: new AccelerockStrategy(),
-  [Ability.PETAL_BLIZZARD]: new PetalBlizzardStrategy()
+  [Ability.PETAL_BLIZZARD]: new PetalBlizzardStrategy(),
+  [Ability.SUNSTEEL_STRIKE]: new SunsteelStrikeStrategy(),
+  [Ability.MOONGEIST_BEAM]: new MoongeistBeamStrategy()
 }

@@ -236,39 +236,24 @@ export class HatchEvolutionRule extends EvolutionRule {
   }
 }
 
-export class TurnEvolutionRule extends EvolutionRule {
+type EvolutionCondition = (
+  pokemon: Pokemon,
+  player: Player,
   stageLevel: number
-  constructor(stageLevel: number, divergentEvolution?: DivergentEvolution) {
+) => boolean
+
+export class ConditionBasedEvolutionRule extends EvolutionRule {
+  condition: EvolutionCondition
+  constructor(
+    condition: EvolutionCondition,
+    divergentEvolution?: DivergentEvolution
+  ) {
     super(divergentEvolution)
-    this.stageLevel = stageLevel
+    this.condition = condition
   }
 
   canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
-    return stageLevel >= this.stageLevel
-  }
-
-  evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
-    let pokemonEvolutionName = pokemon.evolution
-    if (this.divergentEvolution) {
-      pokemonEvolutionName = this.divergentEvolution(pokemon, player)
-    }
-    const pokemonEvolved = player.transformPokemon(
-      pokemon,
-      pokemonEvolutionName
-    )
-    return pokemonEvolved
-  }
-}
-
-export class MoneyEvolutionRule extends EvolutionRule {
-  money: number
-  constructor(money: number, divergentEvolution?: DivergentEvolution) {
-    super(divergentEvolution)
-    this.money = money
-  }
-
-  canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
-    return player.money >= this.money
+    return this.condition(pokemon, player, stageLevel)
   }
 
   evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
