@@ -5,6 +5,7 @@ import Simulation from "../../../../core/simulation"
 import Count from "../../../../models/colyseus-models/count"
 import Player from "../../../../models/colyseus-models/player"
 import Status from "../../../../models/colyseus-models/status"
+import { getPokemonData } from "../../../../models/precomputed"
 import {
   IBoardEvent,
   IPokemonEntity,
@@ -568,10 +569,6 @@ export default class BattleManager {
             if (value != 0) {
               this.displayTripleAttack(pkm.x, pkm.y)
             }
-          } else if (field == "monsterExecutionCount") {
-            if (value != 0) {
-              pkm.sprite.setScale(2 + 0.5 * value)
-            }
           } else if (field == "upgradeCount") {
             pkm.itemsContainer.updateCount(Item.UPGRADE, value)
           } else if (field == "soulDewCount") {
@@ -598,9 +595,9 @@ export default class BattleManager {
       for (let i = 0; i < children.length; i++) {
         const pkm = <PokemonSprite>children[i]
         if (pkm.id == pokemon.id) {
-          if (field == "positionX" || field == "positionY") {
+          if (field === "positionX" || field === "positionY") {
             // logger.debug(pokemon.positionX, pokemon.positionY);
-            if (field == "positionX") {
+            if (field === "positionX") {
               pkm.positionX = pokemon.positionX
             } else if (field == "positionY") {
               pkm.positionY = pokemon.positionY
@@ -625,7 +622,7 @@ export default class BattleManager {
               )
               pkm.moveManager.moveTo(coordinates[0], coordinates[1])
             }
-          } else if (field == "orientation") {
+          } else if (field === "orientation") {
             pkm.orientation = pokemon.orientation
             if (pokemon.action !== PokemonActionState.SLEEP) {
               this.animationManager.animatePokemon(
@@ -634,7 +631,7 @@ export default class BattleManager {
                 this.flip
               )
             }
-          } else if (field == "action") {
+          } else if (field === "action") {
             pkm.action = pokemon.action
             this.animationManager.animatePokemon(pkm, value, this.flip)
           } else if (field == "critChance") {
@@ -643,12 +640,12 @@ export default class BattleManager {
               pkm.detail.critChance.textContent =
                 pokemon.critChance.toString() + "%"
             }
-          } else if (field == "critDamage") {
+          } else if (field === "critDamage") {
             pkm.critDamage = parseFloat(pokemon.critDamage.toFixed(2))
             if (pkm.detail && pkm.detail instanceof PokemonDetail) {
               pkm.detail.critDamage.textContent = pokemon.critDamage.toFixed(2)
             }
-          } else if (field == "ap") {
+          } else if (field === "ap") {
             value > previousValue &&
               this.displayBoost(Stat.AP, pkm.positionX, pkm.positionY)
             pkm.ap = pokemon.ap
@@ -663,71 +660,75 @@ export default class BattleManager {
                 )
               }
             }
-          } else if (field == "atkSpeed") {
+          } else if (field === "atkSpeed") {
             value > previousValue &&
               this.displayBoost(Stat.ATK_SPEED, pkm.positionX, pkm.positionY)
             pkm.atkSpeed = pokemon.atkSpeed
             if (pkm.detail && pkm.detail instanceof PokemonDetail) {
               pkm.detail.atkSpeed.textContent = pokemon.atkSpeed.toFixed(2)
             }
+          } else if (field === "hp") {
+            const baseHP = getPokemonData(pokemon.name).hp
+            const sizeBuff = (pokemon.hp - baseHP) / baseHP
+            pkm.sprite.setScale(2 + sizeBuff)
           } else if (field == "life") {
             pkm.life = pokemon.life
             pkm.lifebar?.setAmount(pkm.life)
             if (pkm.detail && pkm.detail instanceof PokemonDetail) {
               pkm.detail.hp.textContent = pokemon.life.toString()
             }
-          } else if (field == "shield") {
+          } else if (field === "shield") {
             if (value >= 0) {
               value > previousValue &&
                 this.displayBoost(Stat.SHIELD, pkm.positionX, pkm.positionY)
               pkm.shield = pokemon.shield
               pkm.lifebar?.setShieldAmount(pkm.shield)
             }
-          } else if (field == "pp") {
+          } else if (field === "pp") {
             pkm.pp = pokemon.pp
             pkm.powerbar?.setAmount(pkm.pp)
             if (pkm.detail && pkm.detail instanceof PokemonDetail) {
               pkm.detail.updateValue(pkm.detail.pp, previousValue, value)
             }
-          } else if (field == "atk") {
+          } else if (field === "atk") {
             value > previousValue &&
               this.displayBoost(Stat.ATK, pkm.positionX, pkm.positionY)
             pkm.atk = pokemon.atk
             if (pkm.detail && pkm.detail instanceof PokemonDetail) {
               pkm.detail.updateValue(pkm.detail.atk, previousValue, value)
             }
-          } else if (field == "def") {
+          } else if (field === "def") {
             value > previousValue &&
               this.displayBoost(Stat.DEF, pkm.positionX, pkm.positionY)
             pkm.def = pokemon.def
             if (pkm.detail && pkm.detail instanceof PokemonDetail) {
               pkm.detail.updateValue(pkm.detail.def, previousValue, value)
             }
-          } else if (field == "speDef") {
+          } else if (field === "speDef") {
             value > previousValue &&
               this.displayBoost(Stat.SPE_DEF, pkm.positionX, pkm.positionY)
             pkm.speDef = pokemon.speDef
             if (pkm.detail && pkm.detail instanceof PokemonDetail) {
               pkm.detail.updateValue(pkm.detail.speDef, previousValue, value)
             }
-          } else if (field == "range") {
+          } else if (field === "range") {
             pkm.range = pokemon.range
             if (pkm.detail && pkm.detail instanceof PokemonDetail) {
               pkm.detail.updateValue(pkm.detail.range, previousValue, value)
             }
-          } else if (field == "targetX") {
+          } else if (field === "targetX") {
             if (pokemon.targetX >= 0) {
               pkm.targetX = pokemon.targetX
             } else {
               pkm.targetX = null
             }
-          } else if (field == "targetY") {
+          } else if (field === "targetY") {
             if (pokemon.targetY >= 0) {
               pkm.targetY = pokemon.targetY
             } else {
               pkm.targetY = null
             }
-          } else if (field == "team") {
+          } else if (field === "team") {
             if (pkm.lifebar) {
               pkm.lifebar.setTeam(value, this.flip)
             }

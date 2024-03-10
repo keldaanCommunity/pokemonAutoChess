@@ -7575,6 +7575,93 @@ export class PetalBlizzardStrategy extends AbilityStrategy {
   }
 }
 
+export class SunsteelStrikeStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const mostSurroundedCoordinate =
+      state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
+
+    if (mostSurroundedCoordinate) {
+      pokemon.skydiveTo(
+        mostSurroundedCoordinate.x,
+        mostSurroundedCoordinate.y,
+        board
+      )
+      setTimeout(() => {
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: Ability.SUNSTEEL_STRIKE,
+          positionX: mostSurroundedCoordinate.x,
+          positionY: mostSurroundedCoordinate.y,
+          targetX: mostSurroundedCoordinate.x,
+          targetY: mostSurroundedCoordinate.y
+        })
+      }, 500)
+
+      setTimeout(() => {
+        const cells = board.getAdjacentCells(
+          mostSurroundedCoordinate.x,
+          mostSurroundedCoordinate.y
+        )
+
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: Ability.SEARING_SHOT,
+          positionX: mostSurroundedCoordinate.x,
+          positionY: mostSurroundedCoordinate.y,
+          targetX: mostSurroundedCoordinate.x,
+          targetY: mostSurroundedCoordinate.y
+        })
+
+        cells.forEach((cell) => {
+          if (cell.value && cell.value.team !== pokemon.team) {
+            cell.value.handleSpecialDamage(
+              100,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
+            cell.value.status.triggerBurn(3000, cell.value, pokemon)
+          }
+        })
+      }, 1000)
+    }
+  }
+}
+
+export class MoongeistBeamStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    effectInLine(board, pokemon, target, (targetInLine) => {
+      if (targetInLine != null) {
+        if (targetInLine.team !== pokemon.team) {
+          targetInLine.handleSpecialDamage(
+            100,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+          targetInLine.status.triggerParalysis(3000, targetInLine)
+        }
+      }
+    })
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -7867,5 +7954,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.MULTI_ATTACK]: new MultiAttackStrategy(),
   [Ability.STICKY_WEB]: new StickyWebStrategy(),
   [Ability.ACCELEROCK]: new AccelerockStrategy(),
-  [Ability.PETAL_BLIZZARD]: new PetalBlizzardStrategy()
+  [Ability.PETAL_BLIZZARD]: new PetalBlizzardStrategy(),
+  [Ability.SUNSTEEL_STRIKE]: new SunsteelStrikeStrategy(),
+  [Ability.MOONGEIST_BEAM]: new MoongeistBeamStrategy()
 }

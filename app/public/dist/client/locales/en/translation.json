@@ -305,7 +305,9 @@
     "SPACIAL_REND": "Spacial Rend",
     "MULTI_ATTACK": "Multi-Attack",
     "ACCELEROCK": "Accelerock",
-    "PETAL_BLIZZARD": "Petal Blizzard"
+    "PETAL_BLIZZARD": "Petal Blizzard",
+    "SUNSTEEL_STRIKE": "Sunsteel Strike",
+    "MOONGEIST_BEAM": "Moongeist Beam"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1040,7 +1042,11 @@
     "LYCANROC_DUSK": "Lycanroc",
     "LYCANROC_DAY": "Lycanroc (Day)",
     "LYCANROC_NIGHT": "Lycanroc (Night)",
-    "DRUDDIGON": "Druddigon"
+    "DRUDDIGON": "Druddigon",
+    "COSMOG": "Cosmog",
+    "COSMOEM": "Cosmoem",
+    "SOLGALEO": "Solgaleo",
+    "LUNALA": "Lunala"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1331,7 +1337,9 @@
     "MULTI_ATTACK": "Inflicts [10,SP] SPECIAL to surounding enemies, multiplied by the synergy level of current $t(pkm.SILVALLY) form",
     "STICKY_WEB": "Inflicts [20,35,70,SP] SPECIAL on the target and projects a web around it. Pokémon walking on the web are PARALYSIS for 2s",
     "ACCELEROCK": "Jumps next to the farthest enemy and attack it immediately, dealing [100,SP]% of ATK as SPECIAL. In the process, lose up to [5,SP] DEF and gain 5% ATK_SPEED for each DEF point lost.",
-    "PETAL_BLIZZARD": "Deals [30,SP] SPECIAL to surounding enemies and gain 10% AP"
+    "PETAL_BLIZZARD": "Deals [30,SP] SPECIAL to surounding enemies and gain 10% AP",
+    "SUNSTEEL_STRIKE": "Jumps and lands in the middle of the enemy team with the power of a meteor, inflicting [100,SP] SPECIAL to adjacent enemies and BURN for 3 seconds",
+    "MOONGEIST_BEAM": "Deal [100,SP] SPECIAL to all enemy Pokémon in a straight line and make them PARALYSIS for 3 seconds "
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1835,7 +1843,9 @@
     "MIMIKYU_BUSTED": "Its neck is broken. Mimikyu will never forget the person who damaged its rag for as long as it is still alive.",
     "HUNGER_SWITCH": "$t(pkm.MORPEKO) alternates between its normal and hangry forms.\n Normal form attacks inflicts PARALYSIS for 2s\n Hangry form attacks inflicts WOUND for 4s",
     "WATER_BUBBLE": "The pokemon is immune to BURN",
-    "LYCANROC": "Lycanroc turns into night form during NIGHT and day form during SUN"
+    "LYCANROC": "Lycanroc turns into night form during NIGHT and day form during SUN",
+    "COSMOG": "$t(pkm.COSMOG) is feeding with the energy of the stars. Gain 10 permanent max HP every time you evolve a unit. Evolve after 10 times.",
+    "COSMOEM": "$t(pkm.COSMOEM) is feeding with the energy of the stars. Gain 10 permanent max HP every time you evolve a unit. Evolve after 10 times into $t(pkm.SOLGALEO) if in the light spot, or $t(pkm.LUNALA) instead."
   },
   "stat": {
     "ATK": "Attack",

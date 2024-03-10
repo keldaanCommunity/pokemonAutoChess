@@ -73,6 +73,7 @@ export function displayAbility(
       break
 
     case Ability.DYNAMAX_CANNON:
+    case Ability.MOONGEIST_BEAM:
       addAbilitySprite(skill, coordinates, true)
         .setScale(2)
         .setOrigin(0.5, 0)
@@ -637,6 +638,22 @@ export function displayAbility(
       const specialProjectile = addAbilitySprite(skill, startCoords).setScale(
         1.5
       )
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        duration: 500,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
+    case Ability.SUNSTEEL_STRIKE: {
+      const startCoords = transformAttackCoordinate(targetX, 9, false)
+      const specialProjectile = addAbilitySprite(skill, startCoords)
       scene.tweens.add({
         targets: specialProjectile,
         x: coordinatesTarget[0],

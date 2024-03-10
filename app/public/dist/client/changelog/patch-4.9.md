@@ -8,6 +8,10 @@
 - Rockruff
 - Lycanroc
 - Druddigon
+- Cosmog
+- Cosmoem
+- Solgaleo
+- Lunala
 
 # Changes to Pokemon & Abilities
 
@@ -37,6 +41,7 @@
 
 - Add a visual feedback when hovering one of your pokemons to drag or sell
 - Add a visual indicator of max tier reachable for each unit
+- All pokemons grow in body size when gaining max HP (no longer Monster only)
 
 # Bugfix
 

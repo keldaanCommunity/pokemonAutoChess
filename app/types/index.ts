@@ -566,7 +566,6 @@ export interface ICount {
   futureSightCount: number
   healOrderCount: number
   attackOrderCount: number
-  monsterExecutionCount: number
   magmarizerCount: number
 }
 

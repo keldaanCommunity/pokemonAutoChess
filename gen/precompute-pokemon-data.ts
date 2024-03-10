@@ -17,6 +17,7 @@ precomputedPokemons.forEach((pokemon) => {
     stars: pokemon.stars,
     rarity: pokemon.rarity,
     additional: pokemon.additional,
+    hp: pokemon.hp,
     range: pokemon.range,
     types: values(pokemon.types) as Synergy[],
     evolution: pokemon.evolution === Pkm.DEFAULT ? null : pokemon.evolution,
