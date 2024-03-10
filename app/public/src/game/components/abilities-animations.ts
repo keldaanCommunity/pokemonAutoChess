@@ -1881,6 +1881,27 @@ export function displayAbility(
         .setScale(2)
       break
 
+    case "FLYING_TAKEOFF":
+      addAbilitySprite("FLYING_TAKEOFF", coordinates, true)
+        .setDepth(0)
+        .setScale(2)
+      break
+
+    case "FLYING_SKYDIVE":
+      const startCoords = transformAttackCoordinate(targetX, 9, false)
+      const specialProjectile = addAbilitySprite(skill, startCoords).setScale(1)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        duration: 500,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+
     default:
       break
   }
