@@ -1506,7 +1506,7 @@
     "FLORA": "Als de eerste FLORA pokemon dood is, zal er een bloem uit zijn graf opstaan...",
     "ROCK": "ROCK pokemons krijgen DEF en zijn beter bestand tegen kritieke schade",
     "GHOST": "GHOST pokemons heeft 25% kans om te SILENCE bij een treffer en spreekt aan het begin van het gevecht verschillende vervloekingen uit over de tegenstander.",
-    "FAIRY": "FAIRY pokemons shockeren vijanden in de buurt wanneer ze een kritieke aanval uitdelen of ontvangen",
+    "FAIRY": "FAIRY pokemons ontketenen bij het raken of ontvangen van een kritieke treffer een schok die SPECIAL toebrengt bij contact en CHARM gedurende 2 seconden op aanvallers en doelen op afstand",
     "ICE": "ICE pokemons hebben een kans om FREEZE de vijand voor 2 seconden na een hit en geven SPE_DEF aan het hele team.",
     "FOSSIL": "Bij hun eerste KO komen FOSSIL pokemons weer tot leven met verhoogde ATK",
     "SOUND": "SOUND pokemons laten een kreet horen wanneer ze hun vaardigheden gebruiken, slapende bondgenoten wakker maken en bonusstatistieken geven",

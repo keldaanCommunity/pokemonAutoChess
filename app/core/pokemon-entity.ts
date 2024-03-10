@@ -983,18 +983,20 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           damage = 70
         }
 
-        const splashTarget = pokemon === this ? target : this
+        const isCritReceived = pokemon === target
+        const splashTarget = isCritReceived ? this : target
+        const distance = distanceC(
+          pokemon.positionX,
+          pokemon.positionY,
+          splashTarget.positionX,
+          splashTarget.positionY
+        )
 
-        if (
-          distanceC(
-            pokemon.positionX,
-            pokemon.positionY,
-            splashTarget.positionX,
-            splashTarget.positionY
-          ) <= 1
-        ) {
+        pokemon.count.fairyCritCount++
+        pokemon.fairySplashCooldown = 1
+
+        if (distance <= 1) {
           // melee range
-          pokemon.count.fairyCritCount++
           splashTarget.handleDamage({
             damage,
             board,
@@ -1002,12 +1004,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
             attacker: pokemon,
             shouldTargetGainMana: false
           })
-        } else {
-          // not at range, charm it instead
-          splashTarget.status.triggerCharm(2000, splashTarget, pokemon)
         }
 
-        pokemon.fairySplashCooldown = 1
+        if (isCritReceived || distance > 1) {
+          // charm attackers and distant targets
+          splashTarget.status.triggerCharm(2000, splashTarget, pokemon)
+        }
       }
     })
 

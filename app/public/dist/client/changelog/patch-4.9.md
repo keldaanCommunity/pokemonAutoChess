@@ -32,6 +32,7 @@
 - Buff Oddish line: PP ~~100~~ 80
 - Buff Flower 6 ; new ability for Bellossom: Petal Blizzard ; Belossom HP ~~360~~ 300, Attack ~~27~~ 30, PP: ~~100~~ 10
 - Buff Fighting: after 10 hits blocked, throw the target away, destroying its shield. Added Fighting 8 synergy level.
+- Buff Fairy: now charm melee attacker when receiving a critical hit
 
 # Changes to Items
 
