@@ -915,8 +915,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
             this.simulation.room.broadcast(Transfer.ABILITY, {
               id: this.simulation.id,
               skill: "FLYING_TAKEOFF",
-              positionX: destination.x,
-              positionY: destination.y,
+              positionX: this.positionX,
+              positionY: this.positionY,
               targetX: destination.target.positionX,
               targetY: destination.target.positionY
             })
