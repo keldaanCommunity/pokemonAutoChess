@@ -38,7 +38,7 @@ export function displayAbility(
       "abilities",
       skill + `/000.png`
     )
-    abilityFx.setDepth(7).play(skill)
+    abilityFx.setOrigin(0.5, 0.5).setDepth(7).play(skill)
     if (destroyOnComplete) {
       abilityFx.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
         abilityFx.destroy()

@@ -910,8 +910,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
                 cell.value.status.triggerParalysis(2000, cell.value)
               }
             })
-            this.skydiveTo(destination.x, destination.y, board)
-            this.flyingProtection--
             this.simulation.room.broadcast(Transfer.ABILITY, {
               id: this.simulation.id,
               skill: "FLYING_TAKEOFF",
@@ -920,6 +918,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
               targetX: destination.target.positionX,
               targetY: destination.target.positionY
             })
+            this.skydiveTo(destination.x, destination.y, board)
+            this.flyingProtection--
             setTimeout(() => {
               this.simulation.room.broadcast(Transfer.ABILITY, {
                 id: this.simulation.id,
