@@ -1069,7 +1069,7 @@
     "LOCK_ON": "Erfassen Sie das Ziel. Der nächste Angriff kann nicht verfehlen, verursacht [100,SP]% TRUE und wendet 3 Sekunden lang ARMOR_REDUCTION an",
     "PSYCH_UP": "Verteile [10,20,40,SP] SPECIAL und bringe das Ziel und seine angrenzenden Feinde zum Schweigen",
     "RAZOR_WIND": "Fügt dem Ziel [20,40,80,SP] SPECIAL zu und lässt umliegende Feinde paralysieren",
-    "TWISTING_NETHER": "Fügt benachbarten Feinden [80,SP] SPECIAL zu. Jeder Pokémon-Treffer wird irgendwohin teleportiert.",
+    "TWISTING_NETHER": "Verursacht [80,SP] SPEZIAL an allen Gegnern in der Nähe des Ziels in einem Radius von 2 Zellen und teleportiert sie dann zufällig über das Schlachtfeld",
     "WONDER_GUARD": "Verursacht [30,60,120,SP] SPECIAL und paralysiert alle angrenzenden Feinde für 3 Sekunden",
     "ELECTRIC_SURGE": "Erhöhe ATK_SPEED aller ELECTRIC Pokémons um [10,SP]%",
     "PSYCHIC_SURGE": "Erhöht die AP aller PSYCHIC Pokémons um [5,SP] %, außer dem Zaubernden",
