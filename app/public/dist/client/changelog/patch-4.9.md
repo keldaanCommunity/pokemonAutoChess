@@ -27,6 +27,7 @@
 - Updated Sky Attack (Lugia): Skydiving now deals damage to the destination target instead of the initial target before, and after one second instead of immediately before
 - Pinsir is now Wild/Bug
 - Buff Woobat line: PP ~~90~~ 80
+- Nerf Dreepy line: PP ~~80~~ 100
 
 # Changes to Synergies
 

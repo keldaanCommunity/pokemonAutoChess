@@ -8627,7 +8627,7 @@ export class Dreepy extends Pokemon {
   atk = 5
   def = 3
   speDef = 3
-  maxPP = 80
+  maxPP = 100
   range = 2
   skill = Ability.DRAGON_DARTS
   passive = Passive.HATCH
@@ -8644,7 +8644,7 @@ export class Drakloak extends Pokemon {
   atk = 12
   def = 3
   speDef = 3
-  maxPP = 80
+  maxPP = 100
   range = 2
   skill = Ability.DRAGON_DARTS
   passive = Passive.HATCH
@@ -8659,7 +8659,7 @@ export class Dragapult extends Pokemon {
   atk = 22
   def = 3
   speDef = 3
-  maxPP = 80
+  maxPP = 100
   range = 2
   skill = Ability.DRAGON_DARTS
   attackSprite = AttackSprite.FIRE_RANGE
