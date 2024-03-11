@@ -8484,7 +8484,7 @@ export class Starmie extends Pokemon {
   stars = 2
   hp = 180
   atk = 20
-  def = 2
+  def = 4
   speDef = 6
   maxPP = 90
   range = 2

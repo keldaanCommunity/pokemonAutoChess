@@ -28,6 +28,7 @@
 - Pinsir is now Wild/Bug
 - Buff Woobat line: PP ~~90~~ 80
 - Nerf Dreepy line: PP ~~80~~ 100
+- Buff Starmie: Def ~~2~~ 4
 
 # Changes to Synergies
 
