@@ -38,7 +38,7 @@ export function displayAbility(
       "abilities",
       skill + `/000.png`
     )
-    abilityFx.setDepth(7).play(skill)
+    abilityFx.setOrigin(0.5, 0.5).setDepth(7).play(skill)
     if (destroyOnComplete) {
       abilityFx.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
         abilityFx.destroy()
@@ -1879,6 +1879,27 @@ export function displayAbility(
         .setOrigin(0.5, -0.4)
         .setDepth(0)
         .setScale(2)
+      break
+
+    case "FLYING_TAKEOFF":
+      addAbilitySprite("FLYING_TAKEOFF", coordinates, true)
+        .setDepth(0)
+        .setScale(2)
+      break
+
+    case "FLYING_SKYDIVE":
+      const startCoords = transformAttackCoordinate(targetX, 9, false)
+      const specialProjectile = addAbilitySprite(skill, startCoords).setScale(1)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        duration: 500,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
       break
 
     default:

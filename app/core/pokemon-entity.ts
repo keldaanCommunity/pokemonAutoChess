@@ -883,7 +883,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         this.flyAway(board)
         this.flyingProtection--
       } else if (this.effects.has(Effect.FEATHER_DANCE) && pcLife < 0.2) {
-        this.status.triggerProtect(1500)
+        this.status.triggerProtect(2000)
         this.flyAway(board)
         this.flyingProtection--
       } else if (this.effects.has(Effect.MAX_AIRSTREAM)) {
@@ -900,15 +900,49 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           (this.flyingProtection === 2 && pcLife < 0.5) ||
           (this.flyingProtection === 1 && pcLife < 0.2)
         ) {
-          this.status.triggerProtect(2000)
-          const cells = board.getAdjacentCells(this.positionX, this.positionY)
-          cells.forEach((cell) => {
-            if (cell.value && this.team != cell.value.team) {
-              cell.value.status.triggerParalysis(2000, cell.value)
-            }
-          })
-          this.flyAway(board)
-          this.flyingProtection--
+          const destination =
+            this.state.getFarthestTargetCoordinateAvailablePlace(this, board)
+          if (destination) {
+            this.status.triggerProtect(2000)
+            const cells = board.getAdjacentCells(this.positionX, this.positionY)
+            cells.forEach((cell) => {
+              if (cell.value && this.team != cell.value.team) {
+                cell.value.status.triggerParalysis(2000, cell.value)
+              }
+            })
+            this.simulation.room.broadcast(Transfer.ABILITY, {
+              id: this.simulation.id,
+              skill: "FLYING_TAKEOFF",
+              positionX: this.positionX,
+              positionY: this.positionY,
+              targetX: destination.target.positionX,
+              targetY: destination.target.positionY
+            })
+            this.skydiveTo(destination.x, destination.y, board)
+            this.flyingProtection--
+            setTimeout(() => {
+              this.simulation.room.broadcast(Transfer.ABILITY, {
+                id: this.simulation.id,
+                skill: "FLYING_SKYDIVE",
+                positionX: destination.x,
+                positionY: destination.y,
+                targetX: destination.target.positionX,
+                targetY: destination.target.positionY
+              })
+            }, 500)
+
+            setTimeout(() => {
+              if (destination.target?.hp > 0) {
+                destination.target.handleSpecialDamage(
+                  2 * this.atk,
+                  board,
+                  AttackType.PHYSICAL,
+                  this,
+                  chance(this.critChance)
+                )
+              }
+            }, 1000)
+          }
         }
       }
     }
