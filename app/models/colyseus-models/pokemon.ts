@@ -9028,7 +9028,7 @@ export class Woobat extends Pokemon {
   atk = 5
   def = 1
   speDef = 1
-  maxPP = 90
+  maxPP = 80
   range = 3
   skill = Ability.ATTRACT
   additional = true
@@ -9047,7 +9047,7 @@ export class Swoobat extends Pokemon {
   atk = 12
   def = 2
   speDef = 2
-  maxPP = 90
+  maxPP = 80
   range = 3
   skill = Ability.ATTRACT
   additional = true
