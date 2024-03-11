@@ -4226,23 +4226,36 @@ export class SkyAttackStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
-    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(
+    super.process(pokemon, state, board, target, crit, true)
+    const destination = state.getFarthestTargetCoordinateAvailablePlace(
       pokemon,
       board
     )
-    const damage = 120
-    if (farthestCoordinate) {
-      target.handleSpecialDamage(
-        damage,
-        board,
-        AttackType.SPECIAL,
-        pokemon,
-        crit
-      )
+    if (destination) {
+      pokemon.skydiveTo(destination.x, destination.y, board)
+      setTimeout(() => {
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: Ability.SKY_ATTACK,
+          positionX: destination.x,
+          positionY: destination.y,
+          targetX: destination.target.positionX,
+          targetY: destination.target.positionY
+        })
+      }, 500)
 
-      pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
-      pokemon.status.triggerProtect(500)
+      setTimeout(() => {
+        if (destination.target?.hp > 0) {
+          const damage = 120
+          destination.target.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      }, 1000)
     }
   }
 }
@@ -6844,7 +6857,9 @@ export class OutrageStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit, true)
     pokemon.status.triggerConfusion(2000, pokemon)
-    const damage = ([2, 3, 4][pokemon.stars - 1] ?? 4) * pokemon.atk
+    const damage = Math.round(
+      ([1, 1.5, 2][pokemon.stars - 1] ?? 2) * pokemon.atk
+    )
     board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
       .map((v) => v.value)
@@ -7560,6 +7575,93 @@ export class PetalBlizzardStrategy extends AbilityStrategy {
   }
 }
 
+export class SunsteelStrikeStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const mostSurroundedCoordinate =
+      state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
+
+    if (mostSurroundedCoordinate) {
+      pokemon.skydiveTo(
+        mostSurroundedCoordinate.x,
+        mostSurroundedCoordinate.y,
+        board
+      )
+      setTimeout(() => {
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: Ability.SUNSTEEL_STRIKE,
+          positionX: mostSurroundedCoordinate.x,
+          positionY: mostSurroundedCoordinate.y,
+          targetX: mostSurroundedCoordinate.x,
+          targetY: mostSurroundedCoordinate.y
+        })
+      }, 500)
+
+      setTimeout(() => {
+        const cells = board.getAdjacentCells(
+          mostSurroundedCoordinate.x,
+          mostSurroundedCoordinate.y
+        )
+
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: Ability.SEARING_SHOT,
+          positionX: mostSurroundedCoordinate.x,
+          positionY: mostSurroundedCoordinate.y,
+          targetX: mostSurroundedCoordinate.x,
+          targetY: mostSurroundedCoordinate.y
+        })
+
+        cells.forEach((cell) => {
+          if (cell.value && cell.value.team !== pokemon.team) {
+            cell.value.handleSpecialDamage(
+              100,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
+            cell.value.status.triggerBurn(3000, cell.value, pokemon)
+          }
+        })
+      }, 1000)
+    }
+  }
+}
+
+export class MoongeistBeamStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    effectInLine(board, pokemon, target, (targetInLine) => {
+      if (targetInLine != null) {
+        if (targetInLine.team !== pokemon.team) {
+          targetInLine.handleSpecialDamage(
+            100,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+          targetInLine.status.triggerParalysis(3000, targetInLine)
+        }
+      }
+    })
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -7852,5 +7954,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.MULTI_ATTACK]: new MultiAttackStrategy(),
   [Ability.STICKY_WEB]: new StickyWebStrategy(),
   [Ability.ACCELEROCK]: new AccelerockStrategy(),
-  [Ability.PETAL_BLIZZARD]: new PetalBlizzardStrategy()
+  [Ability.PETAL_BLIZZARD]: new PetalBlizzardStrategy(),
+  [Ability.SUNSTEEL_STRIKE]: new SunsteelStrikeStrategy(),
+  [Ability.MOONGEIST_BEAM]: new MoongeistBeamStrategy()
 }

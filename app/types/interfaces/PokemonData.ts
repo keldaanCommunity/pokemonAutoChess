@@ -12,6 +12,7 @@ export interface IPokemonData {
   stars: number
   rarity: Rarity
   additional: boolean
+  hp: number
   range: number
   types: Synergy[]
   evolution: Pkm | null

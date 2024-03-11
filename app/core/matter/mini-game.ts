@@ -510,7 +510,7 @@ export class MiniGame {
           if (state.specialGameRule === SpecialGameRule.KECLEONS_SHOP) {
             player.money -= KECLEON_SHOP_COST
           }
-          player.items.add(item.name)
+          player.items.push(item.name)
         }
       }
 

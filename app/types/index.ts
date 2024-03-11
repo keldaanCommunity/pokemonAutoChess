@@ -1,10 +1,4 @@
-import {
-  ArraySchema,
-  CollectionSchema,
-  MapSchema,
-  Schema,
-  SetSchema
-} from "@colyseus/schema"
+import { ArraySchema, MapSchema, Schema, SetSchema } from "@colyseus/schema"
 import Board from "../core/board"
 import Dps from "../core/dps"
 import DpsHeal from "../core/dps-heal"
@@ -360,7 +354,7 @@ export interface IPlayer {
   opponentAvatar: string
   opponentTitle: string
   boardSize: number
-  items: CollectionSchema<Item>
+  items: ArraySchema<Item>
   rank: number
   elo: number
   alive: boolean
@@ -572,7 +566,6 @@ export interface ICount {
   futureSightCount: number
   healOrderCount: number
   attackOrderCount: number
-  monsterExecutionCount: number
   magmarizerCount: number
 }
 

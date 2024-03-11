@@ -731,7 +731,12 @@ export enum Pkm {
   ROCKRUFF = "ROCKRUFF",
   LYCANROC_DAY = "LYCANROC_DAY",
   LYCANROC_DUSK = "LYCANROC_DUSK",
-  LYCANROC_NIGHT = "LYCANROC_NIGHT"
+  LYCANROC_NIGHT = "LYCANROC_NIGHT",
+  DRUDDIGON = "DRUDDIGON",
+  COSMOG = "COSMOG",
+  COSMOEM = "COSMOEM",
+  SOLGALEO = "SOLGALEO",
+  LUNALA = "LUNALA"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1275,11 +1280,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.MELMETAL]: "0809",
   [Pkm.HOOPA]: "0720",
   [Pkm.HOOPA_UNBOUND]: "0720-0001",
-
   [Pkm.ZERAORA]: "0807",
   [Pkm.XERNEAS]: "0716",
   [Pkm.YVELTAL]: "0717",
-
   [Pkm.MARSHADOW]: "0802",
   [Pkm.HOOTHOOT]: "0163",
   [Pkm.NOCTOWL]: "0164",
@@ -1467,7 +1470,12 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.ROCKRUFF]: "0744",
   [Pkm.LYCANROC_DAY]: "0745",
   [Pkm.LYCANROC_DUSK]: "0745-0002",
-  [Pkm.LYCANROC_NIGHT]: "0745-0001"
+  [Pkm.LYCANROC_NIGHT]: "0745-0001",
+  [Pkm.DRUDDIGON]: "0621",
+  [Pkm.COSMOG]: "0789",
+  [Pkm.COSMOEM]: "0790",
+  [Pkm.SOLGALEO]: "0791",
+  [Pkm.LUNALA]: "0792"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2201,7 +2209,12 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.ROCKRUFF]: Pkm.ROCKRUFF,
   [Pkm.LYCANROC_DAY]: Pkm.ROCKRUFF,
   [Pkm.LYCANROC_DUSK]: Pkm.ROCKRUFF,
-  [Pkm.LYCANROC_NIGHT]: Pkm.ROCKRUFF
+  [Pkm.LYCANROC_NIGHT]: Pkm.ROCKRUFF,
+  [Pkm.DRUDDIGON]: Pkm.DRUDDIGON,
+  [Pkm.COSMOG]: Pkm.COSMOG,
+  [Pkm.COSMOEM]: Pkm.COSMOG,
+  [Pkm.SOLGALEO]: Pkm.COSMOG,
+  [Pkm.LUNALA]: Pkm.COSMOG
 }
 
 export enum PkmDuo {
@@ -6003,6 +6016,31 @@ export const AnimationConfig: {
   [Pkm.LYCANROC_NIGHT]: {
     attack: AnimationType.Attack,
     ability: AnimationType.QuickStrike,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.DRUDDIGON]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.COSMOG]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Rotate
+  },
+  [Pkm.COSMOEM]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Rotate
+  },
+  [Pkm.SOLGALEO]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Hop,
+    emote: AnimationType.Attack
+  },
+  [Pkm.LUNALA]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Charge,
     emote: AnimationType.Shoot
   }
 }

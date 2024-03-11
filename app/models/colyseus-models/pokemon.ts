@@ -5,12 +5,11 @@ import { MapSchema, Schema, SetSchema, type } from "@colyseus/schema"
 import { nanoid } from "nanoid"
 import { AbilityStrategies } from "../../core/abilities/abilities"
 import {
+  ConditionBasedEvolutionRule,
   CountEvolutionRule,
   EvolutionRule,
   HatchEvolutionRule,
-  ItemEvolutionRule,
-  MoneyEvolutionRule,
-  TurnEvolutionRule
+  ItemEvolutionRule
 } from "../../core/evolution-rules"
 import { PokemonEntity } from "../../core/pokemon-entity"
 import Simulation from "../../core/simulation"
@@ -8031,7 +8030,7 @@ const rksSystemOnChangePosition = function (
     SynergyItems.forEach((synergyItem) => {
       if (this.items.has(synergyItem)) {
         this.items.delete(synergyItem)
-        player.items.add(synergyItem)
+        player.items.push(synergyItem)
       }
     })
   }
@@ -10349,7 +10348,7 @@ export class Tropius extends Pokemon {
       entity.items.add(berry)
       entity.refToBoardPokemon.items.add(berry)
     } else {
-      player.items.add(berry)
+      player.items.push(berry)
     }
   }
 }
@@ -11290,7 +11289,9 @@ export class Tandemaus extends Pokemon {
   skill = Ability.POPULATION_BOMB
   attackSprite = AttackSprite.NORMAL_MELEE
   evolution = Pkm.MAUSHOLD_THREE
-  evolutionRule = new TurnEvolutionRule(14)
+  evolutionRule = new ConditionBasedEvolutionRule(
+    (pokemon, player, stageLevel) => stageLevel >= 14
+  )
   passive = Passive.FAMILY
 }
 
@@ -11307,7 +11308,9 @@ export class MausholdThree extends Pokemon {
   skill = Ability.POPULATION_BOMB
   attackSprite = AttackSprite.NORMAL_MELEE
   evolution = Pkm.MAUSHOLD_FOUR
-  evolutionRule = new TurnEvolutionRule(20)
+  evolutionRule = new ConditionBasedEvolutionRule(
+    (pokemon, player, stageLevel) => stageLevel >= 20
+  )
   passive = Passive.FAMILY
 }
 
@@ -11471,7 +11474,9 @@ export class Gimmighoul extends Pokemon {
   skill = Ability.GOLD_RUSH
   attackSprite = AttackSprite.DRAGON_MELEE
   evolution = Pkm.GHOLDENGO
-  evolutionRule = new MoneyEvolutionRule(99)
+  evolutionRule = new ConditionBasedEvolutionRule(
+    (pokemon, player) => player.money >= 99
+  )
   passive = Passive.GIMMIGHOUL
 }
 
@@ -11717,7 +11722,9 @@ export class Corsola extends Pokemon {
   attackSprite = AttackSprite.WATER_MELEE
   passive = Passive.CORSOLA
   evolution = Pkm.GALAR_CORSOLA
-  evolutionRule = new TurnEvolutionRule(99) // natural death
+  evolutionRule = new ConditionBasedEvolutionRule(
+    (pokemon, player, stageLevel) => stageLevel >= 99 // natural death
+  )
   additional = true
 }
 
@@ -12237,6 +12244,106 @@ export class LycanrocDay extends Pokemon {
   beforeSimulationStart({ weather, player }) {
     updateLycanroc(this, weather, player)
   }
+}
+
+export class Druddigon extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.WILD,
+    Synergy.MONSTER
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 170
+  atk = 18
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.OUTRAGE
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
+
+export class Cosmog extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.LIGHT])
+  rarity = Rarity.UNIQUE
+  evolution = Pkm.COSMOEM
+  evolutionRule = new ConditionBasedEvolutionRule(
+    (pokemon) => pokemon.hp >= 200
+  )
+  stars = 1
+  hp = 100
+  atk = 5
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 4
+  skill = Ability.TELEPORT
+  passive = Passive.COSMOG
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
+
+export class Cosmoem extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.LIGHT])
+  rarity = Rarity.UNIQUE
+  evolution = Pkm.COSMOEM
+  stars = 2
+  evolutionRule = new ConditionBasedEvolutionRule(
+    (pokemon) => pokemon.hp >= 300,
+    (pokemon, player) => {
+      if (
+        pokemon.positionX === player.lightX &&
+        pokemon.positionY === player.lightY
+      )
+        return Pkm.SOLGALEO
+      else return Pkm.LUNALA
+    }
+  )
+  hp = 200
+  atk = 5
+  def = 8
+  speDef = 8
+  maxPP = 100
+  range = 4
+  skill = Ability.COSMIC_POWER
+  passive = Passive.COSMOEM
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
+
+export class Solgaleo extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.PSYCHIC,
+    Synergy.LIGHT,
+    Synergy.STEEL
+  ])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 300
+  atk = 25
+  def = 8
+  speDef = 8
+  maxPP = 120
+  range = 1
+  skill = Ability.SUNSTEEL_STRIKE
+  attackSprite = AttackSprite.STEEL_MELEE
+}
+
+export class Lunala extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.PSYCHIC,
+    Synergy.LIGHT,
+    Synergy.GHOST
+  ])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 300
+  atk = 25
+  def = 8
+  speDef = 8
+  maxPP = 120
+  range = 4
+  skill = Ability.MOONGEIST_BEAM
+  attackSprite = AttackSprite.STEEL_MELEE
 }
 
 export const PokemonClasses: Record<
@@ -12973,5 +13080,10 @@ export const PokemonClasses: Record<
   [Pkm.ROCKRUFF]: Rockruff,
   [Pkm.LYCANROC_DAY]: LycanrocDay,
   [Pkm.LYCANROC_DUSK]: LycanrocDusk,
-  [Pkm.LYCANROC_NIGHT]: LycanrocNight
+  [Pkm.LYCANROC_NIGHT]: LycanrocNight,
+  [Pkm.DRUDDIGON]: Druddigon,
+  [Pkm.COSMOG]: Cosmog,
+  [Pkm.COSMOEM]: Cosmoem,
+  [Pkm.SOLGALEO]: Solgaleo,
+  [Pkm.LUNALA]: Lunala
 }

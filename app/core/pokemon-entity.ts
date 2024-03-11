@@ -236,7 +236,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     crit: boolean,
     apBoost = true
   ): { death: boolean; takenDamage: number } {
-    if (this.status.protect || this.status.magicBounce) {
+    if (
+      this.status.protect ||
+      this.status.skydiving ||
+      this.status.magicBounce
+    ) {
       this.count.spellBlockedCount++
       if (
         this.status.magicBounce &&
@@ -432,6 +436,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     board.swapValue(this.positionX, this.positionY, x, y)
     this.toMovingState()
     this.cooldown = 100 // for faster retargeting
+  }
+
+  skydiveTo(x: number, y: number, board: Board) {
+    board.swapValue(this.positionX, this.positionY, x, y)
+    this.status.skydiving = true
+    this.toMovingState()
+    this.cooldown = 1000 // 500ms for flying up and 500ms for skydive anim
   }
 
   // called after every attack, no matter if it's successful or not
@@ -872,7 +883,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         this.flyAway(board)
         this.flyingProtection--
       } else if (this.effects.has(Effect.FEATHER_DANCE) && pcLife < 0.2) {
-        this.status.triggerProtect(1500)
+        this.status.triggerProtect(2000)
         this.flyAway(board)
         this.flyingProtection--
       } else if (this.effects.has(Effect.MAX_AIRSTREAM)) {
@@ -889,15 +900,49 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           (this.flyingProtection === 2 && pcLife < 0.5) ||
           (this.flyingProtection === 1 && pcLife < 0.2)
         ) {
-          this.status.triggerProtect(2000)
-          const cells = board.getAdjacentCells(this.positionX, this.positionY)
-          cells.forEach((cell) => {
-            if (cell.value && this.team != cell.value.team) {
-              cell.value.status.triggerParalysis(2000, cell.value)
-            }
-          })
-          this.flyAway(board)
-          this.flyingProtection--
+          const destination =
+            this.state.getFarthestTargetCoordinateAvailablePlace(this, board)
+          if (destination) {
+            this.status.triggerProtect(2000)
+            const cells = board.getAdjacentCells(this.positionX, this.positionY)
+            cells.forEach((cell) => {
+              if (cell.value && this.team != cell.value.team) {
+                cell.value.status.triggerParalysis(2000, cell.value)
+              }
+            })
+            this.simulation.room.broadcast(Transfer.ABILITY, {
+              id: this.simulation.id,
+              skill: "FLYING_TAKEOFF",
+              positionX: this.positionX,
+              positionY: this.positionY,
+              targetX: destination.target.positionX,
+              targetY: destination.target.positionY
+            })
+            this.skydiveTo(destination.x, destination.y, board)
+            this.flyingProtection--
+            setTimeout(() => {
+              this.simulation.room.broadcast(Transfer.ABILITY, {
+                id: this.simulation.id,
+                skill: "FLYING_SKYDIVE",
+                positionX: destination.x,
+                positionY: destination.y,
+                targetX: destination.target.positionX,
+                targetY: destination.target.positionY
+              })
+            }, 500)
+
+            setTimeout(() => {
+              if (destination.target?.hp > 0) {
+                destination.target.handleSpecialDamage(
+                  2 * this.atk,
+                  board,
+                  AttackType.PHYSICAL,
+                  this,
+                  chance(this.critChance)
+                )
+              }
+            }, 1000)
+          }
         }
       }
     }
@@ -972,18 +1017,20 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           damage = 70
         }
 
-        const splashTarget = pokemon === this ? target : this
+        const isCritReceived = pokemon === target
+        const splashTarget = isCritReceived ? this : target
+        const distance = distanceC(
+          pokemon.positionX,
+          pokemon.positionY,
+          splashTarget.positionX,
+          splashTarget.positionY
+        )
 
-        if (
-          distanceC(
-            pokemon.positionX,
-            pokemon.positionY,
-            splashTarget.positionX,
-            splashTarget.positionY
-          ) <= 1
-        ) {
+        pokemon.count.fairyCritCount++
+        pokemon.fairySplashCooldown = 1
+
+        if (distance <= 1) {
           // melee range
-          pokemon.count.fairyCritCount++
           splashTarget.handleDamage({
             damage,
             board,
@@ -991,12 +1038,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
             attacker: pokemon,
             shouldTargetGainMana: false
           })
-        } else {
-          // not at range, charm it instead
-          splashTarget.status.triggerCharm(2000, splashTarget, pokemon)
         }
 
-        pokemon.fairySplashCooldown = 1
+        if (isCritReceived || distance > 1) {
+          // charm attackers and distant targets
+          splashTarget.status.triggerCharm(2000, splashTarget, pokemon)
+        }
       }
     })
 
@@ -1055,7 +1102,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           this.addMaxHP(lifeBoost)
           this.addAttack(attackBoost)
           this.addAbilityPower(apBoost, false)
-          this.count.monsterExecutionCount++
         }
       }
     }

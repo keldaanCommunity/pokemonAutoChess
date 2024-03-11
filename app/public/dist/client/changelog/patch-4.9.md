@@ -7,6 +7,11 @@
 - Araquanid
 - Rockruff
 - Lycanroc
+- Druddigon
+- Cosmog
+- Cosmoem
+- Solgaleo
+- Lunala
 
 # Changes to Pokemon & Abilities
 
@@ -18,6 +23,8 @@
 - New ability for all Silvally forms: Multi-Attack: Inflicts 10 special damage to surounding enemies, multiplied by the synergy level of current Silvally form
 - New passive for all Silvally forms: RKS System: Silvally can change its synergy items at any time. Place it on bench to drop synergy items.
 - Revert Happiny PP buff from 4.7
+- Nerf Outrage (Axew): ~~200/300/400%~~ 100/150/200% ATK of special damage
+- Updated Sky Attack (Lugia): Skydiving now deals damage to the destination target instead of the initial target before, and after one second instead of immediately before
 
 # Changes to Synergies
 
@@ -25,6 +32,9 @@
 - Buff Oddish line: PP ~~100~~ 80
 - Buff Flower 6 ; new ability for Bellossom: Petal Blizzard ; Belossom HP ~~360~~ 300, Attack ~~27~~ 30, PP: ~~100~~ 10
 - Buff Fighting: after 10 hits blocked, throw the target away, destroying its shield. Added Fighting 8 synergy level.
+- Buff Fairy: now charm melee attacker when receiving a critical hit
+- Buff Flying 4: Protect duration ~~1.5~~ 2 seconds
+- Buff Flying 8: Flying pokémon now perform skydive attacks, causing Paralysis for 2 seconds on takeoff, and 200% PHYSICAL ATK on landing on their target
 
 # Changes to Items
 
@@ -34,6 +44,7 @@
 
 - Add a visual feedback when hovering one of your pokemons to drag or sell
 - Add a visual indicator of max tier reachable for each unit
+- All pokemons grow in body size when gaining max HP (no longer Monster only)
 
 # Bugfix
 

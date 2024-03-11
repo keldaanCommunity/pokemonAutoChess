@@ -924,7 +924,7 @@ export default class GameRoom extends Room<GameState> {
         player.itemsProposition.length > 0 &&
         player.itemsProposition[selectedIndex] != null
       ) {
-        player.items.add(player.itemsProposition[selectedIndex])
+        player.items.push(player.itemsProposition[selectedIndex])
         player.itemsProposition.clear()
       }
     }
@@ -944,7 +944,7 @@ export default class GameRoom extends Room<GameState> {
   pickItemProposition(playerId: string, item: Item) {
     const player = this.state.players.get(playerId)
     if (player && player.itemsProposition.includes(item)) {
-      player.items.add(item)
+      player.items.push(item)
       player.itemsProposition.clear()
     }
   }

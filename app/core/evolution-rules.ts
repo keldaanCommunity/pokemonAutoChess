@@ -1,9 +1,11 @@
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import PokemonFactory from "../models/pokemon-factory"
+import { transformAttackCoordinate } from "../public/src/pages/utils/utils"
 import { EvolutionTime } from "../types/Config"
 import { PokemonActionState } from "../types/enum/Game"
 import { BasicItems, Item } from "../types/enum/Item"
+import { Passive } from "../types/enum/Passive"
 import { Pkm } from "../types/enum/Pokemon"
 import { logger } from "../utils/logger"
 import { values } from "../utils/schemas"
@@ -34,14 +36,25 @@ export abstract class EvolutionRule {
   ): void | Pokemon {
     if (this.canEvolve(pokemon, player, stageLevel)) {
       const pokemonEvolved = this.evolve(pokemon, player, stageLevel)
-      this.afterEvolve(pokemonEvolved, player)
+      this.afterEvolve(pokemonEvolved, player, stageLevel)
       return pokemonEvolved
     }
   }
 
-  afterEvolve(pokemonEvolved: Pokemon, player: Player) {
+  afterEvolve(pokemonEvolved: Pokemon, player: Player, stageLevel: number) {
     player.updateSynergies()
     pokemonEvolved.onAcquired(player)
+    player.board.forEach((pokemon) => {
+      if (
+        (pokemon.passive === Passive.COSMOG ||
+          pokemon.passive === Passive.COSMOEM) &&
+        pokemonEvolved.passive !== Passive.COSMOG &&
+        pokemonEvolved.passive !== Passive.COSMOEM
+      ) {
+        pokemon.hp += 10
+        pokemon.evolutionRule.tryEvolve(pokemon, player, stageLevel)
+      }
+    })
   }
 }
 
@@ -125,7 +138,7 @@ export class CountEvolutionRule extends EvolutionRule {
       const itemToAdd = itemsToAdd.pop()
       if (itemToAdd) {
         if (pokemonEvolved.items.has(itemToAdd)) {
-          player.items.add(itemToAdd)
+          player.items.push(itemToAdd)
         } else {
           pokemonEvolved.items.add(itemToAdd)
         }
@@ -133,10 +146,10 @@ export class CountEvolutionRule extends EvolutionRule {
     }
 
     itemsToAdd.forEach((item) => {
-      player.items.add(item)
+      player.items.push(item)
     })
     basicItemsToAdd.forEach((item) => {
-      player.items.add(item)
+      player.items.push(item)
     })
 
     if (coord) {
@@ -236,39 +249,24 @@ export class HatchEvolutionRule extends EvolutionRule {
   }
 }
 
-export class TurnEvolutionRule extends EvolutionRule {
+type EvolutionCondition = (
+  pokemon: Pokemon,
+  player: Player,
   stageLevel: number
-  constructor(stageLevel: number, divergentEvolution?: DivergentEvolution) {
+) => boolean
+
+export class ConditionBasedEvolutionRule extends EvolutionRule {
+  condition: EvolutionCondition
+  constructor(
+    condition: EvolutionCondition,
+    divergentEvolution?: DivergentEvolution
+  ) {
     super(divergentEvolution)
-    this.stageLevel = stageLevel
+    this.condition = condition
   }
 
   canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
-    return stageLevel >= this.stageLevel
-  }
-
-  evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
-    let pokemonEvolutionName = pokemon.evolution
-    if (this.divergentEvolution) {
-      pokemonEvolutionName = this.divergentEvolution(pokemon, player)
-    }
-    const pokemonEvolved = player.transformPokemon(
-      pokemon,
-      pokemonEvolutionName
-    )
-    return pokemonEvolved
-  }
-}
-
-export class MoneyEvolutionRule extends EvolutionRule {
-  money: number
-  constructor(money: number, divergentEvolution?: DivergentEvolution) {
-    super(divergentEvolution)
-    this.money = money
-  }
-
-  canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
-    return player.money >= this.money
+    return this.condition(pokemon, player, stageLevel)
   }
 
   evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
