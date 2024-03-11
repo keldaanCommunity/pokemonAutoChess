@@ -831,7 +831,7 @@
     "GRASS_WHISTLE": "Metti SLEEP [1,2,4] nemici per 2 secondi",
     "TRI_ATTACK": "Infligge [30,50,70,SP] danni speciali. Può BURN, FREEZE o PARALYSIS il bersaglio",
     "ECHO": "Infligge [3,6,9,SP] SPECIAL alla squadra nemica, aumentando di [3,6,9,SP] ogni volta che il pokemon usa la sua abilità",
-    "PETAL_DANCE": "Distribuisci [20,30,50,SP] SPECIAL a [3,4,5] Pokémon nemici",
+    "PETAL_DANCE": "Infligge [20,30,50,SP] SPECIAL ai [3,4,5] nemici più vicini",
     "HYPER_VOICE": "Infligge [40,80,200,SP] SPECIAL di fila e fa sì che tutti i bersagli colpiscano CONFUSION per [1,2,3] secondi",
     "SHADOW_CLONE": "Crea un clone con il [50,SP]% degli HP massimi e gli dà uno degli oggetti in suo possesso",
     "VOLT_SWITCH": "Scatta nelle retrovie nemiche, infliggendo [30,60,120,SP] SPECIAL",
