@@ -1,5 +1,5 @@
 {
-  "version": "4.8.0.72",
+  "version": "4.8.0.73",
   "packs": {
     "abilities": {
       "name": "abilities",
@@ -77,6 +77,8 @@
         "FLAME_CHARGE": { "frames": 41 },
         "FLAME_HIT": { "frames": 12 },
         "FLORAL_HEALING": { "frames": 22 },
+        "FLYING_SKYDIVE": { "frames": 1, "repeat": -1 },
+        "FLYING_TAKEOFF": { "frames": 6 },
         "FORECAST": { "frames": 52, "fps": 40 },
         "FUSION_BOLT": { "frames": 13 },
         "FUTURE_SIGHT": { "frames": 11 },
