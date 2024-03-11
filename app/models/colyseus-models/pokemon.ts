@@ -4538,7 +4538,7 @@ export class Moltres extends Pokemon {
 }
 
 export class Pinsir extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.HUMAN])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.BUG])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 190

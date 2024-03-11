@@ -25,6 +25,7 @@
 - Revert Happiny PP buff from 4.7
 - Nerf Outrage (Axew): ~~200/300/400%~~ 100/150/200% ATK of special damage
 - Updated Sky Attack (Lugia): Skydiving now deals damage to the destination target instead of the initial target before, and after one second instead of immediately before
+- Pinsir is now Wild/Bug
 
 # Changes to Synergies
 
