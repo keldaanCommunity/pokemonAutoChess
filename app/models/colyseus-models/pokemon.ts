@@ -378,10 +378,11 @@ export class MegaAltaria extends Pokemon {
 
 export class Scyther extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING])
-  rarity = Rarity.ULTRA
-  stars = 1
+  rarity = Rarity.UNIQUE
+  stars = 2
   evolution = Pkm.SCIZOR
-  hp = 130
+  evolutionRule = new ItemEvolutionRule([Item.METAL_COAT])
+  hp = 180
   atk = 18
   def = 5
   speDef = 5
@@ -389,14 +390,14 @@ export class Scyther extends Pokemon {
   range = 1
   skill = Ability.X_SCISSOR
   attackSprite = AttackSprite.NORMAL_MELEE
+  passive = Passive.SCYTHER
 }
 
 export class Scizor extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING, Synergy.STEEL])
-  rarity = Rarity.ULTRA
-  stars = 2
-  evolution = Pkm.MEGA_SCIZOR
-  hp = 180
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 230
   atk = 28
   def = 6
   speDef = 6
@@ -408,7 +409,7 @@ export class Scizor extends Pokemon {
 
 export class MegaScizor extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING, Synergy.STEEL])
-  rarity = Rarity.ULTRA
+  rarity = Rarity.UNIQUE
   stars = 3
   hp = 250
   atk = 48
@@ -416,7 +417,7 @@ export class MegaScizor extends Pokemon {
   speDef = 7
   maxPP = 80
   range = 1
-  skill = Ability.X_SCISSOR
+  skill = Ability.DEFAULT
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -1488,46 +1489,46 @@ export class PorygonZ extends Pokemon {
 
 export class Sewaddle extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.BUG, Synergy.SOUND])
-  rarity = Rarity.EPIC
+  rarity = Rarity.ULTRA
   stars = 1
   evolution = Pkm.SWADLOON
-  hp = 80
-  atk = 5
-  def = 3
-  speDef = 3
-  maxPP = 80
+  hp = 160
+  atk = 14
+  def = 5
+  speDef = 5
+  maxPP = 100
   range = 1
-  skill = Ability.DEFAULT
-  attackSprite = AttackSprite.GRASS_MELEE
+  skill = Ability.MANTIS_BLADES
+  attackSprite = AttackSprite.BUG_MELEE
 }
 
 export class Swadloon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.BUG, Synergy.SOUND])
-  rarity = Rarity.EPIC
+  rarity = Rarity.ULTRA
   stars = 2
   evolution = Pkm.LEAVANNY
-  hp = 120
-  atk = 9
-  def = 4
-  speDef = 4
-  maxPP = 80
+  hp = 200
+  atk = 24
+  def = 6
+  speDef = 6
+  maxPP = 100
   range = 1
-  skill = Ability.DEFAULT
-  attackSprite = AttackSprite.GRASS_MELEE
+  skill = Ability.MANTIS_BLADES
+  attackSprite = AttackSprite.BUG_MELEE
 }
 
 export class Leavanny extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.BUG, Synergy.SOUND])
-  rarity = Rarity.EPIC
+  rarity = Rarity.ULTRA
   stars = 3
-  hp = 220
-  atk = 20
-  def = 4
-  speDef = 4
-  maxPP = 80
+  hp = 300
+  atk = 34
+  def = 7
+  speDef = 7
+  maxPP = 100
   range = 1
-  skill = Ability.DEFAULT
-  attackSprite = AttackSprite.GRASS_MELEE
+  skill = Ability.MANTIS_BLADES
+  attackSprite = AttackSprite.BUG_MELEE
 }
 
 export class Turtwig extends Pokemon {
