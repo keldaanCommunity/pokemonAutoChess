@@ -1645,8 +1645,8 @@ export class PetalDanceStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit, true)
 
-    let damage = [20, 30, 50][pokemon.stars - 1] ?? 50
-    let count = [3, 4, 5][pokemon.stars - 1] ?? 5
+    const damage = [20, 30, 50][pokemon.stars - 1] ?? 50
+    const count = [3, 4, 5][pokemon.stars - 1] ?? 5
 
     const enemies = board.cells.filter(
       (p) => p && p.team !== pokemon.team
@@ -7669,6 +7669,46 @@ export class MoongeistBeamStrategy extends AbilityStrategy {
   }
 }
 
+export class MantisBladesStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = pokemon.stars === 1 ? 30 : pokemon.stars === 2 ? 60 : 120
+
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.PHYSICAL,
+      pokemon,
+      crit,
+      true
+    )
+
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit,
+      true
+    )
+
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.TRUE,
+      pokemon,
+      crit,
+      true
+    )
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -7963,5 +8003,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ACCELEROCK]: new AccelerockStrategy(),
   [Ability.PETAL_BLIZZARD]: new PetalBlizzardStrategy(),
   [Ability.SUNSTEEL_STRIKE]: new SunsteelStrikeStrategy(),
-  [Ability.MOONGEIST_BEAM]: new MoongeistBeamStrategy()
+  [Ability.MOONGEIST_BEAM]: new MoongeistBeamStrategy(),
+  [Ability.MANTIS_BLADES]: new MantisBladesStrategy()
 }

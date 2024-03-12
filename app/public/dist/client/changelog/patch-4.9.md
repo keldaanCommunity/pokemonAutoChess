@@ -12,6 +12,9 @@
 - Cosmoem
 - Solgaleo
 - Lunala
+- Sewaddle
+- Swadloon
+- Leavanny
 
 # Changes to Pokemon & Abilities
 

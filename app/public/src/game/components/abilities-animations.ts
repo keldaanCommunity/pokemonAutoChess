@@ -816,6 +816,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
+    case Ability.MANTIS_BLADES:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
     case Ability.PSYCHIC_FANGS:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
@@ -1888,18 +1892,22 @@ export function displayAbility(
       break
 
     case "FLYING_SKYDIVE":
-      const startCoords = transformAttackCoordinate(targetX, 9, false)
-      const specialProjectile = addAbilitySprite(skill, startCoords).setScale(1)
-      scene.tweens.add({
-        targets: specialProjectile,
-        x: coordinatesTarget[0],
-        y: coordinatesTarget[1],
-        ease: "linear",
-        duration: 500,
-        onComplete: () => {
-          specialProjectile.destroy()
-        }
-      })
+      {
+        const startCoords = transformAttackCoordinate(targetX, 9, false)
+        const specialProjectile = addAbilitySprite(skill, startCoords).setScale(
+          1
+        )
+        scene.tweens.add({
+          targets: specialProjectile,
+          x: coordinatesTarget[0],
+          y: coordinatesTarget[1],
+          ease: "linear",
+          duration: 500,
+          onComplete: () => {
+            specialProjectile.destroy()
+          }
+        })
+      }
       break
 
     default:
