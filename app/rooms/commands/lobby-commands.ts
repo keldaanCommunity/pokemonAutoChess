@@ -634,7 +634,7 @@ export class BuyEmotionCommand extends Command<
                 uPokemonConfig.emotions.push(emotion)
               }
 
-              uPokemonConfig.dust -= cost
+              uPokemonConfig.dust = pokemonConfig.dust
               uPokemonConfig.selectedEmotion = emotion
               uPokemonConfig.selectedShiny = shiny
               u.save()
