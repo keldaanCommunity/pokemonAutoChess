@@ -1645,8 +1645,8 @@ export class PetalDanceStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit, true)
 
-    let damage = [20, 30, 50][pokemon.stars - 1] ?? 50
-    let count = [3, 4, 5][pokemon.stars - 1] ?? 5
+    const damage = [20, 30, 50][pokemon.stars - 1] ?? 50
+    const count = [3, 4, 5][pokemon.stars - 1] ?? 5
 
     const enemies = board.cells.filter(
       (p) => p && p.team !== pokemon.team
