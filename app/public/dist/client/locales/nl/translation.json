@@ -830,7 +830,7 @@
     "GRASS_WHISTLE": "Pas de SLEEP status toe op [1,2,4] vijandelijke Pokémon voor 2 seconden",
     "TRI_ATTACK": "Richt [30,50,70,SP] SPECIAL aan. Kan het doelwit BURN, FREEZE of PARALYSIS",
     "ECHO": "Breng [3,6,9,SP] SPECIAL toe aan alle vijandelijke Pokémon. Elke keer als de gebruiker deze vaardigheid gebruikt gaat de schade omhoog met [3,6,9,SP]",
-    "PETAL_DANCE": "Deel [20,30,50,SP] SPECIAL uit aan [3,4,5] vijandige Pokémon",
+    "PETAL_DANCE": "Deel [20,30,50,SP] SPECIAL uit aan de [3,4,5] dichtstbijzijnde vijanden",
     "HYPER_VOICE": "Breng [40,80,200,SP] SPECIAL toe aan alle vijandelijke Pokémon in dezelfde kolom als de gebruiker en maak ze CONFUSION for [1,2,3] seconds",
     "SHADOW_CLONE": "Spawnt een kloon met [50,SP]% van de maximale HP en geeft hem een van je voorwerpen",
     "VOLT_SWITCH": "Ren naar de achterkant van het vijandelijke team en breng [30,60,120,SP] SPECIAL toe aan alle geraakte vijandelijke Pokémon",

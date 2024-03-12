@@ -1050,7 +1050,7 @@
     "GRASS_WHISTLE": "SLEEP [1,2,4] ennemis pendant 2 secondes",
     "TRI_ATTACK": "Inflige [30,50,70,SP] SPECIAL. Inflige BURN, FREEZE ou PARALYSIS à la cible.",
     "ECHO": "Inflige [3,6,9,SP] SPECIAL à l'équipe ennemie, augmentant de [3,6,9,SP] chaque fois que le Pokémon utilise son talent",
-    "PETAL_DANCE": "Inflige [20,30,50,SP] SPECIAL à [3,4,5] Pokémon ennemis",
+    "PETAL_DANCE": "Inflige [20,30,50,SP] SPECIAL aux [3,4,5] ennemis les plus proches",
     "HYPER_VOICE": "Inflige [40,80,200,SP] SPECIAL sur une ligne, laissant les Pokémon touchés CONFUSION pendant [1,2,3] secondes",
     "SHADOW_CLONE": "Crée un clone avec [50,SP]% de HP max et lui donne un des items portés",
     "VOLT_SWITCH": "Traverse les défenses ennemis, infligeant [30,60,120,SP] SPECIAL",

@@ -4538,7 +4538,7 @@ export class Moltres extends Pokemon {
 }
 
 export class Pinsir extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.HUMAN])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.BUG])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 190
@@ -8484,7 +8484,7 @@ export class Starmie extends Pokemon {
   stars = 2
   hp = 180
   atk = 20
-  def = 2
+  def = 4
   speDef = 6
   maxPP = 90
   range = 2
@@ -8627,7 +8627,7 @@ export class Dreepy extends Pokemon {
   atk = 5
   def = 3
   speDef = 3
-  maxPP = 80
+  maxPP = 100
   range = 2
   skill = Ability.DRAGON_DARTS
   passive = Passive.HATCH
@@ -8644,7 +8644,7 @@ export class Drakloak extends Pokemon {
   atk = 12
   def = 3
   speDef = 3
-  maxPP = 80
+  maxPP = 100
   range = 2
   skill = Ability.DRAGON_DARTS
   passive = Passive.HATCH
@@ -8659,7 +8659,7 @@ export class Dragapult extends Pokemon {
   atk = 22
   def = 3
   speDef = 3
-  maxPP = 80
+  maxPP = 100
   range = 2
   skill = Ability.DRAGON_DARTS
   attackSprite = AttackSprite.FIRE_RANGE
@@ -9028,7 +9028,7 @@ export class Woobat extends Pokemon {
   atk = 5
   def = 1
   speDef = 1
-  maxPP = 90
+  maxPP = 80
   range = 3
   skill = Ability.ATTRACT
   additional = true
@@ -9047,7 +9047,7 @@ export class Swoobat extends Pokemon {
   atk = 12
   def = 2
   speDef = 2
-  maxPP = 90
+  maxPP = 80
   range = 3
   skill = Ability.ATTRACT
   additional = true
