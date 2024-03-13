@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { GameUser, IGameUser } from "../../../models/colyseus-models/game-user"
 import { IBot } from "../../../models/mongo-models/bot-v2"
 import { IChatV2 } from "../../../types"
-import { Dungeon } from "../../../types/Config"
+import { DungeonPMDO } from "../../../types/Config"
 import { GameMode } from "../../../types/enum/Game"
 
 interface IUserPreparationState {
@@ -14,7 +14,7 @@ interface IUserPreparationState {
   name: string
   password: string | null
   noElo: boolean
-  selectedMap: Dungeon | "random"
+  selectedMap: DungeonPMDO | "random"
   user: GameUser | undefined
   botsList: IBot[] | null
   gameMode: GameMode
@@ -85,7 +85,7 @@ export const preparationSlice = createSlice({
     setGameMode: (state, action: PayloadAction<GameMode>) => {
       state.gameMode = action.payload
     },
-    setSelectedMap: (state, action: PayloadAction<Dungeon | "random">) => {
+    setSelectedMap: (state, action: PayloadAction<DungeonPMDO | "random">) => {
       state.selectedMap = action.payload
     },
     leavePreparation: () => initialState,

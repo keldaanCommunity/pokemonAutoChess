@@ -8,7 +8,7 @@ import BannedUser from "../models/mongo-models/banned-user"
 import { IBot } from "../models/mongo-models/bot-v2"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import { IPreparationMetadata, Transfer } from "../types"
-import { EloRank, MAX_PLAYERS_PER_GAME } from "../types/Config"
+import { DungeonPMDO, EloRank, MAX_PLAYERS_PER_GAME } from "../types/Config"
 import { BotDifficulty, GameMode } from "../types/enum/Game"
 import { logger } from "../utils/logger"
 import { cleanProfanity } from "../utils/profanity-filter"
@@ -187,15 +187,18 @@ export default class PreparationRoom extends Room<PreparationState> {
       }
     })
 
-    this.onMessage(Transfer.SELECT_TILEMAP, (client, message) => {
-      try {
-        if (client.auth?.uid === this.state.ownerId) {
-          this.state.selectedMap = message
+    this.onMessage(
+      Transfer.SELECT_TILEMAP,
+      (client, message: DungeonPMDO | "random") => {
+        try {
+          if (client.auth?.uid === this.state.ownerId) {
+            this.state.selectedMap = message
+          }
+        } catch (error) {
+          logger.error(error)
         }
-      } catch (error) {
-        logger.error(error)
       }
-    })
+    )
 
     this.onMessage(Transfer.GAME_START_REQUEST, (client) => {
       try {

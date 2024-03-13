@@ -14,9 +14,9 @@ export function MapSelectModal(props: {
   const { t } = useTranslation()
   const maps = Object.keys(DungeonPMDO).sort((a, b) =>
     (t("map." + a) as string).localeCompare(t("map." + b))
-  )
+  ) as DungeonPMDO[]
 
-  function selectMap(map: string) {
+  function selectMap(map: DungeonPMDO | "random") {
     dispatch(selectTilemap(map))
     props.handleClose()
   }

@@ -13,6 +13,7 @@ import {
   Title,
   Transfer
 } from "../../../types"
+import { DungeonPMDO } from "../../../types/Config"
 import { BotDifficulty } from "../../../types/enum/Game"
 import { Item } from "../../../types/enum/Item"
 import { Language } from "../../../types/enum/Language"
@@ -167,7 +168,7 @@ export const networkSlice = createSlice({
     requestTilemap: (state) => {
       state.game?.send(Transfer.REQUEST_TILEMAP)
     },
-    selectTilemap: (state, action: PayloadAction<string>) => {
+    selectTilemap: (state, action: PayloadAction<DungeonPMDO | "random">) => {
       state.preparation?.send(Transfer.SELECT_TILEMAP, action.payload)
     },
     refreshClick: (state) => {
