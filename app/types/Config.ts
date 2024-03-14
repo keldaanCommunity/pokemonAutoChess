@@ -293,7 +293,8 @@ export const LegendaryShop = new Array<PkmProposition>(
   Pkm.TORNADUS,
   Pkm.THUNDURUS,
   Pkm.LANDORUS,
-  Pkm.ENAMORUS
+  Pkm.ENAMORUS,
+  Pkm.MAGEARNA
 )
 
 export const HatchList = new Array<Pkm>(

@@ -12347,6 +12347,25 @@ export class Lunala extends Pokemon {
   attackSprite = AttackSprite.STEEL_MELEE
 }
 
+export class Magearna extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.STEEL,
+    Synergy.FAIRY,
+    Synergy.ARTIFICIAL
+  ])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 300
+  atk = 25
+  def = 4
+  speDef = 8
+  maxPP = 100
+  range = 1
+  skill = Ability.FLEUR_CANNON
+  attackSprite = AttackSprite.FAIRY_MELEE
+  passive = Passive.SOUL_HEART
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (shiny: boolean, emotion: Emotion) => Pokemon
@@ -13086,5 +13105,6 @@ export const PokemonClasses: Record<
   [Pkm.COSMOG]: Cosmog,
   [Pkm.COSMOEM]: Cosmoem,
   [Pkm.SOLGALEO]: Solgaleo,
-  [Pkm.LUNALA]: Lunala
+  [Pkm.LUNALA]: Lunala,
+  [Pkm.MAGEARNA]: Magearna
 }

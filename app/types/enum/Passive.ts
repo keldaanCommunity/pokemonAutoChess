@@ -90,5 +90,6 @@ export enum Passive {
   LYCANROC = "LYCANROC",
   COSMOG = "COSMOG",
   COSMOEM = "COSMOEM",
-  SCYTHER = "SCYTHER"
+  SCYTHER = "SCYTHER",
+  SOUL_HEART = "SOUL_HEART"
 }

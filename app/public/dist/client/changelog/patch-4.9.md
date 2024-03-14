@@ -15,6 +15,7 @@
 - Sewaddle
 - Swadloon
 - Leavanny
+  Magearna
 
 # Changes to Pokemon & Abilities
 
