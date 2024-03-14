@@ -736,7 +736,8 @@ export enum Pkm {
   COSMOG = "COSMOG",
   COSMOEM = "COSMOEM",
   SOLGALEO = "SOLGALEO",
-  LUNALA = "LUNALA"
+  LUNALA = "LUNALA",
+  MAGEARNA = "MAGEARNA"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1475,7 +1476,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.COSMOG]: "0789",
   [Pkm.COSMOEM]: "0790",
   [Pkm.SOLGALEO]: "0791",
-  [Pkm.LUNALA]: "0792"
+  [Pkm.LUNALA]: "0792",
+  [Pkm.MAGEARNA]: "0801"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2214,7 +2216,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.COSMOG]: Pkm.COSMOG,
   [Pkm.COSMOEM]: Pkm.COSMOG,
   [Pkm.SOLGALEO]: Pkm.COSMOG,
-  [Pkm.LUNALA]: Pkm.COSMOG
+  [Pkm.LUNALA]: Pkm.COSMOG,
+  [Pkm.MAGEARNA]: Pkm.MAGEARNA
 }
 
 export enum PkmDuo {
@@ -3690,7 +3693,8 @@ export const AnimationConfig: {
   [Pkm.KROOKODILE]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Attack,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
   },
   [Pkm.SOLOSIS]: {
     attack: AnimationType.Attack,
@@ -6042,5 +6046,10 @@ export const AnimationConfig: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Charge,
     emote: AnimationType.Shoot
+  },
+  [Pkm.MAGEARNA]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
   }
 }

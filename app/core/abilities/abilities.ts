@@ -3998,6 +3998,31 @@ export class HurricaneStrategy extends AbilityStrategy {
   }
 }
 
+export class FleurCannonStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = 140
+    pokemon.addAbilityPower(-20)
+    effectInLine(board, pokemon, target, (targetInLine) => {
+      if (targetInLine != null && targetInLine.team !== pokemon.team) {
+        targetInLine.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
+    })
+  }
+}
+
 export class SandsearStormStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -8004,5 +8029,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.PETAL_BLIZZARD]: new PetalBlizzardStrategy(),
   [Ability.SUNSTEEL_STRIKE]: new SunsteelStrikeStrategy(),
   [Ability.MOONGEIST_BEAM]: new MoongeistBeamStrategy(),
-  [Ability.MANTIS_BLADES]: new MantisBladesStrategy()
+  [Ability.MANTIS_BLADES]: new MantisBladesStrategy(),
+  [Ability.FLEUR_CANNON]: new FleurCannonStrategy()
 }

@@ -518,6 +518,28 @@ export function displayAbility(
       break
     }
 
+    case Ability.FLEUR_CANNON: {
+      const [dx, dy] = OrientationVector[orientation]
+      const finalCoordinates = transformAttackCoordinate(
+        positionX + dx * 8,
+        positionY + dy * 8,
+        flip
+      )
+      const specialProjectile = addAbilitySprite(skill, coordinates).setScale(2)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: finalCoordinates[0],
+        y: finalCoordinates[1],
+        ease: "linear",
+        yoyo: false,
+        duration: 2000,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
     case Ability.SANDSEAR_STORM:
     case Ability.WILDBOLT_STORM:
     case Ability.BLEAKWIND_STORM:
