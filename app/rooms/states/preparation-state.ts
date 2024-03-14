@@ -1,6 +1,7 @@
 import { MapSchema, Schema, type } from "@colyseus/schema"
 import { GameUser } from "../../models/colyseus-models/game-user"
-import { DungeonPMDO, EloRank } from "../../types/Config"
+import { EloRank } from "../../types/Config"
+import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { GameMode } from "../../types/enum/Game"
 
 export interface IPreparationState {

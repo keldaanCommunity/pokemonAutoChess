@@ -1,6 +1,6 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import { DungeonPMDO } from "../../../../../types/Config"
+import { DungeonPMDO } from "../../../../../types/enum/Dungeon"
 import { useAppDispatch } from "../../../hooks"
 import { selectTilemap } from "../../../stores/NetworkStore"
 import { BasicModal } from "../modal/modal"

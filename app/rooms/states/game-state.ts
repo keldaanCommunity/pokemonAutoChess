@@ -16,11 +16,11 @@ import Shop from "../../models/shop"
 import {
   BOARD_HEIGHT,
   BOARD_WIDTH,
-  Dungeon,
-  DungeonPMDO,
   EloRank,
+  MusicByDungeon,
   StageDuration
 } from "../../types/Config"
+import { DungeonPMDO, DungeonMusic } from "../../types/enum/Dungeon"
 import { GamePhaseState, GameMode } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { PkmProposition } from "../../types/enum/Pokemon"
@@ -48,7 +48,7 @@ export default class GameState extends Schema {
   @type({ map: Simulation }) simulations = new MapSchema<Simulation>()
   @type("uint8") lightX = randomBetween(0, BOARD_WIDTH - 1)
   @type("uint8") lightY = randomBetween(1, BOARD_HEIGHT / 2)
-  @type("string") mapMusic: Dungeon
+  @type("string") mapMusic: DungeonMusic
   @type("string") specialGameRule: SpecialGameRule | null = null
 
   time = StageDuration[1] * 1000
@@ -84,7 +84,7 @@ export default class GameState extends Schema {
     this.gameMode = gameMode
     this.minRank = minRank
     this.mapName = this.id
-    this.mapMusic = pickRandomIn(Object.keys(Dungeon) as Dungeon[])
+    this.mapMusic = MusicByDungeon[this.id]
     this.weather = Weather.NEUTRAL
     this.tilemap = initTilemap(this.id)
     if (gameMode === GameMode.SCRIBBLE) {

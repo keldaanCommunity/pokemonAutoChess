@@ -13,7 +13,7 @@ import {
   Title,
   Transfer
 } from "../../../types"
-import { DungeonPMDO } from "../../../types/Config"
+import { DungeonPMDO } from "../../../types/enum/Dungeon"
 import { BotDifficulty } from "../../../types/enum/Game"
 import { Item } from "../../../types/enum/Item"
 import { Language } from "../../../types/enum/Language"

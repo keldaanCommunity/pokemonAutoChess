@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { GameUser, IGameUser } from "../../../models/colyseus-models/game-user"
 import { IBot } from "../../../models/mongo-models/bot-v2"
 import { IChatV2 } from "../../../types"
-import { DungeonPMDO } from "../../../types/Config"
+import { DungeonPMDO } from "../../../types/enum/Dungeon"
 import { GameMode } from "../../../types/enum/Game"
 
 interface IUserPreparationState {
