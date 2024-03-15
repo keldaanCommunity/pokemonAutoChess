@@ -10284,7 +10284,7 @@ export class Spectrier extends Pokemon {
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 280
-  atk = 25
+  atk = 30
   def = 5
   speDef = 10
   maxPP = 100
