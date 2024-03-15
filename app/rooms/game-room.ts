@@ -38,7 +38,6 @@ import {
 } from "../types"
 import {
   AdditionalPicksStages,
-  DungeonPMDO,
   EloRank,
   ExpPlace,
   LegendaryShop,
@@ -48,6 +47,7 @@ import {
 } from "../types/Config"
 import { GameMode, Rarity } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
+import { DungeonPMDO } from "../types/enum/Dungeon"
 import { Pkm, PkmDuos, PkmProposition } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
