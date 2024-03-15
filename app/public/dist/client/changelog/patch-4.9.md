@@ -60,5 +60,6 @@
 
 # Misc
 
+- Add more musics. Each map now has its own unique music.
 - Removed Ultraball ranked match
 - Add a chance to find Special rarity mons in boosters (except Unowns)
