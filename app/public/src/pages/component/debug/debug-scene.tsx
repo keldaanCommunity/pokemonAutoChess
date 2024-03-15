@@ -11,6 +11,7 @@ export default function DebugSceneContainer({
   pkm = Pkm.RATTATA,
   orientation = Orientation.DOWNLEFT,
   animationType = "Idle",
+  shiny,
   status,
   height = 100,
   width = 100
@@ -18,6 +19,7 @@ export default function DebugSceneContainer({
   pkm?: Pkm
   orientation?: Orientation
   animationType?: string
+  shiny: boolean
   status: Status | ""
   height?: number
   width?: number
@@ -35,8 +37,14 @@ export default function DebugSceneContainer({
 
   const onComplete = useCallback(() => {
     setLoaded(true)
-    debugScene.current?.updateSprite(pkm, orientation, animationType, status)
-  }, [animationType, orientation, pkm, status])
+    debugScene.current?.updateSprite(
+      pkm,
+      orientation,
+      animationType,
+      status,
+      shiny
+    )
+  }, [animationType, orientation, pkm, status, shiny])
 
   useEffect(() => {
     if (!initialized.current) {
@@ -66,9 +74,15 @@ export default function DebugSceneContainer({
 
   useEffect(() => {
     if (initialized.current === true && loaded === true) {
-      debugScene.current?.updateSprite(pkm, orientation, animationType, status)
+      debugScene.current?.updateSprite(
+        pkm,
+        orientation,
+        animationType,
+        status,
+        shiny
+      )
     }
-  }, [pkm, orientation, animationType, status, loaded])
+  }, [pkm, orientation, animationType, status, loaded, shiny])
 
   return (
     <div id="debug-scene">

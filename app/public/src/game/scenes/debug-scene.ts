@@ -59,7 +59,8 @@ export class DebugScene extends Phaser.Scene {
     pkm: Pkm,
     orientation: Orientation,
     animationType: string,
-    status: Status | ""
+    status: Status | "",
+    shiny: boolean
   ) {
     if (this.pokemon) {
       this.pokemon.destroy()
@@ -73,7 +74,7 @@ export class DebugScene extends Phaser.Scene {
       this,
       px,
       py,
-      PokemonFactory.createPokemonFromName(pkm),
+      PokemonFactory.createPokemonFromName(pkm, { selectedShiny: shiny }),
       "debug",
       false,
       false
