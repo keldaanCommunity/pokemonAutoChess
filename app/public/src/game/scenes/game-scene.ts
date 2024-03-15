@@ -316,7 +316,7 @@ export default class GameScene extends Scene {
           }
         })
       }
-      if (this.board) {
+      if (this.board && !pointer.rightButtonDown()) {
         this.board.closeTooltips()
       }
     })
