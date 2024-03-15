@@ -1288,7 +1288,7 @@
     "CHARGE_BEAM": "Fires a concentrated bundle of electricity that propagate to max 3 adjacent targets, dealing [15,30,60,SP] SPECIAL to each.",
     "POPULATION_BOMB": "Deals 10 SPECIAL [4,8,12,16,SP] times to the target",
     "SCREECH": "Reduce DEF of all adjacent enemies by [1,2,4,SP]",
-    "SAND_TOMB": "Deals [10,20,40,SP] SPECIAL, inflicting SILENCE and PARALYSIS for 3/5/8 seconds",
+    "SAND_TOMB": "Deals [10,20,40,SP] SPECIAL, inflicting SILENCE and PARALYSIS for [3,5,8] seconds",
     "WHIRLWIND": "Deals [40,80,120,SP] SPECIAL and make the target fly away",
     "EMPTY_LIGHT": "Spits poison directly at an enemy, inflicting [40,SP] SPECIAL and reducing its SPE_DEF by 3. The ability then rebounds on another Pokemon with a lower SPE_DEF. (5 bounces maximum)",
     "UNBOUND": "Unbinds itself to become Hoopa's true form and get a humongous amount of power",

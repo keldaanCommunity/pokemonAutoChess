@@ -1266,7 +1266,7 @@
     "CHARGE_BEAM": "Libère un arc électrique qui se propage jusqu'à max 3 cibles adjacentes, infligeant [15,30,60,SP] SPECIAL à chacune.",
     "POPULATION_BOMB": "Inflige [4,8,12,16,SP] fois 10 SPECIAL à la cible",
     "SCREECH": "Réduit la DEF de tous les ennemis adjacents de [1,2,4,SP]",
-    "SAND_TOMB": "Inflige [10,20,40,SP] SPECIAL ainsi que SILENCE and PARALYSIS pendant 3/5/8 secondes",
+    "SAND_TOMB": "Inflige [10,20,40,SP] SPECIAL ainsi que SILENCE and PARALYSIS pendant [3,5,8] secondes",
     "WHIRLWIND": "Inflige [40,80,120,SP] SPECIAL et envoie la cible voler au loin",
     "EMPTY_LIGHT": "Projette du poison sur l'ennemi, infligeant [40,SP] SPECIAL et réduisant sa SPE_DEF de 3. Le poison rebondit ensuite sur un autre pokémon avec une plus faible SPE_DEF (5 rebonds maximum)",
     "UNBOUND": "Se libère de ses chaînes pour devenir la vraie forme de Hoopa et gagner une grande puissance",

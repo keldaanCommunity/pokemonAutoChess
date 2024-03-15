@@ -1265,7 +1265,7 @@
     "CHARGE_BEAM": "Dispara abundante electricidad la cual se propaga hasta 3 objetivos adyacentes, causando [15,30,60,SP] de SPECIAL a cada uno.",
     "POPULATION_BOMB": "Inflige [4,8,12,16,SP] de SPECIAL 10 veces al objetivo",
     "SCREECH": "Reduce la DEF de todos los enemigos adyacentes en [1,2,4,SP]",
-    "SAND_TOMB": "Inflige [10,20,40,SP] de SPECIAL, causa SILENCE y PARALYSIS por 3/5/8 segndos",
+    "SAND_TOMB": "Inflige [10,20,40,SP] de SPECIAL, causa SILENCE y PARALYSIS por [3,5,8] segndos",
     "WHIRLWIND": "Inflige [40,80,120,SP] de SPECIAL y hace volar por los aires al objetivo",
     "EMPTY_LIGHT": "Arroja veneno al enemigo, infligiendo [40,SP] de SPECIAL y reduciendo su SPE_DEF por 3. La habilidad rebota en otro pokemon con una SPE_DEF menor. (5 bounces maximum)",
     "UNBOUND": "Se desata para transformarse en la verdadera forma de Hoopa and recibir una gran cantidad de poder",
