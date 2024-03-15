@@ -66,6 +66,14 @@ export default function SynergyDetailComponent(props: {
     )
     .map((p) => getPokemonData(p as Pkm))
 
+  const specials = PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
+    props.type
+  ].specialPokemons
+    .filter(
+      (p, i, arr) => arr.findIndex((x) => PkmFamily[x] === PkmFamily[p]) === i // remove duplicates of same family
+    )
+    .map((p) => getPokemonData(p as Pkm))
+
   return (
     <div style={{ maxWidth: "480px" }}>
       <div style={{ display: "flex", alignItems: "center" }}>
@@ -107,18 +115,23 @@ export default function SynergyDetailComponent(props: {
           <PokemonPortrait p={p} key={p.name} />
         ))}
       </div>
-      <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
+      <div style={{ display: "flex", flexWrap: "wrap", marginTop: "0.5em" }}>
         {additionals.map((p) => (
           <PokemonPortrait p={p} key={p.name} />
         ))}
       </div>
-      <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
+      <div style={{ display: "flex", flexWrap: "wrap", marginTop: "0.5em" }}>
         {uniques.map((p) => (
           <PokemonPortrait p={p} key={p.name} />
         ))}
       </div>
-      <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
+      <div style={{ display: "flex", flexWrap: "wrap", marginTop: "0.5em" }}>
         {legendaries.map((p) => (
+          <PokemonPortrait p={p} key={p.name} />
+        ))}
+      </div>
+      <div style={{ display: "flex", flexWrap: "wrap", marginTop: "0.5em" }}>
+        {specials.map((p) => (
           <PokemonPortrait p={p} key={p.name} />
         ))}
       </div>

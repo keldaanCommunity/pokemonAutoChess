@@ -15,21 +15,20 @@ const data: Partial<
       uniquePokemons: Pkm[]
       legendaryPokemons: Pkm[]
       additionalPokemons: Pkm[]
+      specialPokemons: Pkm[]
     }
   >
 > = {}
 
 precomputedPokemons.forEach((pokemon) => {
-  // ignore specials
-  if (pokemon.rarity === Rarity.SPECIAL) return
-
   pokemon.types.forEach((type: Synergy) => {
     if (type in data === false) {
       data[type] = {
         pokemons: [],
         uniquePokemons: [],
         legendaryPokemons: [],
-        additionalPokemons: []
+        additionalPokemons: [],
+        specialPokemons: []
       }
     }
 
@@ -37,6 +36,8 @@ precomputedPokemons.forEach((pokemon) => {
       data[type]!.uniquePokemons.push(pokemon.name)
     } else if (pokemon.rarity === Rarity.LEGENDARY) {
       data[type]!.legendaryPokemons.push(pokemon.name)
+    } else if (pokemon.rarity === Rarity.SPECIAL) {
+      data[type]!.specialPokemons.push(pokemon.name)
     } else if (pokemon.additional) {
       if (!data[type]!.additionalPokemons.includes(PkmFamily[pokemon.name])) {
         data[type]!.additionalPokemons.push(pokemon.name)
