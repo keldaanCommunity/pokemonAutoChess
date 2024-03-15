@@ -1,6 +1,7 @@
 import { MapSchema, Schema, type } from "@colyseus/schema"
 import { GameUser } from "../../models/colyseus-models/game-user"
-import { Dungeon, EloRank } from "../../types/Config"
+import { EloRank } from "../../types/Config"
+import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { GameMode } from "../../types/enum/Game"
 
 export interface IPreparationState {
@@ -9,7 +10,7 @@ export interface IPreparationState {
   ownerId: string
   ownerName: string
   name: string
-  selectedMap: Dungeon | "random"
+  selectedMap: DungeonPMDO | "random"
   minRank: EloRank | null
   gameMode: GameMode
 }
@@ -24,7 +25,7 @@ export default class PreparationState
   @type("string") ownerName: string
   @type("string") name: string
   @type("string") password: string | null
-  @type("string") selectedMap: Dungeon | "random"
+  @type("string") selectedMap: DungeonPMDO | "random"
   @type("string") minRank: EloRank | null
   @type("string") gameMode: GameMode = GameMode.NORMAL
   @type("boolean") noElo: boolean

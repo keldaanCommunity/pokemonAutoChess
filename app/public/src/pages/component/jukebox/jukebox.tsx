@@ -1,10 +1,10 @@
 import React, { Dispatch, SetStateAction, useState } from "react"
 import { Modal } from "react-bootstrap"
 import { useTranslation } from "react-i18next"
-import { Dungeon } from "../../../../../types/Config"
+import { DungeonMusic } from "../../../../../types/enum/Dungeon"
 import { preferences, savePreferences } from "../../../preferences"
 import { getGameScene } from "../../game"
-import { playMusic } from "../../utils/audio"
+import { playMusic, preloadMusic } from "../../utils/audio"
 import { cc } from "../../utils/jsx"
 
 import "./jukebox.css"
@@ -15,24 +15,22 @@ export default function Jukebox(props: {
 }) {
   const { t } = useTranslation()
 
-  const MUSICS: string[] = Object.values(Dungeon)
+  const MUSICS: DungeonMusic[] = Object.values(DungeonMusic)
 
-  const [music, setMusic] = useState<string>(
-    getGameScene()?.music?.key?.replace("music_", "") ?? ""
+  const [music, setMusic] = useState<DungeonMusic>(
+    getGameScene()?.music?.key?.replace("music_", "") as DungeonMusic
   )
   const [loading, setLoading] = useState<boolean>(false)
   const [volume, setVolume] = useState<number>(preferences.musicVolume)
 
-  function changeMusic(name: string) {
+  function changeMusic(name: DungeonMusic) {
     setMusic(name)
     const gameScene = getGameScene()
     if (gameScene) {
       gameScene.music?.destroy()
       setLoading(true)
       gameScene.load.reset()
-      gameScene.load.audio("music_" + name, [
-        `https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChessMusic/main/music/${name}.mp3`
-      ])
+      preloadMusic(gameScene, name)
       gameScene.load.once("complete", () => {
         playMusic(gameScene, name)
         setLoading(false)
@@ -76,7 +74,10 @@ export default function Jukebox(props: {
           </button>
         </p>
 
-        <select value={music} onChange={(e) => changeMusic(e.target.value)}>
+        <select
+          value={music}
+          onChange={(e) => changeMusic(e.target.value as DungeonMusic)}
+        >
           {MUSICS.map((m) => (
             <option key={m} value={m}>
               {m}
