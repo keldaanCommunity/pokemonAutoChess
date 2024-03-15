@@ -15,7 +15,13 @@ export default function ChatHistory(props: { source: string }) {
   const domRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (messages.length > 0 && domRef && domRef.current) {
+    if (
+      messages.length > 0 &&
+      domRef &&
+      domRef.current &&
+      domRef.current.scrollTop + domRef.current.clientHeight >=
+        domRef.current.scrollHeight - 200 // autoscroll only if not already scrolled up by a 200px margin
+    ) {
       domRef.current.scrollTop = domRef.current.scrollHeight
     }
   }, [messages.length])
