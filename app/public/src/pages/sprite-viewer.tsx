@@ -11,10 +11,12 @@ import { Pkm } from "../../../types/enum/Pokemon"
 import { Status } from "../../../types/enum/Status"
 
 import "./sprite-viewer.css"
+import { Checkbox } from "./component/checkbox/checkbox"
 
 export function SpriteDebug() {
   const navigate = useNavigate()
   const [pkm, setPkm] = useState<Pkm>(Pkm.RATTATA)
+  const [shiny, setShiny] = useState<boolean>(false)
   const [orientation, setOrientation] = useState<Orientation>(
     Orientation.DOWNLEFT
   )
@@ -41,7 +43,14 @@ export function SpriteDebug() {
                 }
               }}
             />
+            <Checkbox
+              checked={shiny}
+              onToggle={setShiny}
+              label={t("shiny")}
+              isDark
+            />
           </div>
+
           <div className="nes-container">
             <label htmlFor="sprite-viewer-orientation">Orientation</label>
             <select
@@ -99,6 +108,7 @@ export function SpriteDebug() {
             pkm={pkm}
             orientation={orientation}
             animationType={animationType}
+            shiny={shiny}
             status={status}
             width={1950}
             height={1000}

@@ -32,8 +32,12 @@
   display: block;
 }
 
-.sprite-viewer-toolbar label::after {
+.sprite-viewer-toolbar label:not(.checkbox-container)::after {
   content: ":";
+}
+
+.sprite-viewer-toolbar .checkbox-container .nes-checkbox + span::before {
+  top: 8px;
 }
 
 .sprite-viewer-sprite {
