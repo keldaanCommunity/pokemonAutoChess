@@ -143,7 +143,7 @@ export class DebugScene extends Phaser.Scene {
             layer.name,
             mapName + "/" + layer.name
           )!
-          map.createLayer(layer.name, tileset, 0, 0)!.setScale(2, 2)
+          map.createLayer(layer.name, tileset, 0, 0)?.setScale(2, 2)
         })
         ;(this.sys as any).animatedTiles.init(map)
         playMusic(this, MusicByDungeon[mapName])
