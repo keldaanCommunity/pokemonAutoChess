@@ -657,6 +657,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.items.has(Item.MAGMARIZER)) {
       this.addAttack(1)
+      target.status.triggerBurn(4000, target, this)
       this.count.magmarizerCount++
     }
 
