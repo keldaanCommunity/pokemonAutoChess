@@ -5529,7 +5529,7 @@ export class Uxie extends Pokemon {
   atk = 15
   def = 3
   speDef = 3
-  maxPP = 80
+  maxPP = 90
   range = 3
   skill = Ability.KNOWLEDGE_THIEF
   attackSprite = AttackSprite.PSYCHIC_RANGE
@@ -5690,9 +5690,9 @@ export class Jirachi extends Pokemon {
   atk = 30
   def = 5
   speDef = 5
-  maxPP = 60
+  maxPP = 100
   range = 3
-  skill = Ability.WISH
+  skill = Ability.DOOM_DESIRE
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -10284,7 +10284,7 @@ export class Spectrier extends Pokemon {
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 280
-  atk = 25
+  atk = 30
   def = 5
   speDef = 10
   maxPP = 100
@@ -11354,7 +11354,7 @@ export class MorpekoHangry extends Pokemon {
   speDef = 5
   maxPP = 50
   range = 1
-  skill = Ability.AURA_WHEEL_HANGRY
+  skill = Ability.AURA_WHEEL
   attackSprite = AttackSprite.ELECTRIC_MELEE
   passive = Passive.HUNGER_SWITCH
 }

@@ -1191,7 +1191,7 @@
     "STEEL_SURGE": "ATKの33%をTRUEとして与える",
     "STEEL_SPIKE": "ATKの66%をTRUEとして与える",
     "CORKSCREW_CRASH": "ATKの100%をTRUEとして与える",
-    "MAX_MELTDOWN": "ATKの150%をTRUEとして与える",
+    "MAX_MELTDOWN": "ATKの140%をTRUEとして与える",
     "BAD_DREAMS": "最も高いHP+SHIELDを持つ相手ユニットはその30%を失い、8秒間FLINCH状態になる。",
     "PHANTOM_FORCE": "また、ATKが最も高い相手ユニットはその30%を失い、8秒間PARALYSISになる。",
     "SHADOW_TAG": "また、APが最も高い相手ユニットは30%を失い、8秒間SILENCEになる。",
