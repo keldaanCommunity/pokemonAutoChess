@@ -851,7 +851,7 @@
     "THUNDER": "[30,60,120,SP] SPECIALを与える単一ターゲットダメージ。",
     "HYDRO_PUMP": "対象の後ろ一列の敵全員に[25,50,100,SP]のSPECIALを与える範囲攻撃。",
     "DRACO_METEOR": "敵全体に範囲攻撃[50,SP]SPECIAL",
-    "BLAZE_KICK": "[30,60,120,SP]SPECIALを扱うモノ対象。",
+    "BLAZE_KICK": "対象に[30,60,120,SP]のSPECIALとBURNを2秒間与える。すでにBURN状態の場合、+30%のダメージを与える。",
     "WISH": "味方ポケモン[1,2,3]匹のHPを[50,SP]回復",
     "CALM_MIND": "ポケモンの攻撃力を[100,SP]%アップ",
     "DEFENSE_CURL": "DEFとSPE_DEFを[3,6,12,SP]ポイントバフします",

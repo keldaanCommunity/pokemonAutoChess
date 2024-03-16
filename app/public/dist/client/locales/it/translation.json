@@ -851,7 +851,7 @@
     "THUNDER": "Danno mono bersaglio che infligge [30,60,120,SP] SPECIAL.",
     "HYDRO_PUMP": "Attacco ad area che infligge [25,50,100,SP] SPECIAL a tutti i nemici in linea dietro il bersaglio.",
     "DRACO_METEOR": "Attacco ad area che infligge [50 SP] SPECIAL a tutti i nemici",
-    "BLAZE_KICK": "Mono bersaglio che infligge [30,60,120,SP] SPECIAL.",
+    "BLAZE_KICK": "Infligge [30,60,120,SP] SPECIAL e BURN al bersaglio per 2 secondi. Se ha già BURN, infligge un +30% di danni.",
     "WISH": "Ripristina [50,SP] HP a [1,2,3] pokemon alleati",
     "CALM_MIND": "Potenzia l'ATK pokemon del [100,SP]%",
     "DEFENSE_CURL": "Aumenta DEF e SPE_DEF di [3,6,12,SP] punti",

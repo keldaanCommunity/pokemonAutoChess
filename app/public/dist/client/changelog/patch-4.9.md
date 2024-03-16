@@ -34,7 +34,7 @@
 - Nerf Dreepy line: PP ~~80~~ 100
 - Buff Starmie: Def ~~2~~ 4
 - Petal Dance (Budew) now always target the closest enemies instead of scanning board from top left corner
-- Torchic line is moving from Uncommon to Rare
+- Torchic line is moving from Uncommon to Rare. Buffed ability Blaze Kick.
 - Bagon line is moving from Rare to Uncommon
 
 # Changes to Synergies
