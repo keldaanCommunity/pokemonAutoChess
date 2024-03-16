@@ -7015,9 +7015,43 @@ export class CurseStrategy extends AbilityStrategy {
     enemies.sort((a, b) => (a.status.curse ? +1 : b.hp - a.hp))
     const enemyWithHighestHP = enemies[0]
     const curseDelay =
-      ([12000, 8000, 4000][pokemon.stars - 1] ?? 5000) *
+      ([12000, 8000, 4000][pokemon.stars - 1] ?? 4000) *
       (1 - (0.2 * pokemon.ap) / 100)
     enemyWithHighestHP.status.triggerCurse(curseDelay)
+  }
+}
+
+export class DoomDesireStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    setTimeout(() => {
+      if (target && target.life > 0) {
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: Ability.JUDGEMENT,
+          positionX: pokemon.positionX,
+          positionY: pokemon.positionY,
+          targetX: target.positionX,
+          targetY: target.positionY
+        })
+        target.handleSpecialDamage(
+          150,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit,
+          true
+        )
+      } else {
+        pokemon.addPP(40)
+      }
+    }, 2000)
   }
 }
 
@@ -8030,5 +8064,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SUNSTEEL_STRIKE]: new SunsteelStrikeStrategy(),
   [Ability.MOONGEIST_BEAM]: new MoongeistBeamStrategy(),
   [Ability.MANTIS_BLADES]: new MantisBladesStrategy(),
-  [Ability.FLEUR_CANNON]: new FleurCannonStrategy()
+  [Ability.FLEUR_CANNON]: new FleurCannonStrategy(),
+  [Ability.DOOM_DESIRE]: new DoomDesireStrategy()
 }

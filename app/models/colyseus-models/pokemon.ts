@@ -5690,9 +5690,9 @@ export class Jirachi extends Pokemon {
   atk = 30
   def = 5
   speDef = 5
-  maxPP = 60
+  maxPP = 100
   range = 3
-  skill = Ability.WISH
+  skill = Ability.DOOM_DESIRE
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 

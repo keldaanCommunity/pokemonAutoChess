@@ -35,6 +35,7 @@
 - Buff Starmie: Def ~~2~~ 4
 - Petal Dance (Budew) now always target the closest enemies instead of scanning board from top left corner
 - Buff Spectrier: Attack ~~25~~ 30
+- New ability for Jirachi: Doom Desire: After 2 seconds, deal 150 special damage to target. Regain 40 PP if target is KO.
 
 # Changes to Synergies
 
