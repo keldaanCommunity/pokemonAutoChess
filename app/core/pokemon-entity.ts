@@ -1068,9 +1068,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   // called after killing an opponent (does not proc if resurection)
   onKill({ target, board }: { target: PokemonEntity; board: Board }) {
-    if (this.passive === Passive.SOUL_HEART && this.pp < this.maxPP / 2) {
-      this.addPP(this.maxPP / 2 - this.pp)
-      this.addAbilityPower(30, false)
+    if (this.passive === Passive.SOUL_HEART) {
+      this.addPP(10)
+      this.addAbilityPower(10, false)
     }
 
     if (this.items.has(Item.AMULET_COIN) && this.player) {

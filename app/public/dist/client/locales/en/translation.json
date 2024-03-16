@@ -1344,7 +1344,7 @@
     "PETAL_BLIZZARD": "Deals [30,SP] SPECIAL to surounding enemies and gain 10% AP",
     "SUNSTEEL_STRIKE": "Jumps and lands in the middle of the enemy team with the power of a meteor, inflicting [100,SP] SPECIAL to adjacent enemies and BURN for 3 seconds",
     "MOONGEIST_BEAM": "Deal [100,SP] SPECIAL to all enemy Pokémon in a straight line and make them PARALYSIS for 3 seconds",
-    "FLEUR_CANNON": "Sends a devastating laser beam that inflicts [140,SP] SPECIAL on all enemies in the beam. Reduces the AP of the caster by 20"
+    "FLEUR_CANNON": "Sends a devastating laser beam that inflicts [120,SP] SPECIAL on all enemies in the beam. Reduces the AP of the caster by 20"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1852,7 +1852,7 @@
     "LYCANROC": "Lycanroc turns into night form during NIGHT and day form during SUN",
     "COSMOG": "$t(pkm.COSMOG) is feeding with the energy of the stars. Gain 10 permanent max HP every time you evolve a unit. Evolve after 10 times.",
     "COSMOEM": "$t(pkm.COSMOEM) is feeding with the energy of the stars. Gain 10 permanent max HP every time you evolve a unit. Evolve after 10 times into $t(pkm.SOLGALEO) if in the light spot, or $t(pkm.LUNALA) instead.",
-    "SOUL_HEART": "Restores half its PP and increases AP by 30 for each KO inflicted by the caster"
+    "SOUL_HEART": "Every time the caster gets a KO, gain 10 AP and 10 PP"
   },
   "stat": {
     "ATK": "Attack",

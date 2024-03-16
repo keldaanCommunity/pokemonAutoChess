@@ -4007,8 +4007,7 @@ export class FleurCannonStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = 140
-    pokemon.addAbilityPower(-20)
+    const damage = 120
     effectInLine(board, pokemon, target, (targetInLine) => {
       if (targetInLine != null && targetInLine.team !== pokemon.team) {
         targetInLine.handleSpecialDamage(
@@ -4020,6 +4019,7 @@ export class FleurCannonStrategy extends AbilityStrategy {
         )
       }
     })
+    pokemon.addAbilityPower(-20)
   }
 }
 
