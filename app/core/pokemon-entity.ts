@@ -84,7 +84,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   @type(Count) count: Count
   @type("uint8") critChance = DEFAULT_CRIT_CHANCE
   @type("float32") critDamage = DEFAULT_CRIT_DAMAGE
-  @type("uint16") ap = 0
+  @type("int16") ap = 0
   @type("uint16") healDone: number
   @type("string") emotion: Emotion
   cooldown = 500
@@ -375,7 +375,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   addAbilityPower(value: number, apBoost = false) {
     const boost = apBoost ? (value * this.ap) / 100 : 0
-    this.ap = min(0)(Math.round(this.ap + Math.round(value + boost)))
+    this.ap = min(-100)(Math.round(this.ap + Math.round(value + boost)))
   }
 
   addDefense(value: number, apBoost = false) {
@@ -1068,9 +1068,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   // called after killing an opponent (does not proc if resurection)
   onKill({ target, board }: { target: PokemonEntity; board: Board }) {
-    if (this.passive === Passive.SOUL_HEART && this.pp < this.maxPP / 2) {
-      this.addPP(this.maxPP / 2 - this.pp)
-      this.addAbilityPower(30, false)
+    if (this.passive === Passive.SOUL_HEART) {
+      this.addPP(10)
+      this.addAbilityPower(10, false)
     }
 
     if (this.items.has(Item.AMULET_COIN) && this.player) {

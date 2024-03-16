@@ -277,6 +277,7 @@
     "FISHIOUS_REND": "Fishious Rend",
     "RECOVER": "Recover",
     "CURSE": "Curse",
+    "DOOM_DESIRE": "Doom Desire",
     "TIME_TRAVEL": "Time Travel",
     "POLTERGEIST": "Poltergeist",
     "GOLD_RUSH": "Gold Rush",
@@ -297,7 +298,6 @@
     "BLEAKWIND_STORM": "Bleakwind Storm",
     "SPRINGTIDE_STORM": "Springtide Storm",
     "AURA_WHEEL": "Aura Wheel",
-    "AURA_WHEEL_HANGRY": "Aura Wheel",
     "LICK": "Lick",
     "FURY_SWIPES": "Fury Swipes",
     "TICKLE": "Tickle",
@@ -1288,7 +1288,7 @@
     "CHARGE_BEAM": "Fires a concentrated bundle of electricity that propagate to max 3 adjacent targets, dealing [15,30,60,SP] SPECIAL to each.",
     "POPULATION_BOMB": "Deals 10 SPECIAL [4,8,12,16,SP] times to the target",
     "SCREECH": "Reduce DEF of all adjacent enemies by [1,2,4,SP]",
-    "SAND_TOMB": "Deals [10,20,40,SP] SPECIAL, inflicting SILENCE and PARALYSIS for 3/5/8 seconds",
+    "SAND_TOMB": "Deals [10,20,40,SP] SPECIAL, inflicting SILENCE and PARALYSIS for [3,5,8] seconds",
     "WHIRLWIND": "Deals [40,80,120,SP] SPECIAL and make the target fly away",
     "EMPTY_LIGHT": "Spits poison directly at an enemy, inflicting [40,SP] SPECIAL and reducing its SPE_DEF by 3. The ability then rebounds on another Pokemon with a lower SPE_DEF. (5 bounces maximum)",
     "UNBOUND": "Unbinds itself to become Hoopa's true form and get a humongous amount of power",
@@ -1310,6 +1310,7 @@
     "FISHIOUS_REND": "Deals [80,SP] SPECIAL. Double damage if attacker has more ATK_SPEED than target.",
     "RECOVER": "Heal for [25,SP]% of max HP",
     "CURSE": "Inflicts CURSE to the enemy with highest HP that will KO after [12,8,4,SP=-0.2] seconds",
+    "DOOM_DESIRE": "After 2 seconds, deal [150,SP] SPECIAL to target. Regain 40 PP if target is KO.",
     "TIME_TRAVEL": "Go back in time to retrieve the lost health. All allies have their negative status cleared and are healed by [25,SP] HP.",
     "POLTERGEIST": "Deals [30,60,120,SP] SPECIAL + [20,SP] SPECIAL for each item held by the target ([40,SP] if item is ARTIFICIAL)",
     "GOLD_RUSH": "Deals  [20,SP] + your amount of GOLD as SPECIAL, then earn 2 GOLD",
@@ -1330,8 +1331,7 @@
     "WILDBOLT_STORM": "Thunderous tempest that strikes all enemies in a straight line, dealing [80,SP] SPECIAL and PARALYSIS for 4 seconds",
     "BLEAKWIND_STORM": "Savagely cold winds that strike all enemies in a straight line, dealing [80,SP] SPECIAL and FREEZE for 2 seconds",
     "SPRINGTIDE_STORM": "Fierce winds brimming with love and hate strike all enemies in a straight line, dealing [80,SP] SPECIAL and CHARM for 2 seconds",
-    "AURA_WHEEL": "Deals [60,SP] SPECIAL and switch to Hangry form",
-    "AURA_WHEEL_HANGRY": "Deals [60,SP] SPECIAL and switch to Normal form",
+    "AURA_WHEEL": "Deals [60,SP] SPECIAL and switch between Normal and Hangry form",
     "LICK": "Deals [30,60,120,SP] SPECIAL. The target is CONFUSION and PARALYSIS for 3 seconds",
     "FURY_SWIPES": "Deals [2,SP] to [5,SP] attacks as PHYSICAL",
     "TICKLE": "Reduce ATK and DEF of the [1,2] closest targets by [3,SP]",
@@ -1344,7 +1344,7 @@
     "PETAL_BLIZZARD": "Deals [30,SP] SPECIAL to surounding enemies and gain 10% AP",
     "SUNSTEEL_STRIKE": "Jumps and lands in the middle of the enemy team with the power of a meteor, inflicting [100,SP] SPECIAL to adjacent enemies and BURN for 3 seconds",
     "MOONGEIST_BEAM": "Deal [100,SP] SPECIAL to all enemy Pokémon in a straight line and make them PARALYSIS for 3 seconds",
-    "FLEUR_CANNON": "Sends a devastating laser beam that inflicts [140,SP] SPECIAL on all enemies in the beam. Reduces the AP of the caster by 20"
+    "FLEUR_CANNON": "Sends a devastating laser beam that inflicts [120,SP] SPECIAL on all enemies in the beam. Reduces the AP of the caster by 20"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1531,7 +1531,7 @@
     "STEEL_SURGE": "Deal 33% of ATK as TRUE",
     "STEEL_SPIKE": "Deal 66% of ATK as TRUE",
     "CORKSCREW_CRASH": "Deal 100% of ATK as TRUE",
-    "MAX_MELTDOWN": "Deal 150% of ATK as TRUE",
+    "MAX_MELTDOWN": "Deal 140% of ATK as TRUE",
     "BAD_DREAMS": "The enemy with the highest HP + SHIELD lose 30% of it and is FLINCH for 8 seconds",
     "PHANTOM_FORCE": "Also, the enemy with the highest ATK lose 30% of it and is PARALYSIS for 8 seconds",
     "SHADOW_TAG": "Also, the enemy with the highest AP lose 30% of it and is SILENCE for 8 seconds",
@@ -1852,7 +1852,7 @@
     "LYCANROC": "Lycanroc turns into night form during NIGHT and day form during SUN",
     "COSMOG": "$t(pkm.COSMOG) is feeding with the energy of the stars. Gain 10 permanent max HP every time you evolve a unit. Evolve after 10 times.",
     "COSMOEM": "$t(pkm.COSMOEM) is feeding with the energy of the stars. Gain 10 permanent max HP every time you evolve a unit. Evolve after 10 times into $t(pkm.SOLGALEO) if in the light spot, or $t(pkm.LUNALA) instead.",
-    "SOUL_HEART": "Restores half its PP and increases AP by 30 for each KO inflicted by the caster"
+    "SOUL_HEART": "Every time the caster gets a KO, gain 10 AP and 10 PP"
   },
   "stat": {
     "ATK": "Attack",
@@ -1981,7 +1981,7 @@
     "FLORA": "When the first FLORA pokemon is dead, a flower will rise from its grave...",
     "ROCK": "ROCK pokemons gain DEF and better resist to critical damage",
     "GHOST": "GHOST pokemons have 25% chance to SILENCE on hit and apply various curses on opponents at the start of the fight",
-    "FAIRY": "FAIRY pokemons, upon dealing or receiving a critical hit, unleash a shock inflicting SPECIAL on contact and CHARM for 2 seconds on attackers and distant targets",
+    "FAIRY": "FAIRY pokemons, upon dealing or receiving a critical hit, unleash a shock on contact and make attackers and distant targets CHARM for 2 seconds",
     "ICE": "ICE pokemons have a chance to FREEZE the enemy for 2 seconds after a hit and give SPE_DEF to the whole team",
     "FOSSIL": "On their first KO, FOSSIL pokemons come back to life with increased ATK",
     "SOUND": "SOUND pokemons emit a cry when they use their abilities, waking up allies asleep and giving them bonus stats",

@@ -3999,8 +3999,7 @@ export class FleurCannonStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = 140
-    pokemon.addAbilityPower(-20)
+    const damage = 120
     effectInLine(board, pokemon, target, (targetInLine) => {
       if (targetInLine != null && targetInLine.team !== pokemon.team) {
         targetInLine.handleSpecialDamage(
@@ -4012,6 +4011,7 @@ export class FleurCannonStrategy extends AbilityStrategy {
         )
       }
     })
+    pokemon.addAbilityPower(-20)
   }
 }
 
@@ -7007,9 +7007,43 @@ export class CurseStrategy extends AbilityStrategy {
     enemies.sort((a, b) => (a.status.curse ? +1 : b.hp - a.hp))
     const enemyWithHighestHP = enemies[0]
     const curseDelay =
-      ([12000, 8000, 4000][pokemon.stars - 1] ?? 5000) *
+      ([12000, 8000, 4000][pokemon.stars - 1] ?? 4000) *
       (1 - (0.2 * pokemon.ap) / 100)
     enemyWithHighestHP.status.triggerCurse(curseDelay)
+  }
+}
+
+export class DoomDesireStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    setTimeout(() => {
+      if (target && target.life > 0) {
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: Ability.JUDGEMENT,
+          positionX: pokemon.positionX,
+          positionY: pokemon.positionY,
+          targetX: target.positionX,
+          targetY: target.positionY
+        })
+        target.handleSpecialDamage(
+          150,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit,
+          true
+        )
+      } else {
+        pokemon.addPP(40)
+      }
+    }, 2000)
   }
 }
 
@@ -7324,6 +7358,7 @@ export class ShieldsUpStrategy extends AbilityStrategy {
 }
 
 export class AuraWheelStrategy extends AbilityStrategy {
+  copyable = false
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -7332,34 +7367,13 @@ export class AuraWheelStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    pokemon.name = Pkm.MORPEKO_HANGRY
-    pokemon.index = PkmIndex[Pkm.MORPEKO_HANGRY]
-    pokemon.skill = Ability.AURA_WHEEL_HANGRY
-
-    target.handleSpecialDamage(
-      60,
-      board,
-      AttackType.SPECIAL,
-      pokemon,
-      crit,
-      true
-    )
-  }
-}
-
-export class AuraWheelHangryStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    state: PokemonState,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
-    super.process(pokemon, state, board, target, crit)
-
-    pokemon.name = Pkm.MORPEKO
-    pokemon.index = PkmIndex[Pkm.MORPEKO]
-    pokemon.skill = Ability.AURA_WHEEL
+    if (pokemon.name === Pkm.MORPEKO) {
+      pokemon.name = Pkm.MORPEKO_HANGRY
+      pokemon.index = PkmIndex[Pkm.MORPEKO_HANGRY]
+    } else {
+      pokemon.name = Pkm.MORPEKO
+      pokemon.index = PkmIndex[Pkm.MORPEKO]
+    }
 
     target.handleSpecialDamage(
       60,
@@ -8008,7 +8022,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.BLEAKWIND_STORM]: new BleakwindStormStrategy(),
   [Ability.SPRINGTIDE_STORM]: new SpringtideStormStrategy(),
   [Ability.AURA_WHEEL]: new AuraWheelStrategy(),
-  [Ability.AURA_WHEEL_HANGRY]: new AuraWheelHangryStrategy(),
   [Ability.LICK]: new LickStrategy(),
   [Ability.FURY_SWIPES]: new FurySwipesStrategy(),
   [Ability.TICKLE]: new TickleStrategy(),
@@ -8022,5 +8035,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SUNSTEEL_STRIKE]: new SunsteelStrikeStrategy(),
   [Ability.MOONGEIST_BEAM]: new MoongeistBeamStrategy(),
   [Ability.MANTIS_BLADES]: new MantisBladesStrategy(),
-  [Ability.FLEUR_CANNON]: new FleurCannonStrategy()
+  [Ability.FLEUR_CANNON]: new FleurCannonStrategy(),
+  [Ability.DOOM_DESIRE]: new DoomDesireStrategy()
 }

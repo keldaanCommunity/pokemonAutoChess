@@ -650,7 +650,7 @@ export default class BattleManager {
               this.displayBoost(Stat.AP, pkm.positionX, pkm.positionY)
             pkm.ap = pokemon.ap
             if (pkm.detail && pkm.detail instanceof PokemonDetail) {
-              pkm.detail.ap.textContent = pokemon.ap.toString()
+              pkm.detail.updateValue(pkm.detail.ap, previousValue, value)
               pkm.detail.updateAbilityDescription(pkm.skill, pkm.stars, pkm.ap)
               if (pokemon.passive != Passive.NONE) {
                 pkm.detail.updatePassiveDescription(
