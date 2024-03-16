@@ -53,6 +53,8 @@
 
 # Gameplay
 
+- Ability Power can now go to negative values, down to -100% minimum, after a debuff from various abilities and effects in the game. Negative AP scales down the special damage and other scaled values for abilities.
+
 # UI
 
 - Add a visual feedback when hovering one of your pokemons to drag or sell

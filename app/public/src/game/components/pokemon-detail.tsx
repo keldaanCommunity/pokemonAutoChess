@@ -89,6 +89,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
 
     this.ap = document.createElement("p")
     this.ap.textContent = ap.toString()
+    this.ap.classList.toggle("negative", ap < 0)
 
     this.pp = document.createElement("p")
     this.pp.innerHTML = pp.toString()
@@ -200,6 +201,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
 
   updateValue(el: HTMLElement, previousValue: number, value: number) {
     el.textContent = value.toString()
+    el.classList.toggle("negative", value < 0)
   }
 
   updateAbilityDescription(skill: Ability, abilityTier: number, ap: number) {
