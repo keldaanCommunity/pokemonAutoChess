@@ -1533,7 +1533,7 @@
     "STEEL_SURGE": "Deal 33% of ATK as TRUE",
     "STEEL_SPIKE": "Deal 66% of ATK as TRUE",
     "CORKSCREW_CRASH": "Deal 100% of ATK as TRUE",
-    "MAX_MELTDOWN": "Deal 150% of ATK as TRUE",
+    "MAX_MELTDOWN": "Deal 140% of ATK as TRUE",
     "BAD_DREAMS": "The enemy with the highest HP + SHIELD lose 30% of it and is FLINCH for 8 seconds",
     "PHANTOM_FORCE": "Also, the enemy with the highest ATK lose 30% of it and is PARALYSIS for 8 seconds",
     "SHADOW_TAG": "Also, the enemy with the highest AP lose 30% of it and is SILENCE for 8 seconds",

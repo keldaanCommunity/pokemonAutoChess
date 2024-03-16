@@ -1207,7 +1207,7 @@
     "STEEL_SURGE": "Раздайте 33% от ATK като TRUE",
     "STEEL_SPIKE": "Раздаване на 66% от ATK като TRUE",
     "CORKSCREW_CRASH": "Раздайте 100% от ATK като TRUE",
-    "MAX_MELTDOWN": "Раздайте 150% от ATK като TRUE",
+    "MAX_MELTDOWN": "Раздайте 140% от ATK като TRUE",
     "BAD_DREAMS": "Противоположната единица с най-висок HP + SHIELD губи 30% от него и е FLINCH за 8 секунди.",
     "PHANTOM_FORCE": "Също така противниковата единица с най-висок ATK губи 30% от него и е PARALYSIS за 8 секунди",
     "SHADOW_TAG": "Също така, противниковата единица с най-висок AP губи 30% от него и е SILENCE за 8 секунди",

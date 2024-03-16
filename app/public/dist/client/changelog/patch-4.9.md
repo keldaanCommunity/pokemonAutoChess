@@ -40,6 +40,7 @@
 # Changes to Synergies
 
 - Nerf Normal : Shield ~~15/25/40/55~~ 15/25/35/50
+- Nerf Steel 8 Max Meltdown: ~~150~~ 140% true damage
 - Buff Oddish line: PP ~~100~~ 80
 - Buff Flower 6 ; new ability for Bellossom: Petal Blizzard ; Belossom HP ~~360~~ 300, Attack ~~27~~ 30, PP: ~~100~~ 10
 - Buff Fighting: after 10 hits blocked, throw the target away, destroying its shield. Added Fighting 8 synergy level.
