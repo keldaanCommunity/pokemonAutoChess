@@ -5529,7 +5529,7 @@ export class Uxie extends Pokemon {
   atk = 15
   def = 3
   speDef = 3
-  maxPP = 80
+  maxPP = 90
   range = 3
   skill = Ability.KNOWLEDGE_THIEF
   attackSprite = AttackSprite.PSYCHIC_RANGE

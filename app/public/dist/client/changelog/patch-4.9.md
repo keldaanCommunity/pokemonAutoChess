@@ -36,6 +36,7 @@
 - Petal Dance (Budew) now always target the closest enemies instead of scanning board from top left corner
 - Buff Spectrier: Attack ~~25~~ 30
 - New ability for Jirachi: Doom Desire: After 2 seconds, deal 150 special damage to target. Regain 40 PP if target is KO.
+- Uxie: PP ~~80~~ 90 to be in line with other lake guardians
 
 # Changes to Synergies
 
