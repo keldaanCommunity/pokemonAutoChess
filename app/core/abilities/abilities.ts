@@ -7366,6 +7366,7 @@ export class ShieldsUpStrategy extends AbilityStrategy {
 }
 
 export class AuraWheelStrategy extends AbilityStrategy {
+  copyable = false
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -7374,34 +7375,13 @@ export class AuraWheelStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    pokemon.name = Pkm.MORPEKO_HANGRY
-    pokemon.index = PkmIndex[Pkm.MORPEKO_HANGRY]
-    pokemon.skill = Ability.AURA_WHEEL_HANGRY
-
-    target.handleSpecialDamage(
-      60,
-      board,
-      AttackType.SPECIAL,
-      pokemon,
-      crit,
-      true
-    )
-  }
-}
-
-export class AuraWheelHangryStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    state: PokemonState,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
-    super.process(pokemon, state, board, target, crit)
-
-    pokemon.name = Pkm.MORPEKO
-    pokemon.index = PkmIndex[Pkm.MORPEKO]
-    pokemon.skill = Ability.AURA_WHEEL
+    if (pokemon.name === Pkm.MORPEKO) {
+      pokemon.name = Pkm.MORPEKO_HANGRY
+      pokemon.index = PkmIndex[Pkm.MORPEKO_HANGRY]
+    } else {
+      pokemon.name = Pkm.MORPEKO
+      pokemon.index = PkmIndex[Pkm.MORPEKO]
+    }
 
     target.handleSpecialDamage(
       60,
@@ -8050,7 +8030,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.BLEAKWIND_STORM]: new BleakwindStormStrategy(),
   [Ability.SPRINGTIDE_STORM]: new SpringtideStormStrategy(),
   [Ability.AURA_WHEEL]: new AuraWheelStrategy(),
-  [Ability.AURA_WHEEL_HANGRY]: new AuraWheelHangryStrategy(),
   [Ability.LICK]: new LickStrategy(),
   [Ability.FURY_SWIPES]: new FurySwipesStrategy(),
   [Ability.TICKLE]: new TickleStrategy(),

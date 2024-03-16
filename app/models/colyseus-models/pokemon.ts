@@ -11354,7 +11354,7 @@ export class MorpekoHangry extends Pokemon {
   speDef = 5
   maxPP = 50
   range = 1
-  skill = Ability.AURA_WHEEL_HANGRY
+  skill = Ability.AURA_WHEEL
   attackSprite = AttackSprite.ELECTRIC_MELEE
   passive = Passive.HUNGER_SWITCH
 }
