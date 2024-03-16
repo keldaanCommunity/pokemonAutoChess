@@ -84,7 +84,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   @type(Count) count: Count
   @type("uint8") critChance = DEFAULT_CRIT_CHANCE
   @type("float32") critDamage = DEFAULT_CRIT_DAMAGE
-  @type("uint16") ap = 0
+  @type("int16") ap = 0
   @type("uint16") healDone: number
   @type("string") emotion: Emotion
   cooldown = 500
@@ -375,7 +375,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   addAbilityPower(value: number, apBoost = false) {
     const boost = apBoost ? (value * this.ap) / 100 : 0
-    this.ap = min(0)(Math.round(this.ap + Math.round(value + boost)))
+    this.ap = min(-100)(Math.round(this.ap + Math.round(value + boost)))
   }
 
   addDefense(value: number, apBoost = false) {
