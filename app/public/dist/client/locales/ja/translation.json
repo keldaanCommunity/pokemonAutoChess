@@ -832,7 +832,7 @@
     "TRI_ATTACK": "[30,50,70,SP]の特殊ダメージを与える。ターゲットを BURN、FREEZE、PARALYSIS のいずれかにすることができます",
     "ECHO": "敵チームに[3,6,9,SP]のSPECIALを与え、ポケモンが能力を使うたびに[3,6,9,SP]ずつ増加します",
     "PETAL_DANCE": "最も近い敵[3,4,5]に[20,30,50,SP] SPECIALを与える",
-    "HYPER_VOICE": "連続で [40,80,200,SP] SPECIAL を与え、すべてのターゲットを [1,2,3] 秒間混乱状態にします",
+    "HYPER_VOICE": "ターゲットの列にいるすべての敵ポケモンに [30,60,150,SP] SPECIAL を与え、[1,2,3] 秒間 CONFUSION にする",
     "SHADOW_CLONE": "最大HPの[50,SP]%のクローンを生成し、所持しているアイテムを1つ与える。",
     "VOLT_SWITCH": "敵後衛に突進し[30,60,120,SP]SPECIALを与える",
     "LIQUIDATION": "[20,40,80,SP] SPECIALを与え、ターゲットからDEFを[1,2,4]削除します",

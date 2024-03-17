@@ -1075,7 +1075,7 @@
     "TRI_ATTACK": "Deal [30,50,70,SP] SPECIAL. Can either BURN, FREEZE or PARALYSIS the target",
     "ECHO": "Deal [3,6,9,SP] SPECIAL to all enemy Pokémon. Every time the user uses this ability, the damage increases by [3,6,9,SP]",
     "PETAL_DANCE": "Deal [20,30,50,SP] SPECIAL to the [3,4,5] closest enemies",
-    "HYPER_VOICE": "Deal [40,80,200,SP] SPECIAL to all enemy Pokémon in the same column as the user and make them CONFUSION for [1,2,3] seconds",
+    "HYPER_VOICE": "Deal [30,60,150,SP] SPECIAL to all enemy Pokémon in target's row and make them CONFUSION for [1,2,3] seconds",
     "SHADOW_CLONE": "Spawns a clone with [50,SP]% of max HP and give it one of your held items",
     "VOLT_SWITCH": "Dash into the enemy team's backline, dealing [30,60,120,SP] SPECIAL to all enemy Pokémon hit",
     "NUZZLE": "Dash to the farthest opponent, dealing [30,60,120,SP] SPECIAL and making it PARALYSIS for [3,4,5] seconds",
