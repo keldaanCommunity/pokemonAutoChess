@@ -34,6 +34,8 @@
 - Nerf Dreepy line: PP ~~80~~ 100
 - Buff Starmie: Def ~~2~~ 4
 - Petal Dance (Budew) now always target the closest enemies instead of scanning board from top left corner
+- Torchic line is moving from Uncommon to Rare. Buffed ability Blaze Kick.
+- Bagon line is moving from Rare to Uncommon
 - Buff Spectrier: Attack ~~25~~ 30
 - New ability for Jirachi: Doom Desire: After 2 seconds, deal 150 special damage to target. Regain 40 PP if target is KO.
 - Uxie: PP ~~80~~ 90 to be in line with other lake guardians

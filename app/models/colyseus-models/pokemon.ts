@@ -879,10 +879,10 @@ export class Seismitoad extends Pokemon {
 
 export class Bagon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.MONSTER])
-  rarity = Rarity.RARE
+  rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.SHELGON
-  hp = 90
+  hp = 70
   atk = 6
   def = 3
   speDef = 3
@@ -894,12 +894,12 @@ export class Bagon extends Pokemon {
 
 export class Shelgon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.MONSTER])
-  rarity = Rarity.RARE
+  rarity = Rarity.UNCOMMON
   stars = 2
   evolution = Pkm.SALAMENCE
-  hp = 150
-  atk = 15
-  def = 3
+  hp = 130
+  atk = 12
+  def = 5
   speDef = 3
   maxPP = 100
   range = 1
@@ -913,11 +913,11 @@ export class Salamence extends Pokemon {
     Synergy.MONSTER,
     Synergy.FLYING
   ])
-  rarity = Rarity.RARE
+  rarity = Rarity.UNCOMMON
   stars = 3
-  hp = 240
-  atk = 24
-  def = 3
+  hp = 210
+  atk = 22
+  def = 5
   speDef = 3
   maxPP = 100
   range = 1
@@ -3352,11 +3352,11 @@ export class Torchic extends Pokemon {
     Synergy.FIGHTING,
     Synergy.FLYING
   ])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.COMBUSKEN
-  hp = 60
-  atk = 5
+  hp = 80
+  atk = 6
   def = 3
   speDef = 3
   maxPP = 100
@@ -3371,13 +3371,13 @@ export class Combusken extends Pokemon {
     Synergy.FIGHTING,
     Synergy.FLYING
   ])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.RARE
   stars = 2
   evolution = Pkm.BLAZIKEN
-  hp = 120
-  atk = 9
-  def = 3
-  speDef = 3
+  hp = 150
+  atk = 12
+  def = 4
+  speDef = 4
   maxPP = 100
   range = 1
   skill = Ability.BLAZE_KICK
@@ -3390,12 +3390,12 @@ export class Blaziken extends Pokemon {
     Synergy.FIGHTING,
     Synergy.FLYING
   ])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.RARE
   stars = 3
-  hp = 210
-  atk = 20
-  def = 3
-  speDef = 3
+  hp = 240
+  atk = 24
+  def = 5
+  speDef = 5
   maxPP = 100
   range = 1
   skill = Ability.BLAZE_KICK

@@ -1017,7 +1017,7 @@
     "THUNDER": "Monozielschaden, der [30,60,120,SP] SPECIAL verursacht.",
     "HYDRO_PUMP": "Flächenangriff, der allen Feinden in einer Linie hinter dem Ziel [25,50,100,SP] SPECIAL zufügt.",
     "DRACO_METEOR": "Flächenangriff, der allen Feinden [50,SP] SPECIAL zufügt",
-    "BLAZE_KICK": "Monoziel, das [30,60,120,SP] SPECIAL austeilt.",
+    "BLAZE_KICK": "Verursacht [30,60,120,SP] SPECIAL und BURN am Ziel für 2 Sekunden. Wenn es bereits BURN hat, verursache +30% Schaden.",
     "WISH": "Stellt [50,SP] HP bei [1,2,3] verbündeten Pokémon wieder her",
     "CALM_MIND": "Erhöht den ATK des Pokémon um [100,SP]%.",
     "DEFENSE_CURL": "Buff DEF und SPE_DEF um [3,6,12,SP] Punkte",
