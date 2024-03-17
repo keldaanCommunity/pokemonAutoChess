@@ -7748,6 +7748,29 @@ export class MantisBladesStrategy extends AbilityStrategy {
   }
 }
 
+export class SpiritBreakStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit,
+      true
+    )
+    const apDebuff = -1 * Math.round(20 * (1 + pokemon.ap / 100))
+    target.addAbilityPower(apDebuff)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -8044,5 +8067,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.MOONGEIST_BEAM]: new MoongeistBeamStrategy(),
   [Ability.MANTIS_BLADES]: new MantisBladesStrategy(),
   [Ability.FLEUR_CANNON]: new FleurCannonStrategy(),
-  [Ability.DOOM_DESIRE]: new DoomDesireStrategy()
+  [Ability.DOOM_DESIRE]: new DoomDesireStrategy(),
+  [Ability.SPIRIT_BREAK]: new SpiritBreakStrategy()
 }

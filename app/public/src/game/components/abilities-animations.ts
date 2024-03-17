@@ -1805,6 +1805,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
+    case Ability.SPIRIT_BREAK:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
     case Ability.AURA_WHEEL: {
       const specialProjectile = addAbilitySprite(skill, coordinates).setScale(1)
       scene.tweens.add({
@@ -1818,7 +1822,7 @@ export function displayAbility(
       })
       break
     }
-    
+
     case Ability.PETAL_DANCE:
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
