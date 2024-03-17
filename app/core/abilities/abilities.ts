@@ -606,7 +606,7 @@ export class CorruptedNatureStrategy extends AbilityStrategy {
     } else if (pokemon.stars == 3) {
       damage = 80
     }
-    const cells = board.getAdjacentCells(target.positionX, target.positionY)
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
         cell.value.status.triggerWound(5000, cell.value, pokemon)
@@ -4521,7 +4521,7 @@ export class TripleKickStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const damage = 60
 
-    const cells = board.getAdjacentCells(target.positionX, target.positionY)
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
     let count = 0
     cells.forEach((cell) => {
       if (cell.value && pokemon.team !== cell.value.team) {
@@ -5391,7 +5391,7 @@ export class ShellSmashStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const damage = pokemon.stars === 1 ? 15 : 30
-    const cells = board.getAdjacentCells(target.positionX, target.positionY)
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
     cells.forEach((cell) => {
       if (cell && cell.value && cell.value.team !== pokemon.team) {
         cell.value.handleSpecialDamage(
