@@ -1070,7 +1070,7 @@
     "THUNDER": "Inflige [30,60,120,SP] SPECIAL à la cible",
     "HYDRO_PUMP": "Attaque à zone d'effet qui inflige [25,50,100,SP] SPECIAL à tous les ennemis en ligne derrière la cible.",
     "DRACO_METEOR": "Attaque à effet de zone qui inflige [50,SP] SPECIAL à tous les ennemis",
-    "BLAZE_KICK": "Inflige [30,60,120,SP] SPECIAL à la cible",
+    "BLAZE_KICK": "Inflige [30,60,120,SP] SPECIAL à la cible et BURN pendant 2 secondes. Si elle subit déjà BURN, inflige +30% de dégâts.",
     "WISH": "Restaure [50,SP] HP à [1,2,3] pokémons alliés",
     "CALM_MIND": "Augmente l'ATK de [100,SP] %",
     "DEFENSE_CURL": "Augmente la DEF et SPE_DEF de [3,6,12,SP] points",

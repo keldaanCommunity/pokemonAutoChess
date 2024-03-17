@@ -1095,7 +1095,7 @@
     "THUNDER": "Deal [30,60,120,SP] SPECIAL",
     "HYDRO_PUMP": "Deal [20,40,80,SP] SPECIAL to all enemy Pokémon behind the target",
     "DRACO_METEOR": "Deal [50,SP] SPECIAL to all enemy Pokémon",
-    "BLAZE_KICK": "Deal [30,60,120,SP] SPECIAL",
+    "BLAZE_KICK": "Deal [30,60,120,SP] SPECIAL and BURN the target for 2 seconds. If it already has BURN, deal +30% damage.",
     "WISH": "Restores [50,SP] HP to [1,2,3] allied Pokémon",
     "CALM_MIND": "Buff the user's ATK by [100,SP]%",
     "DEFENSE_CURL": "Buff the user's DEF and SPE_DEF by [3,6,12,SP]",
