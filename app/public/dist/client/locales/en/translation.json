@@ -309,7 +309,8 @@
     "PETAL_BLIZZARD": "Petal Blizzard",
     "SUNSTEEL_STRIKE": "Sunsteel Strike",
     "MOONGEIST_BEAM": "Moongeist Beam",
-    "FLEUR_CANNON": "Fleur Cannon"
+    "FLEUR_CANNON": "Fleur Cannon",
+    "SPIRIT_BREAK": "Spirit Break"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1049,7 +1050,10 @@
     "COSMOEM": "Cosmoem",
     "SOLGALEO": "Solgaleo",
     "LUNALA": "Lunala",
-    "MAGEARNA": "Magearna"
+    "MAGEARNA": "Magearna",
+    "IMPIDIMP": "Impidimp",
+    "MORGREM": "Morgrem",
+    "GRIMMSNARL": "Grimmsnarl"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1318,13 +1322,13 @@
     "CRUSH_GRIP": "The target is crushed with great force. The more HP the target has left, the greater the damage: between [20,SP] and [200,SP] PHYSICAL.",
     "AURASPHERE": "Exudes an aura and projects energy in a line, dealing [25,50,SP] SPECIAL and SILENCE every opponent hit for 3 seconds",
     "SKETCH": "Copies the ability and max PP of the ally on his left at the start of the fight",
-    "OVERDRIVE": "Deal [120,SP]% of ATK as SPECIAL within a 3-cell radius by twanging an electric guitar, causing a huge echo and strong vibration. The damage is reduced with the distance, 20% per cell.",
+    "OVERDRIVE": "Deals [120,SP]% of ATK as SPECIAL within a 3-cell radius by twanging an electric guitar, causing a huge echo and strong vibration. The damage is reduced with the distance, 20% per cell.",
     "LOVELY_KISS": "Kisses the enemy with a frightening expression. Puts the enemy SLEEP for [2,4,SP] seconds.",
     "TRANSFORM": "Takes the appearance and the statistics of its target (except HP)",
     "PSYCHIC_FANGS": "Inflicts [100,SP] PHYSICAL and removes all the target's ATK, DEF and SPE_DEF buffs",
     "SHED_TAIL": "Create a substitute and charge towards the ally with the fewest HP to give it [80, SP] SHIELD",
-    "NIGHT_SLASH": "Deal [15,30,60,SP] SPECIAL with a [30,60,90]% increased CRIT_CHANCE ratio",
-    "KOWTOW_CLEAVE": "Deal 150% ATK + [20,SP]% per fallen ally as TRUE. Can crit by default",
+    "NIGHT_SLASH": "Deals [15,30,60,SP] SPECIAL with a [30,60,90]% increased CRIT_CHANCE ratio",
+    "KOWTOW_CLEAVE": "Deals 150% ATK + [20,SP]% per fallen ally as TRUE. Can crit by default",
     "SHIELDS_DOWN": "Transform Minior to a random core form",
     "SHIELDS_UP": "Transform Minior to its meteor form",
     "SANDSEAR_STORM": "Searingly hot sand that strikes all enemies in a straight line, dealing [80,SP] SPECIAL and BURN for 4 seconds",
@@ -1339,12 +1343,13 @@
     "DETECT": "PROTECT adjacent allies for [0.5,SP] seconds mutiplied by the number of adjacent enemies",
     "SPACIAL_REND": "Reverse the position of the enemy team, then deals [100,SP] SPECIAL to all enemies in a row",
     "MULTI_ATTACK": "Inflicts [10,SP] SPECIAL to surounding enemies, multiplied by the synergy level of current $t(pkm.SILVALLY) form",
-    "STICKY_WEB": "Inflicts [20,35,70,SP] SPECIAL on the target and projects a web around it. Pokémon walking on the web are PARALYSIS for 2s",
+    "STICKY_WEB": "Inflicts [20,35,70,SP] SPECIAL on the target and projects a web around it. Pokémon walking on the web are PARALYSIS for 2 seconds.",
     "ACCELEROCK": "Jumps next to the farthest enemy and attack it immediately, dealing [100,SP]% of ATK as SPECIAL. In the process, lose up to [5,SP] DEF and gain 5% ATK_SPEED for each DEF point lost.",
     "PETAL_BLIZZARD": "Deals [30,SP] SPECIAL to surounding enemies and gain 10% AP",
     "SUNSTEEL_STRIKE": "Jumps and lands in the middle of the enemy team with the power of a meteor, inflicting [100,SP] SPECIAL to adjacent enemies and BURN for 3 seconds",
-    "MOONGEIST_BEAM": "Deal [100,SP] SPECIAL to all enemy Pokémon in a straight line and make them PARALYSIS for 3 seconds",
-    "FLEUR_CANNON": "Sends a devastating laser beam that inflicts [120,SP] SPECIAL on all enemies in the beam. Reduces the AP of the caster by 20"
+    "MOONGEIST_BEAM": "Deals [100,SP] SPECIAL to all enemy Pokémon in a straight line and make them PARALYSIS for 3 seconds",
+    "FLEUR_CANNON": "Sends a devastating laser beam that inflicts [120,SP] SPECIAL on all enemies in the beam. Reduces the AP of the caster by 20",
+    "SPIRIT_BREAK": "Deals [20,40,80,SP] SPECIAL and lowers the target's AP by [20,SP]"
   },
   "effect": {
     "INGRAIN": "Ingrain",

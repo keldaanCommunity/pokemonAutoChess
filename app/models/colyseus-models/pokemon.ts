@@ -12366,6 +12366,50 @@ export class Magearna extends Pokemon {
   passive = Passive.SOUL_HEART
 }
 
+export class Impidimp extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FAIRY, Synergy.HUMAN])
+  rarity = Rarity.COMMON
+  stars = 1
+  evolution = Pkm.MORGREM
+  hp = 60
+  atk = 6
+  def = 1
+  speDef = 1
+  maxPP = 70
+  range = 1
+  skill = Ability.SPIRIT_BREAK
+  attackSprite = AttackSprite.DARK_MELEE
+}
+
+export class Morgrem extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FAIRY, Synergy.HUMAN])
+  rarity = Rarity.COMMON
+  stars = 2
+  evolution = Pkm.GRIMMSNARL
+  hp = 110
+  atk = 11
+  def = 2
+  speDef = 2
+  maxPP = 70
+  range = 1
+  skill = Ability.SPIRIT_BREAK
+  attackSprite = AttackSprite.DARK_MELEE
+}
+
+export class Grimmsnarl extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FAIRY, Synergy.HUMAN])
+  rarity = Rarity.COMMON
+  stars = 3
+  hp = 200
+  atk = 20
+  def = 3
+  speDef = 3
+  maxPP = 70
+  range = 1
+  skill = Ability.SPIRIT_BREAK
+  attackSprite = AttackSprite.DARK_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (shiny: boolean, emotion: Emotion) => Pokemon
@@ -13106,5 +13150,8 @@ export const PokemonClasses: Record<
   [Pkm.COSMOEM]: Cosmoem,
   [Pkm.SOLGALEO]: Solgaleo,
   [Pkm.LUNALA]: Lunala,
-  [Pkm.MAGEARNA]: Magearna
+  [Pkm.MAGEARNA]: Magearna,
+  [Pkm.IMPIDIMP]: Impidimp,
+  [Pkm.MORGREM]: Morgrem,
+  [Pkm.GRIMMSNARL]: Grimmsnarl
 }
