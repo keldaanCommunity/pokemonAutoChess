@@ -43,6 +43,8 @@
 - New ability for Jirachi: Doom Desire: After 2 seconds, deal 150 special damage to target. Regain 40 PP if target is KO.
 - Uxie: PP ~~80~~ 90 to be in line with other lake guardians
 - Scyther is now Unique, and require a Metal Coat to evolve
+- Torkoal: PP ~~105~~ 110
+- Nerf Altaria: HP ~~200~~ 190, nerf Hyper Voice damage: ~~40/80/200~~ 30/60/150, fixed ability description
 
 # Changes to Synergies
 
@@ -54,6 +56,7 @@
 - Buff Fairy: now charm melee attacker when receiving a critical hit
 - Buff Flying 4: Protect duration ~~1.5~~ 2 seconds
 - Buff Flying 8: Flying pokémon now perform skydive attacks, causing Paralysis for 2 seconds on takeoff, and 200% PHYSICAL ATK on landing on their target
+- Buff Human: ~~10/25/50~~ 15/30/60% of damage done as heal
 
 # Changes to Items
 
