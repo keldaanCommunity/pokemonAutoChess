@@ -1498,7 +1498,7 @@
     "LINK_CABLE": "Obtén +10 % de ATK base, AP y HP máximo como SHIELD por objeto retenido. Consigue otro objeto artificial.",
     "GOOGLE_SPECS": "Obtén +20 % de ATK base, AP y HP máximo como SHIELD por objeto retenido. Consigue otro objeto artificial.",
     "HATCHER": "25% de probabilidad por derrota consecutiva de obtener un huevo, máximo 1 huevo en el banquillo",
-    "BREEDER": "Consigue un huevo tras cada derrota contra un jugador, 2 huevos como máximo en el banquillo",
+    "BREEDER": "Consigue un huevo tras cada derrota contra un jugador, no hay límite de huevos en el banquillo",
     "GOLDEN_EGGS": "Consigue un Huevo dorado después de cada derrota contra un jugador, que se puede vender por 10 GOLD",
     "TELEPORT_NEXT_ATTACK": "El próximo ataque ofrecerá SPECIAL adicional",
     "GRASSY_TERRAIN": "Aumenta el daño infligido en un 20 % (solo hierba)",

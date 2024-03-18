@@ -1525,7 +1525,7 @@
     "LINK_CABLE": "Gagne +10% d'ATK de base, d'AP et de HP max en tant que SHIELD par objet détenu. Obtenez un autre objet artificiel.",
     "GOOGLE_SPECS": "Gagne +20% d'ATK de base, d'AP et de HP max en tant que SHIELD par objet détenu. Obtenez un autre objet artificiel.",
     "HATCHER": "25 % de chance par défaite consécutive d'obtenir un Œuf, 1 œuf max sur le banc",
-    "BREEDER": "Obtenez un œuf après chaque défaite contre un joueur, 2 œufs max sur le banc",
+    "BREEDER": "Obtenez un œuf après chaque défaite contre un joueur, pas de limite d'œufs sur le banc",
     "GOLDEN_EGGS": "Obtenez un œuf shiny après chaque défaite, pouvant être vendu pour 10 GOLD",
     "TELEPORT_NEXT_ATTACK": "La prochaine attaque infligera des SPECIAL supplémentaires",
     "GRASSY_TERRAIN": "Augmente les dégâts infligés de 20% (GRASS uniquement)",

@@ -1189,7 +1189,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             player.effects.has(Effect.GOLDEN_EGGS))
         ) {
           eggChance = 1
-          nbMaxEggs = player.effects.has(Effect.GOLDEN_EGGS) ? 8 : 2
+          nbMaxEggs = 8
         }
         if (
           player.getLastBattleResult() == BattleResult.DEFEAT &&
