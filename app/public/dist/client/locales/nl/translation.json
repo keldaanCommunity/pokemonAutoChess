@@ -856,7 +856,7 @@
     "DEFENSE_CURL": "Verbeter de gebruiker's DEF en SPE_DEF met [3,6,12,SP]",
     "METRONOME": "Gebruik een willekeurige vaardigheid",
     "SOAK": "Breng [20,40,80,SP] SPECIAL aan het doelwit en herstelt 10 PP voor alle vriendelijke Pokémon",
-    "ORIGIN_PULSE": "Een golf beweegt horizontaal over het slagveld en brengt [120,SP] SPECIAL toe aan alle geraakte vijandelijke Pokémon",
+    "ORIGIN_PULSE": "Een golf beweegt horizontaal over het slagveld en brengt [100,SP] SPECIAL toe aan alle geraakte vijandelijke Pokémon",
     "SEED_FLARE": "Shaymin zendt een schokgolf uit, brengt [30,SP] SPECIAL toe aan alle vijandelijke Pokémon en verlaagt hun SPE_DEF met 2",
     "IRON_TAIL": "Brengt [20,40,80,SP] SPECIAL toe aan het doelwit en verbeterd de gebruiker's DEF met [1,3,5]",
     "BLAST_BURN": "Brengt [30,60,120,SP] SPECIAL toe in een gebied rond de gebruiker",

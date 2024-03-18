@@ -43,6 +43,7 @@
 - New ability for Jirachi: Doom Desire: After 2 seconds, deal 150 special damage to target. Regain 40 PP if target is KO.
 - Uxie: PP ~~80~~ 90 to be in line with other lake guardians
 - Scyther is now Unique, and require a Metal Coat to evolve
+- Nerf Origin Pulse (Kyogre): ~~120~~ 100 special damage
 
 # Changes to Synergies
 

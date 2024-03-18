@@ -1102,7 +1102,7 @@
     "IRON_DEFENSE": "Give [20,40,80,SP] SHIELD to allies on the same row",
     "METRONOME": "Use a random ability",
     "SOAK": "Deal [20,40,80,SP] SPECIAL to the target and restore 10 PP to all allied Pokémon",
-    "ORIGIN_PULSE": "A wave travels horizontally across the battlefield dealing [120,SP] SPECIAL to all enemy Pokémon hit",
+    "ORIGIN_PULSE": "A wave travels horizontally across the battlefield dealing [100,SP] SPECIAL to all enemy Pokémon hit",
     "SEED_FLARE": "Shaymin's body emits a shockwave, dealing [30,SP] SPECIAL to all enemy Pokémon, and decreasing their SPE_DEF by 2",
     "IRON_TAIL": "Deal [20,40,80,SP] SPECIAL to the target and buff the user's DEF by [1,3,5]",
     "BLAST_BURN": "Deal [30,60,120,SP] SPECIAL in an area around the user",

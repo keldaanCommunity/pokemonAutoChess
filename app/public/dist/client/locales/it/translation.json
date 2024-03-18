@@ -857,7 +857,7 @@
     "DEFENSE_CURL": "Aumenta DEF e SPE_DEF di [3,6,12,SP] punti",
     "METRONOME": "Spara una capacità casuale",
     "SOAK": "Infligge [20,40,80,SP] SPECIAL e ripristina 10 PP ai pokemon amici",
-    "ORIGIN_PULSE": "Un'onda viaggia orizzontalmente attraverso il campo di battaglia facendo [120,SP] SPECIAL",
+    "ORIGIN_PULSE": "Un'onda viaggia orizzontalmente attraverso il campo di battaglia facendo [100,SP] SPECIAL",
     "SEED_FLARE": "Il corpo di Shaymin emette un'onda d'urto, infliggendo [30,SP] SPECIAL a tutti i nemici e diminuendo la loro SPE_DEF di 2",
     "IRON_TAIL": "Attacco di danno a bersaglio singolo che infligge [20,40,80,SP] SPECIAL. Buff DEF di [1,3,5] punti",
     "BLAST_BURN": "Attacco ad area che infligge [30,60,120,SP] SPECIAL",

@@ -1077,7 +1077,7 @@
     "IRON_DEFENSE": "Otorga [20,40,80,SP] SHIELD a todos los aliados en la misma fila",
     "METRONOME": "Usa una habilidad aleatoria",
     "SOAK": "Realiza [20,40,80,SP] de SPECIAL y restaura 10 PP a los Pokémon amigos",
-    "ORIGIN_PULSE": "Una ola viaja horizontalmente por el campo de batalla haciendo [120,SP] de SPECIAL",
+    "ORIGIN_PULSE": "Una ola viaja horizontalmente por el campo de batalla haciendo [100,SP] de SPECIAL",
     "SEED_FLARE": "El cuerpo de Shaymin emite una onda de choque que inflige [30,SP] de SPECIAL a todos los enemigos y reduce su SPE_DEF en 2",
     "IRON_TAIL": "Ataque de daño de un objetivo que inflige [20,40,80,SP] de SPECIAL. Aumenta DEF por [1,3,5] puntos",
     "BLAST_BURN": "Ataque de área de efecto que inflige [30,60,120,SP] de SPECIAL",
