@@ -1450,7 +1450,7 @@ export function getUnitScore(pokemon: PokemonEntity | IPokemon) {
   let score = 0
   score += 100 * pokemon.items.size
   score += 10 * pokemon.stars
-  score += PokemonFactory.getSellPrice(pokemon.name)
+  score += PokemonFactory.getSellPrice(pokemon.name, pokemon.shiny)
   return score
 }
 

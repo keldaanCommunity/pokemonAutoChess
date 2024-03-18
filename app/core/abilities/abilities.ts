@@ -6664,7 +6664,7 @@ export class EggsplosionStrategy extends AbilityStrategy {
       crit
     )
     if (kill.death && Math.random() < 0.3) {
-      const egg = PokemonFactory.createRandomEgg()
+      const egg = PokemonFactory.createRandomEgg(false)
       const player = pokemon.player
       if (player) {
         const x = getFirstAvailablePositionInBench(player.board)

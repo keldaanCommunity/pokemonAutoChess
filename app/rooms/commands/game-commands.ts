@@ -521,7 +521,7 @@ export class OnSellDropCommand extends Command<
 
       if (pokemon) {
         this.state.shop.releasePokemon(pokemon.name)
-        player.money += PokemonFactory.getSellPrice(pokemon.name, player)
+        player.money += PokemonFactory.getSellPrice(pokemon.name, pokemon.shiny)
         pokemon.items.forEach((it) => {
           player.items.push(it)
         })
@@ -1216,7 +1216,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           getFreeSpaceOnBench(player.board) > 0 &&
           nbOfEggs < nbMaxEggs
         ) {
-          const egg = PokemonFactory.createRandomEgg()
+          const eggShiny = player.effects.has(Effect.GOLDEN_EGGS)
+          const egg = PokemonFactory.createRandomEgg(eggShiny)
           const x = getFirstAvailablePositionInBench(player.board)
           egg.positionX = x !== undefined ? x : -1
           egg.positionY = 0
