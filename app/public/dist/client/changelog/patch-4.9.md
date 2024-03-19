@@ -45,6 +45,7 @@
 - Scyther is now Unique, and require a Metal Coat to evolve
 - Nerf Origin Pulse (Kyogre): ~~120~~ 100 special damage
 - New ability for Snover line: Sheer cold ; Snover now has Monster synergy
+- Nerf Blizzard (Articuno): freeze duration now at 2 seconds at all levels
 
 # Changes to Synergies
 

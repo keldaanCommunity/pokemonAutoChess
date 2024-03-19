@@ -2191,7 +2191,7 @@ export class BlizzardStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const freezeDuration = [1000, 2000, 3000][pokemon.stars - 1] ?? 3000
+    const freezeDuration = 2000
     const damage = [5, 10, 15][pokemon.stars - 1] ?? 15
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
       if (enemy && pokemon.team != enemy.team) {

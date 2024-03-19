@@ -1006,7 +1006,7 @@
     "POISON": "Wende Gift auf [1,2,3] nächste Gegner für [3,6,9,SP=0,5] Sekunden an",
     "SLEEP": "Lass [1,2,3] gegnerische Pokémon in der Backline [2,SP] Sekunden lang SLEEP",
     "PROTECT": "PROTECT Sie den Benutzer und machen Sie ihn für [5,SP=0,5] Sekunden unverwundbar.",
-    "BLIZZARD": "FREEZE alle gegnerischen Pokémon [1,2,3] Sekunden lang ein und verursache [5,10,15,SP] SPECIAL. Doppelter Schaden, wenn der Feind bereits eingefroren ist",
+    "BLIZZARD": "FREEZE alle gegnerischen Pokémon 2 Sekunden lang ein und verursache [5,10,15,SP] SPECIAL. Doppelter Schaden, wenn der Feind bereits eingefroren ist",
     "CONFUSION": "Das Ziel wird CONFUSION und SILENCE für [3,5,7] Sekunden. Wenn bereits CONFUSION, stattdessen [75,150,300,SP] SPECIAL",
     "FIRE_BLAST": "Wirf einen Feuerstoß für [30,60,120,SP] SPECIAL",
     "WHEEL_OF_FIRE": "Sendet ein Feuerrad, das eine Hin- und Rückfahrt macht und dabei [10,20,30,SP] SPECIAL macht",

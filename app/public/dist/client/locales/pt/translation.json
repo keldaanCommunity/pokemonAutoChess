@@ -1074,7 +1074,7 @@
     "POISON": "Aplique POISONNED em [1,2,3] oponentes mais próximos por [3,6,9,SP=0,5] segundos",
     "SLEEP": "Faça com que [1,2,3] Pokémon inimigos na linha de fundo SLEEP por [2,SP] segundos",
     "PROTECT": "PROTECT o usuário, tornando-se invulnerável por [5,SP=0,5] segundos.",
-    "BLIZZARD": "FREEZE todos os Pokémon inimigos por 3 segundos e dê [5,10,15,SP] SPECIAL. Dano dobrado se o inimigo já estiver FREEZE",
+    "BLIZZARD": "FREEZE todos os Pokémon inimigos por 2 segundos e dê [5,10,15,SP] SPECIAL. Dano dobrado se o inimigo já estiver FREEZE",
     "CONFUSION": "O alvo sofre CONFUSION e SILENCE durante [3,5,7] segundos. Se já tiver CONFUSION, causa [75,150,300,SP] SPECIAL em vez disso",
     "FIRE_BLAST": "Lance uma rajada de fogo por [30,60,120,SP] SPECIAL",
     "WHEEL_OF_FIRE": "Envia uma roda de fogo que faz uma viagem de ida e volta fazendo [10,20,30,SP] SPECIAL",

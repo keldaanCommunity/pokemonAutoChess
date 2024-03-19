@@ -1060,7 +1060,7 @@
     "POISON": "Inflige POISONNED aux [1,2,3] adversaires les plus proches pendant [3,6,9,SP=0.5] secondes",
     "SLEEP": "Faites dormir [1,2,3] Pokémon ennemis dans la ligne de fond pendant [2,SP] secondes",
     "PROTECT": "PROTECT l'utilisateur, devenant invulnérable pendant [5,SP=0.5] secondes.",
-    "BLIZZARD": "Inflige [5,10,15,SP] SPECIAL et FREEZE pendant [1,2,3] secondes à tous les Pokémon ennemis. Double dégâts si l'ennemi est déjà FREEZE",
+    "BLIZZARD": "Inflige [5,10,15,SP] SPECIAL et FREEZE pendant 2 secondes à tous les Pokémon ennemis. Double dégâts si l'ennemi est déjà FREEZE",
     "CONFUSION": "Rend la cible CONFUSION et SILENCE pendant [3,5,7] secondes. Si la cible a déjà CONFUSION, inflige [75,150,300,SP] SPECIAL à la place",
     "FIRE_BLAST": "Lance une explosion de feu infligeant [30,60,120,SP] SPECIAL",
     "WHEEL_OF_FIRE": "Envoie une roue de feu qui fait un aller-retour en faisant [10,20,30,SP] SPECIAL",
