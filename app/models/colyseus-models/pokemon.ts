@@ -2347,7 +2347,7 @@ export class Mamoswine extends Pokemon {
 }
 
 export class Snover extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.ICE])
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.ICE, Synergy.MONSTER])
   rarity = Rarity.ULTRA
   stars = 1
   evolution = Pkm.ABOMASNOW
@@ -2357,7 +2357,7 @@ export class Snover extends Pokemon {
   speDef = 6
   maxPP = 100
   range = 1
-  skill = Ability.BLIZZARD
+  skill = Ability.SHEER_COLD
   attackSprite = AttackSprite.ICE_MELEE
 }
 
@@ -2372,7 +2372,7 @@ export class Abomasnow extends Pokemon {
   speDef = 8
   maxPP = 100
   range = 1
-  skill = Ability.BLIZZARD
+  skill = Ability.SHEER_COLD
   attackSprite = AttackSprite.ICE_MELEE
 }
 
@@ -2386,7 +2386,7 @@ export class MegaAbomasnow extends Pokemon {
   speDef = 10
   maxPP = 100
   range = 1
-  skill = Ability.BLIZZARD
+  skill = Ability.SHEER_COLD
   attackSprite = AttackSprite.ICE_MELEE
 }
 

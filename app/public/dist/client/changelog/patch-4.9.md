@@ -44,6 +44,7 @@
 - Uxie: PP ~~80~~ 90 to be in line with other lake guardians
 - Scyther is now Unique, and require a Metal Coat to evolve
 - Nerf Origin Pulse (Kyogre): ~~120~~ 100 special damage
+- New ability for Snover line: Sheer cold ; Snover now has Monster synergy
 
 # Changes to Synergies
 

@@ -310,7 +310,8 @@
     "SUNSTEEL_STRIKE": "Sunsteel Strike",
     "MOONGEIST_BEAM": "Moongeist Beam",
     "FLEUR_CANNON": "Fleur Cannon",
-    "SPIRIT_BREAK": "Spirit Break"
+    "SPIRIT_BREAK": "Spirit Break",
+    "SHEER_COLD": "Sheer Cold"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1349,7 +1350,8 @@
     "SUNSTEEL_STRIKE": "Jumps and lands in the middle of the enemy team with the power of a meteor, inflicting [100,SP] SPECIAL to adjacent enemies and BURN for 3 seconds",
     "MOONGEIST_BEAM": "Deals [100,SP] SPECIAL to all enemy Pokémon in a straight line and make them PARALYSIS for 3 seconds",
     "FLEUR_CANNON": "Sends a devastating laser beam that inflicts [120,SP] SPECIAL on all enemies in the beam. Reduces the AP of the caster by 20",
-    "SPIRIT_BREAK": "Deals [20,40,80,SP] SPECIAL and lowers the target's AP by [20,SP]"
+    "SPIRIT_BREAK": "Deals [20,40,80,SP] SPECIAL and lowers the target's AP by [20,SP]",
+    "SHEER_COLD": "A blast of absolute-zero cold that has [30,SP]% chance to execute the target. The more HP the user has relative to the target, the greater the chance. Always execute FREEZE enemies, but never execute ICE targets."
   },
   "effect": {
     "INGRAIN": "Ingrain",

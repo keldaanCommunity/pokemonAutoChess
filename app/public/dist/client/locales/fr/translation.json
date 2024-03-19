@@ -300,7 +300,8 @@
     "AROMATHERAPY": "Aromathérapie",
     "DETECT": "Détection",
     "SPACIAL_REND": "Spatio-Rift",
-    "MULTI_ATTACK": "Coup Varia-Type"
+    "MULTI_ATTACK": "Coup Varia-Type",
+    "SHEER_COLD": "Glaciation"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1314,7 +1315,8 @@
     "AROMATHERAPY": "Supprime les effets négatfs de statut des alliés adjacents et les soigne de [20,40,80,SP] HP",
     "DETECT": "Donne PROTECT aux alliés adjacents pendant [0.5,SP] secondes mutiplié par le nombre d'ennemis adjacents",
     "SPACIAL_REND": "Inverse les position des unités ennemies, puis inflige [100,SP] SPECIAL à tous les ennemis d'une rangée",
-    "MULTI_ATTACK": "Inflige [10,SP] SPECIAL aux ennemis adjacents, multiplié par le niveau de synergie de la forme actuelle de $t(pkm.SILVALLY)"
+    "MULTI_ATTACK": "Inflige [10,SP] SPECIAL aux ennemis adjacents, multiplié par le niveau de synergie de la forme actuelle de $t(pkm.SILVALLY)",
+    "SHEER_COLD": "Une vague de froid glacial frappe la cible avec [30,SP]% de chance de la mettre K.O. en un coup. Plus l'attaquant a de HP comparé à sa cible, plus les chances augmentent. Éxécute toujours les cibles FREEZE, mais jamais les cibles ICE."
   },
   "effect": {
     "INGRAIN": "Enraciné",

@@ -7763,6 +7763,37 @@ export class SpiritBreakStrategy extends AbilityStrategy {
   }
 }
 
+export class SheerColdStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    let executeChance = clamp(
+      0,
+      0.3 * (1 + pokemon.ap / 100) +
+        min(0)((pokemon.life - target.life) / target.life),
+      1
+    )
+    if (target.types.has(Synergy.ICE)) executeChance = 0
+    else if (target.status.freeze) executeChance = 1
+
+    if (chance(executeChance)) {
+      target.handleSpecialDamage(
+        9999,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit,
+        true
+      )
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -8060,5 +8091,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.MANTIS_BLADES]: new MantisBladesStrategy(),
   [Ability.FLEUR_CANNON]: new FleurCannonStrategy(),
   [Ability.DOOM_DESIRE]: new DoomDesireStrategy(),
-  [Ability.SPIRIT_BREAK]: new SpiritBreakStrategy()
+  [Ability.SPIRIT_BREAK]: new SpiritBreakStrategy(),
+  [Ability.SHEER_COLD]: new SheerColdStrategy()
 }
