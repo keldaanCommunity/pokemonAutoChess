@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import WikiAbility from "./wiki-ability"
 import WikiPokemons from "./wiki-pokemons"
+import { WikiDungeon } from "./wiki-dungeon"
 import WikiFaq from "./wiki-faq"
 import WikiItemsCheatSheet from "./wiki-items-cheat-sheet"
 import WikiStatistic from "./wiki-statistic"
@@ -26,12 +27,13 @@ export default function Wiki({ inGame = false }: { inGame: boolean }) {
               </>
             )}
             <Tab key="title-pokemon">{t("pokemons_label")}</Tab>
+            <Tab key="title-ability">{t("abilities_label")}</Tab>
             <Tab key="title-items">{t("items_label")}</Tab>
             <Tab key="title-types">{t("synergies_label")}</Tab>
             <Tab key="title-statistic">{t("statistics_label")}</Tab>
             <Tab key="title-status">{t("status_label")}</Tab>
             <Tab key="title-weather">{t("weather_label")}</Tab>
-            <Tab key="title-ability">{t("abilities_label")}</Tab>
+            <Tab key="title-dungeon">{t("dungeon_label")}</Tab>
           </TabList>
 
           {!inGame && (
@@ -46,6 +48,9 @@ export default function Wiki({ inGame = false }: { inGame: boolean }) {
           )}
           <TabPanel key="pokemon">
             <WikiPokemons />
+          </TabPanel>
+          <TabPanel key="ability">
+            <WikiAbility />
           </TabPanel>
           <TabPanel key="items">
             <WikiItemsCheatSheet />
@@ -62,8 +67,8 @@ export default function Wiki({ inGame = false }: { inGame: boolean }) {
           <TabPanel key="weather">
             <WikiWeather />
           </TabPanel>
-          <TabPanel key="ability">
-            <WikiAbility />
+          <TabPanel key="dungeon">
+            <WikiDungeon />
           </TabPanel>
         </Tabs>
       </div>

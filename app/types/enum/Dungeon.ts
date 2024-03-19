@@ -1,3 +1,5 @@
+import { Synergy } from "./Synergy"
+
 export enum DungeonMusic {
   AEGIS_CAVE = "Aegis Cave",
   AMP_PLAINS = "Amp Plains",
@@ -292,4 +294,278 @@ export enum DungeonPMDO {
   ZeroIsleEast4 = "ZeroIsleEast4",
   ZeroIsleSouth1 = "ZeroIsleSouth1",
   ZeroIsleSouth2 = "ZeroIsleSouth2"
+}
+
+export const DungeonPMDOSynergies: { [key in DungeonPMDO]: Array<Synergy> } = {
+  [DungeonPMDO.AmpPlains]: [Synergy.ELECTRIC, Synergy.FIELD, Synergy.AQUATIC],
+  [DungeonPMDO.AppleWoods]: [Synergy.BUG, Synergy.FLORA, Synergy.BABY],
+  [DungeonPMDO.BarrenValley]: [Synergy.ROCK, Synergy.FIGHTING, Synergy.GHOST],
+  [DungeonPMDO.BeachCave]: [Synergy.AQUATIC, Synergy.GROUND, Synergy.FOSSIL],
+  [DungeonPMDO.BrineCave]: [Synergy.POISON, Synergy.FOSSIL, Synergy.GROUND],
+  [DungeonPMDO.BuriedRelic1]: [
+    Synergy.LIGHT,
+    Synergy.ARTIFICIAL,
+    Synergy.HUMAN
+  ],
+  [DungeonPMDO.BuriedRelic2]: [
+    Synergy.GROUND,
+    Synergy.ARTIFICIAL,
+    Synergy.LIGHT
+  ],
+  [DungeonPMDO.BuriedRelic3]: [
+    Synergy.GROUND,
+    Synergy.ARTIFICIAL,
+    Synergy.HUMAN
+  ],
+  [DungeonPMDO.ConcealedRuins]: [Synergy.POISON, Synergy.WILD, Synergy.GHOST],
+  [DungeonPMDO.CraggyCoast]: [Synergy.WATER, Synergy.FIGHTING, Synergy.MONSTER],
+  [DungeonPMDO.CrystalCave1]: [Synergy.PSYCHIC, Synergy.SOUND, Synergy.DARK],
+  [DungeonPMDO.CrystalCave2]: [Synergy.PSYCHIC, Synergy.SOUND, Synergy.LIGHT],
+  [DungeonPMDO.CrystalCrossing]: [
+    Synergy.PSYCHIC,
+    Synergy.AQUATIC,
+    Synergy.POISON
+  ],
+  [DungeonPMDO.DarkCrater]: [Synergy.DARK, Synergy.FIRE, Synergy.GROUND],
+  [DungeonPMDO.DarkHill1]: [Synergy.GHOST, Synergy.DARK, Synergy.FLYING],
+  [DungeonPMDO.DarkHill2]: [Synergy.GHOST, Synergy.DARK, Synergy.FIELD],
+  [DungeonPMDO.DarkIceMountain]: [Synergy.DARK, Synergy.ICE, Synergy.NORMAL],
+  [DungeonPMDO.DarkIceMountainPeak]: [
+    Synergy.DARK,
+    Synergy.ICE,
+    Synergy.FLYING
+  ],
+  [DungeonPMDO.DarknightRelic]: [
+    Synergy.FOSSIL,
+    Synergy.ARTIFICIAL,
+    Synergy.HUMAN
+  ],
+  [DungeonPMDO.DarkWasteland]: [Synergy.DARK, Synergy.POISON, Synergy.MONSTER],
+  [DungeonPMDO.DeepBoulderQuarry]: [
+    Synergy.ROCK,
+    Synergy.STEEL,
+    Synergy.FOSSIL
+  ],
+  [DungeonPMDO.DeepDarkCrater]: [Synergy.DARK, Synergy.FIRE, Synergy.MONSTER],
+  [DungeonPMDO.DeepDuskForest1]: [Synergy.GHOST, Synergy.GRASS, Synergy.DARK],
+  [DungeonPMDO.DeepDuskForest2]: [Synergy.GHOST, Synergy.GRASS, Synergy.LIGHT],
+  [DungeonPMDO.DeepLimestoneCavern]: [Synergy.WATER, Synergy.BUG, Synergy.ROCK],
+  [DungeonPMDO.DeepSealedRuin]: [
+    Synergy.HUMAN,
+    Synergy.ARTIFICIAL,
+    Synergy.MONSTER
+  ],
+  [DungeonPMDO.DesertRegion]: [Synergy.FIRE, Synergy.FIELD, Synergy.LIGHT],
+  [DungeonPMDO.DrenchedBluff]: [Synergy.AQUATIC, Synergy.FOSSIL, Synergy.BABY],
+  [DungeonPMDO.DuskForest1]: [Synergy.MONSTER, Synergy.GRASS, Synergy.DARK],
+  [DungeonPMDO.DuskForest2]: [Synergy.GHOST, Synergy.GRASS, Synergy.FLORA],
+  [DungeonPMDO.ElectricMaze]: [
+    Synergy.ELECTRIC,
+    Synergy.MONSTER,
+    Synergy.LIGHT
+  ],
+  [DungeonPMDO.FarAmpPlains]: [Synergy.ELECTRIC, Synergy.FIELD, Synergy.FOSSIL],
+  [DungeonPMDO.FinalMaze2]: [Synergy.BABY, Synergy.FLORA, Synergy.BUG],
+  [DungeonPMDO.FoggyForest]: [Synergy.FAIRY, Synergy.WILD, Synergy.FLORA],
+  [DungeonPMDO.ForestPath]: [Synergy.GRASS, Synergy.BUG, Synergy.BABY],
+  [DungeonPMDO.FrostyForest]: [Synergy.LIGHT, Synergy.ICE, Synergy.FIGHTING],
+  [DungeonPMDO.FutureTemporalSpire]: [
+    Synergy.HUMAN,
+    Synergy.ARTIFICIAL,
+    Synergy.PSYCHIC
+  ],
+  [DungeonPMDO.FutureTemporalTower]: [
+    Synergy.MONSTER,
+    Synergy.ARTIFICIAL,
+    Synergy.PSYCHIC
+  ],
+  [DungeonPMDO.GoldenChamber]: [Synergy.LIGHT, Synergy.STEEL, Synergy.DRAGON],
+  [DungeonPMDO.GrassMaze]: [Synergy.GRASS, Synergy.FIELD, Synergy.NORMAL],
+  [DungeonPMDO.GreatCanyon]: [Synergy.NORMAL, Synergy.WILD, Synergy.FIRE],
+  [DungeonPMDO.HiddenHighland]: [Synergy.FLORA, Synergy.BABY, Synergy.BUG],
+  [DungeonPMDO.HiddenLand]: [Synergy.FLORA, Synergy.WILD, Synergy.WATER],
+  [DungeonPMDO.HowlingForest1]: [Synergy.SOUND, Synergy.FIELD, Synergy.BUG],
+  [DungeonPMDO.HowlingForest2]: [Synergy.SOUND, Synergy.POISON, Synergy.FOSSIL],
+  [DungeonPMDO.IceAegisCave]: [Synergy.ICE, Synergy.FIGHTING, Synergy.DARK],
+  [DungeonPMDO.IceMaze]: [Synergy.ICE, Synergy.STEEL, Synergy.FIGHTING],
+  [DungeonPMDO.IcicleForest]: [Synergy.ICE, Synergy.FIELD, Synergy.FIGHTING],
+  [DungeonPMDO.JoyousTower]: [Synergy.LIGHT, Synergy.FAIRY, Synergy.BABY],
+  [DungeonPMDO.LapisCave]: [Synergy.WATER, Synergy.AQUATIC, Synergy.FOSSIL],
+  [DungeonPMDO.LightningField]: [
+    Synergy.ELECTRIC,
+    Synergy.FIELD,
+    Synergy.LIGHT
+  ],
+  [DungeonPMDO.LimestoneCavern]: [Synergy.ROCK, Synergy.BUG, Synergy.AQUATIC],
+  [DungeonPMDO.LowerBrineCave]: [Synergy.AQUATIC, Synergy.FOSSIL, Synergy.WILD],
+  [DungeonPMDO.LushPrairie]: [Synergy.BUG, Synergy.BABY, Synergy.FLORA],
+  [DungeonPMDO.MagmaCavern2]: [Synergy.FIRE, Synergy.FIGHTING, Synergy.MONSTER],
+  [DungeonPMDO.MagmaCavern3]: [Synergy.FIRE, Synergy.DRAGON, Synergy.MONSTER],
+  [DungeonPMDO.MeteorCave]: [Synergy.PSYCHIC, Synergy.FAIRY, Synergy.HUMAN],
+  [DungeonPMDO.MiracleSea]: [Synergy.WATER, Synergy.AQUATIC, Synergy.FAIRY],
+  [DungeonPMDO.MoonlitCourtyard]: [Synergy.FAIRY, Synergy.FLORA, Synergy.DARK],
+  [DungeonPMDO.MtBlaze]: [Synergy.FIRE, Synergy.FLYING, Synergy.WILD],
+  [DungeonPMDO.MtBristle]: [Synergy.ELECTRIC, Synergy.FLYING, Synergy.MONSTER],
+  [DungeonPMDO.MtFaraway2]: [Synergy.ICE, Synergy.FLYING, Synergy.DRAGON],
+  [DungeonPMDO.MtFaraway4]: [Synergy.ICE, Synergy.FLYING, Synergy.SOUND],
+  [DungeonPMDO.MtFreeze]: [Synergy.ICE, Synergy.FLYING, Synergy.NORMAL],
+  [DungeonPMDO.MtHorn]: [Synergy.ROCK, Synergy.FLYING, Synergy.SOUND],
+  [DungeonPMDO.MtSteel1]: [Synergy.STEEL, Synergy.FLYING, Synergy.FIGHTING],
+  [DungeonPMDO.MtSteel2]: [Synergy.STEEL, Synergy.FLYING, Synergy.FIGHTING],
+  [DungeonPMDO.MtThunder]: [Synergy.ELECTRIC, Synergy.ROCK, Synergy.STEEL],
+  [DungeonPMDO.MtThunderPeak]: [Synergy.ELECTRIC, Synergy.FLYING, Synergy.WILD],
+  [DungeonPMDO.MtTravail]: [Synergy.FIGHTING, Synergy.HUMAN, Synergy.FOSSIL],
+  [DungeonPMDO.MurkyCave]: [Synergy.POISON, Synergy.GROUND, Synergy.HUMAN],
+  [DungeonPMDO.MurkyForest]: [Synergy.POISON, Synergy.GRASS, Synergy.DARK],
+  [DungeonPMDO.MysteryJungle1]: [Synergy.WILD, Synergy.FLORA, Synergy.POISON],
+  [DungeonPMDO.MysteryJungle2]: [Synergy.WILD, Synergy.FAIRY, Synergy.POISON],
+  [DungeonPMDO.MystifyingForest]: [Synergy.BABY, Synergy.FAIRY, Synergy.FLORA],
+  [DungeonPMDO.NorthernDesert1]: [Synergy.DRAGON, Synergy.FIRE, Synergy.LIGHT],
+  [DungeonPMDO.NorthernDesert2]: [Synergy.DRAGON, Synergy.FIRE, Synergy.WILD],
+  [DungeonPMDO.NorthernRange1]: [
+    Synergy.POISON,
+    Synergy.AQUATIC,
+    Synergy.STEEL
+  ],
+  [DungeonPMDO.NorthernRange2]: [
+    Synergy.MONSTER,
+    Synergy.FIGHTING,
+    Synergy.STEEL
+  ],
+  [DungeonPMDO.NorthwindField]: [Synergy.WATER, Synergy.FIELD, Synergy.SOUND],
+  [DungeonPMDO.PitfallValley1]: [Synergy.FIELD, Synergy.HUMAN, Synergy.BABY],
+  [DungeonPMDO.PoisonMaze]: [Synergy.POISON, Synergy.PSYCHIC, Synergy.BUG],
+  [DungeonPMDO.PurityForest2]: [Synergy.BABY, Synergy.FAIRY, Synergy.FLORA],
+  [DungeonPMDO.PurityForest4]: [Synergy.NORMAL, Synergy.WILD, Synergy.FAIRY],
+  [DungeonPMDO.PurityForest6]: [Synergy.NORMAL, Synergy.GRASS, Synergy.BABY],
+  [DungeonPMDO.PurityForest7]: [Synergy.GRASS, Synergy.BABY, Synergy.SOUND],
+  [DungeonPMDO.QuicksandCave]: [Synergy.GROUND, Synergy.FOSSIL, Synergy.NORMAL],
+  [DungeonPMDO.QuicksandPit]: [Synergy.GROUND, Synergy.FOSSIL, Synergy.MONSTER],
+  [DungeonPMDO.QuicksandUnused]: [
+    Synergy.GROUND,
+    Synergy.NORMAL,
+    Synergy.POISON
+  ],
+  [DungeonPMDO.RescueTeamMaze]: [
+    Synergy.FIGHTING,
+    Synergy.HUMAN,
+    Synergy.ARTIFICIAL
+  ],
+  [DungeonPMDO.RockAegisCave]: [Synergy.ROCK, Synergy.GHOST, Synergy.FIGHTING],
+  [DungeonPMDO.RockMaze]: [Synergy.ROCK, Synergy.STEEL, Synergy.FIGHTING],
+  [DungeonPMDO.RockPathRB]: [Synergy.ROCK, Synergy.FIELD, Synergy.FOSSIL],
+  [DungeonPMDO.RockPathTDS]: [Synergy.ROCK, Synergy.FIELD, Synergy.MONSTER],
+  [DungeonPMDO.SealedRuin]: [Synergy.HUMAN, Synergy.DRAGON, Synergy.GHOST],
+  [DungeonPMDO.SidePath]: [Synergy.NORMAL, Synergy.FIELD, Synergy.STEEL],
+  [DungeonPMDO.SilentChasm]: [Synergy.FIRE, Synergy.LIGHT, Synergy.WILD],
+  [DungeonPMDO.SkyPeak4thPass]: [Synergy.GRASS, Synergy.FLORA, Synergy.BABY],
+  [DungeonPMDO.SkyPeak7thPass]: [Synergy.ICE, Synergy.DRAGON, Synergy.FAIRY],
+  [DungeonPMDO.SkyPeakSummitPass]: [Synergy.DARK, Synergy.STEEL, Synergy.ROCK],
+  [DungeonPMDO.SkyTower]: [Synergy.FLYING, Synergy.LIGHT, Synergy.FAIRY],
+  [DungeonPMDO.SnowPath]: [Synergy.ICE, Synergy.FIELD, Synergy.NORMAL],
+  [DungeonPMDO.SolarCave1]: [Synergy.PSYCHIC, Synergy.FIRE, Synergy.SOUND],
+  [DungeonPMDO.SouthernCavern1]: [
+    Synergy.STEEL,
+    Synergy.POISON,
+    Synergy.ARTIFICIAL
+  ],
+  [DungeonPMDO.SouthernCavern2]: [
+    Synergy.FAIRY,
+    Synergy.AQUATIC,
+    Synergy.POISON
+  ],
+  [DungeonPMDO.SouthernJungle]: [Synergy.WILD, Synergy.FLORA, Synergy.GRASS],
+  [DungeonPMDO.SpacialCliffs]: [Synergy.GHOST, Synergy.ROCK, Synergy.ELECTRIC],
+  [DungeonPMDO.SpacialRift1]: [
+    Synergy.GHOST,
+    Synergy.ARTIFICIAL,
+    Synergy.MONSTER
+  ],
+  [DungeonPMDO.SpacialRift2]: [
+    Synergy.GHOST,
+    Synergy.ARTIFICIAL,
+    Synergy.PSYCHIC
+  ],
+  [DungeonPMDO.SteamCave]: [Synergy.FIRE, Synergy.GROUND, Synergy.ELECTRIC],
+  [DungeonPMDO.SteelAegisCave]: [
+    Synergy.STEEL,
+    Synergy.NORMAL,
+    Synergy.FIGHTING
+  ],
+  [DungeonPMDO.StormySea1]: [Synergy.WATER, Synergy.AQUATIC, Synergy.ELECTRIC],
+  [DungeonPMDO.StormySea2]: [Synergy.WATER, Synergy.AQUATIC, Synergy.SOUND],
+  [DungeonPMDO.SurroundedSea]: [Synergy.WATER, Synergy.DRAGON, Synergy.ICE],
+  [DungeonPMDO.TemporalSpire]: [
+    Synergy.HUMAN,
+    Synergy.PSYCHIC,
+    Synergy.ARTIFICIAL
+  ],
+  [DungeonPMDO.TemporalTower]: [
+    Synergy.HUMAN,
+    Synergy.STEEL,
+    Synergy.ARTIFICIAL
+  ],
+  [DungeonPMDO.TemporalUnused]: [
+    Synergy.NORMAL,
+    Synergy.FOSSIL,
+    Synergy.ARTIFICIAL
+  ],
+  [DungeonPMDO.TestDungeon]: [
+    Synergy.ARTIFICIAL,
+    Synergy.ELECTRIC,
+    Synergy.PSYCHIC
+  ],
+  [DungeonPMDO.TheNightmare]: [Synergy.GHOST, Synergy.DARK, Synergy.PSYCHIC],
+  [DungeonPMDO.ThunderwaveCave]: [
+    Synergy.ELECTRIC,
+    Synergy.GROUND,
+    Synergy.LIGHT
+  ],
+  [DungeonPMDO.TinyMeadow]: [Synergy.GRASS, Synergy.BABY, Synergy.NORMAL],
+  [DungeonPMDO.TinyWoods]: [Synergy.BUG, Synergy.BABY, Synergy.NORMAL],
+  [DungeonPMDO.TreeshroudForest1]: [Synergy.GRASS, Synergy.WATER, Synergy.BUG],
+  [DungeonPMDO.TreeshroudForest2]: [
+    Synergy.GRASS,
+    Synergy.AQUATIC,
+    Synergy.BABY
+  ],
+  [DungeonPMDO.UnusedBrineCave]: [
+    Synergy.WATER,
+    Synergy.GROUND,
+    Synergy.DRAGON
+  ],
+  [DungeonPMDO.UnusedSteamCave]: [
+    Synergy.FIRE,
+    Synergy.WATER,
+    Synergy.ELECTRIC
+  ],
+  [DungeonPMDO.UnusedWaterfallPond]: [
+    Synergy.AQUATIC,
+    Synergy.BUG,
+    Synergy.WILD
+  ],
+  [DungeonPMDO.UproarForest]: [Synergy.WILD, Synergy.FIELD, Synergy.SOUND],
+  [DungeonPMDO.VastIceMountain]: [Synergy.DRAGON, Synergy.ICE, Synergy.ROCK],
+  [DungeonPMDO.VastIceMountainPeak]: [
+    Synergy.DRAGON,
+    Synergy.ICE,
+    Synergy.FLYING
+  ],
+  [DungeonPMDO.WaterfallCave]: [Synergy.WATER, Synergy.GROUND, Synergy.SOUND],
+  [DungeonPMDO.WaterfallPond]: [Synergy.WATER, Synergy.AQUATIC, Synergy.SOUND],
+  [DungeonPMDO.WaterMaze]: [Synergy.WATER, Synergy.AQUATIC, Synergy.GRASS],
+  [DungeonPMDO.WesternCave1]: [
+    Synergy.HUMAN,
+    Synergy.FLORA,
+    Synergy.ARTIFICIAL
+  ],
+  [DungeonPMDO.WesternCave2]: [Synergy.HUMAN, Synergy.FLORA, Synergy.ROCK],
+  [DungeonPMDO.WishCave1]: [Synergy.FAIRY, Synergy.HUMAN, Synergy.DRAGON],
+  [DungeonPMDO.WishCave2]: [Synergy.FAIRY, Synergy.DRAGON, Synergy.BUG],
+  [DungeonPMDO.WorldAbyss2]: [Synergy.DARK, Synergy.GHOST, Synergy.ELECTRIC],
+  [DungeonPMDO.WyvernHill]: [Synergy.DRAGON, Synergy.FLYING, Synergy.FIELD],
+  [DungeonPMDO.ZeroIsleEast3]: [Synergy.GROUND, Synergy.PSYCHIC, Synergy.STEEL],
+  [DungeonPMDO.ZeroIsleEast4]: [Synergy.POISON, Synergy.MONSTER, Synergy.ROCK],
+  [DungeonPMDO.ZeroIsleSouth1]: [Synergy.GROUND, Synergy.BUG, Synergy.NORMAL],
+  [DungeonPMDO.ZeroIsleSouth2]: [Synergy.ROCK, Synergy.GROUND, Synergy.FIGHTING]
 }

@@ -153,6 +153,29 @@
   gap: 0.5em;
 }
 
+#wiki-dungeon .nes-container {
+  padding: 0.5em;
+  margin: 0.5em;
+}
+
+#wiki-dungeon > ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
+}
+
+#wiki-dungeon > ul > .nes-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+#wiki-dungeon > ul > .nes-container > img {
+  border: 1px solid #000000;
+  border-radius: 4px;
+  box-shadow: 2px 2px 0 #00000060;
+  image-rendering: pixelated;
+}
+
 #wiki-weather .nes-container header {
   display: flex;
   align-items: center;
