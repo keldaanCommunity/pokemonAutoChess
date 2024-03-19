@@ -296,276 +296,737 @@ export enum DungeonPMDO {
   ZeroIsleSouth2 = "ZeroIsleSouth2"
 }
 
-export const DungeonPMDOSynergies: { [key in DungeonPMDO]: Array<Synergy> } = {
-  [DungeonPMDO.AmpPlains]: [Synergy.ELECTRIC, Synergy.FIELD, Synergy.AQUATIC],
-  [DungeonPMDO.AppleWoods]: [Synergy.BUG, Synergy.FLORA, Synergy.BABY],
-  [DungeonPMDO.BarrenValley]: [Synergy.ROCK, Synergy.FIGHTING, Synergy.GHOST],
-  [DungeonPMDO.BeachCave]: [Synergy.AQUATIC, Synergy.GROUND, Synergy.FOSSIL],
-  [DungeonPMDO.BrineCave]: [Synergy.POISON, Synergy.FOSSIL, Synergy.GROUND],
-  [DungeonPMDO.BuriedRelic1]: [
-    Synergy.LIGHT,
-    Synergy.ARTIFICIAL,
-    Synergy.HUMAN
-  ],
-  [DungeonPMDO.BuriedRelic2]: [
-    Synergy.GROUND,
-    Synergy.ARTIFICIAL,
-    Synergy.LIGHT
-  ],
-  [DungeonPMDO.BuriedRelic3]: [
-    Synergy.GROUND,
-    Synergy.ARTIFICIAL,
-    Synergy.HUMAN
-  ],
-  [DungeonPMDO.ConcealedRuins]: [Synergy.POISON, Synergy.WILD, Synergy.GHOST],
-  [DungeonPMDO.CraggyCoast]: [Synergy.WATER, Synergy.FIGHTING, Synergy.MONSTER],
-  [DungeonPMDO.CrystalCave1]: [Synergy.PSYCHIC, Synergy.SOUND, Synergy.DARK],
-  [DungeonPMDO.CrystalCave2]: [Synergy.PSYCHIC, Synergy.SOUND, Synergy.LIGHT],
-  [DungeonPMDO.CrystalCrossing]: [
-    Synergy.PSYCHIC,
-    Synergy.AQUATIC,
-    Synergy.POISON
-  ],
-  [DungeonPMDO.DarkCrater]: [Synergy.DARK, Synergy.FIRE, Synergy.GROUND],
-  [DungeonPMDO.DarkHill1]: [Synergy.GHOST, Synergy.DARK, Synergy.FLYING],
-  [DungeonPMDO.DarkHill2]: [Synergy.GHOST, Synergy.DARK, Synergy.FIELD],
-  [DungeonPMDO.DarkIceMountain]: [Synergy.DARK, Synergy.ICE, Synergy.NORMAL],
-  [DungeonPMDO.DarkIceMountainPeak]: [
-    Synergy.DARK,
-    Synergy.ICE,
-    Synergy.FLYING
-  ],
-  [DungeonPMDO.DarknightRelic]: [
-    Synergy.FOSSIL,
-    Synergy.ARTIFICIAL,
-    Synergy.HUMAN
-  ],
-  [DungeonPMDO.DarkWasteland]: [Synergy.DARK, Synergy.POISON, Synergy.MONSTER],
-  [DungeonPMDO.DeepBoulderQuarry]: [
-    Synergy.ROCK,
-    Synergy.STEEL,
-    Synergy.FOSSIL
-  ],
-  [DungeonPMDO.DeepDarkCrater]: [Synergy.DARK, Synergy.FIRE, Synergy.MONSTER],
-  [DungeonPMDO.DeepDuskForest1]: [Synergy.GHOST, Synergy.GRASS, Synergy.DARK],
-  [DungeonPMDO.DeepDuskForest2]: [Synergy.GHOST, Synergy.GRASS, Synergy.LIGHT],
-  [DungeonPMDO.DeepLimestoneCavern]: [Synergy.WATER, Synergy.BUG, Synergy.ROCK],
-  [DungeonPMDO.DeepSealedRuin]: [
-    Synergy.HUMAN,
-    Synergy.ARTIFICIAL,
-    Synergy.MONSTER
-  ],
-  [DungeonPMDO.DesertRegion]: [Synergy.FIRE, Synergy.FIELD, Synergy.LIGHT],
-  [DungeonPMDO.DrenchedBluff]: [Synergy.AQUATIC, Synergy.FOSSIL, Synergy.BABY],
-  [DungeonPMDO.DuskForest1]: [Synergy.MONSTER, Synergy.GRASS, Synergy.DARK],
-  [DungeonPMDO.DuskForest2]: [Synergy.GHOST, Synergy.GRASS, Synergy.FLORA],
-  [DungeonPMDO.ElectricMaze]: [
-    Synergy.ELECTRIC,
-    Synergy.MONSTER,
-    Synergy.LIGHT
-  ],
-  [DungeonPMDO.FarAmpPlains]: [Synergy.ELECTRIC, Synergy.FIELD, Synergy.FOSSIL],
-  [DungeonPMDO.FinalMaze2]: [Synergy.BABY, Synergy.FLORA, Synergy.BUG],
-  [DungeonPMDO.FoggyForest]: [Synergy.FAIRY, Synergy.WILD, Synergy.FLORA],
-  [DungeonPMDO.ForestPath]: [Synergy.GRASS, Synergy.BUG, Synergy.BABY],
-  [DungeonPMDO.FrostyForest]: [Synergy.LIGHT, Synergy.ICE, Synergy.FIGHTING],
-  [DungeonPMDO.FutureTemporalSpire]: [
-    Synergy.HUMAN,
-    Synergy.ARTIFICIAL,
-    Synergy.PSYCHIC
-  ],
-  [DungeonPMDO.FutureTemporalTower]: [
-    Synergy.MONSTER,
-    Synergy.ARTIFICIAL,
-    Synergy.PSYCHIC
-  ],
-  [DungeonPMDO.GoldenChamber]: [Synergy.LIGHT, Synergy.STEEL, Synergy.DRAGON],
-  [DungeonPMDO.GrassMaze]: [Synergy.GRASS, Synergy.FIELD, Synergy.NORMAL],
-  [DungeonPMDO.GreatCanyon]: [Synergy.NORMAL, Synergy.WILD, Synergy.FIRE],
-  [DungeonPMDO.HiddenHighland]: [Synergy.FLORA, Synergy.BABY, Synergy.BUG],
-  [DungeonPMDO.HiddenLand]: [Synergy.FLORA, Synergy.WILD, Synergy.WATER],
-  [DungeonPMDO.HowlingForest1]: [Synergy.SOUND, Synergy.FIELD, Synergy.BUG],
-  [DungeonPMDO.HowlingForest2]: [Synergy.SOUND, Synergy.POISON, Synergy.FOSSIL],
-  [DungeonPMDO.IceAegisCave]: [Synergy.ICE, Synergy.FIGHTING, Synergy.DARK],
-  [DungeonPMDO.IceMaze]: [Synergy.ICE, Synergy.STEEL, Synergy.FIGHTING],
-  [DungeonPMDO.IcicleForest]: [Synergy.ICE, Synergy.FIELD, Synergy.FIGHTING],
-  [DungeonPMDO.JoyousTower]: [Synergy.LIGHT, Synergy.FAIRY, Synergy.BABY],
-  [DungeonPMDO.LapisCave]: [Synergy.WATER, Synergy.AQUATIC, Synergy.FOSSIL],
-  [DungeonPMDO.LightningField]: [
-    Synergy.ELECTRIC,
-    Synergy.FIELD,
-    Synergy.LIGHT
-  ],
-  [DungeonPMDO.LimestoneCavern]: [Synergy.ROCK, Synergy.BUG, Synergy.AQUATIC],
-  [DungeonPMDO.LowerBrineCave]: [Synergy.AQUATIC, Synergy.FOSSIL, Synergy.WILD],
-  [DungeonPMDO.LushPrairie]: [Synergy.BUG, Synergy.BABY, Synergy.FLORA],
-  [DungeonPMDO.MagmaCavern2]: [Synergy.FIRE, Synergy.FIGHTING, Synergy.MONSTER],
-  [DungeonPMDO.MagmaCavern3]: [Synergy.FIRE, Synergy.DRAGON, Synergy.MONSTER],
-  [DungeonPMDO.MeteorCave]: [Synergy.PSYCHIC, Synergy.FAIRY, Synergy.HUMAN],
-  [DungeonPMDO.MiracleSea]: [Synergy.WATER, Synergy.AQUATIC, Synergy.FAIRY],
-  [DungeonPMDO.MoonlitCourtyard]: [Synergy.FAIRY, Synergy.FLORA, Synergy.DARK],
-  [DungeonPMDO.MtBlaze]: [Synergy.FIRE, Synergy.FLYING, Synergy.WILD],
-  [DungeonPMDO.MtBristle]: [Synergy.ELECTRIC, Synergy.FLYING, Synergy.MONSTER],
-  [DungeonPMDO.MtFaraway2]: [Synergy.ICE, Synergy.FLYING, Synergy.DRAGON],
-  [DungeonPMDO.MtFaraway4]: [Synergy.ICE, Synergy.FLYING, Synergy.SOUND],
-  [DungeonPMDO.MtFreeze]: [Synergy.ICE, Synergy.FLYING, Synergy.NORMAL],
-  [DungeonPMDO.MtHorn]: [Synergy.ROCK, Synergy.FLYING, Synergy.SOUND],
-  [DungeonPMDO.MtSteel1]: [Synergy.STEEL, Synergy.FLYING, Synergy.FIGHTING],
-  [DungeonPMDO.MtSteel2]: [Synergy.STEEL, Synergy.FLYING, Synergy.FIGHTING],
-  [DungeonPMDO.MtThunder]: [Synergy.ELECTRIC, Synergy.ROCK, Synergy.STEEL],
-  [DungeonPMDO.MtThunderPeak]: [Synergy.ELECTRIC, Synergy.FLYING, Synergy.WILD],
-  [DungeonPMDO.MtTravail]: [Synergy.FIGHTING, Synergy.HUMAN, Synergy.FOSSIL],
-  [DungeonPMDO.MurkyCave]: [Synergy.POISON, Synergy.GROUND, Synergy.HUMAN],
-  [DungeonPMDO.MurkyForest]: [Synergy.POISON, Synergy.GRASS, Synergy.DARK],
-  [DungeonPMDO.MysteryJungle1]: [Synergy.WILD, Synergy.FLORA, Synergy.POISON],
-  [DungeonPMDO.MysteryJungle2]: [Synergy.WILD, Synergy.FAIRY, Synergy.POISON],
-  [DungeonPMDO.MystifyingForest]: [Synergy.BABY, Synergy.FAIRY, Synergy.FLORA],
-  [DungeonPMDO.NorthernDesert1]: [Synergy.DRAGON, Synergy.FIRE, Synergy.LIGHT],
-  [DungeonPMDO.NorthernDesert2]: [Synergy.DRAGON, Synergy.FIRE, Synergy.WILD],
-  [DungeonPMDO.NorthernRange1]: [
-    Synergy.POISON,
-    Synergy.AQUATIC,
-    Synergy.STEEL
-  ],
-  [DungeonPMDO.NorthernRange2]: [
-    Synergy.MONSTER,
-    Synergy.FIGHTING,
-    Synergy.STEEL
-  ],
-  [DungeonPMDO.NorthwindField]: [Synergy.WATER, Synergy.FIELD, Synergy.SOUND],
-  [DungeonPMDO.PitfallValley1]: [Synergy.FIELD, Synergy.HUMAN, Synergy.BABY],
-  [DungeonPMDO.PoisonMaze]: [Synergy.POISON, Synergy.PSYCHIC, Synergy.BUG],
-  [DungeonPMDO.PurityForest2]: [Synergy.BABY, Synergy.FAIRY, Synergy.FLORA],
-  [DungeonPMDO.PurityForest4]: [Synergy.NORMAL, Synergy.WILD, Synergy.FAIRY],
-  [DungeonPMDO.PurityForest6]: [Synergy.NORMAL, Synergy.GRASS, Synergy.BABY],
-  [DungeonPMDO.PurityForest7]: [Synergy.GRASS, Synergy.BABY, Synergy.SOUND],
-  [DungeonPMDO.QuicksandCave]: [Synergy.GROUND, Synergy.FOSSIL, Synergy.NORMAL],
-  [DungeonPMDO.QuicksandPit]: [Synergy.GROUND, Synergy.FOSSIL, Synergy.MONSTER],
-  [DungeonPMDO.QuicksandUnused]: [
-    Synergy.GROUND,
-    Synergy.NORMAL,
-    Synergy.POISON
-  ],
-  [DungeonPMDO.RescueTeamMaze]: [
-    Synergy.FIGHTING,
-    Synergy.HUMAN,
-    Synergy.ARTIFICIAL
-  ],
-  [DungeonPMDO.RockAegisCave]: [Synergy.ROCK, Synergy.GHOST, Synergy.FIGHTING],
-  [DungeonPMDO.RockMaze]: [Synergy.ROCK, Synergy.STEEL, Synergy.FIGHTING],
-  [DungeonPMDO.RockPathRB]: [Synergy.ROCK, Synergy.FIELD, Synergy.FOSSIL],
-  [DungeonPMDO.RockPathTDS]: [Synergy.ROCK, Synergy.FIELD, Synergy.MONSTER],
-  [DungeonPMDO.SealedRuin]: [Synergy.HUMAN, Synergy.DRAGON, Synergy.GHOST],
-  [DungeonPMDO.SidePath]: [Synergy.NORMAL, Synergy.FIELD, Synergy.STEEL],
-  [DungeonPMDO.SilentChasm]: [Synergy.FIRE, Synergy.LIGHT, Synergy.WILD],
-  [DungeonPMDO.SkyPeak4thPass]: [Synergy.GRASS, Synergy.FLORA, Synergy.BABY],
-  [DungeonPMDO.SkyPeak7thPass]: [Synergy.ICE, Synergy.DRAGON, Synergy.FAIRY],
-  [DungeonPMDO.SkyPeakSummitPass]: [Synergy.DARK, Synergy.STEEL, Synergy.ROCK],
-  [DungeonPMDO.SkyTower]: [Synergy.FLYING, Synergy.LIGHT, Synergy.FAIRY],
-  [DungeonPMDO.SnowPath]: [Synergy.ICE, Synergy.FIELD, Synergy.NORMAL],
-  [DungeonPMDO.SolarCave1]: [Synergy.PSYCHIC, Synergy.FIRE, Synergy.SOUND],
-  [DungeonPMDO.SouthernCavern1]: [
-    Synergy.STEEL,
-    Synergy.POISON,
-    Synergy.ARTIFICIAL
-  ],
-  [DungeonPMDO.SouthernCavern2]: [
-    Synergy.FAIRY,
-    Synergy.AQUATIC,
-    Synergy.POISON
-  ],
-  [DungeonPMDO.SouthernJungle]: [Synergy.WILD, Synergy.FLORA, Synergy.GRASS],
-  [DungeonPMDO.SpacialCliffs]: [Synergy.GHOST, Synergy.ROCK, Synergy.ELECTRIC],
-  [DungeonPMDO.SpacialRift1]: [
-    Synergy.GHOST,
-    Synergy.ARTIFICIAL,
-    Synergy.MONSTER
-  ],
-  [DungeonPMDO.SpacialRift2]: [
-    Synergy.GHOST,
-    Synergy.ARTIFICIAL,
-    Synergy.PSYCHIC
-  ],
-  [DungeonPMDO.SteamCave]: [Synergy.FIRE, Synergy.GROUND, Synergy.ELECTRIC],
-  [DungeonPMDO.SteelAegisCave]: [
-    Synergy.STEEL,
-    Synergy.NORMAL,
-    Synergy.FIGHTING
-  ],
-  [DungeonPMDO.StormySea1]: [Synergy.WATER, Synergy.AQUATIC, Synergy.ELECTRIC],
-  [DungeonPMDO.StormySea2]: [Synergy.WATER, Synergy.AQUATIC, Synergy.SOUND],
-  [DungeonPMDO.SurroundedSea]: [Synergy.WATER, Synergy.DRAGON, Synergy.ICE],
-  [DungeonPMDO.TemporalSpire]: [
-    Synergy.HUMAN,
-    Synergy.PSYCHIC,
-    Synergy.ARTIFICIAL
-  ],
-  [DungeonPMDO.TemporalTower]: [
-    Synergy.HUMAN,
-    Synergy.STEEL,
-    Synergy.ARTIFICIAL
-  ],
-  [DungeonPMDO.TemporalUnused]: [
-    Synergy.NORMAL,
-    Synergy.FOSSIL,
-    Synergy.ARTIFICIAL
-  ],
-  [DungeonPMDO.TestDungeon]: [
-    Synergy.ARTIFICIAL,
-    Synergy.ELECTRIC,
-    Synergy.PSYCHIC
-  ],
-  [DungeonPMDO.TheNightmare]: [Synergy.GHOST, Synergy.DARK, Synergy.PSYCHIC],
-  [DungeonPMDO.ThunderwaveCave]: [
-    Synergy.ELECTRIC,
-    Synergy.GROUND,
-    Synergy.LIGHT
-  ],
-  [DungeonPMDO.TinyMeadow]: [Synergy.GRASS, Synergy.BABY, Synergy.NORMAL],
-  [DungeonPMDO.TinyWoods]: [Synergy.BUG, Synergy.BABY, Synergy.NORMAL],
-  [DungeonPMDO.TreeshroudForest1]: [Synergy.GRASS, Synergy.WATER, Synergy.BUG],
-  [DungeonPMDO.TreeshroudForest2]: [
-    Synergy.GRASS,
-    Synergy.AQUATIC,
-    Synergy.BABY
-  ],
-  [DungeonPMDO.UnusedBrineCave]: [
-    Synergy.WATER,
-    Synergy.GROUND,
-    Synergy.DRAGON
-  ],
-  [DungeonPMDO.UnusedSteamCave]: [
-    Synergy.FIRE,
-    Synergy.WATER,
-    Synergy.ELECTRIC
-  ],
-  [DungeonPMDO.UnusedWaterfallPond]: [
-    Synergy.AQUATIC,
-    Synergy.BUG,
-    Synergy.WILD
-  ],
-  [DungeonPMDO.UproarForest]: [Synergy.WILD, Synergy.FIELD, Synergy.SOUND],
-  [DungeonPMDO.VastIceMountain]: [Synergy.DRAGON, Synergy.ICE, Synergy.ROCK],
-  [DungeonPMDO.VastIceMountainPeak]: [
-    Synergy.DRAGON,
-    Synergy.ICE,
-    Synergy.FLYING
-  ],
-  [DungeonPMDO.WaterfallCave]: [Synergy.WATER, Synergy.GROUND, Synergy.SOUND],
-  [DungeonPMDO.WaterfallPond]: [Synergy.WATER, Synergy.AQUATIC, Synergy.SOUND],
-  [DungeonPMDO.WaterMaze]: [Synergy.WATER, Synergy.AQUATIC, Synergy.GRASS],
-  [DungeonPMDO.WesternCave1]: [
-    Synergy.HUMAN,
-    Synergy.FLORA,
-    Synergy.ARTIFICIAL
-  ],
-  [DungeonPMDO.WesternCave2]: [Synergy.HUMAN, Synergy.FLORA, Synergy.ROCK],
-  [DungeonPMDO.WishCave1]: [Synergy.FAIRY, Synergy.HUMAN, Synergy.DRAGON],
-  [DungeonPMDO.WishCave2]: [Synergy.FAIRY, Synergy.DRAGON, Synergy.BUG],
-  [DungeonPMDO.WorldAbyss2]: [Synergy.DARK, Synergy.GHOST, Synergy.ELECTRIC],
-  [DungeonPMDO.WyvernHill]: [Synergy.DRAGON, Synergy.FLYING, Synergy.FIELD],
-  [DungeonPMDO.ZeroIsleEast3]: [Synergy.GROUND, Synergy.PSYCHIC, Synergy.STEEL],
-  [DungeonPMDO.ZeroIsleEast4]: [Synergy.POISON, Synergy.MONSTER, Synergy.ROCK],
-  [DungeonPMDO.ZeroIsleSouth1]: [Synergy.GROUND, Synergy.BUG, Synergy.NORMAL],
-  [DungeonPMDO.ZeroIsleSouth2]: [Synergy.ROCK, Synergy.GROUND, Synergy.FIGHTING]
+export enum RegionPokemon {
+  KANTO = "KANTO",
+  JOHTO = "JOHTO",
+  HOENN = "HOENN",
+  SINNOH = "SINNOH",
+  UNYS = "UNYS",
+  KALOS = "KALOS",
+  ALOLA = "ALOLA",
+  GALAR = "GALAR",
+  PALDEA = "PALDEA"
+}
+
+export interface DungeonPMDODetail {
+  synergies: Synergy[]
+  region: RegionPokemon
+  music: DungeonMusic
+}
+export const DungeonDetails: { [key in DungeonPMDO]: DungeonPMDODetail } = {
+  [DungeonPMDO.AmpPlains]: {
+    synergies: [Synergy.ELECTRIC, Synergy.FIELD, Synergy.AQUATIC],
+    region: RegionPokemon.KANTO,
+    music: DungeonMusic.AMP_PLAINS
+  },
+  [DungeonPMDO.AppleWoods]: {
+    synergies: [Synergy.BUG, Synergy.FLORA, Synergy.BABY],
+    region: RegionPokemon.KANTO,
+    music: DungeonMusic.APPLE_WOODS
+  },
+  [DungeonPMDO.BarrenValley]: {
+    synergies: [Synergy.ROCK, Synergy.FIGHTING, Synergy.GHOST],
+    region: RegionPokemon.KANTO,
+    music: DungeonMusic.BARREN_VALLEY
+  },
+  [DungeonPMDO.BeachCave]: {
+    synergies: [Synergy.AQUATIC, Synergy.GROUND, Synergy.FOSSIL],
+    region: RegionPokemon.KANTO,
+    music: DungeonMusic.BEACH_CAVE
+  },
+  [DungeonPMDO.BrineCave]: {
+    synergies: [Synergy.POISON, Synergy.FOSSIL, Synergy.GROUND],
+    region: RegionPokemon.KANTO,
+    music: DungeonMusic.BRINE_CAVE
+  },
+  [DungeonPMDO.BuriedRelic1]: {
+    synergies: [Synergy.LIGHT, Synergy.ARTIFICIAL, Synergy.HUMAN],
+    region: RegionPokemon.KANTO,
+    music: DungeonMusic.BURIED_RELIC
+  },
+  [DungeonPMDO.BuriedRelic2]: {
+    synergies: [Synergy.GROUND, Synergy.ARTIFICIAL, Synergy.LIGHT],
+    region: RegionPokemon.KANTO,
+    music: DungeonMusic.TIME_GEAR_REMIX
+  },
+  [DungeonPMDO.BuriedRelic3]: {
+    synergies: [Synergy.GROUND, Synergy.ARTIFICIAL, Synergy.HUMAN],
+    region: RegionPokemon.KANTO,
+    music: DungeonMusic.TIME_GEAR
+  },
+  [DungeonPMDO.ConcealedRuins]: {
+    synergies: [Synergy.POISON, Synergy.WILD, Synergy.GHOST],
+    region: RegionPokemon.KANTO,
+    music: DungeonMusic.CONCEALED_RUINS
+  },
+  [DungeonPMDO.CraggyCoast]: {
+    synergies: [Synergy.WATER, Synergy.FIGHTING, Synergy.MONSTER],
+    region: RegionPokemon.KANTO,
+    music: DungeonMusic.CRAGGY_COAST
+  },
+  [DungeonPMDO.CrystalCave1]: {
+    synergies: [Synergy.PSYCHIC, Synergy.SOUND, Synergy.DARK],
+    region: RegionPokemon.KANTO,
+    music: DungeonMusic.CRYSTAL_CAVE
+  },
+  [DungeonPMDO.CrystalCave2]: {
+    synergies: [Synergy.PSYCHIC, Synergy.SOUND, Synergy.LIGHT],
+    region: RegionPokemon.KANTO,
+    music: DungeonMusic.STAFF_ROLL
+  },
+  [DungeonPMDO.CrystalCrossing]: {
+    synergies: [Synergy.PSYCHIC, Synergy.AQUATIC, Synergy.POISON],
+    region: RegionPokemon.KANTO,
+    music: DungeonMusic.CRYSTAL_CROSSING
+  },
+  [DungeonPMDO.DarkCrater]: {
+    synergies: [Synergy.DARK, Synergy.FIRE, Synergy.GROUND],
+    region: RegionPokemon.KANTO,
+    music: DungeonMusic.DARK_CRATER
+  },
+  [DungeonPMDO.DarkHill1]: {
+    synergies: [Synergy.GHOST, Synergy.DARK, Synergy.FLYING],
+    region: RegionPokemon.KANTO,
+    music: DungeonMusic.DARK_HILL
+  },
+  [DungeonPMDO.DarkHill2]: {
+    synergies: [Synergy.GHOST, Synergy.DARK, Synergy.FIELD],
+    region: RegionPokemon.KANTO,
+    music: DungeonMusic.I_SAW_SOMETHING_AGAIN
+  },
+  [DungeonPMDO.DarkIceMountain]: {
+    synergies: [Synergy.DARK, Synergy.ICE, Synergy.NORMAL],
+    region: RegionPokemon.JOHTO,
+    music: DungeonMusic.DARK_ICE_MOUNTAIN
+  },
+  [DungeonPMDO.DarkIceMountainPeak]: {
+    synergies: [Synergy.DARK, Synergy.ICE, Synergy.FLYING],
+    region: RegionPokemon.JOHTO,
+    music: DungeonMusic.AT_THE_SNOWY_MOUNTAIN
+  },
+  [DungeonPMDO.DarknightRelic]: {
+    synergies: [Synergy.FOSSIL, Synergy.ARTIFICIAL, Synergy.HUMAN],
+    region: RegionPokemon.JOHTO,
+    music: DungeonMusic.DARK_WASTELAND
+  },
+  [DungeonPMDO.DarkWasteland]: {
+    synergies: [Synergy.DARK, Synergy.POISON, Synergy.MONSTER],
+    region: RegionPokemon.JOHTO,
+    music: DungeonMusic.CHASM_CAVE
+  },
+  [DungeonPMDO.DeepBoulderQuarry]: {
+    synergies: [Synergy.ROCK, Synergy.STEEL, Synergy.FOSSIL],
+    region: RegionPokemon.JOHTO,
+    music: DungeonMusic.BOULDER_QUARRY
+  },
+  [DungeonPMDO.DeepDarkCrater]: {
+    synergies: [Synergy.DARK, Synergy.FIRE, Synergy.MONSTER],
+    region: RegionPokemon.JOHTO,
+    music: DungeonMusic.DEEP_DARK_CRATER
+  },
+  [DungeonPMDO.DeepDuskForest1]: {
+    synergies: [Synergy.GHOST, Synergy.GRASS, Synergy.DARK],
+    region: RegionPokemon.JOHTO,
+    music: DungeonMusic.DEEP_DUSK_FOREST
+  },
+  [DungeonPMDO.DeepDuskForest2]: {
+    synergies: [Synergy.GHOST, Synergy.GRASS, Synergy.LIGHT],
+    region: RegionPokemon.JOHTO,
+    music: DungeonMusic.GROWING_ANXIETY
+  },
+  [DungeonPMDO.DeepLimestoneCavern]: {
+    synergies: [Synergy.WATER, Synergy.BUG, Synergy.ROCK],
+    region: RegionPokemon.JOHTO,
+    music: DungeonMusic.PROTECTED_WORLD_PEACE
+  },
+  [DungeonPMDO.DeepSealedRuin]: {
+    synergies: [Synergy.HUMAN, Synergy.ARTIFICIAL, Synergy.MONSTER],
+    region: RegionPokemon.JOHTO,
+    music: DungeonMusic.SEALED_RUIN_PIT
+  },
+  [DungeonPMDO.DesertRegion]: {
+    synergies: [Synergy.FIRE, Synergy.FIELD, Synergy.LIGHT],
+    region: RegionPokemon.JOHTO,
+    music: DungeonMusic.DUN_HONOO_2
+  },
+  [DungeonPMDO.DrenchedBluff]: {
+    synergies: [Synergy.AQUATIC, Synergy.FOSSIL, Synergy.BABY],
+    region: RegionPokemon.JOHTO,
+    music: DungeonMusic.DRENCHED_BLUFF
+  },
+  [DungeonPMDO.DuskForest1]: {
+    synergies: [Synergy.MONSTER, Synergy.GRASS, Synergy.DARK],
+    region: RegionPokemon.JOHTO,
+    music: DungeonMusic.DUSK_FOREST
+  },
+  [DungeonPMDO.DuskForest2]: {
+    synergies: [Synergy.GHOST, Synergy.GRASS, Synergy.FLORA],
+    region: RegionPokemon.JOHTO,
+    music: DungeonMusic.SINISTER_WOODS
+  },
+  [DungeonPMDO.ElectricMaze]: {
+    synergies: [Synergy.ELECTRIC, Synergy.MONSTER, Synergy.LIGHT],
+    region: RegionPokemon.JOHTO,
+    music: DungeonMusic.STOP_THIEF
+  },
+  [DungeonPMDO.FarAmpPlains]: {
+    synergies: [Synergy.ELECTRIC, Synergy.FIELD, Synergy.FOSSIL],
+    region: RegionPokemon.JOHTO,
+    music: DungeonMusic.FAR_AMP_PLAINS
+  },
+  [DungeonPMDO.FinalMaze2]: {
+    synergies: [Synergy.BABY, Synergy.FLORA, Synergy.BUG],
+    region: RegionPokemon.HOENN,
+    music: DungeonMusic.FRIEND_AREA_CAVES
+  },
+  [DungeonPMDO.FoggyForest]: {
+    synergies: [Synergy.FAIRY, Synergy.WILD, Synergy.FLORA],
+    region: RegionPokemon.HOENN,
+    music: DungeonMusic.FOGGY_FOREST
+  },
+  [DungeonPMDO.ForestPath]: {
+    synergies: [Synergy.GRASS, Synergy.BUG, Synergy.BABY],
+    region: RegionPokemon.HOENN,
+    music: DungeonMusic.SKY_PEAK_FOREST
+  },
+  [DungeonPMDO.FrostyForest]: {
+    synergies: [Synergy.LIGHT, Synergy.ICE, Synergy.FIGHTING],
+    region: RegionPokemon.HOENN,
+    music: DungeonMusic.FROSTY_FOREST
+  },
+  [DungeonPMDO.FutureTemporalSpire]: {
+    synergies: [Synergy.HUMAN, Synergy.ARTIFICIAL, Synergy.PSYCHIC],
+    region: RegionPokemon.HOENN,
+    music: DungeonMusic.BATTLE_WITH_RAYQUAZA
+  },
+  [DungeonPMDO.FutureTemporalTower]: {
+    synergies: [Synergy.MONSTER, Synergy.ARTIFICIAL, Synergy.PSYCHIC],
+    region: RegionPokemon.HOENN,
+    music: DungeonMusic.TEMPORAL_TOWER
+  },
+  [DungeonPMDO.GoldenChamber]: {
+    synergies: [Synergy.LIGHT, Synergy.STEEL, Synergy.DRAGON],
+    region: RegionPokemon.HOENN,
+    music: DungeonMusic.OUTLAW
+  },
+  [DungeonPMDO.GrassMaze]: {
+    synergies: [Synergy.GRASS, Synergy.FIELD, Synergy.NORMAL],
+    region: RegionPokemon.HOENN,
+    music: DungeonMusic.MAKUHITA_DOJO
+  },
+  [DungeonPMDO.GreatCanyon]: {
+    synergies: [Synergy.NORMAL, Synergy.WILD, Synergy.FIRE],
+    region: RegionPokemon.HOENN,
+    music: DungeonMusic.GREAT_CANYON
+  },
+  [DungeonPMDO.HiddenHighland]: {
+    synergies: [Synergy.FLORA, Synergy.BABY, Synergy.BUG],
+    region: RegionPokemon.HOENN,
+    music: DungeonMusic.HIDDEN_HIGHLAND
+  },
+  [DungeonPMDO.HiddenLand]: {
+    synergies: [Synergy.FLORA, Synergy.WILD, Synergy.WATER],
+    region: RegionPokemon.HOENN,
+    music: DungeonMusic.HIDDEN_LAND
+  },
+  [DungeonPMDO.HowlingForest1]: {
+    synergies: [Synergy.SOUND, Synergy.FIELD, Synergy.BUG],
+    region: RegionPokemon.HOENN,
+    music: DungeonMusic.RANDOM_DUNGEON_2
+  },
+  [DungeonPMDO.HowlingForest2]: {
+    synergies: [Synergy.SOUND, Synergy.POISON, Synergy.FOSSIL],
+    region: RegionPokemon.HOENN,
+    music: DungeonMusic.FRIEND_AREA_FOREST
+  },
+  [DungeonPMDO.IceAegisCave]: {
+    synergies: [Synergy.ICE, Synergy.FIGHTING, Synergy.DARK],
+    region: RegionPokemon.HOENN,
+    music: DungeonMusic.ILLUSION_STONE_CHAMBER
+  },
+  [DungeonPMDO.IceMaze]: {
+    synergies: [Synergy.ICE, Synergy.STEEL, Synergy.FIGHTING],
+    region: RegionPokemon.HOENN,
+    music: DungeonMusic.TOP_MENU_THEME
+  },
+  [DungeonPMDO.IcicleForest]: {
+    synergies: [Synergy.ICE, Synergy.FIELD, Synergy.FIGHTING],
+    region: RegionPokemon.HOENN,
+    music: DungeonMusic.ICICLE_FOREST
+  },
+  [DungeonPMDO.JoyousTower]: {
+    synergies: [Synergy.LIGHT, Synergy.FAIRY, Synergy.BABY],
+    region: RegionPokemon.SINNOH,
+    music: DungeonMusic.A_NEW_WORLD
+  },
+  [DungeonPMDO.LapisCave]: {
+    synergies: [Synergy.WATER, Synergy.AQUATIC, Synergy.FOSSIL],
+    region: RegionPokemon.SINNOH,
+    music: DungeonMusic.LAPIS_CAVE
+  },
+  [DungeonPMDO.LightningField]: {
+    synergies: [Synergy.ELECTRIC, Synergy.FIELD, Synergy.LIGHT],
+    region: RegionPokemon.SINNOH,
+    music: DungeonMusic.OH_NO
+  },
+  [DungeonPMDO.LimestoneCavern]: {
+    synergies: [Synergy.ROCK, Synergy.BUG, Synergy.AQUATIC],
+    region: RegionPokemon.SINNOH,
+    music: DungeonMusic.LIMESTONE_CAVERN
+  },
+  [DungeonPMDO.LowerBrineCave]: {
+    synergies: [Synergy.AQUATIC, Synergy.FOSSIL, Synergy.WILD],
+    region: RegionPokemon.SINNOH,
+    music: DungeonMusic.LOWER_BRINE_CAVE
+  },
+  [DungeonPMDO.LushPrairie]: {
+    synergies: [Synergy.BUG, Synergy.BABY, Synergy.FLORA],
+    region: RegionPokemon.SINNOH,
+    music: DungeonMusic.WELCOME_TO_THE_WORLD_OF_POKEMON
+  },
+  [DungeonPMDO.MagmaCavern2]: {
+    synergies: [Synergy.FIRE, Synergy.FIGHTING, Synergy.MONSTER],
+    region: RegionPokemon.SINNOH,
+    music: DungeonMusic.MAGMA_CAVERN
+  },
+  [DungeonPMDO.MagmaCavern3]: {
+    synergies: [Synergy.FIRE, Synergy.DRAGON, Synergy.MONSTER],
+    region: RegionPokemon.SINNOH,
+    music: DungeonMusic.MAGMA_CAVERN_PIT
+  },
+  [DungeonPMDO.MeteorCave]: {
+    synergies: [Synergy.PSYCHIC, Synergy.FAIRY, Synergy.HUMAN],
+    region: RegionPokemon.SINNOH,
+    music: DungeonMusic.RANDOM_DUNGEON_1
+  },
+  [DungeonPMDO.MiracleSea]: {
+    synergies: [Synergy.WATER, Synergy.AQUATIC, Synergy.FAIRY],
+    region: RegionPokemon.SINNOH,
+    music: DungeonMusic.MIRACLE_SEA
+  },
+  [DungeonPMDO.MoonlitCourtyard]: {
+    synergies: [Synergy.FAIRY, Synergy.FLORA, Synergy.DARK],
+    region: RegionPokemon.SINNOH,
+    music: DungeonMusic.GOODNIGHT
+  },
+  [DungeonPMDO.MtBlaze]: {
+    synergies: [Synergy.FIRE, Synergy.FLYING, Synergy.WILD],
+    region: RegionPokemon.SINNOH,
+    music: DungeonMusic.MT_BLAZE
+  },
+  [DungeonPMDO.MtBristle]: {
+    synergies: [Synergy.ELECTRIC, Synergy.FLYING, Synergy.MONSTER],
+    region: RegionPokemon.SINNOH,
+    music: DungeonMusic.MT_BRISTLE
+  },
+  [DungeonPMDO.MtFaraway2]: {
+    synergies: [Synergy.ICE, Synergy.FLYING, Synergy.DRAGON],
+    region: RegionPokemon.SINNOH,
+    music: DungeonMusic.FROSTY_GROTTO
+  },
+  [DungeonPMDO.MtFaraway4]: {
+    synergies: [Synergy.ICE, Synergy.FLYING, Synergy.SOUND],
+    region: RegionPokemon.SINNOH,
+    music: DungeonMusic.ESCAPE_THROUGH_THE_SNOW
+  },
+  [DungeonPMDO.MtFreeze]: {
+    synergies: [Synergy.ICE, Synergy.FLYING, Synergy.NORMAL],
+    region: RegionPokemon.SINNOH,
+    music: DungeonMusic.MT_FREEZE
+  },
+  [DungeonPMDO.MtHorn]: {
+    synergies: [Synergy.ROCK, Synergy.FLYING, Synergy.SOUND],
+    region: RegionPokemon.UNYS,
+    music: DungeonMusic.MT_HORN
+  },
+  [DungeonPMDO.MtSteel1]: {
+    synergies: [Synergy.STEEL, Synergy.FLYING, Synergy.FIGHTING],
+    region: RegionPokemon.UNYS,
+    music: DungeonMusic.MT_STEEL
+  },
+  [DungeonPMDO.MtSteel2]: {
+    synergies: [Synergy.STEEL, Synergy.FLYING, Synergy.FIGHTING],
+    region: RegionPokemon.UNYS,
+    music: DungeonMusic.BOSS_BATTLE
+  },
+  [DungeonPMDO.MtThunder]: {
+    synergies: [Synergy.ELECTRIC, Synergy.ROCK, Synergy.STEEL],
+    region: RegionPokemon.UNYS,
+    music: DungeonMusic.MT_THUNDER
+  },
+  [DungeonPMDO.MtThunderPeak]: {
+    synergies: [Synergy.ELECTRIC, Synergy.FLYING, Synergy.WILD],
+    region: RegionPokemon.UNYS,
+    music: DungeonMusic.MT_THUNDER_PEAK
+  },
+  [DungeonPMDO.MtTravail]: {
+    synergies: [Synergy.FIGHTING, Synergy.HUMAN, Synergy.FOSSIL],
+    region: RegionPokemon.UNYS,
+    music: DungeonMusic.MT_TRAVAIL
+  },
+  [DungeonPMDO.MurkyCave]: {
+    synergies: [Synergy.POISON, Synergy.GROUND, Synergy.HUMAN],
+    region: RegionPokemon.UNYS,
+    music: DungeonMusic.MONSTER_HOUSE
+  },
+  [DungeonPMDO.MurkyForest]: {
+    synergies: [Synergy.POISON, Synergy.GRASS, Synergy.DARK],
+    region: RegionPokemon.UNYS,
+    music: DungeonMusic.MURKY_FOREST
+  },
+  [DungeonPMDO.MysteryJungle1]: {
+    synergies: [Synergy.WILD, Synergy.FLORA, Synergy.POISON],
+    region: RegionPokemon.UNYS,
+    music: DungeonMusic.FRIEND_AREA_STEPPE
+  },
+  [DungeonPMDO.MysteryJungle2]: {
+    synergies: [Synergy.WILD, Synergy.FAIRY, Synergy.POISON],
+    region: RegionPokemon.UNYS,
+    music: DungeonMusic.BLIZZARD_ISLAND
+  },
+  [DungeonPMDO.MystifyingForest]: {
+    synergies: [Synergy.BABY, Synergy.FAIRY, Synergy.FLORA],
+    region: RegionPokemon.UNYS,
+    music: DungeonMusic.MYSTIFYING_FOREST
+  },
+  [DungeonPMDO.NorthernDesert1]: {
+    synergies: [Synergy.DRAGON, Synergy.FIRE, Synergy.LIGHT],
+    region: RegionPokemon.UNYS,
+    music: DungeonMusic.NORTHERN_DESERT
+  },
+  [DungeonPMDO.NorthernDesert2]: {
+    synergies: [Synergy.DRAGON, Synergy.FIRE, Synergy.WILD],
+    region: RegionPokemon.UNYS,
+    music: DungeonMusic.NORTHERN_DESERT
+  },
+  [DungeonPMDO.NorthernRange1]: {
+    synergies: [Synergy.POISON, Synergy.AQUATIC, Synergy.STEEL],
+    region: RegionPokemon.UNYS,
+    music: DungeonMusic.FORTUNE_RAVINE
+  },
+  [DungeonPMDO.NorthernRange2]: {
+    synergies: [Synergy.MONSTER, Synergy.FIGHTING, Synergy.STEEL],
+    region: RegionPokemon.UNYS,
+    music: DungeonMusic.TEAM_SKULL
+  },
+  [DungeonPMDO.NorthwindField]: {
+    synergies: [Synergy.WATER, Synergy.FIELD, Synergy.SOUND],
+    region: RegionPokemon.UNYS,
+    music: DungeonMusic.THROUGH_THE_SEA_OF_TIME
+  },
+  [DungeonPMDO.PitfallValley1]: {
+    synergies: [Synergy.FIELD, Synergy.HUMAN, Synergy.BABY],
+    region: RegionPokemon.KALOS,
+    music: DungeonMusic.PERSONALITY_TEST
+  },
+  [DungeonPMDO.PoisonMaze]: {
+    synergies: [Synergy.POISON, Synergy.PSYCHIC, Synergy.BUG],
+    region: RegionPokemon.KALOS,
+    music: DungeonMusic.RANDOM_DUNGEON_3
+  },
+  [DungeonPMDO.PurityForest2]: {
+    synergies: [Synergy.BABY, Synergy.FAIRY, Synergy.FLORA],
+    region: RegionPokemon.KALOS,
+    music: DungeonMusic.RUN_AWAY
+  },
+  [DungeonPMDO.PurityForest4]: {
+    synergies: [Synergy.NORMAL, Synergy.WILD, Synergy.FAIRY],
+    region: RegionPokemon.KALOS,
+    music: DungeonMusic.POKEMON_SQUARE
+  },
+  [DungeonPMDO.PurityForest6]: {
+    synergies: [Synergy.NORMAL, Synergy.GRASS, Synergy.BABY],
+    region: RegionPokemon.KALOS,
+    music: DungeonMusic.SHAYMIN_VILLAGE
+  },
+  [DungeonPMDO.PurityForest7]: {
+    synergies: [Synergy.GRASS, Synergy.BABY, Synergy.SOUND],
+    region: RegionPokemon.KALOS,
+    music: DungeonMusic.ON_THE_BEACH_AT_DUSK
+  },
+  [DungeonPMDO.QuicksandCave]: {
+    synergies: [Synergy.GROUND, Synergy.FOSSIL, Synergy.NORMAL],
+    region: RegionPokemon.KALOS,
+    music: DungeonMusic.QUICKSAND_CAVE
+  },
+  [DungeonPMDO.QuicksandPit]: {
+    synergies: [Synergy.GROUND, Synergy.FOSSIL, Synergy.MONSTER],
+    region: RegionPokemon.KALOS,
+    music: DungeonMusic.QUICKSAND_PIT
+  },
+  [DungeonPMDO.QuicksandUnused]: {
+    synergies: [Synergy.GROUND, Synergy.NORMAL, Synergy.POISON],
+    region: RegionPokemon.KALOS,
+    music: DungeonMusic.THERES_TROUBLE
+  },
+  [DungeonPMDO.RescueTeamMaze]: {
+    synergies: [Synergy.FIGHTING, Synergy.HUMAN, Synergy.ARTIFICIAL],
+    region: RegionPokemon.KALOS,
+    music: DungeonMusic.RESCUE_TEAM_BASE
+  },
+  [DungeonPMDO.RockAegisCave]: {
+    synergies: [Synergy.ROCK, Synergy.GHOST, Synergy.FIGHTING],
+    region: RegionPokemon.KALOS,
+    music: DungeonMusic.FRIEND_AREA_SWAMP
+  },
+  [DungeonPMDO.RockMaze]: {
+    synergies: [Synergy.ROCK, Synergy.STEEL, Synergy.FIGHTING],
+    region: RegionPokemon.KALOS,
+    music: DungeonMusic.DEFY_THE_LEGENDS
+  },
+  [DungeonPMDO.RockPathRB]: {
+    synergies: [Synergy.ROCK, Synergy.FIELD, Synergy.FOSSIL],
+    region: RegionPokemon.KALOS,
+    music: DungeonMusic.RISING_FEAR
+  },
+  [DungeonPMDO.RockPathTDS]: {
+    synergies: [Synergy.ROCK, Synergy.FIELD, Synergy.MONSTER],
+    region: RegionPokemon.KALOS,
+    music: DungeonMusic.FRIEND_AREA_POND
+  },
+  [DungeonPMDO.SealedRuin]: {
+    synergies: [Synergy.HUMAN, Synergy.DRAGON, Synergy.GHOST],
+    region: RegionPokemon.KALOS,
+    music: DungeonMusic.THE_LEGEND_OF_NINETALES
+  },
+  [DungeonPMDO.SidePath]: {
+    synergies: [Synergy.NORMAL, Synergy.FIELD, Synergy.STEEL],
+    region: RegionPokemon.KALOS,
+    music: DungeonMusic.CAVE_AND_SIDE_PATH
+  },
+  [DungeonPMDO.SilentChasm]: {
+    synergies: [Synergy.FIRE, Synergy.LIGHT, Synergy.WILD],
+    region: RegionPokemon.ALOLA,
+    music: DungeonMusic.SILENT_CHASM
+  },
+  [DungeonPMDO.SkyPeak4thPass]: {
+    synergies: [Synergy.GRASS, Synergy.FLORA, Synergy.BABY],
+    region: RegionPokemon.ALOLA,
+    music: DungeonMusic.SKY_PEAK_COAST
+  },
+  [DungeonPMDO.SkyPeak7thPass]: {
+    synergies: [Synergy.ICE, Synergy.DRAGON, Synergy.FAIRY],
+    region: RegionPokemon.ALOLA,
+    music: DungeonMusic.SKY_PEAK_CAVE
+  },
+  [DungeonPMDO.SkyPeakSummitPass]: {
+    synergies: [Synergy.DARK, Synergy.STEEL, Synergy.ROCK],
+    region: RegionPokemon.ALOLA,
+    music: DungeonMusic.SKY_TOWER_SUMMIT
+  },
+  [DungeonPMDO.SkyTower]: {
+    synergies: [Synergy.FLYING, Synergy.LIGHT, Synergy.FAIRY],
+    region: RegionPokemon.ALOLA,
+    music: DungeonMusic.SKY_TOWER
+  },
+  [DungeonPMDO.SnowPath]: {
+    synergies: [Synergy.ICE, Synergy.FIELD, Synergy.NORMAL],
+    region: RegionPokemon.ALOLA,
+    music: DungeonMusic.SKY_PEAK_SNOWFIELD
+  },
+  [DungeonPMDO.SolarCave1]: {
+    synergies: [Synergy.PSYCHIC, Synergy.FIRE, Synergy.SOUND],
+    region: RegionPokemon.ALOLA,
+    music: DungeonMusic.SKY_PEAK_PRAIRIE
+  },
+  [DungeonPMDO.SouthernCavern1]: {
+    synergies: [Synergy.STEEL, Synergy.POISON, Synergy.ARTIFICIAL],
+    region: RegionPokemon.ALOLA,
+    music: DungeonMusic.SPRING_CAVE
+  },
+  [DungeonPMDO.SouthernCavern2]: {
+    synergies: [Synergy.FAIRY, Synergy.AQUATIC, Synergy.POISON],
+    region: RegionPokemon.ALOLA,
+    music: DungeonMusic.SPRING_CAVE_DEPTHS
+  },
+  [DungeonPMDO.SouthernJungle]: {
+    synergies: [Synergy.WILD, Synergy.FLORA, Synergy.GRASS],
+    region: RegionPokemon.ALOLA,
+    music: DungeonMusic.SOUTHERN_JUNGLE
+  },
+  [DungeonPMDO.SpacialCliffs]: {
+    synergies: [Synergy.GHOST, Synergy.ROCK, Synergy.ELECTRIC],
+    region: RegionPokemon.ALOLA,
+    music: DungeonMusic.SPACIAL_CLIFFS
+  },
+  [DungeonPMDO.SpacialRift1]: {
+    synergies: [Synergy.GHOST, Synergy.ARTIFICIAL, Synergy.MONSTER],
+    region: RegionPokemon.ALOLA,
+    music: DungeonMusic.IN_THE_FUTURE
+  },
+  [DungeonPMDO.SpacialRift2]: {
+    synergies: [Synergy.GHOST, Synergy.ARTIFICIAL, Synergy.PSYCHIC],
+    region: RegionPokemon.ALOLA,
+    music: DungeonMusic.PLANETS_PARALYSIS
+  },
+  [DungeonPMDO.SteamCave]: {
+    synergies: [Synergy.FIRE, Synergy.GROUND, Synergy.ELECTRIC],
+    region: RegionPokemon.ALOLA,
+    music: DungeonMusic.STEAM_CAVE
+  },
+  [DungeonPMDO.SteelAegisCave]: {
+    synergies: [Synergy.STEEL, Synergy.NORMAL, Synergy.FIGHTING],
+    region: RegionPokemon.ALOLA,
+    music: DungeonMusic.AEGIS_CAVE
+  },
+  [DungeonPMDO.StormySea1]: {
+    synergies: [Synergy.WATER, Synergy.AQUATIC, Synergy.ELECTRIC],
+    region: RegionPokemon.ALOLA,
+    music: DungeonMusic.STORMY_SEA
+  },
+  [DungeonPMDO.StormySea2]: {
+    synergies: [Synergy.WATER, Synergy.AQUATIC, Synergy.SOUND],
+    region: RegionPokemon.GALAR,
+    music: DungeonMusic.FRIEND_AREA_OCEANIC
+  },
+  [DungeonPMDO.SurroundedSea]: {
+    synergies: [Synergy.WATER, Synergy.DRAGON, Synergy.ICE],
+    region: RegionPokemon.GALAR,
+    music: DungeonMusic.SURROUNDED_SEA
+  },
+  [DungeonPMDO.TemporalSpire]: {
+    synergies: [Synergy.HUMAN, Synergy.PSYCHIC, Synergy.ARTIFICIAL],
+    region: RegionPokemon.GALAR,
+    music: DungeonMusic.TEMPORAL_SPIRE
+  },
+  [DungeonPMDO.TemporalTower]: {
+    synergies: [Synergy.HUMAN, Synergy.STEEL, Synergy.ARTIFICIAL],
+    region: RegionPokemon.GALAR,
+    music: DungeonMusic.GARDEVOIR_INSIDE_OF_A_DREAM
+  },
+  [DungeonPMDO.TemporalUnused]: {
+    synergies: [Synergy.NORMAL, Synergy.FOSSIL, Synergy.ARTIFICIAL],
+    region: RegionPokemon.GALAR,
+    music: DungeonMusic.TEMPORAL_PINNACLE
+  },
+  [DungeonPMDO.TestDungeon]: {
+    synergies: [Synergy.ARTIFICIAL, Synergy.ELECTRIC, Synergy.PSYCHIC],
+    region: RegionPokemon.GALAR,
+    music: DungeonMusic.FRIEND_AREA_LAB
+  },
+  [DungeonPMDO.TheNightmare]: {
+    synergies: [Synergy.GHOST, Synergy.DARK, Synergy.PSYCHIC],
+    region: RegionPokemon.GALAR,
+    music: DungeonMusic.THE_POWER_OF_DARKNESS
+  },
+  [DungeonPMDO.ThunderwaveCave]: {
+    synergies: [Synergy.ELECTRIC, Synergy.GROUND, Synergy.LIGHT],
+    region: RegionPokemon.GALAR,
+    music: DungeonMusic.THUNDERWAVE_CAVE
+  },
+  [DungeonPMDO.TinyMeadow]: {
+    synergies: [Synergy.GRASS, Synergy.BABY, Synergy.NORMAL],
+    region: RegionPokemon.GALAR,
+    music: DungeonMusic.FRIEND_AREA_GRASSLANDS
+  },
+  [DungeonPMDO.TinyWoods]: {
+    synergies: [Synergy.BUG, Synergy.BABY, Synergy.NORMAL],
+    region: RegionPokemon.GALAR,
+    music: DungeonMusic.TINY_WOODS
+  },
+  [DungeonPMDO.TreeshroudForest1]: {
+    synergies: [Synergy.GRASS, Synergy.WATER, Synergy.BUG],
+    region: RegionPokemon.GALAR,
+    music: DungeonMusic.TREESHROUD_FOREST
+  },
+  [DungeonPMDO.TreeshroudForest2]: {
+    synergies: [Synergy.GRASS, Synergy.AQUATIC, Synergy.BABY],
+    region: RegionPokemon.GALAR,
+    music: DungeonMusic.FRIEND_AREA_WILDS
+  },
+  [DungeonPMDO.UnusedBrineCave]: {
+    synergies: [Synergy.WATER, Synergy.GROUND, Synergy.DRAGON],
+    region: RegionPokemon.GALAR,
+    music: DungeonMusic.IN_THE_NIGHTMARE
+  },
+  [DungeonPMDO.UnusedSteamCave]: {
+    synergies: [Synergy.FIRE, Synergy.WATER, Synergy.ELECTRIC],
+    region: RegionPokemon.GALAR,
+    music: DungeonMusic.UPPER_STEAM_CAVE
+  },
+  [DungeonPMDO.UnusedWaterfallPond]: {
+    synergies: [Synergy.AQUATIC, Synergy.BUG, Synergy.WILD],
+    region: RegionPokemon.GALAR,
+    music: DungeonMusic.DEEP_STAR_CAVE
+  },
+  [DungeonPMDO.UproarForest]: {
+    synergies: [Synergy.WILD, Synergy.FIELD, Synergy.SOUND],
+    region: RegionPokemon.GALAR,
+    music: DungeonMusic.TREASURE_TOWN
+  },
+  [DungeonPMDO.VastIceMountain]: {
+    synergies: [Synergy.DRAGON, Synergy.ICE, Synergy.ROCK],
+    region: RegionPokemon.PALDEA,
+    music: DungeonMusic.VAST_ICE_MOUNTAIN
+  },
+  [DungeonPMDO.VastIceMountainPeak]: {
+    synergies: [Synergy.DRAGON, Synergy.ICE, Synergy.FLYING],
+    region: RegionPokemon.PALDEA,
+    music: DungeonMusic.VAST_ICE_MOUNTAIN_PEAK
+  },
+  [DungeonPMDO.WaterfallCave]: {
+    synergies: [Synergy.WATER, Synergy.GROUND, Synergy.SOUND],
+    region: RegionPokemon.PALDEA,
+    music: DungeonMusic.MAROWAK_DOJO
+  },
+  [DungeonPMDO.WaterfallPond]: {
+    synergies: [Synergy.WATER, Synergy.AQUATIC, Synergy.SOUND],
+    region: RegionPokemon.PALDEA,
+    music: DungeonMusic.WATERFALL_CAVE
+  },
+  [DungeonPMDO.WaterMaze]: {
+    synergies: [Synergy.WATER, Synergy.AQUATIC, Synergy.GRASS],
+    region: RegionPokemon.PALDEA,
+    music: DungeonMusic.STAR_CAVE
+  },
+  [DungeonPMDO.WesternCave1]: {
+    synergies: [Synergy.HUMAN, Synergy.FLORA, Synergy.ARTIFICIAL],
+    region: RegionPokemon.PALDEA,
+    music: DungeonMusic.SKY_PEAK_FINAL_PASS
+  },
+  [DungeonPMDO.WesternCave2]: {
+    synergies: [Synergy.HUMAN, Synergy.FLORA, Synergy.ROCK],
+    region: RegionPokemon.PALDEA,
+    music: DungeonMusic.JOB_CLEAR
+  },
+  [DungeonPMDO.WishCave1]: {
+    synergies: [Synergy.FAIRY, Synergy.HUMAN, Synergy.DRAGON],
+    region: RegionPokemon.PALDEA,
+    music: DungeonMusic.LIVING_SPIRIT
+  },
+  [DungeonPMDO.WishCave2]: {
+    synergies: [Synergy.FAIRY, Synergy.DRAGON, Synergy.BUG],
+    region: RegionPokemon.PALDEA,
+    music: DungeonMusic.TEAM_CHARM_THEME
+  },
+  [DungeonPMDO.WorldAbyss2]: {
+    synergies: [Synergy.DARK, Synergy.GHOST, Synergy.ELECTRIC],
+    region: RegionPokemon.PALDEA,
+    music: DungeonMusic.WORLD_CALAMITY
+  },
+  [DungeonPMDO.WyvernHill]: {
+    synergies: [Synergy.DRAGON, Synergy.FLYING, Synergy.FIELD],
+    region: RegionPokemon.PALDEA,
+    music: DungeonMusic.KECLEONS_SHOP
+  },
+  [DungeonPMDO.ZeroIsleEast3]: {
+    synergies: [Synergy.GROUND, Synergy.PSYCHIC, Synergy.STEEL],
+    region: RegionPokemon.PALDEA,
+    music: DungeonMusic.VERSUS_BOSS
+  },
+  [DungeonPMDO.ZeroIsleEast4]: {
+    synergies: [Synergy.POISON, Synergy.MONSTER, Synergy.ROCK],
+    region: RegionPokemon.PALDEA,
+    music: DungeonMusic.VERSUS_LEGENDARY
+  },
+  [DungeonPMDO.ZeroIsleSouth1]: {
+    synergies: [Synergy.GROUND, Synergy.BUG, Synergy.NORMAL],
+    region: RegionPokemon.PALDEA,
+    music: DungeonMusic.WIGGLYTUFFS_GUILD_REMIX
+  },
+  [DungeonPMDO.ZeroIsleSouth2]: {
+    synergies: [Synergy.ROCK, Synergy.GROUND, Synergy.FIGHTING],
+    region: RegionPokemon.PALDEA,
+    music: DungeonMusic.WIGGLYTUFFS_GUILD
+  }
 }

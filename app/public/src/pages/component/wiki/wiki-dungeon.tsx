@@ -1,9 +1,6 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import {
-  DungeonPMDO,
-  DungeonPMDOSynergies
-} from "../../../../../types/enum/Dungeon"
+import { DungeonDetails, DungeonPMDO } from "../../../../../types/enum/Dungeon"
 import SynergyIcon from "../icons/synergy-icon"
 
 export function WikiDungeon() {
@@ -21,11 +18,14 @@ export function WikiDungeon() {
                 >
                   <h3>{t(`map.${dungeon}`)}</h3>
                   <div style={{ display: "flex", gap: "5px" }}>
-                    {DungeonPMDOSynergies[dungeon].map((synergy) => (
+                    {DungeonDetails[dungeon].synergies.map((synergy) => (
                       <SynergyIcon type={synergy} />
                     ))}
                   </div>
                 </div>
+                <span>
+                  {t(`region_pokemon.${DungeonDetails[dungeon].region}`)}
+                </span>
                 <img
                   src={`/assets/tilesets/${dungeon}/tileset_0.png`}
                   alt={dungeon}
