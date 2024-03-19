@@ -2037,7 +2037,7 @@ export class OriginPulseStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = 120
+    const damage = 100
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team && target.positionY == y) {
         tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
@@ -2191,7 +2191,7 @@ export class BlizzardStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const freezeDuration = [1000, 2000, 3000][pokemon.stars - 1] ?? 3000
+    const freezeDuration = 2000
     const damage = [5, 10, 15][pokemon.stars - 1] ?? 15
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
       if (enemy && pokemon.team != enemy.team) {
@@ -7763,6 +7763,37 @@ export class SpiritBreakStrategy extends AbilityStrategy {
   }
 }
 
+export class SheerColdStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    let executeChance = clamp(
+      0,
+      0.3 * (1 + pokemon.ap / 100) +
+        min(0)((pokemon.life - target.life) / target.life),
+      1
+    )
+    if (target.types.has(Synergy.ICE)) executeChance = 0
+    else if (target.status.freeze) executeChance = 1
+
+    if (chance(executeChance)) {
+      target.handleSpecialDamage(
+        9999,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit,
+        true
+      )
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -8060,5 +8091,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.MANTIS_BLADES]: new MantisBladesStrategy(),
   [Ability.FLEUR_CANNON]: new FleurCannonStrategy(),
   [Ability.DOOM_DESIRE]: new DoomDesireStrategy(),
-  [Ability.SPIRIT_BREAK]: new SpiritBreakStrategy()
+  [Ability.SPIRIT_BREAK]: new SpiritBreakStrategy(),
+  [Ability.SHEER_COLD]: new SheerColdStrategy()
 }

@@ -536,8 +536,8 @@ export default class Simulation extends Schema implements ISimulation {
               pokemon.positionY
             )
             if (ally && ally.team === pokemon.team) {
-              ally.addShield(Math.ceil(0.25 * ally.hp), ally, false)
-              ally.status.triggerRuneProtect(6000)
+              ally.addShield(Math.ceil(0.2 * ally.hp), ally, false)
+              ally.status.triggerRuneProtect(5000)
             }
           })
         }
@@ -613,13 +613,13 @@ export default class Simulation extends Schema implements ISimulation {
         })
         if (enemyWithHighestHP) {
           enemyWithHighestHP = enemyWithHighestHP as PokemonEntity // see https://github.com/microsoft/TypeScript/issues/11498
-          enemyWithHighestHP.addMaxHP(Math.round(-0.3 * enemyWithHighestHP.hp))
+          enemyWithHighestHP.addMaxHP(Math.round(-0.5 * enemyWithHighestHP.hp))
           enemyWithHighestHP.addShield(
-            Math.round(-0.3 * enemyWithHighestHP.shield),
+            Math.round(-0.5 * enemyWithHighestHP.shield),
             enemyWithHighestHP,
             false
           )
-          enemyWithHighestHP.status.triggerFlinch(8000)
+          enemyWithHighestHP.status.triggerFlinch(5000)
         }
       }
 
@@ -639,9 +639,9 @@ export default class Simulation extends Schema implements ISimulation {
         if (enemyWithHighestATK) {
           enemyWithHighestATK = enemyWithHighestATK as PokemonEntity // see https://github.com/microsoft/TypeScript/issues/11498
           enemyWithHighestATK.addAttack(
-            Math.round(-0.3 * enemyWithHighestATK.atk)
+            Math.round(-0.5 * enemyWithHighestATK.atk)
           )
-          enemyWithHighestATK.status.triggerParalysis(8000, enemyWithHighestATK)
+          enemyWithHighestATK.status.triggerParalysis(5000, enemyWithHighestATK)
         }
       }
 
@@ -656,15 +656,15 @@ export default class Simulation extends Schema implements ISimulation {
         })
         if (enemyWithHighestAP) {
           enemyWithHighestAP = enemyWithHighestAP as PokemonEntity // see https://github.com/microsoft/TypeScript/issues/11498
-          enemyWithHighestAP.addAbilityPower(-30)
-          enemyWithHighestAP.status.triggerSilence(8000, undefined)
+          enemyWithHighestAP.addAbilityPower(-50)
+          enemyWithHighestAP.status.triggerSilence(5000, undefined)
         }
       }
 
       if (teamEffects.has(Effect.CURSE)) {
         const strongestEnemy = getStrongestUnit(opponentsCursable)
         if (strongestEnemy) {
-          strongestEnemy.status.triggerCurse(8000)
+          strongestEnemy.status.triggerCurse(5000)
           console.log(`${strongestEnemy.name} is cursed`)
         }
       }
