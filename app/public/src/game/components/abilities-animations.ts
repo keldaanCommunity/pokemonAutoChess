@@ -1839,6 +1839,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
+    case Ability.SHEER_COLD:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
     case "FIELD_DEATH":
       addAbilitySprite("FIELD_DEATH", coordinates, true).setScale(2)
       break

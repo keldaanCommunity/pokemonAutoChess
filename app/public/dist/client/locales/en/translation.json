@@ -310,7 +310,8 @@
     "SUNSTEEL_STRIKE": "Sunsteel Strike",
     "MOONGEIST_BEAM": "Moongeist Beam",
     "FLEUR_CANNON": "Fleur Cannon",
-    "SPIRIT_BREAK": "Spirit Break"
+    "SPIRIT_BREAK": "Spirit Break",
+    "SHEER_COLD": "Sheer Cold"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1084,7 +1085,7 @@
     "POISON": "Apply POISONNED to the [1,2,3] closest enemy Pokémon for [3,6,9,SP=0.5] seconds",
     "SLEEP": "Make [1,2,3] enemy Pokémon in the backline SLEEP for [2,SP] seconds",
     "PROTECT": "PROTECT the user, becoming invulnerable for [5,SP=0.5] seconds",
-    "BLIZZARD": "FREEZE all enemy Pokémon for [1,2,3] seconds and deal [5,10,15,SP] SPECIAL. Double damage if enemy is already FREEZE",
+    "BLIZZARD": "FREEZE all enemy Pokémon for 2 seconds and deal [5,10,15,SP] SPECIAL. Double damage if enemy is already FREEZE",
     "CONFUSION": "The target is CONFUSION and SILENCE for [3,5,7] seconds. If already CONFUSION, deal [75,150,300,SP] SPECIAL instead",
     "FIRE_BLAST": "Shoot a Fire Blast, dealing [30,60,120,SP] SPECIAL to the target",
     "WHEEL_OF_FIRE": "Shoot a returning Flame Wheel, dealing twice [10,20,30,SP] SPECIAL to all enemy Pokémon hit",
@@ -1102,7 +1103,7 @@
     "IRON_DEFENSE": "Give [20,40,80,SP] SHIELD to allies on the same row",
     "METRONOME": "Use a random ability",
     "SOAK": "Deal [20,40,80,SP] SPECIAL to the target and restore 10 PP to all allied Pokémon",
-    "ORIGIN_PULSE": "A wave travels horizontally across the battlefield dealing [120,SP] SPECIAL to all enemy Pokémon hit",
+    "ORIGIN_PULSE": "A wave travels horizontally across the battlefield dealing [100,SP] SPECIAL to all enemy Pokémon hit",
     "SEED_FLARE": "Shaymin's body emits a shockwave, dealing [30,SP] SPECIAL to all enemy Pokémon, and decreasing their SPE_DEF by 2",
     "IRON_TAIL": "Deal [20,40,80,SP] SPECIAL to the target and buff the user's DEF by [1,3,5]",
     "BLAST_BURN": "Deal [30,60,120,SP] SPECIAL in an area around the user",
@@ -1349,7 +1350,8 @@
     "SUNSTEEL_STRIKE": "Jumps and lands in the middle of the enemy team with the power of a meteor, inflicting [100,SP] SPECIAL to adjacent enemies and BURN for 3 seconds",
     "MOONGEIST_BEAM": "Deals [100,SP] SPECIAL to all enemy Pokémon in a straight line and make them PARALYSIS for 3 seconds",
     "FLEUR_CANNON": "Sends a devastating laser beam that inflicts [120,SP] SPECIAL on all enemies in the beam. Reduces the AP of the caster by 20",
-    "SPIRIT_BREAK": "Deals [20,40,80,SP] SPECIAL and lowers the target's AP by [20,SP]"
+    "SPIRIT_BREAK": "Deals [20,40,80,SP] SPECIAL and lowers the target's AP by [20,SP]",
+    "SHEER_COLD": "A blast of absolute-zero cold that has [30,SP]% chance to execute the target. The more HP the user has relative to the target, the greater the chance. Always execute FREEZE enemies, but never execute ICE targets."
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1537,10 +1539,10 @@
     "STEEL_SPIKE": "Deal 66% of ATK as TRUE",
     "CORKSCREW_CRASH": "Deal 100% of ATK as TRUE",
     "MAX_MELTDOWN": "Deal 140% of ATK as TRUE",
-    "BAD_DREAMS": "The enemy with the highest HP + SHIELD lose 30% of it and is FLINCH for 8 seconds",
-    "PHANTOM_FORCE": "Also, the enemy with the highest ATK lose 30% of it and is PARALYSIS for 8 seconds",
-    "SHADOW_TAG": "Also, the enemy with the highest AP lose 30% of it and is SILENCE for 8 seconds",
-    "CURSE": "Also, the strongest enemy is CURSE and will be KO after 8 seconds",
+    "BAD_DREAMS": "The enemy with the highest HP + SHIELD lose 50% of it and is FLINCH for 5 seconds",
+    "PHANTOM_FORCE": "Also, the enemy with the highest ATK lose 50% of it and is PARALYSIS for 5 seconds",
+    "SHADOW_TAG": "Also, the enemy with the highest AP lose 50% of it and is SILENCE for 5 seconds",
+    "CURSE": "Also, the strongest enemy is CURSE and will be KO after 5 seconds",
     "AROMATIC_MIST": "Shocks deal 15 SPECIAL",
     "FAIRY_WIND": "Shocks deal 30 SPECIAL",
     "STRANGE_STEAM": "Shocks deal 50 SPECIAL",
@@ -1716,7 +1718,7 @@
     "FIRE_GEM": "Attacks do double damage on SHIELD and deal 8 % of target max HP as additional damage",
     "DEFENSIVE_RIBBON": "When the holder takes damage, gain 1 stack. Every 2 stacks, the holder gains +1 DEF, +1 ATK and +5% ATK_SPEED (max 20 stacks)",
     "WONDER_BOX": "At the beginning of each battle, WONDER_BOX is replaced by 2 temporary items (max 3 items held)",
-    "CLEANSE_TAG": "When combat begins, the holder and all adjacent allies on the same row receive 25% HP as SHIELD and RUNE_PROTECT for 6 seconds",
+    "CLEANSE_TAG": "When combat begins, the holder and all adjacent allies on the same row receive 20% HP as SHIELD and RUNE_PROTECT for 5 seconds",
     "WIDE_LENS": "The holder gains +2 RANGE",
     "RAZOR_CLAW": "The holder gains +50% CRIT_CHANCE",
     "FLUFFY_TAIL": "Holder is immune to all status alterations",
