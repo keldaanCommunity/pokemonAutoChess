@@ -382,8 +382,8 @@ export class Scyther extends Pokemon {
   stars = 2
   evolution = Pkm.SCIZOR
   evolutionRule = new ItemEvolutionRule([Item.METAL_COAT])
-  hp = 180
-  atk = 18
+  hp = 190
+  atk = 19
   def = 5
   speDef = 5
   maxPP = 80
@@ -397,10 +397,10 @@ export class Scizor extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING, Synergy.STEEL])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 230
-  atk = 28
-  def = 6
-  speDef = 6
+  hp = 240
+  atk = 29
+  def = 7
+  speDef = 7
   maxPP = 80
   range = 1
   skill = Ability.X_SCISSOR
@@ -1488,7 +1488,7 @@ export class PorygonZ extends Pokemon {
 }
 
 export class Sewaddle extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.BUG, Synergy.SOUND])
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.BUG])
   rarity = Rarity.ULTRA
   stars = 1
   evolution = Pkm.SWADLOON
@@ -1503,7 +1503,7 @@ export class Sewaddle extends Pokemon {
 }
 
 export class Swadloon extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.BUG, Synergy.SOUND])
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.BUG])
   rarity = Rarity.ULTRA
   stars = 2
   evolution = Pkm.LEAVANNY
@@ -1518,7 +1518,7 @@ export class Swadloon extends Pokemon {
 }
 
 export class Leavanny extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.BUG, Synergy.SOUND])
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.BUG])
   rarity = Rarity.ULTRA
   stars = 3
   hp = 250
