@@ -1637,7 +1637,7 @@
     "FIRE_GEM": "Los ataques infligen el doble de daño en SHIELD e infligen un 8 % del HP máximo del objetivo como daño adicional.",
     "DEFENSIVE_RIBBON": "Cuando el portador recibe daño, gana 1 acumulación. Cada 2 acumulaciones, el titular gana +1 DEF, +1 ATK y +5% ATK_SPEED (máx. 20 acumulaciones)",
     "WONDER_BOX": "Al comienzo de cada batalla, la caja de maravillas se reemplaza por 2 elementos temporales (máximo 3 elementos retenidos)",
-    "CLEANSE_TAG": "Cuando comienza el combate, el poseedor y todos los aliados adyacentes en la misma fila reciben 25% de HP como SHIELD y RUNE_PROTECT durante 6 segundos.",
+    "CLEANSE_TAG": "Cuando comienza el combate, el poseedor y todos los aliados adyacentes en la misma fila reciben 20% de HP como SHIELD y RUNE_PROTECT durante 5 segundos.",
     "WIDE_LENS": "El poseedor gana +2 RANGE",
     "RAZOR_CLAW": "El titular gana +50% CRIT_CHANCE",
     "FLUFFY_TAIL": "El titular es inmune a todas las alteraciones de estado.",

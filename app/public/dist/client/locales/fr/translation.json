@@ -1683,7 +1683,7 @@
     "FIRE_GEM": "Les attaques infligent le double de dégâts au SHIELD et infligent 8 % des HP max de la cible en dégâts supplémentaires.",
     "DEFENSIVE_RIBBON": "Lorsque le porteur subit des dégâts, gagne 1 charge. Toutes les 2 charges, le détenteur gagne +1 DEF, +1 ATK et +5 % ATK_SPEED (max 20 charges)",
     "WONDER_BOX": "Au début de chaque bataille, la Boîte à Merveilles est remplacée par 2 objets temporaires (max 3 objets portés)",
-    "CLEANSE_TAG": "Lorsque le combat commence, le porteur et ses alliés adjacents sur la même ligne reçoivent 25% de leurs PV en SHIELD et RUNE_PROTECT pendant 6 secondes.",
+    "CLEANSE_TAG": "Lorsque le combat commence, le porteur et ses alliés adjacents sur la même ligne reçoivent 20% de leurs HP en SHIELD et RUNE_PROTECT pendant 5 secondes.",
     "WIDE_LENS": "Le porteur gagne +2 RANGE",
     "RAZOR_CLAW": "Le détenteur gagne +50% CRIT_CHANCE",
     "FLUFFY_TAIL": "Le porteur est immunisé contre toutes les altérations de statut",

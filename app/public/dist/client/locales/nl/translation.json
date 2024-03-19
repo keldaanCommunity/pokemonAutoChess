@@ -1328,7 +1328,7 @@
     "FIRE_GEM": "Aanvallen richten dubbele schade aan op SHIELD en brengen 8% van de maximale HP als extra schade toe",
     "DEFENSIVE_RIBBON": "Als de houder schade oploopt, krijg je 1 stapel. Elke 2 stapels krijgt de houder +1 DEF, +1 ATK en +5% ATK_SPEED (max. 20 stapels)",
     "WONDER_BOX": "Aan het begin van elk gevecht wordt de wonderdoos vervangen door 2 tijdelijke items (max. 3 items vastgehouden)",
-    "CLEANSE_TAG": "Wanneer het gevecht begint, ontvangen de houder en alle aangrenzende bondgenoten op dezelfde rij 25% HP als SHIELD en RUNE_PROTECT gedurende 6 seconden",
+    "CLEANSE_TAG": "Wanneer het gevecht begint, ontvangen de houder en alle aangrenzende bondgenoten op dezelfde rij 20% HP als SHIELD en RUNE_PROTECT gedurende 5 seconden",
     "WIDE_LENS": "De houder krijgt +2 BEREIK",
     "RAZOR_CLAW": "De houder krijgt +50% CRIT_CHANCE",
     "FLUFFY_TAIL": "Holder is immuun voor alle statusveranderingen",

@@ -1348,7 +1348,7 @@
     "FIRE_GEM": "Gli attacchi infliggono il doppio dei danni a SHIELD e infliggono il 8% degli HP massimi del bersaglio come danno aggiuntivo",
     "DEFENSIVE_RIBBON": "Quando il possessore subisce danni, guadagna 1 stack. Ogni 2 stack, l'holder guadagna +1 DEF, +1 ATK e +5% ATK_SPEED (max 20 stack)",
     "WONDER_BOX": "All'inizio di ogni battaglia, la scatola delle meraviglie viene sostituita da 2 oggetti temporanei (max 3 oggetti posseduti)",
-    "CLEANSE_TAG": "All'inizio del combattimento, il portatore e tutti gli alleati adiacenti sulla stessa fila ricevono il 25% di HP come SHIELD e RUNE_PROTECT per 6 secondi",
+    "CLEANSE_TAG": "All'inizio del combattimento, il portatore e tutti gli alleati adiacenti sulla stessa fila ricevono il 20% di HP come SHIELD e RUNE_PROTECT per 5 secondi",
     "WIDE_LENS": "Il possessore guadagna +2 RANGE",
     "RAZOR_CLAW": "L'holder guadagna +50% CRIT_CHANCE",
     "FLUFFY_TAIL": "Il possessore è immune a tutte le alterazioni di stato",

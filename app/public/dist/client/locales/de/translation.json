@@ -1528,7 +1528,7 @@
     "FIRE_GEM": "Angriffe verursachen auf SHIELD doppelten Schaden und verursachen 8 % der maximalen HP des Ziels als zusätzlichen Schaden",
     "DEFENSIVE_RIBBON": "Wenn der Träger Schaden erleidet, erhältst du 1 Stapel. Alle 2 Stapel erhält der Besitzer +1 DEF, +1 ATK und +5 % ATK_SPEED (maximal 20 Stapel).",
     "WONDER_BOX": "Zu Beginn jeder Schlacht wird die Wunderkiste durch 2 temporäre Gegenstände ersetzt (maximal 3 Gegenstände enthalten).",
-    "CLEANSE_TAG": "Wenn der Kampf beginnt, erhalten der Träger und alle benachbarten Verbündeten in derselben Reihe 6 Sekunden lang 25 % HP als SHIELD und RUNE_PROTECT",
+    "CLEANSE_TAG": "Wenn der Kampf beginnt, erhalten der Träger und alle benachbarten Verbündeten in derselben Reihe 20 % HP als SHIELD und 5 Sekunden lang RUNE_PROTECT",
     "WIDE_LENS": "Der Besitzer erhält +2 RANGE",
     "RAZOR_CLAW": "Der Inhaber erhält +50 % CRIT_CHANCE",
     "FLUFFY_TAIL": "Der Inhaber ist gegen alle Statusänderungen immun",

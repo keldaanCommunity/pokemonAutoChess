@@ -1718,7 +1718,7 @@
     "FIRE_GEM": "Attacks do double damage on SHIELD and deal 8 % of target max HP as additional damage",
     "DEFENSIVE_RIBBON": "When the holder takes damage, gain 1 stack. Every 2 stacks, the holder gains +1 DEF, +1 ATK and +5% ATK_SPEED (max 20 stacks)",
     "WONDER_BOX": "At the beginning of each battle, WONDER_BOX is replaced by 2 temporary items (max 3 items held)",
-    "CLEANSE_TAG": "When combat begins, the holder and all adjacent allies on the same row receive 25% HP as SHIELD and RUNE_PROTECT for 6 seconds",
+    "CLEANSE_TAG": "When combat begins, the holder and all adjacent allies on the same row receive 20% HP as SHIELD and RUNE_PROTECT for 5 seconds",
     "WIDE_LENS": "The holder gains +2 RANGE",
     "RAZOR_CLAW": "The holder gains +50% CRIT_CHANCE",
     "FLUFFY_TAIL": "Holder is immune to all status alterations",

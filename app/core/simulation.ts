@@ -536,8 +536,8 @@ export default class Simulation extends Schema implements ISimulation {
               pokemon.positionY
             )
             if (ally && ally.team === pokemon.team) {
-              ally.addShield(Math.ceil(0.25 * ally.hp), ally, false)
-              ally.status.triggerRuneProtect(6000)
+              ally.addShield(Math.ceil(0.2 * ally.hp), ally, false)
+              ally.status.triggerRuneProtect(5000)
             }
           })
         }
