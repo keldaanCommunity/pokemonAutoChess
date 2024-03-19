@@ -352,7 +352,7 @@ export class Altaria extends Pokemon {
   rarity = Rarity.ULTRA
   stars = 2
   evolution = Pkm.MEGA_ALTARIA
-  hp = 200
+  hp = 190
   atk = 25
   def = 4
   speDef = 4
@@ -5815,7 +5815,7 @@ export class Torkoal extends Pokemon {
   atk = 10
   def = 10
   speDef = 2
-  maxPP = 105
+  maxPP = 110
   range = 1
   skill = Ability.SMOKE_SCREEN
   attackSprite = AttackSprite.FIRE_MELEE

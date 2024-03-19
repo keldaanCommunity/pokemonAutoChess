@@ -46,6 +46,8 @@
 - Nerf Origin Pulse (Kyogre): ~~120~~ 100 special damage
 - New ability for Snover line: Sheer cold ; Snover now has Monster synergy
 - Nerf Blizzard (Articuno): freeze duration now at 2 seconds at all levels
+- Torkoal: PP ~~105~~ 110
+- Nerf Altaria: HP ~~200~~ 190, nerf Hyper Voice damage: ~~40/80/200~~ 30/60/150, fixed ability description
 
 # Changes to Synergies
 
@@ -58,6 +60,7 @@
 - Buff Flying 4: Protect duration ~~1.5~~ 2 seconds
 - Buff Flying 8: Flying pokémon now perform skydive attacks, causing Paralysis for 2 seconds on takeoff, and 200% PHYSICAL ATK on landing on their target
 - Adapted Ghost: Stat reduction: ~~30%~~ 50%, status duration: ~~8~~ 5 seconds
+- Buff Human: ~~10/25/50~~ 15/30/60% of damage done as heal
 
 # Changes to Items
 

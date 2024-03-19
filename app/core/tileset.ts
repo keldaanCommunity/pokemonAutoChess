@@ -2,12 +2,12 @@ import { readJsonSync } from "fs-extra"
 import {
   DTEF_TILESET_WIDTH,
   DtefTileset,
-  DungeonPMDO,
   Mask,
   MaskCoordinate,
   TerrainType,
   TilesetExchangeFile
 } from "../types/Config"
+import { DungeonPMDO } from "../types/enum/Dungeon"
 import { pickRandomIn } from "../utils/random"
 import { TileMapping } from "./design"
 
